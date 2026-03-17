@@ -24,7 +24,7 @@ further_reading:
 - Root or sudo privileges
 - Systemd (for service management)
 - Your Datadog API key
-- Datadog .NET tracing library (see version requirements [here][1])
+- Datadog .NET SDK (see version requirements [here][1])
 
 ## 1. Installing the Datadog Agent
 
@@ -80,7 +80,7 @@ sudo tar -C /opt/datadog -xzf datadog-dotnet-apm-<TRACER_VERSION>.arm64.tar.gz &
 {{< /tabs >}}
 
 <div class="alert alert-danger">
-  If you are having issues installing the Tracer library check the [Tracer Installation guide][5]
+  If you are having issues installing the SDK check the [Tracer Installation guide][5]
   *Note on version:* replace *<TRACER_VERSION>* with the latest three component version of the library (ej: 3.21.0)
 </div>
 

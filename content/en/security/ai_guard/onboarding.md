@@ -49,9 +49,9 @@ Datadog SDKs use the [Datadog Agent][4] to send AI Guard data to Datadog. The Ag
 
 If you don't use the Datadog Agent, the AI Guard evaluator API still works, but you can't see AI Guard traces in Datadog.
 
-### 4. Install the tracer library {#install-tracer}
+### 4. Install the SDK {#install-tracer}
 
-To use AI Guard with the SDK and see AI Guard activity in Datadog, install the appropriate tracer library for your language. The tracer library requires the Datadog Agent to send data to Datadog.
+To use AI Guard with the SDK and see AI Guard activity in Datadog, install the appropriate SDK for your language. The SDK requires the Datadog Agent to send data to Datadog.
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -70,7 +70,7 @@ npm install dd-trace@^5.69.0
 
 {{% /tab %}}
 {{% tab "Java" %}}
-Install dd-trace-java v1.54.0 or later. Follow the [Java installation instructions][1] to add the tracer to your application.
+Install dd-trace-java v1.54.0 or later. Follow the [Java installation instructions][1] to add the SDK to your application.
 
 [1]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/java/
 {{% /tab %}}

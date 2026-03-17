@@ -4,10 +4,10 @@ title: Tutorial - Enabling Tracing for a Java Application with the Admission Con
 further_reading:
 - link: /tracing/trace_collection/library_config/java/
   tag: "Documentation"
-  text: Additional tracing library configuration options
+  text: Additional SDK configuration options
 - link: /tracing/trace_collection/dd_libraries/java/
   tag: "Documentation"
-  text: Detailed tracing library setup instructions
+  text: Detailed SDK setup instructions
 - link: /tracing/trace_collection/compatibility/java/
   tag: "Documentation"
   text: Supported Java frameworks for automatic instrumentation
@@ -95,7 +95,7 @@ After you have your application working, instrument it using the Datadog Admissi
 3. [Annotate][7] your pod for library injection.
 4. [Label][8] your pod to instruct the Datadog Admission controller to mutate the pod.
 
-There's no need to add the tracing library because it's automatically injected. You don't need to redeploy your app yet. This section of the tutorial steps you through the process of adding Datadog variables and deploying a new image or version of your app.
+There's no need to add the SDK because it's automatically injected. You don't need to redeploy your app yet. This section of the tutorial steps you through the process of adding Datadog variables and deploying a new image or version of your app.
 
 1. From the `k8s` subdirectory, use the following command to install the Datadog Cluster Agent, specifying the `values-with-lib-inj.yaml` config file and your [Datadog API key](/account_management/api-app-keys/):
    {{< code-block lang="shell" >}}
@@ -122,7 +122,7 @@ labels:
   tags.datadoghq.com/service: "springfront"
   tags.datadoghq.com/version: "12"{{< /code-block >}}
 
-4. Configure the Datadog Admission Controller to inject a Java tracing library to the app container by adding the following annotation to the pod:
+4. Configure the Datadog Admission Controller to inject a Java SDK to the app container by adding the following annotation to the pod:
    {{< code-block lang="yaml" >}}
 annotations:
   admission.datadoghq.com/java-lib.version: "<CONTAINER IMAGE TAG>"{{< /code-block >}}
@@ -204,7 +204,7 @@ kubectl describe pod springfront{{< /code-block >}}
     Normal  Started    2s    kubelet            Started container springfront
     ```
 
-    As you can see, an init-container is added to your pod. This container includes the Datadog Java tracing libraries to a volume mount. Also `JAVA_TOOL_OPTIONS` is modified to include `javaagent`. And Datadog-specific environment variables are added to the container:
+    As you can see, an init-container is added to your pod. This container includes the Datadog Java SDKs to a volume mount. Also `JAVA_TOOL_OPTIONS` is modified to include `javaagent`. And Datadog-specific environment variables are added to the container:
 
     ```
     Environment:
@@ -221,7 +221,7 @@ kubectl describe pod springfront{{< /code-block >}}
     /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-qvmtk (ro)
     ```
 
-9. Verify that the Datadog tracing library is injected into the pod by checking the pod logs. For example:
+9. Verify that the Datadog SDK is injected into the pod by checking the pod logs. For example:
    {{< code-block lang="shell" >}}
 kubectl logs -f springfront-797b78d6db-jqjdl{{< /code-block >}}
 

@@ -1,6 +1,6 @@
 ---
 title: Setting Up APM with C++
-description: Learn how to set up APM and distributed tracing for C++ applications using Datadog tracing libraries and instrumentation.
+description: Learn how to set up APM and distributed tracing for C++ applications using Datadog SDKs and instrumentation.
 
 further_reading:
 - link: "/tracing/trace_collection/dd_libraries/cpp/"
@@ -97,7 +97,7 @@ int main(int argc, char* argv[]) {
 }
 ```
 
-This creates a tracer that generates two spans, a parent span `span_a` and a child span `span_b`, and tags them.
+This creates an SDK that generates two spans, a parent span `span_a` and a child span `span_b`, and tags them.
 
 Then, compile and link against `libdd_trace_cpp` with:
 

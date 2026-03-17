@@ -12,7 +12,7 @@ further_reading:
 
 ## Overview
 
-This page describes how to instrument your Python application with the Datadog Feature Flags SDK. The Python SDK integrates with [OpenFeature][1], an open standard for feature flag management, and uses the Datadog tracer's Remote Configuration to receive flag updates in real time.
+This page describes how to instrument your Python application with the Datadog Feature Flags SDK. The Python SDK integrates with [OpenFeature][1], an open standard for feature flag management, and uses the Datadog SDK's Remote Configuration to receive flag updates in real time.
 
 This guide explains how to install and enable the SDK, create an OpenFeature client, and evaluate feature flags in your application.
 
@@ -21,7 +21,7 @@ This guide explains how to install and enable the SDK, create an OpenFeature cli
 Before setting up the Python Feature Flags SDK, ensure you have:
 
 - **Datadog Agent** with [Remote Configuration][2] enabled
-- **Datadog Python tracer** `ddtrace` version 3.19.0 or later
+- **Datadog Python SDK** `ddtrace` version 3.19.0 or later
 - **OpenFeature Python SDK** `openfeature-sdk` version 0.5.0 or later
 
 Set the following environment variables:
@@ -37,7 +37,7 @@ export DD_ENV=<YOUR_ENVIRONMENT>
 
 ## Installation
 
-Install the Datadog Python tracer and OpenFeature SDK:
+Install the Datadog Python SDK and OpenFeature SDK:
 
 {{< code-block lang="bash" >}}
 pip install ddtrace openfeature-sdk
@@ -52,7 +52,7 @@ openfeature-sdk>=0.5.0
 
 ## Initialize the SDK
 
-Register the Datadog OpenFeature provider with the OpenFeature API. The provider connects to the Datadog tracer's Remote Configuration system to receive flag configurations.
+Register the Datadog OpenFeature provider with the OpenFeature API. The provider connects to the Datadog SDK's Remote Configuration system to receive flag configurations.
 
 {{< code-block lang="python" >}}
 from ddtrace import tracer
@@ -237,7 +237,7 @@ Verify the following to ensure that Remote Configuration is working:
 - Datadog Agent is version 7.55 or later
 - Remote Configuration is enabled on the Agent
 - `DD_SERVICE` and `DD_ENV` environment variables are set
-- The tracer can communicate with the Agent
+- The SDK can communicate with the Agent
 
 [1]: https://openfeature.dev/
 [2]: /agent/remote_config/

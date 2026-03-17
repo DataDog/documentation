@@ -260,7 +260,7 @@ GlobalOpenTelemetry.set(
 )
 ```
 
-To access the tracer object for manual (custom) tracing, use `io.opentelemetry.api.GlobalOpenTelemetry.get()` instead of `io.opentracing.util.GlobalTracer.get()`.
+To access the SDK object for manual (custom) tracing, use `io.opentelemetry.api.GlobalOpenTelemetry.get()` instead of `io.opentracing.util.GlobalTracer.get()`.
 For example:
 ```kotlin
 val tracer: Tracer = GlobalOpenTelemetry
@@ -298,7 +298,7 @@ GlobalDatadogTracer.registerIfAbsent(
 )
 ```
 
-For manual (custom) tracing use `com.datadog.android.trace.GlobalDatadogTracer.get()` instead of `io.opentracing.util.GlobalTracer.get()` to access the tracer object.
+For manual (custom) tracing use `com.datadog.android.trace.GlobalDatadogTracer.get()` instead of `io.opentracing.util.GlobalTracer.get()` to access the SDK object.
 For example:
 ```kotlin
 val tracer = GlobalDatadogTracer.get()
@@ -1053,7 +1053,7 @@ To dynamically adjust sampling, provide your own implementation of the `com.data
 
 ### `dd-sdk-android-ktx` module removal
 
-To improve granularity for the Datadog SDK libraries used, the `dd-sdk-android-ktx` module is removed. The code is distributed between the other modules to provide extension methods for both RUM and Trace features.
+To improve granularity for the Datadog SDKs used, the `dd-sdk-android-ktx` module is removed. The code is distributed between the other modules to provide extension methods for both RUM and Trace features.
 
 | `1.x`                                                                                     | '2.0'                                                                                       | Module name                       |
 |-------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------|-----------------------------------|

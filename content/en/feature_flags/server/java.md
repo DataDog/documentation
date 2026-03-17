@@ -10,7 +10,7 @@ further_reading:
   text: "Java APM and Distributed Tracing"
 ---
 
-<div class="alert alert-warning">Java Feature Flags support is experimental and requires enabling an experimental flag in the tracer. See the <a href="#configuration">Configuration section</a> for details.</div>
+<div class="alert alert-warning">Java Feature Flags support is experimental and requires enabling an experimental flag in the SDK. See the <a href="#configuration">Configuration section</a> for details.</div>
 
 ## Overview
 
@@ -18,7 +18,7 @@ This page describes how to instrument a Java application with the Datadog Featur
 
 The Java SDK integrates feature flags directly into the Datadog APM tracer and implements the [OpenFeature](https://openfeature.dev/) standard for maximum flexibility and compatibility.
 
-<div class="alert alert-info">If you're using Datadog APM and your application already has the Datadog Java tracer and Remote Configuration enabled, skip to <a href="#initialize-the-openfeature-provider">Initialize the OpenFeature provider</a>. You only need to add the OpenFeature dependencies and initialize the provider.</div>
+<div class="alert alert-info">If you're using Datadog APM and your application already has the Datadog Java SDK and Remote Configuration enabled, skip to <a href="#initialize-the-openfeature-provider">Initialize the OpenFeature provider</a>. You only need to add the OpenFeature dependencies and initialize the provider.</div>
 
 ## Compatibility requirements
 
@@ -37,7 +37,7 @@ Before you begin, make sure you've already [installed and configured the Agent](
 
 ## Installation
 
-Feature flagging is integrated into the Datadog Java APM tracer. You need the tracer JAR and the OpenFeature SDK dependencies.
+Feature flagging is integrated into the Datadog Java APM tracer. You need the SDK JAR and the OpenFeature SDK dependencies.
 
 {{< tabs >}}
 {{% tab "Gradle (Groovy)" %}}
@@ -110,14 +110,14 @@ api_key: <YOUR_API_KEY>
 
 ### Application configuration
 
-If your application already runs with `-javaagent:dd-java-agent.jar` and has Remote Configuration enabled (`DD_REMOTE_CONFIG_ENABLED=true`), you only need to add the experimental feature flag (`DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true`). Skip the tracer download and JVM configuration steps.
+If your application already runs with `-javaagent:dd-java-agent.jar` and has Remote Configuration enabled (`DD_REMOTE_CONFIG_ENABLED=true`), you only need to add the experimental feature flag (`DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true`). Skip the SDK download and JVM configuration steps.
 
 Configure your Java application with the required environment variables or system properties:
 
 {{< tabs >}}
 {{% tab "Environment Variables" %}}
 {{< code-block lang="bash" >}}
-# Required: Enable Remote Configuration in the tracer
+# Required: Enable Remote Configuration in the SDK
 export DD_REMOTE_CONFIG_ENABLED=true
 
 # Required: Enable experimental feature flagging support
@@ -135,7 +135,7 @@ export DD_ENV=<YOUR_ENVIRONMENT>
 # Optional: Version
 export DD_VERSION=<YOUR_APP_VERSION>
 
-# Start your application with the tracer
+# Start your application with the SDK
 java -javaagent:path/to/dd-java-agent.jar -jar your-application.jar
 {{< /code-block >}}
 {{% /tab %}}
@@ -154,13 +154,13 @@ java -javaagent:path/to/dd-java-agent.jar \
 {{% /tab %}}
 {{< /tabs >}}
 
-The Datadog feature flagging system starts automatically when the tracer is initialized with both Remote Configuration and the experimental flagging provider enabled. No additional initialization code is required in your application.
+The Datadog feature flagging system starts automatically when the SDK is initialized with both Remote Configuration and the experimental flagging provider enabled. No additional initialization code is required in your application.
 
 <div class="alert alert-danger">Feature flagging requires both <code>DD_REMOTE_CONFIG_ENABLED=true</code> and <code>DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true</code>. Without the experimental flag, the feature flagging system does not start and the <code>Provider</code> returns the programmatic default.</div>
 
 ### Add the Java tracer to the JVM
 
-For instructions on how to add the `-javaagent` argument to your application server or framework, see [Add the Java Tracer to the JVM](/tracing/trace_collection/automatic_instrumentation/dd_libraries/java/#add-the-java-tracer-to-the-jvm).
+For instructions on how to add the `-javaagent` argument to your application server or framework, see [Add the Java SDK to the JVM](/tracing/trace_collection/automatic_instrumentation/dd_libraries/java/#add-the-java-sdk-to-the-jvm).
 
 Make sure to include the feature flagging configuration flags:
 - `-Ddd.remote.config.enabled=true`
@@ -168,7 +168,7 @@ Make sure to include the feature flagging configuration flags:
 
 ## Initialize the OpenFeature provider
 
-Initialize the Datadog OpenFeature provider in your application startup code. The provider connects to the feature flagging system running in the Datadog tracer.
+Initialize the Datadog OpenFeature provider in your application startup code. The provider connects to the feature flagging system running in the Datadog SDK.
 
 {{< code-block lang="java" >}}
 import dev.openfeature.sdk.OpenFeatureAPI;

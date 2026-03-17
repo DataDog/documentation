@@ -5,10 +5,10 @@ description: Step-by-step tutorial to enable distributed tracing for a Go applic
 further_reading:
 - link: /tracing/trace_collection/library_config/go/
   tag: Documentation
-  text: Additional tracing library configuration options
+  text: Additional SDK configuration options
 - link: /tracing/trace_collection/dd_libraries/go/
   tag: Documentation
-  text: Detailed tracing library setup instructions
+  text: Detailed SDK setup instructions
 - link: /tracing/trace_collection/compatibility/go/
   tag: Documentation
   text: Supported Go frameworks for automatic instrumentation
@@ -106,7 +106,7 @@ Your application (without tracing enabled) is containerized and available for EC
 
 ### Deploy the application
 
-Start the application and send some requests without tracing. After you've seen how the application works, you'll instrument it using the tracing library and Datadog Agent.
+Start the application and send some requests without tracing. After you've seen how the application works, you'll instrument it using the SDK and Datadog Agent.
 
 To start, use a Terraform script to deploy to Amazon ECS:
 

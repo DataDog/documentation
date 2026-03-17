@@ -1,5 +1,5 @@
 ---
-title: Configuring the PHP Tracing Library
+title: Configuring the PHP SDK
 code_lang: php
 type: multi-code-lang
 code_lang_weight: 40
@@ -24,7 +24,7 @@ further_reading:
   text: "OpenTelemetry Environment Variable Configurations"
 ---
 
-After you set up the tracing library with your code and configure the Agent to collect APM data, optionally configure the tracing library as desired, including setting up [Unified Service Tagging][1].
+After you set up the SDK with your code and configure the Agent to collect APM data, optionally configure the SDK as desired, including setting up [Unified Service Tagging][1].
 
 {{% apm-config-visibility %}}
 
@@ -115,7 +115,7 @@ The default app name.
 `DD_TRACE_ENABLED`
 : **INI**: `datadog.trace.enabled`<br>
 **Default**: `1`<br>
-Enable the tracer globally.<br/>
+Enable the SDK globally.<br/>
 See also [DD_APM_TRACING_ENABLED][21].
 
 `DD_PRIORITY_SAMPLING`
@@ -131,7 +131,7 @@ Change the default name of an APM integration. Rename one or more integrations a
 `DD_TRACE_128_BIT_TRACEID_GENERATION_ENABLED`
 : **INI**: `datadog.trace.128_bit_traceid_generation_enabled`<br>
 **Default**: `true`<br>
-When true, the tracer generates 128 bit Trace IDs, and encodes Trace IDs as 32 lowercase hexadecimal characters with zero padding.
+When true, the SDK generates 128 bit Trace IDs, and encodes Trace IDs as 32 lowercase hexadecimal characters with zero padding.
 
 `DD_TRACE_128_BIT_TRACEID_LOGGING_ENABLED`
 : **INI**: `datadog.trace.128_bit_traceid_logging_enabled`<br>
@@ -143,7 +143,7 @@ When true, the trace ID is printed as a full 128-bit trace ID in hexadecimal for
 `DD_TRACE_HEALTH_METRICS_ENABLED`
 : **INI**: `datadog.trace_health_metrics_enabled`<br>
 **Default**: `false`<br>
-When enabled, the tracer sends stats to DogStatsD. In addition, where `sigaction` is available at build time, the tracer sends uncaught exception metrics upon segfaults.
+When enabled, the SDK sends stats to DogStatsD. In addition, where `sigaction` is available at build time, the SDK sends uncaught exception metrics upon segfaults.
 
 `DD_TRACE_AGENT_CONNECT_TIMEOUT`
 : **INI**: `datadog.trace.agent_connect_timeout`<br>
@@ -168,7 +168,7 @@ The Agent URL; takes precedence over `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`. 
 `DD_TRACE_AUTO_FLUSH_ENABLED`
 : **INI**: `datadog.trace.auto_flush_enabled`<br>
 **Default**: `0` (`1` in CLI environment)<br>
-Automatically flush the tracer when all the spans are closed; set to `1` in conjunction with `DD_TRACE_GENERATE_ROOT_SPAN=0` to trace [long-running processes][14].
+Automatically flush the SDK when all the spans are closed; set to `1` in conjunction with `DD_TRACE_GENERATE_ROOT_SPAN=0` to trace [long-running processes][14].
 
 `DD_TRACE_CLI_ENABLED`
 : **INI**: `datadog.trace.cli_enabled`<br>
@@ -344,7 +344,7 @@ The Agent host name.
 `DD_AUTOFINISH_SPANS`
 : **INI**: `datadog.autofinish_spans`<br>
 **Default**: `0`<br>
-Whether spans are automatically finished when the tracer is flushed.
+Whether spans are automatically finished when the SDK is flushed.
 
 `DD_DISTRIBUTED_TRACING`
 : **INI**: `datadog.distributed_tracing`<br>
@@ -478,7 +478,7 @@ Set the profiler's log level. Acceptable values are `off`, `error`, `warn`, `inf
 
 ### Trace context propagation
 
-Read [Trace Context Propagation][11] for information about configuring the PHP tracing library to extract and inject headers for propagating distributed trace context.
+Read [Trace Context Propagation][11] for information about configuring the PHP SDK to extract and inject headers for propagating distributed trace context.
 
 `DD_TRACE_PROPAGATION_STYLE_INJECT`
 : **INI**: `datadog.trace.propagation_style_inject`<br>

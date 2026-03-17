@@ -14,7 +14,7 @@ Some languages log to a separate file depending on language conventions and the 
 
 `CONFIGURATION` logs are a JSON formatted representation of settings applied to your tracer. In languages where an Agent connectivity check is performed, the configuration JSON will also include an `agent_error` key, which indicates whether the Agent is reachable.
 
-`DIAGNOSTICS` or `ERROR` log entries, in the languages that produce them, happen when the tracer encounters an error during application startup. If you see `DIAGNOSTICS` or `ERROR` log lines, confirm from the indicated log that settings and configurations are applied correctly.
+`DIAGNOSTICS` or `ERROR` log entries, in the languages that produce them, happen when the SDK encounters an error during application startup. If you see `DIAGNOSTICS` or `ERROR` log lines, confirm from the indicated log that settings and configurations are applied correctly.
 
 If you do not see logs at all, ensure that your application logs are not silenced and that your log level is at least `INFO` where applicable.
 
@@ -29,7 +29,7 @@ If you do not see logs at all, ensure that your application logs are not silence
 
 **Diagnostics:**
 
-The Java tracer does not output Diagnostics logs. For this check, run the tracer in [debug mode][1].
+The Java tracer does not output Diagnostics logs. For this check, run the SDK in [debug mode][1].
 
 
 [1]: /tracing/troubleshooting/tracer_debug_logs/
@@ -49,7 +49,7 @@ Log files are saved in the following directories by default. Use the `DD_TRACE_L
 
 **Note:** On Linux, you must create the logs directory before you enable debug mode.
 
-Since version `2.19.0`, you can use the `DD_TRACE_LOGFILE_RETENTION_DAYS` setting to configure the tracer to delete log files from the current logging directory on startup. The tracer deletes log files the same age and older than the given number of days, with a default value of `32`.
+Since version `2.19.0`, you can use the `DD_TRACE_LOGFILE_RETENTION_DAYS` setting to configure the SDK to delete log files from the current logging directory on startup. The SDK deletes log files the same age and older than the given number of days, with a default value of `32`.
 
 - `dotnet-tracer-managed-{processName}-{timestamp}.log` contains the configuration logs.
 
@@ -127,7 +127,7 @@ ddtrace.disable => Off => Off
 
 **Configuration:**
 
-If the tracer is in [DEBUG mode][1], the startup logs will appear in the `error_log` once per process on the first request.
+If the SDK is in [DEBUG mode][1], the startup logs will appear in the `error_log` once per process on the first request.
 
 ```text
 DATADOG TRACER CONFIGURATION - {"agent_error":"Couldn't connect to server","ddtrace.request_init_hook_reachable":false,"date":"2020-07-01T17:42:50Z","os_name":"Linux 49b1cb4bdd12 4.19.76-linuxkit #1 SMP Tue May 26 11:42:35 UTC 2020 x86_64","os_version":"4.19.76-linuxkit","version":"1.0.0-nightly","lang":"php","lang_version":"7.4.5","env":null,"enabled":true,"service":null,"enabled_cli":false,"agent_url":"https://localhost:8126","debug":false,"analytics_enabled":false,"sample_rate":1.000000,"sampling_rules":null,"tags":null,"service_mapping":null,"distributed_tracing_enabled":true,"priority_sampling_enabled":true,"dd_version":null,"architecture":"x86_64","sapi":"cgi-fcgi","ddtrace.request_init_hook":null,"open_basedir_configured":false,"uri_fragment_regex":null,"uri_mapping_incoming":null,"uri_mapping_outgoing":null,"auto_flush_enabled":false,"generate_root_span":true,"http_client_split_by_domain":false,"measure_compile_time":true,"report_hostname_on_root_span":false,"traced_internal_functions":null,"auto_prepend_file_configured":false,"integrations_disabled":null,"enabled_from_env":true,"opcache.file_cache":null}
@@ -135,7 +135,7 @@ DATADOG TRACER CONFIGURATION - {"agent_error":"Couldn't connect to server","ddtr
 
 **Diagnostics:**
 
-Failed diagnostics for the PHP tracer print in the `error_log` if the tracer is in [DEBUG mode][1].
+Failed diagnostics for the PHP tracer print in the `error_log` if the SDK is in [DEBUG mode][1].
 
 ```text
 DATADOG TRACER DIAGNOSTICS - agent_error: Couldn't connect to server
@@ -174,7 +174,7 @@ The Go Tracer prints one of two possible diagnostic lines, one for when the Agen
 {{< /programming-lang >}}
 {{< programming-lang lang="nodejs" >}}
 
-Startup logs are disabled by default starting in version 2.x of the tracer. They can be enabled using the environment variable `DD_TRACE_STARTUP_LOGS=true`.
+Startup logs are disabled by default starting in version 2.x of the SDK. They can be enabled using the environment variable `DD_TRACE_STARTUP_LOGS=true`.
 
 **Configuration:**
 
@@ -250,7 +250,7 @@ export DD_TRACE_STARTUP_LOGS=true
 
 ### Output
 
-When startup logs are enabled, the tracer outputs configuration and diagnostic information.
+When startup logs are enabled, the SDK outputs configuration and diagnostic information.
 
 **Configuration:**
 
@@ -283,14 +283,14 @@ W, [2020-07-08T21:19:05.765994 #143]  WARN -- ddtrace: [ddtrace] DATADOG ERROR -
 
 **Diagnostics:**
 
-For C++, there are no `DATADOG TRACER DIAGNOSTICS` lines output to the tracer logs. However, if the Agent is not reachable, errors appear in your application logs. In Envoy there is an increase in the metrics `tracing.datadog.reports_failed` and `tracing.datadog.reports_dropped`.
+For C++, there are no `DATADOG TRACER DIAGNOSTICS` lines output to the SDK logs. However, if the Agent is not reachable, errors appear in your application logs. In Envoy there is an increase in the metrics `tracing.datadog.reports_failed` and `tracing.datadog.reports_dropped`.
 
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
 ## Connection errors
 
-If your application or startup logs contain `DIAGNOSTICS` errors or messages that the Agent cannot be reached or connected to (varying depending on your language), it means the tracer is unable to send traces to the Datadog Agent.
+If your application or startup logs contain `DIAGNOSTICS` errors or messages that the Agent cannot be reached or connected to (varying depending on your language), it means the SDK is unable to send traces to the Datadog Agent.
 
 If you have these errors, check that your Agent is set up to receive traces for [ECS][1], [Kubernetes][2], [Docker][3] or [any other option][4], or [contact support][5] to review your tracer and Agent configuration.
 
@@ -298,7 +298,7 @@ See [Connection Errors][6] for information about errors indicating that your ins
 
 ## Configuration settings
 
-If your logs contain only `CONFIGURATION` lines, a useful troubleshooting step is to confirm that the settings output by the tracer match the settings from your deployment and configuration of the Datadog Tracer. Additionally, if you are not seeing specific traces in Datadog, review the [Compatibility Requirements][7] section of the documentation to confirm these integrations are supported.
+If your logs contain only `CONFIGURATION` lines, a useful troubleshooting step is to confirm that the settings output by the SDK match the settings from your deployment and configuration of the Datadog Tracer. Additionally, if you are not seeing specific traces in Datadog, review the [Compatibility Requirements][7] section of the documentation to confirm these integrations are supported.
 
 If an integration you are using is not supported, or you want a fresh pair of eyes on your configuration output to understand why traces are not appearing as expected in Datadog, [contact support][5] who can help you diagnose and create a Feature Request for a new integration.
 

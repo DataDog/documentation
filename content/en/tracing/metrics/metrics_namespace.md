@@ -137,9 +137,9 @@ In most cases, trace metrics are calculated based on all application traffic. Ho
 
 ### Application-side sampling 
 
-Some tracing libraries support application-side sampling, which reduces the number of spans before they are sent to the Datadog Agent. For example, the Ruby tracing library offers application-side sampling to lower performance overhead. However, this can affect trace metrics, as the Datadog Agent needs all spans to calculate accurate metrics. 
+Some SDKs support application-side sampling, which reduces the number of spans before they are sent to the Datadog Agent. For example, the Ruby SDK offers application-side sampling to lower performance overhead. However, this can affect trace metrics, as the Datadog Agent needs all spans to calculate accurate metrics. 
 
-Very few tracing libraries support this setting, and using it is generally not recommended.
+Very few SDKs support this setting, and using it is generally not recommended.
 
 ### OpenTelemetry sampling
 

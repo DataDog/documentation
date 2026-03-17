@@ -23,16 +23,16 @@ If you haven't already, install the [Datadog-Azure integration][10] to collect m
 
 ### Application
 
-Install the tracing library for your language:
+Install the SDK for your language:
 
 {{< tabs >}}
 {{% tab "Java" %}}
 
 Java supports adding instrumentation code through the use of a command line argument, `javaagent`.
 
-1. Download the [latest version of Datadog's Java tracing library][101].
-1. Place the tracing library inside your project. It must be included with your deployment.
-   If you are using the `azure-webapp-maven` plugin, you can add the Java tracing library as a resource entry with type `lib`.
+1. Download the [latest version of Datadog's Java SDK][101].
+1. Place the SDK inside your project. It must be included with your deployment.
+   If you are using the `azure-webapp-maven` plugin, you can add the Java SDK as a resource entry with type `lib`.
 1. Set the environment variable `JAVA_OPTS` with `--javaagent:/home/site/lib/dd-java-agent.jar`. When your application is deployed, the Java tracer is copied to `/home/site/lib/dd-java-agent.jar`.
 
 Instrumentation starts when the application is launched.
@@ -67,7 +67,7 @@ dotnet add package Datadog.Trace.Bundle --version 3.21.0
 {{% /tab %}}
 {{% tab "PHP" %}}
 
-Run the following script to install Datadog's PHP tracing library:
+Run the following script to install Datadog's PHP SDK:
 startup.sh:
 ```bash
 #!/usr/bin/env bash
@@ -411,7 +411,7 @@ For .NET applications, the following environment variables are **required**. See
 
 `DD_DOTNET_TRACER_HOME`
 : **Value**: `/home/site/wwwroot/datadog`<br>
-Path to the directory containing the .NET tracing libraries.<br>
+Path to the directory containing the Datadog .NET SDK.<br>
 
 `CORECLR_ENABLE_PROFILING`
 : **Value**: `1`<br>
@@ -484,7 +484,7 @@ To enable the Continuous Profiler, set the environment variable `DD_PROFILING_EN
 
 ## Troubleshooting
 
-If you are not receiving traces or custom metric data as expected, enable agent debug logging by setting `DD_LOG_LEVEL` in the sidecar configuration options. For tracer debugging set `DD_TRACE_DEBUG` to true. This generates logs additional debug logs for the sidecar and tracing library.
+If you are not receiving traces or custom metric data as expected, enable agent debug logging by setting `DD_LOG_LEVEL` in the sidecar configuration options. For tracer debugging set `DD_TRACE_DEBUG` to true. This generates logs additional debug logs for the sidecar and SDK.
 
 Be sure to enable **App Service logs** to receive debugging logs.
 

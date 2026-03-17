@@ -230,7 +230,7 @@ When code coverage is available, the Datadog Tracer reports it under the `test.c
 
 If your project already has Jacoco configured, the Datadog Tracer instruments it and reports the coverage data to Datadog automatically.
 
-Otherwise, you can configure the tracer to add Jacoco to your test runs at runtime.
+Otherwise, you can configure the SDK to add Jacoco to your test runs at runtime.
 Use `DD_CIVISIBILITY_JACOCO_PLUGIN_VERSION` environment variable to specify which [version of Jacoco][2] you want to have injected (for example: `DD_CIVISIBILITY_JACOCO_PLUGIN_VERSION=0.8.11`).
 
 

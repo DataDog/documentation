@@ -12,10 +12,10 @@ further_reading:
   text: "Connection Errors"
 - link: "/tracing/troubleshooting/tracer_startup_logs/"
   tag: "Documentation"
-  text: "Datadog tracer startup logs"
+  text: "Datadog SDK startup logs"
 - link: "/tracing/troubleshooting/tracer_debug_logs/"
   tag: "Documentation"
-  text: "Datadog tracer debug logs"
+  text: "Datadog SDK debug logs"
 - link: "/tracing/troubleshooting/agent_apm_metrics/"
   tag: "Documentation"
   text: "APM metrics sent by the Datadog Agent"
@@ -39,7 +39,7 @@ further_reading:
   text: Troubleshooting APM Instrumentation on a Host
 ---
 
-If you experience unexpected behavior while using Datadog APM, read the information on this page to help resolve the issue. Datadog recommends regularly updating to the latest version of the Datadog tracing libraries you use, as each release contains improvements and fixes. If you continue to experience issues, reach out to [Datadog support][1].
+If you experience unexpected behavior while using Datadog APM, read the information on this page to help resolve the issue. Datadog recommends regularly updating to the latest version of the Datadog SDKs you use, as each release contains improvements and fixes. If you continue to experience issues, reach out to [Datadog support][1].
 
 The following components are involved in sending APM data to Datadog:
 
@@ -104,7 +104,7 @@ You can use [Inferred Service dependencies (Preview)][30]. Inferred external API
 
 Or, you can merge the service names using an environment variable such as `DD_SERVICE_MAPPING` or `DD_TRACE_SERVICE_MAPPING`, depending on the language. 
 
-For more information, see [Configure the Datadog Tracing Library][27] or choose your language here:
+For more information, see [Configure the Datadog SDK][27] or choose your language here:
 
 {{< tabs >}}
 {{% tab "Java" %}}
@@ -300,11 +300,11 @@ There are several configuration options available to scrub sensitive data or dis
 
 ## Debugging and logging
 
-This section explains how to use debug and startup logs to identify and resolve issues with your Datadog tracer.
+This section explains how to use debug and startup logs to identify and resolve issues with your Datadog SDK.
 
 {{% collapse-content title="Debug logs" level="h4" %}}
 
-To capture full details on the Datadog tracer, enable debug mode on your tracer by using the `DD_TRACE_DEBUG` environment variable. You might enable it for your own investigation or if Datadog support has recommended it for triage purposes. However, be sure to disable debug logging when you are finished testing to avoid the logging overhead it introduces.
+To capture full details on the Datadog SDK, enable debug mode on your tracer by using the `DD_TRACE_DEBUG` environment variable. You might enable it for your own investigation or if Datadog support has recommended it for triage purposes. However, be sure to disable debug logging when you are finished testing to avoid the logging overhead it introduces.
 
 These logs can surface instrumentation errors or integration-specific errors. For details on enabling and capturing these debug logs, see the [debug mode troubleshooting page][5].
 
@@ -312,7 +312,7 @@ These logs can surface instrumentation errors or integration-specific errors. Fo
 
 {{% collapse-content title="Startup logs" level="h4" %}}
 
-During startup, Datadog tracing libraries emit logs that reflect the configurations applied in a JSON object, as well as any errors encountered, including if the Agent can be reached in languages where this is possible. Some languages require these startup logs to be enabled with the environment variable `DD_TRACE_STARTUP_LOGS=true`. For more information, see the [Startup logs][3].
+During startup, Datadog SDKs emit logs that reflect the configurations applied in a JSON object, as well as any errors encountered, including if the Agent can be reached in languages where this is possible. Some languages require these startup logs to be enabled with the environment variable `DD_TRACE_STARTUP_LOGS=true`. For more information, see the [Startup logs][3].
 
 {{% /collapse-content %}}
 
@@ -332,11 +332,11 @@ When you open a [support ticket][1], the Datadog support team may ask for the fo
 
 1. **Links to a trace or screenshots of the issue**: This helps reproduce your issues for troubleshooting purposes.
 
-2. **Tracer startup logs**: Startup logs help identify tracer misconfiguration or communication issues between the tracer and the Datadog Agent. By comparing the tracer's configuration with the application or container settings, support teams can pinpoint improperly applied settings.
+2. **Tracer startup logs**: Startup logs help identify tracer misconfiguration or communication issues between the SDK and the Datadog Agent. By comparing the SDK's configuration with the application or container settings, support teams can pinpoint improperly applied settings.
 
 3. **Tracer debug logs**: Tracer debug logs provide deeper insights than startup logs, revealing:
    - Proper integration instrumentation during application traffic flow
-   - Contents of spans created by the tracer
+   - Contents of spans created by the SDK
    - Connection errors when sending spans to the Agent
 
 4. **Datadog Agent flare**: [Datadog Agent flares][12] enable you to see what is happening within the Datadog Agent, for example, if traces are being rejected or malformed. This does not help if traces are not reaching the Datadog Agent, but does help identify the source of an issue, or any metric discrepancies.
@@ -345,7 +345,7 @@ When you open a [support ticket][1], the Datadog support team may ask for the fo
 
 6. **Custom tracing code**: Custom instrumentation, configuration, and adding span tags can significantly impact trace visualizations in Datadog.
 
-7. **Version information**: Knowing what language, framework, Datadog Agent, and Datadog tracer versions you are using allows Support to verify [Compatibility Requirements][15], check for known issues, or recommend a version upgrades. For example:
+7. **Version information**: Knowing what language, framework, Datadog Agent, and Datadog SDK versions you are using allows Support to verify [Compatibility Requirements][15], check for known issues, or recommend a version upgrades. For example:
     
 {{% /collapse-content %}}
 

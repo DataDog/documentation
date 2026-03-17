@@ -89,7 +89,7 @@ To enable debug logs:
  
    {{< code-block lang="yaml" disable_copy="true" collapsible="true" >}}
    env:
-     - name: DD_TRACE_DEBUG    # debug logging for the tracer
+     - name: DD_TRACE_DEBUG    # debug logging for the SDK
        value: "true"
      - name: DD_APM_INSTRUMENTATION_DEBUG    # debug logging for the injector
        value: "true"
@@ -103,7 +103,7 @@ There are several configuration mechanisms that can block or alter injection beh
 
 ### Storage requirements
 
-SSI downloads language tracing libraries and an injector package onto each host. The amount of disk space required depends on the number of languages in use and the number of pods being instrumented. A rough estimate is:
+SSI downloads language SDKs and an injector package onto each host. The amount of disk space required depends on the number of languages in use and the number of pods being instrumented. A rough estimate is:
 
 <div style="text-align:center;">
   <pre><code>[sum of the language library sizes]
@@ -169,7 +169,7 @@ The value should be a JSON string that applies the necessary security context to
 
 ### Custom instrumentation
 
-Custom instrumentation still requires you to import the tracing library. Configuration variables like .NET's `DD_TRACE_METHODS` remain available for defining custom spans.
+Custom instrumentation still requires you to import the SDK. Configuration variables like .NET's `DD_TRACE_METHODS` remain available for defining custom spans.
 
 ## Environment-specific troubleshooting
 
@@ -300,7 +300,7 @@ SSI does not inject into applications that already use a `-javaagent` option or 
 
 ### Ruby
 
-Ruby injection modifies the `Gemfile` to add the Datadog tracing library. If injection support is later removed, the application may fail to start due to the missing dependency.
+Ruby injection modifies the `Gemfile` to add the Datadog SDK. If injection support is later removed, the application may fail to start due to the missing dependency.
 
 To resolve this, restore the original `Gemfile`. If you still want to use APM after removing injection, run `bundle install` to download the gem.
 

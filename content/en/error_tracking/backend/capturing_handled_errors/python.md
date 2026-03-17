@@ -10,7 +10,7 @@ This feature is available on `Python3.10+` and `ddtrace 3.8.0+`.
 
 ## Getting started
 
-Before you begin, make sure you've already [installed and configured the Agent][1]. You also need to [add the tracing library][2] directly in the application to instrument it.
+Before you begin, make sure you've already [installed and configured the Agent][1]. You also need to [add the SDK][2] directly in the application to instrument it.
 
 ### Automatic instrumentation
 

@@ -19,7 +19,7 @@ further_reading:
 
 - AWS Fargate environment
 - Go application containerized with Docker
-  - Instrumented with the Datadog Go tracing library (see [version requirements][3])
+  - Instrumented with the Datadog Go SDK (see [version requirements][3])
 - AWS CLI configured with appropriate permissions
 - Your Datadog API key
 

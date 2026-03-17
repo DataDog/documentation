@@ -117,9 +117,9 @@ Trace-based enrichment uses APM traces to automatically associate feature flag c
 
 #### Setup
 
-To automatically detect services using a feature flag, instrument your feature flag evaluation code with the APM tracing library. This allows Datadog to automatically detect all services that evaluate a specific flag, even if they weren't originally tagged.
+To automatically detect services using a feature flag, instrument your feature flag evaluation code with the APM SDK. This allows Datadog to automatically detect all services that evaluate a specific flag, even if they weren't originally tagged.
 
-1. [Instrument your feature flag evaluation code][4] using the Datadog tracing library.
+1. [Instrument your feature flag evaluation code][4] using the Datadog SDK.
 1. Create a custom span with the operation name `experiments.IsEnabled` to track feature flag evaluations.
 3. Tag the span with `experiment_id:<flag-id>`, where `<flag-id>` matches the feature flag ID.
 

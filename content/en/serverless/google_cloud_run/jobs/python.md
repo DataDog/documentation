@@ -21,14 +21,14 @@ ensure you’ve <a href="http://localhost:1313/integrations/google_cloud_platfor
 and are using <a href="https://hub.docker.com/r/datadog/serverless-init">serverless-init version 1.9.0 or later</a>.
 </div>
 
-1. **Install the Datadog Python tracer**.
+1. **Install the Datadog Python SDK**.
 
    Add `ddtrace` to your `requirements.txt` or `pyproject.toml`. You can find the latest version on [PyPI][1]:
    {{< code-block lang="text" filename="requirements.txt" disable_copy="false" collapsible="true" >}}
 ddtrace==<VERSION>
 {{< /code-block >}}
 
-   Alternatively, you can install the tracer in your Dockerfile:
+   Alternatively, you can install the SDK in your Dockerfile:
    {{< code-block lang="dockerfile" filename="Dockerfile" disable_copy="false" collapsible="true" >}}
 RUN pip install ddtrace
 {{< /code-block >}}

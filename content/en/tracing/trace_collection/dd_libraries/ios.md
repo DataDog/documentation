@@ -16,7 +16,7 @@ further_reading:
   tag: Documentation
   text: Explore your services, resources, and traces
 ---
-Send [traces][1] to Datadog from your iOS applications with [Datadog's `dd-sdk-ios` client-side tracing library][2] and leverage the following features:
+Send [traces][1] to Datadog from your iOS applications with [Datadog's `dd-sdk-ios` client-side SDK][2] and leverage the following features:
 
 * Create custom [spans][3] for various operations in your app.
 * Send logs for each span individually.
@@ -304,7 +304,7 @@ DDDatadog.verbosityLevel = DDSDKVerbosityLevelDebug;
 ```
 {{% /tab %}}
 {{< /tabs >}}
-3. Datadog tracer implements both [OpenTracing][8] and [OpenTelemetry][12] standards. Configure and enable the shared an OpenTracing `Tracer` as `Tracer.shared()`:
+3. Datadog SDK implements both [OpenTracing][8] and [OpenTelemetry][12] standards. Configure and enable the shared an OpenTracing `Tracer` as `Tracer.shared()`:
 {{< tabs >}}
 {{% tab "Swift" %}}
 ```swift

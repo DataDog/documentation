@@ -29,7 +29,7 @@ The custom user activity for which out-of-the-box detection rules are available 
 ## Adding authenticated user information to traces and enabling user blocking capability
 
 <div class="alert alert-info">
-<strong>Automated Detection of User Activity:</strong> Datadog Tracing Libraries attempt to detect and report user activity events automatically. For more information, see <a href="/security/application_security/how-it-works/add-user-info/?tab=set_user#disabling-automatic-user-activity-event-tracking">Disabling automatic user activity event tracking</a>.
+<strong>Automated Detection of User Activity:</strong> Datadog SDKs attempt to detect and report user activity events automatically. For more information, see <a href="/security/application_security/how-it-works/add-user-info/?tab=set_user#disabling-automatic-user-activity-event-tracking">Disabling automatic user activity event tracking</a>.
 </div>
 
 You can [add custom tags to your root span][3], or use the instrumentation functions described below.
@@ -1118,7 +1118,7 @@ Once saved, the rule is deployed to instances of the service that have Remote Co
 
 ## Automatic user activity event tracking
 
-When AAP is enabled, Datadog Tracing Libraries attempt to detect user activity events automatically.
+When AAP is enabled, Datadog SDKs attempt to detect user activity events automatically.
 
 The events that can be automatically detected are:
 
@@ -1162,7 +1162,7 @@ For example, `DD_APPSEC_AUTO_USER_INSTRUMENTATION_MODE=anon`.
 
 The following modes are deprecated:
 
-- `safe` mode: The trace library does not include any PII information on the events metadata. The tracer library tries to collect the user ID, and only if the user ID is a valid [GUID][10]
+- `safe` mode: The trace library does not include any PII information on the events metadata. The SDK tries to collect the user ID, and only if the user ID is a valid [GUID][10]
 - `extended` mode: The trace library tries to collect the user ID, and the user email. In this mode, Datadog does not check the type for the user ID to be a GUID. The trace library reports whatever value can be extracted from the event.
 
 **Note**: There could be cases in which the trace library won't be able to extract any information from the user event. The event would be reported with empty metadata. In those cases, use the [SDK](#adding-business-logic-information-login-success-login-failure-any-business-logic-to-traces) to manually instrument the user events.
@@ -1171,7 +1171,7 @@ The following modes are deprecated:
 
 To disable automated user activity detection through your [AAP Software Catalog][14], change the automatic tracking mode environment variable `DD_APPSEC_AUTO_USER_INSTRUMENTATION_MODE` to `disabled` on the service you want to deactivate. All modes only affect automated instrumentation and require [Remote Configuration][15] to be enabled.
 
-For manual configuration, you can set the environment variable `DD_APPSEC_AUTOMATED_USER_EVENTS_TRACKING_ENABLED` to `false` on your service and restart it. This must be set on the application hosting the Datadog Tracing Library, and not on the Datadog Agent.
+For manual configuration, you can set the environment variable `DD_APPSEC_AUTOMATED_USER_EVENTS_TRACKING_ENABLED` to `false` on your service and restart it. This must be set on the application hosting the Datadog SDK, and not on the Datadog Agent.
 
 [3]: /tracing/trace_collection/custom_instrumentation/
 [4]: /security/default_rules/bl-rate-limiting/

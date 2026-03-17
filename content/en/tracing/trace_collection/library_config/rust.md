@@ -1,5 +1,5 @@
 ---
-title: Configuring the Rust Tracing Library
+title: Configuring the Rust SDK
 code_lang: rust
 type: multi-code-lang
 code_lang_weight: 80
@@ -109,7 +109,7 @@ It is recommended to use `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` to set `env`, 
 
 `DD_LOG_LEVEL`
 : **Default**: `ERROR`<br>
-: Sets the internal log level for the tracer. Valid values: `DEBUG`, `INFO`, `WARN`, `ERROR`.
+: Sets the internal log level for the SDK. Valid values: `DEBUG`, `INFO`, `WARN`, `ERROR`.
 
 ## Sampling
 

@@ -14,7 +14,7 @@ If you don't see AAP threat information in the [Trace and Signals Explorer][1] f
 
 2. Check Node.js tracer version:
    - Confirm you're using Node.js tracer v4.30.0 or higher.
-   - Verify the tracer is loaded: `node -e "console.log(require('dd-trace/package.json').version)"`.
+   - Verify the SDK is loaded: `node -e "console.log(require('dd-trace/package.json').version)"`.
 
 3. Verify environment variables:
    - Ensure `DD_APPSEC_ENABLED=true` is set.
@@ -23,7 +23,7 @@ If you don't see AAP threat information in the [Trace and Signals Explorer][1] f
 
 4. Check tracer initialization:
    - Ensure `dd-trace/init` is required at the start of your application.
-   - Verify the tracer is properly loaded before your application code.
+   - Verify the SDK is properly loaded before your application code.
 
 ### Application fails to start
 
@@ -36,8 +36,8 @@ If you don't see AAP threat information in the [Trace and Signals Explorer][1] f
    - Reinstall if necessary: `npm install dd-trace`.
 
 3. Module loading errors:
-   - Check for conflicts with other tracing libraries.
-   - Verify the tracer is required before other modules.
+   - Check for conflicts with other SDKs.
+   - Verify the SDK is required before other modules.
 
 ### Performance impact
 
@@ -57,12 +57,12 @@ If you don't see AAP threat information in the [Trace and Signals Explorer][1] f
 1. Environment variables not recognized:
    - Ensure environment variables are set before starting the application.
    - Check for typos in environment variable names.
-   - Verify that the tracer is initialized with the correct configuration.
+   - Verify that the SDK is initialized with the correct configuration.
 
 2. Tracer initialization problems:
    - Make sure `require('dd-trace/init')` is the first line in your application.
    - Check for syntax errors in your tracer configuration.
-   - Verify that the tracer is being imported correctly.
+   - Verify that the SDK is being imported correctly.
 
 ### Still having issues?
 

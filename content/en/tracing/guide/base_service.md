@@ -24,7 +24,7 @@ This page explains [**integration overrides**](#integration-override) and [**ser
 You can manually set the service name on spans. This gives you visibility into specific components of the service, such as shared libraries and middleware layers. These types of overrides are referred to as **service overrides**.
 
 ### Integration overrides
-Datadog tracing libraries automatically set different service names on client spans to represent databases, queues, or third-party dependencies in integrations. These types of overrides are referred to as **integration overrides**. With inferred entities, **integration overrides are not necessary to represent dependencies**, and may pollute service lists and maps. For instructions on how to remove integration overrides, see [Integration Override Removal][2].
+Datadog SDKs automatically set different service names on client spans to represent databases, queues, or third-party dependencies in integrations. These types of overrides are referred to as **integration overrides**. With inferred entities, **integration overrides are not necessary to represent dependencies**, and may pollute service lists and maps. For instructions on how to remove integration overrides, see [Integration Override Removal][2].
 
 ## Visualizations
 Integration overrides and service overrides are represented similarly in APM.

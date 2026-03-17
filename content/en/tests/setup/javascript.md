@@ -599,7 +599,7 @@ For more information, see [Code Coverage][6].
 
 ## Configuration settings
 
-The following is a list of the most important configuration settings that can be used with the tracer.
+The following is a list of the most important configuration settings that can be used with the SDK.
 
 `test_session.name`
 : Use it to identify a group of tests, such as `integration-tests`, `unit-tests` or `smoke-tests`.<br/>

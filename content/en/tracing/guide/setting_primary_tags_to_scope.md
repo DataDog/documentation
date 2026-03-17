@@ -32,11 +32,11 @@ The default and mandatory primary tag is the environment your traces are collect
 
 #### Tracer environment
 
-Datadog recommends having the tracer set `env`. It also allows for greater flexibility because the definition of `env` lives within the actual runtime of the service.
+Datadog recommends having the SDK set `env`. It also allows for greater flexibility because the definition of `env` lives within the actual runtime of the service.
 
-If `DD_ENV` is exposed to your service's process, the tracer will use it automatically. See [Unified Service Tagging][3] to learn about setting `DD_ENV` and other standard service environment variables.
+If `DD_ENV` is exposed to your service's process, the SDK will use it automatically. See [Unified Service Tagging][3] to learn about setting `DD_ENV` and other standard service environment variables.
 
-You may also manually set `env` as a global tag for the tracer in code. See [assigning tags in APM][4] for more information.
+You may also manually set `env` as a global tag for the SDK in code. See [assigning tags in APM][4] for more information.
 
 #### Agent environment
 
@@ -78,9 +78,9 @@ Go to the [APM Settings][6] page to define, change, or remove your primary tags.
 
 * Only organization administrators have access to this page.
 * Changes may take up to two hours to be reflected in the UI.
-* The tracer always adds `resource`, `name`, and `service` tags to spans. Datadog recommends never adding these as host level tags to avoid confusion.
+* The SDK always adds `resource`, `name`, and `service` tags to spans. Datadog recommends never adding these as host level tags to avoid confusion.
 * The additional primary tags support up to 100 unique values per tag. See [APM data volume guidelines][9] for details.
-* Additional primary tags can be host or container tags. Span-level tags added by the tracer cannot be used as primary tags.
+* Additional primary tags can be host or container tags. Span-level tags added by the SDK cannot be used as primary tags.
 
 If you change a previously set primary tag, be aware of the following:
 

@@ -5,13 +5,13 @@ description: Use the dd-dotnet diagnostic tool to troubleshoot .NET tracing setu
 
 If your application does not produce traces as expected after installing the .NET tracer, run the diagnostic tool `dd-dotnet` described on this page for basic troubleshooting. It can help you determine issues with your setup, such as missing environment variables, incomplete installation, or an unreachable Agent.
 
-The diagnostic tool  `dd-dotnet` is bundled with the tracing library starting with version 2.42.0. It is located in the tracing library's installation folder, and automatically added to the system `PATH` to be invoked from anywhere.
+The diagnostic tool  `dd-dotnet` is bundled with the SDK starting with version 2.42.0. It is located in the SDK's installation folder, and automatically added to the system `PATH` to be invoked from anywhere.
 
 ## Installing `dd-trace`
 
-**This section is for versions of the tracer older than 2.42.0.**
+**This section is for versions of the SDK older than 2.42.0.**
 
-Older versions of the tracer did not include the `dd-dotnet` tool. You can install the `dd-trace` tool instead. Its features and syntax are similar to `dd-dotnet`.
+Older versions of the SDK did not include the `dd-dotnet` tool. You can install the `dd-trace` tool instead. Its features and syntax are similar to `dd-dotnet`.
 
 You can install `dd-trace` in one of the following ways:
 
@@ -55,7 +55,7 @@ Process name: SimpleApp
 Target process is running with .NET Core
 1. Checking Modules Needed so the Tracer Loads:
  [SUCCESS]: The native library version 2.42.0.0 is loaded into the process.
- [SUCCESS]: The tracer version 2.42.0.0 is loaded into the process.
+ [SUCCESS]: The SDK version 2.42.0.0 is loaded into the process.
 2. Checking DD_DOTNET_TRACER_HOME and related configuration value:
  [SUCCESS]: DD_DOTNET_TRACER_HOME is set to 'C:\git\dd-trace-dotnet-2\shared\bin\monitoring-home\win-x64\..' and the
 directory was found correctly.
@@ -95,7 +95,7 @@ Process name: SimpleApp
 Target process is running with .NET Core
 1. Checking Modules Needed so the Tracer Loads:
  [WARNING]: The native loader library is not loaded into the process
- [WARNING]: The native tracer library is not loaded into the process
+ [WARNING]: The native SDK is not loaded into the process
  [WARNING]: Tracer is not loaded into the process
 2. Checking DD_DOTNET_TRACER_HOME and related configuration value:
  [WARNING]: DD_DOTNET_TRACER_HOME is set to 'C:\Program Files\Datadog\.NET Tracer\' but the directory does not exist.
@@ -111,7 +111,7 @@ Tracer\win-x64\Datadog.Trace.ClrProfiler.Native.dll but the file is missing or y
  [FAILURE]: The environment variable CORECLR_ENABLE_PROFILING should be set to '1' (current value: not set)
 6. Checking if process tracing configuration matches Installer or Bundler:
 Installer/MSI related documentation:
-https://docs.datadoghq.com/tracing/trace_collection/dd_libraries/dotnet-core/?tab=windows#install-the-tracer
+https://docs.datadoghq.com/tracing/trace_collection/dd_libraries/dotnet-core/?tab=windows#install-the-sdk
  [FAILURE]: Unable to find Datadog .NET Tracer program, make sure the tracer has been properly installed with the MSI.
  [WARNING]: The registry key SOFTWARE\Classes\CLSID\{846F5F1C-F9AE-4B07-969E-05C26BC060D8}\InprocServer32 is missing. If
 using the MSI, make sure the installation was completed correctly try to repair/reinstall it.
@@ -159,7 +159,7 @@ Inspecting worker process 39852
 Target process is running with .NET Framework
 1. Checking Modules Needed so the Tracer Loads:
  [SUCCESS]: The native library version 2.42.0.0 is loaded into the process.
- [SUCCESS]: The tracer version 2.42.0.0 is loaded into the process.
+ [SUCCESS]: The SDK version 2.42.0.0 is loaded into the process.
 2. Checking DD_DOTNET_TRACER_HOME and related configuration value:
  [SUCCESS]: DD_DOTNET_TRACER_HOME is set to 'C:\Program Files\Datadog\.NET Tracer\' and the directory was found
 correctly.
@@ -199,7 +199,7 @@ Inspecting worker process 35152
 Target process is running with .NET Framework
 1. Checking Modules Needed so the Tracer Loads:
  [SUCCESS]: The native library version 2.42.0.0 is loaded into the process.
- [SUCCESS]: The tracer version 2.42.0.0 is loaded into the process.
+ [SUCCESS]: The SDK version 2.42.0.0 is loaded into the process.
 2. Checking DD_DOTNET_TRACER_HOME and related configuration value:
  [SUCCESS]: DD_DOTNET_TRACER_HOME is set to 'C:\Program Files\Datadog\.NET Tracer\' and the directory was found
 correctly.
@@ -224,7 +224,7 @@ Detected agent url: http://127.0.0.1:8126/. Note: this url may be incorrect if y
 configuration file.
 Connecting to Agent at endpoint http://127.0.0.1:8126/ using HTTP
 Detected agent version 7.48.0
- [FAILURE]: The Datadog.Trace assembly could not be found in the GAC. Make sure the tracer has been properly installed
+ [FAILURE]: The Datadog.Trace assembly could not be found in the GAC. Make sure the SDK has been properly installed
 with the MSI.
 ```
 

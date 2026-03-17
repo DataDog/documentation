@@ -56,7 +56,7 @@ DD_VERSION=<YOUR_APP_VERSION>
 DD_AGENT_HOST=localhost
 DD_TRACE_AGENT_PORT=8126
 
-# Enable Remote Configuration in the tracer
+# Enable Remote Configuration in the SDK
 DD_REMOTE_CONFIG_ENABLED=true
 
 # Enable the feature flagging provider (required for most SDKs)

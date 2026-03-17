@@ -10,7 +10,7 @@ further_reading:
   text: "How App and API Protection Works in Datadog"
 ---
 
-The following capabilities are supported relative to each language's tracing library:
+The following capabilities are supported relative to each language's SDK:
 
 | Capability               | Java    | .NET     | Node.js        | Python        | Go              | Ruby          | PHP           |
 |-----------------------------------------------|---------|----------|----------------|---------------|-----------------|---------------|---------------|

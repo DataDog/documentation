@@ -20,7 +20,7 @@ You must have the `apm_service_renaming_write` permission to create remapping ru
 
 ### Tracer version requirements
 
-You can create service remapping rules only for services instrumented with supported tracer versions. If a service is reporting from an older tracer version, upgrade the tracer before creating remapping rules for that service.
+You can create service remapping rules only for services instrumented with supported tracer versions. If a service is reporting from an older tracer version, upgrade the SDK before creating remapping rules for that service.
 
 | Language   | Minimum supported tracer version |
 |------------|----------------------------------|

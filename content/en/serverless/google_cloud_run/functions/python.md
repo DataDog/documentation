@@ -16,9 +16,9 @@ further_reading:
 
 ## Setup
 
-1. **Install the Datadog Python tracer**.
+1. **Install the Datadog Python SDK**.
 
-   Add `ddtrace` to your `requirements.txt` or `pyproject.toml`. This ensures the tracer is included in your container image when it is built and deployed. You can find the latest version on [PyPI][1]:
+   Add `ddtrace` to your `requirements.txt` or `pyproject.toml`. This ensures the SDK is included in your container image when it is built and deployed. You can find the latest version on [PyPI][1]:
    {{< code-block lang="text" filename="requirements.txt" disable_copy="false" collapsible="true" >}}
 ddtrace==<VERSION>
 {{< /code-block >}}

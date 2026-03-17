@@ -55,7 +55,7 @@ Data Streams Monitoring instruments Kafka _clients_ (consumers/producers). If yo
 | IBM MQ | {{< X >}} | | {{< X >}} | | | |
 | RabbitMQ | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | | |
 
-Data Streams Monitoring requires minimum Datadog tracer versions. See each setup page for details.
+Data Streams Monitoring requires minimum Datadog SDK versions. See each setup page for details.
 
 #### Support for OpenTelemetry
 Data Streams Monitoring supports OpenTelemetry. If you have set up Datadog APM to work with OpenTelemetry, no additional setup is required to use Data Streams Monitoring. See [OpenTelemetry Compatibility][11].

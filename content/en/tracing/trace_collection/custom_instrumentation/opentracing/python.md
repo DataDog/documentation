@@ -10,7 +10,7 @@ type: multi-code-lang
 code_lang_weight: 10
 ---
 
-<div class="alert alert-info">OpenTracing support is based on a deprecated specification. If you want to instrument your code with an open spec, use OpenTelemetry instead. Try <a href="/tracing/trace_collection/otel_instrumentation/python/">processing data from OpenTelemetry instrumentation in Datadog Tracing Libraries</a>.</div>
+<div class="alert alert-info">OpenTracing support is based on a deprecated specification. If you want to instrument your code with an open spec, use OpenTelemetry instead. Try <a href="/tracing/trace_collection/otel_instrumentation/python/">processing data from OpenTelemetry instrumentation in Datadog SDKs</a>.</div>
 
 OpenTracing support is included in the `ddtrace` package. Use `pip` to install the required `opentracing` package:
 
@@ -18,7 +18,7 @@ OpenTracing support is included in the `ddtrace` package. Use `pip` to install t
 pip install ddtrace[opentracing]
 ```
 
-The OpenTracing convention for initializing a tracer is to define an initialization method that configures and instantiates a new tracer and overwrites the global `opentracing.tracer` reference:
+The OpenTracing convention for initializing an SDK is to define an initialization method that configures and instantiates a new tracer and overwrites the global `opentracing.tracer` reference:
 
 ```python
 import time
@@ -44,7 +44,7 @@ init_tracer("<SERVICE_NAME>")
 my_operation()
 ```
 
-The tracer can now be used like in any other OpenTracing application. See [opentracing.io][1] for OpenTracing Python usage.
+The SDK can now be used like in any other OpenTracing application. See [opentracing.io][1] for OpenTracing Python usage.
 
 
 [1]: https://opentracing.io/guides/python/

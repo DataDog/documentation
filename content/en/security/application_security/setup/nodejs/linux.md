@@ -25,7 +25,7 @@ further_reading:
 - Root or sudo privileges
 - Systemd (for service management)
 - Your Datadog API key
-- Datadog Node.js tracing library (see [version requirements][1])
+- Datadog Node.js SDK (see [version requirements][1])
 
 ## 1. Installing the Datadog Agent
 

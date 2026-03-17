@@ -5,9 +5,9 @@ disable_toc: false
 
 ## Overview
 
-Use the [Datadog Admission Controller][1] to inject APM tracer libraries into Kubernetes workloads using pod-level annotations and labels.
+Use the [Datadog Admission Controller][1] to inject APM SDKs into Kubernetes workloads using pod-level annotations and labels.
 
-The Datadog Agent uses the Kubernetes Admission Controller to intercept pod creation requests and inject an init container that installs the tracer library before the application starts. This method provides a manual, pod-level alternative to [Single Step Instrumentation (SSI)][2], which uses Helm or the Datadog Operator to configure instrumentation across your cluster.
+The Datadog Agent uses the Kubernetes Admission Controller to intercept pod creation requests and inject an init container that installs the SDK before the application starts. This method provides a manual, pod-level alternative to [Single Step Instrumentation (SSI)][2], which uses Helm or the Datadog Operator to configure instrumentation across your cluster.
 
 Use this guide if:
 - You want to test library injection on a small number of services before rolling out SSI cluster-wide.
@@ -91,7 +91,7 @@ spec:
         - # (...)
 ```
 
-To view available library versions, see the tracer repositories for each language:
+To view available library versions, see the SDK repositories for each language:
 - [Java][4]
 - [Node.js][5]
 - [Python][6]

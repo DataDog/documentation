@@ -122,7 +122,7 @@ The following table enumerates some of the frameworks and versions Datadog succe
 | Zend Framework | 1.12, 1.21                              | All supported PHP versions  | Framework-level instrumentation |
 | Zend Framework | 2.x                                     | All supported PHP versions  | Generic web tracing             |
 
-Note that even if you don't see your web framework in this list, it is supported out of the box with the latest release of the tracer.
+Note that even if you don't see your web framework in this list, it is supported out of the box with the latest release of the SDK.
 
 
 Datadog is continuously adding more support for in-depth tracing for PHP web-frameworks. To request support for additional span metadata and framework internals, contact our awesome [support team][3].
@@ -181,7 +181,7 @@ To request support for additional libraries, contact our awesome [support team][
 
 Datadog supports tracing forked processes using [pcntl][7]. When a call to `pcntl_fork` is detected, a dedicated span is created, and the forked process is instrumented. This can be disabled with `DD_TRACE_FORKED_PROCESS`. Refer to the [library configuration page][9] for more details.
 
-If the application invokes `pcntl_unshare(CLONE_NEWUSER);` and the tracer is installed, the application fatally crashes. This happens because `unshare` with `CLONE_NEWUSER` requires the process [not to be threaded][8], while the PHP tracer uses a separate thread to send traces to the Datadog Agent without blocking the main process.
+If the application invokes `pcntl_unshare(CLONE_NEWUSER);` and the SDK is installed, the application fatally crashes. This happens because `unshare` with `CLONE_NEWUSER` requires the process [not to be threaded][8], while the PHP tracer uses a separate thread to send traces to the Datadog Agent without blocking the main process.
 
 ## Further Reading
 

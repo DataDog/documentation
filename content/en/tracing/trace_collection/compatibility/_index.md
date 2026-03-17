@@ -1,11 +1,11 @@
 ---
 title: Compatibility Requirements
-description: View compatibility requirements for Datadog tracing libraries including supported languages, frameworks, and runtime versions.
+description: View compatibility requirements for Datadog SDKs including supported languages, frameworks, and runtime versions.
 type: multi-code-lang
 further_reading:
 - link: "/tracing/trace_collection/"
   tag: "Documentation"
-  text: "Add the tracing library to your application"
+  text: "Add the SDK to your application"
 aliases:
   - /tracing/compatibility
   - /tracing/compatibility_requirements

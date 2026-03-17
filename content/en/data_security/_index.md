@@ -35,7 +35,7 @@ You may also wish to review the information available at [Datadog Security][1] a
 
 ## How data gets from you to Datadog
 
-Datadog allows you to send data to Datadog in multiple ways, including from the Agent, [DogStatsD][3], the public API, and integrations. In addition, Real User Monitoring SDKs and tracing libraries generate data based on your application and services code and send it to Datadog. 
+Datadog allows you to send data to Datadog in multiple ways, including from the Agent, [DogStatsD][3], the public API, and integrations. In addition, Real User Monitoring SDKs and SDKs generate data based on your application and services code and send it to Datadog. 
 
 Data in motion through Datadog provided tools is protected with TLS and HSTS. Data stored by Datadog is protected by encryption, access controls, and authentication. For specifics, read more at [Datadog Security][1].
 
@@ -79,9 +79,9 @@ A key approach to reducing risk around logs data security is access control. Rea
 
 To prevent leaking sensitive data when you're monitoring live processes and live containers, Datadog provides some default sensitive keyword scrubbing in process arguments and in Helm charts. You can obfuscate additional sensitive sequences within process commands or arguments by using the [`custom_sensitive_words` setting][16], and add to the container scrubbing word list by using the [`DD_ORCHESTRATOR_EXPLORER_CUSTOM_SENSITIVE_WORDS` environment variable][17].
 
-### APM and other tracing library based products
+### APM and other SDK based products
 
-The Datadog tracing libraries are used to instrument your applications, services, tests, and pipelines, and send performance data through the Agent to Datadog. Trace and span data (along with much more) is generated for the following products to use:
+The Datadog SDKs are used to instrument your applications, services, tests, and pipelines, and send performance data through the Agent to Datadog. Trace and span data (along with much more) is generated for the following products to use:
 
 - Application Performance Monitoring (APM)
 - Continuous Profiler

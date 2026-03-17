@@ -5,10 +5,10 @@ description: Step-by-step tutorial to enable distributed tracing for a Python ap
 further_reading:
 - link: /tracing/trace_collection/library_config/python/
   tag: "Documentation"
-  text: Additional tracing library configuration options
+  text: Additional SDK configuration options
 - link: /tracing/trace_collection/dd_libraries/python/
   tag: "Documentation"
-  text: Detailed tracing library setup instructions
+  text: Detailed SDK setup instructions
 - link: /tracing/trace_collection/compatibility/python/
   tag: "Documentation"
   text: Supported Python frameworks for automatic instrumentation
@@ -34,7 +34,7 @@ See [Tracing Python Applications][2] for general comprehensive tracing setup doc
 
 - A Datadog account and [organization API key][3]
 - Git
-- Python that meets the [tracing library requirements][4]
+- Python that meets the [SDK requirements][4]
 
 ## Install the Agent
 
@@ -46,7 +46,7 @@ DD_AGENT_MAJOR_VERSION=7 DD_API_KEY=<YOUR_API_KEY> DD_SITE="datadoghq.com" bash 
 
 To send data to a Datadog site other than `datadoghq.com`, replace the `DD_SITE` environment variable with [your Datadog site][6].
 
-If you have an Agent already installed on the host, ensure it is at least version 7.28. The minimum version of Datadog Agent required to use `ddtrace` to trace Python applications is documented in the [tracing library developer docs][7].
+If you have an Agent already installed on the host, ensure it is at least version 7.28. The minimum version of Datadog Agent required to use `ddtrace` to trace Python applications is documented in the [SDK developer docs][7].
 
 Verify that the Agent is running and sending data to Datadog by going to [**Events > Explorer**][8], optionally filtering by the `Datadog` Source facet, and looking for an event that confirms the Agent installation on the host:
 
@@ -131,7 +131,7 @@ Run more API calls to see the application in action. When you're done, type Ctrl
 
 ## Install Datadog tracing
 
-Next, install the tracing library by using Poetry or pip (minimum version 18). From your `apm-tutorial-python` directory, run:
+Next, install the SDK by using Poetry or pip (minimum version 18). From your `apm-tutorial-python` directory, run:
 
 {{< tabs >}}
 {{% tab "Poetry" %}}
@@ -227,7 +227,7 @@ The following steps walk you through adding annotations to the code to trace som
    {{< code-block lang="python" >}}
 from ddtrace import tracer{{< /code-block >}}
 
-3. Inside the `NotesHelper` class, add a tracer wrapper called `notes_helper` to better see how the `notes_helper.long_running_process` method works:
+3. Inside the `NotesHelper` class, add an SDK wrapper called `notes_helper` to better see how the `notes_helper.long_running_process` method works:
    {{< code-block lang="python" >}}class NotesHelper:
 
     @tracer.wrap(service="notes_helper")
@@ -236,7 +236,7 @@ from ddtrace import tracer{{< /code-block >}}
         logging.info("Hello from the long running process")
         self.__private_method_1(){{< /code-block >}}
 
-    Now, the tracer automatically labels the resource with the function name it is wrapped around, in this case, `long_running_process`.
+    Now, the SDK automatically labels the resource with the function name it is wrapped around, in this case, `long_running_process`.
 
 4. Resend some HTTP requests, specifically some `GET` requests.
 5. On the Trace Explorer, click on one of the new `GET` requests, and see a flame graph like this:

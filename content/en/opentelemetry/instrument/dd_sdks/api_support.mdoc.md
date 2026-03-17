@@ -314,7 +314,7 @@ Follow these steps to enable OTel Metrics API support in your application.
 {% /if %}
 
 {% if equals($prog_lang, "php") %}
-1. Install the Datadog PHP tracer following the [official installation instructions][400].
+1. Install the Datadog PHP SDK following the [official installation instructions][400].
 2. Install the required OpenTelemetry packages:
    ```sh
    composer require open-telemetry/sdk
@@ -721,7 +721,7 @@ Runtime and trace metrics continue to be submitted using StatsD. Only custom met
 {% /if %}
 
 {% if equals($prog_lang, "php") %}
-1. Install the Datadog PHP tracer following the [official installation instructions][400].
+1. Install the Datadog PHP SDK following the [official installation instructions][400].
 2. Remove any code that manually configures the OTLP exporter. The Datadog SDK handles this configuration automatically.
 3. Set the `DD_METRICS_OTEL_ENABLED=true` environment variable.
 {% /if %}
@@ -1426,8 +1426,8 @@ If you are using Datadog's traditional log injection (where `DD_LOGS_INJECTION=t
 <!-- Metrics and logs shared -->
 [200]: /extend/dogstatsd/
 [201]: /tracing/metrics/runtime_metrics/
-[202]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-framework/#install-the-tracer
-[203]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-core#install-the-tracer
+[202]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-framework/#install-the-sdk
+[203]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-core#install-the-sdk
 [204]: /opentelemetry/config/environment_variable_support
 [205]: /opentelemetry/setup/otlp_ingest_in_the_agent/?tab=host#enabling-otlp-ingestion-on-the-datadog-agent
 [206]: https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.metrics

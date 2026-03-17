@@ -37,7 +37,7 @@ With these three tags, you can:
 
 - Unified service tagging requires the setup of a [Datadog Agent][3] that is 6.19.x/7.19.x or higher.
 
-- Unified service tagging requires a tracer version that supports new configurations of the [reserved tags][1]. More information can be found per language in the [setup instructions][4].
+- Unified service tagging requires an SDK version that supports new configurations of the [reserved tags][1]. More information can be found per language in the [setup instructions][4].
 
 
 | Language         | Minimum Tracer Version |
@@ -399,7 +399,7 @@ To form a single point of configuration for all telemetry emitted directly from 
 
    1. Configure the [APM Tracer][1] with `DD_ENV` to keep the definition of `env` closer to the application that is generating the traces. This method allows the `env` tag to be sourced automatically from a tag in the span metadata.
 
-   2. Configure spans with `DD_VERSION` to add version to all spans that fall under the service that belongs to the tracer (generally `DD_SERVICE`). This means that if your service creates spans with the name of an external service, those spans do not receive `version` as a tag.
+   2. Configure spans with `DD_VERSION` to add version to all spans that fall under the service that belongs to the SDK (generally `DD_SERVICE`). This means that if your service creates spans with the name of an external service, those spans do not receive `version` as a tag.
 
       As long as version is present in spans, it is added to trace metrics generated from those spans. The version can be added manually in-code or automatically by the APM Tracer. When configured, these are used by the APM and [DogStatsD clients][2] to tag trace data and StatsD metrics with `env`, `service`, and `version`. If enabled, the APM tracer also injects the values of these variables into your logs.
 

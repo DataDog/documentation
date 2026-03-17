@@ -77,11 +77,11 @@ Configuring the Datadog Java Tracer varies depending on your CI provider.
 {{% /tab %}}
 {{< /tabs >}}
 
-### Downloading tracer library
+### Downloading SDK
 
-You only need to download the tracer library once for each server.
+You only need to download the SDK once for each server.
 
-If the tracer library is already available locally on the server, you can proceed directly to running the tests.
+If the SDK is already available locally on the server, you can proceed directly to running the tests.
 
 Declare `DD_TRACER_FOLDER` variable with the path to the folder where you want to store the downloaded tracer JAR:
 
@@ -89,20 +89,20 @@ Declare `DD_TRACER_FOLDER` variable with the path to the folder where you want t
 export DD_TRACER_FOLDER=... // e.g. ~/.datadog
 {{< /code-block >}}
 
-Run the command below to download the tracer JAR to the specified folder:
+Run the command below to download the SDK JAR to the specified folder:
 
 {{< code-block lang="shell" >}}
 wget -O $DD_TRACER_FOLDER/dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
 {{< /code-block >}}
 
-You can run the `java -jar $DD_TRACER_FOLDER/dd-java-agent.jar` command to check the version of the tracer library.
+You can run the `java -jar $DD_TRACER_FOLDER/dd-java-agent.jar` command to check the version of the SDK.
 
 ### Running your tests
 
 {{< tabs >}}
 {{% tab "Maven" %}}
 
-Set the following environment variables to configure the tracer:
+Set the following environment variables to configure the SDK:
 
 `DD_CIVISIBILITY_ENABLED=true` (Required)
 : Enables the Test Optimization product.
@@ -117,7 +117,7 @@ Set the following environment variables to configure the tracer:
 : Path to the folder where the downloaded Java Tracer is located.
 
 `MAVEN_OPTS=-javaagent:$DD_TRACER_FOLDER/dd-java-agent.jar` (Required)
-: Injects the tracer into the Maven build process.
+: Injects the SDK into the Maven build process.
 
 `DD_TEST_SESSION_NAME`
 : Identifies a group of tests (for example: `unit-tests` or `integration-tests`).
@@ -127,7 +127,7 @@ Run your tests as you normally do (for example: `mvn test` or `mvn verify`).
 {{% /tab %}}
 {{% tab "Gradle" %}}
 
-Set the following environment variables to configure the tracer:
+Set the following environment variables to configure the SDK:
 
 `DD_CIVISIBILITY_ENABLED=true` (Required)
 : Enables the Test Optimization product.
@@ -142,14 +142,14 @@ Set the following environment variables to configure the tracer:
 : Path to the folder where the downloaded Java Tracer is located.
 
 `GRADLE_OPTS=-javaagent:$DD_TRACER_FOLDER/dd-java-agent.jar` (Required)
-: Injects the tracer into the Gradle launcher process.
+: Injects the SDK into the Gradle launcher process.
 
 Run your tests as you normally do (for example: `./gradlew clean test`).
 
 {{% /tab %}}
 {{% tab "SBT" %}}
 
-Set the following environment variables to configure the tracer:
+Set the following environment variables to configure the SDK:
 
 `DD_CIVISIBILITY_ENABLED=true` (Required)
 : Enables the Test Optimization product.
@@ -167,14 +167,14 @@ Set the following environment variables to configure the tracer:
 : Path to the folder where the downloaded Java Tracer is located.
 
 `SBT_OPTS=-javaagent:$DD_TRACER_FOLDER/dd-java-agent.jar` (Required)
-: Injects the tracer into the JVMs that execute your tests.
+: Injects the SDK into the JVMs that execute your tests.
 
 Run your tests as you normally do (for example: `sbt test`).
 
 {{% /tab %}}
 {{% tab "Other" %}}
 
-Set the following environment variables to configure the tracer:
+Set the following environment variables to configure the SDK:
 
 `DD_CIVISIBILITY_ENABLED=true` (Required)
 : Enables the Test Optimization product.
@@ -192,7 +192,7 @@ Set the following environment variables to configure the tracer:
 : Path to the folder where the downloaded Java Tracer is located.
 
 `JAVA_TOOL_OPTIONS=-javaagent:$DD_TRACER_FOLDER/dd-java-agent.jar` (Required)
-: Injects the tracer into the JVMs that execute your tests.
+: Injects the SDK into the JVMs that execute your tests.
 
 Run your tests as you normally do.
 
@@ -203,7 +203,7 @@ Run your tests as you normally do.
 
 Default configuration values work well in most cases.
 
-However, if there is a need to fine-tune the tracer's behavior, [Datadog Tracer configuration][3] options can be used.
+However, if there is a need to fine-tune the SDK's behavior, [Datadog Tracer configuration][3] options can be used.
 
 ### Collecting Git metadata
 
@@ -211,7 +211,7 @@ However, if there is a need to fine-tune the tracer's behavior, [Datadog Tracer 
 
 ## Extensions
 
-The tracer exposes a set of APIs that can be used to extend its functionality programmatically.
+The SDK exposes a set of APIs that can be used to extend its functionality programmatically.
 
 ### Adding custom tags to tests
 
@@ -509,23 +509,23 @@ Datadog recommends using `DD_TEST_SESSION_NAME` if your test commands vary betwe
 
 ## Troubleshooting
 
-### The tests are not appearing in Datadog after enabling Test Optimization in the tracer
+### The tests are not appearing in Datadog after enabling Test Optimization in the SDK
 
-Verify that the tracer is injected into your build process by examining your build's logs.
+Verify that the SDK is injected into your build process by examining your build's logs.
 If the injection is successful, you can see a line containing `DATADOG TRACER CONFIGURATION`.
-If the line is not there, make sure that the environment variables used to inject and configure the tracer are available to the build process.
+If the line is not there, make sure that the environment variables used to inject and configure the SDK are available to the build process.
 A common mistake is to set the variables in a build step and run the tests in another build step. This approach may not work if the variables are not propagated between build steps.
 
-Ensure that you are using the latest version of the tracer.
+Ensure that you are using the latest version of the SDK.
 
 Verify that your build system and testing framework are supported by Test Optimization. See the list of [supported build systems and test frameworks](#compatibility).
 
-Ensure that the `dd.civisibility.enabled` property (or `DD_CIVISIBILITY_ENABLED` environment variable) is set to `true` in the tracer arguments.
+Ensure that the `dd.civisibility.enabled` property (or `DD_CIVISIBILITY_ENABLED` environment variable) is set to `true` in the SDK arguments.
 
 Try running your build with tracer debug logging enabled by setting the `DD_TRACE_DEBUG` environment variable to `true`.
 Check the build output for any errors that indicate tracer misconfiguration, such as an unset `DD_API_KEY` environment variable.
 
-### Tests or source code compilation fails when building a project with the tracer attached
+### Tests or source code compilation fails when building a project with the SDK attached
 
 By default, Test Optimization runs Java code compilation with a compiler plugin attached.
 
@@ -545,11 +545,11 @@ If this is the case, you can disable plugin injection by adding `dd.civisibility
 
 The plugin is optional, as it only serves to reduce the performance overhead.
 
-### Tests fail when building a project with the tracer attached
+### Tests fail when building a project with the SDK attached
 
-In some cases attaching the tracer can break tests, especially if they run asserts on the internal state of the JVM or instances of third-party libraries' classes.
+In some cases attaching the SDK can break tests, especially if they run asserts on the internal state of the JVM or instances of third-party libraries' classes.
 
-While the best approach is such cases is to update the tests, there is also a quicker option of disabling the tracer's third-party library integrations.
+While the best approach is such cases is to update the tests, there is also a quicker option of disabling the SDK's third-party library integrations.
 
 The integrations provide additional insights into what happens in the tested code and are especially useful in integration tests, to monitor things like HTTP requests or database calls.
 They are enabled by default.

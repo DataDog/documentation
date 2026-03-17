@@ -85,7 +85,7 @@ Use manual configuration if you prefer to set up RUM Browser monitoring independ
 
 ### Enable RUM instrumentation on the Java SDK
 
-RUM Instrumentation for Java web application servers can be configured using the usual Java SDK configuration methods. For more information, see [Configuring the Java SDK Library][4].
+RUM Instrumentation for Java web application servers can be configured using the usual Java SDK configuration methods. For more information, see [Configuring the Java SDK][4].
 
 RUM SDK injection is disabled by default. Enable it by exporting the following environment variables:
 

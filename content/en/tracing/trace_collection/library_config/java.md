@@ -1,5 +1,5 @@
 ---
-title: Configuring the Java Tracing Library
+title: Configuring the Java SDK
 code_lang: java
 type: multi-code-lang
 code_lang_weight: 0
@@ -18,7 +18,7 @@ further_reading:
       text: "OpenTelemetry Environment Variable Configurations"
 ---
 
-After you set up the tracing library with your code and configure the Agent to collect APM data, optionally configure the tracing library as desired, including setting up [Unified Service Tagging][1].
+After you set up the SDK with your code and configure the Agent to collect APM data, optionally configure the SDK as desired, including setting up [Unified Service Tagging][1].
 
 {{% apm-config-visibility %}}
 
@@ -150,7 +150,7 @@ List of class/interface and methods to trace. Similar to adding `@Trace`, but wi
 : **Environment Variable**: `DD_TRACE_CLASSES_EXCLUDE`<br>
 **Default**: `null`<br>
 **Example**: `package.ClassName,package.ClassName$Nested,package.Foo*,package.other.*`<br>
-A list of fully qualified classes (that may end with a wildcard to denote a prefix) which will be ignored (not modified) by the tracer. Must use the jvm internal representation for names (eg package.ClassName$Nested and not package.ClassName.Nested)
+A list of fully qualified classes (that may end with a wildcard to denote a prefix) which will be ignored (not modified) by the SDK. Must use the jvm internal representation for names (eg package.ClassName$Nested and not package.ClassName.Nested)
 
 `dd.trace.partial.flush.min.spans`
 : **Environment Variable**: `DD_TRACE_PARTIAL_FLUSH_MIN_SPANS`<br>
@@ -213,7 +213,7 @@ When `true`, debug mode for the Datadog Java Tracer is enabled.
 `datadog.slf4j.simpleLogger.jsonEnabled`
 : **Environment Variable**: Not available<br>
 **Default**: `false`<br>
-When `true`, Datadog Java tracer logs are written in JSON. Available for versions 1.48.0+.<br>
+When `true`, Datadog Java SDK logs are written in JSON. Available for versions 1.48.0+.<br>
 **Note**: This setting is specific to the embedded SLF4J simple logger and does not support environment variables. `dd.log.format.json` is the preferred configuration option.
 
 `dd.trace.servlet.principal.enabled`
@@ -264,12 +264,12 @@ By default, HTTP 404 responses use "404" as the span resource name. When `false`
 `dd.trace.128.bit.traceid.generation.enabled`
 : **Environment Variable**: `DD_TRACE_128_BIT_TRACEID_GENERATION_ENABLED`<br>
 **Default**: `true`<br>
-When `true`, the tracer generates 128 bit Trace IDs, and encodes Trace IDs as 32 lowercase hexadecimal characters with zero padding.
+When `true`, the SDK generates 128 bit Trace IDs, and encodes Trace IDs as 32 lowercase hexadecimal characters with zero padding.
 
 `dd.trace.128.bit.traceid.logging.enabled`
 : **Environment Variable**: `DD_TRACE_128_BIT_TRACEID_LOGGING_ENABLED`<br>
 **Default**: `false`<br>
-When `true`, the tracer will inject 128 bit Trace IDs as 32 lowercase hexadecimal characters with zero padding, and 64 bit Trace IDs as decimal numbers. Otherwise, the tracer always injects Trace IDs as decimal numbers.
+When `true`, the SDK will inject 128 bit Trace IDs as 32 lowercase hexadecimal characters with zero padding, and 64 bit Trace IDs as decimal numbers. Otherwise, the SDK always injects Trace IDs as decimal numbers.
 
 `dd.trace.otel.enabled`
 : **Environment Variable**: `DD_TRACE_OTEL_ENABLED`<br>
@@ -320,7 +320,7 @@ Hostname for where to send traces to. If using a containerized environment, conf
 `dd.instrumentation.telemetry.enabled`
 : **Environment Variable**: `DD_INSTRUMENTATION_TELEMETRY_ENABLED`<br>
 **Default**: `true`<br>
-When `true`, the tracer collects [telemetry data][8]. Available for versions 0.104+. Defaults to `true` for versions 0.115+.
+When `true`, the SDK collects [telemetry data][8]. Available for versions 0.104+. Defaults to `true` for versions 0.115+.
 
 ### Databases
 
@@ -474,7 +474,7 @@ See how to disable integrations in the [integrations][13] compatibility section.
 `dd.integration.opentracing.enabled`
 : **Environment Variable**: `DD_INTEGRATION_OPENTRACING_ENABLED`<br>
 **Default**: `true`<br>
-By default the tracing client detects if a GlobalTracer is being loaded and dynamically registers a tracer into it. By turning this to false, this removes any tracer dependency on OpenTracing.
+By default the tracing client detects if a GlobalTracer is being loaded and dynamically registers an SDK into it. By turning this to false, this removes any tracer dependency on OpenTracing.
 
 `dd.hystrix.tags.enabled`
 : **Environment Variable**: `DD_HYSTRIX_TAGS_ENABLED`<br>

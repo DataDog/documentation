@@ -70,7 +70,7 @@ There are no required integrations for PHP.
 
 - Check the details of the running Agent at this address `http://<agent-machine-name>:<agent-port>/info`, usually `http://localhost:8126/info`.
 - Ensure there are no Agent transmission errors related to spans in your [tracer logs][7].
-- If the Agent is installed on a separate machine, check that `DD_AGENT_HOST` and, optionally, `DD_TRACE_AGENT_PORT` are set, or that `DD_TRACE_AGENT_URL` is set for the application tracing library.
+- If the Agent is installed on a separate machine, check that `DD_AGENT_HOST` and, optionally, `DD_TRACE_AGENT_PORT` are set, or that `DD_TRACE_AGENT_URL` is set for the application SDK.
 
 ### Check if spans are successfully transmitted to Datadog
 
@@ -80,7 +80,7 @@ AAP data is sent over [spans][9]. To confirm that spans are successfully transmi
 2021-11-29 21:19:58 CET | TRACE | INFO | (pkg/trace/info/stats.go:111 in LogStats) | [lang:.NET lang_version:5.0.10 interpreter:.NET tracer_version:1.30.1.0 endpoint_version:v0.4] -> traces received: 2, traces filtered: 0, traces amount: 1230 bytes, events extracted: 0, events sampled: 0
 ```
 
-If spans are not being transmitted, then the tracer logs will contain logs similar to this:
+If spans are not being transmitted, then the SDK logs will contain logs similar to this:
 
 ```
 2021-11-29 21:18:48 CET | TRACE | INFO | (pkg/trace/info/stats.go:104 in LogStats) | No data received

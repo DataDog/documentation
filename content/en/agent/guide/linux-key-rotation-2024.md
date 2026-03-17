@@ -6,7 +6,7 @@ description: "Information about the 2024 GPG key rotation for Datadog RPM and DE
 As a common best practice, Datadog periodically rotates the keys and certificates used to sign Datadog's Agent packages. Datadog packages include:
 
 - the different flavors of Agent (`datadog-agent`, `datadog-iot-agent`, `datadog-heroku-agent` and `datadog-dogstatsd`).
-- additional packages: Observability Pipelines Worker (`observability-pipelines-worker`), FIPS proxy (`datadog-fips-proxy`) and the APM injection and tracer libraries for Java, Python, .NET, Ruby and Node.js (all `datadog-apm-*` packages).
+- additional packages: Observability Pipelines Worker (`observability-pipelines-worker`), FIPS proxy (`datadog-fips-proxy`) and the APM injection and SDKs for Java, Python, .NET, Ruby and Node.js (all `datadog-apm-*` packages).
 
 The following GPG keys, used to sign the above RPM and DEB packages, reach their end-of-life in September 2024. The rotation is planned for June 2024:
 
@@ -43,7 +43,7 @@ If you're using one of the following installation methods, your host automatical
 
 Additionally, installing the DEB Agent v6.48.0+ or v7.48.0+ package through `apt` from the `apt.datadoghq.com` repository installs the [`datadog-signing-keys` package](#the-datadog-signing-keys-package) version 1.3.1. The `datadog-signing-keys` package automatically ensures that your host trusts the new key. If you have `datadog-signing-keys` version 1.3.1 or later installed, no further action is needed. Versions of `datadog-signing-keys` older than version 1.3.1 don't guarantee full preparedness for the key rotation.
 
-If you installed Observability Pipelines Worker or APM tracer libraries **using the above install methods**, they already come with the newest keys. No further action is required.
+If you installed Observability Pipelines Worker or APM SDKs **using the above install methods**, they already come with the newest keys. No further action is required.
 
 If you're installing the DEB Agent package from a different repository or you are not using `apt` (or a similar tool that checks repo metadata signatures), your system doesn't need to know the Datadog signing keys. No further action is needed. However, you may benefit from the [`datadog-signing-keys` package](#the-datadog-signing-keys-package).
 

@@ -65,7 +65,7 @@ To enable AAP using a new deployment, use the `APPSEC_ENABLED` environment varia
 
 When you see traces from your service in [AAP Traces][6], move to [Step 1.3: Validating login information is automatically collected](#step-1.3:-validating-login-information-is-automatically-collected).
 
-For more detailed instructions on using a new deployment, see [Enabling AAP Threat Detection using Datadog Tracing Libraries][7].
+For more detailed instructions on using a new deployment, see [Enabling AAP Threat Detection using Datadog SDKs][7].
 
 ### Step 1.3: Validating login information is automatically collected
 
@@ -182,7 +182,7 @@ In microservice environments, services are generally reached by internal hosts r
  
 * Source IPs (`@http.client_ip`) are varied and public IPs.  
   * **Problem:** If login attempts are coming from a few IPs only, this might be a proxy that you can't block without risking availability.  
-  * **Solution:** Forward the client IP of the initial request through a HTTP header, such as `X-Forwarded-For`. You can use a custom header for [better security][22] and configure the tracer to read it using the `DD_TRACE_CLIENT_IP_HEADER` environment variable.  
+  * **Solution:** Forward the client IP of the initial request through a HTTP header, such as `X-Forwarded-For`. You can use a custom header for [better security][22] and configure the SDK to read it using the `DD_TRACE_CLIENT_IP_HEADER` environment variable.  
 * The user agent (`@http.user_agent`) is consistent with the expected traffic (web browser, mobile app, etc.)  
   * **Problem:** The user agent could be replaced by the user agent in the calling microservice network library.  
   * **Solution:** Use the client user agent when calling subsequent services.

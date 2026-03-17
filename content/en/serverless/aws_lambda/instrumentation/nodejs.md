@@ -187,7 +187,7 @@ The [Datadog CloudFormation macro][1] automatically transforms your SAM applicat
 
 1. Install the Datadog Lambda Library
 
-    Package the Datadog Lambda and tracing libraries within the image:
+    Package the Datadog Lambda and SDKs within the image:
 
     ```sh
     npm install datadog-lambda-js dd-trace

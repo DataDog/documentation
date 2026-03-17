@@ -33,33 +33,33 @@ The latest Node.js Tracer supports Node.js versions `>=18`. For a full list of D
 
 ## Getting started
 
-Before you begin, make sure you've already [installed and configured the Agent][13]. Then, complete the following steps to add the Datadog tracing library to your Node.js application to instrument it. 
+Before you begin, make sure you've already [installed and configured the Agent][13]. Then, complete the following steps to add the Datadog SDK to your Node.js application to instrument it. 
 
-### Install the Datadog tracing library
+### Install the Datadog SDK
 
-To install the Datadog tracing library using npm for Node.js 18+, run:
+To install the Datadog SDK using npm for Node.js 18+, run:
 
   ```shell
   npm install dd-trace --save
   ```
-To install the Datadog tracing library (version 4.x of `dd-trace`) for end-of-life Node.js version 16, run:
+To install the Datadog SDK (version 4.x of `dd-trace`) for end-of-life Node.js version 16, run:
   ```shell
   npm install dd-trace@latest-node16
   ```
 For more information on Datadog's distribution tags and Node.js runtime version support, see the [Compatibility Requirements][1] page.
 If you are upgrading from a previous major version of the library (0.x, 1.x, 2.x, 3.x or 4.x) to another major version, read the [Migration Guide][5] to assess any breaking changes.
 
-### Import and initialize the tracer
+### Import and initialize the SDK
 
-Import and initialize the tracer either in code or with command line arguments. The Node.js tracing library needs to be imported and initialized **before** any other module.
+Import and initialize the SDK either in code or with command line arguments. The Node.js SDK needs to be imported and initialized **before** any other module.
 
 <div class="alert alert-info">With frameworks like <strong>Next.js</strong> and <strong>Nest.js</strong> you must either provide an environment variable or add an additional Node.js flag. See <a href="/tracing/trace_collection/compatibility/nodejs/#complex-framework-usage">Complex framework usage</a> for more information.</div>
 
-After you have completed setup, if you are not receiving complete traces, including missing URL routes for web requests, or disconnected or missing spans, **confirm the tracer has been imported and initialized correctly**. The tracing library being initialized first is necessary for the tracer to properly patch all of the required libraries for automatic instrumentation.
+After you have completed setup, if you are not receiving complete traces, including missing URL routes for web requests, or disconnected or missing spans, **confirm the SDK has been imported and initialized correctly**. The SDK being initialized first is necessary for the SDK to properly patch all of the required libraries for automatic instrumentation.
 
-When using a transpiler such as TypeScript, Webpack, Babel, or others, import and initialize the tracer library in an external file and then import that file as a whole when building your application.
+When using a transpiler such as TypeScript, Webpack, Babel, or others, import and initialize the SDK in an external file and then import that file as a whole when building your application.
 
-#### Option 1: Add the tracer in code
+#### Option 1: Add the SDK in code
 
 ##### JavaScript
 
@@ -74,7 +74,7 @@ const tracer = require('dd-trace').init();
 
 ##### TypeScript and bundlers
 
-For TypeScript and bundlers that support ECMAScript Module syntax, initialize the tracer in a separate file to maintain correct load order.
+For TypeScript and bundlers that support ECMAScript Module syntax, initialize the SDK in a separate file to maintain correct load order.
 
 ```typescript
 // server.ts
@@ -94,24 +94,24 @@ initializes in one step.
 import 'dd-trace/init';
 ```
 
-#### Option 2: Add the tracer with command line arguments
+#### Option 2: Add the SDK with command line arguments
 
-Use the `--require` option to Node.js to load and initialize the tracer in one step.
+Use the `--require` option to Node.js to load and initialize the SDK in one step.
 
 ```sh
 node --require dd-trace/init app.js
 ```
 
-**Note:** This approach requires using environment variables for all configuration of the tracer.
+**Note:** This approach requires using environment variables for all configuration of the SDK.
 
 #### ESM applications only: Import the loader
 
-ECMAScript Modules (ESM) applications require an _additional_ command line argument. Add this argument regardless of how the tracer is otherwise imported and initialized:
+ECMAScript Modules (ESM) applications require an _additional_ command line argument. Add this argument regardless of how the SDK is otherwise imported and initialized:
 
 - **Node.js < v20.6:** `--loader dd-trace/loader-hook.mjs`
 - **Node.js >= v20.6:** `--import dd-trace/register.js`
 
-For example, in Node.js 22, if initializing the tracer using option one from above, you would start it like this:
+For example, in Node.js 22, if initializing the SDK using option one from above, you would start it like this:
 
 ```sh
 node --import dd-trace/register.js app.js
@@ -233,7 +233,7 @@ The following features are turned off by default in the Node.js tracer. They do 
 
 #### General bundling remarks
 
-**Note**: Due to the usage of native modules in the tracer, which are compiled C++ code, (usually ending with a `.node` file extension), you need to add entries to your `external` list. Currently native modules used in the Node.js tracer live inside of `@datadog` prefixed packages. This will also require that you ship a `node_modules/` directory alongside your bundled application. You don't need to ship your entire `node_modules/` directory as it would contain many superfluous packages that should be contained in your bundle.
+**Note**: Due to the usage of native modules in the SDK, which are compiled C++ code, (usually ending with a `.node` file extension), you need to add entries to your `external` list. Currently native modules used in the Node.js tracer live inside of `@datadog` prefixed packages. This will also require that you ship a `node_modules/` directory alongside your bundled application. You don't need to ship your entire `node_modules/` directory as it would contain many superfluous packages that should be contained in your bundle.
 
 To generate a smaller `node_modules/` directory with only the required native modules, (and their dependencies) you can first determine the versions of packages that you need, then create a temporary directory to install them into, and copy the resulting `node_modules/` directory from it. For example:
 
@@ -257,7 +257,7 @@ At this stage you should be able to deploy your bundle, (which is your applicati
 
 ## Configuration
 
-If needed, configure the tracing library to send application performance telemetry data as you require, including setting up Unified Service Tagging. Read [Library Configuration][4] for details.
+If needed, configure the SDK to send application performance telemetry data as you require, including setting up Unified Service Tagging. Read [Library Configuration][4] for details.
 
 Read [tracer settings][3] for a list of initialization options.
 

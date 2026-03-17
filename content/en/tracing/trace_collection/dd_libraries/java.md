@@ -31,7 +31,7 @@ Before you begin, make sure you've already [installed and configured the Agent][
 
 ### Instrument your application
 
-After you install and configure your Datadog Agent, the next step is to add the tracing library directly in the application to instrument it. Read more about [compatibility information][1].
+After you install and configure your Datadog Agent, the next step is to add the SDK directly in the application to instrument it. Read more about [compatibility information][1].
 
 To begin tracing your applications:
 
@@ -67,7 +67,7 @@ To begin tracing your applications:
     ```
     **Note**: If you have a strong need to reduce the size of your image and omit modules, you can use the [`jdeps`][19] command to identify dependencies. However, required modules can change over time, so do this at your own risk.
 
-    **Note**: When running the tracer with Java 24+, you may see warnings related to JNI native access. Suppress these warnings by adding the `--enable-native-access=ALL-UNNAMED` flag. See [JEP 472][23] for more details.
+    **Note**: When running the SDK with Java 24+, you may see warnings related to JNI native access. Suppress these warnings by adding the `--enable-native-access=ALL-UNNAMED` flag. See [JEP 472][23] for more details.
 
     <div class="alert alert-warning">Enabling profiling may impact your bill depending on your APM bundle. See the <a href="https://docs.datadoghq.com/account_management/billing/apm_tracing_profiler/">pricing page</a> for more information.</div>
 
@@ -84,7 +84,7 @@ To begin tracing your applications:
 Additional [configuration options](#configuration) are described below.
 
 
-### Add the Java Tracer to the JVM
+### Add the Java SDK to the JVM
 
 Use the documentation for your application server to figure out the right way to pass in `-javaagent` and other JVM arguments. Here are instructions for some commonly used frameworks:
 
@@ -216,7 +216,7 @@ Instrumentation may come from auto-instrumentation, the OpenTracing API, or a mi
 
 ## Configuration
 
-If needed, configure the tracing library to send application performance telemetry data as you require, including setting up Unified Service Tagging. Read [Library Configuration][9] for details.
+If needed, configure the SDK to send application performance telemetry data as you require, including setting up Unified Service Tagging. Read [Library Configuration][9] for details.
 
 ### Remote configuration
 

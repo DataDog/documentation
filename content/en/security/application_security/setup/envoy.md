@@ -150,10 +150,10 @@ The App and API Protection Envoy integration uses the Envoy external processing 
 
 ## Datadog Go Tracer and Envoy integration
 
-The External Processor is built on top of the [Datadog Go Tracer][6] and inherits all of its environment variables. See [Configuring the Go Tracing Library][7] and [App and API Protection Library Configuration][8].
+The External Processor is built on top of the [Datadog Go Tracer][6] and inherits all of its environment variables. See [Configuring the Go SDK][7] and [App and API Protection Library Configuration][8].
 
 <div class="alert alert-info">
-  <strong>Note:</strong> As the Datadog External Processor is built on top of the Datadog Go Tracer, it generally follows the same release process as the tracer, and its Docker images are tagged with the corresponding tracer version (for example, <code>v2.2.2</code>). In some cases, early release versions might be published between official tracer releases, and these images are tagged with a suffix such as <code>-docker.1</code>.
+  <strong>Note:</strong> As the Datadog External Processor is built on top of the Datadog Go Tracer, it generally follows the same release process as the SDK, and its Docker images are tagged with the corresponding tracer version (for example, <code>v2.2.2</code>). In some cases, early release versions might be published between official tracer releases, and these images are tagged with a suffix such as <code>-docker.1</code>.
 </div>
 
 ## Limitations

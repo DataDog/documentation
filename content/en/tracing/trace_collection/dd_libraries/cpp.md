@@ -28,7 +28,7 @@ further_reading:
 </div>
 
 ## Compatibility requirements
-The C++ tracing library requires C++17 toolchain to build. For a full list of Datadog's tracing library compatiblity requirements and processor architecture support, visit the [Compatibility Requirements][3] page.
+The C++ SDK requires C++17 toolchain to build. For a full list of the Datadog SDK compatiblity requirements and processor architecture support, visit the [Compatibility Requirements][3] page.
 
 ## Getting started
 Before you begin, make sure you have already [installed and configured the Agent][6].
@@ -36,7 +36,7 @@ Before you begin, make sure you have already [installed and configured the Agent
 ## Instrument your application
 
 Here is an example application that can be used for testing `dd-trace-cpp`.
-This application creates a tracer instance with the default settings and generates a trace with two spans, which is reported under the service name `my-service`.
+This application creates an SDK instance with the default settings and generates a trace with two spans, which is reported under the service name `my-service`.
 
 ```cpp
 // tracer_example.cpp
@@ -192,7 +192,7 @@ DATADOG TRACER CONFIGURATION - {"collector":{"config":{"event_scheduler":{"type"
 
 ## Configuration
 
-If needed, configure the tracing library to send application performance telemetry data as you require, including setting up Unified Service Tagging. Read [Library Configuration][5] for details.
+If needed, configure the SDK to send application performance telemetry data as you require, including setting up Unified Service Tagging. Read [Library Configuration][5] for details.
 
 ## Further Reading
 

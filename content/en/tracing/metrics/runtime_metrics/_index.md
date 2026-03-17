@@ -27,7 +27,7 @@ further_reading:
 
 ## Overview 
 
-Runtime metrics monitor your application's memory usage, garbage collection, and parallelization. Datadog tracing libraries automatically collect these metrics for supported environments and send them to the Datadog Agent.
+Runtime metrics monitor your application's memory usage, garbage collection, and parallelization. Datadog SDKs automatically collect these metrics for supported environments and send them to the Datadog Agent.
 
 These metrics help you identify bottlenecks, troubleshoot performance issues, and optimize resource utilization. By viewing runtime metrics alongside traces and logs, you gain comprehensive visibility into your application's health and performance.
 
@@ -158,11 +158,11 @@ Use the following environment variables to configure runtime metrics in your app
 
 `DD_AGENT_HOST`
 : **Default**: `localhost` <br>
-**Description**: Sets the host address for the tracing library's metric submission. Can be a hostname or an IP address.
+**Description**: Sets the host address for the SDK's metric submission. Can be a hostname or an IP address.
 
 `DD_DOGSTATSD_PORT`
 : **Default**: `8125` <br>
-**Description**: Sets the port for the tracing library's metric submission.
+**Description**: Sets the port for the SDK's metric submission.
 
 #### Code-based configuration
 

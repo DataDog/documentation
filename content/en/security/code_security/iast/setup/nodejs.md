@@ -29,7 +29,7 @@ You can detect code-level vulnerabilities and monitor application security in No
 Follow these steps to enable Code Security in your service:
 
 1. [Update your Datadog Agent][4] to at least version 7.41.1.
-2. Update your Datadog Tracing Library to at least the minimum version needed to turn on Code Security. For details, see [Library Compatibility][3] page.
+2. Update your Datadog SDK to at least the minimum version needed to turn on Code Security. For details, see [Library Compatibility][3] page.
 3. Add the `DD_IAST_ENABLED=true` environment variable to your application configuration.
 
    If you initialize the APM library on the command line using the `--require` option to Node.js:
@@ -137,7 +137,7 @@ To enable IAST during bundling, set the `DD_IAST_ENABLED` environment variable:
 DD_IAST_ENABLED=true node esbuild/esbuilder.js
 ```
 
-Because the tracer uses native modules, you must list them in `external` and ship a `node_modules` directory alongside the bundled app. Native modules used by `dd-trace` are published under the `@datadog/*` scope.
+Because the SDK uses native modules, you must list them in `external` and ship a `node_modules` directory alongside the bundled app. Native modules used by `dd-trace` are published under the `@datadog/*` scope.
 
 To generate a minimal `node_modules` directory that contains only the required native modules and their dependencies:
 

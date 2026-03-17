@@ -48,7 +48,7 @@ If the **Log** section is empty for the `trace_id` option, ensure you have a sta
    {{< tabs >}}
    {{% tab "JSON logs" %}}
 
-   For JSON logs, Step 1 and 2 are automatic. The tracer injects the [trace][1] and [span][2] IDs into the logs, which are automatically remapped by the [reserved attribute remappers][3].
+   For JSON logs, Step 1 and 2 are automatic. The SDK injects the [trace][1] and [span][2] IDs into the logs, which are automatically remapped by the [reserved attribute remappers][3].
 
    If this process is not working as expected, ensure the logs attribute's name containing the trace ID is `dd.trace_id` and verify that the attribute is correctly set in the [reserved attributes'][4] Trace ID section.
 

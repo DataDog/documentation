@@ -16,7 +16,7 @@ further_reading:
 
 {{< partial name="dynamic_instrumentation/beta-callout.html" language="Ruby" limitations_anchor="unsupported-features" >}}
 
-Dynamic Instrumentation is a feature of the Datadog tracing library that lets you add instrumentation to your application at runtime without code changes or redeployments. Follow these instructions to set up Dynamic Instrumentation for Ruby.
+Dynamic Instrumentation is a feature of the Datadog SDK that lets you add instrumentation to your application at runtime without code changes or redeployments. Follow these instructions to set up Dynamic Instrumentation for Ruby.
 
 ## Prerequisites
 
@@ -88,10 +88,10 @@ If your code uses instance variables with these names, rename them to use Dynami
 
 Dynamic Instrumentation tracks code as it loads. For line probes to work correctly:
 
-- Files must be loaded **after** the Datadog tracer initializes
-- Code loaded before the tracer starts cannot be instrumented with line probes
+- Files must be loaded **after** the Datadog SDK initializes
+- Code loaded before the SDK starts cannot be instrumented with line probes
 - Method probes can still work for classes defined before tracking starts
-- Best practice: Ensure the tracer initializes early in your application boot process
+- Best practice: Ensure the SDK initializes early in your application boot process
 
 ## Supported features
 

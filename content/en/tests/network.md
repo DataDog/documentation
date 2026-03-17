@@ -13,12 +13,12 @@ further_reading:
 ---
 
 <div class="alert alert-danger">
-Tracers always initiate traffic to Datadog. Sessions are never initiated from Datadog back to the tracers.
+Tracers always initiate traffic to Datadog. Sessions are never initiated from Datadog back to the SDKs.
 </div>
 
 ## Destinations
 
-The network endpoints accessed by the tracers are dependent on the Datadog site.
+The network endpoints accessed by the SDKs are dependent on the Datadog site.
 To see destinations based on your [Datadog site][1], click the `DATADOG SITE` selector on the right.
 
 The following HTTP endpoints must be accessible from the host where your tests are executed:

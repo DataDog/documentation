@@ -13,7 +13,7 @@ further_reading:
       text: 'Propagating trace context'
 ---
 
-<div class="alert alert-info">OpenTracing support is based on a deprecated specification. If you want to instrument your code with an open spec, use OpenTelemetry instead. Try <a href="/tracing/trace_collection/otel_instrumentation/dotnet/">processing data from OpenTelemetry instrumentation in Datadog Tracing Libraries</a>.</div>
+<div class="alert alert-info">OpenTracing support is based on a deprecated specification. If you want to instrument your code with an open spec, use OpenTelemetry instead. Try <a href="/tracing/trace_collection/otel_instrumentation/dotnet/">processing data from OpenTelemetry instrumentation in Datadog SDKs</a>.</div>
 
 For more details and information, view the [OpenTracing API][1].
 
@@ -33,10 +33,10 @@ public void ConfigureServices(IServiceCollection services)
     // Create an OpenTracing ITracer with the default setting
     OpenTracing.ITracer tracer = OpenTracingTracerFactory.CreateTracer();
 
-    // Use the tracer with ASP.NET Core dependency injection
+    // Use the SDK with ASP.NET Core dependency injection
     services.AddSingleton<ITracer>(tracer);
 
-    // Use the tracer with OpenTracing.GlobalTracer.Instance
+    // Use the SDK with OpenTracing.GlobalTracer.Instance
     GlobalTracer.Register(tracer);
 }
 ```

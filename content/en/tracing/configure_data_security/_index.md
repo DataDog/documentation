@@ -16,15 +16,15 @@ further_reading:
 ---
 ## Overview
 
-Datadog tracing libraries collect data from an instrumented application. That data is sent to Datadog as traces and it may contain sensitive data such as personally identifiable information (PII). If you are ingesting sensitive data as traces into Datadog, remediations can be added at ingestion with [Sensitive Data Scanner][12]. You can also configure the Datadog Agent or the tracing library to remediate sensitive data at collection before traces are sent to Datadog. Datadog's tools and policies comply with PCI v4.0. For more information, see [PCI DSS Compliance][14].
+Datadog SDKs collect data from an instrumented application. That data is sent to Datadog as traces and it may contain sensitive data such as personally identifiable information (PII). If you are ingesting sensitive data as traces into Datadog, remediations can be added at ingestion with [Sensitive Data Scanner][12]. You can also configure the Datadog Agent or the SDK to remediate sensitive data at collection before traces are sent to Datadog. Datadog's tools and policies comply with PCI v4.0. For more information, see [PCI DSS Compliance][14].
 
 If the configurations described here do not cover your compliance requirements, reach out to [the Datadog support team][1].
 
 ### Personal information in trace data
 
-Datadog's APM tracing libraries collect relevant observability data about your applications. Because these libraries collect hundreds of unique attributes in trace data, this page describes categories of data, with a focus on attributes that may contain personal information about your employees and end-users.
+Datadog's APM SDKs collect relevant observability data about your applications. Because these libraries collect hundreds of unique attributes in trace data, this page describes categories of data, with a focus on attributes that may contain personal information about your employees and end-users.
 
-The table below describes the personal data categories collected by the automatic instrumentation provided by the tracing libraries, with some common examples listed.
+The table below describes the personal data categories collected by the automatic instrumentation provided by the SDKs, with some common examples listed.
 
 | Category            | Description                                                                                                            |
 |:--------------------|:-----------------------------------------------------------------------------------------------------------------------|
@@ -38,7 +38,7 @@ The table below describes the personal data categories collected by the automati
 | URI userinfo        | The userinfo subcomponent of the URI that may contain the user name.                                                   |
 | Login ID            | Can include an account/user ID, name, or email address.                                                                |
 
-The table below describes the default behavior of each language tracing library with regard to whether a data category is collected and whether it is obfuscated by default.
+The table below describes the default behavior of each language SDK with regard to whether a data category is collected and whether it is obfuscated by default.
 
 {{% tabs %}}
 
@@ -245,7 +245,7 @@ The table below describes the default behavior of each language tracing library 
 
 {{% /tabs %}}
 
-If you use Datadog App and API Protection (AAP), the tracing libraries collect HTTP request data to help you understand the nature of a security trace. Datadog AAP automatically redacts certain data, and you can configure your own detection rules. Learn more about these defaults and configuration options in the Datadog AAP [data privacy][13] documentation.
+If you use Datadog App and API Protection (AAP), the SDKs collect HTTP request data to help you understand the nature of a security trace. Datadog AAP automatically redacts certain data, and you can configure your own detection rules. Learn more about these defaults and configuration options in the Datadog AAP [data privacy][13] documentation.
 
 ## Agent
 
@@ -636,7 +636,7 @@ If you are running in a containerized environment, set `DD_APM_IGNORE_RESOURCES`
 
 ### HTTP
 
-Datadog is standardizing [span tag semantics][3] across tracing libraries. Information from HTTP requests are added as span tags prefixed with `http.`. The libraries have the following configuration options to control sensitive data collected in HTTP spans.
+Datadog is standardizing [span tag semantics][3] across SDKs. Information from HTTP requests are added as span tags prefixed with `http.`. The libraries have the following configuration options to control sensitive data collected in HTTP spans.
 
 #### Redact query strings
 
@@ -654,7 +654,7 @@ DD_TRACE_HEADER_TAGS=CASE-insensitive-Header:my-tag-name,User-ID:userId,My-Heade
 
 ### Processing
 
-Some tracing libraries provide an interface for processing spans to manually modify or remove sensitive data collected in traces:
+Some SDKs provide an interface for processing spans to manually modify or remove sensitive data collected in traces:
 
 * Java: [TraceInterceptor interface][9]
 * Ruby: [Processing Pipeline][10]
@@ -670,7 +670,7 @@ Instrumentation telemetry is not available for the {{< region-param key="dd_site
 
 {{< /site-region >}}
 
-Datadog may gather environmental and diagnostic information about your tracing libraries for processing; this may include information about the host running an application, operating system, programming language and runtime, APM integrations used, and application dependencies. Additionally, Datadog may collect information such as diagnostic logs, crash dumps with obfuscated stack traces, and various system performance metrics.
+Datadog may gather environmental and diagnostic information about your SDKs for processing; this may include information about the host running an application, operating system, programming language and runtime, APM integrations used, and application dependencies. Additionally, Datadog may collect information such as diagnostic logs, crash dumps with obfuscated stack traces, and various system performance metrics.
 
 You can disable this telemetry collection using either of these settings:
 

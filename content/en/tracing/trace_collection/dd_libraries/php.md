@@ -90,7 +90,7 @@ If the PHP CLI binary is built as NTS (non thread-safe), while Apache uses a ZTS
 
 <div class="alert alert-danger">
 <strong>SELinux:</strong>
-If the httpd SELinux policies are configured on the host, functionality of the tracer may be limited, unless writing and executing temporary files is explicitly allowed in SELinux configuration:
+If the httpd SELinux policies are configured on the host, functionality of the SDK may be limited, unless writing and executing temporary files is explicitly allowed in SELinux configuration:
 
 `allow httpd_t httpd_tmpfs_t:file { execute execute_no_trans };`
 
@@ -111,7 +111,7 @@ Automatic instrumentation captures:
 
 ## Configuration
 
-If needed, configure the tracing library to send application performance telemetry data as you require, including setting up Unified Service Tagging. Read [Library Configuration][6] for details.
+If needed, configure the SDK to send application performance telemetry data as you require, including setting up Unified Service Tagging. Read [Library Configuration][6] for details.
 
 To control trace ingestion by service or resource (including using wildcards in resource names), see [Control trace ingestion with resource-based sampling][15].
 

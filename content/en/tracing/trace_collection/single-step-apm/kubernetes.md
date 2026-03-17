@@ -394,16 +394,16 @@ To disable instrumentation for specific namespaces, add `disabledNamespaces` con
 
 {{< /collapse-content >}}
 
-#### Specify tracing library versions
+#### Specify SDK versions
 
-<div class="alert alert-info">Starting with Datadog Cluster Agent v7.52.0+, you can automatically instrument a subset of your applications, based on the tracing libraries you specify.</div>
+<div class="alert alert-info">Starting with Datadog Cluster Agent v7.52.0+, you can automatically instrument a subset of your applications, based on the SDKs you specify.</div>
 
-Specify Datadog tracing libraries and their versions to automatically instrument applications written in those languages. You can configure this in two ways, which are applied in the following order of precedence:
+Specify Datadog SDKs and their versions to automatically instrument applications written in those languages. You can configure this in two ways, which are applied in the following order of precedence:
 
 1. [Specify at the service level](#specify-at-the-service-level), or
 2. [Specify at the cluster level](#specify-at-the-cluster-level).
 
-**Default**: If you don't specify any library versions, applications written in supported languages are automatically instrumented using the latest tracing library versions.
+**Default**: If you don't specify any library versions, applications written in supported languages are automatically instrumented using the latest SDK versions.
 
 ##### Specify at the service level
 
@@ -514,7 +514,7 @@ Datadog publishes instrumentation libraries images on gcr.io, Docker Hub, and Am
 
 The `DD_ADMISSION_CONTROLLER_AUTO_INSTRUMENTATION_CONTAINER_REGISTRY` environment variable in the Datadog Cluster Agent configuration specifies the registry used by the Admission Controller. The default value is `gcr.io/datadoghq`.
 
-You can pull the tracing library from a different registry by changing it to `docker.io/datadog`, `public.ecr.aws/datadog`, or another URL if you are hosting the images in a local container registry.
+You can pull the SDK from a different registry by changing it to `docker.io/datadog`, `public.ecr.aws/datadog`, or another URL if you are hosting the images in a local container registry.
 
 For instructions on changing your container registry, see [Changing Your Container Registry][33].
 

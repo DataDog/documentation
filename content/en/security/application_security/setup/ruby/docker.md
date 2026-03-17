@@ -24,7 +24,7 @@ further_reading:
 - Docker installed on your host
 - Ruby application containerized with Docker
 - Your Datadog API key
-- Datadog Ruby tracing library (see [version requirements][1])
+- Datadog Ruby SDK (see [version requirements][1])
 
 ## 1. Installing the Datadog Agent
 

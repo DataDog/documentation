@@ -1,5 +1,5 @@
 ---
-title: Add the Datadog Tracing Library
+title: Add the Datadog SDK
 aliases:
     - /tracing/languages
     - /tracing/setup_overview/setup/undefined
@@ -12,7 +12,7 @@ aliases:
 To automatically instrument your application with Datadog libraries:
 
 1. [Install and configure the Agent](#install-and-configure-the-agent).
-2. [Add the Datadog tracing library to your code](#instrument-your-application).
+2. [Add the Datadog SDK to your code](#instrument-your-application).
 
 ## Install and configure the Agent
 
@@ -59,13 +59,13 @@ For other environments, see the [Integrations][14] documentation for that enviro
 
 ## Instrument your application
 
-Set up your application to send [traces][2] using one of the following official Datadog tracing libraries:
+Set up your application to send [traces][2] using one of the following official Datadog SDKs:
 
 {{< partial name="apm/apm-languages.html" >}}
 
 <br>
 
-To instrument an application written in a language that does not have official library support, see the list of [community tracing libraries][1].
+To instrument an application written in a language that does not have official library support, see the list of [community SDKs][1].
 
 
 [1]: /extend/community/libraries/#apm-tracing-client-libraries

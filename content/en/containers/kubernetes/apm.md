@@ -27,7 +27,7 @@ further_reading:
 
 This page describes how to set up and configure [Application Performance Monitoring (APM)][10] for your Kubernetes application.
 
-{{< img src="tracing/visualization/troubleshooting_pipeline_kubernetes.png" alt="The APM troubleshooting pipeline: The tracer sends traces and metrics data from the application pod to the Agent pod, which sends it to the Datadog backend to be shown in the Datadog UI.">}}
+{{< img src="tracing/visualization/troubleshooting_pipeline_kubernetes.png" alt="The APM troubleshooting pipeline: The SDK sends traces and metrics data from the application pod to the Agent pod, which sends it to the Datadog backend to be shown in the Datadog UI.">}}
 
 You can send traces over Unix Domain Socket (UDS), TCP (`IP:Port`), or Kubernetes service. Datadog recommends that you use UDS, but it is possible to use all three at the same time, if necessary.
 
@@ -140,8 +140,8 @@ kind: Deployment
           name: apmsocketpath
 ```
 
-### Configure your application tracers to emit traces:
-After configuring your Datadog Agent to collect traces and giving your application pods the configuration on *where* to send traces, install the Datadog tracer into your applications to emit the traces. Once this is done, the tracer sends the traces to the appropriate `DD_TRACE_AGENT_URL` endpoint.
+### Configure your application SDKs to emit traces:
+After configuring your Datadog Agent to collect traces and giving your application pods the configuration on *where* to send traces, install the Datadog SDK into your applications to emit the traces. Once this is done, the SDK sends the traces to the appropriate `DD_TRACE_AGENT_URL` endpoint.
 
 {{% /tab %}}
 
@@ -165,8 +165,8 @@ kind: Deployment
 ```
 **Note:** This configuration requires the Agent to be configured to accept traces over TCP
 
-### Configure your application tracers to emit traces:
-After configuring your Datadog Agent to collect traces and giving your application pods the configuration on *where* to send traces, install the Datadog tracer into your applications to emit the traces. Once this is done, the tracer automatically sends the traces to the appropriate `DD_AGENT_HOST` endpoint.
+### Configure your application SDKs to emit traces:
+After configuring your Datadog Agent to collect traces and giving your application pods the configuration on *where* to send traces, install the Datadog SDK into your applications to emit the traces. Once this is done, the SDK automatically sends the traces to the appropriate `DD_AGENT_HOST` endpoint.
 
 [1]: /agent/cluster_agent/admission_controller/
 {{% /tab %}}

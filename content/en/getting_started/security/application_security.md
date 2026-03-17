@@ -36,10 +36,10 @@ This guide walks you through best practices for getting your team up and running
 
 These security insights are detected from data reported by APM. The insights help prioritize your security efforts. AAP identifies, prioritizes, and helps remediate all security risks on your services.
 
-**Note**: If no vulnerabilities or suspicious requests are reported, ensure your services are using a recent Datadog tracing library version. From the [Security Software Catalog][2], open any service's side panel and look at its **Tracing Configuration**.
+**Note**: If no vulnerabilities or suspicious requests are reported, ensure your services are using a recent Datadog SDK version. From the [Security Software Catalog][2], open any service's side panel and look at its **Tracing Configuration**.
 
 
-{{< img src="getting_started/appsec/ASM_Tracing_Configuration.png" alt="Tracer Configuration tab in APM Software Catalog page view. Highlighting which version of the Datadog Agent, and Datadog tracing library are being used by your services." style="width:100%;" >}}
+{{< img src="getting_started/appsec/ASM_Tracing_Configuration.png" alt="Tracer Configuration tab in APM Software Catalog page view. Highlighting which version of the Datadog Agent, and Datadog SDK are being used by your services." style="width:100%;" >}}
 
 
 ## Enable AAP
@@ -51,7 +51,7 @@ These security insights are detected from data reported by APM. The insights hel
 
 <!-- On the [AAP landing page,][18] follow the instructions to get started. This includes:
 - Guided selection of services that would benefit from AAP.
-- Configuring your Datadog tracing libraries with an environment variable.
+- Configuring your Datadog SDKs with an environment variable.
 - Restarting your services. </br>
 
 1. Click **Get Started with AAP**.

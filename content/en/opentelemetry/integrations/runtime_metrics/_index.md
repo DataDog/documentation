@@ -16,7 +16,7 @@ further_reading:
 
 ## Overview
 
-Runtime metrics provide insights into application performance, including memory usage, garbage collection, and parallelization. Datadog tracing libraries offer [runtime metrics collection][5] for each supported language, and OpenTelemetry (OTel) also collects compatible runtime metrics that can be sent to Datadog through the OpenTelemetry SDKs.
+Runtime metrics provide insights into application performance, including memory usage, garbage collection, and parallelization. Datadog SDKs offer [runtime metrics collection][5] for each supported language, and OpenTelemetry (OTel) also collects compatible runtime metrics that can be sent to Datadog through the OpenTelemetry SDKs.
 
 ## Compatibility
 

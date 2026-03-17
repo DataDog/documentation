@@ -23,7 +23,7 @@ further_reading:
 - Docker installed on your host
 - Java application containerized with Docker
 - Your Datadog API key
-- Datadog Java tracing library (see version requirements [here][1])
+- Datadog Java SDK (see version requirements [here][1])
 
 ## 1. Installing the Datadog Agent
 
@@ -43,7 +43,7 @@ Install the Datadog Agent by following the [setup instructions for Docker][3].
 Start your Java application with the Datadog agent and App and API Protection enabled using the ENTRYPOINT instruction:
 
 ```dockerfile
-# Download the Datadog Java tracer
+# Download the Datadog Java SDK
 ADD 'https://dtdg.co/latest-java-tracer' /dd-java-agent.jar
 ENTRYPOINT ["java", "-javaagent:/dd-java-agent.jar", "-Ddd.appsec.enabled=true", "-Ddd.service=<MY_SERVICE>", "-Ddd.env=<MY_ENV>", "-jar", "/app.jar"]
 ```
@@ -54,7 +54,7 @@ ENTRYPOINT ["java", "-javaagent:/dd-java-agent.jar", "-Ddd.appsec.enabled=true",
 Add the following environment variables to your Dockerfile:
 
 ```dockerfile
-# Download the Datadog Java tracer
+# Download the Datadog Java SDK
 ADD 'https://dtdg.co/latest-java-tracer' /dd-java-agent.jar
 
 # Set environment variables
@@ -78,7 +78,7 @@ To disable APM tracing while keeping App and API Protection enabled, you must se
 Start your Java application with the Datadog agent and App and API Protection enabled using the ENTRYPOINT instruction:
 
 ```dockerfile
-# Download the Datadog Java tracer
+# Download the Datadog Java SDK
 ADD 'https://dtdg.co/latest-java-tracer' /dd-java-agent.jar
 ENTRYPOINT ["java", "-javaagent:/dd-java-agent.jar", "-Ddd.appsec.enabled=true", "-Ddd.apm.tracing.enabled=false", "-Ddd.service=<MY_SERVICE>", "-Ddd.env=<MY_ENV>", "-jar", "/app.jar"]
 ```
@@ -89,7 +89,7 @@ ENTRYPOINT ["java", "-javaagent:/dd-java-agent.jar", "-Ddd.appsec.enabled=true",
 Add the following environment variables to your Dockerfile:
 
 ```dockerfile
-# Download the Datadog Java tracer
+# Download the Datadog Java SDK
 ADD 'https://dtdg.co/latest-java-tracer' /dd-java-agent.jar
 
 # Set environment variables

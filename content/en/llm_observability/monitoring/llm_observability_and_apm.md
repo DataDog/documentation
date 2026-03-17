@@ -34,7 +34,7 @@ If you are using the [LLM Observability SDK for Python][1] along with APM's [`dd
 
 If you are using the [LLM Observability API][3] with `dd-tracer` for APM:
 
-1. Use the appropriate method to obtain the span ID from the tracer (for example, using `span.Context().SpanID()` for the Go tracer).
+1. Use the appropriate method to obtain the span ID from the SDK (for example, using `span.Context().SpanID()` for the Go tracer).
 1. Include the captured span IDs in all of the LLM Observability API requests. This links APM and LLM Observability spans in Datadog.
 
 ## Navigate between spans

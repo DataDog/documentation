@@ -46,7 +46,7 @@ aws.request.body.Message.Arr.0: a
 aws.request.body.Message.Arr.1: b
 ```
 
-The tracers are configured to match JSON data nested inside JSON documents, which is a common pattern with SQS payloads.
+The SDKs are configured to match JSON data nested inside JSON documents, which is a common pattern with SQS payloads.
 
 ## General configuration
 
@@ -74,7 +74,7 @@ The value `all` indicates that the entire body is used to generate tags. See [Pr
 
 It's expected that many of these payloads contain *personally identifiable information* (PII).
 
-To protect sensitive information, the tracers replace common PII fields with `'redacted'` (such as phone numbers in SNS). **Note**: You can't disable the default redactions.
+To protect sensitive information, the SDKs replace common PII fields with `'redacted'` (such as phone numbers in SNS). **Note**: You can't disable the default redactions.
 
 You can specify additional fields to redact using [JSONPath][1] syntax in the environment variables. For example:
 

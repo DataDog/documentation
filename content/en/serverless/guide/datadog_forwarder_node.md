@@ -89,7 +89,7 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
     ```
     More information on the Datadog Forwarder ARN or installation can be found [here][2]. For additional settings, see the [plugin documentation][1].
 
-**Note**: You need to follow these [additional configuration steps][4] if your Lambda function is simultaneously using Datadog's tracing libraries and [webpack][5].
+**Note**: You need to follow these [additional configuration steps][4] if your Lambda function is simultaneously using Datadog SDKs and [webpack][5].
 
 [1]: https://docs.datadoghq.com/serverless/serverless_integrations/plugin
 [2]: https://docs.datadoghq.com/serverless/forwarder/
@@ -296,7 +296,7 @@ Follow these steps to configure the function:
 4. Set the environment variable `DD_FLUSH_TO_LOG` to `true`.
 5. Optionally add a `service` and `env` tag with appropriate values to your function.
 
-**Note**: You need to follow these [additional configuration steps][4] if your Lambda function is simultaneously using Datadog's tracing libraries and [webpack][5].
+**Note**: You need to follow these [additional configuration steps][4] if your Lambda function is simultaneously using Datadog SDKs and [webpack][5].
 
 ### Subscribe
 

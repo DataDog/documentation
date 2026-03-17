@@ -38,7 +38,7 @@ APM tracer integrations support a *Propagation Mode*, which controls the amount 
 \*\* Full propagation mode on Oracle is only supported when using Java.
 
 
-**Supported application tracers and drivers**
+**Supported application SDKs and drivers**
 
 | Language                                 | Library or Framework             | Postgres  |   MySQL   |     SQL Server      |       Oracle        |     MongoDB      |
 |:-----------------------------------------|:---------------------------------|:---------:|:---------:|:-------------------:|:-------------------:|:----------------:|
@@ -377,7 +377,7 @@ Enable the database monitoring propagation feature by setting the following envi
 {{% tab "PHP" %}}
 
 <div class="alert alert-danger">
-This feature requires the tracer extension to be enabled for your PHP service.
+This feature requires the SDK extension to be enabled for your PHP service.
 </div>
 
 Follow the [PHP tracing instructions][1] to install the automatic instrumentation package and enable tracing for your service.
@@ -399,7 +399,7 @@ Install or update [dd-trace-js][1] to a version greater than `3.17.0` (or `2.30.
 npm install dd-trace@^3.17.0
 ```
 
-Update your code to import and initialize the tracer:
+Update your code to import and initialize the SDK:
 ```javascript
 // This line must come before importing any instrumented module.
 const tracer = require('dd-trace').init();
@@ -411,7 +411,7 @@ Enable the database monitoring propagation feature using one of the following me
    DD_DBM_PROPAGATION_MODE=full
    ```
 
-* Set the tracer to use the `dbmPropagationMode` option (default: `ENV['DD_DBM_PROPAGATION_MODE']`):
+* Set the SDK to use the `dbmPropagationMode` option (default: `ENV['DD_DBM_PROPAGATION_MODE']`):
    ```javascript
    const tracer = require('dd-trace').init({ dbmPropagationMode: 'full' })
    ```

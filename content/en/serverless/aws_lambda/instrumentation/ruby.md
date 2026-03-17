@@ -241,7 +241,7 @@ The [Datadog CloudFormation macro][1] automatically transforms your SAM applicat
 
 1. Install the Datadog Lambda Library
 
-    If you are deploying your Lambda function as a container image, you cannot use the Datadog Lambda library as a Lambda Layer. Instead, you must package the Datadog Lambda and tracing libraries within the image.
+    If you are deploying your Lambda function as a container image, you cannot use the Datadog Lambda library as a Lambda Layer. Instead, you must package the Datadog Lambda and SDKs within the image.
 
     Add the following to your Gemfile:
 

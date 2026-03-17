@@ -1,5 +1,5 @@
 ---
-title: Configuring the Node.js Tracing Library
+title: Configuring the Node.js SDK
 code_lang: nodejs
 type: multi-code-lang
 code_lang_weight: 30
@@ -24,7 +24,7 @@ further_reading:
       text: "OpenTelemetry Environment Variable Configurations"
 ---
 
-After you set up the tracing library with your code and configure the Agent to collect APM data, optionally configure the tracing library as desired, including setting up [Unified Service Tagging][1].
+After you set up the SDK with your code and configure the Agent to collect APM data, optionally configure the SDK as desired, including setting up [Unified Service Tagging][1].
 
 {{% apm-config-visibility %}}
 
@@ -60,7 +60,7 @@ See also [DD_APM_TRACING_ENABLED][16].
 `DD_TRACE_DEBUG`
 : **Configuration**: N/A<br>
 **Default**: `false`<br>
-Enable debug logging in the tracer.
+Enable debug logging in the SDK.
 
 `DD_TRACING_ENABLED`
 : **Configuration**: N/A<br>
@@ -89,7 +89,7 @@ Provide service names for each plugin. Accepts comma separated `plugin:service-n
 Flush Interval
 : **Configuration**: `flushInterval`<br>
 **Default**: `2000`<br>
-Interval in milliseconds at which the tracer submits traces to the Agent.
+Interval in milliseconds at which the SDK submits traces to the Agent.
 
 `DD_TRACE_PARTIAL_FLUSH_MIN_SPANS`
 : **Configuration**: `flushMinSpans`<br>
@@ -135,7 +135,7 @@ Points to a JSON file that contains the span sampling rules. `DD_SPAN_SAMPLING_R
 : **Configuration**: N/A<br>
 **Default**: N/A<br>
 **Example**: `DD_TRACE_DISABLED_PLUGINS=express,dns`<br>
-A comma-separated string of integration names automatically disabled when the tracer is initialized.
+A comma-separated string of integration names automatically disabled when the SDK is initialized.
 
 Experimental Features
 : **Configuration**: `experimental`<br>
@@ -175,22 +175,22 @@ Set global tags that are applied to all spans and runtime metrics. When passed a
 `DD_TRACE_AGENT_URL`
 : **Configuration**: `url`<br>
 **Default**: `http://localhost:8126`<br>
-The URL of the Trace Agent that the tracer submits to. Takes priority over hostname and port, if set. If the [Agent configuration][13] sets `receiver_port` or `DD_APM_RECEIVER_PORT` to something other than the default `8126`, then `DD_TRACE_AGENT_PORT` or `DD_TRACE_AGENT_URL` must match it. Supports Unix Domain Sockets in combination with the `apm_config.receiver_socket` in your `datadog.yaml` file, or the `DD_APM_RECEIVER_SOCKET` environment variable.
+The URL of the Trace Agent that the SDK submits to. Takes priority over hostname and port, if set. If the [Agent configuration][13] sets `receiver_port` or `DD_APM_RECEIVER_PORT` to something other than the default `8126`, then `DD_TRACE_AGENT_PORT` or `DD_TRACE_AGENT_URL` must match it. Supports Unix Domain Sockets in combination with the `apm_config.receiver_socket` in your `datadog.yaml` file, or the `DD_APM_RECEIVER_SOCKET` environment variable.
 
 `DD_TRACE_AGENT_HOSTNAME`
 : **Configuration**: `hostname`<br>
 **Default**: `localhost`<br>
-The address of the Agent that the tracer submits to.
+The address of the Agent that the SDK submits to.
 
 `DD_TRACE_AGENT_PORT`
 : **Configuration**: `port`<br>
 **Default**: `8126`<br>
-The port of the Trace Agent that the tracer submits to. If the [Agent configuration][13] sets `receiver_port` or `DD_APM_RECEIVER_PORT` to something other than the default `8126`, then `DD_TRACE_AGENT_PORT` or `DD_TRACE_AGENT_URL` must match it.
+The port of the Trace Agent that the SDK submits to. If the [Agent configuration][13] sets `receiver_port` or `DD_APM_RECEIVER_PORT` to something other than the default `8126`, then `DD_TRACE_AGENT_PORT` or `DD_TRACE_AGENT_URL` must match it.
 
 `DD_DOGSTATSD_PORT`
 : **Configuration**: `dogstatsd.port`<br>
 **Default**: `8125`<br>
-The port of the DogStatsD Agent that metrics are submitted to. If the [Agent configuration][13] sets `dogstatsd_port` or `DD_DOGSTATSD_PORT` to something other than the default `8125`, then this tracing library `DD_DOGSTATSD_PORT` must match it.
+The port of the DogStatsD Agent that metrics are submitted to. If the [Agent configuration][13] sets `dogstatsd_port` or `DD_DOGSTATSD_PORT` to something other than the default `8125`, then this SDK `DD_DOGSTATSD_PORT` must match it.
 
 `DD_REMOTE_CONFIG_POLL_INTERVAL_SECONDS`
 : **Configuration**: `remoteConfig.pollInterval`<br>
@@ -241,7 +241,7 @@ Enable automatic injection of trace IDs in logs for supported logging libraries.
 `DD_TRACE_LOG_LEVEL`
 : **Configuration**: `logLevel`<br>
 **Default**: `debug`<br>
-A string for the minimum log level for the tracer to use when debug logging is enabled, for example, `error`, `debug`.
+A string for the minimum log level for the SDK to use when debug logging is enabled, for example, `error`, `debug`.
 
 ### OpenTelemetry
 

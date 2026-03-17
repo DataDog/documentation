@@ -229,7 +229,7 @@ This enables each protocol in the default port (`4317` for OTLP/gRPC and `4318` 
 For detailed instructions on using OpenTelemetry with AWS Lambda and Datadog, including:
 
 - Instrumenting your Lambda functions with OpenTelemetry
-- Using OpenTelemetry API support within Datadog tracers
+- Using OpenTelemetry API support within Datadog SDKs
 - Sending OpenTelemetry traces to the Datadog Lambda Extension
 
 See the Serverless documentation for [AWS Lambda and OpenTelemetry][100].

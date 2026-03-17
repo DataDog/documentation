@@ -13,7 +13,7 @@ further_reading:
     text: Explore your services, resources, and traces
     title: Tracing Android Applications
 ---
-<div class="alert alert-info">OpenTracing support is based on a deprecated specification. If you want to instrument your code with an open spec, use OpenTelemetry instead. Try <a href="/tracing/trace_collection/otel_instrumentation/java/">processing data from OpenTelemetry instrumentation in Datadog Tracing Libraries</a>.</div>
+<div class="alert alert-info">OpenTracing support is based on a deprecated specification. If you want to instrument your code with an open spec, use OpenTelemetry instead. Try <a href="/tracing/trace_collection/otel_instrumentation/java/">processing data from OpenTelemetry instrumentation in Datadog SDKs</a>.</div>
 
 Datadog integrates with the [OpenTracing API][1].
 ## Setup
@@ -813,7 +813,7 @@ Request request = OkHttpRequestExtKt
 
 **Note**:
 * If you use multiple Interceptors, this one must be called first.
-* If you define custom tracing header types in the Datadog configuration and are using a tracer registered with `GlobalTracer`, make sure the same tracing header types are set for the tracer in use.
+* If you define custom tracing header types in the Datadog configuration and are using an SDK registered with `GlobalTracer`, make sure the same tracing header types are set for the SDK in use.
 
 ### RxJava
 

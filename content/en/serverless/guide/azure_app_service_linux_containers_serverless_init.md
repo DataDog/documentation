@@ -23,7 +23,7 @@ This instrumentation method uses `serverless-init` and provides the following ad
 
 ### Prerequisites
 
-Make sure you have a [Datadog API Key][6] and are using a programming language [supported by a Datadog tracing library][2].
+Make sure you have a [Datadog API Key][6] and are using a programming language [supported by a Datadog SDK][2].
 
 ## Instrument your application
 
