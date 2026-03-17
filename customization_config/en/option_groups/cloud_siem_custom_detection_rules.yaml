@@ -1,0 +1,96 @@
+cloud_siem_detection_rule_type_options:
+  - id: real_time_rule
+    default: true
+  - id: scheduled_rule
+  - id: historical_job
+
+# cloud_siem_detection_threshold_rule_type_options:
+#   - id: real_time_rule
+#     default: true
+#   - id: scheduled_rule
+#   - id: historical_job
+
+# cloud_siem_detection_new_value_rule_type_options:
+#   - id: real_time_rule
+#     default: true
+#   - id: scheduled_rule
+#   - id: historical_job
+
+# cloud_siem_detection_anomaly_rule_type_options:
+#   - id: real_time_rule
+#     default: true
+#   - id: scheduled_rule
+#   - id: historical_job
+
+# cloud_siem_detection_content_anomaly_rule_type_options:
+#   - id: real_time_rule
+#     default: true
+#   - id: scheduled_rule
+#   - id: historical_job
+
+# cloud_siem_detection_impossible_travel_rule_type_options:
+#   - id: real_time_rule
+#     default: true
+#   - id: scheduled_rule
+#   - id: historical_job
+
+# cloud_siem_detection_third_party_rule_type_options:
+#   - id: real_time_rule
+#     default: true
+#   - id: scheduled_rule
+#   - id: historical_job
+
+# cloud_siem_detection_sequence_rule_type_options:
+#   - id: real_time_rule
+#     default: true
+
+# cloud_siem_detection_signal_correlation_rule_type_options:
+#   - id: real_time_rule
+#     default: true
+#   - id: scheduled_rule
+
+cloud_siem_detection_real_time_rule_search_query_options:
+  - id: threshold
+    default: true
+  - id: new_value
+  - id: anomaly
+  - id: content_anomaly
+  - id: impossible_travel
+  - id: third_party
+  - id: sequence
+  - id: signal_correlation
+
+cloud_siem_detection_scheduled_rule_search_query_options:
+  - id: threshold
+    default: true
+  - id: new_value
+  - id: anomaly
+  - id: content_anomaly
+  - id: impossible_travel
+  - id: third_party
+  - id: signal_correlation
+
+cloud_siem_detection_historical_job_search_query_options:
+  - id: threshold
+    default: true
+  - id: new_value
+  - id: anomaly
+  - id: content_anomaly
+  - id: impossible_travel
+  - id: third_party
+
+cloud_siem_detection_rule_query_language_options:
+  - id: event_query
+    default: true
+  - id: sql
+
+# cloud_siem_detection_rule_search_query_options:
+#   - id: threshold
+#     default: true
+#   - id: new_value
+#   - id: anomaly
+#   - id: content_anomaly
+#   - id: impossible_travel
+#   - id: third_party
+#   - id: signal_correlation
+#   - id: sequence

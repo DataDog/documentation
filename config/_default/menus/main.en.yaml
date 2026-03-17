@@ -7060,9 +7060,9 @@ menu:
       identifier: cloud_siem_custom_detection_rules
       weight: 202
     - name: Create Rule
-      url: security/cloud_siem/detect_and_monitor/custom_detection_rules/create_rule/real_time_rule
+      url: security/cloud_siem/detect_and_monitor/custom_detection_rules/create_rule
       parent: cloud_siem_custom_detection_rules
-      identifier: cloud_siem_real_time_rule
+      identifier: cloud_siem_create_custom_detection_rule
       weight: 2021
     - name: Anomaly
       url: security/cloud_siem/detect_and_monitor/custom_detection_rules/anomaly

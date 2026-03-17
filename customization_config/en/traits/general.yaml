@@ -52,3 +52,18 @@ traits:
   label: Protocol
   type: text
   internal_notes: For example, HTTP, gRPC, or SOCKS.
+
+- id: cloud_siem_detection_rule_type
+  label: "Rule type"
+  type: text
+  internal_notes: The rule type a user wants to use when creating a custom detection rule for Cloud SIEM.
+
+- id: cloud_siem_detection_rule_search_query
+  label: "Search query"
+  type: text
+  internal_notes: The search query a user wants to use when creating a custom detection rule for Cloud SIEM.
+
+- id: cloud_siem_detection_rule_query_language
+  label: "Query language"
+  type: text
+  internal_notes: The search query language a user wants to use when creating a custom detection rule for Cloud SIEM.
