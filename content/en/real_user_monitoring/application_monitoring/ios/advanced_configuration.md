@@ -1102,3 +1102,4 @@ Calling this method disables the SDK and all active features, such as RUM. To re
 [7]: https://www.ntppool.org/en/
 [8]: /real_user_monitoring/error_tracking/mobile/ios/#add-app-hang-reporting
 [9]: /real_user_monitoring/application_monitoring/ios/setup
+
