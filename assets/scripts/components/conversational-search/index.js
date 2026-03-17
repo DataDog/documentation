@@ -480,7 +480,7 @@ class ConversationalSearch {
             signal: this.abortController.signal
         });
 
-        const conversation = response?.results?.[0]?.conversation;
+        const conversation = response?.conversation || response?.results?.[0]?.conversation;
         if (conversation?.conversation_id) {
             this.conversationId = conversation.conversation_id;
         }
