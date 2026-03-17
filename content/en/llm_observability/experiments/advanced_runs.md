@@ -5,7 +5,7 @@ description: Run experiments multiple times to account for model variability on 
 
 This page discusses advanced topics in running experiments, including [multiple experiment runs](#multiple-runs) and [setting up experiments in CI/CD](#setting-up-your-experiment-in-cicd).
 
-## Run an Experiment on a subset of the Dataset
+## Run an Experiment on a subset of the dataset
 
 First, add tags to your dataset records. They can be a unique identifier (e.g `name:test_use_case_1`) or represent a property of the scenario (e.g `difficulty:hard`).
 
