@@ -134,10 +134,8 @@ You can route logs from Observability Pipelines to Snowflake using the Datadog A
 
 #### Permissions
 
-For Observability Pipelines to send logs to Amazon S3, the following policy permissions are required:
+{{% observability_pipelines/aws_authentication/amazon_s3_permissions %}}
 
-- `s3:ListBucket`
-- `s3:PutObject`
 ### Event batching
 
 A batch of events is flushed when one of these parameters is met. See [event batching][7] for more information.
