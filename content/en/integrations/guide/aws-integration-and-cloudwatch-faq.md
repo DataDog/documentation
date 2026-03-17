@@ -116,5 +116,5 @@ Some AWS services do not emit metrics to CloudWatch by default and require extra
 [9]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Monitoring.OS.Enabling.html
 [10]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens.html
 [11]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/monitor_estimated_charges_with_cloudwatch.html#turning_on_billing_metrics
-[13]: /integrations/guide/monitor-your-aws-billing-details/
 [12]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-cloudwatch-new.html
+[13]: /integrations/guide/monitor-your-aws-billing-details/
