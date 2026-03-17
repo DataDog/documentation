@@ -92692,7 +92692,9 @@ paths:
     delete:
       description: 'Deletes a metric''s tag configuration. Can only be used with application
 
-        keys from users with the `Manage Tags for Metrics` permission.'
+        keys from users with the `Manage Tags for Metrics` permission.
+
+        Note: This operation is irreversible.'
       operationId: DeleteTagConfiguration
       parameters:
       - $ref: '#/components/parameters/MetricName'

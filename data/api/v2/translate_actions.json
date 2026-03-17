@@ -2266,7 +2266,7 @@
     "summary": "Get tag key cardinality details"
   },
   "DeleteTagConfiguration": {
-    "description": "Deletes a metric's tag configuration. Can only be used with application\nkeys from users with the `Manage Tags for Metrics` permission.",
+    "description": "Deletes a metric's tag configuration. Can only be used with application\nkeys from users with the `Manage Tags for Metrics` permission.\nNote: This operation is irreversible.",
     "summary": "Delete a tag configuration"
   },
   "ListTagConfigurationByName": {
