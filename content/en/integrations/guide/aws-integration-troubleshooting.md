@@ -55,7 +55,7 @@ The space aggregators `min`, `max`, and `avg` have a different meaning between A
 
 Within Datadog, when you select `min`, `max`, or `avg`, you are controlling how multiple timeseries are combined. For example, requesting `system.cpu.idle` without any filter returns one series for each host that reports that metric, and those series need to be combined to be graphed. If instead you request `system.cpu.idle` from a single host, no aggregation is necessary and switching between average and max yields the same result.
 
-See [Space aggregation][22] in the metric documentation for more information.
+See [Space aggregation][21] in the metric documentation for more information.
 
 #### 3. Per-dimension metrics
 
@@ -96,7 +96,7 @@ The delay between when a metric is generated in AWS and when it appears in Datad
 | Collection method | Typical delay | Notes |
 |---|---|---|
 | API polling (default) | ~10 minutes | CloudWatch API rate limits and account size can increase delay. |
-| [CloudWatch Metric Streams][25] | 2-3 minutes | Requires separate setup with Amazon Data Firehose. |
+| [CloudWatch Metric Streams][23] | 2-3 minutes | Requires separate setup with Amazon Data Firehose. |
 | [Datadog Agent][3] | Real-time | Collects host-level metrics directly, without CloudWatch. |
 
 In addition to collection method delays, some AWS services introduce their own latency on the CloudWatch side:
@@ -119,9 +119,9 @@ If you are not seeing expected AWS metrics in Datadog, work through the followin
 4. **Check whether the service requires additional enablement.** Some AWS services do not emit metrics to CloudWatch by default. For example:
    - Amazon RDS requires [Enhanced Monitoring][18] to be enabled in the RDS console for OS-level metrics.
    - Amazon S3 Storage Lens metrics require Storage Lens to be configured in the S3 console.
-   - AWS billing metrics require enabling `Billing` in the [Metric Collection tab][16], adding the `budgets:ViewBudget` permission, and [enabling billing metrics][19] in the AWS console. See [Monitor your AWS billing details][26] for full instructions.
+   - AWS billing metrics require enabling `Billing` in the [Metric Collection tab][16], adding the `budgets:ViewBudget` permission, and [enabling billing metrics][19] in the AWS console. See [Monitor your AWS billing details][24] for full instructions.
    - Custom CloudWatch namespaces require the **Collect Custom Metrics** option to be enabled in the [Metric Collection tab][16].
-5. **Wait for the polling interval.** API polling collects metrics approximately every 10 minutes. If you use [CloudWatch Metric Streams][25], expect a 2-3 minute delay. See [Expected metric delays](#expected-metric-delays) for more detail.
+5. **Wait for the polling interval.** API polling collects metrics approximately every 10 minutes. If you use [CloudWatch Metric Streams][23], expect a 2-3 minute delay. See [Expected metric delays](#expected-metric-delays) for more detail.
 6. **Check for Service Control Policies (SCPs).** If your account is part of an AWS Organization, SCPs applied at the organization or OU level can override IAM permissions and block API calls. Verify that no SCP denies the required permissions.
 
 ### Wrong count of aws.elb.healthy_host_count
@@ -138,7 +138,7 @@ Datadog collects metrics only from the AWS regions you select in the [AWS integr
 Keep in mind:
 - **Global services**: Some AWS services (such as IAM, CloudFront, and Route 53) are global and not tied to a specific region. Metrics for these services typically appear under `us-east-1` regardless of the region configuration in Datadog.
 - **Regional services**: Most AWS services are regional. Datadog only collects metrics for regions explicitly enabled in the integration tile.
-- **Opt-in regions**: AWS opt-in regions (such as `af-south-1`, `ap-east-1`, and `me-south-1`) must be enabled in both your [AWS account settings][23] and the Datadog integration tile. If the region is not enabled on the AWS side, Datadog cannot collect data from it.
+- **Opt-in regions**: AWS opt-in regions (such as `af-south-1`, `ap-east-1`, and `me-south-1`) must be enabled in both your [AWS account settings][22] and the Datadog integration tile. If the region is not enabled on the AWS side, Datadog cannot collect data from it.
 - **New regions**: Recently launched AWS regions may be crawled automatically but might not yet appear in the Datadog integration UI or Terraform provider. Check the [AWS integration page][16] for the latest list of supported regions.
 
 ## Datadog UI
@@ -211,14 +211,13 @@ By default, host-level tags remain permanently attached to AWS hosts. If you wan
 [12]: https://github.com/DataDog/Miscellany/blob/master/remove_lingering_aws_host_tags.py
 [13]: https://api.datadoghq.com/api/v2/integration/aws/iam_permissions
 [14]: https://github.com/DataDog/cloudformation-template/tree/master/aws_attach_integration_permissions
-[17]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Dimension
-[20]: /metrics/#time-aggregation
-[21]: /metrics/guide/why-does-zooming-out-a-timeframe-also-smooth-out-my-graphs/
 [15]: /integrations/#cat-aws
 [16]: https://app.datadoghq.com/integrations/amazon-web-services
+[17]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Dimension
 [18]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Monitoring.OS.Enabling.html
 [19]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/monitor_estimated_charges_with_cloudwatch.html#turning_on_billing_metrics
-[26]: /integrations/guide/monitor-your-aws-billing-details/
-[22]: /metrics/#space-aggregation
-[23]: https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-regions.html
-[25]: /integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/
+[20]: /metrics/#time-aggregation
+[21]: /metrics/#space-aggregation
+[22]: https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-regions.html
+[23]: /integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/
+[24]: /integrations/guide/monitor-your-aws-billing-details/
