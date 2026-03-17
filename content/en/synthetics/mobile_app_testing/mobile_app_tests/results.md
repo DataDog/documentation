@@ -51,11 +51,8 @@ In the **Sample Runs** section, you can examine the latest failed test runs and 
 Status
 : The status of your test run (`PASSED` or `FAILED`).
 
-Starting URL
-: The URL of your mobile app test scenario.
-
-Steps
-: The number of [test steps][10] completed in your sample run.
+Date
+: The date and time your test ran.
 
 Duration
 : The amount of time it took your test to run.
@@ -66,11 +63,14 @@ Location
 Device
 : The type of device your test was executed from.
 
+App version
+: The version of the mobile application used in your test run.
+
+Test version
+: The version of the test that was executed.
+
 Run type
 : The type of test run (CI, manually triggered, or scheduled).
-
-Records
-: Download device logs that have been captured for your test runs to aid in debugging.
 
 ### Screenshots and actions
 
