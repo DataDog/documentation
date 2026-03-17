@@ -121,7 +121,6 @@ Each call replaces any previously set value (last-call-wins). After it is called
 
 After the loading time is sent, it is accessible as `@view.loading_time` and is visible in the RUM UI.
 
-**Note**: This API is experimental and might change in the future.
 
 ### How page activity is calculated
 
