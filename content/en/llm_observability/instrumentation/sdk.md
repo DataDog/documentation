@@ -2783,3 +2783,4 @@ Your application name (the value of `DD_LLMOBS_ML_APP`) must follow these guidel
 [13]: /llm_observability/instrumentation/auto_instrumentation/
 [14]: /llm_observability/monitoring/cost
 
+

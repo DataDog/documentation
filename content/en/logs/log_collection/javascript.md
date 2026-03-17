@@ -1342,3 +1342,4 @@ window.DD_LOGS && window.DD_LOGS.getInternalContext() // { session_id: "xxxx-xxx
 [11]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#enrich-and-control-rum-data
 [12]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#discard-a-rum-event
 
+
