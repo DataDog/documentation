@@ -59,9 +59,9 @@ See [Space aggregation][22] in the metric documentation for more information.
 
 #### 3. Per-dimension metrics
 
-Some AWS CloudWatch metrics are emitted once per dimension combination, which can produce values that appear inflated when aggregated in Datadog. For example, the `aws.elb.healthy_host_count` metric is reported separately for each Availability Zone and target group. Summing this metric across all dimensions results in a total that is higher than the actual number of healthy hosts, because hosts in multiple zones are counted multiple times.
+Some AWS CloudWatch metrics are emitted once per dimension combination, which can produce values that appear inflated when aggregated in Datadog. For example, the Classic ELB metric `aws.elb.healthy_host_count` is reported separately for each Availability Zone. When cross-zone load balancing is enabled, summing this metric across all Availability Zones produces a total that is higher than the actual number of healthy hosts. See [Wrong count of aws.elb.healthy_host_count](#wrong-count-of-awselbhealthy_host_count) for details.
 
-To avoid this, use the `_deduped` metric variants when available (for example, `aws.elb.healthy_host_count_deduped`), or scope your query to a specific Availability Zone or target group.
+To avoid inflated aggregation, use the `_deduped` metric variants when available (for example, `aws.elb.healthy_host_count_deduped`), or scope your query to a specific dimension value such as a single Availability Zone.
 
 #### Reconcile the discrepancy
 
