@@ -21,6 +21,7 @@ These are the available destinations:
 {{% tab "Logs" %}}
 
 - [Amazon OpenSearch][1]
+- [Amazon S3][22]
 - [Amazon Security Lake][3]
 - [Azure Storage][4]
 - [Datadog Archives][2]
@@ -63,6 +64,7 @@ These are the available destinations:
 [19]: /observability_pipelines/destinations/splunk_hec/
 [20]: /observability_pipelines/destinations/sumo_logic_hosted_collector/
 [21]: /observability_pipelines/destinations/syslog/
+[22]: /observability_pipelines/destinations/amazon_s3/
 
 {{% /tab %}}
 
