@@ -80,7 +80,7 @@ If you recently enabled a new AWS service integration but are not seeing metrics
 | **Typical latency** | ~10 minutes | 2-3 minutes |
 | **Setup** | Included with the AWS integration | Requires separate setup with [Amazon Data Firehose][6] |
 | **AWS cost** | CloudWatch `GetMetricData` API calls | CloudWatch Metric Streams and Firehose delivery charges |
-| **Coverage** | All CloudWatch namespaces | Most CloudWatch namespaces (some exclusions apply) |
+| **Coverage** | All standard CloudWatch namespaces; custom namespaces require **Collect Custom Metrics** to be enabled | Most CloudWatch namespaces (some exclusions apply) |
 | **Custom namespaces** | Supported with **Collect Custom Metrics** enabled | Supported by including the namespace in the stream configuration |
 
 For more detail, see [Cloud Metric Delay][4] and the [CloudWatch Metric Streams guide][6].
