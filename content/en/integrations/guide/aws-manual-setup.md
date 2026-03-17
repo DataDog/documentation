@@ -123,6 +123,31 @@ This policy defines the permissions necessary for the Datadog integration role t
 5. Click **Save**.
 6. Wait up to 10 minutes for data to start being collected, and then view the out-of-the-box <a href="https://app.datadoghq.com/screen/integration/7/aws-overview" target="_blank">AWS Overview Dashboard</a> to see metrics sent by your AWS services and infrastructure.
 
+### Troubleshoot IAM role issues
+
+If the integration does not appear to be working after setup, verify the following:
+
+**Common trust policy mistakes:**
+- The **Account ID** in the trust policy must match the Datadog account ID for your [Datadog site][8]. Verify that the **DATADOG SITE** selector on this page is set correctly.
+- The **External ID** in the trust policy must match the value shown in the [AWS integration configuration page][1]. External IDs are regenerated after 48 hours if not used.
+- The role ARN entered in Datadog must exactly match the role ARN in AWS, including capitalization.
+
+**Validate role assumption from the AWS CLI:**
+
+Run the following command from a machine with AWS CLI access to confirm that the role can be assumed:
+```shell
+aws sts assume-role \
+  --role-arn "arn:aws:iam::<YOUR_AWS_ACCOUNT_ID>:role/DatadogIntegrationRole" \
+  --role-session-name "DatadogTest" \
+  --external-id "<YOUR_EXTERNAL_ID>"
+```
+
+If this command fails, the trust policy or role configuration has an issue. See [Error: Datadog is not authorized to perform sts:AssumeRole][9] for detailed troubleshooting steps.
+
+**Service Control Policies (SCPs):**
+
+If your AWS account is part of an AWS Organization, a [Service Control Policy][10] applied at the organization or OU level can deny permissions even when the IAM role and trust policy are correctly configured. Verify that no SCP blocks the `sts:AssumeRole` action or the specific API calls required by the integration.
+
 <div class="alert alert-danger">If there is a <code>Datadog is not authorized to perform sts:AssumeRole</code> error, follow the troubleshooting steps recommended in the UI, or read the <a href="https://docs.datadoghq.com/integrations/guide/error-datadog-not-authorized-sts-assume-role/" target="_blank">troubleshooting guide</a>.</div>
 
 \*{{% mainland-china-disclaimer %}}
@@ -134,6 +159,9 @@ This policy defines the permissions necessary for the Datadog integration role t
 [5]: /integrations/amazon_web_services/#resource-collection
 [6]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_condition.html
 [7]: https://aws.amazon.com/blogs/security/easier-way-to-control-access-to-aws-regions-using-iam-policies/
+[8]: /getting_started/site/
+[9]: /integrations/guide/error-datadog-not-authorized-sts-assume-role/
+[10]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scps.html
 {{% /tab %}}
 {{% tab "Access keys" %}}
 
