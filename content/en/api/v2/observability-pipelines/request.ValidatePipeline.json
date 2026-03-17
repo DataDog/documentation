@@ -11,7 +11,7 @@
             "type": "datadog_logs"
           }
         ],
-        "processors": [
+        "processor_groups": [
           {
             "enabled": true,
             "id": "my-processor-group",

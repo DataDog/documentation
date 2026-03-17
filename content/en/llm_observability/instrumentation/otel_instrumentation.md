@@ -12,7 +12,7 @@ LLM Observability supports ingesting OpenTelemetry traces that follow the [OpenT
 - A [Datadog API key][2]
 - An application instrumented with OpenTelemetry that emits traces following the [OpenTelemetry 1.37+ semantic conventions for generative AI][1]
 
-To send <a href="/llm_observability/evaluations/external_evaluations#submitting-external-evaluations-with-the-api">external evaluations directly to the API</a> for OpenTelemetry spans, you must include the <code>source:otel</code> tag in the evaluation.
+To send <a href="/llm_observability/evaluations/external_evaluations#submitting-external-evaluations-with-the-api">external evaluations directly to the API</a> for OpenTelemetry spans, you must include the <code>source:otel</code> tag in the evaluation. When referencing spans, provide <code>span_id</code> and <code>trace_id</code> as decimal strings. OpenTelemetry uses hexadecimal IDs natively, so convert them to decimal before submitting evaluations. For example, use Python's <code>int(hex_span_id, 16)</code> to convert a hex span ID to its decimal equivalent.
 
 ## Setup
 
@@ -38,7 +38,9 @@ OTEL_SEMCONV_STABILITY_OPT_IN=gen_ai_latest_experimental
 
 This environment variable enables version 1.37+-compliant OpenTelemetry traces for frameworks that now support the version 1.37+ semantic conventions, but previously supported older versions (such as [strands-agents][5]).
 
-**Note**: If you are using an OpenTelemetry library other than the default OpenTelemetry SDK, you may need to configure the endpoint, protocol, and headers differently depending on the library's API. Refer to your library's documentation for the appropriate configuration method.
+**Note**:
+* If you are using an OpenTelemetry library other than the default OpenTelemetry SDK, you may need to configure the endpoint, protocol, and headers differently depending on the library's API. See your library's documentation for the appropriate configuration method.
+* When using OpenTelemetry instrumentation, some data sent to LLM Observability may also be written to the corresponding APM traces. If you are protecting sensitive data, consider also configuring a Restricted Dataset on APM to match your LLM Observability access controls. See [Data Access Control][8] for more information.
 
 #### Using strands-agents
 
@@ -140,14 +142,14 @@ with tracer.start_as_current_span(
     max_tokens = 1024
     temperature = 0.7
     messages = [{"role": "user", "content": "Explain OpenTelemetry in one sentence."}]
-    
+
     # Set request attributes
     span.set_attribute("gen_ai.provider.name", "openai")
     span.set_attribute("gen_ai.request.model", model)
     span.set_attribute("gen_ai.operation.name", "chat")
     span.set_attribute("gen_ai.request.max_tokens", max_tokens)
     span.set_attribute("gen_ai.request.temperature", temperature)
-    
+
     # Add input messages as event
     input_messages_parts = []
     for msg in messages:
@@ -155,14 +157,14 @@ with tracer.start_as_current_span(
             "role": msg["role"],
             "parts": [{"type": "text", "content": msg["content"]}]
         })
-    
+
     span.add_event(
         "gen_ai.client.inference.operation.details",
         {
             "gen_ai.input.messages": json.dumps(input_messages_parts)
         }
     )
-    
+
     # Make actual LLM call
     client = OpenAI(api_key="<YOUR_OPENAI_API_KEY>")
     response = client.chat.completions.create(
@@ -171,14 +173,14 @@ with tracer.start_as_current_span(
         temperature=temperature,
         messages=messages
     )
-    
+
     # Set response attributes from actual data
     span.set_attribute("gen_ai.response.id", response.id)
     span.set_attribute("gen_ai.response.model", response.model)
     span.set_attribute("gen_ai.response.finish_reasons", [response.choices[0].finish_reason])
     span.set_attribute("gen_ai.usage.input_tokens", response.usage.prompt_tokens)
     span.set_attribute("gen_ai.usage.output_tokens", response.usage.completion_tokens)
-    
+
     # Add output messages as event
     output_text = response.choices[0].message.content
     span.add_event(
@@ -191,7 +193,7 @@ with tracer.start_as_current_span(
             }])
         }
     )
-    
+
     print(f"Response: {output_text}")
 
 # Flush spans before exit
@@ -245,6 +247,218 @@ provider.force_flush(timeout_millis=5000)
 
 After running this example, search for `ml_app:simple-openllmetry-test` in the LLM Observability UI to find the generated trace.
 
+## Attribute mapping reference
+
+This section provides the mapping between OpenTelemetry GenAI semantic conventions (v1.37+) as well as OpenLLMetry to Datadog' LLM Observability span schema.
+
+<div class="alert alert-info">OpenLLMetry-specific mappings are documented separately in the <a href="#openllmetry-attribute-mappings">OpenLLMetry attribute mappings</a> section.</div>
+
+### OpenTelemetry 1.37+ attribute mappings
+
+#### Base span attributes
+
+| OTLP Field | LLM Observability Field | Notes |
+|------------|--------------|-------|
+| `resource.attributes.service.name` | `ml_app`, `tags.service` | |
+| `name` | `name` | Overridden by `gen_ai.tool.name` if present |
+| `parent_span_id` | `parent_id` | |
+| `start_time_unix_nano` | `start_ns` | |
+| `end_time_unix_nano` | `duration` | Calculated: end - start |
+| `status.code` | `status` | `error` if > 0, else `ok` |
+| `status.message` | `meta.error.message` | |
+| `attributes.error.type` | `meta.error.type` | |
+
+#### Span kind resolution
+
+| `gen_ai.operation.name` | LLM Observability `span.kind` |
+|-------------------------|-------------------|
+| `generate_content`, `chat`, `text_completion`, `completion` | `llm` |
+| `embeddings`, `embedding` | `embedding` |
+| `execute_tool` | `tool` |
+| `invoke_agent`, `create_agent` | `agent` |
+| `rerank`, `unknown`, *(default)* | `workflow` |
+
+#### Model information
+
+| OTel Attribute | LLM Observability Field | Notes |
+|----------------|--------------|-------|
+| `gen_ai.operation.name` | `meta.span.kind` | See resolution table above |
+| `gen_ai.provider.name` | `meta.model_provider` | Falls back to `gen_ai.system`, then `custom` |
+| `gen_ai.response.model` | `meta.model_name` | |
+| `gen_ai.request.model` | `meta.model_name` | Fallback if `response.model` absent |
+
+#### Token usage metrics
+
+| OTel Attribute | LLM Observability Field |
+|----------------|--------------|
+| `gen_ai.usage.input_tokens` | `metrics.input_tokens` |
+| `gen_ai.usage.output_tokens` | `metrics.output_tokens` |
+| `gen_ai.usage.prompt_tokens` | `metrics.prompt_tokens` |
+| `gen_ai.usage.completion_tokens` | `metrics.completion_tokens` |
+| `gen_ai.usage.total_tokens` | `metrics.total_tokens` |
+
+#### Request parameters
+
+All `gen_ai.request.*` parameters map to `meta.metadata.*` with the prefix stripped.
+
+| OTel Attribute | LLM Observability Field |
+|----------------|--------------|
+| `gen_ai.request.seed` | `metadata.seed` |
+| `gen_ai.request.frequency_penalty` | `metadata.frequency_penalty` |
+| `gen_ai.request.max_tokens` | `metadata.max_tokens` |
+| `gen_ai.request.stop_sequences` | `metadata.stop_sequences` |
+| `gen_ai.request.temperature` | `metadata.temperature` |
+| `gen_ai.request.top_k` | `metadata.top_k` |
+| `gen_ai.request.top_p` | `metadata.top_p` |
+| `gen_ai.request.choice.count` | `metadata.choice.count` |
+
+#### Tool attributes
+
+| OTel Attribute | LLM Observability Field | Notes |
+|----------------|--------------|-------|
+| `gen_ai.tool.name` | `name` | Overrides span name |
+| `gen_ai.tool.call.id` | `metadata.tool_id` | |
+| `gen_ai.tool.description` | `metadata.tool_description` | |
+| `gen_ai.tool.type` | `metadata.tool_type` | |
+| `gen_ai.tool.definitions` | `meta.tool_definitions` | Parsed JSON array |
+| `gen_ai.tool.call.arguments` | `input.value` | |
+| `gen_ai.tool.call.result` | `output.value` | |
+
+#### Session and conversation
+
+| OTel Attribute | LLM Observability Field | Notes |
+|----------------|--------------|-------|
+| `gen_ai.conversation.id` | `session_id` | Also added to `metadata.conversation_id` and tags |
+
+#### Response attributes
+
+| OTel Attribute | LLM Observability Field |
+|----------------|--------------|
+| `gen_ai.response.model` | `meta.model_name` |
+| `gen_ai.response.finish_reasons` | `metadata.finish_reasons` |
+
+#### Input and output messages
+
+Input and output messages are extracted from the following sources, in priority order:
+
+1. Direct attributes: `gen_ai.input.messages`, `gen_ai.output.messages`, `gen_ai.system_instructions`
+2. Span events (`meta["events"]`) with name `gen_ai.client.inference.operation.details`
+
+| OTel Source | LLM Observability Field | Notes |
+|-------------|--------------|-------|
+| `gen_ai.input.messages` | `meta.input.messages` (llm) / `meta.input.value` (others) | |
+| `gen_ai.output.messages` | `meta.output.messages` (llm) / `meta.output.value` (others) | |
+| `gen_ai.system_instructions` | Prepended to input | Added as system role messages |
+
+##### Embedding spans
+
+| OTel Source | LLM Observability Field |
+|-------------|--------------|
+| `gen_ai.input.messages` | `meta.input.documents` |
+| N/A | `meta.output.value` = `[N embedding(s) returned]` |
+
+#### Tags
+
+Tags are placed directly on the span:
+
+- Non-`gen_ai.*` attributes are converted to `key:value` tags
+- Unknown `gen_ai.*` keys are added with prefix stripped
+- Filtered out: `_dd.*`, `llm.*`, `ddtags`, `events`, and already specifically mapped `gen_ai.*` keys
+
+<div class="alert alert-info">Any <code>gen_ai.*</code> attributes that are not explicitly mapped to LLM Observability span fields are placed in the LLM span's tags, with a 256 character limit per value. Values exceeding this limit are truncated. All other non-<code>gen_ai</code> attributes are dropped.</div>
+
+### OpenLLMetry attribute mappings
+
+This section documents OpenLLMetry-specific attribute mappings that differ from or extend the standard OpenTelemetry GenAI semantic conventions.
+
+#### Span kind resolution
+
+`llm.request.type` is used as a fallback when `gen_ai.operation.name` is absent.
+
+| `llm.request.type` | LLM Observability `span.kind` |
+|--------------------|-------------------|
+| `chat` | `llm` |
+| `completion` | `llm` |
+| `embedding` | `embedding` |
+| `rerank` | `workflow` |
+| `unknown`, *(default)* | `workflow` |
+
+#### Model information
+
+| OpenLLMetry Attribute | LLM Observability Field | Notes |
+|-----------------------|--------------|-------|
+| `gen_ai.system` | `meta.model_provider` | Fallback when `gen_ai.provider.name` absent |
+
+#### Token usage metrics
+
+| OpenLLMetry Attribute | LLM Observability Field | Notes |
+|-----------------------|--------------|-------|
+| `llm.usage.total_tokens` | `metrics.total_tokens` | Fallback when `gen_ai.usage.total_tokens` absent |
+
+#### Input and output messages
+
+OpenLLMetry uses indexed attributes instead of JSON arrays. These are the lowest priority source and are only used when no OTel standard sources exist.
+
+##### Prompt attributes (input)
+
+| OpenLLMetry Attribute | Description |
+|-----------------------|-------------|
+| `gen_ai.prompt.<index>.role` | Message role (user, system, assistant, tool) |
+| `gen_ai.prompt.<index>.content` | Message content |
+| `gen_ai.prompt.<index>.tool_call_id` | Tool call ID for tool response messages |
+
+##### Completion attributes (output)
+
+| OpenLLMetry Attribute | Description |
+|-----------------------|-------------|
+| `gen_ai.completion.<index>.role` | Message role |
+| `gen_ai.completion.<index>.content` | Message content |
+| `gen_ai.completion.<index>.finish_reason` | Completion finish reason |
+
+##### Mapping
+
+Messages are converted to OTel-compatible format and processed normally:
+
+| OpenLLMetry Source | LLMObs Field |
+|--------------------|--------------|
+| `gen_ai.prompt.*` | `meta.input.messages` (llm) / `meta.input.value` (others) |
+| `gen_ai.completion.*` | `meta.output.messages` (llm) / `meta.output.value` (others) |
+
+#### Tool calls
+
+Tool calls are nested within completion attributes.
+
+| OpenLLMetry Attribute | Maps To |
+|-----------------------|---------|
+| `gen_ai.completion.<index>.tool_calls.<idx>.name` | `tool_calls[].name` |
+| `gen_ai.completion.<index>.tool_calls.<idx>.id` | `tool_calls[].tool_id` |
+| `gen_ai.completion.<index>.tool_calls.<idx>.arguments` | `tool_calls[].arguments` |
+
+##### Tool response messages
+
+When `role = "tool"` and `tool_call_id` are present, the message is converted to a tool result:
+
+| OpenLLMetry Attribute | Maps To |
+|-----------------------|---------|
+| `gen_ai.prompt.<index>.tool_call_id` | `tool_results[].tool_id` |
+| `gen_ai.prompt.<index>.content` | `tool_results[].result` |
+
+#### Embedding spans
+
+For embedding spans, documents are extracted from prompt content attributes.
+
+| OpenLLMetry Source | LLM Observability Field |
+|--------------------|--------------|
+| `gen_ai.prompt.<index>.content` | `meta.input.documents[].text` |
+
+#### Tags filtering
+
+The following OpenLLMetry-specific attributes are filtered from tags:
+
+- `gen_ai.prompt.*`
+- `gen_ai.completion.*`
+- `llm.*`
+
 ## Supported semantic conventions
 
 LLM Observability supports spans that follow the OpenTelemetry 1.37+ semantic conventions for generative AI, including:
@@ -289,4 +503,5 @@ with tracer.start_as_current_span("my-span") as span:
 [5]: https://pypi.org/project/strands-agents/
 [6]: /llm_observability/evaluations/external_evaluations
 [7]: https://strandsagents.com/latest/
+[8]: /account_management/rbac/data_access/
 

@@ -13,13 +13,9 @@ further_reading:
   text: "Learn about Application Performance Monitoring (APM)"
 ---
 
-{{< callout url="http://datadoghq.com/product-preview/feature-flags/" >}}
-Feature Flags are in Preview. Complete the form to request access.
-{{< /callout >}}
-
 ## Overview
 
-This page describes how to instrument your Ruby application with the Datadog Feature Flags SDK.
+This page describes how to instrument your Ruby application with the Datadog Feature Flags SDK. The Ruby SDK integrates with [OpenFeature][3], an open standard for feature flag management, and uses the Datadog tracer's Remote Configuration to receive flag updates in real time.
 
 ## Prerequisites
 
@@ -29,6 +25,8 @@ Before setting up the Ruby Feature Flags SDK, ensure you have:
 - **Datadog Ruby tracer** `datadog` version 2.23.0 or later
 - **OpenFeature Ruby SDK** `openfeature-sdk` version 0.4.1 or later
 - **Service and environment configured** - Feature flags are targeted by service and environment
+- **Supported operating system** - Feature flags are only [supported on Linux operating systems][2]. Windows and macOS are not natively supported, but Dockerized Linux environments running on those operating systems are.
+
 
 ## Installing and initializing
 
@@ -43,22 +41,28 @@ require 'datadog'
 require 'open_feature/sdk'
 require 'datadog/open_feature/provider'
 
+INITIALIZATION_TIMEOUT = 30
+
 # Configure Datadog with feature flagging enabled
 Datadog.configure do |config|
   config.remote.enabled = true
+  config.remote.boot_timeout_seconds = INITIALIZATION_TIMEOUT
   config.open_feature.enabled = true
 end
 
-# Configure OpenFeature SDK with Datadog provider
+# Configure OpenFeature SDK with Datadog provider and wait for initialization
 OpenFeature::SDK.configure do |config|
-  config.set_provider(Datadog::OpenFeature::Provider.new)
+  config.set_provider_and_wait(
+    Datadog::OpenFeature::Provider.new,
+    timeout: INITIALIZATION_TIMEOUT
+  )
 end
 
 # Create OpenFeature client
 client = OpenFeature::SDK.build_client
 ```
 
-The client returns default values until Remote Configuration loads in the background. This approach keeps your application responsive during startup but may serve defaults for early requests.
+Using `set_provider_and_wait` blocks your application from proceeding until the provider is fully initialized or the timeout is reached. This ensures flags are ready before your application starts handling requests. If you prefer non-blocking initialization, use `set_provider` instead. If you do, the client returns default values until Remote Configuration loads in the background.
 
 ## Set the evaluation context
 
@@ -66,7 +70,7 @@ Define an evaluation context that identifies the user or entity for flag targeti
 
 ```ruby
 context = OpenFeature::SDK::EvaluationContext.new(
-  targetingKey: 'user-123',  # Targeting key (typically user ID)
+  targeting_key: 'user-123',  # Targeting key (typically user ID)
   email: 'user@example.com',
   country: 'US',
   tier: 'premium',
@@ -209,7 +213,7 @@ If feature flags unexpectedly always return default values, check the following:
 - Verify Remote Configuration is enabled in your Datadog Agent configuration
 - Ensure the service and environment are configured (either through `DD_SERVICE` and `DD_ENV` environment variables or `config.service` and `config.env` in Ruby)
 - Check that `config.remote.enabled = true` and `config.open_feature.enabled = true` are set in your Ruby application's Datadog configuration
-- Verify the `datadog` gem version includes OpenFeature support (2.23.0 or later)
+- Verify the `datadog` gem version includes OpenFeature support (2.24.0 or later)
 
 ### Remote Configuration connection issues
 
@@ -235,3 +239,5 @@ Look for messages about:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent/remote_config/
+[2]: /tracing/trace_collection/compatibility/ruby/#supported-operating-systems
+[3]: https://openfeature.dev/

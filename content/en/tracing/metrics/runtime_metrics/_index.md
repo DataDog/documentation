@@ -125,7 +125,7 @@ Enable [DogStatsD for the Agent][2]. By default, the Datadog Agent is configured
 
 When running the Agent in containerized environments, additional configuration is required:
 
-1. Set `dogstatsd_non_local_traffic: true` in your main [`datadog.yaml` configuration file][8], or set the [environment variable][3] `DD_DOGSTATSD_NON_LOCAL_TRAFFIC=true`. **Note**: DogStatsD non‑local traffic is enabled by default, so you only need to set this if you've overridden it.
+1. Verify that DogStatsD non-local traffic is enabled. This setting is enabled by default. If you have previously disabled it, set `dogstatsd_non_local_traffic: true` in your main [`datadog.yaml` configuration file][8], or set the [environment variable][3] `DD_DOGSTATSD_NON_LOCAL_TRAFFIC=true`.
 2. Follow these container-specific setup instructions:
 
 {{< partial name="apm/apm-runtime-metrics-containers.html" >}}
@@ -298,7 +298,7 @@ Each supported language collects a set of runtime metrics that provide insights 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[2]: /developers/dogstatsd/#setup
+[2]: /extend/dogstatsd/#setup
 [3]: /agent/docker/#dogstatsd-custom-metrics
-[7]: /developers/dogstatsd/unix_socket/
+[7]: /extend/dogstatsd/unix_socket/
 [8]: /agent/configuration/agent-configuration-files/#main-configuration-file

@@ -5,6 +5,7 @@ further_reading:
   - link: "/network_monitoring/devices/troubleshooting"
     tag: "Documentation"
     text: "NDM Troubleshooting"
+site_support_id: network_config_management
 ---
 
 <div class="alert alert-info">Network Configuration Management is in Preview. To request access and receive the custom Datadog Agent build, contact your Datadog representative.</div>
@@ -31,45 +32,45 @@ Network Configuration Management (NCM) extends [Network Device Monitoring (NDM)]
 1. In the Agent's root configuration directory at `conf.d/network_config_management.d/`, create the `conf.yaml` file and configure it as follows:
 
    ```yaml
-     init_config:
-       ## @param namespace - string - optional - default: default
-       ## The namespace should match namespaces of devices being monitored
-       namespace: default
-       ## @param min_collection_interval - integer - optional - default: 900 (15 minutes)
-       min_collection_interval: 900
-       ## @param ssh - object - optional
-       ## Global SSH configuration that applies to all device instances unless 
-       ## overridden at the device level. 
-       ssh:
-         ## @param timeout - duration - optional - default: 30 (seconds)
-         ## Maximum time for the SSH client to establish a TCP connection.
-         timeout: 30
-         ## @param known_hosts_path - string - required (unless insecure_skip_verify is true)
-         ## Path to the known_hosts file containing public keys of servers to 
-         ## verify the identity of remote hosts. Required for secure connections.
-         known_hosts_path: /path/to/known_hosts
-         ## @param insecure_skip_verify - boolean - optional - default: false
-         ## Skip host key verification. This is INSECURE and should only be used
-         ## for development/testing purposes.
-         insecure_skip_verify: false 
-      instances:
-        ip_address - string - required
-        ## The IP address of the network device to collect configurations from.
-        ip_address: <IP_ADDRESS>
-        ## @param auth - object - required
-        ## Authentication credentials to connect to the network device.
-        auth:
-          ## @param username - string - required
-          ## Username to authenticate to the network device.
-          username: <USERNAME>
-          ## @param password - string - required (if private_key_file is not provided)
-          ## Password to authenticate to the network device.
-          ## Used as a fallback after private key authentication if both are provided.
-          password: <PASSWORD>
-          ## @param private_key_file - string - optional
-          ## Path to the SSH private key file for authentication.
-          ## At least one of password or private_key_file must be provided.
-          private_key_file: /path/to/private_key
+   init_config:
+     ## @param namespace - string - optional - default: default
+     ## The namespace should match namespaces of devices being monitored
+     namespace: default
+     ## @param min_collection_interval - integer - optional - default: 900 (15 minutes)
+     min_collection_interval: 900
+     ## @param ssh - object - optional
+     ## Global SSH configuration that applies to all device instances unless 
+     ## overridden at the device level. 
+     ssh:
+       ## @param timeout - duration - optional - default: 30 (seconds)
+       ## Maximum time for the SSH client to establish a TCP connection.
+       timeout: 30
+       ## @param known_hosts_path - string - required (unless insecure_skip_verify is true)
+       ## Path to the known_hosts file containing public keys of servers to 
+       ## verify the identity of remote hosts. Required for secure connections.
+       known_hosts_path: /path/to/known_hosts
+       ## @param insecure_skip_verify - boolean - optional - default: false
+       ## Skip host key verification. This is INSECURE and should only be used
+       ## for development/testing purposes.
+       insecure_skip_verify: false 
+   instances:
+     ## ip_address - string - required
+     ## The IP address of the network device to collect configurations from.
+   - ip_address: <IP_ADDRESS>
+     ## @param auth - object - required
+     ## Authentication credentials to connect to the network device.
+     auth:
+       ## @param username - string - required
+       ## Username to authenticate to the network device.
+       username: <USERNAME>
+       ## @param password - string - required (if private_key_file is not provided)
+       ## Password to authenticate to the network device.
+       ## Used as a fallback after private key authentication if both are provided.
+       password: <PASSWORD>
+       ## @param private_key_file - string - optional
+       ## Path to the SSH private key file for authentication.
+       ## At least one of password or private_key_file must be provided.
+       private_key_file: /path/to/private_key
    ```
 
 2. Optionally, if your devices require specific SSH algorithms, use the following configuration:
@@ -104,7 +105,7 @@ Network Configuration Management is accessible from the device side panel in Net
 
 ### Time picker and retention
 
-The time controls at the top of the page allow you to select which configuration history to view. By default, the view shows the last 2 days of configuration changes. You can extend this range to view older versions, up to the retention limit (1 year).
+The time controls at the top of the page allow you to select which configuration history to view. You can extend this range to view older versions, up to the retention limit (1 year).
 
 The timeline and configuration version list automatically update based on your selected time range.
 

@@ -278,6 +278,15 @@
       5.25.0 or later
     {{- end -}}
   {{- end -}}
+<!-- BullMQ (bullmq) -->
+  {{- if eq (.Get "lib") "bullmq" -}}
+    {{- if eq (.Get "type") "minimal" -}}
+      5.82.0
+    {{- end -}}
+    {{- if eq (.Get "type") "recommended" -}}
+      5.82.0 or later
+    {{- end -}}
+  {{- end -}}
 {{- end -}}
 
 <!-- Go -->

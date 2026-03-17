@@ -15,10 +15,6 @@ further_reading:
       tag: 'Blog'
       text: "Diagnose runtime and code inefficiencies using Continuous Profiler's timeline view"
 ---
-{{< callout url="https://www.datadoghq.com/product-preview/automated-analysis/" btn_hidden="false" header="Join the Preview!" >}}
-Automated Analysis is in Preview.
-{{< /callout >}}
-
 ## Overview
 Automated Analysis automatically detects performance issues in your applications using Continuous Profiler data and provides actionable insights for resolution. When an issue is detected, Automated Analysis provides:
 
@@ -53,9 +49,9 @@ Each row represents an insight type, summarizing:
 
 - Service and runtime affected
 - Insight type (for example, GC Pauses or High Lock Contention)
-- Severity (for example, Info or Warning)
+- Priority (high, medium or low)
 
-You can filter insights by runtime, service, or environment to narrow the list to the most important insights. Teams often use this view to identify patterns, such as multiple services affected by the same inefficiency. Clicking on an insight opens its detail panel.
+You can filter insights by insight name, runtime, service, or environment to narrow the list to the most important insights. Teams often use this view to identify patterns, such as multiple services affected by the same inefficiency. Clicking on an insight opens its detail panel.
 
 ## Supported insights
 
@@ -115,6 +111,8 @@ Automated Analysis supports finding the following insights:
 {{% tab "Node.js" %}}
 | Name                         | Priority   | Description |
 |------------------------------|------------|-------------|
+| CPU Burst                    | Medium     | Triggers if there is more than 75% CPU utilization across a 10s window. |
+| CPU Starvation               | High       | Triggers if no CPU samples were captured for at least 100ms. |
 | Event Loop Blocking          | Medium     | Triggers if callbacks were running for an extended period of time on the Main Event Loop thread. |
 | GC Overhead                  | Low        | Triggers if more than 20% of CPU time is related to GC activities or allocation overhead. |
 | Libuv Pool Overload          | Low        | Triggers if there were more concurrent tasks scheduled to run on the libuv thread pool than it has threads. |

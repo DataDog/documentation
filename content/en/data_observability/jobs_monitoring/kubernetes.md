@@ -1,20 +1,20 @@
 ---
-title: Data Jobs Monitoring for Spark on Kubernetes
-description: "Set up Data Jobs Monitoring for Apache Spark applications on Kubernetes clusters using the Datadog Agent and admission controller."
+title: "Data Observability: Jobs Monitoring for Spark on Kubernetes"
+description: "Set up Data Observability: Jobs Monitoring for Apache Spark applications on Kubernetes clusters using the Datadog Agent and admission controller."
 aliases:
   - /data_jobs/kubernetes
 further_reading:
     - link: '/data_jobs'
       tag: 'Documentation'
-      text: 'Data Jobs Monitoring'
+      text: 'Data Observability: Jobs Monitoring'
 ---
 
-[Data Jobs Monitoring][6] gives visibility into the performance and reliability of Apache Spark applications on Kubernetes.
+[Data Observability: Jobs Monitoring][6] gives visibility into the performance and reliability of Apache Spark applications on Kubernetes.
 
 ## Setup
-<div class="alert alert-info">Data Jobs Monitoring requires <a href="https://github.com/DataDog/datadog-agent/releases" target="_blank">Datadog Agent version</a> 7.55.0 or later, and <a href="https://github.com/DataDog/dd-trace-java/releases" target="_blank">Java tracer</a> version 1.38.0 or later.</div>
+<div class="alert alert-info">Data Observability: Jobs Monitoring requires <a href="https://github.com/DataDog/datadog-agent/releases" target="_blank">Datadog Agent version</a> 7.55.0 or later, and <a href="https://github.com/DataDog/dd-trace-java/releases" target="_blank">Java tracer</a> version 1.38.0 or later.</div>
 
-Follow these steps to enable Data Jobs Monitoring for Spark on Kubernetes.
+Follow these steps to enable Data Observability: Jobs Monitoring for Spark on Kubernetes.
 
 1. [Install the Datadog Agent](#install-the-datadog-agent-on-your-kubernetes-cluster) on your Kubernetes cluster.
 2. [Inject Spark instrumentation](#inject-spark-instrumentation).
@@ -210,7 +210,7 @@ aws emr-containers start-job-run \
 ```
 ## Validation
 
-In Datadog, view the [Data Jobs Monitoring][5] page to see a list of all your data processing jobs.
+In Datadog, view the [Data Observability: Jobs Monitoring][5] page to see a list of all your data processing jobs.
 
 ## Advanced Configuration
 

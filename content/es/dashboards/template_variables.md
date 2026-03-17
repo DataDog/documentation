@@ -7,9 +7,15 @@ description: Utiliza variables de plantilla para filtrar dinámicamente los widg
   del dashboard por etiquetas, atributos y facetas para una exploración flexible de
   los datos.
 further_reading:
+- link: https://www.datadoghq.com/blog/datadog-executive-dashboards
+  tag: Blog
+  text: Diseñar dashboards ejecutivos eficaces con Datadog
+- link: https://www.datadoghq.com/blog/zendesk-cost-optimization
+  tag: Blog
+  text: 'Optimización de Datadog a escala: Observabilidad rentable en Zendesk'
 - link: https://www.datadoghq.com/blog/template-variable-associated-values/
   tag: Blog
-  text: Usa variables de plantilla asociadas para reajustar tus dashboards
+  text: Usa variables de plantilla asociadas para redefinir tus dashboards
 - link: https://www.datadoghq.com/blog/dynamic-template-variable-syntax-dashboards/
   tag: Blog
   text: Acelerar flujos de trabajo de dashboards con la sintaxis dinámica de variables
@@ -26,7 +32,7 @@ further_reading:
   text: Compartir gráficos fuera de Datadog
 - link: /dashboards/widgets/
   tag: Documentación
-  text: Descubrir widgets para dashboards
+  text: Descubre widgets para tus dashboards
 title: Variables de plantilla
 ---
 

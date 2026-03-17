@@ -11,18 +11,18 @@ further_reading:
   Join the CloudPrem Preview to access new self-hosted log management features.
 {{< /callout >}}
 
-{{< img src="/cloudprem/overview_diagram_cloudprem.png" alt="CloudPrem architecture overview showing how logs flow from sources through CloudPrem to the Datadog platform" style="width:100%;" >}}
+CloudPrem is Datadog BYOC log management solution which offers a cost-effective solution for organizations that want to keep their data in their own cloud accounts and control costs over time using their existing cloud provider discounts. It is built to meet stringent security, data residency, regulatory and high-volume requirements.
 
-Datadog CloudPrem is a self-hosted log management solution that enables cost-effective log ingestion, processing, indexing, and search capabilities within your own infrastructure. Built to meet data residency, stringent security, and high-volume requirements, CloudPrem integrates with the Datadog platform to provide log analysis, visualization, and alerting---all while keeping your log data at rest within your infrastructure boundaries.
 
 ## Get started
 
 {{< whatsnext desc="Follow our guides to get CloudPrem up and running:">}}
+  {{< nextlink href="/cloudprem/introduction/" >}}What is CloudPrem?{{< /nextlink >}}
   {{< nextlink href="/cloudprem/quickstart/" >}}Quickstart: Run CloudPrem locally in 5 minutes{{< /nextlink >}}
-  {{< nextlink href="/cloudprem/install/" >}}Install CloudPrem{{< /nextlink >}}
-  {{< nextlink href="/cloudprem/ingest_logs/datadog_agent/" >}}Ingest logs with Datadog Agent{{< /nextlink >}}
-  {{< nextlink href="/cloudprem/configure/datadog_account" >}}Configure your Datadog account{{< /nextlink >}}
-  {{< nextlink href="/cloudprem/architecture/" >}}Understand CloudPrem architecture{{< /nextlink >}}
+  {{< nextlink href="/cloudprem/install/" >}}Installation - Deploy CloudPrem on AWS, Azure, or custom Kubernetes{{< /nextlink >}}
+  {{< nextlink href="/cloudprem/ingest/agent/" >}}Ingest Logs - Configure the Datadog Agent to send logs to CloudPrem{{< /nextlink >}}
+  {{< nextlink href="/cloudprem/operate/search_logs" >}}Search Logs - Explore your logs in the Datadog Log Explorer{{< /nextlink >}}
+  {{< nextlink href="/cloudprem/guides/" >}}Guides - Step-by-step guides for CloudPrem features and integrations{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further reading

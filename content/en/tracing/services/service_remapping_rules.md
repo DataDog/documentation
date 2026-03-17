@@ -36,9 +36,9 @@ You can create service remapping rules only for services instrumented with suppo
 
 ### Step 1: Select remapping action and entities to target
 
-1. In Datadog, navigate to **APM** > **Software Catalog** > **Manage** > [**Manage Renaming Rules**][13] and click **+ Add Rule**. 
+1. In Datadog, navigate to **APM** > **Software Catalog** > **Manage** > [**Manage Remapping Rules**][13] and click **+ Add Rule**. 
 
-   Alternatively, navigate to **APM** > [**Software Catalog**][14] and click on a service to open the service side panel. From there, click **Service Page** > **Service Renaming**.
+   Alternatively, navigate to **APM** > [**Software Catalog**][14] and click on a service to open the service side panel. From there, click **Service Page** > **Service Remapping**.
    {{< img src="tracing/services/renaming_rules/service-side-panel.png" alt="The side panel for a service, showing the Service Page dropdown menu with a Service Remapping option" style="width:100%;" >}}
 1. Choose a remapping action to perform for your new remapping rule.
    - You can select to split a single entity, rename an entity, merge multiple entities together, or rename several entities.

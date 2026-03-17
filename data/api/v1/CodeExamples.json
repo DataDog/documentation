@@ -93,6 +93,11 @@
     },
     {
       "group": "dashboards",
+      "suffix": "_2345541687",
+      "description": "Create a new dashboard with a bar_chart widget with stacked type and no legend specified"
+    },
+    {
+      "group": "dashboards",
       "suffix": "_3562282606",
       "description": "Create a new dashboard with a change widget using formulas and functions slo query"
     },
@@ -178,6 +183,16 @@
     },
     {
       "group": "dashboards",
+      "suffix": "_1712853070",
+      "description": "Create a new dashboard with bar_chart widget"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_2617251399",
+      "description": "Create a new dashboard with bar_chart widget sorted by group"
+    },
+    {
+      "group": "dashboards",
       "suffix": "_2607944105",
       "description": "Create a new dashboard with check_status widget"
     },
@@ -220,6 +235,16 @@
       "group": "dashboards",
       "suffix": "_3777304439",
       "description": "Create a new dashboard with formula and function heatmap widget"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_732700533",
+      "description": "Create a new dashboard with formulas and functions events query using facet group by"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_4018282928",
+      "description": "Create a new dashboard with formulas and functions events query using flat group by fields"
     },
     {
       "group": "dashboards",
@@ -428,8 +453,28 @@
     },
     {
       "group": "dashboards",
+      "suffix": "_1705253330",
+      "description": "Create a new dashboard with timeseries widget using has_value_labels"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_416487533",
+      "description": "Create a new dashboard with timeseries widget using order_by tags"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_1259346254",
+      "description": "Create a new dashboard with timeseries widget using order_by values"
+    },
+    {
+      "group": "dashboards",
       "suffix": "_3520534424",
       "description": "Create a new dashboard with timeseries widget with custom_unit"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_3631423980",
+      "description": "Create a new dashboard with timeseries widget without order_by for backward compatibility"
     },
     {
       "group": "dashboards",
@@ -776,6 +821,16 @@
     },
     {
       "group": "monitors",
+      "suffix": "_2608995690",
+      "description": "Create a monitor with aggregate augmented query variables returns \"OK\" response"
+    },
+    {
+      "group": "monitors",
+      "suffix": "_2082938111",
+      "description": "Create a monitor with aggregate filtered query variables returns \"OK\" response"
+    },
+    {
+      "group": "monitors",
       "suffix": "_3541766733",
       "description": "Create a monitor with assets returns \"OK\" response"
     },
@@ -873,6 +928,11 @@
     }
   ],
   "CreateSLO": [
+    {
+      "group": "service_level_objectives",
+      "suffix": "_512760759",
+      "description": "Create a new metric SLO object using sli_specification returns \"OK\" response"
+    },
     {
       "group": "service_level_objectives",
       "suffix": "_3765703239",
@@ -999,7 +1059,7 @@
   "UpdateMobileTest": [
     {
       "group": "synthetics",
-      "suffix": "",
+      "suffix": "_477498912",
       "description": "Edit a Mobile test returns \"OK\" response"
     }
   ],

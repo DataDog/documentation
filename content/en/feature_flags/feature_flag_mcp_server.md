@@ -10,10 +10,6 @@ further_reading:
   text: "Datadog MCP Server"
 ---
 
-{{< callout url="http://datadoghq.com/product-preview/feature-flags/" >}}
-Feature Flags are in Preview. Complete the form to request access.
-{{< /callout >}}
-
 ## Overview
 
 The Datadog MCP Server uses the Model Context Protocol (MCP) to provide AI agents with access to [Feature Flags][1] management capabilities, including flag creation, configuration, and React/JavaScript integration guidance.

@@ -1,8 +1,10 @@
 ---
 title: Session Replay Mobile Dev Tools
-description: 
+description: Use Session Replay Dev Tools to debug and inspect mobile session recordings.
 aliases:
-- /real_user_monitoring/session_replay/dev_tools
+  - /real_user_monitoring/session_replay/dev_tools
+  - /real_user_monitoring/session_replay/mobile/dev_tools
+  - /product_analytics/session_replay/mobile/dev_tools
 further_reading:
     - link: '/session_replay/'
       tag: Documentation

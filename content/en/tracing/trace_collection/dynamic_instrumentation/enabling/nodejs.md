@@ -14,16 +14,20 @@ further_reading:
       text: 'Getting Started with Datadog Agent'
 ---
 
-Dynamic Instrumentation is a feature of supporting Datadog tracing libraries. If you are already using [APM to collect traces][1] for your application, ensure your Agent and tracing library are on the required version. Then, go directly to enabling Dynamic Instrumentation in step 4.
+Dynamic Instrumentation is a feature of the Datadog tracing library that lets you add instrumentation to your application at runtime without code changes or redeployments. Follow these instructions to set up Dynamic Instrumentation for Node.js.
+
+## Prerequisites
+
+Before you begin, review the [Dynamic Instrumentation prerequisites][15]. Node.js applications also require:
+
+- Tracing library [`dd-trace-js`][16] version 5.48.0 or higher. See the [installation instructions][2] for setup details.
 
 ## Installation
 
-1. Install or upgrade your Agent to version [7.49.0][6] or higher.
-2. If you don't already have APM enabled, in your Agent configuration, set the `DD_APM_ENABLED` environment variable to `true` and listening to the port `8126/TCP`.
-3. Install or upgrade the Node.js tracing library to version 5.48.0 or higher, by following the [relevant instructions][2].
-4. If your source code is transpiled during deployment (for example, if using TypeScript), ensure that source maps are published along with the deployed Node.js application.
-5. Run your service with Dynamic Instrumentation enabled by setting the `DD_DYNAMIC_INSTRUMENTATION_ENABLED` environment variable to `true`. Specify `DD_SERVICE`, `DD_ENV`, and `DD_VERSION` Unified Service Tags so you can filter and group your instrumentations and target active clients across these dimensions.
-6. After starting your service with Dynamic Instrumentation enabled, you can start using Dynamic Instrumentation on the [APM > Dynamic Instrumentation page][3].
+1. If you don't already have APM enabled, in your Agent configuration, set the `DD_APM_ENABLED` environment variable to `true` and listening to the port `8126/TCP`.
+2. If your source code is transpiled during deployment (for example, if using TypeScript), ensure that source maps are published along with the deployed Node.js application.
+3. Run your service with Dynamic Instrumentation enabled by setting the `DD_DYNAMIC_INSTRUMENTATION_ENABLED` environment variable to `true`. Specify `DD_SERVICE`, `DD_ENV`, and `DD_VERSION` Unified Service Tags so you can filter and group your instrumentations and target active clients across these dimensions.
+4. After starting your service with Dynamic Instrumentation enabled, you can start using Dynamic Instrumentation on the [APM > Dynamic Instrumentation page][3].
 
 ## Configuration
 
@@ -74,12 +78,10 @@ The following limitations apply to the Node.js implementation:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/trace_collection/
 [2]: /tracing/trace_collection/dd_libraries/nodejs/
 [3]: https://app.datadoghq.com/dynamic-instrumentation
 [4]: /dynamic_instrumentation/
 [5]: /getting_started/tagging/unified_service_tagging
-[6]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
 [7]: /dynamic_instrumentation/#creating-log-probes
 [8]: /dynamic_instrumentation/sensitive-data-scrubbing/#custom-identifier-redaction
 [9]: /integrations/guide/source-code-integration/?tab=nodejs#embed-git-information-in-your-build-artifacts
@@ -88,3 +90,5 @@ The following limitations apply to the Node.js implementation:
 [12]: https://babeljs.io/docs/options#sourcemaps
 [13]: https://webpack.js.org/configuration/devtool/
 [14]: https://coffeescript.org/#usage
+[15]: /dynamic_instrumentation/#prerequisites
+[16]: https://github.com/DataDog/dd-trace-js

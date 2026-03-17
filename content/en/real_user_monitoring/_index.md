@@ -6,6 +6,9 @@ aliases:
   - /real_user_monitoring/installation
   - /real_user_monitoring/faq/
 further_reading:
+- link: "https://www.datadoghq.com/blog/llm-observability-at-datadog-dashboards"
+  tag: "Blog"
+  text: "Building reliable dashboard agents with Datadog LLM Observability"
 - link: "https://www.datadoghq.com/blog/rum-product-analytics-bridging-teams"
   tag: "Blog"
   text: "From performance to impact: Bridging frontend teams through shared context"
@@ -261,7 +264,7 @@ You must have edit access to restore general access to a restricted application.
 [11]: /real_user_monitoring/application_monitoring/android/web_view_tracking/
 [12]: /session_replay/browser/
 [13]: /session_replay/browser/privacy_options/
-[14]: /session_replay/browser/developer_tools/
+[14]: /session_replay/browser/dev_tools/
 [15]: /real_user_monitoring/application_monitoring/browser/setup/
 [16]: /real_user_monitoring/application_monitoring/
 [17]: https://app.datadoghq.com/rum/optimization/inspect
