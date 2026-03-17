@@ -74,7 +74,7 @@ Click the **Metrics** tab in the NDM device view to see all metrics collected fo
 
 ### Traffic
 
-Click the **Traffic** tab to view traffic trends, throughput changes, and a Sankey diagram of traffic flows. You can drill down into traffic at the interface level and jump to [NetFlow Monitoring][1] for further investigation.
+Click the **Traffic** tab to view traffic trends, throughput changes, and a Sankey diagram of traffic flows. You can examine traffic at the interface level and jump to [NetFlow Monitoring][1] for further investigation.
 
 {{< img src="/network_device_monitoring/network_topology_map/traffic.png" alt="The NDM device view with the Traffic tab open, showing a Sankey diagram of traffic flows." style="width:100%;" >}}
 

@@ -63,7 +63,7 @@ After configuration, SNMP traps are forwarded as logs to Datadog. You can find t
 
    <div class="alert alert-info">Even though SNMP traps are <em>forwarded as logs</em>, <code>logs_enabled</code> does <strong>not</strong> need to be set to <code>true</code>.</div>
 
-You can also view SNMP traps directly from the NDM device view. Select a device in [**Infrastructure > Network Devices**][8] and click the **Events** tab. Syslog messages and SNMP traps are combined in a single view, and use the filters to narrow results by event type.
+You can also view SNMP traps directly from the NDM device view. Select a device in [**Infrastructure > Network Devices**][8] and click the **Events** tab. Syslog messages and SNMP traps are combined in a single view. Use the filters to narrow results by event type.
 
 {{< img src="network_device_monitoring/network_topology_map/events.png" alt="The NDM device view with the Events tab open, showing Syslog messages and SNMP traps." style="width:100%;" >}}
 
