@@ -9,7 +9,11 @@ products:
 
 {{< product-availability >}}
 
-Use the Datadog Archives destination to send logs to Amazon S3 for [archiving][1] in Datadog format. Yu can [rehydrate][2] those logs later on when you need to analyze and investigate them.
+## Overview
+
+Use the Datadog Archives destination to send logs to Amazon S3 for [archiving][1] in Datadog-rehydratable format. You can [rehydrate][2] these logs later when you want to analyze and investigate them in Datadog.
+
+**Note**: If you want to send your logs to Amazon S3 in JSON or Parquet format, use the Amazon S3 destination.
 
 You can also [route logs to Snowflake using the Datadog Archives destination](#route-logs-to-snowflake-using-the-datadog-archives-destination).
 
@@ -65,12 +69,20 @@ Set up the Datadog Archives destination and its environment variables when you [
         - Standard-IA
         - One Zone-IA
     - If you wish to rehydrate from archives in another storage class, you must first move them to one of the supported storage classes above.
-    - See the [Example destination and log archive setup](#example-destination-and-log-archive-setup) section of this page for how to configure your Log Archive based on your Datadog Archives destination setup.
-1. Optionally, select an AWS authentication option. If you are only using the [user or role you created earlier](#set-up-an-iam-policy-that-allows-workers-to-write-to-the-s3-bucket) for authentication, do not select **Assume role**. The **Assume role** option should only be used if the user or role you created earlier needs to assume a different role to access the specific AWS resource and that permission has to be explicitly defined.<br>If you select **Assume role**:
-    1. Enter the ARN of the IAM role you want to assume.
-    1. Optionally, enter the assumed role session name and external ID.
+    - See the [Example destination and log archive setup](#example-destination-and-log-archive-setup) section of this page for how to configure your Log Archive based on your Amazon S3 destination setup.
+
+#### Optional settings
+
+##### AWS authentication
+
+Select an AWS authentication option. If you are only using the [user or role you created earlier](#set-up-an-iam-policy-that-allows-workers-to-write-to-the-s3-bucket) for authentication, do not select **Assume role**. The **Assume role** option should only be used if the user or role you created earlier needs to assume a different role to access the specific AWS resource and that permission has to be explicitly defined.<br>If you select **Assume role**:
+1. Enter the ARN of the IAM role you want to assume.
     - **Note:** The [user or role you created earlier](#set-up-an-iam-policy-that-allows-workers-to-write-to-the-s3-bucket) must have permission to assume this role so that the Worker can authenticate with AWS.
-{{% observability_pipelines/destination_buffer_numbered %}}
+1. (Optional) Enter the assumed role session name and external ID.
+
+##### Buffering options
+
+{{% observability_pipelines/destination_buffer %}}
 
 #### Example destination and log archive setup
 
@@ -110,7 +122,7 @@ There are no secret identifiers to configure.
 ## Route logs to Snowflake using the Datadog Archives destination
 
 You can route logs from Observability Pipelines to Snowflake using the Datadog Archives destination by configuring Snowpipe in Snowflake to automatically ingest those logs. To set this up:
-1. Configure [Log Archives](#configure-log-archives) if you want to [archive][1] and [rehydrate][2] your logs. If you only want to send logs to Amazon S3, skip to step 2.
+1. Configure [Log Archives](#configure-log-archives).
 1. [Set up a pipeline][5] to use Datadog Archives as the log destination. When logs are collected by Observability Pipelines, they are written to an S3 bucket using the same configuration detailed in [Set up the destination for your pipeline](#set-up-the-destination-for-your-pipeline), which includes AWS authentication, region settings, and permissions.
 1. Set up Snowpipe in Snowflake. See [Automating Snowpipe for Amazon S3][6] for instructions. Snowpipe continuously monitors your S3 bucket for new files and automatically ingests them into your Snowflake tables, ensuring near real-time data availability for analytics or further processing.
 
