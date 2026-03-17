@@ -66,6 +66,7 @@ cascade:
 
 {{< header-list header="OCI guides" >}}
     {{< nextlink href="integrations/guide/oci-integration-troubleshooting" tag=" oci" >}}OCI Integration Troubleshooting{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/oracle-fusion-integration-setup" tag=" oci" >}}Oracle Fusion Integration Setup{{< /nextlink >}}
 {{< /header-list >}}
 
 {{< header-list header="JMX guides" >}}

@@ -7952,6 +7952,161 @@ components:
       x-enum-varnames:
       - DRAFT
       - PUBLISHED
+    MonitorFormulaAndFunctionAggregateAugmentQuery:
+      description: Augment query for aggregate augmented queries. Can be an events
+        query or a reference table query.
+      oneOf:
+      - $ref: '#/components/schemas/MonitorFormulaAndFunctionEventQueryDefinition'
+      - $ref: '#/components/schemas/MonitorFormulaAndFunctionReferenceTableQueryDefinition'
+    MonitorFormulaAndFunctionAggregateAugmentedDataSource:
+      description: Data source for aggregate augmented queries.
+      enum:
+      - aggregate_augmented_query
+      example: aggregate_augmented_query
+      type: string
+      x-enum-varnames:
+      - AGGREGATE_AUGMENTED_QUERY
+    MonitorFormulaAndFunctionAggregateAugmentedQueryDefinition:
+      additionalProperties: false
+      description: A formula and functions aggregate augmented query. Used to enrich
+        base query results with data from a reference table.
+      properties:
+        augment_query:
+          $ref: '#/components/schemas/MonitorFormulaAndFunctionAggregateAugmentQuery'
+        base_query:
+          $ref: '#/components/schemas/MonitorFormulaAndFunctionAggregateBaseQuery'
+        compute:
+          description: Compute options for the query.
+          items:
+            $ref: '#/components/schemas/MonitorFormulaAndFunctionEventQueryDefinitionCompute'
+          minItems: 1
+          type: array
+        data_source:
+          $ref: '#/components/schemas/MonitorFormulaAndFunctionAggregateAugmentedDataSource'
+        group_by:
+          description: Group by options for the query.
+          items:
+            $ref: '#/components/schemas/MonitorFormulaAndFunctionEventQueryGroupBy'
+          type: array
+        join_condition:
+          $ref: '#/components/schemas/MonitorFormulaAndFunctionAggregateQueryJoinCondition'
+        name:
+          description: Name of the query for use in formulas.
+          example: query1
+          type: string
+      required:
+      - data_source
+      - base_query
+      - augment_query
+      - join_condition
+      - compute
+      - group_by
+      type: object
+    MonitorFormulaAndFunctionAggregateBaseQuery:
+      description: Base query for aggregate queries. Can be an events query or a metrics
+        query.
+      oneOf:
+      - $ref: '#/components/schemas/MonitorFormulaAndFunctionEventQueryDefinition'
+      - $ref: '#/components/schemas/MonitorFormulaAndFunctionMetricsQueryDefinition'
+    MonitorFormulaAndFunctionAggregateFilterQuery:
+      description: Filter query for aggregate filtered queries. Can be an events query
+        or a reference table query.
+      oneOf:
+      - $ref: '#/components/schemas/MonitorFormulaAndFunctionEventQueryDefinition'
+      - $ref: '#/components/schemas/MonitorFormulaAndFunctionReferenceTableQueryDefinition'
+    MonitorFormulaAndFunctionAggregateFilteredDataSource:
+      description: Data source for aggregate filtered queries.
+      enum:
+      - aggregate_filtered_query
+      example: aggregate_filtered_query
+      type: string
+      x-enum-varnames:
+      - AGGREGATE_FILTERED_QUERY
+    MonitorFormulaAndFunctionAggregateFilteredQueryDefinition:
+      additionalProperties: false
+      description: A formula and functions aggregate filtered query. Used to filter
+        base query results using data from another source.
+      properties:
+        base_query:
+          $ref: '#/components/schemas/MonitorFormulaAndFunctionAggregateBaseQuery'
+        compute:
+          description: Compute options for the query.
+          items:
+            $ref: '#/components/schemas/MonitorFormulaAndFunctionEventQueryDefinitionCompute'
+          type: array
+        data_source:
+          $ref: '#/components/schemas/MonitorFormulaAndFunctionAggregateFilteredDataSource'
+        filter_query:
+          $ref: '#/components/schemas/MonitorFormulaAndFunctionAggregateFilterQuery'
+        filters:
+          description: Filter conditions for the query.
+          items:
+            $ref: '#/components/schemas/MonitorFormulaAndFunctionAggregateQueryFilter'
+          type: array
+        group_by:
+          description: Group by options for the query.
+          items:
+            $ref: '#/components/schemas/MonitorFormulaAndFunctionEventQueryGroupBy'
+          type: array
+        name:
+          description: Name of the query for use in formulas.
+          example: query1
+          type: string
+      required:
+      - data_source
+      - base_query
+      - filter_query
+      - filters
+      type: object
+    MonitorFormulaAndFunctionAggregateQueryFilter:
+      additionalProperties: false
+      description: Filter definition for aggregate filtered queries.
+      properties:
+        base_attribute:
+          description: Attribute from the base query to filter on.
+          example: org_id
+          type: string
+        exclude:
+          default: false
+          description: Whether to exclude matching records instead of including them.
+          type: boolean
+        filter_attribute:
+          description: Attribute from the filter query to match against.
+          example: org_id
+          type: string
+      required:
+      - base_attribute
+      - filter_attribute
+      type: object
+    MonitorFormulaAndFunctionAggregateQueryJoinCondition:
+      additionalProperties: false
+      description: Join condition for aggregate augmented queries.
+      properties:
+        augment_attribute:
+          description: Attribute from the augment query to join on.
+          example: org_id
+          type: string
+        base_attribute:
+          description: Attribute from the base query to join on.
+          example: org_id
+          type: string
+        join_type:
+          $ref: '#/components/schemas/MonitorFormulaAndFunctionAggregateQueryJoinType'
+      required:
+      - base_attribute
+      - augment_attribute
+      - join_type
+      type: object
+    MonitorFormulaAndFunctionAggregateQueryJoinType:
+      description: Join type for aggregate query join conditions.
+      enum:
+      - inner
+      - left
+      example: inner
+      type: string
+      x-enum-varnames:
+      - INNER
+      - LEFT
     MonitorFormulaAndFunctionCostAggregator:
       description: Aggregation methods for metric queries.
       enum:
@@ -8185,6 +8340,11 @@ components:
           description: Measurable attribute to compute.
           example: '@duration'
           type: string
+        name:
+          description: The name assigned to this aggregation, when multiple aggregations
+            are defined for a query.
+          example: compute_result
+          type: string
       required:
       - aggregation
       type: object
@@ -8254,12 +8414,122 @@ components:
       - DATABASE_QUERIES
       - NETWORK
       - NETWORK_PATH
+    MonitorFormulaAndFunctionMetricsAggregator:
+      description: Aggregator for metrics queries.
+      enum:
+      - avg
+      - min
+      - max
+      - sum
+      - last
+      - mean
+      - area
+      - l2norm
+      - percentile
+      - stddev
+      - count_unique
+      example: avg
+      type: string
+      x-enum-varnames:
+      - AVG
+      - MIN
+      - MAX
+      - SUM
+      - LAST
+      - MEAN
+      - AREA
+      - L2NORM
+      - PERCENTILE
+      - STDDEV
+      - COUNT_UNIQUE
+    MonitorFormulaAndFunctionMetricsDataSource:
+      description: Data source for metrics queries.
+      enum:
+      - metrics
+      - cloud_cost
+      - datadog_usage
+      example: metrics
+      type: string
+      x-enum-varnames:
+      - METRICS
+      - CLOUD_COST
+      - DATADOG_USAGE
+    MonitorFormulaAndFunctionMetricsQueryDefinition:
+      additionalProperties: false
+      description: A formula and functions metrics query for use in aggregate queries.
+      properties:
+        aggregator:
+          $ref: '#/components/schemas/MonitorFormulaAndFunctionMetricsAggregator'
+        data_source:
+          $ref: '#/components/schemas/MonitorFormulaAndFunctionMetricsDataSource'
+        name:
+          description: Name of the query for use in formulas.
+          example: query1
+          type: string
+        query:
+          description: The metrics query definition.
+          example: avg:system.cpu.user{*}
+          type: string
+      required:
+      - data_source
+      - query
+      type: object
     MonitorFormulaAndFunctionQueryDefinition:
       description: A formula and function query.
       oneOf:
       - $ref: '#/components/schemas/MonitorFormulaAndFunctionEventQueryDefinition'
       - $ref: '#/components/schemas/MonitorFormulaAndFunctionCostQueryDefinition'
       - $ref: '#/components/schemas/MonitorFormulaAndFunctionDataQualityQueryDefinition'
+      - $ref: '#/components/schemas/MonitorFormulaAndFunctionAggregateAugmentedQueryDefinition'
+      - $ref: '#/components/schemas/MonitorFormulaAndFunctionAggregateFilteredQueryDefinition'
+    MonitorFormulaAndFunctionReferenceTableColumn:
+      additionalProperties: false
+      description: A column definition for reference table queries.
+      properties:
+        alias:
+          description: Optional alias for the column.
+          type: string
+        name:
+          description: Name of the column.
+          example: org_id
+          type: string
+      required:
+      - name
+      type: object
+    MonitorFormulaAndFunctionReferenceTableDataSource:
+      description: Data source for reference table queries.
+      enum:
+      - reference_table
+      example: reference_table
+      type: string
+      x-enum-varnames:
+      - REFERENCE_TABLE
+    MonitorFormulaAndFunctionReferenceTableQueryDefinition:
+      additionalProperties: false
+      description: A reference table query for use in aggregate queries.
+      properties:
+        columns:
+          description: List of columns to retrieve from the reference table.
+          items:
+            $ref: '#/components/schemas/MonitorFormulaAndFunctionReferenceTableColumn'
+          type: array
+        data_source:
+          $ref: '#/components/schemas/MonitorFormulaAndFunctionReferenceTableDataSource'
+        name:
+          description: Name of the query.
+          example: filter_query
+          type: string
+        query_filter:
+          description: Optional filter expression for the reference table query.
+          type: string
+        table_name:
+          description: Name of the reference table.
+          example: test_table
+          type: string
+      required:
+      - data_source
+      - table_name
+      type: object
     MonitorGroupSearchResponse:
       description: The response of a monitor group search.
       example:
@@ -22530,6 +22800,11 @@ components:
             wireless devices over all hours in the current date for all organizations.
           format: int64
           type: integer
+        network_path_sum:
+          description: Shows the sum of all Network Path scheduled tests over all
+            hours in the current date for all organizations.
+          format: int64
+          type: integer
         npm_host_top99p:
           description: Shows the 99th percentile of all distinct Cloud Network Monitoring
             hosts (formerly known as Network hosts) over all hours in the current
@@ -23696,6 +23971,11 @@ components:
         network_device_wireless_top99p:
           description: Shows the 99th percentile of all Network Device Monitoring
             wireless devices over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        network_path_sum:
+          description: Shows the sum of all Network Path scheduled tests over all
+            hours in the current date for the given org.
           format: int64
           type: integer
         npm_host_top99p:
@@ -24884,6 +25164,11 @@ components:
         network_device_wireless_top99p_sum:
           description: Shows the 99th percentile of all Network Device Monitoring
             wireless devices over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        network_path_agg_sum:
+          description: Shows the sum of all Network Path scheduled tests over all
+            hours in the current month for all organizations.
           format: int64
           type: integer
         npm_host_top99p_sum:
@@ -31290,12 +31575,11 @@ paths:
       x-menu-order: 3
     put:
       deprecated: true
-      description: 'Add channels to your existing Datadog-Slack integration.
-
-
-        This method updates your integration configuration by **replacing**
-
-        your current configuration with the new one sent to your Datadog organization.'
+      description: "**Deprecated**: This endpoint is deprecated.\n\nThis method **completely
+        rewrites** your integration configuration by **replacing**\nyour current configuration
+        with the new one sent to your Datadog organization.\nPlease ensure that all
+        fields\u2014including the Slack webhook URL\u2014are valid\nbecause an invalid
+        URL will break your Slack notifications."
       operationId: UpdateSlackIntegration
       requestBody:
         content:

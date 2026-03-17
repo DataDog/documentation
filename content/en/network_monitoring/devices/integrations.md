@@ -44,6 +44,8 @@ The following integrations cover **wireless networking platforms** that support 
 | Integration | Summary | Collection type |
 |---|---|---|
 | [Cisco Meraki](/integrations/meraki/) | Collects network device status, client counts, and uplink performance from Cisco Meraki cloud-managed networks through the Meraki Dashboard API. | Crawler-based |
+| [Juniper Mist](/integrations/juniper-mist/) (Preview) | Provides end-to-end visibility into cloud-managed Juniper Mist wireless, wired, and WAN network infrastructure, including access points, switches, and gateways through the Juniper Mist API. | Crawler-based |
+| [Aruba Central](/integrations/aruba-central/) (Preview) | Monitors Aruba Central-managed network devices, including access points and switches for health and performance metrics through the Aruba Central API. | Crawler-based |
 
 ## Virtualization
 
