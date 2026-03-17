@@ -81,7 +81,7 @@ The Datadog MCP Server supports _toolsets_, which allow you to use only the tool
 - `software-delivery`: Tools for interacting with Software Delivery ([CI Visibility][21] and [Test Optimization][24])
 - `synthetics`: Tools for interacting with Datadog [Synthetic tests][20]
 
-To use a toolset, include the `toolsets` query parameter in the endpoint URL when connecting to the MCP Server ([remote authentication][27] only). 
+To use a toolset, include the `toolsets` query parameter in the endpoint URL when connecting to the MCP Server (not available with [local binary authentication][39]). 
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
 For example, based on your selected [Datadog site][36] ({{< region-param key="dd_site_name" >}}):
@@ -774,3 +774,4 @@ The Datadog MCP Server is under significant development. Use [this feedback form
 [36]: /getting_started/site/#navigate-the-datadog-documentation-by-site
 [37]: https://help.datadoghq.com/hc/en-us/requests/new
 [38]: /service_management/case_management/
+[39]: /bits_ai/mcp_server/setup#local-binary-authentication
