@@ -72,8 +72,7 @@ Le programme de gestion de la vulnérabilité de Datadog comprend des évaluatio
 
 Concernant son Agent de conteneur en particulier, Datadog effectue des analyses statiques régulières des vulnérabilités sur ses versions en disponibilité générale (GA) et en release candidate (RC). L'Agent de conteneur Datadog est disponible dans des référentiels publics comme indiqué dans [Agent Docker][10] ; de plus, le code source de l'Agent Datadog est open source. Cela permet aux clients d'effectuer des analyses de vulnérabilités avec leurs outils préférés selon une cadence adaptée à leurs besoins. Cela fournit la visibilité nécessaire aux clients souhaitant surveiller l'Agent Datadog pour détecter d'éventuelles vulnérabilités.
 
-Si vous pensez avoir découvert un bug dans la sécurité de Datadog, consultez la section [Signaler un problème][11]. 
-Pour vérifier le statut d'une CVE spécifique, consultez la [page Public Artifact Vulnerabilities][19]. Pour obtenir des informations complémentaires, contactez l'[assistance Datadog][12] via votre processus d'assistance standard. Lorsque vous soumettez un ticket d'assistance via le site web Datadog, définissez le champ `Product type` sur `Vulnerability Inquiry on Datadog Product`.
+Si vous pensez avoir découvert un bug dans la sécurité de Datadog, consultez la section [Signaler un problème][11]. Pour soumettre une demande de vulnérabilité sur un produit spécifique en tant que client existant, contactez l'[assistance Datadog][12] via votre processus d'assistance standard. Si vous soumettez un ticket d'assistance via le site web Datadog, définissez le champ `Product type` sur `Vulnerability Inquiry on Datadog Product`.
 
 ## Exécution en tant qu'utilisateur sans privilèges
 
@@ -228,4 +227,3 @@ Seules les métriques applicables sont émises. Par exemple, si DBM n'est pas ac
 [16]: https://keys.datadoghq.com/DATADOG_RPM_KEY_B01082D3.public
 [17]: https://keys.datadoghq.com/DATADOG_RPM_KEY_4F09D16B.public
 [18]: https://keys.datadoghq.com/DATADOG_APT_KEY_06462314.public
-[19]: /data_security/guide/public_artifact_vulnerabilities/
