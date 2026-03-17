@@ -65,7 +65,7 @@ The DDOT Collector offers:
 
 ### Support levels
 
-For details on support levels for Datadog, community, and custom components, see [Support levels][57] on the Compatibility page.
+For details on Datadog, community, and custom component support, see [Support levels][57] on the Compatibility page.
 
 ### OpenTelemetry Collector components
 
