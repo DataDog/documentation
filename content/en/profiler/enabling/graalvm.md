@@ -36,7 +36,7 @@ Available profile types
 
 ## Installation
 
-### 1. Build your native image with the Datadog SDK
+### 1. Build your native image with the Datadog tracer
 
 Follow the [Tracer Setup Instructions][3] to build your GraalVM native image with the Datadog Java Profiler instrumentation.
 

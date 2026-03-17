@@ -48,7 +48,7 @@ func main() {
         tracer.WithServiceVersion("abc123"),
     )
 
-    // When the SDK is stopped, it will flush everything it has to the Datadog Agent before quitting.
+    // When the tracer is stopped, it will flush everything it has to the Datadog Agent before quitting.
     // Make sure this line stays in your main function.
     defer tracer.Stop()
 

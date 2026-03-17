@@ -1162,7 +1162,7 @@ For example, `DD_APPSEC_AUTO_USER_INSTRUMENTATION_MODE=anon`.
 
 The following modes are deprecated:
 
-- `safe` mode: The trace library does not include any PII information on the events metadata. The SDK tries to collect the user ID, and only if the user ID is a valid [GUID][10]
+- `safe` mode: The trace library does not include any PII information on the events metadata. The tracer tries to collect the user ID, and only if the user ID is a valid [GUID][10]
 - `extended` mode: The trace library tries to collect the user ID, and the user email. In this mode, Datadog does not check the type for the user ID to be a GUID. The trace library reports whatever value can be extracted from the event.
 
 **Note**: There could be cases in which the trace library won't be able to extract any information from the user event. The event would be reported with empty metadata. In those cases, use the [SDK](#adding-business-logic-information-login-success-login-failure-any-business-logic-to-traces) to manually instrument the user events.

@@ -377,7 +377,7 @@ Enable the database monitoring propagation feature by setting the following envi
 {{% tab "PHP" %}}
 
 <div class="alert alert-danger">
-This feature requires the SDK extension to be enabled for your PHP service.
+This feature requires the tracer extension to be enabled for your PHP service.
 </div>
 
 Follow the [PHP tracing instructions][1] to install the automatic instrumentation package and enable tracing for your service.
@@ -399,7 +399,7 @@ Install or update [dd-trace-js][1] to a version greater than `3.17.0` (or `2.30.
 npm install dd-trace@^3.17.0
 ```
 
-Update your code to import and initialize the SDK:
+Update your code to import and initialize the tracer:
 ```javascript
 // This line must come before importing any instrumented module.
 const tracer = require('dd-trace').init();

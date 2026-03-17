@@ -11,7 +11,7 @@ title: Troubleshooting Java App and API Protection
    - Check Agent status: `datadog-agent status`.
 2. Check Java tracer version:
    - Confirm you're using Java tracer v0.94.0 or higher.
-   - Verify the SDK is loaded: `java -javaagent:/path/to/dd-java-agent.jar -version`.
+   - Verify the tracer is loaded: `java -javaagent:/path/to/dd-java-agent.jar -version`.
 3. Verify environment variables:
    - Ensure `DD_APPSEC_ENABLED=true` is set.
    - Check `DD_SERVICE` and `DD_ENV` are properly configured.

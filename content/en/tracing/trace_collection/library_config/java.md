@@ -320,7 +320,7 @@ Hostname for where to send traces to. If using a containerized environment, conf
 `dd.instrumentation.telemetry.enabled`
 : **Environment Variable**: `DD_INSTRUMENTATION_TELEMETRY_ENABLED`<br>
 **Default**: `true`<br>
-When `true`, the SDK collects [telemetry data][8]. Available for versions 0.104+. Defaults to `true` for versions 0.115+.
+When `true`, the tracer collects [telemetry data][8]. Available for versions 0.104+. Defaults to `true` for versions 0.115+.
 
 ### Databases
 
@@ -474,7 +474,7 @@ See how to disable integrations in the [integrations][13] compatibility section.
 `dd.integration.opentracing.enabled`
 : **Environment Variable**: `DD_INTEGRATION_OPENTRACING_ENABLED`<br>
 **Default**: `true`<br>
-By default the tracing client detects if a GlobalTracer is being loaded and dynamically registers an SDK into it. By turning this to false, this removes any tracer dependency on OpenTracing.
+By default the tracing client detects if a GlobalTracer is being loaded and dynamically registers a tracer into it. By turning this to false, this removes any tracer dependency on OpenTracing.
 
 `dd.hystrix.tags.enabled`
 : **Environment Variable**: `DD_HYSTRIX_TAGS_ENABLED`<br>

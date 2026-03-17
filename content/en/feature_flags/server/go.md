@@ -68,7 +68,7 @@ import (
 )
 
 func main() {
-    // Start the Datadog SDK (enables Remote Config)
+    // Start the Datadog tracer (enables Remote Config)
     tracer.Start()
     defer tracer.Stop()
 
@@ -118,7 +118,7 @@ import (
 )
 
 func main() {
-    // Start the Datadog SDK (enables Remote Config)
+    // Start the Datadog tracer (enables Remote Config)
     tracer.Start()
     defer tracer.Stop()
 

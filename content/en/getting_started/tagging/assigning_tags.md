@@ -254,7 +254,7 @@ Depending on the cardinality, there is a different set of out-of-the box tags fo
 
 #### Traces
 
-The Datadog SDK can be configured with environment variables, system properties, or through configuration in code. The [Datadog tracing setup][9] documentation has information on tagging options and configuration for each tracer. You can also follow the [unified service tagging][2] documentation to configure your tracer for unified service tagging.
+The Datadog tracer can be configured with environment variables, system properties, or through configuration in code. The [Datadog tracing setup][9] documentation has information on tagging options and configuration for each tracer. You can also follow the [unified service tagging][2] documentation to configure your tracer for unified service tagging.
 
 Regardless of the SDK used, span metadata must respect a typed tree structure. Each node of the tree is split by a `.` and is of a single type.
 

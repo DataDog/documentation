@@ -49,9 +49,9 @@ To install the Datadog SDK (version 4.x of `dd-trace`) for end-of-life Node.js v
 For more information on Datadog's distribution tags and Node.js runtime version support, see the [Compatibility Requirements][1] page.
 If you are upgrading from a previous major version of the library (0.x, 1.x, 2.x, 3.x or 4.x) to another major version, read the [Migration Guide][5] to assess any breaking changes.
 
-### Import and initialize the SDK
+### Import and initialize the tracer
 
-Import and initialize the SDK either in code or with command line arguments. The Node.js SDK needs to be imported and initialized **before** any other module.
+Import and initialize the tracer either in code or with command line arguments. The Node.js SDK needs to be imported and initialized **before** any other module.
 
 <div class="alert alert-info">With frameworks like <strong>Next.js</strong> and <strong>Nest.js</strong> you must either provide an environment variable or add an additional Node.js flag. See <a href="/tracing/trace_collection/compatibility/nodejs/#complex-framework-usage">Complex framework usage</a> for more information.</div>
 

@@ -37,7 +37,7 @@ Because the decision is made at the beginning of the trace and then conveyed to 
 
 You can set sampling rates for head-based sampling in two places:
 - At the **[Agent](#in-the-agent)** level (default)
-- At the **[SDK](#in-tracing-libraries-user-defined-rules)** level: any SDK mechanism overrides the Agent setup.
+- At the **[SDK](#in-sdks-user-defined-rules)** level: any SDK mechanism overrides the Agent setup.
 
 ### In the Agent
 `ingestion_reason: auto`
@@ -316,7 +316,7 @@ For traces not caught by the head-based sampling, two additional Datadog Agent s
 - **Error traces**: Sampling errors is important for providing visibility on potential system failures.
 - **Rare traces**: Sampling rare traces allows you to keep visibility on your system as a whole, by making sure that low-traffic services and resources are still monitored.
 
-**Note**: Error and rare samplers are ignored for services for which you set [library sampling rules](#in-tracing-libraries-user-defined-rules).
+**Note**: Error and rare samplers are ignored for services for which you set [library sampling rules](#in-sdks-user-defined-rules).
 
 ### Error traces
 `ingestion_reason: error`

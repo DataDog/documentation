@@ -33,10 +33,10 @@ public void ConfigureServices(IServiceCollection services)
     // Create an OpenTracing ITracer with the default setting
     OpenTracing.ITracer tracer = OpenTracingTracerFactory.CreateTracer();
 
-    // Use the SDK with ASP.NET Core dependency injection
+    // Use the tracer with ASP.NET Core dependency injection
     services.AddSingleton<ITracer>(tracer);
 
-    // Use the SDK with OpenTracing.GlobalTracer.Instance
+    // Use the tracer with OpenTracing.GlobalTracer.Instance
     GlobalTracer.Register(tracer);
 }
 ```

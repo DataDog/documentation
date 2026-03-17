@@ -249,7 +249,7 @@ Datadog.verbosityLevel = .debug
 {{% /tab %}}
 {{< /tabs >}}
 
-3. Datadog SDK implements the [Open Telemetry standard][13]. Enable the Datadog SDK, register the SDK provider, and get the SDK instance:
+3. Datadog SDK implements the [Open Telemetry standard][13]. Enable the Datadog SDK, register the tracer provider, and get the tracer instance:
 
 {{< tabs >}}
 {{% tab "Swift" %}}

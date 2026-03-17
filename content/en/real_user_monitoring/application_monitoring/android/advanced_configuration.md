@@ -271,7 +271,7 @@ Widgets are not automatically tracked with the SDK. To send UI interactions from
 You can use the following methods in `Configuration.Builder` when creating the Datadog configuration to initialize the library:
 
 `setFirstPartyHosts()` 
-: Defines hosts that have tracing enabled and have RUM resources categorized as `first-party`. **Note**: If you define custom tracing header types in the Datadog configuration and are using an SDK registered with `GlobalTracer`, make sure the same tracing header types are set for the SDK in use.
+: Defines hosts that have tracing enabled and have RUM resources categorized as `first-party`. **Note**: If you define custom tracing header types in the Datadog configuration and are using a tracer registered with `GlobalTracer`, make sure the same tracing header types are set for the SDK in use.
 
 `useSite(DatadogSite)` 
 : Switches target data to EU1, US1, US3, US5, US1_FED, AP1 and AP2 sites.

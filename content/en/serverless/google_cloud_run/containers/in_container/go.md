@@ -26,7 +26,7 @@ further_reading:
 go get github.com/DataDog/dd-trace-go/v2/ddtrace/tracer
 {{< /code-block >}}
 
-   2. Add the following to your application code to initialize the SDK:
+   2. Add the following to your application code to initialize the tracer:
       {{< code-block lang="go" disable_copy="false" >}}
 tracer.Start()
 defer tracer.Stop()

@@ -4,7 +4,7 @@ title: Error Tracking Troubleshooting
 
 If you experience unexpected behavior with Error Tracking, the troubleshooting steps below can help you resolve the issue quickly. If you continue to have trouble, reach out to [Datadog support][1].
 
-Datadog recommends regularly updating to the latest version of the Datadog SDKs, mobile SDKs, and web SDKs, as each release contains improvements and fixes.
+Datadog recommends regularly updating to the latest version of Datadog SDKs, as each release contains improvements and fixes.
 
 ## Errors are not found in Error Tracking
 

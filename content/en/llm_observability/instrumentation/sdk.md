@@ -2573,7 +2573,7 @@ def server_process_request(request):
 {{% /tab %}}
 {{% tab "Node.js" %}}
 
-The `dd-trace` library provides out-of-the-box integrations that support distributed tracing for popular [web frameworks][1]. Requiring the SDK automatically enables these integrations, but you can disable them optionally with:
+The `dd-trace` library provides out-of-the-box integrations that support distributed tracing for popular [web frameworks][1]. Requiring the tracer automatically enables these integrations, but you can disable them optionally with:
 
 {{< code-block lang="javascript">}}
 const tracer = require('dd-trace').init({

@@ -897,11 +897,11 @@ tracer.use('langchain', true);
 For more specific control over library patching and the integration that starts the span, you can set the following environment variables:
 
 `DD_TRACE_DISABLED_PLUGINS`
-: A comma-separated string of integration names that are automatically disabled when the SDK is initialized.<br>
+: A comma-separated string of integration names that are automatically disabled when the tracer is initialized.<br>
 **Example**: `DD_TRACE_DISABLED_PLUGINS=openai,http`
 
 `DD_TRACE_DISABLED_INSTRUMENTATIONS`
-: A comma-separated string of library names that are not patched when the SDK is initialized.<br>
+: A comma-separated string of library names that are not patched when the tracer is initialized.<br>
 **Example**: `DD_TRACE_DISABLED_INSTRUMENTATIONS=openai,http`
 
 ## Further Reading

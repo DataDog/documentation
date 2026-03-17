@@ -80,13 +80,13 @@ Adds the `hostname` tag with the result of `gethostname`.
 `DD_TRACE_STARTUP_LOGS`
 : **Since**: 0.1.0 <br>
 **Default**: `true` <br>
-Log the SDK configuration once the SDK is fully initialized. <br>
+Log the tracer configuration once the tracer is fully initialized. <br>
 
 `DD_TRACE_128_BIT_TRACEID_GENERATION_ENABLED`
 : **Since**: 0.1.6 <br>
 **Default**: `true` <br>
-If `true`, the SDK will generate 128-bit trace IDs. <br>
-If `false`, the SDK will generate legacy 64-bit trace IDs.
+If `true`, the tracer will generate 128-bit trace IDs. <br>
+If `false`, the tracer will generate legacy 64-bit trace IDs.
 
 `DD_REMOTE_CONFIGURATION_ENABLED`
 : **Since**: 0.2.0 <br>

@@ -37,7 +37,7 @@ Before you begin, make sure you've already [installed and configured the Agent](
 
 ## Installation
 
-Feature flagging is integrated into the Datadog Java Datadog SDK. You need the SDK JAR and the OpenFeature SDK dependencies.
+Feature flagging is integrated into the Datadog Java SDK. You need the SDK JAR and the OpenFeature SDK dependencies.
 
 {{< tabs >}}
 {{% tab "Gradle (Groovy)" %}}
@@ -154,7 +154,7 @@ java -javaagent:path/to/dd-java-agent.jar \
 {{% /tab %}}
 {{< /tabs >}}
 
-The Datadog feature flagging system starts automatically when the SDK is initialized with both Remote Configuration and the experimental flagging provider enabled. No additional initialization code is required in your application.
+The Datadog feature flagging system starts automatically when the tracer is initialized with both Remote Configuration and the experimental flagging provider enabled. No additional initialization code is required in your application.
 
 <div class="alert alert-danger">Feature flagging requires both <code>DD_REMOTE_CONFIG_ENABLED=true</code> and <code>DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true</code>. Without the experimental flag, the feature flagging system does not start and the <code>Provider</code> returns the programmatic default.</div>
 

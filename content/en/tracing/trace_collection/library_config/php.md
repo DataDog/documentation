@@ -143,7 +143,7 @@ When true, the trace ID is printed as a full 128-bit trace ID in hexadecimal for
 `DD_TRACE_HEALTH_METRICS_ENABLED`
 : **INI**: `datadog.trace_health_metrics_enabled`<br>
 **Default**: `false`<br>
-When enabled, the SDK sends stats to DogStatsD. In addition, where `sigaction` is available at build time, the SDK sends uncaught exception metrics upon segfaults.
+When enabled, the tracer sends stats to DogStatsD. In addition, where `sigaction` is available at build time, the tracer sends uncaught exception metrics upon segfaults.
 
 `DD_TRACE_AGENT_CONNECT_TIMEOUT`
 : **INI**: `datadog.trace.agent_connect_timeout`<br>

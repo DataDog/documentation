@@ -135,7 +135,7 @@ Points to a JSON file that contains the span sampling rules. `DD_SPAN_SAMPLING_R
 : **Configuration**: N/A<br>
 **Default**: N/A<br>
 **Example**: `DD_TRACE_DISABLED_PLUGINS=express,dns`<br>
-A comma-separated string of integration names automatically disabled when the SDK is initialized.
+A comma-separated string of integration names automatically disabled when the tracer is initialized.
 
 Experimental Features
 : **Configuration**: `experimental`<br>

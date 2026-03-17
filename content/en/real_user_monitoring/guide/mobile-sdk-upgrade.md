@@ -260,7 +260,7 @@ GlobalOpenTelemetry.set(
 )
 ```
 
-To access the SDK object for manual (custom) tracing, use `io.opentelemetry.api.GlobalOpenTelemetry.get()` instead of `io.opentracing.util.GlobalTracer.get()`.
+To access the tracer object for manual (custom) tracing, use `io.opentelemetry.api.GlobalOpenTelemetry.get()` instead of `io.opentracing.util.GlobalTracer.get()`.
 For example:
 ```kotlin
 val tracer: Tracer = GlobalOpenTelemetry
@@ -298,7 +298,7 @@ GlobalDatadogTracer.registerIfAbsent(
 )
 ```
 
-For manual (custom) tracing use `com.datadog.android.trace.GlobalDatadogTracer.get()` instead of `io.opentracing.util.GlobalTracer.get()` to access the SDK object.
+For manual (custom) tracing use `com.datadog.android.trace.GlobalDatadogTracer.get()` instead of `io.opentracing.util.GlobalTracer.get()` to access the tracer object.
 For example:
 ```kotlin
 val tracer = GlobalDatadogTracer.get()

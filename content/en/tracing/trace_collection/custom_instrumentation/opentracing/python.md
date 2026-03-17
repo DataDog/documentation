@@ -18,7 +18,7 @@ OpenTracing support is included in the `ddtrace` package. Use `pip` to install t
 pip install ddtrace[opentracing]
 ```
 
-The OpenTracing convention for initializing an SDK is to define an initialization method that configures and instantiates a new tracer and overwrites the global `opentracing.tracer` reference:
+The OpenTracing convention for initializing a tracer is to define an initialization method that configures and instantiates a new tracer and overwrites the global `opentracing.tracer` reference:
 
 ```python
 import time

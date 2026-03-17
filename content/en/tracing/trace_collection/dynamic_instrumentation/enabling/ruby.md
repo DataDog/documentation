@@ -89,7 +89,7 @@ If your code uses instance variables with these names, rename them to use Dynami
 Dynamic Instrumentation tracks code as it loads. For line probes to work correctly:
 
 - Files must be loaded **after** the Datadog SDK initializes
-- Code loaded before the SDK starts cannot be instrumented with line probes
+- Code loaded before the tracer starts cannot be instrumented with line probes
 - Method probes can still work for classes defined before tracking starts
 - Best practice: Ensure the SDK initializes early in your application boot process
 

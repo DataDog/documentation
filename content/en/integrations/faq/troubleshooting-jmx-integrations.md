@@ -168,7 +168,7 @@ The default Agent installation does not come with a bundled JVM and uses the one
 
 ### JVM metrics
 
-Datadog's Java Datadog SDK is capable of collecting JVM metrics without the JMX integration. See [Runtime Metrics][3], for more details.
+The Datadog Java SDK is capable of collecting JVM metrics without the JMX integration. See [Runtime Metrics][3], for more details.
 
 ### Monitoring JBoss or WildFly applications
 

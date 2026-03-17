@@ -124,7 +124,7 @@ This service is a gRPC server that Envoy communicates with to have requests and 
 
 Create a Kubernetes Deployment and Service for the Datadog External Processor. It's recommended to deploy this service in a namespace accessible by your Envoy Gateway.
 
-The Datadog External Processor Docker image is available on the [Datadog Go SDK GitHub Registry][6].
+The Datadog External Processor Docker image is available on the [Datadog Go tracer GitHub Registry][6].
 
 Here is an example manifest (`datadog-aap-extproc-service.yaml`):
 
@@ -222,10 +222,10 @@ Configure the connection from the external processor to the Datadog Agent using 
 | `DD_AGENT_HOST`                        | `localhost`   | Hostname or IP of your Datadog Agent.                                            |
 | `DD_TRACE_AGENT_PORT`                  | `8126`        | Port of the Datadog Agent for trace collection.                                  |
 
-The External Processor is built on top of the [Datadog Go Tracer][7] and inherits all of its environment variables. See [Configuring the Go SDK][8] and [App and API Protection Library Configuration][9].
+The External Processor is built on top of the [Datadog Go Tracer][7] and inherits all environment variables from the tracer. See [Configuring the Go SDK][8] and [App and API Protection Library Configuration][9].
 
 <div class="alert alert-danger">
-  <strong>Note:</strong> As the Datadog External Processor is built on top of the Datadog Go Tracer, it generally follows the same release process as the SDK, and its Docker images are tagged with the corresponding tracer version (for example, <code>v2.2.2</code>). In some cases, early release versions might be published between official tracer releases, and these images are tagged with a suffix such as <code>-docker.1</code>.
+  <strong>Note:</strong> As the Datadog External Processor is built on top of the Datadog Go Tracer, it generally follows the same release process as the tracer, and its Docker images are tagged with the corresponding tracer version (for example, <code>v2.2.2</code>). In some cases, early release versions might be published between official tracer releases, and these images are tagged with a suffix such as <code>-docker.1</code>.
 </div>
 
 ### Step 2: Configure an EnvoyExtensionPolicy

@@ -236,7 +236,7 @@ The following steps walk you through adding annotations to the code to trace som
    {{< code-block lang="python" >}}
 from ddtrace import tracer{{< /code-block >}}
 
-3. Inside the `NotesHelper` class, add an SDK wrapper called `notes_helper` to better see how the `notes_helper.long_running_process` method works:
+3. Inside the `NotesHelper` class, add a tracer wrapper called `notes_helper` to better see how the `notes_helper.long_running_process` method works:
    {{< code-block lang="python" >}}class NotesHelper:
 
     @tracer.wrap(service="notes_helper")
@@ -245,7 +245,7 @@ from ddtrace import tracer{{< /code-block >}}
         logging.info("Hello from the long running process")
         self.__private_method_1(){{< /code-block >}}
 
-    Now, the SDK automatically labels the resource with the function name it is wrapped around, in this case, `long_running_process`.
+    Now, the tracer automatically labels the resource with the function name it is wrapped around, in this case, `long_running_process`.
 
 4. Rebuild the containers by running:
    {{< code-block lang="sh" >}}

@@ -133,7 +133,7 @@ By default, all logs are processed by the default Ruby logger. When using Rails,
 
 Datadog client log messages are marked with `[ddtrace]`, so you can isolate them from other messages.
 
-You can override the default logger and replace it with a custom one by using the SDK's `log` attribute:
+You can override the default logger and replace it with a custom one by using the tracer's `log` attribute:
 
 ```ruby
 f = File.new("<FILENAME>.log", "w+")           # Log messages should go there
@@ -197,11 +197,11 @@ func main() {
 
 To enable debug mode for the Datadog Node.js Tracer, use the environment variable `DD_TRACE_DEBUG=true`.
 
-**Note:** For versions below 2.X, debug mode could be enabled programmatically inside the SDK initialization but this is no longer supported.
+**Note:** For versions below 2.X, debug mode could be enabled programmatically inside the tracer initialization but this is no longer supported.
 
 **Application Logs**
 
-In debug mode the SDK will log debug information to `console.log()` and errors to `console.error()`. You can change this behavior by passing a custom logger to the SDK. The logger should contain `debug()` and `error()` methods that can handle messages and errors, respectively.
+In debug mode the tracer logs debug information to `console.log()` and errors to `console.error()`. You can change this behavior by passing a custom logger to the tracer. The logger should contain `debug()` and `error()` methods that can handle messages and errors, respectively.
 
 For example:
 
@@ -222,11 +222,11 @@ const tracer = require('dd-trace').init({
 
 Then check the Agent logs to see if there is more info about your issue:
 
-* If the trace was sent to the Agent properly, you should see `Response from the Agent: OK` log entries. This indicates that the SDK is working properly, so the problem may be with the Agent itself. Refer to the [Agent troubleshooting guide][1] for more information.
+* If the trace was sent to the Agent properly, you should see `Response from the Agent: OK` log entries. This indicates that the tracer is working properly, so the problem may be with the Agent itself. Refer to the [Agent troubleshooting guide][1] for more information.
 
 * If an error was reported by the Agent (or the Agent could not be reached), you will see `Error from the Agent` log entries. In this case, validate your network configuration to ensure the Agent can be reached. If you are confident the network is functional and that the error is coming from the Agent, refer to the [Agent troubleshooting guide][1].
 
-If neither of these log entries is present, then no request was sent to the Agent, which means that the SDK is not instrumenting your application. In this case, [contact Datadog support][2] and provide the relevant log entries with [a flare][3].
+If neither of these log entries is present, then no request was sent to the Agent, which means that the tracer is not instrumenting your application. In this case, [contact Datadog support][2] and provide the relevant log entries with [a flare][3].
 
 For more tracer settings, check out the [API documentation][4].
 
@@ -260,7 +260,7 @@ Logs files are saved in the following directories by default. Use the `DD_TRACE_
 
 **Note:**: On Linux, you must create the logs directory before you enabled debug mode.
 
-Since version `2.19.0`, you can use the `DD_TRACE_LOGFILE_RETENTION_DAYS` setting to configure the SDK to delete log files from the current logging directory on startup. The SDK deletes log files the same age and older than the given number of days, with a default value of `32`.
+Since version `2.19.0`, you can use the `DD_TRACE_LOGFILE_RETENTION_DAYS` setting to configure the tracer to delete log files from the current logging directory on startup. The tracer deletes log files the same age and older than the given number of days, with a default value of `32`.
 
 For more details on how to configure the .NET Tracer, see the [Configuration][2] section.
 
@@ -275,7 +275,7 @@ There are two types of logs that are created in these paths:
 
 {{< programming-lang lang="php" >}}
 
-To enable debug mode for the Datadog PHP Tracer, set the environment variable `DD_TRACE_DEBUG=true`. See the PHP [configuration docs][1] for details about how and when this environment variable value should be set in order to be properly handled by the SDK.
+To enable debug mode for the Datadog PHP Tracer, set the environment variable `DD_TRACE_DEBUG=true`. See the PHP [configuration docs][1] for details about how and when this environment variable value should be set in order to be properly handled by the tracer.
 
 There are two options to route debug tracer logs to a file.
 
@@ -321,14 +321,14 @@ cmake --install .build
 ## Review debug logs
 
 
-When debug mode for your tracer is enabled, tracer-specific log messages report how the SDK was initialized and whether traces were sent to the Agent. Debug logs are stored in a separate path depending on your logging configuration. If you enable application-level tracer information, debug logs are also sent in the flare for [supported languages](#prerequisites). The following log examples show what might appear in your log file.
+When debug mode for your tracer is enabled, tracer-specific log messages report how the tracer was initialized and whether traces were sent to the Agent. Debug logs are stored in a separate path depending on your logging configuration. If you enable application-level tracer information, debug logs are also sent in the flare for [supported languages](#prerequisites). The following log examples show what might appear in your log file.
 
 If there are errors that you don't understand, or if traces are reported as flushed to Datadog but you cannot see them in the Datadog UI, [contact Datadog support][1] and provide the relevant log entries with [a flare][2].
 
 {{< programming-lang-wrapper langs="java,python,ruby,go,nodejs,.NET,php" >}}
 {{< programming-lang lang="java" >}}
 
-**Intialization log for the SDK:**
+**Initialization log for the tracer:**
 
 ```java
 [main] DEBUG datadog.trace.agent.ot.DDTracer - Using config: Config(runtimeId=<runtime ID>, serviceName=<service name>, traceEnabled=true, writerType=DDAgentWriter, agentHost=<IP HERE>, agentPort=8126, agentUnixDomainSocket=null, prioritySamplingEnabled=true, traceResolverEnabled=true, serviceMapping={}, globalTags={env=none}, spanTags={}, jmxTags={}, excludedClasses=[], headerTags={}, httpServerErrorStatuses=[512, 513, 514, 515, 516, 517, 518, 519, 520, 521, 522, 523, 524, 525, 526, 527, 528, 529, 530, 531, 532, 533, 534, 535, 536, 537, 538, 539, 540, 541, 542, 543, 544, 545, 546, 547, 548, 549, 550, 551, 552, 553, 554, 555, 556, 557, 558, 559, 560, 561, 562, 563, 564, 565, 566, 567, 568, 569, 570, 571, 572, 573, 574, 575, 576, 577, 578, 579, 580, 581, 582, 583, 584, 585, 586, 587, 588, 589, 590, 591, 592, 593, 594, 595, 596, 597, 598, 599, 500, 501, 502, 503, 504, 505, 506, 507, 508, 509, 510, 511], httpClientErrorStatuses=[400, 401, 402, 403, 404, 405, 406, 407, 408, 409, 410, 411, 412, 413, 414, 415, 416, 417, 418, 419, 420, 421, 422, 423, 424, 425, 426, 427, 428, 429, 430, 431, 432, 433, 434, 435, 436, 437, 438, 439, 440, 441, 442, 443, 444, 445, 446, 447, 448, 449, 450, 451, 452, 453, 454, 455, 456, 457, 458, 459, 460, 461, 462, 463, 464, 465, 466, 467, 468, 469, 470, 471, 472, 473, 474, 475, 476, 477, 478, 479, 480, 481, 482, 483, 484, 485, 486, 487, 488, 489, 490, 491, 492, 493, 494, 495, 496, 497, 498, 499], httpClientSplitByDomain=false, partialFlushMinSpans=1000, runtimeContextFieldInjection=true, propagationStylesToExtract=[DATADOG], propagationStylesToInject=[DATADOG], jmxFetchEnabled=true, jmxFetchMetricsConfigs=[], jmxFetchCheckPeriod=null, jmxFetchRefreshBeansPeriod=null, jmxFetchStatsdHost=null, jmxFetchStatsdPort=8125, logsInjectionEnabled=false, reportHostName=false)

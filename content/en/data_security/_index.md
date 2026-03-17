@@ -35,7 +35,7 @@ You may also wish to review the information available at [Datadog Security][1] a
 
 ## How data gets from you to Datadog
 
-Datadog allows you to send data to Datadog in multiple ways, including from the Agent, [DogStatsD][3], the public API, and integrations. In addition, Real User Monitoring SDKs and SDKs generate data based on your application and services code and send it to Datadog. 
+Datadog allows you to send data to Datadog in multiple ways, including from the Agent, [DogStatsD][3], the public API, and integrations. In addition, Real User Monitoring SDKs and Datadog SDKs generate data based on your application and services code and send it to Datadog. 
 
 Data in motion through Datadog provided tools is protected with TLS and HSTS. Data stored by Datadog is protected by encryption, access controls, and authentication. For specifics, read more at [Datadog Security][1].
 

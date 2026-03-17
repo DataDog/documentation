@@ -27,7 +27,7 @@ further_reading:
 
 This page describes how to set up and configure [Application Performance Monitoring (APM)][10] for your Kubernetes application.
 
-{{< img src="tracing/visualization/troubleshooting_pipeline_kubernetes.png" alt="The APM troubleshooting pipeline: The SDK sends traces and metrics data from the application pod to the Agent pod, which sends it to the Datadog backend to be shown in the Datadog UI.">}}
+{{< img src="tracing/visualization/troubleshooting_pipeline_kubernetes.png" alt="The APM troubleshooting pipeline: The tracer sends traces and metrics data from the application pod to the Agent pod, which sends it to the Datadog backend to be shown in the Datadog UI.">}}
 
 You can send traces over Unix Domain Socket (UDS), TCP (`IP:Port`), or Kubernetes service. Datadog recommends that you use UDS, but it is possible to use all three at the same time, if necessary.
 
