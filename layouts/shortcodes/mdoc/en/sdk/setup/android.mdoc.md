@@ -516,8 +516,8 @@ If you use Cronet instead of OkHttp, you can instrument your `CronetEngine` for 
 
 2. Instrument the `CronetEngine.Builder`:
 
-   {{< tabs >}}
-   {{% tab "Kotlin" %}}
+   {% tabs %}
+   {% tab label="Kotlin" %}
 
    ```kotlin
    val tracedHostsWithHeaderType = mapOf(
@@ -537,9 +537,9 @@ If you use Cronet instead of OkHttp, you can instrument your `CronetEngine` for 
        .build()
    ```
 
-   {{% /tab %}}
+    {% /tab %}
 
-   {{% tab "Java" %}}
+   {% tab label="Java" %}
 
    ```java
    Map<String, Set<TracingHeaderType>> tracedHostsWithHeaderType = new HashMap<>();
@@ -557,8 +557,8 @@ If you use Cronet instead of OkHttp, you can instrument your `CronetEngine` for 
        .build();
    ```
 
-   {{% /tab %}}
-   {{< /tabs >}}
+   {% /tab %}
+   {% /tabs %}
 
 **Known limitations**:
 
