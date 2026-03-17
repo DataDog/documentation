@@ -42,7 +42,7 @@ Per-index retention configured through the Datadog UI takes precedence over the 
 
 ## Searching across indexes
 
-In the [Log Explorer][3], you can select a specific CloudPrem index to scope your search, or search across all indexes in a cluster. From the index configuration page, use **View in Log Explorer** to open a filtered view for a given index.
+To query logs stored in CloudPrem, select one or more CloudPrem indexes in the [Log Explorer][3]. You can select a specific index to narrow your search, or select all indexes in a cluster to search across them. From the index configuration page, use **View in Log Explorer** to open a filtered view for a given index.
 
 ## Further reading
 
