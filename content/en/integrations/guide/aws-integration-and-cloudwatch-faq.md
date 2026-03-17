@@ -64,6 +64,49 @@ aws.apigateway.integration_latency.p50
 
 Rollups don't display similar results. For a rollup call of `rollup(sum, 60)`, the server groups all data points in minute bins and returns the sum of each bin as a datapoint. However, the granularity of AWS metrics is one minute, so there is only one datapoint per bin leading to no change.
 
+### Why don't I see metrics for a new AWS service I enabled?
+
+If you recently enabled a new AWS service integration but are not seeing metrics in Datadog, verify the following:
+
+1. **IAM permissions**: Confirm that the `DatadogAWSIntegrationRole` includes the permissions required by the service. See the individual [AWS integration pages][8] for service-specific permission requirements.
+2. **Region**: Confirm that the AWS region where your resources are deployed is enabled in the [AWS integration page][1].
+3. **CloudWatch availability**: Open the CloudWatch console in AWS and confirm the expected metrics exist. Some services do not emit CloudWatch metrics until specific conditions are met (for example, an ELB with no attached instances does not emit metrics).
+4. **Polling delay**: API polling collects metrics approximately every 10 minutes. If you use [CloudWatch Metric Streams][6], expect a 2-3 minute delay. Allow at least one polling cycle before investigating further.
+
+### What is the difference between API polling and CloudWatch Metric Streams?
+
+| | API polling (default) | CloudWatch Metric Streams |
+|---|---|---|
+| **Typical latency** | ~10 minutes | 2-3 minutes |
+| **Setup** | Included with the AWS integration | Requires separate setup with [Amazon Data Firehose][6] |
+| **AWS cost** | CloudWatch `GetMetricData` API calls | CloudWatch Metric Streams and Firehose delivery charges |
+| **Coverage** | All CloudWatch namespaces | Most CloudWatch namespaces (some exclusions apply) |
+| **Custom namespaces** | Supported with **Collect Custom Metrics** enabled | Supported by including the namespace in the stream configuration |
+
+For more detail, see [Cloud Metric Delay][4] and the [CloudWatch Metric Streams guide][6].
+
+### Why do my metric values look doubled after enabling Metric Streams?
+
+When transitioning from API polling to CloudWatch Metric Streams, there is an overlap period where both collection methods send data for the same metrics. This can cause metric values to appear doubled in Datadog.
+
+To avoid this:
+1. After enabling Metric Streams, disable the corresponding AWS service namespaces from API polling in the [Metric Collection tab][1].
+2. Allow time for the overlap to clear. The transition period can last several hours, not minutes.
+
+See the [CloudWatch Metric Streams guide][6] for migration instructions.
+
+### Which AWS services require additional setup beyond the core integration?
+
+Some AWS services do not emit metrics to CloudWatch by default and require extra configuration:
+
+| Service | Additional setup required |
+|---|---|
+| Amazon RDS (OS-level metrics) | Enable [Enhanced Monitoring][9] in the RDS console |
+| Amazon S3 (Storage Lens metrics) | Configure [Storage Lens][10] in the S3 console |
+| AWS billing metrics | Enable [Cost Explorer][11] in the AWS Billing console |
+| Custom CloudWatch namespaces | Enable **Collect Custom Metrics** in the [Metric Collection tab][1] |
+| EC2 detailed monitoring | Enable [detailed monitoring][12] per-instance in the EC2 console |
+
 [1]: https://app.datadoghq.com/integrations/amazon-web-services
 [2]: https://docs.datadoghq.com/api/latest/aws-integration/#set-an-aws-tag-filter
 [3]: /integrations/amazon_billing/
@@ -71,3 +114,8 @@ Rollups don't display similar results. For a rollup call of `rollup(sum, 60)`, t
 [5]: /help/
 [6]: https://docs.datadoghq.com/integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/
 [7]: /metrics/introduction/#space-aggregation
+[8]: /integrations/#cat-aws
+[9]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Monitoring.OS.Enabling.html
+[10]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens.html
+[11]: https://docs.aws.amazon.com/cost-management/latest/userguide/ce-enable.html
+[12]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-cloudwatch-new.html
