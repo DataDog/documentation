@@ -7,7 +7,7 @@ further_reading:
 - link: tracing/services/inferred_services
   tag: Documentación
   text: Servicios inferidos
-site_support_id: reglas_reasignación_entidades_inferidas
+site_support_id: inferred_entity_remapping_rules
 title: Reglas de reasignación para entidades inferidas
 ---
 
