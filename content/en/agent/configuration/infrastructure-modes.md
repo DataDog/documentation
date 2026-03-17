@@ -121,7 +121,7 @@ To verify the infrastructure mode set on your hosts:
 1. Expand the mode group to see your hosts
 1. Optionally, use the search bar to filter to a specific hostname (for example, `hostname:worker1`)
 
-{{< img src="agent/configuration/fleet_automation_group_by_infra_mode-1.png" alt="Fleet Automation View Agents page showing hosts grouped by Infrastructure Mode, with separate groups for Full, End User Device, and Basic modes." style="width:90%" >}}
+{{< img src="agent/configuration/fleet_automation_group_by_infra_mode-1.png" alt="Fleet Automation View Agents page with Infrastructure Mode selected in the Group by dropdown, showing the Full group expanded with 311 hosts and columns for hostname, Agent version, integrations, services, and remote configuration status." style="width:90%" >}}
 
 ## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}
