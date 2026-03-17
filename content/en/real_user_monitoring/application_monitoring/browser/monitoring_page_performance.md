@@ -109,6 +109,20 @@ To account for modern web applications, loading time watches for network request
 
 - **SPA Route Change**: Loading Time is equal to the difference between the URL change and the first time the page has no activity. Read [How page activity is calculated](#how-page-activity-is-calculated) for details.
 
+### Manually set the loading time
+
+If the automatic loading time calculation does not accurately reflect when your view has finished loading, you can manually set it using `setViewLoadingTime`. Call this method when your view is fully loaded and displayed to the user. The loading time is computed as the elapsed time since the current view started.
+
+```javascript
+window.DD_RUM.setViewLoadingTime()
+```
+
+Each call replaces any previously set value (last-call-wins). Once called, the automatic loading time detection is stopped and the manual value is used instead.
+
+After the loading time is sent, it is accessible as `@view.loading_time` and is visible in the RUM UI.
+
+**Note**: This API is experimental and might change in the future.
+
 ### How page activity is calculated
 
 The RUM Browser SDK tracks the page activity to estimate the time until the interface is stable again. The page is considered to have activity when:
