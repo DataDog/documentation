@@ -37,9 +37,9 @@ Datadog.setVerbosity(Log.INFO)
 
 The [RUM Debug Widget][5] provides a floating overlay that displays key metrics such as memory usage, CPU load, and RUM events in real time. It is intended for debugging and development purposes only.
 
-{{< img src="real_user_monitoring/android/android-rum-debug-widget.png" alt="RUM Debug Widget floating overlay" style="width:50%;">}}
-
 See the [module README][6] for setup instructions.
+
+{{< img src="real_user_monitoring/android/android-rum-debug-widget.png" alt="RUM Debug Widget floating overlay" style="width:50%;">}}
 
 ## Migrating to 3.0.0
 
