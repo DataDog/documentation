@@ -102,7 +102,7 @@ To use the rule, do one of the following:
  - Create a `code-security.datadog.yaml` file at the root of your repository with the ruleset.
  - Add the rule in [your settings][3], either for the org-wide or repo-level configuration.
 
-A valid configuration for using this ruleset (and no other ruleset) look like this:
+A valid configuration for using this ruleset (and no other ruleset) looks like the following:
 
 ```yaml
 schema-version: v1.0

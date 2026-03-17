@@ -69,7 +69,7 @@ You can set the following parameters for Static Code Analysis.
 By default, [Datadog Static Analyzer][8] detects the languages of your codebase and uses the default rulesets to analyze
 your codebase.
 
-To specify and customize the rulesets, add a `code-security.datadog.yaml` file to your repository's root directory to define which rulesets to use.
+Add a `code-security.datadog.yaml` file to your repository's root directory to define which rulesets to use. For example:
 
 ```yaml
 schema-version: v1.0

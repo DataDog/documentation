@@ -76,7 +76,7 @@ is too large, consider the following options:
  - Update your configuration to scan only specific directories.
  - Configure the analyzer to run only the rulesets necessary for your codebase.
 
-Updating the configuration is done either in the Datadog application or using the `code-security.datadog.yaml` file.
+Update the configuration either through the Datadog application or by modifying the `code-security.datadog.yaml` file.
 
 ### `GLIBC_X.YY not found` error message
 

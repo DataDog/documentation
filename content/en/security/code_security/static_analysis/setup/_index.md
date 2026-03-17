@@ -102,35 +102,35 @@ There are three levels of configuration:
 
 * Org-level configuration (Datadog)
 * Repository-level configuration (Datadog)
-* Repository-level configuration (Repo File)
+* Repository-level configuration (repo file)
 
-All three locations use the same YAML format for configuration. These configurations are merged **in order** (see [how configurations interact](#how-org-level-repo-level-and-file-level-settings-interact) below).
+All three configurations use the same YAML format, and they are merged **in order** (see [Configuration precedence and merging](#configuration-precedence-and-merging)).
 
 #### Default rulesets
 
-By default, Datadog's default rulesets are enabled for your repository's programming language(s) (`use-default-rulesets` is `true`). You can customize which rulesets are active:
+By default, Datadog enables the default rulesets for your repository’s programming language(s) (`use-default-rulesets: true`). To modify the enabled rulesets:
 
-- To **add** rulesets beyond the defaults, list them under `use-rulesets`.
-- To **disable** specific rulesets, list them under `ignore-rulesets`.
-- To **disable all defaults** and choose your own, set `use-default-rulesets: false` and list the desired rulesets under `use-rulesets`.
+- **Add rulesets**: List them under `use-rulesets`
+- **Disable specific rulesets**: List them under `ignore-rulesets`
+- **Disable all default rulesets**: Set `use-default-rulesets: false`, then listing the desired rulesets under `use-rulesets`
 
 For the full list of default rulesets, see [Static Code Analysis (SAST) Rules][6].
 
-#### How org-level, repo-level, and file-level settings interact
+#### Configuration precedence and merging
 
-All configuration levels use the same YAML format. These configurations are merged in order, with the following precedence (highest to lowest):
+Configurations are merged in the following order, where each level overrides the one before it:
 
+1. **Org-level (Datadog)**
+1. **Repo-level (Datadog)**
 1. **Repo-level file** (`code-security.datadog.yaml`)
-2. **Repo-level (Datadog)**
-3. **Org-level (Datadog)**
 
-The merge follows these rules:
+The following merge rules apply:
 
-- **Lists** (`use-rulesets`, `ignore-rulesets`, `ignore-paths`, `only-paths`): concatenated with duplicates removed.
-- **Scalar values** (`use-default-rulesets`, `use-gitignore`, `ignore-generated-files`, `max-file-size-kb`, `category`, and per-path entries for `severity` and `arguments`): the highest-precedence configuration's value wins.
-- **Maps** (`ruleset-configs`, `rule-configs`, `arguments`): recursively merged.
+- **Lists** (`use-rulesets`, `ignore-rulesets`, `ignore-paths`, `only-paths`): Concatenated, with duplicates removed
+- **Scalar values** (`use-default-rulesets`, `use-gitignore`, `ignore-generated-files`, `max-file-size-kb`, `category`, and per-path entries for `severity` and `arguments`): The value from the highest-precedence configuration is used
+- **Maps** (`ruleset-configs`, `rule-configs`, `arguments`): Recursively merged
 
-For example, consider the following two configurations:
+The following example shows how configurations are merged:
 
 **Org-level:**
 
@@ -170,7 +170,7 @@ sast:
             - "src"
 ```
 
-The merged result would be:
+Merged result:
 
 ```yaml
 schema-version: v1.0
@@ -194,17 +194,17 @@ sast:
             - "src"
 ```
 
-As you can see, the `maxCount: 10` argument from the org-level configuration was **overlayed** by the `maxCount: 22` value from the repo-level configuration due to merge order. This happened because there was a conflict and the repo-level configuration's value took precedence due to merge order. All other fields from the org-level configuration are retained because the repo-level configuration does not override them.
+The `maxCount: 22` value from the repo-level configuration overrides the `maxCount: 10` value from the org-level configuration because repo-level settings have higher precedence. All other fields from the org-level configuration are retained because they are not overridden.
 
-#### Org level configuration
+#### Org-level configuration
 
-{{< img src="/security/code_security/org-level-configuration.png" alt="Org level configuration UI" style="width:100%;" >}}
+{{< img src="/security/code_security/org-level-configuration.png" alt="Org-level configuration UI" style="width:100%;" >}}
 
 Configurations at the org level apply to all repositories that are being analyzed and is a good place to define rules that must run or global paths/files to be ignored.
 
 #### Repository level configuration
 
-{{< img src="/security/code_security/repo-level-configuration.png" alt="Repo level configuration UI" style="width:100%;" >}}
+{{< img src="/security/code_security/repo-level-configuration.png" alt="Repo-level configuration UI" style="width:100%;" >}}
 
 Configurations at the repository level apply only to the repository selected. These configurations are merged with the org configuration, with the repository configuration taking precedence. Repository level configurations are a good place to define overrides for repository specific details, or add rules that are specific to only that repo for example.
 
@@ -292,7 +292,7 @@ Each entry in the `ruleset-configs` map configures a specific ruleset. A ruleset
 
 | **Property** | **Type** | **Description** | **Default** |
 | --- | --- | --- | --- |
-| `only-paths` | Array | File paths or glob patterns. Only files matching these patterns will be processed for this ruleset. | None |
+| `only-paths` | Array | File paths or glob patterns. Only files matching these patterns are processed for this ruleset. | None |
 | `ignore-paths` | Array | File paths or glob patterns to exclude from analysis for this ruleset. | None |
 | `rule-configs` | Object | A map from rule name to its configuration. | None |
 
@@ -304,11 +304,11 @@ Each entry in a ruleset's `rule-configs` map configures a specific rule:
 
 | **Property** | **Type** | **Description** | **Default** |
 | --- | --- | --- | --- |
-| `only-paths` | Array | File paths or glob patterns. The rule is only applied to files matching these patterns. | None |
-| `ignore-paths` | Array | File paths or glob patterns to exclude from the rule. | None |
-| `arguments` | Object | Parameters and values for the rule. Values can be scalars or specified on a per-path basis. | None |
-| `severity` | String or Object | Override the rule's severity. Valid values: `ERROR`, `WARNING`, `NOTICE`, `NONE`. Can be a single value or a per-path map. | None |
-| `category` | String | Override the rule's category. Valid values: `BEST_PRACTICES`, `CODE_STYLE`, `ERROR_PRONE`, `PERFORMANCE`, `SECURITY`. | None |
+| `only-paths` | Array | File paths or glob patterns. The rule is applied only to files matching these patterns. | None |
+| `ignore-paths` | Array | File paths or glob patterns to exclude. The rule is not applied to files matching these patterns. | None |
+| `arguments` | Object | Parameters and values for the rule. Values can be scalars or defined per path. | None |
+| `severity` | String or Object | The rule severity. Valid values: `ERROR`, `WARNING`, `NOTICE`, `NONE`. Can be a single value or defined per path. | None |
+| `category` | String | The rule category. Valid values: `BEST_PRACTICES`, `CODE_STYLE`, `ERROR_PRONE`, `PERFORMANCE`, `SECURITY`. | None |
 
 ---
 
@@ -352,10 +352,10 @@ The `global-config` object controls repository-wide settings:
 | **Property** | **Type** | **Description** | **Default** |
 | --- | --- | --- | --- |
 | `only-paths` | Array | File paths or glob patterns. Only matching files are analyzed. | None |
-| `ignore-paths` | Array | File paths or glob patterns to exclude from analysis. | None |
-| `use-gitignore` | Boolean | Append entries from the `.gitignore` file to the `ignore-paths` list. | `true` |
-| `ignore-generated-files` | Boolean | Append glob patterns for commonly-generated files to the `ignore-paths` list. | `true` |
-| `max-file-size-kb` | Number | Ignore files larger than this size (in kB). | `200` |
+| `ignore-paths` | Array | File paths or glob patterns to exclude. Matching files are not analyzed. | None |
+| `use-gitignore` | Boolean | Whether to include entries from the `.gitignore` file in `ignore-paths`. | `true` |
+| `ignore-generated-files` | Boolean | Whether to include common generated file patterns in `ignore-paths`. | `true` |
+| `max-file-size-kb` | Number | Maximum file size (in kB) to analyze. Larger files are ignored. | `200` |
 
 ---
 
@@ -419,13 +419,15 @@ sast:
 ```
 
 ## Legacy configuration
-Datadog Static Code Analysis (SAST) configuration used to use a different file (``static-analysis.datadog.yml``) and a different schema. This schema has been deprecated and will not receive new updates, though it remains [documented][25] in the `datadog-static-analyzer` repository. If present, a ``code-security.datadog.yaml`` will always take precedence over ``static-analysis.datadog.yml``.
+
+Datadog Static Code Analysis (SAST) previously used a different configuration file (`static-analysis.datadog.yml`) and schema. This schema is deprecated and does not receive new updates, but it remains [documented][25] in the `datadog-static-analyzer` repository.
+If both files are present, `code-security.datadog.yaml` takes precedence over `static-analysis.datadog.yml`.
 
 
 ### Ignoring violations
 
 #### Ignore for a repository
-Add a rule configuration in your `code-security.datadog.yaml` file. The example below ignores the rule `javascript-express/reduce-server-fingerprinting` for all directories.
+Add a rule configuration in your `code-security.datadog.yaml` file. The following example ignores the rule `javascript-express/reduce-server-fingerprinting` for all directories.
 
 ```yaml
 schema-version: v1.0
@@ -439,7 +441,7 @@ sast:
 ```
 
 #### Ignore for a file or directory
-Add a rule configuration in your `code-security.datadog.yaml` file. The example below ignores the rule `javascript-express/reduce-server-fingerprinting` for a specific file. For more information on how to ignore by path, see the [Customize your configuration section](#customize-your-configuration).
+Add a rule configuration in your `code-security.datadog.yaml` file. The following example ignores the rule `javascript-express/reduce-server-fingerprinting` for a specific file. For more information on how to ignore by path, see [Customize your configuration](#customize-your-configuration).
 
 ```yaml
 schema-version: v1.0
