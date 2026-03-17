@@ -264,8 +264,6 @@ Submit your RATE type metrics from one of the following sources:
 | [Agent check][1]  | `self.rate(...)`                    | RATE            | GAUGE               |
 | [API][2]          | `api.Metric.send(type="rate", ...)` | RATE            | RATE                |
 
-**Note**: When submitting a RATE metric type through DogStatsD, the metric appears as a GAUGE in-app to ensure relevant comparison across different Agents.
-
 
 [1]: /metrics/custom_metrics/agent_metrics_submission/?tab=rate
 [2]: /api/v1/metrics/#submit-metrics
