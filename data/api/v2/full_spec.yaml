@@ -3990,19 +3990,29 @@ components:
       - server.request.uri.raw
       - server.request.path_params
       - server.request.query
+      - server.request.headers
       - server.request.headers.no_cookies
+      - server.request.custom-auth
       - server.request.cookies
       - server.request.trailers
       - server.request.body
+      - server.request.body.filenames
       - server.response.status
       - server.response.headers.no_cookies
       - server.response.trailers
+      - server.response.body
       - grpc.server.request.metadata
       - grpc.server.request.message
       - grpc.server.method
       - graphql.server.all_resolvers
       - usr.id
       - http.client_ip
+      - server.llm.event
+      - server.llm.guard.verdict
+      - _dd.appsec.fp.http.header
+      - _dd.appsec.fp.http.network
+      - _dd.appsec.fp.session
+      - _dd.appsec.fp.http.endpoint
       example: server.db.statement
       type: string
       x-enum-varnames:
@@ -4014,19 +4024,29 @@ components:
       - SERVER_REQUEST_URI_RAW
       - SERVER_REQUEST_PATH_PARAMS
       - SERVER_REQUEST_QUERY
+      - SERVER_REQUEST_HEADERS
       - SERVER_REQUEST_HEADERS_NO_COOKIES
+      - SERVER_REQUEST_CUSTOM_AUTH
       - SERVER_REQUEST_COOKIES
       - SERVER_REQUEST_TRAILERS
       - SERVER_REQUEST_BODY
+      - SERVER_REQUEST_BODY_FILENAMES
       - SERVER_RESPONSE_STATUS
       - SERVER_RESPONSE_HEADERS_NO_COOKIES
       - SERVER_RESPONSE_TRAILERS
+      - SERVER_RESPONSE_BODY
       - GRPC_SERVER_REQUEST_METADATA
       - GRPC_SERVER_REQUEST_MESSAGE
       - GRPC_SERVER_METHOD
       - GRAPHQL_SERVER_ALL_RESOLVERS
       - USR_ID
       - HTTP_CLIENT_IP
+      - SERVER_LLM_EVENT
+      - SERVER_LLM_GUARD_VERDICT
+      - DD_APPSEC_FP_HTTP_HEADER
+      - DD_APPSEC_FP_HTTP_NETWORK
+      - DD_APPSEC_FP_SESSION
+      - DD_APPSEC_FP_HTTP_ENDPOINT
     ApplicationSecurityWafCustomRuleConditionOperator:
       description: Operator to use for the WAF Condition.
       enum:
