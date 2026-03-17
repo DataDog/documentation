@@ -118,6 +118,19 @@ To set up multiple accounts at once, use the [API][3], [AWS CLI][4], or [Terrafo
 
 **Note**: Datadog's CloudFormation template only supports creation and deletion of its defined resources. See [Update your stack template][59] for guidance on applying updates to your stack.
 
+### What to expect after setup
+
+After the integration is successfully configured, data begins appearing in Datadog on the following timeline:
+
+- **Metrics**: Appear within approximately 10 minutes with API polling, or 2-3 minutes with [CloudWatch Metric Streams][60]. Not all services report at the same cadence, so a partially populated dashboard during the first hour is normal.
+- **Tags**: AWS resource tags may take additional time to propagate. Changes to tags in AWS can take anywhere from 15 minutes to several hours to reflect in Datadog.
+- **Resources**: Discovered during the next resource crawl cycle after setup.
+- **Logs**: Require separate configuration. See [Send logs](#send-logs) for setup instructions.
+
+<div class="alert alert-info">
+Datadog does not backfill historical metric data from before the integration was enabled. Metrics begin flowing from the time the integration is successfully configured.
+</div>
+
 ## Configuration
 
 ### Enable integrations for individual AWS services
@@ -280,3 +293,4 @@ If you encounter the error `Datadog is not authorized to perform sts:AssumeRole`
 [57]: /integrations/guide/aws-integration-troubleshooting/
 [58]: /integrations/ecs_fargate/?tab=webui#installation-for-aws-batch
 [59]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-get-template.html
+[60]: /integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/
