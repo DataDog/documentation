@@ -53,12 +53,12 @@ traits:
   type: text
   internal_notes: For example, HTTP, gRPC, or SOCKS.
 
-- id: pipeline_setup_method
+- id: interface
   label: Pipeline setup method
   type: text
   internal_notes: For example UI, API, or Terraform.
 
-- id: secrets_retrieval_method
-  label: Secrets retrieval method
+- id: secrets_source
+  label: Secrets source
   type: text
   internal_notes: For example, Secrets Management or environment variables.
