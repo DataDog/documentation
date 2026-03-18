@@ -68,7 +68,6 @@ The test automatically pauses during the downtime's scheduled time slots.
 
 **Note**: You cannot create a new downtime from the test creation form. To create one, navigate to [Settings > Downtimes][2] first, then return to the test creation form.
 
-<!-- TODO: Replace with final screenshot from production (current image is a placeholder from staging) -->
 {{< img src="synthetics/settings/downtimes_test_creation.png" alt="The Downtimes section in the test creation form showing a Select downtimes dropdown" style="width:90%;" >}}
 
 ### From the Tests or Test Suites page
@@ -91,7 +90,7 @@ To apply an existing downtime to multiple tests or test suites at once:
 
 ## Known considerations
 
-- The existing [Downtime feature for monitors][1] mutes alerts only and does not pause test execution. Scheduled downtime for Synthetics pauses test execution and does not affect monitor alerting behavior.
+- The existing [Downtime feature for monitors][1] mutes alerts but allows tests to continue running. Scheduled downtime for Synthetics stops test execution entirely, which means no new evaluations occur and monitors cannot trigger or recover during the downtime window.
 - After a downtime ends, tests resume automatically.
 
 ## Further Reading
