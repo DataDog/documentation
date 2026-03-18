@@ -67,7 +67,7 @@ Enter a prefix that you want to apply to all key objects.
 
 A batch of events is flushed when one of these parameters is met. See [event batching][5] for more information.
 
-| Max Events     | Max Size (MB)   | Timeout (seconds)   |
+| Maximum Events | Maximum Size (MB)   | Timeout (seconds)   |
 |----------------| ----------------| --------------------|
 | None           | 100             | 900                 |
 

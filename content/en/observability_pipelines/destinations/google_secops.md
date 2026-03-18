@@ -63,7 +63,7 @@ To set up the Worker's Google SecOps destination:
 
 A batch of events is flushed when one of these parameters is met. See [event batching][2] for more information.
 
-| Max Events     | Max Size (MB)   | Timeout (seconds)   |
+| Maximum Events | Maximum Size (MB)   | Timeout (seconds)   |
 |----------------|-----------------|---------------------|
 | None           | 1               | 15                  |
 

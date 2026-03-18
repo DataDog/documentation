@@ -141,7 +141,7 @@ See the [Observability Pipelines Metrics][8] for a full list of available health
 
 A batch of events is flushed when one of these parameters is met. See [event batching][9] for more information.
 
-| Max Events     | Max Size (MB)   | Timeout (seconds)   |
+| Maximum Events | Maximum Size (MB)   | Timeout (seconds)   |
 |----------------|-----------------|---------------------|
 | 10,000         | 1               | 1                   |
 

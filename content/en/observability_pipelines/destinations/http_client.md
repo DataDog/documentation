@@ -87,7 +87,7 @@ Toggle the switch to enable TLS. If you enable TLS, the following certificate an
 
 A batch of events is flushed when one of these conditions occurs. See [event batching][2] for more information.
 
-| Max Events     | Max Size (MB)   | Timeout (seconds)   |
+| Maximum Events | Maximum Size (MB)   | Timeout (seconds)   |
 |----------------|-----------------|---------------------|
 | 1,000          | 1               | 1                   |
 
