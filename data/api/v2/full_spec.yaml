@@ -48396,11 +48396,13 @@ components:
       enum:
       - logs
       - metrics
+      - audit
       example: logs
       type: string
       x-enum-varnames:
       - LOGS
       - METRICS
+      - AUDIT
     OrgConnectionUpdate:
       description: Org connection update data.
       properties:
