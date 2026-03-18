@@ -29,6 +29,57 @@ Scans can run in your CI/CD pipelines or directly in Datadog with hosted scannin
 Datadog Secret Scanning is powered by [Sensitive Data Scanner (SDS)][3] and includes all of the rules in the
 [Secrets and credentials category of SDS][4].
 
+## How it works
+
+Secret Scanning integrates directly with your repositories to continuously detect leaked secrets before they become a threat. Built on Datadog's static analyzer, it scans every commit across all branches of each configured repository. Findings are surfaced with repository, branch, and file path context so your team can identify, prioritize, and remediate exposed secrets at the source.
+
+## Key capabilities
+
+### Review exposed secrets in pull requests
+
+When a pull request introduces a leaked secret, Datadog automatically adds inline comments to flag the exposure. You can also open a new pull request from Datadog to remediate the finding directly. For more information, see [Pull Request Comments][7]. 
+
+### Automatically block leaks with PR Gates
+
+Use [PR Gates][11] to prevent leaked secrets from being merged into your main branch. Datadog scans each pull request for exposed secrets and reports a pass or fail status directly to GitHub, Azure DevOps, or GitLab (in preview).
+
+By default, checks are informational, but you can make them blocking to prevent merging when secrets are detected. For setup instructions, see [Set up PR Gate Rules][12].
+
+### Inline exclusions
+
+You can add inline exclusions to prevent certain findings from appearing in scan results. Comment `dd-no-secrets` to ignore secrets detected on the next line.
+
+### View and filter findings
+
+After setting up Secret Scanning, each commit to a scanned repository triggers a scan. Findings are summarized on the [Code Security Vulnerabilities][15] page and grouped per repository on the [Code Security Repositories][14] page.
+
+Use filters to narrow results by facets such as:
+
+- Severity
+- Status (open, muted, fixed)
+- Validation Status
+- Team
+- Repository visibility
+
+### Create Jira tickets from findings
+
+You can create a bidirectional Jira ticket directly from any finding to track and remediate issues in your existing workflows. Ticket status remains synced between Datadog and Jira. For more information, see [Bidirectional ticket syncing with Jira][16].
+
+### Declare an incident from a leaked secret
+[Declare an incident][13] from a finding by clicking **Declare incident** in the Secret Scanning side panel. The incident is pre-filled with all detection metadata.
+
+### Mute findings
+
+To suppress a finding, click **Mute** in the finding details panel. This opens a workflow where you can [create a Muting Rule][10] for context-aware filtering by tag values (for example, by `repository`). Muting a finding hides it and excludes it from reports.
+
+To restore a muted finding, click **Unmute** in the details panel. You can also use the **Status** filter on the [Code Security Vulnerabilities][15] page to review muted findings.
+
+## Next steps
+
+1. [Set up Secret Scanning][1] in your environment.
+2. Configure [scanning exclusions][2] to reduce false positives or ignore expected results.
+3. Review and triage findings on the [Code Security Vulnerabilities][3] page.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -40,3 +91,13 @@ Datadog Secret Scanning is powered by [Sensitive Data Scanner (SDS)][3] and incl
 [4]: /security/sensitive_data_scanner/scanning_rules/library_rules/?category=Secrets+and+credentials#overview
 [5]: /security/code_security/secret_scanning/github_actions
 [6]: /security/code_security/secret_scanning/generic_ci_providers
+[7]: /security/code_security/dev_tool_int/pull_request_comments/
+[8]: /security/automation_pipelines/mute
+[9]: https://app.datadoghq.com/integrations/github/
+[10]: /security/automation_pipelines/
+[11]: /pr_gates/
+[12]: /pr_gates/setup
+[13]: /incident_response/incident_management/investigate/declare/#from-a-leaked-secret
+[14]: https://app.datadoghq.com/ci/code-analysis?
+[15]: https://app.datadoghq.com/security/code-security/secrets
+[16]: /security/ticketing_integrations#bidirectional-ticket-syncing-with-jira
