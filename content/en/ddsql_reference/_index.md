@@ -873,7 +873,7 @@ dd.logs(
     to_timestamp ? => timestamp
 ) AS (column_name type [, ...])</pre>
       </td>
-      <td>Returns log data as a table. The columns parameter specifies which log fields to extract. Nested fields are accessed using dot notation, and non-core fields need to be prepended by <code>@</code>. The AS clause defines the schema of the returned table. Optional: filtering by index or time range. When time is not specified, DDSQL defaults to the past 1 hour of data. Optional: specifying the storage to use (for example, <code>hot</code>, <code>flex_tier</code>). When not specified, the default is hot storage.</td>
+      <td>Returns log data as a table. The columns parameter specifies which log fields to extract. Nested fields are accessed using dot notation, and non-core fields need to be prepended by <code>@</code>. The AS clause defines the schema of the returned table. Optional: filtering by index or time range. When time is not specified, DDSQL defaults to the global time setting, which in DDSQL Editor is set to the past 1 hour. Optional: specifying the storage to use (for example, <code>hot</code>, <code>flex_tier</code>). When not specified, the default is hot storage.</td>
       <td>
         {{< code-block lang="sql" >}}
 SELECT timestamp, host, service, message, asset_id
@@ -957,7 +957,7 @@ SELECT *
 FROM dd.logs(
     columns => ARRAY['timestamp','host','service','message'],
     from_timestamp => now() - INTERVAL '7 days',
-    to_timestamp =>  now()
+    to_timestamp => now()
 ) AS (
     timestamp TIMESTAMP,
     host      VARCHAR,
