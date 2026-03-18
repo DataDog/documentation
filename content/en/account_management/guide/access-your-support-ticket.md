@@ -89,21 +89,40 @@ further_reading:
 
 {{< site-region region="gov" >}}
 
-<h2>Create a support ticket</h2>
+
+<h2>Register on the portal</h2>
+
+<p>If you are a first-time user, follow these steps to register an account:</p>
+
 <ol>
-    <li>Navigate to <code>https://govsupport.ddog-gov.com</code></li>
-    <li>Click <strong>Sign Up</strong> to register (first-time users)</li>
-    <li>Complete registration form using email associated with existing GovCloud Datadog account</li>
-    <li>Verify account via email from <code>help@ddog-gov.com</code></li>
-    <li>Log in using username format: <code>[name]@[domain].ddgov.support</code></li>
-    <li>Click <strong>Create a New Case</strong> and complete the form</li>
+    <li>Navigate to <a href="https://govsupport.ddog-gov.com">the Datadog GovCloud support portal</a>.</li>
+    <li>Click <strong>Sign Up</strong>.</li>
+    <li>Complete the registration form using an email address associated with your existing GovCloud Datadog account.</li>
+    <li>Verify your support account via the email from <code>help@ddog-gov.com</code>.</li>
+</ol>
+
+<h2>Create a support ticket</h2>
+
+<p>To create a support ticket:</p>
+
+<ol>
+    <li>Navigate to <a href="https://govsupport.ddog-gov.com">the Datadog GovCloud support portal</a>.</li>
+    <li>Log in with the username format <code>[name]@[domain].ddgov.support</code>.</li>
+    <li>Click <strong>Create a New Case</strong>.</li>
+    <li>Complete the form.</li>
+    <li>Click <strong>Submit & Upload Files</strong>.</li>
+    <li>Optionally, upload supporting files.</li>
+    <li>Click <strong>Submit</strong>.</li>
 </ol>
 
 <h2>Access existing tickets</h2>
+
+<p>If you have opened at least one Datadog support ticket, follow this process to access your tickets:</p>
+
 <ol>
-    <li>Log in at <code>https://govsupport.ddog-gov.com</code></li>
-    <li>Change filter from <strong>Recently Viewed</strong> to <strong>Cases</strong> to view all tickets</li>
-    <li>Click Case Number or Subject to view details</li>
+    <li>Log in at <a href="https://govsupport.ddog-gov.com">the Datadog GovCloud support portal</a>.</li>
+    <li>Change the filter from <strong>Recently Viewed</strong> to <strong>Cases</strong> to view all tickets.</li>
+    <li>Click <strong>Case Number</strong> or <strong>Subject</strong> to view details.</li>
 </ol>
 
 <h2>Notes</h2>
