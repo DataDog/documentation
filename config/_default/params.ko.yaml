@@ -1,6 +1,6 @@
 announcement_banner:
   desktop_message: "<span>6월 9일~10일에 진행되는 DASH에 참여하세요. 3월 31일까지 등록하면 $700를 절약할 수 있습니다.</span>"
-  external_link: "https://dash.datadoghq.com/?utm_source=events&amp;utm_medium=internal&amp;utm_campaign=summit-202606dash&amp;utm_term=HPbanner"
+  external_link: "https://dash.datadoghq.com/?utm_source=events&utm_medium=internal&utm_campaign=summit-202606dash&utm_term=HPbanner"
   mobile_message: "<span>6월 9일~10일에 진행되는 DASH에 참여하세요. 3월 31일까지 등록하면 $700를 절약할 수 있습니다.</span>"
   background_color: "#000000"
   custom_classes: 'dash-announcement-banner'
