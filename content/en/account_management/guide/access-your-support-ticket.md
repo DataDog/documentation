@@ -113,7 +113,7 @@ further_reading:
     <li>Click <strong>Create a New Case</strong>.</li>
     <li>Complete the form.</li>
     <li>Click <strong>Submit & Upload Files</strong>.</li>
-    <li>Optionally, upload supporting files.</li>
+    <li>Optionally, upload supporting files. Accepted file types include <code>.txt</code>, <code>.csv</code>, <code>.xls</code>, <code>.xlsx</code>, <code>.doc</code>, <code>.otf</code>, <code>.yaml</code>, <code>.log</code>, <code>.conf</code>, <code>.tf</code>, <code>.zip</code>, and <code>.pcap</code>.</li>
     <li>Click <strong>Submit</strong>.</li>
 </ol>
 
@@ -132,7 +132,7 @@ further_reading:
     <li>Username format is email appended with <code>.ddgov.support</code></li>
     <li>Historical Zendesk cases are not migrated; legacy Zendesk is read-only</li>
     <li>Verification emails come from <code>help@ddog-gov.com</code></li>
-    <li>Accepted file types: .txt, .csv, .xls, .xlsx, .doc, .otf, .yaml, .log, .conf, .tf, .zip, .pcap</li>
+    <li>Accepted file types: <code>.txt</code>, <code>.csv</code>, <code>.xls</code>, <code>.xlsx</code>, <code>.doc</code>, <code>.otf</code>, <code>.yaml</code>, <code>.log</code>, <code>.conf</code>, <code>.tf</code>, <code>.zip</code>, <code>.pcap</code></li>
 </ul>
 
 <h2>Troubleshooting</h2>
