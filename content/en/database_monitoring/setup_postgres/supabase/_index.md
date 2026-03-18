@@ -14,7 +14,7 @@ Select your setup method to get started:
       <a class="card h-100" href="/database_monitoring/setup_postgres/supabase/cloud">
         <div class="card-body text-center py-3 px-2">
           <img src="/images/integrations_logos/supabase.png" class="img-fluid" alt="Supabase Cloud" width="175" />
-          <br/><strong>Supabase Cloud</strong> <span class="badge badge-primary">Recommended</span>
+          <br/><strong>Supabase Cloud (Recommended)</strong>
           <p>Set up Database Monitoring through the Supabase Cloud integration tile. No Agent installation required.</p>
         </div>
       </a>
