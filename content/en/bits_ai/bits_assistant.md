@@ -68,7 +68,13 @@ To open Bits Assistant, click **Ask Bits** in the top-right of the navigation ba
 {{< img src="bits_ai/getting_started/bits_assistant_full_page.png" alt="Full-page Bits Assistant interface showing conversation history and prompt suggestions" style="width:100%;">}}
 
 ### Mobile Application
+<div class="alert alert-info">
+Bits Assistant is available on iOS v5.8.4+.
+</div>
 
+1. [Download the mobile app and log in][2].
+2. Tap Bits Assistant on the home screen.
+3. Start chatting with Bits Assistant in chat or voice mode.
 {{< img src="bits_ai/getting_started/bitsai_mobile_app.PNG" alt="View of the Mobile App Home dashboard with Bits AI" style="width:40%;" >}}
 
 ### Slack
@@ -87,3 +93,4 @@ After setup is completed, you can send queries to `@Datadog` in natural language
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /integrations/slack/?tab=applicationforslack
+[2]: /mobile/?tab=ios#installing
