@@ -77,8 +77,8 @@ To restore a muted finding, click **Unmute** in the details panel. You can also 
 ## Next steps
 
 1. [Set up Secret Scanning][1] in your environment.
-2. Configure [scanning exclusions][2] to reduce false positives or ignore expected results.
-3. Review and triage findings on the [Code Security Vulnerabilities][3] page.
+2. Set up [Automation Pipelines][10] to automate initial triage.
+3. Review findings on the [Code Security Vulnerabilities][15] page.
 
 ## Further Reading
 
