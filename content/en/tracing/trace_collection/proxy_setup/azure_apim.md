@@ -15,12 +15,7 @@ Inferred spans for Azure API Management are supported for **.NET**, **JavaScript
 
 ## Prerequisites
 
-- `DD_TRACE_INFERRED_PROXY_SERVICES_ENABLED` is set in your application container or runtime:
-
-  {{< code-block lang="shell" >}}
-  export DD_TRACE_INFERRED_PROXY_SERVICES_ENABLED=true
-  {{< /code-block >}}
-
+- `DD_TRACE_INFERRED_PROXY_SERVICES_ENABLED` is set in your application settings
 - Your underlying application is running a [supported web framework](/tracing/trace_collection/proxy_setup/apigateway#supported-versions-and-web-frameworks) for your language.
 - Your application tracer is at or above the minimum version listed above for your language.
 
