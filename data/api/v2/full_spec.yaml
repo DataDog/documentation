@@ -39955,12 +39955,15 @@ components:
       - DISTRIBUTION
     MetricTagConfigurationMetricTypes:
       default: gauge
-      description: The metric's type.
+      description: The metric's type. Contact your CSM for instructions on how to
+        use the histogram types.
       enum:
       - gauge
       - count
       - rate
       - distribution
+      - exponential_histogram
+      - explicit_histogram
       example: count
       type: string
       x-enum-varnames:
@@ -39968,6 +39971,8 @@ components:
       - COUNT
       - RATE
       - DISTRIBUTION
+      - EXPONENTIAL_HISTOGRAM
+      - EXPLICIT_HISTOGRAM
     MetricTagConfigurationResponse:
       description: Response object which includes a single metric's tag configuration.
       properties:
@@ -103526,6 +103531,13 @@ paths:
     get:
       description: Get the list of all critical assets.
       operationId: ListSecurityMonitoringCriticalAssets
+      parameters:
+      - description: Query string.
+        in: query
+        name: query
+        required: false
+        schema:
+          type: string
       responses:
         '200':
           content:
