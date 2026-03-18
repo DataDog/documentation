@@ -152,7 +152,7 @@ kubectl apply -f my-deployment.yaml
 
 As Kubernetes recreates your pods they trigger the Admission Controller for injection. When injection is successful, the pod includes two `initContainers` named `datadog-init-apm-inject` and `datadog-lib-<LANGUAGE>-init` for your specified tracer language and version:
 
-{{< img src="tracing/trace_collection/datadog-lib-init.png" alt="Pod details in Datadog with `initContainers` listed" style="width:100%;" >}}
+{{< img src="tracing/trace_collection/k8s-local-sdk-injection.png" alt="Pod details in Datadog with `initContainers` listed" style="width:100%;" >}}
 
 Alternatively, confirm injection and the added environment variables on your pod using:
 
