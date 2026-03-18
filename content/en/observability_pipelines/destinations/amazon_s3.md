@@ -22,6 +22,38 @@ You can also [route logs to Snowflake using the Amazon S3 destination](#route-lo
 
 {{% observability_pipelines/configure_log_archive/amazon_s3/instructions %}}
 
+
+#### Set up an IAM policy that allows Workers to write to the S3 bucket
+
+1. Navigate to the [IAM console][11].
+1. Select **Policies** in the left side menu.
+1. Click **Create policy**.
+1. Click **JSON** in the **Specify permissions** section.
+1. Copy the below policy and paste it into the **Policy editor**. Replace `<MY_BUCKET_NAME>` and `<MY_BUCKET_NAME_1_/_MY_OPTIONAL_BUCKET_PATH_1>` with the information for the S3 bucket you created earlier.
+    ```json
+    {
+        "Version": "2012-10-17",
+        "Statement": [
+            {
+                "Sid": "DatadogUploadAndRehydrateLogArchives",
+                "Effect": "Allow",
+                "Action": ["s3:PutObject", "s3:GetObject"],
+                "Resource": "arn:aws:s3:::<MY_BUCKET_NAME_1_/_MY_OPTIONAL_BUCKET_PATH_1>/*"
+            },
+            {
+                "Sid": "DatadogRehydrateLogArchivesListBucket",
+                "Effect": "Allow",
+                "Action": "s3:ListBucket",
+                "Resource": "arn:aws:s3:::<MY_BUCKET_NAME>"
+            }
+        ]
+    }
+    ```
+1. Click **Next**.
+1. Enter a descriptive policy name.
+1. Optionally, add tags.
+1. Click **Create policy**.
+
 {{< tabs >}}
 {{% tab "Docker" %}}
 
@@ -134,3 +166,4 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 [8]: /observability_pipelines/destinations/#template-syntax
 [9]: /logs/log_configuration/archives/?tab=awss3#storage-class
 [10]: https://aws.amazon.com/s3/storage-classes/intelligent-tiering/
+[11]: https://console.aws.amazon.com/iam/
