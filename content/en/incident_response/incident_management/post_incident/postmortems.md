@@ -79,7 +79,8 @@ Templates support variables that populate with incident data when the postmortem
 
 Any [custom property fields][5] you have defined are also available as variables.
 
-**The incident card variable** (`{{incident.card}}`) embeds a summary card that reflects incident fields in real time. When incident fields change, the card in the postmortem updates automatically, reducing the need to switch between the two. **Note**: The incident card is only supported in Datadog Notebooks.
+**The incident card variable** (`{{incident.card}}`) embeds a summary card that reflects incident fields in real time. When incident fields change, the card in the postmortem updates automatically, reducing the need to switch between the two. 
+**Note**: The incident card is only supported in Datadog Notebooks.
 
 **AI variables** use Bits AI to generate suggested content based on incident data. When you generate a postmortem that includes an AI variable, Datadog provides a suggested value that you can accept, edit, or reject before it is saved. The `{{incident.ai_summary}}` variable, for example, generates a suggested summary of what occurred during the incident.
 
