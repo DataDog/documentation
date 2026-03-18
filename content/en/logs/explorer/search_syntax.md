@@ -216,9 +216,9 @@ To search a nested field in an array attribute, use the `@` prefix with the full
 
 * `@network.ip.attributes.ip:2a02\:1810*` matches all logs where at least one item in the `network.ip.attributes` array has an `ip` field starting with `2a02:1810`.
 
-To match logs where an array contains at least one of multiple specific values, list the values in parentheses:
+To match logs where an array contains multiple specific values, list the values in parentheses:
 
-* `@user_perms:(4 6)` matches all logs where the `user_perms` array contains `4` or `6`.
+* `@user_perms:(4 6)` matches all logs where the `user_perms` array contains both `4` and `6`.
 
 To match logs where an array contains any value within a range, use a range query:
 
