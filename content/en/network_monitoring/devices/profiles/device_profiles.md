@@ -71,13 +71,16 @@ The recommended entry point for the SNMP Profile Manager is from a single device
 1. Navigate to [**Infrastructure > Network Devices**][15].
 2. Click on a device to open the device side panel.
 3. Click the **View all metrics** to view the list of metrics being automatically collected for the device.
+
+{{< img src="/network_device_monitoring/profile_onboarding/ndm_view_all_metrics.png" alt="The NDM device View all metrics tab with the metrics list" style="width:80%;">}}
+
 4. To edit the profile, click **SNMP Profile** in the **View all metrics** tab.
 
-{{< img src="/network_device_monitoring/profile_onboarding/ndm_metrics_tab.png" alt="The NDM device Metrics tab with the SNMP Profile option highlighted in the left sidebar" style="width:100%;">}}
+{{< img src="/network_device_monitoring/profile_onboarding/ndm_metrics_tab.png" alt="The NDM device Metrics tab with the SNMP Profile option highlighted in the left sidebar" style="width:80%;">}}
 
 This opens the profile editor for the profile that covers this device. The profile editor shows all metrics available for the devices covered by this profile where you can toggle to enable or disable metrics.
 
-{{< img src="/network_device_monitoring/profile_onboarding/ndm_profile_editor.png" alt="The NDM device view panel showing the profile editor with metrics enabled and disabled" style="width:100%;">}}
+{{< img src="/network_device_monitoring/profile_onboarding/ndm_profile_editor.png" alt="The NDM device view panel showing the profile editor with metrics enabled and disabled" style="width:80%;">}}
 
 #### Scalar metrics
 
