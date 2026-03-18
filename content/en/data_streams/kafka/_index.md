@@ -10,16 +10,11 @@ With Data Streams Monitoring's Kafka Monitoring, a Datadog Agent check connects 
 - **Connect services to topics**: See which producers and consumers interact with each topic, with linked owners, repos, on-call rotations, traces, and error logs
 - **Inspect topic schemas and messages**: View schemas, compare versions, and access messages to debug poison payloads or explore the topic
 
-## Prerequisites
-
-- Install the [Kafka integration][1]
-- [Instrument your application][2]
-
 ## Setup
 
-Go to the [Kafka Monitoring setup page][3] and click {{< ui >}}Get Started{{< / ui >}}. Then choose your environment and follow the instructions.
+Go to the [Kafka Monitoring setup page][1] and click {{< ui >}}Get Started{{< / ui >}}. Then choose your environment and follow the instructions. To request assistance, choose {{< ui >}}Request a pairing session{{< /ui >}}.
 
-{{< img src="data_streams/kafka_setup.png" alt="The Kafka Monitoring setup dialog showing environment selection, security protocol, schema registry options, and Kubernetes configuration instructions" >}}
+{{< img src="data_streams/kafka_setup-2.png" alt="The Kafka Monitoring setup dialog showing environment selection, security protocol, schema registry options, and Kubernetes configuration instructions" >}}
 
 The setup page provides environment-specific configuration instructions. You can copy the instructions directly to an AI agent with **Copy for AI**.
 
@@ -43,9 +38,9 @@ Change events are overlaid directly on throughput and lag graphs, so you can see
 
 {{< img src="data_streams/kafka_topics_lag_change.png" alt="Topics view with a topic_config change annotation at 17:02:42 overlaid on the lag-by-topic graph, showing a spike correlated with the change event" >}}
 
-To identify exactly what changed, click on a topic, select **Configuration**, and use the version selector to compare any two versions side by side.
+To identify exactly what changed, click on detected changes on the overlay and select **View config change**. 
 
-{{< img src="data_streams/kafka_config_diff.png" alt="Topic configuration diff view comparing version 625 and 626, with max.message.bytes changed from 1000012 to 1024 highlighted" >}}
+{{< img src="data_streams/lag-by-topic-overlay.png" alt="Topic configuration diff view comparing version 625 and 626, with max.message.bytes changed from 1000012 to 1024 highlighted" >}}
 
 ### Connect producer and consumer services to topics
 
@@ -63,9 +58,8 @@ The **Messages** section lets you retrieve messages by partition and offset to i
 
 {{< img src="data_streams/kafka_schema_messages.png" alt="Topic schema and messages view showing a Protobuf schema definition and a table of recent messages with date, partition, offset, and message value" >}}
 
-**Note**: Message viewing is not enabled by default and requires additional setup. Access is controlled by per-user permissions, so you can roll out Kafka Monitoring without exposing message content. Configure message viewing separately after completing the initial setup.
+**Note**: [Message viewing][2] is not enabled by default and requires additional setup. Access is controlled by per-user permissions, so you can roll out Kafka Monitoring without exposing message content. Configure message viewing separately after completing the initial setup.
 
 
-[1]: https://app.datadoghq.com/integrations?search=kafka
-[2]: /data_streams/setup/
-[3]: https://app.datadoghq.com/data-streams/kafka/setup
+[1]: https://app.datadoghq.com/data-streams/kafka/setup
+[2]: /data_streams/kafka/messages
