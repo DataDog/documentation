@@ -16,7 +16,7 @@ further_reading:
 
 After [launching your experiment][1], Datadog begins calculating results for your selected metrics. You can add additional metrics, organize metrics into groups, and explore related user sessions to understand the impact of each variant.
 
-{{< img src="/product_analytics/experiment/exp_reading_exps_overview.png" alt="A view of the metrics and their variations in the control and experiment groups." style="width:90%;" >}}
+{{< img src="/product_analytics/experiment/exp_reading_exps_overview.png" alt="The experiment results overview showing a decision metrics table with control and treatment values, relative lift, and confidence interval bars for three metrics." style="width:90%;" >}}
 
 ## Confidence intervals
 For each metric, Datadog shows the average per-subject value (typically per user) for both the control and treatment variants. It also reports the relative lift and the associated confidence interval.
@@ -39,7 +39,7 @@ To dive deeper into experiment results, hover over a metric and click **Chart**.
 ### Segment-level results
 Subject level properties are based on attributes at the initial time of exposure (for example, region, new visitor vs repeat visitor). This is useful for understanding when certain cohorts of users reacted differently to the new experience. 
 
-{{< img src="/product_analytics/experiment/exp_segment_view.png" alt="Segment-level view of metric 'click on ADD TO CART' split by four country ISO code." style="width:90%;" >}}
+{{< img src="/product_analytics/experiment/exp_segment_view.png" alt="Segment-level view of a metric split by Country ISO Code, showing a bar chart of relative lift and a data table with control and treatment values per country." style="width:90%;" >}}
 
 
 ## Further reading
