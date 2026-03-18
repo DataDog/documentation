@@ -204,8 +204,6 @@ Since location uptime is computed based on the final test result after retries c
 For more information on how Synthetic Monitoring notifications evaluate test results and trigger alerts, see <a href="/synthetics/guide/how-synthetics-monitors-trigger-alerts/">Understanding Synthetic Monitor Alerting</a>.
 </div>
 
-### Downtimes
-
 {{% synthetics-downtimes %}}
 
 ### Configure the test monitor
