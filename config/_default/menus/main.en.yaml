@@ -4681,7 +4681,7 @@ menu:
       identifier: dbm_postgres_supabase
       weight: 307
     - name: Supabase Cloud
-      url: database_monitoring/setup_postgres/supabase
+      url: database_monitoring/setup_postgres/supabase/cloud
       parent: dbm_postgres_supabase
       identifier: dbm_supabase_cloud
       weight: 1000
