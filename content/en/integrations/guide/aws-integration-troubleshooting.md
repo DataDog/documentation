@@ -61,7 +61,7 @@ See [Space aggregation][21] in the metric documentation for more information.
 
 Some AWS CloudWatch metrics are emitted once per dimension combination, which can produce values that appear inflated when aggregated in Datadog. For example, the Classic ELB metric `aws.elb.healthy_host_count` is reported separately for each Availability Zone. When cross-zone load balancing is enabled, summing this metric across all Availability Zones produces a total that is higher than the actual number of healthy hosts. See [Wrong count of aws.elb.healthy_host_count](#wrong-count-of-awselbhealthy_host_count) for details.
 
-To avoid inflated aggregation, use the `_deduped` metric variants when available (for example, `aws.elb.healthy_host_count_deduped`), or scope your query to a specific dimension value such as a single Availability Zone.
+To avoid inflated aggregation, use the `_deduped` metric variants when available, or scope your query to a specific dimension value such as a single Availability Zone. See the [ELB integration page][27] for a full list of load balancer types that support `_deduped` variants.
 
 #### Reconcile the discrepancy
 
@@ -105,9 +105,7 @@ In addition to collection method delays, some AWS services introduce their own l
 - **AWS billing metrics** are delayed by several hours and update infrequently.
 - **Detailed monitoring** for EC2 provides one-minute metrics (instead of the default five-minute granularity) but requires enablement per-instance in AWS.
 
-<div class="alert alert-info">
-Datadog does not backfill historical metric data from before the integration was enabled. Metrics begin flowing from the time the integration is successfully configured.
-</div>
+**Note**: Datadog does not backfill historical metric data. See [What to expect after setup][25] for details.
 
 ### Missing metrics
 
@@ -116,12 +114,8 @@ If you are not seeing expected AWS metrics in Datadog, work through the followin
 1. **Verify IAM permissions.** Confirm that the `DatadogAWSIntegrationRole` includes the required permissions for the AWS service. Some services require service-specific permissions beyond the core integration policy. See the individual [AWS integration pages][15] for service-specific permission requirements.
 2. **Verify the AWS region is enabled.** In the [AWS integration page][16], confirm that the region where your resources are deployed is selected under the **General** tab. Metrics are only collected from enabled regions.
 3. **Verify the service is emitting metrics to CloudWatch.** Open the CloudWatch console in AWS and confirm that the expected metrics exist. CloudWatch's API returns only metrics with datapoints, so if a resource is idle or has no attached components (for example, an ELB with no attached instances), CloudWatch may not report metrics for it.
-4. **Check whether the service requires additional enablement.** Some AWS services do not emit metrics to CloudWatch by default. For example:
-   - Amazon RDS requires [Enhanced Monitoring][18] to be enabled in the RDS console for OS-level metrics.
-   - Amazon S3 Storage Lens metrics require Storage Lens to be configured in the S3 console.
-   - AWS billing metrics require enabling `Billing` in the [Metric Collection tab][16], adding the `budgets:ViewBudget` permission, and [enabling billing metrics][19] in the AWS console. See [Monitor your AWS billing details][24] for full instructions.
-   - Custom CloudWatch namespaces require the **Collect Custom Metrics** option to be enabled in the [Metric Collection tab][16].
-5. **Wait for the polling interval.** API polling collects metrics approximately every 10 minutes. If you use [CloudWatch Metric Streams][23], expect a 2-3 minute delay. See [Expected metric delays](#expected-metric-delays) for more detail.
+4. **Check whether the service requires additional enablement.** Some AWS services do not emit metrics to CloudWatch by default and require extra configuration in the AWS console. See [Which AWS services require additional setup beyond the core integration?][26] for a full list.
+5. **Wait for the polling interval.** Allow at least one collection cycle before investigating further. See [Expected metric delays](#expected-metric-delays) above for timing by collection method.
 6. **Check for Service Control Policies (SCPs).** If your account is part of an AWS Organization, SCPs applied at the organization or OU level can override IAM permissions and block API calls. Verify that no SCP denies the required permissions.
 
 ### Wrong count of aws.elb.healthy_host_count
@@ -221,3 +215,6 @@ By default, host-level tags remain permanently attached to AWS hosts. If you wan
 [22]: https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-regions.html
 [23]: /integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/
 [24]: /integrations/guide/monitor-your-aws-billing-details/
+[25]: /getting_started/integrations/aws/#what-to-expect-after-setup
+[26]: /integrations/guide/aws-integration-and-cloudwatch-faq/#which-aws-services-require-additional-setup-beyond-the-core-integration
+[27]: /integrations/amazon_elb/
