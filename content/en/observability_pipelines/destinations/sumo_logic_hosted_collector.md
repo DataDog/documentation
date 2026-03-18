@@ -28,7 +28,10 @@ Set up the Sumo Logic destination and its environment variables when you [set up
 1. Enter a **host name** to override the default `host` value configured for your Sumo Logic collector's source.
 1. Enter a **category name** to override the default `category` value configured for your Sumo Logic collector's source.
 1. Click **Add Header** to add any custom header fields and values.
-{{% observability_pipelines/destination_buffer_numbered %}}
+
+##### Buffering options
+
+{{% observability_pipelines/destination_buffer %}}
 
 ### Set secrets
 

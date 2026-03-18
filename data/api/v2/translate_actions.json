@@ -1510,6 +1510,26 @@
     "request_description": "",
     "request_schema_description": "AWS Account Update Request body."
   },
+  "DeleteAWSAccountCCMConfig": {
+    "description": "Delete the Cloud Cost Management config for an AWS Account Integration Config using Cost and Usage Report\n(CUR) 2.0 by config ID.",
+    "summary": "Delete AWS CCM config"
+  },
+  "GetAWSAccountCCMConfig": {
+    "description": "Get the Cloud Cost Management config for an AWS Account Integration Config using Cost and Usage Report\n(CUR) 2.0 by config ID.",
+    "summary": "Get AWS CCM config"
+  },
+  "UpdateAWSAccountCCMConfig": {
+    "description": "Update the Cloud Cost Management config for an AWS Account Integration Config using Cost and Usage Report\n(CUR) 2.0 by config ID.",
+    "summary": "Update AWS CCM config",
+    "request_description": "Update a Cloud Cost Management config for an AWS Account Integration Config.",
+    "request_schema_description": "AWS CCM Config Create/Update Request body."
+  },
+  "CreateAWSAccountCCMConfig": {
+    "description": "Create the Cloud Cost Management config for an AWS Account Integration Config using Cost and Usage Report\n(CUR) 2.0 by config ID.",
+    "summary": "Create AWS CCM config",
+    "request_description": "Create a Cloud Cost Management config for an AWS Account Integration Config.",
+    "request_schema_description": "AWS CCM Config Create/Update Request body."
+  },
   "ListAWSNamespaces": {
     "description": "Get a list of available AWS CloudWatch namespaces that can send metrics to Datadog.",
     "summary": "List available namespaces"
@@ -1941,6 +1961,100 @@
     "request_description": "",
     "request_schema_description": "Update the IP allowlist."
   },
+  "ListLLMObsExperiments": {
+    "description": "List all LLM Observability experiments sorted by creation date, newest first.",
+    "summary": "List LLM Observability experiments"
+  },
+  "CreateLLMObsExperiment": {
+    "description": "Create a new LLM Observability experiment.",
+    "summary": "Create an LLM Observability experiment",
+    "request_description": "Create experiment payload.",
+    "request_schema_description": "Request to create an LLM Observability experiment."
+  },
+  "DeleteLLMObsExperiments": {
+    "description": "Delete one or more LLM Observability experiments.",
+    "summary": "Delete LLM Observability experiments",
+    "request_description": "Delete experiments payload.",
+    "request_schema_description": "Request to delete one or more LLM Observability experiments."
+  },
+  "UpdateLLMObsExperiment": {
+    "description": "Partially update an existing LLM Observability experiment.",
+    "summary": "Update an LLM Observability experiment",
+    "request_description": "Update experiment payload.",
+    "request_schema_description": "Request to partially update an LLM Observability experiment."
+  },
+  "CreateLLMObsExperimentEvents": {
+    "description": "Push spans and metrics for an LLM Observability experiment.",
+    "summary": "Push events for an LLM Observability experiment",
+    "request_description": "Experiment events payload.",
+    "request_schema_description": "Request to push spans and metrics for an LLM Observability experiment."
+  },
+  "ListLLMObsProjects": {
+    "description": "List all LLM Observability projects sorted by creation date, newest first.",
+    "summary": "List LLM Observability projects"
+  },
+  "CreateLLMObsProject": {
+    "description": "Create a new LLM Observability project. Returns the existing project if a name conflict occurs.",
+    "summary": "Create an LLM Observability project",
+    "request_description": "Create project payload.",
+    "request_schema_description": "Request to create an LLM Observability project."
+  },
+  "DeleteLLMObsProjects": {
+    "description": "Delete one or more LLM Observability projects.",
+    "summary": "Delete LLM Observability projects",
+    "request_description": "Delete projects payload.",
+    "request_schema_description": "Request to delete one or more LLM Observability projects."
+  },
+  "UpdateLLMObsProject": {
+    "description": "Partially update an existing LLM Observability project.",
+    "summary": "Update an LLM Observability project",
+    "request_description": "Update project payload.",
+    "request_schema_description": "Request to partially update an LLM Observability project."
+  },
+  "ListLLMObsDatasets": {
+    "description": "List all LLM Observability datasets for a project, sorted by creation date, newest first.",
+    "summary": "List LLM Observability datasets"
+  },
+  "CreateLLMObsDataset": {
+    "description": "Create a new LLM Observability dataset within the specified project.",
+    "summary": "Create an LLM Observability dataset",
+    "request_description": "Create dataset payload.",
+    "request_schema_description": "Request to create an LLM Observability dataset."
+  },
+  "DeleteLLMObsDatasets": {
+    "description": "Delete one or more LLM Observability datasets within the specified project.",
+    "summary": "Delete LLM Observability datasets",
+    "request_description": "Delete datasets payload.",
+    "request_schema_description": "Request to delete one or more LLM Observability datasets."
+  },
+  "UpdateLLMObsDataset": {
+    "description": "Partially update an existing LLM Observability dataset within the specified project.",
+    "summary": "Update an LLM Observability dataset",
+    "request_description": "Update dataset payload.",
+    "request_schema_description": "Request to partially update an LLM Observability dataset."
+  },
+  "ListLLMObsDatasetRecords": {
+    "description": "List all records in an LLM Observability dataset, sorted by creation date, newest first.",
+    "summary": "List LLM Observability dataset records"
+  },
+  "UpdateLLMObsDatasetRecords": {
+    "description": "Update one or more existing records in an LLM Observability dataset.",
+    "summary": "Update LLM Observability dataset records",
+    "request_description": "Update records payload.",
+    "request_schema_description": "Request to update records in an LLM Observability dataset."
+  },
+  "CreateLLMObsDatasetRecords": {
+    "description": "Append one or more records to an LLM Observability dataset.",
+    "summary": "Append records to an LLM Observability dataset",
+    "request_description": "Append records payload.",
+    "request_schema_description": "Request to append records to an LLM Observability dataset."
+  },
+  "DeleteLLMObsDatasetRecords": {
+    "description": "Delete one or more records from an LLM Observability dataset.",
+    "summary": "Delete LLM Observability dataset records",
+    "request_description": "Delete records payload.",
+    "request_schema_description": "Request to delete records from an LLM Observability dataset."
+  },
   "SubmitLog": {
     "description": "Send your logs to your Datadog platform over HTTP. Limits per HTTP request are:\n\n- Maximum content size per payload (uncompressed): 5MB\n- Maximum size for a single log: 1MB\n- Maximum array size if sending multiple logs in an array: 1000 entries\n\nAny log exceeding 1MB is accepted and truncated by Datadog:\n- For a single log request, the API truncates the log at 1MB and returns a 2xx.\n- For a multi-logs request, the API processes all logs, truncates only logs larger than 1MB, and returns a 2xx.\n\nDatadog recommends sending your logs compressed.\nAdd the `Content-Encoding: gzip` header to the request when sending compressed logs.\nLog events can be submitted with a timestamp that is up to 18 hours in the past.\n\nThe status codes answered by the HTTP API are:\n- 202: Accepted: the request has been accepted for processing\n- 400: Bad request (likely an issue in the payload formatting)\n- 401: Unauthorized (likely a missing API Key)\n- 403: Permission issue (likely using an invalid API Key)\n- 408: Request Timeout, request should be retried after some time\n- 413: Payload too large (batch is above 5MB uncompressed)\n- 429: Too Many Requests, request should be retried after some time\n- 500: Internal Server Error, the server encountered an unexpected condition that prevented it from fulfilling the request, request should be retried after some time\n- 503: Service Unavailable, the server is not ready to handle the request probably because it is overloaded, request should be retried after some time",
     "summary": "Send logs",
@@ -2116,7 +2230,7 @@
     "request_schema_description": "The request for a logs list."
   },
   "ListTagConfigurations": {
-    "description": "Returns all metrics that can be configured in the Metrics Summary page or with Metrics without Limits™ (matching additional filters if specified).\nOptionally, paginate by using the `page[cursor]` and/or `page[size]` query parameters.\nTo fetch the first page, pass in a query parameter with either a valid `page[size]` or an empty cursor like `page[cursor]=`. To fetch the next page, pass in the `next_cursor` value from the response as the new `page[cursor]` value.\nOnce the `meta.pagination.next_cursor` value is null, all pages have been retrieved.",
+    "description": "Get a list of actively reporting metrics for your organization. Pagination is optional using the `page[cursor]` and `page[size]` query parameters.",
     "summary": "Get a list of metrics"
   },
   "DeleteBulkTagsMetricsConfiguration": {
@@ -2614,6 +2728,12 @@
     "summary": "Query timeseries data across multiple products",
     "request_description": "",
     "request_schema_description": "A request wrapper around a single timeseries query to be executed."
+  },
+  "BatchRowsQuery": {
+    "description": "Batch query reference table rows by their primary key values.  Returns only found rows in the included array.",
+    "summary": "Batch rows query",
+    "request_description": "",
+    "request_schema_description": ""
   },
   "ListTables": {
     "description": "List all reference tables in this organization.",
@@ -3777,6 +3897,10 @@
     "description": "Lists all degradations for the organization. Optionally filter by status and page.",
     "summary": "List degradations"
   },
+  "ListMaintenances": {
+    "description": "Lists all maintenances for the organization. Optionally filter by status and page.",
+    "summary": "List maintenances"
+  },
   "DeleteStatusPage": {
     "description": "Deletes a status page by its ID.",
     "summary": "Delete status page"
@@ -3832,6 +3956,22 @@
   "UpdateDegradation": {
     "description": "Updates an existing degradation's attributes.",
     "summary": "Update degradation",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "CreateMaintenance": {
+    "description": "Schedules a new maintenance.",
+    "summary": "Schedule maintenance",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "GetMaintenance": {
+    "description": "Retrieves a specific maintenance by its ID.",
+    "summary": "Get maintenance"
+  },
+  "UpdateMaintenance": {
+    "description": "Updates an existing maintenance's attributes.",
+    "summary": "Update maintenance",
     "request_description": "",
     "request_schema_description": ""
   },
@@ -4153,6 +4293,10 @@
   "GetProjectedCost": {
     "description": "Get projected cost across multi-org and single root-org accounts.\nProjected cost data is only available for the current month and becomes available around the 12th of the month.\n\nThis endpoint is only accessible for [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/).",
     "summary": "Get projected cost across your account"
+  },
+  "GetUsageAttributionTypes": {
+    "description": "Get usage attribution types.",
+    "summary": "Get usage attribution types"
   },
   "SendInvitations": {
     "description": "Sends emails to one or more users inviting them to join the organization.",

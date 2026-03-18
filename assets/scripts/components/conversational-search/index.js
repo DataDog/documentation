@@ -5,7 +5,7 @@ import { logAction, logError } from './logger';
 import { parseMarkdown, inlineRefChips, extractSources, renderMessageWithSources } from './markdown';
 import { attachTooltips, buildSourceCards, showSourceTooltip, closeAllSourceTooltips, repositionTooltip } from './sources';
 import { addMessageActions, injectCodeCopyButtons } from './actions';
-import { streamConversation } from './streaming';
+import { streamConversation, fetchConversation, resetTypesenseClient } from './streaming';
 
 const { env } = document.documentElement.dataset;
 const docsConfig = getConfig(env);
@@ -17,9 +17,17 @@ const CONVERSATIONAL_SEARCH_FLAG_KEY = 'docs_conversational_search';
 const CONV_MODEL_DOCS_PREVIEW = 'docs-ai-conv-model-v1-preview';
 const CONV_MODEL_DOCS_STABLE = 'docs-ai-conv-model-v1-stable';
 const DEFAULT_CONVERSATION_MODEL_ID = CONV_MODEL_DOCS_STABLE;
-const USE_LEGACY_MODEL_FLAG_KEY = 'DOCS_AI_USE_LEGACY_MODEL';
+const USE_LEGACY_MODEL_FLAG_KEY = 'docs-ai-use-legacy-model';
+const DISABLE_STREAMING_FLAG_KEY = 'docs-ai-disable-streaming';
 
 const RENDER_THROTTLE = 50;
+
+const LOADING_MESSAGES = [
+    'Searching documentation…',
+    'Reviewing relevant pages…',
+    'Analyzing content…',
+    'Generating answer…'
+];
 
 let isDatadogUser = false;
 
@@ -49,13 +57,14 @@ class ConversationalSearch {
         this.userCancelledRequest = false;
         this.hasLoggedFirstOpen = false;
         this.selectedModelId = DEFAULT_CONVERSATION_MODEL_ID;
+        this.streamingDisabled = false;
         this.isHomepage = document.querySelector('.kind-home') !== null;
         this.homeAiBtnVisible = false;
         this.ready = false;
 
         if (!this.createElements()) return;
         this.bindEvents();
-        this.resolveModelFromFlag();
+        this.resolveFlags();
         this.ready = true;
     }
 
@@ -66,10 +75,13 @@ class ConversationalSearch {
     log(message, data) { logAction(message, data, this.ctx); }
     logErr(message, error) { logError(message, error, this.ctx); }
 
-    resolveModelFromFlag() {
+    resolveFlags() {
         initializeFeatureFlags().then((client) => {
             if (getBooleanFlag(client, USE_LEGACY_MODEL_FLAG_KEY)) {
                 this.selectedModelId = CONV_MODEL_DOCS_PREVIEW;
+            }
+            if (getBooleanFlag(client, DISABLE_STREAMING_FLAG_KEY)) {
+                this.streamingDisabled = true;
             }
         }).catch(() => {});
     }
@@ -374,12 +386,17 @@ class ConversationalSearch {
         const responseContainer = this.addStreamingMessage();
 
         try {
-            await this.runStreamConversation(query, responseContainer);
+            if (this.streamingDisabled) {
+                await this.runFetchConversation(query, responseContainer);
+            } else {
+                await this.runStreamConversation(query, responseContainer);
+            }
         } catch (error) {
             if (error.name === 'AbortError' && this.userCancelledRequest) {
                 responseContainer.textContent = 'Request cancelled.';
             } else {
                 this.logErr('Conversational Search Response Error', error);
+                resetTypesenseClient();
                 responseContainer.textContent = 'Sorry, something went wrong. Please try again.';
             }
         } finally {
@@ -448,6 +465,63 @@ class ConversationalSearch {
                 conversational_search: {
                     action: 'response_received',
                     response_length: accumulatedMessage.length,
+                    conversation_id: this.conversationId,
+                    latency_ms: Date.now() - startTime
+                }
+            });
+        } else {
+            responseContainer.textContent = 'No response received. Please try again.';
+        }
+    }
+
+    async runFetchConversation(query, responseContainer) {
+        this.abortController = new AbortController();
+        const startTime = Date.now();
+
+        let msgIndex = 0;
+        responseContainer.innerHTML =
+            `<span class="conv-search-status-text">${LOADING_MESSAGES[0]}</span>` +
+            '<span class="conv-search-cursor"></span>';
+
+        const statusInterval = setInterval(() => {
+            if (msgIndex < LOADING_MESSAGES.length - 1) msgIndex++;
+            const el = responseContainer.querySelector('.conv-search-status-text');
+            if (el) el.textContent = LOADING_MESSAGES[msgIndex];
+        }, 3000);
+
+        let response;
+        try {
+            response = await fetchConversation({
+                typesenseConfig,
+                query,
+                modelId: this.selectedModelId,
+                conversationId: this.conversationId,
+                signal: this.abortController.signal
+            });
+        } finally {
+            clearInterval(statusInterval);
+        }
+
+        const conversation = response?.conversation || response?.results?.[0]?.conversation;
+        if (conversation?.conversation_id) {
+            this.conversationId = conversation.conversation_id;
+        }
+
+        const answer = conversation?.answer || '';
+        if (answer) {
+            responseContainer.innerHTML = renderMessageWithSources(answer, {
+                attachTooltips,
+                buildSourceCards
+            });
+            injectCodeCopyButtons(responseContainer, this.ctx);
+            addMessageActions(responseContainer.parentElement, query, answer, this.ctx);
+            this.scrollToBottom();
+
+            this.log('Conversational Search Response', {
+                conversational_search: {
+                    action: 'response_received',
+                    streaming: false,
+                    response_length: answer.length,
                     conversation_id: this.conversationId,
                     latency_ms: Date.now() - startTime
                 }

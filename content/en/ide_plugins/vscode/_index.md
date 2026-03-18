@@ -80,8 +80,6 @@ Install the extension either directly in the IDE, or from the web:
 
 ### MCP Server setup
 
-<div class="alert alert-info">The Datadog MCP Server is in Preview. Complete <a href="https://www.datadoghq.com/product-preview/datadog-mcp-server">this form</a> to request access.</div>
-
 The extension includes access to the [Datadog Model Context Protocol (MCP) Server][3]. Ensure the MCP Server is enabled to enhance the editor's AI capabilities with your specific Datadog environment:
 
 1. Open the chat panel, select agent mode, and click the **Configure Tools** button.
@@ -101,8 +99,6 @@ Install the extension either directly in the IDE, or from the web:
 - **From the web**: Download the VSIX file from [Open VSX Registry][2], and install with `Extensions: Install from VSIX` in the command palette (`Shift` + `Cmd/Ctrl` + `P`).
 
 ### MCP Server setup
-
-<div class="alert alert-info">The Datadog MCP Server is in Preview. Complete <a href="https://www.datadoghq.com/product-preview/datadog-mcp-server">this form</a> to request access.</div>
 
 The extension includes access to the [Datadog Model Context Protocol (MCP) Server][3]. Ensure the MCP Server is enabled to enhance the editor's AI capabilities with your specific Datadog environment:
 

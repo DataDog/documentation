@@ -519,6 +519,16 @@ If you are setting up monitoring for a .NET application, configure the following
 {{% /tab %}}
 {{< /tabs >}}
 
+{{% svl-tracing-env %}}
+
+## Profiling
+
+<div class="alert alert-info">
+Datadog's Continuous Profiler is available in preview for Python and Node.js on Linux Azure App Service.
+</div>
+
+To enable the [Continuous Profiler][4], set the environment variable `DD_PROFILING_ENABLED=true` in your application container.
+
 ## Example application
 The following example contains a single app with tracing, metrics, and logs set up.
 
@@ -751,3 +761,4 @@ $statsd->increment('page.views', 1, array('environment'=>'dev'));
 [1]: https://learn.microsoft.com/en-us/azure/app-service/tutorial-custom-container-sidecar
 [2]: /serverless/guide/azure_app_service_linux_containers_serverless_init
 [3]: https://app.datadoghq.com/integrations/azure
+[4]: /profiler/

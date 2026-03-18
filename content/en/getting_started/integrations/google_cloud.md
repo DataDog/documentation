@@ -348,8 +348,6 @@ You can also specify additional locations not listed and disable any global metr
 
 {{< img src="integrations/google_cloud_platform/metric_region_filtering.png" alt="The metric collection tab in the Datadog Google Cloud integration page, with the Enable Global Metrics option highlighted and a subset of regions selected. The Additional Locations option is also highlighted with a multi-region filter defined" style="width:80%;">}}
 
-**Note**: These metric collection filters do not apply to `gcp.prometheus.*` metrics and a subset of `gcp.gke.*` metrics.
-
 {{% /collapse-content %}}
 
 {{% collapse-content title="Limit metric collection by host or Cloud Run instance" level="h4" %}}

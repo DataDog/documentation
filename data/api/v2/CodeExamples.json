@@ -1267,6 +1267,11 @@
   "ValidatePipeline": [
     {
       "group": "observability_pipelines",
+      "suffix": "_884022323",
+      "description": "Validate a metrics pipeline with opentelemetry source returns \"OK\" response"
+    },
+    {
+      "group": "observability_pipelines",
       "suffix": "",
       "description": "Validate an observability pipeline returns \"OK\" response"
     },
@@ -1274,6 +1279,11 @@
       "group": "observability_pipelines",
       "suffix": "_3024756866",
       "description": "Validate an observability pipeline with OCSF mapper custom mapping returns \"OK\" response"
+    },
+    {
+      "group": "observability_pipelines",
+      "suffix": "_3067748504",
+      "description": "Validate an observability pipeline with OCSF mapper keep_unmatched returns \"OK\" response"
     },
     {
       "group": "observability_pipelines",
@@ -2059,6 +2069,13 @@
       "description": "Create degradation returns \"Created\" response"
     }
   ],
+  "CreateMaintenance": [
+    {
+      "group": "status_pages",
+      "suffix": "_2202276054",
+      "description": "Create maintenance returns \"Created\" response"
+    }
+  ],
   "CreateStatusPage": [
     {
       "group": "status_pages",
@@ -2078,6 +2095,13 @@
       "group": "status_pages",
       "suffix": "",
       "description": "Update degradation returns \"OK\" response"
+    }
+  ],
+  "UpdateMaintenance": [
+    {
+      "group": "status_pages",
+      "suffix": "",
+      "description": "Update maintenance returns \"OK\" response"
     }
   ],
   "UpdateStatusPage": [
