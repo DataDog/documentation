@@ -39,7 +39,6 @@ Each index has its own retention period, which determines how long logs in that 
 
 The index retention configured through the Datadog UI takes precedence over the global retention set in the [Helm chart values][2]. If you are migrating from a single-index setup, existing logs remain in the default index with the globally configured retention until they expire.
 
-
 ## Searching across indexes
 
 To query logs stored in CloudPrem, select one or more CloudPrem indexes in the [Log Explorer][3]. You can select a specific index to narrow your search, or select all indexes in a cluster to search across them. From the index configuration page, use **View in Log Explorer** to open a filtered view for a given index.
