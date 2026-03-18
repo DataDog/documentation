@@ -20,9 +20,6 @@ further_reading:
 
 <p>You can also access this form through Datadog. From the left navigation, mouse over <strong>Help</strong> and click <em>Support</em>. Alternatively, navigate to the <a href="https://app.datadoghq.com/help">Datadog help page</a> and click <strong>New Support Ticket</strong>.</p>
 
-
-{{< img src="/account_management/guide/access_your_support_ticket/support_page.png" alt="Datadog Support landing page" style="width:100%;" >}}
-
 <h2>Accessing existing tickets</h2>
 
 <p>If you have opened at least one Datadog support ticket, follow this process to access all your Datadog support tickets:</p>
@@ -92,7 +89,7 @@ further_reading:
 
 {{< site-region region="gov" >}}
 
-<h2>Creating a Support Ticket</h2>
+<h2>Creating a support ticket</h2>
 <ol>
     <li>Navigate to <code>https://govsupport.ddog-gov.com</code></li>
     <li>Click <strong>Sign Up</strong> to register (first-time users)</li>
@@ -102,7 +99,7 @@ further_reading:
     <li>Click <strong>Create a New Case</strong> and complete the form</li>
 </ol>
 
-<h2>Accessing Existing Tickets</h2>
+<h2>Accessing existing tickets</h2>
 <ol>
     <li>Log in at <code>https://govsupport.ddog-gov.com</code></li>
     <li>Change filter from <strong>Recently Viewed</strong> to <strong>Cases</strong> to view all tickets</li>
