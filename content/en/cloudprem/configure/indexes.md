@@ -21,7 +21,7 @@ further_reading:
 
 By default, a CloudPrem cluster stores all logs in a single index with a single retention policy. With multiple indexes, you can segment logs by defining filter queries and assigning a different retention period to each index. For example, you can retain audit logs for 1 year while keeping debug logs for only 3 days.
 
-Indexes are managed from the [CloudPrem page][1] in Datadog. Select a cluster and click **View Indexes** to access the index configuration.
+To view and manage your CloudPrem indexes, navigate to the [CloudPrem page][1] in Datadog. Select a cluster and click **View Indexes** to access the index configuration.
 
 ## Filter routing
 
