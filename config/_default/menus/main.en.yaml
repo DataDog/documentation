@@ -2670,10 +2670,17 @@ menu:
       parent: case_management
       identifier: case_management_automation_rules
       weight: 6
+    - name: MCP Server
+      url: incident_response/case_management/mcp_server
+      parent: case_management
+      identifier: case_management_mcp_server
+      weight: 7
     - name: Troubleshooting
       url: incident_response/case_management/troubleshooting
       parent: case_management
       identifier: case_management_troubleshooting
+      weight: 8
+    - name: Agents
       weight: 7
     - name: Agent Builder
       url: actions/agents/
