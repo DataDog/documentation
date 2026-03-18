@@ -47,7 +47,7 @@ After selecting your experiment’s metrics, use the optional sample size calcul
 
 1. Click **Run calculation** to see the [Minimum Detectable Effects][3] (MDE) your experiment has on your metrics. The MDE is the smallest difference that you are able to detect between your experiment’s variants.
 
-{{< img src="/product_analytics/experiment/exp_sample_size.png" alt="Select an entry point event to run a sample size calculation" style="width:90%;" >}}
+{{< img src="/product_analytics/experiment/exp_sample_size.png" alt="The sample size calculation panel showing entry point selection and minimum detectable effects for each metric." style="width:90%;" >}}
 
 ### Step 3 - Launch your experiment
 
