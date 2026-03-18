@@ -12,9 +12,11 @@ products:
 
 ## Overview
 
-Use the Amazon S3 destination to send logs in JSON or Parquet format to Amazon S3. **Note**: If you want to send logs to a S3 bucket and be able to [rehydrate][1] them to Datadog, use the [Datadog Archives][2] destination.
+Use the Amazon S3 destination to send logs in JSON or Parquet format to Amazon S3. For Parquet, the Observability Pipelines Worker automatically generates a Parquet schema based on the batch file the events are being written to, which means the schema can vary between batches.
 
 You can also [route logs to Snowflake using the Amazon S3 destination](#route-logs-to-snowflake-using-the-datadog-archives-destination).
+
+**Note**: If you want to send logs to a S3 bucket and be able to [rehydrate][1] them to Datadog, use the [Datadog Archives][2] destination.
 
 ## Set up an Amazon S3 bucket
 
@@ -49,18 +51,19 @@ Set up the Amazon S3 destination and its environment variables when you create a
 
 1. Enter your S3 bucket name. If you configured Log Archives, it's the name of the bucket you created earlier.
 1. Enter the AWS region the S3 bucket is in.
-1. Enter the key prefix.
+1. (Optional) Enter the key prefix.
     - Prefixes are useful for partitioning objects. For example, you can use a prefix as an object key to store objects under a particular directory. If using a prefix for this purpose, it must end in `/` to act as a directory path; a trailing `/` is not automatically added.
-    - See [template syntax][8] if you want to route logs to different object keys based on specific fields in your logs.
-     - **Note**: Datadog recommends that you start your prefixes with the directory name and without a lead slash (`/`). For example, `app-logs/` or `service-logs/`.
+      - See [template syntax][8] if you want to route logs to different object keys based on specific fields in your logs.
+      - **Note**: Datadog recommends that you start your prefixes with the directory name and without a lead slash (`/`). For example, `app-logs/` or `service-logs/`.
 1. Select the storage class for your S3 bucket in the **Storage Class** dropdown menu.
 1. Select the encoding you want to use in the **Encoding** dropdown menu (**JSON** or **Parquet**).
-1. Select a compression algorithm in the **Compression - Algorithm** dropdown menu. **Note**: Datadog recommends using `snappy` or a low compression level if you choose `zstd`.
+    - **Note**: For **Parquet**, the Observability Pipelines Worker automatically generates a Parquet schema based on the batch file the events are being written to, which means the schema can vary between batches.
+1. Select a compression algorithm in the **Compression - Algorithm** dropdown menu. **Note**: Datadog recommends using `snappy` or a low-compression level if you choose `zstd`.
 
 ### Optional settings
 
-1. Enter a maximum batching size and select the unit (**MB** or **GB**) in the dropdown menu.
-1. Enter a batching timeout in seconds.
+1. Enter a maximum batching size and select the unit (**MB** or **GB**) in the dropdown menu. If not configured, the default is `100` MB.
+1. Enter a batching timeout in seconds. If not configured, the default is `900` seconds.
 
 #### AWS authentication
 
@@ -105,7 +108,13 @@ You can route logs from Observability Pipelines to Snowflake using the Amazon S3
 
 #### Permissions
 
-{{% observability_pipelines/aws_authentication/amazon_s3_permissions %}}
+To send logs to Amazon S3, the Observability Pipelines Worker requires the following policy permissions:
+
+- `s3:GetObject`
+
+### Automatically generated Parquet schema
+
+The Observability Pipelines Worker collects a batch of events, generates a schema for those events, and then flushes the batch to S3. The schema can vary between batches because the schema is based on the current batch of events only.
 
 ### Event batching
 
