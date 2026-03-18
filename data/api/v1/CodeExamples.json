@@ -453,6 +453,11 @@
     },
     {
       "group": "dashboards",
+      "suffix": "_1705253330",
+      "description": "Create a new dashboard with timeseries widget using has_value_labels"
+    },
+    {
+      "group": "dashboards",
       "suffix": "_416487533",
       "description": "Create a new dashboard with timeseries widget using order_by tags"
     },
@@ -816,6 +821,16 @@
     },
     {
       "group": "monitors",
+      "suffix": "_2608995690",
+      "description": "Create a monitor with aggregate augmented query variables returns \"OK\" response"
+    },
+    {
+      "group": "monitors",
+      "suffix": "_2082938111",
+      "description": "Create a monitor with aggregate filtered query variables returns \"OK\" response"
+    },
+    {
+      "group": "monitors",
       "suffix": "_3541766733",
       "description": "Create a monitor with assets returns \"OK\" response"
     },
@@ -913,6 +928,11 @@
     }
   ],
   "CreateSLO": [
+    {
+      "group": "service_level_objectives",
+      "suffix": "_707861409",
+      "description": "Create a new metric SLO object using bad events formula returns \"OK\" response"
+    },
     {
       "group": "service_level_objectives",
       "suffix": "_512760759",

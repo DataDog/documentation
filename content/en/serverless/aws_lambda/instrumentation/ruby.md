@@ -485,6 +485,8 @@ The [`lambda-datadog`][1] Terraform module wraps the [`aws_lambda_function`][2] 
 {{% /tab %}}
 {{< /tabs >}}
 
+{{% svl-tracing-env %}}
+
 ## FIPS compliance
 
 {{% svl-lambda-fips %}}

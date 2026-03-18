@@ -6,6 +6,7 @@ const slugify = require('slugify');
 const $RefParser = require('@apidevtools/json-schema-ref-parser');
 const safeJsonStringify = require('safe-json-stringify');
 const oneOfLimit = 50;
+const ENUM_DISPLAY_LIMIT = 10;
 
 // Support both marked v1 (require('marked')) and v12+ (marked.umd.js or default export)
 let marked;
@@ -743,7 +744,15 @@ const descColumn = (key, value) => {
   let desc = '';
   if(value.description) {
     if (value.enum){
-      desc = `${value.description  } \nAllowed enum values: <code>${value.enum}</code>`;
+      const enumArray = Array.isArray(value.enum) ? value.enum : value.enum.split(',');
+      if (enumArray.length > ENUM_DISPLAY_LIMIT) {
+        const visibleEnums = enumArray.slice(0, ENUM_DISPLAY_LIMIT).join(',');
+        const hiddenEnums = enumArray.slice(ENUM_DISPLAY_LIMIT).join(',');
+        const remainingCount = enumArray.length - ENUM_DISPLAY_LIMIT;
+        desc = `${value.description  } \nAllowed enum values: <code>${visibleEnums}</code><details class="enum-details"><summary class="enum-summary">Show ${remainingCount} more</summary><code>,${hiddenEnums}</code></details>`;
+      } else {
+        desc = `${value.description  } \nAllowed enum values: <code>${value.enum}</code>`;
+      }
     } else if(typeof(value.description) !== "object") {
       desc = value.description || '';
     }

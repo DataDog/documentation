@@ -51,7 +51,7 @@ Worker version 2.13.0 gives you access to the following:
 
 #### Enhancements
 
-- [Disk buffers][26] have been updated to drop logs when the buffer is full.
+- [Disk buffers][18] have been updated to drop logs when the buffer is full.
 - The Dedupe processor has been updated with a configurable cache size.
 - The Datadog Agent source has been updated with configurable request timeouts.
 - Source buffers have been updated to record the utilization level of the buffer with these metrics:
@@ -279,7 +279,7 @@ Worker version 2.7.0 gives you access to the following:
 
 - [The HTTP Client destination][16]: Send logs to an HTTP Client, such as a logging platform or SIEM.
 - [Processor Groups][17]: Organize your processors into logical groups to help you manage them.
-- [Disk][18] and [memory][19] buffering options are available for destinations.
+- [Disk and memory][18] buffering options are available for destinations.
 
 #### Enhancements
 
@@ -312,15 +312,13 @@ Worker version 2.7.0 gives you access to the following:
 [15]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.7.0
 [16]: /observability_pipelines/destinations/http_client/
 [17]: /observability_pipelines/processors/#processor-groups
-[18]: /observability_pipelines/scaling_and_performance/handling_load_and_backpressure/#destination-buffer-behavior
-[19]: /observability_pipelines/scaling_and_performance/handling_load_and_backpressure/#component-buffers
+[18]: /observability_pipelines/scaling_and_performance/buffering_and_backpressure/#destination-buffers
 [20]: /observability_pipelines/processors/sample/#group-by-example
 [21]: /observability_pipelines/destinations/elasticsearch/#set-up-the-destination
 [22]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.13.1
 [23]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.13.0
 [24]: /observability_pipelines/processors/custom_processor
 [25]: /observability_pipelines/configuration/live_capture/
-[26]: /observability_pipelines/scaling_and_performance/handling_load_and_backpressure/#destination-buffer-behavior
 [27]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.12.0
 [28]: /observability_pipelines/processors/enrichment_table/
 [29]: /observability_pipelines/destinations/http_client/
