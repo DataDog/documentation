@@ -141,9 +141,9 @@ See the [Observability Pipelines Metrics][8] for a full list of available health
 
 A batch of events is flushed when one of these parameters is met. See [event batching][9] for more information.
 
-| Max Events     | Max Bytes       | Timeout (seconds)   |
+| Max Events     | Max Size (MB)   | Timeout (seconds)   |
 |----------------|-----------------|---------------------|
-| 10,000         | 1,000,000       | 1                   |
+| 10,000         | 1               | 1                   |
 
 [1]: https://clickhouse.com/docs/engines/table-engines/integrations/kafka
 [2]: https://docs.snowflake.com/en/user-guide/kafka-connector

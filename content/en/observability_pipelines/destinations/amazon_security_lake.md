@@ -86,9 +86,9 @@ Toggle the switch to **Enable TLS**. If you enable TLS, the following certificat
 
 A batch of events is flushed when one of these parameters is met. See [event batching][2] for more information.
 
-| Max Events     | Max Bytes       | Timeout (seconds)   |
+| Max Events     | Max Size (MB)   | Timeout (seconds)   |
 |----------------|-----------------|---------------------|
-| None           | 256,000,000     | 300                 |
+| None           | 256             | 300                 |
 
 [1]: https://app.datadoghq.com/observability-pipelines
 [2]: /observability_pipelines/destinations/#event-batching

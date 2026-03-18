@@ -138,9 +138,9 @@ To send logs to Amazon S3, the Observability Pipelines Worker requires the follo
 
 A batch of events is flushed when one of these parameters is met. See [event batching][7] for more information.
 
-| Max Events     | Max Bytes       | Timeout (seconds)   |
+| Max Events     | Max Size (MB)   | Timeout (seconds)   |
 |----------------| ----------------| --------------------|
-| None           | 100,000,000     | 900                 |
+| None           | 100             | 900                 |
 
 [1]: /logs/log_configuration/archives/
 [2]: /logs/log_configuration/rehydrating/
