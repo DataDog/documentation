@@ -50,18 +50,17 @@ The Agent collects system resource metrics and process data, runs all infrastruc
 : **Minimum Agent version**: 7.73.0 (Linux, macOS), 7.76.2 (Windows)<br>
 **Recommended for**: VMs and physical servers that need system resource metrics only<br>
 The Agent collects system resource metrics (CPU, memory, disk, network) and limited process and service data. Only the following integrations run:
-
-- [System Check][1]
-- [Disk][2]
-- [Network][3]
-- [NTP][4]
-- [Processes][5]
-- [Systemd][6]
-- [Windows Crash Detection][7]
-- [Windows Kernel Memory][8]
-- [Windows Services][9]
-- [Custom checks][10] prefixed with `custom_`
-- Logs-only integrations (for example, [journald][11] or [Windows Event Log][12])
+  - [System Check][1]
+  - [Disk][2]
+  - [Network][3]
+  - [NTP][4]
+  - [Processes][5]
+  - [Systemd][6]
+  - [Windows Crash Detection][7]
+  - [Windows Kernel Memory][8]
+  - [Windows Services][9]
+  - [Custom checks][10] prefixed with `custom_`
+  - Logs-only integrations (for example, [journald][11] or [Windows Event Log][12])
 
 ### None
 
@@ -69,8 +68,7 @@ The Agent collects system resource metrics (CPU, memory, disk, network) and limi
 : **Minimum Agent version**: 7.77.0<br>
 **Recommended for**: Hosts configured only for [Log Management][13], [APM][14], or [Error Tracking][15]<br>
 The Agent does not collect infrastructure metrics or run infrastructure integrations. The Agent supports custom metrics, [custom checks][10] prefixed with `custom_`, and logs-only integrations.
-
-<div class="alert alert-info">Hosts in <code>none</code> mode still appear in <a href="https://app.datadoghq.com/fleet">Fleet Automation</a> because the Agent continues to send metadata. However, they do not appear in infrastructure dashboards or queries that rely on infrastructure metrics.</div>
+  <div class="alert alert-info">Hosts in <code>none</code> mode still appear in <a href="https://app.datadoghq.com/fleet">Fleet Automation</a> because the Agent continues to send metadata. However, they do not appear in infrastructure dashboards or queries that rely on infrastructure metrics.</div>
 
 ## Configure infrastructure mode
 
