@@ -15,10 +15,6 @@ further_reading:
   text: "dd-sdk-unity source code"
 ---
 
-{{< callout url="http://datadoghq.com/product-preview/feature-flags/" >}}
-Feature Flags are in Preview. Complete the form to request access.
-{{< /callout >}}
-
 <div class="alert alert-info">This page documents the <strong>direct FlagsClient API</strong> for Unity Feature Flags. If you're looking for OpenFeature integration, see <a href="/feature_flags/client/unity-openfeature/">Unity Feature Flags (OpenFeature)</a>.</div>
 
 ## Overview

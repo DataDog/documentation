@@ -18,10 +18,6 @@ further_reading:
   text: "OpenFeature"
 ---
 
-{{< callout url="http://datadoghq.com/product-preview/feature-flags/" >}}
-Feature Flags are in Preview. Complete the form to request access.
-{{< /callout >}}
-
 <div class="alert alert-info">This page documents the <strong>OpenFeature integration</strong> for Unity Feature Flags. For the direct FlagsClient API (without OpenFeature), see <a href="/feature_flags/client/unity/">Unity Feature Flags</a>.</div>
 
 ## Overview
