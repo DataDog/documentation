@@ -1,29 +1,25 @@
 ---
 title: Enabling App and API Protection for Azure Container Apps in Go
 further_reading:
-    - link: "/security/application_security/how-it-works/"
-      tag: "Documentation"
-      text: "How App and API Protection Works"
-    - link: "/security/default_rules/?category=cat-application-security"
-      tag: "Documentation"
-      text: "OOTB App and API Protection Rules"
-    - link: "/security/application_security/troubleshooting"
-      tag: "Documentation"
-      text: "Troubleshooting App and API Protection"
-    - link: "/security/application_security/threats/"
-      tag: "Documentation"
-      text: "App and API Protection"
+- link: "/security/application_security/how-it-works/"
+  tag: "Documentation"
+  text: "How App and API Protection Works"
+- link: "/security/default_rules/?category=cat-application-security"
+  tag: "Documentation"
+  text: "OOTB App and API Protection Rules"
+- link: "/security/application_security/troubleshooting"
+  tag: "Documentation"
+  text: "Troubleshooting App and API Protection"
+- link: "/security/application_security/threats/"
+  tag: "Documentation"
+  text: "App and API Protection"
 ---
 
 <div class="alert alert-info">AAP support for Azure Container Apps is in Preview.</div>
 
-**Note**: Threat Protection through Remote Configuration is not supported. Use [Workflows][5] to block IPs in your [WAF][6].
+**Note**: Threat Protection through Remote Configuration is not supported. Use [Workflows][4] to block IPs in your [WAF][5].
 
 ## Setup
-
-{{% collapse-content title="APM Tracing Enabled" level="h4" %}}
-
-Follow these steps to enable App and API Protection with APM tracing on your Azure Container App.
 
 1. **Install the Datadog Go tracer**.
 
@@ -48,23 +44,14 @@ go get github.com/DataDog/dd-trace-go/v2/profiler
 go get github.com/DataDog/dd-trace-go/contrib/net/http/v2
 {{< /code-block >}}
 
-   For more information, see [Tracing Go Applications][1] and the [Tracer README][2].
-
    Compile your Go binary with the `appsec` build tag enabled:
-
    {{< code-block lang="shell" disable_copy="false" >}}
 go build --tags "appsec" ...
 {{< /code-block >}}
 
-2. **Enable App and API Protection**.
+   For more information, see [Tracing Go Applications][1] and the [Tracer README][2].
 
-   Set the following environment variable in your application container:
-
-   ```
-   DD_APPSEC_ENABLED=true
-   ```
-
-3. **Install serverless-init as a sidecar**.
+2. **Install serverless-init as a sidecar**.
 
    {{% serverless-init-install mode="sidecar" %}}
 
@@ -92,48 +79,31 @@ go build --tags "appsec" ...
 
    {{< /tabs >}}
 
-4. **Set up logs**.
+## Configuration
 
-   In the previous step, you created a shared volume. In this step, configure your logging library to write logs to the file set in `DD_SERVERLESS_LOG_PATH`. In Go, Datadog recommends writing logs in a JSON format. For example, you can use a third-party logging library such as `logrus`:
-   {{< code-block lang="go" disable_copy="false" >}}
-const LOG_FILE = "/LogFiles/app.log"
+### Enable App and API Protection
 
-os.MkdirAll(filepath.Dir(LOG_FILE), 0755)
-logFile, err := os.OpenFile(LOG_FILE, os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0666)
-defer logFile.Close()
+Set the environment variable `DD_APPSEC_ENABLED=true` in your application container to enable App and API Protection.
 
-logrus.SetOutput(logFile)
-logrus.SetFormatter(&logrus.JSONFormatter{})
-logrus.AddHook(&dd_logrus.DDContextLogHook{})
+### Disable APM tracing
 
-logrus.WithContext(ctx).Info("Hello World!")
-{{< /code-block >}}
+To use App and API Protection without APM tracing, set `DD_APM_TRACING_ENABLED=false` in your application container in addition to `DD_APPSEC_ENABLED=true`.
 
-   Datadog recommends setting the environment variable `DD_SOURCE=go` in your sidecar container to enable advanced Datadog log parsing.
+{{% serverless-init-env-vars-sidecar language="go" defaultSource="containerapp" %}}
 
-   For more information, see [Correlating Go Logs and Traces][3].
-
-{{% /collapse-content %}}
-
-{{% collapse-content title="APM Tracing Disabled" level="h4" %}}
-To disable APM tracing while keeping App and API Protection enabled, you must set the APM tracing variable to false.
-
-Follow the same steps as above, but set the following environment variables in your application container:
-
-```
-DD_APPSEC_ENABLED=true
-DD_APM_TRACING_ENABLED=false
-```
-
-{{% /collapse-content %}}
+{{% svl-tracing-env %}}
 
 ## Testing threat detection
 
-To see App and API Protection threat detection in action, send known attack patterns to your application. For example, send a request with the user agent header set to `dd-test-scanner-log` to trigger a [security scanner attack][4] attempt:
+To see App and API Protection threat detection in action, send known attack patterns to your application. For example, send a request with the user agent header set to `dd-test-scanner-log` to trigger a [security scanner attack][6] attempt:
 ```sh
 curl -A 'dd-test-scanner-log' https://<YOUR_APP_URL>/existing-route
 ```
-After you enable your application and exercise it, threat information appears in the [Application Signals Explorer][8].
+After you enable your application and exercise it, threat information appears in the [Application Signals Explorer][7].
+
+## Troubleshooting
+
+{{% serverless-init-troubleshooting productNames="Azure Container Apps" %}}
 
 ## Further reading
 
@@ -142,7 +112,7 @@ After you enable your application and exercise it, threat information appears in
 [1]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/go/
 [2]: https://github.com/DataDog/dd-trace-go?tab=readme-ov-file#installing
 [3]: /tracing/other_telemetry/connect_logs_and_traces/go/
-[4]: /security/default_rules/security-scan-detected/
-[5]: /actions/workflows/
-[6]: /security/application_security/waf-integration/
-[8]: https://app.datadoghq.com/security/appsec
+[4]: /actions/workflows/
+[5]: /security/application_security/waf-integration/
+[6]: /security/default_rules/security-scan-detected/
+[7]: https://app.datadoghq.com/security/appsec
