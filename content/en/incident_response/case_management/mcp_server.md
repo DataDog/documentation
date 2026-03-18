@@ -17,7 +17,7 @@ The [Datadog MCP Server][1] exposes a  `cases` toolset so that AI agents that su
 - **Creating a new case** to track information related to an ongoing investigation
 - **Updating an existing case** with new findings, links to related Jira tickets, or escalated priority
 
-## Available Tools
+## Available tools
 
 For setup instructions and full details on the `cases` toolset, see the [Datadog MCP Server documentation][1].
 
