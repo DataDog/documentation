@@ -16,7 +16,7 @@
 | SentinelOne                                | None           | 1                 | 1                   |
 | Socket*                                    | N/A            | N/A               | N/A                 |
 | Splunk HTTP Event Collector (HEC)          | None           | 1                 | 1                   |
-| Sumo Logic Hosted Collecter                | None           | 10                | 1                   |
+| Sumo Logic Hosted Collector                | None           | 10                | 1                   |
 | Syslog*                                    | N/A            | N/A               | N/A                 |
 
 *Destination does not batch events.
