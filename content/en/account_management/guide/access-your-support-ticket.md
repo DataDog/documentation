@@ -97,13 +97,15 @@ further_reading:
 <ol>
     <li>Navigate to <a href="https://govsupport.ddog-gov.com">the Datadog GovCloud support portal</a>.</li>
     <li>Click <strong>Sign Up</strong>.</li>
-    <li>Complete the registration form using an email address associated with your existing GovCloud Datadog account.</li>
-    <li>Verify your support account via the email from <code>help@ddog-gov.com</code>.</li>
+    <li>Complete the registration form, using the email address associated with your existing GovCloud Datadog account.</li>
+    <li>In a separate browser tab, navigate to your email. Open the verification email from <code>help@ddog-gov.com</code> and copy the verification code.</li>
+    <li>In the Datadog GovCloud support portal, enter the verification code.</li>
+    <li>Click <strong>Verify</strong>.
 </ol>
 
-<h2>Create a support ticket</h2>
+<h2>Create a new case</h2>
 
-<p>To create a support ticket:</p>
+<p>To create a new case:</p>
 
 <ol>
     <li>Navigate to <a href="https://govsupport.ddog-gov.com">the Datadog GovCloud support portal</a>.</li>
@@ -115,13 +117,13 @@ further_reading:
     <li>Click <strong>Submit</strong>.</li>
 </ol>
 
-<h2>Access existing tickets</h2>
+<h2>Access existing cases</h2>
 
-<p>If you have opened at least one Datadog support ticket, follow this process to access your tickets:</p>
+<p>If you have opened at least one Datadog case, follow this process to access your cases:</p>
 
 <ol>
     <li>Log in at <a href="https://govsupport.ddog-gov.com">the Datadog GovCloud support portal</a>.</li>
-    <li>Change the filter from <strong>Recently Viewed</strong> to <strong>Cases</strong> to view all tickets.</li>
+    <li>Change the filter from <strong>Recently Viewed</strong> to <strong>Cases</strong> to view all cases.</li>
     <li>Click <strong>Case Number</strong> or <strong>Subject</strong> to view details.</li>
 </ol>
 
