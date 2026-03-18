@@ -574,7 +574,7 @@ Para obtener más información, consulta [`fastlane-plugin-datadog`][1].
 [1]: https://github.com/DataDog/datadog-fastlane-plugin
 
 {{% /tab %}}
-{{% tab "GitHub Actions" (Acciones GitHub) %}}
+{{% tab "GitHub Actions (Acciones GitHub)" %}}
 
 La [GitHub Action dSYM de carga de Datadog][1] te permite cargar tus símbolos en tus trabajos de GitHub Action:
 
