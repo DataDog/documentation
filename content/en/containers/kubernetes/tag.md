@@ -961,3 +961,4 @@ DD_CONTAINER_LABELS_AS_TAGS='{"app":"kube_app"}'
 [4]: /getting_started/tagging/assigning_tags/?tab=containerizedenvironments#tags-cardinality
 [5]: /containers/guide/template_variables/
 
+

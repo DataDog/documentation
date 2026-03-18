@@ -1143,3 +1143,4 @@ The host tag is assigned automatically by the Datadog Agent aggregating the metr
 [10]: /containers/kubernetes/tag
 
 
+

@@ -1187,3 +1187,4 @@ For manual configuration, you can set the environment variable `DD_APPSEC_AUTOMA
 [14]: https://app.datadoghq.com/security/appsec/inventory/services?tab=capabilities
 [15]: /tracing/guide/remote_config
 
+

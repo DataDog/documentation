@@ -872,3 +872,4 @@ val inputStream = context.getRawResAsRumResource(id)
 [23]: https://app.datadoghq.com/organization-settings/api-keys
 [24]: https://app.datadoghq.com/source-code/setup/rum
 [25]: /real_user_monitoring/application_monitoring/android/setup/#track-background-events
+
