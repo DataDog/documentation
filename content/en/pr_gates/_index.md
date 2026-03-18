@@ -106,6 +106,9 @@ You can create rules to block code changes from being merged when a pull request
 
 {{< img src="pr_gates/setup/flaky_tests.png" alt="A PR Gate rule that fails when a pull request introduces at least one new flaky test" style="width:80%" >}}
 
+Use this PR Gate together with [Early Flake Detection][1] to detect newly added flaky tests.
+
+[1]: /tests/flaky_tests/early_flake_detection
 {{% /tab %}}
 {{< /tabs >}}
 
