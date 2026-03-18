@@ -4,29 +4,29 @@ is_beta: true
 private: true
 disable_toc: false
 aliases:
-- /cloud_cost_management/saas_costs
+    - /cloud_cost_management/saas_costs
 further_reading:
-- link: "/cloud_cost_management/"
-  tag: "Documentation"
-  text: "Cloud Cost Management"
-- link: "/cloud_cost_management/setup/aws"
-  tag: "Documentation"
-  text: "Gain insights into your AWS bill"
-- link: "/cloud_cost_management/setup/azure"
-  tag: "Documentation"
-  text: "Gain insights into your Azure bill"
-- link: "/cloud_cost_management/setup/google_cloud"
-  tag: "Documentation"
-  text: "Gain insights into your Google Cloud bill"
-- link: "/cloud_cost_management/setup/oracle"
-  tag: "Documentation"
-  text: "Gain insights into your Oracle bill"
-- link: "/cloud_cost_management/setup/custom"
-  tag: "Documentation"
-  text: "Gain insights into your custom costs"
-- link: "https://www.datadoghq.com/blog/total-cost-of-service-ownership-ccm/"
-  tag: "Blog"
-  text: "Quickly and comprehensively analyze the cloud and SaaS costs behind your services"
+    - link: '/cloud_cost_management/'
+      tag: 'Documentation'
+      text: 'Cloud Cost Management'
+    - link: '/cloud_cost_management/setup/aws'
+      tag: 'Documentation'
+      text: 'Gain insights into your AWS bill'
+    - link: '/cloud_cost_management/setup/azure'
+      tag: 'Documentation'
+      text: 'Gain insights into your Azure bill'
+    - link: '/cloud_cost_management/setup/google_cloud'
+      tag: 'Documentation'
+      text: 'Gain insights into your Google Cloud bill'
+    - link: '/cloud_cost_management/setup/oracle'
+      tag: 'Documentation'
+      text: 'Gain insights into your Oracle bill'
+    - link: '/cloud_cost_management/setup/custom'
+      tag: 'Documentation'
+      text: 'Gain insights into your custom costs'
+    - link: 'https://www.datadoghq.com/blog/total-cost-of-service-ownership-ccm/'
+      tag: 'Blog'
+      text: 'Quickly and comprehensively analyze the cloud and SaaS costs behind your services'
 ---
 
 {{< callout btn_hidden="true" header="Join the Preview!">}}
@@ -73,16 +73,18 @@ Navigate to [**Cloud Cost** > **Settings**, select **Accounts**][8] and then cli
 7. Follow step 5 of the [Snowflake integration][103] page to configure the key-value pair authentication.
 8. Click **Save**.
 
-Your Snowflake cost data for the past 15 months can be accessed in Cloud Cost Management after 24 hours. To access the available data collected by each SaaS Cost Integration, see the [Data Collected section](#data-collected).
+Snowflake cost data from the past 6 months is available in Cloud Cost Management within 24 hours. To access the available data collected by each SaaS Cost Integration, see the [Data Collected section](#data-collected).
 
 **Snowflake query tags**
 
 [Snowflake's query tags][105] are powerful metadata strings that can be associated with queries. The [Snowflake Cost Management integration][101] ingests [JSON parsable][106] query tags present in a comma-separated allowlist found in the Snowflake integration tile.
 
 For example, if an organization wishes to group its Snowflake compute costs by the `team` and `application` dimensions, it may choose to tag its Snowflake queries for a specific team's application in the following manner:
+
 ```
 ALTER SESSION SET QUERY_TAG = '{"team": "devops", "application": "CI_job_executor"}';
 ```
+
 {{< img src="cloud_cost/saas_costs/snowflake_query_tags_example.png" alt="Group costs by team and application query tags." style="width:100%" >}}
 
 As a result, the costs of all queries executed with the `team` and `application` query tags are attributable to those concepts.
@@ -102,6 +104,7 @@ Object tags are user-defined strings that you can attach to Snowflake objects fo
 All object tag configuration is done within [Snowflake][104].
 
 Notes:
+
 - **Tag Inheritance**: Snowflake objects adhere to a hierarchical structure, and the CCM integration considers inherited tags when submitting cost data.
 
 {{< img src="cloud_cost/saas_costs/snowflake_setup.png" alt="Integrate with Snowflake to collect cost data." style="width:100%" >}}
@@ -124,6 +127,7 @@ Notes:
 5. Click **Save Databricks Workspace**.
 
 Your service principal requires read access to the [system tables](https://docs.databricks.com/aws/en/admin/system-tables/) within Unity Catalog.
+
 ```sql
 GRANT USE CATALOG ON CATALOG system TO <service_principal>;
 GRANT USE SCHEMA ON CATALOG system TO <service_principal>;
@@ -138,15 +142,14 @@ Your Databricks cost data for the past 15 months can be accessed in Cloud Cost M
 
 {{% /tab %}}
 
-
 {{% tab "OpenAI" %}}
 
 <div class="alert alert-danger">An <strong>admin-scoped API key is required</strong> to collect OpenAI cost data for Cloud Cost Management. Project-scoped API keys cannot collect cost data.</div>
 
 1. Create an [admin API key][103] in your OpenAI account settings:
-   - Log in to your [OpenAI Account][104].
-   - Navigate to the [Admin Keys page][105] or go to **API keys** under **Organization settings** and select the **Admin keys** tab.
-   - Click **Create a new secret key** and copy the created admin API key.
+    - Log in to your [OpenAI Account][104].
+    - Navigate to the [Admin Keys page][105] or go to **API keys** under **Organization settings** and select the **Admin keys** tab.
+    - Click **Create a new secret key** and copy the created admin API key.
 2. Navigate to the [OpenAI integration tile][102] in Datadog and click **Add Account**.
 3. Enter your OpenAI account name, input your admin API key, and optionally, specify tags.
 4. Under the **Resources** section, click the toggle for each account to enable `OpenAI Billing Usage Data Collection`.
@@ -533,32 +536,32 @@ The following table contains a non-exhaustive list of out-of-the-box tags associ
 
 {{% tab "OpenAI" %}}
 
-| Tag Name | Tag Description |
-|---|---|
+| Tag Name             | Tag Description                                                   |
+| -------------------- | ----------------------------------------------------------------- |
 | `charge_description` | The name of the model whose costs are associated with the charge. |
-| `organization_id` | The unique identifier of the organization. |
-| `organization_name` | The name of the organization. |
-| `project_id` | The unique identifier of the project. |
-| `project_name` | The name of the project. |
+| `organization_id`    | The unique identifier of the organization.                        |
+| `organization_name`  | The name of the organization.                                     |
+| `project_id`         | The unique identifier of the project.                             |
+| `project_name`       | The name of the project.                                          |
 
 {{% /tab %}}
 
 {{% tab "Anthropic" %}}
 
-| Tag Name | Tag Description |
-|---|---|
-| `workspace_id` | The unique identifier of the Anthropic workspace. |
-| `workspace_name` | A tag-normalized version of the workspace name. |
-| `display_workspace_name` | The unaltered name of the workspace. |
-| `org_id` | The unique identifier of the Anthropic organization. |
-| `org_name` | A tag-normalized version of the Anthropic organization's name. |
-| `display_org_name` | The unaltered name of the organization. |
-| `model_id` | The canonical Anthropic model identifier (for example, `claude-3-opus-20240229`). |
-| `model` | An alias for `model_id`, provided for compatibility and consistency with usage and metrics. |
-| `model_name` | The friendly name of the model (for example, `Claude 3 Opus`). |
-| `service_tier` | The Anthropic service plan or tier associated with the usage (for example, `standard`, `pro`, `enterprise`). |
-| `token_type` | The category of tokens consumed.|
-| `context_window` | The context window size for the tokens (for example, `tier_0-200k`). |
+| Tag Name                 | Tag Description                                                                                              |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------ |
+| `workspace_id`           | The unique identifier of the Anthropic workspace.                                                            |
+| `workspace_name`         | A tag-normalized version of the workspace name.                                                              |
+| `display_workspace_name` | The unaltered name of the workspace.                                                                         |
+| `org_id`                 | The unique identifier of the Anthropic organization.                                                         |
+| `org_name`               | A tag-normalized version of the Anthropic organization's name.                                               |
+| `display_org_name`       | The unaltered name of the organization.                                                                      |
+| `model_id`               | The canonical Anthropic model identifier (for example, `claude-3-opus-20240229`).                            |
+| `model`                  | An alias for `model_id`, provided for compatibility and consistency with usage and metrics.                  |
+| `model_name`             | The friendly name of the model (for example, `Claude 3 Opus`).                                               |
+| `service_tier`           | The Anthropic service plan or tier associated with the usage (for example, `standard`, `pro`, `enterprise`). |
+| `token_type`             | The category of tokens consumed.                                                                             |
+| `context_window`         | The context window size for the tokens (for example, `tier_0-200k`).                                         |
 
 {{% /tab %}}
 
@@ -566,15 +569,15 @@ The following table contains a non-exhaustive list of out-of-the-box tags associ
 
 **Note**: The GitHub cost integration estimates costs based on list prices and usage data, and includes discount values when available. It does not account for any negotiated rates.
 
-| Tag Name | Tag Description |
-|---|---|
-| `enterprise_name` | Alphanumeric string identifying the GitHub enterprise account. |
-| `charge_description` | The description of the charge. |
-| `product` | The product of usage, for example "actions" or "storage". |
-| `organization_name` | The GitHub organization. |
-| `repository_name` | The GitHub repository. |
-| `billing_currency` | The billing currency, for example "USD". |
-| `discount` | If the cost item is a discount. |
+| Tag Name             | Tag Description                                                |
+| -------------------- | -------------------------------------------------------------- |
+| `enterprise_name`    | Alphanumeric string identifying the GitHub enterprise account. |
+| `charge_description` | The description of the charge.                                 |
+| `product`            | The product of usage, for example "actions" or "storage".      |
+| `organization_name`  | The GitHub organization.                                       |
+| `repository_name`    | The GitHub repository.                                         |
+| `billing_currency`   | The billing currency, for example "USD".                       |
+| `discount`           | If the cost item is a discount.                                |
 
 {{% /tab %}}
 
@@ -619,26 +622,26 @@ The following table contains a non-exhaustive list of out-of-the-box tags associ
 
 {{% tab "Elastic Cloud" %}}
 
-| Tag Name | Tag Description |
-|---|---|
-| `charge_description` | The SKU of a charge. |
-| `kind` | The type of resource. |
-| `name` | The unique identifier of the Elastic Cloud resource. |
-| `price_per_hour` | The cost of the Elastic Cloud resource per hour. |
+| Tag Name             | Tag Description                                      |
+| -------------------- | ---------------------------------------------------- |
+| `charge_description` | The SKU of a charge.                                 |
+| `kind`               | The type of resource.                                |
+| `name`               | The unique identifier of the Elastic Cloud resource. |
+| `price_per_hour`     | The cost of the Elastic Cloud resource per hour.     |
 
 {{% /tab %}}
 {{% tab "MongoDB" %}}
 
-| Tag Name | Tag Description |
-|---|---|
-| `charge_description` | The description of a charge. |
-| `cluster_name` | The name of the cluster that incurred the charge. |
-| `group_id` | ID of the project with which the line item is associated. |
-| `invoice_id` | The unique identifier of the invoice. |
-| `mongo_org_id` | MongoDB organization ID. |
-| `replica_set_name` | Name of the replica set with which the line item is associated. |
-| `resource_tags` | Arbitrary tags on clusters set by users, usually as key-value pairs. |
-| `status` | State of the payment. |
+| Tag Name             | Tag Description                                                      |
+| -------------------- | -------------------------------------------------------------------- |
+| `charge_description` | The description of a charge.                                         |
+| `cluster_name`       | The name of the cluster that incurred the charge.                    |
+| `group_id`           | ID of the project with which the line item is associated.            |
+| `invoice_id`         | The unique identifier of the invoice.                                |
+| `mongo_org_id`       | MongoDB organization ID.                                             |
+| `replica_set_name`   | Name of the replica set with which the line item is associated.      |
+| `resource_tags`      | Arbitrary tags on clusters set by users, usually as key-value pairs. |
+| `status`             | State of the payment.                                                |
 
 {{% /tab %}}
 
