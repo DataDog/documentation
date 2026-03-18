@@ -33,7 +33,7 @@ Use functions and operators in Sheets to analyze and transform your data. Functi
 ### Text
 
 | Function | Description | Example | Available in |
-| -------- | ----------- | ------- | ------------ |
+| ------------ | ------------ | ------------ | ------------ |
 | REGEXMATCH(text_string, regular_expression) | Evaluates whether a text string matches a regular expression. | REGEXMATCH("ABC 123 def", "\\\\d+") => TRUE | Table, Sheet |
 | REGEXEXTRACT(text_string, regular_expression) | Extracts the first substring that matches a specified regex pattern. | REGEXEXTRACT("ABC 123 def", "\\\\d+") => "123" | Table, Sheet |
 | REGEXCOUNT(text_string, regular_expression) | Counts the number of times a regex pattern appears in a text string. | REGEXCOUNT("abc 123 def", "\\\\d+") => 2 | Table, Sheet |
@@ -58,7 +58,7 @@ Use functions and operators in Sheets to analyze and transform your data. Functi
 ### Logical
 
 | Function | Description | Example | Available in |
-| -------- | ----------- | ------- | ------------ |
+| ------------ | ------------ | ------------ | ------------ |
 | IF(logical_expression, value_if_true, value_if_false) | Returns one value if a logical expression is TRUE and another if it is FALSE. | IF(42>9, "all good", "something is wrong in the matrix") | Table, Sheet |
 | IFS(logical_test1, value_if_true1, [logical_test2, value_if_true2], …) | Evaluates multiple conditions and returns a value that corresponds to the first true condition. | IFS(A1>90, "A", A1>80, "B") | Table, Sheet |
 | AND(logical_expression1, [logical_expression2, …]) | Returns true if all of the provided arguments are logically true, and false if any of the provided arguments are logically false. | AND(A1=1, A2=2) | Table, Sheet |
@@ -74,7 +74,7 @@ Use functions and operators in Sheets to analyze and transform your data. Functi
 ### Math
 
 | Function | Description | Example | Available in |
-| -------- | ----------- | ------- | ------------ |
+| ------------ | ------------ | ------------ | ------------ |
 | ABS(number) | Returns the absolute value of a number. | ABS(26.34) | Table, Sheet |
 | CEILING(number, factor) | Rounds a number up to the nearest integer multiple of the specified factor. | CEILING(826.645, 10) | Table, Sheet |
 | FLOOR(number, factor) | Rounds a number down to the nearest integer multiple of the specified factor. | FLOOR(826.645, 10) | Table, Sheet |
@@ -101,7 +101,7 @@ Use functions and operators in Sheets to analyze and transform your data. Functi
 ### Date and time
 
 | Function | Description | Example | Available in |
-| -------- | ----------- | ------- | ------------ |
+| ------------ | ------------ | ------------ | ------------ |
 | DATE(year, month, day) | Converts a provided year, month, and day into a date. | DATE(2021, 10, 31) | Table, Sheet |
 | DATEDIF(start_date, end_date, unit) | Calculates the number of days, months, or years between two dates. | DATEDIF("10/17/1979", "8/22/2019", "Y") will return 39 | Table, Sheet |
 | TODAY() | Returns the current date. | TODAY() | Sheet |
@@ -121,7 +121,7 @@ Use functions and operators in Sheets to analyze and transform your data. Functi
 ### Lookup and reference
 
 | Function | Description | Example | Available in |
-| -------- | ----------- | ------- | ------------ |
+| ------------ | ------------ | ------------ | ------------ |
 | VLOOKUP(search_key, range, index, [is_sorted]) | Searches for a value in the first column of a range and returns a value in the same row from a specified column. | VLOOKUP("Apple", A1:C10, 2, FALSE) | Sheet |
 | HLOOKUP(search_key, range, index, [is_sorted]) | Searches for a value in the first row of a range and returns a value in the same column from a specified row. | HLOOKUP("Apple", A1:D3, 2, FALSE) | Sheet |
 | INDEX(reference, row, [column]) | Returns the value of an element in a table based on row and column numbers. | INDEX(A1:D3, 2, 3) | Sheet |
@@ -133,7 +133,7 @@ Use functions and operators in Sheets to analyze and transform your data. Functi
 ### Statistical
 
 | Function | Description | Example | Available in |
-| -------- | ----------- | ------- | ------------ |
+| ------------ | ------------ | ------------ | ------------ |
 | AVERAGE(value1, [value2, ...]) | Returns the numerical average value in a dataset, ignoring text. | AVERAGE('APM'#"duration") | Sheet |
 | AVERAGEIF(range, criteria, [average_range]) | Returns the average of cells that meet a specified criteria. | AVERAGEIF('APM'#"env", "prod", 'APM'#"duration") | Sheet |
 | AVERAGEIFS(average_range, range1, criteria1, ...) | Returns the average of cells that meet multiple criteria. | AVERAGEIFS('APM'#"duration", 'APM'#"env", "prod", 'APM'#"service", "web") | Sheet |
@@ -148,7 +148,7 @@ Use functions and operators in Sheets to analyze and transform your data. Functi
 ### Financial
 
 | Function | Description | Example | Available in |
-| -------- | ----------- | ------- | ------------ |
+| ------------ | ------------ | ------------ | ------------ |
 | PMT(rate, number_of_periods, present_value, [future_value], [end_or_beginning]) | Calculates the payment for a loan based on constant payments and a constant interest rate. | PMT(0.05/12, 60, 20000) | Sheet |
 | PV(rate, number_of_periods, payment_amount, [future_value], [end_or_beginning]) | Calculates the present value of an investment. | PV(0.05/12, 60, -377.42) | Sheet |
 | FV(rate, number_of_periods, payment_amount, [present_value], [end_or_beginning]) | Calculates the future value of an investment based on periodic, constant payments and a constant interest rate. | FV(0.06/12, 240, -500) | Sheet |
@@ -161,7 +161,7 @@ Use functions and operators in Sheets to analyze and transform your data. Functi
 ### Info
 
 | Function | Description | Example | Available in |
-| -------- | ----------- | ------- | ------------ |
+| ------------ | ------------ | ------------ | ------------ |
 | ISBLANK(value) | Tests whether a cell is blank. | ISBLANK(A1) | Sheet |
 | ISNUMBER(value) | Tests whether a value is a number. | ISNUMBER(123) | Sheet |
 | TYPE(value) | Returns the data type of a value as a number (1 = number, 2 = text, 4 = logical, 16 = error). | TYPE(123) => 1 | Sheet |

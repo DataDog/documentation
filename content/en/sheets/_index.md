@@ -117,18 +117,6 @@ For example, `=SUM('Error Logs'#"duration_ms")` sums every value in the `duratio
 
 Sheet formulas support all functions listed on the [Functions and Operators][3] page, plus additional lookup, statistical, financial, and other functions available only in sheets. See the [Sheet functions][21] section for the full list.
 
-### Error values
-
-| Error | Cause | How to handle |
-| -------------------- | ----- | ------------- |
-| `#DIV/0!` | Division by zero | `=IFERROR(A1/B1,0)` |
-| `#VALUE!` | Wrong argument type, for example text passed to a math function | Check input types |
-| `#NUM!` | Invalid numeric value, for example `SQRT(-1)` | Validate inputs with `IF` |
-| `#N/A` | Value not found, for example a failed `VLOOKUP` | `=IFNA(VLOOKUP(...),"not found")` |
-| `#REF!` | Reference to a cell that no longer exists | Update the formula |
-| `#NAME?` | Unrecognized function name | Check spelling |
-| `#ERROR!` | Formula could not be parsed | Check syntax |
-
 #### Examples
 
 **Aggregate a table column in a sheet**
@@ -176,6 +164,18 @@ Calculate the monthly payment on a $50,000 loan at 6% annual interest over 3 yea
 ```
 =PMT(0.06/12,36,-50000)
 ```
+
+### Error values
+
+| Error | Cause | How to handle |
+| -------------------- | ----- | ------------- |
+| `#DIV/0!` | Division by zero | `=IFERROR(A1/B1,0)` |
+| `#VALUE!` | Wrong argument type, for example text passed to a math function | Check input types |
+| `#NUM!` | Invalid numeric value, for example `SQRT(-1)` | Validate inputs with `IF` |
+| `#N/A` | Value not found, for example a failed `VLOOKUP` | `=IFNA(VLOOKUP(...),"not found")` |
+| `#REF!` | Reference to a cell that no longer exists | Update the formula |
+| `#NAME?` | Unrecognized function name | Check spelling |
+| `#ERROR!` | Formula could not be parsed | Check syntax |
 
 ### Cell formatting
 
