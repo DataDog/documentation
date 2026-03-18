@@ -145,13 +145,12 @@ See [Unified Service Tagging][10] for more information.
 
 ### Step 3: Apply your changes and verify injection 
 
-After applying your updated pod spec, let Kubernetes re-create your pods to trigger the Admission Controller.
-
+After adding the required pod metadata to your manifest, apply the change in Kubernetes:
 ```
 kubectl apply -f my-deployment.yaml
 ```
 
-When injection is successful, the pod includes two `initContainers` named `datadog-init-apm-inject` and `datadog-lib-<LANGUAGE>-init` for your specified tracer language and version:
+As Kubernetes recreates your pods they trigger the Admission Controller for injection. When injection is successful, the pod includes two `initContainers` named `datadog-init-apm-inject` and `datadog-lib-<LANGUAGE>-init` for your specified tracer language and version:
 
 {{< img src="tracing/trace_collection/datadog-lib-init.png" alt="Pod details in Datadog with `initContainers` listed" style="width:100%;" >}}
 
