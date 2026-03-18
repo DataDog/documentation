@@ -45,7 +45,7 @@ Bits AI can run investigations on the following Security log sources:
 - Azure
 - GCP
 - Kubernetes
-- EntraID
+- Microsoft Entra ID
 - Okta
 - Google Workspace
 - Microsoft 365
@@ -61,7 +61,7 @@ Bits AI can run investigations on the following Security log sources:
 To use Bits AI Security Analyst:
 - Ensure your organization is using a non-legacy version of Cloud SIEM. If you need assistance, contact [Datadog support][1].
 - To set up Bits AI Security Analyst, you need the **Bits AI Security Analyst Config Write** [permission][2].
-- To view investigations, you must have 14 days or more of log history. If you have a shorter log history, you can still set up Bits AI Security Analyst, but won't see any investigations until you have that much history.
+- To view investigations, you must have **14 days or more** of log history. If you have a shorter log history, you can still set up Bits AI Security Analyst, but won't see any investigations until you have that much history.
 
 ### Setup
 
