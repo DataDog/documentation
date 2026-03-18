@@ -304,7 +304,7 @@ For security, use a scoped API key and application key from a [service account][
 
 ### Local binary authentication
 
-Local authentication is recommended for Cline and when remote authentication is unreliable or not available. After installation, you typically do not need to update the local binary to benefit from MCP Server updates, as the tools are remote.
+Local authentication is recommended for Cline and when [remote authentication](#installation) is unreliable or not available. After installation, you typically do not need to update the local binary to benefit from MCP Server updates, as the tools are remote.
 
 {{% collapse-content title="Set up Datadog MCP Server local binary" level="h5" expanded=false id="mcp-local-binary" %}}
 
