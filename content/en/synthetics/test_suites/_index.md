@@ -72,7 +72,7 @@ To create a new Test Suite:
 
 After creating your suite, it appears in the **Suites** tab on the [Synthetic Monitoring tests][1] page, or you can access test suites from **Digital Experience > Test Suites**.
 
-To apply a [Scheduled Downtime][3] to one or more test suites, select them using the checkboxes and click **Add to Downtime** in the bulk actions bar.
+To apply a [Scheduled downtime][3] to one or more test suites, select them using the checkboxes and click **Add to Downtime** in the bulk actions bar.
 
 When viewing a test suite, three tabs are available:
 

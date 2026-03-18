@@ -7986,7 +7986,7 @@ menu:
       url: synthetics/platform/settings
       parent: synthetics_platform
       weight: 706
-    - name: Scheduled Downtime
+    - name: Scheduled downtime
       identifier: synthetics_platform_downtime
       url: synthetics/platform/downtime
       parent: synthetics_platform
