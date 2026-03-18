@@ -11,6 +11,8 @@ further_reading:
 
 Datadog APM can create **inferred spans** for requests that pass through Azure API Management to your backend services. The spans power end-to-end traces, service maps, and sampling based on the API Management gateway.
 
+Inferred spans for Azure API Management are supported for **.NET**, **JavaScript** (Node.js), and **Python** only. Minimum tracer versions: .NET [v3.39.0][1]+, JavaScript [v5.87.0][2]+, Python [v4.6.0][3]+.
+
 ## Prerequisites
 
 - `DD_TRACE_INFERRED_PROXY_SERVICES_ENABLED` is set in your application container or runtime:
@@ -19,8 +21,8 @@ Datadog APM can create **inferred spans** for requests that pass through Azure A
   export DD_TRACE_INFERRED_PROXY_SERVICES_ENABLED=true
   {{< /code-block >}}
 
-- Your underlying application is running a [supported web framework](/tracing/trace_collection/proxy_setup/apigateway#supported-versions-and-web-frameworks).
-- Your application tracer meets the [minimum version](/tracing/trace_collection/proxy_setup/apigateway#supported-versions-and-web-frameworks) requirements.
+- Your underlying application is running a [supported web framework](/tracing/trace_collection/proxy_setup/apigateway#supported-versions-and-web-frameworks) for your language.
+- Your application tracer is at or above the minimum version listed above for your language.
 
 ## Setup
 
@@ -87,3 +89,7 @@ DD_TRACE_SAMPLING_RULES='[{"sample_rate":0.5}]'
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v3.39.0
+[2]: https://github.com/DataDog/dd-trace-js/releases/tag/v5.87.0
+[3]: https://github.com/DataDog/dd-trace-py/releases/tag/v4.6.0
