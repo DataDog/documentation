@@ -9,6 +9,11 @@ products:
 
 {{< product-availability >}}
 
+{{< callout url=https://www.datadoghq.com/product-preview/use-reference-tables-in-stream-with-op-to-control-costs/
+ btn_hidden="false" header="Join the Preview!">}}
+ The Enrichment Table processor using Reference Tables is in Preview. Use this form to request access.
+{{< /callout >}}
+
 ## Overview
 
 Logs can contain information like IP addresses, user IDs, or service names that often need additional context. With the Enrichment Table processor, you can add context to your logs, using lookup datasets stored in Datadog [Reference Tables][1], local files, or MaxMind GeoIP tables. The processor matches logs based on a specified key and appends information from your lookup file to the log. If you use Reference Tables, you can connect to and enrich logs with SaaS-based datasets directly stored in ServiceNow, Snowflake, S3, and more.
