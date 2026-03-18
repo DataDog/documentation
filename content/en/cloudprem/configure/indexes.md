@@ -37,7 +37,7 @@ You can reorder indexes at any time by dragging rows or using the **Move to** ac
 
 Each index has its own retention period, which determines how long logs in that index are stored before automatic deletion.
 
-Per-index retention configured through the Datadog UI takes precedence over the global retention set in the [Helm chart values][2]. If you are migrating from a single-index setup, existing logs remain in the default index with the globally configured retention until they expire.
+The index retention configured through the Datadog UI takes precedence over the global retention set in the [Helm chart values][2]. If you are migrating from a single-index setup, existing logs remain in the default index with the globally configured retention until they expire.
 
 
 ## Searching across indexes
