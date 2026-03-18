@@ -138,7 +138,7 @@ After configuring the role, return to the [AWS integration page][1] and save the
 
 **Service Control Policies (SCPs):**
 
-If your AWS account is part of an AWS Organization, a [Service Control Policy][10] applied at the organization or OU level can deny permissions even when the IAM role and trust policy are correctly configured. Verify that no SCP blocks the `sts:AssumeRole` action or the specific API calls required by the integration.
+If your AWS account is part of an AWS Organization, [Service Control Policies][10] can block the integration even when the IAM role and trust policy are correct. See [Missing metrics][11] in the troubleshooting guide for details.
 
 <div class="alert alert-danger">If there is a <code>Datadog is not authorized to perform sts:AssumeRole</code> error, follow the troubleshooting steps recommended in the UI, or read the <a href="https://docs.datadoghq.com/integrations/guide/error-datadog-not-authorized-sts-assume-role/" target="_blank">troubleshooting guide</a>.</div>
 
@@ -154,6 +154,7 @@ If your AWS account is part of an AWS Organization, a [Service Control Policy][1
 [8]: /getting_started/site/
 [9]: /integrations/guide/error-datadog-not-authorized-sts-assume-role/
 [10]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scps.html
+[11]: /integrations/guide/aws-integration-troubleshooting/#missing-metrics
 {{% /tab %}}
 {{% tab "Access keys" %}}
 
