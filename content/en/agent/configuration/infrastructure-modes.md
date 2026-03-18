@@ -22,18 +22,19 @@ Infrastructure modes control how much infrastructure monitoring the Datadog Agen
 
 ## Available modes
 
-| Feature | Full (default) | Basic | None |
-|---------|----------------|-------|------|
-| **Best for** | Hosts that need comprehensive monitoring | VMs and servers that need system metrics only | Hosts running APM, logs, or Error Tracking only |
-| System resource metrics | Supported | Supported | Not supported |
-| Infrastructure integrations | All | [Limited set](#basic) | Not supported |
-| Container Monitoring | Supported | Not supported | Not supported |
-| Live Processes | Supported | Not supported | Not supported |
-| Custom checks and logs-only integrations | Supported | Supported | Supported |
-| Custom metrics | Supported | Not supported | Supported |
-| Visible in infrastructure dashboards | Yes | Yes | No |
+The Agent supports three infrastructure modes. A checkmark ({{< X >}}) indicates the feature is available in that mode.
 
-<div class="alert alert-info">For monitoring employee workstations and laptops, use <code>end_user_device</code> mode. See <a href="/infrastructure/end_user_device_monitoring/">End User Device Monitoring</a> for details.</div>
+| Feature | [Full](#full) (default) | [Basic](#basic) | [None](#none) |
+|---------|-------------------------|-----------------|---------------|
+| System resource metrics | {{< X >}} | {{< X >}} | |
+| Infrastructure integrations | {{< X >}} | {{< X >}} ([limited set](#basic)) | |
+| Container Monitoring | {{< X >}} | | |
+| Live Processes | {{< X >}} | | |
+| Custom checks and logs-only integrations | {{< X >}} | {{< X >}} | {{< X >}} |
+| Custom metrics | {{< X >}} | | {{< X >}} |
+| Visible in infrastructure dashboards | {{< X >}} | {{< X >}} | |
+
+<div class="alert alert-info">For monitoring employee workstations and laptops, use <code>end_user_device</code> mode (Preview). See <a href="/infrastructure/end_user_device_monitoring/">End User Device Monitoring</a> for details.</div>
 
 ### Full
 
@@ -74,7 +75,7 @@ The Agent does not collect infrastructure metrics or run infrastructure integrat
 
 To set the infrastructure mode for a host:
 
-1. Open the [Agent configuration file][18] (`datadog.yaml`) and add `infrastructure_mode` at the root level:
+1. Open the [Agent configuration file][18] and add `infrastructure_mode` at the root level:
 
     {{< code-block lang="yaml" filename="datadog.yaml" disable_copy="true"
       collapsible="true" >}}
