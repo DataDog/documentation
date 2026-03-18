@@ -2670,7 +2670,7 @@ menu:
       parent: case_management
       identifier: case_management_troubleshooting
       weight: 7
-    - name: Agents
+    - name: Agent Builder
       url: actions/agents/
       pre: robot-wui
       identifier: agents

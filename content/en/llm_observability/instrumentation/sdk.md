@@ -1808,8 +1808,8 @@ Supported keys:
 - `template` (str): Template string with placeholders (for example, `"Translate {{text}} to {{lang}}"`).
 - `chat_template` (List[Message]): Multi-message template form. Provide a list of `{ "role": "<role>", "content": "<template string with placeholders>" }` objects.
 - `tags` (Dict[str, str]): Tags to attach to the prompt run.
-- `rag_context_variables` (List[str]): Variable keys that contain ground-truth/context content. Used for [hallucination detection](/llm_observability/evaluations/managed_evaluations/?tab=openai#hallucination).
-- `rag_query_variables` (List[str]): Variable keys that contain the user query. Used for [hallucination detection](/llm_observability/evaluations/managed_evaluations/?tab=openai#hallucination).
+- `rag_context_variables` (List[str]): Variable keys that contain ground-truth/context content. Used for [hallucination detection](/llm_observability/evaluations/custom_llm_as_a_judge_evaluations/template_evaluations#hallucination).
+- `rag_query_variables` (List[str]): Variable keys that contain the user query. Used for [hallucination detection](/llm_observability/evaluations/custom_llm_as_a_judge_evaluations/template_evaluations#hallucination).
 
 {{% /collapse-content %}}
 
@@ -1870,8 +1870,8 @@ Supported properties:
 - `variables` (Record<string, string>): Variables used to populate the template placeholders.
 - `template` (string | List[Message]): Template string with placeholders (for example, `"Translate {{text}} to {{lang}}"`). Alternatively, a list of `{ "role": "<role>", "content": "<template string with placeholders>" }` objects.
 - `tags` (Record<string, string>): Tags to attach to the prompt run.
-- `contextVariables` (string[]): Variable keys that contain ground-truth/context content. Used for [hallucination detection](/llm_observability/evaluations/managed_evaluations/?tab=openai#hallucination).
-- `queryVariables` (string[]): Variable keys that contain the user query. Used for [hallucination detection](/llm_observability/evaluations/managed_evaluations/?tab=openai#hallucination).
+- `contextVariables` (string[]): Variable keys that contain ground-truth/context content. Used for [hallucination detection](/llm_observability/evaluations/custom_llm_as_a_judge_evaluations/template_evaluations#hallucination).
+- `queryVariables` (string[]): Variable keys that contain the user query. Used for [hallucination detection](/llm_observability/evaluations/custom_llm_as_a_judge_evaluations/template_evaluations#hallucination).
 
 {{% /collapse-content %}}
 

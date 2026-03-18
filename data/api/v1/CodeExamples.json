@@ -930,6 +930,11 @@
   "CreateSLO": [
     {
       "group": "service_level_objectives",
+      "suffix": "_707861409",
+      "description": "Create a new metric SLO object using bad events formula returns \"OK\" response"
+    },
+    {
+      "group": "service_level_objectives",
       "suffix": "_512760759",
       "description": "Create a new metric SLO object using sli_specification returns \"OK\" response"
     },
