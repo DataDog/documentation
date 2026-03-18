@@ -73,7 +73,22 @@ As soon as you enable Bits AI Security Analyst, by default, it starts autonomous
    - Click **Rule Settings** to configure investigations for individual rules. You can change the minimum severity for signals to be investigated, and enable or disable individual rules for investigation.
      <div class="alert alert-info">When you enable Bits AI Security Analyst, Datadog analyzes your custom rules to determine whether it can confidently investigate signals associated with it. If you have new custom rules to evaluate, or want to ask about a rule that wasn't made eligible, contact <a href="/help">Datadog support</a>.</div>
    - Click **Query Filter** to write a signal query filter, so Bits AI Security Analyst only investigates signals that match your filter.
-1. Some investigation sources require credentials to run or enhance investigations by accessing logs, telemetry, or other data that isn't in Datadog. To add credentials, click **Edit credentials**, and follow the prompts to select or add a connection. Datadog securely stores and restricts all credentials using Actions Catalog. For more information, see [Connections][4].
+1. Some log sources require credentials to run or enhance investigations by accessing logs, telemetry, or other data that isn't in Datadog. To add credentials, click **Edit credentials**. In the **Select or Add Connection** window that opens, follow the prompts to select an [existing connection][4] from Actions Catalog, or add a connection. Datadog securely stores and restricts all credentials using Actions Catalog.
+   - Some log sources require additional setup so you can create HTTP connections. Here's an example:
+     {{< collapse-content title="Configure SentinelOne" level="h4" expanded=false id="sentinelone" >}}
+     <ol>
+       <li>In SentinelOne, ensure you have permission to create an API token. Create an S1 API service user, then assign the <strong>Viewer</strong> role to that user.</li>
+       <li>In Datadog, in the <strong>Select or Add Connection</strong> window, in the dropdown, select <strong>New Connection</strong>, then click the <strong>HTTP</strong> tile.</li>
+       <li>Add the following information:
+         <ul>
+           <li>In the <strong>Description</strong> field, Datadog recommends adding your token expiry date, to make it easily accessible.</li>
+           <li>In the <strong>Base URL</strong> field, enter your SentinelOne Management Console URL.</li>
+           <li>Under <strong>Token Auth</strong>, enter a name for your token in the <strong>Token Name</strong> field, and your API token in the <strong>Token Value</strong> field.</li>
+         </ul>
+       </li>
+       <li>Click <strong>Next, Confirm Access</strong> to verify your connection.</li>
+     </ol>
+     {{< /collapse-content >}}
 
 ## Disable Bits AI Security Analyst
 
