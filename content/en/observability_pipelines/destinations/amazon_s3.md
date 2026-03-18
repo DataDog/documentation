@@ -128,7 +128,7 @@ You can route logs from Observability Pipelines to Snowflake using the Amazon S3
 
 #### Permissions
 
-For Observability Pipelines to send logs to Amazon S3, the following policy permissions are required:
+To send logs to Amazon S3, the Observability Pipelines Worker requires the following policy permissions:
 
 - `s3:ListBucket`
 - `s3:PutObject`
