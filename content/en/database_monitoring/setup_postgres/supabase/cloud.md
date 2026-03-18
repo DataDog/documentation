@@ -61,7 +61,7 @@ Sourced from `pg_stat_activity`, collected every 5 seconds:
 - Connection aggregates grouped by application, state, user, and database
 
 ### Database instance metadata
-Collected every 5 minutes:
+Collected every 30 seconds:
 - PostgreSQL version
 - Instance identifier and hostname
 - Connection mode (direct or pooler)
