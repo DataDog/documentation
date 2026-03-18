@@ -17,7 +17,7 @@ Datadog Experiments is in Preview. Complete the form to request access.
 {{< /callout >}}
 
 ## Overview 
-Datadog Experiments allows you to measure the causal relationship that new experiences and features have on user outcomes. Experiments uses [Feature Flags][4] to randomly allocate traffic between two or more variations, using one of the variations as a control group.
+Datadog Experiments allows you to measure the causal relationship that new experiences and features have on user outcomes. Datadog Experiments uses [Feature Flags][4] to randomly allocate traffic between two or more variations, using one of the variations as a control group.
 
 This page walks you through planning and launching your experiments. 
 
