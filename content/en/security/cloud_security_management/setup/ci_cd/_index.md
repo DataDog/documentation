@@ -194,7 +194,7 @@ To enable Datadog to link detected vulnerabilities back to the source code (Dock
 
 This allows Datadog to:
 - Display a **preview of the Dockerfile** directly in the Container Image Vulnerabilities panel
-- Enable **source-based remediation**, helping you quickly identify and fix issues in context
+- Enable **source-based remediation**, helping you identify and fix issues in context
 
 These annotations provide the metadata needed to associate a scanned image with its corresponding repository, commit, and Dockerfile path.
 
@@ -216,7 +216,7 @@ Add the following annotations to your image at build time:
 - `org.opencontainers.image.base.name`
   The base image used to build the image (for example, `ubuntu:22.04`)
 
-For more details, see the [OCI Image Spec annotations documentation](https://github.com/opencontainers/image-spec/blob/main/annotations.md).
+For more details, see the [OCI Image Spec annotations documentation][14].
 
 ### Example
 
