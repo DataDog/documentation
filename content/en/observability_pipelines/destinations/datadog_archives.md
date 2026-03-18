@@ -13,7 +13,7 @@ products:
 
 Use the Datadog Archives destination to send logs to Amazon S3 for [archiving][1] in Datadog-rehydratable format. You can [rehydrate][2] these logs later when you want to analyze and investigate them in Datadog.
 
-**Note**: If you want to send your logs to Amazon S3 in JSON or Parquet format, use the Amazon S3 destination.
+**Note**: Use the [Amazon S3][12] destination if you want to send your logs to Amazon S3 in JSON or Parquet format.
 
 You can also [route logs to Snowflake using the Datadog Archives destination](#route-logs-to-snowflake-using-the-datadog-archives-destination).
 
@@ -165,7 +165,11 @@ You can route logs from Observability Pipelines to Snowflake using the Datadog A
 
 #### Permissions
 
-{{% observability_pipelines/aws_authentication/amazon_s3_permissions %}}
+The Observability Pipelines Worker requires these policy permissions to send logs to Amazon S3:
+
+- `s3:ListBucket`
+- `s3:PutObject`
+- `s3:GetObject`
 
 ### Event batching
 
@@ -186,3 +190,4 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 [9]: /logs/log_configuration/archives/?tab=awss3#storage-class
 [10]: https://aws.amazon.com/s3/storage-classes/intelligent-tiering/
 [11]: https://console.aws.amazon.com/iam/
+[12]: /observability_pipelines/destinations/amazon_s3/

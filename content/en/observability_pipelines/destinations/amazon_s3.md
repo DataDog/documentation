@@ -16,7 +16,7 @@ Use the Amazon S3 destination to send logs in JSON or Parquet format to Amazon S
 
 You can also [route logs to Snowflake using the Amazon S3 destination](#route-logs-to-snowflake-using-the-datadog-archives-destination).
 
-**Note**: If you want to send logs to a S3 bucket and be able to [rehydrate][1] them to Datadog, use the [Datadog Archives][2] destination.
+**Note**: If you want to send logs to a S3 bucket and be able to [rehydrate][1] them for analysis and investigation in Datadog, use the [Datadog Archives][2] destination.
 
 ## Set up an Amazon S3 bucket
 
@@ -25,7 +25,7 @@ You can also [route logs to Snowflake using the Amazon S3 destination](#route-lo
 
 #### Set up an IAM policy that allows Workers to write to the S3 bucket
 
-1. Navigate to the [IAM console][11].
+1. Navigate to the [IAM console][3].
 1. Select **Policies** in the left side menu.
 1. Click **Create policy**.
 1. Click **JSON** in the **Specify permissions** section.
@@ -85,7 +85,7 @@ Set up the Amazon S3 destination and its environment variables when you create a
 1. Enter the AWS region the S3 bucket is in.
 1. (Optional) Enter the key prefix.
     - Prefixes are useful for partitioning objects. For example, you can use a prefix as an object key to store objects under a particular directory. If using a prefix for this purpose, it must end in `/` to act as a directory path; a trailing `/` is not automatically added.
-      - See [template syntax][8] if you want to route logs to different object keys based on specific fields in your logs.
+      - See [template syntax][4] if you want to route logs to different object keys based on specific fields in your logs.
       - **Note**: Datadog recommends that you start your prefixes with the directory name and without a lead slash (`/`). For example, `app-logs/` or `service-logs/`.
 1. Select the storage class for your S3 bucket in the **Storage Class** dropdown menu.
 1. Select the encoding you want to use in the **Encoding** dropdown menu (**JSON** or **Parquet**).
@@ -140,7 +140,7 @@ You can route logs from Observability Pipelines to Snowflake using the Amazon S3
 
 #### Permissions
 
-To send logs to Amazon S3, the Observability Pipelines Worker requires the following policy permissions:
+The Observability Pipelines Worker requires these policy permissions to send logs to Amazon S3:
 
 - `s3:GetObject`
 
@@ -158,12 +158,8 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 
 [1]: /logs/log_configuration/rehydrating/
 [2]: /observability_pipelines/destinations/datadog_archives/
-[3]: /integrations/amazon_web_services/#setup
-[4]: /observability_pipelines/configuration/explore_templates/?tab=logs#archive-logs
+[3]: https://console.aws.amazon.com/iam/
+[4]: /observability_pipelines/destinations/#template-syntax
 [5]: /observability_pipelines/configuration/set_up_pipelines/
 [6]: https://docs.snowflake.com/en/user-guide/data-load-snowpipe-auto-s3
 [7]: /observability_pipelines/destinations/#event-batching
-[8]: /observability_pipelines/destinations/#template-syntax
-[9]: /logs/log_configuration/archives/?tab=awss3#storage-class
-[10]: https://aws.amazon.com/s3/storage-classes/intelligent-tiering/
-[11]: https://console.aws.amazon.com/iam/
