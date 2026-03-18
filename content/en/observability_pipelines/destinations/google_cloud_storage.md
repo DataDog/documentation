@@ -80,9 +80,9 @@ There are no secret identifiers to configure.
 
 A batch of events is flushed when one of these parameters is met. See [event batching][5] for more information.
 
-| Maximum Events | Maximum Size (MB)   | Timeout (seconds)   |
-|----------------| ----------------| --------------------|
-| None           | 100             | 900                 |
+| Maximum Events | Maximum Size (MB) | Timeout (seconds)   |
+|----------------|-------------------|---------------------|
+| None           | 100               | 900                 |
 
 [1]: /logs/log_configuration/archives/
 [2]: /logs/log_configuration/rehydrating/

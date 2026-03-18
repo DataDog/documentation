@@ -56,9 +56,9 @@ Set up the New Relic destination and its environment variables when you [set up 
 
 A batch of events is flushed when one of these parameters is met. See [event batching][2] for more information.
 
-| Maximum Events | Maximum Size (MB)   | Timeout (seconds)   |
-|----------------|-----------------|---------------------|
-| 100            | 1               | 1                   |
+| Maximum Events | Maximum Size (MB) | Timeout (seconds)   |
+|----------------|-------------------|---------------------|
+| 100            | 1                 | 1                   |
 
 [1]: https://app.datadoghq.com/observability-pipelines
 [2]: /observability_pipelines/destinations/#event-batching

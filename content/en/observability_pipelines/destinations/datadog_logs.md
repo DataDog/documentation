@@ -107,9 +107,9 @@ Alternatively, you can click on **Review Configured Organizations** in the Datad
 
 A batch of events is flushed when one of these parameters is met. See [event batching][2] for more information.
 
-| Maximum Events | Maximum Size (MB)   | Timeout (seconds)   |
-|----------------|-----------------|---------------------|
-| 1,000          | 4.25            | 5                   |
+| Maximum Events | Maximum Size (MB) | Timeout (seconds)   |
+|----------------|-------------------|---------------------|
+| 1,000          | 4.25              | 5                   |
 
 {{< site-region region="us,ap1,ap2" >}}
 
