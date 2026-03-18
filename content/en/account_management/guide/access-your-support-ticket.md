@@ -127,13 +127,7 @@ further_reading:
     <li>Click <strong>Case Number</strong> or <strong>Subject</strong> to view details.</li>
 </ol>
 
-<h2>Notes</h2>
-<ul>
-    <li>Username format is email appended with <code>.ddgov.support</code></li>
-    <li>Historical Zendesk cases are not migrated; legacy Zendesk is read-only</li>
-    <li>Verification emails come from <code>help@ddog-gov.com</code></li>
-    <li>Accepted file types: <code>.txt</code>, <code>.csv</code>, <code>.xls</code>, <code>.xlsx</code>, <code>.doc</code>, <code>.otf</code>, <code>.yaml</code>, <code>.log</code>, <code>.conf</code>, <code>.tf</code>, <code>.zip</code>, <code>.pcap</code></li>
-</ul>
+<p><strong>Note</strong>: Historical Zendesk cases are not migrated; legacy Zendesk is read-only</p>
 
 <h2>Troubleshooting</h2>
 <ul>
