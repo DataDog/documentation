@@ -17,23 +17,21 @@ private: true
 
 Infrastructure modes control how much infrastructure monitoring the Datadog Agent performs on a host. Choose a mode based on the level of visibility you need for each host.
 
-If you haven't configured a mode, the Agent defaults to `full`, which provides comprehensive infrastructure monitoring. For hosts that only need metrics collection or non-infrastructure products like APM and Log Management, use `basic` or `none` to reduce overhead.
-
 For monitoring employee workstations and laptops, see [End User Device Monitoring][16].
 
 ## Available modes
 
-The following table summarizes the features available in each mode:
+The following table summarizes what each mode supports. "Supported" means the feature is enabled; "Not supported" means the Agent does not collect or run that feature in the given mode.
 
-|  | Full | Basic | None |
-|--|------|-------|------|
-| System resource metrics | {{< X >}} | {{< X >}} | |
-| Infrastructure integrations | All | Limited set | |
-| Container Monitoring | {{< X >}} | | |
-| Live Processes | {{< X >}} | | |
-| Custom checks and logs-only integrations | {{< X >}} | {{< X >}} | {{< X >}} |
-| Custom metrics | {{< X >}} | | {{< X >}} |
-| Appears in infrastructure dashboards | {{< X >}} | {{< X >}} | |
+| Feature | Full (default) | Basic | None |
+|---------|----------------|-------|------|
+| System resource metrics | Supported | Supported | Not supported |
+| Infrastructure integrations | All integrations | [Limited set](#basic) | Not supported |
+| Container Monitoring | Supported | Not supported | Not supported |
+| Live Processes | Supported | Not supported | Not supported |
+| Custom checks and logs-only integrations | Supported | Supported | Supported |
+| Custom metrics | Supported | Not supported | Supported |
+| Visible in infrastructure dashboards | Yes | Yes | No |
 
 ### Full
 
