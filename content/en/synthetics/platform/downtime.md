@@ -45,7 +45,7 @@ Downtimes can be saved in an enabled or disabled state and modified at any time.
 
 The **Downtimes** page provides a list and calendar view of all configured downtimes. Use the calendar to see how scheduled time slots are distributed across the week.
 
-<!-- TODO: Add screenshot of Downtimes page (list + calendar view) -->
+{{< img src="synthetics/settings/synthetics_downtimes_list.png" alt="The Downtimes settings page showing a list of configured downtimes with their name, number of tests, tags, and team, alongside a calendar view of scheduled time slots" style="width:90%;" >}}
 
 Use the filters at the top of the page to find specific downtimes:
 
@@ -69,7 +69,7 @@ The test automatically pauses during the downtime's scheduled time slots.
 
 **Note**: You cannot create a new downtime from the test creation form. To create one, navigate to [Settings > Downtimes][2] first, then return to the test creation form.
 
-<!-- TODO: Add screenshot of Downtimes step in test creation form -->
+{{< img src="synthetics/settings/synthetics_downtimes_test_creation.png" alt="The Downtimes section in the test creation form showing a Select downtimes dropdown" style="width:90%;" >}}
 
 ### From the Tests or Test Suites page
 
@@ -80,7 +80,7 @@ To apply an existing downtime to multiple tests or test suites at once:
 3. Click **Add to Downtime** in the bulk actions bar.
 4. Select an existing downtime from the list.
 
-<!-- TODO: Add screenshot of Add to Downtime bulk action -->
+{{< img src="synthetics/settings/synthetics_downtimes_bulk_add.png" alt="The Test Suites page with multiple test suites selected and the Add to Downtime bulk action button highlighted in the actions bar" style="width:90%;" >}}
 
 ## Best practices
 
