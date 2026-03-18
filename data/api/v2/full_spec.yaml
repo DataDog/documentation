@@ -92245,111 +92245,92 @@ paths:
         - logs_read_data
   /api/v2/metrics:
     get:
-      description: 'Returns all metrics for your organization that match the given
-        filter parameters.
-
-        Optionally, paginate by using the `page[cursor]` and/or `page[size]` query
-        parameters.
-
-        To fetch the first page, pass in a query parameter with either a valid `page[size]`
-        or an empty cursor like `page[cursor]=`. To fetch the next page, pass in the
-        `next_cursor` value from the response as the new `page[cursor]` value.
-
-        Once the `meta.pagination.next_cursor` value is null, all pages have been
-        retrieved.'
+      description: Get a list of actively reporting metrics for your organization.
+        Pagination is optional using the `page[cursor]` and `page[size]` query parameters.
       operationId: ListTagConfigurations
       parameters:
-      - description: Filter custom metrics that have configured tags.
+      - description: Only return custom metrics that have been configured with Metrics
+          Without Limits.
         example: true
         in: query
         name: filter[configured]
         required: false
         schema:
           type: boolean
-      - description: Filter tag configurations by configured tags.
-        example: app
+      - description: Only return metrics that have the given tag key(s) in their Metrics
+          Without Limits configuration (included or excluded).
+        example: app,env
         in: query
         name: filter[tags_configured]
         required: false
         schema:
           description: Tag keys to filter by.
           type: string
-      - description: Filter metrics by metric type.
+      - description: Only return metrics of the given metric type.
         in: query
         name: filter[metric_type]
         required: false
         schema:
           $ref: '#/components/schemas/MetricTagConfigurationMetricTypeCategory'
-      - description: 'Filter distributions with additional percentile
-
-          aggregations enabled or disabled.'
+      - description: Only return distribution metrics that have percentile aggregations
+          enabled (true) or disabled (false).
         example: true
         in: query
         name: filter[include_percentiles]
         required: false
         schema:
           type: boolean
-      - description: '(Preview) Filter custom metrics that have or have not been queried
-          in the specified window[seconds].
-
-          If no window is provided or the window is less than 2 hours, a default of
-          2 hours will be applied.'
+      - description: Only return metrics that have been queried (true) or not queried
+          (false) in the look back window. Set the window with `filter[queried][window][seconds]`;
+          if omitted, a default window is used.
         example: true
         in: query
         name: filter[queried]
         required: false
         schema:
           type: boolean
-      - description: 'The number of seconds of look back (from now) used by the `filter[queried]`
-          filter logic.
-
-          Must be sent with `filter[queried]` and is only applied when `filter[queried]=true`.
-
-          If `filter[queried]=false`, this parameter is ignored and default queried-window
-          behavior applies.
-
-          If `filter[queried]` is not provided, sending this parameter returns a 400.
-
-          For example: `GET /api/v2/metrics?filter[queried]=true&filter[queried][window][seconds]=15552000`.'
+      - description: Only return metrics that have been queried or not queried in
+          the specified window. Dependent on being sent with `filter[queried]`.
         example: 15552000
         in: query
         name: filter[queried][window][seconds]
         required: false
         schema:
+          default: 2592000
           format: int64
           maximum: 15552000
-          minimum: 0
+          minimum: 1
           type: integer
-      - description: 'Filter metrics that have been submitted with the given tags.
-          Supports boolean and wildcard expressions.
-
-          Can only be combined with the filter[queried] filter.'
-        example: env IN (staging,test) AND service:web
+      - description: Only return metrics that were submitted with tags matching this
+          expression. You can use AND, OR, IN, and wildcards (for example, service:web*).
+        example: env IN (staging,test) AND service:web*
         in: query
         name: filter[tags]
         required: false
         schema:
           type: string
-      - description: (Preview) Filter metrics that are used in dashboards, monitors,
-          notebooks, SLOs.
+      - description: Only return metrics that are used in at least one dashboard,
+          monitor, notebook, or SLO.
         example: true
         in: query
         name: filter[related_assets]
         required: false
         schema:
           type: boolean
-      - description: 'The number of seconds of look back (from now) to apply to a
-          filter[tag] query.
-
-          Default value is 3600 (1 hour), maximum value is 5,184,000 (60 days).'
+      - description: Only return metrics that have been actively reporting in the
+          specified window.
         example: 3600
         in: query
         name: window[seconds]
         required: false
         schema:
+          default: 3600
           format: int64
+          maximum: 2592000
+          minimum: 1
           type: integer
-      - description: Maximum number of results returned.
+      - description: Maximum number of results per page. Use with `page[cursor]` for
+          pagination.
         in: query
         name: page[size]
         required: false
@@ -92359,12 +92340,9 @@ paths:
           maximum: 10000
           minimum: 1
           type: integer
-      - description: 'String to query the next page of results.
-
-          This key is provided with each valid response from the API in `meta.pagination.next_cursor`.
-
-          Once the `meta.pagination.next_cursor` key is null, all pages have been
-          retrieved.'
+      - description: Cursor for pagination. Use `page[size]` to opt-in to pagination
+          and get the first page; for subsequent pages, use the value from `meta.pagination.next_cursor`
+          in the response. Pagination is complete when `next_cursor` is null.
         in: query
         name: page[cursor]
         required: false
