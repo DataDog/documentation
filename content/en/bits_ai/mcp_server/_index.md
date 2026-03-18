@@ -774,3 +774,4 @@ The Datadog MCP Server is under significant development. Use [this feedback form
 [36]: /getting_started/site/#navigate-the-datadog-documentation-by-site
 [37]: https://help.datadoghq.com/hc/en-us/requests/new
 [38]: /service_management/case_management/
+[39]: /bits_ai/mcp_server/setup#local-binary-authentication
