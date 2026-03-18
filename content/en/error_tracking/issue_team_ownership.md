@@ -39,12 +39,6 @@ Your team owns an issue if it is the code owner of the top-level stack frame of 
 
 {{< img src="error_tracking/team-github-connection.jpg" alt="Linking GitHub teams to Datadog teams" style="width:80%;" >}}
 
-## Service ownership
-
-Your team owns an issue if it owns the service where the issue happens. Service ownership is inferred from your existing service ownership configuration in Datadog. No additional setup is required.
-
-**Note**: Teams assigned through service ownership cannot be removed from an issue and are dynamically updated based on the current service ownership.
-
 ## Team attribute
 
 You can programmatically assign team ownership at the time an error is raised by setting the `team` attribute to a Datadog team handle.
@@ -70,6 +64,12 @@ Set the `team` attribute on the RUM event:
 ```javascript
 datadogRum.addError(error, { team: 'payments-frontend' });
 ```
+
+## Service ownership
+
+Your team owns an issue if it owns the service where the issue happens. Service ownership is inferred from your existing service ownership configuration in Datadog. No additional setup is required.
+
+**Note**: Teams assigned through service ownership cannot be removed from an issue and are dynamically updated based on the current service ownership.
 
 ## Use team ownership
 
