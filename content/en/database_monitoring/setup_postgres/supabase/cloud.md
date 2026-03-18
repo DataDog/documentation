@@ -2,6 +2,9 @@
 title: Setting Up Database Monitoring for Supabase Cloud
 description: Install and configure Database Monitoring for Supabase with the Supabase Cloud integration.
 further_reading:
+    - link: '/integrations/supabase-cloud/'
+      tag: 'Documentation'
+      text: 'Supabase Cloud Integration'
     - link: '/integrations/postgres/'
       tag: 'Documentation'
       text: 'Basic Postgres Integration'
