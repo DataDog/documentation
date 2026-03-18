@@ -78,19 +78,23 @@ export async function streamConversation({
 export async function streamDocsAiChat({
     docsAiConfig,
     query,
+    history = [],
     signal,
     onToken,
     onError
 }) {
+    const attributes = { query };
+    if (history.length > 0) {
+        attributes.history = history;
+    }
+
     const response = await fetch(docsAiConfig.apiUrl, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
             'X-Docs-Api-Key': docsAiConfig.apiKey
         },
-        body: JSON.stringify({
-            data: { attributes: { query } }
-        }),
+        body: JSON.stringify({ data: { attributes } }),
         signal
     });
 

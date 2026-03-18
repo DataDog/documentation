@@ -53,6 +53,7 @@ initializeFeatureFlags().then(async (client) => {
 class ConversationalSearch {
     constructor() {
         this.conversationId = null;
+        this.chatHistory = [];
         this.isOpen = false;
         this.isLoading = false;
         this.abortController = null;
@@ -318,6 +319,7 @@ class ConversationalSearch {
         }
 
         this.conversationId = null;
+        this.chatHistory = [];
         this.isLoading = false;
         this.sendBtn.disabled = false;
 
@@ -376,6 +378,21 @@ class ConversationalSearch {
         }
     }
 
+    startLoadingIndicator(container) {
+        let msgIndex = 0;
+        container.innerHTML =
+            '<span class="conv-search-spinner"></span>' +
+            `<span class="conv-search-status-text">${LOADING_MESSAGES[0]}</span>`;
+
+        const interval = setInterval(() => {
+            if (msgIndex < LOADING_MESSAGES.length - 1) msgIndex++;
+            const el = container.querySelector('.conv-search-status-text');
+            if (el) el.textContent = LOADING_MESSAGES[msgIndex];
+        }, 3000);
+
+        return () => clearInterval(interval);
+    }
+
     async sendMessage() {
         const query = this.input.value.trim();
         if (!query || this.isLoading) return;
@@ -420,7 +437,8 @@ class ConversationalSearch {
 
         let accumulatedMessage = '';
         let lastRenderTime = 0;
-        responseContainer.innerHTML = '';
+        const stopLoading = this.startLoadingIndicator(responseContainer);
+        let receivedFirstChunk = false;
 
         const response = await streamConversation({
             typesenseConfig,
@@ -434,6 +452,11 @@ class ConversationalSearch {
                 }
 
                 if (chunk?.message !== undefined) {
+                    if (!receivedFirstChunk) {
+                        stopLoading();
+                        receivedFirstChunk = true;
+                    }
+
                     accumulatedMessage += chunk.message;
 
                     const now = Date.now();
@@ -452,6 +475,7 @@ class ConversationalSearch {
                 this.logErr('Conversational Search Streaming Error', error);
             }
         });
+        stopLoading();
 
         const finalConversationId = response?.results?.[0]?.conversation?.conversation_id;
         if (finalConversationId) {
@@ -486,13 +510,22 @@ class ConversationalSearch {
 
         let accumulatedMessage = '';
         let lastRenderTime = 0;
-        responseContainer.innerHTML = '';
+        const stopLoading = this.startLoadingIndicator(responseContainer);
+        let receivedFirstToken = false;
+
+        this.chatHistory.push({ role: 'user', content: query });
 
         accumulatedMessage = await streamDocsAiChat({
             docsAiConfig,
             query,
+            history: this.chatHistory.slice(0, -1),
             signal: this.abortController.signal,
             onToken: (_token, fullMessage) => {
+                if (!receivedFirstToken) {
+                    stopLoading();
+                    receivedFirstToken = true;
+                }
+
                 accumulatedMessage = fullMessage;
 
                 const now = Date.now();
@@ -510,8 +543,11 @@ class ConversationalSearch {
                 this.logErr('Docs AI Streaming Error', error);
             }
         });
+        stopLoading();
 
         if (accumulatedMessage) {
+            this.chatHistory.push({ role: 'assistant', content: accumulatedMessage });
+
             responseContainer.innerHTML = renderMessageWithSources(accumulatedMessage, {
                 attachTooltips,
                 buildSourceCards
@@ -537,17 +573,7 @@ class ConversationalSearch {
     async runFetchConversation(query, responseContainer) {
         this.abortController = new AbortController();
         const startTime = Date.now();
-
-        let msgIndex = 0;
-        responseContainer.innerHTML =
-            `<span class="conv-search-status-text">${LOADING_MESSAGES[0]}</span>` +
-            '<span class="conv-search-cursor"></span>';
-
-        const statusInterval = setInterval(() => {
-            if (msgIndex < LOADING_MESSAGES.length - 1) msgIndex++;
-            const el = responseContainer.querySelector('.conv-search-status-text');
-            if (el) el.textContent = LOADING_MESSAGES[msgIndex];
-        }, 3000);
+        const stopLoading = this.startLoadingIndicator(responseContainer);
 
         let response;
         try {
@@ -559,7 +585,7 @@ class ConversationalSearch {
                 signal: this.abortController.signal
             });
         } finally {
-            clearInterval(statusInterval);
+            stopLoading();
         }
 
         const conversation = response?.conversation || response?.results?.[0]?.conversation;

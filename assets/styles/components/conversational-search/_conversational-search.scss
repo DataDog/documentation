@@ -280,10 +280,22 @@ $conv-search-text-muted: #6b7280;
 }
 
 .conv-search-status-text {
-    color: #6e6e80;
+    color: #3b3b4f;
     font-size: 13px;
-    margin-right: 6px;
+    margin-left: 8px;
     animation: conv-search-fade-in 0.3s ease;
+}
+
+.conv-search-spinner {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    border: 2px solid $conv-search-border;
+    border-top-color: $conv-search-purple;
+    border-radius: 50%;
+    animation: conv-search-spin 0.8s linear infinite;
+    vertical-align: middle;
+    flex-shrink: 0;
 }
 
 @keyframes conv-search-fade-in {
