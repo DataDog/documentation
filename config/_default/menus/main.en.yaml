@@ -2295,9 +2295,9 @@ menu:
       identifier: error_tracking_case_management
       weight: 101
     - name: Linked Pull Requests
-      url: error_tracking/linked_pull_requests
+      url: error_tracking/link_pull_requests
       parent: error_tracking
-      identifier: error_tracking_linked_pull_requests
+      identifier: error_tracking_link_pull_requests
       weight: 15
     - name: Troubleshooting
       url: error_tracking/troubleshooting
