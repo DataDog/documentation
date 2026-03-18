@@ -120,6 +120,7 @@ To confirm which infrastructure mode your hosts are running:
 [13]: /logs/
 [14]: /tracing/
 [15]: /error_tracking/
+[16]: /infrastructure/end_user_device_monitoring/
 [17]: https://app.datadoghq.com/fleet
 [18]: /agent/configuration/agent-configuration-files/
 [19]: /agent/configuration/agent-commands/#restart-the-agent
