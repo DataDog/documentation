@@ -17,7 +17,7 @@ Sheets is a spreadsheet tool that you can populate with Datadog data, enabling y
 Sheets lets you manipulate, transform, and analyze data from logs, real user monitoring, and cloud cost monitoring in a familiar spreadsheet interface. It can contain the following tabs:
 
 - **[Table](#table)**: Query live data from a Datadog data source and enrich it with calculated columns, lookups, and filters.
-- **[Pivot](#pivot-table)**: Summarize and aggregate data from a table with custom dimensions and calculations.
+- **[Pivot](#pivot)**: Summarize and aggregate data from a table with custom dimensions and calculations.
 - **[Sheet](#sheet-preview)** (Preview): A flexible, blank-canvas spreadsheet where you can write formulas referencing data directly from a table to build models, reports, or track operations.
 
 ## Table
@@ -58,7 +58,7 @@ Lookup enriches your existing data and adds more context to your table. Click **
 
 For example, you have a table of RUM data with user emails, and you want to know which teams these users belong to. You can add a lookup that compares the user email column in your table with the work email column in a Reference Table. Lookup pulls the team from the Reference Table and adds it as a new column to your spreadsheet.
 
-## Pivot table
+## Pivot
 
 After you add a table of data to a spreadsheet, analyze and add context to your raw data with a pivot table. Use pivot tables to summarize and organize large amounts of data into customized tables. It helps you analyze data to find patterns and trends, and see comparisons. For example, you can have a table with a hundred rows, but with a pivot table you can break down that data into a summary table that counts your data by method or region. To create a pivot table:
 1. From an existing spreadsheet that already has a table of data, click **Add Pivot Table**.
@@ -167,7 +167,7 @@ Calculate the monthly payment on a $50,000 loan at 6% annual interest over 3 yea
 
 ### Error values
 
-| Error | Cause | How to handle |
+| <span style="min-width:80px;display:block">Error</span> | Cause | How to handle |
 | -------------------- | ----- | ------------- |
 | `#DIV/0!` | Division by zero | `=IFERROR(A1/B1,0)` |
 | `#VALUE!` | Wrong argument type, for example text passed to a math function | Check input types |
