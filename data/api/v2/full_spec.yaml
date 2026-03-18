@@ -45089,6 +45089,11 @@ components:
             targets.
           example: service:my-service
           type: string
+        keep_unmatched:
+          description: Whether to keep an event that does not match any of the mapping
+            filters.
+          example: false
+          type: boolean
         mappings:
           description: A list of mapping rules to convert events to the OCSF format.
           items:
