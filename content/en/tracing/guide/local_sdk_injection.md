@@ -22,7 +22,7 @@ Use this guide if:
   - v7.44+ for .NET and Ruby
 - Datadog Admission Controller enabled (enabled by default in Helm chart v2.35.0+ and Operator v1.0.0+)
 
-**Note:** The Datadog Cluster Agent and the Admission Controller do not modify pods in the `kube-system` namespace and the same namespace as itself.
+**Note:** Starting in v7.73.0, the Admission Controller does not inject into pods in the `kube-system` namespace or the namespace where the Cluster Agent is deployed.
 
 ### Step 1: Enable pod mutation
 
@@ -78,7 +78,7 @@ clusterAgent:
 {{% /tab %}}
 {{< /tabs >}}
 
-By setting this pod label or changing the `mutateUnlabelled` setting the Admission Controller modifies your newly created pods with the APM configurations for connectivity. For more details, see the [Datadog Admission Controller documentation][1].
+After setting the pod label or updating `mutateUnlabelled`, the Admission Controller mutates newly created pods to add APM connectivity configuration. For more details, see the [Datadog Admission Controller documentation][1].
 
 ### Step 2: Annotate pods for library injection
 
@@ -128,7 +128,7 @@ To view available library versions, see the tracer repositories for each languag
 
 #### Add Unified Service Tags
 
-Use Unified Service Tagging (USTs) to apply consistent tags across traces, metrics, and logs, making it easier to navigate and correlate your observability data. The Admission Controller automatically adds the corresponding `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` environment variables to match your pod labels.
+Use Unified Service Tagging (UST) to apply consistent tags across traces, metrics, and logs, making it easier to navigate and correlate your observability data. The Admission Controller automatically adds the corresponding `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` environment variables to match your pod labels.
 
 ```yaml
     metadata:
@@ -141,7 +141,7 @@ Use Unified Service Tagging (USTs) to apply consistent tags across traces, metri
         admission.datadoghq.com/java-lib.version: "v1.12.0"
 ```
 
-See the [UST documentation][10] for more information.
+See [Unified Service Tagging][10] for more information.
 
 ### Step 3: Apply your changes and verify injection 
 
@@ -155,7 +155,7 @@ When injection is successful, the pod includes two `initContainers` named `datad
 
 {{< img src="tracing/trace_collection/datadog-lib-init.png" alt="Pod details in Datadog with `initContainers` listed" style="width:100%;" >}}
 
-Alternatively, check for the new `initContainers` and added APM configurations on your pod using:
+Alternatively, confirm injection and the added environment variables on your pod using:
 
 ```
 kubectl describe pod <pod-name>
