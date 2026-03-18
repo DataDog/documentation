@@ -14,15 +14,15 @@ further_reading:
 
 Sheets is a spreadsheet tool that you can populate with Datadog data, enabling you to perform complex analysis and build reports without requiring technical expertise. It allows teams to use familiar spreadsheet functions like lookups, pivot tables, and calculations on Datadog data, so you don't have to export and use another tool with stale data.
 
-A Sheets file can contain any combination of three sheet types:
+Sheets lets you manipulate, transform, and analyze data from logs, real user monitoring, and cloud cost monitoring in a familiar spreadsheet interface. It can contain the following tabs:
 
-- **Table** — Query live data from a Datadog data source and enrich it with calculated columns, lookups, and filters.
-- **Pivot table** — Summarize and aggregate data from a table with custom dimensions and calculations.
-- **Sheet** (Preview) — A flexible, blank-canvas spreadsheet where you can write formulas, build models, and track operations.
+- **[Table](#table)**: Query live data from a Datadog data source and enrich it with calculated columns, lookups, and filters.
+- **[Pivot](#pivot-table)**: Summarize and aggregate data from a table with custom dimensions and calculations.
+- **[Sheet](#sheet-preview)** (Preview): A flexible, blank-canvas spreadsheet where you can write formulas referencing data directly from a table to build models, reports, or track operations.
 
 ## Table
 
-Start by creating a table of data, either by building a new query from Sheets or transferring a query from the Logs Explorer, RUM Explorer, or Metrics Explorer.
+Start by creating a table of data, either by building a new query from Sheets or transferring a query from explorer pages, like Logs, RUM, Metrics, or Cloud Cost.
 
 ### Add a new table in Sheets
 
@@ -81,6 +81,8 @@ A sheet is a flexible, blank-canvas spreadsheet with a full formula engine. Use 
 
 To add a sheet, click the **+** tab at the bottom of your spreadsheet and select **Add Sheet**.
 
+{{< img src="/sheets/flexible_spreadsheet.png" alt="A flexible sheet showing a 2025 cloud spend by provider model, with SUMIFS and VLOOKUP formulas referencing Cloud cost and Currency conversion table tabs" style="width:90%;" >}}
+
 ### Cell references
 
 Cells are referenced using standard A1 notation, where the column is a letter and the row is a number. For example, `A1` is the first cell, `B3` is the third row of column B, and `A1:C5` is a range spanning columns A through C and rows 1 through 5.
@@ -118,7 +120,7 @@ Sheet formulas support all functions listed on the [Functions and Operators][3] 
 ### Error values
 
 | Error | Cause | How to handle |
-| ----- | ----- | ------------- |
+| -------------------- | ----- | ------------- |
 | `#DIV/0!` | Division by zero | `=IFERROR(A1/B1,0)` |
 | `#VALUE!` | Wrong argument type, for example text passed to a math function | Check input types |
 | `#NUM!` | Invalid numeric value, for example `SQRT(-1)` | Validate inputs with `IF` |
@@ -127,7 +129,7 @@ Sheet formulas support all functions listed on the [Functions and Operators][3] 
 | `#NAME?` | Unrecognized function name | Check spelling |
 | `#ERROR!` | Formula could not be parsed | Check syntax |
 
-### Examples
+#### Examples
 
 **Aggregate a table column in a sheet**
 
