@@ -72,6 +72,9 @@ Test version
 Run type
 : The type of test run (CI, manually triggered, or scheduled).
 
+Video replay
+: A recording of the test execution available for diagnosing failures. See [Video replay](#video-replay).
+
 ### Screenshots and actions
 
 Every executed test step contains a screenshot of the step action, step action name, step ID, and step duration. 
