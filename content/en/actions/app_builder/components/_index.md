@@ -69,7 +69,9 @@ Is Visible
 Event
 : **Value**: click
 
-For more information on events, see [Events][1].
+Reaction
+: **Values**: examples include open modal, trigger action, and set component state<br>
+See [Events][1] for the full list of available reactions.
 
 ### Inspect data
 
@@ -178,7 +180,9 @@ Is Visible
 Event
 : **Value**: change<br>
 
-For more information on events, see [Events][1].
+Reaction
+: **Values**: examples include open modal, trigger action, and set component state<br>
+See [Events][1] for the full list of available reactions.
 
 ### Inspect data
 
@@ -272,11 +276,13 @@ Is Visible
 Event
 : **Value**: change
 
-State Functions
-: setValue<br>
-**Example**: See [events][9].
+Reaction
+: **Values**: examples include open modal, trigger action, and set component state<br>
+See [Events][1] for the full list of available reactions.
 
-For more information on events, see [Events][1].
+State Function
+: setValue<br>
+**Example**: See [State functions][9].
 
 ### Inspect data
 
@@ -305,7 +311,9 @@ Is Visible
 Event
 : **Value**: change
 
-For more information on events, see [Events][1].
+Reaction
+: **Values**: examples include open modal, trigger action, and set component state<br>
+See [Events][1] for the full list of available reactions.
 
 ### Inspect data
 
@@ -353,7 +361,9 @@ Is Visible
 Event
 : **Value**: change
 
-For more information on events, see [Events][1].
+Reaction
+: **Values**: examples include open modal, trigger action, and set component state<br>
+See [Events][1] for the full list of available reactions.
 
 ### Inspect data
 
@@ -513,11 +523,14 @@ Is Disabled
 Event
 : **Value**: submit, change, validate
 
+Reaction
+: **Values**: examples include open modal, trigger action, and set component state<br>
+See [Events][1] for the full list of available reactions.
+
 State Function
 : setValue<br>
-**Example**: `form0.setValue({name: 'node-group-1'})` sets the value of the `form0` component to `{name: 'node-group-1'}`.
-
-For more information on events, see [Events][1].
+**Example**: `form0.setValue({name: 'node-group-1'})` sets the value of the `form0` component to `{name: 'node-group-1'}`.<br>
+See [State functions][9] for more information.
 
 ### Inspect data
 
@@ -552,7 +565,9 @@ Is Visible
 Event
 : **Value**: change
 
-For more information on events, see [Events][1].
+Reaction
+: **Values**: examples include open modal, trigger action, and set component state<br>
+See [Events][1] for the full list of available reactions.
 
 ### Inspect data
 
@@ -585,11 +600,14 @@ Is Visible
 Event
 : **Values**: toggleOpen, close, open
 
+Reaction
+: **Values**: examples include open modal, trigger action, and set component state<br>
+See [Events][1] for the full list of available reactions.
+
 State Function
 : setIsOpen<br>
-**Example**: `modal0.setIsOpen(true)` sets the state of `modal0` to open.
-
-For more information on events, see [Events][1].
+**Example**: `modal0.setIsOpen(true)` sets the state of `modal0` to open.<br>
+See [State functions][9] for more information.
 
 ### Inspect data
 
@@ -642,11 +660,14 @@ Is Visible
 Event
 : **Value**: change
 
+Reaction
+: **Values**: examples include open modal, trigger action, and set component state<br>
+See [Events][1] for the full list of available reactions.
+
 State Function
 : setValue<br>
-**Example**: `numberInput0.setValue(3)` sets the value of the `numberInput0` component to `3`.
-
-For more information on events, see [Events][1].
+**Example**: `numberInput0.setValue(3)` sets the value of the `numberInput0` component to `3`.<br>
+See [State functions][9] for more information.
 
 ### Inspect data
 
@@ -705,11 +726,14 @@ Is Visible
 Event
 : **Value**: change
 
+Reaction
+: **Values**: examples include open modal, trigger action, and set component state<br>
+See [Events][1] for the full list of available reactions.
+
 State Function
 : setValue<br>
-**Example**: `radioButtons0.setValue("production")` sets the value of the `radioButtons0` component to `"production"`.
-
-For more information on events, see [Events][1].
+**Example**: `radioButtons0.setValue("production")` sets the value of the `radioButtons0` component to `"production"`.<br>
+See [State functions][9] for more information.
 
 ### Inspect data
 
@@ -745,7 +769,9 @@ Event
 Function Name
 : **Value**: <code>props.customFunctionName</code>
 
-For more information on events, see [Events][1].
+Reaction
+: **Values**: examples include open modal, trigger action, and set component state<br>
+See [Events][1] for the full list of available reactions.
 
 ### Inspect data
 
@@ -795,9 +821,14 @@ Is Visible
 Event
 : **Values**: change, submit
 
+Reaction
+: **Values**: examples include open modal, trigger action, and set component state<br>
+See [Events][1] for the full list of available reactions.
+
 State Function
 : setValue<br>
-**Example**: `search0.setValue("search query")` sets the value of the `search0` component to `"search query"`.
+**Example**: `search0.setValue("search query")` sets the value of the `search0` component to `"search query"`.<br>
+See [State functions][9] for more information.
 
 For more information on events, see [Events][1].
 
@@ -863,11 +894,14 @@ Is Visible
 Event
 : **Value**: change
 
+Reaction
+: **Values**: examples include open modal, trigger action, and set component state<br>
+See [Events][1] for the full list of available reactions.
+
 State Function
 : setValue<br>
-**Example**: `select0.setValue("staging")` sets the value of the `select0` component to `"staging"`.
-
-For more information on events, see [Events][1].
+**Example**: `select0.setValue("staging")` sets the value of the `select0` component to `"staging"`.<br>
+See [State functions][9] for more information.
 
 ### Inspect data
 
@@ -903,11 +937,14 @@ Hide Close Button
 Event
 : **Values**: toggle open, close, open
 
-State Functions
-: setIsOpen<br>
-**Example**: `sidePanel0.setIsOpen(true)` sets the state of `sidePanel0` to open.
+Reaction
+: **Values**: examples include open modal, trigger action, and set component state<br>
+See [Events][1] for the full list of available reactions.
 
-For more information on events, see [Events][1].
+State Function
+: setIsOpen<br>
+**Example**: `sidePanel0.setIsOpen(true)` sets the state of `sidePanel0` to open.<br>
+See [State functions][9] for more information.
 
 ### Inspect data
 
@@ -959,11 +996,14 @@ Is Visible
 Event
 : **Value**: change
 
+Reaction
+: **Values**: examples include open modal, trigger action, and set component state<br>
+See [Events][1] for the full list of available reactions.
+
 State Function
 : setTabIndex<br>
-**Example**: `tab0.setTabIndex(0)` sets the value of the `tab0` component to the first tab.
-
-For more information on events, see [Events][1].
+**Example**: `tab0.setTabIndex(0)` sets the value of the `tab0` component to the first tab.<br>
+See [State functions][9] for more information.
 
 ### Inspect data
 
@@ -1115,13 +1155,16 @@ Is Visible
 Event
 : **Values**: pageChange, tableRowClick
 
+Reaction
+: **Values**: examples include open modal, trigger action, and set component state<br>
+See [Events][1] for the full list of available reactions.
+
 State Function
 : setSelectedRow<br>
 **Examples**: <ul><li>`table0.setSelectedRow(0)` sets the `selectedRow` property of `table0` to the first row.</li><li>`table0.setSelectedRow(null)` clears the `selectedRow` property.</li></ul>
 : setPageIndex<br>
-**Example**: `table0.setPageIndex(0)` sets the `pageIndex` property of `table0` to the first page.
-
-For more information on events, see [Events][1].
+**Example**: `table0.setPageIndex(0)` sets the `pageIndex` property of `table0` to the first page.<br>
+See [State functions][9] for more information.
 
 ### Inspect data
 
@@ -1208,11 +1251,14 @@ Is Visible
 Event
 : **Values**: change, submit
 
+Reaction
+: **Values**: examples include open modal, trigger action, and set component state<br>
+See [Events][1] for the full list of available reactions.
+
 State Function
 : setValue<br>
-**Example**: `textArea0.setValue("text")` sets the value of the `textArea0` component to `"text"`.
-
-For more information on events, see [Events][1].
+**Example**: `textArea0.setValue("text")` sets the value of the `textArea0` component to `"text"`.<br>
+See [State functions][9] for more information.
 
 ### Inspect data
 
@@ -1250,11 +1296,14 @@ Is Visible
 Event
 : **Values**: change, submit
 
+Reaction
+: **Values**: examples include open modal, trigger action, and set component state<br>
+See [Events][1] for the full list of available reactions.
+
 State Function
 : setValue<br>
 **Example**: `textInput0.setValue("text")` sets the value of the `textInput0` component to `"text"`.
-
-For more information on events, see [Events][1].
+See [State functions][9] for more information.
 
 ### Inspect data
 
