@@ -24,10 +24,10 @@ Infrastructure modes control how much infrastructure monitoring the Datadog Agen
 
 The Agent supports three infrastructure modes. A checkmark ({{< X >}}) indicates the feature is available in that mode.
 
-| Feature | [Full](#full) (default) | [Basic](#basic) | [None](#none) |
-|---------|-------------------------|-----------------|---------------|
+| Capability | [Full](#full) (default) | [Basic](#basic) | [None](#none) |
+|------------|-------------------------|-----------------|---------------|
 | System resource metrics | {{< X >}} | {{< X >}} | |
-| Infrastructure integrations | {{< X >}} | {{< X >}} ([limited set](#basic)) | |
+| Infrastructure integrations | {{< X >}} (all) | {{< X >}} ([limited set](#basic)) | |
 | Container Monitoring | {{< X >}} | | |
 | Live Processes | {{< X >}} | | |
 | Custom checks and logs-only integrations | {{< X >}} | {{< X >}} | {{< X >}} |
