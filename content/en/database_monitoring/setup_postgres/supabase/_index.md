@@ -13,8 +13,8 @@ Select your setup method to get started:
     <div class="col">
       <a class="card h-100" href="/database_monitoring/setup_postgres/supabase/cloud">
         <div class="card-body text-center py-3 px-2">
-          {{< img src="integrations_logos/supabase.png" class="img-fluid" alt="Supabase Cloud" width="175" >}}
-          <br/>Supabase Cloud <span class="badge badge-primary">Recommended</span>
+          <img src="/images/integrations_logos/supabase.png" class="img-fluid" alt="Supabase Cloud" width="175" />
+          <br/><strong>Supabase Cloud</strong> <span class="badge badge-primary">Recommended</span>
           <p>Set up Database Monitoring through the Supabase Cloud integration tile. No Agent installation required.</p>
         </div>
       </a>
@@ -22,8 +22,8 @@ Select your setup method to get started:
     <div class="col">
       <a class="card h-100" href="/database_monitoring/setup_postgres/supabase/agent">
         <div class="card-body text-center py-3 px-2">
-          {{< img src="integrations_logos/supabase.png" class="img-fluid" alt="Supabase Self-Hosted" width="175" >}}
-          <br/>Supabase Self-Hosted
+          <img src="/images/integrations_logos/supabase.png" class="img-fluid" alt="Supabase Self-Hosted" width="175" />
+          <br/><strong>Supabase Self-Hosted</strong>
           <p>Set up Database Monitoring with the Datadog Agent for self-hosted Supabase deployments.</p>
         </div>
       </a>
