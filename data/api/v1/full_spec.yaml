@@ -7952,12 +7952,6 @@ components:
       x-enum-varnames:
       - DRAFT
       - PUBLISHED
-    MonitorFormulaAndFunctionAggregateAugmentQuery:
-      description: Augment query for aggregate augmented queries. Can be an events
-        query or a reference table query.
-      oneOf:
-      - $ref: '#/components/schemas/MonitorFormulaAndFunctionEventQueryDefinition'
-      - $ref: '#/components/schemas/MonitorFormulaAndFunctionReferenceTableQueryDefinition'
     MonitorFormulaAndFunctionAggregateAugmentedDataSource:
       description: Data source for aggregate augmented queries.
       enum:
@@ -7972,7 +7966,9 @@ components:
         base query results with data from a reference table.
       properties:
         augment_query:
-          $ref: '#/components/schemas/MonitorFormulaAndFunctionAggregateAugmentQuery'
+          $ref: '#/components/schemas/MonitorFormulaAndFunctionAggregateSubQuery'
+          description: Augment query for aggregate augmented queries. Can be an events
+            query or a reference table query.
         base_query:
           $ref: '#/components/schemas/MonitorFormulaAndFunctionAggregateBaseQuery'
         compute:
@@ -8008,12 +8004,6 @@ components:
       oneOf:
       - $ref: '#/components/schemas/MonitorFormulaAndFunctionEventQueryDefinition'
       - $ref: '#/components/schemas/MonitorFormulaAndFunctionMetricsQueryDefinition'
-    MonitorFormulaAndFunctionAggregateFilterQuery:
-      description: Filter query for aggregate filtered queries. Can be an events query
-        or a reference table query.
-      oneOf:
-      - $ref: '#/components/schemas/MonitorFormulaAndFunctionEventQueryDefinition'
-      - $ref: '#/components/schemas/MonitorFormulaAndFunctionReferenceTableQueryDefinition'
     MonitorFormulaAndFunctionAggregateFilteredDataSource:
       description: Data source for aggregate filtered queries.
       enum:
@@ -8037,7 +8027,9 @@ components:
         data_source:
           $ref: '#/components/schemas/MonitorFormulaAndFunctionAggregateFilteredDataSource'
         filter_query:
-          $ref: '#/components/schemas/MonitorFormulaAndFunctionAggregateFilterQuery'
+          $ref: '#/components/schemas/MonitorFormulaAndFunctionAggregateSubQuery'
+          description: Filter query for aggregate filtered queries. Can be an events
+            query or a reference table query.
         filters:
           description: Filter conditions for the query.
           items:
@@ -8107,6 +8099,12 @@ components:
       x-enum-varnames:
       - INNER
       - LEFT
+    MonitorFormulaAndFunctionAggregateSubQuery:
+      description: Sub-query for aggregate composite queries (augmented or filtered).
+        Can be an events query or a reference table query.
+      oneOf:
+      - $ref: '#/components/schemas/MonitorFormulaAndFunctionEventQueryDefinition'
+      - $ref: '#/components/schemas/MonitorFormulaAndFunctionReferenceTableQueryDefinition'
     MonitorFormulaAndFunctionCostAggregator:
       description: Aggregation methods for metric queries.
       enum:

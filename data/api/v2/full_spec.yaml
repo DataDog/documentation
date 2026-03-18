@@ -103526,6 +103526,13 @@ paths:
     get:
       description: Get the list of all critical assets.
       operationId: ListSecurityMonitoringCriticalAssets
+      parameters:
+      - description: Query string.
+        in: query
+        name: query
+        required: false
+        schema:
+          type: string
       responses:
         '200':
           content:
