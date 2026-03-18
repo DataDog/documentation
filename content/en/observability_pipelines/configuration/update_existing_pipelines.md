@@ -9,7 +9,7 @@ aliases:
 
 For existing pipelines in Observability Pipelines, you can update and deploy changes for source settings, destination settings, and processors in the Observability Pipelines UI. But if you are using environment variables and want to update source and destination environment variables, you must manually update the Worker with the new values.
 
-This document goes through updating the pipeline in the UI. You can also use the [update a pipeline][2] API or [datadog_observability_pipeline][3] Terraform resource to update existing pipelines.
+This document goes through updating the pipeline in the UI. You can also use the [update a pipeline][2] API or [datadog_observability_pipeline][3] Terraform resource to update existing pipelines. You can also [export your pipeline configuration to JSON or Terraform][4] to deploy changes programmatically.
 
 ## Update an existing pipeline
 
@@ -235,6 +235,17 @@ On the Worker installation page:
 {{% /tab %}}
 {{< /tabs >}}
 
+## Export pipeline configuration to JSON or Terraform
+
+If you have a deployed pipeline and want to add additional components, you can set up the components in the UI, then export the configuration to JSON or Terraform to deploy the changes programmatically.
+
+1. Navigate to [Observability Pipelines][1].
+1. Select your pipeline.
+1. After you have updated your pipeline, click **Export Pipeline**.
+
+See [Export pipeline configuration to JSON or Terraform][4] for more information, including how to export pipelines that have not been deployed yet.
+
 [1]: https://app.datadoghq.com/observability-pipelines
 [2]: /api/latest/observability-pipelines/#update-a-pipeline
 [3]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/observability_pipeline
+[4]: /observability_pipelines/configuration/set_up_pipelines/#export-pipeline-configuration-to-json-or-terraform

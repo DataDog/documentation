@@ -139,6 +139,28 @@ Use the [datadog_observability_pipeline][10] module to make any changes to an ex
 
 See [Advanced Worker Configurations][5] for bootstrapping options.
 
+## Export pipeline configuration to JSON or Terraform
+
+Setting up and updating a pipeline directly in Terraform or through the API can be time consuming and prone to errors. To address those issues, you can create or update a pipeline in the UI and export the configuration to JSON or Terraform.
+
+### Pipelines that have not been deployed yet
+
+For a pipeline that has not been deployed yet, you can export the pipeline in draft mode to JSON or Terraform.
+
+1. Navigate to [Observability Pipelines][4].
+1. [Set up a pipeline](#set-up-a-pipeline-in-the-ui).
+1. After the source, processors, and destinations have been configured, click **Export Pipeline**.
+1. Copy or download the JSON or Terraform file and programmatically deploy the pipelines.
+1. [Install the Worker][7] to send data through the pipeline.
+
+### Deployed pipelines
+
+If you have a deployed pipeline and want to add additional components, you can set up the components in the UI, then export the configuration to JSON or Terraform to deploy the changes programmatically.
+
+1. Navigate to [Observability Pipelines][4].
+1. Select your pipeline.
+1. After you have updated your pipeline, click **Export Pipeline**.
+
 ## Clone a pipeline
 
 To clone a pipeline in the UI:
