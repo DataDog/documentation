@@ -742,7 +742,7 @@ Executes a published workflow that has an agent trigger, with optional input par
 
 - Run the incident escalation workflow for service `checkout-api` with severity `high`.
 - Execute the deployment rollback workflow for the payments service.
-- Trigger the on-call notification workflow with the context from this investigation.
+- Trigger the On-Call notification workflow with the context from this investigation.
 
 **Note**: The workflow must be published and have an agent trigger configured. Use `update_datadog_workflow_with_agent_trigger` to add one if needed.
 
