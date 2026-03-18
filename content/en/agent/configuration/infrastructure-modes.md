@@ -22,19 +22,17 @@ Infrastructure modes control how much infrastructure monitoring the Datadog Agen
 
 ## Available modes
 
-The Agent supports three infrastructure modes. A checkmark ({{< X >}}) indicates the feature is available in that mode.
+The Agent supports four infrastructure modes. A checkmark ({{< X >}}) indicates the capability is available in that mode.
 
-| Capability | [Full](#full) (default) | [Basic](#basic) | [None](#none) |
-|------------|-------------------------|-----------------|---------------|
-| System resource metrics | {{< X >}} | {{< X >}} | |
-| Infrastructure integrations | {{< X >}} (all) | {{< X >}} ([limited set](#basic)) | |
-| Container Monitoring | {{< X >}} | | |
-| Live Processes | {{< X >}} | | |
-| Custom checks and logs-only integrations | {{< X >}} | {{< X >}} | {{< X >}} |
-| Custom metrics | {{< X >}} | | {{< X >}} |
-| Visible in infrastructure dashboards | {{< X >}} | {{< X >}} | |
-
-<div class="alert alert-info">For monitoring employee workstations and laptops, use <code>end_user_device</code> mode (Preview). See <a href="/infrastructure/end_user_device_monitoring/">End User Device Monitoring</a> for details.</div>
+| Capability | [Full](#full) (default) | [Basic](#basic) | [None](#none) | [End User Device](#end-user-device) |
+|------------|-------------------------|-----------------|---------------|--------------------------------------|
+| System resource metrics | {{< X >}} | {{< X >}} | | {{< X >}} |
+| Infrastructure integrations | {{< X >}} (all) | {{< X >}} ([limited set](#basic)) | | {{< X >}} (limited set) |
+| Container Monitoring | {{< X >}} | | | |
+| Live Processes | {{< X >}} | | | {{< X >}} |
+| Custom checks and logs-only integrations | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
+| Custom metrics | {{< X >}} | | {{< X >}} | |
+| Visible in infrastructure dashboards | {{< X >}} | {{< X >}} | | |
 
 ### Full
 
@@ -69,6 +67,13 @@ The Agent collects system resource metrics (CPU, memory, disk, network) and limi
 **Recommended for**: Hosts configured only for [Log Management][13], [APM][14], or [Error Tracking][15]<br>
 The Agent does not collect infrastructure metrics or run infrastructure integrations. The Agent supports custom metrics, [custom checks][10] prefixed with `custom_`, and logs-only integrations.
   <div class="alert alert-info">Hosts in <code>none</code> mode still appear in <a href="https://app.datadoghq.com/fleet">Fleet Automation</a> because the Agent continues to send metadata. However, they do not appear in infrastructure dashboards or queries that rely on infrastructure metrics.</div>
+
+### End user device
+
+`end_user_device`
+: **Minimum Agent version**: 7.76.0<br>
+**Recommended for**: Employee desktops, laptops, and workstations<br>
+This mode is in Preview. For configuration steps and to request access, see [End User Device Monitoring][16].
 
 ## Configure infrastructure mode
 
