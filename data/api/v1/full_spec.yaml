@@ -8131,25 +8131,13 @@ components:
       - L2NORM
       - PERCENTILE
       - STDDEV
-    MonitorFormulaAndFunctionCostDataSource:
-      description: Data source for cost queries.
-      enum:
-      - metrics
-      - cloud_cost
-      - datadog_usage
-      example: cloud_cost
-      type: string
-      x-enum-varnames:
-      - METRICS
-      - CLOUD_COST
-      - DATADOG_USAGE
     MonitorFormulaAndFunctionCostQueryDefinition:
       description: A formula and functions cost query.
       properties:
         aggregator:
           $ref: '#/components/schemas/MonitorFormulaAndFunctionCostAggregator'
         data_source:
-          $ref: '#/components/schemas/MonitorFormulaAndFunctionCostDataSource'
+          $ref: '#/components/schemas/MonitorFormulaAndFunctionMetricsDataSource'
         name:
           description: Name of the query for use in formulas.
           example: query1
@@ -12445,19 +12433,53 @@ components:
       type: object
     SLOCountDefinition:
       description: 'A count-based (metric) SLI specification, composed of three parts:
-        the good events formula, the total events formula,
+        the good events formula,
 
-        and the underlying queries.'
+        the bad or total events formula, and the underlying queries.
+
+        Exactly one of `total_events_formula` or `bad_events_formula` must be provided.'
       example:
-        good_events_formula: query1 - query2
+        bad_events_formula: query2
+        good_events_formula: query1
         queries:
         - data_source: metrics
           name: query1
-          query: sum:trace.servlet.request.hits{*} by {env}.as_count()
+          query: sum:trace.servlet.request.hits{!http.status_code:500} by {env}.as_count()
         - data_source: metrics
           name: query2
-          query: sum:trace.servlet.request.errors{*} by {env}.as_count()
-        total_events_formula: query1
+          query: sum:trace.servlet.request.hits{http.status_code:500} by {env}.as_count()
+      oneOf:
+      - $ref: '#/components/schemas/SLOCountDefinitionWithTotalEventsFormula'
+      - $ref: '#/components/schemas/SLOCountDefinitionWithBadEventsFormula'
+    SLOCountDefinitionWithBadEventsFormula:
+      additionalProperties: false
+      properties:
+        bad_events_formula:
+          $ref: '#/components/schemas/SLOFormula'
+          description: The bad events formula (recommended). Total events queries
+            can be defined using the `total_events_formula` field as an alternative.
+            Only one of `total_events_formula` or `bad_events_formula` must be provided.
+        good_events_formula:
+          $ref: '#/components/schemas/SLOFormula'
+        queries:
+          example:
+          - data_source: metrics
+            name: query1
+            query: sum:trace.servlet.request.hits{!http.status_code:500} by {env}.as_count()
+          - data_source: metrics
+            name: query2
+            query: sum:trace.servlet.request.hits{http.status_code:500} by {env}.as_count()
+          items:
+            $ref: '#/components/schemas/SLODataSourceQueryDefinition'
+          minItems: 1
+          type: array
+      required:
+      - good_events_formula
+      - bad_events_formula
+      - queries
+      type: object
+    SLOCountDefinitionWithTotalEventsFormula:
+      additionalProperties: false
       properties:
         good_events_formula:
           $ref: '#/components/schemas/SLOFormula'
@@ -12465,13 +12487,19 @@ components:
           example:
           - data_source: metrics
             name: query1
-            query: sum:trace.servlet.request.hits{*} by {env}.as_count()
+            query: sum:trace.servlet.request.hits{!http.status_code:500} by {env}.as_count()
+          - data_source: metrics
+            name: query2
+            query: sum:trace.servlet.request.hits{http.status_code:500} by {env}.as_count()
           items:
             $ref: '#/components/schemas/SLODataSourceQueryDefinition'
           minItems: 1
           type: array
         total_events_formula:
           $ref: '#/components/schemas/SLOFormula'
+          description: The total events formula. Bad events queries can be defined
+            using the `bad_events_formula` field as an alternative. Only one of `total_events_formula`
+            or `bad_events_formula` must be provided.
       required:
       - good_events_formula
       - total_events_formula
@@ -12482,15 +12510,15 @@ components:
       description: A metric SLI specification.
       example:
         count:
-          good_events_formula: query1 - query2
+          bad_events_formula: query2
+          good_events_formula: query1
           queries:
           - data_source: metrics
             name: query1
-            query: sum:trace.servlet.request.hits{*} by {env}.as_count()
+            query: sum:trace.servlet.request.hits{!http.status_code:500} by {env}.as_count()
           - data_source: metrics
             name: query2
-            query: sum:trace.servlet.request.errors{*} by {env}.as_count()
-          total_events_formula: query1
+            query: sum:trace.servlet.request.hits{http.status_code:500} by {env}.as_count()
       properties:
         count:
           $ref: '#/components/schemas/SLOCountDefinition'
@@ -13626,7 +13654,7 @@ components:
               name: query1
               query: sum:trace.servlet.request.hits{*} by {env}.as_count()
             - data_source: metrics
-              name: query1
+              name: query2
               query: sum:trace.servlet.request.errors{*} by {env}.as_count()
           threshold: 5
       properties:
