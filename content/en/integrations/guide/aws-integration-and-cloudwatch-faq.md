@@ -91,7 +91,7 @@ When transitioning from API polling to CloudWatch Metric Streams, there is an ov
 
 Datadog automatically detects streamed namespaces and stops polling them, so you do not need to manually disable API polling. Leave your configuration settings in the [AWS integration page][1] unchanged, as Datadog continues to use API polling to collect custom tags, metadata, and metrics that cannot be sent through Metric Streams (such as `aws.s3.bucket_size_bytes` and `aws.billing.estimated_charges`).
 
-The overlap period is typically brief (up to five minutes). If values still appear doubled after this period, see the [CloudWatch Metric Streams guide][6] for troubleshooting.
+Detection typically takes up to five minutes, but the overlap period may last longer depending on the timing of active polling crawlers. If values still appear doubled after several minutes, see the [CloudWatch Metric Streams guide][6] for troubleshooting.
 
 ### Which AWS services require additional setup beyond the core integration?
 
