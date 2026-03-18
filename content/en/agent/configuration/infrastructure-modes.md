@@ -38,16 +38,17 @@ The Agent supports three infrastructure modes. A checkmark ({{< X >}}) indicates
 
 ### Full
 
+`full`
+: **Default**: Yes<br>
 **Minimum Agent version**: 7.73.0<br>
-**Configuration value**: `full` (default)
-
-The Agent collects system resource metrics and process data, runs all infrastructure integrations, and supports Container Monitoring and Live Processes. This is the default mode; if you have not set an `infrastructure_mode` value, the Agent runs in `full` mode.
+**Recommended for**: Most use cases<br>
+The Agent collects system resource metrics and process data, runs all infrastructure integrations, and supports Container Monitoring and Live Processes. If you have not set an `infrastructure_mode` value, the Agent runs in `full` mode.
 
 ### Basic
 
-**Minimum Agent version**: 7.73.0 (Linux, macOS), 7.76.2 (Windows)<br>
-**Configuration value**: `basic`
-
+`basic`
+: **Minimum Agent version**: 7.73.0 (Linux, macOS), 7.76.2 (Windows)<br>
+**Recommended for**: VMs and physical servers that need system resource metrics only<br>
 The Agent collects system resource metrics (CPU, memory, disk, network) and limited process and service data. Only the following integrations run:
 
 - [System Check][1]
@@ -64,10 +65,10 @@ The Agent collects system resource metrics (CPU, memory, disk, network) and limi
 
 ### None
 
-**Minimum Agent version**: 7.77.0<br>
-**Configuration value**: `none`
-
-The Agent does not collect infrastructure metrics or run infrastructure integrations. Use this mode on hosts configured only for [Log Management][13], [APM][14], or [Error Tracking][15]. The Agent supports custom metrics, [custom checks][10] prefixed with `custom_`, and logs-only integrations.
+`none`
+: **Minimum Agent version**: 7.77.0<br>
+**Recommended for**: Hosts configured only for [Log Management][13], [APM][14], or [Error Tracking][15]<br>
+The Agent does not collect infrastructure metrics or run infrastructure integrations. The Agent supports custom metrics, [custom checks][10] prefixed with `custom_`, and logs-only integrations.
 
 <div class="alert alert-info">Hosts in <code>none</code> mode still appear in <a href="https://app.datadoghq.com/fleet">Fleet Automation</a> because the Agent continues to send metadata. However, they do not appear in infrastructure dashboards or queries that rely on infrastructure metrics.</div>
 
