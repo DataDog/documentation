@@ -78,7 +78,7 @@ The recommended entry point for the SNMP Profile Manager is from a single device
 
 5. This opens the profile editor. From here, you can view all available metrics for the devices covered by this profile and enable or disable them individually.
 
-{{< img src="/network_device_monitoring/profile_onboarding/ndm_profile_editor.png" alt="The NDM device view panel showing the profile editor with metrics enabled and disabled" style="width:90%;">}}
+{{< img src="/network_device_monitoring/profile_onboarding/ndm_profile_editor.png" alt="The SNMP Profile Manager profile editor showing the Metrics tab with all available metrics listed by name, MIB, OID, category, and compatibility" style="width:90%;">}}
 
 ### Device coverage
 
@@ -130,7 +130,7 @@ This metadata enriches device details in the UI, enables filtering and grouping,
 
 Click the pencil icon to edit a metadata field. Metadata is displayed on the [Network Device Monitoring][15] page as searchable facets and in the device side panel.
 
-{{< img src="/network_device_monitoring/profile_onboarding/ndm_advanced_options_edit.png" alt="The Advanced Options tab showing the Device metadata section with metadata field names and their corresponding SNMP OID values" style="width:90%;">}}
+{{< img src="/network_device_monitoring/profile_onboarding/ndm_advanced_options_edit.png" alt="The Advanced Options tab with Device metadata selected, showing a table of metadata field names such as Device name, Vendor, and Location, and their mapped SNMP OID values" style="width:90%;">}}
 
 The following table describes the different modification options for a metadata field:
 | Modification    | Description                                                                                         |
@@ -144,37 +144,49 @@ The following table describes the different modification options for a metadata 
 
 Use **Global tags** to apply tags to all metrics and device-level metadata for devices associated with the profile. Global tags help standardize tagging across similar devices and add context such as environment, location, or ownership.
 
-{{< img src="/network_device_monitoring/profile_onboarding/ndm_global_tags.png" alt="The Advanced Options Global Tags section" style="width:90%;">}}
+{{< img src="/network_device_monitoring/profile_onboarding/ndm_global_tags.png" alt="The Advanced Options tab with Global tags selected, showing a table of tag names and their OID values with an Add global tag button" style="width:90%;">}}
 
 
-### Step 4: Explore metric packs
+### Explore metric packs
 
-The **Metric Packs** tab provides AI-guided recommendations for enabling groups of related metrics in bulk. Metric packs are curated sets of metrics organized by category, such as interface metrics or routing metrics.
+Metric packs are curated sets of metrics you can enable in bulk. They are accessible from the **Metrics** tab and provide AI-guided recommendations based on your devices.
 
-<!-- TODO: New screenshot — Metric Packs tab showing pack list, AI recommendations, and preview of a selected pack -->
-{{< img src="/network_device_monitoring/profile_onboarding/ndm_metric_packs.png" alt="The Metric Packs tab showing recommended packs and a pack preview" style="width:80%;">}}
+{{< img src="/network_device_monitoring/profile_onboarding/ndm_metric_packs.png" alt="The Metrics tab showing the Start with metric packs banner at the top and the Metric packs button highlighted in the top right corner" style="width:90%;">}}
 
-1. Browse or search for a metric pack.
-2. Click a pack to preview the metrics included.
-3. Click **Add Metric Pack** to enable all metrics in the pack at once.
+To add a metric pack:
 
-{{< img src="/network_device_monitoring/profile_onboarding/ndm_add_metric_pack.png" alt="The Metric Packs tab showing the Add Metric Pack button highlighted" style="width:90%;">}}
+1. From the **Metrics** tab, click **Metric packs** in the top right corner, or click **View All** in the **Start with metric packs** banner.
+2. In the **Add metric pack** modal, browse all available packs or click **Suggested packs** to view AI-guided recommendations.
+3. Click a pack to preview its included metrics, global tags, and metadata.
+4. Click **Add metric pack** to enable all metrics in the pack at once.
+
+{{< img src="/network_device_monitoring/profile_onboarding/ndm_add_metric_pack.png" alt="The Add metric pack modal showing the pack list on the left and a preview of the selected pack's metrics, global tags, and metadata on the right" style="width:90%;">}}
 
 ## Inventory page
 
-To view all profiles in one place, navigate to [**Infrastructure > Network Devices > Configuration**][1]. The **Inventory** page shows a summary of out-of-the-box (OOTB) Datadog profiles and any custom profiles you have created.
+To view all profiles in one place, navigate to [**Infrastructure > Network Devices > Settings**][1] and click **SNMP Profile Manager** in the left sidebar. This page lists all profiles, both Datadog out-of-the-box profiles and any custom profiles you have created.
 
-<!-- TODO: New screenshot — Updated inventory page (no "Create New Profile" button visible) -->
+{{< img src="/network_device_monitoring/profile_onboarding/snmp_profile_manager.png" alt="The SNMP Profile Manager page showing a list of profiles with their name, vendor, device coverage, and last update columns" style="width:90%;">}}
+
+Use the **Device vendor** filter or the search bar to narrow the list by profile name, vendor, or device name. Toggle **Show only profiles with matching devices** to hide profiles with no associated devices.
+
+If Agents are misconfigured for Remote Config, a warning banner appears at the top of the page. Click **Fix Agents** to resolve the issue.
+
+To open the profile editor, click on any profile. For Datadog-provided profiles, editing creates a custom version on your behalf.
+
+Click the three-dot menu to the right of a profile row to:
+
+- **Edit profile**: Open the profile editor for that profile.
+- **Delete profile**: Permanently remove a custom profile.
+- **Review related devices**: Navigate to NDM filtered to the devices matched to that profile.
 
 ### Download profiles
 
-Click the download button on the inventory page to generate and download a `.zip` bundle containing the `yaml` files for your custom profiles. To apply profiles manually to Agents:
+To download profiles as YAML files, click **Download Profiles** in the top right corner of the page. This generates a `.zip` bundle containing the `yaml` files for your custom profiles. To apply profiles manually to Agents:
 
 1. Place the `yaml` files in the [profile directory][13] on each relevant installed Agent.
 2. Restart the Datadog Agent.
 3. Confirm that NDM is receiving metrics from the matched devices.
-
-{{< img src="/network_device_monitoring/profile_onboarding/profile_download_2.png" alt="The Network Device profile main page highlighting the Download All Profiles option" style="width:100%;">}}
 
 ## Profile inheritance
 
@@ -193,7 +205,7 @@ For advanced inheritance configuration, see [Profile Format Reference][3].
 ### Why are there no matching devices?
 If no matching devices are found, it may be due to the following reasons:
   * **The profile is in Draft mode**:
-    * Draft profiles are not applied to the Agent. To start monitoring devices with your profile, open the profile and click [**Save and Deploy**](#step-5-save-and-deploy).
+    * Draft profiles are not applied to the Agent. To start monitoring devices with your profile, open the profile and click **Save & Deploy Profile**.
     After a profile is applied, you cannot bring it back to draft status.
   * **The profile is applied but is not matching any device(s)**:
     * Profiles are matched to devices using their SysObjectID. Confirm that the SysObjectID in the profile matches one or more of your monitored devices.
@@ -226,10 +238,6 @@ The Profile Manager requires:
 If Remote Configuration is not enabled, you cannot trigger device scans or sync profiles to Agents through the UI. To apply profiles manually, see [Download profiles](#download-profiles).
 
 Datadog recommends enabling Remote Configuration to take advantage of the full UI-based experience and minimize manual Agent interactions.
-
-### Why is a table metric not working?
-
-Table metrics require an index tag to be configured. If a table metric is enabled but not appearing in Datadog, confirm that an index tag was selected when enabling the metric. See [Table metrics](#table-metrics) for more information.
 
 ## Further Reading
 
