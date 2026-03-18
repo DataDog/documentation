@@ -24,7 +24,7 @@ When the Browser SDK collects an error:
 
 * The error is captured as an [Error event][14] in RUM.
 * [Retention Filters][15] that target sessions containing an Error event will retain the current session.
-* The [RUM metrics][16] `rum.measure.error`, `rum.measure.session.error` and `rum.measure.view.error_free` are updated, regardless of whether the session is retained.
+* The [RUM metrics][16] `rum.measure.error`, `rum.measure.session.error`, and `rum.measure.view.error_free` are updated, regardless of whether the session is retained.
 * The error is captured in [Error Tracking][4].
 
 [Error Tracking rules][17] do not apply to _Error events_, and RUM still records Error events that match [Ignored and Excluded issues][18] in Error Tracking. To prevent errors from being recorded as Error events, you must discard them before they are sent to Datadog [using the `beforeSend` callback][19].
