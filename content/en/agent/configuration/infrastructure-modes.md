@@ -8,6 +8,9 @@ further_reading:
 - link: "/agent/guide/upgrade/"
   tag: "Guide"
   text: "Upgrade your Datadog Agent"
+- link: "/infrastructure/end_user_device_monitoring/"
+  tag: "Guide"
+  text: "End User Device Monitoring"
 algolia:
   tags: ['infrastructure modes']
 private: true
@@ -15,45 +18,36 @@ private: true
 
 ## Overview
 
-Infrastructure modes control how much infrastructure monitoring the Datadog Agent performs on a host. Choose a mode based on the level of visibility you need for each host.
-
-For monitoring employee workstations and laptops, see [End User Device Monitoring][16].
+Infrastructure modes control how much infrastructure monitoring the Datadog Agent performs on a host. Set a mode on each host to match its monitoring role: collecting full infrastructure data, reporting basic system metrics, or running only non-infrastructure products like APM and logs.
 
 ## Available modes
 
-The following table summarizes what each mode supports. "Supported" means the feature is enabled; "Not supported" means the Agent does not collect or run that feature in the given mode.
-
 | Feature | Full (default) | Basic | None |
 |---------|----------------|-------|------|
+| **Best for** | Hosts that need comprehensive monitoring | VMs and servers that need system metrics only | Hosts running APM, logs, or Error Tracking only |
 | System resource metrics | Supported | Supported | Not supported |
-| Infrastructure integrations | All integrations | [Limited set](#basic) | Not supported |
+| Infrastructure integrations | All | [Limited set](#basic) | Not supported |
 | Container Monitoring | Supported | Not supported | Not supported |
 | Live Processes | Supported | Not supported | Not supported |
 | Custom checks and logs-only integrations | Supported | Supported | Supported |
 | Custom metrics | Supported | Not supported | Supported |
 | Visible in infrastructure dashboards | Yes | Yes | No |
 
+<div class="alert alert-info">For monitoring employee workstations and laptops, use <code>end_user_device</code> mode. See <a href="/infrastructure/end_user_device_monitoring/">End User Device Monitoring</a> for details.</div>
+
 ### Full
 
 **Minimum Agent version**: 7.73.0<br>
 **Configuration value**: `full` (default)
 
-`full` mode is the default and is recommended for most use cases. The Agent collects system resource metrics and process data, runs all infrastructure integrations, and supports Container Monitoring and Live Processes.
+The Agent collects system resource metrics and process data, runs all infrastructure integrations, and supports Container Monitoring and Live Processes. This is the default mode; if you have not set an `infrastructure_mode` value, the Agent runs in `full` mode.
 
 ### Basic
 
 **Minimum Agent version**: 7.73.0 (Linux, macOS), 7.76.2 (Windows)<br>
 **Configuration value**: `basic`
 
-`basic` mode is designed for VMs and physical servers where you need system resource metrics but not the full set of infrastructure integrations. The Agent reports the following resource usage data:
-
-- CPU
-- Memory
-- Disk
-- Network
-- Process and service data (limited)
-
-Only the following integrations run in `basic` mode:
+The Agent collects system resource metrics (CPU, memory, disk, network) and limited process and service data. Only the following integrations run:
 
 - [System Check][1]
 - [Disk][2]
@@ -67,14 +61,12 @@ Only the following integrations run in `basic` mode:
 - [Custom checks][10] prefixed with `custom_`
 - Logs-only integrations (for example, [journald][11] or [Windows Event Log][12])
 
-<div class="alert alert-info"><code>basic</code> mode does not support Container Monitoring or Live Processes. To use all integrations and features, switch to <code>full</code> mode.</div>
-
 ### None
 
 **Minimum Agent version**: 7.77.0<br>
 **Configuration value**: `none`
 
-`none` mode is designed for hosts that run non-infrastructure Datadog products such as [Log Management][13], [APM][14], or [Error Tracking][15] and do not need infrastructure metrics. The Agent supports custom metrics, [custom checks][10] prefixed with `custom_`, and logs-only integrations.
+The Agent does not collect infrastructure metrics or run infrastructure integrations. Use this mode on hosts configured only for [Log Management][13], [APM][14], or [Error Tracking][15]. The Agent supports custom metrics, [custom checks][10] prefixed with `custom_`, and logs-only integrations.
 
 <div class="alert alert-info">Hosts in <code>none</code> mode still appear in <a href="https://app.datadoghq.com/fleet">Fleet Automation</a> because the Agent continues to send metadata. However, they do not appear in infrastructure dashboards or queries that rely on infrastructure metrics.</div>
 
@@ -82,12 +74,15 @@ Only the following integrations run in `basic` mode:
 
 To set the infrastructure mode for a host:
 
-1. Open the [Agent configuration file][18] (`datadog.yaml`) and add the `infrastructure_mode` parameter at the root level, adjacent to `api_key`:
+1. Open the [Agent configuration file][18] (`datadog.yaml`) and add `infrastructure_mode` at the root level:
 
     {{< code-block lang="yaml" filename="datadog.yaml" disable_copy="true"
       collapsible="true" >}}
-api_key: <YOUR_API_KEY>
-infrastructure_mode: <MODE>  # full, basic, none, or end_user_device
+## @param infrastructure_mode - string - optional - default: full
+## Set the level of infrastructure monitoring the Agent performs.
+## Available values: full, basic, none, end_user_device
+#
+infrastructure_mode: basic
     {{< /code-block >}}
 
 2. [Restart the Datadog Agent][19] to apply the change.
@@ -99,7 +94,6 @@ To confirm which infrastructure mode your hosts are running:
 1. Navigate to [Fleet Automation][17] and click the **View Agents** tab.
 1. Select **Infrastructure Mode** from the **Group by** dropdown.
 1. Click a mode group to expand it and see the hosts it contains.
-1. Optionally, use the search bar to filter by hostname (for example, `hostname:worker1`).
 
 {{< img src="agent/configuration/fleet_automation_group_by_infra_mode-1.png" alt="Fleet Automation page grouped by infrastructure mode, showing the Full group expanded with a list of hosts." style="width:90%" >}}
 
@@ -121,7 +115,6 @@ To confirm which infrastructure mode your hosts are running:
 [13]: /logs/
 [14]: /tracing/
 [15]: /error_tracking/
-[16]: /infrastructure/end_user_device_monitoring/
 [17]: https://app.datadoghq.com/fleet
 [18]: /agent/configuration/agent-configuration-files/
 [19]: /agent/configuration/agent-commands/#restart-the-agent
