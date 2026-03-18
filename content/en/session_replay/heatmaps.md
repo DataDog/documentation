@@ -115,24 +115,53 @@ The panel to the left of the Scroll map provides high-level insights with direct
 A screenshot is the state of a view at a particular point in time. Changing the screenshot shows different results, depending on the screenshot selected. You can also save screenshots so that everyone in your organization can analyze the same view state. 
 
 ### Changing screenshots
-From the heatmap view, click the **Change Screenshot** button. Choose from existing screenshots previously saved by teammates, or grab a screenshot from a Session Replay.
 
-To select a screenshot from a Session Replay:
+From the heatmap view, click the **Change Screenshot** button. A dropdown appears with three options.
 
-1. Click **Grab from replay** if the desired heatmap screenshot has not been previously saved.
+{{< img src="real_user_monitoring/session_replay/heatmaps/heatmaps-change-screenshot-button.png" alt="The Change Screenshot dropdown showing three options: Existing screenshots, Take new screenshot, and Grab from replay." style="width:100%;">}}
 
-   {{< img src="real_user_monitoring/session_replay/heatmaps/heatmaps-change-screenshot-button-1.png" alt="Click the Grab from replay button to change the screenshot the heatmap background is based on." style="width:100%;">}}
+**Existing screenshots**
+
+Choose from screenshots previously saved by you or your teammates. This ensures everyone in your organization analyzes the same view state.
+
+**Take new screenshot**
+
+Capture a screenshot directly from your live application. Use this option when the state you need—such as an open modal, a hover menu, or a specific scroll position—does not exist in your recorded replays.
+
+**Prerequisite**: Install the [Datadog Test Recorder][6] Chrome extension before using this option.
+
+1. Click **Take new screenshot**.
+
+   {{< img src="real_user_monitoring/session_replay/heatmaps/heatmaps-take-new-screenshot-selected.png" alt="The Change Screenshot dropdown with Take new screenshot selected." style="width:100%;">}}
+
+
+1. Navigate to the page you want to capture in the embedded browser.
+1. Scroll and interact with the page to display the content you want.
+1. Select a masking level to prevent sensitive data from appearing in your heatmap screenshot. Individual element-level privacy settings configured in your code still take precedence. For more information, see [Privacy options][5].
+
+   {{< img src="real_user_monitoring/session_replay/heatmaps/heatmaps-take-new-screenshot.png" alt="The Take New Screenshot panel showing navigation instructions and a masking level selector." style="width:100%;">}}
+
+1. Click **Take Screenshot**. A preview of the screenshot opens.
+1. Review the preview and click **Confirm** to apply the screenshot to your heatmap.
+
+**Grab from replay**
+
+Select a screenshot from a recorded Session Replay.
+
+1. Click **Grab from replay**.
+
+   {{< img src="real_user_monitoring/session_replay/heatmaps/heatmaps-grab-from-replay-selected.png" alt="The Change Screenshot dropdown with Grab from replay selected." style="width:100%;">}}
 
 1. Click an action event on the right to select a different snapshot for your heatmap.
 
    {{< img src="real_user_monitoring/session_replay/heatmaps/heatmaps-list-all-events-1.png" alt="List of action events for the session replay." style="width:100%;">}}
 
-1. If the session [does not contain the action](#the-view-that-i-selected-is-not-showing-the-initial-content) that leads to the desired screenshot, you can return to the list of replays by clicking **Choose Another Replay**.
-1. Click the **Take Screenshot** button to apply the screenshot at the paused point to the heatmap.
+1. If the session [does not contain the action](#the-view-that-i-selected-is-not-showing-the-initial-content) that leads to the desired screenshot, return to the list of replays by clicking **Choose Another Replay**.
+1. Click **Take Screenshot** to apply the screenshot at the paused point to the heatmap.
 
 ### Saving screenshots
 
-You can save the current heatmap state as a screenshot so it becomes the default view for anyone in your organization who opens the heatmap. To save the current screenshot auto-picked from a recent replay, click **Save** on the current screenshot.
+Screenshots taken using **Grab from replay** or **Take new screenshot** are automatically saved and become the default view for anyone in your organization who opens the heatmap. To also save the screenshot auto-picked from a recent replay, click **Save** on the current screenshot.
 
 {{< img src="real_user_monitoring/session_replay/heatmaps/heatmaps-save-screenshot-1.png" alt="Click Save to apply the auto-picked screenshot." style="width:100%;">}}
 
@@ -193,3 +222,5 @@ User information is not collected by default. Heatmaps use the user information 
 [2]: https://github.com/DataDog/browser-sdk/blob/main/packages/rum/package.json
 [3]: /real_user_monitoring/explorer/
 [4]: /product_analytics/charts/analytics_explorer/
+[5]: /session_replay/browser/privacy_options/#privacy-options
+[6]: https://chromewebstore.google.com/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa
