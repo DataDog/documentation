@@ -44,6 +44,20 @@ Mobile Session Replay expands visibility into your mobile applications by visual
 
 Learn more about the [Session Replay for Mobile][6].
 
+## AI-powered summaries and smart chapters
+
+Summaries and smart chapters give you instant context about what happened in a session before you watch it.
+
+**Summaries** describe the user's intent, key actions, friction signals, and outcome. Specific moments in the summary are hyperlinked so you can jump directly to that point in the replay. In the session list, hover over a replay to preview the summary, or open the replay directly. If a session has been summarized before, the summary appears instantly when you open the replay.
+
+{{< img src="real_user_monitoring/session_replay/session-replay-ai-summary.png" alt="AI-powered summary in the Session Replay player, showing user intent, key actions, friction signals, and hyperlinked moments" style="width:100%;" >}}
+
+**Smart chapters** automatically segment the replay timeline into labeled stages of the user journey. For example, in an e-commerce session, chapters might include "Browse lighting", "Shop bedding and chairs", and "Review cart and checkout". Chapters appear when you hovering over the timeline and in the dropdown on the player controls, letting you jump directly directly between them.
+
+{{< img src="real_user_monitoring/session_replay/session-replay-smart-chapters.png" alt="Smart chapter dropdown in the Session Replay player showing labeled stages of the user journey" style="width:100%;" >}}
+
+AI summaries and smart chapters generate for sessions with at least 4 user actions and a duration of at least 45 seconds.
+
 ## Extend data retention
 
 By default, Session Replay data is retained for 30 days.
