@@ -23,7 +23,7 @@ The Browser SDK collects front-end errors. The error message and stack trace are
 When the Browser SDK collects an error:
 
 * The error is captured as an [Error event][14] in RUM.
-* [Retention Filters][15] that target sessions containing an Error event will retain the current session.
+* [Retention Filters][15] that target sessions containing an Error event retain the current session.
 * The [RUM metrics][16] `rum.measure.error`, `rum.measure.session.error`, and `rum.measure.view.error_free` are updated, regardless of whether the session is retained.
 * The error is captured in [Error Tracking][4].
 
