@@ -23,7 +23,7 @@ By default, a CloudPrem cluster stores all logs in a single index with a single 
 
 To view and manage your CloudPrem indexes, navigate to the [CloudPrem page][1] in Datadog. Select a cluster and click **View Indexes** to access the index configuration.
 
-## Filter routing
+## Indexes filters
 
 When a log is ingested, CloudPrem evaluates each index's filter from top to bottom and routes the log to the **first matching index**. This means index order matters:
 
@@ -37,11 +37,13 @@ You can reorder indexes at any time by dragging rows or using the **Move to** ac
 
 Each index has its own retention period, which determines how long logs are stored before automatic deletion.
 
-The index retention configured through the Datadog UI takes precedence over the global retention set in the [Helm chart values][2]. If you are migrating from a single-index setup, existing logs remain in the default index with the globally configured retention until they expire.
+If you are upgrading from an previous CloudPrem version, the index retention configured through the Datadog UI takes precedence over the global retention set in the [Helm chart values][2].
 
 ## Searching across indexes
 
 To query logs stored in CloudPrem, select one or more CloudPrem indexes in the [Log Explorer][3]. You can select a specific index to narrow your search, or select all indexes in a cluster to search across them. From the index configuration page, use **View in Log Explorer** to open a filtered view for a given index.
+
+For more information, see [Search CloudPrem Logs][4].
 
 ## Further reading
 
@@ -50,3 +52,4 @@ To query logs stored in CloudPrem, select one or more CloudPrem indexes in the [
 [1]: https://app.datadoghq.com/cloudprem
 [2]: /cloudprem/configure/retention/
 [3]: /logs/explorer/
+[4]: /cloudprem/operate/search_logs
