@@ -15,93 +15,68 @@ private: true
 
 ## Overview
 
-Infrastructure modes let you control how much infrastructure monitoring the Datadog Agent performs on a host. You can configure each of your hosts to run in one of four modes: `full`, `basic`, `none`, and `end_user_device`.
-
-This page covers `full`, `basic`, and `none` modes. For `end_user_device`, see [End User Device Monitoring][16].
+Infrastructure modes control how much infrastructure monitoring the Datadog Agent performs on a host. Set a mode on each host to match its monitoring role: collecting full infrastructure data, reporting basic system metrics, or running only non-infrastructure products like APM and logs.
 
 ## Available modes
+The Agent supports four infrastructure modes. A checkmark ({{< X >}}) indicates the capability is available in that mode.
 
-The level of infrastructure monitoring determines which integrations, metrics, and features the Agent collects. See [Full](#full), [Basic](#basic), and [None](#none) for configuration details. For End User Device Monitoring, see [End User Device](#end-user-device).
-
-|  | Full | Basic | None |
-|--|------|-------|------|
-| System resource metrics | {{< X >}} | {{< X >}} | |
-| Infrastructure integrations | All | Limited set | |
-| Container Monitoring | {{< X >}} | | |
-| Live Processes | {{< X >}} | | |
-| Custom checks and logs-only integrations | {{< X >}} | {{< X >}} | {{< X >}} |
-| Custom metrics | {{< X >}} | | {{< X >}} |
-| Appears in infrastructure dashboards | {{< X >}} | {{< X >}} | |
+| Capability | [Full](#full) (default) | [Basic](#basic) | [None](#none) | [End User Device](#end-user-device) |
+|------------|-------------------------|-----------------|---------------|--------------------------------------|
+| System resource metrics | {{< X >}} | {{< X >}} | | {{< X >}} |
+| Infrastructure integrations | {{< X >}} (all) | {{< X >}} ([limited set](#basic)) | | {{< X >}} (limited set) |
+| Container Monitoring | {{< X >}} | | | |
+| Live Processes | {{< X >}} | | | {{< X >}} |
+| Custom checks and logs-only integrations | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
+| Custom metrics | {{< X >}} | | {{< X >}} | |
+| Visible in infrastructure dashboards | {{< X >}} | {{< X >}} | | |
 
 ### Full
 
+`full`
+: **Default**: Yes<br>
 **Minimum Agent version**: 7.73.0<br>
 **Recommended for**: Most use cases<br>
-**Configuration value**: `full` (default)
-
-In `full` mode, the Agent collects system resource metrics and process data, runs all infrastructure integrations, and supports Container Monitoring and Live Processes.
-
-Use `full` mode for hosts that require comprehensive infrastructure monitoring.
+: The Agent collects system resource metrics and process data, runs all infrastructure integrations, and supports Container Monitoring and Live Processes. If you have not set an `infrastructure_mode` value, the Agent runs in `full` mode.
 
 ### Basic
-
-**Minimum Agent version**: 7.73.0 (Linux, macOS), 7.76.2 (Windows)<br>
-**Recommended for**: VMs and physical servers that only need system resource metrics<br>
-**Configuration value**: `basic`
-
-In `basic` mode, the Agent reports system resource usage data for the following:
-- CPU
-- Memory
-- Disk
-- Network
-- Process and service data (limited)
-
-In `basic` mode, only the following integrations run:
-
-- [System Check][1]
-- [Disk][2]
-- [Network][3]
-- [NTP][4]
-- [Processes][5]
-- [Systemd][6]
-- [Windows Crash Detection][7]
-- [Windows Kernel Memory][8]
-- [Windows Services][9]
-- [Custom checks][10] prefixed with `custom_`
-- Logs-only integrations (for example, [journald][11] or [Windows Event Log][12])
-
-<div class="alert alert-info">The Agent in <code>basic</code> mode does not run integrations other than those listed above, and does not support Container Monitoring or Live Processes. Switch to <code>full</code> mode to use all integrations and features.</div>
+`basic`
+: **Minimum Agent version**: 7.73.0 (Linux, macOS), 7.76.2 (Windows)<br>
+**Recommended for**: VMs and physical servers that need system resource metrics only<br>
+: The Agent collects system resource metrics (CPU, memory, disk, network) and limited process and service data. Only the following integrations run:
+  - [System Check][1]
+  - [Disk][2]
+  - [Network][3]
+  - [NTP][4]
+  - [Processes][5]
+  - [Systemd][6]
+  - [Windows Crash Detection][7]
+  - [Windows Kernel Memory][8]
+  - [Windows Services][9]
+  - [Custom checks][10] prefixed with `custom_`
+  - Logs-only integrations (for example, [journald][11] or [Windows Event Log][12])
 
 ### None
 
-**Minimum Agent version**: 7.77.0<br>
+`none`
+
+: **Minimum Agent version**: 7.77.0<br>
 **Recommended for**: Hosts configured only for [Log Management][13], [APM][14], or [Error Tracking][15]<br>
-**Configuration value**: `none`
-
-In `none` mode, the Agent does not collect any infrastructure metrics or run infrastructure integrations. You can use custom metrics, [custom checks][10] prefixed with `custom_`, and logs-only integrations.
-
-The host in `none` mode appears in [Fleet Automation][17] under the **View Agents** tab because the Agent continues to send metadata to Datadog. However, the host does not appear in infrastructure dashboards or queries that rely on infrastructure metrics.
+**Configuration value**: `none`<br>
+: In `none` mode, the Agent does not collect any infrastructure metrics or run infrastructure integrations. You can use custom metrics, [custom checks][10] prefixed with `custom_`, and logs-only integrations.
+: The host in `none` mode appears in [Fleet Automation][17] under the **View Agents** tab because the Agent continues to send metadata to Datadog. However, the host does not appear in infrastructure dashboards or queries that rely on infrastructure metrics.
 
 ### End User Device
 
-{{% collapse-content title="End User Device details" level="h4" %}}
-<div class="alert alert-info">End User Device Monitoring is in Preview. For configuration steps and to request access, see <a href="/infrastructure/end_user_device_monitoring/">End User Device Monitoring</a>.</div>
-
-**Minimum Agent version**: 7.76.0<br>
+`end_user_device`
+: **Minimum Agent version**: 7.76.0<br>
 **Recommended for**: Employee desktops, laptops, and workstations<br>
-**Configuration value**: `end_user_device`
-
-In `end_user_device` mode, the Agent collects system resource metrics, runs a limited set of infrastructure integrations, and supports Live Processes, custom checks, and logs-only integrations. It does not support Container Monitoring, custom metrics, or infrastructure dashboards.
-
-End User Device Monitoring is not intended for general infrastructure monitoring. See [Key capabilities][20] for more information.
-
-{{% /collapse-content %}}
+: This mode is in Preview. For configuration steps and to request access, see [End User Device Monitoring][16].
 
 ## Configure Agent infrastructure mode
 
-To configure the Agent infrastructure mode:
+To set the infrastructure mode for a host:
 
-1. Add the `infrastructure_mode` parameter at the root level of the [Agent configuration file][18]
+1. Open the [Agent configuration file][18] and add `infrastructure_mode` at the root level: 
 
     {{< code-block lang="yaml" filename="datadog.yaml" disable_copy="true"
       collapsible="true" >}}
@@ -114,12 +89,12 @@ infrastructure_mode: <MODE>  # The available options are `full`, `basic`, `none`
 
 To verify the infrastructure mode set on your hosts:
 
-1. Navigate to [Fleet Automation][17] and click the **View Agents** tab
-1. Select **Infrastructure Mode** from the **Group by** dropdown
-1. Click the mode group name to expand it and see the hosts it contains
+1. Navigate to [Fleet Automation][17] and click the **View Agents** tab.
+1. Select **Infrastructure Mode** from the **Group by** dropdown.
+1. Click a mode group to expand it and see the hosts it contains.
 1. Optionally, use the search bar to filter to a specific hostname (for example, `hostname:worker1`)
 
-{{< img src="agent/configuration/fleet_automation_group_by_infra_mode-1.png" alt="Fleet Automation View Agents page with Infrastructure Mode selected in the Group by dropdown, showing the Full group expanded with 311 hosts and columns for hostname, Agent version, integrations, services, and remote configuration status." style="width:90%" >}}
+{{< img src="agent/configuration/fa_group_by_infra_mode-1.png" alt="Fleet Automation View Agents page with Infrastructure Mode selected in the Group by dropdown, showing the Full group expanded with 311 hosts and columns for hostname, Agent version, integrations, services, and remote configuration status." style="width:90%" >}}
 
 ## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}
