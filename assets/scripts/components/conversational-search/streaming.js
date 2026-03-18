@@ -75,6 +75,64 @@ export async function streamConversation({
     });
 }
 
+export async function streamDocsAiChat({
+    docsAiConfig,
+    query,
+    signal,
+    onToken,
+    onError
+}) {
+    const response = await fetch(docsAiConfig.apiUrl, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-Docs-Api-Key': docsAiConfig.apiKey
+        },
+        body: JSON.stringify({
+            data: { attributes: { query } }
+        }),
+        signal
+    });
+
+    if (!response.ok) {
+        throw new Error(`Docs AI request failed: ${response.status}`);
+    }
+
+    const reader = response.body.getReader();
+    const decoder = new TextDecoder();
+    let buffer = '';
+    let fullMessage = '';
+
+    while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+
+        buffer += decoder.decode(value, { stream: true });
+        const lines = buffer.split('\n');
+        buffer = lines.pop();
+
+        for (const line of lines) {
+            const trimmed = line.trim();
+            if (!trimmed || !trimmed.startsWith('data: ')) continue;
+
+            const payload = trimmed.slice(6);
+            if (payload === '[DONE]') return fullMessage;
+
+            try {
+                const parsed = JSON.parse(payload);
+                if (parsed.token !== undefined) {
+                    fullMessage += parsed.token;
+                    onToken(parsed.token, fullMessage);
+                }
+            } catch (e) {
+                if (onError) onError(e);
+            }
+        }
+    }
+
+    return fullMessage;
+}
+
 export async function fetchConversation({
     typesenseConfig,
     query,

@@ -5,11 +5,12 @@ import { logAction, logError } from './logger';
 import { parseMarkdown, inlineRefChips, extractSources, renderMessageWithSources } from './markdown';
 import { attachTooltips, buildSourceCards, showSourceTooltip, closeAllSourceTooltips, repositionTooltip } from './sources';
 import { addMessageActions, injectCodeCopyButtons } from './actions';
-import { streamConversation, fetchConversation, resetTypesenseClient } from './streaming';
+import { streamConversation, fetchConversation, streamDocsAiChat, resetTypesenseClient } from './streaming';
 
 const { env } = document.documentElement.dataset;
 const docsConfig = getConfig(env);
 const typesenseConfig = docsConfig.typesense;
+const docsAiConfig = docsConfig.docsAi;
 
 let IS_CONVERSATIONAL_SEARCH_ENABLED = false;
 const CONVERSATIONAL_SEARCH_FLAG_KEY = 'docs_conversational_search';
@@ -19,6 +20,7 @@ const CONV_MODEL_DOCS_STABLE = 'docs-ai-conv-model-v1-stable';
 const DEFAULT_CONVERSATION_MODEL_ID = CONV_MODEL_DOCS_STABLE;
 const USE_LEGACY_MODEL_FLAG_KEY = 'docs-ai-use-legacy-model';
 const DISABLE_STREAMING_FLAG_KEY = 'docs-ai-disable-streaming';
+const USE_DOCS_AI_CHAT_FLAG_KEY = 'docs-ai-use-internal-chat';
 
 const RENDER_THROTTLE = 50;
 
@@ -58,6 +60,7 @@ class ConversationalSearch {
         this.hasLoggedFirstOpen = false;
         this.selectedModelId = DEFAULT_CONVERSATION_MODEL_ID;
         this.streamingDisabled = false;
+        this.useDocsAiChat = true;
         this.isHomepage = document.querySelector('.kind-home') !== null;
         this.homeAiBtnVisible = false;
         this.ready = false;
@@ -83,6 +86,7 @@ class ConversationalSearch {
             if (getBooleanFlag(client, DISABLE_STREAMING_FLAG_KEY)) {
                 this.streamingDisabled = true;
             }
+            this.useDocsAiChat = getBooleanFlag(client, USE_DOCS_AI_CHAT_FLAG_KEY, true);
         }).catch(() => {});
     }
 
@@ -386,7 +390,9 @@ class ConversationalSearch {
         const responseContainer = this.addStreamingMessage();
 
         try {
-            if (this.streamingDisabled) {
+            if (this.useDocsAiChat) {
+                await this.runDocsAiStreamConversation(query, responseContainer);
+            } else if (this.streamingDisabled) {
                 await this.runFetchConversation(query, responseContainer);
             } else {
                 await this.runStreamConversation(query, responseContainer);
@@ -464,6 +470,60 @@ class ConversationalSearch {
             this.log('Conversational Search Response', {
                 conversational_search: {
                     action: 'response_received',
+                    response_length: accumulatedMessage.length,
+                    conversation_id: this.conversationId,
+                    latency_ms: Date.now() - startTime
+                }
+            });
+        } else {
+            responseContainer.textContent = 'No response received. Please try again.';
+        }
+    }
+
+    async runDocsAiStreamConversation(query, responseContainer) {
+        this.abortController = new AbortController();
+        const startTime = Date.now();
+
+        let accumulatedMessage = '';
+        let lastRenderTime = 0;
+        responseContainer.innerHTML = '';
+
+        accumulatedMessage = await streamDocsAiChat({
+            docsAiConfig,
+            query,
+            signal: this.abortController.signal,
+            onToken: (_token, fullMessage) => {
+                accumulatedMessage = fullMessage;
+
+                const now = Date.now();
+                if (now - lastRenderTime > RENDER_THROTTLE) {
+                    const { displayMarkdown, sources } = extractSources(accumulatedMessage);
+                    responseContainer.innerHTML = inlineRefChips(parseMarkdown(displayMarkdown));
+                    if (sources.length > 0) {
+                        responseContainer.appendChild(buildSourceCards(sources));
+                    }
+                    lastRenderTime = now;
+                    this.scrollToBottom();
+                }
+            },
+            onError: (error) => {
+                this.logErr('Docs AI Streaming Error', error);
+            }
+        });
+
+        if (accumulatedMessage) {
+            responseContainer.innerHTML = renderMessageWithSources(accumulatedMessage, {
+                attachTooltips,
+                buildSourceCards
+            });
+            injectCodeCopyButtons(responseContainer, this.ctx);
+            addMessageActions(responseContainer.parentElement, query, accumulatedMessage, this.ctx);
+            this.scrollToBottom();
+
+            this.log('Conversational Search Response', {
+                conversational_search: {
+                    action: 'response_received',
+                    provider: 'docs_ai',
                     response_length: accumulatedMessage.length,
                     conversation_id: this.conversationId,
                     latency_ms: Date.now() - startTime

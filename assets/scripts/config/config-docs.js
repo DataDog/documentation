@@ -10,6 +10,12 @@ module.exports = {
             apiIndex: 'docs_api_alias',
             partnersIndex: 'docs_partners_alias'
         },
+        // TODO: Update to production docs-ai URL before GA rollout
+        // Alternative: https://ddstaging.datadoghq.com/api/unstable/docs-ai/chat
+        docsAi: {
+            apiUrl: 'https://docs-ai.us1.staging.dog/api/unstable/docs-ai/chat',
+            apiKey: 'public-api-key'
+        },
         imgUrl: 'https://datadog-docs.imgix.net/',
         gaTag: 'UA-21102638-5'
     },
@@ -24,6 +30,11 @@ module.exports = {
             apiIndex: 'docs_api_alias',
             partnersIndex: 'docs_partners_alias'
         },
+        // Alternative: https://ddstaging.datadoghq.com/api/unstable/docs-ai/chat
+        docsAi: {
+            apiUrl: 'https://docs-ai.us1.staging.dog/api/unstable/docs-ai/chat',
+            apiKey: 'public-api-key'
+        },
         imgUrl: 'https://datadog-docs-staging.imgix.net/',
         gaTag: 'UA-21102638-9'
     },
@@ -36,6 +47,11 @@ module.exports = {
             docsIndex: 'docs_alias',
             apiIndex: 'docs_api_alias',
             partnersIndex: 'docs_partners_alias'
+        },
+        // Alternative: https://ddstaging.datadoghq.com/api/unstable/docs-ai/chat
+        docsAi: {
+            apiUrl: 'https://docs-ai.us1.staging.dog/api/unstable/docs-ai/chat',
+            apiKey: 'public-api-key'
         },
         imgUrl: 'http://localhost:1313/',
         gaTag: 'UA-21102638-9'
