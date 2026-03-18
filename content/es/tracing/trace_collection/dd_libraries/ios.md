@@ -472,6 +472,8 @@ for (NSString *key in headersWriter.traceHeaderFields) {
     [request addValue:value forHTTPHeaderField:key];
 }
 ```
+{{% /tab %}}
+{{< /tabs >}}
 Esto define cabeceras de rastreo adicionales en tu solicitud para que tu backend pueda extraer la solicitud y continuar con el rastreo distribuido. Una vez finalizada la solicitud, llama a `span.finish()` dentro de un controlador de finalización. Si tu backend también está instrumentado con [Datadog APM y el rastreo distribuido][10], la totalidad de la traza frontend-backend aparece en el dashboard de Datadog.
 
     * Para rastrear automáticamente todas las solicitudes de red realizadas a los hosts dados, especifica la matriz `firstPartyHosts` en la configuración de la traza con `urlSessionTracking`:
@@ -497,7 +499,7 @@ DDTraceFirstPartyHostsTracing *firstPartyHosts = [DDTraceFirstPartyHostsTracing 
                                                                                             sampleRate: 20];
 
 DDTraceURLSessionTracking *urlSessionTracking = [DDTraceURLSessionTracking alloc] initWithFirstPartyHostsTracing:firstPartyHosts];
-DDTraceConfiguration *configuration = [[DDTraceConfiguration] alloc] init];
+DDTraceConfiguration *configuration = [[DDTraceConfiguration alloc] init];
 [configuration setURLSessionTracking:urlSessionTracking];
 
 [DDTrace enableWith:configuration];
