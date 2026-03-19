@@ -80,6 +80,7 @@ The Datadog MCP Server supports _toolsets_, which allow you to use only the tool
 - `security`: Tools for code security scanning and searching [security signals][33] and [security findings][34]
 - `software-delivery`: Tools for interacting with Software Delivery ([CI Visibility][21] and [Test Optimization][24])
 - `synthetics`: Tools for interacting with Datadog [Synthetic tests][20]
+- `workflows`: Tools for [Workflow Automation][39], including listing, inspecting, executing, and configuring workflows for agent use
 
 To use a toolset, include the `toolsets` query parameter in the endpoint URL when connecting to the MCP Server ([remote authentication][27] only). 
 
@@ -695,6 +696,20 @@ Searches [Test Optimization][24] test events with filters and returns details on
 - Show me all flaky test runs for the checkout service.
 - Find tests owned by `@team-name` that are failing.
 
+### `get_datadog_code_coverage_branch_summary`
+*Toolset: **software-delivery***\
+Fetches aggregated code coverage summary metrics for a repository branch, including total coverage, patch coverage, and service/codeowner breakdowns.
+
+- What's the code coverage on the `main` branch for `github.com/my-org/my-repo`?
+- Show me the coverage summary for the `release/1.x` branch of `github.com/my-org/my-repo`.
+
+### `get_datadog_code_coverage_commit_summary`
+*Toolset: **software-delivery***\
+Fetches aggregated code coverage summary metrics for a repository commit, including total coverage, patch coverage, and service/codeowner breakdowns.
+
+- Show me the code coverage for commit `abc123abc123abc123abc123abc123abc123abcd` in `github.com/my-org/my-repo`.
+- What's the patch coverage for the latest commit on my branch?
+
 ### `get_synthetics_tests`
 *Toolset: **synthetics***\
 Searches Datadog Synthetic tests.
@@ -718,6 +733,47 @@ Preview and create Datadog Synthetics HTTP API Tests.
 - Create Synthetics tests on every endpoint defined in this code file.
 - Create a Synthetics test on `/path/to/endpoint`.
 - Create a Synthetics test that checks if my domain `mycompany.com` stays up.
+
+### `list_datadog_workflows`
+*Toolset: **workflows***\
+Lists and searches [Workflow Automation][39] workflows. Supports filtering by name, tags, owner, handle, and trigger type (such as `monitor`, `schedule`, `api`, or `incident`). Results can be sorted by fields like `name` or `updatedAt`.
+
+- Show me all published workflows tagged with `team:platform`.
+- List workflows that have an agent trigger configured.
+- Find all workflows related to incident response owned by Alice Smith.
+
+### `get_datadog_workflow`
+*Toolset: **workflows***\
+Retrieves detailed information about a specific workflow, including its triggers, steps, connections, and input schema.
+
+- Get the full details for workflow `00000000-0000-0000-0000-000000000000`.
+- Show me the input parameters and steps for the deployment rollback workflow.
+- What triggers are configured for this workflow?
+
+### `execute_datadog_workflow`
+*Toolset: **workflows***\
+Executes a published workflow that has an agent trigger, with optional input parameters matching the workflow's input schema.
+
+- Run the incident escalation workflow for service `checkout-api` with severity `high`.
+- Execute the deployment rollback workflow for the payments service.
+- Trigger the On-Call notification workflow with the context from this investigation.
+
+**Note**: The workflow must be published and have an agent trigger configured. Use `update_datadog_workflow_with_agent_trigger` to add one if needed.
+
+### `get_datadog_workflow_instance`
+*Toolset: **workflows***\
+Retrieves the status and details of a workflow execution instance, including step results and outputs.
+
+- What's the status of the workflow execution I triggered?
+- Did the incident escalation workflow complete successfully?
+- Show me the detailed outputs from workflow instance `00000000-0000-0000-0000-000000000000`.
+
+### `update_datadog_workflow_with_agent_trigger`
+*Toolset: **workflows***\
+Adds an agent trigger to a workflow and publishes it, enabling the workflow to be executed by AI agents.
+
+- Add an agent trigger to the deployment rollback workflow so I can run it from here.
+- Configure the incident response workflow to be triggerable by an agent.
 
 ## Context efficiency
 
@@ -760,3 +816,5 @@ The Datadog MCP Server is under significant development. Use [this feedback form
 [36]: /getting_started/site/#navigate-the-datadog-documentation-by-site
 [37]: https://help.datadoghq.com/hc/en-us/requests/new
 [38]: /service_management/case_management/
+[39]: /actions/workflows/
+[40]: /bits_ai/mcp_server/setup#local-binary-authentication
