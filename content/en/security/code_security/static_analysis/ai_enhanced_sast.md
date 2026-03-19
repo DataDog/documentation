@@ -200,7 +200,7 @@ After you create a campaign, Bits AI Dev Agent loads the in-scope findings, gene
 
 #### View campaign progress
 
-To view all campaigns, navigate to **Bits AI** > **Dev Agent** > **Code Sessions** > [**Campaigns**][12].
+To view all campaigns, navigate to [**Bits AI** > **Dev Agent** > **Code Sessions** > **Campaigns**][12].
 
 Click a campaign to view details including session status, pull requests by repository, and remediated findings. You can click on individual sessions to review, edit, and merge fixes with the [Bits AI Dev Agent][10].
 
