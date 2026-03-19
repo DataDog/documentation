@@ -38,8 +38,29 @@ The RUM iOS SDK supports the following iOS versions:
 | macOS (Catalyst) | partially supported | 12+ | Catalyst is supported in build mode only, which means that macOS targets build, but functionalities for the SDK might not work for this target. |
 | macOS | | 12+ | macOS is not officially supported by the Datadog SDK. Some features may not be fully functional. **Note**:  `DatadogRUM`, `DatadogSessionReplay`, and `DatadogObjc`, which heavily depend on `UIKit`, do not build on macOS. |
 | visionOS | | 1.0+ | visionOS is not officially supported by the Datadog SDK. Some features may not be fully functional. |
-| watchOS | | 7.0+ | watchOS is not officially supported by the Datadog SDK. Some features may not be fully functional. **Note**: only `DatadogLogs` and `DatadogTrace` can build on watchOS. |
+| watchOS | | 7.0+ | watchOS is not officially supported by the Datadog SDK. Some features may not be fully functional. |
 | Linux | | n/a | |
+
+### Module support by platform
+
+  | Module | iOS | tvOS | watchOS | visionOS | Notes |
+  |--------|-----|------|---------|----------|-------|
+  | DatadogCore | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | |
+  | DatadogLogs | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | |
+  | DatadogTrace | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | |
+  | DatadogCrashReporting | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | |
+  | DatadogRUM | {{< X >}} | {{< X >}} | {{< X >}} * | {{< X >}} | |
+  | DatadogFlags | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | |
+  | DatadogProfiling | {{< X >}} | {{< X >}} | | {{< X >}} | Not available on watchOS. The profiling module requires system-level APIs that watchOS does not support. |
+  | DatadogSessionReplay | {{< X >}} | | | | Not available on tvOS, watchOS, and visionOS. SessionReplay depends on specific rendering capabilities that are not available on these platforms. |
+  | DatadogWebViewTracking | {{< X >}} | | | {{< X >}} | Not available on tvOS and watchOS. WebViewTracking requires browser rendering capabilities that are not available on these platforms. |
+
+  \* **RUM limitations on watchOS**
+
+  DatadogRUM on watchOS does not support automatic tracking of views and actions.
+  Frame rate monitoring and memory warning detection are also not available.
+  These features rely on platform capabilities that watchOS does not provide,
+  so they are unavailable regardless of the SDK configuration.
 
 ## Supported platforms
 
