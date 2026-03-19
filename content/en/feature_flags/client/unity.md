@@ -49,6 +49,46 @@ Initialize Datadog as early as possible in your app lifecycle. Navigate to your 
 
 For more information about setting up the Unity SDK, see [Unity Monitoring Setup][5].
 
+## Getting started
+
+After the SDK is initialized, set up feature flags with these steps:
+
+{{< code-block lang="csharp" >}}
+using System.Collections.Generic;
+using Datadog.Unity.Flags;
+using UnityEngine;
+
+// 1. Enable the Flags feature after Datadog SDK initialization
+DdFlags.Enable(new FlagsConfiguration(
+    trackExposures: true,
+    trackEvaluations: true
+));
+
+// 2. Create a client (once, at startup)
+var client = DdFlags.Instance.CreateClient();
+
+// 3. Set the evaluation context (fetches flag assignments from the server)
+client.SetEvaluationContext(
+    new FlagsEvaluationContext(
+        targetingKey: "user-123",
+        attributes: new Dictionary<string, object>
+        {
+            { "email", "user@example.com" },
+            { "tier", "premium" }
+        }
+    ),
+    onComplete: success =>
+    {
+        if (success)
+        {
+            // 4. Evaluate flags — local and instantaneous
+            var isNewCheckoutEnabled = client.GetBooleanValue("checkout.new", false);
+            Debug.Log($"checkout.new = {isNewCheckoutEnabled}");
+        }
+    }
+);
+{{< /code-block >}}
+
 ## Enable flags
 
 After initializing Datadog, enable flags in your application code:
@@ -56,11 +96,10 @@ After initializing Datadog, enable flags in your application code:
 {{< code-block lang="csharp" >}}
 using Datadog.Unity.Flags;
 
-DdFlags.Enable(new FlagsConfiguration
-{
-    TrackExposures = true,
-    TrackEvaluations = true,
-});
+DdFlags.Enable(new FlagsConfiguration(
+    trackExposures: true,
+    trackEvaluations: true
+));
 {{< /code-block >}}
 
 You can also pass additional configuration options; see [Advanced configuration](#advanced-configuration).
@@ -70,13 +109,13 @@ You can also pass additional configuration options; see [Advanced configuration]
 Create a client once, typically during app startup, and hold a reference to it:
 
 {{< code-block lang="csharp" >}}
-var client = DdFlags.CreateClient(); // Creates the default client
+var client = DdFlags.Instance.CreateClient(); // Creates the default client
 {{< /code-block >}}
 
 You can also create multiple clients by providing the `name` parameter:
 
 {{< code-block lang="csharp" >}}
-var checkoutClient = DdFlags.CreateClient("checkout");
+var checkoutClient = DdFlags.Instance.CreateClient("checkout");
 {{< /code-block >}}
 
 <div class="alert alert-info">If a client with the given name already exists, the existing instance is reused.</div>
@@ -118,10 +157,7 @@ Each flag is identified by a _key_ (a unique string) and can be evaluated with a
 Use `GetBooleanValue(key, defaultValue)` for flags that represent on/off or true/false conditions. For example:
 
 {{< code-block lang="csharp" >}}
-var isNewCheckoutEnabled = client.GetBooleanValue(
-    key: "checkout.new",
-    defaultValue: false
-);
+var isNewCheckoutEnabled = client.GetBooleanValue("checkout.new", false);
 
 if (isNewCheckoutEnabled)
 {
@@ -138,10 +174,7 @@ else
 Use `GetStringValue(key, defaultValue)` for flags that select between multiple variants or configuration strings. For example:
 
 {{< code-block lang="csharp" >}}
-var theme = client.GetStringValue(
-    key: "ui.theme",
-    defaultValue: "light"
-);
+var theme = client.GetStringValue("ui.theme", "light");
 
 switch (theme)
 {
@@ -162,15 +195,8 @@ switch (theme)
 For numeric flags, use `GetIntegerValue(key, defaultValue)` or `GetDoubleValue(key, defaultValue)`. These are appropriate when a feature depends on a numeric parameter such as a limit, percentage, or multiplier:
 
 {{< code-block lang="csharp" >}}
-var maxItems = client.GetIntegerValue(
-    key: "cart.items.max",
-    defaultValue: 20
-);
-
-var priceMultiplier = client.GetDoubleValue(
-    key: "pricing.multiplier",
-    defaultValue: 1.0
-);
+var maxItems = client.GetIntegerValue("cart.items.max", 20);
+var priceMultiplier = client.GetDoubleValue("pricing.multiplier", 1.0);
 {{< /code-block >}}
 
 ### Object flags
@@ -179,8 +205,8 @@ For structured or JSON-like data, use `GetObjectValue(key, defaultValue)`. This 
 
 {{< code-block lang="csharp" >}}
 var config = client.GetObjectValue(
-    key: "ui.config",
-    defaultValue: new Dictionary<string, object>
+    "ui.config",
+    new Dictionary<string, object>
     {
         { "color", "#00A3FF" },
         { "fontSize", 14 }
@@ -207,10 +233,7 @@ When you need more than just the flag value, use the detail methods. These metho
 For example:
 
 {{< code-block lang="csharp" >}}
-var details = client.GetStringDetails(
-    key: "paywall.layout",
-    defaultValue: "control"
-);
+var details = client.GetStringDetails("paywall.layout", "control");
 
 Debug.Log($"Value: {details.Value}");     // Evaluated value (for example: "A", "B", or "control")
 Debug.Log($"Variant: {details.Variant}"); // Variant name, if applicable
@@ -225,30 +248,29 @@ Flag details may help you debug evaluation behavior and understand why a user re
 The `DdFlags.Enable()` API accepts optional configuration with options listed below.
 
 {{< code-block lang="csharp" >}}
-var config = new FlagsConfiguration
-{
-    // configure options here
-};
-
-DdFlags.Enable(config);
+DdFlags.Enable(new FlagsConfiguration(
+    trackExposures: true,
+    trackEvaluations: true,
+    evaluationFlushIntervalSeconds: 10.0f
+));
 {{< /code-block >}}
 
-`TrackExposures`
+`trackExposures`
 : When `true` (default), the SDK automatically records an _exposure event_ when a flag is evaluated. These events contain metadata about which flag was accessed, which variant was served, and under what context. They are sent to Datadog so you can later analyze feature adoption. Set to `false` to disable exposure tracking.
 
-`TrackEvaluations`
+`trackEvaluations`
 : When `true` (default), the SDK tracks flag evaluations and sends aggregated evaluation telemetry to Datadog. This enables analytics about flag usage patterns and performance. Set to `false` to disable evaluation tracking.
 
-`EvaluationFlushIntervalSeconds`
-: The interval in seconds at which batched evaluation events are sent to Datadog. Default is `10.0` seconds.
+`evaluationFlushIntervalSeconds`
+: The interval in seconds at which batched evaluation events are sent to Datadog. Accepted values are between `1` and `60`. Default is `10.0` seconds.
 
-`CustomFlagsEndpoint`
+`customFlagsEndpoint`
 : Configures a custom server URL for retrieving flag assignments.
 
-`CustomExposureEndpoint`
+`customExposureEndpoint`
 : Configures a custom server URL for sending flags exposure data.
 
-`CustomEvaluationEndpoint`
+`customEvaluationEndpoint`
 : Configures a custom server URL for sending flags evaluation telemetry.
 
 ## Further reading

@@ -59,11 +59,10 @@ After initializing Datadog, enable flags in your application code:
 {{< code-block lang="csharp" >}}
 using Datadog.Unity.Flags;
 
-DdFlags.Enable(new FlagsConfiguration
-{
-    TrackExposures = true,
-    TrackEvaluations = true,
-});
+DdFlags.Enable(new FlagsConfiguration(
+    trackExposures: true,
+    trackEvaluations: true
+));
 {{< /code-block >}}
 
 You can also pass additional configuration options; see [Advanced configuration](#advanced-configuration).
@@ -238,30 +237,29 @@ Flag details may help you debug evaluation behavior and understand why a user re
 The `DdFlags.Enable()` API accepts optional configuration with options listed below.
 
 {{< code-block lang="csharp" >}}
-var config = new FlagsConfiguration
-{
-    // configure options here
-};
-
-DdFlags.Enable(config);
+DdFlags.Enable(new FlagsConfiguration(
+    trackExposures: true,
+    trackEvaluations: true,
+    evaluationFlushIntervalSeconds: 10.0f
+));
 {{< /code-block >}}
 
-`TrackExposures`
+`trackExposures`
 : When `true` (default), the SDK automatically records an _exposure event_ when a flag is evaluated. These events contain metadata about which flag was accessed, which variant was served, and under what context. They are sent to Datadog so you can later analyze feature adoption. Set to `false` to disable exposure tracking.
 
-`TrackEvaluations`
+`trackEvaluations`
 : When `true` (default), the SDK tracks flag evaluations and sends aggregated evaluation telemetry to Datadog. This enables analytics about flag usage patterns and performance. Set to `false` to disable evaluation tracking.
 
-`EvaluationFlushIntervalSeconds`
-: The interval in seconds at which batched evaluation events are sent to Datadog. Default is `10.0` seconds.
+`evaluationFlushIntervalSeconds`
+: The interval in seconds at which batched evaluation events are sent to Datadog. Accepted values are between `1` and `60`. Default is `10.0` seconds.
 
-`CustomFlagsEndpoint`
+`customFlagsEndpoint`
 : Configures a custom server URL for retrieving flag assignments.
 
-`CustomExposureEndpoint`
+`customExposureEndpoint`
 : Configures a custom server URL for sending flags exposure data.
 
-`CustomEvaluationEndpoint`
+`customEvaluationEndpoint`
 : Configures a custom server URL for sending flags evaluation telemetry.
 
 ## Further reading
