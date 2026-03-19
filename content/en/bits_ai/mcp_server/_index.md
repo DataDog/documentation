@@ -601,21 +601,6 @@ Guides you through uploading source maps for RUM error mapping.
 
 - Help me upload source maps so my RUM errors show original source code.
 
-<!-- ### `datadog_code_security_scan`
-*Toolset: **security***\
-Runs a comprehensive security scan that detects both vulnerabilities (SQL injection, XSS, path traversal, and others) and secrets (API keys, passwords, credentials, and others) in parallel.
-
-- Scan my code for security vulnerabilities and hardcoded secrets.
-- Run a full security scan on this pull request.
-- Check this file for any security issues.
-
-### `datadog_sast_scan`
-*Toolset: **security***\
-Scans code for security vulnerabilities using static analysis (SAST), detecting SQL injection, XSS, path traversal, command injection, insecure cryptography, and other security weaknesses.
-
-- Scan this file for security vulnerabilities.
-- Check my code for SQL injection and XSS vulnerabilities. -->
-
 ### `datadog_secrets_scan`
 *Toolset: **security***\
 Scans code for hardcoded secrets and credentials, detecting AWS keys, API keys, passwords, tokens, private keys, and database credentials.

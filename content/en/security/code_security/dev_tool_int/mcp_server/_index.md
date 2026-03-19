@@ -31,10 +31,6 @@ The MCP server exposes the following tools that AI coding assistants can call to
 | [`datadog_iac_scan`][10]                     | Infrastructure-as-Code security scanning                    |      Yes      |
 | [`datadog_generate_sbom`][11]           | Software Bill of Materials generation                       |      No       |
 
-<!-- Removed rows for Code Security tools -->
-<!-- | [`datadog_code_security_scan`][6] | Comprehensive scan (SAST + Secrets + SCA + IaC) in parallel |      Yes      |
-| [`datadog_sast_scan`][7]                   | Static Application Security Testing                         |      Yes      | -->
-
 For detailed parameters, required binaries, and output formats for each tool, see the [Tools Reference][12].
 
 ## Setup
@@ -252,8 +248,6 @@ datadog-code-security-mcp generate-sbom . --json
 [3]: /account_management/api-app-keys/
 [4]: https://github.com/DataDog/datadog-sbom-generator/releases
 [5]: https://github.com/DataDog/datadog-iac-scanner/releases
-[6]: /security/code_security/dev_tool_int/mcp_server/tools_reference/#datadog_code_security_scan
-[7]: /security/code_security/dev_tool_int/mcp_server/tools_reference/#datadog_sast_scan
 [8]: /security/code_security/dev_tool_int/mcp_server/tools_reference/#datadog_secrets_scan
 [9]: /security/code_security/dev_tool_int/mcp_server/tools_reference/#datadog_sca_scan
 [10]: /security/code_security/dev_tool_int/mcp_server/tools_reference/#datadog_iac_scan
