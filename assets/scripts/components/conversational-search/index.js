@@ -62,6 +62,9 @@ class ConversationalSearch {
         this.selectedModelId = DEFAULT_CONVERSATION_MODEL_ID;
         this.streamingDisabled = false;
         this.useDocsAiChat = true;
+        // Rewrites the initial user query for better retrieval before answering.
+        // Only applied on the first message (no history). Follow-ups use history context instead.
+        this.shouldRewriteQuery = true;
         this.isHomepage = document.querySelector('.kind-home') !== null;
         this.homeAiBtnVisible = false;
         this.ready = false;
@@ -261,6 +264,7 @@ class ConversationalSearch {
                         }
                     });
                     this.input.value = query;
+                    this.isSuggestionQuery = true;
                     this.sendMessage();
                 }
             }
@@ -513,12 +517,16 @@ class ConversationalSearch {
         const stopLoading = this.startLoadingIndicator(responseContainer);
         let receivedFirstToken = false;
 
+        const isFirstMessage = this.chatHistory.length === 0;
+        const isSuggestion = this.isSuggestionQuery;
+        this.isSuggestionQuery = false;
         this.chatHistory.push({ role: 'user', content: query });
 
         accumulatedMessage = await streamDocsAiChat({
             docsAiConfig,
             query,
-            history: this.chatHistory.slice(0, -1),
+            history: isFirstMessage ? [] : this.chatHistory.slice(0, -1),
+            rewriteQuery: isFirstMessage && this.shouldRewriteQuery && !isSuggestion,
             signal: this.abortController.signal,
             onToken: (_token, fullMessage) => {
                 if (!receivedFirstToken) {

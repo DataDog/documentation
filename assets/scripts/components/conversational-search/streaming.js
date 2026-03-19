@@ -79,6 +79,7 @@ export async function streamDocsAiChat({
     docsAiConfig,
     query,
     history = [],
+    rewriteQuery = false,
     signal,
     onToken,
     onError
@@ -86,6 +87,10 @@ export async function streamDocsAiChat({
     const attributes = { query };
     if (history.length > 0) {
         attributes.history = history;
+    }
+    // Tells the API to rewrite the query for better retrieval (first message only)
+    if (rewriteQuery) {
+        attributes.rewrite_query = true;
     }
 
     const response = await fetch(`${docsAiConfig.apiUrl}/chat`, {
