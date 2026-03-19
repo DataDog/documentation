@@ -30,7 +30,7 @@ L'Agent Datadog vous aide à gérer vos secrets de manière sécurisée en s'int
 
 Au lieu de coder en dur des valeurs sensibles comme des clés API ou des mots de passe en texte clair dans des fichiers de configuration, l'Agent peut les récupérer dynamiquement à l'exécution. Pour référencer un secret dans votre configuration, utilisez la notation `ENC[<secret_id>]`. Le secret est récupéré et chargé en mémoire mais n'est jamais écrit sur le disque ni envoyé au backend Datadog.
 
-**Remarque** : Vous ne pouvez pas utiliser la syntaxe `ENC[]` dans les paramètres `secret_*` comme `secret_backend_command`.
+**Remarque** : Vous ne pouvez pas utiliser la syntaxe `ENC[]` dans des paramètres `secret_*` comme `secret_backend_command`.
 
 ## Options pour récupérer des secrets
 
@@ -91,14 +91,14 @@ DD_SECRET_BACKEND_CONFIG='{"aws_session":{"aws_region":"<AWS_REGION>"}}'
 Après avoir configuré l'Agent pour utiliser AWS Secrets, vous pouvez référencer n'importe quel secret dans vos configurations avec `ENC[secretId;secretKey]`.
 
 La notation ENC est composée de :
-* `secretId` : soit le "nom amical" secret (par exemple, `/DatadogAgent/Production`) ou l'ARN (par exemple, `arn:aws:secretsmanager:us-east-1:123456789012:secret:/DatadogAgent/Production-FOga1K`).
-  - **Note** : Le format ARN complet est requis lors de l'accès à des secrets d'un compte différent où les identifiants AWS ou `sts:AssumeRole` sont définis.
+* `secretId` : soit le "nom amical" secret (par exemple, `/DatadogAgent/Production`) soit l'ARN (par exemple, `arn:aws:secretsmanager:us-east-1:123456789012:secret:/DatadogAgent/Production-FOga1K`).
+  - **Note** : Le format ARN complet est requis lors de l'accès à des secrets d'un autre compte où les identifiants AWS ou `sts:AssumeRole` sont définis.
 * `secretKey` : la clé JSON du secret AWS que vous souhaitez utiliser.
 
 
 Le gestionnaire de secrets AWS peut stocker plusieurs paires clé-valeur au sein d'un seul secret. Une configuration backend utilisant le gestionnaire de secrets a accès à toutes les clés définies dans un secret.
 
-Par exemple, en supposant que l'ID secret `My-Secrets` contient les 3 valeurs suivantes :
+Par exemple, en supposant que l'ID de secret `My-Secrets` contient les 3 valeurs suivantes :
 
 ```json
 {
@@ -123,7 +123,7 @@ secret_backend_config:
 
 {{% tab "Helm" %}}
 
-Configurez l'Agent Datadog pour utiliser les secrets AWS afin de résoudre les secrets dans Helm en utilisant la configuration suivante :
+Configurez l'agent Datadog pour utiliser les secrets AWS afin de résoudre les secrets dans Helm en utilisant la configuration suivante :
 
 Vérification d'intégration #####
 
@@ -149,7 +149,7 @@ agents:
       eks.amazonaws.com/role-arn: <IAM_ROLE_ARN>
 ```
 
-<div class="alert alert-info"> Vous devez inclure les <code>annotationsServiceAccount</code> pour accorder à l'Agent les permissions d'accéder au secret AWS. </div>
+<div class="alert alert-info"> Vous devez inclure les <code>annotationsServiceAccount</code> pour accorder à l'agent les permissions d'accès au secret AWS. </div>
 
 <br>
 
@@ -211,7 +211,7 @@ clusterChecksRunner:
 
 {{% tab "Opérateur" %}}
 
-Configurez l'Agent Datadog pour utiliser les secrets AWS afin de résoudre les secrets avec l'Opérateur Datadog en utilisant la configuration suivante :
+Configurez l'agent Datadog pour utiliser les secrets AWS afin de résoudre les secrets avec l'opérateur Datadog en utilisant la configuration suivante :
 
 Vérification d'intégration #####
 
@@ -245,7 +245,7 @@ spec:
 
 ```
 
-<div class="alert alert-info"> Vous devez inclure les <code>annotationsServiceAccount</code> pour accorder à l'Agent les permissions d'accéder au secret AWS. </div>
+<div class="alert alert-info"> Vous devez inclure les <code>annotationsServiceAccount</code> pour accorder à l'agent les permissions d'accès au secret AWS. </div>
 
 <br>
 
@@ -337,7 +337,7 @@ Datadog recommande d'utiliser la méthode [profil d'instance][1006] pour récup�
 
 ##### Exemple de configuration
 
-Le magasin de paramètres du gestionnaire de systèmes AWS prend en charge un modèle hiérarchique. Par exemple, en supposant les chemins suivants du AWS System Manager Parameter Store :
+Le magasin de paramètres du gestionnaire de système AWS prend en charge un modèle hiérarchique. Par exemple, en supposant les chemins suivants du AWS System Manager Parameter Store :
 
 ```sh
 /DatadogAgent/Production/ApiKey = <your_api_key>
@@ -416,7 +416,7 @@ L'implémentation de GCP Secret Manager utilise [Application Default Credentials
 
 Pour interagir avec GCP Secret Manager, le compte de service utilisé par l'Agent Datadog (tel que le compte de service de la VM, une identité de charge de travail ou des identifiants activés localement) nécessite la permission `secretmanager.versions.access`.
 
-Cela peut être accordé avec le rôle prédéfini **Accesseur de secret de GCP Secret Manager** (`roles/secretmanager.secretAccessor`) ou un rôle personnalisé avec un [accès][5002] équivalent.
+Ceci peut être accordé avec le rôle prédéfini **Accesseur de secret GCP Secret Manager** (`roles/secretmanager.secretAccessor`) ou un rôle personnalisé avec un [accès][5002] équivalent.
 
 Sur les environnements GCE ou GKE, ADC est configuré automatiquement via le compte de service attaché à l'instance ou au pod. Le compte de service attaché doit avoir les rôles appropriés pour accéder à GCP Secret Manager. De plus, l'environnement GCE ou GKE nécessite le `cloud-platform` [portée d'accès OAuth][5003].
 
@@ -444,7 +444,7 @@ La notation ENC est composée de :
     - `secret-key;;latest` - Version `latest` explicite
     - `secret-key;;1` - Numéro de version spécifique
 
-Par exemple, en supposant des secrets GCP nommés `datadog-api-key` avec deux versions et `datadog-app-key` :
+Par exemple, en supposant des secrets GCP nommés `datadog-api-key` avec deux versions et `datadog-app-key`:
 
 ```yaml
 # datadog.yaml
@@ -504,7 +504,7 @@ Les services HashiCorp suivants sont pris en charge :
 
 ##### Comment configurer HashiCorp Vault
 1. Exécutez votre HashiCorp Vault. Consultez la [documentation officielle de HashiCorp Vault][3001] pour plus d'informations.
-2. Écrivez une politique qui donne la permission de tirer des secrets de votre coffre-fort. Créez un fichier `*.hcl`, et incluez la permission suivante si vous utilisez la version 1 du moteur de secrets :
+2. Écrivez une politique qui donne la permission de récupérer des secrets de votre coffre-fort. Créez un fichier `*.hcl`, et incluez la permission suivante si vous utilisez la version 1 du moteur de secrets :
 ```
 path "<your mount path>/<additional subpath>" {
   capabilities = ["read"]
@@ -705,12 +705,12 @@ spec:
 
 **Remarque :** Une clé API d'espace réservé satisfait à la validation de l'Opérateur lors de l'utilisation du backend secret pour résoudre la clé API. La variable d'environnement `DD_API_KEY` la remplace. Vous devez créer manuellement RBAC (Rôle + Liaison de rôle) pour chaque espace de noms contenant des secrets. Pour plus d'informations, voir la section [configuration RBAC](#rbac-setup).
 
-<div class="alert alert-info"> L'Opérateur n'a pas de configuration native pour <code>secretBackend.type</code>. Utilisez des variables d'environnement dans <code>override.nodeAgent.env</code>. </div>
+<div class="alert alert-info"> L'opérateur n'a pas de configuration native pour <code>secretBackend.type</code>. Utilisez des variables d'environnement dans <code>override.nodeAgent.env</code>. </div>
 
 {{% /tab %}}
 {{< /tabs >}}
 
-##### Configuration de chemin personnalisée
+##### Configuration de chemin personnalisé
 Si votre configuration ne suit pas les emplacements par défaut pour l'authentification basée sur ServiceAccount, vous pouvez spécifier `token_path` et `ca_path` à la place.
 
 {{< tabs >}}
@@ -747,7 +747,7 @@ override:
 {{% /tab %}}
 {{< /tabs >}}
 
-##### Configuration personnalisée du serveur API
+##### Configuration de serveur API personnalisée
 
 Si votre configuration n'expose pas les variables d'environnement par défaut `KUBERNETES_SERVICE_HOST` et `KUBERNETES_SERVICE_PORT`, vous pouvez fournir une `api_server` URL pour interagir avec l'API REST de Kubernetes.
 
@@ -990,9 +990,9 @@ secret_backend_config:
 {{% /collapse-content %}}
 
 
-### Option 2 : Utilisation du script intégré pour Kubernetes et Docker
+### Option 2 : Utiliser le script intégré pour Kubernetes et Docker
 
-Pour les environnements conteneurisés, les images de conteneur de l'Agent Datadog incluent un script intégré `/readsecret_multiple_providers.sh` à partir de la version v7.32.0. Ce script prend en charge la lecture des secrets depuis :
+Pour les environnements conteneurisés, les images de conteneur de l'Agent Datadog incluent un script intégré `/readsecret_multiple_providers.sh` à partir de la version v7.32.0. Ce script prend en charge la lecture des secrets à partir de :
 
 * Fichiers : utilisation de `ENC[file@/path/to/file]`
 * Secrets Kubernetes : utilisation de `ENC[k8s_secret@namespace/secret-name/key]`
@@ -1061,7 +1061,7 @@ password: ENC[file@/etc/secret-volume/password]
 - Le Secret doit exister dans le même espace de noms que le pod dans lequel il est monté.
 - Le script peut accéder à tous les sous-dossiers, y compris le `/var/run/secrets/kubernetes.io/serviceaccount/token` sensible. Ainsi, Datadog recommande d'utiliser un dossier dédié au lieu de `/var/run/secrets`.
 
-[Les secrets de Docker swarm][3] sont montés dans le dossier `/run/secrets`. Par exemple, le secret Docker `db_prod_passsword` est situé dans `/run/secrets/db_prod_password` dans le conteneur de l'Agent. Cela serait référencé dans la configuration avec `ENC[file@/run/secrets/db_prod_password]`.
+[Secrets Docker swarm][3] sont montés dans le dossier `/run/secrets`. Par exemple, le secret Docker `db_prod_passsword` est situé dans `/run/secrets/db_prod_password` dans le conteneur de l'Agent. Cela serait référencé dans la configuration avec `ENC[file@/run/secrets/db_prod_password]`.
 
 #### Exemple : Lecture d'un secret Kubernetes à travers les espaces de noms
 
@@ -1087,7 +1087,7 @@ spec:
         secrets:
         - "database-secret"
 ```
-***Remarque*** : Chaque espace de noms dans la liste des rôles doit également être configuré dans la variable d'environnement `WATCH_NAMESPACE` ou `DD_AGENT_WATCH_NAMESPACE` sur le déploiement de l'Opérateur Datadog.
+***Note*** : Chaque espace de noms dans la liste des rôles doit également être configuré dans la variable d'environnement `WATCH_NAMESPACE` ou `DD_AGENT_WATCH_NAMESPACE` sur le déploiement de l'Opérateur Datadog.
 {{% /tab %}}
 {{% tab "Helm" %}}
 ```yaml
@@ -1292,7 +1292,7 @@ Par défaut, l'Agent randomise le rafraîchissement initial dans la fenêtre `se
 Agents ne se rafraîchisse simultanément. La clé est résolue au démarrage, puis rafraîchie une fois dans le premier intervalle
 et à chaque intervalle par la suite.
 
-Pour éviter les temps d'arrêt, invalidez les anciennes clés uniquement après que toute votre flotte a récupéré les clés mises à jour. Vous pouvez suivre l'utilisation des clés
+Pour éviter les temps d'arrêt, invalidez les anciennes clés uniquement après que votre flotte entière a récupéré les clés mises à jour. Vous pouvez suivre l'utilisation des clés
 sur la page [Gestion de la flotte](https://app.datadoghq.com/fleet).
 
 Vous pouvez désactiver ce comportement en définissant :
@@ -1330,7 +1330,7 @@ L'Agent peut alors déclencher le rafraîchissement des secrets soit à l'interv
 
 À partir de la version v7.74 de l'Agent, l'Agent peut automatiquement rafraîchir les secrets lorsqu'il détecte une clé API invalide. Cela se produit lorsque l'Agent reçoit une réponse 403 Interdit de Datadog ou lorsque le contrôle de santé périodique détecte une clé API invalide ou expirée.
 
-Pour activer cette fonctionnalité, définissez `secret_refresh_on_api_key_failure_interval` sur un intervalle en minutes dans votre fichier `datadog.yaml`. Définissez sur `0` pour désactiver (par défaut).
+Pour activer cette fonctionnalité, définissez `secret_refresh_on_api_key_failure_interval` sur un intervalle en minutes dans votre fichier `datadog.yaml`. Définir sur `0` pour désactiver (par défaut).
 
 Cet intervalle est le temps minimum entre 2 rafraîchissements pour éviter de spammer votre solution de gestion des secrets lorsqu'une clé API invalide est détectée.
 
@@ -1468,7 +1468,7 @@ L'utilisateur `dd-agent` est créé lorsque vous installez l'Agent Datadog.
 
 Les erreurs suivantes indiquent qu'il manque quelque chose dans votre configuration.
 
-1. Si un autre groupe ou utilisateur que celui requis a des droits sur l'exécutable, une erreur similaire à la suivante est enregistrée :
+1. Si un autre groupe ou utilisateur que celui nécessaire a des droits sur l'exécutable, une erreur similaire à la suivante est enregistrée :
    ```
    error while decrypting secrets in an instance: Invalid executable 'C:\decrypt.exe': other users/groups than LOCAL_SYSTEM, Administrators or ddagentuser have rights on it
    ```
@@ -1558,7 +1558,7 @@ exit code:
 
 ### L'Agent refuse de démarrer
 
-La première chose que fait l'Agent au démarrage est de charger `datadog.yaml` et de déchiffrer les secrets qu'il contient. Cela se fait avant la configuration des journaux. Cela signifie que sur des plateformes comme Windows, les erreurs survenant lors du chargement de `datadog.yaml` ne sont pas écrites dans les journaux, mais sur `stderr`. Cela peut se produire lorsque l'exécutable donné à l'Agent pour les secrets renvoie une erreur.
+La première chose que fait l'Agent au démarrage est de charger `datadog.yaml` et de déchiffrer les secrets qui s'y trouvent. Cela se fait avant la configuration des journaux. Cela signifie que sur des plateformes comme Windows, les erreurs survenant lors du chargement de `datadog.yaml` ne sont pas écrites dans les journaux, mais sur `stderr`. Cela peut se produire lorsque l'exécutable donné à l'Agent pour les secrets renvoie une erreur.
 
 Si vous avez des secrets dans `datadog.yaml` et que l'Agent refuse de démarrer :
 
@@ -1582,7 +1582,7 @@ kubectl auth can-i get secret/database-secret -n database --as system:serviceacc
 
 Cette commande indique si les autorisations sont valides pour que l'Agent puisse voir ce Secret.
 
-### Supprimer les sauts de ligne à la fin {#remove-trailing-line-breaks}
+### Supprimer les sauts de ligne finaux {#remove-trailing-line-breaks}
 
 Certains outils de gestion des secrets ajoutent automatiquement un saut de ligne lors de l'exportation de secrets via des fichiers. Vous pouvez supprimer ces sauts de ligne en définissant `secret_backend_remove_trailing_line_break: true` dans [le fichier de configuration datadog.yaml][8], ou utiliser la variable d'environnement `DD_SECRET_BACKEND_REMOVE_TRAILING_LINE_BREAK` pour faire de même, en particulier dans des environnements conteneurisés.
 
