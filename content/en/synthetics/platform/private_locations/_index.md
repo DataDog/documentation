@@ -935,7 +935,7 @@ Start testing your first internal endpoint by launching a fast test on one of yo
 
 Create an API, multistep API, or browser test, and select your **Private Locations** of interest.
 
-{{< img src="synthetics/private_locations/assign-test-pl-2.png" alt="Assign Synthetic test to private location" style="width:90%;">}}
+{{< img src="synthetics/private_locations/assign-test-pl_3.png" alt="Assign Synthetic test to private location" style="width:90%;">}}
 
 Use private locations just like your Datadog managed locations: assign [Synthetic tests][29] to private locations, visualize test results, retrieve [Synthetic metrics][11], and more.
 

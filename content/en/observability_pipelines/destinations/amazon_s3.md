@@ -64,11 +64,19 @@ Set up the Amazon S3 destination and its environment variables when you [set up 
         - One Zone-IA
     - If you wish to rehydrate from archives in another storage class, you must first move them to one of the supported storage classes above.
     - See the [Example destination and log archive setup](#example-destination-and-log-archive-setup) section of this page for how to configure your Log Archive based on your Amazon S3 destination setup.
-1. Optionally, select an AWS authentication option. If you are only using the [user or role you created earlier](#set-up-an-iam-policy-that-allows-workers-to-write-to-the-s3-bucket) for authentication, do not select **Assume role**. The **Assume role** option should only be used if the user or role you created earlier needs to assume a different role to access the specific AWS resource and that permission has to be explicitly defined.<br>If you select **Assume role**:
-    1. Enter the ARN of the IAM role you want to assume.
-    1. Optionally, enter the assumed role session name and external ID.
+
+#### Optional settings
+
+##### AWS authentication
+
+Select an AWS authentication option. If you are only using the [user or role you created earlier](#set-up-an-iam-policy-that-allows-workers-to-write-to-the-s3-bucket) for authentication, do not select **Assume role**. The **Assume role** option should only be used if the user or role you created earlier needs to assume a different role to access the specific AWS resource and that permission has to be explicitly defined.<br>If you select **Assume role**:
+1. Enter the ARN of the IAM role you want to assume.
     - **Note:** The [user or role you created earlier](#set-up-an-iam-policy-that-allows-workers-to-write-to-the-s3-bucket) must have permission to assume this role so that the Worker can authenticate with AWS.
-{{% observability_pipelines/destination_buffer_numbered %}}
+1. (Optional) Enter the assumed role session name and external ID.
+
+##### Buffering options
+
+{{% observability_pipelines/destination_buffer %}}
 
 #### Example destination and log archive setup
 
@@ -120,15 +128,19 @@ You can route logs from Observability Pipelines to Snowflake using the Amazon S3
 
 #### Permissions
 
-{{% observability_pipelines/aws_authentication/amazon_security_lake/permissions %}}
+To send logs to Amazon S3, the Observability Pipelines Worker requires the following policy permissions:
+
+- `s3:ListBucket`
+- `s3:PutObject`
+- `s3:GetObject`
 
 ### Event batching
 
 A batch of events is flushed when one of these parameters is met. See [event batching][7] for more information.
 
-| Max Events     | Max Bytes       | Timeout (seconds)   |
-|----------------| ----------------| --------------------|
-| None           | 100,000,000     | 900                 |
+| Maximum Events | Maximum Size (MB) | Timeout (seconds)   |
+|----------------|-------------------|---------------------|
+| None           | 100               | 900                 |
 
 [1]: /logs/log_configuration/archives/
 [2]: /logs/log_configuration/rehydrating/

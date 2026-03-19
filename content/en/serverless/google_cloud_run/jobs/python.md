@@ -91,6 +91,12 @@ logger.info("Hello world!")
 
    To send custom metrics, [install the DogStatsD client][5] and [view code examples][6]. In serverless, only the *distribution* metric type is supported.
 
+8. **Enable profiling (preview)**.
+
+   To enable the [Continuous Profiler][7], set the environment variable `DD_PROFILING_ENABLED=true`.
+
+   <div class="alert alert-info">Datadog's Continuous Profiler is available in preview for Google Cloud Run Jobs.</div>
+
 {{% serverless-init-env-vars-in-container language="python" defaultSource="cloudrun" %}}
 
 {{% svl-tracing-env %}}
@@ -109,4 +115,5 @@ logger.info("Hello world!")
 [4]: /tracing/other_telemetry/connect_logs_and_traces/python/
 [5]: /extend/dogstatsd/?tab=python#install-the-dogstatsd-client
 [6]: /metrics/custom_metrics/dogstatsd_metrics_submission/?tab=python#code-examples-5
+[7]: /profiler/
 

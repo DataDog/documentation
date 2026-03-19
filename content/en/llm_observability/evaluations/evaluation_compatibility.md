@@ -13,7 +13,6 @@ Managed evaluations are supported for the following configurations.
 
 | Evaluation                      | DD-trace version  |  LLM Provider                 | Applicable span |
 | --------------------------------| ----------------- | ------------------------------| ----------------|
-| [Hallucination][4]              | v2.18+            | OpenAI                        | LLM only        |
 | [Language Mismatch][10]         | Fully supported   | Self hosted                   | All span kinds  |
 
 ### Custom LLM-as-a-judge evaluations
@@ -34,19 +33,20 @@ Existing templates for custom LLM-as-a-judge evaluations are supported for the f
 | Evaluation              | DD-trace version | LLM Provider                  | Applicable span |
 | ----------------------- | ---------------- | ----------------------------- | --------------- |
 | [Failure to Answer][5]  | Fully supported  | All third party LLM providers | All span kinds  |
+| [Hallucination][4]      | Fully supported  | All third party LLM providers | LLM only        |
 | [Sentiment][6]          | Fully supported  | All third party LLM providers | All span kinds  |
 | [Toxicity][7]           | Fully supported  | All third party LLM providers | All span kinds  |
 | [Prompt Injection][8]   | Fully supported  | All third party LLM providers | All span kinds  |
 | [Topic Relevancy][9]    | Fully supported  | All third party LLM providers | All span kinds  |
-| [Tool Selection][1]             | v3.12+            | All third party LLM providers          | LLM only        |
-| [Tool Argument Correctness][2]  | v3.12+            | All third party LLM providers          | LLM only        |
-| [Goal Completeness][3]          | Fully supported   | All third party LLM providers          | LLM only        |
+| [Tool Selection][1]             | Fully supported | All third party LLM providers | LLM only |
+| [Tool Argument Correctness][2]  | Fully supported | All third party LLM providers | LLM only |
+| [Goal Completeness][3]          | Fully supported | All third party LLM providers | LLM only |
 
 
 [1]: /llm_observability/evaluations/custom_llm_as_a_judge_evaluations/template_evaluations#tool-selection
 [2]: /llm_observability/evaluations/custom_llm_as_a_judge_evaluations/template_evaluations#tool-argument-correctness
 [3]: /llm_observability/evaluations/custom_llm_as_a_judge_evaluations/template_evaluations#goal-completeness
-[4]: /llm_observability/evaluations/managed_evaluations#hallucination
+[4]: /llm_observability/evaluations/custom_llm_as_a_judge_evaluations/template_evaluations#hallucination
 [5]: /llm_observability/evaluations/custom_llm_as_a_judge_evaluations/template_evaluations#failure-to-answer
 [6]: /llm_observability/evaluations/custom_llm_as_a_judge_evaluations/template_evaluations#sentiment
 [7]: /llm_observability/evaluations/custom_llm_as_a_judge_evaluations/template_evaluations#toxicity
