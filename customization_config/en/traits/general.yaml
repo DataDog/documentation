@@ -8,6 +8,11 @@ traits:
   type: text
   label: "Database"
 
+- id: deployment
+  label: "Deployment"
+  type: text
+  internal_notes: Deployment topology or target environment, such as Kubernetes DaemonSet, Gateway, ECS Fargate, or Linux host.
+
 - id: host
   label: "Host"
   type: text

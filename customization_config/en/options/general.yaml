@@ -163,6 +163,12 @@ options:
 - label: Dockerfile
   id: dockerfile
 
+- label: ECS Fargate
+  id: ecs_fargate
+
+- label: EKS Fargate
+  id: eks_fargate
+
 - label: Elasticsearch
   id: elasticsearch
 
@@ -231,6 +237,12 @@ options:
 
 - label: Kubernetes
   id: kubernetes
+
+- label: Kubernetes (DaemonSet)
+  id: kubernetes_daemonset
+
+- label: Kubernetes (Gateway)
+  id: kubernetes_gateway
 
 - label: Linux
   id: linux
