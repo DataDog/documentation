@@ -4692,6 +4692,16 @@ menu:
       parent: dbm_setup_postgres
       identifier: dbm_postgres_supabase
       weight: 307
+    - name: Supabase Cloud
+      url: database_monitoring/setup_postgres/supabase/cloud
+      parent: dbm_postgres_supabase
+      identifier: dbm_supabase_cloud
+      weight: 1000
+    - name: Supabase Self-Hosted
+      url: database_monitoring/setup_postgres/supabase/agent
+      parent: dbm_postgres_supabase
+      identifier: dbm_supabase_agent
+      weight: 2000
     - name: Heroku
       url: database_monitoring/setup_postgres/heroku
       parent: dbm_setup_postgres
