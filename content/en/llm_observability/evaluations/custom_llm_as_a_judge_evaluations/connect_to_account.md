@@ -37,7 +37,7 @@ LLM Observability does not support [data residency][2] for OpenAI.
 
 <div class="alert alert-danger">If you are subject to HIPAA, you are responsible for ensuring that you connect only to an Azure OpenAI account that is subject to a business associate agreement (BAA) and meets all requirements for HIPAA compliance.</div>
 
-Connect your Azure OpenAI account to LLM Observability with your OpenAI API key. Datadog strongly recommends using the `GPT-4o mini` model for evaluations. The selected model version must support [structured output][8] and require the Chat Completions api be available. A full list of such models can be found [here][9].
+Connect your Azure OpenAI account to LLM Observability with your OpenAI API key. Datadog strongly recommends using the `GPT-4o mini` model for evaluations. The selected model version must support [structured output][8], and the Chat Completions API must be available. See a [full list of compatible models][9].
 
 1. In Datadog, navigate to [**LLM Observability > Settings > Integrations**][1].
 1. Select **Connect** on the Azure OpenAI tile.
