@@ -18,7 +18,7 @@ This page provides an overview of these features.
 
 ## Summary of AI features in SAST
 
-| Step of vulnerability management lifecycle | Feature                                                                                                | Trigger Point                            | Impact                                                                        |
+| Step of vulnerability management life cycle | Feature                                                                                                | Trigger Point                            | Impact                                                                        |
 | ------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ---------------------------------------- | ----------------------------------------------------------------------------- |
 | [Detection](#detection)                    | Malicious PR protection: Detect potentially malicious changes or suspicious diffs                      | At PR time                               | Flags PRs introducing novel risky code                                        |
 | [Detection](#ai-native-sast)               | AI-native SAST: LLM-based taint analysis to detect security vulnerabilities with higher accuracy       | At scan time (Datadog Hosted Scans only) | Identifies contextually complex vulnerabilities missed by rule-based analysis |
