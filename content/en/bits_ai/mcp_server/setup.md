@@ -25,10 +25,10 @@ Datadog's [Cursor and VS Code extension][1] includes built-in access to the mana
     cursor --install-extension datadog.datadog-vscode --profile <PROFILE_NAME>
     ```
    Alternatively, install the Datadog extension following [these instructions][2]. If you have the extension installed already, make sure it's the latest version.
-3. Sign in to your Datadog account.
+1. Sign in to your Datadog account.
    {{< img src="bits_ai/mcp_server/ide_sign_in.png" alt="Sign in to Datadog from the IDE extension" style="width:70%;" >}}
-4. **Restart the IDE.**
-5. Confirm the Datadog MCP Server is available and the [tools][3] are listed: Go to **Cursor Settings** (`Shift` + `Cmd/Ctrl` + `J`), select the **Tools & MCP** tab, and expand the extension's tools list.
+1. **Restart the IDE.**
+1. Confirm the Datadog MCP Server is available and the [tools][3] are listed: Go to **Cursor Settings** (`Shift` + `Cmd/Ctrl` + `J`), select the **Tools & MCP** tab, and expand the extension's tools list.
 1. If you previously installed the Datadog MCP Server manually, remove it from the IDE's configuration to avoid conflicts.
 
 
@@ -135,14 +135,18 @@ Point your AI agent to the MCP Server endpoint for your regional [Datadog site][
 
 {{% tab "VS Code" %}}
 
-Datadog's [Cursor and VS Code extension][1] includes built-in access to the managed Datadog MCP Server. To install the extension:
+Datadog's [Cursor and VS Code extension][1] includes built-in access to the managed Datadog MCP Server.
 
-1. If you previously installed the Datadog MCP Server manually, remove it from the IDE's configuration to avoid conflicts. Open the command palette (`Shift` + `Cmd/Ctrl` + `P`) and run `MCP: Open User Configuration`.
-2. Install the Datadog extension following [these instructions][2]. If you have the extension installed already, make sure it's the latest version.
-3. Sign in to your Datadog account.
-4. **Restart the IDE.**
-5. Confirm the Datadog MCP Server is available and the [tools][3] are listed: Open the chat panel, select agent mode, and click the **Configure Tools** button.
+1. Install the extension (omit `--profile` and name to install to the default VS Code profile):
+    ```shell
+    code --install-extension datadog.datadog-vscode --profile <PROFILE_NAME>
+    ```
+   Alternatively, install the Datadog extension following [these instructions][2]. If you have the extension installed already, make sure it's the latest version.
+1. Sign in to your Datadog account.
+1. **Restart the IDE.**
+1. Confirm the Datadog MCP Server is available and the [tools][3] are listed: Open the chat panel, select agent mode, and click the **Configure Tools** button.
    {{< img src="bits_ai/mcp_server/vscode_configure_tools_button.png" alt="Configure Tools button in VS Code" style="width:70%;" >}}
+1. If you previously installed the Datadog MCP Server manually, remove it from the IDE's configuration to avoid conflicts. Open the command palette (`Shift` + `Cmd/Ctrl` + `P`) and run `MCP: Open User Configuration`.
 
 [1]: /ide_plugins/vscode/
 [2]: /ide_plugins/vscode/?tab=vscode#installation
