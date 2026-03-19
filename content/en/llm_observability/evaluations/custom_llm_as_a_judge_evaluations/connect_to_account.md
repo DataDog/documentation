@@ -23,7 +23,7 @@ Connect your OpenAI account to LLM Observability with your OpenAI API key. LLM O
 1. Follow the instructions on the tile.
    - Provide your OpenAI API key. Ensure that this key has **write** permission for **model capabilities**.
 1. Enable **Use this API key to evaluate your LLM applications**.
-1. LLM Observability requires that the `complete/chat` api endpoint be availble for the selected model. See OpenAI's model overview page [here][3] for details about which models support this endpoint.
+1. LLM Observability requires that the `complete/chat` API endpoint be available for the selected model. See [OpenAI's model overview page][3] for details about which models support this endpoint.
 
 {{< img src="llm_observability/configuration/openai-tile.png" alt="The OpenAI configuration tile in LLM Observability. Lists instructions for configuring OpenAI and providing your OpenAI API key." style="width:100%;" >}}
 
