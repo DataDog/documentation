@@ -13,11 +13,7 @@ further_reading:
   text: "Datadog Extension for Cursor"
 ---
 
-This page explains how to set up and configure the Datadog MCP Server, which lets you retrieve telemetry insights and manage platform features directly from AI-powered clients.
-
-## Installation
-
-Select your client to see setup instructions:
+Learn how to set up and configure the Datadog MCP Server, which lets you retrieve telemetry insights and manage platform features directly from AI-powered clients. Select your client:
 
 {{< tabs >}}
 {{% tab "Cursor" %}}
@@ -45,35 +41,35 @@ To install the extension:
 
 {{% tab "Claude Code" %}}
 
-Point your AI agent to the MCP Server endpoint for your regional [Datadog site][1]. 
+Point your AI agent to the MCP Server endpoint for your regional [Datadog site][1]. Use the **Datadog Site** selector on the right side of this page to select your site.
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
-For example, the endpoint for your selected site ({{< region-param key="dd_site_name" >}}) is: <code>{{< region-param key="mcp_server_endpoint" >}}</code>.
+Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-param key="mcp_server_endpoint" >}}</code>.
 
-* **Command line**: Run:
-  <pre><code>claude mcp add --transport http datadog-mcp {{< region-param key="mcp_server_endpoint" >}}
-  </code></pre>
+1. Run in terminal:
+    <pre><code>claude mcp add --transport http datadog-mcp {{< region-param key="mcp_server_endpoint" >}}</code></pre>
 
-* **Configuration file**: Add to `~/.claude.json`:
-  <pre><code>{
-    "mcpServers": {
-      "datadog": {
-        "type": "http",
-        "url": "{{< region-param key="mcp_server_endpoint" >}}"
-      }
-    }
-  }
-  </code></pre>
+   Alternatively, add to `~/.claude.json`:
+    <pre><code>{
+      "mcpServers": {
+        "datadog": {
+          "type": "http",
+          "url": "{{< region-param key="mcp_server_endpoint" >}}"
+         }
+       }
+    }</code></pre>
+
+1. To enable [product-specific tools](#toolsets), include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and LLM Observability tools: 
+
+   <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
 
 [1]: /getting_started/site/
 {{< /site-region >}}
 
 {{< site-region region="gov" >}}
-Point your AI agent to the MCP Server endpoint for your regional [Datadog site][1].
 
 <div class="alert alert-danger">Datadog MCP Server is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
 
-[1]: /getting_started/site/
 {{< /site-region >}}
 
 <div class="alert alert-info">If remote authentication is not available, use <a href="#local-binary-authentication">local binary authentication</a> instead.</div>
@@ -218,47 +214,43 @@ The [Datadog plugin][3] integrates with these agent CLIs. For an uninterrupted e
 
 {{% tab "Other" %}}
 
-The following clients can connect to the Datadog MCP Server: [Goose][1], [Kiro][2], [Kiro CLI][3], [Cline][4], and other MCP-compatible clients. Use these instructions for remote authentication when your client supports it. For Cline or when remote authentication is unreliable or not available, use [local binary authentication](#local-binary-authentication).
+For most other [supported clients](#supported-clients), use these instructions for remote authentication. For Cline or when remote authentication is unreliable or not available, use [local binary authentication](#local-binary-authentication).
+
+Point your AI agent to the MCP Server endpoint for your regional [Datadog site][1]. Use the **Datadog Site** selector on the right side of this page.
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
-Point your AI agent to the MCP Server endpoint for your regional [Datadog site][1]. For example, the endpoint for your selected site ({{< region-param key="dd_site_name" >}}) is: <code>{{< region-param key="mcp_server_endpoint" >}}</code>.
+Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-param key="mcp_server_endpoint" >}}</code>.
 
-Add the Datadog MCP Server to your client's configuration using the HTTP transport and the endpoint above. Example config file locations:
+1. Add the Datadog MCP Server to your client's configuration file using the HTTP transport and your site's endpoint URL. For example:
+
+    <pre><code>{
+      "mcpServers": {
+        "datadog": {
+          "type": "http",
+          "url": "{{< region-param key="mcp_server_endpoint" >}}"
+        }
+      }
+    }</code></pre>
+
+1. To enable [product-specific tools](#toolsets), include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and LLM Observability tools: 
+
+    <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
+
+Example configuration file locations:
 
 | Client | Configuration file |
 |--------|---------------------|
 | Gemini CLI | `~/.gemini/settings.json` |
 | Kiro CLI | `~/.kiro/settings/mcp.json` |
 
-Example JSON configuration ({{< region-param key="dd_site_name" >}}):
-
-<pre><code>{
-  "mcpServers": {
-    "datadog": {
-      "type": "http",
-      "url": "{{< region-param key="mcp_server_endpoint" >}}"
-    }
-  }
-}
-</code></pre>
-
-[1]: /getting_started/site/
 {{< /site-region >}}
 
 {{< site-region region="gov" >}}
-Point your AI agent to the MCP Server endpoint for your regional [Datadog site][1].
-
 <div class="alert alert-danger">Datadog MCP Server is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
 
-[1]: /getting_started/site/
 {{< /site-region >}}
 
-[1]: https://github.com/block/goose
-[2]: https://kiro.dev/
-[3]: https://kiro.dev/cli/
-[4]: https://cline.bot/
-[5]: /getting_started/site/
-
+[1]: /getting_started/site/
 {{% /tab %}}
 {{< /tabs >}}
 
