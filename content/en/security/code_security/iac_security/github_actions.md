@@ -17,7 +17,7 @@ further_reading:
 <div class="alert alert-danger">IaC Security with GitHub Actions is not supported for the {{< region-param key=dd_site code="true" >}} site.</div>
 {{% /site-region %}}
 
-The [`datadog-iac-scanner-github-action`][2] runs the [Datadog IaC Scanner][7] in your GitHub Action workflows to detect misconfigurations in Terraform and Kubernetes files on every push, then uploads the results to [IaC Security][1]. It uses the [datadog-ci][3] standalone binary, so no Node.js setup is required.
+The [`datadog-iac-scanner-github-action`][2] runs the [Datadog IaC Scanner][7] in your GitHub Action workflows to detect misconfigurations in Terraform and Kubernetes files on every push, then uploads the results to [IaC Security][1].
 
 ## Supported platforms
 
