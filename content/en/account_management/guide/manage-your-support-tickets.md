@@ -132,19 +132,19 @@ further_reading:
 
 <h2>Troubleshooting</h2>
 
-<h4>Cannot see new cases</h4>
+<h3>Cannot see new cases</h3>
 
 <p>Change the filter from <strong>Recently Viewed</strong> to <strong>Cases</strong>.</p>
 
-<h4>Login issues</h4>
+<h3>Login issues</h3>
 
 <p>Make sure your full username includes the <code>.ddgov.support</code> suffix.</p>
 
-<h4>Password reset not received</h4>
+<h3>Password reset not received</h3>
 
 <p>Click <strong>Forgot Password</strong> and follow the process with your full username (with the <code>.ddgov.support</code> suffix).</p>
 
-<h4>Registration error</h4>
+<h3>Registration error</h3>
 
 <p>Your account may already exist. Click <strong>Forgot Password</strong> and follow the process with your full username.</p>
 
