@@ -1,7 +1,6 @@
 ---
 title: Setting Up Database Monitoring for Self-Hosted ClickHouse
 description: Install and configure Database Monitoring for self-hosted ClickHouse.
-private: true
 further_reading:
 - link: "/database_monitoring/"
   tag: "Documentation"
