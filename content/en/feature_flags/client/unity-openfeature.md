@@ -24,7 +24,7 @@ further_reading:
 
 This page describes how to instrument your Unity application with the Datadog Feature Flags SDK using the OpenFeature standard. Datadog feature flags provide a unified way to remotely control feature availability in your app, experiment safely, and deliver new experiences with confidence.
 
-This guide explains how to install and enable the SDK, create and use a flags client with OpenFeature, and configure advanced options.
+This guide explains how to install and enable the SDK, register the Datadog OpenFeature provider, set an evaluation context, and evaluate flags.
 
 ## Installation
 
@@ -57,42 +57,36 @@ For more information about setting up the Unity SDK, see [Unity Monitoring Setup
 After the SDK is initialized, set up feature flags with these steps:
 
 {{< code-block lang="csharp" >}}
-using System.Collections.Generic;
 using Datadog.Unity.Flags;
 using OpenFeature;
+using OpenFeature.Model;
 using UnityEngine;
 
 // 1. Enable the Flags feature after Datadog SDK initialization
-DdFlags.Enable(new FlagsConfiguration
-{
-    TrackExposures = true,
-    TrackEvaluations = true,
-});
+DdFlags.Enable(new FlagsConfiguration(
+    trackExposures: true,
+    trackEvaluations: true
+));
 
-// 2. Create the default client (wires up the OpenFeature provider automatically)
-DdFlags.CreateClient();
+// 2. Create the Datadog provider and register it with OpenFeature
+var provider = DdFlags.Instance.CreateProvider();
+await Api.Instance.SetProviderAsync(provider);
 
-// 3. Set the evaluation context (fetches flag assignments from the server)
-DdFlags.SetEvaluationContext(
-    new FlagsEvaluationContext(
-        targetingKey: "user-123",
-        attributes: new Dictionary<string, object>
-        {
-            { "email", "user@example.com" },
-            { "tier", "premium" }
-        }
-    ),
-    onComplete: async success =>
-    {
-        if (success)
-        {
-            // 4. Evaluate flags via the OpenFeature API
-            var client = Api.Instance.GetClient();
-            var isNewCheckoutEnabled = await client.GetBooleanValueAsync("checkout.new", false);
-            Debug.Log($"checkout.new = {isNewCheckoutEnabled}");
-        }
-    }
+// 3. Get an OpenFeature client
+var client = Api.Instance.GetClient();
+
+// 4. Set the evaluation context
+await client.SetContextAsync(
+    EvaluationContext.Builder()
+        .SetTargetingKey("user-123")
+        .Set("email", "user@example.com")
+        .Set("tier", "premium")
+        .Build()
 );
+
+// 5. Evaluate flags
+var isNewCheckoutEnabled = await client.GetBooleanValueAsync("checkout.new", false);
+Debug.Log($"checkout.new = {isNewCheckoutEnabled}");
 {{< /code-block >}}
 
 ## Enable flags
@@ -102,69 +96,60 @@ After initializing Datadog, enable flags in your application code:
 {{< code-block lang="csharp" >}}
 using Datadog.Unity.Flags;
 
-DdFlags.Enable(new FlagsConfiguration
-{
-    TrackExposures = true,
-    TrackEvaluations = true,
-});
+DdFlags.Enable(new FlagsConfiguration(
+    trackExposures: true,
+    trackEvaluations: true
+));
 {{< /code-block >}}
 
 You can also pass additional configuration options; see [Advanced configuration](#advanced-configuration).
 
-## Create and retrieve a client
+## Register the provider
 
-Create a client once, typically during app startup:
-
-{{< code-block lang="csharp" >}}
-DdFlags.CreateClient(); // Creates the default client
-{{< /code-block >}}
-
-Retrieve the same client anywhere in your app using the OpenFeature API:
+Create the Datadog provider and register it with the OpenFeature `Api`:
 
 {{< code-block lang="csharp" >}}
 using OpenFeature;
 
+var provider = DdFlags.Instance.CreateProvider();
+await Api.Instance.SetProviderAsync(provider);
+{{< /code-block >}}
+
+Retrieve a client anywhere in your app using the OpenFeature API:
+
+{{< code-block lang="csharp" >}}
 var client = Api.Instance.GetClient();
 {{< /code-block >}}
 
-You can also create and retrieve multiple clients by providing the `name` parameter:
+You can also register named providers and retrieve named clients:
 
 {{< code-block lang="csharp" >}}
-DdFlags.CreateClient("checkout");
+var provider = DdFlags.Instance.CreateProvider();
+await Api.Instance.SetProviderAsync("checkout", provider);
 var client = Api.Instance.GetClient("checkout");
 {{< /code-block >}}
 
-<div class="alert alert-info">If a client with the given name already exists, the existing instance is reused.</div>
-
 ## Set the evaluation context
 
-Define who or what the flag evaluation applies to using a `FlagsEvaluationContext`. The evaluation context includes user or session information used to determine which flag variations should be returned. Call this method before evaluating flags to ensure proper targeting.
+Define who or what the flag evaluation applies to using an OpenFeature `EvaluationContext`. The evaluation context includes user or session information used to determine which flag variations should be returned. Call this method before evaluating flags to ensure proper targeting.
 
 {{< code-block lang="csharp" >}}
-DdFlags.SetEvaluationContext(
-    new FlagsEvaluationContext(
-        targetingKey: "user-123",
-        attributes: new Dictionary<string, object>
-        {
-            { "email", "user@example.com" },
-            { "tier", "premium" }
-        }
-    ),
-    onComplete: success =>
-    {
-        if (success)
-        {
-            Debug.Log("Flags loaded successfully!");
-        }
-    }
+using OpenFeature.Model;
+
+await client.SetContextAsync(
+    EvaluationContext.Builder()
+        .SetTargetingKey("user-123")
+        .Set("email", "user@example.com")
+        .Set("tier", "premium")
+        .Build()
 );
 {{< /code-block >}}
 
-This method fetches flag assignments from the server asynchronously in the background. The operation is non-blocking and thread-safe. Flag updates are available for subsequent evaluations once the background operation completes.
+This triggers a fetch of flag assignments from the server. Flag updates are available for subsequent evaluations once the operation completes.
 
 ## Evaluate flags
 
-After creating the client and setting its evaluation context, you can start reading flag values throughout your app. Flag evaluation is _local and instantaneous_—the SDK uses locally cached data, so no network requests occur when evaluating flags. This makes evaluations safe to perform on the main thread.
+After setting the evaluation context, you can start reading flag values throughout your app. Flag evaluation is _local and instantaneous_—the SDK uses locally cached data, so no network requests occur when evaluating flags. This makes evaluations safe to perform on the main thread.
 
 Each flag is identified by a _key_ (a unique string) and can be evaluated with a _typed method_ that returns a value of the expected type. If the flag doesn't exist or cannot be evaluated, the SDK returns the provided default value.
 
@@ -175,12 +160,7 @@ The Unity SDK uses the [OpenFeature][6] standard API for flag evaluation.
 Use `GetBooleanValueAsync(key, defaultValue)` for flags that represent on/off or true/false conditions. For example:
 
 {{< code-block lang="csharp" >}}
-var client = Api.Instance.GetClient();
-
-var isNewCheckoutEnabled = await client.GetBooleanValueAsync(
-    flagKey: "checkout.new",
-    defaultValue: false
-);
+var isNewCheckoutEnabled = await client.GetBooleanValueAsync("checkout.new", false);
 
 if (isNewCheckoutEnabled)
 {
@@ -197,10 +177,7 @@ else
 Use `GetStringValueAsync(key, defaultValue)` for flags that select between multiple variants or configuration strings. For example:
 
 {{< code-block lang="csharp" >}}
-var theme = await client.GetStringValueAsync(
-    flagKey: "ui.theme",
-    defaultValue: "light"
-);
+var theme = await client.GetStringValueAsync("ui.theme", "light");
 
 switch (theme)
 {
@@ -221,15 +198,8 @@ switch (theme)
 For numeric flags, use `GetIntegerValueAsync(key, defaultValue)` or `GetDoubleValueAsync(key, defaultValue)`. These are appropriate when a feature depends on a numeric parameter such as a limit, percentage, or multiplier:
 
 {{< code-block lang="csharp" >}}
-var maxItems = await client.GetIntegerValueAsync(
-    flagKey: "cart.items.max",
-    defaultValue: 20
-);
-
-var priceMultiplier = await client.GetDoubleValueAsync(
-    flagKey: "pricing.multiplier",
-    defaultValue: 1.0
-);
+var maxItems = await client.GetIntegerValueAsync("cart.items.max", 20);
+var priceMultiplier = await client.GetDoubleValueAsync("pricing.multiplier", 1.0);
 {{< /code-block >}}
 
 ### Object flags
@@ -238,8 +208,8 @@ For structured or JSON-like data, use `GetObjectValueAsync(key, defaultValue)`. 
 
 {{< code-block lang="csharp" >}}
 var config = await client.GetObjectValueAsync(
-    flagKey: "ui.config",
-    defaultValue: new Value(new Structure(new Dictionary<string, Value>
+    "ui.config",
+    new Value(new Structure(new Dictionary<string, Value>
     {
         { "color", new Value("#00A3FF") },
         { "fontSize", new Value(14) }
@@ -263,10 +233,7 @@ When you need more than just the flag value, use the detail methods. These metho
 For example:
 
 {{< code-block lang="csharp" >}}
-var details = await client.GetStringDetailsAsync(
-    flagKey: "paywall.layout",
-    defaultValue: "control"
-);
+var details = await client.GetStringDetailsAsync("paywall.layout", "control");
 
 Debug.Log($"Value: {details.Value}");         // Evaluated value (for example: "A", "B", or "control")
 Debug.Log($"Variant: {details.Variant}");     // Variant name, if applicable
@@ -281,30 +248,29 @@ Flag details may help you debug evaluation behavior and understand why a user re
 The `DdFlags.Enable()` API accepts optional configuration with options listed below.
 
 {{< code-block lang="csharp" >}}
-DdFlags.Enable(new FlagsConfiguration
-{
-    TrackExposures = true,
-    TrackEvaluations = true,
-    EvaluationFlushIntervalSeconds = 10.0f,
-});
+DdFlags.Enable(new FlagsConfiguration(
+    trackExposures: true,
+    trackEvaluations: true,
+    evaluationFlushIntervalSeconds: 10.0f
+));
 {{< /code-block >}}
 
-`TrackExposures`
+`trackExposures`
 : When `true` (default), the SDK automatically records an _exposure event_ when a flag is evaluated. These events contain metadata about which flag was accessed, which variant was served, and under what context. They are sent to Datadog so you can later analyze feature adoption. Set to `false` to disable exposure tracking.
 
-`TrackEvaluations`
+`trackEvaluations`
 : When `true` (default), the SDK tracks flag evaluations and sends aggregated evaluation telemetry to Datadog. This enables analytics about flag usage patterns and performance. Set to `false` to disable evaluation tracking.
 
-`EvaluationFlushIntervalSeconds`
+`evaluationFlushIntervalSeconds`
 : The interval in seconds at which batched evaluation events are sent to Datadog. Accepted values are between `1` and `60`. Default is `10.0` seconds.
 
-`CustomFlagsEndpoint`
+`customFlagsEndpoint`
 : Configures a custom server URL for retrieving flag assignments.
 
-`CustomExposureEndpoint`
+`customExposureEndpoint`
 : Configures a custom server URL for sending flags exposure data.
 
-`CustomEvaluationEndpoint`
+`customEvaluationEndpoint`
 : Configures a custom server URL for sending flags evaluation telemetry.
 
 ## Further reading
