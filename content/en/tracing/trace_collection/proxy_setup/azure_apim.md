@@ -16,7 +16,7 @@ Inferred spans for Azure API Management are supported for **.NET**, **JavaScript
 ## Prerequisites
 
 - `DD_TRACE_INFERRED_PROXY_SERVICES_ENABLED` is set in your application settings.
-- Your backend uses a **supported runtime**, **minimum tracer version**, and **web framework** from the table below. Do not use the Amazon API Gateway support matrix on this site as a reference for Azure API Management—those minimum versions and runtimes differ.
+- Your backend uses a **supported runtime**, **minimum tracer version**, and **web framework** from the table below.
 
 ### Supported runtimes and web frameworks
 
