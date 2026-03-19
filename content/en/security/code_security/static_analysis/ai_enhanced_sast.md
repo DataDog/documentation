@@ -21,7 +21,7 @@ This page provides an overview of these features.
 | Step of vulnerability management lifecycle | Feature                                                                                                | Trigger Point                            | Impact                                                                        |
 | ------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ---------------------------------------- | ----------------------------------------------------------------------------- |
 | [Detection](#detection)                    | Malicious PR protection: Detect potentially malicious changes or suspicious diffs                      | At PR time                               | Flags PRs introducing novel risky code                                        |
-| [Detection](#ai-native-sast)               | AI-native SAST: LLM-based taint analysis to detect security vulnerabilities with higher accuracy       | At scan time (Datadog Hosted Scans only) | Identifies contextually complex vulnerabilities missed by rule-based analysis |
+| [Detection](#ai-native-sast)               | AI-Native SAST: LLM-based taint analysis to detect security vulnerabilities with higher accuracy       | At scan time (Datadog Hosted Scans only) | Identifies contextually complex vulnerabilities missed by rule-based analysis |
 | [Validation](#validation-and-triage)       | False positive filtering: Deprioritize low-likelihood findings                                         | After scan                               | Reduce noise, allow focus on actual issues                                    |
 | [Remediation](#remediation)                | Batched remediation: Generate suggested fixes (and optionally PRs) for one or multiple vulnerabilities | After scan                               | Reduces developer effort, accelerates fix cycle                               |
 
@@ -59,13 +59,13 @@ There are two potential verdicts: `malicious` and `benign`. They can be filtered
 
 Signals can be triaged directly in Datadog (assign, create a case, or declare an incident), or routed externally using [Datadog Workflow Automation][5].
 
-## AI-native SAST
+## AI-Native SAST
 
 {{< callout btn_hidden="true" >}}
-AI-native SAST is in Preview and is only available for Datadog Hosted Scans.
+AI-Native SAST is in Preview and is only available for Datadog Hosted Scans.
 {{< /callout >}}
 
-Datadog's AI-native SAST engine uses large language models (LLMs) to detect security vulnerabilities by reasoning about how data flows through your code. Unlike rule-based static analysis, it can identify vulnerabilities that require contextual understanding of application logic.
+Datadog's AI-Native SAST engine uses large language models (LLMs) to detect security vulnerabilities by reasoning about how data flows through your code. Unlike rule-based static analysis, it can identify vulnerabilities that require contextual understanding of application logic.
 
 Scans use a two-phase approach:
 
@@ -84,7 +84,8 @@ Scans use a two-phase approach:
 ### Detected vulnerability types
 
 {{% collapse-content title="Supported CWEs" level="h4" expanded=true id="ai-native-sast-cwes" %}}
-AI-native SAST detects the following vulnerability types:
+AI-Native SAST detects the following vulnerability types:
+
 - [CWE-89: SQL Injection](https://cwe.mitre.org/data/definitions/89.html)
 - [CWE-77: Command Injection](https://cwe.mitre.org/data/definitions/77.html)
 - [CWE-79: Cross-Site Scripting (XSS)](https://cwe.mitre.org/data/definitions/79.html)
@@ -100,7 +101,7 @@ AI-native SAST detects the following vulnerability types:
 - [CWE-501: Trust Boundary Violation](https://cwe.mitre.org/data/definitions/501.html)
 - [CWE-284: Broken Access Control (IDOR)](https://cwe.mitre.org/data/definitions/284.html)
 - [CWE-1427: Server-Side Template Injection](https://cwe.mitre.org/data/definitions/1427.html)
-{{% /collapse-content %}}
+  {{% /collapse-content %}}
 
 <!-- ## AI-powered detection
 
