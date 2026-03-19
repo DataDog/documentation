@@ -128,15 +128,19 @@ You can route logs from Observability Pipelines to Snowflake using the Amazon S3
 
 #### Permissions
 
-{{% observability_pipelines/aws_authentication/amazon_security_lake/permissions %}}
+To send logs to Amazon S3, the Observability Pipelines Worker requires the following policy permissions:
+
+- `s3:ListBucket`
+- `s3:PutObject`
+- `s3:GetObject`
 
 ### Event batching
 
 A batch of events is flushed when one of these parameters is met. See [event batching][7] for more information.
 
-| Max Events     | Max Bytes       | Timeout (seconds)   |
-|----------------| ----------------| --------------------|
-| None           | 100,000,000     | 900                 |
+| Maximum Events | Maximum Size (MB) | Timeout (seconds)   |
+|----------------|-------------------|---------------------|
+| None           | 100               | 900                 |
 
 [1]: /logs/log_configuration/archives/
 [2]: /logs/log_configuration/rehydrating/

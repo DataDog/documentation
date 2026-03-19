@@ -1,20 +1,22 @@
 ---
 title: Defining Metrics
-description: Define the metrics you want to measure during your experimentation.
+description: Define the metrics you want to measure during your experiments.
+aliases:
+  - /product_analytics/experimentation/defining_metrics/
 further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-product-analytics/"
   tag: "Blog"
   text: "Make data-driven design decisions with Product Analytics"
-- link: "/product_analytics/experimentation/reading_results"
+- link: "/experiments/reading_results"
   tag: "Documentation"
   text: "Reading Experiment Results"
 ---
 
 ## Overview
 
-Define the metrics you want to measure during your experimentation. Metrics can be built using Product Analytics and Real User Monitoring (RUM) data.
+Define the metrics you want to measure during your experiment. Metrics can be built using Product Analytics and Real User Monitoring (RUM) data.
 
-<div class="alert alert-info"> In order to create a metric, you must have Datadog’s client SDK installed in your application and be actively capturing data.
+<div class="alert alert-info"> To create a metric, you must have Datadog’s client SDK installed in your application and be actively capturing data.
 </div>
 
 ## Create your first metric
@@ -34,7 +36,6 @@ To create a metric for your experiment:
 After you’ve selected your event of interest, you can specify an aggregation method. Metrics default to a **count of unique** subjects (often users) that had at least one event. However, you can also choose to _count the total number_ of events, or _sum a property_ of that event:
 
 {{< img src="/product_analytics/experiment/exp_default_metric_agg.png" alt="Dropdown menu to select the method of aggregation for metrics." style="width:90%;" >}}
-
 
 ### Default metric normalization 
 
@@ -68,17 +69,13 @@ For example, an e-commerce company that wants to measure the _Average Order Valu
 
 Datadog’s statistical engine accounts for correlations between the numerator and denominator using the [delta method][2]. 
 
-
 ## Add filters
 You can also add filters to your metrics, similar to other [Product Analytics dashboards][3]. For instance, you might want to filter page views based on referring URL or UTM parameters. Similarly, you might want to filter actions to a specific page or value of a custom attribute. As you add filters, you can check metric values in real time using the chart on the right.
 
-
 {{< img src="/product_analytics/experiment/exp_filter_by.png" alt="Filter flow to scope your metric by specific properties." style="width:90%;" >}}
 
-
-
 ## Advanced options
-Datadog supports several advanced options specific to experimentation:
+Datadog Experiments supports several advanced options:
 
 `Timeframe filters`
 : - By default, Datadog will include all events between a user's first exposure and the end of the experiment. If you want to measure a time-boxed value such as “sessions within 7 days”, you can add a timeframe filter.
@@ -91,10 +88,6 @@ Datadog supports several advanced options specific to experimentation:
 `Outlier handling`
 : - Real world data often includes extreme outliers that can impact experiment results. 
   - Use this setting to set a threshold at which data is truncated. For instance, set a 99% upper bound to truncate all results at the metric’s 99th percentile.
-
-
-
-
 
 ## Further reading
 {{< partial name="whats-next/whats-next.html" >}}

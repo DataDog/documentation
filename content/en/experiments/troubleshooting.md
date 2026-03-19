@@ -1,6 +1,8 @@
 ---
 title: Troubleshooting
 description: Troubleshoot issues when running experiments.
+aliases:
+  - /product_analytics/experimentation/troubleshooting/
 further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-product-analytics"
   tag: "Blog"

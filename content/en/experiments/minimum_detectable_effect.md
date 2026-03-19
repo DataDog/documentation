@@ -1,6 +1,8 @@
 ---
 title: Minimum Detectable Effects
 description: Determine the smallest detectable difference that may result in a statistically significant experiment result.
+aliases:
+  - /product_analytics/experimentation/minimum_detectable_effect/
 further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-product-analytics/"
   tag: "Blog"
@@ -39,11 +41,6 @@ If the MDE is too large, the experiment may be underpowered, meaning it won’t 
 If the MDE is too small, the experiment may require excessive traffic or run time, reducing the ability to run parallel experiments and potentially exposing many users to risky changes.
 
 A common way to choose an MDE is to examine results from past experiments. For example, if historical experiments in a particular domain typically yield effects of 5–10%, selecting an MDE near the lower end of that range (such as 5%) can be a reasonable starting point.
-
-
-
-
-
 
 ## Further reading
 {{< partial name="whats-next/whats-next.html" >}}
