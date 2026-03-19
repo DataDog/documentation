@@ -56,18 +56,17 @@ Because containers and cloud environments regularly churn through hosts, using t
 
 Below are Datadog's tagging requirements:
 
-1. Tags must **start with a letter** and after that may contain the characters listed below:
+1. Tags must **start with a letter** and after that, may contain the characters listed below:
 
-    - Letters (all Unicode letters are supported, e.g., a, ó, 気, 녕, ك, and ดี)
+    - Letters (all Unicode letters are supported---for example, a, ó, 気, 녕, ك, and ดี)
     - Numbers
-    - Underscores
+    - Underscores (leading/trailing underscores are stripped, and contiguous underscores are collapsed into one)
     - Minuses
     - Colons
-    - Commas
     - Periods
-    - Slashes
+    - Forward slashes
 
-    Other special characters are converted to underscores.
+    All other characters (including, but not limited to, commas, emoji, and spaces) are converted to underscores.
 
 2. Tags can be **up to 200 characters** long.
 3. Tags are converted to lowercase. Therefore, `CamelCase` tags are not recommended. Authentication (crawler) based integrations convert camel case tags to underscores, for example `TestTag` --> `test_tag`.
