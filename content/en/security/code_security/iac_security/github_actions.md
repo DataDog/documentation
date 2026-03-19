@@ -17,7 +17,7 @@ further_reading:
 <div class="alert alert-danger">IaC Security with GitHub Actions is not supported for the {{< region-param key=dd_site code="true" >}} site.</div>
 {{% /site-region %}}
 
-Run a [Datadog IaC Security][1] scan as a step in your GitHub Action workflows. This action uses the [Datadog IaC Scanner][2] to check your infrastructure-as-code configurations and upload the results to Datadog. It uses the [datadog-ci][3] standalone binary, so no Node.js setup is required.
+The [`datadog-iac-scanner-github-action`][2] runs the [Datadog IaC Scanner][7] in your GitHub Action workflows to detect misconfigurations in Terraform and Kubernetes files on every push, then uploads the results to [IaC Security][1]. It uses the [datadog-ci][3] standalone binary, so no Node.js setup is required.
 
 ## Supported platforms
 
@@ -27,9 +27,16 @@ Run a [Datadog IaC Security][1] scan as a step in your GitHub Action workflows. 
 | macOS   | arm64           |
 | Windows | x86_64          |
 
+## Prerequisites
+
+Before you begin, make sure you have:
+
+- A [Datadog API key and application key][5], stored as [secrets in your GitHub repository][4] (`DD_API_KEY` and `DD_APP_KEY`).
+- Your [Datadog site][6] (for example, `datadoghq.com` or `datadoghq.eu`).
+
 ## Setup
 
-Create a `.github/workflows/datadog-iac-scanning.yml` file in your repository with the following content:
+To add IaC scanning to your GitHub Actions workflow, create a `.github/workflows/datadog-iac-scanning.yml` file in your repository with the following content:
 
 ```yaml
 on: [push]
@@ -52,22 +59,15 @@ jobs:
         dd_site: datadoghq.com
 ```
 
-You **must** set your Datadog API and application keys as [secrets in your GitHub repository][4] at the organization or repository level. For more information, see [API and Application Keys][5].
+### Optional inputs
 
-Replace `dd_site` with the [Datadog site][6] you are using.
+In addition to the required `dd_api_key`, `dd_app_key`, and `dd_site` inputs, you can set the following optional parameters in your workflow file:
 
-## Inputs
-
-You can set the following parameters for IaC Security.
-
-| Name         | Description                                                                                                  | Required | Default         |
-|--------------|--------------------------------------------------------------------------------------------------------------|----------|-----------------|
-| `dd_api_key` | Your Datadog API key. This key is created by your [Datadog organization][5] and should be stored as a [secret][4]. | Yes      |                 |
-| `dd_app_key` | Your Datadog application key. This key is created by your [Datadog organization][5] and should be stored as a [secret][4]. | Yes      |                 |
-| `dd_site`    | The [Datadog site][6] to send information to.                                                                | No       | `datadoghq.com` |
-| `paths`      | Comma-separated list of directories and files to scan.                                                       | No       | `.`             |
-| `extra_args` | Additional arguments passed to the IaC scanner.                                                              | No       |                 |
-| `datadog_ci_extra_args` | Additional arguments passed to the `datadog-ci` upload command.                                     | No       |                 |
+| Name         | Description                                                                                                  | Default         |
+|--------------|--------------------------------------------------------------------------------------------------------------|-----------------|
+| `paths`      | Comma-separated list of directories and files to scan.                                                       | `.`             |
+| `extra_args` | Additional arguments passed to the IaC scanner.                                                              |                 |
+| `datadog_ci_extra_args` | Additional arguments passed to the `datadog-ci` upload command.                                     |                 |
 
 ## Examples
 
@@ -96,8 +96,9 @@ You can set the following parameters for IaC Security.
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /security/code_security/iac_security/
-[2]: https://github.com/DataDog/datadog-iac-scanner
+[2]: https://github.com/DataDog/datadog-iac-scanner-github-action
 [3]: https://github.com/DataDog/datadog-ci
 [4]: https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions#creating-secrets-for-a-repository
 [5]: /account_management/api-app-keys/
 [6]: /getting_started/site/
+[7]: https://github.com/DataDog/datadog-iac-scanner
