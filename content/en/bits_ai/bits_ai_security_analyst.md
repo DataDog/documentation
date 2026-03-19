@@ -65,13 +65,14 @@ To use Bits AI Security Analyst:
 
 ### Setup
 
-As soon as you enable Bits AI Security Analyst, by default, it starts autonomously investigating signals for all eligible rules above medium severity.
+When you enable Bits AI Security Analyst, Datadog analyzes your rules, including custom rules, to determine whether it can confidently investigate signals associated with them. For all eligible rules above medium severity, it starts autonomously investigating signals. 
+
+Rule eligibility depends on whether Datadog has built the investigation capability for the log source, and whether the Agent is able to investigate the specific rule. If you have new custom rules to evaluate, or want to ask about a rule that wasn't made eligible, contact [Datadog support][1].
 
 1. In Datadog, go to **Security** > **Settings** > **[Bits AI Security Analyst][3]**.
 1. Turn on the toggle to enable Bits AI Security Analyst. Additional settings appear.
 1. (Optional) Configure which rules and which severities you want Bits AI Security Analyst to automatically investigate signals for. There are two ways to do so:
    - Click **Rule Settings** to configure investigations for individual rules. You can change the minimum severity for signals to be investigated, and enable or disable individual rules for investigation.
-     <div class="alert alert-info">When you enable Bits AI Security Analyst, Datadog analyzes your custom rules to determine whether it can confidently investigate signals associated with it. If you have new custom rules to evaluate, or want to ask about a rule that wasn't made eligible, contact <a href="/help">Datadog support</a>.</div>
    - Click **Query Filter** to write a signal query filter, so Bits AI Security Analyst only investigates signals that match your filter.
 1. Some log sources require credentials to run or enhance investigations by accessing logs, telemetry, or other data that isn't in Datadog. To add credentials, click **Edit credentials**. In the **Select or Add Connection** window that opens, follow the prompts to select an [existing connection][4] from Actions Catalog, or add a connection. Datadog securely stores and restricts all credentials using Actions Catalog.
    - Some log sources require additional setup so you can create HTTP connections. Here's an example:
