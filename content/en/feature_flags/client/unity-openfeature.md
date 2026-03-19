@@ -52,6 +52,49 @@ Initialize Datadog as early as possible in your app lifecycle. Navigate to your 
 
 For more information about setting up the Unity SDK, see [Unity Monitoring Setup][5].
 
+## Getting started
+
+After the SDK is initialized, set up feature flags with these steps:
+
+{{< code-block lang="csharp" >}}
+using System.Collections.Generic;
+using Datadog.Unity.Flags;
+using OpenFeature;
+using UnityEngine;
+
+// 1. Enable the Flags feature after Datadog SDK initialization
+DdFlags.Enable(new FlagsConfiguration
+{
+    TrackExposures = true,
+    TrackEvaluations = true,
+});
+
+// 2. Create the default client (wires up the OpenFeature provider automatically)
+DdFlags.CreateClient();
+
+// 3. Set the evaluation context (fetches flag assignments from the server)
+DdFlags.SetEvaluationContext(
+    new FlagsEvaluationContext(
+        targetingKey: "user-123",
+        attributes: new Dictionary<string, object>
+        {
+            { "email", "user@example.com" },
+            { "tier", "premium" }
+        }
+    ),
+    onComplete: async success =>
+    {
+        if (success)
+        {
+            // 4. Evaluate flags via the OpenFeature API
+            var client = Api.Instance.GetClient();
+            var isNewCheckoutEnabled = await client.GetBooleanValueAsync("checkout.new", false);
+            Debug.Log($"checkout.new = {isNewCheckoutEnabled}");
+        }
+    }
+);
+{{< /code-block >}}
+
 ## Enable flags
 
 After initializing Datadog, enable flags in your application code:
@@ -59,10 +102,11 @@ After initializing Datadog, enable flags in your application code:
 {{< code-block lang="csharp" >}}
 using Datadog.Unity.Flags;
 
-DdFlags.Enable(new FlagsConfiguration(
-    trackExposures: true,
-    trackEvaluations: true
-));
+DdFlags.Enable(new FlagsConfiguration
+{
+    TrackExposures = true,
+    TrackEvaluations = true,
+});
 {{< /code-block >}}
 
 You can also pass additional configuration options; see [Advanced configuration](#advanced-configuration).
@@ -237,29 +281,30 @@ Flag details may help you debug evaluation behavior and understand why a user re
 The `DdFlags.Enable()` API accepts optional configuration with options listed below.
 
 {{< code-block lang="csharp" >}}
-DdFlags.Enable(new FlagsConfiguration(
-    trackExposures: true,
-    trackEvaluations: true,
-    evaluationFlushIntervalSeconds: 10.0f
-));
+DdFlags.Enable(new FlagsConfiguration
+{
+    TrackExposures = true,
+    TrackEvaluations = true,
+    EvaluationFlushIntervalSeconds = 10.0f,
+});
 {{< /code-block >}}
 
-`trackExposures`
+`TrackExposures`
 : When `true` (default), the SDK automatically records an _exposure event_ when a flag is evaluated. These events contain metadata about which flag was accessed, which variant was served, and under what context. They are sent to Datadog so you can later analyze feature adoption. Set to `false` to disable exposure tracking.
 
-`trackEvaluations`
+`TrackEvaluations`
 : When `true` (default), the SDK tracks flag evaluations and sends aggregated evaluation telemetry to Datadog. This enables analytics about flag usage patterns and performance. Set to `false` to disable evaluation tracking.
 
-`evaluationFlushIntervalSeconds`
+`EvaluationFlushIntervalSeconds`
 : The interval in seconds at which batched evaluation events are sent to Datadog. Accepted values are between `1` and `60`. Default is `10.0` seconds.
 
-`customFlagsEndpoint`
+`CustomFlagsEndpoint`
 : Configures a custom server URL for retrieving flag assignments.
 
-`customExposureEndpoint`
+`CustomExposureEndpoint`
 : Configures a custom server URL for sending flags exposure data.
 
-`customEvaluationEndpoint`
+`CustomEvaluationEndpoint`
 : Configures a custom server URL for sending flags evaluation telemetry.
 
 ## Further reading
