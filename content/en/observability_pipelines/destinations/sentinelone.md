@@ -66,9 +66,9 @@ After you've set up the pipeline to send logs to the SentinelOne destination, yo
 
 A batch of events is flushed when one of these parameters is met. See [event batching][3] for more information.
 
-| Max Events     | Max Bytes       | Timeout (seconds)   |
-|----------------|-----------------|---------------------|
-| None           | 1,000,000       | 1                   |
+| Maximum Events | Maximum Size (MB) | Timeout (seconds)   |
+|----------------|-------------------|---------------------|
+| None           | 1                 | 1                   |
 
 ## Further reading
 
