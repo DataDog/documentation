@@ -213,19 +213,36 @@ Add the following annotations to your image at build time:
 
 ### Optional annotations
 
+These annotations help Datadog improve base image remediation suggestions:
+
 - `org.opencontainers.image.base.name`
-  The base image used to build the image (for example, `ubuntu:22.04`)
+  The base image name (for example, `ubuntu:22.04`)
+
+- `org.opencontainers.image.base.digest`
+  The base image digest
 
 For more details, see the [OCI Image Spec annotations documentation][14].
 
 ### Example
 
+#### Using docker build
+
+Annotations are the preferred method. Labels are also supported as a fallback.
+
 ```bash
 docker build \
-  --label org.opencontainers.image.source="https://github.com/org/repo" \
-  --label org.opencontainers.image.revision="$(git rev-parse HEAD)" \
-  --label com.datadoghq.image.source_path="Dockerfile" \
+  --annotation org.opencontainers.image.source="https://github.com/org/repo" \
+  --annotation org.opencontainers.image.revision="$(git rev-parse HEAD)" \
+  --annotation com.datadoghq.image.source_path="Dockerfile" \
   -t myapp:latest .
+```
+
+#### Using the Datadog Security CLI
+
+As an alternative to adding annotations manually, the Datadog Security CLI can inject the required metadata directly when scanning, using the `--dockerfile` flag:
+
+```bash
+datadog-security-cli image myapp:latest --dockerfile ./Dockerfile
 ```
 
 ## Troubleshooting
@@ -270,3 +287,4 @@ For additional help, see the [Cloud Security troubleshooting guide][12] or conta
 [11]: /integrations/azure-devops-source-code/#setup
 [12]: /security/cloud_security_management/troubleshooting/vulnerabilities/
 [13]: /help/
+[14]: https://specs.opencontainers.org/image-spec/annotations/
