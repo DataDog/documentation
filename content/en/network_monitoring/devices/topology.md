@@ -64,19 +64,31 @@ By default, the **Unmonitored Device** option is unchecked, which hides devices 
 
 In addition to showing an overview of your network's physical connections, the Device Topology Map lets you investigate individual devices to understand their connections, flows, and overall status. Hover over a device to see its status and key metrics, or click a device to open the NDM device view with details such as its IP address, tags, throughput, CPU, and memory.
 
+While investigating a device, click the **Open Device Page** dropdown in the top right of the device view to navigate to [NetFlow Monitoring][1] or other related pages for deeper investigation.
+
 {{< img src="/network_device_monitoring/network_topology_map/network_topology_map_device_inspect_view_7.png" alt="The Network Device Topology Map with a device selected, displaying information in the NDM device view." style="width:100%;" >}}
+
+### Dependencies
+
+The **Dependencies** section in the NDM device view shows the number of physically connected devices and VPN tunnels at a glance, along with a visual graph of neighboring devices.
+
+{{< img src="/network_device_monitoring/network_topology_map/topology_depdencies.png" alt="The NDM device view showing the Dependencies section with a graph of connected devices." style="width:100%;" >}}
+
+Click **View dependencies** to open the full device page. On the **Dependencies** tab, use the **Physical** or **VPN** filters to switch between physical connections and VPN tunnels (VPN dependencies require [VPN Monitoring][12] to be configured). The physical view displays a topology graph alongside a table of connected devices showing their status, device name, IP address, monitors, local interface, and remote interface.
+
+{{< img src="/network_device_monitoring/network_topology_map/ndm_summary_dependencies.png" alt="The Dependencies tab on the NDM device page with the Physical filter selected, showing a topology graph and a table of connected devices with status, IP address, and interface details." style="width:100%;" >}}
 
 ### Metrics
 
-Click the **Metrics** tab in the NDM device view to see all metrics collected for the device. You can star metrics you care about for quick access, view key metrics and Datadog-highlighted metrics, and browse all additional metrics.
+Click the **Metrics** tab in the NDM device view to see key metrics for the device, including CPU usage, memory usage, and throughput. Summary stats are displayed at the top, and each metric is shown as a graph over time. Click **View all metrics** to explore the full list of collected metrics.
 
-{{< img src="/network_device_monitoring/network_topology_map/metrics_2.png" alt="The NDM device view with the Metrics tab open, showing starred and key metrics." style="width:100%;" >}}
+{{< img src="/network_device_monitoring/network_topology_map/metrics_3.png" alt="The NDM device view with the Metrics tab open, showing CPU, memory, and throughput graphs." style="width:100%;" >}}
 
 ### Traffic
 
-Click the **Traffic** tab to view traffic trends, throughput changes, and a Sankey diagram of traffic flows. You can examine traffic at the interface level and jump to [NetFlow Monitoring][1] for further investigation.
+Click the **Traffic** tab to view total, inbound, and outbound throughput for the device. A traffic graph shows activity over time, and the **Top Conversations** table lists the highest-volume source-to-destination flows with bit rate, packet rate, and total bytes. Click **View traffic** to investigate further in on the device summary page, and in [NetFlow Monitoring][1].
 
-{{< img src="/network_device_monitoring/network_topology_map/traffic.png" alt="The NDM device view with the Traffic tab open, showing a Sankey diagram of traffic flows." style="width:100%;" >}}
+{{< img src="/network_device_monitoring/network_topology_map/traffic_2.png" alt="The NDM device view with the Traffic tab open, showing throughput stats, a traffic graph, and a Top Conversations table." style="width:100%;" >}}
 
 ### Events
 
@@ -84,17 +96,23 @@ Click the **Events** tab to view Syslog messages and SNMP traps in a single, com
 
 {{< img src="/network_device_monitoring/network_topology_map/events.png" alt="The NDM device view with the Events tab open, showing Syslog messages and SNMP traps." style="width:100%;" >}}
 
-### Link details
-
-Click on a link between devices to explore connection details including traffic volume, bandwidth utilization, errors, and discards, with options to view the data in [Device Overview][10] or [NetFlow Monitoring][11].
-
-{{< img src="/network_device_monitoring/network_topology_map/link_details.mp4" alt="A user clicking on a link between devices to view additional link details." video="true" >}}
-
 ### View flow details
 
 To explore a device's traffic sources, destinations, and volume, click the **Open Device Page** dropdown and select **NetFlow Monitoring**. The data is automatically filtered by the device's `@device.ip`. For more information, see [NetFlow Monitoring][1].
 
 {{< img src="/network_device_monitoring/network_topology_map/netflow_tab_4.png" alt="The NDM device view with the Open Device Page dropdown showing the NetFlow Monitoring option." style="width:100%;" >}}
+
+### Device settings
+
+Click the **Device Settings** icon in the NDM device view to open the Device Settings panel. The **Information** tab displays general details (name, namespace, and description), network details (IP address, subnet, and geolocation), and hardware details (model, vendor, OS, and version). The **Tags** tab lets you view and manage tags associated with the device.
+
+{{< img src="/network_device_monitoring/network_topology_map/device_settings.png" alt="The Device Settings panel for an NDM device, showing the Information tab with general, network, and hardware details." style="width:90%;" >}}
+
+### Link details
+
+Click on a link between devices to explore connection details including traffic volume, bandwidth utilization, errors, and discards, with options to view the data in [Device Overview][10] or [NetFlow Monitoring][11].
+
+{{< img src="/network_device_monitoring/network_topology_map/link_details.mp4" alt="A user clicking on a link between devices to view additional link details." video="true" >}}
 
 ### Icon legend
 
@@ -221,3 +239,4 @@ NDM provides multiple visualization tools to monitor your infrastructure:
 [9]: /network_monitoring/devices/geomap
 [10]: https://app.datadoghq.com/devices
 [11]: https://app.datadoghq.com/devices/netflow
+[12]: /network_monitoring/devices/vpn_monitoring/
