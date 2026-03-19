@@ -62,7 +62,7 @@ Signals can be triaged directly in Datadog (assign, create a case, or declare an
 ## AI-Native SAST
 
 {{< callout btn_hidden="true" >}}
-AI-Native SAST is in Preview and is only available for Datadog Hosted Scans.
+AI-Native SAST is in Preview and is only available for Datadog-hosted Scans.
 {{< /callout >}}
 
 Datadog's AI-Native SAST engine uses large language models (LLMs) to detect security vulnerabilities by reasoning about how data flows through your code. Unlike rule-based static analysis, it can identify vulnerabilities that require contextual understanding of application logic.
