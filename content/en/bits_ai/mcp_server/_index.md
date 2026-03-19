@@ -696,6 +696,20 @@ Searches [Test Optimization][24] test events with filters and returns details on
 - Show me all flaky test runs for the checkout service.
 - Find tests owned by `@team-name` that are failing.
 
+### `get_datadog_code_coverage_branch_summary`
+*Toolset: **software-delivery***\
+Fetches aggregated code coverage summary metrics for a repository branch, including total coverage, patch coverage, and service/codeowner breakdowns.
+
+- What's the code coverage on the `main` branch for `github.com/my-org/my-repo`?
+- Show me the coverage summary for the `release/1.x` branch of `github.com/my-org/my-repo`.
+
+### `get_datadog_code_coverage_commit_summary`
+*Toolset: **software-delivery***\
+Fetches aggregated code coverage summary metrics for a repository commit, including total coverage, patch coverage, and service/codeowner breakdowns.
+
+- Show me the code coverage for commit `abc123abc123abc123abc123abc123abc123abcd` in `github.com/my-org/my-repo`.
+- What's the patch coverage for the latest commit on my branch?
+
 ### `get_synthetics_tests`
 *Toolset: **synthetics***\
 Searches Datadog Synthetic tests.
@@ -803,3 +817,4 @@ The Datadog MCP Server is under significant development. Use [this feedback form
 [37]: https://help.datadoghq.com/hc/en-us/requests/new
 [38]: /service_management/case_management/
 [39]: /actions/workflows/
+[40]: /bits_ai/mcp_server/setup#local-binary-authentication

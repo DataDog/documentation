@@ -2552,6 +2552,11 @@ menu:
       parent: post_incident
       identifier: post_incident_follow_ups
       weight: 301
+    - name: Postmortems
+      url: incident_response/incident_management/post_incident/postmortems
+      parent: post_incident
+      identifier: post_incident_postmortems
+      weight: 302
     - name: Analytics and Reporting
       url: incident_response/incident_management/analytics_and_reporting
       parent: incidents
@@ -2665,12 +2670,19 @@ menu:
       parent: case_management
       identifier: case_management_automation_rules
       weight: 6
+    - name: MCP Server
+      url: incident_response/case_management/mcp_server
+      parent: case_management
+      identifier: case_management_mcp_server
+      weight: 7
     - name: Troubleshooting
       url: incident_response/case_management/troubleshooting
       parent: case_management
       identifier: case_management_troubleshooting
-      weight: 7
+      weight: 8
     - name: Agents
+      weight: 7
+    - name: Agent Builder
       url: actions/agents/
       pre: robot-wui
       identifier: agents
@@ -5747,6 +5759,11 @@ menu:
       parent: software_delivery_heading
       identifier: feature_flags
       weight: 80000
+    - name: Client SDKs
+      url: feature_flags/client
+      parent: feature_flags
+      identifier: feature_flags_client
+      weight: 1
     - name: Android and Android TV
       url: feature_flags/client/android
       parent: feature_flags_client
