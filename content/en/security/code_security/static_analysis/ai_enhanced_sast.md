@@ -70,7 +70,7 @@ Datadog's AI-native SAST engine uses large language models (LLMs) to detect secu
 AI-native SAST uses a two-phase approach:
 
 1. **Detection**: An LLM scans each file and reasons about whether user-controlled data can reach a dangerous operation without being sanitized.
-2. **Verification**: A second LLM independently re-evaluates each candidate finding through taint analysis, confirming or dismissing it to reduce false positives.
+2. **Verification**: A second LLM independently re-evaluates each candidate finding through taint analysis, confirming or dismissing each finding to reduce false positives.
 
 ### Supported languages
 
