@@ -127,14 +127,24 @@ further_reading:
     <li>Click <strong>Case Number</strong> or <strong>Subject</strong> to view details.</li>
 </ol>
 
-<p><strong>Note</strong>: Historical Zendesk cases are not migrated; legacy Zendesk is read-only</p>
+<p><strong>Note</strong>: Historical Zendesk cases are not migrated; legacy Zendesk is read-only.</p>
 
 <h2>Troubleshooting</h2>
-<ul>
-    <li><strong>Cannot see new cases</strong>: Change filter from "Recently Viewed" to "Cases"</li>
-    <li><strong>Login issues</strong>: Ensure full username with <code>.ddgov.support</code> suffix</li>
-    <li><strong>Password reset not received</strong>: Use full username (with <code>.ddgov.support</code>) in Forgot Password</li>
-    <li><strong>Registration error</strong>: Account may already exist; try Forgot Password with full username</li>
-</ul>
+
+<h4>Cannot see new cases</h4>
+
+<p>Change the filter from <strong>Recently Viewed</strong> to <strong>Cases</strong>.</p>
+
+<h4>Login issues</h4>
+
+<p>Ensure your full username includes the <code>.ddgov.support</code> suffix.</p>
+
+<h4>Password reset not received</h4>
+
+<p>Use your full username (with the <code>.ddgov.support</code> suffix) in the <strong>Forgot Password</strong> flow.</p>
+
+<h4>Registration error</h4>
+
+<p>Your account may already exist. Try the <strong>Forgot Password</strong> flow with your full username.</p>
 
 {{< /site-region >}}
