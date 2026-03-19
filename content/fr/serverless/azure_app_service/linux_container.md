@@ -38,7 +38,7 @@ Les métriques personnalisées sont également collectées via le traceur. Voir 
 #### Journaux
 Le sidecar Datadog utilise le suivi de fichiers pour collecter les journaux. Datadog recommande d'écrire les journaux d'application dans `/home/LogFiles/` car ce répertoire est conservé lors des redémarrages.
 
-Vous pouvez également créer un sous-répertoire, tel que `/home/LogFiles/myapp`, si vous souhaitez plus de contrôle sur ce qui est envoyé à Datadog. Cependant, si vous ne suivez pas tous les fichiers journaux dans `/home/LogFiles`, alors les journaux d'application du service d'application Azure liés aux démarrages et aux erreurs ne sont pas collectés.
+Vous pouvez également créer un sous-répertoire, tel que `/home/LogFiles/myapp`, si vous souhaitez plus de contrôle sur ce qui est envoyé à Datadog. Cependant, si vous ne taillez pas tous les fichiers journaux dans `/home/LogFiles`, alors les journaux d'application du service d'application Azure liés aux démarrages et aux erreurs ne sont pas collectés.
 
 Pour configurer la journalisation dans votre application, consultez [Collecte de journaux Node.js][103]. Pour configurer la corrélation des journaux de trace, consultez [Corrélation des journaux et des traces Node.js][104].
 
@@ -49,15 +49,15 @@ Pour configurer la journalisation dans votre application, consultez [Collecte de
 {{% /tab %}}
 {{% tab "Python" %}}
 #### Traçage
-Instrumentez votre application principale avec la bibliothèque `dd-trace-py`. Consultez [Tracer les applications Python][201] pour des instructions.
+Instrumentez votre application principale avec la bibliothèque `dd-trace-py`. Consultez [Tracer les applications Python][201] pour les instructions.
 
 #### Métriques
-Les métriques personnalisées sont également collectées via le traceur. Voir les [exemples de code][202].
+Les métriques personnalisées sont également collectées via le traceur. Consultez les [exemples de code][202].
 
 #### Journaux
 Le sidecar Datadog utilise le suivi de fichiers pour collecter des journaux. Datadog recommande d'écrire les journaux d'application dans `/home/LogFiles/` car ce répertoire est conservé lors des redémarrages.
 
-Vous pouvez également créer un sous-répertoire, tel que `/home/LogFiles/myapp`, si vous souhaitez plus de contrôle sur ce qui est envoyé à Datadog. Cependant, si vous ne suivez pas tous les fichiers journaux dans `/home/LogFiles`, alors les journaux d'application du service d'application Azure liés aux démarrages et aux erreurs ne sont pas collectés.
+Vous pouvez également créer un sous-répertoire, tel que `/home/LogFiles/myapp`, si vous souhaitez plus de contrôle sur ce qui est envoyé à Datadog. Cependant, si vous ne taillez pas tous les fichiers journaux dans `/home/LogFiles`, alors les journaux d'application du service d'application Azure liés aux démarrages et aux erreurs ne sont pas collectés.
 
 Pour configurer la journalisation dans votre application, consultez [Collecte de journaux Node.js][203]. Pour configurer la corrélation des journaux de trace, consultez [Corrélation des journaux et des traces Node.js][204].
 
@@ -68,15 +68,15 @@ Pour configurer la journalisation dans votre application, consultez [Collecte de
 {{% /tab %}}
 {{% tab "Java" %}}
 #### Traçage
-Instrumentez votre application principale avec la bibliothèque `dd-trace-java`. Consultez [Tracer les applications Java][301] pour des instructions.
+Instrumentez votre application principale avec la bibliothèque `dd-trace-java`. Consultez [Tracer les applications Java][301] pour les instructions.
 
 #### Métriques
-Les métriques personnalisées sont également collectées via le traceur. Voir les [exemples de code][302].
+Les métriques personnalisées sont également collectées via le traceur. Consultez les [exemples de code][302].
 
 #### Journaux
 Le sidecar Datadog utilise le suivi de fichiers pour collecter les journaux. Datadog recommande d'écrire les journaux d'application dans `/home/LogFiles/` car ce répertoire est conservé lors des redémarrages.
 
-Vous pouvez également créer un sous-répertoire, tel que `/home/LogFiles/myapp`, si vous souhaitez plus de contrôle sur ce qui est envoyé à Datadog. Cependant, si vous ne suivez pas tous les fichiers journaux dans `/home/LogFiles`, alors les journaux d'application du service d'application Azure liés aux démarrages et aux erreurs ne sont pas collectés.
+Vous pouvez également créer un sous-répertoire, tel que `/home/LogFiles/myapp`, si vous souhaitez plus de contrôle sur ce qui est envoyé à Datadog. Cependant, si vous ne taillez pas tous les fichiers journaux dans `/home/LogFiles`, alors les journaux d'application du service d'application Azure liés aux démarrages et aux erreurs ne sont pas collectés.
 
 Pour configurer la journalisation dans votre application, consultez [Collecte de journaux Node.js][303]. Pour configurer la corrélation des journaux de trace, consultez [Corrélation des journaux et des traces Node.js][304].
 
@@ -89,7 +89,7 @@ Pour configurer la journalisation dans votre application, consultez [Collecte de
 #### Traçage
 Instrumentez votre application principale avec la bibliothèque `dd-trace-dotnet`.
 
-1. Ajoutez les lignes suivantes au Dockerfile de votre application principale. Cela installe et configure le traceur Datadog dans le conteneur de votre application.
+1. Ajoutez les lignes suivantes au Dockerfile de votre application principale. Cela installe et configure le traceur Datadog dans votre conteneur d'application.
    {{< code-block lang="dockerfile" >}}
    RUN mkdir -p /datadog/tracer
    RUN mkdir -p /home/LogFiles/dotnet
@@ -100,7 +100,7 @@ Instrumentez votre application principale avec la bibliothèque `dd-trace-dotnet
 
 2. Construisez l'image et poussez-la vers votre registre de conteneurs préféré.
 
-**Exemple complet de Dockerfile**
+** Exemple complet de Dockerfile**
 
 {{< highlight dockerfile "hl_lines=22-27" >}}
 # Stage 1: Build the application
@@ -141,9 +141,9 @@ Pour plus d'informations, consultez [Tracer les applications .NET][401].
 Les métriques personnalisées sont également collectées via le traceur. Consultez les [exemples de code][402].
 
 #### Journaux
-Le sidecar Datadog utilise le suivi de fichiers pour collecter les journaux. Datadog recommande d'écrire les journaux d'application dans `/home/LogFiles/` car ce répertoire est conservé entre les redémarrages.
+Le sidecar Datadog utilise le suivi de fichiers pour collecter les journaux. Datadog recommande d'écrire les journaux d'application dans `/home/LogFiles/` car ce répertoire est conservé lors des redémarrages.
 
-Vous pouvez également créer un sous-répertoire, tel que `/home/LogFiles/myapp`, si vous souhaitez plus de contrôle sur ce qui est envoyé à Datadog. Cependant, si vous ne suivez pas tous les fichiers journaux dans `/home/LogFiles`, alors les journaux d'application du service Azure App liés aux démarrages et aux erreurs ne sont pas collectés.
+Vous pouvez également créer un sous-répertoire, tel que `/home/LogFiles/myapp`, si vous souhaitez plus de contrôle sur ce qui est envoyé à Datadog. Cependant, si vous ne suivez pas tous les fichiers journaux dans `/home/LogFiles`, alors les journaux d'application Azure App Service liés aux démarrages et aux erreurs ne sont pas collectés.
 
 Pour configurer la journalisation dans votre application, consultez [Collecte de journaux C#][403]. Pour configurer la corrélation des journaux de trace, consultez [Corrélation des journaux et des traces .NET][404].
 
@@ -155,17 +155,17 @@ Pour configurer la journalisation dans votre application, consultez [Collecte de
 {{% /tab %}}
 {{% tab "Go" %}}
 #### Traçage
-Instrumentez votre application principale avec la bibliothèque `dd-trace-go`. Voir [Tracing Go applications][501] pour les instructions.
+Instrumentez votre application principale avec la bibliothèque `dd-trace-go`. Consultez [Tracer les applications Go][501] pour des instructions.
 
 #### Métriques
-Les métriques personnalisées sont également collectées via le traceur. Voir les [exemples de code][502].
+Les métriques personnalisées sont également collectées via le traceur. Consultez les [exemples de code][502].
 
 #### Journaux
 Le sidecar Datadog utilise le suivi de fichiers pour collecter les journaux. Datadog recommande d'écrire les journaux d'application dans `/home/LogFiles/` car ce répertoire est conservé lors des redémarrages.
 
-Vous pouvez également créer un sous-répertoire, tel que `/home/LogFiles/myapp`, si vous souhaitez plus de contrôle sur ce qui est envoyé à Datadog. Cependant, si vous ne suivez pas tous les fichiers journaux dans `/home/LogFiles`, alors les journaux d'application du service d'application Azure liés aux démarrages et aux erreurs ne sont pas collectés.
+Vous pouvez également créer un sous-répertoire, tel que `/home/LogFiles/myapp`, si vous souhaitez plus de contrôle sur ce qui est envoyé à Datadog. Cependant, si vous ne taillez pas tous les fichiers journaux dans `/home/LogFiles`, alors les journaux d'application du service d'application Azure liés aux démarrages et aux erreurs ne sont pas collectés.
 
-Pour configurer la journalisation dans votre application, voir [Node.js Log Collection][503]. Pour configurer la corrélation des journaux de trace, voir [Correlating Node.js Logs and Traces][504].
+Pour configurer la journalisation dans votre application, consultez [Collecte de journaux Node.js][503]. Pour configurer la corrélation des journaux de trace, consultez [Corrélation des journaux et des traces Node.js][504].
 
 [501]: /fr/tracing/trace_collection/automatic_instrumentation/dd_libraries/go
 [502]: /fr/metrics/custom_metrics/dogstatsd_metrics_submission/?code-lang=go#code-examples
@@ -174,17 +174,17 @@ Pour configurer la journalisation dans votre application, voir [Node.js Log Coll
 {{% /tab %}}
 {{% tab "PHP" %}}
 #### Traçage
-Instrumentez votre application principale avec la bibliothèque `dd-trace-php`. Voir [Tracing PHP applications][601] pour les instructions.
+Instrumentez votre application principale avec la bibliothèque `dd-trace-php`. Consultez [Tracer les applications PHP][601] pour des instructions.
 
 #### Métriques
-Les métriques personnalisées sont également collectées via le traceur. Voir les [exemples de code][602].
+Les métriques personnalisées sont également collectées via le traceur. Consultez les [exemples de code][602].
 
 #### Journaux
 Le sidecar Datadog utilise le suivi de fichiers pour collecter les journaux. Datadog recommande d'écrire les journaux d'application dans `/home/LogFiles/` car ce répertoire est conservé lors des redémarrages.
 
-Vous pouvez également créer un sous-répertoire, tel que `/home/LogFiles/myapp`, si vous souhaitez plus de contrôle sur ce qui est envoyé à Datadog. Cependant, si vous ne suivez pas tous les fichiers journaux dans `/home/LogFiles`, alors les journaux d'application du service d'application Azure liés aux démarrages et aux erreurs ne sont pas collectés.
+Vous pouvez également créer un sous-répertoire, tel que `/home/LogFiles/myapp`, si vous souhaitez plus de contrôle sur ce qui est envoyé à Datadog. Cependant, si vous ne taillez pas tous les fichiers journaux dans `/home/LogFiles`, alors les journaux d'application du service d'application Azure liés aux démarrages et aux erreurs ne sont pas collectés.
 
-Pour configurer la journalisation dans votre application, voir [Node.js Log Collection][603]. Pour configurer la corrélation des journaux de trace, voir [Correlating Node.js Logs and Traces][604].
+Pour configurer la journalisation dans votre application, consultez [Collecte de journaux Node.js][603]. Pour configurer la corrélation des journaux de trace, consultez [Corrélation des journaux et des traces Node.js][604].
 
 [601]: /fr/tracing/trace_collection/automatic_instrumentation/dd_libraries/php/#getting-started
 [602]: /fr/metrics/custom_metrics/dogstatsd_metrics_submission/?code-lang=php#code-examples
@@ -220,7 +220,7 @@ datadog-ci aas instrument -s <subscription-id> -g <resource-group-name> -n <app-
 
 Définissez votre site Datadog sur {{< region-param key="dd_site" code="true" >}}. Par défaut, c'est `datadoghq.com`.
 
-**Remarque :** Pour les applications .NET, ajoutez le `--dotnet` drapeau pour inclure les variables d'environnement supplémentaires requises par le traceur .NET, et en plus le `--musl` drapeau si votre conteneur utilise dotnet sur une image musl libc (comme Alpine Linux).
+**Remarque :** Pour les applications .NET, ajoutez le `--dotnet` drapeau pour inclure les variables d'environnement supplémentaires requises par le traceur .NET, et ajoutez également le `--musl` drapeau si votre conteneur utilise dotnet sur une image musl libc (comme Alpine Linux).
 
 Des drapeaux supplémentaires, comme `--service` et `--env`, peuvent être utilisés pour définir les balises de service et d'environnement. Pour une liste complète des options, exécutez `datadog-ci aas instrument --help`.
 
@@ -234,14 +234,14 @@ npx @datadog/datadog-ci aas instrument -s <subscription-id> -g <resource-group-n
 ```
 
 [601]: https://github.com/DataDog/datadog-ci#how-to-install-the-cli
-[602]: https://learn.microsoft.com/fr-fr/cli/azure/install-azure-cli
+[602]: https://learn.microsoft.com/en-us/cli/azure/install-azure-cli
 [603]: https://portal.azure.com/#cloudshell/
 {{% /tab %}}
 {{% tab "Terraform" %}}
 
 <div class="alert alert-danger">Parce que la ressource Azure Web App for Containers ne prend pas directement en charge les sitecontainers, vous devez vous attendre à un dérive dans votre configuration.</div>
 
-Le [module Datadog Terraform pour les applications Web Linux][1] enveloppe la ressource [azurerm_linux_web_app][2] et configure automatiquement votre application Web pour la surveillance sans serveur de Datadog en ajoutant les variables d'environnement requises et le sidecar serverless-init.
+Le [module Datadog Terraform pour les applications Web Linux][1] enveloppe la ressource [azurerm_linux_web_app][2] et configure automatiquement votre application Web pour la surveillance sans serveur Datadog en ajoutant les variables d'environnement requises et le sidecar serverless-init.
 
 Si vous n'avez pas encore configuré Terraform, [installez Terraform][3], créez un nouveau répertoire et créez un fichier appelé `main.tf`.
 
@@ -295,7 +295,7 @@ module "my_web_app" {
 
 Enfin, exécutez `terraform apply`, et suivez les invites.
 
-Le [module Datadog Linux Web App][1] ne déploie que la ressource Web App, donc vous devez construire et pousser votre conteneur séparément.
+Le [module Datadog Linux Web App][1] ne déploie que la ressource Web App, vous devez donc construire et pousser votre conteneur séparément.
 
 [1]: https://registry.terraform.io/modules/DataDog/web-app-datadog/azurerm/latest/submodules/linux
 [2]: https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/linux_web_app
@@ -370,7 +370,7 @@ Redéployez votre modèle mis à jour :
 az deployment group create --resource-group <RESOURCE GROUP> --template-file <TEMPLATE FILE>
 ```
 
-Consultez l'[onglet Manuel](?tab=manual#instrumentation) pour des descriptions de toutes les variables d'environnement.
+Voir l'onglet [Manuel](?tab=manual#instrumentation) pour des descriptions de toutes les variables d'environnement.
 
 
 {{% /tab %}}
@@ -465,14 +465,14 @@ Redéployez votre modèle mis à jour :
 az deployment group create --resource-group <RESOURCE GROUP> --template-file <TEMPLATE FILE>
 ```
 
-Consultez l'[onglet Manuel](?tab=manual#instrumentation) pour des descriptions de toutes les variables d'environnement.
+Voir l'onglet [Manuel](?tab=manual#instrumentation) pour des descriptions de toutes les variables d'environnement.
 
 {{% /tab %}}
 {{% tab "Manuel" %}}
 
-#### Conteneur sidecar
+#### Conteneur Sidecar
 
-1. Dans le portail Azure, allez dans **Centre de déploiement** et sélectionnez **Ajouter**.
+1. Dans le portail Azure, allez à **Centre de déploiement** et sélectionnez **Ajouter**.
 2. Dans le formulaire **Modifier le conteneur**, fournissez les éléments suivants :
    - **Source de l'image** : Docker Hub ou autres registres
    - **Type d'image** : Public
@@ -483,14 +483,14 @@ Consultez l'[onglet Manuel](?tab=manual#instrumentation) pour des descriptions d
 
 #### Paramètres de l'application
 
-Dans vos **Paramètres d'application** dans Azure, définissez les variables d'environnement suivantes sur votre conteneur principal et le conteneur sidecar. Alternativement, définissez ces variables sur votre conteneur principal et activez l'option **Autoriser l'accès à tous les paramètres d'application** .
+Dans vos **Paramètres d'application** dans Azure, définissez les variables d'environnement suivantes sur votre conteneur principal et le conteneur sidecar. Alternativement, définissez ces variables sur votre conteneur principal et activez l'option **Autoriser l'accès à tous les paramètres d'application**.
 
 {{< img src="serverless/azure_app_service/app_settings.png" alt="Dans Azure, une section Variables d'environnement. Une option 'Allow access to all app settings' est activée avec une case à cocher." >}}
 
 - `DD_API_KEY` : Votre [clé API Datadog][701]
 - `DD_SERVICE` : Comment vous souhaitez taguer votre service. Par exemple, `sidecar-azure`
-- `DD_ENV`: Comment souhaitez-vous étiqueter votre environnement. Par exemple, `prod`
-- `WEBSITES_ENABLE_APP_SERVICE_STORAGE`: `true`. Définir cette variable d'environnement permet au montage `/home/` de persister et d'être partagé avec le sidecar.
+- `DD_ENV` : Comment vous souhaitez taguer votre environnement. Par exemple, `prod`
+- `WEBSITES_ENABLE_APP_SERVICE_STORAGE` : `true`. Définir cette variable d'environnement permet au `/home/` montage de persister et d'être partagé avec le sidecar.
 - `DD_SERVERLESS_LOG_PATH`: Où vous écrivez vos journaux. Par exemple, `/home/LogFiles/*.log` ou `/home/LogFiles/myapp/*.log`
 - `DD_AAS_INSTANCE_LOGGING_ENABLED`: Lorsque `true`, la collecte des journaux est automatiquement configurée pour un chemin de fichier supplémentaire : `/home/LogFiles/*$COMPUTERNAME*.log`
 - `DD_AAS_INSTANCE_LOG_FILE_DESCRIPTOR`: Un descripteur de fichier optionnel utilisé pour un suivi de fichier plus précis. Recommandé pour les scénarios avec une rotation fréquente des journaux. Par exemple, définir `_default_docker` configure le tailleur de journaux pour ignorer les fichiers tournés et se concentrer uniquement sur le fichier journal actif d'Azure.
@@ -503,7 +503,7 @@ Dans vos **Paramètres d'application** dans Azure, définissez les variables d'e
 <h4>Pour les applications .NET : Variables d'environnement supplémentaires requises</h4>
 </summary>
 
-Si vous configurez la surveillance d'une application .NET, configurez les variables d'environnement **requises** suivantes.
+Si vous configurez la surveillance pour une application .NET, configurez les variables d'environnement **requises** suivantes.
 
 | Nom de la variable | Valeur |
 | ------------- | ----- |
@@ -525,9 +525,9 @@ Si vous configurez la surveillance d'une application .NET, configurez les variab
 Le Profiler Continu de Datadog est disponible en aperçu pour Python et Node.js sur Linux Azure App Service.
 </div>
 
-Pour activer le [Profiler Continu][4], définissez la variable d'environnement `DD_PROFILING_ENABLED=true` dans votre conteneur d'application.
+Pour activer le [Profiler Continu][4], définissez la variable d'environnement `DD_PROFILING_ENABLED=true` dans le conteneur de votre application.
 
-## Exemple d'application
+## Application exemple
 L'exemple suivant contient une seule application avec traçage, métriques et journaux configurés.
 
 {{< tabs >}}
