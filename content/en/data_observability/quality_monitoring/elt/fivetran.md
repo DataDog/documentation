@@ -26,6 +26,7 @@ Follow the [Fivetran System Keys documentation][1] to generate an API key and se
 
 ```json
 [
+  {"resource_type": "ACCOUNT", "access_level": "READ"},
   {"resource_type": "DESTINATION", "access_level": "READ"},
   {"resource_type": "CONNECTOR", "access_level": "READ"}
 ]
