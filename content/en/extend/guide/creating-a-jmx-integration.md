@@ -20,6 +20,7 @@ The JMX integration contains specific init and instance configs:
 init_config:
     is_jmx: true                   # Identifies the integration type as JMX.
     collect_default_metrics: true  # Collect metrics declared in `metrics.yaml`.
+    use_canonical_bean_name: true  # Optional. When true, match bean_regex against canonical (alphabetically ordered) MBean names. Recommended true for new setups; default false for backward compatibility. Can be overridden per instance.
 
 instances:
   - host: <HOST>                   # JMX hostname
@@ -42,7 +43,7 @@ Edit the `metrics.yaml` to define the filters for collecting metrics.
 
 See the [JMX integration][5] for details on the metrics filters format.
 
-[JMXFetch test cases][6] provide examples of how metrics filters work.  
+[JMXFetch test cases][6] provide examples of how metrics filters work.
 
 Example of `metrics.yaml`:
 

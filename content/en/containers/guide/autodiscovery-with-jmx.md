@@ -21,7 +21,7 @@ further_reading:
 
 ---
 
-In containerized environments there are a few differences in how the Agent connects to the JMX server. Autodiscovery features make it possible to dynamically setup these integrations. Use Datadog's JMX based integrations to collect JMX applications metrics from your pods in Kubernetes. 
+In containerized environments there are a few differences in how the Agent connects to the JMX server. Autodiscovery features make it possible to dynamically setup these integrations. Use Datadog's JMX based integrations to collect JMX applications metrics from your pods in Kubernetes.
 
 If you are using the Java tracer for your applications, you can alternatively take advantage of the [Java runtime metrics][2] feature to send these metrics to the Agent.
 
@@ -67,7 +67,7 @@ Use one of the following methods:
 
 ### Autodiscovery annotations
 
-In this method, a JMX check configuration is applied using annotations on your Java-based Pods. This allows the Agent to automatically configure the JMX check when a new container starts. Ensure these annotations are on the created Pod, and not on the object (Deployment, DaemonSet, etc.) creating the Pod. 
+In this method, a JMX check configuration is applied using annotations on your Java-based Pods. This allows the Agent to automatically configure the JMX check when a new container starts. Ensure these annotations are on the created Pod, and not on the object (Deployment, DaemonSet, etc.) creating the Pod.
 
 Use the following template for Autodiscovery annotations:
 
@@ -186,7 +186,7 @@ ad.datadoghq.com/<CONTAINER_NAME>.checks: |
                "FreePhysicalMemorySize": {
                  "metric_type": "gauge",
                  "alias": "jvm.free_physical_memory"
-               } 
+               }
             }
           }
         }]
@@ -197,7 +197,7 @@ ad.datadoghq.com/<CONTAINER_NAME>.checks: |
       }]
     }
   }
-```          
+```
 
 See the [JMX integration][6] documentation for more information about the formatting for these metrics.
 
@@ -207,9 +207,9 @@ If you need to pass a more complex custom configuration for your Datadog-JMX int
 
 #### 1. Compose configuration file
 
-When using this method, the Agent needs a configuration file and an optional `metrics.yaml` file for the metrics to collect. These files can either be mounted into the Agent pod or built into the container image. 
+When using this method, the Agent needs a configuration file and an optional `metrics.yaml` file for the metrics to collect. These files can either be mounted into the Agent pod or built into the container image.
 
-The configuration file naming convention is to first identify your desired integration name from the [prerequisite steps of available integrations](#available-jmx-integrations). Once this is determined, the Agent needs a configuration file named relative to that integration—_or_ within that integration's config directory. 
+The configuration file naming convention is to first identify your desired integration name from the [prerequisite steps of available integrations](#available-jmx-integrations). Once this is determined, the Agent needs a configuration file named relative to that integration—_or_ within that integration's config directory.
 
 For example, for the [Tomcat][81] integration, create _either_:
 - `/etc/datadog-agent/conf.d/tomcat.yaml`, or
@@ -225,6 +225,7 @@ ad_identifiers:
 
 init_config:
   is_jmx: true
+  use_canonical_bean_name: true
   conf:
     <METRICS_TO_COLLECT>
 
@@ -329,8 +330,8 @@ spec:
           -Dcom.sun.management.jmxremote.local.only=false
           -Dcom.sun.management.jmxremote.port=<JMX_PORT>
           -Dcom.sun.management.jmxremote.rmi.port=<JMX_PORT>
-          -Djava.rmi.server.hostname=$(POD_IP)   
-```          
+          -Djava.rmi.server.hostname=$(POD_IP)
+```
 
 ## Available JMX integrations
 The Datadog Agent comes with several JMX integrations pre-configured.
