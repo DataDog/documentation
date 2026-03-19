@@ -196,15 +196,15 @@ To see metrics about your Enrichment Table processor using a Reference Table, ad
 `pipelines.enrichment_cache_misses_total`
 : Number of cache misses, that is logs that required buffering and sending a request to the Reference Tables API.
 
-`pipelines.reference_table_cached_rows`
-: This gauge metric reports the number of rows stored in the local cache. The tag `found:true` reports rows existing in the table, and `found:false` reports rows that do not exist in the table.
-
 `pipelines.component_errors_total`
 : Number of logs that cannot be enriched because of an error. These errors are reported with the tag `error_code=did_not_enrich_event`.
 : The tag `reason` may contain the following values:<br>- `target_exists`: The target value to store the enriched data already exists and is not an object.<br>- `too_many_pending_lookups`: The buffer or lookup queue is full.<br>- `lookup_failed`: The lookup key was not found in the log, not a string or an integer.<br>- `reference_table_read_error`: Unrecoverable errors or too many consecutive errors occurred while trying to read the Reference Table.
 
 
 The metrics below are common to all processors consuming the same Reference Table and use the tags `component_type:enrichment_table`, `component_id=reference_table_<table_uuid>` and `reference_table:<table_uuid>`.
+
+`pipelines.reference_table_cached_rows`
+: This gauge metric reports the number of rows stored in the local cache. The tag `found:true` reports rows existing in the table, and `found:false` reports rows that do not exist in the table.
 
 `pipelines.reference_table_queued_keys`
 : This gauge metric reports the number of row keys waiting to be read from the Reference Tables API. The queue has a maximum capacity of 5,000 keys. When a log attempts to insert a key that would exceed this limit, the log is immediately sent downstream without enrichment.
