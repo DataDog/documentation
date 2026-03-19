@@ -148,7 +148,7 @@ merchant_info {
 
 ### Using Reference Tables
 
-[Reference Tables][4] allow you to store information like customer details, asset lists, and service dependency information in Datadog. The Enrichment Table processor pulls rows from Reference Tables on demand and caches them locally. Table rows persist in the cache for about 10 minutes (30 minutes for a negative lookup, i.e. if the row was not found in the table). After that, they are evicted or refreshed.
+[Reference Tables][4] allow you to store information like customer details, asset lists, and service dependency information in Datadog. The Enrichment Table processor pulls rows from Reference Tables on demand and caches them locally. Table rows persist in the cache for about 10 minutes (30 minutes for a negative lookup, that is if the row was not found in the table). After that, they are evicted or refreshed.
 
 When the processor encounters a log that does not have a corresponding row in the cache, the log data is buffered in memory until the row is retrieved from the Reference Table. If the buffer reaches its maximum capacity, it begins sending the oldest buffered logs downstream without enrichment. The processor does not exert upstream backpressure.
 
@@ -158,7 +158,7 @@ If an authentication error occurs while connecting to the Reference Table or aft
 
 If an error that causes a log to be sent without enrichment occurs, you can view it in the Worker logs. It also increments the [`pipelines.component_errors_total`](#processor-metrics) metric.
 
-Datadog does not recommend using the processor on a log field with high cardinality (in the order of 10,000+ possible values within a timeframe of 10 minutes). The Reference Tables API is subject to rate limits and might deny Worker requests. Reach out to [Datadog support][5] if you continue to notice rate limit warnings in the Worker logs while running the processor.
+Datadog does not recommend using the processor on a log field with high cardinality (in the order of 10,000+ possible values within a time frame of 10 minutes). The Reference Tables API is subject to rate limits and might deny Worker requests. Reach out to [Datadog support][5] if you continue to notice rate limit warnings in the Worker logs while running the processor.
 
 ### Metrics
 
@@ -185,16 +185,17 @@ To see buffer metrics for your Enrichment Table processor, add these tags to buf
 
 #### Reference Table metrics
 
-To see metrics about your Enrichment Table processor using a Reference Table, add the tags `component_type:enrichment_table` and `component_id=<processor_id>` or `reference_table:<table_uuid>` to the metrics:
+To see metrics about your Enrichment Table processor using a Reference Table, add the tags `component_type:enrichment_table` and `component_id=<processor_id>` to the metrics below. The tag `reference_table:<table_uuid>` can also be used to aggregate across all processors using the same Reference Table.
 
 `pipelines.enrichment_rows_not_found_total`
 : This counter is incremented for each processed log that does not have a corresponding row in the table.
 
 `pipelines.enrichment_cache_hits_total`
-: Number of cache hits, i.e. logs that could be enriched without being buffered.
+: Number of cache hits, that is logs that could be enriched without being buffered.
 
 `pipelines.enrichment_cache_misses_total`
-: Number of cache misses, i.e. logs that required buffering and sending a request to the Reference Tables API.
+: Number of cache misses, that is logs that required buffering and sending a request to the Reference Tables API.
+
 `pipelines.reference_table_cached_rows`
 : This gauge metric reports the number of rows stored in the local cache. The tag `found:true` reports rows existing in the table, and `found:false` reports rows that do not exist in the table.
 
@@ -204,9 +205,6 @@ To see metrics about your Enrichment Table processor using a Reference Table, ad
 
 
 The metrics below are common to all processors consuming the same Reference Table and use the tags `component_type:enrichment_table`, `component_id=reference_table_<table_uuid>` and `reference_table:<table_uuid>`.
-
-`pipelines.reference_table_cached_rows`
-: This gauge reports the number of Reference Table entries currently cached by the Worker. Use the tag `found:true` (resp. `found:false`) to see the entries associated to a positive (resp. negative) lookup, i.e. a row was found (resp. not found) in the Reference Table.
 
 `pipelines.reference_table_queued_keys`
 : This gauge metric reports the number of row keys waiting to be read from the Reference Tables API. The queue has a maximum capacity of 5,000 keys. When a log attempts to insert a key that would exceed this limit, the log is immediately sent downstream without enrichment.
