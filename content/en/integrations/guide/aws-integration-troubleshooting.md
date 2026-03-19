@@ -129,7 +129,8 @@ As this can be counter intuitive, the metrics **aws.elb.healthy_host_count_dedup
 
 Datadog collects metrics only from the AWS regions you select in the [AWS integration page][16]. If you do not see data for a specific service, confirm the region where that resource is deployed is enabled.
 
-Keep in mind:
+#### Considerations
+
 - **Global services**: Some AWS services (such as IAM, CloudFront, and Route 53) are global and not tied to a specific region. Metrics for these services typically appear under `us-east-1` regardless of the region configuration in Datadog.
 - **Regional services**: Most AWS services are regional. Datadog only collects metrics for regions explicitly enabled in the integration tile.
 - **Opt-in regions**: AWS opt-in regions (such as `af-south-1`, `ap-east-1`, and `me-south-1`) must be enabled in both your [AWS account settings][22] and the Datadog integration tile. If the region is not enabled on the AWS side, Datadog cannot collect data from it.
