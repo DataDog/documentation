@@ -66,7 +66,7 @@ Proporcionamos un contenedor init específico **para cada versión del controlad
 </div>
 
 ## Interacción con OpenTelemetry
-Por defecto, ingress-NGINX incluye un módulo de OpenTelemetry que puede activarse mediante el ajuste `enable-OpenTelemetry: true` 
+Por defecto, ingress-nginx incluye un módulo de OpenTelemetry que puede activarse mediante el ajuste `enable-opentelemetry: true` 
 en el [ConfigMap de ingress-NGINX][6].
 Sin embargo, si utilizas `nginx-datadog` para el rastreo, recomendamos **deshabilitar** OpenTelemetry para evitar la duplicación de datos de rastreo de los módulos y 
 los módulos de OpenTelemetry y Datadog.
