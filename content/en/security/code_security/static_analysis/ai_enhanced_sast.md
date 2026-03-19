@@ -3,14 +3,14 @@ title: AI-Enhanced Static Code Analysis
 description: Automate security decision-making across the entire static analysis lifecycle
 disable_toc: false
 aliases:
-- /security/code_security/static_analysis/malicious_pr_protection/
+    - /security/code_security/static_analysis/malicious_pr_protection/
 further_reading:
-- link: "logs/processing/pipelines"
-  tag: "Documentation"
-  text: "Log processing pipelines"
-- link: "https://www.datadoghq.com/blog/using-llms-to-filter-out-false-positives"
-  tag: "Blog"
-  text: "Using LLMs to filter out false positives from static code analysis"
+    - link: 'logs/processing/pipelines'
+      tag: 'Documentation'
+      text: 'Log processing pipelines'
+    - link: 'https://www.datadoghq.com/blog/using-llms-to-filter-out-false-positives'
+      tag: 'Blog'
+      text: 'Using LLMs to filter out false positives from static code analysis'
 ---
 
 Static Code Analysis (SAST) uses AI to help automate detection, validation, and remediation across the vulnerability management lifecycle.
@@ -18,15 +18,14 @@ This page provides an overview of these features.
 
 ## Summary of AI features in SAST
 
-| Step of vulnerability management lifecycle                                 | Feature                                                  | Trigger Point                           | Impact                                               |
-| --------------------------------------- | -------------------------------------------------------- | --------------------------------------- | --------------------------------------------------------- |
-| [Detection](#detection)                 | Malicious PR protection: Detect potentially malicious changes or suspicious diffs | At PR time                | Flags PRs introducing novel risky code          |
-| [Detection](#ai-native-sast)            | AI-native SAST: LLM-based taint analysis to detect security vulnerabilities with higher accuracy | At scan time (Datadog Hosted Scans only) | Identifies contextually complex vulnerabilities missed by rule-based analysis |
-| [Validation](#validation-and-triage) | False positive filtering: Deprioritize low-likelihood findings         | After scan                  | Reduce noise, allow focus on actual issues                |
-| [Remediation](#remediation)                    | Batched remediation: Generate suggested fixes (and optionally PRs) for one or multiple vulnerabilities                 | After scan | Reduces developer effort, accelerates fix cycle           |
+| Step of vulnerability management lifecycle | Feature                                                                                                | Trigger Point                            | Impact                                                                        |
+| ------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ---------------------------------------- | ----------------------------------------------------------------------------- |
+| [Detection](#detection)                    | Malicious PR protection: Detect potentially malicious changes or suspicious diffs                      | At PR time                               | Flags PRs introducing novel risky code                                        |
+| [Detection](#ai-native-sast)               | AI-native SAST: LLM-based taint analysis to detect security vulnerabilities with higher accuracy       | At scan time (Datadog Hosted Scans only) | Identifies contextually complex vulnerabilities missed by rule-based analysis |
+| [Validation](#validation-and-triage)       | False positive filtering: Deprioritize low-likelihood findings                                         | After scan                               | Reduce noise, allow focus on actual issues                                    |
+| [Remediation](#remediation)                | Batched remediation: Generate suggested fixes (and optionally PRs) for one or multiple vulnerabilities | After scan                               | Reduces developer effort, accelerates fix cycle                               |
 
 ## Detection
-
 
 {{< callout url="https://www.datadoghq.com/product-preview/malicious-pr-protection/" >}}
 Malicious PR protection is in Preview and supports GitHub repositories only. Click <strong>Request Access</strong> and complete the form.
@@ -54,11 +53,11 @@ Examples include the [tj-actions/changed-files breach (March 2025)][2] and [obfu
 Detections from Datadog SAST on potentially malicious PRs can be found in [Security Signals][4] from the rule ID `def-000-wnp`.
 
 There are two potential verdicts: `malicious` and `benign`. They can be filtered for using:
+
 - `@malicious_pr_protection.scan.verdict:malicious`
 - `@malicious_pr_protection.scan.verdict:benign`.
 
 Signals can be triaged directly in Datadog (assign, create a case, or declare an incident), or routed externally using [Datadog Workflow Automation][5].
-
 
 ## AI-native SAST
 
@@ -69,13 +68,14 @@ AI-native SAST is in Preview and is only available for Datadog Hosted Scans.
 Datadog's AI-native SAST engine uses large language models (LLMs) to detect security vulnerabilities by reasoning about how data flows through your code. Unlike rule-based static analysis, it can identify vulnerabilities that require contextual understanding of application logic.
 
 Scans use a two-phase approach:
+
 1. **Detection**: An LLM scans each file and reasons about whether user-controlled data can reach a dangerous operation without being sanitized.
 2. **Verification**: A second LLM independently re-evaluates each candidate finding through taint analysis, confirming or dismissing it to reduce false positives.
 
 ### Supported languages
 
 | Language | Status      |
-|----------|-------------|
+| -------- | ----------- |
 | Java     | Available   |
 | Python   | Available   |
 | Go       | Available   |
@@ -83,23 +83,24 @@ Scans use a two-phase approach:
 
 ### Detected vulnerability types
 
-| Vulnerability                 | CWE     |
-|-------------------------------|---------|
-| SQL Injection                 | CWE-89  |
-| Command Injection             | CWE-77  |
-| Cross-Site Scripting (XSS)    | CWE-79  |
-| XPath Injection               | CWE-643 |
-| Path Traversal                | CWE-22  |
-| Insecure Deserialization      | CWE-502 |
-| Broken Cryptography           | CWE-327 |
-| Weak Hashing                  | CWE-328 |
-| Weak Randomness               | CWE-330 |
-| Insecure Cookie               | CWE-614 |
-| LDAP Injection                | CWE-90  |
-| Code Injection                | CWE-94  |
-| Trust Boundary Violation      | CWE-501 |
-| Broken Access Control (IDOR)  | CWE-284 |
-| Server-Side Template Injection | CWE-1427 |
+{{% collapse-content title="Supported CWEs" level="h4" expanded=true id="ai-native-sast-cwes" %}}
+AI-native SAST detects the following vulnerability types:
+- [CWE-89: SQL Injection](https://cwe.mitre.org/data/definitions/89.html)
+- [CWE-77: Command Injection](https://cwe.mitre.org/data/definitions/77.html)
+- [CWE-79: Cross-Site Scripting (XSS)](https://cwe.mitre.org/data/definitions/79.html)
+- [CWE-643: XPath Injection](https://cwe.mitre.org/data/definitions/643.html)
+- [CWE-22: Path Traversal](https://cwe.mitre.org/data/definitions/22.html)
+- [CWE-502: Insecure Deserialization](https://cwe.mitre.org/data/definitions/502.html)
+- [CWE-327: Broken Cryptography](https://cwe.mitre.org/data/definitions/327.html)
+- [CWE-328: Weak Hashing](https://cwe.mitre.org/data/definitions/328.html)
+- [CWE-330: Weak Randomness](https://cwe.mitre.org/data/definitions/330.html)
+- [CWE-614: Insecure Cookie](https://cwe.mitre.org/data/definitions/614.html)
+- [CWE-90: LDAP Injection](https://cwe.mitre.org/data/definitions/90.html)
+- [CWE-94: Code Injection](https://cwe.mitre.org/data/definitions/94.html)
+- [CWE-501: Trust Boundary Violation](https://cwe.mitre.org/data/definitions/501.html)
+- [CWE-284: Broken Access Control (IDOR)](https://cwe.mitre.org/data/definitions/284.html)
+- [CWE-1427: Server-Side Template Injection](https://cwe.mitre.org/data/definitions/1427.html)
+{{% /collapse-content %}}
 
 <!-- ## AI-powered detection
 
@@ -141,6 +142,7 @@ Each finding includes a section with an explanation of the assessment. You can p
 
 {{% collapse-content title="Supported CWEs" level="h4" expanded=true id="id-for-anchoring" %}}
 False positive filtering is supported for the following CWEs:
+
 - [CWE-89: SQL Injection](https://cwe.mitre.org/data/definitions/89.html)
 - [CWE-78: OS Command Injection](https://cwe.mitre.org/data/definitions/78.html)
 - [CWE-90: LDAP Injection](https://cwe.mitre.org/data/definitions/90.html)
@@ -153,8 +155,7 @@ False positive filtering is supported for the following CWEs:
 - [CWE-94: Code Injection](https://cwe.mitre.org/data/definitions/94.html)
 - [CWE-284: Improper Access Control](https://cwe.mitre.org/data/definitions/284.html)
 - [CWE-502: Deserialization of Untrusted Data](https://cwe.mitre.org/data/definitions/502.html)
-{{% /collapse-content %}}
-
+  {{% /collapse-content %}}
 
 ## Remediation
 
@@ -169,9 +170,8 @@ To view and remediate vulnerabilities:
 1. In Datadog, navigate to [**Security** > **Code Security** > **Vulnerabilities**][6], and select **Static Code (SAST)** on the left sidebar.
 1. Select a vulnerability to open a side panel with details about the finding and the affected code.
 1. In the **Next Steps** > **Remediation** section, click **Fix with Bits**.
-
-   - To generate a fix, select [**Single fix**](#single-fix) or [**Bulk fix**](#bulk-fix-campaigns).
-   - If a fix has already been generated, select **View fix and create PR** to view the existing [remediation session](#remediation-session-details).
+    - To generate a fix, select [**Single fix**](#single-fix) or [**Bulk fix**](#bulk-fix-campaigns).
+    - If a fix has already been generated, select **View fix and create PR** to view the existing [remediation session](#remediation-session-details).
 
 ### Single fix
 
@@ -199,7 +199,7 @@ After you create a campaign, Bits AI Dev Agent loads the in-scope findings, gene
 
 #### View campaign progress
 
-To view all campaigns, navigate to **Bits AI** > **Dev Agent** > **Code Sessions** > [**Campaigns**][12]. 
+To view all campaigns, navigate to **Bits AI** > **Dev Agent** > **Code Sessions** > [**Campaigns**][12].
 
 Click a campaign to view details including session status, pull requests by repository, and remediated findings. You can click on individual sessions to review, edit, and merge fixes with the [Bits AI Dev Agent][10].
 
@@ -214,12 +214,11 @@ Each code session shows the life cycle of an AI-generated fix so you can review 
 - CI results (if enabled) to validate the patch is safe to deploy
 - Options to refine the fix or **Create PR** to apply the changes to your source code repository
 
-To open the remediation session, select the vulnerability from the [**Vulnerabilities**][6] page to open the side panel, scroll to the **Remediation** section, and select **Expand & Chat**. 
+To open the remediation session, select the vulnerability from the [**Vulnerabilities**][6] page to open the side panel, scroll to the **Remediation** section, and select **Expand & Chat**.
 
 You can also navigate to remediation sessions through the [**Campaigns**][12] and [**Code Sessions**][7] views.
 
 {{< img src="/code_security/static_analysis/single-session-sql-injection-fix-light-png.png" alt="Concluded remediation session in Bits AI Dev Agent showing generated fixes and pull request options" style="width:100%;">}}
-
 
 ## Further reading
 
