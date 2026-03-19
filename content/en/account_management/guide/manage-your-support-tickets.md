@@ -150,4 +150,7 @@ further_reading:
 
 <p>Your account may already exist. Click <strong>Forgot Password</strong> and enter your full username, including the <code>.ddgov.support</code> suffix (for example, <code>john@agency.gov.ddgov.support</code>). If you are still unable to access your account, contact <code>support@ddog-gov.com</code>.</p>
 
+<h2>Further reading</h2>
+{{< partial name="whats-next/whats-next.html" >}}
+
 {{< /site-region >}}
