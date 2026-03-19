@@ -451,6 +451,93 @@ Update your existing daemon task definition to include the following configurati
 
 For more information, see the [Cloud Network Monitoring][36] documentation.
 
+## Migrate from sidecar to daemon setup
+
+Follow these steps to migrate from the legacy sidecar deployment to the daemon deployment.
+
+### 1. Set up the daemon
+
+Follow the [Setup](#setup) instructions on this page to create and register a daemon task definition, then create the daemon on your cluster.
+
+### 2. Remove the Datadog Agent sidecar from application task definitions
+
+For each application task definition that includes a `datadog-agent` sidecar container, remove the `datadog-agent` entry from `containerDefinitions`.
+
+### 3. Update APM configuration
+
+The daemon Agent exposes its trace socket on the host filesystem rather than through a shared in-task volume. Update each application task definition to use the host path.
+
+**Remove** the shared empty volume (`"host": {}`) that was used in the sidecar setup and **replace** it with a host path volume:
+
+```json
+{
+    "containerDefinitions": [
+        {
+            "name": "<APP_CONTAINER_NAME>",
+            "environment": [
+                {
+                    "name": "DD_TRACE_AGENT_URL",
+                    "value": "unix:///var/run/datadog/apm.socket"
+                }
+            ],
+            "mountPoints": [
+                {
+                    "containerPath": "/var/run/datadog",
+                    "readOnly": true,
+                    "sourceVolume": "dd-sockets"
+                }
+            ]
+        }
+    ],
+    "volumes": [
+        {
+            "host": {
+                "sourcePath": "/var/run/datadog"
+            },
+            "name": "dd-sockets"
+        }
+    ]
+}
+```
+
+If you were previously collecting traces over UDP (using the sidecar's `localhost` address), switch to UDS using the configuration above.
+
+### 4. Update process collection
+
+The sidecar setup used `pidMode: task` to enable process collection. The daemon setup uses the `DD_PROCESS_CONFIG_PROCESS_COLLECTION_ENABLED` environment variable instead.
+
+Remove the `pidMode` parameter from your application task definitions. Then confirm the daemon task definition includes:
+
+```json
+{
+    "name": "DD_PROCESS_CONFIG_PROCESS_COLLECTION_ENABLED",
+    "value": "true"
+}
+```
+
+### 5. Register and deploy the updated task definitions
+
+After completing the changes above, register each updated application task definition and redeploy the associated services.
+
+{{< tabs >}}
+{{% tab "AWS Console" %}}
+
+1. In the AWS Console, navigate to **Elastic Container Service** > **Task Definitions**.
+2. Select your application task definition and click **Create new revision with JSON**.
+3. Apply your changes and click **Create**.
+4. Navigate to the service using this task definition, click **Update**, select the new revision, and click **Update Service**.
+
+{{% /tab %}}
+{{% tab "AWS CLI" %}}
+
+```bash
+aws ecs register-task-definition --cli-input-json file://<path-to-updated-task-definition.json>
+aws ecs update-service --cluster <CLUSTER_NAME> --service <SERVICE_NAME> --task-definition <NEW_TASK_DEFINITION_ARN>
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Sidecar setup (legacy)
 
 <div class="alert alert-warning">
