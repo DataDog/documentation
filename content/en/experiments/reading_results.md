@@ -37,7 +37,7 @@ If the entire confidence interval is above zero, then the result is statisticall
 To dive deeper into experiment results, hover over a metric and click **Chart**. This gives you the option to compare the experiment’s impact across different user segments.
 
 ### Segment-level results
-Subject level properties are based on attributes at the initial time of exposure (for example, a user's region, whether they are a new visitor, or a repeat visitor). This is useful for understanding when certain cohorts of users reacted differently to the new experience. 
+Subject-level properties are based on attributes at the initial time of exposure (for example, a user's region, whether they are a new visitor, or a repeat visitor). This is useful for understanding when certain cohorts of users reacted differently to the new experience. 
 
 {{< img src="/product_analytics/experiment/exp_segment_view.png" alt="Segment-level view of a metric split by Country ISO Code, showing a bar chart of relative lift and a data table with control and treatment values per country." style="width:90%;" >}}
 
