@@ -23,7 +23,7 @@ The Agent supports four infrastructure modes. A checkmark ({{< X >}}) indicates 
 | Capability | [Full](#full) (default) | [Basic](#basic) | [None](#none) | [End User Device](#end-user-device) |
 |------------|-------------------------|-----------------|---------------|--------------------------------------|
 | System resource metrics | {{< X >}} | {{< X >}} | | {{< X >}} |
-| Infrastructure integrations | {{< X >}} (all) | {{< X >}} ([limited set](#basic)) | | {{< X >}} (limited set) |
+| Infrastructure integrations | {{< X >}} (all) | {{< X >}} ([limited set](#basic)) | | {{< X >}} ([limited set][20]) |
 | Container Monitoring | {{< X >}} | | | |
 | Live Processes | {{< X >}} | | | {{< X >}} |
 | Custom checks and logs-only integrations | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
@@ -61,9 +61,8 @@ The Agent supports four infrastructure modes. A checkmark ({{< X >}}) indicates 
 
 : **Minimum Agent version**: 7.77.0<br>
 **Recommended for**: Hosts configured only for [Log Management][13], [APM][14], or [Error Tracking][15]<br>
-**Configuration value**: `none`<br>
-: In `none` mode, the Agent does not collect any infrastructure metrics or run infrastructure integrations. You can use custom metrics, [custom checks][10] prefixed with `custom_`, and logs-only integrations.
-: The host in `none` mode appears in [Fleet Automation][17] under the **View Agents** tab because the Agent continues to send metadata to Datadog. However, the host does not appear in infrastructure dashboards or queries that rely on infrastructure metrics, or when the list is grouped by Infrastructure Mode.
+: In `none` mode, the Agent does not collect any infrastructure metrics or run infrastructure integrations. You can use custom metrics, [custom checks][10] prefixed with `custom_`, and logs-only integrations such as [journald][11] or [Windows Event Log][12].
+: The host in `none` mode appears in [Fleet Automation][17] under the **View Agents** tab because the Agent continues to send metadata to Datadog. However, the host does not appear in infrastructure dashboards or queries that rely on infrastructure metrics, or when the hosts list is grouped by Infrastructure Mode.
 
 ### End User Device
 
@@ -92,9 +91,9 @@ To verify the infrastructure mode set on your hosts:
 1. Navigate to [Fleet Automation][17] and click the **View Agents** tab.
 1. Select **Infrastructure Mode** from the **Group by** dropdown.
 1. Click a mode group to expand it and see the hosts it contains.
-1. Optionally, use the search bar to filter to a specific hostname (for example, `hostname:worker1`)
+1. Optionally, use the search bar to filter to a specific hostname (for example, `hostname:worker1`).
 
-{{< img src="agent/configuration/fa_group_by_infra_mode-1.png" alt="Fleet Automation View Agents page with Infrastructure Mode selected in the Group by dropdown, showing the Full group expanded with 311 hosts and columns for hostname, Agent version, integrations, services, and remote configuration status." style="width:90%" >}}
+{{< img src="agent/configuration/fa_group_by_infra_mode-1.png" alt="Fleet Automation View Agents page with Infrastructure Mode selected in the Group by dropdown, showing the Full group expanded with 311 hosts and columns for hostname, Agent, OTEL, integrations, services, and remote configuration status." style="width:90%" >}}
 
 ## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}
