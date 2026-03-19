@@ -21,6 +21,7 @@ This page provides an overview of these features.
 | Step of vulnerability management lifecycle                                 | Feature                                                  | Trigger Point                           | Impact                                               |
 | --------------------------------------- | -------------------------------------------------------- | --------------------------------------- | --------------------------------------------------------- |
 | [Detection](#detection)                 | Malicious PR protection: Detect potentially malicious changes or suspicious diffs | At PR time                | Flags PRs introducing novel risky code          |
+| [Detection](#ai-native-sast)            | AI-native SAST: LLM-based taint analysis to detect security vulnerabilities | At scan time (Datadog Hosted Scans only) | Identifies contextually complex vulnerabilities missed by rule-based analysis |
 | [Validation](#validation-and-triage) | False positive filtering: Deprioritize low-likelihood findings         | After scan                  | Reduce noise, allow focus on actual issues                |
 | [Remediation](#remediation)                    | Batched remediation: Generate suggested fixes (and optionally PRs) for one or multiple vulnerabilities                 | After scan | Reduces developer effort, accelerates fix cycle           |
 
@@ -58,6 +59,46 @@ There are two potential verdicts: `malicious` and `benign`. They can be filtered
 
 Signals can be triaged directly in Datadog (assign, create a case, or declare an incident), or routed externally using [Datadog Workflow Automation][5].
 
+
+## AI-native SAST
+
+{{< callout btn_hidden="true" >}}
+AI-native SAST is in Preview and is only available for Datadog Hosted Scans.
+{{< /callout >}}
+
+Datadog's AI-native SAST engine uses large language models (LLMs) to detect security vulnerabilities by reasoning about how data flows through your code. Unlike rule-based static analysis, it can identify vulnerabilities that require contextual understanding of application logic.
+
+Scans use a two-phase approach:
+1. **Detection**: An LLM scans each file and reasons about whether user-controlled data can reach a dangerous operation without being sanitized.
+2. **Verification**: A second LLM independently re-evaluates each candidate finding through taint analysis, confirming or dismissing it to reduce false positives.
+
+### Supported languages
+
+| Language | Status      |
+|----------|-------------|
+| Java     | Available   |
+| Python   | Available   |
+| Go       | Available   |
+| C#       | Coming soon |
+
+### Detected vulnerability types
+
+| Vulnerability                 | CWE     |
+|-------------------------------|---------|
+| SQL Injection                 | CWE-89  |
+| Command Injection             | CWE-77  |
+| Cross-Site Scripting (XSS)    | CWE-79  |
+| XPath Injection               | CWE-643 |
+| Path Traversal                | CWE-22  |
+| Insecure Deserialization      | CWE-502 |
+| Broken Cryptography           | CWE-327 |
+| Weak Hashing                  | CWE-328 |
+| Weak Randomness               | CWE-330 |
+| Insecure Cookie               | CWE-614 |
+| LDAP Injection                | CWE-90  |
+| Code Injection                | CWE-94  |
+| Trust Boundary Violation      | CWE-501 |
+| Broken Access Control (IDOR)  | CWE-284 |
 
 <!-- ## AI-powered detection
 
