@@ -11,9 +11,9 @@ module.exports = {
             partnersIndex: 'docs_partners_alias'
         },
         // TODO: Update to production docs-ai URL before GA rollout
-        // Alternative: https://ddstaging.datadoghq.com/api/unstable/docs-ai/chat
+        // Alternative: https://ddstaging.datadoghq.com/api/unstable/docs-ai
         docsAi: {
-            apiUrl: 'https://docs-ai.us1.staging.dog/api/unstable/docs-ai/chat',
+            apiUrl: 'https://dd.datad0g.com/api/unstable/docs-ai',
             apiKey: 'public-api-key'
         },
         imgUrl: 'https://datadog-docs.imgix.net/',
@@ -30,9 +30,9 @@ module.exports = {
             apiIndex: 'docs_api_alias',
             partnersIndex: 'docs_partners_alias'
         },
-        // Alternative: https://ddstaging.datadoghq.com/api/unstable/docs-ai/chat
+        // Alternative: https://ddstaging.datadoghq.com/api/unstable/docs-ai
         docsAi: {
-            apiUrl: 'https://docs-ai.us1.staging.dog/api/unstable/docs-ai/chat',
+            apiUrl: 'https://dd.datad0g.com/api/unstable/docs-ai',
             apiKey: 'public-api-key'
         },
         imgUrl: 'https://datadog-docs-staging.imgix.net/',
@@ -48,9 +48,9 @@ module.exports = {
             apiIndex: 'docs_api_alias',
             partnersIndex: 'docs_partners_alias'
         },
-        // Alternative: https://ddstaging.datadoghq.com/api/unstable/docs-ai/chat
+        // Alternative: https://ddstaging.datadoghq.com/api/unstable/docs-ai
         docsAi: {
-            apiUrl: 'https://docs-ai.us1.staging.dog/api/unstable/docs-ai/chat',
+            apiUrl: 'https://dd.datad0g.com/api/unstable/docs-ai',
             apiKey: 'public-api-key'
         },
         imgUrl: 'http://localhost:1313/',

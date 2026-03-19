@@ -88,7 +88,7 @@ export async function streamDocsAiChat({
         attributes.history = history;
     }
 
-    const response = await fetch(docsAiConfig.apiUrl, {
+    const response = await fetch(`${docsAiConfig.apiUrl}/chat`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
