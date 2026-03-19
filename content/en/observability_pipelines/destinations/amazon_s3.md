@@ -86,11 +86,15 @@ Set up the Amazon S3 destination and its environment variables when you create a
 1. (Optional) Enter the key prefix.
     - Prefixes are useful for partitioning objects. For example, you can use a prefix as an object key to store objects under a particular directory. If using a prefix for this purpose, it must end in `/` to act as a directory path; a trailing `/` is not automatically added.
       - See [template syntax][4] if you want to route logs to different object keys based on specific fields in your logs.
-      - **Note**: Datadog recommends that you start your prefixes with the directory name and without a lead slash (`/`). For example, `app-logs/` or `service-logs/`.
+    - **Notes**:
+        - Datadog recommends that you start your prefixes with the directory name and without a lead slash (`/`). For example, `app-logs/` or `service-logs/`.
+        - Do **not** use the same S3 prefix as a [Datadog Archives][2] destination. The Amazon S3 destination writes files in a different format and having both file types in the same prefix can result in rehydration issues.
 1. Select the storage class for your S3 bucket in the **Storage Class** dropdown menu.
 1. Select the encoding you want to use in the **Encoding** dropdown menu (**JSON** or **Parquet**).
     - **Note**: For **Parquet**, the Observability Pipelines Worker automatically generates a Parquet schema based on the batch file the events are being written to, which means the schema can vary between batches.
-1. Select a compression algorithm in the **Compression - Algorithm** dropdown menu. **Note**: Datadog recommends using `snappy` or a low-compression level if you choose `zstd`.
+1. Select a compression algorithm in the **Compression - Algorithm** dropdown menu. If you selected:
+    - **Parquet**: Datadog recommends `snappy` or a low-compression level if you choose `zstd`.
+    - **JSON**: Datadog recommends `gzip`.
 
 ### Optional settings
 
