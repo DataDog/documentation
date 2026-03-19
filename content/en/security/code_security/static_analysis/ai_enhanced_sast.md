@@ -79,7 +79,6 @@ Scans use a two-phase approach:
 | Java     | Available   |
 | Python   | Available   |
 | Go       | Available   |
-| C#       | Coming soon |
 
 ### Detected vulnerability types
 
