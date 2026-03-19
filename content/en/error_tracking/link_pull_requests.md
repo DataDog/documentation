@@ -21,12 +21,22 @@ With linked pull requests, you can:
 - **Track issue resolution**: See which pull requests are addressing an Error Tracking issue directly from the issue panel.
 - **Automatically resolve issues**: When a linked pull request is merged, Datadog automatically moves the issue to **RESOLVED** status.
 
+## Prerequisites
+
+Install [the GitHub integration][2] with read permissions for pull requests.
+
+Enable [Source Code Integration][3] so that Datadog can process GitHub webhooks and link pull requests to Error Tracking issues.
+
+You need the following [permission][1] to link your PRs to Error Tracking issues:
+
+- Error Tracking Issue Write
+
 ## Link a pull request to an issue
 
 To link a pull request to an Error Tracking issue:
 
 1. In [Error Tracking][1], open the issue you want to link.
-1. Copy the issue URL from your browser's address bar.
+1. Copy the issue URL from the Actions dropdown of the issue panel.
 1. Paste the issue URL into the description of your GitHub pull request.
 
 Datadog detects the issue URL and automatically creates the link.
@@ -48,26 +58,16 @@ To unlink a pull request from an issue, edit the pull request description and re
 
 ## Automatic state changes
 
-Linked pull requests trigger automatic issue state transitions:
+Linked pull requests trigger automatic issue state transitions. If you link or merge a pull request, the linked Error Tracking issue state is updated accordingly:
 
-| Event | Issue state change |
-|---|---|
-| A PR is linked to a **FOR REVIEW** issue | Issue moves to **REVIEWED** |
-| A linked PR is merged | Issue moves to **RESOLVED** |
-| A PR linked to a **RESOLVED** issue is reopened | Issue moves to **REVIEWED** |
-| A new open PR is linked to a **RESOLVED** issue | Issue moves to **REVIEWED** |
+| Initial state | Action | Resulting state |
+|---|---|---|
+| Issue is `For Review` | A PR is linked to the issue | Issue moves to `Reviewed` |
+| Issue is `Reviewed` | A linked PR is merged | Issue moves to `Resolved` |
+| Issue is `Resolved` | A linked PR is reopened | Issue moves to `Reviewed` |
+| Issue is `Resolved` | A new open PR is linked to the issue | Issue moves to `Reviewed` |
 
-If an issue is linked to multiple pull requests, the issue moves to **RESOLVED** only when the last open (non-closed, non-merged) PR is merged. Closing a PR without merging does not resolve the issue.
-
-## Setup
-
-### Install the GitHub integration
-
-Install [the GitHub integration][2] with read permissions for pull requests.
-
-### Enable Source Code Integration
-
-Enable [Source Code Integration][3] so that Datadog can process GitHub webhooks and link pull requests to Error Tracking issues.
+If an issue is linked to multiple pull requests, the issue moves to `Resolved` only when the last open (non-closed, non-merged) PR is merged. Closing a PR without merging does not resolve the issue.
 
 ## Further reading
 
