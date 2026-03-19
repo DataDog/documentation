@@ -601,7 +601,7 @@ Guides you through uploading source maps for RUM error mapping.
 
 - Help me upload source maps so my RUM errors show original source code.
 
-### `datadog_code_security_scan`
+<!-- ### `datadog_code_security_scan`
 *Toolset: **security***\
 Runs a comprehensive security scan that detects both vulnerabilities (SQL injection, XSS, path traversal, and others) and secrets (API keys, passwords, credentials, and others) in parallel.
 
@@ -614,7 +614,7 @@ Runs a comprehensive security scan that detects both vulnerabilities (SQL inject
 Scans code for security vulnerabilities using static analysis (SAST), detecting SQL injection, XSS, path traversal, command injection, insecure cryptography, and other security weaknesses.
 
 - Scan this file for security vulnerabilities.
-- Check my code for SQL injection and XSS vulnerabilities.
+- Check my code for SQL injection and XSS vulnerabilities. -->
 
 ### `datadog_secrets_scan`
 *Toolset: **security***\
