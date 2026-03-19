@@ -112,7 +112,7 @@ By default, Datadog enables the default rulesets for your repository’s program
 
 - **Add rulesets**: List them under `use-rulesets`
 - **Disable specific rulesets**: List them under `ignore-rulesets`
-- **Disable all default rulesets**: Set `use-default-rulesets: false`, then listing the desired rulesets under `use-rulesets`
+- **Disable all default rulesets**: Set `use-default-rulesets: false`, then list the desired rulesets under `use-rulesets`
 
 For the full list of default rulesets, see [Static Code Analysis (SAST) Rules][6].
 
