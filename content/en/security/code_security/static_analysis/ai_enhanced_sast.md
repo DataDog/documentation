@@ -59,7 +59,7 @@ There are two potential verdicts: `malicious` and `benign`. They can be filtered
 
 Signals can be triaged directly in Datadog (assign, create a case, or declare an incident), or routed externally using [Datadog Workflow Automation][5].
 
-## AI-Native SAST
+## AI-native SAST
 
 {{< callout btn_hidden="true" >}}
 AI-Native SAST is in Preview and is only available for Datadog-hosted Scans.
