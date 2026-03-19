@@ -39,8 +39,8 @@ The [RUM Debug Widget][5] provides a floating overlay that displays key metrics 
 
 See the [module README][6] for setup instructions.
 
-{{< img src="real_user_monitoring/android/android-rum-debug-widget.png" alt="The RUM Debug Widget overlay displaying real-time metrics including memory, CPU, threads, and GC rate, with an   
-events timeline showing Action, Resource, Slow, and Frozen event markers." style="width:50%;">}}
+{{< img src="real_user_monitoring/android/android-rum-debug-widget.png" alt=`The RUM Debug Widget overlay displaying real-time metrics including memory, CPU, threads, and GC rate, with an
+events timeline showing Action, Resource, Slow, and Frozen event markers.` style="width:50%;">}}
 
 ## Migrating to 3.0.0
 
