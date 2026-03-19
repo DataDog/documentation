@@ -72,7 +72,7 @@ While investigating a device, click the **Open Device Page** dropdown in the top
 
 The **Dependencies** section in the NDM device view shows the number of physically connected devices and VPN tunnels at a glance, along with a visual graph of neighboring devices.
 
-{{< img src="/network_device_monitoring/network_topology_map/topology_depdencies.png" alt="The NDM device view showing the Dependencies section with a graph of connected devices." style="width:100%;" >}}
+{{< img src="/network_device_monitoring/network_topology_map/topology_dependencies.png" alt="The NDM device view showing the Dependencies section with a graph of connected devices." style="width:100%;" >}}
 
 Click **View dependencies** to open the full device page. On the **Dependencies** tab, use the **Physical** or **VPN** filters to switch between physical connections and VPN tunnels (VPN dependencies require [VPN Monitoring][12] to be configured). The physical view displays a topology graph alongside a table of connected devices showing their status, device name, IP address, monitors, local interface, and remote interface.
 
@@ -92,7 +92,7 @@ Click the **Traffic** tab to view total, inbound, and outbound throughput for th
 
 ### Events
 
-Click the **Events** tab to view Syslog messages and SNMP traps in a single, combined view. Use filters to narrow results by event type. Spikes in event volume are visually highlighted, making it easier to identify and investigate errors.
+Click the **Events** tab to view Syslog messages and SNMP traps in a single, combined view. Use filters to narrow results by event type. Spikes in event volume are visually highlighted, helping you identify and investigate errors.
 
 {{< img src="/network_device_monitoring/network_topology_map/events.png" alt="The NDM device view with the Events tab open, showing Syslog messages and SNMP traps." style="width:100%;" >}}
 
