@@ -498,7 +498,7 @@
     "request_schema_description": "Datadog-Webhooks integration."
   },
   "DeleteWebhooksIntegration": {
-    "description": "Deletes the endpoint with the name `<WEBHOOK NAME>`.",
+    "description": "Deletes the endpoint with the name `<WEBHOOK NAME>`. This action cannot be undone.",
     "summary": "Delete a webhook"
   },
   "GetWebhooksIntegration": {
