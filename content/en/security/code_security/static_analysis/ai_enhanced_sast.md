@@ -67,7 +67,7 @@ AI-Native SAST is in Preview and is only available for Datadog-hosted Scans.
 
 Datadog's AI-native SAST engine uses large language models (LLMs) to detect security vulnerabilities by reasoning about how data flows through your code. Unlike rule-based static analysis, it can identify vulnerabilities that require contextual understanding of application logic.
 
-Scans use a two-phase approach:
+AI-native SAST uses a two-phase approach:
 
 1. **Detection**: An LLM scans each file and reasons about whether user-controlled data can reach a dangerous operation without being sanitized.
 2. **Verification**: A second LLM independently re-evaluates each candidate finding through taint analysis, confirming or dismissing it to reduce false positives.
