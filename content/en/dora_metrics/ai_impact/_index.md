@@ -1,6 +1,6 @@
 ---
 title: AI Impact
-description: "Measure the impact of AI coding assistants and AI review agents on your software delivery performance with DORA Metrics."
+description: "Measure the impact of AI coding assistants on your software delivery performance with DORA Metrics."
 aliases:
 - /dora_metrics/ai-impact/
 is_beta: true
@@ -22,18 +22,9 @@ AI Impact is in Preview.
 
 ## Overview
 
-AI Impact measures how AI tools affect your software delivery performance. It tracks two categories of tools:
-
-AI coding assistants
-: Tools that impact how code is written, such as Cursor and Claude Code. Measuring their impact requires configuring an integration with a supported provider.
-
-AI review agents
-: Tools that impact how code is validated, such as Codex, CodeRabbit, and Copilot review. These are detected automatically from pull request metadata.
+AI Impact measures how AI coding assistants affect your software delivery performance. Measuring their impact requires configuring an integration with a supported provider.
 
 ## Setup
-
-{{< tabs >}}
-{{% tab "AI Coding Assistants" %}}
 
 ### Prerequisites
 
@@ -60,30 +51,6 @@ User Activity
 : Compares delivery metrics between active and non-active users of the selected tool. A user is considered active on a given day if they performed any interaction with the tool (for example, accepted a suggestion, used chat, or triggered an agent). Commits are attributed to the active or non-active group based on their author's activity on the day the commit was created.
 
 [1]: /dora_metrics/setup/
-
-{{% /tab %}}
-{{% tab "AI Review Agents" %}}
-
-### Prerequisites
-
-- [DORA Metrics][1] set up with deployment and commit data.
-- A Git provider integration ([GitHub][2], [GitLab][3] or [Azure DevOps][4]) configured with PR permissions.
-
-**Note**: No separate integration is required for review agents. Detection is automatic.
-
-### How it works
-
-AI review agents are detected automatically from pull request metadata. When a known AI agent (such as Codex, CodeRabbit, or Copilot review) participates in a PR review, Datadog enriches that PR with AI review data.
-
-Enrichment happens at the PR level, not the commit level. All commits within a PR reviewed by an AI agent inherit the AI review classification.
-
-[1]: /dora_metrics/setup/
-[2]: /dora_metrics/setup/?tab=github
-[3]: /dora_metrics/setup/?tab=gitlab
-[4]: /dora_metrics/setup/?tab=azure-devops
-
-{{% /tab %}}
-{{< /tabs >}}
 
 ## Impact metrics
 
@@ -117,14 +84,6 @@ Enrichment happens at the PR level, not the commit level. All commits within a P
 {{< /tabs >}}
 
 **Note**: Change Failure Rate only includes deployments linked to code changes. Configuration-only or infrastructure deployments are excluded to help the comparison reflect the impact of AI on code-related failures. This differs from standard DORA Change Failure Rate, which counts all deployment types.
-
-### AI Review Agents
-
-| Metric | Definition |
-|--------|------------|
-| AI Reviewed PRs | Number of PRs reviewed by an AI agent, divided by total PRs. |
-| Review Time | Median time from PR creation to approval or merge, split by AI-reviewed PRs compared to human-only PRs. |
-| Change Failure Rate | Rate of deployments that cause a failure requiring intervention, weighted by the proportion of PRs reviewed by an AI agent in each deployment. |
 
 ## Further Reading
 

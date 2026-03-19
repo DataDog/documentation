@@ -5676,11 +5676,6 @@ menu:
       parent: dora_metrics
       identifier: dora_metrics_data_collected
       weight: 4
-    - name: AI Impact
-      url: dora_metrics/ai_impact/
-      parent: dora_metrics
-      identifier: dora_metrics_ai_impact
-      weight: 5
     - name: Feature Flags
       url: feature_flags/
       pre: signpost
