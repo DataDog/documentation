@@ -101,7 +101,7 @@ further_reading:
     <li>Complete the registration form, using the email address associated with your existing GovCloud Datadog account.</li>
     <li>In a separate browser tab, navigate to your email. Open the verification email from <code>help@ddog-gov.com</code> and copy the verification code.</li>
     <li>In the Datadog GovCloud support portal, enter the verification code.</li>
-    <li>Click <strong>Verify</strong>.
+    <li>Click <strong>Verify</strong>.</li>
 </ol>
 
 <h2>Create a new case</h2>
@@ -113,7 +113,7 @@ further_reading:
     <li>Log in with the username format <code>[name]@[domain].ddgov.support</code>.</li>
     <li>Click <strong>Create a New Case</strong>.</li>
     <li>Complete the form.</li>
-    <li>Click <strong>Submit & Upload Files</strong>.</li>
+    <li>Click <strong>Submit &amp; Upload Files</strong>.</li>
     <li>Optionally, upload supporting files. Accepted file types include <code>.txt</code>, <code>.csv</code>, <code>.xls</code>, <code>.xlsx</code>, <code>.doc</code>, <code>.otf</code>, <code>.yaml</code>, <code>.log</code>, <code>.conf</code>, <code>.tf</code>, <code>.zip</code>, and <code>.pcap</code>.</li>
     <li>Click <strong>Submit</strong>.</li>
 </ol>
@@ -138,7 +138,7 @@ further_reading:
 
 <h4>Login issues</h4>
 
-<p>Ensure your full username includes the <code>.ddgov.support</code> suffix.</p>
+<p>Make sure your full username includes the <code>.ddgov.support</code> suffix.</p>
 
 <h4>Password reset not received</h4>
 
