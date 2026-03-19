@@ -11637,6 +11637,18 @@ menu:
           - ListTables
         unstable: []
         order: 3
+    - name: Batch rows query
+      url: '#batch-rows-query'
+      identifier: reference-tables-batch-rows-query
+      parent: reference-tables
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - BatchRowsQuery
+        unstable: []
+        order: 10
     - name: Restriction Policies
       url: /api/latest/restriction-policies/
       identifier: restriction-policies
