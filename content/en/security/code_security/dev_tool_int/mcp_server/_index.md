@@ -26,12 +26,14 @@ The MCP server exposes the following tools that AI coding assistants can call to
 
 | Tool                                                        | Description                                                 | Auth Required |
 | ----------------------------------------------------------- | ----------------------------------------------------------- | :-----------: |
-| [`datadog_code_security_scan`][6] | Comprehensive scan (SAST + Secrets + SCA + IaC) in parallel |      Yes      |
-| [`datadog_sast_scan`][7]                   | Static Application Security Testing                         |      Yes      |
 | [`datadog_secrets_scan`][8]             | Hardcoded secrets detection                                 |      Yes      |
 | [`datadog_sca_scan`][9]                     | Dependency vulnerability scanning (CVEs)                    |      Yes      |
 | [`datadog_iac_scan`][10]                     | Infrastructure-as-Code security scanning                    |      Yes      |
 | [`datadog_generate_sbom`][11]           | Software Bill of Materials generation                       |      No       |
+
+<!-- Removed rows for Code Security tools -->
+<!-- | [`datadog_code_security_scan`][6] | Comprehensive scan (SAST + Secrets + SCA + IaC) in parallel |      Yes      |
+| [`datadog_sast_scan`][7]                   | Static Application Security Testing                         |      Yes      | -->
 
 For detailed parameters, required binaries, and output formats for each tool, see the [Tools Reference][12].
 

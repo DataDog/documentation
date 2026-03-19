@@ -15,7 +15,7 @@ The [Datadog Code Security MCP Server][1] exposes the following tools for AI cod
 
 <div class="alert alert-info">This MCP server is separate from the <a href="/bits_ai/mcp_server">Datadog MCP Server</a>, which provides cloud-based access to Datadog features and data. The Code Security MCP Server runs locally and focuses on code-level security scanning.</div>
 
-## `datadog_code_security_scan`
+<!-- ## `datadog_code_security_scan`
 
 Run a comprehensive security scan combining Static Application Security Testing (SAST), secrets detection, Software Composition Analysis (SCA), and Infrastructure-as-Code (IaC) scanning. All scan types execute in parallel for maximum performance.
 
@@ -43,7 +43,7 @@ Run SAST to detect security vulnerabilities in source code, such as SQL injectio
 
 ### Required binary
 
-`datadog-static-analyzer`
+`datadog-static-analyzer` -->
 
 ## `datadog_secrets_scan`
 
