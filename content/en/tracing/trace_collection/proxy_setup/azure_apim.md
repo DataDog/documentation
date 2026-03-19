@@ -1,6 +1,6 @@
 ---
 title: Instrumenting Azure API Management
-code_lang: azure-apim
+code_lang: azure_apim
 type: multi-code-lang
 code_lang_weight: 60
 further_reading:
