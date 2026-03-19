@@ -1314,6 +1314,13 @@ components:
             description: A role UUID.
             type: string
           type: array
+        tabs:
+          description: List of tabs for organizing dashboard widgets into groups.
+          items:
+            $ref: "#/components/schemas/DashboardTab"
+          maxItems: 100
+          nullable: true
+          type: array
         tags:
           description: List of team names representing ownership of a dashboard.
           items:
@@ -1583,6 +1590,35 @@ components:
         url:
           description: URL of the dashboard.
           type: string
+      type: object
+    DashboardTab:
+      description: Dashboard tab for organizing widgets.
+      properties:
+        id:
+          description: UUID of the tab.
+          example: ""
+          format: uuid
+          type: string
+        name:
+          description: Name of the tab.
+          example: L
+          maxLength: 100
+          minLength: 1
+          type: string
+        widget_ids:
+          description: >-
+            List of widget IDs belonging to this tab. The backend also accepts positional references in @N format (1-indexed) as a convenience for Terraform and other declarative tools.
+          example:
+            - 0
+          items:
+            description: Widget ID.
+            format: int64
+            type: integer
+          type: array
+      required:
+        - id
+        - name
+        - widget_ids
       type: object
     DashboardTemplateVariable:
       description: Template variable.
