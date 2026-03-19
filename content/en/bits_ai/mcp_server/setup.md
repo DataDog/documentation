@@ -18,20 +18,19 @@ Learn how to set up and configure the Datadog MCP Server, which lets you retriev
 {{< tabs >}}
 {{% tab "Cursor" %}}
 
-Datadog's [Cursor and VS Code extension][1] includes built-in access to the managed Datadog MCP Server. Benefits include:
+Datadog's [Cursor and VS Code extension][1] includes built-in access to the managed Datadog MCP Server.
 
-* No additional MCP Server setup after you install the extension and connect to Datadog.
-* One-click transitions between multiple Datadog organizations.
-* Better fixes from **Fix in Chat** on Code Insights (issues from Error Tracking, Code Vulnerabilities, and Library Vulnerabilities), informed by context from the MCP Server.
-
-To install the extension:
-
-1. If you previously installed the Datadog MCP Server manually, remove it from the IDE's configuration to avoid conflicts. Go to **Cursor Settings** (`Shift` + `Cmd/Ctrl` + `J`) and select the **MCP** tab.
-2. Install the Datadog extension following [these instructions][2]. If you have the extension installed already, make sure it's the latest version, as new features are released regularly.
+1. Install the extension (omit `--profile` and name to install to the default Cursor profile):
+    ```shell
+    cursor --install-extension datadog.datadog-vscode --profile <PROFILE_NAME>
+    ```
+   Alternatively, install the Datadog extension following [these instructions][2]. If you have the extension installed already, make sure it's the latest version.
 3. Sign in to your Datadog account.
    {{< img src="bits_ai/mcp_server/ide_sign_in.png" alt="Sign in to Datadog from the IDE extension" style="width:70%;" >}}
 4. **Restart the IDE.**
-5. Confirm the Datadog MCP Server is available and the [tools][3] are listed: Go to **Cursor Settings** (`Shift` + `Cmd/Ctrl` + `J`), and select the **MCP** tab.
+5. Confirm the Datadog MCP Server is available and the [tools][3] are listed: Go to **Cursor Settings** (`Shift` + `Cmd/Ctrl` + `J`), select the **Tools & MCP** tab, and expand the extension's tools list.
+1. If you previously installed the Datadog MCP Server manually, remove it from the IDE's configuration to avoid conflicts.
+
 
 [1]: /ide_plugins/vscode/
 [2]: /ide_plugins/vscode/?tab=cursor#installation
@@ -136,12 +135,7 @@ Point your AI agent to the MCP Server endpoint for your regional [Datadog site][
 
 {{% tab "VS Code" %}}
 
-Datadog's [Cursor and VS Code extension][1] includes built-in access to the managed Datadog MCP Server. Benefits include:
-
-* No additional MCP Server setup after you install the extension and connect to Datadog.
-* One-click transitions between multiple Datadog organizations.
-
-To install the extension:
+Datadog's [Cursor and VS Code extension][1] includes built-in access to the managed Datadog MCP Server. To install the extension:
 
 1. If you previously installed the Datadog MCP Server manually, remove it from the IDE's configuration to avoid conflicts. Open the command palette (`Shift` + `Cmd/Ctrl` + `P`) and run `MCP: Open User Configuration`.
 2. Install the Datadog extension following [these instructions][2]. If you have the extension installed already, make sure it's the latest version.
