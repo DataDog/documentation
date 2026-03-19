@@ -2,9 +2,6 @@
 title: Indexes
 description: Learn how to configure multiple indexes with custom filters and retention policies for your CloudPrem cluster
 further_reading:
-- link: "/cloudprem/configure/retention/"
-  tag: "Documentation"
-  text: "Configure Global Retention Policy"
 - link: "/cloudprem/configure/pipelines/"
   tag: "Documentation"
   text: "Configure Processing Pipelines"
@@ -39,19 +36,18 @@ You can reorder indexes at any time by dragging rows or using the **Move to** ac
 
 Each index has its own retention period, which determines how long logs are stored before automatic deletion.
 
-If you are upgrading from a previous CloudPrem version, the index retention configured through the Datadog UI takes precedence over the global retention set in the [Helm chart values][2].
+<div class="alert alert-info">If you are upgrading from a previous CloudPrem version, the index retention configured through the Datadog UI takes precedence over the global retention set in the Helm chart values.</div>
 
 ## Searching across indexes
 
-To query logs stored in CloudPrem, select one or more CloudPrem indexes in the [Log Explorer][3]. You can select a specific index to narrow your search, or select all indexes in a cluster to search across them. From the index configuration page, use **View in Log Explorer** to open a filtered view for a given index.
+To query logs stored in CloudPrem, select one or more CloudPrem indexes in the [Log Explorer][2]. You can select a specific index to narrow your search, or select all indexes in a cluster to search across them. From the index configuration page, use **View in Log Explorer** to open a filtered view for a given index.
 
-For more information, see [Search CloudPrem Logs][4].
+For more information, see [Search CloudPrem Logs][3].
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/cloudprem
-[2]: /cloudprem/configure/retention/
-[3]: /logs/explorer/
-[4]: /cloudprem/operate/search_logs
+[2]: /logs/explorer/
+[3]: /cloudprem/operate/search_logs
