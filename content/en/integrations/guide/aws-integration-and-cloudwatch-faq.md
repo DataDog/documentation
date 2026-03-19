@@ -68,7 +68,7 @@ Rollups don't display similar results. For a rollup call of `rollup(sum, 60)`, t
 
 If you recently enabled a new AWS service integration but are not seeing metrics in Datadog, verify the following:
 
-1. **IAM permissions**: Confirm that the `DatadogAWSIntegrationRole` includes the permissions required by the service. See the individual [AWS integration pages][8] for service-specific permission requirements.
+1. **IAM permissions**: Confirm that the IAM role or IAM user associated with the Datadog integration includes the permissions required by the service. See the individual [AWS integration pages][8] for service-specific permission requirements.
 2. **Region**: Confirm that the AWS region where your resources are deployed is enabled in the [AWS integration page][1].
 3. **CloudWatch availability**: Open the CloudWatch console in AWS and confirm the expected metrics exist. Some services do not emit CloudWatch metrics until specific conditions are met (for example, an ELB with no attached instances does not emit metrics).
 4. **Polling delay**: API polling collects metrics approximately every 10 minutes. If you use [CloudWatch Metric Streams][6], expect a 2-3 minute delay. Allow at least one polling cycle before investigating further.
