@@ -39,6 +39,7 @@ The Agent supports four infrastructure modes. A checkmark ({{< X >}}) indicates 
 : The Agent collects system resource metrics and process data, runs all infrastructure integrations, and supports Container Monitoring and Live Processes. If you have not set an `infrastructure_mode` value, the Agent runs in `full` mode.
 
 ### Basic
+
 `basic`
 : **Minimum Agent version**: 7.73.0 (Linux, macOS), 7.76.2 (Windows)<br>
 **Recommended for**: VMs and physical servers that need system resource metrics only<br>
@@ -75,14 +76,14 @@ The Agent supports four infrastructure modes. A checkmark ({{< X >}}) indicates 
 
 To set the infrastructure mode for a host:
 
-1. Open the [Agent configuration file][18] and add `infrastructure_mode` at the root level: 
+1. Open the [Agent configuration file][18] and add `infrastructure_mode` at the root level:
 
     {{< code-block lang="yaml" filename="datadog.yaml" disable_copy="true"
       collapsible="true" >}}
 infrastructure_mode: <MODE>  # The available options are `full`, `basic`, `none`, and `end_user_device`.
     {{< /code-block >}}
 
-2. [Restart the Datadog Agent][19]
+2. [Restart the Datadog Agent][19].
 
 ## Verify infrastructure mode
 
