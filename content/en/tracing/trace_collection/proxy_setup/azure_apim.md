@@ -11,13 +11,20 @@ further_reading:
 
 Datadog APM can create **inferred spans** for requests that pass through Azure API Management to your backend services. The spans power end-to-end traces, service maps, and sampling based on the API Management gateway.
 
-Inferred spans for Azure API Management are supported for **.NET**, **JavaScript** (Node.js), and **Python** only. Minimum tracer versions: .NET [v3.39.0][1]+, JavaScript [v5.87.0][2]+, Python [v4.6.0][3]+.
+Inferred spans for Azure API Management are supported for **.NET**, **JavaScript** (Node.js), and **Python** only. Other runtimes (for example Go, Java, or PHP) do not emit Azure API Management inferred spans, even if they support inferred spans for other gateways.
 
 ## Prerequisites
 
-- `DD_TRACE_INFERRED_PROXY_SERVICES_ENABLED` is set in your application settings
-- Your underlying application is running a [supported web framework](/tracing/trace_collection/proxy_setup/apigateway#supported-versions-and-web-frameworks) for your language.
-- Your application tracer is at or above the minimum version listed above for your language.
+- `DD_TRACE_INFERRED_PROXY_SERVICES_ENABLED` is set in your application settings.
+- Your backend uses a **supported runtime**, **minimum tracer version**, and **web framework** from the table below. Do not use the Amazon API Gateway support matrix on this site as a reference for Azure API Management—those minimum versions and runtimes differ.
+
+### Supported runtimes and web frameworks
+
+| Runtime | Datadog Tracer | Minimum tracer version | Frameworks |
+| ------- | -------------- | ---------------------- | ---------- |
+| Node.js | `dd-trace-js` | [v5.87.0][2]+ | express, fastify, hapi, koa, microgateway-core, next, paperplane, restify, router, apollo |
+| Python | `dd-trace-py` | [v4.6.0][3]+ | aiohttp, asgi, bottle, cherrypy, django, djangorestframework, falcon, fastapi, flask, molten, pyramid, sanic, starlette, tornado, wsgi |
+| .NET | `dd-trace-dotnet` | [v3.39.0][1]+ | ASP.NET, ASP.NET Core |
 
 ## Setup
 
