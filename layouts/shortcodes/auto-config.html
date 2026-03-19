@@ -1,0 +1,282 @@
+<style>
+[x-cloak] { display: none !important; }
+
+.acg {
+  border: 2px solid #d0c6e8;
+  border-top: 6px solid #632ca6;
+  border-radius: 8px;
+  background: #fff;
+  margin: 0 0 2rem;
+  overflow: hidden;
+}
+.acg-inner { padding: 1.5rem; }
+.acg-title { color: #632ca6; font-size: 2.25rem; font-weight: 200; margin: 0 0 0.25rem; }
+.acg-desc { color: #6c757d; font-size: 0.875rem; margin: 0 0 1.25rem; }
+
+.acg-label { font-weight: 600; font-size: 0.875rem; display: block; margin-bottom: 6px; }
+.acg textarea {
+  width: 100%; box-sizing: border-box;
+  border: 1px solid #ced4da; border-radius: 6px;
+  padding: 10px 12px; font-size: 0.875rem;
+  font-family: var(--bs-body-font-family);
+  resize: vertical; line-height: 1.5;
+}
+.acg textarea:focus { outline: none; border-color: #632ca6; box-shadow: 0 0 0 3px rgba(99,44,166,.1); }
+.acg textarea:disabled { background: #f8f9fa; }
+
+.acg-ctx-toggle { background: none; border: none; padding: 0; margin-top: 10px; font-size: 0.875rem; color: #6c757d; cursor: pointer; }
+.acg-ctx-toggle:hover { color: #632ca6; }
+.acg-ctx { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
+.acg-ctx select, .acg-ctx input {
+  flex: 1; min-width: 130px;
+  border: 1px solid #ced4da; border-radius: 6px;
+  padding: 6px 10px; font-size: 0.875rem;
+  font-family: var(--bs-body-font-family);
+  background: #fff;
+}
+
+.acg-actions { display: flex; align-items: center; gap: 10px; margin-top: 1rem; }
+.acg-btn {
+  background: #632ca6; color: #fff; border: none;
+  border-radius: 6px; padding: 9px 20px;
+  font-size: 0.875rem; font-weight: 600;
+  cursor: pointer; display: flex; align-items: center; gap: 8px;
+  font-family: var(--bs-body-font-family);
+}
+.acg-btn:hover:not(:disabled) { background: #4e2284; }
+.acg-btn:disabled { opacity: .5; cursor: not-allowed; }
+.acg-btn-sec {
+  background: none; border: 1px solid #ced4da; border-radius: 6px;
+  padding: 8px 16px; font-size: 0.875rem; cursor: pointer; color: #495057;
+  font-family: var(--bs-body-font-family);
+}
+.acg-btn-sec:hover { background: #f8f9fa; }
+.acg-spinner {
+  width: 14px; height: 14px; flex-shrink: 0;
+  border: 2px solid rgba(255,255,255,.35); border-top-color: #fff;
+  border-radius: 50%; animation: acg-spin .65s linear infinite;
+}
+@keyframes acg-spin { to { transform: rotate(360deg); } }
+
+.acg-divider { border: none; border-top: 1px solid #f0eaf8; margin: 1.25rem 0; }
+
+.acg-steps-label { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; color: #9e8cbf; margin-bottom: 8px; }
+.acg-pills { display: flex; flex-wrap: wrap; gap: 6px; }
+.acg-pill {
+  background: #faf8ff; border: 1px solid #d0c6e8;
+  border-radius: 20px; padding: 3px 11px;
+  font-size: 0.75rem; color: #4a3470;
+}
+.acg-pill-gen { background: #f3e8ff; border-color: #b08ee0; color: #632ca6; font-weight: 600; }
+
+.acg-error { background: #fff5f5; border: 1px solid #f5c6cb; border-radius: 6px; padding: 12px 14px; color: #721c24; font-size: 0.875rem; margin-top: 1rem; }
+
+.acg-files { margin-top: 1.25rem; border: 1px solid #dee2e6; border-radius: 8px; overflow: hidden; }
+.acg-tabs { display: flex; flex-wrap: wrap; background: #f8f6fc; border-bottom: 1px solid #dee2e6; }
+.acg-tab {
+  background: none; border: none; border-bottom: 3px solid transparent;
+  padding: 8px 16px; font-size: 0.8rem; font-family: monospace;
+  color: #6c757d; cursor: pointer; white-space: nowrap;
+}
+.acg-tab:hover { color: #632ca6; }
+.acg-tab.active { color: #632ca6; font-weight: 700; border-bottom-color: #632ca6; background: #fff; }
+.acg-pre {
+  background: #1e1e1e; color: #d4d4d4; margin: 0;
+  padding: 1.1rem 1.25rem; font-size: 0.8rem;
+  overflow-x: auto; white-space: pre-wrap; word-break: break-all;
+  position: relative;
+}
+.acg-copy {
+  position: absolute; top: 8px; right: 8px;
+  background: rgba(255,255,255,.1); color: #fff;
+  border: 1px solid rgba(255,255,255,.2); border-radius: 4px;
+  padding: 3px 10px; font-size: 0.72rem; cursor: pointer;
+}
+.acg-copy:hover { background: rgba(255,255,255,.2); }
+
+.acg-exp-toggle { background: none; border: none; padding: 0; font-size: 1rem; color: #632ca6; cursor: pointer; margin-top: 1rem; display: block; }
+.acg-exp { border: 1px solid #e8e0f5; border-radius: 6px; padding: 12px 14px; background: #faf8ff; margin-top: 8px; }
+.acg-exp-item { font-size: 1rem; margin-bottom: 8px; }
+.acg-exp-item:last-child { margin-bottom: 0; }
+.acg-exp code { color: #632ca6; }
+
+.acg-notes { background: #fff8e1; border: 1px solid #ffe082; border-radius: 6px; padding: 12px 14px; margin-top: 1rem; }
+.acg-notes b { font-size: 1rem; display: block; margin-bottom: 6px; }
+.acg-notes ul { margin: 0; padding-left: 18px; font-size: 1rem; }
+.acg-notes li { margin-bottom: 3px; }
+</style>
+
+<div class="acg" x-data="autoConfigWidget()" x-cloak>
+  <div class="acg-inner">
+
+    <h2 class="acg-title" id="agent-configuration-generator">Agent configuration generator</h2>
+    <p class="acg-desc">Describe what you want to configure and get production-ready, schema-validated Agent YAML.</p>
+
+    <label class="acg-label">What do you want to configure?</label>
+    <textarea
+      x-model="intent"
+      rows="3"
+      placeholder="e.g. Set up PostgreSQL monitoring with SSL&#10;e.g. Configure secrets management using a text file&#10;e.g. Enable APM tracing with 10% sampling rate"
+      :disabled="loading"
+      @keydown.ctrl.enter="submit()"
+    ></textarea>
+
+    <div>
+      <button type="button" class="acg-ctx-toggle" @click="showCtx = !showCtx">
+        <span x-text="showCtx ? '▾ Hide context' : '▸ Add context (cloud, platform, agent version)'"></span>
+      </button>
+      <div x-show="showCtx" x-transition class="acg-ctx">
+        <select x-model="cloud">
+          <option value="">Cloud provider</option>
+          <option>aws</option><option>gcp</option><option>azure</option>
+        </select>
+        <input x-model="platform" placeholder="Platform (kubernetes, docker...)">
+        <input x-model="agentVersion" placeholder="Agent version (e.g. 7.70)">
+      </div>
+    </div>
+
+    <div class="acg-actions">
+      <button type="button" class="acg-btn" @click="submit()" :disabled="!intent.trim() || loading">
+        <span x-show="loading" class="acg-spinner"></span>
+        <span x-text="!loading ? 'Generate' : (events.length === 0 ? 'Starting…' : (switchedToGen ? 'Writing config…' : 'Researching…'))"></span>
+      </button>
+      <button x-show="result || error" type="button" class="acg-btn-sec" @click="reset()">Clear</button>
+    </div>
+
+    <!-- Research steps -->
+    <template x-if="events.length > 0">
+      <div>
+        <hr class="acg-divider">
+        <p class="acg-steps-label">Research steps</p>
+        <div class="acg-pills">
+          <template x-for="(e, i) in events" :key="i">
+            <span class="acg-pill" x-text="label(e)"></span>
+          </template>
+          <span x-show="loading && switchedToGen" class="acg-pill acg-pill-gen">Writing config…</span>
+        </div>
+      </div>
+    </template>
+
+    <!-- Error -->
+    <div x-show="error" class="acg-error">
+      <strong>Error:</strong> <span x-text="error"></span>
+    </div>
+
+    <!-- Results -->
+    <template x-if="result">
+      <div>
+        <hr class="acg-divider">
+
+        <div class="acg-files">
+          <div class="acg-tabs">
+            <template x-for="(f, i) in result.files" :key="i">
+              <button type="button" class="acg-tab" :class="activeFile===i?'active':''" @click="activeFile=i" x-text="f.path"></button>
+            </template>
+          </div>
+          <template x-for="(f, i) in result.files" :key="i">
+            <div x-show="activeFile===i">
+              <pre class="acg-pre"><button class="acg-copy" @click="copy(f.content, $event)">Copy</button><span x-text="f.content"></span></pre>
+            </div>
+          </template>
+        </div>
+
+        <button x-show="result.explanation?.length" type="button" class="acg-exp-toggle" @click="showExp = !showExp">
+          <span x-text="showExp ? '▾ Hide explanation' : '▸ Why these settings?'"></span>
+        </button>
+        <div x-show="showExp" x-transition class="acg-exp">
+          <template x-for="item in result.explanation" :key="item.setting">
+            <div class="acg-exp-item">
+              <code x-text="item.setting"></code>
+              <span style="color:#6c757d"> — </span>
+              <span x-text="item.why"></span>
+            </div>
+          </template>
+        </div>
+
+        <div x-show="result.warnings?.length" class="acg-notes">
+          <b>Notes &amp; reminders</b>
+          <ul>
+            <template x-for="w in result.warnings" :key="w">
+              <li x-text="w"></li>
+            </template>
+          </ul>
+        </div>
+      </div>
+    </template>
+
+  </div>
+</div>
+
+<script>
+document.addEventListener('alpine:init', () => {
+  Alpine.data('autoConfigWidget', () => ({
+    intent: '', cloud: '', platform: '', agentVersion: '',
+    showCtx: false, showExp: false,
+    loading: false, switchedToGen: false,
+    events: [], result: null, error: null, activeFile: 0,
+
+    label(e) {
+      const q = (e.query||'').replace(/^https?:\/\/[^/]+\//, '');
+      return e.tool.replace(/_/g, ' ') + ': ' + (q.length > 45 ? q.slice(0, 45) + '…' : q);
+    },
+
+    async submit() {
+      if (!this.intent.trim() || this.loading) return;
+      this.loading = true; this.switchedToGen = false;
+      this.events = []; this.result = null; this.error = null; this.activeFile = 0;
+
+      try {
+        const body = { intent: this.intent, format: 'file', context: {} };
+        if (this.cloud) body.context.cloud = this.cloud;
+        if (this.platform) body.context.platform = this.platform;
+        if (this.agentVersion) body.context.agent_version = this.agentVersion;
+
+        const res = await fetch('http://localhost:8080/api/v1/generate/stream', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(body),
+        });
+
+        if (!res.ok) {
+          this.error = `Service returned ${res.status}. Is the config generator running on localhost:8080?`;
+          this.loading = false; return;
+        }
+
+        const reader = res.body.getReader();
+        const decoder = new TextDecoder();
+        let buf = '';
+
+        while (true) {
+          const { done, value } = await reader.read();
+          if (done) break;
+          buf += decoder.decode(value, { stream: true });
+          const parts = buf.split('\n\n');
+          buf = parts.pop();
+          for (const part of parts) {
+            const line = part.trim();
+            if (!line.startsWith('data: ')) continue;
+            try {
+              const ev = JSON.parse(line.slice(6));
+              if (ev.type === 'tool_call') { this.events.push(ev); }
+              else if (ev.type === 'complete') { this.result = ev.result; this.loading = false; this.switchedToGen = false; }
+              else if (ev.type === 'error') { this.error = ev.message; this.loading = false; }
+            } catch(_) {}
+          }
+          if (this.events.length > 0 && this.loading) this.switchedToGen = true;
+        }
+      } catch(e) {
+        this.error = 'Could not reach the config generator. Make sure the service is running on localhost:8080.';
+        this.loading = false;
+      }
+    },
+
+    async copy(text, evt) {
+      await navigator.clipboard.writeText(text);
+      const b = evt.currentTarget; b.textContent = 'Copied!';
+      setTimeout(() => b.textContent = 'Copy', 2000);
+    },
+
+    reset() { this.events=[]; this.result=null; this.error=null; this.loading=false; this.switchedToGen=false; }
+  }));
+});
+</script>
