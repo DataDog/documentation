@@ -41,6 +41,60 @@ You can setup using the [API][13], [Terraform][14], or directly in Datadog by fo
 ### Configure the Azure integration
 Navigate to [Setup & Configuration][3], add an Azure account and follow the steps to configure the Azure integration.
 
+{{< tabs >}}
+
+{{% tab "Terraform" %}}
+
+{{< img src="cloud_cost/setup/azure_terraform_setup.png" alt="CCM setup page with the Terraform selected, showing Step 1 and Step 2 expanded to configure scope and export details" style="width:100%" >}}
+
+### Select scope type
+
+Use the dropdown to select the scope type for your account. CCM currently supports the billing account, subscription, and resource group scope type.
+
+### Select the resources to create
+
+The Terraform configuration supports three setups depending on your existing Azure resources:
+
+* **New setup**: Select **Create storage account and container** to create a new storage account, container, and cost exports.
+* **Existing storage account and container**: Unselect **Create storage account and container** and select **Create cost exports** to use existing storage but create new cost exports.
+* **Existing storage account, container, and cost exports**: Unselect both options to use existing storage and cost exports.
+
+### Configure the scope and export details
+
+Enter the following details for your configuration:
+
+* **Billing account or Subscription ID**: Depending on the scope selected in Step 1, the relevant billing account ID or subscription ID.
+* **Resource group name**: The name of your existing resource group in the selected scope. A pre-existing resource group is required for the Terraform setup.
+* **Location**: The Azure location of your resource group. For example, `East US 2`.
+* **Storage account and container name**: Depending on the resources you have selected to create, the names of your new or pre-existing storage account and container.
+* **Actual cost export name and path**: The name and path of your actual cost export.
+* **Amortized cost export name and path**: The name and path of your amortized cost export.
+  * **Note:** The following prefix formats are not supported: empty, starting with `/` (such as `/` or `/cost`), or ending with `/` (such as `cost/`). Prefixes containing `/` in the middle are supported (such as `cost/hourly`).
+
+### Copy generated Azure resource Terraform HCL and apply changes
+
+Once the fields in Step 2 are complete, Step 3 will enable and display the generated Terraform HCL. Follow the instructions to set up your Terraform configuration files with this code. Resolve any issues that appear while running `terraform plan` or `terraform apply` before returning to CCM to configure cost exports.
+
+### Access Azure console to configure exports
+
+{{< img src="cloud_cost/setup/azure_toggle_file_partitioning.png" alt="Toggle on file partitioning for both exports" style="width:50%" >}}
+
+Visit the Azure console link to locate your cost exports. If needed, change the current scope to the correct one for your exports. For both actual and amortized exports, select them and click **Edit** to toggle on File Partioning if not already enabled.
+
+{{< img src="cloud_cost/run_now.png" alt="Click Run Now button in export side panel to generate exports" style="width:50%" >}}
+
+Save the File Partitioning changes and click **Run Now**. Return to CCM once both export runs have succeeded.
+
+### Copy generated Datadog HCL and apply changes
+
+Follow the instructions in the **Apply Datadog Terraform HCL** step. Resolve any issues that appear while running `terraform plan` or `terraform apply` before returning to CCM to confirm account creation.
+
+{{% /tab %}}
+
+{{% tab "Manual" %}}
+
+{{< img src="cloud_cost/setup/azure_manual_setup.png" alt="CCM setup page with the Manual option selected, showing Step 1 and Step 2 expanded to configure scope type and select existing exports" style="width:100%" >}}
+
 ### Generate cost exports
 
 You need to generate exports for two data types: **actual** and **amortized**. Datadog recommends using the same storage container for both exports.
@@ -132,6 +186,10 @@ This ensures complete cost accuracy by allowing periodic cost calculations again
 [1]: https://portal.azure.com/#view/Microsoft_Azure_Billing/SubscriptionsBlade
 
 {{% /tab %}}
+{{< /tabs >}}
+
+{{% /tab %}}
+
 {{< /tabs >}}
 
 **Note**: If you have the proper permissions on the app registration but your network is blocking Datadog's webhook IPs, you may encounter errors that appear to be permission-related.
