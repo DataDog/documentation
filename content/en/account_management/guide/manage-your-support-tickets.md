@@ -104,6 +104,8 @@ further_reading:
     <li>Click <strong>Verify</strong>.</li>
 </ol>
 
+<p><strong>Note</strong>: After registration, your login username is your email with <code>.ddgov.support</code> appended (for example, <code>john@agency.gov.ddgov.support</code>). Use this full username when logging in.</p>
+
 <h2>Create a new case</h2>
 
 <p>To create a new case:</p>
