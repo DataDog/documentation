@@ -142,10 +142,10 @@ further_reading:
 
 <h4>Password reset not received</h4>
 
-<p>Use your full username (with the <code>.ddgov.support</code> suffix) in the <strong>Forgot Password</strong> flow.</p>
+<p>Click <strong>Forgot Password</strong> and follow the process with your full username (with the <code>.ddgov.support</code> suffix).</p>
 
 <h4>Registration error</h4>
 
-<p>Your account may already exist. Try the <strong>Forgot Password</strong> flow with your full username.</p>
+<p>Your account may already exist. Click <strong>Forgot Password</strong> and follow the process with your full username.</p>
 
 {{< /site-region >}}
