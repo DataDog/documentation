@@ -178,7 +178,7 @@ AWS tags are collected as part of the integration's crawl cycle and may take add
 If you recently added or changed tags in AWS and do not see them reflected in Datadog:
 1. Wait at least one full crawl cycle (approximately 10 minutes for API polling).
 2. Verify that the `DatadogAWSIntegrationRole` has the required tag-related permissions (for example, `tag:GetResources`).
-3. Confirm that the resource type supports tag collection. Not all AWS resource types support tag collection through the integration.
+3. Confirm that the resource type supports tag collection. Datadog collects tags through the [AWS Resource Groups Tagging API][28]. See the [supported resource types][29] in the AWS documentation to verify that your resource type is supported.
 
 ### Hosts still have AWS tags after removing the Amazon EC2 integration
 
@@ -219,3 +219,5 @@ By default, host-level tags remain permanently attached to AWS hosts. If you wan
 [25]: /getting_started/integrations/aws/#what-to-expect-after-setup
 [26]: /integrations/guide/aws-integration-and-cloudwatch-faq/#which-aws-services-require-additional-setup-beyond-the-core-integration
 [27]: /integrations/amazon_elb/
+[28]: https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/overview.html
+[29]: https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/supported-services.html
