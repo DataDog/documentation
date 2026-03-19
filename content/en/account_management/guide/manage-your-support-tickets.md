@@ -148,6 +148,6 @@ further_reading:
 
 <h3>Registration error</h3>
 
-<p>Your account may already exist. Click <strong>Forgot Password</strong> and follow the process with your full username.</p>
+<p>Your account may already exist. Click <strong>Forgot Password</strong> and enter your full username, including the <code>.ddgov.support</code> suffix (for example, <code>john@agency.gov.ddgov.support</code>). If you are still unable to access your account, contact <code>support@ddog-gov.com</code>.</p>
 
 {{< /site-region >}}
