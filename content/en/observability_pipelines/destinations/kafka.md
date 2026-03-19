@@ -119,7 +119,7 @@ These are the available librdkafka options:
 
 See the [librdkafka documentation][7] for more information and to ensure your values have the correct type and are within range.
 
-## How the destination works
+## Metrics
 
 See the [Observability Pipelines Metrics][8] for a full list of available health metrics.
 
@@ -129,17 +129,21 @@ See the [Observability Pipelines Metrics][8] for a full list of available health
 
 {{% observability_pipelines/metrics/component %}}
 
-#### Buffer metrics (when buffering is enabled)
+### Buffer metrics (when enabled)
 
-{{% observability_pipelines/metrics/buffer %}}
+{{% observability_pipelines/metrics/buffer/destinations %}}
+
+#### Deprecated buffer metrics
+
+{{% observability_pipelines/metrics/buffer/deprecated_destination_metrics %}}
 
 ### Event batching
 
 A batch of events is flushed when one of these parameters is met. See [event batching][9] for more information.
 
-| Max Events     | Max Bytes       | Timeout (seconds)   |
-|----------------|-----------------|---------------------|
-| 10,000         | 1,000,000       | 1                   |
+| Maximum Events | Maximum Size (MB) | Timeout (seconds)   |
+|----------------|-------------------|---------------------|
+| 10,000         | 1                 | 1                   |
 
 [1]: https://clickhouse.com/docs/engines/table-engines/integrations/kafka
 [2]: https://docs.snowflake.com/en/user-guide/kafka-connector

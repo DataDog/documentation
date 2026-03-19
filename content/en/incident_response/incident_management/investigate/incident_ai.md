@@ -140,6 +140,8 @@ To generate an AI-assisted postmortem draft:
 1. Click **Generate**. Allow up to one minute for the postmortem to be generated. Do not close the tab during this time.
 1. Review the AI-generated postmortem draft. It serves as a starting point for your incident responders. Datadog recommends reviewing and refining the draft before sharing it.
 
+For more information on generating and managing postmortems, see [Incident Postmortems][6].
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -149,3 +151,4 @@ To generate an AI-assisted postmortem draft:
 [3]: https://app.datadoghq.com/incidents/settings?section=postmortem-templates
 [4]: https://app.datadoghq.com/incidents/settings?section=integrations
 [5]: /incident_response/incident_management/post_incident/follow-ups
+[6]: /incident_response/incident_management/post_incident/postmortems

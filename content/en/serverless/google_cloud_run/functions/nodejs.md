@@ -18,17 +18,15 @@ further_reading:
 
 1. **Install the Datadog Node.js tracer**.
 
-   1. In your main application, add `dd-trace-js`.
+   1. In your main application, install the `dd-trace` package.
 
       {{< code-block lang="shell" disable_copy="false" >}}
-npm install dd-trace --save
+npm install dd-trace
 {{< /code-block >}}
 
-   2. Add the following to your application code to initialize the tracer:
-   {{< code-block lang="javascript" disable_copy="false" >}}
-const tracer = require('dd-trace').init({
- logInjection: true,
-});
+   2. Initialize the Node.js tracer with the `NODE_OPTIONS` environment variable:
+   {{< code-block lang="dockerfile" disable_copy="false" >}}
+ENV NODE_OPTIONS="--require dd-trace/init"
 {{< /code-block >}}
 
    For more information, see [Tracing Node.js applications][1].
@@ -57,9 +55,6 @@ const tracer = require('dd-trace').init({
 
    In this step, configure your logging library to write logs to the file set in `DD_SERVERLESS_LOG_PATH`. In Node.js, Datadog recommend writing logs in a JSON format. For example, you can use a third-party logging library such as `winston`:
    {{< code-block lang="javascript" disable_copy="false" >}}
-const tracer = require('dd-trace').init({
-  logInjection: true,
-});
 const { createLogger, format, transports } = require('winston');
 
 const LOG_FILE = "/shared-volume/logs/app.log"
@@ -87,7 +82,15 @@ logger.info('Hello world!');
 
    To send custom metrics, [view code examples][3]. In Serverless Monitoring, only the *distribution* metric type is supported.
 
+6. **Enable profiling (preview)**.
+
+   To enable the [Continuous Profiler][6], set the environment variable `DD_PROFILING_ENABLED=true` in your application container.
+
+   <div class="alert alert-info">Datadog's Continuous Profiler is available in preview for 2nd gen Cloud Run functions.</div>
+
 {{% serverless-init-env-vars-sidecar language="nodejs" function="true" defaultSource="cloudrun" %}}
+
+{{% svl-tracing-env %}}
 
 ## Distributed tracing with Pub/Sub
 
@@ -166,4 +169,5 @@ gcloud pubsub subscriptions update \
 [3]: /metrics/custom_metrics/dogstatsd_metrics_submission/?tab=nodejs#code-examples-5
 [4]: https://www.datadoghq.com/blog/pubsub-cloud-run-tracing/
 [5]: https://cloud.google.com/pubsub/docs/payload-unwrapping
+[6]: /profiler/
 
