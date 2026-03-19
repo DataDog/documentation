@@ -99,6 +99,7 @@ Scans use a two-phase approach:
 | Code Injection                | CWE-94  |
 | Trust Boundary Violation      | CWE-501 |
 | Broken Access Control (IDOR)  | CWE-284 |
+| Server-Side Template Injection | CWE-1427 |
 
 <!-- ## AI-powered detection
 
