@@ -473,7 +473,7 @@ Datadog admite la supervisión de los componentes del plano de control de Kubern
 
 La supervisión del plano de control está habilitada por defecto, pero requiere que la introspección esté habilitada.
 
-Puede habilitar la introspección utilizando el [chart de Helm datadog-operator][12]:
+Puede habilitar la introspección utilizando el [chart de Helm de datadog-operator][12]:
 
 {{< code-block lang="yaml" filename="datadog-agent.yaml" >}}
 introspection:
@@ -793,7 +793,7 @@ En OpenShift 3, todos los componentes del plano de control pueden ser monitoread
 1. Habilite el [Agente de Clúster de Datadog][6]
 1. Habilitar [Verificaciones de clúster][7]
 1. Habilitar [Verificaciones de punto final][8]
-1. Asegúrese de que ha iniciado sesión con permisos suficientes para crear y editar servicios.
+1. Asegúrese de haber iniciado sesión con permisos suficientes para crear y editar servicios.
 
 ### Servidor API
 
@@ -891,9 +891,9 @@ oc annotate service etcd-copy -n openshift-etcd 'ad.datadoghq.com/endpoints.reso
 El Agente de Clúster de Datadog programa las verificaciones como verificaciones de punto final y las despacha a los Ejecutores de Verificación de Clúster.
 
 
-### Administrador de controladores y programador
+### Controlador de administrador y programador
 
-El Administrador de controladores y el programador se ejecutan detrás del mismo servicio, `kube-controllers` en el espacio de nombres `kube-system`. Las ediciones directas del servicio no se persisten, así que haga una copia del servicio:
+El controlador de administrador y el programador se ejecutan detrás del mismo servicio, `kube-controllers` en el espacio de nombres `kube-system`. Las ediciones directas del servicio no se persisten, así que haga una copia del servicio:
 
 ```shell
 oc get service kube-controllers -n kube-system -o yaml | sed 's/name: kube-controllers/name: kube-controllers-copy/'  | oc create -f -
@@ -924,7 +924,7 @@ La integración del servidor API se configura automáticamente. El Agente de Dat
 
 ### Etcd
 
-Al proporcionar acceso de lectura a los certificados etcd ubicados en el host, la verificación del Agente Datadog puede comunicarse con etcd y comenzar a recopilar métricas de etcd.
+Al proporcionar acceso de lectura a los certificados etcd ubicados en el host, la verificación del agente Datadog puede comunicarse con etcd y comenzar a recopilar métricas de etcd.
 
 {{< code-block lang="yaml" filename="datadog-values.yaml" >}}
 datadog:
@@ -1031,7 +1031,7 @@ providers:
 **Notas:**
 
 - El campo `ssl_verify` en la configuración de `kube_controller_manager` y `kube_scheduler` necesita ser establecido en `false` al usar certificados autofirmados.
-- Al apuntar a puertos seguros, la opción `bind-address` en la configuración de tu Controlador Manager y Scheduler debe ser accesible por el Agente de Datadog. Aplique el parche a continuación a los nodos de plano de control en la generación del clúster; o, para nodos Talos en ejecución, ejecute `talosctl patch mc -n <control-plane-node1,control-plane-node2> --patch @controlplane-datadog-monitoring-patch.yaml`.
+- Al apuntar a puertos seguros, la opción `bind-address` en la configuración de tu Controlador Manager y Scheduler debe ser accesible por el Agente de Datadog. Aplique el parche a continuación a los nodos del plano de control en la generación del clúster; o, para nodos Talos en ejecución, ejecute `talosctl patch mc -n <control-plane-node1,control-plane-node2> --patch @controlplane-datadog-monitoring-patch.yaml`.
 
 {{< code-block lang="yaml" filename="controlplane-datadog-monitoring-patch.yaml" >}}
 cluster:
@@ -1050,7 +1050,7 @@ Rancher v2.5 se basa en [PushProx][9] para exponer los puntos finales de métric
 ### Requisitos previos
 
 1. Instale el Agente de Datadog con el [chart de rancher-monitoring][10].
-2. Los `pushprox` daemonsets se despliegan con `rancher-monitoring` y están en ejecución en el espacio de nombres `cattle-monitoring-system`.
+2. Los `pushprox` daemonsets se implementan con `rancher-monitoring` y están en ejecución en el espacio de nombres `cattle-monitoring-system`.
 
 ### Servidor API
 
@@ -1063,7 +1063,7 @@ annotations:
   ad.datadoghq.com/endpoints.instances: '[{ "prometheus_url": "https://%%host%%:%%port%%/metrics", "bearer_token_auth": "true" }]'
 ```
 
-### Agregue servicios de Kubernetes para configurar verificaciones de Autodescubrimiento
+### Agregue servicios de Kubernetes para configurar verificaciones de Autodescubrimiento.
 
 Al agregar servicios de Kubernetes sin cabeza para definir configuraciones de verificación, el Agente de Datadog puede dirigirse a los pods `pushprox` y recoger métricas.
 

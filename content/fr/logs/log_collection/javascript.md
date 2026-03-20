@@ -6,9 +6,9 @@ aliases:
 - /fr/logs/log_collection/web_browser
 title: Collecte des journaux du navigateur
 ---
-Envoyez des journaux à Datadog depuis les pages du navigateur web avec le SDK des journaux du navigateur.
+Envoyez des journaux à Datadog depuis les pages du navigateur avec le SDK des journaux du navigateur.
 
-Avec le SDK des journaux du navigateur, vous pouvez envoyer des journaux directement à Datadog depuis les pages du navigateur web et tirer parti des fonctionnalités suivantes :
+Avec le SDK des journaux du navigateur, vous pouvez envoyer des journaux directement à Datadog depuis les pages du navigateur et tirer parti des fonctionnalités suivantes :
 
 - Utilisez le SDK comme un logger. Tout est transféré à Datadog sous forme de documents JSON.
 - Ajoutez `context` et des attributs personnalisés supplémentaires à chaque journal envoyé.
@@ -29,7 +29,7 @@ Avec le SDK des journaux du navigateur, vous pouvez envoyer des journaux directe
 
 Dans Datadog, accédez à [**Paramètres de l'organisation > Nouveaux jetons clients**][1]
 
-**Environnements pris en charge** : Le SDK des journaux du navigateur prend en charge tous les navigateurs de bureau et mobiles modernes, ainsi que les environnements Worker et Service Worker. Consultez le tableau [Support des navigateurs][4].
+**Environnements pris en charge** : Le SDK des journaux du navigateur prend en charge tous les navigateurs modernes de bureau et mobiles, ainsi que les environnements Worker et Service Worker. Consultez le tableau [Support des navigateurs][4].
 
 <div class="alert alert-info">Pour des raisons de sécurité, <a href="https://docs.datadoghq.com/account_management/api-app-keys/#api-keys">les clés API</a> ne peuvent pas être utilisées pour configurer le SDK des journaux du navigateur, car elles seraient exposées côté client dans le code JavaScript. Pour collecter des journaux à partir des navigateurs web, un <a href="https://docs.datadoghq.com/account_management/api-app-keys/#client-tokens">jeton client</a> doit être utilisé.</div>  
 
@@ -351,7 +351,7 @@ window.DD_LOGS && window.DD_LOGS.logger.info('Button clicked', { name: 'buttonNa
 
 #### Résultats
 
-Les résultats sont les mêmes que ce soit avec NPM, CDN asynchrone ou CDN synchrone :
+Les résultats sont les mêmes que ce soit en utilisant NPM, CDN asynchrone ou CDN synchrone :
 
 ```json
 {
@@ -451,7 +451,7 @@ try {
 
 #### Résultats
 
-Les résultats sont les mêmes que ce soit avec NPM, CDN asynchrone ou CDN synchrone :
+Les résultats sont les mêmes que ce soit en utilisant NPM, CDN asynchrone ou CDN synchrone :
 
 ```json
 {
@@ -883,7 +883,7 @@ window.DD_LOGS && window.DD_LOGS.getGlobalContext() // => {}
 
 #### Contexte utilisateur
 
-Le SDK des journaux Datadog fournit des fonctions pratiques pour associer un `User` aux journaux générés.
+Le SDK des journaux Datadog fournit des fonctions pratiques pour associer un `User` avec les journaux générés.
 
 - Définissez l'utilisateur pour tous vos enregistreurs avec l'API `setUser (newUser: User)`.
 - Ajoutez ou modifiez une propriété utilisateur pour tous vos enregistreurs avec l'API `setUserProperty (key: string, value: any)`.
@@ -977,7 +977,7 @@ window.DD_LOGS && window.DD_LOGS.getUser() // => {}
 
 #### Contexte de compte
 
-Le SDK des journaux Datadog fournit des fonctions pratiques pour associer un `Account` aux journaux générés.
+Le SDK des journaux Datadog fournit des fonctions pratiques pour associer un `Account` avec les journaux générés.
 
 - Définissez le compte pour tous vos enregistreurs avec l'API `setAccount (newAccount: Account)`.
 - Ajoutez ou modifiez une propriété de compte pour tous vos enregistreurs avec l'API `setAccountProperty (key: string, value: any)`.
@@ -1072,7 +1072,7 @@ Par défaut, les contextes sont stockés dans la mémoire de la page actuelle, c
 
 Pour les ajouter à tous les événements de la session, ils doivent être attachés à chaque page.
 
-Avec l'introduction de l'option de configuration `storeContextsAcrossPages` dans la version v4.49.0 du SDK du navigateur, ces contextes peuvent être stockés dans [`localStorage`][9], permettant les comportements suivants :
+Avec l'introduction de l'option de configuration `storeContextsAcrossPages` dans la version 4.49.0 du SDK du navigateur, ces contextes peuvent être stockés dans [`localStorage`][9], permettant les comportements suivants :
 
 - Les contextes sont préservés après un rechargement complet
 - Les contextes sont synchronisés entre les onglets ouverts sur la même origine
@@ -1224,16 +1224,16 @@ window.DD_LOGS && window.DD_LOGS.logger.setHandler(['<HANDLER1>', '<HANDLER2>'])
 
 ### Consentement au suivi des utilisateurs
 
-Pour être conforme au RGPD, CCPA et à des réglementations similaires, le SDK du navigateur des journaux vous permet de fournir la valeur de consentement au suivi lors de l'initialisation.
+Pour être conforme au RGPD, CCPA et à des réglementations similaires, le SDK des journaux du navigateur vous permet de fournir la valeur de consentement au suivi lors de l'initialisation.
 
 Le paramètre d'initialisation `trackingConsent` peut être l'une des valeurs suivantes :
 
-1. `"granted"` : Le SDK du navigateur des journaux commence à collecter des données et les envoie à Datadog.
-2. `"not-granted"` : Le SDK du navigateur des journaux ne collecte aucune donnée.
+1. `"granted"` : Le SDK des journaux du navigateur commence à collecter des données et les envoie à Datadog.
+2. `"not-granted"` : Le SDK des journaux du navigateur ne collecte aucune donnée.
 
 Pour changer la valeur de consentement au suivi après l'initialisation du SDK des journaux du navigateur, utilisez l'appel API `setTrackingConsent()`. Le SDK des journaux du navigateur change son comportement en fonction de la nouvelle valeur :
 
-- lorsqu'il est changé de `"granted"` à `"not-granted"`, la session de journaux est arrêtée, et les données ne sont plus envoyées à Datadog.
+- lorsqu'il est changé de `"granted"` à `"not-granted"`, la session de journaux est arrêtée et les données ne sont plus envoyées à Datadog.
 - lorsqu'il est changé de `"not-granted"` à `"granted"`, une nouvelle session de journaux est créée si aucune session précédente n'est active, et la collecte de données reprend.
 
 Cet état n'est pas synchronisé entre les onglets ni persistant entre les navigations. Il est de votre responsabilité de fournir la décision de l'utilisateur lors de l'initialisation du SDK Logs Browser ou en utilisant `setTrackingConsent()`.

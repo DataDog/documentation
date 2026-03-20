@@ -37,7 +37,7 @@ Puede [agregar etiquetas personalizadas a su span raíz][3], o utilizar las func
 
 {{< programming-lang lang="java" >}}
 
-Utilice la API del rastreador de Java para agregar etiquetas personalizadas a un span raíz y añadir información del usuario para que pueda monitorear solicitudes autenticadas en la aplicación.
+Utilice la API del rastreador de Java para agregar etiquetas personalizadas a un span raíz y añadir información del usuario para que pueda monitorear las solicitudes autenticadas en la aplicación.
 
 Las etiquetas de monitoreo de usuarios se aplican en el span raíz y comienzan con el prefijo `usr` seguido del nombre del campo. Por ejemplo, `usr.name` es una etiqueta de monitoreo de usuarios que rastrea el nombre del usuario.
 
@@ -134,7 +134,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 {{< programming-lang lang="ruby" >}}
 
-Utilice una de las siguientes API para agregar información del usuario a un rastreo para que pueda monitorear solicitudes autenticadas en la aplicación:
+Utilice una de las siguientes API para agregar información del usuario a un rastreo para que pueda monitorear las solicitudes autenticadas en la aplicación:
 
 {{% collapse-content title="set_user" level="h4" expanded="true" %}}
 
@@ -336,7 +336,7 @@ set_user(tracer, user_id, name="John", email="test@test.com", scope="some_scope"
 ## Agregando información de lógica de negocio (éxito de inicio de sesión, fallo de inicio de sesión, cualquier lógica de negocio) a los rastros
 
 <div class="alert alert-info">
-<strong>Una nota sobre usr.id y usr.login:</strong> La investigación del abuso de inicio de sesión se basa en dos conceptos similares, pero diferentes. usr.id contiene el identificador único de la cuenta de usuario en la base de datos. Es único e inmutable. No está disponible cuando alguien intenta iniciar sesión en una cuenta que no existe. El bloqueo de usuario se dirige a usr.id.</br>
+<strong> Una nota sobre usr.id y usr.login:</strong> La investigación del abuso de inicio de sesión se basa en dos conceptos similares, pero diferentes. usr.id contiene el identificador único de la cuenta de usuario en la base de datos. Es único e inmutable. No está disponible cuando alguien intenta iniciar sesión en una cuenta que no existe. El bloqueo de usuario se dirige a usr.id.</br>
 El usuario generalmente no es consciente de su ID de usuario. En cambio, confían en identificadores mutables (número de teléfono, nombre de usuario, dirección de correo electrónico...). La cadena utilizada por el usuario para iniciar sesión en una cuenta debe ser reportada como usr.login en los eventos de inicio de sesión.</br>
 Si no se proporciona usr.login, se utilizará usr.id en su lugar.</a>
 </div>
@@ -620,11 +620,11 @@ Datadog::Kit::AppSec::Events.track(event_name, trace, span, metadata)
 Los nuevos métodos en `Datadog::Kit::AppSec::Events::V2` introducen un orden de parámetros más intuitivo y una separación de preocupaciones más clara. Aquí están los cambios clave:
 
 1. El identificador de inicio de sesión (correo electrónico, nombre de usuario) es el primer parámetro y es obligatorio.
-2. El objeto/ID de usuario es opcional en eventos de éxito y se ha eliminado de los eventos de fracaso.
+2. El objeto/ID de usuario es opcional en eventos de éxito y ha sido eliminado de los eventos de fracaso.
 3. Los metadatos se han simplificado y ya no requieren el campo `usr.login`.
 4. Los parámetros de traza y de intervalo ya no son obligatorios y se infieren automáticamente.
 
-**Nota**: los métodos heredados `track_login_success` y `track_login_failure` están en desuso a favor de los nuevos métodos `track_user_login_success` y `track_user_login_failure`, respectivamente.
+**Nota**: los métodos heredados `track_login_success` y `track_login_failure` están obsoletos en favor de los nuevos métodos `track_user_login_success` y `track_user_login_failure`, respectivamente.
 
 En el siguiente ejemplo, el código comentado ya no es necesario.
 
@@ -727,10 +727,10 @@ $metadata = ['usr.id' => $id]; // you can add arbitrary fields to metadata
 Los nuevos métodos en el espacio de nombres `\datadog\appsec\v2\` introducen un orden de parámetros más intuitivo y una separación de preocupaciones más clara. Aquí están los cambios clave:
 
 1. El identificador de inicio de sesión (correo electrónico, nombre de usuario) es el primer parámetro y es obligatorio.
-2. El arreglo/ID de usuario es opcional en eventos de éxito y se ha eliminado de los eventos de fracaso.
+2. El arreglo/ID de usuario es opcional en eventos de éxito y ha sido eliminado de los eventos de fracaso.
 3. Los metadatos se han simplificado y ya no requieren el campo `usr.login`.
 
-**Nota**: los métodos heredados `\datadog\appsec\track_user_login_success_event` y `\datadog\appsec\track_user_login_failure_event` están en desuso a favor de los nuevos métodos `\datadog\appsec\v2\track_user_login_success` y `\datadog\appsec\v2\track_user_login_failure`, respectivamente.
+**Nota**: los métodos heredados `\datadog\appsec\track_user_login_success_event` y `\datadog\appsec\track_user_login_failure_event` están obsoletos en favor de los nuevos métodos `\datadog\appsec\v2\track_user_login_success` y `\datadog\appsec\v2\track_user_login_failure`, respectivamente.
 
 En el siguiente ejemplo, el código comentado ya no es necesario.
 
@@ -839,10 +839,10 @@ tracer.appsec.trackCustomEvent(eventName, metadata)
 Los nuevos métodos en `eventTrackingV2` introducen un orden de parámetros más intuitivo y una separación de preocupaciones más clara. Aquí están los cambios clave:
 
 1. El identificador de inicio de sesión (correo electrónico, nombre de usuario) es el primer parámetro y es obligatorio.
-2. El objeto/ID de usuario es opcional en eventos de éxito y se ha eliminado de los eventos de fracaso.
+2. El objeto/ID de usuario es opcional en eventos de éxito y ha sido eliminado de los eventos de fracaso.
 3. Los metadatos se han simplificado y ya no requieren el campo `usr.login`.
 
-**Nota**: los métodos heredados `trackUserLoginSuccessEvent` y `trackUserLoginFailureEvent` están en desuso a favor de los nuevos métodos `eventTrackingV2.trackUserLoginSuccess` y `eventTrackingV2.trackUserLoginFailure`, respectivamente.
+**Nota**: los métodos heredados `trackUserLoginSuccessEvent` y `trackUserLoginFailureEvent` están obsoletos en favor de los nuevos métodos `eventTrackingV2.trackUserLoginSuccess` y `eventTrackingV2.trackUserLoginFailure`, respectivamente.
 
 En el siguiente ejemplo, el código comentado ya no es necesario.
 
@@ -1127,7 +1127,7 @@ Si su servicio tiene AAP habilitado y [Configuración Remota][1] habilitada, pue
 
 Para comenzar, navegue a la [página de Regla WAF Personalizada][2] y haga clic en "Crear Nueva Regla".
 
-{{< img src="security/application_security/threats/custom-waf-rule-menu.png" alt="Acceda al Menú de Regla WAF Personalizada desde la página de inicio de AAP haciendo clic en Protección, luego en WAF en la Aplicación y Reglas Personalizadas" style="width:100%;" >}}
+{{< img src="security/application_security/threats/custom-waf-rule-menu.png" alt="Acceda al Menú de Reglas WAF Personalizadas desde la página de inicio de AAP haciendo clic en Protección, luego en WAF en la Aplicación y Reglas Personalizadas" style="width:100%;" >}}
 
 Esto abrirá un menú en el que puede definir su regla WAF personalizada. Al seleccionar la categoría "Lógica de Negocio", podrá configurar un tipo de evento (por ejemplo, `users.password_reset`). Luego puede seleccionar el servicio que desea rastrear y un endpoint específico. También puede usar la condición de la regla para apuntar a un parámetro específico para identificar el flujo de código que desea _instrumentar_. Cuando la condición coincide, la biblioteca etiqueta el rastro y lo marca para ser enviado a AAP. Si no necesita la condición, puede establecer una condición amplia para coincidir con todo.
 

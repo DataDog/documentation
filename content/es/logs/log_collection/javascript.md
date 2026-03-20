@@ -537,7 +537,7 @@ Los posibles valores `context` son:
 | Valor | Tipo de dato | Caso de uso |
 |-------|---------|------------|
 | `isAborted` | Boolean | Para los eventos de registro de red, esta propiedad indica si la solicitud fallida fue abortada por la aplicación, en cuyo caso es posible que no desee enviar este evento porque puede haber sido abortado intencionalmente. |
-| `handlingStack` | Cadena | Un seguimiento de pila de dónde se manejó el evento de registro. Esto se puede usar para identificar de qué [micro-frontend][9] se envió el registro. |
+| `handlingStack` | Cadena | Un seguimiento de pila de dónde se manejó el evento de registro. Esto se puede utilizar para identificar de qué [micro-frontend][9] se envió el registro. |
 
 Para redactar direcciones de correo electrónico de las URL de su aplicación web:
 
@@ -1067,7 +1067,7 @@ window.DD_LOGS && window.DD_LOGS.getAccount() // => {}
 
 Por defecto, los contextos se almacenan en la memoria de la página actual, lo que significa que no están:
 
-- guardados después de una recarga completa de la página
+- mantenidos después de una recarga completa de la página
 - compartidos entre diferentes pestañas o ventanas de la misma sesión
 
 Para agregarlos a todos los eventos de la sesión, deben estar adjuntos a cada página.
@@ -1138,7 +1138,7 @@ Después de que se inicializa el SDK de registros del navegador de Datadog, el n
 setLevel (level?: 'debug' | 'info' | 'warn' | 'error')
 ```
 
-Solo se envían los registros con un estado igual o superior al nivel especificado.
+Solo se envían registros con un estado igual o superior al nivel especificado.
 
 {{< tabs >}}
 {{% tab "NPM" %}}
@@ -1236,7 +1236,7 @@ Para cambiar el valor de consentimiento de seguimiento después de que se inicia
 - cuando se cambia de `"granted"` a `"not-granted"`, la sesión de registros se detiene y los datos ya no se envían a Datadog.
 - cuando se cambia de `"not-granted"` a `"granted"`, se crea una nueva sesión de registros si no hay ninguna sesión anterior activa, y la recopilación de datos se reanuda.
 
-Este estado no se sincroniza entre pestañas ni se persiste entre navegaciones. Es su responsabilidad proporcionar la decisión del usuario durante la inicialización del SDK de Logs Browser o utilizando `setTrackingConsent()`.
+Este estado no está sincronizado entre pestañas ni persistido entre navegaciones. Es su responsabilidad proporcionar la decisión del usuario durante la inicialización del SDK de Logs Browser o utilizando `setTrackingConsent()`.
 
 Cuando `setTrackingConsent()` se utiliza antes de `init()`, el valor proporcionado tiene prioridad sobre el parámetro de inicialización.
 

@@ -1,5 +1,5 @@
 ---
-description: Apprenez à identifier et à nettoyer le désordre des moniteurs en analysant
+description: Apprenez à identifier et à nettoyer l'encombrement des moniteurs en analysant
   les modèles d'utilisation des moniteurs, en identifiant les moniteurs inutilisés
   ou redondants, et en mettant en œuvre les meilleures pratiques pour la gestion des
   moniteurs afin d'améliorer la qualité des alertes et de réduire le bruit.
@@ -10,11 +10,11 @@ further_reading:
 - link: monitors/quality
   tag: Documentation
   text: Qualité des moniteurs
-title: Nettoyer le désordre des moniteurs
+title: Nettoyer l'encombrement des moniteurs
 ---
 ## Aperçu
 
-Le désordre des moniteurs s'accumule avec le temps, entraînant du bruit, des alertes dupliquées et une friction opérationnelle accrue. Ce guide présente une approche claire pour identifier et nettoyer les moniteurs encombrés, avec des cas d'utilisation pour vous aider à rationaliser vos flux de travail d'alerte.
+L'encombrement des moniteurs s'accumule avec le temps, entraînant du bruit, des alertes dupliquées et une friction opérationnelle accrue. Ce guide présente une approche claire pour identifier et nettoyer les moniteurs encombrés, avec des cas d'utilisation pour vous aider à rationaliser vos flux de travail d'alerte.
 
 Il fournit également des meilleures pratiques pour maintenir un environnement de surveillance propre, facilitant ainsi l'évolutivité et la gouvernance de votre stratégie de surveillance à mesure que vos systèmes se développent.
 
@@ -24,13 +24,13 @@ Vous devez avoir les [permissions d'écriture sur les moniteurs][10].
 
 ### Cas d'utilisation
 
-Ce guide couvre plusieurs cas d'utilisation clés pour nettoyer le désordre des moniteurs :
+Ce guide couvre plusieurs cas d'utilisation clés pour nettoyer l'encombrement des moniteurs :
 
 - **[ Moniteurs désactivés à long terme ](#muted-for-a-long-period-of-time)** : Moniteurs qui ont été désactivés pendant de longues périodes—semaines ou même mois.
 - **[ Moniteurs bloqués en état d'ALERT ](#in-the-alerted-state-for-a-long-period-of-time)** : Moniteurs qui sont restés en état "Alerte" pendant une période anormalement longue sans être reconnus ou résolus.
 - **[ Moniteurs dupliqués ](#duplicate-monitors)** : Plusieurs moniteurs déclenchant la même condition, métrique ou service—souvent en raison de silos d'équipe ou d'un manque de coordination.
 - **[ Moniteurs instables et bruyants ](#flappy-and-noisy-monitors)** : Moniteurs qui se déclenchent et se résolvent fréquemment (c'est-à-dire, qui "flappent") ou produisent de grands volumes d'alertes de faible valeur.
-- **[ Moniteurs mal configurés ](#misconfigured-monitors)** : Moniteurs avec des liens brisés vers des tableaux de bord, des délais d'évaluation manquants, des éléments d'alerte manquants ou incorrects, ou des balises et conventions de nommage obsolètes.
+- **[ Moniteurs mal configurés ](#misconfigured-monitors)** : Moniteurs avec des liens brisés vers des tableaux de bord, des délais d'évaluation manquants, des constituants d'alerte manquants ou incorrects, ou des balises et conventions de nommage obsolètes.
 
 ## Désactivé pendant une longue période
 
@@ -42,7 +42,7 @@ Nettoyez les moniteurs qui n'apportent pas de valeur et remplacez les mises en s
 
 Auditez les moniteurs qui ont été mis en sourdine pendant une longue période pour comprendre lesquels sont réellement nécessaires ou utiles. Certains moniteurs peuvent être mis en sourdine pour une bonne raison et vous souhaitez éviter de les supprimer.
 
-Pour voir ces moniteurs, naviguez vers la page [Qualité des Moniteurs][1] et trouvez la liste des moniteurs qui ont été mis en sourdine pendant plus de 60 jours. Vous pouvez également trouver des moniteurs mis en sourdine sur la [**Liste des Moniteurs**][8] avec la requête `muted_elapsed:<number_of_days>d`.
+Pour voir ces moniteurs, accédez à la page [Qualité des Moniteurs][1] et trouvez la liste des moniteurs qui ont été mis en sourdine pendant plus de 60 jours. Vous pouvez également trouver des moniteurs mis en sourdine sur la [**Liste des Moniteurs**][8] avec la requête `muted_elapsed:<number_of_days>d`.
 
 Après avoir obtenu votre liste, vous pouvez soit agir sur chaque moniteur depuis la page Qualité des Moniteurs, soit procéder à une suppression en masse des moniteurs avec les étapes 2 et 3.
 
@@ -82,7 +82,7 @@ tail -n +2 "$input_file" | awk -F',' '{print $1}' | while read -r monitor_id; do
 done
 ```
 
-## Dans un état d'ALERT pendant une longue période
+## En état d'ALERT pendant une longue période
 
 Des alertes persistantes suggèrent l'un des deux problèmes : soit le problème n'est pas actionnable, soit le seuil du moniteur est mal configuré. Dans les deux cas, cela érode la confiance dans les alertes et contribue à la fatigue des alertes. Ces moniteurs doivent être examinés et modifiés, ou supprimés.
 
@@ -180,9 +180,9 @@ Pour plus d'informations, consultez le [guide de dépannage AWS][7].
 
 Les moniteurs composites évaluent leur état en fonction de la combinaison logique de deux moniteurs ou plus (appelés constituants). Si l'un de ces moniteurs constituants est supprimé ou devient indisponible, le moniteur composite devient invalide ou peu fiable.
 
-Un constituant manquant signifie généralement qu'au moins un des moniteurs d'entrée originaux a été supprimé après la création du moniteur composite. Cela entraîne une incomplétude du composite et peut potentiellement induire en erreur le comportement d'alerte.
+Un constituant manquant signifie généralement qu'au moins un des moniteurs d'entrée d'origine a été supprimé après la création du moniteur composite. Cela entraîne une incomplétude du composite et peut potentiellement induire en erreur le comportement d'alerte.
 
-**Datadog recommande** de vérifier les moniteurs composites pour soit remplacer soit restaurer les constituants manquants, ou supprimer le moniteur composite. Vous pouvez trouver la liste des moniteurs composites avec des constituants manquants sur la page [Qualité des Moniteurs][4].
+**Datadog recommande** de vérifier les moniteurs composites pour soit remplacer ou restaurer les constituants manquants, soit supprimer le moniteur composite. Vous pouvez trouver la liste des moniteurs composites avec des constituants manquants sur la page [Qualité des Moniteurs][4].
 
 Pour obtenir de manière programmatique la liste des moniteurs qui manquent de constituants :
 
@@ -205,9 +205,9 @@ Pour plus d'informations, voir [Moniteur Composite][11].
 
 | Meilleure Pratique | Description | Mise en œuvre |
 |---------------|-------------|----------------|
-| **Éliminer la redondance** | Évitez de créer plusieurs moniteurs qui suivent le même signal avec des portées légèrement différentes (comme par région, équipe ou environnement). | Utilisez **des moniteurs groupés avec des tags**, qui sont plus faciles à gérer et à faire évoluer. |
+| **Éliminer la redondance** | Évitez de créer plusieurs moniteurs qui suivent le même signal avec des portées légèrement différentes (comme par région, équipe ou environnement). | Utilisez **des moniteurs groupés avec des tags**, qui sont plus faciles à gérer et à mettre à l'échelle. |
 | **Définir une propriété claire** | Chaque moniteur doit avoir un propriétaire clair pour diriger les alertes vers les bons répondants et éviter la confusion. | Utilisez `team:` des tags et des gestionnaires de notification (`@slack-xyz`, `@pagerduty-twilio`). Utilisez le filtre **Créateur** sur la [Liste des Moniteurs][8] pour auditer les créateurs de moniteurs les plus fréquents. |
-| **Réviser les moniteurs bruyants ou dormants** | Les moniteurs qui alertent trop souvent ou qui n'alertent jamais peuvent provoquer de la fatigue ou signaler une mauvaise configuration. | Utilisez la [**page de Qualité des Moniteurs**][4] pour identifier et nettoyer les moniteurs bruyants, défectueux ou obsolètes. |
+| **Réviser les moniteurs bruyants ou inactifs** | Les moniteurs qui alertent trop souvent ou qui n'alertent jamais peuvent provoquer de la fatigue ou signaler une mauvaise configuration. | Utilisez la [**page de Qualité des Moniteurs**][4] pour identifier et nettoyer les moniteurs bruyants, défectueux ou obsolètes. |
 | **Exploiter les modèles de moniteurs** | Pour des modèles courants (comme les métriques RED ou la latence API), utilisez des modèles pour réduire la duplication et garantir la standardisation. | Utilisez [des modèles réutilisables][5] pour réduire la duplication et garantir la standardisation entre les équipes. |
 | **Établir une Politique de Tagging** | Des tags cohérents et significatifs vous permettent de filtrer, regrouper et diriger facilement les moniteurs. | Utilisez des tags cohérents (comme `service:`, `env:`, `team:`) et établissez une [Politique de Tagging][6]. Cela permet des tableaux de bord, alertes et suivis de conformité ciblés. |
 | **Tableau de bord de Qualité des Moniteurs** | Visualisez les tendances en matière d'hygiène des moniteurs à travers les équipes, services et environnements pour identifier proactivement les lacunes et suivre les améliorations. | Configurez un [**tableau de bord de Qualité des Moniteurs**](#template-monitor-quality-dashboard) pour suivre les améliorations au fil du temps et prioriser les efforts de nettoyage à grande échelle. |

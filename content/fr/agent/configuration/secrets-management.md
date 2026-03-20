@@ -92,7 +92,7 @@ Après avoir configuré l'Agent pour utiliser AWS Secrets, vous pouvez référen
 
 La notation ENC est composée de :
 * `secretId` : soit le "nom amical" secret (par exemple, `/DatadogAgent/Production`) soit l'ARN (par exemple, `arn:aws:secretsmanager:us-east-1:123456789012:secret:/DatadogAgent/Production-FOga1K`).
-  - **Note** : Le format ARN complet est requis lors de l'accès à des secrets d'un autre compte où les identifiants AWS ou les identifiants `sts:AssumeRole` sont définis.
+  - **Note** : Le format ARN complet est requis lors de l'accès à des secrets d'un autre compte où les identifiants AWS ou `sts:AssumeRole` sont définis.
 * `secretKey` : la clé JSON du secret AWS que vous souhaitez utiliser.
 
 
@@ -335,7 +335,7 @@ Les services AWS suivants sont pris en charge :
 
 ##### Configurer un profil d'instance
 
-Datadog recommande d'utiliser la méthode [profil d'instance][1006] pour récupérer les secrets, car AWS gère toutes les variables d'environnement et les profils de session pour vous. D'autres instructions sur la façon de procéder peuvent être trouvées dans la [documentation officielle du gestionnaire de secrets AWS][1001].
+Datadog recommande d'utiliser la méthode [profil d'instance][1006] pour récupérer les secrets, car AWS gère toutes les variables d'environnement et les profils de session pour vous. D'autres instructions sur la façon de procéder peuvent être trouvées dans la [documentation officielle d'AWS Secrets Manager][1001].
 
 ##### Exemple de configuration
 
@@ -420,7 +420,7 @@ Pour interagir avec le Gestionnaire de Secrets GCP, le compte de service utilis�
 
 Ceci peut être accordé avec le rôle prédéfini **Accesseur de Secrets du Gestionnaire de Secrets** (`roles/secretmanager.secretAccessor`) ou un rôle personnalisé avec un [accès][5002] équivalent.
 
-Sur les environnements GCE ou GKE, ADC est configuré automatiquement via le compte de service attaché à l'instance ou au pod. Le compte de service attaché doit avoir les rôles appropriés pour accéder au Gestionnaire de Secrets GCP. De plus, l'environnement GCE ou GKE nécessite le `cloud-platform` [portée d'accès OAuth][5003].
+Sur les environnements GCE ou GKE, l'ADC est configuré automatiquement via le compte de service attaché à l'instance ou au pod. Le compte de service attaché doit avoir les rôles appropriés pour accéder au Gestionnaire de Secrets GCP. De plus, l'environnement GCE ou GKE nécessite le `cloud-platform` [portée d'accès OAuth][5003].
 
 ##### Exemple de configuration GCP
 
@@ -446,7 +446,7 @@ La notation ENC est composée de :
     - `secret-key;;latest` - Version `latest` explicite
     - `secret-key;;1` - Numéro de version spécifique
 
-Par exemple, en supposant des secrets GCP nommés `datadog-api-key` avec deux versions et `datadog-app-key`:
+Par exemple, en supposant des secrets GCP nommés `datadog-api-key` avec deux versions et `datadog-app-key` :
 
 ```yaml
 # datadog.yaml
@@ -530,17 +530,17 @@ path "sys/mounts" {
 ```
 3. Exécuter `vault policy write <policy_name> <path_to_*.hcl_file>`
 
-4. Choisissez la méthode d'authentification pour votre coffre-fort. Si vous utilisez la méthode de profil d'instance AWS, exécutez `vault auth enable aws`.
+4. Choisissez la méthode d'authentification pour votre coffre-fort. Si vous utilisez la méthode du profil d'instance AWS, exécutez `vault auth enable aws`.
 
 ##### Instructions sur le profil d'instance AWS
 
-Datadog recommande d'authentifier en utilisant la [méthode de profil d'instance][3003] si vous exécutez votre coffre-fort HashiCorp depuis une machine connectée à AWS.
+Datadog recommande d'authentifier en utilisant la [méthode du profil d'instance][3003] si vous exécutez votre coffre-fort HashiCorp depuis une machine connectée à AWS.
 
 Après cela, rédigez une [politique de coffre-fort spécifique à l'authentification][3004].
 
 ##### Exemple de configuration
 
-Dans l'exemple suivant, supposons que le préfixe de chemin secret du coffre-fort HashiCorp soit `/Datadog/Production` avec une clé de paramètre de `apikey` :
+Dans l'exemple suivant, supposons que le préfixe du chemin secret du coffre-fort HashiCorp soit `/Datadog/Production` avec une clé de paramètre de `apikey` :
 
 ```sh
 /DatadogAgent/Production/apikey: (SecureString) "<your_api_key>"
@@ -565,7 +565,7 @@ secret_backend_config:
 
 {{% collapse-content title="Secrets Kubernetes" level="h4" expanded=false id="id-for-kubernetes" %}}
 
-**Disponible dans la version de l'Agent 7.75+**
+**Disponible dans la version 7.75+ de l'Agent**
 
 Les services Kubernetes suivants sont pris en charge :
 
@@ -576,7 +576,7 @@ Les services Kubernetes suivants sont pris en charge :
 ##### Prérequis
 
 Le backend des secrets Kubernetes nécessite :
-- **Identifiants ServiceAccount** : Par défaut, utilise des jetons ServiceAccount montés automatiquement (`automountServiceAccountToken: true`, voir [ documentation Kubernetes ](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/#opt-out-of-api-credential-automounting)). Des chemins personnalisés peuvent être configurés si nécessaire.
+- **Identifiants ServiceAccount** : Par défaut, utilise des jetons ServiceAccount montés automatiquement (`automountServiceAccountToken: true`, voir [documentation Kubernetes](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/#opt-out-of-api-credential-automounting)). Des chemins personnalisés peuvent être configurés si nécessaire.
 - **Autorisations RBAC** : Le ServiceAccount de l'Agent doit avoir les autorisations pour lire les secrets des espaces de noms cibles
 - **Accès réseau** : Le pod de l'Agent doit pouvoir atteindre le serveur API Kubernetes
 
@@ -715,7 +715,7 @@ spec:
 {{% /tab %}}
 {{< /tabs >}}
 
-##### Configuration de chemin personnalisée
+##### Configuration de chemin personnalisé
 Si votre configuration ne suit pas les emplacements par défaut pour l'authentification basée sur ServiceAccount, vous pouvez spécifier `token_path` et `ca_path` à la place.
 
 {{< tabs >}}
@@ -755,7 +755,7 @@ override:
 {{% /tab %}}
 {{< /tabs >}}
 
-##### Configuration personnalisée du serveur API
+##### Configuration du serveur API personnalisé
 
 Si votre configuration n'expose pas les variables d'environnement par défaut `KUBERNETES_SERVICE_HOST` et `KUBERNETES_SERVICE_PORT`, vous pouvez fournir une `api_server` URL pour interagir avec l'API REST de Kubernetes.
 
@@ -799,7 +799,7 @@ override:
 
 {{% collapse-content title="Secrets Docker" level="h4" expanded=false id="id-for-docker" %}}
 
-**Disponible dans la version de l'Agent 7.75+**
+**Disponible dans la version 7.75+ de l'Agent**
 
 Les services Docker suivants sont pris en charge :
 
@@ -809,7 +809,7 @@ Les services Docker suivants sont pris en charge :
 
 ##### Prérequis
 
-Le backend des secrets Docker prend en charge à la fois [les secrets Docker Swarm][6002] et [les secrets Docker Compose][6003]. Par défaut, Swarm et Compose montent automatiquement les secrets dans le conteneur sous forme de fichiers à `/run/secrets` (Linux) ou `C:\ProgramData\Docker\secrets` (Windows).
+Le backend des secrets Docker prend en charge à la fois les [secrets Docker Swarm][6002] et les [secrets Docker Compose][6003]. Par défaut, Swarm et Compose montent automatiquement les secrets dans le conteneur en tant que fichiers à `/run/secrets` (Linux) ou `C:\ProgramData\Docker\secrets` (Windows).
 
 **Remarque** : Les secrets Compose peuvent être basés sur des fichiers (pointant vers des fichiers locaux) ou externes (référencer des secrets Swarm existants).
 
@@ -826,7 +826,7 @@ api_key: "ENC[dd_api_key]"
 ```
 
 Le format de notation ENC est le nom du secret, qui correspond au nom de fichier dans `/run/secrets/` :
-- `ENC[api_key]` lit depuis `/run/secrets/api_key` (Linux) ou `C:\ProgramData\Docker\secrets\api_key` (Windows)
+- `ENC[api_key]` lit à partir de `/run/secrets/api_key` (Linux) ou `C:\ProgramData\Docker\secrets\api_key` (Windows)
 
 **Chemin des secrets personnalisés :**
 Si Docker Swarm ou Compose sont configurés pour monter des secrets à un emplacement différent, vous pouvez le spécifier comme ceci :
@@ -955,7 +955,7 @@ secret_backend_config:
 
 {{% tab "Backend de fichier TEXT" %}}
 
-**Disponible dans la version de l'Agent 7.75+**
+**Disponible dans la version 7.75+ de l'Agent**
 
 **Remarque** : Chaque secret doit être stocké dans son propre fichier texte individuel.
 
@@ -1005,7 +1005,7 @@ secret_backend_config:
 
 ### Option 2 : Utilisation du script intégré pour Kubernetes et Docker
 
-Pour les environnements conteneurisés, les images de conteneur de l'Agent Datadog incluent un script intégré `/readsecret_multiple_providers.sh` à partir de la version v7.32.0. Ce script prend en charge la lecture des secrets à partir de :
+Pour les environnements conteneurisés, les images de conteneur de l'Agent Datadog incluent un script intégré `/readsecret_multiple_providers.sh` à partir de la version v7.32.0. Ce script prend en charge la lecture des secrets depuis :
 
 * Fichiers : utilisation de `ENC[file@/path/to/file]`
 * Secrets Kubernetes : utilisation de `ENC[k8s_secret@namespace/secret-name/key]`
@@ -1163,7 +1163,7 @@ Pour récupérer des secrets, l'Agent utilise un exécutable externe que vous fo
 
 Cela vous permet d'utiliser n'importe quelle solution de gestion des secrets et vous donne un contrôle total sur la façon dont l'Agent accède aux secrets.
 
-L'Agent envoie à cet exécutable une charge utile JSON via l'entrée standard contenant une liste de poignées de secrets à résoudre. Ensuite, votre exécutable récupère chaque secret et les renvoie au format JSON via une sortie standard.
+L'Agent envoie à cet exécutable une charge utile JSON via l'entrée standard contenant une liste de gestionnaires de secrets à résoudre. Ensuite, votre exécutable récupère chaque secret et les renvoie au format JSON via une sortie standard.
 
 L'exemple suivant montre ce que l'Agent envoie à votre exécutable sur STDIN :
 
@@ -1175,7 +1175,7 @@ L'exemple suivant montre ce que l'Agent envoie à votre exécutable sur STDIN :
 ```
 
 * `version` (chaîne) : La version du format.
-* `secrets` (liste de chaînes) : Chaque chaîne est une poignée pour un secret à récupérer.
+* `secrets` (liste de chaînes) : Chaque chaîne est un gestionnaire pour un secret à récupérer.
 
 
 L'exécutable répond par la sortie STDOUT suivante :
@@ -1292,7 +1292,7 @@ Sur Windows, votre exécutable doit :
 
 ## Actualisation des secrets à l'exécution
 
-À partir de l'Agent v7.67, vous pouvez configurer l'Agent pour actualiser les secrets résolus sans nécessiter un redémarrage.
+À partir de la version 7.67 de l'Agent, vous pouvez configurer l'Agent pour actualiser les secrets résolus sans nécessiter un redémarrage.
 
 Définir un intervalle d'actualisation :
 
@@ -1331,7 +1331,7 @@ secret_refresh_scatter: false
 ```
 
 ### Vérification de l'autodécouverte des secrets rafraîchit
-À partir de l'Agent v7.76, les vérifications programmées [Autodécouverte][1] peuvent rafraîchir les secrets à l'exécution si le modèle utilise la syntaxe `ENC[]`.
+À partir de l'Agent v7.76, les vérifications programmées [Autodiscovery][1] peuvent rafraîchir les secrets à l'exécution si le modèle utilise la syntaxe `ENC[]`.
 
 ```yaml
 labels:
@@ -1360,7 +1360,7 @@ L'Agent peut alors déclencher le rafraîchissement des secrets soit à l'interv
 
 À partir de la version v7.74 de l'Agent, l'Agent peut automatiquement rafraîchir les secrets lorsqu'il détecte une clé API invalide. Cela se produit lorsque l'Agent reçoit une réponse 403 Interdit de Datadog ou lorsque la vérification de santé périodique détecte une clé API invalide ou expirée.
 
-Pour activer cette fonctionnalité, définissez `secret_refresh_on_api_key_failure_interval` sur un intervalle en minutes dans votre fichier `datadog.yaml`. Définissez sur `0` pour désactiver (par défaut).
+Pour activer cette fonctionnalité, définissez `secret_refresh_on_api_key_failure_interval` sur un intervalle en minutes dans votre fichier `datadog.yaml`. Définir sur `0` pour désactiver (par défaut).
 
 Cet intervalle est le temps minimum entre 2 rafraîchissements pour éviter de spammer votre solution de gestion des secrets lorsqu'une clé API invalide est détectée.
 
@@ -1550,11 +1550,11 @@ Votre exécutable est exécuté par l'Agent lors de la récupération de vos sec
 
 Cela signifie que votre exécutable peut fonctionner avec votre utilisateur par défaut ou l'utilisateur de développement, mais pas lorsqu'il est exécuté par l'Agent, puisque `ddagentuser` a des droits plus restreints.
 
-Pour tester votre exécutable dans les mêmes conditions que l'Agent, mettez à jour le mot de passe du `ddagentuser` sur votre machine de développement. De cette manière, vous pouvez vous authentifier en tant que `ddagentuser` et exécuter votre exécutable dans le même contexte que celui dans lequel l'Agent l'exécuterait.
+Pour tester votre exécutable dans les mêmes conditions que l'Agent, mettez à jour le mot de passe du `ddagentuser` sur votre machine de développement. De cette façon, vous pouvez vous authentifier en tant que `ddagentuser` et exécuter votre exécutable dans le même contexte que celui dans lequel l'Agent fonctionnerait.
 
 Pour ce faire, suivez ces étapes :
 
-1. Retirez `ddagentuser` de la liste `Local Policies/User Rights Assignement/Deny Log on locally` dans le `Local Security Policy`.
+1. Supprimez `ddagentuser` de la liste `Local Policies/User Rights Assignement/Deny Log on locally` dans le `Local Security Policy`.
 2. Définissez un nouveau mot de passe pour `ddagentuser` (puisque celui généré au moment de l'installation n'est jamais enregistré nulle part). Dans PowerShell, exécutez :
     ```powershell
     $user = [ADSI]"WinNT://./ddagentuser";
@@ -1612,9 +1612,9 @@ Dans ce cas, utilisez la commande suivante :
 kubectl auth can-i get secret/database-secret -n database --as system:serviceaccount:default:datadog-agent
 ```
 
-Cette commande renvoie si les autorisations sont valides pour que l'Agent puisse voir ce Secret.
+Cette commande indique si les autorisations sont valides pour que l'Agent puisse voir ce Secret.
 
-### Retirez les sauts de ligne finaux {#remove-trailing-line-breaks}
+### Retirez les sauts de ligne à la fin {#remove-trailing-line-breaks}
 
 Certains outils de gestion des secrets ajoutent automatiquement un saut de ligne lors de l'exportation des secrets via des fichiers. Vous pouvez supprimer ces sauts de ligne en définissant `secret_backend_remove_trailing_line_break: true` dans [le fichier de configuration datadog.yaml][8], ou utilisez la variable d'environnement `DD_SECRET_BACKEND_REMOVE_TRAILING_LINE_BREAK` pour faire de même, en particulier dans des environnements conteneurisés.
 

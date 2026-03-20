@@ -177,9 +177,9 @@ module.exports = {
 {{% /tab %}}
 {{< /tabs >}}
 
-<div class="alert alert-info">Datadog LLM Observability prend également en charge tout cadre qui émet nativement des spans conformes à la convention sémantique <a href="https://opentelemetry.io/docs/specs/semconv/gen-ai/">OpenTelemetry GenAI v1.37+</a>, sans nécessiter le traceur Datadog. Voir <a href="/llm_observability/instrumentation/otel_instrumentation">Instrumentation OpenTelemetry</a> pour plus de détails.</div>
+<div class="alert alert-info">Datadog LLM Observability prend également en charge tout cadre qui émet nativement des spans conformes à la convention sémantique <a href="https://opentelemetry.io/docs/specs/semconv/gen-ai/">OpenTelemetry GenAI v1.37+</a>, sans nécessiter le traceur Datadog. Consultez <a href="/llm_observability/instrumentation/otel_instrumentation">Instrumentation OpenTelemetry</a> pour plus de détails.</div>
 
-## intégrations LLM
+## Intégrations LLM
 
 Les intégrations LLM de Datadog capturent la latence, les erreurs, les paramètres d'entrée, les messages d'entrée et de sortie, ainsi que l'utilisation des jetons (lorsqu'elle est disponible) pour les appels tracés.
 
@@ -295,13 +295,13 @@ L'intégration Anthropic instrumente les méthodes suivantes :
 {{% collapse-content title="CrewAI" level="h3" expanded=false id="crewai" %}}
 {{< tabs >}}
 {{% tab "Python" %}}
-L'[intégration CrewAI][1] trace automatiquement l'exécution des lancements de Crew, y compris les invocations de tâches/agents/outils, effectuées via l'[SDK Python de CrewAI][2].
+L'[intégration CrewAI][1] trace automatiquement l'exécution des démarrages Crew, y compris les invocations de tâches/agents/outils, effectuées via l'[SDK Python de CrewAI][2].
 
 ### Méthodes tracées
 
 L'intégration CrewAI instrumente les méthodes suivantes :
 
-- [Lancement de Crew][3] :
+- [Démarrage Crew][3] :
   - `crew.kickoff()`
   - `crew.kickoff_async()`
   - `crew.kickoff_for_each()`
@@ -522,7 +522,7 @@ L'intégration LiteLLM instrumente les méthodes suivantes :
 {{% collapse-content title="MCP" level="h3" expanded=false id="mcp" %}}
 {{< tabs >}}
 {{% tab "Python" %}}
-L'intégration du Modèle de Contexte de Protocole (MCP) instrumente les appels d'outils client et serveur dans le SDK [MCP][1].
+L'intégration du Protocole de Contexte de Modèle (MCP) instrumente les appels d'outils client et serveur dans le SDK [MCP][1].
 
 ### Méthodes tracées
 
@@ -601,7 +601,7 @@ L'intégration OpenAI instrumente les méthodes suivantes, y compris les appels 
 {{% /tab %}}
 
 {{% tab "Java" %}}
-L'[intégration OpenAI][1] fournit un traçage automatique pour les points de terminaison de [OpenAI Java SDK][2] concernant les complétions, les complétions de chat, les embeddings et les réponses vers OpenAI et Azure OpenAI.
+L'intégration [OpenAI][1] fournit un traçage automatique pour les points de terminaison de complétion, de complétion de chat, d'incorporations et de réponses de [OpenAI Java SDK][2] vers OpenAI et Azure OpenAI.
 
 ### Méthodes tracées
 
@@ -617,7 +617,7 @@ L'intégration OpenAI instrumente les méthodes suivantes sur `OpenAIClient`, y 
   - `openAiClient.chat().completions().createStreaming()`
   - `openAiClient.async().chat().completions().create()`
   - `openAiClient.async().chat().completions().createStreaming()`
-- [Embeddings][5] :
+- [Incorporations][5] :
   - `openAiClient.embeddings().create()`
   - `openAiClient.async().embeddings().create()`
 - [Réponses][6] :
@@ -626,7 +626,7 @@ L'intégration OpenAI instrumente les méthodes suivantes sur `OpenAIClient`, y 
   - `openAiClient.async().responses().create()`
   - `openAiClient.async().responses().createStreaming()`
 
-Le fournisseur (OpenAI vs Azure OpenAI) est automatiquement détecté en fonction du `baseUrl` configuré dans `ClientOptions`. Toutes les méthodes prennent en charge à la fois les variantes bloquantes et asynchrones (basées sur CompletableFuture).
+Le fournisseur (OpenAI vs Azure OpenAI) est automatiquement détecté en fonction du `baseUrl` configuré dans `ClientOptions`. Toutes les méthodes prennent en charge à la fois des variantes bloquantes et asynchrones (basées sur CompletableFuture).
 
 [1]: /fr/integrations/openai/
 [2]: https://platform.openai.com/docs/api-reference/introduction
@@ -672,7 +672,7 @@ Les opérations suivantes sont prises en charge :
 {{% collapse-content title="Pydantic AI" level="h3" expanded=false id="pydantic-ai" %}}
 {{< tabs >}}
 {{% tab "Python" %}}
-L'intégration de Pydantic AI instrumente les invocations d'agents et les appels d'outils effectués en utilisant le cadre d'agents [Pydantic AI][1].
+L'intégration de Pydantic AI instrumente les invocations d'agents et les appels d'outils effectués à l'aide du cadre d'agents [Pydantic AI][1].
 
 ### Méthodes tracées
 
@@ -768,7 +768,7 @@ async function main () {
 {{% collapse-content title="Vertex AI" level="h3" expanded=false id="vertex-ai" %}}
 {{< tabs >}}
 {{% tab "Python" %}}
-L'intégration [Vertex AI][1] trace automatiquement la génération de contenu et les appels de messages de chat effectués via le [SDK Python de Vertex AI de Google][2].
+L'intégration [Vertex AI][1] trace automatiquement la génération de contenu et les appels de messages de chat effectués via le [SDK Python Vertex AI de Google][2].
 
 ### Méthodes tracées
 

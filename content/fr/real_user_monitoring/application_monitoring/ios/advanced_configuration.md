@@ -392,7 +392,7 @@ You can automatically track views with UIKit and SwiftUI.
 
 {{% collapse-content title="UIKit" level="h4" expanded=true id="auto-track-views-uikit" %}}
 
-Pour suivre automatiquement les vues (`UIViewControllers`), utilisez l'option `uiKitViewsPredicate` lors de l'activation du RUM. Par défaut, les vues sont nommées avec le nom de la classe du contrôleur de vue. Pour le personnaliser, fournissez votre propre implémentation du `predicate` qui respecte le protocole `UIKitRUMViewsPredicate` :
+Pour suivre automatiquement les vues (`UIViewControllers`), utilisez l'option `uiKitViewsPredicate` lors de l'activation du RUM. Par défaut, les vues sont nommées avec le nom de classe du contrôleur de vue. Pour le personnaliser, fournissez votre propre implémentation du `predicate` qui respecte le protocole `UIKitRUMViewsPredicate` :
 
 {{< tabs >}}
 {{% tab "Swift" %}}

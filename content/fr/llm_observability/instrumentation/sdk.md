@@ -19,7 +19,7 @@ title: Référence SDK LLM Observability
 ---
 ## Aperçu
 
-Les SDK LLM Observability de Datadog fournissent une instrumentation automatique ainsi que des API d'instrumentation manuelle pour offrir une visibilité et des informations sur vos applications LLM.
+Les SDK LLM Observability de Datadog fournissent une instrumentation automatique ainsi que des API d'instrumentation manuelle pour offrir une observabilité et des insights sur vos applications LLM.
 
 ## Configuration
 
@@ -202,23 +202,23 @@ LLMObs.enable(
 
 `agentless_enabled`
 : optionnel - _booléen_ - **par défaut**: `false`
-<br />Uniquement requis si vous n'utilisez pas l'Agent Datadog, auquel cas cela doit être défini sur `True`. Cela configure la `ddtrace` bibliothèque pour ne pas envoyer de données nécessitant l'Agent Datadog. Si non fourni, cela par défaut à la valeur de `DD_LLMOBS_AGENTLESS_ENABLED`.
+<br />Uniquement requis si vous n'utilisez pas l'Agent Datadog, auquel cas cela doit être défini sur `True`. Cela configure la `ddtrace` bibliothèque pour ne pas envoyer de données nécessitant l'Agent Datadog. S'il n'est pas fourni, cela par défaut à la valeur de `DD_LLMOBS_AGENTLESS_ENABLED`.
 
 `site`
 : optionnel - _chaîne_
-<br />Le site Datadog pour soumettre vos données LLM. Votre site est {{< region-param key="dd_site" code="true" >}}. Si non fourni, cela par défaut à la valeur de `DD_SITE`.
+<br />Le site Datadog pour soumettre vos données LLM. Votre site est {{< region-param key="dd_site" code="true" >}}. S'il n'est pas fourni, cela par défaut à la valeur de `DD_SITE`.
 
 `api_key`
 : optionnel - _chaîne_
-<br />Votre clé API Datadog. Seulement requis si vous n'utilisez pas l'Agent Datadog. Si non fourni, cela par défaut à la valeur de `DD_API_KEY`.
+<br />Votre clé API Datadog. Seulement requis si vous n'utilisez pas l'Agent Datadog. S'il n'est pas fourni, cela par défaut à la valeur de `DD_API_KEY`.
 
 `env`
 : optionnel - _chaîne_
-<br />Le nom de l'environnement de votre application (exemples : `prod`, `pre-prod`, `staging`). Si non fourni, cela par défaut à la valeur de `DD_ENV`.
+<br />Le nom de l'environnement de votre application (exemples : `prod`, `pre-prod`, `staging`). S'il n'est pas fourni, cela par défaut à la valeur de `DD_ENV`.
 
 `service`
 : optionnel - _chaîne_
-<br />Le nom du service utilisé pour votre application. Si non fourni, cela par défaut à la valeur de `DD_SERVICE`.
+<br />Le nom du service utilisé pour votre application. S'il n'est pas fourni, cela par défaut à la valeur de `DD_SERVICE`.
 
 [1]: /fr/llm_observability/instrumentation/auto_instrumentation/
 {{% /tab %}}
@@ -248,7 +248,7 @@ const llmobs = tracer.llmobs;
 
 `mlApp`
 : optionnel - _chaîne_
-<br />Le nom de votre application LLM, service ou projet, sous lequel toutes les traces et spans sont regroupés. Cela aide à distinguer entre différentes applications ou expériences. Voir [Directives de nommage des applications](#application-naming-guidelines) pour les caractères autorisés et d'autres contraintes. Pour remplacer cette valeur pour une trace donnée, voir [Tracer plusieurs applications](#tracing-multiple-applications). Si non fourni, cela par défaut à la valeur de `DD_LLMOBS_ML_APP`.
+<br />Le nom de votre application LLM, service ou projet, sous lequel toutes les traces et spans sont regroupés. Cela aide à distinguer entre différentes applications ou expériences. Voir [Directives de nommage des applications](#application-naming-guidelines) pour les caractères autorisés et d'autres contraintes. Pour remplacer cette valeur pour une trace donnée, voir [Tracer plusieurs applications](#tracing-multiple-applications). S'il n'est pas fourni, cela par défaut à la valeur de `DD_LLMOBS_ML_APP`.
 
 `agentlessEnabled`
 : optionnel - _booléen_ - **par défaut** : `false`
@@ -258,7 +258,7 @@ const llmobs = tracer.llmobs;
 
 `site`
 : optionnel - _chaîne_
-<br />Le site Datadog pour soumettre vos données LLM. Votre site est {{< region-param key="dd_site" code="true" >}}. Si non fourni, cela par défaut à la valeur de `DD_SITE`.
+<br />Le site Datadog pour soumettre vos données LLM. Votre site est {{< region-param key="dd_site" code="true" >}}. S'il n'est pas fourni, cela par défaut à la valeur de `DD_SITE`.
 
 `env`
 : optionnel - _chaîne_
@@ -266,7 +266,7 @@ const llmobs = tracer.llmobs;
 
 `service`
 : optionnel - _chaîne_
-<br />Le nom du service utilisé pour votre application. Si non fourni, cela par défaut à la valeur de `DD_SERVICE`.
+<br />Le nom du service utilisé pour votre application. S'il n'est pas fourni, cela par défaut à la valeur de `DD_SERVICE`.
 
 ##### Variables d'environnement
 
@@ -408,7 +408,7 @@ Les types de span sont requis et sont spécifiés sur l'objet `options` passé a
 
 ### Capture automatique des arguments/outputs/noms de fonction
 
-`llmobs.wrap` (avec [`llmobs.decorate`](#function-decorators-in-typescript) pour TypeScript) essaie de capturer automatiquement les entrées, les sorties et le nom de la fonction étant tracée. Si vous devez annoter manuellement un span, consultez [Enrichissement des spans](#enriching-spans). Les entrées et sorties que vous annotez remplaceront la capture automatique. De plus, pour remplacer le nom de la fonction, passez la propriété `name` dans l'objet options à la fonction `llmobs.wrap` :
+`llmobs.wrap` (avec [`llmobs.decorate`](#function-decorators-in-typescript) pour TypeScript) essaie de capturer automatiquement les entrées, les sorties et le nom de la fonction étant tracée. Si vous devez annoter manuellement un span, consultez [Enrichissement des spans](#enriching-spans). Les entrées et sorties que vous annotez remplaceront la capture automatique. De plus, pour remplacer le nom de la fonction, passez la propriété `name` sur l'objet options à la fonction `llmobs.wrap` :
 
 {{< code-block lang="javascript" >}}
 function processMessage () {
@@ -960,7 +960,7 @@ def sanitize_input():
 {{% /tab %}}
 
 {{% tab "Node.js" %}}
-Pour tracer une portée de tâche, spécifiez le type de portée comme `task`, et éventuellement spécifiez des arguments dans l'objet d'options.
+Pour tracer une portée de tâche, spécifiez le type de portée comme `task`, et optionnellement spécifiez des arguments dans l'objet d'options.
 
 {{% collapse-content title="Arguments" level="h4" expanded=false id="task-span-arguments" %}}
 
@@ -974,7 +974,7 @@ Pour tracer une portée de tâche, spécifiez le type de portée comme `task`, e
 
 `mlApp`
 : optionnel - _chaîne_
-<br/>Le nom de l'application ML à laquelle l'opération appartient. Voir [Tracer plusieurs applications](#tracing-multiple-applications) pour plus d'informations.
+<br/>Le nom de l'application ML à laquelle appartient l'opération. Voir [Tracer plusieurs applications](#tracing-multiple-applications) pour plus d'informations.
 
 {{% /collapse-content %}}
 
@@ -1005,7 +1005,7 @@ LLMObs.startTaskSpan(spanName, mlApp, sessionID);
 
 `mlApp`
 : optionnel - _Chaîne_
-<br/>Le nom de l'application ML à laquelle l'opération appartient. Fournir une valeur non nulle remplace le nom de l'application ML fourni au début de l'application. Voir [Tracer plusieurs applications](#tracing-multiple-applications) pour plus d'informations.
+<br/>Le nom de l'application ML à laquelle appartient l'opération. Fournir une valeur non nulle remplace le nom de l'application ML fourni au début de l'application. Voir [Tracer plusieurs applications](#tracing-multiple-applications) pour plus d'informations.
 
 `sessionId`
 : optionnel - _Chaîne_
@@ -1124,7 +1124,7 @@ Pour tracer une période de récupération, utilisez le décorateur de fonction 
 
 `ml_app`
 : optionnel - _chaîne_
-<br/>Le nom de l'application ML à laquelle l'opération appartient. Voir [Tracer plusieurs applications](#tracing-multiple-applications) pour plus d'informations.
+<br/>Le nom de l'application ML à laquelle appartient l'opération. Voir [Tracer plusieurs applications](#tracing-multiple-applications) pour plus d'informations.
 
 {{% /collapse-content %}}
 
@@ -1165,7 +1165,7 @@ Pour tracer une période de récupération, spécifiez le type de période comme
 
 `mlApp`
 : optionnel - _chaîne_
-<br/>Le nom de l'application ML à laquelle l'opération appartient. Voir [Tracer plusieurs applications](#tracing-multiple-applications) pour plus d'informations.
+<br/>Le nom de l'application ML à laquelle appartient l'opération. Voir [Tracer plusieurs applications](#tracing-multiple-applications) pour plus d'informations.
 
 {{% /collapse-content %}}
 
@@ -1276,16 +1276,16 @@ La méthode `LLMObs.annotate()` accepte les arguments suivants :
 <br />Le span à annoter. Si `span` n'est pas fourni (comme lors de l'utilisation de décorateurs de fonction), le SDK annote le span actif actuel.
 
 `input_data`
-: optionnel - _type sérialisable JSON ou liste de dictionnaires_
-<br />Soit un type sérialisable JSON (pour les spans non-LLM) ou une liste de dictionnaires avec ce format : `{"content": "...", "role": "...", "tool_calls": ..., "tool_results": ...}`, où `"tool_calls"` sont une liste optionnelle de dictionnaires d'appels d'outils avec des clés requises : `"name"`, `"arguments"`, et des clés optionnelles : `"tool_id"`, `"type"`, et `"tool_results"` sont une liste optionnelle de dictionnaires de résultats d'outils avec une clé requise : `"result"`, et des clés optionnelles : `"name"`, `"tool_id"`, `"type"` pour les scénarios d'appel de fonction. **Remarque** : Les spans d'incorporation sont un cas spécial et nécessitent une chaîne ou un dictionnaire (ou une liste de dictionnaires) avec ce format : `{"text": "..."}`.
+: optionnel - _type sérialisable en JSON ou liste de dictionnaires_
+<br />Soit un type sérialisable en JSON (pour les spans non-LLM) ou une liste de dictionnaires avec ce format : `{"content": "...", "role": "...", "tool_calls": ..., "tool_results": ...}`, où `"tool_calls"` sont une liste optionnelle de dictionnaires d'appels d'outils avec des clés requises : `"name"`, `"arguments"`, et des clés optionnelles : `"tool_id"`, `"type"`, et `"tool_results"` sont une liste optionnelle de dictionnaires de résultats d'outils avec une clé requise : `"result"`, et des clés optionnelles : `"name"`, `"tool_id"`, `"type"` pour les scénarios d'appel de fonction. **Remarque** : Les spans d'incorporation sont un cas particulier et nécessitent une chaîne ou un dictionnaire (ou une liste de dictionnaires) avec ce format : `{"text": "..."}`.
 
 `output_data`
-: optionnel - _type sérialisable JSON ou liste de dictionnaires_
-<br />Soit un type sérialisable JSON (pour les spans non-LLM) ou une liste de dictionnaires avec ce format : `{"content": "...", "role": "...", "tool_calls": ...}`, où `"tool_calls"` sont une liste optionnelle de dictionnaires d'appels d'outils avec des clés requises : `"name"`, `"arguments"`, et des clés optionnelles : `"tool_id"`, `"type"` pour les scénarios d'appel de fonction. **Remarque** : Les spans de récupération sont un cas spécial et nécessitent une chaîne ou un dictionnaire (ou une liste de dictionnaires) avec ce format : `{"text": "...", "name": "...", "score": float, "id": "..."}`.
+: optionnel - _type sérialisable en JSON ou liste de dictionnaires_
+<br />Soit un type sérialisable en JSON (pour les spans non-LLM) ou une liste de dictionnaires avec ce format : `{"content": "...", "role": "...", "tool_calls": ...}`, où `"tool_calls"` sont une liste optionnelle de dictionnaires d'appels d'outils avec des clés requises : `"name"`, `"arguments"`, et des clés optionnelles : `"tool_id"`, `"type"` pour les scénarios d'appel de fonction. **Remarque** : Les spans de récupération sont un cas particulier et nécessitent une chaîne ou un dictionnaire (ou une liste de dictionnaires) avec ce format : `{"text": "...", "name": "...", "score": float, "id": "..."}`.
 
 `tool_definitions`
 : optionnel - _liste de dictionnaires_
-<br />Liste de dictionnaires de définition d'outils pour les scénarios d'appel de fonction. Chaque définition d'outil doit avoir une clé requise `"name": "..."` et des clés optionnelles `"description": "..."` et `"schema": {...}`.
+<br />Liste de dictionnaires de définition d'outils pour les scénarios d'appel de fonction. Chaque définition d'outil doit avoir une clé `"name": "..."` requise et des clés optionnelles `"description": "..."` et `"schema": {...}`.
 
 `metadata`
 : optionnel - _dictionnaire_
@@ -1612,7 +1612,7 @@ La méthode membre `addThrowable()` de l'interface `LLMObsSpan` accepte l'argume
 
 `throwable`
 : requis - _Throwable_
-<br /> Le throwable/exception qui s'est produit.
+<br /> Le throwable/exceptions qui s'est produit.
 
 #### Ajout d'un message d'erreur
 
@@ -1632,7 +1632,7 @@ La méthode membre `setError()` de l'interface `LLMObsSpan` accepte l'argument s
 
 `error`
 : requis - _booléen_
-<br /> `true` si la portée a échoué.
+<br /> `true` si la portée a rencontré une erreur.
 
 #### Exemples
 
@@ -1656,7 +1656,7 @@ public class MyJavaClass {
 }
 ```
 
-### Annotation des métadonnées
+### Annotation de métadonnées
 
 La méthode membre `setMetadata()` de l'interface `LLMObsSpan` accepte les arguments suivants :
 
@@ -1702,11 +1702,11 @@ La méthode `LLMObs.annotation_context()` accepte les arguments suivants :
 
 `name`
 : optionnel - _str_
-<br />Nom qui remplace le nom de la portée pour toutes les portées auto-instrumentées démarrées dans le contexte d'annotation.
+<br />Nom qui remplace le nom de la portée pour toutes les portées auto-instrumentées qui sont démarrées dans le contexte d'annotation.
 
 `prompt`
 : optionnel - _dictionnaire_
-<br />Un dictionnaire qui représente l'invite utilisée pour un appel LLM. Voir la documentation de l'objet [Prompt](#prompt-tracking-arguments) pour le schéma complet et les clés prises en charge. Vous pouvez également importer l'objet `Prompt` depuis `ddtrace.llmobs.utils` et le passer en tant qu'argument `prompt`. **Remarque** : Cet argument ne s'applique qu'aux portées LLM.
+<br />Un dictionnaire qui représente l'invite utilisée pour un appel LLM. Voir la documentation de l'objet [Invite](#prompt-tracking-arguments) pour le schéma complet et les clés prises en charge. Vous pouvez également importer l'objet `Prompt` depuis `ddtrace.llmobs.utils` et le passer en tant qu'argument `prompt`. **Remarque** : Cet argument ne s'applique qu'aux portées LLM.
 
 `tags`
 : optionnel - _dictionnaire_
@@ -1756,7 +1756,7 @@ La méthode `llmobs.annotationContext()` accepte les options suivantes en premie
 
 `name`
 : optionnel - _str_
-<br />Nom qui remplace le nom de la portée pour toutes les portées auto-instrumentées démarrées dans le contexte d'annotation.
+<br />Nom qui remplace le nom de la portée pour toutes les portées auto-instrumentées qui sont démarrées dans le contexte d'annotation.
 
 `tags`
 : optionnel - _objet_
@@ -1816,8 +1816,8 @@ Clés prises en charge :
 - `template` (str) : Chaîne de modèle avec des espaces réservés (par exemple, `"Traduire {{text}} en {{lang}}"`).
 - `chat_template` (List[Message]) : Forme de modèle multi-message. Fournissez une liste d'objets `{ "role": "<role>", "content": "<template string with placeholders>" }`.
 - `tags` (Dict[str, str]) : Étiquettes à attacher à l'exécution de l'invite.
-- `rag_context_variables` (List[str]) : Clés de variables contenant le contenu de vérité de base/contexte. Utilisé pour [la détection d'hallucinations](/llm_observability/evaluations/managed_evaluations/?tab=openai#hallucination).
-- `rag_query_variables` (List[str]) : Clés de variables contenant la requête de l'utilisateur. Utilisé pour [la détection d'hallucinations](/llm_observability/evaluations/managed_evaluations/?tab=openai#hallucination).
+- `rag_context_variables` (List[str]) : Clés de variables contenant le contenu de vérité de base/contexte. Utilisé pour [détection d'hallucination](/llm_observability/evaluations/managed_evaluations/?tab=openai#hallucination).
+- `rag_query_variables` (List[str]) : Clés de variables contenant la requête de l'utilisateur. Utilisé pour [détection d'hallucination](/llm_observability/evaluations/managed_evaluations/?tab=openai#hallucination).
 
 {{% /collapse-content %}}
 
@@ -1916,7 +1916,7 @@ function answerQuestion(text) {
 - L'annotation d'une invite n'est disponible que sur les intervalles LLM.
 - Placez l'annotation immédiatement avant l'appel du fournisseur afin qu'elle s'applique au bon intervalle LLM.
 - Utilisez une invite unique `id` pour distinguer différentes invites au sein de votre application.
-- Gardez les modèles statiques en utilisant la syntaxe des espaces réservés (comme `{{nom_variable}}`) and define dynamic content in the `sections de variables.
+- Gardez les modèles statiques en utilisant la syntaxe des espaces réservés (comme `{{nom_variable}}`) and define dynamic content in the `section des variables.
 - Pour plusieurs appels LLM auto-instrumentés dans un bloc, utilisez un contexte d'annotation pour appliquer les mêmes métadonnées d'invite à travers les appels. Voir [Annoter les spans auto-instrumentés](#annotating-auto-instrumented-spans).
 
 ### Suivi des versions
@@ -1928,7 +1928,7 @@ Le système de versionnage fonctionne comme suit :
 - **Versionnage manuel** : Lorsque un tag `version` est fourni, LLM Observability utilise votre étiquette de version spécifiée exactement comme fournie.
 - **Historique des versions** : Les versions auto-générées et manuelles sont maintenues dans l'historique des versions pour suivre l'évolution des invites au fil du temps.
 
-Cela vous donne la flexibilité de vous fier à la gestion automatique des versions basée sur les changements de contenu du modèle, ou de maintenir un contrôle total sur le versionnage avec vos propres étiquettes de version.
+Cela vous donne la flexibilité de vous fier soit à la gestion automatique des versions basée sur les changements de contenu du modèle, soit de maintenir un contrôle total sur le versionnage avec vos propres étiquettes de version.
 
 ## Suivi des coûts
 Attachez des métriques de tokens (pour le suivi automatique des coûts) ou des métriques de coûts (pour le suivi manuel des coûts) à vos spans LLM/embedding. Les métriques de tokens permettent à Datadog de calculer les coûts en utilisant les prix du fournisseur, tandis que les métriques de coûts vous permettent de fournir vos propres prix lors de l'utilisation de modèles personnalisés ou non pris en charge. Pour plus de détails, voir [Coûts][14].
@@ -1965,7 +1965,7 @@ def llm_call(prompt):
 {{< /code-block >}}
 
 #### Cas d'utilisation : Utilisation d'un modèle personnalisé
-Pour les modèles personnalisés ou non pris en charge, vous devez annoter manuellement la portée avec les données de coût.
+Pour les modèles personnalisés ou non pris en charge, vous devez annoter manuellement l'intervalle avec les données de coût.
 
 {{< code-block lang="python" >}}
 from ddtrace.llmobs import LLMObs
@@ -1998,21 +1998,21 @@ Le SDK d'observabilité LLM fournit des méthodes pour exporter et soumettre vos
 
 <div class="alert alert-info"> Pour créer des évaluateurs réutilisables basés sur des classes (<code>BaseEvaluator</code>, <code>BaseSummaryEvaluator</code>) avec des métadonnées de résultats riches, consultez le <a href="/llm_observability/guide/evaluation_developer_guide/">Guide du développeur d'évaluation</a>.</div>
 
-Les évaluations doivent être jointes à une seule portée. Vous pouvez identifier la portée cible en utilisant l'une de ces deux méthodes :
-- _ Jointure basée sur des balises_ - Joindre une évaluation en utilisant une paire de balises clé-valeur unique qui est définie sur une seule portée. L'évaluation échouera à se joindre si la paire de balises clé-valeur correspond à plusieurs portées ou à aucune portée.
-- _ Référence directe à la portée_ - Joindre une évaluation en utilisant la combinaison de l'ID de trace unique de la portée et de l'ID de portée.
+Les évaluations doivent être jointes à un seul intervalle. Vous pouvez identifier l'intervalle cible en utilisant l'une de ces deux méthodes :
+- _ Jointure basée sur des tags_ - Joindre une évaluation en utilisant une paire de tags clé-valeur unique qui est définie sur un seul intervalle. L'évaluation échouera à se joindre si la paire clé-valeur de tag correspond à plusieurs intervalles ou à aucun intervalle.
+- _ Référence directe à l'intervalle_ - Joindre une évaluation en utilisant la combinaison de l'ID de trace unique de l'intervalle et de l'ID de l'intervalle.
 
-### Exporter une portée
+### Exporter un intervalle
 {{< tabs >}}
 {{% tab "Python" %}}
-`LLMObs.export_span()` peut être utilisé pour extraire le contexte de la portée d'une portée. Cette méthode est utile pour associer votre évaluation à la portée correspondante.
+`LLMObs.export_span()` peut être utilisé pour extraire le contexte de l'intervalle d'un intervalle. Cette méthode est utile pour associer votre évaluation à l'intervalle correspondant.
 
 #### Arguments
 La méthode `LLMObs.export_span()` accepte l'argument suivant :
 
 `span`
-: optionnel - _Portée_
-<br /> La portée à partir de laquelle extraire le contexte de la portée (IDs de portée et de trace). Si non fourni (comme lors de l'utilisation de décorateurs de fonction), le SDK exporte la portée active actuelle.
+: optionnel - _Intervalle_
+<br /> L'intervalle à partir duquel extraire le contexte de l'intervalle (IDs d'intervalle et de trace). Si non fourni (comme lors de l'utilisation de décorateurs de fonction), le SDK exporte l'intervalle actif actuel.
 
 #### Exemple
 
@@ -2030,15 +2030,15 @@ def llm_call():
 {{% /tab %}}
 
 {{% tab "Node.js" %}}
-`llmobs.exportSpan()` peut être utilisé pour extraire le contexte de la portée d'une portée. Vous devrez utiliser cette méthode pour associer votre évaluation avec l'intervalle correspondant.
+`llmobs.exportSpan()` peut être utilisé pour extraire le contexte de l'intervalle d'un intervalle. Vous devrez utiliser cette méthode pour associer votre évaluation à la plage correspondante.
 
 #### Arguments
 
 La méthode `llmobs.exportSpan()` accepte l'argument suivant :
 
 `span`
-: optionnel - _Portée_
-<br /> La portée à partir de laquelle extraire le contexte de la portée (IDs de portée et de trace). S'il n'est pas fourni (comme lors de l'utilisation de wrappers de fonction), le SDK exporte l'intervalle actif actuel.
+: optionnel - _Intervalle_
+<br /> L'intervalle à partir duquel extraire le contexte de l'intervalle (IDs d'intervalle et de trace). S'il n'est pas fourni (comme lors de l'utilisation de wrappers de fonction), le SDK exporte la plage active actuelle.
 
 #### Exemple
 
@@ -2057,11 +2057,11 @@ llmCall = llmobs.wrap({ kind: 'llm', name: 'invokeLLM', modelName: 'claude', mod
 
 {{< tabs >}}
 {{% tab "Python" %}}
-`LLMObs.submit_evaluation()` peut être utilisé pour soumettre votre évaluation personnalisée associée à un intervalle donné.
+`LLMObs.submit_evaluation()` peut être utilisé pour soumettre votre évaluation personnalisée associée à une plage donnée.
 
 <div class="alert alert-info"><code>LLMObs.submit_evaluation_for</code> est obsolète et sera supprimé dans la prochaine version majeure de ddtrace (4.0). Pour migrer, renommez vos appels <code>LLMObs.submit_evaluation_for</code> avec <code>LLMObs.submit_evaluation</code>.</div>
 
-**Remarque** : Les évaluations personnalisées sont des évaluateurs que vous implémentez et hébergez vous-même. Celles-ci diffèrent des évaluations prêtes à l'emploi, qui sont automatiquement calculées par Datadog en utilisant des évaluateurs intégrés. Pour configurer des évaluations prêtes à l'emploi pour votre application, utilisez la page [**LLM Observabilité** > **Paramètres** > **Évaluations**][1] dans Datadog.
+**Remarque** : Les évaluations personnalisées sont des évaluateurs que vous implémentez et hébergez vous-même. Celles-ci diffèrent des évaluations prêtes à l'emploi, qui sont automatiquement calculées par Datadog à l'aide d'évaluateurs intégrés. Pour configurer des évaluations prêtes à l'emploi pour votre application, utilisez la page [**LLM Observabilité** > **Paramètres** > **Évaluations**][1] dans Datadog.
 
 La méthode `LLMObs.submit_evaluation()` accepte les arguments suivants :
 
@@ -2080,7 +2080,7 @@ La méthode `LLMObs.submit_evaluation()` accepte les arguments suivants :
 
 `span`
 : optionnel - _dictionnaire_
-<br />Un dictionnaire qui identifie de manière unique l'intervalle associé à cette évaluation. Doit contenir `span_id` (chaîne) et `trace_id` (chaîne). Utilisez [`LLMObs.export_span()`](#exporting-a-span) pour générer ce dictionnaire.
+<br />Un dictionnaire qui identifie de manière unique la plage associée à cette évaluation. Doit contenir `span_id` (chaîne) et `trace_id` (chaîne). Utilisez [`LLMObs.export_span()`](#exporting-a-span) pour générer ce dictionnaire.
 
 `span_with_tag_value`
 : optionnel - _dictionnaire_
@@ -2094,7 +2094,7 @@ La méthode `LLMObs.submit_evaluation()` accepte les arguments suivants :
 
 `timestamp_ms`
 : optionnel - _entier_
-<br />L'horodatage unix en millisecondes lorsque le résultat de la métrique d'évaluation a été généré. Si non fourni, cela par défaut à l'heure actuelle.
+<br />L'horodatage unix en millisecondes lorsque le résultat de la métrique d'évaluation a été généré. S'il n'est pas fourni, cela par défaut à l'heure actuelle.
 
 `tags`
 : optionnel - _dictionnaire_
@@ -2529,7 +2529,7 @@ patch(<INTEGRATION_NAME>=True)
 
 Si votre application n'utilise aucune de ces bibliothèques prises en charge, vous pouvez activer le traçage distribué en propageant manuellement les informations de portée vers et depuis les en-têtes HTTP. Le SDK fournit les méthodes d'aide `LLMObs.inject_distributed_headers()` et `LLMObs.activate_distributed_headers()` pour injecter et activer les contextes de traçage dans les en-têtes de requête.
 
-### Injection des en-têtes distribués
+### Injection d'en-têtes distribués
 
 La méthode `LLMObs.inject_distributed_headers()` prend une portée et injecte son contexte dans les en-têtes HTTP à inclure dans la requête. Cette méthode accepte les arguments suivants :
 
@@ -2545,7 +2545,7 @@ La méthode `LLMObs.inject_distributed_headers()` prend une portée et injecte s
 
 La méthode `LLMObs.activate_distributed_headers()` prend des en-têtes HTTP et extrait les attributs de contexte de traçage à activer dans le nouveau service.
 
-**Remarque** : Vous devez appeler `LLMObs.activate_distributed_headers()` avant de commencer toute portée dans votre service en aval. Les portées commencées auparavant (y compris les portées de décorateurs de fonction) ne sont pas capturées dans le traçage distribué.
+**Remarque** : Vous devez appeler `LLMObs.activate_distributed_headers()` avant de commencer toute portée dans votre service en aval. Les portées commencées auparavant (y compris les portées de décorateur de fonction) ne sont pas capturées dans le traçage distribué.
 
 Cette méthode accepte l'argument suivant :
 

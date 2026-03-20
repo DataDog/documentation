@@ -562,13 +562,13 @@ Vous devriez voir des métriques du plan de contrôle dans Datadog, y compris :
 
 ### Configuration héritée
 
-Sur OpenShift 4, tous les composants du plan de contrôle peuvent être surveillés à l'aide de vérifications de point de terminaison.
+Sur OpenShift 4, tous les composants du plan de contrôle peuvent être surveillés à l'aide de vérifications des points de terminaison.
 
 #### Prérequis
 
 1. Activer le [Cluster Agent][6] de Datadog
 1. Activer les [vérifications de cluster][7]
-1. Activer les [vérifications de point de terminaison][8]
+1. Activer les [vérifications des points de terminaison][8]
 1. Assurez-vous que vous êtes connecté avec des autorisations suffisantes pour modifier les services et créer des secrets.
 
 #### Serveur API
@@ -583,7 +583,7 @@ oc annotate service kubernetes -n default 'ad.datadoghq.com/endpoints.resolve=ip
 
 ```
 
-La dernière annotation `ad.datadoghq.com/endpoints.resolve` est nécessaire car le service est devant des pods statiques. Le Cluster Agent de Datadog planifie les vérifications en tant que vérifications de point de terminaison et les dispatches aux Cluster Check Runners. Les nœuds sur lesquels ils s'exécutent peuvent être identifiés avec :
+La dernière annotation `ad.datadoghq.com/endpoints.resolve` est nécessaire car le service est devant des pods statiques. Le Cluster Agent de Datadog planifie les vérifications en tant que vérifications des points de terminaison et les dispatches aux Cluster Check Runners. Les nœuds sur lesquels ils s'exécutent peuvent être identifiés avec :
 
 ```shell
 oc exec -it <datadog cluster agent pod> -n <datadog ns> -- agent clusterchecks
@@ -601,7 +601,7 @@ oc get secret kube-etcd-client-certs -n openshift-monitoring -o yaml | sed 's/na
 
 Ces certificats doivent être montés sur les pods Cluster Check Runner en ajoutant les volumes et les volumeMounts comme ci-dessous.
 
-**Remarque** : Les montages sont également inclus pour désactiver le fichier de configuration automatique de vérification Etcd inclus avec l'agent.
+**Remarque** : Des montages sont également inclus pour désactiver le fichier de configuration automatique de vérification Etcd inclus avec l'agent.
 
 
 {{< tabs >}}
@@ -666,7 +666,7 @@ oc annotate service etcd -n openshift-etcd 'ad.datadoghq.com/endpoints.resolve=i
 
 ```
 
-Le Cluster Agent de Datadog planifie les vérifications en tant que vérifications de point de terminaison et les dispatches aux Cluster Check Runners.
+Le Cluster Agent de Datadog planifie les vérifications en tant que vérifications des points de terminaison et les dispatches aux Cluster Check Runners.
 
 {{% /collapse-content %}}
 
@@ -681,7 +681,7 @@ oc get secret etcd-metric-client -n openshift-etcd-operator -o yaml | sed 's/nam
 
 Ces certificats doivent être montés sur les pods Cluster Check Runner en ajoutant les volumes et les volumeMounts comme ci-dessous.
 
-**Remarque** : Les montages sont également inclus pour désactiver le fichier de configuration automatique de vérification Etcd inclus avec l'agent.
+**Remarque** : Des montages sont également inclus pour désactiver le fichier de configuration automatique de vérification Etcd inclus avec l'agent.
 
 
 {{< tabs >}}
@@ -746,7 +746,7 @@ oc annotate service etcd -n openshift-etcd 'ad.datadoghq.com/endpoints.instances
 oc annotate service etcd -n openshift-etcd 'ad.datadoghq.com/endpoints.resolve=ip'
 ```
 
-Le Cluster Agent de Datadog planifie les vérifications en tant que vérifications de point de terminaison et les dispatches aux Cluster Check Runners.
+Le Cluster Agent de Datadog planifie les vérifications en tant que vérifications des points de terminaison et les dispatches aux Cluster Check Runners.
 
 {{% /collapse-content %}}
 
@@ -764,7 +764,7 @@ oc annotate service kube-controller-manager -n openshift-kube-controller-manager
 
 ```
 
-Le Cluster Agent de Datadog planifie les vérifications en tant que vérifications de point de terminaison et les dispatches aux Cluster Check Runners.
+Le Cluster Agent de Datadog planifie les vérifications en tant que vérifications des points de terminaison et les dispatches aux Cluster Check Runners.
 
 
 
@@ -781,7 +781,7 @@ oc annotate service scheduler -n openshift-kube-scheduler 'ad.datadoghq.com/endp
 
 ```
 
-Le Cluster Agent de Datadog planifie les vérifications en tant que vérifications de point de terminaison et les dispatches aux Cluster Check Runners.
+Le Cluster Agent de Datadog planifie les vérifications en tant que vérifications des points de terminaison et les dispatches aux Cluster Check Runners.
 
 
 ## Kubernetes sur OpenShift 3 {#OpenShift3}
@@ -807,7 +807,7 @@ oc annotate service kubernetes -n default 'ad.datadoghq.com/endpoints.resolve=ip
 
 ```
 
-La dernière annotation `ad.datadoghq.com/endpoints.resolve` est nécessaire car le service est devant des pods statiques. Le Cluster Agent de Datadog planifie les vérifications en tant que vérifications de point de terminaison et les dispatches aux Cluster Check Runners. Les nœuds sur lesquels ils s'exécutent peuvent être identifiés avec :
+La dernière annotation `ad.datadoghq.com/endpoints.resolve` est nécessaire car le service est devant des pods statiques. Le Cluster Agent de Datadog planifie les vérifications en tant que vérifications des points de terminaison et les dispatches aux Cluster Check Runners. Les nœuds sur lesquels ils s'exécutent peuvent être identifiés avec :
 
 ```shell
 oc exec -it <datadog cluster agent pod> -n <datadog ns> -- agent clusterchecks
@@ -888,7 +888,7 @@ oc annotate service etcd-copy -n openshift-etcd 'ad.datadoghq.com/endpoints.reso
 
 ```
 
-Le Cluster Agent de Datadog planifie les vérifications en tant que vérifications de point de terminaison et les dispatches aux Cluster Check Runners.
+Le Cluster Agent de Datadog planifie les vérifications en tant que vérifications des points de terminaison et les dispatches aux Cluster Check Runners.
 
 
 ### Gestionnaire de contrôleur et planificateur
@@ -912,7 +912,7 @@ oc annotate service kube-controllers-copy -n kube-system 'ad.datadoghq.com/endpo
 
 ```
 
-Le Cluster Agent de Datadog planifie les vérifications en tant que vérifications de point de terminaison et les dispatches aux Cluster Check Runners.
+Le Cluster Agent de Datadog planifie les vérifications en tant que vérifications des points de terminaison et les dispatches aux Cluster Check Runners.
 
 ## Kubernetes sur Talos Linux {#TalosLinux}
 
@@ -1063,7 +1063,7 @@ annotations:
   ad.datadoghq.com/endpoints.instances: '[{ "prometheus_url": "https://%%host%%:%%port%%/metrics", "bearer_token_auth": "true" }]'
 ```
 
-### Ajouter des services Kubernetes pour configurer les vérifications d'autodécouverte
+### Ajouter des services Kubernetes pour configurer les vérifications d'Autodécouverte
 
 En ajoutant des services Kubernetes sans tête pour définir les configurations de vérification, le Datadog Agent est capable de cibler les pods `pushprox` et de collecter des métriques.
 
@@ -1243,7 +1243,7 @@ metadata:
 
 Etcd est exécuté dans Docker en dehors de Kubernetes, et des certificats sont nécessaires pour communiquer avec le service Etcd. Les étapes suggérées pour configurer la surveillance d'Etcd nécessitent un accès SSH à un nœud du plan de contrôle exécutant Etcd.
 
-1. Connectez-vous en SSH au nœud du plan de contrôle en suivant la [documentation de Rancher][9]. Confirmez qu'Etcd s'exécute dans un conteneur Docker avec `$ docker ps`, puis utilisez `$ docker inspect etcd` pour trouver l'emplacement des certificats utilisés dans la commande d'exécution (`"Cmd"`), ainsi que le chemin hôte des montages.
+1. Connectez-vous en SSH au nœud du plan de contrôle en suivant la [documentation de Rancher][9]. Confirmez qu'Etcd fonctionne dans un conteneur Docker avec `$ docker ps`, puis utilisez `$ docker inspect etcd` pour trouver l'emplacement des certificats utilisés dans la commande d'exécution (`"Cmd"`), ainsi que le chemin hôte des montages.
 
 Les trois indicateurs dans la commande à rechercher sont :
 
@@ -1255,7 +1255,7 @@ Les trois indicateurs dans la commande à rechercher sont :
 
 2. En utilisant les informations de montage disponibles dans la sortie `$ docker inspect etcd`, définissez `volumes` et `volumeMounts` dans la configuration de l'Agent Datadog. Incluez également des tolérances afin que l'Agent Datadog puisse s'exécuter sur les nœuds du plan de contrôle.
 
-Voici des exemples de la façon de configurer l'Agent Datadog avec Helm et le Datadog Operator :
+Voici des exemples de la façon de configurer l'Agent Datadog avec Helm et l'Opérateur Datadog :
 
 
 {{< tabs >}}

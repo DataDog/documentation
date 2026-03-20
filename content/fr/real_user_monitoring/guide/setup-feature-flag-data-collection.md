@@ -15,9 +15,9 @@ further_reading:
 title: Commencer avec les données de drapeaux de fonctionnalités dans RUM
 ---
 ## Aperçu
-Les données des drapeaux de fonctionnalités vous offrent une meilleure visibilité sur l'expérience utilisateur et le suivi des performances en vous permettant de déterminer quels utilisateurs se voient montrer une fonctionnalité spécifique et si tout changement que vous introduisez impacte votre expérience utilisateur ou affecte négativement les performances.
+Les données des drapeaux de fonctionnalités vous offrent une meilleure visibilité sur l'expérience utilisateur et le suivi des performances en vous permettant de déterminer quels utilisateurs se voient présenter une fonctionnalité spécifique et si tout changement que vous introduisez impacte votre expérience utilisateur ou affecte négativement les performances.
 
-En enrichissant vos données RUM avec des données de drapeaux de fonctionnalités, vous pouvez être sûr que votre fonctionnalité se lance avec succès sans causer involontairement un bug ou une régression de performance. Avec cette couche supplémentaire d'informations, vous pouvez corréler les versions de fonctionnalités avec les performances, identifier les problèmes liés à des versions spécifiques et résoudre les problèmes plus rapidement.
+En enrichissant vos données RUM avec des données de drapeaux de fonctionnalités, vous pouvez être sûr que votre fonctionnalité est lancée avec succès sans causer involontairement un bug ou une régression de performance. Avec cette couche supplémentaire d'informations, vous pouvez corréler les versions de fonctionnalités avec les performances, identifier les problèmes liés à des versions spécifiques et résoudre les problèmes plus rapidement.
 
 ## Configuration
 
@@ -213,7 +213,7 @@ Amplitude ne prend pas en charge cette intégration. Créez un ticket avec Ampli
 {{< tabs >}}
 {{% tab "Navigateur" %}}
 
-Lors de l'initialisation du SDK Javascript de ConfigCat, abonnez-vous à l'`flagEvaluated` événement et signalez les évaluations des drapeaux de fonctionnalités à Datadog :
+Lors de l'initialisation du SDK Javascript de ConfigCat, abonnez-vous à l'événement `flagEvaluated` et signalez les évaluations des drapeaux de fonctionnalités à Datadog :
 
 ```javascript
 const configCatClient = configcat.getClient(
@@ -236,7 +236,7 @@ Pour plus d'informations sur l'initialisation du SDK Javascript de ConfigCat, co
 {{% /tab %}}
 {{% tab "iOS" %}}
 
-Lors de l'initialisation du SDK Swift iOS de ConfigCat, abonnez-vous à l'`flagEvaluated` événement et signalez les évaluations des drapeaux de fonctionnalités à Datadog :
+Lors de l'initialisation du SDK Swift iOS de ConfigCat, abonnez-vous à l'événement `flagEvaluated` et signalez les évaluations des drapeaux de fonctionnalités à Datadog :
 
 ```swift
   let client = ConfigCatClient.get(sdkKey: "#YOUR-SDK-KEY#") { options in
@@ -254,7 +254,7 @@ Pour plus d'informations sur l'initialisation du SDK Swift (iOS) de ConfigCat, c
 {{% /tab %}}
 {{% tab "Android" %}}
 
-Lors de l'initialisation du SDK Android de ConfigCat, abonnez-vous à l'`flagEvaluated` événement et signalez les évaluations des drapeaux de fonctionnalités à Datadog :
+Lors de l'initialisation du SDK Android de ConfigCat, abonnez-vous à l'événement `flagEvaluated` et signalez les évaluations des drapeaux de fonctionnalités à Datadog :
 
 ```java
   ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> {
@@ -272,7 +272,7 @@ Pour plus d'informations sur l'initialisation du SDK Android de ConfigCat, consu
 {{% /tab %}}
 {{% tab "Flutter" %}}
 
-Lors de l'initialisation du SDK Dart de ConfigCat, abonnez-vous à l'`flagEvaluated` événement et signalez les évaluations des drapeaux de fonctionnalités à Datadog :
+Lors de l'initialisation du SDK Dart de ConfigCat, abonnez-vous à l'événement `flagEvaluated` et signalez les évaluations des drapeaux de fonctionnalités à Datadog :
 
 ```dart
   final client = ConfigCatClient.get(
@@ -298,7 +298,7 @@ Pour plus d'informations sur l'initialisation du SDK Dart (Flutter) de ConfigCat
 
 {{% tab "React Native" %}}
 
-Lors de l'initialisation du SDK React de ConfigCat, abonnez-vous à l'événement `flagEvaluated` et signalez les évaluations des drapeaux de fonctionnalité à Datadog :
+Lors de l'initialisation du SDK React de ConfigCat, abonnez-vous à l'événement `flagEvaluated` et signalez les évaluations des drapeaux de fonctionnalités à Datadog :
 
 ```typescript
 <ConfigCatProvider
@@ -322,7 +322,7 @@ Pour plus d'informations sur l'initialisation du SDK React de ConfigCat, consult
 {{% /tab %}}
 {{< /tabs >}}
 
-### Gestion des drapeaux de fonctionnalité personnalisés
+### Gestion personnalisée des drapeaux de fonctionnalités
 
 {{< tabs >}}
 {{% tab "Navigateur" %}}
@@ -371,7 +371,7 @@ Chaque fois qu'un drapeau de fonctionnalité est évalué, ajoutez la fonction s
 {{% /tab %}}
 {{< /tabs >}}
 
-### Intégration de DevCycle
+### Intégration DevCycle
 
 {{< tabs >}}
 {{% tab "Navigateur" %}}
@@ -432,12 +432,12 @@ DevCycle ne prend pas en charge cette intégration. Créez un ticket avec DevCyc
 {{% /tab %}}
 {{< /tabs >}}
 
-### Intégration d'Eppo
+### Intégration Eppo
 
 {{< tabs >}}
 {{% tab "Navigateur" %}}
 
-Initialisez le SDK d'Eppo et créez un journal d'attribution qui signale également les évaluations des drapeaux de fonctionnalité à Datadog en utilisant le code ci-dessous.
+Initialisez le SDK d'Eppo et créez un journal d'attribution qui signale également les évaluations des drapeaux de fonctionnalités à Datadog en utilisant le code ci-dessous.
 
 Pour plus d'informations sur l'initialisation du SDK d'Eppo, consultez la [documentation du SDK JavaScript d'Eppo][1].
 
@@ -458,7 +458,7 @@ await eppoInit({
 {{% /tab %}}
 {{% tab "iOS" %}}
 
-Initialisez le SDK d'Eppo et créez un journal d'attribution qui signale également les évaluations des drapeaux de fonctionnalité à Datadog en utilisant le code ci-dessous.
+Initialisez le SDK d'Eppo et créez un journal d'attribution qui signale également les évaluations des drapeaux de fonctionnalités à Datadog en utilisant le code ci-dessous.
 
 Pour plus d'informations sur l'initialisation du SDK d'Eppo, consultez la [documentation du SDK iOS d'Eppo][1].
 
@@ -475,7 +475,7 @@ let eppoClient = EppoClient(apiKey: "mock-api-key", assignmentLogger: IAssignmen
 {{% /tab %}}
 {{% tab "Android" %}}
 
-Initialisez le SDK d'Eppo et créez un journal d'attribution qui signale également les évaluations des drapeaux de fonctionnalité à Datadog en utilisant le code ci-dessous.
+Initialisez le SDK d'Eppo et créez un journal d'attribution qui signale également les évaluations des drapeaux de fonctionnalités à Datadog en utilisant le code ci-dessous.
 
 Pour plus d'informations sur l'initialisation du SDK d'Eppo, consultez la [documentation du SDK Android d'Eppo][1].
 
@@ -507,7 +507,7 @@ Eppo ne prend pas en charge cette intégration. [Contactez Eppo][1] pour demande
 {{% /tab %}}
 {{% tab "React Native" %}}
 
-Initialisez le SDK d'Eppo et créez un journal d'attribution qui signale également les évaluations des drapeaux de fonctionnalité à Datadog en utilisant le code ci-dessous.
+Initialisez le SDK d'Eppo et créez un journal d'attribution qui signale également les évaluations des drapeaux de fonctionnalités à Datadog en utilisant le code ci-dessous.
 
 Pour plus d'informations sur l'initialisation du SDK d'Eppo, consultez la [documentation du SDK React Native d'Eppo][1].
 
@@ -529,12 +529,12 @@ await eppoInit({
 {{% /tab %}}
 {{< /tabs >}}
 
-### Intégration de Flagsmith
+### Intégration Flagsmith
 
 {{< tabs >}}
 {{% tab "Navigateur" %}}
 
-Initialisez le SDK de Flagsmith avec l'option `datadogRum`, qui signale les évaluations des drapeaux de fonctionnalité à Datadog en utilisant le code ci-dessous.
+Initialisez le SDK de Flagsmith avec l'option `datadogRum`, qui signale les évaluations des drapeaux de fonctionnalités à Datadog en utilisant le code ci-dessous.
 
    En option, vous pouvez configurer le client afin que les traits de Flagsmith soient envoyés à Datadog via `datadogRum.setUser()`. Pour plus d'informations sur l'initialisation du SDK de Flagsmith, consultez la [documentation du SDK JavaScript de Flagsmith][1].
 
@@ -803,7 +803,7 @@ const client = factory.client();
 {{% /tab %}}
 {{% tab "iOS" %}}
 
-Initialisez le SDK de Split et créez un inspecteur signalant les évaluations des drapeaux de fonctionnalités à Datadog en utilisant l'extrait de code ci-dessous.
+Initialisez le SDK de Split et créez une fonctionnalité d'inspection signalant les évaluations des drapeaux de fonctionnalités à Datadog en utilisant l'extrait de code ci-dessous.
 
 Pour plus d'informations sur l'initialisation du SDK de Split, consultez la [documentation du SDK iOS de Split][1].
 
@@ -823,7 +823,7 @@ Pour plus d'informations sur l'initialisation du SDK de Split, consultez la [doc
 {{% /tab %}}
 {{% tab "Android" %}}
 
-Initialisez le SDK de Split et créez un inspecteur signalant les évaluations des drapeaux de fonctionnalités à Datadog en utilisant l'extrait de code ci-dessous.
+Initialisez le SDK de Split et créez une fonctionnalité d'inspection signalant les évaluations des drapeaux de fonctionnalités à Datadog en utilisant l'extrait de code ci-dessous.
 
 Pour plus d'informations sur l'initialisation du SDK de Split, consultez la [documentation du SDK Android de Split][1].
 
@@ -852,7 +852,7 @@ val config = SplitClientConfig.builder()
 {{% /tab %}}
 {{% tab "Flutter" %}}
 
-Initialisez le SDK de Split et créez un inspecteur signalant les évaluations des drapeaux de fonctionnalités à Datadog en utilisant l'extrait de code ci-dessous.
+Initialisez le SDK de Split et créez une fonctionnalité d'inspection signalant les évaluations des drapeaux de fonctionnalités à Datadog en utilisant l'extrait de code ci-dessous.
 
 Pour plus d'informations sur l'initialisation du SDK de Split, consultez la [documentation du plugin Flutter de Split][1].
 
@@ -982,12 +982,12 @@ Par exemple, pour voir sur quelles **Vues** votre drapeau de fonctionnalité est
 
 {{< img src="real_user_monitoring/guide/setup-feature-flag-data-collection/feature_flag_view_query.png" alt="Recherchez des Vues pour des Feature Flags dans RUM Explorer" style="width:75%;">}}
 
-Voici quelques exemples de raisons pour lesquelles votre drapeau de fonctionnalité est évalué sur des Vues non liées qui peuvent aider dans vos enquêtes :
+Voici quelques exemples de raisons pour lesquelles votre drapeau de fonctionnalité est évalué sur des Vues non liées qui peuvent aider dans vos investigations :
 
-- Un composant React commun qui apparaît sur plusieurs pages et qui évalue les drapeaux de fonctionnalité chaque fois qu'il s'exécute.
+- Un composant React commun qui apparaît sur plusieurs pages et qui évalue les drapeaux de fonctionnalité chaque fois qu'ils s'exécutent.
 - Un problème de routage où les composants avec une évaluation de drapeau de fonctionnalité sont rendus avant/après les changements d'URL.
 
-Lors de vos enquêtes, vous pouvez également limiter vos données aux `View Name` pertinents pour votre drapeau de fonctionnalité.
+Lors de vos investigations, vous pouvez également limiter vos données aux `View Name` pertinents pour votre drapeau de fonctionnalité.
 
 
 ## Lectures complémentaires

@@ -486,7 +486,7 @@ Pour toute version d'Android, vous pouvez remplacer le paramètre par défaut po
 
 Lorsque votre application Android est construite pour la production, le code est généralement obfusqué à l'aide de ProGuard ou R8 pour réduire la taille de l'application et protéger la propriété intellectuelle. Cette obfuscation rend les traces de pile dans les rapports de plantage illisibles, affichant des noms de classes et de méthodes sans signification comme `a.b.c()` au lieu de `com.example.MyClass.myMethod()`.
 
-Pour rendre ces traces de pile lisibles pour le débogage, vous devez télécharger vos fichiers de mappage sur Datadog. Ces fichiers contiennent la correspondance entre le code obfusqué et le code original, permettant à Datadog de déobfusquer automatiquement les traces de pile dans vos rapports d'erreurs.
+Pour rendre ces traces de pile lisibles pour le débogage, vous devez télécharger vos fichiers de mappage sur Datadog. Ces fichiers contiennent le mappage entre le code obfusqué et le code original, permettant à Datadog de déobfusquer automatiquement les traces de pile dans vos rapports d'erreurs.
 
 #### Comment cela fonctionne
 

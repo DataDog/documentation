@@ -24,7 +24,7 @@ Al enriquecer tus datos de RUM con datos de banderas de características, puedes
 {{< tabs >}}
 {{% tab "Navegador" %}}
 
-El seguimiento de banderas de características está disponible en el SDK de RUM para navegadores. Para comenzar, configura [el monitoreo de RUM en el navegador][1]. Necesitas la versión del SDK de RUM para navegadores >= 4.25.0.
+El seguimiento de banderas de características está disponible en el SDK de RUM para navegadores. Para comenzar, configura [el monitoreo de RUM para navegadores][1]. Necesitas la versión del SDK de RUM para navegadores >= 4.25.0.
 
 <details>
   <summary>Antes de <code>v5.17.0</code></summary>
@@ -77,31 +77,31 @@ window.DD_RUM &&
 {{% /tab %}}
 {{% tab "Android" %}}
 
-El seguimiento de banderas de características está disponible en el SDK de RUM para Android. Para comenzar, configura la [monitoreo de RUM para Android][1]. Necesitas la versión >= 1.18.0 del SDK de RUM para Android.
+El seguimiento de banderas de características está disponible en el SDK de RUM para Android. Para comenzar, configura [la monitorización de RUM para Android][1]. Necesitas la versión >= 1.18.0 del SDK de RUM para Android.
 
 [1]: /es/real_user_monitoring/application_monitoring/android/setup/
 {{% /tab %}}
 {{% tab "Flutter" %}}
 
-El seguimiento de banderas de características está disponible para tus aplicaciones de Flutter. Para comenzar, configura la [monitoreo de RUM para Flutter][1]. Necesitas la versión >= 1.3.2 del Plugin de Flutter.
+El seguimiento de banderas de características está disponible para tus aplicaciones de Flutter. Para comenzar, configura [la monitorización de RUM para Flutter][1]. Necesitas la versión >= 1.3.2 del Plugin de Flutter.
 
 [1]: /es/real_user_monitoring/application_monitoring/flutter/setup/
 {{% /tab %}}
 {{% tab "iOS" %}}
 
-El seguimiento de banderas de características está disponible en el SDK de RUM para iOS. Para comenzar, configura la [monitoreo de RUM para iOS][1]. Necesitas la versión >= 1.16.0 del SDK de RUM para iOS.
+El seguimiento de banderas de características está disponible en el SDK de RUM para iOS. Para comenzar, configura [la monitorización de RUM para iOS][1]. Necesitas la versión >= 1.16.0 del SDK de RUM para iOS.
 
 [1]: /es/real_user_monitoring/application_monitoring/ios/setup
 {{% /tab %}}
 {{% tab "Kotlin Multiplatform" %}}
 
-El seguimiento de banderas de características está disponible para tus aplicaciones de Kotlin Multiplatform. Para comenzar, configura la [monitoreo de RUM para Kotlin Multiplatform][1].
+El seguimiento de banderas de características está disponible para tus aplicaciones de Kotlin Multiplatform. Para comenzar, configura [la monitorización de RUM para Kotlin Multiplatform][1].
 
 [1]: /es/real_user_monitoring/application_monitoring/kotlin_multiplatform
 {{% /tab %}}
 {{% tab "React Native" %}}
 
-El seguimiento de banderas de características está disponible para tus aplicaciones de React Native. Para comenzar, configura la [monitoreo de RUM para React Native][1]. Necesitas la versión >= 1.7.0 del SDK de RUM para React Native.
+El seguimiento de banderas de características está disponible para tus aplicaciones de React Native. Para comenzar, configura [la monitorización de RUM para React Native][1]. Necesitas la versión >= 1.7.0 del SDK de RUM para React Native.
 
 [1]: /es/real_user_monitoring/application_monitoring/react_native/setup
 {{% /tab %}}
@@ -128,7 +128,7 @@ Datadog admite integraciones con:
 {{< tabs >}}
 {{% tab "Navegador" %}}
 
-Inicialice el SDK de Amplitude y cree un oyente de exposición que informe las evaluaciones de banderas de características a Datadog utilizando el siguiente fragmento de código:
+Inicialice el SDK de Amplitude y cree un oyente de exposición que informe las evaluaciones de las banderas de características a Datadog utilizando el siguiente fragmento de código:
 
 Para obtener más información sobre cómo inicializar el SDK de Amplitude, consulte la [documentación del SDK de JavaScript de Amplitude][1].
 
@@ -149,7 +149,7 @@ Para obtener más información sobre cómo inicializar el SDK de Amplitude, cons
 {{% /tab %}}
 {{% tab "iOS" %}}
 
-Inicialice el SDK de Amplitude y cree un inspector que informe las evaluaciones de banderas de características a Datadog utilizando el fragmento de código a continuación.
+Inicialice el SDK de Amplitude y cree un inspector que informe las evaluaciones de las banderas de características a Datadog utilizando el fragmento de código a continuación.
 
 Para obtener más información sobre cómo inicializar el SDK de Amplitude, consulte la [documentación del SDK de iOS de Amplitude][1].
 
@@ -175,7 +175,7 @@ Para obtener más información sobre cómo inicializar el SDK de Amplitude, cons
 {{% /tab %}}
 {{% tab "Android" %}}
 
-Inicialice el SDK de Amplitude y cree un inspector que informe las evaluaciones de banderas de características a Datadog utilizando el fragmento de código a continuación.
+Inicialice el SDK de Amplitude y cree un inspector que informe las evaluaciones de las banderas de características a Datadog utilizando el fragmento de código a continuación.
 
 Para obtener más información sobre cómo inicializar el SDK de Amplitude, consulte la [documentación del SDK de Android de Amplitude][1].
 
@@ -213,7 +213,7 @@ Amplitude no admite esta integración. Cree un ticket con Amplitude para solicit
 {{< tabs >}}
 {{% tab "Navegador" %}}
 
-Al inicializar el SDK de Javascript de ConfigCat, suscríbase al `flagEvaluated` evento e informe las evaluaciones de banderas de características a Datadog:
+Al inicializar el SDK de Javascript de ConfigCat, suscríbase al `flagEvaluated` evento e informe las evaluaciones de las banderas de características a Datadog:
 
 ```javascript
 const configCatClient = configcat.getClient(
@@ -236,7 +236,7 @@ Para obtener más información sobre cómo inicializar el SDK de Javascript de C
 {{% /tab %}}
 {{% tab "iOS" %}}
 
-Al inicializar el SDK de ConfigCat Swift para iOS, suscríbase al `flagEvaluated` evento e informe las evaluaciones de banderas de características a Datadog:
+Al inicializar el SDK de ConfigCat Swift para iOS, suscríbase al `flagEvaluated` evento e informe las evaluaciones de las banderas de características a Datadog:
 
 ```swift
   let client = ConfigCatClient.get(sdkKey: "#YOUR-SDK-KEY#") { options in
@@ -254,7 +254,7 @@ Para obtener más información sobre cómo inicializar el SDK de ConfigCat Swift
 {{% /tab %}}
 {{% tab "Android" %}}
 
-Al inicializar el SDK de ConfigCat para Android, suscríbase al `flagEvaluated` evento e informe las evaluaciones de banderas de características a Datadog:
+Al inicializar el SDK de ConfigCat para Android, suscríbase al `flagEvaluated` evento e informe las evaluaciones de las banderas de características a Datadog:
 
 ```java
   ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> {
@@ -575,7 +575,7 @@ Flagsmith actualmente no soporta esta integración. Crea un ticket con Flagsmith
 {{% /tab %}}
 {{< /tabs >}}
 
-### integración de GrowthBook
+### Integración de GrowthBook
 
 {{< tabs >}}
 {{% tab "Navegador" %}}
@@ -661,7 +661,7 @@ gb.init();
 {{% /tab %}}
 {{< /tabs >}}
 
-### integración de Kameleoon
+### Integración de Kameleoon
 
 {{< tabs >}}
 {{% tab "Navegador" %}}
@@ -721,7 +721,7 @@ onEvent(EventType.Evaluation, ({ featureKey, variation }) => {
 {{< tabs >}}
 {{% tab "Navegador" %}}
 
-Inicializa el SDK de LaunchDarkly y crea un inspector que informe sobre las evaluaciones de las banderas de características a Datadog utilizando el fragmento de código que se muestra a continuación.
+Inicializa el SDK de LaunchDarkly y crea un inspector que informe las evaluaciones de las banderas de características a Datadog utilizando el fragmento de código que se muestra a continuación.
 
  Para más información sobre la inicialización del SDK de LaunchDarkly, consulta la [documentación del SDK de JavaScript de LaunchDarkly][1].
 
@@ -774,7 +774,7 @@ LaunchDarkly actualmente no soporta esta integración. Crea un ticket con Launch
 {{< tabs >}}
 {{% tab "Navegador" %}}
 
-Inicializa el SDK de Split y crea un listener de impresiones que informe sobre las evaluaciones de las banderas de características a Datadog utilizando el siguiente fragmento de código:
+Inicializa el SDK de Split y crea un listener de impresiones que informe las evaluaciones de las banderas de características a Datadog utilizando el siguiente fragmento de código:
 
 Para más información sobre la inicialización del SDK de Split, consulta la [documentación del SDK de JavaScript de Split][1].
 
@@ -803,7 +803,7 @@ const client = factory.client();
 {{% /tab %}}
 {{% tab "iOS" %}}
 
-Inicializa el SDK de Split y crea un inspector que informe sobre las evaluaciones de las banderas de características a Datadog utilizando el fragmento de código a continuación.
+Inicializa el SDK de Split y crea un inspector que informe las evaluaciones de las banderas de características a Datadog utilizando el fragmento de código a continuación.
 
 Para más información sobre la inicialización del SDK de Split, consulta la [documentación del SDK de iOS de Split][1].
 
@@ -823,7 +823,7 @@ Para más información sobre la inicialización del SDK de Split, consulta la [d
 {{% /tab %}}
 {{% tab "Android" %}}
 
-Inicializa el SDK de Split y crea un inspector que informe sobre las evaluaciones de las banderas de características a Datadog utilizando el fragmento de código a continuación.
+Inicializa el SDK de Split y crea un inspector que informe las evaluaciones de las banderas de características a Datadog utilizando el fragmento de código a continuación.
 
 Para más información sobre la inicialización del SDK de Split, consulta la [documentación del SDK de Android de Split][1].
 
@@ -852,7 +852,7 @@ val config = SplitClientConfig.builder()
 {{% /tab %}}
 {{% tab "Flutter" %}}
 
-Inicializa el SDK de Split y crea un inspector que informe sobre las evaluaciones de las banderas de características a Datadog utilizando el fragmento de código a continuación.
+Inicializa el SDK de Split y crea un inspector que informe las evaluaciones de las banderas de características a Datadog utilizando el fragmento de código a continuación.
 
 Para más información sobre la inicialización del SDK de Split, consulta la [documentación del plugin de Flutter de Split][1].
 
@@ -872,7 +872,7 @@ Para más información sobre la inicialización del SDK de Split, consulta la [d
 {{% /tab %}}
 {{% tab "React Native" %}}
 
-Inicializa el SDK de Split y crea un listener de impresiones que informe sobre las evaluaciones de las banderas de características a Datadog utilizando el siguiente fragmento de código:
+Inicializa el SDK de Split y crea un listener de impresiones que informe las evaluaciones de las banderas de características a Datadog utilizando el siguiente fragmento de código:
 
 Para más información sobre la inicialización del SDK de Split, consulta la [documentación del SDK de React Native de Split][1].
 

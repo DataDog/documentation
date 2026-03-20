@@ -5,11 +5,11 @@ description: Configurez la surveillance des services universels avec l'agent Dat
 further_reading:
 - link: /universal_service_monitoring/
   tag: Documentation
-  text: Découvrez la surveillance des services universels
+  text: Découvrez la surveillance des services universels.
 - link: https://www.datadoghq.com/blog/universal-service-monitoring-datadog/
   tag: Blog
-  text: Signaux d'or en quelques secondes avec la surveillance des services universels
-title: Configuration de la surveillance des services universels
+  text: Signaux d'or en quelques secondes avec la surveillance des services universels.
+title: Configuration de la surveillance des services universels.
 ---
 ## Versions prises en charge et compatibilité
 
@@ -38,10 +38,10 @@ Des protocoles supplémentaires et des méthodes de cryptage du trafic sont en <
 
 - Si vous êtes sur Linux :
     - Votre service s'exécute dans un conteneur.
-    - **En aperçu :** Pour les services non conteneurisés, consultez les [ instructions ici ](#additional-configuration).
+    - **Dans l'aperçu :** Pour les services non conteneurisés, consultez les [instructions ici](#additional-configuration).
 - Si vous êtes sur Windows :
     - Votre service s'exécute sur une machine virtuelle.
-- L'Agent Datadog est installé aux côtés de votre service. L'installation d'une bibliothèque de traçage _ n'est _ pas requise.
+- L'Agent Datadog est installé aux côtés de votre service. L'installation d'une bibliothèque de traçage n'est _pas_ requise.
 - Le `env` tag pour [Tagging de Service Unifié][1] a été appliqué à votre déploiement. Les tags `service` et `version` sont optionnels.
 
 ## Comment USM détecte les noms de service
@@ -58,7 +58,7 @@ USM reconnaît les variables d'environnement suivantes :
 
 ### Limitation clé : USM et les variables d'environnement définies par programme pour APM
 
-Si vous définissez des variables d'environnement par programme **à l'intérieur de votre code d'application** (comme `System.setProperty("dd.service", "my-service")` en Java, ou `Environment.SetEnvironmentVariable("DD_SERVICE", "my-service")` en .NET), ces variables d'environnement ne sont **pas** détectées par USM, même si ces valeurs fonctionnent pour l'instrumentation de traçage APM.
+Si vous définissez des variables d'environnement par programme **dans votre code d'application** (comme `System.setProperty("dd.service", "my-service")` en Java, ou `Environment.SetEnvironmentVariable("DD_SERVICE", "my-service")` en .NET), ces variables d'environnement ne sont **pas** détectées par USM, même si ces valeurs fonctionnent pour l'instrumentation de traçage APM.
 
 Cela se produit parce qu'USM s'exécute dans l'Agent Datadog en tant que processus séparé et ne voit que les variables d'environnement qui ont été définies lorsque votre processus a démarré. Inversement, les bibliothèques d'instrumentation APM s'exécutent à l'intérieur de votre processus d'application et peuvent lire les changements d'environnement d'exécution.
 
@@ -93,7 +93,7 @@ java -jar myapp.jar
 {{% /tab %}}
 {{< /tabs >}}
 
-## Activer la surveillance de service universelle
+## Activation de la surveillance de service universelle
 
 Activez la surveillance de service universelle dans votre Agent en utilisant l'une des méthodes suivantes en fonction de la manière dont votre service est déployé et de la configuration de votre Agent :
 
@@ -134,7 +134,7 @@ agents:
 {{% /tab %}}
 {{% tab "Opérateur" %}}
 
-La version Datadog Operator v1.0.0 ou supérieure est requise.
+La version 1.0.0 ou supérieure de Datadog Operator est requise.
 
 Pour activer la surveillance de service universelle avec le [Datadog Operator][1], mettez à jour votre manifeste `datadog-agent.yaml`. Dans la ressource `DatadogAgent`, définissez `spec.features.usm.enabled` sur `true` :
 
@@ -765,7 +765,7 @@ Pour un support HTTPS optionnel, ajoutez également :
 
 Si vous utilisez des équilibreurs de charge avec vos services, activez des intégrations cloud supplémentaires pour permettre à la surveillance de service universelle de découvrir des entités gérées par le cloud :
 
-1. Installez l'[Intégration AWS][2] pour la visibilité dans AWS Load Balancer.
+1. Installez l'[Intégration AWS][2] pour la visibilité dans l'équilibreur de charge AWS.
 2. Activez la collecte de métriques ENI et EC2.
 3. Ajoutez les balises suivantes à chaque équilibreur de charge :
    ```conf
@@ -852,7 +852,7 @@ DD_SYSTEM_PROBE_PROCESS_SERVICE_INFERENCE_ENABLED=true
 {{< /tabs >}}
 {{< /collapse-content >}}
 
-{{< collapse-content title="Surveillance TLS" level="h4" >}}
+{{< collapse-content title="Surveillance TLS Go" level="h4" >}}
 <div class="alert alert-info">
 La surveillance des services universels est en Preview pour surveiller le trafic chiffré TLS des services implémentés en Golang.
 </div>

@@ -33,26 +33,26 @@ El mecanismo de muestreo predeterminado se llama _muestreo basado en cabecera_. 
 
 Debido a que la decisión se toma al principio de la traza y luego se transmite a todas las partes de la traza, se garantiza que la traza se mantenga o se descarte en su totalidad.
 
-{{< img src="/tracing/guide/ingestion_sampling_use_cases/head-based-sampling.png" alt="Muestreo basado en encabezados" style="width:100%;" >}}
+{{< img src="/tracing/guide/ingestion_sampling_use_cases/head-based-sampling.png" alt="Muestreo basado en la cabeza" style="width:100%;" >}}
 
-Puede establecer tasas de muestreo para el muestreo basado en encabezados en dos lugares:
-- En el nivel de **[Agente](#in-the-agent)** (predeterminado)
-- En el nivel de **[Biblioteca de Trazado](#in-tracing-libraries-user-defined-rules)**: cualquier mecanismo de biblioteca de trazado anula la configuración del Agente.
+Puedes establecer tasas de muestreo para el muestreo basado en la cabeza en dos lugares:
+- A nivel de **[Agente](#in-the-agent)** (predeterminado)
+- A nivel de **[Biblioteca de Trazado](#in-tracing-libraries-user-defined-rules)**: cualquier mecanismo de biblioteca de trazado anula la configuración del Agente.
 
 ### En el Agente
 `ingestion_reason: auto`
 
-El Agente de Datadog envía continuamente tasas de muestreo a las bibliotecas de trazado para aplicar en la raíz de las trazas. El Agente ajusta las tasas para lograr un objetivo de diez trazas por segundo en total, distribuidas a los servicios dependiendo del tráfico.
+El Agente de Datadog envía continuamente tasas de muestreo a las bibliotecas de trazado para aplicar en la raíz de los trazos. El Agente ajusta las tasas para lograr un objetivo de diez trazos por segundo en total, distribuidos a los servicios dependiendo del tráfico.
 
-Por ejemplo, si el servicio `A` tiene más tráfico que el servicio `B`, el Agente podría variar la tasa de muestreo para `A` de tal manera que `A` no mantenga más de siete trazas por segundo, y ajustar de manera similar la tasa de muestreo para `B` de tal manera que `B` no mantenga más de tres trazas por segundo, para un total de 10 trazas por segundo.
+Por ejemplo, si el servicio `A` tiene más tráfico que el servicio `B`, el Agente podría variar la tasa de muestreo para `A` de tal manera que `A` no mantenga más de siete trazos por segundo, y ajustar de manera similar la tasa de muestreo para `B` de tal manera que `B` no mantenga más de tres trazos por segundo, para un total de 10 trazos por segundo.
 
 #### Configuración remota
 
-La configuración de la tasa de muestreo en el Agente se puede configurar de forma remota si está utilizando la versión del Agente [7.42.0][20] o superior. Para comenzar, configure [Configuración Remota][21] y luego configure el parámetro `ingestion_reason` desde la [página de Control de Ingesta][5]. La Configuración Remota le permite cambiar el parámetro sin tener que reiniciar el Agente. La configuración remota tiene prioridad sobre las configuraciones locales, incluidas las variables de entorno y la configuración de `datadog.yaml`.
+La configuración de la tasa de muestreo en el Agente se puede configurar de forma remota si estás utilizando la versión del Agente [7.42.0][20] o superior. Para comenzar, configura [Configuración Remota][21] y luego configura el parámetro `ingestion_reason` desde la [página de Control de Ingesta][5]. La Configuración Remota te permite cambiar el parámetro sin tener que reiniciar el Agente. La configuración remota tiene prioridad sobre las configuraciones locales, incluidas las variables de entorno y la configuración de `datadog.yaml`.
 
 #### Configuración local
 
-Establezca las trazas por segundo objetivo del Agente en su archivo de configuración principal (`datadog.yaml`) o como una variable de entorno:
+Establece el objetivo de trazos por segundo del Agente en su archivo de configuración principal (`datadog.yaml`) o como una variable de entorno:
 
 ```
 @param target_traces_per_second - integer - optional - default: 10
@@ -60,17 +60,17 @@ Establezca las trazas por segundo objetivo del Agente en su archivo de configura
 ```
 
 **Notas**:
-- La tasa de muestreo de trazas por segundo establecida en el Agente solo se aplica a las bibliotecas de trazado de Datadog. No tiene efecto en otras bibliotecas de trazado como los SDK de OpenTelemetry.
+- La tasa de muestreo de trazos por segundo establecida en el Agente solo se aplica a las bibliotecas de trazado de Datadog. No tiene efecto en otras bibliotecas de trazado como los SDK de OpenTelemetry.
 - El objetivo no es un valor fijo. En realidad, fluctúa dependiendo de los picos de tráfico y otros factores.
 
-Todos los spans de un trazo muestreado utilizando el Agente de Datadog [tienen tasas de muestreo computadas automáticamente](#in-the-agent) y están etiquetados con la razón de ingestión `auto`. La etiqueta `ingestion_reason` también se establece en [métricas de uso][2]. Los servicios que utilizan el mecanismo predeterminado del Agente de Datadog están etiquetados como `Automatic` en la columna de Configuración de la [Página de Control de Ingestión][5].
+Todos los spans de un trazo muestreados utilizando el Agente de Datadog [tienen tasas de muestreo computadas automáticamente](#in-the-agent) y están etiquetados con la razón de ingestión `auto`. La etiqueta `ingestion_reason` también se establece en [métricas de uso][2]. Los servicios que utilizan el mecanismo predeterminado del Agente de Datadog están etiquetados como `Automatic` en la columna de Configuración de la [Página de Control de Ingestión][5].
 
 ### En bibliotecas de trazado: reglas definidas por el usuario
 `ingestion_reason: rule`
 
 Para un control más granular, utilice las opciones de configuración de muestreo de la biblioteca de trazado:
-- Establezca una **tasa de muestreo específica que se aplique a la raíz del trazo**, por servicio y/o nombre de recurso, sobrescribiendo el [mecanismo predeterminado](#in-the-agent) del Agente.
-- Establezca un **límite de tasa** en el número de trazos ingeridos por segundo. El límite de tasa predeterminado es de 100 trazos por segundo por instancia de servicio (al utilizar el [mecanismo predeterminado](#in-the-agent) del Agente, se ignora el limitador de tasa).
+- Establezca una **tasa de muestreo específica** que se aplique a la raíz del trazo, por servicio y/o nombre de recurso, sobreescribiendo el [mecanismo predeterminado](#in-the-agent) del Agente.
+- Establezca un **límite de tasa** en el número de trazos ingeridos por segundo. El límite de tasa predeterminado es de 100 trazos por segundo por instancia de servicio (cuando se utiliza el [mecanismo predeterminado](#in-the-agent) del Agente, se ignora el limitador de tasa).
 
 **Nota**: Las reglas de muestreo también son controles de muestreo basados en la cabeza. Si el tráfico para un servicio es mayor que el máximo configurado de trazos por segundo, entonces los trazos se descartan en la raíz. No crea trazos incompletos.
 
@@ -349,7 +349,7 @@ Para anular el comportamiento predeterminado de modo que los intervalos descarta
 
 #### Datadog Agent 6/7.33 a 6/7.40.x
 
-El comportamiento predeterminado del muestreo de errores no puede ser cambiado para estas versiones del Agente. Actualice el Agente de Datadog a Datadog Agent 6/7.41.0 y superior.
+El comportamiento predeterminado del muestreo de errores no se puede cambiar para estas versiones del Agente. Actualice el Agente de Datadog a Datadog Agent 6/7.41.0 y superior.
 
 
 ### Trazas raras
@@ -396,7 +396,7 @@ Para cambiar la configuración predeterminada del muestreador raro, actualiza la
 ## Forzar mantener y descartar
 `ingestion_reason: manual`
 
-El mecanismo de muestreo basado en la cabecera puede ser anulado a nivel de la biblioteca de trazado. Por ejemplo, si necesitas monitorear una transacción crítica, puedes forzar que la traza asociada se mantenga. Por otro lado, para información innecesaria o repetitiva como las verificaciones de salud, puedes forzar que la traza se descarte.
+El mecanismo de muestreo basado en la cabeza puede ser anulado a nivel de la biblioteca de trazado. Por ejemplo, si necesitas monitorear una transacción crítica, puedes forzar que la traza asociada se mantenga. Por otro lado, para información innecesaria o repetitiva como las verificaciones de salud, puedes forzar que la traza se descarte.
 
 - Establece Mantener Manualmente en un span para indicar que este y todos los spans hijos deben ser ingeridos. La traza resultante puede parecer incompleta en la interfaz de usuario si el span en cuestión no es el span raíz de la traza.
 
@@ -839,7 +839,7 @@ Lee más sobre los controles de muestreo en la [documentación de la biblioteca 
 
 Una solicitud de una aplicación web o móvil genera un trazado cuando los servicios de backend están instrumentados. [La integración de APM con Monitoreo de Usuarios Reales][7] vincula las solicitudes de aplicaciones web y móviles a sus trazas de backend correspondientes para que puedas ver tus datos completos de frontend y backend a través de una sola lente.
 
-A partir de la versión `4.30.0` del SDK del navegador RUM, puedes controlar los volúmenes ingeridos y mantener un muestreo de las trazas de backend configurando el parámetro de `traceSampleRate` inicialización. Establece `traceSampleRate` en un número entre `0` y `100`.
+A partir de la versión `4.30.0` del SDK del navegador RUM, puedes controlar los volúmenes ingeridos y mantener un muestreo de las trazas de backend configurando el parámetro de `traceSampleRate` inicialización. Establece `traceSampleRate` a un número entre `0` y `100`.
 Si no se establece ningún valor `traceSampleRate`, se envía un 100% de las trazas provenientes de las solicitudes del navegador a Datadog por defecto.
 
 De manera similar, controla la tasa de muestreo de trazas en otros SDK utilizando parámetros similares:
@@ -861,9 +861,9 @@ Por defecto, el 100% de las pruebas sintéticas de HTTP y navegador generan traz
 
 ### Otros productos
 
-Algunas razones adicionales de ingestión se atribuyen a intervalos que son generados por productos específicos de Datadog:
+Algunas razones adicionales de ingesta se atribuyen a intervalos que son generados por productos específicos de Datadog:
 
-| Producto    | Razón de Ingestión                    | Descripción del Mecanismo de Ingestión |
+| Producto    | Razón de Ingesta                    | Descripción del Mecanismo de Ingesta |
 |------------|-------------------------------------|---------------------------------|
 | Sin servidor | `lambda` y `xray`                   | Tus trazas recibidas de las [aplicaciones sin servidor][14] trazadas con las Bibliotecas de Trazado de Datadog o la integración de AWS X-Ray. |
 | Protección de Aplicaciones y API     | `appsec`                            | Trazas ingeridas de las bibliotecas de trazado de Datadog y marcadas por [AAP][15] como una amenaza. |

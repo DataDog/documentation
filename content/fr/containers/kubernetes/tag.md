@@ -3,7 +3,7 @@ aliases:
 - /fr/agent/autodiscovery/tag/
 - /fr/agent/kubernetes/tag
 description: Configurer l'extraction automatique des balises à partir des étiquettes
-  et des annotations des pods Kubernetes pour un suivi amélioré
+  et annotations des pods Kubernetes pour un suivi amélioré
 further_reading:
 - link: /getting_started/tagging/
   tag: Documentation
@@ -16,11 +16,11 @@ further_reading:
   text: Limiter la collecte de données à un sous-ensemble de conteneurs uniquement
 title: Extraction de balises Kubernetes
 ---
-L'Agent Datadog peut automatiquement attribuer des balises aux métriques, aux traces et aux journaux émis par un pod (ou un conteneur individuel au sein d'un pod) en fonction des étiquettes ou des annotations.
+L'Agent Datadog peut automatiquement attribuer des balises aux métriques, traces et journaux émis par un pod (ou un conteneur individuel au sein d'un pod) en fonction des étiquettes ou des annotations.
 
 ## Balises prêtes à l'emploi
 
-La liste des balises attribuées automatiquement dépend de la [configuration de cardinalité][1] de l'Agent. [Cardinalité des balises][4] est ajoutée avant l'ingestion et peut avoir un impact sur la facturation, car différents paramètres de cardinalité influencent le nombre de métriques émises.
+La liste des balises attribuées automatiquement dépend de la [configuration de cardinalité][1] de l'Agent. [Cardinalité des balises][4] est ajoutée avant l'ingestion et peut avoir un impact sur la facturation, car différentes configurations de cardinalité influencent le nombre de métriques émises.
 
 <div style="overflow-x: auto;">
 
@@ -30,12 +30,12 @@ La liste des balises attribuées automatiquement dépend de la [configuration de
   | `display_container_name`      | Élevé         | État du pod                                                                                                                    | N/A                                                 |
   | `pod_name`                    | Orchestrateur | Métadonnées du pod                                                                                                                  | N/A                                                 |
   | `oshift_deployment`           | Orchestrateur | Annotation du pod `openshift.io/deployment.name`                                                                                 | L'environnement OpenShift et l'annotation du pod doivent exister |
-  | `kube_ownerref_name`          | Orchestrateur | Référence du propriétaire du pod                                                                                                                  | Le pod doit avoir un propriétaire                              |
-  | `kube_job`                    | Orchestrateur | Référence du propriétaire du pod                                                                                                                  | Le pod doit être attaché à un cronjob                   |
-  | `kube_job`                    | Faible          | Référence du propriétaire du pod                                                                                                                  | Le pod doit être attaché à un job                       |
-  | `kube_replica_set`            | Faible          | Référence du propriétaire du pod                                                                                                                  | Le pod doit être attaché à un ensemble de réplicas               |
+  | `kube_ownerref_name`          | Orchestrateur | Propriétaire du pod                                                                                                                  | Le pod doit avoir un propriétaire                              |
+  | `kube_job`                    | Orchestrateur | Propriétaire du pod                                                                                                                  | Le pod doit être attaché à un cronjob                   |
+  | `kube_job`                    | Faible          | Propriétaire du pod                                                                                                                  | Le pod doit être attaché à un job                       |
+  | `kube_replica_set`            | Faible          | Propriétaire du pod                                                                                                                  | Le pod doit être attaché à un ensemble de réplicas               |
   | `kube_service`                | Faible          | Découverte de service Kubernetes                                                                                                  | Le pod est derrière un service Kubernetes                  |
-  | `kube_daemon_set`             | Faible          | Référence du propriétaire du pod                                                                                                                  | Le pod doit être attaché à un DaemonSet                 |
+  | `kube_daemon_set`             | Faible          | Propriétaire du pod                                                                                                                  | Le pod doit être attaché à un DaemonSet                 |
   | `kube_container_name`         | Faible          | État du pod                                                                                                                    | N/A                                                 |
   | `kube_namespace`              | Faible          | Métadonnées du pod                                                                                                                  | N/A                                                 |
   | `kube_app_name`               | Faible          | Étiquette du pod `app.kubernetes.io/name`                                                                                            | L'étiquette du pod doit exister                                |
@@ -51,21 +51,21 @@ La liste des balises attribuées automatiquement dépend de la [configuration de
   | `oshift_deployment_config`    | Faible          | Annotation du pod `openshift.io/deployment-config.name`                                                                          | L'environnement OpenShift et l'annotation du pod doivent exister |
   | `kube_ownerref_kind`          | Faible          | Référence du propriétaire du pod                                                                                                                  | Le pod doit avoir un propriétaire                              |
   | `kube_deployment`             | Faible          | Référence du propriétaire du pod                                                                                                                  | Le pod doit être attaché à un déploiement                |
-  | `kube_argo_rollout`           | Faible          | Référence du propriétaire du pod                                                                                                                  | Le pod doit être attaché à un déploiement argo             |
+  | `kube_argo_rollout`           | Faible          | Référence du propriétaire du pod                                                                                                                  | Le pod doit être attaché à un déploiement Argo             |
   | `kube_replication_controller` | Faible          | Référence du propriétaire du pod                                                                                                                  | Le pod doit être attaché à un contrôleur de réplication    |
-  | `kube_stateful_set`           | Faible          | Référence du propriétaire du pod                                                                                                                  | Le pod doit être attaché à un statefulset               |
+  | `kube_stateful_set`           | Faible          | Référence du propriétaire du pod                                                                                                                  | Le pod doit être attaché à un StatefulSet               |
   | `persistentvolumeclaim`       | Faible          | Spécification du pod                                                                                                                      | Un PVC doit être attaché au pod                   |
   | `kube_cronjob`                | Faible          | Référence du propriétaire du pod                                                                                                                  | Le pod doit être attaché à un cronjob                   |
-  | `image_name`                  | Faible          | Spécification du pod                                                                                                                      | N/A                                                 |
-  | `short_image`                 | Faible          | Spécification du pod                                                                                                                      | N/A                                                 |
-  | `image_tag`                   | Faible          | Spécification du pod                                                                                                                      | N/A                                                 |
-  | `eks_fargate_node`            | Faible          | Spécification du pod                                                                                                                      | Environnement EKS Fargate                             |
-  | `kube_runtime_class`          | Faible          | Spécification du pod                                                                                                                      | Le pod doit être attaché à une classe d'exécution             |
-  | `gpu_vendor`                  | Faible          | Spécification du pod                                                                                                                      | Le conteneur doit être attaché à une ressource GPU        |
+  | `image_name`                  | Faible          | Spécification du Pod                                                                                                                      | N/A                                                 |
+  | `short_image`                 | Faible          | Spécification du Pod                                                                                                                      | N/A                                                 |
+  | `image_tag`                   | Faible          | Spécification du Pod                                                                                                                      | N/A                                                 |
+  | `eks_fargate_node`            | Faible          | Spécification du Pod                                                                                                                      | Environnement EKS Fargate                             |
+  | `kube_runtime_class`          | Faible          | Spécification du Pod                                                                                                                      | Le Pod doit être attaché à une classe d'exécution             |
+  | `gpu_vendor`                  | Faible          | Spécification du Pod                                                                                                                      | Le conteneur doit être attaché à une ressource GPU        |
   | `image_id`                    | Faible          | ID de l'image du conteneur                                                                                                            | N/A                                                 |
   | `kube_autoscaler_kind`        | Faible          | Type d'autoscaler Kubernetes                                                                                                    | L'autoscaler Kubernetes doit être utilisé                  |
-  | `kube_priority_class`         | Faible          | Classe de priorité du pod                                                                                                            | Le pod doit avoir une classe de priorité définie                    |
-  | `kube_qos`                    | Faible          | Classe de qualité de service du pod                                                                                                  | N/A                                                 |
+  | `kube_priority_class`         | Faible          | Classe de priorité du Pod                                                                                                            | Le Pod doit avoir une classe de priorité définie                    |
+  | `kube_qos`                    | Faible          | Classe de qualité de service du Pod                                                                                                  | N/A                                                 |
 
 </div>
 
@@ -87,31 +87,31 @@ L'Agent peut attacher des informations sur l'environnement Kubernetes en tant qu
 
 ## Autodécouverte de tag
 
-À partir de l'Agent v6.10+, l'Agent peut autodécouvrir des tags à partir des annotations de pod. Il permet à l'Agent d'associer des tags à toutes les données émises par l'ensemble des pods ou un conteneur individuel au sein de ce pod.
+À partir de la version 6.10+ de l'Agent, l'Agent peut autodécouvrir des tags à partir des annotations de Pod. Il permet à l'Agent d'associer des étiquettes à toutes les données émises par l'ensemble des pods ou un conteneur individuel au sein de ce pod.
 
-En tant que meilleure pratique dans les environnements conteneurisés, Datadog recommande d'utiliser un étiquetage de service unifié pour aider à unifier les tags. L'étiquetage de service unifié relie la télémétrie de Datadog grâce à l'utilisation de trois tags standard : `env`, `service` et `version`. Pour apprendre à configurer votre environnement avec un étiquetage unifié, référez-vous à la documentation dédiée à l'[étiquetage de service unifié][2].
+En tant que meilleure pratique dans les environnements conteneurisés, Datadog recommande d'utiliser un étiquetage de service unifié pour aider à unifier les étiquettes. L'étiquetage de service unifié relie la télémétrie de Datadog grâce à l'utilisation de trois étiquettes standard : `env`, `service` et `version`. Pour apprendre à configurer votre environnement avec un étiquetage unifié, référez-vous à la documentation dédiée à l'[étiquetage de service unifié][2].
 
-Pour appliquer un tag `<TAG_KEY>:<TAG_VALUE>` à toutes les données émises par un pod donné et collectées par l'Agent, utilisez l'annotation suivante sur votre pod :
+Pour appliquer une étiquette `<TAG_KEY>:<TAG_VALUE>` à toutes les données émises par un pod donné et collectées par l'Agent, utilisez l'annotation suivante sur votre pod :
 
 ```yaml
 annotations:
   ad.datadoghq.com/tags: '{"<TAG_KEY>": "<TAG_VALUE>","<TAG_KEY_1>": "<TAG_VALUE_1>"}'
 ```
 
-Si vous souhaitez appliquer un tag `<TAG_KEY>:<TAG_VALUE>` à un conteneur individuel `<CONTAINER_NAME>` au sein d'un pod, utilisez l'annotation suivante sur votre pod :
+Si vous souhaitez appliquer une étiquette `<TAG_KEY>:<TAG_VALUE>` à un conteneur individuel `<CONTAINER_NAME>` au sein d'un pod, utilisez l'annotation suivante sur votre pod :
 
 ```yaml
 annotations:
   ad.datadoghq.com/<CONTAINER_NAME>.tags: '{"<TAG_KEY>": "<TAG_VALUE>","<TAG_KEY_1>": "<TAG_VALUE_1>"}'
 ```
 
-À partir de la version 7.17+ de l'Agent, l'Agent peut découvrir automatiquement des tags à partir des étiquettes Docker. Ce processus permet à l'Agent d'associer des tags personnalisés à toutes les données émises par un conteneur, sans modifier la configuration de l'Agent.
+À partir de la version 7.17+ de l'Agent, l'Agent peut découvrir automatiquement des étiquettes à partir des étiquettes Docker. Ce processus permet à l'Agent d'associer des étiquettes personnalisées à toutes les données émises par un conteneur, sans modifier la configuration de l'Agent.
 
 ```yaml
 com.datadoghq.ad.tags: '["<TAG_KEY>:TAG_VALUE", "<TAG_KEY_1>:<TAG_VALUE_1>"]'
 ```
 
-À partir de la version 7.77+ de l'Agent, les annotations de tags prennent en charge les [variables de modèle d'autodécouverte][5] pour un étiquetage dynamique basé sur les métadonnées d'exécution. À l'exception de `%%env_<VAR>%%`, toutes les variables de modèle sont prises en charge.
+À partir de la version 7.77+ de l'Agent, les annotations d'étiquettes prennent en charge les [variables de modèle d'autodécouverte][5] pour un étiquetage dynamique basé sur les métadonnées d'exécution. À l'exception de `%%env_<VAR>%%`, toutes les variables de modèle sont prises en charge.
 
 ```yaml
 annotations:
@@ -119,8 +119,9 @@ annotations:
   ad.datadoghq.com/nginx.tags: '{"container_port":"%%port_80%%"}'
 ```
 
-## Extraction de tag
-À partir de la version 7.64+, l'Agent et l'Agent de Cluster peuvent être configurés pour collecter des étiquettes et des annotations à partir des ressources Kubernetes et les utiliser comme tags à partir d'une configuration commune. Datadog recommande d'utiliser les options suivantes pour garantir un reporting cohérent entre l'étiquetage de base de l'Agent, le reporting KSM de l'Agent de Cluster et le reporting de l'Orchestrateur Explorer des deux Agents :
+## Extraction d'étiquette
+
+À partir de la version 7.64+, l'Agent et l'Agent de Cluster peuvent être configurés pour collecter des étiquettes et des annotations à partir des ressources Kubernetes et les utiliser comme étiquettes à partir d'une configuration commune. Datadog recommande d'utiliser les options suivantes pour garantir des rapports cohérents à travers l'étiquetage de base de l'Agent, le rapport KSM de l'Agent de Cluster et le rapport Orchestrator Explorer des deux Agents :
 - `kubernetesResourcesLabelsAsTags`
 - `kubernetesResourcesAnnotationsAsTags`
 
@@ -140,7 +141,7 @@ Par exemple, exécutez `kubectl api-resources` pour récupérer cette informatio
 
 **Notes:**
 
-- Les tags *ne* se pas propager entre la charge de travail et les ressources enfants. Par exemple, les étiquettes sur un déploiement ne sont pas automatiquement appliquées aux journaux de ses Pods enfants. Pour taguer les données des Pods, configurez l'extraction des étiquettes directement sur les Pods.
+- Les tags *ne* se propagent pas entre la charge de travail et les ressources enfants. Par exemple, les étiquettes sur un déploiement ne sont pas automatiquement appliquées aux journaux de ses Pods enfants. Pour taguer les données des Pods, configurez l'extraction des étiquettes directement sur les Pods.
 - Les tags *se* propagent du namespace vers les pods et les conteneurs à l'intérieur de ceux-ci.
 - Utilisez Datadog Agent 7.73+ pour utiliser des jokers dans les règles d'extraction de tags pour vos métriques KSM.
 
@@ -166,7 +167,7 @@ spec:
         <LABEL>: <TAG_KEY>
 ```
 
-Par exemple, pour extraire les étiquettes de ressource des nœuds, pods et déploiements :
+Par exemple, pour extraire des étiquettes de ressource des nœuds, pods et déploiements :
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -197,7 +198,7 @@ datadog:
       <LABEL>: <TAG_KEY>
 ```
 
-Par exemple, pour extraire les étiquettes de ressource des nœuds, pods et déploiements :
+Par exemple, pour extraire des étiquettes de ressource des nœuds, pods et déploiements :
 
 ```yaml
 datadog:
@@ -221,7 +222,7 @@ Pour extraire une étiquette de ressource donnée `<LABEL>` et les transformer e
   value: '{"<RESOURCE>":{"<LABEL>":"<TAG_KEY>"}}'
 ```
 
-Par exemple, pour extraire les étiquettes de ressource des nœuds, pods et déploiements :
+Par exemple, pour extraire des étiquettes de ressource des nœuds, pods et déploiements :
 
 ```yaml
 - name: DD_KUBERNETES_RESOURCES_LABELS_AS_TAGS
@@ -806,9 +807,9 @@ DD_KUBERNETES_NAMESPACE_LABELS_AS_TAGS='{"*":"<PREFIX>_%%label%%"}'
 **Remarque** : Les métriques personnalisées peuvent avoir un impact sur la facturation. Consultez la [page de facturation des métriques personnalisées][3] pour plus d'informations.
 {{% /collapse-content %}}
 
-### Variables d'environnement de conteneur en tant qu'étiquettes
+### Variables d'environnement des conteneurs en tant qu'étiquettes
 
-À partir de l'Agent v7.32+, l'Agent peut collecter des variables d'environnement de conteneur et les utiliser comme étiquettes à attacher à toutes les métriques, traces et journaux correspondant au conteneur. Les conteneurs `docker` et `containerd` sont pris en charge :
+À partir de l'Agent v7.32+, l'Agent peut collecter des variables d'environnement des conteneurs et les utiliser comme étiquettes à attacher à toutes les métriques, traces et journaux correspondant au conteneur. Les conteneurs `docker` et `containerd` sont pris en charge :
 
 {{< tabs >}}
 {{% tab "Opérateur Datadog" %}}

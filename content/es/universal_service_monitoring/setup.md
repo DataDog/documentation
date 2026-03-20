@@ -37,7 +37,7 @@ Protocolos adicionales y métodos de cifrado de tráfico están en <a href="/uni
 
 - Si está en Linux:
     - Su servicio se está ejecutando en un contenedor.
-    - **En Vista previa:** Para servicios que no están en contenedores, consulte las [instrucciones aquí](#additional-configuration).
+    - **En Vista Previa:** Para servicios que no están en contenedores, consulte las [instrucciones aquí](#additional-configuration).
 - Si está en Windows:
     - Su servicio se está ejecutando en una máquina virtual.
 - El Agente de Datadog está instalado junto a su servicio. Instalar una biblioteca de trazado _no_ es obligatorio.
@@ -801,7 +801,7 @@ service_monitoring_config:
 ```
 
 <div class="alert alert-warning">
-<strong>Limitación importante para servicios de Windows que no son de IIS:</strong> El Monitoreo de Servicios Universales en Windows utiliza el Seguimiento de Eventos para Windows (ETW) a través del proveedor <code>Microsoft-Windows-HttpService</code> para el monitoreo de tráfico HTTPS. Este proveedor de ETW solo está disponible para servicios basados en IIS. Los servicios que no son de IIS (como aplicaciones .NET personalizadas, servidores Node.js, servidores Java u otros servidores HTTP que se ejecutan en Windows) <strong>no admiten el monitoreo de HTTPS</strong> a través de USM. Solo se puede monitorear tráfico HTTP simple para servicios de Windows que no son de IIS.
+<strong>Limitación importante para servicios de Windows que no son de IIS:</strong> El Monitoreo de Servicios Universales en Windows utiliza el Seguimiento de Eventos para Windows (ETW) a través del <code>Microsoft-Windows-HttpService</code> proveedor para el monitoreo de tráfico HTTPS. Este proveedor de ETW solo está disponible para servicios basados en IIS. Los servicios que no son de IIS (como aplicaciones .NET personalizadas, servidores Node.js, servidores Java u otros servidores HTTP que se ejecutan en Windows) <strong>no admiten el monitoreo de HTTPS</strong> a través de USM. Solo se puede monitorear tráfico HTTP simple para servicios de Windows que no son de IIS.
 </div>
 
 ### Soporte para servicios de IIS y no-IIS

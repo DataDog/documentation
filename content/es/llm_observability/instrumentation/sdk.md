@@ -20,7 +20,7 @@ title: Referencia del SDK de Observabilidad de LLM
 ---
 ## Resumen
 
-Los SDK de Observabilidad de LLM de Datadog proporcionan instrumentación automática así como APIs de instrumentación manual para ofrecer visibilidad y conocimientos sobre tus aplicaciones de LLM.
+Los SDK de Observabilidad de LLM de Datadog proporcionan instrumentación automática así como APIs de instrumentación manual para ofrecer observabilidad y conocimientos sobre tus aplicaciones de LLM.
 
 ## Configuración
 
@@ -53,7 +53,7 @@ Los SDK de Observabilidad de LLM de Datadog proporcionan instrumentación autom�
 {{% /tab %}}
 {{< /tabs >}}
 
-{{% collapse-content title="Configuración de línea de comandos" level="h3" expanded=false id="command-line-setup" %}}
+{{% collapse-content title="Configuración desde la línea de comandos" level="h3" expanded=false id="command-line-setup" %}}
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -78,7 +78,7 @@ DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME> ddtrace-run <YOUR_APP_STARTUP_COMMAND>
 
 `DD_LLMOBS_ML_APP`
 : opcional - _cadena_
-<br />El nombre de tu aplicación, servicio o proyecto de LLM, bajo el cual se agrupan todos los trazos y spans. Esto ayuda a distinguir entre diferentes aplicaciones o experimentos. Consulta [Directrices de nomenclatura de aplicaciones](#application-naming-guidelines) para caracteres permitidos y otras restricciones. Para anular este valor para un span raíz dado, consulta [Trazando múltiples aplicaciones](#tracing-multiple-applications). Si no se proporciona, esto se establece de forma predeterminada en el valor de [`DD_SERVICE`][1], o el valor de un `DD_LLMOBS_ML_APP` propagado desde un servicio ascendente.
+<br />El nombre de tu aplicación, servicio o proyecto de LLM, bajo el cual se agrupan todos los rastros y spans. Esto ayuda a distinguir entre diferentes aplicaciones o experimentos. Consulta [Directrices de nomenclatura de aplicaciones](#application-naming-guidelines) para caracteres permitidos y otras restricciones. Para anular este valor para un span raíz dado, consulta [Rastreo de múltiples aplicaciones](#tracing-multiple-applications). Si no se proporciona, esto se establece de forma predeterminada en el valor de [`DD_SERVICE`][1], o el valor de un `DD_LLMOBS_ML_APP` propagado desde un servicio ascendente.
 <br />**Nota**: Antes de la versión `ddtrace==3.14.0`, este es un **campo requerido**.
 
 `DD_LLMOBS_AGENTLESS_ENABLED`
@@ -114,7 +114,7 @@ DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME> NODE_OPTIONS="--import dd-trace/initialize.m
 
 `DD_LLMOBS_ML_APP`
 : opcional - _cadena_
-<br />El nombre de tu aplicación, servicio o proyecto de LLM, bajo el cual se agrupan todos los trazos y spans. Esto ayuda a distinguir entre diferentes aplicaciones o experimentos. Consulta [Directrices de nomenclatura de aplicaciones](#application-naming-guidelines) para caracteres permitidos y otras restricciones. Para anular este valor para un span raíz dado, consulta [Trazando múltiples aplicaciones](#tracing-multiple-applications). Si no se proporciona, esto se establece de forma predeterminada en el valor de [`DD_SERVICE`][1], o el valor de un `DD_LLMOBS_ML_APP` propagado desde un servicio ascendente.
+<br />El nombre de tu aplicación, servicio o proyecto de LLM, bajo el cual se agrupan todos los rastros y spans. Esto ayuda a distinguir entre diferentes aplicaciones o experimentos. Consulta [Directrices de nomenclatura de aplicaciones](#application-naming-guidelines) para caracteres permitidos y otras restricciones. Para anular este valor para un span raíz dado, consulta [Rastreo de múltiples aplicaciones](#tracing-multiple-applications). Si no se proporciona, esto se establece de forma predeterminada en el valor de [`DD_SERVICE`][1], o el valor de un `DD_LLMOBS_ML_APP` propagado desde un servicio ascendente.
 <br />**Nota**: Antes de la versión `dd-trace@5.66.0`, este es un **campo requerido**.
 
 `DD_LLMOBS_AGENTLESS_ENABLED`
@@ -147,7 +147,7 @@ Puede proporcionar los siguientes parámetros como variables de entorno (por eje
 
 `DD_LLMOBS_ENABLED` o `dd.llmobs.enabled`
 : requerido - _entero o cadena_
-<br />Alternar para habilitar el envío de datos a la Observabilidad LLM. Debería configurarse en `1` o `true`.
+<br />Alternar para habilitar el envío de datos a la Observabilidad LLM. Debe configurarse en `1` o `true`.
 
 `DD_LLMOBS_ML_APP` o `dd.llmobs.ml.app`
 : opcional - _cadena_
@@ -195,15 +195,15 @@ LLMObs.enable(
 
 `ml_app`
 : opcional - _cadena_
-<br />El nombre de su aplicación, servicio o proyecto LLM, bajo el cual se agrupan todos los rastros y spans. Esto ayuda a distinguir entre diferentes aplicaciones o experimentos. Consulte [Directrices de nomenclatura de aplicaciones](#application-naming-guidelines) para caracteres permitidos y otras restricciones. Para anular este valor para un rastro dado, consulte [Rastreo de múltiples aplicaciones](#tracing-multiple-applications). Si no se proporciona, esto se establece de forma predeterminada al valor de `DD_LLMOBS_ML_APP`.
+<br />El nombre de su aplicación, servicio o proyecto LLM, bajo el cual se agrupan todos los rastros y spans. Esto ayuda a distinguir entre diferentes aplicaciones o experimentos. Consulte [Directrices de nomenclatura de aplicaciones](#application-naming-guidelines) para caracteres permitidos y otras restricciones. Para anular este valor para un rastro dado, consulte [Rastreo de múltiples aplicaciones](#tracing-multiple-applications). Si no se proporciona, este valor predeterminado es el de `DD_LLMOBS_ML_APP`.
 
 `integrations_enabled` - **predeterminado**: `true`
 : opcional - _booleano_
-<br />Una bandera para habilitar el rastreo automático de llamadas LLM para las [integraciones LLM][1] soportadas por Datadog. Si no se proporciona, todas las integraciones LLM soportadas están habilitadas por defecto. Para evitar el uso de las integraciones LLM, establezca este valor en `false`.
+<br />Una bandera para habilitar el rastreo automático de llamadas LLM para las integraciones de LLM soportadas por Datadog [integraciones de LLM][1]. Si no se proporciona, todas las integraciones de LLM soportadas están habilitadas por defecto. Para evitar el uso de las integraciones de LLM, establezca este valor en `false`.
 
 `agentless_enabled`
 : opcional - _booleano_ - **predeterminado**: `false`
-<br />Solo es necesario si no está utilizando el Agente de Datadog, en cuyo caso esto debe establecerse en `True`. Esto configura la biblioteca `ddtrace` para no enviar ningún dato que requiera el Agente de Datadog. Si no se proporciona, esto se establece de forma predeterminada al valor de `DD_LLMOBS_AGENTLESS_ENABLED`.
+<br />Solo es necesario si no está utilizando el Agente de Datadog, en cuyo caso este debe establecerse en `True`. Esto configura la biblioteca `ddtrace` para no enviar ningún dato que requiera el Agente de Datadog. Si no se proporciona, este valor predeterminado es el de `DD_LLMOBS_AGENTLESS_ENABLED`.
 
 `site`
 : opcional - _cadena_
@@ -329,7 +329,7 @@ datadog-ci lambda instrument -f <YOUR_LAMBDA_FUNCTION_NAME> -r <AWS_REGION> -v {
 
 4. Invoca tu función Lambda y verifica que los trazas de LLM Observability sean visibles en la interfaz de usuario de Datadog.
 
-Limpia manualmente las trazas de LLM Observability utilizando el método `flush` antes de que la función Lambda regrese.
+Limpia manualmente los trazas de LLM Observability utilizando el método `flush` antes de que la función Lambda regrese.
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -392,14 +392,14 @@ with LLMObs.llm(model="gpt-4o"):
 {{< /code-block >}}
 
 
-Para una lista de tipos de span disponibles, consulta la [documentación de Tipos de Span][1]. Para un trazado más granular de operaciones dentro de funciones, consulta [Trazando spans utilizando métodos en línea](#tracing-spans-using-inline-methods).
+Para una lista de tipos de span disponibles, consulta la [documentación de Tipos de Span][1]. Para un trazado más granular de operaciones dentro de funciones, consulta [Trazado de spans utilizando métodos en línea](#tracing-spans-using-inline-methods).
 
 [1]: /es/llm_observability/terms/
 {{% /tab %}}
 
 {{% tab "Node.js" %}}
 
-Para trazar un span, utiliza `llmobs.wrap(options, function)` como un envoltorio de función para la función que deseas trazar. Para una lista de tipos de span disponibles, consulta la [documentación de Tipos de Span][1]. Para un trazado más granular de operaciones dentro de funciones, consulta [Trazando spans utilizando métodos en línea](#tracing-spans-using-inline-methods).
+Para trazar un span, utiliza `llmobs.wrap(options, function)` como un envoltorio de función para la función que deseas trazar. Para una lista de tipos de span disponibles, consulta la [documentación de Tipos de Span][1]. Para un trazado más granular de operaciones dentro de funciones, consulta [Trazado de spans utilizando métodos en línea](#tracing-spans-using-inline-methods).
 
 ### Tipos de Span
 
@@ -409,7 +409,7 @@ Los tipos de span son requeridos y se especifican en el objeto `options` pasado 
 
 ### Captura automática de argumentos/salida/nombre de función
 
-`llmobs.wrap` (junto con [`llmobs.decorate`](#function-decorators-in-typescript) para TypeScript) intenta capturar automáticamente las entradas, salidas y el nombre de la función que se está rastreando. Si necesitas anotar manualmente un intervalo, consulta [Enriqueciendo intervalos](#enriching-spans). Las entradas y salidas que anotes anularán la captura automática. Además, para anular el nombre de la función, pasa la propiedad `name` en el objeto de opciones a la función `llmobs.wrap`:
+`llmobs.wrap` (junto con [`llmobs.decorate`](#function-decorators-in-typescript) para TypeScript) intenta capturar automáticamente las entradas, salidas y el nombre de la función que se está rastreando. Si necesitas anotar manualmente un intervalo, consulta [Enriqueciendo intervalos](#enriching-spans). Las entradas y salidas que anotes anularán la captura automática. Además, para anular el nombre de la función, pasa la `name` propiedad en el objeto de opciones a la `llmobs.wrap` función:
 
 {{< code-block lang="javascript" >}}
 function processMessage () {
@@ -899,7 +899,7 @@ callWeatherApi = llmobs.wrap({ kind: 'tool' }, callWeatherApi)
 
 {{% /tab %}}
 {{% tab "Java" %}}
-Para rastrear una llamada a una herramienta, importa y llama al siguiente método con los argumentos que se enumeran a continuación:
+Para rastrear una llamada a una herramienta, importe y llame al siguiente método con los argumentos que se enumeran a continuación:
 
 ```java
 import datadog.trace.api.llmobs.LLMObs;
@@ -929,7 +929,7 @@ LLMObs.startToolSpan(spanName, mlApp, sessionID);
 
 {{< tabs >}}
 {{% tab "Python" %}}
-Para rastrear un intervalo de tarea, utiliza el decorador de función `LLMObs.task()`.
+Para rastrear un intervalo de tarea, utilice el decorador de función `LLMObs.task()`.
 
 {{% collapse-content title="Argumentos" level="h4" expanded=false id="task-span-arguments" %}}
 
@@ -1286,15 +1286,15 @@ El método `LLMObs.annotate()` acepta los siguientes argumentos:
 
 `tool_definitions`
 : opcional - _lista de diccionarios_
-<br />Lista de diccionarios de definición de herramientas para escenarios de llamadas a funciones. Cada definición de herramienta debe tener una clave requerida `"name": "..."` y claves opcionales `"description": "..."` y `"schema": {...}`.
+<br />Lista de diccionarios de definición de herramientas para escenarios de llamadas a funciones. Cada definición de herramienta debe tener una clave `"name": "..."` requerida y claves opcionales `"description": "..."` y `"schema": {...}`.
 
 `metadata`
 : opcional - _diccionario_
-<br />Un diccionario de pares clave-valor serializables en JSON que los usuarios pueden agregar como información de metadatos relevante a la operación de entrada o salida descrita por el rango (`model_temperature`, `max_tokens`, `top_k`, etc.).
+<br />Un diccionario de pares clave-valor serializables en JSON que los usuarios pueden agregar como información de metadatos relevante para la operación de entrada o salida descrita por el rango (`model_temperature`, `max_tokens`, `top_k`, etc.).
 
 `metrics`
 : opcional - _diccionario_
-<br />Un diccionario de claves serializables en JSON y valores numéricos que los usuarios pueden agregar como métricas relevantes a la operación descrita por el rango (`input_tokens`, `output_tokens`, `total_tokens`, `time_to_first_token`, etc.). La unidad para `time_to_first_token` está en segundos, similar a la métrica `duration` que se emite por defecto.
+<br />Un diccionario de claves serializables en JSON y valores numéricos que los usuarios pueden agregar como métricas relevantes para la operación descrita por el rango (`input_tokens`, `output_tokens`, `total_tokens`, `time_to_first_token`, etc.). La unidad para `time_to_first_token` está en segundos, similar a la métrica `duration` que se emite por defecto.
 
 `tags`
 : opcional - _diccionario_
@@ -1703,15 +1703,15 @@ El método `LLMObs.annotation_context()` acepta los siguientes argumentos:
 
 `name`
 : opcional - _str_
-<br />Nombre que anula el nombre del span para cualquier span auto-instrumentado que se inicie dentro del contexto de anotación.
+<br />Nombre que reemplaza el nombre del span para cualquier span auto-instrumentado que se inicie dentro del contexto de anotación.
 
 `prompt`
 : opcional - _diccionario_
-<br />Un diccionario que representa el prompt utilizado para una llamada a LLM. Consulte la documentación del [objeto Prompt](#prompt-tracking-arguments) para el esquema completo y las claves admitidas. También puede importar el `Prompt` objeto de `ddtrace.llmobs.utils` y pasarlo como el argumento `prompt`. **Nota**: Este argumento solo se aplica a los spans de LLM.
+<br />Un diccionario que representa el prompt utilizado para una llamada a LLM. Consulta la documentación del [Objeto Prompt](#prompt-tracking-arguments) para el esquema completo y las claves soportadas. También puedes importar el `Prompt` objeto de `ddtrace.llmobs.utils` y pasarlo como el argumento `prompt`. **Nota**: Este argumento solo se aplica a los spans de LLM.
 
 `tags`
 : opcional - _diccionario_
-<br />Un diccionario de pares clave-valor serializables en JSON que los usuarios pueden agregar como etiquetas en el span. Ejemplos de claves: `session`, `env`, `system` y `version`. Para más información sobre etiquetas, consulte [Introducción a las Etiquetas](/getting_started/tagging/).
+<br />Un diccionario de pares clave-valor serializables en JSON que los usuarios pueden agregar como etiquetas en el span. Ejemplos de claves: `session`, `env`, `system`, y `version`. Para más información sobre etiquetas, consulta [Introducción a las Etiquetas](/getting_started/tagging/).
 
 {{% /collapse-content %}}
 
@@ -1757,7 +1757,7 @@ El método `llmobs.annotationContext()` acepta las siguientes opciones en el pri
 
 `name`
 : opcional - _str_
-<br />Nombre que anula el nombre del span para cualquier span auto-instrumentado que se inicie dentro del contexto de anotación.
+<br />Nombre que reemplaza el nombre del span para cualquier span auto-instrumentado que se inicie dentro del contexto de anotación.
 
 `tags`
 : opcional - _objeto_
@@ -1814,7 +1814,7 @@ Claves soportadas:
 - `id` (str): Identificador lógico para esta solicitud. Debería ser único por `ml_app`. Por defecto es `{ml_app}-unnamed_prompt`
 - `version` (str): Etiqueta de versión para la solicitud (por ejemplo, "1.0.0"). Consulta [seguimiento de versiones](#version-tracking) para más detalles.
 - `variables` (Dict[str, str]): Variables utilizadas para poblar los marcadores de posición de la plantilla.
-- `template` (str): Cadena de plantilla con marcadores de posición (por ejemplo, `"Traducir {{text}} a {{lang}}"`).
+- `template` (str): Cadena de plantilla con marcadores de posición (por ejemplo, `"Traducir {{texto}} a {{lang}}"`).
 - `chat_template` (Lista[Mensaje]): Formato de plantilla de múltiples mensajes. Proporcione una lista de `{ "role": "<role>", "content": "<template string with placeholders>" }` objetos.
 - `tags` (Dict[str, str]): Etiquetas para adjuntar a la ejecución del prompt.
 - `rag_context_variables` (Lista[str]): Claves variables que contienen contenido de verdad/contexto. Utilizado para [detección de alucinaciones](/llm_observability/evaluations/managed_evaluations/?tab=openai#hallucination).
@@ -1877,10 +1877,10 @@ Propiedades soportadas:
 - `id` (cadena): Identificador lógico para este prompt. Debería ser único por `ml_app`. Por defecto es `{ml_app}-unnamed_prompt`
 - `version` (cadena): Etiqueta de versión para el prompt (por ejemplo, "1.0.0"). Consulta [seguimiento de versiones](#version-tracking) para más detalles.
 - `variables` (Registro<string, string>): Variables utilizadas para poblar los marcadores de posición de la plantilla.
-- `template` (cadena | Lista[Mensaje]): Cadena de plantilla con marcadores de posición (por ejemplo, `"Traducir {{text}} a {{lang}}"`). Alternatively, a list of `{ "rol": "<role>", "contenido": "<template string with placeholders>" }` objetos.
+- `template` (cadena | Lista[Mensaje]): Cadena de plantilla con marcadores de posición (por ejemplo, `"Traducir {{texto}} a {{lang}}"`). Alternatively, a list of `{ "rol": "<role>", "contenido": "<template string with placeholders>" }` objetos.
 - `tags` (Registro<string, string>): Etiquetas para adjuntar a la ejecución del prompt.
-- `contextVariables` (cadena[]): Claves de variable que contienen contenido de verdad fundamental/contexto. Utilizado para la [detección de alucinaciones](/llm_observability/evaluations/managed_evaluations/?tab=openai#hallucination).
-- `queryVariables` (cadena[]): Claves de variable que contienen la consulta del usuario. Utilizado para la [detección de alucinaciones](/llm_observability/evaluations/managed_evaluations/?tab=openai#hallucination).
+- `contextVariables` (cadena[]): Claves de variable que contienen contenido de verdad fundamental/contexto. Utilizado para [detección de alucinaciones](/llm_observability/evaluations/managed_evaluations/?tab=openai#hallucination).
+- `queryVariables` (cadena[]): Claves de variable que contienen la consulta del usuario. Utilizado para [detección de alucinaciones](/llm_observability/evaluations/managed_evaluations/?tab=openai#hallucination).
 
 {{% /collapse-content %}}
 
@@ -1916,23 +1916,23 @@ function answerQuestion(text) {
 #### Notas
 - La anotación de un prompt solo está disponible en los tramos de LLM.
 - Coloca la anotación inmediatamente antes de la llamada al proveedor para que se aplique al tramo de LLM correcto.
-- Utiliza un prompt único `id` para distinguir diferentes prompts dentro de tu aplicación.
+- Usa un prompt único `id` para distinguir diferentes prompts dentro de tu aplicación.
 - Mantén las plantillas estáticas utilizando la sintaxis de marcador de posición (como `{{nombre_variable}}`) and define dynamic content in the `sección de variables.
 - Para múltiples llamadas de LLM auto-instrumentadas dentro de un bloque, utiliza un contexto de anotación para aplicar los mismos metadatos del prompt en todas las llamadas. Consulta [Anotando tramos auto-instrumentados](#annotating-auto-instrumented-spans).
 
 ### Seguimiento de versiones
 
-La Observabilidad de LLM proporciona versionado automático para tus prompts cuando no se especifica una versión explícita. Cuando proporcionas un `template` o `chat_template` en los metadatos de tu prompt sin una etiqueta `version`, el sistema genera automáticamente una versión calculando un hash del contenido de la plantilla. Si proporcionas una etiqueta `version`, la Observabilidad de LLM utiliza la etiqueta de versión que especificaste en lugar de generar una automáticamente.
+La observabilidad de LLM proporciona versionado automático para tus prompts cuando no se especifica una versión explícita. Cuando proporcionas un `template` o `chat_template` en los metadatos de tu prompt sin una etiqueta `version`, el sistema genera automáticamente una versión calculando un hash del contenido de la plantilla. Si proporcionas una etiqueta `version`, la observabilidad de LLM utiliza la etiqueta de versión que especificaste en lugar de generar una automáticamente.
 
 El sistema de versionado funciona de la siguiente manera:
-- **Versionado automático**: Cuando no se proporciona una etiqueta `version`, la Observabilidad de LLM calcula un hash del contenido `template` o `chat_template` para generar automáticamente un identificador de versión numérico.
+- **Versionado automático**: Cuando no se proporciona una etiqueta `version`, la observabilidad de LLM calcula un hash del contenido `template` o `chat_template` para generar automáticamente un identificador de versión numérico.
 - **Versionado manual**: Cuando se proporciona una `version` etiqueta, LLM Observability utiliza su etiqueta de versión especificada exactamente como se proporciona
 - **Historial de versiones**: Tanto las versiones generadas automáticamente como las manuales se mantienen en el historial de versiones para rastrear la evolución de los prompts a lo largo del tiempo
 
 Esto le brinda la flexibilidad de confiar en la gestión automática de versiones basada en cambios en el contenido de la plantilla, o mantener el control total sobre el versionado con sus propias etiquetas de versión.
 
 ## Monitoreo de costos
-Adjunte métricas de tokens (para el seguimiento automático de costos) o métricas de costos (para el seguimiento manual de costos) a sus tramos de LLM/embedding. Las métricas de tokens permiten a Datadog calcular costos utilizando los precios del proveedor, mientras que las métricas de costos le permiten proporcionar su propio precio al usar modelos personalizados o no compatibles. Para más detalles, consulte [Costos][14].
+Adjunte métricas de tokens (para el seguimiento automático de costos) o métricas de costos (para el seguimiento manual de costos) a sus tramos de LLM/embedding. Las métricas de tokens permiten a Datadog calcular costos utilizando los precios del proveedor, mientras que las métricas de costos le permiten proporcionar su propio precio al usar modelos personalizados o no soportados. Para más detalles, consulte [Costos][14].
 
 Si está utilizando instrumentación automática, las métricas de tokens y costos aparecen en sus tramos automáticamente. Si está instrumentando manualmente, siga la guía a continuación.
 
@@ -1942,7 +1942,7 @@ Si está utilizando instrumentación automática, las métricas de tokens y cost
 {{% tab "Python" %}}
 
 Datadog calcula automáticamente el costo estimado basado en el precio del proveedor.
-Caso de uso: Usando un modelo personalizado Para modelos personalizados o no compatibles, debe anotar el tramo manualmente con los datos de costo. Evaluaciones
+Caso de uso: Usando un modelo personalizado Para modelos personalizados o no soportados, debe anotar el tramo manualmente con los datos de costo. Evaluaciones
 
 {{< code-block lang="python" >}}
 from ddtrace.llmobs import LLMObs
@@ -2000,7 +2000,7 @@ def llm_call(prompt):
 <div class="alert alert-info">Para construir evaluadores reutilizables basados en clases (<code>BaseEvaluator</code>, <code>BaseSummaryEvaluator</code>) con metadatos de resultados ricos, consulte la <a href="/llm_observability/guide/evaluation_developer_guide/">Guía del Desarrollador de Evaluación</a>.</div>
 
 Las evaluaciones deben unirse a un solo intervalo. Puede identificar el intervalo objetivo utilizando cualquiera de estos dos métodos:
-- _Unión basada en etiquetas_ - Una evaluación se une utilizando un par de clave-valor de etiqueta único que se establece en un solo intervalo. La evaluación fallará al unirse si el par de clave-valor de la etiqueta coincide con múltiples intervalos o con ningún intervalo.
+- _Unión basada en etiquetas_ - Una evaluación se une utilizando un par de etiquetas clave-valor único que se establece en un solo intervalo. La evaluación fallará al unirse si el par de etiquetas clave-valor coincide con múltiples intervalos o con ningún intervalo.
 - _Referencia directa al intervalo_ - Una evaluación se une utilizando la combinación del ID de traza único del intervalo y el ID del intervalo.
 
 ### Exportando un intervalo
@@ -2062,7 +2062,7 @@ llmCall = llmobs.wrap({ kind: 'llm', name: 'invokeLLM', modelName: 'claude', mod
 
 <div class="alert alert-info"><code>LLMObs.submit_evaluation_for</code> está en desuso y se eliminará en la próxima versión principal de ddtrace (4.0). Para migrar, renombre sus llamadas a <code>LLMObs.submit_evaluation_for</code> con <code>LLMObs.submit_evaluation</code>.</div>
 
-**Nota**: Las evaluaciones personalizadas son evaluadores que usted implementa y aloja usted mismo. Estos difieren de las evaluaciones predeterminadas, que son calculadas automáticamente por Datadog utilizando evaluadores integrados. Para configurar evaluaciones predeterminadas para su aplicación, utilice la página [**Observabilidad LLM** > **Configuraciones** > **Evaluaciones**][1] en Datadog.
+**Nota**: Las evaluaciones personalizadas son evaluadores que usted implementa y aloja usted mismo. Estos difieren de las evaluaciones listas para usar, que son calculadas automáticamente por Datadog utilizando evaluadores integrados. Para configurar evaluaciones listas para usar para su aplicación, utilice la página [**Observabilidad LLM** > **Configuraciones** > **Evaluaciones**][1] en Datadog.
 
 El método `LLMObs.submit_evaluation()` acepta los siguientes argumentos:
 
@@ -2197,7 +2197,7 @@ El objeto `evaluationOptions` puede contener lo siguiente:
 
 `tags`
 : opcional - _diccionario_
-<br />Un diccionario de pares clave-valor de cadena que los usuarios pueden agregar como etiquetas respecto a la evaluación. Para más información sobre etiquetas, consulte [Introducción a las Etiquetas](/getting_started/tagging/).
+<br />Un diccionario de pares clave-valor de cadenas que los usuarios pueden agregar como etiquetas respecto a la evaluación. Para más información sobre etiquetas, consulte [Introducción a las Etiquetas](/getting_started/tagging/).
 
 `assessment`
 : opcional - _cadena_
@@ -2479,9 +2479,9 @@ def process_user_message():
 | Etiqueta | Descripción |
 |---|---|
 | `session_id` | El ID que representa una única sesión de usuario, por ejemplo, una sesión de chat. |
-| `user_handle` | El identificador para el usuario de la sesión de chat. |
-| `user_name` | El nombre para el usuario de la sesión de chat. |
-| `user_id` | El ID para el usuario de la sesión de chat. |
+| `user_handle` | El identificador del usuario de la sesión de chat. |
+| `user_name` | El nombre del usuario de la sesión de chat. |
+| `user_id` | El ID del usuario de la sesión de chat. |
 {{% /tab %}}
 
 {{% tab "Node.js" %}}
@@ -2532,7 +2532,7 @@ Si su aplicación no utiliza ninguna de estas bibliotecas admitidas, puede habil
 
 ### Inyectando encabezados distribuidos
 
-El método `LLMObs.inject_distributed_headers()` toma un span e inyecta su contexto en los encabezados HTTP que se incluirán en la solicitud. Este método acepta los siguientes argumentos:
+El método `LLMObs.inject_distributed_headers()` toma un span e inyecta su contexto en los encabezados HTTP para ser incluidos en la solicitud. Este método acepta los siguientes argumentos:
 
 `request_headers`
 : requerido - _diccionario_
@@ -2540,13 +2540,13 @@ El método `LLMObs.inject_distributed_headers()` toma un span e inyecta su conte
 
 `span`
 : opcional - _Span_ - **predeterminado**: `The current active span.`
-<br />El span para inyectar su contexto en los encabezados de solicitud proporcionados. Cualquier span (incluidos aquellos con decoradores de función), esto se predetermina al span activo actual.
+<br />El span para inyectar su contexto en los encabezados de solicitud proporcionados. Cualquier span (incluyendo aquellos con decoradores de función), esto se predetermina al span activo actual.
 
 ### Activando encabezados distribuidos
 
 El método `LLMObs.activate_distributed_headers()` toma encabezados HTTP y extrae atributos de contexto de trazado para activar en el nuevo servicio.
 
-**Nota**: Debe llamar a `LLMObs.activate_distributed_headers()` antes de iniciar cualquier span en su servicio descendente. Los spans iniciados previamente (incluidos los spans de decoradores de función) no se capturan en el trazado distribuido.
+**Nota**: Debe llamar a `LLMObs.activate_distributed_headers()` antes de iniciar cualquier span en su servicio descendente. Los spans iniciados previamente (incluyendo spans de decoradores de función) no se capturan en el trazado distribuido.
 
 Este método acepta el siguiente argumento:
 
@@ -2582,7 +2582,7 @@ def server_process_request(request):
 {{% /tab %}}
 {{% tab "Node.js" %}}
 
-La biblioteca `dd-trace` proporciona integraciones listas para usar que soportan trazado distribuido para [marcos web populares][1]. Requerir el trazador habilita automáticamente estas integraciones, pero puedes desactivarlas opcionalmente con:
+La biblioteca `dd-trace` proporciona integraciones listas para usar que soportan trazado distribuido para [marcos web][1] populares. Requerir el trazador habilita automáticamente estas integraciones, pero puedes desactivarlas opcionalmente con:
 
 {{< code-block lang="javascript">}}
 const tracer = require('dd-trace').init({
@@ -2644,13 +2644,13 @@ def separate_task(workflow_span):
 
 `LLMObs.flush()` es una función bloqueante que envía todos los datos de observabilidad de LLM en búfer al backend de Datadog. Esto puede ser útil en entornos sin servidor para evitar que una aplicación se cierre hasta que se envíen todos los rastros de observabilidad de LLM.
 
-### Rastreo de múltiples aplicaciones
+### Rastreando múltiples aplicaciones
 
 El SDK admite el rastreo de múltiples aplicaciones de LLM desde el mismo servicio.
 
 Puedes configurar una variable de entorno `DD_LLMOBS_ML_APP` con el nombre de tu aplicación LLM, en la que se agrupan por defecto todos los spans generados.
 
-Para anular esta configuración y usar un nombre de aplicación LLM diferente para un span raíz dado, pasa el argumento `ml_app` con el nombre de cadena de la aplicación LLM subyacente al iniciar un span raíz para un nuevo rastreo o un span en un nuevo proceso.
+Para anular esta configuración y usar un nombre de aplicación LLM diferente para un span raíz dado, pasa el argumento `ml_app` con el nombre de cadena de la aplicación LLM subyacente al iniciar un span raíz para un nuevo rastro o un span en un nuevo proceso.
 
 {{< code-block lang="python">}}
 from ddtrace.llmobs.decorators import workflow
@@ -2712,7 +2712,7 @@ function processMessage () {
 
 ### Decoradores de función en TypeScript
 
-El SDK de observabilidad de LLM de Node.js ofrece una función `llmobs.decorate` que sirve como decorador de función para aplicaciones de TypeScript. El comportamiento de rastreo de esta función es el mismo que `llmobs.wrap`.
+El SDK de observabilidad de LLM de Node.js ofrece una función `llmobs.decorate` que sirve como un decorador de función para aplicaciones de TypeScript. El comportamiento de rastreo de esta función es el mismo que `llmobs.wrap`.
 
 #### Ejemplo
 
@@ -2741,13 +2741,13 @@ class MyAgent {
 
 `llmobs.flush()` es una función bloqueante que envía todos los datos de observabilidad de LLM en búfer al backend de Datadog. Esto puede ser útil en entornos sin servidor para evitar que una aplicación se cierre hasta que se envíen todos los rastros de observabilidad de LLM.
 
-### Rastreo de múltiples aplicaciones
+### Rastreando múltiples aplicaciones
 
 El SDK admite el rastreo de múltiples aplicaciones de LLM desde el mismo servicio.
 
 Puedes configurar una variable de entorno `DD_LLMOBS_ML_APP` con el nombre de tu aplicación LLM, en la que se agrupan por defecto todos los spans generados.
 
-Para anular esta configuración y usar un nombre de aplicación LLM diferente para un span raíz dado, pasa el argumento `mlApp` con el nombre de cadena de la aplicación LLM subyacente al iniciar un span raíz para un nuevo rastreo o un span en un nuevo proceso.
+Para anular esta configuración y usar un nombre de aplicación LLM diferente para un span raíz dado, pasa el argumento `mlApp` con el nombre de cadena de la aplicación LLM subyacente al iniciar un span raíz para un nuevo rastro o un span en un nuevo proceso.
 
 {{< code-block lang="javascript">}}
 function processMessage () {

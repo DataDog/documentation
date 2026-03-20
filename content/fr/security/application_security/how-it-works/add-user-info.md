@@ -28,7 +28,7 @@ L'activité utilisateur personnalisée pour laquelle des règles de détection p
 ## Ajout d'informations sur les utilisateurs authentifiés aux traces et activation de la capacité de blocage des utilisateurs
 
 <div class="alert alert-info">
-<strong> Détection automatisée de l'activité des utilisateurs : </strong> Les bibliothèques de traçage Datadog tentent de détecter et de signaler automatiquement les événements d'activité des utilisateurs. Pour plus d'informations, consultez <a href="/security/application_security/how-it-works/add-user-info/?tab=set_user#disabling-automatic-user-activity-event-tracking"> Désactivation du suivi automatique des événements d'activité des utilisateurs </a>.
+<strong> Détection automatisée de l'activité des utilisateurs : </strong> Les bibliothèques de traçage Datadog tentent de détecter et de signaler automatiquement les événements d'activité des utilisateurs. Pour plus d'informations, voir <a href="/security/application_security/how-it-works/add-user-info/?tab=set_user#disabling-automatic-user-activity-event-tracking"> Désactivation du suivi automatique des événements d'activité des utilisateurs </a>.
 </div>
 
 Vous pouvez [ajouter des tags personnalisés à votre span racine][3], ou utiliser les fonctions d'instrumentation décrites ci-dessous.
@@ -617,7 +617,7 @@ Datadog::Kit::AppSec::Events.track(event_name, trace, span, metadata)
 
 #### Migration vers les nouvelles méthodes de succès et d'échec de connexion
 
-Les nouvelles méthodes dans `Datadog::Kit::AppSec::Events::V2` introduisent un ordre de paramètres plus intuitif et une séparation des préoccupations plus claire. Voici les principaux changements :
+Les nouvelles méthodes dans `Datadog::Kit::AppSec::Events::V2` introduisent un ordre de paramètres plus intuitif et une séparation des préoccupations plus claire. Voici les changements clés :
 
 1. L'identifiant de connexion (e-mail, nom d'utilisateur) est le premier paramètre et est obligatoire.
 2. L'objet/ID utilisateur est optionnel dans les événements de succès et a été supprimé des événements d'échec.
@@ -724,7 +724,7 @@ $metadata = ['usr.id' => $id]; // you can add arbitrary fields to metadata
 
 #### Migration vers les nouvelles méthodes de succès et d'échec de connexion
 
-Les nouvelles méthodes dans l'espace de noms `\datadog\appsec\v2\` introduisent un ordre de paramètres plus intuitif et une séparation des préoccupations plus claire. Voici les principaux changements :
+Les nouvelles méthodes dans l'espace de noms `\datadog\appsec\v2\` introduisent un ordre de paramètres plus intuitif et une séparation des préoccupations plus claire. Voici les changements clés :
 
 1. L'identifiant de connexion (e-mail, nom d'utilisateur) est le premier paramètre et est obligatoire.
 2. Le tableau/ID utilisateur est optionnel dans les événements de succès et a été supprimé des événements d'échec.
@@ -836,7 +836,7 @@ tracer.appsec.trackCustomEvent(eventName, metadata)
 
 #### Migration vers les nouvelles méthodes de succès et d'échec de connexion
 
-Les nouvelles méthodes dans `eventTrackingV2` introduisent un ordre de paramètres plus intuitif et une séparation des préoccupations plus claire. Voici les principaux changements :
+Les nouvelles méthodes dans `eventTrackingV2` introduisent un ordre de paramètres plus intuitif et une séparation des préoccupations plus claire. Voici les changements clés :
 
 1. L'identifiant de connexion (e-mail, nom d'utilisateur) est le premier paramètre et est obligatoire.
 2. L'objet/ID utilisateur est optionnel dans les événements de succès et a été supprimé des événements d'échec.
@@ -1129,7 +1129,7 @@ Pour commencer, accédez à la [page des règles WAF personnalisées][2] et cliq
 
 {{< img src="security/application_security/threats/custom-waf-rule-menu.png" alt="Accédez au menu des règles WAF personnalisées depuis la page d'accueil de l'AAP en cliquant sur Protection, puis sur WAF en application et Règles personnalisées." style="width:100%;" >}}
 
-Cela ouvrira un menu dans lequel vous pourrez définir votre règle WAF personnalisée. En sélectionnant la catégorie "Logique métier", vous pourrez configurer un type d'événement (par exemple, `users.password_reset`). Vous pouvez ensuite sélectionner le service que vous souhaitez suivre et un point de terminaison spécifique. Vous pouvez également utiliser la condition de règle pour cibler un paramètre spécifique afin d'identifier le flux de code que vous souhaitez _instrumenter_. Lorsque la condition correspond, la bibliothèque étiquette la trace et la signale pour être transmise à l'AAP. Si vous n'avez pas besoin de la condition, vous pouvez définir une condition large pour correspondre à tout.
+Cela ouvrira un menu dans lequel vous pourrez définir votre règle WAF personnalisée. En sélectionnant la catégorie "Logique métier", vous pourrez configurer un type d'événement (par exemple, `users.password_reset`). Vous pouvez ensuite sélectionner le service que vous souhaitez suivre et un point de terminaison spécifique. Vous pouvez également utiliser la condition de règle pour cibler un paramètre spécifique afin d'identifier le flux de code que vous souhaitez _instrumenter_. Lorsque la condition correspond, la bibliothèque tague la trace et la signale pour être transmise à l'AAP. Si vous n'avez pas besoin de la condition, vous pouvez définir une condition large pour correspondre à tout.
 
 {{< img src="security/application_security/threats/custom-waf-rule-form.png" alt="Capture d'écran du formulaire qui apparaît lorsque vous cliquez sur le bouton Créer une nouvelle règle." style="width:50%;" >}}
 
@@ -1156,7 +1156,7 @@ Le suivi automatique des activités des utilisateurs offre les modes suivants :
 - `identification` mode (nom court : `ident`) :
   - Ce mode est le mode par défaut et collecte toujours l'identifiant de l'utilisateur ou fait de son mieux.
   - L'identifiant de l'utilisateur est collecté lors du succès de la connexion et de l'échec de la connexion. En cas d'échec, l'identifiant de l'utilisateur est collecté, que l'utilisateur existe ou non.
-  - Lorsque le cadre instrumenté ne fournit pas clairement un identifiant utilisateur, mais plutôt un objet utilisateur structuré, l'identifiant utilisateur est déterminé sur une base d'effort maximal en fonction des noms de champs de l'objet. Cette liste de noms de champs est considérée, classée par ordre de priorité :
+  - Lorsque le cadre instrumenté ne fournit pas clairement un identifiant utilisateur, mais plutôt un objet utilisateur structuré, l'identifiant utilisateur est déterminé sur une base d'effort raisonnable en fonction des noms de champs de l'objet. Cette liste de noms de champs est considérée, classée par ordre de priorité :
     - `id`
     - `email`
     - `username`
@@ -1173,7 +1173,7 @@ Le suivi automatique des activités des utilisateurs offre les modes suivants :
 
 ### Configuration manuelle
 
-Les bibliothèques Datadog vous permettent de configurer l'auto-instrumentation en utilisant la variable d'environnement `DD_APPSEC_AUTO_USER_INSTRUMENTATION_MODE` avec le nom court du mode : `ident`|`anon`|`disabled`.
+Les bibliothèques Datadog vous permettent de configurer l'auto-instrumentation en utilisant la variable d'environnement `DD_APPSEC_AUTO_USER_INSTRUMENTATION_MODE` avec le nom court pour le mode : `ident`|`anon`|`disabled`.
 
 Le mode par défaut est le mode `identification` (nom court : `ident`).
 

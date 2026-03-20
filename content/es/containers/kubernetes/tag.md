@@ -46,7 +46,7 @@ La lista de etiquetas asignadas automáticamente depende de la [configuración d
   | `kube_app_managed_by`         | Bajo          | Etiqueta del Pod `app.kubernetes.io/managed-by`                                                                                      | La etiqueta del Pod debe existir                                |
   | `env`                         | Bajo          | Etiqueta del Pod `tags.datadoghq.com/env` o variable de entorno del contenedor (`DD_ENV` o `OTEL_RESOURCE_ATTRIBUTES`)                               | [Etiquetado de servicio unificado][2] habilitado                |
   | `version`                     | Bajo          | Etiqueta del Pod `tags.datadoghq.com/version` o variable de entorno del contenedor (`DD_VERSION` o `OTEL_RESOURCE_ATTRIBUTES`)                       | [Etiquetado de servicio unificado][2] habilitado                |
-  | `service`                     | Bajo          | Etiqueta del Pod `tags.datadoghq.com/service` o variable de entorno del contenedor (`DD_SERVICE`, `OTEL_RESOURCE_ATTRIBUTES`, o `OTEL_SERVICE_NAME`) | [Etiquetado de servicio unificado][2] habilitado                |
+  | `service`                     | Bajo          | Etiqueta del Pod `tags.datadoghq.com/service` o variable de entorno del contenedor (`DD_SERVICE`, `OTEL_RESOURCE_ATTRIBUTES` o `OTEL_SERVICE_NAME`) | [Etiquetado de servicio unificado][2] habilitado                |
   | `pod_phase`                   | Bajo          | Estado del Pod                                                                                                                    | N/A                                                 |
   | `oshift_deployment_config`    | Bajo          | Anotación del Pod `openshift.io/deployment-config.name`                                                                          | El entorno de OpenShift y la anotación del Pod deben existir |
   | `kube_ownerref_kind`          | Bajo          | Referencia del propietario del Pod                                                                                                                  | El Pod debe tener un propietario                              |
@@ -136,14 +136,14 @@ Por ejemplo, ejecute `kubectl api-resources` para recuperar esta información:
 | pods        | v1                           | pods                            |
 | nodos       | v1                           | nodos                           |
 | namespaces  | v1                           | namespaces                      |
-| deployments | apps/v1                      | deployments.apps                |
+| despliegues | apps/v1                      | despliegues.apps                |
 | roles       | rbac.authorization.k8s.io/v1 | roles.rbac.authorization.k8s.io |
 
 **Notas:**
 
-- Las * etiquetas * no se propagan entre la carga de trabajo y los recursos secundarios. Por ejemplo, las etiquetas en un Deployment no se aplican automáticamente a los registros de sus Pods secundarios. Para etiquetar los datos de los Pods, configure la extracción de etiquetas directamente en los Pods.
+- Las * etiquetas * no se propagan entre la carga de trabajo y los recursos secundarios. Por ejemplo, las etiquetas en un Despliegue no se aplican automáticamente a los registros de sus Pods secundarios. Para etiquetar los datos del Pod, configure la extracción de etiquetas directamente en los Pods.
 - Las etiquetas * sí* se propagan desde el namespace a los pods y contenedores dentro de ellos.
-- Utilice Datadog Agent 7.73+ para usar comodines en las reglas de extracción de etiquetas para sus Métricas de KSM.
+- Utilice Datadog Agent 7.73+ para usar comodines en las reglas de extracción de etiquetas para sus Métricas KSM.
 
 ### Etiquetas de recursos de Kubernetes como etiquetas
 
@@ -360,7 +360,7 @@ Por ejemplo, para extraer anotaciones de recursos de nodos, pods y despliegues:
 {{% /tab %}}
 {{< /tabs >}}
 
-Para la versión 7.73.0+ del Agente, use la siguiente configuración para agregar todas las anotaciones de recurso como etiquetas a sus métricas. En este ejemplo, los nombres de las etiquetas están precedidos por `<PREFIX>_`:
+Para el Agente 7.73.0+, use la siguiente configuración para agregar todas las anotaciones de recurso como etiquetas a sus métricas. En este ejemplo, los nombres de las etiquetas están precedidos por `<PREFIX>_`:
 
 ```yaml
     #(...)
@@ -405,11 +405,11 @@ annotation-3: legacy-tag-d
 
 <div class="alert alert-info">
 
-Si está en la versión 7.58.0+ del agente, se le aconseja usar <a href="/containers/kubernetes/tag/#kubernetes-resources-labels-as-tags">Etiquetas de recursos de Kubernetes como etiquetas</a> para configurar etiquetas de nodo como etiquetas.
+Si está en la versión del agente 7.58.0+, se le aconseja usar <a href="/containers/kubernetes/tag/#kubernetes-resources-labels-as-tags">Etiquetas de recursos de Kubernetes como etiquetas</a> para configurar etiquetas de nodo como etiquetas.
 
 </div>
 
-A partir de la versión v6.0+ del Agente, el Agente puede recopilar etiquetas para un nodo dado y usarlas como etiquetas para adjuntar a todas las métricas, trazas y registros emitidos asociados con este `host` en Datadog:
+A partir del Agente v6.0+, el Agente puede recopilar etiquetas para un nodo dado y usarlas como etiquetas para adjuntar a todas las métricas, trazas y registros emitidos asociados con este `host` en Datadog:
 
 {{< tabs >}}
 {{% tab "Operador de Datadog" %}}
@@ -439,7 +439,7 @@ spec:
       kubernetes.io/arch: arch
 ```
 
-Para la versión v7.24.0+ del Agente, use la siguiente configuración de variable de entorno para agregar todas las etiquetas de nodo como etiquetas a sus métricas. En este ejemplo, los nombres de las etiquetas están precedidos por `<PREFIX>_`:
+Para el Agente v7.24.0+, use la siguiente configuración de variable de entorno para agregar todas las etiquetas de nodo como etiquetas a sus métricas. En este ejemplo, los nombres de las etiquetas están precedidos por `<PREFIX>_`:
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -470,7 +470,7 @@ datadog:
     kubernetes.io/arch: arch
 ```
 
-Para la versión v7.24.0+ del Agente, use la siguiente configuración de variable de entorno para agregar todas las etiquetas de nodo como etiquetas a sus métricas. En este ejemplo, los nombres de las etiquetas están precedidos por `<PREFIX>_`:
+Para el Agente v7.24.0+, use la siguiente configuración de variable de entorno para agregar todas las etiquetas de nodo como etiquetas a sus métricas. En este ejemplo, los nombres de las etiquetas están precedidos por `<PREFIX>_`:
 
 
 ```yaml
@@ -493,7 +493,7 @@ Por ejemplo, podría configurar:
 DD_KUBERNETES_NODE_LABELS_AS_TAGS='{"kubernetes.io/arch":"arch"}'
 ```
 
-Para la versión v7.24.0+ del Agente, use la siguiente configuración de variable de entorno para agregar todas las etiquetas de nodo como etiquetas a sus métricas. En este ejemplo, los nombres de las etiquetas están precedidos por `<PREFIX>_`:
+Para el Agente v7.24.0+, use la siguiente configuración de variable de entorno para agregar todas las etiquetas de nodo como etiquetas a sus métricas. En este ejemplo, los nombres de las etiquetas están precedidos por `<PREFIX>_`:
 
 ```bash
 DD_KUBERNETES_NODE_LABELS_AS_TAGS='{"*":"<PREFIX>_%%label%%"}' # Note: wildcards do not work for KSM metrics before version 7.73
@@ -507,11 +507,11 @@ DD_KUBERNETES_NODE_LABELS_AS_TAGS='{"*":"<PREFIX>_%%label%%"}' # Note: wildcards
 
 <div class="alert alert-info">
 
-Si está en la versión 7.58.0+ del agente, se le aconseja usar <a href="/containers/kubernetes/tag/#kubernetes-resources-labels-as-tags">Etiquetas de recursos de Kubernetes como etiquetas</a> para configurar etiquetas de pod como etiquetas.
+Si está en la versión del agente 7.58.0+, se le aconseja usar <a href="/containers/kubernetes/tag/#kubernetes-resources-labels-as-tags">Etiquetas de recursos de Kubernetes como etiquetas</a> para configurar etiquetas de pod como etiquetas.
 
 </div>
 
-A partir de la versión v6.0+ del Agente, el Agente puede recopilar etiquetas para un pod dado y usarlas como etiquetas para adjuntar a todas las métricas, trazas y registros emitidos por este pod:
+A partir del Agente v6.0+, el Agente puede recopilar etiquetas para un pod dado y usarlas como etiquetas para adjuntar a todas las métricas, trazas y registros emitidos por este pod:
 
 {{< tabs >}}
 {{% tab "Operador de Datadog" %}}
@@ -807,9 +807,9 @@ DD_KUBERNETES_NAMESPACE_LABELS_AS_TAGS='{"*":"<PREFIX>_%%label%%"}'
 **Nota**: Las métricas personalizadas pueden afectar la facturación. Consulte la [página de facturación de métricas personalizadas][3] para más información.
 {{% /collapse-content %}}
 
-### Variables de entorno de contenedor como etiquetas
+### Variables de entorno del contenedor como etiquetas
 
-A partir de la versión 7.32+ del Agente, el Agente puede recopilar variables de entorno de contenedor y usarlas como etiquetas para adjuntarlas a todas las métricas, trazas y registros correspondientes al contenedor. Se admiten tanto los contenedores `docker` como `containerd`:
+A partir de la versión 7.32+ del Agente, el Agente puede recopilar variables de entorno del contenedor y usarlas como etiquetas para adjuntarlas a todas las métricas, trazas y registros correspondientes al contenedor. Se admiten tanto los contenedores `docker` como `containerd`:
 
 {{< tabs >}}
 {{% tab "Operador de Datadog" %}}

@@ -29,7 +29,7 @@ El RUM para iOS rastrea automáticamente atributos como la actividad del usuario
 
 ### Vistas personalizadas
 
-Además de [rastrear vistas automáticamente](#automatically-track-views), también puedes rastrear vistas específicas y distintas, como `viewControllers` cuando se vuelven visibles e interactivas. Detén el rastreo cuando la vista ya no sea visible utilizando los siguientes métodos en `RUMMonitor.shared()`:
+Además de [rastrear vistas automáticamente](#automatically-track-views), también puedes rastrear vistas distintas específicas, como `viewControllers` cuando se vuelven visibles e interactivas. Detén el rastreo cuando la vista ya no sea visible utilizando los siguientes métodos en `RUMMonitor.shared()`:
 
 - `.startView(viewController:)`
 - `.stopView(viewController:)`

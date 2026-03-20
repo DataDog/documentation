@@ -224,7 +224,7 @@ Après avoir exécuté le code ci-dessus, vos données de métriques sont dispon
 
 {{< img src="metrics/custom_metrics/dogstatsd_metrics_submission/increment_decrement.png" alt="Incrémenter Décrémenter" >}}
 
-Puisque la valeur est soumise en tant que `COUNT`, elle est stockée en tant que `RATE` dans Datadog. Pour obtenir des comptes bruts dans Datadog, appliquez une fonction à votre série, telle que la fonction [Somme Cumulative][3] ou [Intégrale][4] :
+Puisque la valeur est soumise en tant que `COUNT`, elle est stockée en tant que `RATE` dans Datadog. Pour obtenir des comptes bruts dans Datadog, appliquez une fonction à votre série, comme la fonction [Somme Cumulative][3] ou [Intégrale][4] :
 
 {{< img src="metrics/custom_metrics/dogstatsd_metrics_submission/increment_decrement_cumsum.png" alt="Incrémenter Décrémenter avec Cumsum" >}}
 
@@ -763,7 +763,7 @@ Après avoir exécuté le code ci-dessus, vos données de métriques sont dispon
 
 ##### Configuration
 
-Pour un `TIMER`, les règles de `HISTOGRAM` [configuration](#configuration) s'appliquent.
+Pour un `TIMER`, les règles de configuration `HISTOGRAM` [ s'appliquent.
 
 ##### Exemples de code
 
@@ -1035,7 +1035,7 @@ L'instrumentation ci-dessus calcule le `sum`, `count`, `average`, `minimum`, `ma
 
 ### Taux d'échantillonnage
 
-Étant donné que la surcharge d'envoi de paquets UDP peut être trop importante pour certains chemins de code intensifs en performances, les clients DogStatsD prennent en charge l'échantillonnage (n'envoyant des métriques qu'un pourcentage du temps). C'est utile si vous échantillonnez de nombreuses métriques, et que votre client DogStatsD n'est pas sur le même hôte que le serveur DogStatsD. Le compromis : vous réduisez le trafic mais perdez une certaine précision et granularité.
+Étant donné que la surcharge d'envoi de paquets UDP peut être trop importante pour certains chemins de code intensifs en performances, les clients DogStatsD prennent en charge l'échantillonnage (n'envoyant des métriques qu'un pourcentage du temps). C'est utile si vous échantillonnez de nombreuses métriques et que votre client DogStatsD n'est pas sur le même hôte que le serveur DogStatsD. Le compromis : vous réduisez le trafic mais perdez une certaine précision et granularité.
 
 Un taux d'échantillonnage de `1` envoie des métriques 100 % du temps, tandis qu'un taux d'échantillonnage de `0` envoie des métriques 0 % du temps.
 
@@ -1046,7 +1046,7 @@ Avant d'envoyer une métrique à Datadog, DogStatsD utilise le `<SAMPLE_RATE>` p
 | `COUNT`        | Les valeurs reçues sont multipliées par (`1/<SAMPLE_RATE>`). Il est raisonnable de supposer que pour un point de données reçu, `1/<SAMPLE_RATE>` ont en fait été échantillonnés avec la même valeur. |
 | `GAUGE`        | Aucune correction. La valeur reçue est conservée telle quelle.                                                                                                                               |
 | `SET`          | Aucune correction. La valeur reçue est conservée telle quelle.                                                                                                                               |
-| `HISTOGRAM`    | La statistique `histogram.count` est une métrique de COMPTE, et reçoit la correction décrite ci-dessus. D'autres statistiques sont des métriques de jauge et ne sont pas "corrigées".                      |
+| `HISTOGRAM`    | La statistique `histogram.count` est une métrique de COMPTE et reçoit la correction décrite ci-dessus. D'autres statistiques sont des métriques de jauge et ne sont pas "corrigées".                      |
 | `DISTRIBUTION` | Les valeurs reçues sont comptées (`1/<SAMPLE_RATE>`) fois. Il est raisonnable de supposer que pour un point de données reçu, `1/<SAMPLE_RATE>` ont en réalité été échantillonnés avec la même valeur. |
 
 #### Exemples de code

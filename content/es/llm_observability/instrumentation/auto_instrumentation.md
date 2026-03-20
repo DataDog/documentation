@@ -49,7 +49,7 @@ La Observabilidad LLM de Datadog puede rastrear y anotar automáticamente las ll
 
 {{% /tab %}}
 {{% tab "Node.js" %}}
-| Marco                                  | Versiones Soportadas | Versión del Trazador                              |
+| Marco                                  | Versiones Soportadas | Versión del Rastreador                              |
 |--------------------------------------------|--------------------|---------------------------------------------|
 | [Amazon Bedrock](#amazon-bedrock)          | >= 3.422.0         | >= 5.35.0 (CJS), >=5.35.0 (ESM)             |
 | [Anthropic](#anthropic)                    | >= 0.14.0          | >= 5.71.0 (CJS), >=5.71.0 (ESM)             |
@@ -177,7 +177,7 @@ module.exports = {
 {{% /tab %}}
 {{< /tabs >}}
 
-<div class="alert alert-info">La observabilidad de LLM de Datadog también admite cualquier marco que emita nativamente spans compatibles con la convención semántica de OpenTelemetry GenAI v1.37+</a>, sin requerir el rastreador de Datadog. Consulte <a href="/llm_observability/instrumentation/otel_instrumentation">Instrumentación de OpenTelemetry</a> para más detalles.</div>
+<div class="alert alert-info">La observabilidad de LLM de Datadog también admite cualquier marco que emita nativamente spans compatibles con la convención semántica de OpenTelemetry GenAI v1.37+</a>, sin requerir el rastreador de Datadog. Vea <a href="/llm_observability/instrumentation/otel_instrumentation">Instrumentación de OpenTelemetry</a> para más detalles.</div>
 
 ## Integraciones de LLM
 
@@ -233,7 +233,7 @@ La integración de Amazon Bedrock instrumenta los siguientes métodos:
 {{% collapse-content title="Agentes de Amazon Bedrock" level="h3" expanded=false id="amazon-bedrock-agents" %}}
 {{< tabs >}}
 {{% tab "Python" %}}
-La integración de Agentes de Amazon Bedrock proporciona trazado automático para las llamadas de invocación de agentes del SDK de Python de Amazon Bedrock (utilizando [Boto3][1]/[Botocore][2]).
+La integración de Agentes de Amazon Bedrock proporciona trazado automático para las llamadas de invocación de agente del SDK de Python de Amazon Bedrock (utilizando [Boto3][1]/[Botocore][2]).
 
 ### Métodos rastreados
 
@@ -397,7 +397,7 @@ La integración de Google GenAI instrumenta los siguientes métodos:
 {{% collapse-content title="LangChain" level="h3" expanded=false id="langchain" %}}
 {{< tabs >}}
 {{% tab "Python" %}}
-La [integración de LangChain][1] proporciona trazado automático para el [SDK de Python de LangChain][2] LLM, modelo de chat y llamadas de cadena.
+La [integración de LangChain][1] proporciona trazado automático para el [SDK de Python de LangChain][2], el modelo de chat y las llamadas a cadenas.
 
 ### Métodos rastreados
 
@@ -423,7 +423,7 @@ La integración de LangChain instrumenta los siguientes métodos:
 - [Plantillas de Prompt][9]
   - `BasePromptTemplate.invoke()`, `BasePromptTemplate.ainvoke()`
 
-  <div class="alert alert-info">Para obtener los mejores resultados, asigne plantillas a variables con nombres significativos. La instrumentación automática utiliza estos nombres para identificar los mensajes.</div>
+  <div class="alert alert-info">Para obtener los mejores resultados, asigna plantillas a variables con nombres significativos. La instrumentación automática utiliza estos nombres para identificar los mensajes.</div>
 
   ```python
   # "translation_template" will be used to identify the template in Datadog
@@ -442,7 +442,7 @@ La integración de LangChain instrumenta los siguientes métodos:
 {{% /tab %}}
 
 {{% tab "Node.js" %}}
-La [integración de LangChain][1] proporciona trazado automático para el [SDK de LangChain Node.js][2], modelo de chat, cadena y llamadas a embeddings de OpenAI.
+La [integración de LangChain][1] proporciona trazado automático para el [SDK de LangChain Node.js][2], el modelo de chat, la cadena y las llamadas a embeddings de OpenAI.
 
 ### Métodos rastreados
 
@@ -522,7 +522,7 @@ La integración de LiteLLM instrumenta los siguientes métodos:
 {{% collapse-content title="MCP" level="h3" expanded=false id="mcp" %}}
 {{< tabs >}}
 {{% tab "Python" %}}
-La integración del Protocolo de Contexto del Modelo (MCP) instrumenta llamadas de herramientas del cliente y del servidor en el [MCP][1] SDK.
+La integración del Protocolo de Contexto del Modelo (MCP) instrumenta las llamadas a herramientas del cliente y del servidor en el [SDK de MCP][1].
 
 ### Métodos rastreados
 
@@ -691,7 +691,7 @@ La integración de Pydantic AI instrumenta los siguientes métodos:
 {{% collapse-content title="Agentes de Strands" level="h3" expanded=false id="strands-agents" %}}
 {{< tabs >}}
 {{% tab "Python" %}}
-A partir de [v1.11.0][1], [Agentes de Strands][2] emite de manera nativa spans compatibles con [convenciones semánticas de OpenTelemetry GenAI v1.37][3], que Datadog LLM Observability ingiere automáticamente sin requerir el rastreador de Datadog.
+A partir de [v1.11.0][1], [Agentes de Strands][2] emite de manera nativa spans compatibles con [OpenTelemetry GenAI semantic conventions v1.37][3], que Datadog LLM Observability ingiere automáticamente sin requerir el rastreador de Datadog.
 
 Para instrucciones de configuración y un ejemplo completo, consulte [Instrumentación de OpenTelemetry — Usando Agentes de Strands][4].
 
@@ -899,11 +899,11 @@ tracer.use('langchain', true);
 Para un control más específico sobre el parcheo de bibliotecas y la integración que inicia el span, puedes establecer las siguientes variables de entorno:
 
 `DD_TRACE_DISABLED_PLUGINS`
-: Una cadena separada por comas de nombres de integraciones que se desactivan automáticamente cuando se inicializa el rastreador.<br>
+: Una cadena separada por comas de nombres de integraciones que se desactivan automáticamente cuando se inicializa el tracer.<br>
 **Ejemplo**: `DD_TRACE_DISABLED_PLUGINS=openai,http`
 
 `DD_TRACE_DISABLED_INSTRUMENTATIONS`
-: Una cadena separada por comas de nombres de bibliotecas que no se parchean cuando se inicializa el rastreador.<br>
+: Una cadena separada por comas de nombres de bibliotecas que no se parchean cuando se inicializa el tracer.<br>
 **Ejemplo**: `DD_TRACE_DISABLED_INSTRUMENTATIONS=openai,http`
 
 ## Lectura Adicional
