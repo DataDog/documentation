@@ -78,8 +78,8 @@ Email your new org name to your [Customer Success Manager](mailto:success@datado
 After the Datadog team has set your DDR org, use the Datadog [public API endpoint][8] to retrieve the public IDs of the primary and DDR org. 
 
 To link your DDR and primary orgs:
-- Add the Datadog Disaster Recovery Write (`disaster_recovery_status_write`) permission to your application key in the primary org 
-- Run these commands, replacing the `<PLACEHOLDERS>` with your orgs' values:
+- Add the [Datadog Disaster Recovery Write][19] (`disaster_recovery_status_write`) permission to your application key in the primary org. 
+- Run the following commands, replacing the `<PLACEHOLDERS>` with your orgs' values.
 
 
 ```shell
@@ -366,3 +366,4 @@ During testing, integration telemetry is spread over both organizations. If you 
 [16]: https://app.datadoghq.com/organization-settings/application-keys
 [17]: https://docs.datadoghq.com/agent/configuration/dual-shipping/?tab=helm
 [18]: https://docs.datadoghq.com/agent/fleet_automation/#overview
+[19]: /account_management/rbac/permissions/#disaster-recovery
