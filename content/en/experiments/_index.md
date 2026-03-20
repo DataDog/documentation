@@ -12,7 +12,7 @@ further_reading:
 
 ## Overview
 
-Datadog Experiments helps teams run and analyze randomized experiments, such as A/B tests, to understand how product changes affect user behavior, application performance, and business outcomes, allowing you to make confident, data-backed decisions about what to implement.
+Datadog Experiments helps teams run and analyze randomized experiments, such as A/B tests, to understand how product changes affect business outcomes, user behavior, and application performance, allowing you to make confident, data-backed decisions about what to implement.
 
 Datadog Experiments has two components:
 
@@ -30,7 +30,7 @@ After setting your data source:
 1. **[Create a metric][4]** to use to evaluate your experiment.
 1. **[Create an experiment][5]** to calculate a [sample size][8] and set a hypothesis.
 1. **[Create a feature flag][6]** and implement it using the [SDK][9] to assign users to the control and variant groups. This is required to launch your experiment.
-1. **[Launch your experiment][7]** to see the impact of your change on business metrics, application performance, and user journey.
+1. **[Launch your experiment][7]** to see the impact of your change on business metrics, user journey, and application performance.
 
 {{< img src="/product_analytics/experiment/overview_metrics_view-1.png" alt="The Experiments metrics view showing business, funnel, and performance metrics with control and variant values and relative lift for each metric." style="width:90%;" >}}
 
