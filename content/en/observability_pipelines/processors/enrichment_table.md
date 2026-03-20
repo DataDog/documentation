@@ -158,7 +158,7 @@ If an authentication error occurs while connecting to the Reference Table or aft
 
 If an error that causes a log to be sent without enrichment occurs, you can view it in the Worker logs. It also increments the [`pipelines.component_errors_total`](#processor-metrics) metric.
 
-Datadog does not recommend using the processor on a log field with high cardinality (in the order of 10,000+ possible values within a time frame of 10 minutes). The Reference Tables API is subject to rate limits and might deny Worker requests. Reach out to [Datadog support][5] if you continue to notice rate limit warnings in the Worker logs while running the processor.
+Datadog does not recommend using the processor on a log field with high cardinality (in the order of 10,000 or more possible values within a time frame of 10 minutes). The Reference Tables API is subject to rate limits and might deny Worker requests. Reach out to [Datadog support][5] if you continue to notice rate limit warnings in the Worker logs while running the processor.
 
 ### Metrics
 
