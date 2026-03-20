@@ -57,7 +57,7 @@ Cambie el interruptor a **Habilitar TLS**. Si activa TLS, se requieren los sigui
 {{% observability_pipelines/set_secrets_intro %}}
 
 {{< tabs >}}
-{{% pestaña "Gestión de secretos" %}}
+{{% tab "Gestión de secretos" %}}
 
 - Identificador de los servidores de arranque de Kafka:
     - Hace referencia al servidor de arranque que el cliente utiliza para conectarse al clúster Kafka y descubrir todos los demás hosts del clúster.
