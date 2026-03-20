@@ -117,6 +117,10 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
    url = "{{< region-param key="mcp_server_endpoint" >}}"
    </code></pre>
 
+   To enable [product-specific tools][2], include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and LLM Observability tools: 
+
+   <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
+
 2. Log in to the Datadog MCP Server:
 
    ```shell
@@ -124,6 +128,8 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
    ```
 
    This opens your browser to complete the OAuth flow. Codex stores the resulting credentials so you don't need to log in again until the token expires.
+
+[2]: /bits_ai/mcp_server#toolsets
 {{< /site-region >}}
 
 {{< site-region region="gov" >}}
