@@ -20,6 +20,7 @@ Learn how to set up and configure the Datadog MCP Server, which lets you retriev
 
 Datadog's [Cursor and VS Code extension][1] includes built-in access to the managed Datadog MCP Server.
 
+{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
 1. Install the extension (omit `--profile` and profile name to install to the default Cursor profile):
     ```shell
     cursor --install-extension datadog.datadog-vscode --profile <PROFILE_NAME>
@@ -31,11 +32,15 @@ Datadog's [Cursor and VS Code extension][1] includes built-in access to the mana
 1. Confirm the Datadog MCP Server is available and the [tools][3] are listed: Go to **Cursor Settings** (`Shift` + `Cmd/Ctrl` + `J`), select the **Tools & MCP** tab, and expand the extension's tools list.
 1. If you previously installed the Datadog MCP Server manually, remove it from the IDE's configuration to avoid conflicts.
 
-
-[1]: /ide_plugins/vscode/
 [2]: /ide_plugins/vscode/?tab=cursor#installation
 [3]: /bits_ai/mcp_server#available-tools
+{{< /site-region >}}
 
+{{< site-region region="gov" >}}
+<div class="alert alert-danger">Datadog MCP Server is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
+[1]: /ide_plugins/vscode/
 {{% /tab %}}
 
 {{% tab "Claude Code" %}}
@@ -143,6 +148,7 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
 
 Datadog's [Cursor and VS Code extension][1] includes built-in access to the managed Datadog MCP Server.
 
+{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
 1. Install the extension (omit `--profile` and profile name to install to the default VS Code profile):
     ```shell
     code --install-extension datadog.datadog-vscode --profile <PROFILE_NAME>
@@ -154,10 +160,15 @@ Datadog's [Cursor and VS Code extension][1] includes built-in access to the mana
    {{< img src="bits_ai/mcp_server/vscode_configure_tools_button.png" alt="Configure Tools button in VS Code" style="width:70%;" >}}
 1. If you previously installed the Datadog MCP Server manually, remove it from the IDE's configuration to avoid conflicts. Open the command palette (`Shift` + `Cmd/Ctrl` + `P`) and run `MCP: Open User Configuration`.
 
-[1]: /ide_plugins/vscode/
 [2]: /ide_plugins/vscode/?tab=vscode#installation
 [3]: /bits_ai/mcp_server#available-tools
+{{< /site-region >}}
 
+{{< site-region region="gov" >}}
+<div class="alert alert-danger">Datadog MCP Server is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
+[1]: /ide_plugins/vscode/
 {{% /tab %}}
 
 {{% tab "JetBrains IDEs" %}}
