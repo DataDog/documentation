@@ -5841,6 +5841,12 @@ components:
             Scope down exclusion filter to only a subset of logs with a log query.
           example: "*"
           type: string
+        sample_attribute:
+          description: |-
+            Sample attribute to use for the sampling of logs going through this exclusion filter.
+            When set, only the logs with the specified attribute are sampled.
+          example: "@ci.job_id"
+          type: string
         sample_rate:
           description: |-
             Sample rate to apply to logs going through this exclusion filter,
