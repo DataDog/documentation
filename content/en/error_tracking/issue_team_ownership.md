@@ -18,25 +18,6 @@ Issue Team Ownership automates your triaging work by assigning issues to the rig
 2. [CODEOWNERS](#codeowners-file): based on the top-level stack frame of the issue according to GitHub `CODEOWNERS`.
 3. [Service ownership](#service-ownership): based on the owner of the service where the issue happens.
 
-## CODEOWNERS file
-
-Your team owns an issue if it is the code owner of the top-level stack frame of the issue according to your GitHub `CODEOWNERS` file.
-
-**Notes**:
--  Stack frames of third-party files are not taken into account. Only the top-most stack frame related to a file present in your repository is considered.
-- After a team is assigned to an issue through CODEOWNERS, the assignment is immutable.
-- Issue Team Ownership only supports GitHub.
-
-### Setup
-
-1. Ensure [Source Code Integration][1] is set up.
-2. Install [the GitHub integration][2].
-3. Make sure the GitHub integration has all requested permissions (Contents and Members).
-4. Create a valid `CODEOWNERS` file in your repository following [GitHub's CODEOWNERS standards][3].
-5. In Datadog, go to [**Teams**](https://app.datadoghq.com/teams) > Select your team > **Settings** > **GitHub Connection** to map your Datadog teams to the corresponding GitHub teams defined in your `CODEOWNERS` file.
-
-{{< img src="error_tracking/team-github-connection.jpg" alt="Linking GitHub teams to Datadog teams" style="width:80%;" >}}
-
 ## Team attribute
 
 You can programmatically assign team ownership at the time an error is raised by setting the `team` attribute to a Datadog team handle.
@@ -62,6 +43,25 @@ Set the `team` attribute on the RUM event:
 ```javascript
 datadogRum.addError(error, { team: 'payments-frontend' });
 ```
+
+## CODEOWNERS file
+
+Your team owns an issue if it is the code owner of the top-level stack frame of the issue according to your GitHub `CODEOWNERS` file.
+
+**Notes**:
+-  Stack frames of third-party files are not taken into account. Only the top-most stack frame related to a file present in your repository is considered.
+- After a team is assigned to an issue through CODEOWNERS, the assignment is immutable.
+- Issue Team Ownership only supports GitHub.
+
+### Setup
+
+1. Ensure [Source Code Integration][1] is set up.
+2. Install [the GitHub integration][2].
+3. Make sure the GitHub integration has all requested permissions (Contents and Members).
+4. Create a valid `CODEOWNERS` file in your repository following [GitHub's CODEOWNERS standards][3].
+5. In Datadog, go to [**Teams**](https://app.datadoghq.com/teams) > Select your team > **Settings** > **GitHub Connection** to map your Datadog teams to the corresponding GitHub teams defined in your `CODEOWNERS` file.
+
+{{< img src="error_tracking/team-github-connection.jpg" alt="Linking GitHub teams to Datadog teams" style="width:80%;" >}}
 
 ## Service ownership
 
