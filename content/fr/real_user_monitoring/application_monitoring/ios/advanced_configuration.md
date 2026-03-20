@@ -1,40 +1,40 @@
 ---
 aliases:
-- /es/real_user_monitoring/ios/advanced_configuration
-- /es/real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/ios
-- /es/real_user_monitoring/mobile_and_tv_monitoring/ios/advanced_configuration
-description: Configura la configuración avanzada del SDK de RUM para iOS para enriquecer
-  las sesiones de usuario, rastrear eventos personalizados y controlar la recopilación
-  de datos para obtener mejores perspectivas.
+- /fr/real_user_monitoring/ios/advanced_configuration
+- /fr/real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/ios
+- /fr/real_user_monitoring/mobile_and_tv_monitoring/ios/advanced_configuration
+description: Configurez les paramètres avancés du SDK RUM iOS pour enrichir les sessions
+  utilisateur, suivre des événements personnalisés et contrôler la collecte de données
+  pour de meilleures analyses.
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-ios
   tag: Source Code
-  text: Código fuente para dd-sdk-ios
+  text: Code source pour dd-sdk-ios
 - link: /real_user_monitoring
   tag: Documentation
-  text: RUM y Repetición de Sesiones
+  text: RUM et Relecture de Session
 - link: /real_user_monitoring/application_monitoring/ios/supported_versions/
   tag: Documentation
-  text: Versiones soportadas de monitoreo de RUM para iOS y tvOS
+  text: Versions prises en charge pour la surveillance RUM iOS et tvOS
 - link: https://github.com/DataDog/dd-sdk-ios-apollo-interceptor
   tag: Source Code
-  text: Integración de Datadog para Apollo iOS
-title: Configuración Avanzada de iOS
+  text: Intégration Datadog pour Apollo iOS
+title: Configuration Avancée iOS
 ---
-Si aún no has configurado el SDK de RUM para iOS, sigue las [instrucciones de configuración en la aplicación][1] o consulta la [documentación de configuración de RUM para iOS][2].
+Si vous n'avez pas encore configuré le SDK RUM iOS, suivez les [instructions de configuration dans l'application][1] ou consultez la [documentation de configuration RUM iOS][2].
 
-## Enriquecer las sesiones de usuario
+## Enrichir les sessions utilisateur
 
-El RUM para iOS rastrea automáticamente atributos como la actividad del usuario, pantallas, errores y solicitudes de red. Consulta la [documentación de Recopilación de Datos de RUM][3] para aprender sobre los eventos de RUM y los atributos predeterminados. Puedes enriquecer aún más la información de la sesión de usuario y obtener un control más fino sobre los atributos recopilados al rastrear eventos personalizados.
+Le RUM iOS suit automatiquement des attributs tels que l'activité utilisateur, les écrans, les erreurs et les requêtes réseau. Consultez la [documentation sur la collecte de données RUM][3] pour en savoir plus sur les événements RUM et les attributs par défaut. Vous pouvez enrichir davantage les informations de session utilisateur et obtenir un meilleur contrôle sur les attributs collectés en suivant des événements personnalisés.
 
-### Vistas personalizadas
+### Vues personnalisées
 
-Además de [rastrear vistas automáticamente](#automatically-track-views), también puedes rastrear vistas distintas específicas como `viewControllers` cuando se vuelven visibles e interactivas. Detén el rastreo cuando la vista ya no sea visible utilizando los siguientes métodos en `RUMMonitor.shared()`:
+En plus de [suivre les vues automatiquement](#automatically-track-views), vous pouvez également suivre des vues distinctes spécifiques telles que `viewControllers` lorsqu'elles deviennent visibles et interactives. Arrêtez de suivre lorsque la vue n'est plus visible en utilisant les méthodes suivantes dans `RUMMonitor.shared()` :
 
 - `.startView(viewController:)`
 - `.stopView(viewController:)`
 
-Por ejemplo:
+Par exemple :
 
 {{< tabs >}}
 {{% tab "Swift" %}}
@@ -386,7 +386,7 @@ You can automatically track views with UIKit and SwiftUI.
 
 {{% collapse-content title="UIKit" level="h4" expanded=true id="auto-track-views-uikit" %}}
 
-Para rastrear automáticamente las vistas (`UIViewControllers`), utiliza la opción `uiKitViewsPredicate` al habilitar RUM. Por defecto, las vistas se nombran con el nombre de la clase del controlador de vista. Para personalizarlo, proporciona tu propia implementación de `predicate` que cumpla con el protocolo `UIKitRUMViewsPredicate`:
+Pour suivre automatiquement les vues (`UIViewControllers`), utilisez l'option `uiKitViewsPredicate` lors de l'activation du RUM. Par défaut, les vues sont nommées avec le nom de classe du contrôleur de vue. Pour le personnaliser, fournissez votre propre implémentation de la `predicate` qui respecte le protocole `UIKitRUMViewsPredicate` :
 
 {{< tabs >}}
 {{% tab "Swift" %}}
@@ -406,9 +406,9 @@ public protocol DDUIKitRUMViewsPredicate: AnyObject {
 {{% /tab %}}
 {{< /tabs >}}
 
-Dentro de la implementación de `rumView(for:)`, tu aplicación debe decidir si una instancia dada de `UIViewController` debe iniciar una vista RUM (devolver un valor) o no (devolver `nil`). El valor `RUMView` devuelto debe especificar `name` y puede proporcionar información adicional `attributes` para la vista RUM creada.
+Dans l'implémentation de la `rumView(for:)`, votre application doit décider si une instance `UIViewController` donnée doit démarrer une vue RUM (retourner une valeur) ou non (retourner `nil`). La valeur `RUMView` retournée doit spécifier le `name` et peut fournir des `attributes` supplémentaires pour la vue RUM créée.
 
-Por ejemplo, puedes configurar el predicado para usar una verificación de tipo explícita para cada controlador de vista en tu aplicación:
+Par exemple, vous pouvez configurer le prédicat pour utiliser une vérification de type explicite pour chaque contrôleur de vue dans votre application :
 
 {{< tabs >}}
 {{% tab "Swift" %}}
@@ -710,7 +710,7 @@ let session = URLSession(
 This tracks all requests sent with the instrumented `session`. Requests matching the `example.com` domain are marked as "first party" and tracing information is sent to your backend to [connect the RUM resource with its Trace][1].
 
 
-[1]: https://docs.datadoghq.com/es/real_user_monitoring/correlate_with_other_telemetry/apm?tab=browserrum
+[1]: https://docs.datadoghq.com/fr/real_user_monitoring/correlate_with_other_telemetry/apm?tab=browserrum
 {{% /tab %}}
 {{% tab "Objective-C" %}}
 ```objective-c
@@ -1095,11 +1095,11 @@ Calling this method disables the SDK and all active features, such as RUM. To re
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/rum/application/create
-[2]: /es/real_user_monitoring/application_monitoring/ios
-[3]: /es/real_user_monitoring/application_monitoring/ios/data_collected/
+[2]: /fr/real_user_monitoring/application_monitoring/ios
+[3]: /fr/real_user_monitoring/application_monitoring/ios/data_collected/
 [4]: https://github.com/DataDog/dd-sdk-ios/blob/master/DatadogRUM/Sources/RUMMonitorProtocol.swift
-[5]: /es/real_user_monitoring/application_monitoring/ios/data_collected/?tab=error#error-attributes
-[6]: /es/real_user_monitoring/application_monitoring/ios/data_collected/?tab=session#default-attributes
+[5]: /fr/real_user_monitoring/application_monitoring/ios/data_collected/?tab=error#error-attributes
+[6]: /fr/real_user_monitoring/application_monitoring/ios/data_collected/?tab=session#default-attributes
 [7]: https://www.ntppool.org/en/
-[8]: /es/real_user_monitoring/error_tracking/mobile/ios/#add-app-hang-reporting
-[9]: /es/real_user_monitoring/application_monitoring/ios/setup
+[8]: /fr/real_user_monitoring/error_tracking/mobile/ios/#add-app-hang-reporting
+[9]: /fr/real_user_monitoring/application_monitoring/ios/setup
