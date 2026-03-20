@@ -12,9 +12,9 @@ further_reading:
 
 ## Overview
 
-Datadog Experiments helps you run and analyze randomized experiments, such as A/B tests, from rollout through results. It combines [Datadog Feature Flags][1] for assigning users to variants with statistical analysis to measure how each variant affects key outcome metrics.
+Datadog Experiments helps you run and analyze randomized experiments, such as A/B tests, to understand how product changes affect business, behavioral, and performance outcomes.
 
-You can use Feature Flags capabilities — including multi-variant testing, granular targeting, and canary rollouts — to deploy a change, then evaluate its impact using Datadog data or metrics from your own data warehouse.
+Experiments combines [Datadog Feature Flags][1] for assigning users to control and variant groups with statistical analysis to measure the impact of each variant.
 
 ## How Experiments work
 
@@ -37,7 +37,8 @@ To start using Experiments, [install the Feature Flags SDK][5] and [create your 
 
 If you already use Product Analytics or Real User Monitoring, you can start creating metrics right away.
 
-<!-- THIS NEEDS THE GUIDES TO BE COMNPLETED FIRST
+
+<!-- THIS NEEDS THE GUIDES TO BE COMPLETED FIRST
 
 To connect your data warehouse, follow the appropriate setup guide:
 
@@ -50,13 +51,10 @@ To connect your data warehouse, follow the appropriate setup guide:
 ## Further reading
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /feature_management/
+[1]: /feature_flags/
 [2]: /product_analytics/
 [3]: /real_user_monitoring/
 [4]: /experiments/warehouse_native/
 [5]: /feature_management/setup/
-[6]: /experiments/metrics/
-[7]: /experiments/warehouse_native/snowflake/
-[8]: /experiments/warehouse_native/databricks/
-[9]: /experiments/warehouse_native/bigquery/
-[10]: /experiments/warehouse_native/redshift/
+[6]: /experiments/defining_metrics
+
