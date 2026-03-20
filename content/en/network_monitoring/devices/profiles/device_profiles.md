@@ -64,21 +64,25 @@ For advanced profile configuration, see [Build an NDM Profile][3].
 
 The recommended entry point for the SNMP Profile Manager is from a single device in NDM. Every device matches to a profile, either a custom profile or a generic Datadog-provided one. Editing a profile from a device automatically creates a custom version of that profile on your behalf, so you never need to create a profile from scratch.
 
-### Open a device profile from NDM
-
 1. Navigate to [**Infrastructure > Network Devices**][15].
 2. Click on a device to open the device side panel.
 3. Click the **View all metrics** to view the list of metrics being automatically collected for the device.
 
-{{< img src="/network_device_monitoring/profile_onboarding/ndm_view_all_metrics.png" alt="The NDM device side panel showing the Metrics section with the View all metrics button highlighted" style="width:90%;">}}
+   {{< img src="/network_device_monitoring/profile_onboarding/ndm_view_all_metrics.png" alt="The NDM device side panel showing the Metrics section with the View all metrics button highlighted" style="width:90%;">}}
 
-4. To edit the profile, click **SNMP Profile** in the **Metrics** tab on the NDM device view.
+4. The **Metrics** tab opens, showing all metrics collected for the device. Use the left sidebar to browse by category: **Alerting Metrics**, **Starred Metrics**, **Key Metrics**, and **Additional Metrics**. 
 
-{{< img src="/network_device_monitoring/profile_onboarding/ndm_metrics_tab.png" alt="The NDM device Metrics tab with the SNMP Profile option highlighted in the left sidebar" style="width:90%;">}}
+   {{< img src="/network_device_monitoring/profile_onboarding/profile_manager_metrics_tab.png" alt="The NDM device Metrics tab showing metric graphs and a left sidebar with categories including Alerting Metrics, Starred Metrics, Key Metrics, Additional Metrics, and SNMP Profile" style="width:90%;">}}
 
-5. This opens the profile editor. From here, you can view all available metrics for the devices covered by this profile and enable or disable them individually.
+5. To open the profile editor and manage which metrics are collected, click **SNMP Profile** in the sidebar.
 
-{{< img src="/network_device_monitoring/profile_onboarding/ndm_profile_editor.png" alt="The SNMP Profile Manager profile editor showing the Metrics tab with all available metrics listed by name, MIB, OID, category, and compatibility" style="width:90%;">}}
+   {{< img src="/network_device_monitoring/profile_onboarding/ndm_metrics_tab.png" alt="The NDM device Metrics tab with the SNMP Profile option highlighted in the left sidebar" style="width:90%;">}}
+
+   This opens the profile editor in the **Metrics** tab, containing the list of all available metrics for the devices covered by the profile, organized by name, MIB, OID, category, and compatibility. This is the primary view for controlling what data Datadog collects from your devices. You can filter the metric list by category or use the search bar to find specific metrics by name or OID.
+
+6. To enable a metric, click the **Enable** toggle next to the metric name. To disable a metric, click the toggle again. Changes are not applied until you save and deploy the profile.
+
+   {{< img src="/network_device_monitoring/profile_onboarding/ndm_profile_editor.png" alt="The SNMP Profile Manager profile editor showing the Metrics tab with all available metrics listed by name, MIB, OID, category, and compatibility" style="width:90%;">}}
 
 ### Device coverage
 
@@ -107,7 +111,7 @@ If SNMP walks are failing, verify that:
 - Network connectivity allows SNMP polling.
 - Credentials and ports are correct.
 
-### Advanced Options
+### Advanced options
 
 Click **Advanced Options** to access device metadata and global tag configuration. These settings are not required for most use cases.
 
