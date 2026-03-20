@@ -19,7 +19,7 @@ title: Référence SDK LLM Observability
 ---
 ## Aperçu
 
-Les SDK LLM Observability de Datadog fournissent une instrumentation automatique ainsi que des API d'instrumentation manuelle pour offrir une observabilité et des insights sur vos applications LLM.
+Les SDK LLM Observability de Datadog fournissent une instrumentation automatique ainsi que des API d'instrumentation manuelle pour offrir une visibilité et des informations sur vos applications LLM.
 
 ## Configuration
 
@@ -283,7 +283,7 @@ Définissez les valeurs suivantes comme variables d'environnement. Elles ne peuv
 
 {{% collapse-content title="Configuration AWS Lambda" level="h3" expanded=false id="aws-lambda-setup" %}}
 
-Pour instrumenter une fonction AWS Lambda existante avec LLM Observabilité, vous pouvez utiliser l'Extension Datadog et les couches de langage respectives.
+Pour instrumenter une fonction AWS Lambda existante avec LLM Observability, vous pouvez utiliser l'Extension Datadog et les couches de langage respectives.
 
 1. Ouvrez un Cloudshell dans la console AWS.
 2. Installez le client Datadog CLI
@@ -406,9 +406,9 @@ Les types de span sont requis et sont spécifiés sur l'objet `options` passé a
 
 **Remarque :** Les spans avec un type de span invalide ne sont pas soumis à LLM Observability.
 
-### Capture automatique des arguments/outputs/noms de fonction
+### Capture automatique des arguments/sorties/noms de fonction
 
-`llmobs.wrap` (avec [`llmobs.decorate`](#function-decorators-in-typescript) pour TypeScript) essaie de capturer automatiquement les entrées, les sorties et le nom de la fonction étant tracée. Si vous devez annoter manuellement un span, consultez [Enrichissement des spans](#enriching-spans). Les entrées et sorties que vous annotez remplaceront la capture automatique. De plus, pour remplacer le nom de la fonction, passez la propriété `name` sur l'objet options à la fonction `llmobs.wrap` :
+`llmobs.wrap` (avec [`llmobs.decorate`](#function-decorators-in-typescript) pour TypeScript) essaie de capturer automatiquement les entrées, les sorties et le nom de la fonction étant tracée. Si vous devez annoter manuellement un span, consultez [Enrichissement des spans](#enriching-spans). Les entrées et sorties que vous annotez remplaceront la capture automatique. De plus, pour remplacer le nom de la fonction, passez la propriété `name` dans l'objet options à la fonction `llmobs.wrap` :
 
 {{< code-block lang="javascript" >}}
 function processMessage () {
@@ -426,7 +426,7 @@ processMessage = llmobs.wrap({ kind: 'workflow', name: 'differentFunctionName' }
 - Si la fonction prend un rappel comme dernier paramètre, alors la portée se termine lorsque ce rappel est appelé.
 - Si la fonction n'accepte pas de rappel et ne retourne pas de promesse, alors la portée se termine à la fin de l'exécution de la fonction.
 
-L'exemple suivant démontre la deuxième condition, où le dernier argument est un rappel :
+L'exemple suivant illustre la deuxième condition, où le dernier argument est un rappel :
 
 #### Exemple
 
@@ -551,7 +551,7 @@ Pour tracer un appel LLM, spécifiez le type de span comme `llm`, et spécifiez 
 
 `name`
 : optionnel - _chaîne_
-<br/>Le nom de l'opération. Si non fourni, `name` par défaut prend le nom de la fonction tracée.
+<br/>Le nom de l'opération. Si non fourni, `name` par défaut au nom de la fonction tracée.
 
 `modelProvider`
 : optionnel - _chaîne_ - **par défaut**: `"custom"`
@@ -591,7 +591,7 @@ LLMObs.startLLMSpan(spanName, modelName, modelProvider, mlApp, sessionID);
 
 `spanName`
 : optionnel - _Chaîne_
-<br/>Le nom de l'opération. Si non fourni, `spanName` par défaut prend le type de portée.
+<br/>Le nom de l'opération. Si non fourni, `spanName` par défaut au type de portée.
 
 `modelName`
 : optionnel - _Chaîne_ - **par défaut**: `"custom"`
@@ -608,7 +608,7 @@ LLMObs.startLLMSpan(spanName, modelName, modelProvider, mlApp, sessionID);
 
 `sessionId`
 : optionnel - _Chaîne_
-<br/>L'ID de la session utilisateur sous-jacente. Voir [Suivi des sessions utilisateur](#tracking-user-sessions) pour plus d'informations.
+<br/>L'ID de la session utilisateur sous-jacente. Voir [Suivre les sessions utilisateur](#tracking-user-sessions) pour plus d'informations.
 
 {{% /collapse-content %}}
 
@@ -645,7 +645,7 @@ Pour tracer un intervalle de flux de travail, utilisez le décorateur de fonctio
 
 `session_id`
 : optionnel - _chaîne_
-<br/>L'ID de la session utilisateur sous-jacente. Voir [Suivi des sessions utilisateur](#tracking-user-sessions) pour plus d'informations.
+<br/>L'ID de la session utilisateur sous-jacente. Voir [Suivre les sessions utilisateur](#tracking-user-sessions) pour plus d'informations.
 
 `ml_app`
 : optionnel - _chaîne_
@@ -678,7 +678,7 @@ Pour tracer un intervalle de flux de travail, spécifiez le type d'intervalle co
 
 `sessionId`
 : optionnel - _chaîne_
-<br/>L'ID de la session utilisateur sous-jacente. Voir [Suivi des sessions utilisateur](#tracking-user-sessions) pour plus d'informations.
+<br/>L'ID de la session utilisateur sous-jacente. Voir [Suivre les sessions utilisateur](#tracking-user-sessions) pour plus d'informations.
 
 `mlApp`
 : optionnel - _chaîne_
@@ -709,7 +709,7 @@ LLMObs.startWorkflowSpan(spanName, mlApp, sessionID);
 
 `spanName`
 : optionnel - _Chaîne_
-<br/>Le nom de l'opération. Si non fourni, `spanName` par défaut prend le type de portée.
+<br/>Le nom de l'opération. Si non fourni, `spanName` par défaut au type de portée.
 
 `mlApp`
 : optionnel - _Chaîne_
@@ -755,7 +755,7 @@ Pour tracer l'exécution d'un agent, utilisez le décorateur de fonction `ddtrac
 
 `session_id`
 : optionnel - _chaîne_
-<br/>L'ID de la session utilisateur sous-jacente. Voir [Suivi des sessions utilisateur](#tracking-user-sessions) pour plus d'informations.
+<br/>L'ID de la session utilisateur sous-jacente. Voir [Suivre les sessions utilisateur](#tracking-user-sessions) pour plus d'informations.
 
 `ml_app`
 : optionnel - _chaîne_
@@ -786,7 +786,7 @@ Pour tracer l'exécution d'un agent, spécifiez le type de portée comme `agent`
 
 `sessionId`
 : optionnel - _chaîne_
-<br/>L'ID de la session utilisateur sous-jacente. Voir [Suivi des sessions utilisateur](#tracking-user-sessions) pour plus d'informations.
+<br/>L'ID de la session utilisateur sous-jacente. Voir [Suivre les sessions utilisateur](#tracking-user-sessions) pour plus d'informations.
 
 `mlApp`
 : optionnel - _chaîne_
@@ -806,7 +806,7 @@ reactAgent = llmobs.wrap({ kind: 'agent' }, reactAgent)
 
 {{% /tab %}}
 {{% tab "Java" %}}
-Pour tracer l'exécution d'un agent, importez et appelez la méthode suivante avec les arguments énumérés ci-dessous
+Pour tracer l'exécution d'un agent, importez et appelez la méthode suivante avec les arguments énumérés ci-dessous.
 
 ```
 import datadog.trace.api.llmobs.LLMObs;
@@ -846,7 +846,7 @@ Pour tracer un appel d'outil, utilisez le décorateur de fonction `ddtrace.llmob
 
 `session_id`
 : optionnel - _chaîne_
-<br/>L'ID de la session utilisateur sous-jacente. Voir [Suivi des sessions utilisateur](#tracking-user-sessions) pour plus d'informations.
+<br/>L'ID de la session utilisateur sous-jacente. Voir [Suivre les sessions utilisateur](#tracking-user-sessions) pour plus d'informations.
 
 `ml_app`
 : optionnel - _chaîne_
@@ -878,7 +878,7 @@ Pour tracer un appel d'outil, spécifiez le type de portée comme `tool`, et sp�
 
 `sessionId`
 : optionnel - _chaîne_
-<br/>L'ID de la session utilisateur sous-jacente. Voir [Suivi des sessions utilisateur](#tracking-user-sessions) pour plus d'informations.
+<br/>L'ID de la session utilisateur sous-jacente. Voir [Suivre les sessions utilisateur](#tracking-user-sessions) pour plus d'informations.
 
 `mlApp`
 : optionnel - _chaîne_
@@ -938,7 +938,7 @@ Pour tracer une portée de tâche, utilisez le décorateur de fonction `LLMObs.t
 
 `session_id`
 : optionnel - _chaîne_
-<br/>L'ID de la session utilisateur sous-jacente. Voir [Suivi des sessions utilisateur](#tracking-user-sessions) pour plus d'informations.
+<br/>L'ID de la session utilisateur sous-jacente. Voir [Suivre les sessions utilisateur](#tracking-user-sessions) pour plus d'informations.
 
 `ml_app`
 : optionnel - _chaîne_
@@ -974,7 +974,7 @@ Pour tracer une portée de tâche, spécifiez le type de portée comme `task`, e
 
 `mlApp`
 : optionnel - _chaîne_
-<br/>Le nom de l'application ML à laquelle appartient l'opération. Voir [Tracer plusieurs applications](#tracing-multiple-applications) pour plus d'informations.
+<br/>Le nom de l'application ML à laquelle l'opération appartient. Voir [Tracer plusieurs applications](#tracing-multiple-applications) pour plus d'informations.
 
 {{% /collapse-content %}}
 
@@ -1005,7 +1005,7 @@ LLMObs.startTaskSpan(spanName, mlApp, sessionID);
 
 `mlApp`
 : optionnel - _Chaîne_
-<br/>Le nom de l'application ML à laquelle appartient l'opération. Fournir une valeur non nulle remplace le nom de l'application ML fourni au début de l'application. Voir [Tracer plusieurs applications](#tracing-multiple-applications) pour plus d'informations.
+<br/>Le nom de l'application ML à laquelle l'opération appartient. Fournir une valeur non nulle remplace le nom de l'application ML fourni au début de l'application. Voir [Tracer plusieurs applications](#tracing-multiple-applications) pour plus d'informations.
 
 `sessionId`
 : optionnel - _Chaîne_
@@ -1124,7 +1124,7 @@ Pour tracer une période de récupération, utilisez le décorateur de fonction 
 
 `ml_app`
 : optionnel - _chaîne_
-<br/>Le nom de l'application ML à laquelle appartient l'opération. Voir [Tracer plusieurs applications](#tracing-multiple-applications) pour plus d'informations.
+<br/>Le nom de l'application ML à laquelle l'opération appartient. Voir [Tracer plusieurs applications](#tracing-multiple-applications) pour plus d'informations.
 
 {{% /collapse-content %}}
 
@@ -1165,7 +1165,7 @@ Pour tracer une période de récupération, spécifiez le type de période comme
 
 `mlApp`
 : optionnel - _chaîne_
-<br/>Le nom de l'application ML à laquelle appartient l'opération. Voir [Tracer plusieurs applications](#tracing-multiple-applications) pour plus d'informations.
+<br/>Le nom de l'application ML à laquelle l'opération appartient. Voir [Tracer plusieurs applications](#tracing-multiple-applications) pour plus d'informations.
 
 {{% /collapse-content %}}
 
@@ -1276,16 +1276,16 @@ La méthode `LLMObs.annotate()` accepte les arguments suivants :
 <br />Le span à annoter. Si `span` n'est pas fourni (comme lors de l'utilisation de décorateurs de fonction), le SDK annote le span actif actuel.
 
 `input_data`
-: optionnel - _type sérialisable en JSON ou liste de dictionnaires_
-<br />Soit un type sérialisable en JSON (pour les spans non-LLM) ou une liste de dictionnaires avec ce format : `{"content": "...", "role": "...", "tool_calls": ..., "tool_results": ...}`, où `"tool_calls"` sont une liste optionnelle de dictionnaires d'appels d'outils avec des clés requises : `"name"`, `"arguments"`, et des clés optionnelles : `"tool_id"`, `"type"`, et `"tool_results"` sont une liste optionnelle de dictionnaires de résultats d'outils avec une clé requise : `"result"`, et des clés optionnelles : `"name"`, `"tool_id"`, `"type"` pour les scénarios d'appel de fonction. **Remarque** : Les spans d'incorporation sont un cas particulier et nécessitent une chaîne ou un dictionnaire (ou une liste de dictionnaires) avec ce format : `{"text": "..."}`.
+: optionnel - _type sérialisable JSON ou liste de dictionnaires_
+<br />Soit un type sérialisable JSON (pour les spans non-LLM) ou une liste de dictionnaires avec ce format : `{"content": "...", "role": "...", "tool_calls": ..., "tool_results": ...}`, où `"tool_calls"` sont une liste optionnelle de dictionnaires d'appels d'outils avec des clés requises : `"name"`, `"arguments"`, et des clés optionnelles : `"tool_id"`, `"type"`, et `"tool_results"` sont une liste optionnelle de dictionnaires de résultats d'outils avec une clé requise : `"result"`, et des clés optionnelles : `"name"`, `"tool_id"`, `"type"` pour les scénarios d'appel de fonction. **Remarque** : Les spans d'incorporation sont un cas spécial et nécessitent une chaîne ou un dictionnaire (ou une liste de dictionnaires) avec ce format : `{"text": "..."}`.
 
 `output_data`
-: optionnel - _type sérialisable en JSON ou liste de dictionnaires_
-<br />Soit un type sérialisable en JSON (pour les spans non-LLM) ou une liste de dictionnaires avec ce format : `{"content": "...", "role": "...", "tool_calls": ...}`, où `"tool_calls"` sont une liste optionnelle de dictionnaires d'appels d'outils avec des clés requises : `"name"`, `"arguments"`, et des clés optionnelles : `"tool_id"`, `"type"` pour les scénarios d'appel de fonction. **Remarque** : Les spans de récupération sont un cas particulier et nécessitent une chaîne ou un dictionnaire (ou une liste de dictionnaires) avec ce format : `{"text": "...", "name": "...", "score": float, "id": "..."}`.
+: optionnel - _type sérialisable JSON ou liste de dictionnaires_
+<br />Soit un type sérialisable JSON (pour les spans non-LLM) ou une liste de dictionnaires avec ce format : `{"content": "...", "role": "...", "tool_calls": ...}`, où `"tool_calls"` sont une liste optionnelle de dictionnaires d'appels d'outils avec des clés requises : `"name"`, `"arguments"`, et des clés optionnelles : `"tool_id"`, `"type"` pour les scénarios d'appel de fonction. **Remarque** : Les spans de récupération sont un cas spécial et nécessitent une chaîne ou un dictionnaire (ou une liste de dictionnaires) avec ce format : `{"text": "...", "name": "...", "score": float, "id": "..."}`.
 
 `tool_definitions`
 : optionnel - _liste de dictionnaires_
-<br />Liste de dictionnaires de définition d'outils pour les scénarios d'appel de fonction. Chaque définition d'outil doit avoir une clé `"name": "..."` requise et des clés optionnelles `"description": "..."` et `"schema": {...}`.
+<br />Liste de dictionnaires de définition d'outils pour les scénarios d'appel de fonction. Chaque définition d'outil doit avoir une clé requise `"name": "..."` et des clés optionnelles `"description": "..."` et `"schema": {...}`.
 
 `metadata`
 : optionnel - _dictionnaire_
@@ -1391,7 +1391,7 @@ L'objet `annotationOptions` peut contenir les éléments suivants :
 
 `tags`
 : optionnel - _objet_
-<br />Un objet de paires clé-valeur sérialisables en JSON que les utilisateurs peuvent ajouter comme étiquettes concernant le contexte de l'intervalle (`session`, `environment`, `system`, `versioning`, etc.). Pour plus d'informations sur les étiquettes, voir [Commencer avec les étiquettes](/getting_started/tagging/).
+<br />Un objet de paires clé-valeur sérialisables en JSON que les utilisateurs peuvent ajouter comme étiquettes concernant le contexte de l'intervalle (`session`, `environment`, `system`, `versioning`, etc.). Pour plus d'informations sur les étiquettes, voir [Guide de démarrage avec les étiquettes](/getting_started/tagging/).
 
 {{% /collapse-content %}}
 
@@ -1462,11 +1462,11 @@ Si un argument est nul ou vide, rien ne se passe. Par exemple, si `inputData` es
 
 `inputData`
 : optionnel - _Chaîne_ ou _Liste<LLMObs.LLMMessage>_
-<br />Soit une chaîne (pour des intervalles non-LLM) ou une liste de `LLMObs.LLMMessage`s pour des intervalles LLM.
+<br />Soit une chaîne (pour les intervalles non-LLM) ou une liste de `LLMObs.LLMMessage`s pour les intervalles LLM.
 
 `outputData`
 : optionnel - _Chaîne_ ou _Liste<LLMObs.LLMMessage>_
-<br />Soit une chaîne (pour des intervalles non-LLM) ou une liste de `LLMObs.LLMMessage`s pour des intervalles LLM.
+<br />Soit une chaîne (pour les intervalles non-LLM) ou une liste de `LLMObs.LLMMessage`s pour les intervalles LLM.
 
 #### Messages LLM
 Les intervalles LLM doivent être annotés avec des messages LLM en utilisant l'objet `LLMObs.LLMMessage`.
@@ -1612,7 +1612,7 @@ La méthode membre `addThrowable()` de l'interface `LLMObsSpan` accepte l'argume
 
 `throwable`
 : requis - _Throwable_
-<br /> Le throwable/exceptions qui s'est produit.
+<br /> Le throwable/exception qui s'est produit.
 
 #### Ajout d'un message d'erreur
 
@@ -1694,7 +1694,7 @@ public class MyJavaClass {
 {{< tabs >}}
 {{% tab "Python" %}}
 
-La méthode `LLMObs.annotation_context()` du SDK renvoie un gestionnaire de contexte qui peut être utilisé pour modifier toutes les portées auto-instrumentées démarrées pendant que le contexte d'annotation est actif.
+La méthode `LLMObs.annotation_context()` du SDK retourne un gestionnaire de contexte qui peut être utilisé pour modifier toutes les portées auto-instrumentées démarrées pendant que le contexte d'annotation est actif.
 
 La méthode `LLMObs.annotation_context()` accepte les arguments suivants :
 
@@ -1790,7 +1790,7 @@ function ragWorkflow(userQuestion) {
 
 ## Suivi des invites
 
-Attachez des métadonnées de prompt structurées au span LLM afin de pouvoir reproduire les résultats, auditer les changements et comparer les performances des prompts entre les versions. Lors de l'utilisation de modèles, l'observabilité LLM fournit également [suivi des versions](#version-tracking) basé sur les changements de contenu des modèles.
+Attachez des métadonnées de prompt structurées au span LLM afin de pouvoir reproduire les résultats, auditer les changements et comparer les performances des prompts entre les versions. Lors de l'utilisation de modèles, l'observabilité LLM fournit également [un suivi des versions](#version-tracking) basé sur les changements de contenu des modèles.
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -1928,7 +1928,7 @@ Le système de versionnage fonctionne comme suit :
 - **Versionnage manuel** : Lorsque un tag `version` est fourni, LLM Observability utilise votre étiquette de version spécifiée exactement comme fournie.
 - **Historique des versions** : Les versions auto-générées et manuelles sont maintenues dans l'historique des versions pour suivre l'évolution des invites au fil du temps.
 
-Cela vous donne la flexibilité de vous fier soit à la gestion automatique des versions basée sur les changements de contenu du modèle, soit de maintenir un contrôle total sur le versionnage avec vos propres étiquettes de version.
+Cela vous donne la flexibilité de vous fier à la gestion automatique des versions basée sur les changements de contenu du modèle, ou de maintenir un contrôle total sur le versionnage avec vos propres étiquettes de version.
 
 ## Suivi des coûts
 Attachez des métriques de tokens (pour le suivi automatique des coûts) ou des métriques de coûts (pour le suivi manuel des coûts) à vos spans LLM/embedding. Les métriques de tokens permettent à Datadog de calculer les coûts en utilisant les prix du fournisseur, tandis que les métriques de coûts vous permettent de fournir vos propres prix lors de l'utilisation de modèles personnalisés ou non pris en charge. Pour plus de détails, voir [Coûts][14].
@@ -2012,7 +2012,7 @@ La méthode `LLMObs.export_span()` accepte l'argument suivant :
 
 `span`
 : optionnel - _Intervalle_
-<br /> L'intervalle à partir duquel extraire le contexte de l'intervalle (IDs d'intervalle et de trace). Si non fourni (comme lors de l'utilisation de décorateurs de fonction), le SDK exporte l'intervalle actif actuel.
+<br />L'intervalle à partir duquel extraire le contexte de l'intervalle (IDs d'intervalle et de trace). Si non fourni (comme lors de l'utilisation de décorateurs de fonction), le SDK exporte l'intervalle actif actuel.
 
 #### Exemple
 
@@ -2038,7 +2038,7 @@ La méthode `llmobs.exportSpan()` accepte l'argument suivant :
 
 `span`
 : optionnel - _Intervalle_
-<br /> L'intervalle à partir duquel extraire le contexte de l'intervalle (IDs d'intervalle et de trace). S'il n'est pas fourni (comme lors de l'utilisation de wrappers de fonction), le SDK exporte la plage active actuelle.
+<br />L'intervalle à partir duquel extraire le contexte de l'intervalle (IDs d'intervalle et de trace). S'il n'est pas fourni (comme lors de l'utilisation de wrappers de fonction), le SDK exporte la plage active actuelle.
 
 #### Exemple
 
@@ -2098,7 +2098,7 @@ La méthode `LLMObs.submit_evaluation()` accepte les arguments suivants :
 
 `tags`
 : optionnel - _dictionnaire_
-<br />Un dictionnaire de paires clé-valeur de chaînes que les utilisateurs peuvent ajouter comme étiquettes concernant l'évaluation. Pour plus d'informations sur les étiquettes, voir [Commencer avec les étiquettes](/getting_started/tagging/).
+<br />Un dictionnaire de paires clé-valeur de chaînes que les utilisateurs peuvent ajouter en tant qu'étiquettes concernant l'évaluation. Pour plus d'informations sur les étiquettes, voir [Commencer avec les Étiquettes](/getting_started/tagging/).
 
 `assessment`
 : optionnel - _chaîne_
@@ -2196,7 +2196,7 @@ L'objet `evaluationOptions` peut contenir les éléments suivants :
 
 `tags`
 : optionnel - _dictionnaire_
-<br />Un dictionnaire de paires clé-valeur de chaînes que les utilisateurs peuvent ajouter en tant qu'étiquettes concernant l'évaluation. Pour plus d'informations sur les étiquettes, voir [Commencer avec les étiquettes](/getting_started/tagging/).
+<br />Un dictionnaire de paires clé-valeur de chaînes que les utilisateurs peuvent ajouter en tant qu'étiquettes concernant l'évaluation. Pour plus d'informations sur les étiquettes, voir [Commencer avec les Étiquettes](/getting_started/tagging/).
 
 `assessment`
 : optionnel - _chaîne_
@@ -2529,7 +2529,7 @@ patch(<INTEGRATION_NAME>=True)
 
 Si votre application n'utilise aucune de ces bibliothèques prises en charge, vous pouvez activer le traçage distribué en propageant manuellement les informations de portée vers et depuis les en-têtes HTTP. Le SDK fournit les méthodes d'aide `LLMObs.inject_distributed_headers()` et `LLMObs.activate_distributed_headers()` pour injecter et activer les contextes de traçage dans les en-têtes de requête.
 
-### Injection d'en-têtes distribués
+### Injection des en-têtes distribués
 
 La méthode `LLMObs.inject_distributed_headers()` prend une portée et injecte son contexte dans les en-têtes HTTP à inclure dans la requête. Cette méthode accepte les arguments suivants :
 
@@ -2649,7 +2649,7 @@ Le SDK prend en charge le traçage de plusieurs applications LLM à partir du m�
 
 Vous pouvez configurer une variable d'environnement `DD_LLMOBS_ML_APP` au nom de votre application LLM, dans laquelle tous les spans générés sont regroupés par défaut.
 
-Pour remplacer cette configuration et utiliser un nom d'application LLM différent pour un span racine donné, passez l'argument `ml_app` avec le nom de chaîne de l'application LLM sous-jacente lors du démarrage d'un span racine pour un nouveau traçage ou un span dans un nouveau processus.
+Pour remplacer cette configuration et utiliser un nom d'application LLM différent pour un span racine donné, passez l'argument `ml_app` avec le nom de chaîne de l'application LLM sous-jacente lors du démarrage d'un span racine pour un nouveau traçage ou d'un span dans un nouveau processus.
 
 {{< code-block lang="python">}}
 from ddtrace.llmobs.decorators import workflow
@@ -2711,7 +2711,7 @@ function processMessage () {
 
 ### Décorateurs de fonction en TypeScript
 
-Le SDK d'observabilité LLM Node.js propose une fonction `llmobs.decorate` qui sert de décorateur de fonction pour les applications TypeScript. Le comportement de traçage de cette fonction est le même que `llmobs.wrap`.
+Le SDK d'observabilité LLM de Node.js propose une fonction `llmobs.decorate` qui sert de décorateur de fonction pour les applications TypeScript. Le comportement de traçage de cette fonction est le même que `llmobs.wrap`.
 
 #### Exemple
 
@@ -2746,7 +2746,7 @@ Le SDK prend en charge le traçage de plusieurs applications LLM à partir du m�
 
 Vous pouvez configurer une variable d'environnement `DD_LLMOBS_ML_APP` au nom de votre application LLM, dans laquelle tous les spans générés sont regroupés par défaut.
 
-Pour remplacer cette configuration et utiliser un nom d'application LLM différent pour un span racine donné, passez l'argument `mlApp` avec le nom de chaîne de l'application LLM sous-jacente lors du démarrage d'un span racine pour un nouveau traçage ou un span dans un nouveau processus.
+Pour remplacer cette configuration et utiliser un nom d'application LLM différent pour un span racine donné, passez l'argument `mlApp` avec le nom de chaîne de l'application LLM sous-jacente lors du démarrage d'un span racine pour un nouveau traçage ou d'un span dans un nouveau processus.
 
 {{< code-block lang="javascript">}}
 function processMessage () {

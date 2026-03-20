@@ -30,7 +30,7 @@ Ce guide couvre plusieurs cas d'utilisation clés pour nettoyer l'encombrement d
 - **[ Moniteurs bloqués en état d'ALERT ](#in-the-alerted-state-for-a-long-period-of-time)** : Moniteurs qui sont restés en état "Alerte" pendant une période anormalement longue sans être reconnus ou résolus.
 - **[ Moniteurs dupliqués ](#duplicate-monitors)** : Plusieurs moniteurs déclenchant la même condition, métrique ou service—souvent en raison de silos d'équipe ou d'un manque de coordination.
 - **[ Moniteurs instables et bruyants ](#flappy-and-noisy-monitors)** : Moniteurs qui se déclenchent et se résolvent fréquemment (c'est-à-dire, qui "flappent") ou produisent de grands volumes d'alertes de faible valeur.
-- **[ Moniteurs mal configurés ](#misconfigured-monitors)** : Moniteurs avec des liens brisés vers des tableaux de bord, des délais d'évaluation manquants, des constituants d'alerte manquants ou incorrects, ou des balises et conventions de nommage obsolètes.
+- **[ Moniteurs mal configurés ](#misconfigured-monitors)** : Moniteurs avec des liens brisés vers des tableaux de bord, des délais d'évaluation manquants, des éléments d'alerte manquants ou incorrects, ou des balises et conventions de nommage obsolètes.
 
 ## Désactivé pendant une longue période
 
@@ -180,9 +180,9 @@ Pour plus d'informations, consultez le [guide de dépannage AWS][7].
 
 Les moniteurs composites évaluent leur état en fonction de la combinaison logique de deux moniteurs ou plus (appelés constituants). Si l'un de ces moniteurs constituants est supprimé ou devient indisponible, le moniteur composite devient invalide ou peu fiable.
 
-Un constituant manquant signifie généralement qu'au moins un des moniteurs d'entrée d'origine a été supprimé après la création du moniteur composite. Cela entraîne une incomplétude du composite et peut potentiellement induire en erreur le comportement d'alerte.
+Un constituant manquant signifie généralement qu'au moins un des moniteurs d'entrée d'origine a été supprimé après la création du moniteur composite. Cela entraîne une incomplétude du composite et peut potentiellement induire en erreur dans le comportement d'alerte.
 
-**Datadog recommande** de vérifier les moniteurs composites pour soit remplacer ou restaurer les constituants manquants, soit supprimer le moniteur composite. Vous pouvez trouver la liste des moniteurs composites avec des constituants manquants sur la page [Qualité des Moniteurs][4].
+**Datadog recommande** de vérifier les moniteurs composites pour soit remplacer soit restaurer les constituants manquants, ou supprimer le moniteur composite. Vous pouvez trouver la liste des moniteurs composites avec des constituants manquants sur la page [Qualité des Moniteurs][4].
 
 Pour obtenir de manière programmatique la liste des moniteurs qui manquent de constituants :
 

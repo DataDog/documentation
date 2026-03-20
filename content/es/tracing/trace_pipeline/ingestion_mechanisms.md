@@ -21,7 +21,7 @@ title: Mecanismos de Ingestión
 {{< img src="tracing/apm_lifecycle/ingestion_sampling_rules.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Reglas de Muestreo de Ingestión" >}}
 
 
-Múltiples mecanismos son responsables de elegir si los spans generados por sus aplicaciones son enviados a Datadog (_ingresados_). La lógica detrás de estos mecanismos radica en las [bibliotecas de rastreo][1] y en el Agente de Datadog. Dependiendo de la configuración, todo o parte del tráfico generado por los servicios instrumentados es ingerido.
+Múltiples mecanismos son responsables de elegir si los spans generados por sus aplicaciones son enviados a Datadog (_ingresados_). La lógica detrás de estos mecanismos radica en las [bibliotecas de trazado][1] y en el Agente de Datadog. Dependiendo de la configuración, todo o parte del tráfico generado por los servicios instrumentados es ingerido.
 
 A cada span ingresado se le adjunta una única **razón de ingestión** que se refiere a uno de los mecanismos descritos en esta página. [Métricas de uso][2] `datadog.estimated_usage.apm.ingested_bytes` y `datadog.estimated_usage.apm.ingested_spans` están etiquetadas por `ingestion_reason`.
 
@@ -33,26 +33,26 @@ El mecanismo de muestreo predeterminado se llama _muestreo basado en cabecera_. 
 
 Debido a que la decisión se toma al principio de la traza y luego se transmite a todas las partes de la traza, se garantiza que la traza se mantenga o se descarte en su totalidad.
 
-{{< img src="/tracing/guide/ingestion_sampling_use_cases/head-based-sampling.png" alt="Muestreo basado en la cabeza" style="width:100%;" >}}
+{{< img src="/tracing/guide/ingestion_sampling_use_cases/head-based-sampling.png" alt="Muestreo basado en encabezados" style="width:100%;" >}}
 
-Puedes establecer tasas de muestreo para el muestreo basado en la cabeza en dos lugares:
-- A nivel de **[Agente](#in-the-agent)** (predeterminado)
-- A nivel de **[Biblioteca de Trazado](#in-tracing-libraries-user-defined-rules)**: cualquier mecanismo de biblioteca de trazado anula la configuración del Agente.
+Puedes establecer tasas de muestreo para el muestreo basado en encabezados en dos lugares:
+- En el nivel de **[Agente](#in-the-agent)** (predeterminado)
+- En el nivel de **[Biblioteca de Trazado](#in-tracing-libraries-user-defined-rules)**: cualquier mecanismo de biblioteca de trazado anula la configuración del Agente.
 
 ### En el Agente
 `ingestion_reason: auto`
 
-El Agente de Datadog envía continuamente tasas de muestreo a las bibliotecas de trazado para aplicar en la raíz de los trazos. El Agente ajusta las tasas para lograr un objetivo de diez trazos por segundo en total, distribuidos a los servicios dependiendo del tráfico.
+El Agente de Datadog envía continuamente tasas de muestreo a las bibliotecas de trazado para aplicar en la raíz de las trazas. El Agente ajusta las tasas para lograr un objetivo de diez trazas por segundo en total, distribuidas a los servicios dependiendo del tráfico.
 
-Por ejemplo, si el servicio `A` tiene más tráfico que el servicio `B`, el Agente podría variar la tasa de muestreo para `A` de tal manera que `A` no mantenga más de siete trazos por segundo, y ajustar de manera similar la tasa de muestreo para `B` de tal manera que `B` no mantenga más de tres trazos por segundo, para un total de 10 trazos por segundo.
+Por ejemplo, si el servicio `A` tiene más tráfico que el servicio `B`, el Agente podría variar la tasa de muestreo para `A` de tal manera que `A` no mantenga más de siete trazas por segundo, y ajustar de manera similar la tasa de muestreo para `B` de tal manera que `B` no mantenga más de tres trazas por segundo, para un total de 10 trazas por segundo.
 
 #### Configuración remota
 
-La configuración de la tasa de muestreo en el Agente se puede configurar de forma remota si estás utilizando la versión del Agente [7.42.0][20] o superior. Para comenzar, configura [Configuración Remota][21] y luego configura el parámetro `ingestion_reason` desde la [página de Control de Ingesta][5]. La Configuración Remota te permite cambiar el parámetro sin tener que reiniciar el Agente. La configuración remota tiene prioridad sobre las configuraciones locales, incluidas las variables de entorno y la configuración de `datadog.yaml`.
+La configuración de la tasa de muestreo en el Agente se puede configurar de forma remota si estás utilizando la versión del Agente [7.42.0][20] o superior. Para comenzar, configura [Configuración Remota][21] y luego configura el parámetro `ingestion_reason` desde la [página de Control de Ingesta][5]. La Configuración Remota te permite cambiar el parámetro sin tener que reiniciar el Agente. La configuración remota tiene prioridad sobre las configuraciones locales, incluidas las variables de entorno y configuraciones de `datadog.yaml`.
 
 #### Configuración local
 
-Establece el objetivo de trazos por segundo del Agente en su archivo de configuración principal (`datadog.yaml`) o como una variable de entorno:
+Establece las trazas por segundo objetivo del Agente en su archivo de configuración principal (`datadog.yaml`) o como una variable de entorno:
 
 ```
 @param target_traces_per_second - integer - optional - default: 10
@@ -60,19 +60,19 @@ Establece el objetivo de trazos por segundo del Agente en su archivo de configur
 ```
 
 **Notas**:
-- La tasa de muestreo de trazos por segundo establecida en el Agente solo se aplica a las bibliotecas de trazado de Datadog. No tiene efecto en otras bibliotecas de trazado como los SDK de OpenTelemetry.
+- La tasa de muestreo de trazas por segundo establecida en el Agente solo se aplica a las bibliotecas de trazado de Datadog. No tiene efecto en otras bibliotecas de trazado como los SDK de OpenTelemetry.
 - El objetivo no es un valor fijo. En realidad, fluctúa dependiendo de los picos de tráfico y otros factores.
 
-Todos los spans de un trazo muestreados utilizando el Agente de Datadog [tienen tasas de muestreo computadas automáticamente](#in-the-agent) y están etiquetados con la razón de ingestión `auto`. La etiqueta `ingestion_reason` también se establece en [métricas de uso][2]. Los servicios que utilizan el mecanismo predeterminado del Agente de Datadog están etiquetados como `Automatic` en la columna de Configuración de la [Página de Control de Ingestión][5].
+Todos los spans de un trazado muestreado utilizando el Agente de Datadog [tienen tasas de muestreo computadas automáticamente](#in-the-agent) y están etiquetados con la razón de ingestión `auto`. La etiqueta `ingestion_reason` también se establece en [métricas de uso][2]. Los servicios que utilizan el mecanismo predeterminado del Agente de Datadog están etiquetados como `Automatic` en la columna de Configuración de la [Página de Control de Ingestión][5].
 
 ### En bibliotecas de trazado: reglas definidas por el usuario
 `ingestion_reason: rule`
 
 Para un control más granular, utilice las opciones de configuración de muestreo de la biblioteca de trazado:
-- Establezca una **tasa de muestreo específica** que se aplique a la raíz del trazo, por servicio y/o nombre de recurso, sobreescribiendo el [mecanismo predeterminado](#in-the-agent) del Agente.
-- Establezca un **límite de tasa** en el número de trazos ingeridos por segundo. El límite de tasa predeterminado es de 100 trazos por segundo por instancia de servicio (cuando se utiliza el [mecanismo predeterminado](#in-the-agent) del Agente, se ignora el limitador de tasa).
+- Establezca una **tasa de muestreo específica que se aplique a la raíz del trazado**, por servicio y/o nombre de recurso, sobrescribiendo el [mecanismo predeterminado](#in-the-agent) del Agente.
+- Establezca un **límite de tasa** en el número de trazas ingeridas por segundo. El límite de tasa predeterminado es de 100 trazas por segundo por instancia de servicio (cuando se utiliza el [mecanismo predeterminado](#in-the-agent) del Agente, se ignora el limitador de tasa).
 
-**Nota**: Las reglas de muestreo también son controles de muestreo basados en la cabeza. Si el tráfico para un servicio es mayor que el máximo configurado de trazos por segundo, entonces los trazos se descartan en la raíz. No crea trazos incompletos.
+**Nota**: Las reglas de muestreo también son controles de muestreo basados en la cabeza. Si el tráfico para un servicio es mayor que el máximo configurado de trazas por segundo, entonces las trazas se descartan en la raíz. No crea trazas incompletas.
 
 La configuración se puede establecer mediante variables de entorno o directamente en el código:
 
@@ -143,14 +143,14 @@ Lee más sobre los controles de muestreo en la [documentación de la biblioteca 
 {{% tab "Ruby" %}}
 **Configuración remota**
 
-A partir de la versión <a href="https://github.com/DataDog/dd-trace-rb/releases/tag/v2.0.0">2.0.0</a>, para aplicaciones de Ruby, establece las tasas de muestreo por servicio y por recurso desde la interfaz de usuario de la <a href="/tracing/trace_pipeline/ingestion_controls#configure-the-service-ingestion-rate">Página de Control de Ingesta</a>.
+A partir de la versión <a href="https://github.com/DataDog/dd-trace-rb/releases/tag/v2.0.0">2.0.0</a>, para aplicaciones Ruby, establece las tasas de muestreo por servicio y por recurso desde la interfaz de usuario de la <a href="/tracing/trace_pipeline/ingestion_controls#configure-the-service-ingestion-rate">Página de Control de Ingesta</a>.
 
 Lea más sobre cómo configurar remotamente las tasas de muestreo por servicio y recurso en la [guía de muestreo basado en recursos][1].
 
 **Nota**: La configuración remota tiene prioridad sobre la configuración local.
 
 **Configuración local**
-Para aplicaciones de Ruby, establece una tasa de muestreo global para la biblioteca utilizando la variable de entorno `DD_TRACE_SAMPLE_RATE`. Establece las tasas de muestreo por servicio con la variable de entorno `DD_TRACE_SAMPLING_RULES`.
+Para aplicaciones Ruby, establece una tasa de muestreo global para la biblioteca utilizando la variable de entorno `DD_TRACE_SAMPLE_RATE`. Establece las tasas de muestreo por servicio con la variable de entorno `DD_TRACE_SAMPLING_RULES`.
 
 Por ejemplo, para enviar el 50% de los trazos para el servicio llamado `my-service` y el 10% del resto de los trazos:
 
@@ -168,7 +168,7 @@ Lee más sobre los controles de muestreo en la [documentación de la biblioteca 
 {{% tab "Go" %}}
 **Configuración remota**
 
-A partir de la versión <a href="https://github.com/DataDog/dd-trace-go/releases/tag/v1.64.0">1.64.0</a>, para aplicaciones de Go, establece las tasas de muestreo por servicio y por recurso desde la interfaz de usuario de la <a href="/tracing/trace_pipeline/ingestion_controls#configure-the-service-ingestion-rate">Página de Control de Ingesta</a>. 
+A partir de la versión <a href="https://github.com/DataDog/dd-trace-go/releases/tag/v1.64.0">1.64.0</a>, para aplicaciones Go, establece las tasas de muestreo por servicio y por recurso desde la interfaz de usuario de la <a href="/tracing/trace_pipeline/ingestion_controls#configure-the-service-ingestion-rate">Página de Control de Ingesta</a>. 
 
 Lee más sobre cómo configurar remotamente las tasas de muestreo por servicio y recurso en este [artículo][3].
 
@@ -176,7 +176,7 @@ Lee más sobre cómo configurar remotamente las tasas de muestreo por servicio y
 
 **Configuración local**
 
-Para aplicaciones de Go, establece las tasas de muestreo por servicio y por recurso (a partir de la versión [v1.60.0][2] para muestreo basado en recursos) con la variable de entorno `DD_TRACE_SAMPLING_RULES`.
+Para aplicaciones Go, establece las tasas de muestreo por servicio y por recurso (a partir de la versión [v1.60.0][2] para muestreo basado en recursos) con la variable de entorno `DD_TRACE_SAMPLING_RULES`.
 
 Por ejemplo, para capturar el 100% de los rastros para el recurso `GET /checkout` del servicio `my-service`, y el 20% de los rastros de otros puntos finales, configure:
 
@@ -197,7 +197,7 @@ Lee más sobre los controles de muestreo en la [documentación de la biblioteca 
 {{% tab "Node.js" %}}
 **Configuración remota**
 
-A partir de la versión <a href="https://github.com/DataDog/dd-trace-js/releases/tag/v5.16.0">5.16.0</a>, para aplicaciones de Node.js, establece las tasas de muestreo por servicio y por recurso desde la interfaz de usuario de la <a href="/tracing/trace_pipeline/ingestion_controls#configure-the-service-ingestion-rate">Página de Control de Ingesta</a>.
+A partir de la versión <a href="https://github.com/DataDog/dd-trace-js/releases/tag/v5.16.0">5.16.0</a>, para aplicaciones Node.js, establece las tasas de muestreo por servicio y por recurso desde la interfaz de usuario de la <a href="/tracing/trace_pipeline/ingestion_controls#configure-the-service-ingestion-rate">Página de Control de Ingesta</a>.
 
 Lea más sobre cómo configurar remotamente las tasas de muestreo por servicio y recurso en la [guía de muestreo basado en recursos][1].
 
@@ -205,7 +205,7 @@ Lea más sobre cómo configurar remotamente las tasas de muestreo por servicio y
 
 **Configuración local**
 
-Para aplicaciones de Node.js, establece una tasa de muestreo global en la biblioteca utilizando la variable de entorno `DD_TRACE_SAMPLE_RATE`.
+Para aplicaciones Node.js, establece una tasa de muestreo global en la biblioteca utilizando la variable de entorno `DD_TRACE_SAMPLE_RATE`.
 
 También puedes establecer tasas de muestreo por servicio. Por ejemplo, para enviar el 50% de los trazos para el servicio llamado `my-service` y el 10% para el resto de los trazos:
 
@@ -231,7 +231,7 @@ Lee más sobre los controles de muestreo en la [documentación de la biblioteca 
 {{% tab "PHP" %}}
 **Configuración remota**
 
-A partir de la versión <a href="https://github.com/DataDog/dd-trace-php/releases/tag/1.4.0">1.4.0</a>, para aplicaciones PHP, configure las tasas de muestreo por servicio y por recurso desde la <a href="https://app.datadoghq.com/apm/traces/ingestion-control">Página de Control de Ingesta</a>.
+A partir de la versión <a href="https://github.com/DataDog/dd-trace-php/releases/tag/1.4.0">1.4.0</a>, para aplicaciones PHP, establezca las tasas de muestreo por servicio y por recurso desde la <a href="https://app.datadoghq.com/apm/traces/ingestion-control">Página de Control de Ingesta</a>.
 
 Lea más sobre cómo configurar remotamente las tasas de muestreo por servicio y recurso en la [guía de muestreo basado en recursos][1].
 
@@ -241,7 +241,7 @@ Lea más sobre cómo configurar remotamente las tasas de muestreo por servicio y
 
 Para aplicaciones PHP, establezca una tasa de muestreo global para la biblioteca utilizando la `DD_TRACE_SAMPLE_RATE` variable de entorno. Establece las tasas de muestreo por servicio con la variable de entorno `DD_TRACE_SAMPLING_RULES`.
 
-Por ejemplo, para enviar el 50% de los rastros para el servicio llamado `my-service`, el 20% de los rastros de otros puntos finales y el 10% para el resto de los rastros, configure:
+Por ejemplo, para enviar el 50% de los rastros para el servicio llamado `my-service`, el 20% de los rastros de otros puntos finales y el 10% para el resto de los rastros, establezca:
 
 ```
 export DD_TRACE_SAMPLE_RATE=0.1
@@ -255,7 +255,7 @@ Lea más sobre los controles de muestreo en la [documentación de la biblioteca 
 {{% tab "C++" %}}
 **Configuración remota**
 
-A partir de la versión <a href="https://github.com/DataDog/dd-trace-cpp/releases/tag/v0.2.2">0.2.2</a>, para aplicaciones C++, configure las tasas de muestreo por servicio y por recurso desde la interfaz de usuario de la <a href="/tracing/trace_pipeline/ingestion_controls#configure-the-service-ingestion-rate">Página de Control de Ingesta</a>.
+A partir de la versión <a href="https://github.com/DataDog/dd-trace-cpp/releases/tag/v0.2.2">0.2.2</a>, para aplicaciones C++, establezca las tasas de muestreo por servicio y por recurso desde la interfaz de usuario de la <a href="/tracing/trace_pipeline/ingestion_controls#configure-the-service-ingestion-rate">Página de Control de Ingesta</a>.
 
 Lea más sobre cómo configurar remotamente las tasas de muestreo por servicio y recurso en la [guía de muestreo basado en recursos][1].
 
@@ -274,7 +274,7 @@ export DD_TRACE_SAMPLE_RATE=0.1
 export DD_TRACE_SAMPLING_RULES='[{"service": "my-service", "sample_rate": 0.5}]'
 ```
 
-C++ no proporciona integraciones para instrumentación automática, pero se utiliza para el trazado por proxy como Envoy, Nginx o Istio. Lea más sobre cómo configurar el muestreo para proxies en [Trazado de proxies][2].
+C++ no proporciona integraciones para instrumentación automática, pero se utiliza mediante trazado por proxy como Envoy, Nginx o Istio. Lea más sobre cómo configurar el muestreo para proxies en [Trazado de proxies][2].
 
 [1]: https://github.com/DataDog/dd-trace-cpp/releases/tag/v0.1.0
 [2]: /es/tracing/trace_collection/proxy_setup
@@ -690,7 +690,7 @@ span.trace_segment().override_sampling_priority(int(dd::SamplingPriority::USER_D
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
-La conservación del rastro manual debe realizarse antes de la propagación del contexto. Si se conserva después de la propagación del contexto, el sistema no puede garantizar que se mantenga todo el rastro a través de los servicios. La conservación del rastro manual se establece en la ubicación del cliente de trazado, por lo que el rastro aún puede ser eliminado por la ubicación del Agente o del servidor según las reglas de muestreo.
+La conservación del rastro manual debe realizarse antes de la propagación del contexto. Si se conserva después de la propagación del contexto, el sistema no puede garantizar que se mantenga el rastro completo a través de los servicios. La conservación del rastro manual se establece en la ubicación del cliente de trazado, por lo que el rastro aún puede ser eliminado por la ubicación del Agente o del servidor según las reglas de muestreo.
 
 
 ## Intervalos individuales
@@ -708,7 +708,7 @@ Esta función está disponible para Datadog Agent v[7.40.0][19]+.
 {{% tab "Java" %}}
 A partir de la biblioteca de trazado [versión 1.7.0][1], para aplicaciones Java, establezca las reglas de muestreo de **intervalo** por servicio y por nombre de operación con la `DD_SPAN_SAMPLING_RULES` variable de entorno.
 
-Por ejemplo, para recolectar el 100% de los intervalos del servicio llamado `my-service`, para la operación `http.request`, hasta 50 intervalos por segundo:
+Por ejemplo, para recopilar el 100% de los intervalos del servicio llamado `my-service`, para la operación `http.request`, hasta 50 intervalos por segundo:
 
 ```
 @env DD_SPAN_SAMPLING_RULES=[{"service": "my-service", "name": "http.request", "sample_rate":1.0, "max_per_second": 50}]
@@ -722,7 +722,7 @@ Lea más sobre los controles de muestreo en la [documentación de la biblioteca 
 {{% tab "Python" %}}
 A partir de la versión [v1.4.0][1], para aplicaciones Python, establezca las reglas de muestreo de **intervalo** por servicio y por nombre de operación con la `DD_SPAN_SAMPLING_RULES` variable de entorno.
 
-Por ejemplo, para recolectar `100%` de los intervalos del servicio llamado `my-service`, para la operación `http.request`, hasta `50` intervalos por segundo:
+Por ejemplo, para recopilar `100%` de los intervalos del servicio llamado `my-service`, para la operación `http.request`, hasta `50` intervalos por segundo:
 
 ```
 @env DD_SPAN_SAMPLING_RULES=[{"service": "my-service", "name": "http.request", "sample_rate":1.0, "max_per_second": 50}]
@@ -737,7 +737,7 @@ Lee más sobre los controles de muestreo en la [documentación de la biblioteca 
 {{% tab "Ruby" %}}
 A partir de la versión [v1.5.0][1], para aplicaciones Ruby, establezca las reglas de muestreo de **intervalo** por servicio y por nombre de operación con la `DD_SPAN_SAMPLING_RULES` variable de entorno.
 
-Por ejemplo, para recolectar `100%` de los intervalos del servicio llamado `my-service`, para la operación `http.request`, hasta `50` intervalos por segundo:
+Por ejemplo, para recopilar `100%` de los intervalos del servicio llamado `my-service`, para la operación `http.request`, hasta `50` intervalos por segundo:
 
 ```
 @env DD_SPAN_SAMPLING_RULES=[{"service": "my-service", "name": "http.request", "sample_rate":1.0, "max_per_second": 50}]
@@ -751,14 +751,14 @@ Lea más sobre los controles de muestreo en la [documentación de la biblioteca 
 {{% tab "Go" %}}
 A partir de la versión [v1.41.0][1], para aplicaciones Go, establezca las reglas de muestreo de **intervalo** por servicio y por nombre de operación con la `DD_SPAN_SAMPLING_RULES` variable de entorno.
 
-Por ejemplo, para recolectar `100%` de los intervalos del servicio llamado `my-service`, para la operación `http.request`, hasta `50` intervalos por segundo:
+Por ejemplo, para recopilar `100%` de los intervalos del servicio llamado `my-service`, para la operación `http.request`, hasta `50` intervalos por segundo:
 
 ```
 @env DD_SPAN_SAMPLING_RULES=[{"service": "my-service", "name": "http.request", "sample_rate":1.0, "max_per_second": 50}]
 ```
 A partir de la versión [v1.60.0][3], para aplicaciones Go, establezca las reglas de muestreo de **intervalo** por recurso y por etiquetas con la `DD_SPAN_SAMPLING_RULES` variable de entorno.
 
-Por ejemplo, para recolectar `100%` de los intervalos del servicio para el recurso `POST /api/create_issue`, para la etiqueta `priority` con valor `high`:
+Por ejemplo, para recopilar `100%` de los intervalos del servicio para el recurso `POST /api/create_issue`, para la etiqueta `priority` con valor `high`:
 
 ```
 @env DD_SPAN_SAMPLING_RULES=[{"resource": "POST /api/create_issue", "tags": { "priority":"high" }, "sample_rate":1.0}]
@@ -773,7 +773,7 @@ Lee más sobre los controles de muestreo en la [documentación de la biblioteca 
 {{% tab "Node.js" %}}
 Para aplicaciones de Node.js, establece las reglas de muestreo por servicio y por nombre de operación **span** con la variable de entorno `DD_SPAN_SAMPLING_RULES`.
 
-Por ejemplo, para recolectar `100%` de los intervalos del servicio llamado `my-service`, para la operación `http.request`, hasta `50` intervalos por segundo:
+Por ejemplo, para recopilar `100%` de los intervalos del servicio llamado `my-service`, para la operación `http.request`, hasta `50` intervalos por segundo:
 
 ```
 @env DD_SPAN_SAMPLING_RULES=[{"service": "my-service", "name": "http.request", "sample_rate":1.0, "max_per_second": 50}]
@@ -786,7 +786,7 @@ Lee más sobre los controles de muestreo en la [documentación de la biblioteca 
 {{% tab "PHP" %}}
 A partir de la versión [v0.77.0][1], para aplicaciones de PHP, establece las reglas de muestreo por servicio y por nombre de operación **span** con la variable de entorno `DD_SPAN_SAMPLING_RULES`.
 
-Por ejemplo, para recolectar `100%` de los intervalos del servicio llamado `my-service`, para la operación `http.request`, hasta `50` intervalos por segundo:
+Por ejemplo, para recopilar `100%` de los intervalos del servicio llamado `my-service`, para la operación `http.request`, hasta `50` intervalos por segundo:
 
 ```
 @env DD_SPAN_SAMPLING_RULES=[{"service": "my-service", "name": "http.request", "sample_rate":1.0, "max_per_second": 50}]
@@ -800,7 +800,7 @@ Lee más sobre los controles de muestreo en la [documentación de la biblioteca 
 {{% tab "C++" %}}
 A partir de la versión [v0.1.0][1], para aplicaciones de C++, establece las reglas de muestreo por servicio y por nombre de operación **span** con la variable de entorno `DD_SPAN_SAMPLING_RULES`.
 
-Por ejemplo, para recolectar `100%` de los intervalos del servicio llamado `my-service`, para la operación `http.request`, hasta `50` intervalos por segundo:
+Por ejemplo, para recopilar `100%` de los intervalos del servicio llamado `my-service`, para la operación `http.request`, hasta `50` intervalos por segundo:
 
 ```
 @env DD_SPAN_SAMPLING_RULES=[{"service": "my-service", "name": "http.request", "sample_rate":1.0, "max_per_second": 50}]
@@ -811,7 +811,7 @@ Por ejemplo, para recolectar `100%` de los intervalos del servicio llamado `my-s
 {{% tab ".NET" %}}
 A partir de la versión [v2.18.0][1], para aplicaciones de .NET, establece las reglas de muestreo por servicio y por nombre de operación **span** con la variable de entorno `DD_SPAN_SAMPLING_RULES`.
 
-Por ejemplo, para recolectar `100%` de los intervalos del servicio llamado `my-service`, para la operación `http.request`, hasta `50` intervalos por segundo:
+Por ejemplo, para recopilar `100%` de los intervalos del servicio llamado `my-service`, para la operación `http.request`, hasta `50` intervalos por segundo:
 
 ```
 #using powershell
@@ -832,14 +832,14 @@ Lee más sobre los controles de muestreo en la [documentación de la biblioteca 
 
 <div class="alert alert-danger"> El mecanismo de <a href="/tracing/legacy_app_analytics/">Analítica de Aplicaciones</a> está completamente obsoleto. Para ingerir spans individuales sin el trazado completo, utiliza la configuración de <a href="/tracing/trace_pipeline/ingestion_mechanisms#single-spans">Muestreo de Span Único</a>. Para ingerir trazados completos, utiliza configuraciones de <a href="/tracing/trace_pipeline/ingestion_mechanisms#head-based-sampling">Muestreo Basado en Cabeza</a>.</div>
 
-## Spans de producto ingeridos
+## Spans de productos ingeridos
 
-### Trazas RUM
+### Trazas de RUM
 `ingestion_reason:rum`
 
-Una solicitud de una aplicación web o móvil genera un trazado cuando los servicios de backend están instrumentados. [La integración de APM con Monitoreo de Usuarios Reales][7] vincula las solicitudes de aplicaciones web y móviles a sus trazas de backend correspondientes para que puedas ver tus datos completos de frontend y backend a través de una sola lente.
+Una solicitud de una aplicación web o móvil genera un trazado cuando los servicios de backend están instrumentados. [La integración de APM con Monitoreo de Usuarios Reales][7] vincula las solicitudes de aplicaciones web y móviles con sus trazas de backend correspondientes para que puedas ver tus datos completos de frontend y backend a través de una sola lente.
 
-A partir de la versión `4.30.0` del SDK del navegador RUM, puedes controlar los volúmenes ingeridos y mantener un muestreo de las trazas de backend configurando el parámetro de `traceSampleRate` inicialización. Establece `traceSampleRate` a un número entre `0` y `100`.
+A partir de la versión `4.30.0` del SDK del navegador RUM, puedes controlar los volúmenes ingeridos y mantener un muestreo de las trazas de backend configurando el parámetro de `traceSampleRate` inicialización. Establece `traceSampleRate` en un número entre `0` y `100`.
 Si no se establece ningún valor `traceSampleRate`, se envía un 100% de las trazas provenientes de las solicitudes del navegador a Datadog por defecto.
 
 De manera similar, controla la tasa de muestreo de trazas en otros SDK utilizando parámetros similares:

@@ -21,7 +21,7 @@ type: multi-code-lang
 ---
 ## Resumen
 
-El [seguimiento de errores en Android][1] te brinda una visibilidad completa sobre la salud de tu aplicación móvil al capturar automáticamente fallos, excepciones y errores. Con esta función, puedes:
+El [seguimiento de errores en Android][1] te brinda una visibilidad completa de la salud de tu aplicación móvil al capturar automáticamente fallos, excepciones y errores. Con esta función, puedes:
 
 - Monitorear la estabilidad de la aplicación en tiempo real con alertas instantáneas de fallos y seguimiento de la tasa de errores a través de versiones, dispositivos y segmentos de usuarios.
 - Depura problemas más rápido con trazas de pila desofuscadas y cargas automáticas de archivos de mapeo de ProGuard para una identificación más fácil de problemas.
@@ -39,7 +39,7 @@ Si aún no has configurado el SDK de Android, sigue las [instrucciones de config
 
 ### Paso 1 - Declara el SDK de Android como una dependencia
 
-Declara [dd-sdk-android-rum][5] y el [plugin de Gradle][6] como dependencias en tu **módulo de aplicación** `build.gradle` archivo:
+Declara [dd-sdk-android-rum][5] y el [plugin de Gradle][6] como dependencias en tu **archivo del módulo de aplicación**:
 
 ```groovy
 buildscript {
@@ -347,7 +347,7 @@ public class SampleApplication extends Application {
 {{< /tabs >}}
 {{< /site-region >}}
 
-Las credenciales de inicialización requieren el nombre de variante de su aplicación y utilizan el valor de `BuildConfig.FLAVOR`. Con la variante, el SDK puede asociar los errores reportados desde su aplicación a los archivos de mapeo subidos por el complemento de Gradle. Si no tiene variantes, las credenciales utilizan una cadena vacía.
+Las credenciales de inicialización requieren el nombre de variante de su aplicación y utilizan el valor de `BuildConfig.FLAVOR`. Con la variante, el SDK puede asociar los errores reportados de su aplicación con los archivos de mapeo subidos por el complemento de Gradle. Si no tiene variantes, las credenciales utilizan una cadena vacía.
 
 El complemento de Gradle sube automáticamente el archivo ProGuard `mapping.txt` apropiado en el momento de la construcción para que pueda ver las trazas de error desofuscadas. Para más información, consulte la sección [Suba su archivo de mapeo](#upload-your-mapping-file).
 
@@ -386,7 +386,7 @@ Consulte [`ViewTrackingStrategy`][12] para habilitar el seguimiento automático 
 
 #### Instrumente sus webviews (opcional)
 
-Si su aplicación de Android utiliza WebViews para mostrar contenido web, puede instrumentarlas para rastrear errores de JavaScript y fallos que ocurren dentro del contenido web.
+Si su aplicación de Android utiliza WebViews para mostrar contenido web, puede instrumentarlas para rastrear errores de JavaScript y bloqueos que ocurren dentro del contenido web.
 
 Para instrumentar sus vistas web:
 
@@ -407,11 +407,11 @@ Para más información, consulte [Seguimiento de Web View][8].
 
 ### Paso 4 - Agregar informes de fallos de NDK
 
-Si su aplicación de Android utiliza código nativo (C/C++) a través del NDK de Android (Kit de Desarrollo Nativo), puede rastrear fallos que ocurren en este código nativo. El código nativo se utiliza a menudo para operaciones críticas de rendimiento, procesamiento de imágenes o cuando se reutilizan bibliotecas existentes de C/C++.
+Si su aplicación de Android utiliza código nativo (C/C++) a través del NDK de Android (Kit de Desarrollo Nativo), puede rastrear los bloqueos que ocurren en este código nativo. El código nativo se utiliza a menudo para operaciones críticas de rendimiento, procesamiento de imágenes o cuando se reutilizan bibliotecas existentes de C/C++.
 
 Sin el informe de fallos de NDK, los fallos en su código nativo no aparecen en el seguimiento de errores, lo que dificulta la depuración de problemas en esta parte de su aplicación.
 
-Para habilitar el informe de fallos de NDK, utilice el complemento Datadog NDK:
+Para habilitar el informe de fallos de NDK, utilice el complemento de NDK de Datadog:
 
 1. Agregue la dependencia de Gradle declarando la biblioteca como una dependencia en su archivo `build.gradle`:
 
@@ -429,7 +429,7 @@ Para habilitar el informe de fallos de NDK, utilice el complemento Datadog NDK:
 
 ### Paso 5 - Agregar informe de ANR
 
-Un "Aplicación No Responde" ([ANR][18]) es un tipo de error específico de Android que se activa cuando la aplicación no responde durante demasiado tiempo. Puede agregar el informe de ANR a su configuración de RUM para monitorear estos problemas de respuesta de la aplicación.
+Un "Aplicación No Responde" ([ANR][18]) es un tipo de error específico de Android que se activa cuando la aplicación no responde durante demasiado tiempo. Puede agregar el informe de ANR a su configuración de RUM para monitorear estos problemas de capacidad de respuesta de la aplicación.
 
 Para habilitar el informe de ANR, agregue lo siguiente a su configuración de RUM:
 
@@ -476,7 +476,7 @@ Los ANRs no fatales pueden o no haber llevado a la terminación de la aplicació
 
 {{< img src="real_user_monitoring/error_tracking/rum-anr-non-fatal.png" alt="Un informe de accidente no fatal en el seguimiento de errores." >}}
 
-- En la página de **Seguimiento de Errores**, los ANRs no fatales se agrupan bajo un **único** problema debido a su nivel de ruido.
+- En la página **Seguimiento de Errores**, los ANRs no fatales se agrupan bajo un **único** problema debido a su nivel de ruido.
 - Por defecto, el informe de ANRs no fatales en *Android 30+* está **deshabilitado** porque generaría demasiado ruido sobre los ANRs fatales. En *Android 29* y versiones anteriores, sin embargo, el informe de ANRs no fatales está **habilitado** por defecto, ya que los ANRs fatales no pueden ser reportados en esas versiones.
 
 Para cualquier versión de Android, puedes anular la configuración predeterminada para informar ANRs no fatales configurando `trackNonFatalAnrs` a `true` o `false` al inicializar el SDK.
@@ -496,32 +496,32 @@ Datadog utiliza un ID de construcción único generado para cada construcción p
 - Puedes subir archivos de mapeo durante construcciones de preproducción o producción.
 - El proceso funciona sin problemas a través de diferentes variantes de construcción y entornos.
 
-El proceso de coincidencia depende de tu versión del [plugin de Gradle para Android][22]:
+El proceso de coincidencia depende de la versión de su [plugin de Gradle para Android][22]:
 
-- **Versiones 1.13.0 y superiores**: Utiliza el campo `build_id` (requiere el SDK de Android de Datadog 2.8.0 o posterior)
+- **Versiones 1.13.0 y superiores**: Utiliza el campo `build_id` (requiere el SDK de Datadog para Android 2.8.0 o posterior)
 - **Versiones anteriores**: Utiliza una combinación de los campos `service`, `version` y `variant`
 
-#### Sube tu archivo de mapeo
+#### Cargue su archivo de mapeo
 
-El plugin de Gradle para Android automatiza el proceso de carga del archivo de mapeo. Después de la configuración, sube automáticamente el archivo de mapeo ProGuard/R8 apropiado para cada variante de compilación cuando construyes tu aplicación.
+El plugin de Gradle para Android automatiza el proceso de carga del archivo de mapeo. Después de la configuración, carga automáticamente el archivo de mapeo de ProGuard/R8 apropiado para cada variante de compilación cuando compila su aplicación.
 
-**Nota**: Volver a subir un archivo de mapeo no reemplaza el existente si la versión no ha cambiado. Para información sobre limitaciones de tamaño de archivo y otras restricciones, consulta la sección [Limitaciones](#limitations).
+**Nota**: Volver a cargar un archivo de mapeo no anula el existente si la versión no ha cambiado. Para información sobre limitaciones de tamaño de archivo y otras restricciones, consulte la sección [Limitaciones](#limitations).
 
-#### Ejecuta las tareas de carga
+#### Ejecute las tareas de carga
 
-Después de configurar el plugin, ejecuta las tareas de Gradle para subir tu archivo de mapeo ProGuard/R8 y los archivos de símbolos NDK a Datadog:
+Después de configurar el plugin, ejecute las tareas de Gradle para cargar su archivo de mapeo de ProGuard/R8 y los archivos de símbolos de NDK a Datadog:
 
 ```bash
 ./gradlew uploadMappingRelease
 ./gradlew uploadNdkSymbolFilesRelease
 ```
 
-Para cualquier error dado, puedes acceder a la ruta del archivo, número de línea y un fragmento de código para cada marco de la traza de pila relacionada.
+Para cualquier error dado, puede acceder a la ruta del archivo, número de línea y un fragmento de código para cada marco de la traza de pila relacionada.
 
 {{< tabs >}}
 {{% tab "EE. UU." %}}
 
-1. Agrega el [Plugin de Gradle para Android][22] a tu proyecto de Gradle usando el siguiente fragmento de código.
+1. Agregue el [Plugin de Gradle para Android][22] a su proyecto de Gradle utilizando el siguiente fragmento de código.
 
    ```kotlin
    // In your app's build.gradle script
@@ -530,8 +530,8 @@ Para cualquier error dado, puedes acceder a la ruta del archivo, número de lín
    }
    ```
 
-2. [Crea una clave API dedicada de Datadog][23] y expórtala como una variable de entorno llamada `DD_API_KEY` o `DATADOG_API_KEY`. Alternativamente, pásala como una propiedad de tarea, o si tienes un archivo `datadog-ci.json` en la raíz de tu proyecto, se puede tomar de una propiedad `apiKey` allí.
-3. Opcionalmente, configura el plugin para subir archivos a la región de la UE configurando el plugin en tu script `build.gradle`:
+2. [Cree una clave API dedicada de Datadog][23] y expórtela como una variable de entorno llamada `DD_API_KEY` o `DATADOG_API_KEY`. Alternativamente, páselo como una propiedad de tarea, o si tiene un archivo `datadog-ci.json` en la raíz de su proyecto, se puede tomar de una propiedad `apiKey` allí.
+3. Opcionalmente, configure el plugin para cargar archivos a la región de la UE configurando el plugin en su script `build.gradle`:
    
    ```kotlin
    datadog {
@@ -539,13 +539,13 @@ Para cualquier error dado, puedes acceder a la ruta del archivo, número de lín
    }
    ```
 
-4. Ejecuta la tarea de carga después de que se construya tu APK ofuscado:
+4. Ejecute la tarea de carga después de que se construyan sus APK ofuscados:
     
    ```bash
    ./gradlew uploadMappingRelease
    ```
 
-5. Si ejecutas código nativo, ejecuta la tarea de carga de símbolos NDK:
+5. Si está ejecutando código nativo, ejecute la tarea de carga de símbolos de NDK:
    ```bash
    ./gradlew uploadNdkSymbolFilesRelease
    ```
@@ -556,7 +556,7 @@ Para cualquier error dado, puedes acceder a la ruta del archivo, número de lín
 [23]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{% tab "UE" %}}
-1. Agrega el [Plugin de Gradle para Android][22] a tu proyecto de Gradle usando el siguiente fragmento de código.
+1. Agregue el [Plugin de Gradle para Android][22] a su proyecto de Gradle utilizando el siguiente fragmento de código.
 
    ```kotlin
    // In your app's build.gradle script
@@ -565,7 +565,7 @@ Para cualquier error dado, puedes acceder a la ruta del archivo, número de lín
    }
    ```
 
-2. [Crea una clave API dedicada de Datadog][23] y expórtala como una variable de entorno llamada `DD_API_KEY` o `DATADOG_API_KEY`. Alternativamente, pásala como una propiedad de tarea, o si tienes un archivo `datadog-ci.json` en la raíz de tu proyecto, se puede tomar de una propiedad `apiKey` allí.
+2. [Cree una clave API dedicada de Datadog][23] y expórtela como una variable de entorno llamada `DD_API_KEY` o `DATADOG_API_KEY`. Alternativamente, páselo como una propiedad de tarea, o si tiene un archivo `datadog-ci.json` en la raíz de su proyecto, se puede tomar de una propiedad `apiKey` allí.
 3. Configura el complemento para usar la región de la UE agregando el siguiente fragmento en el archivo de script `build.gradle` de tu aplicación:
 
    ```kotlin
@@ -574,13 +574,13 @@ Para cualquier error dado, puedes acceder a la ruta del archivo, número de lín
    }
    ```
 
-4. Ejecuta la tarea de carga después de que se construya tu APK ofuscado:
+4. Ejecute la tarea de carga después de que se construyan sus APK ofuscados:
    
    ```bash
    ./gradlew uploadMappingRelease
    ```
    
-5. Si ejecutas código nativo, ejecuta la tarea de carga de símbolos NDK:
+5. Si está ejecutando código nativo, ejecute la tarea de carga de símbolos de NDK:
    ```bash
    ./gradlew uploadNdkSymbolFilesRelease
    ```
@@ -710,7 +710,7 @@ También puede agregar un `EventListener` para el `OkHttpClient` para [rastrear 
 
 {{% collapse-content title="Rastrear eventos en segundo plano" level="h4" expanded=false id="track-background-events" %}}
 
-Puede rastrear eventos como fallos y solicitudes de red cuando su aplicación está en segundo plano (por ejemplo, no hay vista activa disponible). 
+Puede rastrear eventos como fallos y solicitudes de red cuando su aplicación está en segundo plano (por ejemplo, no hay una vista activa disponible). 
 
 Agrega el siguiente fragmento durante la configuración:
 
@@ -737,7 +737,7 @@ Agrega el siguiente fragmento durante la configuración:
 
 El SDK de Android asegura la disponibilidad de datos cuando el dispositivo del usuario está desconectado. En caso de áreas con baja red, o cuando la batería del dispositivo está demasiado baja, todos los eventos se almacenan primero en el dispositivo local en lotes. 
 
-Cada lote sigue la especificación de entrada. Los lotes se envían tan pronto como la red está disponible y la batería es lo suficientemente alta para asegurar que el SDK de Datadog no afecte la experiencia del usuario final. Si la red no está disponible mientras tu aplicación está en primer plano, o si una carga de datos falla, el lote se mantiene hasta que pueda ser enviado con éxito.
+Cada lote sigue la especificación de entrada. Los lotes se envían tan pronto como la red está disponible y la batería es lo suficientemente alta para asegurar que el SDK de Datadog no afecte la experiencia del usuario final. Si la red no está disponible mientras tu aplicación está en primer plano, o si una carga de datos falla, el lote se mantiene hasta que se pueda enviar con éxito.
  
 Esto significa que incluso si los usuarios abren tu aplicación mientras están desconectados, no se pierde ningún dato. Para asegurar que el SDK no use demasiado espacio en disco, los datos en el disco se descartan automáticamente si se vuelven demasiado antiguos.
 
@@ -745,7 +745,7 @@ Esto significa que incluso si los usuarios abren tu aplicación mientras están 
 
 {{% collapse-content title="Opciones de configuración del plugin" level="h4" expanded=false id="plugin-config-options" %}}
 
-Hay varias propiedades del plugin que se pueden configurar a través de la extensión del plugin. En caso de que estés usando múltiples variantes, puedes establecer un valor de propiedad para un sabor específico en la variante.
+Hay varias propiedades del plugin que se pueden configurar a través de la extensión del plugin. En caso de que estés utilizando múltiples variantes, puedes establecer un valor de propiedad para un sabor específico en la variante.
 
 Por ejemplo, para una variante `fooBarRelease`, puedes usar la siguiente configuración:
 
@@ -777,7 +777,7 @@ Esto resuelve el valor final para la propiedad `versionName` como `fooBar`.
 | `serviceName`              | El nombre del servicio de la aplicación (por defecto, el nombre del paquete de tu aplicación como se declara en el bloque `android` de tu script `build.gradle`).                                                                                                                          |
 | `site`                     | El sitio de Datadog para cargar tus datos (US1, US3, US5, EU1, US1_FED, AP1 o AP2).                                                                                                                                       |
 | `remoteRepositoryUrl`      | La URL del repositorio remoto donde se desplegó el código fuente. Si no se proporciona esto, este valor se resuelve a partir de tu configuración de Git durante el tiempo de ejecución de la tarea.                     |
-| `checkProjectDependencies` | Esta propiedad controla si el plugin debe verificar si el SDK de Android de Datadog está incluido en las dependencias. Si no, `none` se ignora, `warn` registra una advertencia y `fail` falla la construcción con un error (por defecto). |
+| `checkProjectDependencies` | Esta propiedad controla si el complemento debe verificar si el SDK de Android de Datadog está incluido en las dependencias. Si no, `none` se ignora, `warn` registra una advertencia y `fail` falla la construcción con un error (por defecto). |
 
 {{% /collapse-content %}}
 
@@ -797,10 +797,10 @@ tasks["minify${variant}WithR8"].finalizedBy { tasks["uploadMapping${variant}"] }
 ## Limitaciones
 
 ### Tamaño de archivo
-[Los archivos de mapeo](#upload-your-mapping-file) están limitados en tamaño a **500 MB** cada uno. Si tu proyecto tiene un archivo de mapeo más grande que esto, utiliza una de las siguientes opciones para reducir el tamaño del archivo:
+[ Los archivos de mapeo](#upload-your-mapping-file) están limitados en tamaño a **500 MB** cada uno. Si tu proyecto tiene un archivo de mapeo más grande que esto, utiliza una de las siguientes opciones para reducir el tamaño del archivo:
 
-- Establece la `mappingFileTrimIndents` opción a `true`. Esto reduce el tamaño de tu archivo en un 5%, en promedio.
-- Establece un mapa de `mappingFilePackagesAliases`: Esto reemplaza los nombres de los paquetes con alias más cortos. **Nota**: El stacktrace de Datadog utiliza el mismo alias en lugar del nombre de paquete original, por lo que es mejor usar esta opción para dependencias de terceros.
+- Establece la opción `mappingFileTrimIndents` a `true`. Esto reduce el tamaño de tu archivo en un 5%, en promedio.
+- Establece un mapa de `mappingFilePackagesAliases`: Esto reemplaza los nombres de los paquetes con alias más cortos. **Nota**: El stacktrace de Datadog utiliza el mismo alias en lugar del nombre de paquete original, por lo que es mejor usar esta opción para las dependencias de terceros.
 
 ```kotlin
 datadog {
@@ -818,7 +818,7 @@ datadog {
 Al observar los comportamientos de informes de fallos de RUM para Android, considere lo siguiente:
 
 - El fallo solo puede ser detectado después de que el SDK esté inicializado. Dado esto, la recomendación es inicializar el SDK lo antes posible en el método `onCreate` de su aplicación.
-- Los fallos de RUM deben estar asociados a una vista de RUM. Si ocurre un fallo antes de que una vista sea visible (típicamente una Actividad o Fragmento en un estado `onResume`), o después de que el usuario final envíe la aplicación al fondo navegando fuera de ella, el fallo se silencia y no se reporta para su recolección. Para mitigar esto, utilice el método `trackBackgroundEvents()` [método][25] en su constructor `RumConfiguration`.
+- Los fallos de RUM deben estar asociados a una vista de RUM. Si ocurre un fallo antes de que una vista sea visible (típicamente una Actividad o Fragmento en un estado `onResume`), o después de que la aplicación sea enviada al fondo por el usuario final al navegar fuera de ella, el fallo se silencia y no se reporta para su recolección. Para mitigar esto, utilice el método `trackBackgroundEvents()` [método][25] en su constructor `RumConfiguration`.
 - Solo se conservan los fallos que ocurren en sesiones muestreadas. Si una [tasa de muestreo de sesiones no es del 100%][24], algunos fallos no son reportados. 
 
 ## Pruebe su implementación
@@ -836,7 +836,7 @@ Para probar su implementación:
    }
    ```
 
-3. Después de que ocurra el fallo, reinicie su aplicación y espere a que el SDK de Android suba el informe de fallos en [**Seguimiento de Errores**][2].
+3. Después de que ocurra el fallo, reinicie su aplicación y espere a que el SDK de Android suba el informe de fallo en [**Seguimiento de Errores**][2].
 
 ## Extensiones de Kotlin
 

@@ -23,7 +23,7 @@ type: multi-code-lang
 
 Le [suivi des erreurs Android][1] vous offre une visibilité complète sur la santé de votre application mobile en capturant automatiquement les plantages, les exceptions et les erreurs. Avec cette fonctionnalité, vous pouvez :
 
-- Surveiller la stabilité de l'application en temps réel avec des alertes de plantage instantanées et un suivi du taux d'erreur à travers les versions, les appareils et les segments d'utilisateurs.
+- Surveiller la stabilité de l'application en temps réel avec des alertes instantanées de plantage et un suivi du taux d'erreur à travers les versions, les appareils et les segments d'utilisateurs.
 - Déboguez les problèmes plus rapidement avec des traces de pile déobfusquées et des téléchargements automatiques de fichiers de mappage ProGuard pour une identification plus facile des problèmes.
 - Améliorez la qualité de l'application en identifiant les fonctionnalités sujettes aux plantages, en suivant les tendances des erreurs et en priorisant les corrections pour une meilleure satisfaction des utilisateurs.
 - Accédez aux tableaux de bord de plantage Android agrégés et aux attributs.
@@ -37,7 +37,7 @@ Vos rapports de plantage apparaissent dans [**Suivi des erreurs**][2].
 
 Si vous n'avez pas encore configuré le SDK Android, suivez les [instructions de configuration dans l'application][3] ou consultez la [documentation de configuration Android][4].
 
-### Étape 1 - Déclarez le SDK Android comme une dépendance
+### Étape 1 - Déclarez le SDK Android comme dépendance
 
 Déclarez [dd-sdk-android-rum][5] et le [plugin Gradle][6] comme dépendances dans votre **module d'application** `build.gradle` fichier :
 
@@ -409,7 +409,7 @@ Pour plus d'informations, voir [Suivi des Web Views][8].
 
 Si votre application Android utilise du code natif (C/C++) via le NDK Android (Native Development Kit), vous pouvez suivre les plantages qui se produisent dans ce code natif. Le code natif est souvent utilisé pour des opérations critiques en termes de performance, le traitement d'images, ou lors de la réutilisation de bibliothèques C/C++ existantes.
 
-Sans rapport de plantage NDK, les plantages dans votre code natif n'apparaissent pas dans le suivi des erreurs, rendant difficile le débogage des problèmes dans cette partie de votre application.
+Sans le rapport de plantage NDK, les plantages dans votre code natif n'apparaissent pas dans le suivi des erreurs, rendant difficile le débogage des problèmes dans cette partie de votre application.
 
 Pour activer le rapport de plantage NDK, utilisez le plugin Datadog NDK :
 
@@ -429,7 +429,7 @@ Pour activer le rapport de plantage NDK, utilisez le plugin Datadog NDK :
 
 ### Étape 5 - Ajoutez le rapport ANR
 
-Un "Application Not Responding" ([ANR][18]) est un type d'erreur spécifique à Android qui se déclenche lorsque l'application ne répond pas pendant trop longtemps. Vous pouvez ajouter le rapport ANR à votre configuration RUM pour surveiller ces problèmes de réactivité de l'application.
+Un "Application Not Responding" ([ANR][18]) est un type d'erreur spécifique à Android qui se déclenche lorsque l'application est non réactive pendant trop longtemps. Vous pouvez ajouter le rapport ANR à votre configuration RUM pour surveiller ces problèmes de réactivité de l'application.
 
 Pour activer le rapport ANR, ajoutez ce qui suit à votre configuration RUM :
 
@@ -463,7 +463,7 @@ Rum.enable(rumConfig);
 Les ANR ne sont signalés que par le biais du SDK (pas par les journaux).
 
 #### Signalement des ANR fatals
-Les ANRs fatals entraînent des plantages. L'application les signale lorsqu'elle est non réactive, ce qui conduit le système d'exploitation Android à afficher une boîte de dialogue contextuelle à l'utilisateur, qui choisit de forcer la fermeture de l'application via la boîte de dialogue.
+Les ANRs fatals entraînent des plantages. L'application les signale lorsqu'elle est non réactive, ce qui amène le système d'exploitation Android à afficher une boîte de dialogue contextuelle à l'utilisateur, qui choisit de forcer la fermeture de l'application via la boîte de dialogue.
 
 {{< img src="real_user_monitoring/error_tracking/rum-anr-fatal.png" alt="Un rapport de plantage fatal dans le suivi des erreurs." >}}
 
@@ -521,7 +521,7 @@ Pour toute erreur donnée, vous pouvez accéder au chemin du fichier, au numéro
 {{< tabs >}}
 {{% tab "ÉTATS-UNIS" %}}
 
-1. Ajoutez le [plugin Android Gradle][22] à votre projet Gradle en utilisant l'extrait de code suivant.
+1. Ajoutez le [plugin Android Gradle][22] à votre projet Gradle en utilisant le code suivant.
 
    ```kotlin
    // In your app's build.gradle script
@@ -550,13 +550,13 @@ Pour toute erreur donnée, vous pouvez accéder au chemin du fichier, au numéro
    ./gradlew uploadNdkSymbolFilesRelease
    ```
 
-**Note** : Si votre projet utilise des variantes supplémentaires, le plugin fournit une tâche de téléchargement pour chaque variante avec l'obfuscation activée. Dans ce cas, initialisez le SDK Android avec un nom de variante approprié (l'API nécessaire est disponible dans les versions `1.8.0` et ultérieures).
+**Remarque** : Si votre projet utilise des variantes supplémentaires, le plugin fournit une tâche de téléchargement pour chaque variante avec l'obfuscation activée. Dans ce cas, initialisez le SDK Android avec un nom de variante approprié (l'API nécessaire est disponible dans les versions `1.8.0` et ultérieures).
 
 [22]: https://github.com/DataDog/dd-sdk-android-gradle-plugin
 [23]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{% tab "UE" %}}
-1. Ajoutez le [plugin Android Gradle][22] à votre projet Gradle en utilisant l'extrait de code suivant.
+1. Ajoutez le [plugin Android Gradle][22] à votre projet Gradle en utilisant le code suivant.
 
    ```kotlin
    // In your app's build.gradle script
@@ -585,7 +585,7 @@ Pour toute erreur donnée, vous pouvez accéder au chemin du fichier, au numéro
    ./gradlew uploadNdkSymbolFilesRelease
    ```
 
-**Note** : Si votre projet utilise des variantes supplémentaires, le plugin fournit une tâche de téléchargement pour chaque variante avec l'obfuscation activée. Dans ce cas, initialisez le SDK Android avec un nom de variante approprié (l'API nécessaire est disponible dans les versions `1.8.0` et ultérieures).
+**Remarque** : Si votre projet utilise des variantes supplémentaires, le plugin fournit une tâche de téléchargement pour chaque variante avec l'obfuscation activée. Dans ce cas, initialisez le SDK Android avec un nom de variante approprié (l'API nécessaire est disponible dans les versions `1.8.0` et ultérieures).
 
 [22]: https://github.com/DataDog/dd-sdk-android-gradle-plugin
 [23]: https://app.datadoghq.com/organization-settings/api-keys
@@ -609,7 +609,7 @@ Le consentement au suivi peut être l'une des valeurs suivantes :
 - `TrackingConsent.GRANTED` : Le SDK commence à collecter les données et les envoie au point de collecte des données.
 - `TrackingConsent.NOT_GRANTED` : Le SDK ne collecte aucune donnée. Vous ne pouvez pas envoyer manuellement de journaux, de traces ou d'événements.
 
-Pour **mettre à jour le consentement au suivi** après l'initialisation du SDK, appelez `Datadog.setTrackingConsent(<NEW CONSENT>)`. Le SDK change son comportement en fonction du nouveau consentement. Par exemple, si le consentement de suivi actuel est `TrackingConsent.PENDING` et que vous le mettez à jour pour :
+Pour **mettre à jour le consentement au suivi** après l'initialisation du SDK, appelez `Datadog.setTrackingConsent(<NEW CONSENT>)`. Le SDK modifie son comportement en fonction du nouveau consentement. Par exemple, si le consentement de suivi actuel est `TrackingConsent.PENDING` et que vous le mettez à jour pour :
 
 - `TrackingConsent.GRANTED` : Le SDK envoie toutes les données groupées actuelles et les données futures directement à l'endpoint de collecte de données.
 - `TrackingConsent.NOT_GRANTED` : Le SDK efface toutes les données groupées et ne collecte aucune donnée future.
@@ -818,7 +818,7 @@ datadog {
 Lors de l'examen des comportements de rapport de crash RUM pour Android, considérez ce qui suit :
 
 - Le crash ne peut être détecté qu'après l'initialisation du SDK. Dans ce contexte, la recommandation est d'initialiser le SDK dès que possible dans la méthode `onCreate` de votre application.
-- Les crashes RUM doivent être associés à une vue RUM. Si un crash se produit avant qu'une vue ne soit visible (typiquement une Activité ou un Fragment dans un état `onResume`), ou après que l'application a été envoyée en arrière-plan par l'utilisateur final en naviguant loin de celle-ci, le crash est atténué et n'est pas signalé pour la collecte. Pour atténuer cela, utilisez la méthode `trackBackgroundEvents()` [méthode][25] dans votre constructeur `RumConfiguration`.
+- Les crashes RUM doivent être associés à une vue RUM. Si un crash se produit avant qu'une vue ne soit visible (typiquement une Activité ou un Fragment dans un état `onResume`), ou après que l'application ait été envoyée en arrière-plan par l'utilisateur final en naviguant loin de celle-ci, le crash est atténué et n'est pas signalé pour la collecte. Pour atténuer cela, utilisez la méthode `trackBackgroundEvents()` [méthode][25] dans votre constructeur `RumConfiguration`.
 - Seuls les crashes qui se produisent dans des sessions échantillonnées sont conservés. Si un [taux d'échantillonnage de session n'est pas de 100 %][24], certains crashes ne sont pas signalés. 
 
 ## Testez votre implémentation

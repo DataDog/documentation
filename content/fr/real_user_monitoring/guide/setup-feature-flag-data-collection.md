@@ -128,7 +128,7 @@ Datadog prend en charge les intégrations avec :
 {{< tabs >}}
 {{% tab "Navigateur" %}}
 
-Initialisez le SDK d'Amplitude et créez un écouteur d'exposition signalant les évaluations des drapeaux de fonctionnalités à Datadog en utilisant le snippet de code suivant :
+Initialisez le SDK d'Amplitude et créez un écouteur d'exposition signalant les évaluations des drapeaux de fonctionnalités à Datadog à l'aide du code suivant :
 
 Pour plus d'informations sur l'initialisation du SDK d'Amplitude, consultez la [documentation du SDK JavaScript d'Amplitude][1].
 
@@ -149,7 +149,7 @@ Pour plus d'informations sur l'initialisation du SDK d'Amplitude, consultez la [
 {{% /tab %}}
 {{% tab "iOS" %}}
 
-Initialisez le SDK d'Amplitude et créez un inspecteur signalant les évaluations des drapeaux de fonctionnalités à Datadog en utilisant le snippet de code ci-dessous.
+Initialisez le SDK d'Amplitude et créez un inspecteur signalant les évaluations des drapeaux de fonctionnalités à Datadog à l'aide du code ci-dessous.
 
 Pour plus d'informations sur l'initialisation du SDK d'Amplitude, consultez la [documentation du SDK iOS d'Amplitude][1].
 
@@ -175,7 +175,7 @@ Pour plus d'informations sur l'initialisation du SDK d'Amplitude, consultez la [
 {{% /tab %}}
 {{% tab "Android" %}}
 
-Initialisez le SDK d'Amplitude et créez un inspecteur signalant les évaluations des drapeaux de fonctionnalités à Datadog en utilisant le snippet de code ci-dessous.
+Initialisez le SDK d'Amplitude et créez un inspecteur signalant les évaluations des drapeaux de fonctionnalités à Datadog à l'aide du code ci-dessous.
 
 Pour plus d'informations sur l'initialisation du SDK d'Amplitude, consultez la [documentation du SDK Android d'Amplitude][1].
 
@@ -322,7 +322,7 @@ Pour plus d'informations sur l'initialisation du SDK React de ConfigCat, consult
 {{% /tab %}}
 {{< /tabs >}}
 
-### Gestion personnalisée des drapeaux de fonctionnalités
+### Gestion des drapeaux de fonctionnalités personnalisés
 
 {{< tabs >}}
 {{% tab "Navigateur" %}}
@@ -371,7 +371,7 @@ Chaque fois qu'un drapeau de fonctionnalité est évalué, ajoutez la fonction s
 {{% /tab %}}
 {{< /tabs >}}
 
-### Intégration DevCycle
+### Intégration de DevCycle
 
 {{< tabs >}}
 {{% tab "Navigateur" %}}
@@ -432,7 +432,7 @@ DevCycle ne prend pas en charge cette intégration. Créez un ticket avec DevCyc
 {{% /tab %}}
 {{< /tabs >}}
 
-### Intégration Eppo
+### Intégration d'Eppo
 
 {{< tabs >}}
 {{% tab "Navigateur" %}}
@@ -529,7 +529,7 @@ await eppoInit({
 {{% /tab %}}
 {{< /tabs >}}
 
-### Intégration Flagsmith
+### Intégration de Flagsmith
 
 {{< tabs >}}
 {{% tab "Navigateur" %}}
@@ -949,12 +949,12 @@ Statsig ne prend actuellement pas en charge cette intégration. Contactez suppor
 
 ## Analysez la performance de votre Feature Flag dans RUM
 
-Les Feature Flags apparaissent dans le contexte de vos Sessions RUM, Vues et Erreurs sous forme de liste.
+Les Feature Flags apparaissent dans le contexte de vos sessions RUM, vues et erreurs sous forme de liste.
 
 {{< img src="real_user_monitoring/guide/setup-feature-flag-data-collection/feature-flag-list-rum-event.png" alt="Liste des attributs des Feature Flags dans RUM Explorer" style="width:75%;">}}
 
 ### Recherchez des Feature Flags en utilisant RUM Explorer
-Parcourez toutes les données collectées par RUM dans le [RUM Explorer][2] pour faire ressortir les tendances sur les Feature Flags, analyser les modèles avec un contexte plus large, ou les exporter vers des [tableaux de bord][3] et des [moniteurs][4]. Vous pouvez rechercher vos Sessions, Vues ou Erreurs dans RUM Explorer, avec l'attribut `@feature_flags.{flag_name}`.
+Parcourez toutes les données collectées par RUM dans le [RUM Explorer][2] pour faire ressortir les tendances sur les Feature Flags, analyser les modèles avec un contexte plus large, ou les exporter vers des [tableaux de bord][3] et [moniteurs][4]. Vous pouvez rechercher vos sessions, vues ou erreurs dans RUM Explorer, avec l'attribut `@feature_flags.{flag_name}`.
 
 #### Sessions
 En filtrant vos **Sessions** avec l'attribut `@feature_flags.{flag_name}`, vous pouvez trouver toutes les sessions dans la période donnée où votre Feature Flag a été évalué.
@@ -967,7 +967,7 @@ En filtrant vos **Vues** avec l'attribut `@feature_flags.{flag_name}`, vous pouv
 {{< img src="real_user_monitoring/guide/setup-feature-flag-data-collection/rum-explorer-view-feature-flag-search.png" alt="Recherchez des Vues pour des Feature Flags dans RUM Explorer" style="width:75%;">}}
 
 #### Erreurs
-En filtrant vos **Erreurs** avec l'attribut `@feature_flags.{flag_name}`, vous pouvez trouver toutes les erreurs dans la période donnée qui se sont produites sur la Vue où votre Feature Flag a été évalué.
+En filtrant vos **Erreurs** avec l'attribut `@feature_flags.{flag_name}`, vous pouvez trouver toutes les erreurs dans la période donnée qui se sont produites sur la vue où votre Feature Flag a été évalué.
 
 {{< img src="real_user_monitoring/guide/setup-feature-flag-data-collection/rum-explorer-error-feature-flag-search.png" alt="Recherchez des Erreurs pour des Feature Flags dans RUM Explorer" style="width:75%;">}}
 
@@ -976,7 +976,7 @@ En filtrant vos **Erreurs** avec l'attribut `@feature_flags.{flag_name}`, vous p
 ### Mes données de Feature Flag ne reflètent pas ce que je m'attends à voir
 Les Feature Flags apparaissent dans le contexte des événements où ils sont évalués, ce qui signifie qu'ils devraient apparaître sur les vues sur lesquelles la logique du code du Feature Flag est exécutée.
 
-En fonction de la façon dont vous avez structuré votre code et configuré vos Feature Flags, vous pouvez voir des Feature Flags inattendus apparaître dans le contexte de certains événements.
+En fonction de la manière dont vous avez structuré votre code et configuré vos Feature Flags, vous pouvez voir des Feature Flags inattendus apparaître dans le contexte de certains événements.
 
 Par exemple, pour voir sur quelles **Vues** votre drapeau de fonctionnalité est évalué, vous pouvez utiliser l'Explorateur RUM pour effectuer une requête similaire :
 

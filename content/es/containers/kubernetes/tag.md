@@ -34,26 +34,26 @@ La lista de etiquetas asignadas automáticamente depende de la [configuración d
   | `kube_job`                    | Orquestador | Referencia del propietario del pod                                                                                                                  | El pod debe estar adjunto a un cronjob                   |
   | `kube_job`                    | Baja          | Referencia del propietario del pod                                                                                                                  | El pod debe estar adjunto a un trabajo                       |
   | `kube_replica_set`            | Baja          | Referencia del propietario del pod                                                                                                                  | El pod debe estar adjunto a un conjunto de réplicas               |
-  | `kube_service`                | Bajo          | Descubrimiento de servicios de Kubernetes                                                                                                  | El Pod está detrás de un servicio de Kubernetes                  |
-  | `kube_daemon_set`             | Bajo          | Referencia del propietario del Pod                                                                                                                  | El Pod debe estar adjunto a un DaemonSet                 |
-  | `kube_container_name`         | Bajo          | Estado del Pod                                                                                                                    | N/A                                                 |
-  | `kube_namespace`              | Bajo          | Metadatos del Pod                                                                                                                  | N/A                                                 |
-  | `kube_app_name`               | Bajo          | Etiqueta del Pod `app.kubernetes.io/name`                                                                                            | La etiqueta del Pod debe existir                                |
-  | `kube_app_instance`           | Bajo          | Etiqueta del Pod `app.kubernetes.io/instance`                                                                                        | La etiqueta del Pod debe existir                                |
-  | `kube_app_version`            | Bajo          | Etiqueta del Pod `app.kubernetes.io/version`                                                                                         | La etiqueta del Pod debe existir                                |
-  | `kube_app_component`          | Bajo          | Etiqueta del Pod `app.kubernetes.io/component`                                                                                       | La etiqueta del Pod debe existir                                |
-  | `kube_app_part_of`            | Bajo          | Etiqueta del Pod `app.kubernetes.io/part-of`                                                                                         | La etiqueta del Pod debe existir                                |
-  | `kube_app_managed_by`         | Bajo          | Etiqueta del Pod `app.kubernetes.io/managed-by`                                                                                      | La etiqueta del Pod debe existir                                |
-  | `env`                         | Bajo          | Etiqueta del Pod `tags.datadoghq.com/env` o variable de entorno del contenedor (`DD_ENV` o `OTEL_RESOURCE_ATTRIBUTES`)                               | [Etiquetado de servicio unificado][2] habilitado                |
-  | `version`                     | Bajo          | Etiqueta del Pod `tags.datadoghq.com/version` o variable de entorno del contenedor (`DD_VERSION` o `OTEL_RESOURCE_ATTRIBUTES`)                       | [Etiquetado de servicio unificado][2] habilitado                |
-  | `service`                     | Bajo          | Etiqueta del Pod `tags.datadoghq.com/service` o variable de entorno del contenedor (`DD_SERVICE`, `OTEL_RESOURCE_ATTRIBUTES` o `OTEL_SERVICE_NAME`) | [Etiquetado de servicio unificado][2] habilitado                |
-  | `pod_phase`                   | Bajo          | Estado del Pod                                                                                                                    | N/A                                                 |
-  | `oshift_deployment_config`    | Bajo          | Anotación del Pod `openshift.io/deployment-config.name`                                                                          | El entorno de OpenShift y la anotación del Pod deben existir |
-  | `kube_ownerref_kind`          | Bajo          | Referencia del propietario del Pod                                                                                                                  | El Pod debe tener un propietario                              |
-  | `kube_deployment`             | Bajo          | Referencia del propietario del Pod                                                                                                                  | El Pod debe estar adjunto a un despliegue                |
-  | `kube_argo_rollout`           | Bajo          | Referencia del propietario del Pod                                                                                                                  | El Pod debe estar adjunto a un despliegue de argo             |
-  | `kube_replication_controller` | Bajo          | Referencia del propietario del Pod                                                                                                                  | El Pod debe estar adjunto a un controlador de replicación    |
-  | `kube_stateful_set`           | Bajo          | Referencia del propietario del Pod                                                                                                                  | El Pod debe estar adjunto a un statefulset               |
+  | `kube_service`                | Bajo          | Descubrimiento de servicios de Kubernetes                                                                                                  | El pod está detrás de un servicio de Kubernetes                  |
+  | `kube_daemon_set`             | Bajo          | Referencia del propietario del pod                                                                                                                  | El pod debe estar adjunto a un DaemonSet                 |
+  | `kube_container_name`         | Bajo          | Estado del pod                                                                                                                    | N/A                                                 |
+  | `kube_namespace`              | Bajo          | Metadatos del pod                                                                                                                  | N/A                                                 |
+  | `kube_app_name`               | Bajo          | Etiqueta del pod `app.kubernetes.io/name`                                                                                            | La etiqueta del pod debe existir                                |
+  | `kube_app_instance`           | Bajo          | Etiqueta del pod `app.kubernetes.io/instance`                                                                                        | La etiqueta del pod debe existir                                |
+  | `kube_app_version`            | Bajo          | Etiqueta del pod `app.kubernetes.io/version`                                                                                         | La etiqueta del pod debe existir                                |
+  | `kube_app_component`          | Bajo          | Etiqueta del pod `app.kubernetes.io/component`                                                                                       | La etiqueta del pod debe existir                                |
+  | `kube_app_part_of`            | Bajo          | Etiqueta del pod `app.kubernetes.io/part-of`                                                                                         | La etiqueta del pod debe existir                                |
+  | `kube_app_managed_by`         | Bajo          | Etiqueta del pod `app.kubernetes.io/managed-by`                                                                                      | La etiqueta del pod debe existir                                |
+  | `env`                         | Bajo          | Etiqueta del pod `tags.datadoghq.com/env` o variable de entorno del contenedor (`DD_ENV` o `OTEL_RESOURCE_ATTRIBUTES`)                               | [Etiquetado de servicio unificado][2] habilitado                |
+  | `version`                     | Bajo          | Etiqueta del pod `tags.datadoghq.com/version` o variable de entorno del contenedor (`DD_VERSION` o `OTEL_RESOURCE_ATTRIBUTES`)                       | [Etiquetado de servicio unificado][2] habilitado                |
+  | `service`                     | Bajo          | Etiqueta del pod `tags.datadoghq.com/service` o variable de entorno del contenedor (`DD_SERVICE`, `OTEL_RESOURCE_ATTRIBUTES`, o `OTEL_SERVICE_NAME`) | [Etiquetado de servicio unificado][2] habilitado                |
+  | `pod_phase`                   | Bajo          | Estado del pod                                                                                                                    | N/A                                                 |
+  | `oshift_deployment_config`    | Bajo          | Anotación del pod `openshift.io/deployment-config.name`                                                                          | El entorno de OpenShift y la anotación del pod deben existir |
+  | `kube_ownerref_kind`          | Bajo          | Referencia del propietario del pod                                                                                                                  | El pod debe tener un propietario                              |
+  | `kube_deployment`             | Bajo          | Referencia del propietario del pod                                                                                                                  | El pod debe estar adjunto a un despliegue                |
+  | `kube_argo_rollout`           | Bajo          | Referencia del propietario del pod                                                                                                                  | El pod debe estar adjunto a un despliegue de argo             |
+  | `kube_replication_controller` | Bajo          | Referencia del propietario del pod                                                                                                                  | El pod debe estar adjunto a un controlador de replicación    |
+  | `kube_stateful_set`           | Bajo          | Referencia del propietario del pod                                                                                                                  | El pod debe estar adjunto a un statefulset               |
   | `persistentvolumeclaim`       | Bajo          | Especificación del pod                                                                                                                      | Se debe adjuntar un PVC al pod                   |
   | `kube_cronjob`                | Bajo          | Propietario del pod                                                                                                                  | El pod debe estar adjunto a un cronjob                   |
   | `image_name`                  | Bajo          | Especificación del pod                                                                                                                      | N/A                                                 |
@@ -76,7 +76,7 @@ El agente puede adjuntar información del entorno de Kubernetes como "etiquetas 
 
 <div style="overflow-x: auto;">
 
-  | Etiqueta                 | Cardinalidad | Fuente                                                 | Requisito                                                    |
+  | Etiqueta                 | Cardinalidad | Fuente                                                 | Requerimiento                                                    |
   |---------------------|-------------|--------------------------------------------------------|----------------------------------------------------------------|
   | `kube_cluster_name` | Bajo         | `DD_CLUSTER_NAME` integración de envvar o proveedor de nube | `DD_CLUSTER_NAME` integración de envvar o proveedor de nube habilitada |
   | `kube_node_role`    | Bajo         | Etiqueta de nodo `node-role.kubernetes.io/<role>`            | La etiqueta de nodo debe existir                                          |
@@ -87,7 +87,7 @@ El agente puede adjuntar información del entorno de Kubernetes como "etiquetas 
 
 ## Etiqueta de Autodescubrimiento
 
-A partir de la versión v6.10+ del Agente, el Agente puede autodescubrir etiquetas a partir de las anotaciones de los Pods. Permite al Agente asociar etiquetas a todos los datos emitidos por todos los pods o un contenedor individual dentro de este pod.
+A partir de la versión v6.10+ del Agente, este puede autodescubrir etiquetas a partir de las anotaciones de los Pods. Permite al Agente asociar etiquetas a todos los datos emitidos por todos los pods o un contenedor individual dentro de este pod.
 
 Como mejor práctica en entornos de contenedores, Datadog recomienda utilizar etiquetado de servicio unificado para ayudar a unificar las etiquetas. El etiquetado de servicio unificado vincula la telemetría de Datadog a través del uso de tres etiquetas estándar: `env`, `service` y `version`. Para aprender a configurar su entorno con etiquetado unificado, consulte la documentación dedicada de [etiquetado de servicio unificado][2].
 
@@ -105,7 +105,7 @@ annotations:
   ad.datadoghq.com/<CONTAINER_NAME>.tags: '{"<TAG_KEY>": "<TAG_VALUE>","<TAG_KEY_1>": "<TAG_VALUE_1>"}'
 ```
 
-A partir de la versión v7.17+ del Agente, el Agente puede autodescubrir etiquetas a partir de etiquetas de Docker. Este proceso permite al Agente asociar etiquetas personalizadas a todos los datos emitidos por un contenedor, sin modificar la configuración del Agente.
+A partir de la versión v7.17+ del Agente, este puede autodescubrir etiquetas a partir de etiquetas de Docker. Este proceso permite al Agente asociar etiquetas personalizadas a todos los datos emitidos por un contenedor, sin modificar la configuración del Agente.
 
 ```yaml
 com.datadoghq.ad.tags: '["<TAG_KEY>:TAG_VALUE", "<TAG_KEY_1>:<TAG_VALUE_1>"]'
@@ -136,12 +136,12 @@ Por ejemplo, ejecute `kubectl api-resources` para recuperar esta información:
 | pods        | v1                           | pods                            |
 | nodos       | v1                           | nodos                           |
 | namespaces  | v1                           | namespaces                      |
-| despliegues | apps/v1                      | despliegues.apps                |
+| despliegues | apps/v1                      | deployments.apps                |
 | roles       | rbac.authorization.k8s.io/v1 | roles.rbac.authorization.k8s.io |
 
 **Notas:**
 
-- Las * etiquetas * no se propagan entre la carga de trabajo y los recursos secundarios. Por ejemplo, las etiquetas en un Despliegue no se aplican automáticamente a los registros de sus Pods secundarios. Para etiquetar los datos del Pod, configure la extracción de etiquetas directamente en los Pods.
+- Las * etiquetas * no se propagan entre la carga de trabajo y los recursos secundarios. Por ejemplo, las etiquetas en un Despliegue no se aplican automáticamente a los registros de sus Pods secundarios. Para etiquetar los datos de los Pods, configure la extracción de etiquetas directamente en los Pods.
 - Las etiquetas * sí* se propagan desde el namespace a los pods y contenedores dentro de ellos.
 - Utilice Datadog Agent 7.73+ para usar comodines en las reglas de extracción de etiquetas para sus Métricas KSM.
 
@@ -360,7 +360,7 @@ Por ejemplo, para extraer anotaciones de recursos de nodos, pods y despliegues:
 {{% /tab %}}
 {{< /tabs >}}
 
-Para el Agente 7.73.0+, use la siguiente configuración para agregar todas las anotaciones de recurso como etiquetas a sus métricas. En este ejemplo, los nombres de las etiquetas están precedidos por `<PREFIX>_`:
+Para la versión 7.73.0+ del Agente, use la siguiente configuración para agregar todas las anotaciones de recurso como etiquetas a sus métricas. En este ejemplo, los nombres de las etiquetas están precedidos por `<PREFIX>_`:
 
 ```yaml
     #(...)
@@ -405,15 +405,15 @@ annotation-3: legacy-tag-d
 
 <div class="alert alert-info">
 
-Si está en la versión del agente 7.58.0+, se le aconseja usar <a href="/containers/kubernetes/tag/#kubernetes-resources-labels-as-tags">Etiquetas de recursos de Kubernetes como etiquetas</a> para configurar etiquetas de nodo como etiquetas.
+Si está en la versión 7.58.0+ del agente, se le aconseja usar <a href="/containers/kubernetes/tag/#kubernetes-resources-labels-as-tags">Etiquetas de recursos de Kubernetes como etiquetas</a> para configurar etiquetas de nodo como etiquetas.
 
 </div>
 
-A partir del Agente v6.0+, el Agente puede recopilar etiquetas para un nodo dado y usarlas como etiquetas para adjuntar a todas las métricas, trazas y registros emitidos asociados con este `host` en Datadog:
+A partir de la versión v6.0+ del Agente, el Agente puede recopilar etiquetas para un nodo dado y usarlas como etiquetas para adjuntar a todas las métricas, trazas y registros emitidos asociados con este `host` en Datadog:
 
 {{< tabs >}}
 {{% tab "Operador de Datadog" %}}
-Para extraer una etiqueta de nodo dada `<NODE_LABEL>` y transformarla en una clave de etiqueta `<TAG_KEY>` dentro de Datadog, agregue la siguiente configuración a la `DatadogAgent` configuración de su Operador en `datadog-agent.yaml`:
+Para extraer una etiqueta de nodo dada `<NODE_LABEL>` y transformarla en una clave de etiqueta `<TAG_KEY>` dentro de Datadog, agregue la siguiente configuración a la configuración de su Operador en `DatadogAgent`:
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -439,7 +439,7 @@ spec:
       kubernetes.io/arch: arch
 ```
 
-Para el Agente v7.24.0+, use la siguiente configuración de variable de entorno para agregar todas las etiquetas de nodo como etiquetas a sus métricas. En este ejemplo, los nombres de las etiquetas están precedidos por `<PREFIX>_`:
+Para la versión v7.24.0+ del Agente, use la siguiente configuración de variable de entorno para agregar todas las etiquetas de nodo como etiquetas a sus métricas. En este ejemplo, los nombres de las etiquetas están precedidos por `<PREFIX>_`:
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -470,7 +470,7 @@ datadog:
     kubernetes.io/arch: arch
 ```
 
-Para el Agente v7.24.0+, use la siguiente configuración de variable de entorno para agregar todas las etiquetas de nodo como etiquetas a sus métricas. En este ejemplo, los nombres de las etiquetas están precedidos por `<PREFIX>_`:
+Para la versión v7.24.0+ del Agente, use la siguiente configuración de variable de entorno para agregar todas las etiquetas de nodo como etiquetas a sus métricas. En este ejemplo, los nombres de las etiquetas están precedidos por `<PREFIX>_`:
 
 
 ```yaml
@@ -493,7 +493,7 @@ Por ejemplo, podría configurar:
 DD_KUBERNETES_NODE_LABELS_AS_TAGS='{"kubernetes.io/arch":"arch"}'
 ```
 
-Para el Agente v7.24.0+, use la siguiente configuración de variable de entorno para agregar todas las etiquetas de nodo como etiquetas a sus métricas. En este ejemplo, los nombres de las etiquetas están precedidos por `<PREFIX>_`:
+Para la versión v7.24.0+ del Agente, use la siguiente configuración de variable de entorno para agregar todas las etiquetas de nodo como etiquetas a sus métricas. En este ejemplo, los nombres de las etiquetas están precedidos por `<PREFIX>_`:
 
 ```bash
 DD_KUBERNETES_NODE_LABELS_AS_TAGS='{"*":"<PREFIX>_%%label%%"}' # Note: wildcards do not work for KSM metrics before version 7.73
@@ -507,11 +507,11 @@ DD_KUBERNETES_NODE_LABELS_AS_TAGS='{"*":"<PREFIX>_%%label%%"}' # Note: wildcards
 
 <div class="alert alert-info">
 
-Si está en la versión del agente 7.58.0+, se le aconseja usar <a href="/containers/kubernetes/tag/#kubernetes-resources-labels-as-tags">Etiquetas de recursos de Kubernetes como etiquetas</a> para configurar etiquetas de pod como etiquetas.
+Si está en la versión 7.58.0+ del agente, se le aconseja usar <a href="/containers/kubernetes/tag/#kubernetes-resources-labels-as-tags">Etiquetas de recursos de Kubernetes como etiquetas</a> para configurar etiquetas de pod como etiquetas.
 
 </div>
 
-A partir del Agente v6.0+, el Agente puede recopilar etiquetas para un pod dado y usarlas como etiquetas para adjuntar a todas las métricas, trazas y registros emitidos por este pod:
+A partir de la versión v6.0+ del Agente, el Agente puede recopilar etiquetas para un pod dado y usarlas como etiquetas para adjuntar a todas las métricas, trazas y registros emitidos por este pod:
 
 {{< tabs >}}
 {{% tab "Operador de Datadog" %}}
@@ -807,9 +807,9 @@ DD_KUBERNETES_NAMESPACE_LABELS_AS_TAGS='{"*":"<PREFIX>_%%label%%"}'
 **Nota**: Las métricas personalizadas pueden afectar la facturación. Consulte la [página de facturación de métricas personalizadas][3] para más información.
 {{% /collapse-content %}}
 
-### Variables de entorno del contenedor como etiquetas
+### Variables de entorno de contenedor como etiquetas
 
-A partir de la versión 7.32+ del Agente, el Agente puede recopilar variables de entorno del contenedor y usarlas como etiquetas para adjuntarlas a todas las métricas, trazas y registros correspondientes al contenedor. Se admiten tanto los contenedores `docker` como `containerd`:
+A partir de la versión 7.32+ del Agente, el Agente puede recopilar variables de entorno de contenedor y usarlas como etiquetas para adjuntarlas a todas las métricas, trazas y registros correspondientes al contenedor. Se admiten tanto los contenedores `docker` como `containerd`:
 
 {{< tabs >}}
 {{% tab "Operador de Datadog" %}}

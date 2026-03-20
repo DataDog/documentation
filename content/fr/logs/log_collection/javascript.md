@@ -29,7 +29,7 @@ Avec le SDK des journaux du navigateur, vous pouvez envoyer des journaux directe
 
 Dans Datadog, accédez à [**Paramètres de l'organisation > Nouveaux jetons clients**][1]
 
-**Environnements pris en charge** : Le SDK des journaux du navigateur prend en charge tous les navigateurs modernes de bureau et mobiles, ainsi que les environnements Worker et Service Worker. Consultez le tableau [Support des navigateurs][4].
+**Environnements pris en charge** : Le SDK des journaux du navigateur prend en charge tous les navigateurs de bureau et mobiles modernes, ainsi que les environnements Worker et Service Worker. Consultez le tableau [Support des navigateurs][4].
 
 <div class="alert alert-info">Pour des raisons de sécurité, <a href="https://docs.datadoghq.com/account_management/api-app-keys/#api-keys">les clés API</a> ne peuvent pas être utilisées pour configurer le SDK des journaux du navigateur, car elles seraient exposées côté client dans le code JavaScript. Pour collecter des journaux à partir des navigateurs web, un <a href="https://docs.datadoghq.com/account_management/api-app-keys/#client-tokens">jeton client</a> doit être utilisé.</div>  
 
@@ -301,7 +301,7 @@ Pour être conforme au RGPD, au CCPA et à des réglementations similaires, le S
 
 Si vous utilisez l'intégration de la politique de sécurité du contenu (CSP) de Datadog sur votre site, consultez [la documentation CSP][6] pour des étapes de configuration supplémentaires.
 
-### Étape 4 - Visualiser vos données
+### Étape 4 - Visualisez vos données
 
 Maintenant que vous avez terminé la configuration de base pour les journaux, votre application collecte les journaux du navigateur et vous pouvez commencer à surveiller et à déboguer les problèmes en temps réel.
 
@@ -524,7 +524,7 @@ Les espaces réservés dans les exemples ci-dessus sont décrits ci-dessous :
 
 ### Supprimez les données sensibles de vos journaux de navigateur
 
-Si vos journaux de navigateur contiennent des informations sensibles à masquer, configurez le SDK du navigateur pour supprimer les séquences sensibles en utilisant le `beforeSend` rappel lors de l'initialisation du Collecteur de journaux du navigateur.
+Si vos journaux de navigateur contiennent des informations sensibles à masquer, configurez le SDK du navigateur pour supprimer les séquences sensibles en utilisant le rappel `beforeSend` lors de l'initialisation du collecteur de journaux du navigateur.
 
 La fonction de rappel `beforeSend` peut être invoquée avec deux arguments : l'événement `log` et `context`. Cette fonction vous donne accès à chaque journal collecté par le SDK du navigateur avant qu'il ne soit envoyé à Datadog, et vous permet d'utiliser le contexte pour ajuster les propriétés de tout journal. Le contexte contient des informations supplémentaires liées à l'événement, mais pas nécessairement incluses dans l'événement. Vous pouvez généralement utiliser ces informations pour [enrichir][11] votre événement ou [le supprimer][12].
 
@@ -607,9 +607,9 @@ Les propriétés suivantes sont automatiquement collectées par le SDK et pourra
 
 ### Supprimer des journaux spécifiques
 
-La fonction de rappel `beforeSend` vous permet également de rejeter un journal avant qu'il ne soit envoyé à Datadog.
+La fonction de rappel `beforeSend` vous permet également de supprimer un journal avant qu'il ne soit envoyé à Datadog.
 
-Pour rejeter les erreurs réseau si leur statut est 404 :
+Pour supprimer les erreurs réseau si leur statut est 404 :
 
 {{< tabs >}}
 {{% tab "NPM" %}}
@@ -883,7 +883,7 @@ window.DD_LOGS && window.DD_LOGS.getGlobalContext() // => {}
 
 #### Contexte utilisateur
 
-Le SDK des journaux Datadog fournit des fonctions pratiques pour associer un `User` avec les journaux générés.
+Le SDK des journaux Datadog fournit des fonctions pratiques pour associer un `User` aux journaux générés.
 
 - Définissez l'utilisateur pour tous vos enregistreurs avec l'API `setUser (newUser: User)`.
 - Ajoutez ou modifiez une propriété utilisateur pour tous vos enregistreurs avec l'API `setUserProperty (key: string, value: any)`.
@@ -977,7 +977,7 @@ window.DD_LOGS && window.DD_LOGS.getUser() // => {}
 
 #### Contexte de compte
 
-Le SDK des journaux Datadog fournit des fonctions pratiques pour associer un `Account` avec les journaux générés.
+Le SDK des journaux Datadog fournit des fonctions pratiques pour associer un `Account` aux journaux générés.
 
 - Définissez le compte pour tous vos enregistreurs avec l'API `setAccount (newAccount: Account)`.
 - Ajoutez ou modifiez une propriété de compte pour tous vos enregistreurs avec l'API `setAccountProperty (key: string, value: any)`.
@@ -1088,7 +1088,7 @@ Cependant, cette fonctionnalité présente certaines **limitations** :
 Après qu'un logger soit créé, il est possible de :
 
 - Définir l'ensemble du contexte pour votre logger avec l'API `setContext (context: object)`.
-- Définissez une propriété de contexte sur votre logger avec l'API `setContextProperty (key: string, value: any)` :
+- Définissez une propriété de contexte sur votre journaliseur avec l'API `setContextProperty (key: string, value: any)` :
 
 {{< tabs >}}
 {{% tab "NPM" %}}
@@ -1132,7 +1132,7 @@ window.DD_LOGS && window.DD_LOGS.setContextProperty('referrer', document.referre
 
 ### Filtrer par statut
 
-Après l'initialisation du SDK des journaux du navigateur Datadog, le niveau de journalisation minimal pour votre logger est défini avec l'API :
+Après l'initialisation du SDK des journaux du navigateur Datadog, le niveau de journalisation minimal pour votre journaliseur est défini avec l'API :
 
 ```typescript
 setLevel (level?: 'debug' | 'info' | 'warn' | 'error')
@@ -1174,7 +1174,7 @@ window.DD_LOGS && window.DD_LOGS.logger.setLevel('<LEVEL>')
 
 ### Changer la destination
 
-Par défaut, les loggers créés par le SDK des journaux du navigateur Datadog envoient des journaux à Datadog. Après l'initialisation du SDK des journaux du navigateur Datadog, il est possible de configurer le logger pour :
+Par défaut, les journaliseurs créés par le SDK des journaux du navigateur Datadog envoient des journaux à Datadog. Après l'initialisation du SDK des journaux du navigateur Datadog, il est possible de configurer le journaliseur pour :
 
 - envoyer des journaux au `console` et à Datadog (`http`)
 - envoyer des journaux uniquement au `console`
@@ -1236,7 +1236,7 @@ Pour changer la valeur de consentement au suivi après l'initialisation du SDK d
 - lorsqu'il est changé de `"granted"` à `"not-granted"`, la session de journaux est arrêtée et les données ne sont plus envoyées à Datadog.
 - lorsqu'il est changé de `"not-granted"` à `"granted"`, une nouvelle session de journaux est créée si aucune session précédente n'est active, et la collecte de données reprend.
 
-Cet état n'est pas synchronisé entre les onglets ni persistant entre les navigations. Il est de votre responsabilité de fournir la décision de l'utilisateur lors de l'initialisation du SDK Logs Browser ou en utilisant `setTrackingConsent()`.
+Cet état n'est pas synchronisé entre les onglets ni conservé entre les navigations. Il est de votre responsabilité de fournir la décision de l'utilisateur lors de l'initialisation du SDK Logs Browser ou en utilisant `setTrackingConsent()`.
 
 Lorsque `setTrackingConsent()` est utilisé avant `init()`, la valeur fournie prend le pas sur le paramètre d'initialisation.
 
@@ -1293,7 +1293,7 @@ acceptCookieBannerButton.addEventListener('click', () => {
 
 ### Accéder au contexte interne
 
-Après l'initialisation du SDK des journaux du navigateur Datadog, vous pouvez accéder au contexte interne du SDK. Cela vous permet d'accéder au `session_id`.
+Après l'initialisation du SDK de journaux du navigateur Datadog, vous pouvez accéder au contexte interne du SDK. Cela vous permet d'accéder au `session_id`.
 
 ```typescript
 getInternalContext (startTime?: 'number' | undefined)

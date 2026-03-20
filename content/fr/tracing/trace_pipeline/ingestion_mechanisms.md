@@ -48,7 +48,7 @@ Par exemple, si le service `A` a plus de trafic que le service `B`, l'Agent peut
 
 #### Configuration à distance
 
-La configuration du taux d'échantillonnage dans l'Agent peut être configurée à distance si vous utilisez la version de l'Agent [7.42.0][20] ou supérieure. Pour commencer, configurez [Configuration à Distance][21] puis configurez le paramètre `ingestion_reason` depuis la [page de Contrôle d'Ingestion][5]. La Configuration à Distance vous permet de modifier le paramètre sans avoir à redémarrer l'Agent. La configuration à distance a la priorité sur les configurations locales, y compris les variables d'environnement et les paramètres de `datadog.yaml`.
+La configuration du taux d'échantillonnage dans l'Agent peut être configurée à distance si vous utilisez la version de l'Agent [7.42.0][20] ou supérieure. Pour commencer, configurez [Configuration à Distance][21] puis configurez le paramètre `ingestion_reason` depuis la [page de Contrôle d'Ingestion][5]. La Configuration à Distance vous permet de modifier le paramètre sans avoir à redémarrer l'Agent. La configuration à distance prend le pas sur les configurations locales, y compris les variables d'environnement et les paramètres de `datadog.yaml`.
 
 #### Configuration locale
 
@@ -72,7 +72,7 @@ Pour un contrôle plus granulaire, utilisez les options de configuration d'écha
 - Définissez un taux d'échantillonnage spécifique **à appliquer à la racine du traçage**, par service et/ou nom de ressource, en remplaçant le [mécanisme par défaut](#in-the-agent) de l'Agent.
 - Définissez une **limite de taux** sur le nombre de traces ingérées par seconde. La limite de taux par défaut est de 100 traces par seconde par instance de service (lors de l'utilisation du [mécanisme par défaut](#in-the-agent) de l'Agent, le limiteur de taux est ignoré).
 
-**Remarque** : Les règles d'échantillonnage sont également des contrôles d'échantillonnage basés sur l'en-tête. Si le trafic pour un service est supérieur au maximum configuré de traces par seconde, alors les traces sont abandonnées à la racine. Cela ne crée pas de traces incomplètes.
+**Remarque** : Les règles d'échantillonnage sont également des contrôles d'échantillonnage basés sur l'en-tête. Si le trafic pour un service est supérieur au maximum de traces configuré par seconde, alors les traces sont abandonnées à la racine. Cela ne crée pas de traces incomplètes.
 
 La configuration peut être définie par des variables d'environnement ou directement dans le code :
 
@@ -115,7 +115,7 @@ Lisez-en plus sur les contrôles d'échantillonnage dans la [documentation de la
 {{% tab "Python" %}}
 **Configuration distante**
 
-À partir de la version <a href="https://github.com/DataDog/dd-trace-py/releases/tag/v2.9.0">2.9.0</a>, pour les applications Python, définissez les taux d'échantillonnage par service et par ressource depuis l'interface utilisateur de la <a href="/tracing/trace_pipeline/ingestion_controls#configure-the-service-ingestion-rate">Page de Contrôle d'Ingestion</a>.
+À partir de la version <a href="https://github.com/DataDog/dd-trace-py/releases/tag/v2.9.0">2.9.0</a>, pour les applications Python, définissez les taux d'échantillonnage par service et par ressource depuis l'interface utilisateur de la <a href="/tracing/trace_pipeline/ingestion_controls#configure-the-service-ingestion-rate">Page de contrôle d'ingestion</a>.
 
 Lisez-en plus sur la façon de configurer à distance les taux d'échantillonnage par service et par ressource dans le [guide d'échantillonnage basé sur les ressources][3].
 
@@ -143,7 +143,7 @@ Lisez-en plus sur les contrôles d'échantillonnage dans la [documentation de la
 {{% tab "Ruby" %}}
 **Configuration distante**
 
-À partir de la version <a href="https://github.com/DataDog/dd-trace-rb/releases/tag/v2.0.0">2.0.0</a>, pour les applications Ruby, définissez les taux d'échantillonnage par service et par ressource depuis l'interface utilisateur de la <a href="/tracing/trace_pipeline/ingestion_controls#configure-the-service-ingestion-rate">Page de Contrôle d'Ingestion</a>.
+À partir de la version <a href="https://github.com/DataDog/dd-trace-rb/releases/tag/v2.0.0">2.0.0</a>, pour les applications Ruby, définissez les taux d'échantillonnage par service et par ressource depuis l'interface utilisateur de la <a href="/tracing/trace_pipeline/ingestion_controls#configure-the-service-ingestion-rate">Page de contrôle d'ingestion</a>.
 
 Lisez-en plus sur la façon de configurer à distance les taux d'échantillonnage par service et ressource dans le [guide d'échantillonnage basé sur les ressources][1].
 
@@ -168,7 +168,7 @@ Lisez-en plus sur les contrôles d'échantillonnage dans la [documentation de la
 {{% tab "Go" %}}
 **Configuration distante**
 
-À partir de la version <a href="https://github.com/DataDog/dd-trace-go/releases/tag/v1.64.0">1.64.0</a>, pour les applications Go, définissez les taux d'échantillonnage par service et par ressource depuis l'interface utilisateur de la <a href="/tracing/trace_pipeline/ingestion_controls#configure-the-service-ingestion-rate">Page de Contrôle d'Ingestion</a>. 
+À partir de la version <a href="https://github.com/DataDog/dd-trace-go/releases/tag/v1.64.0">1.64.0</a>, pour les applications Go, définissez les taux d'échantillonnage par service et par ressource depuis l'interface utilisateur de la <a href="/tracing/trace_pipeline/ingestion_controls#configure-the-service-ingestion-rate">Page de contrôle d'ingestion</a>. 
 
 Lisez-en plus sur la façon de configurer à distance les taux d'échantillonnage par service et par ressource dans cet [article][3].
 
@@ -265,7 +265,7 @@ Lisez-en plus sur la façon de configurer à distance les taux d'échantillonnag
 À partir de [v0.1.0][1], la bibliothèque C++ de Datadog prend en charge les configurations suivantes :
 - Taux d'échantillonnage global : variable d'environnement `DD_TRACE_SAMPLE_RATE`
 - Taux d'échantillonnage par service : variable d'environnement `DD_TRACE_SAMPLING_RULES`.
-- Paramètre de limitation de taux : variable d'environnement `DD_TRACE_RATE_LIMIT`.
+- Paramètre de limite de taux : variable d'environnement `DD_TRACE_RATE_LIMIT`.
 
 Par exemple, pour envoyer 50 % des traces pour le service nommé `my-service` et 10 % pour le reste des traces :
 
@@ -706,7 +706,7 @@ Cette fonctionnalité est disponible pour Datadog Agent v[7.40.0][19]+.
 
 {{< tabs >}}
 {{% tab "Java" %}}
-À partir de la version de la bibliothèque de traçage [1.7.0][1], pour les applications Java, définissez les règles d'échantillonnage de spans **par service** et **par nom d'opération** avec la variable d'environnement `DD_SPAN_SAMPLING_RULES`.
+À partir de la version de la bibliothèque de traçage [1.7.0][1], pour les applications Java, définissez les règles d'échantillonnage de **span** par service et par nom d'opération avec la variable d'environnement `DD_SPAN_SAMPLING_RULES`.
 
 Par exemple, pour collecter 100 % des spans du service nommé `my-service`, pour l'opération `http.request`, jusqu'à 50 spans par seconde :
 
@@ -720,7 +720,7 @@ Lisez-en plus sur les contrôles d'échantillonnage dans la [documentation de la
 [2]: /fr/tracing/trace_collection/dd_libraries/java
 {{% /tab %}}
 {{% tab "Python" %}}
-À partir de la version [v1.4.0][1], pour les applications Python, définissez les règles d'échantillonnage de spans **par service** et **par nom d'opération** avec la variable d'environnement `DD_SPAN_SAMPLING_RULES`.
+À partir de la version [v1.4.0][1], pour les applications Python, définissez les règles d'échantillonnage de **span** par service et par nom d'opération avec la variable d'environnement `DD_SPAN_SAMPLING_RULES`.
 
 Par exemple, pour collecter `100%` des spans du service nommé `my-service`, pour l'opération `http.request`, jusqu'à `50` spans par seconde :
 
@@ -735,7 +735,7 @@ Lisez-en plus sur les contrôles d'échantillonnage dans la [documentation de la
 [2]: /fr/tracing/trace_collection/dd_libraries/python
 {{% /tab %}}
 {{% tab "Ruby" %}}
-À partir de la version [v1.5.0][1], pour les applications Ruby, définissez les règles d'échantillonnage de spans **par service** et **par nom d'opération** avec la variable d'environnement `DD_SPAN_SAMPLING_RULES`.
+À partir de la version [v1.5.0][1], pour les applications Ruby, définissez les règles d'échantillonnage de **span** par service et par nom d'opération avec la variable d'environnement `DD_SPAN_SAMPLING_RULES`.
 
 Par exemple, pour collecter `100%` des spans du service nommé `my-service`, pour l'opération `http.request`, jusqu'à `50` spans par seconde :
 
@@ -749,14 +749,14 @@ En savoir plus sur les contrôles d'échantillonnage dans la [documentation de l
 [2]: /fr/tracing/trace_collection/dd_libraries/ruby#sampling
 {{% /tab %}}
 {{% tab "Go" %}}
-À partir de la version [v1.41.0][1], pour les applications Go, définissez les règles d'échantillonnage de spans **par service** et **par nom d'opération** avec la variable d'environnement `DD_SPAN_SAMPLING_RULES`.
+À partir de la version [v1.41.0][1], pour les applications Go, définissez les règles d'échantillonnage de **span** par service et par nom d'opération avec la variable d'environnement `DD_SPAN_SAMPLING_RULES`.
 
 Par exemple, pour collecter `100%` des spans du service nommé `my-service`, pour l'opération `http.request`, jusqu'à `50` spans par seconde :
 
 ```
 @env DD_SPAN_SAMPLING_RULES=[{"service": "my-service", "name": "http.request", "sample_rate":1.0, "max_per_second": 50}]
 ```
-À partir de la version [v1.60.0][3], pour les applications Go, définissez les règles d'échantillonnage de spans **par ressource** et **par balises avec la variable d'environnement `DD_SPAN_SAMPLING_RULES`.
+À partir de la version [v1.60.0][3], pour les applications Go, définissez les règles d'échantillonnage de **span** par ressource et par balises avec la variable d'environnement `DD_SPAN_SAMPLING_RULES`.
 
 Par exemple, pour collecter `100%` des spans du service pour la ressource `POST /api/create_issue`, pour la balise `priority` avec la valeur `high` :
 
@@ -771,7 +771,7 @@ En savoir plus sur les contrôles d'échantillonnage dans la [documentation de l
 [3]: https://github.com/DataDog/dd-trace-go/releases/tag/v1.60.0
 {{% /tab %}}
 {{% tab "Node.js" %}}
-Pour les applications Node.js, définissez les règles d'échantillonnage de spans **par service** et **par nom d'opération** avec la variable d'environnement `DD_SPAN_SAMPLING_RULES`.
+Pour les applications Node.js, définissez les règles d'échantillonnage de **span** par service et par nom d'opération avec la variable d'environnement `DD_SPAN_SAMPLING_RULES`.
 
 Par exemple, pour collecter `100%` des spans du service nommé `my-service`, pour l'opération `http.request`, jusqu'à `50` spans par seconde :
 
@@ -792,7 +792,7 @@ Par exemple, pour collecter `100%` des spans du service nommé `my-service`, pou
 @env DD_SPAN_SAMPLING_RULES=[{"service": "my-service", "name": "http.request", "sample_rate":1.0, "max_per_second": 50}]
 ```
 
-Pour en savoir plus sur les contrôles d'échantillonnage, consultez la [documentation de la bibliothèque de traçage PHP][2].
+En savoir plus sur les contrôles d'échantillonnage dans la [documentation de la bibliothèque de traçage PHP][2].
 
 [1]: https://github.com/DataDog/dd-trace-php/releases/tag/0.77.0
 [2]: /fr/tracing/trace_collection/dd_libraries/php
@@ -823,14 +823,14 @@ $env:DD_SPAN_SAMPLING_RULES='[{"service": "my-service", "name": "http.request", 
 }
 ```
 
-Pour en savoir plus sur les contrôles d'échantillonnage, consultez la [documentation de la bibliothèque de traçage .NET][2].
+En savoir plus sur les contrôles d'échantillonnage dans la [documentation de la bibliothèque de traçage .NET][2].
 
 [1]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v2.18.0
 [2]: /fr/tracing/trace_collection/dd_libraries/dotnet-core
 {{% /tab %}}
 {{< /tabs >}}
 
-<div class="alert alert-danger"> Le mécanisme <a href="/tracing/legacy_app_analytics/">App Analytics</a> est entièrement obsolète. Pour ingérer des spans uniques sans la trace complète, utilisez la configuration <a href="/tracing/trace_pipeline/ingestion_mechanisms#single-spans">Single Span sampling</a>. Pour ingérer des traces complètes, utilisez les configurations <a href="/tracing/trace_pipeline/ingestion_mechanisms#head-based-sampling">Head-Based sampling</a>.</div>
+<div class="alert alert-danger"> Le mécanisme <a href="/tracing/legacy_app_analytics/">App Analytics</a> est entièrement obsolète. Pour ingérer des spans uniques sans le trace complet, utilisez la configuration <a href="/tracing/trace_pipeline/ingestion_mechanisms#single-spans">Single Span sampling</a>. Pour ingérer des traces complètes, utilisez les configurations <a href="/tracing/trace_pipeline/ingestion_mechanisms#head-based-sampling">Head-Based sampling</a>.</div>
 
 ## Spans de produit ingérés
 
@@ -867,12 +867,12 @@ Certaines raisons d'ingestion supplémentaires sont attribuées à des spans gé
 |------------|-------------------------------------|---------------------------------|
 | Serverless | `lambda` et `xray`                   | Vos traces reçues des [applications Serverless][14] tracées avec les bibliothèques de traçage Datadog ou l'intégration AWS X-Ray. |
 | Protection des applications et des API     | `appsec`                            | Traces ingérées à partir des bibliothèques de traçage Datadog et signalées par [AAP][15] comme une menace. |
-| Observabilité des données : Surveillance des travaux    | `data_jobs`                            | Traces ingérées à partir de l'intégration Datadog Java Tracer Spark ou de l'intégration Databricks. |
+| Observabilité des données : Surveillance des travaux    | `data_jobs`                            | Traces ingérées à partir de l'intégration Spark du traceur Java Datadog ou de l'intégration Databricks. |
 
 ## Mécanismes d'ingestion dans OpenTelemetry
 `ingestion_reason:otel`
 
-En fonction de votre configuration avec les SDK OpenTelemetry (en utilisant le collecteur OpenTelemetry ou l'agent Datadog), vous avez plusieurs façons de contrôler l'échantillonnage d'ingestion. Voir [Échantillonnage d'ingestion avec OpenTelemetry][22] pour des détails sur les options disponibles pour l'échantillonnage au niveau des SDK OpenTelemetry, du collecteur OpenTelemetry et de l'agent Datadog dans diverses configurations OpenTelemetry.
+En fonction de votre configuration avec les SDK OpenTelemetry (utilisant le collecteur OpenTelemetry ou l'agent Datadog), vous avez plusieurs façons de contrôler l'échantillonnage d'ingestion. Consultez [L'échantillonnage d'ingestion avec OpenTelemetry][22] pour des détails sur les options disponibles pour l'échantillonnage au niveau des SDK OpenTelemetry, du collecteur OpenTelemetry et de l'agent Datadog dans diverses configurations OpenTelemetry.
 
 ## Lectures complémentaires
 

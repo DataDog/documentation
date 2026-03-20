@@ -24,7 +24,7 @@ further_reading:
   text: Asigna etiquetas a todos los datos emitidos por un contenedor
 title: Monitoreo del Plano de Control de Kubernetes
 ---
-## Visión General
+## Resumen
 
 Esta sección tiene como objetivo documentar especificidades y proporcionar buenas configuraciones base para monitorear el Plano de Control de Kubernetes. Luego puedes personalizar estas configuraciones para agregar cualquier característica de Datadog.
 
@@ -323,7 +323,7 @@ scheduler:
 
 <div class="alert alert-info"> Esta función está en vista previa.</div>
 
-Datadog admite la supervisión de los componentes del plano de control de Kubernetes, incluidos el Servidor API, el Controlador Manager y el Scheduler.
+Datadog admite la supervisión de los componentes del plano de control de Kubernetes, incluyendo el Servidor API, Controlador Manager y Scheduler.
 
 {{< tabs >}}
 {{% tab "Operador de Datadog" %}}
@@ -473,7 +473,7 @@ Datadog admite la supervisión de los componentes del plano de control de Kubern
 
 La supervisión del plano de control está habilitada por defecto, pero requiere que la introspección esté habilitada.
 
-Puede habilitar la introspección utilizando el [chart de Helm de datadog-operator][12]:
+Puede habilitar la introspección utilizando el [chart de Helm datadog-operator][12]:
 
 {{< code-block lang="yaml" filename="datadog-agent.yaml" >}}
 introspection:
@@ -567,8 +567,8 @@ En OpenShift 4, todos los componentes del plano de control se pueden supervisar 
 #### Requisitos previos
 
 1. Habilite el [Agente de Clúster de Datadog][6]
-1. Habilite [verificaciones de clúster][7]
-1. Habilite [verificaciones de punto final][8]
+1. Habilite [Verificaciones de Clúster][7]
+1. Habilite [Verificaciones de Punto Final][8]
 1. Asegúrese de haber iniciado sesión con permisos suficientes para editar servicios y crear secretos.
 
 #### Servidor API
@@ -793,7 +793,7 @@ En OpenShift 3, todos los componentes del plano de control pueden ser monitoread
 1. Habilite el [Agente de Clúster de Datadog][6]
 1. Habilitar [Verificaciones de clúster][7]
 1. Habilitar [Verificaciones de punto final][8]
-1. Asegúrese de haber iniciado sesión con permisos suficientes para crear y editar servicios.
+1. Asegúrese de que ha iniciado sesión con los permisos suficientes para crear y editar servicios.
 
 ### Servidor API
 
@@ -891,9 +891,9 @@ oc annotate service etcd-copy -n openshift-etcd 'ad.datadoghq.com/endpoints.reso
 El Agente de Clúster de Datadog programa las verificaciones como verificaciones de punto final y las despacha a los Ejecutores de Verificación de Clúster.
 
 
-### Controlador de administrador y programador
+### Administrador de controladores y programador
 
-El controlador de administrador y el programador se ejecutan detrás del mismo servicio, `kube-controllers` en el espacio de nombres `kube-system`. Las ediciones directas del servicio no se persisten, así que haga una copia del servicio:
+El Administrador de controladores y el programador se ejecutan detrás del mismo servicio, `kube-controllers` en el espacio de nombres `kube-system`. Las ediciones directas del servicio no se persisten, así que haga una copia del servicio:
 
 ```shell
 oc get service kube-controllers -n kube-system -o yaml | sed 's/name: kube-controllers/name: kube-controllers-copy/'  | oc create -f -
@@ -924,7 +924,7 @@ La integración del servidor API se configura automáticamente. El Agente de Dat
 
 ### Etcd
 
-Al proporcionar acceso de lectura a los certificados etcd ubicados en el host, la verificación del agente Datadog puede comunicarse con etcd y comenzar a recopilar métricas de etcd.
+Al proporcionar acceso de lectura a los certificados etcd ubicados en el host, la verificación del Agente Datadog puede comunicarse con etcd y comenzar a recopilar métricas de etcd.
 
 {{< code-block lang="yaml" filename="datadog-values.yaml" >}}
 datadog:

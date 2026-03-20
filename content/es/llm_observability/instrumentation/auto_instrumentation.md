@@ -49,7 +49,7 @@ La Observabilidad LLM de Datadog puede rastrear y anotar automáticamente las ll
 
 {{% /tab %}}
 {{% tab "Node.js" %}}
-| Marco                                  | Versiones Soportadas | Versión del Rastreador                              |
+| Marco                                  | Versiones Soportadas | Versión del Trazador                              |
 |--------------------------------------------|--------------------|---------------------------------------------|
 | [Amazon Bedrock](#amazon-bedrock)          | >= 3.422.0         | >= 5.35.0 (CJS), >=5.35.0 (ESM)             |
 | [Anthropic](#anthropic)                    | >= 0.14.0          | >= 5.71.0 (CJS), >=5.71.0 (ESM)             |
@@ -126,7 +126,7 @@ module.exports = {
 {{% /collapse-content %}}
 
 {{% collapse-content title="Soporte para Next.js" level="h4" expanded=false id="nextjs-support" %}}
-Inicialice correctamente el rastreador en su aplicación para asegurar que la auto-instrumentación funcione correctamente. Si está utilizando TypeScript o ESM para su aplicación Next.js, inicialice el rastreador en un archivo `instrumentation.{ts/js}` de la siguiente manera, especificando sus opciones de configuración como variables de entorno:
+Inicialice correctamente el rastreador en su aplicación para asegurar que la auto-instrumentación funcione correctamente. Si utiliza TypeScript o ESM para su aplicación Next.js, inicialice el rastreador en un archivo `instrumentation.{ts/js}` de la siguiente manera, especificando sus opciones de configuración como variables de entorno:
 
 ```typescript
 // instrumentation.ts
@@ -170,7 +170,7 @@ module.exports = {
 
 {{% /tab %}}
 {{% tab "Java" %}}
-| Marco                                  | Versiones Soportadas | Versión del Rastreador |
+| Marco                                  | Versiones soportadas | Versión del rastreador |
 |--------------------------------------------|--------------------|----------------|
 | [OpenAI](#openai), [Azure OpenAI](#openai) | >= 3.0.0           | >= 1.59.0      |
 
@@ -213,7 +213,7 @@ La integración de Amazon Bedrock instrumenta los siguientes métodos:
 {{% /tab %}}
 
 {{% tab "Node.js" %}}
-La [integración de Amazon Bedrock][1] proporciona trazado automático para las llamadas del modelo de chat del SDK de Node.js de Amazon Bedrock (utilizando [BedrockRuntimeClient][2]).
+La [integración de Amazon Bedrock][1] proporciona trazado automático para las llamadas del modelo de chat del SDK de Node.js de Amazon Bedrock (usando [BedrockRuntimeClient][2]).
 
 ### Métodos rastreados
 
@@ -233,7 +233,7 @@ La integración de Amazon Bedrock instrumenta los siguientes métodos:
 {{% collapse-content title="Agentes de Amazon Bedrock" level="h3" expanded=false id="amazon-bedrock-agents" %}}
 {{< tabs >}}
 {{% tab "Python" %}}
-La integración de Agentes de Amazon Bedrock proporciona trazado automático para las llamadas de invocación de agente del SDK de Python de Amazon Bedrock (utilizando [Boto3][1]/[Botocore][2]).
+La integración de Agentes de Amazon Bedrock proporciona trazado automático para las llamadas de invocación de agentes del SDK de Python de Amazon Bedrock (usando [Boto3][1]/[Botocore][2]).
 
 ### Métodos rastreados
 
@@ -273,7 +273,7 @@ La integración de Antropico instrumenta los siguientes métodos:
 {{% /tab %}}
 
 {{% tab "Node.js" %}}
-La [integración de Anthropic][1] proporciona seguimiento automático para las llamadas de mensajes de chat del [SDK de Node.js de Anthropic][2].
+La [integración de Anthropic][1] proporciona un seguimiento automático para las llamadas de mensajes de chat del [SDK de Node.js de Anthropic][2].
 
 ### Métodos rastreados
 
@@ -330,7 +330,7 @@ La integración de CrewAI instrumenta los siguientes métodos:
 {{% collapse-content title="Google ADK" level="h3" expanded=false id="google-adk" %}}
 {{< tabs >}}
 {{% tab "Python" %}}
-La integración de Google ADK proporciona seguimiento automático para ejecuciones de agentes, llamadas a herramientas y ejecuciones de código realizadas a través del [SDK de Python de Google ADK][1].
+La integración de Google ADK proporciona un seguimiento automático para ejecuciones de agentes, llamadas a herramientas y ejecuciones de código realizadas a través del [SDK de Python de Google ADK][1].
 
 ### Métodos rastreados
 
@@ -364,7 +364,7 @@ La integración de Google GenAI instrumenta los siguientes métodos:
 - [Generando contenido][2] (incluyendo llamadas transmitidas):
   - `models.generate_content()` (También captura `chat.send_message()`)
   - `aio.models.generate_content()` (También captura `aio.chat.send_message()`)
-- [Incrustando contenido][3]
+- [Incorporando contenido][3]
   -`models.embed_content()`
   -`aio.models.embed_content()`
 
@@ -382,7 +382,7 @@ La integración de Google GenAI rastrea automáticamente los métodos en el [Goo
 La integración de Google GenAI instrumenta los siguientes métodos:
 
 - [Generando contenido][2] (incluyendo [llamadas transmitidas][5])
-- [Incrustando contenido][3]
+- [Incorporando contenido][3]
 
 [1]: https://ai.google.dev/gemini-api/docs#javascript
 [2]: https://ai.google.dev/api/generate-content#text_gen_text_only_prompt-JAVASCRIPT
@@ -522,16 +522,16 @@ La integración de LiteLLM instrumenta los siguientes métodos:
 {{% collapse-content title="MCP" level="h3" expanded=false id="mcp" %}}
 {{< tabs >}}
 {{% tab "Python" %}}
-La integración del Protocolo de Contexto del Modelo (MCP) instrumenta las llamadas a herramientas del cliente y del servidor en el [SDK de MCP][1].
+La integración del Protocolo de Contexto del Modelo (MCP) instrumenta las llamadas de herramientas del cliente y del servidor en el [MCP][1] SDK.
 
 ### Métodos rastreados
 
 Los instrumentos de integración de MCP los siguientes métodos:
 
-- [Llamadas de Herramientas del Cliente][2]:
+- [Llamadas a herramientas del cliente][2]:
   - `mcp.client.session.ClientSession.call_tool`
 
-- [Llamadas de Herramientas del Servidor][3]:
+- [Llamadas a herramientas del servidor][3]:
   - `mcp.server.fastmcp.tools.tool_manager.ToolManager.call_tool`
 
 [1]: https://modelcontextprotocol.io/docs/getting-started/intro
@@ -544,16 +544,16 @@ Los instrumentos de integración de MCP los siguientes métodos:
 {{% collapse-content title="OpenAI, Azure OpenAI" level="h3" expanded=false id="openai" %}}
 {{< tabs >}}
 {{% tab "Python" %}}
-La [integración de OpenAI][1] proporciona trazado automático para los [puntos finales de finalización y chat del OpenAI Python SDK][2] hacia OpenAI y Azure OpenAI.
+La [integración de OpenAI][1] proporciona seguimiento automático para los puntos finales de [completación del SDK de Python de OpenAI][2] y de completación de chat a OpenAI y Azure OpenAI.
 
 ### Métodos rastreados
 
 La integración de OpenAI instrumenta los siguientes métodos, incluyendo llamadas transmitidas:
 
-- [Finalizaciones][3]:
+- [Completaciones][3]:
    - `OpenAI().completions.create()`, `AzureOpenAI().completions.create()`
    - `AsyncOpenAI().completions.create()`, `AsyncAzureOpenAI().completions.create()`
-- [Finalizaciones de chat][4]:
+- [Completaciones de chat][4]:
    - `OpenAI().chat.completions.create()`, `AzureOpenAI().chat.completions.create()`
    - `AsyncOpenAI().chat.completions.create()`, `AsyncAzureOpenAI().chat.completions.create()`
 - [Respuestas][5]:
@@ -561,7 +561,7 @@ La integración de OpenAI instrumenta los siguientes métodos, incluyendo llamad
    - `AsyncOpenAI().responses.create()`
    - `OpenAI().responses.parse()` (a partir de `ddtrace==3.17.0`)
    - `AsyncOpenAI().responses.parse()` (a partir de `ddtrace==3.17.0`)
-- [Llamadas realizadas a DeepSeek a través del OpenAI Python SDK][6] (a partir de `ddtrace==3.1.0`)
+- [Llamadas realizadas a DeepSeek a través del SDK de Python de OpenAI][6] (a partir de `ddtrace==3.1.0`)
 
 [1]: /es/integrations/openai/
 [2]: https://platform.openai.com/docs/api-reference/introduction
@@ -573,13 +573,13 @@ La integración de OpenAI instrumenta los siguientes métodos, incluyendo llamad
 {{% /tab %}}
 
 {{% tab "Node.js" %}}
-La [integración de OpenAI][1] proporciona trazado automático para los [puntos finales de finalización, chat y embeddings del OpenAI Node.js SDK][2] hacia OpenAI y [Azure OpenAI][3].
+La [integración de OpenAI][1] proporciona seguimiento automático para los puntos finales de [completación, completación de chat y embeddings del SDK de Node.js de OpenAI][2] a OpenAI y [Azure OpenAI][3].
 
 ### Métodos rastreados
 
 La integración de OpenAI instrumenta los siguientes métodos, incluyendo llamadas transmitidas:
 
-- [Finalizaciones][4]:
+- [Completaciones][4]:
   - `openai.completions.create()` y `azureopenai.completions.create()`
 - [Completaciones de chat][5]:
   - `openai.chat.completions.create()` y `azureopenai.chat.completions.create()`
@@ -601,7 +601,7 @@ La integración de OpenAI instrumenta los siguientes métodos, incluyendo llamad
 {{% /tab %}}
 
 {{% tab "Java" %}}
-La [integración de OpenAI][1] proporciona seguimiento automático para los puntos finales de [completación del SDK de OpenAI Java][2], completaciones de chat, incrustaciones y respuestas hacia OpenAI y Azure OpenAI.
+La [integración de OpenAI][1] proporciona seguimiento automático para las finalizaciones, completaciones de chat, incrustaciones y puntos finales de respuestas del [SDK de OpenAI Java][2] hacia OpenAI y Azure OpenAI.
 
 ### Métodos rastreados
 
@@ -818,7 +818,7 @@ Todas las integraciones están **habilitadas por defecto**.
 
 {{< tabs >}}
 {{% tab "Python" %}}
-Utiliza la [configuración del SDK en código][1] y especifica `integrations_enabled=False`.
+Utilizar la [configuración del SDK en código][1] y especificar `integrations_enabled=False`.
 
 **Ejemplo**: Configuración del SDK en código que deshabilita todas las integraciones LLM
 
@@ -836,7 +836,7 @@ LLMObs.enable(
 {{% /tab %}}
 
 {{% tab "Node.js" %}}
-Utiliza la [configuración del SDK en código][1] y especifica `plugins: false`.
+Utilizar la [configuración del SDK en código][1] y especificar `plugins: false`.
 
 **Ejemplo**: Configuración del SDK en código que desactiva todas las integraciones de LLM
 

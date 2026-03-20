@@ -41,7 +41,7 @@ Utilisez l'API du traceur Java pour ajouter des balises personnalisées à un sp
 
 Les balises de surveillance des utilisateurs sont appliquées sur le span racine et commencent par le préfixe `usr` suivi du nom du champ. Par exemple, `usr.name` est une balise de surveillance des utilisateurs qui suit le nom de l'utilisateur.
 
-**Note** : Vérifiez que vous avez ajouté [les dépendances nécessaires à votre application][1].
+**Remarque** : Vérifiez que vous avez ajouté [les dépendances nécessaires à votre application][1].
 
 L'exemple ci-dessous montre comment obtenir le span racine, ajouter les balises de surveillance des utilisateurs pertinentes et activer la capacité de blocage des utilisateurs :
 
@@ -344,7 +344,7 @@ Si aucun usr.login n'est fourni, usr.id sera utilisé à la place.</a>
 {{< programming-lang-wrapper langs="java,dotnet,go,ruby,php,nodejs,python" >}}
 {{< programming-lang lang="java" >}}
 
-À partir de dd-trace-java v1.8.0, vous pouvez utiliser l'API du traceur Java pour suivre les événements utilisateur.
+À partir de la version 1.8.0 de dd-trace-java, vous pouvez utiliser l'API du traceur Java pour suivre les événements utilisateur.
 
 Les exemples suivants montrent comment suivre les événements de connexion ou les événements personnalisés (en utilisant l'inscription comme exemple).
 
@@ -411,7 +411,7 @@ public class LoginController {
 ```
 {{% /collapse-content %}}
 
-{{% collapse-content title="Logique commerciale personnalisée" level="h4" expanded="false" id="java-custom-business" %}}
+{{% collapse-content title="Logique métier personnalisée" level="h4" expanded="false" id="java-custom-business" %}}
 
 ```java
 import datadog.trace.api.EventTracker;
@@ -440,7 +440,7 @@ public class LoginController {
 
 {{< programming-lang lang="dotnet" >}}
 
-À partir de dd-trace-dotnet v2.23.0, vous pouvez utiliser l'API du traceur .NET pour suivre les événements utilisateur.
+À partir de la version 2.23.0 de dd-trace-dotnet, vous pouvez utiliser l'API du traceur .NET pour suivre les événements utilisateur.
 
 Les exemples suivants montrent comment suivre les événements de connexion ou les événements personnalisés (en utilisant l'inscription comme exemple).
 
@@ -483,7 +483,7 @@ void OnLogonFailure(string userId, string login, bool userExists, ...)
 ```
 {{% /collapse-content %}}
 
-{{% collapse-content title="Logique commerciale personnalisée" level="h4" expanded="false" id="dotnet-custom-business" %}}
+{{% collapse-content title="Logique métier personnalisée" level="h4" expanded="false" id="dotnet-custom-business" %}}
 
 ```csharp
 void OnUserSignupComplete(string userId, ...)
@@ -504,7 +504,7 @@ void OnUserSignupComplete(string userId, ...)
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
-À partir de dd-trace-go v1.47.0, vous pouvez utiliser l'API du traceur Go pour suivre les événements utilisateur.
+À partir de la version 1.47.0 de dd-trace-go, vous pouvez utiliser l'API du traceur Go pour suivre les événements utilisateur.
 
 Les exemples suivants montrent comment suivre les événements de connexion ou les événements personnalisés (en utilisant l'inscription comme exemple). {{% tracing-go-v2 %}}
 
@@ -548,7 +548,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 ```
 {{% /collapse-content %}}
 
-{{% collapse-content title="Logique commerciale personnalisée" level="h4" expanded="false" id="go-custom-business" %}}
+{{% collapse-content title="Logique métier personnalisée" level="h4" expanded="false" id="go-custom-business" %}}
 
 ```go
 import (
@@ -567,7 +567,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
-À partir de dd-trace-rb v1.9.0, vous pouvez utiliser l'API du traceur Ruby pour suivre les événements utilisateur. La version v2.19.0 de dd-trace-rb introduit de nouvelles méthodes sous l'espace de noms `Datadog::Kit::AppSec::Events::V2`. Les méthodes de suivi des événements existantes sont conservées pour des raisons de compatibilité.
+À partir de la version 1.9.0 de dd-trace-rb, vous pouvez utiliser l'API du traceur Ruby pour suivre les événements utilisateur. La version v2.19.0 de dd-trace-rb introduit de nouvelles méthodes sous l'espace de noms `Datadog::Kit::AppSec::Events::V2`. Les méthodes de suivi des événements existantes sont conservées pour des raisons de compatibilité.
 
 Les exemples suivants montrent comment suivre les événements de connexion ou les événements personnalisés (en utilisant l'inscription comme exemple).
 
@@ -601,7 +601,7 @@ Datadog::Kit::AppSec::Events::V2.track_user_login_failure(login, user_exists, me
 ```
 {{% /collapse-content %}}
 
-{{% collapse-content title="Logique commerciale personnalisée" level="h4" expanded="false" id="ruby-custom-business" %}}
+{{% collapse-content title="Logique métier personnalisée" level="h4" expanded="false" id="ruby-custom-business" %}}
 
 ```ruby
 require 'datadog/kit/appsec/events'
@@ -617,7 +617,7 @@ Datadog::Kit::AppSec::Events.track(event_name, trace, span, metadata)
 
 #### Migration vers les nouvelles méthodes de succès et d'échec de connexion
 
-Les nouvelles méthodes dans `Datadog::Kit::AppSec::Events::V2` introduisent un ordre de paramètres plus intuitif et une séparation des préoccupations plus claire. Voici les changements clés :
+Les nouvelles méthodes dans `Datadog::Kit::AppSec::Events::V2` introduisent un ordre de paramètres plus intuitif et une séparation des préoccupations plus claire. Voici les principaux changements :
 
 1. L'identifiant de connexion (e-mail, nom d'utilisateur) est le premier paramètre et est obligatoire.
 2. L'objet/ID utilisateur est optionnel dans les événements de succès et a été supprimé des événements d'échec.
@@ -672,7 +672,7 @@ Datadog::Kit::AppSec::Events::V2.track_user_login_failure(login, user_exists, me
 {{< /programming-lang >}}
 
 {{< programming-lang lang="php" >}}
-À partir de dd-trace-php v0.84.0, vous pouvez utiliser l'API du traceur PHP pour suivre les événements utilisateur. La version v1.11.0 de dd-trace-php introduit de nouvelles méthodes sous l'espace de noms `\datadog\appsec\v2\`. Les méthodes de suivi des événements existantes sont conservées pour des raisons de compatibilité.
+À partir de la version dd-trace-php v0.84.0, vous pouvez utiliser l'API du traceur PHP pour suivre les événements utilisateur. La version v1.11.0 de dd-trace-php introduit de nouvelles méthodes sous l'espace de noms `\datadog\appsec\v2\`. Les méthodes de suivi des événements existantes sont conservées pour des raisons de compatibilité.
 
 Les exemples suivants montrent comment suivre les événements de connexion ou les événements personnalisés (en utilisant l'inscription comme exemple).
 
@@ -711,7 +711,7 @@ $metadata = [ 'key' => 'value' ]; // you can add arbitrary fields to metadata
 ```
 {{% /collapse-content %}}
 
-{{% collapse-content title="Logique commerciale personnalisée" level="h4" expanded="false" id="php-custom-business" %}}
+{{% collapse-content title="Logique métier personnalisée" level="h4" expanded="false" id="php-custom-business" %}}
 
 ```php
 <?php
@@ -724,7 +724,7 @@ $metadata = ['usr.id' => $id]; // you can add arbitrary fields to metadata
 
 #### Migration vers les nouvelles méthodes de succès et d'échec de connexion
 
-Les nouvelles méthodes dans l'espace de noms `\datadog\appsec\v2\` introduisent un ordre de paramètres plus intuitif et une séparation des préoccupations plus claire. Voici les changements clés :
+Les nouvelles méthodes dans l'espace de noms `\datadog\appsec\v2\` introduisent un ordre de paramètres plus intuitif et une séparation des préoccupations plus claire. Voici les principaux changements :
 
 1. L'identifiant de connexion (e-mail, nom d'utilisateur) est le premier paramètre et est obligatoire.
 2. Le tableau/ID utilisateur est optionnel dans les événements de succès et a été supprimé des événements d'échec.
@@ -779,7 +779,7 @@ $metadata = [
 
 {{< programming-lang lang="nodejs" >}}
 
-À partir de dd-trace-js v3.13.1, vous pouvez utiliser l'API du traceur Node.js pour suivre les événements utilisateur. La version v5.48.0 de dd-trace-js introduit de nouvelles méthodes sous l'espace de noms `eventTrackingV2`. Les méthodes de suivi des événements existantes sont conservées pour des raisons de compatibilité.
+À partir de la version dd-trace-js v3.13.1, vous pouvez utiliser l'API du traceur Node.js pour suivre les événements utilisateur. La version v5.48.0 de dd-trace-js introduit de nouvelles méthodes sous l'espace de noms `eventTrackingV2`. Les méthodes de suivi des événements existantes sont conservées pour des raisons de compatibilité.
 
 
 Les exemples suivants montrent comment suivre les événements de connexion ou les événements personnalisés (en utilisant l'inscription comme exemple).
@@ -821,7 +821,7 @@ tracer.appsec.eventTrackingV2.trackUserLoginFailure(login, userExists, metadata)
 ```
 {{% /collapse-content %}}
 
-{{% collapse-content title="Logique commerciale personnalisée" level="h4" expanded="false" id="nodejs-custom-business" %}}
+{{% collapse-content title="Logique métier personnalisée" level="h4" expanded="false" id="nodejs-custom-business" %}}
 
 ```javascript
 const tracer = require('dd-trace')
@@ -836,7 +836,7 @@ tracer.appsec.trackCustomEvent(eventName, metadata)
 
 #### Migration vers les nouvelles méthodes de succès et d'échec de connexion
 
-Les nouvelles méthodes dans `eventTrackingV2` introduisent un ordre de paramètres plus intuitif et une séparation des préoccupations plus claire. Voici les changements clés :
+Les nouvelles méthodes dans `eventTrackingV2` introduisent un ordre de paramètres plus intuitif et une séparation des préoccupations plus claire. Voici les principaux changements :
 
 1. L'identifiant de connexion (e-mail, nom d'utilisateur) est le premier paramètre et est obligatoire.
 2. L'objet/ID utilisateur est optionnel dans les événements de succès et a été supprimé des événements d'échec.
@@ -894,7 +894,7 @@ tracer.appsec.eventTrackingV2.trackUserLoginFailure(login, userExists, metadata)
 {{< programming-lang lang="python" >}}
 
 
-À partir de dd-trace-py v1.9.0, vous pouvez utiliser l'API du traceur Python pour suivre les événements utilisateur.
+À partir de la version dd-trace-py v1.9.0, vous pouvez utiliser l'API du traceur Python pour suivre les événements utilisateur.
 
 À partir de dd-trace-py v3.7, vous pouvez utiliser le nouveau SDK du traceur Python pour suivre les utilisateurs et les événements utilisateur.
 
@@ -1125,11 +1125,11 @@ track_custom_event(tracer, event_name, metadata)
 
 Si votre service a l'AAP activé et que la [Configuration à distance][1] est activée, vous pouvez créer une règle WAF personnalisée pour signaler toute demande qu'elle correspond avec une étiquette de logique métier personnalisée. Cela ne nécessite aucune modification de votre application et peut être fait entièrement depuis Datadog.
 
-Pour commencer, accédez à la [page des règles WAF personnalisées][2] et cliquez sur "Créer une nouvelle règle".
+Pour commencer, naviguez vers la [page des règles WAF personnalisées][2] et cliquez sur "Créer une nouvelle règle".
 
 {{< img src="security/application_security/threats/custom-waf-rule-menu.png" alt="Accédez au menu des règles WAF personnalisées depuis la page d'accueil de l'AAP en cliquant sur Protection, puis sur WAF en application et Règles personnalisées." style="width:100%;" >}}
 
-Cela ouvrira un menu dans lequel vous pourrez définir votre règle WAF personnalisée. En sélectionnant la catégorie "Logique métier", vous pourrez configurer un type d'événement (par exemple, `users.password_reset`). Vous pouvez ensuite sélectionner le service que vous souhaitez suivre et un point de terminaison spécifique. Vous pouvez également utiliser la condition de règle pour cibler un paramètre spécifique afin d'identifier le flux de code que vous souhaitez _instrumenter_. Lorsque la condition correspond, la bibliothèque tague la trace et la signale pour être transmise à l'AAP. Si vous n'avez pas besoin de la condition, vous pouvez définir une condition large pour correspondre à tout.
+Cela ouvrira un menu dans lequel vous pourrez définir votre règle WAF personnalisée. En sélectionnant la catégorie "Logique métier", vous pourrez configurer un type d'événement (par exemple, `users.password_reset`). Vous pouvez ensuite sélectionner le service que vous souhaitez suivre et un point de terminaison spécifique. Vous pouvez également utiliser la condition de règle pour cibler un paramètre spécifique afin d'identifier le flux de code que vous souhaitez _instrumenter_. Lorsque la condition correspond, la bibliothèque marque la trace et la signale pour être transmise à l'AAP. Si vous n'avez pas besoin de la condition, vous pouvez définir une condition large pour correspondre à tout.
 
 {{< img src="security/application_security/threats/custom-waf-rule-form.png" alt="Capture d'écran du formulaire qui apparaît lorsque vous cliquez sur le bouton Créer une nouvelle règle." style="width:50%;" >}}
 
@@ -1156,7 +1156,7 @@ Le suivi automatique des activités des utilisateurs offre les modes suivants :
 - `identification` mode (nom court : `ident`) :
   - Ce mode est le mode par défaut et collecte toujours l'identifiant de l'utilisateur ou fait de son mieux.
   - L'identifiant de l'utilisateur est collecté lors du succès de la connexion et de l'échec de la connexion. En cas d'échec, l'identifiant de l'utilisateur est collecté, que l'utilisateur existe ou non.
-  - Lorsque le cadre instrumenté ne fournit pas clairement un identifiant utilisateur, mais plutôt un objet utilisateur structuré, l'identifiant utilisateur est déterminé sur une base d'effort raisonnable en fonction des noms de champs de l'objet. Cette liste de noms de champs est considérée, classée par ordre de priorité :
+  - Lorsque le cadre instrumenté ne fournit pas clairement un identifiant utilisateur, mais plutôt un objet utilisateur structuré, l'identifiant utilisateur est déterminé sur une base d'effort maximal en fonction des noms de champs de l'objet. Cette liste de noms de champs est considérée, classée par ordre de priorité :
     - `id`
     - `email`
     - `username`
@@ -1173,7 +1173,7 @@ Le suivi automatique des activités des utilisateurs offre les modes suivants :
 
 ### Configuration manuelle
 
-Les bibliothèques Datadog vous permettent de configurer l'auto-instrumentation en utilisant la variable d'environnement `DD_APPSEC_AUTO_USER_INSTRUMENTATION_MODE` avec le nom court pour le mode : `ident`|`anon`|`disabled`.
+Les bibliothèques Datadog vous permettent de configurer l'auto-instrumentation en utilisant la variable d'environnement `DD_APPSEC_AUTO_USER_INSTRUMENTATION_MODE` avec le nom court du mode : `ident`|`anon`|`disabled`.
 
 Le mode par défaut est le mode `identification` (nom court : `ident`).
 
@@ -1192,7 +1192,7 @@ Les modes suivants sont obsolètes :
 
 ## Désactivation du suivi des événements d'activité utilisateur.
 
-Pour désactiver la détection automatisée de l'activité utilisateur via votre [Catalogue de logiciels AAP][14], changez la variable d'environnement du mode de suivi automatique `DD_APPSEC_AUTO_USER_INSTRUMENTATION_MODE` en `disabled` sur le service que vous souhaitez désactiver. Tous les modes n'affectent que l'instrumentation automatisée et nécessitent que la [Configuration à distance][15] soit activée.
+Pour désactiver la détection automatisée des activités utilisateur via votre [Catalogue de logiciels AAP][14], changez la variable d'environnement du mode de suivi automatique `DD_APPSEC_AUTO_USER_INSTRUMENTATION_MODE` en `disabled` sur le service que vous souhaitez désactiver. Tous les modes n'affectent que l'instrumentation automatisée et nécessitent que la [Configuration à distance][15] soit activée.
 
 Pour la configuration manuelle, vous pouvez définir la variable d'environnement `DD_APPSEC_AUTOMATED_USER_EVENTS_TRACKING_ENABLED` sur `false` sur votre service et le redémarrer. Cela doit être défini sur l'application hébergeant la bibliothèque de traçage Datadog, et non sur l'Agent Datadog.
 

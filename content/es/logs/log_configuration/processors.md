@@ -53,22 +53,22 @@ Crea reglas grok personalizadas para analizar el mensaje completo o un atributo 
 
 Defina el procesador Grok en la página [**Pipelines**][1]. Para configurar las reglas de análisis de Grok:
 
-1. Haga clic en **Analizar mis registros** para generar automáticamente un conjunto de tres reglas de análisis basadas en los registros que fluyen a través del pipeline.
+1. Haga clic en **Analizar mis registros** para generar automáticamente un conjunto de tres reglas de análisis basadas en los registros que fluyen a través de la canalización.
    **Nota**: Esta función requiere que los registros correspondientes estén indexados y fluyan activamente. Puede desactivar temporalmente o reducir los filtros de exclusión para permitir que la función detecte registros.
 1. **Muestras de registros**: Agregue hasta cinco registros de muestra (de hasta 5000 caracteres cada uno) para probar sus reglas de análisis.
 1. **Definir reglas de análisis**: Escriba sus reglas de análisis en el editor de reglas. A medida que define reglas, el analizador Grok proporciona asistencia de sintaxis:
-   - **Sugerencias de coincidencia**: Escriba un nombre de regla seguido de `%{`. Aparece un menú desplegable con los matchers disponibles (como `word`, `integer`, `ip`, `date`). Seleccione un matcher de la lista para insertarlo en su regla.<br>
+   - **Sugerencias de coincidencia**: Escriba un nombre de regla seguido de `%{`. Aparece un menú desplegable con los coincidencias disponibles (como `word`, `integer`, `ip`, `date`). Seleccione una coincidencia de la lista para insertarla en su regla.<br>
      ```
      MyParsingRule %{
      ```
-   - **Sugerencias de filtro**: Al agregar un filtro con `:`, un menú desplegable muestra filtros compatibles para el matcher seleccionado.
+   - **Sugerencias de filtro**: Al agregar un filtro con `:`, un menú desplegable muestra filtros compatibles para la coincidencia seleccionada.
 1. **Pruebe sus reglas**: Seleccione una muestra haciendo clic en ella para activar su evaluación contra la regla de análisis y mostrar el resultado en la parte inferior de la pantalla. Todas las muestras muestran un estado (`match` o `no match`), que resalta si una de las reglas de análisis del analizador Grok coincide con la muestra.
 
 [1]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
 {{% tab "API" %}}
 
-Utilice el [punto final de la API del Pipeline de Registros de Datadog][1] con la siguiente carga JSON del analizador Grok:
+Utilice el [punto final de la API de Datadog Log Pipeline][1] con la siguiente carga útil JSON del analizador Grok:
 
 ```json
 {
@@ -98,7 +98,7 @@ Utilice el [punto final de la API del Pipeline de Registros de Datadog][1] con l
 
 ## Remapeador de fecha de registro
 
-A medida que Datadog recibe registros, les asigna una marca de tiempo utilizando el/los valor(es) de cualquiera de estos atributos predeterminados:
+A medida que Datadog recibe registros, les asigna una marca de tiempo utilizando el valor o valores de cualquiera de estos atributos predeterminados:
 
 * `timestamp`
 * `date`
@@ -166,15 +166,15 @@ Utilice el procesador remapeador de estado para asignar atributos como un estado
 Cada valor de estado entrante se mapea de la siguiente manera:
 
 * Enteros del 0 al 7 se mapean a los [estándares de severidad de Syslog][4]
-* Cadenas que comienzan con **emerg** o **f** (sin importar mayúsculas o minúsculas) se mapean a **emerg (0)**
-* Cadenas que comienzan con **a** (sin importar mayúsculas o minúsculas) se mapean a **alerta (1)**
-* Cadenas que comienzan con **c** (sin importar mayúsculas o minúsculas) se mapean a **crítico (2)**
-* Cadenas que comienzan con **err** (sin importar mayúsculas o minúsculas) se mapean a **error (3)**
-* Cadenas que comienzan con **w** (sin importar mayúsculas o minúsculas) se mapean a **advertencia (4)**
-* Cadenas que comienzan con **n** (sin importar mayúsculas o minúsculas) se mapean a **noticia (5)**
-* Cadenas que comienzan con **i** (sin importar mayúsculas o minúsculas) se mapean a **info (6)**
-* Cadenas que comienzan con **d**, **t**, **v**, **traza**, o **verbose** (sin importar mayúsculas o minúsculas) se mapean a **debug (7)**
-* Cadenas que comienzan con **o** o **s**, o que coinciden con **OK** o **Éxito** (sin importar mayúsculas o minúsculas) se mapean a **OK**
+* Cadenas que comienzan con **emerg** o **f** (sin distinción entre mayúsculas y minúsculas) se mapean a **emerg (0)**
+* Cadenas que comienzan con **a** (sin distinción entre mayúsculas y minúsculas) se mapean a **alerta (1)**
+* Cadenas que comienzan con **c** (sin distinción entre mayúsculas y minúsculas) se mapean a **crítico (2)**
+* Cadenas que comienzan con **err** (sin distinción entre mayúsculas y minúsculas) se mapean a **error (3)**
+* Cadenas que comienzan con **w** (sin distinción entre mayúsculas y minúsculas) se mapean a **advertencia (4)**
+* Cadenas que comienzan con **n** (sin distinción entre mayúsculas y minúsculas) se mapean a **noticia (5)**
+* Cadenas que comienzan con **i** (sin distinción entre mayúsculas y minúsculas) se mapean a **info (6)**
+* Cadenas que comienzan con **d**, **t**, **v**, **traza**, o **verbose** (sin distinción entre mayúsculas y minúsculas) se mapean a **debug (7)**
+* Cadenas que comienzan con **o** o **s**, o que coinciden con **OK** o **Éxito** (sin distinción entre mayúsculas y minúsculas) se mapean a **OK**
 * Todos los demás se mapean a **info (6)**
 
 **Nota**: Si se aplican múltiples procesadores remapeadores de estado de registro a un registro dentro de un pipeline, solo se considera el primero en el orden del pipeline. Además, para todos los pipelines que coincidan con el registro, solo se aplica el primer remapeador de estado encontrado (de todos los pipelines aplicables).
@@ -321,7 +321,7 @@ El procesador de Remapeo **no puede ser utilizado para remapear atributos reserv
 {{< tabs >}}
 {{% tab "INTERFAZ DE USUARIO" %}}
 
-Define el procesador de reasignación en la página [**Pipelines**][1]. Por ejemplo, reasigna `user` a `user.firstname`.
+Define el procesador de reasignación en la página de [**Pipelines**][1]. Por ejemplo, reasigna `user` a `user.firstname`.
 
 {{< img src="logs/log_configuration/processor/remapper.png" alt="Procesador de reasignación de atributos" style="width:80%;" >}}
 
@@ -329,7 +329,7 @@ Define el procesador de reasignación en la página [**Pipelines**][1]. Por ejem
 {{% /tab %}}
 {{% tab "API" %}}
 
-Utiliza el [punto final de la API de Datadog Log Pipeline][1] con la siguiente carga JSON del Reasignador:
+Utiliza el [punto final de la API de Datadog Log Pipeline][1] con la siguiente carga útil JSON del Reasignador:
 
 ```json
 {
@@ -351,11 +351,11 @@ Utiliza el [punto final de la API de Datadog Log Pipeline][1] con la siguiente c
 | `type`                 | Cadena           | Sí      | Tipo del procesador.                                                         |
 | `name`                 | Cadena           | No      | Nombre del procesador.                                                         |
 | `is_enabled`           | Booleano          | No      | Si el procesador está habilitado o no. Predeterminado: `false`.                          |
-| `source_type`          | Cadena           | No      | Define si las fuentes son de registro `attribute` o `tag`. Predeterminado: `attribute`. |
+| `source_type`          | Cadena           | No      | Define si las fuentes son de registro `attribute` o `tag`. Por defecto: `attribute`. |
 | `sources`              | Array de cadenas | Sí      | Array de atributos o etiquetas de origen                                             |
 | `target`               | Cadena           | Sí      | Nombre del atributo o etiqueta final para remapear las fuentes.                           |
 | `target_type`          | Cadena           | No      | Define si el destino es un registro `attribute` o un `tag`. Predeterminado: `attribute`.    |
-| `target_format`        | Cadena           | No      | Define si el valor del atributo debe ser convertido a otro tipo. Valores posibles: `auto`, `string` o `integer`. Predeterminado: `auto`. Cuando se establece en `auto`, no se aplica ninguna conversión.  |
+| `target_format`        | Cadena           | No      | Define si el valor del atributo debe ser convertido a otro tipo. Valores posibles: `auto`, `string` o `integer`. Predeterminado: `auto`. Cuando se establece en `auto`, no se aplica conversión.  |
 | `preserve_source`      | Booleano          | No      | Eliminar o preservar el elemento de fuente remapeado. Predeterminado: `false`.               |
 | `override_on_conflict` | Booleano          | No      | Sobrescribir o no el elemento de destino si ya está establecido. Predeterminado: `false`.            |
 
@@ -511,7 +511,7 @@ Por defecto, se omite un cálculo si falta un atributo. Seleccione *Reemplazar a
 
 **Notas**:
 
-* Un atributo puede ser listado como faltante si no se encuentra en los atributos del registro, o si no puede ser convertido a un número.
+* Un atributo puede ser listado como faltante si no se encuentra en los atributos del registro, o si no se puede convertir a un número.
 * Al usar el operador `-`, agregue espacios alrededor de él porque los nombres de atributos como `start-time` pueden contener guiones. Por ejemplo, la siguiente fórmula debe incluir espacios alrededor del operador `-`: `(end-time - start-time) / 1000`.
 * Si el atributo objetivo ya existe, se sobrescribe con el resultado de la fórmula.
 * Los resultados se redondean hasta la novena decimal. Por ejemplo, si el resultado de la fórmula es `0.1234567891`, el valor real almacenado para el atributo es `0.123456789`.
@@ -570,7 +570,7 @@ La plantilla se define tanto por texto en bruto como por bloques con la sintaxis
 {{< tabs >}}
 {{% tab "INTERFAZ DE USUARIO" %}}
 
-Defina el procesador de construcción de cadenas en la página [**Pipelines**][1]:
+Defina el procesador de construcción de cadenas en la página [**Pipelines**]:
 
 {{< img src="logs/log_configuration/processor/stringbuilder_processor.png" alt="Procesador de construcción de cadenas" style="width:80%;">}}
 
@@ -644,7 +644,7 @@ Utilice el [punto final de la API de Datadog Log Pipeline][1] con la siguiente c
 
 ## Analizador GeoIP
 
-El analizador GeoIP toma un atributo de dirección IP y extrae información de continente, país, subdivisión o ciudad (si está disponible) en la ruta del atributo de destino.
+El analizador geoIP toma un atributo de dirección IP y extrae información de continente, país, subdivisión o ciudad (si está disponible) en la ruta del atributo de destino.
 
 {{< tabs >}}
 {{% tab "INTERFAZ DE USUARIO" %}}
@@ -653,14 +653,14 @@ El analizador GeoIP toma un atributo de dirección IP y extrae información de c
 
 La mayoría de los elementos contienen un atributo `name` y `iso_code` (o `code` para continente). `subdivision` es el primer nivel de subdivisión que utiliza el país, como "Estados" para los Estados Unidos o "Departamentos" para Francia.
 
-Por ejemplo, el analizador GeoIP extrae la ubicación del atributo `network.client.ip` y la almacena en el atributo `network.client.geoip`:
+Por ejemplo, el analizador geoIP extrae la ubicación del atributo `network.client.ip` y la almacena en el atributo `network.client.geoip`:
 
 {{< img src="logs/log_configuration/processor/geoip_example_blurred.png" alt="Ejemplo de GeoIP" style="width:60%;">}}
 
 {{% /tab %}}
 {{% tab "API" %}}
 
-Utiliza el [punto final de la API del Pipeline de Logs de Datadog][1] con la siguiente carga útil JSON del analizador GeoIP:
+Utiliza el [punto final de la API de Datadog Log Pipeline][1] con la siguiente carga útil JSON del analizador geoIP:
 
 ```json
 {
@@ -686,19 +686,19 @@ Utiliza el [punto final de la API del Pipeline de Logs de Datadog][1] con la sig
 
 ## Procesador de búsqueda
 
-Utiliza el procesador de búsqueda para definir un mapeo entre un atributo de log y un valor legible por humanos guardado en una [Tabla de Referencia][7] o en la tabla de mapeo de procesadores.
+Utiliza el procesador de búsqueda para definir un mapeo entre un atributo de registro y un valor legible por humanos guardado en una [Tabla de Referencia][7] o la tabla de mapeo de procesadores.
 
-Por ejemplo, puedes usar el procesador de búsqueda para mapear un ID de servicio interno a un nombre de servicio legible por humanos. Alternativamente, puedes usarlo para verificar si la dirección MAC que acaba de intentar conectarse al entorno de producción pertenece a tu lista de máquinas robadas.
+Por ejemplo, puedes usar el procesador de búsqueda para mapear un ID de servicio interno en un nombre de servicio legible por humanos. Alternativamente, puedes usarlo para verificar si la dirección MAC que acaba de intentar conectarse al entorno de producción pertenece a tu lista de máquinas robadas.
 
 {{< tabs >}}
 {{% tab "INTERFAZ DE USUARIO" %}}
 
 El procesador de búsqueda realiza las siguientes acciones:
 
-* Verifica si el log actual contiene el atributo de origen.
+* Verifica si el registro actual contiene el atributo de origen.
 * Verifica si el valor del atributo de origen existe en la tabla de mapeo.
   * Si lo tiene, crea el atributo de destino con el valor correspondiente en la tabla.
-  * Opcionalmente, si no encuentra el valor en la tabla de mapeo, crea un atributo de destino con el valor predeterminado de reserva establecido en el campo `fallbackValue`. Puede ingresar manualmente una lista de `source_key,target_value` pares o cargar un archivo CSV en la pestaña **Mapeo Manual**.
+  * Opcionalmente, si no encuentra el valor en la tabla de mapeo, crea un atributo de destino con el valor de reserva predeterminado establecido en el campo `fallbackValue`. Puede ingresar manualmente una lista de `source_key,target_value` pares o cargar un archivo CSV en la pestaña **Mapeo Manual**.
 
     {{< img src="logs/log_configuration/processor/lookup_processor_manual_mapping.png" alt="Procesador de búsqueda" style="width:80%;">}}
 
@@ -784,7 +784,7 @@ Utilice el [punto final de la API de Datadog Log Pipeline][1] con la siguiente c
 {{% /tab %}}
 {{< /tabs >}}
 
-**Nota**: Los IDs de traza y los IDs de intervalo no se muestran en sus registros o atributos de registro en la interfaz de usuario.
+**Nota**: Los IDs de traza y los IDs de intervalo no se muestran en sus registros ni en los atributos de registro en la interfaz de usuario.
 
 ## Remapeador de intervalos
 
@@ -827,7 +827,7 @@ Utilice el [punto final de la API de Datadog Log Pipeline][1] con la siguiente c
 {{% /tab %}}
 {{< /tabs >}}
 
-**Nota**: Los IDs de traza y los IDs de intervalo no se muestran en sus registros o atributos de registro en la interfaz de usuario.
+**Nota**: Los IDs de traza y los IDs de intervalo no se muestran en sus registros ni en los atributos de registro en la interfaz de usuario.
 
 ## Procesador de arreglos
 
@@ -908,7 +908,7 @@ Utilice el [punto final de la API de Datadog Log Pipeline][1] con la siguiente c
 |--------------|------------------|----------|---------------------------------------------------------------|
 | `type`       | Cadena           | Sí      | Tipo de procesador.                                        |
 | `name`       | Cadena           | No       | Nombre del procesador.                                        |
-| `is_enabled` | Booleano          | No       | Si el procesador está habilitado. Predeterminado: `false`.        |
+| `is_enabled` | Booleano          | No       | Indica si el procesador está habilitado. Predeterminado: `false`.        |
 | `operation.type`  | Cadena      | Sí      | Tipo de operación del procesador de arreglos.                            |
 | `operation.source`  | Cadena    | Sí      | Ruta del arreglo del cual desea seleccionar.                    |
 | `operation.target`  | Cadena    | Sí      | Atributo objetivo.                                             |
@@ -1070,7 +1070,7 @@ El procesador decodificador traduce campos de cadenas codificadas en binario a t
 {{% tab "INTERFAZ DE USUARIO" %}}
 
 1. Establecer el atributo de origen: Proporcione la ruta del atributo que contiene la cadena codificada, como `encoded.base64`.
-2. Seleccionar la codificación de origen: Elija la codificación de binario a texto de la fuente: `base64` o `base16/hex`.
+2. Seleccionar la codificación de origen: Elija la codificación binaria a texto de la fuente: `base64` o `base16/hex`.
 2. Para `Base16/Hex`: Elija el formato de salida: `string (UTF-8)` o `integer`.
 3. Establezca el atributo de destino: Ingrese la ruta del atributo para almacenar el resultado decodificado.
 
@@ -1081,24 +1081,24 @@ El procesador decodificador traduce campos de cadenas codificadas en binario a t
 
 ## Procesador de inteligencia de amenazas
 
-Agregue el Procesador de Inteligencia de Amenazas para evaluar los registros contra la tabla utilizando una clave específica de Indicador de Compromiso (IoC), como una dirección IP. Si se encuentra una coincidencia, el registro se enriquece con atributos relevantes de Inteligencia de Amenazas (TI) de la tabla, lo que mejora la detección, investigación y respuesta.
+Agregue el Procesador de Inteligencia de Amenazas para evaluar los registros contra la tabla utilizando una clave específica de Indicador de Compromiso (IoC), como una dirección IP. Si se encuentra una coincidencia, el registro se enriquece con los atributos relevantes de Inteligencia de Amenazas (TI) de la tabla, lo que mejora la detección, investigación y respuesta.
 
 Para más información, consulte [Inteligencia de Amenazas][9].
 
 ## Procesador OCSF
 
-Utilice el procesador OCSF para normalizar sus registros de seguridad de acuerdo con el [Marco de Esquema de Ciberseguridad Abierto (OCSF)][11]. El procesador OCSF le permite crear mapeos personalizados que remapean sus atributos de registro a las clases de esquema OCSF y sus atributos correspondientes, incluidos los atributos enumerados (ENUM).
+Utilice el procesador OCSF para normalizar sus registros de seguridad de acuerdo con el [Marco de Esquema de Ciberseguridad Abierto (OCSF)][11]. El procesador OCSF le permite crear mapeos personalizados que reasignan los atributos de sus registros a las clases de esquema OCSF y sus atributos correspondientes, incluidos los atributos enumerados (ENUM).
 
 El procesador le permite:
 
-- Mapear atributos de registro de origen a atributos de destino OCSF
+- Mapear atributos de registros de origen a atributos de destino OCSF
 - Configurar atributos ENUM con valores numéricos específicos
 - Crear sub-pipelines para diferentes clases de eventos de destino OCSF
-- Preprocesar registros antes del remapeo OCSF
+- Preprocesar registros antes de la reasignación OCSF
 
 Para instrucciones detalladas de configuración, ejemplos de configuración y orientación para solucionar problemas, consulte [Procesador OCSF][12].
 
-## Lectura Adicional
+## Lectura adicional
 
 {{< partial name="whats-next/whats-next.html" >}}
 

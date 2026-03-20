@@ -5,11 +5,11 @@ description: Configurez la surveillance des services universels avec l'agent Dat
 further_reading:
 - link: /universal_service_monitoring/
   tag: Documentation
-  text: Découvrez la surveillance des services universels.
+  text: Découvrez la surveillance des services universels
 - link: https://www.datadoghq.com/blog/universal-service-monitoring-datadog/
   tag: Blog
-  text: Signaux d'or en quelques secondes avec la surveillance des services universels.
-title: Configuration de la surveillance des services universels.
+  text: Signaux d'or en quelques secondes avec la surveillance des services universels
+title: Configuration de la surveillance des services universels
 ---
 ## Versions prises en charge et compatibilité
 
@@ -28,20 +28,20 @@ Protocoles de couche application pris en charge
 HTTPS (OpenSSL)
 
 Limitations connues
-: La surveillance des services universels nécessite l'utilisation de `system-probe`Datadog, qui n'est pas pris en charge sur Google Kubernetes Engine (GKE) Autopilot.
+: La surveillance des services universels nécessite l'utilisation de `system-probe`Datadog's, qui n'est pas pris en charge sur Google Kubernetes Engine (GKE) Autopilot.
 
 <div class="alert alert-info">
-Des protocoles supplémentaires et des méthodes de cryptage du trafic sont en <a href="/universal_service_monitoring/additional_protocols/">aperçu</a>. Si vous avez des retours concernant les plateformes et protocoles que vous aimeriez voir pris en charge, <a href="/help/">contactez le support</a>.
+Des protocoles supplémentaires et des méthodes de cryptage du trafic sont en <a href="/universal_service_monitoring/additional_protocols/">Aperçu</a>. Si vous avez des retours concernant les plateformes et protocoles que vous aimeriez voir pris en charge, <a href="/help/">contactez le support</a>.
 </div>
 
 ## Prérequis
 
 - Si vous êtes sur Linux :
     - Votre service s'exécute dans un conteneur.
-    - **Dans l'aperçu :** Pour les services non conteneurisés, consultez les [instructions ici](#additional-configuration).
+    - **En aperçu :** Pour les services non conteneurisés, consultez les [instructions ici](#additional-configuration).
 - Si vous êtes sur Windows :
     - Votre service s'exécute sur une machine virtuelle.
-- L'Agent Datadog est installé aux côtés de votre service. L'installation d'une bibliothèque de traçage n'est _pas_ requise.
+- L'Agent Datadog est installé aux côtés de votre service. L'installation d'une bibliothèque de traçage _n'est_ pas requise.
 - Le `env` tag pour [Tagging de Service Unifié][1] a été appliqué à votre déploiement. Les tags `service` et `version` sont optionnels.
 
 ## Comment USM détecte les noms de service
@@ -54,7 +54,7 @@ USM reconnaît les variables d'environnement suivantes :
 - `DD_SERVICE` : Définit explicitement le nom du service
 - `DD_ENV` : Définit le tag d'environnement
 - `DD_VERSION` : Définit le tag de version
-- `DD_TAGS` : Tags supplémentaires ; peut inclure le tag `service:name`
+- `DD_TAGS` : Tags supplémentaires ; peut inclure le `service:name` tag
 
 ### Limitation clé : USM et les variables d'environnement définies par programme pour APM
 
@@ -479,7 +479,7 @@ service_monitoring_config:
 {{% /tab %}}
 {{% tab "Variables d'environnement (Linux)" %}}
 
-Si vous configurez le `system-probe` avec des variables d'environnement, comme c'est courant avec les installations Docker et ECS, passez la variable d'environnement suivante à **à la fois** pour le `process-agent` et le `system-probe` :
+Si vous configurez le `system-probe` avec des variables d'environnement, comme c'est courant avec les installations Docker et ECS, passez la variable d'environnement suivante à **les** `process-agent` et `system-probe` :
 
 ```yaml
 DD_SYSTEM_PROBE_SERVICE_MONITORING_ENABLED=true
@@ -824,10 +824,10 @@ Les systèmes ou services suivants nécessitent une configuration supplémentair
 
 {{< collapse-content title="Services non conteneurisés sur Linux" level="h4" >}}
 <div class="alert alert-info">
-La surveillance des services universels est disponible pour surveiller les services fonctionnant en bare-metal sur des machines virtuelles Linux.
+La surveillance des services universels est disponible pour surveiller les services fonctionnant sur des machines virtuelles Linux bare-metal.
 </div>
 
-Nécessite la version 7.42 ou supérieure de l'Agent.
+Nécessite la version 7.42 ou supérieure de l'agent.
 
 {{< tabs >}}
 {{% tab "Fichier de configuration" %}}
@@ -854,14 +854,14 @@ DD_SYSTEM_PROBE_PROCESS_SERVICE_INFERENCE_ENABLED=true
 
 {{< collapse-content title="Surveillance TLS Go" level="h4" >}}
 <div class="alert alert-info">
-La surveillance des services universels est en Preview pour surveiller le trafic chiffré TLS des services implémentés en Golang.
+La surveillance des services universels est en aperçu pour surveiller le trafic chiffré TLS des services implémentés en Golang.
 </div>
 
 <strong>Remarque</strong> :
 <br>
 <ul role="list">
-  <li>Les serveurs HTTPS Go peuvent mettre à niveau le protocole HTTP1.1 vers HTTP/2, qui est pris en charge en Preview. Contactez votre responsable de compte pour plus de détails.</li>
-  <li>Nécessite la version 7.51 ou supérieure de l'Agent.</li>
+  <li>Les serveurs HTTPS Go peuvent mettre à niveau le protocole HTTP1.1 vers HTTP/2, qui est pris en charge en aperçu. Contactez votre responsable de compte pour plus de détails.</li>
+  <li>Nécessite la version 7.51 ou supérieure de l'agent.</li>
 </ul>
 
 {{< tabs >}}
@@ -1145,7 +1145,7 @@ agents:
 {{< /tabs >}}
 
 
-<div class="alert alert-info"><strong>Prise en charge de protocoles supplémentaires et de méthodes de cryptage</strong><p>USM est en aperçu pour découvrir des services cloud et décoder des protocoles supplémentaires ainsi que des méthodes de cryptage de trafic. Pour plus d'informations et pour demander l'accès à l'aperçu, lisez <a href="/universal_service_monitoring/additional_protocols/">Découverte de services cloud et protocoles supplémentaires</a>.</p></div>
+<div class="alert alert-info"><strong>Support pour des protocoles supplémentaires et des méthodes de cryptage</strong><p>USM est en aperçu pour découvrir des services cloud et décoder des protocoles supplémentaires ainsi que des méthodes de cryptage de trafic. Pour plus d'informations et pour demander l'accès à l'aperçu, lisez <a href="/universal_service_monitoring/additional_protocols/">Découverte de services cloud et protocoles supplémentaires</a>.</p></div>
 
 
 ## Lectures complémentaires
