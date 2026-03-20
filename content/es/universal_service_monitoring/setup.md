@@ -41,12 +41,12 @@ Protocolos adicionales y métodos de cifrado de tráfico están en <a href="/uni
 - Si está en Windows:
     - Su servicio se está ejecutando en una máquina virtual.
 - El Agente de Datadog está instalado junto a su servicio. Instalar una biblioteca de trazado _no_ es obligatorio.
-- La `env` etiqueta para [Etiquetado Unificado de Servicios][1] se ha aplicado a su implementación. Las etiquetas `service` y `version` son opcionales.
+- La `env` etiqueta para [Etiquetado de Servicio Unificado][1] se ha aplicado a su implementación. Las etiquetas `service` y `version` son opcionales.
 
-## Cómo USM detecta nombres de servicios
+## Cómo USM detecta nombres de servicio
 
 <div class="alert alert-warning">
-La Monitoreo Universal de Servicios detecta nombres de servicios a partir de variables de entorno que existen cuando un proceso se inicia. USM lee estos valores del sistema operativo: desde <code>/proc/PID/environ</code> en Linux, o a través de APIs del sistema en Windows.
+La Monitoreo de Servicio Universal detecta nombres de servicio a partir de variables de entorno que existen cuando un proceso se inicia. USM lee estos valores del sistema operativo: desde <code>/proc/PID/environ</code> en Linux, o a través de APIs del sistema en Windows.
 </div>
 
 USM reconoce las siguientes variables de entorno:
@@ -764,7 +764,7 @@ Para soporte opcional de HTTPS, también agrega:
 
 Si utilizas balanceadores de carga con tus servicios, habilita integraciones adicionales en la nube para permitir que el Monitoreo de Servicio Universal descubra entidades gestionadas en la nube:
 
-1. Instala la [Integración de AWS][2] para visibilidad en el Balanceador de Carga de AWS.
+1. Instala la [Integración de AWS][2] para visibilidad en AWS Load Balancer.
 2. Habilita la recolección de métricas de ENI y EC2.
 3. Agregue las siguientes etiquetas a cada equilibrador de carga:
    ```conf

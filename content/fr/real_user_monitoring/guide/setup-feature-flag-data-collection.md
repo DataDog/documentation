@@ -15,9 +15,9 @@ further_reading:
 title: Commencer avec les données de drapeaux de fonctionnalités dans RUM
 ---
 ## Aperçu
-Les données des drapeaux de fonctionnalités vous offrent une meilleure visibilité sur l'expérience utilisateur et le suivi des performances en vous permettant de déterminer quels utilisateurs se voient présenter une fonctionnalité spécifique et si tout changement que vous introduisez impacte votre expérience utilisateur ou affecte négativement les performances.
+Les données des drapeaux de fonctionnalités vous offrent une meilleure visibilité sur l'expérience utilisateur et le suivi des performances en vous permettant de déterminer quels utilisateurs se voient montrer une fonctionnalité spécifique et si tout changement que vous introduisez impacte votre expérience utilisateur ou affecte négativement les performances.
 
-Enrichissant vos données RUM avec des données de drapeaux de fonctionnalités, vous pouvez être sûr que votre fonctionnalité se lance avec succès sans causer involontairement un bug ou une régression de performance. Avec cette couche supplémentaire d'informations, vous pouvez corréler les versions de fonctionnalités avec les performances, identifier les problèmes liés à des versions spécifiques et résoudre les problèmes plus rapidement.
+En enrichissant vos données RUM avec des données de drapeaux de fonctionnalités, vous pouvez être sûr que votre fonctionnalité se lance avec succès sans causer involontairement un bug ou une régression de performance. Avec cette couche supplémentaire d'informations, vous pouvez corréler les versions de fonctionnalités avec les performances, identifier les problèmes liés à des versions spécifiques et résoudre les problèmes plus rapidement.
 
 ## Configuration
 
@@ -322,7 +322,7 @@ Pour plus d'informations sur l'initialisation du SDK React de ConfigCat, consult
 {{% /tab %}}
 {{< /tabs >}}
 
-### Gestion personnalisée des drapeaux de fonctionnalité
+### Gestion des drapeaux de fonctionnalité personnalisés
 
 {{< tabs >}}
 {{% tab "Navigateur" %}}
@@ -371,7 +371,7 @@ Chaque fois qu'un drapeau de fonctionnalité est évalué, ajoutez la fonction s
 {{% /tab %}}
 {{< /tabs >}}
 
-### Intégration DevCycle
+### Intégration de DevCycle
 
 {{< tabs >}}
 {{% tab "Navigateur" %}}
@@ -432,7 +432,7 @@ DevCycle ne prend pas en charge cette intégration. Créez un ticket avec DevCyc
 {{% /tab %}}
 {{< /tabs >}}
 
-### Intégration Eppo
+### Intégration d'Eppo
 
 {{< tabs >}}
 {{% tab "Navigateur" %}}
@@ -529,7 +529,7 @@ await eppoInit({
 {{% /tab %}}
 {{< /tabs >}}
 
-### Intégration Flagsmith
+### Intégration de Flagsmith
 
 {{< tabs >}}
 {{% tab "Navigateur" %}}
@@ -803,7 +803,7 @@ const client = factory.client();
 {{% /tab %}}
 {{% tab "iOS" %}}
 
-Initialisez le SDK de Split et créez une fonctionnalité d'inspection signalant les évaluations des drapeaux de fonctionnalités à Datadog en utilisant l'extrait de code ci-dessous.
+Initialisez le SDK de Split et créez un inspecteur signalant les évaluations des drapeaux de fonctionnalités à Datadog en utilisant l'extrait de code ci-dessous.
 
 Pour plus d'informations sur l'initialisation du SDK de Split, consultez la [documentation du SDK iOS de Split][1].
 
@@ -823,7 +823,7 @@ Pour plus d'informations sur l'initialisation du SDK de Split, consultez la [doc
 {{% /tab %}}
 {{% tab "Android" %}}
 
-Initialisez le SDK de Split et créez une fonctionnalité d'inspection signalant les évaluations des drapeaux de fonctionnalités à Datadog en utilisant l'extrait de code ci-dessous.
+Initialisez le SDK de Split et créez un inspecteur signalant les évaluations des drapeaux de fonctionnalités à Datadog en utilisant l'extrait de code ci-dessous.
 
 Pour plus d'informations sur l'initialisation du SDK de Split, consultez la [documentation du SDK Android de Split][1].
 
@@ -852,7 +852,7 @@ val config = SplitClientConfig.builder()
 {{% /tab %}}
 {{% tab "Flutter" %}}
 
-Initialisez le SDK de Split et créez une fonctionnalité d'inspection signalant les évaluations des drapeaux de fonctionnalités à Datadog en utilisant l'extrait de code ci-dessous.
+Initialisez le SDK de Split et créez un inspecteur signalant les évaluations des drapeaux de fonctionnalités à Datadog en utilisant l'extrait de code ci-dessous.
 
 Pour plus d'informations sur l'initialisation du SDK de Split, consultez la [documentation du plugin Flutter de Split][1].
 
@@ -949,12 +949,12 @@ Statsig ne prend actuellement pas en charge cette intégration. Contactez suppor
 
 ## Analysez la performance de votre Feature Flag dans RUM
 
-Les Feature Flags apparaissent dans le contexte de vos sessions RUM, vues et erreurs sous forme de liste.
+Les Feature Flags apparaissent dans le contexte de vos Sessions RUM, Vues et Erreurs sous forme de liste.
 
 {{< img src="real_user_monitoring/guide/setup-feature-flag-data-collection/feature-flag-list-rum-event.png" alt="Liste des attributs des Feature Flags dans RUM Explorer" style="width:75%;">}}
 
 ### Recherchez des Feature Flags en utilisant RUM Explorer
-Parcourez toutes les données collectées par RUM dans le [RUM Explorer][2] pour faire ressortir les tendances sur les Feature Flags, analyser les modèles avec un contexte plus large, ou les exporter vers des [tableaux de bord][3] et des [moniteurs][4]. Vous pouvez rechercher vos sessions, vues ou erreurs dans RUM Explorer, avec l'attribut `@feature_flags.{flag_name}`.
+Parcourez toutes les données collectées par RUM dans le [RUM Explorer][2] pour faire ressortir les tendances sur les Feature Flags, analyser les modèles avec un contexte plus large, ou les exporter vers des [tableaux de bord][3] et des [moniteurs][4]. Vous pouvez rechercher vos Sessions, Vues ou Erreurs dans RUM Explorer, avec l'attribut `@feature_flags.{flag_name}`.
 
 #### Sessions
 En filtrant vos **Sessions** avec l'attribut `@feature_flags.{flag_name}`, vous pouvez trouver toutes les sessions dans la période donnée où votre Feature Flag a été évalué.
@@ -967,7 +967,7 @@ En filtrant vos **Vues** avec l'attribut `@feature_flags.{flag_name}`, vous pouv
 {{< img src="real_user_monitoring/guide/setup-feature-flag-data-collection/rum-explorer-view-feature-flag-search.png" alt="Recherchez des Vues pour des Feature Flags dans RUM Explorer" style="width:75%;">}}
 
 #### Erreurs
-En filtrant vos **Erreurs** avec l'attribut `@feature_flags.{flag_name}`, vous pouvez trouver toutes les erreurs dans la période donnée qui se sont produites sur la vue où votre Feature Flag a été évalué.
+En filtrant vos **Erreurs** avec l'attribut `@feature_flags.{flag_name}`, vous pouvez trouver toutes les erreurs dans la période donnée qui se sont produites sur la Vue où votre Feature Flag a été évalué.
 
 {{< img src="real_user_monitoring/guide/setup-feature-flag-data-collection/rum-explorer-error-feature-flag-search.png" alt="Recherchez des Erreurs pour des Feature Flags dans RUM Explorer" style="width:75%;">}}
 
@@ -976,18 +976,18 @@ En filtrant vos **Erreurs** avec l'attribut `@feature_flags.{flag_name}`, vous p
 ### Mes données de Feature Flag ne reflètent pas ce que je m'attends à voir
 Les Feature Flags apparaissent dans le contexte des événements où ils sont évalués, ce qui signifie qu'ils devraient apparaître sur les vues sur lesquelles la logique du code du Feature Flag est exécutée.
 
-En fonction de la manière dont vous avez structuré votre code et configuré vos Feature Flags, vous pourriez voir des Feature Flags inattendus apparaître dans le contexte de certains événements.
+En fonction de la façon dont vous avez structuré votre code et configuré vos Feature Flags, vous pouvez voir des Feature Flags inattendus apparaître dans le contexte de certains événements.
 
 Par exemple, pour voir sur quelles **Vues** votre drapeau de fonctionnalité est évalué, vous pouvez utiliser l'Explorateur RUM pour effectuer une requête similaire :
 
 {{< img src="real_user_monitoring/guide/setup-feature-flag-data-collection/feature_flag_view_query.png" alt="Recherchez des Vues pour des Feature Flags dans RUM Explorer" style="width:75%;">}}
 
-Voici quelques exemples de raisons pour lesquelles votre drapeau de fonctionnalité est évalué sur des Vues non liées qui peuvent aider dans vos investigations :
+Voici quelques exemples de raisons pour lesquelles votre drapeau de fonctionnalité est évalué sur des Vues non liées qui peuvent aider dans vos enquêtes :
 
-- Un composant React commun qui apparaît sur plusieurs pages et qui évalue les drapeaux de fonctionnalité chaque fois qu'ils s'exécutent.
+- Un composant React commun qui apparaît sur plusieurs pages et qui évalue les drapeaux de fonctionnalité chaque fois qu'il s'exécute.
 - Un problème de routage où les composants avec une évaluation de drapeau de fonctionnalité sont rendus avant/après les changements d'URL.
 
-Lors de vos investigations, vous pouvez également limiter vos données aux `View Name` pertinents pour votre drapeau de fonctionnalité.
+Lors de vos enquêtes, vous pouvez également limiter vos données aux `View Name` pertinents pour votre drapeau de fonctionnalité.
 
 
 ## Lectures complémentaires

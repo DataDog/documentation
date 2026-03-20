@@ -7,22 +7,22 @@ aliases:
 further_reading:
 - link: /llm_observability/instrumentation/sdk/
   tag: Documentation
-  text: Referencia del SDK de Observabilidad de LLM
+  text: Referencia del SDK de Observabilidad LLM
 - link: https://www.datadoghq.com/blog/llm-prompt-tracking
   tag: Blog
-  text: Rastree, compare y optimice sus prompts de LLM con la Observabilidad de LLM
-    de Datadog
+  text: Rastree, compare y optimice sus prompts de LLM con la Observabilidad LLM de
+    Datadog
 - link: https://www.datadoghq.com/blog/mcp-client-monitoring
   tag: Blog
   text: Obtenga visibilidad de extremo a extremo en los clientes de MCP con la Observabilidad
-    de LLM de Datadog
-title: Instrumentación automática para la Observabilidad de LLM
+    LLM de Datadog
+title: Instrumentación automática para la Observabilidad LLM
 ---
 ## Resumen
 
-La Observabilidad de LLM de Datadog puede rastrear y anotar automáticamente las llamadas a los marcos y bibliotecas de LLM compatibles a través de varias [integraciones de LLM](#llm-integrations). Cuando [ejecute su aplicación de LLM con el SDK de Observabilidad de LLM][2], estas integraciones de LLM están habilitadas por defecto y proporcionan trazas y observabilidad listas para usar, sin que tenga que cambiar su código.
+La Observabilidad LLM de Datadog puede rastrear y anotar automáticamente las llamadas a los marcos y bibliotecas de LLM compatibles a través de varias [integraciones de LLM](#llm-integrations). Cuando [ejecute su aplicación LLM con el SDK de Observabilidad LLM][2], estas integraciones de LLM están habilitadas por defecto y proporcionan trazas y observabilidad listas para usar, sin que tenga que cambiar su código.
 
-<div class="alert alert-info">La instrumentación automática funciona para llamadas a <a href="#supported-frameworks-and-libraries">marcos y bibliotecas compatibles</a>. Para rastrear otras llamadas (por ejemplo: llamadas a API, consultas a bases de datos, funciones internas), consulte la <a href="/llm_observability/instrumentation/sdk">referencia del SDK de Observabilidad de LLM</a> para saber cómo agregar instrumentación manual.</div>
+<div class="alert alert-info">La instrumentación automática funciona para llamadas a <a href="#supported-frameworks-and-libraries">marcos y bibliotecas compatibles</a>. Para rastrear otras llamadas (por ejemplo: llamadas a API, consultas a bases de datos, funciones internas), consulte la <a href="/llm_observability/instrumentation/sdk">referencia del SDK de Observabilidad LLM</a> para saber cómo agregar instrumentación manual.</div>
 
 
 ### Marcos y bibliotecas compatibles
@@ -177,7 +177,7 @@ module.exports = {
 {{% /tab %}}
 {{< /tabs >}}
 
-<div class="alert alert-info">La observabilidad de LLM de Datadog también admite cualquier marco que emita nativamente spans compatibles con la convención semántica de OpenTelemetry GenAI v1.37+</a>, sin requerir el rastreador de Datadog. Vea <a href="/llm_observability/instrumentation/otel_instrumentation">Instrumentación de OpenTelemetry</a> para más detalles.</div>
+<div class="alert alert-info">La observabilidad de LLM de Datadog también admite cualquier marco que emita nativamente spans compatibles con la convención semántica de OpenTelemetry GenAI v1.37+</a>, sin requerir el rastreador de Datadog. Consulte <a href="/llm_observability/instrumentation/otel_instrumentation">Instrumentación de OpenTelemetry</a> para más detalles.</div>
 
 ## Integraciones de LLM
 
@@ -307,14 +307,14 @@ La integración de CrewAI instrumenta los siguientes métodos:
   - `crew.kickoff_for_each()`
   - `crew.kickoff_for_each_async()`
 
-- [Ejecución de Tarea][4]:
+- [Ejecución de Tareas][4]:
   - `task.execute_sync()`
   - `task.execute_async()`
 
-- [Ejecución de Agente][5]:
+- [Ejecución de Agentes][5]:
   - `agent.execute_task()`
 
-- [Invocación de Herramienta][6]:
+- [Invocación de Herramientas][6]:
   - `tool.invoke()`
 
 [1]: /es/integrations/crewai
@@ -364,7 +364,7 @@ La integración de Google GenAI instrumenta los siguientes métodos:
 - [Generando contenido][2] (incluyendo llamadas transmitidas):
   - `models.generate_content()` (También captura `chat.send_message()`)
   - `aio.models.generate_content()` (También captura `aio.chat.send_message()`)
-- [Incorporando contenido][3]
+- [Incrustando contenido][3]
   -`models.embed_content()`
   -`aio.models.embed_content()`
 
@@ -382,7 +382,7 @@ La integración de Google GenAI rastrea automáticamente los métodos en el [Goo
 La integración de Google GenAI instrumenta los siguientes métodos:
 
 - [Generando contenido][2] (incluyendo [llamadas transmitidas][5])
-- [Incorporando contenido][3]
+- [Incrustando contenido][3]
 
 [1]: https://ai.google.dev/gemini-api/docs#javascript
 [2]: https://ai.google.dev/api/generate-content#text_gen_text_only_prompt-JAVASCRIPT
@@ -423,7 +423,7 @@ La integración de LangChain instrumenta los siguientes métodos:
 - [Plantillas de Prompt][9]
   - `BasePromptTemplate.invoke()`, `BasePromptTemplate.ainvoke()`
 
-  <div class="alert alert-info">Para obtener los mejores resultados, asigna plantillas a variables con nombres significativos. La instrumentación automática utiliza estos nombres para identificar los mensajes.</div>
+  <div class="alert alert-info">Para obtener los mejores resultados, asigne plantillas a variables con nombres significativos. La instrumentación automática utiliza estos nombres para identificar los mensajes.</div>
 
   ```python
   # "translation_template" will be used to identify the template in Datadog
@@ -522,16 +522,16 @@ La integración de LiteLLM instrumenta los siguientes métodos:
 {{% collapse-content title="MCP" level="h3" expanded=false id="mcp" %}}
 {{< tabs >}}
 {{% tab "Python" %}}
-La integración del Protocolo de Contexto del Modelo (MCP) instrumenta las llamadas de herramientas del cliente y del servidor en el [MCP][1] SDK.
+La integración del Protocolo de Contexto del Modelo (MCP) instrumenta llamadas de herramientas del cliente y del servidor en el [MCP][1] SDK.
 
 ### Métodos rastreados
 
 Los instrumentos de integración de MCP los siguientes métodos:
 
-- [Llamadas a herramientas del cliente][2]:
+- [Llamadas de Herramientas del Cliente][2]:
   - `mcp.client.session.ClientSession.call_tool`
 
-- [Llamadas a herramientas del servidor][3]:
+- [Llamadas de Herramientas del Servidor][3]:
   - `mcp.server.fastmcp.tools.tool_manager.ToolManager.call_tool`
 
 [1]: https://modelcontextprotocol.io/docs/getting-started/intro
@@ -544,7 +544,7 @@ Los instrumentos de integración de MCP los siguientes métodos:
 {{% collapse-content title="OpenAI, Azure OpenAI" level="h3" expanded=false id="openai" %}}
 {{< tabs >}}
 {{% tab "Python" %}}
-La [integración de OpenAI][1] proporciona trazado automático para los [puntos finales de finalización y chat del SDK de Python de OpenAI][2] hacia OpenAI y Azure OpenAI.
+La [integración de OpenAI][1] proporciona trazado automático para los [puntos finales de finalización y chat del OpenAI Python SDK][2] hacia OpenAI y Azure OpenAI.
 
 ### Métodos rastreados
 
@@ -561,7 +561,7 @@ La integración de OpenAI instrumenta los siguientes métodos, incluyendo llamad
    - `AsyncOpenAI().responses.create()`
    - `OpenAI().responses.parse()` (a partir de `ddtrace==3.17.0`)
    - `AsyncOpenAI().responses.parse()` (a partir de `ddtrace==3.17.0`)
-- [Llamadas realizadas a DeepSeek a través del SDK de Python de OpenAI][6] (a partir de `ddtrace==3.1.0`)
+- [Llamadas realizadas a DeepSeek a través del OpenAI Python SDK][6] (a partir de `ddtrace==3.1.0`)
 
 [1]: /es/integrations/openai/
 [2]: https://platform.openai.com/docs/api-reference/introduction
@@ -573,7 +573,7 @@ La integración de OpenAI instrumenta los siguientes métodos, incluyendo llamad
 {{% /tab %}}
 
 {{% tab "Node.js" %}}
-La [integración de OpenAI][1] proporciona trazado automático para los [puntos finales de finalización, chat y embeddings del SDK de Node.js de OpenAI][2] hacia OpenAI y [Azure OpenAI][3].
+La [integración de OpenAI][1] proporciona trazado automático para los [puntos finales de finalización, chat y embeddings del OpenAI Node.js SDK][2] hacia OpenAI y [Azure OpenAI][3].
 
 ### Métodos rastreados
 
@@ -899,11 +899,11 @@ tracer.use('langchain', true);
 Para un control más específico sobre el parcheo de bibliotecas y la integración que inicia el span, puedes establecer las siguientes variables de entorno:
 
 `DD_TRACE_DISABLED_PLUGINS`
-: Una cadena separada por comas de nombres de integraciones que se desactivan automáticamente cuando se inicializa el tracer.<br>
+: Una cadena separada por comas de nombres de integraciones que se desactivan automáticamente cuando se inicializa el rastreador.<br>
 **Ejemplo**: `DD_TRACE_DISABLED_PLUGINS=openai,http`
 
 `DD_TRACE_DISABLED_INSTRUMENTATIONS`
-: Una cadena separada por comas de nombres de bibliotecas que no se parchean cuando se inicializa el tracer.<br>
+: Una cadena separada por comas de nombres de bibliotecas que no se parchean cuando se inicializa el rastreador.<br>
 **Ejemplo**: `DD_TRACE_DISABLED_INSTRUMENTATIONS=openai,http`
 
 ## Lectura Adicional

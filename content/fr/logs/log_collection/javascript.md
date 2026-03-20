@@ -6,9 +6,9 @@ aliases:
 - /fr/logs/log_collection/web_browser
 title: Collecte des journaux du navigateur
 ---
-Envoyez des journaux à Datadog depuis les pages du navigateur avec le SDK des journaux du navigateur.
+Envoyez des journaux à Datadog depuis les pages du navigateur web avec le SDK des journaux du navigateur.
 
-Avec le SDK des journaux du navigateur, vous pouvez envoyer des journaux directement à Datadog depuis les pages du navigateur et tirer parti des fonctionnalités suivantes :
+Avec le SDK des journaux du navigateur, vous pouvez envoyer des journaux directement à Datadog depuis les pages du navigateur web et tirer parti des fonctionnalités suivantes :
 
 - Utilisez le SDK comme un logger. Tout est transféré à Datadog sous forme de documents JSON.
 - Ajoutez `context` et des attributs personnalisés supplémentaires à chaque journal envoyé.
@@ -351,7 +351,7 @@ window.DD_LOGS && window.DD_LOGS.logger.info('Button clicked', { name: 'buttonNa
 
 #### Résultats
 
-Les résultats sont les mêmes que ce soit en utilisant NPM, CDN asynchrone ou CDN synchrone :
+Les résultats sont les mêmes que ce soit avec NPM, CDN asynchrone ou CDN synchrone :
 
 ```json
 {
@@ -451,7 +451,7 @@ try {
 
 #### Résultats
 
-Les résultats sont les mêmes que ce soit en utilisant NPM, CDN asynchrone ou CDN synchrone :
+Les résultats sont les mêmes que ce soit avec NPM, CDN asynchrone ou CDN synchrone :
 
 ```json
 {
@@ -524,7 +524,7 @@ Les espaces réservés dans les exemples ci-dessus sont décrits ci-dessous :
 
 ### Supprimez les données sensibles de vos journaux de navigateur
 
-Si vos journaux de navigateur contiennent des informations sensibles qui doivent être supprimées, configurez le SDK du navigateur pour supprimer les séquences sensibles en utilisant le `beforeSend` rappel lors de l'initialisation du collecteur de journaux du navigateur.
+Si vos journaux de navigateur contiennent des informations sensibles à masquer, configurez le SDK du navigateur pour supprimer les séquences sensibles en utilisant le `beforeSend` rappel lors de l'initialisation du Collecteur de journaux du navigateur.
 
 La fonction de rappel `beforeSend` peut être invoquée avec deux arguments : l'événement `log` et `context`. Cette fonction vous donne accès à chaque journal collecté par le SDK du navigateur avant qu'il ne soit envoyé à Datadog, et vous permet d'utiliser le contexte pour ajuster les propriétés de tout journal. Le contexte contient des informations supplémentaires liées à l'événement, mais pas nécessairement incluses dans l'événement. Vous pouvez généralement utiliser ces informations pour [enrichir][11] votre événement ou [le supprimer][12].
 
@@ -539,7 +539,7 @@ Les valeurs potentielles `context` sont :
 | `isAborted` | Booléen | Pour les événements de journal réseau, cette propriété vous indique si la requête échouée a été annulée par l'application, auquel cas vous pourriez ne pas vouloir envoyer cet événement car il peut avoir été intentionnellement annulé. |
 | `handlingStack` | Chaîne | Une trace de pile de l'endroit où l'événement de journal a été traité. Cela peut être utilisé pour identifier de quel [micro-frontend][9] le journal a été envoyé. |
 
-Pour supprimer les adresses e-mail de vos URL d'application web :
+Pour masquer les adresses e-mail de vos URL d'application web :
 
 {{< tabs >}}
 {{% tab "NPM" %}}
@@ -607,9 +607,9 @@ Les propriétés suivantes sont automatiquement collectées par le SDK et pourra
 
 ### Supprimer des journaux spécifiques
 
-La fonction de rappel `beforeSend` vous permet également de supprimer un journal avant qu'il ne soit envoyé à Datadog.
+La fonction de rappel `beforeSend` vous permet également de rejeter un journal avant qu'il ne soit envoyé à Datadog.
 
-Pour supprimer les erreurs réseau si leur statut est 404 :
+Pour rejeter les erreurs réseau si leur statut est 404 :
 
 {{< tabs >}}
 {{% tab "NPM" %}}
@@ -1072,7 +1072,7 @@ Par défaut, les contextes sont stockés dans la mémoire de la page actuelle, c
 
 Pour les ajouter à tous les événements de la session, ils doivent être attachés à chaque page.
 
-Avec l'introduction de l'option de configuration `storeContextsAcrossPages` dans la version 4.49.0 du SDK du navigateur, ces contextes peuvent être stockés dans [`localStorage`][9], permettant les comportements suivants :
+Avec l'introduction de l'option de configuration `storeContextsAcrossPages` dans la version v4.49.0 du SDK du navigateur, ces contextes peuvent être stockés dans [`localStorage`][9], permettant les comportements suivants :
 
 - Les contextes sont préservés après un rechargement complet
 - Les contextes sont synchronisés entre les onglets ouverts sur la même origine
@@ -1224,19 +1224,19 @@ window.DD_LOGS && window.DD_LOGS.logger.setHandler(['<HANDLER1>', '<HANDLER2>'])
 
 ### Consentement au suivi des utilisateurs
 
-Pour être conforme au RGPD, CCPA et à des réglementations similaires, le SDK des journaux du navigateur vous permet de fournir la valeur de consentement au suivi lors de l'initialisation.
+Pour être conforme au RGPD, CCPA et à des réglementations similaires, le SDK du navigateur des journaux vous permet de fournir la valeur de consentement au suivi lors de l'initialisation.
 
 Le paramètre d'initialisation `trackingConsent` peut être l'une des valeurs suivantes :
 
-1. `"granted"` : Le SDK des journaux du navigateur commence à collecter des données et les envoie à Datadog.
-2. `"not-granted"` : Le SDK des journaux du navigateur ne collecte aucune donnée.
+1. `"granted"` : Le SDK du navigateur des journaux commence à collecter des données et les envoie à Datadog.
+2. `"not-granted"` : Le SDK du navigateur des journaux ne collecte aucune donnée.
 
 Pour changer la valeur de consentement au suivi après l'initialisation du SDK des journaux du navigateur, utilisez l'appel API `setTrackingConsent()`. Le SDK des journaux du navigateur change son comportement en fonction de la nouvelle valeur :
 
-- lorsqu'il est changé de `"granted"` à `"not-granted"`, la session de journaux est arrêtée et les données ne sont plus envoyées à Datadog.
+- lorsqu'il est changé de `"granted"` à `"not-granted"`, la session de journaux est arrêtée, et les données ne sont plus envoyées à Datadog.
 - lorsqu'il est changé de `"not-granted"` à `"granted"`, une nouvelle session de journaux est créée si aucune session précédente n'est active, et la collecte de données reprend.
 
-Cet état n'est pas synchronisé entre les onglets ni conservé entre les navigations. Il est de votre responsabilité de fournir la décision de l'utilisateur lors de l'initialisation du SDK Logs Browser ou en utilisant `setTrackingConsent()`.
+Cet état n'est pas synchronisé entre les onglets ni persistant entre les navigations. Il est de votre responsabilité de fournir la décision de l'utilisateur lors de l'initialisation du SDK Logs Browser ou en utilisant `setTrackingConsent()`.
 
 Lorsque `setTrackingConsent()` est utilisé avant `init()`, la valeur fournie prend le pas sur le paramètre d'initialisation.
 
@@ -1293,7 +1293,7 @@ acceptCookieBannerButton.addEventListener('click', () => {
 
 ### Accéder au contexte interne
 
-Après l'initialisation du SDK de journaux du navigateur Datadog, vous pouvez accéder au contexte interne du SDK. Cela vous permet d'accéder au `session_id`.
+Après l'initialisation du SDK des journaux du navigateur Datadog, vous pouvez accéder au contexte interne du SDK. Cela vous permet d'accéder au `session_id`.
 
 ```typescript
 getInternalContext (startTime?: 'number' | undefined)

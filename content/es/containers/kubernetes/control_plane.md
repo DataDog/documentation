@@ -321,7 +321,7 @@ scheduler:
 
 ### Método recomendado
 
-<div class="alert alert-info">Esta función está en vista previa.</div>
+<div class="alert alert-info"> Esta función está en vista previa.</div>
 
 Datadog admite la supervisión de los componentes del plano de control de Kubernetes, incluidos el Servidor API, el Controlador Manager y el Scheduler.
 
@@ -403,7 +403,7 @@ Amazon Elastic Kubernetes Service (EKS) admite la supervisión de todos los comp
 - Un clúster de EKS ejecutándose en la versión de Kubernetes >= 1.28
 - Despliega el Agente utilizando uno de:
   - Versión del gráfico de Helm >= `3.90.1`
-  - Datadog Operator >= `v1.13.0`
+  - Operador de Datadog >= `v1.13.0`
 - Habilita el [Agente de Clúster de Datadog][6]
 
 Agrega las siguientes anotaciones al servicio `default/kubernetes`:
@@ -455,7 +455,7 @@ annotations:
 
 ## Kubernetes en OpenShift 4 {#OpenShift4}
 
-<div class="alert alert-info">Esta función está en vista previa.</div>
+<div class="alert alert-info"> Esta función está en vista previa.</div>
 
 Datadog admite la supervisión de los componentes del plano de control de Kubernetes, incluidos el servidor API, etcd, el administrador de controladores y el programador.
 
@@ -567,8 +567,8 @@ En OpenShift 4, todos los componentes del plano de control se pueden supervisar 
 #### Requisitos previos
 
 1. Habilite el [Agente de Clúster de Datadog][6]
-1. Habilite [Verificaciones de Clúster][7]
-1. Habilite [Verificaciones de Punto Final][8]
+1. Habilite [verificaciones de clúster][7]
+1. Habilite [verificaciones de punto final][8]
 1. Asegúrese de haber iniciado sesión con permisos suficientes para editar servicios y crear secretos.
 
 #### Servidor API
@@ -599,7 +599,7 @@ oc get secret kube-etcd-client-certs -n openshift-monitoring -o yaml | sed 's/na
 
 ```
 
-Estos certificados deben montarse en los pods de los Ejecutores de Verificación de Clúster agregando los volúmenes y los montajes de volúmenes como se indica a continuación.
+Estos certificados deben montarse en los pods de los Ejecutores de Verificación de Clúster agregando los volúmenes y volumeMounts como se indica a continuación.
 
 **Nota**: También se incluyen montajes para deshabilitar el archivo de autoconfiguración de verificación de Etcd empaquetado con el agente.
 
@@ -679,7 +679,7 @@ Se necesitan certificados para comunicarse con el servicio Etcd, que se pueden e
 oc get secret etcd-metric-client -n openshift-etcd-operator -o yaml | sed 's/namespace: openshift-etcd-operator/namespace: <datadog agent namespace>/'  | oc create -f -
 ```
 
-Estos certificados deben montarse en los pods de los Ejecutores de Verificación de Clúster agregando los volúmenes y los montajes de volúmenes como se indica a continuación.
+Estos certificados deben montarse en los pods de los Ejecutores de Verificación de Clúster agregando los volúmenes y volumeMounts como se indica a continuación.
 
 **Nota**: También se incluyen montajes para deshabilitar el archivo de autoconfiguración de verificación de Etcd empaquetado con el agente.
 
@@ -793,7 +793,7 @@ En OpenShift 3, todos los componentes del plano de control pueden ser monitoread
 1. Habilite el [Agente de Clúster de Datadog][6]
 1. Habilitar [Verificaciones de clúster][7]
 1. Habilitar [Verificaciones de punto final][8]
-1. Asegúrese de haber iniciado sesión con permisos suficientes para crear y editar servicios.
+1. Asegúrese de que ha iniciado sesión con permisos suficientes para crear y editar servicios.
 
 ### Servidor API
 
@@ -816,7 +816,7 @@ oc exec -it <datadog cluster agent pod> -n <datadog ns> -- agent clusterchecks
 
 ### Etcd
 
-Se necesitan certificados para comunicarse con el servicio Etcd, que se encuentran en el host. Estos certificados deben montarse en los pods de los Ejecutores de Verificación de Clúster agregando los volúmenes y los montajes de volúmenes como se indica a continuación.
+Se necesitan certificados para comunicarse con el servicio Etcd, que se encuentran en el host. Estos certificados deben montarse en los pods de los Ejecutores de Verificación de Clúster agregando los volúmenes y volumeMounts como se indica a continuación.
 
 **Nota**: También se incluyen montajes para deshabilitar el archivo de autoconfiguración de verificación de Etcd empaquetado con el agente.
 

@@ -15,7 +15,7 @@ Con el SDK de registros del navegador, puedes enviar registros directamente a Da
 - Envuelve y reenvía automáticamente cada error del frontend.
 - Reenvía errores del frontend.
 - Registra direcciones IP reales de clientes y agentes de usuario.
-- Uso de red optimizado con publicaciones automáticas en bloque.
+- Uso optimizado de la red con publicaciones automáticas en bloque.
 - Usa en entornos de Worker y Service Worker.
 
 **Notas**:
@@ -532,12 +532,12 @@ La función de callback `beforeSend` se puede invocar con dos argumentos: el eve
 function beforeSend(log, context)
 ```
 
-Los valores potenciales `context` son:
+Los posibles valores `context` son:
 
 | Valor | Tipo de dato | Caso de uso |
 |-------|---------|------------|
 | `isAborted` | Boolean | Para los eventos de registro de red, esta propiedad indica si la solicitud fallida fue abortada por la aplicación, en cuyo caso es posible que no desee enviar este evento porque puede haber sido abortado intencionalmente. |
-| `handlingStack` | Cadena | Un seguimiento de pila de dónde se manejó el evento de registro. Esto se puede utilizar para identificar de qué [micro-frontend][9] se envió el registro. |
+| `handlingStack` | Cadena | Un seguimiento de pila de dónde se manejó el evento de registro. Esto se puede usar para identificar de qué [micro-frontend][9] se envió el registro. |
 
 Para redactar direcciones de correo electrónico de las URL de su aplicación web:
 
@@ -607,7 +607,7 @@ Las siguientes propiedades son recopiladas automáticamente por el SDK y podría
 
 ### Descartar registros específicos
 
-La `beforeSend` función de callback también le permite descartar un registro antes de que se envíe a Datadog.
+La función de callback `beforeSend` también le permite descartar un registro antes de que se envíe a Datadog.
 
 Para descartar errores de red si su estado es 404:
 
@@ -671,11 +671,11 @@ window.DD_LOGS &&
 {{% /tab %}}
 {{< /tabs >}}
 
-### Definir múltiples registradores
+### Define múltiples registradores
 
 El SDK de registros del navegador de Datadog contiene un registrador predeterminado, pero es posible definir diferentes registradores.
 
-#### Crear un nuevo registrador
+#### Crea un nuevo registrador
 
 Después de que el SDK de registros del navegador de Datadog esté inicializado, utiliza la API `createLogger` para definir un nuevo registrador:
 
@@ -689,7 +689,7 @@ createLogger (name: string, conf?: {
 
 **Nota**: Estos parámetros se pueden establecer con las APIs [setLevel](#filter-by-status), [setHandler](#change-the-destination) y [setContext](#overwrite-context).
 
-#### Obtener un registrador personalizado
+#### Obtén un registrador personalizado
 
 Después de la creación de un registrador, accede a él en cualquier parte de tu código JavaScript con la API:
 
@@ -712,7 +712,7 @@ datadogLogs.createLogger('signupLogger', {
 })
 ```
 
-Luego se puede usar en otra parte del código con:
+Luego se puede usar en una parte diferente del código con:
 
 ```javascript
 import { datadogLogs } from '@datadog/browser-logs'
@@ -736,7 +736,7 @@ window.DD_LOGS.onReady(function () {
 })
 ```
 
-Luego se puede usar en otra parte del código con:
+Luego se puede usar en una parte diferente del código con:
 
 ```javascript
 window.DD_LOGS.onReady(function () {
@@ -762,7 +762,7 @@ if (window.DD_LOGS) {
 }
 ```
 
-Luego se puede usar en otra parte del código con:
+Luego se puede usar en una parte diferente del código con:
 
 ```javascript
 if (window.DD_LOGS) {
@@ -783,12 +783,12 @@ if (window.DD_LOGS) {
 Después de que el SDK de registros del navegador de Datadog esté inicializado, es posible:
 
 - Establecer el contexto completo para todos tus registradores con la API `setGlobalContext (context: object)`.
-- Agregar un contexto a todos tus registradores con la API `setGlobalContextProperty (key: string, value: any)`.
-- Obtener el contexto global completo con la API `getGlobalContext ()`.
-- Eliminar la propiedad de contexto con la API `removeGlobalContextProperty (key: string)`.
-- Limpiar todas las propiedades de contexto existentes con la API `clearGlobalContext ()`.
+- Agrega un contexto a todos tus registradores con la API `setGlobalContextProperty (key: string, value: any)`.
+- Obtén el contexto global completo con la API `getGlobalContext ()`.
+- Elimina la propiedad de contexto con la API `removeGlobalContextProperty (key: string)`.
+- Limpia todas las propiedades de contexto existentes con la API `clearGlobalContext ()`.
 
-> El SDK de Log Browser v4.17.0 ha actualizado los nombres de varias APIs:
+> El SDK del Navegador de Registros v4.17.0 ha actualizado los nombres de varias APIs:
 >
 > - `getGlobalContext` en lugar de `getLoggerGlobalContext`
 > - `setGlobalContext` en lugar de `setLoggerGlobalContext`
@@ -1067,7 +1067,7 @@ window.DD_LOGS && window.DD_LOGS.getAccount() // => {}
 
 Por defecto, los contextos se almacenan en la memoria de la página actual, lo que significa que no están:
 
-- mantenidos después de una recarga completa de la página
+- guardados después de una recarga completa de la página
 - compartidos entre diferentes pestañas o ventanas de la misma sesión
 
 Para agregarlos a todos los eventos de la sesión, deben estar adjuntos a cada página.
@@ -1087,7 +1087,7 @@ Sin embargo, esta función viene con algunas **limitaciones**:
 
 Después de que se crea un registrador, es posible:
 
-- Establecer todo el contexto para su registrador con la API `setContext (context: object)`.
+- Establecer el contexto completo para su registrador con la API `setContext (context: object)`.
 - Establecer una propiedad de contexto en su registrador con la API `setContextProperty (key: string, value: any)`:
 
 {{< tabs >}}
@@ -1236,7 +1236,7 @@ Para cambiar el valor de consentimiento de seguimiento después de que se inicia
 - cuando se cambia de `"granted"` a `"not-granted"`, la sesión de registros se detiene y los datos ya no se envían a Datadog.
 - cuando se cambia de `"not-granted"` a `"granted"`, se crea una nueva sesión de registros si no hay ninguna sesión anterior activa, y la recopilación de datos se reanuda.
 
-Este estado no está sincronizado entre pestañas ni persistido entre navegaciones. Es su responsabilidad proporcionar la decisión del usuario durante la inicialización del SDK de Logs Browser o utilizando `setTrackingConsent()`.
+Este estado no se sincroniza entre pestañas ni se persiste entre navegaciones. Es su responsabilidad proporcionar la decisión del usuario durante la inicialización del SDK de Logs Browser o utilizando `setTrackingConsent()`.
 
 Cuando `setTrackingConsent()` se utiliza antes de `init()`, el valor proporcionado tiene prioridad sobre el parámetro de inicialización.
 

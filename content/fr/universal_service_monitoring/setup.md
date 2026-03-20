@@ -28,10 +28,10 @@ Protocoles de couche application pris en charge
 HTTPS (OpenSSL)
 
 Limitations connues
-: La surveillance des services universels nécessite l'utilisation de `system-probe`Datadog's, qui n'est pas pris en charge sur Google Kubernetes Engine (GKE) Autopilot.
+: La surveillance des services universels nécessite l'utilisation de `system-probe`Datadog, qui n'est pas pris en charge sur Google Kubernetes Engine (GKE) Autopilot.
 
 <div class="alert alert-info">
-Des protocoles supplémentaires et des méthodes de cryptage du trafic sont en <a href="/universal_service_monitoring/additional_protocols/">Aperçu</a>. Si vous avez des retours concernant les plateformes et protocoles que vous aimeriez voir pris en charge, <a href="/help/">contactez le support</a>.
+Des protocoles supplémentaires et des méthodes de cryptage du trafic sont en <a href="/universal_service_monitoring/additional_protocols/">aperçu</a>. Si vous avez des retours concernant les plateformes et protocoles que vous aimeriez voir pris en charge, <a href="/help/">contactez le support</a>.
 </div>
 
 ## Prérequis
@@ -41,7 +41,7 @@ Des protocoles supplémentaires et des méthodes de cryptage du trafic sont en <
     - **En aperçu :** Pour les services non conteneurisés, consultez les [ instructions ici ](#additional-configuration).
 - Si vous êtes sur Windows :
     - Votre service s'exécute sur une machine virtuelle.
-- L'Agent Datadog est installé aux côtés de votre service. L'installation d'une bibliothèque de traçage n'est _ pas _ requise.
+- L'Agent Datadog est installé aux côtés de votre service. L'installation d'une bibliothèque de traçage _ n'est _ pas requise.
 - Le `env` tag pour [Tagging de Service Unifié][1] a été appliqué à votre déploiement. Les tags `service` et `version` sont optionnels.
 
 ## Comment USM détecte les noms de service
@@ -93,7 +93,7 @@ java -jar myapp.jar
 {{% /tab %}}
 {{< /tabs >}}
 
-## Activation de la surveillance de service universelle
+## Activer la surveillance de service universelle
 
 Activez la surveillance de service universelle dans votre Agent en utilisant l'une des méthodes suivantes en fonction de la manière dont votre service est déployé et de la configuration de votre Agent :
 
@@ -134,7 +134,7 @@ agents:
 {{% /tab %}}
 {{% tab "Opérateur" %}}
 
-La version 1.0.0 ou supérieure de Datadog Operator est requise.
+La version Datadog Operator v1.0.0 ou supérieure est requise.
 
 Pour activer la surveillance de service universelle avec le [Datadog Operator][1], mettez à jour votre manifeste `datadog-agent.yaml`. Dans la ressource `DatadogAgent`, définissez `spec.features.usm.enabled` sur `true` :
 
@@ -479,7 +479,7 @@ service_monitoring_config:
 {{% /tab %}}
 {{% tab "Variables d'environnement (Linux)" %}}
 
-Si vous configurez le `system-probe` avec des variables d'environnement, comme c'est courant avec les installations Docker et ECS, passez la variable d'environnement suivante à **les** `process-agent` et `system-probe` :
+Si vous configurez le `system-probe` avec des variables d'environnement, comme c'est courant avec les installations Docker et ECS, passez la variable d'environnement suivante à **à la fois** pour le `process-agent` et le `system-probe` :
 
 ```yaml
 DD_SYSTEM_PROBE_SERVICE_MONITORING_ENABLED=true
@@ -765,7 +765,7 @@ Pour un support HTTPS optionnel, ajoutez également :
 
 Si vous utilisez des équilibreurs de charge avec vos services, activez des intégrations cloud supplémentaires pour permettre à la surveillance de service universelle de découvrir des entités gérées par le cloud :
 
-1. Installez l'[Intégration AWS][2] pour la visibilité dans l'équilibreur de charge AWS.
+1. Installez l'[Intégration AWS][2] pour la visibilité dans AWS Load Balancer.
 2. Activez la collecte de métriques ENI et EC2.
 3. Ajoutez les balises suivantes à chaque équilibreur de charge :
    ```conf
@@ -824,7 +824,7 @@ Les systèmes ou services suivants nécessitent une configuration supplémentair
 
 {{< collapse-content title="Services non conteneurisés sur Linux" level="h4" >}}
 <div class="alert alert-info">
-La surveillance des services universels est disponible pour surveiller les services fonctionnant sur des machines virtuelles Linux bare-metal.
+La surveillance des services universels est disponible pour surveiller les services fonctionnant en bare-metal sur des machines virtuelles Linux.
 </div>
 
 Nécessite la version 7.42 ou supérieure de l'Agent.
@@ -852,15 +852,15 @@ DD_SYSTEM_PROBE_PROCESS_SERVICE_INFERENCE_ENABLED=true
 {{< /tabs >}}
 {{< /collapse-content >}}
 
-{{< collapse-content title="Surveillance TLS Go" level="h4" >}}
+{{< collapse-content title="Surveillance TLS" level="h4" >}}
 <div class="alert alert-info">
-La surveillance des services universels est en aperçu pour surveiller le trafic chiffré TLS des services implémentés en Golang.
+La surveillance des services universels est en Preview pour surveiller le trafic chiffré TLS des services implémentés en Golang.
 </div>
 
 <strong>Remarque</strong> :
 <br>
 <ul role="list">
-  <li>Les serveurs HTTPS Go peuvent mettre à niveau le protocole HTTP1.1 vers HTTP/2, qui est pris en charge en aperçu. Contactez votre responsable de compte pour plus de détails.</li>
+  <li>Les serveurs HTTPS Go peuvent mettre à niveau le protocole HTTP1.1 vers HTTP/2, qui est pris en charge en Preview. Contactez votre responsable de compte pour plus de détails.</li>
   <li>Nécessite la version 7.51 ou supérieure de l'Agent.</li>
 </ul>
 

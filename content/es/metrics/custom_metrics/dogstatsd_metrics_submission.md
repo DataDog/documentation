@@ -17,9 +17,9 @@ title: 'Envío de Métricas: DogStatsD'
 ---
 Mientras que StatsD acepta solo métricas, DogStatsD acepta los tres tipos de datos principales de Datadog: métricas, eventos y verificaciones de servicio. Esta sección muestra casos de uso típicos para métricas desglosadas por tipos de métricas, e introduce [tasas de muestreo](#sample-rates) y [opciones de etiquetado de métricas](#metric-tagging) específicas para DogStatsD.
 
-[CUENTA](#count), [MEDIDOR](#gauge) y [CONJUNTO](#set) son tipos de métricas familiares para los usuarios de StatsD. `TIMER` de StatsD es un subconjunto de `HISTOGRAM` en DogStatsD. Además, puedes enviar tipos de métricas [HISTOGRAMA](#histogram) y [DISTRIBUCIÓN](#distribution) utilizando DogStatsD.
+[CUENTA](#count), [GAUGE](#gauge) y [CONJUNTO](#set) son tipos de métricas familiares para los usuarios de StatsD. `TIMER` de StatsD es un subconjunto de `HISTOGRAM` en DogStatsD. Además, puedes enviar tipos de métricas [HISTOGRAMA](#histogram) y [DISTRIBUCIÓN](#distribution) usando DogStatsD.
 
-**Nota**: Dependiendo del método de envío utilizado, el tipo de métrica real almacenado en Datadog puede diferir del tipo de métrica enviado. Al enviar un tipo de métrica TASA a través de DogStatsD, la métrica aparece como un MEDIDOR en la aplicación para asegurar una comparación relevante entre diferentes Agentes.
+**Nota**: Dependiendo del método de envío utilizado, el tipo de métrica real almacenado en Datadog puede diferir del tipo de métrica enviado. Al enviar un tipo de métrica RATE a través de DogStatsD, la métrica aparece como un GAUGE en la aplicación para asegurar una comparación relevante entre diferentes Agentes.
 
 ## Funciones
 
@@ -29,8 +29,8 @@ Después de que [instales DogStatsD][1], las siguientes funciones están disponi
 |------------------|-----------------|----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `<METRIC_NAME>`  | Cadena          | Sí      | Nombre de la métrica a enviar.                                                                                                                                                                  |
 | `<METRIC_VALUE>` | Doble          | Sí      | Valor asociado con tu métrica.                                                                                                                                                             |
-| `<SAMPLE_RATE>`  | Doble          | No       | La tasa de muestreo que se aplicará a la métrica. Toma un valor entre `0` (todo se muestrea, por lo que no se envía nada) y `1` (sin muestreo). Consulta la sección de [Tasa de Muestreo](#sample-rates) para aprender más. |
-| `<TAGS>`         | Lista de cadenas | No       | Una lista de etiquetas que se aplicarán a la métrica. Consulta la sección de [Etiquetado de Métricas](#metric-tagging) para aprender más.                                                                                       |
+| `<SAMPLE_RATE>`  | Doble          | No       | La tasa de muestreo que se aplicará a la métrica. Toma un valor entre `0` (todo se muestrea, por lo que no se envía nada) y `1` (sin muestreo). Consulta la sección [Tasa de Muestreo](#sample-rates) para aprender más. |
+| `<TAGS>`         | Lista de cadenas | No       | Una lista de etiquetas que se aplicarán a la métrica. Consulta la sección [Etiquetado de Métricas](#metric-tagging) para aprender más.                                                                                       |
 | `<CARDINALITY>`  | Enum            | No       | La [cardinalidad][10] de etiquetas que se asignarán a esta métrica.                                                                                                                               |
 
 ### CONTAR
@@ -239,7 +239,7 @@ Emitir un métrica `GAUGE` almacenada como un métrica `GAUGE` a Datadog. Aprend
 
 Ejecuta el siguiente código para enviar una métrica DogStatsD `GAUGE` a Datadog. Recuerda `flush`/`close` al cliente cuando ya no sea necesario.
 
-**Nota:** Las llamadas para enviar métricas son asíncronas. Si deseas asegurarte de que las métricas se envíen, llama a `flush` antes de que el programa finalice.
+**Nota:** Las llamadas para enviar métricas son asíncronas. Si deseas asegurarte de que las métricas se envían, llama a `flush` antes de que el programa finalice.
 
 {{< programming-lang-wrapper langs="python,ruby,go,java,.NET,php,nodejs" >}}
 
@@ -593,7 +593,7 @@ Después de ejecutar el código anterior, tus datos de métricas están disponib
 El tipo de métrica `HISTOGRAM` es específico de DogStatsD. Emite una métrica `HISTOGRAM`—almacenada como una métrica `GAUGE` y `RATE`—a Datadog. Aprende más sobre el tipo `HISTOGRAM` en la documentación de [tipos de métricas][6].
 
 
-Ejecuta el siguiente código para enviar una métrica DogStatsD `HISTOGRAM` a Datadog. Recuerda `flush`/`close` al cliente cuando ya no sea necesario.
+Ejecuta el siguiente código para enviar una métrica DogStatsD `HISTOGRAM` a Datadog. Recuerda `flush`/`close` el cliente cuando ya no sea necesario.
 
 {{< programming-lang-wrapper langs="python,ruby,go,java,.NET,PHP" >}}
 
@@ -1035,7 +1035,7 @@ La instrumentación anterior calcula el `sum`, `count`, `average`, `minimum`, `m
 
 ### Tasas de muestreo
 
-Dado que la sobrecarga de enviar paquetes UDP puede ser demasiado grande para algunos caminos de código intensivos en rendimiento, los clientes de DogStatsD soportan muestreo (enviando métricas solo un porcentaje del tiempo). Es útil si muestreas muchas métricas y tu cliente de DogStatsD no está en el mismo host que el servidor de DogStatsD. El intercambio: disminuyes el tráfico pero pierdes algo de precisión y granularidad.
+Dado que la sobrecarga de enviar paquetes UDP puede ser demasiado grande para algunos caminos de código intensivos en rendimiento, los clientes de DogStatsD soportan el muestreo (enviando métricas solo un porcentaje del tiempo). Es útil si muestreas muchas métricas y tu cliente de DogStatsD no está en el mismo host que el servidor de DogStatsD. La compensación: disminuyes el tráfico pero pierdes algo de precisión y granularidad.
 
 Una tasa de muestreo de `1` envía métricas el 100% del tiempo, mientras que una tasa de muestreo de `0` envía métricas el 0% del tiempo.
 
@@ -1046,7 +1046,7 @@ Antes de enviar una métrica a Datadog, DogStatsD utiliza el `<SAMPLE_RATE>` par
 | `COUNT`        | Los valores recibidos se multiplican por (`1/<SAMPLE_RATE>`). Es razonable suponer que por cada punto de datos recibido, `1/<SAMPLE_RATE>` fueron realmente muestreados con el mismo valor. |
 | `GAUGE`        | Sin corrección. El valor recibido se mantiene tal como está.                                                                                                                               |
 | `SET`          | Sin corrección. El valor recibido se mantiene tal como está.                                                                                                                               |
-| `HISTOGRAM`    | La `histogram.count` estadística es una métrica de CONTADOR y recibe la corrección descrita anteriormente. Otras estadísticas son métricas de medidor y no son "corregidas".                      |
+| `HISTOGRAM`    | La `histogram.count` estadística es una métrica de CONTADOR y recibe la corrección descrita anteriormente. Otras estadísticas son métricas de gauge y no son "corregidas".                      |
 | `DISTRIBUTION` | Los valores recibidos se cuentan (`1/<SAMPLE_RATE>`) veces. Es razonable suponer que por cada punto de datos recibido, `1/<SAMPLE_RATE>` fueron realmente muestreados con el mismo valor. |
 
 #### Ejemplos de código

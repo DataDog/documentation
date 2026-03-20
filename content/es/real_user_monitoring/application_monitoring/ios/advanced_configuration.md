@@ -3,33 +3,33 @@ aliases:
 - /es/real_user_monitoring/ios/advanced_configuration
 - /es/real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/ios
 - /es/real_user_monitoring/mobile_and_tv_monitoring/ios/advanced_configuration
-description: Configura la configuraciÃ³n avanzada del SDK de RUM para iOS para enriquecer
-  las sesiones de usuario, rastrear eventos personalizados y controlar la recopilaciÃ³n
+description: Configura la configuración avanzada del SDK de RUM para iOS para enriquecer
+  las sesiones de usuario, rastrear eventos personalizados y controlar la recopilación
   de datos para obtener mejores perspectivas.
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-ios
   tag: Source Code
-  text: CÃ³digo fuente para dd-sdk-ios
+  text: Código fuente para dd-sdk-ios
 - link: /real_user_monitoring
   tag: Documentation
-  text: RUM y RepeticiÃ³n de Sesiones
+  text: RUM y Repetición de Sesiones
 - link: /real_user_monitoring/application_monitoring/ios/supported_versions/
   tag: Documentation
   text: Versiones soportadas para monitoreo de RUM en iOS y tvOS
 - link: https://github.com/DataDog/dd-sdk-ios-apollo-interceptor
   tag: Source Code
-  text: IntegraciÃ³n de Datadog para Apollo en iOS
-title: ConfiguraciÃ³n Avanzada de iOS
+  text: Integración de Datadog para Apollo en iOS
+title: Configuración Avanzada de iOS
 ---
-Si aÃºn no has configurado el SDK de RUM para iOS, sigue las [instrucciones de configuraciÃ³n en la aplicaciÃ³n][1] o consulta la [documentaciÃ³n de configuraciÃ³n de RUM para iOS][2].
+Si aún no has configurado el SDK de RUM para iOS, sigue las [instrucciones de configuración en la aplicación][1] o consulta la [documentación de configuración de RUM para iOS][2].
 
 ## Enriquecer las sesiones de usuario
 
-El RUM para iOS rastrea automÃ¡ticamente atributos como la actividad del usuario, pantallas, errores y solicitudes de red. Consulta la [documentaciÃ³n de RecopilaciÃ³n de Datos de RUM][3] para aprender sobre los eventos de RUM y los atributos predeterminados. Puedes enriquecer aÃºn mÃ¡s la informaciÃ³n de la sesiÃ³n de usuario y obtener un control mÃ¡s fino sobre los atributos recopilados al rastrear eventos personalizados.
+El RUM para iOS rastrea automáticamente atributos como la actividad del usuario, pantallas, errores y solicitudes de red. Consulta la [documentación de Recopilación de Datos de RUM][3] para aprender sobre los eventos de RUM y los atributos predeterminados. Puedes enriquecer aún más la información de la sesión de usuario y obtener un control más fino sobre los atributos recopilados al rastrear eventos personalizados.
 
 ### Vistas personalizadas
 
-AdemÃ¡s de [rastrear vistas automÃ¡ticamente](#automatically-track-views), tambiÃ©n puedes rastrear vistas especÃ­ficas y distintas, como `viewControllers` cuando se vuelven visibles e interactivas. DetÃ©n el rastreo cuando la vista ya no sea visible utilizando los siguientes mÃ©todos en `RUMMonitor.shared()`:
+Además de [rastrear vistas automáticamente](#automatically-track-views), también puedes rastrear vistas específicas y distintas, como `viewControllers` cuando se vuelven visibles e interactivas. Detén el rastreo cuando la vista ya no sea visible utilizando los siguientes métodos en `RUMMonitor.shared()`:
 
 - `.startView(viewController:)`
 - `.stopView(viewController:)`
@@ -392,7 +392,7 @@ You can automatically track views with UIKit and SwiftUI.
 
 {{% collapse-content title="UIKit" level="h4" expanded=true id="auto-track-views-uikit" %}}
 
-Para rastrear automÃ¡ticamente las vistas (`UIViewControllers`), utiliza la opciÃ³n `uiKitViewsPredicate` al habilitar RUM. Por defecto, las vistas se nombran con el nombre de la clase del controlador de vista. Para personalizarlo, proporciona tu propia implementaciÃ³n de `predicate` que cumpla con el protocolo `UIKitRUMViewsPredicate`:
+Para rastrear automáticamente las vistas (`UIViewControllers`), utiliza la opción `uiKitViewsPredicate` al habilitar RUM. Por defecto, las vistas se nombran con el nombre de la clase del controlador de vista. Para personalizarlo, proporciona tu propia implementación de `predicate` que cumpla con el protocolo `UIKitRUMViewsPredicate`:
 
 {{< tabs >}}
 {{% tab "Swift" %}}
@@ -414,9 +414,9 @@ public protocol DDUIKitRUMViewsPredicate: AnyObject {
 {{% /tab %}}
 {{< /tabs >}}
 
-Dentro de la implementaciÃ³n de `rumView(for:)`, tu aplicaciÃ³n debe decidir si una instancia dada de `UIViewController` debe iniciar una vista RUM (devolver un valor) o no (devolver `nil`). El valor `RUMView` devuelto debe especificar `name` y puede proporcionar informaciÃ³n adicional `attributes` para la vista RUM creada.
+Dentro de la implementación de `rumView(for:)`, tu aplicación debe decidir si una instancia dada de `UIViewController` debe iniciar una vista RUM (devolver un valor) o no (devolver `nil`). El valor `RUMView` devuelto debe especificar `name` y puede proporcionar información adicional `attributes` para la vista RUM creada.
 
-Por ejemplo, puedes configurar el predicado para usar una verificaciÃ³n de tipo explÃ­cita para cada controlador de vista en tu aplicaciÃ³n:
+Por ejemplo, puedes configurar el predicado para usar una verificación de tipo explícita para cada controlador de vista en tu aplicación:
 
 {{< tabs >}}
 {{% tab "Swift" %}}

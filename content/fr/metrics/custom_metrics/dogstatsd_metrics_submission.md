@@ -235,7 +235,7 @@ Puisque la valeur est soumise en tant que `COUNT`, elle est stockée en tant que
 
 #### Exemples de code
 
-Émettre une métrique `GAUGE` - stockée en tant que métrique `GAUGE` - vers Datadog. En savoir plus sur le type `GAUGE` dans la documentation des [types de métriques][5].
+Émettre une métrique `GAUGE` - stockée en tant que métrique `GAUGE` - vers Datadog. En savoir plus sur le type `GAUGE` dans la documentation [types de métriques][5].
 
 Exécutez le code suivant pour soumettre une métrique DogStatsD `GAUGE` à Datadog. N'oubliez pas de `flush`/`close` le client lorsqu'il n'est plus nécessaire.
 
@@ -754,9 +754,9 @@ Après avoir exécuté le code ci-dessus, vos données de métriques sont dispon
 
 {{< img src="metrics/custom_metrics/dogstatsd_metrics_submission/histogram.png" alt="Histogramme" >}}
 
-#### MINUTEUR
+#### MINUTERIE
 
-`TIMER` le type de métrique dans DogStatsD est une implémentation de `HISTOGRAM` type de métrique (à ne pas confondre avec les minuteurs dans le StatsD standard). Il mesure uniquement les données de timing : par exemple, le temps qu'une section de code met à s'exécuter.
+`TIMER` le type de métrique dans DogStatsD est une implémentation de `HISTOGRAM` type de métrique (à ne pas confondre avec les minuteries dans le StatsD standard). Il mesure uniquement les données de timing : par exemple, le temps qu'une section de code met à s'exécuter.
 
 `timed(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>, <CARDINALITY>)`
 : Étant donné que plusieurs métriques sont soumises, les types de métriques stockés (`GAUGE`, `RATE`) dépendent de la métrique. Consultez la documentation sur le [type de métrique HISTOGRAM][6] pour en savoir plus.
@@ -773,7 +773,7 @@ Pour un `TIMER`, les règles de `HISTOGRAM` [configuration](#configuration) s'ap
 
 {{< programming-lang lang="python" >}}
 
-En Python, les minuteurs sont créés avec un décorateur.
+En Python, les minuteries sont créées avec un décorateur.
 
 ```python
 from datadog import initialize, statsd
@@ -846,7 +846,7 @@ while (TRUE) {
 
 {{< /programming-lang-wrapper >}}
 
-Alors que DogStatsD reçoit les données de métrique de minuteur, il calcule la distribution statistique des temps de rendu et envoie les métriques suivantes à Datadog :
+Alors que DogStatsD reçoit les données de métrique de minuterie, il calcule la distribution statistique des temps de rendu et envoie les métriques suivantes à Datadog :
 
 | Métrique                              | Description                             |
 |-------------------------------------|-----------------------------------------|
@@ -858,7 +858,7 @@ Alors que DogStatsD reçoit les données de métrique de minuteur, il calcule la
 
 DogStatsD traite `TIMER` comme une métrique `HISTOGRAM`. Que vous utilisiez le type de métrique `TIMER` ou `HISTOGRAM`, vous envoyez les mêmes données à Datadog. Après avoir exécuté le code ci-dessus, vos données de métriques sont disponibles pour être graphées dans Datadog :
 
-{{< img src="metrics/custom_metrics/dogstatsd_metrics_submission/timer.png" alt="Minuteur" >}}
+{{< img src="metrics/custom_metrics/dogstatsd_metrics_submission/timer.png" alt="Minuterie" >}}
 
 ### DISTRIBUTION
 

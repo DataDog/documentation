@@ -15,7 +15,7 @@ further_reading:
 title: Introducción a los datos de banderas de características en RUM
 ---
 ## Resumen
-Los datos de banderas de características te brindan una mayor visibilidad sobre la experiencia del usuario y el monitoreo del rendimiento al permitirte determinar qué usuarios están viendo una característica específica y si algún cambio que introduces está impactando tu experiencia de usuario o afectando negativamente el rendimiento.
+Los datos de banderas de características te brindan una mayor visibilidad de la experiencia del usuario y el monitoreo del rendimiento al permitirte determinar qué usuarios están viendo una característica específica y si algún cambio que introduces está impactando tu experiencia de usuario o afectando negativamente el rendimiento.
 
 Al enriquecer tus datos de RUM con datos de banderas de características, puedes estar seguro de que tu característica se lanza con éxito sin causar accidentalmente un error o una regresión en el rendimiento. Con esta capa adicional de información, puedes correlacionar lanzamientos de características con el rendimiento, identificar problemas en lanzamientos específicos y solucionar problemas más rápido.
 
@@ -24,7 +24,7 @@ Al enriquecer tus datos de RUM con datos de banderas de características, puedes
 {{< tabs >}}
 {{% tab "Navegador" %}}
 
-El seguimiento de banderas de características está disponible en el SDK de RUM para navegadores. Para comenzar, configura [el monitoreo del navegador RUM][1]. Necesitas la versión del SDK de RUM para navegadores >= 4.25.0.
+El seguimiento de banderas de características está disponible en el SDK de RUM para navegadores. Para comenzar, configura [el monitoreo de RUM en el navegador][1]. Necesitas la versión del SDK de RUM para navegadores >= 4.25.0.
 
 <details>
   <summary>Antes de <code>v5.17.0</code></summary>
@@ -908,7 +908,7 @@ const client = factory.client();
 
 Inicializa el SDK de Statsig con `statsig.initialize`.
 
-1. Actualiza la versión de tu SDK de RUM para navegadores a 4.25.0 o superior.
+1. Actualiza tu versión del SDK de RUM para navegadores a 4.25.0 o superior.
 2. Inicializa el SDK de RUM y configura el parámetro de inicialización `enableExperimentalFeatures` con `["feature_flags"]`.
 3. Inicializa el SDK de Statsig (`>= v4.34.0`) e implementa la opción `gateEvaluationCallback` como se muestra a continuación:
 
@@ -949,25 +949,25 @@ Statsig actualmente no soporta esta integración. Contacta a support@statsig.com
 
 ## Analiza el rendimiento de tu Feature Flag en RUM
 
-Las banderas de características aparecen en el contexto de tus sesiones RUM, vistas y errores como una lista.
+Las flags de características aparecen en el contexto de tus sesiones, vistas y errores de RUM como una lista.
 
 {{< img src="real_user_monitoring/guide/setup-feature-flag-data-collection/feature-flag-list-rum-event.png" alt="Lista de atributos de Feature Flag en RUM Explorer" style="width:75%;">}}
 
-### Busca banderas de características usando el RUM Explorer
-Busca a través de todos los datos recopilados por RUM en el [RUM Explorer][2] para identificar tendencias en las banderas de características, analizar patrones con mayor contexto, o exportarlos a [tableros][3] y [monitores][4]. Puedes buscar tus sesiones, vistas o errores en el RUM Explorer, con el atributo `@feature_flags.{flag_name}`.
+### Busca flags de características usando el RUM Explorer
+Busca a través de todos los datos recopilados por RUM en el [RUM Explorer][2] para identificar tendencias en las flags de características, analizar patrones con mayor contexto, o exportarlos a [tableros][3] y [monitores][4]. Puedes buscar tus sesiones, vistas o errores en el RUM Explorer, con el atributo `@feature_flags.{flag_name}`.
 
 #### Sesiones
-Filtrando tus **Sesiones** con el atributo `@feature_flags.{flag_name}`, puedes encontrar todas las sesiones en el marco de tiempo dado donde tu bandera de características fue evaluada.
+Filtrando tus **Sesiones** con el atributo `@feature_flags.{flag_name}`, puedes encontrar todas las sesiones en el marco de tiempo dado donde tu flag de características fue evaluada.
 
-{{< img src="real_user_monitoring/guide/setup-feature-flag-data-collection/rum-explorer-session-feature-flag-search.png" alt="Busca sesiones para banderas de características en el RUM Explorer" style="width:75%;">}}
+{{< img src="real_user_monitoring/guide/setup-feature-flag-data-collection/rum-explorer-session-feature-flag-search.png" alt="Busca sesiones para flags de características en el RUM Explorer" style="width:75%;">}}
 
 #### Vistas
-Filtrando tus **Vistas** con el atributo `@feature_flags.{flag_name}`, puedes encontrar las vistas específicas en el marco de tiempo dado donde tu bandera de características fue evaluada.
+Filtrando tus **Vistas** con el atributo `@feature_flags.{flag_name}`, puedes encontrar las vistas específicas en el marco de tiempo dado donde tu flag de características fue evaluada.
 
-{{< img src="real_user_monitoring/guide/setup-feature-flag-data-collection/rum-explorer-view-feature-flag-search.png" alt="Busca vistas para banderas de características en el RUM Explorer" style="width:75%;">}}
+{{< img src="real_user_monitoring/guide/setup-feature-flag-data-collection/rum-explorer-view-feature-flag-search.png" alt="Busca vistas para flags de características en el RUM Explorer" style="width:75%;">}}
 
 #### Errores
-Filtrando tus **Errores** con el atributo `@feature_flags.{flag_name}`, puedes encontrar todos los errores en el marco de tiempo dado que ocurrieron en la vista donde tu bandera de características fue evaluada.
+Filtrando tus **Errores** con el atributo `@feature_flags.{flag_name}`, puedes encontrar todos los errores en el marco de tiempo dado que ocurrieron en la vista donde tu flag de características fue evaluada.
 
 {{< img src="real_user_monitoring/guide/setup-feature-flag-data-collection/rum-explorer-error-feature-flag-search.png" alt="Buscar errores de banderas de características en el explorador RUM" style="width:75%;">}}
 
@@ -980,7 +980,7 @@ Dependiendo de cómo hayas estructurado tu código y configurado tus banderas de
 
 Por ejemplo, para ver en qué **Vistas** se está evaluando tu bandera de características, puedes usar el explorador RUM para hacer una consulta similar:
 
-{{< img src="real_user_monitoring/guide/setup-feature-flag-data-collection/feature_flag_view_query.png" alt="Busca vistas para banderas de características en el RUM Explorer" style="width:75%;">}}
+{{< img src="real_user_monitoring/guide/setup-feature-flag-data-collection/feature_flag_view_query.png" alt="Busca vistas para flags de características en el RUM Explorer" style="width:75%;">}}
 
 Aquí hay algunos ejemplos de razones por las cuales tu bandera de características se está evaluando en Vistas no relacionadas que pueden ayudar con tus investigaciones:
 

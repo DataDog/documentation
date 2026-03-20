@@ -13,7 +13,7 @@ Instrumentez vos services et suivez l'activité des utilisateurs pour détecter 
 
 [ Suivez les connexions et l'activité des utilisateurs ](#adding-business-logic-information-login-success-login-failure-any-business-logic-to-traces) pour détecter les prises de contrôle de compte et les abus de logique métier avec des règles de détection prêtes à l'emploi, et pour finalement bloquer les attaquants.
 
-Les activités utilisateur personnalisées pour lesquelles des règles de détection prêtes à l'emploi sont disponibles sont les suivantes :
+L'activité utilisateur personnalisée pour laquelle des règles de détection prêtes à l'emploi sont disponibles est la suivante :
 
 | Noms d'événements intégrés | Métadonnées requises | Règles associées                                                                                                                                                                                                       |
 |------------------------|------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -28,7 +28,7 @@ Les activités utilisateur personnalisées pour lesquelles des règles de détec
 ## Ajout d'informations sur les utilisateurs authentifiés aux traces et activation de la capacité de blocage des utilisateurs
 
 <div class="alert alert-info">
-<strong> Détection automatisée de l'activité des utilisateurs : </strong> Les bibliothèques de traçage Datadog tentent de détecter et de signaler automatiquement les événements d'activité des utilisateurs. Pour plus d'informations, voir <a href="/security/application_security/how-it-works/add-user-info/?tab=set_user#disabling-automatic-user-activity-event-tracking"> Désactivation du suivi automatique des événements d'activité des utilisateurs </a>.
+<strong> Détection automatisée de l'activité des utilisateurs : </strong> Les bibliothèques de traçage Datadog tentent de détecter et de signaler automatiquement les événements d'activité des utilisateurs. Pour plus d'informations, consultez <a href="/security/application_security/how-it-works/add-user-info/?tab=set_user#disabling-automatic-user-activity-event-tracking"> Désactivation du suivi automatique des événements d'activité des utilisateurs </a>.
 </div>
 
 Vous pouvez [ajouter des tags personnalisés à votre span racine][3], ou utiliser les fonctions d'instrumentation décrites ci-dessous.
@@ -617,7 +617,7 @@ Datadog::Kit::AppSec::Events.track(event_name, trace, span, metadata)
 
 #### Migration vers les nouvelles méthodes de succès et d'échec de connexion
 
-Les nouvelles méthodes dans `Datadog::Kit::AppSec::Events::V2` introduisent un ordre de paramètres plus intuitif et une séparation des préoccupations plus claire. Voici les changements clés :
+Les nouvelles méthodes dans `Datadog::Kit::AppSec::Events::V2` introduisent un ordre de paramètres plus intuitif et une séparation des préoccupations plus claire. Voici les principaux changements :
 
 1. L'identifiant de connexion (e-mail, nom d'utilisateur) est le premier paramètre et est obligatoire.
 2. L'objet/ID utilisateur est optionnel dans les événements de succès et a été supprimé des événements d'échec.
@@ -724,7 +724,7 @@ $metadata = ['usr.id' => $id]; // you can add arbitrary fields to metadata
 
 #### Migration vers les nouvelles méthodes de succès et d'échec de connexion
 
-Les nouvelles méthodes dans l'espace de noms `\datadog\appsec\v2\` introduisent un ordre de paramètres plus intuitif et une séparation des préoccupations plus claire. Voici les changements clés :
+Les nouvelles méthodes dans l'espace de noms `\datadog\appsec\v2\` introduisent un ordre de paramètres plus intuitif et une séparation des préoccupations plus claire. Voici les principaux changements :
 
 1. L'identifiant de connexion (e-mail, nom d'utilisateur) est le premier paramètre et est obligatoire.
 2. Le tableau/ID utilisateur est optionnel dans les événements de succès et a été supprimé des événements d'échec.
@@ -836,7 +836,7 @@ tracer.appsec.trackCustomEvent(eventName, metadata)
 
 #### Migration vers les nouvelles méthodes de succès et d'échec de connexion
 
-Les nouvelles méthodes dans `eventTrackingV2` introduisent un ordre de paramètres plus intuitif et une séparation des préoccupations plus claire. Voici les changements clés :
+Les nouvelles méthodes dans `eventTrackingV2` introduisent un ordre de paramètres plus intuitif et une séparation des préoccupations plus claire. Voici les principaux changements :
 
 1. L'identifiant de connexion (e-mail, nom d'utilisateur) est le premier paramètre et est obligatoire.
 2. L'objet/ID utilisateur est optionnel dans les événements de succès et a été supprimé des événements d'échec.
@@ -1125,11 +1125,11 @@ track_custom_event(tracer, event_name, metadata)
 
 Si votre service a l'AAP activé et que la [Configuration à distance][1] est activée, vous pouvez créer une règle WAF personnalisée pour signaler toute demande qu'elle correspond avec une étiquette de logique métier personnalisée. Cela ne nécessite aucune modification de votre application et peut être fait entièrement depuis Datadog.
 
-Pour commencer, naviguez vers la [page des règles WAF personnalisées][2] et cliquez sur "Créer une nouvelle règle".
+Pour commencer, accédez à la [page des règles WAF personnalisées][2] et cliquez sur "Créer une nouvelle règle".
 
 {{< img src="security/application_security/threats/custom-waf-rule-menu.png" alt="Accédez au menu des règles WAF personnalisées depuis la page d'accueil de l'AAP en cliquant sur Protection, puis sur WAF en application et Règles personnalisées." style="width:100%;" >}}
 
-Cela ouvrira un menu dans lequel vous pourrez définir votre règle WAF personnalisée. En sélectionnant la catégorie "Logique métier", vous pourrez configurer un type d'événement (par exemple, `users.password_reset`). Vous pouvez ensuite sélectionner le service que vous souhaitez suivre et un point de terminaison spécifique. Vous pouvez également utiliser la condition de règle pour cibler un paramètre spécifique afin d'identifier le flux de code que vous souhaitez _instrumenter_. Lorsque la condition correspond, la bibliothèque marque la trace et la signale pour être transmise à l'AAP. Si vous n'avez pas besoin de la condition, vous pouvez définir une condition large pour correspondre à tout.
+Cela ouvrira un menu dans lequel vous pourrez définir votre règle WAF personnalisée. En sélectionnant la catégorie "Logique métier", vous pourrez configurer un type d'événement (par exemple, `users.password_reset`). Vous pouvez ensuite sélectionner le service que vous souhaitez suivre et un point de terminaison spécifique. Vous pouvez également utiliser la condition de règle pour cibler un paramètre spécifique afin d'identifier le flux de code que vous souhaitez _instrumenter_. Lorsque la condition correspond, la bibliothèque étiquette la trace et la signale pour être transmise à l'AAP. Si vous n'avez pas besoin de la condition, vous pouvez définir une condition large pour correspondre à tout.
 
 {{< img src="security/application_security/threats/custom-waf-rule-form.png" alt="Capture d'écran du formulaire qui apparaît lorsque vous cliquez sur le bouton Créer une nouvelle règle." style="width:50%;" >}}
 
@@ -1190,7 +1190,7 @@ Les modes suivants sont obsolètes :
 
 **Note** : Il pourrait y avoir des cas où la bibliothèque de trace ne pourra pas extraire d'informations de l'événement utilisateur. L'événement serait rapporté avec des métadonnées vides. Dans ces cas, utilisez le [SDK](#adding-business-logic-information-login-success-login-failure-any-business-logic-to-traces) pour instrumenter manuellement les événements utilisateur.
 
-## Désactivation du suivi des événements d'activité utilisateur
+## Désactivation du suivi des événements d'activité utilisateur.
 
 Pour désactiver la détection automatisée de l'activité utilisateur via votre [Catalogue de logiciels AAP][14], changez la variable d'environnement du mode de suivi automatique `DD_APPSEC_AUTO_USER_INSTRUMENTATION_MODE` en `disabled` sur le service que vous souhaitez désactiver. Tous les modes n'affectent que l'instrumentation automatisée et nécessitent que la [Configuration à distance][15] soit activée.
 

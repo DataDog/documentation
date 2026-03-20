@@ -392,7 +392,7 @@ You can automatically track views with UIKit and SwiftUI.
 
 {{% collapse-content title="UIKit" level="h4" expanded=true id="auto-track-views-uikit" %}}
 
-Pour suivre automatiquement les vues (`UIViewControllers`), utilisez l'option `uiKitViewsPredicate` lors de l'activation du RUM. Par défaut, les vues sont nommées avec le nom de classe du contrôleur de vue. Pour le personnaliser, fournissez votre propre implémentation du `predicate` qui respecte le protocole `UIKitRUMViewsPredicate` :
+Pour suivre automatiquement les vues (`UIViewControllers`), utilisez l'option `uiKitViewsPredicate` lors de l'activation du RUM. Par défaut, les vues sont nommées avec le nom de la classe du contrôleur de vue. Pour le personnaliser, fournissez votre propre implémentation du `predicate` qui respecte le protocole `UIKitRUMViewsPredicate` :
 
 {{< tabs >}}
 {{% tab "Swift" %}}
@@ -414,7 +414,7 @@ public protocol DDUIKitRUMViewsPredicate: AnyObject {
 {{% /tab %}}
 {{< /tabs >}}
 
-Dans l'implémentation du `rumView(for:)`, votre application doit décider si une instance donnée de `UIViewController` doit démarrer une vue RUM (retourner une valeur) ou non (retourner `nil`). La valeur `RUMView` retournée doit spécifier le `name` et peut fournir des `attributes` supplémentaires pour la vue RUM créée.
+Dans l'implémentation du `rumView(for:)`, votre application doit décider si une instance `UIViewController` donnée doit démarrer une vue RUM (retourner une valeur) ou non (retourner `nil`). La valeur `RUMView` retournée doit spécifier le `name` et peut fournir des `attributes` supplémentaires pour la vue RUM créée.
 
 Par exemple, vous pouvez configurer le prédicat pour utiliser une vérification de type explicite pour chaque contrôleur de vue dans votre application :
 
