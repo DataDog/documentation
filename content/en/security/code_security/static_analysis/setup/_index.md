@@ -106,6 +106,22 @@ There are three levels of configuration:
 
 All three configurations use the same YAML format, and they are merged **in order** (see [Configuration precedence and merging](#configuration-precedence-and-merging)).
 
+#### Org-level configuration
+
+{{< img src="/security/code_security/org-level-configuration.png" alt="Org-level configuration UI" style="width:100%;" >}}
+
+Use org-level configuration to define rules that apply to all repositories and specify global paths or files to ignore.
+
+#### Repository-level configuration
+
+{{< img src="/security/code_security/repo-level-configuration.png" alt="Repo-level configuration UI" style="width:100%;" >}}
+
+Configurations at the repository level apply only to the repository selected. These configurations are merged with the org configuration, with the repository configuration taking precedence. Use repository-level configuration to define overrides for repository-specific details or add rules specific to that repository.
+
+#### Repository-level configuration (file)
+
+You can also define configuration in a `code-security.datadog.yaml` file at the root of your repo. This file takes precedence over the repository-level configuration defined in Datadog. Use this file to customize rule configurations and iterate on setup and testing.
+
 #### Default rulesets
 
 By default, Datadog enables the default rulesets for your repository’s programming languages (`use-default-rulesets: true`). To modify the enabled rulesets:
@@ -195,22 +211,6 @@ sast:
 ```
 
 The `maxCount: 22` value from the repo-level configuration overrides the `maxCount: 10` value from the org-level configuration because repo-level settings have higher precedence. All other fields from the org-level configuration are retained because they are not overridden.
-
-#### Org-level configuration
-
-{{< img src="/security/code_security/org-level-configuration.png" alt="Org-level configuration UI" style="width:100%;" >}}
-
-Use org-level configuration to define rules that apply to all repositories and specify global paths or files to ignore.
-
-#### Repository-level configuration
-
-{{< img src="/security/code_security/repo-level-configuration.png" alt="Repo-level configuration UI" style="width:100%;" >}}
-
-Configurations at the repository level apply only to the repository selected. These configurations are merged with the org configuration, with the repository configuration taking precedence. Use repository-level configuration to define overrides for repository-specific details or add rules specific to that repository.
-
-#### Repository-level configuration (file)
-
-You can also define configuration in a `code-security.datadog.yaml` file at the root of your repo. This file takes precedence over the repository-level configuration defined in Datadog. Use this file to customize rule configurations and iterate on setup and testing.
 
 ### Configuration format
 
