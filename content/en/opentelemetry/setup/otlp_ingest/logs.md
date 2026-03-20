@@ -14,7 +14,6 @@ further_reading:
   - link: "https://opentelemetry.io/docs/reference/specification/protocol/exporter/"
     tag: "External Site"
     text: "OpenTelemetry Protocol Exporter"
-site_support_id: otlp_agentless
 ---
 
 ## Overview

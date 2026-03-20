@@ -187,5 +187,5 @@ Click on the context menu (three vertical dots) of any dashboard graph to open a
 [6]: /tracing/services/service_page/
 [7]: /tracing/services/resource_page/
 [8]: /dashboards/guide/custom_time_frames/
-[9]: /service_management/incident_management/datadog_clipboard/
+[9]: /dashboards/guide/datadog_clipboard/
 [10]: /dashboards/widgets/split_graph/

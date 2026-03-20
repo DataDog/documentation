@@ -4,6 +4,8 @@ algolia:
   - scim
   - アイデンティティプロバイダー
   - IdP
+description: Microsoft Entra ID と Okta (いずれもアイデンティティ プロバイダー) との SCIM 統合を使用して、Datadog
+  でユーザーのプロビジョニングとデプロビジョニングを自動化します。
 further_reading:
 - link: /account_management/scim/azure/
   tag: ドキュメント
@@ -21,7 +23,7 @@ SCIM は Infrastructure Pro プランおよび Infrastructure Enterprise プラ�
 
 ## 概要
 
-SCIM (System for Cross-domain Identity Management) は、ユーザープロビジョニングの自動化を可能にするオープンスタンダードです。SCIM を使用すると、組織のアイデンティティプロバイダー (IdP) と同期して、Datadog 組織のユーザーを自動的にプロビジョニングおよびデプロビジョニングすることができます。
+[SCIM][9] (System for Cross-domain Identity Management) は、ユーザー プロビジョニングの自動化を可能にするオープン スタンダードです。SCIM を使用すると、組織のアイデンティティ プロバイダー (IdP) と同期して、Datadog 組織のユーザーを自動的にプロビジョニングおよびデプロビジョニングできます。
 
 ### サポートされる機能
 
@@ -31,7 +33,9 @@ SCIM (System for Cross-domain Identity Management) は、ユーザープロビ�
 - Datadog へのシングルサインオン (推奨)
 - Managed Teams: IdP のグループから Datadog チームを作成し、Datadog チームのメンバーシップを IdP のグループメンバーシップと同期させます。 
 
-Datadog では、Microsoft Entra ID と Okta アイデンティティプロバイダーを使用した SCIM がサポートされています。SCIM を構成するには、お使いの IdP のドキュメントを参照してください。
+Datadog は SCIM サーバー プロトコルを実装しています。Datadog は Microsoft Entra ID と Okta (いずれもアイデンティティ プロバイダー) での SCIM の使用をサポートしています。その他のアイデンティティ プロバイダーでも動作する可能性はありますが、明示的にはサポートされていません。
+
+サポート対象のアイデンティティ プロバイダー向けに SCIM を構成するには、お使いの IdP のドキュメントを参照してください:
 - [Microsoft Entra ID][2]
 - [Okta][3]
 
@@ -53,11 +57,7 @@ SCIM を有効化するためにユーザーに紐付けられているアプリ
 
 データへのアクセスを失わないために、Datadog は SCIM 専用の[サービスアカウント][6]を作成することを強く推奨します。そのサービスアカウント内で、SCIM インテグレーションで使用するアプリケーションキーを作成します。
 
-## メール認証
-
-SCIM で新規ユーザーを作成すると、そのユーザーにメールが送信されます。初めてアクセスする場合は、メールで共有された招待リンクからログインする必要があります。リンクは 2 日間有効です。有効期限が切れた場合は、[ユーザー設定ページ][7]に移動し、ユーザーを選択して招待リンクを再送信してください。
-
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -69,3 +69,4 @@ SCIM で新規ユーザーを作成すると、そのユーザーにメールが
 [6]: /ja/account_management/org_settings/service_accounts
 [7]: https://app.datadoghq.com/organization-settings/users
 [8]: /ja/help/
+[9]: https://scim.cloud/

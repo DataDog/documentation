@@ -62,7 +62,7 @@ To see who enabled Audit Trail:
 
 
 ### Permissions
-Only users with `Audit Trail Write` permission can enable or disable Audit Trail. Additionally, users need `Audit Trail Read` permission to view audit events using Audit Explorer. 
+Only users with `Audit Trail Write` permission can enable or disable Audit Trail. Additionally, users need `Audit Trail Read` permission to view audit events using Audit Explorer.
 
 ### Archiving
 
@@ -94,6 +94,20 @@ Audit Trail events have the same functionality as logs within the [Log Explorer]
 
 {{< img src="account_management/audit_logs/attributes.png" alt="Audit Trail in the Organization Settings menu" style="width:50%;">}}
 
+
+### Natural language queries
+
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">
+This feature is not supported for your selected Datadog site ({{< region-param key="dd_site_name" >}}).
+</div>
+{{< /site-region >}}
+
+Use Natural Language Queries (NLQ) to describe what you're looking for in plain English. Datadog automatically translates your request into a structured audit trail query, making it easier to explore audit events without needing to write complex syntax.
+
+The system translates natural language input into Datadog queries and understands context such as users, actions, resources, and time ranges. It also detects relevant fields automatically, for example, "Who modified the payment dashboard last week" or "Show all role changes in the past 24 hours."
+
+{{< img src="account_management/audit_logs/audit_trail_nlq_light.mp4" alt="Natural language query in Audit Trail showing how to search for audit events using plain English phrases" video=true >}}
 
 ### Saved views
 
@@ -240,3 +254,4 @@ Datadog Audit Trail comes with an [out-of-the-box dashboard][13] that shows vari
 [15]: /security/cloud_siem/
 [16]: /getting_started/cloud_siem/
 [17]: /dashboards/sharing/scheduled_reports/#schedule-a-report
+

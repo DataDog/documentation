@@ -4,6 +4,8 @@ algolia:
   - visibilidad de pipelines
   - usm
   - pipeline ci
+description: Monitoriza la salud y el rendimiento de los pipelines CI con trazas (traces),
+  métricas y análisis para optimizar la velocidad de desarrollo y reducir costes.
 further_reading:
 - link: https://www.datadoghq.com/blog/monitor-ci-pipelines/
   tag: Blog
@@ -25,7 +27,7 @@ title: Empezando con CI Visibility
 
 ## Información general
 
-CI Visibility, o CI Pipeline Visibility, te permite monitorizar el estado de tus pipelines CI y visualizar el rendimiento de las ejecuciones de tus pipelines en forma de trazas (traces), donde los tramos (spans) representan los diferentes niveles del pipeline. 
+CI Visibility, o CI Pipeline Visibility, te permite monitorizar el estado de tus pipelines CI y visualizar el rendimiento de las ejecuciones de tus pipelines en forma de trazas, donde los tramos (spans) representan los diferentes niveles del pipeline. 
 
 {{< img src="/getting_started/ci_visibility/pipelines_list.png" alt="Vista de lista de tus pipelines CI en Datadog CI Visibility" style="width:100%" >}}
 
@@ -141,8 +143,8 @@ Para configurar un monitor que envía alertas sobre tu pipeline CI cuando la dur
 1. En la sección `Evaluate the query over the`, selecciona **last 1 day** (último día).
 1. Configura las condiciones de activación de las alertas cuando el valor evaluado esté **por encima** del umbral y especifica valores para los umbrales de alerta o advertencia, como `Alert threshold > 300000000000`.
 1. En la sección `Configure notifications and automations`, configura los parámetros de notificación de tu monitor.
-1. Define permisos para el monitor.
-1. Haz clic en **Crear**.
+1. Establece permisos para el monitor.
+1. Haz clic en **Create** (Crear).
 
 ## Referencias adicionales
 

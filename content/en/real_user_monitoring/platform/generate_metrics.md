@@ -122,5 +122,5 @@ You can use RUM-based custom metrics for the following actions:
 [12]: /dashboards/querying/#configuring-a-graph
 [13]: /monitors/types/anomaly/
 [14]: /monitors/types/forecasts/
-[15]: /service_management/service_level_objectives/metric/
+[15]: /service_level_objectives/metric/
 [16]: /real_user_monitoring/rum_without_limits/

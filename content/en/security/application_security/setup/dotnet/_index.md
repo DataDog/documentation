@@ -8,6 +8,8 @@ aliases:
   - /security/application_security/getting_started/dotnet
   - /security/application_security/threats/setup/threat_detection/dotnet
   - /security/application_security/threats_detection/dotnet
+  - /security/application_security/setup/threat_detection/dotnet
+  - /security/application_security/enabling/dotnet
 further_reading:
 - link: "/security/application_security/add-user-info/"
   tag: "Documentation"

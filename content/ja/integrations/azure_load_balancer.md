@@ -68,7 +68,7 @@ Datadog Azure インテグレーションを使用して、Azure Load Balancer �
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "azure-load-balancer" >}}
+{{< get-metrics-from-git "azure_load_balancer" >}}
 
 
 ### イベント

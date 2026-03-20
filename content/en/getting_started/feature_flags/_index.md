@@ -2,39 +2,35 @@
 title: Getting Started with Feature Flags
 description: Manage feature delivery with integrated observability, real-time metrics, and OpenFeature-compatible gradual rollouts.
 further_reading:
-- link: '/feature_flags/client/'
-  tag: 'Documentation'
-  text: 'Client-Side SDKs'
-- link: '/feature_flags/server/'
-  tag: 'Documentation'
-  text: 'Server-Side SDKs'
-- link: 'https://www.datadoghq.com/blog/feature-flags/'
-  tag: 'Blog'
-  text: 'Ship features faster and safer with Datadog Feature Flags'
-- link: 'https://www.datadoghq.com/blog/experimental-data-datadog/'
-  tag: 'Blog'
-  text: 'How to bridge speed and quality in experiments through unified data'
-- link: 'https://www.datadoghq.com/blog/datadog-feature-flags-cloud-resilience/'
-  tag: 'Blog'
-  text: 'How Datadog Feature Flags is resilient to cloud provider failures'
+    - link: '/feature_flags/client/'
+      tag: 'Documentation'
+      text: 'Client-Side SDKs'
+    - link: '/feature_flags/server/'
+      tag: 'Documentation'
+      text: 'Server-Side SDKs'
+    - link: 'https://www.datadoghq.com/blog/feature-flags/'
+      tag: 'Blog'
+      text: 'Ship features faster and safer with Datadog Feature Flags'
+    - link: 'https://www.datadoghq.com/blog/experimental-data-datadog/'
+      tag: 'Blog'
+      text: 'How to bridge speed and quality in experiments through unified data'
+    - link: 'https://www.datadoghq.com/blog/datadog-feature-flags-cloud-resilience/'
+      tag: 'Blog'
+      text: 'How Datadog Feature Flags is resilient to cloud provider failures'
 site_support_id: getting_started_feature_flags
 ---
-
-{{< callout url="http://datadoghq.com/product-preview/feature-flags/" >}}
-Feature Flags are in Preview. Complete the form to request access.
-{{< /callout >}}
 
 ## Overview
 
 Datadog feature flags offer a powerful, integrated way to manage feature delivery, with built-in observability and seamless integration across the platform.
 
-* **Real-time metrics:** Understand who's receiving each variant, as well as how your flag impacts the health & performance of your application—all in real time.
+- **Real-time metrics:** Understand who's receiving each variant, as well as how your flag impacts the health & performance of your application—all in real time.
 
-* **Supports any data type:** Use Booleans, strings, numbers or full JSON objects—whatever your use case requires.
+- **Supports any data type:** Use Booleans, strings, numbers or full JSON objects—whatever your use case requires.
 
-* **Built for experimentation:** Target specific audiences for A/B tests, roll out features gradually with canary releases, and automatically roll back when regressions are detected.
+- **Built for experimentation:** Target specific audiences for A/B tests, roll out features gradually with canary releases, and automatically roll back when regressions are detected.
 
-* **OpenFeature compatible:** Built on the OpenFeature standard, ensuring compatibility with existing OpenFeature implementations and providing a vendor-neutral approach to feature flag management.
+- **OpenFeature compatible:** Built on the OpenFeature standard, ensuring compatibility with existing OpenFeature implementations and providing a vendor-neutral approach to feature flag management.
 
 ## Feature Flags SDKs
 
@@ -60,7 +56,6 @@ Your organization likely already has pre-configured environments for Development
 
 First, install `@datadog/openfeature-browser`, `@openfeature/web-sdk`, and `@openfeature/core` as dependencies in your project:
 
-
 ```
 yarn add @datadog/openfeature-browser @openfeature/web-sdk @openfeature/core
 ```
@@ -73,13 +68,13 @@ import { OpenFeature } from '@openfeature/web-sdk';
 
 // Initialize the provider
 const provider = new DatadogProvider({
-   clientToken: '<CLIENT_TOKEN>',
-   applicationId: '<APPLICATION_ID>',
-   enableExposureLogging: true, // Can impact RUM costs if enabled
-   site: 'datadoghq.com',
-   env: '<YOUR_ENV>', // Same environment normally passed to the RUM SDK
-   service: '<SERVICE_NAME>',
-   version: '1.0.0',
+    clientToken: '<CLIENT_TOKEN>',
+    applicationId: '<APPLICATION_ID>',
+    enableExposureLogging: true, // Can impact RUM costs if enabled
+    site: 'datadoghq.com',
+    env: '<YOUR_ENV>', // Same environment normally passed to the RUM SDK
+    service: '<SERVICE_NAME>',
+    version: '1.0.0'
 });
 
 // Set the provider
@@ -92,7 +87,21 @@ More information about OpenFeature SDK configuration options can be found in its
 
 ### Step 2: Create a feature flag
 
-Use the [feature flags creation UI][2] to bootstrap your first feature flag. By default, the flag is disabled in all environments.
+Go to [**Create Feature Flag**][2] in Datadog and configure the following:
+
+- **Name and key**: The flag's display name and the key referenced in code
+- **Variant type**: The data type for the flag variants (Boolean, string, integer, number, or JSON)
+
+    **Note**: The <b>flag key</b> and <b>variant type</b> cannot be modified after creation.
+
+- **Variant values**: The possible values the flag can return (you can add these later)
+- **Distribution channels**: Which types of SDKs receive this flag's configuration (client-side, server-side, or both)
+
+<div class="alert alert-warning">
+  <b>Flag keys</b>, <b>variant keys</b>, and <b>variant values</b> should be considered public when sent to client SDKs.
+</div>
+
+{{< img src="getting_started/feature_flags/create-feature-flags.png" alt="Create Feature Flag" style="width:100%;" >}}
 
 ### Step 3: Evaluate the flag and write feature code
 
@@ -106,9 +115,10 @@ const client = OpenFeature.getClient();
 // If applicable, set relevant attributes on the client's global context
 // (e.g. org id, user email)
 await OpenFeature.setContext({
-   org: { id: 2 },
-   user: { id: 'user-123', email: 'user@example.com' },
-   targetingKey: 'user-123',
+    org_id: 2,
+    user_id: 'user-123',
+    email: 'user@example.com',
+    targetingKey: 'user-123'
 });
 
 // This is what the SDK returns if the flag is disabled in
@@ -117,7 +127,7 @@ const fallback = false;
 
 const showFeature = await client.getBooleanValue('show-new-feature', fallback);
 if (showFeature) {
-   // Feature code here
+    // Feature code here
 }
 ```
 
@@ -127,7 +137,7 @@ After you've completed this step, redeploy the application to pick up these chan
 
 Now that the application is ready to check the value of your flag, you can start adding targeting rules. Targeting rules enable you to define where or to whom to serve different variants of your feature.
 
-Go to **Feature Flags**, select your flag, then find the **Targeting Rules & Rollouts** section. Select the environment whose rules you want to modify, and click **Edit Targeting Rules**.
+Go to **Feature Flags**, select your flag, select the environment whose rules you want to modify, and click **Edit Targeting Rules**.
 
 {{< img src="getting_started/feature_flags/ff-targeting-rules-and-rollouts.png" alt="Targeting Rules & Rollouts" style="width:100%;" >}}
 
@@ -139,7 +149,7 @@ After saving changes to the targeting rules, publish those rules by enabling you
 As a general best practice, changes should be rolled out in a Staging environment before rolling out in Production.
 </div>
 
-In the **Targeting Rules & Rollouts** section, toggle your selected environment to **Enabled**.
+Toggle your selected environment to **Enabled**.
 
 {{< img src="getting_started/feature_flags/publish-targeting-rules.png" alt="Publish targeting rules" style="width:100%;" >}}
 
@@ -157,5 +167,5 @@ Monitor the feature rollout from the feature flag details page, which provides r
 
 [1]: https://openfeature.dev/docs/reference/technologies/client/web/
 [2]: https://app.datadoghq.com/feature-flags/create
-[3]: https://app.datadoghq.com/feature-flags/environments
+[3]: https://app.datadoghq.com/feature-flags/settings/environments
 [4]: https://docs.datadoghq.com/account_management/api-app-keys/#client-tokens

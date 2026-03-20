@@ -131,17 +131,16 @@ Follow these steps to deploy the Datadog Azure integration through [Terraform][2
    - App Service Plans
    - Container Apps
 
-You can also click to enable custom metric collection from [Azure Application Insights][101], and disable the collection of usage metrics.
-
+   You can also click to enable custom metric collection from [Azure Application Insights][101], and disable the collection of usage metrics.
 4. Optionally, click the resource collection toggle to disable the collection of configuration information from your Azure resources.
 5. Configure log collection:
-   a. If a log forwarder already exists in the tenant, extend its scope to include any new subscriptions or management groups.
-   b. If you're creating a new log forwarder:
-      a. Enter a resource group name to store the log forwarder control plane.
-      b. Select a control plane subscription for the log-forwarding orchestration (LFO).
-      c. Select a region for the control plane.
-   See the [Architecture section][102] of the automated log forwarding guide for more information about this architecture.
+   - If a log forwarder already exists in the tenant, extend its scope to include any new subscriptions or management groups.
+   - If you're creating a new log forwarder:
+     1. Enter a resource group name to store the log forwarder control plane.
+     1. Select a control plane subscription for the log-forwarding orchestration (LFO).
+     1. Select a region for the control plane.
 
+   See the [Architecture section][102] of the automated log forwarding guide for more information about this architecture.
 6. Copy and run the command under **Initialize and apply the Terraform**.
 
 [100]: https://app.datadoghq.com/integrations/azure/
@@ -385,5 +384,5 @@ Still need help? Contact [Datadog support][17].
 [48]: https://learn.microsoft.com/azure/azure-functions/functions-get-started
 [49]: https://github.com/DataDog/datadog-serverless-functions/blob/master/azure/blobs_logs_monitoring/index.js
 [51]: https://app.datadoghq.com/logs
-[52]: https://portal.azure.com/#create/Microsoft.Template/uri/CustomDeploymentBlade/uri/https%3A%2F%2Fddazurelfo.blob.core.windows.net%2Ftemplates%2Fforwarder.json
+[52]: https://portal.azure.com/#create/Microsoft.Template/uri/CustomDeploymentBlade/uri/https%3A%2F%2Fraw.githubusercontent.com%2FDataDog%2Fintegrations-management%2Fmain%2Fazure%2Flogging_install%2Fdist%2Fforwarder.json
 [53]: https://learn.microsoft.com/azure/azure-monitor/platform/diagnostic-settings

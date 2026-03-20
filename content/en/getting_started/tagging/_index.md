@@ -21,6 +21,9 @@ further_reading:
     - link: "https://dtdg.co/fe"
       tag: "Foundation Enablement"
       text: "Join an interactive session on effective tagging with Datadog"
+    - link: "https://www.datadoghq.com/blog/datadog-executive-dashboards"
+      tag: "Blog"
+      text: "Design effective executive dashboards with Datadog"
 algolia:
   tags: ["tagging"]
 ---
@@ -59,6 +62,7 @@ Below are Datadog's tagging requirements:
     - Underscores
     - Minuses
     - Colons
+    - Commas
     - Periods
     - Slashes
 

@@ -7,6 +7,9 @@ aliases:
   - /network_performance_monitoring/
   - /network_monitoring/performance/
 further_reading:
+- link: "https://www.datadoghq.com/blog/cnm-network-health"
+  tag: "Blog"
+  text: "Detect, diagnose, and resolve network issues easily with CNM Network Health"
 - link: '/network_monitoring/cloud_network_monitoring/guide/detecting_application_availability/'
   tag: 'Guide'
   text: 'Detecting Application Availability using Network Insights'
@@ -51,7 +54,7 @@ Datadog Cloud Network Monitoring (CNM) gives you visibility into your network tr
     {{< nextlink href="network_monitoring/cloud_network_monitoring/network_health" >}}<u>Network Health</u>: Review the health of your network environment.{{< /nextlink >}}
     {{< nextlink href="network_monitoring/cloud_network_monitoring/network_analytics" >}}<u>Network Analytics</u>: Graph your network data between each client and server available.{{< /nextlink >}}
     {{< nextlink href="network_monitoring/network_path/setup/#scheduled-tests" >}}<u>Network Path Scheduled Tests</u>: Visualize the route that network traffic follows from its origin to its destination using scheduled tests.{{< /nextlink >}}
-    {{< nextlink href="network_monitoring/network_path/setup/#dynamic-tests-preview" >}}<u>Network Path Dynamic Tests</u>: Dynamically create tests to allow the Agent to automatically discover and monitor network paths.{{< /nextlink >}}
+    {{< nextlink href="network_monitoring/network_path/setup/#dynamic-tests" >}}<u>Network Path Dynamic Tests</u>: Dynamically create tests to allow the Agent to automatically discover and monitor network paths.{{< /nextlink >}}
     {{< nextlink href="network_monitoring/cloud_network_monitoring/network_map" >}}<u>Network Map</u>: Map your network data between your tags.{{< /nextlink >}}
     {{< nextlink href="monitors/types/cloud_network_monitoring/#common-monitors" >}}<u>Common Monitors</u>: Configure Common CNM monitors.{{< /nextlink >}}
 {{< /whatsnext >}}

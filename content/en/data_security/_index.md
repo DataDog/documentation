@@ -16,7 +16,7 @@ further_reading:
 - link: "/data_security/real_user_monitoring/"
   tag: "Documentation"
   text: "RUM Data Security"
-- link: "/real_user_monitoring/session_replay/browser/privacy_options"
+- link: "/session_replay/browser/privacy_options"
   tag: "Documentation"
   text: "Session Replay Privacy Options"
 - link: "/security/sensitive_data_scanner/"
@@ -143,7 +143,7 @@ Continuous Integration pipelines and tests
 
 [1]: https://www.datadoghq.com/security/
 [2]: https://www.datadoghq.com/legal/privacy/
-[3]: /developers/dogstatsd/
+[3]: /extend/dogstatsd/
 [4]: /data_security/agent/
 [5]: /agent/configuration/secrets-management/
 [6]: /integrations/amazon_web_services/
@@ -162,7 +162,7 @@ Continuous Integration pipelines and tests
 [19]: /serverless/distributed_tracing/collect_lambda_payloads#obfuscating-payload-contents
 [20]: /data_security/synthetics/
 [21]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/
-[22]: /real_user_monitoring/session_replay/browser/privacy_options
+[22]: /session_replay/browser/privacy_options
 [23]: /database_monitoring/data_collected/#sensitive-information
 [24]: /getting_started/tagging/
 [25]: /tracing/glossary/

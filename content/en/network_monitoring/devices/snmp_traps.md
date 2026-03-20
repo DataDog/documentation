@@ -159,7 +159,7 @@ You can write these mappings by hand, or generate mappings from a list of MIBs u
 
 **Prerequisites**:
 - Python 3
-- [`ddev`][4] (`pip3 install "datadog-checks-dev[cli]"`)
+- [`ddev`][4] (`pip3 install ddev`)
 - [`pysmi`][5] (`pip3 install pysmi`)
 
 Place all your MIBs in a dedicated folder and run:
@@ -177,7 +177,7 @@ The `ddev` tool automatically fetches available MIB dependencies. If you encount
 [1]: /monitors/
 [2]: https://app.datadoghq.com/logs
 [3]: /network_monitoring/devices
-[4]: /developers/integrations/python
+[4]: /extend/integrations/python
 [5]: https://pypi.org/project/pysmi/
 [6]: /agent/configuration/agent-commands/#start-stop-and-restart-the-agent
 [7]: /network_monitoring/devices/troubleshooting#traps-or-flows-not-being-received-at-all

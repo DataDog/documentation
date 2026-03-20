@@ -2,8 +2,8 @@
 algolia:
   tags:
   - Archivos en línea
-description: Capacidades rentables de consulta en directo en la retención de logs
-  a largo plazo
+description: Capacidades de consulta en directo rentables para la conservación de
+  logs a largo plazo
 further_reading:
 - link: /logs/log_configuration/indexes/#indexes-filters
   tag: Documentación
@@ -19,7 +19,7 @@ title: Archivos en línea
 ---
 
 <div class="alert alert-danger">
-La disponibilidad de Archivos en línea es limitada. Para solicitar acceso, ponte en contacto con <a href="/help/">el soporte de Datadog</a>.
+La disponibilidad de Online Archives es limitada. Para solicitar acceso, ponte en contacto con el <a href="/help/">soporte de Datadog</a>.
 </div>
 
 ## Información general
@@ -53,7 +53,7 @@ Selecciona Archivos en línea en el menú desplegable del Log Explorer para empe
 
 Puedes [buscar][4] al escribir las consultas en la barra de búsqueda o al seleccionar la faceta correspondiente en el panel de facetas.
 
-**Notas**:
+**Notas**: 
 - No se puede exportar logs del Archivo en línea a dashboards, notebooks, o monitores.
 - La vista de Transacciones y patrones no está disponible para los Archivos en línea.
 

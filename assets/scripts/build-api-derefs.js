@@ -46,6 +46,11 @@ const processSpec = async (specPath) => {
     const fileData = yaml.safeLoad(fs.readFileSync(specPath, 'utf8'));
     const deref = await $RefParser.dereference(fileData, { resolve: { external: false } });
 
+    // VALIDATION: Ensure we actually have an object with servers
+    if (!deref || typeof deref !== 'object' || Array.isArray(deref)) {
+      throw new Error(`Deref produced invalid type: ${typeof deref}`);
+    }
+
     const version = extractVersion(specPath);
     if (!version) {
       throw new Error(`Could not extract version from path: ${specPath}`);
@@ -53,6 +58,10 @@ const processSpec = async (specPath) => {
 
     // Write dereferenced JSON
     const jsonString = safeJsonStringify(deref, null, 2);
+    // Safety check to prevent writing "null" or empty strings
+    if (jsonString === "null" || jsonString === '""' || jsonString.length < 5) {
+      throw new Error(`Aborting write: generated JSON for ${version} is suspiciously small or null.`);
+    }
     const pathToJson = `./data/api/${version}/full_spec_deref.json`;
     fs.writeFileSync(pathToJson, jsonString, 'utf8');
     console.log(`Written dereferenced spec to: ${pathToJson}`);

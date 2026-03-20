@@ -101,6 +101,10 @@ You can initiate a page to an individual or team, and also override existing shi
 
 To configure On-Call notifications on your mobile device, see the guide to [Set up your Mobile Device for Datadog On-Call][21].
 
+<div class="alert alert-info">
+If you only need to access On-Call on mobile and want to restrict access to sensitive telemetry data on mobile devices, contact Datadog support.
+</div>
+
 ## Incidents
 
 {{< tabs >}}
@@ -280,7 +284,7 @@ On the Services page, you can view, search and filter all services that you have
 {{% /tab %}}
 {{< /tabs >}}
 
-On the Bits AI home page, you can ask questions about your organization's system health. Bits AI supports natural language querying for logs and APM traces. For more information, see [Chat with Bits AI][27].
+On the Bits AI home page, you can ask questions about your organization's system health. Bits AI supports natural language querying for logs and APM traces. For more information, see [Bits Assistant][27].
 
 ### Bits AI SRE
 {{< tabs >}}
@@ -343,13 +347,13 @@ For help with troubleshooting, [contact Datadog support][13]. You can also send 
 [17]: https://docs.datadoghq.com/software_catalog/manage/
 [18]: https://docs.datadoghq.com/notebooks/
 [19]: https://docs.datadoghq.com/notebooks/#notebook-tags
-[20]: https://docs.datadoghq.com/service_management/on-call/
-[21]: /service_management/on-call/guides/configure-mobile-device-for-on-call/?tab=ios
+[20]: https://docs.datadoghq.com/incident_response/on-call/
+[21]: /incident_response/on-call/guides/configure-mobile-device-for-on-call/?tab=ios
 [22]: https://docs.datadoghq.com/logs/explorer/analytics/patterns/
 [23]: https://docs.datadoghq.com/logs/explorer/search_syntax/
 [24]: /dashboards/configure/#configuration-actions
 [25]: /logs/explorer/watchdog_insights/
 [26]: /watchdog/insights/?tab=logmanagement
-[27]: /bits_ai/chat_with_bits_ai/
+[27]: /bits_ai/bits_assistant/
 [28]: /bits_ai/bits_ai_sre/
 [29]: /account_management/multi_organization/#custom-sub-domains

@@ -7,7 +7,7 @@ aliases:
 - /es/tracing/trace_collection/custom_instrumentation/php
 - /es/tracing/trace_collection/custom_instrumentation/dd_libraries/php
 code_lang: dd-api
-code_lang_weight: 1
+code_lang_weight: 2
 description: Instrumenta manualmente tu aplicación PHP para enviar trazas (traces)
   personalizadas a Datadog.
 further_reading:
@@ -26,7 +26,7 @@ type: multi-code-lang
 ---
 
 <div class="alert alert-info">
-Si aún no has leído las instrucciones de autoinstrumentación y configuración, comienza por las <a href="/tracing/setup/php/">Instrucciones de configuración de PHP </a>. Aunque Datadog no admita oficialmente tu marco web, es posible que no necesites realizar ninguna instrumentación manual. Consulta <a href="/tracing/setup/php/#automatic-instrumentation"> Instrumentación automática</a> para obtener más detalles.
+Si aún no has leído las instrucciones de autoinstrumentación y configuración, comienza por las <a href="/tracing/setup/php/">Instrucciones de configuración de PHP </a>. Aunque Datadog no admita oficialmente tu framework web, es posible que no necesites realizar ninguna instrumentación manual. Consulta <a href="/tracing/setup/php/#automatic-instrumentation"> Instrumentación automática</a> para obtener más detalles.
 </div>
 
 ## Anotaciones
@@ -57,7 +57,7 @@ Puedes proporcionar los siguientes argumentos:
 - `$run_if_limited`: si la función debe ser rastreada en el modo limitado. (Por ejemplo, cuando se supera el límite del tramo).
 
 <div class="alert alert-danger">
-Si el espacio de nombres está presente, <strong>debes</strong> utilizar el nombre completo del atributo <code>#[\DDTrace\Trace]</code>. Alternativamente, puedes importar el espacio de nombres con <code>use DDTrace\Trace;</code> y usar <code>#[Trace]</code>.
+Si existe un espacio de nombres, <strong>debes</strong> utilizar el nombre completo del atributo <code>#[\DDTrace\Trace]</code>. Alternativamente, puedes importar el espacio de nombres con <code>use DDTrace\Trace;</code> y use <code>#[Trace]</code>.
 </div>
 
 ## Redacción de la instrumentación personalizada
@@ -347,7 +347,7 @@ if ($span) {
 ## Adding tags
 
 <div class="alert alert-danger">
-Cuando configures etiquetas, para evitar sobrescribir etiquetas existentes añadidas automáticamente por la instrumentación central de Datadog, <strong>escribe <code>$span->meta['mytag'] = 'value'</code></strong>. No escribas <code>$span->meta = ['mytag' => 'value']</code>.
+Cuando establezcas etiquetas, para evitar sobrescribir etiquetas existentes añadidas automáticamente por la instrumentación del núcleo de Datadog, <strong>escribe <code>$span->meta['mytag'] = 'value'</code></strong>. No escribas <code>$span->meta = ['mytag' => 'value']</code>.
 </div>
 
 {{< tabs >}}
@@ -762,7 +762,7 @@ resources.ddtrace = true
 
 ### Optimización del código de PHP
 
-Antes de PHP 7, algunos marcos proporcionaban formas de compilar clases PHP (por ejemplo, a través del comando `php artisan optimize` de Laravel).
+Antes de PHP 7, algunos frameworks proporcionaban formas de compilar clases PHP (por ejemplo, a través del comando `php artisan optimize` de Laravel).
 
 Aunque esto [ha quedado obsoleto][7] si utilizas PHP 7.x, todavía puedes utilizar este mecanismo de almacenamiento en caché en tu aplicación anterior a la versión 7.x. En este caso, Datadog sugiere que utilices la API de [OpenTracing][8] en lugar de añadir `datadog/dd-trace` a tu archivo Composer.
 

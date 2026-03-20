@@ -22,9 +22,11 @@ aliases:
 
 <div class="alert alert-info">Version 67+ of the Datadog Lambda Extension is optimized to significantly reduce cold start duration. <a href="/serverless/aws_lambda/configuration/?tab=datadogcli#using-datadog-lambda-extension-v67">Read more</a>.</div>
 
-## Setup
+{{< callout url="https://www.datadoghq.com/product-preview/agentic-onboarding-for-serverless-applications/" btn_hidden="false" header="Agentically add Datadog to your Lambda Functions">}}
+Agentic onboarding for Datadog Serverless is in Preview. Use your favorite AI coding tool such as Cursor or Claude to bulk-add Datadog monitoring to your Lambda functions.
+{{< /callout >}}
 
-If your application is deployed as a container image, use the _Container Image_ method.
+## Setup
 
 {{< tabs >}}
 {{% tab "Datadog UI" %}}
@@ -394,6 +396,8 @@ To configure Datadog using SST v3, follow these steps:
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{< /tabs >}}
+
+{{% svl-tracing-env %}}
 
 <div class="alert alert-danger">Do not install the Datadog Lambda Library as a layer <i>and</i> as a JavaScript package. If you installed the Datadog Lambda Library as a layer, do not include <code>datadog-lambda-js</code> in your <code>package.json</code>, or install it as a dev dependency and run <code>npm install --production</code> before deploying.</div>
 

@@ -12,7 +12,7 @@ cascade:
 {{< header-list header="General guides" >}}
     {{< nextlink href="integrations/guide/requests" tag=" documentation" >}}Request Datadog integrations{{< /nextlink >}}
     {{< nextlink href="/integrations/guide/reference-tables/" tag=" Documentation" >}}Add Custom Metadata with Reference Tables{{< /nextlink >}}
-    {{< nextlink href="integrations/guide/source-code-integration" tag=" Documentation" >}}Datadog Source Code Integration{{< /nextlink >}}
+    {{< nextlink href="source_code" tag=" Documentation" >}}Datadog Source Code Integration{{< /nextlink >}}
     {{< nextlink href="integrations/guide/high_availability" tag=" Documentation" >}}High Availability (HA) support of the Datadog Agent{{< /nextlink >}}
     {{< nextlink href="integrations/guide/cloud-metric-delay" tag=" cloud" >}}Cloud metric delay{{< /nextlink >}}
     {{< nextlink href="integrations/guide/add-event-log-files-to-the-win32-ntlogevent-wmi-class" tag=" Windows" >}}Add event log files to the `Win32_NTLogEvent` WMI class{{< /nextlink >}}
@@ -31,6 +31,7 @@ cascade:
     {{< nextlink href="integrations/guide/application-monitoring-vmware-tanzu" tag=" VMWare Tanzu" >}}Datadog Application Monitoring for VMware Tanzu{{< /nextlink >}}
     {{< nextlink href="integrations/guide/cluster-monitoring-vmware-tanzu" tag=" VMWare Tanzu" >}}Datadog Cluster Monitoring for VMware Tanzu{{< /nextlink >}}
     {{< nextlink href="integrations/guide/fips-integrations" tag=" fips" >}}FIPS Verified Agent Integrations{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/microsoft_teams_troubleshooting" tag=" Microsoft Teams" >}}Troubleshooting Microsoft Teams{{< /nextlink >}}
 {{< /header-list >}}
 
 {{< header-list header="AWS guides" >}}
@@ -65,6 +66,7 @@ cascade:
 
 {{< header-list header="OCI guides" >}}
     {{< nextlink href="integrations/guide/oci-integration-troubleshooting" tag=" oci" >}}OCI Integration Troubleshooting{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/oracle-fusion-integration-setup" tag=" oci" >}}Oracle Fusion Integration Setup{{< /nextlink >}}
 {{< /header-list >}}
 
 {{< header-list header="JMX guides" >}}
