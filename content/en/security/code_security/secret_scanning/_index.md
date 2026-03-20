@@ -27,7 +27,7 @@ Scans can run in your CI/CD pipelines or directly in Datadog with hosted scannin
 ## Secret Scanning rules
 
 Datadog Secret Scanning is powered by [Sensitive Data Scanner (SDS)][3] and includes all of the rules in the
-[Secrets and credentials category of SDS][4]. For a subset of detections, Secret Scanning will automatically check if detected keys are live with [third-party active validation][17]. 
+[Secrets and credentials category of SDS][4]. For a subset of detections, Secret Scanning automatically checks if detected keys are live with [third-party active validation][17]. 
 
 ## How it works
 
