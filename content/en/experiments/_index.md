@@ -12,22 +12,27 @@ further_reading:
 
 ## Overview
 
-Datadog Experiments helps teams run and analyze randomized experiments, such as A/B tests, to understand how product changes affect user behavior, application performance, and business outcomes. This allows you to make confident, data-backed decisions about what to implement.
+Datadog Experiments helps teams run and analyze randomized experiments, such as A/B tests, to understand how product changes affect user behavior, application performance, and business outcomes, allowing you to make confident, data-backed decisions about what to implement.
 
-Datadog Experiments builds on [Datadog Feature Flags][1], [Product Analytics][2], and [Real User Monitoring (RUM)][3]. Feature Flags control which users see each variant while [Product Analytics][2] and [Real User Monitoring (RUM)][3] provide the metrics used to measure the impact.
+Datadog Experiments has two components:
+
+- An integration with [Datadog Feature Flags][1] for deploying and managing randomized experiments
+- A statistical analysis engine that uses metrics from [Product Analytics][2], [Real User Monitoring (RUM)][3] to measure the impact of each test group.
 
 ## Getting started
 
-To start using Datadog Experiments, set up a data source:
+To start using Datadog Experiments, configure both of the following data sources:
 
-- **[Product Analytics][2]** for user behavior and journey metrics
 - **[Real User Monitoring (RUM)][3]** for client-side and performance signals
+- **[Product Analytics][2]** for user behavior and journey metrics
 
-After setting up a data source:
-1. **[Create a metric][4]** to calculate a [sample size][8] and to evaluate your experiment.
-1. **[Create an experiment][5]** and define the experiment's name and hypothesis.
-1. **[Create a feature flag][6]** and implement it using the SDK to assign users to control and variant groups. This is required to launch your experiment.
-1. **[Launch your experiment][7]** to see comparison results across groups and a report of the lift, confidence intervals, and statistical significance.
+After setting your data sources:
+1. **[Create a metric][4]** to use to evaluate your experiment.
+1. **[Create a experiment][5]** to calculate a [sample size][8] and set a hypothesis.
+1. **[Create a feature flag][6]** and implement it using the [SDK][9] to assign users to the control and variant groups. This is required to launch your experiment.
+1. **[Launch your experiment][7]** to see the impact of your change on business metrics, application performance, and user journey.
+
+{{< img src="/product_analytics/experiment/overview_metrics_view1.png" alt="The Experiments metrics view showing business, funnel, and performance metrics with control and variant values and relative lift for each metric." style="width:90%;" >}}
 
 
 ## Further reading
@@ -41,4 +46,5 @@ After setting up a data source:
 [6]: /getting_started/feature_flags/#create-your-first-feature-flag
 [7]: /experiments/plan_and_launch_experiments#step-3---launch-your-experiment
 [8]: /experiments/plan_and_launch_experiments#add-a-sample-size-calculation-optional
+[9]: /getting_started/feature_flags/#feature-flags-sdks
 
