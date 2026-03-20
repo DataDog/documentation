@@ -702,6 +702,27 @@
       "description": "Update Fastly account returns \"OK\" response"
     }
   ],
+  "CreateFeatureFlag": [
+    {
+      "group": "feature_flags",
+      "suffix": "",
+      "description": "Create a feature flag returns \"Created\" response"
+    }
+  ],
+  "CreateFeatureFlagsEnvironment": [
+    {
+      "group": "feature_flags",
+      "suffix": "",
+      "description": "Create an environment returns \"Created\" response"
+    }
+  ],
+  "UpdateFeatureFlag": [
+    {
+      "group": "feature_flags",
+      "suffix": "",
+      "description": "Update a feature flag returns \"OK\" response"
+    }
+  ],
   "MakeGCPSTSDelegate": [
     {
       "group": "gcp_integration",
