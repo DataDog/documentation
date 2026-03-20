@@ -69,7 +69,7 @@ You can configure Datadog to send you notifications as soon as it detects new th
 
 An entity's risk score approximates the entity's risk level over the past 14 days of activity. Datadog calculates the risk score from the characteristics of the entity's associated signals, such as the severity level of the signal, and how many times the signal has fired.
 
-### Signal score impacts
+### View and customize signal score impacts
 
 Each signal has a score impact based on its severity. Datadog assigns a default number of points to each signal severity. To view or override the default score impacts for your organization, as well as impacts for misconfigurations and identity risks, go to the [Risk Insights settings page][7].
 
