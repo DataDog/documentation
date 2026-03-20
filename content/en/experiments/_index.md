@@ -16,19 +16,19 @@ Datadog Experiments helps teams run and analyze randomized experiments, such as 
 
 Datadog Experiments has two components:
 
-- An integration with [Datadog Feature Flags][1] for deploying and managing randomized experiments
-- A statistical analysis engine that uses metrics from [Product Analytics][2], [Real User Monitoring (RUM)][3] to measure the impact of each test group.
+- [Datadog Feature Flags][1] for deploying and managing randomized experiments
+- Statistical analysis using metrics from [Product Analytics][2] and [Real User Monitoring (RUM)][3] to measure the impact of each experiment group.
 
 ## Getting started
 
-To start using Datadog Experiments, configure both of the following data sources:
+To start using Datadog Experiments, configure at least one of the following data sources:
 
 - **[Real User Monitoring (RUM)][3]** for client-side and performance signals
 - **[Product Analytics][2]** for user behavior and journey metrics
 
-After setting your data sources:
+After setting your data source:
 1. **[Create a metric][4]** to use to evaluate your experiment.
-1. **[Create a experiment][5]** to calculate a [sample size][8] and set a hypothesis.
+1. **[Create an experiment][5]** to calculate a [sample size][8] and set a hypothesis.
 1. **[Create a feature flag][6]** and implement it using the [SDK][9] to assign users to the control and variant groups. This is required to launch your experiment.
 1. **[Launch your experiment][7]** to see the impact of your change on business metrics, application performance, and user journey.
 
