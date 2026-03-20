@@ -12,41 +12,23 @@ further_reading:
 
 ## Overview
 
-Datadog Experiments helps you run and analyze randomized experiments, such as A/B tests, to understand how product changes affect business, behavioral, and performance outcomes.
+Datadog Experiments helps teams run and analyze randomized experiments, such as A/B tests, to understand how product changes affect user behavior, application performance, and business outcomes. This allows you to make confident, data-backed decisions about what to implement.
 
-Experiments combines [Datadog Feature Flags][1] for assigning users to control and variant groups with statistical analysis to measure the impact of each variant.
-
-## How Experiments work
-
-1. Use [Datadog Feature Flags][1] to deploy a change and assign users to control and variant groups.
-2. Select the metrics you want to evaluate.
-3. As the experiment runs, Datadog compares performance between the control and each variant.
-4. Review lift, confidence intervals, and statistical significance to understand the impact of the change.
-
-## Data sources
-
-Experiments can analyze metrics from:
-
-- **[Product Analytics][2]** for user behavior and journey metrics
-- **[Real User Monitoring (RUM)][3]** for client-side and performance signals
-- **[Warehouse-native data sources][4]** for business and operational metrics from your own data warehouse
+Datadog Experiments builds on [Datadog Feature Flags][1], [Product Analytics][2], and [Real User Monitoring (RUM)][3]. Feature Flags control which users see each variant while [Product Analytics][2] and [Real User Monitoring (RUM)][3] provide the metrics used to measure the impact.
 
 ## Getting started
 
-To start using Experiments, [install the Feature Flags SDK][5] and [create your first metrics][6].
+To start using Datadog Experiments, set up a data source:
 
-If you already use Product Analytics or Real User Monitoring, you can start creating metrics right away.
+- **[Product Analytics][2]** for user behavior and journey metrics
+- **[Real User Monitoring (RUM)][3]** for client-side and performance signals
 
+After setting up a data source:
+1. **[Create a metric][4]** to calculate a [sample size][8] and to evaluate your experiment.
+1. **[Create an experiment][5]** and define the experiment's name and hypothesis.
+1. **[Create a feature flag][6]** and implement it using the SDK to assign users to control and variant groups. This is required to launch your experiment.
+1. **[Launch your experiment][7]** to see comparison results across groups and a report of the lift, confidence intervals, and statistical significance.
 
-<!-- THIS NEEDS THE GUIDES TO BE COMPLETED FIRST
-
-To connect your data warehouse, follow the appropriate setup guide:
-
-- [Snowflake][7]
-- [Databricks][8]
-- [BigQuery][9]
-- [Redshift][10]
- -->
 
 ## Further reading
 {{< partial name="whats-next/whats-next.html" >}}
@@ -54,7 +36,9 @@ To connect your data warehouse, follow the appropriate setup guide:
 [1]: /feature_flags/
 [2]: /product_analytics/
 [3]: /real_user_monitoring/
-[4]: /experiments/warehouse_native/
-[5]: /feature_management/setup/
-[6]: /experiments/defining_metrics
+[4]: /experiments/defining_metrics
+[5]: /experiments/plan_and_launch_experiments
+[6]: /getting_started/feature_flags/#create-your-first-feature-flag
+[7]: /experiments/plan_and_launch_experiments#step-3---launch-your-experiment
+[8]: /experiments/plan_and_launch_experiments#add-a-sample-size-calculation-optional
 
