@@ -242,9 +242,9 @@ Send cases from Datadog to the Datadog Cases ITSM table in ServiceNow. ServiceNo
 <div class="alert alert-info">The user configuring the settings in ServiceNow must have both the <code>x_datad_datadog.user</code> and <code>admin</code> roles.</a></div>
 
 1. In Datadog, go to the [ServiceNow integration settings][4] page.
-1. Go to the **Configure** tab, then the **ITSM** tab, then the **Case Management** tab.
+1. Go to the **Configure** tab, then the **ITOM/ITSM** tab, then the **Case Management** tab.
 1. Under **Sync ServiceNow with Case Management**, open the settings for your ServiceNow instance.
-1. Beside **Case Table**, choose to send cases to **Datadog Cases ITSM**.
+1. Beside **Case Table**, choose to send cases to **Datadog Cases ITSM**. Note that ITOM is not supported for Case Management.
 1. Navigate to the [**Case Management > Settings**][5] page, and expand your project. Then, [set up the ServiceNow integration][6] for that project.
 
 ### Configure Datadog Incident Management {#incident-management}
