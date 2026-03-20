@@ -13743,6 +13743,13 @@ components:
         data:
           $ref: "#/components/schemas/ConvertJobResultsToSignalsData"
       type: object
+    CostAggregationType:
+      description: "Controls how costs are aggregated when using `start_date`. The `cumulative` option returns month-to-date running totals."
+      enum:
+        - cumulative
+      type: string
+      x-enum-varnames:
+        - CUMULATIVE
     CostAttributionAggregates:
       description: An array of available aggregates.
       items:
@@ -108226,6 +108233,12 @@ paths:
           schema:
             format: date-time
             type: string
+        - description: "Controls how costs are aggregated when using `start_date`. The `cumulative` option returns month-to-date running totals."
+          in: query
+          name: cost_aggregation
+          required: false
+          schema:
+            $ref: "#/components/schemas/CostAggregationType"
         - description: "Boolean to specify whether to include accounts connected to the current account as partner customers in the Datadog partner network program. Defaults to `false`."
           in: query
           name: include_connected_accounts
