@@ -39,7 +39,7 @@ Deploy using Agentless or unified Datadog Agent
 : Quickly scan your entire infrastructure for vulnerabilities, either using Agentless, or by using the unified Datadog Agent you already have deployed.
 
 Inventory cloud resources, in real-time
-: Inventory container images, hosts, serverless functions, and all packages deployed in your infrastructure, in real time, and export your SBOM.
+: Inventory container images, hosts, serverless functions, and all packages deployed in your infrastructure, in real time, and export your SBOM (software bill of materials).
 
 Detect vulnerabilities continuously
 : Scan recent updates and newly published CVEs, across running container images from hosts and registries, host, host images, and serverless, and identify vulnerable container image layers.
@@ -74,14 +74,14 @@ Use these tables to decide which solution to start with:
 | Vulnerability prioritization              | Yes                                           | Yes, with runtime context      |
 | Vulnerability scanning frequency          | 12 hours                                      | Real-time                      |
 
-| Vulnerability detection scope | Agentless                                     | Unified Datadog Agent          |
-|-------------------------------|-----------------------------------------------|--------------------------------|
-| Host and host image           | OS packages and app packages, mapped to image | OS packages                    |
-| Container image               | OS packages and app packages, mapped to image | OS packages                    |
-| Cloud provider                | AWS, Azure, GCP                               | AWS, Azure, GCP, on-prem, etc. |
-| Operating system              | Linux, Windows                                | Linux, Windows                 |
-| Serverless                    | AWS Lambda, Amazon ECS Fargate, GCP Cloud Run | Not applicable                 |
-| Container registries          | Amazon ECR, Google Artifact Registry          | Not applicable                 |
+| Vulnerability detection scope | Agentless                                                                         | Unified Datadog Agent          |
+|-------------------------------|-----------------------------------------------------------------------------------|--------------------------------|
+| Host and host image           | OS packages and app packages, mapped to image                                     | OS packages                    |
+| Container image               | OS packages and app packages, mapped to image                                     | OS packages                    |
+| Cloud provider                | AWS, Azure, GCP                                                                   | AWS, Azure, GCP, on-prem, etc. |
+| Operating system              | Linux, Windows                                                                    | Linux, Windows                 |
+| Serverless                    | AWS Lambda, Amazon ECS Fargate, Azure Container Apps, Azure Container Instances, GCP Cloud Run (container deployment only) | Not applicable                 |
+| Container registries          | Amazon ECR (running + at-rest), Google Artifact Registry (running workloads only), Azure Container Registry (running container images only) | Not applicable                 |
 
 For more information on compatibility, see [Cloud Security Vulnerabilities Hosts and Containers Compatibility][13]. If you need any assistance, see the [troubleshooting guide][14], or reach out to support@datadoghq.com.
 

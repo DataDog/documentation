@@ -16,10 +16,6 @@ further_reading:
   text: "Connect your AI agents to Datadog tools and context using the Datadog MCP Server"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/datadog-mcp-server/" >}}
-The Datadog MCP Server is in Preview. There is no charge for using the Datadog MCP Server during the Preview, but pricing may change when the feature becomes generally available. If you're interested in the MCP server and need access, complete this form.
-{{< /callout >}}
-
 ## Overview
 
 The [Datadog MCP Server][1] enables AI agents to access your Software Delivery data through the [Model Context Protocol (MCP)][2]. The `software-delivery` toolset provides tools for interacting with [CI Visibility][3] and [Test Optimization][4] directly from AI-powered clients like Cursor, Claude Code, or OpenAI Codex.
@@ -32,6 +28,7 @@ The Software Delivery MCP tools unlock AI-assisted workflows for:
 - **Identifying flaky tests**: Query for flaky tests in your repository and get prioritized recommendations for which to fix first.
 - **Analyzing CI performance**: Get aggregated statistics on pipeline durations, failure rates, and trends over time.
 - **Triaging test failures**: Understand which tests are failing, their ownership, and historical patterns.
+- **Reviewing code coverage**: Get coverage summaries for branches or commits, including patch coverage and breakdowns by service or code owner.
 
 ## Available tools
 
@@ -52,6 +49,12 @@ The `software-delivery` toolset includes the following tools:
 `search_datadog_test_events`
 : Search test events with filters and get details on them.
 
+`get_datadog_code_coverage_branch_summary`
+: Fetch aggregated code coverage summary metrics for a repository branch, including total coverage, patch coverage, and service/codeowner breakdowns.
+
+`get_datadog_code_coverage_commit_summary`
+: Fetch aggregated code coverage summary metrics for a repository commit, including total coverage, patch coverage, and service/codeowner breakdowns.
+
 ## Example prompts
 
 After you are connected, try prompts like:
@@ -61,6 +64,8 @@ After you are connected, try prompts like:
 - Find active flaky tests for the checkout service sorted by failure rate.
 - How many failed pipelines have there been in the last 2 weeks?
 - Show me the 95th percentile of pipeline duration grouped by pipeline name.
+- What's the code coverage on the `main` branch for `github.com/my-org/my-repo`?
+- Show me coverage metrics for commit `abc123abc123abc123abc123abc123abc123abcd`.
 
 ## Setup
 

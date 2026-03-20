@@ -292,7 +292,7 @@ Consulta [Azure Automated Log Forwarding Architecture][34] para obtener más det
 
 {{% azure-log-archiving %}}
 
-## Obtén más información de la plataforma de Datadog 
+## Obtén más información de la plataforma de Datadog
 
 ### Instala el Agent para obtener una mayor visibilidad de tu aplicación.
 
@@ -387,5 +387,5 @@ Consulta [Solución de problemas][16] en la guía de configuración avanzada de 
 [48]: https://learn.microsoft.com/azure/azure-functions/functions-get-started
 [49]: https://github.com/DataDog/datadog-serverless-functions/blob/master/azure/blobs_logs_monitoring/index.js
 [51]: https://app.datadoghq.com/logs
-[52]: https://portal.azure.com/#create/Microsoft.Template/uri/CustomDeploymentBlade/uri/https%3A%2F%2Fddazurelfo.blob.core.windows.net%2Ftemplates%2Fforwarder.json
+[52]: https://portal.azure.com/#create/Microsoft.Template/uri/CustomDeploymentBlade/uri/https%3A%2F%2Fraw.githubusercontent.com%2FDataDog%2Fintegrations-management%2Fmain%2Fazure%2Flogging_install%2Fdist%2Fforwarder.json
 [53]: https://learn.microsoft.com/azure/azure-monitor/platform/diagnostic-settings

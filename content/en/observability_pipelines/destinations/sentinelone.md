@@ -25,7 +25,12 @@ Set up the SentinelOne destination and its environment variables when you [set u
 
 1. Enter the identifier for your token. If you leave it blank, the [default](#set-secrets) is used.
 1. Select your SentinelOne logs environment in the dropdown menu.
-{{% observability_pipelines/destination_buffer_numbered %}}
+
+#### Optional settings
+
+##### Buffering options
+
+{{% observability_pipelines/destination_buffer %}}
 
 ### Set secrets
 
@@ -61,9 +66,9 @@ After you've set up the pipeline to send logs to the SentinelOne destination, yo
 
 A batch of events is flushed when one of these parameters is met. See [event batching][3] for more information.
 
-| Max Events     | Max Bytes       | Timeout (seconds)   |
-|----------------|-----------------|---------------------|
-| None           | 1,000,000       | 1                   |
+| Maximum Events | Maximum Size (MB) | Timeout (seconds)   |
+|----------------|-------------------|---------------------|
+| None           | 1                 | 1                   |
 
 ## Further reading
 

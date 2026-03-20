@@ -15,7 +15,7 @@ further_reading:
 
 ## Overview
 
-This document explains [bootstrapping](#bootstrap-options) for the Observability Pipelines Worker and how to [enable the health check endpoint and the liveness and readiness probes](#enable-the-health-check-endpoint-and-the-liveness-and-readiness-probes).
+This document explains [bootstrapping](#bootstrap-options) for the Observability Pipelines Worker, [other Worker configuration options](#other-worker-configuration-options), and how to [enable the health check endpoint and the liveness and readiness probes](#enable-the-health-check-endpoint-and-the-liveness-and-readiness-probes).
 
 ## Bootstrap Options
 
@@ -98,9 +98,13 @@ The following is a list of bootstrap options, their related pipeline environment
 : **Priority**: `DD_OP_THREADS`
 : **Description**: The number of threads to use for processing (optional, default: the number of available cores).
 
+## Other Worker configuration options
+
+Use the `VECTOR_HOSTNAME` environment variable to assign a unique hostname and help you identify the Worker.
+
 ## Enable the health check endpoint and the liveness and readiness probes
 
-Configure your load balancer's health check with the `/heath` endpoint to check that the Worker is up and running.
+Configure your load balancer's health check with the `/health` endpoint to check that the Worker is up and running.
 
 For Kubernetes, the liveness and readiness probes are already enabled in the [helm chart][9] and [values.yaml][10] file.
 
@@ -109,7 +113,7 @@ For other installations such as VM-based ones, you must set `DD_OP_API_ENABLED` 
 ```
 api:
   enabled: true
-  address: "0.0.0.0.1:8686"
+  address: "0.0.0.0:8686"
 ```
 
 ## Further reading

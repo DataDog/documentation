@@ -9,15 +9,11 @@ further_reading:
   text: Bring Your Own Threat Intelligence
 ---
 
-{{< callout url="" btn_hidden="true" header="false" >}}
-The IOC Explorer is in Preview.
-{{< /callout >}}
-
 ## Overview
 
 Indicators of Compromise (IOC) are evidence that your systems have experienced a security breach. With the [IOC Explorer][1], you can view more details about compromises, and see related signals and logs.
 
-{{< img src="security/security_monitoring/ioc_explorer.png" alt="The IOC Explorer, showing an IP address that has been flagged as an indicator of compromise" style="width:100%;" >}}
+{{< img src="security/security_monitoring/ioc_explorer_1.png" alt="The IOC Explorer, showing an IP address that has been flagged as an indicator of compromise" style="width:100%;" >}}
 
 ## Prerequisites
 
@@ -45,10 +41,11 @@ Additionally, you can click a column heading in the Explorer to sort by that col
 ### Get more context on an indicator of compromise
 
 Click an indicator of compromise to open a side panel that contains additional information about it:
-- When the indicator was first and last seen in a threat intelligence feed
-  <div class="alert alert-info" style="margin-bottom: 0">This is distinct from the first or last time the indicator was seen in a log.</div>
-- Any categories and ratings assigned to it, and the threat intelligence feeds associated with those ratings
+- Any categories assigned to the indicator, and the threat intelligence feeds it appeared in
+- Any ratings assigned to the indicator, and the threat intelligence feeds associated with those ratings
 - A breakdown of the indicator's severity score
+- The environment associated with the indicator, including related sources and services
+- Related items the indicator can have an impact on
 - Signal matches, which you can view in Signals Explorer
 - Related logs, which you can view in Log Explorer
 

@@ -34,7 +34,7 @@ If you are using the LLM Observability Node.js SDK (`dd-trace` v5.83.0+), attach
 #### LLM Observability API
 If you are using the LLM Observability API intake, submit prompt metadata to the Spans API endpoint. See the [LLM Observability HTTP API reference documentation][4].
 
-#### OpenTelemetry Instrumentation
+#### OpenTelemetry instrumentation
 If you are using [OpenTelemetry instrumentation][7], you can attach prompt metadata to your LLM spans by setting the `_dd.ml_obs.prompt_tracking` attribute with a JSON string containing your prompt information.
 
 Set the attribute on any LLM span:
