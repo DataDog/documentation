@@ -2,7 +2,7 @@
 title: Sources
 disable_toc: false
 further_reading:
-- link: "/observability_pipelines/set_up_pipelines/"
+- link: "/observability_pipelines/configuration/set_up_pipelines/"
   tag: "Documentation"
   text: "Set up pipelines"
 - link: "/observability_pipelines/processors/"
@@ -15,9 +15,72 @@ further_reading:
 
 ## Overview
 
-Use Observability Pipelines' sources to receive logs from your different log sources. Sources have different prerequisites and settings. Some sources also need to be configured to send logs to the Observability Pipelines Worker.
+Use Observability Pipelines' sources to receive logs or metrics ({{< tooltip glossary="preview" case="title" >}}) from different data sources. Sources have different prerequisites and settings. Some sources also need to be configured to send data to the Observability Pipelines Worker.
 
 Select a source in the left navigation menu to see more information about it.
+
+## Sources
+
+These are the available sources:
+
+{{< tabs >}}
+{{% tab "Logs" %}}
+
+- [Akamai DataStream][1]
+- [Amazon Data Firehose][2]
+- [Amazon S3][3]
+- [Azure Event Hubs][4]
+- [Cloudflare Logpush][5]
+- [Datadog Agent][6]
+- [Filebeat][7]
+- [Fluentd and Fluent Bit][8]
+- [Google Pub/Sub][9]
+- [HTTP Client][10]
+- [HTTP Server][11]
+- [Kafka][12]
+- [Lambda Extension][13]
+- [Lambda Forwarder][14]
+- [Logstash][15]
+- [MySQL][16]
+- [OpenTelemetry][17]
+- [Socket][18]
+- [Splunk HTTP Event Collector (HEC)][19]
+- [Splunk Heavy or Universal Forwarders (TCP)][20]
+- [Sumo Logic Hosted Collector][21]
+- [Syslog][22]
+
+[1]: /observability_pipelines/sources/akamai_datastream/
+[2]: /observability_pipelines/sources/amazon_data_firehose/
+[3]: /observability_pipelines/sources/amazon_s3/
+[4]: /observability_pipelines/sources/azure_event_hubs/
+[5]: /observability_pipelines/sources/cloudflare_logpush/
+[6]: /observability_pipelines/sources/datadog_agent/
+[7]: /observability_pipelines/sources/filebeat/
+[8]: /observability_pipelines/sources/fluent/
+[9]: /observability_pipelines/sources/google_pubsub/
+[10]: /observability_pipelines/sources/http_client/
+[11]: /observability_pipelines/sources/http_server/
+[12]: /observability_pipelines/sources/kafka/
+[13]: /observability_pipelines/sources/lambda_extension/
+[14]: /observability_pipelines/sources/lambda_forwarder/
+[15]: /observability_pipelines/sources/logstash/
+[16]: /observability_pipelines/sources/mysql/
+[17]: /observability_pipelines/sources/opentelemetry/
+[18]: /observability_pipelines/sources/socket/
+[19]: /observability_pipelines/sources/splunk_hec/
+[20]: /observability_pipelines/sources/splunk_tcp/
+[21]: /observability_pipelines/sources/sumo_logic/
+[22]: /observability_pipelines/sources/syslog/
+
+{{% /tab %}}
+{{% tab "Metrics" %}}
+
+- [Datadog Agent][1]
+
+[1]: /observability_pipelines/sources/datadog_agent/
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Standard metadata fields
 
@@ -54,9 +117,47 @@ After events are ingested by the source, they get sent to different processors a
 
 **Note**: The `bytes in per second` metric in the UI is for ingested raw events, not enriched events.
 
+## TLS certificates
+
+Enable TLS for Observability Pipelines to ensure that data are encrypted during transit. This prevents attackers from tampering with your data.
+
+Observability Pipelines does not accept self-signed certificates by default because they do not provide secure trust verification and can potentially expose your environment to man-in-the-middle attacks.
+
+To check if your certificate is self-signed, run this command:
+
+```
+openssl verify -CAfile certificate.pem certificate.pem
+```
+
+If the certificate is self-signed and verifies against itself, the output is:
+
+```
+certificate.pem: OK
+```
+
+Otherwise, you see the error `unable to get local issuer certificate`.
+
+Instead of using a self-signed certificate, Datadog recommends the following:
+
+1. Use a certificate signed by Certificate Authority (CA).
+2. If you cannot use a CA-signed certificate, use a certificate from [Let's Encrypt][3].
+
+If you must use a self-signed certificate because the above approaches are not possible, you can configure your environment to trust the self-signed certificate on the Observability Pipelines Worker host.
+
+<div class="alert alert-warning">Datadog does not recommend self-signed certificates. They are less secure and are not appropriate for production or internet-facing use. If you must use self-signed certificates, limit usage to internal testing only.</a></div>
+
+For the Worker host to trust the self-signed certificate:
+
+- On Linux hosts, install the certificate in the OS trust store.
+- In Kubernetes, you can either:
+    - Build a custom container image that includes the certificate.
+    - Mount the certificate and update the container's trust store manually.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/observability-pipelines
-[2]: /observability_pipelines/troubleshooting/#use-tap-to-see-your-data
+[2]: /observability_pipelines/monitoring_and_troubleshooting/troubleshooting/#use-tap-to-see-your-data
+[3]: https://letsencrypt.org/
+

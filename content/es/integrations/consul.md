@@ -1,38 +1,5 @@
 ---
 app_id: consul
-app_uuid: d0b52e9d-6594-4ff5-9b66-800943f75756
-assets:
-  dashboards:
-    consul: assets/dashboards/consul_overview.json
-  integration:
-    auto_install: true
-    configuration:
-      spec: assets/configuration/spec.yaml
-    events:
-      creates_events: true
-    metrics:
-      check: consul.peers
-      metadata_path: metadata.csv
-      prefix: consul.
-    process_signatures:
-    - consul agent
-    - consul_agent
-    - consul-agent
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 122
-    source_type_name: Consul
-  monitors:
-    consul service status: assets/monitors/consul_status.json
-  saved_views:
-    consul_errors: assets/saved_views/consul_errors.json
-    consul_overview: assets/saved_views/consul_overview.json
-    consul_processes: assets/saved_views/consul_processes.json
-author:
-  homepage: https://www.datadoghq.com
-  name: Datadog
-  sales_email: info@datadoghq.com
-  support_email: help@datadoghq.com
 categories:
 - configuration & deployment
 - containers
@@ -41,63 +8,36 @@ categories:
 - notifications
 - orchestration
 custom_kind: integración
-dependencies:
-- https://github.com/DataDog/integrations-core/blob/master/consul/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: consul
-integration_id: consul
-integration_title: Consul
-integration_version: 4.0.0
-is_public: true
-manifest_version: 2.0.0
-name: consul
-public_title: Consul
-short_description: Alerta sobre los controles de estado de Consul, consulta las asignaciones
-  de servicio a nodo y mucho más.
+description: Recibe alertas sobre los checks de estado de Consul, ve las asignaciones
+  de servicio a nodo y mucho más. more.
+further_reading:
+- link: https://docs.datadoghq.com/integrations/guide/hcp-consul
+  tag: documentación
+  text: Monitorización de HCP Cónsul con Datadog
+- link: https://www.datadoghq.com/blog/monitor-consul-health-and-performance-with-datadog
+  tag: blog
+  text: Monitorización del estado y rendimiento de Consul con Datadog
+- link: https://www.datadoghq.com/blog/engineering/consul-at-datadog/
+  tag: blog
+  text: Consul en Datadog
+- link: https://www.datadoghq.com/blog/consul-metrics/
+  tag: blog
+  text: Métricas clave para la monitorización de Consul
+- link: https://www.datadoghq.com/blog/consul-monitoring-tools/
+  tag: blog
+  text: Herramientas de monitorización de Consul
+- link: https://www.datadoghq.com/blog/consul-datadog/
+  tag: blog
+  text: Cómo monitorizar Consul con Datadog
+integration_version: 5.0.0
+media: []
 supported_os:
 - linux
 - windows
 - macos
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::Configuración y despliegue
-  - Category::Contenedores
-  - Category::Recopilación de logs
-  - Category::Red
-  - Category::Notificaciones
-  - Category::Orquestación
-  - Supported OS::Linux
-  - Supported OS::Windows
-  - Supported OS::macOS
-  - Offering::integración
-  configuration: README.md#Configuración
-  description: Alerta sobre los controles de estado de Consul, consulta las asignaciones
-    de servicio a nodo y mucho más.
-  media: []
-  overview: README.md#Información general
-  resources:
-  - resource_type: documentación
-    url: https://docs.datadoghq.com/integrations/guide/hcp-consul
-  - resource_type: blog
-    url: https://www.datadoghq.com/blog/monitor-consul-health-and-performance-with-datadog
-  - resource_type: blog
-    url: https://www.datadoghq.com/blog/engineering/consul-at-datadog/
-  - resource_type: blog
-    url: https://www.datadoghq.com/blog/consul-metrics/
-  - resource_type: blog
-    url: https://www.datadoghq.com/blog/consul-monitoring-tools/
-  - resource_type: blog
-    url: https://www.datadoghq.com/blog/consul-datadog/
-  support: README.md#Soporte
-  title: Consul
+title: Consul
 ---
-
-<!--  EXTRAÍDO DE https://github.com/DataDog/integrations-core -->
-
-
-![Consul Dash][1]
+![Panel de Consul](https://raw.githubusercontent.com/DataDog/integrations-core/master/consul/images/consul-dash.png)
 
 ## Información general
 
@@ -114,7 +54,7 @@ El _Consul_ Agent puede proporcionar métricas adicionales con DogStatsD. Estas 
 - Protocolo Raft
 - Rendimiento del DNS
 
-Y mucho más.
+Y muchos más.
 
 Por último, además de las métricas, el Datadog Agent también envía un check de servicio para cada uno de los checks de estado de Consul y un evento después de cada nueva elección de líder.
 
@@ -122,20 +62,21 @@ Por último, además de las métricas, el Datadog Agent también envía un check
 
 ### Instalación
 
-El check de Consul está incluido en el paquete del [Datadog Agent][2], por lo que no necesitas instalar nada más en tus nodos de Consul.
+El check de Consul del Datadog Agent está incluido en el paquete del [Datadog Agent](https://app.datadoghq.com/account/settings/agent/latest), por lo que no necesitas instalar nada más en tus nodos de Consul.
 
 ### Configuración
 
 {{< tabs >}}
+
 {{% tab "Host" %}}
 
-#### Host
+#### host
 
 Para configurar este check para un Agent que se ejecuta en un host:
 
 ##### Recopilación de métricas
 
-1. Edita el archivo `consul.d/conf.yaml` en la carpeta `conf.d/` en la raíz del [directorio de configuración de tu Agent][1] para empezar a recopilar tus métricas de Consul. Para ver todas las opciones disponibles de configuración, consulta el [ejemplo consul.d/conf.yaml][2].
+1. Edita el archivo `consul.d/conf.yaml`, en la carpeta `conf.d/` en la raíz de tu [directorio de configuración del Agent](https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory) para comenzar a recopilar tus métricas de Consul. Consulta el [consul.d/conf.yaml de ejemplo](https://github.com/DataDog/integrations-core/blob/master/consul/datadog_checks/consul/data/conf.yaml.example) para conocer todas las opciones de configuración disponibles.
 
    ```yaml
    init_config:
@@ -149,7 +90,7 @@ Para configurar este check para un Agent que se ejecuta en un host:
      - url: http://localhost:8500
    ```
 
-2. [Reinicia el Agent][3].
+1. [Reinicia el Agent](https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent).
 
 ###### OpenMetrics
 
@@ -157,44 +98,45 @@ Opcionalmente, puedes habilitar la opción de configuración `use_prometheus_end
 
 **Nota**: Utiliza el método DogStatsD o Prometheus; no habilites ambos para la misma instancia.
 
-1. Configura Consul para exponer métricas al endpoint de Prometheus. Establece [`prometheus_retention_time`][4] anidado bajo la clave `telemetry` de nivel superior del archivo de configuración principal de Consul:
+1. Configura Consul para exponer métricas al endpoint de Prometheus. Establece [`prometheus_retention_time`](https://www.consul.io/docs/agent/options#telemetry-prometheus_retention_time) anidado bajo la clave de nivel superior `telemetry` del archivo de configuración principal de Consul:
 
-    ```conf
-    {
-      ...
-      "telemetry": {
-        "prometheus_retention_time": "360h"
-      },
-      ...
-    }
-    ```
+   ```conf
+   {
+     ...
+     "telemetry": {
+       "prometheus_retention_time": "360h"
+     },
+     ...
+   }
+   ```
 
-2. Edita el archivo `consul.d/conf.yaml`, en la carpeta `conf.d/` en la raíz de tu [directorio de configuración del Agent][1] para empezar a usar el endpoint de Prometheus.
-    ```yaml
-    instances:
-        - url: <EXAMPLE>
-          use_prometheus_endpoint: true
-    ```
+1. Edita el archivo `consul.d/conf.yaml`, en la carpeta `conf.d/` en la raíz de tu [directorio de configuración del Agent](https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory) para empezar a utilizar el endpoint de Prometheus.
 
-3. [Reinicia el Agent][3].
+   ```yaml
+   instances:
+       - url: <EXAMPLE>
+         use_prometheus_endpoint: true
+   ```
+
+1. [Reinicia el Agent](https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent).
 
 ##### DogStatsD
 
-En lugar de utilizar el endpoint de Prometheus, puedes configurar Consul para enviar el mismo conjunto de métricas adicionales al Agent a través de [DogStatsD][5].
+En lugar de utilizar el endpoint de Prometheus, puedes configurar Consul para que envíe el mismo conjunto de métricas adicionales al Agent a través de [DogStatsD](https://docs.datadoghq.com/developers/dogstatsd/).
 
 1. Configura Consul para enviar métricas de DogStatsD añadiendo `dogstatsd_addr` anidado bajo la clave `telemetry` de nivel superior en el archivo de configuración principal de Consul:
 
-    ```conf
-    {
-      ...
-      "telemetry": {
-        "dogstatsd_addr": "127.0.0.1:8125"
-      },
-      ...
-    }
-    ```
+   ```conf
+   {
+     ...
+     "telemetry": {
+       "dogstatsd_addr": "127.0.0.1:8125"
+     },
+     ...
+   }
+   ```
 
-2. Actualiza el [archivo de configuración principal del Datadog Agent][6] `datadog.yaml` añadiendo las siguientes configuraciones para garantizar que las métricas estén etiquetadas correctamente:
+1. Actualiza el [archivo de configuración principal del Datadog Agent](https://docs.datadoghq.com/agent/guide/agent-configuration-files/) `datadog.yaml` añadiendo los siguientes ajustes para garantizar que las métricas se etiquetan correctamente:
 
    ```yaml
    # dogstatsd_mapper_cache_size: 1000  # default to 1000
@@ -225,11 +167,11 @@ En lugar de utilizar el endpoint de Prometheus, puedes configurar Consul para en
              peer_id: "$1"
    ```
 
-3. [Reinicia el Agent][3].
+1. [Reinicia el Agent](https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent).
 
 ##### Recopilación de logs
 
-_Disponible para la versión 6.0 o posteriores del Agent_
+_Disponible para las versiones 6.0 o posteriores del Agent_
 
 1. La recopilación de logs se encuentra deshabilitada de manera predeterminada en el Datadog Agent. Habilítala en tu archivo `datadog.yaml` con:
 
@@ -237,7 +179,7 @@ _Disponible para la versión 6.0 o posteriores del Agent_
    logs_enabled: true
    ```
 
-2. Edita este bloque de configuración en tu archivo `consul.yaml` para recopilar logs de Consul:
+1. Edita este bloque de configuración en tu archivo `consul.yaml` para recopilar logs de Consul:
 
    ```yaml
    logs:
@@ -248,22 +190,17 @@ _Disponible para la versión 6.0 o posteriores del Agent_
    ```
 
    Cambia los valores de los parámetros `path` y `service` y configúralos para tu entorno.
-   Para conocer todas las opciones de configuración disponibles, consulta el [consul.d/conf.yaml de ejemplo][2].
+   Consulta el [consul.d/conf.yaml de ejemplo](https://github.com/DataDog/integrations-core/blob/master/consul/datadog_checks/consul/data/conf.yaml.example) para conocer todas las opciones de configuración disponibles.
 
-3. [Reinicia el Agent][3].
+1. [Reinicia el Agent](https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent).
 
-[1]: https://docs.datadoghq.com/es/agent/guide/agent-configuration-files/#agent-configuration-directory
-[2]: https://github.com/DataDog/integrations-core/blob/master/consul/datadog_checks/consul/data/conf.yaml.example
-[3]: https://docs.datadoghq.com/es/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[4]: https://www.consul.io/docs/agent/options#telemetry-prometheus_retention_time
-[5]: https://docs.datadoghq.com/es/developers/dogstatsd/
-[6]: https://docs.datadoghq.com/es/agent/guide/agent-configuration-files/
 {{% /tab %}}
-{{% tab "Contenedorizado" %}}
 
-#### Contenedores
+{{% tab "Containerized" %}}
 
-Para entornos en contenedores, consulta las [plantillas de integración de Autodiscovery][1] para obtener orientación sobre la aplicación de los parámetros que se indican a continuación.
+#### En contenedores
+
+Para entornos en contenedores, consulta las [plantillas de integración de Autodiscovery](https://docs.datadoghq.com/agent/kubernetes/integrations/) para obtener orientación sobre la aplicación de los parámetros que se indican a continuación.
 
 ##### Recopilación de métricas
 
@@ -275,23 +212,21 @@ Para entornos en contenedores, consulta las [plantillas de integración de Autod
 
 ##### Recopilación de logs
 
-_Disponible para la versión 6.0 o posteriores del Agent_
+_Disponible para las versiones 6.0 o posteriores del Agent_
 
-La recopilación de logs se encuentra deshabilitada de manera predeterminada en el Datadog Agent. Para habilitarla, consulta [Recopilación de logs de Kubernetes][2].
+La recopilación de logs está desactivada por defecto en el Datadog Agent. Para activarla, consulta [recopilación de logs de Kubernetes](https://docs.datadoghq.com/agent/kubernetes/log/).
 
 | Parámetro      | Valor                                               |
 | -------------- | --------------------------------------------------- |
 | `<LOG_CONFIG>` | `{"source": "consul", "service": "<SERVICE_NAME>"}` |
 
-
-[1]: https://docs.datadoghq.com/es/agent/kubernetes/integrations/
-[2]: https://docs.datadoghq.com/es/agent/kubernetes/log/
 {{% /tab %}}
+
 {{< /tabs >}}
 
 ### Validación
 
-[Ejecuta el subcomando de estado del Agent][3] y busca `consul` en la sección Checks.
+[Ejecuta el subcomando de estado del Agent(https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information) y busca `consul` en la sección Checks.
 
 **Nota**: Si tus nodos de Consul tienen habilitado el registro de depuración, el sondeo regular del Datadog Agent se muestra en el log de Consul:
 
@@ -317,12 +252,165 @@ udp        0      0 127.0.0.1:53874         127.0.0.1:8125          ESTABLISHED 
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "consul" >}}
 
+| | |
+| --- | --- |
+| **consul.catalog.nodes_critical** <br>(gauge) | \[Integración\] El número de nodos registrados con estado de servicio `critical`<br>_Se muestra como nodo_ |
+| **consul.catalog.nodes_passing** <br>(gauge) | \[Integración\] El número de nodos registrados con estado de servicio `passing`<br>_Se muestra como nodo_ |
+| **consul.catalog.nodes_up** <br>(gauge) | \[Integración\] El número de nodos<br>_Se muestra como nodo_ |
+| **consul.catalog.nodes_warning** <br>(gauge) | \[Integración\] El número de nodos registrados con estado de servicio `warning`<br>_Se muestra como nodo_ |
+| **consul.catalog.services_count** <br>(gauge) | \[Integración\] Métrica para contar el número de servicios que coinciden con criterios como la etiqueta del servicio, el nombre del nodo o el estado. Se puede consultar mediante el agregador `sum by`.<br>_Se muestra como servicio_ |
+| **consul.catalog.services_critical** <br>(gauge) | \[Integración\] Total de servicios críticos en los nodos<br>_Se muestra como servicio_ |
+| **consul.catalog.services_passing** <br>(gauge) | \[Integración\] Total de servicios aprobados en los nodos<br>_Se muestra como servicio_ |
+| **consul.catalog.services_up** <br>(gauge) | \[Integración\] Total de servicios registrados en los nodos<br>_Se muestra como servicio_ |
+| **consul.catalog.services_warning** <br>(gauge) | \[Integración\] Total de servicios de alerta en los nodos<br>_Se muestra como servicio_ |
+| **consul.catalog.total_nodes** <br>(gauge) | \[Integración\] El número de nodos registrados en el clúster de consul<br>_Se muestra como nodo_ |
+| **consul.check.up** <br>(gauge) | Métrica que representa el estado de un check de servicio. Un valor de 0 = no disponible, 1 = aprobado, 2 = advertencia, 3 = crítico.|
+| **consul.client.rpc** <br>(count) | \[DogStatsD\] \[Prometheus\] Se incrementa cada vez que un agente de Consul en modo cliente hace una solicitud RPC a un servidor de Consul. Esto da una medida de cuánto está cargando un agent dado los servidores de Consul. Esto solo lo generan los agents en modo cliente, no los servidores de Consul.<br>_Se muestra como solicitud_ |
+| **consul.client.rpc.failed** <br>(count) | \[DogStatsD\] \[Prometheus\] Se incrementa cada vez que un agente de Consul en modo cliente realiza una solicitud RPC a un servidor de Consul y falla<br>_Se muestra como solicitud_ |
+| **consul.http.request** <br>(gauge) | \[DogStatsD\] Realiza un seguimiento de cuánto tiempo se tarda en atender la solicitud HTTP dada para el verbo y la ruta dados. Usando un asignador DogStatsD como se describe en el README, las rutas se asignan a etiquetas y no incluyen detalles como nombres de servicio o clave. Para estas rutas, un guión bajo está presente como parámetro, por ejemplo: `http_method:GET, path:v1.kv._)`<br>_Se muestra como milisegundo_ |
+| **consul.http.request.count** <br>(count) | \[Prometheus\] Un recuento de cuánto tiempo se tarda en atender la solicitud HTTP dada para el verbo y la ruta dados. Incluye etiquetas para ruta y método. La ruta no incluye detalles como nombres de servicio o clave. Para estas rutas, un guión bajo está presente como parámetro, por ejemplo: `path=v1.kv._)`<br>_Se muestra como milisegundo_ |
+| **consul.http.request.quantile** <br>(gauge) | \[Prometheus\] Un cuantil de cuánto tiempo se tarda en atender la solicitud HTTP dada para el verbo y la ruta dados. Incluye etiquetas para ruta y método. La ruta no incluye detalles como nombres de servicio o clave. Para estas rutas, hay un guión bajo como parámetro, por ejemplo: `path=v1.kv._)`<br>_Se muestra como milisegundo_ |
+| **consul.http.request.sum** <br>(count) | \[Prometheus\] La suma de lo que se tarda en atender la solicitud HTTP dada para el verbo y la ruta dados. Incluye etiquetas para ruta y método. La ruta no incluye detalles como nombres de servicio o clave. Para estas rutas, un guión bajo está presente como parámetro, por ejemplo: `path=v1.kv._)`<br>_Se muestra como milisegundo_ |
+| **consul.memberlist.degraded.probe** <br>(gauge) | \[DogStatsD\] \[Prometheus\] Esta métrica cuenta el número de veces que el agent de Consul ha realizado la detección de fallos en otro agent a una velocidad de sonda más lenta. El agent utiliza su propia métrica de estado como indicador para realizar esta acción. Si su puntuación de estado es baja, significa que el nodo está en buen estado, y viceversa.|
+| **consul.memberlist.gossip.95percentile** <br>(gauge) | \[DogStatsD\] El p95 para el número de chismes (mensajes) emitidos a un conjunto de nodos seleccionados aleatoriamente.<br>_Se muestra como mensaje_ |
+| **consul.memberlist.gossip.avg** <br>(gauge) | \[DogStatsD\] Promedio del número de chismes (mensajes) emitidos a un conjunto de nodos seleccionados aleatoriamente.<br>_Se muestra como mensaje_ |
+| **consul.memberlist.gossip.count** <br>(count) | \[DogStatsD\] \[Prometheus\] El número de muestras de consul.memberlist.gossip|
+| **consul.memberlist.gossip.max** <br>(gauge) | \[DogStatsD\] El máximo para el número de chismes (mensajes) difundidos a un conjunto de nodos seleccionados al azar.<br>_Se muestra como mensaje_ |
+| **consul.memberlist.gossip.median** <br>(gauge) | \[DogStatsD\] La mediana del número de chismes (mensajes) emitidos a un conjunto de nodos seleccionados aleatoriamente.<br>_Se muestra como mensaje_ |
+| **consul.memberlist.gossip.quantile** <br>(gauge) | \[Prometheus\] El cuantil del número de chismes (mensajes) emitidos a un conjunto de nodos seleccionados aleatoriamente.<br>_Se muestra como mensaje_ |
+| **consul.memberlist.gossip.sum** <br>(count) | \[DogStatsD\] \[Prometheus\] La suma del número de chismes (mensajes) emitidos a un conjunto de nodos seleccionados aleatoriamente.<br>_Se muestra como mensaje_ |
+| **consul.memberlist.health.score** <br>(gauge) | \[DogStatsD\] \[Prometheus\] Esta métrica describe la percepción de un nodo de su propio estado basado en lo bien que está cumpliendo los requisitos de tiempo real poco restrictivos del protocolo. Esta métrica va de 0 a 8, donde 0 indica "totalmente en buen estado". Para más detalles, consulta la sección IV del documento de Lifeguard: https://arxiv.org/pdf/1707.00788.pdf|
+| **consul.memberlist.msg.alive** <br>(count) | \[DogStatsD\] \[Prometheus\] Esta métrica cuenta el número de agents de Consul activos, que el agent ha asignado hasta el momento, basándose en la información de mensajes dada por la capa de red.|
+| **consul.memberlist.msg.dead** <br>(count) | \[DogStatsD\] \[Prometheus\] Esta métrica cuenta el número de veces que un agent de Consul ha marcado a otro agente como nodo apagado.<br>_Se muestra como mensaje_ |
+| **consul.memberlist.msg.suspect** <br>(count) | \[DogStatsD\] \[Prometheus\] El número de veces que un agent de Consul sospecha que otro ha fallado mientras sondea durante el protocolo de gossip.|
+| **consul.memberlist.probenode.95percentile** <br>(gauge) | \[DogStatsD\] El p95 para el tiempo que se tarda en realizar una sola ronda de detección de fallos en un agent selecto de Consul.<br>_Se muestra como nodo_ |
+| **consul.memberlist.probenode.avg** <br>(gauge) | \[DogStatsD\] Promedio del tiempo necesario para realizar una sola ronda de detección de fallos en un agent seleccionado de Consul.<br>_Se muestra como nodo_ |
+| **consul.memberlist.probenode.count** <br>(count) | \[DogStatsD\] \[Prometheus\] El número de muestras de consul.memberlist.probenode|
+| **consul.memberlist.probenode.max** <br>(gauge) | \[DogStatsD\] El máximo para el tiempo que se tarda en realizar una sola ronda de detección de fallos en un agent selecto de Consul.<br>_Se muestra como nodo_ |
+| **consul.memberlist.probenode.median** <br>(gauge) | \[DogStatsD\] La mediana del tiempo que se tarda en realizar una sola ronda de detección de fallos en un agent seleccionado de Consul.<br>_Se muestra como nodo_ |
+| **consul.memberlist.probenode.quantile** <br>(gauge) | \[Prometheus\] El cuantil del tiempo necesario para realizar una única ronda de detección de fallos en un agent de Consul seleccionado.<br>_Se muestra como nodo_ |
+| **consul.memberlist.probenode.sum** <br>(count) | \[DogStatsD\] \[Prometheus\] La suma del tiempo necesario para realizar una sola ronda de detección de fallos en un agent de Consul seleccionado.<br>_Se muestra como nodo_ |
+| **consul.memberlist.pushpullnode.95percentile** <br>(gauge) | \[DogStatsD\] El p95 para el número de agents de Consul que han intercambiado estado con este agent.<br>_Se muestra como nodo_ |
+| **consul.memberlist.pushpullnode.avg** <br>(gauge) | \[DogStatsD\] La media del número de agents de Consul que han intercambiado estado con este agent.<br>_Se muestra como nodo_ |
+| **consul.memberlist.pushpullnode.count** <br>(count) | \[DogStatsD\] \[Prometheus\] El número de muestras de consul.memberlist.pushpullnode|
+| **consul.memberlist.pushpullnode.max** <br>(gauge) | \[DogStatsD\] El máximo para el número de agents de Consul que han intercambiado estado con este agent.<br>_Se muestra como nodo_ |
+| **consul.memberlist.pushpullnode.median** <br>(gauge) | \[DogStatsD\] La mediana del número de agents de Consul que han intercambiado estado con este agent.<br>_Se muestra como nodo_ |
+| **consul.memberlist.pushpullnode.quantile** <br>(gauge) | \[Prometheus\] El cuantil para el número de agents de Consul que han intercambiado estado con este agent.|
+| **consul.memberlist.pushpullnode.sum** <br>(count) | \[DogStatsD\] \[Prometheus\] La suma del número de agents de Consul que han intercambiado estado con este agent.|
+| **consul.memberlist.tcp.accept** <br>(count) | \[DogStatsD\] \[Prometheus\] Esta métrica cuenta el número de veces que un agent de Consul ha aceptado una conexión de flujo TCP entrante.<br>_Se muestra como conexión_ |
+| **consul.memberlist.tcp.connect** <br>(count) | \[DogStatsD\] \[Prometheus\] Esta métrica cuenta el número de veces que un agent de Consul ha iniciado una sincronización push/pull con otro agent.<br>_Se muestra como conexión_ |
+| **consul.memberlist.tcp.sent** <br>(count) | \[DogStatsD\] \[Prometheus\] Esta métrica mide el número total de bytes enviados por un agent de Consul a través del protocolo TCP<br>_Se muestra como byte_ |
+| **consul.memberlist.udp.received** <br>(count) | \[DogStatsD\] \[Prometheus\] Esta métrica mide el número total de bytes enviados/recibidos por un agent de Consul a través del protocolo UDP.<br>_Se muestra como byte_ |
+| **consul.memberlist.udp.sent** <br>(count) | \[DogStatsD\] \[Prometheus\] Esta métrica mide el número total de bytes enviados/recibidos por un agent de Consul a través del protocolo UDP.<br>_Se muestra como byte_ |
+| **consul.net.node.latency.max** <br>(gauge) | \[Integration\] Latencia máxima desde este nodo a todos los demás<br>_Se muestra en milisegundos_ |
+| **consul.net.node.latency.median** <br>(gauge) | \[Integration\] Mediana de latencia desde este nodo a todos los demás<br>_Se muestra en milisegundos_ |
+| **consul.net.node.latency.min** <br>(gauge) | \[Integration\] Latencia mínima desde este nodo a todos los demás<br>_Se muestra en milisegundos_ |
+| **consul.net.node.latency.p25** <br>(gauge) | \[Integración\] Latencia P25 desde este nodo a todos los demás<br>_Se muestra en milisegundos_ |
+| **consul.net.node.latency.p75** <br>(gauge) | \[Integración\] Latencia P75 desde este nodo a todos los demás<br>_Se muestra en milisegundos_ |
+| **consul.net.node.latency.p90** <br>(gauge) | \[Integración\] Latencia P90 desde este nodo a todos los demás<br>_Se muestra en milisegundos_ |
+| **consul.net.node.latency.p95** <br>(gauge) | \[Integración\] Latencia P95 desde este nodo a todos los demás<br>_Se muestra en milisegundos_ |
+| **consul.net.node.latency.p99** <br>(gauge) | \[Integración\] Latencia P99 desde este nodo a todos los demás<br>_Se muestra en milisegundos_ |
+| **consul.peers** <br>(gauge) | \[Integración\] El número de pares en el conjunto de pares|
+| **consul.raft.apply** <br>(count) | \[DogStatsD\] \[Prometheus\] El número de transacciones de raft que se producen<br>_Se muestra como transacción_ |
+| **consul.raft.commitTime.95percentile** <br>(gauge) | \[DogStatsD\] El tiempo p95 que tarda en confirmarse una nueva entrada en el log de raft en el líder<br>_Se muestra como milisegundo_ |
+| **consul.raft.commitTime.avg** <br>(gauge) | \[DogStatsD\] El tiempo medio que se tarda en consignar una nueva entrada en el log de raft en el líder<br>_Se muestra como milisegundo_ |
+| **consul.raft.commitTime.count** <br>(count) | \[DogStatsD\] \[Prometheus\] El número de muestras de raft.commitTime|
+| **consul.raft.commitTime.max** <br>(gauge) | \[DogStatsD\] El tiempo máximo que se tarda en confirmar una nueva entrada en el log de raft en el líder<br>_Se muestra como milisegundo_ |
+| **consul.raft.commitTime.median** <br>(gauge) | \[DogStatsD\] La mediana del tiempo que se tarda en consignar una nueva entrada en el log de raft en el líder<br>_Se muestra como milisegundo_ |
+| **consul.raft.commitTime.quantile** <br>(gauge) | \[Prometheus\] El cuantil de tiempo que se tarda en consignar una nueva entrada al log de raft en el líder<br>_Se muestra como milisegundo_ |
+| **consul.raft.commitTime.sum** <br>(count) | \[DogStatsD\] \[Prometheus\] La suma del tiempo que se tarda en consignar una nueva entrada al log de raft en el líder<br>_Se muestra como milisegundo_ |
+| **consul.raft.leader.dispatchLog.95percentile** <br>(gauge) | \[DogStatsD\] El tiempo p95 que tarda el líder en escribir entradas de log en el disco<br>_Se muestra en milisegundos_ |
+| **consul.raft.leader.dispatchLog.avg** <br>(gauge) | \[DogStatsD\] El tiempo medio que tarda el líder en escribir entradas de log en el disco<br>_Se muestra en milisegundos_ |
+| **consul.raft.leader.dispatchLog.count** <br>(count) | \[DogStatsD\] \[Prometheus\] El número de muestras de raft.leader.dispatchLog|
+| **consul.raft.leader.dispatchLog.max** <br>(gauge) | \[DogStatsD\] El tiempo máximo que tarda el líder en escribir entradas de log en el disco<br>_Se muestra como milisegundo_ |
+| **consul.raft.leader.dispatchLog.median** <br>(gauge) | \[DogStatsD\] El tiempo medio que tarda el líder en escribir entradas de log en el disco<br>_Se muestra en milisegundos_ |
+| **consul.raft.leader.dispatchLog.quantile** <br>(gauge) | \[Prometheus\] El cuantil de tiempo que tarda el líder en escribir entradas de log en el disco<br>_Se muestra como milisegundo_ |
+| **consul.raft.leader.dispatchLog.sum** <br>(count) | \[DogStatsD\] \[Prometheus\] La suma del tiempo que tarda el líder en escribir entradas de log en el disco<br>_Se muestra como milisegundo_ |
+| **consul.raft.leader.lastContact.95percentile** <br>(gauge) | \[DogStatsD\] El tiempo p95 transcurrido desde la última vez que el líder pudo comprobar su contrato con los seguidores<br>_Se muestra en milisegundos_ |
+| **consul.raft.leader.lastContact.avg** <br>(gauge) | \[DogStatsD\] Tiempo medio transcurrido desde la última vez que el líder pudo comprobar su contrato con los seguidores<br>_Se muestra en milisegundos_ |
+| **consul.raft.leader.lastContact.count** <br>(count) | \[DogStatsD\] \[Prometheus\] El número de muestras de raft.leader.lastContact|
+| **consul.raft.leader.lastContact.max** <br>(gauge) | \[DogStatsD\] Tiempo máximo transcurrido desde la última vez que el líder pudo comprobar su contrato con los seguidores<br>_Se muestra en milisegundos_ |
+| **consul.raft.leader.lastContact.median** <br>(gauge) | \[DogStatsD\] La mediana del tiempo transcurrido desde que el líder pudo comprobar por última vez su contrato con los seguidores<br>_Se muestra en milisegundos_ |
+| **consul.raft.leader.lastContact.quantile** <br>(gauge) | \[Prometheus\] El cuantil de tiempo transcurrido desde la última vez que el líder pudo comprobar su contrato con los seguidores<br>_Se muestra como milisegundo_ |
+| **consul.raft.leader.lastContact.sum** <br>(count) | \[DogStatsD\] \[Prometheus\] La suma del tiempo transcurrido desde la última vez que el líder pudo comprobar su contrato con los seguidores<br>_Se muestra en milisegundos_ |
+| **consul.raft.replication.appendEntries.logs** <br>(count) | \[DogStatsD\] \[Prometheus\] Mide el número de logs replicados a un agente, para acercarlo a los logs del líder.<br>_Se muestra como entrada_ |
+| **consul.raft.replication.appendEntries.rpc.count** <br>(count) | \[DogStatsD\] \[Prometheus\] El tiempo que tarda el RFC de append entries en replicar las entradas de log de un agent líder en su(s) agent(s) seguidor(es)<br>_Se muestra en milisegundos_ |
+| **consul.raft.replication.appendEntries.rpc.quantile** <br>(gauge) | \[Prometheus\] El cuantil que tarda el RFC de append entries en replicar las entradas de log de un agent líder en su(s) agent(s) seguidor(es)<br>_Se muestra en milisegundos_ |
+| **consul.raft.replication.appendEntries.rpc.sum** <br>(count) | \[DogStatsD\] \[Prometheus\] La suma el tiempo que tarda el RFC de append entries en replicar las entradas de log de un agent líder en su(s) agent(s) seguidor(es)<br>_Se muestra como milisegundo_ |
+| **consul.raft.replication.heartbeat.count** <br>(count) | \[DogStatsD\] \[Prometheus\] Cuenta el tiempo que se tarda en invocar appendEntries en un par.<br>_Se muestra como milisegundo_ |
+| **consul.raft.replication.heartbeat.quantile** <br>(gauge) | \[Prometheus\] El cuantil del tiempo necesario para invocar appendEntries en un par.<br>_Se muestra como milisegundo_ |
+| **consul.raft.replication.heartbeat.sum** <br>(count) | \[DogStatsD\] \[Prometheus\] La suma del tiempo empleado en invocar appendEntries en un par.<br>_Se muestra como milisegundo_ |
+| **consul.raft.state.candidate** <br>(count) | \[DogStatsD\] \[Prometheus\]El número de elecciones de líderes iniciados<br>_Se muestra como evento_ |
+| **consul.raft.state.leader** <br>(count) | \[DogStatsD\] \[Prometheus\] El número de elecciones de líderes completadas<br>_Se muestra como evento_ |
+| **consul.runtime.gc_pause_ns.95percentile** <br>(gauge) | \[DogStatsD\] El p95 para el número de nanosegundos consumidos por las pausas de recolección de elementos no usados (GC) desde que se inició Consul.<br>_Se muestra como nanosegundo_ |
+| **consul.runtime.gc_pause_ns.avg** <br>(gauge) | \[DogStatsD\] Promedio del número de nanosegundos consumidos por las pausas de recolección de elementos no usados (GC) desde que se inició Consul.<br>_Se muestra como nanosegundo_ |
+| **consul.runtime.gc_pause_ns.count** <br>(count) | \[DogStatsD\] \[Prometheus\] El número de muestras de consul.runtime.gc_pause_ns|
+| **consul.runtime.gc_pause_ns.max** <br>(gauge) | \[DogStatsD\] Máximo número de nanosegundos consumidos por pausas de recolección de elementos no usados (GC) desde que se inició Consul.<br>_Se muestra como nanosegundos_ |
+| **consul.runtime.gc_pause_ns.median** <br>(gauge) | \[DogStatsD\] La mediana del número de nanosegundos consumidos por las pausas de recolección de elementos no usados (GC) desde que se inició Consul.<br>_Se muestra como nanosegundos_ |
+| **consul.runtime.gc_pause_ns.quantile** <br>(gauge) | \[Prometheus\] El cuantil de nanosegundos consumidos por las pausas de recolección de elementos no usados (GC) desde que se inició Consul.<br>_Se muestra como nanosegundos_ |
+| **consul.runtime.gc_pause_ns.sum** <br>(count) | \[DogStatsD\] \[Prometheus\] La suma de nanosegundos consumidos por las pausas de recolección de elementos no usados (GC) desde que se inició Consul.<br>_Se muestra como nanosegundo_ |
+| **consul.serf.coordinate.adjustment_ms.95percentile** <br>(gauge) | \[DogStatsD\] El p95 en milisegundos para el ajuste de coordenadas del nodo<br>_Se muestra como milisegundo_ |
+| **consul.serf.coordinate.adjustment_ms.avg** <br>(gauge) | \[DogStatsD\] La media en milisegundos para el ajuste de coordenadas del nodo<br>_Se muestra como milisegundo_ |
+| **consul.serf.coordinate.adjustment_ms.count** <br>(count) | \[DogStatsD\] \[Prometheus\] El número de muestras de consul.serf.coordinate.adjustment_ms|
+| **consul.serf.coordinate.adjustment_ms.max** <br>(gauge) | \[DogStatsD\] El máximo en milisegundos para el ajuste de coordenadas del nodo<br>_Se muestra como milisegundo_ |
+| **consul.serf.coordinate.adjustment_ms.median** <br>(gauge) | \[DogStatsD\] La mediana en milisegundos para el ajuste de coordenadas del nodo<br>_Se muestra como milisegundo_ |
+| **consul.serf.coordinate.adjustment_ms.quantile** <br>(gauge) | \[Prometheus\] El cuantil en milisegundos para el ajuste de coordenadas del nodo<br>_Se muestra como milisegundo_ |
+| **consul.serf.coordinate.adjustment_ms.sum** <br>(count) | \[DogStatsD\] \[Prometheus\] La suma en milisegundos para el ajuste de coordenadas del nodo<br>_Se muestra como milisegundo_ |
+| **consul.serf.events** <br>(count) | \[DogStatsD\] \[Prometheus\] Esto se incrementa cuando un agent de Consul procesa un evento serf<br>_Se muestra como evento_ |
+| **consul.serf.member.failed** <br>(count) | \[DogStatsD\] \[Prometheus\] Se incrementa cuando un agent de Consul se marca como eliminado. Esto puede ser un indicador de agents sobrecargados, problemas de red o errores de configuración donde los agents no pueden conectarse entre sí en los puertos requeridos.|
+| **consul.serf.member.flap** <br>(count) | \[DogStatsD\] \[Prometheus\] Número de veces que un agent de Consul es marcado como eliminado y luego se recupera rápidamente.|
+| **consul.serf.member.join** <br>(count) | \[DogStatsD\] \[Prometheus\] Se incrementa cuando un agent de Consul procesa un evento de unión<br>_Se muestra como evento_ |
+| **consul.serf.member.left** <br>(count) | \[DogStatsD\] \[Prometheus\] Se incrementa cuando un agent de Consul abandona el clúster.|
+| **consul.serf.member.update** <br>(count) | \[DogStatsD\] \[Prometheus\] Esto se incrementa cuando un agent de Consul se actualiza.|
+| **consul.serf.msgs.received.95percentile** <br>(gauge) | \[DogStatsD\] El p95 para el número de mensajes serf recibidos<br>_Se muestra como mensaje_ |
+| **consul.serf.msgs.received.avg** <br>(gauge) | \[DogStatsD\] La media del número de mensajes serf recibidos<br>_Se muestra como mensaje_ |
+| **consul.serf.msgs.received.count** <br>(count) | \[DogStatsD\] \[Prometheus\] El recuento de mensajes serf recibido|
+| **consul.serf.msgs.received.max** <br>(gauge) | \[DogStatsD\] El máximo de mensajes serf recibidos<br>_Se muestra como mensaje_ |
+| **consul.serf.msgs.received.median** <br>(gauge) | \[DogStatsD\] La mediana del número de mensajes serf recibidos<br>_Se muestra como mensaje_ |
+| **consul.serf.msgs.received.quantile** <br>(gauge) | \[Prometheus\] El cuantil para el número de mensajes serf recibido<br>_Se muestra como mensaje_ |
+| **consul.serf.msgs.received.sum** <br>(count) | \[DogStatsD\] \[Prometheus\] La suma para el número de mensajes serf recibidos<br>_Se muestra como mensaje_ |
+| **consul.serf.msgs.sent.95percentile** <br>(gauge) | \[DogStatsD\] El p95 para el número de mensajes serf enviados<br>_Se muestra como mensaje_ |
+| **consul.serf.msgs.sent.avg** <br>(gauge) | \[DogStatsD\] La media del número de mensajes serf enviados<br>_Se muestra como mensaje_ |
+| **consul.serf.msgs.sent.count** <br>(count) | \[DogStatsD\] \[Prometheus\] El recuento de mensajes serf enviados|
+| **consul.serf.msgs.sent.max** <br>(gauge) | \[DogStatsD\] El máximo para el número de mensajes serf enviados<br>_Se muestra como mensaje_ |
+| **consul.serf.msgs.sent.median** <br>(gauge) | \[DogStatsD\] La mediana del número de mensajes serf enviados<br>_Se muestra como mensaje_ |
+| **consul.serf.msgs.sent.quantile** <br>(gauge) | \[Prometheus\] El cuantil para el número de mensajes serf enviados<br>_Se muestra como mensaje_ |
+| **consul.serf.msgs.sent.sum** <br>(count) | \[DogStatsD\] \[Prometheus\] La suma del número de mensajes serf enviados<br>_Se muestra como mensaje_ |
+| **consul.serf.queue.event.95percentile** <br>(gauge) | \[DogStatsD\] El p95 para el tamaño de la cola de eventos serf|
+| **consul.serf.queue.event.avg** <br>(gauge) | \[DogStatsD\] El tamaño medio de la cola de eventos serf|
+| **consul.serf.queue.event.count** <br>(count) | \[DogStatsD\] \[Prometheus\] El número de elementos en la cola de eventos serf.|
+| **consul.serf.queue.event.max** <br>(gauge) | \[DogStatsD\] El tamaño máximo de la cola de eventos serf.|
+| **consul.serf.queue.event.median** <br>(gauge) | \[DogStatsD\] El tamaño medio de la cola de eventos serf|
+| **consul.serf.queue.event.quantile** <br>(gauge) | \[Prometheus\] El cuantil para el tamaño de la cola de eventos serf.|
+| **consul.serf.queue.intent.95percentile** <br>(gauge) | \[DogStatsD\] El p95 para el tamaño de la cola de intento de serf|
+| **consul.serf.queue.intent.avg** <br>(gauge) | \[DogStatsD\] Tamaño medio de la cola de intentos de serf|
+| **consul.serf.queue.intent.count** <br>(count) | \[DogStatsD\] \[Prometheus\] El número de elementos en la cola de intentos de serf.|
+| **consul.serf.queue.intent.max** <br>(gauge) | \[DogStatsD\] Tamaño máximo de la cola de intentos de serf|
+| **consul.serf.queue.intent.median** <br>(gauge) | \[DogStatsD\] El tamaño medio de la cola de intento de serf|
+| **consul.serf.queue.intent.quantile** <br>(gauge) | \[Prometheus\] El cuantil para el tamaño de la cola de intentos de serf.|
+| **consul.serf.queue.query.95percentile** <br>(gauge) | \[DogStatsD\] El p95 para el tamaño de la cola de consulta de serf|
+| **consul.serf.queue.query.avg** <br>(gauge) | \[DogStatsD\] El tamaño medio de la cola de consultas de serf|
+| **consul.serf.queue.query.count** <br>(count) | \[DogStatsD\] \[Prometheus\] El número de elementos en la cola de consulta de serf|
+| **consul.serf.queue.query.max** <br>(gauge) | \[DogStatsD\] El tamaño máximo de la cola de consulta de serf.|
+| **consul.serf.queue.query.median** <br>(gauge) | \[DogStatsD\] El tamaño medio de la cola de consultas de serf|
+| **consul.serf.queue.query.quantile** <br>(gauge) | \[Prometheus\] El cuantil para el tamaño de la cola de consulta de serf|
+| **consul.serf.snapshot.appendline.95percentile** <br>(gauge) | \[DogStatsD\] El p95 del tiempo que tarda el agent de Consul en añadir una entrada en el log existente.<br>_Se muestra como milisegundo_ |
+| **consul.serf.snapshot.appendline.avg** <br>(gauge) | \[DogStatsD\] Promedio del tiempo que tarda el agent de Consul en añadir una entrada al log existente.<br>_Se muestra en milisegundos_ |
+| **consul.serf.snapshot.appendline.count** <br>(count) | \[DogStatsD\] \[Prometheus\] El número de muestras de consul.serf.snapshot.appendline|
+| **consul.serf.snapshot.appendline.max** <br>(gauge) | \[DogStatsD\] El tiempo máximo que tarda el agent de Consul en añadir una entrada al log existente.<br>_Se muestra en milisegundos_ |
+| **consul.serf.snapshot.appendline.median** <br>(gauge) | \[DogStatsD\] La mediana del tiempo que tarda el agent de Consul en añadir una entrada al log existente.<br>_Se muestra en milisegundos_ |
+| **consul.serf.snapshot.appendline.quantile** <br>(gauge) | \[Prometheus\] El cuantil del tiempo que tarda el agent de Consul en añadir una entrada en el log existente.<br>_Se muestra como milisegundo_ |
+| **consul.serf.snapshot.compact.95percentile** <br>(gauge) | \[DogStatsD\] El p95 del tiempo que tarda el agent de Consul en compactar un log. Esta operación solo se produce cuando el snapshot se hace lo suficientemente grande como para justificar la compactación.<br>_Se muestra como milisegundo_ |
+| **consul.serf.snapshot.compact.avg** <br>(gauge) | \[DogStatsD\] Promedio del tiempo que tarda el agent de Consul en compactar un log. Esta operación solo se produce cuando el snapshot es lo suficientemente grande como para justificar la compactación.<br>_Se muestra en milisegundos_ |
+| **consul.serf.snapshot.compact.count** <br>(count) | \[DogStatsD\] \[Prometheus\] El número de muestras de consul.serf.snapshot.compact|
+| **consul.serf.snapshot.compact.max** <br>(gauge) | \[DogStatsD\] El tiempo máximo que tarda el agent de Consul en compactar un log. Esta operación solo se produce cuando el snapshot es lo suficientemente grande como para justificar la compactación.<br>_Se muestra como milisegundos_ |
+| **consul.serf.snapshot.compact.median** <br>(gauge) | \[DogStatsD\] La mediana del tiempo que tarda el agent de Consul en compactar un log. Esta operación solo se produce cuando el snapshot es lo suficientemente grande como para justificar la compactación.<br>_Se muestra como milisegundos_ |
+| **consul.serf.snapshot.compact.quantile** <br>(gauge) | \[Prometheus\] El cuantil del tiempo que tarda el agent de Consul en compactar un log. Esta operación solo se produce cuando el snapshot se hace lo suficientemente grande como para justificar la compactación.<br>_Se muestra como milisegundos_ |
 
-Consulta el [documento de telemetría del Consul][4] para obtener una descripción de las métricas que el Consul Agent envía a DogStatsD.
+Consulta el [socumento de telemetría de Consul](https://www.consul.io/docs/agent/telemetry.html) para una descripción de las métricas que el Agent de Consul envía a DogStatsD.
 
-Consulta el [documento de coordenadas de red de Consul][5] para obtener detalles sobre cómo se calculan las métricas de latencia de red.
+Consulta el [documento de coordenadas de red de Consul](https://www.consul.io/docs/internals/coordinates.html) para más detalles sobre cómo se calculan las métricas de latencia de red.
 
 ### Eventos
 
@@ -330,36 +418,43 @@ Consulta el [documento de coordenadas de red de Consul][5] para obtener detalles
 El Datadog Agent emite un evento cuando el clúster de Consul elige un nuevo líder y lo etiqueta con `prev_consul_leader`, `curr_consul_leader` y `consul_datacenter`.
 
 ### Checks de servicio
-{{< get-service-checks-from-git "consul" >}}
 
+**consul.check**
+
+Devuelve OK si el servicio está activo, WARNING si hay algún problema y CRITICAL cuando está caído.
+
+_Estados: ok, warning, critical, unknown_
+
+**consul.up**
+
+Devuelve OK si el servidor consul está activo, CRITICAL en caso contrario.
+
+_Estados: ok, critical_
+
+**consul.can_connect**
+
+Devuelve OK si el Agent puede realizar solicitudes HTTP a consul, CRITICAL en caso contrario.
+
+_Estados: ok, critical_
+
+**consul.prometheus.health**
+
+Devuelve `CRITICAL` si el check no puede acceder al endpoint de métricas; en caso contrario, devuelve `OK`.
+
+_Estados: ok, critical_
 
 ## Solucionar problemas
 
-¿Necesitas ayuda? Ponte en contacto con el [soporte de Datadog][6].
+¿Necesitas ayuda? Ponte en contacto con el [soporte de Datadog](https://docs.datadoghq.com/help/).
 
 ## Referencias adicionales
 
-Más enlaces, artículos y documentación útiles:
+Documentación útil adicional, enlaces y artículos:
 
-- [Monitorización de HCP Consul con Datadog][7]
-- [Monitorizar el estado y el rendimiento de Consul con Datadog][8]
-- [Consul en Datadog][9]
-- [Métricas clave para monitorizar Consul][10]
-- [Herramientas de monitorización de Consul][11]
-- [Cómo monitorizar Consul con Datadog][12]
-- [Datadog NPM ya es compatible con la red Consul][13]
-
-
-[1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/consul/images/consul-dash.png
-[2]: https://app.datadoghq.com/account/settings/agent/latest
-[3]: https://docs.datadoghq.com/es/agent/guide/agent-commands/#agent-status-and-information
-[4]: https://www.consul.io/docs/agent/telemetry.html
-[5]: https://www.consul.io/docs/internals/coordinates.html
-[6]: https://docs.datadoghq.com/es/help/
-[7]: https://docs.datadoghq.com/es/integrations/guide/hcp-consul
-[8]: https://www.datadoghq.com/blog/monitor-consul-health-and-performance-with-datadog
-[9]: https://engineering.datadoghq.com/consul-at-datadog
-[10]: https://www.datadoghq.com/blog/consul-metrics/
-[11]: https://www.datadoghq.com/blog/consul-monitoring-tools/
-[12]: https://www.datadoghq.com/blog/consul-datadog/
-[13]: https://www.datadoghq.com/blog/monitor-consul-with-datadog-npm/
+- [Monitorización de HCP Consulta con Datadog](https://docs.datadoghq.com/integrations/guide/hcp-consul)
+- [Monitorización del estado y rendimiento de Consul con Datadog](https://www.datadoghq.com/blog/monitor-consul-health-and-performance-with-datadog)
+- [Consul en Datadog](https://engineering.datadoghq.com/consul-at-datadog)
+- [Métricas clave para la monitorización de Consul](https://www.datadoghq.com/blog/consul-metrics/)
+- [Herramientas de monitorización de Consul](https://www.datadoghq.com/blog/consul-monitoring-tools/)
+- [Cómo monitorizar Consul con Datadog](https://www.datadoghq.com/blog/consul-datadog/)
+- [Datadog CNM ahora admite la red de Consul](https://www.datadoghq.com/blog/monitor-consul-with-datadog-npm/)

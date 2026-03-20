@@ -87,7 +87,7 @@ Le check Snowflake est inclus avec le package de l'[Agent Datadog][2].
 **Remarque** : le check Snowflake n'est pas disponible dans l'Agent v6 basé sur Python 2. Pour utiliser Snowflake avec l'Agent v6, consultez la section [Utiliser Python 3 avec l'Agent v6 de Datadog][3] ou passez à l'Agent v7.
 
 ### Configuration
-<div class="alert alert-warning">Snowflake recommande d'accorder des autorisations à un rôle alternatif tel que `SYSADMIN`. En savoir plus sur le contrôle <a href="https://docs.snowflake.com/en/user-guide/security-access-control-considerations.html#control-the-assignment-of-the-accountadmin-role-to-users"> du rôle ACCOUNTADMIN</a> (en anglais).</div>
+<div class="alert alert-danger">Snowflake recommande d'accorder des autorisations à un rôle alternatif tel que `SYSADMIN`. En savoir plus sur le contrôle <a href="https://docs.snowflake.com/en/user-guide/security-access-control-considerations.html#control-the-assignment-of-the-accountadmin-role-to-users"> du rôle ACCOUNTADMIN</a> (en anglais).</div>
 
 1. Créez un rôle et un utilisateur spécifiques Datadog pour surveiller Snowflake. Dans Snowflake, exécutez les commandes suivantes pour créer un rôle personnalisé ayant accès au schéma ACCOUNT_USAGE.
 

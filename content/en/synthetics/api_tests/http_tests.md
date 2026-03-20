@@ -137,6 +137,8 @@ Define variables for your HTTP API tests with JavaScript:
 
 {{< img src="synthetics/api_tests/http_javascript.png" alt="Define HTTP API test with Javascript" style="width:90%;" >}}
 
+<div class="alert alert-info">JavaScript capabilities are not supported for API tests in Windows private locations.</div>
+
    {{% /tab %}}
 
    {{< /tabs >}}
@@ -144,6 +146,11 @@ Define variables for your HTTP API tests with JavaScript:
 ### Define assertions
 
 Assertions define what an expected test result is. After you click **Test URL**, basic assertions on `response time`, `status code`, and `header` `content-type` are added based on the response that was obtained. You must define at least one assertion for your test to monitor.
+
+<div class="alert alert-info">The assertions header, body, and JavaScript sections are only for defining assertions. They cannot be used to make additional HTTP requests.</div>
+
+{{< tabs >}}
+{{% tab "Response Assertions" %}}
 
 | Type          | Operator                                                                                               | Value type                                                      |
 |---------------|--------------------------------------------------------------------------------------------------------|----------------------------------------------------------------|
@@ -158,11 +165,132 @@ You can create up to 20 assertions per API test by clicking **New Assertion** or
 
 {{< img src="synthetics/api_tests/assertions_http.png" alt="Define assertions for your HTTP test to succeed or fail on" style="width:90%;" >}}
 
-To perform `OR` logic in an assertion, use the `matches regex` comparator to define a regex with multiple expected values like `(200|302)`. For example, you may want your HTTP test to succeed when a server must respond with a `200` or `302` status code. The `status code` assertion succeeds if the status code is 200 or 302. You can also add `OR` logic on a `body` or `header` assertion.
+To perform `OR` logic in an assertion, use the `matches regex` comparator to define a regex with multiple expected values like `(200|302)`. For example, you may want your HTTP test to succeed when a server must respond with a `200` or `302` status code. The `status code` assertion succeeds if the status code is 200 or 302. You can also add `OR` logic on a `body` or `header` assertion with the `matches regex` comparator.
 
 If a test does not contain an assertion on the response body, the body payload drops and returns an associated response time for the request within the timeout limit set by the Synthetics Worker.
 
+The response body is only returned if you have added assertions on its content and these assertions have failed. If a test contains an assertion on the response body and succeeds, the body payload drops and only a snippet of the first 50 characters of the response body is shown.
+
 If a test contains an assertion on the response body and the timeout limit is reached, an `Assertions on the body/response cannot be run beyond this limit` error appears.
+
+[4]: https://restfulapi.net/json-jsonpath/
+[5]: https://www.w3schools.com/xml/xpath_syntax.asp
+[6]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
+
+{{% /tab %}}
+{{% tab "JavaScript" %}}
+
+Use JavaScript assertions when standard response assertions don't meet your validation needs. Synthetic Monitoring uses the [Chai assertion library][20], which provides `dd.expect()`, `dd.should`, and `dd.assert()` for flexible assertion styles.
+
+**Note:** When working with JSON responses, use `JSON.parse(dd.response.body)` to parse the response body before accessing its properties. This is required for all assertion methods (`dd.assert()`, `dd.expect()`, and `dd.should`) when validating JSON data.
+
+{{< img src="synthetics/api_tests/JS_assertion.png" alt="JavaScript assertion for HTTP API test" style="width:90%;" >}}
+
+<div class="alert alert-info">JavaScript capabilities are not supported for API tests in Windows private locations.</div>
+
+#### Using dd.assert()
+
+Use `dd.assert()` for traditional assertion syntax:
+
+For example, to assert that a `status.code` field is one of several allowed values:
+
+{{< code-block lang="javascript" >}}
+const response = JSON.parse(dd.response.body);
+// Assert that the status code is 200, 210, 320, or 330
+dd.assert.include([200, 210, 320, 330], response.status.code);
+{{< /code-block >}}
+
+Example response:
+```json
+{
+  "status": {
+    "code": 200,
+    "message": "Success"
+  }
+}
+```
+
+This assertion:
+- Parses the JSON response body
+- Checks that `status.code` is included in the array of allowed values (200, 210, 320, or 330)
+
+The test **passes** because `status.code` is `200`, which is included in the allowed values array.
+
+For more information on `assert.include()`, see the [Chai assert.include() documentation][21].
+
+#### Using dd.expect()
+
+Use `dd.expect()` for assertions with nested property validation.
+
+For example, to assert that a `status.indicator` field matches one of several expected values:
+
+{{< code-block lang="javascript" >}}
+const response = JSON.parse(dd.response.body);
+const regex = /^(major|critical|minor|none)$/;
+
+dd.expect(response)
+  .to.have.nested.property('status.indicator')
+  .that.matches(regex);
+{{< /code-block >}}
+
+Example response:
+```json
+{
+  "status": {
+    "indicator": "none"
+  }
+}
+```
+This assertion:
+- Parses the JSON response body
+- Validates that the nested property `status.indicator` exists
+- Checks that the value matches the regex pattern (one of: `major`, `critical`, `minor`, or `none`)
+
+With the regex `/^(major|critical|minor|none)$/`, the test **passes** because `status.indicator` is `"none"`, which matches the pattern.
+
+With the regex `/^(major|critical|minor)$/`, the test **fails** because `"none"` is not included in the allowed values.
+
+For more information on `expect()`, see the [Chai expect() documentation][22].
+
+#### Using dd.should
+
+Use `dd.should` to write assertions with natural language syntax:
+
+For example, to assert that a `status.indicator` field exists and equals a specific value:
+
+{{< code-block lang="javascript" >}}
+const response = JSON.parse(dd.response.body);
+response.status.should.exist();
+const indicator = response.status.indicator;
+indicator.should.equal('none');
+{{< /code-block >}}
+
+Example response:
+```json
+{
+  "status": {
+    "indicator": "none"
+  }
+}
+```
+
+This assertion:
+- Parses the JSON response body
+- Verifies that the `status` property exists
+- Extracts the indicator value into a variable
+- Checks that `status.indicator` equals `"none"`
+
+The test **passes** because `status` exists and `status.indicator` is `"none"`.
+
+For more information on `should()`, see the [Chai should() documentation][23].
+
+[20]: https://www.chaijs.com/api/
+[21]: https://www.chaijs.com/api/assert/#method_include
+[22]: https://www.chaijs.com/guide/styles/#expect
+[23]: https://www.chaijs.com/guide/styles/#should
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Select locations
 
@@ -207,37 +335,7 @@ To display your list of variables, type `{{` in your desired field:
 
 A test is considered `FAILED` if it does not satisfy one or more assertions or if the request prematurely failed. In some cases, the test can fail without testing the assertions against the endpoint.
 
-The most common errors include the following:
-
-`AUTHENTICATION_ERROR`
-: Synthetic Monitoring automatically disables test retries when authentication failures occur. This safety measure remains in effect until you update the test with valid credentials. This prevents unnecessary test executions that would generate false alerts and increase billable usage.
-
-`CONNREFUSED`
-: No connection could be made because the target machine actively refused it.
-
-`CONNRESET`
-: The connection was abruptly closed by the remote server. Possible causes include the web server encountering an error or crashing while responding, or loss of connectivity of the web server.
-
-`DNS`
-: DNS entry not found for the test URL. Possible causes include misconfigured test URL or the wrong configuration of your DNS entries.
-
-`Error performing HTTP/2 request`
-: The request could not be performed. See the dedicated [error][16] page for more information.
-
-`INVALID_REQUEST`
-: The configuration of the test is invalid (for example, a typo in the URL).
-
-`SSL`
-: The SSL connection couldn't be performed. [See the dedicated error page for more information][12].
-
-`TIMEOUT`
-: The request couldn't be completed in a reasonable time. Two types of `TIMEOUT` can happen:
-  - `TIMEOUT: The request couldn't be completed in a reasonable time.` indicates that the request duration hit the test defined timeout (default is set to 60s).
-  For each request only the completed stages for the request are displayed in the network waterfall. For example, in the case of `Total response time` only being displayed, the timeout occurred during the DNS resolution.
-  - `TIMEOUT: Overall test execution couldn't be completed in a reasonable time.` indicates that the test duration (request + assertions) hits the maximum duration (60.5s).
-
-`MALFORMED_RESPONSE`
-: The remote server responded with a payload that does not comply with HTTP specifications. This error can happen when remote servers differ in their HTTP support. To prevent issues, run tests with a consistent HTTP version: either HTTP/2 (if available) or HTTP/1.1.
+For a complete list of HTTP and SSL error codes, see [API Testing Errors][12].
 
 ## Permissions
 
@@ -256,15 +354,12 @@ If you are using the [custom role feature][14], add your user to any custom role
 [1]: /synthetics/private_locations
 [2]: /synthetics/cicd_integrations
 [3]: /synthetics/search/#search
-[4]: https://restfulapi.net/json-jsonpath/
-[5]: https://www.w3schools.com/xml/xpath_syntax.asp
-[6]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
 [7]: /monitors/notify/#configure-notifications-and-automations
 [8]: https://www.markdownguide.org/basic-syntax/
 [9]: /monitors/notify/?tab=is_recoveryis_alert_recovery#conditional-variables
 [10]: /synthetics/guide/synthetic-test-monitors
 [11]: /synthetics/settings/#global-variables
-[12]: /synthetics/api_tests/errors/#ssl-errors
+[12]: /synthetics/api_tests/errors/
 [13]: /account_management/rbac/
 [14]: /account_management/rbac#custom-roles
 [15]: /account_management/rbac/#create-a-custom-role

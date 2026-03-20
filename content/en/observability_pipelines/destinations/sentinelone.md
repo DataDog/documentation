@@ -5,7 +5,13 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/observability-pipelines-sentinelone/"
   tag: "blog"
   text: "Optimize EDR logs and route them to SentinelOne with Observability Pipelines"
+products:
+- name: Logs
+  icon: logs
+  url: /observability_pipelines/configuration/?tab=logs#pipeline-types
 ---
+
+{{< product-availability >}}
 
 Use Observability Pipelines' SentinelOne destination to send logs to SentinelOne.
 
@@ -15,11 +21,35 @@ Set up the SentinelOne destination and its environment variables when you [set u
 
 ### Set up the destination
 
-{{% observability_pipelines/destination_settings/sentinelone %}}
+<div class="alert alert-danger">Only enter the identifier for the token. Do <b>not</b> enter the actual value.</a></div>
 
-### Set the environment variables
+1. Enter the identifier for your token. If you leave it blank, the [default](#set-secrets) is used.
+1. Select your SentinelOne logs environment in the dropdown menu.
+
+#### Optional settings
+
+##### Buffering options
+
+{{% observability_pipelines/destination_buffer %}}
+
+### Set secrets
+
+{{% observability_pipelines/set_secrets_intro %}}
+
+{{< tabs >}}
+{{% tab "Secrets Management" %}}
+
+- SentinelOne write access token identifier:
+	- The default identifier is `DESTINATION_SENTINEL_ONE_TOKEN`.
+
+{{% /tab %}}
+
+{{% tab "Environment Variables" %}}
 
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/sentinelone %}}
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## View logs in a SentinelOne cluster
 
@@ -36,9 +66,9 @@ After you've set up the pipeline to send logs to the SentinelOne destination, yo
 
 A batch of events is flushed when one of these parameters is met. See [event batching][3] for more information.
 
-| Max Events     | Max Bytes       | Timeout (seconds)   |
-|----------------|-----------------|---------------------|
-| None           | 1,000,000       | 1                   |
+| Maximum Events | Maximum Size (MB) | Timeout (seconds)   |
+|----------------|-------------------|---------------------|
+| None           | 1                 | 1                   |
 
 ## Further reading
 

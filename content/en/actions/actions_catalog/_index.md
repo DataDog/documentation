@@ -1,9 +1,11 @@
 ---
 title: Action Catalog
+description: Browse and discover actions for Workflow Automation and App Builder across cloud providers, SaaS tools, and Datadog services.
 type: actioncatalog
 disable_toc: true
 disable_sidebar: false
 aliases:
+- /actions/action_interface/
 - /workflows/actions_catalog
 - /service_management/service_management/workflows/actions_catalog
 - /service_management/workflows/actions_catalog

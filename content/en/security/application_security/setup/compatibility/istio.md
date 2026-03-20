@@ -29,7 +29,7 @@ The Datadog External Processor service supports the processing of request and re
 
 ### Supported Envoy Versions
 
-Istio’s data plane is based on Envoy. The following table shows the relationship between Istio versions and their corresponding Envoy release branches:
+Istio's data plane is based on Envoy. The following table shows the relationship between Istio versions and their corresponding Envoy release branches:
 
 | Istio version | Envoy release branch |
 |---------------|----------------------|

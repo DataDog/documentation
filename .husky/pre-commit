@@ -9,3 +9,15 @@ if [ "$branch" = "master" ]; then
   echo "${YELLOW}You're trying to commit to master. Use a feature branch instead.${ENDCOLOR}"
   exit 1
 fi
+
+# Check for circular aliases in markdown files
+echo "Checking for circular aliases..."
+python3 .husky/check-circular-aliases.py
+
+# Check that Cdocs gitignored files are not tracked
+echo "Checking Cdocs gitignore tracking status..."
+python3 .husky/check-cdocs-gitignore.py
+
+# Check for missing section _index.md files
+echo "Checking for missing section _index.md files..."
+python3 .husky/check-section-index.py

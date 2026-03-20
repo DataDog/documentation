@@ -6,7 +6,7 @@
         {{ $rel_path := "" }}
 
         {{ with $page.File }}
-            {{ $rel_path = (print .Lang "/" .Path) }}
+            {{ $rel_path = (print $page.Language.Lang "/" .Path) }}
         {{ end }}
 
         {{ $object_id := md5 $rel_path }}

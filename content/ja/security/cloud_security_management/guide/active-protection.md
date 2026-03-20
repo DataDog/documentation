@@ -6,7 +6,7 @@ further_reading:
 title: Active Protection で暗号マイニングの脅威を積極的にブロック
 ---
 
-<div class="alert alert-warning">Please contact <a href="https://docs.datadoghq.com/help/">Datadog Support</a> to enable Active Protection.</div>
+<div class="alert alert-danger">Please contact <a href="https://docs.datadoghq.com/help/">Datadog Support</a> to enable Active Protection.</div>
 
 <div class="alert alert-info">CSM Threats Active Protection はベータ版です。</div>
 

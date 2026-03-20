@@ -10,15 +10,11 @@ further_reading:
   text: "Get end-to-end network visibility with Datadog Network Path"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Network Path for Datadog Cloud Network Monitoring is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 Most modern operating systems include a built-in `traceroute` tool. For example, Linux and macOS use the `traceroute` command, while Windows uses `tracert`. However, you may observe different results from these commands even when run on the same network. This article explains the reasons behind these differences.
 
 ## Traceroute variants by platform
 
-All traceroute tools fundamentally perform the same process: they send packets with a progressively increasing TTL (also known as *hop limit*), to get information about each hop along the route. However, they differ in what type of packet they send. There are three major protocols for traceroutes: ICMP, UDP, and TCP. Linux and macOS `traceroute` use UDP by default, while Windows `tracert` uses ICMP.
+All traceroute tools fundamentally perform the same process: they send packets with a progressively increasing TTL (also known as *hop limit*), to get information about each hop along the route. However, they differ in what type of packet they send. There are three major protocols for traceroutes: ICMP, UDP, and TCP. Linux and macOS `traceroute` use UDP by default, while Windows `tracert` uses ICMP. For the full list of supported traceroutes, see the [support matrix][3].
 
 {{< tabs >}}
 {{% tab "Linux" %}}
@@ -31,7 +27,7 @@ All traceroute tools fundamentally perform the same process: they send packets w
   </thead>
   <tr>
     <td>ICMP</td>
-    <td></td>
+    <td><i class='icon-check-bold'></td>
     <td><code>traceroute -I</code></td>
   </tr>
   <tr>
@@ -65,7 +61,7 @@ Typically `traceroute` and `tcptraceroute` are made available by official packag
   </thead>
   <tr>
     <td>ICMP</td>
-    <td></td>
+    <td><i class='icon-check-bold'></td>
     <td><code>tracert</code></td>
   </tr>
   <tr>
@@ -80,7 +76,7 @@ Typically `traceroute` and `tcptraceroute` are made available by official packag
   </tr>
   <tr>
     <td>TCP SACK</td>
-    <td></td>
+    <td><i class='icon-check-bold'></td>
     <td>N/A</td>
   </tr>
 </table>
@@ -99,22 +95,22 @@ Windows does not have officially distributed TCP or UDP `traceroute` tools. Thir
   </thead>
   <tr>
     <td>ICMP</td>
-    <td></td>
+    <td><i class='icon-check-bold'></td>
     <td><code>traceroute -I</code></td>
   </tr>
   <tr>
     <td>UDP</td>
-    <td></td>
+    <td><i class='icon-check-bold'></td>
     <td><code>traceroute</code></td>
   </tr>
   <tr>
     <td>TCP SYN</td>
-    <td></td>
-    <td><code>tcptraceroute` (via homebrew)</td>
+    <td><i class='icon-check-bold'></td>
+    <td><code>tcptraceroute (via homebrew)</td>
   </tr>
   <tr>
     <td>TCP SACK</td>
-    <td></td>
+    <td><i class='icon-check-bold'></td>
     <td>N/A</td>
   </tr>
 </table>
@@ -149,3 +145,4 @@ An ICMP traceroute specifically sends [ICMP Echo Request][2] packets, the same t
 
 [1]: https://en.wikipedia.org/wiki/Head-of-line_blocking#In_reliable_byte_streams
 [2]: https://en.wikipedia.org/wiki/Ping_(networking_utility)#Message_format
+[3]: https://github.com/DataDog/datadog-traceroute?tab=readme-ov-file#support-matrix-for-ipv4

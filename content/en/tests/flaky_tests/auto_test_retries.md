@@ -52,7 +52,7 @@ This behavior can be fine-tuned with the following environment variables:
 
 ### Compatibility
 
-`dd-trace-js >= v5.19.0` and `dd-trace-js >= v4.43.0`
+`dd-trace-js >= v5.19.0`
 
 ### Configuration
 
@@ -190,7 +190,7 @@ This behavior can be fine-tuned with the following environment variables:
 
 ### Failed Test Replay
 
-<div class="alert alert-info">Failed Test Replay is only supported for JavaScript.</a></div>
+<div class="alert alert-info">Failed Test Replay is only supported for Java, JavaScript, and .NET.</a></div>
 
 In addition to automatically retrying failed tests, Failed Test Replay allows you to see local variable data in the topmost frame of the test error's stack trace. Enable this feature with the **Failed Test Replay** toggle.
 

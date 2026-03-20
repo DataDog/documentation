@@ -28,6 +28,9 @@ products:
 - icon: app-sec
   name: App and API Protection
   url: /security/application_security/
+- icon: cloud-security-management
+  name: Workload Protection
+  url: /security/workload_protection/
 title: Reglas de detección
 ---
 
@@ -44,10 +47,31 @@ Las reglas predefinidas están disponibles para los siguientes productos de segu
 - [Cloud SIEM][3] utiliza la detección de logs para analizar logs ingeridos en tiempo real.
 - Cloud Security:
     - [Cloud Security Misconfigurations][4] utiliza reglas de detección de configuración en la nube y configuración de infraestructura para analizar el estado de tu entorno en la nube.
-    - [Workload Protection][5] utiliza las reglas del Agent y de detección para monitorizar activamente y evaluar la actividad del sistema.
     - [Cloud Security Identity Risks][6] utiliza reglas de detección para detectar riesgos basados en IAM en tu infraestructura de nube.
+- [Workload Protection][5] utiliza las reglas del Agent y de detección para monitorizar activamente y evaluar la actividad del sistema.
 - [App and API Protection][7] (AAP) aprovecha Datadog [APM][8], el [Datadog Agent][9] y las reglas de detección para detectar amenazas en el entorno de tu aplicación.
 
+## Mapa de MITRE ATT&CK
+
+{{< product-availability names="Cloud SIEM,App and API Protection,Workload Protection" >}}
+
+MITRE ATT&CK es un marco que ayuda a las organizaciones a comprender cómo actúan los ciberatacantes. Mapea lo siguiente:
+
+- **Táctica:** el "por qué" de un ataque. Son los objetivos generales, como obtener acceso inicial, ejecutar código malicioso o robar datos.
+- **Técnicas:** el "cómo" de un ataque. Son las acciones específicas que realiza un atacante para lograr una táctica, como utilizar el phishing para entrar en un sistema o explotar una vulnerabilidad en el software.
+
+Mediante el mapeo de tácticas y técnicas, MITRE ATT&CK proporciona a los equipos de seguridad un lenguaje común para comunicar las amenazas y preparar mejor las defensas.
+
+Para utilizar el mapa de ATT&CK de MITRE, haz lo siguiente:
+
+1. Abrir reglas de detección en [SIEM][16] o [Workload Protection][17].
+2. Selecciona el mapa **MITRE ATT&CK**.
+3. Selecciona uno o varios productos en el filtro <i class="icon-filter"></i>.
+4. Revisa el mapa para ver lo siguiente:
+   - Evaluar la cobertura: determina qué técnicas de ataque están bien cubiertas y cuáles están poco vigiladas.
+   - Priorizar la creación de reglas: centrarse en la creación de reglas de detección para técnicas con baja o nula cobertura.
+   - Racionalización de la gestión de reglas: gestionar y actualizar las reglas de detección, asegurándote de que se ajustan a la información sobre amenazas más reciente.
+El mapa de ATT&CK de MITRE está disponible en SIEM o Workload Protection, pero puedes seleccionar Application and API Protection en el filtro. Application and API Protection se incluye en el mapa de MITRE ATT&CK para una cobertura de seguridad integral.
 ## Reglas de detección beta
 
 El equipo de investigación de seguridad de Datadog añade continuamente nuevas reglas de detección de seguridad predefinidas. Aunque el objetivo es ofrecer detecciones de alta calidad con el lanzamiento de integraciones u otras nuevas funciones, a menudo es necesario observar el rendimiento de la detección a escala antes de poner la regla a disposición general. De este modo, el equipo de investigación de seguridad de Datadog dispone del tiempo necesario para perfeccionar o eliminar las posibilidades de detección que no cumplan nuestras normas.
@@ -111,12 +135,12 @@ Para eliminar una regla personalizada, haz clic en el menú vertical de tres pun
 
 ### Consultar el historial de versiones de una regla
 
-{{< img src="/security/security_monitoring/detection_rules/rule_version_history_20250207.png" alt="Historial de versiones del compromiso de un token de acceso GitHub OAuth" style="width:80%;" >}}
+{{< img src="/security/security_monitoring/detection_rules/rule_version_history_20250207.png" alt="Historial de versiones de un compromiso de token de acceso GitHub OAuth" style="width:80%;" >}}
 
 Utiliza el historial de versiones de reglas para:
-- Ver las versiones anteriores de una regla de detección y comprender los cambios a lo largo del tiempo.
-- Ver quién realizó los cambios para mejorar la colaboración.
-- Comparar versiones con diferencias para analizar las modificaciones y el impacto de los cambios.
+- Consulta las versiones anteriores de una regla de detección y entiende los cambios a lo largo del tiempo.
+- Descubre quién realizó los cambios para mejorar la colaboración.
+- Compara versiones con diferencias para analizar las modificaciones y el impacto de los cambios.
 
 Para ver el historial de versiones de una regla:
 1. Ve a la página [Parámetros de seguridad][15]. En el panel de navegación izquierdo:
@@ -171,8 +195,10 @@ El proceso de obsolescencia de las reglas es el siguiente:
 [8]: /es/tracing/
 [9]: /es/agent/
 [10]: https://app.datadoghq.com/security/configuration/
-[11]: /es/security/cloud_siem/detection_rules/
+[11]: /es/security/cloud_siem/detect_and_monitor/custom_detection_rules/
 [12]: /es/security/application_security/policies/custom_rules/
 [13]: /es/security/cloud_security_management/misconfigurations/custom_rules
 [14]: /es/security/workload_protection/workload_security_rules?tab=host#create-custom-rules
 [15]: https://app.datadoghq.com/security/configuration/
+[16]: https://app.datadoghq.com/security/rules
+[17]: https://app.datadoghq.com/security/workload-protection/detection-rules

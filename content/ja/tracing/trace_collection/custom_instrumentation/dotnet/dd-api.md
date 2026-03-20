@@ -80,7 +80,7 @@ namespace Store.Managers
   <strong>注</strong>: この機能を使用するには、<a href="https://www.nuget.org/packages/Datadog.Trace"><code>Datadog.Trace</code> NuGet パッケージ</a>をアプリケーションに追加する必要があります。これは、トレーサーとアクティブスパンに直接アクセスするための API を提供します。
 </div>
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>注:</strong> v3.0.0 以降、カスタム インスツルメンテーションを使用するには自動インスツルメンテーションも併用する必要があります。自動およびカスタム インスツルメンテーションのパッケージ バージョン (例: MSI と NuGet) は同期させ、メジャー バージョンを混在させないようにしてください。
 </div>
 
@@ -106,7 +106,7 @@ Tracer.Configure(settings);
 
 `Tracer.Configure()` を呼び出すと、カスタムインスツルメンテーションでも自動インスツルメンテーションでも、それ以降のすべてのトレースの設定が置き換わります。
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   構成の置き換えは、アプリケーションで<strong>一度だけ、できるだけ早い段階で</strong>行う必要があります。
 </div>
 
@@ -116,7 +116,7 @@ Tracer.Configure(settings);
 
 カスタムスパンを作成してアクティブにするには、`Tracer.Instance.StartActive()` を使用します。トレースがすでにアクティブな場合 (例えば、自動インスツルメンテーションによって作成された場合)、スパンは現在のトレースの一部となります。現在のトレースがない場合は、新しいトレースが開始されます。
 
-<div class="alert alert-warning"><strong>警告</strong>: <code>StartActive</code> から返されたスコープを確実にディスポーズしてください。スコープをディスポーズすると、スパンが閉じられ、そのスパンがすべて閉じられると、トレースが Datadog にフラッシュされるようになります。
+<div class="alert alert-danger"><strong>警告</strong>: <code>StartActive</code> から返されたスコープを確実にディスポーズしてください。スコープをディスポーズすると、スパンが閉じられ、そのスパンがすべて閉じられると、トレースが Datadog にフラッシュされるようになります。
 </div>
 
 ```csharp

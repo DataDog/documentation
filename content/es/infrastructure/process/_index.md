@@ -28,7 +28,7 @@ title: Live Processes
 ---
 
 
-<div class="alert alert-warning">
+<div class="alert alert-info">
 Live Processes se encuentra incluido en el plan Enterprise. Para todos los demás planes, ponte en contacto con la persona encargada de tu cuenta o escribe a <a href="mailto:success@datadoghq.com">success@datadoghq.com</a> a fin de solicitar esta función.
 </div>
 
@@ -159,7 +159,7 @@ Consulta las páginas de información de la [Instalación de DaemonSet][1] está
 {{% /tab %}}
 {{% tab "AWS ECS Fargate" %}}
 
-<div class="alert alert-warning">Puedes ver tus procesos de ECS Fargate en Datadog. Para ver su relación con los contenedores de ECS Fargate, utiliza la versión del Datadog Agent 7.50.0 o una posterior.</div>
+<div class="alert alert-info">Puedes ver tus procesos de ECS Fargate en Datadog. Para ver su relación con los contenedores de ECS Fargate, utiliza la versión del Datadog Agent 7.50.0 o una posterior.</div>
 
 Para recopilar procesos, el Datadog Agent se debe ejecutar como un contenedor en la tarea.
 

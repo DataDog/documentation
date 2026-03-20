@@ -1,5 +1,6 @@
 ---
 title: Duplicate hosts with Kubernetes on AWS (EC2 or EKS)
+description: Troubleshoot duplicate host issues when running Datadog Agent in Kubernetes environments on AWS EC2 or EKS
 ---
 
 If you are running the Datadog Agent in a Kubernetes environment on AWS (fully self-managed on EC2, or using EKS) you may see a problem with duplicate hosts. One host is using a hostname coming from the Datadog Agent, while the other is the AWS `instance-id` collected by Datadog's AWS integration.

@@ -72,7 +72,7 @@ title: 로그 아카이브
 ### 스토리지 버킷 생성하기
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">아카이브로 로그를 보내는 것은 Datadog GovCloud 환경 외부에서 일어나며, 이는 Datadog의 통제를 벗어나는 것입니다. Datadog은 FedRAMP, DoD 영향 수준, ITAR, 수출 규정 준수, 데이터 보존 또는 해당 로그에 적용되는 유사 규정과 관련해 사용자가 가질 의무 또는 요구 사항을 포함하되 이에 국한되지 않는 Datadog GovCloud 환경을 떠난 모든 로그에 대해 책임을 지지 않습니다.</div>
+<div class="alert alert-danger">아카이브로 로그를 보내는 것은 Datadog GovCloud 환경 외부에서 일어나며, 이는 Datadog의 통제를 벗어나는 것입니다. Datadog은 FedRAMP, DoD 영향 수준, ITAR, 수출 규정 준수, 데이터 보존 또는 해당 로그에 적용되는 유사 규정과 관련해 사용자가 가질 의무 또는 요구 사항을 포함하되 이에 국한되지 않는 Datadog GovCloud 환경을 떠난 모든 로그에 대해 책임을 지지 않습니다.</div>
 {{< /site-region >}}
 
 {{< tabs >}}
@@ -81,7 +81,7 @@ title: 로그 아카이브
 [AWS 콘솔][1]에서 [S3 버킷을 생성하여][2] 아카이브를 보냅니다.
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">가상 호스트 스타일 주소를 이용하는 S3 FIPS 엔드포인트와 통합되어 있을 경우 Datadog Archives에서 점(.)이 있는 버킷 이름을 지원하지 않습니다. 자세한 내용은 AWS 설명서를 참고하세요.<a href="https://aws.amazon.com/compliance/fips/">AWS FIPS</a> 및 <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/VirtualHosting.html">AWS Virtual Hosting</a>.</div>
+<div class="alert alert-danger">가상 호스트 스타일 주소를 이용하는 S3 FIPS 엔드포인트와 통합되어 있을 경우 Datadog Archives에서 점(.)이 있는 버킷 이름을 지원하지 않습니다. 자세한 내용은 AWS 설명서를 참고하세요.<a href="https://aws.amazon.com/compliance/fips/">AWS FIPS</a> 및 <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/VirtualHosting.html">AWS Virtual Hosting</a>.</div>
 {{< /site-region >}}
 
 **참조**:

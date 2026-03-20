@@ -174,7 +174,7 @@ kubectl delete -f notes-app.yaml{{< /code-block >}}
 
    자동으로 Datadog 서비스를 포함하는 애플리케이션을 계측합니다.
 
-   <div class="alert alert-warning"><strong>참고</strong>: 이 샘플 명령의 플래그, 특히 샘플 속도는 이 튜토리얼이 적용되지 않은 환경에는 적합하지 않을 수 있습니다. 실제 환경에서 어떤 플래그를 사용해야 하는지에 대해 살펴보려면 <a href="#tracing-configuration">추적 설정</a>을 참고하세요.</div>
+   <div class="alert alert-danger"><strong>참고</strong>: 이 샘플 명령의 플래그, 특히 샘플 속도는 이 튜토리얼이 적용되지 않은 환경에는 적합하지 않을 수 있습니다. 실제 환경에서 어떤 플래그를 사용해야 하는지에 대해 살펴보려면 <a href="#tracing-configuration">추적 설정</a>을 참고하세요.</div>
 
 3. [Universal Service Tags][10]는 다양한 버전 및 배포 환경에서 추적된 서비스를 식별하여 Datadog 내에서 상관 관계를 분석하고 검색 및 필터링에 사용할 수 있도록 합니다. Unified Service Tagging에 사용되는 세 가지 환경 변수는 `DD_SERVICE`, `DD_ENV`, `DD_VERSION`입니다. Kubernetes로 배포된 애플리케이션의 경우, 이러한 환경 변수는 배포 YAML 파일 내, 특히 배포 오브젝트, 파드(Pod) 사양, 파드(Pod) 컨테이너 템플릿에 추가할 수 있습니다.
 
@@ -379,7 +379,7 @@ docker push <ECR_REGISTRY_URL>:notes
    ENTRYPOINT ["java" , "-javaagent:../dd-java-agent.jar", "-Ddd.trace.sample.rate=1", "-jar" , "target/calendar-0.0.1-SNAPSHOT.jar"]
    ```
 
-   <div class="alert alert-warning"><strong>참고</strong>: 이 플래그, 특히 샘플 속도는 이 튜토리얼이 적용되지 않은 환경에는 적합하지 않을 수 있음을 다시 강조합니다. 실제 환경에서 어떤 플래그를 사용해야 하는지에 살펴보려면 <a href="#tracing-configuration">추적 설정</a>을 참고하세요.</div>
+   <div class="alert alert-danger"><strong>참고</strong>: 이 플래그, 특히 샘플 속도는 이 튜토리얼이 적용되지 않은 환경에는 적합하지 않을 수 있음을 다시 강조합니다. 실제 환경에서 어떤 플래그를 사용해야 하는지에 살펴보려면 <a href="#tracing-configuration">추적 설정</a>을 참고하세요.</div>
 
 3. 두 애플리케이션을 모두 빌드하고 ECR에 게시합니다. `docker` 디렉터리에서 실행합니다.
    {{< code-block lang="sh" >}}

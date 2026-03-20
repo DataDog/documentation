@@ -1,5 +1,6 @@
 ---
 title: Watchdog Explains
+description: Automatically detect anomalies in timeseries graphs and identify contributing tags for faster root cause analysis.
 aliases:
     - /graphing/correlations/
     - /dashboards/correlations/
@@ -36,19 +37,8 @@ You can start your investigation from any timeseries graph that uses metric data
 
 This opens a full-screen investigation view. Watchdog analyzes the anomaly and surfaces any tag groups that significantly contributed to the shape or scale of the anomaly. Click on a tag to see how removing or isolating that dimension affects the graph. Use this to identify root causes like specific customers, services, or environments.
 
-## Example: Surge in traffic from a single tenant
-
-A spike in traffic is detected in the `shopist-returns` service. Watchdog surfaces a sharp increase in request volume, highlighted on the graph. Upon investigation, it attributes the anomaly to a single tag group: `org_id:17728`
-
-A spike in **Shopist Checkout Latency** is quickly explained by Watchdog: the `/apply-coupon` route in `eu-west-1` is the driver. This suggests that customers in that region experienced delays or were blocked when applying discount codes, directly impacting their ability to complete purchases.
-
-{{< img src="/dashboards/graph_insights/watchdog_explains/isolation_root_cause.png" alt="Example of Watchdog Explains highlighting a root cause in a timeseries graph" style="width:100%;" >}}
-
-At the same time, **Shopist Payment Error Rate** climbs. Watchdog Explains attributes the spike to `payment_provider:adyen` and a recent code change (`version:2025.08.14`). The release introduced errors that prevented some customers from completing payments, resulting in failed checkouts and revenue loss.
-
 {{< img src="/dashboards/graph_insights/watchdog_explains/isolation_tag_breakdown.png" alt="Tag breakdown in Watchdog Explains investigation" style="width:100%;" >}}
 
-By automatically surfacing these contributors, Watchdog Explains narrowed the root cause from "checkout is slow" to "coupon submissions in eu-west-1 failed due to a recent code change on Adyen." This clarity enabled a quick rollback and helped restore reliability.
 
 ## Disabling anomaly detection
 

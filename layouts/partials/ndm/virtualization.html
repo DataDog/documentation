@@ -1,0 +1,45 @@
+{{ $root := . }}
+{{ $virtualization_integrations := slice
+  (dict "name" "vsphere" "href" "/integrations/vsphere/" "src" "integrations_logos/vsphere.png")
+  (dict "name" "openstack" "href" "/integrations/openstack/" "src" "integrations_logos/openstack.png")
+  (dict "name" "proxmox" "href" "/integrations/proxmox/" "src" "integrations_logos/proxmox_small.svg")
+ }}
+<div class="virtualization-integrations">
+  <div class="container cards-dd">
+    <div class="row row-cols-4 g-2 g-xl-3">
+      {{ range first 4 $virtualization_integrations }}
+      <div class="col">
+        <a class="card h-100" href="{{ .href }}">
+          <div class="card-body text-center py-2 px-1">
+            {{ partial "img.html" (dict "root" $root "src" .src "class" "img-fluid" "alt" .name "width" "150") }}
+          </div>
+        </a>
+      </div>
+      {{ end }}
+    </div>
+    <br>
+    <div class="row row-cols-4 g-2 g-xl-3">
+      {{ range first 4 (after 4 $virtualization_integrations) }}
+      <div class="col">
+        <a class="card h-100" href="{{ .href }}">
+          <div class="card-body text-center py-2 px-1">
+            {{ partial "img.html" (dict "root" $root "src" .src "class" "img-fluid" "alt" .name "width" "150") }}
+          </div>
+        </a>
+      </div>
+      {{ end }}
+    </div>
+    <br>
+    <div class="row row-cols-4 g-2 g-xl-3">
+      {{ range after 8 $virtualization_integrations }}
+      <div class="col">
+        <a class="card h-100" href="{{ .href }}">
+          <div class="card-body text-center py-2 px-1">
+            {{ partial "img.html" (dict "root" $root "src" .src "class" "img-fluid" "alt" .name "width" "150") }}
+          </div>
+        </a>
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</div>

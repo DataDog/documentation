@@ -11,7 +11,7 @@ further_reading:
 title: Vista de rutas
 ---
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Network Path para Datadog Cloud Network Monitoring no es compatible con tu <a href="/getting_started/site">sitio Datadog</a> seleccionado ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-danger">Network Path para Datadog Cloud Network Monitoring no es compatible con tu <a href="/getting_started/site">sitio Datadog</a> seleccionado ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 <div class="alert alert-info">Network Path para Datadog Cloud Network Monitoring tiene disponibilidad limitada. Para inscribirte, ponte en contacto con tu representante de Datadog.</div>

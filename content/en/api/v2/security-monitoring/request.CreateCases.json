@@ -1,0 +1,50 @@
+{
+  "data": [
+    {
+      "attributes": {
+        "title": "A title",
+        "description": "A description"
+      },
+      "relationships": {
+        "findings": {
+          "data": [
+            {
+              "id": "YjdhNDM3N2QyNTFjYmUwYTY3NDdhMTg0YTk2Yjg5MDl-ZjNmMzAwOTFkZDNhNGQzYzI0MzgxNTk4MjRjZmE2NzE=",
+              "type": "findings"
+            }
+          ]
+        },
+        "project": {
+          "data": {
+            "id": "959a6f71-bac8-4027-b1d3-2264f569296f",
+            "type": "projects"
+          }
+        }
+      },
+      "type": "cases"
+    },
+    {
+      "attributes": {
+        "title": "A title",
+        "description": "A description"
+      },
+      "relationships": {
+        "findings": {
+          "data": [
+            {
+              "id": "OGRlMDIwYzk4MjFmZTZiNTQwMzk2ZjUxNzg0MDc0NjR-MTk3Yjk4MDI4ZDQ4YzI2ZGZiMWJmMTNhNDEwZGZkYWI=",
+              "type": "findings"
+            }
+          ]
+        },
+        "project": {
+          "data": {
+            "id": "959a6f71-bac8-4027-b1d3-2264f569296f",
+            "type": "projects"
+          }
+        }
+      },
+      "type": "cases"
+    }
+  ]
+}

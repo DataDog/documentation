@@ -9,7 +9,7 @@ further_reading:
 title: (레거시) Ruby 트레이스 컨텍스트 전파
 ---
 
-<div class="alert alert-warning">이 문서는 <code>ddtrace</code> gem v1.x용입니다. <code>datadog</code> gem v2.0 이상 사용자는 최신 <a href="/tracing/trace_collection/trace_context_propagation/">Ruby 트레이스 컨텍스트 전파</a> 문서를 참고하세요.</div>
+<div class="alert alert-danger">이 문서는 <code>ddtrace</code> gem v1.x용입니다. <code>datadog</code> gem v2.0 이상 사용자는 최신 <a href="/tracing/trace_collection/trace_context_propagation/">Ruby 트레이스 컨텍스트 전파</a> 문서를 참고하세요.</div>
 
 ### 헤더 추출 및 삽입
 

@@ -117,7 +117,7 @@ tritonserver --cache-config local,size=1048576
 ```
 
 また、NVIDIA Triton では OpenMetrics エンドポイントを通じて [カスタムメトリクス][6] を公開できます。Datadog は `extra_metrics` オプションを使用して、これらのカスタムメトリクスも収集できます。
-<div class="alert alert-warning">これらの NVIDIA Triton のカスタムメトリクスは、Datadog では標準メトリクスとみなされます。</div>
+<div class="alert alert-danger">これらの NVIDIA Triton のカスタムメトリクスは、Datadog では標準メトリクスとみなされます。</div>
 
 ### 構成
 

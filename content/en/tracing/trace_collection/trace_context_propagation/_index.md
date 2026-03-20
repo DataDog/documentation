@@ -73,14 +73,16 @@ Most services send and receive trace context headers using the same format. Howe
 
 The Datadog SDK supports the following trace context formats:
 
-| Format                 | Configuration Value           |
-|------------------------|-------------------------------|
-| [Datadog][1]           | `datadog`                     |
-| [W3C Trace Context][2] | `tracecontext`                |
-| [B3 Single][3]         | _Language Dependent Value_    |
-| [B3 Multi][4]          | `b3multi`                     |
-| [Baggage][10]          | `baggage`                     |
-| [None][5]              | `none`                        |
+| Format                 | Configuration Value        |
+|------------------------|----------------------------|
+| [Datadog][1]           | `datadog`                  |
+| [W3C Trace Context][2] | `tracecontext`             |
+| [B3 Single][3]         | _Language Dependent Value_ |
+| [B3 Multi][4]          | `b3multi`                  |
+| [Baggage][10]          | `baggage`<sup>*</sup>       |
+| [None][5]              | `none`                     |
+
+<sup>*</sup> **Note**: `baggage` is not supported in Rust.
 
 ## Language support
 
@@ -100,6 +102,7 @@ The Datadog Java SDK supports the following trace context formats, including dep
 |                        | `b3single`          |
 | [B3 Multi][4]          | `b3multi`           |
 |                        | `b3` (deprecated)   |
+| [Baggage][7]          | `baggage`           |
 | [AWS X-Ray][5]         | `xray`              |
 | [None][6]              | `none`              |
 
@@ -117,6 +120,7 @@ In addition to the environment variable configuration, you can also update the p
 [4]: https://github.com/openzipkin/b3-propagation#multiple-headers
 [5]: https://docs.aws.amazon.com/xray/latest/devguide/xray-concepts.html#xray-concepts-tracingheader
 [6]: #none-format
+[7]: https://www.w3.org/TR/baggage/
 
 {{% /tab %}}
 
@@ -130,9 +134,9 @@ The Datadog Python SDK supports the following trace context formats, including d
 |------------------------|---------------------------------|
 | [Datadog][1]           | `datadog`                       |
 | [W3C Trace Context][2] | `tracecontext`                  |
-| [Baggage][6]          | `baggage`                       |
+| [Baggage][6]           | `baggage`                       |
 | [B3 Single][3]         | `b3`                            |
-|                        | `b3 single header` (deprecated) |
+|                        | `b3 single header` (removed in v3.0) |
 | [B3 Multi][4]          | `b3multi`                       |
 | [None][5]              | `none`                          |
 
@@ -620,6 +624,136 @@ void SetHeaderValues(MessageHeaders headers, string name, string value)
 
 {{% /tab %}}
 
+{{% tab "Rust" %}}
+
+<div class="alert alert-info">The Datadog Rust SDK is in Preview.</div>
+
+The Datadog Rust SDK is built on the OpenTelemetry (OTel) SDK.
+
+Trace context propagation is handled by the OTel SDK, which is configured by `datadog-opentelemetry` to support both `datadog` and `tracecontext` (W3C) formats.
+
+### Supported formats
+
+| Format | Configuration Value |
+|---|---|
+| [Datadog][1] | `datadog` |
+| [W3C Trace Context][2] | `tracecontext` |
+
+### Configuration
+
+You can control which propagation formats are used by setting the `DD_TRACE_PROPAGATION_STYLE` environment variable. You can provide a comma-separated list.
+
+For example:
+
+```bash
+# To support both W3C and Datadog
+export DD_TRACE_PROPAGATION_STYLE="tracecontext,datadog"
+```
+
+### Manual injection and extraction
+
+Because there is no automatic instrumentation for Rust, you must manually propagate context when making or receiving remote calls (like HTTP requests).
+- `HeaderExtractor` to **extract** a parent context from incoming request headers.
+- `HeaderInjector` to **inject** the current context into outbound request headers.
+
+First, add `opentelemetry-http` to your `Cargo.toml`.
+
+```toml
+[dependencies]
+# Provides HeaderInjector and HeaderExtractor
+# Ensure this version matches your other opentelemetry dependencies
+opentelemetry-http = "0.31"
+
+# Only required for the Hyper examples below
+http-body-util = "0.1"
+```
+
+<div class="alert alert-danger">Use the same crate version for <code>opentelemetry-http</code> as the rest of your OpenTelemetry dependencies to avoid version conflicts.</div>
+
+### Injecting context (client side)
+
+When making an HTTP request (for example, with `hyper` 1.0), inject the current span context into the request headers using `HeaderInjector`.
+
+```rust
+use opentelemetry::{global, Context};
+use opentelemetry_http::HeaderInjector;
+use hyper::Request;
+use http_body_util::Empty;
+use hyper::body::Bytes;
+
+// HYPER example
+fn build_outbound_request(url: &str) -> http::Result<Request<Empty<Bytes>>> {
+    let cx = Context::current();
+
+    // Build the request and inject headers in-place
+    let mut builder = Request::builder().method("GET").uri(url);
+    global::get_text_map_propagator(|prop| {
+        prop.inject_context(&cx, &mut HeaderInjector(builder.headers_mut().unwrap()))
+    });
+
+    builder.body(Empty::<Bytes>::new())
+}
+```
+
+### Extracting context (server side)
+
+When receiving an HTTP request, extract the trace context from the headers using `HeaderExtractor`.
+
+When using async runtimes (like Tokio), you must attach the extracted context to the future so that it propagates correctly through the async task chain.
+
+```rust
+use opentelemetry::{
+    global,
+    trace::{Span, FutureExt, SpanKind, Tracer},
+    Context,
+};
+use opentelemetry_http::HeaderExtractor;
+use hyper::{Request, Response};
+use hyper::body::Incoming;
+use http_body_util::Full;
+use hyper::body::Bytes;
+
+// Utility function to extract context from a hyper request
+fn extract_context(req: &Request<Incoming>) -> Context {
+    global::get_text_map_propagator(|propagator| {
+        propagator.extract(&HeaderExtractor(req.headers()))
+    })
+}
+
+// A placeholder for your actual request handling logic
+async fn your_handler_logic() -> Response<Full<Bytes>> {
+    // ... your logic ...
+    Response::new(Full::new(Bytes::from("Hello, World!")))
+}
+
+// HYPER example
+async fn hyper_handler(req: Request<Incoming>) -> Response<Full<Bytes>> {
+    // Extract the parent context from the incoming headers
+    let parent_cx = extract_context(&req);
+    
+    let tracer = global::tracer("my-server-component");
+    
+    // Start the server span as a child of the extracted context
+    let server_span = tracer
+        .span_builder("http.server.request")
+        .with_kind(SpanKind::Server)
+        .start_with_context(tracer, &parent_cx);
+
+    // Create a new context with the new server span
+    // This is critical for async propagation
+    let cx = parent_cx.with_span(server_span);
+
+    // Attach the new context to the future using .with_context(cx)
+    // This makes the span active for the duration of the handler
+    your_handler_logic().with_context(cx).await
+}
+```
+
+[1]: #datadog-format
+[2]: https://www.w3.org/TR/trace-context/
+
+{{% /tab %}}
+
 {{< /tabs >}}
 
 ## Custom header formats
@@ -652,9 +786,22 @@ When the Datadog SDK is configured with the None format for extraction or inject
 By default, Baggage is automatically propagated through a distributed request using OpenTelemetry's [W3C-compatible headers][10]. To disable baggage, set [DD_TRACE_PROPAGATION_STYLE][12] to `datadog,tracecontext`.
 
 #### Adding baggage as span tags
-_Available in Python, PHP, Node.js, Go, .NET, Ruby, and Java. For other languages, reach out to [Support][11]_ 
 
 By default, `user.id,session.id,account.id` baggage keys are added as span tags. To customize this configuration, see [Context Propagation Configuration][13]. Specified baggage keys are automatically added as span tags `baggage.<key>` (for example, `baggage.user.id`).
+
+Support for baggage as span tags was introduced in the following releases:
+
+| Language  | Minimum SDK version                         |
+|-----------|---------------------------------------------|
+| Java      | 1.52.0                                      |
+| Python    | 3.7.0                                       |
+| Ruby      | 2.20.0                                      |
+| Go        | 2.2.2                                       |
+| .NET      | 3.23.0                                      |
+| Node      | 5.54.0                                      |
+| PHP       | 1.10.0                                      |
+| C++/Proxy | 1.9.0 (Nginx). Other proxies not supported. |
+| Rust      | Not supported                               |
 
 ## Further reading
 

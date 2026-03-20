@@ -7,7 +7,7 @@ custom_kind: integración
 description: Rastrea las métricas clave de Azure Diagnostic Extension.
 title: Azure Diagnostic Extension
 ---
-<div class="alert alert-warning">Esta integración está obsoleta. Instala el Datadog Agent para obtener información similar a nivel de invitado y de proceso sobre tus máquinas virtuales de Azure, con mejor granularidad y latencia.
+<div class="alert alert-danger">Esta integración está obsoleta. Instala el Datadog Agent para obtener información similar a nivel de invitado y de proceso sobre tus máquinas virtuales de Azure, con mejor granularidad y latencia.
 
 Las métricas que aparecen en esta página ya no se completan para las organizaciones Datadog recién creadas. Para los usuarios existentes, estas métricas se deshabilitaron el 1 de junio de 2023.
 

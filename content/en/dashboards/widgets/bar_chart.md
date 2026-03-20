@@ -1,5 +1,6 @@
 ---
 title: Bar Chart Widget
+description: Display aggregated data in vertical or horizontal bars to compare metrics across different categories.
 widget_type: "bar_chart"
 further_reading:
 - link: "/dashboards/graphing_json/"

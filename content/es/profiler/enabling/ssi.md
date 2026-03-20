@@ -19,7 +19,7 @@ de Continuous Profiler con SSI funciona para despliegues de hosts, contenedores 
 
 Continuous Profiler con SSI puede activarse para los siguientes lenguajes:
 
-| Lenguaje           | Versión de biblioteca del rastreador |
+| Lenguaje           | Versión de librería del rastreador |
 |--------------------|------------------------|
 | Java               | v1.37.0 o posterior                |
 | .NET (sólo x86_64) | v3.3.1 o posterior                 |
@@ -36,7 +36,7 @@ Continuous Profiler puede habilitarse como parte de la configuración de SSI sig
 {{% tab "Host y contenedor" %}}
 
 1. Ve a la [página de instalación del Agent][2] y selecciona una de las plataformas Linux o Docker.
-1. Activa el interruptor "Habilitar instrumentación APM". (Si no hay ningún interruptor, la plataforma no es compatible con SSI.) Activar el interruptor añade la variable de entorno `DD_APM_INSTRUMENTATION_ENABLED=` al comando de instalación, configurando el Agent instalado para inyectar la biblioteca del rastreador en los procesos.
+1. Activa el interruptor "Habilitar instrumentación APM". (Si no hay ningún interruptor, la plataforma no es compatible con SSI.) Activar el interruptor añade la variable de entorno `DD_APM_INSTRUMENTATION_ENABLED=` al comando de instalación, configurando el Agent instalado para inyectar la librería del rastreador en los procesos.
 1. Copia el comando de instalación en un editor de texto.
 1. Añade `DD_PROFILING_ENABLED=auto` como una variable de entorno adicional después de `DD_APM_INSTRUMENTATION_ENABLED` en el comando copiado. Esto activa el generador de perfiles automático para cualquier proceso nuevo que merezca la generación de un perfil.
 1. Continúa con el resto de las instrucciones de instalación, utilizando el comando de instalación modificado.
@@ -101,7 +101,7 @@ el Datadog Operator utiliza por defecto una versión más antigua del Agent.
 ## ¿Cómo funciona la generación de perfiles con SSI?
 
 Luego de la instalación, todos los nuevos procesos se ejecutan con la variable de entorno
-`DD_PROFILING_ENABLED=auto`. Los procesos en ejecución no se ven afectados. La biblioteca Datadog activa dinámicamente
+`DD_PROFILING_ENABLED=auto`. Los procesos en ejecución no se ven afectados. La librería Datadog activa dinámicamente
 el generador de perfiles para los procesos que son buenos candidatos para la generación de perfiles.
 
 La lógica para identificar un proceso como buen candidato varía según el lenguaje. Para Java, se generan perfiles

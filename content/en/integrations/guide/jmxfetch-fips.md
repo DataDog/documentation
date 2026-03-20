@@ -45,7 +45,7 @@ connector) and the client (JMXFetch).
 Commands provided in this section are for reference only and should be adjusted based on your specific scenario.
 
 
-<div class="alert alert-warning">Configure the JVM in FIPS mode before generating certificates, as some Java FIPS modules reject private keys created in non-FIPS mode.</div>
+<div class="alert alert-danger">Configure the JVM in FIPS mode before generating certificates, as some Java FIPS modules reject private keys created in non-FIPS mode.</div>
 
 
 {{< tabs >}}

@@ -5,22 +5,28 @@ aliases:
 - /es/agent/openmetrics
 - /es/agent/prometheus
 - /es/agent/kubernetes/prometheus
+description: Recopila Prometheus y OpenMetrics de las cargas de trabajo de Kubernetes
+  utilizando el módulo Datadog Agent con Autodiscovery
 further_reading:
+- link: https://www.datadoghq.com/blog/kubernetes-operator-performance
+  tag: Blog
+  text: Monitorizar tus operadores de Kubernetes para que las aplicaciones funcionen
+    sin problemas
 - link: /agent/kubernetes/log/
   tag: Documentación
-  text: Recopilar tus logs de aplicación
+  text: Recopilar logs de tus aplicaciones
 - link: /agent/kubernetes/apm/
   tag: Documentación
-  text: Recopila tus trazas de aplicaciones
+  text: Recopilar tus trazas (traces) de aplicaciones
 - link: /agent/kubernetes/integrations/
   tag: Documentación
   text: Recopila automáticamente los datos de métricas y logs de tus aplicaciones
 - link: /agent/guide/autodiscovery-management/
   tag: Documentación
-  text: Limita la recopilación de datos solo a un subconjunto de contenedores
+  text: Limitar la recopilación de datos a un subconjunto de contenedores
 - link: /agent/kubernetes/tag/
   tag: Documentación
-  text: Asignar etiquetas a todos los datos emitidos por un contenedor
+  text: Asignar etiquetas (tags) a todos los datos emitidos por un contenedor
 - link: /integrations/guide/prometheus-metrics/
   tag: Documentación
   text: Asignación de métricas de Prometheus a métricas de Datadog
@@ -37,7 +43,7 @@ En esta página se explica el uso básico de estos checks, que te permiten extra
 
 **Nota**: Datadog recomienda utilizar el check de OpenMetrics, ya que es más eficiente y admite totalmente el formato de texto de Prometheus. Utiliza el check de Prometheus sólo cuando el endpoint de métricas no admita un formato de texto.
 
-## Configuración
+## Instalación
 
 ### Instalación
 

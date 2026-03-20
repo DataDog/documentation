@@ -89,7 +89,7 @@ tile:
 ---
 
 <!--  EXTRAÍDO DE https://github.com/DataDog/integrations-extras -->
-<div class="alert alert-warning">El check del Agent existente para la recopilación de métricas de JFrog ha sido sustituido por FluentD. El check del Agent está obsoleto.</div>
+<div class="alert alert-danger">El check del Agent existente para la recopilación de métricas de JFrog ha sido sustituido por FluentD. El check del Agent está obsoleto.</div>
 
 ## Información general
 

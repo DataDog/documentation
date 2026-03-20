@@ -1,5 +1,6 @@
 ---
 title: SAML Group Mapping
+description: Map SAML identity provider attributes to Datadog roles and teams for automated user provisioning and access control management.
 further_reading:
 - link: "/account_management/saml/"
   tag: "Documentation"
@@ -14,11 +15,13 @@ You can map attributes to the following principals:
 - [Datadog roles][1]
 - [Datadog Teams][2]
 
- Users with the Access Management permission can assign or remove Datadog principals based on a user's SAML-assigned attributes.
+Setting up a mapping from SAML attributes to Datadog entities allows you to manage users solely in your identity provider. The system then provisions users in Datadog according to the mappings you set up.
 
- Setting up a mapping from SAML attributes to Datadog entities allows you to manage users solely in your identity provider. The system then provisions users in Datadog according to the mappings you set up.
+You can create a maximum of 1000 role mappings and 1000 team mappings in each organization. If your organization needs more mappings, reach out to [Support][8].
 
 ## Prerequisites
+
+Users with the Access Management permission can assign or remove Datadog principals based on a user's SAML-assigned attributes.
 
 It's important to understand what is sent in an assertion before turning on mappings, as mappings require correct attributes. Every IdP has specific mappings. For example, Azure works with object IDs, and Okta requires you to set attributes in [Okta settings][3]. Datadog recommends cross-referencing with [built-in browser tooling][4] such as Chrome DevTools or browser extensions and [validating your SAML assertions][5] **before** creating mappings.
 
@@ -38,7 +41,7 @@ It's important to understand what is sent in an assertion before turning on mapp
 
 When a user logs in who has the specified identity provider attribute, they are automatically assigned the Datadog role. Likewise, if someone has that identity provider attribute removed, they lose access to the role (unless another mapping adds it).
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>Important:</strong> If a user does <i>not</i> match any mapping, they lose any roles they had previously and are prevented from logging into the org with SAML. This includes roles that may be set with Just-In-Time provisioning. Double-check your mapping definitions and inspect your own assertions before enabling Mappings to prevent any scenarios where your users are unable to login.
 </div>
 
@@ -71,3 +74,4 @@ Make changes to a mapping by clicking the pencil (**Edit**) icon, or remove a ma
 [5]: https://www.samltool.com/validate_response.php
 [6]: /account_management/authn_mapping/
 [7]: /account_management/teams/#choose-provisioning-source
+[8]: /help/

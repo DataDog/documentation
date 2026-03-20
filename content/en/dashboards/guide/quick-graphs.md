@@ -1,5 +1,6 @@
 ---
 title: Quick Graphs
+description: Create graphs quickly from anywhere in Datadog using the Quick Graphs editor with keyboard shortcuts or global search.
 ---
 
 ## Overview

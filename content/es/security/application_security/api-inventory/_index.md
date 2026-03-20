@@ -27,7 +27,7 @@ Con el Inventario de seguridad de la API puedes:
 
 ## Configuración
 
-Las siguientes versiones de biblioteca son compatible con el Inventario de seguridad de la API. Se requiere la [configuración remota][1].
+Las siguientes versiones de librería son compatible con el Inventario de seguridad de la API. Se requiere la [configuración remota][1].
 
 |Tecnología|Versión mínima| Compatibilidad con el análisis de datos confidenciales |
 |----------|----------|----------|
@@ -42,7 +42,7 @@ Las siguientes versiones de biblioteca son compatible con el Inventario de segur
 
 ## Cómo funciona
 
-El inventario de la API aprovecha la biblioteca de rastreo de Datadog con ASM habilitado para recopilar metadatos de seguridad sobre el tráfico de la API, incluido el esquema de la API, los tipos de datos confidenciales procesados y el esquema de autenticación.
+El inventario de la API aprovecha la librería de rastreo de Datadog con ASM habilitado para recopilar metadatos de seguridad sobre el tráfico de la API, incluido el esquema de la API, los tipos de datos confidenciales procesados y el esquema de autenticación.
 
 El Inventario de seguridad de la API utiliza la [configuración remota][4] para gestionar y configurar reglas de análisis que detectan datos confidenciales y autenticaciones.
 
@@ -92,7 +92,7 @@ Datadog marca un endpoint como público si la dirección IP del cliente está fu
 - 192.168.0.0/16
 - 169.254.1.0/16
 
-Para obtener más información sobre la configuración de biblioteca requerida, consulta [Configuración de una cabecera IP de cliente][6].
+Para obtener más información sobre la configuración de librería requerida, consulta [Configuración de una cabecera IP de cliente][6].
 
 ### Endpoint no autenticado
 

@@ -49,6 +49,22 @@ Select a rule to view details about the misconfigured resources, the rule descri
 
 {{< img src="security/cspm/frameworks_and_benchmarks/failed-finding3.png" alt="The compliance rule side panel includes information about the rule and resources with failed misconfigurations" style="width:75%;">}}
 
+## Track compliance posture with dashboards
+
+You can use dashboards to see posture scores across teams, services, accounts, environments, and more. This data can help you prioritize your remediation efforts, schedule reports, put security data next to observability and cost data, and embed apps and workflows so you can start them directly from your reporting view. For more information, see [Dashboards][4].
+
+You can graph your organization's compliance data in dashboards using the `datadog.csm.findings.count` metric.
+
+<div class="alert alert-info">This metric estimates the true values in the Compliance page, and some error is expected. You can filter the <a href="https://app.datadoghq.com/security/compliance/home/essential-cloud-security-controls">Compliance Framework page</a> to see exact values for any combination of account, service, environment, and team.</div>
+
+## Show or hide compliance frameworks
+
+You can hide frameworks from the list on the [Compliance][20] page, so you can focus on the ones that are most relevant to your organization.
+
+To hide a framework, either on the Compliance page or on a page for a specific framework, click the **Options** button {{< img src="icons/kebab.png" alt="Options button" inline="true" style="height:1em">}}, then click **Hide framework**.
+
+Then, on the Compliance page, you can use the **Show hidden frameworks** toggle to show hidden frameworks at the bottom of the list, or hide them completely. When the toggle is on, you can click **Show** next to any hidden framework to add it back to the list.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -56,6 +72,7 @@ Select a rule to view details about the misconfigured resources, the rule descri
 [1]: /security_monitoring/default_rules/
 [2]: /security/cloud_security_management/misconfigurations/frameworks_and_benchmarks/supported_frameworks/
 [3]: /glossary/#security-posture-score
+[4]: /dashboards
 [11]: /security/cloud_siem/
 [12]: /integrations/amazon_cloudtrail/
 [13]: https://app.datadoghq.com/security/configuration/rules?product=cspm
@@ -65,10 +82,9 @@ Select a rule to view details about the misconfigured resources, the rule descri
 [17]: /integrations/servicenow/
 [18]: /integrations/microsoft_teams/
 [19]: /integrations/webhooks/
-[20]: https://app.datadoghq.com/security/compliance/homepage
+[20]: https://app.datadoghq.com/security/compliance
 [21]: /security/cloud_security_management/misconfigurations/detection_rules
 [26]: /security/cloud_security_management/misconfigurations/custom_rules/#tagging-misconfigurations
-[27]: https://app.datadoghq.com/security/compliance
 [28]: /dashboards/template_variables/
 [29]: /api/latest/security-monitoring/#update-an-existing-rule
 [30]: /security/cloud_security_management/misconfigurations/frameworks_and_benchmarks/custom_frameworks

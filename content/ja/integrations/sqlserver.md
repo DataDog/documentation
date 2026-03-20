@@ -23,6 +23,7 @@ assets:
   monitors:
     Auto-parameterization attempts are failing: assets/monitors/sqlserver_high_number_failed_auto_param.json
     Availability Group is not healthy: assets/monitors/sqlserver_ao_not_healthy.json
+    Availability group failover detected: assets/monitors/sqlserver_ao_failover.json
     Database is not online: assets/monitors/sqlserver_db_not_online.json
     Database not in sync: assets/monitors/sqlserver_db_not_sync.json
     Processes are blocked: assets/monitors/sqlserver_high_processes_blocked.json
@@ -42,7 +43,7 @@ draft: false
 git_integration_title: sqlserver
 integration_id: sql-server
 integration_title: SQL Server
-integration_version: 20.2.0
+integration_version: 22.7.0
 is_public: true
 manifest_version: 2.0.0
 name: sqlserver
@@ -82,7 +83,7 @@ tile:
   title: SQL Server
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
+<!-- SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ![SQL Server のグラフ][1]
@@ -119,6 +120,7 @@ SQL Server チェックでサポートされる SQL Server のバージョンは
 
     ```SQL
         CREATE LOGIN datadog WITH PASSWORD = '<PASSWORD>';
+        USE master;
         CREATE USER datadog FOR LOGIN datadog;
         GRANT SELECT on sys.dm_os_performance_counters to datadog;
         GRANT VIEW SERVER STATE to datadog;
@@ -127,7 +129,7 @@ SQL Server チェックでサポートされる SQL Server のバージョンは
    データベースごとにファイルサイズのメトリクスを収集するには、作成したユーザー (`datadog`) にデータベースへの[接続権限アクセス][6]があることを確認するために、以下を実行します。
 
    ```SQL
-       GRANT CONNECT ANY DATABASE to datadog;
+       GRANT CONNECT ANY DATABASE to datadog; 
    ```
 
 2. (AlwaysOn および `sys.master_files` メトリクスの場合に必要metrics) AlwaysOn および `sys.master_files` メトリクスを収集するには、以下の追加権限を付与します。
@@ -136,7 +138,7 @@ SQL Server チェックでサポートされる SQL Server のバージョンは
         GRANT VIEW ANY DEFINITION to datadog;
     ```
 
-### 構成
+### 設定
 
 {{< tabs >}}
 {{% tab "ホスト" %}}
@@ -154,20 +156,22 @@ SQL Server チェックでサポートされる SQL Server のバージョンは
      - host: "<SQL_HOST>,<SQL_PORT>"
        username: datadog
        password: "<YOUR_PASSWORD>"
-       connector: odbc # alternative is 'adodbapi'
-       driver: SQL Server
+       connector: adodbapi 
+       adoprovider: MSOLEDBSQL19  # Replace with MSOLEDBSQL for versions 18 and previous
    ```
 
     ポートオートディスカバリーを使用する場合は、`SQL_PORT` に `0` を使用します。カスタムクエリを使用して独自のメトリクスを作成する方法など、すべてのオプションの詳細については、[チェックコンフィギュレーションの例][2]を参照してください。
 
-    **注**: (デフォルトの) プロバイダー `SQLOLEDB` は、非推奨になります。新しい `MSOLEDBSQL` プロバイダーを使用するには、[Microsoft][3] からこのプロバイダーをダウンロードし、`sqlserver.d/conf.yaml`ファイルで `adoprovider` 変数を `MSOLEDBSQL19` に設定します。`MSOLEDBSQL` バージョン 18 以下を使用している場合は、代わりに `adoprovider` 変数を `MSOLEDBSQL` に設定します。また、以下のように指定することで、Windows 認証を使用し、ユーザー名とパスワードを指定せずに済ますこともできます。
+    SQL Server の設定に基づき、[サポートされているドライバー][3] を使用してください。
+
+    **注**: また、以下のように指定することで、Windows 認証を使用し、ユーザー名/パスワードを指定しないこともできます:
 
       ```yaml
       connection_string: "Trusted_Connection=yes"
       ```
 
 
-2. [Agent を再起動します][4]。
+2. [Agent を再起動][4]します。
 
 ##### Linux
 
@@ -200,11 +204,11 @@ _Agent バージョン 6.0 以降で利用可能_
 
     `path` パラメーターと `service` パラメーターの値を環境に合わせて変更してください。使用可能なすべてのコンフィギュレーションオプションの詳細については、[sqlserver.d/conf.yaml のサンプル][2]を参照してください。
 
-3. [Agent を再起動します][4]。
+3. [Agent を再起動][4]します。
 
 [1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/datadog_checks/sqlserver/data/conf.yaml.example
-[3]: https://docs.microsoft.com/en-us/sql/connect/oledb/oledb-driver-for-sql-server?view=sql-server-2017
+[3]: https://docs.datadoghq.com/ja/database_monitoring/setup_sql_server/selfhosted/#supported-drivers
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [5]: https://docs.microsoft.com/en-us/sql/connect/odbc/linux-mac/installing-the-microsoft-odbc-driver-for-sql-server?view=sql-server-2017
 [6]: http://www.freetds.org/
@@ -245,10 +249,10 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 [Agent の status サブコマンドを実行][7]し、Checks セクションの `sqlserver` を探します。
 
-## 収集データ
+## 収集されるデータ
 
 ### メトリクス
-{{< get-metrics-from-git "sql-server" >}}
+{{< get-metrics-from-git "sqlserver" >}}
 
 
 これらのメトリクスのほとんどは、SQL Server の `sys.dm_os_performance_counters` テーブルにあります。
@@ -257,13 +261,13 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 SQL Server チェックには、イベントは含まれません。
 
-### サービスチェック
-{{< get-service-checks-from-git "sql-server" >}}
+### サービス チェック
+{{< get-service-checks-from-git "sqlserver" >}}
 
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][8]までお問い合わせください。
 
 ARM aarch64 プロセッサで Agent を実行している場合、Agent バージョン 7.48.0 にバンドルされているこのチェックのバージョン 14.0.0 以降、既知の問題があります。Python の依存関係がロードに失敗し、[Agent の status サブコマンド][7]を実行すると以下のメッセージが表示されます。
 

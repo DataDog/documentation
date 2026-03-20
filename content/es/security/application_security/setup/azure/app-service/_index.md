@@ -78,7 +78,7 @@ Configura estos valores en la variable de entorno `DD_START_APP`. Los siguientes
 Ve a **Parámetros generales** y añade lo siguiente al campo **Comando de inicio**:
 
 ```
-curl -s https://raw.githubusercontent.com/DataDog/datadog-aas-linux/v1.4.0/datadog_wrapper | bash
+curl -s https://raw.githubusercontent.com/DataDog/datadog-aas-linux/v1.14.0/datadog_wrapper | bash
 ```
 
 {{< img src="serverless/azure_app_service/startup-command-1.jpeg" alt="Configuración de Azure App Service: parámetros de stack tecnológico, en la sección de configuración de parámetros de la interfaz de usuario de Azure. Debajo de los campos de versión mayor y menor del stack tecnológico se encuentra el 'Comando de inicio' rellenado por el comando curl anterior." style="width:100%;" >}}

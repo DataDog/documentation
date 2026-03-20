@@ -1,6 +1,8 @@
 ---
 aliases:
 - /es/agent/amazon_ecs/apm
+description: Configura la recopilación de traces (trazas) de APM para aplicaciones
+  en contenedores ejecutadas en Amazon ECS
 further_reading:
 - link: /agent/amazon_ecs/logs/
   tag: Documentación
@@ -74,7 +76,7 @@ Indica al rastreador la dirección IP privada de la instancia EC2 subyacente en 
 Utiliza uno de los siguientes métodos para obtener dinámicamente la dirección IP privada:
 
 {{< tabs >}}
-{{% tab "Endpoint de metadatos de EC2" %}}
+{{% tab "EC2 metadata endpoint" %}}
 
 El [endpoint de metadatos de EC2 de Amazon (IMDSv1)][1] permite detectar la dirección IP privada. Para obtener la dirección IP privada de cada host, utiliza el comando curl para la siguiente URL:
 
@@ -92,7 +94,7 @@ curl http://169.254.169.254/latest/meta-data/local-ipv4 -H "X-aws-ec2-metadata-t
 [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html
 [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-service.html
 {{% /tab %}}
-{{% tab "Archivo de metadatos del contenedor de ECS" %}}
+{{% tab "ECS container metadata file (Archivo de metadatos del contenedor de ECS)" %}}
 
 El [archivo de metadatos del contenedor de ECS de Amazon][1] permite detectar la dirección IP privada. Para obtener la dirección IP privada de cada host, ejecuta el siguiente comando:
 
@@ -128,26 +130,11 @@ Actualiza el `entryPoint` de la definición de tareas con lo siguiente, sustituy
 ```
 Para Python, el comando de inicio suele ser `ddtrace-run python my_app.py`, aunque puede variar en función del marco utilizado; por ejemplo, utilizando [uWSGI][1] o instrumentando tu [código manualmente con `patch_all`][2].
 
-#### Código
-También puedes actualizar el código para que el rastreador configure el nombre de host explícitamente:
-
-```python
-import requests
-from ddtrace import tracer
-
-
-def get_aws_ip():
-  r = requests.get('http://169.254.169.254/latest/meta-data/local-ipv4')
-  return r.text
-
-tracer.configure(hostname=get_aws_ip())
-```
-
 [1]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#uwsgi
 [2]: https://ddtrace.readthedocs.io/en/stable/basic_usage.html#patch-all
 {{< /programming-lang >}}
 
-{{< programming-lang lang="nodeJS" >}}
+{{< programming-lang lenguaje="nodeJS" >}}
 
 #### Variable de momento de inicio
 Actualiza el `entryPoint` de la definición de tareas con lo siguiente, sustituyendo tu `<Node.js Startup Command>`:
@@ -325,7 +312,7 @@ Al utilizar IMDSv2, la configuración de `entryPoint` equivalente tendrá la apa
 ]
 ```
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

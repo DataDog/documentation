@@ -42,7 +42,7 @@ Conéctate a Microsoft Azure para:
 - Obtener métricas generadas por Datadog para obtener información exclusiva sobre tu entorno de Azure.
 - Correlacionar los datos de tus aplicaciones Azure en todos los logs, métricas, rastreo de APM, actividad del usuario y más en tu organización Datadog.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 La integración Azure de Datadog fue creada para recopilar <a href="https://docs.microsoft.com/en-us/azure/azure-monitor/platform/metrics-supported">todas las métricas del monitor Azure</a>. Datadog hace todo lo posible para actualizar continuamente los documentos para mostrar todas las sub-integraciones, pero los servicios de la nube envían rápidamente nuevas métricas y servicios, por lo que la lista de integraciones a veces puede retrasarse. <br>La métrica <code>azure.*.count</code> es generada por Datadog desde Azure Resource Health. Para obtener más información, consulta <a href="https://docs.datadoghq.com/integrations/guide/azure-status-metric">Métrica de recuento de Azure</a>.
 </div>
 

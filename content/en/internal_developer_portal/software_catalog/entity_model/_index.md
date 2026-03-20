@@ -29,37 +29,38 @@ aliases:
   - /api_catalog/api_catalog_api
   - /service_catalog/apis
 further_reading:
-- link: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/service_definition_yaml"
-  tag: "External Site"
-  text: "Create and manage definitions with Terraform"
-- link: "/api/latest/service-definition/"
-  tag: "API"
-  text: "Learn about the Definition API"
-- link: "/integrations/github"
-  tag: "Documentation"
-  text: "Learn about the GitHub Integration"
-- link: "https://www.datadoghq.com/blog/service-catalog-backstage-yaml/"
-  tag: "Blog"
-  text: "Import Backstage YAML files into Datadog"
-- link: "https://www.datadoghq.com/blog/service-catalog-schema-v3/"
-  tag: "Blog"
-  text: "Improve developer experience and collaboration with Service Catalog schema version 3.0"
+  - link: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/service_definition_yaml"
+    tag: "External Site"
+    text: "Create and manage definitions with Terraform"
+  - link: "/api/latest/service-definition/"
+    tag: "API"
+    text: "Learn about the Definition API"
+  - link: "/integrations/github"
+    tag: "Documentation"
+    text: "Learn about the GitHub Integration"
+  - link: "https://www.datadoghq.com/blog/service-catalog-backstage-yaml/"
+    tag: "Blog"
+    text: "Import Backstage YAML files into Datadog"
+  - link: "https://www.datadoghq.com/blog/service-catalog-schema-v3/"
+    tag: "Blog"
+    text: "Improve developer experience and collaboration with Service Catalog schema version 3.0"
+  - link: "https://www.datadoghq.com/blog/software-catalog-custom-entities/"
+    tag: "Blog"
+    text: "Model your architecture with custom entities in the Datadog Software Catalog"
 algolia:
   tags: [ "codeLocations" ]
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Entity Model schema v3.0 is not available in the selected site at this time.</div>
+<div class="alert alert-danger">Entity Model schema v3.0 is not available in the selected site at this time.</div>
 
 {{< /site-region >}}
 
 ## Overview
 
-Software Catalog uses definition schemas to store and display relevant metadata about your services. The schemas have built-in validation rules to ensure that only valid values are accepted. You can view warnings in the **Definition** tab on the Software Catalog side panel for any selected services.
+Software Catalog uses definition schemas to store and display relevant metadata about your entities. The schemas have built-in validation rules to ensure that only valid values are accepted. You can view warnings in the **Definition** tab on the Software Catalog side panel for any selected services.
 
-{{< callout url="https://forms.gle/fwzarcSww6By7tn39" btn_hidden="true" header="false" >}}
-<a href="https://forms.gle/fwzarcSww6By7tn39">Share feedback</a> on new and upcoming Software Catalog features!
-{{< /callout >}}
+{{< img src="/tracing/internal_developer_portal/entity-model-flow-chart.png" alt="A flow chart showing how components of Software Catalog connect with each other and with your cloud environment " style="width:100%;" >}}
 
 ## Supported versions
 
@@ -123,171 +124,171 @@ V3.0 contains the following changes from v2.2:
 ### Example YAML files
 
 {{% collapse-content title="Component of <code>kind:system</code>" level="h4" expanded=false id="id-for-anchoring" %}}
-  {{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
-  apiVersion: v3
-  kind: system
-  metadata:
-    name: myapp
-    displayName: My App
-    tags:
-      - tag:value
-    links:
-      - name: shopping-cart runbook
-        type: runbook
-        url: https://runbook/shopping-cart
-      - name: shopping-cart architecture
-        provider: gdoc
-        url: https://google.drive/shopping-cart-architecture
-        type: doc
-      - name: shopping-cart Wiki
-        provider: wiki
-        url: https://wiki/shopping-cart
-        type: doc
-      - name: shopping-cart source code
-        provider: github
-        url: http://github/shopping-cart
-        type: repo
-    contacts:
-      - name: Support Email
-        type: email
-        contact: team@shopping.com
-      - name: Support Slack
-        type: slack
-        contact: https://www.slack.com/archives/shopping-cart
-    owner: myteam
-    additionalOwners:
-      - name: opsTeam
-        type: operator
-  integrations:
-    pagerduty:
-      serviceURL: https://www.pagerduty.com/service-directory/Pshopping-cart
-    opsgenie:
-      serviceURL: https://www.opsgenie.com/service/shopping-cart
-      region: US
-  spec:
-    components:
-      - service:myservice
-      - service:otherservice
-  extensions:
-    datadoghq.com/shopping-cart:
-      customField: customValue
-  datadog:
-    codeLocations:
-      - repositoryURL: https://github.com/myorganization/myrepo.git
-        paths:
-          - path/to/service/code/**
-    events:
-      - name: "deployment events"
-        query: "app:myapp AND type:github"
-      - name: "event type B"
-        query: "app:myapp AND type:github"
-    logs:
-      - name: "critical logs"
-        query: "app:myapp AND type:github"
-      - name: "ops logs"
-        query: "app:myapp AND type:github"
-    pipelines:
-      fingerprints:
-        - fp1
-        - fp2
-  {{< /code-block >}}
+{{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
+apiVersion: v3
+kind: system
+metadata:
+  name: myapp
+  displayName: My App
+  tags:
+    - tag:value
+  links:
+    - name: shopping-cart runbook
+      type: runbook
+      url: https://runbook/shopping-cart
+    - name: shopping-cart architecture
+      provider: gdoc
+      url: https://google.drive/shopping-cart-architecture
+      type: doc
+    - name: shopping-cart Wiki
+      provider: wiki
+      url: https://wiki/shopping-cart
+      type: doc
+    - name: shopping-cart source code
+      provider: github
+      url: http://github/shopping-cart
+      type: repo
+  contacts:
+    - name: Support Email
+      type: email
+      contact: team@shopping.com
+    - name: Support Slack
+      type: slack
+      contact: https://www.slack.com/archives/shopping-cart
+  owner: myteam
+  additionalOwners:
+    - name: opsTeam
+      type: operator
+integrations:
+  pagerduty:
+    serviceURL: https://www.pagerduty.com/service-directory/Pshopping-cart
+  opsgenie:
+    serviceURL: https://www.opsgenie.com/service/shopping-cart
+    region: US
+spec:
+  components:
+    - service:myservice
+    - service:otherservice
+extensions:
+  datadoghq.com/shopping-cart:
+    customField: customValue
+datadog:
+  codeLocations:
+    - repositoryURL: https://github.com/myorganization/myrepo.git
+      paths:
+        - path/to/service/code/**
+  events:
+    - name: "deployment events"
+      query: "app:myapp AND type:github"
+    - name: "event type B"
+      query: "app:myapp AND type:github"
+  logs:
+    - name: "critical logs"
+      query: "app:myapp AND type:github"
+    - name: "ops logs"
+      query: "app:myapp AND type:github"
+  pipelines:
+    fingerprints:
+      - fp1
+      - fp2
+{{< /code-block >}}
 {{% /collapse-content %}}
 
 {{% collapse-content title="Component of <code>kind:library</code>" level="h4" expanded=false id="id-for-anchoring" %}}
-  {{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
-  apiVersion: v3
-  kind: library
-  metadata:
-    name: my-library
-    displayName: My Library
-    tags:
-      - tag:value
-    links:
-      - name: shopping-cart runbook
-        type: runbook
-        url: https://runbook/shopping-cart
-      - name: shopping-cart architecture
-        provider: gdoc
-        url: https://google.drive/shopping-cart-architecture
-        type: doc
-      - name: shopping-cart Wiki
-        provider: wiki
-        url: https://wiki/shopping-cart
-        type: doc
-      - name: shopping-cart source code
-        provider: github
-        url: http://github/shopping-cart
-        type: repo
-    contacts:
-      - name: Support Email
-        type: email
-        contact: team@shopping.com
-      - name: Support Slack
-        type: slack
-        contact: https://www.slack.com/archives/shopping-cart
-    owner: myteam
-    additionalOwners:
-      - name: opsTeam
-        type: operator
-  {{< /code-block >}}
+{{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
+apiVersion: v3
+kind: library
+metadata:
+  name: my-library
+  displayName: My Library
+  tags:
+    - tag:value
+  links:
+    - name: shopping-cart runbook
+      type: runbook
+      url: https://runbook/shopping-cart
+    - name: shopping-cart architecture
+      provider: gdoc
+      url: https://google.drive/shopping-cart-architecture
+      type: doc
+    - name: shopping-cart Wiki
+      provider: wiki
+      url: https://wiki/shopping-cart
+      type: doc
+    - name: shopping-cart source code
+      provider: github
+      url: http://github/shopping-cart
+      type: repo
+  contacts:
+    - name: Support Email
+      type: email
+      contact: team@shopping.com
+    - name: Support Slack
+      type: slack
+      contact: https://www.slack.com/archives/shopping-cart
+  owner: myteam
+  additionalOwners:
+    - name: opsTeam
+      type: operator
+{{< /code-block >}}
 {{% /collapse-content %}}
 
 {{% collapse-content title="Components that are part of multiple systems" level="h4" expanded=false id="id-for-anchoring" %}}
-  If a single component is part of multiple systems, you must specify that component in the YAML for each system. For example, if the datastore `orders-postgres` is a component of both a postgres fleet and a web application, specify two YAMLs:
+If a single component is part of multiple systems, you must specify that component in the YAML for each system. For example, if the datastore `orders-postgres` is a component of both a postgres fleet and a web application, specify two YAMLs:
 
-  For the postgres fleet (`managed-postgres`), specify a definition for `kind:system`:
-  {{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
-  apiVersion: v3
-  kind: system
-  spec:
-    components:
-      - datastore:orders-postgres
-      - datastore:foo-postgres
-      - datastore:bar-postgres
-  metadata:
-    name: managed-postgres
-    owner: db-team
-  {{< /code-block >}}
+For the postgres fleet (`managed-postgres`), specify a definition for `kind:system`:
+{{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
+apiVersion: v3
+kind: system
+spec:
+  components:
+    - datastore:orders-postgres
+    - datastore:foo-postgres
+    - datastore:bar-postgres
+metadata:
+  name: managed-postgres
+  owner: db-team
+{{< /code-block >}}
 
-  For the web application (`shopping-cart`), declare a separate definition for `kind:system`:
-  {{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
+For the web application (`shopping-cart`), declare a separate definition for `kind:system`:
+{{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
 
-  apiVersion: v3
-  kind: system
-  spec:
-    lifecycle: production
-    tier: critical
-    components:
-      - service:shopping-cart-api
-      - service:shopping-cart-processor
-      - queue:orders-queue
-      - datastore:orders-postgres
-  metadata:
-    name: shopping-cart
-    owner: shopping-team
-    additionalOwners:
-      - name: sre-team
-        type: operator
-  ---
-  apiVersion: v3
-  kind: datastore
-  metadata:
-    name: orders-postgres
-    additionalOwners:
-      - name: db-team
-        type: operator
-  ---
-  apiVersion: v3
-  kind: service
-  metadata:
-    name: shopping-cart-api
-  ---
-  apiVersion: v3
-  kind: service
-  metadata:
-    name: shopping-cart-processor
-  ---
-  {{< /code-block >}}
+apiVersion: v3
+kind: system
+spec:
+  lifecycle: production
+  tier: critical
+  components:
+    - service:shopping-cart-api
+    - service:shopping-cart-processor
+    - queue:orders-queue
+    - datastore:orders-postgres
+metadata:
+  name: shopping-cart
+  owner: shopping-team
+  additionalOwners:
+    - name: sre-team
+      type: operator
+---
+apiVersion: v3
+kind: datastore
+metadata:
+  name: orders-postgres
+  additionalOwners:
+    - name: db-team
+      type: operator
+---
+apiVersion: v3
+kind: service
+metadata:
+  name: shopping-cart-api
+---
+apiVersion: v3
+kind: service
+metadata:
+  name: shopping-cart-processor
+---
+{{< /code-block >}}
 {{% /collapse-content %}}
 
 ### Explicit and implicit metadata inheritance
@@ -598,5 +599,5 @@ The [JSON schema for Datadog definitions][20] is registered with the open source
 [18]: http://json-schema.org/
 [19]: https://www.schemastore.org
 [20]: https://raw.githubusercontent.com/DataDog/schema/refs/heads/main/service-catalog/service.schema.json
-[21]: /dora_metrics/setup/deployments?tab=apmdeploymenttracking#handling-multiple-services-in-the-same-repository
+[21]: /dora_metrics/setup/#handling-multiple-services-in-the-same-repository
 [22]: /continuous_delivery/features/code_changes_detection?tab=github#specify-service-file-path-patterns

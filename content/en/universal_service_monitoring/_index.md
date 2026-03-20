@@ -1,5 +1,6 @@
 ---
 title: Universal Service Monitoring
+description: "Monitor service health metrics across your entire stack without code instrumentation using Universal Service Monitoring and the Datadog Agent."
 aliases:
 - /tracing/universal_service_monitoring/
 further_reading:
@@ -80,5 +81,5 @@ After enabling Universal Service Monitoring, you can:
 [3]: /tracing/software_catalog/
 [4]: /monitors/types/apm/?tab=apmmetrics
 [5]: /dashboards/
-[6]: /service_management/service_level_objectives/metric/
+[6]: /service_level_objectives/metric/
 [7]: /universal_service_monitoring/setup/

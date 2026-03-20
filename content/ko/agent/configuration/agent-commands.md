@@ -7,6 +7,7 @@ aliases:
 - /ko/agent/faq/start-stop-restart-the-datadog-agent
 - /ko/agent/faq/agent-commands
 - /ko/agent/guide/agent-commands
+description: Agent 시작, 중지, 문제 해결 및 관리를 위한 Datadog Agent 명령의 전체 참조입니다.
 further_reading:
 - link: /agent/troubleshooting/
   tag: 설명서
@@ -14,7 +15,8 @@ further_reading:
 title: Agent 명령
 ---
 
-<div class="alert alert-warning"><code>service</code> 래퍼 명령을 사용할 수 없는 Linux 기반 시스템의 경우 <a href="/agent/faq/agent-v6-changes/?tab=linux#service-lifecycle-commands">사용 가능한 대안 목록을 확인하세요</a>.
+<div class="alert alert-danger">
+<code>서비스</code> 래퍼 명령을 사용할 수 없는 Linux 기반 시스템의 경우 <a href="/agent/faq/agent-v6-changes/?tab=linux#service-lifecycle-commands"> 문의해 주시면 대체 목록을 알려드립니다</a>.
 </div>
 
 ## Agent 시작/중지/다시 시작
@@ -27,11 +29,11 @@ Datadog Agent를 시작하는 명령 목록:
 |------------|--------------------------------------------------------------------|
 | AIX        | `startsrc -s datadog-agent`                                        |
 | Linux      | 사용 중인 OS에 대한 [Agent 문서][1]를 참고하세요.                      |
-| Docker     | [설치 명령][2]을 사용합니다.                                 |
-| 쿠버네티스(Kubernetes) | `kubectl create -f datadog-agent.yaml`                             |
+| 도커(Docker)     | [설치 명령][2]을 사용합니다.                                 |
+| Kubernetes | `kubectl create -f datadog-agent.yaml`                             |
 | macOS      | `launchctl start com.datadoghq.agent` *또는* systray 앱 사용 |
-| Source     | `sudo service datadog-agent start`                                 |
-| Windows    | [Windows Agent 문서][3]를 참고하세요.                          |
+| 소스     | `sudo service datadog-agent start`                                 |
+| 윈도우즈(Windows)    | [Windows Agent 문서][3]를 참고하세요.                          |
 
 ### Agent 중지
 
@@ -41,11 +43,11 @@ Datadog Agent를 중지하는 명령 목록:
 |------------|----------------------------------------------------------------------------------|
 | AIX        | `stopsrc -s datadog-agent`                                                       |
 | Linux      | 사용 중인 OS에 대한 [Agent 문서][1]를 참고하세요.                                    |
-| Docker     | `docker exec -it <CONTAINER_NAME> agent stop`                                    |
-| 쿠버네티스(Kubernetes) | `kubectl delete pod <AGENT POD NAME>`—참고: 파드가 자동으로 재예약됩니다 |
+| 도커(Docker)     | `docker exec -it <CONTAINER_NAME> agent stop`                                    |
+| Kubernetes | `kubectl delete pod <AGENT POD NAME>`—참고: 파드가 자동으로 재예약됩니다 |
 | macOS      | `launchctl stop com.datadoghq.agent` *또는* systray 앱 사용                |
-| Source     | `sudo service datadog-agent stop`                                                |
-| Windows    | [Windows Agent 문서][3]를 참고하세요.                                        |
+| 소스     | `sudo service datadog-agent stop`                                                |
+| 윈도우즈(Windows)    | [Windows Agent 문서][3]를 참고하세요.                                        |
 
 ### 에이전트 재시작
 
@@ -54,14 +56,14 @@ Datadog Agent를 다시 시작하는 명령 목록:
 | 플랫폼   | 명령어                                                                          |
 |------------|----------------------------------------------------------------------------------|
 | Linux      | 사용 중인 OS에 대한 [Agent 문서][1]를 참고하세요.                                    |
-| Docker     | [설치 명령][2]을 사용합니다.                                               |
-| 쿠버네티스(Kubernetes) | `kubectl delete pod <AGENT POD NAME>`—참고: 파드가 자동으로 재예약됩니다 |
+| 도커(Docker)     | [설치 명령][2]을 사용합니다.                                               |
+| Kubernetes | `kubectl delete pod <AGENT POD NAME>`—참고: 파드가 자동으로 재예약됩니다 |
 | macOS      | 에이전트를 중지한 후 다음으로 시작:<br>`launchctl stop com.datadoghq.agent` <br> `launchctl start com.datadoghq.agent` <br> 또는 Systray 앱 사용 |
-| Source     | *지원되지 않는 플랫폼*                                                           |
-| Windows    | [Windows Agent 문서][3]를 참고하세요.                                        |
+| 소스     | *지원되지 않는 플랫폼*                                                           |
+| 윈도우즈(Windows)    | [Windows Agent 문서][3]를 참고하세요.                                        |
 
 
-## Agent 상태 및 정보
+## 에이전트 상태 및 정보
 
 ### 서비스 상태
 
@@ -72,10 +74,10 @@ Datadog Agent의 상태를 표시하는 명령 목록:
 | AIX             | `lssrc -s datadog-agent`                                                      |
 | Linux           | 사용 중인 OS에 대한 [Agent 문서][1]를 참고하세요.                                 |
 | Docker (Debian) | `sudo docker exec -it <CONTAINER_NAME> s6-svstat /var/run/s6/services/agent/` |
-| 쿠버네티스(Kubernetes)      | `kubectl exec -it <POD_NAME> -- s6-svstat /var/run/s6/services/agent/`        |
+| Kubernetes      | `kubectl exec -it <POD_NAME> -- s6-svstat /var/run/s6/services/agent/`        |
 | macOS           | `launchctl list com.datadoghq.agent` *또는* systray 앱 사용             |
-| Source          | `sudo service datadog-agent status`                                           |
-| Windows         | [Windows Agent 문서][4]를 참고하세요.                                     |
+| 소스          | `sudo service datadog-agent status`                                           |
+| 윈도우즈(Windows)         | [Windows Agent 문서][4]를 참고하세요.                                     |
 | [Cluster Agent (Kubernetes)][5] | `datadog-cluster-agent status`                                     |
 
 ### Agent 정보
@@ -86,11 +88,11 @@ Datadog Agent와 활성화된 통합의 상태를 표시하는 명령 목록:
 |------------|------------------------------------------------------|
 | AIX        | `datadog-agent status`                               |
 | Linux      | `sudo datadog-agent status`                          |
-| Docker     | `sudo docker exec -it <CONTAINER_NAME> agent status` |
-| 쿠버네티스(Kubernetes) | `kubectl exec -it <POD_NAME> -- agent status`        |
+| 도커(Docker)     | `sudo docker exec -it <CONTAINER_NAME> agent status` |
+| Kubernetes | `kubectl exec -it <POD_NAME> -- agent status`        |
 | macOS      | `datadog-agent status` 또는 [web GUI][6]에서   |
-| Source     | `sudo datadog-agent status`                          |
-| Windows    | [Windows Agent 문서][4]를 참고하세요.            |
+| 소스     | `sudo datadog-agent status`                          |
+| 윈도우즈(Windows)    | [Windows Agent 문서][4]를 참고하세요.            |
 | [Cluster Agent (Kubernetes)][5] | `datadog-cluster-agent status`       |
 
 올바르게 구성된 통합은 아래에서 볼 수 있듯이 경고나 오류 없이 **Running Checks**에 표시됩니다.

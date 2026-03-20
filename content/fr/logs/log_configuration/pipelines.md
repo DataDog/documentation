@@ -98,7 +98,7 @@ Vous pouvez préciser des attributs alternatifs à utiliser comme source pour la
 
 **Remarque** : Datadog rejette un log si sa date officielle est antérieure de plus de 18 heures.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Les formats de date reconnus sont : <a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO 8601</a>, <a href="https://en.wikipedia.org/wiki/Unix_time">UNIX (le format EPOCH en millisecondes)</a> et <a href="https://www.ietf.org/rfc/rfc3164.txt">RFC 3164</a>.
 </div>
 

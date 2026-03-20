@@ -54,7 +54,7 @@ Actions can be authenticated in the following ways:
 - Connection credentials
 
 By default, viewers of a published app do not need access to the app's connections. Instead, actions use the identity of the app's author. This simplifies sharing and improves security by preventing apps from performing sensitive operations using the identity of arbitrary viewers.
-For more information on configuring credentials, see [Connections][2]. App Builder shares the Action Catalog and the connection credentials for each integration with [Datadog Workflow Automation][3].
+For more information on configuring credentials, see [Connections][8]. App Builder shares the Action Catalog and the connection credentials for each integration with [Datadog Workflow Automation][9].
 
 ## App permissions
 
@@ -66,7 +66,7 @@ You can expand access to a draft of published app using access control.
 
 ### Permissions and access control
 
-Use [role-based access control (RBAC)][4] to control access to your apps and connections.
+Use [role-based access control (RBAC)][3] to control access to your apps and connections.
 
 The coarse permissions that apply to apps include the following:
 
@@ -119,8 +119,11 @@ App Builder provides the following permissions for each app:
 Viewer
 : Run and view the app
 
-Editor
+Contributor
 : Edit, run, and view the app
+
+Editor
+: Edit, run, view, publish, and delete the app.
 
 To restrict access to the app, perform the following steps in the app canvas:
 1. Navigate to the detailed editing view for the app you want to restrict access to.
@@ -134,10 +137,11 @@ To restrict access to the app, perform the following steps in the app canvas:
 
 <br>Do you have questions or feedback? Join the **#app-builder** channel on the [Datadog Community Slack][6].
 
-[1]: https://app.datadoghq.com/app-builder/action-catalog
-[2]: /service_management/app_builder/connections/
-[3]: /service_management/workflows/
-[4]: /account_management/rbac/
+[1]: https://app.datadoghq.com/actions/action-catalog/
+[2]: /account_management/org_settings/service_accounts#permissions
+[3]: /account_management/rbac/?tab=datadogapplication#role-based-access-control
 [5]: https://app.datadoghq.com/app-builder/
-[6]: https://datadoghq.slack.com/
+[6]: https://chat.datadoghq.com/
 [7]: /account_management/audit_trail/#overview
+[8]: /actions/connections/
+[9]: /actions/workflows/

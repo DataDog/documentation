@@ -30,8 +30,8 @@ title: Tráfico de red
 
 ## Información general
 
-<div class="alert alert-warning">
-El Agent siempre inicia el tráfico hacia Datadog. Nunca se inician sesiones desde Datadog hacia el Agent.
+<div class="alert alert-danger">
+El tráfico siempre se inicia desde el Agent hacia Datadog. Nunca se inician sesiones desde Datadog hacia el Agent.
 </div>
 
 Todo el tráfico del Agent se envía a través de SSL. El destino depende del sitio y servicio de Datadog. Para ver los destinos basados en tu [sitio de Datadog][11], haz clic en el selector `DATADOG SITE` de la derecha.
@@ -44,8 +44,14 @@ Añade los siguientes dominios a tu lista de inclusión para permitir la instala
 - `yum.datadoghq.com`
 - `keys.datadoghq.com`
 - `apt.datadoghq.com`
+- `windows-agent.datadoghq.com`
 
 ## Destinos
+<div class="alert alert-warning">
+A partir de la versión 7.67.0, el Agent convierte los sitios Datadog en nombres de dominio completos (añadiendo un punto al final del dominio) para reducir el número de consultas DNS.
+Por ejemplo, envía las cargas útiles de APM a <code>trace.agent.datadoghq.com.</code>.<br>
+Este comportamiento se puede desactivar en la versión 7.72.0 y posteriores configurando <code>convert_dd_site_fqdn.enabled</code> como <code>falso</code> en la configuración, o con la variable de entorno <code>DD_CONVERT_DD_SITE_FQDN_ENABLED=false</code>.
+</div>
 
 [APM][1]
 : `trace.agent.`{{< region-param key="dd_site" code="true" >}}<br>
@@ -78,6 +84,9 @@ Añade los siguientes dominios a tu lista de inclusión para permitir la instala
 [Real User Monitoring (RUM)][6]
 : {{< region-param key="browser_sdk_endpoint_domain" code="true" >}}
 
+[Cloud Security Vulnerabilities][29]
+: `sbom-intake.`{{< region-param key="dd_site" code="true" >}}
+
 [Localizaciones privadas de la monitorización Synthetic][8]
 : Synthetics Worker v1.5.0 o posteriores: `intake.synthetics.`{{< region-param key="dd_site" code="true" >}} es el único endpoint que necesitas configurar.<br>
 Resultados de la prueba de API para las versiones de Synthetics Worker superiores a la 0.1.6: `intake.synthetics.`{{< region-param key="dd_site" code="true" >}}<br>
@@ -93,109 +102,18 @@ Resultados de la prueba de API para las versiones de Synthetics Worker anteriore
 : `dbm-metrics-intake.`{{< region-param key="dd_site" code="true" >}}<br>
 `dbquery-intake.`{{< region-param key="dd_site" code="true" >}}
 
-[101]: /es/agent/remote_config
+[101]: /es/remote_configuration
 [102]: /es/database_monitoring/
 
 {{% /site-region %}}
 
-{{% site-region region="us" %}}
-[Logs][200] y [logs de HIPAA][201]
-: TCP: `agent-intake.logs.datadoghq.com`<br>
-HTTP: `agent-http-intake.logs.datadoghq.com`<br>
-Otros: consulta los [endpoints para logs][203]
+[Logs][30] & [Logs HIPAA][31]
+: TCP: {{< region-param key=tcp_endpoint code="true" >}}<br>
+HTTP: {{< region-param key=agent_http_endpoint code="true" >}}<br>
+Otros: Consultar [endpoints de logs][32]
 
-[Logs heredados de HIPAA][201]
-: `tcp-encrypted-intake.logs.datadoghq.com`<br>
-`lambda-tcp-encrypted-intake.logs.datadoghq.com`<br>
-`gcp-encrypted-intake.logs.datadoghq.com`<br>
-`http-encrypted-intake.logs.datadoghq.com`
-
-[200]: /es/logs/
-[201]: /es/data_security/logs/#hipaa-enabled-customers
-[203]: /es/logs/log_collection/#logging-endpoints
-{{% /site-region %}}
-
-{{% site-region region="eu" %}}
-[Logs][200] y [logs de HIPAA][201]
-: TCP: `agent-intake.logs.datadoghq.eu`<br>
-HTTP: `agent-http-intake.logs.datadoghq.eu`<br>
-Otros: consulta los [endpoints para logs][202]
-
-[Logs heredados de HIPAA][201]
-: `tcp-encrypted-intake.logs.datadoghq.eu`<br>
-`lambda-tcp-encrypted-intake.logs.datadoghq.eu`<br>
-`gcp-encrypted-intake.logs.datadoghq.eu`<br>
-`http-encrypted-intake.logs.datadoghq.eu`
-
-[200]: /es/logs/
-[201]: /es/data_security/logs/#hipaa-enabled-customers
-[202]: /es/logs/log_collection/#logging-endpoints
-{{% /site-region %}}
-
-{{% site-region region="us3" %}}
-[Logs][200] y [logs de HIPAA][201]
-: HTTP: `agent-http-intake.logs.us3.datadoghq.com`<br>
-Otros: consulta los [endpoints para logs][202]
-
-[Logs heredados de HIPAA][201]
-: `lambda-tcp-encrypted-intake.logs.us3.datadoghq.com`<br>
-`gcp-encrypted-intake.logs.us3.datadoghq.com`<br>
-`http-encrypted-intake.logs.us3.datadoghq.com`
-
-[200]: /es/logs/
-[201]: /es/data_security/logs/#hipaa-enabled-customers
-[202]: /es/logs/log_collection/#logging-endpoints
-{{% /site-region %}}
-
-{{% site-region region="us5" %}}
-[Logs][200] y [logs de HIPAA][201]
-: HTTP: `agent-http-intake.logs.us5.datadoghq.com`<br>
-Otros: consulta los [endpoints para logs][202]
-
-[Logs heredados de HIPAA][201]
-: `lambda-tcp-encrypted-intake.logs.us5.datadoghq.com`<br>
-`gcp-encrypted-intake.logs.us5.datadoghq.com`<br>
-`http-encrypted-intake.logs.us5.datadoghq.com`
-
-[200]: /es/logs/
-[201]: /es/data_security/logs/#hipaa-enabled-customers
-[202]: /es/logs/log_collection/#logging-endpoints
-{{% /site-region %}}
-
-{{% site-region region="ap1" %}}
-[Logs][200] y [Logs de HIPAA][201]
-: HTTP: `agent-http-intake.logs.ap1.datadoghq.com`<br>
-Otros: Consulta [endpoints de logs][202]
-
-[200]: /es/logs/
-[201]: /es/data_security/logs/#hipaa-enabled-customers
-[202]: /es/logs/log_collection/#logging-endpoints
-{{% /site-region %}}
-
-{{% site-region region="ap2" %}}
-[Logs][200] y [Logs de HIPAA][201]
-: HTTP: `agent-http-intake.logs.ap2.datadoghq.com`<br>
-Otros: Consulta [endpoints de logs][202]
-
-[200]: /es/logs/
-[201]: /es/data_security/logs/#hipaa-enabled-customers
-[202]: /es/logs/log_collection/#logging-endpoints
-{{% /site-region %}}
-
-{{% site-region region="gov" %}}
-[Logs][200] y [logs de HIPAA][201]
-: HTTP: `agent-http-intake.logs.ddog-gov.com`<br>
-Otros: consulta los [endpoints para logs][202]
-
-[Logs heredados de HIPAA][201]
-: `lambda-tcp-encrypted-intake.logs.ddog-gov.com`<br>
-`gcp-encrypted-intake.logs.ddog-gov.com`<br>
-`http-encrypted-intake.logs.ddog-gov.com`
-
-[200]: /es/logs/
-[201]: /es/data_security/logs/#hipaa-enabled-customers
-[202]: /es/logs/log_collection/#logging-endpoints
-{{% /site-region %}}
+[Logs HIPAA legacy][31]
+: {{< region-param key=hipaa_logs_legacy code="true" >}}
 
 [Métricas][26], [Checks de servicio][27], [Eventos][28] y otros metadatos del Agent 
 : `<VERSION>-app.agent.`{{< region-param key="dd_site" code="true" >}}<br>
@@ -250,39 +168,23 @@ Añade todos los `ip-ranges` a tu lista de inclusión. Aunque solo un subconjunt
 
 ## Puertos abiertos
 
-<div class="alert alert-warning">
-Todo el tráfico saliente se envía a través de SSL por TCP o UDP.
+<div class="alert alert-danger">
+Todo el tráfico saliente se envía por SSL a través de TCP o UDP.
 <br><br>
-Utiliza una regla de cortafuegos, o una restricción de red similar, para asegurarte de que el Agent solo es accesible para tus aplicaciones o fuentes de red de confianza. Si se accede a él desde una fuente no fiable, los agentes maliciosos pueden realizar diversas acciones invasivas, entre las que se incluyen escribir trazas y métricas en tu cuenta de Datadog u obtener información sobre tu configuración y servicios.
+Asegúrate de que solo puedan acceder al Agent tus aplicaciones o fuentes de red de confianza mediante una regla de cortafuegos o una restricción de red similar. El acceso que no es de confianza puede permitir a actores maliciosos realizar varias acciones invasivas, entre otras, escribir trazas y métricas en tu cuenta de Datadog u obtener información sobre tu configuración y tus servicios.
 </div>
 
 Abre los siguientes puertos para beneficiarte de todas las funcionalidades del **Agent**:
 
 #### Salida
 
-{{% site-region region="us" %}}
+{{% site-region region="us,eu" %}}
 
 | Producto/Función | Puerto | Protocolo | Descripción |
 | ------  | ---- | ------- | ----------- |
 | Agent<br>APM<br>Contenedores<br>Procesos activos<br>Métricas<br>Monitorización de redes en la nube<br>Universal Service Monitoring | 443 | TCP | La mayoría de los datos del Agent utilizan el puerto 443. |
 | [Autoescala personalizada del Agent][22] | 8443 | TCP |  |
-| Recopilación de logs | 10516 | TCP | Registro a través de TCP. Consulta [endpoints de logs][21] para otros tipos de connection (conexión). |
-| NTP | 123 | UDP | Protocolo de tiempo de red (NTP). Consulta [Destinos NTP predeterminados][20].<br>Para obtener información sobre la solución de problemas NTP, consulta [Problemas NTP][19]. |
-
-[19]: /es/agent/faq/network-time-protocol-ntp-offset-issues/
-[20]: /es/integrations/ntp/#overview
-[21]: /es/logs/log_collection/#logging-endpoints
-[22]: /es/containers/guide/cluster_agent_autoscaling_metrics
-
-{{% /site-region %}}
-
-{{% site-region region="eu" %}}
-
-| Producto/Función | Puerto | Protocolo | Descripción |
-| ------  | ---- | ------- | ----------- |
-| Agent<br>APM<br>Contenedores<br>Procesos activos<br>Métricas<br>Monitorización de redes en la nube<br>Universal Service Monitoring | 443 | TCP | La mayoría de los datos del Agent utilizan el puerto 443. |
-| [Autoescala personalizada del Agent][22] | 8443 | TCP |  |
-| Recopilación de logs | 443 | TCP | Registro a través de TCP. Consulta [endpoints de logs][21] para otros tipos de connection (conexión). |
+| Recopilación de logs | {{< region-param key=web_integrations_port >}} | TCP | Registro a través de TCP. Consulta [endpoints de logs][21] para otros tipos de connection (conexión). |
 | NTP | 123 | UDP | Protocolo de tiempo de red (NTP). Consulta [Destinos NTP predeterminados][20].<br>Para obtener información sobre la solución de problemas NTP, consulta [Problemas NTP][19]. |
 
 [19]: /es/agent/faq/network-time-protocol-ntp-offset-issues/
@@ -369,7 +271,7 @@ El receptor de APM y los puertos DogStatsD se encuentran en las secciones **Trac
 # receiver_port: 8126
 {{< /code-block >}}
 
-<div class="alert alert-warning">Si modificas aquí el valor del puerto DogStatsD o del puerto del receptor de APM, también deberás cambiar la configuración de la biblioteca de rastreo de APM para el puerto correspondiente. Consulta la información sobre cómo configurar puertos en los <a href="/tracing/trace_collection/library_config/">documentos de configuración de bibliotecas disponibles en tu idioma</a>.</div>
+<div class="alert alert-danger">Si cambias aquí el valor del puerto DogStatsD o del puerto receptor APM, debes cambiar también la configuración de la biblioteca de rastreo APM para el puerto correspondiente. Consulta la información sobre la configuración de puertos en los <a href="/tracing/trace_collection/library_config/">documentos de configuración de bibliotecas para tu lenguaje</a>.</div>
 
 ## Utilizar proxies
 
@@ -386,7 +288,7 @@ Las métricas se almacenan en la carpeta que define el parámetro `forwarder_sto
 
 Para evitar que se agote el espacio de almacenamiento, el Agent almacena las métricas en el disco sólo si el espacio de almacenamiento total utilizado es inferior al 80 %. Este límite se define mediante la configuración de `forwarder_storage_max_disk_ratio`.
 
-## Instalación del Datadog Operator
+## Instalación de Datadog Operator
 
 Si estás instalando el Datadog Operator en un entorno Kubernetes con conectividad limitada, debes permitir los siguientes endpoints para el puerto TCP 443, en función de tu ubicación:
 
@@ -430,3 +332,7 @@ Si estás instalando el Datadog Operator en un entorno Kubernetes con conectivid
 [26]: /es/metrics/
 [27]: /es/developers/service_checks/
 [28]: /es/events/
+[29]: /es/security/cloud_security_management/vulnerabilities/
+[30]: /es/logs/
+[31]: /es/data_security/logs/#hipaa-enabled-customers
+[32]: /es/logs/log_collection/#logging-endpoints

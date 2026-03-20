@@ -1,91 +1,32 @@
 ---
 app_id: airbyte
-app_uuid: 5994a02c-8754-40c3-9e99-a39ffc862b1c
-assets:
-  dashboards:
-    airbyte_overview: assets/dashboards/airbyte_overview.json
-  integration:
-    auto_install: true
-    metrics:
-      check:
-      - airbyte.metrics_reporter.est_num_metrics_emitted_by_reporter
-      - airbyte.worker.attempt.created
-      - airbyte.cron.jobs_run
-      metadata_path: metadata.csv
-      prefix: airbyte.
-    process_signatures:
-    - airbyte-cron
-    - airbyte-metrics-reporter
-    - airbyte-server
-    - airbyte-workers
-    - uvicorn connector_builder.entrypoint:app
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 10386
-    source_type_name: Airbyte
-  monitors:
-    Sync Jobs are taking a longer time than usual: assets/monitors/long_running_jobs.json
-author:
-  homepage: https://www.datadoghq.com
-  name: Datadog
-  sales_email: info@datadoghq.com
-  support_email: help@datadoghq.com
 categories:
 - ia/ml
 - almacenes de datos
 custom_kind: integración
-dependencies:
-- https://github.com/DataDog/integrations-core/blob/master/airbyte/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: airbyte
-integration_id: airbyte
-integration_title: Airbyte
-integration_version: ''
-is_public: true
-manifest_version: 2.0.0
-name: airbyte
-public_title: Airbyte
-short_description: Monitoriza el estado de tu despliegue Airbyte.
+description: Monitoriza el estado de tu despliegue Airbyte.
+integration_version: 1.0.0
+media: []
 supported_os:
 - Linux
 - Windows
 - macOS
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Categoría::IA/ML
-  - Categoría::Almacenes de datos
-  - Sistema operativo compatible::Linux
-  - Sistema operativo compatible::Windows
-  - Sistema operativo compatible::macOS
-  - Tipo de datos enviados::Métricas
-  - Oferta::Integración
-  configuration: README.md#Configuración
-  description: Monitoriza el estado de tu despliegue Airbyte.
-  media: []
-  overview: README.md#Información general
-  support: README.md#Soporte
-  title: Airbyte
+title: Airbyte
 ---
-
-<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
-
-
 ## Información general
 
-Este check monitoriza [Airbyte][1]. Las métricas se envían a Datadog a través de [DogStatsD][2].
+Este check monitoriza [Airbyte](https://airbyte.com/). Las métricas se envían a Datadog a través de [DogStatsD](https://docs.datadoghq.com/developers/dogstatsd).
 
 ## Configuración
 
 ### Instalación
 
-Todos los pasos que se indican a continuación son necesarios para que la integración Airbyte funcione correctamente. Antes de empezar, [instala la versión del Datadog Agent][3] `>=6.17` o `>=7.17`, que incluye la función de asignación StatsD/DogStatsD.
+Todos los pasos que se indican a continuación son necesarios para que la integración de Airbyte funcione correctamente. Antes de empezar, [instala la versión del Datadog Agent](https://app.datadoghq.com/account/settings/agent/latest) `>=6.17` o `>=7.17`, que incluye la función de asignación de StatsD/DogStatsD.
 
 ### Configuración
 
-1. Configura tu despliegue Airbyte [para enviar métricas a Datadog][4].
-2. Actualiza el [archivo de configuración principal del Datadog Agent][5] `datadog.yaml` añadiendo la siguiente configuración:
+1. Configura tu despliegue de Airbyte [para enviar métricas a Datadog](https://docs.airbyte.com/operator-guides/collecting-metrics/).
+1. Actualiza el [archivo de configuración principal del Datadog Agent](https://docs.datadoghq.com/agent/guide/agent-configuration-files/) `datadog.yaml` añadiendo la siguiente configuración:
 
 ```yaml
 dogstatsd_mapper_profiles:
@@ -147,13 +88,62 @@ dogstatsd_mapper_profiles:
         name: "airbyte.cron.jobs_run"
 ```
 
-3. [Reinicia el Agent][6] y Airbyte.
+3. [Reinicia el Agent](https://docs.datadoghq.com/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent) y Airbyte.
 
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "airbyte" >}}
 
+| | |
+| --- | --- |
+| **airbyte.cron.jobs_run** <br>(count) | Número de ejecuciones CRON por tipo de CRON.|
+| **airbyte.cron.workflows_healed** <br>(count) | Número de flujos de trabajo que el CRON autorreparable ha solucionado.|
+| **airbyte.metrics_reporter.est_num_metrics_emitted_by_reporter** <br>(count) | Estimación de las métricas emitidas por el informador en el último intervalo. Se trata de una estimación, ya que el recuento no es preciso.|
+| **airbyte.metrics_reporter.num_orphan_running_jobs** <br>(gauge) | Número de trabajos notificados como en ejecución que están asociados a una conexión inactiva u obsoleta.<br>_Se muestra como trabajo_ |
+| **airbyte.metrics_reporter.num_pending_jobs** <br>(gauge) | Número de trabajos pendientes.<br>_Se muestra como trabajo_ |
+| **airbyte.metrics_reporter.num_running_jobs** <br>(gauge) | Número de trabajos en ejecución.<br>_Se muestra como trabajo_ |
+| **airbyte.metrics_reporter.num_total_scheduled_syncs_last_day** <br>(gauge) | Número total de trabajos de sincronización ejecutados en el último día.<br>_Se muestra como trabajo_ |
+| **airbyte.metrics_reporter.num_unusually_long_syncs** <br>(gauge) | Número de trabajos de sincronización inusualmente largos en comparación con su rendimiento histórico.<br>_Se muestra como trabajo_ |
+| **airbyte.metrics_reporter.oldest_pending_job_age_secs** <br>(gauge) | La edad del trabajo pendiente más antiguo en segundos.<br>_Se muestra como segundo_ |
+| **airbyte.metrics_reporter.oldest_running_job_age_secs** <br>(gauge) | La edad del trabajo más antiguo en segundos.<br>_Se muestra como segundo_ |
+| **airbyte.orchestrator.source_hearbeat_failure** <br>(count) | Recuento de fallos de replicación debidos a la falta de un latido en la fuente.|
+| **airbyte.server.breaking_change_detected** <br>(count) | Recuento de cambios de esquema de ruptura detectados.|
+| **airbyte.server.schema_change_auto_propagated** <br>(count) | Recuento de los cambios de esquema que se han propagado.|
+| **airbyte.worker.activity.check_connection** <br>(count) | El recuento de la actividad de check de conexión iniciada.<br>_Se muestra como conexión_ |
+| **airbyte.worker.activity.dbt_transformation** <br>(count) | Se inicia el recuento de la actividad de transformación DBT.|
+| **airbyte.worker.activity.discover_catalog** <br>(count) | El recuento de la actividad de detección de catálogos iniciada.|
+| **airbyte.worker.activity.failure** <br>(count) | El recuento de fallos de la actividad. Etiquetado por actividad.|
+| **airbyte.worker.activity.normalization** <br>(count) | Se inicia el recuento de la actividad de normalización.|
+| **airbyte.worker.activity.normalization_summary_check** <br>(count) | El recuento de la actividad de check de resumen de normalización iniciada.|
+| **airbyte.worker.activity.refresh_schema** <br>(count) | Recuento de actividades de actualización de esquemas iniciadas.|
+| **airbyte.worker.activity.replication** <br>(count) | El recuento de la actividad de replicación iniciada.|
+| **airbyte.worker.activity.spec** <br>(count) | El recuento de la actividad de especificaciones iniciada.|
+| **airbyte.worker.activity.submit_check_destination_connection** <br>(count) | El recuento de envío de actividades de check de conexión iniciadas.<br>_Se muestra como conexión_ |
+| **airbyte.worker.activity.submit_check_source_connection** <br>(count) | El recuento de envío de actividades de check de conexión iniciadas.<br>_Se muestra como conexión_ |
+| **airbyte.worker.activity.webhook_operation** <br>(count) | El recuento de la actividad de operación de webhook iniciada.|
+| **airbyte.worker.attempt.completed** <br>(count) | El recuento de nuevos intentos completados. Se emite uno por intento.<br>_Se muestra como intento_ |
+| **airbyte.worker.attempt.created** <br>(count) | El recuento de nuevos intentos creados. Se emite uno por intento.<br>_Se muestra como intento_ |
+| **airbyte.worker.attempt.created_by_release_stage** <br>(count) | El recuento de nuevos intentos creados. Los intentos se cuentan dos veces, ya que se etiquetan mediante la fase de publicación.<br>_Se muestra como intento_ |
+| **airbyte.worker.attempt.failed_by_failure_origin** <br>(count) | El recuento de orígenes de fallo que tiene un intento fallido. Dado que un fallo puede tener múltiples orígenes, un mismo fallo puede contarse más de una vez. Etiquetado por origen de fallo y tipo de fallo.<br>_Se muestra como intento_ |
+| **airbyte.worker.attempt.failed_by_release_stage** <br>(count) | El recuento de intentos fallidos. Los intentos se cuentan dos veces, ya que está etiquetado por fase de la versión.<br>_Se muestra como intento_ |
+| **airbyte.worker.attempt.succeeded_by_release_stage** <br>(count) | Recuento de intentos realizados con éxito. Los intentos se cuentan dos veces, ya que está etiquetado por la fase de la versión.<br>_Se muestra como intento_ |
+| **airbyte.worker.destination_buffer_size** <br>(gauge) | Tamaño de la cola del búfer de destino del worker de replicación.<br>_Se muestra como registro_ |
+| **airbyte.worker.destination_message_read** <br>(count) | El recuento de mensajes leídos desde el destino.<br>_Se muestra como mensaje_ |
+| **airbyte.worker.destination_message_sent** <br>(count) | El recuento de mensajes enviados al destino.<br>_Se muestra como mensaje_ |
+| **airbyte.worker.job.cancelled_by_release_stage** <br>(count) | Recuento de trabajos cancelados. Los trabajos se cuentan dos veces, ya que se etiquetan mediante la fase de publicación.<br>_Se muestra como trabajo_ |
+| **airbyte.worker.job.created_by_release_stage** <br>(count) | Recuento de nuevos trabajos creados. Los trabajos se cuentan dos veces, ya que están etiquetados por fase de publicación.<br>_Se muestra como trabajo_ |
+| **airbyte.worker.job.failed_by_release_stage** <br>(count) | El recuento de fallos de trabajo. Los trabajos se cuentan dos veces, ya que está etiquetado por la fase de publicación.<br>_Se muestra como trabajo_ |
+| **airbyte.worker.job.succeeded_by_release_stage** <br>(count) | El recuento de trabajos exitosos. Los trabajos se cuentan dos veces, ya que están etiquetados por la fase de publicación.<br>_Se muestra como trabajo_ |
+| **airbyte.worker.notifications_sent** <br>(count) | Número de notificaciones enviadas.|
+| **airbyte.worker.replication_bytes_synced** <br>(count) | Número de bytes sincronizados durante la replicación.<br>_Se muestra como byte_ |
+| **airbyte.worker.replication_records_synced** <br>(count) | Número de registros sincronizados durante la replicación.<br>_Se muestra como registro_ |
+| **airbyte.worker.source_buffer_size** <br>(gauge) | El tamaño de la cola del búfer del worker de replicación fuente.<br>_Se muestra como registro_ |
+| **airbyte.worker.source_message_read** <br>(count) | El recuento de mensajes leídos de la fuente.<br>_Se muestra como mensaje_ |
+| **airbyte.worker.state_commit.close_successful** <br>(count) | Número de finales a conexión que salen con una descarga de estado final exitosa.|
+| **airbyte.worker.state_commit.not_attempted** <br>(count) | Número de intentos de estados confirmados abandonados debido a una finalización anticipada.<br>_Se muestra como intento_ |
+| **airbyte.worker.temporal_workflow.attempt** <br>(count) | El recuento de intentos de proceso temporales.<br>_Se muestra como intento_ |
+| **airbyte.worker.temporal_workflow.failure** <br>(count) | Recuento de fallos de proceso temporales.|
+| **airbyte.worker.temporal_workflow.success** <br>(count) | El recuento de sincronizaciones de proceso temporales con éxito.<br>_Se muestra como éxito_ |
 
 ### Checks de servicio
 
@@ -165,13 +155,4 @@ El check Airbyte no incluye eventos.
 
 ## Solucionar problemas
 
-¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][8].
-
-[1]: https://airbyte.com/
-[2]: https://docs.datadoghq.com/es/developers/dogstatsd
-[3]: https://app.datadoghq.com/account/settings/agent/latest
-[4]: https://docs.airbyte.com/operator-guides/collecting-metrics/
-[5]: https://docs.datadoghq.com/es/agent/guide/agent-configuration-files/
-[6]: https://docs.datadoghq.com/es/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
-[7]: https://github.com/DataDog/integrations-core/blob/master/airbyte/metadata.csv
-[8]: https://docs.datadoghq.com/es/help/
+¿Necesitas ayuda? Ponte en contacto con el [soporte de Datadog](https://docs.datadoghq.com/help/).

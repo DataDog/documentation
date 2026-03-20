@@ -1,0 +1,110 @@
+---
+title: Instrumenting a Node.js Container App with Sidecar
+code_lang: nodejs
+type: multi-code-lang
+code_lang_weight: 20
+further_reading:
+- link: '/tracing/trace_collection/automatic_instrumentation/dd_libraries/nodejs/'
+  tag: 'Documentation'
+  text: 'Tracing Node.js Applications'
+- link: '/tracing/other_telemetry/connect_logs_and_traces/nodejs/'
+  tag: 'Documentation'
+  text: 'Correlating Node.js Logs and Traces'
+---
+
+## Setup
+
+1. **Install the Datadog Node.js tracer**.
+
+   1. In your main application, install the `dd-trace` package.
+
+      {{< code-block lang="shell" disable_copy="false" >}}
+npm install dd-trace
+{{< /code-block >}}
+
+   2. Initialize the Node.js tracer with the `NODE_OPTIONS` environment variable:
+   {{< code-block lang="dockerfile" disable_copy="false" >}}
+ENV NODE_OPTIONS="--require dd-trace/init"
+{{< /code-block >}}
+
+   For more information, see [Tracing Node.js applications][1].
+
+2. **Install serverless-init as a sidecar**.
+
+   {{% serverless-init-install mode="sidecar" %}}
+
+   {{< tabs >}}
+
+   {{% tab "Datadog CLI" %}}
+   {{% aca-install-sidecar-datadog-ci %}}
+   {{% /tab %}}
+
+   {{% tab "Terraform" %}}
+   {{% aca-install-sidecar-terraform %}}
+   {{% /tab %}}
+
+   {{% tab "Bicep" %}}
+   {{% aca-install-sidecar-bicep %}}
+   {{% /tab %}}
+
+   {{% tab "ARM Template" %}}
+   {{% aca-install-sidecar-arm-template %}}
+   {{% /tab %}}
+
+   {{% tab "Manual" %}}
+   {{% aca-install-sidecar-manual %}}
+   {{% /tab %}}
+
+   {{< /tabs >}}
+
+3. **Set up logs**.
+
+   In the previous step, you created a shared volume. In this step, configure your logging library to write logs to the file set in `DD_SERVERLESS_LOG_PATH`. In Node.js, we recommend writing logs in a JSON format. For example, you can use a third-party logging library such as `winston`:
+   {{< code-block lang="javascript" disable_copy="false" >}}
+const { createLogger, format, transports } = require('winston');
+
+const LOG_FILE = "/LogFiles/app.log"
+
+const logger = createLogger({
+  level: 'info',
+  exitOnError: false,
+  format: format.json(),
+  transports: [
+    new transports.File({ filename: LOG_FILE }),
+    new transports.Console()
+  ],
+});
+
+logger.info('Hello world!');
+{{< /code-block >}}
+
+   Datadog recommends setting the environment variables `DD_LOGS_INJECTION=true` (in your main container) and `DD_SOURCE=nodejs` (in your sidecar container) to enable advanced Datadog log parsing.
+
+   For more information, see [Correlating Node.js Logs and Traces][2].
+
+4. **Send custom metrics**.
+
+   To send custom metrics, [view code examples][3]. In serverless, only the *distribution* metric type is supported.
+
+5. **Enable profiling (preview)**.
+
+   To enable the [Continuous Profiler][4], set the environment variable `DD_PROFILING_ENABLED=true` in your application container.
+
+   <div class="alert alert-info">Datadog's Continuous Profiler is available in preview for Azure Container Apps.</div>
+
+{{% serverless-init-env-vars-sidecar language="nodejs" defaultSource="cloudrun" %}}
+
+{{% svl-tracing-env %}}
+
+## Troubleshooting
+
+{{% serverless-init-troubleshooting productNames="Cloud Run services" %}}
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/nodejs/
+[2]: /tracing/other_telemetry/connect_logs_and_traces/nodejs/
+[3]: /metrics/custom_metrics/dogstatsd_metrics_submission/?tab=nodejs#code-examples-5
+[4]: /profiler/

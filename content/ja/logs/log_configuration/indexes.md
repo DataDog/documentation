@@ -52,7 +52,7 @@ Log Explorer は、[複数のインデックスにわたるクエリ][7]をサ�
 
 {{< img src="logs/indexes/delete-index.png" alt="インデックスを削除" style="width:70%;">}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 削除されたインデックスと同じ名前のインデックスを再作成することはできません。 
 </div>
 

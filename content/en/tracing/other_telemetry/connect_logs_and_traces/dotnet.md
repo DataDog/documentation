@@ -35,7 +35,7 @@ The .NET Tracer supports the following logging libraries:
 
 Ensure that log collection is configured in the Datadog Agent and that the [Logs Agent configuration][15] for the specified files to tail is set to `source: csharp` so log pipelines can parse the log files. For more information, see [C# Log Collection][7]. If the `source` is set to a value other than `csharp`, you may need to add a [trace remapper][8] to the appropriate log processing pipeline for the correlation to work correctly.
 
-<div class="alert alert-warning"><strong>Note:</strong> Automatic log collection only works for logs formatted as JSON. Alternatively, use custom parsing rules.</div>
+<div class="alert alert-danger">Automatic log collection only works for logs formatted as JSON. Alternatively, use custom parsing rules.</div>
 
 ## Configure injection in logs
 
@@ -48,7 +48,7 @@ To inject correlation identifiers into your log messages, follow the instruction
 {{< tabs >}}
 {{% tab "Serilog" %}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>Note: </strong>Starting with .NET Tracer version 2.0.1, automatic injection for the Serilog logging library requires the application to be instrumented with automatic instrumentation.
 </div>
 
@@ -65,7 +65,7 @@ To automatically inject correlation identifiers into your log messages:
 {{% /tab %}}
 {{% tab "log4net" %}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>Note: </strong>Starting with .NET Tracer version 1.29.0, automatic injection for the log4net logging library requires the application to be instrumented with automatic instrumentation.
 </div>
 
@@ -110,7 +110,7 @@ For additional examples, see [the log4net automatic trace ID injection project][
 {{% /tab %}}
 {{% tab "NLog" %}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>Note: </strong>Starting with .NET Tracer version 2.0.1, automatic injection for the NLog logging library requires the application to be instrumented with automatic instrumentation.
 </div>
 

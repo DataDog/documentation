@@ -7,7 +7,7 @@ type: lenguaje de código múltiple
 
 ## Funciones de seguridad de las aplicaciones
 
-Las siguientes funciones de seguridad de las aplicaciones son compatibles con la biblioteca PHP para la versión de rastreador especificada:
+Las siguientes funciones de seguridad de las aplicaciones son compatibles con la librería PHP para la versión de rastreador especificada:
 
 | Función de seguridad de las aplicaciones                   | Versión mínima de rastreador PHP |
 | -------------------------------- |----------------------------|
@@ -72,15 +72,15 @@ Las funciones de seguridad de las aplicaciones para PHP admiten las siguientes a
 | Linux GNU arm64 (aarch64-linux-gnu)       | GA                    | &gt; `0.95.0`                             |
 | Linux MUSL arm64 (aarch64-linux-musl)     | GA                    | &gt; `0.95.0`                             |
 
-La biblioteca PHP de Datadog es compatible con PHP versión 7.0 y posteriores en las siguientes arquitecturas:
+La librería PHP de Datadog es compatible con PHP versión 7.0 y posteriores en las siguientes arquitecturas:
 
 - Linux (GNU) x86-64 y arm64
 - Alpine Linux (musl) x86-64 y arm64
 
-La biblioteca admite el uso de todos los marcos PHP y también el uso de ningún marco.
+La librería admite el uso de todos los marcos PHP y también el uso de ningún marco.
 
 
-### Compatibilidad con marcos web
+### Compatibilidad con web frameworks
 
 - Detalles de una solicitud HTTP originada por un atacante
 - Etiquetas (tags) para la solicitud HTTP (código de estado, método, etc.)

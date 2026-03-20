@@ -2,7 +2,7 @@ import { getConfig } from '../helpers/getConfig';
 import instantsearch from 'instantsearch.js';
 import TypesenseInstantSearchAdapter from 'typesense-instantsearch-adapter';
 import { configure, searchBox, index } from 'instantsearch.js/es/widgets';
-import { searchbarHits } from './instantsearch/searchbarHits';
+import { searchbarHits, updateAskAISuggestionElement } from './instantsearch/searchbarHits';
 import { searchpageHits } from './instantsearch/searchpageHits';
 import { customPagination } from './instantsearch/customPagination';
 import { debounce } from '../utils/debounce';
@@ -335,16 +335,75 @@ function loadInstantSearch(currentPageWasAsyncLoaded) {
             aisSearchBoxInput.blur();
         }
     };
+
+    const getVisibleSearchResultItems = () => {
+        // Include AI suggestion items first, then regular search results
+        const aiSuggestions = Array.from(document.querySelectorAll('.ais-Hits-ai-suggestion'));
+        const regularItems = Array.from(document.querySelectorAll('#hits:not(.no-hits) .ais-Hits-item:not(.ais-Hits-category):not(.ais-Hits-ai-suggestion), #hits-partners:not(.no-hits) .ais-Hits-item:not(.ais-Hits-category)'));
+        return [...aiSuggestions, ...regularItems];
+    }
     
     const handleSearchbarKeydown = (e) => {
+        // Only handle navigation and selection keys; exit early for all others
+        if (!['ArrowDown', 'ArrowUp', 'Enter'].includes(e.code)) return;
+
+        e.preventDefault();
+        const searchResultItems = getVisibleSearchResultItems();
+        const currentSelectedIndex = Array.from(searchResultItems).findIndex((item) => item.classList.contains('selected-item'));
+
         if (e.code === 'Enter') {
-            e.preventDefault();
+            const selectedItem = searchResultItems[currentSelectedIndex];
+            
+            // Check if it's an AI suggestion
+            if (selectedItem?.classList.contains('ais-Hits-ai-suggestion')) {
+                const query = selectedItem.dataset.query || aisSearchBoxInput.value;
+                if (window.askDocsAI) {
+                    window.askDocsAI(query);
+                    // Hide the search dropdown
+                    hitsContainerContainer.classList.add('d-none');
+                    searchBoxContainerContainer.classList.remove('active-search');
+                }
+                return;
+            }
+            
+            const link = selectedItem?.querySelector('a[href]');
+            if (link?.href) {
+                return navigateToUrl(link.href);
+            }
+
             sendSearchRumAction(search.helper.state.query);
 
             // Give query-url sync 500ms to update
             setTimeout(() => {
                 window.location.pathname = searchPathname;
             }, 500);
+        } else if (e.code === 'ArrowDown') {
+            if (searchResultItems.length === 0) {
+                return;
+            }
+            if (currentSelectedIndex === -1) {
+                // No item is currently selected, select the first one
+                searchResultItems[0].classList.add('selected-item');
+            } else if (currentSelectedIndex < searchResultItems.length - 1) {
+                searchResultItems[currentSelectedIndex].classList.remove('selected-item');
+                searchResultItems[currentSelectedIndex + 1].classList.add('selected-item');
+            }
+        }
+        else if (e.code === 'ArrowUp') {
+            if (searchResultItems.length === 0) {
+                return;
+            }
+            if (currentSelectedIndex === -1) {
+                // Start keyboard navigation from the first item (Ask AI suggestion when present)
+                searchResultItems[0].classList.add('selected-item');
+            } else if (currentSelectedIndex > 0) {
+                searchResultItems[currentSelectedIndex].classList.remove('selected-item');
+                searchResultItems[currentSelectedIndex - 1].classList.add('selected-item');
+            } else if (currentSelectedIndex === 0) {
+                // If it's the first item, move focus to input
+                searchResultItems[currentSelectedIndex].classList.remove('selected-item');
+                aisSearchBoxInput.focus();
+            }
         }
     };
 
@@ -422,6 +481,13 @@ function loadInstantSearch(currentPageWasAsyncLoaded) {
         aisSearchBoxInput.addEventListener('keydown', handleSearchbarKeydown);
         aisSearchBoxSubmit.addEventListener('click', handleSearchbarSubmitClick);
         document.addEventListener('click', handleOutsideSearchbarClick);
+
+        // Instantly update "Ask AI about" text as user types (don't wait for search results)
+        aisSearchBoxInput.addEventListener('input', () => {
+            const query = aisSearchBoxInput.value.trim();
+            const aiSuggestion = document.querySelector('.ais-Hits-ai-suggestion');
+            updateAskAISuggestionElement(aiSuggestion, query);
+        });
 
         // Pages that aren't homepage or search page need to move the searchbar on mobile
         if(!homepage){

@@ -7,107 +7,414 @@ further_reading:
 - link: "synthetics/mobile_app_testing/"
   tag: "Documentation"
   text: "Mobile App Testing"
----
 
-{{< site-region region="gov" >}}<div class="alert alert-warning"> Mobile Application Testing is not supported on this <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
+multifiltersearch:
+  headers:
+    - name: Device
+      id: device
+    - name: OS
+      id: os
+    - name: Platform
+      id: platform
+      filter_by: true
+    - name: EU
+      id: eu
+    - name: US
+      id: us
+  data:
+    # Android devices
+    - device: Google Pixel 6a
+      os: Android 13
+      platform: Android
+      eu: 'Yes'
+      us: 'Yes'
+    - device: Google Pixel 8
+      os: Android 14
+      platform: Android
+      eu: 'Yes'
+      us: 'Yes'
+    - device: Google Pixel 8 Pro
+      os: Android 14
+      platform: Android
+      eu: 'Yes'
+      us: 'Yes'
+    - device: Google Pixel 7
+      os: Android 14
+      platform: Android
+      eu: 'Yes'
+      us: 'Yes'
+    - device: Google Pixel 7
+      os: Android 13
+      platform: Android
+      eu: 'Yes'
+      us: 'Yes'
+    - device: Google Pixel 7 Pro
+      os: Android 13
+      platform: Android
+      eu: 'Yes'
+      us: 'Yes'
+    - device: Google Pixel 6 Pro (Unlocked)
+      os: Android 12
+      platform: Android
+      eu: 'Yes'
+      us: 'Yes'
+    - device: Google Pixel 5
+      os: Android 12
+      platform: Android
+      eu: 'Yes'
+      us: 'Yes'
+    - device: Google Pixel 4a
+      os: Android 11
+      platform: Android
+      eu: 'Yes'
+      us: 'Yes'
+    - device: Google Pixel 4 XL (Unlocked)
+      os: Android 10
+      platform: Android
+      eu: 'Yes'
+      us: 'Yes'
+    - device: Samsung Galaxy S24
+      os: Android 14
+      platform: Android
+      eu: 'Yes'
+      us: 'Yes'
+    - device: Samsung Galaxy S24+
+      os: Android 14
+      platform: Android
+      eu: 'Yes'
+      us: 'Yes'
+    - device: Samsung Galaxy S24 Ultra
+      os: Android 14
+      platform: Android
+      eu: 'Yes'
+      us: 'Yes'
+    - device: Samsung Galaxy S23
+      os: Android 14
+      platform: Android
+      eu: 'Yes'
+      us: 'Yes'
+    - device: Samsung Galaxy S23
+      os: Android 13
+      platform: Android
+      eu: 'Yes'
+      us: 'Yes'
+    - device: Samsung Galaxy S23 Ultra
+      os: Android 13
+      platform: Android
+      eu: 'Yes'
+      us: 'Yes'
+    - device: Samsung Galaxy S22 Ultra 5G
+      os: Android 12
+      platform: Android
+      eu: 'Yes'
+      us: 'Yes'
+    - device: Samsung Galaxy S21
+      os: Android 12
+      platform: Android
+      eu: 'Yes'
+      us: 'Yes'
+    - device: Samsung Galaxy S21
+      os: Android 11
+      platform: Android
+      eu: 'Yes'
+      us: 'Yes'
+    - device: Samsung Galaxy A51
+      os: Android 10
+      platform: Android
+      eu: 'Yes'
+      us: 'Yes'
+    - device: Samsung Galaxy Tab S8
+      os: Android 12
+      platform: Android
+      eu: 'Yes'
+      us: 'Yes'
+    - device: Samsung Galaxy Tab S7
+      os: Android 11
+      platform: Android
+      eu: 'Yes'
+      us: 'Yes'
+    - device: Google Pixel 6 (Unlocked)
+      os: Android 12
+      platform: Android
+      eu: 'No'
+      us: 'Yes'
+    - device: Google Pixel 3a XL
+      os: Android 11
+      platform: Android
+      eu: 'No'
+      us: 'Yes'
+    - device: LG Stylo 6
+      os: Android 10
+      platform: Android
+      eu: 'No'
+      us: 'Yes'
+    - device: Samsung Galaxy S23+
+      os: Android 13
+      platform: Android
+      eu: 'No'
+      us: 'Yes'
+    - device: Samsung Galaxy S22 5G
+      os: Android 13
+      platform: Android
+      eu: 'No'
+      us: 'Yes'
+    - device: Samsung Galaxy S22+ 5G
+      os: Android 12
+      platform: Android
+      eu: 'No'
+      us: 'Yes'
+    - device: Samsung Galaxy S21 Ultra
+      os: Android 11
+      platform: Android
+      eu: 'No'
+      us: 'Yes'
+    - device: Samsung Galaxy S21+ (US Unlocked)
+      os: Android 11
+      platform: Android
+      eu: 'No'
+      us: 'Yes'
+    - device: Samsung Galaxy Note 20
+      os: Android 11
+      platform: Android
+      eu: 'No'
+      us: 'Yes'
+    - device: Samsung Galaxy A71
+      os: Android 11
+      platform: Android
+      eu: 'No'
+      us: 'Yes'
+    # Apple devices
+    - device: iPhone 16
+      os: iOS 18
+      platform: Apple
+      eu: 'Yes'
+      us: 'Yes'
+    - device: iPhone 16 Pro
+      os: iOS 18
+      platform: Apple
+      eu: 'Yes'
+      us: 'Yes'
+    - device: iPhone 16 Pro Max
+      os: iOS 18
+      platform: Apple
+      eu: 'Yes'
+      us: 'Yes'
+    - device: iPhone 15
+      os: iOS 18
+      platform: Apple
+      eu: 'Yes'
+      us: 'Yes'
+    - device: iPhone 15
+      os: iOS 17
+      platform: Apple
+      eu: 'Yes'
+      us: 'Yes'
+    - device: iPhone 15 Pro
+      os: iOS 17
+      platform: Apple
+      eu: 'Yes'
+      us: 'Yes'
+    - device: iPhone 15 Pro Max
+      os: iOS 17
+      platform: Apple
+      eu: 'Yes'
+      us: 'Yes'
+    - device: iPhone 14
+      os: iOS 16
+      platform: Apple
+      eu: 'Yes'
+      us: 'Yes'
+    - device: iPhone 14 Pro
+      os: iOS 17
+      platform: Apple
+      eu: 'Yes'
+      us: 'Yes'
+    - device: iPhone 14 Pro
+      os: iOS 16
+      platform: Apple
+      eu: 'Yes'
+      us: 'Yes'
+    - device: iPhone 14 Plus
+      os: iOS 16
+      platform: Apple
+      eu: 'Yes'
+      us: 'Yes'
+    - device: iPhone 14 Pro Max
+      os: iOS 16
+      platform: Apple
+      eu: 'Yes'
+      us: 'Yes'
+    - device: iPhone 13
+      os: iOS 16
+      platform: Apple
+      eu: 'Yes'
+      us: 'Yes'
+    - device: iPhone 13 Mini
+      os: iOS 16
+      platform: Apple
+      eu: 'Yes'
+      us: 'Yes'
+    - device: iPhone 13 Mini
+      os: iOS 15
+      platform: Apple
+      eu: 'Yes'
+      us: 'Yes'
+    - device: iPhone 13 Pro Max
+      os: iOS 17
+      platform: Apple
+      eu: 'Yes'
+      us: 'Yes'
+    - device: iPhone 12 Pro Max
+      os: iOS 15
+      platform: Apple
+      eu: 'Yes'
+      us: 'Yes'
+    - device: iPhone 12
+      os: iOS 16
+      platform: Apple
+      eu: 'Yes'
+      us: 'Yes'
+    - device: iPhone 12
+      os: iOS 15
+      platform: Apple
+      eu: 'Yes'
+      us: 'Yes'
+    - device: iPhone 12
+      os: iOS 14
+      platform: Apple
+      eu: 'Yes'
+      us: 'Yes'
+    - device: iPhone 12 Pro
+      os: iOS 14
+      platform: Apple
+      eu: 'Yes'
+      us: 'Yes'
+    - device: iPhone 11
+      os: iOS 14
+      platform: Apple
+      eu: 'Yes'
+      us: 'Yes'
+    - device: iPhone 11 Pro
+      os: iOS 15
+      platform: Apple
+      eu: 'Yes'
+      us: 'Yes'
+    - device: iPhone XR
+      os: iOS 14
+      platform: Apple
+      eu: 'Yes'
+      us: 'Yes'
+    - device: iPhone X
+      os: iOS 14
+      platform: Apple
+      eu: 'Yes'
+      us: 'Yes'
+    - device: iPhone 8
+      os: iOS 14
+      platform: Apple
+      eu: 'Yes'
+      us: 'Yes'
+    - device: iPhone 8
+      os: iOS 13
+      platform: Apple
+      eu: 'Yes'
+      us: 'Yes'
+    - device: iPhone SE (2020)
+      os: iOS 14
+      platform: Apple
+      eu: 'Yes'
+      us: 'Yes'
+    - device: iPhone 12 Pro Max
+      os: iOS 14
+      platform: Apple
+      eu: 'Yes'
+      us: 'Yes'
+    - device: iPhone 13 Pro
+      os: iOS 15
+      platform: Apple
+      eu: 'Yes'
+      us: 'Yes'
+    - device: iPad Pro 11" (2022)
+      os: iOS 16
+      platform: Apple
+      eu: 'Yes'
+      us: 'Yes'
+    - device: iPad (2022)
+      os: iOS 16
+      platform: Apple
+      eu: 'Yes'
+      us: 'Yes'
+    - device: iPad Pro 12.9" (2022)
+      os: iOS 16
+      platform: Apple
+      eu: 'Yes'
+      us: 'Yes'
+    - device: iPad Air 4 (2020)
+      os: iOS 14
+      platform: Apple
+      eu: 'Yes'
+      us: 'Yes'
+    - device: iPhone SE (2022)
+      os: iOS 15
+      platform: Apple
+      eu: 'No'
+      us: 'Yes'
+    - device: iPhone 12 Mini
+      os: iOS 16
+      platform: Apple
+      eu: 'No'
+      us: 'Yes'
+    - device: iPhone 12 Mini
+      os: iOS 14
+      platform: Apple
+      eu: 'No'
+      us: 'Yes'
+    - device: iPhone 11
+      os: iOS 16
+      platform: Apple
+      eu: 'No'
+      us: 'Yes'
+    - device: iPad (2022)
+      os: iOS 17
+      platform: Apple
+      eu: 'No'
+      us: 'Yes'
+    - device: iPad Air (2022)
+      os: iOS 15
+      platform: Apple
+      eu: 'No'
+      us: 'Yes'
+    - device: iPad Mini 2021
+      os: iOS 15
+      platform: Apple
+      eu: 'No'
+      us: 'Yes'
+    - device: iPad 9th Gen (2021)
+      os: iOS 15
+      platform: Apple
+      eu: 'No'
+      us: 'Yes'
+    - device: iPad Pro 5th Gen (2021)
+      os: iOS 15
+      platform: Apple
+      eu: 'No'
+      us: 'Yes'
+    - device: iPad Pro 12.9 (2020)
+      os: iOS 14
+      platform: Apple
+      eu: 'No'
+      us: 'Yes'
+    - device: iPad Mini (5th Gen)
+      os: iOS 14
+      platform: Apple
+      eu: 'No'
+      us: 'Yes'
+
+---
 
 The following mobile devices are compatible with Mobile App Testing. These devices are categorized by operating system and availability in the EU and US regions.
 
-{{< tabs >}}
-{{% tab "Android" %}}
-
-| Device                              | OS          | EU  | US  |
-|-------------------------------------|-------------|-----|-----|
-| Google Pixel 6a                    | Android 13  | Yes | Yes |
-| Google Pixel 8                     | Android 14  | Yes | Yes |
-| Google Pixel 8 Pro                 | Android 14  | Yes | Yes |
-| Google Pixel 7                     | Android 14  | Yes | Yes |
-| Google Pixel 7                     | Android 13  | Yes | Yes |
-| Google Pixel 7 Pro                 | Android 13  | Yes | Yes |
-| Google Pixel 6 Pro (Unlocked)      | Android 12  | Yes | Yes |
-| Google Pixel 5                     | Android 12  | Yes | Yes |
-| Google Pixel 4a                    | Android 11  | Yes | Yes |
-| Google Pixel 4 XL (Unlocked)       | Android 10  | Yes | Yes |
-| Samsung Galaxy S24                 | Android 14  | Yes | Yes |
-| Samsung Galaxy S24 Plus            | Android 14  | Yes | Yes |
-| Samsung Galaxy S24 Ultra           | Android 14  | Yes | Yes |
-| Samsung Galaxy S23                 | Android 14  | Yes | Yes |
-| Samsung Galaxy S23                 | Android 13  | Yes | Yes |
-| Samsung Galaxy S23 Ultra           | Android 13  | Yes | Yes |
-| Samsung Galaxy S22 Ultra 5G        | Android 12  | Yes | Yes |
-| Samsung Galaxy S21                 | Android 12  | Yes | Yes |
-| Samsung Galaxy S21                 | Android 11  | Yes | Yes |
-| Samsung Galaxy A51                 | Android 10  | Yes | Yes |
-| Samsung Galaxy Tab S8              | Android 12  | Yes | Yes |
-| Samsung Galaxy Tab S7              | Android 11  | Yes | Yes |
-| Google Pixel 6 (Unlocked)          | Android 12  | No  | Yes |
-| Google Pixel 3a XL                 | Android 11  | No  | Yes |
-| LG Stylo 6                         | Android 10  | No  | Yes |
-| Samsung Galaxy S23+                | Android 13  | No  | Yes |
-| Samsung Galaxy S22 5G              | Android 13  | No  | Yes |
-| Samsung Galaxy S22+ 5G             | Android 12  | No  | Yes |
-| Samsung Galaxy S21 Ultra           | Android 11  | No  | Yes |
-| Samsung Galaxy S21+ (US Unlocked)  | Android 11  | No  | Yes |
-| Samsung Galaxy Note 20             | Android 11  | No  | Yes |
-| Samsung Galaxy A71                 | Android 11  | No  | Yes |
-
-
-{{% /tab %}}
-
-{{% tab "Apple" %}}
-
-| Device                              | OS          | EU  | US  |
-|-------------------------------------|-------------|-----|-----|
-| iPhone 16                          | iOS 18      | Yes | Yes |
-| iPhone 16 Pro                      | iOS 18      | Yes | Yes |
-| iPhone 16 Pro Max                  | iOS 18      | Yes | Yes |
-| iPhone 15                          | iOS 18      | Yes | Yes |
-| iPhone 15                          | iOS 17      | Yes | Yes |
-| iPhone 15 Pro                      | iOS 17      | Yes | Yes |
-| iPhone 15 Pro Max                  | iOS 17      | Yes | Yes |
-| iPhone 14                          | iOS 16      | Yes | Yes |
-| iPhone 14 Pro                      | iOS 17      | Yes | Yes |
-| iPhone 14 Pro                      | iOS 16      | Yes | Yes |
-| iPhone 14 Plus                     | iOS 16      | Yes | Yes |
-| iPhone 14 Pro Max                  | iOS 16      | Yes | Yes |
-| iPhone 13                          | iOS 16      | Yes | Yes |
-| iPhone 13 Mini                     | iOS 16      | Yes | Yes |
-| iPhone 13 Mini                     | iOS 15      | Yes | Yes |
-| iPhone 13 Pro Max                  | iOS 17      | Yes | Yes |
-| iPhone Pro Max                     | iOS 15      | Yes | Yes |
-| iPhone 12                          | iOS 16      | Yes | Yes |
-| iPhone 12                          | iOS 15      | Yes | Yes |
-| iPhone 12                          | iOS 14      | Yes | Yes |
-| iPhone 12 Pro                      | iOS 14      | Yes | Yes |
-| iPhone 11                          | iOS 14      | Yes | Yes |
-| iPhone 11 Pro                      | iOS 15      | Yes | Yes |
-| iPhone XR                          | iOS 14      | Yes | Yes |
-| iPhone X                           | iOS 14      | Yes | Yes |
-| iPhone 8                           | iOS 14      | Yes | Yes |
-| iPhone 8                           | iOS 13      | Yes | Yes |
-| iPhone SE (2020)                   | iOS 14      | Yes | Yes |
-| iPhone 12 Pro Max                  | iOS 14      | Yes | Yes |
-| iPhone 13 Pro                      | iOS 15      | Yes | Yes |
-| iPad Pro 11" (2022)                | iOS 16      | Yes | Yes |
-| iPad (2022)                        | iOS 16      | Yes | Yes |
-| iPad Pro 12.9" (2022)              | iOS 16      | Yes | Yes |
-| iPad Air 4 (2020)                  | iOS 14      | Yes | Yes |
-| iPhone SE (2022)                   | iOS 15      | No  | Yes |
-| iPhone 12 Mini                     | iOS 16      | No  | Yes |
-| iPhone 12 Mini                     | iOS 14      | No  | Yes |
-| iPhone 11                          | iOS 16      | No  | Yes |
-| iPad (2022)                        | iOS 17      | No  | Yes |
-| iPad Air (2022)                    | iOS 15      | No  | Yes |
-| iPad Mini 2021                     | iOS 15      | No  | Yes |
-| iPad 9th Gen (2021)                | iOS 15      | No  | Yes |
-| iPad Pro 5th Gen (2021)            | iOS 15      | No  | Yes |
-| iPad Pro 12.9 (2020)               | iOS 14      | No  | Yes |
-| iPad Mini (5th Gen)                | iOS 14      | No  | Yes |
-
-{{% /tab %}}
-
-{{< /tabs >}}
+{{< multifilter-search >}}
 
 ## Further reading
 

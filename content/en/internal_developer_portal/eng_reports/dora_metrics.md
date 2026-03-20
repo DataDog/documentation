@@ -11,9 +11,6 @@ further_reading:
   text: "Datadog Dashboards"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/engineering-reports/" d_target="#signupModal" btn_hidden="false" header="Join the Preview for Engineering Reports!" >}}
-{{< /callout >}}
-
 ## Overview
 
 The DORA Metrics report includes an organization-wide view of software development velocity and stability metrics, including historical trends. With this report, you can:
@@ -30,7 +27,7 @@ Access the DORA Metrics report by searching for "Engineering Reports" (or clicki
 
 ### Adjust your view
 
-By default, the Scorecards Performance report breaks down data by service, which allows you to quickly understand DORA metrics performance across all your services.
+By default, the Scorecards Performance report breaks down data by service, which allows you to understand DORA metrics performance across all your services.
 
 You can update your DORA Metrics report view in the following ways:
 

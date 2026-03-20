@@ -175,7 +175,7 @@ Maintenant que vous disposez d'une application Java fonctionnelle, configurez-la
 
    L'instrumentation automatique est désormais configurée pour les deux services.
 
-   <div class="alert alert-warning"><strong>Remarque</strong> : les flags de ces exemples de commandes, notamment le taux d'échantillonnage, ne sont pas nécessairement adaptés aux environnements en dehors de ce tutoriel. Pour en savoir plus sur les éléments à utiliser dans votre environnement réel, lisez la rubrique <a href="#configuration-du-tracing">Configuration du tracing</a>.</div>
+   <div class="alert alert-danger"><strong>Remarque</strong> : les flags de ces exemples de commandes, notamment le taux d'échantillonnage, ne sont pas nécessairement adaptés aux environnements en dehors de ce tutoriel. Pour en savoir plus sur les éléments à utiliser dans votre environnement réel, lisez la rubrique <a href="#configuration-du-tracing">Configuration du tracing</a>.</div>
 
 3. L'instrumentation automatique est une fonctionnalité pratique, mais il se peut que vous ayez besoin de spans plus précises. L'API Java DD Trace de Datadog vous permet de spécifier des spans au sein de votre code à l'aide d'annotations ou de code. Ajoutez des annotations au code à tracer au sein de quelques exemples de méthodes.
 

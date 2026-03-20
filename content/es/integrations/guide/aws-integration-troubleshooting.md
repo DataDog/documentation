@@ -19,6 +19,19 @@ El error de permiso `sts:Assumerole` indica un problema con la política de conf
 
 **Nota**: Este error puede persistir en la interfaz de usuario de Datadog durante algunas horas mientras se propagan los cambios.
 
+### Resolver todos los incidentes relacionados con permisos de AWS 
+La opción **Resolver todos los incidentes relacionados con permisos de AWS** en el cuadro de integración de AWS te permite utilizar un stack tecnológico QuickStart CloudFormation para actualizar tu rol IAM y resolver los incidentes relacionados con permisos faltantes. 
+En **Issues** (Incidentes), haz clic en **Resolve All AWS Permissions Issues** (Resolver todos los incidentes relacionados con permisos de AWS). Esto inicia un stack tecnológico CloudFormation que llama al [endpoint][13] de nuestra API pública y obtiene los últimos permisos de IAM necesarios para la integración, crea nuevas políticas de IAM que contienen esos permisos y los adjunta al rol de la integración. También adjunta la política gestionada por AWS `SecurityAudit`, si no está presente.
+
+**Notas**:
+
+* La opción **Resolver todos los incidentes relacionados con permisos de AWS** no soluciona los problemas de autenticaciones rotas con el rol (donde el nombre del rol, el ID externo o la configuración de la política de confianza no permiten que Datadog se autentique con tu cuenta de AWS).
+* La plantilla de CloudFormation está en nuestro [repositorio] público[14].
+* Las políticas creadas se nombran con un prefijo `datadog-aws-integration-iam-permissions-` seguido de un hash único para evitar conflictos con cualquier política existente que hayas configurado.
+* Si haces clic varias veces en **Resolve All AWS Permissions Issues** (Resolver todos los incidentes relacionados con permisos de AWS), se eliminarán todas las políticas antiguas creadas con ese prefijo antes de crear las nuevas.
+* NO se verán afectadas las políticas que hayas asignado al rol.
+* La opción **Resolver todos los incidentes relacionados con permisos de AWS** no soluciona los casos en los que se aplique una política de control de servicios (SCP) que deniegue explícitamente los permisos necesarios.
+
 ## Discrepancias en los datos
 
 ### Discrepancia entre tus datos en CloudWatch y Datadog
@@ -81,7 +94,7 @@ La actualización del Datadog Agent a la v7.64.0 o posterior debería resolver e
 A partir de la versión 7.64.0, el Datadog Agent utiliza por defecto IMDSv2 y vuelve a IMDSv1 en caso de fallo. Para volver al comportamiento anterior, configura `ec2_imdsv2_transition_payload_enabled` como `false` en la configuración  de tu host.
 Para obtener más información, consulta la documentación [Transición al uso de Instance Metadata Service, versión 2][7].
 
-## Etiquetas (Tags)
+## Etiquetas
 
 ### Los hosts aún tienen etiquetas de AWS después de eliminar la integración de Amazon EC2
 
@@ -107,3 +120,5 @@ Por defecto, las etiquetas de nivel de host permanecen adjuntas a hosts AWS. Si 
 [10]: https://github.com/DataDog/helm-charts/blob/58bf52e4e342c79dbec95659458f7de8c5de7e6c/charts/datadog/values.yaml#L930-L937
 [11]: /es/api/latest/tags/#remove-host-tags
 [12]: https://github.com/DataDog/Miscellany/blob/master/remove_lingering_aws_host_tags.py
+[13]: https://api.datadoghq.com/api/v2/integration/aws/iam_permissions
+[14]: https://github.com/DataDog/cloudformation-template/tree/master/aws_attach_integration_permissions

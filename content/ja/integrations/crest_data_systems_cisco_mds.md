@@ -147,10 +147,6 @@ Cisco MDS スイッチは、SAN 環境において、ストレージデバイス
 - Web サイト: [crestdata.ai][3]
 - よくあるご質問: [Crest Data Datadog Marketplace インテグレーションのよくあるご質問][14]
 
-## トラブルシューティング
-
-ご不明な点は、[Datadog のサポートチーム][11]までお問合せください。
-
 [1]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/?tab=agentv6v7#start-stop-and-restart-the-agent
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [3]: https://www.crestdata.ai/
@@ -167,4 +163,4 @@ Cisco MDS スイッチは、SAN 環境において、ストレージデバイス
 [14]: https://docs.crestdata.ai/datadog-integrations-readme/Crest_Data_Datadog_Integrations_FAQ.pdf
 
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/crest-data-systems-cisco-mds" target="_blank">こちらをクリック</a>してください。
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。利用するには、<a href="https://app.datadoghq.com/marketplace/app/crest-data-systems-cisco-mds" target="_blank">Marketplace でこのアプリケーションを購入してください</a>。

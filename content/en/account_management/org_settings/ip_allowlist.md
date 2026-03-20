@@ -1,5 +1,6 @@
 ---
 title: IP Allowlist
+description: Control network access to Datadog by restricting API and UI access to specific IP addresses or CIDR ranges for enterprise security.
 ---
 
 {{< callout url="/help/" header="Get Started with IP Allowlist" >}}

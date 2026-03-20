@@ -1,20 +1,23 @@
 ---
 description: データをフィルタリングして、返されるメトリクスのスコープを絞り込みます。
 further_reading:
+- link: /getting_started/search/
+  tag: ドキュメント
+  text: Datadog で検索を始める
 - link: /metrics/explorer/
-  tag: Documentation
+  tag: ドキュメント
   text: メトリクスエクスプローラー
 - link: /metrics/summary/
-  tag: Documentation
+  tag: ドキュメント
   text: メトリクスの概要
 - link: /metrics/distributions/
-  tag: Documentation
+  tag: ドキュメント
   text: ディストリビューションメトリクス
 - link: /logs/explorer/search_syntax/
   tag: ドキュメント
   text: ログクエリーフィルターと検索構文
 - link: /dashboards/functions/exclusion/
-  tag: Documentation
+  tag: ドキュメント
   text: 除外関数
 title: 高度なフィルタリング
 ---
@@ -103,7 +106,7 @@ avg:system.disk.utilized{region:*east*} by {region}
 
 関数は Datadog からデータポイントを削除しませんが、可視化からデータポイントを削除します。
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

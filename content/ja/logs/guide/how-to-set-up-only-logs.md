@@ -11,7 +11,7 @@ further_reading:
 title: Datadog Agent をログ収集のみに使用
 ---
 
-<div class="alert alert-danger">Infrastructure Monitoring は APM を使用するための前提条件です。APM のお客様である場合、メトリクス収集を無効にしないでください。重要なテレメトリーおよびメトリクス収集情報を失う可能性があります。</div>
+<div class="alert alert-warning">Infrastructure Monitoring は APM を使用するための前提条件です。APM のお客様である場合、メトリクス収集を無効にしないでください。重要なテレメトリーおよびメトリクス収集情報を失う可能性があります。</div>
 
 ペイロードを無効にするには、Agent v6.4 以降を実行している必要があります。これにより、メトリクスデータの送信 (カスタムメトリクスを含む) が無効になり、ホストが Datadog に表示されなくなります。以下の手順に従ってください。
 

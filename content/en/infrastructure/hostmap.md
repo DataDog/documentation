@@ -1,5 +1,5 @@
 ---
-title: Host and Container Maps
+title: Host Map
 aliases:
   - /graphing/infrastructure/hostmap/
   - /infrastructure/containermap/
@@ -13,119 +13,47 @@ further_reading:
   text: "Understand what is going on at any level of your system"
 ---
 
-## Overview
+Datadog's [Host Map][1] visualizes your hosts, pods, containers, and clusters, helping you to understand and diagnose your infrastructure.
 
-Infrastructure Maps ([Host Maps][4] and [Container Maps][5]) help you to visualize hosts and containers on one screen, with metrics made comprehensible through color and shape.
-
-{{< img src="infrastructure/containermap/containermap.png" alt="A Container Map, showing containers as rectangles grouped by AWS availability zone." style="width:80%;">}}
-
-Use the drop-down selector in the upper left to switch between hosts and containers.
-
-## Installation
-
-After deploying the [Agent][6], no other configuration is necessary. For collecting Docker container information in the standard install rather than with the [Docker Agent][7], the `dd-agent` user needs to have permissions to access `docker.sock`. Permission can be given by adding `dd-agent` to the `docker` group.
+{{< img src="infrastructure/hostmap/new-host-map.png" alt="The Host Map showing hosts grouped by availability zone and colored by CPU usage. Hexagonal cells range from green (low usage) to orange-red (high usage). Groups include no availability-zone with 395 hosts, eastus with 183, eastus-1 with 153, and many additional regions." style="width:100%;" >}}
 
 ## Usage
 
-### Filter
+{{< img src="infrastructure/hostmap/query-selector.png" alt="The query selector dropdown showing a list of suggested queries such as 'What is the CPU usage across my hosts?' and 'How many errors are being logged across my infrastructure?', along with saved custom queries. A Create button and Filter views search field are at the top." style="width:60%;" >}}
 
-Use the **Filter** input box to limit an Infrastructure Map to a specific subset of an infrastructure. The filter input bar in the top left enables filtering of the Infrastructure Map by tags as well as Datadog-provided attributes.
+Use the drop-down in the upper left to view suggested queries, or the saved custom queries written by you or someone else in your organization. To write a custom query, click {{< ui >}}Create{{< /ui >}}.
 
-If the filter input bar is empty, the map displays all hosts/containers that are reporting the selected metric to Datadog.
+{{< img src="infrastructure/hostmap/draft-query.png" alt="The Draft Query editor with two levels. The parent object is set to Host with Fill by CPU usage. The child object is set to Pod with Fill by Readiness." style="width:100%;" >}}
 
-For example, if you tag your hosts by the environment they are in, you can filter by 'production' to remove hosts in your staging and other environments from the map. If you want to eliminate all but one host role in production, then add that role to the filter, too—the filters are `AND`ed together.
+- {{< ui >}}Parent/Child Object{{< /ui >}}: Select resources ({{< ui >}}Host{{< /ui >}}, {{< ui >}}Pod{{< /ui >}}, {{< ui >}}Container{{< /ui >}}, {{< ui >}}Cluster{{< /ui >}}) to view. Parent and Child objects have hierarchical relationships.
+- {{< ui >}}Fill by{{< /ui >}}: By default, the color of each object represents CPU usage, where the color ranges from green (0% utilized) to orange (100% utilized). Use the {{< ui >}}Fill by{{< /ui >}} drop-down to color your objects by various metrics or signals, such as memory or error logs.
+- {{< ui >}}Size by{{< /ui >}}: If you do not specify a Child object, you can use the {{< ui >}}Size by{{< /ui >}} selector to size each object by a metric or signal.
+  {{< img src="infrastructure/hostmap/size-by.png" alt="The Host Map query editor with Parent Object set to Host, Fill by set to CPU usage, and Size by set to Error logs. The map below shows 1.61k hosts as hexagons of varying sizes and colors, with a tooltip on one host showing 88% average CPU usage." style="width:85%;" >}}
+- {{< ui >}}Group by{{< /ui >}}: Spatially arrange your objects into groups. You can use multiple groupings. For example, if you group by `tags.availability-zone` `tags.instance-type`, your objects are first arranged by availability zone and then further subdivided by instance type.
 
-**Note**: There is a distinction between filtering for `tag:value` and `"tag:value"`. Filtering for `tag:value` strictly matches the tag, while filtering for `"tag:value"` performs a search on that text.
-
-### Group
-
-Use the **Group** input box to spatially arrange your hosts/containers into groups. Any host/container in a group shares the tag or tags you group by.  
-
-For example, you can group your hosts by AWS availability zone. If you add a second grouping tag, such as instance type, then the hosts are further subdivided into groups: first by availability zone and then by instance type, as seen below.
-
-{{< img src="infrastructure/hostmap/hostmappart2image2.png" alt="A Host Map where hosts (represented by hexagons) are split into two groups, by availability zone. Within each availability zone grouping, the hosts are then subdivided by instance type." >}}
-
-### Fill and size
-
-By default, the color of each host is set to represent the percentage of CPU usage on that host/container, where the color ranges from green (0% utilized) to orange (100% utilized). You can select different metrics from **Fill** selector.  
-
-Infrastructure Maps can also communicate an additional, optional metric with the size of the hexagon or rectangle. You can select this metric from the **Size** selector. 
-
-**Note**: The CPU Utilization metric uses the most reliable and up-to-date measurement of CPU utilization, whether it is being reported by the Datadog Agent, or directly by AWS or vSphere.
-
-### Tags
-
-You can apply [tags][1] manually, or use [integrations][2] to automatically apply them. You can then use these tags to filter your hosts or containers.
-
-For example, if some of your hosts are running on AWS, the following AWS-specific tags are available to you:
-
-* `availability-zone`
-* `region`
-* `image`
-* `instance-type`
-* `security-group`
-* any EC2 tags you might use, such as `name`
-
-The Datadog Agent also collects host metadata and application information, some of which can be used as a filter or for grouping terms. Those fields include:
-
-- `field:metadata_agent_version`
-- `field:metadata_platform`
-- `field:metadata_processor`
-- `field:metadata_machine`
-- `field:apps`
-
-The `field:apps` is derived from the metrics collected by the Datadog Agent on a host, and it indicates which integrations or Datadog products are active. For example, a value of `field:apps:universal` indicates that Universal Service Monitoring is running on that host.
-
-### Zoom in
-
-When you've identified a host or container that you want to investigate, click it for details. It zooms in and displays up to six integrations reporting metrics from that host. If there are more than six integrations, they are listed under the **Apps** header in the host's detail pane, as shown in the screenshot below.
-
-Click the name of an integration for a condensed dashboard of metrics for that integration. In the screenshot below, "system" has been clicked to get system metrics such as CPU usage, memory usage, disk latency, etc.
-
-{{< img src="infrastructure/hostmap/blog-host-maps-01.png" alt="A view of what is displayed when a user clicks on a particular host. An information panel is displayed at the bottom and lists various apps, as well as a sections for metrics and status checks." style="width:75%;" >}}
-
-### Display hosts on the Host Map that don't have an Agent installed
-
-By default, the Host Map only shows hosts that are reporting the selected metric, which can then be used to set a color or size for the individual hexagon within the grid.
-
-### Data freshness and meaning
-
-Data in the Host Map is refreshed about once a minute—unless you are continuously interacting with the map. The bottom left of the screen tells you when data was last updated.
+  {{< img src="infrastructure/hostmap/group-by.png" alt="The Host Map grouped by both tags.availability-zone and tags.instance-type. Hosts are arranged first into availability zone sections such as us-east-1a and us-east-1b, then subdivided by instance type such as m5a.2xlarge and t2.micro. Cells are colored by CPU usage from green to orange-red." style="width:85%;" >}}
+- {{< ui >}}Filter{{< /ui >}}: Limit the Host Map to a specific subset of your infrastructure. For example, you can filter by `production` to only view your production resources. The {{< ui >}}Filter{{< /ui >}} input supports logical operators (`AND`, `NOT`, `OR`) and wildcards (`*`). For example: `(tags.availability-zone:ap* OR tags.availability-zone:eu*) NOT tags.agent_version:5.3*`.
 
 ## Use cases
 
-### Resource optimization
+### Troubleshoot degraded server performance
 
-If you are an AWS user, you probably use a variety of instance types. Some instances are optimized for memory, some for compute, some are small, some are big.  
+Identify whether performance issues stem from overloaded hosts, unhealthy pods, container restarts, or cluster-level bottlenecks. Check for `kubernetes_state.pod.status:unready` or `system.cpu.user > 80` and use hierarchical views to isolate the root cause.
 
-If you want to reduce your AWS spend, you might start by figuring out what the expensive instances are used for. First, group by `instance-type` and then group by `role` or `name`. Take a look at your expensive instance types, such as **c3.8xlarge**. Are there any host roles whose CPU is underutilized? If so, zoom in to individual hosts and see whether all that computational power has been needed in the last several months, or whether this group of hosts is a candidate for migrating to a cheaper instance type.  
+### Identify cost hotspots
+Identify clusters, nodes, or workloads contributing disproportionately to cloud spend by querying tags like `tags.kube_node_instance_type`, `tags.cloud_provider`, or custom allocation tags. Combine this with container/host CPU and memory signals to detect under- or over-provisioning.
 
-Below is a subset of Datadog's infrastructure. As you can see, **c3.2xlarge** instances are heavily loaded.
+### Fleet-wide Datadog Agent management
 
-{{< img src="infrastructure/hostmap/hostmappart1image2.png" alt="A view of a number of hosts, represented by hexagons, that have been grouped by instance type: m3.large, c3.2xlarge, and m1.xlarge. Most hosts in m3.large and m1.xlarge are colored green to signify low CPU utlization, but the hosts in c3.2xlarge are orange, signifying high CPU utilization." style="width:80%;">}}
+Find hosts or containers running outdated Datadog Agent versions using queries like `tags.agent_version < 7.50`. Then group by availability zone, cluster, or service to drive rollout planning.
 
-If you click on the c3.2xlarge group and then sub-group by role (shown below), you can find that only some of the roles are loaded, while others are nearly idling. If you downgraded these seven green nodes to a c3.xlarge, you would save almost $13K per year. ($0.21 saved per hour per host x 24 hr/day * 365 days/year * 7 hosts = $12,877.20 / year)
+### Monitor Kubernetes rollouts or infrastructure migrations
 
-{{< img src="infrastructure/hostmap/hostmappart1image3.png" alt="The previously shown c3.2xlarge group, now sub-grouped by role. Some groups are uniformly orange, but some groups are all green." style="width:80%;">}}
+Visualize the distribution and health of pods, nodes, and clusters during a deployment or migration. View your clusters, nested with pods, and watch changes in real time to detect regressions.
 
-### Availability zone placement
+### Verify tagging and metadata hygiene
 
-Host Maps enable you to see distributions of machines in each of your availability zones (AZ). Filter for the hosts you are interested in, group by AZ, and you can immediately see whether resources need rebalancing. 
-
-In the example seen below, there is an uneven distribution of hosts with `role:daniels` across availability zones. (Daniels is the name of an internal application.)
-
-{{< img src="infrastructure/hostmap/hostmappart1image4.png" alt="Host Map filtered by role:daniels and grouped by availability zone. Three groups of hosts are displayed." style="width:80%;" >}}
-
-### Problem investigation
-
-Imagine you are having a problem in production. Maybe the CPUs on some of your hosts are pegged, which is causing long response times. Host Maps can help you quickly see whether there is anything different about the loaded and not-loaded hosts. You can rapidly group by dimensions you would like to investigate, and visually determine whether the problem servers belong to a certain group.  
-For example, you can group by AZ, region, instance type, image, or any tags that you use within your system. 
-
-In the screenshot below, some hosts have much less usable memory than others, despite being part of the same cluster. Grouping by machine image reveals that there were two different images in use, and one of them is overloaded.
-
-{{< img src="infrastructure/hostmap/hostmappart1image5.png" alt="Datadog Host Maps Two Memory Usage Bands" style="width:80%;" >}}
-
-{{< img src="infrastructure/hostmap/hostmappart1image6.png" alt="Datadog Host Maps Two Image Groups" style="width:80%;">}}
+Use logical operators to validate whether your hosts and pods are correctly tagged for ownership, environment, region, or cost allocation. For example, `tags.env:prod AND NOT (tags.team:*)` to surface unowned or improperly tagged resources.
 
 ## Further Reading
 

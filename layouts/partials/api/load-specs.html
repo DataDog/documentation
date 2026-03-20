@@ -1,0 +1,38 @@
+{{/*
+  Shared partial for loading API specs with caching
+  Prefer .Site.Data.api.v1.full_spec_deref, else fallback to full_spec.
+  Usage: {{ partial "api/load-specs.html" (dict "version" "v1") }}
+*/}}
+{{- $version  := .version | default "v1" -}}
+{{- $cacheKey := printf "api:%s:full_spec" $version -}}
+{{- $spec := "" -}}
+{{- with (hugo.Store.Get $cacheKey) -}}
+  {{- /* return cached */ -}}
+  {{- $spec = . -}}
+{{- else -}}
+  {{- $apiData := index site.Data "api" -}}
+  {{- if not $apiData -}}
+    {{- errorf "Data namespace 'api' not found under /data. Expected /data/api/%s/full_spec.(yaml|yml|json)" $version -}}
+  {{- end -}}
+
+  {{- $verData := index $apiData $version -}}
+  {{- if not $verData -}}
+    {{- errorf "API data for version %q not found. Expected /data/api/%s/..." $version $version -}}
+  {{- end -}}
+
+  {{- $hasDeref := isset $verData "full_spec_deref" -}}
+  {{- $spec := cond $hasDeref (index $verData "full_spec_deref") (index $verData "full_spec") -}}
+
+  {{- if not $spec -}}
+    {{- errorf "Neither full_spec_deref nor full_spec found in .Site.Data.api.%s. Place one at /data/api/%s/." $version $version -}}
+  {{- end -}}
+
+  {{- if not $hasDeref -}}
+    {{- warnf "OpenAPI: version=%q using fallback .Site.Data.api.%s.full_spec (full_spec_deref not present)" $version $version -}}
+  {{- end -}}
+
+  {{- /* Cache and return */ -}}
+  {{- hugo.Store.Set $cacheKey $spec -}}
+{{- end -}}
+
+{{- return $spec -}}

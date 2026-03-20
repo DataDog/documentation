@@ -3,13 +3,19 @@ title: Datadog Distribution of OpenTelemetry Collector
 aliases:
 - "/opentelemetry/agent/"
 further_reading:
+- link: https://www.datadoghq.com/blog/llm-otel-semantic-convention
+  tag: Blog
+  text: Datadog LLM Observability natively supports OpenTelemetry GenAI Semantic Conventions
+- link: https://www.datadoghq.com/blog/ddot-gateway
+  tag: Blog
+  text: Centralize and govern your OpenTelemetry pipeline with the DDOT gateway
 - link: "https://www.datadoghq.com/blog/datadog-distribution-otel-collector/"
   tag: "Blog"
   text: "Unify OpenTelemetry and Datadog with the DDOT Collector"
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-danger"><strong>The Datadog Distribution of OpenTelemetry Collector (DDOT) is not yet FedRAMP/FIPS compliant.</strong><br>
+<div class="alert alert-warning"><strong>The Datadog Distribution of OpenTelemetry Collector (DDOT) is not yet FedRAMP/FIPS compliant.</strong><br>
 &bull; If you require a FedRAMP or FIPS-compliant data collection pipeline, use the <a href="/agent/configuration/fips-compliance/?tab=linux">FIPS-enabled Datadog Agent</a>.<br>
 &bull; If you are a GovCloud customer whose only requirement is data residency in the GovCloud (US1-FED) data center, you <strong>may</strong> use the DDOT Collector.</div>
 {{< /site-region >}}
@@ -59,13 +65,7 @@ The DDOT Collector offers:
 
 ### Support levels
 
-Datadog provides different levels of support depending on the type of component:
-
-- **Datadog Supported Components**: Datadog-owned components such as the [Datadog Connector][44], [Datadog Exporter][38], and [Infra Attribute Processor][50]. These components are maintained by Datadog, receive regular updates, and are prioritized for bug fixes and feature enhancements within OpenTelemetry community guidelines.
-
-- **Community Supported Components**: [OpenTelemetry components](#opentelemetry-collector-components) included with the Agent by default. Datadog ensures these components are secure, stable, and compatible with the Agent.
-
-- **Custom Components**: OpenTelemetry components that are not included with the Agent by default and are added through the [custom components process][2]. Datadog provides guidance on the integration process but does not provide direct support for these components' functionality. For issues with custom components, Datadog recommends engaging with the OpenTelemetry community or the component maintainers.
+For details on Datadog, community, and custom component support, see [Support levels][57] on the Compatibility page.
 
 ### OpenTelemetry Collector components
 
@@ -227,3 +227,4 @@ This guide helps you migrate from an existing OpenTelemetry Collector setup to t
 [54]: /getting_started/tagging/unified_service_tagging/?tab=kubernetes
 [55]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/loadbalancingexporter/README.md
 [56]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/connector/routingconnector/README.md
+[57]: /opentelemetry/compatibility/#support-levels

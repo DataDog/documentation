@@ -1,6 +1,7 @@
 ---
 title: Connecting with Managed Authentication
-
+aliases:
+- /database_monitoring/managed_authentication
 ---
 
 This guide assumes that you have configured [Database Monitoring][1].
@@ -502,8 +503,8 @@ Create the function **in every database** to enable the Agent to collect explain
 
 ```tsql
 CREATE OR REPLACE FUNCTION datadog.explain_statement(
-  l_query TEXT,
-  OUT explain JSON
+   l_query TEXT,
+   OUT explain JSON
 )
 RETURNS SETOF JSON AS
 $$
@@ -511,17 +512,18 @@ DECLARE
 curs REFCURSOR;
 plan JSON;
 
-
 BEGIN
-  OPEN curs FOR EXECUTE pg_catalog.concat('EXPLAIN (FORMAT JSON) ', l_query);
-  FETCH curs INTO plan;
-  CLOSE curs;
-  RETURN QUERY SELECT plan;
+   SET TRANSACTION READ ONLY;
+
+   OPEN curs FOR EXECUTE pg_catalog.concat('EXPLAIN (FORMAT JSON) ', l_query);
+   FETCH curs INTO plan;
+   CLOSE curs;
+   RETURN QUERY SELECT plan;
 END;
 $$
 LANGUAGE 'plpgsql'
 RETURNS NULL ON NULL INPUT
-SECURITY DEFINER
+SECURITY DEFINER;
 ```
 
 

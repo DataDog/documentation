@@ -115,7 +115,7 @@ Las métricas se calculan en función del 100 % del tráfico de la aplicación,
 |`DD_API_KEY`| La [clave de la API de Datadog][6]: **obligatoria**.|
 | `DD_SITE` | El [sitio de Datadog][4]: **obligatorio**. |
 | `DD_LOGS_ENABLED` | Cuando es true, envía logs (stdout y stderr) a Datadog. Por defecto, es false. |
-| `DD_LOGS_INJECTION`| Cuando es true, enriquece todos los logs con datos de trazas para los loggers admitidos en [Java][10], [Node.js][11], [.NET][12] y [PHP][13]. Consulta la documentación adicional de [Python][14], [Go][15] y [Ruby][16]. |
+| `DD_LOGS_INJECTION`| Enriquece todos los logs con datos de trazas (trace) de los generadores de logs compatibles en [Java][10], [Node.js][11], [.NET][12] y [PHP][13]. Consulta la documentación adicional para [Python][14], [Go][15], y [Ruby][16]. |
 | `DD_TRACE_SAMPLE_RATE`|  Controla la frecuencia de muestreo de la ingesta de trazas entre `0.0` y `1.0`.|
 | `DD_SERVICE`      | Consulta [Etiquetado de servicios unificado][5].                                       |
 | `DD_VERSION`      | Consulta [Etiquetado de servicios unificado][5].                                       |

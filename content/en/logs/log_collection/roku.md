@@ -34,131 +34,24 @@ Send logs to Datadog from your Roku channel with [Datadog's `dd-sdk-roku` loggin
 
    For more information about setting up a client token, see the [client token documentation][2].
 
-   {{< site-region region="us" >}}
-   ```brightscript
-   sub RunUserInterface(args as dynamic)
-       screen = CreateObject("roSGScreen")
-       scene = screen.CreateScene("MyScene")
-       screen.show()
+```brightscript
+sub RunUserInterface(args as dynamic)
+    screen = CreateObject("roSGScreen")
+    scene = screen.CreateScene("MyScene")
+    screen.show()
 
-       datadogroku_initialize({
-           clientToken: "<CLIENT_TOKEN>",
-           applicationId: "<APPLICATION_ID>"
-           site: "us1",
-           env: "<ENV_NAME>",
-           sessionSampleRate: 100, ' the percentage (integer) of sessions to track
-           launchArgs: args
-       })
+    datadogroku_initialize({
+        clientToken: "<CLIENT_TOKEN>",
+        applicationId: "<APPLICATION_ID>"
+        site: "{{< region-param key=roku_site >}}",
+        env: "<ENV_NAME>",
+        sessionSampleRate: 100, ' the percentage (integer) of sessions to track
+        launchArgs: args
+    })
 
-       ' complete your channel setup here
-   end sub
-   ```
-   {{< /site-region >}}
-
-   {{< site-region region="eu" >}}
-   ```brightscript
-   sub RunUserInterface(args as dynamic)
-       screen = CreateObject("roSGScreen")
-       scene = screen.CreateScene("MyScene")
-       screen.show()
-
-       datadogroku_initialize({
-           clientToken: "<CLIENT_TOKEN>",
-           applicationId: "<APPLICATION_ID>"
-           site: "eu1",
-           env: "<ENV_NAME>",
-           sessionSampleRate: 100, ' the percentage (integer) of sessions to track
-           launchArgs: args
-       })
-
-       ' complete your channel setup here
-   end sub
-   ```
-   {{< /site-region >}}
-
-   {{< site-region region="us3" >}}
-   ```brightscript
-   sub RunUserInterface(args as dynamic)
-       screen = CreateObject("roSGScreen")
-       scene = screen.CreateScene("MyScene")
-       screen.show()
-
-       datadogroku_initialize({
-           clientToken: "<CLIENT_TOKEN>",
-           applicationId: "<APPLICATION_ID>"
-           site: "us3",
-           env: "<ENV_NAME>",
-           sessionSampleRate: 100, ' the percentage (integer) of sessions to track
-           launchArgs: args
-       })
-
-       ' complete your channel setup here
-   end sub
-   ```
-   {{< /site-region >}}
-
-   {{< site-region region="us5" >}}
-   ```brightscript
-   sub RunUserInterface(args as dynamic)
-       screen = CreateObject("roSGScreen")
-       scene = screen.CreateScene("MyScene")
-       screen.show()
-
-       datadogroku_initialize({
-           clientToken: "<CLIENT_TOKEN>",
-           applicationId: "<APPLICATION_ID>"
-           site: "us5",
-           env: "<ENV_NAME>",
-           sessionSampleRate: 100, ' the percentage (integer) of sessions to track
-           launchArgs: args
-       })
-
-       ' complete your channel setup here
-   end sub
-   ```
-   {{< /site-region >}}
-
-   {{< site-region region="ap1" >}}
-   ```brightscript
-   sub RunUserInterface(args as dynamic)
-       screen = CreateObject("roSGScreen")
-       scene = screen.CreateScene("MyScene")
-       screen.show()
-
-       datadogroku_initialize({
-           clientToken: "<CLIENT_TOKEN>",
-           applicationId: "<APPLICATION_ID>"
-           site: "ap1",
-           env: "<ENV_NAME>",
-           sessionSampleRate: 100, ' the percentage (integer) of sessions to track
-          launchArgs: args
-       })
-
-       ' complete your channel setup here
-   end sub
-   ```
-   {{< /site-region >}}
-
-   {{< site-region region="ap2" >}}
-   ```brightscript
-   sub RunUserInterface(args as dynamic)
-       screen = CreateObject("roSGScreen")
-       scene = screen.CreateScene("MyScene")
-       screen.show()
-
-       datadogroku_initialize({
-           clientToken: "<CLIENT_TOKEN>",
-           applicationId: "<APPLICATION_ID>"
-           site: "ap2",
-           env: "<ENV_NAME>",
-           sessionSampleRate: 100, ' the percentage (integer) of sessions to track
-          launchArgs: args
-       })
-
-       ' complete your channel setup here
-   end sub
-   ```
-   {{< /site-region >}}
+    ' complete your channel setup here
+end sub
+```
 
 
 3. (Optional) When writing your application, you can enable development logs by setting the `datadogVerbosity` attribute on the global node. All internal messages in the library with a priority equal to or higher than the provided level are then logged to your Roku device's telnet output:
@@ -211,6 +104,6 @@ To ensure the SDK doesn't use too much disk space, the data on the disk is autom
 [3]: /account_management/api-app-keys/#api-keys
 [4]: /logs/processing/attributes_naming_convention/
 [5]: /tagging/
-[6]: /real_user_monitoring/mobile_and_tv_monitoring/roku/setup/?tab=us
+[6]: /real_user_monitoring/application_monitoring/roku/setup/?tab=us
 [7]: https://github.com/DataDog/dd-sdk-roku/releases
 [8]: https://developer.roku.com/fr-fr/docs/developer-program/getting-started/architecture/file-system.md#cachefs

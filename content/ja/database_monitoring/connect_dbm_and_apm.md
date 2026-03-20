@@ -307,7 +307,7 @@ cursor.executemany("select %s", (("foo",), ("bar",)))
 
 {{% tab ".NET" %}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 この機能を利用するには、.NET サービスで自動インスツルメンテーションが有効になっている必要があります。
 </div>
 
@@ -327,7 +327,7 @@ cursor.executemany("select %s", (("foo",), ("bar",)))
 
 {{% tab "PHP" %}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 この機能を利用するには、PHP サービスでトレーサー拡張が有効になっている必要があります。
 </div>
 

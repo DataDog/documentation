@@ -54,7 +54,7 @@ Para un host Ubuntu:
 
 **Nota:** Para configurar un solo step (UI) / paso (generic) para la protección contra amenazas de AAP, añade la variable de entorno `DD_APPSEC_ENABLED=true` a tu comando de instalación de una línea.
 
-### Especificación de las versiones de biblioteca de rastreo {#lib-linux}
+### Especificación de las versiones de librería de rastreo {#lib-linux}
 
 En forma predeterminada, al activar APM en tu servidor se instala la compatibilidad con los servicios de Java, Python, Node.js y .NET Core. Si sólo tienes servicios implementados en algunos de estos lenguajes, configura `DD_APM_INSTRUMENTATION_LIBRARIES` en tu comando de instalación de una línea:
 
@@ -62,7 +62,7 @@ En forma predeterminada, al activar APM en tu servidor se instala la compatibili
 DD_APM_INSTRUMENTATION_LIBRARIES="java:1.25.0,python" DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="<YOUR_DD_SITE>" DD_APM_INSTRUMENTATION_ENABLED=host DD_APPSEC_ENABLED=true DD_ENV=staging bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
-Opcionalmente, puedes proporcionar un número de versión para la biblioteca de rastreo colocando dos puntos después del nombre del leguaje y especificando la versión de la biblioteca de rastreo. Si no especificas una versión, se utilizará por defecto la versión más reciente. Los nombres de lenguaje están separados por comas.
+Opcionalmente, puedes proporcionar un número de versión para la librería de rastreo colocando dos puntos después del nombre del leguaje y especificando la versión de la librería de rastreo. Si no especificas una versión, se utilizará por defecto la versión más reciente. Los nombres de lenguaje están separados por comas.
 
 Los lenguajes admitidos son:
 
@@ -72,7 +72,7 @@ Los lenguajes admitidos son:
 - Node.js (`js`)
 - PHP (`php`)
 
-**Nota**: Para la biblioteca de rastreo Node.js, diferentes versiones de Node.js son compatibles con diferentes versiones de la biblioteca de rastreo Node.js. Consulta [DataDog/dd-trace-js: Rastreador de JavaScript APM][6] para obtener más información.
+**Nota**: Para la librería de rastreo Node.js, diferentes versiones de Node.js son compatibles con diferentes versiones de la librería de rastreo Node.js. Consulta [DataDog/dd-trace-js: Rastreador de JavaScript APM][6] para obtener más información.
 
 ### Etiquetado de datos de observabilidad por entorno {#env-linux}
 
@@ -96,7 +96,7 @@ DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="<YOUR_DD_SITE>" DD_APM_INSTRUMENTATION_ENA
 
 Para un contenedor Linux Docker:
 
-1. Instala el inyector de biblioteca:
+1. Instala el inyector de librería:
    ```shell
    DD_APM_INSTRUMENTATION_ENABLED=docker DD_APM_INSTRUMENTATION_LIBRARIES="java:1,python:3,js:5,dotnet:3,php:1" DD_NO_AGENT_INSTALL=true DD_APPSEC_ENABLED=true bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
    ```
@@ -125,17 +125,17 @@ Para un contenedor Linux Docker:
 3. Reinicia los contenedores Docker.
 4. [Explora la observabilidad del rendimiento de tus servicios en Datadog][6].
 
-### Especificación de las versiones de biblioteca de rastreo  {#lib-docker}
+### Especificación de las versiones de librería de rastreo  {#lib-docker}
 
 Por defecto, la habilitación de APM en tu servidor instala el soporte para los servicios Java, Python, Node.js, y .NET. Si solo tienes servicios implementados en algunos de estos lenguajes, configura `DD_APM_INSTRUMENTATION_LIBRARIES` cuando ejecutes el script de instalación.
 
-Por ejemplo, para instalar el soporte únicamente para la versión v1.25.0 de la biblioteca de rastreo Java y la última versión de la biblioteca de rastreo Python, añade lo siguiente al comando de instalación:
+Por ejemplo, para instalar el soporte únicamente para la versión v1.25.0 de la librería de rastreo Java y la última versión de la librería de rastreo Python, añade lo siguiente al comando de instalación:
 
 ```shell
 DD_APM_INSTRUMENTATION_LIBRARIES="java:1.25.0,python" DD_APM_INSTRUMENTATION_ENABLED=docker DD_NO_AGENT_INSTALL=true DD_APPSEC_ENABLED=true bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
-Opcionalmente, puedes proporcionar un número de versión para la biblioteca de rastreo colocando dos puntos después del nombre del leguaje y especificando la versión de la biblioteca de rastreo. Si no especificas una versión, se utilizará por defecto la versión más reciente. Los nombres de lenguaje están separados por comas.
+Opcionalmente, puedes proporcionar un número de versión para la librería de rastreo colocando dos puntos después del nombre del leguaje y especificando la versión de la librería de rastreo. Si no especificas una versión, se utilizará por defecto la versión más reciente. Los nombres de lenguaje están separados por comas.
 
 Los lenguajes admitidos son:
 
@@ -146,11 +146,11 @@ Los lenguajes admitidos son:
 - Ruby (`ruby`)
 - PHP (`php`)
 
-**Nota**: Para la biblioteca de rastreo Node.js, diferentes versiones de Node.js son compatibles con diferentes versiones de la biblioteca de rastreo Node.js. Consulta [DataDog/dd-trace-js: Rastreador de JavaScript APM][7] para obtener más información.
+**Nota**: Para la librería de rastreo Node.js, diferentes versiones de Node.js son compatibles con diferentes versiones de la librería de rastreo Node.js. Consulta [DataDog/dd-trace-js: Rastreador de JavaScript APM][7] para obtener más información.
 
 ### Etiquetado de datos de observabilidad por entorno {#env-docker}
 
-Establece `DD_ENV` en el comando de instalación del inyector de biblioteca para que Docker etiquete automáticamente los servicios instrumentados y otra telemetría que pase por el Agent con un entorno específico. Por ejemplo, si el Agent está instalado en tu entorno de staging, configura `DD_ENV=staging` para asociar los datos de observabilidad con `staging`.
+Establece `DD_ENV` en el comando de instalación del inyector de librería para que Docker etiquete automáticamente los servicios instrumentados y otra telemetría que pase por el Agent con un entorno específico. Por ejemplo, si el Agent está instalado en tu entorno de staging, configura `DD_ENV=staging` para asociar los datos de observabilidad con `staging`.
 
 Por ejemplo:
 
@@ -216,7 +216,7 @@ Para habilitar la instrumentación de un solo paso con Helm:
 ## Eliminación de la instrumentación de APM y AAP de un solo step (UI) / paso (generic) de tu Agent
 Si no deseas recopilar datos de trazas (traces) para un determinado servicio, host, máquina virtual o contenedor, completa los siguientes pasos:
 ### Eliminación de la instrumentación para servicios específicos
-Ejecuta los siguientes comandos y reinicia el servicio para dejar de inyectar la biblioteca en el servicio y dejar de producir traces (trazas) de ese servicio.
+Ejecuta los siguientes comandos y reinicia el servicio para dejar de inyectar la librería en el servicio y dejar de producir traces (trazas) de ese servicio.
 {{< tabs >}}
 {{% tab "Linux host or VM" %}}
 1. Añade la variable de entorno `DD_INSTRUMENT_SERVICE_WITH_APM` al comando de inicio de servicio:
@@ -245,7 +245,7 @@ Ejecuta los siguientes comandos y reinicia el servicio para dejar de inyectar la
 {{% /tab %}}
 {{< /tabs >}}
 ### Eliminación de APM para todos los servicios en la infraestructura
-Para dejar de producir trazas, retira los inyectores de biblioteca y reinicia la infraestructura:
+Para dejar de producir trazas, retira los inyectores de librería y reinicia la infraestructura:
 {{< tabs >}}
 {{% tab "Linux host or VM" %}}
 1. Ejecuta:
@@ -255,7 +255,7 @@ Para dejar de producir trazas, retira los inyectores de biblioteca y reinicia la
 2. Reinicia el host.
 {{% /tab %}}
 {{% tab "Docker" %}}
-1. Desinstala la inyección de biblioteca local:
+1. Desinstala la inyección de librería local:
    ```shell
    dd-container-install --uninstall
    ```

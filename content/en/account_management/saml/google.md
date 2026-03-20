@@ -1,5 +1,6 @@
 ---
 title: Google SAML IdP
+description: Configure Google as a SAML identity provider for Datadog with service provider details and attribute mapping for secure single sign-on.
 aliases:
   - /account_management/faq/how-do-i-configure-google-as-a-saml-idp/
 further_reading:

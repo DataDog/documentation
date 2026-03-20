@@ -1,0 +1,6 @@
+1. (Optional) In the **Count** dropdown menu, select attributes whose unique values you want to count during the specified time frame.
+1. (Optional) In the **group by** dropdown menu, select attributes you want to group by.
+    - The defined `group by` generates a signal for each `group by` value.
+    - Typically, the `group by` is an entity (like user or IP). The `group by` can also join the queries together.
+    - Joining logs that span a time frame can increase the confidence or severity of the security signal. For example, if you want to detect a successful brute force attack, both successful and unsuccessful authentication logs must be correlated for a user.
+    - Anomaly detection inspects how the `group by` attribute has behaved in the past. If a `group by` attribute is seen for the first time (for example, the first time an IP is communicating with your system) and is anomalous, it does not generate a security signal because the anomaly detection algorithm has no historical data to compare with.

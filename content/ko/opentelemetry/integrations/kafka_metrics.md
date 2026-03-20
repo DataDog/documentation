@@ -6,7 +6,7 @@ further_reading:
 title: Kafka 메트릭
 ---
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 OTel Kafka 메트릭 리매핑은 공개 알파 버전입니다. 컬렉터(Collector) 0.93.0 이상 버전에서 사용할 수 있습니다. 이와 관련된 피드백이 있으면 계정 팀에 연락하여 의견을 제시해 주세요.
 </div>
 

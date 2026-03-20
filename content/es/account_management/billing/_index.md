@@ -1,4 +1,7 @@
 ---
+description: Comprende los ciclos de facturación, los métodos de pago, los cálculos
+  de uso y el recuento de hosts con información detallada sobre los precios de los
+  productos Datadog.
 title: Facturación
 ---
 

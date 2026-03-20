@@ -9,7 +9,7 @@ title: NDM 트러블슈팅
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">네트워크 기기 모니터링은 이 사이트에서 지원되지 않습니다.</div>
+<div class="alert alert-danger">네트워크 기기 모니터링은 이 사이트에서 지원되지 않습니다.</div>
 {{< /site-region >}}
 
 ## 개요

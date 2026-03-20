@@ -1,5 +1,6 @@
 ---
 title: Best practices for maintaining relevant dashboards
+description: Guidelines for identifying unused dashboards and best practices for maintaining a clean, organized dashboard list.
 aliases:
   - /graphing/faq/maintain-relevant-dashboards
   - /graphing/guide/maintain-relevant-dashboards

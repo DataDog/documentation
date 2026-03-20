@@ -39,11 +39,20 @@ Both of these should return the same image.
 {{- $imagesJSON := site.Data.images -}}
 {{- $integrationLogosList := index $imagesJSON "integrationLogosList" | default slice -}}
 {{- $integrationAliasList := index $imagesJSON "aliases" | default dict -}}
+{{- $environment := hugo.Environment -}}
 {{- if (eq (len $integrationLogosList) 0) -}}
-  {{- errorf "Integration image json integrationLogosList missing" -}}
+  {{- if eq $environment "development" -}}
+    {{- warnf "Integration image json integrationLogosList missing" -}}
+  {{- else -}}
+    {{- errorf "Integration image json integrationLogosList missing" -}}
+  {{- end -}}
 {{- end -}}
 {{- if (eq (len $integrationAliasList) 0) -}}
-  {{- errorf "Integration image json integrationAliasList missing" -}}
+  {{- if eq $environment "development" -}}
+    {{- warnf "Integration image json integrationAliasList missing" -}}
+  {{- else -}}
+    {{- errorf "Integration image json integrationAliasList missing" -}}
+  {{- end -}}
 {{- end -}}
 {{- $output_image := "" -}}
 {{- $imageExists := false -}}

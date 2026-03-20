@@ -4,7 +4,7 @@ null
 ---
 ## Información general
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Si recién empiezas a utilizar Datadog Serverless, sigue las <a href="/serverless/installation/dotnet">instrucciones para instrumentar tus funciones de Lambda mediante la Datadog Lambda Extension</a>. Si ya configuraste Datadog Serverless con el Datadog Forwarder antes que las funcionalidades de Lambda listas para usar, utiliza esta guía para mantener tu instancia.
 </div>
 

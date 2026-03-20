@@ -16,7 +16,7 @@ Custom commands provide a way to trace individual commands in your CI pipelines,
 
 Custom commands work with the following CI providers:
 
-- GitHub.com (SaaS) with datadog-ci CLI >= 2.40. For sending custom commands in GitHub Actions, see [Known issue with Github Actions](#known-issue-with-github-actions).
+- GitHub.com (SaaS) with datadog-ci CLI >= 2.40.
 - GitLab (SaaS or self-hosted >= 14.1) with datadog-ci CLI >= 2.40.
 - Jenkins with the Datadog plugin >= v3.2.0
 - CircleCI
@@ -31,6 +31,8 @@ Install the [`datadog-ci`][1] (>=v0.17.0) CLI globally using `npm`:
 {{< code-block lang="shell" >}}
 npm install -g @datadog/datadog-ci
 {{< /code-block >}}
+
+<div class="alert alert-info">See <a href="https://github.com/DataDog/datadog-ci?tab=readme-ov-file#more-ways-to-install-the-cli">More ways to install the CLI</a> in the datadog-ci repo for alternative installation options.</div>
 
 ## Trace a command line
 
@@ -53,7 +55,7 @@ echo "Hello World"
 </pre>
 {{< /site-region >}}
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-danger">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 ### Configuration settings
@@ -124,7 +126,7 @@ DATADOG_API_KEY=&lt;key&gt; DATADOG_SITE={{< region-param key="dd_site" >}} data
 </pre>
 {{< /site-region >}}
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-danger">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 ### Configuration settings
@@ -179,10 +181,21 @@ Additionally, configure the Datadog site to use the selected one ({{< region-par
 **Selected site**: {{< region-param key="dd_site" code="true" >}}
 {{< /site-region >}}
 
-## Known issue with GitHub Actions
+## Troubleshooting
 
-If the job name does not match the entry defined in the workflow configuration file (the GitHub [job ID][3]),
-the `DD_GITHUB_JOB_NAME` environment variable needs to be exposed, pointing to the job name. For example:
+### Payload too large
+The size limit is approximately `4MB`. The most common cause for this error is extremely large tags.
+Use the `--dry-run` option to see the traced command's contents before sending it to Datadog.
+
+### GitHub Actions custom commands not appearing in Datadog
+
+Older versions of the datadog-ci CLI may require additional setup:
+
+<details>
+<summary><strong>For datadog-ci versions prior to 4.1.1</strong></summary>
+
+If you are using `datadog-ci` version `2.29.0` to `4.1.0` and the job name does not match the entry defined in the workflow configuration file (the GitHub [job ID][3]), the `DD_GITHUB_JOB_NAME` environment variable needs to be exposed, pointing to the job name. For example:
+
 1. If the job name is changed using the [name property][4]:
     ```yaml
     jobs:
@@ -207,12 +220,7 @@ the `DD_GITHUB_JOB_NAME` environment variable needs to be exposed, pointing to t
         steps:
         - run: datadog-ci trace ...
     ```
-
-## Troubleshooting
-
-### Payload too large
-The size limit is approximately `4MB`. The most common cause for this error is extremely large tags.
-Use the `--dry-run` option to see the traced command's contents before sending it to Datadog.
+</details>
 
 ## Further reading
 

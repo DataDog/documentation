@@ -12,7 +12,7 @@ further_reading:
     text: "Troubleshooting Test Optimization"
 ---
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Tracers always initiate traffic to Datadog. Sessions are never initiated from Datadog back to the tracers.
 </div>
 

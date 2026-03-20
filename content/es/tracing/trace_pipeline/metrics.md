@@ -78,7 +78,7 @@ En este dashboard, puedes encontrar la siguiente información:
 
 ## Dashboard de motivos de ingesta de APM
 
-El [Dashboard de motivos de ingesta de APM][6] brinda información sobre cada fuente de volumen de ingesta. Cada métrica del uso de ingesta está etiquetada con una dimensión `ingestion_reason`, para que puedas ver qué opciones de configuración (configuración del Datadog Agent o configuración de bibliotecas de rastreo) y productos (como RUM o Testing Sintético) están generando la mayor cantidad de datos de APM.
+El [Dashboard de motivos de ingesta de APM][6] brinda información sobre cada fuente de volumen de ingesta. Cada métrica del uso de ingesta está etiquetada con una dimensión `ingestion_reason`, para que puedas ver qué opciones de configuración (configuración del Datadog Agent o configuración de librerías de rastreo) y productos (como RUM o Testing Sintético) están generando la mayor cantidad de datos de APM.
 
 {{< img src="tracing/trace_indexing_and_ingestion/usage_metrics/dashboard_ingestion_reasons.png" style="width:100%;" alt="Dashboard de motivos de ingesta de APM" >}}
 

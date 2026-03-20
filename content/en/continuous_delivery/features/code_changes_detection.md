@@ -52,7 +52,7 @@ https://docs.datadoghq.com/integrations/guide/source-code-integration/?tab=githu
 {{< tabs >}}
 {{% tab "GitHub" %}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 GitHub workflows running the <a href="https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#pull_request"> <code>pull_request</code> trigger </a> are not supported by the GitHub integration.
 If you are using the <code>pull_request</code> trigger, use the alternative method.
 </div>
@@ -70,13 +70,12 @@ To confirm that the setup is valid, select your GitHub App in the [GitHub integr
 {{% /tab %}}
 
 {{% tab "GitLab" %}}
-<div class="alert alert-warning">Datadog's GitLab integration is in Preview. To request access to Datadog's GitLab integration for your organization, reach out to <a href="https://www.datadoghq.com/support/">Datadog Support</a>.</div>
 
-After your organization has access, follow the [GitLab installation guide][1].
+Follow the [in-app onboarding][1] to set up the GitLab Source Code integration.
 
 **Note**: The scope of the service account's personal access token needs to be at least `read_api`.
 
-[1]: https://github.com/DataDog/gitlab-integration-setup?tab=readme-ov-file#datadog--gitlab-integration-installation-guide
+[1]: https://app.datadoghq.com/integrations/gitlab-source-code?subPath=configuration
 {{% /tab %}}
 
 {{% tab "Other Git Providers" %}}
@@ -86,7 +85,7 @@ When this command is executed, Datadog receives the repository URL, the commit S
 
 Run this command in CI for every new commit. When a deployment is executed for a specific commit SHA, ensure that the `datadog-ci git-metadata upload` command is run for that commit **before** the deployment event is sent.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Do not provide the <code>--no-gitsync</code> option to the <code>datadog-ci git-metadata upload</code> command.
 When that option is included, the commit information is not sent to Datadog and changes are not detected.
 </div>
@@ -98,7 +97,7 @@ Reporting commit 007f7f466e035b052415134600ea899693e7bb34 from repository git@gi
 ✅  Handled in 0.077 seconds.
 ```
 
-[1]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/git-metadata
+[1]: https://github.com/DataDog/datadog-ci/tree/master/packages/base/src/commands/git-metadata
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -168,9 +167,9 @@ extensions:
       - "**"
 ```
 
-In this case, Code Changes Detection for deployments of the `shopist` service will consider the Git commits that include changes in the whole repository tree.  
+In this case, Code Changes Detection for deployments of the `shopist` service will consider the Git commits that include changes in the whole repository tree.
 
-<div class="alert alert-warning">If a pattern is exactly <code>**</code> or begins with it, enclose it in quotes, as <code>*</code> is reserved in YAML for anchors.</div>  
+<div class="alert alert-danger">If a pattern is exactly <code>**</code> or begins with it, enclose it in quotes, as <code>*</code> is reserved in YAML for anchors.</div>
 
 
 ## Further Reading

@@ -26,7 +26,7 @@ Para conceder a una cuenta acceso a la eliminación de datos, realiza los siguie
 
 ### Iniciar eliminaciones
 
-<div class="alert alert-danger">Los datos eliminados nunca se pueden recuperar y las eliminaciones no se pueden deshacer.</div>
+<div class="alert alert-warning">Los datos eliminados nunca se pueden recuperar y las eliminaciones no se pueden deshacer.</div>
 
 <div class="alert alert-info"><strong>Para logs</strong>: las eliminaciones no pueden asignarse a un índice específico, y se producen en todos los índices, índices flexibles y archivos en línea.
 </div>

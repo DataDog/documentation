@@ -1,6 +1,8 @@
 ---
 aliases:
 - /es/tracing/faq/resource-trace-doesn-t-show-up-under-correct-service/
+description: Conoce las métricas basadas en DDSketch en APM para calcular percentiles
+  precisos y distribuciones de latencia con mayor exactitud.
 further_reading:
 - link: https://www.datadoghq.com/blog/engineering/computing-accurate-percentiles-with-ddsketch/
   tag: Blog

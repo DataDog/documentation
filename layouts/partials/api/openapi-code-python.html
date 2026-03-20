@@ -51,6 +51,6 @@ data = res.read()
 print(data.decode("utf-8"))
 {{- end -}}
 
-{{- $p := printf "partials/api/openapi-code-python-%s.html" .method -}}
+{{- $p := printf "api/openapi-code-python-%s.html" .method -}}
 {{- $pr := partial $p (dict "payload" .payload "path" .path) }}
 {{- highlight (trim $pr "\n\r") "python" -}}

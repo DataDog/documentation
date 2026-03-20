@@ -1,5 +1,6 @@
 ---
 title: Getting Started with Synthetic Monitoring
+description: Monitor system performance with simulated requests for API, browser, and mobile tests across global locations.
 further_reading:
 - link: 'https://learn.datadoghq.com/courses/getting-started-with-synthetic-browser-testing'
   tag: 'Learning Center'

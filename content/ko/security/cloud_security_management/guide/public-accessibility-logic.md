@@ -10,7 +10,7 @@ title: Datadog에서 리소스가 공용인지 확인하는 방법
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">선택한 <a href="/getting_started/site">Datadog 사이트</a>는 클라우드 보안 관리 설정 오류를 지원하지 않습니다. ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-danger">선택한 <a href="/getting_started/site">Datadog 사이트</a>는 클라우드 보안 관리 설정 오류를 지원하지 않습니다. ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 Datadog에서는 클라우드 그래프 처리 프레임워크를 사용해 클라우드 리소스 간의 관계를 매핑하여 인터넷으로 접근할 수 있는지를 판단합니다. 이 가이드에서는 그래프 프레임워크 내에서 공용으로 접근할 수 있는 리소스를 구분하는 로직을 설명합니다.

@@ -37,7 +37,7 @@ title: Empezando con la gestión de incidencias
 ---
 
 {{% site-region region="gov" %}}
-<div class="alert alert-warning">La gestión de incidencias no está disponible para el sitio de Datadog que has seleccionado ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-danger">La gestión de incidencias no está disponible para el sitio de Datadog que has seleccionado ({{< region-param key="dd_site_name" >}}).</div>
 {{% /site-region %}}
 
 ## Información general

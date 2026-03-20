@@ -1,5 +1,6 @@
 ---
 title: Getting Started with Dashboards
+description: Learn to create effective dashboards for team monitoring, executive reporting, and troubleshooting using Datadog's visualization tools.
 further_reading:
   - link: "https://www.datadoghq.com/blog/dashboard-sharing/"
     tag: "Blog"

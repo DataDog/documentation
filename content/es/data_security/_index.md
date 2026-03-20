@@ -18,7 +18,7 @@ further_reading:
 - link: /data_security/real_user_monitoring/
   tag: Documentación
   text: Seguridad de los datos en RUM
-- link: /real_user_monitoring/session_replay/browser/privacy_options
+- link: /session_replay/browser/privacy_options
   tag: Documentación
   text: Opciones de privacidad de Session Replay
 - link: /security/sensitive_data_scanner/
@@ -71,7 +71,7 @@ Sensitive Data Scanner es un servicio de flujos (streams) que hace comparaciones
 
 Los logs son los registros que producen tus sistemas y servicios, así como también las actividades derivadas de ellos. Para obtener información sobre cómo proteger los datos de los logs, por ejemplo, cómo filtrarlos y enmascararlos, consulta [Seguridad de los datos en Log Management][11]. 
 
-Y si quieres información más detallada, puedes consultar la guía [Controlar los datos confidenciales de los logs][12] y el artículo sobre la [configuración avanzada de Agent para recopilar logs][13].
+Para profundizar en el control de los datos de logs consulta la guía [Gestionar el acceso a datos confidenciales de logs][12] y [Configuración avanzada del Agent para logs][13].
 
 Para reducir los riesgos que amenazan la seguridad de los datos en los logs, es fundamental controlar los accesos. Descubre cómo [configurar RBAC en los logs][14] y cómo [funcionan los permisos de RBAC][15] en Datadog.
 
@@ -152,7 +152,7 @@ Pipelines y tests de integración continua
 [9]: /es/integrations/google_cloud_platform/
 [10]: /es/security/sensitive_data_scanner/
 [11]: /es/data_security/logs/
-[12]: /es/logs/guide/control-sensitive-logs-data/
+[12]: /es/logs/guide/manage-sensitive-logs-data-access/
 [13]: /es/agent/logs/advanced_log_collection
 [14]: /es/logs/guide/logs-rbac
 [15]: /es/logs/guide/logs-rbac-permissions
@@ -161,8 +161,8 @@ Pipelines y tests de integración continua
 [18]: /es/tracing/configure_data_security/
 [19]: /es/serverless/distributed_tracing/collect_lambda_payloads#obfuscating-payload-contents
 [20]: /es/data_security/synthetics/
-[21]: /es/real_user_monitoring/browser/advanced_configuration/
-[22]: /es/real_user_monitoring/session_replay/browser/privacy_options
+[21]: /es/real_user_monitoring/application_monitoring/browser/advanced_configuration/
+[22]: /es/session_replay/browser/privacy_options
 [23]: /es/database_monitoring/data_collected/#sensitive-information
 [24]: /es/getting_started/tagging/
 [25]: /es/tracing/glossary/

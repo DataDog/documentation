@@ -1,5 +1,6 @@
 ---
 title: Account Management Guides
+description: Comprehensive guides for managing your Datadog account, including API migrations, Terraform management, and support resources.
 private: true
 cascade:
     algolia:
@@ -16,6 +17,8 @@ cascade:
 {{< /whatsnext >}}
 
 {{< whatsnext desc="General Account Management:" >}}
+    {{< nextlink href="account_management/guide/teams-and-access" >}}Manage your access with teams{{< /nextlink >}}
+    {{< nextlink href="account_management/guide/secure-configuration" >}}Recommended secure configuration{{< /nextlink >}}
     {{< nextlink href="account_management/guide/manage-datadog-with-terraform" >}}Manage Datadog with Terraform{{< /nextlink >}}
     {{< nextlink href="account_management/guide/access-your-support-ticket" >}}Access your Support ticket{{< /nextlink >}}
 {{< /whatsnext >}}

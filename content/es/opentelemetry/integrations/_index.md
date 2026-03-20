@@ -22,7 +22,7 @@ Datadog recopila métricas de los receptores compatibles de OpenTelemetry sin co
 
 Por ejemplo, el archivo [`dockerstatsreceiver`][15] `metadata.yaml` enumera las métricas que puedes recopilar sin coste adicional.
 
-<div class="alert alert-warning">Asegúrate de configurar los receptores de acuerdo con la documentación de receptores de OpenTelemetry. Los receptores configurados incorrectamente pueden hacer que las métricas se clasifiquen como personalizadas, lo que conlleva cargos adicionales.</div>
+<div class="alert alert-danger">Asegúrate de configurar los receptores de acuerdo con la documentación de receptores de OpenTelemetry. Los receptores configurados incorrectamente pueden hacer que las métricas se clasifiquen como personalizadas, lo que conlleva cargos adicionales.</div>
 
 ## Integraciones OpenTelemetry (OTel) compatibles con Datadog
 

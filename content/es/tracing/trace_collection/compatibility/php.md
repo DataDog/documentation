@@ -16,7 +16,7 @@ type: multi-code-lang
 
 ## Política de soporte técnico de tiempo de ejecución de PHP APM
 
-La biblioteca de PHP Datadog Trace es de código abierto - consulta el [repositorio GitHub][1] para obtener más información.
+La librería de PHP Datadog Trace es de código abierto - consulta el [repositorio GitHub][1] para obtener más información.
 
 Datadog APM para PHP se basa en dependencias definidas en versiones específicas del sistema operativo host, el tiempo de ejecución de PHP,
 determinadas bibliotecas de PHP y el Datadog Agent o API.
@@ -86,9 +86,9 @@ PHP APM es compatible con las siguientes arquitecturas:
 
 ### Integraciones
 
-#### Compatibilidad con marcos web
+#### Compatibilidad con web frameworks
 
-Por defecto, Datadog **soporta todos los marcos web de PHP** desde el primer momento, ya sea con instrumentación al nivel del marco o con rastreo web genérico.
+Por defecto, Datadog **soporta todos los web frameworks de PHP** desde el primer momento, ya sea con instrumentación al nivel del marco o con rastreo web genérico.
 
 La instrumentación al nivel del marco incluye el rastreo de métodos internos y el etiquetado de marcos específicos.
 
@@ -96,7 +96,7 @@ El rastreo web genérico incluye un tramo (span) `web.request` para rastrear la 
 
 En la siguiente tabla se enumeran algunos de los marcos y versiones que Datadog rastrea con éxito.
 
-**Marcos web**:
+**web frameworks**:
 
 | Módulo         | Versiones                                | Tipo de soporte técnico                | Nivel de instrumentación           |
 |:---------------|:----------------------------------------|:----------------------------|:--------------------------------|
@@ -124,9 +124,9 @@ En la siguiente tabla se enumeran algunos de los marcos y versiones que Datadog 
 Ten en cuenta que aunque no veas tu marco web en esta lista, es compatible con la última versión del rastreador.
 
 
-Datadog está añadiendo continuamente más soporte técnico para el rastreo en profundidad de marcos web de PHP. Para solicitar soporte técnico para metadatos de tramos adicionales e información interna del marco, ponte en contacto con nuestro impresionante [equipo de soporte][3].
+Datadog está añadiendo continuamente más soporte técnico para el rastreo en profundidad de web frameworks de PHP. Para solicitar soporte técnico para metadatos de tramos adicionales e información interna del marco, ponte en contacto con nuestro impresionante [equipo de soporte][3].
 
-#### Compatibilidad con biblioteca CLI 
+#### Compatibilidad con biblioteca CLI
 
 El rastreo del CLI SAPI está activado en forma predeterminada. Para desactivar selectivamente el rastreo de los scripts CLI de PHP, configura `DD_TRACE_CLI_ENABLED=false`.
 
@@ -157,7 +157,7 @@ Para solicitar soporte técnico para bibliotecas CLI adicionales, ponte en conta
 
 Para solicitar soporte técnico para almacenes de datos adicionales, ponte en contacto con nuestro impresionante [equipo de asistencia][3].
 
-#### Compatibilidad de la biblioteca
+#### Compatibilidad de la librería
 
 | Módulo            | Versiones                   | Tipo de soporte técnico               |
 |:------------------|:---------------------------|:---------------------------|
@@ -173,7 +173,7 @@ Para solicitar soporte técnico para bibliotecas adicionales, ponte en contacto 
 
 ### PCNTL
 
-Datadog es compatible con el rastreo de procesos de bifurcaciones utilizando [pcntl][7]. Cuando se detecta una llamada a `pcntl_fork`, se crea un tramo dedicado y se instrumenta el proceso de bifurcación. Esto puede desactivarse con `DD_TRACE_FORKED_PROCESS`. Consulta la [página de configuración de bibliotecas][9] para obtener más información.
+Datadog es compatible con el rastreo de procesos de bifurcaciones utilizando [pcntl][7]. Cuando se detecta una llamada a `pcntl_fork`, se crea un tramo dedicado y se instrumenta el proceso de bifurcación. Esto puede desactivarse con `DD_TRACE_FORKED_PROCESS`. Consulta la [página de configuración de librerías][9] para obtener más información.
 
 Si la aplicación invoca `pcntl_unshare(CLONE_NEWUSER);` y el rastreador está instalado, la aplicación se bloquea fatalmente. Esto ocurre porque `unshare` con `CLONE_NEWUSER` requiere que el proceso [no sea encadenado][8], mientras que el rastreador PHP utiliza un subproceso separado para enviar trazas (traces) al Datadog Agent sin bloquear el proceso principal.
 

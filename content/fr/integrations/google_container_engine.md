@@ -25,7 +25,7 @@ version: '1.0'
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## Présentation
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Cette intégration est obsolète. Consultez plutôt la <a href="https://docs.datadoghq.com/integrations/google_kubernetes_engine">documentation relative à l'intégration Google Kubernetes Engine</a>. Pour en savoir plus sur les métriques obsolètes, consultez la documentation Google sur les <a href="https://cloud.google.com/monitoring/api/metrics_gcp#gcp-container">métriques Google Cloud</a> (en anglais).
 </div>
 

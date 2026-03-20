@@ -52,7 +52,7 @@ apk add libgcc
 {{% /tab %}}
 {{< /tabs >}}
 
-Las siguientes funciones de generación de perfiles están disponibles en las siguientes versiones mínimas de la biblioteca `dd-trace-php`:
+Las siguientes funciones de generación de perfiles están disponibles en las siguientes versiones mínimas de la librería `dd-trace-php`:
 
 |      Función              | Versión requerida de `dd-trace-php`           |
 |---------------------------|------------------------------------------|

@@ -1,19 +1,25 @@
 ---
 title: Code Coverage
+description: "Upload coverage reports to Datadog, visualize coverage data for pull requests, and block merges based on configurable thresholds."
 further_reading:
   - link: "/code_coverage/setup"
     tag: "Documentation"
     text: "Set up Code Coverage"
+  - link: "/code_coverage/configuration"
+    tag: "Documentation"
+    text: "Configure Code Coverage"
+  - link: "/code_coverage/flags"
+    tag: "Documentation"
+    text: "Organize coverage data with flags"
   - link: "/code_coverage/data_collected"
     tag: "Documentation"
     text: "Learn what data is collected for Code Coverage"
+  - link: "/code_coverage/monorepo_support"
+    tag: "Documentation"
+    text: "Learn how Code Coverage supports large monorepos"
 algolia:
   tags: ["code coverage"]
 ---
-
-{{< callout url="http://datadoghq.com/product-preview/code-coverage/" >}}
-Code Coverage is in Preview. This product replaces Test Optimization's <a href="https://docs.datadoghq.com/tests/code_coverage">code coverage</a> feature, which is being deprecated. Complete the form to request access for the new Code Coverage product.
-{{< /callout >}}
 
 [Code Coverage][1] lets you upload coverage reports to Datadog, visualize aggregated coverage data for pull requests, and block merges based on configurable coverage thresholds.
 

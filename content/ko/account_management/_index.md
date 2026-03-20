@@ -13,7 +13,7 @@ further_reading:
 title: 계정 관리
 ---
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">정부 사이트용 Datadog는 SAML 로그인만을 지원합니다.</div>
+<div class="alert alert-danger">정부 사이트용 Datadog는 SAML 로그인만을 지원합니다.</div>
 {{< /site-region >}}
 
 ## 개인 설정
@@ -37,7 +37,7 @@ Google Authentication을 사용해 Datadog에 로그인하는 경우 이메일 �
 
 이메일을 구독하면 다음 보고서에 액세스할 수 있습니다.
 {{< site-region region="us3,us5,gov,ap1" >}}
-<div class="alert alert-warning">이메일 다이제스트는 선택한 사이트 ({{< region-param key="dd_site_name" >}})에서 사용할 수 없습니다.</div>
+<div class="alert alert-danger">이메일 다이제스트는 선택한 사이트 ({{< region-param key="dd_site_name" >}})에서 사용할 수 없습니다.</div>
 {{< /site-region >}}
 
 * 일간 다이제스트

@@ -102,7 +102,8 @@ configuration.service = @"<service name>";
 [DDDatadog initializeWithConfiguration:configuration
                        trackingConsent:trackingConsent];
 
-[DDLogs enable];
+DDLogsConfiguration *logsConfiguration = [[DDLogsConfiguration alloc] initWithCustomEndpoint:nil];
+[DDLogs enableWith:logsConfiguration];
 ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -138,7 +139,8 @@ configuration.site = [DDSite eu1];
 [DDDatadog initializeWithConfiguration:configuration
                        trackingConsent:trackingConsent];
 
-[DDLogs enable];
+DDLogsConfiguration *logsConfiguration = [[DDLogsConfiguration alloc] initWithCustomEndpoint:nil];
+[DDLogs enableWith:logsConfiguration];
 ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -167,7 +169,7 @@ Logs.enable()
 {{% /tab %}}
 {{% tab "Objective-C" %}}
 ```objective-c
-@import DatadogObjc;
+@import DatadogLogs;
 
 DDConfiguration *configuration = [[DDConfiguration alloc] initWithClientToken:@"<client token>" env:@"<environment>"];
 configuration.service = @"<service name>";
@@ -176,7 +178,8 @@ configuration.site = [DDSite us3];
 [DDDatadog initializeWithConfiguration:configuration
                        trackingConsent:trackingConsent];
 
-[DDLogs enable];
+DDLogsConfiguration *logsConfiguration = [[DDLogsConfiguration alloc] initWithCustomEndpoint:nil];
+[DDLogs enableWith:logsConfiguration];
 ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -205,7 +208,7 @@ Logs.enable()
 {{% /tab %}}
 {{% tab "Objective-C" %}}
 ```objective-c
-@import DatadogObjc;
+@import DatadogLogs;
 
 DDConfiguration *configuration = [[DDConfiguration alloc] initWithClientToken:@"<client token>" env:@"<environment>"];
 configuration.service = @"<service name>";
@@ -214,7 +217,8 @@ configuration.site = [DDSite us5];
 [DDDatadog initializeWithConfiguration:configuration
                        trackingConsent:trackingConsent];
 
-[DDLogs enable];
+DDLogsConfiguration *logsConfiguration = [[DDLogsConfiguration alloc] initWithCustomEndpoint:nil];
+[DDLogs enableWith:logsConfiguration];
 ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -243,7 +247,7 @@ Logs.enable()
 {{% /tab %}}
 {{% tab "Objective-C" %}}
 ```objective-c
-@import DatadogObjc;
+@import DatadogLogs;
 
 DDConfiguration *configuration = [[DDConfiguration alloc] initWithClientToken:@"<client token>" env:@"<environment>"];
 configuration.service = @"<service name>";
@@ -252,7 +256,8 @@ configuration.site = [DDSite us1_fed];
 [DDDatadog initializeWithConfiguration:configuration
                        trackingConsent:trackingConsent];
 
-[DDLogs enable];
+DDLogsConfiguration *logsConfiguration = [[DDLogsConfiguration alloc] initWithCustomEndpoint:nil];
+[DDLogs enableWith:logsConfiguration];
 ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -281,7 +286,7 @@ Logs.enable()
 {{% /tab %}}
 {{% tab "Objective-C" %}}
 ```objective-c
-@import DatadogObjc;
+@import DatadogLogs;
 
 DDConfiguration *configuration = [[DDConfiguration alloc] initWithClientToken:@"<client token>" env:@"<environment>"];
 configuration.service = @"<service name>";
@@ -290,7 +295,8 @@ configuration.site = [DDSite ap1];
 [DDDatadog initializeWithConfiguration:configuration
                        trackingConsent:trackingConsent];
 
-[DDLogs enable];
+DDLogsConfiguration *logsConfiguration = [[DDLogsConfiguration alloc] initWithCustomEndpoint:nil];
+[DDLogs enableWith:logsConfiguration];
 ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -319,7 +325,7 @@ Logs.enable()
 {{% /tab %}}
 {{% tab "Objective-C" %}}
 ```objective-c
-@import DatadogObjc;
+@import DatadogLogs;
 
 DDConfiguration *configuration = [[DDConfiguration alloc] initWithClientToken:@"<client token>" env:@"<environment>"];
 configuration.service = @"<service name>";
@@ -328,7 +334,8 @@ configuration.site = [DDSite ap2];
 [DDDatadog initializeWithConfiguration:configuration
                        trackingConsent:trackingConsent];
 
-[DDLogs enable];
+DDLogsConfiguration *logsConfiguration = [[DDLogsConfiguration alloc] initWithCustomEndpoint:nil];
+[DDLogs enableWith:logsConfiguration];
 ```
 {{% /tab %}}
 {{< /tabs >}}

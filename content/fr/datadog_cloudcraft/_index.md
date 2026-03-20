@@ -40,7 +40,7 @@ La fonctionnalité principale de Cloudcraft est sa capacité à générer des di
 
 **Remarque** : Cloudcraft s’adapte aux permissions restrictives en excluant les ressources inaccessibles. Par exemple, si vous ne donnez pas la permission de lister les buckets S3, ces derniers ne s’afficheront pas. Si des ressources sont bloquées par les permissions, une alerte apparaît dans l’interface.
 
-<div class="alert alert-warning"><strong>Remarque</strong> : L’activation de la collecte des ressources peut affecter vos coûts AWS CloudWatch. Pour éviter ces frais, désactivez les métriques <strong>Usage</strong> dans l’onglet <strong>Metric Collection</strong> de l’<a href="https://app.datadoghq.com/integrations/amazon-web-services">intégration AWS Datadog</a>.<br/>
+<div class="alert alert-danger"><strong>Remarque</strong> : L’activation de la collecte des ressources peut affecter vos coûts AWS CloudWatch. Pour éviter ces frais, désactivez les métriques <strong>Usage</strong> dans l’onglet <strong>Metric Collection</strong> de l’<a href="https://app.datadoghq.com/integrations/amazon-web-services">intégration AWS Datadog</a>.<br/>
 
 {{< img src="/infrastructure/resource_catalog/aws_usage_toggle.png" alt="Bouton d'utilisation AWS dans les réglages du compte" style="width:100%;" >}}</div>
 

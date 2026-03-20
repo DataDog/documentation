@@ -9,7 +9,7 @@ further_reading:
 - link: "/continuous_integration/tests"
   tag: "Documentation"
   text: "Learn about Test Optimization"
-- link: "/real_user_monitoring/browser"
+- link: "/real_user_monitoring/application_monitoring/browser"
   tag: "Documentation"
   text: "Learn about RUM Browser Monitoring"
 ---
@@ -44,9 +44,9 @@ RUM integration is supported for Cypress browser tests and Selenium-driven brows
 * `dd-trace-js` >= 5.46.0
 * `browser-sdk` >= 5.15.0
 
-<blockquote class="alert alert-info">
-From Browser SDK v5.0.0, enable the `allowUntrustedEvents` initialization parameter during the tests to correctly capture clicks.
-</blockquote>
+<div class="alert alert-info">
+From Browser SDK v5.0.0, enable the <code>allowUntrustedEvents</code> initialization parameter during the tests to correctly capture clicks.
+</div>
 
 ## Connect browser tests and RUM
 
@@ -65,5 +65,5 @@ The RUM session has all the data that [RUM normally collects][3] so you can debu
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tests/setup/
-[2]: /real_user_monitoring/browser/
-[3]: /real_user_monitoring/browser/data_collected/
+[2]: /real_user_monitoring/application_monitoring/browser/
+[3]: /real_user_monitoring/application_monitoring/browser/data_collected/

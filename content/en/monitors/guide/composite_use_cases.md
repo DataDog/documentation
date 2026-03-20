@@ -1,5 +1,6 @@
 ---
 title: Composite Monitor Use Cases
+description: "Common use cases for composite monitors including error rates, frequent metrics monitoring, step monitoring, and notification delays."
 further_reading:
 - link: "monitors/types/composite/"
   tag: "Documentation"

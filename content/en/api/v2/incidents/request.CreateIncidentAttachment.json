@@ -1,0 +1,12 @@
+{
+  "data": {
+    "attributes": {
+      "attachment": {
+        "documentUrl": "https://app.datadoghq.com/notebook/ExampleIncident/Example-Incident",
+        "title": "Example-Incident"
+      },
+      "attachment_type": "postmortem"
+    },
+    "type": "incident_attachments"
+  }
+}

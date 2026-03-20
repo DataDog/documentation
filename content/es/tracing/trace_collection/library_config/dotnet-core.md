@@ -3,7 +3,7 @@ null
 ...
 ---
 
-Después de configurar la biblioteca de rastreo con tu código y de configurar el Agent para recopilar datos de APM, también puedes configurar la biblioteca de rastreo como prefieras e incluir la configuración del [Etiquetado de servicios unificado][4].
+Después de configurar la librería de rastreo con tu código y de configurar el Agent para recopilar datos de APM, también puedes configurar la librería de rastreo como prefieras e incluir la configuración del [Etiquetado de servicios unificado][4].
 
 {{< img src="tracing/dotnet/dotnet_core_configuration.png" alt="Establecer precedencia de la configuración del rastreador de .NET Core" style="width:100%" >}}
 
@@ -22,7 +22,7 @@ Para configurar el rastreador mediante variables de entorno, establece las varia
 
 Para configurar el rastreador en el código de la aplicación, crea una instancia `TracerSettings` a partir de las fuentes de configuración predeterminadas. Establece las propiedades de esta instancia `TracerSettings` antes de llamar a `Tracer.Configure()`. Por ejemplo:
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
  <strong>Nota:</strong> La configuración debe establecerse en <code>TracerSettings</code> <em>antes de</em> crear el <code>rastreador</code>. Los cambios realizados en las propiedades de <code>TracerSettings</code> después de crear el <code>rastreador</code> se ignoran.
 </div>
 
@@ -64,7 +64,7 @@ Para configurar el rastreador mediante un archivo JSON, crea `datadog.json` en e
 
 ### Ajustes de configuración
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
  <strong>Nota:</strong> En Linux, los nombres de las variables de entorno distinguen entre mayúsculas y minúsculas.
 </div>
 
@@ -208,7 +208,7 @@ Las siguientes variables de configuración están disponibles **solo** cuando se
 : **Propiedad en TracerSettings**: `TraceEnabled`<br>
 Activa o desactiva toda la instrumentación. Los valores válidos son: `true` o `false`.<br>
 **Predeterminado**: `true`
-**Nota**: Establecer la variable de entorno en `false` deshabilita completamente la biblioteca del cliente, y no puede ser habilitada a través de otros métodos de configuración. Si se establece en `false` a través de otro método de configuración (no una variable de entorno), la biblioteca del cliente se sigue cargando, pero no se generarán trazas.
+**Nota**: Establecer la variable de entorno en `false` deshabilita completamente la librería del cliente, y no puede ser habilitada a través de otros métodos de configuración. Si se establece en `false` a través de otro método de configuración (no una variable de entorno), la librería del cliente se sigue cargando, pero no se generarán trazas.
 
 `DD_DBM_PROPAGATION_MODE`
 : permite la conexión entre los datos enviados desde APM y el producto de Database Monitoring cuando se establece en `service` o `full`. La opción `service` permite la conexión entre DBM y servicios de APM. La opción `full` permite la conexión entre los tramos de base de datos y los eventos de consulta de base de datos. Disponible para Postgres y MySQL.<br>

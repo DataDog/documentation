@@ -1,9 +1,15 @@
 ---
+aliases:
+- /ja/tracing/trace_search_and_analytics/request_flow_map
+- /ja/tracing/trace_explorer/request_flow_map/
 description: スパンを一覧で表示したり、スパンを集計して時系列やトップリストなどにすることができます。
 further_reading:
 - link: tracing/trace_explorer/
   tag: ドキュメント
   text: トレースエクスプローラー
+- link: https://www.datadoghq.com/blog/apm-request-flow-map-datadog
+  tag: ブログ
+  text: リクエストフローマップについて
 title: スパンの視覚化
 ---
 
@@ -29,13 +35,13 @@ title: スパンの視覚化
 
 トレースが不正または不完全な場合、トレースの `Latency Breakdown` はいくつかのスパンで欠落している可能性があります。例えば、エラーサンプラーやレアサンプラーは、完全なトレースをキャプチャする保証なく、トレースの断片をキャプチャします。この場合、トレースが完全である場合にのみ意味をなす、一貫性のないまたは誤解を招くレイテンシー情報を表示するのを避けるために、データが省略されます。
 
-When the query is filtered on error spans, select the **Group into Issues** option to visualize a list of [Error Tracking][5] issues instead of individual error spans. Click on any issue in the issue list to open the issue panel and access additional information about this group of errors.
+クエリがエラー スパンでフィルタリングされている場合、個々のエラー スパンの代わりに [Error Tracking][5] の issue リストを表示するには、**Group into Issues** オプションを選択します。issue リスト内の任意の issue をクリックすると、issue パネルが開き、このエラー グループに関する追加情報にアクセスできます。
 
-{{< img src="tracing/trace_explorer/visualize/trace_explorer_issue_grouping.png" alt="Error Tracking Issue Grouping" style="width:100%;">}}
+{{< img src="tracing/trace_explorer/visualize/trace_explorer_issue_grouping.png" alt="Error Tracking の issue のグループ化" style="width:100%;">}}
 
-From the issue details, click `See all errors` to view individual error spans grouped under this issue.
+issue の詳細から `See all errors` をクリックすると、この issue の下にグループ化された個々のエラー スパンが表示されます。
 
-**Note**:Switch back to the `Errors` grouping to view individual errors, including non fingerprinted errors, i.e. errors without associated issue.
+**注**: フィンガー プリントのないエラー、すなわち関連する issue のないエラーを含め、個々のエラーを表示するには、グループ化の基準を `Errors` に戻します。
 
 ## Timeseries
 
@@ -89,6 +95,31 @@ Choose additional display options for timeseries: the **roll-up interval**, whet
 
 {{< img src="tracing/trace_explorer/visualize/table_view.png" alt="テーブルビュー" style="width:100%;">}}
 
+## リクエストフローマップ
+
+[リクエスト フロー マップ][6]は、APM の [サービス マップ][7] と [ライブ探索][8] の機能を組み合わせて、スタック内のリクエスト パスを図示します。任意のタグの組み合わせでトレースの範囲を設定し、各サービス間のリクエストの流れを表す動的なマップを生成します。
+
+{{< img src="tracing/live_search_and_analytics/request_flow_map/Overview.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="サービス間のリクエストの流れ、リクエスト時間、エラー レートを示すリクエスト フロー マップ" >}}
+
+たとえば、リクエスト フロー マップを使用して、トラフィックの多いサービスを特定したり、特定のエンド ポイントに対するリクエストによって生成されたデータベース呼び出しの回数を追跡したりできます。[シャドウ デプロイ][9]やカスタム スパン タグとして設定された機能フラグを使用している場合、リクエスト フロー マップを使用して、リクエスト間のレイテンシーを比較し、コードの変更がパフォーマンスにどのような影響を与えるかを予測できます。
+
+### リクエストフローマップの操作
+
+- 2 つのサービスを接続するエッジにカーソルを合わせると、それらのサービス間のリクエスト、エラー、レイテンシーに関するメトリクスを見ることができます。**注**: ハイライト表示されたエッジは、最もスループットの高い接続、または最も一般的なパスを表します。
+
+- **Export** をクリックすると、現在のリクエスト フロー マップの PNG 画像を保存できます。リアル タイムのアーキテクチャー ダイアグラムや、特定のユーザー フローに特化した図の作成に利用できます。
+
+- マップ上の任意のサービスをクリックすると、そのサービスの健全性、パフォーマンス、インフラストラクチャー、およびランタイム メトリクスが表示されます。
+
+{{< img src="tracing/live_search_and_analytics/request_flow_map/ServicePanel.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="選択したサービスのメトリクスとメタ データが表示された、リクエスト フロー マップのサイド パネル" >}}
+
+- マップは表示されるサービスの数に基づいて適切なレイアウトを自動で選択します。レイアウトを切り替えるには、**Cluster** または **Flow** をクリックします。
+
+- [RUM とトレースの接続][10]を行っている場合、RUM アプリケーションがリクエスト フロー マップに表示されます。
+
+{{< img src="tracing/live_search_and_analytics/request_flow_map/RUMService.mp4" alt="リクエスト フロー マップで RUM アプリケーションのサービス詳細を確認する方法を示した動画" video=true style="width:100%;">}}
+
+
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -98,3 +129,8 @@ Choose additional display options for timeseries: the **roll-up interval**, whet
 [3]: /ja/tracing/trace_explorer/facets/#quantitative-facets-measures
 [4]: /ja/tracing/trace_explorer/?tab=timeseriesview#live-search-for-15-minutes
 [5]: /ja/tracing/error_tracking/
+[6]: https://app.datadoghq.com/apm/flow-map
+[7]: /ja/tracing/services/services_map/
+[8]: /ja/tracing/trace_explorer/
+[9]: /ja/tracing/services/deployment_tracking/#shadow-deploys
+[10]: /ja/real_user_monitoring/correlate_with_other_telemetry/apm?tab=browserrum

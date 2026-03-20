@@ -1,5 +1,6 @@
 ---
 title: Graphing Guides
+description: Guides for dashboard configuration, visualization techniques, widget customization, and API usage.
 private: true
 disable_toc: true
 aliases:
@@ -35,6 +36,7 @@ cascade:
   {{< nextlink href="dashboards/guide/getting_started_with_wildcard_widget" >}}Getting started with the Wildcard Widget{{< /nextlink >}}
   {{< nextlink href="/dashboards/guide/using_vega_lite_in_wildcard_widgets/" >}}Using Vega-Lite with Wildcard Widgets in Datadog{{< /nextlink >}}
   {{< nextlink href="/dashboards/guide/wildcard_examples" >}}Wildcard Widget Examples{{< /nextlink >}}
+  {{< nextlink href="/dashboards/guide/datadog_clipboard" >}}Datadog Clipboard{{< /nextlink >}}
   {{< nextlink href="dashboards/guide/context-links" >}}Context Links{{< /nextlink >}}
   {{< nextlink href="dashboards/guide/embeddable-graphs-with-template-variables" >}}Embeddable graphs with template variables{{< /nextlink >}}
   {{< nextlink href="dashboards/guide/unable-to-iframe" >}}Why am I unable to iFrame certain HTTPS URLs?{{< /nextlink >}}

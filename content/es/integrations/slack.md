@@ -72,7 +72,7 @@ Conecta Slack a Datadog para ayudar al trabajo de tu equipo al:
 
 
 {{% site-region region="gov" %}}
-<div class="alert alert-warning">
+<div class="alert alert-danger">
     <a href="https://www.datadoghq.com/blog/datadog-slack-app/">Datadog para Slack</a> no está disponible para el sitio {{< region-param key="dd_site_name" >}}. Para enviar notificaciones a Slack en el sitio US1-FED, utiliza el webhook de Slack (legacy).
 </div>
 {{% /site-region %}}

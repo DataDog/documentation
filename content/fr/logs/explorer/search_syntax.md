@@ -43,7 +43,7 @@ Pour combiner plusieurs termes dans une requête complexe, vous pouvez utiliser 
 
 ## Recherche en texte intégral 
 
-<div class="alert alert-warning">La fonction de recherche en texte intégral est uniquement disponible dans Log Management et fonctionne dans les requêtes de monitor, de dashboard et de notebook. La syntaxe de recherche en texte intégral ne peut pas être utilisée pour définir des filtres d'index, d'archivage, de pipeline de logs, de réhydratation, ni dans Live Tail (suivi en direct). </div>
+<div class="alert alert-danger">La fonction de recherche en texte intégral est uniquement disponible dans Log Management et fonctionne dans les requêtes de monitor, de dashboard et de notebook. La syntaxe de recherche en texte intégral ne peut pas être utilisée pour définir des filtres d'index, d'archivage, de pipeline de logs, de réhydratation, ni dans Live Tail (suivi en direct). </div>
 
 Utilisez la syntaxe `*:search_term` pour effectuer une recherche en texte intégral sur tous les attributs de logs, y compris le message de log.
 

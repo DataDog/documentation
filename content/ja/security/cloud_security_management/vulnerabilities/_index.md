@@ -25,7 +25,7 @@ title: Cloud Security Management Vulnerabilities
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">選択している <a href="/getting_started/site">Datadog サイト</a> ({{< region-param key="dd_site_name" >}}) では、Cloud Security Management Vulnerabilities がプレビュー段階です。
+<div class="alert alert-danger">選択している <a href="/getting_started/site">Datadog サイト</a> ({{< region-param key="dd_site_name" >}}) では、Cloud Security Management Vulnerabilities がプレビュー段階です。
 <a href="https://www.datadoghq.com/product-preview/csm-vulnerability-management-govcloud/">こちらのフォーム</a>に入力し、アクセスをリクエストしてください。 </div>
 {{< /site-region >}} 
 

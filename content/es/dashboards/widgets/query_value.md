@@ -14,7 +14,7 @@ Los valores de consulta muestran el valor actual de una determinada consulta de 
 
 El widget puede mostrar el último valor informado o un agregado calculado a partir de todos los valores de la consulta a lo largo del intervalo de tiempo. Estas visualizaciones brindan un intervalo estrecho, pero inequívoco a tu consulta de infraestructura.
 
-{{< img src="dashboards/widgets/query_value/query_value1.png" alt="Widget de valor de consulta" style="width:80%;" >}}
+{{< img src="/dashboards/widgets/query_value/query_value_change_indicator.png" alt="Widget de valor de consulta" style="width:80%;" >}}
 
 ## Configuración
 
@@ -40,9 +40,21 @@ El widget puede mostrar el último valor informado o un agregado calculado a par
 
 <div class="alert alert-info">Las reglas de formato visual deben basarse en el valor bruto de métrica. Si la unidad base de la métrica está en nanosegundos, pero el valor de consulta tiene el formato automático en segundos, las reglas condicionales deben basarse en nanosegundos.</div>
 
+{{< img src="dashboards/widgets/query_value/visual_formatting_rules_custom_img.png" alt="Reglas de formato visual del widget de valor de consulta con fondo de imagen personalizado" style="width:90%;" >}}
+
 Personaliza el fondo del widget de tu valor de consulta con reglas condicionales. Tienes la opción de añadir un color de fondo, un color de fuente o una imagen personalizada. Con las imágenes personalizadas, puedes cargar una imagen desde tu ordenador local o hacer referencia a imágenes de la Internet pública. Los servidores internos deben actualizarse para admitir solicitudes de origen cruzado para hacer referencia a imágenes internas.
 
-{{< img src="dashboards/widgets/query_value/visual_formatting_rules_custom_img.png" alt="Reglas de formato visual del widget de valor de consulta con fondo de imagen personalizado" style="width:90%;" >}}
+#### Indicador de cambio
+
+Activa el **indicador de cambio** para resaltar la comparación del valor actual con un marco temporal anterior.
+
+{{< img src="/dashboards/widgets/query_value/change_indicator_config.png" alt="Opciones de configuración del indicador de cambio del widget de valor de consulta" style="width:90%;" >}}
+
+* **Visualización**: `Relative Change` (porcentaje), `Absolute Change` (valor bruto), `Both` o `Off`
+* **Color**: `Increases as better` (verde ↑, rojo ↓), `Decreases as better` (rojo ↑, verde ↓) o `Neutral`
+* **Comparado con**: `Previous Period`, `Previous Day/Week/Month`, o marco temporal `Custom`
+
+El widget muestra la diferencia debajo de la métrica principal, lo que ayuda a resaltar las tendencias recientes de un vistazo.
 
 #### Enlaces contextuales
 

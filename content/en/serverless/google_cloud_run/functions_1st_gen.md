@@ -6,7 +6,7 @@ title: Instrumenting 1st Gen Cloud Run Functions
 
 This page explains how to collect traces, trace metrics, runtime metrics, and custom metrics from your Cloud Run functions (1st gen), previously known as Cloud Functions.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 <strong>Migrating to 2nd gen Cloud Run functions</strong> 
 <br/>
 Datadog recommends using 2nd gen <a href="/serverless/google_cloud_run/functions">Cloud Run functions</a>, which offer improved performance, better scaling, and better monitoring with Datadog.
@@ -21,6 +21,10 @@ Google has integrated Cloud Run functions into the Cloud Run UI. Starting August
 
 ## Setup
 
+1. Set up the [Google Cloud integration][6].
+1. Enable log collection with the [Dataflow Method][14] to collect your Cloud Function logs.
+1. Configure tracing, runtime metrics, and custom metrics for your function's runtime.
+
 {{< programming-lang-wrapper langs="nodejs,python,java,go" >}}
 {{< programming-lang lang="nodejs" >}}
 1. **Install dependencies**. Run the following commands:
@@ -34,13 +38,12 @@ Google has integrated Cloud Run functions into the Cloud Run UI. Starting August
    For more information, see [Tracing Node.js Applications][1].
 
 
-2. **Start the Datadog serverless compatibility layer and initialize the Node.js tracer**. Add the following lines to your main application entry point file (for example, `app.js`):
+2. **Start the Datadog Serverless Compatibility Layer and initialize the Datadog Node.js tracer**.
 
-   ```js
-   require('@datadog/serverless-compat').start();
+   Use the `--require` option to load and initialize the Serverless Compatibility Layer and the Datadog Node.js tracer in one step.
 
-   // This line must come before importing any instrumented module.
-   const tracer = require('dd-trace').init()
+   ```
+   NODE_OPTIONS='--require @datadog/serverless-compat/init --require dd-trace/init'
    ```
 
 3. (Optional) **Enable runtime metrics**. See [Node.js Runtime Metrics][2].
@@ -63,7 +66,7 @@ Google has integrated Cloud Run functions into the Cloud Run UI. Starting August
    For more information, see [Tracing Python Applications][1].
 
 
-2. **Initialize the Datadog Python tracer and serverless compatibility layer**. Add the following lines to your main application entry point file:
+2. **Initialize the Datadog Python tracer and Serverless Compatibility Layer**. Add the following lines to your main application entry point file:
 
    ```python
    from datadog_serverless_compat import start
@@ -82,7 +85,7 @@ Google has integrated Cloud Run functions into the Cloud Run UI. Starting August
 [3]: /metrics/custom_metrics/dogstatsd_metrics_submission/?code-lang=python
 {{< /programming-lang >}}
 {{< programming-lang lang="java" >}}
-1. **Install dependencies**. Download the Datadog Java tracer and serverless compatibility layer:
+1. **Install dependencies**. Download the Datadog Java tracer and Serverless Compatibility Layer:
 
 
    Download `dd-java-agent.jar` and `dd-serverless-compat-java-agent.jar` that contains the latest tracer class files, to a folder that is accessible by your Datadog user:
@@ -95,9 +98,9 @@ Google has integrated Cloud Run functions into the Cloud Run UI. Starting August
    Datadog recommends using the latest versions of both `datadog-serverless-compat` and `dd-java-agent` to ensure you have access to enhancements and bug fixes.
 
 
-2. **Initialize the Datadog Java tracer and serverless compatibility layer**. Add `JAVA_TOOL_OPTIONS` to your runtime environment variable:
+2. **Initialize the Datadog Java tracer and Serverless Compatibility Layer**. Add `JAVA_TOOL_OPTIONS` to your runtime environment variable:
 
-   Implement and [Auto instrument][1] the Java tracer by setting the Runtime environment variable to instrument your Java cloud function with the Datadog Java tracer and the serverless compatibility layer.
+   Implement and [Auto instrument][1] the Java tracer by setting the Runtime environment variable to instrument your Java cloud function with the Datadog Java tracer and the Serverless Compatibility Layer.
 
    | Name      | Value |
    |-----------| ----- |
@@ -122,10 +125,10 @@ Google has integrated Cloud Run functions into the Cloud Run UI. Starting August
 
    Datadog recommends pinning the package versions and regularly upgrading to the latest versions of both `datadog-serverless-compat-go/datadogserverlesscompat` and `dd-trace-go.v1/ddtrace/trace` to ensure you have access to enhancements and bug fixes.
 
-   For more information, see [Tracing Go Applications][1] and [Datadog Severless Compatability Layer for Go](https://pkg.go.dev/github.com/DataDog/datadog-serverless-compat-go/datadogserverlesscompat).
+   For more information, see [Tracing Go Applications][1] and [Datadog Serverless Compatibility Layer for Go](https://pkg.go.dev/github.com/DataDog/datadog-serverless-compat-go/datadogserverlesscompat).
 
 
-2. **Start the Datadog serverless compatibility layer and initialize the Go tracer**. Add the following lines to your main application entry point file (for example, `main.go`):
+2. **Start the Datadog Serverless Compatibility Layer and initialize the Go tracer**. Add the following lines to your main application entry point file (for example, `main.go`):
 
    ```go
       import (
@@ -187,17 +190,16 @@ Google has integrated Cloud Run functions into the Cloud Run UI. Starting August
 
    For more information on how to add labels, see Google Cloud's [Configure labels for services][12] documentation.
 
+{{% svl-tracing-env %}}
+
 ## Example functions
 The following examples contain a sample function with tracing and metrics set up.
 
 {{< programming-lang-wrapper langs="nodejs,python,java,go" >}}
 {{< programming-lang lang="nodejs" >}}
 ```js
-// Example of a simple Cloud Run Function with traces and custom metrics
-// dd-trace must come before any other import.
+// Example of a simple Cloud Run Function with custom traces and custom metrics
 const tracer = require('dd-trace').init()
-
-require('@datadog/serverless-compat').start();
 
 const functions = require('@google-cloud/functions-framework');
 
@@ -400,3 +402,4 @@ You can collect [debug logs][7] for troubleshooting. To configure debug logs, us
 [11]: https://cloud.google.com/sdk/gcloud/reference/functions/deploy
 [12]: https://cloud.google.com/run/docs/configuring/services/labels
 [13]: https://docs.datadoghq.com/getting_started/site/#access-the-datadog-site
+[14]: /integrations/google-cloud-platform/?tab=organdfolderlevelprojectdiscovery#log-collection

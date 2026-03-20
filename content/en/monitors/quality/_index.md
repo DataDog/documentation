@@ -1,5 +1,6 @@
 ---
 title: Monitor Quality
+description: "Identify and fix common monitor misconfigurations including high alert volumes, missing recipients, and stuck alert states."
 disable_toc: false
 further_reading:
 - link: "https://app.datadoghq.com/monitors/quality"

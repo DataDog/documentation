@@ -41,7 +41,7 @@ El backend de Datadog utiliza esa información para buscar a través de ejecucio
 
 {{< img src="continuous_integration/itr_test_selection_diagram.png" alt="Un diagrama de Venn que explica qué hace que un test sea omitible en el proceso de selección de Test Impact Analysis" style="width:80%;">}}
 
-A continuación, la biblioteca de Datadog elimina los tests marcados como no omitibles en la fuente de la lista de tests omitibles. A continuación, procede a ejecutar los tests, pero ordena al marco de tests que omita los que están en la lista de tests omitibles.
+A continuación, la librería de Datadog elimina los tests marcados como no omitibles en la fuente de la lista de tests omitibles. A continuación, procede a ejecutar los tests, pero ordena al marco de tests que omita los que están en la lista de tests omitibles.
 
 {{< img src="continuous_integration/itr_skipped_test_run.png" alt="Un test omitible por Test Impact Analysis" style="width:80%;">}}
 

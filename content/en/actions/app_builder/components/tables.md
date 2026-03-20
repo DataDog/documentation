@@ -1,5 +1,6 @@
 ---
 title: Tables
+description: Advanced table component features including client-side filtering, server-side filtering, loading indicators, and dynamic values.
 disable_toc: false
 aliases:
 - /service_management/app_builder/tables/
@@ -19,11 +20,23 @@ This page describes advanced features you can use to manipulate table components
 
 When you have a full list of items already and you want to filter them, there are multiple methods to do so on the client side.
 
+### Column filtering
+
+Under **Columns**, expand a column and enable the **Filterable** option to allow users to filter by entries in that column. When enabled, a drop-down menu appears in the table header which allows the user to select an item from that column to filter on.
+
+### Filter by date range
+
+To allow date range filtering, under **Appearance**, enable the **Has Date Range Filter** option and select a data path to filter by. When enabled, a drop-down menu appears in the table header which allows the user to select a time span to filter by.
+
+### Filter with search
+
+To add a search bar to your table, under **Appearance**, enable the **Is Searchable** option.
+
 ### Filter a table with a text input or search component
 
 One common use case is filtering a table component using the value in a text input component.
 
-For example, if you want to list your dashboards in a table that you can filter using a text input component, you could do the following: 
+For example, if you want to list your dashboards in a table that you can filter using a text input component, you could do the following:
 
 1. Add a new query using the **+** button.
 1. Search for "list dashboards" and click the **List Dashboards** action. Name your query `listDashboards0`.
@@ -41,7 +54,7 @@ You can type text into the text input component and the rows of table are filter
 
 Another common use case is filtering a table using a select component.
 
-For example, if you want to list your dashboards in a table that you can filter using a select component, you could do the following: 
+For example, if you want to list your dashboards in a table that you can filter using a select component, you could do the following:
 
 1. Add a new query using the **+** button.
 1. Search for "list dashboards" and click the **List Dashboards** action. Name your query `listDashboards0`.
@@ -63,7 +76,7 @@ If you want to filter the results of a query itself, then use those results in y
 1. Search for "list dashboards" and click the **List Dashboards** action. Name your query `listDashboards0`.
 1. Add a text input or search component to your app. Name it `searchInput`.
 1. Add a table component and set its **data source** property to the query that you added.
-1. Expand the **Advanced** section of the query and find **Post-query Tranformation**.
+1. Expand the **Advanced** section of the query and find **Post-query Transformation**.
 1. Replace `return outputs` with the following line:
 
     ```
@@ -76,9 +89,9 @@ If you need the original, untransformed query result, you can reference it as `$
 
 ## Server-side filtering
 
-In some cases, you might want to filter values server-side and issue new requests when the user enters a value in an input such as a text input component. 
+In some cases, you might want to filter values server-side and issue new requests when the user enters a value in an input such as a text input component.
 
-In this case, you can enable server-side filtering by editing the query directly. 
+In this case, you can enable server-side filtering by editing the query directly.
 
 For example, in the [GitHub PR pipeline][4] blueprint, the `listOpenedPulls` query has an input that gets the following URL:
 
@@ -143,7 +156,7 @@ In the table, the **User** column fills with an avatar and GitHub username for e
 
 <br>Do you have questions or feedback? Join the **#app-builder** channel on the [Datadog Community Slack][0].
 
-[0]: https://datadoghq.slack.com/
+[0]: https://chat.datadoghq.com/
 [1]: https://app.datadoghq.com/app-builder/apps/edit?activeTab=queries&showActionCatalog=false&template=pagerduty_oncall_manager&viewMode=preview
 [2]: /service_management/app_builder/components/tables/#filtering-with-a-text-input
 [3]: https://app.datadoghq.com/app-builder/apps/edit?viewMode=edit&template=github-pr-summarizer

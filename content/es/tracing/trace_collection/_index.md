@@ -46,10 +46,11 @@ Para más información, consulta [Instrumentación automática][5].
 
 ### Instrumentación personalizada
 
-Captura datos de observabilidad de código propio o funciones complejas que no son capturadas por la instrumentación automática. Para instrumentar tu aplicación de forma personalizada, puedes utilizar cualquiera de estas opciones:
+Captura datos de observabilidad de código interno o funciones complejas que no captura  la instrumentación automática. Para instrumentar de forma personalizada tu aplicación, puedes utilizar cualquiera de estas opciones:
 
 - [Bibliotecas de Datadog][9]: utiliza bibliotecas de rastreo de Datadog para añadir y personalizar la observabilidad dentro de Datadog.
 - [APIs de OpenTelemetry][10]: utiliza la compatibilidad con la API de OpenTelemetry en bibliotecas de Datadog para disponer de una instrumentación independiente de tu código.
+- [Dynamic Instrumentation][11]: Utiliza Dynamic Instrumentation para añadir telemetría personalizada en ubicaciones de código específicas, desde la interfaz de usuario de Datadog.
 
 Para más información, consulta [Instrumentación personalizada][6].
 
@@ -93,3 +94,4 @@ Los siguientes tutoriales te guiarán a través de la configuración de trazas d
 [8]: /es/tracing/trace_collection/automatic_instrumentation/dd_libraries/
 [9]: /es/tracing/trace_collection/custom_instrumentation/dd_libraries/
 [10]: /es/tracing/trace_collection/custom_instrumentation/otel_instrumentation/
+[11]: /es/tracing/dynamic_instrumentation/

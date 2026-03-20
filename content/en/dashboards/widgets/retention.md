@@ -1,5 +1,6 @@
 ---
 title: Retention Widget
+description: Analyze user retention and engagement patterns over time using cohort analysis visualization.
 widget_type: cohort
 further_reading:
 - link: "product_analytics/charts/retention_analysis/"
@@ -11,7 +12,7 @@ further_reading:
 ---
 
 {{% site-region region="gov" %}}
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 The Retention widget is not available in the <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).
 </div>
 {{% /site-region %}}
@@ -51,5 +52,4 @@ On screenboards and notebooks, choose whether your widget has a custom timeframe
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
-[1]: /real_user_monitoring/browser/advanced_configuration#user-session
+[1]: /real_user_monitoring/application_monitoring/browser/advanced_configuration#user-session

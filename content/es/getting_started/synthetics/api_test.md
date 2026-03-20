@@ -1,4 +1,7 @@
 ---
+description: Crea tests de API en Datadog para monitorizar tus endpoints de forma
+  proactiva. Crea tests de API de uno o varios pasos con aserciones, configura alertas
+  y soluciona problemas.
 further_reading:
 - link: /api/latest/synthetics/#create-an-api-test
   tag: API

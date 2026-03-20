@@ -30,7 +30,7 @@ version: '1.0'
 ---
 
 {{< site-region region="us3,eu,gov" >}}
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   Cette intégration est uniquement disponible pour les clients Datadog utilisant le site américain.
 </div>
 {{< /site-region >}}

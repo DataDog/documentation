@@ -1,0 +1,55 @@
+{
+  "data": {
+    "attributes": {
+      "costs_to_allocate": [
+        {
+          "condition": "is",
+          "tag": "account_id",
+          "value": "123456789"
+        },
+        {
+          "condition": "in",
+          "tag": "environment",
+          "value": "",
+          "values": [
+            "production",
+            "staging"
+          ]
+        }
+      ],
+      "enabled": true,
+      "order_id": 1,
+      "provider": [
+        "aws",
+        "gcp"
+      ],
+      "rule_name": "example-arbitrary-cost-rule",
+      "strategy": {
+        "allocated_by_tag_keys": [
+          "team",
+          "environment"
+        ],
+        "based_on_costs": [
+          {
+            "condition": "is",
+            "tag": "service",
+            "value": "web-api"
+          },
+          {
+            "condition": "not in",
+            "tag": "team",
+            "value": "",
+            "values": [
+              "legacy",
+              "deprecated"
+            ]
+          }
+        ],
+        "granularity": "daily",
+        "method": "proportional"
+      },
+      "type": "shared"
+    },
+    "type": "upsert_arbitrary_rule"
+  }
+}

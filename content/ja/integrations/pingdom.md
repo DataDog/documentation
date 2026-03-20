@@ -23,7 +23,7 @@ version: '1.0'
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
-<div class="alert alert-danger">
+<div class="alert alert-warning">
 このインテグレーションは非推奨であり、依存する API はいつサポートを失うかわかりません。代わりに <a href="https://docs.datadoghq.com/integrations/pingdom_v3/" class="alert-link">Datadog Pingdom V3 インテグレーション</a>を使用してください。
 </div>
 

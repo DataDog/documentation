@@ -2,10 +2,10 @@
 further_reading:
 - link: /tracing/trace_collection/library_config/python/
   tag: Documentación
-  text: Opciones adicionales de configuración de bibliotecas de rastreo
+  text: Opciones adicionales de configuración de librerías de rastreo
 - link: /tracing/trace_collection/dd_libraries/python/
   tag: Documentación
-  text: Instrucciones detalladas de configuración de bibliotecas de rastreo
+  text: Instrucciones detalladas de configuración de librerías de rastreo
 - link: /tracing/trace_collection/compatibility/python/
   tag: Documentación
   text: Marcos de trabajo compatibles Python para la instrumentación automática
@@ -14,7 +14,7 @@ further_reading:
   text: Configuración manual de trazas (traces) y tramos (spans)
 - link: https://github.com/DataDog/dd-trace-py
   tag: Código fuente
-  text: Rastreo del repositorio de código fuente abierto de bibliotecas
+  text: Rastreo del repositorio de código fuente abierto de librerías
 title: Tutorial - Habilitación del rastreo de una aplicación Python en el mismo host
   que el Datadog Agent
 ---
@@ -45,7 +45,7 @@ DD_AGENT_MAJOR_VERSION=7 DD_API_KEY=<YOUR_API_KEY> DD_SITE="datadoghq.com" bash 
 
 Para enviar datos a un sitio Datadog distinto de `datadoghq.com`, sustituye la variable de entorno `DD_SITE` por [tu sitio Datadog ][6].
 
-Si ya tienes un Agent instalado en el host, asegúrate de que es al menos la versión 7.28. Puedes consultar la versión mínima del Datadog Agent necesaria para utilizar las aplicaciones de rastreo Python `ddtrace` en la [documentación para desarrolladores de bibliotecas de rastreo][7].
+Si ya tienes un Agent instalado en el host, asegúrate de que es al menos la versión 7.28. Puedes consultar la versión mínima del Datadog Agent necesaria para utilizar las aplicaciones de rastreo Python `ddtrace` en la [documentación para desarrolladores de librerías de rastreo][7].
 
 Verifica que el Agent se está ejecutando y enviando datos a Datadog, accediendo a [**Events > Explorer** (Eventos > Explorador)][8]. También puedes filtrar por la faceta `Datadog` de origen y buscar un evento que confirme la instalación del Agent en el host:
 
@@ -130,7 +130,7 @@ Ejecuta más llamadas a la API para ver la aplicación en acción. Cuando hayas 
 
 ## Instalación del rastreo de Datadog
 
-A continuación, instala la biblioteca de rastreo utilizando Poetry o pip (versión 18 como mínimo). Desde tu directorio `apm-tutorial-python`, ejecuta:
+A continuación, instala la librería de rastreo utilizando Poetry o pip (versión 18 como mínimo). Desde tu directorio `apm-tutorial-python`, ejecuta:
 
 {{< tabs >}}
 {{% tab "Poetry" %}}

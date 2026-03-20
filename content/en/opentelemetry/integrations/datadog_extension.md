@@ -14,7 +14,7 @@ further_reading:
 
 ## Overview
 
-<div class="alert alert-info">The Datadog Extension is in Preview.</div>
+As of OpenTelemetry Collector Contrib [modules v0.129.0][4] and newer, the Datadog Extension is included in [contrib distributions][5] of OpenTelemetry Collector. It is also available for [custom builds][6] of OpenTelemetry Collector.
 
 The Datadog Extension allows you to view OpenTelemetry Collector configuration and build information directly within Datadog on the [Infrastructure List][2] and [Resource Catalog][3]. When used with the [Datadog Exporter][1], this extension gives you visibility into your Collector fleet without leaving the Datadog UI.
 
@@ -85,11 +85,12 @@ service:
 | `hostname` | Custom hostname for the Collector | Auto-detected |
 | `http.endpoint` | Local HTTP server endpoint | `localhost:9875` |
 | `http.path` | HTTP server path for metadata | `/metadata` |
+| `deployment_type` | Deployment type for the Collector. One of: `gateway`, `daemonset`, or `unknown`. | `unknown` |
 | `proxy_url` | HTTP proxy URL for outbound requests | - |
 | `timeout` | Timeout for HTTP requests | `30s` |
 | `tls.insecure_skip_verify` | Skip TLS certificate verification | `false` |
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 <strong>Hostname Matching</strong>: If you specify a custom <code>hostname</code> in the Datadog Extension, it <strong>must</strong> match the <code>hostname</code> value in the Datadog Exporter configuration. The Datadog Extension does not have access to pipeline telemetry and cannot infer hostnames from incoming spans. It only obtains hostnames from system/cloud provider APIs or manual configuration. If telemetry has different <a href="/opentelemetry/config/hostname_tagging/?tab=host">hostname attributes</a> than the hostname reported by the extension, the telemetry will not be correlated to the correct host, and you may see duplicate hosts in Datadog.
 </div>
 
@@ -184,3 +185,6 @@ This endpoint provides:
 [1]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/exporter/datadogexporter
 [2]: https://app.datadoghq.com/infrastructure
 [3]: https://app.datadoghq.com/infrastructure/catalog
+[4]: https://github.com/open-telemetry/opentelemetry-collector-contrib/releases/tag/v0.129.0
+[5]: https://github.com/open-telemetry/opentelemetry-collector-releases/releases/tag/v0.129.1
+[6]: https://opentelemetry.io/docs/collector/custom-collector/

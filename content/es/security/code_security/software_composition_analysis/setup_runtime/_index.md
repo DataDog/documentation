@@ -8,10 +8,10 @@ SCA puede detectar vulnerabilidades que afectan a las bibliotecas de código abi
 
 Antes de configurar la detección en tiempo de ejecución, asegúrate de que se cumplen los siguientes requisitos previos:
 
-1. **Biblioteca de rastreo compatible:** La biblioteca de rastreo de Datadog utilizada por tu aplicación o servicio es compatible con las funciones de Software Composition Analysis para el lenguaje de tu aplicación o servicio.
+1. **Biblioteca de rastreo compatible:** La librería de rastreo de Datadog utilizada por tu aplicación o servicio es compatible con las funciones de Software Composition Analysis para el lenguaje de tu aplicación o servicio.
 2. **Instalación del Datadog Agent:** El Datadog Agent se instala y configura para el sistema operativo de tu aplicación o contenedor, nube o entorno virtual.
 3. **Configuración de Datadog APM:** Datadog APM está configurado para tu aplicación o servicio, y las trazas (traces) web (`type:web`) son recibidas por Datadog.
-4. **Biblioteca de rastreo compatible:** La biblioteca de rastreo de Datadog utilizada por tu aplicación o servicio es compatible con las funciones de Software Composition Analysis para el lenguaje de tu aplicación o servicio. Para ver más detalles, consulta la página [Compatibilidad de bibliotecas][2] de cada producto de AAP.
+4. **Biblioteca de rastreo compatible:** La librería de rastreo de Datadog utilizada por tu aplicación o servicio es compatible con las funciones de Software Composition Analysis para el lenguaje de tu aplicación o servicio. Para ver más detalles, consulta la página [Compatibilidad de librerías][2] de cada producto de AAP.
 
 ## Tipos de activación de Software Composition Analysis
 
@@ -20,11 +20,11 @@ Antes de configurar la detección en tiempo de ejecución, asegúrate de que se 
 Puedes habilitar Software Composition Analysis (SCA) en tiempo de ejecución en la aplicación a través de [**Seguridad** > **Code Security**][3].
 
 1. Ve a la página [Configuración de seguridad][3].
-2. En **Activar la detección en tiempo de ejecución de vulnerabilidades de biblioteca**, haz clic en **Manage Services** (Gestionar servicios).
-3. Comprueba los servicios donde quieres identificar vulnerabilidades de biblioteca y selecciona **Acciones en bloque**.
+2. En **Activar la detección en tiempo de ejecución de vulnerabilidades de librería**, haz clic en **Manage Services** (Gestionar servicios).
+3. Comprueba los servicios donde quieres identificar vulnerabilidades de librería y selecciona **Acciones en bloque**.
 4. Haz clic en **Activate Runtime Software Composition Analysis (SCA)** (Activar Software Composition Analysis (SCA) en tiempo de ejecución).
 
-### Configuración de la biblioteca de rastreo de Datadog
+### Configuración de la librería de rastreo de Datadog
 
 Añade una variable de entorno o un nuevo argumento para configurar tu biblioteca de rastreo de Datadog.
 

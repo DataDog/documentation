@@ -33,7 +33,7 @@ assets:
     source_type_id: 10263
     source_type_name: crest_data_systems_microsoft_defender
   monitors:
-    '[Crest Data Systems Microsoft 365 Defender] Missing KBs of Endpoint': assets/monitors/cds_missing_kbs_of_endpoint.json
+    Missing KBs of Endpoint: assets/monitors/cds_missing_kbs_of_endpoint.json
 author:
   homepage: https://www.crestdata.ai
   name: Crest Data
@@ -44,7 +44,7 @@ categories:
 - インシデント
 - マーケットプレイス
 - セキュリティ
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -131,10 +131,10 @@ Microsoft 365 Defender は、エンドポイント、アイデンティティ、
 
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから Crest Data にお問い合わせください。
 
-- Support Email: [datadog.integrations@crestdata.ai][9]
-- Sales Email: [datadog-sales@crestdata.ai][10]
-- Website: [crestdata.ai][4]
-- FAQ: [Crest Data Datadog Marketplace Integrations FAQ][2]
+- サポートメール: [datadog.integrations@crestdata.ai][9]
+- 営業メール: [datadog-sales@crestdata.ai][10]
+- Web サイト: [crestdata.ai][4]
+- よくあるご質問: [Crest Data Datadog Marketplace インテグレーションのよくあるご質問][2]
 
 [1]: https://docs.crestdata.ai/datadog-integrations-readme/Microsoft_365_defender.pdf
 [2]: https://docs.crestdata.ai/datadog-integrations-readme/Crest_Data_Datadog_Integrations_FAQ.pdf
@@ -146,5 +146,7 @@ Microsoft 365 Defender は、エンドポイント、アイデンティティ、
 [8]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [9]: mailto:datadog.integrations@crestdata.ai
 [10]: mailto:datadog-sales@crestdata.ai
+[11]: https://docs.crestdata.ai/datadog-integrations-readme/datadog_ms_defender_365_script.pdf
+[12]: https://github.com/crestdatasystems/datadog-crest_data_microsoft_defender/blob/master/azure_app_registrator.py
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/crest-data-systems-microsoft-defender" target="_blank">こちらをクリック</a>してください。
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。利用するには、<a href="https://app.datadoghq.com/marketplace/app/crest-data-systems-microsoft-defender" target="_blank">Marketplace でこのアプリケーションを購入してください</a>。

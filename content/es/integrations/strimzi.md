@@ -90,7 +90,7 @@ Este check monitoriza [Strimzi][1] a través del Datadog Agent.
 El check de Strimzi está incluido en el paquete del [Datadog Agent][2].
 No es necesaria ninguna instalación adicional en tu servidor.
 
-<div class="alert alert-warning">Este check utiliza <a href="https://docs.datadoghq.com/integrations/openmetrics/">OpenMetrics</a>, que requiere Python 3.</div>
+<div class="alert alert-danger">Este check utiliza <a href="https://docs.datadoghq.com/integrations/openmetrics/">OpenMetrics</a>, que requiere Python 3.</div>
 
 ### Configuración
 

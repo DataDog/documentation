@@ -1,5 +1,6 @@
 ---
 title: Events Side Panel
+description: "View detailed information about individual RUM events including context, waterfalls, and performance data in the side panel."
 further_reading:
 - link: "/real_user_monitoring/explorer/search/"
   tag: "Documentation"
@@ -8,33 +9,78 @@ further_reading:
 
 ## Overview
 
-The Real User Monitoring (RUM) Explorer displays individual events that include this side panel format:
+The Real User Monitoring (RUM) Explorer displays individual events in a side panel. To open the event side panel in the [RUM Explorer][1], click on a table row in the **List** visualization type.
 
-{{< img src="real_user_monitoring/explorer/events/performance_side_panel.png" alt="Application performance graph and Core Web Vitals in the Performance tab" width="80%" >}}
+Use the side panel header to view contextual information about your users (environment, country) and event-specific details like view path and loading type. For Synthetic test runs, click the test ID to view the result.
 
-General context information is provided at the top. Scroll to the waterfall to see the actual content of the event. 
+The distribution visualization at the top helps you understand whether the current view is close to the median or is an outlier. Use the dropdown to switch between {{< tooltip text="Loading Time" tooltip="Time until the page is ready and no network request or DOM mutation is happening. Mobile apps have a different, manually reported loading time. <a href='/real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#all-performance-telemetry'>Learn more</a>" >}}, or web and mobile vitals such as {{< tooltip text="Time To First Byte" tooltip="Time elapsed until the first byte of the view has been received. <a href='/real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#all-performance-telemetry'>Learn more</a>" >}}, {{< tooltip text="FCP" tooltip="First Contentful Paint: Time when the browser first renders any text, image, or SVG. <a href='/real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#event-timings-and-core-web-vitals'>Learn more</a>" >}}, {{< tooltip text="LCP" tooltip="Largest Contentful Paint: Time when the largest DOM object in the viewport is rendered. <a href='/real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#event-timings-and-core-web-vitals'>Learn more</a>" >}}, {{< tooltip text="CLS" tooltip="Cumulative Layout Shift: Quantifies unexpected page movement due to dynamically loaded content. <a href='/real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#event-timings-and-core-web-vitals'>Learn more</a>" >}}, {{< tooltip text="INP" tooltip="Interaction to Next Paint: Longest duration between a user's interaction and the next paint. <a href='/real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#event-timings-and-core-web-vitals'>Learn more</a>" >}}, Refresh Rate, and Memory Average. Adjust the time range to view data by day, week, or month.
 
-Context about your users and their applications, including the OS, country, code version, and more, is captured when the event is generated. Context also refers to the event itself, which includes information specific to the event type. For example, the event side panel shows the view path while the **Errors** side panel shows the error message.
+{{< img src="real_user_monitoring/explorer/events/side-panel-overview-2.png" alt="RUM Explorer side panel showing the distribution visualization, waterfall timeline, and filter options" width="100%" >}}
 
-## Event side panel
+Click any tab to view its corresponding details and investigate specific aspects of the event. See [Additional tabs](#additional-tabs) for a full list.
 
-To open the event side panel in the [RUM Explorer][1], click on a table row in the **List** visualization type.
+## Waterfall tab
 
-The event side panel displays all the information relative to a RUM event. The waterfall displays related resources, errors, views, and actions, and visualizes your events that cause errors or experience excessive loading times in a timeline format (the view minimap). 
+The **Waterfall** tab displays an interactive timeline of the events associated with this view. Overlays display key performance markers, including [Core Web Vitals][3] or mobile timings, with pass or fail indicators.
 
-You can also drag and drop the time selectors in the waterfall to zoom into a time span and focus on the events of interest.
+{{< img src="real_user_monitoring/explorer/events/events_side_panel-3.mp4" alt="Interacting with the waterfall timeline in the Waterfall tab" video="true" width="80%" >}}
 
-{{< img src="real_user_monitoring/explorer/events/events_side_panel-1.mp4" alt="Events Timings and Mobile Vitals" video="true" width="80%" >}}
+### Filtering the waterfall
 
-## Attributes
+Control which events appear in the waterfall:
 
-RUM collects contextual information by default. You can also add additional context attributes with the [Global Context API][2].
+- **By critical path**: Click the **Critical Events** toggle to see only events directly impacting your key performance timings.
+- **By attribute**: Use the filter buttons above the waterfall. Click a filter to access additional options like resource URL, action name, error message, and more.
+- **By time range**: Drag the time selectors in the minimap, or expand the left sidebar and click a timing to filter to events before that point.
 
-{{< img src="real_user_monitoring/explorer/events/attributes.png" alt="Attribute tab" width="80%" >}}
+The left sidebar reveals key timings, including custom timings from the [addTiming API][4].
 
-## Further Reading
+### Inspecting events
+
+Hover over any event in the waterfall to see its timestamp, duration, and contributing factors (scripts, style/layout, or other processing). Hover over a Core Web Vital to view its definition, threshold, and how it compares to your p75.
+
+{{< img src="real_user_monitoring/explorer/events/specific-times-1.png" alt="Loading Time popover showing performance details, threshold indicators, and comparison to p75 performance" width="100%" >}}
+
+### Connected telemetry
+
+Click on events in the waterfall to access related data:
+
+- **Resources**: View connected backend traces.
+- **Long Animation Frames**: Access associated profiles for performance analysis.
+
+## Additional tabs
+
+Use the other tabs to explore related data:
+
+Replay
+: Watch a visual replay of the user's session.
+
+Errors
+: View errors associated with the event.
+
+Resources
+: Inspect all resources loaded during the event.
+
+Traces
+: See backend traces connected to the event.
+
+Feature Flags
+: View feature flags evaluated during the event.
+
+Actions
+: Review user actions captured during the session.
+
+Logs
+: Access logs associated with the event.
+
+Attributes
+: View collected context attributes. Add custom attributes with the [Global Context API][2].
+
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/rum/explorer
-[2]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#global-context
+[2]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/?tab=npm#global-context
+[3]: /real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#event-timings-and-core-web-vitals
+[4]: /real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#track-additional-performance-timings

@@ -50,7 +50,7 @@ Utiliza [Sensitive Data Scanner][5] para limitar el riesgo de almacenar datos co
 
 ## Enviar una solicitud de eliminación a logs 
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Sólo un administrador de Datadog puede solicitar la eliminación de logs. Si no eres administrador, asegúrate de incluir a un administrador en la solicitud de manera que pueda confirmar la solicitud de eliminación.
 </div>
 
@@ -62,7 +62,7 @@ Si las opciones para cambiar el periodo de retención, hacer que los logs no se 
 1. Si se trata de una solicitud de eliminación selectiva por intervalo de tiempo, el intervalo de tiempo exacto, en formato Epoch o UTC, de los logs que contenían datos confidenciales.
 1. El nombre de los índices donde están los datos confidenciales.
 1. Confirmación de que comprendes el siguiente requisito:
-   <div class="alert alert-danger">
+   <div class="alert alert-warning">
    Datadog deletes logs by time buckets, not by query scope or precise time frame. Therefore, Datadog might have to delete a larger amount of data than your exposed logs. For example. if you need to delete all error logs from <code>service:x</code> that came in between 10:00 a.m. to 12:00 p.m. from <code>index:main</code>, Datadog might have to delete all logs in that index from 1:00 a.m. to 5:00 p.m. Datadog support will work with you to ensure that only the necessary data is deleted.
    </div>
 

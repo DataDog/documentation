@@ -33,31 +33,31 @@ La última versión del rastreador Node.js es compatible con las versiones de No
 
 ## Para empezar
 
-Antes de empezar, asegúrate de haber [instalado y configurado el Agent][13]. A continuación, sigue los siguientes pasos para añadir la biblioteca de rastreo de Datadog a tu aplicación Node.js para instrumentarla. 
+Antes de empezar, asegúrate de haber [instalado y configurado el Agent][13]. A continuación, sigue los siguientes pasos para añadir la librería de rastreo de Datadog a tu aplicación Node.js para instrumentarla.
 
-### Instalación de la biblioteca de rastreo de Datadog
+### Instalación de la librería de rastreo de Datadog
 
-Para instalar la biblioteca de rastreo de Datadog utilizando npm para Node.js v18 y superiores, ejecuta:
+Para instalar la librería de rastreo de Datadog utilizando npm para Node.js v18 y superiores, ejecuta:
 
   ```shell
   npm install dd-trace --save
   ```
-Para instalar la biblioteca de rastreo de Datadog (v4. y superiores de `dd-trace`) para la versión 16 de Node.js, ejecuta:
+Para instalar la librería de rastreo de Datadog (v4. y superiores de `dd-trace`) para la versión 16 de Node.js, ejecuta:
   ```shell
   npm install dd-trace@latest-node16
   ```
 Para obtener más información sobre las etiquetas (tags) de distribución y la compatibilidad con las versiones de tiempos de ejecución Node.js de Datadog, consulta la página de [requisitos de compatibilidad][1].
-Si estás actualizando desde una versión principal anterior de biblioteca (0.x, 1.x, 2.x, 3.x o 4.x) a otra versión principal, consulta la [guía para migraciones][5], para evaluar cualquier cambio de última hora.
+Si estás actualizando desde una versión principal anterior de librería (0.x, 1.x, 2.x, 3.x o 4.x) a otra versión principal, consulta la [guía para migraciones][5], para evaluar cualquier cambio de última hora.
 
 ### Para importar e inicializar el rastreador
 
-Importa e inicializa el rastreador ya sea en código o con argumentos de línea de comandos. La biblioteca de rastreo de Node.js debe importarse e inicializarse **antes** que cualquier otro módulo.
+Importa e inicializa el rastreador ya sea en código o con argumentos de línea de comandos. La librería de rastreo de Node.js debe importarse e inicializarse **antes** que cualquier otro módulo.
 
 <div class="alert alert-info">Con marcos como <strong>Next.js</strong> y <strong>Nest.js</strong> debes proporcionar una variable de entorno o añadir una marca de Node.js adicional. Consulta <a href="/tracing/trace_collection/compatibility/NodeJS/#complex-framework-usage">Uso de marcos complejos</a> para obtener más información.</div>
 
-Una vez que hayas completado la configuración, si no estás recibiendo trazas (traces) completas, incluyendo rutas URL faltantes para solicitudes web, o tramos (spans) desconectados o faltantes, **confirma que el rastreador ha sido importado e inicializado correctamente**. La biblioteca de rastreo que se inicializa en primer lugar es necesaria para que el rastreador corrija correctamente a través de parches todas los bibliotecas requeridas para la instrumentación automática.
+Una vez que hayas completado la configuración, si no estás recibiendo trazas (traces) completas, incluyendo rutas URL faltantes para solicitudes web, o tramos (spans) desconectados o faltantes, **confirma que el rastreador ha sido importado e inicializado correctamente**. La librería de rastreo que se inicializa en primer lugar es necesaria para que el rastreador corrija correctamente a través de parches todas los bibliotecas requeridas para la instrumentación automática.
 
-Cuando utilices un transpilador como TypeScript, Webpack, Babel u otros, importa e inicializa la biblioteca de rastreo en un archivo externo y luego importa ese archivo como un todo cuando crees tu aplicación.
+Cuando utilices un transpilador como TypeScript, Webpack, Babel u otros, importa e inicializa la librería de rastreo en un archivo externo y luego importa ese archivo como un todo cuando crees tu aplicación.
 
 #### Opción 1: Añadir el rastreador en el código
 
@@ -69,7 +69,7 @@ const tracer = require('dd-trace').init();
 ```
 
 **Nota**: `DD_TRACE_ENABLED` es `true` en forma predeterminada, lo que significa que algo de instrumentación ocurre en el momento de la importación, antes de la inicialización. Para desactivar completamente la instrumentación, puedes realizar una de las siguientes acciones:
-- importar el módulo condicionalmente 
+- importar el módulo condicionalmente
 - configurar `DD_TRACE_ENABLED=false` (si, por ejemplo, las importaciones estáticas o ESM de nivel superior impiden la carga condicional)
 
 ##### TypeScript y bundlers (empaquetadores)
@@ -136,12 +136,12 @@ node --import dd-trace/initialize.mjs app.js
 Los bundlers rastrean todas las llamadas `require()` que una aplicación realiza a los archivos del disco. Sustituye las llamadas `require()` por código personalizado y combina todos los JavaScript resultantes en un archivo "empaquetado". Cuando se carga un módulo incorporado, como `require('fs')`, esa llamada puede seguir siendo la misma en el paquete resultante.
 
 Las herramientas APM como `dd-trace` dejan de funcionar en este punto. Pueden seguir interceptando las llamadas a módulos incorporados, pero no interceptan las llamadas a bibliotecas de terceros. Esto significa que cuando empaquetas una aplicación `dd-trace` utilizando un bundler, es probable que capture información sobre el acceso al disco (a través de `fs`) y las solicitudes HTTP salientes (a través de `http`), pero que omita las llamadas a bibliotecas de terceros. Por ejemplo:
-- Extracción de información entrante de rutas de solicitudes para el marco `express`. 
+- Extracción de información entrante de rutas de solicitudes para el marco `express`.
 - Muestra qué consulta se ejecuta para el cliente de base de datos `mysql`.
 
 Una solución común es tratar como "externos" al bundler todos los módulos de terceros que APM necesita para la instrumentación. Con esta configuración, los módulos instrumentados permanecen en el disco y continúan siendo cargados con `require()`, mientras que los módulos no instrumentados se empaquetan. Sin embargo, esto resulta en una compilación con muchos archivos extraños y comienza a hacer fracasar el propósito de la agrupación.
 
-Datadog recomienda disponer de complementos de bundler personalizados. Estos complementos son capaces de dar instrucciones al bundler sobre cómo comportarse, inyectar código intermediario e interceptar las llamadas "traducidas" a `require()`. Como resultado, se incluyen más paquetes en el archivo empaquetado JavaScript. 
+Datadog recomienda disponer de complementos de bundler personalizados. Estos complementos son capaces de dar instrucciones al bundler sobre cómo comportarse, inyectar código intermediario e interceptar las llamadas "traducidas" a `require()`. Como resultado, se incluyen más paquetes en el archivo empaquetado JavaScript.
 
 **Nota**: Algunas aplicaciones pueden tener el 100 % de los módulos empaquetados, sin embargo los módulos nativos deben permanecer externos al paquete.
 
@@ -225,7 +225,7 @@ const nextConfig = {
 export default nextConfig;
 ```
 
-#### Funciones no compatibles de Datadog 
+#### Funciones no compatibles de Datadog
 
 Las siguientes funciones están desactivadas en forma predeterminada en el rastreador Node.js. No son compatibles con la agrupación y no se pueden utilizar si la aplicación está agrupada.
 
@@ -257,7 +257,7 @@ En esta etapa, debes ser capaz de desplegar tu paquete (que es el código de la 
 
 ## Configuración
 
-Si es necesario, configura la biblioteca de rastreo para que envíe datos de telemetría sobre el rendimiento de la aplicación, según sea necesario, incluida la configuración del etiquetado unificado de servicios. Para ver más detalles, consulta la [configuración de bibliotecas][4].
+Si es necesario, configura la librería de rastreo para que envíe datos de telemetría sobre el rendimiento de la aplicación, según sea necesario, incluida la configuración del etiquetado unificado de servicios. Para ver más detalles, consulta la [configuración de librerías][4].
 
 Para ver lista de opciones de inicialización, lee los [parámetros del rastreador][3].
 

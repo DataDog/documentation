@@ -25,3 +25,9 @@ grant select on v_$rsrcmgrmetric to datadog ;
 grant select on v_$dataguard_config to datadog ;
 grant select on v_$dataguard_stats to datadog ;
 ```
+
+If you are unable to fetch data after granting the above permissions, you may not be using the Oracle default profile, and may need to grant the `execute` privilege on `dbms_lob`. To do so, run the following:
+
+```SQL
+grant execute on sys.dbms_lob to datadog;
+```

@@ -40,7 +40,7 @@ GROUP BY instance_type
 
 ## テレメトリーを探索する
 
-<div class="alert alert-warning">DDSQL での Logs と Metrics のクエリはプレビュー版です。アクセスをリクエストするには <a href="https://www.datadoghq.com/product-preview/logs-metrics-support-in-ddsql-editor/">このフォーム</a> をご利用ください。</div>
+<div class="alert alert-danger">DDSQL での Logs と Metrics のクエリはプレビュー版です。アクセスをリクエストするには <a href="https://www.datadoghq.com/product-preview/logs-metrics-support-in-ddsql-editor/">このフォーム</a> をご利用ください。</div>
 
 Data Explorer でクエリをビュー、フィルター、およびビルドします。
 

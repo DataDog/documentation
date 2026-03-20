@@ -86,7 +86,7 @@ kubectl exec -it <task-runner-pod-name>-- \
 
 그런 다음 계측할 각 프로젝트에 대해 **Settings > Integrations > Datadog**으로 이동하여 [프로젝트][3]에 대한 통합을 설정합니다.
 
-<div class="alert alert-warning"><strong>참고</strong>: 초기 버전의 GitLab <a href="https://gitlab.com/gitlab-org/gitlab/-/issues/335218">버그</a>로 인해, GitLab의 UI에서 옵션을 사용할 수 있더라도 <strong>GitLab versions < 14.1</strong>에서는 <strong>그룹 또는 인스턴스</strong> 레벨에서 Datadog 통합을 활성화할 수 없습니다.</div>
+<div class="alert alert-danger"><strong>참고</strong>: 초기 버전의 GitLab <a href="https://gitlab.com/gitlab-org/gitlab/-/issues/335218">버그</a>로 인해, GitLab의 UI에서 옵션을 사용할 수 있더라도 <strong>GitLab versions < 14.1</strong>에서는 <strong>그룹 또는 인스턴스</strong> 레벨에서 Datadog 통합을 활성화할 수 없습니다.</div>
 
 
 [1]: https://docs.gitlab.com/ee/administration/feature_flags.html

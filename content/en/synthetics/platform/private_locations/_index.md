@@ -93,11 +93,10 @@ This machine's requirements are listed in the table below. PowerShell scripting 
 
 You must install .NET version 4.7.2 or later on your computer before using the MSI installer.
 
-{{< site-region region="gov" >}}
+**Enable FIPS 140-2 cryptographic mode**: </br>
+Enable FIPS-compliant cryptographic modules for secure communications. The Windows host must be running in Windows FIPS mode to use this option. Available in Private Location `v1.63.0` and above.
 
-<div class="alert alert-danger">FIPS compliance is not supported for Windows private locations that report to <code>ddog-gov.com</code>. To disable this behavior, use the <a href="https://docs.datadoghq.com/synthetics/private_locations/configuration/?tab=docker#all-configuration-options"><code>--disableFipsCompliance</code> option</a>.</div>
-
-{{< /site-region >}}
+{{< img src="synthetics/private_locations/synthetics_pl_windows_fips.png" alt="Synthetics Private Location Worker wizard, MSI installer. FIPS 140-2 cryptographic mode setting is displayed." style="width:80%;" >}}
 
 [101]: https://ddsynthetics-windows.s3.amazonaws.com/datadog-synthetics-worker-{{< synthetics-worker-version "synthetics-windows-pl" >}}.amd64.msi
 [102]: https://www.datadoghq.com/legal/eula/
@@ -109,76 +108,15 @@ You must install .NET version 4.7.2 or later on your computer before using the M
 
 To pull test configurations and push test results, the private location worker needs access to the following Datadog API endpoints.
 
-{{< site-region region="us" >}}
-
 | Port | Endpoint                               | Description                                                   |
 | ---- | -------------------------------------- | ------------------------------------------------------------- |
-| 443  | `intake.synthetics.datadoghq.com`      | Used by the private location to pull test configurations and push test results to Datadog using an in-house protocol based on [AWS Signature Version 4 protocol][1]. |
-| 443  | `intake-v2.synthetics.datadoghq.com` for versions >=0.2.0 and <=1.4.0   | Used by the private location to push browser test artifacts such as screenshots, errors, and resources.       |
+| 443  | {{< region-param key=synthetics_intake_endpoint code="true" >}} | Used by the private location to pull test configurations and push test results to Datadog using an in-house protocol based on [AWS Signature Version 4 protocol][1].{{< site-region region="gov" >}} For versions `1.32.0` and later, requests from **Linux containerized Private Locations** are Federal Information Processing Standards (FIPS) compliant. For **Windows Private Locations**, FIPS-compliant encryption is supported in version `1.63.0` and later.{{< /site-region >}} |
 
 [1]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
-
-{{< /site-region >}}
 
 {{< site-region region="eu" >}}
 
-| Port | Endpoint                           | Description                                                    |
-| ---- | ---------------------------------- | -------------------------------------------------------------- |
-| 443  | `intake.synthetics.datadoghq.eu`   | Used by the private location to pull test configurations and push test results to Datadog using an in-house protocol based on [AWS Signature Version 4 protocol][1]. |
-
 **Note**: These domains are pointing to a set of static IP addresses. These addresses can be found at https://ip-ranges.datadoghq.eu.
-
-[1]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
-
-{{< /site-region >}}
-
-{{< site-region region="us3" >}}
-
-| Port | Endpoint                                | Description                                                                        |
-| ---- | --------------------------------------- | ---------------------------------------------------------------------------------- |
-| 443  | `intake.synthetics.us3.datadoghq.com`  | Used by the private location to pull test configurations and push test results to Datadog using an in-house protocol based on [AWS Signature Version 4 protocol][1]. |
-
-[1]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
-
-{{< /site-region >}}
-
-{{< site-region region="ap1" >}}
-
-| Port | Endpoint                                | Description                                                                        |
-| ---- | --------------------------------------- | ---------------------------------------------------------------------------------- |
-| 443  | `intake.synthetics.ap1.datadoghq.com`  | Used by the private location to pull test configurations and push test results to Datadog using an in-house protocol based on [AWS Signature Version 4 protocol][1]. |
-
-[1]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
-
-{{< /site-region >}}
-
-{{< site-region region="ap2" >}}
-
-| Port | Endpoint                                | Description                                                                        |
-| ---- | --------------------------------------- | ---------------------------------------------------------------------------------- |
-| 443  | `intake.synthetics.ap2.datadoghq.com`  | Used by the private location to pull test configurations and push test results to Datadog using an in-house protocol based on [AWS Signature Version 4 protocol][1]. |
-
-[1]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
-
-{{< /site-region >}}
-
-{{< site-region region="us5" >}}
-
-| Port | Endpoint                              | Description                                                    |
-| ---- | ------------------------------------- | -------------------------------------------------------------- |
-| 443  | `intake.synthetics.us5.datadoghq.com` | Used by the private location to pull test configurations and push test results to Datadog using an in-house protocol based on [AWS Signature Version 4 protocol][1]. |
-
-[1]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
-
-{{< /site-region >}}
-
-{{< site-region region="gov" >}}
-
-| Port | Endpoint                         | Description                                                                                                                                                                                                                                                                       |
-|------|----------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 443  | `intake.synthetics.ddog-gov.com` | Used by the private location to pull test configurations and push test results to Datadog using an in-house protocol based on [AWS Signature Version 4 protocol][1]. For versions 1.32.0 and later, these requests are Federal Information Processing Standards (FIPS) compliant. |
-
-[1]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
 
 {{< /site-region >}}
 
@@ -607,7 +545,7 @@ Because Datadog already integrates with Kubernetes and AWS, it is ready-made to 
 
 1. You can apply the following configuration options:
 
-   {{< img src="synthetics/private_locations/settings.png" alt="Synthetics Private Location Worker wizard, MSI installer. Firewall and log settings are displayed." style="width:80%;" >}}
+   {{< img src="synthetics/private_locations/synthetics_pl_windows_fips.png" alt="Synthetics Private Location Worker wizard, MSI installer. FIPS 140-2 cryptographic mode setting is displayed." style="width:80%;" >}}
 
    Apply firewall rules needed by this program to Windows Firewall
    : Allow the installer to apply firewall rules on install and remove them on uninstall.
@@ -624,11 +562,14 @@ Because Datadog already integrates with Kubernetes and AWS, it is ready-made to 
    Logging Verbosity
    : Specifies the verbosity of the console and file logging for the Synthetics Private Location Worker.
 
+   Enable FIPS 140-2 cryptographic mode
+   : Enable FIPS-compliant cryptographic modules for secure communications. The Windows host must be running in Windows FIPS mode to use this option. Available in Private Location v1.63.0 and above.
+
 1. Click **Next** and **Install** to start the installation process.
 
 Once the process is complete, click **Finish** on the installation completion page.
 
-<div class="alert alert-warning">If you entered your JSON configuration, the Windows Service starts running using that configuration. If you did not enter your configuration, run <code>C:\\Program Files\Datadog-Synthetics\Synthetics\synthetics-pl-worker.exe --config=< PathToYourConfiguration ></code> from a command prompt or use the <code>start menu</code> shortcut to start the Synthetics Private Location Worker.</div>
+<div class="alert alert-danger">If you entered your JSON configuration, the Windows Service starts running using that configuration. If you did not enter your configuration, run <code>C:\\Program Files\Datadog-Synthetics\Synthetics\synthetics-pl-worker.exe --config=< PathToYourConfiguration ></code> from a command prompt or use the <code>start menu</code> shortcut to start the Synthetics Private Location Worker.</div>
 
 [101]: https://ddsynthetics-windows.s3.amazonaws.com/datadog-synthetics-worker-{{< synthetics-worker-version "synthetics-windows-pl" >}}.amd64.msi
 [102]: https://app.datadoghq.com/synthetics/settings/private-locations
@@ -663,6 +604,14 @@ Additional parameters can be added:
 | LOGGING_MAXDAYS | Number of days to keep file logs on the system before deleting them. Can be any number when running an unattended installation. | 7 | `--logFileMaxDays` | Integer |
 | CONFIG_FILEPATH | This should be changed to the path to your Synthetics Private Location Worker JSON configuration file. Wrap this path in quotes if your path contains spaces. | <None> | `--config` | String |
 
+To enable FIPS 140-2 cryptographic mode, set the `ENABLE_FIPS=1` environment variable before running the worker executable. The Windows host must be running in Windows FIPS mode to use this option. Available in Private Location v1.63.0 and above.
+
+Example:
+
+```cmd
+set ENABLE_FIPS=1 && .\synthetics-pl-worker.exe --config "<PathToYourConfiguration>"
+```
+
 [101]: https://ddsynthetics-windows.s3.amazonaws.com/datadog-synthetics-worker-{{< synthetics-worker-version "synthetics-windows-pl" >}}.amd64.msi
 
 {{< /tab >}}
@@ -679,7 +628,7 @@ You can upload custom root certificates to your private locations to have your A
 
 When spinning up your private location containers, mount the relevant certificate `.pem` files to `/etc/datadog/certs` in the same way you mount your private location configuration file. These certificates are considered trusted CA and are used at test runtime.
 
-<div class="alert alert-info"><strong>Note</strong>: If you combine all your <code>.pem</code> files into one file, the sequence of the certificates within the file is important. It is required that the intermediate certificate precedes the root certificate to successfully establish a chain of trust.</div>
+<div class="alert alert-info">If you combine all your <code>.pem</code> files into one file, the sequence of the certificates within the file is important. It is required that the intermediate certificate precedes the root certificate to successfully establish a chain of trust.</div>
 
 {{% /tab %}}
 
@@ -691,7 +640,7 @@ To install root certificates for private locations on a Windows service, use the
 2. Navigate to the entry `Computer\HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\synthetics-private-location`.
 3. Create a Registry key named `Environment` with the `Multi-string` value type.
 
-<div class="alert alert-info"><strong>Note</strong>: Your certificate needs to be in the same folder as the your Synthetic Monitoring Service:
+<div class="alert alert-info">Your certificate needs to be in the same folder as the your Synthetic Monitoring Service:
 default: <code>C:\Program Files\Datadog-Synthetics\Synthetics</code>.</div>
 
 4. Set the value `NODE_EXTRA_CA_CERTS=C:\Program Files\Datadog-Synthetics\Synthetics\CACert.pem`
@@ -715,6 +664,14 @@ Example:
 ```text
 set NODE_EXTRA_CA_CERTS=C:\Program Files\Datadog-Synthetics\Synthetics\CACert.pem && .\synthetics-private-location.exe --config "C:\ProgramData\Datadog-Synthetics\Synthetics\worker-config.json"
 ```
+
+To enable FIPS 140-2 cryptographic mode, include `ENABLE_FIPS=1`:
+
+```text
+set ENABLE_FIPS=1 && set NODE_EXTRA_CA_CERTS=C:\Program Files\Datadog-Synthetics\Synthetics\CACert.pem && .\synthetics-private-location.exe --config "C:\ProgramData\Datadog-Synthetics\Synthetics\worker-config.json"
+```
+
+The Windows host must be running in Windows FIPS mode to use this option. Available in Private Location v1.63.0 and above.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -840,7 +797,7 @@ readinessProbe:
 
 #### Additional health check configurations
 
-<div class="alert alert-danger">This method of adding private location health checks is no longer supported. Datadog recommends using liveness and readiness probes.</div>
+<div class="alert alert-warning">This method of adding private location health checks is no longer supported. Datadog recommends using liveness and readiness probes.</div>
 
 The `/tmp/liveness.date` file of private location containers gets updated after every successful poll from Datadog (2s by default). The container is considered unhealthy if no poll has been performed in a while, for example: no fetch in the last minute.
 
@@ -978,7 +935,7 @@ Start testing your first internal endpoint by launching a fast test on one of yo
 
 Create an API, multistep API, or browser test, and select your **Private Locations** of interest.
 
-{{< img src="synthetics/private_locations/assign-test-pl-2.png" alt="Assign Synthetic test to private location" style="width:90%;">}}
+{{< img src="synthetics/private_locations/assign-test-pl_3.png" alt="Assign Synthetic test to private location" style="width:90%;">}}
 
 Use private locations just like your Datadog managed locations: assign [Synthetic tests][29] to private locations, visualize test results, retrieve [Synthetic metrics][11], and more.
 
@@ -1006,7 +963,7 @@ Users with the [Datadog Admin and Datadog Standard roles][20] can view private l
 
 If you are using the [custom role feature][21], add your user to a custom role that includes `synthetics_private_location_read` and `synthetics_private_location_write` permissions.
 
-<div class="alert alert-danger"><strong>Note</strong>: If a test includes restricted private locations, updating the test removes those locations from the test.</div>
+<div class="alert alert-warning">If a test includes restricted private locations, updating the test removes those locations from the test.</div>
 
 ## Restrict access
 
@@ -1021,7 +978,8 @@ Use [granular access control][24] to limit who has access to your test based on 
 6. Select the level of access you want to associate with each of them.
 7. Click **Done**.
 
-<div class="alert alert-info"><strong>Note</strong>: You can view results from a Private Location even without Viewer access to that Private Location.</div>
+<div class="alert alert-info">You can view results from a Private Location even without Viewer access to that Private Location. <br><br>
+Restricting a Private Location may limit other users from adding it to a test or editing it, but they are still able to see the location's name if it was added to a test by an authorized user.</div>
 
 | Access level | View PL instructions | View PL metrics | Use PL in test | Edit PL configuration  |
 | ------------ | ---------------------| --------------- | -------------- | ---------------------- |

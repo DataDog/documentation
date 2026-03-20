@@ -83,7 +83,7 @@ with dsd:
     dsd.gauge('example_metric.gauge_2', 1001, tags=["environment:dev"])
 ```
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   デフォルトでは、Python DogStatsD クライアントインスタンス (<code>statsd</code> グローバルインスタンスを含む) はプロセス間で共有できませんが、スレッドセーフです。このため、親プロセスと各子プロセスは、クライアントの独自のインスタンスを作成するか、<code>disable_buffering</code> を <code>True</code> に設定してバッファリングを明示的に無効にする必要があります。詳細については、<a href="https://datadogpy.readthedocs.io/en/latest/#datadog-dogstatsd">datadog.dogstatsd</a> のドキュメントを参照してください。
 </div>
 
@@ -367,7 +367,7 @@ Agent は、DogStatsD クライアントから送信されたメトリクスの�
 
 最大メモリ使用量を制限するために注意すべきもう 1 つのことは、バッファリングを減らすことです。Agent 内の DogStatsD サーバーのメインバッファは、`dogstatsd_queue_size` フィールドで構成できます (Datadog Agent 6.1.0 以降)。そのデフォルト値の `1024` は、およその最大メモリ使用量である 768MB を引き起こします。
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>注</strong>: バッファサイズを小さくすると、パケットドロップの数が増える可能性があります。
 </div>
 
@@ -383,7 +383,7 @@ dogstatsd_queue_size: 512
 
 DogStatsD には、どのメトリクスが最も多く処理されたかを把握するのに役立つ統計モードが搭載されています。
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>注</strong>: メトリクス統計モードを有効にすると、DogStatsD のパフォーマンスが低下する可能性があります。
 </div>
 

@@ -48,7 +48,7 @@ title: Entity Model
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">El esquema Entity Model v3.0 no está disponible en el sitio seleccionado en este momento.</div>
+<div class="alert alert-danger">El esquema Entity Model v3.0 no está disponible en el sitio seleccionado en este momento.</div>
 
 {{< /site-region >}}
 

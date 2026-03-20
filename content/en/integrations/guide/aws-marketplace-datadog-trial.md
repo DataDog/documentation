@@ -37,7 +37,8 @@ Check out the [AWS Solutions Page][6] to learn more about how to monitor your AW
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://aws.amazon.com/marketplace/pp/prodview-7tlwraipohxq6
+
+[1]: https://aws.amazon.com/marketplace/pp/prodview-7tlwraipohxq6?trk=8d276e92-b310-40ce-908f-23a198ca7ffc&sc_channel=el&source=datadog
 [2]: https://docs.aws.amazon.com/marketplace/latest/buyerguide/buyer-purchase-orders.html?icmpid=docs_console_unmapped
 [3]: https://aws.amazon.com/marketplace/pp/prodview-536p4hpqbajc2
 [4]: https://aws.amazon.com/marketplace/pp/prodview-tl2m77mvj2gmk

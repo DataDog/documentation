@@ -1,10 +1,12 @@
 site_name: "Datadog Infrastructure and Application Monitoring"
 meta_title: Getting Started with Datadog
 meta_description: Datadog, the leading service for cloud-scale monitoring.
-disclaimer: "This page is not yet available in English. We are working on its translation. <br> If you have any questions or feedback about our current translation project, <a href=\"https://docs.datadoghq.com/fr/help/\">feel free to reach out to us!</a>"
+disclaimer: "This page is not yet available in English. We are working on its translation. <br> If you have any questions or feedback about our current translation project, <a href=\"https://docs.datadoghq.com/help/\">feel free to reach out to us!</a>"
 announcement_banner:
-  desktop_message: Datadog named a Leader in the Gartner® Magic Quadrant™ for Observability Platforms
-  mobile_message: Leader in the Gartner® Magic Quadrant™
-  external_link: https://www.datadoghq.com/resources/gartner-magic-quadrant-observability-platforms-2025/?utm_source=inbound&utm_medium=corpsite-display&utm_campaign=dg-apm-ww-announcement-corpsite-announcement-gartnermq2025-obsplat
+  desktop_message: "<span>Join Datadog at DASH—coming to NYC June 9-10. Register now for Super Early Bird savings of $700 until March 31</span>"
+  mobile_message: "<span>Join us at DASH—June 9-10. Save $700 until March 31</span>"
+  background_color: "#000000"
+  custom_classes: 'dash-announcement-banner'
+  external_link: https://dash.datadoghq.com/?utm_source=events&utm_medium=internal&utm_campaign=summit-202606dash&utm_term=HPbanner
 translate_status_banner: "This translation isn't up-to-date. For the latest English version, click here"
 site_support_banner: "This product is not supported for your selected <a href=\"/getting_started/site\">Datadog site</a>."

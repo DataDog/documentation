@@ -1,5 +1,6 @@
 ---
 title: Add a Minimum Request Threshold for Error Rate Alerts
+description: "Learn to set minimum request thresholds for error rate monitors using Boolean functions to reduce false alarms during low-traffic periods."
 disable_toc: false
 further_reading:
 - link: "/metrics/nested_queries"
@@ -28,8 +29,6 @@ $$\text"Error Rate" =  \text"trace.rack.request.errors" / \text"trace.rack.reque
 You want to monitor the error rate, but only if there are at least 15 entries. In the monitor query configuration, take the error rate and set a minimum threshold on query b (`is_greater(b,15)`).
 
 ```((a/b)*100)*is_greater(b,15)```
-
-{{< img src="/monitors/guide/add-a-minimum-request-threshold-for-error-rate-alerts/error_rate_min_threshold.png" alt="Monitor configuration showing error rate calculation with minimum request threshold of 15 requests" style="width:100%;" >}}
 
 The `is_greater` function works as follows:
 - Returns `1` when the number of `trace.rack.requests` exceeds 15

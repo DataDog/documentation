@@ -1,5 +1,6 @@
 ---
 title: Autodiscovery with JMX
+description: Configure JMX-based integrations for containerized Java applications using Autodiscovery templates
 aliases:
   - /agent/guide/autodiscovery-with-jmx
 algolia:
@@ -27,7 +28,7 @@ If you are using the Java tracer for your applications, you can alternatively ta
 ## Installation
 
 ### Use a JMX-enabled Agent
-JMX utilities are not installed in the Agent by default. To set up a JMX integration, append `-jmx` to your Agent's image tag. For example, `gcr.io/datadoghq/agent:latest-jmx`.
+JMX utilities are not installed in the Agent by default. To set up a JMX integration, append `-jmx` to your Agent's image tag. For example, `registry.datadoghq.com/agent:latest-jmx`.
 
 If you are using Datadog Operator or Helm, the following configurations append `-jmx` to your Agent's image tag:
 

@@ -26,7 +26,7 @@ title: Amazon EKS en AWS Fargate
 ---
 ## Información general
 
-<div class="alert alert-warning"> En esta página se describe la integración de EKS Fargate. Para ECS Fargate, consulta la documentación sobre la <a href="http://docs.datadoghq.com/integrations/ecs_fargate">integración de ECS Fargate de Datadog</a>.
+<div class="alert alert-danger"> En esta página se describe la integración de EKS Fargate. Para ECS Fargate, consulta la documentación sobre la <a href="http://docs.datadoghq.com/integrations/ecs_fargate">integración de ECS Fargate de Datadog</a>.
 </div>
 
 Amazon EKS Fargate es un servicio de Kubernetes administrado que automatiza determinados aspectos del despliegue y el mantenimiento de cualquier entorno de Kubernetes estándar. Los nodos de EKS Fargate son administrados por AWS Fargate y los abstrae del usuario.

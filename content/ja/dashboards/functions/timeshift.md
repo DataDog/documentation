@@ -51,7 +51,7 @@ timeshift(avg:system.load.1{*}, -1209600)
 
 ## 1 日前
 
-<div class="alert alert-danger">"The day before" 機能は非推奨です。代わりに "-1d" の calendar shift をご利用ください。</div>
+<div class="alert alert-warning">"The day before" 機能は非推奨です。代わりに "-1d" の calendar shift をご利用ください。</div>
 
 | 関数       | 説明                                                          | 例                        |
 |:---------------|:---------------------------------------------------------------------|:-------------------------------|
@@ -63,7 +63,7 @@ timeshift(avg:system.load.1{*}, -1209600)
 
 ## 1 週前
 
-<div class="alert alert-danger">"The week before" 機能は非推奨です。代わりに "-7d" の calendar shift をご利用ください。</div>
+<div class="alert alert-warning">"The week before" 機能は非推奨です。代わりに "-7d" の calendar shift をご利用ください。</div>
 
 | 関数        | 説明                                                                    | 例                         |
 |:----------------|:-------------------------------------------------------------------------------|:--------------------------------|
@@ -75,7 +75,7 @@ timeshift(avg:system.load.1{*}, -1209600)
 
 ## 1 か月前
 
-<div class="alert alert-danger">"The month before" 機能は非推奨です。ユースケースに応じて "-1mo"、"-30d"、または "-4w" の calendar shift をご利用ください。</div>
+<div class="alert alert-warning">"The month before" 機能は非推奨です。ユースケースに応じて "-1mo"、"-30d"、または "-4w" の calendar shift をご利用ください。</div>
 
 | 関数         | 説明                                                                                | 例                          |
 |:-----------------|:-------------------------------------------------------------------------------------------|:---------------------------------|

@@ -1,5 +1,6 @@
 ---
 title: Deployment Gates
+description: "Reduce deployment incidents by automatically evaluating monitors and APM anomalies to halt releases when performance regressions are detected."
 further_reading:
 - link: "/deployment_gates/setup"
   tag: "Documentation"
@@ -18,7 +19,7 @@ algolia:
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Deployment Gates are not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
+<div class="alert alert-danger">Deployment Gates are not available for the selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 {{< callout url="http://datadoghq.com/product-preview/deployment-gates" >}}

@@ -1,18 +1,22 @@
 ---
+algolia:
+  tags:
+  - windows agent user
+  - windows user
+  - ddagentuser
+  - group policy
 aliases:
 - /fr/agent/faq/windows-agent-ddagent-user/
 title: Utilisateur de l'Agent Datadog pour Windows
 ---
 
-Depuis la version `6.11.0` de l'Agent Windows, les composants de base ainsi que ceux de la solution APM et du système de tracing s'exécutent sous un compte utilisateur dédié au lieu du compte `LOCAL_SYSTEM`. Lorsqu'il est activé, le composant Live Process s'exécute toujours sous le compte `LOCAL_SYSTEM`.
+Par défaut, l'Agent Windows utilise le compte `ddagentuser` créé lors de l'installation. Ce compte est ajouté aux groupes suivants pendant l'installation :
 
-Le programme d'installation de l'Agent crée un nouveau compte par défaut (`ddagentuser`), mais l'utilisateur a également la possibilité d'en spécifier un.
-Le compte rejoint les groupes suivants lors de l'installation :
-
-* Il devient membre du groupe Utilisateurs de l’Analyseur de performances
+* Il devient membre du groupe « Performance Monitor Users »
   * Nécessaire pour accéder aux informations de WMI
   * Nécessaire pour accéder aux données des compteurs de performances Windows
-* Il devient membre du groupe Lecteurs des journaux d’événements
+* Il devient membre du groupe « Event Log Readers »
+* Il devient membre du groupe « Performance Log Users » (à partir de la version 7.51)
 
 **Remarque** : le programme d'installation n'ajoute pas le compte qu'il crée aux groupes `Users` par défaut. Dans de rares cas, il est possible de rencontrer des problèmes d'autorisations. Si vous êtes concerné, ajoutez manuellement l'utilisateur créé au groupe `Users`.
 
@@ -22,11 +26,9 @@ Les stratégies de sécurité suivantes sont également appliquées au compte lo
 * Refuser les connexions via Remote Desktop Services
 * Se connecter en tant que service
 
-**Important** : étant donné que le compte est modifié au cours de l'installation afin de restreindre ses privilèges, notamment ses privilèges de connexion, assurez-vous qu'il ne s'agit pas d'un « vrai » compte utilisateur mais d'un compte uniquement dédié à l'exécution de l'Agent Datadog.
+L'Agent Windows peut également utiliser un compte personnalisé fourni par l'utilisateur. N'utilisez pas un compte utilisateur « réel ». Le compte fourni doit être exclusivement dédié à l'exécution de l'Agent Datadog. Ce compte est modifié pendant l'installation afin de restreindre ses privilèges, y compris les droits de connexion.
 
-**Remarque** : les exemples de commande sur cette page utilisent tous les symboles `<>` pour signaler une variable à remplacer. Par exemple, si le compte utilisateur est `ddagentuser` et que la commande contient `DDAGENTUSER_NAME=<NOM_UTILISATEUR>`, alors `DDAGENTUSER_NAME=ddagentuser` doit être saisi dans la ligne de commande.
-
-**Remarque** : depuis la version `7.38.0/6.38.0`, le programme d'installation prend en charge l'utilisation d'un **compte de service administré de groupe (gMSA)**. Pour spécifier un compte gMSA, ajoutez **$** à la fin du nom d'utilisateur : `<DOMAINE>\<NOM_UTILISATEUR>$`. Le compte gMSA doit exister *avant* l'installation, car le programme ne peut pas en créer un.
+**Remarque** : à partir de la version `7.38.0/6.38.0`, le programme d'installation prend en charge l'utilisation d'un **compte de service géré par groupe (gMSA)**. Pour spécifier un gMSA, ajoutez un **$** à la fin du nom d'utilisateur : `<DOMAIN>\<USERNAME>$`. Le compte de service géré par groupe doit exister *avant* l'installation, car le programme d'installation ne peut pas en créer un. Pour en savoir plus, consultez la présentation [des comptes de service gérés par groupe][11].
 
 ## Installation
 
@@ -34,19 +36,22 @@ Si aucun compte utilisateur n'est spécifié sur la ligne de commande, le progra
 
 Si un compte utilisateur est spécifié sur la ligne de commande mais que ce compte est introuvable dans le système, le programme d'installation tente de le créer. Si un mot de passe a été spécifié, le programme d'installation utilise ce mot de passe ; sinon, il en génère un aléatoirement.
 
-Pour spécifier un NOM_UTILISATEUR et un MOT_DE_PASSE (facultatif), passez les propriétés suivantes à la commande `msiexec` (supprimez les symboles `<>` qui entourent les paramètres fictifs) :
+Pour spécifier un NOM_UTILISATEUR et un MOT_DE_PASSE facultatifs en ligne de commande, passez les propriétés suivantes à la commande `msiexec` (les symboles `<>` indiquent qu'une variable doit être remplacée) :
 
-```shell
-msiexec /i ddagent.msi DDAGENTUSER_NAME=<NOM_UTILISATEUR> DDAGENTUSER_PASSWORD=<MOT_DE_PASSE>
-```
+{{< code-block lang="powershell" >}}
+$p = Start-Process -Wait -PassThru msiexec -ArgumentList '/qn /i https://windows-agent.datadoghq.com/datadog-agent-7-latest.amd64.msi /log C:\Windows\SystemTemp\install-datadog.log APIKEY="<DATADOG_API_KEY>" DDAGENTUSER_NAME="<USERNAME>" DDAGENTUSER_PASSWORD="<PASSWORD>"'
+if ($p.ExitCode -ne 0) {
+  Write-Host "msiexec failed with exit code $($p.ExitCode) please check the logs at C:\Windows\SystemTemp\install-datadog.log" -ForegroundColor Red
+}
+{{< /code-block >}}
 
-**Remarque** : le `<NOM_UTILISATEUR>` ne doit pas comporter plus de 20 caractères afin de respecter les exigences de l'[attribut SAM-Account-Name du schéma Active Directory][1].
+Exigences :
+* Le nom d'utilisateur doit comporter 20 caractères ou moins afin de respecter l'attribut SAM-Account-Name du [schéma Active Directory (AD Schema)][1] de Microsoft.
+* En raison d'une limitation liée au programme d'installation MSI, la propriété `DDAGENTUSER_PASSWORD` ne peut pas contenir le caractère point-virgule `;`.
 
-**Remarque** : en raison d'une limitation liée au programme d'installation MSI, la propriété `DDAGENTUSER_PASSWORD` ne peut pas contenir de point-virgule `;`.
+**Remarque** : si vous rencontrez des problèmes d'autorisations avec les checks `system` et `winproc` lors de l'installation, assurez-vous que le compte `ddagentuser` fait partie des groupes Performance Monitor Users et Event Log Readers.
 
-**Remarque** : si vous rencontrez des problèmes d'autorisations avec les checks `system` et `winproc` lors de l'installation, assurez-vous que le compte `ddagentuser` fait partie des groupes Utilisateurs de l'Analyseur de performances et Lecteurs des journaux d’événements.
-
-**Remarque** : il n'est pas possible de spécifier l'utilisateur dans l'interface du programme d'installation. Utilisez la ligne de commande pour passer le `DDAGENTUSER_NAME` et d'autres paramètres. Ils seront ainsi pris en compte, même en cas d'installation via l'interface utilisateur.
+**Remarque** : pour la version `7.40.0` ou antérieure de l'Agent, il n'est pas possible de spécifier l'utilisateur dans l'interface du programme d'installation. Utilisez la ligne de commande pour passer le `DDAGENTUSER_NAME` et d'autres paramètres. Ils seront ainsi pris en compte, même en cas d'installation via l'interface utilisateur.
 
 ### Installation avec une stratégie de groupe
 
@@ -65,9 +70,12 @@ Si un compte utilisateur est spécifié sur la ligne de commande mais que ce com
 
 Pour spécifier un nom d'utilisateur depuis un compte de domaine, utilisez le format suivant pour la propriété `DDAGENTUSER_NAME` :
 
-```shell
-msiexec /i ddagent.msi DDAGENTUSER_NAME=<DOMAINE>\<NOM_UTILISATEUR> DDAGENTUSER_PASSWORD=<MOT_DE_PASSE>
-```
+{{< code-block lang="powershell" >}}
+$p = Start-Process -Wait -PassThru msiexec -ArgumentList '/qn /i https://windows-agent.datadoghq.com/datadog-agent-7-latest.amd64.msi /log C:\Windows\SystemTemp\install-datadog.log APIKEY="<DATADOG_API_KEY>" DDAGENTUSER_NAME="<DOMAIN>\<USERNAME>" DDAGENTUSER_PASSWORD="<PASSWORD>"'
+if ($p.ExitCode -ne 0) {
+  Write-Host "msiexec failed with exit code $($p.ExitCode) please check the logs at C:\Windows\SystemTemp\install-datadog.log" -ForegroundColor Red
+}
+{{< /code-block >}}
 
 Le `<DOMAINE>` peut être un nom de domaine complet (au format `mondomaine.com`) ou le nom NETBIOS (pré-Windows 2000).
 Il doit être séparé du `<NOM_UTILISATEUR>` à l'aide d'une barre oblique inversée `\`.
@@ -84,8 +92,7 @@ Lors de l'installation de l'Agent sur un contrôleur de domaine, il n'y a pas de
 
 Si un compte utilisateur est spécifié sur la ligne de commande mais que ce compte est introuvable dans le système, le programme d'installation tente de le créer. Un mot de passe doit être spécifié pour que l'installation se déroule correctement.
 
-Si le compte utilisateur spécifié est issu d'un domaine parent, le programme d'installation utilise ce compte utilisateur.
-Si le compte utilisateur n'existe pas, il le crée dans le domaine enfant (le domaine auquel le contrôleur est joint). Le programme d'installation ne crée jamais de compte utilisateur dans le domaine parent.
+Si le compte utilisateur spécifié est issu d'un domaine parent, le programme d'installation utilise ce compte. Assurez-vous qu'un compte utilisateur existe déjà dans le domaine parent avant l'installation, car le programme d'installation ne crée jamais de compte utilisateur dans un domaine parent.
 
 ##### Contrôleurs de domaine en lecture seule
 
@@ -150,7 +157,7 @@ Pour que l'intégration Cassandra Nodetool continue de fonctionner, appliquez le
 
 ## Canal des logs de sécurité
 
-Si vous utilisez l'[intégration Datadog/Journal d'événements Win32][10], l'utilisateur Datadog `ddagentuser` doit être ajouté au groupe Lecteurs des journaux d’événements pour recueillir les logs depuis le canal des logs de sécurité :
+Si vous utilisez l'[intégration Datadog/Journal d'événements Win32][10], l'utilisateur Datadog `ddagentuser` doit être ajouté au groupe Event Log Readers pour recueillir les logs depuis le canal des logs de sécurité :
 
 1. Ouvrez l'exécuteur de commandes avec le raccourci *Windows+R*, puis saisissez `compmgmt.msc`.
 2. Accédez à *Outils système* -> *Utilisateurs et groupes locaux* -> *Groupes*.
@@ -168,3 +175,4 @@ Si vous utilisez l'[intégration Datadog/Journal d'événements Win32][10], l'ut
 [8]: /fr/integrations/tomcat/
 [9]: /fr/integrations/kafka/
 [10]: /fr/integrations/win32_event_log/
+[11]: https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage/group-managed-service-accounts/group-managed-service-accounts/getting-started-with-group-managed-service-accounts

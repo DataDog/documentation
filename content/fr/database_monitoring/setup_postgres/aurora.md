@@ -203,7 +203,7 @@ Pour configurer la collecte de métriques Database Monitoring pour un Agent s'e
        # dbname: '<NOM_BASE_DE_DONNÉES>'
    ```
 
-<div class="alert alert-warning"><strong>Important</strong> : utilisez l'endpoint de l'instance Aurora ici, mais pas l'endpoint du cluster.</div>
+<div class="alert alert-danger"><strong>Important</strong> : utilisez l'endpoint de l'instance Aurora ici, mais pas l'endpoint du cluster.</div>
 
 
 2. [Redémarrez l'Agent][2].
@@ -259,7 +259,7 @@ LABEL "com.datadoghq.ad.init_configs"='[{}]'
 LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<ENDPOINT_INSTANCE_AWS>", "port": 5432,"username": "datadog","password": "<MOT_DE_PASSE_UNIQUE>"}]'
 ```
 
-<div class="alert alert-warning"><strong>Important</strong> : utilisez l'endpoint de l'instance Aurora en tant que host, mais pas l'endpoint du cluster.</div>
+<div class="alert alert-danger"><strong>Important</strong> : utilisez l'endpoint de l'instance Aurora en tant que host, mais pas l'endpoint du cluster.</div>
 
 Pour Postgres 9.6, ajoutez les paramètres suivants à la configuration de l'instance spécifiant le host et le port :
 
@@ -360,7 +360,7 @@ spec:
     targetPort: 5432
     name: postgres
 ```
-<div class="alert alert-warning"><strong>Important</strong> : utilisez l'endpoint de l'instance Aurora ici, mais pas l'endpoint du cluster Aurora.</div>
+<div class="alert alert-danger"><strong>Important</strong> : utilisez l'endpoint de l'instance Aurora ici, mais pas l'endpoint du cluster Aurora.</div>
 
 Pour Postgres 9.6, ajoutez les paramètres suivants à la configuration de l'instance spécifiant le host et le port :
 

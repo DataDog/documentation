@@ -6,7 +6,7 @@ title: Puertos del Agent 5
 
 Esta página aborda los puertos utilizados por el Agent 5. Para obtener información sobre la última versión del Agent, consulta [Tráfico de red][1].
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Todo el tráfico saliente se envía a través de SSL por TCP o UDP.
 <br><br>
 Utiliza una regla de cortafuegos, o una restricción de red similar, para asegurarte de que el Agent solo es accesible para tus aplicaciones o fuentes de red de confianza. Si se accede a él desde una fuente no fiable, los agentes maliciosos pueden realizar diversas acciones invasivas, entre las que se incluyen escribir trazas y métricas en tu cuenta de Datadog u obtener información sobre tu configuración y servicios.

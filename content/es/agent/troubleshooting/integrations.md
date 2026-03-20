@@ -1,6 +1,8 @@
 ---
 aliases:
 - /es/integrations/faq/issues-getting-integrations-working
+description: Soluciona problemas de configuración de la integración Datadog y resuelve
+  problemas relacionados con archivos YAML, checks de estado y métricas faltantes.
 further_reading:
 - link: /agent/troubleshooting/debug_mode/
   tag: Documentación

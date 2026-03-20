@@ -5,13 +5,14 @@ aliases:
 - /continuous_integration/static_analysis
 - /static_analysis
 - /security/code_security/static_analysis/circleci_orbs/
+- /code_analysis/static_analysis/setup/
 is_beta: false
 algolia:
   tags: ['static analysis', 'static analysis rules', 'static application security testing', 'SAST']
 ---
 
 {{% site-region region="gov" %}}
-<div class="alert alert-danger">
+<div class="alert alert-warning">
     Code Security is not available for the {{< region-param key="dd_site_name" >}} site.
 </div>
 {{% /site-region %}}
@@ -20,10 +21,14 @@ algolia:
 To set up Datadog SAST in-app, navigate to [**Security** > **Code Security**][1].
 
 ## Select where to run Static Code Analysis scans
-
 ### Scan with Datadog-hosted scanning
 
-For GitHub repositories, you can run Datadog Static Code Analysis scans directly on Datadog's infrastructure. To get started, navigate to the [**Code Security** page][1].
+You can run Datadog Static Code Analysis (SAST) scans directly on Datadog infrastructure. Supported repository types include:
+- [GitHub][18] (excluding repositories that use [Git Large File Storage][17])
+- [GitLab.com and GitLab Self-Managed][20]
+- [Azure DevOps][19]
+
+To get started, navigate to the [**Code Security** page][1].
 
 ### Scan in CI pipelines
 Datadog Static Code Analysis runs in your CI pipelines using the [`datadog-ci` CLI][8].
@@ -43,7 +48,7 @@ Datadog Static Code Analysis supports all source code management providers, with
 {{< tabs >}}
 {{% tab "GitHub" %}}
 
-If GitHub is your source code management provider, you must configure a GitHub App using the [GitHub integration tile][1] and set up the [source code integration][2] to see inline code snippets and enable [pull request comments][3].
+Configure a GitHub App with the [GitHub integration tile][1] and set up the [source code integration][2] to enable inline code snippets and [pull request comments][3].
 
 When installing a GitHub App, the following permissions are required to enable certain features:
 
@@ -59,68 +64,21 @@ When installing a GitHub App, the following permissions are required to enable c
 {{% /tab %}}
 {{% tab "GitLab" %}}
 
-<div class="alert alert-warning">
-Repositories from GitLab instances are supported in closed Preview. <a href="https://www.datadoghq.com/product-preview/gitlab-source-code-integration/">Join the Preview</a>.
-</div>
+See the [GitLab source code setup instructions][1] to connect GitLab repositories to Datadog. Both GitLab.com and Self-Managed instances are supported.
 
-If GitLab is your source code management provider, before you can begin installation, you must request access to the closed Preview using the form above. After being granted access, follow [these instructions][1] to complete the setup process.
-
-[1]: https://github.com/DataDog/gitlab-integration-setup
+[1]: /integrations/gitlab-source-code/#setup 
 
 {{% /tab %}}
 {{% tab "Azure DevOps" %}}
 
-<div class="alert alert-warning">
-Repositories from Azure DevOps are supported in closed Preview. Your Azure DevOps organizations must be connected to a Microsoft Entra tenant. <a href="https://www.datadoghq.com/product-preview/azure-devops-integration-code-security/">Join the Preview</a>.
-</div>
+**Note:** Your Azure DevOps integrations must be connected to a Microsoft Entra tenant. Azure DevOps Server is **not** supported.
 
-If Azure DevOps is your source code management provider, before you can begin installation, you must request access to the closed preview using the form above. After being granted access, follow the instructions below to complete the setup process.
-
-**Note:** Azure DevOps Server is not supported.
-
-### Create and register a Microsoft Entra app
-If you are an admin in your Azure portal, you can configure Entra apps to connect your tenant to Datadog.
-
-1. Go to [Code Security setup][1].
-2. In **Activate scanning for your repositories**, click **Manage Repositories**.
-3. Select **CI Pipelines**.
-4. Select the scan types you want to use.
-5. Select **Azure DevOps** as your source code management provider.
-6. If this is your first time connecting an Azure DevOps organization to Datadog, click **Connect Azure DevOps Account**.
-7. When connecting a Microsoft Entra tenant for the first time you will need to go to your [Azure Portal][2] to register a new application. During this creation process, ensure the following:
-   1. You select **Accounts in this organizational directory only (Datadog, Inc. only - Single tenant)** as the account type.
-   2. Set the redirect URI to **Web** and paste the URI given to you in the instructions.
-8. Copy the values for **Application (client) ID** and **Directory (tenant) ID** and paste them into Datadog.
-9. In the Azure Portal for your app registration, navigate to **Manage > Certificates & secrets** and switch to **Client secrets**.
-10. Click **New client secret** and create a secret with the description and expiration values you want to use.
-11. Copy and paste the string in the **Value** column for your new secret.
-12. Paste the secret into Datadog and click **Create Configuration** to complete the connection between your Entra tenant and Datadog.
-13. Add one or more Azure DevOps organizations by pasting the organization slug into Datadog and then adding your Service Principal as a user by going to **Organization settings > Users > Add users**.
-    1.  Your Service Principal will need the **Basic** access level and at least the **Project Contributor** security group.
-14. Click **Submit Organization**.
-
-### Configure project service hooks
-
-To enable all Code Security features in Azure DevOps, you'll need to use a [Datadog API key][3] to configure service hooks for your projects.
-
-First, set your environment variables (note: the Datadog UI will fill these values out for you):
-```shell
-export AZURE_DEVOPS_TOKEN="..."                 # Client Secret Value
-export DD_API_KEY="..."                         # Datadog API Key
-```
-
-Then, replace the placeholders in the script below with your [Datadog Site][5] and Azure DevOps organization name to configure the necessary service hooks on your organization's projects:
-```shell
-curl https://raw.githubusercontent.com/DataDog/azdevops-sci-hooks/refs/heads/main/setup-hooks.py > setup-hooks.py && chmod a+x ./setup-hooks.py
-./setup-hooks.py --dd-site="<dd-site>" --az-devops-org="<org-name>"
-```
-
-Click [here][4] to see our CLI that automates this process.
+See the [Azure source code setup instructions][4] to connect Azure DevOps repositories to Datadog.
 
 [1]: https://app.datadoghq.com/security/configuration/code-security/setup
 [2]: https://portal.azure.com/#view/Microsoft_AAD_RegisteredApps/ApplicationsListBlade
 [3]: https://app.datadoghq.com/organization-settings/api-keys
-[4]: https://github.com/DataDog/azdevops-sci-hooks
+[4]: /integrations/azure-devops-source-code/#setup
 [5]: /getting_started/site/
 
 {{% /tab %}}
@@ -134,316 +92,357 @@ You **must** run an analysis of your repository on the default branch before res
 
 ## Customize your configuration
 
-By default, Datadog Static Code Analysis scans your repositories with [Datadog's default rulesets][6] for your programming language(s). You can customize which rulesets or rules to run or ignore, in addition to other parameters. You can customize these settings locally in your repository or within the Datadog App.
+By default, Datadog Static Code Analysis (SAST) scans your repositories with [Datadog's default rulesets][6] for your programming language(s). You can customize which rulesets or rules to run or ignore, in addition to other parameters. You can customize these settings locally in your repository or within the Datadog App.
 
 ### Configuration locations
 
-Datadog Static Code Analysis can be configured within Datadog and/or by using a file within your repository's **root directory**.
+Datadog Static Code Analysis (SAST) can be configured within Datadog and/or by using a file within your repository's **root directory**.
 
 There are three levels of configuration:
 
-* Org Level Configuration (Datadog)
-* Repo Level Configuration (Datadog)
-* Repo Level Configuration (Repo File)
+* Org-level configuration (Datadog)
+* Repository-level configuration (Datadog)
+* Repository-level configuration (repo file)
 
-<div class="alert alert-warning">
-By default, when no configuration is defined at the org or repo level, Datadog uses a default configuration with all default rules enabled. If you define an org-level configuration without default rules, default rules are not used. If want to use default rules in this scenario, you must enable them.
-</div>
+All three configurations use the same YAML format, and they are merged **in order** (see [Configuration precedence and merging](#configuration-precedence-and-merging)).
 
-All three locations use the same YAML format for configuration. These configurations are merged **in order** using an overlay/patch merge method. For example, lets look at these two sample YAML files:
+#### Org-level configuration
+
+{{< img src="/security/code_security/org-level-configuration.png" alt="Org-level configuration UI" style="width:100%;" >}}
+
+Use org-level configuration to define rules that apply to all repositories and specify global paths or files to ignore.
+
+#### Repository-level configuration
+
+{{< img src="/security/code_security/repo-level-configuration.png" alt="Repo-level configuration UI" style="width:100%;" >}}
+
+Configurations at the repository level apply only to the repository selected. These configurations are merged with the org configuration, with the repository configuration taking precedence. Use repository-level configuration to define overrides for repository-specific details or add rules specific to that repository.
+
+#### Repository-level configuration (file)
+
+You can also define configuration in a `code-security.datadog.yaml` file at the root of your repo. This file takes precedence over the repository-level configuration defined in Datadog. Use this file to customize rule configurations and iterate on setup and testing.
+
+#### Default rulesets
+
+By default, Datadog enables the default rulesets for your repository’s programming languages (`use-default-rulesets: true`). To modify the enabled rulesets:
+
+- **Add rulesets**: List them under `use-rulesets`
+- **Disable specific rulesets**: List them under `ignore-rulesets`
+- **Disable all default rulesets**: Set `use-default-rulesets: false`, then list the desired rulesets under `use-rulesets`
+
+For the full list of default rulesets, see [Static Code Analysis (SAST) Rules][6].
+
+#### Configuration precedence and merging
+
+Configurations are merged in the following order, where each level overrides the one before it:
+
+1. **Org-level (Datadog)**
+1. **Repo-level (Datadog)**
+1. **Repo-level file** (`code-security.datadog.yaml`)
+
+The following merge rules apply:
+
+- **Lists** (`use-rulesets`, `ignore-rulesets`, `ignore-paths`, `only-paths`): Concatenated, with duplicates removed
+- **Scalar values** (`use-default-rulesets`, `use-gitignore`, `ignore-generated-files`, `max-file-size-kb`, `category`, and per-path entries for `severity` and `arguments`): The value from the highest-precedence configuration is used
+- **Maps** (`ruleset-configs`, `rule-configs`, `arguments`): Recursively merged
+
+The following example shows how configurations are merged:
+
+**Org-level:**
 
 ```yaml
-rulesets:
- - A
-   rules:
-      foo:
-        ignore: ["**"]
-        args: ["my_arg1", "my_arg2"]
-```
-
-```yaml
-rulesets:
- - A
-    rules:
+schema-version: v1.0
+sast:
+  use-default-rulesets: false
+  use-rulesets:
+    - A
+  ruleset-configs:
+    A:
+      rule-configs:
         foo:
-            ignore: ["my_ignored_file.file"]
-        bar:
-            only: ["the_only_file.file"]
- - B
-
+          ignore-paths:
+            - "path/to/ignore"
+          arguments:
+            maxCount: 10
 ```
 
-If these YAML files were merged in order, first file with the second, the merge of these YAML files with a overlay/patch method would be the following:
+**Repo-level:**
 
 ```yaml
-rulesets:
- - A
-    rules:
+schema-version: v1.0
+sast:
+  use-rulesets:
+    - B
+  ignore-rulesets:
+    - C
+  ruleset-configs:
+    A:
+      rule-configs:
         foo:
-            ignore: ["my_ignored_file.file"]
-            args: ["my_arg1", "my_arg2"]
+          arguments:
+            maxCount: 22
         bar:
-            only: ["the_only_file.file"]
- - B
-
-
+          only-paths:
+            - "src"
 ```
 
-As you can see, the `ignore: ["**"]` from the first file was overlayed with the `ignore: ["my_ignored_file.file"]`. This happened because there was a conflict and the second file's value took precedence due to merge order. The `args` field from the first file is retained because there is no conflicting value in the second file.
+**Merged result:**
 
-#### Org level configuration
+```yaml
+schema-version: v1.0
+sast:
+  use-default-rulesets: false
+  use-rulesets:
+    - A
+    - B
+  ignore-rulesets:
+    - C  
+  ruleset-configs:
+    A:
+      rule-configs:
+        foo:
+          ignore-paths:
+            - "path/to/ignore"
+          arguments:
+            maxCount: 22
+        bar:
+          only-paths:
+            - "src"
+```
 
-{{< img src="/security/code_security/org-wide-configuration2.png" alt="Rule created" style="width:100%;" >}}
-
-Configurations at the org level apply to all repositories that are being analyzed and is a good place to define rules that must run or global paths/files to be ignored.
-
-#### Repository level configuration
-
-{{< img src="/security/code_security/org-wide-configuration2.png" alt="Rule created" style="width:100%;" >}}
-
-Configurations at the repository level apply only to the repository selected. These configurations are merged with the org configuration, with the repository configuration taking precedence. Repository level configurations are a good place to define overrides for repository specific details, or add rules that are specific to only that repo for example.
-
-#### Repository level configuration (file)
-
-In addition to the configurations provided for the Org and Repository level, you can also define a configuration at the root of your repo in the form of ``static-analysis.datadog.yml``. This file takes precedence over the Repository level configuration defined in Datadog. Repository level file configurations are a useful method to change rule configs and iterate on setup and testing.
+The `maxCount: 22` value from the repo-level configuration overrides the `maxCount: 10` value from the org-level configuration because repo-level settings have higher precedence. All other fields from the org-level configuration are retained because they are not overridden.
 
 ### Configuration format
 
-The following configuration format applies to all configuration locations: Org level, Repository level, and Repository level (file).
+The following configuration format applies to all configuration locations: org-level, repository-level, and repository-level (file).
 
-The full structure of a configuration is as follows:
+The configuration file must begin with `schema-version: v1.0`, followed by a `sast` key containing the analysis configuration. The full structure is as follows:
 
 ```yaml
-rulesets:
-  - ruleset-name # A ruleset we want to run with default configurations
-  - ruleset-name:
-    # Only apply this ruleset to the following paths/files
-    only:
+schema-version: v1.0
+sast:
+  use-default-rulesets: true
+  use-rulesets:
+    - ruleset-name
+  ignore-rulesets:
+    # Always ignore these rulesets (even if it is a default ruleset or listed in `use-rulesets`)
+    - ignored-ruleset-name
+  ruleset-configs:
+    ruleset-name:
+      # Only apply this ruleset to the following paths/files
+      only-paths:
+        - "path/example"
+        - "**/*.file"
+      # Do not apply this ruleset in the following paths/files
+      ignore-paths:
+        - "path/example/directory"
+        - "**/config.file"
+      rule-configs:
+        rule-name:
+          # Only apply this rule to the following paths/files
+          only-paths:
+            - "path/example"
+            - "**/*.file"
+          # Do not apply this rule to the following paths/files
+          ignore-paths:
+            - "path/example/directory"
+            - "**/config.file"
+          arguments:
+            # Set the rule's argument to value.
+            argument-name: value
+          severity: ERROR
+          category: CODE_STYLE
+        rule-name:
+          arguments:
+            # Set different argument values in different subtrees
+            argument-name:
+              # Set the rule's argument to value_1 by default (root path of the repo)
+              /: value_1
+              # Set the rule's argument to value_2 for specific paths
+              path/example: value_2
+  global-config:
+    # Only analyze the following paths/files
+    only-paths:
       - "path/example"
       - "**/*.file"
-    # Do not apply this ruleset in the following paths/files
-    ignore:
-      - "path/example"
-      - "**/*.file"
-  - ruleset-name:
-    rules:
-      rule-name:
-        # Only apply this rule to the following paths/files
-        only:
-          - "path/example"
-          - "**/*.file"
-        # Do not apply this rule to the following paths/files
-        ignore:
-          - "path/example"
-          - "**/*.file"
-        arguments:
-          # Set the rule's argument to value.
-          argument-name: value
-      rule-name:
-        arguments:
-          # Set different argument values in different subtrees
-          argument-name:
-            # Set the rule's argument to value_1 by default (root path of the repo)
-            /: value_1
-            # Set the rule's argument to value_2 for specific paths
-            path/example: value_2
-# Only analyze any ruleset in the following paths/files
-only:
-  - "path/example"
-  - "**/*.file"
-# Do not analyze any ruleset in the following paths/files
-ignore:
-  - "path/example"
-  - "**/*.file"
+    # Do not analyze the following paths/files
+    ignore-paths:
+      - "path/example/directory"
+      - "**/config.file"
+    use-gitignore: true
+    ignore-generated-files: true
+    max-file-size-kb: 200
 ```
 
+The `sast` key supports the following fields:
 
-
-
-The YAML configuration file supports the following top-level keys:
-
-| **Property** | **Type** | **Description**                                                                                                              | **Default** |
-| ------------------ | -------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ----------------- |
-| `rulesets`       | Array          | A list of rulesets to analyze. Each element can be either a ruleset name (string) or an object with detailed configuration. | *Required*      |
-| `only`           | Array          | A list of file paths or glob patterns. If provided, only matching files are analyzed across all rulesets.                      | None              |
-| `ignore`         | Array          | A list of file paths or glob patterns to exclude from analysis across all rulesets.                                                | None              |
-
-*Note:* The `only` and `ignore` keys here act as file filters that apply to the entire configuration file.
-
----
+| **Property** | **Type** | **Description** | **Default** |
+| --- | --- | --- | --- |
+| `use-default-rulesets` | Boolean | Whether to enable Datadog default rulesets. | `true` |
+| `use-rulesets` | Array | A list of ruleset names to enable. | None |
+| `ignore-rulesets` | Array | A list of ruleset names to disable. Takes precedence over `use-rulesets` and `use-default-rulesets`. | None |
+| `ruleset-configs` | Object | A map from ruleset name to its configuration. | None |
+| `global-config` | Object | Global settings for the repository. | None |
 
 ## Ruleset configuration
 
-Each entry in the `rulesets` array can be defined in one of two ways:
+Each entry in the `ruleset-configs` map configures a specific ruleset. A ruleset does not need to be listed in `use-rulesets` for its configuration to apply; the configuration is used whenever the ruleset is enabled, including through `use-default-rulesets`.
 
-1. **Simple Ruleset Declaration:** A plain string (for example, `ruleset-name`) indicates that the ruleset should run with its default settings.
-2. **Detailed Ruleset Object:** An object where the key is the ruleset name and the value is an object containing additional configuration. The available properties for a detailed ruleset are:
-
-| **Property** | **Type** | **Description**                                                                               | **Default** |
-| ------------------ | -------------- | --------------------------------------------------------------------------------------------------- | ----------------- |
-| `only`           | Array          | File paths or glob patterns. Only files matching these patterns will be processed for this ruleset. | None              |
-| `ignore`         | Array          | File paths or glob patterns to exclude from analysis for this ruleset.                              | None              |
-| `rules`          | Object         | A mapping of individual rule names to their configuration objects.                                  | None              |
-
----
+| **Property** | **Type** | **Description** | **Default** |
+| --- | --- | --- | --- |
+| `only-paths` | Array | File paths or glob patterns. Only files matching these patterns are processed for this ruleset. | None |
+| `ignore-paths` | Array | File paths or glob patterns to exclude from analysis for this ruleset. | None |
+| `rule-configs` | Object | A map from rule name to its configuration. | None |
 
 ## Rule configuration
 
-Within a ruleset's `rules` property, each rule is defined by its name and configuration. The properties available for each rule are:
+Each entry in a ruleset's `rule-configs` map configures a specific rule:
 
-| **Property** | **Type** | **Description**                                                                              | **Default** |
-| ------------------ | -------------- | -------------------------------------------------------------------------------------------------- | ----------------- |
-| `only`           | Array          | File paths or glob patterns. The rule will only be applied to files matching these patterns.       | None              |
-| `ignore`         | Array          | File paths or glob patterns to exclude from the rule's application.                               | None              |
-| `arguments`      | Object         | Parameters and values for the rule. Values can be scalars or specified on a per-path basis. | None              |
+| **Property** | **Type** | **Description** | **Default** |
+| --- | --- | --- | --- |
+| `only-paths` | Array | File paths or glob patterns. The rule is applied only to files matching these patterns. | None |
+| `ignore-paths` | Array | File paths or glob patterns to exclude. The rule is not applied to files matching these patterns. | None |
+| `arguments` | Object | Parameters and values for the rule. Values can be scalars or defined per path. | None |
+| `severity` | String or Object | The rule severity. Valid values: `ERROR`, `WARNING`, `NOTICE`, `NONE`. Can be a single value or defined per path. | None |
+| `category` | String | The rule category. Valid values: `BEST_PRACTICES`, `CODE_STYLE`, `ERROR_PRONE`, `PERFORMANCE`, `SECURITY`. | None |
 
----
+## Argument and severity configuration
 
-## Argument configuration
+Arguments and severity can be defined in one of two formats:
 
-Rule arguments can be defined in one of two formats:
-
-1. **Static Value:** Directly assign a value to an argument.
+1. **Single value:** Applies to the whole repository.
 
    ```yaml
    arguments:
      argument-name: value
+   severity: ERROR
    ```
-2. **Path-Specific Mapping:**
-   Define different values based on file paths. Use the special key `/` to denote the default value (applicable at the repository root).
+
+2. **Per-path mapping:** Different values for different subtrees. The longest matching path prefix applies. Use `/` as a catch-all default.
 
    ```yaml
    arguments:
      argument-name:
        /: value_default
        path/example: value_specific
+   severity:
+     /: WARNING
+     path/example: ERROR
    ```
 
-| **Key**     | **Type** | **Description**                                                     | **Default** |
-| ----------------- | -------------- | ------------------------------------------------------------------------- | ----------------- |
-| `/`             | Any            | The default argument value when no specific path is matched.              | None              |
-| `specific path` | Any            | The argument value for files matching the specified path or glob pattern. | None              |
+   | **Key** | **Type** | **Description** | **Default** |
+   | --- | --- | --- | --- |
+   | `/` | Any | The default value when no specific path is matched. | None |
+   | `specific path` | Any | The value for files matching the specified path or glob pattern. | None |
 
----
+The `category` field takes a single string value for the whole repository.
 
+## Global configuration
 
+The `global-config` object controls repository-wide settings:
+
+| **Property** | **Type** | **Description** | **Default** |
+| --- | --- | --- | --- |
+| `only-paths` | Array | File paths or glob patterns. Only matching files are analyzed. | None |
+| `ignore-paths` | Array | File paths or glob patterns to exclude. Matching files are not analyzed. | None |
+| `use-gitignore` | Boolean | Whether to include entries from the `.gitignore` file in `ignore-paths`. | `true` |
+| `ignore-generated-files` | Boolean | Whether to include common generated file patterns in `ignore-paths`. | `true` |
+| `max-file-size-kb` | Number | Maximum file size (in kB) to analyze. Larger files are ignored. | `200` |
 
 Example configuration:
 
 ```yaml
-rulesets:
-  - python-best-practices
-  - python-security
-  - python-code-style:
-    rules:
-      max-function-lines:
-        # Do not apply the rule max-function-lines to the following files
-        ignore:
-          - "src/main/util/process.py"
-          - "src/main/util/datetime.py"
-        arguments:
-          # Set the max-function-lines rule's threshold to 150 lines
-          max-lines: 150
-        # Override this rule's severity
-        severity: NOTICE
-      max-class-lines:
-        arguments:
-          # Set different thresholds for the max-class-lines rule in different subtrees
-          max-lines:
-            # Set the rule's threshold to 200 lines by default (root path of the repo)
-            /: 200
-            # Set the rule's threshold to 100 lines in src/main/backend
-            src/main/backend: 100
-        # Override this rule's severity with different values in different subtrees
-        severity:
-          # Set the rule's severity to INFO by default
-          /: INFO
-          # Set the rule's severity to NONE in tests/
-          tests: NONE
-  - python-inclusive
-  - python-django:
-    # Only apply the python-django ruleset to the following paths
-    only:
-      - "src/main/backend"
-      - "src/main/django"
-    # Do not apply the python-django ruleset in files matching the following pattern
-    ignore:
-      - "src/main/backend/util/*.py"
-# Only analyze source files
-only:
-  - "src/main"
-  - "src/tests"
-  - "**/*.py"
-# Do not analyze third-party or generated files
-ignore:
-  - "lib/third_party"
-  - "**/*.generated.py"
-  - "**/*.pb.py"
+schema-version: v1.0
+sast:
+  use-default-rulesets: false
+  use-rulesets:
+    - python-best-practices
+    - python-security
+    - python-code-style
+    - python-inclusive
+    - python-django
+    - custom-python-ruleset
+  ruleset-configs:
+    python-code-style:
+      rule-configs:
+        max-function-lines:
+          # Do not apply the rule max-function-lines to the following files
+          ignore-paths:
+            - "src/main/util/process.py"
+            - "src/main/util/datetime.py"
+          arguments:
+            # Set the max-function-lines rule's threshold to 150 lines
+            max-lines: 150
+          # Override this rule's severity
+          severity: NOTICE
+        max-class-lines:
+          arguments:
+            # Set different thresholds for the max-class-lines rule in different subtrees
+            max-lines:
+              # Set the rule's threshold to 200 lines by default (root path of the repo)
+              /: 200
+              # Set the rule's threshold to 100 lines in src/main/backend
+              src/main/backend: 100
+          # Override this rule's severity with different values in different subtrees
+          severity:
+            # Set the rule's severity to NOTICE by default
+            /: NOTICE
+            # Set the rule's severity to NONE in tests/
+            tests: NONE
+    python-django:
+      # Only apply the python-django ruleset to the following paths
+      only-paths:
+        - "src/main/backend"
+        - "src/main/django"
+      # Do not apply the python-django ruleset in files matching the following pattern
+      ignore-paths:
+        - "src/main/backend/util/*.py"
+  global-config:
+    # Only analyze source files
+    only-paths:
+      - "src/main"
+      - "src/tests"
+      - "**/*.py"
+    # Do not analyze third-party files
+    ignore-paths:
+      - "lib/third_party"
 ```
 
+## Legacy configuration
 
-| Name                 | Description                                                                                 | Required  | Default   |
-| -------------------- | ------------------------------------------------------------------------------------------- | --------- | --------- |
-| `rulesets`         | A list of ruleset names and configurations.[View all available rulesets][6].                | `true`  |           |
-| `ignore`           | A list of path prefixes and glob patterns to ignore. Matching files will not be analyzed.   | `false` |           |
-| `only`             | A list of path prefixes and glob patterns to analyze. Only matching files will be analyzed. | `false` |           |
-| `ignore-gitignore` | Do not use paths listed in the `.gitignore` file to skip analysis on certain files.       | `false` | `false` |
-| `max-file-size-kb` | Ignore files larger than the specified size (in kB units).                                  | `false` | `200`   |
+Datadog Static Code Analysis (SAST) previously used a different configuration file (`static-analysis.datadog.yml`) and schema. This schema is deprecated and does not receive new updates, but it is [documented][25] in the `datadog-static-analyzer` repository.
 
-You can include the following **ruleset** options in the `static-analysis.datadog.yml` file:
+If both files are present, `code-security.datadog.yaml` takes precedence over `static-analysis.datadog.yml`.
 
-| Name       | Description                                                                                                           | Required  |
-| ---------- | --------------------------------------------------------------------------------------------------------------------- | --------- |
-| `rules`  | A list of rule configurations for rules belonging to ruleset.                                                         | `false` |
-| `ignore` | A list of path prefixes and glob patterns to ignore for this specific ruleset. Matching files will not be analyzed.   | `false` |
-| `only`   | A list of path prefixes and glob patterns to analyze for this specific ruleset. Only matching files will be analyzed. | `false` |
-
-You can include the following **rule** options in the `static-analysis.datadog.yml` file:
-
-| Name          | Description                                                                                                        | Required  |
-| ------------- | ------------------------------------------------------------------------------------------------------------------ | --------- |
-| `ignore`    | A list of path prefixes and glob patterns to ignore for this specific rule. Matching files will not be analyzed.   | `false` |
-| `only`      | A list of path prefixes and glob patterns to analyze for this specific rule. Only matching files will be analyzed. | `false` |
-| `arguments` | A map of values for rules that support customizable arguments. See the syntax below.                               | `false` |
-| `severity`  | Override the rule's severity. See the syntax below.                                                                | `false` |
-| `category`  | Override the rule's category. See the syntax below.                                                                | `false` |
-
-The map in the `arguments` field uses an argument's name as its key, and the values are either strings or maps:
-
-* To set a value for the whole repository, you can specify it as a string.
-* To set different values for different subtrees in the repository, you can specify them as a map from a subtree prefix to the value that the argument will have within that subtree.
-
-The `severity` field can take a string or a map:
-
-* To set the severity for the whole repository, specify it as one of the following strings: `ERROR`, `WARNING`, `NOTICE`, or `NONE`.
-* To set different severities for different subtrees in the repository, you can specify them as a map from a subtree prefix to the severity for that subtree.
-
-The `category` field can take a string with one of the following values: `BEST_PRACTICES`, `CODE_STYLE`, `ERROR_PRONE`, `PERFORMANCE`, or `SECURITY`. You can only specify one category for the whole repository.
 
 ### Ignoring violations
 
 #### Ignore for a repository
-Add an ignore rule in your `static-analysis.datadog.yml` file. The example below ignores the rule `javascript-express/reduce-server-fingerprinting` for all directories.
+Add a rule configuration in your `code-security.datadog.yaml` file. The following example ignores the rule `javascript-express/reduce-server-fingerprinting` for all directories.
 
-```
-rulesets:
-  - javascript-express:
-    rules:
-      reduce-server-fingerprinting:
-        ignore:
-          - "**"
+```yaml
+schema-version: v1.0
+sast:
+  ruleset-configs:
+    javascript-express:
+      rule-configs:
+        reduce-server-fingerprinting:
+          ignore-paths:
+            - "**"
 ```
 
 #### Ignore for a file or directory
-Add an ignore rule in your `static-analysis.datadog.yml` file. The example below ignores the rule `javascript-express/reduce-server-fingerprinting` for this file. For more information on how to ignore by path, see the [Customize your configuration section](#customize-your-configuration).
+Add a rule configuration in your `code-security.datadog.yaml` file. The following example ignores the rule `javascript-express/reduce-server-fingerprinting` for a specific file. For more information on how to ignore by path, see [Customize your configuration](#customize-your-configuration).
 
-```
-rulesets:
-  - javascript-express:
-    rules:
-      reduce-server-fingerprinting:
-        ignore:
-          - "ad-server/src/app.js"
+```yaml
+schema-version: v1.0
+sast:
+  ruleset-configs:
+    javascript-express:
+      rule-configs:
+        reduce-server-fingerprinting:
+          ignore-paths:
+            - "ad-server/src/app.js"
 ```
 
 #### Ignore for a specific instance
@@ -468,73 +467,10 @@ my_foo = 1
 myBar = 2
 ```
 
-## Link results to Datadog services and teams
+## Link findings to Datadog services and teams
 
-### Link results to services
-Datadog associates static code and library scan results with relevant services by using the following mechanisms:
+{{% security-products/link-findings-to-datadog-services-and-teams %}}
 
-{{% collapse-content title="Identifying the code location in the Software Catalog" level="h4" %}}
-The [schema version `v3`][14] and later of the Software Catalog allows you to add the mapping of your code location for your service. The `codeLocations` section specifies the location of the repository containing the code and its associated paths.
-
-The `paths` attribute is a list of globs that should match paths in the repository.
-
-{{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
-apiVersion: v3
-kind: service
-metadata:
-  name: my-service
-datadog:
-  codeLocations:
-    - repositoryURL: https://github.com/myorganization/myrepo.git
-      paths:
-        - path/to/service/code/**
-{{< /code-block >}}
-
-If you want all the files in a repository to be associated with a service, you can use the glob `**` as follows:
-
-{{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
-apiVersion: v3
-kind: service
-metadata:
-  name: my-service
-datadog:
-  codeLocations:
-    - repositoryURL: https://github.com/myorganization/myrepo.git
-      paths:
-        - "**"
-{{< /code-block >}}
-{{% /collapse-content %}}
-
-{{% collapse-content title="Detecting file usage patterns" level="h4" %}}
-Datadog detects file usage in additional products such as Error Tracking and associate
-files with the runtime service. For example, if a service called `foo` has
-a log entry or a stack trace containing a file with a path `/modules/foo/bar.py`,
-it associates files `/modules/foo/bar.py` to service `foo`.
-{{% /collapse-content %}}
-
-{{% collapse-content title="Detecting service name in paths and repository names" level="h4" %}}
-Datadog detects service names in paths and repository names, and associates the file with the service if a match is found.
-
-For a repository match, if there is a service called `myservice` and
-the repository URL is `https://github.com/myorganization/myservice.git`, then,
-it associates `myservice` to all files in the repository.
-
-If no repository match is found, Datadog attempts to find a match in the
-`path` of the file. If there is a service named `myservice`, and the path is `/path/to/myservice/foo.py`, the file is associated with `myservice` because the service name is part of the path. If two services are present
-in the path, the service name closest to the filename is selected.
-{{% /collapse-content %}}
-
-If one method succeeds (in order), no further mapping attempts are made.
-
-### Link results to teams
-
-Datadog automatically associates the team attached to a service when a violation or vulnerability is detected. For example, if the file `domains/ecommerce/apps/myservice/foo.py`
-is associated with `myservice`, then the team `myservice` will be associated to any violation
-detected in this file.
-
-If no services or teams are found, Datadog uses the `CODEOWNERS` file in your repository. The `CODEOWNERS` file determines which team owns a file in your Git provider.
-
-**Note**: You must accurately map your Git provider teams to your [Datadog teams][10] for this feature to function properly.
 
 ## Diff-aware scanning
 
@@ -556,7 +492,7 @@ datadog-static-analyzer -i /path/to/directory -g -o sarif.json -f sarif –-diff
 ## Upload third-party static analysis results to Datadog
 
 <div class="alert alert-info">
-  SARIF importing has been tested for Snyk, CodeQL, Semgrep, Checkov, Gitleaks, and Sysdig. Reach out to <a href="/help">Datadog Support</a> if you experience any issues with other SARIF-compliant tools.
+  SARIF importing has been tested for Snyk, CodeQL, Semgrep, Gitleaks, and Sysdig. Reach out to <a href="/help">Datadog Support</a> if you experience any issues with other SARIF-compliant tools.
 </div>
 
 You can send results from third-party static analysis tools to Datadog, provided they are in the interoperable [Static Analysis Results Interchange Format (SARIF) Format][2]. Node.js version 14 or later is required.
@@ -691,7 +627,7 @@ Datadog stores findings in accordance with our [Data Rentention Periods](https:/
 
 [1]: https://app.datadoghq.com/security/configuration/code-security/setup
 [2]: https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=sarif
-[3]: /developers/ide_plugins/idea/#static-analysis
+[3]: /ide_plugins/idea/#static-analysis
 [4]: /account_management/api-app-keys/
 [6]: /security/code_security/static_analysis/static_analysis_rules
 [7]: /getting_started/site/
@@ -701,6 +637,15 @@ Datadog stores findings in accordance with our [Data Rentention Periods](https:/
 [11]: /security/code_security/dev_tool_int/github_pull_requests
 [12]: /security/code_security/dev_tool_int/github_pull_requests#fixing-a-vulnerability-directly-from-datadog
 [13]: https://docs.github.com/en/actions/security-for-github-actions/security-guides
-[14]: https://docs.datadoghq.com/software_catalog/service_definitions/v3-0/
 [15]: https://docs.oasis-open.org/sarif/sarif/v2.1.0/sarif-v2.1.0.html
 [16]: https://www.first.org/cvss/
+[17]: https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-git-large-file-storage
+[18]: /security/code_security/static_analysis/setup/?tab=github#select-your-source-code-management-provider
+[19]: /security/code_security/static_analysis/setup/?tab=azuredevops#select-your-source-code-management-provider
+[20]: /security/code_security/static_analysis/setup/?tab=gitlab#select-your-source-code-management-provider
+[22]: https://docs.datadoghq.com/internal_developer_portal/software_catalog/entity_model/?tab=v30#migrating-to-v30
+[24]: https://docs.datadoghq.com/account_management/teams/
+[25]: https://github.com/DataDog/datadog-static-analyzer/blob/main/doc/legacy_config.md
+[101]: https://docs.datadoghq.com/software_catalog/service_definitions/v3-0/
+[102]: https://docs.datadoghq.com/internal_developer_portal/software_catalog/entity_model/?tab=v30#codelocations
+[103]: https://docs.datadoghq.com/data_security/data_retention_periods/

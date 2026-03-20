@@ -373,7 +373,7 @@ Les mentions d'utilisateur permettent de notifier des utilisateurs spécifiques 
    - Accédez à `Microsoft Entra ID` > `Gérer` > `Utilisateurs`
    - Trouvez l'utilisateur dans la liste et copiez son UPN dans la colonne `User principal name`.
 
-<div class="alert alert-warning">Les mentions d'utilisateur ne sont PAS prises en charge pour les handles de type Webhook Workflows publiés en tant qu'utilisateur (pour les canaux privés). Inclure une mention d'utilisateur dans ce cas entraînera un échec. Pour inclure des mentions d'utilisateur avec Workflows Webhooks, vous devez utiliser le bot Flow.</div>
+<div class="alert alert-danger">Les mentions d'utilisateur ne sont PAS prises en charge pour les handles de type Webhook Workflows publiés en tant qu'utilisateur (pour les canaux privés). Inclure une mention d'utilisateur dans ce cas entraînera un échec. Pour inclure des mentions d'utilisateur avec Workflows Webhooks, vous devez utiliser le bot Flow.</div>
 
 Datadog recommande de tester vos notifications de monitor pour garantir leur bonne livraison. Consultez la section [Notifications de test][6] pour obtenir des instructions.
 
@@ -942,7 +942,7 @@ Oui, vous pouvez inclure plusieurs mentions d'utilisateur dans une même notific
 
 **Exemple** : `@Teams-handle <at>user1@microsoft.com</at> <at>user2@microsoft.com</at> <at>user3@microsoft.com</at>`
 
-<div class="alert alert-warning">Lorsqu'une notification contient plusieurs mentions et qu'une d’elles est invalide, les utilisateurs valides recevront bien la notification, mais l’ordre des mentions pourra être affecté.</div>
+<div class="alert alert-danger">Lorsqu'une notification contient plusieurs mentions et qu'une d’elles est invalide, les utilisateurs valides recevront bien la notification, mais l’ordre des mentions pourra être affecté.</div>
 
 {{< /site-region >}}
 

@@ -66,7 +66,7 @@ El [Datadog Operator][1] es un [operador de Kubernetes][2] de código abierto qu
 
 ### Ejecutar Agents en un único contenedor
 
-<div class="alert alert-warning">Disponible en Operator v1.4.0 o posterior</div>
+<div class="alert alert-danger">Disponible en Operator v1.4.0 o posterior</div>
 
 De manera predeterminada, Datadog Operator crea un Agent DaemonSet con pods que ejecutan diferentes contenedores del Agent. Datadog Operator v1.4.0 introduce una configuración que permite a los usuarios ejecutar Agents en un único contenedor. Para evitar la elevación de privilegios de todos los Agents en ese contenedor, esto solo se puede hacer cuando `system-probe` o `security-agent` no son obligatorios. Para obtener más información, consulta [Ejecutar como usuario sin privilegios][7] en la página Seguridad de datos del Agent.
 

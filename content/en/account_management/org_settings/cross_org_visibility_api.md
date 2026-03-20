@@ -1,5 +1,6 @@
 ---
 title: Cross-Organization Connections API
+description: Configure cross-organization data sharing connections using the API to enable insights across multiple organizations in your account.
 ---
 
 {{< callout url="#" btn_hidden="true">}}

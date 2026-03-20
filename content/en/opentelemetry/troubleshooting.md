@@ -178,6 +178,70 @@ This approach combines OpenTelemetry semantic conventions with Datadog-specific 
 {{% /tab %}}
 {{< /tabs >}}
 
+## Infrastructure tags are missing from telemetry
+
+**Symptom**: You have enabled the `infraattributes` processor in your DDOT Collector configuration, but Kubernetes-level tags (like `k8s.pod.name`, `k8s.namespace.name`, or pod labels) are not appearing on your traces, metrics, or logs.
+
+**Cause**: The `infraattributes` processor requires specific resource attributes on incoming telemetry to identify the source container.
+
+If the `container.id` resource attribute is not present on the input, the processor attempts to automatically detect it. The following methods are tried, in order from highest to lowest precedence:
+
+| Resource attributes                              | Detection method                  |
+|--------------------------------------------------|-----------------------------------|
+| `process.pid` (int)                              | Based on container's external PID |
+| `datadog.container.cgroup_inode` (int)           | Based on container's cgroup inode |
+| `k8s.pod.uid` (str) + `k8s.container.name` (str) | Based on container's pod and name |
+
+If your telemetry does not provide attributes for any of these detection methods, the processor cannot look up the corresponding Kubernetes metadata.
+
+**Resolution**:
+
+Ensure your telemetry includes the required attributes by following these steps in order:
+
+1.  **Use SDK auto-instrumentation (Preferred)**: Upgrade to a recent version of your language's OpenTelemetry auto-instrumentation. This is the preferred first step, as it often provides `container.id` or `process.pid` automatically. If these attributes are not being added automatically, check your SDK's documentation. Some SDKs (such as Go) provide a specific setting (such as [resource.WithContainerID][8]) to enable this.
+
+2.  **Manually set resource attributes**: If auto-instrumentation doesn't add the necessary attributes, set them manually using `OTEL_RESOURCE_ATTRIBUTES`. This allows the processor to use the `k8s.pod.uid` and `k8s.container.name` detection method. For example:
+    ```yaml
+    env:
+      - name: OTEL_SERVICE_NAME
+        value: {{ .Chart.Name }}
+      - name: OTEL_K8S_NAMESPACE
+        valueFrom:
+          fieldRef:
+            apiVersion: v1
+            fieldPath: metadata.namespace
+      - name: OTEL_K8S_NODE_NAME
+        valueFrom:
+          fieldRef:
+            apiVersion: v1
+            fieldPath: spec.nodeName
+      - name: OTEL_K8S_POD_NAME
+        valueFrom:
+          fieldRef:
+            apiVersion: v1
+            fieldPath: metadata.name
+      - name: OTEL_K8S_POD_ID
+        valueFrom:
+          fieldRef:
+            apiVersion: v1
+            fieldPath: metadata.uid
+      - name: OTEL_RESOURCE_ATTRIBUTES
+        value: >-
+          service.name=$(OTEL_SERVICE_NAME),
+          k8s.namespace.name=$(OTEL_K8S_NAMESPACE),
+          k8s.node.name=$(OTEL_K8S_NODE_NAME),
+          k8s.pod.name=$(OTEL_K8S_POD_NAME),
+          k8s.pod.uid=$(OTEL_K8S_POD_ID),
+          k8s.container.name={{ .Chart.Name }},
+          host.name=$(OTEL_K8S_NODE_NAME),
+          deployment.environment.name=$(OTEL_K8S_NAMESPACE)
+    ```
+3.  **Use the Collector's `resourcedetection` processor**: If you cannot set resource attributes at the SDK or application level, you can use the Collector's `resourcedetection` processor. Place it before `infraattributes`.
+
+4.  **Verify attributes**: Use the `debug` exporter in your DDOT Collector pipeline to confirm that the required resource attributes (like `container.id`, `process.pid`, or `k8s.pod.uid`) are present on your telemetry.
+
+For more details on the attributes used by this processor, see the [Infrastructure Attribute Processor documentation][7].
+
 ## Unable to map 'team' attribute to Datadog team tag
 
 **Symptom**: The team tag is not appearing in Datadog for logs and traces, despite being set as a resource attribute in OpenTelemetry configurations.
@@ -271,7 +335,7 @@ features:
         name: otel-http
 ```
 
-<div class="alert alert-warning">When configuring ports <code>4317</code> and <code>4318</code>, you must use the default names <code>otel-grpc</code> and <code>otel-http</code> respectively to avoid port conflicts.</div>
+<div class="alert alert-danger">When configuring ports <code>4317</code> and <code>4318</code>, you must use the default names <code>otel-grpc</code> and <code>otel-http</code> respectively to avoid port conflicts.</div>
 
 ## Further reading
 
@@ -282,3 +346,6 @@ features:
 [3]: /opentelemetry/schema_semantics/host_metadata/
 [4]: /opentelemetry/schema_semantics/semantic_mapping/
 [5]: /opentelemetry/schema_semantics/metrics_mapping/#metrics-mappings
+[6]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/resourcedetectionprocessor#readme
+[7]: https://github.com/DataDog/datadog-agent/tree/main/comp/otelcol/otlp/components/processor/infraattributesprocessor#readme
+[8]: https://pkg.go.dev/go.opentelemetry.io/otel/sdk/resource#WithContainerID

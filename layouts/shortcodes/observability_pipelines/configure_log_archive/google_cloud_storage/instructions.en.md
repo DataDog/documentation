@@ -36,4 +36,3 @@ See the [Log Archives documentation][9096] for additional information.
 [9094]: https://app.datadoghq.com/logs/pipelines/log-forwarding
 [9095]: /logs/log_configuration/archives/?tab=awss3#advanced-settings
 [9096]: /logs/log_configuration/archives
-[9097]: /observability_pipelines/advanced_configurations/#referencing-files-in-kubernetes

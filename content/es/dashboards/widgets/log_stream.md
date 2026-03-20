@@ -6,4 +6,4 @@ title: Widget de flujo de logs
 widget_type: log_stream
 ---
 
-<div class="alert alert-warning">Consulta el flujo de Log Management a través del <a href="https://docs.datadoghq.com/dashboards/widgets/list/">widget de lista</a>.</div>
+<div class="alert alert-danger">Consulta el flujo de Log Management a través del <a href="https://docs.datadoghq.com/dashboards/widgets/list/">widget de lista</a>.</div>

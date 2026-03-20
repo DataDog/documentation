@@ -1,5 +1,5 @@
 ---
-title: Set up CI Visibility on GitHub Actions Workflows
+title: GitHub Actions Setup for CI Visibility
 aliases:
   - /continuous_integration/setup_pipelines/github
 further_reading:
@@ -21,14 +21,14 @@ further_reading:
 
 [GitHub Actions][1] is an automation tool that allows you to build, test, and deploy your code in GitHub. Create workflows that automate every step of your development process, streamlining software updates and enhancing code quality with CI/CD features integrated into your repositories.
 
-Set up CI Visibility in GitHub Actions to track the execution of your workflows, identify performance bottlenecks, troubleshoot operational issues, and optimize your deployment processes.
+Set up CI Visibility for GitHub Actions to track the execution of your workflows, identify performance bottlenecks, troubleshoot operational issues, and optimize your deployment processes.
 
 ### Compatibility
 
 | Pipeline Visibility | Platform | Definition |
 |---|---|---|
 | [Running pipelines][2] | Running pipelines | View pipeline executions that are running. Queued or waiting pipelines show with status "Running" on Datadog. |
-| [CI jobs failure analysis][23] | CI jobs failure analysis | Analysis of the root causes of failed CI jobs based on relevant logs using LLM models. |
+| [CI jobs failure analysis][23] | CI jobs failure analysis | Uses LLM models on relevant logs to analyze the root cause of failed CI jobs. |
 | [Partial retries][3] | Partial pipelines | View partially retried pipeline executions. |
 | Logs correlation | Logs correlation | Correlate pipeline and job spans to logs and enable [job log collection](#collect-job-logs). |
 | Infrastructure metric correlation | Infrastructure metric correlation | Correlate jobs to [infrastructure host metrics][4] for GitHub jobs. |
@@ -44,6 +44,16 @@ The following GitHub versions are supported:
 
 - GitHub.com (SaaS)
 - GitHub Enterprise Server (GHES) 3.5.0 or later
+
+### Terminology
+
+This table shows the mapping of concepts between Datadog CI Visibility and GitHub Actions:
+
+| Datadog  | GitHub Actions |
+|----------|----------------|
+| Pipeline | Workflow       |
+| Job      | Job            |
+| Step     | Step           |
 
 ## Configure the Datadog integration
 
@@ -71,7 +81,7 @@ After the GitHub App is created and installed, enable CI Visibility on the accou
 
 Pipelines appear immediately after enabling CI Visibility for any account or repository.
 
-### Disable CI Visiblity for GitHub Actions
+### Disable CI Visibility for GitHub Actions
 
 To disable the CI Visibility GitHub Actions integration:
 
@@ -106,7 +116,7 @@ To see the metrics, click on a job span in the trace view. A window opens with a
 
 ### CI jobs failure analysis
 
-If job logs collection is enabled, CI Visibility computes analysis using LLM models for failed CI jobs based on relevant logs coming from GitHub Actions.
+If job logs collection is enabled, CI Visibility uses LLM models to analyze failed CI jobs based on relevant logs coming from GitHub Actions.
 
 You can also add job failure analysis to a PR comment. See the guide on [using PR comments][26].
 

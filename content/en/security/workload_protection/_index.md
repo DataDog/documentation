@@ -8,6 +8,12 @@ aliases:
   - /security/threats/security_profiles
   - /security/threats/runtime_anomaly_detection
   - /security/threats/
+  - /security/threats/agent
+  - /security/workload_protection/agent
+further_reading:
+  - link: "https://www.datadoghq.com/blog/workload-protection-investigation/"
+    tag: "Blog"
+    text: "Turn fragmented runtime signals into coherent attack stories with Datadog Workload Protection"
 cascade:
 - _target:
     path: /security/workload_protection/agent_expressions
@@ -44,8 +50,6 @@ Workload Protection Threats uses the Datadog Agent to monitor your environment. 
 2. **File Integrity Monitoring** to watch for changes to key files and directories on hosts or containers in real-time.
 3. **DNS Activity Monitoring** to watch network traffic for malicious activity on hosts and containers in real-time.
 4. **Kernel Activity Monitoring** to watch for kernel-layer attacks like process hijacking, container breakouts, and more in real-time.
-
-<!-- {{< img src="security/csm/csm_overview_3.png" alt="The Security Inbox on the Cloud Security Management overview shows a list of prioritized security issues to remediate" width="100%">}} -->
 
 ## Proactively block threats with Active Protection
 
@@ -85,8 +89,11 @@ Datadog is introducing a new feature called Active Protection to address the cry
   {{< nextlink href="/account_management/rbac/permissions/#cloud-security-platform">}}Datadog role permissions for Workload Protection{{< /nextlink >}}
   {{< nextlink href="/security/workload_protection/workload_security_rules">}}Learn about Workload Protection detection rules{{< /nextlink >}}
   {{< nextlink href="/security/default_rules/#cat-workload-security">}}Start using out-of-the-box Workload Protection detection rules{{< /nextlink >}}
-  {{< nextlink href="/getting_started/cloud_security_management">}}Getting Started with Cloud Security Management{{< /nextlink >}}
 {{< /whatsnext >}}
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /security/cloud_security_management/setup/
 [2]: /agent/

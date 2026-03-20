@@ -1,5 +1,6 @@
 ---
 title: Wildcard Widget
+description: Build custom visualizations using Vega-Lite grammar for advanced charting and data representation beyond standard widgets.
 widget_type: wildcard
 further_reading:
 - link: "dashboards/guide/getting_started_with_wildcard_widget/"

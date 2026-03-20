@@ -10,13 +10,16 @@ further_reading:
 - link: "/integrations/azure_app_service_environment/"
   tag: "Documentation"
   text: "Azure App Service Environment"
+- link: "/serverless/guide/disable_serverless"
+  tag: "Documentation"
+  text: "Disable Serverless Monitoring"
 - link: "https://www.datadoghq.com/blog/azure-app-service-extension/"
   tag: "Blog"
   text: "Monitor .NET web apps with the Datadog extension for Azure App Service"
 - link: "https://www.datadoghq.com/blog/deploy-dotnet-core-azure-app-service/"
   tag: "Blog"
   text: "Deploy ASP.NET Core applications to Azure App Service"
-- link: "https://www.datadoghq.com/pricing/?product=application-performance-monitoring#application-performance-monitoring-apm_faq-what-is-considered-as-a-host-for-azure-app-services"
+- link: "https://www.datadoghq.com/pricing/?product=serverless-monitoring&tab=azure-app-service#products"
   tag: "Pricing"
   text: "Azure App Service APM Pricing"
 ---
@@ -61,9 +64,9 @@ Capabilities:
 [3]: /integrations/azure_app_services/#metrics
 [4]: https://app.datadoghq.com/serverless/azure/app-service-plan
 [5]: /integrations/azure/#setup
-[6]: /logs/guide/azure-logging-guide/
+[6]: /logs/guide/azure-automated-log-forwarding/
 [7]: /serverless/azure_app_service/linux_code
 [8]: /serverless/azure_app_service/linux_container
 [9]: /serverless/azure_app_service/windows_code
-[10]: /developers/dogstatsd/
+[10]: /extend/dogstatsd/
 

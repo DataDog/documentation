@@ -6,10 +6,6 @@ further_reading:
   text: "Setting Up the OpenTelemetry Collector"
 ---
 
-<div class="alert alert-warning">
-OTel Kafka Metrics Remapping is in public alpha. It is available in versions >= 0.93.0 of the collector. If you have feedback related to this, reach out to your account team to provide your input.
-</div>
-
 
 ## Overview
 
@@ -255,7 +251,23 @@ In order to ensure this attribute only gets added to your Kafka logs, use [inclu
 
 ## Data collected
 
+### Kafka metrics receiver
+
+{{< mapping-table resource="kafkametrics.csv">}}
+
+### JMX receiver / JMX Metrics Gatherer
+
+#### Kafka broker
+
 {{< mapping-table resource="kafka.csv">}}
+
+#### Kafka producer
+
+{{< mapping-table resource="kafka-producer.csv">}}
+
+#### Kafka consumer
+
+{{< mapping-table resource="kafka-consumer.csv">}}
 
 **Note:** In Datadog `-` gets translated to `_`. For the metrics prepended by `otel.`, this means that the OTel metric name and the Datadog metric name are the same (for example, `kafka.producer.request-rate` and `kafka.producer.request_rate`). In order to avoid double counting for these metrics, the OTel metric is then prepended with `otel.`.
 

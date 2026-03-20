@@ -1,5 +1,6 @@
 ---
 title: Kubernetes Data Collected
+description: Reference guide for metrics and events collected by the Datadog Agent from Kubernetes clusters
 aliases:
  - /agent/kubernetes/metrics
  - /agent/kubernetes/data_collected
@@ -78,7 +79,7 @@ For more information, see the documentation for the [Kubernetes controller manag
 
 For more information, see the documentation for the [Kubernetes metrics server][4] integration.
 
-{{< get-metrics-from-git "kubernetes_state_core" >}}
+{{< get-metrics-from-git "kube-metrics-server" >}}
 
 ### Kubernetes scheduler
 
@@ -134,7 +135,7 @@ For more information, see the documentation for the [Kubernetes controller manag
 
 For more information, see the documentation for the [Kubernetes metrics server][4] integration.
 
-{{< get-service-checks-from-git "kubernetes_state_core" >}}
+{{< get-service-checks-from-git "kube-metrics-server" >}}
 
 ### Kubernetes scheduler
 

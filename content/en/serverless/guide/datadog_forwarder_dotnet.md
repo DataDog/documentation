@@ -4,7 +4,7 @@ title: Instrumenting .NET Serverless Applications Using the Datadog Forwarder
 ---
 ## Overview
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 If you are a new user of Datadog Serverless, follow the <a href="/serverless/installation/dotnet">instructions to instrument your Lambda functions using the Datadog Lambda Extension</a> instead. If you have already set up Datadog Serverless with the Datadog Forwarder before Lambda offered out-of-the-box functionality, use this guide to maintain your instance.
 </div>
 

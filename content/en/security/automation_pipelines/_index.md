@@ -28,12 +28,14 @@ Automation Pipelines is available for:
 - Misconfigurations
 - Attack paths
 - Identity risks
-- Vulnerabilities
-- Application Code Vulnerability
-- Application Library Vulnerability
-- Container Image Vulnerability
-- API Security Finding
-- Host Vulnerability
+- Secrets
+- Infrastructure as Code
+- Runtime Code Vulnerabilities
+- Static Code Vulnerabilities
+- Library Vulnerabilities
+- Container Image Vulnerabilities
+- API Security findings
+- Host Vulnerabilities
 
 ## How it works
 

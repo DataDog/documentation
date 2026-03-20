@@ -20,9 +20,9 @@ further_reading:
     - link: "https://www.datadoghq.com/blog/cnm-kubernetes-egress/"
       tag: "Blog"
       text: "How Datadog Cloud Network Monitoring helps you move to a deny-by-default network egress policy at scale"
-
-      
-
+    - link: "/network_monitoring/cloud_network_monitoring/glossary"
+      tag: "Doc"
+      text: "CNM Terms and Concepts"
 ---
 
 Datadog Cloud Network Monitoring (CNM) gives you visibility into your network traffic between services, containers, availability zones, and any other tag in Datadog so you can:
@@ -121,6 +121,16 @@ To enable Cloud Network Monitoring with the Datadog Agent, use the following con
       enabled: true
     ```
 
+    **Optional**: To monitor DNS traffic on non-standard ports (Agent v7.76.0+), add the `dns_monitoring_ports` option:
+
+    ```yaml
+    network_config:
+      enabled: true
+      dns_monitoring_ports:
+        - 53
+        - 5353
+    ```
+
 4. **If you are running an Agent older than v6.18 or 7.18**, manually start the system-probe and enable it to start on boot (since v6.18 and v7.18 the system-probe starts automatically when the Agent is started):
 
     ```shell
@@ -190,12 +200,23 @@ To enable Cloud Network Monitoring for Windows hosts:
 
    [DEPRECATED] _(version 7.44 or below)_ During installation pass `ADDLOCAL="MainApplication,NPM"` to the `msiexec` command, or select "Cloud Network Monitoring" when running the Agent installation through the GUI.
 
-1. Edit `C:\ProgramData\Datadog\system-probe.yaml` to set the enabled flag to `true`:
+2. Edit `C:\ProgramData\Datadog\system-probe.yaml` to set the enabled flag to `true`:
 
     ```yaml
     network_config:
         enabled: true
     ```
+
+    **Optional**: To monitor DNS traffic on non-standard ports (Agent v7.76.0+), add the `dns_monitoring_ports` option:
+
+    ```yaml
+    network_config:
+        enabled: true
+        dns_monitoring_ports:
+            - 53
+            - 5353
+    ```
+
 3. [Restart the Agent][2].
 
     For PowerShell (`powershell.exe`):
@@ -215,27 +236,80 @@ To enable Cloud Network Monitoring for Windows hosts:
 {{% tab "Helm" %}}
 
 To enable Cloud Network Monitoring with Kubernetes using Helm, add the below to your `values.yaml` file.</br>
-**Note:** Helm chart v2.4.39+ is required. For more information, see the [Datadog Helm Chart documentation][1].
+**Note:** Helm chart v3.135.3+ is required. For more information, see the [Datadog Helm Chart documentation][1].
+
+  ```yaml
+  datadog:
+    ...
+    networkMonitoring:
+      enabled: true
+  ```
+
+**Optional**: To monitor DNS traffic on non-standard ports (Agent v7.76.0+), add the `dnsMonitoringPorts` option:
 
   ```yaml
   datadog:
     networkMonitoring:
       enabled: true
+      dnsMonitoringPorts:
+        - 53
+        - 5353
   ```
 
-**Note**: If you receive a permissions error when configuring CNM on your Kubernetes environment: `Error: error enabling protocol classifier: permission denied`, add the following to your `values.yaml` (Reference this [section][5] in the Helm chart):
+You may require one of the following additional steps depending on your environment:
 
-  ```yaml
-  agents:
-    podSecurity:
-      apparmor:
-        enabled: true
-  ```
+{{< collapse-content title="Google GKE Autopilot" level="h4" >}}
+
+If your cluster is running Google's GKE Autopilot, add the following to your values file:
+
+```
+providers:
+  gke:
+    autopilot: true
+```
+
+{{< /collapse-content >}}
+
+{{< collapse-content title="Google Container-Optimized OS (COS)" level="h4" >}}
+
+If your cluster is running Google Container-Optimized OS (COS), add the following to your values file:
+
+```
+providers:
+  gke:
+    cos: true
+```
+
+
+{{< /collapse-content >}}
+
+{{< collapse-content title="Bottlerocket Linux" level="h4" >}}
+
+If your cluster is using the Bottlerocket Linux distribution for its nodes, add the following to your values file:
+
+```
+agents:
+  containers:
+    systemProbe:
+      securityContext:
+        seLinuxOptions:
+          user: "system_u"
+          role: "system_r"
+          type: "super_t"
+          level: "s0"
+```
+
+{{< /collapse-content >}}
+
+[1]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/README.md#enabling-npm-collection
+
+{{% /tab %}}
+{{% tab "Kubernetes without Helm" %}}
 
 If you are not using Helm, you can enable Cloud Network Monitoring with Kubernetes from scratch:
 
-1. Download the [datadog-agent.yaml manifest][2] template.
-2. Replace `<DATADOG_API_KEY>` with your [Datadog API key][3].
+1. Download the [datadog-agent.yaml manifest][1] template.
+2. Replace `<DATADOG_API_KEY>` with your [Datadog API key][2].
 3. Optional - **Set your Datadog site**. If you are using the Datadog EU site, set the `DD_SITE` environment variable to `datadoghq.eu` in the `datadog-agent.yaml` manifest.
 4. **Deploy the DaemonSet** with the command:
 
@@ -243,7 +317,7 @@ If you are not using Helm, you can enable Cloud Network Monitoring with Kubernet
     kubectl apply -f datadog-agent.yaml
     ```
 
-If you already have the [Agent running with a manifest][4]:
+If you already have the [Agent running with a manifest][3]:
 
 1. For Kubernetes versions below `1.30`, add the annotation `container.apparmor.security.beta.kubernetes.io/system-probe: unconfined` on the `datadog-agent` template:
 
@@ -307,7 +381,7 @@ If you already have the [Agent running with a manifest][4]:
                 serviceAccountName: datadog-agent
                 containers:
                     - name: datadog-agent
-                      image: 'gcr.io/datadoghq/agent:latest'
+                      image: 'registry.datadoghq.com/agent:latest'
                       # (...)
                   volumeMounts:
                       - name: procdir
@@ -333,10 +407,10 @@ If you already have the [Agent running with a manifest][4]:
                 serviceAccountName: datadog-agent
                 containers:
                     - name: datadog-agent
-                      image: 'gcr.io/datadoghq/agent:latest'
+                      image: 'registry.datadoghq.com/agent:latest'
                     # (...)
                     - name: system-probe
-                      image: 'gcr.io/datadoghq/agent:latest'
+                      image: 'registry.datadoghq.com/agent:latest'
                       imagePullPolicy: Always
                       securityContext:
                           capabilities:
@@ -394,11 +468,9 @@ If you already have the [Agent running with a manifest][4]:
                       emptyDir: { }
     ```
 
-[1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/README.md#enabling-system-probe-collection
-[2]: /resources/yaml/datadog-agent-npm.yaml
-[3]: https://app.datadoghq.com/organization-settings/api-keys
-[4]: /agent/kubernetes/
-[5]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/values.yaml#L1774-L1775
+[1]: /resources/yaml/datadog-agent-npm.yaml
+[2]: https://app.datadoghq.com/organization-settings/api-keys
+[3]: /agent/kubernetes/
 
 {{% /tab %}}
 {{% tab "Operator" %}}
@@ -443,7 +515,7 @@ docker run --cgroupns host \
 --cap-add=NET_RAW \
 --cap-add=IPC_LOCK \
 --cap-add=CHOWN \
-gcr.io/datadoghq/agent:latest
+registry.datadoghq.com/agent:latest
 ```
 
 Replace `<DATADOG_API_KEY>` with your [Datadog API key][1].
@@ -454,7 +526,7 @@ If using `docker-compose`, make the following additions to the Datadog Agent ser
 version: '3'
 services:
   datadog:
-    image: "gcr.io/datadoghq/agent:latest"
+    image: "registry.datadoghq.com/agent:latest"
     environment:
       - DD_SYSTEM_PROBE_NETWORK_ENABLED=true
       - DD_PROCESS_AGENT_ENABLED=true

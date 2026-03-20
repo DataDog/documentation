@@ -40,7 +40,7 @@ Puedes generar una nueva métrica basada en procesos directamente a partir de co
 
 {{< img src="infrastructure/process/process2metrics_create.png" alt="Crear una métrica basada en procesos" style="width:80%;">}}
 
-1. **Selecciona etiquetas (tags) para filtrar tu consulta**: Las etiquetas (tags) disponibles son las mismas que para [Procesos activos][2]. Sólo se tendrán en cuenta para la agregación los procesos que coincidan con el ámbito de tus filtros. Los filtros de búsqueda de texto sólo se admiten en la page (página) Procesos activos.
+1. **Selecciona etiquetas para filtrar tu consulta**: Las etiquetas disponibles son las mismas que para [Procesos activos][2]. Sólo se tendrán en cuenta para la agregación los procesos que coincidan con el ámbito de tus filtros. Los filtros de búsqueda de texto sólo se admiten en la page (página) Procesos activos.
 2. **Seleccionar la medida de la que deseas realizar un seguimiento**: ingresa una medida como `Total CPU %` para agregar un valor numérico y crear sus métricas agregadas `count`, `min`, `max`, `sum` y `avg` correspondientes.
 3. **Añadir etiquetas a `group by`**: selecciona etiquetas que se añadirán como dimensiones a tus métricas, para que se puedan filtrar, agregar y comparar. De manera predeterminada, las métricas generadas a partir de procesos no tienen etiquetas a menos que se añadan de manera explícita. En este campo se puede utilizar cualquier etiqueta disponible para consultas de Live Processes.
 4. **Nombrar la métrica**: completa el nombre de tu métrica. Las métricas basadas en procesos siempre tienen el prefijo _proc._ y el sufijo _[selección_de_medida]_.
@@ -50,7 +50,7 @@ Puedes crear varias métricas con la misma consulta al seleccionar la casilla **
 
 **Nota**: Los puntos de datos para métricas basadas en procesos se generan en intervalos de diez segundos. Es posible que se produzca un retraso de hasta 3 minutos desde el momento en que se crea o actualiza la métrica hasta el momento en que se informa el primer punto de datos.
 
-<div class="alert alert-warning">Las métricas basadas en procesos se consideran <a href="/metrics/custom_metrics/">métricas personalizadas</a> y se facturan en consecuencia. Evita agrupar por etiquetas ilimitadas o de cardinalidad extremadamente alta, como <code>comando</code> y <code>usuario</code>, para evitar afectar tu facturación.</div>
+<div class="alert alert-danger">Las métricas basadas en procesos se consideran <a href="/metrics/custom_metrics/">métricas personalizadas</a> y se facturan en consecuencia. Evita agrupar por etiquetas ilimitadas o de cardinalidad extremadamente alta, como <code>comando</code> y <code>usuario</code>, para evitar afectar tu facturación.</div>
 
 ### Actualizar una métrica basada en procesos
 
