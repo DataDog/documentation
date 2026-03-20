@@ -1438,21 +1438,26 @@ menu:
       parent: bits_ai_dev_agent
       identifier: bits_ai_dev_agent_setup
       weight: 200
+    - name: Bits AI Security Analyst
+      url: bits_ai/bits_ai_security_analyst
+      identifier: bits_ai_bits_ai_security_analyst
+      parent: bits_ai
+      weight: 3
     - name: Bits Assistant
       url: bits_ai/bits_assistant
       identifier: bits_ai_bits_assistant
       parent: bits_ai
-      weight: 3
+      weight: 4
     - name: MCP Server
       url: bits_ai/mcp_server
       identifier: bits_ai_mcp_server
       parent: bits_ai
-      weight: 4
+      weight: 5
     - name: Setup
       url: bits_ai/mcp_server/setup
       identifier: bits_ai_mcp_server_setup
       parent: bits_ai_mcp_server
-      weight: 401
+      weight: 501
     - name: Dashboards
       url: dashboards/
       pre: dashboard

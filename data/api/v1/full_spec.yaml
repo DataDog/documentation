@@ -6343,6 +6343,9 @@ components:
 
         A pipeline can contain Nested Pipelines and Processors whereas a Nested Pipeline can only contain Processors.
       properties:
+        description:
+          description: A description of the pipeline.
+          type: string
         filter:
           $ref: "#/components/schemas/LogsFilter"
         is_enabled:
@@ -6356,6 +6359,12 @@ components:
           description: Ordered list of processors in this pipeline.
           items:
             $ref: "#/components/schemas/LogsProcessor"
+          type: array
+        tags:
+          description: A list of tags associated with the pipeline.
+          items:
+            description: A single tag using the format `key:value`.
+            type: string
           type: array
         type:
           $ref: "#/components/schemas/LogsPipelineProcessorType"
@@ -7622,13 +7631,25 @@ components:
         - L2NORM
         - PERCENTILE
         - STDDEV
+    MonitorFormulaAndFunctionCostDataSource:
+      description: Data source for cost queries.
+      enum:
+        - metrics
+        - cloud_cost
+        - datadog_usage
+      example: "cloud_cost"
+      type: string
+      x-enum-varnames:
+        - METRICS
+        - CLOUD_COST
+        - DATADOG_USAGE
     MonitorFormulaAndFunctionCostQueryDefinition:
       description: A formula and functions cost query.
       properties:
         aggregator:
           $ref: "#/components/schemas/MonitorFormulaAndFunctionCostAggregator"
         data_source:
-          $ref: "#/components/schemas/MonitorFormulaAndFunctionMetricsDataSource"
+          $ref: "#/components/schemas/MonitorFormulaAndFunctionCostDataSource"
         name:
           description: Name of the query for use in formulas.
           example: "query1"
