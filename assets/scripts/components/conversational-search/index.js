@@ -528,6 +528,10 @@ class ConversationalSearch {
             history: isFirstMessage ? [] : this.chatHistory.slice(0, -1),
             rewriteQuery: isFirstMessage && this.shouldRewriteQuery && !isSuggestion,
             signal: this.abortController.signal,
+            onThinking: (message) => {
+                const el = responseContainer.querySelector('.conv-search-status-text');
+                if (el) el.textContent = message;
+            },
             onToken: (_token, fullMessage) => {
                 if (!receivedFirstToken) {
                     stopLoading();

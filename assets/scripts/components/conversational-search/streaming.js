@@ -82,6 +82,7 @@ export async function streamDocsAiChat({
     rewriteQuery = false,
     signal,
     onToken,
+    onThinking,
     onError
 }) {
     const attributes = { query };
@@ -129,9 +130,11 @@ export async function streamDocsAiChat({
 
             try {
                 const parsed = JSON.parse(payload);
-                if (parsed.token !== undefined) {
-                    fullMessage += parsed.token;
-                    onToken(parsed.token, fullMessage);
+                if (parsed.type === 'thinking' && onThinking) {
+                    onThinking(parsed.content);
+                } else if (parsed.type === 'markdown_fragment') {
+                    fullMessage += parsed.content;
+                    onToken(parsed.content, fullMessage);
                 }
             } catch (e) {
                 if (onError) onError(e);
