@@ -102,7 +102,7 @@ dogstatsd_mapper_profiles:
 
 It would send the metric `custom_metric.process` to Datadog with the tags `tag_key_1:value_1` and `tag_key_2:value.with.dots._2`.
 
-As dogstatsd is written in python, please use the [Python 3 regex syntax](https://docs.python.org/3/howto/regex.html) for name matching.
+As dogstatsd is written in Go, please use the [Go regex syntax](https://pkg.go.dev/regexp/syntax) for name matching.
 
 ## Expand group in metric name
 
