@@ -82,21 +82,24 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
 Connect Claude (including Claude Cowork) to the Datadog MCP Server by adding it as a **custom connector** with the remote MCP URL.
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
-1. Follow the [Claude help center guide on custom connectors][1] to add a new custom connector.
-2. When prompted for a URL, enter the Datadog MCP Server endpoint for your [Datadog site][2] ({{< region-param key="dd_site_name" >}}):
+1. Follow the Claude help center guide on [custom connectors][1] to add a new custom connector.
+
+1. When prompted for a URL, enter the Datadog MCP Server endpoint for your [Datadog site][2] ({{< region-param key="dd_site_name" >}}). Use the **Datadog Site** selector on the right side of this page to select your site.
    <pre><code>{{< region-param key="mcp_server_endpoint" >}}</code></pre>
-3. Complete the OAuth login flow when prompted.
+
+   To enable [product-specific tools][3], include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and LLM Observability tools: 
+
+   <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
+
+1. Complete the OAuth login flow when prompted.
 
 [1]: https://support.claude.com/en/articles/11175166-get-started-with-custom-connectors-using-remote-mcp
 [2]: /getting_started/site/
+[3]: /bits_ai/mcp_server#toolsets
 {{< /site-region >}}
 
 {{< site-region region="gov" >}}
-Point your AI agent to the MCP Server endpoint for your regional [Datadog site][1].
-
-<div class="alert alert-danger">Datadog MCP Server is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
-
-[1]: /getting_started/site/
+<div class="alert alert-danger">Datadog MCP Server is not supported for your selected <a href="/getting_started/site/">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 {{% /tab %}}
