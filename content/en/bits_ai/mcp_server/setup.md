@@ -106,35 +106,31 @@ Connect Claude (including Claude Cowork) to the Datadog MCP Server by adding it 
 
 {{% tab "Codex" %}}
 
-You can connect Codex CLI to the Datadog MCP Server using HTTP transport.
+Point your AI agent to the MCP Server endpoint for your regional [Datadog site][1]. Use the **Datadog Site** selector on the right side of this page to select your site.
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
-Point your AI agent to the MCP Server endpoint for your regional [Datadog site][1]. For example, the endpoint for your selected site ({{< region-param key="dd_site_name" >}}) is: <code>{{< region-param key="mcp_server_endpoint" >}}</code>.
+Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-param key="mcp_server_endpoint" >}}</code>.
 
-1. Edit `~/.codex/config.toml` (or your Codex CLI configuration file) to add the Datadog MCP Server with HTTP transport and the endpoint URL for your site. Example configuration ({{< region-param key="dd_site_name" >}}):
+1. Edit `~/.codex/config.toml` (or your Codex CLI configuration file) to add the Datadog MCP Server with HTTP transport and the endpoint URL for your site. For example:
 
    <pre><code>[mcp_servers.datadog]
    url = "{{< region-param key="mcp_server_endpoint" >}}"
    </code></pre>
 
-2. Log in to the Datadog MCP Server by running:
+2. Log in to the Datadog MCP Server:
 
-   ```bash
+   ```shell
    codex mcp login datadog
    ```
 
    This opens your browser to complete the OAuth flow. Codex stores the resulting credentials so you don't need to log in again until the token expires.
-
-[1]: /getting_started/site/
 {{< /site-region >}}
 
 {{< site-region region="gov" >}}
-Point your AI agent to the MCP Server endpoint for your regional [Datadog site][1].
-
 <div class="alert alert-danger">Datadog MCP Server is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
 
 [1]: /getting_started/site/
-{{< /site-region >}}
 {{% /tab %}}
 
 {{% tab "VS Code" %}}
