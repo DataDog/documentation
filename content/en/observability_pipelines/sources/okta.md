@@ -12,7 +12,7 @@ products:
 
 ## Overview
 
-This document goes over how to send Okta logs to Observability Pipelines using Amazon EventBridge.
+This document goes over how to send Okta logs to Observability Pipelines using Amazon EventBridge and the Observability Pipelines HTTP Server source.
 
 ## Prerequisites
 
