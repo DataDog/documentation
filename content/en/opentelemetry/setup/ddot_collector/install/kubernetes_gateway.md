@@ -21,10 +21,6 @@ further_reading:
   text: "Tail Sampling Processor"
 ---
 
-{{< callout header="false" btn_hidden="true">}}
-  Support for installing the DDOT Collector as a gateway on Kubernetes is in Preview.
-{{< /callout >}}
-
 <div class="alert alert-info">
 This guide assumes you are familiar with deploying the DDOT Collector as a DaemonSet. For more information, see <a href="/opentelemetry/setup/ddot_collector/install/kubernetes_daemonset">Install the DDOT Collector as a DaemonSet on Kubernetes</a>.
 </div>
