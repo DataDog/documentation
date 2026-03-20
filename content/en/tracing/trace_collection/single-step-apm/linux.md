@@ -113,16 +113,16 @@ To update the SDK versions:
 1. Re-run the Agent installation command. This command also updates the Agent to the latest version.
 1. Restart your applications.
 
-### Define workload selection rules 
+### Define instrumentation rules
 
 {{< callout url="https://www.datadoghq.com/product-preview/single-step-instrumentation-targeting-rules-on-linux/"
  btn_hidden="false" header="Join the Preview!">}}
-Workload selection is in Preview.
+Instrumentation rules are in Preview.
 {{< /callout >}}
 
-Workload selection rules (available for Agent v7.73+) let you control which processes are automatically instrumented by SSI on Linux hosts.
+Instrumentation rules (available for Agent v7.73+) let you control which processes are automatically instrumented by SSI on Linux hosts.
 
-To configure workload selection:
+To configure instrumentation rules:
 
 1. In Datadog, navigate to **APM** > **Service Setup** > [**Workload Selection**][20].
 1. Click **Add or Edit Rules**. 
