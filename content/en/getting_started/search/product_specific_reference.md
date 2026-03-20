@@ -132,7 +132,7 @@ service:database @db.statement:"SELECT *" @db.row_count:>1000
   {{< nextlink href="/real_user_monitoring/explorer/search_syntax" >}}RUM Explorer Search: Search user sessions, views, actions, and errors{{< /nextlink >}}
   {{< nextlink href="/security/sensitive_data_scanner/scanning_rules/custom_rules" >}}Sensitive Data Scanner Custom Rules: Regex patterns and matching syntax for scanning sensitive data{{< /nextlink >}}
   {{< nextlink href="/events/explorer/searching" >}}Service Management Events Search: Query and filter service management events{{< /nextlink >}}
-  {{< nextlink href="/logs/workspaces/sql_reference" >}}SQL Reference for Logs: SQL syntax for advanced log analysis{{< /nextlink >}}
+  {{< nextlink href="/ddsql_reference" >}}SQL Reference for Logs: SQL syntax for advanced log analysis{{< /nextlink >}}
   {{< nextlink href="/tests/explorer/search_syntax" >}}Test Optimization Explorer Search Syntax: Search and analyze test execution data{{< /nextlink >}}
   {{< nextlink href="/observability_pipelines/search_syntax/logs" >}}Observability Pipelines Search Syntax: Filter logs for your processors{{< /nextlink >}}
 {{< /whatsnext >}}
