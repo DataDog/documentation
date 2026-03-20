@@ -156,12 +156,15 @@ Datadog's [Cursor and VS Code extension][1] includes built-in access to the mana
 
 {{% tab "JetBrains IDEs" %}}
 
-JetBrains offers the [Junie][1] and [AI Assistant][2] plugins for their range of IDEs. Alternately, many developers use an agent CLI, such as Claude Code or Codex, alongside their IDE. The sections below describe how to configure the Datadog MCP Server for use by these AI tools.
+JetBrains offers the [Junie][1] and [AI Assistant][2] plugins for their range of IDEs. Alternatively, many developers use an agent CLI, such as Claude Code or Codex, alongside their IDE.
 
+Point your plugin to the MCP Server endpoint for your regional [Datadog site][3]. Use the **Datadog Site** selector on the right side of this page to select your site.
 
-#### Junie
+{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
+Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-param key="mcp_server_endpoint" >}}</code>.
 
-To configure the Datadog MCP Server with Junie, navigate to the IDE settings. Go to **Tools** > **Junie** > **MCP Settings** and add the following block:
+{{% collapse-content title="Junie" level="h4" expanded=false id="jetbrains-junie" %}}
+Go to **Tools** > **Junie** > **MCP Settings** and add the following block:
 
 <pre><code>{
   "mcpServers": {
@@ -173,48 +176,67 @@ To configure the Datadog MCP Server with Junie, navigate to the IDE settings. Go
 }
 </code></pre>
 
+To enable [product-specific tools][1], include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and LLM Observability tools: 
+
+<pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
+
 You are prompted to login through OAuth. The status indicator in the settings displays a green tick when the connection is successful.
 
-#### AI Assistant
+[1]: /bits_ai/mcp_server#toolsets
+{{% /collapse-content %}}
 
-To configure the Datadog MCP Server with AI Assistant, navigate to the IDE settings. Go to **Tools** > **AI Assistant** > **Model Context Protocol (MCP)** and add the following block:
+{{% collapse-content title="JetBrains AI Assistant" level="h4" expanded=false id="jetbrains-ai-assistant" %}}
+Go to **Tools** > **AI Assistant** > **Model Context Protocol (MCP)** and add the following block:
 
 <pre><code>{
   "mcpServers": {
     "datadog": {
       "url": "{{< region-param key="mcp_server_endpoint" >}}"
       "headers": {
-        "DD_API_KEY": "your API key",
-        "DD_APPLICATION_KEY": "your APP key"
+        "DD_API_KEY": "&lt;YOUR_API_KEY&gt;",
+        "DD_APPLICATION_KEY": "&lt;YOUR_APP_KEY&gt;"
       }
     }
   }
 }
 </code></pre>
 
+To enable [product-specific tools][1], include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and LLM Observability tools: 
+
+<pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
+
 The status indicator in the settings displays a green tick when the connection is successful.
 
-#### Agent CLIs
+[1]: /bits_ai/mcp_server#toolsets
+{{% /collapse-content %}}
 
+{{% collapse-content title="Agent CLIs" level="h4" expanded=false id="jetbrains-agent-clis" %}}
 Many developers use an agent CLI such as Claude Code or Codex alongside their JetBrains IDE. See the configuration for those CLI tools:
 - [Claude Code][4]
 - [Codex][5]
 
-The [Datadog plugin][3] integrates with these agent CLIs. For an uninterrupted experience, install the plugin at the same time as you configure the Datadog MCP Server.
+The [Datadog plugin for JetBrains IDEs][3] integrates with these agent CLIs. For an uninterrupted experience, install the plugin at the same time as you configure the Datadog MCP Server.
 
-[1]: https://plugins.jetbrains.com/plugin/26104-junie-the-ai-coding-agent-by-jetbrains
-[2]: https://plugins.jetbrains.com/plugin/22282-jetbrains-ai-assistant
 [3]: /ide_plugins/idea/
 [4]: /bits_ai/mcp_server/setup/?tab=claudecode
 [5]: /bits_ai/mcp_server/setup/?tab=codex
+{{% /collapse-content %}}
+{{< /site-region >}}
 
+{{< site-region region="gov" >}}
+<div class="alert alert-danger">Datadog MCP Server is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
+[1]: https://plugins.jetbrains.com/plugin/26104-junie-the-ai-coding-agent-by-jetbrains
+[2]: https://plugins.jetbrains.com/plugin/22282-jetbrains-ai-assistant
+[3]: /getting_started/site/
 {{% /tab %}}
 
 {{% tab "Other" %}}
 
 For most other [supported clients](#supported-clients), use these instructions for remote authentication. For Cline or when remote authentication is unreliable or not available, use [local binary authentication](#local-binary-authentication).
 
-Point your AI agent to the MCP Server endpoint for your regional [Datadog site][1]. Use the **Datadog Site** selector on the right side of this page.
+Point your AI agent to the MCP Server endpoint for your regional [Datadog site][1]. Use the **Datadog Site** selector on the right side of this page to select your site.
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
 Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-param key="mcp_server_endpoint" >}}</code>.
