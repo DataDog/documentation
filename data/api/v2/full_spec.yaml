@@ -70893,7 +70893,7 @@ paths:
       summary: Delete datastore
       tags:
         - Actions Datastores
-      x-menu-order: 6
+      x-menu-order: 5
       x-permission:
         operator: OR
         permissions:
@@ -70932,7 +70932,7 @@ paths:
       summary: Get datastore
       tags:
         - Actions Datastores
-      x-menu-order: 4
+      x-menu-order: 3
       x-permission:
         operator: OR
         permissions:
@@ -70977,7 +70977,7 @@ paths:
       summary: Update datastore
       tags:
         - Actions Datastores
-      x-menu-order: 5
+      x-menu-order: 4
       x-permission:
         operator: OR
         permissions:
@@ -71023,7 +71023,7 @@ paths:
       summary: Delete datastore item
       tags:
         - Actions Datastores
-      x-menu-order: 8
+      x-menu-order: 7
       x-permission:
         operator: OR
         permissions:
@@ -71093,7 +71093,7 @@ paths:
       summary: List datastore items
       tags:
         - Actions Datastores
-      x-menu-order: 7
+      x-menu-order: 6
       x-permission:
         operator: OR
         permissions:
@@ -71138,7 +71138,7 @@ paths:
       summary: Update datastore item
       tags:
         - Actions Datastores
-      x-menu-order: 9
+      x-menu-order: 8
       x-permission:
         operator: OR
         permissions:
@@ -71191,7 +71191,7 @@ paths:
       summary: Bulk delete datastore items
       tags:
         - Actions Datastores
-      x-menu-order: 11
+      x-menu-order: 9
       x-permission:
         operator: OR
         permissions:
@@ -74041,7 +74041,7 @@ paths:
       summary: Get all projects
       tags:
         - Case Management
-      x-menu-order: 2
+      x-menu-order: 29
     post:
       description: Create a project.
       operationId: CreateProject
@@ -74077,7 +74077,7 @@ paths:
       summary: Create a project
       tags:
         - Case Management
-      x-menu-order: 1
+      x-menu-order: 28
   /api/v2/cases/projects/{project_id}:
     delete:
       description: Remove a project using the project's `id`.
@@ -74105,7 +74105,7 @@ paths:
       summary: Remove a project
       tags:
         - Case Management
-      x-menu-order: 4
+      x-menu-order: 31
     get:
       description: >-
         Get the details of a project by `project_id`.
@@ -74137,7 +74137,7 @@ paths:
       summary: Get the details of a project
       tags:
         - Case Management
-      x-menu-order: 3
+      x-menu-order: 30
     patch:
       description: >-
         Update a project.
@@ -74176,7 +74176,7 @@ paths:
       summary: Update a project
       tags:
         - Case Management
-      x-menu-order: 5
+      x-menu-order: 32
   /api/v2/cases/projects/{project_id}/notification_rules:
     get:
       description: >-
@@ -74215,7 +74215,7 @@ paths:
       summary: Get notification rules
       tags:
         - Case Management
-      x-menu-order: 1
+      x-menu-order: 17
     post:
       description: Create a notification rule for a project.
       operationId: CreateProjectNotificationRule
@@ -74259,7 +74259,7 @@ paths:
       summary: Create a notification rule
       tags:
         - Case Management
-      x-menu-order: 2
+      x-menu-order: 18
   /api/v2/cases/projects/{project_id}/notification_rules/{notification_rule_id}:
     delete:
       description: Delete a notification rule using the notification rule's `id`.
@@ -74294,7 +74294,7 @@ paths:
       summary: Delete a notification rule
       tags:
         - Case Management
-      x-menu-order: 4
+      x-menu-order: 20
     put:
       description: >-
         Update a notification rule.
@@ -74336,7 +74336,7 @@ paths:
       summary: Update a notification rule
       tags:
         - Case Management
-      x-menu-order: 3
+      x-menu-order: 19
   /api/v2/cases/types:
     get:
       description: Get all case types
@@ -74578,7 +74578,7 @@ paths:
       summary: Archive case
       tags:
         - Case Management
-      x-menu-order: 8
+      x-menu-order: 10
   /api/v2/cases/{case_id}/assign:
     post:
       description: Assign case to a user
@@ -74617,7 +74617,7 @@ paths:
       summary: Assign case
       tags:
         - Case Management
-      x-menu-order: 6
+      x-menu-order: 8
   /api/v2/cases/{case_id}/attributes:
     post:
       description: Update case attributes
@@ -74656,7 +74656,7 @@ paths:
       summary: Update case attributes
       tags:
         - Case Management
-      x-menu-order: 10
+      x-menu-order: 12
   /api/v2/cases/{case_id}/comment:
     post:
       description: Comment case
@@ -74690,7 +74690,7 @@ paths:
       summary: Comment case
       tags:
         - Case Management
-      x-menu-order: 11
+      x-menu-order: 13
   /api/v2/cases/{case_id}/comment/{cell_id}:
     delete:
       description: Delete case comment
@@ -74714,7 +74714,7 @@ paths:
       summary: Delete case comment
       tags:
         - Case Management
-      x-menu-order: 12
+      x-menu-order: 14
   /api/v2/cases/{case_id}/custom_attributes/{custom_attribute_key}:
     delete:
       description: Delete custom attribute from case
@@ -74745,7 +74745,7 @@ paths:
       summary: Delete custom attribute from case
       tags:
         - Case Management
-      x-menu-order: 14
+      x-menu-order: 16
     post:
       description: Update case custom attribute
       operationId: UpdateCaseCustomAttribute
@@ -74784,7 +74784,7 @@ paths:
       summary: Update case custom attribute
       tags:
         - Case Management
-      x-menu-order: 13
+      x-menu-order: 15
   /api/v2/cases/{case_id}/description:
     post:
       description: Update case description
@@ -74823,7 +74823,7 @@ paths:
       summary: Update case description
       tags:
         - Case Management
-      x-menu-order: 4
+      x-menu-order: 5
   /api/v2/cases/{case_id}/priority:
     post:
       description: Update case priority
@@ -74862,7 +74862,7 @@ paths:
       summary: Update case priority
       tags:
         - Case Management
-      x-menu-order: 5
+      x-menu-order: 7
   /api/v2/cases/{case_id}/relationships/incidents:
     post:
       description: Link an incident to a case
@@ -75284,7 +75284,7 @@ paths:
       summary: Update case status
       tags:
         - Case Management
-      x-menu-order: 4
+      x-menu-order: 6
   /api/v2/cases/{case_id}/title:
     post:
       description: Update case title
@@ -75362,7 +75362,7 @@ paths:
       summary: Unarchive case
       tags:
         - Case Management
-      x-menu-order: 9
+      x-menu-order: 11
   /api/v2/cases/{case_id}/unassign:
     post:
       description: Unassign case
@@ -75401,7 +75401,7 @@ paths:
       summary: Unassign case
       tags:
         - Case Management
-      x-menu-order: 7
+      x-menu-order: 9
   /api/v2/catalog/entity:
     get:
       description: Get a list of entities from Software Catalog.
@@ -75509,7 +75509,7 @@ paths:
       summary: Preview catalog entities
       tags:
         - Software Catalog
-      x-menu-order: 3.5
+      x-menu-order: 4
   /api/v2/catalog/entity/{entity_id}:
     delete:
       description: Delete a single entity in Software Catalog.
@@ -75574,7 +75574,7 @@ paths:
       summary: Get a list of entity kinds
       tags:
         - Software Catalog
-      x-menu-order: 4
+      x-menu-order: 6
       x-pagination:
         limitParam: page[limit]
         pageOffsetParam: page[offset]
@@ -75611,7 +75611,7 @@ paths:
       tags:
         - Software Catalog
       x-codegen-request-body-name: body
-      x-menu-order: 5
+      x-menu-order: 7
   /api/v2/catalog/kind/{kind_id}:
     delete:
       description: Delete a single kind in Software Catalog.
@@ -75637,7 +75637,7 @@ paths:
       summary: Delete a single kind
       tags:
         - Software Catalog
-      x-menu-order: 6
+      x-menu-order: 8
   /api/v2/catalog/relation:
     get:
       description: Get a list of entity relations from Software Catalog.
@@ -75683,7 +75683,7 @@ paths:
       summary: Get a list of entity relations
       tags:
         - Software Catalog
-      x-menu-order: 3
+      x-menu-order: 5
       x-pagination:
         limitParam: page[limit]
         pageOffsetParam: page[offset]
@@ -76549,7 +76549,7 @@ paths:
       summary: Create a custom framework
       tags: ["Security Monitoring"]
       x-codegen-request-body-name: body
-      x-menu-order: 4
+      x-menu-order: 26
       "x-permission":
         operator: AND
         permissions:
@@ -76584,7 +76584,7 @@ paths:
       summary: Delete a custom framework
       tags: ["Security Monitoring"]
       x-codegen-request-body-name: body
-      x-menu-order: 4
+      x-menu-order: 22
       "x-permission":
         operator: AND
         permissions:
@@ -76617,7 +76617,7 @@ paths:
       summary: Get a custom framework
       tags: ["Security Monitoring"]
       x-codegen-request-body-name: body
-      x-menu-order: 4
+      x-menu-order: 23
       "x-permission":
         operator: OR
         permissions:
@@ -76656,7 +76656,7 @@ paths:
       summary: Update a custom framework
       tags: ["Security Monitoring"]
       x-codegen-request-body-name: body
-      x-menu-order: 4
+      x-menu-order: 21
       "x-permission":
         operator: AND
         permissions:
@@ -76690,7 +76690,7 @@ paths:
             - security_monitoring_filters_read
       summary: List resource filters
       tags: ["Security Monitoring"]
-      x-menu-order: 26
+      x-menu-order: 24
       "x-permission":
         operator: OR
         permissions:
@@ -76725,7 +76725,7 @@ paths:
       summary: Update resource filters
       tags: ["Security Monitoring"]
       x-codegen-request-body-name: body
-      x-menu-order: 27
+      x-menu-order: 25
       "x-permission":
         operator: OR
         permissions:
@@ -78103,7 +78103,7 @@ paths:
       summary: Get active billing dimensions for cost attribution
       tags:
         - Usage Metering
-      x-menu-order: 5
+      x-menu-order: 11
       "x-permission":
         operator: OR
         permissions:
@@ -78222,7 +78222,7 @@ paths:
       summary: Get Monthly Cost Attribution
       tags:
         - Usage Metering
-      x-menu-order: 5
+      x-menu-order: 8
       "x-permission":
         operator: AND
         permissions:
@@ -78321,7 +78321,7 @@ paths:
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Get the CSM Hosts and Containers Coverage Analysis
       tags: ["CSM Coverage Analysis"]
-      x-menu-order: 1
+      x-menu-order: 2
   /api/v2/csm/onboarding/coverage_analysis/serverless:
     get:
       description: |-
@@ -78342,7 +78342,7 @@ paths:
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Get the CSM Serverless Coverage Analysis
       tags: ["CSM Coverage Analysis"]
-      x-menu-order: 1
+      x-menu-order: 3
   /api/v2/csm/onboarding/serverless/agents:
     get:
       description: Get the list of all CSM Serverless Agents running on your hosts and containers.
@@ -78394,7 +78394,7 @@ paths:
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Get all CSM Serverless Agents
       tags: ["CSM Agents"]
-      x-menu-order: 3
+      x-menu-order: 4
   /api/v2/current_user/application_keys:
     get:
       description: List all application keys available for current user
@@ -78437,7 +78437,7 @@ paths:
       summary: Get all application keys owned by current user
       tags:
         - Key Management
-      x-menu-order: 5
+      x-menu-order: 14
       "x-permission":
         operator: OR
         permissions:
@@ -78476,7 +78476,7 @@ paths:
       tags:
         - Key Management
       x-codegen-request-body-name: body
-      x-menu-order: 4
+      x-menu-order: 13
       "x-permission":
         operator: OR
         permissions:
@@ -78507,7 +78507,7 @@ paths:
       summary: Delete an application key owned by current user
       tags:
         - Key Management
-      x-menu-order: 1
+      x-menu-order: 10
       "x-permission":
         operator: OR
         permissions:
@@ -78543,7 +78543,7 @@ paths:
       summary: Get one application key owned by current user
       tags:
         - Key Management
-      x-menu-order: 3
+      x-menu-order: 12
       "x-permission":
         operator: OR
         permissions:
@@ -78592,7 +78592,7 @@ paths:
       tags:
         - Key Management
       x-codegen-request-body-name: body
-      x-menu-order: 2
+      x-menu-order: 11
       "x-permission":
         operator: OR
         permissions:
@@ -79908,7 +79908,7 @@ paths:
       summary: Send an incident event (legacy)
       tags: ["DORA Metrics"]
       x-codegen-request-body-name: body
-      x-menu-order: 28
+      x-menu-order: 10
   /api/v2/downtime:
     get:
       description: Get all scheduled downtimes.
@@ -80056,7 +80056,7 @@ paths:
       summary: Cancel a downtime
       tags:
         - Downtimes
-      x-menu-order: 4
+      x-menu-order: 3
       "x-permission":
         operator: OR
         permissions:
@@ -80116,7 +80116,7 @@ paths:
       summary: Get a downtime
       tags:
         - Downtimes
-      x-menu-order: 5
+      x-menu-order: 4
       "x-permission":
         operator: OR
         permissions:
@@ -80175,7 +80175,7 @@ paths:
       tags:
         - Downtimes
       x-codegen-request-body-name: body
-      x-menu-order: 6
+      x-menu-order: 5
       "x-permission":
         operator: OR
         permissions:
@@ -80562,7 +80562,7 @@ paths:
       summary: Search events
       tags: ["Events"]
       x-codegen-request-body-name: body
-      x-menu-order: 2
+      x-menu-order: 3
       x-pagination:
         cursorParam: body.page.cursor
         cursorPath: meta.page.after
@@ -80608,7 +80608,7 @@ paths:
             - events_read
       summary: Get an event
       tags: ["Events"]
-      x-menu-order: 3
+      x-menu-order: 4
       "x-permission":
         operator: OR
         permissions:
@@ -80740,7 +80740,7 @@ paths:
       summary: Get a list of incidents
       tags:
         - Incidents
-      x-menu-order: 5
+      x-menu-order: 50
       x-pagination:
         limitParam: page[size]
         pageOffsetParam: page[offset]
@@ -82343,7 +82343,7 @@ paths:
       summary: Get a list of an incident's integration metadata
       tags:
         - Incidents
-      x-menu-order: 9
+      x-menu-order: 51
       "x-permission":
         operator: OR
         permissions:
@@ -82743,7 +82743,7 @@ paths:
       summary: List all AWS integrations
       tags:
         - AWS Integration
-      x-menu-order: 1
+      x-menu-order: 12
       "x-permission":
         operator: OR
         permissions:
@@ -82776,7 +82776,7 @@ paths:
       tags:
         - AWS Integration
       x-codegen-request-body-name: body
-      x-menu-order: 2
+      x-menu-order: 13
       "x-permission":
         operator: OR
         permissions:
@@ -82920,7 +82920,7 @@ paths:
       summary: Get AWS CCM config
       tags:
         - AWS Integration
-      x-menu-order: 7
+      x-menu-order: 14
       "x-permission":
         operator: OR
         permissions:
@@ -83000,7 +83000,7 @@ paths:
       tags:
         - AWS Integration
       x-codegen-request-body-name: body
-      x-menu-order: 8
+      x-menu-order: 15
       "x-permission":
         operator: OR
         permissions:
@@ -83083,7 +83083,7 @@ paths:
       summary: Get all Amazon EventBridge sources
       tags:
         - AWS Integration
-      x-menu-order: 9
+      x-menu-order: 16
       "x-permission":
         operator: OR
         permissions:
@@ -83117,7 +83117,7 @@ paths:
       tags:
         - AWS Integration
       x-codegen-request-body-name: body
-      x-menu-order: 10
+      x-menu-order: 17
       "x-permission":
         operator: OR
         permissions:
@@ -83420,7 +83420,7 @@ paths:
       summary: Get space information by display name
       tags:
         - Google Chat Integration
-      x-menu-order: 1
+      x-menu-order: 6
   /api/v2/integration/google-chat/organizations/{organization_binding_id}/organization-handles:
     get:
       description: Get a list of all organization handles from the Datadog Google Chat integration.
@@ -83479,7 +83479,7 @@ paths:
       tags:
         - Google Chat Integration
       x-codegen-request-body-name: body
-      x-menu-order: 1
+      x-menu-order: 2
   /api/v2/integration/google-chat/organizations/{organization_binding_id}/organization-handles/{handle_id}:
     delete:
       description: Delete an organization handle from the Datadog Google Chat integration.
@@ -83509,7 +83509,7 @@ paths:
       summary: Delete organization handle
       tags:
         - Google Chat Integration
-      x-menu-order: 1
+      x-menu-order: 5
     get:
       description: Get an organization handle from the Datadog Google Chat integration.
       operationId: GetOrganizationHandle
@@ -83534,7 +83534,7 @@ paths:
       summary: Get organization handle
       tags:
         - Google Chat Integration
-      x-menu-order: 1
+      x-menu-order: 3
     patch:
       description: Update an organization handle from the Datadog Google Chat integration.
       operationId: UpdateOrganizationHandle
@@ -83569,7 +83569,7 @@ paths:
       tags:
         - Google Chat Integration
       x-codegen-request-body-name: body
-      x-menu-order: 1
+      x-menu-order: 4
   /api/v2/integration/jira/accounts:
     get:
       description: |-
@@ -83838,7 +83838,7 @@ paths:
       summary: Get all tenant-based handles
       tags:
         - Microsoft Teams Integration
-      x-menu-order: 1
+      x-menu-order: 2
     post:
       description: Create a tenant-based handle in the Datadog Microsoft Teams integration.
       operationId: CreateTenantBasedHandle
@@ -83872,7 +83872,7 @@ paths:
       tags:
         - Microsoft Teams Integration
       x-codegen-request-body-name: body
-      x-menu-order: 1
+      x-menu-order: 3
   /api/v2/integration/ms-teams/configuration/tenant-based-handles/{handle_id}:
     delete:
       description: Delete a tenant-based handle from the Datadog Microsoft Teams integration.
@@ -83893,7 +83893,7 @@ paths:
       summary: Delete tenant-based handle
       tags:
         - Microsoft Teams Integration
-      x-menu-order: 1
+      x-menu-order: 6
     get:
       description: Get the tenant, team, and channel information of a tenant-based handle from the Datadog Microsoft Teams integration.
       operationId: GetTenantBasedHandle
@@ -83919,7 +83919,7 @@ paths:
       summary: Get tenant-based handle information
       tags:
         - Microsoft Teams Integration
-      x-menu-order: 1
+      x-menu-order: 4
     patch:
       description: Update a tenant-based handle from the Datadog Microsoft Teams integration.
       operationId: UpdateTenantBasedHandle
@@ -83955,7 +83955,7 @@ paths:
       tags:
         - Microsoft Teams Integration
       x-codegen-request-body-name: body
-      x-menu-order: 1
+      x-menu-order: 5
   /api/v2/integration/ms-teams/configuration/workflows-webhook-handles:
     get:
       description: Get a list of all Workflows webhook handles from the Datadog Microsoft Teams integration.
@@ -83982,7 +83982,7 @@ paths:
       summary: Get all Workflows webhook handles
       tags:
         - Microsoft Teams Integration
-      x-menu-order: 1
+      x-menu-order: 7
     post:
       description: Create a Workflows webhook handle in the Datadog Microsoft Teams integration.
       operationId: CreateWorkflowsWebhookHandle
@@ -84016,7 +84016,7 @@ paths:
       tags:
         - Microsoft Teams Integration
       x-codegen-request-body-name: body
-      x-menu-order: 1
+      x-menu-order: 8
   /api/v2/integration/ms-teams/configuration/workflows-webhook-handles/{handle_id}:
     delete:
       description: Delete a Workflows webhook handle from the Datadog Microsoft Teams integration.
@@ -84037,7 +84037,7 @@ paths:
       summary: Delete Workflows webhook handle
       tags:
         - Microsoft Teams Integration
-      x-menu-order: 1
+      x-menu-order: 11
     get:
       description: Get the name of a Workflows webhook handle from the Datadog Microsoft Teams integration.
       operationId: GetWorkflowsWebhookHandle
@@ -84063,7 +84063,7 @@ paths:
       summary: Get Workflows webhook handle information
       tags:
         - Microsoft Teams Integration
-      x-menu-order: 1
+      x-menu-order: 9
     patch:
       description: Update a Workflows webhook handle from the Datadog Microsoft Teams integration.
       operationId: UpdateWorkflowsWebhookHandle
@@ -84099,7 +84099,7 @@ paths:
       tags:
         - Microsoft Teams Integration
       x-codegen-request-body-name: body
-      x-menu-order: 1
+      x-menu-order: 10
   /api/v2/integration/oci/products:
     get:
       description: >-
@@ -87780,7 +87780,7 @@ paths:
       summary: Get restriction query for a given role
       tags:
         - Logs Restriction Queries
-      x-menu-order: 10
+      x-menu-order: 11
       "x-permission":
         operator: OR
         permissions:
@@ -87824,7 +87824,7 @@ paths:
       summary: Get all restriction queries for a given user
       tags:
         - Logs Restriction Queries
-      x-menu-order: 9
+      x-menu-order: 10
       "x-permission":
         operator: OR
         permissions:
@@ -87865,7 +87865,7 @@ paths:
       tags:
         - Logs Restriction Queries
       x-codegen-request-body-name: body
-      x-menu-order: 5
+      x-menu-order: 6
       "x-permission":
         operator: OR
         permissions:
@@ -88011,7 +88011,7 @@ paths:
       tags:
         - Logs Restriction Queries
       x-codegen-request-body-name: body
-      x-menu-order: 4.5
+      x-menu-order: 5
       "x-permission":
         operator: OR
         permissions:
@@ -88058,7 +88058,7 @@ paths:
       tags:
         - Logs Restriction Queries
       x-codegen-request-body-name: body
-      x-menu-order: 8
+      x-menu-order: 9
       "x-permission":
         operator: OR
         permissions:
@@ -88104,7 +88104,7 @@ paths:
       tags:
         - Logs Restriction Queries
       x-codegen-request-body-name: body
-      x-menu-order: 6
+      x-menu-order: 7
       "x-permission":
         operator: OR
         permissions:
@@ -88153,7 +88153,7 @@ paths:
       tags:
         - Logs Restriction Queries
       x-codegen-request-body-name: body
-      x-menu-order: 7
+      x-menu-order: 8
       "x-permission":
         operator: OR
         permissions:
@@ -89940,7 +89940,7 @@ paths:
       tags:
         - Downtimes
       x-codegen-request-body-name: body
-      x-menu-order: 7
+      x-menu-order: 6
       x-pagination:
         limitParam: page[limit]
         pageOffsetParam: page[offset]
@@ -91682,7 +91682,7 @@ paths:
         "429": {$ref: "#/components/responses/TooManyRequestsResponse"}
       summary: List Org Configs
       tags: [Organizations]
-      x-menu-order: 100
+      x-menu-order: 1
       "x-permission":
         operator: OPEN
         permissions: []
@@ -91704,7 +91704,7 @@ paths:
         "429": {$ref: "#/components/responses/TooManyRequestsResponse"}
       summary: Get a specific Org Config value
       tags: [Organizations]
-      x-menu-order: 101
+      x-menu-order: 2
       "x-permission":
         operator: OPEN
         permissions: []
@@ -91730,7 +91730,7 @@ paths:
         "429": {$ref: "#/components/responses/TooManyRequestsResponse"}
       summary: Update a specific Org Config
       tags: [Organizations]
-      x-menu-order: 102
+      x-menu-order: 3
       "x-permission":
         operator: OR
         permissions:
@@ -92242,7 +92242,7 @@ paths:
       summary: Get a finding
       tags:
         - "Security Monitoring"
-      x-menu-order: 2
+      x-menu-order: 3
       x-unstable: |-
         **Note**: This endpoint uses the legacy security findings data model and is planned for deprecation.
         Use the [search security findings endpoint](https://docs.datadoghq.com/api/latest/security-monitoring/#search-security-findings),
@@ -93127,7 +93127,7 @@ paths:
       tags:
         - Metrics
       x-codegen-request-body-name: body
-      x-menu-order: 2
+      x-menu-order: 16
       "x-permission":
         operator: OR
         permissions:
@@ -93168,7 +93168,7 @@ paths:
       tags:
         - Metrics
       x-codegen-request-body-name: body
-      x-menu-order: 1
+      x-menu-order: 15
       "x-permission":
         operator: OR
         permissions:
@@ -93663,7 +93663,7 @@ paths:
       summary: List all WAF custom rules
       tags:
         - "Application Security"
-      x-menu-order: 13
+      x-menu-order: 9
     post:
       description: Create a new WAF custom rule with the given parameters.
       operationId: CreateApplicationSecurityWafCustomRule
@@ -93693,7 +93693,7 @@ paths:
       tags:
         - "Application Security"
       x-codegen-request-body-name: body
-      x-menu-order: 12
+      x-menu-order: 10
   /api/v2/remote_config/products/asm/waf/custom_rules/{custom_rule_id}:
     delete:
       description: Delete a specific WAF custom rule.
@@ -93714,7 +93714,7 @@ paths:
       summary: Delete a WAF Custom Rule
       tags:
         - "Application Security"
-      x-menu-order: 16
+      x-menu-order: 8
       x-terraform-resource: appsec_waf_custom_rule
     get:
       description: Retrieve a WAF custom rule by ID.
@@ -93735,7 +93735,7 @@ paths:
       summary: Get a WAF custom rule
       tags:
         - "Application Security"
-      x-menu-order: 10
+      x-menu-order: 6
       x-terraform-resource: appsec_waf_custom_rule
     put:
       description: |-
@@ -93772,7 +93772,7 @@ paths:
       tags:
         - "Application Security"
       x-codegen-request-body-name: body
-      x-menu-order: 15
+      x-menu-order: 7
       x-terraform-resource: appsec_waf_custom_rule
   /api/v2/remote_config/products/asm/waf/exclusion_filters:
     get:
@@ -93792,7 +93792,7 @@ paths:
       summary: List all WAF exclusion filters
       tags:
         - "Application Security"
-      x-menu-order: 3
+      x-menu-order: 4
       "x-permission":
         operator: AND
         permissions:
@@ -93831,7 +93831,7 @@ paths:
       tags:
         - "Application Security"
       x-codegen-request-body-name: body
-      x-menu-order: 2
+      x-menu-order: 5
       "x-permission":
         operator: AND
         permissions:
@@ -93857,7 +93857,7 @@ paths:
       summary: Delete a WAF exclusion filter
       tags:
         - "Application Security"
-      x-menu-order: 6
+      x-menu-order: 3
       "x-permission":
         operator: AND
         permissions:
@@ -93925,7 +93925,7 @@ paths:
       tags:
         - "Application Security"
       x-codegen-request-body-name: body
-      x-menu-order: 5
+      x-menu-order: 2
       "x-permission":
         operator: AND
         permissions:
@@ -94569,7 +94569,7 @@ paths:
       summary: List roles
       tags:
         - Roles
-      x-menu-order: 1
+      x-menu-order: 2
       "x-permission":
         operator: OR
         permissions:
@@ -94613,7 +94613,7 @@ paths:
       tags:
         - Roles
       x-codegen-request-body-name: body
-      x-menu-order: 2
+      x-menu-order: 3
       "x-permission":
         operator: OR
         permissions:
@@ -94639,7 +94639,7 @@ paths:
       summary: List role templates
       tags:
         - Roles
-      x-menu-order: 16
+      x-menu-order: 14
       x-unstable: "**Note**: This endpoint may be subject to changes."
   /api/v2/roles/{role_id}:
     delete:
@@ -94673,7 +94673,7 @@ paths:
       tags:
         - Roles
       x-codegen-request-body-name: body
-      x-menu-order: 5
+      x-menu-order: 6
     get:
       description: Get a role in the organization specified by the role’s `role_id`.
       operationId: GetRole
@@ -94709,7 +94709,7 @@ paths:
       tags:
         - Roles
       x-codegen-request-body-name: body
-      x-menu-order: 3
+      x-menu-order: 4
     patch:
       description: |-
         Edit a role. Can only be used with application keys belonging to administrators.
@@ -94764,7 +94764,7 @@ paths:
       tags:
         - Roles
       x-codegen-request-body-name: body
-      x-menu-order: 4
+      x-menu-order: 5
       "x-permission":
         operator: OR
         permissions:
@@ -94823,7 +94823,7 @@ paths:
       tags:
         - Roles
       x-codegen-request-body-name: body
-      x-menu-order: 12
+      x-menu-order: 13
       "x-permission":
         operator: OR
         permissions:
@@ -94876,7 +94876,7 @@ paths:
       tags:
         - Roles
       x-codegen-request-body-name: body
-      x-menu-order: 8
+      x-menu-order: 9
       "x-permission":
         operator: OR
         permissions:
@@ -94916,7 +94916,7 @@ paths:
       tags:
         - Roles
       x-codegen-request-body-name: body
-      x-menu-order: 6
+      x-menu-order: 7
     post:
       description: Adds a permission to a role.
       operationId: AddPermissionToRole
@@ -94964,7 +94964,7 @@ paths:
       tags:
         - Roles
       x-codegen-request-body-name: body
-      x-menu-order: 7
+      x-menu-order: 8
       "x-permission":
         operator: OR
         permissions:
@@ -95017,7 +95017,7 @@ paths:
       tags:
         - Roles
       x-codegen-request-body-name: body
-      x-menu-order: 11
+      x-menu-order: 12
       "x-permission":
         operator: OR
         permissions:
@@ -95074,7 +95074,7 @@ paths:
       summary: Get all users of a role
       tags:
         - Roles
-      x-menu-order: 9
+      x-menu-order: 10
     post:
       description: Adds a user to a role.
       operationId: AddUserToRole
@@ -95122,7 +95122,7 @@ paths:
       tags:
         - Roles
       x-codegen-request-body-name: body
-      x-menu-order: 10
+      x-menu-order: 11
       "x-permission":
         operator: OR
         permissions:
@@ -96296,7 +96296,7 @@ paths:
       tags:
         - Organizations
       x-codegen-request-body-name: body
-      x-menu-order: 1
+      x-menu-order: 4
       "x-permission":
         operator: OR
         permissions:
@@ -97026,7 +97026,7 @@ paths:
       tags:
         - Service Scorecards
       x-codegen-request-body-name: body
-      x-menu-order: 1
+      x-menu-order: 5
       x-unstable: |-
         **Note**: This endpoint is in public beta.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -97114,7 +97114,7 @@ paths:
       summary: List all rules
       tags:
         - Service Scorecards
-      x-menu-order: 2
+      x-menu-order: 6
       x-pagination:
         limitParam: page[size]
         pageOffsetParam: page[offset]
@@ -97154,7 +97154,7 @@ paths:
       tags:
         - Service Scorecards
       x-codegen-request-body-name: body
-      x-menu-order: 1
+      x-menu-order: 7
       x-unstable: |-
         **Note**: This endpoint is in public beta.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -97548,7 +97548,7 @@ paths:
       summary: List security findings
       tags:
         - "Security Monitoring"
-      x-menu-order: 1
+      x-menu-order: 14
       x-pagination:
         cursorParam: page[cursor]
         cursorPath: meta.page.after
@@ -97589,7 +97589,7 @@ paths:
       tags:
         - "Security Monitoring"
       x-codegen-request-body-name: body
-      x-menu-order: 46
+      x-menu-order: 17
       "x-permission":
         operator: OR
         permissions:
@@ -97628,7 +97628,7 @@ paths:
       tags:
         - "Security Monitoring"
       x-codegen-request-body-name: body
-      x-menu-order: 44
+      x-menu-order: 16
       "x-permission":
         operator: OR
         permissions:
@@ -97675,7 +97675,7 @@ paths:
       tags:
         - "Security Monitoring"
       x-codegen-request-body-name: body
-      x-menu-order: 45
+      x-menu-order: 18
       "x-permission":
         operator: OR
         permissions:
@@ -97715,7 +97715,7 @@ paths:
       tags:
         - "Security Monitoring"
       x-codegen-request-body-name: body
-      x-menu-order: 48
+      x-menu-order: 20
       "x-permission":
         operator: OR
         permissions:
@@ -97754,7 +97754,7 @@ paths:
       tags:
         - "Security Monitoring"
       x-codegen-request-body-name: body
-      x-menu-order: 47
+      x-menu-order: 19
       "x-permission":
         operator: OR
         permissions:
@@ -97799,7 +97799,7 @@ paths:
       tags:
         - "Security Monitoring"
       x-codegen-request-body-name: body
-      x-menu-order: 2
+      x-menu-order: 15
       x-pagination:
         cursorParam: body.data.attributes.page.cursor
         cursorPath: meta.page.after
@@ -97919,7 +97919,7 @@ paths:
       summary: List assets SBOMs
       tags:
         - "Security Monitoring"
-      x-menu-order: 28
+      x-menu-order: 83
       x-permission:
         operator: OR
         permissions:
@@ -97991,7 +97991,7 @@ paths:
       summary: Get SBOM
       tags:
         - "Security Monitoring"
-      x-menu-order: 27
+      x-menu-order: 82
       x-permission:
         operator: OR
         permissions:
@@ -98122,7 +98122,7 @@ paths:
       summary: List scanned assets metadata
       tags:
         - "Security Monitoring"
-      x-menu-order: 28
+      x-menu-order: 84
       x-permission:
         operator: OR
         permissions:
@@ -98147,7 +98147,7 @@ paths:
       summary: Get the list of signal-based notification rules
       tags:
         - Security Monitoring
-      x-menu-order: 15
+      x-menu-order: 9
       "x-permission":
         operator: OR
         permissions:
@@ -98184,7 +98184,7 @@ paths:
       tags:
         - Security Monitoring
       x-codegen-request-body-name: body
-      x-menu-order: 16
+      x-menu-order: 10
       "x-permission":
         operator: OR
         permissions:
@@ -98215,7 +98215,7 @@ paths:
       summary: Delete a signal-based notification rule
       tags:
         - Security Monitoring
-      x-menu-order: 21
+      x-menu-order: 12
       "x-permission":
         operator: OR
         permissions:
@@ -98251,7 +98251,7 @@ paths:
       summary: Get details of a signal-based notification rule
       tags:
         - Security Monitoring
-      x-menu-order: 18
+      x-menu-order: 11
       "x-permission":
         operator: OR
         permissions:
@@ -98296,7 +98296,7 @@ paths:
       tags:
         - Security Monitoring
       x-codegen-request-body-name: body
-      x-menu-order: 20
+      x-menu-order: 13
       "x-permission":
         operator: OR
         permissions:
@@ -98740,7 +98740,7 @@ paths:
       summary: List vulnerabilities
       tags:
         - "Security Monitoring"
-      x-menu-order: 25
+      x-menu-order: 79
       x-permission:
         operator: OR
         permissions:
@@ -98765,7 +98765,7 @@ paths:
       summary: Get the list of vulnerability notification rules
       tags:
         - Security Monitoring
-      x-menu-order: 15
+      x-menu-order: 4
       "x-permission":
         operator: OR
         permissions:
@@ -98802,7 +98802,7 @@ paths:
       tags:
         - Security Monitoring
       x-codegen-request-body-name: body
-      x-menu-order: 16
+      x-menu-order: 5
       "x-permission":
         operator: OR
         permissions:
@@ -98833,7 +98833,7 @@ paths:
       summary: Delete a vulnerability-based notification rule
       tags:
         - Security Monitoring
-      x-menu-order: 21
+      x-menu-order: 7
       "x-permission":
         operator: OR
         permissions:
@@ -98869,7 +98869,7 @@ paths:
       summary: Get details of a vulnerability notification rule
       tags:
         - Security Monitoring
-      x-menu-order: 18
+      x-menu-order: 6
       "x-permission":
         operator: OR
         permissions:
@@ -98914,7 +98914,7 @@ paths:
       tags:
         - Security Monitoring
       x-codegen-request-body-name: body
-      x-menu-order: 20
+      x-menu-order: 8
       "x-permission":
         operator: OR
         permissions:
@@ -99091,7 +99091,7 @@ paths:
       summary: List vulnerable assets
       tags:
         - "Security Monitoring"
-      x-menu-order: 26
+      x-menu-order: 81
       x-permission:
         operator: OR
         permissions:
@@ -99277,7 +99277,7 @@ paths:
       summary: Get all critical assets
       tags:
         - Security Monitoring
-      x-menu-order: 0
+      x-menu-order: 41
     post:
       description: Create a new critical asset.
       operationId: CreateSecurityMonitoringCriticalAsset
@@ -99312,7 +99312,7 @@ paths:
       tags:
         - Security Monitoring
       x-codegen-request-body-name: body
-      x-menu-order: 0
+      x-menu-order: 42
   /api/v2/security_monitoring/configuration/critical_assets/rules/{rule_id}:
     get:
       description: Get the list of critical assets that affect a specific existing rule by the rule's ID.
@@ -99340,7 +99340,7 @@ paths:
       summary: Get critical assets affecting a specific rule
       tags:
         - Security Monitoring
-      x-menu-order: 0
+      x-menu-order: 46
   /api/v2/security_monitoring/configuration/critical_assets/{critical_asset_id}:
     delete:
       description: Delete a specific critical asset.
@@ -99364,7 +99364,7 @@ paths:
       summary: Delete a critical asset
       tags:
         - Security Monitoring
-      x-menu-order: 0
+      x-menu-order: 45
     get:
       description: Get the details of a specific critical asset.
       operationId: GetSecurityMonitoringCriticalAsset
@@ -99391,7 +99391,7 @@ paths:
       summary: Get a critical asset
       tags:
         - Security Monitoring
-      x-menu-order: 0
+      x-menu-order: 43
     patch:
       description: Update a specific critical asset.
       operationId: UpdateSecurityMonitoringCriticalAsset
@@ -99429,7 +99429,7 @@ paths:
       summary: Update a critical asset
       tags:
         - Security Monitoring
-      x-menu-order: 0
+      x-menu-order: 44
   /api/v2/security_monitoring/configuration/security_filters:
     get:
       description: Get the list of configured security filters with their definitions.
@@ -99452,7 +99452,7 @@ paths:
             - security_monitoring_filters_read
       summary: Get all security filters
       tags: ["Security Monitoring"]
-      x-menu-order: 18
+      x-menu-order: 27
       "x-permission":
         operator: OR
         permissions:
@@ -99494,7 +99494,7 @@ paths:
       summary: Create a security filter
       tags: ["Security Monitoring"]
       x-codegen-request-body-name: body
-      x-menu-order: 17
+      x-menu-order: 28
       "x-permission":
         operator: OR
         permissions:
@@ -99521,7 +99521,7 @@ paths:
             - security_monitoring_filters_write
       summary: Delete a security filter
       tags: ["Security Monitoring"]
-      x-menu-order: 14
+      x-menu-order: 31
       "x-permission":
         operator: OR
         permissions:
@@ -99555,7 +99555,7 @@ paths:
             - security_monitoring_filters_read
       summary: Get a security filter
       tags: ["Security Monitoring"]
-      x-menu-order: 16
+      x-menu-order: 29
       "x-permission":
         operator: OR
         permissions:
@@ -99599,7 +99599,7 @@ paths:
       summary: Update a security filter
       tags: ["Security Monitoring"]
       x-codegen-request-body-name: body
-      x-menu-order: 15
+      x-menu-order: 30
       "x-permission":
         operator: OR
         permissions:
@@ -99650,7 +99650,7 @@ paths:
       summary: Get all suppression rules
       tags:
         - Security Monitoring
-      x-menu-order: 0
+      x-menu-order: 32
     post:
       description: Create a new suppression rule.
       operationId: CreateSecurityMonitoringSuppression
@@ -99685,7 +99685,7 @@ paths:
       tags:
         - Security Monitoring
       x-codegen-request-body-name: body
-      x-menu-order: 0
+      x-menu-order: 33
   /api/v2/security_monitoring/configuration/suppressions/rules:
     post:
       description: Get the list of suppressions that would affect a rule.
@@ -99717,7 +99717,7 @@ paths:
       summary: Get suppressions affecting future rule
       tags:
         - Security Monitoring
-      x-menu-order: 0
+      x-menu-order: 38
   /api/v2/security_monitoring/configuration/suppressions/rules/{rule_id}:
     get:
       description: Get the list of suppressions that affect a specific existing rule by its ID.
@@ -99745,7 +99745,7 @@ paths:
       summary: Get suppressions affecting a specific rule
       tags:
         - Security Monitoring
-      x-menu-order: 0
+      x-menu-order: 39
   /api/v2/security_monitoring/configuration/suppressions/validation:
     post:
       description: Validate a suppression rule.
@@ -99773,7 +99773,7 @@ paths:
       summary: Validate a suppression rule
       tags: ["Security Monitoring"]
       x-codegen-request-body-name: body
-      x-menu-order: 0
+      x-menu-order: 37
       "x-permission":
         operator: OR
         permissions:
@@ -99801,7 +99801,7 @@ paths:
       summary: Delete a suppression rule
       tags:
         - Security Monitoring
-      x-menu-order: 0
+      x-menu-order: 36
     get:
       description: Get the details of a specific suppression rule.
       operationId: GetSecurityMonitoringSuppression
@@ -99828,7 +99828,7 @@ paths:
       summary: Get a suppression rule
       tags:
         - Security Monitoring
-      x-menu-order: 0
+      x-menu-order: 34
     patch:
       description: Update a specific suppression rule.
       operationId: UpdateSecurityMonitoringSuppression
@@ -99866,7 +99866,7 @@ paths:
       summary: Update a suppression rule
       tags:
         - Security Monitoring
-      x-menu-order: 0
+      x-menu-order: 35
   /api/v2/security_monitoring/configuration/suppressions/{suppression_id}/version_history:
     get:
       description: Get a suppression's version history.
@@ -99896,7 +99896,7 @@ paths:
       summary: Get a suppression's version history
       tags:
         - Security Monitoring
-      x-menu-order: 0
+      x-menu-order: 40
   /api/v2/security_monitoring/content_packs/states:
     get:
       description: |-
@@ -99928,7 +99928,7 @@ paths:
       summary: Get content pack states
       tags:
         - Security Monitoring
-      x-menu-order: 3
+      x-menu-order: 46
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -99967,7 +99967,7 @@ paths:
       summary: Activate content pack
       tags:
         - Security Monitoring
-      x-menu-order: 2
+      x-menu-order: 48
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -100005,7 +100005,7 @@ paths:
       summary: Deactivate content pack
       tags:
         - Security Monitoring
-      x-menu-order: 1
+      x-menu-order: 49
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -100047,7 +100047,7 @@ paths:
             - security_monitoring_rules_read
       summary: List rules
       tags: ["Security Monitoring"]
-      x-menu-order: 4
+      x-menu-order: 49
       "x-permission":
         operator: OR
         permissions:
@@ -100082,7 +100082,7 @@ paths:
       summary: Create a detection rule
       tags: ["Security Monitoring"]
       x-codegen-request-body-name: body
-      x-menu-order: 4
+      x-menu-order: 51
       "x-permission":
         operator: OR
         permissions:
@@ -100124,7 +100124,7 @@ paths:
       summary: Bulk export security monitoring rules
       tags: ["Security Monitoring"]
       x-codegen-request-body-name: body
-      x-menu-order: 13
+      x-menu-order: 60
       "x-permission":
         operator: OR
         permissions:
@@ -100171,7 +100171,7 @@ paths:
       summary: Convert a rule from JSON to Terraform
       tags: ["Security Monitoring"]
       x-codegen-request-body-name: body
-      x-menu-order: 12
+      x-menu-order: 59
       "x-permission":
         operator: OR
         permissions:
@@ -100212,7 +100212,7 @@ paths:
       summary: Test a rule
       tags: ["Security Monitoring"]
       x-codegen-request-body-name: body
-      x-menu-order: 9
+      x-menu-order: 56
       "x-permission":
         operator: OR
         permissions:
@@ -100244,7 +100244,7 @@ paths:
       summary: Validate a detection rule
       tags: ["Security Monitoring"]
       x-codegen-request-body-name: body
-      x-menu-order: 10
+      x-menu-order: 57
       "x-permission":
         operator: OR
         permissions:
@@ -100272,7 +100272,7 @@ paths:
             - security_monitoring_rules_write
       summary: Delete an existing rule
       tags: ["Security Monitoring"]
-      x-menu-order: 7
+      x-menu-order: 54
       "x-permission":
         operator: OR
         permissions:
@@ -100300,7 +100300,7 @@ paths:
             - security_monitoring_rules_read
       summary: Get a rule's details
       tags: ["Security Monitoring"]
-      x-menu-order: 5
+      x-menu-order: 52
       "x-permission":
         operator: OR
         permissions:
@@ -100345,7 +100345,7 @@ paths:
       summary: Update an existing rule
       tags: ["Security Monitoring"]
       x-codegen-request-body-name: body
-      x-menu-order: 6
+      x-menu-order: 53
       "x-permission":
         operator: OR
         permissions:
@@ -100385,7 +100385,7 @@ paths:
             - security_monitoring_rules_read
       summary: Convert an existing rule from JSON to Terraform
       tags: ["Security Monitoring"]
-      x-menu-order: 11
+      x-menu-order: 58
       "x-permission":
         operator: OR
         permissions:
@@ -100428,7 +100428,7 @@ paths:
       summary: Test an existing rule
       tags: ["Security Monitoring"]
       x-codegen-request-body-name: body
-      x-menu-order: 8
+      x-menu-order: 55
       "x-permission":
         operator: OR
         permissions:
@@ -100458,7 +100458,7 @@ paths:
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Get a rule's version history
       tags: ["Security Monitoring"]
-      x-menu-order: 25
+      x-menu-order: 61
       "x-permission":
         operator: OR
         permissions:
@@ -100499,7 +100499,7 @@ paths:
             - security_monitoring_signals_read
       summary: Get a quick list of security signals
       tags: ["Security Monitoring"]
-      x-menu-order: 14
+      x-menu-order: 73
       x-pagination:
         cursorParam: page[cursor]
         cursorPath: meta.page.after
@@ -100543,7 +100543,7 @@ paths:
       summary: Get a list of security signals
       tags: ["Security Monitoring"]
       x-codegen-request-body-name: body
-      x-menu-order: 13
+      x-menu-order: 71
       x-pagination:
         cursorParam: body.page.cursor
         cursorPath: meta.page.after
@@ -100577,7 +100577,7 @@ paths:
             - security_monitoring_signals_read
       summary: Get a signal's details
       tags: ["Security Monitoring"]
-      x-menu-order: 13
+      x-menu-order: 74
       "x-permission":
         operator: OR
         permissions:
@@ -100626,7 +100626,7 @@ paths:
       summary: Modify the triage assignee of a security signal
       tags: ["Security Monitoring"]
       x-codegen-request-body-name: body
-      x-menu-order: 10
+      x-menu-order: 77
       "x-permission":
         operator: OR
         permissions:
@@ -100675,7 +100675,7 @@ paths:
       summary: Change the related incidents of a security signal
       tags: ["Security Monitoring"]
       x-codegen-request-body-name: body
-      x-menu-order: 11
+      x-menu-order: 76
       "x-permission":
         operator: OR
         permissions:
@@ -100724,7 +100724,7 @@ paths:
       summary: Change the triage state of a security signal
       tags: ["Security Monitoring"]
       x-codegen-request-body-name: body
-      x-menu-order: 12
+      x-menu-order: 75
       "x-permission":
         operator: OR
         permissions:
@@ -101181,7 +101181,7 @@ paths:
       tags:
         - Metrics
       x-codegen-request-body-name: body
-      x-menu-order: 1
+      x-menu-order: 14
   /api/v2/service_accounts:
     post:
       description: Create a service account for your organization.
@@ -101264,7 +101264,7 @@ paths:
       summary: List application keys for this service account
       tags:
         - Service Accounts
-      x-menu-order: 6
+      x-menu-order: 2
       "x-permission":
         operator: OR
         permissions:
@@ -101305,7 +101305,7 @@ paths:
       tags:
         - Service Accounts
       x-codegen-request-body-name: body
-      x-menu-order: 5
+      x-menu-order: 3
       "x-permission":
         operator: OR
         permissions:
@@ -101337,7 +101337,7 @@ paths:
       summary: Delete an application key for this service account
       tags:
         - Service Accounts
-      x-menu-order: 3
+      x-menu-order: 6
       "x-permission":
         operator: OR
         permissions:
@@ -101372,7 +101372,7 @@ paths:
       summary: Get one application key for this service account
       tags:
         - Service Accounts
-      x-menu-order: 1
+      x-menu-order: 4
       "x-permission":
         operator: OR
         permissions:
@@ -101420,7 +101420,7 @@ paths:
       tags:
         - Service Accounts
       x-codegen-request-body-name: body
-      x-menu-order: 2
+      x-menu-order: 5
       "x-permission":
         operator: OR
         permissions:
@@ -101809,7 +101809,7 @@ paths:
             - security_monitoring_signals_read
       summary: List hist signals
       tags: ["Security Monitoring"]
-      x-menu-order: 42
+      x-menu-order: 69
       "x-permission":
         operator: OR
         permissions:
@@ -101849,7 +101849,7 @@ paths:
             - security_monitoring_signals_read
       summary: Search hist signals
       tags: ["Security Monitoring"]
-      x-menu-order: 40
+      x-menu-order: 71
       "x-permission":
         operator: OR
         permissions:
@@ -101885,7 +101885,7 @@ paths:
             - security_monitoring_signals_read
       summary: Get a hist signal's details
       tags: ["Security Monitoring"]
-      x-menu-order: 41
+      x-menu-order: 70
       "x-permission":
         operator: OR
         permissions:
@@ -101933,7 +101933,7 @@ paths:
         - AuthZ: []
       summary: List threat hunting jobs
       tags: ["Security Monitoring"]
-      x-menu-order: 20
+      x-menu-order: 63
       x-unstable: |-
         **Note**: This endpoint is in beta and may be subject to changes.
         Please check the documentation regularly for updates.
@@ -101972,7 +101972,7 @@ paths:
       summary: Run a threat hunting job
       tags: ["Security Monitoring"]
       x-codegen-request-body-name: body
-      x-menu-order: 19
+      x-menu-order: 61
       "x-permission":
         operator: OR
         permissions:
@@ -102007,7 +102007,7 @@ paths:
       summary: Convert a job result to a signal
       tags: ["Security Monitoring"]
       x-codegen-request-body-name: body
-      x-menu-order: 24
+      x-menu-order: 67
       "x-permission":
         operator: OR
         permissions:
@@ -102043,7 +102043,7 @@ paths:
         - AuthZ: []
       summary: Delete an existing job
       tags: ["Security Monitoring"]
-      x-menu-order: 23
+      x-menu-order: 65
       x-unstable: |-
         **Note**: This endpoint is in beta and may be subject to changes.
         Please check the documentation regularly for updates.
@@ -102074,7 +102074,7 @@ paths:
             - security_monitoring_rules_read
       summary: Get a job's details
       tags: ["Security Monitoring"]
-      x-menu-order: 21
+      x-menu-order: 64
       "x-permission":
         operator: OR
         permissions:
@@ -102110,7 +102110,7 @@ paths:
             - security_monitoring_rules_write
       summary: Cancel a threat hunting job
       tags: ["Security Monitoring"]
-      x-menu-order: 22
+      x-menu-order: 66
       "x-permission":
         operator: OR
         permissions:
@@ -102152,7 +102152,7 @@ paths:
             - security_monitoring_signals_read
       summary: Get a job's hist signals
       tags: ["Security Monitoring"]
-      x-menu-order: 43
+      x-menu-order: 68
       "x-permission":
         operator: OR
         permissions:
@@ -102349,7 +102349,7 @@ paths:
       summary: Get SLO status
       tags:
         - Service Level Objectives
-      x-menu-order: 105
+      x-menu-order: 104
       "x-permission":
         operator: OR
         permissions:
@@ -102666,7 +102666,7 @@ paths:
       summary: Post dependencies for analysis
       tags:
         - Static Analysis
-      x-menu-order: 2
+      x-menu-order: 12
       x-unstable: "**Note**: This endpoint may be subject to changes."
   /api/v2/static-analysis-sca/vulnerabilities/resolve-vulnerable-symbols:
     post:
@@ -102694,7 +102694,7 @@ paths:
       summary: POST request to resolve vulnerable symbols
       tags:
         - Static Analysis
-      x-menu-order: 1
+      x-menu-order: 11
       x-unstable: "**Note**: This endpoint may be subject to changes."
   /api/v2/static-analysis/custom/rulesets/{ruleset_name}:
     delete:
@@ -103221,7 +103221,7 @@ paths:
       summary: Ruleset get multiple
       tags:
         - "Security Monitoring"
-      x-menu-order: 28
+      x-menu-order: 79
       x-unstable: "**Note**: This endpoint may be subject to changes."
   /api/v2/static-analysis/secrets/rules:
     get:
@@ -103245,7 +103245,7 @@ paths:
       summary: Returns a list of Secrets rules
       tags:
         - "Security Monitoring"
-      x-menu-order: 28
+      x-menu-order: 77
       x-unstable: "**Note**: This endpoint may be subject to changes."
   /api/v2/statuspages:
     get:
@@ -104204,7 +104204,7 @@ paths:
       summary: Create a test suite
       tags:
         - Synthetics
-      x-menu-order: 50
+      x-menu-order: 45
       x-permission:
         operator: OR
         permissions:
@@ -104242,7 +104242,7 @@ paths:
       summary: Bulk delete suites
       tags:
         - Synthetics
-      x-menu-order: 70
+      x-menu-order: 46
       x-permission:
         operator: OR
         permissions:
@@ -104311,7 +104311,7 @@ paths:
       summary: Search test suites
       tags:
         - Synthetics
-      x-menu-order: 55
+      x-menu-order: 42
       "x-permission":
         operator: OR
         permissions:
@@ -104349,7 +104349,7 @@ paths:
       summary: Get a suite
       tags:
         - Synthetics
-      x-menu-order: 60
+      x-menu-order: 43
       x-permission:
         operator: OR
         permissions:
@@ -104393,7 +104393,7 @@ paths:
       summary: Edit a test suite
       tags:
         - Synthetics
-      x-menu-order: 65
+      x-menu-order: 44
       x-permission:
         operator: OR
         permissions:
@@ -104436,7 +104436,7 @@ paths:
       summary: Bulk delete tests
       tags:
         - Synthetics
-      x-menu-order: 90
+      x-menu-order: 50
       x-permission:
         operator: OR
         permissions:
@@ -104473,7 +104473,7 @@ paths:
       summary: Create a Network Path test
       tags:
         - Synthetics
-      x-menu-order: 75
+      x-menu-order: 47
       x-permission:
         operator: OR
         permissions:
@@ -104518,7 +104518,7 @@ paths:
       summary: Get a Network Path test
       tags:
         - Synthetics
-      x-menu-order: 80
+      x-menu-order: 48
       x-permission:
         operator: OR
         permissions:
@@ -104568,7 +104568,7 @@ paths:
       summary: Edit a Network Path test
       tags:
         - Synthetics
-      x-menu-order: 85
+      x-menu-order: 49
       x-permission:
         operator: OR
         permissions:
@@ -104617,7 +104617,7 @@ paths:
       tags:
         - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 45
+      x-menu-order: 51
       "x-permission":
         operator: OR
         permissions:
@@ -104874,7 +104874,7 @@ paths:
       summary: Get all teams
       tags:
         - Teams
-      x-menu-order: 1
+      x-menu-order: 20
       x-pagination:
         limitParam: page[size]
         pageParam: page[number]
@@ -104921,7 +104921,7 @@ paths:
       tags:
         - Teams
       x-codegen-request-body-name: body
-      x-menu-order: 2
+      x-menu-order: 21
       "x-permission":
         operator: AND
         permissions:
@@ -104965,7 +104965,7 @@ paths:
       summary: Get team hierarchy links
       tags:
         - Teams
-      x-menu-order: 20
+      x-menu-order: 30
       x-pagination:
         limitParam: page[size]
         pageParam: page[number]
@@ -105009,7 +105009,7 @@ paths:
       summary: Create a team hierarchy link
       tags:
         - Teams
-      x-menu-order: 22
+      x-menu-order: 31
       "x-permission":
         operator: AND
         permissions:
@@ -105048,7 +105048,7 @@ paths:
       summary: Remove a team hierarchy link
       tags:
         - Teams
-      x-menu-order: 23
+      x-menu-order: 33
       "x-permission":
         operator: AND
         permissions:
@@ -105089,7 +105089,7 @@ paths:
       summary: Get a team hierarchy link
       tags:
         - Teams
-      x-menu-order: 21
+      x-menu-order: 32
       "x-permission":
         operator: OR
         permissions:
@@ -105123,7 +105123,7 @@ paths:
       summary: Delete team connections
       tags:
         - Teams
-      x-menu-order: 26
+      x-menu-order: 3
       "x-permission":
         operator: OR
         permissions:
@@ -105199,7 +105199,7 @@ paths:
       summary: List team connections
       tags:
         - Teams
-      x-menu-order: 24
+      x-menu-order: 1
       x-pagination:
         limitParam: page[size]
         pageParam: page[number]
@@ -105240,7 +105240,7 @@ paths:
       summary: Create team connections
       tags:
         - Teams
-      x-menu-order: 25
+      x-menu-order: 2
       "x-permission":
         operator: OR
         permissions:
@@ -105283,7 +105283,7 @@ paths:
       summary: Get team sync configurations
       tags:
         - Teams
-      x-menu-order: 18
+      x-menu-order: 22
       x-permission:
         operator: OR
         permissions:
@@ -105330,7 +105330,7 @@ paths:
       tags:
         - Teams
       x-codegen-request-body-name: body
-      x-menu-order: 19
+      x-menu-order: 23
       x-permission:
         operator: AND
         permissions:
@@ -105387,7 +105387,7 @@ paths:
       summary: Get all member teams
       tags:
         - Teams
-      x-menu-order: 21
+      x-menu-order: 27
       x-pagination:
         limitParam: page[size]
         pageParam: page[number]
@@ -105442,7 +105442,7 @@ paths:
       summary: Add a member team
       tags:
         - Teams
-      x-menu-order: 20
+      x-menu-order: 28
       x-permission:
         operator: OR
         permissions:
@@ -105493,7 +105493,7 @@ paths:
       summary: Remove a member team
       tags:
         - Teams
-      x-menu-order: 22
+      x-menu-order: 29
       x-permission:
         operator: OR
         permissions:
@@ -105535,7 +105535,7 @@ paths:
       summary: Remove a team
       tags:
         - Teams
-      x-menu-order: 5
+      x-menu-order: 26
       "x-permission":
         operator: AND
         permissions:
@@ -105576,7 +105576,7 @@ paths:
       summary: Get a team
       tags:
         - Teams
-      x-menu-order: 3
+      x-menu-order: 24
       "x-permission":
         operator: OR
         permissions:
@@ -105637,7 +105637,7 @@ paths:
       tags:
         - Teams
       x-codegen-request-body-name: body
-      x-menu-order: 4
+      x-menu-order: 25
       "x-permission":
         operator: OR
         permissions:
@@ -105678,7 +105678,7 @@ paths:
       summary: Get links for a team
       tags:
         - Teams
-      x-menu-order: 10
+      x-menu-order: 4
       "x-permission":
         operator: OR
         permissions:
@@ -105731,7 +105731,7 @@ paths:
       tags:
         - Teams
       x-codegen-request-body-name: body
-      x-menu-order: 11
+      x-menu-order: 5
       "x-permission":
         operator: OR
         permissions:
@@ -105774,7 +105774,7 @@ paths:
       summary: Remove a team link
       tags:
         - Teams
-      x-menu-order: 14
+      x-menu-order: 8
       "x-permission":
         operator: OR
         permissions:
@@ -105820,7 +105820,7 @@ paths:
       summary: Get a team link
       tags:
         - Teams
-      x-menu-order: 12
+      x-menu-order: 6
       "x-permission":
         operator: OR
         permissions:
@@ -105873,7 +105873,7 @@ paths:
       tags:
         - Teams
       x-codegen-request-body-name: body
-      x-menu-order: 13
+      x-menu-order: 7
       "x-permission":
         operator: OR
         permissions:
@@ -105928,7 +105928,7 @@ paths:
       summary: Get team memberships
       tags:
         - Teams
-      x-menu-order: 6
+      x-menu-order: 9
       x-pagination:
         limitParam: page[size]
         pageParam: page[number]
@@ -105988,7 +105988,7 @@ paths:
       tags:
         - Teams
       x-codegen-request-body-name: body
-      x-menu-order: 7
+      x-menu-order: 10
       "x-permission":
         operator: OR
         permissions:
@@ -106034,7 +106034,7 @@ paths:
       summary: Remove a user from a team
       tags:
         - Teams
-      x-menu-order: 8
+      x-menu-order: 11
       "x-permission":
         operator: OR
         permissions:
@@ -106096,7 +106096,7 @@ paths:
       tags:
         - Teams
       x-codegen-request-body-name: body
-      x-menu-order: 9
+      x-menu-order: 12
       "x-permission":
         operator: OR
         permissions:
@@ -106136,7 +106136,7 @@ paths:
       summary: Get team notification rules
       tags:
         - Teams
-      x-menu-order: 27
+      x-menu-order: 13
       x-permission:
         operator: OR
         permissions:
@@ -106187,7 +106187,7 @@ paths:
       summary: Create team notification rule
       tags:
         - Teams
-      x-menu-order: 28
+      x-menu-order: 14
       x-permission:
         operator: OR
         permissions:
@@ -106229,7 +106229,7 @@ paths:
       summary: Delete team notification rule
       tags:
         - Teams
-      x-menu-order: 31
+      x-menu-order: 17
       x-permission:
         operator: OR
         permissions:
@@ -106274,7 +106274,7 @@ paths:
       summary: Get team notification rule
       tags:
         - Teams
-      x-menu-order: 29
+      x-menu-order: 15
       x-permission:
         operator: OR
         permissions:
@@ -106325,7 +106325,7 @@ paths:
       summary: Update team notification rule
       tags:
         - Teams
-      x-menu-order: 30
+      x-menu-order: 16
       x-permission:
         operator: OR
         permissions:
@@ -106366,7 +106366,7 @@ paths:
       summary: Get permission settings for a team
       tags:
         - Teams
-      x-menu-order: 17
+      x-menu-order: 18
       "x-permission":
         operator: OR
         permissions:
@@ -106420,7 +106420,7 @@ paths:
       tags:
         - Teams
       x-codegen-request-body-name: body
-      x-menu-order: 18
+      x-menu-order: 19
       "x-permission":
         operator: OR
         permissions:
@@ -106789,7 +106789,7 @@ paths:
       summary: Get hourly usage for application security
       tags:
         - Usage Metering
-      x-menu-order: 38
+      x-menu-order: 2
       "x-permission":
         operator: OR
         permissions:
@@ -106850,7 +106850,7 @@ paths:
       summary: Get billing dimension mapping for usage endpoints
       tags:
         - Usage Metering
-      x-menu-order: 1
+      x-menu-order: 12
       "x-permission":
         operator: OR
         permissions:
@@ -106916,7 +106916,7 @@ paths:
       summary: Get cost across multi-org account
       tags:
         - Usage Metering
-      x-menu-order: 45
+      x-menu-order: 4
       "x-permission":
         operator: AND
         permissions:
@@ -107008,7 +107008,7 @@ paths:
       summary: Get estimated cost across your account
       tags:
         - Usage Metering
-      x-menu-order: 6
+      x-menu-order: 5
       "x-permission":
         operator: AND
         permissions:
@@ -107084,7 +107084,7 @@ paths:
       summary: Get historical cost across your account
       tags:
         - Usage Metering
-      x-menu-order: 5
+      x-menu-order: 6
       "x-permission":
         operator: AND
         permissions:
@@ -107203,7 +107203,7 @@ paths:
       summary: Get hourly usage by product family
       tags:
         - Usage Metering
-      x-menu-order: 1
+      x-menu-order: 9
       "x-permission":
         operator: OR
         permissions:
@@ -107265,7 +107265,7 @@ paths:
       summary: Get hourly usage for Lambda traced invocations
       tags:
         - Usage Metering
-      x-menu-order: 37
+      x-menu-order: 1
       "x-permission":
         operator: OR
         permissions:
@@ -107327,7 +107327,7 @@ paths:
       summary: Get hourly usage for observability pipelines
       tags:
         - Usage Metering
-      x-menu-order: 39
+      x-menu-order: 3
       "x-permission":
         operator: OR
         permissions:
@@ -107426,7 +107426,7 @@ paths:
       summary: Get usage attribution types
       tags:
         - Usage Metering
-      x-menu-order: 5
+      x-menu-order: 10
       "x-permission":
         operator: OR
         permissions:
@@ -107908,7 +107908,7 @@ paths:
       summary: Get user memberships
       tags:
         - Teams
-      x-menu-order: 19
+      x-menu-order: 34
       "x-permission":
         operator: OR
         permissions:
