@@ -1,0 +1,83 @@
+{{ $workflow_bundles := site.Data.workflow_bundles | default slice }}
+
+{{ if lt (len $workflow_bundles) 1 }}
+  {{ $err_msg := "Could not load workflow bundles data" }}
+
+  {{ if eq hugo.Environment "development" -}}
+    {{ warnf $err_msg }}
+  {{ else }}
+    {{ errorf $err_msg }}
+  {{ end }}
+{{ end }}
+
+{{/* Build a dict of title -> slice of FQNs for actions that can run on premises */}}
+{{ $allowlist := dict }}
+
+{{ range sort $workflow_bundles "title" }}
+    {{ $workflow_title := .title }}
+    {{ $workflow_name := .name }}
+    {{ range $action_name, $action_data := .actions }}
+        {{ if $action_data.canRunOnPremises }}
+            {{ $fqn := print $workflow_name "." $action_name }}
+            {{ $existing := index $allowlist $workflow_title | default slice }}
+            {{ $allowlist = merge $allowlist (dict $workflow_title (sort ($existing | append $fqn))) }}
+        {{ end }}
+    {{ end }}
+{{ end }}
+
+{{ if lt (len $allowlist) 1 }}
+    {{ $err_msg := "On prem allowlist is empty" }}
+
+    {{ if eq hugo.Environment "development" -}}
+        {{ warnf $err_msg }}
+    {{ else }}
+        {{ errorf $err_msg }}
+    {{ end }}
+{{ end }}
+
+{{/* Prefixes whose sub-integrations get nested under a parent accordion */}}
+{{ $grouped_prefixes := slice "Kubernetes" "GitLab" }}
+
+{{/* Separate entries into grouped vs standalone */}}
+{{ $grouped := dict }}
+{{ $standalone := dict }}
+
+{{ range $title, $fqns := $allowlist }}
+    {{ $matched := false }}
+    {{ range $grouped_prefixes }}
+        {{ if hasPrefix $title . }}
+            {{ $existing := index $grouped . | default dict }}
+            {{ $grouped = merge $grouped (dict . (merge $existing (dict $title $fqns))) }}
+            {{ $matched = true }}
+        {{ end }}
+    {{ end }}
+    {{ if not $matched }}
+        {{ $standalone = merge $standalone (dict $title $fqns) }}
+    {{ end }}
+{{ end }}
+
+{{/* Output standalone integrations */}}
+{{ range $title, $fqns := $standalone }}
+<details>
+  <summary>{{ $title }}</summary>
+  <pre>{{ range $i, $fqn := $fqns }}{{ if $i }}
+{{ end }}"{{ $fqn }}"{{ end }}</pre>
+</details>
+{{ end }}
+
+{{/* Output grouped integrations under a parent accordion */}}
+{{ range $grouped_prefixes }}
+    {{ $children := index $grouped . }}
+    {{ if $children }}
+<details>
+  <summary>{{ . }}</summary>
+        {{ range $title, $fqns := $children }}
+  <details>
+    <summary>{{ $title }}</summary>
+    <pre>{{ range $i, $fqn := $fqns }}{{ if $i }}
+{{ end }}"{{ $fqn }}"{{ end }}</pre>
+  </details>
+        {{ end }}
+</details>
+    {{ end }}
+{{ end }}

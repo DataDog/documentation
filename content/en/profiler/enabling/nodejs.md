@@ -37,7 +37,7 @@ To begin profiling applications:
 
 2. Run `npm install --save dd-trace@latest` to add a dependency on the `dd-trace` module which includes the profiler.
 
-3. Enable the profiler:
+3. Enable the profiler using **one** of the following approaches:
 
    {{< tabs >}}
 {{% tab "Environment variables" %}}

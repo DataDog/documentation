@@ -8,6 +8,9 @@ further_reading:
 - link: "/database_monitoring/guide/parameterized_queries/"
   tag: "Documentation"
   text: "Capturing SQL Query Parameter Values"
+- link: "https://www.datadoghq.com/blog/database-monitoring-explain-analyze"
+  tag: "Blog"
+  text: "Debug PostgreSQL query latency faster with EXPLAIN ANALYZE in Datadog Database Monitoring"
 ---
 
 Database Monitoring provides deep visibility into your Postgres databases by exposing query metrics, query samples, explain plans, database states, failovers, and events.
@@ -21,7 +24,7 @@ The Agent collects telemetry directly from the database by logging in as a read-
 ## Before you begin
 
 Supported PostgreSQL versions
-: 9.6, 10, 11, 12, 13, 14, 15, 16, 17
+: 9.6, 10, 11, 12, 13, 14, 15, 16, 17, 18
 
 Prerequisites
 : Postgres additional supplied modules must be installed. For most installations, this is included by default but less conventional installations might require an additional installation of your version of [the `postgresql-contrib` package][1].

@@ -55,7 +55,7 @@ After you have set up your Datadog library for Test Optimization, you can config
 {{< tabs >}}
 {{% tab "JavaScript/TypeScript" %}}
 
-`dd-trace-js>=5.74.0`
+`dd-trace-js>=5.23.0`
 
 The test framework compatibility is the same as [Test Optimization Compatibility][1], with the exception of `playwright`, which is only supported from `>=1.38.0`.
 
@@ -64,7 +64,7 @@ The test framework compatibility is the same as [Test Optimization Compatibility
 
 {{% tab "Java" %}}
 
-`dd-trace-java>=1.31.0`
+`dd-trace-java>=1.34.0`
 
 The test framework compatibility is the same as [Test Optimization Compatibility][2], with the exception of `Scala Weaver`.
 
@@ -91,7 +91,7 @@ The test framework compatibility is the same as [Test Optimization Compatibility
 
 {{% tab "Go" %}}
 
-`orchestrion >= 0.9.4 + dd-trace-go >= 1.70.0`
+`orchestrion >= 0.9.4 + dd-trace-go >= 1.69.1`
 
 {{% /tab %}}
 

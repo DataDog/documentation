@@ -28,7 +28,7 @@ Ensure [Test Optimization][1] is configured for your test runs.
 
 ### Compatibility
 
-`dd-trace-java >= 1.32.0`
+`dd-trace-java >= 1.34.0`
 
 The test framework compatibility is the same as [Test Optimization Compatibility][3], with the exception of `Scala Weaver`.
 
@@ -52,7 +52,7 @@ This behavior can be fine-tuned with the following environment variables:
 
 ### Compatibility
 
-`dd-trace-js >= v5.74.0`
+`dd-trace-js >= v5.19.0`
 
 ### Configuration
 
@@ -120,7 +120,7 @@ Customize the Auto Test Retries with the following environment variables:
 
 ### Compatibility
 
-`orchestrion >= 0.9.4` + `dd-trace-go >= 1.69.0`
+`orchestrion >= 0.9.4` + `dd-trace-go >= 1.69.1`
 
 ### Configuration
 

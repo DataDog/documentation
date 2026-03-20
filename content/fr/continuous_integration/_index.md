@@ -21,6 +21,9 @@ further_reading:
 - link: /continuous_integration/pipelines
   tag: Documentation
   text: Explorer les données de pipeline pour résoudre les problèmes liés aux builds
+- link: /account_management/billing/ci_visibility
+  tag: Documentation
+  text: En savoir plus sur les considérations relatives à la facturation de CI Visibility
 - link: /continuous_integration/tests/
   tag: Documentation
   text: Explorer les données de test pour identifier et résoudre les tests problématiques
@@ -36,10 +39,25 @@ further_reading:
 - link: https://www.datadoghq.com/blog/modernize-your-ci-cd-environment/
   tag: Blog
   text: Surveiller vos modernisations CI/CD avec Datadog CI Pipeline Visibility
+- link: https://www.datadoghq.com/blog/datadog-detection-as-code/
+  tag: Blog
+  text: Comment nous utilisons Datadog pour la détection en tant que code
+- link: https://www.datadoghq.com/blog/cache-purge-ci-cd/
+  tag: Blog
+  text: Patterns pour une purge du cache à la fois efficace et sûre dans les pipelines
+    de CI/CD
+- link: https://www.datadoghq.com/blog/gitlab-source-code-integration
+  tag: Blog
+  text: Dépannage plus rapide grâce à l'intégration du code source GitLab dans Datadog
 title: Continuous Integration Visibility
 ---
 
-<div class="alert alert-info">Cette page explique comment intégrer vos métriques et données d'intégration continue (CI) dans des dashboards Datadog. Si vous souhaitez exécuter des tests continus dans vos pipelines CI, consultez plutôt la section <a href="/continuous_testing/cicd_integrations/" target="_blank">Tests continus et CI/CD</a>.</div>
+<div class="alert alert-info">Cette page concerne l'ajout de vos métriques et données de CI dans des dashboards Datadog. Si vous souhaitez exécuter des tests Continuous Testing dans vos pipelines de CI, consultez la section <a href="/continuous_testing/cicd_integrations/" target="_blank">Tests continus et CI/CD</a>.</div>
+
+{{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Participer" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=CI">}}
+  Participez à la session de présentation de CI Visibility pour mieux comprendre comment cette solution améliore l'efficacité des pipelines de CI et comment configurer les solutions Testing Visibility et Pipeline Visibility. 
+{{< /learning-center-callout >}}
+
 
 ## Présentation
 

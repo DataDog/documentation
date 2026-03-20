@@ -42,14 +42,14 @@ Instrumentation starts when the application is launched.
 {{% /tab %}}
 {{% tab "Node.js" %}}
 
-1. Add the `ddtrace` package to your project using your package manager.
-1. Initialize the tracer by doing one of the following:
-   - Set `NODE_OPTIONS` with `--require=dd-trace/init`
-   - Include the tracer in your application's entrypoint file:
-     ```javascript
-     const tracer = require('dd-trace').init({ logInjection: true, });
-     ```
-     This also configures trace log correlation.
+1. Install the `dd-trace` package
+   ```
+   npm install dd-trace
+   ```
+2. Initialize the Node.js tracer with the `NODE_OPTIONS` environment variable:
+   ```
+   NODE_OPTIONS='--require dd-trace/init'
+   ```
 
 {{% /tab %}}
 {{% tab ".NET" %}}
@@ -240,6 +240,7 @@ var datadogAppSettings = [
   { name: 'DD_SERVICE', value: 'my-service' }  // Replace with your service name
   { name: 'DD_ENV', value: 'prod' }            // Replace with your environment (e.g. prod, staging)
   { name: 'DD_VERSION', value: '0.0.0' }       // Replace with your application version
+  { name: 'WEBSITES_ENABLE_APP_SERVICE_STORAGE', value: 'true' }
   // Uncomment for .NET applications
   // { name: 'DD_DOTNET_TRACER_HOME', value: '/datadog/tracer' }
   // { name: 'CORECLR_ENABLE_PROFILING', value: '1' }
@@ -296,6 +297,7 @@ Update your existing Web App to include the necessary Datadog App Settings and s
       { "name": "DD_SERVICE", "value": "my-service" }, // Replace with your service name
       { "name": "DD_ENV", "value": "prod" },           // Replace with your environment (e.g. prod, staging)
       { "name": "DD_VERSION", "value": "0.0.0" },      // Replace with your application version
+      { "name": "WEBSITES_ENABLE_APP_SERVICE_STORAGE", "value": "true" },
       // Uncomment for .NET applications
       // { "name": "DD_DOTNET_TRACER_HOME", "value": "/datadog/tracer" }
       // { "name": "CORECLR_ENABLE_PROFILING", "value": "1" }
@@ -382,6 +384,10 @@ See [Unified Service Tagging][303] for more information on the `env` tag.<br>
 There is no default value for this field.<br>
 See [Unified Service Tagging][303] for more information on the `version` tag.<br>
 
+`WEBSITES_ENABLE_APP_SERVICE_STORAGE`
+: **Value**: `true`<br>
+Setting this environment variable to `true` allows the `/home/` mount to persist and be shared with the sidecar.<br>
+
 `DD_SERVERLESS_LOG_PATH`
 : **Value**: The log path the sidecar uses to collect logs.<br>
 Where you write your logs. For example, `/home/LogFiles/*.log` or `/home/LogFiles/myapp/*.log`.<br>
@@ -396,9 +402,6 @@ Recommended for scenarios with frequent log rotation. For example, setting `_def
 
 <div class="alert alert-info">If your application has multiple instances, make sure your application's log filename includes the <code>$COMPUTERNAME</code> variable. This ensures that log tailing does not create duplicate logs from multiple instances that are reading the same file. Enabling this feature variable also prevents <code>DD_SERVERLESS_LOG_PATH</code> from being set. This is to prevent ingesting duplicate logs.</div>
 
-`WEBSITES_ENABLE_APP_SERVICE_STORAGE`
-: **Value**: `true`<br>
-Setting this environment variable to `true` allows the `/home/` mount to persist and be shared with the sidecar.<br>
 
 
 
@@ -451,6 +454,8 @@ Path to the instrumentation library loaded by the .NET runtime.<br>
 {{% /tab %}}
 {{< /tabs >}}
 
+{{% svl-tracing-env %}}
+
 ### View traces in Datadog
 
 After your application restarts, go to Datadog's [APM Service page][2] and search for the service name you set for your application (`DD_SERVICE`).
@@ -466,6 +471,10 @@ To configure your application to submit custom metrics, follow the appropriate s
 - [Python][7]
 
 ### Continuous Profiler
+
+<div class="alert alert-info">
+Datadog's Continuous Profiler is available in preview for Python and Node.js on Linux Azure App Service.
+</div>
 
 To enable the Continuous Profiler, set the environment variable `DD_PROFILING_ENABLED=true`. For more information, see the [Continuous Profiler documentation][8].
 
@@ -489,11 +498,11 @@ Share the content of the **Log stream** with [Datadog Support][9].
 
 [1]: /serverless/guide/azure_app_service_linux_code_wrapper_script
 [2]: /tracing/services/service_page/
-[3]: /developers/dogstatsd/?tab=java#dogstatsd-client
+[3]: /extend/dogstatsd/?tab=java#dogstatsd-client
 [4]: https://github.com/brightcove/hot-shots
-[5]: /developers/dogstatsd/?tab=dotnet#dogstatsd-client
-[6]: /developers/dogstatsd/?tab=php#dogstatsd-client
-[7]: /developers/dogstatsd/?tab=python#dogstatsd-client
+[5]: /extend/dogstatsd/?tab=dotnet#dogstatsd-client
+[6]: /extend/dogstatsd/?tab=php#dogstatsd-client
+[7]: /extend/dogstatsd/?tab=python#dogstatsd-client
 [8]: /profiler/
 [9]: /help
 [10]: https://app.datadoghq.com/integrations/azure

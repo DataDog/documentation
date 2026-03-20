@@ -72,6 +72,7 @@ code_languages:
     example_file: src/main.rs
 
 code_language_ids:
+    browser: Browser
     android: Android
     ios: iOS
     expo: Expo
@@ -83,6 +84,7 @@ code_language_ids:
     kotlin-multiplatform: Kotlin Multiplatform
     swiftui: Swift UI
     java: Java
+    graalvm: GraalVM
     cpp: 'C++'
     php: PHP
     nodejs: "Node.js"
@@ -137,12 +139,14 @@ code_language_ids:
     historical_job: "Historical Job"
     kubernetes_daemonset: "Kubernetes (DaemonSet)"
     kubernetes_gateway: "Kubernetes (Gateway)"
+    ecs_fargate: "ECS Fargate"
+    eks_fargate: "EKS Fargate"
     haproxy: "HAProxy"
     traces: "Traces"
     metrics: "Metrics"
-    logs: "Logs"    
+    logs: "Logs"
     topology: "Topology Map"
-    geomap: "Geomap" 
+    geomap: "Geomap"
 branch: ""
 
 signupclass: sign-up-trigger
@@ -163,36 +167,42 @@ allowedRegions:
     domain: datadoghq.com
     exact_domains:
       - "navy.oncall.datadoghq.com"
+      - "browser-intake-datadoghq.com"
   - name: US3
     value: us3
     weight: 13
     domain: us3.datadoghq.com
     exact_domains:
       - "teal.oncall.datadoghq.com"
+      - "browser-intake-us3-datadoghq.com"
   - name: US5
     value: us5
     weight: 15
     domain: us5.datadoghq.com
     exact_domains:
       - "coral.oncall.datadoghq.com"
+      - "browser-intake-us5-datadoghq.com"
   - name: EU
     value: eu
     weight: 20
     domain: datadoghq.eu
     exact_domains:
-       "beige.oncall.datadoghq.eu"
+      - "beige.oncall.datadoghq.eu"
+      - "browser-intake-datadoghq.eu"
   - name: AP1
     value: ap1
     weight: 25
     domain: ap1.datadoghq.com
     exact_domains:
       - "saffron.oncall.datadoghq.com"
+      - "browser-intake-ap1-datadoghq.com"
   - name: AP2
     value: ap2
     weight: 30
     domain: ap2.datadoghq.com
     exact_domains:
       - "lava.oncall.datadoghq.com"
+      - "browser-intake-ap2-datadoghq.com"
   - name: US1-FED
     value: gov
     weight: 35
@@ -263,6 +273,7 @@ core_product:
 
 # Unsupported sites for each product
 unsupported_sites:
+  advanced_analysis: [gov]
   actions: [gov]
   adaptive_sampling: [gov]
   agent_flare: [gov]
@@ -276,18 +287,20 @@ unsupported_sites:
   azure-private-link: [us,us5,eu,gov,ap1,ap2]
   backstage: [gov]
   bits_ai: [gov]
-  bits_ai_sre: [gov, ap2]
+  bits_ai_sre: [gov]
   case_management: [gov]
   ci_visibility: [gov]
   code_coverage: [gov]
   code_security: [gov]
   configuration_at_runtime: [gov]
+  containers_kubernetes_appsec: [gov]
   continuous_delivery: [gov]
   continuous_integration: [gov]
   correlation: [gov] #Event management correlation
   cloudprem: [gov]
+  csm_jira: [us,us3,us5,eu,ap1,ap2]
   data_jobs: [gov]
-  datadog_cloudcraft: [gov]
+  data_streams: [gov]
   datadog_disaster_recovery: [gov]
   ddot_collector: [gov]
   dora_metrics: [gov]
@@ -296,11 +309,13 @@ unsupported_sites:
   eng_reports: [gov]
   events_from_sns_emails: [gov]
   exception_replay: [gov]
+  experimentation: [gov]
   feature_flags: [gov]
   forwarding_audit_events: [gov]
   getting_started_feature_flags: [gov]
   gcp-private-service-connect: [us,us3,gov,ap1,ap2]
   google-hangouts-chat: [gov]
+  google_chat: [gov]
   fips-compliance: [us,us3,us5,eu,ap1,ap2]
   fips-integrations: [us,us3,us5,eu,ap1,ap2]
   fips-proxy: [us,us3,us5,eu,ap1,ap2]
@@ -310,13 +325,16 @@ unsupported_sites:
   incident_ai: [gov]
   inferred_entity_remapping_rules: [gov]
   internal_developer_portal: [gov]
+  jira_error_tracking: [gov]
   linear: [gov]
   live_debugger: [gov]
   llm_observability: [gov]
+  mcp_server: [gov]
   mobile_app_testing: [gov]
+  network_config_management: [gov]
   observability_pipelines: [gov]
   on-call: [gov]
-  otlp_agentless: [gov]
+  oracle_fusion_integration_setup: [gov]
   overview_pages: [gov]
   pr_gates: [gov]
   resource_based_sampling: [gov]
@@ -332,6 +350,7 @@ unsupported_sites:
   service_remapping_rules: [gov]
   service_override_removal: [gov]
   snmp_profile_manager: [gov]
+  software_delivery_mcp_tools: [gov]
   status_pages: [gov]
   supported_deployment_types: [gov]
   synthetics_email_validation: [gov]

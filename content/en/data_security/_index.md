@@ -143,7 +143,7 @@ Continuous Integration pipelines and tests
 
 [1]: https://www.datadoghq.com/security/
 [2]: https://www.datadoghq.com/legal/privacy/
-[3]: /developers/dogstatsd/
+[3]: /extend/dogstatsd/
 [4]: /data_security/agent/
 [5]: /agent/configuration/secrets-management/
 [6]: /integrations/amazon_web_services/

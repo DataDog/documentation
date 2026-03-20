@@ -33,7 +33,14 @@ Notifications are a key component of monitors that keep your team informed of is
 
 This approach helps ensure your monitor titles and messages are clear, actionable, and tailored to your audience's needs.
 - **Unique titles**: Add a unique title to your monitor (this is required). For multi alert monitors, some tags identifying your triggering scope are automatically inserted. You can use [tag variables][3] to enhance specificity.
-- **Message field**: The message field supports standard [Markdown formatting][4] and [variables][5]. Use [conditional variables][6] to modulate the notification text sent to different contacts with [@notifications](#notifications). Use [synthetics template variables][23] to enrich the alert message with synthetics failure context. 
+- **Message field**: The message field supports standard [Markdown formatting][4] and [variables][5]. Use [conditional variables][6] to modulate the notification text sent to different contacts with [@notifications](#notifications). Use [synthetics template variables][23] to enrich the alert message with synthetics failure context.
+
+<div class="alert alert-info"> Markdown formatting support differs by notification method. Some channels support only a subset of Markdown syntax.
+<ul> 
+  <li/>Slack notifications: Support basic formatting (bold, italics, inline code, links). Markdown headers (for example, <code>#</code>, <code>##</code>) and tables are not rendered; they appear as plain text.
+  <li/>Email notifications: Support basic formatting (bold, italics, inline code, links). Tables are not rendered as Markdown tables and appear as plain text in the message body.
+</ul>
+</div>
 
 {{% collapse-content title="Example monitor message" level="h4" expanded=false %}}
 A common use-case for the monitor message is to include a step-by-step way to resolve the problem, for example:
@@ -64,7 +71,7 @@ In both notification rules and individual monitors, you can use an `@notificatio
 
 An @notification must have a space between it and the last line character:
 
-| 🟢 Correct Format | ❌ Incorrect Format |
+| Correct Format | Incorrect Format |
 |------------------|-------------------|
 | `Disk space is low @ops-team@company.com` | `Disk space is low@ops-team@company.com` |
 
@@ -228,7 +235,7 @@ Message variables auto-populate with a randomly selected group based on the scop
 [10]: /service_management/workflows/trigger/#add-the-workflow-to-your-monitor
 [11]: /service_management/workflows/build/
 [12]: https://app.datadoghq.com/incidents/settings?section=global-settings
-[13]: /incident_response/incident_management/incident_settings/property_fields
+[13]: /incident_response/incident_management/setup_and_configuration/property_fields
 [14]: /incident_response/incident_management/notification
 [15]: /monitors/notify/variables/?tab=is_renotify#examples
 [16]: /monitors/settings/#tag-policies
