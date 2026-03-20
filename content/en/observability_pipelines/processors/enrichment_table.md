@@ -152,7 +152,7 @@ merchant_info {
 
 When the processor encounters a log that does not have a corresponding row in the cache, the log data is buffered in memory until the row is retrieved from the Reference Table. If the buffer reaches its maximum capacity, it begins sending the oldest buffered logs downstream without enrichment. The processor does not exert upstream backpressure.
 
-A request to read the Reference Tables is sent every second or if at least 250 keys are queued for a lookup.
+A request to read the Reference Tables is sent every second or when 250 keys are queued for a lookup.
 
 If an authentication error occurs while connecting to the Reference Table or after a series of failed requests, Datadog flushes buffered logs downstream without enrichment, to prevent the logs from waiting indefinitely, and the buffer stops accepting new logs. The processor periodically retries requests and automatically resumes normal operations when a request succeeds.
 
