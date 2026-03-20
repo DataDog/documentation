@@ -44461,7 +44461,10 @@ components:
         action:
           $ref: "#/components/schemas/ObservabilityPipelineSensitiveDataScannerProcessorActionHashAction"
         options:
-          description: The `ObservabilityPipelineSensitiveDataScannerProcessorActionHash` `options`.
+          description: |-
+            Optional settings for the hash action. When omitted or empty, matched sensitive data is
+            replaced with a deterministic hashed value that preserves structure for analytics while
+            protecting the original content. Reserved for future hash configuration (for example, algorithm or salt).
           type: object
       required: [action]
       type: object
@@ -44492,7 +44495,7 @@ components:
       description: Controls how partial redaction is applied, including character count and direction.
       properties:
         characters:
-          description: The `ObservabilityPipelineSensitiveDataScannerProcessorActionPartialRedactOptions` `characters`.
+          description: Number of characters to leave visible from the start or end of the matched value; the rest are redacted.
           example: 4
           format: int64
           type: integer
@@ -44528,7 +44531,7 @@ components:
       description: Configuration for fully redacting sensitive data.
       properties:
         replace:
-          description: The `ObservabilityPipelineSensitiveDataScannerProcessorActionRedactOptions` `replace`.
+          description: The string used to replace matched sensitive data (for example, "***" or "[REDACTED]").
           example: "***"
           type: string
       required: [replace]
@@ -44638,7 +44641,6 @@ components:
           type: array
       required:
         - name
-        - tags
         - pattern
         - scope
         - on_match
@@ -44699,7 +44701,7 @@ components:
       description: Fields to which the scope rule applies.
       properties:
         fields:
-          description: The `ObservabilityPipelineSensitiveDataScannerProcessorScopeOptions` `fields`.
+          description: List of log attribute names (field paths) to which the scope applies. Only these fields are included in or excluded from pattern matching.
           example:
             - ""
           items:
