@@ -444,7 +444,7 @@ spec:
 
 #### 3. Pass credentials in the Autodiscovery annotation
 
-Add `user` and `password` to the JMX check instance:
+Add `user` and `password` to the JMX check instance. Use the [`%%env_<ENV_VAR>%%` template variable][3] to reference the password from an environment variable in the Agent container rather than hardcoding it in the annotation:
 
 ```yaml
 ad.datadoghq.com/<CONTAINER_NAME>.checks: |
@@ -458,10 +458,22 @@ ad.datadoghq.com/<CONTAINER_NAME>.checks: |
         "host": "%%host%%",
         "port": "<JMX_PORT>",
         "user": "monitorRole",
-        "password": "<YOUR_JMX_PASSWORD>"
+        "password": "%%env_JMX_PASSWORD%%"
       }]
     }
   }
+```
+
+Make `JMX_PASSWORD` available in the Agent container by injecting it from the same Kubernetes Secret:
+
+```yaml
+# In your Datadog Agent DaemonSet or Helm values
+env:
+  - name: JMX_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        name: jmx-credentials
+        key: jmxremote.password
 ```
 
 For the full list of security-related parameters, including SSL and client certificate options (`trust_store_path`, `key_store_path`, `rmi_registry_ssl`), see the [JMX integration][6] configuration reference.
