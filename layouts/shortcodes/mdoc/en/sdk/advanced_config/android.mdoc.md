@@ -15,6 +15,7 @@ In addition to [tracking views automatically][4], you can also track specific di
 
 {% tabs %}
 {% tab label="Kotlin" %}
+
 ```kotlin
 fun onResume() {
     GlobalRumMonitor.get().startView(viewKey, viewName, viewAttributes)
@@ -24,8 +25,10 @@ fun onPause() {
     GlobalRumMonitor.get().stopView(viewKey, viewAttributes)
 }
 ```
+
 {% /tab %}
 {% tab label="Java" %}
+
 ```java
 public void onResume() {
     GlobalRumMonitor.get().startView(viewKey, viewName, viewAttributes);
@@ -35,6 +38,7 @@ public void onPause() {
     GlobalRumMonitor.get().stopView(viewKey, viewAttributes);
 }
 ```
+
 {% /tab %}
 {% /tabs %}
 
@@ -46,18 +50,22 @@ The action type should be one of the following: "custom", "click", "tap", "scrol
 
 {% tabs %}
 {% tab label="Kotlin" %}
+
 ```kotlin
 fun onUserInteraction() {
     GlobalRumMonitor.get().addAction(actionType, name, actionAttributes)
 }
 ```
+
 {% /tab %}
 {% tab label="Java" %}
+
 ```java
 public void onUserInteraction() {
     GlobalRumMonitor.get().addAction(actionType, name, actionAttributes);
 }
 ```
+
 {% /tab %}
 {% /tabs %}
 
@@ -67,6 +75,7 @@ When [tracking resources automatically][6], provide a custom `RumResourceAttribu
 
 {% tabs %}
 {% tab label="Kotlin" %}
+
 ```kotlin
 class CustomRumResourceAttributesProvider : RumResourceAttributesProvider {
     override fun onProvideAttributes(
@@ -81,8 +90,10 @@ class CustomRumResourceAttributesProvider : RumResourceAttributesProvider {
     }
 }
 ```
+
 {% /tab %}
 {% tab label="Java" %}
+
 ```java
 public class CustomRumResourceAttributesProvider implements RumResourceAttributesProvider {
     @NonNull
@@ -104,6 +115,7 @@ public class CustomRumResourceAttributesProvider implements RumResourceAttribute
     }
 }
 ```
+
 {% /tab %}
 {% /tabs %}
 
@@ -113,6 +125,7 @@ In addition to [tracking resources automatically][6], you can also track specifi
 
 {% tabs %}
 {% tab label="Kotlin" %}
+
 ```kotlin
 fun loadResource() {
     GlobalRumMonitor.get().startResource(resourceKey, method, url, resourceAttributes)
@@ -124,8 +137,10 @@ fun loadResource() {
     }
 }
 ```
+
 {% /tab %}
 {% tab label="Java" %}
+
 ```java
 public void loadResource() {
     GlobalRumMonitor.get().startResource(resourceKey, method, url, resourceAttributes);
@@ -137,6 +152,7 @@ public void loadResource() {
     }
 }
 ```
+
 {% /tab %}
 {% /tabs %}
 
@@ -372,18 +388,22 @@ For instance, to set each fragment as a distinct view, use the following configu
 
 {% tabs %}
 {% tab label="Kotlin" %}
+
 ```kotlin
 val rumConfig = RumConfiguration.Builder(applicationId)
   .useViewTrackingStrategy(FragmentViewTrackingStrategy(...))
   .build()
 ```
+
 {% /tab %}
 {% tab label="Java" %}
+
 ```java
 RumConfiguration rumConfig = new RumConfiguration.Builder(applicationId)
  .useViewTrackingStrategy(new FragmentViewTrackingStrategy(...))
  .build();
 ```
+
 {% /tab %}
 {% /tabs %}
 
@@ -392,6 +412,7 @@ For `ActivityViewTrackingStrategy`, `FragmentViewTrackingStrategy`, or `MixedVie
 
 {% tabs %}
 {% tab label="Kotlin" %}
+
 ```kotlin
 val rumConfig = RumConfiguration.Builder(applicationId)
   .useViewTrackingStrategy(
@@ -407,8 +428,10 @@ val rumConfig = RumConfiguration.Builder(applicationId)
     )
   .build()
 ```
+
 {% /tab %}
 {% tab label="Java" %}
+
 ```java
 RumConfiguration rumConfig = new RumConfiguration.Builder(applicationId)
     .useViewTrackingStrategy(new ActivityViewTrackingStrategy(
@@ -427,6 +450,7 @@ RumConfiguration rumConfig = new RumConfiguration.Builder(applicationId)
     ))
     .build();
 ```
+
 {% /tab %}
 {% /tabs %}
 
@@ -440,14 +464,13 @@ To get timing information in resources (such as third-party providers, network r
 
 1. Add the Gradle dependency to the `dd-sdk-android-okhttp` library in the module-level `build.gradle` file:
 
-    ```groovy
-    dependencies {
-        implementation "com.datadoghq:dd-sdk-android-okhttp:x.x.x"
-    }
-    ```
+```groovy
+dependencies {
+    implementation "com.datadoghq:dd-sdk-android-okhttp:x.x.x"
+}
+```
 
 2. Add the [EventListener][12] factory:
-
 {% tabs %}
 {% tab label="Kotlin" %}
 ```kotlin
@@ -475,16 +498,15 @@ If you use Cronet instead of OkHttp, you can instrument your `CronetEngine` for 
 
 1. Add the Gradle dependencies in the module-level `build.gradle` file:
 
-    ```groovy
-    dependencies {
-        implementation "com.datadoghq:dd-sdk-android-cronet:x.x.x"
-    }
-    ```
+```groovy
+dependencies {
+    implementation "com.datadoghq:dd-sdk-android-cronet:x.x.x"
+}
+```
 
 2. Instrument the `CronetEngine.Builder`:
-
-    {{< tabs >}}
-    {{% tab "Kotlin" %}}
+{% tabs %}
+{% tab label="Kotlin" %}
 
 ```kotlin
 val cronetEngine = CronetEngine.Builder(context)
@@ -497,8 +519,8 @@ val cronetEngine = CronetEngine.Builder(context)
     .build()
 ```
 
-    {{% /tab %}}
-    {{% tab "Java" %}}
+{% /tab %}
+{% tab label="Java" %}
 
 ```java
 CronetEngine.Builder builder = new CronetEngine.Builder(context);
@@ -513,8 +535,8 @@ CronetEngine cronetEngine = CronetIntegrationPluginKt
     .build();
 ```
 
-    {{% /tab %}}
-    {{< /tabs >}}
+{% /tab %}
+{% /tabs %}
 
 #### Apollo instrumentation
 
@@ -576,8 +598,10 @@ val rumConfig = RumConfiguration.Builder(applicationId)
   .trackLongTasks(250L) // track tasks longer than 250ms as long tasks
   .build()
 ```
+
 {% /tab %}
 {% tab label="Java" %}
+
 ```java
 RumConfiguration rumConfig = new RumConfiguration.Builder(applicationId)
   // …
@@ -593,6 +617,7 @@ RumConfiguration rumConfig = new RumConfiguration.Builder(applicationId)
   .trackLongTasks(250L) // track tasks longer than 250ms as long tasks
   .build();
 ```
+
 {% /tab %}
 {% /tabs %}
 
@@ -602,6 +627,7 @@ To modify some attributes in your RUM events, or to drop some of the events enti
 
 {% tabs %}
 {% tab label="Kotlin" %}
+
 ```kotlin
 val rumConfig = RumConfiguration.Builder(applicationId)
   // ...
@@ -612,8 +638,10 @@ val rumConfig = RumConfiguration.Builder(applicationId)
   .setLongTaskEventMapper(rumLongTaskEventMapper)
   .build()
 ```
+
 {% /tab %}
 {% tab label="Java" %}
+
 ```java
 RumConfiguration rumConfig = new RumConfiguration.Builder(applicationId)
   // ...
@@ -624,6 +652,7 @@ RumConfiguration rumConfig = new RumConfiguration.Builder(applicationId)
   .setLongTaskEventMapper(rumLongTaskEventMapper)
   .build();
 ```
+
 {% /tab %}
 {% /tabs %}
 

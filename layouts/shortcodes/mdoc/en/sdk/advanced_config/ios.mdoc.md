@@ -20,6 +20,7 @@ For example:
 
 {% tabs %}
 {% tab label="Swift" %}
+
 ```swift
 import DatadogRUM
 
@@ -36,8 +37,10 @@ override func viewDidDisappear(_ animated: Bool) {
   rum.stopView(viewController: self)
 }
 ```
+
 {% /tab %}
 {% tab label="Objective-C" %}
+
 ```objective-c
 @import DatadogRUM;
 // in your `UIViewController`:
@@ -56,6 +59,7 @@ DDRUMMonitor *rum = [DDRUMMonitor shared];
     [rum stopViewWithViewController:self attributes:nil];
 }
 ```
+
 {% /tab %}
 {% /tabs %}
 
@@ -71,6 +75,7 @@ For example:
 
 {% tabs %}
 {% tab label="Swift" %}
+
 ```swift
 import DatadogRUM
 
@@ -85,14 +90,17 @@ let rum = RUMMonitor.shared()
     )
 }
 ```
+
 {% /tab %}
 {% tab label="Objective-C" %}
+
 ```objective-c
 - (IBAction)didTapDownloadResourceButton:(UIButton *)sender {
     NSString *name = sender.currentTitle ? sender.currentTitle : @"";
     [[DDRUMMonitor shared] addActionWithType:DDRUMActionTypeTap name:name attributes:@{}];
 }
 ```
+
 {% /tab %}
 {% /tabs %}
 
@@ -113,6 +121,7 @@ For example:
 
 {% tabs %}
 {% tab label="Swift" %}
+
 ```swift
 import DatadogRUM
 
@@ -130,8 +139,10 @@ rum.stopResource(
     response: response
 )
 ```
+
 {% /tab %}
 {% tab label="Objective-C" %}
+
 ```objective-c
 // in your network client:
 
@@ -143,6 +154,7 @@ rum.stopResource(
                                           response:response
                                         attributes:@{}];
 ```
+
 {% /tab %}
 {% /tabs %}
 
@@ -159,15 +171,19 @@ To track specific errors, notify `RUMMonitor.shared()` when an error occurs usin
 
 {% tabs %}
 {% tab label="Swift" %}
+
 ```swift
 let rum = RUMMonitor.shared()
 rum.addError(message: "error message.")
 ```
+
 {% /tab %}
 {% tab label="Objective-C" %}
+
 ```objective-c
 [[DDRUMMonitor shared] addErrorWithMessage:@"error message." stack:nil source:DDRUMErrorSourceCustom attributes:@{}];
 ```
+
 {% /tab %}
 {% /tabs %}
 
@@ -217,16 +233,20 @@ For example:
 
 {% tabs %}
 {% tab label="Swift" %}
+
 ```swift
 import DatadogCore
 
 Datadog.setUserInfo(id: "1234", name: "John Doe", email: "john@doe.com")
 ```
+
 {% /tab %}
 {% tab label="Objective-C" %}
+
 ```objective-c
 [DDDatadog setUserInfoWithId:@"1234" name:@"John Doe" email:@"john@doe.com" extraInfo:@{}];
 ```
+
 {% /tab %}
 {% /tabs %}
 
@@ -374,19 +394,23 @@ To automatically track views (`UIViewControllers`), use the `uiKitViewsPredicate
 
 {% tabs %}
 {% tab label="Swift" %}
+
 ```swift
 public protocol UIKitRUMViewsPredicate {
     func rumView(for viewController: UIViewController) -> RUMView?
 }
 ```
+
 {% /tab %}
 {% tab label="Objective-C" %}
+
 ```swift
 @objc
 public protocol DDUIKitRUMViewsPredicate: AnyObject {
     func rumView(for viewController: UIViewController) -> DDRUMView?
 }
 ```
+
 {% /tab %}
 {% /tabs %}
 
@@ -396,6 +420,7 @@ For instance, you can configure the predicate to use explicit type check for eac
 
 {% tabs %}
 {% tab label="Swift" %}
+
 ```swift
 class YourCustomPredicate: UIKitRUMViewsPredicate {
 
@@ -408,8 +433,10 @@ class YourCustomPredicate: UIKitRUMViewsPredicate {
     }
 }
 ```
+
 {% /tab %}
 {% tab label="Objective-C" %}
+
 ```objective-c
 @interface YourCustomPredicate : NSObject<DDUIKitRUMViewsPredicate>
 
@@ -431,6 +458,7 @@ class YourCustomPredicate: UIKitRUMViewsPredicate {
 
 @end
 ```
+
 {% /tab %}
 {% /tabs %}
 
@@ -440,6 +468,7 @@ For example, if your view controllers use `accessibilityLabel` consistently, you
 
 {% tabs %}
 {% tab label="Swift" %}
+
 ```swift
 class YourCustomPredicate: UIKitRUMViewsPredicate {
 
@@ -452,8 +481,10 @@ class YourCustomPredicate: UIKitRUMViewsPredicate {
     }
 }
 ```
+
 {% /tab %}
 {% tab label="Objective-C" %}
+
 ```objective-c
 @interface YourCustomPredicate : NSObject<DDUIKitRUMViewsPredicate>
 
@@ -471,6 +502,7 @@ class YourCustomPredicate: UIKitRUMViewsPredicate {
 
 @end
 ```
+
 {% /tab %}
 {% /tabs %}
 
@@ -486,6 +518,7 @@ You can use the default predicate (`DefaultSwiftUIRUMViewsPredicate`) or provide
 
 {% tabs %}
 {% tab label="Swift" %}
+
 ```swift
 public protocol SwiftUIRUMViewsPredicate {
     func rumView(for extractedViewName: String) -> RUMView?
@@ -505,8 +538,10 @@ class CustomSwiftUIPredicate: SwiftUIRUMViewsPredicate {
     }
 }
 ```
+
 {% /tab %}
 {% tab label="Objective-C" %}
+
 ```objective-c
 @protocol DDSwiftUIRUMViewsPredicate <NSObject>
 - (DDRUMView * _Nullable)rumViewFor:(NSString * _Nonnull)extractedViewName;
@@ -528,6 +563,7 @@ class CustomSwiftUIPredicate: SwiftUIRUMViewsPredicate {
 }
 @end
 ```
+
 {% /tab %}
 {% /tabs %}
 
@@ -557,6 +593,7 @@ To automatically track user tap actions in SwiftUI, enable the `swiftUIActionsPr
 
 {% tabs %}
 {% tab label="Swift" %}
+
 ```swift
 // Use the default predicate by disabling iOS 17 and below detection
 let predicate = DefaultSwiftUIRUMActionsPredicate(isLegacyDetectionEnabled: false)
@@ -569,8 +606,10 @@ class CustomSwiftUIActionsPredicate: SwiftUIRUMActionsPredicate {
     }
 }
 ```
+
 {% /tab %}
 {% tab label="Objective-C" %}
+
 ```objective-c
 // Use the default predicate by disabling iOS 17 and below detection
 DDDefaultSwiftUIRUMActionsPredicate *swiftUIActionsPredicate = [[DDDefaultSwiftUIRUMActionsPredicate alloc] initWithIsLegacyDetectionEnabled:NO];
@@ -590,6 +629,7 @@ DDDefaultSwiftUIRUMActionsPredicate *swiftUIActionsPredicate = [[DDDefaultSwiftU
 }
 @end
 ```
+
 {% /tab %}
 {% /tabs %}
 
@@ -614,6 +654,7 @@ To get detailed timing breakdown (DNS resolution, SSL handshake, time to first b
 
 {% tabs %}
 {% tab label="Swift" %}
+
 ```swift
 URLSessionInstrumentation.enableDurationBreakdown(
     with: .init(
@@ -627,8 +668,10 @@ let session = URLSession(
     delegateQueue: nil
 )
 ```
+
 {% /tab %}
 {% tab label="Objective-C" %}
+
 ```objective-c
 DDURLSessionInstrumentationConfiguration *config = [[DDURLSessionInstrumentationConfiguration alloc] initWithDelegateClass:[<YourSessionDelegate> class]];
 [DDURLSessionInstrumentation enableWithConfiguration:config];
@@ -637,6 +680,7 @@ NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConf
                                                       delegate:[[<YourSessionDelegate> alloc] init]
                                                  delegateQueue:nil];
 ```
+
 {% /tab %}
 {% /tabs %}
 
@@ -660,6 +704,7 @@ For instance, you can configure `example.com` as the first party host and enable
 
 {% tabs %}
 {% tab label="Swift" %}
+
 ```swift
 
 import DatadogRUM
@@ -691,6 +736,7 @@ let session = URLSession(
 This tracks all requests sent with the instrumented `session`. Requests matching the `example.com` domain are marked as "first party" and tracing information is sent to your backend to [connect the RUM resource with its Trace](https://docs.datadoghq.com/real_user_monitoring/correlate_with_other_telemetry/apm?tab=browserrum).
 {% /tab %}
 {% tab label="Objective-C" %}
+
 ```objective-c
 @import DatadogRUM;
 
@@ -701,6 +747,7 @@ DDRUMURLSessionTracking *urlSessionTracking = [DDRUMURLSessionTracking new];
 
 [DDRUM enableWith:configuration];
 ```
+
 {% /tab %}
 {% /tabs %}
 
@@ -728,14 +775,18 @@ If you don't want to track requests, you can disable URLSessionInstrumentation f
 
 {% tabs %}
 {% tab label="Swift" %}
+
 ```swift
 URLSessionInstrumentation.disable(delegateClass: <YourSessionDelegate>.self)
 ```
+
 {% /tab %}
 {% tab label="Objective-C" %}
+
 ```objective-c
 [DDURLSessionInstrumentation disableWithDelegateClass:[<YourSessionDelegate> class]];
 ```
+
 {% /tab %}
 {% /tabs %}
 
@@ -790,6 +841,7 @@ class CustomInterceptorProvider: DefaultInterceptorProvider {
     }
 }
 ```
+
 {% /tab %}
 {% tab label="Apollo iOS 2.0+" %}
 Configure network instrumentation using the provided `DatadogApolloDelegate` and `DatadogApolloURLSession`:
@@ -834,6 +886,7 @@ struct NetworkInterceptorProvider: InterceptorProvider {
     }
 }
 ```
+
 {% /tab %}
 {% /tabs %}
 
@@ -843,9 +896,11 @@ This lets Datadog RUM extract the operation type, name, variables, and payloads 
 - The integration supports Apollo iOS versions `1.0+` and `2.0+`.
 - The `query` and `mutation` type operations are tracked; `subscription` operations are not.
 - GraphQL payload sending is disabled by default. To enable it, set the `sendGraphQLPayloads` flag in the `DatadogApolloInterceptor` constructor as follows:
+
   ```swift
   let datadogInterceptor = DatadogApolloInterceptor(sendGraphQLPayloads: true)
   ```
+  
 {% /alert %}
 
 ### Automatically track errors
@@ -854,6 +909,7 @@ All "error" and "critical" logs sent with `Logger` are automatically reported as
 
 {% tabs %}
 {% tab label="Swift" %}
+
 ```swift
 import DatadogLogs
 
@@ -862,8 +918,10 @@ let logger = Logger.create()
 logger.error("message")
 logger.critical("message")
 ```
+
 {% /tab %}
 {% tab label="Objective-C" %}
+
 ```objective-c
 @import DatadogLogs;
 
@@ -871,6 +929,7 @@ DDLogger *logger = [DDLogger create];
 [logger error:@"message"];
 [logger critical:@"message"];
 ```
+
 {% /tab %}
 {% /tabs %}
 
@@ -878,6 +937,7 @@ Similarly, all finished spans marked as error are reported as RUM errors:
 
 {% tabs %}
 {% tab label="Swift" %}
+
 ```swift
 import DatadogTrace
 
@@ -886,14 +946,17 @@ let span = Tracer.shared().startSpan(operationName: "operation")
 span.setError(error)
 span.finish()
 ```
+
 {% /tab %}
 {% tab label="Objective-C" %}
+
 ```objective-c
 // ... capture the `error`
 id<OTSpan> span = [[DDTracer shared] startSpan:@"operation"];
 [span setError:error];
 [span finish];
 ```
+
 {% /tab %}
 {% /tabs %}
 
@@ -903,6 +966,7 @@ To modify attributes of a RUM event before it is sent to Datadog or to drop an e
 
 {% tabs %}
 {% tab label="Swift" %}
+
 ```swift
 let configuration = RUM.Configuration(
     applicationID: "<rum application id>",
@@ -923,8 +987,10 @@ let configuration = RUM.Configuration(
     }
 )
 ```
+
 {% /tab %}
 {% tab label="Objective-C" %}
+
 ```objective-c
 DDRUMConfiguration *configuration = [[DDRUMConfiguration alloc] initWithApplicationID:@"<rum application id>"];
 
@@ -948,6 +1014,7 @@ DDRUMConfiguration *configuration = [[DDRUMConfiguration alloc] initWithApplicat
     return RUMLongTaskEvent;
 }];
 ```
+
 {% /tab %}
 {% /tabs %}
 
@@ -957,6 +1024,7 @@ For example, to redact sensitive information in a RUM Resource's `url`, implemen
 
 {% tabs %}
 {% tab label="Swift" %}
+
 ```swift
 let configuration = RUM.Configuration(
     applicationID: "<rum application id>",
@@ -967,8 +1035,10 @@ let configuration = RUM.Configuration(
     }
 )
 ```
+
 {% /tab %}
 {% tab label="Objective-C" %}
+
 ```objective-c
 DDRUMConfiguration *configuration = [[DDRUMConfiguration alloc] initWithApplicationID:@"<rum application id>"];
 
@@ -976,6 +1046,7 @@ DDRUMConfiguration *configuration = [[DDRUMConfiguration alloc] initWithApplicat
     return RUMResourceEvent;
 }];
 ```
+
 {% /tab %}
 {% /tabs %}
 
