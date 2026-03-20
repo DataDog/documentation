@@ -60,6 +60,5 @@ The **Messages** section lets you retrieve messages by partition and offset to i
 
 **Note**: [Message viewing][2] is not enabled by default and requires additional setup. Access is controlled by per-user permissions, so you can roll out Kafka Monitoring without exposing message content. Configure message viewing separately after completing the initial setup.
 
-
 [1]: https://app.datadoghq.com/data-streams/kafka/setup
 [2]: /data_streams/kafka/messages
