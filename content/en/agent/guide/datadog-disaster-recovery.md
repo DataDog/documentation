@@ -79,7 +79,7 @@ After the Datadog team has set your DDR org, use the Datadog [public API endpoin
 
 To link your DDR and primary orgs:
 - Add the [Datadog Disaster Recovery Write][19] (`disaster_recovery_status_write`) permission to your application key in the primary org. 
-- Run the following commands, replacing the `<PLACEHOLDERS>` with your orgs' values.
+- Run the following commands, replacing the placeholders with your orgs' values.
 
 
 ```shell
