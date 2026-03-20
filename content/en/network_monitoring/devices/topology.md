@@ -86,7 +86,7 @@ Click the **Metrics** tab in the NDM device view to see key metrics for the devi
 
 ### Traffic
 
-Click the **Traffic** tab to view total, inbound, and outbound throughput for the device. A traffic graph shows activity over time, and the **Top Conversations** table lists the highest-volume source-to-destination flows with bit rate, packet rate, and total bytes. Click **View traffic** to investigate further in on the device summary page, and in [NetFlow Monitoring][1].
+Click the **Traffic** tab to view total, inbound, and outbound throughput for the device. A traffic graph shows activity over time, and the **Top Conversations** table lists the highest-volume source-to-destination flows with bit rate, packet rate, and total bytes. Click **View traffic** to investigate further on the device summary page, and in [NetFlow Monitoring][1].
 
 {{< img src="/network_device_monitoring/network_topology_map/traffic_2.png" alt="The NDM device view with the Traffic tab open, showing throughput stats, a traffic graph, and a Top Conversations table." style="width:100%;" >}}
 
