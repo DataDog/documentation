@@ -5,7 +5,7 @@ These metrics are specific to processor buffers, located upstream of a processor
 - Use the `component_type` tag to filter or group by the processor type, such as `quota` for the Quota processor.
 
 `pipelines.transform_buffer_utilization`
-: **Description**: Event count in a processor's buffer.
+: **Description**: Distribution of how many events are buffered in a processor.
 : **Metric type**: histogram
 
 `pipelines.transform_buffer_utilization_level`
