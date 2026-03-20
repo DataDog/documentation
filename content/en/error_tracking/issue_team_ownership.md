@@ -22,8 +22,6 @@ Issue Team Ownership automates your triaging work by assigning issues to the rig
 
 Your team owns an issue if it is the code owner of the top-level stack frame of the issue according to your GitHub `CODEOWNERS` file.
 
-**Note**: After a team is assigned to an issue through CODEOWNERS, the assignment is immutable.
-
 **Notes**:
 -  Stack frames of third-party files are not taken into account. Only the top-most stack frame related to a file present in your repository is considered.
 - After a team is assigned to an issue through CODEOWNERS, the assignment is immutable.
