@@ -64,7 +64,7 @@ For more information on how to configure a new notification rule, see the [Incid
 
 ## Message templates
 
-Message templates are dynamic, reusable messages that can be used in [manual incident notifications](#add-a-notification), or automated [notification rules](#customize-notification-rules). Message templates leverage template variables, such as `{{incident.severity}}`, to dynamically inject the corresponding value from the incident that the notification is being sent for. Message templates have Markdown support so that incident notifications can include text formatting, tables, indented lists, and hyperlinks. Template variables are supported in both the message's subject and body.
+Message templates are dynamic, reusable messages that can be used in [manual incident notifications](#add-a-notification), or automated [notification rules](#customize-notification-rules). Message templates use [template variables][5], such as `{{incident.severity}}`, to dynamically inject the corresponding value from the incident that the notification is being sent for. Message templates have Markdown support so that incident notifications can include text formatting, tables, indented lists, and hyperlinks. Template variables are supported in both the message's subject and body.
 
 For more information on how to create a message template, see the [Incident Settings][3] documentation.
 
@@ -76,3 +76,4 @@ For more information on how to create a message template, see the [Incident Sett
 [2]: /monitors/notify/variables/?tab=is_alert
 [3]: /incident_response/incident_management/setup_and_configuration/templates
 [4]: /incident_response/on-call/
+[5]: /incident_response/incident_management/setup_and_configuration/variables

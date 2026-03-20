@@ -75,7 +75,7 @@ Your team owns an issue if it owns the service where the issue happens. Service 
 
 Team ownership information appears on the issue details panel when available:
 
-{{< img src="error_tracking/ownership-details.png" alt="Team ownership information on issue details" style="width:80%;" >}}
+{{< img src="error_tracking/ownership-details-2.png" alt="Team ownership information on issue details" style="width:80%;" >}}
 
 You can also use issue team ownership to filter issues by teams in the Error Tracking Explorer.
 

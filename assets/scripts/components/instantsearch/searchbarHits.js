@@ -2,13 +2,13 @@ import { getHitData, getSnippetForDisplay } from './getHitData';
 import { bodyClassContains } from '../../helpers/helpers';
 import { CONVERSATIONAL_SEARCH_FLAG_KEY } from '../../components/conversational-search';
 import connectHits from 'instantsearch.js/es/connectors/hits/connectHits';
-import { initializeFeatureFlags, getBooleanFlag } from '../../helpers/feature-flags';
+import { initializeFeatureFlags, getBooleanFlag, isDatadogEmployee } from '../../helpers/feature-flags';
 
 let IS_CONVERSATIONAL_SEARCH_ENABLED = false;
 const ASK_AI_ICON_SRC = '/images/svg-icons/spark-ai.svg';
 
 initializeFeatureFlags().then((client) => {
-    IS_CONVERSATIONAL_SEARCH_ENABLED = getBooleanFlag(client, CONVERSATIONAL_SEARCH_FLAG_KEY);
+    IS_CONVERSATIONAL_SEARCH_ENABLED = getBooleanFlag(client, CONVERSATIONAL_SEARCH_FLAG_KEY) || isDatadogEmployee();
 });
 
 const logDocsAIEvent = (message, payload) => {

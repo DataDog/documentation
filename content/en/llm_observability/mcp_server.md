@@ -15,11 +15,10 @@ further_reading:
 
 ## Overview
 
-{{< callout url="#" btn_hidden="true" header="Preview Feature">}}
-LLM Observability MCP Tools are in Preview.
-{{< /callout >}}
-
 The [Datadog MCP Server][1] enables AI agents to access your [LLM Observability][2] data through the Model Context Protocol (MCP). The `llmobs` toolset provides tools for searching and analyzing traces, inspecting span details and content, and evaluating experiment results directly from AI-powered clients like Cursor, Claude Code, or OpenAI Codex.
+
+## Agent skills
+A set of agent skills that make use of these MCP endpoints can be found in the [datadog-labs/agent-skills](https://github.com/datadog-labs/agent-skills) repo. These help automate some of the manual work associated with the below use cases.  
 
 ## Use cases
 
@@ -152,7 +151,16 @@ This method uses the MCP specification's [Streamable HTTP][1] transport.
 claude mcp add --transport http datadog-mcp "https://mcp.datadoghq.com/api/unstable/mcp-server/mcp?toolsets=llmobs,core"
 ```
 
-**Configuration file** (Codex CLI, Gemini CLI, Kiro CLI, or any MCP-compatible client):
+**Codex CLI** (`~/.codex/config.toml`):
+
+```toml
+[mcp_servers.datadog]
+url = "https://mcp.datadoghq.com/api/unstable/mcp-server/mcp?toolsets=llmobs,core"
+```
+
+After adding the configuration, run `codex mcp login datadog` to complete the OAuth flow.
+
+**Gemini CLI, Kiro CLI, or other MCP-compatible clients**:
 
 ```json
 {
