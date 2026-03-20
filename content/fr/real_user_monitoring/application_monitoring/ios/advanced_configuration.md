@@ -5,7 +5,7 @@ aliases:
 - /fr/real_user_monitoring/mobile_and_tv_monitoring/ios/advanced_configuration
 description: Configurez les paramètres avancés du SDK RUM iOS pour enrichir les sessions
   utilisateur, suivre des événements personnalisés et contrôler la collecte de données
-  pour de meilleures analyses.
+  pour obtenir de meilleures informations.
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-ios
   tag: Source Code
@@ -38,6 +38,7 @@ Par exemple :
 
 {{< tabs >}}
 {{% tab "Swift" %}}
+
 ```swift
 import DatadogRUM
 
@@ -74,6 +75,7 @@ DDRUMMonitor *rum = [DDRUMMonitor shared];
 
     [rum stopViewWithViewController:self attributes:nil];
 }
+
 ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -111,6 +113,7 @@ let rum = RUMMonitor.shared()
     NSString *name = sender.currentTitle ? sender.currentTitle : @"";
     [[DDRUMMonitor shared] addActionWithType:DDRUMActionTypeTap name:name attributes:@{}];
 }
+
 ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -161,6 +164,7 @@ rum.stopResource(
 [[DDRUMMonitor shared] stopResourceWithResourceKey:@"resource-key"
                                           response:response
                                         attributes:@{}];
+
 ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -186,6 +190,7 @@ rum.addError(message: "error message.")
 {{% tab "Objective-C" %}}
 ```objective-c
 [[DDRUMMonitor shared] addErrorWithMessage:@"error message." stack:nil source:DDRUMErrorSourceCustom attributes:@{}];
+
 ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -243,6 +248,7 @@ Datadog.setUserInfo(id: "1234", name: "John Doe", email: "john@doe.com")
 {{% tab "Objective-C" %}}
 ```objective-c
 [DDDatadog setUserInfoWithId:@"1234" name:@"John Doe" email:@"john@doe.com" extraInfo:@{}];
+
 ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -386,10 +392,11 @@ You can automatically track views with UIKit and SwiftUI.
 
 {{% collapse-content title="UIKit" level="h4" expanded=true id="auto-track-views-uikit" %}}
 
-Pour suivre automatiquement les vues (`UIViewControllers`), utilisez l'option `uiKitViewsPredicate` lors de l'activation du RUM. Par défaut, les vues sont nommées avec le nom de classe du contrôleur de vue. Pour le personnaliser, fournissez votre propre implémentation de la `predicate` qui respecte le protocole `UIKitRUMViewsPredicate` :
+Pour suivre automatiquement les vues (`UIViewControllers`), utilisez l'option `uiKitViewsPredicate` lors de l'activation du RUM. Par défaut, les vues sont nommées avec le nom de classe du contrôleur de vue. Pour le personnaliser, fournissez votre propre implémentation du `predicate` qui respecte le protocole `UIKitRUMViewsPredicate` :
 
 {{< tabs >}}
 {{% tab "Swift" %}}
+
 ```swift
 public protocol UIKitRUMViewsPredicate {
     func rumView(for viewController: UIViewController) -> RUMView?
@@ -397,6 +404,7 @@ public protocol UIKitRUMViewsPredicate {
 ```
 {{% /tab %}}
 {{% tab "Objective-C" %}}
+
 ```swift
 @objc
 public protocol DDUIKitRUMViewsPredicate: AnyObject {
@@ -406,12 +414,13 @@ public protocol DDUIKitRUMViewsPredicate: AnyObject {
 {{% /tab %}}
 {{< /tabs >}}
 
-Dans l'implémentation de la `rumView(for:)`, votre application doit décider si une instance `UIViewController` donnée doit démarrer une vue RUM (retourner une valeur) ou non (retourner `nil`). La valeur `RUMView` retournée doit spécifier le `name` et peut fournir des `attributes` supplémentaires pour la vue RUM créée.
+Dans l'implémentation du `rumView(for:)`, votre application doit décider si une instance donnée de `UIViewController` doit démarrer une vue RUM (retourner une valeur) ou non (retourner `nil`). La valeur `RUMView` retournée doit spécifier le `name` et peut fournir des `attributes` supplémentaires pour la vue RUM créée.
 
 Par exemple, vous pouvez configurer le prédicat pour utiliser une vérification de type explicite pour chaque contrôleur de vue dans votre application :
 
 {{< tabs >}}
 {{% tab "Swift" %}}
+
 ```swift
 class YourCustomPredicate: UIKitRUMViewsPredicate {
 
@@ -446,6 +455,7 @@ class YourCustomPredicate: UIKitRUMViewsPredicate {
 }
 
 @end
+
 ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -486,6 +496,7 @@ class YourCustomPredicate: UIKitRUMViewsPredicate {
 }
 
 @end
+
 ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -544,6 +555,7 @@ class CustomSwiftUIPredicate: SwiftUIRUMViewsPredicate {
     return [[DDRUMView alloc] initWithName:extractedViewName attributes:@{}];
 }
 @end
+
 ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -607,6 +619,7 @@ DDDefaultSwiftUIRUMActionsPredicate *swiftUIActionsPredicate = [[DDDefaultSwiftU
     return [[DDRUMAction alloc] initWithName:componentName attributes:@{}];
 }
 @end
+
 ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -654,6 +667,7 @@ DDURLSessionInstrumentationConfiguration *config = [[DDURLSessionInstrumentation
 NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]
                                                       delegate:[[<YourSessionDelegate> alloc] init]
                                                  delegateQueue:nil];
+
 ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -722,6 +736,7 @@ DDRUMURLSessionTracking *urlSessionTracking = [DDRUMURLSessionTracking new];
 [configuration setURLSessionTracking:urlSessionTracking];
 
 [DDRUM enableWith:configuration];
+
 ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -750,6 +765,7 @@ If you don't want to track requests, you can disable URLSessionInstrumentation f
 
 {{< tabs >}}
 {{% tab "Swift" %}}
+
 ```swift
 URLSessionInstrumentation.disable(delegateClass: <YourSessionDelegate>.self)
 ```
@@ -757,6 +773,7 @@ URLSessionInstrumentation.disable(delegateClass: <YourSessionDelegate>.self)
 {{% tab "Objective-C" %}}
 ```objective-c
 [DDURLSessionInstrumentation disableWithDelegateClass:[<YourSessionDelegate> class]];
+
 ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -898,6 +915,7 @@ logger.critical("message")
 DDLogger *logger = [DDLogger create];
 [logger error:@"message"];
 [logger critical:@"message"];
+
 ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -921,6 +939,7 @@ span.finish()
 id<OTSpan> span = [[DDTracer shared] startSpan:@"operation"];
 [span setError:error];
 [span finish];
+
 ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -975,6 +994,7 @@ DDRUMConfiguration *configuration = [[DDRUMConfiguration alloc] initWithApplicat
 [configuration setLongTaskEventMapper:^DDRUMLongTaskEvent * _Nullable(DDRUMLongTaskEvent * _Nonnull RUMLongTaskEvent) {
     return RUMLongTaskEvent;
 }];
+
 ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -1003,6 +1023,7 @@ DDRUMConfiguration *configuration = [[DDRUMConfiguration alloc] initWithApplicat
 [configuration setResourceEventMapper:^DDRUMResourceEvent * _Nullable(DDRUMResourceEvent * _Nonnull RUMResourceEvent) {
     return RUMResourceEvent;
 }];
+
 ```
 {{% /tab %}}
 {{< /tabs >}}

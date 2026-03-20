@@ -10,19 +10,19 @@ further_reading:
   text: Referencia del SDK de Observabilidad de LLM
 - link: https://www.datadoghq.com/blog/llm-prompt-tracking
   tag: Blog
-  text: Rastrea, compara y optimiza tus prompts de LLM con la Observabilidad de LLM
+  text: Rastree, compare y optimice sus prompts de LLM con la Observabilidad de LLM
     de Datadog
 - link: https://www.datadoghq.com/blog/mcp-client-monitoring
   tag: Blog
-  text: Obtén visibilidad de extremo a extremo en los clientes de MCP con la Observabilidad
+  text: Obtenga visibilidad de extremo a extremo en los clientes de MCP con la Observabilidad
     de LLM de Datadog
 title: Instrumentación automática para la Observabilidad de LLM
 ---
 ## Resumen
 
-La Observabilidad de LLM de Datadog puede rastrear y anotar automáticamente las llamadas a los marcos y bibliotecas de LLM compatibles a través de varias [integraciones de LLM](#llm-integrations). Cuando [ejecutas tu aplicación de LLM con el SDK de Observabilidad de LLM][2], estas integraciones de LLM están habilitadas por defecto y proporcionan trazas y observabilidad listas para usar, sin que tengas que cambiar tu código.
+La Observabilidad de LLM de Datadog puede rastrear y anotar automáticamente las llamadas a los marcos y bibliotecas de LLM compatibles a través de varias [integraciones de LLM](#llm-integrations). Cuando [ejecute su aplicación de LLM con el SDK de Observabilidad de LLM][2], estas integraciones de LLM están habilitadas por defecto y proporcionan trazas y observabilidad listas para usar, sin que tenga que cambiar su código.
 
-<div class="alert alert-info">La instrumentación automática funciona para llamadas a <a href="#supported-frameworks-and-libraries">marcos y bibliotecas compatibles</a>. Para rastrear otras llamadas (por ejemplo: llamadas a API, consultas a bases de datos, funciones internas), consulta la <a href="/llm_observability/instrumentation/sdk">referencia del SDK de Observabilidad de LLM</a> para saber cómo agregar instrumentación manual.</div>
+<div class="alert alert-info">La instrumentación automática funciona para llamadas a <a href="#supported-frameworks-and-libraries">marcos y bibliotecas compatibles</a>. Para rastrear otras llamadas (por ejemplo: llamadas a API, consultas a bases de datos, funciones internas), consulte la <a href="/llm_observability/instrumentation/sdk">referencia del SDK de Observabilidad de LLM</a> para saber cómo agregar instrumentación manual.</div>
 
 
 ### Marcos y bibliotecas compatibles
@@ -49,7 +49,7 @@ La Observabilidad de LLM de Datadog puede rastrear y anotar automáticamente las
 
 {{% /tab %}}
 {{% tab "Node.js" %}}
-| Marco                                  | Versiones Soportadas | Versión del Rastreador                              |
+| Marco                                  | Versiones Soportadas | Versión del Trazador                              |
 |--------------------------------------------|--------------------|---------------------------------------------|
 | [Amazon Bedrock](#amazon-bedrock)          | >= 3.422.0         | >= 5.35.0 (CJS), >=5.35.0 (ESM)             |
 | [Anthropic](#anthropic)                    | >= 0.14.0          | >= 5.71.0 (CJS), >=5.71.0 (ESM)             |
@@ -60,7 +60,7 @@ La Observabilidad de LLM de Datadog puede rastrear y anotar automáticamente las
 | [Google GenAI](#google-genai)              | >= 1.19.0          | >= 5.81.0 (CJS), >=5.81.0 (ESM)             |
 
 {{% collapse-content title="Soporte para Módulos ESMAScript (ESM)" level="h4" expanded=false id="esm-support" %}}
-La instrumentación automática para proyectos ESM es compatible a partir de `dd-trace@>=5.38.0`. Para habilitar la instrumentación automática en tus proyectos ESM, ejecuta tu aplicación con la siguiente opción de Node:
+La instrumentación automática para proyectos ESM es compatible a partir de `dd-trace@>=5.38.0`. Para habilitar la instrumentación automática en sus proyectos ESM, ejecute su aplicación con la siguiente opción de Node:
 
 ```bash
 --import dd-trace/register.js
@@ -76,7 +76,7 @@ Para [la configuración de línea de comandos](/llm_observability/instrumentatio
 
 ##### Solución de problemas: Cargador personalizado para incompatibilidad de módulos
 
-Si hay errores al iniciar tu aplicación al usar esta opción, es probable que haya una incompatibilidad de módulos. Puedes crear tu propio archivo de gancho excluyendo el módulo y el archivo en cuestión:
+Si hay errores al iniciar su aplicación al usar esta opción, es probable que haya una incompatibilidad de módulos. Puede crear su propio archivo de gancho excluyendo el módulo y el archivo en cuestión:
 
 ```javascript
 // hook.mjs
@@ -94,7 +94,7 @@ register('import-in-the-middle/hook.mjs', import.meta.url, {
 });
 ```
 
-Para usar este cargador personalizado, ejecuta tu aplicación con la siguiente opción de Node:
+Para usar este cargador personalizado, ejecute su aplicación con la siguiente opción de Node:
 
 ```bash
 --import ./hook.mjs
@@ -102,13 +102,13 @@ Para usar este cargador personalizado, ejecuta tu aplicación con la siguiente o
 {{% /collapse-content %}}
 
 {{% collapse-content title="Soporte para aplicaciones empaquetadas (esbuild, Webpack)" level="h4" expanded=false id="bundling-support" %}}
-Para usar integraciones de Observabilidad LLM en aplicaciones empaquetadas (esbuild, Webpack), debes excluir los módulos de estas integraciones del empaquetado.
+Para usar integraciones de Observabilidad LLM en aplicaciones empaquetadas (esbuild, Webpack), debe excluir los módulos de estas integraciones del empaquetado.
 
 ##### esbuild
-Si estás usando esbuild, consulta [Empaquetado con el rastreador de Node.js](/tracing/trace_collection/automatic_instrumentation/dd_libraries/nodejs/#bundling).
+Si está utilizando esbuild, consulte [Empaquetado con el rastreador de Node.js](/tracing/trace_collection/automatic_instrumentation/dd_libraries/nodejs/#bundling).
 
 ##### Webpack
-Para Webpack, especifica la integración correspondiente en la sección `externals` de la configuración de webpack:
+Para Webpack, especifique la integración correspondiente en la sección `externals` de la configuración de webpack:
 
 ```javascript
 // webpack.config.js
@@ -126,7 +126,7 @@ module.exports = {
 {{% /collapse-content %}}
 
 {{% collapse-content title="Soporte para Next.js" level="h4" expanded=false id="nextjs-support" %}}
-Inicializa correctamente el rastreador en tu aplicación para asegurar que la auto-instrumentación funcione correctamente. Si usas TypeScript o ESM para tu aplicación Next.js, inicializa el rastreador en un archivo `instrumentation.{ts/js}` de la siguiente manera, especificando tus opciones de configuración como variables de entorno:
+Inicialice correctamente el rastreador en su aplicación para asegurar que la auto-instrumentación funcione correctamente. Si está utilizando TypeScript o ESM para su aplicación Next.js, inicialice el rastreador en un archivo `instrumentation.{ts/js}` de la siguiente manera, especificando sus opciones de configuración como variables de entorno:
 
 ```typescript
 // instrumentation.ts
@@ -140,7 +140,7 @@ export async function register() {
 }
 ```
 
-De lo contrario, para aplicaciones Next.js en CommonJS, puedes usar la función `init` directamente:
+De lo contrario, para aplicaciones Next.js en CommonJS, puede usar la función `init` directamente:
 
 ```javascript
 // instrumentation.js
@@ -158,7 +158,8 @@ module.exports = register;
 ```
 
 
-Luego, asegúrate de especificar `dd-trace` y cualquier otra integración soportada en `serverExternalPackages` en tu archivo `next.config.{ts/js}`:
+Luego, asegúrese de especificar `dd-trace` y cualquier otra integración soportada en `serverExternalPackages` en su archivo `next.config.{ts/js}`:
+
 ```javascript
 // next.config.ts
 module.exports = {
@@ -176,11 +177,11 @@ module.exports = {
 {{% /tab %}}
 {{< /tabs >}}
 
-<div class="alert alert-info">La observabilidad de LLM de Datadog también soporta cualquier marco que emita nativamente <a href="https://opentelemetry.io/docs/specs/semconv/gen-ai/">la convención semántica de OpenTelemetry GenAI v1.37+</a> compatible, sin requerir el rastreador de Datadog. Consulta <a href="/llm_observability/instrumentation/otel_instrumentation">la instrumentación de OpenTelemetry</a> para más detalles.</div>
+<div class="alert alert-info">La observabilidad de LLM de Datadog también admite cualquier marco que emita nativamente spans compatibles con la convención semántica de OpenTelemetry GenAI v1.37+</a>, sin requerir el rastreador de Datadog. Vea <a href="/llm_observability/instrumentation/otel_instrumentation">Instrumentación de OpenTelemetry</a> para más detalles.</div>
 
 ## Integraciones de LLM
 
-Las integraciones de LLM de Datadog capturan latencia, errores, parámetros de entrada, mensajes de entrada y salida, y uso de tokens (cuando está disponible) para las llamadas rastreadas.
+Las integraciones de LLM de Datadog capturan latencia, errores, parámetros de entrada, mensajes de entrada y salida, y uso de tokens (cuando esté disponible) para las llamadas rastreadas.
 
 {{% collapse-content title="Amazon Bedrock" level="h3" expanded=false id="amazon-bedrock" %}}
 {{< tabs >}}
@@ -200,7 +201,7 @@ La integración de Amazon Bedrock instrumenta los siguientes métodos:
 - [Mensajes de chat transmitidos][7]:
   - `ConverseStream` (requiere `ddtrace>=3.5.0`)
 
-<div class="alert alert-info">La integración de Amazon Bedrock no soporta el rastreo de llamadas de incrustación.</div>
+<div class="alert alert-info">La integración de Amazon Bedrock no admite el rastreo de llamadas de incrustación.</div>
 
 [1]: /es/integrations/amazon-bedrock
 [2]: https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/bedrock-runtime.html
@@ -212,7 +213,7 @@ La integración de Amazon Bedrock instrumenta los siguientes métodos:
 {{% /tab %}}
 
 {{% tab "Node.js" %}}
-La [integración de Amazon Bedrock][1] proporciona trazado automático para las llamadas al modelo de chat del SDK de Node.js de Amazon Bedrock Runtime (usando [BedrockRuntimeClient][2]).
+La [integración de Amazon Bedrock][1] proporciona trazado automático para las llamadas del modelo de chat del SDK de Node.js de Amazon Bedrock (utilizando [BedrockRuntimeClient][2]).
 
 ### Métodos rastreados
 
@@ -232,7 +233,7 @@ La integración de Amazon Bedrock instrumenta los siguientes métodos:
 {{% collapse-content title="Agentes de Amazon Bedrock" level="h3" expanded=false id="amazon-bedrock-agents" %}}
 {{< tabs >}}
 {{% tab "Python" %}}
-La integración de Agentes de Amazon Bedrock proporciona trazado automático para las llamadas de invocación de agente del SDK de Python de Amazon Bedrock Agents Runtime (usando [Boto3][1]/[Botocore][2]).
+La integración de Agentes de Amazon Bedrock proporciona trazado automático para las llamadas de invocación de agentes del SDK de Python de Amazon Bedrock (utilizando [Boto3][1]/[Botocore][2]).
 
 ### Métodos rastreados
 
@@ -242,7 +243,7 @@ La integración de Agentes de Amazon Bedrock instrumenta los siguientes métodos
   - `InvokeAgent` (requiere ddtrace>=3.10.0)
 
 <div class="alert alert-info">La integración de Agentes de Amazon Bedrock, por defecto, solo traza el método general <code>InvocarAgente</code>. Para habilitar
-el trazado de pasos intra-agente, debes establecer <code>enableTrace=True</code> en los parámetros de solicitud de <code>InvocarAgente</code>.</div>
+el trazado de pasos intra-agente, debe establecer <code>enableTrace=True</code> en los parámetros de solicitud de <code>InvocarAgente</code>.</div>
 
 [1]: https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/bedrock-runtime.html
 [2]: https://botocore.amazonaws.com/v1/documentation/api/latest/reference/services/bedrock-runtime.html
@@ -254,7 +255,7 @@ el trazado de pasos intra-agente, debes establecer <code>enableTrace=True</code>
 {{% collapse-content title="Antropico" level="h3" expanded=false id="anthropic" %}}
 {{< tabs >}}
 {{% tab "Python" %}}
-La [integración de Antropico][1] proporciona trazado automático para las llamadas de mensajes de chat del [SDK de Antropico en Python][2].
+La [integración de Antropico][1] proporciona trazado automático para las llamadas de mensajes de chat del [SDK de Python de Antropico][2].
 
 ### Métodos rastreados
 
@@ -335,11 +336,11 @@ La integración de Google ADK proporciona seguimiento automático para ejecucion
 
 La integración de Google ADK instrumenta los siguientes métodos:
 
-- [Ejecuta Agentes][2]
-- [Llamadas a Herramientas][3]
-- [Ejecuciones de Código][4]
+- [El agente ejecuta][2]
+- [Llamadas de herramientas][3]
+- [Ejecuciones de código][4]
 
-Ambos `run_live` y `run_async` métodos son compatibles.
+Ambos métodos `run_live` y `run_async` son compatibles.
 
 [1]: https://google.github.io/adk-docs/#python
 [2]: https://google.github.io/adk-docs/agents/
@@ -354,7 +355,7 @@ Ambos `run_live` y `run_async` métodos son compatibles.
 {{% tab "Python" %}}
 La integración de Google GenAI rastrea automáticamente los métodos en el [Google GenAI Python SDK][1].
 
-**Nota:** El [Google GenAI Python SDK][1] sucede al Google GenerativeAI SDK, y expone tanto la API de Desarrollador de Gemini como Vertex.
+**Nota:** El [Google GenAI Python SDK][1] sucede al Google GenerativeAI SDK y expone tanto la API de desarrollador de Gemini como Vertex.
 
 ### Métodos rastreados
 
@@ -374,7 +375,7 @@ La integración de Google GenAI instrumenta los siguientes métodos:
 {{% tab "Node.js" %}}
 La integración de Google GenAI rastrea automáticamente los métodos en el [Google GenAI Node.js SDK][1] al instrumentar el [`@google/genai` paquete][4].
 
-**Nota:** El [Google GenAI Node.js SDK][1] sucede al [Google GenerativeAI SDK][6], y expone tanto la API de Desarrollador de Gemini como Vertex.
+**Nota:** El [Google GenAI Node.js SDK][1] sucede al [Google GenerativeAI SDK][6] y expone tanto la API de desarrollador de Gemini como Vertex.
 
 ### Métodos rastreados
 
@@ -396,7 +397,7 @@ La integración de Google GenAI instrumenta los siguientes métodos:
 {{% collapse-content title="LangChain" level="h3" expanded=false id="langchain" %}}
 {{< tabs >}}
 {{% tab "Python" %}}
-La [integración de LangChain][1] proporciona seguimiento automático para el [SDK de Python de LangChain][2] LLM, modelo de chat y llamadas de cadena.
+La [integración de LangChain][1] proporciona trazado automático para el [SDK de Python de LangChain][2] LLM, modelo de chat y llamadas de cadena.
 
 ### Métodos rastreados
 
@@ -521,7 +522,7 @@ La integración de LiteLLM instrumenta los siguientes métodos:
 {{% collapse-content title="MCP" level="h3" expanded=false id="mcp" %}}
 {{< tabs >}}
 {{% tab "Python" %}}
-La integración del Protocolo de Contexto del Modelo (MCP) instrumenta llamadas de herramientas de cliente y servidor en el [MCP][1] SDK.
+La integración del Protocolo de Contexto del Modelo (MCP) instrumenta las llamadas de herramientas del cliente y del servidor en el [MCP][1] SDK.
 
 ### Métodos rastreados
 
@@ -543,16 +544,16 @@ Los instrumentos de integración de MCP los siguientes métodos:
 {{% collapse-content title="OpenAI, Azure OpenAI" level="h3" expanded=false id="openai" %}}
 {{< tabs >}}
 {{% tab "Python" %}}
-La [integración de OpenAI][1] proporciona seguimiento automático para los puntos finales de finalización y finalización de chat del [SDK de Python de OpenAI][2] hacia OpenAI y Azure OpenAI.
+La [integración de OpenAI][1] proporciona trazado automático para los [puntos finales de finalización y chat del SDK de Python de OpenAI][2] hacia OpenAI y Azure OpenAI.
 
 ### Métodos rastreados
 
 La integración de OpenAI instrumenta los siguientes métodos, incluyendo llamadas transmitidas:
 
-- [Completaciones][3]:
+- [Finalizaciones][3]:
    - `OpenAI().completions.create()`, `AzureOpenAI().completions.create()`
    - `AsyncOpenAI().completions.create()`, `AsyncAzureOpenAI().completions.create()`
-- [Completaciones de chat][4]:
+- [Finalizaciones de chat][4]:
    - `OpenAI().chat.completions.create()`, `AzureOpenAI().chat.completions.create()`
    - `AsyncOpenAI().chat.completions.create()`, `AsyncAzureOpenAI().chat.completions.create()`
 - [Respuestas][5]:
@@ -572,13 +573,13 @@ La integración de OpenAI instrumenta los siguientes métodos, incluyendo llamad
 {{% /tab %}}
 
 {{% tab "Node.js" %}}
-La [integración de OpenAI][1] proporciona seguimiento automático para los puntos finales de finalización, finalización de chat y embeddings del [SDK de Node.js de OpenAI][2] hacia OpenAI y [Azure OpenAI][3].
+La [integración de OpenAI][1] proporciona trazado automático para los [puntos finales de finalización, chat y embeddings del SDK de Node.js de OpenAI][2] hacia OpenAI y [Azure OpenAI][3].
 
 ### Métodos rastreados
 
 La integración de OpenAI instrumenta los siguientes métodos, incluyendo llamadas transmitidas:
 
-- [Completaciones][4]:
+- [Finalizaciones][4]:
   - `openai.completions.create()` y `azureopenai.completions.create()`
 - [Completaciones de chat][5]:
   - `openai.chat.completions.create()` y `azureopenai.chat.completions.create()`
@@ -625,7 +626,7 @@ La integración de OpenAI instrumenta los siguientes métodos en `OpenAIClient`,
   - `openAiClient.async().responses().create()`
   - `openAiClient.async().responses().createStreaming()`
 
-El proveedor (OpenAI vs Azure OpenAI) se detecta automáticamente según el `baseUrl` configurado en `ClientOptions`. Todos los métodos soportan variantes tanto bloqueantes como asíncronas (basadas en CompletableFuture).
+El proveedor (OpenAI vs Azure OpenAI) se detecta automáticamente según el `baseUrl` configurado en `ClientOptions`. Todos los métodos admiten variantes tanto bloqueantes como asíncronas (basadas en CompletableFuture).
 
 [1]: /es/integrations/openai/
 [2]: https://platform.openai.com/docs/api-reference/introduction
@@ -642,7 +643,7 @@ El proveedor (OpenAI vs Azure OpenAI) se detecta automáticamente según el `bas
 {{< tabs >}}
 {{% tab "Python" %}}
 La integración de Agentes de OpenAI convierte el [seguimiento incorporado][1] del [SDK de Agentes de OpenAI][2] en
-formato de Observabilidad LLM y lo envía al producto de Observabilidad LLM de Datadog añadiendo un procesador de trazas de Datadog.
+formato de Observabilidad LLM y lo envía al producto de Observabilidad LLM de Datadog al agregar un procesador de trazas de Datadog.
 
 Las siguientes operaciones son compatibles:
 - [`traces`][3]
@@ -722,7 +723,7 @@ La integración del [Vercel AI SDK][1] rastrea automáticamente la generación d
 
 ### Telemetría del SDK de Vercel AI Core
 
-Esta integración parchea automáticamente el rastreador pasado a cada uno de los métodos rastreados bajo la opción [`experimental_telemetry`][7]. Si no se pasa ninguna configuración `experimental_telemetry`, la integración permite que aún envíe spans de Observabilidad LLM.
+Esta integración parchea automáticamente el rastreador pasado a cada uno de los métodos rastreados bajo la opción [`experimental_telemetry`][7]. Si no se pasa ninguna configuración `experimental_telemetry`, la integración permite que aún se envíen spans de Observabilidad LLM.
 
 ```javascript
 require('dd-trace').init({
@@ -817,7 +818,7 @@ Todas las integraciones están **habilitadas por defecto**.
 
 {{< tabs >}}
 {{% tab "Python" %}}
-Usa la [configuración del SDK en código][1] y especifica `integrations_enabled=False`.
+Utiliza la [configuración del SDK en código][1] y especifica `integrations_enabled=False`.
 
 **Ejemplo**: Configuración del SDK en código que deshabilita todas las integraciones LLM
 
@@ -835,7 +836,7 @@ LLMObs.enable(
 {{% /tab %}}
 
 {{% tab "Node.js" %}}
-Usa la [configuración del SDK en código][1] y especifica `plugins: false`.
+Utiliza la [configuración del SDK en código][1] y especifica `plugins: false`.
 
 **Ejemplo**: Configuración del SDK en código que desactiva todas las integraciones de LLM
 
@@ -855,7 +856,7 @@ const { llmobs } = tracer;
 
 {{< tabs >}}
 {{% tab "Python" %}}
-1. Usa la [configuración del SDK en código][1] y desactiva todas las integraciones con `integrations_enabled=False`.
+1. Utiliza la [configuración del SDK en código][1] y desactiva todas las integraciones con `integrations_enabled=False`.
 2. Habilita manualmente integraciones seleccionadas con `ddtrace.patch()`.
 
 **Ejemplo**: Configuración del SDK en código que solo habilita la integración de LangChain
@@ -877,7 +878,7 @@ patch(langchain=True)
 {{% /tab %}}
 
 {{% tab "Node.js" %}}
-1. Usa la [configuración del SDK en código][1] y desactiva todas las integraciones con `plugins: false`.
+1. Utiliza la [configuración del SDK en código][1] y desactiva todas las integraciones con `plugins: false`.
 2. Habilita manualmente integraciones seleccionadas con `use()`.
 
 **Ejemplo**: Configuración del SDK en código que solo habilita la integración de LangChain

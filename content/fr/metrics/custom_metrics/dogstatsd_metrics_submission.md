@@ -30,19 +30,19 @@ Après avoir [installé DogStatsD][1], les fonctions suivantes sont disponibles 
 | `<METRIC_NAME>`  | Chaîne          | Oui      | Nom de la métrique à soumettre.                                                                                                                                                                  |
 | `<METRIC_VALUE>` | Double          | Oui      | Valeur associée à votre métrique.                                                                                                                                                             |
 | `<SAMPLE_RATE>`  | Double          | Non       | Le taux d'échantillonnage à appliquer à la métrique. Prend une valeur entre `0` (tout est échantillonné, donc rien n'est envoyé) et `1` (aucun échantillon). Voir la section [Taux d'échantillonnage](#sample-rates) pour en savoir plus. |
-| `<TAGS>`         | Liste de chaînes | Non       | Une liste de balises à appliquer à la métrique. Voir la section [Tagging des métriques](#metric-tagging) pour en savoir plus.                                                                                       |
+| `<TAGS>`         | Liste de chaînes | Non       | Une liste de balises à appliquer à la métrique. Consultez la section [Tagging des métriques](#metric-tagging) pour en savoir plus.                                                                                       |
 | `<CARDINALITY>`  | Enum            | Non       | La [cardinalité][10] des balises à attribuer à cette métrique.                                                                                                                               |
 
 ### COMPTE
 
 `increment(<METRIC_NAME>, <SAMPLE_RATE>, <TAGS>, <CARDINALITY> )`
-: Utilisé pour incrémenter une métrique de type COMPTE. Stocké en tant que type `RATE` dans Datadog. Chaque valeur dans la série temporelle stockée est un delta normalisé dans le temps de la valeur de la métrique sur la période de vidage StatsD.
+: Utilisé pour incrémenter une métrique de COMPTE. Stocké en tant que `RATE` type dans Datadog. Chaque valeur dans la série temporelle stockée est un delta normalisé dans le temps de la valeur de la métrique sur la période de vidage de StatsD.
 
 `decrement(<METRIC_NAME>, <SAMPLE_RATE>, <TAGS>, <CARDINALITY>)`
-: Utilisé pour décrémenter une métrique de type COMPTE. Stocké en tant que type `RATE` dans Datadog. Chaque valeur dans la série temporelle stockée est un delta normalisé dans le temps de la valeur de la métrique sur la période de vidage StatsD.
+: Utilisé pour décrémenter une métrique de COMPTE. Stocké en tant que `RATE` type dans Datadog. Chaque valeur dans la série temporelle stockée est un delta normalisé dans le temps de la valeur de la métrique sur la période de vidage de StatsD.
 
 `count(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>, <CARDINALITY>)`
-: Utilisé pour incrémenter une métrique de type COMPTE à partir d'un `Value` arbitraire. Stocké en tant que type `RATE` dans Datadog. Chaque valeur dans la série temporelle stockée est un delta normalisé dans le temps de la valeur de la métrique sur la période de vidage StatsD.
+: Utilisé pour incrémenter une métrique de COMPTE à partir d'un `Value` arbitraire. Stocké en tant que `RATE` type dans Datadog. Chaque valeur dans la série temporelle stockée est un delta normalisé dans le temps de la valeur de la métrique sur la période de vidage de StatsD.
 
 **Remarque**: `COUNT` les métriques de type peuvent afficher une valeur décimale dans Datadog car elles sont normalisées sur l'intervalle de vidage pour rapporter des unités par seconde.
 
@@ -55,6 +55,7 @@ Exécutez le code suivant pour soumettre une métrique DogStatsD `COUNT` à Data
 {{< programming-lang-wrapper langs="python,ruby,go,java,.NET,php,nodejs" >}}
 
 {{< programming-lang lang="python" >}}
+
 ```python
 from datadog import initialize, statsd
 import time
@@ -77,6 +78,7 @@ while(1):
 {{< /programming-lang >}}
 
 {{< programming-lang lang="ruby" >}}
+
 ```ruby
 require 'datadog/statsd'
 
@@ -93,6 +95,7 @@ end
 {{< /programming-lang >}}
 
 {{< programming-lang lang="go" >}}
+
 ```go
 package main
 
@@ -120,6 +123,7 @@ func main() {
 {{< /programming-lang >}}
 
 {{< programming-lang lang="java" >}}
+
 ```java
 import com.timgroup.statsd.NonBlockingStatsDClientBuilder;
 import com.timgroup.statsd.StatsDClient;
@@ -146,6 +150,7 @@ public class DogStatsdClient {
 {{< /programming-lang >}}
 
 {{< programming-lang lang=".NET" >}}
+
 ```csharp
 using StatsdClient;
 using System;
@@ -180,6 +185,7 @@ public class DogStatsdClient
 {{< /programming-lang >}}
 
 {{< programming-lang lang="php" >}}
+
 ```php
 <?php
 
@@ -202,6 +208,7 @@ while (TRUE) {
 {{< /programming-lang >}}
 
 {{< programming-lang lang="nodejs" >}}
+
 ```javascript
 const tracer = require('dd-trace');
 tracer.init();
@@ -217,9 +224,9 @@ Après avoir exécuté le code ci-dessus, vos données de métriques sont dispon
 
 {{< img src="metrics/custom_metrics/dogstatsd_metrics_submission/increment_decrement.png" alt="Incrémenter Décrémenter" >}}
 
-Puisque la valeur est soumise en tant que `COUNT`, elle est stockée en tant que `RATE` dans Datadog. Pour obtenir des comptes bruts dans Datadog, appliquez une fonction à votre série telle que la fonction [Somme cumulative][3] ou [Intégrale][4] :
+Puisque la valeur est soumise en tant que `COUNT`, elle est stockée en tant que `RATE` dans Datadog. Pour obtenir des comptes bruts dans Datadog, appliquez une fonction à votre série, telle que la fonction [Somme Cumulative][3] ou [Intégrale][4] :
 
-{{< img src="metrics/custom_metrics/dogstatsd_metrics_submission/increment_decrement_cumsum.png" alt="Incrément Décrément avec Cumsum" >}}
+{{< img src="metrics/custom_metrics/dogstatsd_metrics_submission/increment_decrement_cumsum.png" alt="Incrémenter Décrémenter avec Cumsum" >}}
 
 ### GAUGE
 
@@ -237,6 +244,7 @@ Exécutez le code suivant pour soumettre une métrique DogStatsD `GAUGE` à Data
 {{< programming-lang-wrapper langs="python,ruby,go,java,.NET,php,nodejs" >}}
 
 {{< programming-lang lang="python" >}}
+
 ```python
 from datadog import initialize, statsd
 import time
@@ -258,6 +266,7 @@ while(1):
 {{< /programming-lang >}}
 
 {{< programming-lang lang="ruby" >}}
+
 ```ruby
 require 'datadog/statsd'
 
@@ -274,6 +283,7 @@ end
 {{< /programming-lang >}}
 
 {{< programming-lang lang="go" >}}
+
 ```go
 package main
 
@@ -300,6 +310,7 @@ func main() {
 {{< /programming-lang >}}
 
 {{< programming-lang lang="java" >}}
+
 ```java
 import com.timgroup.statsd.NonBlockingStatsDClientBuilder;
 import com.timgroup.statsd.StatsDClient;
@@ -324,6 +335,7 @@ public class DogStatsdClient {
 {{< /programming-lang >}}
 
 {{< programming-lang lang=".NET" >}}
+
 ```csharp
 using StatsdClient;
 using System;
@@ -356,6 +368,7 @@ public class DogStatsdClient
 {{< /programming-lang >}}
 
 {{< programming-lang lang="php" >}}
+
 ```php
 <?php
 
@@ -379,6 +392,7 @@ while (TRUE) {
 {{< /programming-lang >}}
 
 {{< programming-lang lang="nodejs" >}}
+
 ```javascript
 const tracer = require('dd-trace');
 tracer.init();
@@ -411,6 +425,7 @@ Exécutez le code suivant pour soumettre une métrique DogStatsD `SET` à Datado
 {{< programming-lang-wrapper langs="python,ruby,go,java,.NET,PHP" >}}
 
 {{< programming-lang lang="python" >}}
+
 ```python
 from datadog import initialize, statsd
 import time
@@ -431,6 +446,7 @@ while(1):
 {{< /programming-lang >}}
 
 {{< programming-lang lang="ruby" >}}
+
 ```ruby
 require 'datadog/statsd'
 
@@ -446,6 +462,7 @@ end
 {{< /programming-lang >}}
 
 {{< programming-lang lang="go" >}}
+
 ```go
 package main
 
@@ -474,6 +491,7 @@ func main() {
 {{< /programming-lang >}}
 
 {{< programming-lang lang="java" >}}
+
 ```java
 import com.timgroup.statsd.NonBlockingStatsDClientBuilder;
 import com.timgroup.statsd.StatsDClient;
@@ -498,6 +516,7 @@ public class DogStatsdClient {
 {{< /programming-lang >}}
 
 {{< programming-lang lang=".NET" >}}
+
 ```csharp
 using StatsdClient;
 using System;
@@ -530,6 +549,7 @@ public class DogStatsdClient
 {{< /programming-lang >}}
 
 {{< programming-lang lang="php" >}}
+
 ```php
 <?php
 
@@ -561,16 +581,16 @@ Après avoir exécuté le code ci-dessus, vos données de métriques sont dispon
 ### HISTOGRAM
 
 `histogram(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>, <CARDINALITY>)`
-: Étant donné que plusieurs métriques sont soumises, les types de métriques stockés (`GAUGE`, `RATE`) dépendent de la métrique. Consultez la documentation du [type de métrique HISTOGRAM][6] pour en savoir plus.
+Étant donné que plusieurs métriques sont soumises, les types de métriques stockés (`GAUGE`, `RATE`) dépendent de la métrique. Consultez la documentation sur le [type de métrique HISTOGRAM][6] pour en savoir plus.
 
 #### Configuration
 
 * Configurez l'agrégation à envoyer à Datadog avec le paramètre `histogram_aggregates` dans votre [fichier de configuration datadog.yaml][7]. Par défaut, seules les agrégations `max`, `median`, `avg` et `count` sont envoyées.
-* Configurez l'agrégation des percentiles à envoyer à Datadog avec le paramètre `histogram_percentiles` dans votre [fichier de configuration datadog.yaml][7]. Par défaut, seul le percentile `95pc` est envoyé.
+* Configurez l'agrégation de percentile à envoyer à Datadog avec le paramètre `histogram_percentiles` dans votre [fichier de configuration datadog.yaml][7]. Par défaut, seul le percentile `95pc` est envoyé.
 
 #### Exemples de code
 
-Le type de métrique `HISTOGRAM` est spécifique à DogStatsD. Émettez une métrique `HISTOGRAM`—stockée en tant que métrique `GAUGE` et `RATE`—vers Datadog. En savoir plus sur le type `HISTOGRAM` dans la documentation des [types de métriques][6].
+Le type de métrique `HISTOGRAM` est spécifique à DogStatsD. Émettez une métrique `HISTOGRAM`—stockée en tant que métrique `GAUGE` et `RATE`—vers Datadog. En savoir plus sur le type `HISTOGRAM` dans la documentation sur les [types de métriques][6].
 
 
 Exécutez le code suivant pour soumettre une métrique DogStatsD `HISTOGRAM` à Datadog. N'oubliez pas de `flush`/`close` le client lorsqu'il n'est plus nécessaire.
@@ -578,6 +598,7 @@ Exécutez le code suivant pour soumettre une métrique DogStatsD `HISTOGRAM` à 
 {{< programming-lang-wrapper langs="python,ruby,go,java,.NET,PHP" >}}
 
 {{< programming-lang lang="python" >}}
+
 ```python
 from datadog import initialize, statsd
 import time
@@ -597,6 +618,7 @@ while(1):
 {{< /programming-lang >}}
 
 {{< programming-lang lang="ruby" >}}
+
 ```ruby
 require 'datadog/statsd'
 
@@ -610,6 +632,7 @@ end
 {{< /programming-lang >}}
 
 {{< programming-lang lang="go" >}}
+
 ```go
 package main
 
@@ -636,6 +659,7 @@ func main() {
 {{< /programming-lang >}}
 
 {{< programming-lang lang="java" >}}
+
 ```java
 import com.timgroup.statsd.NonBlockingStatsDClientBuilder;
 import com.timgroup.statsd.StatsDClient;
@@ -660,6 +684,7 @@ public class DogStatsdClient {
 {{< /programming-lang >}}
 
 {{< programming-lang lang=".NET" >}}
+
 ```csharp
 using StatsdClient;
 using System;
@@ -692,6 +717,7 @@ public class DogStatsdClient
 {{< /programming-lang >}}
 
 {{< programming-lang lang="php" >}}
+
 ```php
 <?php
 
@@ -728,12 +754,12 @@ Après avoir exécuté le code ci-dessus, vos données de métriques sont dispon
 
 {{< img src="metrics/custom_metrics/dogstatsd_metrics_submission/histogram.png" alt="Histogramme" >}}
 
-#### MINUTERIE
+#### MINUTEUR
 
-`TIMER` le type de métrique dans DogStatsD est une implémentation de `HISTOGRAM` type de métrique (à ne pas confondre avec les minuteries dans le StatsD standard). Il mesure uniquement les données de timing : par exemple, le temps qu'une section de code met à s'exécuter.
+`TIMER` le type de métrique dans DogStatsD est une implémentation de `HISTOGRAM` type de métrique (à ne pas confondre avec les minuteurs dans le StatsD standard). Il mesure uniquement les données de timing : par exemple, le temps qu'une section de code met à s'exécuter.
 
 `timed(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>, <CARDINALITY>)`
-: Étant donné que plusieurs métriques sont soumises, les types de métriques stockés (`GAUGE`, `RATE`) dépendent de la métrique. Consultez la documentation du [type de métrique HISTOGRAM][6] pour en savoir plus.
+: Étant donné que plusieurs métriques sont soumises, les types de métriques stockés (`GAUGE`, `RATE`) dépendent de la métrique. Consultez la documentation sur le [type de métrique HISTOGRAM][6] pour en savoir plus.
 
 ##### Configuration
 
@@ -741,13 +767,13 @@ Pour un `TIMER`, les règles de `HISTOGRAM` [configuration](#configuration) s'ap
 
 ##### Exemples de code
 
-Émettre une métrique `TIMER`—stockée en tant que métrique `GAUGE` et `RATE`—vers Datadog. En savoir plus sur le type `HISTOGRAM` dans la documentation [types de métriques][6]. N'oubliez pas de `flush`/`close` le client lorsqu'il n'est plus nécessaire.
+Émettez une métrique `TIMER`—stockée en tant que `GAUGE` et `RATE` métrique—vers Datadog. En savoir plus sur le type `HISTOGRAM` dans la documentation [types de métriques][6]. N'oubliez pas de `flush`/`close` le client lorsqu'il n'est plus nécessaire.
 
 {{< programming-lang-wrapper langs="python,PHP" >}}
 
 {{< programming-lang lang="python" >}}
 
-En Python, les minuteries sont créées avec un décorateur.
+En Python, les minuteurs sont créés avec un décorateur.
 
 ```python
 from datadog import initialize, statsd
@@ -792,6 +818,7 @@ while(1):
 {{< /programming-lang >}}
 
 {{< programming-lang lang="php" >}}
+
 ```php
 <?php
 
@@ -819,7 +846,7 @@ while (TRUE) {
 
 {{< /programming-lang-wrapper >}}
 
-Alors que DogStatsD reçoit les données de métrique de minuterie, il calcule la distribution statistique des temps de rendu et envoie les métriques suivantes à Datadog :
+Alors que DogStatsD reçoit les données de métrique de minuteur, il calcule la distribution statistique des temps de rendu et envoie les métriques suivantes à Datadog :
 
 | Métrique                              | Description                             |
 |-------------------------------------|-----------------------------------------|
@@ -831,22 +858,23 @@ Alors que DogStatsD reçoit les données de métrique de minuterie, il calcule l
 
 DogStatsD traite `TIMER` comme une métrique `HISTOGRAM`. Que vous utilisiez le type de métrique `TIMER` ou `HISTOGRAM`, vous envoyez les mêmes données à Datadog. Après avoir exécuté le code ci-dessus, vos données de métriques sont disponibles pour être graphées dans Datadog :
 
-{{< img src="metrics/custom_metrics/dogstatsd_metrics_submission/timer.png" alt="Minuterie" >}}
+{{< img src="metrics/custom_metrics/dogstatsd_metrics_submission/timer.png" alt="Minuteur" >}}
 
 ### DISTRIBUTION
 
 `distribution(<METRIC_NAME>, <METRIC_VALUE>, <TAGS>, <CARDINALITY>)`
-: Stocké en tant que type `DISTRIBUTION` dans Datadog. Voir la documentation [Distribution dédiée][8] pour en savoir plus.
+: Stocké en tant que type `DISTRIBUTION` dans Datadog. Consultez la documentation [Distribution dédiée][8] pour en savoir plus.
 
 #### Exemples de code
 
-Le type de métrique `DISTRIBUTION` est spécifique à DogStatsD. Émettre une métrique `DISTRIBUTION` stockée en tant que métrique `DISTRIBUTION` vers Datadog. En savoir plus sur le type `DISTRIBUTION` dans la documentation des [types métriques][9].
+Le type de métrique `DISTRIBUTION` est spécifique à DogStatsD. Émettez une métrique `DISTRIBUTION` stockée en tant que métrique `DISTRIBUTION` vers Datadog. En savoir plus sur le type `DISTRIBUTION` dans la documentation des [types de métriques][9].
 
 Exécutez le code suivant pour soumettre une métrique DogStatsD `DISTRIBUTION` à Datadog. N'oubliez pas de `flush`/`close` le client lorsqu'il n'est plus nécessaire.
 
 {{< programming-lang-wrapper langs="python,ruby,go,java,.NET,php,nodejs" >}}
 
 {{< programming-lang lang="python" >}}
+
 ```python
 from datadog import initialize, statsd
 import time
@@ -866,6 +894,7 @@ while(1):
 {{< /programming-lang >}}
 
 {{< programming-lang lang="ruby" >}}
+
 ```ruby
 require 'datadog/statsd'
 
@@ -879,6 +908,7 @@ end
 {{< /programming-lang >}}
 
 {{< programming-lang lang="go" >}}
+
 ```go
 package main
 
@@ -905,6 +935,7 @@ func main() {
 {{< /programming-lang >}}
 
 {{< programming-lang lang="java" >}}
+
 ```java
 import com.timgroup.statsd.NonBlockingStatsDClientBuilder;
 import com.timgroup.statsd.StatsDClient;
@@ -929,6 +960,7 @@ public class DogStatsdClient {
 {{< /programming-lang >}}
 
 {{< programming-lang lang=".NET" >}}
+
 ```csharp
 using StatsdClient;
 using System;
@@ -961,6 +993,7 @@ public class DogStatsdClient
 {{< /programming-lang >}}
 
 {{< programming-lang lang="php" >}}
+
 ```php
 <?php
 
@@ -982,6 +1015,7 @@ while (TRUE) {
 {{< /programming-lang >}}
 
 {{< programming-lang lang="nodejs" >}}
+
 ```javascript
 const tracer = require('dd-trace');
 tracer.init();
@@ -995,7 +1029,7 @@ while(true) {
 
 {{< /programming-lang-wrapper >}}
 
-L'instrumentation ci-dessus calcule le `sum`, `count`, `average`, `minimum`, `maximum`, `50th percentile` (médiane), `75th percentile`, `90th percentile`, `95th percentile` et `99th percentile`. Les distributions peuvent être utilisées pour mesurer la distribution de *tout* type de valeur, comme la taille des fichiers téléchargés ou les résultats des tests en classe.
+L'instrumentation ci-dessus calcule le `sum`, `count`, `average`, `minimum`, `maximum`, `50th percentile` (médiane), `75th percentile`, `90th percentile`, `95th percentile` et `99th percentile`. Les distributions peuvent être utilisées pour mesurer la distribution de tout type de valeur *, comme la taille des fichiers téléchargés ou les résultats des tests en classe.
 
 ## Options de soumission de métriques
 
@@ -1017,41 +1051,47 @@ Avant d'envoyer une métrique à Datadog, DogStatsD utilise le `<SAMPLE_RATE>` p
 
 #### Exemples de code
 
-Le code suivant n'envoie des points que la moitié du temps :
+Le code suivant envoie des points seulement la moitié du temps :
 
 {{< programming-lang-wrapper langs="python,ruby,go,java,.NET,php" >}}
 
 {{< programming-lang lang="python" >}}
+
 ```python
 statsd.increment('loop.count', sample_rate=0.5)
 ```
 {{< /programming-lang >}}
 
 {{< programming-lang lang="ruby" >}}
+
 ```ruby
 statsd.increment('loop.count', :sample_rate => 0.5)
 ```
 {{< /programming-lang >}}
 
 {{< programming-lang lang="go" >}}
+
 ```go
 statsd.Incr("example_metric.increment", []string{}, 0.5)
 ```
 {{< /programming-lang >}}
 
 {{< programming-lang lang="java" >}}
+
 ```java
 Statsd.incrementCounter("example_metric.increment", sampleRate=0.5);
 ```
 {{< /programming-lang >}}
 
 {{< programming-lang lang=".NET" >}}
+
 ```csharp
 dogStatsdService.Increment("example_metric.increment", sampleRate: 0.5);
 ```
 {{< /programming-lang >}}
 
 {{< programming-lang lang="php" >}}
+
 ```php
 <? php
 $statsd->increment('example_metric.increment', $sampleRate->0.5);
@@ -1071,30 +1111,35 @@ Le code suivant n'ajoute que les étiquettes `environment:dev` et `account:local
 {{< programming-lang-wrapper langs="python,ruby,go,java,.NET,php,nodejs" >}}
 
 {{< programming-lang lang="python" >}}
+
 ```python
 statsd.increment('example_metric.increment', tags=["environment:dev","account:local"])
 ```
 {{< /programming-lang >}}
 
 {{< programming-lang lang="ruby" >}}
+
 ```ruby
 statsd.increment('example_metric.increment', tags: ['environment:dev','account:local'])
 ```
 {{< /programming-lang >}}
 
 {{< programming-lang lang="go" >}}
+
 ```go
 statsd.Incr("example_metric.increment", []string{"environment:dev","account:local"}, 1)
 ```
 {{< /programming-lang >}}
 
 {{< programming-lang lang="java" >}}
+
 ```java
 Statsd.incrementCounter("example_metric.increment", new String[]{"environment:dev","account:local"});
 ```
 {{< /programming-lang >}}
 
 {{< programming-lang lang=".NET" >}}
+
 ```csharp
 dogStatsdService.Increment("example_metric.increment", tags: new[] {"environment:dev","account:local"})
 ```
@@ -1108,6 +1153,7 @@ $statsd->increment('example_metric.increment', 1.0, "environment:dev,account:loc
 ```
 
 ou un tableau :
+
 ```php
 <?php
 $statsd->increment('example_metric.increment', 1.0, array('environment' => 'dev', 'account' => 'local'));
@@ -1115,6 +1161,7 @@ $statsd->increment('example_metric.increment', 1.0, array('environment' => 'dev'
 {{< /programming-lang >}}
 
 {{< programming-lang lang="nodejs" >}}
+
 ```javascript
 tracer.dogstatsd.increment('example_metric.increment', 1, { environment: 'dev', account: 'local' });
 ```
@@ -1124,7 +1171,7 @@ tracer.dogstatsd.increment('example_metric.increment', 1, { environment: 'dev', 
 
 #### Étiquette d'hôte
 
-L'étiquette d'hôte est attribuée automatiquement par l'Agent Datadog qui agrège les métriques. Les métriques soumises avec une étiquette d'hôte ne correspondant pas au nom d'hôte de l'Agent perdent la référence à l'hôte d'origine. L'étiquette d'hôte soumise remplace tout nom d'hôte collecté par ou configuré dans l'Agent.
+L'étiquette d'hôte est assignée automatiquement par l'Agent Datadog qui agrège les métriques. Les métriques soumises avec une étiquette d'hôte ne correspondant pas au nom d'hôte de l'Agent perdent la référence à l'hôte d'origine. L'étiquette d'hôte soumise remplace tout nom d'hôte collecté par ou configuré dans l'Agent.
 
 ## Lectures complémentaires
 

@@ -11,7 +11,7 @@ Instrumenta tus servicios y rastrea la actividad del usuario para detectar y blo
 
 [ Agrega información de usuario autenticado en trazas ](#adding-authenticated-user-information-to-traces-and-enabling-user-blocking-capability) para identificar y bloquear a los actores maliciosos que apuntan a tu superficie de ataque autenticada. Para hacer esto, establece la etiqueta de ID de usuario en la traza APM en ejecución, proporcionando la instrumentación necesaria para que AAP bloquee a los atacantes autenticados. Esto permite que AAP asocie ataques y eventos de lógica de negocio a los usuarios.
 
-[ Rastrea los inicios de sesión y la actividad de los usuarios ](#adding-business-logic-information-login-success-login-failure-any-business-logic-to-traces) para detectar tomas de control de cuentas y abuso de lógica de negocio con reglas de detección listas para usar, y para bloquear a los atacantes.
+[ Rastrea los inicios de sesión y la actividad del usuario ](#adding-business-logic-information-login-success-login-failure-any-business-logic-to-traces) para detectar tomas de control de cuentas y abusos de lógica de negocio con reglas de detección listas para usar, y para finalmente bloquear a los atacantes.
 
 La actividad de usuario personalizada para la cual hay reglas de detección listas para usar es la siguiente:
 
@@ -22,22 +22,22 @@ La actividad de usuario personalizada para la cual hay reglas de detección list
 | `users.login.failure`  | El ID de usuario y `usr.exists` son obligatorios, se pueden agregar metadatos opcionales | [Ataque de Credential Stuffing][6]<br>[Ataque de Fuerza Bruta][12]<br>[Credential Stuffing Distribuido][13] |
 | `users.signup`         | `{ "usr.id": "12345" }`                              | [Creaciones excesivas de cuentas desde una IP][7] |
 | `users.delete`         | `{ "usr.id": "12345" }`                              | [Eliminaciones excesivas de cuentas desde una IP][8] |
-| `users.password_reset` | `{ "usr.id": "12345", "usr.login": "user@email.com", "exists": true }` | [Intentos de fuerza bruta para restablecer contraseñas][9] |
+| `users.password_reset` | `{ "usr.id": "12345", "usr.login": "user@email.com", "exists": true }` | [Intentos de fuerza bruta de restablecimiento de contraseña][9] |
 | `payment.failure`      | Ninguno | [Fallos excesivos de pago desde IP][10] |
 
 ## Agregar información de usuario autenticado a las trazas y habilitar la capacidad de bloqueo de usuarios
 
 <div class="alert alert-info">
-<strong> Detección Automatizada de Actividad de Usuario: </strong> Las bibliotecas de trazado de Datadog intentan detectar e informar eventos de actividad de usuario automáticamente. Para más información, consulte <a href="/security/application_security/how-it-works/add-user-info/?tab=set_user#disabling-automatic-user-activity-event-tracking">Deshabilitar el seguimiento automático de eventos de actividad del usuario</a>.
+<strong> Detección Automatizada de Actividad del Usuario: </strong> Las bibliotecas de trazado de Datadog intentan detectar e informar eventos de actividad del usuario automáticamente. Para más información, consulte <a href="/security/application_security/how-it-works/add-user-info/?tab=set_user#disabling-automatic-user-activity-event-tracking">Deshabilitar el seguimiento automático de eventos de actividad del usuario</a>.
 </div>
 
-Puede [agregar etiquetas personalizadas a su span raíz][3], o usar las funciones de instrumentación descritas a continuación.
+Puede [agregar etiquetas personalizadas a su span raíz][3], o utilizar las funciones de instrumentación descritas a continuación.
 
 {{< programming-lang-wrapper langs="java,dotnet,go,ruby,php,nodejs,python" >}}
 
 {{< programming-lang lang="java" >}}
 
-Utilice la API del tracer de Java para agregar etiquetas personalizadas a un span raíz y añadir información del usuario para que pueda monitorear solicitudes autenticadas en la aplicación.
+Utilice la API del rastreador de Java para agregar etiquetas personalizadas a un span raíz y añadir información del usuario para que pueda monitorear solicitudes autenticadas en la aplicación.
 
 Las etiquetas de monitoreo de usuarios se aplican en el span raíz y comienzan con el prefijo `usr` seguido del nombre del campo. Por ejemplo, `usr.name` es una etiqueta de monitoreo de usuarios que rastrea el nombre del usuario.
 
@@ -75,7 +75,7 @@ Blocking
 
 {{< programming-lang lang="dotnet" >}}
 
-El paquete del tracer de .NET proporciona la función `SetUser()`, que le permite monitorear solicitudes autenticadas al agregar información del usuario al rastro.
+El paquete del rastreador .NET proporciona la función `SetUser()`, que le permite monitorear solicitudes autenticadas al agregar información del usuario al rastreo.
 
 El ejemplo a continuación muestra cómo agregar las etiquetas de monitoreo de usuarios relevantes y habilitar la capacidad de bloqueo de usuarios:
 
@@ -101,7 +101,7 @@ using Datadog.Trace;
     Tracer.Instance.ActiveScope?.Span.SetUser(userDetails);
 ```
 
-Para información y opciones, lea [la documentación del tracer de .NET][1].
+Para información y opciones, lea [la documentación del rastreador .NET][1].
 
 [1]: https://github.com/DataDog/dd-trace-dotnet/tree/master/docs/Datadog.Trace#user-identification
 
@@ -109,9 +109,9 @@ Para información y opciones, lea [la documentación del tracer de .NET][1].
 
 {{< programming-lang lang="go" >}}
 
-El paquete del tracer de Go proporciona la función `SetUser()`, que le permite monitorear solicitudes autenticadas al agregar información del usuario al rastro. Para más opciones, consulte [la documentación del tracer de Go][2] (o [documentación v1][1]).
+El paquete del rastreador Go proporciona la función `SetUser()`, que le permite monitorear solicitudes autenticadas al agregar información del usuario al rastreo. Para más opciones, consulte [la documentación del rastreador Go][2] (o [documentación v1][1]).
 
-Este ejemplo muestra cómo recuperar el span del tracer actual, usarlo para establecer etiquetas de monitoreo de usuarios y habilitar la capacidad de bloqueo de usuarios. {{% tracing-go-v2 %}}
+Este ejemplo muestra cómo recuperar el span del rastreador actual, usarlo para establecer etiquetas de monitoreo de usuarios y habilitar la capacidad de bloqueo de usuarios. {{% tracing-go-v2 %}}
 
 ```go
 import (
@@ -134,11 +134,11 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 {{< programming-lang lang="ruby" >}}
 
-Utilice una de las siguientes APIs para agregar información del usuario a un rastro para que pueda monitorear solicitudes autenticadas en la aplicación:
+Utilice una de las siguientes API para agregar información del usuario a un rastreo para que pueda monitorear solicitudes autenticadas en la aplicación:
 
 {{% collapse-content title="set_user" level="h4" expanded="true" %}}
 
-A partir de `ddtrace` 1.1.0, el método `Datadog::Kit::Identity.set_user` está disponible. Esta es la API recomendada para agregar información del usuario a los rastros:
+A partir de `ddtrace` 1.1.0, el método `Datadog::Kit::Identity.set_user` está disponible. Esta es la API recomendada para agregar información del usuario a los rastreos:
 
 ```ruby
 # Get the active trace
@@ -349,6 +349,7 @@ A partir de dd-trace-java v1.8.0, puedes usar la API del rastreador de Java para
 Los siguientes ejemplos muestran cómo rastrear eventos de inicio de sesión o eventos personalizados (usando el registro como ejemplo).
 
 {{% collapse-content title="Éxito de inicio de sesión" level="h4" expanded="true" %}}
+
 ```java
 import datadog.trace.api.EventTracker;
 import datadog.trace.api.GlobalTracer;
@@ -378,6 +379,7 @@ public class LoginController {
 {{% /collapse-content %}}
 
 {{% collapse-content title="Fallo de inicio de sesión" level="h4" expanded="false" id="java-login-failure" %}}
+
 ```java
 import datadog.trace.api.EventTracker;
 import datadog.trace.api.GlobalTracer;
@@ -410,6 +412,7 @@ public class LoginController {
 {{% /collapse-content %}}
 
 {{% collapse-content title="Lógica de negocio personalizada" level="h4" expanded="false" id="java-custom-business" %}}
+
 ```java
 import datadog.trace.api.EventTracker;
 import datadog.trace.api.GlobalTracer;
@@ -442,6 +445,7 @@ A partir de dd-trace-dotnet v2.23.0, puedes usar la API del rastreador de .NET p
 Los siguientes ejemplos muestran cómo rastrear eventos de inicio de sesión o eventos personalizados (usando el registro como ejemplo).
 
 {{% collapse-content title="Éxito de inicio de sesión" level="h4" expanded="true" %}}
+
 ```csharp
 using Datadog.Trace.AppSec;
 
@@ -460,6 +464,7 @@ void OnLogonSuccess(string userId, string login...)
 ```
 {{% /collapse-content %}}
 {{% collapse-content title="Fallo de inicio de sesión" level="h4" expanded="false" id="dotnet-login-failure" %}}
+
 ```csharp
 using Datadog.Trace.AppSec;
 
@@ -479,6 +484,7 @@ void OnLogonFailure(string userId, string login, bool userExists, ...)
 {{% /collapse-content %}}
 
 {{% collapse-content title="Lógica de negocio personalizada" level="h4" expanded="false" id="dotnet-custom-business" %}}
+
 ```csharp
 void OnUserSignupComplete(string userId, ...)
 {
@@ -503,6 +509,7 @@ A partir de dd-trace-go v1.47.0, puedes usar la API del rastreador de Go para ra
 Los siguientes ejemplos muestran cómo rastrear eventos de inicio de sesión o eventos personalizados (usando el registro como ejemplo). {{% tracing-go-v2 %}}
 
 {{% collapse-content title="Éxito de inicio de sesión" level="h4" expanded="true" %}}
+
 ```go
 import (
   "github.com/DataDog/dd-trace-go/v2/appsec"
@@ -524,6 +531,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 ```
 {{% /collapse-content %}}
 {{% collapse-content title="Fallo de inicio de sesión" level="h4" expanded="false" id="go-login-failure" %}}
+
 ```go
 import (
   "github.com/DataDog/dd-trace-go/v2/appsec"
@@ -541,6 +549,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 {{% /collapse-content %}}
 
 {{% collapse-content title="Lógica de negocio personalizada" level="h4" expanded="false" id="go-custom-business" %}}
+
 ```go
 import (
   "github.com/DataDog/dd-trace-go/v2/appsec"
@@ -558,11 +567,12 @@ func handler(w http.ResponseWriter, r *http.Request) {
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
-A partir de dd-trace-rb v1.9.0, puedes usar la API del rastreador de Ruby para rastrear eventos de usuario. La versión v2.19.0 de dd-trace-rb introduce nuevos métodos bajo el `Datadog::Kit::AppSec::Events::V2` espacio de nombres. Los métodos existentes de seguimiento de eventos se mantienen para compatibilidad.
+A partir de dd-trace-rb v1.9.0, puedes usar la API del rastreador de Ruby para rastrear eventos de usuario. La versión v2.19.0 de dd-trace-rb introduce nuevos métodos bajo el espacio de nombres `Datadog::Kit::AppSec::Events::V2`. Los métodos existentes de rastreo de eventos se mantienen para compatibilidad.
 
 Los siguientes ejemplos muestran cómo rastrear eventos de inicio de sesión o eventos personalizados (usando el registro como ejemplo).
 
 {{% collapse-content title="Éxito de inicio de sesión" level="h4" expanded="true" %}}
+
 ```ruby
 require 'datadog/kit/appsec/events/v2'
 
@@ -579,6 +589,7 @@ Datadog::Kit::AppSec::Events::V2.track_user_login_success(login, user, metadata)
 {{% /collapse-content %}}
 
 {{% collapse-content title="Fallo de inicio de sesión" level="h4" expanded="false" id="ruby-login-failure" %}}
+
 ```ruby
 require 'datadog/kit/appsec/events/v2'
 
@@ -591,6 +602,7 @@ Datadog::Kit::AppSec::Events::V2.track_user_login_failure(login, user_exists, me
 {{% /collapse-content %}}
 
 {{% collapse-content title="Lógica de negocio personalizada" level="h4" expanded="false" id="ruby-custom-business" %}}
+
 ```ruby
 require 'datadog/kit/appsec/events'
 
@@ -603,20 +615,21 @@ Datadog::Kit::AppSec::Events.track(event_name, trace, span, metadata)
 ```
 {{% /collapse-content %}}
 
-#### Migrando a los nuevos métodos de éxito y fracaso de inicio de sesión
+#### Migrando a los nuevos métodos de inicio de sesión para el éxito y el fracaso
 
 Los nuevos métodos en `Datadog::Kit::AppSec::Events::V2` introducen un orden de parámetros más intuitivo y una separación de preocupaciones más clara. Aquí están los cambios clave:
 
 1. El identificador de inicio de sesión (correo electrónico, nombre de usuario) es el primer parámetro y es obligatorio.
 2. El objeto/ID de usuario es opcional en eventos de éxito y se ha eliminado de los eventos de fracaso.
 3. Los metadatos se han simplificado y ya no requieren el campo `usr.login`.
-4. Los parámetros de traza y de span ya no son obligatorios y se infieren automáticamente.
+4. Los parámetros de traza y de intervalo ya no son obligatorios y se infieren automáticamente.
 
-**Nota**: los métodos heredados `track_login_success` y `track_login_failure` están obsoletos en favor de los nuevos métodos `track_user_login_success` y `track_user_login_failure`, respectivamente.
+**Nota**: los métodos heredados `track_login_success` y `track_login_failure` están en desuso a favor de los nuevos métodos `track_user_login_success` y `track_user_login_failure`, respectivamente.
 
 En el siguiente ejemplo, el código comentado ya no es necesario.
 
 {{% collapse-content title="Éxito de inicio de sesión" level="h4" expanded="true" id="ruby-v2-migration-login-success" %}}
+
 ```ruby
 require 'datadog/kit/appsec/events/v2'
 
@@ -638,6 +651,7 @@ Datadog::Kit::AppSec::Events::V2.track_user_login_success(login, user, metadata)
 {{% /collapse-content %}}
 
 {{% collapse-content title="Fallo de inicio de sesión" level="h4" expanded="false" id="ruby-v2-migration-login-failure" %}}
+
 ```ruby
 require 'datadog/kit/appsec/events/v2'
 
@@ -658,11 +672,12 @@ Datadog::Kit::AppSec::Events::V2.track_user_login_failure(login, user_exists, me
 {{< /programming-lang >}}
 
 {{< programming-lang lang="php" >}}
-A partir de dd-trace-php v0.84.0, puedes usar la API del rastreador de PHP para rastrear eventos de usuario. La versión v1.11.0 de dd-trace-php introduce nuevos métodos bajo el espacio de nombres `\datadog\appsec\v2\`. Los métodos existentes de seguimiento de eventos se mantienen para compatibilidad.
+A partir de dd-trace-php v0.84.0, puedes usar la API del rastreador de PHP para rastrear eventos de usuario. La versión v1.11.0 de dd-trace-php introduce nuevos métodos bajo el espacio de nombres `\datadog\appsec\v2\`. Los métodos existentes de rastreo de eventos se mantienen para compatibilidad.
 
 Los siguientes ejemplos muestran cómo rastrear eventos de inicio de sesión o eventos personalizados (usando el registro como ejemplo).
 
 {{% collapse-content title="Éxito de inicio de sesión" level="h4" expanded="true" %}}
+
 ```php
 <?php
 $user = [
@@ -681,6 +696,7 @@ $metadata = [ 'key' => 'value' ]; // you can add arbitrary fields to metadata
 {{% /collapse-content %}}
 
 {{% collapse-content title="Fallo de inicio de sesión" level="h4" expanded="false" id="php-login-failure" %}}
+
 ```php
 <?php
 $login = 'user-id'; // the string used by the user to log in
@@ -696,6 +712,7 @@ $metadata = [ 'key' => 'value' ]; // you can add arbitrary fields to metadata
 {{% /collapse-content %}}
 
 {{% collapse-content title="Lógica de negocio personalizada" level="h4" expanded="false" id="php-custom-business" %}}
+
 ```php
 <?php
 $eventName = 'users.signup'; // custom event name
@@ -705,7 +722,7 @@ $metadata = ['usr.id' => $id]; // you can add arbitrary fields to metadata
 ```
 {{% /collapse-content %}}
 
-#### Migrando a los nuevos métodos de éxito y fracaso de inicio de sesión
+#### Migrando a los nuevos métodos de inicio de sesión para el éxito y el fracaso
 
 Los nuevos métodos en el espacio de nombres `\datadog\appsec\v2\` introducen un orden de parámetros más intuitivo y una separación de preocupaciones más clara. Aquí están los cambios clave:
 
@@ -713,11 +730,12 @@ Los nuevos métodos en el espacio de nombres `\datadog\appsec\v2\` introducen un
 2. El arreglo/ID de usuario es opcional en eventos de éxito y se ha eliminado de los eventos de fracaso.
 3. Los metadatos se han simplificado y ya no requieren el campo `usr.login`.
 
-**Nota**: los métodos heredados `\datadog\appsec\track_user_login_success_event` y `\datadog\appsec\track_user_login_failure_event` están obsoletos en favor de los nuevos métodos `\datadog\appsec\v2\track_user_login_success` y `\datadog\appsec\v2\track_user_login_failure`, respectivamente.
+**Nota**: los métodos heredados `\datadog\appsec\track_user_login_success_event` y `\datadog\appsec\track_user_login_failure_event` están en desuso a favor de los nuevos métodos `\datadog\appsec\v2\track_user_login_success` y `\datadog\appsec\v2\track_user_login_failure`, respectivamente.
 
 En el siguiente ejemplo, el código comentado ya no es necesario.
 
 {{% collapse-content title="Éxito de inicio de sesión" level="h4" expanded="true" %}}
+
 ```php
 <?php
 // in a controller:
@@ -740,6 +758,7 @@ $metadata = [
 {{% /collapse-content %}}
 
 {{% collapse-content title="Fallo de inicio de sesión" level="h4" expanded="false" id="php-migration-login-failure" %}}
+
 ```php
 <?php
 
@@ -760,12 +779,13 @@ $metadata = [
 
 {{< programming-lang lang="nodejs" >}}
 
-A partir de dd-trace-js v3.13.1, puedes usar la API del rastreador de Node.js para rastrear eventos de usuario. La versión v5.48.0 de dd-trace-js introduce nuevos métodos bajo el espacio de nombres `eventTrackingV2`. Los métodos existentes de seguimiento de eventos se mantienen para compatibilidad.
+A partir de dd-trace-js v3.13.1, puedes usar la API del rastreador de Node.js para rastrear eventos de usuario. La versión v5.48.0 de dd-trace-js introduce nuevos métodos bajo el espacio de nombres `eventTrackingV2`. Los métodos existentes de rastreo de eventos se mantienen para compatibilidad.
 
 
 Los siguientes ejemplos muestran cómo rastrear eventos de inicio de sesión o eventos personalizados (usando el registro como ejemplo).
 
 {{% collapse-content title="Éxito de inicio de sesión" level="h4" expanded="true" %}}
+
 ```javascript
 const tracer = require('dd-trace')
 
@@ -785,6 +805,7 @@ tracer.appsec.eventTrackingV2.trackUserLoginSuccess(login, user, metadata)
 {{% /collapse-content %}}
 
 {{% collapse-content title="Fallo de inicio de sesión" level="h4" expanded="false" id="nodejs-login-failure" %}}
+
 ```javascript
 const tracer = require('dd-trace')
 
@@ -801,6 +822,7 @@ tracer.appsec.eventTrackingV2.trackUserLoginFailure(login, userExists, metadata)
 {{% /collapse-content %}}
 
 {{% collapse-content title="Lógica de negocio personalizada" level="h4" expanded="false" id="nodejs-custom-business" %}}
+
 ```javascript
 const tracer = require('dd-trace')
 
@@ -812,7 +834,7 @@ tracer.appsec.trackCustomEvent(eventName, metadata)
 ```
 {{% /collapse-content %}}
 
-#### Migrando a los nuevos métodos de éxito y fracaso de inicio de sesión
+#### Migrando a los nuevos métodos de inicio de sesión para el éxito y el fracaso
 
 Los nuevos métodos en `eventTrackingV2` introducen un orden de parámetros más intuitivo y una separación de preocupaciones más clara. Aquí están los cambios clave:
 
@@ -820,11 +842,12 @@ Los nuevos métodos en `eventTrackingV2` introducen un orden de parámetros más
 2. El objeto/ID de usuario es opcional en eventos de éxito y se ha eliminado de los eventos de fracaso.
 3. Los metadatos se han simplificado y ya no requieren el campo `usr.login`.
 
-**Nota**: los métodos heredados `trackUserLoginSuccessEvent` y `trackUserLoginFailureEvent` están obsoletos en favor de los nuevos métodos `eventTrackingV2.trackUserLoginSuccess` y `eventTrackingV2.trackUserLoginFailure`, respectivamente.
+**Nota**: los métodos heredados `trackUserLoginSuccessEvent` y `trackUserLoginFailureEvent` están en desuso a favor de los nuevos métodos `eventTrackingV2.trackUserLoginSuccess` y `eventTrackingV2.trackUserLoginFailure`, respectivamente.
 
 En el siguiente ejemplo, el código comentado ya no es necesario.
 
 {{% collapse-content title="Éxito de inicio de sesión" level="h4" expanded="true" %}}
+
 ```javascript
 const tracer = require('dd-trace')
 
@@ -847,6 +870,7 @@ tracer.appsec.eventTrackingV2.trackUserLoginSuccess(login, user, metadata)
 {{% /collapse-content %}}
 
 {{% collapse-content title="Fallo de inicio de sesión" level="h4" expanded="false" id="nodejs-migration-login-failure" %}}
+
 ```javascript
 const tracer = require('dd-trace')
 
@@ -959,7 +983,7 @@ track_user_sdk.track_custom_event("my_event_name", metadata)
 
 {{% collapse-content title="Aplicación de juguete FastAPI con SDK" level="h4" expanded="false" id="python-business-logic-example" %}}
 
-El siguiente ejemplo es una aplicación de juguete completamente funcional que utiliza el SDK de seguimiento de usuarios con una base de datos de usuarios basada en memoria. Este ejemplo ilustra el posible uso del SDK, pero no proporciona los requisitos necesarios de una aplicación real, como un modelo de datos persistente o un sistema de autenticación seguro.
+El siguiente ejemplo es una aplicación de juguete completamente funcional que utiliza el SDK de seguimiento de usuarios con una base de datos de usuarios basada en memoria. Este ejemplo ilustra el uso posible del SDK, pero no proporciona los requisitos necesarios de una aplicación real, como un modelo de datos persistente o un sistema de autenticación seguro.
 
 ```python
 from uuid import uuid4
@@ -1067,7 +1091,7 @@ async def whoami(request: Request) -> User:
 
 {{% collapse-content title="API Legado" level="h4" expanded="false" id="python-business-logic-legacy" %}}
 
-El método preferido es usar el nuevo SDK de seguimiento de usuarios (disponible desde dd-trace-py v1.9) en lugar de la API heredada.
+El método preferido es utilizar el nuevo SDK de seguimiento de usuarios (disponible desde dd-trace-py v1.9) en lugar de la API heredada.
 
 ```python
 from ddtrace.appsec.trace_utils import track_user_login_success_event
@@ -1099,15 +1123,15 @@ track_custom_event(tracer, event_name, metadata)
 
 ### Seguimiento de información de lógica de negocio sin modificar el código
 
-Si tu servicio tiene AAP habilitado y [Configuración Remota][1] habilitada, puedes crear una regla WAF personalizada para marcar cualquier solicitud que coincida con una etiqueta de lógica de negocio personalizada. Esto no requiere ninguna modificación a tu aplicación y se puede hacer completamente desde Datadog.
+Si su servicio tiene AAP habilitado y [Configuración Remota][1] habilitada, puede crear una regla WAF personalizada para marcar cualquier solicitud que coincida con una etiqueta de lógica de negocio personalizada. Esto no requiere ninguna modificación a su aplicación y se puede hacer completamente desde Datadog.
 
-Para comenzar, navega a la [página de Reglas WAF Personalizadas][2] y haz clic en "Crear Nueva Regla".
+Para comenzar, navegue a la [página de Regla WAF Personalizada][2] y haga clic en "Crear Nueva Regla".
 
-{{< img src="security/application_security/threats/custom-waf-rule-menu.png" alt="Accede al Menú de Reglas WAF Personalizadas desde la página de inicio de AAP haciendo clic en Protección, luego en WAF en la Aplicación y Reglas Personalizadas" style="width:100%;" >}}
+{{< img src="security/application_security/threats/custom-waf-rule-menu.png" alt="Acceda al Menú de Regla WAF Personalizada desde la página de inicio de AAP haciendo clic en Protección, luego en WAF en la Aplicación y Reglas Personalizadas" style="width:100%;" >}}
 
-Esto abrirá un menú en el que puedes definir tu regla WAF personalizada. Al seleccionar la categoría "Lógica de Negocio", podrás configurar un tipo de evento (por ejemplo, `users.password_reset`). Luego puedes seleccionar el servicio que deseas rastrear y un endpoint específico. También puedes usar la condición de la regla para apuntar a un parámetro específico para identificar el flujo de código que deseas _instrumentar_. Cuando la condición coincide, la biblioteca etiqueta el rastro y lo marca para ser enviado a AAP. Si no necesitas la condición, puedes establecer una condición amplia para coincidir con todo.
+Esto abrirá un menú en el que puede definir su regla WAF personalizada. Al seleccionar la categoría "Lógica de Negocio", podrá configurar un tipo de evento (por ejemplo, `users.password_reset`). Luego puede seleccionar el servicio que desea rastrear y un endpoint específico. También puede usar la condición de la regla para apuntar a un parámetro específico para identificar el flujo de código que desea _instrumentar_. Cuando la condición coincide, la biblioteca etiqueta el rastro y lo marca para ser enviado a AAP. Si no necesita la condición, puede establecer una condición amplia para coincidir con todo.
 
-{{< img src="security/application_security/threats/custom-waf-rule-form.png" alt="Captura de pantalla del formulario que aparece cuando haces clic en el botón Crear Nueva Regla" style="width:50%;" >}}
+{{< img src="security/application_security/threats/custom-waf-rule-form.png" alt="Captura de pantalla del formulario que aparece cuando hace clic en el botón Crear Nueva Regla" style="width:50%;" >}}
 
 Una vez guardada, la regla se despliega en las instancias del servicio que tienen habilitada la Configuración Remota.
 
@@ -1117,7 +1141,7 @@ Una vez guardada, la regla se despliega en las instancias del servicio que tiene
 
 ## Seguimiento automático de eventos de actividad del usuario
 
-Cuando AAP está habilitado, las bibliotecas de trazado de Datadog intentan detectar automáticamente los eventos de actividad del usuario.
+Cuando AAP está habilitado, las bibliotecas de trazado de Datadog intentan detectar automáticamente eventos de actividad del usuario.
 
 Los eventos que se pueden detectar automáticamente son:
 
@@ -1131,7 +1155,7 @@ El seguimiento automático de la actividad del usuario ofrece los siguientes mod
 
 - `identification` modo (nombre corto: `ident`):
   - Este modo es el predeterminado y siempre recopila el ID del usuario o hace el mejor esfuerzo.
-  - El ID del usuario se recopila en el éxito y el fracaso del inicio de sesión. Con el fracaso, el ID del usuario se recopila independientemente de si el usuario existe o no.
+  - El ID del usuario se recopila en el éxito y en el fracaso del inicio de sesión. Con el fracaso, el ID del usuario se recopila independientemente de si el usuario existe o no.
   - Cuando el marco instrumentado no proporciona claramente un ID de usuario, sino más bien un objeto de usuario estructurado, el ID del usuario se determina en función del mejor esfuerzo basado en los nombres de los campos del objeto. Esta lista de nombres de campos se considera, ordenada por prioridad:
     - `id`
     - `email`
@@ -1140,7 +1164,7 @@ El seguimiento automático de la actividad del usuario ofrece los siguientes mod
     - `user`
   - Si no hay un ID de usuario disponible o encontrado, el evento del usuario no se emite.
 - `anonymization` modo (nombre corto: `anon`):
-  - Este modo es el mismo que `identification`, pero anonimiza el ID del usuario al hash (SHA256) y recorta el hash resultante.
+  - Este modo es el mismo que `identification`, pero anonimiza el ID del usuario al aplicar un hash (SHA256) y recortar el hash resultante.
 - `disabled` modo:
   - Las bibliotecas de AAP no *recogen* ninguna identificación de usuario de sus instrumentaciones automatizadas.
   - No se emiten eventos de inicio de sesión de usuario.
@@ -1151,13 +1175,13 @@ El seguimiento automático de la actividad del usuario ofrece los siguientes mod
 
 Las bibliotecas de Datadog te permiten configurar la auto-instrumentación utilizando la variable de entorno `DD_APPSEC_AUTO_USER_INSTRUMENTATION_MODE` con el nombre corto para el modo: `ident`|`anon`|`disabled`.
 
-El modo predeterminado es `identification` modo (nombre corto: `ident`).
+El modo predeterminado es el modo `identification` (nombre corto: `ident`).
 
 Por ejemplo, `DD_APPSEC_AUTO_USER_INSTRUMENTATION_MODE=anon`.
 
 ### Modos obsoletos
 
-<div class="alert alert-info"> Los modos anteriores están obsoletos, pero la compatibilidad se mantendrá hasta la próxima versión importante.</div>
+<div class="alert alert-info"> Los modos anteriores están obsoletos, pero se mantendrá la compatibilidad hasta la próxima versión importante.</div>
 
 Los siguientes modos están obsoletos:
 

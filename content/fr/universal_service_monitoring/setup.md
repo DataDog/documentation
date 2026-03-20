@@ -31,18 +31,18 @@ Limitations connues
 : La surveillance des services universels nécessite l'utilisation de `system-probe`Datadog's, qui n'est pas pris en charge sur Google Kubernetes Engine (GKE) Autopilot.
 
 <div class="alert alert-info">
-Des protocoles supplémentaires et des méthodes de cryptage du trafic sont en <a href="/universal_service_monitoring/additional_protocols/">aperçu</a>. Si vous avez des commentaires sur les plateformes et protocoles que vous aimeriez voir pris en charge, <a href="/help/">contactez le support</a>.
+Des protocoles supplémentaires et des méthodes de cryptage du trafic sont en <a href="/universal_service_monitoring/additional_protocols/">Aperçu</a>. Si vous avez des retours concernant les plateformes et protocoles que vous aimeriez voir pris en charge, <a href="/help/">contactez le support</a>.
 </div>
 
 ## Prérequis
 
 - Si vous êtes sur Linux :
-    - Votre service fonctionne dans un conteneur.
-    - **En aperçu :** Pour les services non conteneurisés, consultez les [instructions ici](#additional-configuration).
+    - Votre service s'exécute dans un conteneur.
+    - **En aperçu :** Pour les services non conteneurisés, consultez les [ instructions ici ](#additional-configuration).
 - Si vous êtes sur Windows :
-    - Votre service fonctionne sur une machine virtuelle.
-- L'Agent Datadog est installé aux côtés de votre service. L'installation d'une bibliothèque de traçage n'est _pas_ requise.
-- Le `env` tag pour [Tagging de Service Unifié][1] a été appliqué à votre déploiement. Les `service` et `version` tags sont optionnels.
+    - Votre service s'exécute sur une machine virtuelle.
+- L'Agent Datadog est installé aux côtés de votre service. L'installation d'une bibliothèque de traçage n'est _ pas _ requise.
+- Le `env` tag pour [Tagging de Service Unifié][1] a été appliqué à votre déploiement. Les tags `service` et `version` sont optionnels.
 
 ## Comment USM détecte les noms de service
 
@@ -54,11 +54,11 @@ USM reconnaît les variables d'environnement suivantes :
 - `DD_SERVICE` : Définit explicitement le nom du service
 - `DD_ENV` : Définit le tag d'environnement
 - `DD_VERSION` : Définit le tag de version
-- `DD_TAGS` : Tags supplémentaires ; peut inclure le `service:name` tag
+- `DD_TAGS` : Tags supplémentaires ; peut inclure le tag `service:name`
 
 ### Limitation clé : USM et les variables d'environnement définies par programme pour APM
 
-Si vous définissez des variables d'environnement par programme **dans votre code d'application** (comme `System.setProperty("dd.service", "my-service")` en Java, ou `Environment.SetEnvironmentVariable("DD_SERVICE", "my-service")` en .NET), ces variables d'environnement ne sont **pas** détectées par USM, même si ces valeurs fonctionnent pour l'instrumentation de traçage APM.
+Si vous définissez des variables d'environnement par programme **à l'intérieur de votre code d'application** (comme `System.setProperty("dd.service", "my-service")` en Java, ou `Environment.SetEnvironmentVariable("DD_SERVICE", "my-service")` en .NET), ces variables d'environnement ne sont **pas** détectées par USM, même si ces valeurs fonctionnent pour l'instrumentation de traçage APM.
 
 Cela se produit parce qu'USM s'exécute dans l'Agent Datadog en tant que processus séparé et ne voit que les variables d'environnement qui ont été définies lorsque votre processus a démarré. Inversement, les bibliothèques d'instrumentation APM s'exécutent à l'intérieur de votre processus d'application et peuvent lire les changements d'environnement d'exécution.
 
@@ -66,6 +66,7 @@ Cela se produit parce qu'USM s'exécute dans l'Agent Datadog en tant que process
 
 {{< tabs >}}
 {{% tab "Docker" %}}
+
 ```yaml
 environment:
   - DD_SERVICE=my-service
@@ -73,6 +74,7 @@ environment:
 ```
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
+
 ```yaml
 env:
   - name: DD_SERVICE
@@ -82,6 +84,7 @@ env:
 ```
 {{% /tab %}}
 {{% tab "Shell" %}}
+
 ```bash
 export DD_SERVICE=my-service
 export DD_ENV=production
@@ -90,9 +93,9 @@ java -jar myapp.jar
 {{% /tab %}}
 {{< /tabs >}}
 
-## Activation de la surveillance des services universels
+## Activation de la surveillance de service universelle
 
-Activez la surveillance des services universels dans votre Agent en utilisant l'une des méthodes suivantes en fonction de la manière dont votre service est déployé et de la configuration de votre Agent :
+Activez la surveillance de service universelle dans votre Agent en utilisant l'une des méthodes suivantes en fonction de la manière dont votre service est déployé et de la configuration de votre Agent :
 
 {{< tabs >}}
 {{% tab "Helm" %}}
@@ -131,9 +134,9 @@ agents:
 {{% /tab %}}
 {{% tab "Opérateur" %}}
 
-Datadog Operator v1.0.0 ou supérieur est requis.
+La version 1.0.0 ou supérieure de Datadog Operator est requise.
 
-Pour activer la surveillance des services universels avec le [Datadog Operator][1], mettez à jour votre `datadog-agent.yaml` manifeste. Dans la ressource `DatadogAgent`, définissez `spec.features.usm.enabled` sur `true` :
+Pour activer la surveillance de service universelle avec le [Datadog Operator][1], mettez à jour votre manifeste `datadog-agent.yaml`. Dans la ressource `DatadogAgent`, définissez `spec.features.usm.enabled` sur `true` :
 
    ```yaml
    apiVersion: datadoghq.com/v2alpha1
@@ -175,7 +178,7 @@ Pour activer la surveillance des services universels avec le [Datadog Operator][
          annotations:
            container.apparmor.security.beta.kubernetes.io/system-probe: unconfined
     ```
-2. Activez la surveillance des services universels avec les variables d'environnement suivantes dans le daemonset de l'Agent. Si vous exécutez un conteneur par processus d'Agent, ajoutez les variables d'environnement suivantes au conteneur `process-agent`. Sinon, ajoutez-les au conteneur `agent`.
+2. Activez la surveillance de service universelle avec les variables d'environnement suivantes dans le daemonset de l'Agent. Si vous exécutez un conteneur par processus d'Agent, ajoutez les variables d'environnement suivantes au conteneur `process-agent`. Sinon, ajoutez-les au conteneur `agent`.
 
    ```yaml
    ...
@@ -824,7 +827,7 @@ Les systèmes ou services suivants nécessitent une configuration supplémentair
 La surveillance des services universels est disponible pour surveiller les services fonctionnant sur des machines virtuelles Linux bare-metal.
 </div>
 
-Nécessite la version 7.42 ou supérieure de l'agent.
+Nécessite la version 7.42 ou supérieure de l'Agent.
 
 {{< tabs >}}
 {{% tab "Fichier de configuration" %}}
@@ -858,7 +861,7 @@ La surveillance des services universels est en aperçu pour surveiller le trafic
 <br>
 <ul role="list">
   <li>Les serveurs HTTPS Go peuvent mettre à niveau le protocole HTTP1.1 vers HTTP/2, qui est pris en charge en aperçu. Contactez votre responsable de compte pour plus de détails.</li>
-  <li>Nécessite la version 7.51 ou supérieure de l'agent.</li>
+  <li>Nécessite la version 7.51 ou supérieure de l'Agent.</li>
 </ul>
 
 {{< tabs >}}
@@ -1035,8 +1038,8 @@ La surveillance de Kafka est disponible en <strong>Aperçu</strong>.
 <strong>Remarque</strong> :
 <br>
 <ul role="list">
-  <li>Les producteurs et les consommateurs nécessitent la version 5.2 ou ultérieure du noyau Linux.</li>
-  <li>Les producteurs et les consommateurs doivent interagir avec Kafka <strong>sans</strong> TLS.</li>
+  <li>Les producteurs et consommateurs nécessitent la version 5.2 ou ultérieure du noyau Linux.</li>
+  <li>Les producteurs et consommateurs doivent interagir avec Kafka <strong>sans</strong> TLS.</li>
   <li>Nécessite la version 7.53 ou supérieure de l'Agent.</li>
 </ul>
 
@@ -1142,7 +1145,7 @@ agents:
 {{< /tabs >}}
 
 
-<div class="alert alert-info"><strong>Support pour des protocoles supplémentaires et des méthodes de cryptage</strong><p>USM est en aperçu pour découvrir des services cloud et décoder des protocoles supplémentaires et des méthodes de cryptage de trafic. Pour plus d'informations et pour demander l'accès à l'aperçu, lisez <a href="/universal_service_monitoring/additional_protocols/">Découverte de services cloud et protocoles supplémentaires</a>.</p></div>
+<div class="alert alert-info"><strong>Prise en charge de protocoles supplémentaires et de méthodes de cryptage</strong><p>USM est en aperçu pour découvrir des services cloud et décoder des protocoles supplémentaires ainsi que des méthodes de cryptage de trafic. Pour plus d'informations et pour demander l'accès à l'aperçu, lisez <a href="/universal_service_monitoring/additional_protocols/">Découverte de services cloud et protocoles supplémentaires</a>.</p></div>
 
 
 ## Lectures complémentaires

@@ -26,15 +26,15 @@ Vous devez avoir les [permissions d'écriture sur les moniteurs][10].
 
 Ce guide couvre plusieurs cas d'utilisation clés pour nettoyer le désordre des moniteurs :
 
-- **[Moniteurs muets à long terme](#muted-for-a-long-period-of-time)** : Moniteurs qui ont été mis en sourdine pendant de longues périodes—semaines ou même mois.
-- **[Moniteurs bloqués en état d'ALERT](#in-the-alerted-state-for-a-long-period-of-time)** : Moniteurs qui sont restés dans l'état "Alerte" pendant une période anormalement longue sans être reconnus ou résolus.
-- **[Moniteurs dupliqués](#duplicate-monitors)** : Plusieurs moniteurs déclenchant la même condition, métrique ou service—souvent en raison de silos d'équipe ou d'un manque de coordination.
-- **[Moniteurs instables et bruyants](#flappy-and-noisy-monitors)** : Moniteurs qui se déclenchent et se résolvent fréquemment (c'est-à-dire, "flap") ou produisent de grands volumes d'alertes de faible valeur.
-- **[Moniteurs mal configurés](#misconfigured-monitors)** : Moniteurs avec des liens brisés vers des tableaux de bord, des délais d'évaluation manquants, des éléments d'alerte manquants ou incorrects, ou des balises et conventions de nommage obsolètes.
+- **[ Moniteurs désactivés à long terme ](#muted-for-a-long-period-of-time)** : Moniteurs qui ont été désactivés pendant de longues périodes—semaines ou même mois.
+- **[ Moniteurs bloqués en état d'ALERT ](#in-the-alerted-state-for-a-long-period-of-time)** : Moniteurs qui sont restés en état "Alerte" pendant une période anormalement longue sans être reconnus ou résolus.
+- **[ Moniteurs dupliqués ](#duplicate-monitors)** : Plusieurs moniteurs déclenchant la même condition, métrique ou service—souvent en raison de silos d'équipe ou d'un manque de coordination.
+- **[ Moniteurs instables et bruyants ](#flappy-and-noisy-monitors)** : Moniteurs qui se déclenchent et se résolvent fréquemment (c'est-à-dire, qui "flappent") ou produisent de grands volumes d'alertes de faible valeur.
+- **[ Moniteurs mal configurés ](#misconfigured-monitors)** : Moniteurs avec des liens brisés vers des tableaux de bord, des délais d'évaluation manquants, des éléments d'alerte manquants ou incorrects, ou des balises et conventions de nommage obsolètes.
 
-## Mis en sourdine pendant une longue période
+## Désactivé pendant une longue période
 
-Les moniteurs servent de système d'alerte précoce pour les pannes, les menaces de sécurité et les problèmes de performance. Cependant, avoir des moniteurs mis en sourdine pendant une longue période va à l'encontre de cet objectif, le fait de mettre en sourdine à long terme signale souvent qu'un moniteur est obsolète, non pertinent ou trop bruyant pour être utile. Ces éléments doivent être examinés et soit réactivés avec un réglage approprié, soit retirés pour réduire le désordre et éliminer les moniteurs obsolètes de votre environnement d'alerte.
+Les moniteurs servent de système d'alerte précoce pour les pannes, les menaces de sécurité et les problèmes de performance. Cependant, avoir des moniteurs désactivés pendant une longue période va à l'encontre de cet objectif, le désactivation à long terme signale souvent qu'un moniteur est obsolète, non pertinent ou trop bruyant pour être utile. Ces éléments doivent être examinés et soit réactivés avec un réglage approprié, soit retirés pour réduire le désordre et éliminer les moniteurs obsolètes de votre environnement d'alerte.
 
 Nettoyez les moniteurs qui n'apportent pas de valeur et remplacez les mises en sourdine à long terme par des horaires limités dans le temps :
 
@@ -42,7 +42,7 @@ Nettoyez les moniteurs qui n'apportent pas de valeur et remplacez les mises en s
 
 Auditez les moniteurs qui ont été mis en sourdine pendant une longue période pour comprendre lesquels sont réellement nécessaires ou utiles. Certains moniteurs peuvent être mis en sourdine pour une bonne raison et vous souhaitez éviter de les supprimer.
 
-Pour voir ces moniteurs, accédez à la page [Qualité des Moniteurs][1] et trouvez la liste des moniteurs qui ont été mis en sourdine pendant plus de 60 jours. Vous pouvez également trouver des moniteurs mis en sourdine sur la [**Liste des Moniteurs**][8] avec la requête `muted_elapsed:<number_of_days>d`.
+Pour voir ces moniteurs, naviguez vers la page [Qualité des Moniteurs][1] et trouvez la liste des moniteurs qui ont été mis en sourdine pendant plus de 60 jours. Vous pouvez également trouver des moniteurs mis en sourdine sur la [**Liste des Moniteurs**][8] avec la requête `muted_elapsed:<number_of_days>d`.
 
 Après avoir obtenu votre liste, vous pouvez soit agir sur chaque moniteur depuis la page Qualité des Moniteurs, soit procéder à une suppression en masse des moniteurs avec les étapes 2 et 3.
 
@@ -105,13 +105,13 @@ Pour supprimer, utilisez le même processus dans la commande [Supprimer les moni
 
 Créer des moniteurs séparés qui ne diffèrent que par une étiquette peut entraîner une duplication inutile. Par exemple, surveiller l'utilisation du CPU avec un moniteur pour `prod` et un autre pour `staging` augmente votre nombre de moniteurs.
 
-Les moniteurs redondants créent du bruit et de la confusion inutiles. Dans de nombreux cas, ceux-ci peuvent être consolidés en un seul [**multi-alert** monitor][2] avec un bon cadrage et étiquetage, réduisant la duplication et rendant les alertes plus gérables.
+Les moniteurs redondants créent du bruit et de la confusion inutiles. Dans de nombreux cas, ceux-ci peuvent être consolidés en un seul moniteur [**multi-alert**][2] avec un bon ciblage et étiquetage, réduisant la duplication et rendant les alertes plus gérables.
 
 Si vous devez envoyer différentes notifications en fonction de la valeur de l'étiquette qui a déclenché l'alerte, utilisez [les variables de moniteur][3] pour personnaliser dynamiquement le message en fonction de l'étiquette qui a franchi le seuil.
 
-## Moniteurs flappy et bruyants
+## Moniteurs instables et bruyants
 
-Les moniteurs bruyants désensibilisent les équipes aux problèmes réels. Le flapping (lorsqu'un moniteur passe fréquemment entre les états d'alerte et de récupération) indique souvent des seuils instables, des délais d'évaluation manquants ou une volatilité sous-jacente du système.
+Les moniteurs bruyants désensibilisent les équipes aux véritables problèmes. Le flapping (lorsqu'un moniteur passe fréquemment entre les états d'alerte et de récupération) indique souvent des seuils instables, des délais d'évaluation manquants ou une volatilité sous-jacente du système.
 
 Pour réduire le bruit, examinez l'agrégation d'évaluation du moniteur et la configuration des seuils. Ajustez les paramètres pour stabiliser le comportement des alertes, ou supprimez le moniteur s'il n'apporte plus de valeur.
 
@@ -159,7 +159,7 @@ Ce problème impacte principalement les moniteurs basés sur les métriques AWS.
 
 Vous pouvez trouver les moniteurs affectés dans la page [Qualité des Moniteurs][4], où les moniteurs manquant un délai d'évaluation sont signalés.
 
-**Datadog recommande** d'ajouter un délai à tous les moniteurs qui utilisent des métriques AWS. Un délai de 300 secondes (5 minutes) est généralement suffisant pour tenir compte de la latence d'ingestion des données.
+**Datadog recommande** d'ajouter un délai à tous les moniteurs utilisant des métriques AWS. Un délai de 300 secondes (5 minutes) est généralement suffisant pour tenir compte de la latence d'ingestion des données.
 
 Voici comment obtenir la liste des moniteurs qui manquent d'un délai :
 
@@ -180,11 +180,11 @@ Pour plus d'informations, consultez le [guide de dépannage AWS][7].
 
 Les moniteurs composites évaluent leur état en fonction de la combinaison logique de deux moniteurs ou plus (appelés constituants). Si l'un de ces moniteurs constituants est supprimé ou devient indisponible, le moniteur composite devient invalide ou peu fiable.
 
-Un constituant manquant signifie généralement qu'au moins un des moniteurs d'entrée d'origine a été supprimé après la création du moniteur composite. Cela rend le composite incomplet et potentiellement trompeur dans le comportement d'alerte.
+Un constituant manquant signifie généralement qu'au moins un des moniteurs d'entrée originaux a été supprimé après la création du moniteur composite. Cela entraîne une incomplétude du composite et peut potentiellement induire en erreur le comportement d'alerte.
 
 **Datadog recommande** de vérifier les moniteurs composites pour soit remplacer soit restaurer les constituants manquants, ou supprimer le moniteur composite. Vous pouvez trouver la liste des moniteurs composites avec des constituants manquants sur la page [Qualité des Moniteurs][4].
 
-Pour obtenir de manière programmatique la liste des moniteurs qui manquent des constituants :
+Pour obtenir de manière programmatique la liste des moniteurs qui manquent de constituants :
 
 ```bash
 curl -s -X GET "{{< region-param key=dd_api >}}/api/v1/monitor/search" \
@@ -205,10 +205,10 @@ Pour plus d'informations, voir [Moniteur Composite][11].
 
 | Meilleure Pratique | Description | Mise en œuvre |
 |---------------|-------------|----------------|
-| **Éliminer la redondance** | Évitez de créer plusieurs moniteurs qui suivent le même signal avec des portées légèrement différentes (comme par région, équipe ou environnement). | Utilisez **des moniteurs groupés avec des tags**, qui sont plus faciles à gérer et à mettre à l'échelle. |
+| **Éliminer la redondance** | Évitez de créer plusieurs moniteurs qui suivent le même signal avec des portées légèrement différentes (comme par région, équipe ou environnement). | Utilisez **des moniteurs groupés avec des tags**, qui sont plus faciles à gérer et à faire évoluer. |
 | **Définir une propriété claire** | Chaque moniteur doit avoir un propriétaire clair pour diriger les alertes vers les bons répondants et éviter la confusion. | Utilisez `team:` des tags et des gestionnaires de notification (`@slack-xyz`, `@pagerduty-twilio`). Utilisez le filtre **Créateur** sur la [Liste des Moniteurs][8] pour auditer les créateurs de moniteurs les plus fréquents. |
-| **Réviser les moniteurs bruyants ou dormants** | Les moniteurs qui alertent trop souvent ou qui n'alertent jamais peuvent causer de la fatigue ou signaler une mauvaise configuration. | Utilisez la [**page de Qualité des Moniteurs**][4] pour identifier et nettoyer les moniteurs bruyants, cassés ou obsolètes. |
-| **Exploiter les modèles de moniteurs** | Pour des modèles courants (comme les métriques RED ou la latence API), utilisez des modèles pour réduire la duplication et garantir la standardisation. | Utilisez des [modèles réutilisables][5] pour réduire la duplication et garantir la standardisation entre les équipes. |
+| **Réviser les moniteurs bruyants ou dormants** | Les moniteurs qui alertent trop souvent ou qui n'alertent jamais peuvent provoquer de la fatigue ou signaler une mauvaise configuration. | Utilisez la [**page de Qualité des Moniteurs**][4] pour identifier et nettoyer les moniteurs bruyants, défectueux ou obsolètes. |
+| **Exploiter les modèles de moniteurs** | Pour des modèles courants (comme les métriques RED ou la latence API), utilisez des modèles pour réduire la duplication et garantir la standardisation. | Utilisez [des modèles réutilisables][5] pour réduire la duplication et garantir la standardisation entre les équipes. |
 | **Établir une Politique de Tagging** | Des tags cohérents et significatifs vous permettent de filtrer, regrouper et diriger facilement les moniteurs. | Utilisez des tags cohérents (comme `service:`, `env:`, `team:`) et établissez une [Politique de Tagging][6]. Cela permet des tableaux de bord, alertes et suivis de conformité ciblés. |
 | **Tableau de bord de Qualité des Moniteurs** | Visualisez les tendances en matière d'hygiène des moniteurs à travers les équipes, services et environnements pour identifier proactivement les lacunes et suivre les améliorations. | Configurez un [**tableau de bord de Qualité des Moniteurs**](#template-monitor-quality-dashboard) pour suivre les améliorations au fil du temps et prioriser les efforts de nettoyage à grande échelle. |
 

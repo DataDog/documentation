@@ -1,8 +1,8 @@
 ---
-description: Aprende a identificar y limpiar el desorden en los monitores analizando
-  los patrones de uso, identificando monitores no utilizados o redundantes, e implementando
-  las mejores prácticas para la gestión de monitores para mejorar la calidad de las
-  alertas y reducir el ruido.
+description: Aprenda a identificar y limpiar el desorden de monitores analizando los
+  patrones de uso de los monitores, identificando monitores no utilizados o redundantes,
+  e implementando las mejores prácticas para la gestión de monitores con el fin de
+  mejorar la calidad de las alertas y reducir el ruido.
 further_reading:
 - link: monitors/guide/monitor_best_practices
   tag: Documentation
@@ -10,21 +10,21 @@ further_reading:
 - link: monitors/quality
   tag: Documentation
   text: Calidad de Monitores
-title: Limpia el desorden de los monitores
+title: Limpie el desorden de monitores
 ---
 ## Resumen
 
-El desorden de los monitores se acumula con el tiempo, resultando en ruido, alertas duplicadas y un aumento de la fricción operativa. Esta guía describe un enfoque claro para identificar y limpiar monitores desordenados, con casos de uso que te ayudarán a optimizar tus flujos de trabajo de alertas.
+El desorden de monitores se acumula con el tiempo, resultando en ruido, alertas duplicadas y un aumento de la fricción operativa. Esta guía describe un enfoque claro para identificar y limpiar monitores desordenados, con casos de uso que le ayudarán a optimizar sus flujos de trabajo de alertas.
 
-También proporciona mejores prácticas para ayudar a mantener un entorno de monitoreo limpio, facilitando la escalabilidad y la gobernanza de tu estrategia de monitoreo a medida que tus sistemas crecen.
+También proporciona mejores prácticas para ayudar a mantener un entorno de monitoreo limpio, facilitando la escalabilidad y la gobernanza de su estrategia de monitoreo a medida que sus sistemas crecen.
 
 ### Requisitos Previos
 
-Debes tener los [permisos de escritura de monitores][10].
+Debe tener los [permisos de escritura de monitores][10].
 
 ### Casos de uso
 
-Esta guía cubre varios casos de uso clave para limpiar el desorden de los monitores:
+Esta guía cubre varios casos de uso clave para limpiar el desorden de monitores:
 
 - **[Monitores silenciados a largo plazo](#muted-for-a-long-period-of-time)**: Monitores que han estado silenciados durante períodos prolongados—semanas o incluso meses.
 - **[Monitores atascados en estado de ALERTA](#in-the-alerted-state-for-a-long-period-of-time)**: Monitores que han permanecido en estado de "Alerta" durante un tiempo inusualmente largo sin ser reconocidos o resueltos.
@@ -32,15 +32,15 @@ Esta guía cubre varios casos de uso clave para limpiar el desorden de los monit
 - **[Monitores inestables y ruidosos](#flappy-and-noisy-monitors)**: Monitores que se activan y resuelven con frecuencia (es decir, "flap") o producen altos volúmenes de alertas de bajo valor.
 - **[Monitores mal configurados](#misconfigured-monitors)**: Monitores con enlaces rotos a paneles de control, retrasos de evaluación faltantes, constituyentes de alerta faltantes o incorrectos, o etiquetas y convenciones de nombres desactualizadas.
 
-## Silenciado por un largo período de tiempo
+## Silenciado durante un largo período de tiempo
 
-Los monitores sirven como un sistema de alerta temprana para fallas, amenazas de seguridad y problemas de rendimiento. Sin embargo, tener monitores silenciados por un largo período de tiempo derrota ese propósito; el silencio a largo plazo a menudo indica que un monitor es obsoleto, irrelevante o demasiado ruidoso para ser útil. Estos deben ser revisados y reactivados con la configuración adecuada o retirados para reducir el desorden y eliminar monitores obsoletos de su entorno de alertas.
+Los monitores sirven como un sistema de advertencia temprana para fallas, amenazas de seguridad y problemas de rendimiento. Sin embargo, tener los monitores silenciados durante un largo período de tiempo derrota ese propósito; el silencio prolongado a menudo indica que un monitor es obsoleto, irrelevante o demasiado ruidoso para ser útil. Estos deben ser revisados y reactivados con la configuración adecuada o retirados para reducir el desorden y eliminar monitores obsoletos de su entorno de alertas.
 
-Limpie los monitores que no están proporcionando valor y reemplace los silencios a largo plazo con horarios limitados:
+Limpie los monitores que no están proporcionando valor y reemplace los silencios prolongados con horarios limitados en el tiempo:
 
 ### 1. Inspeccione los monitores
 
-Audite los monitores que han estado silenciados por un largo período de tiempo para entender cuáles son realmente necesarios o útiles. Algunos monitores pueden estar silenciados por una buena razón y desea evitar eliminarlos.
+Audite los monitores que han estado silenciados durante un largo período de tiempo para entender cuáles son realmente necesarios o útiles. Algunos monitores pueden estar silenciados por una buena razón y desea evitar eliminarlos.
 
 Para ver esos monitores, navegue a la página de [Calidad del Monitor][1] y encuentre la lista de monitores que han estado silenciados por más de 60 días. También puede encontrar monitores silenciados en la [**Lista de Monitores**][8] con la consulta `muted_elapsed:<number_of_days>d`.
 
@@ -99,13 +99,13 @@ curl -s -X GET "{{< region-param key=dd_api >}}/api/v1/monitor/search" \
   | @csv' > monitors_alerted_too_long.csv
 ```
 
-Para eliminar, utiliza el mismo proceso en el [comando Eliminar Monitores](#3-delete-the-monitors). Reemplaza el `input_file` con `monitors_alerted_too_long.csv`.
+Para eliminar, utiliza el mismo proceso en el comando [Eliminar Monitores](#3-delete-the-monitors). Reemplaza el `input_file` con `monitors_alerted_too_long.csv`.
 
 ## Monitores duplicados
 
 Crear monitores separados que solo difieran por una etiqueta puede llevar a una duplicación innecesaria. Por ejemplo, monitorear el uso de CPU con un monitor para `prod` y otro para `staging` aumenta tu conteo de monitores.
 
-Los monitores redundantes crean ruido y confusión innecesarios. En muchos casos, estos pueden ser consolidados en un solo [**multi-alerta** monitor][2] con un alcance y etiquetado adecuados, reduciendo la duplicación y haciendo que las alertas sean más manejables.
+Los monitores redundantes crean ruido y confusión innecesarios. En muchos casos, estos pueden ser consolidados en un solo monitor [**multi-alerta**][2] con un adecuado alcance y etiquetado, reduciendo la duplicación y haciendo las alertas más manejables.
 
 Si necesitas enviar diferentes notificaciones dependiendo del valor de la etiqueta que activó la alerta, utiliza [variables de monitor][3] para personalizar dinámicamente el mensaje basado en la etiqueta que superó el umbral.
 
@@ -128,14 +128,14 @@ curl -s -X GET "{{< region-param key=dd_api >}}/api/v1/monitor/search" \
   | @csv' > noisy_monitors.csv
 ```
 
-Para eliminar, utiliza el mismo proceso en el [comando Eliminar Monitores](#3-delete-the-monitors). Reemplaza el `input_file` con `noisy_monitors.csv`.
+Para eliminar, utiliza el mismo proceso en el comando [Eliminar Monitores](#3-delete-the-monitors). Reemplaza el `input_file` con `noisy_monitors.csv`.
 
 ## Monitores mal configurados
 
 Los monitores mal configurados son monitores activos que pueden tener un uso adecuado, pero son ineficientes porque no recibirás notificaciones. Estas malas configuraciones socavan la fiabilidad del monitor y dificultan la depuración o el triage. Limpiar estos asegura que tus alertas sean precisas, accionables e integradas en tus flujos de trabajo de observabilidad.
 
 ### Mango roto
-Utiliza la [**página de Calidad del Monitor**][4] para visualizar qué monitores tienen un mango roto. Las notificaciones de estos monitores no pueden llegar a su destino.
+Utiliza la página de [**Calidad del Monitor**][4] para visualizar qué monitores tienen un mango roto. Las notificaciones de estos monitores no pueden llegar a su destino.
 
 **Datadog recomienda** revisar los destinatarios de los monitores para asegurar una entrega adecuada, o eliminar el monitor.
 
@@ -152,12 +152,12 @@ curl -s -X GET "{{< region-param key=dd_api >}}/api/v1/monitor/search" \
   | @csv' > monitors_broken_handle.csv
 ```
 
-Para eliminar, utiliza el mismo proceso en el [comando Eliminar Monitores](#3-delete-the-monitors). Reemplaza el `input_file` con `monitors_broken_handle.csv`.
+Para eliminar, utiliza el mismo proceso en el comando [Eliminar Monitores](#3-delete-the-monitors). Reemplaza el `input_file` con `monitors_broken_handle.csv`.
 
 ### Falta un retraso
 Este problema impacta principalmente a los monitores basados en métricas de AWS. Debido a que Datadog recupera métricas de AWS a través de la API, a menudo hay un retraso incorporado antes de que los datos estén disponibles. Si no tomas esto en cuenta, los monitores pueden activar falsos positivos debido a datos incompletos o retrasados.
 
-Puedes encontrar monitores afectados en la página [Calidad del Monitor][4], donde se marcan los monitores que faltan un retraso de evaluación.
+Puedes encontrar los monitores afectados en la página de [Calidad del Monitor][4], donde se marcan los monitores que faltan un retraso de evaluación.
 
 **Datadog recomienda** agregar un retraso a todos los monitores que utilizan métricas de AWS. Un retraso de 300 segundos (5 minutos) es típicamente suficiente para tener en cuenta la latencia de ingestión de datos.
 
@@ -174,15 +174,15 @@ curl -s -X GET "{{< region-param key=dd_api >}}/api/v1/monitor/search" \
   | @csv' > monitors_missing_delay.csv
 ```
 
-Para más información, consulta la [guía de solución de problemas de AWS][7].
+Para más información, consulte la [guía de solución de problemas de AWS][7].
 
 ### Constituyente faltante
 
 Los monitores compuestos evalúan su estado en función de la combinación lógica de dos o más monitores (llamados constituyentes). Si alguno de esos monitores constituyentes es eliminado o se vuelve no disponible, el monitor compuesto se vuelve inválido o poco confiable.
 
-Un constituyente faltante generalmente significa que al menos uno de los monitores de entrada originales ha sido eliminado después de que se creó el monitor compuesto. Esto causa que el compuesto esté incompleto y potencialmente engañoso en el comportamiento de alerta.
+Un constituyente faltante típicamente significa que al menos uno de los monitores de entrada originales ha sido eliminado después de que se creó el monitor compuesto. Esto causa que el compuesto esté incompleto y potencialmente engañoso en el comportamiento de alerta.
 
-**Datadog recomienda** revisar los monitores compuestos para reemplazar o restaurar los constituyentes faltantes, o eliminar el monitor compuesto. Puedes encontrar la lista de monitores compuestos con constituyentes faltantes en la página de [Calidad del Monitor][4].
+**Datadog recomienda** revisar los monitores compuestos para reemplazar o restaurar los constituyentes faltantes, o eliminar el monitor compuesto. Puede encontrar la lista de monitores compuestos con constituyentes faltantes en la página de [Calidad del Monitor][4].
 
 Para obtener programáticamente la lista de monitores que están faltando constituyentes:
 
@@ -197,28 +197,28 @@ curl -s -X GET "{{< region-param key=dd_api >}}/api/v1/monitor/search" \
   | @csv' > monitors_missing_constituent.csv
 ```
 
-Para eliminar, utiliza el mismo proceso en el [comando Eliminar Monitores](#3-delete-the-monitors). Reemplaza el `input_file` con `monitors_missing_constituent.csv`.
+Para eliminar, utiliza el mismo proceso en el comando [Eliminar Monitores](#3-delete-the-monitors). Reemplaza el `input_file` con `monitors_missing_constituent.csv`.
 
-Para más información, consulta [Monitor Compuesto][11].
+Para más información, consulte [Monitor Compuesto][11].
 
 ## Mejores Prácticas para evitar el Desorden de Monitores
 
 | Mejor Práctica | Descripción | Implementación |
 |---------------|-------------|----------------|
-| **Eliminar redundancia** | Evita crear múltiples monitores que rastreen la misma señal con alcances ligeramente diferentes (como por región, equipo o entorno). | Usa **monitores agrupados con etiquetas**, que son más fáciles de gestionar y escalar. |
-| **Establecer una clara propiedad** | Cada monitor debe tener un propietario claro para dirigir las alertas a los respondedores correctos y evitar confusiones. | Usa `team:` etiquetas y manejadores de notificación (`@slack-xyz`, `@pagerduty-twilio`). Usa el filtro **Creador** en la [Lista de Monitores][8] para auditar a los creadores de monitores más frecuentes. |
-| **Revisar monitores ruidosos o inactivos** | Los monitores que alertan con demasiada frecuencia o que nunca alertan pueden causar fatiga o señalar una mala configuración. | Utiliza la [**página de Calidad del Monitor**][4] para identificar y limpiar monitores ruidosos, rotos o desactualizados. |
-| **Aprovecha las plantillas de monitor** | Para patrones comunes (como métricas ROJAS o latencia de API), utiliza plantillas para reducir la duplicación y asegurar la estandarización. | Utiliza [plantillas reutilizables][5] para reducir la duplicación y asegurar la estandarización entre equipos. |
+| **Eliminar redundancia** | Evite crear múltiples monitores que rastreen la misma señal con alcances ligeramente diferentes (como por región, equipo o entorno). | Utilice **monitores agrupados por etiquetas**, que son más fáciles de gestionar y escalar. |
+| **Establecer una clara propiedad** | Cada monitor debe tener un propietario claro para dirigir las alertas a los respondedores correctos y evitar confusiones. | Utilice `team:` etiquetas y manejadores de notificación (`@slack-xyz`, `@pagerduty-twilio`). Utilice el filtro **Creador** en la [Lista de Monitores][8] para auditar a los creadores de monitores más frecuentes. |
+| **Revise monitores ruidosos o inactivos** | Los monitores que alertan con demasiada frecuencia o que nunca alertan pueden causar fatiga o señalar una mala configuración. | Utiliza la [**página de Monitoreo de Calidad**][4] para identificar y limpiar monitores ruidosos, rotos o desactualizados. |
+| **Aprovecha las plantillas de monitores** | Para patrones comunes (como métricas ROJAS o latencia de API), utiliza plantillas para reducir la duplicación y asegurar la estandarización. | Utiliza [plantillas reutilizables][5] para reducir la duplicación y asegurar la estandarización entre equipos. |
 | **Establece una Política de Etiquetado** | Etiquetas consistentes y significativas te permiten filtrar, agrupar y dirigir monitores fácilmente. | Utiliza etiquetas consistentes (como `service:`, `env:`, `team:`) y establece una [Política de Etiquetado][6]. Esto permite tableros, alertas y seguimiento de cumplimiento específicos. |
-| **Tablero de Calidad del Monitor** | Visualiza tendencias en la higiene de los monitores entre equipos, servicios y entornos para identificar proactivamente brechas y rastrear mejoras. | Configura un [**tablero de Calidad del Monitor**](#template-monitor-quality-dashboard) para rastrear mejoras a lo largo del tiempo y priorizar esfuerzos de limpieza a gran escala. |
+| **Tablero de Calidad de Monitoreo** | Visualiza tendencias en la higiene de monitores entre equipos, servicios y entornos para identificar proactivamente brechas y rastrear mejoras. | Configura un [**tablero de Calidad de Monitoreo**](#template-monitor-quality-dashboard) para rastrear mejoras a lo largo del tiempo y priorizar esfuerzos de limpieza a gran escala. |
 
-## Plantilla de tablero de Calidad del Monitor
+## Tablero de plantilla de Calidad de Monitoreo
 
 Para ayudarte a comenzar, importa la siguiente definición de tablero JSON directamente en tu cuenta de Datadog.
 
 1. En la aplicación, navega a [**Tableros**][9] y haz clic en **Nuevo Tablero**.
 2. En la parte superior de la página, haz clic en **Configurar** y selecciona **Importar JSON del tablero...**.
-3. Copia y pega el siguiente JSON para construir un tablero de Calidad del Monitor:
+3. Copia y pega el siguiente JSON para construir un tablero de Calidad de Monitoreo:
 
 ```json
 {

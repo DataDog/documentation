@@ -29,7 +29,7 @@ title: Processeurs
 
 <div class="alert alert-info">Les processeurs décrits dans cette documentation sont spécifiques aux environnements de journalisation basés sur le cloud. Pour analyser, structurer et enrichir les journaux sur site, consultez <a href="https://docs.datadoghq.com/observability_pipelines/processors/">Pipelines d'observabilité</a>.</div>
 
-Un processeur s'exécute dans un [Pipeline][1] pour effectuer une action de structuration des données et générer des attributs pour enrichir vos journaux.
+Un processeur s'exécute au sein d'un [Pipeline][1] pour réaliser une action de structuration des données et générer des attributs pour enrichir vos journaux.
 
 {{< img src="logs/log_configuration/processor/processor_overview.png" alt="Processeurs" style="width:100%" >}}
 
@@ -37,7 +37,7 @@ Dans les [paramètres de configuration des journaux][1], vous pouvez configurer 
 
 **Remarques** :
 
-- Les journaux structurés doivent être expédiés dans un format valide. Si la structure contient des caractères invalides pour l'analyse, ceux-ci doivent être supprimés au niveau de l'Agent à l'aide de la fonctionnalité [mask_sequences][2].
+- Les journaux structurés doivent être expédiés dans un format valide. Si la structure contient des caractères invalides pour l'analyse, ceux-ci doivent être supprimés au niveau de l'Agent en utilisant la fonctionnalité [mask_sequences][2].
 
 - En tant que meilleure pratique, il est recommandé d'utiliser au maximum 20 processeurs par pipeline.
 
@@ -48,20 +48,20 @@ Créez des règles grok personnalisées pour analyser le message complet ou un a
 {{< img src="/logs/processing/processors/define_parsing_rules_syntax_suggestions.png" alt="Suggestions de syntaxe du parseur Grok dans l'interface utilisateur" style="width:90%;" >}}
 
 {{< tabs >}}
-{{% tab "IU" %}}
+{{% tab "INTERFACE UTILISATEUR" %}}
 
 Définissez le processeur Grok sur la page [**Pipelines**][1]. Pour configurer les règles de parsing Grok :
 
-1. Cliquez sur **Analyser mes journaux** pour générer automatiquement un ensemble de trois règles de parsing basées sur les journaux circulant dans le pipeline.
+1. Cliquez sur **Analyser mes journaux** pour générer automatiquement un ensemble de trois règles de parsing basé sur les journaux circulant dans le pipeline.
    **Remarque** : Cette fonctionnalité nécessite que les journaux correspondants soient indexés et en cours de circulation. Vous pouvez temporairement désactiver ou réduire les filtres d'exclusion pour permettre à la fonctionnalité de détecter les journaux.
 1. **Exemples de journaux** : Ajoutez jusqu'à cinq journaux d'exemple (jusqu'à 5000 caractères chacun) pour tester vos règles de parsing.
-1. **Définir les règles de parsing** : Écrivez vos règles de parsing dans l'éditeur de règles. Au fur et à mesure que vous définissez des règles, le parseur Grok fournit une assistance syntaxique :
-   - **Suggestions de correspondance** : Tapez un nom de règle suivi de `%{`. Un menu déroulant apparaît avec les correspondances disponibles (comme `word`, `integer`, `ip`, `date`). Sélectionnez une correspondance dans la liste pour l'insérer dans votre règle.<br>
+1. **Définir des règles de parsing** : Écrivez vos règles de parsing dans l'éditeur de règles. Au fur et à mesure que vous définissez des règles, le parseur Grok fournit une assistance syntaxique :
+   - **Suggestions de correspondants** : Tapez un nom de règle suivi de `%{`. Un menu déroulant apparaît avec les correspondants disponibles (tels que `word`, `integer`, `ip`, `date`). Sélectionnez un correspondant dans la liste pour l'insérer dans votre règle.<br>
      ```
      MyParsingRule %{
      ```
-   - **Suggestions de filtres** : Lorsque vous ajoutez un filtre avec `:`, un menu déroulant affiche les filtres compatibles pour la correspondance sélectionnée.
-1. **Testez vos règles** : Sélectionnez un exemple en cliquant dessus pour déclencher son évaluation par rapport à la règle de parsing et afficher le résultat en bas de l'écran. Tous les exemples affichent un statut (`match` ou `no match`), qui met en évidence si l'une des règles de parsing du parseur grok correspond à l'exemple.
+   - **Suggestions de filtres** : Lorsque vous ajoutez un filtre avec `:`, un menu déroulant affiche les filtres compatibles pour le correspondant sélectionné.
+1. **Testez vos règles** : Sélectionnez un exemple en cliquant dessus pour déclencher son évaluation par rapport à la règle de parsing et afficher le résultat en bas de l'écran. Tous les exemples affichent un statut (`match` ou `no match`), qui met en évidence si l'une des règles de parsing du parseur Grok correspond à l'exemple.
 
 [1]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
@@ -106,7 +106,7 @@ Lorsque Datadog reçoit des journaux, il les horodate en utilisant la ou les val
 * `eventTime`
 * `published_date`
 
-Si vos journaux ont des dates dans un attribut qui ne figure pas sur cette liste, utilisez le processeur de remappage de date de journal pour définir leur attribut de date comme l'horodatage officiel du journal :
+Si vos journaux contiennent des dates dans un attribut qui ne figure pas dans cette liste, utilisez le processeur de remappage de date de journal pour définir leur attribut de date comme l'horodatage officiel du journal :
 
 <div class="alert alert-info">
 Les formats de date reconnus sont : <a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO8601</a>, <a href="https://en.wikipedia.org/wiki/Unix_time">UNIX (le format EPOCH en millisecondes)</a>, et <a href="https://www.ietf.org/rfc/rfc3164.txt">RFC3164</a>.
@@ -114,17 +114,17 @@ Les formats de date reconnus sont : <a href="https://www.iso.org/iso-8601-date-a
 
 Si vos journaux n'ont pas d'horodatage conforme aux formats énumérés ci-dessus, utilisez le processeur grok pour extraire le temps epoch de l'horodatage vers un nouvel attribut. Le remappeur de date utilise l'attribut nouvellement défini.
 
-Pour voir comment un format de date et d'heure personnalisé peut être analysé dans Datadog, voir [Analyse des dates][3].
+Pour voir comment un format de date et d'heure personnalisé peut être analysé dans Datadog, consultez [Analyse des dates][3].
 
 **Notes** :
 
 * Les événements de journal peuvent être soumis jusqu'à 18 heures dans le passé et deux heures dans le futur.
-* Depuis ISO 8601-1:2019, le format de base est `T[hh][mm][ss]` et le format étendu est `T[hh]:[mm]:[ss]`. Les versions antérieures omettaient le T (représentant le temps) dans les deux formats.
-* Si vos journaux ne contiennent aucun des attributs par défaut et que vous n'avez pas défini votre propre attribut de date, Datadog horodate les journaux avec la date à laquelle il les a reçus.
+* Selon ISO 8601-1:2019, le format de base est `T[hh][mm][ss]` et le format étendu est `T[hh]:[mm]:[ss]`. Les versions antérieures omettaient le T (représentant le temps) dans les deux formats.
+* Si vos journaux ne contiennent aucun des attributs par défaut et que vous n'avez pas défini votre propre attribut de date, Datadog horodate les journaux avec la date à laquelle ils les ont reçus.
 * Si plusieurs processeurs de remappage de date de journal sont appliqués à un journal donné dans le pipeline, le dernier (selon l'ordre du pipeline) est pris en compte.
 
 {{< tabs >}}
-{{% tab "IU" %}}
+{{% tab "INTERFACE UTILISATEUR" %}}
 
 Définissez le processeur de remappage de date de journal sur la page [**Pipelines**][1] :
 
@@ -136,7 +136,7 @@ Définissez le processeur de remappage de date de journal sur la page [**Pipelin
 {{% /tab %}}
 {{% tab "API" %}}
 
-Utilisez le [point de terminaison de l'API de pipeline de journaux Datadog][1] avec la charge utile JSON suivante pour le remappeur de date de journal :
+Utilisez le [point de terminaison de l'API Datadog Log Pipeline][1] avec la charge utile JSON suivante pour le remappeur de date de journal :
 
 ```json
 {
@@ -162,7 +162,7 @@ Utilisez le [point de terminaison de l'API de pipeline de journaux Datadog][1] a
 
 Utilisez le processeur de remappeur de statut pour attribuer des attributs comme un statut officiel à vos journaux. Par exemple, ajoutez un niveau de gravité de journal à vos journaux avec le remappeur de statut.
 
-Chaque valeur de statut entrante est mappée comme suit :
+Chaque valeur de statut entrant est mappée comme suit :
 
 * Les entiers de 0 à 7 sont mappés aux [normes de gravité Syslog][4]
 * Les chaînes commençant par **emerg** ou **f** (insensible à la casse) sont mappées à **emerg (0)**
@@ -179,7 +179,7 @@ Chaque valeur de statut entrante est mappée comme suit :
 **Remarque** : Si plusieurs processeurs de remappage de statut de journal sont appliqués à un journal dans un pipeline, seul le premier dans l'ordre du pipeline est pris en compte. De plus, pour tous les pipelines qui correspondent au journal, seul le premier remappeur de statut rencontré (parmi tous les pipelines applicables) est appliqué.
 
 {{< tabs >}}
-{{% tab "IU" %}}
+{{% tab "INTERFACE UTILISATEUR" %}}
 
 Définissez le processeur de remappage de statut de journal sur la page [**Pipelines**][1] :
 
@@ -218,9 +218,9 @@ Le processeur de remappeur de service attribue un ou plusieurs attributs à vos 
 **Remarque** : Si plusieurs processeurs de remappage de service sont appliqués à un journal donné dans le pipeline, seul le premier (selon l'ordre du pipeline) est pris en compte.
 
 {{< tabs >}}
-{{% tab "IU" %}}
+{{% tab "INTERFACE UTILISATEUR" %}}
 
-Définissez le processeur de remappage de service de journal sur la page [**Pipelines**][1] :
+Définissez le processeur de remappeur de service de journal sur la page [**Pipelines**][1] :
 
 {{< img src="logs/log_configuration/processor/service_remapper.png" alt="Processeur de remappeur de service" style="width:80%;" >}}
 
@@ -261,7 +261,7 @@ Pour définir les attributs de message, utilisez d'abord le [processeur de const
 **Remarque** : Si plusieurs processeurs de remappage de message journal sont appliqués à un journal donné dans le pipeline, seul le premier (selon l'ordre du pipeline) est pris en compte.
 
 {{< tabs >}}
-{{% tab "IU" %}}
+{{% tab "INTERFACE UTILISATEUR" %}}
 
 Définissez le processeur de remappage de message journal sur la page [**Pipelines**][1] :
 
@@ -271,7 +271,7 @@ Définissez le processeur de remappage de message journal sur la page [**Pipelin
 {{% /tab %}}
 {{% tab "API" %}}
 
-Utilisez le [point de terminaison de l'API de pipeline de journaux Datadog][1] avec la charge utile JSON suivante pour le remappeur de message journal :
+Utilisez le [point de terminaison de l'API de pipeline de journal Datadog][1] avec la charge utile JSON suivante pour le remappeur de message journal :
 
 ```json
 {
@@ -295,7 +295,7 @@ Utilisez le [point de terminaison de l'API de pipeline de journaux Datadog][1] a
 
 ## Remappeur
 
-Le processeur de remappage remappe un ou plusieurs attribut(s) ou balises source à un attribut ou balise cible différent. Par exemple, vous pouvez remapper l'attribut `user` à `firstname` pour normaliser les données de journal dans l'Explorateur de journaux.
+Le processeur de remappage remappe un ou plusieurs attribut(s) ou balises source à un attribut ou une balise cible différente. Par exemple, vous pouvez remapper l'attribut `user` à `firstname` pour normaliser les données de journal dans l'Explorateur de journaux.
 
 Si la cible du remappeur est un attribut, le processeur peut également essayer de convertir la valeur en un nouveau type (`String`, `Integer` ou `Double`). Si la conversion échoue, la valeur et le type d'origine sont préservés.
 
@@ -309,16 +309,16 @@ Les caractères `:` et `,` ne sont pas autorisés dans les noms d'attributs ou d
 
 Le processeur Remapper **ne peut pas être utilisé pour remapper les attributs réservés de Datadog**. 
 - L'attribut `host` ne peut pas être remappé.
-- Les attributs suivants nécessitent des processeurs remappers dédiés et ne peuvent pas être remappés avec le Remapper générique. Pour remapper l'un des attributs, utilisez le remapper ou le processeur spécialisé correspondant à la place.
+- Les attributs suivants nécessitent des processeurs remapper dédiés et ne peuvent pas être remappés avec le Remapper générique. Pour remapper l'un des attributs, utilisez le remapper ou le processeur spécialisé correspondant à la place.
    - `message` : Remapper de message journal
    - `service` : Remapper de service
    - `status` : Remapper de statut de journal
    - `date` : Remapper de date de journal
    - `trace_id` : Remapper de trace
-   - `span_id` : Remapper de span
+   - `span_id` : Remapper d'intervalle
 
 {{< tabs >}}
-{{% tab "IU" %}}
+{{% tab "INTERFACE UTILISATEUR" %}}
 
 Définissez le processeur remapper sur la page [**Pipelines**][1]. Par exemple, remappez `user` à `user.firstname`.
 
@@ -328,7 +328,7 @@ Définissez le processeur remapper sur la page [**Pipelines**][1]. Par exemple, 
 {{% /tab %}}
 {{% tab "API" %}}
 
-Utilisez le point de terminaison [API de pipeline de journaux Datadog][1] avec la charge utile JSON Remapper suivante :
+Utilisez le point de terminaison [API de pipeline de journal Datadog][1] avec la charge utile JSON Remapper suivante :
 
 ```json
 {
@@ -352,7 +352,7 @@ Utilisez le point de terminaison [API de pipeline de journaux Datadog][1] avec l
 | `is_enabled`           | Booléen          | Non      | Si le processeur est activé ou non. Par défaut : `false`.                          |
 | `source_type`          | Chaîne           | Non      | Définit si les sources proviennent de journal `attribute` ou `tag`. Par défaut : `attribute`. |
 | `sources`              | Tableau de chaînes | Oui      | Tableau d'attributs ou de balises sources                                             |
-| `target`               | Chaîne           | Oui      | Nom de l'attribut ou du tag final à remapper aux sources.                           |
+| `target`               | Chaîne           | Oui      | Nom final de l'attribut ou de la balise à remapper vers les sources.                           |
 | `target_type`          | Chaîne           | Non      | Définit si la cible est un journal `attribute` ou un `tag`. Par défaut : `attribute`.    |
 | `target_format`        | Chaîne           | Non      | Définit si la valeur de l'attribut doit être convertie en un autre type. Valeurs possibles : `auto`, `string` ou `integer`. Par défaut : `auto`. Lorsqu'il est défini sur `auto`, aucune conversion n'est appliquée.  |
 | `preserve_source`      | Booléen          | Non      | Supprimer ou préserver l'élément source remappé. Par défaut : `false`.               |
@@ -369,7 +369,7 @@ Le processeur d'analyse d'URL extrait les paramètres de requête et d'autres pa
 {{< img src="logs/processing/processors/url_processor.png" alt="Processeur d'URL" style="width:80%;" >}}
 
 {{< tabs >}}
-{{% tab "IU" %}}
+{{% tab "INTERFACE UTILISATEUR" %}}
 
 Définir le processeur d'analyse d'URL sur la page [**Pipelines**][1] :
 
@@ -409,7 +409,7 @@ Le processeur d'analyseur d'agent utilisateur prend un attribut `useragent` et e
 **Remarque** : Si vos journaux contiennent des agents utilisateurs encodés (par exemple, des journaux IIS), configurez ce processeur pour **décoder l'URL** avant de l'analyser.
 
 {{< tabs >}}
-{{% tab "IU" %}}
+{{% tab "INTERFACE UTILISATEUR" %}}
 
 Définissez le processeur d'agent utilisateur sur la page [**Pipelines**][1] :
 
@@ -419,7 +419,7 @@ Définissez le processeur d'agent utilisateur sur la page [**Pipelines**][1] :
 {{% /tab %}}
 {{% tab "API" %}}
 
-Utilisez le [point de terminaison de l'API Datadog Log Pipeline][1] avec la charge utile JSON de l'analyseur d'agent utilisateur suivante :
+Utilisez le [point de terminaison de l'API de pipeline de journaux Datadog][1] avec la charge utile JSON de l'analyseur d'agent utilisateur suivante :
 
 ```json
 {
@@ -456,12 +456,12 @@ Utilisez le processeur de catégorie pour ajouter un nouvel attribut (sans espac
 * La syntaxe de la requête est celle de la barre de recherche [Log Explorer][6]. Cette requête peut être effectuée sur n'importe quel attribut ou tag de journal, qu'il s'agisse d'un facette ou non. Les jokers peuvent également être utilisés dans votre requête.
 * Une fois que le journal a correspondu à l'une des requêtes du processeur, il s'arrête. Assurez-vous qu'ils sont correctement ordonnés au cas où un journal pourrait correspondre à plusieurs requêtes.
 * Les noms des catégories doivent être uniques.
-* Une fois définie dans le processeur de catégorie, vous pouvez mapper les catégories à l'état du journal en utilisant le [remappeur d'état du journal](#log-status-remapper).
+* Une fois définies dans le processeur de catégorie, vous pouvez mapper les catégories à l'état du journal en utilisant le [remappeur d'état du journal](#log-status-remapper).
 
 {{< tabs >}}
-{{% tab "IU" %}}
+{{% tab "INTERFACE UTILISATEUR" %}}
 
-Définissez le processeur de catégorie sur la page [**Pipelines**][1]. Par exemple, pour catégoriser vos journaux d'accès web en fonction de la valeur de plage de code d'état (`"OK" for a response code between 200 and 299, "Notice" for a response code between 300 and 399, ...`), ajoutez ce processeur :
+Définissez le processeur de catégorie sur la page [**Pipelines**][1]. Par exemple, pour catégoriser vos journaux d'accès web en fonction de la valeur de la plage de codes d'état (`"OK" for a response code between 200 and 299, "Notice" for a response code between 300 and 399, ...`), ajoutez ce processeur :
 
 {{< img src="logs/log_configuration/processor/category_processor.png" alt="processeur de catégorie" style="width:80%;" >}}
 
@@ -493,7 +493,7 @@ Utilisez le [point de terminaison de l'API Datadog Log Pipeline][1] avec la char
 | `type`       | Chaîne          | Oui      | Type du processeur.                                                                                     |
 | `name`       | Chaîne          | Non       | Nom du processeur.                                                                                     |
 | `is_enabled` | Booléen         | Non       | Si le processeur est activé ou non. Par défaut : `false`                                                      |
-| `categories` | Tableau d'objets | Oui      | Tableau de filtres pour correspondre ou non à un journal et leurs `name` correspondants pour attribuer une valeur personnalisée au journal. |
+| `categories` | Tableau d'objets | Oui      | Tableau de filtres pour correspondre ou non à un journal et leur `name` correspondant pour attribuer une valeur personnalisée au journal. |
 | `target`     | Chaîne          | Oui      | Nom de l'attribut cible dont la valeur est définie par la catégorie correspondante.                              |
 
 [1]: /fr/api/v1/logs-pipelines/
@@ -506,7 +506,7 @@ Utilisez le processeur arithmétique pour ajouter un nouvel attribut (sans espac
 
 Une formule de processeur arithmétique peut utiliser des parenthèses et des opérateurs arithmétiques de base : `-`, `+`, `*`, `/`.
 
-Par défaut, un calcul est ignoré si un attribut est manquant. Sélectionnez *Remplacer l'attribut manquant par 0* pour remplir automatiquement les valeurs d'attribut manquantes avec 0 afin de garantir que le calcul est effectué.
+Par défaut, un calcul est ignoré si un attribut est manquant. Sélectionnez *Remplacer l'attribut manquant par 0* pour remplir automatiquement les valeurs d'attribut manquantes avec 0 afin de garantir que le calcul soit effectué.
 
 **Remarques** :
 
@@ -517,7 +517,7 @@ Par défaut, un calcul est ignoré si un attribut est manquant. Sélectionnez *R
 * Si vous devez mettre à l'échelle une unité de mesure, utilisez le filtre de mise à l'échelle.
 
 {{< tabs >}}
-{{% tab "IU" %}}
+{{% tab "INTERFACE UTILISATEUR" %}}
 
 Définissez le processeur arithmétique sur la page [**Pipelines**][1] :
 
@@ -527,7 +527,7 @@ Définissez le processeur arithmétique sur la page [**Pipelines**][1] :
 {{% /tab %}}
 {{% tab "API" %}}
 
-Utilisez le [point de terminaison de l'API Datadog Log Pipeline][1] avec la charge utile JSON du processeur arithmétique suivante :
+Utilisez le point de terminaison [API de pipeline de journaux Datadog][1] avec la charge utile JSON du processeur arithmétique suivante :
 
 ```json
 {
@@ -557,17 +557,17 @@ Utilisez le [point de terminaison de l'API Datadog Log Pipeline][1] avec la char
 
 Utilisez le processeur de construction de chaînes pour ajouter un nouvel attribut (sans espaces ni caractères spéciaux) à un journal avec le résultat du modèle fourni. Cela permet d'agréger différents attributs ou chaînes brutes en un seul attribut.
 
-Le modèle est défini à la fois par du texte brut et des blocs avec la syntaxe `%{attribute_path}`.
+Le modèle est défini à la fois par du texte brut et par des blocs avec la syntaxe `%{attribute_path}`.
 
 **Notes** :
 
 * Ce processeur n'accepte que les attributs avec des valeurs ou un tableau de valeurs dans le bloc (voir les exemples dans la section UI ci-dessous).
-* Si un attribut ne peut pas être utilisé (objet ou tableau d'objets), il est remplacé par une chaîne vide ou l'ensemble de l'opération est sauté selon votre sélection.
+* Si un attribut ne peut pas être utilisé (objet ou tableau d'objets), il est remplacé par une chaîne vide ou l'ensemble de l'opération est sauté en fonction de votre sélection.
 * Si un attribut cible existe déjà, il est écrasé par le résultat du modèle.
 * Les résultats d'un modèle ne peuvent pas dépasser 256 caractères.
 
 {{< tabs >}}
-{{% tab "IU" %}}
+{{% tab "INTERFACE UTILISATEUR" %}}
 
 Définissez le processeur de construction de chaînes sur la page [**Pipelines**][1] :
 
@@ -615,7 +615,7 @@ Request GET https://app.datadoghq.com/users was answered with response 200
 {{% /tab %}}
 {{% tab "API" %}}
 
-Utilisez le point de terminaison de l'API [Datadog Log Pipeline][1] avec le JSON du processeur de constructeur de chaînes suivant :
+Utilisez le point de terminaison de l'API [Datadog Log Pipeline][1] avec le payload JSON du processeur de construction de chaînes suivant :
 
 ```json
 {
@@ -632,7 +632,7 @@ Utilisez le point de terminaison de l'API [Datadog Log Pipeline][1] avec le JSON
 |----------------------|---------|----------|---------------------------------------------------------------------------------------------------------------------------------------------------|
 | `type`               | Chaîne  | Oui      | Type de processeur.                                                                                                                            |
 | `name`               | Chaîne  | Non       | Nom du processeur.                                                                                                                            |
-| `is_enabled`         | Booléen | Non       | Si le processeur est activé ou non, par défaut `false`.                                                                                          |
+| `is_enabled`         | Booléen | Non       | Indique si le processeur est activé ou non, par défaut `false`.                                                                                          |
 | `template`           | Chaîne  | Oui      | Une formule avec un ou plusieurs attributs et du texte brut.                                                                                               |
 | `target`             | Chaîne  | Oui      | Le nom de l'attribut qui contient le résultat du modèle.                                                                               |
 | `is_replace_missing` | Booléen | Non       | Si `true`, cela remplace tous les attributs manquants de `template` par une chaîne vide. Si `false`, ignore l'opération pour les attributs manquants. Par défaut : `false`. |
@@ -646,20 +646,20 @@ Utilisez le point de terminaison de l'API [Datadog Log Pipeline][1] avec le JSON
 L'analyseur geoIP prend un attribut d'adresse IP et extrait des informations sur le continent, le pays, la subdivision ou la ville (si disponible) dans le chemin d'attribut cible.
 
 {{< tabs >}}
-{{% tab "IU" %}}
+{{% tab "INTERFACE UTILISATEUR" %}}
 
 {{< img src="logs/log_configuration/processor/geoip_processor.png" alt="Processeur GeoIP" style="width:80%;">}}
 
 La plupart des éléments contiennent un attribut `name` et `iso_code` (ou `code` pour le continent). `subdivision` est le premier niveau de subdivision que le pays utilise, comme "États" pour les États-Unis ou "Départements" pour la France.
 
-Par exemple, l'analyseur geoIP extrait l'emplacement de l'attribut `network.client.ip` et le stocke dans l'attribut `network.client.geoip` :
+Par exemple, l'analyseur geoIP extrait la localisation de l'attribut `network.client.ip` et la stocke dans l'attribut `network.client.geoip` :
 
 {{< img src="logs/log_configuration/processor/geoip_example_blurred.png" alt="Exemple GeoIP" style="width:60%;">}}
 
 {{% /tab %}}
 {{% tab "API" %}}
 
-Utilisez le point de terminaison de l'API [Datadog Log Pipeline][1] avec le JSON du processeur geoIP suivant :
+Utilisez le point de terminaison de l'API [Datadog Log Pipeline][1] avec le payload JSON de l'analyseur geoIP suivant :
 
 ```json
 {
@@ -690,7 +690,7 @@ Utilisez le processeur de recherche pour définir une correspondance entre un at
 Par exemple, vous pouvez utiliser le processeur de recherche pour mapper un ID de service interne en un nom de service lisible par l'homme. Alternativement, vous pouvez l'utiliser pour vérifier si l'adresse MAC qui vient d'essayer de se connecter à l'environnement de production appartient à votre liste de machines volées.
 
 {{< tabs >}}
-{{% tab "IU" %}}
+{{% tab "INTERFACE UTILISATEUR" %}}
 
 Le processeur de recherche effectue les actions suivantes :
 
@@ -714,7 +714,7 @@ Le processeur de recherche effectue les actions suivantes :
 {{% /tab %}}
 {{% tab "API" %}}
 
-Utilisez le [point de terminaison de l'API de pipeline de journaux Datadog][1] avec la charge utile JSON suivante du processeur de recherche :
+Utilisez le [point de terminaison de l'API Datadog Log Pipeline][1] avec la charge utile JSON suivante du processeur de recherche :
 
 ```json
 {
@@ -735,7 +735,7 @@ Utilisez le [point de terminaison de l'API de pipeline de journaux Datadog][1] a
 | `is_enabled`     | Booléen          | Oui      | Si le processeur est activé ou non. Par défaut : `false`.                                                                                                                     |
 | `source`         | Chaîne           | Oui      | Attribut source utilisé pour effectuer la recherche.                                                                                                                             |
 | `target`         | Chaîne           | Oui      | Nom de l'attribut qui contient la valeur correspondante dans la liste de correspondance ou le `default_lookup` si non trouvé dans la liste de correspondance.                                |
-| `lookup_table`   | Tableau de chaînes | Oui      | Tableau de correspondance des valeurs pour l'attribut source et leurs valeurs d'attribut cible associées, formaté comme [ "source_key1,valeur_cible1", "source_key2,valeur_cible2" ]. |
+| `lookup_table`   | Tableau de chaînes | Oui      | Tableau de correspondance des valeurs pour l'attribut source et leurs valeurs d'attribut cible associées, formaté comme [ "source_key1,target_value1", "source_key2,target_value2" ]. |
 | `default_lookup` | Chaîne           | Non       | Valeur à définir pour l'attribut cible si la valeur source n'est pas trouvée dans la liste.                                                                                          |
 
 [1]: /fr/api/v1/logs-pipelines/
@@ -751,7 +751,7 @@ Il existe deux façons de définir la corrélation entre les traces d'applicatio
 2. Utilisez le processeur de remappage de trace pour définir un attribut de journal comme son ID de trace associé.
 
 {{< tabs >}}
-{{% tab "IU" %}}
+{{% tab "INTERFACE UTILISATEUR" %}}
 
 Définissez le processeur de remappage de trace sur la page [**Pipelines**][1]. Entrez le chemin de l'attribut ID de trace dans le bloc du processeur comme suit :
 
@@ -783,28 +783,28 @@ Utilisez le [point de terminaison de l'API Datadog Log Pipeline][1] avec la char
 {{% /tab %}}
 {{< /tabs >}}
 
-**Remarque** : Les identifiants de trace et les identifiants de span ne sont pas affichés dans vos journaux ou attributs de journaux dans l'interface utilisateur.
+**Remarque** : Les identifiants de trace et les identifiants de portée ne sont pas affichés dans vos journaux ou attributs de journal dans l'interface utilisateur.
 
-## Remappeur de span
+## Remappeur de portée
 
-Il existe deux façons de définir la corrélation entre les spans d'application et les journaux :
+Il existe deux façons de définir la corrélation entre les portées d'application et les journaux :
 
-1. Suivez la documentation sur [comment injecter un identifiant de span dans les journaux d'application][8]. Les intégrations de journaux gèrent automatiquement toutes les étapes de configuration restantes par défaut.
+1. Suivez la documentation sur [comment injecter un identifiant de portée dans les journaux d'application][8]. Les intégrations de journaux gèrent automatiquement toutes les étapes de configuration restantes par défaut.
 
-2. Utilisez le processeur de remappage de span pour définir un attribut de journal comme son identifiant de span associé.
+2. Utilisez le processeur de remappage de portée pour définir un attribut de journal comme son identifiant de portée associé.
 
 {{< tabs >}}
-{{% tab "UI" %}}
+{{% tab "INTERFACE UTILISATEUR" %}}
 
-Définissez le processeur de remappage de span sur la page [**Pipelines**][1]. Entrez le chemin d'attribut de l'identifiant de span dans le bloc du processeur comme suit :
+Définissez le processeur de remappage de portée sur la page [**Pipelines**][1]. Entrez le chemin de l'attribut d'identifiant de portée dans le bloc du processeur comme suit :
 
-{{< img src="logs/log_configuration/processor/span_id_remapper.png" alt="Processeur d'identifiant de span" style="width:80%;">}}
+{{< img src="logs/log_configuration/processor/span_id_remapper.png" alt="Processeur d'identifiant de portée" style="width:80%;">}}
 
 [1]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
 {{% tab "API" %}}
 
-Utilisez le [point de terminaison de l'API Datadog Log Pipeline][1] avec la charge utile JSON de remappage de span suivante :
+Utilisez le [point de terminaison de l'API Datadog Log Pipeline][1] avec la charge utile JSON de remappage de portée suivante :
 
 ```json
 {
@@ -826,7 +826,7 @@ Utilisez le [point de terminaison de l'API Datadog Log Pipeline][1] avec la char
 {{% /tab %}}
 {{< /tabs >}}
 
-**Remarque** : Les identifiants de trace et les identifiants de span ne sont pas affichés dans vos journaux ou attributs de journaux dans l'interface utilisateur.
+**Remarque** : Les identifiants de trace et les identifiants de portée ne sont pas affichés dans vos journaux ou attributs de journal dans l'interface utilisateur.
 
 ## Processeur de tableau
 
@@ -848,7 +848,7 @@ Définissez le processeur de tableau sur la page [**Pipelines**].
 Extraire une valeur spécifique d'un objet à l'intérieur d'un tableau lorsqu'il correspond à une condition.
 
 {{< tabs >}}
-{{% tab "UI" %}}
+{{% tab "INTERFACE UTILISATEUR" %}}
 
 {{< img src="logs/log_configuration/processor/array_processor_select_value.png" alt="Processeur de tableau - Sélectionner la valeur d'un élément" style="width:80%;" >}}
 
@@ -909,7 +909,7 @@ Utilisez le point de terminaison [API de pipeline de journaux Datadog][1] avec l
 | `name`       | Chaîne           | Non       | Nom du processeur.                                        |
 | `is_enabled` | Booléen          | Non       | Indique si le processeur est activé. Par défaut : `false`.        |
 | `operation.type`  | Chaîne      | Oui      | Type d'opération du processeur de tableau.                            |
-| `operation.source`  | Chaîne    | Oui      | Chemin du tableau à partir duquel vous souhaitez sélectionner.                    |
+| `operation.source`  | Chaîne    | Oui      | Chemin du tableau dont vous souhaitez sélectionner.                    |
 | `operation.target`  | Chaîne    | Oui      | Attribut cible.                                             |
 | `operation.filter`  | Chaîne    | Oui      | Expression pour correspondre à un élément de tableau. Le premier élément correspondant est sélectionné. |
 | `operation.value_to_extract`  | Chaîne | Oui | Attribut à lire dans l'élément sélectionné.                  |
@@ -923,7 +923,7 @@ Utilisez le point de terminaison [API de pipeline de journaux Datadog][1] avec l
 Calculez le nombre d'éléments dans un tableau.
 
 {{< tabs >}}
-{{% tab "UI" %}}
+{{% tab "INTERFACE UTILISATEUR" %}}
 
 {{< img src="logs/log_configuration/processor/array_processor_length.png" alt="Processeur de tableau - Longueur" style="width:80%;" >}}
 
@@ -970,7 +970,7 @@ Utilisez le point de terminaison [API de pipeline de journaux Datadog][1] avec l
 |---------------------|-----------|----------|---------------------------------------------------------------|
 | `type`              | Chaîne    | Oui      | Type du processeur.                                        |
 | `name`              | Chaîne    | Non       | Nom du processeur.                                        |
-| `is_enabled`        | Booléen   | Non       | Indique si le processeur est activé. Par défaut : `false`.        |
+| `is_enabled`        | Booléen   | Non       | Si le processeur est activé. Par défaut : `false`.        |
 | `operation.type`    | Chaîne    | Oui      | Type d'opération du processeur de tableau.                            |
 | `operation.source`  | Chaîne    | Oui      | Chemin du tableau pour extraire la longueur.                   |
 | `operation.target`  | Chaîne    | Oui      | Attribut cible.                                             |
@@ -987,7 +987,7 @@ Ajoutez une valeur d'attribut à la fin d'un attribut de tableau cible dans le j
 
 
 {{< tabs >}}
-{{% tab "UI" %}}
+{{% tab "INTERFACE UTILISATEUR" %}}
 
 {{< img src="logs/log_configuration/processor/array_processor_append.png" alt="Processeur de tableau - Ajouter" style="width:80%;" >}}
 
@@ -1059,16 +1059,16 @@ Le processeur décodeur traduit les champs de chaînes encodées en binaire en t
 
 **Remarques** :
 
-- Chaînes tronquées : Le processeur gère les chaînes Base64/Base16 partiellement tronquées avec soin en les coupant ou en les complétant si nécessaire.
+- Chaînes tronquées : Le processeur gère gracieusement les chaînes Base64/Base16 partiellement tronquées en les coupant ou en les complétant si nécessaire.
 
 - Format hexadécimal : L'entrée hexadécimale peut être décodée en une chaîne (UTF-8) ou en un entier.
 
 - Gestion des erreurs : Si le décodage échoue (en raison d'une entrée invalide), le processeur ignore la transformation et le journal reste inchangé.
 
 {{< tabs >}}
-{{% tab "UI" %}}
+{{% tab "INTERFACE UTILISATEUR" %}}
 
-1. Définir l'attribut source : Fournissez le chemin d'attribut qui contient la chaîne encodée, comme `encoded.base64`.
+1. Définir l'attribut source : Fournissez le chemin d'attribut qui contient la chaîne encodée, tel que `encoded.base64`.
 2. Sélectionner l'encodage source : Choisissez l'encodage binaire-texte de la source : `base64` ou `base16/hex`.
 2. Pour `Base16/Hex` : Choisissez le format de sortie : `string (UTF-8)` ou `integer`.
 3. Définir l'attribut cible : Entrez le chemin d'attribut pour stocker le résultat décodé.
@@ -1078,11 +1078,11 @@ Le processeur décodeur traduit les champs de chaînes encodées en binaire en t
 {{% /tab %}}
 {{< /tabs >}}
 
-## Processeur d'intelligence sur les menaces
+## Processeur d'intelligence des menaces
 
-Ajoutez le Processeur d'Intelligence sur les Menaces pour évaluer les journaux par rapport à la table en utilisant une clé d'Indicateur de Compromis (IoC) spécifique, comme une adresse IP. Si une correspondance est trouvée, le journal est enrichi avec des attributs d'Intelligence sur les Menaces (TI) pertinents de la table, ce qui améliore la détection, l'investigation et la réponse.
+Ajoutez le Processeur d'Intelligence des Menaces pour évaluer les journaux par rapport à la table en utilisant une clé spécifique d'Indicateur de Compromis (IoC), telle qu'une adresse IP. Si une correspondance est trouvée, le journal est enrichi avec des attributs d'Intelligence des Menaces (TI) pertinents de la table, ce qui améliore la détection, l'investigation et la réponse.
 
-Pour plus d'informations, voir [Intelligence sur les Menaces][9].
+Pour plus d'informations, voir [Intelligence des Menaces][9].
 
 ## Processeur OCSF
 

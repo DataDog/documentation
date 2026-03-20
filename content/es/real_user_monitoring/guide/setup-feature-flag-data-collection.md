@@ -15,7 +15,7 @@ further_reading:
 title: Introducción a los datos de banderas de características en RUM
 ---
 ## Resumen
-Los datos de banderas de características te brindan una mayor visibilidad de la experiencia del usuario y el monitoreo del rendimiento al permitirte determinar qué usuarios están viendo una característica específica y si algún cambio que introduces está impactando tu experiencia de usuario o afectando negativamente el rendimiento.
+Los datos de banderas de características te brindan una mayor visibilidad sobre la experiencia del usuario y el monitoreo del rendimiento al permitirte determinar qué usuarios están viendo una característica específica y si algún cambio que introduces está impactando tu experiencia de usuario o afectando negativamente el rendimiento.
 
 Al enriquecer tus datos de RUM con datos de banderas de características, puedes estar seguro de que tu característica se lanza con éxito sin causar accidentalmente un error o una regresión en el rendimiento. Con esta capa adicional de información, puedes correlacionar lanzamientos de características con el rendimiento, identificar problemas en lanzamientos específicos y solucionar problemas más rápido.
 
@@ -24,7 +24,7 @@ Al enriquecer tus datos de RUM con datos de banderas de características, puedes
 {{< tabs >}}
 {{% tab "Navegador" %}}
 
-El seguimiento de banderas de características está disponible en el SDK de RUM para navegadores. Para comenzar, configura [el monitoreo de RUM en el navegador][1]. Necesitas la versión del SDK de RUM para navegadores >= 4.25.0.
+El seguimiento de banderas de características está disponible en el SDK de RUM para navegadores. Para comenzar, configura [el monitoreo del navegador RUM][1]. Necesitas la versión del SDK de RUM para navegadores >= 4.25.0.
 
 <details>
   <summary>Antes de <code>v5.17.0</code></summary>
@@ -32,6 +32,7 @@ El seguimiento de banderas de características está disponible en el SDK de RUM
 Si estás utilizando una versión anterior a 5.17.0, inicializa el SDK de RUM y configura el parámetro de inicialización `enableExperimentalFeatures` con `["feature_flags"]` para comenzar a recopilar datos de banderas de características.
 
 {{% collapse-content title="NPM" level="h4" %}}
+
 ```javascript
   import { datadogRum } from '@datadog/browser-rum';
 
@@ -45,6 +46,7 @@ Si estás utilizando una versión anterior a 5.17.0, inicializa el SDK de RUM y 
 {{% /collapse-content %}}
 
 {{% collapse-content title="CDN asíncrono" level="h4" %}}
+
 ```javascript
 window.DD_RUM.onReady(function() {
     window.DD_RUM.init({
@@ -57,6 +59,7 @@ window.DD_RUM.onReady(function() {
 {{% /collapse-content %}}
 
 {{% collapse-content title="CDN síncrono" level="h4" %}}
+
 ```javascript
 window.DD_RUM &&
     window.DD_RUM.init({
@@ -74,37 +77,37 @@ window.DD_RUM &&
 {{% /tab %}}
 {{% tab "Android" %}}
 
-El seguimiento de banderas de características está disponible en el SDK de RUM para Android. Para comenzar, configura [la monitorización de RUM para Android][1]. Necesitas la versión >= 1.18.0 del SDK de RUM para Android.
+El seguimiento de banderas de características está disponible en el SDK de RUM para Android. Para comenzar, configura la [monitoreo de RUM para Android][1]. Necesitas la versión >= 1.18.0 del SDK de RUM para Android.
 
 [1]: /es/real_user_monitoring/application_monitoring/android/setup/
 {{% /tab %}}
 {{% tab "Flutter" %}}
 
-El seguimiento de banderas de características está disponible para tus aplicaciones de Flutter. Para comenzar, configura [la monitorización de RUM para Flutter][1]. Necesitas la versión >= 1.3.2 del Plugin de Flutter.
+El seguimiento de banderas de características está disponible para tus aplicaciones de Flutter. Para comenzar, configura la [monitoreo de RUM para Flutter][1]. Necesitas la versión >= 1.3.2 del Plugin de Flutter.
 
 [1]: /es/real_user_monitoring/application_monitoring/flutter/setup/
 {{% /tab %}}
 {{% tab "iOS" %}}
 
-El seguimiento de banderas de características está disponible en el SDK de RUM para iOS. Para comenzar, configura [la monitorización de RUM para iOS][1]. Necesitas la versión >= 1.16.0 del SDK de RUM para iOS.
+El seguimiento de banderas de características está disponible en el SDK de RUM para iOS. Para comenzar, configura la [monitoreo de RUM para iOS][1]. Necesitas la versión >= 1.16.0 del SDK de RUM para iOS.
 
 [1]: /es/real_user_monitoring/application_monitoring/ios/setup
 {{% /tab %}}
 {{% tab "Kotlin Multiplatform" %}}
 
-El seguimiento de banderas de características está disponible para tus aplicaciones de Kotlin Multiplatform. Para comenzar, configura [la monitorización de RUM para Kotlin Multiplatform][1].
+El seguimiento de banderas de características está disponible para tus aplicaciones de Kotlin Multiplatform. Para comenzar, configura la [monitoreo de RUM para Kotlin Multiplatform][1].
 
 [1]: /es/real_user_monitoring/application_monitoring/kotlin_multiplatform
 {{% /tab %}}
 {{% tab "React Native" %}}
 
-El seguimiento de banderas de características está disponible para tus aplicaciones de React Native. Para comenzar, configura [la monitorización de RUM para React Native][1]. Necesitas la versión >= 1.7.0 del SDK de RUM para React Native.
+El seguimiento de banderas de características está disponible para tus aplicaciones de React Native. Para comenzar, configura la [monitoreo de RUM para React Native][1]. Necesitas la versión >= 1.7.0 del SDK de RUM para React Native.
 
 [1]: /es/real_user_monitoring/application_monitoring/react_native/setup
 {{% /tab %}}
 {{% tab "Unity" %}}
 
-El seguimiento de banderas de características está disponible para tus aplicaciones de Unity. Para comenzar, configura [la monitorización RUM de Unity][1].
+El seguimiento de banderas de características está disponible para sus aplicaciones de Unity. Para comenzar, configure [la monitorización RUM de Unity][1].
 
 [1]: /es/real_user_monitoring/application_monitoring/unity/setup
 {{% /tab %}}
@@ -112,7 +115,7 @@ El seguimiento de banderas de características está disponible para tus aplicac
 
 ## Integraciones
 
-Puedes comenzar a recopilar datos de banderas de características con [soluciones personalizadas de gestión de banderas de características](#custom-feature-flag-management), o utilizando uno de los socios de integración de Datadog.
+Puede comenzar a recopilar datos de banderas de características con [soluciones personalizadas de gestión de banderas de características](#custom-feature-flag-management), o utilizando uno de los socios de integración de Datadog.
 
 Datadog admite integraciones con:
 {{< partial name="rum/rum-feature-flag-tracking.html" >}}
@@ -120,14 +123,14 @@ Datadog admite integraciones con:
 
 </br>
 
-### Integración de Amplitude
+### integración de Amplitude
 
 {{< tabs >}}
 {{% tab "Navegador" %}}
 
-Inicializa el SDK de Amplitude y crea un oyente de exposición que informe las evaluaciones de banderas de características a Datadog utilizando el siguiente fragmento de código:
+Inicialice el SDK de Amplitude y cree un oyente de exposición que informe las evaluaciones de banderas de características a Datadog utilizando el siguiente fragmento de código:
 
-Para más información sobre cómo inicializar el SDK de Amplitude, consulta la [documentación del SDK de JavaScript de Amplitude][1].
+Para obtener más información sobre cómo inicializar el SDK de Amplitude, consulte la [documentación del SDK de JavaScript de Amplitude][1].
 
 ```javascript
   const experiment = Experiment.initialize("CLIENT_DEPLOYMENT_KEY", {
@@ -146,9 +149,9 @@ Para más información sobre cómo inicializar el SDK de Amplitude, consulta la 
 {{% /tab %}}
 {{% tab "iOS" %}}
 
-Inicializa el SDK de Amplitude y crea un inspector que informe las evaluaciones de banderas de características a Datadog utilizando el fragmento de código a continuación.
+Inicialice el SDK de Amplitude y cree un inspector que informe las evaluaciones de banderas de características a Datadog utilizando el fragmento de código a continuación.
 
-Para más información sobre cómo inicializar el SDK de Amplitude, consulta la [documentación del SDK de iOS de Amplitude][1].
+Para obtener más información sobre cómo inicializar el SDK de Amplitude, consulte la [documentación del SDK de iOS de Amplitude][1].
 
 ```swift
   class DatadogExposureTrackingProvider : ExposureTrackingProvider {
@@ -172,9 +175,9 @@ Para más información sobre cómo inicializar el SDK de Amplitude, consulta la 
 {{% /tab %}}
 {{% tab "Android" %}}
 
-Inicializa el SDK de Amplitude y crea un inspector que informe las evaluaciones de banderas de características a Datadog utilizando el fragmento de código a continuación.
+Inicialice el SDK de Amplitude y cree un inspector que informe las evaluaciones de banderas de características a Datadog utilizando el fragmento de código a continuación.
 
-Para más información sobre cómo inicializar el SDK de Amplitude, consulta la [documentación del SDK de Android de Amplitude][1].
+Para obtener más información sobre cómo inicializar el SDK de Amplitude, consulte la [documentación del SDK de Android de Amplitude][1].
 
 ```kotlin
 internal class DatadogExposureTrackingProvider : ExposureTrackingProvider {
@@ -199,18 +202,18 @@ val config = ExperimentConfig.Builder()
 {{% /tab %}}
 {{% tab "Flutter" %}}
 
-Amplitude no admite esta integración. Crea un ticket con Amplitude para solicitar esta función.
+Amplitude no admite esta integración. Cree un ticket con Amplitude para solicitar esta función.
 
 
 {{% /tab %}}
 {{< /tabs >}}
 
-### Integración de ConfigCat
+### integración de ConfigCat
 
 {{< tabs >}}
 {{% tab "Navegador" %}}
 
-Al inicializar el SDK de ConfigCat para Javascript, suscríbete al `flagEvaluated` evento e informa las evaluaciones de banderas de características a Datadog:
+Al inicializar el SDK de Javascript de ConfigCat, suscríbase al `flagEvaluated` evento e informe las evaluaciones de banderas de características a Datadog:
 
 ```javascript
 const configCatClient = configcat.getClient(
@@ -225,7 +228,7 @@ const configCatClient = configcat.getClient(
 );
 ```
 
-Para más información sobre cómo inicializar el SDK de ConfigCat para Javascript, consulta la [documentación del SDK de JavaScript de ConfigCat][1].
+Para obtener más información sobre cómo inicializar el SDK de Javascript de ConfigCat, consulte la [documentación del SDK de JavaScript de ConfigCat][1].
 
 [1]: https://configcat.com/docs/sdk-reference/js
 
@@ -233,7 +236,7 @@ Para más información sobre cómo inicializar el SDK de ConfigCat para Javascri
 {{% /tab %}}
 {{% tab "iOS" %}}
 
-Al inicializar el SDK de ConfigCat para Swift en iOS, suscríbete al `flagEvaluated` evento e informa las evaluaciones de banderas de características a Datadog:
+Al inicializar el SDK de ConfigCat Swift para iOS, suscríbase al `flagEvaluated` evento e informe las evaluaciones de banderas de características a Datadog:
 
 ```swift
   let client = ConfigCatClient.get(sdkKey: "#YOUR-SDK-KEY#") { options in
@@ -243,7 +246,7 @@ Al inicializar el SDK de ConfigCat para Swift en iOS, suscríbete al `flagEvalua
   }
 ```
 
-Para más información sobre cómo inicializar el SDK de ConfigCat para Swift (iOS), consulta la [documentación del SDK de Swift para iOS de ConfigCat][1].
+Para obtener más información sobre cómo inicializar el SDK de ConfigCat Swift (iOS), consulte la [documentación del SDK de Swift para iOS de ConfigCat][1].
 
 [1]: https://configcat.com/docs/sdk-reference/ios
 
@@ -251,7 +254,7 @@ Para más información sobre cómo inicializar el SDK de ConfigCat para Swift (i
 {{% /tab %}}
 {{% tab "Android" %}}
 
-Al inicializar el SDK de ConfigCat para Android, suscríbete al `flagEvaluated` evento e informa las evaluaciones de banderas de características a Datadog:
+Al inicializar el SDK de ConfigCat para Android, suscríbase al `flagEvaluated` evento e informe las evaluaciones de banderas de características a Datadog:
 
 ```java
   ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> {
@@ -261,7 +264,7 @@ Al inicializar el SDK de ConfigCat para Android, suscríbete al `flagEvaluated` 
   });
 ```
 
-Para más información sobre cómo inicializar el SDK de ConfigCat para Android, consulta la [documentación del SDK de Android de ConfigCat][1].
+Para obtener más información sobre cómo inicializar el SDK de ConfigCat para Android, consulte la [documentación del SDK de Android de ConfigCat][1].
 
 [1]: https://configcat.com/docs/sdk-reference/android
 
@@ -324,7 +327,7 @@ Para más información sobre cómo inicializar el SDK de ConfigCat React, consul
 {{< tabs >}}
 {{% tab "Navegador" %}}
 
-Cada vez que se evalúe una bandera de características, agrega la siguiente función para enviar la información de la bandera de características a RUM:
+Cada vez que se evalúe una bandera de características, añade la siguiente función para enviar la información de la bandera de características a RUM:
 
 ```javascript
 datadogRum.addFeatureFlagEvaluation(key, value);
@@ -333,7 +336,7 @@ datadogRum.addFeatureFlagEvaluation(key, value);
 {{% /tab %}}
 {{% tab "iOS" %}}
 
-Cada vez que se evalúe una bandera de características, agrega la siguiente función para enviar la información de la bandera de características a RUM:
+Cada vez que se evalúe una bandera de características, añade la siguiente función para enviar la información de la bandera de características a RUM:
 
    ```swift
    RUMMonitor.shared().addFeatureFlagEvaluation(key, value);
@@ -342,7 +345,7 @@ Cada vez que se evalúe una bandera de características, agrega la siguiente fun
 {{% /tab %}}
 {{% tab "Android" %}}
 
-Cada vez que se evalúe una bandera de características, agrega la siguiente función para enviar la información de la bandera de características a RUM:
+Cada vez que se evalúe una bandera de características, añade la siguiente función para enviar la información de la bandera de características a RUM:
 
    ```kotlin
    GlobalRumMonitor.get().addFeatureFlagEvaluation(key, value);
@@ -351,7 +354,7 @@ Cada vez que se evalúe una bandera de características, agrega la siguiente fun
 {{% /tab %}}
 {{% tab "Flutter" %}}
 
-Cada vez que se evalúe una bandera de características, agrega la siguiente función para enviar la información de la bandera de características a RUM:
+Cada vez que se evalúe una bandera de características, añade la siguiente función para enviar la información de la bandera de características a RUM:
 
    ```dart
    DatadogSdk.instance.rum?.addFeatureFlagEvaluation(key, value);
@@ -359,7 +362,7 @@ Cada vez que se evalúe una bandera de características, agrega la siguiente fun
 {{% /tab %}}
 {{% tab "React Native" %}}
 
-Cada vez que se evalúe una bandera de características, agrega la siguiente función para enviar la información de la bandera de características a RUM:
+Cada vez que se evalúe una bandera de características, añade la siguiente función para enviar la información de la bandera de características a RUM:
 
    ```javascript
    DdRum.addFeatureFlagEvaluation(key, value);
@@ -551,28 +554,28 @@ Inicializa el SDK de Flagsmith con la opción `datadogRum`, que reporta las eval
 {{% /tab %}}
 {{% tab "iOS" %}}
 
-Flagsmith no soporta esta integración. Crea un ticket con Flagsmith para solicitar esta función.
+Flagsmith no soporta esta integración. Crea un ticket con Flagsmith para solicitar esta característica.
 
 
 {{% /tab %}}
 {{% tab "Android" %}}
 
-Flagsmith no soporta esta integración. Crea un ticket con Flagsmith para solicitar esta función.
+Flagsmith no soporta esta integración. Crea un ticket con Flagsmith para solicitar esta característica.
 
 {{% /tab %}}
 {{% tab "Flutter" %}}
 
-Flagsmith no soporta esta integración. Crea un ticket con Flagsmith para solicitar esta función.
+Flagsmith no soporta esta integración. Crea un ticket con Flagsmith para solicitar esta característica.
 
 {{% /tab %}}
 {{% tab "React Native" %}}
 
-Flagsmith actualmente no soporta esta integración. Crea un ticket con Flagsmith para solicitar esta función.
+Flagsmith actualmente no soporta esta integración. Crea un ticket con Flagsmith para solicitar esta característica.
 
 {{% /tab %}}
 {{< /tabs >}}
 
-Integración de ### GrowthBook
+### integración de GrowthBook
 
 {{< tabs >}}
 {{% tab "Navegador" %}}
@@ -597,7 +600,7 @@ gb.init();
 {{% /tab %}}
 {{% tab "iOS" %}}
 
-GrowthBook no soporta esta integración. Contacta a GrowthBook para solicitar esta función.
+GrowthBook no soporta esta integración. Contacta a GrowthBook para solicitar esta característica.
 
 {{% /tab %}}
 {{% tab "Android" %}}
@@ -658,7 +661,7 @@ gb.init();
 {{% /tab %}}
 {{< /tabs >}}
 
-Integración de ### Kameleoon
+### integración de Kameleoon
 
 {{< tabs >}}
 {{% tab "Navegador" %}}
@@ -718,7 +721,7 @@ onEvent(EventType.Evaluation, ({ featureKey, variation }) => {
 {{< tabs >}}
 {{% tab "Navegador" %}}
 
-Inicializa el SDK de LaunchDarkly y crea un inspector que informe las evaluaciones de las banderas de características a Datadog utilizando el fragmento de código que se muestra a continuación.
+Inicializa el SDK de LaunchDarkly y crea un inspector que informe sobre las evaluaciones de las banderas de características a Datadog utilizando el fragmento de código que se muestra a continuación.
 
  Para más información sobre la inicialización del SDK de LaunchDarkly, consulta la [documentación del SDK de JavaScript de LaunchDarkly][1].
 
@@ -771,7 +774,7 @@ LaunchDarkly actualmente no soporta esta integración. Crea un ticket con Launch
 {{< tabs >}}
 {{% tab "Navegador" %}}
 
-Inicializa el SDK de Split y crea un listener de impresiones que informe las evaluaciones de las banderas de características a Datadog utilizando el siguiente fragmento de código:
+Inicializa el SDK de Split y crea un listener de impresiones que informe sobre las evaluaciones de las banderas de características a Datadog utilizando el siguiente fragmento de código:
 
 Para más información sobre la inicialización del SDK de Split, consulta la [documentación del SDK de JavaScript de Split][1].
 
@@ -800,7 +803,7 @@ const client = factory.client();
 {{% /tab %}}
 {{% tab "iOS" %}}
 
-Inicializa el SDK de Split y crea un inspector que informe las evaluaciones de las banderas de características a Datadog utilizando el fragmento de código a continuación.
+Inicializa el SDK de Split y crea un inspector que informe sobre las evaluaciones de las banderas de características a Datadog utilizando el fragmento de código a continuación.
 
 Para más información sobre la inicialización del SDK de Split, consulta la [documentación del SDK de iOS de Split][1].
 
@@ -820,7 +823,7 @@ Para más información sobre la inicialización del SDK de Split, consulta la [d
 {{% /tab %}}
 {{% tab "Android" %}}
 
-Inicializa el SDK de Split y crea un inspector que informe las evaluaciones de las banderas de características a Datadog utilizando el fragmento de código a continuación.
+Inicializa el SDK de Split y crea un inspector que informe sobre las evaluaciones de las banderas de características a Datadog utilizando el fragmento de código a continuación.
 
 Para más información sobre la inicialización del SDK de Split, consulta la [documentación del SDK de Android de Split][1].
 
@@ -849,7 +852,7 @@ val config = SplitClientConfig.builder()
 {{% /tab %}}
 {{% tab "Flutter" %}}
 
-Inicializa el SDK de Split y crea un inspector que informe las evaluaciones de las banderas de características a Datadog utilizando el fragmento de código a continuación.
+Inicializa el SDK de Split y crea un inspector que informe sobre las evaluaciones de las banderas de características a Datadog utilizando el fragmento de código a continuación.
 
 Para más información sobre la inicialización del SDK de Split, consulta la [documentación del plugin de Flutter de Split][1].
 
@@ -869,7 +872,7 @@ Para más información sobre la inicialización del SDK de Split, consulta la [d
 {{% /tab %}}
 {{% tab "React Native" %}}
 
-Inicializa el SDK de Split y crea un listener de impresiones que informe las evaluaciones de las banderas de características a Datadog utilizando el siguiente fragmento de código:
+Inicializa el SDK de Split y crea un listener de impresiones que informe sobre las evaluaciones de las banderas de características a Datadog utilizando el siguiente fragmento de código:
 
 Para más información sobre la inicialización del SDK de Split, consulta la [documentación del SDK de React Native de Split][1].
 
@@ -905,7 +908,7 @@ const client = factory.client();
 
 Inicializa el SDK de Statsig con `statsig.initialize`.
 
-1. Actualiza tu versión del SDK de RUM para navegadores a 4.25.0 o superior.
+1. Actualiza la versión de tu SDK de RUM para navegadores a 4.25.0 o superior.
 2. Inicializa el SDK de RUM y configura el parámetro de inicialización `enableExperimentalFeatures` con `["feature_flags"]`.
 3. Inicializa el SDK de Statsig (`>= v4.34.0`) e implementa la opción `gateEvaluationCallback` como se muestra a continuación:
 
@@ -946,38 +949,38 @@ Statsig actualmente no soporta esta integración. Contacta a support@statsig.com
 
 ## Analiza el rendimiento de tu Feature Flag en RUM
 
-Las flags de características aparecen en el contexto de tus sesiones, vistas y errores de RUM como una lista.
+Las banderas de características aparecen en el contexto de tus sesiones RUM, vistas y errores como una lista.
 
 {{< img src="real_user_monitoring/guide/setup-feature-flag-data-collection/feature-flag-list-rum-event.png" alt="Lista de atributos de Feature Flag en RUM Explorer" style="width:75%;">}}
 
-### Busca flags de características usando el RUM Explorer
-Busca a través de todos los datos recopilados por RUM en el [RUM Explorer][2] para identificar tendencias en las flags de características, analizar patrones con mayor contexto, o exportarlos a [tableros][3] y [monitores][4]. Puedes buscar tus sesiones, vistas o errores en el RUM Explorer, con el atributo `@feature_flags.{flag_name}`.
+### Busca banderas de características usando el RUM Explorer
+Busca a través de todos los datos recopilados por RUM en el [RUM Explorer][2] para identificar tendencias en las banderas de características, analizar patrones con mayor contexto, o exportarlos a [tableros][3] y [monitores][4]. Puedes buscar tus sesiones, vistas o errores en el RUM Explorer, con el atributo `@feature_flags.{flag_name}`.
 
 #### Sesiones
-Filtrando tus **Sesiones** con el atributo `@feature_flags.{flag_name}`, puedes encontrar todas las sesiones en el marco de tiempo dado donde tu flag de características fue evaluada.
+Filtrando tus **Sesiones** con el atributo `@feature_flags.{flag_name}`, puedes encontrar todas las sesiones en el marco de tiempo dado donde tu bandera de características fue evaluada.
 
-{{< img src="real_user_monitoring/guide/setup-feature-flag-data-collection/rum-explorer-session-feature-flag-search.png" alt="Busca sesiones para flags de características en el RUM Explorer" style="width:75%;">}}
+{{< img src="real_user_monitoring/guide/setup-feature-flag-data-collection/rum-explorer-session-feature-flag-search.png" alt="Busca sesiones para banderas de características en el RUM Explorer" style="width:75%;">}}
 
 #### Vistas
-Filtrando tus **Vistas** con el atributo `@feature_flags.{flag_name}`, puedes encontrar las vistas específicas en el marco de tiempo dado donde tu flag de características fue evaluada.
+Filtrando tus **Vistas** con el atributo `@feature_flags.{flag_name}`, puedes encontrar las vistas específicas en el marco de tiempo dado donde tu bandera de características fue evaluada.
 
-{{< img src="real_user_monitoring/guide/setup-feature-flag-data-collection/rum-explorer-view-feature-flag-search.png" alt="Busca vistas para flags de características en el RUM Explorer" style="width:75%;">}}
+{{< img src="real_user_monitoring/guide/setup-feature-flag-data-collection/rum-explorer-view-feature-flag-search.png" alt="Busca vistas para banderas de características en el RUM Explorer" style="width:75%;">}}
 
 #### Errores
-Filtrando tus **Errores** con el atributo `@feature_flags.{flag_name}`, puedes encontrar todos los errores en el marco de tiempo dado que ocurrieron en la vista donde tu flag de características fue evaluada.
+Filtrando tus **Errores** con el atributo `@feature_flags.{flag_name}`, puedes encontrar todos los errores en el marco de tiempo dado que ocurrieron en la vista donde tu bandera de características fue evaluada.
 
-{{< img src="real_user_monitoring/guide/setup-feature-flag-data-collection/rum-explorer-error-feature-flag-search.png" alt="Errores de búsqueda para banderas de características en el Explorador RUM" style="width:75%;">}}
+{{< img src="real_user_monitoring/guide/setup-feature-flag-data-collection/rum-explorer-error-feature-flag-search.png" alt="Buscar errores de banderas de características en el explorador RUM" style="width:75%;">}}
 
 ## Solución de problemas
 
 ### Mis datos de bandera de características no reflejan lo que espero ver
 Las banderas de características aparecen en el contexto de eventos donde se evalúan, lo que significa que deberían aparecer en las vistas en las que se ejecuta la lógica del código de la bandera de características.
 
-Dependiendo de cómo hayas estructurado tu código y configurado tus banderas de características, es posible que veas banderas de características inesperadas aparecer en el contexto de algunos eventos.
+Dependiendo de cómo hayas estructurado tu código y configurado tus banderas de características, puedes ver banderas de características inesperadas aparecer en el contexto de algunos eventos.
 
-Por ejemplo, para ver en qué **Vistas** se está evaluando tu bandera de características, puedes usar el Explorador RUM para hacer una consulta similar:
+Por ejemplo, para ver en qué **Vistas** se está evaluando tu bandera de características, puedes usar el explorador RUM para hacer una consulta similar:
 
-{{< img src="real_user_monitoring/guide/setup-feature-flag-data-collection/feature_flag_view_query.png" alt="Busca vistas para flags de características en el RUM Explorer" style="width:75%;">}}
+{{< img src="real_user_monitoring/guide/setup-feature-flag-data-collection/feature_flag_view_query.png" alt="Busca vistas para banderas de características en el RUM Explorer" style="width:75%;">}}
 
 Aquí hay algunos ejemplos de razones por las cuales tu bandera de características se está evaluando en Vistas no relacionadas que pueden ayudar con tus investigaciones:
 

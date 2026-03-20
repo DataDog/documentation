@@ -6,9 +6,9 @@ aliases:
 - /fr/logs/log_collection/web_browser
 title: Collecte des journaux du navigateur
 ---
-Envoyez des journaux à Datadog depuis les pages de navigateur web avec le SDK des journaux du navigateur.
+Envoyez des journaux à Datadog depuis les pages du navigateur avec le SDK des journaux du navigateur.
 
-Avec le SDK des journaux du navigateur, vous pouvez envoyer des journaux directement à Datadog depuis les pages de navigateur web et tirer parti des fonctionnalités suivantes :
+Avec le SDK des journaux du navigateur, vous pouvez envoyer des journaux directement à Datadog depuis les pages du navigateur et tirer parti des fonctionnalités suivantes :
 
 - Utilisez le SDK comme un logger. Tout est transféré à Datadog sous forme de documents JSON.
 - Ajoutez `context` et des attributs personnalisés supplémentaires à chaque journal envoyé.
@@ -237,7 +237,7 @@ Ajoutez le code généré dans la balise head (devant toutes les autres balises 
 
 Le SDK doit être initialisé le plus tôt possible dans le cycle de vie de l'application. Cela garantit que tous les journaux sont capturés correctement.
 
-Dans le snippet d'initialisation, définissez le token client et le site. Voir la liste complète des [paramètres d'initialisation][4].
+Dans le code d'initialisation, définissez le jeton client et le site. Voir la liste complète des [paramètres d'initialisation][4].
 
 {{< tabs >}}
 {{% tab "NPM" %}}
@@ -335,7 +335,7 @@ window.DD_LOGS.onReady(function () {
 })
 ```
 
-**Remarque** : Les appels API précoces doivent être enveloppés dans le `window.DD_LOGS.onReady()` callback. Cela garantit que le code n'est exécuté qu'une fois que le SDK est correctement chargé.
+**Remarque** : Les appels API précoces doivent être enveloppés dans le `window.DD_LOGS.onReady()` rappel. Cela garantit que le code n'est exécuté qu'une fois que le SDK est correctement chargé.
 
 {{% /tab %}}
 {{% tab "CDN synchrone" %}}
@@ -378,7 +378,7 @@ Les résultats sont les mêmes que ce soit en utilisant NPM, CDN asynchrone ou C
 }
 ```
 
-Le SDK Logs ajoute les informations suivantes par défaut (d'autres champs peuvent être ajoutés si le SDK RUM est
+Le SDK Logs ajoute par défaut les informations suivantes (d'autres champs peuvent être ajoutés si le SDK RUM est
 présent) :
 
 - `date`
@@ -386,14 +386,14 @@ présent) :
 - `view.referrer`
 - `session_id` (uniquement si une session est utilisée)
 
-Le backend Datadog ajoute d'autres champs, comme :
+Le backend Datadog ajoute d'autres champs, tels que :
 
 - `http.useragent`
 - `network.client.ip`
 
 ### Suivi des erreurs
 
-Le SDK des logs du navigateur Datadog permet le suivi manuel des erreurs en utilisant le paramètre optionnel `error` (disponible dans le SDK v4.36.0+). Lorsqu'une instance d'une [Erreur JavaScript][8] est fournie, le SDK extrait les informations pertinentes (type, message, trace de la pile) de l'erreur.
+Le SDK des journaux du navigateur Datadog permet un suivi manuel des erreurs en utilisant le paramètre optionnel `error` (disponible dans le SDK v4.36.0+). Lorsqu'une instance d'une [Erreur JavaScript][8] est fournie, le SDK extrait les informations pertinentes (type, message, trace de la pile) de l'erreur.
 
 ```typescript
 logger.{debug|info|warn|error}(message: string, messageContext?: Context, error?: Error)
@@ -429,7 +429,7 @@ try {
 }
 ```
 
-**Remarque** : Les appels API précoces doivent être enveloppés dans le `window.DD_LOGS.onReady()` callback. Cela garantit que le code n'est exécuté qu'une fois que le SDK est correctement chargé.
+**Remarque** : Les appels API précoces doivent être enveloppés dans le `window.DD_LOGS.onReady()` rappel. Cela garantit que le code n'est exécuté qu'une fois que le SDK est correctement chargé.
 
 {{% /tab %}}
 {{% tab "CDN synchrone" %}}
@@ -471,7 +471,7 @@ Les résultats sont les mêmes que ce soit en utilisant NPM, CDN asynchrone ou C
 
 ### Fonction de journalisation générique
 
-Le SDK des logs du navigateur Datadog ajoute des fonctions abrégées (`.debug`, `.info`, `.warn`, `.error`) aux journaux pour plus de commodité. Une fonction de journalisation générique est également disponible, exposant le paramètre `status` :
+Le SDK des journaux du navigateur Datadog ajoute des fonctions abrégées (`.debug`, `.info`, `.warn`, `.error`) aux journaux pour plus de commodité. Une fonction de journalisation générique est également disponible, exposant le paramètre `status` :
 
 ```typescript
 log(message: string, messageContext?: Context, status? = 'debug' | 'info' | 'warn' | 'error', error?: Error)
@@ -495,7 +495,7 @@ window.DD_LOGS.onReady(function() {
 })
 ```
 
-**Remarque** : Les appels API précoces doivent être enveloppés dans le `window.DD_LOGS.onReady()` callback. Cela garantit que le code n'est exécuté qu'une fois que le SDK est correctement chargé.
+**Remarque** : Les appels API précoces doivent être enveloppés dans le `window.DD_LOGS.onReady()` rappel. Cela garantit que le code n'est exécuté qu'une fois que le SDK est correctement chargé.
 
 {{% /tab %}}
 {{% tab "CDN synchrone" %}}
@@ -522,11 +522,11 @@ Les espaces réservés dans les exemples ci-dessus sont décrits ci-dessous :
 
 ## Utilisation avancée
 
-### Nettoyez les données sensibles de vos journaux de navigateur
+### Supprimez les données sensibles de vos journaux de navigateur
 
-Si vos journaux de navigateur contiennent des informations sensibles à masquer, configurez le SDK du navigateur pour nettoyer les séquences sensibles en utilisant le `beforeSend` rappel lors de l'initialisation du collecteur de journaux de navigateur.
+Si vos journaux de navigateur contiennent des informations sensibles qui doivent être supprimées, configurez le SDK du navigateur pour supprimer les séquences sensibles en utilisant le `beforeSend` rappel lors de l'initialisation du collecteur de journaux du navigateur.
 
-La fonction de rappel `beforeSend` peut être invoquée avec deux arguments : l'événement `log` et `context`. Cette fonction vous donne accès à chaque journal collecté par le SDK du navigateur avant qu'il ne soit envoyé à Datadog, et vous permet d'utiliser le contexte pour ajuster les propriétés de tout journal. Le contexte contient des informations supplémentaires liées à l'événement, mais pas nécessairement incluses dans l'événement. Vous pouvez généralement utiliser ces informations pour [enrichir][11] votre événement ou [le rejeter][12].
+La fonction de rappel `beforeSend` peut être invoquée avec deux arguments : l'événement `log` et `context`. Cette fonction vous donne accès à chaque journal collecté par le SDK du navigateur avant qu'il ne soit envoyé à Datadog, et vous permet d'utiliser le contexte pour ajuster les propriétés de tout journal. Le contexte contient des informations supplémentaires liées à l'événement, mais pas nécessairement incluses dans l'événement. Vous pouvez généralement utiliser ces informations pour [enrichir][11] votre événement ou [le supprimer][12].
 
 ```javascript
 function beforeSend(log, context)
@@ -539,7 +539,7 @@ Les valeurs potentielles `context` sont :
 | `isAborted` | Booléen | Pour les événements de journal réseau, cette propriété vous indique si la requête échouée a été annulée par l'application, auquel cas vous pourriez ne pas vouloir envoyer cet événement car il peut avoir été intentionnellement annulé. |
 | `handlingStack` | Chaîne | Une trace de pile de l'endroit où l'événement de journal a été traité. Cela peut être utilisé pour identifier de quel [micro-frontend][9] le journal a été envoyé. |
 
-Pour masquer les adresses e-mail de vos URL d'application web :
+Pour supprimer les adresses e-mail de vos URL d'application web :
 
 {{< tabs >}}
 {{% tab "NPM" %}}
@@ -573,7 +573,7 @@ window.DD_LOGS.onReady(function() {
 })
 ```
 
-**Remarque** : Les appels API précoces doivent être enveloppés dans le `window.DD_LOGS.onReady()` callback. Cela garantit que le code n'est exécuté qu'une fois que le SDK est correctement chargé.
+**Remarque** : Les appels API précoces doivent être enveloppés dans le `window.DD_LOGS.onReady()` rappel. Cela garantit que le code n'est exécuté qu'une fois que le SDK est correctement chargé.
 
 {{% /tab %}}
 {{% tab "CDN synchrone" %}}
@@ -605,11 +605,11 @@ Les propriétés suivantes sont automatiquement collectées par le SDK et pourra
 | `error.stack`   | Chaîne | La trace de pile ou des informations complémentaires sur l'erreur.                                    |
 | `http.url`      | Chaîne | L'URL HTTP.                                                                                    |
 
-### Rejeter des journaux spécifiques
+### Supprimer des journaux spécifiques
 
-La fonction de rappel `beforeSend` vous permet également de rejeter un journal avant qu'il ne soit envoyé à Datadog.
+La fonction de rappel `beforeSend` vous permet également de supprimer un journal avant qu'il ne soit envoyé à Datadog.
 
-Pour rejeter les erreurs réseau si leur statut est 404 :
+Pour supprimer les erreurs réseau si leur statut est 404 :
 
 {{< tabs >}}
 {{% tab "NPM" %}}
@@ -647,7 +647,7 @@ window.DD_LOGS.onReady(function() {
 })
 ```
 
-**Remarque** : Les appels API précoces doivent être enveloppés dans le `window.DD_LOGS.onReady()` callback. Cela garantit que le code n'est exécuté qu'une fois que le SDK est correctement chargé.
+**Remarque** : Les appels API précoces doivent être enveloppés dans le `window.DD_LOGS.onReady()` rappel. Cela garantit que le code n'est exécuté qu'une fois que le SDK est correctement chargé.
 
 {{% /tab %}}
 {{% tab "CDN synchrone" %}}
@@ -673,11 +673,11 @@ window.DD_LOGS &&
 
 ### Définir plusieurs enregistreurs
 
-Le SDK des journaux de navigateur Datadog contient un enregistreur par défaut, mais il est possible de définir différents enregistreurs.
+Le SDK des journaux du navigateur Datadog contient un enregistreur par défaut, mais il est possible de définir différents enregistreurs.
 
 #### Créer un nouvel enregistreur
 
-Après l'initialisation du SDK des journaux de navigateur Datadog, utilisez l'API `createLogger` pour définir un nouvel enregistreur :
+Après l'initialisation du SDK des journaux du navigateur Datadog, utilisez l'API `createLogger` pour définir un nouvel enregistreur :
 
 ```typescript
 createLogger (name: string, conf?: {
@@ -687,7 +687,7 @@ createLogger (name: string, conf?: {
 })
 ```
 
-**Remarque** : Ces paramètres peuvent être définis avec les API [setLevel](#filter-by-status), [setHandler](#change-the-destination) et [setContext](#overwrite-context).
+**Note** : Ces paramètres peuvent être définis avec les API [setLevel](#filter-by-status), [setHandler](#change-the-destination) et [setContext](#overwrite-context).
 
 #### Obtenir un enregistreur personnalisé
 
@@ -745,7 +745,7 @@ window.DD_LOGS.onReady(function () {
 })
 ```
 
-**Remarque** : Les appels API précoces doivent être enveloppés dans le `window.DD_LOGS.onReady()` callback. Cela garantit que le code n'est exécuté qu'une fois que le SDK est correctement chargé.
+**Remarque** : Les appels API précoces doivent être enveloppés dans le `window.DD_LOGS.onReady()` rappel. Cela garantit que le code n'est exécuté qu'une fois que le SDK est correctement chargé.
 
 {{% /tab %}}
 {{% tab "CDN synchrone" %}}
@@ -780,7 +780,7 @@ if (window.DD_LOGS) {
 
 #### Contexte global
 
-Après l'initialisation du SDK des journaux de navigateur Datadog, il est possible de :
+Après l'initialisation du SDK des journaux du navigateur Datadog, il est possible de :
 
 - Définir l'ensemble du contexte pour tous vos enregistreurs avec l'API `setGlobalContext (context: object)`.
 - Ajouter un contexte à tous vos enregistreurs avec l'API `setGlobalContextProperty (key: string, value: any)`.
@@ -853,7 +853,7 @@ window.DD_LOGS.onReady(function () {
 })
 ```
 
-**Remarque** : Les appels API précoces doivent être enveloppés dans le `window.DD_LOGS.onReady()` callback. Cela garantit que le code n'est exécuté qu'une fois que le SDK est correctement chargé.
+**Remarque** : Les appels API précoces doivent être enveloppés dans le `window.DD_LOGS.onReady()` rappel. Cela garantit que le code n'est exécuté qu'une fois que le SDK est correctement chargé.
 
 {{% /tab %}}
 {{% tab "CDN synchrone" %}}
@@ -947,7 +947,7 @@ window.DD_LOGS.onReady(function () {
 })
 ```
 
-**Remarque** : Les appels API précoces doivent être enveloppés dans le `window.DD_LOGS.onReady()` callback. Cela garantit que le code n'est exécuté qu'une fois que le SDK est correctement chargé.
+**Remarque** : Les appels API précoces doivent être enveloppés dans le `window.DD_LOGS.onReady()` rappel. Cela garantit que le code n'est exécuté qu'une fois que le SDK est correctement chargé.
 
 {{% /tab %}}
 {{% tab "CDN synchrone" %}}
@@ -1037,7 +1037,7 @@ window.DD_LOGS.onReady(function () {
 })
 ```
 
-**Remarque** : Les appels API précoces doivent être enveloppés dans le `window.DD_LOGS.onReady()` callback. Cela garantit que le code n'est exécuté qu'une fois que le SDK est correctement chargé.
+**Remarque** : Les appels API précoces doivent être enveloppés dans le `window.DD_LOGS.onReady()` rappel. Cela garantit que le code n'est exécuté qu'une fois que le SDK est correctement chargé.
 
 {{% /tab %}}
 {{% tab "CDN synchrone" %}}
@@ -1072,22 +1072,22 @@ Par défaut, les contextes sont stockés dans la mémoire de la page actuelle, c
 
 Pour les ajouter à tous les événements de la session, ils doivent être attachés à chaque page.
 
-Avec l'introduction de l'option de configuration `storeContextsAcrossPages` dans la version v4.49.0 du SDK du navigateur, ces contextes peuvent être stockés dans [`localStorage`][9], permettant les comportements suivants :
+Avec l'introduction de l'option de configuration `storeContextsAcrossPages` dans la version 4.49.0 du SDK du navigateur, ces contextes peuvent être stockés dans [`localStorage`][9], permettant les comportements suivants :
 
 - Les contextes sont préservés après un rechargement complet
 - Les contextes sont synchronisés entre les onglets ouverts sur la même origine
 
-Cependant, cette fonctionnalité comporte certaines **limitations** :
+Cependant, cette fonctionnalité présente certaines **limitations** :
 
 - Il n'est pas recommandé de définir des informations personnellement identifiables (PII) dans ces contextes, car les données stockées dans `localStorage` survivent à la session utilisateur
 - La fonctionnalité est incompatible avec les options `trackSessionAcrossSubdomains` car `localStorage` les données ne sont partagées qu'entre la même origine (login.site.com ≠ app.site.com)
 - `localStorage` est limité à 5 MiB par origine, donc les données spécifiques à l'application, les contextes Datadog et d'autres données tierces stockées dans `localStorage` doivent être dans cette limite pour éviter tout problème
 
-#### Contexte du journaliseur
+#### Contexte du logger
 
-Après qu'un journaliseur soit créé, il est possible de :
+Après qu'un logger soit créé, il est possible de :
 
-- Définir l'ensemble du contexte pour votre journaliseur avec l'API `setContext (context: object)`.
+- Définir l'ensemble du contexte pour votre logger avec l'API `setContext (context: object)`.
 - Définissez une propriété de contexte sur votre logger avec l'API `setContextProperty (key: string, value: any)` :
 
 {{< tabs >}}
@@ -1114,7 +1114,7 @@ window.DD_LOGS.onReady(function () {
 })
 ```
 
-**Remarque** : Les appels API précoces doivent être enveloppés dans le `window.DD_LOGS.onReady()` callback. Cela garantit que le code n'est exécuté qu'une fois que le SDK est correctement chargé.
+**Remarque** : Les appels API précoces doivent être enveloppés dans le `window.DD_LOGS.onReady()` rappel. Cela garantit que le code n'est exécuté qu'une fois que le SDK est correctement chargé.
 
 {{% /tab %}}
 {{% tab "CDN synchrone" %}}
@@ -1158,7 +1158,7 @@ window.DD_LOGS.onReady(function () {
 })
 ```
 
-**Remarque** : Les appels API précoces doivent être enveloppés dans le `window.DD_LOGS.onReady()` callback. Cela garantit que le code n'est exécuté qu'une fois que le SDK est correctement chargé.
+**Remarque** : Les appels API précoces doivent être enveloppés dans le `window.DD_LOGS.onReady()` rappel. Cela garantit que le code n'est exécuté qu'une fois que le SDK est correctement chargé.
 
 {{% /tab %}}
 {{% tab "CDN synchrone" %}}
@@ -1205,7 +1205,7 @@ window.DD_LOGS.onReady(function () {
 })
 ```
 
-**Remarque** : Les appels API précoces doivent être enveloppés dans le `window.DD_LOGS.onReady()` callback. Cela garantit que le code n'est exécuté qu'une fois que le SDK est correctement chargé.
+**Remarque** : Les appels API précoces doivent être enveloppés dans le `window.DD_LOGS.onReady()` rappel. Cela garantit que le code n'est exécuté qu'une fois que le SDK est correctement chargé.
 
 {{% /tab %}}
 {{% tab "CDN synchrone" %}}
@@ -1224,7 +1224,7 @@ window.DD_LOGS && window.DD_LOGS.logger.setHandler(['<HANDLER1>', '<HANDLER2>'])
 
 ### Consentement au suivi des utilisateurs
 
-Pour être conforme au RGPD, à la CCPA et à des réglementations similaires, le SDK des journaux du navigateur vous permet de fournir la valeur de consentement au suivi lors de l'initialisation.
+Pour être conforme au RGPD, CCPA et à des réglementations similaires, le SDK des journaux du navigateur vous permet de fournir la valeur de consentement au suivi lors de l'initialisation.
 
 Le paramètre d'initialisation `trackingConsent` peut être l'une des valeurs suivantes :
 
@@ -1236,7 +1236,7 @@ Pour changer la valeur de consentement au suivi après l'initialisation du SDK d
 - lorsqu'il est changé de `"granted"` à `"not-granted"`, la session de journaux est arrêtée et les données ne sont plus envoyées à Datadog.
 - lorsqu'il est changé de `"not-granted"` à `"granted"`, une nouvelle session de journaux est créée si aucune session précédente n'est active, et la collecte de données reprend.
 
-Cet état n'est pas synchronisé entre les onglets ni persistant entre les navigations. Il est de votre responsabilité de fournir la décision de l'utilisateur lors de l'initialisation du SDK Logs Browser ou en utilisant `setTrackingConsent()`.
+Cet état n'est pas synchronisé entre les onglets ni conservé entre les navigations. Il est de votre responsabilité de fournir la décision de l'utilisateur lors de l'initialisation du SDK Logs Browser ou en utilisant `setTrackingConsent()`.
 
 Lorsque `setTrackingConsent()` est utilisé avant `init()`, la valeur fournie prend le pas sur le paramètre d'initialisation.
 
@@ -1293,13 +1293,13 @@ acceptCookieBannerButton.addEventListener('click', () => {
 
 ### Accéder au contexte interne
 
-Après l'initialisation du SDK de journaux de navigateur Datadog, vous pouvez accéder au contexte interne du SDK. Cela vous permet d'accéder au `session_id`.
+Après l'initialisation du SDK de journaux du navigateur Datadog, vous pouvez accéder au contexte interne du SDK. Cela vous permet d'accéder au `session_id`.
 
 ```typescript
 getInternalContext (startTime?: 'number' | undefined)
 ```
 
-Vous pouvez optionnellement utiliser le paramètre `startTime` pour obtenir le contexte d'un moment spécifique. Si le paramètre est omis, le contexte actuel est renvoyé.
+Vous pouvez optionnellement utiliser le paramètre `startTime` pour obtenir le contexte d'un moment spécifique. Si le paramètre est omis, le contexte actuel est retourné.
 
 {{< tabs >}}
 {{% tab "NPM" %}}

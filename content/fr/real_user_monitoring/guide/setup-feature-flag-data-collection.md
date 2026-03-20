@@ -15,9 +15,9 @@ further_reading:
 title: Commencer avec les données de drapeaux de fonctionnalités dans RUM
 ---
 ## Aperçu
-Les données des drapeaux de fonctionnalités vous offrent une meilleure visibilité sur l'expérience utilisateur et le suivi des performances en vous permettant de déterminer quels utilisateurs se voient montrer une fonctionnalité spécifique et si tout changement que vous introduisez impacte votre expérience utilisateur ou affecte négativement les performances.
+Les données des drapeaux de fonctionnalités vous offrent une meilleure visibilité sur l'expérience utilisateur et le suivi des performances en vous permettant de déterminer quels utilisateurs se voient présenter une fonctionnalité spécifique et si tout changement que vous introduisez impacte votre expérience utilisateur ou affecte négativement les performances.
 
-En enrichissant vos données RUM avec des données de drapeaux de fonctionnalités, vous pouvez être sûr que votre fonctionnalité est lancée avec succès sans causer involontairement un bug ou une régression de performance. Avec cette couche supplémentaire d'informations, vous pouvez corréler les versions de fonctionnalités avec les performances, identifier les problèmes liés à des versions spécifiques et résoudre les problèmes plus rapidement.
+Enrichissant vos données RUM avec des données de drapeaux de fonctionnalités, vous pouvez être sûr que votre fonctionnalité se lance avec succès sans causer involontairement un bug ou une régression de performance. Avec cette couche supplémentaire d'informations, vous pouvez corréler les versions de fonctionnalités avec les performances, identifier les problèmes liés à des versions spécifiques et résoudre les problèmes plus rapidement.
 
 ## Configuration
 
@@ -32,6 +32,7 @@ Le suivi des drapeaux de fonctionnalités est disponible dans le SDK RUM pour na
 Si vous utilisez une version antérieure à 5.17.0, initialisez le SDK RUM et configurez le paramètre d'initialisation `enableExperimentalFeatures` avec `["feature_flags"]` pour commencer à collecter des données de drapeaux de fonctionnalités.
 
 {{% collapse-content title="NPM" level="h4" %}}
+
 ```javascript
   import { datadogRum } from '@datadog/browser-rum';
 
@@ -45,6 +46,7 @@ Si vous utilisez une version antérieure à 5.17.0, initialisez le SDK RUM et co
 {{% /collapse-content %}}
 
 {{% collapse-content title="CDN asynchrone" level="h4" %}}
+
 ```javascript
 window.DD_RUM.onReady(function() {
     window.DD_RUM.init({
@@ -56,7 +58,8 @@ window.DD_RUM.onReady(function() {
 ```
 {{% /collapse-content %}}
 
-{{% collapse-content title="CDN synchronisé" level="h4" %}}
+{{% collapse-content title="CDN synchrone" level="h4" %}}
+
 ```javascript
 window.DD_RUM &&
     window.DD_RUM.init({
@@ -74,37 +77,37 @@ window.DD_RUM &&
 {{% /tab %}}
 {{% tab "Android" %}}
 
-Le suivi des drapeaux de fonctionnalités est disponible dans le SDK RUM pour Android. Pour commencer, configurez la [surveillance RUM Android][1]. Vous avez besoin de la version >= 1.18.0 du SDK RUM Android.
+Le suivi des drapeaux de fonctionnalités est disponible dans le SDK RUM pour Android. Pour commencer, configurez [la surveillance RUM Android][1]. Vous avez besoin de la version >= 1.18.0 du SDK RUM Android.
 
 [1]: /fr/real_user_monitoring/application_monitoring/android/setup/
 {{% /tab %}}
 {{% tab "Flutter" %}}
 
-Le suivi des drapeaux de fonctionnalités est disponible pour vos applications Flutter. Pour commencer, configurez la [surveillance RUM Flutter][1]. Vous avez besoin de la version >= 1.3.2 du plugin Flutter.
+Le suivi des drapeaux de fonctionnalités est disponible pour vos applications Flutter. Pour commencer, configurez [la surveillance RUM Flutter][1]. Vous avez besoin de la version >= 1.3.2 du plugin Flutter.
 
 [1]: /fr/real_user_monitoring/application_monitoring/flutter/setup/
 {{% /tab %}}
 {{% tab "iOS" %}}
 
-Le suivi des drapeaux de fonctionnalités est disponible dans le SDK RUM iOS. Pour commencer, configurez la [surveillance RUM iOS][1]. Vous avez besoin de la version >= 1.16.0 du SDK RUM iOS.
+Le suivi des drapeaux de fonctionnalités est disponible dans le SDK RUM iOS. Pour commencer, configurez [la surveillance RUM iOS][1]. Vous avez besoin de la version >= 1.16.0 du SDK RUM iOS.
 
 [1]: /fr/real_user_monitoring/application_monitoring/ios/setup
 {{% /tab %}}
 {{% tab "Kotlin Multiplatform" %}}
 
-Le suivi des drapeaux de fonctionnalités est disponible pour vos applications Kotlin Multiplatform. Pour commencer, configurez la [surveillance RUM Kotlin Multiplatform][1].
+Le suivi des drapeaux de fonctionnalités est disponible pour vos applications Kotlin Multiplatform. Pour commencer, configurez [la surveillance RUM Kotlin Multiplatform][1].
 
 [1]: /fr/real_user_monitoring/application_monitoring/kotlin_multiplatform
 {{% /tab %}}
 {{% tab "React Native" %}}
 
-Le suivi des drapeaux de fonctionnalités est disponible pour vos applications React Native. Pour commencer, configurez la [surveillance RUM React Native][1]. Vous avez besoin de la version >= 1.7.0 du SDK RUM React Native.
+Le suivi des drapeaux de fonctionnalités est disponible pour vos applications React Native. Pour commencer, configurez [la surveillance RUM React Native][1]. Vous avez besoin de la version >= 1.7.0 du SDK RUM React Native.
 
 [1]: /fr/real_user_monitoring/application_monitoring/react_native/setup
 {{% /tab %}}
 {{% tab "Unity" %}}
 
-Le suivi des drapeaux de fonctionnalités est disponible pour vos applications Unity. Pour commencer, configurez la [surveillance RUM Unity][1].
+Le suivi des drapeaux de fonctionnalités est disponible pour vos applications Unity. Pour commencer, configurez [la surveillance RUM Unity][1].
 
 [1]: /fr/real_user_monitoring/application_monitoring/unity/setup
 {{% /tab %}}
@@ -125,7 +128,7 @@ Datadog prend en charge les intégrations avec :
 {{< tabs >}}
 {{% tab "Navigateur" %}}
 
-Initialisez le SDK d'Amplitude et créez un écouteur d'exposition signalant les évaluations des drapeaux de fonctionnalités à Datadog à l'aide du code suivant :
+Initialisez le SDK d'Amplitude et créez un écouteur d'exposition signalant les évaluations des drapeaux de fonctionnalités à Datadog en utilisant le snippet de code suivant :
 
 Pour plus d'informations sur l'initialisation du SDK d'Amplitude, consultez la [documentation du SDK JavaScript d'Amplitude][1].
 
@@ -146,7 +149,7 @@ Pour plus d'informations sur l'initialisation du SDK d'Amplitude, consultez la [
 {{% /tab %}}
 {{% tab "iOS" %}}
 
-Initialisez le SDK d'Amplitude et créez un inspecteur signalant les évaluations des drapeaux de fonctionnalités à Datadog à l'aide du code ci-dessous.
+Initialisez le SDK d'Amplitude et créez un inspecteur signalant les évaluations des drapeaux de fonctionnalités à Datadog en utilisant le snippet de code ci-dessous.
 
 Pour plus d'informations sur l'initialisation du SDK d'Amplitude, consultez la [documentation du SDK iOS d'Amplitude][1].
 
@@ -172,7 +175,7 @@ Pour plus d'informations sur l'initialisation du SDK d'Amplitude, consultez la [
 {{% /tab %}}
 {{% tab "Android" %}}
 
-Initialisez le SDK d'Amplitude et créez un inspecteur signalant les évaluations des drapeaux de fonctionnalités à Datadog à l'aide du code ci-dessous.
+Initialisez le SDK d'Amplitude et créez un inspecteur signalant les évaluations des drapeaux de fonctionnalités à Datadog en utilisant le snippet de code ci-dessous.
 
 Pour plus d'informations sur l'initialisation du SDK d'Amplitude, consultez la [documentation du SDK Android d'Amplitude][1].
 
@@ -718,7 +721,7 @@ onEvent(EventType.Evaluation, ({ featureKey, variation }) => {
 {{< tabs >}}
 {{% tab "Navigateur" %}}
 
-Initialisez le SDK de LaunchDarkly et créez un inspecteur rapportant les évaluations des drapeaux de fonctionnalités à Datadog en utilisant le code ci-dessous.
+Initialisez le SDK de LaunchDarkly et créez une fonctionnalité d'inspection signalant les évaluations des drapeaux de fonctionnalités à Datadog en utilisant l'extrait de code ci-dessous.
 
  Pour plus d'informations sur l'initialisation du SDK de LaunchDarkly, consultez la [documentation du SDK JavaScript de LaunchDarkly][1].
 
@@ -771,7 +774,7 @@ LaunchDarkly ne prend actuellement pas en charge cette intégration. Créez un t
 {{< tabs >}}
 {{% tab "Navigateur" %}}
 
-Initialisez le SDK de Split et créez un écouteur d'impression rapportant les évaluations des drapeaux de fonctionnalités à Datadog en utilisant le code suivant :
+Initialisez le SDK de Split et créez un écouteur d'impression signalant les évaluations des drapeaux de fonctionnalités à Datadog en utilisant l'extrait de code suivant :
 
 Pour plus d'informations sur l'initialisation du SDK de Split, consultez la [documentation du SDK JavaScript de Split][1].
 
@@ -800,7 +803,7 @@ const client = factory.client();
 {{% /tab %}}
 {{% tab "iOS" %}}
 
-Initialisez le SDK de Split et créez un inspecteur rapportant les évaluations des drapeaux de fonctionnalités à Datadog en utilisant le code ci-dessous.
+Initialisez le SDK de Split et créez une fonctionnalité d'inspection signalant les évaluations des drapeaux de fonctionnalités à Datadog en utilisant l'extrait de code ci-dessous.
 
 Pour plus d'informations sur l'initialisation du SDK de Split, consultez la [documentation du SDK iOS de Split][1].
 
@@ -820,7 +823,7 @@ Pour plus d'informations sur l'initialisation du SDK de Split, consultez la [doc
 {{% /tab %}}
 {{% tab "Android" %}}
 
-Initialisez le SDK de Split et créez un inspecteur rapportant les évaluations des drapeaux de fonctionnalités à Datadog en utilisant le code ci-dessous.
+Initialisez le SDK de Split et créez une fonctionnalité d'inspection signalant les évaluations des drapeaux de fonctionnalités à Datadog en utilisant l'extrait de code ci-dessous.
 
 Pour plus d'informations sur l'initialisation du SDK de Split, consultez la [documentation du SDK Android de Split][1].
 
@@ -849,7 +852,7 @@ val config = SplitClientConfig.builder()
 {{% /tab %}}
 {{% tab "Flutter" %}}
 
-Initialisez le SDK de Split et créez un inspecteur rapportant les évaluations des drapeaux de fonctionnalités à Datadog en utilisant le code ci-dessous.
+Initialisez le SDK de Split et créez une fonctionnalité d'inspection signalant les évaluations des drapeaux de fonctionnalités à Datadog en utilisant l'extrait de code ci-dessous.
 
 Pour plus d'informations sur l'initialisation du SDK de Split, consultez la [documentation du plugin Flutter de Split][1].
 
@@ -869,7 +872,7 @@ Pour plus d'informations sur l'initialisation du SDK de Split, consultez la [doc
 {{% /tab %}}
 {{% tab "React Native" %}}
 
-Initialisez le SDK de Split et créez un écouteur d'impression rapportant les évaluations des drapeaux de fonctionnalités à Datadog en utilisant le code suivant :
+Initialisez le SDK de Split et créez un écouteur d'impression signalant les évaluations des drapeaux de fonctionnalités à Datadog en utilisant l'extrait de code suivant :
 
 Pour plus d'informations sur l'initialisation du SDK de Split, consultez la [documentation du SDK React Native de Split][1].
 
@@ -951,7 +954,7 @@ Les Feature Flags apparaissent dans le contexte de vos sessions RUM, vues et err
 {{< img src="real_user_monitoring/guide/setup-feature-flag-data-collection/feature-flag-list-rum-event.png" alt="Liste des attributs des Feature Flags dans RUM Explorer" style="width:75%;">}}
 
 ### Recherchez des Feature Flags en utilisant RUM Explorer
-Parcourez toutes les données collectées par RUM dans le [RUM Explorer][2] pour faire ressortir les tendances sur les Feature Flags, analyser les modèles avec un plus grand contexte, ou les exporter vers des [tableaux de bord][3] et des [moniteurs][4]. Vous pouvez rechercher vos sessions, vues ou erreurs dans RUM Explorer, avec l'attribut `@feature_flags.{flag_name}`.
+Parcourez toutes les données collectées par RUM dans le [RUM Explorer][2] pour faire ressortir les tendances sur les Feature Flags, analyser les modèles avec un contexte plus large, ou les exporter vers des [tableaux de bord][3] et des [moniteurs][4]. Vous pouvez rechercher vos sessions, vues ou erreurs dans RUM Explorer, avec l'attribut `@feature_flags.{flag_name}`.
 
 #### Sessions
 En filtrant vos **Sessions** avec l'attribut `@feature_flags.{flag_name}`, vous pouvez trouver toutes les sessions dans la période donnée où votre Feature Flag a été évalué.
@@ -970,10 +973,10 @@ En filtrant vos **Erreurs** avec l'attribut `@feature_flags.{flag_name}`, vous p
 
 ## Dépannage
 
-### Mes données de Feature Flag ne reflètent pas ce que j'attends de voir
+### Mes données de Feature Flag ne reflètent pas ce que je m'attends à voir
 Les Feature Flags apparaissent dans le contexte des événements où ils sont évalués, ce qui signifie qu'ils devraient apparaître sur les vues sur lesquelles la logique du code du Feature Flag est exécutée.
 
-En fonction de la façon dont vous avez structuré votre code et configuré vos Feature Flags, vous pouvez voir des Feature Flags inattendus apparaître dans le contexte de certains événements.
+En fonction de la manière dont vous avez structuré votre code et configuré vos Feature Flags, vous pourriez voir des Feature Flags inattendus apparaître dans le contexte de certains événements.
 
 Par exemple, pour voir sur quelles **Vues** votre drapeau de fonctionnalité est évalué, vous pouvez utiliser l'Explorateur RUM pour effectuer une requête similaire :
 

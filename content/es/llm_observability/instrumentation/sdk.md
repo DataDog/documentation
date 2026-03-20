@@ -26,7 +26,7 @@ Los SDK de Observabilidad de LLM de Datadog proporcionan instrumentación autom�
 
 ### Requisitos
 
-- Una [clave API de Datadog][1].
+- Una [clave de API de Datadog][1].
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 
@@ -53,7 +53,7 @@ Los SDK de Observabilidad de LLM de Datadog proporcionan instrumentación autom�
 {{% /tab %}}
 {{< /tabs >}}
 
-{{% collapse-content title="Configuración desde la línea de comandos" level="h3" expanded=false id="command-line-setup" %}}
+{{% collapse-content title="Configuración de línea de comandos" level="h3" expanded=false id="command-line-setup" %}}
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -83,19 +83,19 @@ DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME> ddtrace-run <YOUR_APP_STARTUP_COMMAND>
 
 `DD_LLMOBS_AGENTLESS_ENABLED`
 : opcional - _entero o cadena_ - **predeterminado**: `false`
-<br />Solo requerido si no estás utilizando el Agente de Datadog, en cuyo caso esto debe configurarse a `1` o `true`.
+<br />Solo es necesario si no está utilizando el Agente de Datadog, en cuyo caso esto debe configurarse en `1` o `true`.
 
 `DD_API_KEY`
 : opcional - _cadena_
-<br />Tu clave API de Datadog. Solo requerido si no estás utilizando el Agente de Datadog.
+<br />Su clave API de Datadog. Solo es necesario si no está utilizando el Agente de Datadog.
 
 [1]: /es/getting_started/tagging/unified_service_tagging?tab=kubernetes#non-containerized-environment
 {{% /tab %}}
 
 {{% tab "Node.js" %}}
-Habilita la Observabilidad LLM ejecutando tu aplicación con `NODE_OPTIONS="--import dd-trace/initialize.mjs"` y especificando las variables de entorno requeridas.
+Habilite la Observabilidad LLM ejecutando su aplicación con `NODE_OPTIONS="--import dd-trace/initialize.mjs"` y especificando las variables de entorno requeridas.
 
-**Nota**: `dd-trace/initialize.mjs` activa automáticamente todas las integraciones APM.
+**Nota**: `dd-trace/initialize.mjs` activa automáticamente todas las integraciones de APM.
 
 ```shell
 DD_SITE=<YOUR_DATADOG_SITE> DD_API_KEY=<YOUR_API_KEY> DD_LLMOBS_ENABLED=1 \
@@ -106,7 +106,7 @@ DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME> NODE_OPTIONS="--import dd-trace/initialize.m
 
 `DD_SITE`
 : requerido - _cadena_
-<br />El sitio de Datadog para enviar tus datos LLM. Tu sitio es {{< region-param key="dd_site" code="true" >}}.
+<br />El sitio de Datadog para enviar sus datos LLM. Tu sitio es {{< region-param key="dd_site" code="true" >}}.
 
 `DD_LLMOBS_ENABLED`
 : requerido - _entero o cadena_
@@ -119,17 +119,17 @@ DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME> NODE_OPTIONS="--import dd-trace/initialize.m
 
 `DD_LLMOBS_AGENTLESS_ENABLED`
 : opcional - _entero o cadena_ - **predeterminado**: `false`
-<br />Solo requerido si no estás utilizando el Agente de Datadog, en cuyo caso esto debe configurarse a `1` o `true`.
+<br />Solo es necesario si no está utilizando el Agente de Datadog, en cuyo caso esto debe configurarse en `1` o `true`.
 
 `DD_API_KEY`
 : opcional - _cadena_
-<br />Tu clave API de Datadog. Solo requerido si no estás utilizando el Agente de Datadog.
+<br />Su clave API de Datadog. Solo es necesario si no está utilizando el Agente de Datadog.
 
 [1]: /es/getting_started/tagging/unified_service_tagging?tab=kubernetes#non-containerized-environment
 {{% /tab %}}
 {{% tab "Java" %}}
 
-Habilita la Observabilidad LLM ejecutando tu aplicación con `dd-trace-java` y especificando los parámetros requeridos como variables de entorno o propiedades del sistema.
+Habilite la Observabilidad LLM ejecutando su aplicación con `dd-trace-java` y especificando los parámetros requeridos como variables de entorno o propiedades del sistema.
 
 ```shell
 DD_SITE=<YOUR_DATADOG_SITE> DD_API_KEY=<YOUR_API_KEY> \
@@ -139,7 +139,7 @@ java -javaagent:path/to/your/dd-trace-java-jar/dd-java-agent-SNAPSHOT.jar \
 
 #### Variables de entorno y propiedades del sistema
 
-Puedes proporcionar los siguientes parámetros como variables de entorno (por ejemplo, `DD_LLMOBS_ENABLED`) o como propiedades del sistema Java (por ejemplo, `dd.llmobs_enabled`).
+Puede proporcionar los siguientes parámetros como variables de entorno (por ejemplo, `DD_LLMOBS_ENABLED`) o como propiedades del sistema Java (por ejemplo, `dd.llmobs_enabled`).
 
 `DD_SITE` o `dd.site`
 : requerido - _cadena_
@@ -147,20 +147,20 @@ Puedes proporcionar los siguientes parámetros como variables de entorno (por ej
 
 `DD_LLMOBS_ENABLED` o `dd.llmobs.enabled`
 : requerido - _entero o cadena_
-<br />Alternar para habilitar el envío de datos a la Observabilidad LLM. Debería configurarse a `1` o `true`.
+<br />Alternar para habilitar el envío de datos a la Observabilidad LLM. Debería configurarse en `1` o `true`.
 
 `DD_LLMOBS_ML_APP` o `dd.llmobs.ml.app`
 : opcional - _cadena_
-<br />El nombre de tu aplicación, servicio o proyecto LLM, bajo el cual se agrupan todos los rastros y spans. Esto ayuda a distinguir entre diferentes aplicaciones o experimentos. Consulta [Directrices de nomenclatura de aplicaciones](#application-naming-guidelines) para caracteres permitidos y otras restricciones. Para anular este valor para un span raíz dado, consulta [Rastreo de múltiples aplicaciones](#tracing-multiple-applications). Si no se proporciona, esto se establece de forma predeterminada al valor de [`DD_SERVICE`][1], o al valor de un `DD_LLMOBS_ML_APP`propagado desde un servicio ascendente.
+<br />El nombre de su aplicación, servicio o proyecto LLM, bajo el cual se agrupan todos los rastros y spans. Esto ayuda a distinguir entre diferentes aplicaciones o experimentos. Consulte [las pautas de nomenclatura de aplicaciones](#application-naming-guidelines) para los caracteres permitidos y otras restricciones. Para anular este valor para un span raíz dado, consulte [Rastreo de múltiples aplicaciones](#tracing-multiple-applications). Si no se proporciona, esto se establece de forma predeterminada al valor de [`DD_SERVICE`][1], o al valor de un `DD_LLMOBS_ML_APP`propagado desde un servicio ascendente.
 <br />**Nota**: Antes de la versión 1.54.0 de `dd-trace-java`, este es un **campo requerido**.
 
 `DD_LLMOBS_AGENTLESS_ENABLED` o `dd.llmobs.agentless.enabled`
 : opcional - _entero o cadena_ - **predeterminado**: `false`
-<br />Solo es requerido si no estás usando el Agente de Datadog, en cuyo caso esto debe establecerse en `1` o `true`.
+<br />Solo es requerido si no está utilizando el Agente de Datadog, en cuyo caso esto debe establecerse en `1` o `true`.
 
 `DD_API_KEY` o `dd.api.key`
 : opcional - _cadena_
-<br />Tu clave API de Datadog. Solo requerido si no estás utilizando el Agente de Datadog.
+<br />Su clave API de Datadog. Solo es necesario si no está utilizando el Agente de Datadog.
 
 [1]: /es/getting_started/tagging/unified_service_tagging?tab=kubernetes#non-containerized-environment
 {{% /tab %}}
@@ -170,15 +170,15 @@ Puedes proporcionar los siguientes parámetros como variables de entorno (por ej
 
 {{% collapse-content title="Configuración en código" level="h3" expanded=false id="in-code-setup" %}}
 
-En lugar de usar [configuración por línea de comandos](#command-line-setup), también puedes habilitar la Observabilidad LLM programáticamente.
+En lugar de usar [configuración de línea de comandos](#command-line-setup), también puede habilitar la Observabilidad LLM programáticamente.
 
 {{< tabs >}}
 {{% tab "Python" %}}
 
-Usa la `LLMObs.enable()` función para habilitar la Observabilidad LLM.
+Utilice la `LLMObs.enable()` función para habilitar la Observabilidad LLM.
 
 <div class="alert alert-info">
-No uses este método de configuración con el comando <code>ddtrace-run</code>.
+No utilice este método de configuración con el comando <code>ddtrace-run</code>.
 </div>
 
 {{< code-block lang="python" >}}
@@ -195,23 +195,23 @@ LLMObs.enable(
 
 `ml_app`
 : opcional - _cadena_
-<br />El nombre de tu aplicación, servicio o proyecto LLM, bajo el cual se agrupan todos los rastros y spans. Esto ayuda a distinguir entre diferentes aplicaciones o experimentos. Consulta [Directrices de nomenclatura de aplicaciones](#application-naming-guidelines) para caracteres permitidos y otras restricciones. Para anular este valor para un rastro dado, consulta [Rastreo de múltiples aplicaciones](#tracing-multiple-applications). Si no se proporciona, esto se establece de forma predeterminada al valor de `DD_LLMOBS_ML_APP`.
+<br />El nombre de su aplicación, servicio o proyecto LLM, bajo el cual se agrupan todos los rastros y spans. Esto ayuda a distinguir entre diferentes aplicaciones o experimentos. Consulte [Directrices de nomenclatura de aplicaciones](#application-naming-guidelines) para caracteres permitidos y otras restricciones. Para anular este valor para un rastro dado, consulte [Rastreo de múltiples aplicaciones](#tracing-multiple-applications). Si no se proporciona, esto se establece de forma predeterminada al valor de `DD_LLMOBS_ML_APP`.
 
 `integrations_enabled` - **predeterminado**: `true`
 : opcional - _booleano_
-<br />Una bandera para habilitar el rastreo automático de llamadas LLM para las integraciones [LLM soportadas][1] de Datadog. Si no se proporciona, todas las integraciones LLM soportadas están habilitadas por defecto. Para evitar usar las integraciones LLM, establece este valor en `false`.
+<br />Una bandera para habilitar el rastreo automático de llamadas LLM para las [integraciones LLM][1] soportadas por Datadog. Si no se proporciona, todas las integraciones LLM soportadas están habilitadas por defecto. Para evitar el uso de las integraciones LLM, establezca este valor en `false`.
 
 `agentless_enabled`
 : opcional - _booleano_ - **predeterminado**: `false`
-<br />Solo requerido si no estás usando el Agente de Datadog, en cuyo caso esto debe establecerse en `True`. Esto configura la biblioteca `ddtrace` para no enviar ningún dato que requiera el Agente de Datadog. Si no se proporciona, esto se establece de forma predeterminada al valor de `DD_LLMOBS_AGENTLESS_ENABLED`.
+<br />Solo es necesario si no está utilizando el Agente de Datadog, en cuyo caso esto debe establecerse en `True`. Esto configura la biblioteca `ddtrace` para no enviar ningún dato que requiera el Agente de Datadog. Si no se proporciona, esto se establece de forma predeterminada al valor de `DD_LLMOBS_AGENTLESS_ENABLED`.
 
 `site`
 : opcional - _cadena_
-<br />El sitio de Datadog para enviar tus datos LLM. Tu sitio es {{< region-param key="dd_site" code="true" >}}. Si no se proporciona, esto se establece de forma predeterminada al valor de `DD_SITE`.
+<br />El sitio de Datadog para enviar sus datos LLM. Tu sitio es {{< region-param key="dd_site" code="true" >}}. Si no se proporciona, esto se establece de forma predeterminada al valor de `DD_SITE`.
 
 `api_key`
 : opcional - _cadena_
-<br />Tu clave API de Datadog. Solo requerido si no estás utilizando el Agente de Datadog. Si no se proporciona, esto se establece de forma predeterminada al valor de `DD_API_KEY`.
+<br />Tu clave de API de Datadog. Solo es necesario si no está utilizando el Agente de Datadog. Si no se proporciona, esto se establece de forma predeterminada al valor de `DD_API_KEY`.
 
 `env`
 : opcional - _cadena_
@@ -230,7 +230,7 @@ LLMObs.enable(
 No utilices este método de configuración con el comando <code>dd-trace/initialize.mjs</code>.
 </div>
 
-Usa la `init()` función para habilitar la Observabilidad LLM.
+Utilice la `init()` función para habilitar la Observabilidad LLM.
 
 {{< code-block lang="javascript" >}}
 const tracer = require('dd-trace').init({
@@ -253,7 +253,7 @@ const llmobs = tracer.llmobs;
 
 `agentlessEnabled`
 : opcional - _booleano_ - **predeterminado**: `false`
-<br />Solo requerido si no estás utilizando el Agente de Datadog, en cuyo caso esto debe establecerse en `true`. Esto configura la biblioteca `dd-trace` para no enviar ningún dato que requiera el Agente de Datadog. Si no se proporciona, esto se establece por defecto en el valor de `DD_LLMOBS_AGENTLESS_ENABLED`.
+<br />Solo es necesario si no estás utilizando el Agente de Datadog, en cuyo caso esto debe establecerse en `true`. Esto configura la `dd-trace` biblioteca para no enviar ningún dato que requiera el Agente de Datadog. Si no se proporciona, esto se establece en el valor de `DD_LLMOBS_AGENTLESS_ENABLED`.
 
 **Opciones para la configuración general del rastreador**:
 
@@ -263,7 +263,7 @@ const llmobs = tracer.llmobs;
 
 `env`
 : opcional - _cadena_
-<br />El nombre del entorno de tu aplicación (ejemplos: `prod`, `pre-prod`, `staging`). Si no se proporciona, esto se establece por defecto en el valor de `DD_ENV`.
+<br />El nombre del entorno de tu aplicación (ejemplos: `prod`, `pre-prod`, `staging`). Si no se proporciona, esto se establece en el valor de `DD_ENV`.
 
 `service`
 : opcional - _cadena_
@@ -275,7 +275,7 @@ Establece los siguientes valores como variables de entorno. No se pueden configu
 
 `DD_API_KEY`
 : opcional - _cadena_
-<br />Tu clave API de Datadog. Solo requerido si no estás utilizando el Agente de Datadog.
+<br />Tu clave API de Datadog. Solo es necesario si no está utilizando el Agente de Datadog.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -284,37 +284,43 @@ Establece los siguientes valores como variables de entorno. No se pueden configu
 
 {{% collapse-content title="Configuración de AWS Lambda" level="h3" expanded=false id="aws-lambda-setup" %}}
 
-Para instrumentar una función existente de AWS Lambda con LLM Observability, puedes usar la Extensión de Datadog y las capas de lenguaje respectivas.
+Para instrumentar una función existente de AWS Lambda con Observabilidad de LLM, puedes usar la Extensión de Datadog y las respectivas capas de lenguaje.
 
 1. Abre un Cloudshell en la consola de AWS.
 2. Instala el cliente de la CLI de Datadog
+
 ```shell
 npm install -g @datadog/datadog-ci
 ```
 3. Establece la clave de API de Datadog y el sitio
+
 ```shell
 export DD_API_KEY=<YOUR_DATADOG_API_KEY>
 export DD_SITE=<YOUR_DATADOG_SITE>
 ```
-Si ya tienes o prefieres usar un secreto en Secrets Manager, puedes establecer la clave de API utilizando el ARN del secreto:
+Si ya tienes o prefieres usar un secreto en el Administrador de Secretos, puedes establecer la clave de API utilizando el ARN del secreto:
+
 ```shell
 export DATADOG_API_KEY_SECRET_ARN=<DATADOG_API_KEY_SECRET_ARN>
 ```
 4. Instala tu función Lambda con LLM Observability (esto requiere al menos la versión 77 de la capa de extensión de Datadog)
 {{< tabs >}}
 {{% tab "Python" %}}
+
 ```shell
 datadog-ci lambda instrument -f <YOUR_LAMBDA_FUNCTION_NAME> -r <AWS_REGION> -v {{< latest-lambda-layer-version layer="python" >}} -e {{< latest-lambda-layer-version layer="extension" >}} --llmobs <YOUR_LLMOBS_ML_APP>
 ```
 {{% /tab %}}
 
 {{% tab "Node.js" %}}
+
 ```shell
 datadog-ci lambda instrument -f <YOUR_LAMBDA_FUNCTION_NAME> -r <AWS_REGION> -v {{< latest-lambda-layer-version layer="node" >}} -e {{< latest-lambda-layer-version layer="extension" >}} --llmobs <YOUR_LLMOBS_ML_APP>
 ```
 {{% /tab %}}
 
 {{% tab "Java" %}}
+
 ```shell
 datadog-ci lambda instrument -f <YOUR_LAMBDA_FUNCTION_NAME> -r <AWS_REGION> -v {{< latest-lambda-layer-version layer="dd-trace-java" >}} -e {{< latest-lambda-layer-version layer="extension" >}} --llmobs <YOUR_LLMOBS_ML_APP>
 ```
@@ -327,6 +333,7 @@ Limpia manualmente las trazas de LLM Observability utilizando el método `flush`
 
 {{< tabs >}}
 {{% tab "Python" %}}
+
 ```python
 from ddtrace.llmobs import LLMObs
 def handler():
@@ -336,6 +343,7 @@ def handler():
 {{% /tab %}}
 
 {{% tab "Node.js" %}}
+
 ```javascript
 import tracer from 'dd-trace';
 const llmobs = tracer.llmobs;
@@ -351,7 +359,7 @@ export const handler = async (event) => {
 {{% /collapse-content %}}
 
 
-Después de instalar el SDK y ejecutar tu aplicación, deberías esperar ver algunos datos en LLM Observability de la auto-instrumentación. La instrumentación manual se puede usar para capturar marcos personalizados o operaciones de bibliotecas que aún no están soportadas.
+Después de instalar el SDK y ejecutar tu aplicación, deberías esperar ver algunos datos en LLM Observability provenientes de la auto-instrumentación. La instrumentación manual puede ser utilizada para capturar marcos personalizados o operaciones de bibliotecas que aún no están soportadas.
 
 ## Instrumentación manual
 
@@ -384,14 +392,14 @@ with LLMObs.llm(model="gpt-4o"):
 {{< /code-block >}}
 
 
-Para una lista de tipos de span disponibles, consulta la [documentación de Tipos de Span][1]. Para un trazado más granular de operaciones dentro de funciones, consulta [Trazando spans usando métodos en línea](#tracing-spans-using-inline-methods).
+Para una lista de tipos de span disponibles, consulta la [documentación de Tipos de Span][1]. Para un trazado más granular de operaciones dentro de funciones, consulta [Trazando spans utilizando métodos en línea](#tracing-spans-using-inline-methods).
 
 [1]: /es/llm_observability/terms/
 {{% /tab %}}
 
 {{% tab "Node.js" %}}
 
-Para trazar un span, usa `llmobs.wrap(options, function)` como un envoltorio de función para la función que deseas trazar. Para una lista de tipos de span disponibles, consulta la [documentación de Tipos de Span][1]. Para un trazado más granular de operaciones dentro de funciones, consulta [Trazando spans usando métodos en línea](#tracing-spans-using-inline-methods).
+Para trazar un span, utiliza `llmobs.wrap(options, function)` como un envoltorio de función para la función que deseas trazar. Para una lista de tipos de span disponibles, consulta la [documentación de Tipos de Span][1]. Para un trazado más granular de operaciones dentro de funciones, consulta [Trazando spans utilizando métodos en línea](#tracing-spans-using-inline-methods).
 
 ### Tipos de Span
 
@@ -399,9 +407,9 @@ Los tipos de span son requeridos y se especifican en el objeto `options` pasado 
 
 **Nota:** Los spans con un tipo de span inválido no se envían a LLM Observability.
 
-### Captura automática de argumentos/salidas/nombres de función
+### Captura automática de argumentos/salida/nombre de función
 
-`llmobs.wrap` (junto con [`llmobs.decorate`](#function-decorators-in-typescript) para TypeScript) intenta capturar automáticamente las entradas, salidas y el nombre de la función que se está rastreando. Si necesitas anotar manualmente un intervalo, consulta [Enriqueciendo intervalos](#enriching-spans). Las entradas y salidas que anotes anularán la captura automática. Además, para anular el nombre de la función, pasa la `name` propiedad en el objeto de opciones a la `llmobs.wrap` función:
+`llmobs.wrap` (junto con [`llmobs.decorate`](#function-decorators-in-typescript) para TypeScript) intenta capturar automáticamente las entradas, salidas y el nombre de la función que se está rastreando. Si necesitas anotar manualmente un intervalo, consulta [Enriqueciendo intervalos](#enriching-spans). Las entradas y salidas que anotes anularán la captura automática. Además, para anular el nombre de la función, pasa la propiedad `name` en el objeto de opciones a la función `llmobs.wrap`:
 
 {{< code-block lang="javascript" >}}
 function processMessage () {
@@ -417,7 +425,7 @@ processMessage = llmobs.wrap({ kind: 'workflow', name: 'differentFunctionName' }
 
 - Si la función devuelve una Promesa, entonces el intervalo finaliza cuando la promesa se resuelve o se rechaza.
 - Si la función toma un callback como su último parámetro, entonces el intervalo finaliza cuando se llama a ese callback.
-- Si la función t no acepta un callback y no devuelve una Promesa, entonces el intervalo finaliza al final de la ejecución de la función.
+- Si la función no acepta un callback y no devuelve una Promesa, entonces el intervalo finaliza al final de la ejecución de la función.
 
 El siguiente ejemplo demuestra la segunda condición, donde el último argumento es un callback:
 
@@ -438,7 +446,7 @@ app.use(myAgentMiddleware)
 
 {{< /code-block >}}
 
-Si la aplicación no utiliza la función de callback, se recomienda usar un bloque rastreado en línea en su lugar. Consulta [Rastreo de intervalos usando métodos en línea](#tracing-spans-using-inline-methods) para más información.
+Si la aplicación no utiliza la función de callback, se recomienda usar un bloque rastreado en línea en su lugar. Consulta [Rastreando intervalos usando métodos en línea](#tracing-spans-using-inline-methods) para más información.
 
 {{< code-block lang="javascript" >}}
 const express = require('express')
@@ -462,7 +470,7 @@ app.use(myAgentMiddleware)
 
 ### Iniciando un intervalo
 
-Hay múltiples métodos para iniciar un intervalo, según el tipo de intervalo que estés iniciando. Consulta la [documentación de Tipos de Span][1] para una lista de tipos de span soportados.
+Existen múltiples métodos para iniciar un intervalo, según el tipo de intervalo que estés iniciando. Consulta la [documentación de Tipos de Span][1] para una lista de tipos de span soportados.
 
 Todos los intervalos se inician como una instancia de objeto de `LLMObsSpan`. Cada intervalo tiene métodos que puedes usar para interactuar con el intervalo y registrar datos.
 
@@ -473,6 +481,7 @@ Los spans deben ser finalizados para que el rastro sea enviado y visible en la a
 Para finalizar un span, llama a `finish()` en una instancia del objeto span. Si es posible, envuelve el span en un bloque de `try/finally` para asegurar que el span se envíe incluso si ocurre una excepción.
 
 #### Ejemplo
+
 ```java
     try {
         LLMObsSpan workflowSpan = LLMObs.startWorkflowSpan("my-workflow-span-name", "ml-app-override", "session-141");
@@ -493,7 +502,7 @@ Para finalizar un span, llama a `finish()` en una instancia del objeto span. Si 
 
 {{< tabs >}}
 {{% tab "Python" %}}
-Para rastrear una llamada a LLM, usa el decorador de función `ddtrace.llmobs.decorators.llm()`.
+Para rastrear una llamada a LLM, utiliza el decorador de función `ddtrace.llmobs.decorators.llm()`.
 
 {{% collapse-content title="Argumentos" level="h4" expanded=false id="llm-span-arguments" %}}
 
@@ -512,11 +521,11 @@ Para rastrear una llamada a LLM, usa el decorador de función `ddtrace.llmobs.de
 
 `session_id`
 : opcional - _cadena_
-<br/>El ID de la sesión de usuario subyacente. Vea [Seguimiento de sesiones de usuario](#tracking-user-sessions) para más información.
+<br/>El ID de la sesión de usuario subyacente. Consulte [Seguimiento de sesiones de usuario](#tracking-user-sessions) para más información.
 
 `ml_app`
 : opcional - _cadena_
-<br/>El nombre de la aplicación de ML a la que pertenece la operación. Vea [Rastreo de múltiples aplicaciones](#tracing-multiple-applications) para más información.
+<br/>El nombre de la aplicación de ML a la que pertenece la operación. Consulte [Rastreo de múltiples aplicaciones](#tracing-multiple-applications) para más información.
 
 {{% /collapse-content %}}
 
@@ -552,11 +561,11 @@ Para rastrear una llamada de LLM, especifique el tipo de intervalo como `llm`, y
 
 `sessionId`
 : opcional - _cadena_
-<br/>El ID de la sesión de usuario subyacente. Vea [Seguimiento de sesiones de usuario](#tracking-user-sessions) para más información.
+<br/>El ID de la sesión de usuario subyacente. Consulte [Seguimiento de sesiones de usuario](#tracking-user-sessions) para más información.
 
 `mlApp`
 : opcional - _cadena_
-<br/>El nombre de la aplicación de ML a la que pertenece la operación. Consulta [Rastreo de múltiples aplicaciones](#tracing-multiple-applications) para más información.
+<br/>El nombre de la aplicación de ML a la que pertenece la operación. Consulte [Rastreo de múltiples aplicaciones](#tracing-multiple-applications) para más información.
 
 {{% /collapse-content %}}
 
@@ -572,7 +581,7 @@ llmCall = llmobs.wrap({ kind: 'llm', name: 'invokeLLM', modelName: 'claude', mod
 
 {{% /tab %}}
 {{% tab "Java" %}}
-Para rastrear una llamada de LLM, importa y llama al siguiente método con los argumentos listados a continuación:
+Para rastrear una llamada de LLM, importe y llame al siguiente método con los argumentos que se enumeran a continuación:
 
 ```
 import datadog.trace.api.llmobs.LLMObs;
@@ -583,7 +592,7 @@ LLMObs.startLLMSpan(spanName, modelName, modelProvider, mlApp, sessionID);
 
 `spanName`
 : opcional - _Cadena_
-<br/>El nombre de la operación. Si no se proporciona, `spanName` predetermina al tipo de intervalo.
+<br/>El nombre de la operación. Si no se proporciona, `spanName` se establece en el tipo de intervalo.
 
 `modelName`
 : opcional - _Cadena_ - **predeterminado**: `"custom"`
@@ -596,11 +605,11 @@ LLMObs.startLLMSpan(spanName, modelName, modelProvider, mlApp, sessionID);
 
 `mlApp`
 : opcional - _Cadena_
-<br/>El nombre de la aplicación de ML a la que pertenece la operación. Proporcionar un valor no nulo anula el nombre de la aplicación de ML suministrado al inicio de la aplicación. Consulta [Rastreo de múltiples aplicaciones](#tracing-multiple-applications) para más información.
+<br/>El nombre de la aplicación de ML a la que pertenece la operación. Proporcionar un valor no nulo anula el nombre de la aplicación de ML proporcionado al inicio de la aplicación. Consulte [Rastreo de múltiples aplicaciones](#tracing-multiple-applications) para más información.
 
 `sessionId`
 : opcional - _Cadena_
-<br/>El ID de la sesión de usuario subyacente. Consulta [Seguimiento de sesiones de usuario](#tracking-user-sessions) para más información.
+<br/>La ID de la sesión de usuario subyacente. Consulte [Seguimiento de sesiones de usuario](#tracking-user-sessions) para más información.
 
 {{% /collapse-content %}}
 
@@ -628,20 +637,20 @@ public class MyJavaClass {
 
 {{< tabs >}}
 {{% tab "Python" %}}
-Para rastrear un intervalo de flujo de trabajo, usa el decorador de función `ddtrace.llmobs.decorators.workflow()`.
+Para rastrear un intervalo de flujo de trabajo, use el decorador de función `ddtrace.llmobs.decorators.workflow()`.
 
 {{% collapse-content title="Argumentos" level="h4" expanded=false id="workflow-span-arguments" %}}
 `name`
 : opcional - _cadena_
-<br/>El nombre de la operación. Si no se proporciona, `name` predetermina al nombre de la función rastreada.
+<br/>El nombre de la operación. Si no se proporciona, `name` se establece en el nombre de la función rastreada.
 
 `session_id`
 : opcional - _cadena_
-<br/>El ID de la sesión de usuario subyacente. Consulta [Seguimiento de sesiones de usuario](#tracking-user-sessions) para más información.
+<br/>El ID de la sesión de usuario subyacente. Vea [Seguimiento de sesiones de usuario](#tracking-user-sessions) para más información.
 
 `ml_app`
 : opcional - _cadena_
-<br/>El nombre de la aplicación de ML a la que pertenece la operación. Consulta [Rastreo de múltiples aplicaciones](#tracing-multiple-applications) para más información.
+<br/>El nombre de la aplicación de ML a la que pertenece la operación. Vea [Rastreo de múltiples aplicaciones](#tracing-multiple-applications) para más información.
 
 {{% /collapse-content %}}
 
@@ -660,21 +669,21 @@ def process_message():
 
 {{% tab "Node.js" %}}
 
-Para rastrear un intervalo de flujo de trabajo, especifica el tipo de intervalo como `workflow`, y opcionalmente especifica argumentos en el objeto de opciones.
+Para rastrear un intervalo de flujo de trabajo, especifique el tipo de intervalo como `workflow`, y opcionalmente especifique argumentos en el objeto de opciones.
 
 {{% collapse-content title="Argumentos" level="h4" expanded=false id="workflow-span-arguments" %}}
 
 `name`
 : opcional - _cadena_
-<br/>El nombre de la operación. Si no se proporciona, `name` predetermina al nombre de la función rastreada.
+<br/>El nombre de la operación. Si no se proporciona, `name` se establece en el nombre de la función rastreada.
 
 `sessionId`
 : opcional - _cadena_
-<br/>El ID de la sesión de usuario subyacente. Consulta [Seguimiento de sesiones de usuario](#tracking-user-sessions) para más información.
+<br/>El ID de la sesión de usuario subyacente. Vea [Seguimiento de sesiones de usuario](#tracking-user-sessions) para más información.
 
 `mlApp`
 : opcional - _cadena_
-<br/>El nombre de la aplicación de ML a la que pertenece la operación. Consulta [Rastreo de múltiples aplicaciones](#tracing-multiple-applications) para más información.
+<br/>El nombre de la aplicación de ML a la que pertenece la operación. Vea [Rastreo de múltiples aplicaciones](#tracing-multiple-applications) para más información.
 
 {{% /collapse-content %}}
 
@@ -690,7 +699,7 @@ processMessage = llmobs.wrap({ kind: 'workflow' }, processMessage)
 
 {{% /tab %}}
 {{% tab "Java" %}}
-Para rastrear un intervalo de flujo de trabajo, importa y llama al siguiente método con los argumentos listados a continuación:
+Para rastrear un intervalo de flujo de trabajo, importe y llame al siguiente método con los argumentos que se enumeran a continuación:
 
 ```
 import datadog.trace.api.llmobs.LLMObs;
@@ -701,15 +710,15 @@ LLMObs.startWorkflowSpan(spanName, mlApp, sessionID);
 
 `spanName`
 : opcional - _Cadena_
-<br/>El nombre de la operación. Si no se proporciona, `spanName` predetermina al tipo de intervalo.
+<br/>El nombre de la operación. Si no se proporciona, `spanName` se establece en el tipo de intervalo.
 
 `mlApp`
 : opcional - _Cadena_
-<br/>El nombre de la aplicación de ML a la que pertenece la operación. Proporcionar un valor no nulo anula el nombre de la aplicación de ML suministrado al inicio de la aplicación. Consulta [Rastreo de múltiples aplicaciones](#tracing-multiple-applications) para más información.
+<br/>El nombre de la aplicación de ML a la que pertenece la operación. Proporcionar un valor no nulo anula el nombre de la aplicación de ML proporcionado al inicio de la aplicación. Vea [Rastreo de múltiples aplicaciones](#tracing-multiple-applications) para más información.
 
 `sessionId`
 : opcional - _Cadena_
-<br/>El ID de la sesión de usuario subyacente. Consulta [Seguimiento de sesiones de usuario](#tracking-user-sessions) para más información.
+<br/>El ID de la sesión de usuario subyacente. Vea [Seguimiento de sesiones de usuario](#tracking-user-sessions) para más información.
 
 {{% /collapse-content %}}
 
@@ -737,21 +746,21 @@ public class MyJavaClass {
 
 {{< tabs >}}
 {{% tab "Python" %}}
-Para rastrear la ejecución de un agente, utiliza el decorador de función `ddtrace.llmobs.decorators.agent()`.
+Para rastrear la ejecución de un agente, use el decorador de función `ddtrace.llmobs.decorators.agent()`.
 
 {{% collapse-content title="Argumentos" level="h4" expanded=false id="agent-span-arguments" %}}
 
 `name`
 : opcional - _cadena_
-<br/>El nombre de la operación. Si no se proporciona, `name` predetermina al nombre de la función rastreada.
+<br/>El nombre de la operación. Si no se proporciona, `name` se establece en el nombre de la función rastreada.
 
 `session_id`
 : opcional - _cadena_
-<br/>El ID de la sesión de usuario subyacente. Consulta [Seguimiento de sesiones de usuario](#tracking-user-sessions) para más información.
+<br/>El ID de la sesión de usuario subyacente. Vea [Seguimiento de sesiones de usuario](#tracking-user-sessions) para más información.
 
 `ml_app`
 : opcional - _cadena_
-<br/>El nombre de la aplicación de ML a la que pertenece la operación. Consulta [Rastreo de múltiples aplicaciones](#tracing-multiple-applications) para más información.
+<br/>El nombre de la aplicación de ML a la que pertenece la operación. Vea [Rastreo de múltiples aplicaciones](#tracing-multiple-applications) para más información.
 {{% /collapse-content %}}
 
 #### Ejemplo
@@ -768,21 +777,21 @@ def react_agent():
 {{% /tab %}}
 
 {{% tab "Node.js" %}}
-Para rastrear la ejecución de un agente, especifica el tipo de intervalo como `agent`, y opcionalmente especifica argumentos en el objeto de opciones.
+Para rastrear la ejecución de un agente, especifique el tipo de intervalo como `agent`, y opcionalmente especifique argumentos en el objeto de opciones.
 
 {{% collapse-content title="Argumentos" level="h4" expanded=false id="agent-span-arguments" %}}
 
 `name`
 : opcional - _cadena_
-<br/>El nombre de la operación. Si no se proporciona, `name` predetermina al nombre de la función rastreada.
+<br/>El nombre de la operación. Si no se proporciona, `name` se establece en el nombre de la función rastreada.
 
 `sessionId`
 : opcional - _cadena_
-<br/>El ID de la sesión de usuario subyacente. Consulta [Seguimiento de sesiones de usuario](#tracking-user-sessions) para más información.
+<br/>El ID de la sesión de usuario subyacente. Vea [Seguimiento de sesiones de usuario](#tracking-user-sessions) para más información.
 
 `mlApp`
 : opcional - _cadena_
-<br/>El nombre de la aplicación de ML a la que pertenece la operación. Consulta [Rastreo de múltiples aplicaciones](#tracing-multiple-applications) para más información.
+<br/>El nombre de la aplicación de ML a la que pertenece la operación. Vea [Rastreo de múltiples aplicaciones](#tracing-multiple-applications) para más información.
 
 {{% /collapse-content %}}
 
@@ -798,7 +807,8 @@ reactAgent = llmobs.wrap({ kind: 'agent' }, reactAgent)
 
 {{% /tab %}}
 {{% tab "Java" %}}
-Para rastrear la ejecución de un agente, importa y llama al siguiente método con los argumentos listados a continuación
+Para rastrear la ejecución de un agente, importe y llame al siguiente método con los argumentos que se enumeran a continuación
+
 ```
 import datadog.trace.api.llmobs.LLMObs;
 LLMObs.startAgentSpan(spanName, mlApp, sessionID);
@@ -808,15 +818,15 @@ LLMObs.startAgentSpan(spanName, mlApp, sessionID);
 
 `spanName`
 : opcional - _Cadena_
-<br/>El nombre de la operación. Si no se proporciona, `spanName` predetermina al nombre de la función rastreada.
+<br/>El nombre de la operación. Si no se proporciona, `spanName` se establece en el nombre de la función rastreada.
 
 `mlApp`
 : opcional - _Cadena_
-<br/>El nombre de la aplicación de ML a la que pertenece la operación. Proporcionar un valor no nulo anula el nombre de la aplicación de ML suministrado al inicio de la aplicación. Consulta [Rastreo de múltiples aplicaciones](#tracing-multiple-applications) para más información.
+<br/>El nombre de la aplicación de ML a la que pertenece la operación. Proporcionar un valor no nulo anula el nombre de la aplicación de ML proporcionado al inicio de la aplicación. Vea [Rastreo de múltiples aplicaciones](#tracing-multiple-applications) para más información.
 
 `sessionId`
 : opcional - _Cadena_
-<br/>El ID de la sesión de usuario subyacente. Consulta [Seguimiento de sesiones de usuario](#tracking-user-sessions) para más información.
+<br/>El ID de la sesión de usuario subyacente. Vea [Seguimiento de sesiones de usuario](#tracking-user-sessions) para más información.
 
 {{% /collapse-content %}}
 
@@ -827,21 +837,21 @@ LLMObs.startAgentSpan(spanName, mlApp, sessionID);
 
 {{< tabs >}}
 {{% tab "Python" %}}
-Para rastrear una llamada a una herramienta, utiliza el decorador de función `ddtrace.llmobs.decorators.tool()`.
+Para rastrear una llamada a una herramienta, use el decorador de función `ddtrace.llmobs.decorators.tool()`.
 
 {{% collapse-content title="Argumentos" level="h4" expanded=false id="tool-span-arguments" %}}
 
 `name`
 : opcional - _cadena_
-<br/>El nombre de la operación. Si no se proporciona, `name` predetermina al nombre de la función rastreada.
+<br/>El nombre de la operación. Si no se proporciona, `name` se establece en el nombre de la función rastreada.
 
 `session_id`
 : opcional - _cadena_
-<br/>El ID de la sesión de usuario subyacente. Consulta [Seguimiento de sesiones de usuario](#tracking-user-sessions) para más información.
+<br/>El ID de la sesión de usuario subyacente. Vea [Seguimiento de sesiones de usuario](#tracking-user-sessions) para más información.
 
 `ml_app`
 : opcional - _cadena_
-<br/>El nombre de la aplicación de ML a la que pertenece la operación. Consulta [Rastreo de múltiples aplicaciones](#tracing-multiple-applications) para más información.
+<br/>El nombre de la aplicación de ML a la que pertenece la operación. Vea [Rastreo de múltiples aplicaciones](#tracing-multiple-applications) para más información.
 
 {{% /collapse-content %}}
 
@@ -859,21 +869,21 @@ def call_weather_api():
 {{% /tab %}}
 
 {{% tab "Node.js" %}}
-Para rastrear una llamada a una herramienta, especifica el tipo de intervalo como `tool`, y opcionalmente especifica argumentos en el objeto de opciones.
+Para rastrear una llamada a una herramienta, especifique el tipo de intervalo como `tool`, y opcionalmente especifique argumentos en el objeto de opciones.
 
 {{% collapse-content title="Argumentos" level="h4" expanded=false id="tool-span-arguments" %}}
 
 `name`
 : opcional - _cadena_
-<br/>El nombre de la operación. Si no se proporciona, `name` predetermina al nombre de la función rastreada.
+<br/>El nombre de la operación. Si no se proporciona, `name` se establece en el nombre de la función rastreada.
 
 `sessionId`
 : opcional - _cadena_
-<br/>El ID de la sesión de usuario subyacente. Consulta [Seguimiento de sesiones de usuario](#tracking-user-sessions) para más información.
+<br/>El ID de la sesión de usuario subyacente. Vea [Seguimiento de sesiones de usuario](#tracking-user-sessions) para más información.
 
 `mlApp`
 : opcional - _cadena_
-<br/>El nombre de la aplicación de ML a la que pertenece la operación. Consulta [Rastreo de múltiples aplicaciones](#tracing-multiple-applications) para más información.
+<br/>El nombre de la aplicación de ML a la que pertenece la operación. Vea [Rastreo de múltiples aplicaciones](#tracing-multiple-applications) para más información.
 
 {{% /collapse-content %}}
 
@@ -900,15 +910,15 @@ LLMObs.startToolSpan(spanName, mlApp, sessionID);
 
 `spanName`
 : opcional - _Cadena_
-<br/>El nombre de la operación. Si no se proporciona, `spanName` predetermina al nombre de la función rastreada.
+<br/>El nombre de la operación. Si no se proporciona, `spanName` se establece en el nombre de la función rastreada.
 
 `mlApp`
 : opcional - _Cadena_
-<br/>El nombre de la aplicación de ML a la que pertenece la operación. Proporcionar un valor no nulo anula el nombre de la aplicación de ML suministrado al inicio de la aplicación. Consulta [Rastreo de múltiples aplicaciones](#tracing-multiple-applications) para más información.
+<br/>El nombre de la aplicación de ML a la que pertenece la operación. Proporcionar un valor no nulo anula el nombre de la aplicación de ML proporcionado al inicio de la aplicación. Vea [Rastreo de múltiples aplicaciones](#tracing-multiple-applications) para más información.
 
 `sessionId`
 : opcional - _Cadena_
-<br/>El ID de la sesión de usuario subyacente. Consulta [Seguimiento de sesiones de usuario](#tracking-user-sessions) para más información.
+<br/>El ID de la sesión de usuario subyacente. Vea [Seguimiento de sesiones de usuario](#tracking-user-sessions) para más información.
 
 {{% /collapse-content %}}
 
@@ -925,15 +935,15 @@ Para rastrear un intervalo de tarea, utiliza el decorador de función `LLMObs.ta
 
 `name`
 : opcional - _cadena_
-<br/>El nombre de la operación. Si no se proporciona, `name` predetermina al nombre de la función rastreada.
+<br/>El nombre de la operación. Si no se proporciona, `name` se establece en el nombre de la función rastreada.
 
 `session_id`
 : opcional - _cadena_
-<br/>El ID de la sesión de usuario subyacente. Consulta [Seguimiento de sesiones de usuario](#tracking-user-sessions) para más información.
+<br/>El ID de la sesión de usuario subyacente. Vea [Seguimiento de sesiones de usuario](#tracking-user-sessions) para más información.
 
 `ml_app`
 : opcional - _cadena_
-<br/>El nombre de la aplicación de ML a la que pertenece la operación. Consulta [Rastreo de múltiples aplicaciones](#tracing-multiple-applications) para más información.
+<br/>El nombre de la aplicación de ML a la que pertenece la operación. Consulte [Rastreo de múltiples aplicaciones](#tracing-multiple-applications) para más información.
 
 {{% /collapse-content %}}
 
@@ -951,7 +961,7 @@ def sanitize_input():
 {{% /tab %}}
 
 {{% tab "Node.js" %}}
-Para rastrear un intervalo de tarea, especifica el tipo de intervalo como `task`, y opcionalmente especifica argumentos en el objeto de opciones.
+Para rastrear un intervalo de tarea, especifique el tipo de intervalo como `task`, y opcionalmente especifique argumentos en el objeto de opciones.
 
 {{% collapse-content title="Argumentos" level="h4" expanded=false id="task-span-arguments" %}}
 
@@ -961,11 +971,11 @@ Para rastrear un intervalo de tarea, especifica el tipo de intervalo como `task`
 
 `sessionId`
 : opcional - _cadena_
-<br/>El ID de la sesión de usuario subyacente. Consulta [Rastreo de sesiones de usuario](#tracking-user-sessions) para más información.
+<br/>El ID de la sesión de usuario subyacente. Consulte [Rastreo de sesiones de usuario](#tracking-user-sessions) para más información.
 
 `mlApp`
 : opcional - _cadena_
-<br/>El nombre de la aplicación de ML a la que pertenece la operación. Consulta [Rastreo de múltiples aplicaciones](#tracing-multiple-applications) para más información.
+<br/>El nombre de la aplicación de ML a la que pertenece la operación. Consulte [Rastreo de múltiples aplicaciones](#tracing-multiple-applications) para más información.
 
 {{% /collapse-content %}}
 
@@ -981,7 +991,7 @@ sanitizeInput = llmobs.wrap({ kind: 'task' }, sanitizeInput)
 
 {{% /tab %}}
 {{% tab "Java" %}}
-Para rastrear un intervalo de tarea, importa y llama al siguiente método con los argumentos listados a continuación:
+Para rastrear un intervalo de tarea, importe y llame al siguiente método con los argumentos que se enumeran a continuación:
 
 ```java
 import datadog.trace.api.llmobs.LLMObs;
@@ -996,11 +1006,11 @@ LLMObs.startTaskSpan(spanName, mlApp, sessionID);
 
 `mlApp`
 : opcional - _Cadena_
-<br/>El nombre de la aplicación de ML a la que pertenece la operación. Proporcionar un valor no nulo anula el nombre de la aplicación de ML suministrado al inicio de la aplicación. Ver [Rastreo de múltiples aplicaciones](#tracing-multiple-applications) para más información.
+<br/>El nombre de la aplicación de ML a la que pertenece la operación. Proporcionar un valor no nulo anula el nombre de la aplicación de ML suministrado al inicio de la aplicación. Vea [Rastreo de múltiples aplicaciones](#tracing-multiple-applications) para más información.
 
 `sessionId`
 : opcional - _Cadena_
-<br/>El ID de la sesión de usuario subyacente. Ver [Rastreo de sesiones de usuario](#tracking-user-sessions) para más información.
+<br/>El ID de la sesión de usuario subyacente. Vea [Rastreo de sesiones de usuario](#tracking-user-sessions) para más información.
 
 
 {{% /collapse-content %}}
@@ -1012,9 +1022,9 @@ LLMObs.startTaskSpan(spanName, mlApp, sessionID);
 
 {{< tabs >}}
 {{% tab "Python" %}}
-Para rastrear una operación de embedding, utiliza el decorador de función `LLMObs.embedding()`.
+Para rastrear una operación de embedding, use el decorador de función `LLMObs.embedding()`.
 
-**Nota**: Anotar la entrada de un rango de embedding requiere un formato diferente al de otros tipos de rango. Ver [Enriqueciendo rangos](#enriching-spans) para más detalles sobre cómo especificar entradas de embedding.
+**Nota**: Anotar la entrada de un rango de embedding requiere un formato diferente al de otros tipos de rango. Vea [Enriqueciendo rangos](#enriching-spans) para más detalles sobre cómo especificar entradas de embedding.
 
 {{% collapse-content title="Argumentos" level="h4" expanded=false id="embedding-span-arguments" %}}
 
@@ -1031,11 +1041,11 @@ Para rastrear una operación de embedding, utiliza el decorador de función `LLM
 
 `session_id`
 : opcional - _cadena_
-<br/>El ID de la sesión de usuario subyacente. Consulta [Seguimiento de sesiones de usuario](#tracking-user-sessions) para más información.
+<br/>El ID de la sesión de usuario subyacente. Consulte [Seguimiento de sesiones de usuario](#tracking-user-sessions) para más información.
 
 `ml_app`
 : opcional - _cadena_
-<br/>El nombre de la aplicación de ML a la que pertenece la operación. Consulta [Rastreo de múltiples aplicaciones](#tracing-multiple-applications) para más información.
+<br/>El nombre de la aplicación de ML a la que pertenece la operación. Consulte [Rastreo de múltiples aplicaciones](#tracing-multiple-applications) para más información.
 
 {{% /collapse-content %}}
 
@@ -1053,9 +1063,9 @@ def perform_embedding():
 {{% /tab %}}
 
 {{% tab "Node.js" %}}
-Para rastrear una operación de incrustación, especifica el tipo de intervalo como `embedding`, y opcionalmente especifica argumentos en el objeto de opciones.
+Para rastrear una operación de incrustación, especifique el tipo de intervalo como `embedding`, y opcionalmente especifique argumentos en el objeto de opciones.
 
-**Nota**: Anotar la entrada de un rango de embedding requiere un formato diferente al de otros tipos de rango. Ver [Enriqueciendo rangos](#enriching-spans) para más detalles sobre cómo especificar entradas de embedding.
+**Nota**: Anotar la entrada de un rango de embedding requiere un formato diferente al de otros tipos de rango. Vea [Enriqueciendo rangos](#enriching-spans) para más detalles sobre cómo especificar entradas de embedding.
 
 {{% collapse-content title="Argumentos" level="h4" expanded=false id="embedding-span-arguments" %}}
 
@@ -1073,11 +1083,11 @@ Para rastrear una operación de incrustación, especifica el tipo de intervalo c
 
 `sessionId`
 : opcional - _cadena_
-<br/>El ID de la sesión de usuario subyacente. Consulta [Seguimiento de sesiones de usuario](#tracking-user-sessions) para más información.
+<br/>El ID de la sesión de usuario subyacente. Vea [Seguimiento de sesiones de usuario](#tracking-user-sessions) para más información.
 
 `mlApp`
 : opcional - _cadena_
-<br/>El nombre de la aplicación de ML a la que pertenece la operación. Consulta [Rastreo de múltiples aplicaciones](#tracing-multiple-applications) para más información.
+<br/>El nombre de la aplicación de ML a la que pertenece la operación. Vea [Rastreo de múltiples aplicaciones](#tracing-multiple-applications) para más información.
 
 {{% /collapse-content %}}
 
@@ -1099,9 +1109,9 @@ performEmbedding = llmobs.wrap({ kind: 'embedding', modelName: 'text-embedding-3
 
 {{< tabs >}}
 {{% tab "Python" %}}
-Para rastrear un intervalo de recuperación, utiliza el decorador de función `ddtrace.llmobs.decorators.retrieval()`.
+Para rastrear un intervalo de recuperación, use el decorador de función `ddtrace.llmobs.decorators.retrieval()`.
 
-**Nota**: Anotar la salida de un intervalo de recuperación requiere un formato diferente al de otros tipos de intervalos. Consulta [Enriqueciendo intervalos](#enriching-spans) para más detalles sobre cómo especificar salidas de recuperación.
+**Nota**: Anotar la salida de un intervalo de recuperación requiere un formato diferente al de otros tipos de intervalos. Vea [Enriqueciendo intervalos](#enriching-spans) para más detalles sobre cómo especificar salidas de recuperación.
 
 {{% collapse-content title="Argumentos" level="h4" expanded=false id="retrieval-span-arguments" %}}
 
@@ -1111,11 +1121,11 @@ Para rastrear un intervalo de recuperación, utiliza el decorador de función `d
 
 `session_id`
 : opcional - _cadena_
-<br/>El ID de la sesión de usuario subyacente. Consulta [Rastreo de sesiones de usuario](#tracking-user-sessions) para más información.
+<br/>El ID de la sesión de usuario subyacente. Consulte [Rastreo de sesiones de usuario](#tracking-user-sessions) para más información.
 
 `ml_app`
 : opcional - _cadena_
-<br/>El nombre de la aplicación de ML a la que pertenece la operación. Consulta [Rastreo de múltiples aplicaciones](#tracing-multiple-applications) para más información.
+<br/>El nombre de la aplicación de ML a la que pertenece la operación. Consulte [Rastreo de múltiples aplicaciones](#tracing-multiple-applications) para más información.
 
 {{% /collapse-content %}}
 
@@ -1140,9 +1150,9 @@ def get_relevant_docs(question):
 
 {{% tab "Node.js" %}}
 
-Para rastrear un intervalo de recuperación, especifica el tipo de intervalo como `retrieval`, y opcionalmente especifica los siguientes argumentos en el objeto de opciones.
+Para rastrear un intervalo de recuperación, especifique el tipo de intervalo como `retrieval`, y opcionalmente especifique los siguientes argumentos en el objeto de opciones.
 
-**Nota**: Anotar la salida de un intervalo de recuperación requiere un formato diferente al de otros tipos de intervalos. Consulta [Enriqueciendo intervalos](#enriching-spans) para más detalles sobre cómo especificar salidas de recuperación.
+**Nota**: Anotar la salida de un intervalo de recuperación requiere un formato diferente al de otros tipos de intervalos. Vea [Enriqueciendo intervalos](#enriching-spans) para más detalles sobre cómo especificar salidas de recuperación.
 
 {{% collapse-content title="Argumentos" level="h4" expanded=false id="retrieval-span-arguments" %}}
 
@@ -1152,17 +1162,17 @@ Para rastrear un intervalo de recuperación, especifica el tipo de intervalo com
 
 `sessionId`
 : opcional - _cadena_
-<br/>El ID de la sesión de usuario subyacente. Consulta [Rastreo de sesiones de usuario](#tracking-user-sessions) para más información.
+<br/>El ID de la sesión de usuario subyacente. Consulte [Rastreo de sesiones de usuario](#tracking-user-sessions) para más información.
 
 `mlApp`
 : opcional - _cadena_
-<br/>El nombre de la aplicación de ML a la que pertenece la operación. Consulta [Rastreo de múltiples aplicaciones](#tracing-multiple-applications) para más información.
+<br/>El nombre de la aplicación de ML a la que pertenece la operación. Consulte [Rastreo de múltiples aplicaciones](#tracing-multiple-applications) para más información.
 
 {{% /collapse-content %}}
 
 #### Ejemplo
 
-Lo siguiente también incluye un ejemplo de anotación de un intervalo. Consulta [Enriqueciendo intervalos](#enriching-spans) para más información.
+Lo siguiente también incluye un ejemplo de anotación de un intervalo. Vea [Enriqueciendo intervalos](#enriching-spans) para más información.
 
 {{< code-block lang="javascript" >}}
 function getRelevantDocs (question) {
@@ -1186,7 +1196,7 @@ getRelevantDocs = llmobs.wrap({ kind: 'retrieval' }, getRelevantDocs)
 
 ## Anidando intervalos
 
-Iniciar un nuevo intervalo antes de que el intervalo actual haya terminado rastrea automáticamente una relación padre-hijo entre los dos intervalos. El intervalo padre representa la operación más grande, mientras que el intervalo hijo representa una sub-operación más pequeña anidada dentro de ella.
+Iniciar un nuevo intervalo antes de que el intervalo actual haya terminado rastrea automáticamente una relación padre-hijo entre los dos intervalos. El intervalo padre representa la operación más grande, mientras que el intervalo hijo representa una suboperación más pequeña anidada dentro de ella.
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -1280,15 +1290,15 @@ El método `LLMObs.annotate()` acepta los siguientes argumentos:
 
 `metadata`
 : opcional - _diccionario_
-<br />Un diccionario de pares clave-valor serializables en JSON que los usuarios pueden agregar como información de metadatos relevante para la operación de entrada o salida descrita por el rango (`model_temperature`, `max_tokens`, `top_k`, etc.).
+<br />Un diccionario de pares clave-valor serializables en JSON que los usuarios pueden agregar como información de metadatos relevante a la operación de entrada o salida descrita por el rango (`model_temperature`, `max_tokens`, `top_k`, etc.).
 
 `metrics`
 : opcional - _diccionario_
-<br />Un diccionario de claves serializables en JSON y valores numéricos que los usuarios pueden agregar como métricas relevantes para la operación descrita por el rango (`input_tokens`, `output_tokens`, `total_tokens`, `time_to_first_token`, etc.). La unidad para `time_to_first_token` está en segundos, similar a la métrica `duration` que se emite por defecto.
+<br />Un diccionario de claves serializables en JSON y valores numéricos que los usuarios pueden agregar como métricas relevantes a la operación descrita por el rango (`input_tokens`, `output_tokens`, `total_tokens`, `time_to_first_token`, etc.). La unidad para `time_to_first_token` está en segundos, similar a la métrica `duration` que se emite por defecto.
 
 `tags`
 : opcional - _diccionario_
-<br />Un diccionario de pares clave-valor serializables en JSON que los usuarios pueden agregar como etiquetas en el span. Ejemplos de claves: `session`, `env`, `system` y `version`. Para más información sobre etiquetas, consulta [Introducción a las Etiquetas](/getting_started/tagging/).
+<br />Un diccionario de pares clave-valor serializables en JSON que los usuarios pueden agregar como etiquetas en el span. Ejemplos de claves: `session`, `env`, `system` y `version`. Para más información sobre etiquetas, consulte [Introducción a las Etiquetas](/getting_started/tagging/).
 
 {{% /collapse-content %}}
 
@@ -1374,11 +1384,11 @@ El objeto `annotationOptions` puede contener lo siguiente:
 
 `metadata`
 : opcional - _objeto_
-<br />Un objeto de pares clave-valor serializables en JSON que los usuarios pueden agregar como información de metadatos relevante para la operación de entrada o salida descrita por el intervalo (`model_temperature`, `max_tokens`, `top_k`, etc.).
+<br />Un objeto de pares clave-valor serializables en JSON que los usuarios pueden agregar como información de metadatos relevante a la operación de entrada o salida descrita por el intervalo (`model_temperature`, `max_tokens`, `top_k`, etc.).
 
 `metrics`
 : opcional - _objeto_
-<br />Un objeto de claves serializables en JSON y valores numéricos que los usuarios pueden agregar como métricas relevantes para la operación descrita por el intervalo (`input_tokens`, `output_tokens`, `total_tokens`, etc.).
+<br />Un objeto de claves serializables en JSON y valores numéricos que los usuarios pueden agregar como métricas relevantes a la operación descrita por el intervalo (`input_tokens`, `output_tokens`, `total_tokens`, etc.).
 
 `tags`
 : opcional - _objeto_
@@ -1449,7 +1459,7 @@ Utilice el método miembro `annotateIO()` de la interfaz `LLMObsSpan` para agreg
 
 #### Argumentos
 
-Si un argumento es nulo o vacío, no sucede nada. Por ejemplo, si `inputData` es una cadena no vacía mientras que `outputData` es nulo, entonces solo se registra `inputData`.
+Si un argumento es nulo o está vacío, no sucede nada. Por ejemplo, si `inputData` es una cadena no vacía mientras que `outputData` es nulo, entonces solo se registra `inputData`.
 
 `inputData`
 : opcional - _Cadena_ o _Lista<LLMObs.LLMMessage>_
@@ -1509,14 +1519,14 @@ El método miembro `setMetrics()` de la interfaz `LLMObsSpan` acepta los siguien
 : requerido - _Mapa<String, Número>_
 <br /> Un mapa de claves serializables en JSON y valores numéricos que los usuarios pueden agregar para registrar métricas relevantes a la operación descrita por el intervalo (por ejemplo, `input_tokens`, `output_tokens` o `total_tokens`).
 
-#### Agregar una métrica única
+#### Agregar una sola métrica
 
-El método miembro `setMetric()` de la interfaz `LLMObsSpan` acepta los siguientes argumentos para adjuntar una métrica única:
+El método miembro `setMetric()` de la interfaz `LLMObsSpan` acepta los siguientes argumentos para adjuntar una sola métrica:
 
 ##### Argumentos
 
 `key`
-: requerido - _SecuenciaDeCaracteres_
+: requerido - _Secuencia de caracteres_
 <br /> El nombre de la métrica.
 
 `value`
@@ -1547,7 +1557,7 @@ public class MyJavaClass {
 
 ### Agregando etiquetas
 
-Para más información sobre etiquetas, consulta [Introducción a las Etiquetas][1].
+Para más información sobre etiquetas, consulte [Introducción a las Etiquetas][1].
 
 #### Agregar etiquetas en bloque
 
@@ -1623,7 +1633,7 @@ El método miembro `setError()` de la interfaz `LLMObsSpan` acepta el siguiente 
 
 `error`
 : requerido - _boolean_
-<br /> `true` si el rango tuvo un error.
+<br /> `true` si el intervalo tuvo un error.
 
 #### Ejemplos
 
@@ -1656,6 +1666,7 @@ El método miembro `setMetadata()` de la interfaz `LLMObsSpan` acepta los siguie
 <br />Un mapa de pares clave-valor serializables en JSON que contiene metadatos relevantes para la operación de entrada o salida descrita por el span.
 
 #### Ejemplo
+
 ```java
 import datadog.trace.api.llmobs.LLMObs;
 
@@ -1692,15 +1703,15 @@ El método `LLMObs.annotation_context()` acepta los siguientes argumentos:
 
 `name`
 : opcional - _str_
-<br />Nombre que reemplaza el nombre del span para cualquier span auto-instrumentado que se inicie dentro del contexto de anotación.
+<br />Nombre que anula el nombre del span para cualquier span auto-instrumentado que se inicie dentro del contexto de anotación.
 
 `prompt`
 : opcional - _diccionario_
-<br />Un diccionario que representa el prompt utilizado para una llamada a LLM. Consulta la documentación del [objeto Prompt](#prompt-tracking-arguments) para el esquema completo y las claves soportadas. También puedes importar el `Prompt` objeto de `ddtrace.llmobs.utils` y pasarlo como el argumento `prompt`. **Nota**: Este argumento solo se aplica a los spans de LLM.
+<br />Un diccionario que representa el prompt utilizado para una llamada a LLM. Consulte la documentación del [objeto Prompt](#prompt-tracking-arguments) para el esquema completo y las claves admitidas. También puede importar el `Prompt` objeto de `ddtrace.llmobs.utils` y pasarlo como el argumento `prompt`. **Nota**: Este argumento solo se aplica a los spans de LLM.
 
 `tags`
 : opcional - _diccionario_
-<br />Un diccionario de pares clave-valor serializables en JSON que los usuarios pueden agregar como etiquetas en el span. Ejemplos de claves: `session`, `env`, `system` y `version`. Para más información sobre etiquetas, consulta [Introducción a las Etiquetas](/getting_started/tagging/).
+<br />Un diccionario de pares clave-valor serializables en JSON que los usuarios pueden agregar como etiquetas en el span. Ejemplos de claves: `session`, `env`, `system` y `version`. Para más información sobre etiquetas, consulte [Introducción a las Etiquetas](/getting_started/tagging/).
 
 {{% /collapse-content %}}
 
@@ -1746,7 +1757,7 @@ El método `llmobs.annotationContext()` acepta las siguientes opciones en el pri
 
 `name`
 : opcional - _str_
-<br />Nombre que reemplaza el nombre del span para cualquier span auto-instrumentado que se inicie dentro del contexto de anotación.
+<br />Nombre que anula el nombre del span para cualquier span auto-instrumentado que se inicie dentro del contexto de anotación.
 
 `tags`
 : opcional - _objeto_
@@ -1780,7 +1791,7 @@ function ragWorkflow(userQuestion) {
 
 ## Seguimiento de solicitudes
 
-Adjunta metadatos estructurados de la solicitud al rango del LLM para que puedas reproducir resultados, auditar cambios y comparar el rendimiento de las solicitudes entre versiones. Al usar plantillas, la Observabilidad del LLM también proporciona [seguimiento de versiones](#version-tracking) basado en cambios en el contenido de la plantilla.
+Adjunta metadatos estructurados de la solicitud al rango de LLM para que puedas reproducir resultados, auditar cambios y comparar el rendimiento de la solicitud entre versiones. Al usar plantillas, la Observabilidad de LLM también proporciona [seguimiento de versiones](#version-tracking) basado en cambios en el contenido de la plantilla.
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -1804,10 +1815,10 @@ Claves soportadas:
 - `version` (str): Etiqueta de versión para la solicitud (por ejemplo, "1.0.0"). Consulta [seguimiento de versiones](#version-tracking) para más detalles.
 - `variables` (Dict[str, str]): Variables utilizadas para poblar los marcadores de posición de la plantilla.
 - `template` (str): Cadena de plantilla con marcadores de posición (por ejemplo, `"Traducir {{text}} a {{lang}}"`).
-- `chat_template` (Lista[Mensaje]): Formato de plantilla de múltiples mensajes. Proporciona una lista de `{ "role": "<role>", "content": "<template string with placeholders>" }` objetos.
+- `chat_template` (Lista[Mensaje]): Formato de plantilla de múltiples mensajes. Proporcione una lista de `{ "role": "<role>", "content": "<template string with placeholders>" }` objetos.
 - `tags` (Dict[str, str]): Etiquetas para adjuntar a la ejecución del prompt.
-- `rag_context_variables` (Lista[str]): Claves variables que contienen contenido de verdad/contexto. Usado para [detección de alucinaciones](/llm_observability/evaluations/managed_evaluations/?tab=openai#hallucination).
-- `rag_query_variables` (Lista[str]): Claves variables que contienen la consulta del usuario. Usado para [detección de alucinaciones](/llm_observability/evaluations/managed_evaluations/?tab=openai#hallucination).
+- `rag_context_variables` (Lista[str]): Claves variables que contienen contenido de verdad/contexto. Utilizado para [detección de alucinaciones](/llm_observability/evaluations/managed_evaluations/?tab=openai#hallucination).
+- `rag_query_variables` (Lista[str]): Claves variables que contienen la consulta del usuario. Utilizado para [detección de alucinaciones](/llm_observability/evaluations/managed_evaluations/?tab=openai#hallucination).
 
 {{% /collapse-content %}}
 
@@ -1835,7 +1846,7 @@ def answer_question(text):
 
 #### Ejemplo: plantillas de prompt de LangChain
 
-Cuando uses la plantilla de prompts de LangChain con auto-instrumentación, asigna plantillas a variables con nombres significativos. La auto-instrumentación utiliza estos nombres para identificar los prompts.
+Cuando utilice la plantilla de prompts de LangChain con auto-instrumentación, asigne plantillas a variables con nombres significativos. La auto-instrumentación utiliza estos nombres para identificar los prompts.
 
 {{< code-block lang="python" >}}
 # "translation_template" will be used to identify the template in Datadog
@@ -1868,8 +1879,8 @@ Propiedades soportadas:
 - `variables` (Registro<string, string>): Variables utilizadas para poblar los marcadores de posición de la plantilla.
 - `template` (cadena | Lista[Mensaje]): Cadena de plantilla con marcadores de posición (por ejemplo, `"Traducir {{text}} a {{lang}}"`). Alternatively, a list of `{ "rol": "<role>", "contenido": "<template string with placeholders>" }` objetos.
 - `tags` (Registro<string, string>): Etiquetas para adjuntar a la ejecución del prompt.
-- `contextVariables` (cadena[]): Claves de variable que contienen contenido de verdad de referencia/contexto. Usado para [detección de alucinaciones](/llm_observability/evaluations/managed_evaluations/?tab=openai#hallucination).
-- `queryVariables` (cadena[]): Claves de variable que contienen la consulta del usuario. Usado para [detección de alucinaciones](/llm_observability/evaluations/managed_evaluations/?tab=openai#hallucination).
+- `contextVariables` (cadena[]): Claves de variable que contienen contenido de verdad fundamental/contexto. Utilizado para la [detección de alucinaciones](/llm_observability/evaluations/managed_evaluations/?tab=openai#hallucination).
+- `queryVariables` (cadena[]): Claves de variable que contienen la consulta del usuario. Utilizado para la [detección de alucinaciones](/llm_observability/evaluations/managed_evaluations/?tab=openai#hallucination).
 
 {{% /collapse-content %}}
 
@@ -1903,35 +1914,35 @@ function answerQuestion(text) {
 {{< /tabs >}}
 
 #### Notas
-- Anotar un prompt solo está disponible en tramos de LLM.
+- La anotación de un prompt solo está disponible en los tramos de LLM.
 - Coloca la anotación inmediatamente antes de la llamada al proveedor para que se aplique al tramo de LLM correcto.
-- Usa un prompt único `id` para distinguir diferentes prompts dentro de tu aplicación.
-- Mantén las plantillas estáticas usando la sintaxis de marcador de posición (como `{{nombre_variable}}`) and define dynamic content in the `sección de variables.
-- Para múltiples llamadas de LLM auto-instrumentadas dentro de un bloque, usa un contexto de anotación para aplicar los mismos metadatos del prompt en todas las llamadas. Consulta [Anotando tramos auto-instrumentados](#annotating-auto-instrumented-spans).
+- Utiliza un prompt único `id` para distinguir diferentes prompts dentro de tu aplicación.
+- Mantén las plantillas estáticas utilizando la sintaxis de marcador de posición (como `{{nombre_variable}}`) and define dynamic content in the `sección de variables.
+- Para múltiples llamadas de LLM auto-instrumentadas dentro de un bloque, utiliza un contexto de anotación para aplicar los mismos metadatos del prompt en todas las llamadas. Consulta [Anotando tramos auto-instrumentados](#annotating-auto-instrumented-spans).
 
 ### Seguimiento de versiones
 
-La observabilidad de LLM proporciona versionado automático para tus prompts cuando no se especifica una versión explícita. Cuando proporcionas un `template` o `chat_template` en los metadatos de tu prompt sin una etiqueta `version`, el sistema genera automáticamente una versión calculando un hash del contenido de la plantilla. Si proporcionas una etiqueta `version`, la observabilidad de LLM usa tu etiqueta de versión especificada en lugar de generar una automáticamente.
+La Observabilidad de LLM proporciona versionado automático para tus prompts cuando no se especifica una versión explícita. Cuando proporcionas un `template` o `chat_template` en los metadatos de tu prompt sin una etiqueta `version`, el sistema genera automáticamente una versión calculando un hash del contenido de la plantilla. Si proporcionas una etiqueta `version`, la Observabilidad de LLM utiliza la etiqueta de versión que especificaste en lugar de generar una automáticamente.
 
 El sistema de versionado funciona de la siguiente manera:
-- **Versionado automático**: Cuando no se proporciona una etiqueta `version`, la observabilidad de LLM calcula un hash del contenido `template` o `chat_template` para generar automáticamente un identificador de versión numérica.
-- **Versionado manual**: Cuando se proporciona una `version` etiqueta, LLM Observability utiliza tu etiqueta de versión especificada exactamente como se proporciona
+- **Versionado automático**: Cuando no se proporciona una etiqueta `version`, la Observabilidad de LLM calcula un hash del contenido `template` o `chat_template` para generar automáticamente un identificador de versión numérico.
+- **Versionado manual**: Cuando se proporciona una `version` etiqueta, LLM Observability utiliza su etiqueta de versión especificada exactamente como se proporciona
 - **Historial de versiones**: Tanto las versiones generadas automáticamente como las manuales se mantienen en el historial de versiones para rastrear la evolución de los prompts a lo largo del tiempo
 
-Esto te brinda la flexibilidad de confiar en la gestión automática de versiones basada en cambios en el contenido de la plantilla, o mantener el control total sobre el versionado con tus propias etiquetas de versión.
+Esto le brinda la flexibilidad de confiar en la gestión automática de versiones basada en cambios en el contenido de la plantilla, o mantener el control total sobre el versionado con sus propias etiquetas de versión.
 
 ## Monitoreo de costos
-Adjunta métricas de tokens (para seguimiento automático de costos) o métricas de costos (para seguimiento manual de costos) a tus tramos de LLM/embedding. Las métricas de tokens permiten a Datadog calcular costos utilizando los precios del proveedor, mientras que las métricas de costos te permiten proporcionar tu propio precio al usar modelos personalizados o no soportados. Para más detalles, consulta [Costos][14].
+Adjunte métricas de tokens (para el seguimiento automático de costos) o métricas de costos (para el seguimiento manual de costos) a sus tramos de LLM/embedding. Las métricas de tokens permiten a Datadog calcular costos utilizando los precios del proveedor, mientras que las métricas de costos le permiten proporcionar su propio precio al usar modelos personalizados o no compatibles. Para más detalles, consulte [Costos][14].
 
-Si estás utilizando instrumentación automática, las métricas de tokens y costos aparecen en tus tramos automáticamente. Si estás instrumentando manualmente, sigue la guía a continuación.
+Si está utilizando instrumentación automática, las métricas de tokens y costos aparecen en sus tramos automáticamente. Si está instrumentando manualmente, siga la guía a continuación.
 
-<div class="alert alert-info">Caso de uso: Usando un proveedor de modelo común Datadog soporta proveedores de modelos comunes como OpenAI, Azure OpenAI, Anthropic y Google Gemini. Al usar estos proveedores, solo necesitas anotar tu solicitud de LLM con ,  y el uso de tokens.
+<div class="alert alert-info">Caso de uso: Usando un proveedor de modelo común Datadog admite proveedores de modelos comunes como OpenAI, Azure OpenAI, Anthropic y Google Gemini. Al usar estos proveedores, solo necesita anotar su solicitud de LLM con ,  y el uso de tokens.
 
 {{< tabs >}}
 {{% tab "Python" %}}
 
 Datadog calcula automáticamente el costo estimado basado en el precio del proveedor.
-Caso de uso: Usando un modelo personalizado Para modelos personalizados o no soportados, debes anotar el tramo manualmente con los datos de costo. Evaluaciones
+Caso de uso: Usando un modelo personalizado Para modelos personalizados o no compatibles, debe anotar el tramo manualmente con los datos de costo. Evaluaciones
 
 {{< code-block lang="python" >}}
 from ddtrace.llmobs import LLMObs
@@ -1954,7 +1965,7 @@ def llm_call(prompt):
     return resp
 {{< /code-block >}}
 
-El SDK de LLM Observability proporciona métodos para exportar y enviar tus evaluaciones a Datadog.
+El SDK de LLM Observability proporciona métodos para exportar y enviar sus evaluaciones a Datadog.
 
 
 {{< code-block lang="python" >}}
@@ -1986,16 +1997,16 @@ def llm_call(prompt):
 
 
 
-<div class="alert alert-info">Para construir evaluadores reutilizables basados en clases (<code>BaseEvaluator</code>, <code>BaseSummaryEvaluator</code>) con metadatos de resultados ricos, consulta la <a href="/llm_observability/guide/evaluation_developer_guide/">Guía del Desarrollador de Evaluación</a>.</div>
+<div class="alert alert-info">Para construir evaluadores reutilizables basados en clases (<code>BaseEvaluator</code>, <code>BaseSummaryEvaluator</code>) con metadatos de resultados ricos, consulte la <a href="/llm_observability/guide/evaluation_developer_guide/">Guía del Desarrollador de Evaluación</a>.</div>
 
-Las evaluaciones deben unirse a un solo intervalo. Puedes identificar el intervalo objetivo utilizando cualquiera de estos dos métodos:
-- _Unión basada en etiquetas_ - Une una evaluación utilizando un par de clave-valor de etiqueta único que se establece en un solo intervalo. La evaluación fallará al unirse si el par de clave-valor de la etiqueta coincide con múltiples intervalos o con ningún intervalo.
-- _Referencia directa al intervalo_ - Une una evaluación utilizando la combinación del ID de traza único del intervalo y el ID del intervalo.
+Las evaluaciones deben unirse a un solo intervalo. Puede identificar el intervalo objetivo utilizando cualquiera de estos dos métodos:
+- _Unión basada en etiquetas_ - Una evaluación se une utilizando un par de clave-valor de etiqueta único que se establece en un solo intervalo. La evaluación fallará al unirse si el par de clave-valor de la etiqueta coincide con múltiples intervalos o con ningún intervalo.
+- _Referencia directa al intervalo_ - Una evaluación se une utilizando la combinación del ID de traza único del intervalo y el ID del intervalo.
 
 ### Exportando un intervalo
 {{< tabs >}}
 {{% tab "Python" %}}
-`LLMObs.export_span()` se puede usar para extraer el contexto del intervalo de un intervalo. Este método es útil para asociar tu evaluación con el intervalo correspondiente.
+`LLMObs.export_span()` se puede usar para extraer el contexto del intervalo de un intervalo. Este método es útil para asociar su evaluación con el intervalo correspondiente.
 
 #### Argumentos
 El `LLMObs.export_span()` método acepta el siguiente argumento:
@@ -2020,7 +2031,7 @@ def llm_call():
 {{% /tab %}}
 
 {{% tab "Node.js" %}}
-`llmobs.exportSpan()` se puede usar para extraer el contexto del intervalo de un intervalo. Necesitarás usar este método para asociar tu evaluación con el intervalo correspondiente.
+`llmobs.exportSpan()` se puede usar para extraer el contexto del intervalo de un intervalo. Necesitará usar este método para asociar su evaluación con el intervalo correspondiente.
 
 #### Argumentos
 
@@ -2047,11 +2058,11 @@ llmCall = llmobs.wrap({ kind: 'llm', name: 'invokeLLM', modelName: 'claude', mod
 
 {{< tabs >}}
 {{% tab "Python" %}}
-`LLMObs.submit_evaluation()` se puede usar para enviar tu evaluación personalizada asociada con un intervalo dado.
+`LLMObs.submit_evaluation()` se puede usar para enviar su evaluación personalizada asociada con un intervalo dado.
 
-<div class="alert alert-info"><code>LLMObs.submit_evaluation_for</code> está en desuso y se eliminará en la próxima versión principal de ddtrace (4.0). Para migrar, renombra tus llamadas a <code>LLMObs.submit_evaluation_for</code> con <code>LLMObs.submit_evaluation</code>.</div>
+<div class="alert alert-info"><code>LLMObs.submit_evaluation_for</code> está en desuso y se eliminará en la próxima versión principal de ddtrace (4.0). Para migrar, renombre sus llamadas a <code>LLMObs.submit_evaluation_for</code> con <code>LLMObs.submit_evaluation</code>.</div>
 
-**Nota**: Las evaluaciones personalizadas son evaluadores que implementas y alojas tú mismo. Estos difieren de las evaluaciones predeterminadas, que son calculadas automáticamente por Datadog utilizando evaluadores integrados. Para configurar evaluaciones predeterminadas para tu aplicación, utiliza la página [**Observabilidad LLM** > **Configuraciones** > **Evaluaciones**][1] en Datadog.
+**Nota**: Las evaluaciones personalizadas son evaluadores que usted implementa y aloja usted mismo. Estos difieren de las evaluaciones predeterminadas, que son calculadas automáticamente por Datadog utilizando evaluadores integrados. Para configurar evaluaciones predeterminadas para su aplicación, utilice la página [**Observabilidad LLM** > **Configuraciones** > **Evaluaciones**][1] en Datadog.
 
 El método `LLMObs.submit_evaluation()` acepta los siguientes argumentos:
 
@@ -2070,13 +2081,13 @@ El método `LLMObs.submit_evaluation()` acepta los siguientes argumentos:
 
 `span`
 : opcional - _diccionario_
-<br />Un diccionario que identifica de manera única el intervalo asociado con esta evaluación. Debe contener `span_id` (cadena) y `trace_id` (cadena). Usa [`LLMObs.export_span()`](#exporting-a-span) para generar este diccionario.
+<br />Un diccionario que identifica de manera única el intervalo asociado con esta evaluación. Debe contener `span_id` (cadena) y `trace_id` (cadena). Utilice [`LLMObs.export_span()`](#exporting-a-span) para generar este diccionario.
 
 `span_with_tag_value`
 : opcional - _diccionario_
 <br />Un diccionario que identifica de manera única el rango asociado con esta evaluación. Debe contener `tag_key` (cadena) y `tag_value` (cadena).
 
-   **Nota**: Exactamente uno de `span` o `span_with_tag_value` es requerido. Proporcionar ambos, o ninguno, genera un ValueError.
+   **Nota**: Se requiere exactamente uno de `span` o `span_with_tag_value`. Proporcionar ambos, o ninguno, genera un ValueError.
 
 `ml_app`
 : requerido - _cadena_
@@ -2084,11 +2095,11 @@ El método `LLMObs.submit_evaluation()` acepta los siguientes argumentos:
 
 `timestamp_ms`
 : opcional - _entero_
-<br />La marca de tiempo unix en milisegundos cuando se generó el resultado de la métrica de evaluación. Si no se proporciona, esto se establece en el tiempo actual.
+<br />La marca de tiempo unix en milisegundos cuando se generó el resultado de la métrica de evaluación. Si no se proporciona, esto se establece en la hora actual.
 
 `tags`
 : opcional - _diccionario_
-<br />Un diccionario de pares clave-valor de cadena que los usuarios pueden agregar como etiquetas sobre la evaluación. Para más información sobre etiquetas, consulte [Introducción a las Etiquetas](/getting_started/tagging/).
+<br />Un diccionario de pares clave-valor de cadena que los usuarios pueden agregar como etiquetas relacionadas con la evaluación. Para más información sobre etiquetas, consulte [Introducción a las Etiquetas](/getting_started/tagging/).
 
 `assessment`
 : opcional - _cadena_
@@ -2178,15 +2189,15 @@ El objeto `evaluationOptions` puede contener lo siguiente:
 
 `metricType`
 : requerido - _cadena_
-<br />El tipo de la evaluación. Debe ser uno de "categórico", "puntuación", "booleano" o "json".
+<br />El tipo de la evaluación. Debe ser uno de "categórico", "puntaje", "booleano" o "json".
 
 `value`
 : requerido - _tipo de cadena o numérico_
-<br />El valor de la evaluación. Debe ser una cadena (para categórico `metric_type`), número (para puntuación `metric_type`), booleano (para booleano `metric_type`), o un objeto JSON (para json `metric_type`).
+<br />El valor de la evaluación. Debe ser una cadena (para categórico `metric_type`), número (para puntaje `metric_type`), booleano (para booleano `metric_type`), o un objeto JSON (para json `metric_type`).
 
 `tags`
 : opcional - _diccionario_
-<br />Un diccionario de pares clave-valor de cadena que los usuarios pueden agregar como etiquetas relacionadas con la evaluación. Para más información sobre etiquetas, consulte [Introducción a las Etiquetas](/getting_started/tagging/).
+<br />Un diccionario de pares clave-valor de cadena que los usuarios pueden agregar como etiquetas respecto a la evaluación. Para más información sobre etiquetas, consulte [Introducción a las Etiquetas](/getting_started/tagging/).
 
 `assessment`
 : opcional - _cadena_
@@ -2222,7 +2233,7 @@ llmCall = llmobs.wrap({ kind: 'llm', name: 'invokeLLM', modelName: 'claude', mod
 {{% /tab %}}
 {{% tab "Java" %}}
 
-Usa `LLMObs.SubmitEvaluation()` para enviar tu evaluación personalizada asociada con un intervalo dado.
+Utilice `LLMObs.SubmitEvaluation()` para enviar su evaluación personalizada asociada con un intervalo dado.
 
 El método `LLMObs.SubmitEvaluation()` acepta los siguientes argumentos:
 
@@ -2242,7 +2253,7 @@ El método `LLMObs.SubmitEvaluation()` acepta los siguientes argumentos:
 
 `tags`
 : opcional - _Mapa<String, Object>_
-<br />Un diccionario de pares clave-valor de cadenas utilizados para etiquetar la evaluación. Para más información sobre etiquetas, consulta [Introducción a las Etiquetas](/getting_started/tagging/).
+<br />Un diccionario de pares clave-valor de cadenas utilizados para etiquetar la evaluación. Para más información sobre etiquetas, consulte [Introducción a las Etiquetas](/getting_started/tagging/).
 {{% /collapse-content %}}
 
 #### Ejemplo
@@ -2277,7 +2288,7 @@ public class MyJavaClass {
 
 ## Procesamiento de intervalos
 
-Para modificar los datos de entrada y salida en intervalos, puedes configurar una función procesadora. La función del procesador tiene acceso a las etiquetas de span para habilitar la modificación condicional de entrada/salida. Las funciones del procesador pueden devolver el span modificado para emitirlo, o devolver `None`/`null` para evitar que el span se emita por completo. Esto es útil para filtrar spans que contienen datos sensibles o que cumplen ciertos criterios.
+Para modificar los datos de entrada y salida en intervalos, puede configurar una función de procesador. La función del procesador tiene acceso a las etiquetas de span para habilitar la modificación condicional de entrada/salida. Las funciones del procesador pueden devolver el span modificado para emitirlo, o devolver `None`/`null` para evitar que el span sea emitido por completo. Esto es útil para filtrar spans que contienen datos sensibles o que cumplen ciertos criterios.
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -2449,7 +2460,7 @@ El seguimiento de sesiones permite asociar múltiples interacciones con un usuar
 
 {{< tabs >}}
 {{% tab "Python" %}}
-Al iniciar un span raíz para un nuevo rastro o span en un nuevo proceso, especifica el argumento `session_id` con el ID de cadena de la sesión de usuario subyacente, que se envía como una etiqueta en el span. Opcionalmente, también puedes especificar las etiquetas `user_handle`, `user_name` y `user_id`.
+Al iniciar un span raíz para un nuevo rastro o span en un nuevo proceso, especifique el argumento `session_id` con el ID de cadena de la sesión de usuario subyacente, que se envía como una etiqueta en el span. Opcionalmente, también puede especificar las etiquetas `user_handle`, `user_name` y `user_id`.
 
 {{< code-block lang="python" >}}
 from ddtrace.llmobs.decorators import workflow
@@ -2468,13 +2479,13 @@ def process_user_message():
 | Etiqueta | Descripción |
 |---|---|
 | `session_id` | El ID que representa una única sesión de usuario, por ejemplo, una sesión de chat. |
-| `user_handle` | El identificador del usuario de la sesión de chat. |
-| `user_name` | El nombre del usuario de la sesión de chat. |
-| `user_id` | El ID del usuario de la sesión de chat. |
+| `user_handle` | El identificador para el usuario de la sesión de chat. |
+| `user_name` | El nombre para el usuario de la sesión de chat. |
+| `user_id` | El ID para el usuario de la sesión de chat. |
 {{% /tab %}}
 
 {{% tab "Node.js" %}}
-Al iniciar un span raíz para un nuevo rastro o span en un nuevo proceso, especifica el argumento `sessionId` con el ID de cadena de la sesión de usuario subyacente:
+Al iniciar un span raíz para un nuevo rastro o span en un nuevo proceso, especifique el argumento `sessionId` con el ID de cadena de la sesión de usuario subyacente:
 
 {{< code-block lang="javascript" >}}
 function processMessage() {
@@ -2486,7 +2497,7 @@ processMessage = llmobs.wrap({ kind: 'workflow', sessionId: "<SESSION_ID>" }, pr
 {{% /tab %}}
 
 {{% tab "Java" %}}
-Al iniciar un span raíz para un nuevo rastro o span en un nuevo proceso, especifica el argumento `sessionId` con el ID de cadena de la sesión de usuario subyacente:
+Al iniciar un span raíz para un nuevo rastro o span en un nuevo proceso, especifique el argumento `sessionId` con el ID de cadena de la sesión de usuario subyacente:
 
 {{< code-block lang="java" >}}
 import datadog.trace.api.llmobs.LLMObs;
@@ -2506,12 +2517,12 @@ public class MyJavaClass {
 
 ## Trazado distribuido
 
-El SDK admite trazado a través de servicios o hosts distribuidos. El trazado distribuido funciona propagando información de span a través de solicitudes web.
+El SDK admite el trazado a través de servicios o hosts distribuidos. El trazado distribuido funciona propagando información de span a través de solicitudes web.
 
 {{< tabs >}}
 {{% tab "Python" %}}
 
-La biblioteca `ddtrace` proporciona algunas integraciones listas para usar que admiten trazado distribuido para populares [marcos web][1] y bibliotecas de [HTTP][2]. Si su aplicación realiza solicitudes utilizando estas bibliotecas admitidas, puede habilitar el trazado distribuido ejecutando:
+La biblioteca `ddtrace` proporciona algunas integraciones listas para usar que admiten el trazado distribuido para populares [marcos web][1] y [bibliotecas HTTP][2]. Si su aplicación realiza solicitudes utilizando estas bibliotecas admitidas, puede habilitar el trazado distribuido ejecutando:
 {{< code-block lang="python">}}
 from ddtrace import patch
 patch(<INTEGRATION_NAME>=True)
@@ -2521,7 +2532,7 @@ Si su aplicación no utiliza ninguna de estas bibliotecas admitidas, puede habil
 
 ### Inyectando encabezados distribuidos
 
-El método `LLMObs.inject_distributed_headers()` toma un span e inyecta su contexto en los encabezados HTTP para ser incluidos en la solicitud. Este método acepta los siguientes argumentos:
+El método `LLMObs.inject_distributed_headers()` toma un span e inyecta su contexto en los encabezados HTTP que se incluirán en la solicitud. Este método acepta los siguientes argumentos:
 
 `request_headers`
 : requerido - _diccionario_
@@ -2571,7 +2582,7 @@ def server_process_request(request):
 {{% /tab %}}
 {{% tab "Node.js" %}}
 
-La `dd-trace` biblioteca proporciona integraciones listas para usar que soportan trazado distribuido para [marcos web populares][1]. Requerir el trazador habilita automáticamente estas integraciones, pero puedes desactivarlas opcionalmente con:
+La biblioteca `dd-trace` proporciona integraciones listas para usar que soportan trazado distribuido para [marcos web populares][1]. Requerir el trazador habilita automáticamente estas integraciones, pero puedes desactivarlas opcionalmente con:
 
 {{< code-block lang="javascript">}}
 const tracer = require('dd-trace').init({
@@ -2589,7 +2600,7 @@ tracer.use('http', false) // disable the http integration
 
 {{< tabs >}}
 {{% tab "Python" %}}
-### Trazado de intervalos usando métodos en línea
+### Trazado de intervalos utilizando métodos en línea
 
 Para cada tipo de intervalo, la clase `ddtrace.llmobs.LLMObs` proporciona un método en línea correspondiente para trazar automáticamente la operación que implica un bloque de código dado. Estos métodos tienen la misma firma de argumento que sus contrapartes de decorador de función, con la adición de que `name` por defecto es el tipo de intervalo (`llm`, `workflow`, etc.) si no se proporciona. Estos métodos pueden ser utilizados como administradores de contexto para finalizar automáticamente el intervalo después de que se complete el bloque de código encerrado.
 
@@ -2608,9 +2619,9 @@ def process_message():
 
 Para iniciar y detener manualmente un intervalo a través de diferentes contextos o ámbitos:
 
-1. Inicia un intervalo manualmente usando los mismos métodos (por ejemplo, el método `LLMObs.workflow` para un intervalo de flujo de trabajo), pero como una llamada de función simple en lugar de como un administrador de contexto.
+1. Inicia un intervalo manualmente utilizando los mismos métodos (por ejemplo, el método `LLMObs.workflow` para un intervalo de flujo de trabajo), pero como una llamada de función simple en lugar de como un administrador de contexto.
 2. Pasa el objeto de intervalo como un argumento a otras funciones.
-3. Detén el intervalo manualmente con el método `span.finish()`. **Nota**: el intervalo debe finalizarse manualmente, de lo contrario no se envía.
+3. Detén el intervalo manualmente con el método `span.finish()`. **Nota**: el span debe finalizarse manualmente, de lo contrario no se envía.
 
 #### Ejemplo
 
@@ -2631,15 +2642,15 @@ def separate_task(workflow_span):
 
 #### Forzar el vaciado en entornos sin servidor
 
-`LLMObs.flush()` es una función bloqueante que envía todos los datos de observabilidad de LLM en búfer al backend de Datadog. Esto puede ser útil en entornos sin servidor para evitar que una aplicación salga hasta que se envíen todos los rastros de observabilidad de LLM.
+`LLMObs.flush()` es una función bloqueante que envía todos los datos de observabilidad de LLM en búfer al backend de Datadog. Esto puede ser útil en entornos sin servidor para evitar que una aplicación se cierre hasta que se envíen todos los rastros de observabilidad de LLM.
 
-### Rastreando múltiples aplicaciones
+### Rastreo de múltiples aplicaciones
 
 El SDK admite el rastreo de múltiples aplicaciones de LLM desde el mismo servicio.
 
-Puedes configurar una variable de entorno `DD_LLMOBS_ML_APP` con el nombre de tu aplicación LLM, en la que se agrupan por defecto todos los intervalos generados.
+Puedes configurar una variable de entorno `DD_LLMOBS_ML_APP` con el nombre de tu aplicación LLM, en la que se agrupan por defecto todos los spans generados.
 
-Para anular esta configuración y usar un nombre de aplicación LLM diferente para un intervalo raíz dado, pasa el argumento `ml_app` con el nombre de cadena de la aplicación LLM subyacente al iniciar un intervalo raíz para un nuevo rastro o un intervalo en un nuevo proceso.
+Para anular esta configuración y usar un nombre de aplicación LLM diferente para un span raíz dado, pasa el argumento `ml_app` con el nombre de cadena de la aplicación LLM subyacente al iniciar un span raíz para un nuevo rastreo o un span en un nuevo proceso.
 
 {{< code-block lang="python">}}
 from ddtrace.llmobs.decorators import workflow
@@ -2653,13 +2664,13 @@ def process_message():
 {{% /tab %}}
 
 {{% tab "Node.js" %}}
-### Trazado de intervalos usando métodos en línea
+### Trazado de intervalos utilizando métodos en línea
 
-El SDK `llmobs` proporciona un método en línea correspondiente para rastrear automáticamente la operación que implica un bloque de código dado. Estos métodos tienen la misma firma de argumentos que sus contrapartes de envoltura de función, con la adición de que `name` es requerido, ya que el nombre no puede inferirse de un callback anónimo. Este método finalizará el intervalo bajo las siguientes condiciones:
+El SDK `llmobs` proporciona un método en línea correspondiente para rastrear automáticamente la operación que implica un bloque de código dado. Estos métodos tienen la misma firma de argumentos que sus contrapartes de envoltura de función, con la adición de que `name` es requerido, ya que el nombre no puede inferirse de un callback anónimo. Este método finalizará el span bajo las siguientes condiciones:
 
-- Si la función devuelve una Promesa, entonces el intervalo finaliza cuando la promesa se resuelve o se rechaza.
-- Si la función toma un callback como su último parámetro, entonces el intervalo finaliza cuando se llama a ese callback.
-- Si la función no acepta un callback y no devuelve una Promesa, entonces el intervalo finaliza al final de la ejecución de la función.
+- Si la función devuelve una Promesa, entonces el span finaliza cuando la promesa se resuelve o se rechaza.
+- Si la función toma un callback como su último parámetro, entonces el span finaliza cuando se llama a ese callback.
+- Si la función no acepta un callback y no devuelve una Promesa, entonces el span finaliza al final de la ejecución de la función.
 
 #### Ejemplo sin un callback
 
@@ -2701,7 +2712,7 @@ function processMessage () {
 
 ### Decoradores de función en TypeScript
 
-El SDK de observabilidad de LLM de Node.js ofrece una `llmobs.decorate` función que sirve como un decorador de función para aplicaciones de TypeScript. El comportamiento de rastreo de esta función es el mismo que `llmobs.wrap`.
+El SDK de observabilidad de LLM de Node.js ofrece una función `llmobs.decorate` que sirve como decorador de función para aplicaciones de TypeScript. El comportamiento de rastreo de esta función es el mismo que `llmobs.wrap`.
 
 #### Ejemplo
 
@@ -2728,15 +2739,15 @@ class MyAgent {
 
 ### Forzar el vaciado en entornos sin servidor
 
-`llmobs.flush()` es una función bloqueante que envía todos los datos de observabilidad de LLM en búfer al backend de Datadog. Esto puede ser útil en entornos sin servidor para evitar que una aplicación salga hasta que se envíen todos los rastros de observabilidad de LLM.
+`llmobs.flush()` es una función bloqueante que envía todos los datos de observabilidad de LLM en búfer al backend de Datadog. Esto puede ser útil en entornos sin servidor para evitar que una aplicación se cierre hasta que se envíen todos los rastros de observabilidad de LLM.
 
-### Rastreando múltiples aplicaciones
+### Rastreo de múltiples aplicaciones
 
 El SDK admite el rastreo de múltiples aplicaciones de LLM desde el mismo servicio.
 
-Puedes configurar una variable de entorno `DD_LLMOBS_ML_APP` con el nombre de tu aplicación LLM, en la que se agrupan por defecto todos los intervalos generados.
+Puedes configurar una variable de entorno `DD_LLMOBS_ML_APP` con el nombre de tu aplicación LLM, en la que se agrupan por defecto todos los spans generados.
 
-Para anular esta configuración y usar un nombre de aplicación LLM diferente para un intervalo raíz dado, pasa el argumento `mlApp` con el nombre de cadena de la aplicación LLM subyacente al iniciar un intervalo raíz para un nuevo rastro o un intervalo en un nuevo proceso.
+Para anular esta configuración y usar un nombre de aplicación LLM diferente para un span raíz dado, pasa el argumento `mlApp` con el nombre de cadena de la aplicación LLM subyacente al iniciar un span raíz para un nuevo rastreo o un span en un nuevo proceso.
 
 {{< code-block lang="javascript">}}
 function processMessage () {
@@ -2751,7 +2762,7 @@ processMessage = llmobs.wrap({ kind: 'workflow', name: 'processMessage', mlApp: 
 
 ### Directrices para nombrar aplicaciones
 
-El nombre de tu aplicación (el valor de `DD_LLMOBS_ML_APP`) debe seguir estas directrices:
+El nombre de su aplicación (el valor de `DD_LLMOBS_ML_APP`) debe seguir estas directrices:
 
 - Debe ser una cadena Unicode en minúsculas
 - Puede tener hasta 193 caracteres de longitud
