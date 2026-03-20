@@ -237,14 +237,14 @@ Case Management integration is not supported in the {{< region-param key=dd_data
 </div>
 {{% /site-region %}}
 
-Send cases from Datadog to either the Datadog Cases ITOM or ITSM table in ServiceNow. ServiceNow stores incoming records and uses the installed update set to transform the records in the Event or Incident table. Datadog doesn't support custom payloads for these tables, or updates to the Events table.
+Send cases from Datadog to the Datadog Cases ITSM table in ServiceNow. ServiceNow stores incoming records and uses the installed update set to transform the records in the Incident table. Datadog doesn't support custom payloads for this table.
 
 <div class="alert alert-info">The user configuring the settings in ServiceNow must have both the <code>x_datad_datadog.user</code> and <code>admin</code> roles.</a></div>
 
 1. In Datadog, go to the [ServiceNow integration settings][4] page.
-1. Go to the **Configure** tab, then the **ITOM/ITSM** tab, then the **Case Management** tab.
+1. Go to the **Configure** tab, then the **ITSM** tab, then the **Case Management** tab.
 1. Under **Sync ServiceNow with Case Management**, open the settings for your ServiceNow instance.
-1. Beside **Case Table**, choose to send cases to either **Datadog Cases ITOM** or **Datadog Cases ITSM**.
+1. Beside **Case Table**, choose to send cases to **Datadog Cases ITSM**.
 1. Navigate to the [**Case Management > Settings**][5] page, and expand your project. Then, [set up the ServiceNow integration][6] for that project.
 
 ### Configure Datadog Incident Management {#incident-management}
