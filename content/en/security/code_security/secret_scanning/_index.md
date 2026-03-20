@@ -27,7 +27,7 @@ Scans can run in your CI/CD pipelines or directly in Datadog with hosted scannin
 ## Secret Scanning rules
 
 Datadog Secret Scanning is powered by [Sensitive Data Scanner (SDS)][3] and includes all of the rules in the
-[Secrets and credentials category of SDS][4].
+[Secrets and credentials category of SDS][4]. For a subset of detections, Secret Scanning will automatically check if detected keys are live with [third-party active validation][17]. 
 
 ## How it works
 
@@ -101,3 +101,4 @@ To restore a muted finding, click **Unmute** in the details panel. You can also 
 [14]: https://app.datadoghq.com/ci/code-analysis?
 [15]: https://app.datadoghq.com/security/code-security/secrets
 [16]: /security/ticketing_integrations#bidirectional-ticket-syncing-with-jira
+[17]: /security/code_security/secret_scanning/secret_validation/
