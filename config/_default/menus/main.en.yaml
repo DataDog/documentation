@@ -8877,7 +8877,7 @@ menu:
       parent: digital_experience_heading
       identifier: pa_experiments
       weight: 50000
-    - name: Plan and Launch and Experiment
+    - name: Plan and Launch Experiments
       url: experiments/plan_and_launch_experiments
       parent: pa_experiments
       identifier: pa_experiments_plan
@@ -8887,7 +8887,7 @@ menu:
       parent: pa_experiments
       identifier: pa_experiments_metrics
       weight: 2
-    - name: Reading Experiment Results
+    - name: Read Experiment Results
       url: experiments/reading_results
       parent: pa_experiments
       identifier: pa_experiments_results
