@@ -1,6 +1,8 @@
 ---
 title: Indexes
 description: Learn how to configure multiple indexes with custom filters and retention policies for your CloudPrem cluster
+aliases:
+  - /cloudprem/configure/retention/
 further_reading:
 - link: "/cloudprem/configure/pipelines/"
   tag: "Documentation"
@@ -13,8 +15,6 @@ further_reading:
 {{< callout url="https://www.datadoghq.com/product-preview/cloudprem/" btn_hidden="false" header="CloudPrem is in Preview" >}}
   Join the CloudPrem Preview to access new self-hosted log management features.
 {{< /callout >}}
-
-## Overview
 
 By default, a CloudPrem cluster stores all logs in a single index with a single retention policy. With multiple indexes, you can segment logs by defining filter queries and assigning a different retention period to each index. For example, you can retain audit logs for 1 year while keeping debug logs for only 3 days.
 
