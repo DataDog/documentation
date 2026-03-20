@@ -740,6 +740,11 @@
     },
     {
       "group": "logs_pipelines",
+      "suffix": "_2599033345",
+      "description": "Create a pipeline with nested pipeline processor returns \"OK\" response"
+    },
+    {
+      "group": "logs_pipelines",
       "suffix": "_501419705",
       "description": "Create a pipeline with schema processor"
     }
@@ -928,6 +933,11 @@
     }
   ],
   "CreateSLO": [
+    {
+      "group": "service_level_objectives",
+      "suffix": "_707861409",
+      "description": "Create a new metric SLO object using bad events formula returns \"OK\" response"
+    },
     {
       "group": "service_level_objectives",
       "suffix": "_512760759",
