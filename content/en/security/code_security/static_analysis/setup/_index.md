@@ -108,7 +108,7 @@ All three configurations use the same YAML format, and they are merged **in orde
 
 #### Default rulesets
 
-By default, Datadog enables the default rulesets for your repository’s programming language(s) (`use-default-rulesets: true`). To modify the enabled rulesets:
+By default, Datadog enables the default rulesets for your repository’s programming languages (`use-default-rulesets: true`). To modify the enabled rulesets:
 
 - **Add rulesets**: List them under `use-rulesets`
 - **Disable specific rulesets**: List them under `ignore-rulesets`
@@ -170,7 +170,7 @@ sast:
             - "src"
 ```
 
-Merged result:
+**Merged result:**
 
 ```yaml
 schema-version: v1.0
@@ -200,21 +200,21 @@ The `maxCount: 22` value from the repo-level configuration overrides the `maxCou
 
 {{< img src="/security/code_security/org-level-configuration.png" alt="Org-level configuration UI" style="width:100%;" >}}
 
-Configurations at the org level apply to all repositories that are being analyzed and is a good place to define rules that must run or global paths/files to be ignored.
+Use org-level configuration to define rules that apply to all repositories and specify global paths or files to ignore.
 
-#### Repository level configuration
+#### Repository-level configuration
 
 {{< img src="/security/code_security/repo-level-configuration.png" alt="Repo-level configuration UI" style="width:100%;" >}}
 
-Configurations at the repository level apply only to the repository selected. These configurations are merged with the org configuration, with the repository configuration taking precedence. Repository level configurations are a good place to define overrides for repository specific details, or add rules that are specific to only that repo for example.
+Configurations at the repository level apply only to the repository selected. These configurations are merged with the org configuration, with the repository configuration taking precedence. Use repository-level configuration to define overrides for repository-specific details or add rules specific to that repository.
 
-#### Repository level configuration (file)
+#### Repository-level configuration (file)
 
-In addition to the configurations provided for the Org and Repository level, you can also define a configuration at the root of your repo in the form of ``code-security.datadog.yaml``. This file takes precedence over the Repository level configuration defined in Datadog. Repository level file configurations are a useful method to change rule configs and iterate on setup and testing.
+You can also define configuration in a `code-security.datadog.yaml` file at the root of your repo. This file takes precedence over the repository-level configuration defined in Datadog. Use this file to customize rule configurations and iterate on setup and testing.
 
 ### Configuration format
 
-The following configuration format applies to all configuration locations: Org level, Repository level, and Repository level (file).
+The following configuration format applies to all configuration locations: org-level, repository-level, and repository-level (file).
 
 The configuration file must begin with `schema-version: v1.0`, followed by a `sast` key containing the analysis configuration. The full structure is as follows:
 
@@ -278,25 +278,21 @@ The `sast` key supports the following fields:
 
 | **Property** | **Type** | **Description** | **Default** |
 | --- | --- | --- | --- |
-| `use-default-rulesets` | Boolean | Enable Datadog's default rulesets. | `true` |
+| `use-default-rulesets` | Boolean | Whether to enable Datadog default rulesets. | `true` |
 | `use-rulesets` | Array | A list of ruleset names to enable. | None |
 | `ignore-rulesets` | Array | A list of ruleset names to disable. Takes precedence over `use-rulesets` and `use-default-rulesets`. | None |
 | `ruleset-configs` | Object | A map from ruleset name to its configuration. | None |
 | `global-config` | Object | Global settings for the repository. | None |
 
----
-
 ## Ruleset configuration
 
-Each entry in the `ruleset-configs` map configures a specific ruleset. A ruleset does not need to appear in `use-rulesets` to have a configuration; the configuration is applied whenever that ruleset is enabled (including through `use-default-rulesets`).
+Each entry in the `ruleset-configs` map configures a specific ruleset. A ruleset does not need to be listed in `use-rulesets` for its configuration to apply; the configuration is used whenever the ruleset is enabled, including through `use-default-rulesets`.
 
 | **Property** | **Type** | **Description** | **Default** |
 | --- | --- | --- | --- |
 | `only-paths` | Array | File paths or glob patterns. Only files matching these patterns are processed for this ruleset. | None |
 | `ignore-paths` | Array | File paths or glob patterns to exclude from analysis for this ruleset. | None |
 | `rule-configs` | Object | A map from rule name to its configuration. | None |
-
----
 
 ## Rule configuration
 
@@ -309,8 +305,6 @@ Each entry in a ruleset's `rule-configs` map configures a specific rule:
 | `arguments` | Object | Parameters and values for the rule. Values can be scalars or defined per path. | None |
 | `severity` | String or Object | The rule severity. Valid values: `ERROR`, `WARNING`, `NOTICE`, `NONE`. Can be a single value or defined per path. | None |
 | `category` | String | The rule category. Valid values: `BEST_PRACTICES`, `CODE_STYLE`, `ERROR_PRONE`, `PERFORMANCE`, `SECURITY`. | None |
-
----
 
 ## Argument and severity configuration
 
@@ -336,14 +330,12 @@ Arguments and severity can be defined in one of two formats:
      path/example: ERROR
    ```
 
-| **Key** | **Type** | **Description** | **Default** |
-| --- | --- | --- | --- |
-| `/` | Any | The default value when no specific path is matched. | None |
-| `specific path` | Any | The value for files matching the specified path or glob pattern. | None |
+   | **Key** | **Type** | **Description** | **Default** |
+   | --- | --- | --- | --- |
+   | `/` | Any | The default value when no specific path is matched. | None |
+   | `specific path` | Any | The value for files matching the specified path or glob pattern. | None |
 
 The `category` field takes a single string value for the whole repository.
-
----
 
 ## Global configuration
 
@@ -356,8 +348,6 @@ The `global-config` object controls repository-wide settings:
 | `use-gitignore` | Boolean | Whether to include entries from the `.gitignore` file in `ignore-paths`. | `true` |
 | `ignore-generated-files` | Boolean | Whether to include common generated file patterns in `ignore-paths`. | `true` |
 | `max-file-size-kb` | Number | Maximum file size (in kB) to analyze. Larger files are ignored. | `200` |
-
----
 
 Example configuration:
 
@@ -420,7 +410,7 @@ sast:
 
 ## Legacy configuration
 
-Datadog Static Code Analysis (SAST) previously used a different configuration file (`static-analysis.datadog.yml`) and schema. This schema is deprecated and does not receive new updates, but it remains [documented][25] in the `datadog-static-analyzer` repository.
+Datadog Static Code Analysis (SAST) previously used a different configuration file (`static-analysis.datadog.yml`) and schema. This schema is deprecated and does not receive new updates, but it is [documented][25] in the `datadog-static-analyzer` repository.
 
 If both files are present, `code-security.datadog.yaml` takes precedence over `static-analysis.datadog.yml`.
 
