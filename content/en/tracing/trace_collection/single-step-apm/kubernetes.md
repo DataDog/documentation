@@ -594,13 +594,13 @@ If you don't want to collect trace data for a particular service, host, VM, or c
 
 To remove APM instrumentation and stop sending traces from a specific service, you can do one of the following:
 
-#### Use workload selection (recommended)
+#### Target specific workloads with instrumentation rules (recommended)
 
-With workload selection (available for Agent v7.64+), you can enable and disable tracing for specific applications. [See configuration details here](#advanced-options).
+With instrumentation rules (available for Agent v7.64+), you can enable and disable tracing for specific applications. [See configuration details here](#advanced-options).
 
 #### Use the Datadog Admission Controller
 
-As an alternative, or for a version of the agent that does not support workload selection, you can also disable pod mutation by adding a label to your pod.
+As an alternative, or for a version of the agent that does not support instrumentation rules, you can also disable pod mutation by adding a label to your pod.
 
 <div class="alert alert-danger">In addition to disabling SSI, the following steps disable other mutating webhooks. Use with caution.</div>
 
@@ -670,7 +670,7 @@ To control where APM is activated and reduce overhead, consider the following be
 | Mode    | Behavior    | When to use |
 | ---  | ----------- | ----------- |
 | Default | All supported processes in the cluster are instrumented. | Small clusters or prototypes. |
-| Opt-in | Use [workload selection][4] to restrict instrumentation to specific namespaces or pods. | Production clusters, staged rollouts, or cost‑sensitive use cases. |
+| Opt-in | Use [instrumentation rules][4] to restrict instrumentation to specific namespaces or pods. | Production clusters, staged rollouts, or cost‑sensitive use cases. |
 
 #### Example: Enable instrumentation for specific pods
 
@@ -719,7 +719,7 @@ To control where APM is activated and reduce overhead, consider the following be
                  datadoghq.com/apm-instrumentation: "enabled"
    ```
 
-See [workload selection][4] for additional examples.
+See [instrumentation rules][4] for additional examples.
 
 {{% /collapse-content %}}
 
