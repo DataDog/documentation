@@ -1246,6 +1246,24 @@ components:
       required: true
       schema:
         type: string
+    environment_id:
+      description: The ID of the environment.
+      in: path
+      name: environment_id
+      required: true
+      schema:
+        example: "550e8400-e29b-41d4-a716-446655440001"
+        format: uuid
+        type: string
+    feature_flag_id:
+      description: The ID of the feature flag.
+      in: path
+      name: feature_flag_id
+      required: true
+      schema:
+        example: "550e8400-e29b-41d4-a716-446655440000"
+        format: uuid
+        type: string
   requestBodies: {}
   responses:
     BadRequestResponse:
@@ -14651,6 +14669,127 @@ components:
         - address
         - formats
       type: object
+    CreateEnvironmentAttributes:
+      description: Attributes for creating a new environment.
+      properties:
+        is_production:
+          default: false
+          description: Indicates whether this is a production environment.
+          example: false
+          type: boolean
+        name:
+          description: The name of the environment.
+          example: "env-search-term"
+          type: string
+        queries:
+          description: List of queries to define the environment scope.
+          example: ["staging", "test"]
+          items:
+            type: string
+          minItems: 1
+          type: array
+        require_feature_flag_approval:
+          default: false
+          description: Indicates whether feature flag changes require approval in this environment.
+          example: false
+          type: boolean
+      required:
+        - name
+        - queries
+      type: object
+    CreateEnvironmentData:
+      description: Data for creating a new environment.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/CreateEnvironmentAttributes"
+        type:
+          $ref: "#/components/schemas/CreateEnvironmentDataType"
+      required:
+        - type
+        - attributes
+      type: object
+    CreateEnvironmentDataType:
+      description: The resource type.
+      enum:
+        - "environments"
+      example: "environments"
+      type: string
+      x-enum-varnames:
+        - ENVIRONMENTS
+    CreateEnvironmentRequest:
+      description: Request to create a new environment.
+      properties:
+        data:
+          $ref: "#/components/schemas/CreateEnvironmentData"
+      required:
+        - data
+      type: object
+    CreateFeatureFlagAttributes:
+      description: Attributes for creating a new feature flag.
+      properties:
+        default_variant_key:
+          description: The key of the default variant.
+          example: "variant-abc123"
+          nullable: true
+          type: string
+        description:
+          description: The description of the feature flag.
+          example: "This is an example feature flag for demonstration"
+          type: string
+        json_schema:
+          description: JSON schema for validation when value_type is JSON.
+          example: '{"type": "object", "properties": {"enabled": {"type": "boolean"}}}'
+          nullable: true
+          type: string
+        key:
+          description: The unique key of the feature flag.
+          example: "feature-flag-abc123"
+          type: string
+        name:
+          description: The name of the feature flag.
+          example: "Feature Flag ABC123"
+          type: string
+        value_type:
+          $ref: "#/components/schemas/ValueType"
+        variants:
+          description: The variants of the feature flag.
+          items:
+            $ref: "#/components/schemas/CreateVariant"
+          type: array
+      required:
+        - key
+        - name
+        - description
+        - value_type
+        - variants
+      type: object
+    CreateFeatureFlagData:
+      description: Data for creating a new feature flag.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/CreateFeatureFlagAttributes"
+        type:
+          $ref: "#/components/schemas/CreateFeatureFlagDataType"
+      required:
+        - type
+        - attributes
+      type: object
+    CreateFeatureFlagDataType:
+      description: The resource type.
+      enum:
+        - "feature-flags"
+      example: "feature-flags"
+      type: string
+      x-enum-varnames:
+        - FEATURE_FLAGS
+    CreateFeatureFlagRequest:
+      description: Request to create a new feature flag.
+      properties:
+        data:
+          $ref: "#/components/schemas/CreateFeatureFlagData"
+      required:
+        - data
+      type: object
     CreateIncidentNotificationRuleRequest:
       description: Create request for a notification rule.
       properties:
@@ -15909,6 +16048,26 @@ components:
           $ref: "#/components/schemas/CreateNotificationChannelData"
       required:
         - data
+      type: object
+    CreateVariant:
+      description: Request to create a variant.
+      properties:
+        key:
+          description: The unique key of the variant.
+          example: "variant-abc123"
+          type: string
+        name:
+          description: The name of the variant.
+          example: "Variant ABC123"
+          type: string
+        value:
+          description: The value of the variant as a string.
+          example: "true"
+          type: string
+      required:
+        - key
+        - name
+        - value
       type: object
     CreateWorkflowRequest:
       description: A request object for creating a new workflow.
@@ -22200,6 +22359,94 @@ components:
           minLength: 1
           type: string
       type: object
+    Environment:
+      description: A feature flag environment resource.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/EnvironmentAttributes"
+        id:
+          description: The unique identifier of the environment.
+          example: "550e8400-e29b-41d4-a716-446655440001"
+          format: uuid
+          type: string
+        type:
+          $ref: "#/components/schemas/CreateEnvironmentDataType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    EnvironmentAttributes:
+      description: Attributes of an environment.
+      properties:
+        created_at:
+          description: The timestamp when the environment was created.
+          example: "2023-01-01T00:00:00Z"
+          format: date-time
+          type: string
+        description:
+          description: The description of the environment.
+          example: "Test environment XYZ789"
+          nullable: true
+          type: string
+        is_production:
+          description: Indicates whether this is a production environment.
+          example: false
+          type: boolean
+        key:
+          description: The unique key of the environment.
+          example: "env-search-term"
+          type: string
+        name:
+          description: The name of the environment.
+          example: "env-search-term"
+          type: string
+        queries:
+          description: List of queries to define the environment scope.
+          example: ["staging", "test"]
+          items:
+            type: string
+          minItems: 1
+          type: array
+        require_feature_flag_approval:
+          description: Indicates whether feature flag changes require approval in this environment.
+          example: false
+          type: boolean
+        updated_at:
+          description: The timestamp when the environment was last updated.
+          example: "2023-01-01T00:00:00Z"
+          format: date-time
+          type: string
+      required:
+        - name
+      type: object
+    EnvironmentResponse:
+      description: Response containing an environment.
+      properties:
+        data:
+          $ref: "#/components/schemas/Environment"
+      required:
+        - data
+      type: object
+    EnvironmentsPaginationMeta:
+      description: Pagination metadata for environments.
+      properties:
+        page:
+          $ref: "#/components/schemas/EnvironmentsPaginationMetaPage"
+      type: object
+    EnvironmentsPaginationMetaPage:
+      properties:
+        total_count:
+          description: Total number of items.
+          example: 10
+          format: int64
+          type: integer
+        total_filtered_count:
+          description: Total number of items matching the filter.
+          example: 5
+          format: int64
+          type: integer
+      type: object
     ErrorHandler:
       description: Used to handle errors in an action.
       properties:
@@ -24150,6 +24397,203 @@ components:
           items:
             $ref: "#/components/schemas/FastlyServiceData"
           type: array
+      type: object
+    FeatureFlag:
+      description: A feature flag resource.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/FeatureFlagAttributes"
+        id:
+          description: The unique identifier of the feature flag.
+          example: "550e8400-e29b-41d4-a716-446655440000"
+          format: uuid
+          type: string
+        type:
+          $ref: "#/components/schemas/CreateFeatureFlagDataType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    FeatureFlagAttributes:
+      description: Attributes of a feature flag.
+      properties:
+        archived_at:
+          description: The timestamp when the feature flag was archived.
+          example: "2023-01-01T00:00:00Z"
+          format: date-time
+          nullable: true
+          type: string
+        created_at:
+          description: The timestamp when the feature flag was created.
+          example: "2023-01-01T00:00:00Z"
+          format: date-time
+          type: string
+        created_by:
+          description: The ID of the user who created the feature flag.
+          example: "550e8400-e29b-41d4-a716-446655440010"
+          format: uuid
+          type: string
+        description:
+          description: The description of the feature flag.
+          example: "This is an example feature flag for demonstration"
+          type: string
+        distribution_channel:
+          description: Distribution channel for the feature flag.
+          example: "ALL"
+          type: string
+        feature_flag_environments:
+          description: Environment-specific settings for the feature flag.
+          items:
+            $ref: "#/components/schemas/FeatureFlagEnvironment"
+          type: array
+        json_schema:
+          description: JSON schema for validation when value_type is JSON.
+          example: '{"type": "object", "properties": {"enabled": {"type": "boolean"}}}'
+          nullable: true
+          type: string
+        key:
+          description: The unique key of the feature flag.
+          example: "feature-flag-abc123"
+          type: string
+        last_updated_by:
+          description: The ID of the user who last updated the feature flag.
+          example: "550e8400-e29b-41d4-a716-446655440010"
+          format: uuid
+          type: string
+        name:
+          description: The name of the feature flag.
+          example: "Feature Flag ABC123"
+          type: string
+        require_approval:
+          description: Indicates whether this feature flag requires approval for changes.
+          example: false
+          type: boolean
+        updated_at:
+          description: The timestamp when the feature flag was last updated.
+          example: "2023-01-01T00:00:00Z"
+          format: date-time
+          type: string
+        value_type:
+          $ref: "#/components/schemas/ValueType"
+        variants:
+          description: The variants of the feature flag.
+          items:
+            $ref: "#/components/schemas/Variant"
+          type: array
+      required:
+        - key
+        - name
+        - description
+        - value_type
+        - variants
+      type: object
+    FeatureFlagEnvironment:
+      description: Environment-specific settings for a feature flag.
+      properties:
+        allocations:
+          additionalProperties: {}
+          description: Allocation metadata for this environment.
+          nullable: true
+          type: object
+        default_allocation_key:
+          description: The allocation key used for the default variant.
+          example: "allocation-default-123abc"
+          type: string
+        default_variant_id:
+          description: The ID of the default variant for this environment.
+          example: "550e8400-e29b-41d4-a716-446655440002"
+          nullable: true
+          type: string
+        environment_id:
+          description: The ID of the environment.
+          example: "550e8400-e29b-41d4-a716-446655440001"
+          format: uuid
+          type: string
+        environment_name:
+          description: The name of the environment.
+          example: "env-search-term"
+          type: string
+        is_production:
+          description: Indicates whether the environment is production.
+          example: false
+          type: boolean
+        override_allocation_key:
+          description: The allocation key used for the override variant.
+          example: "allocation-override-123abc"
+          type: string
+        override_variant_id:
+          description: The ID of the override variant for this environment.
+          example: "550e8400-e29b-41d4-a716-446655440003"
+          nullable: true
+          type: string
+        pending_suggestion_id:
+          description: Pending suggestion identifier, if approval is required.
+          example: "550e8400-e29b-41d4-a716-446655440099"
+          nullable: true
+          type: string
+        require_feature_flag_approval:
+          description: Indicates whether feature flag changes require approval in this environment.
+          example: false
+          type: boolean
+        rollout_percentage:
+          description: Rollout percentage for this environment.
+          example: 0
+          format: int64
+          maximum: 100
+          minimum: 0
+          type: integer
+        rules:
+          description: Environment targeting rules for this feature flag.
+          items:
+            $ref: "#/components/schemas/FeatureFlagTargetingRule"
+          type: array
+        status:
+          $ref: "#/components/schemas/FeatureFlagStatus"
+      required:
+        - environment_id
+        - status
+      type: object
+    FeatureFlagResponse:
+      description: Response containing a feature flag.
+      properties:
+        data:
+          $ref: "#/components/schemas/FeatureFlag"
+      required:
+        - data
+      type: object
+    FeatureFlagStatus:
+      description: The status of a feature flag in an environment.
+      enum:
+        - ENABLED
+        - DISABLED
+      example: "ENABLED"
+      type: string
+      x-enum-varnames:
+        - ENABLED
+        - DISABLED
+    FeatureFlagTargetingRule:
+      additionalProperties: {}
+      description: A targeting rule for a feature flag.
+      type: object
+    FeatureFlagsPaginationMeta:
+      description: Pagination metadata for feature flags.
+      properties:
+        page:
+          $ref: "#/components/schemas/FeatureFlagsPaginationMetaPage"
+      type: object
+    FeatureFlagsPaginationMetaPage:
+      properties:
+        total_count:
+          description: Total number of items.
+          example: 100
+          format: int64
+          type: integer
+        total_filtered_count:
+          description: Total number of items matching the filter.
+          example: 25
+          format: int64
+          type: integer
       type: object
     FiltersPerProduct:
       description: Product-specific filters for the dataset.
@@ -35313,6 +35757,19 @@ components:
           description: Current link.
           type: string
       type: object
+    ListEnvironmentsResponse:
+      description: Response containing a list of environments.
+      properties:
+        data:
+          description: List of environments.
+          items:
+            $ref: "#/components/schemas/Environment"
+          type: array
+        meta:
+          $ref: "#/components/schemas/EnvironmentsPaginationMeta"
+      required:
+        - data
+      type: object
     ListExternalUserGroupResponse:
       description: List groups response object.
       example:
@@ -35548,6 +36005,19 @@ components:
         userName:
           description: Unique identifier for the User.
           type: string
+      type: object
+    ListFeatureFlagsResponse:
+      description: Response containing a list of feature flags.
+      properties:
+        data:
+          description: List of feature flags.
+          items:
+            $ref: "#/components/schemas/FeatureFlag"
+          type: array
+        meta:
+          $ref: "#/components/schemas/FeatureFlagsPaginationMeta"
+      required:
+        - data
       type: object
     ListFindingsData:
       description: Array of findings.
@@ -43991,7 +44461,10 @@ components:
         action:
           $ref: "#/components/schemas/ObservabilityPipelineSensitiveDataScannerProcessorActionHashAction"
         options:
-          description: The `ObservabilityPipelineSensitiveDataScannerProcessorActionHash` `options`.
+          description: |-
+            Optional settings for the hash action. When omitted or empty, matched sensitive data is
+            replaced with a deterministic hashed value that preserves structure for analytics while
+            protecting the original content. Reserved for future hash configuration (for example, algorithm or salt).
           type: object
       required: [action]
       type: object
@@ -44022,7 +44495,7 @@ components:
       description: Controls how partial redaction is applied, including character count and direction.
       properties:
         characters:
-          description: The `ObservabilityPipelineSensitiveDataScannerProcessorActionPartialRedactOptions` `characters`.
+          description: Number of characters to leave visible from the start or end of the matched value; the rest are redacted.
           example: 4
           format: int64
           type: integer
@@ -44058,7 +44531,7 @@ components:
       description: Configuration for fully redacting sensitive data.
       properties:
         replace:
-          description: The `ObservabilityPipelineSensitiveDataScannerProcessorActionRedactOptions` `replace`.
+          description: The string used to replace matched sensitive data (for example, "***" or "[REDACTED]").
           example: "***"
           type: string
       required: [replace]
@@ -44168,7 +44641,6 @@ components:
           type: array
       required:
         - name
-        - tags
         - pattern
         - scope
         - on_match
@@ -44229,7 +44701,7 @@ components:
       description: Fields to which the scope rule applies.
       properties:
         fields:
-          description: The `ObservabilityPipelineSensitiveDataScannerProcessorScopeOptions` `fields`.
+          description: List of log attribute names (field paths) to which the scope applies. Only these fields are included in or excluded from pattern matching.
           example:
             - ""
           items:
@@ -67108,6 +67580,100 @@ components:
         - name
         - options
       type: object
+    UpdateEnvironmentAttributes:
+      description: Attributes for updating an environment.
+      properties:
+        is_production:
+          description: Indicates whether this is a production environment.
+          example: false
+          type: boolean
+        name:
+          description: The name of the environment.
+          example: "Environment XYZ789"
+          type: string
+        queries:
+          description: List of queries to define the environment scope.
+          example: ["staging", "test"]
+          items:
+            type: string
+          minItems: 1
+          type: array
+        require_feature_flag_approval:
+          description: Indicates whether feature flag changes require approval in this environment.
+          example: true
+          type: boolean
+      type: object
+    UpdateEnvironmentData:
+      description: Data for updating an environment.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/UpdateEnvironmentAttributes"
+        type:
+          $ref: "#/components/schemas/UpdateEnvironmentDataType"
+      required:
+        - type
+        - attributes
+      type: object
+    UpdateEnvironmentDataType:
+      description: The resource type.
+      enum:
+        - "environments"
+      example: "environments"
+      type: string
+      x-enum-varnames:
+        - ENVIRONMENTS
+    UpdateEnvironmentRequest:
+      description: Request to update an environment.
+      properties:
+        data:
+          $ref: "#/components/schemas/UpdateEnvironmentData"
+      required:
+        - data
+      type: object
+    UpdateFeatureFlagAttributes:
+      description: Attributes for updating a feature flag.
+      properties:
+        description:
+          description: The description of the feature flag.
+          example: "Updated description for feature flag XYZ789"
+          type: string
+        json_schema:
+          description: JSON schema for validation when value_type is JSON.
+          example: '{"type": "object", "properties": {"enabled": {"type": "boolean"}}}'
+          nullable: true
+          type: string
+        name:
+          description: The name of the feature flag.
+          example: "Updated Feature Flag XYZ789"
+          type: string
+      type: object
+    UpdateFeatureFlagData:
+      description: Data for updating a feature flag.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/UpdateFeatureFlagAttributes"
+        type:
+          $ref: "#/components/schemas/UpdateFeatureFlagDataType"
+      required:
+        - type
+        - attributes
+      type: object
+    UpdateFeatureFlagDataType:
+      description: The resource type.
+      enum:
+        - "feature-flags"
+      example: "feature-flags"
+      type: string
+      x-enum-varnames:
+        - FEATURE_FLAGS
+    UpdateFeatureFlagRequest:
+      description: Request to update a feature flag.
+      properties:
+        data:
+          $ref: "#/components/schemas/UpdateFeatureFlagData"
+      required:
+        - data
+      type: object
     UpdateFlakyTestsRequest:
       description: Request to update the state of multiple flaky tests.
       properties:
@@ -68708,6 +69274,58 @@ components:
           items:
             $ref: "#/components/schemas/ValidationError"
           type: array
+      type: object
+    ValueType:
+      description: The type of values for the feature flag variants.
+      enum:
+        - BOOLEAN
+        - INTEGER
+        - NUMERIC
+        - STRING
+        - JSON
+      example: "BOOLEAN"
+      type: string
+      x-enum-varnames:
+        - BOOLEAN
+        - INTEGER
+        - NUMERIC
+        - STRING
+        - JSON
+    Variant:
+      description: A variant of a feature flag.
+      properties:
+        created_at:
+          description: The timestamp when the variant was created.
+          example: "2023-01-01T00:00:00Z"
+          format: date-time
+          type: string
+        id:
+          description: The unique identifier of the variant.
+          example: "550e8400-e29b-41d4-a716-446655440002"
+          format: uuid
+          type: string
+        key:
+          description: The unique key of the variant.
+          example: "variant-abc123"
+          type: string
+        name:
+          description: The name of the variant.
+          example: "Variant ABC123"
+          type: string
+        updated_at:
+          description: The timestamp when the variant was last updated.
+          example: "2023-01-01T00:00:00Z"
+          format: date-time
+          type: string
+        value:
+          description: The value of the variant as a string.
+          example: "true"
+          type: string
+      required:
+        - id
+        - key
+        - name
+        - value
       type: object
     Version:
       description: Version of the notification rule. It is updated when the rule is modified.
@@ -80613,6 +81231,647 @@ paths:
         operator: OR
         permissions:
           - events_read
+  /api/v2/feature-flags:
+    get:
+      description: |-
+        Returns a list of feature flags for the organization.
+        Supports filtering by key and archived status.
+      operationId: ListFeatureFlags
+      parameters:
+        - description: Filter feature flags by key (partial matching).
+          example: "flag-search-term"
+          in: query
+          name: key
+          schema:
+            type: string
+        - description: Filter by archived status.
+          example: false
+          in: query
+          name: is_archived
+          schema:
+            type: boolean
+        - description: Maximum number of results to return.
+          example: 10
+          in: query
+          name: limit
+          schema:
+            default: 100
+            maximum: 1000
+            minimum: 1
+            type: integer
+        - description: Number of results to skip.
+          example: 0
+          in: query
+          name: offset
+          schema:
+            default: 0
+            minimum: 0
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListFeatureFlagsResponse"
+          description: OK
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Forbidden
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: List feature flags
+      tags:
+        - Feature Flags
+      x-menu-order: 13
+      x-permission:
+        operator: AND
+        permissions:
+          - feature_flag_config_read
+          - feature_flag_environment_config_read
+    post:
+      description: |-
+        Creates a new feature flag with variants.
+      operationId: CreateFeatureFlag
+      requestBody:
+        content:
+          application/json:
+            example:
+              data:
+                attributes:
+                  description: "Demo feature flag with unique identifier"
+                  key: "feature-flag-demo123"
+                  name: "Feature Flag Demo123"
+                  value_type: "BOOLEAN"
+                  variants:
+                    - key: "variant-demo123"
+                      name: "Variant Demo123"
+                      value: "true"
+                type: "feature-flags"
+            schema:
+              $ref: "#/components/schemas/CreateFeatureFlagRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FeatureFlagResponse"
+          description: Created
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Forbidden
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Conflict
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Create a feature flag
+      tags:
+        - Feature Flags
+      x-menu-order: 12
+      x-permission:
+        operator: AND
+        permissions:
+          - feature_flag_config_write
+          - feature_flag_environment_config_read
+  /api/v2/feature-flags/environments:
+    get:
+      description: |-
+        Returns a list of environments for the organization.
+        Supports filtering by name and key.
+      operationId: ListFeatureFlagsEnvironments
+      parameters:
+        - description: Filter environments by name (partial matching).
+          example: "env-search-term"
+          in: query
+          name: name
+          schema:
+            type: string
+        - description: Filter environments by key (partial matching).
+          example: "env-partial"
+          in: query
+          name: key
+          schema:
+            type: string
+        - description: Maximum number of results to return.
+          example: 10
+          in: query
+          name: limit
+          schema:
+            default: 100
+            maximum: 1000
+            minimum: 1
+            type: integer
+        - description: Number of results to skip.
+          example: 0
+          in: query
+          name: offset
+          schema:
+            default: 0
+            minimum: 0
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListEnvironmentsResponse"
+          description: OK
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Forbidden
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: List environments
+      tags:
+        - Feature Flags
+      x-menu-order: 5
+      x-permission:
+        operator: AND
+        permissions:
+          - feature_flag_environment_config_read
+    post:
+      description: |-
+        Creates a new environment for organizing feature flags.
+      operationId: CreateFeatureFlagsEnvironment
+      requestBody:
+        content:
+          application/json:
+            example:
+              data:
+                attributes:
+                  name: "Environment Demo123"
+                  queries: ["env-demo123", "queries-demo456"]
+                type: "environments"
+            schema:
+              $ref: "#/components/schemas/CreateEnvironmentRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EnvironmentResponse"
+          description: Created
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Forbidden
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Conflict
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Create an environment
+      tags:
+        - Feature Flags
+      x-menu-order: 4
+      x-permission:
+        operator: AND
+        permissions:
+          - feature_flag_environment_config_write
+  /api/v2/feature-flags/environments/{environment_id}:
+    delete:
+      description: |-
+        Deletes an environment. This operation cannot be undone.
+      operationId: DeleteFeatureFlagsEnvironment
+      parameters:
+        - $ref: "#/components/parameters/environment_id"
+      responses:
+        "204":
+          description: No Content
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Delete an environment
+      tags:
+        - Feature Flags
+      x-menu-order: 1
+      x-permission:
+        operator: AND
+        permissions:
+          - feature_flag_environment_config_write
+    get:
+      description: |-
+        Returns the details of a specific environment.
+      operationId: GetFeatureFlagsEnvironment
+      parameters:
+        - $ref: "#/components/parameters/environment_id"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EnvironmentResponse"
+          description: OK
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Get an environment
+      tags:
+        - Feature Flags
+      x-menu-order: 3
+      x-permission:
+        operator: AND
+        permissions:
+          - feature_flag_environment_config_read
+    put:
+      description: |-
+        Updates an existing environment's metadata such as
+         name and description.
+      operationId: UpdateFeatureFlagsEnvironment
+      parameters:
+        - $ref: "#/components/parameters/environment_id"
+      requestBody:
+        content:
+          application/json:
+            example:
+              data:
+                attributes:
+                  name: "Updated Environment XYZ789"
+                  queries: ["updated-env-xyz789", "updated-queries-abc456"]
+                type: "environments"
+            schema:
+              $ref: "#/components/schemas/UpdateEnvironmentRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EnvironmentResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Update an environment
+      tags:
+        - Feature Flags
+      x-menu-order: 2
+      x-permission:
+        operator: AND
+        permissions:
+          - feature_flag_environment_config_write
+  /api/v2/feature-flags/{feature_flag_id}:
+    get:
+      description: |-
+        Returns the details of a specific feature flag
+        including variants and environment status.
+      operationId: GetFeatureFlag
+      parameters:
+        - $ref: "#/components/parameters/feature_flag_id"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FeatureFlagResponse"
+          description: OK
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Get a feature flag
+      tags:
+        - Feature Flags
+      x-menu-order: 11
+      x-permission:
+        operator: AND
+        permissions:
+          - feature_flag_config_read
+          - feature_flag_environment_config_read
+    put:
+      description: |-
+        Updates an existing feature flag's metadata such as
+         name and description. Does not modify targeting rules or allocations.
+      operationId: UpdateFeatureFlag
+      parameters:
+        - $ref: "#/components/parameters/feature_flag_id"
+      requestBody:
+        content:
+          application/json:
+            example:
+              data:
+                attributes:
+                  description: "Updated description for feature flag XYZ789"
+                  name: "Updated Feature Flag XYZ789"
+                type: "feature-flags"
+            schema:
+              $ref: "#/components/schemas/UpdateFeatureFlagRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FeatureFlagResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Update a feature flag
+      tags:
+        - Feature Flags
+      x-menu-order: 10
+      x-permission:
+        operator: AND
+        permissions:
+          - feature_flag_config_write
+          - feature_flag_environment_config_read
+  /api/v2/feature-flags/{feature_flag_id}/archive:
+    post:
+      description: |-
+        Archives a feature flag. Archived flags are
+        hidden from the main list but remain accessible and can be unarchived.
+      operationId: ArchiveFeatureFlag
+      parameters:
+        - $ref: "#/components/parameters/feature_flag_id"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FeatureFlagResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Archive a feature flag
+      tags:
+        - Feature Flags
+      x-menu-order: 9
+      x-permission:
+        operator: AND
+        permissions:
+          - feature_flag_config_write
+          - feature_flag_environment_config_read
+  /api/v2/feature-flags/{feature_flag_id}/environments/{environment_id}/disable:
+    post:
+      description: |-
+        Disable a feature flag in a specific environment.
+      operationId: DisableFeatureFlagEnvironment
+      parameters:
+        - $ref: "#/components/parameters/feature_flag_id"
+        - $ref: "#/components/parameters/environment_id"
+      responses:
+        "200":
+          description: OK
+        "202":
+          description: Accepted - Approval required for this change
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Disable a feature flag in an environment
+      tags:
+        - Feature Flags
+      x-menu-order: 6
+      x-permission:
+        operator: AND
+        permissions:
+          - feature_flag_config_write
+          - feature_flag_environment_config_read
+  /api/v2/feature-flags/{feature_flag_id}/environments/{environment_id}/enable:
+    post:
+      description: |-
+        Enable a feature flag in a specific environment.
+      operationId: EnableFeatureFlagEnvironment
+      parameters:
+        - $ref: "#/components/parameters/feature_flag_id"
+        - $ref: "#/components/parameters/environment_id"
+      responses:
+        "200":
+          description: OK
+        "202":
+          description: Accepted - Approval required for this change
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Enable a feature flag in an environment
+      tags:
+        - Feature Flags
+      x-menu-order: 7
+      x-permission:
+        operator: AND
+        permissions:
+          - feature_flag_config_write
+          - feature_flag_environment_config_read
+  /api/v2/feature-flags/{feature_flag_id}/unarchive:
+    post:
+      description: |-
+        Unarchives a previously archived feature flag,
+        making it visible in the main list again.
+      operationId: UnarchiveFeatureFlag
+      parameters:
+        - $ref: "#/components/parameters/feature_flag_id"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FeatureFlagResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Unarchive a feature flag
+      tags:
+        - Feature Flags
+      x-menu-order: 8
+      x-permission:
+        operator: AND
+        permissions:
+          - feature_flag_config_write
+          - feature_flag_environment_config_read
   /api/v2/hamr:
     get:
       description: |-
@@ -108429,6 +109688,8 @@ tags:
   - description: |-
       Manage your Datadog Fastly integration accounts and services directly through the Datadog API. See the [Fastly integration page](https://docs.datadoghq.com/integrations/fastly/) for more information.
     name: Fastly Integration
+  - description: Manage feature flags and environments.
+    name: Feature Flags
   - description: |-
       Manage automated deployments across your fleet of hosts.
 
