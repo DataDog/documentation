@@ -171,7 +171,7 @@ To see metrics about your Enrichment Table processor, add the tags `component_ty
 
 `pipelines.component_errors_total`
 : Number of logs that cannot be enriched because of an error. These errors are reported with the tag `error_code=did_not_enrich_event`.
-: The tag `reason` may contain the following values:<br>- `target_exists`: The target value to store the enriched data already exists and is not an object.<br>- `too_many_pending_lookups`: The buffer or lookup queue is full.<br>- `lookup_failed`: The lookup key was not found in the log, not a string or an integer.
+: The tag `reason` may contain the following values:<br>- `target_exists`: The target value to store the enriched data already exists and is not an object.<br>- `too_many_pending_lookups`: The buffer or lookup queue is full.<br>- `lookup_failed`: The lookup key was not found in the log, not a string, or not an integer.
 
 #### Buffer metrics (when enabled)
 
