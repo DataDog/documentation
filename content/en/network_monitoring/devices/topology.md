@@ -10,7 +10,7 @@ aliases:
 further_reading:
 - link: "https://www.datadoghq.com/blog/visualize-network-device-topology/"
   tag: "Blog"
-  text: "Visualize relationships across your on-premise network with the Device Topology Map"
+  text: "Visualize relationships across your on-premises network with the Device Topology Map"
 - link: "/network_monitoring/devices/data"
   tag: "Documentation"
   text: "Data Collected with Network Device Monitoring"
@@ -172,7 +172,7 @@ There are no devices because NDM is not configured.
 
 ### Missing devices/connections
 
-The Device Topology Map data is based on LLDP (Link Layer Discovery Protocol) and CDP (Cisco Discovery Protocol) information collected with SNMP. If your map is missing devices and/or connections, ensure the following:
+The Device Topology Map data is based on LLDP (Link Layer Discovery Protocol) and CDP (Cisco Discovery Protocol) information collected with SNMP. If your map is missing devices and/or connections, verify the following:
 
 - Datadog Agent version 7.52 or later is installed.
 - Devices have LLDP and/or CDP enabled with SNMP.
@@ -191,7 +191,7 @@ sudo -u dd-agent datadog-agent snmp walk <DEVICE_IP> 1.3.6.1.4.1.9.9.23
 
 ### Missing connections or links
 
-If your device is exposing topology data with LLDP or CDP but some of the connections are missing, ensure that the **Unmonitored Device** selection is off.
+If your device is exposing topology data with LLDP or CDP but some of the connections are missing, verify that the **Unmonitored Device** selection is off.
 
 ### Unmonitored devices showing on map
 

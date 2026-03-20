@@ -157,7 +157,7 @@ If you experience issues using VPN monitoring, use the following troubleshooting
 
 ### VPN tunnels not displayed
 
-The VPN tunnel data is collected with SNMP. If VPN tunnels are missing on a device, ensure the following:
+The VPN tunnel data is collected with SNMP. If VPN tunnels are missing on a device, verify the following:
 
 - Datadog Agent version 7.70 or later is installed.
 - Verify the device exposes the relevant VPN tunnel data with SNMP by running the following command:
