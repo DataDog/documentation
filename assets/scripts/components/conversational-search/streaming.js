@@ -98,7 +98,7 @@ export async function streamDocsAiChat({
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'X-Docs-Api-Key': docsAiConfig.apiKey
+            'X-Docs-Ai-Api-Key': docsAiConfig.apiKey
         },
         body: JSON.stringify({ data: { attributes } }),
         signal
