@@ -79,7 +79,7 @@ The Agent supports four infrastructure modes. A checkmark ({{< X >}}) indicates 
   - Windows Crash Detection
   - Network Path Monitoring
  
-: For full descriptions, see [Key Capabilities][20].
+: For full descriptions, see [Key capabilities][20].
 
 ## Configure Agent infrastructure mode
 
