@@ -1,73 +1,62 @@
 ---
-title: Planning and Launching Experiments
-description: Use Datadog Experiments to measure the causal relationship that new experiences or features have on user outcomes.
-aliases:
-  - /product_analytics/experimentation/
+title: Experiments
+description: Plan, run, and analyze randomized experiments across your stack with Datadog Experiments.
 further_reading:
-- link: "https://www.datadoghq.com/blog/datadog-product-analytics"
-  tag: "Blog"
-  text: "Make data-driven design decisions with Product Analytics"
-- link: "/experiments/defining_metrics"
+- link: "/feature_management/"
   tag: "Documentation"
-  text: "Defining Experiment Metrics"
+  text: "Feature Flags"
+- link: "/product_analytics/"
+  tag: "Documentation"
+  text: "Product Analytics"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/datadog-experiments/" >}}
-Datadog Experiments is in Preview. Complete the form to request access.
-{{< /callout >}}
+## Overview
 
-## Overview 
-Datadog Experiments allows you to measure the causal relationship that new experiences and features have on user outcomes. Datadog Experiments uses [Feature Flags][4] to randomly allocate traffic between two or more variations, using one of the variations as a control group.
+Datadog Experiments helps you run and analyze randomized experiments, such as A/B tests, from rollout through results. It combines [Datadog Feature Flags][1] for assigning users to variants with statistical analysis to measure how each variant affects key outcome metrics.
 
-This page walks you through planning and launching your experiments. 
+You can use Feature Flags capabilities — including multi-variant testing, granular targeting, and canary rollouts — to deploy a change, then evaluate its impact using Datadog data or metrics from your own data warehouse.
 
-## Setup
-To create, configure, and launch your experiment, complete the following steps:
+## How Experiments work
 
-### Step 1 - Create your experiment
+1. Use [Datadog Feature Flags][1] to deploy a change and assign users to control and variant groups.
+2. Select the metrics you want to evaluate.
+3. As the experiment runs, Datadog compares performance between the control and each variant.
+4. Review lift, confidence intervals, and statistical significance to understand the impact of the change.
 
-1. Navigate to the [Experiments][1] page in Datadog Product Analytics.
-2. Click **+ Create Experiment**.
-3. Enter your experiment name and hypothesis.
+## Data sources
 
-{{< img src="/product_analytics/experiment/exp_create_experiment.png" alt="The experiment creation form with fields for experiment name and hypothesis." style="width:80%;" >}}
+Experiments can analyze metrics from:
 
-### Step 2 - Add metrics
+- **[Product Analytics][2]** for user behavior and journey metrics
+- **[Real User Monitoring (RUM)][3]** for client-side and performance signals
+- **[Warehouse-native data sources][4]** for business and operational metrics from your own data warehouse
 
-After you’ve created an experiment, add your primary metric and optional guardrails. See [Defining Metrics][2] for details on how to create metrics.
+## Getting started
 
-{{< img src="/product_analytics/experiment/exp_decision_metrics1.png" alt="The metrics configuration panel with options for primary metric and guardrails." style="width:80%;" >}}
+To start using Experiments, [install the Feature Flags SDK][5] and [create your first metrics][6].
 
-#### Add a sample size calculation (optional)
+If you already use Product Analytics or Real User Monitoring, you can start creating metrics right away.
 
-After selecting your experiment’s metrics, use the optional sample size calculator to determine how small of a change your experiment can reliably detect with your current sample size.
+<!-- THIS NEEDS THE GUIDES TO BE COMNPLETED FIRST
 
-1. Select the **Entrypoint Event** of your experiment. This specifies _when_ in the user journey they will be enrolled into the test. 
-1. Click **Run calculation** to see the [Minimum Detectable Effects][3] (MDE) your experiment has on your metrics. The MDE is the smallest difference that you are able to detect between your experiment’s variants.
+To connect your data warehouse, follow the appropriate setup guide:
 
-{{< img src="/product_analytics/experiment/exp_sample_size.png" alt="The Sample Size Calculator modal with the Entrypoint Event dropdown highlighted." style="width:90%;" >}}
-
-### Step 3 - Launch your experiment
-
-After specifying your metrics, you can launch your experiment.
-
-1. Select a Feature Flag that captures the variants you want to test. If you have not yet created a feature flag, see the [Getting Started with Feature Flags][4] page.
-
-1. Click **Set Up Experiment on Feature Flag** to specify how you want to roll out your experiment. You can either launch the experiment to all traffic, or schedule a gradual rollout.
-
-{{< img src="/product_analytics/experiment/exp_feature_flag.png" alt="Set up an experiment on a Feature Flag." style="width:90%;" >}}
-
-## Next steps
-1. **[Defining metrics][2]**: Define the metrics you want to measure during your experiments.
-1. **[Reading Experiment Results][5]**: Review and explore your experiment results.
-1. **[Minimum Detectable Effects][3]**: Choose appropriately sized MDEs.
-
+- [Snowflake][7]
+- [Databricks][8]
+- [BigQuery][9]
+- [Redshift][10]
+ -->
 
 ## Further reading
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/product-analytics/experiments
-[2]: /experiments/defining_metrics
-[3]: /experiments/minimum_detectable_effect
-[4]: /getting_started/feature_flags/
-[5]: /experiments/reading_results
+[1]: /feature_management/
+[2]: /product_analytics/
+[3]: /real_user_monitoring/
+[4]: /experiments/warehouse_native/
+[5]: /feature_management/setup/
+[6]: /experiments/metrics/
+[7]: /experiments/warehouse_native/snowflake/
+[8]: /experiments/warehouse_native/databricks/
+[9]: /experiments/warehouse_native/bigquery/
+[10]: /experiments/warehouse_native/redshift/
