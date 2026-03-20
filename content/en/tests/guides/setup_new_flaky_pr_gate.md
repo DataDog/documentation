@@ -23,10 +23,12 @@ A new flaky test is a test that:
 - was added in the pull request branch and has not run in any other branch
 - exhibited [flaky behavior][2] for the first time
 
+**IMPORTANT**: [Early Flake Detection][4] and automatic fix verification with [Attempt To Fix][8] are supported only with native libraries, not [JUnit XML uploads][10]. If you use JUnit XML uploads, verify fixes manually and mark the test as **Fixed** in [Flaky Tests Management][9].
+
 Before you begin:
 
 - Set up [Test Optimization][1] for your language.
-- To improve detection of new flaky tests, enable [Early Flake Detection][4]. This option is supported only with native libraries, not JUnit XML uploads. See [supported features][5].
+- To improve detection of new flaky tests, enable [Early Flake Detection][4]. See [supported features][5].
 
 ## How it works
 
@@ -40,7 +42,7 @@ If Datadog detects at least one new flaky test in the feature branch, the PR gat
 
 2. Select the repositories where the rule should be evaluated. By default, it applies to all repositories in your organization.
 
-3. Optional: enable [Early Flake Detection][4] to improve detection of new flaky tests. This option is supported only with native libraries, not JUnit XML uploads.
+3. Optional: enable [Early Flake Detection][4] to improve detection of new flaky tests.
 
 After you create the PR gate, a new status check appears in pull requests from the selected repositories.
 
@@ -48,17 +50,19 @@ After you create the PR gate, a new status check appears in pull requests from t
 
 ## In a pull request
 
+The following screenshots use GitHub as an example. The status check and optional PR comment appear in the pull request.
+
 If Datadog detects a new flaky test, the status check fails:
 
-{{< img src="pr_gates/setup/failed_pr_gate.png" alt="The new flaky PR gate fails because a new flaky test is detected" style="width:100%" >}}
+{{< img src="pr_gates/setup/failed_pr_gate.png" alt="GitHub pull request check failing because a new flaky test is detected" style="width:100%" >}}
 
 If [PR comments][6] are enabled, Datadog adds a comment listing the new flaky tests and their error messages:
 
-{{< img src="pr_gates/setup/new_flaky_test_pr_comment.png" alt="PR comment showing the new flaky test" style="width:100%" >}}
+{{< img src="pr_gates/setup/new_flaky_test_pr_comment.png" alt="GitHub pull request comment showing the new flaky test" style="width:100%" >}}
 
-Open the failed check to view the PR gate details:
+When you open the failed check, Datadog shows the PR gate details in the Datadog UI:
 
-{{< img src="pr_gates/setup/pr_gate_detail.png" alt="PR gate detail" style="width:100%" >}}
+{{< img src="pr_gates/setup/pr_gate_detail.png" alt="Datadog PR gate detail view" style="width:100%" >}}
 
 ## Make the PR gate pass
 
@@ -98,17 +102,17 @@ If the new flaky test is reported with [JUnit XML upload][10], you must verify t
 
 #### How to manually mark the new flaky test as fixed
 
-For this, follow the link provided in the New Flaky Test PR gate detail page:
+In the Datadog UI, follow the link from the PR gate details:
 
-{{< img src="pr_gates/setup/pr_gate_detail_test.png" alt="PR gate detail to manually fix" style="width:100%" >}}
+{{< img src="pr_gates/setup/pr_gate_detail_test.png" alt="Datadog PR gate detail view with a link to Flaky Tests Management" style="width:100%" >}}
 
-This opens [Flaky Tests Management][9] with the test selected:
+This opens [Flaky Tests Management][9] in the Datadog UI with the test selected:
 
-{{< img src="pr_gates/setup/flaky_test_detail.png" alt="Flaky test detail" style="width:70%" >}}
+{{< img src="pr_gates/setup/flaky_test_detail.png" alt="Datadog Flaky Tests Management view with the selected test" style="width:70%" >}}
 
 Change the status from **Active** to **Fixed**:
 
-{{< img src="pr_gates/setup/fix_flaky_test.png" alt="Mark flaky test as fixed" style="width:70%" >}}
+{{< img src="pr_gates/setup/fix_flaky_test.png" alt="Datadog Flaky Tests Management status menu showing Fixed" style="width:70%" >}}
 
 ## Require the PR gate in GitHub
 
@@ -116,7 +120,7 @@ If you use GitHub, you can mark the PR gate as a required status check in branch
 
 By default, the PR gate is optional, so pull requests can still be merged when a new flaky test is detected:
 
-{{< img src="pr_gates/setup/github_required_check.png" alt="Mark PR gate as required" style="width:70%" >}}
+{{< img src="pr_gates/setup/github_required_check.png" alt="GitHub branch protection rule requiring the PR gate status check" style="width:70%" >}}
 
 For more information, see the GitHub documentation for [status checks][11].
 
