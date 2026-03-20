@@ -8582,6 +8582,166 @@ menu:
           - ListFastlyAccounts
         unstable: []
         order: 1
+    - name: Feature Flags
+      url: /api/latest/feature-flags/
+      identifier: feature-flags
+      generated: true
+    - name: Unarchive a feature flag
+      url: '#unarchive-a-feature-flag'
+      identifier: feature-flags-unarchive-a-feature-flag
+      parent: feature-flags
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UnarchiveFeatureFlag
+        unstable: []
+        order: 8
+    - name: Enable a feature flag in an environment
+      url: '#enable-a-feature-flag-in-an-environment'
+      identifier: feature-flags-enable-a-feature-flag-in-an-environment
+      parent: feature-flags
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - EnableFeatureFlagEnvironment
+        unstable: []
+        order: 7
+    - name: Disable a feature flag in an environment
+      url: '#disable-a-feature-flag-in-an-environment'
+      identifier: feature-flags-disable-a-feature-flag-in-an-environment
+      parent: feature-flags
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DisableFeatureFlagEnvironment
+        unstable: []
+        order: 6
+    - name: Archive a feature flag
+      url: '#archive-a-feature-flag'
+      identifier: feature-flags-archive-a-feature-flag
+      parent: feature-flags
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ArchiveFeatureFlag
+        unstable: []
+        order: 9
+    - name: Update a feature flag
+      url: '#update-a-feature-flag'
+      identifier: feature-flags-update-a-feature-flag
+      parent: feature-flags
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateFeatureFlag
+        unstable: []
+        order: 10
+    - name: Get a feature flag
+      url: '#get-a-feature-flag'
+      identifier: feature-flags-get-a-feature-flag
+      parent: feature-flags
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetFeatureFlag
+        unstable: []
+        order: 11
+    - name: Update an environment
+      url: '#update-an-environment'
+      identifier: feature-flags-update-an-environment
+      parent: feature-flags
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateFeatureFlagsEnvironment
+        unstable: []
+        order: 2
+    - name: Get an environment
+      url: '#get-an-environment'
+      identifier: feature-flags-get-an-environment
+      parent: feature-flags
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetFeatureFlagsEnvironment
+        unstable: []
+        order: 3
+    - name: Delete an environment
+      url: '#delete-an-environment'
+      identifier: feature-flags-delete-an-environment
+      parent: feature-flags
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteFeatureFlagsEnvironment
+        unstable: []
+        order: 1
+    - name: Create an environment
+      url: '#create-an-environment'
+      identifier: feature-flags-create-an-environment
+      parent: feature-flags
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateFeatureFlagsEnvironment
+        unstable: []
+        order: 4
+    - name: List environments
+      url: '#list-environments'
+      identifier: feature-flags-list-environments
+      parent: feature-flags
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListFeatureFlagsEnvironments
+        unstable: []
+        order: 5
+    - name: Create a feature flag
+      url: '#create-a-feature-flag'
+      identifier: feature-flags-create-a-feature-flag
+      parent: feature-flags
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateFeatureFlag
+        unstable: []
+        order: 12
+    - name: List feature flags
+      url: '#list-feature-flags'
+      identifier: feature-flags-list-feature-flags
+      parent: feature-flags
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListFeatureFlags
+        unstable: []
+        order: 13
     - name: Fleet Automation
       url: /api/latest/fleet-automation/
       identifier: fleet-automation
