@@ -10,7 +10,7 @@ cascade:
 ---
 
 {{< whatsnext desc="General Experients:" >}}
-    {{< nextlink href="experiments/guide/connecting_snowflake" >}}Connect Snowflake for Warehouse Native Experimentation
+    {{< nextlink href="experiments/guide/connecting_snowflake" >}}Connect Snowflake for Warehouse Native Experiment Analysis
 {{< /nextlink >}}
 
 {{< /whatsnext >}}

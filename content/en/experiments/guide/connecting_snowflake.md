@@ -1,6 +1,6 @@
 ---
-title: Connect Snowflake for Warehouse Native Experimentation
-description: Connect a Snowflake service account to enable warehouse native experimentation.
+title: Connect Snowflake for Warehouse Native Experiment Analysis
+description: Connect a Snowflake service account to enable warehouse native experiment analysis.
 further_reading:
 - link: "/experiments/defining_metrics"
   tag: "Documentation"
