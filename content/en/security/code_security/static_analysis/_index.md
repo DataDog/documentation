@@ -76,7 +76,7 @@ The content of the violation is shown in tabs:
 - **Event**: JSON metadata regarding the violation.
 
 ### Filter out false positives
-For a subset of SAST vulnerabilities, Bits AI can review the context of the  and assess whether it is more likely to be a true or false positive, along with a short explanation of the reasoning. 
+For a subset of SAST vulnerabilities, Bits AI can review the context and assess whether it is more likely to be a true or false positive, along with a short explanation of the reasoning. 
 
 For more information, see [AI-Enhanced Static Code Analysis][17].
 
