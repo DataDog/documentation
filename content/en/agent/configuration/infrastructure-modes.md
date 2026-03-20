@@ -72,12 +72,14 @@ The Agent supports four infrastructure modes. A checkmark ({{< X >}}) indicates 
 `end_user_device`
 : **Minimum Agent version**: 7.76.2<br>
 **Recommended for**: Employee desktops, laptops, and workstations<br>
-: The Agent includes all [full mode](#full) capabilities except Container Monitoring, plus the following. For full descriptions, see [Key Capabilities][20].
+: The Agent includes all [full mode](#full) capabilities except Container Monitoring, plus the following.
   - Device Performance Monitoring
   - Logs Collection
   - Wi-Fi Monitoring
   - Windows Crash Detection
   - Network Path Monitoring
+ 
+: For full descriptions, see [Key Capabilities][20].
 
 ## Configure Agent infrastructure mode
 
