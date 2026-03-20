@@ -32,7 +32,7 @@ After setting your data source:
 1. **[Create a feature flag][6]** and implement it using the [SDK][9] to assign users to the control and variant groups. This is required to launch your experiment.
 1. **[Launch your experiment][7]** to see the impact of your change on business metrics, application performance, and user journey.
 
-{{< img src="/product_analytics/experiment/overview_metrics_view1.png" alt="The Experiments metrics view showing business, funnel, and performance metrics with control and variant values and relative lift for each metric." style="width:90%;" >}}
+{{< img src="/product_analytics/experiment/overview_metrics_view-1.png" alt="The Experiments metrics view showing business, funnel, and performance metrics with control and variant values and relative lift for each metric." style="width:90%;" >}}
 
 
 ## Further reading
