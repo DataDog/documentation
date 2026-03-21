@@ -9,8 +9,8 @@ cascade:
         subcategory: Experiment Guides
 ---
 
-{{< whatsnext desc="General Experients:" >}}
-    {{< nextlink href="experiments/guide/connecting_snowflake" >}}Connect Snowflake for Warehouse Native Experiment Analysis
+{{< whatsnext desc="Connect warehouse data to Datadog Experiments:" >}}
+    {{< nextlink href="experiments/guide/connecting_snowflake" >}}Connect Snowflake Data to Datadog Experiments
 {{< /nextlink >}}
 
 {{< /whatsnext >}}
