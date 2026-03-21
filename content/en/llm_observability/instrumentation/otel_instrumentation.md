@@ -54,6 +54,35 @@ OTEL_SEMCONV_STABILITY_OPT_IN=gen_ai_latest_experimental
 
 This environment variable ensures that `strands-agents` emits traces following the OpenTelemetry v1.37+ semantic conventions for generative AI, which are required by LLM Observability.
 
+#### Using Microsoft Foundry
+
+[Microsoft Foundry][9] (formerly Azure AI Foundry) emits OpenTelemetry GenAI traces that follow the v1.37+ semantic conventions. This includes traces from the Foundry Agents Service, Semantic Kernel, and LangChain through `langchain-azure-ai`.
+
+To send Microsoft Foundry traces to LLM Observability, configure the OpenTelemetry exporter in your application:
+
+```python
+from azure.ai.projects import AIProjectClient
+from azure.identity import DefaultAzureCredential
+from opentelemetry import trace
+from opentelemetry.sdk.trace import TracerProvider
+from opentelemetry.sdk.trace.export import BatchSpanProcessor
+from opentelemetry.exporter.otlp.proto.http.trace_exporter import OTLPSpanExporter
+
+provider = TracerProvider()
+provider.add_span_processor(BatchSpanProcessor(OTLPSpanExporter()))
+trace.set_tracer_provider(provider)
+```
+
+Set the following environment variables:
+
+```
+OTEL_EXPORTER_OTLP_TRACES_PROTOCOL=http/protobuf
+OTEL_EXPORTER_OTLP_TRACES_ENDPOINT={{< region-param key="otlp_trace_endpoint" code="true" >}}
+OTEL_EXPORTER_OTLP_TRACES_HEADERS=dd-api-key=<YOUR_API_KEY>,dd-otlp-source=llmobs
+```
+
+Then enable tracing on your Foundry client with the `enable_telemetry` method from the `azure-core-tracing-opentelemetry` package. For more details, see the [Microsoft Foundry tracing documentation][9].
+
 ### Instrumentation
 
 To generate traces compatible with LLM Observability, do one of the following:
@@ -506,4 +535,5 @@ with tracer.start_as_current_span("my-span") as span:
 [6]: /llm_observability/evaluations/external_evaluations
 [7]: https://strandsagents.com/latest/
 [8]: /account_management/rbac/data_access/
+[9]: https://learn.microsoft.com/en-us/azure/foundry/observability/how-to/trace-agent-framework
 
