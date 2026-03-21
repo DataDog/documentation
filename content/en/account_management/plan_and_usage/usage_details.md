@@ -5,6 +5,10 @@ aliases:
   - /account_management/billing/usage_details/
 ---
 
+{{< callout url="" btn_hidden="true" header="New: Bill Overview" >}}
+A new Bill Overview experience is now in Limited Availability and will start rolling out automatically to all organizations starting March 2026. [Learn more][11].
+{{< /callout >}}
+
 ## Overview
 
 Administrators can access the [Usage][1] page by hovering over their username at the bottom left, then navigate to:
@@ -170,3 +174,4 @@ For billing questions, contact your [Customer Success][10] Manager.
 [8]: https://docs.datadoghq.com/logs/archives/rehydrating/?tab=awss3#overview
 [9]: /help/
 [10]: mailto:success@datadoghq.com
+[11]: /account_management/plan_and_usage/bill_overview/

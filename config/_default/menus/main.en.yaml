@@ -9194,6 +9194,11 @@ menu:
       parent: account_management
       identifier: account_management_plan_and_usage
       weight: 13
+    - name: Bill Overview
+      identifier: account_management_bill_overview
+      url: account_management/plan_and_usage/bill_overview/
+      parent: account_management_plan_and_usage
+      weight: 1300
     - name: Cost Details
       identifier: account_management_cost_details
       url: account_management/plan_and_usage/cost_details/
