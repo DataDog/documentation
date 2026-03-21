@@ -12,16 +12,15 @@ further_reading:
 
 ## Overview
 
-This guide walks through connecting Snowflake to Datadog to enable warehouse-native experiment analysis. This is done in two steps:
+This guide walks through connecting Snowflake to Datadog to enable warehouse-native experiment analysis.
 
-1. Creating a dedicated Snowflake user and granting the required privileges
-2. Configuring the connection in the Datadog interface
+The examples in this guide use `datadog_experiments_user` and `datadog_experiments_role` as the service account user and role. Replace these with your own values.
 
 ## Step 1: Prepare the Snowflake service account
 
 ### Create a dedicated service user and role in Snowflake
 
-1. Use the [Snowflake documentation][6] to create a private-public key-pair for enhanced authentication.
+1. Use the [Snowflake documentation][6] to create a public and private key-pair for enhanced authentication.
 1. Run the following commands in Snowflake to create the user and role in the service account. Replace `<public_key>` with the public key you generated in the previous step.
 
 **Note**: Datadog only supports unencrypted private keys.
@@ -51,7 +50,7 @@ GRANT SELECT ON TABLE <database>.<schema>.<tableN> TO ROLE datadog_experiments_r
 
 ### Grant access to output schema
 
-Datadog writes experiment exposure logs and intermediate metric results to tables in a dedicated output schema. Run the following command to grant the service role full access to this schema. Replace `<database>` with the appropriate value.
+Datadog writes experiment exposure logs and intermediate metric results to tables in a dedicated output schema. Run the following command to create the schema and grant the service role full access to it. Replace `<database>` with the appropriate value.
 
 ```sql
 CREATE SCHEMA IF NOT EXISTS <database>.datadog_experiments_output;
@@ -59,11 +58,9 @@ GRANT ALL ON SCHEMA <database>.datadog_experiments_output TO ROLE datadog_experi
 GRANT ALL PRIVILEGES ON FUTURE TABLES IN SCHEMA <database>.datadog_experiments_output TO ROLE datadog_experiments_role;
 ```
 
-### Create Experiment Warehouse (optional)
+### Create Datadog Experiments warehouse (optional)
 
-Datadog recommends creating a dedicated warehouse for Datadog Experiments. Ensure that the [role created](#create-a-dedicated-service-user-and-role-in-snowflake) has access to at least one warehouse to use for computing results. 
-
-**Note**: You need to provide the name of this warehouse when adding Snowflake credentials in Datadog in [Step 2](#step-2-connect-snowflake-to-datadog).
+Creating a dedicated warehouse for Datadog Experiments is optional. However, the [role you created](#create-a-dedicated-service-user-and-role-in-snowflake) must have access to at least one warehouse to compute results. Provide the warehouse name when [configuring experiment settings](#step-3-configure-experiment-settings).
 
 
 ```sql
@@ -76,11 +73,21 @@ GRANT ALL PRIVILEGES ON WAREHOUSE datadog_experiments_wh TO ROLE datadog_experim
 
 ## Step 2: Connect Snowflake to Datadog
 
-Once the service account has been created, connect Snowflake to Datadog by navigating to the [integrations page][2] and searching for Snowflake. Enter your account URL, username (for instance, `datadog_experiments_user`), and your RSA private key. To find your account URL, see the [Snowflake docs][3].
+Follow these steps to connect your Snowflake account to Datadog for warehouse-native experiment analysis:
 
-If you’re only using the Snowflake integration for warehouse-native experiment analysis, you can opt out of collecting other resources. 
+1. Navigate to [Datadog's integrations page][2] and search **Snowflake**.
+1. Click the **Snowflake** tile to open its modal.
+1. Select the **Configure** tab and click **Add Snowflake Account**.
+1. Add your **Account URL**. To find your account URL, see the [Snowflake guide][3].
+1. **Toggle on** the Product Analytics resource and **toggle off** all other resources. 
+1. Input your **User Name** (for example, `datadog_experiments_user`).
+1. Scroll to the **Configure a key pair authentication** section and Upload your unencypted **private key**. 
+1. Click **Save**.
 
-The privileges granted above are sufficient for running warehouse native experiments. The additional grants described on this setup page are only required if you plan to leverage other warehouse observability functionality in Datadog. To learn about other Datadog Snowflake integrations, see the [Snowflake integration page][4].
+You can find your new snowflake account in the Snowflake integration tile under the **Configure** tab.
+
+<div class="alert alert-info">The privilege grants described under <strong>Recommended Warehouse Settings</strong> section of the Snowflake integration tile are not needed for warehouse-native experiment analysis. The privileges granted in <a href="#step-1-prepare-the-snowflake-service-account">step 1</a> are sufficient. If you plan to use other warehouse observability functionalities in Datadog, see <a href="https://docs.datadoghq.com/integrations/snowflake-web/"> Datadog's Snowflake integration documentation</a> for more information.
+</div>
 
 {{< img src="/product_analytics/experiment/guide/snowflake_main_integration.png" alt="Datadog Snowflake integration, showing settings and options for connecting Snowflake to Datadog." style="width:90%;" >}}
 
