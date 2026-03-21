@@ -63,7 +63,7 @@ GRANT ALL PRIVILEGES ON FUTURE TABLES IN SCHEMA <database>.datadog_experiments_o
 
 Datadog recommends creating a dedicated warehouse for Datadog Experiments. Ensure that the [role created](#create-a-dedicated-service-user-and-role-in-snowflake) has access to at least one warehouse to use for computing results. 
 
-**Note**: You need to provide the name of this warehouse when adding Snowflake credentials in the Datadog UI in [Step 2](#step-2-connect-snowflake-to-datadog).
+**Note**: You need to provide the name of this warehouse when adding Snowflake credentials in Datadog in [Step 2](#step-2-connect-snowflake-to-datadog).
 
 
 ```sql
