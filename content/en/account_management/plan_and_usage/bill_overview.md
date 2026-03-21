@@ -114,11 +114,11 @@ Click **View Details** on a Trends card, or click any row in the Product List ta
 
 ## Toggle back to the previous layout
 
-If your organization is on the new Bill Overview and you prefer the previous layout, click **Switch to legacy view** in the page header. This toggle is available to all organizations and persists for your session.
+If your organization is on the new Bill Overview and you prefer the previous layout, click **Disable Preview** in the page header. This toggle is available to all organizations and persists for your session.
 
-{{< img src="account_management/plan_and_usage/toggle-back-header.png" alt="Bill Overview page header showing the Switch to legacy view button" >}}
+{{< img src="account_management/plan_and_usage/toggle-back-header.png" alt="Bill Overview page header showing the Disable Preview button" >}}
 
-To return to Bill Overview, click **Switch to new layout** in the header.
+To return to Bill Overview, click **Enable Preview** in the header.
 
 ## Permissions
 
