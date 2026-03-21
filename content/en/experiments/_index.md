@@ -17,7 +17,7 @@ Datadog Experiments helps teams run and analyze randomized experiments, such as 
 Datadog Experiments consists of two components:
 
 - An integration with [Datadog Feature Flags][1] for deploying and managing randomized experiments.
-- Statistical analysis of [Product Analytics][2] and [Real User Monitoring (RUM)][3] metrics to evaluate experiment results.
+- A statistical analysis of [Product Analytics][2] and [Real User Monitoring (RUM)][3] metrics to evaluate experiment results.
 
 ## Getting started
 
