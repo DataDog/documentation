@@ -306,6 +306,24 @@ Example configuration file locations:
 
 <div class="alert alert-info">The Datadog MCP Server is under significant development, and additional supported clients may become available.</div>
 
+## Required permissions
+MCP Server tools require the following [Datadog user role permissions][22]:
+| Permission | Required for |
+|------------|-------------|
+| <code style="white-space:nowrap">mcp_read</code> | Tools that read data from Datadog (for example, querying monitors, searching logs, retrieving dashboards) |
+| <code style="white-space:nowrap">mcp_write</code> | Tools that create or modify resources in Datadog (for example, creating monitors, muting hosts) |
+
+In addition to `mcp_read` or `mcp_write`, users need the standard Datadog permissions for the underlying resource. For example, using an MCP tool that reads monitors requires both `mcp_read` and the [Monitors Read][24] permission. See [Datadog Role Permissions][25] for the full list of resource-level permissions.
+
+Users with the **Datadog Standard Role** have both MCP Server permissions by default. If your organization uses [custom roles][23], add the permissions manually:
+1. Go to [**Organization Settings > Roles**][26] as an administrator, and click the role you want to update.
+1. Click **Edit Role** (pencil icon).
+1. Under the permissions list, select the **MCP Read** and **MCP Write** checkboxes.
+1. Select any other resource-level permissions you need for the role.
+5. Click **Save**.
+
+Organization administrators can manage global MCP access and write capabilities from [Organization Settings][27].
+
 ## Authentication
 
 The MCP Server uses OAuth 2.0 for [authentication][14]. If you cannot go through the OAuth flow (for example, on a server), you can provide a Datadog [API key and application key][1] as `DD_API_KEY` and `DD_APPLICATION_KEY` HTTP headers.
@@ -409,3 +427,9 @@ Local authentication is recommended for Cline and when remote authentication is 
 [19]: https://claude.ai
 [20]: https://coterm.datadoghq.com/mcp-cli/datadog_mcp_cli.exe
 [21]: /getting_started/site/
+[22]: /account_management/rbac/permissions/#mcp
+[23]: /account_management/rbac/?tab=datadogapplication#custom-roles
+[24]: /account_management/rbac/permissions/#monitors
+[25]: /account_management/rbac/permissions/
+[26]: https://app.datadoghq.com/organization-settings/roles
+[27]: https://app.datadoghq.com/organization-settings/preferences
