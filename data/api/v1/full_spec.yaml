@@ -1314,6 +1314,13 @@ components:
             description: A role UUID.
             type: string
           type: array
+        tabs:
+          description: List of tabs for organizing dashboard widgets into groups.
+          items:
+            $ref: "#/components/schemas/DashboardTab"
+          maxItems: 100
+          nullable: true
+          type: array
         tags:
           description: List of team names representing ownership of a dashboard.
           items:
@@ -1583,6 +1590,35 @@ components:
         url:
           description: URL of the dashboard.
           type: string
+      type: object
+    DashboardTab:
+      description: Dashboard tab for organizing widgets.
+      properties:
+        id:
+          description: UUID of the tab.
+          example: ""
+          format: uuid
+          type: string
+        name:
+          description: Name of the tab.
+          example: L
+          maxLength: 100
+          minLength: 1
+          type: string
+        widget_ids:
+          description: >-
+            List of widget IDs belonging to this tab. The backend also accepts positional references in @N format (1-indexed) as a convenience for Terraform and other declarative tools.
+          example:
+            - 0
+          items:
+            description: Widget ID.
+            format: int64
+            type: integer
+          type: array
+      required:
+        - id
+        - name
+        - widget_ids
       type: object
     DashboardTemplateVariable:
       description: Template variable.
@@ -6307,6 +6343,9 @@ components:
 
         A pipeline can contain Nested Pipelines and Processors whereas a Nested Pipeline can only contain Processors.
       properties:
+        description:
+          description: A description of the pipeline.
+          type: string
         filter:
           $ref: "#/components/schemas/LogsFilter"
         is_enabled:
@@ -6320,6 +6359,12 @@ components:
           description: Ordered list of processors in this pipeline.
           items:
             $ref: "#/components/schemas/LogsProcessor"
+          type: array
+        tags:
+          description: A list of tags associated with the pipeline.
+          items:
+            description: A single tag using the format `key:value`.
+            type: string
           type: array
         type:
           $ref: "#/components/schemas/LogsPipelineProcessorType"
@@ -7586,13 +7631,25 @@ components:
         - L2NORM
         - PERCENTILE
         - STDDEV
+    MonitorFormulaAndFunctionCostDataSource:
+      description: Data source for cost queries.
+      enum:
+        - metrics
+        - cloud_cost
+        - datadog_usage
+      example: "cloud_cost"
+      type: string
+      x-enum-varnames:
+        - METRICS
+        - CLOUD_COST
+        - DATADOG_USAGE
     MonitorFormulaAndFunctionCostQueryDefinition:
       description: A formula and functions cost query.
       properties:
         aggregator:
           $ref: "#/components/schemas/MonitorFormulaAndFunctionCostAggregator"
         data_source:
-          $ref: "#/components/schemas/MonitorFormulaAndFunctionMetricsDataSource"
+          $ref: "#/components/schemas/MonitorFormulaAndFunctionCostDataSource"
         name:
           description: Name of the query for use in formulas.
           example: "query1"

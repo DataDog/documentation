@@ -740,6 +740,11 @@
     },
     {
       "group": "logs_pipelines",
+      "suffix": "_2599033345",
+      "description": "Create a pipeline with nested pipeline processor returns \"OK\" response"
+    },
+    {
+      "group": "logs_pipelines",
       "suffix": "_501419705",
       "description": "Create a pipeline with schema processor"
     }

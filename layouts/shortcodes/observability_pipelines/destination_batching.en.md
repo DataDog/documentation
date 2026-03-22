@@ -5,11 +5,15 @@
 | Amazon Security Lake                       | None           | 256               | 300                 |
 | Azure Storage (Datadog Log Archives)       | None           | 100               | 900                 |
 | CrowdStrike                                | None           | 1                 | 1                   |
+| Datadog CloudPrem                          | 1,000          | 4.25              | 5                   |
 | Datadog Logs                               | 1,000          | 4.25              | 5                   |
+| Datadog Metrics                            | 100,000        | None              | 2                   |
 | Elasticsearch                              | None           | 10                | 1                   |
 | Google Chronicle                           | None           | 1                 | 15                  |
 | Google Cloud Storage (Datadog Log Archives)| None           | 100               | 900                 |
+| Google Pub/Sub                             | 1,000          | 10                | 1                   |
 | HTTP Client                                | 1000           | 1                 | 1                   |
+| Kafka                                      | 10,000         | 1                 | 1                   |
 | Microsoft Sentinel                         | None           | 10                | 1                   |
 | New Relic                                  | 100            | 1                 | 1                   |
 | OpenSearch                                 | None           | 10                | 1                   |
