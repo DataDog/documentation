@@ -89,7 +89,7 @@ Connect Claude (including Claude Cowork) to the Datadog MCP Server by adding it 
 {{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
 1. Follow the Claude help center guide on [custom connectors][1] to add a new custom connector.
 
-1. When prompted for a URL, enter the Datadog MCP Server endpoint for your [Datadog site][2] ({{< region-param key="dd_site_name" >}}). Use the **Datadog Site** selector on the right side of this documentation page to select your site.
+1. When prompted for a URL, enter the Datadog MCP Server endpoint for your [Datadog site][2] ({{< region-param key="dd_site_name" >}}). For the correct instructions, use the **Datadog Site** selector on the right side of this documentation page to select your site.
    <pre><code>{{< region-param key="mcp_server_endpoint" >}}</code></pre>
 
    To enable [product-specific tools][3], include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and LLM Observability tools: 
