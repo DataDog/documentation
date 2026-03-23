@@ -324,7 +324,7 @@ To redact the attribute:
 2. Click **Add Scanning Rule**.
 3. Check the library rules you want to use.
 4. Select **Specific Attributes** for **Scan entire event or portion of it**.
-5. Enter the name of the attribute you created earlier to specify that you want it scanned. Use the attribute path without the `@` prefix.
+5. Enter the name of the attribute you created earlier to specify that you want it scanned. **Note**: Use the attribute path without the `@` prefix.
 6. Select the action you want when there's a match.
 7. Optionally, add tags.
 8. Click **Add Rules**.
