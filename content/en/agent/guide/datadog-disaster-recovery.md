@@ -93,7 +93,7 @@ export USER_EMAIL=<USER_EMAIL>
 export CONNECTION='{"data":{"id":"'${PRIMARY_ORG_ID}'","type":"hamr_org_connections","attributes":{"TargetOrgUuid":"'${DDR_ORG_ID}'","HamrStatus":1,"ModifiedBy":"'${USER_EMAIL}'", "IsPrimary":true}}}'
 
 curl -v -H "Content-Type: application/json" -H \
-"dd-api-key:${PRIMARY_DD_API_KEY}" -H \ 
+"dd-api-key:${PRIMARY_DD_API_KEY}" -H \
 "dd-application-key:${PRIMARY_DD_APP_KEY}" --data "${CONNECTION}" --request POST ${PRIMARY_DD_API_URL}/api/v2/hamr
 ```
 After linking your orgs, only the failover org displays this banner:
