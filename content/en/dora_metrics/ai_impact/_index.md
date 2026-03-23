@@ -75,7 +75,7 @@ User Activity
 
 | Metric | Definition |
 |--------|------------|
-| AI Assisted Commits | Commits authored on a day where the author was active with the selected tool, divided by total commits. |
+| AI Assisted Commits | Commits authored on a day when the author was active with the selected tool, divided by total commits. |
 | AI Assisted Deployments | Deployments containing at least one commit from an active user, divided by total deployments. |
 | Change Lead Time | Median lead time of commits by active users compared to non-active users. |
 | PR Review Time | Median review time of PRs where at least one commit author was active compared to PRs where no author was active. |
