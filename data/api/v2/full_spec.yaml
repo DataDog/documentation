@@ -66128,6 +66128,8 @@ components:
       properties:
         frequency:
           $ref: "#/components/schemas/TeamSyncAttributesFrequency"
+        selection_state:
+          $ref: "#/components/schemas/TeamSyncAttributesSelectionState"
         source:
           $ref: "#/components/schemas/TeamSyncAttributesSource"
         sync_membership:
@@ -66150,6 +66152,14 @@ components:
         - ONCE
         - CONTINUOUSLY
         - PAUSED
+    TeamSyncAttributesSelectionState:
+      description: |-
+        Specifies which teams or organizations to sync. When
+        provided, synchronization is limited to the specified
+        items and their subtrees.
+      items:
+        $ref: "#/components/schemas/TeamSyncSelectionStateItem"
+      type: array
     TeamSyncAttributesSource:
       description: The external source platform for team synchronization. Only "github" is supported.
       enum:
@@ -66159,6 +66169,7 @@ components:
       x-enum-varnames:
         - GITHUB
     TeamSyncAttributesSyncMembership:
+      default: false
       description: Whether to sync members from the external team to the Datadog team. Defaults to `false` when not provided.
       example: true
       type: boolean
@@ -66218,6 +66229,72 @@ components:
             $ref: "#/components/schemas/TeamSyncData"
           type: array
       type: object
+    TeamSyncSelectionStateExternalId:
+      description: The external identifier for a team or organization in the source platform.
+      properties:
+        type:
+          $ref: "#/components/schemas/TeamSyncSelectionStateExternalIdType"
+        value:
+          $ref: "#/components/schemas/TeamSyncSelectionStateExternalIdValue"
+      required:
+        - type
+        - value
+      type: object
+    TeamSyncSelectionStateExternalIdType:
+      description: |-
+        The type of external identifier for the selection state item.
+        For GitHub synchronization, the allowed values are `team` and
+        `organization`.
+      enum:
+        - team
+        - organization
+      example: team
+      type: string
+      x-enum-varnames:
+        - TEAM
+        - ORGANIZATION
+    TeamSyncSelectionStateExternalIdValue:
+      description: |-
+        The external identifier value from the source
+        platform. For GitHub, this is the string
+        representation of a GitHub organization ID or team
+        ID.
+      example: "1"
+      type: string
+    TeamSyncSelectionStateItem:
+      description: Identifies a team or organization hierarchy to include in synchronization.
+      properties:
+        external_id:
+          $ref: "#/components/schemas/TeamSyncSelectionStateExternalId"
+        operation:
+          $ref: "#/components/schemas/TeamSyncSelectionStateOperation"
+        scope:
+          $ref: "#/components/schemas/TeamSyncSelectionStateScope"
+      required:
+        - external_id
+      type: object
+    TeamSyncSelectionStateOperation:
+      description: |-
+        The operation to perform on the selected hierarchy.
+        When set to `include`, synchronization covers the
+        referenced teams or organizations.
+      enum:
+        - include
+      example: include
+      type: string
+      x-enum-varnames:
+        - INCLUDE
+    TeamSyncSelectionStateScope:
+      description: |-
+        The scope of the selection. When set to `subtree`,
+        synchronization includes the referenced team or
+        organization and everything nested under it.
+      enum:
+        - subtree
+      example: subtree
+      type: string
+      x-enum-varnames:
+        - SUBTREE
     TeamTarget:
       description: "Represents a team target for an escalation policy step, including the team's ID and resource type."
       properties:
@@ -106916,12 +106993,6 @@ paths:
           description: OK
         "403":
           $ref: "#/components/responses/ForbiddenResponse"
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/APIErrorResponse"
-          description: Team sync configurations not found
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       security:
@@ -106939,12 +107010,16 @@ paths:
           - teams_read
     post:
       description: |-
-        This endpoint attempts to link your existing Datadog teams with GitHub teams by matching their names.
+        This endpoint configures synchronization between your existing Datadog teams and GitHub teams by matching their names.
         It evaluates all current Datadog teams and compares them against teams in the GitHub organization
         connected to your Datadog account, based on Datadog Team handle and GitHub Team slug
         (lowercased and kebab-cased).
 
         This operation is read-only on the GitHub side, no teams will be modified or created.
+
+        Optionally, provide `selection_state` to limit synchronization
+        to specific teams or organizations and their subtrees, instead
+        of syncing all teams.
 
         [A GitHub organization must be connected to your Datadog account](https://docs.datadoghq.com/integrations/github/),
         and the GitHub App integrated with Datadog must have the `Members Read` permission. Matching is performed by comparing the Datadog team handle to the GitHub team slug
@@ -106960,6 +107035,8 @@ paths:
       responses:
         "200":
           description: OK
+        "204":
+          description: No Content
         "403":
           $ref: "#/components/responses/ForbiddenResponse"
         "429":
