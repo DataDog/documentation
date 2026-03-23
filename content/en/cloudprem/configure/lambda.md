@@ -14,7 +14,7 @@ further_reading:
   Join the CloudPrem Preview to access new self-hosted log management features.
 {{< /callout >}}
 
-<div class="alert alert-warning">Lambda search offloading is an experimental feature. Its configuration and behavior may change in future releases.</div>
+<div class="alert alert-warning">Lambda search offloading is an experimental feature.</div>
 
 <div class="alert alert-info">Lambda search offloading is only available on AWS.</div>
 
