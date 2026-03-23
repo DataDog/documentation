@@ -87,17 +87,24 @@ To configure the Redshift integration in Datadog:
 1. Navigate to [**Datadog Data Observability** > **Settings**][1].
 2. Click the **Configure** button for the Redshift option.
 
-   {{< img src="data_observability/data-obs-settings-integrations.png" alt="List of Data Observability integrations on the Settings page" style="width:100%;" >}}
+   {{< img src="data_observability/redshift/data_obs_redshift_on_integrations_page.png" alt="Redshift on the Settings page of Data Observability integrations" style="width:100%;" >}}
 
-3. Enter your cluster connection details:
+3. Select either a connected AWS account or add a new AWS account.
+
+   {{< img src="data_observability/redshift/data_obs_redshift_integration_flow.png" alt="Selecting a connected or new AWS account for the Redshift Data Observability integration." style="width:100%;" >}}
+
+4. Enter your cluster connection details:
    - **AWS account ID**: Your AWS account ID.
    - **Region**: The AWS region where your cluster is hosted (for example, `us-east-1`).
    - **Cluster identifier**: Your Redshift cluster identifier. For Redshift Serverless, enter your workgroup name instead.
    - **Database**: The name of the database to connect to (defaults to `dev`).
    - **Database user**: The Datadog user created during setup (for example, `datadog_user`).
    - **Password**: The password set for the Datadog user.
-4. Turn on **Enable Data Observability for Redshift tables**.
-5. Click **Save & Test**.
+
+   {{< img src="data_observability/redshift/data_obs_redshift_add_credentials.png" alt="Input fields for Redshift credentials for Data Observability integrations" style="width:100%;" >}}
+
+5. Turn on **Enable Data Observability for Redshift tables**.
+6. Click **Save & Test**.
 
 ## Next steps
 
