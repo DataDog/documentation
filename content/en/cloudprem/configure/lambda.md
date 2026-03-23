@@ -33,9 +33,8 @@ When a Lambda configuration is defined, CloudPrem performs a dry run invocation 
 ## Prerequisite: IAM permissions
 
 Lambda search offloading requires specific permissions for two separate IAM roles:
-- **The CloudPrem node role**: the role attached to the Kubernetes nodes (or pod identity) running CloudPrem.  The role is defined in the `serviceAccount` section of your `values.yaml`. This role will need permissions to invoke and deploy the Lambda function.
-- **The Lambda execution role**: the role assumed by the Lambda function itself at runtime. This role needs read access to your index data in S3. Its ARN has to be set in the
-`config.searcher.lambda.auto_deploy.execution_role_arn` key as we will see in [Configuration](#configuration).
+- **The CloudPrem node role**: the role attached to the Kubernetes nodes (or pod identity) running CloudPrem.  The role is defined in the `serviceAccount` section of your `values.yaml`. This role needs permissions to invoke and deploy the Lambda function.
+- **The Lambda execution role**: the role assumed by the Lambda function itself at runtime. This role needs read access to your index data in S3. Its ARN must be set in the `config.searcher.lambda.auto_deploy.execution_role_arn` key. For more details, see the [Configuration](#configuration) section.
 
 ### CloudPrem node permissions
 
@@ -75,7 +74,7 @@ Replace `<REGION>`, `<ACCOUNT_ID>`, and `<LAMBDA_EXECUTION_ROLE_ARN>` with value
 
 ### Lambda execution role
 
-The Lambda function requires its own execution role with read access to your bucket in S3:
+The Lambda function requires its own execution role with read access to your S3 bucket:
 
 ```json
 {
@@ -128,7 +127,7 @@ Optionally, to capture Lambda logs in CloudWatch, add the following permissions 
 
 ## Configuration
 
-<div class="alert alert-warning">If a Lambda configuration is present, but invalid, Cloudprem's searcher will fail to start.</div>
+<div class="alert alert-warning">The Lambda configuration <strong>must be valid</strong> for the CloudPrem searcher to start.</div>
 
 After the [Prerequisite: IAM permissions](#prerequisite-iam-permissions) iam permissions have been properly set up, to enable Lambda offloading, add a `lambda` section under `config.searcher` in your Helm chart values file:
 
@@ -143,7 +142,7 @@ config:
         invocation_timeout_secs: 15
 {{< /code-block >}}
 
-Replace `arn:aws:iam::123456789012:role/cloudprem-lambda-role` by the Lambda execution role you have created.
+Replace `arn:aws:iam::123456789012:role/cloudprem-lambda-role` with the Lambda execution role you have created.
 
 You can then upgrade the Helm chart release:
 
