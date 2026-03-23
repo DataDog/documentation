@@ -613,6 +613,13 @@
       "description": "Create deployment rule returns \"OK\" response"
     }
   ],
+  "TriggerDeploymentGatesEvaluation": [
+    {
+      "group": "deployment_gates",
+      "suffix": "_691804290",
+      "description": "Trigger a deployment gates evaluation returns \"Accepted\" response"
+    }
+  ],
   "UpdateDeploymentGate": [
     {
       "group": "deployment_gates",
@@ -2189,8 +2196,8 @@
   "SyncTeams": [
     {
       "group": "teams",
-      "suffix": "_3215592344",
-      "description": "Sync teams returns \"OK\" response"
+      "suffix": "",
+      "description": "Link Teams with GitHub Teams returns \"No Content\" response"
     }
   ],
   "UpdateTeamLink": [
