@@ -1,7 +1,6 @@
 ---
 title: Setup
 description: Setting up Network Path
-is_beta: true
 content_filters:
   - trait_id: os
     option_group_id: network_path_setup_options
