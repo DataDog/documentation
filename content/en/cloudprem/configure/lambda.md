@@ -129,7 +129,7 @@ Optionally, to capture Lambda logs in CloudWatch, add the following permissions 
 
 <div class="alert alert-warning">The Lambda configuration <strong>must be valid</strong> for the CloudPrem searcher to start.</div>
 
-After the [Prerequisite: IAM permissions](#prerequisite-iam-permissions) iam permissions have been properly set up, to enable Lambda offloading, add a `lambda` section under `config.searcher` in your Helm chart values file:
+After setting up the [IAM permissions](#prerequisite-iam-permissions), add a `lambda` section under `config.searcher` in your Helm chart values file to enable Lambda offloading:
 
 {{< code-block lang="yaml" filename="datadog-values.yaml">}}
 config:
