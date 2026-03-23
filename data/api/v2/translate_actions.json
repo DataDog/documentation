@@ -725,6 +725,24 @@
     "request_description": "",
     "request_schema_description": "The request for a pipelines search."
   },
+  "DeleteTestOptimizationServiceSettings": {
+    "description": "Delete Test Optimization settings for a specific service identified by repository, service name, and environment.",
+    "summary": "Delete Test Optimization service settings",
+    "request_description": "",
+    "request_schema_description": "Request object for deleting Test Optimization service settings."
+  },
+  "UpdateTestOptimizationServiceSettings": {
+    "description": "Partially update Test Optimization settings for a specific service identified by repository, service name, and environment.\nOnly provided fields are updated; null or omitted fields are left unchanged.",
+    "summary": "Update Test Optimization service settings",
+    "request_description": "",
+    "request_schema_description": "Request object for updating Test Optimization service settings."
+  },
+  "GetTestOptimizationServiceSettings": {
+    "description": "Retrieve Test Optimization settings for a specific service identified by repository, service name, and environment.",
+    "summary": "Get Test Optimization service settings",
+    "request_description": "",
+    "request_schema_description": "Request object for getting Test Optimization service settings."
+  },
   "AggregateCIAppTestEvents": {
     "description": "The API endpoint to aggregate CI Visibility test events into buckets of computed metrics and timeseries.",
     "summary": "Aggregate tests events",

@@ -67869,6 +67869,250 @@ components:
       required:
         - data
       type: object
+    TestOptimizationDeleteServiceSettingsRequest:
+      description: Request object for deleting Test Optimization service settings.
+      properties:
+        data:
+          $ref: "#/components/schemas/TestOptimizationDeleteServiceSettingsRequestData"
+      required:
+        - data
+      type: object
+    TestOptimizationDeleteServiceSettingsRequestAttributes:
+      description: Attributes for deleting Test Optimization service settings.
+      properties:
+        env:
+          description: The environment name. If omitted, defaults to `none`.
+          example: prod
+          type: string
+        repository_id:
+          description: The repository identifier.
+          example: github.com/datadog/shopist
+          minLength: 1
+          type: string
+        service_name:
+          description: The service name.
+          example: shopist
+          minLength: 1
+          type: string
+      required:
+        - repository_id
+        - service_name
+      type: object
+    TestOptimizationDeleteServiceSettingsRequestData:
+      description: Data object for delete service settings request.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/TestOptimizationDeleteServiceSettingsRequestAttributes"
+        type:
+          $ref: "#/components/schemas/TestOptimizationDeleteServiceSettingsRequestDataType"
+      required:
+        - type
+        - attributes
+      type: object
+    TestOptimizationDeleteServiceSettingsRequestDataType:
+      description: |-
+        JSON:API type for delete service settings request.
+        The value must always be `test_optimization_delete_service_settings_request`.
+      enum:
+        - test_optimization_delete_service_settings_request
+      example: test_optimization_delete_service_settings_request
+      type: string
+      x-enum-varnames:
+        - TEST_OPTIMIZATION_DELETE_SERVICE_SETTINGS_REQUEST
+    TestOptimizationGetServiceSettingsRequest:
+      description: Request object for getting Test Optimization service settings.
+      properties:
+        data:
+          $ref: "#/components/schemas/TestOptimizationGetServiceSettingsRequestData"
+      required:
+        - data
+      type: object
+    TestOptimizationGetServiceSettingsRequestAttributes:
+      description: Attributes for requesting Test Optimization service settings.
+      properties:
+        env:
+          description: The environment name. If omitted, defaults to `none`.
+          example: prod
+          type: string
+        repository_id:
+          description: The repository identifier.
+          example: github.com/datadog/shopist
+          minLength: 1
+          type: string
+        service_name:
+          description: The service name.
+          example: shopist
+          minLength: 1
+          type: string
+      required:
+        - repository_id
+        - service_name
+      type: object
+    TestOptimizationGetServiceSettingsRequestData:
+      description: Data object for get service settings request.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/TestOptimizationGetServiceSettingsRequestAttributes"
+        type:
+          $ref: "#/components/schemas/TestOptimizationGetServiceSettingsRequestDataType"
+      required:
+        - type
+        - attributes
+      type: object
+    TestOptimizationGetServiceSettingsRequestDataType:
+      description: |-
+        JSON:API type for get service settings request.
+        The value must always be `test_optimization_get_service_settings_request`.
+      enum:
+        - test_optimization_get_service_settings_request
+      example: test_optimization_get_service_settings_request
+      type: string
+      x-enum-varnames:
+        - TEST_OPTIMIZATION_GET_SERVICE_SETTINGS_REQUEST
+    TestOptimizationServiceSettingsAttributes:
+      description: Attributes for Test Optimization service settings.
+      properties:
+        auto_test_retries_enabled:
+          description: Whether Auto Test Retries are enabled for this service.
+          example: false
+          type: boolean
+        code_coverage_enabled:
+          description: Whether Code Coverage is enabled for this service.
+          example: false
+          type: boolean
+        early_flake_detection_enabled:
+          description: Whether Early Flake Detection is enabled for this service.
+          example: false
+          type: boolean
+        env:
+          description: The environment name.
+          example: prod
+          type: string
+        failed_test_replay_enabled:
+          description: Whether Failed Test Replay is enabled for this service.
+          example: false
+          type: boolean
+        pr_comments_enabled:
+          description: Whether PR Comments are enabled for this service.
+          example: true
+          type: boolean
+        repository_id:
+          description: The repository identifier.
+          example: github.com/datadog/shopist
+          type: string
+        service_name:
+          description: The service name.
+          example: shopist
+          type: string
+        test_impact_analysis_enabled:
+          description: Whether Test Impact Analysis is enabled for this service.
+          example: false
+          type: boolean
+      type: object
+    TestOptimizationServiceSettingsData:
+      description: Data object for Test Optimization service settings response.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/TestOptimizationServiceSettingsAttributes"
+        id:
+          description: Unique identifier for the service settings.
+          example: github.com/datadog/shopist::shopist::prod
+          type: string
+        type:
+          $ref: "#/components/schemas/TestOptimizationServiceSettingsType"
+      type: object
+    TestOptimizationServiceSettingsResponse:
+      description: Response object containing Test Optimization service settings.
+      properties:
+        data:
+          $ref: "#/components/schemas/TestOptimizationServiceSettingsData"
+      type: object
+    TestOptimizationServiceSettingsType:
+      description: |-
+        JSON:API type for service settings response.
+        The value must always be `test_optimization_service_settings`.
+      enum:
+        - test_optimization_service_settings
+      example: test_optimization_service_settings
+      type: string
+      x-enum-varnames:
+        - TEST_OPTIMIZATION_SERVICE_SETTINGS
+    TestOptimizationUpdateServiceSettingsRequest:
+      description: Request object for updating Test Optimization service settings.
+      properties:
+        data:
+          $ref: "#/components/schemas/TestOptimizationUpdateServiceSettingsRequestData"
+      required:
+        - data
+      type: object
+    TestOptimizationUpdateServiceSettingsRequestAttributes:
+      description: |-
+        Attributes for updating Test Optimization service settings.
+        All non-required fields are optional; only provided fields will be updated.
+      properties:
+        auto_test_retries_enabled:
+          description: Whether Auto Test Retries are enabled for this service.
+          example: false
+          type: boolean
+        code_coverage_enabled:
+          description: Whether Code Coverage is enabled for this service.
+          example: false
+          type: boolean
+        early_flake_detection_enabled:
+          description: Whether Early Flake Detection is enabled for this service.
+          example: false
+          type: boolean
+        env:
+          description: The environment name. If omitted, defaults to `none`.
+          example: prod
+          type: string
+        failed_test_replay_enabled:
+          description: Whether Failed Test Replay is enabled for this service.
+          example: false
+          type: boolean
+        pr_comments_enabled:
+          description: Whether PR Comments are enabled for this service.
+          example: true
+          type: boolean
+        repository_id:
+          description: The repository identifier.
+          example: github.com/datadog/shopist
+          minLength: 1
+          type: string
+        service_name:
+          description: The service name.
+          example: shopist
+          minLength: 1
+          type: string
+        test_impact_analysis_enabled:
+          description: Whether Test Impact Analysis is enabled for this service.
+          example: false
+          type: boolean
+      required:
+        - repository_id
+        - service_name
+      type: object
+    TestOptimizationUpdateServiceSettingsRequestData:
+      description: Data object for update service settings request.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/TestOptimizationUpdateServiceSettingsRequestAttributes"
+        type:
+          $ref: "#/components/schemas/TestOptimizationUpdateServiceSettingsRequestDataType"
+      required:
+        - type
+        - attributes
+      type: object
+    TestOptimizationUpdateServiceSettingsRequestDataType:
+      description: |-
+        JSON:API type for update service settings request.
+        The value must always be `test_optimization_update_service_settings_request`.
+      enum:
+        - test_optimization_update_service_settings_request
+      example: test_optimization_update_service_settings_request
+      type: string
+      x-enum-varnames:
+        - TEST_OPTIMIZATION_UPDATE_SERVICE_SETTINGS_REQUEST
     ThreatHuntingJobDataType:
       description: Type of payload.
       enum:
@@ -71895,6 +72139,7 @@ components:
             teams_manage: Manage Teams. Create, delete, rename, and edit metadata of all Teams. To control Team membership across all Teams, use the User Access Manage permission.
             teams_read: Read Teams data. A User with this permission can view Team names, metadata, and which Users are on each Team.
             test_optimization_read: View Test Optimization.
+            test_optimization_settings_write: Update service settings in Test Optimization.
             test_optimization_write: Update flaky tests from Flaky Tests Management of Test Optimization.
             timeseries_query: Query Timeseries data.
             usage_read: View your organization's usage and usage attribution.
@@ -78290,6 +78535,127 @@ paths:
         operator: OR
         permissions:
           - ci_visibility_read
+  /api/v2/ci/test-optimization/settings/service:
+    delete:
+      description: |-
+        Delete Test Optimization settings for a specific service identified by repository, service name, and environment.
+      operationId: DeleteTestOptimizationServiceSettings
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TestOptimizationDeleteServiceSettingsRequest"
+        required: true
+      responses:
+        "204":
+          description: No Content
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/NotAuthorizedResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - test_optimization_settings_write
+      summary: Delete Test Optimization service settings
+      tags: ["Test Optimization"]
+      x-codegen-request-body-name: body
+      x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+          - test_optimization_settings_write
+      x-unstable: |-
+        **Note**: This endpoint is in preview and may be subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    patch:
+      description: |-
+        Partially update Test Optimization settings for a specific service identified by repository, service name, and environment.
+        Only provided fields are updated; null or omitted fields are left unchanged.
+      operationId: UpdateTestOptimizationServiceSettings
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TestOptimizationUpdateServiceSettingsRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TestOptimizationServiceSettingsResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/NotAuthorizedResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - test_optimization_settings_write
+      summary: Update Test Optimization service settings
+      tags: ["Test Optimization"]
+      x-codegen-request-body-name: body
+      x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+          - test_optimization_settings_write
+      x-unstable: |-
+        **Note**: This endpoint is in preview and may be subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    post:
+      description: |-
+        Retrieve Test Optimization settings for a specific service identified by repository, service name, and environment.
+      operationId: GetTestOptimizationServiceSettings
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TestOptimizationGetServiceSettingsRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TestOptimizationServiceSettingsResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/NotAuthorizedResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - test_optimization_read
+      summary: Get Test Optimization service settings
+      tags: ["Test Optimization"]
+      x-codegen-request-body-name: body
+      x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+          - test_optimization_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and may be subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/ci/tests/analytics/aggregate:
     post:
       description: |-
