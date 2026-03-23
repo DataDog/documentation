@@ -42,7 +42,7 @@ AI Impact measures how AI coding assistants affect your software delivery perfor
 
 AI Impact metrics can be analyzed at two levels of granularity. The granularity mode being used determines how commits are classified as "AI-assisted" or "non-AI" for all metrics.
 
-By default, Datadog selects the most precise granularity mode that all integrated tools have in common, so that metrics are comparable across tools on an equal basis.
+By default, Datadog selects the most precise granularity mode that all integrated tools have in common, so that metrics are comparable across tools on an equal basis. For example, if you're using only Cursor, metrics are classified per-commit because that's the most precise method available. If you're using both Cursor and Claude Code, metrics are classified based on user activity because per-commit is not available for Claude Code.
 
 Per-Commit
 : A commit is classified as AI-assisted when there is evidence that AI directly contributed code to that specific commit (for example, Cursor reports AI-generated lines). Each commit is independently tagged. This is the most precise method, available for tools that provide commit-level data.
