@@ -52,7 +52,7 @@ User Activity
 
 [1]: /dora_metrics/setup/
 [2]: /integrations/cursor/?tab=cursorintegrationindatadog#overview
-[3]: /integrations/anthropic-usage-and-costs/#events
+[3]: /integrations/anthropic-usage-and-costs/
 
 ## Impact metrics
 
