@@ -9189,7 +9189,7 @@ menu:
       parent: account_management
       identifier: safety_center
       weight: 12
-    - name: Plan and Usage
+    - name: Plan & Usage
       url: account_management/plan_and_usage/
       parent: account_management
       identifier: account_management_plan_and_usage
