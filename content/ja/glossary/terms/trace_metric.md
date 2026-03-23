@@ -16,7 +16,7 @@ title: トレースメトリクス
 トレースメトリクスは、監視に役立ちます。APM モニターは、[New Monitors][3]、[Service][4]、または [Resource][5] ページで設定できます。推奨されるモニターのセットは、[Service][4] または [Resource][5] ページで利用できます。
 
 
-[1]: /ja/developers/guide/data-collection-resolution-retention/
+[1]: /ja/extend/guide/data-collection-resolution/
 [2]: https://app.datadoghq.com/metric/summary
 [3]: https://app.datadoghq.com/monitors
 [4]: /ja/tracing/services/service_page/

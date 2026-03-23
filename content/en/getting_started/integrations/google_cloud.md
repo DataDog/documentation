@@ -71,6 +71,8 @@ Use this guide to get started with monitoring your Google Cloud environment. Thi
 
 ### Metric collection
 
+<div class="alert alert-info">If your Google Cloud organization uses <a href="https://cloud.google.com/vpc-service-controls/docs/overview">VPC Service Controls</a>, you must explicitly allow Datadog service accounts to access protected resources. If these service accounts are not permitted within your service perimeter, metric, resource, and metadata collection may fail. Contact <a href="/help/">Datadog Support</a> for the service account identifiers for your site or region.</div>
+
 {{< tabs >}}
 
 {{% tab "Org-level" %}}
@@ -218,7 +220,7 @@ To use the Quick Start method, your Datadog user role must be able to create API
    2. Choose whether to apply tags to the metrics associated with the created service account.
    3. Choose whether to disable metric collection for specific Google Cloud services to help control Google Cloud Monitoring costs.
    4. Choose whether to apply granular metric filters for any Google Cloud services enabled for metric collection.
-   5. Choose whether to filter metrics by tags for GCP resource types `Cloud Run Revision`, `VM Intance`, or `Cloud Function` to help control Datadog costs.
+   5. Choose whether to filter metrics by tags for GCP resource types `Cloud Run Revision`, `VM Instance`, or `Cloud Function` to help control Datadog costs.
 7. Configure **Resource Collection** (attributes and configuration information of the resources in your Google Cloud environment).
 8. Copy the provided **Terraform Code**.
 9. Paste the code into a `.tf` file, and run the **Initialize and apply the Terraform** command. If successful, the command:
@@ -253,7 +255,7 @@ To use the Quick Start method, your Datadog user role must be able to create API
    2. Choose whether to apply tags to the metrics associated with the created service account.
    3. Choose whether to disable metric collection for specific Google Cloud services to help control Google Cloud Monitoring costs.
    4. Choose whether to apply granular metric filters for any Google Cloud services enabled for metric collection.
-   5. Choose whether to filter metrics by tags for GCP resource types `Cloud Run Revision`, `VM Intance`, or `Cloud Function` to help control Datadog costs.
+   5. Choose whether to filter metrics by tags for GCP resource types `Cloud Run Revision`, `VM Instance`, or `Cloud Function` to help control Datadog costs.
 9. Configure **Resource Collection** (attributes and configuration information of the resources in your Google Cloud environment, optional).
 10. Click **Verify and Save Account**.
 
@@ -348,8 +350,6 @@ You can also specify additional locations not listed and disable any global metr
 
 {{< img src="integrations/google_cloud_platform/metric_region_filtering.png" alt="The metric collection tab in the Datadog Google Cloud integration page, with the Enable Global Metrics option highlighted and a subset of regions selected. The Additional Locations option is also highlighted with a multi-region filter defined" style="width:80%;">}}
 
-**Note**: These metric collection filters do not apply to `gcp.prometheus.*` metrics and a subset of `gcp.gke.*` metrics.
-
 {{% /collapse-content %}}
 
 {{% collapse-content title="Limit metric collection by host or Cloud Run instance" level="h4" %}}
@@ -390,7 +390,7 @@ Use the [Datadog Dataflow template][14] to batch and compresses your log events 
 
 ## Leveraging the Datadog Agent
 
-After the Google Cloud integration is configured, Datadog automatically starts collecting Google Cloud metrics. However, you can leverage the Datadog Agent to gather deeper insights into your infrastructure.
+After the Google Cloud integration is configured, Datadog automatically starts collecting Google Cloud metrics. However, you can use the Datadog Agent to gather deeper insights into your infrastructure.
 
 The [Datadog Agent][31] provides the [most granular, low-latency metrics][32] from your infrastructure, delivering real-time insights into CPU, memory, disk usage, and more for your Google Cloud hosts.
 The Agent can be installed on any host, including [GKE][33].
@@ -482,7 +482,7 @@ You can get granular visibility into your BigQuery environments to monitor the p
 [29]: https://www.datadoghq.com/blog/datadog-google-security-command-center/
 [30]: https://www.datadoghq.com/blog/google-cloud-vertex-ai-monitoring-datadog/
 [31]: /agent/
-[32]: /developers/guide/data-collection-resolution-retention/#pagetitle:~:text=n/a-,Infrastructure,-Agent%20integrations
+[32]: /extend/guide/data-collection-resolution-retention/#pagetitle:~:text=n/a-,Infrastructure,-Agent%20integrations
 [33]: /integrations/gke/?tab=standard
 [34]: /integrations/
 [35]: /tracing/

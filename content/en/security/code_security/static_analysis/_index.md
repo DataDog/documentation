@@ -51,8 +51,8 @@ To get started, go to the [**Code Security** setup page][12] or see the [Setup d
 
 ### IDEs
 {{< whatsnext desc="You can identify code vulnerabilities in real time as you edit a file in your Integrated Development Environment (IDE). See integration-specific documentation for more information:">}}
-    {{< nextlink href="developers/ide_plugins/idea/" >}}Datadog Plugin for JetBrains IDEs{{< /nextlink >}}
-    {{< nextlink href="developers/ide_plugins/vscode/#static-analysis" >}}Datadog Extension for Visual Studio Code{{< /nextlink >}}
+    {{< nextlink href="ide_plugins/idea/" >}}Datadog Plugin for JetBrains IDEs{{< /nextlink >}}
+    {{< nextlink href="ide_plugins/vscode/#static-analysis" >}}Datadog Extension for Visual Studio Code{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Search and filter results
@@ -76,7 +76,7 @@ The content of the violation is shown in tabs:
 - **Event**: JSON metadata regarding the violation.
 
 ### Filter out false positives
-For a subset of SAST vulnerabilities, Bits AI can review the context of the finding and assess whether it is more likely to be a true or false positive, along with a short explanation of the reasoning. 
+For a subset of SAST vulnerabilities, Bits AI can review the context and assess whether it is more likely to be a true or false positive, along with a short explanation of the reasoning. 
 
 For more information, see [AI-Enhanced Static Code Analysis][17].
 
@@ -144,7 +144,7 @@ If you believe a specific violation is a false positive, you can flag it as a fa
 [10]: /security/code_security/dev_tool_int/github_pull_requests/
 [11]: /getting_started/code_security/
 [12]: https://app.datadoghq.com/security/configuration/code-security/setup
-[13]: https://docs.datadoghq.com/security/code_security/static_analysis/#link-results-to-datadog-services-and-teams
+[13]: /security/code_security/static_analysis/setup/?tab=github#link-findings-to-datadog-services-and-teams
 [14]: /account_management/teams/
 [15]: /integrations/github/#connect-github-teams-to-datadog-teams
 [16]: /integrations/azure-devops-source-code/

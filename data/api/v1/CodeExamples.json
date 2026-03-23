@@ -238,6 +238,16 @@
     },
     {
       "group": "dashboards",
+      "suffix": "_732700533",
+      "description": "Create a new dashboard with formulas and functions events query using facet group by"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_4018282928",
+      "description": "Create a new dashboard with formulas and functions events query using flat group by fields"
+    },
+    {
+      "group": "dashboards",
       "suffix": "_2104498738",
       "description": "Create a new dashboard with formulas and functions scatterplot widget"
     },
@@ -443,6 +453,11 @@
     },
     {
       "group": "dashboards",
+      "suffix": "_1705253330",
+      "description": "Create a new dashboard with timeseries widget using has_value_labels"
+    },
+    {
+      "group": "dashboards",
       "suffix": "_416487533",
       "description": "Create a new dashboard with timeseries widget using order_by tags"
     },
@@ -546,8 +561,8 @@
   "SendPublicDashboardInvitation": [
     {
       "group": "dashboards",
-      "suffix": "",
-      "description": "Send shared dashboard invitation email returns \"OK\" response"
+      "suffix": "_3435926116",
+      "description": "Send shared dashboard invitation email returns OK"
     }
   ],
   "UpdateDashboard": [
@@ -725,6 +740,11 @@
     },
     {
       "group": "logs_pipelines",
+      "suffix": "_2599033345",
+      "description": "Create a pipeline with nested pipeline processor returns \"OK\" response"
+    },
+    {
+      "group": "logs_pipelines",
       "suffix": "_501419705",
       "description": "Create a pipeline with schema processor"
     }
@@ -803,6 +823,16 @@
       "group": "monitors",
       "suffix": "",
       "description": "Create a monitor returns \"OK\" response"
+    },
+    {
+      "group": "monitors",
+      "suffix": "_2608995690",
+      "description": "Create a monitor with aggregate augmented query variables returns \"OK\" response"
+    },
+    {
+      "group": "monitors",
+      "suffix": "_2082938111",
+      "description": "Create a monitor with aggregate filtered query variables returns \"OK\" response"
     },
     {
       "group": "monitors",
@@ -903,6 +933,16 @@
     }
   ],
   "CreateSLO": [
+    {
+      "group": "service_level_objectives",
+      "suffix": "_707861409",
+      "description": "Create a new metric SLO object using bad events formula returns \"OK\" response"
+    },
+    {
+      "group": "service_level_objectives",
+      "suffix": "_512760759",
+      "description": "Create a new metric SLO object using sli_specification returns \"OK\" response"
+    },
     {
       "group": "service_level_objectives",
       "suffix": "_3765703239",
@@ -1029,7 +1069,7 @@
   "UpdateMobileTest": [
     {
       "group": "synthetics",
-      "suffix": "",
+      "suffix": "_477498912",
       "description": "Edit a Mobile test returns \"OK\" response"
     }
   ],

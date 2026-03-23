@@ -311,6 +311,8 @@ module "lambda-datadog" {
 {{% /tab %}}
 {{< /tabs >}}
 
+{{% svl-tracing-env %}}
+
 ## FIPS compliance
 
 {{% svl-lambda-fips %}}

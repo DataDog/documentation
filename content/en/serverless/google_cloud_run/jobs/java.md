@@ -97,6 +97,8 @@ logger.info("Hello World!");
 
 {{% serverless-init-env-vars-in-container language="java" defaultSource="cloudrun" %}}
 
+{{% svl-tracing-env %}}
+
 ## Troubleshooting
 
 {{% serverless-init-troubleshooting productNames="Cloud Run services" %}}
@@ -109,5 +111,5 @@ logger.info("Hello World!");
 [2]: /tracing/trace_collection/custom_instrumentation/java/dd-api#adding-spans
 [3]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/java/
 [4]: /tracing/other_telemetry/connect_logs_and_traces/java/
-[5]: /developers/dogstatsd/?tab=java#install-the-dogstatsd-client
+[5]: /extend/dogstatsd/?tab=java#install-the-dogstatsd-client
 [6]: /metrics/custom_metrics/dogstatsd_metrics_submission/?tab=java#code-examples-5

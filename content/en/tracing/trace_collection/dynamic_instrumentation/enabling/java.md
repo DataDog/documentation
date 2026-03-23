@@ -14,19 +14,20 @@ further_reading:
       text: 'Getting Started with Datadog Agent'
 ---
 
-Dynamic Instrumentation is a feature provided by the Datadog tracing library. If you are already using [APM to collect traces][1] for your application, ensure your Agent and tracing library are on the required version. Then, go directly to enabling Dynamic Instrumentation in step 4.
+Dynamic Instrumentation is a feature of the Datadog tracing library that lets you add instrumentation to your application at runtime without code changes or redeployments. Follow these instructions to set up Dynamic Instrumentation for Java.
 
-## Requirements
+## Prerequisites
 
-- The Datadog Dynamic Instrumentation library is supported in JDK version 8 and above.
-- For a better experience, Datadog recommends enabling [autocomplete and search (in Preview)][7].
+Before you begin, review the [Dynamic Instrumentation prerequisites][9]. Java applications also require:
+
+- JDK version 8 or higher.
+- Tracing library [`dd-java-agent.jar`][8] version 1.34.0 or higher. See the [installation instructions][10] for setup details.
 
 ## Installation
 
-1. Install or upgrade your Agent to version [7.49.0][2] or higher.
-2. If you don't already have APM enabled, in your Agent configuration, set the `DD_APM_ENABLED` environment variable to `true` and listening to the port `8126/TCP`.
+1. If you don't already have APM enabled, in your Agent configuration, set the `DD_APM_ENABLED` environment variable to `true` and listening to the port `8126/TCP`.
 
-3. Download `dd-java-agent.jar`:
+2. Download `dd-java-agent.jar`:
  {{< tabs >}}
  {{% tab "Wget" %}}
    ```shell
@@ -44,8 +45,6 @@ Dynamic Instrumentation is a feature provided by the Datadog tracing library. If
    ```
 {{% /tab %}}
 {{< /tabs >}}
-
-   **Note**: Dynamic Instrumentation is available in the `dd-java-agent.jar` library in versions 1.34.0 and later.
 
 3. Run your service with Dynamic Instrumentation enabled by setting `-Ddd.dynamic.instrumentation.enabled` flag or `DD_DYNAMIC_INSTRUMENTATION_ENABLED` environment variable to `true`. Specify `dd.service`, `dd.env`, and `dd.version` Unified Service Tags so you can filter and group your instrumentations and target active clients across these dimensions.
    {{< tabs >}}
@@ -103,14 +102,18 @@ Configure Dynamic Instrumentation using the following environment variables:
 
 See [Dynamic Instrumentation][6] for information about adding instrumentations and browsing and indexing the data.
 
+## Limitations
+
+- On JDK 18 and below, classes compiled with the `-parameters` flag may fail to instrument with the error message "Method Parameters detected". Spring 6+, Spring Boot 3+, and Scala use this flag by default.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/trace_collection/
-[2]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
 [3]: https://docs.oracle.com/javase/7/docs/technotes/tools/solaris/java.html
 [4]: https://app.datadoghq.com/dynamic-instrumentation
 [5]: /getting_started/tagging/unified_service_tagging
 [6]: /tracing/dynamic_instrumentation/
-[7]: /dynamic_instrumentation/symdb/
+[8]: https://github.com/DataDog/dd-trace-java
+[9]: /dynamic_instrumentation/#prerequisites
+[10]: /tracing/trace_collection/dd_libraries/java/
