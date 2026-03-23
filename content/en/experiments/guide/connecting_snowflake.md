@@ -97,8 +97,11 @@ After connecting your Snowflake account, configure the experiment settings in [D
 1. Click **Connect a data warehouse** to open the setup modal. If you already have a warehouse connected, click **Edit** instead.
 1. Select the **Snowflake** tile.
 1. Enter the **Account**, **Role**, **Warehouse**, **Database**, and **Schema** you configured in [Step 1](#step-1-prepare-the-snowflake-service-account).
+1. Click **Save**.
 
 {{< img src="/product_analytics/experiment/guide/snowflake_experiment_setup.png" alt="The Edit Data Warehouse modal with Snowflake selected, showing two sections: Select Snowflake Account with fields for Account, Role, and Warehouse, and Select Database and Schema with fields for Database and Schema." style="width:90%;" >}}
+
+After you save your warehouse connection, create experiment metrics using your Snowflake data. See [Create Experiment Metrics][5].
 
 ## Further reading
 
@@ -108,3 +111,4 @@ After connecting your Snowflake account, configure the experiment settings in [D
 [2]: https://app.datadoghq.com/integrations
 [3]: https://docs.snowflake.com/en/user-guide/organizations-connect
 [4]: https://app.datadoghq.com/product-analytics
+[5]: /experiments/defining_metrics
