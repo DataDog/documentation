@@ -11,9 +11,12 @@ further_reading:
   tag: "Documentation"
   text: "Reading Experiment Results"
 ---
+{{< jqmath-vanilla >}}
 
 ## Overview
-<!-- SME NOTE: Experiment metrics are different from Datadog metrics (ingested time-series data points). Consider adding a sentence here clarifying that experiment metrics are aggregations computed over event data to measure user behavior — not the same as Datadog metrics. -->
+<!-- SME NOTE: Experiment metrics are different from Datadog metrics (ingested time-series data points).
+
+Consider adding a sentence here clarifying that experiment metrics are aggregations computed over event data to measure user behavior — not the same as Datadog metrics. -->
 
 Create the metrics you want to measure in your experiments. Datadog Experiments metrics can use data from Product Analytics, Real User Monitoring (RUM), or your own data warehouse.
 
@@ -105,11 +108,9 @@ Imagine measuring conversion through a basic, two-step funnel. When users visit 
 
 Datadog calculates this metric as:
 
-```
-   Number of users that click Add to Cart
------------------------------------------------
-  Number of users enrolled into this variant
-```
+
+$$\text"Number of users that click Add to Cart" /{\text"Number of users enrolled into this variant"}$$
+
 
 Since only users who visit the page are assigned to the experiment, this formula gives the per-user conversion rate.
 
@@ -121,11 +122,8 @@ Now imagine running a similar experiment on your homepage. To measure conversion
 
 Instead of dividing by the number of users enrolled (which includes all homepage visitors), Datadog divides by the number of users who viewed a product page:
 
-```
-   Number of users that click Add to Cart
------------------------------------------------
-  Number of users that visit the Product Page
-```
+$$\text"Number of users that click Add to Cart" /{\text"Number of users that visit the Product Page"}$$
+
 
 <div class="alert alert-info">While it can be informative to understand down-funnel metrics, we recommend making decisions based on per-assigned-user metrics. Down-funnel conversion metrics may not reflect decreases to top-of-funnel performance.</div>
 
