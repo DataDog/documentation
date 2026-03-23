@@ -9,12 +9,6 @@ async function hideOverlays(page: import('@playwright/test').Page) {
       .conv-search-float-btn { display: none !important; }
       body > header { display: none !important; }
       .announcement-banner { display: none !important; }
-      *, *::before, *::after {
-        animation-duration: 0s !important;
-        animation-delay: 0s !important;
-        transition-duration: 0s !important;
-        transition-delay: 0s !important;
-      }
     `,
   });
 }
@@ -23,18 +17,6 @@ test.describe('Cdocs alert box component', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto(PAGE_URL);
     await page.waitForSelector(CONTENT_AREA);
-    await page.evaluate(() =>
-      Promise.all([
-        document.fonts.ready,
-        ...Array.from(document.images, (img) =>
-          img.complete
-            ? Promise.resolve()
-            : new Promise((r) => {
-                img.onload = img.onerror = r;
-              })
-        ),
-      ])
-    );
     await hideOverlays(page);
   });
 

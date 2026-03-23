@@ -46,12 +46,6 @@ async function hideOverlays(page: Page) {
       .conv-search-float-btn { display: none !important; }
       body > header { display: none !important; }
       .announcement-banner { display: none !important; }
-      *, *::before, *::after {
-        animation-duration: 0s !important;
-        animation-delay: 0s !important;
-        transition-duration: 0s !important;
-        transition-delay: 0s !important;
-      }
     `,
   });
 }
@@ -71,18 +65,6 @@ test.describe('Cdocs open stepper', () => {
     });
     await page.reload();
     await page.waitForSelector('.stepper--initialized');
-    await page.evaluate(() =>
-      Promise.all([
-        document.fonts.ready,
-        ...Array.from(document.images, (img) =>
-          img.complete
-            ? Promise.resolve()
-            : new Promise((r) => {
-                img.onload = img.onerror = r;
-              })
-        ),
-      ])
-    );
     await hideOverlays(page);
   });
 
