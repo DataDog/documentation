@@ -2196,8 +2196,8 @@
   "SyncTeams": [
     {
       "group": "teams",
-      "suffix": "",
-      "description": "Link Teams with GitHub Teams returns \"No Content\" response"
+      "suffix": "_3215592344",
+      "description": "Sync teams returns \"OK\" response"
     }
   ],
   "UpdateTeamLink": [
