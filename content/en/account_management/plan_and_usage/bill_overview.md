@@ -18,7 +18,7 @@ further_reading:
 
 View Datadog costs, usage trends, and projected end-of-month costs in a single page, with daily breakdowns, product-level detail, and multi-organization filtering.
 
-The [Bill Overview page][app-bill-overview] gives administrators a single view of Datadog costs and usage. It is automatically enabled during the phased rollout starting March 2026.
+The [**Bill Overview** page][1] gives administrators a single view of Datadog costs and usage. It is automatically enabled during the phased rollout starting March 2026.
 
 ## Global filters
 
