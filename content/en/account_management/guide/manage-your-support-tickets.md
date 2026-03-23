@@ -1,6 +1,6 @@
 ---
 title: Manage Your Support Tickets
-description: Learn how to create new support tickets and access your existing Datadog support tickets.
+description: Learn how to create and manage Datadog support tickets, including on the GovCloud support portal.
 aliases:
   - /developers/faq/access-your-support-ticket
   - /account_management/faq/access-your-support-ticket
@@ -26,16 +26,15 @@ further_reading:
 <p>If you have opened at least one Datadog support ticket, follow this process to access all your Datadog support tickets:</p>
 <ol>
     <li>From the Support page click <strong>Sign in</strong> on the top right.</li>
-    <li>If this is your first time signing into your Datadog Zendesk account, click the link by <strong>New to your Datadog Zendesk account? Sign up</strong>.</li>
-    <li>If you have previously emailed Datadog support, click <strong>Emailed us for support? Get a password</strong> and enter the same email address you used to contact Datadog support.</li>
+    <li>If this is your first time signing into your Datadog Zendesk account, click <strong>New to your Datadog Zendesk account? Sign up</strong>.</li>
+    <li>If you have previously emailed Datadog support, click <strong>Emailed us for support? Get a password</strong> and enter the email address you used to contact Datadog support.</li>
     <li>After you receive the password in your email, log in and click <strong>Manage your tickets</strong> to see your requests.</li>
     <li>If you don't see the <strong>My Activities</strong> page after logging in, click on your name in the upper right corner, and then click <strong>My Activities</strong>.</li>
-    <li>If you would like to view your entire organization's tickets, submit a request to Datadog support.</li>
+    <li>To view your entire organization's tickets, submit a request to Datadog support.</li>
 </ol>
 
 {{< whatsnext desc="Support Page by Datadog Site:">}}
     {{< nextlink href="https://help.datadoghq.com/" >}} US1, US3, US5, EU, AP1, AP2 {{< /nextlink >}}
-    {{< nextlink href="https://govsupport.ddog-gov.com/" >}}US1-FED{{< /nextlink >}}
 {{< /whatsnext >}}
 
 <h2>Password requirements</h2>
@@ -67,7 +66,7 @@ further_reading:
             <li>Users cannot reuse a certain number of their previously used passwords.</li>
         </ul>
     </li>
-    <li>Expiration Policy:
+    <li>Expiration policy:
         <ul>
             <li>Passwords must be updated at least <strong>every 90 days</strong>, or whenever prompted by the system.</li>
         </ul>
@@ -98,7 +97,7 @@ further_reading:
 <ol>
     <li>Navigate to <a href="https://govsupport.ddog-gov.com">the Datadog GovCloud support portal</a>.</li>
     <li>Click <strong>Sign Up</strong>.</li>
-    <li>Complete the registration form, using the email address associated with your existing GovCloud Datadog account.</li>
+    <li>Complete the registration form using the email address associated with your existing GovCloud Datadog account.</li>
     <li>In a separate browser tab, navigate to your email. Open the verification email from <code>help@ddog-gov.com</code> and copy the verification code.</li>
     <li>In the Datadog GovCloud support portal, enter the verification code.</li>
     <li>Click <strong>Verify</strong>.</li>

@@ -7,7 +7,7 @@ further_reading:
   text: "Agent Troubleshooting"
 - link: "/account_management/guide/manage-your-support-tickets"
   tag: "Documentation"
-  text: "Manage Your Support Tickets"
+  text: "Manage Your support tickets"
 ---
 
 ## Overview
