@@ -90,10 +90,14 @@ async function stabilizeToc(page: Page) {
   await page.waitForTimeout(300);
 }
 
-/** Hide the fixed-position Ask AI button so it doesn't overlap element screenshots. */
-async function hideAskAiButton(page: Page) {
+/** Hide fixed/floating elements that can overlap content and block clicks. */
+async function hideOverlays(page: Page) {
   await page.addStyleTag({
-    content: '.conv-search-float-btn { display: none !important; }',
+    content: `
+      .conv-search-float-btn { display: none !important; }
+      body > header { display: none !important; }
+      .announcement-banner { display: none !important; }
+    `,
   });
 }
 
@@ -105,7 +109,7 @@ test.describe('Cdocs headings and TOC', () => {
     await page.waitForSelector('#cdoc-content');
     // Reset to default (postgres)
     await clickPill(page, 'postgres');
-    await hideAskAiButton(page);
+    await hideOverlays(page);
   });
 
   test.describe('TOC shows correct H2s for each filter', () => {

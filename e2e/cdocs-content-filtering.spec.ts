@@ -59,10 +59,14 @@ async function resetToDefaults(page: Page) {
   await clickPill(page, 'database', 'postgres');
 }
 
-/** Hide the fixed-position Ask AI button so it doesn't overlap element screenshots. */
-async function hideAskAiButton(page: Page) {
+/** Hide fixed/floating elements that can overlap content and block clicks. */
+async function hideOverlays(page: Page) {
   await page.addStyleTag({
-    content: '.conv-search-float-btn { display: none !important; }',
+    content: `
+      .conv-search-float-btn { display: none !important; }
+      body > header { display: none !important; }
+      .announcement-banner { display: none !important; }
+    `,
   });
 }
 
@@ -74,7 +78,7 @@ test.describe('Cdocs content filtering', () => {
     await page.waitForSelector('#cdoc-content');
     // Click defaults to clear any persisted state from URL params
     await resetToDefaults(page);
-    await hideAskAiButton(page);
+    await hideOverlays(page);
   });
 
   test('initial page snapshot', async ({ page }) => {
