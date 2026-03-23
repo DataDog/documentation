@@ -85,7 +85,7 @@ User Activity
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note**: Change Failure Rate only includes deployments linked to code changes. Configuration-only or infrastructure deployments are excluded to help the comparison reflect the impact of AI on code-related failures. This differs from standard DORA Change Failure Rate, which counts all deployment types.
+<div class="alert alert-info">Change Failure Rate only includes deployments linked to code changes. Configuration-only or infrastructure deployments are excluded to help the comparison reflect the impact of AI on code-related failures. This differs from standard DORA Change Failure Rate, which counts all deployment types.</div>
 
 ## Further Reading
 
