@@ -57147,7 +57147,7 @@ components:
           $ref: "#/components/schemas/SecurityMonitoringCriticalAsset"
       type: object
     SecurityMonitoringCriticalAssetSeverity:
-      description: Severity associated with this critical asset. Either an explicit severity can be set, or the severity can be increased or decreased.
+      description: Severity associated with this critical asset. Either an explicit severity can be set, or the severity can be increased or decreased, or the severity can be left unchanged (no-op).
       enum:
         - info
         - low
@@ -57156,6 +57156,7 @@ components:
         - critical
         - increase
         - decrease
+        - no-op
       example: increase
       type: string
       x-enum-varnames:
@@ -57166,6 +57167,7 @@ components:
         - CRITICAL
         - INCREASE
         - DECREASE
+        - NO_OP
     SecurityMonitoringCriticalAssetType:
       default: critical_assets
       description: The type of the resource. The value should always be `critical_assets`.
