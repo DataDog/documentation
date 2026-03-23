@@ -306,4 +306,4 @@ Each supported language collects a set of runtime metrics that provide insights 
 [3]: /agent/docker/#dogstatsd-custom-metrics
 [7]: /extend/dogstatsd/unix_socket/
 [8]: /agent/configuration/agent-configuration-files/#main-configuration-file
-[9]: https://learn.microsoft.com/en-us/dotnet/core/diagnostics/metrics
+[9]: https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.metrics?view=net-6.0
