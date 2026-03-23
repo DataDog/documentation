@@ -34,6 +34,8 @@ An input represents which part of the request the operator is applied to. The fo
 | `server.request.body` | The parsed HTTP body (key/value map) | `data.items[0] => value0, data.items[1] => value1` |
 | `server.response.status` | The http status code | `200` |
 
+**Note**: Input values are subject to [WAF inspection size limits][7]. Values that exceed the inspection threshold are not evaluated by WAF rules.
+
 #### Operators
 
 | name | Description |
@@ -146,3 +148,4 @@ Next, [configure detection rules to create security signals][1] based on those s
 [4]: https://app.datadoghq.com/security/appsec/in-app-waf?config_by=custom-rules
 [5]: https://app.datadoghq.com/security/appsec/policies/in-app-waf?config_by=suggested-rules
 [6]: /security/account_takeover_protection
+[7]: /security/application_security/how-it-works/#waf-inspection-limits

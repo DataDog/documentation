@@ -107,6 +107,24 @@ Datadog App and API Protection includes over 100 attack signatures that help pro
 * Cross-Site Scripting (XSS)
 * Server-side Request Forgery (SSRF)
 
+## WAF inspection limits
+
+The In-App WAF inspects individual request parameter values up to a size threshold. Values that exceed this threshold are not evaluated by WAF rules. This is standard behavior across WAF products — all WAFs impose inspection limits to maintain performance and stability.
+
+### What happens when a value exceeds the limit
+
+When a request parameter value exceeds the inspection limit, that specific value is skipped during WAF analysis. The remaining parameters in the request are still inspected normally. Oversized values are neither blocked nor generate security signals by default.
+
+Because HTTP request size limits vary across web servers and load balancers (often 8 KB to several MB), there can be a gap between the data your application accepts and what the WAF inspects.
+
+### Recommended mitigations
+
+To reduce the risk of uninspected payloads:
+
+- **Set upstream request size limits**: Configure your web server, load balancer, or API gateway to constrain request body and parameter sizes closer to the WAF inspection threshold.
+- **Use defense in depth**: Enable [Exploit Prevention (RASP)][30] alongside the In-App WAF. Exploit Prevention operates at the application runtime level and is not subject to the same input size constraints.
+- **Monitor large payloads**: Use application-level logging or infrastructure monitoring to track requests with unusually large parameter values.
+
 ## API security
 
 <div class="alert alert-info">API security is in Preview.</div>
@@ -137,3 +155,4 @@ Datadog App and API Protection identifies Log4j Log4Shell attack payloads and pr
 [27]: /software_catalog/endpoints/
 [28]: /security/code_security/iast/
 [29]: /security/code_security/
+[30]: /security/application_security/exploit-prevention/
