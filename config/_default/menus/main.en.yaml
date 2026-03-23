@@ -5216,6 +5216,11 @@ menu:
       parent: llm_obs_managed_evaluations
       identifier: llm_obs_managed_evaluations_security
       weight: 40002
+    - name: Connect Your LLM Provider
+      url: llm_observability/evaluations/custom_llm_as_a_judge_evaluations/connect_to_account
+      parent: llm_obs_custom_llm_as_a_judge_evaluations
+      identifier: llm_obs_custom_llm_as_a_judge_evaluations_connect_to_account
+      weight: 40100
     - name: Template Evaluations
       url: llm_observability/evaluations/custom_llm_as_a_judge_evaluations/template_evaluations
       parent: llm_obs_custom_llm_as_a_judge_evaluations
