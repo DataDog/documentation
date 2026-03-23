@@ -1,0 +1,6 @@
+traits:
+
+- id: network_path_mode
+  label: "Mode"
+  type: text
+  internal_notes: The Network Path configuration mode — scheduled (manually defined endpoints) or dynamic (automatically discovered from CNM traffic).

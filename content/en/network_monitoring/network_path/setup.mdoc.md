@@ -2,6 +2,13 @@
 title: Setup
 description: Setting up Network Path
 is_beta: true
+content_filters:
+  - trait_id: network_path_mode
+    option_group_id: network_path_mode_options
+    label: "Test type"
+  - trait_id: os
+    option_group_id: network_path_setup_options
+    label: "Environment"
 further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-network-path-monitoring/"
   tag: "Blog"
@@ -14,7 +21,6 @@ further_reading:
   text: "Network Path traceroute variants"
 ---
 
-
 ## Overview
 
 Setting up Network Path involves configuring your environment to monitor and trace the network routes between your services and endpoints. This helps identify bottlenecks, latency issues, and potential points of failure in your network infrastructure. Network Path allows you to manually configure individual network paths or automatically discover them, depending on your needs.
@@ -23,7 +29,12 @@ Setting up Network Path involves configuring your environment to monitor and tra
 
 ## Setup
 
-<div class="alert alert-info">This page covers Network Path setup for Agent-based configuration in Network Monitoring. To create Network Path tests in Synthetic Monitoring, see <a href="/synthetics/network_path_tests/">Network Path Testing in Synthetic Monitoring</a>.</div>
+{% alert level="info" %}
+This page covers Network Path setup for Agent-based configuration in Network Monitoring. To create Network Path tests in Synthetic Monitoring, see [Network Path Testing in Synthetic Monitoring][15].
+{% /alert %}
+
+<!-- Scheduled tests -->
+{% if equals($network_path_mode, "scheduled") %}
 
 ### Scheduled tests
 
@@ -31,8 +42,8 @@ You can monitor specific network paths by defining them in the Agent configurati
 
 To get started, copy the [example configuration][5], remove the `.example` extension, and update it with your desired settings, or use one of the environment-specific configurations below. For performance optimization in large environments, see [increase the number of workers](#increase-the-number-of-workers).
 
-{{< tabs >}}
-{{% tab "Linux" %}}
+<!-- Scheduled > Linux -->
+{% if equals($os, "linux") %}
 
 Agent `v7.59+` is required.
 
@@ -77,8 +88,11 @@ Agent `v7.59+` is required.
 
 3. Restart the Agent after making these configuration changes to start seeing network paths.
 
-{{% /tab %}}
-{{% tab "macOS" %}}
+{% /if %}
+<!-- end Scheduled > Linux -->
+
+<!-- Scheduled > macOS -->
+{% if equals($os, "mac_os") %}
 
 Agent `v7.75+` is required.
 
@@ -123,8 +137,11 @@ Agent `v7.75+` is required.
 
 3. Restart the Agent after making these configuration changes to start seeing network paths.
 
-{{% /tab %}}
-{{% tab "Windows" %}}
+{% /if %}
+<!-- end Scheduled > macOS -->
+
+<!-- Scheduled > Windows -->
+{% if equals($os, "windows") %}
 
 Agent `v7.72+` is required.
 
@@ -166,14 +183,19 @@ Agent `v7.72+` is required.
          - "tag_key2:tag_value2"
     ```
 
-  3. Restart the Agent after making these configuration changes to start seeing network paths.
+3. Restart the Agent after making these configuration changes to start seeing network paths.
 
-{{% /tab %}}
-{{% tab "Helm" %}}
+{% /if %}
+<!-- end Scheduled > Windows -->
+
+<!-- Scheduled > Helm -->
+{% if equals($os, "helm") %}
 
 Agent `v7.59+` is required.
 
-<div class="alert alert-info">Helm chart v3.109.1+ is required. For more information, reference the <a href="https://github.com/DataDog/helm-charts/blob/main/charts/datadog/README.md">Datadog Helm Chart documentation</a> and the documentation <a href="https://docs.datadoghq.com/containers/kubernetes/integrations/?tab=helm#configuration">for Kubernetes and Integrations.</a></div>
+{% alert level="info" %}
+Helm chart v3.109.1+ is required. For more information, see the [Datadog Helm Chart documentation](https://github.com/DataDog/helm-charts/blob/main/charts/datadog/README.md) and the documentation [for Kubernetes and Integrations](https://docs.datadoghq.com/containers/kubernetes/integrations/?tab=helm#configuration).
+{% /alert %}
 
 To enable Network Path with Kubernetes using Helm, add the following to your `values.yaml` file.
 
@@ -211,11 +233,17 @@ To enable Network Path with Kubernetes using Helm, add the following to your `va
               - "tag_key2:tag_value2"
 ```
 
-{{% /tab %}}
-{{% tab "Autodiscovery (Kubernetes)" %}}
-Datadog Autodiscovery allows you to enable Network Path on a per-service basis through Kubernetes annotations. 
+{% /if %}
+<!-- end Scheduled > Helm -->
 
-<div class="alert alert-info">Helm chart v3.109.1+ is required. For more information, see the <a href="https://github.com/DataDog/helm-charts/blob/main/charts/datadog/README.md">Datadog Helm Chart documentation</a>.</div>
+<!-- Scheduled > Kubernetes -->
+{% if equals($os, "kubernetes") %}
+
+{% alert level="info" %}
+Helm chart v3.109.1+ is required. For more information, see the [Datadog Helm Chart documentation](https://github.com/DataDog/helm-charts/blob/main/charts/datadog/README.md).
+{% /alert %}
+
+Datadog Autodiscovery allows you to enable Network Path on a per-service basis through Kubernetes annotations.
 
 1. Enable the traceroute module in the Datadog `values.yaml` file, which the Network Path integration depends on.
 
@@ -224,7 +252,7 @@ Datadog Autodiscovery allows you to enable Network Path on a per-service basis t
      traceroute:
        enabled: true
 
-2. After the module is enabled, Datadog automatically detects Network Path annotations added to your Kubernetes pod. For more information, see [Kubernetes and Integrations][2].
+2. After the module is enabled, Datadog automatically detects Network Path annotations added to your Kubernetes pod. For more information, see [Kubernetes and Integrations][k8s-integrations].
 
    ```yaml
    apiVersion: v1
@@ -268,15 +296,13 @@ Datadog Autodiscovery allows you to enable Network Path on a per-service basis t
        - name: '<CONTAINER_NAME>'
    # (...)
    ```
-    If you define pods indirectly (with deployments, ReplicaSets, or ReplicationControllers), add pod annotations under `spec.template.metadata`.
 
-[1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/README.md#enabling-system-probe-collection
-[2]: https://docs.datadoghq.com/containers/kubernetes/integrations/?tab=annotations#configuration
+   If you define pods indirectly (with deployments, ReplicaSets, or ReplicationControllers), add pod annotations under `spec.template.metadata`.
 
-{{% /tab %}}
-{{< /tabs >}}
+{% /if %}
+<!-- end Scheduled > Kubernetes -->
 
-#### Increase the number of workers 
+#### Increase the number of workers
 
 Network Path monitoring for individual paths runs as an Agent Integration. The number of concurrent workers is controlled by the `check_runners` setting in the `datadog.yaml` file.
 
@@ -294,14 +320,34 @@ To increase the number of workers, add the following configuration to your `data
 check_runners: <NUMBER_OF_WORKERS>
 ```
 
+{% /if %}
+<!-- end Scheduled tests -->
+
+<!-- Dynamic tests -->
+{% if equals($network_path_mode, "dynamic") %}
+
 ### Dynamic tests
 
 **Prerequisites**: [CNM][1] must be enabled.
 
 Configure dynamic tests to allow the Agent to automatically discover and monitor network paths based on actual network traffic, eliminating the need to manually configure individual endpoints. See [filter syntax](#filter-syntax) to include/exclude domain or IPs.
 
-{{< tabs >}}
-{{% tab "Linux" %}}
+<!-- Dynamic > macOS: not supported -->
+{% if equals($os, "mac_os") %}
+{% alert level="info" %}
+Dynamic tests are not supported on macOS.
+{% /alert %}
+{% /if %}
+
+<!-- Dynamic > Kubernetes: not supported -->
+{% if equals($os, "kubernetes") %}
+{% alert level="info" %}
+Dynamic tests are not supported for Kubernetes Autodiscovery. Use Helm for dynamic test configuration in Kubernetes environments.
+{% /alert %}
+{% /if %}
+
+<!-- Dynamic > Linux -->
+{% if equals($os, "linux") %}
 
 Agent `v7.73+` is required.
 
@@ -322,7 +368,7 @@ Agent `v7.73+` is required.
         # workers: <NUMBER OF WORKERS> # default 4
     ```
 
-    For full configuration details, reference the [example config][3], or use the following:
+    For full configuration details, see the [example config][3], or use the following:
 
     ```yaml
     network_path:
@@ -352,10 +398,11 @@ Agent `v7.73+` is required.
 
 3. Restart the Agent after making these configuration changes to start seeing network paths.
 
-[3]: https://github.com/DataDog/datadog-agent/blob/2c8d60b901f81768f44a798444af43ae8d338843/pkg/config/config_template.yaml#L1731
+{% /if %}
+<!-- end Dynamic > Linux -->
 
-{{% /tab %}}
-{{% tab "Windows" %}}
+<!-- Dynamic > Windows -->
+{% if equals($os, "windows") %}
 
 Agent `v7.73+` is required.
 
@@ -376,7 +423,7 @@ Agent `v7.73+` is required.
         # workers: <NUMBER OF WORKERS> # default 4
     ```
 
-    For full configuration details, reference the [example config][3], or use the following:
+    For full configuration details, see the [example config][3], or use the following:
 
     ```yaml
     network_path:
@@ -405,15 +452,17 @@ Agent `v7.73+` is required.
 
 3. Restart the Agent after making these configuration changes to start seeing network paths.
 
-[3]: https://github.com/DataDog/datadog-agent/blob/2c8d60b901f81768f44a798444af43ae8d338843/pkg/config/config_template.yaml#L1731
+{% /if %}
+<!-- end Dynamic > Windows -->
 
-{{% /tab %}}
-{{% tab "Helm" %}}
+<!-- Dynamic > Helm -->
+{% if equals($os, "helm") %}
 
 Agent `v7.73+` is required.
 
 To enable Network Path with Kubernetes using Helm, add the following to your `values.yaml` file.
-**Note:** Helm chart v3.124.0+ is required. For more information, reference the [Datadog Helm Chart documentation][1] and the documentation for [Kubernetes and Integrations][2].
+
+**Note:** Helm chart v3.124.0+ is required. For more information, see the [Datadog Helm Chart documentation](https://github.com/DataDog/helm-charts/blob/main/charts/datadog/README.md) and the documentation for [Kubernetes and Integrations](https://docs.datadoghq.com/containers/kubernetes/integrations/?tab=helm#configuration).
 
 ```yaml
 datadog:
@@ -433,7 +482,7 @@ datadog:
     ## The `workers` refers to the number of concurrent workers available for network path execution.
     #
     # workers: 4
-    
+
     ## @param pathtest_interval - integer - optional - default: 35m
     ## @env DD_NETWORK_PATH_COLLECTOR_PATHTEST_INTERVAL - integer - optional - default: 30m
     ## The `pathtest_interval` refers to the traceroute run interval for monitored connections.
@@ -448,12 +497,9 @@ datadog:
     # pathtest_ttl: 35m
 
 ```
-[1]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/README.md
-[2]: https://docs.datadoghq.com/containers/kubernetes/integrations/?tab=helm#configuration
 
-
-{{% /tab %}}
-{{< /tabs >}}
+{% /if %}
+<!-- end Dynamic > Helm -->
 
 #### Filter syntax
 
@@ -498,7 +544,7 @@ network_path:
         type: include
 ```
 
-**Note**: 
+**Note**:
 Filters are applied sequentially, with later filters taking precedence over earlier ones.
 
 For example, all domains matching `*.datadoghq.com` are ignored, except `api.datadoghq.com`.
@@ -512,6 +558,9 @@ network_path:
       - match_domain: 'api.datadoghq.com'
         type: include
 ```
+
+{% /if %}
+<!-- end Dynamic tests -->
 
 ## Troubleshooting
 
@@ -543,18 +592,10 @@ If you encounter an error like the following:
 
    - This indicates that the traceroute module is not enabled. Ensure the traceroute module is enabled in your `system-probe.yaml` file.
 
-
-
-## Further Reading
-
-{{< partial name="whats-next/whats-next.html" >}}
-
 [1]: /network_monitoring/cloud_network_monitoring/setup/
 [2]: https://docs.datadoghq.com/agent/configuration/proxy/?tab=linux
 [3]: /help
 [4]: https://app.datadoghq.com/network/path
 [5]: https://github.com/DataDog/datadog-agent/blob/main/cmd/agent/dist/conf.d/network_path.d/conf.yaml.example
 [15]: /synthetics/network_path_tests/
-
-
-
+[k8s-integrations]: https://docs.datadoghq.com/containers/kubernetes/integrations/?tab=annotations#configuration

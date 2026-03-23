@@ -1,0 +1,12 @@
+network_path_mode_options:
+  - id: scheduled
+    default: true
+  - id: dynamic
+
+network_path_setup_options:
+  - id: linux
+    default: true
+  - id: mac_os
+  - id: windows
+  - id: helm
+  - id: kubernetes

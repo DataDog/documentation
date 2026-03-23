@@ -507,3 +507,9 @@ options:
 
 - label: Elixir
   id: elixir
+
+- label: Scheduled
+  id: scheduled
+
+- label: Dynamic
+  id: dynamic
