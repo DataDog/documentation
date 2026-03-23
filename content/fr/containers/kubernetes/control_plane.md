@@ -1,59 +1,58 @@
 ---
 aliases:
 - /fr/agent/kubernetes/control_plane
-description: Surveiller les composants du plan de contrôle Kubernetes, notamment l'API
-  Server, etcd, le Controller Manager et le Scheduler
+description: Surveillez les composants du plan de contrôle Kubernetes, y compris le
+  serveur API, etcd, le gestionnaire de contrôleur et le planificateur
 further_reading:
 - link: agent/kubernetes/log
   tag: Documentation
-  text: Recueillir les logs de votre application
+  text: Collectez les journaux de votre application
 - link: /agent/kubernetes/apm
   tag: Documentation
-  text: Recueillir les traces de vos applications
+  text: Collectez les traces de votre application
 - link: /agent/kubernetes/prometheus
   tag: Documentation
-  text: Recueillir vos métriques Prometheus
+  text: Collectez vos métriques Prometheus
 - link: /agent/kubernetes/integrations
   tag: Documentation
-  text: Recueillir automatiquement les métriques et les logs de vos applications
+  text: Collectez automatiquement vos métriques et journaux d'application
 - link: /agent/guide/autodiscovery-management
   tag: Documentation
-  text: Limiter la collecte de données à un sous-ensemble de conteneurs
+  text: Limitez la collecte de données à un sous-ensemble de conteneurs uniquement
 - link: /agent/kubernetes/tag
   tag: Documentation
-  text: Attribuer des tags à toutes les données envoyées par un conteneur
+  text: Attribuez des étiquettes à toutes les données émises par un conteneur
 title: Surveillance du plan de contrôle Kubernetes
 ---
+## Aperçu
 
-## Présentation
+Cette section vise à documenter les spécificités et à fournir de bonnes configurations de base pour surveiller le plan de contrôle Kubernetes. Vous pouvez ensuite personnaliser ces configurations pour ajouter toute fonctionnalité de Datadog.
 
-Cette section propose des configurations de base efficaces pour la surveillance du plan de contrôle Kubernetes et décrit les spécificités associées. Vous pouvez personnaliser ces configurations afin d'ajouter les fonctionnalités Datadog de votre choix.
-
-Grâce aux intégrations Datadog pour le [serveur d'API][1], [Etcd][2], [Controller Manager][3] et [Scheduler][4], vous pouvez recueillir des métriques clés depuis les quatre composants du plan de contrôle Kubernetes.
+Avec les intégrations Datadog pour le [serveur API][1], [Etcd][2], [Gestionnaire de contrôleur][3] et [Planificateur][4], vous pouvez collecter des métriques clés de tous les quatre composants du plan de contrôle Kubernetes.
 
 * [Kubernetes avec Kubeadm](#Kubeadm)
-* [Kubernetes sur Amazon EKS](#EKS)
-* [Kubernetes sur OpenShift 4](#OpenShift4)
-* [Kubernetes sur OpenShift 3](#OpenShift3)
+* [Kubernetes sur Amazon EKS](#EKS)
+* [Kubernetes sur OpenShift 4](#OpenShift4)
+* [Kubernetes sur OpenShift 3](#OpenShift3)
 * [Kubernetes sur Talos Linux](#TalosLinux)
-* [Kubernetes sur Rancher Kubernetes Engine (version 2.5+)](#RKE)
-* [Kubernetes on Rancher Kubernetes Engine (\<v2.5)](#RKEBefore2_5)
-* [Kubernetes sur des services gérés (AKS, GKE)](#services-geres)
+* [Kubernetes sur Rancher Kubernetes Engine (v2.5+)](#RKE)
+* [Kubernetes sur Rancher Kubernetes Engine (\<v2.5)](#RKEBefore2_5)
+* [Kubernetes sur des services gérés (AKS, GKE)](#ManagedServices)
 
 ## Kubernetes avec Kubeadm {#Kubeadm}
 
-Les configurations suivantes ont été testées pour Kubernetes `v1.18+`. 
+Les configurations suivantes sont testées sur Kubernetes `v1.18+`.
 
-### Serveur d'API
+### Serveur API
 
-L'intégration du serveur d'API est automatiquement configurée. L'Agent Datadog la découvre automatiquement.
+L'intégration du serveur API est configurée automatiquement. L'Agent Datadog le découvre automatiquement.
 
 ### Etcd
 
-Attribuez un accès en lecture aux certificats Etcd situés sur le host pour que le check de l'Agent Datadog puisse communiquer avec Etcd et commencer à recueillir des métriques Etcd.
+En fournissant un accès en lecture aux certificats Etcd situés sur l'hôte, le contrôle de l'Agent Datadog peut communiquer avec Etcd et commencer à collecter des métriques Etcd.
 
 {{< tabs >}}
-{{% tab "Operator Datadog" %}}
+{{% tab "Opérateur Datadog" %}}
 
 {{< code-block lang="yaml" filename="datadog-agent.yaml" >}}
 kind: DatadogAgent
@@ -71,10 +70,10 @@ spec:
   override:
     clusterAgent:
       image:
-        name: gcr.io/datadoghq/cluster-agent:latest
+        name: registry.datadoghq.com/cluster-agent:latest
     nodeAgent:
       image:
-        name: gcr.io/datadoghq/agent:latest
+        name: registry.datadoghq.com/agent:latest
       extraConfd:
         configMap:
           name: datadog-checks
@@ -153,18 +152,18 @@ agents:
 
 {{< /tabs >}}
 
-### Controller Manager et Scheduler
+### Gestionnaire de contrôleur et planificateur
 
 #### Ports non sécurisés
 
-Si les ports non sécurisés de vos instances Controller Manager et Scheduler sont activés, l'Agent Datadog découvre les intégrations et commence à collecter les métriques sans configuration supplémentaire.
+Si les ports non sécurisés de vos instances de Gestionnaire de contrôleur et de planificateur sont activés, l'Agent Datadog découvre les intégrations et commence à collecter des métriques sans configuration supplémentaire.
 
 #### Ports sécurisés
 
-Les ports sécurisés activent des processus d'authentification et d'autorisation afin de protéger les composants de votre plan de contrôle. L'Agent Datadog peut recueillir des métriques à partir de Controller Manager et Scheduler en ciblant leurs ports sécurisés.
+Les ports sécurisés permettent l'authentification et l'autorisation pour protéger vos composants de plan de contrôle. L'Agent Datadog peut collecter des métriques du Gestionnaire de contrôleur et du planificateur en ciblant leurs ports sécurisés.
 
 {{< tabs >}}
-{{% tab "Operator Datadog" %}}
+{{% tab "Opérateur Datadog" %}}
 
 {{< code-block lang="yaml" filename="datadog-agent.yaml" >}}
 kind: DatadogAgent
@@ -182,10 +181,10 @@ spec:
   override:
     clusterAgent:
       image:
-        name: gcr.io/datadoghq/cluster-agent:latest
+        name: registry.datadoghq.com/cluster-agent:latest
     nodeAgent:
       image:
-        name: gcr.io/datadoghq/agent:latest
+        name: registry.datadoghq.com/agent:latest
       extraConfd:
         configMap:
           name: datadog-checks
@@ -302,10 +301,10 @@ agents:
 
 {{< /tabs >}}
 
-**Remarques :**
+**Notes:**
 
-- Si vous utilisez des certificats autosignés, le champ `ssl_verify` des configurations `kube_controller_manager` et `kube_scheduler` doit être défini sur `false`.
-- Lors du ciblage de ports sécurisés, l'Agent Datadog doit pouvoir atteindre l'option `bind-address` de vos configurations Controller Manager et Scheduler. Exemple :
+- Le champ `ssl_verify` dans la configuration `kube_controller_manager` et `kube_scheduler` doit être défini sur `false` lors de l'utilisation de certificats auto-signés.
+- Lors de la cible des ports sécurisés, l'option `bind-address` dans votre configuration de Gestionnaire de contrôleur et de planificateur doit être accessible par l'Agent Datadog. Exemple :
 
 ```yaml
 apiVersion: kubeadm.k8s.io/v1beta2
@@ -318,39 +317,40 @@ scheduler:
     bind-address: 0.0.0.0
 ```
 
-## Kubernetes sur Amazon EKS {#EKS}
+## Kubernetes sur Amazon EKS {#EKS}
 
 ### Méthode recommandée
 
-<div class="alert alert-info">Cette fonctionnalité est en version Preview.</div>
+<div class="alert alert-info">Cette fonctionnalité est en aperçu.</div>
 
-Datadog prend en charge la surveillance des composants du plan de contrôle Kubernetes, notamment l'API Server, le Controller Manager et le Scheduler.
+Datadog prend en charge la surveillance des composants du plan de contrôle Kubernetes, y compris le serveur API, le gestionnaire de contrôleur et le planificateur.
 
 {{< tabs >}}
-{{% tab "Operator Datadog" %}}
+{{% tab "Opérateur Datadog" %}}
 
 #### Prérequis
 
-1. Opérateur Datadog >= `v1.18.0`
-1. Agent Datadog >= `v7.69`
+1. Datadog Operator >= `v1.18.0`
+1. Datadog Agent >= `v7.69`
 
 #### Configuration générale
 
-La surveillance du plan de contrôle est activée par défaut, mais nécessite l'activation de l'introspection.
+La surveillance du plan de contrôle est activée par défaut, mais nécessite que l'introspection soit activée.
 
-Vous pouvez activer l'introspection en utilisant le [chart Helm datadog-operator](https://github.com/DataDog/helm-charts/tree/main/charts/datadog-operator) :
+Vous pouvez activer l'introspection en utilisant le [chart Helm datadog-operator](https://github.com/DataDog/helm-charts/tree/main/charts/datadog-operator) :
 
 {{< code-block lang="yaml" filename="datadog-agent.yaml" >}}
 introspection:
   enabled: true
 {{< /code-block >}}
 
-En utilisant la ligne de commande :
+En utilisant la ligne de commande :
+
 ```shell
 helm install datadog-operator datadog/datadog-operator --set introspection.enabled=true
 ```
 
-Étant donné que cette fonctionnalité est activée par défaut, vous pouvez déployer une spec DatadogAgent minimale.
+Étant donné que cette fonctionnalité est activée par défaut, vous pouvez déployer une spécification minimale de DatadogAgent.
 
 {{% /tab %}}
 
@@ -358,12 +358,12 @@ helm install datadog-operator datadog/datadog-operator --set introspection.enabl
 
 #### Prérequis
 
-1. Version chart Helm >= `3.152.0`
-1. Agent Datadog >= `v7.69`
+1. Version du chart Helm >= `3.152.0`
+1. Datadog Agent >= `v7.69`
 
 #### Configuration générale
 
-Activez la surveillance du plan de contrôle en utilisant l'option `providers.eks.controlPlaneMonitoring` :
+Activez la surveillance du plan de contrôle en utilisant l'option `providers.eks.controlPlaneMonitoring` :
 
 {{< code-block lang="yaml" filename="datadog-values.yaml" >}}
 datadog:
@@ -379,33 +379,34 @@ providers:
 {{< /tabs >}}
 
 #### Validation
-Vérifier que les checks sont en cours d'exécution :
+Vérifiez que les vérifications sont en cours d'exécution :
+
 ```shell
 kubectl exec <cluster-agent-pod> -- agent clusterchecks
 ```
 
-Recherchez :
+Recherchez :
 - `kube_apiserver_metrics`
 - `kube_controller_manager`
 - `kube_scheduler`
 
-Vous devriez voir les métriques du plan de contrôle dans Datadog, notamment :
+Vous devriez voir des métriques du plan de contrôle dans Datadog, y compris :
 - `kube_apiserver.*`
 - `kube_controller_manager.*`
 - `kube_scheduler.*`
 
 ### Configuration héritée
 
-Amazon Elastic Kubernetes Service (EKS) prend en charge la surveillance de tous les composants du plan de contrôle à l'aide de cluster checks.
+Amazon Elastic Kubernetes Service (EKS) prend en charge la surveillance de tous les composants du plan de contrôle à l'aide de vérifications de cluster.
 
 #### Prérequis
-- Un cluster EKS exécutant Kubernetes version >= 1.28
-- Déployer l'Agent en utilisant l'un des éléments suivants :
+- Un cluster EKS fonctionnant sur Kubernetes version >= 1.28
+- Déployez l'Agent en utilisant l'une des options suivantes :
   - Version du chart Helm >= `3.90.1`
-  - Opérateur Datadog >= `v1.13.0`
-- Activez l'[Agent de cluster][6] Datadog.
+  - Datadog Operator >= `v1.13.0`
+- Activez le [Cluster Agent][6] de Datadog
 
-Ajouter les annotations suivantes au service `default/kubernetes` :
+Ajoutez les annotations suivantes au service `default/kubernetes` :
 
 ```yaml
 annotations:
@@ -448,43 +449,44 @@ annotations:
     }
 ```
 
-**Remarques :**
+**Notes:**
 - Amazon expose les métriques `kube_controller_manager` et `kube_scheduler` sous le groupe d'API [`metrics.eks.amazonaws.com`][11].
-- L'ajout de `"extra_headers":{"accept":"*/*"}` empêche les erreurs `HTTP 406` lors de l'interrogation de l'API de métriques EKS.
+- L'ajout de `"extra_headers":{"accept":"*/*"}` empêche les erreurs `HTTP 406` lors de la requête de l'API des métriques EKS.
 
-## Kubernetes sur OpenShift 4 {#OpenShift4}
+## Kubernetes sur OpenShift 4 {#OpenShift4}
 
-<div class="alert alert-info">Cette fonctionnalité est en version Preview.</div>
+<div class="alert alert-info">Cette fonctionnalité est en aperçu.</div>
 
-Datadog prend en charge la surveillance des composants du plan de contrôle Kubernetes, notamment l'API Server, etcd, le Controller Manager et le Scheduler.
+Datadog prend en charge la surveillance des composants du plan de contrôle Kubernetes, y compris le serveur API, etcd, le gestionnaire de contrôleur et le planificateur.
 
 {{< tabs >}}
-{{% tab "Operator Datadog" %}}
+{{% tab "Opérateur Datadog" %}}
 
 #### Prérequis
 
-1. Opérateur Datadog >= `v1.18.0`
-1. Agent Datadog >= `v7.69`
+1. Datadog Operator >= `v1.18.0`
+1. Datadog Agent >= `v7.69`
 
-**Remarque** : `etcd` n'est pas pris en charge sur les versions 4.0-4.13.
+**Remarque** : `etcd` n'est pas pris en charge sur les versions 4.0-4.13.
 
 #### Configuration générale
 
-La surveillance du plan de contrôle est activée par défaut, mais nécessite l'activation de l'introspection.
+La surveillance du plan de contrôle est activée par défaut, mais nécessite que l'introspection soit activée.
 
-Vous pouvez activer l'introspection en utilisant le [chart Helm datadog-operator][12] :
+Vous pouvez activer l'introspection en utilisant le [chart Helm datadog-operator][12] :
 
 {{< code-block lang="yaml" filename="datadog-agent.yaml" >}}
 introspection:
   enabled: true
 {{< /code-block >}}
 
-En utilisant la ligne de commande :
+En utilisant la ligne de commande :
+
 ```shell
 helm install datadog-operator datadog/datadog-operator --set introspection.enabled=true
 ```
 
-Ou, pour les **utilisateurs d'OpenShift** qui ont installé l'opérateur via OperatorHub/Marketplace (la [méthode recommandée](install-openshift.md)), en patchant la version de service de cluster de l'opérateur :
+Ou, pour les **utilisateurs d'OpenShift** qui ont installé l'opérateur via OperatorHub/Marché (la [méthode recommandée](install-openshift.md)), en patchant la version du service de cluster de l'opérateur :
 
 ```shell
 oc patch csv <datadog-operator.VERSION> -n <datadog-operator-namespace> \
@@ -492,11 +494,11 @@ oc patch csv <datadog-operator.VERSION> -n <datadog-operator-namespace> \
   -p='[{"op": "add", "path": "/spec/install/spec/deployments/0/spec/template/spec/containers/0/args/-", "value": "--introspectionEnabled=true"}]'
 ```
 
-Étant donné que cette fonctionnalité est activée par défaut, vous pouvez déployer une spec DatadogAgent minimale.
+Étant donné que cette fonctionnalité est activée par défaut, vous pouvez déployer une spécification minimale de DatadogAgent.
 
-Activer `features.clusterChecks.useClusterChecksRunners` pour planifier les checks ici ; sinon, les checks du plan de contrôle s'exécutent sur l'Agent de nœud.
+Activez `features.clusterChecks.useClusterChecksRunners` pour planifier des vérifications là-bas ; sinon, les vérifications du plan de contrôle s'exécutent sur l'Agent Node.
 
-Pour OpenShift 4.14 et versions ultérieures, la surveillance etcd nécessite de copier les certificats etcd. Vérifiez les logs de l'opérateur pour obtenir la commande exacte. Consultez l'exemple suivant (ajustez l'espace de nommage si nécessaire) :
+Pour OpenShift 4.14 et versions ultérieures, la surveillance d'etcd nécessite de copier les certificats etcd. Vérifiez les journaux de l'opérateur pour la commande exacte. Voir l'exemple suivant (ajustez l'espace de noms si nécessaire) :
 
 ```shell
 oc get secret etcd-metric-client -n openshift-etcd-operator -o yaml | \
@@ -512,13 +514,13 @@ oc get secret etcd-metric-client -n openshift-etcd-operator -o yaml | \
 #### Prérequis
 
 1. Version du chart Helm >= `3.150.0`
-1. Agent Datadog >= `v7.69`
+1. Datadog Agent >= `v7.69`
 
-**Remarque** : `etcd` n'est pas pris en charge sur les versions 4.0-4.13.
+**Remarque** : `etcd` n'est pas pris en charge sur les versions 4.0-4.13.
 
 #### Configuration générale
 
-Activez la surveillance du plan de contrôle en utilisant l'option `providers.openshift.controlPlaneMonitoring` : 
+Activez la surveillance du plan de contrôle en utilisant l'option `providers.openshift.controlPlaneMonitoring` :
 
 {{< code-block lang="yaml" filename="datadog-values.yaml" >}}
 datadog:
@@ -530,7 +532,7 @@ providers:
     controlPlaneMonitoring: true
 {{< /code-block >}}
 
-Pour OpenShift 4.14 et versions ultérieures, la surveillance etcd nécessite de copier les certificats etcd. Pour les copier dans le même espace de nommage que l'Agent Datadog :
+Pour OpenShift 4.14 et versions ultérieures, la surveillance d'etcd nécessite de copier les certificats etcd. Pour les copier dans le même espace de noms que l'Agent Datadog :
 
 ```shell
 oc get secret etcd-metric-client -n openshift-etcd-operator -o yaml | sed 's/namespace: openshift-etcd-operator/namespace: <datadog agent namespace>/'  | oc create -f -
@@ -540,18 +542,19 @@ oc get secret etcd-metric-client -n openshift-etcd-operator -o yaml | sed 's/nam
 {{< /tabs >}}
 
 #### Validation
-Vérifiez que les checks sont en cours d'exécution :
+Vérifiez que les vérifications sont en cours d'exécution :
+
 ```shell
 kubectl exec <cluster-agent-pod> -- agent clusterchecks
 ```
 
-Cherchez :
+Recherchez :
 - `kube_apiserver_metrics`
 - `kube_controller_manager`
 - `kube_scheduler`
 - `etcd`
 
-Vous devriez voir les métriques du plan de contrôle dans Datadog, notamment :
+Vous devriez voir des métriques du plan de contrôle dans Datadog, y compris :
 - `kube_apiserver.*`
 - `kube_controller_manager.*`
 - `kube_scheduler.*`
@@ -559,18 +562,18 @@ Vous devriez voir les métriques du plan de contrôle dans Datadog, notamment :
 
 ### Configuration héritée
 
-Sur OpenShift 4, tous les composants du plan de contrôle peuvent être surveillés à l'aide de checks d'endpoint.
+Sur OpenShift 4, tous les composants du plan de contrôle peuvent être surveillés à l'aide de vérifications de point de terminaison.
 
 #### Prérequis
 
-1. Activez l'[Agent de cluster][6] Datadog.
-1. Activez les [checks de cluster][7].
-1. Activez les [checks d'endpoint][8].
-1. Vérifiez que votre compte dispose de suffisamment d'autorisations pour pouvoir modifier des services et créer des secrets.
+1. Activer le [Cluster Agent][6] de Datadog
+1. Activer les [vérifications de cluster][7]
+1. Activer les [vérifications de point de terminaison][8]
+1. Assurez-vous que vous êtes connecté avec des autorisations suffisantes pour modifier les services et créer des secrets.
 
-#### Serveur d'API
+#### Serveur API
 
-Le serveur d'API s'exécute derrière le service `kubernetes` dans l'espace de nommage `default`. Annotez ce service avec la configuration `kube_apiserver_metrics` :
+Le serveur API fonctionne derrière le service `kubernetes` dans l'espace de noms `default`. Annoter ce service avec la configuration `kube_apiserver_metrics` :
 
 ```shell
 oc annotate service kubernetes -n default 'ad.datadoghq.com/endpoints.check_names=["kube_apiserver_metrics"]'
@@ -580,7 +583,7 @@ oc annotate service kubernetes -n default 'ad.datadoghq.com/endpoints.resolve=ip
 
 ```
 
-La dernière annotation `ad.datadoghq.com/endpoints.resolve` est requise, car le service est exécuté devant les pods statiques. L'Agent de cluster Datadog planifie les checks en tant que checks d'endpoint et les distribue aux exécuteurs de checks de cluster. Pour identifier les nœuds sur lesquels ils s'exécutent, utilisez la commande suivante :
+La dernière annotation `ad.datadoghq.com/endpoints.resolve` est nécessaire car le service est devant des pods statiques. Le Cluster Agent de Datadog planifie les vérifications en tant que vérifications de point de terminaison et les dispatches aux Cluster Check Runners. Les nœuds sur lesquels ils s'exécutent peuvent être identifiés avec :
 
 ```shell
 oc exec -it <datadog cluster agent pod> -n <datadog ns> -- agent clusterchecks
@@ -588,21 +591,21 @@ oc exec -it <datadog cluster agent pod> -n <datadog ns> -- agent clusterchecks
 ```
 #### Etcd
 
-{{% collapse-content title= "Etcd OpenShift 4.0 - 4.13" level="h4" %}}
-Des certificats sont nécessaires pour communiquer avec le service Etcd, qui peuvent être trouvés dans le secret `kube-etcd-client-certs` dans l'espace de nommage `openshift-monitoring`. Pour donner à l'Agent Datadog l'accès à ces certificats, copiez-les d'abord dans le même espace de nommage dans lequel l'Agent Datadog est exécuté :
+{{% collapse-content title="Etcd OpenShift 4.0 - 4.13" level="h4" %}}
+Des certificats sont nécessaires pour communiquer avec le service Etcd, qui peut être trouvé dans le secret `kube-etcd-client-certs` dans l'espace de noms `openshift-monitoring`. Pour donner au Datadog Agent accès à ces certificats, copiez-les d'abord dans le même espace de noms que celui dans lequel le Datadog Agent s'exécute :
 
 ```shell
 oc get secret kube-etcd-client-certs -n openshift-monitoring -o yaml | sed 's/namespace: openshift-monitoring/namespace: <datadog agent namespace>/'  | oc create -f -
 
 ```
 
-Ces certificats doivent être montés sur les pods des exécuteurs de checks de cluster, en ajoutant les volumes et volumeMounts tel que décrit ci-dessous.
+Ces certificats doivent être montés sur les pods Cluster Check Runner en ajoutant les volumes et les volumeMounts comme ci-dessous.
 
-**Remarque** : des montages sont également inclus pour désactiver le fichier d'autoconfiguration du check Etcd fourni avec l'Agent.
+**Remarque** : Des montages sont également inclus pour désactiver le fichier de configuration automatique de vérification Etcd inclus avec l'agent.
 
 
 {{< tabs >}}
-{{% tab "Operator Datadog" %}}
+{{% tab "Opérateur Datadog" %}}
 
 {{< code-block lang="yaml" filename="datadog-agent.yaml" >}}
 kind: DatadogAgent
@@ -652,7 +655,7 @@ clusterChecksRunner:
 
 {{< /tabs >}}
 
-Annotez ensuite le service s'exécutant devant Etcd :
+Ensuite, annoter le service fonctionnant devant Etcd :
 
 ```shell
 oc annotate service etcd -n openshift-etcd 'ad.datadoghq.com/endpoints.check_names=["etcd"]'
@@ -663,26 +666,26 @@ oc annotate service etcd -n openshift-etcd 'ad.datadoghq.com/endpoints.resolve=i
 
 ```
 
-L'Agent de cluster Datadog planifie les checks en tant que checks d'endpoint et les distribue aux exécuteurs de check de cluster.
+Le Cluster Agent de Datadog planifie les vérifications en tant que vérifications de point de terminaison et les dispatches aux Cluster Check Runners.
 
 {{% /collapse-content %}}
 
 
-{{% collapse-content title="Etcd OpenShift 4.14 et versions ultérieures" level="h4" %}}
+{{% collapse-content title="Etcd OpenShift 4.14 et ultérieur" level="h4" %}}
 
-Des certificats sont nécessaires pour communiquer avec le service Etcd, qui peuvent être trouvés dans le secret `etcd-metric-client` dans l'espace de nommage `openshift-etcd-operator`. Pour donner à l'Agent Datadog l'accès à ces certificats, copiez-les dans le même espace de nommage que l'Agent Datadog :
+Des certificats sont nécessaires pour communiquer avec le service Etcd, qui peut être trouvé dans le secret `etcd-metric-client` dans l'espace de noms `openshift-etcd-operator`. Pour donner au Datadog Agent accès à ces certificats, copiez-les dans le même espace de noms que le Datadog Agent :
 
 ```shell
 oc get secret etcd-metric-client -n openshift-etcd-operator -o yaml | sed 's/namespace: openshift-etcd-operator/namespace: <datadog agent namespace>/'  | oc create -f -
 ```
 
-Ces certificats doivent être montés sur les pods des exécuteurs de checks de cluster, en ajoutant les volumes et volumeMounts tel que décrit ci-dessous.
+Ces certificats doivent être montés sur les pods Cluster Check Runner en ajoutant les volumes et les volumeMounts comme ci-dessous.
 
-**Remarque** : des montages sont également inclus pour désactiver le fichier d'autoconfiguration du check Etcd fourni avec l'Agent.
+**Remarque** : Des montages sont également inclus pour désactiver le fichier de configuration automatique de vérification Etcd inclus avec l'agent.
 
 
 {{< tabs >}}
-{{% tab "Operator Datadog" %}}
+{{% tab "Opérateur Datadog" %}}
 
 {{< code-block lang="yaml" filename="datadog-agent.yaml" >}}
 kind: DatadogAgent
@@ -733,7 +736,7 @@ clusterChecksRunner:
 
 {{< /tabs >}}
 
-Annotez ensuite le service s'exécutant devant Etcd :
+Ensuite, annoter le service fonctionnant devant Etcd :
 
 ```shell
 oc annotate service etcd -n openshift-etcd 'ad.datadoghq.com/endpoints.check_names=["etcd"]'
@@ -743,14 +746,14 @@ oc annotate service etcd -n openshift-etcd 'ad.datadoghq.com/endpoints.instances
 oc annotate service etcd -n openshift-etcd 'ad.datadoghq.com/endpoints.resolve=ip'
 ```
 
-L'Agent de cluster Datadog planifie les checks en tant que checks d'endpoint et les distribue aux exécuteurs de check de cluster.
+Le Cluster Agent de Datadog planifie les vérifications en tant que vérifications de point de terminaison et les dispatches aux Cluster Check Runners.
 
 {{% /collapse-content %}}
 
 
-#### Controller Manager
+#### Gestionnaire de contrôleur
 
-Le Controller Manager s'exécute derrière le service `kube-controller-manager` dans l'espace de nommage `openshift-kube-controller-manager`. Annotez ce service avec la configuration de check :
+Le gestionnaire de contrôleur fonctionne derrière le service `kube-controller-manager` dans l'espace de noms `openshift-kube-controller-manager`. Annoter le service avec la configuration de vérification :
 
 
 ```shell
@@ -761,13 +764,13 @@ oc annotate service kube-controller-manager -n openshift-kube-controller-manager
 
 ```
 
-L'Agent de cluster Datadog planifie les checks en tant que checks d'endpoint et les distribue aux exécuteurs de check de cluster.
+Le Cluster Agent de Datadog planifie les vérifications en tant que vérifications de point de terminaison et les dispatches aux Cluster Check Runners.
 
 
 
-#### Scheduler
+#### Planificateur
 
-Le Scheduler s'exécute derrière le service `scheduler` dans l'espace de nommage `openshift-kube-scheduler`. Annotez ce service avec la configuration de check :
+Le planificateur fonctionne derrière le service `scheduler` dans l'espace de noms `openshift-kube-scheduler`. Annoter le service avec la configuration de vérification :
 
 
 ```shell
@@ -778,23 +781,23 @@ oc annotate service scheduler -n openshift-kube-scheduler 'ad.datadoghq.com/endp
 
 ```
 
-L'Agent de cluster Datadog planifie les checks en tant que checks d'endpoint et les distribue aux exécuteurs de check de cluster.
+Le Cluster Agent de Datadog planifie les vérifications en tant que vérifications de point de terminaison et les dispatches aux Cluster Check Runners.
 
 
-## Kubernetes sur OpenShift 3 {#OpenShift3}
+## Kubernetes sur OpenShift 3 {#OpenShift3}
 
-Sur OpenShift 3, tous les composants du plan de contrôle peuvent être surveillés à l'aide de checks d'endpoint.
+Sur OpenShift 3, tous les composants du plan de contrôle peuvent être surveillés à l'aide de vérifications de point de terminaison.
 
 ### Prérequis
 
-1. Activez l'[Agent de cluster][6] Datadog.
-1. Activez les [checks de cluster][7].
-1. Activez les [checks d'endpoint][8].
-1. Vérifiez que votre compte dispose de suffisamment d'autorisations pour pouvoir créer et modifier des services.
+1. Activer l'[Agent de cluster][6] Datadog
+1. Activer les [vérifications de cluster][7]
+1. Activer les [vérifications de point de terminaison][8]
+1. Assurez-vous que vous êtes connecté avec des autorisations suffisantes pour créer et modifier des services.
 
-### Serveur d'API
+### Serveur API
 
-Le serveur d'API s'exécute derrière le service `kubernetes` dans l'espace de nommage `default`. Annotez ce service avec la configuration `kube_apiserver_metrics` :
+Le serveur API fonctionne derrière le service `kubernetes` dans l'espace de noms `default`. Annoter ce service avec la configuration `kube_apiserver_metrics` :
 
 ```shell
 oc annotate service kubernetes -n default 'ad.datadoghq.com/endpoints.check_names=["kube_apiserver_metrics"]'
@@ -804,7 +807,7 @@ oc annotate service kubernetes -n default 'ad.datadoghq.com/endpoints.resolve=ip
 
 ```
 
-La dernière annotation `ad.datadoghq.com/endpoints.resolve` est requise, car le service est exécuté devant les pods statiques. L'Agent de cluster Datadog planifie les checks en tant que checks d'endpoint et les distribue aux exécuteurs de checks de cluster. Pour identifier les nœuds sur lesquels ils s'exécutent, utilisez la commande suivante :
+La dernière annotation `ad.datadoghq.com/endpoints.resolve` est nécessaire car le service est devant des pods statiques. Le Cluster Agent de Datadog planifie les vérifications en tant que vérifications de point de terminaison et les dispatches aux Cluster Check Runners. Les nœuds sur lesquels ils s'exécutent peuvent être identifiés avec :
 
 ```shell
 oc exec -it <datadog cluster agent pod> -n <datadog ns> -- agent clusterchecks
@@ -813,12 +816,12 @@ oc exec -it <datadog cluster agent pod> -n <datadog ns> -- agent clusterchecks
 
 ### Etcd
 
-Pour communiquer avec le service Etcd, vous devez utiliser des certificats. Vous trouverez les certificats requis sur le host. Ces certificats doivent être montés sur les pods des exécuteurs de checks de cluster, en ajoutant les volumes et volumeMounts tel que décrit ci-dessous.
+Des certificats sont nécessaires pour communiquer avec le service Etcd, qui se trouve sur l'hôte. Ces certificats doivent être montés sur les pods Cluster Check Runner en ajoutant les volumes et les volumeMounts comme ci-dessous.
 
-**Remarque** : des montages sont également inclus pour désactiver le fichier d'autoconfiguration du check Etcd fourni avec l'Agent.
+**Note** : Des montages sont également inclus pour désactiver le fichier de configuration automatique de vérification Etcd fourni avec l'agent.
 
 {{< tabs >}}
-{{% tab "Operator Datadog" %}}
+{{% tab "Opérateur Datadog" %}}
 
 {{< code-block lang="yaml" filename="datadog-agent.yaml" >}}
 kind: DatadogAgent
@@ -867,14 +870,14 @@ clusterChecksRunner:
 {{% /tab %}}
 {{< /tabs >}}
 
-Les modifications directes apportées à ce service ne sont pas persistantes. Veillez donc à dupliquer le service Etcd.
+Les modifications directes de ce service ne sont pas conservées, donc faites une copie du service Etcd :
 
 ```shell
 oc get service etcd -n kube-system -o yaml | sed 's/name: etcd/name: etcd-copy/'  | oc create -f -
 
 ```
 
-Annotez le service dupliqué avec la configuration de check :
+Annoter le service copié avec la configuration de vérification :
 
 ```shell
 oc annotate service etcd-copy -n openshift-etcd 'ad.datadoghq.com/endpoints.check_names=["etcd"]'
@@ -885,19 +888,19 @@ oc annotate service etcd-copy -n openshift-etcd 'ad.datadoghq.com/endpoints.reso
 
 ```
 
-L'Agent de cluster Datadog planifie les checks en tant que checks d'endpoint et les distribue aux exécuteurs de check de cluster.
+Le Cluster Agent de Datadog planifie les vérifications en tant que vérifications de point de terminaison et les dispatches aux Cluster Check Runners.
 
 
-### Controller Manager et Scheduler
+### Gestionnaire de contrôleur et planificateur
 
-Le Controller Manager et le Scheduler sont exécutés derrière le même service, à savoir `kube-controllers`, dans l'espace de nommage `kube-system`. Les modifications directes apportées au service ne sont pas persistantes. Veillez donc à dupliquer le service :
+Le gestionnaire de contrôleur et le planificateur fonctionnent derrière le même service, `kube-controllers` dans l'espace de noms `kube-system`. Les modifications directes du service ne sont pas conservées, donc faites une copie du service :
 
 ```shell
 oc get service kube-controllers -n kube-system -o yaml | sed 's/name: kube-controllers/name: kube-controllers-copy/'  | oc create -f -
 
 ```
 
-Annotez le service dupliqué avec les configurations de check :
+Annoter le service copié avec les configurations de vérification :
 
 ```shell
 oc annotate service kube-controllers-copy -n kube-system 'ad.datadoghq.com/endpoints.check_names=["kube_controller_manager", "kube_scheduler"]'
@@ -909,19 +912,19 @@ oc annotate service kube-controllers-copy -n kube-system 'ad.datadoghq.com/endpo
 
 ```
 
-L'Agent de cluster Datadog planifie les checks en tant que checks d'endpoint et les distribue aux exécuteurs de check de cluster.
+Le Cluster Agent de Datadog planifie les vérifications en tant que vérifications de point de terminaison et les dispatches aux Cluster Check Runners.
 
 ## Kubernetes sur Talos Linux {#TalosLinux}
 
-Helm est la méthode d'installation recommandée pour Talos Linux. Utiliser Helm en définissant le flag `providers.talos.enabled` sur `true`.
+Helm est la méthode d'installation recommandée pour Talos Linux. Utilisez Helm en définissant le drapeau `providers.talos.enabled` sur `true`.
 
-### Serveur d'API
+### Serveur API
 
-L'intégration du serveur d'API est automatiquement configurée. L'Agent Datadog la découvre automatiquement.
+L'intégration du serveur API est configurée automatiquement. L'Agent Datadog le découvre automatiquement.
 
 ### Etcd
 
-En fournissant un accès en lecture aux certificats etcd situés sur l'hôte, le check de l'Agent Datadog peut communiquer avec etcd et commencer à collecter les métriques etcd.
+En fournissant un accès en lecture aux certificats etcd situés sur l'hôte, le contrôle du Datadog Agent peut communiquer avec etcd et commencer à collecter des métriques etcd.
 
 {{< code-block lang="yaml" filename="datadog-values.yaml" >}}
 datadog:
@@ -934,27 +937,27 @@ datadog:
   - etcd
   confd:
     etcd.yaml: |-
-      # Vous pouvez configurer l'Agent pour exécuter ce check uniquement sur l'hôte où etcd est en cours d'exécution
-      # en utilisant `ad_identifiers` pour un pod qui ne serait en cours d'exécution que sur un nœud control plane.
-      # Cela permet d'éviter les erreurs lorsque l'Agent est exécuté sur des nœuds worker.
-      # Une autre approche consiste à exécuter un pod minimal sur le nœud control plane et à l'utiliser pour `ad_identifiers`.
+      # You can configure the Agent to only run this check on the host where etcd is running
+      # by using `ad_identifiers` for a pod that would only be running on a control-plane node.
+      # This is to avoid errors when the Agent is running on worker nodes.
+      # Another approach is to run a minimal pod on the control-plane node and use it for `ad_identifiers`.
       ad_identifiers:
         - kube-scheduler
       instances:
-          # Il s'agit de l'adresse IP du nœud où les métriques sont exposées car kube-scheduler s'exécute en mode réseau host. 
-          # Sinon, l'adresse IP peut être codée en dur sur l'adresse IP du nœud master (également dans la variable d'environnement `DD_KUBERNETES_KUBELET_HOST`).
-        - prometheus_url : https://%%host%%:2379/metrics
-          tls_ca_cert : /host/etc/kubernetes/pki/etcd/ca.crt
-          tls_cert : /host/etc/kubernetes/pki/etcd/server.crt
-          tls_private_key : /host/etc/kubernetes/pki/etcd/server.key
+          # This is the node IP where metrics are exposed because kube-scheduler runs in host network mode.
+          # Otherwise, the IP could be hardcoded to the master node IP (also in the environment variable `DD_KUBERNETES_KUBELET_HOST`).
+        - prometheus_url: https://%%host%%:2379/metrics
+          tls_ca_cert: /host/etc/kubernetes/pki/etcd/ca.crt
+          tls_cert: /host/etc/kubernetes/pki/etcd/server.crt
+          tls_private_key: /host/etc/kubernetes/pki/etcd/server.key
 agents:
-  # Des tolérances sont nécessaires pour être planifié sur les nœuds de plan de contrôle exécutant etcd
+  # Tolerations are needed to be scheduled on control-plane nodes running etcd
   tolerations:
   - key: node-role.kubernetes.io/control-plane
     operator: Exists
     effect: NoSchedule
   volumes:
-    # Sur Talos, les certificats etcd sont stockés dans /system/secrets/etcd
+    # On Talos, etcd certificates are stored in /system/secrets/etcd
     - hostPath:
         path: /system/secrets/etcd
       name: etcd-certs
@@ -967,11 +970,11 @@ providers:
     enabled: true
 {{< /code-block >}}
 
-### Controller Manager et Scheduler
+### Gestionnaire de contrôleur et planificateur
 
 #### Ports sécurisés
 
-Les ports sécurisés activent des processus d'authentification et d'autorisation afin de protéger les composants de votre plan de contrôle. L'Agent Datadog peut recueillir des métriques à partir de Controller Manager et Scheduler en ciblant leurs ports sécurisés.
+Les ports sécurisés permettent l'authentification et l'autorisation pour protéger vos composants de plan de contrôle. L'Agent Datadog peut collecter des métriques du Gestionnaire de contrôleur et du planificateur en ciblant leurs ports sécurisés.
 
 {{< code-block lang="yaml" filename="datadog-values.yaml" >}}
 datadog:
@@ -1025,10 +1028,10 @@ providers:
     enabled: true
 {{< /code-block >}}
 
-**Remarques :**
+**Notes:**
 
-- Si vous utilisez des certificats autosignés, le champ `ssl_verify` des configurations `kube_controller_manager` et `kube_scheduler` doit être défini sur `false`.
-- Lors du ciblage de ports sécurisés, l'option `bind-address` dans votre configuration Controller Manager et Scheduler doit être accessible par l'Agent Datadog. Appliquez le patch ci-dessous aux nœuds control-plane lors de la génération du cluster ; ou, pour les nœuds Talos en cours d'exécution, exécutez `talosctl patch mc -n <control-plane-node1,control-plane-node2> --patch @controlplane-datadog-monitoring-patch.yaml`.
+- Le champ `ssl_verify` dans la configuration `kube_controller_manager` et `kube_scheduler` doit être défini sur `false` lors de l'utilisation de certificats auto-signés.
+- Lors de la cible des ports sécurisés, l'option `bind-address` dans votre configuration de Gestionnaire de contrôleur et de planificateur doit être accessible par l'Agent Datadog. Appliquez le patch ci-dessous aux nœuds de plan de contrôle lors de la génération du cluster ; ou, pour les nœuds Talos en cours d'exécution, exécutez `talosctl patch mc -n <control-plane-node1,control-plane-node2> --patch @controlplane-datadog-monitoring-patch.yaml`.
 
 {{< code-block lang="yaml" filename="controlplane-datadog-monitoring-patch.yaml" >}}
 cluster:
@@ -1040,18 +1043,18 @@ cluster:
       bind-address: 0.0.0.0
 {{< /code-block >}}
 
-## Kubernetes sur Rancher Kubernetes Engine (version 2.5+) {#RKE}
+## Kubernetes sur Rancher Kubernetes Engine (v2.5+) {#RKE}
 
-La version 2.5 de Rancher se base sur [PushProx][9] pour exposer les endpoints de métriques du plan de contrôle. L'Agent Datadog peut ainsi exécuter des checks de plan de contrôle et recueillir des métriques.
+Rancher v2.5 s'appuie sur [PushProx][9] pour exposer les points de terminaison des métriques du plan de contrôle, ce qui permet au Datadog Agent d'exécuter des vérifications du plan de contrôle et de collecter des métriques.
 
 ### Prérequis
 
-1. Installez l'Agent Datadog avec le [chart rancher-monitoring][10].
-2. Les daemonsets `pushprox` sont déployés avec `rancher-monitoring` et s'exécutent dans l'espace de nommage `cattle-monitoring-system`. 
+1. Installez le Datadog Agent avec le [chart rancher-monitoring][10].
+2. Les `pushprox` daemonsets sont déployés avec `rancher-monitoring` et fonctionnent dans l'espace de noms `cattle-monitoring-system`.
 
-### Serveur d'API
+### Serveur API
 
-Pour configurer le check `kube_apiserver_metrics`, ajoutez les annotations suivantes au service `default/kubernetes` :
+Pour configurer la vérification `kube_apiserver_metrics`, ajoutez les annotations suivantes au service `default/kubernetes` :
 
 ```yaml
 annotations:
@@ -1060,11 +1063,11 @@ annotations:
   ad.datadoghq.com/endpoints.instances: '[{ "prometheus_url": "https://%%host%%:%%port%%/metrics", "bearer_token_auth": "true" }]'
 ```
 
-### Ajouter des services Kubernetes pour configurer les checks Autodiscovery
+### Ajouter des services Kubernetes pour configurer les vérifications d'autodécouverte
 
-Si vous ajoutez des services Kubernetes headless pour définir des configuration de check, l'Agent Datadog pourra cibler les pods `pushprox` et recueillir des métriques.
+En ajoutant des services Kubernetes sans tête pour définir les configurations de vérification, le Datadog Agent est capable de cibler les pods `pushprox` et de collecter des métriques.
 
-Appliquez `rancher-control-plane-services.yaml` :
+Appliquez `rancher-control-plane-services.yaml` :
 
 ```yaml
 apiVersion: v1
@@ -1137,10 +1140,10 @@ spec:
     k8s-app: pushprox-kube-etcd-client
 ```
 
-Déployez l'Agent Datadog avec des manifestes basés sur les configurations suivantes :
+Déployez le Datadog Agent avec des manifests basés sur les configurations suivantes :
 
 {{< tabs >}}
-{{% tab "Operator Datadog" %}}
+{{% tab "Opérateur Datadog" %}}
 
 {{< code-block lang="yaml" filename="datadog-agent.yaml" >}}
 kind: DatadogAgent
@@ -1211,15 +1214,15 @@ agents:
 {{< /tabs >}}
 
 
-## Kubernetes sur Rancher Kubernetes Engine (avant la v2.5) {#RKEBefore2_5}
+## Kubernetes sur Rancher Kubernetes Engine (avant v2.5) {#RKEBefore2_5}
 
-### API Server, Controller Manager et Scheduler
+### Serveur API, Gestionnaire de contrôleur et Planificateur
 
-Installez l'Agent Datadog avec le [chart rancher-monitoring][10].
+Installez le Datadog Agent avec le [chart rancher-monitoring][10].
 
-Les composants du plan de contrôle s'exécutent sur Docker en dehors de Kubernetes. Dans Kubernetes, le service `kubernetes` dans l'espace de nommage `default` cible la ou les IP du nœud du plan de contrôle. Pour vérifier que c'est bien le cas, exécutez la commande `$ kubectl describe endpoints kubernetes`.
+Les composants du plan de contrôle s'exécutent sur Docker en dehors de Kubernetes. Dans Kubernetes, le service `kubernetes` dans l'espace de noms `default` cible l'IP du nœud du plan de contrôle. Vous pouvez le confirmer en exécutant `$ kubectl describe endpoints kubernetes`.
 
-Vous pouvez annoter ce service avec des checks d'endpoint (gérés par l'Agent de cluster) Datadog pour surveiller les composants API Server, Controller Manager et Scheduler :
+Vous pouvez annoter ce service avec des vérifications de point de terminaison (gérées par le Datadog Cluster Agent) pour surveiller l'API Server, le Controller Manager et le Scheduler :
 
 ```shell
 kubectl edit service kubernetes
@@ -1238,11 +1241,11 @@ metadata:
 
 ### Etcd
 
-Etcd s'exécute dans Docker en dehors de Kubernetes. Des certificats sont requis pour communiquer avec le service Etcd. Pour configurer la surveillance d'Etcd en suivant la procédure recommandée, vous avez besoin d'un accès SSH au nœud du plan de contrôle exécutant Etcd.
+Etcd est exécuté dans Docker en dehors de Kubernetes, et des certificats sont nécessaires pour communiquer avec le service Etcd. Les étapes suggérées pour configurer la surveillance d'Etcd nécessitent un accès SSH à un nœud du plan de contrôle exécutant Etcd.
 
-1. Commencez par SSH le nœud du plan de contrôle en suivant la [documentation Rancher][9] (en anglais). Vérifiez qu'Etcd s'exécute dans un conteneur Docker avec `$ docker ps`, puis utilisez la commande `$ docker inspect etcd` pour rechercher l'emplacement des certificats utilisés dans la commande d'exécution (`"Cmd"`), ainsi que le chemin hôte des montages.
+1. Connectez-vous en SSH au nœud du plan de contrôle en suivant la [documentation de Rancher][9]. Confirmez qu'Etcd s'exécute dans un conteneur Docker avec `$ docker ps`, puis utilisez `$ docker inspect etcd` pour trouver l'emplacement des certificats utilisés dans la commande d'exécution (`"Cmd"`), ainsi que le chemin hôte des montages.
 
-Recherchez les trois flags suivants dans la commande :
+Les trois indicateurs dans la commande à rechercher sont :
 
 ```shell
 --trusted-ca-file
@@ -1250,13 +1253,13 @@ Recherchez les trois flags suivants dans la commande :
 --key-file
 ```
 
-2. À l'aide des informations de montage fournies dans la sortie de `$ docker inspect etcd`, définissez `volumes` et `volumeMounts` dans la configuration de l'Agent Datadog. Ajoutez également des tolérances, afin que l'Agent Datadog puisse s'exécuter sur les nœuds du plan de contrôle.
+2. En utilisant les informations de montage disponibles dans la sortie `$ docker inspect etcd`, définissez `volumes` et `volumeMounts` dans la configuration de l'Agent Datadog. Incluez également des tolérances afin que l'Agent Datadog puisse s'exécuter sur les nœuds du plan de contrôle.
 
-Vous trouverez ci-dessous des exemples de configuration de l'Agent Datadog avec Helm et l'Operator Datadog :
+Voici des exemples de la façon de configurer l'Agent Datadog avec Helm et l'Opérateur Datadog :
 
 
 {{< tabs >}}
-{{% tab "Operator Datadog" %}}
+{{% tab "Opérateur Datadog" %}}
 
 {{< code-block lang="yaml" filename="datadog-agent.yaml" >}}
 kind: DatadogAgent
@@ -1327,7 +1330,7 @@ agents:
 {{< /tabs >}}
 
 
-3. Configurez un DaemonSet avec un conteneur de pause afin d'exécuter le check Etcd sur les nœuds exécutant Etcd. Ce DamonSet s'exécute sur le réseau hôte pour pouvoir accéder au service Etcd. Il dispose également de la configuration de check et des tolérances nécessaires pour s'exécuter sur les nœuds du plan de contrôle. Veillez à ce que les chemins des fichiers de certificat montés correspondent aux emplacements sur votre instance, et remplacez la partie `<...>` par l'emplacement pertinent.
+3. Configurez un DaemonSet avec un conteneur de pause pour exécuter la vérification d'Etcd sur les nœuds exécutant Etcd. Ce DaemonSet s'exécute sur le réseau hôte afin qu'il puisse accéder au service Etcd. Il a également la configuration de vérification et les tolérances nécessaires pour s'exécuter sur le(s) nœud(s) du plan de contrôle. Assurez-vous que les chemins des fichiers de certificats montés correspondent à ce que vous avez configuré sur votre instance, et remplacez la partie `<...>` en conséquence.
 
 ```yaml
 apiVersion: apps/v1
@@ -1369,16 +1372,16 @@ spec:
         operator: Exists
 ```
 
-Pour déployer le DaemonSet et la configuration de check, exécutez la commande suivante :
+Pour déployer le DaemonSet et la configuration de vérification, exécutez
 
 ```shell
 kubectl apply -f <filename>
 ```
 
 
-## Kubernetes sur des services gérés (AKS, GKE) {#services-geres}
+## Kubernetes sur des services gérés (AKS, GKE) {#ManagedServices}
 
-Sur d'autres services gérés, comme Azure Kubernetes Service (AKS) et Google Kubernetes Engine (GKE), l'utilisateur ne peut pas accéder aux composants du plan de contrôle. Il n'est donc pas possible d'exécuter les checks `kube_apiserver`, `kube_controller_manager`, `kube_scheduler` et `etcd` dans ces environnements.
+Sur d'autres services gérés, tels que Azure Kubernetes Service (AKS) et Google Kubernetes Engine (GKE), l'utilisateur ne peut pas accéder aux composants du plan de contrôle. En conséquence, il n'est pas possible d'exécuter les vérifications `kube_apiserver`, `kube_controller_manager`, `kube_scheduler` ou `etcd` dans ces environnements.
 
 
 [1]: https://docs.datadoghq.com/fr/integrations/kube_apiserver_metrics/

@@ -1,56 +1,56 @@
 ---
-description: Aprenda a identificar y limpiar el desorden de monitores analizando los
-  patrones de uso de los monitores, identificando monitores no utilizados o redundantes,
-  e implementando las mejores prácticas para la gestión de monitores con el fin de
-  mejorar la calidad de las alertas y reducir el ruido.
+description: Apprenez à identifier et à nettoyer le désordre des moniteurs en analysant
+  les modèles d'utilisation des moniteurs, en identifiant les moniteurs inutilisés
+  ou redondants, et en mettant en œuvre les meilleures pratiques pour la gestion des
+  moniteurs afin d'améliorer la qualité des alertes et de réduire le bruit.
 further_reading:
 - link: monitors/guide/monitor_best_practices
   tag: Documentation
-  text: Mejores Prácticas de Monitores
+  text: Meilleures pratiques pour les moniteurs
 - link: monitors/quality
   tag: Documentation
-  text: Calidad de Monitores
-title: Limpiar el desorden de monitores
+  text: Qualité des moniteurs
+title: Nettoyer le désordre des moniteurs
 ---
-## Resumen
+## Aperçu
 
-El desorden de monitores se acumula con el tiempo, resultando en ruido, alertas duplicadas y un aumento de la fricción operativa. Esta guía describe un enfoque claro para identificar y limpiar monitores desordenados, con casos de uso que le ayudarán a optimizar sus flujos de trabajo de alertas.
+Le désordre des moniteurs s'accumule avec le temps, entraînant du bruit, des alertes dupliquées et une friction opérationnelle accrue. Ce guide présente une approche claire pour identifier et nettoyer les moniteurs encombrés, avec des cas d'utilisation pour vous aider à rationaliser vos flux de travail d'alerte.
 
-También proporciona mejores prácticas para ayudar a mantener un entorno de monitoreo limpio, facilitando la escalabilidad y la gobernanza de su estrategia de monitoreo a medida que sus sistemas crecen.
+Il fournit également des meilleures pratiques pour maintenir un environnement de surveillance propre, facilitant ainsi l'évolutivité et la gouvernance de votre stratégie de surveillance à mesure que vos systèmes se développent.
 
-### Requisitos Previos
+### Conditions préalables
 
-Debe tener los [permisos de escritura de monitores][10].
+Vous devez avoir les [permissions d'écriture sur les moniteurs][10].
 
-### Casos de uso
+### Cas d'utilisation
 
-Esta guía cubre varios casos de uso clave para limpiar el desorden de monitores:
+Ce guide couvre plusieurs cas d'utilisation clés pour nettoyer le désordre des moniteurs :
 
-- **[Monitores silenciados a largo plazo](#muted-for-a-long-period-of-time)**: Monitores que han estado silenciados durante períodos prolongados—semanas o incluso meses.
-- **[Monitores atascados en estado de ALERTA](#in-the-alerted-state-for-a-long-period-of-time)**: Monitores que han permanecido en estado de "Alerta" durante un tiempo inusualmente largo sin ser reconocidos o resueltos.
-- **[Monitores duplicados](#duplicate-monitors)**: Múltiples monitores que se activan bajo la misma condición, métrica o servicio—frecuentemente debido a silos de equipo o falta de coordinación.
-- **[Monitores inestables y ruidosos](#flappy-and-noisy-monitors)**: Monitores que se activan y resuelven con frecuencia (es decir, "flap") o que producen altos volúmenes de alertas de bajo valor.
-- **[Monitores mal configurados](#misconfigured-monitors)**: Monitores con enlaces rotos a paneles de control, retrasos de evaluación faltantes, constituyentes de alerta faltantes o incorrectos, o etiquetas y convenciones de nombres desactualizadas.
+- **[ Moniteurs désactivés à long terme ](#muted-for-a-long-period-of-time)** : Moniteurs qui ont été désactivés pendant de longues périodes—semaines ou même mois.
+- **[ Moniteurs bloqués en état d'ALERT ](#in-the-alerted-state-for-a-long-period-of-time)** : Moniteurs qui sont restés en état "Alerte" pendant une période anormalement longue sans être reconnus ou résolus.
+- **[ Moniteurs dupliqués ](#duplicate-monitors)** : Plusieurs moniteurs déclenchant la même condition, métrique ou service—souvent en raison de silos d'équipe ou d'un manque de coordination.
+- **[ Moniteurs instables et bruyants ](#flappy-and-noisy-monitors)** : Moniteurs qui se déclenchent et se résolvent fréquemment (c'est-à-dire, qui "flappent") ou produisent de grands volumes d'alertes de faible valeur.
+- **[ Moniteurs mal configurés ](#misconfigured-monitors)** : Moniteurs avec des liens brisés vers des tableaux de bord, des délais d'évaluation manquants, des éléments d'alerte manquants ou incorrects, ou des balises et conventions de nommage obsolètes.
 
-## Silenciado durante un largo período de tiempo
+## Désactivé pendant une longue période
 
-Los monitores sirven como un sistema de advertencia temprana para fallas, amenazas de seguridad y problemas de rendimiento. Sin embargo, tener los monitores silenciados durante un largo período de tiempo derrota ese propósito; el silencio prolongado a menudo indica que un monitor es obsoleto, irrelevante o demasiado ruidoso para ser útil. Estos deben ser revisados y reactivados con la configuración adecuada o retirados para reducir el desorden y eliminar monitores obsoletos de su entorno de alertas.
+Les moniteurs servent de système d'alerte précoce pour les pannes, les menaces de sécurité et les problèmes de performance. Cependant, avoir des moniteurs désactivés pendant une longue période va à l'encontre de cet objectif, le désactivation à long terme signale souvent qu'un moniteur est obsolète, non pertinent ou trop bruyant pour être utile. Ces éléments doivent être examinés et soit réactivés avec un réglage approprié, soit retirés pour réduire le désordre et éliminer les moniteurs obsolètes de votre environnement d'alerte.
 
-Limpie los monitores que no están proporcionando valor y reemplace los silencios prolongados con horarios limitados:
+Nettoyez les moniteurs qui n'apportent pas de valeur et remplacez les mises en sourdine à long terme par des horaires limités dans le temps :
 
-### 1. Inspeccione los monitores
+### 1. Inspectez les moniteurs
 
-Audite los monitores que han estado silenciados durante un largo período de tiempo para entender cuáles son realmente necesarios o útiles. Algunos monitores pueden estar silenciados por una buena razón y desea evitar eliminarlos.
+Auditez les moniteurs qui ont été mis en sourdine pendant une longue période pour comprendre lesquels sont réellement nécessaires ou utiles. Certains moniteurs peuvent être mis en sourdine pour une bonne raison et vous souhaitez éviter de les supprimer.
 
-Para ver esos monitores, navegue a la página de [Calidad del Monitor][1] y encuentre la lista de monitores que han estado silenciados por más de 60 días. También puede encontrar monitores silenciados en la [**Lista de Monitores**][8] con la consulta `muted_elapsed:<number_of_days>d`.
+Pour voir ces moniteurs, accédez à la page [Qualité des Moniteurs][1] et trouvez la liste des moniteurs qui ont été mis en sourdine pendant plus de 60 jours. Vous pouvez également trouver des moniteurs mis en sourdine sur la [**Liste des Moniteurs**][8] avec la requête `muted_elapsed:<number_of_days>d`.
 
-Después de tener su lista, puede tomar acción sobre cada monitor desde la página de Calidad del Monitor o hacer una eliminación masiva de monitores con los pasos 2 y 3.
+Après avoir obtenu votre liste, vous pouvez soit agir sur chaque moniteur depuis la page Qualité des Moniteurs, soit procéder à une suppression en masse des moniteurs avec les étapes 2 et 3.
 
-### 2. Obtenga la lista de ID de monitores
+### 2. Obtenez la liste des ID de moniteurs
 
-Obtenga una lista de sus ID de monitores para automatizar programáticamente los cambios. Comience con los monitores que han estado silenciados por más de 60 días.
+Obtenez une liste de vos ID de moniteurs pour automatiser les changements de manière programmatique. Commencez par les moniteurs qui ont été mis en sourdine pendant plus de 60 jours.
 
-El siguiente comando CURL obtiene esa información:
+La commande CURL suivante récupère cette information :
 
 ```shell
 curl -s -X GET "{{< region-param key=dd_api >}}/api/v1/monitor/search" \
@@ -63,11 +63,11 @@ curl -s -X GET "{{< region-param key=dd_api >}}/api/v1/monitor/search" \
   | @csv' > monitors_muted.csv
 ```
 
-Esto le proporciona los detalles de sus monitores en un archivo CSV para facilitar la lectura. Puede refinar la consulta para su caso de uso específico.
+Cela vous donne les détails de vos moniteurs dans un fichier CSV pour une meilleure lisibilité. Vous pouvez affiner la requête à votre cas d'utilisation spécifique.
 
-### 3. Elimine los monitores
+### 3. Supprimez les moniteurs
 
-Con su lista de monitores que han estado silenciados por más de 60 días (del Paso 2), puede eliminarlos con el siguiente script. Antes de ejecutar el script, coloca la columna de ID del monitor **primero** en la tabla.
+Avec votre liste de moniteurs qui ont été mis en sourdine pendant plus de 60 jours (de l'étape 2), vous pouvez les supprimer avec le script suivant. Avant d'exécuter le script, placez la colonne des ID de moniteurs **en premier** dans le tableau.
 
 ```shell
 input_file="monitors_muted.csv"
@@ -82,11 +82,11 @@ tail -n +2 "$input_file" | awk -F',' '{print $1}' | while read -r monitor_id; do
 done
 ```
 
-## En un estado de ALERTA durante un largo período de tiempo
+## En état d'ALERT pendant une longue période
 
-Las alertas persistentes sugieren uno de dos problemas: o el problema no es accionable, o el umbral del monitor está mal configurado. Ambos casos erosionan la confianza en las alertas y contribuyen a la fatiga de alertas. Estos monitores deben ser revisados y editados, o eliminados.
+Des alertes persistantes suggèrent l'un des deux problèmes : soit le problème n'est pas actionnable, soit le seuil du moniteur est mal configuré. Dans les deux cas, cela érode la confiance dans les alertes et contribue à la fatigue des alertes. Ces moniteurs doivent être examinés et modifiés, ou supprimés.
 
-Aquí está cómo obtener la lista de monitores que han estado en estado de ALERTA por más de 60 días:
+Voici comment obtenir la liste des moniteurs qui ont été en état d'ALERT pendant plus de 60 jours :
 
 ```shell
 curl -s -X GET "{{< region-param key=dd_api >}}/api/v1/monitor/search" \
@@ -99,23 +99,23 @@ curl -s -X GET "{{< region-param key=dd_api >}}/api/v1/monitor/search" \
   | @csv' > monitors_alerted_too_long.csv
 ```
 
-Para eliminar, utiliza el mismo proceso en el comando [Eliminar Monitores](#3-delete-the-monitors). Reemplaza el `input_file` con `monitors_alerted_too_long.csv`.
+Pour supprimer, utilisez le même processus dans la commande [Supprimer les moniteurs](#3-delete-the-monitors). Remplacez le `input_file` par `monitors_alerted_too_long.csv`.
 
-## Monitores duplicados
+## Moniteurs en double
 
-Crear monitores separados que solo difieran por una etiqueta puede llevar a una duplicación innecesaria. Por ejemplo, monitorear el uso de CPU con un monitor para `prod` y otro para `staging` aumenta tu conteo de monitores.
+Créer des moniteurs séparés qui ne diffèrent que par une étiquette peut entraîner une duplication inutile. Par exemple, surveiller l'utilisation du CPU avec un moniteur pour `prod` et un autre pour `staging` augmente votre nombre de moniteurs.
 
-Los monitores redundantes crean ruido y confusión innecesarios. En muchos casos, estos pueden ser consolidados en un solo monitor de [**multi-alerta**][2] con un adecuado alcance y etiquetado, reduciendo la duplicación y haciendo las alertas más manejables.
+Les moniteurs redondants créent du bruit et de la confusion inutiles. Dans de nombreux cas, ceux-ci peuvent être consolidés en un seul moniteur [**multi-alert**][2] avec un bon ciblage et étiquetage, réduisant la duplication et rendant les alertes plus gérables.
 
-Si necesitas enviar diferentes notificaciones dependiendo del valor de la etiqueta que activó la alerta, utiliza [variables de monitor][3] para personalizar dinámicamente el mensaje basado en la etiqueta que superó el umbral.
+Si vous devez envoyer différentes notifications en fonction de la valeur de l'étiquette qui a déclenché l'alerte, utilisez [les variables de moniteur][3] pour personnaliser dynamiquement le message en fonction de l'étiquette qui a franchi le seuil.
 
-## Monitores inestables y ruidosos
+## Moniteurs instables et bruyants
 
-Los monitores ruidosos desensibilizan a los equipos ante problemas reales. El parpadeo (cuando un monitor cambia frecuentemente entre estados de alerta y recuperación) a menudo indica umbrales inestables, retrasos de evaluación faltantes o volatilidad subyacente del sistema.
+Les moniteurs bruyants désensibilisent les équipes aux véritables problèmes. Le flapping (lorsqu'un moniteur passe fréquemment entre les états d'alerte et de récupération) indique souvent des seuils instables, des délais d'évaluation manquants ou une volatilité sous-jacente du système.
 
-Para reducir el ruido, revisa la agregación de evaluación del monitor y la configuración del umbral. Ajusta la configuración para estabilizar el comportamiento de las alertas, o elimina el monitor si ya no proporciona valor.
+Pour réduire le bruit, examinez l'agrégation d'évaluation du moniteur et la configuration des seuils. Ajustez les paramètres pour stabiliser le comportement des alertes, ou supprimez le moniteur s'il n'apporte plus de valeur.
 
-Aquí se explica cómo obtener una lista de monitores que están generando un alto volumen de alertas:
+Voici comment obtenir une liste de moniteurs qui génèrent un volume élevé d'alertes :
 
 ```shell
 curl -s -X GET "{{< region-param key=dd_api >}}/api/v1/monitor/search" \
@@ -128,18 +128,18 @@ curl -s -X GET "{{< region-param key=dd_api >}}/api/v1/monitor/search" \
   | @csv' > noisy_monitors.csv
 ```
 
-Para eliminar, utiliza el mismo proceso en el comando [Eliminar Monitores](#3-delete-the-monitors). Reemplaza el `input_file` con `noisy_monitors.csv`.
+Pour supprimer, utilisez le même processus dans la commande [Supprimer les moniteurs](#3-delete-the-monitors). Remplacez le `input_file` par `noisy_monitors.csv`.
 
-## Monitores mal configurados
+## Moniteurs mal configurés
 
-Los monitores mal configurados son monitores activos que pueden tener un uso adecuado, pero son ineficientes porque no recibirás notificaciones. Estas malas configuraciones socavan la fiabilidad del monitor y dificultan la depuración o el triage. Limpiar estos problemas asegura que tus alertas sean precisas, accionables e integradas en tus flujos de trabajo de observabilidad.
+Les moniteurs mal configurés sont des moniteurs actifs qui peuvent avoir une utilisation appropriée, mais qui sont inefficaces car vous ne serez pas notifié. Ces erreurs de configuration compromettent la fiabilité du moniteur et rendent le débogage ou le triage plus difficiles. Les nettoyer garantit que vos alertes sont précises, exploitables et intégrées dans vos flux de travail d'observabilité.
 
-### Mango roto
-Utiliza la página de [**Calidad del Monitor**][4] para visualizar qué monitores tienen un mango roto. Las notificaciones de estos monitores no pueden llegar a su destino.
+### Poignée cassée
+Utilisez la page [**Qualité des Moniteurs**][4] pour visualiser quels moniteurs ont une poignée cassée. Les notifications de ces moniteurs ne peuvent pas atteindre leur destination.
 
-**Datadog recomienda** revisar los destinatarios de los monitores para asegurar una entrega adecuada, o eliminar el monitor.
+**Datadog recommande** de vérifier les destinataires des moniteurs pour garantir une livraison correcte, ou de supprimer le moniteur.
 
-Aquí se explica cómo obtener la lista de monitores que tienen mangos mal configurados:
+Voici comment obtenir la liste des moniteurs ayant des poignées mal configurées :
 
 ```shell
 curl -s -X GET "{{< region-param key=dd_api >}}/api/v1/monitor/search" \
@@ -152,16 +152,16 @@ curl -s -X GET "{{< region-param key=dd_api >}}/api/v1/monitor/search" \
   | @csv' > monitors_broken_handle.csv
 ```
 
-Para eliminar, utiliza el mismo proceso en el comando [Eliminar Monitores](#3-delete-the-monitors). Reemplaza el `input_file` con `monitors_broken_handle.csv`.
+Pour supprimer, utilisez le même processus dans la commande [Supprimer les moniteurs](#3-delete-the-monitors). Remplacez le `input_file` par `monitors_broken_handle.csv`.
 
-### Falta un retraso
-Este problema afecta principalmente a los monitores basados en métricas de AWS. Debido a que Datadog recupera métricas de AWS a través de la API, a menudo hay un retraso incorporado antes de que los datos estén disponibles. Si no tienes en cuenta esto, los monitores pueden activar falsos positivos debido a datos incompletos o retrasados.
+### Délai manquant
+Ce problème impacte principalement les moniteurs basés sur les métriques AWS. Parce que Datadog récupère les métriques AWS via l'API, il y a souvent un délai intégré avant que les données ne soient disponibles. Si vous ne tenez pas compte de cela, les moniteurs peuvent déclencher de faux positifs en raison de données incomplètes ou retardées.
 
-Puedes encontrar los monitores afectados en la página de [Calidad del Monitor][4], donde se marcan los monitores que faltan un retraso de evaluación.
+Vous pouvez trouver les moniteurs affectés dans la page [Qualité des Moniteurs][4], où les moniteurs manquant un délai d'évaluation sont signalés.
 
-**Datadog recomienda** agregar un retraso a todos los monitores que utilizan métricas de AWS. Un retraso de 300 segundos (5 minutos) es típicamente suficiente para tener en cuenta la latencia de ingestión de datos.
+**Datadog recommande** d'ajouter un délai à tous les moniteurs utilisant des métriques AWS. Un délai de 300 secondes (5 minutes) est généralement suffisant pour tenir compte de la latence d'ingestion des données.
 
-Aquí se explica cómo obtener la lista de monitores que están faltando un retraso:
+Voici comment obtenir la liste des moniteurs qui manquent d'un délai :
 
 ```shell
 curl -s -X GET "{{< region-param key=dd_api >}}/api/v1/monitor/search" \
@@ -174,17 +174,17 @@ curl -s -X GET "{{< region-param key=dd_api >}}/api/v1/monitor/search" \
   | @csv' > monitors_missing_delay.csv
 ```
 
-Para más información, consulte la [guía de solución de problemas de AWS][7].
+Pour plus d'informations, consultez le [guide de dépannage AWS][7].
 
-### Constituyente faltante
+### Constituant manquant
 
-Los monitores compuestos evalúan su estado en función de la combinación lógica de dos o más monitores (llamados constituyentes). Si alguno de esos monitores constituyentes es eliminado o se vuelve no disponible, el monitor compuesto se vuelve inválido o poco confiable.
+Les moniteurs composites évaluent leur état en fonction de la combinaison logique de deux moniteurs ou plus (appelés constituants). Si l'un de ces moniteurs constituants est supprimé ou devient indisponible, le moniteur composite devient invalide ou peu fiable.
 
-Un constituyente faltante típicamente significa que al menos uno de los monitores de entrada originales ha sido eliminado después de que se creó el monitor compuesto. Esto causa que el compuesto esté incompleto y potencialmente engañoso en el comportamiento de alerta.
+Un constituant manquant signifie généralement qu'au moins un des moniteurs d'entrée d'origine a été supprimé après la création du moniteur composite. Cela entraîne une incomplétude du composite et peut potentiellement induire en erreur le comportement d'alerte.
 
-**Datadog recomienda** revisar los monitores compuestos para reemplazar o restaurar los constituyentes faltantes, o eliminar el monitor compuesto. Puede encontrar la lista de monitores compuestos con constituyentes faltantes en la página de [Calidad del Monitor][4].
+**Datadog recommande** de vérifier les moniteurs composites pour soit remplacer soit restaurer les constituants manquants, ou supprimer le moniteur composite. Vous pouvez trouver la liste des moniteurs composites avec des constituants manquants sur la page [Qualité des Moniteurs][4].
 
-Para obtener programáticamente la lista de monitores que están faltando constituyentes:
+Pour obtenir de manière programmatique la liste des moniteurs qui manquent de constituants :
 
 ```bash
 curl -s -X GET "{{< region-param key=dd_api >}}/api/v1/monitor/search" \
@@ -197,28 +197,28 @@ curl -s -X GET "{{< region-param key=dd_api >}}/api/v1/monitor/search" \
   | @csv' > monitors_missing_constituent.csv
 ```
 
-Para eliminar, utiliza el mismo proceso en el comando [Eliminar Monitores](#3-delete-the-monitors). Reemplaza el `input_file` con `monitors_missing_constituent.csv`.
+Pour supprimer, utilisez le même processus dans la commande [Supprimer les moniteurs](#3-delete-the-monitors). Remplacez le `input_file` par `monitors_missing_constituent.csv`.
 
-Para más información, consulte [Monitor Compuesto][11].
+Pour plus d'informations, voir [Moniteur Composite][11].
 
-## Mejores Prácticas para evitar el Desorden de Monitores
+## Meilleures pratiques pour éviter l'encombrement des moniteurs
 
-| Mejor Práctica | Descripción | Implementación |
+| Meilleure Pratique | Description | Mise en œuvre |
 |---------------|-------------|----------------|
-| **Eliminar redundancia** | Evite crear múltiples monitores que rastreen la misma señal con alcances ligeramente diferentes (como por región, equipo o entorno). | Use **monitores agrupados por etiquetas**, que son más fáciles de gestionar y escalar. |
-| **Establecer una clara propiedad** | Cada monitor debe tener un propietario claro para dirigir las alertas a los respondedores correctos y evitar confusiones. | Use `team:` etiquetas y manejadores de notificación (`@slack-xyz`, `@pagerduty-twilio`). Utilice el filtro **Creador** en la [Lista de Monitores][8] para auditar a los creadores de monitores más frecuentes. |
-| **Revise monitores ruidosos o inactivos** | Los monitores que alertan con demasiada frecuencia o que nunca alertan pueden causar fatiga o señalar una mala configuración. | Utiliza la página de [**Monitoreo de Calidad**][4] para identificar y limpiar monitores ruidosos, rotos o desactualizados. |
-| **Aprovecha las plantillas de monitores** | Para patrones comunes (como métricas ROJAS o latencia de API), utiliza plantillas para reducir la duplicación y asegurar la estandarización. | Utiliza [plantillas reutilizables][5] para reducir la duplicación y asegurar la estandarización entre equipos. |
-| **Establece una Política de Etiquetado** | Etiquetas consistentes y significativas te permiten filtrar, agrupar y dirigir monitores fácilmente. | Utiliza etiquetas consistentes (como `service:`, `env:`, `team:`) y establece una [Política de Etiquetado][6]. Esto permite tableros, alertas y seguimiento de cumplimiento específicos. |
-| **Tablero de Calidad de Monitores** | Visualiza tendencias en la higiene de monitores entre equipos, servicios y entornos para identificar proactivamente brechas y rastrear mejoras. | Configura un [**tablero de Calidad de Monitores**](#template-monitor-quality-dashboard) para rastrear mejoras a lo largo del tiempo y priorizar esfuerzos de limpieza a gran escala. |
+| **Éliminer la redondance** | Évitez de créer plusieurs moniteurs qui suivent le même signal avec des portées légèrement différentes (comme par région, équipe ou environnement). | Utilisez **des moniteurs groupés avec des tags**, qui sont plus faciles à gérer et à mettre à l'échelle. |
+| **Définir une propriété claire** | Chaque moniteur doit avoir un propriétaire clair pour diriger les alertes vers les bons répondants et éviter la confusion. | Utilisez `team:` des tags et des gestionnaires de notification (`@slack-xyz`, `@pagerduty-twilio`). Utilisez le filtre **Créateur** sur la [Liste des Moniteurs][8] pour auditer les créateurs de moniteurs les plus fréquents. |
+| **Réviser les moniteurs bruyants ou dormants** | Les moniteurs qui alertent trop souvent ou qui n'alertent jamais peuvent provoquer de la fatigue ou signaler une mauvaise configuration. | Utilisez la [**page de Qualité des Moniteurs**][4] pour identifier et nettoyer les moniteurs bruyants, défectueux ou obsolètes. |
+| **Exploiter les modèles de moniteurs** | Pour des modèles courants (comme les métriques RED ou la latence API), utilisez des modèles pour réduire la duplication et garantir la standardisation. | Utilisez [des modèles réutilisables][5] pour réduire la duplication et garantir la standardisation entre les équipes. |
+| **Établir une Politique de Tagging** | Des tags cohérents et significatifs vous permettent de filtrer, regrouper et diriger facilement les moniteurs. | Utilisez des tags cohérents (comme `service:`, `env:`, `team:`) et établissez une [Politique de Tagging][6]. Cela permet des tableaux de bord, alertes et suivis de conformité ciblés. |
+| **Tableau de bord de Qualité des Moniteurs** | Visualisez les tendances en matière d'hygiène des moniteurs à travers les équipes, services et environnements pour identifier proactivement les lacunes et suivre les améliorations. | Configurez un [**tableau de bord de Qualité des Moniteurs**](#template-monitor-quality-dashboard) pour suivre les améliorations au fil du temps et prioriser les efforts de nettoyage à grande échelle. |
 
-## Tablero de plantilla de Calidad de Monitores
+## Tableau de bord de Qualité des Moniteurs par Modèle
 
-Para ayudarte a comenzar, importa la siguiente definición de tablero JSON directamente en tu cuenta de Datadog.
+Pour vous aider à démarrer, importez directement la définition de tableau de bord JSON suivante dans votre compte Datadog.
 
-1. En la aplicación, navega a [**Tableros**][9] y haz clic en **Nuevo Tablero**.
-2. En la parte superior de la página, haz clic en **Configurar** y selecciona **Importar JSON del tablero...**.
-3. Copia y pega el siguiente JSON para construir un tablero de Calidad de Monitores:
+1. Dans l'application, accédez à [**Tableaux de bord**][9] et cliquez sur **Nouveau tableau de bord**.
+2. En haut de la page, cliquez sur **Configurer** et sélectionnez **Importer le JSON du tableau de bord...**.
+3. Copiez et collez le JSON suivant pour créer un tableau de bord de qualité de surveillance :
 
 ```json
 {
@@ -1402,18 +1402,18 @@ Para ayudarte a comenzar, importa la siguiente definición de tablero JSON direc
 }
 ```
 
-## Lectura adicional
+## Lectures complémentaires
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/monitors/quality
-[2]: /es/monitors/guide/alert_aggregation/#multi-alert
-[3]: /es/monitors/notify/variables/?tab=is_alert#conditional-variables
+[2]: /fr/monitors/guide/alert_aggregation/#multi-alert
+[3]: /fr/monitors/notify/variables/?tab=is_alert#conditional-variables
 [4]: https://app.datadoghq.com/monitors/quality?order=desc
 [5]: https://app.datadoghq.com/monitors/templates?q=&origination=installed&p=1
 [6]: https://app.datadoghq.com/monitors/settings/policies
-[7]: /es/integrations/guide/aws-integration-troubleshooting/#metrics-delayed
+[7]: /fr/integrations/guide/aws-integration-troubleshooting/#metrics-delayed
 [8]: https://app.datadoghq.com/monitors/manage
 [9]: https://app.datadoghq.com/dashboard/lists
-[10]: /es/account_management/rbac/permissions/#monitors
-[11]: /es/monitors/types/composite/
+[10]: /fr/account_management/rbac/permissions/#monitors
+[11]: /fr/monitors/types/composite/

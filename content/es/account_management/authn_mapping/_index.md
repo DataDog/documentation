@@ -2,45 +2,44 @@
 aliases:
 - /es/account_management/authen_mapping/
 beta: true
-description: Asigna automáticamente grupos de proveedores de identidad a funciones
-  de Datadog mediante la API de asignación de autenticación para sistemas de autenticación
+description: Mapear automáticamente los grupos del proveedor de identidad a los roles
+  de Datadog utilizando la API de Mapeo de Autenticación para sistemas de autenticación
   federada.
 further_reading:
 - link: /account_management/rbac/log_management/
-  tag: Documentación
-  text: Control de acceso basado en roles (RBAC) para gestionar logs
-title: API para asignar atributos de autenticación federada a un rol
+  tag: Documentation
+  text: RBAC para la Gestión de Registros
+title: API de Mapeo de Roles para Autenticación Federada
 ---
+Si está utilizando mecanismos de Autenticación Federada, esta API le permite mapear automáticamente grupos de usuarios a roles en Datadog utilizando atributos enviados desde su Proveedor de Identidad. Para crear y gestionar Mapeos de Autenticación a través de la API, los usuarios deben utilizar una clave de aplicación perteneciente a alguien con el permiso de Gestión de Acceso.
 
-Si estás utilizando mecanismos de autenticación federada, esta API te permite asignar de forma automática grupos de usuarios a roles de Datadog utilizando atributos enviados por tu proveedor de identidades. Para crear y gestionar las asignaciones de autenticación a través de la API, los usuarios deben utilizar una clave de aplicación que pertenezca a un usuario con el permiso de gestión de acceso.
+**Nota**: Si es un usuario de SAML, Datadog recomienda encarecidamente que transicione a utilizar esta API.
 
-**Nota**: Si utilizas SAML, Datadog te recomienda que optes por el uso de esta API.
-
-También puede crear y gestionar asignaciones en la interfaz de usuario de Datadog, en la pestaña **Mappings** (Asignaciones) de User Management (Gestión de usuarios). Consulta la [asignación de grupos SAML][1] para obtener más información.
+También puede crear y gestionar mapeos en la interfaz de usuario de Datadog, en la pestaña **Mapeos** en Gestión de Usuarios. Consulte [mapeo de grupos SAML][1] para más información.
 
 ## Solicitudes
 
-Todos los endpoints de la API que aparecen a continuación utilizan el siguiente endpoint de host:
+Todos los puntos finales de la API a continuación están utilizando el siguiente punto final de host:
 
-* `https://api.{{< region-param key="dd_site" >}}/api/` para tu región de Datadog.
+* `https://api.{{< region-param key="dd_site" >}}/api/` para su región de Datadog.
 
-### Crear una nueva asignación de autenticación
+### Crear un nuevo mapeo de autenticación
 
-Crea una nueva asignación de AuthN a partir de un conjunto JSON. Devuelve la asignación de AuthN que se acaba de crear.
+Crear un nuevo Mapeo de AuthN a partir de un cuerpo JSON. Devuelve el nuevo Mapeo de AuthN creado.
 
-| Método | Ruta del endpoint        | Carga útil obligatoria |
+| Método | Ruta del punto final        | Carga útil requerida |
 |--------|----------------------|------------------|
 | `POST` | `/v2/authn_mappings` | JSON             |
 
 ##### ARGUMENTOS
 
-* **`role["data"]["id"]`** [*obligatorio*, sin default]:
- El `ID` del rol que se va a utilizar para asignar. La API de roles se puede utilizar para crear y gestionar roles de Datadog, así como para definir los permisos generales que se conceden y los usuarios asociados a cada rol.
- **Nota**: Este atributo debe presentarse en las solicitudes como parte de un bloque de relación de `role`. Para obtener más información, consulta el siguiente ejemplo. Cuando se crea un rol, se le asigna un ID. Para obtener más información sobre cómo encontrar el `ID` del rol que quieres asignar, consulta la [documentación sobre la API de roles][2].
-* **`attributes["attribute_key"]`** [*obligatorio*, sin default]:
- La `attribute_key` es la clave de un par clave/valor que representa un atributo que envía tu proveedor de identidades. Puedes definir estos pares en función de tus necesidades. Por ejemplo, la `attribute_key` se podría definir como `member-of` y el `attribute_value` podría ser `Development`.
-* **`attributes["attribute_value"]`** [*obligatorio*, sin default]:
- El `attribute_value` es el valor de un par clave/valor que representa un atributo que envía tu proveedor de identidades. Puedes definir estos pares en función de tus necesidades. Por ejemplo, la `attribute_key` se podría definir como `member-of` y el `attribute_value` podría ser `Development`.
+* **`role["data"]["id"]`** [*requerido*, sin valor por defecto]:
+ El `ID` del rol al que se asignará. La API de Roles se puede utilizar para crear y gestionar roles de Datadog, qué permisos globales otorgan y qué usuarios pertenecen a ellos.
+ **Nota**: Este atributo debe presentarse como parte de un bloque de relación `role` en las solicitudes. Vea el ejemplo a continuación para más detalles. Cuando crea un rol, se le asigna un ID. Para más información sobre cómo encontrar el `ID` para el rol al que desea asignar, consulte la [documentación de la API de Roles][2].
+* **`attributes["attribute_key"]`** [*requerido*, sin valor por defecto]:
+ El `attribute_key` es la parte clave de un par clave/valor que representa un atributo enviado desde su Proveedor de Identidad. Puede definir estos para su propio caso de uso. Por ejemplo, `attribute_key` podría ser `member-of` y el `attribute_value` podría ser `Development`.
+* **`attributes["attribute_value"]`** [*requerido*, sin valor por defecto]:
+ El `attribute_value` es la parte de valor de un par clave/valor que representa un atributo enviado desde su Proveedor de Identidad. Puede definir estos para su propio caso de uso. Por ejemplo, `attribute_key` podría ser `member-of` y el `attribute_value` podría ser `Development`.
 
 {{< tabs >}}
 {{% tab "Ejemplo" %}}
@@ -70,8 +69,8 @@ curl -X POST \
         }'
 ```
 
-- Reemplaza `<YOUR_DATADOG_API_KEY>` y `<YOUR_DATADOG_APPLICATION_KEY>` por las correspondientes [claves de API y aplicación][1] de tu organización.
-- Reemplaza `<YOUR_DD_SITE>` por {{< region-param key="dd_site" code="true" >}}
+- Reemplace `<YOUR_DATADOG_API_KEY>` y `<YOUR_DATADOG_APPLICATION_KEY>` con las correspondientes [claves de API y aplicación][1] para su organización.
+- Reemplace `<YOUR_DD_SITE>` con {{< region-param key="dd_site" code="true" >}}
 
 [1]: https://api.datadoghq.com/account/settings#api
 {{% /tab %}}
@@ -143,24 +142,24 @@ curl -X POST \
 {{% /tab %}}
 {{< /tabs >}}
 
-### Consultar todas las asignaciones de autenticación
+### Obtenga todos los mapeos de AuthN
 
-Devuelve una lista con las asignaciones de autenticación
+Devuelve una lista de mapeos de AuthN
 
-| Método | Ruta del endpoint        | Carga útil obligatoria          |
+| Método | Ruta del endpoint        | Carga útil requerida          |
 |--------|----------------------|---------------------------|
 | `GET`  | `/v2/authn_mappings` | Parámetros de consulta opcionales |
 
 ##### ARGUMENTOS
 
-* **`sort`** [*opcional*, *default*=**created\_at**]:
-  El atributo y el orden de clasificación. Por defecto, en orden ascendente, `-<attribute>` sorts in descending order. Can also sort on relationship attributes `role.name`, `saml_assertion_attribute.attribute_key`, `saml_assertion_attribute.attribute_value`.
-* **`page[number]`** [*opcional*, *default*=**0**, *minimum*=**0**]:
-  La página de resultados que devolverá.
-* **`page[size]`** [*opcional*, *default*=**10**]:
-  El número de resultados que devolverá por página.
-* **`filter`** [*opcional*, default=none]:
-  Filtrar por etiquetas (tags) en forma de cadenas. Por ejemplo, `Billing Users`.
+* **`sort`** [*opcional*, *predeterminado*=**creado\_en**]
+  Atributo de ordenamiento y dirección—por defecto es orden ascendente, `-<attribute>` ordena en orden descendente. También se puede ordenar por atributos de relación `role.name`, `saml_assertion_attribute.attribute_key`, `saml_assertion_attribute.attribute_value`.
+* **`page[number]`** [*opcional*, *predeterminado*=**0**, *mínimo*=**0**]
+  La página de resultados a devolver.
+* **`page[size]`** [*opcional*, *predeterminado*=**10**]
+  El número de resultados a devolver en cada página.
+* **`filter`** [*opcional*, predeterminado=ninguno]
+  Filtrar por etiquetas como cadenas. Por ejemplo, `Billing Users`.
 
 {{< tabs >}}
 {{% tab "Ejemplo" %}}
@@ -171,8 +170,8 @@ curl -X GET "https://api.<YOUR_DD_SITE>/api/v2/authn_mappings" \
      -H "DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>"
 ```
 
-- Reemplaza `<YOUR_DATADOG_API_KEY>` y `<YOUR_DATADOG_APPLICATION_KEY>` por las correspondientes [claves de API y aplicación][1] de tu organización.
-- Reemplaza `<YOUR_DD_SITE>` por {{< region-param key="dd_site" code="true" >}}
+- Reemplace `<YOUR_DATADOG_API_KEY>` y `<YOUR_DATADOG_APPLICATION_KEY>` con las correspondientes [claves de API y aplicación][1] para su organización.
+- Reemplace `<YOUR_DD_SITE>` con {{< region-param key="dd_site" code="true" >}}
 
 [1]: https://api.datadoghq.com/account/settings#api
 {{% /tab %}}
@@ -248,18 +247,18 @@ curl -X GET "https://api.<YOUR_DD_SITE>/api/v2/authn_mappings" \
 {{% /tab %}}
 {{< /tabs >}}
 
-### Consultar una asignación de autenticación específica
+### Obtenga un mapeo específico de AuthN
 
-Devuelve una asignación de autenticación a través de su UUID.
+Devuelve un mapeo de AuthN específico por UUID.
 
-| Método | Ruta del endpoint            | Carga útil obligatoria |
+| Método | Ruta del endpoint | Carga útil requerida |
 |--------|--------------------------|------------------|
-| `GET`  | `/authn_mappings/{authn_mapping_id}` | Parámetros de URL    |
+| `GET`  | `/authn_mappings/{authn_mapping_id}` | Parámetro de URL |
 
 ##### ARGUMENTOS
 
-* **`{authn_mapping_id}`** [*obligatorio*, sin default]:
-  Reemplaza `{authn_mapping_id}` por el ID de la asignación de autenticación que deseas ver.
+* **`{authn_mapping_id}`** [*requerido*, sin valor por defecto]:
+  Reemplace `{authn_mapping_id}` con el ID del mapeo de AuthN que desea ver.
 
 {{< tabs >}}
 {{% tab "Ejemplo" %}}
@@ -270,8 +269,8 @@ curl -X GET "https://api.<YOUR_DD_SITE>/api/v2/authn_mappings/{authn_mapping_id}
      -H "DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>"
 ```
 
-- Reemplaza `<YOUR_DATADOG_API_KEY>` y `<YOUR_DATADOG_APPLICATION_KEY>` por las correspondientes [claves de API y aplicación][1] de tu organización.
-- Reemplaza `<YOUR_DD_SITE>` por {{< region-param key="dd_site" code="true" >}}
+- Reemplace `<YOUR_DATADOG_API_KEY>` y `<YOUR_DATADOG_APPLICATION_KEY>` con las correspondientes [claves de API y aplicación][1] para su organización.
+- Reemplace `<YOUR_DD_SITE>` con {{< region-param key="dd_site" code="true" >}}
 
 [1]: https://api.datadoghq.com/account/settings#api
 {{% /tab %}}
@@ -344,25 +343,25 @@ curl -X GET "https://api.<YOUR_DD_SITE>/api/v2/authn_mappings/{authn_mapping_id}
 {{% /tab %}}
 {{< /tabs >}}
 
-### Actualizar una asignación
+### Actualizar mapeo
 
-Actualiza el `role` de la asignación de autenticación, el `saml_assertion_attribute_id` o ambos a partir de un cuerpo JSON. Devuelve la asignación de autenticación actualizada.
+Actualiza el mapeo de AuthN `role`, `saml_assertion_attribute_id` o ambos desde un cuerpo JSON. Devuelve el mapeo de AuthN actualizado.
 
-| Método  | Ruta del endpoint                           | Carga útil obligatoria    |
+| Método | Ruta del endpoint | Carga útil requerida |
 |---------|-----------------------------------------|---------------------|
 | `PATCH` | `/v2/authn_mappings/{authn_mapping_id}` | Parámetro de URL, JSON |
 
 ##### ARGUMENTOS
 
-* **`{authn_mapping_id}`** [*obligatorio*, sin default]:
-  Reemplaza `{authn_mapping_id}` por el ID de la asignación de autenticación que deseas actualizar. Este valor es necesario tanto en la ruta de la solicitud como en el cuerpo de la misma.
-* **`role["data"]["id"]`** [*opcional*, *default*=none]:
- El `ID` del rol que se va a utilizar para asignar. La API de roles se puede utilizar para crear y gestionar roles de Datadog, así como para definir los permisos generales que se conceden y los usuarios asociados a cada rol.
- **Nota**: Este atributo debe presentarse en las solicitudes como parte de un bloque de relación de `role`. Para obtener más información, consulta el siguiente ejemplo. Cuando se crea un rol, se le asigna un ID. Para obtener más información sobre cómo encontrar el `ID` del rol que quieres asignar, consulta la [documentación sobre la API de roles][2].
-* **`attributes["attribute_key"]`** [*opcional*, *default*=none]:
- La `attribute_key` es la clave de un par clave/valor que representa un atributo que envía tu proveedor de identidades. Puedes definir estos pares en función de tus necesidades. Por ejemplo, la `attribute_key` se podría definir como `member-of` y el `attribute_value` podría ser `Development`.
-* **`attributes["attribute_value"]`** [*opcional*, *default*=none]:
- El `attribute_value` es el valor de un par clave/valor que representa un atributo que envía tu proveedor de identidades. Puedes definir estos pares en función de tus necesidades. Por ejemplo, la `attribute_key` se podría definir como `member-of` y el `attribute_value` podría ser `Development`.
+* **`{authn_mapping_id}`** [*requerido*, sin valor predeterminado]:
+  Reemplace `{authn_mapping_id}` con el ID del mapeo de AuthN que desea actualizar. Esto es requerido tanto en la ruta de la solicitud como en el cuerpo de la solicitud.
+* **`role["data"]["id"]`** [*opcional*, *predeterminado*=ninguno]:
+ El `ID` del rol al que se asignará. La API de Roles se puede utilizar para crear y gestionar roles de Datadog, qué permisos globales otorgan y qué usuarios pertenecen a ellos.
+ **Nota**: Este atributo debe presentarse como parte de un bloque de relación `role` en las solicitudes. Vea el ejemplo a continuación para más detalles. Cuando crea un rol, se le asigna un ID. Para más información sobre cómo encontrar el `ID` para el rol al que desea asignarse, consulte la [documentación de la API de Roles][2].
+* **`attributes["attribute_key"]`** [*opcional*, *predeterminado*=ninguno]:
+ El `attribute_key` es la parte clave de un par clave/valor que representa un atributo enviado desde su Proveedor de Identidad. Puede definir estos para su propio caso de uso. Por ejemplo, `attribute_key` podría ser `member-of` y el `attribute_value` podría ser `Development`.
+* **`attributes["attribute_value"]`** [*opcional*, *predeterminado*=ninguno]:
+ El `attribute_value` es la parte de valor de un par clave/valor que representa un atributo enviado desde su Proveedor de Identidad. Puede definir estos para su propio caso de uso. Por ejemplo, `attribute_key` podría ser `member-of` y el `attribute_value` podría ser `Development`.
 
 {{< tabs >}}
 {{% tab "Ejemplo" %}}
@@ -393,8 +392,8 @@ curl -X PATCH \
         }'
 ```
 
-- Reemplaza `<YOUR_DATADOG_API_KEY>` y `<YOUR_DATADOG_APPLICATION_KEY>` por las correspondientes [claves de API y aplicación][1] de tu organización.
-- Reemplaza `<YOUR_DD_SITE>` por {{< region-param key="dd_site" code="true" >}}
+- Reemplace `<YOUR_DATADOG_API_KEY>` y `<YOUR_DATADOG_APPLICATION_KEY>` con las correspondientes [claves de API y aplicación][1] para su organización.
+- Reemplace `<YOUR_DD_SITE>` con {{< region-param key="dd_site" code="true" >}}
 
 [1]: https://api.datadoghq.com/account/settings#api
 {{% /tab %}}
@@ -464,18 +463,18 @@ curl -X PATCH \
 {{% /tab %}}
 {{< /tabs >}}
 
-### Eliminar una asignación
+### Eliminar mapeo
 
-Elimina una asignación de autenticación específica.
+Elimina un mapeo de AuthN específico.
 
-| Método   | Ruta del endpoint                           | Carga útil obligatoria |
+| Método   | Ruta del endpoint                           | Carga útil requerida |
 |----------|-----------------------------------------|------------------|
-| `DELETE` | `/v2/authn_mappings/{authn_mapping_id}` | Parámetros de URL    |
+| `DELETE` | `/v2/authn_mappings/{authn_mapping_id}` | Parámetro de URL |
 
 ##### ARGUMENTOS
 
-* **`{authn_mapping_id}`** [*obligatorio*, sin default]:
-  Reemplaza `{authn_mapping_id}` por el ID de la asignación de autenticación que deseas eliminar.
+* **`{authn_mapping_id}`** [*requerido*, sin valor por defecto]:
+  Reemplace `{authn_mapping_id}` con el ID del mapeo de AuthN que desea eliminar.
 
 {{< tabs >}}
 {{% tab "Ejemplo" %}}
@@ -487,8 +486,8 @@ curl -X DELETE "https://api.<YOUR_DD_SITE>/api/v2/authn_mappings/{UUID}" \
          -H "DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>"
 ```
 
-- Reemplaza `<YOUR_DATADOG_API_KEY>` y `<YOUR_DATADOG_APPLICATION_KEY>` por las correspondientes [claves de API y aplicación][1] de tu organización.
-- Reemplaza `<YOUR_DD_SITE>` por {{< region-param key="dd_site" code="true" >}}
+- Reemplace `<YOUR_DATADOG_API_KEY>` y `<YOUR_DATADOG_APPLICATION_KEY>` con las correspondientes [claves de API y aplicación][1] para su organización.
+- Reemplace `<YOUR_DD_SITE>` con {{< region-param key="dd_site" code="true" >}}
 
 [1]: https://api.datadoghq.com/account/settings#api
 {{% /tab %}}
@@ -501,11 +500,11 @@ HTTP/2 204
 {{% /tab %}}
 {{< /tabs >}}
 
-### Consultar el indicador de activación de la asignación de autenticación
+### Obtener habilitación de mapeo de AuthN
 
-Comprueba si las asignaciones de autenticación están activadas o desactivadas.
+Verifique si los mapeos de AuthN están habilitados o deshabilitados.
 
-| Método   | Ruta del endpoint              | Carga útil obligatoria |
+| Método   | Ruta del endpoint              | Carga útil requerida |
 |----------|----------------------------|------------------|
 | `GET`    | `/v1/org_preferences`      | Ninguno             |
 
@@ -520,8 +519,8 @@ curl -X GET \
          -H "DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>" \
 ```
 
-- Reemplaza `<YOUR_DATADOG_API_KEY>` y `<YOUR_DATADOG_APPLICATION_KEY>` por las correspondientes [claves de API y aplicación][1] de tu organización.
-- Reemplaza `<YOUR_DD_SITE>` por {{< region-param key="dd_site" code="true" >}}
+- Reemplace `<YOUR_DATADOG_API_KEY>` y `<YOUR_DATADOG_APPLICATION_KEY>` con las correspondientes [claves de API y aplicación][1] para su organización.
+- Reemplace `<YOUR_DD_SITE>` con {{< region-param key="dd_site" code="true" >}}
 
 [1]: https://api.datadoghq.com/account/settings#api
 {{% /tab %}}
@@ -543,24 +542,24 @@ curl -X GET \
 {{% /tab %}}
 {{< /tabs >}}
 
-### Activar o desactivar las asignaciones
+### Habilitar o deshabilitar todos los mapeos
 
 <div class="alert alert-danger">
-Cuando se habilitan las asignaciones, todos los usuarios que inician sesión con SAML son despojados de sus roles y se les reasignan roles basados en los valores de su aserción SAML. Es importante confirmar que estás recibiendo las aserciones SAML esperadas en tu inicio de sesión antes de habilitar la aplicación de las asignaciones.
+Cuando los mapeos están habilitados, todos los usuarios que inician sesión con SAML son despojados de sus roles y se les reasignan roles basados en los valores en su aserción SAML. Es importante confirmar que está recibiendo las aserciones SAML esperadas en su inicio de sesión antes de habilitar la aplicación de mapeo.
 </div>
 
-Activa/desactiva la aplicación de todas las asignaciones de autenticación.
+Habilita/deshabilita la aplicación de todos los mapeos de AuthN.
 
-| Método   | Ruta del endpoint               | Carga útil obligatoria |
+| Método   | Ruta del endpoint               | Carga útil requerida |
 |----------|-----------------------------|------------------|
 | `POST`   | `/v1/org_preferences`       | JSON             |
 
 ##### ARGUMENTOS
 
-* **`{preference_type}`** [*obligatorio*, sin default]:
-  Preferencia a actualizar, debe ser "saml_authn_mapping_roles"
-* **`{preference_data}`** [*obligatorio*, sin default]:
-  Datos con los que actualizar la preferencia. Debe ser verdadero o falso: verdadero para activar todas las asignaciones, falso para desactivarlas.
+* **`{preference_type}`** [*requerido*, sin valor predeterminado]:
+  Preferencia para actualizar, requerido que sea "saml_authn_mapping_roles"
+* **`{preference_data}`** [*requerido*, sin valor predeterminado]:
+  Datos para actualizar la preferencia, debe ser verdadero o falso: verdadero para habilitar todos los mapeos, falso para deshabilitar
 
 {{< tabs >}}
 {{% tab "Ejemplo" %}}
@@ -583,8 +582,8 @@ curl -X POST \
 `
 ```
 
-- Reemplaza `<YOUR_DATADOG_API_KEY>` y `<YOUR_DATADOG_APPLICATION_KEY>` por las correspondientes [claves de API y aplicación][1] de tu organización.
-- Reemplaza `<YOUR_DD_SITE>` por {{< region-param key="dd_site" code="true" >}}
+- Reemplace `<YOUR_DATADOG_API_KEY>` y `<YOUR_DATADOG_APPLICATION_KEY>` con las correspondientes [claves de API y aplicación][1] para su organización.
+- Reemplace `<YOUR_DD_SITE>` con {{< region-param key="dd_site" code="true" >}}
 
 [1]: https://api.datadoghq.com/account/settings#api
 {{% /tab %}}
@@ -606,7 +605,7 @@ curl -X POST \
 {{% /tab %}}
 {{< /tabs >}}
 
-## Referencias adicionales
+## Lectura Adicional
 
 {{< partial name="whats-next/whats-next.html" >}}
 
