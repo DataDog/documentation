@@ -20170,6 +20170,238 @@ components:
         data:
           $ref: "#/components/schemas/ListDeploymentRuleResponseData"
       type: object
+    DeploymentGatesEvaluationRequest:
+      description: Request body for triggering a deployment gate evaluation.
+      properties:
+        data:
+          $ref: "#/components/schemas/DeploymentGatesEvaluationRequestData"
+      required:
+        - data
+      type: object
+    DeploymentGatesEvaluationRequestAttributes:
+      description: Attributes for a deployment gate evaluation request.
+      properties:
+        env:
+          description: The environment of the deployment.
+          example: "staging"
+          type: string
+        identifier:
+          default: default
+          description: The identifier of the deployment gate. Defaults to "default".
+          example: "pre-deploy"
+          type: string
+        primary_tag:
+          description: A primary tag to scope APM Faulty Deployment Detection rules.
+          example: "region:us-east-1"
+          type: string
+        service:
+          description: The service being deployed.
+          example: "transaction-backend"
+          type: string
+        version:
+          description: The version of the deployment. Required for APM Faulty Deployment Detection rules.
+          example: "v1.2.3"
+          type: string
+      required:
+        - env
+        - service
+      type: object
+    DeploymentGatesEvaluationRequestData:
+      description: Data for a deployment gate evaluation request.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/DeploymentGatesEvaluationRequestAttributes"
+        type:
+          $ref: "#/components/schemas/DeploymentGatesEvaluationRequestDataType"
+      required:
+        - type
+        - attributes
+      type: object
+    DeploymentGatesEvaluationRequestDataType:
+      default: deployment_gates_evaluation_request
+      description: JSON:API type for a deployment gate evaluation request.
+      enum:
+        - deployment_gates_evaluation_request
+      example: deployment_gates_evaluation_request
+      type: string
+      x-enum-varnames:
+        - DEPLOYMENT_GATES_EVALUATION_REQUEST
+    DeploymentGatesEvaluationResponse:
+      description: Response for a deployment gate evaluation request.
+      properties:
+        data:
+          $ref: "#/components/schemas/DeploymentGatesEvaluationResponseData"
+      type: object
+    DeploymentGatesEvaluationResponseAttributes:
+      description: Attributes for a deployment gate evaluation response.
+      properties:
+        evaluation_id:
+          description: The unique identifier of the gate evaluation.
+          example: "e9d2f04f-4f4b-494b-86e5-52f03e10c8e9"
+          type: string
+      required:
+        - evaluation_id
+      type: object
+    DeploymentGatesEvaluationResponseData:
+      description: Data for a deployment gate evaluation response.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/DeploymentGatesEvaluationResponseAttributes"
+        id:
+          description: The unique identifier of the evaluation response.
+          example: "e9d2f04f-4f4b-494b-86e5-52f03e10c8e9"
+          format: uuid
+          type: string
+        type:
+          $ref: "#/components/schemas/DeploymentGatesEvaluationResponseDataType"
+      required:
+        - type
+        - attributes
+        - id
+      type: object
+    DeploymentGatesEvaluationResponseDataType:
+      default: deployment_gates_evaluation_response
+      description: JSON:API type for a deployment gate evaluation response.
+      enum:
+        - deployment_gates_evaluation_response
+      example: deployment_gates_evaluation_response
+      type: string
+      x-enum-varnames:
+        - DEPLOYMENT_GATES_EVALUATION_RESPONSE
+    DeploymentGatesEvaluationResultResponse:
+      description: Response containing the result of a deployment gate evaluation.
+      properties:
+        data:
+          $ref: "#/components/schemas/DeploymentGatesEvaluationResultResponseData"
+      type: object
+    DeploymentGatesEvaluationResultResponseAttributes:
+      description: Attributes for a deployment gate evaluation result response.
+      properties:
+        dry_run:
+          description: Whether the gate was evaluated in dry-run mode.
+          example: false
+          type: boolean
+        evaluation_id:
+          description: The unique identifier of the gate evaluation.
+          example: "e9d2f04f-4f4b-494b-86e5-52f03e10c8e9"
+          type: string
+        evaluation_url:
+          description: A URL to view the evaluation details in the Datadog UI.
+          example: "https://app.datadoghq.com/ci/deployment-gates/evaluations?index=cdgates&query=level%3Agate+%40evaluation_id%3Ae9d2f04f-4f4b-494b-86e5-52f03e10c8e9"
+          type: string
+        gate_id:
+          description: The unique identifier of the deployment gate.
+          example: "e140302e-0cba-40d2-978c-6780647f8f1c"
+          format: uuid
+          type: string
+        gate_status:
+          $ref: "#/components/schemas/DeploymentGatesEvaluationResultResponseAttributesGateStatus"
+        rules:
+          description: The results of individual rule evaluations.
+          items:
+            $ref: "#/components/schemas/DeploymentGatesRuleResponse"
+          type: array
+      required:
+        - dry_run
+        - evaluation_id
+        - evaluation_url
+        - gate_id
+        - gate_status
+        - rules
+      type: object
+    DeploymentGatesEvaluationResultResponseAttributesGateStatus:
+      description: |-
+        The overall status of the gate evaluation.
+        - `in_progress`: The evaluation is still running.
+        - `pass`: All rules passed successfully and the deployment is allowed to proceed.
+        - `fail`: One or more rules did not pass; the deployment should not proceed.
+      enum:
+        - in_progress
+        - pass
+        - fail
+      example: "pass"
+      type: string
+      x-enum-varnames:
+        - IN_PROGRESS
+        - PASS
+        - FAIL
+    DeploymentGatesEvaluationResultResponseData:
+      description: Data for a deployment gate evaluation result response.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/DeploymentGatesEvaluationResultResponseAttributes"
+        id:
+          description: The unique identifier of the evaluation.
+          example: "e9d2f04f-4f4b-494b-86e5-52f03e10c8e9"
+          type: string
+        type:
+          $ref: "#/components/schemas/DeploymentGatesEvaluationResultResponseDataType"
+      required:
+        - type
+        - attributes
+        - id
+      type: object
+    DeploymentGatesEvaluationResultResponseDataType:
+      default: deployment_gates_evaluation_result_response
+      description: JSON:API type for a deployment gate evaluation result response.
+      enum:
+        - deployment_gates_evaluation_result_response
+      example: deployment_gates_evaluation_result_response
+      type: string
+      x-enum-varnames:
+        - DEPLOYMENT_GATES_EVALUATION_RESULT_RESPONSE
+    DeploymentGatesListResponse:
+      description: Response containing a paginated list of deployment gates.
+      properties:
+        data:
+          description: Array of deployment gates.
+          items:
+            $ref: "#/components/schemas/DeploymentGateResponseData"
+          type: array
+        meta:
+          $ref: "#/components/schemas/DeploymentGatesListResponseMeta"
+      type: object
+    DeploymentGatesListResponseMeta:
+      description: Metadata for a list of deployment gates response.
+      properties:
+        page:
+          $ref: "#/components/schemas/DeploymentGatesListResponseMetaPage"
+      type: object
+    DeploymentGatesListResponseMetaPage:
+      description: Pagination information for a list of deployment gates.
+      properties:
+        cursor:
+          description: The cursor used for the current page.
+          type: string
+        next_cursor:
+          description: The cursor to use to fetch the next page. This is absent when there are no more pages.
+          type: string
+        size:
+          default: 50
+          description: The number of results per page.
+          format: int64
+          maximum: 1000
+          minimum: 1
+          type: integer
+      type: object
+    DeploymentGatesRuleResponse:
+      description: The result of a single rule evaluation.
+      properties:
+        dry_run:
+          description: Whether this rule was evaluated in dry-run mode.
+          example: false
+          type: boolean
+        name:
+          description: The name of the rule.
+          example: "Check service monitors"
+          type: string
+        reason:
+          description: The reason for the rule result, if applicable.
+          example: "One or more monitors in ALERT state"
+          type: string
+        status:
+          $ref: "#/components/schemas/DeploymentGatesEvaluationResultResponseAttributesGateStatus"
+      type: object
     DeploymentMetadata:
       description: Metadata object containing the publication creation information.
       properties:
@@ -79610,6 +79842,62 @@ paths:
         **Note: Data Access is in preview. If you have any feedback,
         contact [Datadog support](https://docs.datadoghq.com/help/).**
   /api/v2/deployment_gates:
+    get:
+      description: |-
+        Returns a paginated list of all deployment gates for the organization.
+        Use `page[cursor]` and `page[size]` query parameters to paginate through results.
+      operationId: ListDeploymentGates
+      parameters:
+        - description: Cursor for pagination. Use the `meta.page.next_cursor` value from the previous response.
+          in: query
+          name: page[cursor]
+          required: false
+          schema:
+            type: string
+        - description: Number of results per page. Defaults to 50. Must be between 1 and 1000.
+          in: query
+          name: page[size]
+          required: false
+          schema:
+            default: 50
+            format: int64
+            maximum: 1000
+            minimum: 1
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeploymentGatesListResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/HTTPCDGatesBadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HTTPCIAppErrors"
+          description: Internal Server Error
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Get all deployment gates
+      tags: ["Deployment Gates"]
+      x-menu-order: 10
+      x-permission:
+        operator: OR
+        permissions:
+          - deployment_gates_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and may be subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     post:
       description: |-
         Endpoint to create a deployment gate.
@@ -80054,6 +80342,108 @@ paths:
         operator: OR
         permissions:
           - deployment_gates_write
+      x-unstable: |-
+        **Note**: This endpoint is in preview and may be subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/deployments/gates/evaluation:
+    post:
+      description: |-
+        Triggers an asynchronous deployment gate evaluation for the given service and environment.
+        Returns an evaluation ID that can be used to poll for the result via the
+        `GET /api/v2/deployments/gates/evaluation/{id}` endpoint.
+      operationId: TriggerDeploymentGatesEvaluation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DeploymentGatesEvaluationRequest"
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeploymentGatesEvaluationResponse"
+          description: Accepted
+        "400":
+          $ref: "#/components/responses/HTTPCDGatesBadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/HTTPCDGatesNotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HTTPCIAppErrors"
+          description: Internal Server Error
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Trigger a deployment gate evaluation
+      tags: ["Deployment Gates"]
+      x-menu-order: 11
+      x-permission:
+        operator: OR
+        permissions:
+          - deployment_gates_evaluate
+      x-unstable: |-
+        **Note**: This endpoint is in preview and may be subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/deployments/gates/evaluation/{id}:
+    get:
+      description: |-
+        Retrieves the result of a deployment gate evaluation by its evaluation ID.
+        If the evaluation is still in progress, `data.attributes.gate_status` will be `in_progress`;
+        continue polling until it returns `pass` or `fail`.
+        Polling every 10-20 seconds is recommended.
+        The endpoint may return a 404 if called too soon after triggering; retry after a few seconds.
+      operationId: GetDeploymentGatesEvaluationResult
+      parameters:
+        - description: The evaluation ID returned by the trigger endpoint.
+          in: path
+          name: id
+          required: true
+          schema:
+            format: uuid
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeploymentGatesEvaluationResultResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/HTTPCDGatesBadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/HTTPCDGatesNotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HTTPCIAppErrors"
+          description: Internal Server Error
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Get a deployment gate evaluation result
+      tags: ["Deployment Gates"]
+      x-menu-order: 12
+      x-permission:
+        operator: OR
+        permissions:
+          - deployment_gates_evaluate
       x-unstable: |-
         **Note**: This endpoint is in preview and may be subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).

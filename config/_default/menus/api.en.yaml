@@ -8232,6 +8232,32 @@ menu:
       url: /api/latest/deployment-gates/
       identifier: deployment-gates
       generated: true
+    - name: Get a deployment gate evaluation result
+      url: '#get-a-deployment-gate-evaluation-result'
+      identifier: deployment-gates-get-a-deployment-gate-evaluation-result
+      parent: deployment-gates
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetDeploymentGatesEvaluationResult
+        unstable:
+          - v2
+        order: 12
+    - name: Trigger a deployment gate evaluation
+      url: '#trigger-a-deployment-gate-evaluation'
+      identifier: deployment-gates-trigger-a-deployment-gate-evaluation
+      parent: deployment-gates
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - TriggerDeploymentGatesEvaluation
+        unstable:
+          - v2
+        order: 11
     - name: Update deployment gate
       url: '#update-deployment-gate'
       identifier: deployment-gates-update-deployment-gate
@@ -8349,6 +8375,19 @@ menu:
         unstable:
           - v2
         order: 1
+    - name: Get all deployment gates
+      url: '#get-all-deployment-gates'
+      identifier: deployment-gates-get-all-deployment-gates
+      parent: deployment-gates
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListDeploymentGates
+        unstable:
+          - v2
+        order: 10
     - name: Domain Allowlist
       url: /api/latest/domain-allowlist/
       identifier: domain-allowlist
