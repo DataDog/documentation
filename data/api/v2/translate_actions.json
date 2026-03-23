@@ -1054,6 +1054,10 @@
     "request_description": "Dataset payload",
     "request_schema_description": "Edit request for a dataset."
   },
+  "ListDeploymentGates": {
+    "description": "Returns a paginated list of all deployment gates for the organization.\nUse `page[cursor]` and `page[size]` query parameters to paginate through results.",
+    "summary": "Get all deployment gates"
+  },
   "CreateDeploymentGate": {
     "description": "Endpoint to create a deployment gate.",
     "summary": "Create deployment gate",
@@ -1097,6 +1101,16 @@
     "summary": "Update deployment gate",
     "request_description": "",
     "request_schema_description": "Parameters for updating a deployment gate."
+  },
+  "TriggerDeploymentGatesEvaluation": {
+    "description": "Triggers an asynchronous deployment gate evaluation for the given service and environment.\nReturns an evaluation ID that can be used to poll for the result via the\n`GET /api/v2/deployments/gates/evaluation/{id}` endpoint.",
+    "summary": "Trigger a deployment gate evaluation",
+    "request_description": "",
+    "request_schema_description": "Request body for triggering a deployment gate evaluation."
+  },
+  "GetDeploymentGatesEvaluationResult": {
+    "description": "Retrieves the result of a deployment gate evaluation by its evaluation ID.\nIf the evaluation is still in progress, `data.attributes.gate_status` will be `in_progress`;\ncontinue polling until it returns `pass` or `fail`.\nPolling every 10-20 seconds is recommended.\nThe endpoint may return a 404 if called too soon after triggering; retry after a few seconds.",
+    "summary": "Get a deployment gate evaluation result"
   },
   "GetDomainAllowlist": {
     "description": "Get the domain allowlist for an organization.",
