@@ -387,7 +387,7 @@ Replace `<AGENT_NAMESPACE>` with the namespace where the Datadog Agent is deploy
 
 As an additional layer of defense, you can enable JMX authentication so that the Agent must provide credentials to connect. The Datadog Agent JMX check supports `user` and `password` parameters.
 
-#### 1. Create a Kubernetes Secret with JMX credentials
+#### Step 1 - Create a Kubernetes Secret with JMX credentials
 
 Create a JMX password file and access file, then store them in a Kubernetes Secret:
 
