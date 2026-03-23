@@ -131,7 +131,7 @@ To return to Bill Overview, click **Enable Preview** in the header.
 | Usage Attribution | `USAGE_READ` + Enterprise or Pro plan |
 | Sub-org cost trends | Parent org must have `suborg_cost_trends` enabled |
 
-For information on managing permissions, see [Role Based Access Control][rbac].
+For information on managing permissions, see [Role Based Access Control][3].
 
 ## Further reading
 
