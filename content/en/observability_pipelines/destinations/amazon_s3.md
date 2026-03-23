@@ -35,16 +35,12 @@ You can also [route logs to Snowflake using the Amazon S3 destination](#route-lo
         "Version": "2012-10-17",
         "Statement": [
             {
-                "Sid": "DatadogUploadAndRehydrateLogArchives",
+                "Sid": "DatadogOPUpload",
                 "Effect": "Allow",
-                "Action": ["s3:PutObject", "s3:GetObject"],
+                "Action": [
+                    "s3:PutObject"
+                ],
                 "Resource": "arn:aws:s3:::<MY_BUCKET_NAME_1_/_MY_OPTIONAL_BUCKET_PATH_1>/*"
-            },
-            {
-                "Sid": "DatadogRehydrateLogArchivesListBucket",
-                "Effect": "Allow",
-                "Action": "s3:ListBucket",
-                "Resource": "arn:aws:s3:::<MY_BUCKET_NAME>"
             }
         ]
     }
@@ -98,6 +94,8 @@ Set up the Amazon S3 destination and its environment variables when you create a
 
 ### Optional settings
 
+#### Batching
+
 1. Enter a maximum batching size and select the unit (**MB** or **GB**) in the dropdown menu. If not configured, the default is `100` MB.
 1. Enter a batching timeout in seconds. If not configured, the default is `900` seconds.
 
@@ -108,7 +106,7 @@ Select an AWS authentication option. If you are only using the [user or role you
     - **Note:** The [user or role you created earlier](#set-up-an-iam-policy-that-allows-workers-to-write-to-the-s3-bucket) must have permission to assume this role so that the Worker can authenticate with AWS.
 1. (Optional) Enter the assumed role session name and external ID.
 
-#### Buffering options
+#### Buffering
 
 {{% observability_pipelines/destination_buffer %}}
 
