@@ -327,7 +327,7 @@ layouts/shortcodes/mdoc/en/**/*.ast.json
 static/llms.txt
 
 # Playwright
-e2e/test-results/
+test-results/
 playwright-report/
 
 # AI
