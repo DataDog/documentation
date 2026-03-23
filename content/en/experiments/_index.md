@@ -21,11 +21,16 @@ Datadog Experiments helps teams run and analyze randomized experiments, such as 
 Datadog Experiments consists of two components:
 
 - An integration with [Datadog Feature Flags][1] for deploying and managing randomized experiments.
-- A statistical analysis of metrics based on [Product Analytics][2] data to evaluate experiment results.
+- A statistical analysis of [Real User Monitoring (RUM)][2] and [Product Analytics][3] data to evaluate experiment results.
 
 ## Getting started
 
-To start using Datadog Experiments, set up [Product Analytics][2]. Then, follow these steps to launch your experiment:
+To start using Datadog Experiments, configure at least one of the following data sources:
+
+- [Real User Monitoring (RUM)][2] for client-side and performance signals.
+- [Product Analytics][3] for user behavior and journey metrics.
+
+After configuring a data source, follow these steps to launch your experiment:
 
 1. **[Create a metric][4]** to evaluate your experiment.
 1. **[Create an experiment][5]** to define your hypothesis and optionally calculate a [sample size][8].
@@ -34,16 +39,15 @@ To start using Datadog Experiments, set up [Product Analytics][2]. Then, follow 
 
 {{< img src="/product_analytics/experiment/overview_metrics_view-1.png" alt="The Experiments metrics view showing business, funnel, and performance metrics with control and variant values and relative lift for each metric. A tooltip is open on the Revenue metric showing Non-CUPED values for Revenue per User, Total Revenue, and User Assignment Count across the control and variant groups." style="width:90%;" >}}
 
-
 ## Further reading
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /feature_flags/
-[2]: /product_analytics/#getting-started
+[2]: /real_user_monitoring/
+[3]: /product_analytics/#getting-started
 [4]: /experiments/defining_metrics
 [5]: /experiments/plan_and_launch_experiments
 [6]: /getting_started/feature_flags/#create-your-first-feature-flag
 [7]: /experiments/plan_and_launch_experiments#step-3---launch-your-experiment
 [8]: /experiments/plan_and_launch_experiments#add-a-sample-size-calculation-optional
 [9]: /getting_started/feature_flags/#feature-flags-sdks
-
