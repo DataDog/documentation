@@ -137,5 +137,6 @@ For information on managing permissions, see [Role Based Access Control][3].
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[app-bill-overview]: https://app.datadoghq.com/billing/bill-overview
-[rbac]: /account_management/rbac/
+[1]: https://app.datadoghq.com/billing/bill-overview
+[2]: /account_management/plan_and_usage/bill_overview/#product-detail-page
+[3]: /account_management/rbac/
