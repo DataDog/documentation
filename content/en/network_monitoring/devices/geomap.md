@@ -7,7 +7,7 @@ code_lang_weight: 1
 further_reading:
 - link: "https://www.datadoghq.com/blog/visualize-network-device-topology/"
   tag: "Blog"
-  text: "Visualize relationships across your on-premise network with the Device Topology Map"
+  text: "Visualize relationships across your on-premises network with the Device Topology Map"
 - link: "/network_monitoring/devices/data"
   tag: "Documentation"
   text: "Data Collected with Network Device Monitoring"

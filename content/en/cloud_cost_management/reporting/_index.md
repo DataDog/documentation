@@ -11,6 +11,9 @@ further_reading:
 - link: "/cloud_cost_management/reporting/explorer"
   tag: "Documentation"
   text: "Cost Explorer"
+- link: "/cloud_cost_management/reporting/dashboards"
+  tag: "Documentation"
+  text: "Dashboards"
 - link: "/cloud_cost_management/"
   tag: "Documentation"
   text: "Learn about Cloud Cost Management"
@@ -50,6 +53,7 @@ Use **[Cost Explorer][13]** for flexible investigation and **Cost Reports** for 
    - **AWS Spend by Service Name**: Understand your EC2, S3, and Lambda costs.
    - **Azure Spend by Service Name**: Break down costs by Azure services like Virtual Machines and Azure Monitor.
    - **GCP Spend by Service Name**: Break down costs by GCP services like Compute Engine, BigQuery, and Kubernetes Engine.
+   - **Datadog Spend by Product**: Break down costs by Datadog products like Infrastructure Hosts, Custom Metrics, and Indexed Logs.
    - **Spend by Provider**: Compare costs across AWS, Azure, Google Cloud, Oracle Cloud, and more.
 
 ## Customizing your report
@@ -108,7 +112,7 @@ After you've created and customized your report, you can save and share it from 
 - **Save your report** to make it available for personal or team use.
 - **Share your report** by copying the URL or exporting it to CSV or PNG.
 - **Schedule reports** to be automatically sent to your team. [Learn more about scheduling reports][11].
-- **Export report views to Dashboards** to track costs alongside other widgets.
+- **Export report views to Dashboards** to track costs alongside other widgets. [Learn more about monitoring cost on dashboards][14].
 - **Search saved reports** to find what you need (available from main reports page only).
 
 ## Further reading
@@ -128,3 +132,4 @@ After you've created and customized your report, you can save and share it from 
 [11]: /cloud_cost_management/reporting/scheduled_reports
 [12]: /cloud_cost_management/oracle/
 [13]: /cloud_cost_management/reporting/explorer
+[14]: /cloud_cost_management/reporting/dashboards

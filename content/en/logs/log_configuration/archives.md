@@ -22,7 +22,7 @@ further_reading:
 
 ## Overview
 
-Configure your Datadog account to forward all the logs ingested—whether [indexed][1] or not—to a cloud storage system of your own. Keep your logs in a storage-optimized archive for longer periods of time and meet compliance requirements while also keeping auditability for ad-hoc investigations, with [Rehydration][2].
+Configure your Datadog account to forward all the logs ingested—whether [indexed][1] or not—to a cloud storage system of your own. Keep your logs in a storage-optimized archive for longer periods of time and meet compliance requirements while also keeping auditability for ad-hoc investigations, with [Rehydration][2] or [Archive Search][16].
 
 {{< img src="/logs/archives/log_forwarding_archives_122024.png" alt="Archives tab on the Log Forwarding page" style="width:100%;">}}
 
@@ -231,7 +231,20 @@ Use this optional configuration step to define the maximum volume of log data (i
 
 For Archives with a maximum scan size defined, all users need to estimate the scan size before they are allowed to start a Rehydration. If the estimated scan size is greater than what is permitted for that Archive, users must reduce the time range over which they are requesting the Rehydration. Reducing the time range will reduce the scan size and allow the user to start a Rehydration.
 
+#### Archive Search Lookup Attribute (Preview) {#archive-search-lookup-attribute}
+
+{{< callout url="https://www.datadoghq.com/product-preview/flex-frozen-archive-search/" btn_hidden="false" header="Join the Preview!" >}}
+Archive Search is in Preview. Request access to search archived logs in real time. No rehydrating, no delays. Instantly access years of data when you need it.
+{{< /callout >}}
+
+To accelerate searches and investigations in your archives (with [Archive Search][16]), configure lookup attributes in your Datadog Archive.
+
+* **Lookup Attributes**: Add high-cardinality attributes such as `trace_id`, `container_id`, or `customer_id`.
+* **Benefit**: This allows you to pinpoint specific logs within your long-term storage much faster, reducing the time and data scanned during ad-hoc investigations.
+
+
 {{< site-region region="us3" >}}
+
 #### Firewall rules
 
 {{< tabs >}}
@@ -294,11 +307,9 @@ Archiving and [Rehydration][1] supports the following access tiers:
 When creating or updating an S3 archive in Datadog, you can optionally configure **Advanced Encryption**. Three options are available under the **Encryption Type** dropdown:
 
 - **Default S3 Bucket-Level Encryption** (Default): Datadog does not override your S3 bucket's default encryption settings.
-- **Amazon S3 managed keys**: Forces server-side encryption using Amazon S3 managed keys ([SSE-S3][1]), regardless of the S3 bucket's default encryption.
-- **AWS Key Management Service**: Forces server-side encryption using a customer-managed key (CMK) from [AWS KMS][2], regardless of the S3 bucket's default encryption. You will need to provide the CMK ARN.
+- **Amazon S3 managed keys**: Forces server-side encryption using Amazon S3 managed keys ([SSE-S3][17]), regardless of the S3 bucket's default encryption.
+- **AWS Key Management Service**: Forces server-side encryption using a customer-managed key (CMK) from [AWS KMS][18], regardless of the S3 bucket's default encryption. You will need to provide the CMK ARN.
 
-[1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingServerSideEncryption.html
-[2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html
 {{< tabs >}}
 {{% tab "Default S3 Bucket-Level Encryption" %}}
 
@@ -382,6 +393,7 @@ Ensure that you have completed the following steps to create a valid CMK and CMK
 3. After selecting **AWS Key Management Service** as your **Encryption Type** in Datadog, input your AWS KMS key ARN.
 
 [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -439,3 +451,8 @@ This directory structure simplifies the process of querying your historical log 
 [13]: /account_management/rbac/permissions#logs_read_data
 [14]: /logs/explorer/live_tail/
 [15]: /events/explorer/
+[16]: /logs/log_configuration/archive_search/?tab=amazons3
+[17]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingServerSideEncryption.html
+[18]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html
+
+

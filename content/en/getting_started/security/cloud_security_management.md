@@ -38,7 +38,7 @@ With Cloud Security, Security and DevOps teams can act on the shared context of 
 
 1. Using [Agentless][34] and/or the [Datadog Agent (version 7.46 or above)][4], [enable Cloud Security for your cloud resources and infrastructure][5]:
     - **[Threats][3]**: Kubernetes, Docker, and host-based installations.
-    - **[Misconfigurations][2]**: AWS, Azure, GCP, Kubernetes, and Docker instructions.
+    - **[Misconfigurations][2]**: AWS, Azure, GCP, OCI, Kubernetes, and Docker instructions.
     - **[Identity Risks][28]**: Enable AWS resource collection and Cloudtrail logs forwarding.
     - **[Vulnerabilities][6]**: Container image scanning and host scanning instructions for AWS, Azure, Kubernetes, ECS EC2 instances, and host-based installations.
 1. Check out the [Cloud Security homepage][13] to get an overview of your organization's risks and threats.

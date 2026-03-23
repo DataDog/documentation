@@ -31,6 +31,8 @@ Custom LLM-as-a-judge evaluations use an LLM to judge the performance of another
 
 You can create and manage custom evaluations from the [Evaluations page][1] in LLM Observability. You can start from scratch or use and build on existing [template LLM-as-a-judge evaluations][7] we provide.
 
+<div class="alert alert-info">If you already have an <code>LLMJudge</code> defined in the SDK, you can publish it directly to Datadog without rebuilding the configuration in the UI. See <a href="/llm_observability/guide/evaluation_developer_guide/#publishing-an-llmjudge-as-a-datadog-managed-evaluation">Publishing an LLMJudge as a Datadog managed evaluation</a>.</div>
+
 Learn more about the [compatibility requirements][6].
 
 ### Configure the prompt
@@ -95,13 +97,13 @@ Span Input: {{span_input}}
 
 ### Define the evaluation output
 
-For OpenAI, Azure OpenAI, Vertex AI, or Anthropic models, configure [Structured Output](#structured-output).
+For OpenAI, Azure OpenAI, Vertex AI, Anthropic, or Amazon Bedrock models, configure [Structured Output](#structured-output).
 
-For Anthropic or Amazon Bedrock models, configure [Keyword Search Output](#keyword-search-output).
+For Anthropic or Amazon Bedrock models, you can alternatively configure [Keyword Search Output](#keyword-search-output).
 
 For AI Gateway, both [Structured Output](#structured-output) and [Keyword Search Output](#keyword-search-output) are supported. Datadog recommends using Structured Output when your model supports it, and falling back to Keyword Search Output otherwise.
 
-{{% collapse-content title="Structured Output (OpenAI, Azure OpenAI, Anthropic, AI Gateway, Vertex AI)" level="h4" expanded="true" id="structured-output" %}}
+{{% collapse-content title="Structured Output (OpenAI, Azure OpenAI, Anthropic, Amazon Bedrock, AI Gateway, Vertex AI)" level="h4" expanded="true" id="structured-output" %}}
 1. Select an evaluation output type:
 
    - **Boolean**: True/false results (for example, "Did the model follow instructions?")
@@ -251,7 +253,7 @@ Assessment Criteria is not currently available for JSON evaluations.
 
 {{% collapse-content title="Keyword Search Output (Anthropic, Amazon Bedrock, AI Gateway)" level="h4" expanded="true" id="keyword-search-output" %}}
 1. Select the **Boolean** output type.
-   <div class="alert alert-info">For Anthropic and Amazon Bedrock models, only the <strong>Boolean</strong> output type is available.</div>
+   <div class="alert alert-info">For Keyword Search Output, only the <strong>Boolean</strong> output type is available.</div>
 
 2. Provide **True keywords** and **False keywords** that define when the evaluation result is true or false, respectively.
 
@@ -323,6 +325,26 @@ You can:
 - View aggregate results in the LLM Observability Overview page's Evaluation section
 - Create [monitors][4] to alert on performance changes or regression
 
+## Using in experiments
+
+To reuse a custom LLM-as-a-judge evaluation in a local [LLM Experiment][8], reference it by name using `RemoteEvaluator` from the SDK:
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs import LLMObs, RemoteEvaluator
+
+evaluator = RemoteEvaluator(eval_name="quality-assessment")
+
+experiment = LLMObs.experiment(
+    name="my-experiment",
+    task=my_task,
+    dataset=dataset,
+    evaluators=[evaluator],
+)
+experiment.run()
+{{< /code-block >}}
+
+You can mix `RemoteEvaluator` with other local evaluators in the same experiment. For custom input mapping, error handling, and more options, see [RemoteEvaluator][9] in the Evaluation Developer Guide.
+
 ## Best practices for reliable custom evaluations
 
 - **Start small**: Target a single, well-defined failure mode before scaling.
@@ -332,14 +354,29 @@ You can:
 - **Document your rubric**: Clearly define what "Pass" and "Fail" mean to avoid drift over time.
 - **Re-align your evaluator**: Reassess prompt and few-shot examples when the underlying LLM updates.
 
+## Estimated token usage
+
+You can monitor the token usage of your LLM evaluations using the [LLM Evaluations Token Usage dashboard][10].
+
+If you need more details, the following metrics allow you to track the LLM resources consumed to power evaluations:
+
+- `ml_obs.estimated_usage.llm.input.tokens`
+- `ml_obs.estimated_usage.llm.output.tokens`
+- `ml_obs.estimated_usage.llm.total.tokens`
+
+Each of these metrics has `ml_app`, `model_server`, `model_provider`, `model_name`, and `evaluation_name` tags, allowing you to pinpoint specific applications, models, and evaluations contributing to your usage.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/llm/evaluations
-[2]: /llm_observability/evaluations/managed_evaluations#connect-your-llm-provider-account
+[2]: /llm_observability/evaluations/custom_llm_as_a_judge_evaluations/connect_to_account
 [3]: /events/explorer/facets/
 [4]: /monitors/
 [5]: https://arxiv.org/abs/2504.00050
 [6]: /llm_observability/evaluations/evaluation_compatibility
 [7]: /llm_observability/evaluations/custom_llm_as_a_judge_evaluations/template_evaluations/
+[8]: /llm_observability/experiments
+[9]: /llm_observability/guide/evaluation_developer_guide/#using-managed-evaluators
+[10]: https://app.datadoghq.com/dash/integration/llm_evaluations_token_usage

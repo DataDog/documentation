@@ -277,6 +277,10 @@ A dictionary of metrics to collect for the span. The keys are metric names (stri
 - `input_tokens` - The number of input tokens (LLM spans)
 - `output_tokens` - The number of output tokens (LLM spans)
 - `total_tokens` - The total number of tokens (LLM spans)
+- `non_cached_input_tokens` - The number of non-cached input tokens (LLM spans)
+- `cache_read_input_tokens` - The number of cache read input tokens (LLM spans)
+- `cache_write_input_tokens` - The number of cache write input tokens (LLM spans)
+- `reasoning_output_tokens` - The number of reasoning tokens (LLM spans)
 - `time_to_first_token` - Time in seconds for first output token (streaming LLM, root spans)
 - `time_per_output_token` - Time in seconds per output token (streaming LLM, root spans)
 - `input_cost` - Input cost in dollars (LLM and embedding spans)
@@ -285,6 +289,7 @@ A dictionary of metrics to collect for the span. The keys are metric names (stri
 - `non_cached_input_cost` - Non-cached input cost in dollars (LLM spans)
 - `cache_read_input_cost` - Cache read input cost in dollars (LLM spans)
 - `cache_write_input_cost` - Cache write input cost in dollars (LLM spans)
+- `reasoning_output_cost`- Reasoning output cost in dollars (LLM spans)
 
 Type: `Dict[key (string), float64]`
 
@@ -341,6 +346,8 @@ Your application name (the value of `DD_LLMOBS_ML_APP`) must be a lowercase Unic
 The name can be up to 193 characters long and may not contain contiguous or trailing underscores.
 
 ## Evaluations API
+
+<div class="alert alert-info">For comprehensive examples and guidance on building custom evaluators, see the <a href="/llm_observability/guide/evaluation_developer_guide/">Evaluation Developer Guide</a>.</div>
 
 Use this endpoint to send evaluations associated with a given span to Datadog.
 
@@ -585,8 +592,8 @@ Evaluations must be joined to a unique span. You can identify the target span us
 
 | Field      | Type            | Description  |
 |------------|-----------------|--------------|
-| span_id [*required*] | string | The span ID of the span that this evaluation is associated with. |
-| trace_id [*required*] | string | The trace ID of the span that this evaluation is associated with. |
+| span_id [*required*] | string | The span ID of the span that this evaluation is associated with. Must be a decimal string (for example, `"20245611112024561111"`). If your instrumentation produces hexadecimal span IDs (such as OpenTelemetry), convert them to decimal before submitting. |
+| trace_id [*required*] | string | The trace ID of the span that this evaluation is associated with. Must be a decimal string (for example, `"13932955089405749200"`) or a 32-character lowercase hexadecimal string for 128-bit trace IDs. |
 
 #### TagContext
 
