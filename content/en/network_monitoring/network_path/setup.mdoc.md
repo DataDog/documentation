@@ -3,9 +3,6 @@ title: Setup
 description: Setting up Network Path
 is_beta: true
 content_filters:
-  - trait_id: network_path_mode
-    option_group_id: network_path_mode_options
-    label: "Test type"
   - trait_id: os
     option_group_id: network_path_setup_options
     label: "Environment"
@@ -32,9 +29,6 @@ Setting up Network Path involves configuring your environment to monitor and tra
 {% alert level="info" %}
 This page covers Network Path setup for Agent-based configuration in Network Monitoring. To create Network Path tests in Synthetic Monitoring, see [Network Path Testing in Synthetic Monitoring][15].
 {% /alert %}
-
-<!-- Scheduled tests -->
-{% if equals($network_path_mode, "scheduled") %}
 
 ### Scheduled tests
 
@@ -320,12 +314,6 @@ To increase the number of workers, add the following configuration to your `data
 check_runners: <NUMBER_OF_WORKERS>
 ```
 
-{% /if %}
-<!-- end Scheduled tests -->
-
-<!-- Dynamic tests -->
-{% if equals($network_path_mode, "dynamic") %}
-
 ### Dynamic tests
 
 **Prerequisites**: [CNM][1] must be enabled.
@@ -558,9 +546,6 @@ network_path:
       - match_domain: 'api.datadoghq.com'
         type: include
 ```
-
-{% /if %}
-<!-- end Dynamic tests -->
 
 ## Troubleshooting
 
