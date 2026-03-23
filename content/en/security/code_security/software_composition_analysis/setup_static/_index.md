@@ -119,6 +119,10 @@ If you are using another source code management provider, configure SCA to run i
 {{% /tab %}}
 {{< /tabs >}}
 
+## Link findings to Datadog services and teams
+
+{{% security-products/link-findings-to-datadog-services-and-teams %}}
+
 ## Upload third-party SBOM to Datadog
 
 Datadog recommends using the [Datadog SBOM generator][10], but it is also possible to ingest a third-party SBOM.
@@ -142,11 +146,6 @@ datadog-ci sbom upload /path/to/third-party-sbom.json
 <div class="alert alert-info">
 If you already have automatic scanning enabled for a repository, a manual upload will replace any existing result for that commit.
 </div>
-
-
-## Link findings to Datadog services and teams
-
-{{% security-products/link-findings-to-datadog-services-and-teams %}}
 
 
 ## Filter by reachable vulnerabilities
