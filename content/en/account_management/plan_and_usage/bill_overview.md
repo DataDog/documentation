@@ -22,7 +22,9 @@ The [**Bill Overview** page][1] gives administrators a single view of Datadog co
 
 ## Global filters
 
-The following filters apply across the entire Bill Overview page:
+The following filters apply to the **Bill Overview** page:```
+
+the original isn't bad or wrong, just making this fit with the docs tone a little more
 
 - **Product Category**: Filter all views by broader product family (for example, Infrastructure, APM, Logs, Security, AI/ML).
 - **Billing Dimension**: Filter to a specific billing dimension.
