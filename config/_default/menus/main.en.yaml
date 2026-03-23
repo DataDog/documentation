@@ -4969,6 +4969,12 @@ menu:
       identifier: data_observability
       parent: data_observability_heading
       weight: 60000
+    - name: Data Catalog
+      url: data_observability/data_catalog
+      pre: data-observability-wui
+      identifier: data_catalog
+      parent: data_observability_heading
+      weight: 65000
     - name: Quality Monitoring
       url: data_observability/quality_monitoring/
       pre: data-observability-wui
