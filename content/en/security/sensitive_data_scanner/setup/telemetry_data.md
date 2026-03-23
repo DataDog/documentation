@@ -283,7 +283,7 @@ To make matches more precise, you can also do one of the following:
 - Scan the entire event but exclude certain attributes from getting scanned. For example, if you are scanning for personally identifiable information (PII) like physical addresses, you might want to exclude attributes such as `ip_address`.
 - Scan for specific attributes to narrow the scope of the data that is scanned. For example, if you are scanning for physical addresses, you can choose specific attributes such as `street` and `city`.
 
-**Note**: Do not user the `@` prefix in the attribute path when specifying attribute names. For example, use `function.request.body.password` instead of `@function.request.body.password`. The `@` prefix used in search queries and other parts of Datadog is not supported in this field.
+**Note**: Do not use the `@` prefix in the attribute path when specifying attribute names. For example, use `function.request.body.password` instead of `@function.request.body.password`. The `@` prefix used in search queries and other parts of Datadog is not supported in this field.
 
 ### Edit scanning rules
 
