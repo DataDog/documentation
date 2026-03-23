@@ -60,10 +60,10 @@ Toggle the switch to enable TLS. If you enable TLS, the following certificate an
 {{% tab "Secrets Management" %}}
 
 - OTel HTTP address identifier:
-	- References the socket address on which the Observability Pipelines Worker listens for logs from the OTel collector over HTTP.
+	- References the HTTP socket address on which the Observability Pipelines Worker listens for logs from the OTel collector.
 	- The default identifier is `SOURCE_OTEL_HTTP_ADDRESS`.
 - OTel gRPC address identifier:
-	- References the socket address on which the Observability Pipelines Worker listens for logs from the OTel collector over gRPC.
+	- References the gRPC socket address on which the Observability Pipelines Worker listens for logs from the OTel collector.
 	- The default identifier is `SOURCE_OTEL_GRPC_ADDRESS`.
 - OTel TLS passphrase identifier (when TLS is enabled):
 	- The default identifier is `SOURCE_OTEL_KEY_PASS`.
