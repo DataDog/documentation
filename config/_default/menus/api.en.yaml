@@ -2480,7 +2480,7 @@ menu:
           - GetSecretsRules
         unstable:
           - v2
-        order: 77
+        order: 78
     - name: Ruleset get multiple
       url: '#ruleset-get-multiple'
       identifier: security-monitoring-ruleset-get-multiple
@@ -2571,7 +2571,7 @@ menu:
           - RunThreatHuntingJob
         unstable:
           - v2
-        order: 61
+        order: 62
     - name: List threat hunting jobs
       url: '#list-threat-hunting-jobs'
       identifier: security-monitoring-list-threat-hunting-jobs
@@ -2659,7 +2659,7 @@ menu:
         operationids:
           - SearchSecurityMonitoringSignals
         unstable: []
-        order: 71
+        order: 72
     - name: Get a quick list of security signals
       url: '#get-a-quick-list-of-security-signals'
       identifier: security-monitoring-get-a-quick-list-of-security-signals
@@ -2816,7 +2816,7 @@ menu:
         operationids:
           - ListSecurityMonitoringRules
         unstable: []
-        order: 49
+        order: 50
     - name: Deactivate content pack
       url: '#deactivate-content-pack'
       identifier: security-monitoring-deactivate-content-pack
@@ -2855,7 +2855,7 @@ menu:
           - GetContentPacksStates
         unstable:
           - v2
-        order: 46
+        order: 47
     - name: Get a suppression's version history
       url: '#get-a-suppressions-version-history'
       identifier: security-monitoring-get-a-suppressions-version-history
@@ -3181,7 +3181,7 @@ menu:
           - ListVulnerabilities
         unstable:
           - v2
-        order: 79
+        order: 80
     - name: Patch a signal-based notification rule
       url: '#patch-a-signal-based-notification-rule'
       identifier: security-monitoring-patch-a-signal-based-notification-rule
