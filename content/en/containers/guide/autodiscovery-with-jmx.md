@@ -442,7 +442,7 @@ spec:
         defaultMode: 0400
 ```
 
-#### 3. Pass credentials in the Autodiscovery annotation
+#### Step 3 - Pass credentials in the Autodiscovery annotation
 
 Add `user` and `password` to the JMX check instance. Use the [`%%env_<ENV_VAR>%%` template variable][3] to reference the password from an environment variable in the Agent container rather than hardcoding it in the annotation:
 
