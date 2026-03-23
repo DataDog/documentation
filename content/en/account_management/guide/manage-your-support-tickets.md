@@ -19,7 +19,7 @@ further_reading:
 
 <p>To create a new support ticket, navigate to the <a href="https://help.datadoghq.com/">Datadog support site</a>. At the bottom of the page, click <strong>Create a New Ticket</strong> to fill out a ticket form.</p>
 
-<p>You can also access this form through Datadog. From the left navigation, mouse over <strong>Help</strong> and click <em>Support</em>. Alternatively, navigate to the <a href="https://app.datadoghq.com/help">Datadog help page</a> and click <strong>New Support Ticket</strong>.</p>
+<p>You can also access this form through Datadog. From the left navigation, hover over <strong>Help</strong> and click <strong>Support</strong>. Alternatively, navigate to the <a href="https://app.datadoghq.com/help">Datadog help page</a> and click <strong>New Support Ticket</strong>.</p>
 
 <h2>Access existing tickets</h2>
 
