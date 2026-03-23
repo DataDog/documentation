@@ -40,7 +40,7 @@ AI Impact measures how AI coding assistants affect your software delivery perfor
 
 ### Granularity modes
 
-AI Impact metrics can be viewed at two levels of granularity. The active mode determines how commits are classified as "AI" or "non-AI" for all metrics.
+AI Impact metrics can be analyzed at two levels of granularity. The granularity mode being used determines how commits are classified as "AI-assisted" or "non-AI" for all metrics.
 
 By default, Datadog selects the most precise granularity mode that all integrated tools have in common, so that metrics are comparable across tools on an equal basis.
 
