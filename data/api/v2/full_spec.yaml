@@ -1246,6 +1246,24 @@ components:
       required: true
       schema:
         type: string
+    environment_id:
+      description: The ID of the environment.
+      in: path
+      name: environment_id
+      required: true
+      schema:
+        example: "550e8400-e29b-41d4-a716-446655440001"
+        format: uuid
+        type: string
+    feature_flag_id:
+      description: The ID of the feature flag.
+      in: path
+      name: feature_flag_id
+      required: true
+      schema:
+        example: "550e8400-e29b-41d4-a716-446655440000"
+        format: uuid
+        type: string
   requestBodies: {}
   responses:
     BadRequestResponse:
@@ -14651,6 +14669,127 @@ components:
         - address
         - formats
       type: object
+    CreateEnvironmentAttributes:
+      description: Attributes for creating a new environment.
+      properties:
+        is_production:
+          default: false
+          description: Indicates whether this is a production environment.
+          example: false
+          type: boolean
+        name:
+          description: The name of the environment.
+          example: "env-search-term"
+          type: string
+        queries:
+          description: List of queries to define the environment scope.
+          example: ["staging", "test"]
+          items:
+            type: string
+          minItems: 1
+          type: array
+        require_feature_flag_approval:
+          default: false
+          description: Indicates whether feature flag changes require approval in this environment.
+          example: false
+          type: boolean
+      required:
+        - name
+        - queries
+      type: object
+    CreateEnvironmentData:
+      description: Data for creating a new environment.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/CreateEnvironmentAttributes"
+        type:
+          $ref: "#/components/schemas/CreateEnvironmentDataType"
+      required:
+        - type
+        - attributes
+      type: object
+    CreateEnvironmentDataType:
+      description: The resource type.
+      enum:
+        - "environments"
+      example: "environments"
+      type: string
+      x-enum-varnames:
+        - ENVIRONMENTS
+    CreateEnvironmentRequest:
+      description: Request to create a new environment.
+      properties:
+        data:
+          $ref: "#/components/schemas/CreateEnvironmentData"
+      required:
+        - data
+      type: object
+    CreateFeatureFlagAttributes:
+      description: Attributes for creating a new feature flag.
+      properties:
+        default_variant_key:
+          description: The key of the default variant.
+          example: "variant-abc123"
+          nullable: true
+          type: string
+        description:
+          description: The description of the feature flag.
+          example: "This is an example feature flag for demonstration"
+          type: string
+        json_schema:
+          description: JSON schema for validation when value_type is JSON.
+          example: '{"type": "object", "properties": {"enabled": {"type": "boolean"}}}'
+          nullable: true
+          type: string
+        key:
+          description: The unique key of the feature flag.
+          example: "feature-flag-abc123"
+          type: string
+        name:
+          description: The name of the feature flag.
+          example: "Feature Flag ABC123"
+          type: string
+        value_type:
+          $ref: "#/components/schemas/ValueType"
+        variants:
+          description: The variants of the feature flag.
+          items:
+            $ref: "#/components/schemas/CreateVariant"
+          type: array
+      required:
+        - key
+        - name
+        - description
+        - value_type
+        - variants
+      type: object
+    CreateFeatureFlagData:
+      description: Data for creating a new feature flag.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/CreateFeatureFlagAttributes"
+        type:
+          $ref: "#/components/schemas/CreateFeatureFlagDataType"
+      required:
+        - type
+        - attributes
+      type: object
+    CreateFeatureFlagDataType:
+      description: The resource type.
+      enum:
+        - "feature-flags"
+      example: "feature-flags"
+      type: string
+      x-enum-varnames:
+        - FEATURE_FLAGS
+    CreateFeatureFlagRequest:
+      description: Request to create a new feature flag.
+      properties:
+        data:
+          $ref: "#/components/schemas/CreateFeatureFlagData"
+      required:
+        - data
+      type: object
     CreateIncidentNotificationRuleRequest:
       description: Create request for a notification rule.
       properties:
@@ -15909,6 +16048,26 @@ components:
           $ref: "#/components/schemas/CreateNotificationChannelData"
       required:
         - data
+      type: object
+    CreateVariant:
+      description: Request to create a variant.
+      properties:
+        key:
+          description: The unique key of the variant.
+          example: "variant-abc123"
+          type: string
+        name:
+          description: The name of the variant.
+          example: "Variant ABC123"
+          type: string
+        value:
+          description: The value of the variant as a string.
+          example: "true"
+          type: string
+      required:
+        - key
+        - name
+        - value
       type: object
     CreateWorkflowRequest:
       description: A request object for creating a new workflow.
@@ -20011,6 +20170,238 @@ components:
         data:
           $ref: "#/components/schemas/ListDeploymentRuleResponseData"
       type: object
+    DeploymentGatesEvaluationRequest:
+      description: Request body for triggering a deployment gate evaluation.
+      properties:
+        data:
+          $ref: "#/components/schemas/DeploymentGatesEvaluationRequestData"
+      required:
+        - data
+      type: object
+    DeploymentGatesEvaluationRequestAttributes:
+      description: Attributes for a deployment gate evaluation request.
+      properties:
+        env:
+          description: The environment of the deployment.
+          example: "staging"
+          type: string
+        identifier:
+          default: default
+          description: The identifier of the deployment gate. Defaults to "default".
+          example: "pre-deploy"
+          type: string
+        primary_tag:
+          description: A primary tag to scope APM Faulty Deployment Detection rules.
+          example: "region:us-east-1"
+          type: string
+        service:
+          description: The service being deployed.
+          example: "transaction-backend"
+          type: string
+        version:
+          description: The version of the deployment. Required for APM Faulty Deployment Detection rules.
+          example: "v1.2.3"
+          type: string
+      required:
+        - env
+        - service
+      type: object
+    DeploymentGatesEvaluationRequestData:
+      description: Data for a deployment gate evaluation request.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/DeploymentGatesEvaluationRequestAttributes"
+        type:
+          $ref: "#/components/schemas/DeploymentGatesEvaluationRequestDataType"
+      required:
+        - type
+        - attributes
+      type: object
+    DeploymentGatesEvaluationRequestDataType:
+      default: deployment_gates_evaluation_request
+      description: JSON:API type for a deployment gate evaluation request.
+      enum:
+        - deployment_gates_evaluation_request
+      example: deployment_gates_evaluation_request
+      type: string
+      x-enum-varnames:
+        - DEPLOYMENT_GATES_EVALUATION_REQUEST
+    DeploymentGatesEvaluationResponse:
+      description: Response for a deployment gate evaluation request.
+      properties:
+        data:
+          $ref: "#/components/schemas/DeploymentGatesEvaluationResponseData"
+      type: object
+    DeploymentGatesEvaluationResponseAttributes:
+      description: Attributes for a deployment gate evaluation response.
+      properties:
+        evaluation_id:
+          description: The unique identifier of the gate evaluation.
+          example: "e9d2f04f-4f4b-494b-86e5-52f03e10c8e9"
+          type: string
+      required:
+        - evaluation_id
+      type: object
+    DeploymentGatesEvaluationResponseData:
+      description: Data for a deployment gate evaluation response.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/DeploymentGatesEvaluationResponseAttributes"
+        id:
+          description: The unique identifier of the evaluation response.
+          example: "e9d2f04f-4f4b-494b-86e5-52f03e10c8e9"
+          format: uuid
+          type: string
+        type:
+          $ref: "#/components/schemas/DeploymentGatesEvaluationResponseDataType"
+      required:
+        - type
+        - attributes
+        - id
+      type: object
+    DeploymentGatesEvaluationResponseDataType:
+      default: deployment_gates_evaluation_response
+      description: JSON:API type for a deployment gate evaluation response.
+      enum:
+        - deployment_gates_evaluation_response
+      example: deployment_gates_evaluation_response
+      type: string
+      x-enum-varnames:
+        - DEPLOYMENT_GATES_EVALUATION_RESPONSE
+    DeploymentGatesEvaluationResultResponse:
+      description: Response containing the result of a deployment gate evaluation.
+      properties:
+        data:
+          $ref: "#/components/schemas/DeploymentGatesEvaluationResultResponseData"
+      type: object
+    DeploymentGatesEvaluationResultResponseAttributes:
+      description: Attributes for a deployment gate evaluation result response.
+      properties:
+        dry_run:
+          description: Whether the gate was evaluated in dry-run mode.
+          example: false
+          type: boolean
+        evaluation_id:
+          description: The unique identifier of the gate evaluation.
+          example: "e9d2f04f-4f4b-494b-86e5-52f03e10c8e9"
+          type: string
+        evaluation_url:
+          description: A URL to view the evaluation details in the Datadog UI.
+          example: "https://app.datadoghq.com/ci/deployment-gates/evaluations?index=cdgates&query=level%3Agate+%40evaluation_id%3Ae9d2f04f-4f4b-494b-86e5-52f03e10c8e9"
+          type: string
+        gate_id:
+          description: The unique identifier of the deployment gate.
+          example: "e140302e-0cba-40d2-978c-6780647f8f1c"
+          format: uuid
+          type: string
+        gate_status:
+          $ref: "#/components/schemas/DeploymentGatesEvaluationResultResponseAttributesGateStatus"
+        rules:
+          description: The results of individual rule evaluations.
+          items:
+            $ref: "#/components/schemas/DeploymentGatesRuleResponse"
+          type: array
+      required:
+        - dry_run
+        - evaluation_id
+        - evaluation_url
+        - gate_id
+        - gate_status
+        - rules
+      type: object
+    DeploymentGatesEvaluationResultResponseAttributesGateStatus:
+      description: |-
+        The overall status of the gate evaluation.
+        - `in_progress`: The evaluation is still running.
+        - `pass`: All rules passed successfully and the deployment is allowed to proceed.
+        - `fail`: One or more rules did not pass; the deployment should not proceed.
+      enum:
+        - in_progress
+        - pass
+        - fail
+      example: "pass"
+      type: string
+      x-enum-varnames:
+        - IN_PROGRESS
+        - PASS
+        - FAIL
+    DeploymentGatesEvaluationResultResponseData:
+      description: Data for a deployment gate evaluation result response.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/DeploymentGatesEvaluationResultResponseAttributes"
+        id:
+          description: The unique identifier of the evaluation.
+          example: "e9d2f04f-4f4b-494b-86e5-52f03e10c8e9"
+          type: string
+        type:
+          $ref: "#/components/schemas/DeploymentGatesEvaluationResultResponseDataType"
+      required:
+        - type
+        - attributes
+        - id
+      type: object
+    DeploymentGatesEvaluationResultResponseDataType:
+      default: deployment_gates_evaluation_result_response
+      description: JSON:API type for a deployment gate evaluation result response.
+      enum:
+        - deployment_gates_evaluation_result_response
+      example: deployment_gates_evaluation_result_response
+      type: string
+      x-enum-varnames:
+        - DEPLOYMENT_GATES_EVALUATION_RESULT_RESPONSE
+    DeploymentGatesListResponse:
+      description: Response containing a paginated list of deployment gates.
+      properties:
+        data:
+          description: Array of deployment gates.
+          items:
+            $ref: "#/components/schemas/DeploymentGateResponseData"
+          type: array
+        meta:
+          $ref: "#/components/schemas/DeploymentGatesListResponseMeta"
+      type: object
+    DeploymentGatesListResponseMeta:
+      description: Metadata for a list of deployment gates response.
+      properties:
+        page:
+          $ref: "#/components/schemas/DeploymentGatesListResponseMetaPage"
+      type: object
+    DeploymentGatesListResponseMetaPage:
+      description: Pagination information for a list of deployment gates.
+      properties:
+        cursor:
+          description: The cursor used for the current page.
+          type: string
+        next_cursor:
+          description: The cursor to use to fetch the next page. This is absent when there are no more pages.
+          type: string
+        size:
+          default: 50
+          description: The number of results per page.
+          format: int64
+          maximum: 1000
+          minimum: 1
+          type: integer
+      type: object
+    DeploymentGatesRuleResponse:
+      description: The result of a single rule evaluation.
+      properties:
+        dry_run:
+          description: Whether this rule was evaluated in dry-run mode.
+          example: false
+          type: boolean
+        name:
+          description: The name of the rule.
+          example: "Check service monitors"
+          type: string
+        reason:
+          description: The reason for the rule result, if applicable.
+          example: "One or more monitors in ALERT state"
+          type: string
+        status:
+          $ref: "#/components/schemas/DeploymentGatesEvaluationResultResponseAttributesGateStatus"
+      type: object
     DeploymentMetadata:
       description: Metadata object containing the publication creation information.
       properties:
@@ -22200,6 +22591,94 @@ components:
           minLength: 1
           type: string
       type: object
+    Environment:
+      description: A feature flag environment resource.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/EnvironmentAttributes"
+        id:
+          description: The unique identifier of the environment.
+          example: "550e8400-e29b-41d4-a716-446655440001"
+          format: uuid
+          type: string
+        type:
+          $ref: "#/components/schemas/CreateEnvironmentDataType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    EnvironmentAttributes:
+      description: Attributes of an environment.
+      properties:
+        created_at:
+          description: The timestamp when the environment was created.
+          example: "2023-01-01T00:00:00Z"
+          format: date-time
+          type: string
+        description:
+          description: The description of the environment.
+          example: "Test environment XYZ789"
+          nullable: true
+          type: string
+        is_production:
+          description: Indicates whether this is a production environment.
+          example: false
+          type: boolean
+        key:
+          description: The unique key of the environment.
+          example: "env-search-term"
+          type: string
+        name:
+          description: The name of the environment.
+          example: "env-search-term"
+          type: string
+        queries:
+          description: List of queries to define the environment scope.
+          example: ["staging", "test"]
+          items:
+            type: string
+          minItems: 1
+          type: array
+        require_feature_flag_approval:
+          description: Indicates whether feature flag changes require approval in this environment.
+          example: false
+          type: boolean
+        updated_at:
+          description: The timestamp when the environment was last updated.
+          example: "2023-01-01T00:00:00Z"
+          format: date-time
+          type: string
+      required:
+        - name
+      type: object
+    EnvironmentResponse:
+      description: Response containing an environment.
+      properties:
+        data:
+          $ref: "#/components/schemas/Environment"
+      required:
+        - data
+      type: object
+    EnvironmentsPaginationMeta:
+      description: Pagination metadata for environments.
+      properties:
+        page:
+          $ref: "#/components/schemas/EnvironmentsPaginationMetaPage"
+      type: object
+    EnvironmentsPaginationMetaPage:
+      properties:
+        total_count:
+          description: Total number of items.
+          example: 10
+          format: int64
+          type: integer
+        total_filtered_count:
+          description: Total number of items matching the filter.
+          example: 5
+          format: int64
+          type: integer
+      type: object
     ErrorHandler:
       description: Used to handle errors in an action.
       properties:
@@ -24150,6 +24629,203 @@ components:
           items:
             $ref: "#/components/schemas/FastlyServiceData"
           type: array
+      type: object
+    FeatureFlag:
+      description: A feature flag resource.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/FeatureFlagAttributes"
+        id:
+          description: The unique identifier of the feature flag.
+          example: "550e8400-e29b-41d4-a716-446655440000"
+          format: uuid
+          type: string
+        type:
+          $ref: "#/components/schemas/CreateFeatureFlagDataType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    FeatureFlagAttributes:
+      description: Attributes of a feature flag.
+      properties:
+        archived_at:
+          description: The timestamp when the feature flag was archived.
+          example: "2023-01-01T00:00:00Z"
+          format: date-time
+          nullable: true
+          type: string
+        created_at:
+          description: The timestamp when the feature flag was created.
+          example: "2023-01-01T00:00:00Z"
+          format: date-time
+          type: string
+        created_by:
+          description: The ID of the user who created the feature flag.
+          example: "550e8400-e29b-41d4-a716-446655440010"
+          format: uuid
+          type: string
+        description:
+          description: The description of the feature flag.
+          example: "This is an example feature flag for demonstration"
+          type: string
+        distribution_channel:
+          description: Distribution channel for the feature flag.
+          example: "ALL"
+          type: string
+        feature_flag_environments:
+          description: Environment-specific settings for the feature flag.
+          items:
+            $ref: "#/components/schemas/FeatureFlagEnvironment"
+          type: array
+        json_schema:
+          description: JSON schema for validation when value_type is JSON.
+          example: '{"type": "object", "properties": {"enabled": {"type": "boolean"}}}'
+          nullable: true
+          type: string
+        key:
+          description: The unique key of the feature flag.
+          example: "feature-flag-abc123"
+          type: string
+        last_updated_by:
+          description: The ID of the user who last updated the feature flag.
+          example: "550e8400-e29b-41d4-a716-446655440010"
+          format: uuid
+          type: string
+        name:
+          description: The name of the feature flag.
+          example: "Feature Flag ABC123"
+          type: string
+        require_approval:
+          description: Indicates whether this feature flag requires approval for changes.
+          example: false
+          type: boolean
+        updated_at:
+          description: The timestamp when the feature flag was last updated.
+          example: "2023-01-01T00:00:00Z"
+          format: date-time
+          type: string
+        value_type:
+          $ref: "#/components/schemas/ValueType"
+        variants:
+          description: The variants of the feature flag.
+          items:
+            $ref: "#/components/schemas/Variant"
+          type: array
+      required:
+        - key
+        - name
+        - description
+        - value_type
+        - variants
+      type: object
+    FeatureFlagEnvironment:
+      description: Environment-specific settings for a feature flag.
+      properties:
+        allocations:
+          additionalProperties: {}
+          description: Allocation metadata for this environment.
+          nullable: true
+          type: object
+        default_allocation_key:
+          description: The allocation key used for the default variant.
+          example: "allocation-default-123abc"
+          type: string
+        default_variant_id:
+          description: The ID of the default variant for this environment.
+          example: "550e8400-e29b-41d4-a716-446655440002"
+          nullable: true
+          type: string
+        environment_id:
+          description: The ID of the environment.
+          example: "550e8400-e29b-41d4-a716-446655440001"
+          format: uuid
+          type: string
+        environment_name:
+          description: The name of the environment.
+          example: "env-search-term"
+          type: string
+        is_production:
+          description: Indicates whether the environment is production.
+          example: false
+          type: boolean
+        override_allocation_key:
+          description: The allocation key used for the override variant.
+          example: "allocation-override-123abc"
+          type: string
+        override_variant_id:
+          description: The ID of the override variant for this environment.
+          example: "550e8400-e29b-41d4-a716-446655440003"
+          nullable: true
+          type: string
+        pending_suggestion_id:
+          description: Pending suggestion identifier, if approval is required.
+          example: "550e8400-e29b-41d4-a716-446655440099"
+          nullable: true
+          type: string
+        require_feature_flag_approval:
+          description: Indicates whether feature flag changes require approval in this environment.
+          example: false
+          type: boolean
+        rollout_percentage:
+          description: Rollout percentage for this environment.
+          example: 0
+          format: int64
+          maximum: 100
+          minimum: 0
+          type: integer
+        rules:
+          description: Environment targeting rules for this feature flag.
+          items:
+            $ref: "#/components/schemas/FeatureFlagTargetingRule"
+          type: array
+        status:
+          $ref: "#/components/schemas/FeatureFlagStatus"
+      required:
+        - environment_id
+        - status
+      type: object
+    FeatureFlagResponse:
+      description: Response containing a feature flag.
+      properties:
+        data:
+          $ref: "#/components/schemas/FeatureFlag"
+      required:
+        - data
+      type: object
+    FeatureFlagStatus:
+      description: The status of a feature flag in an environment.
+      enum:
+        - ENABLED
+        - DISABLED
+      example: "ENABLED"
+      type: string
+      x-enum-varnames:
+        - ENABLED
+        - DISABLED
+    FeatureFlagTargetingRule:
+      additionalProperties: {}
+      description: A targeting rule for a feature flag.
+      type: object
+    FeatureFlagsPaginationMeta:
+      description: Pagination metadata for feature flags.
+      properties:
+        page:
+          $ref: "#/components/schemas/FeatureFlagsPaginationMetaPage"
+      type: object
+    FeatureFlagsPaginationMetaPage:
+      properties:
+        total_count:
+          description: Total number of items.
+          example: 100
+          format: int64
+          type: integer
+        total_filtered_count:
+          description: Total number of items matching the filter.
+          example: 25
+          format: int64
+          type: integer
       type: object
     FiltersPerProduct:
       description: Product-specific filters for the dataset.
@@ -35313,6 +35989,19 @@ components:
           description: Current link.
           type: string
       type: object
+    ListEnvironmentsResponse:
+      description: Response containing a list of environments.
+      properties:
+        data:
+          description: List of environments.
+          items:
+            $ref: "#/components/schemas/Environment"
+          type: array
+        meta:
+          $ref: "#/components/schemas/EnvironmentsPaginationMeta"
+      required:
+        - data
+      type: object
     ListExternalUserGroupResponse:
       description: List groups response object.
       example:
@@ -35548,6 +36237,19 @@ components:
         userName:
           description: Unique identifier for the User.
           type: string
+      type: object
+    ListFeatureFlagsResponse:
+      description: Response containing a list of feature flags.
+      properties:
+        data:
+          description: List of feature flags.
+          items:
+            $ref: "#/components/schemas/FeatureFlag"
+          type: array
+        meta:
+          $ref: "#/components/schemas/FeatureFlagsPaginationMeta"
+      required:
+        - data
       type: object
     ListFindingsData:
       description: Array of findings.
@@ -43991,7 +44693,10 @@ components:
         action:
           $ref: "#/components/schemas/ObservabilityPipelineSensitiveDataScannerProcessorActionHashAction"
         options:
-          description: The `ObservabilityPipelineSensitiveDataScannerProcessorActionHash` `options`.
+          description: |-
+            Optional settings for the hash action. When omitted or empty, matched sensitive data is
+            replaced with a deterministic hashed value that preserves structure for analytics while
+            protecting the original content. Reserved for future hash configuration (for example, algorithm or salt).
           type: object
       required: [action]
       type: object
@@ -44022,7 +44727,7 @@ components:
       description: Controls how partial redaction is applied, including character count and direction.
       properties:
         characters:
-          description: The `ObservabilityPipelineSensitiveDataScannerProcessorActionPartialRedactOptions` `characters`.
+          description: Number of characters to leave visible from the start or end of the matched value; the rest are redacted.
           example: 4
           format: int64
           type: integer
@@ -44058,7 +44763,7 @@ components:
       description: Configuration for fully redacting sensitive data.
       properties:
         replace:
-          description: The `ObservabilityPipelineSensitiveDataScannerProcessorActionRedactOptions` `replace`.
+          description: The string used to replace matched sensitive data (for example, "***" or "[REDACTED]").
           example: "***"
           type: string
       required: [replace]
@@ -44168,7 +44873,6 @@ components:
           type: array
       required:
         - name
-        - tags
         - pattern
         - scope
         - on_match
@@ -44229,7 +44933,7 @@ components:
       description: Fields to which the scope rule applies.
       properties:
         fields:
-          description: The `ObservabilityPipelineSensitiveDataScannerProcessorScopeOptions` `fields`.
+          description: List of log attribute names (field paths) to which the scope applies. Only these fields are included in or excluded from pattern matching.
           example:
             - ""
           items:
@@ -65424,6 +66128,8 @@ components:
       properties:
         frequency:
           $ref: "#/components/schemas/TeamSyncAttributesFrequency"
+        selection_state:
+          $ref: "#/components/schemas/TeamSyncAttributesSelectionState"
         source:
           $ref: "#/components/schemas/TeamSyncAttributesSource"
         sync_membership:
@@ -65446,6 +66152,14 @@ components:
         - ONCE
         - CONTINUOUSLY
         - PAUSED
+    TeamSyncAttributesSelectionState:
+      description: |-
+        Specifies which teams or organizations to sync. When
+        provided, synchronization is limited to the specified
+        items and their subtrees.
+      items:
+        $ref: "#/components/schemas/TeamSyncSelectionStateItem"
+      type: array
     TeamSyncAttributesSource:
       description: The external source platform for team synchronization. Only "github" is supported.
       enum:
@@ -65455,6 +66169,7 @@ components:
       x-enum-varnames:
         - GITHUB
     TeamSyncAttributesSyncMembership:
+      default: false
       description: Whether to sync members from the external team to the Datadog team. Defaults to `false` when not provided.
       example: true
       type: boolean
@@ -65514,6 +66229,72 @@ components:
             $ref: "#/components/schemas/TeamSyncData"
           type: array
       type: object
+    TeamSyncSelectionStateExternalId:
+      description: The external identifier for a team or organization in the source platform.
+      properties:
+        type:
+          $ref: "#/components/schemas/TeamSyncSelectionStateExternalIdType"
+        value:
+          $ref: "#/components/schemas/TeamSyncSelectionStateExternalIdValue"
+      required:
+        - type
+        - value
+      type: object
+    TeamSyncSelectionStateExternalIdType:
+      description: |-
+        The type of external identifier for the selection state item.
+        For GitHub synchronization, the allowed values are `team` and
+        `organization`.
+      enum:
+        - team
+        - organization
+      example: team
+      type: string
+      x-enum-varnames:
+        - TEAM
+        - ORGANIZATION
+    TeamSyncSelectionStateExternalIdValue:
+      description: |-
+        The external identifier value from the source
+        platform. For GitHub, this is the string
+        representation of a GitHub organization ID or team
+        ID.
+      example: "1"
+      type: string
+    TeamSyncSelectionStateItem:
+      description: Identifies a team or organization hierarchy to include in synchronization.
+      properties:
+        external_id:
+          $ref: "#/components/schemas/TeamSyncSelectionStateExternalId"
+        operation:
+          $ref: "#/components/schemas/TeamSyncSelectionStateOperation"
+        scope:
+          $ref: "#/components/schemas/TeamSyncSelectionStateScope"
+      required:
+        - external_id
+      type: object
+    TeamSyncSelectionStateOperation:
+      description: |-
+        The operation to perform on the selected hierarchy.
+        When set to `include`, synchronization covers the
+        referenced teams or organizations.
+      enum:
+        - include
+      example: include
+      type: string
+      x-enum-varnames:
+        - INCLUDE
+    TeamSyncSelectionStateScope:
+      description: |-
+        The scope of the selection. When set to `subtree`,
+        synchronization includes the referenced team or
+        organization and everything nested under it.
+      enum:
+        - subtree
+      example: subtree
+      type: string
+      x-enum-varnames:
+        - SUBTREE
     TeamTarget:
       description: "Represents a team target for an escalation policy step, including the team's ID and resource type."
       properties:
@@ -67107,6 +67888,100 @@ components:
         - dry_run
         - name
         - options
+      type: object
+    UpdateEnvironmentAttributes:
+      description: Attributes for updating an environment.
+      properties:
+        is_production:
+          description: Indicates whether this is a production environment.
+          example: false
+          type: boolean
+        name:
+          description: The name of the environment.
+          example: "Environment XYZ789"
+          type: string
+        queries:
+          description: List of queries to define the environment scope.
+          example: ["staging", "test"]
+          items:
+            type: string
+          minItems: 1
+          type: array
+        require_feature_flag_approval:
+          description: Indicates whether feature flag changes require approval in this environment.
+          example: true
+          type: boolean
+      type: object
+    UpdateEnvironmentData:
+      description: Data for updating an environment.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/UpdateEnvironmentAttributes"
+        type:
+          $ref: "#/components/schemas/UpdateEnvironmentDataType"
+      required:
+        - type
+        - attributes
+      type: object
+    UpdateEnvironmentDataType:
+      description: The resource type.
+      enum:
+        - "environments"
+      example: "environments"
+      type: string
+      x-enum-varnames:
+        - ENVIRONMENTS
+    UpdateEnvironmentRequest:
+      description: Request to update an environment.
+      properties:
+        data:
+          $ref: "#/components/schemas/UpdateEnvironmentData"
+      required:
+        - data
+      type: object
+    UpdateFeatureFlagAttributes:
+      description: Attributes for updating a feature flag.
+      properties:
+        description:
+          description: The description of the feature flag.
+          example: "Updated description for feature flag XYZ789"
+          type: string
+        json_schema:
+          description: JSON schema for validation when value_type is JSON.
+          example: '{"type": "object", "properties": {"enabled": {"type": "boolean"}}}'
+          nullable: true
+          type: string
+        name:
+          description: The name of the feature flag.
+          example: "Updated Feature Flag XYZ789"
+          type: string
+      type: object
+    UpdateFeatureFlagData:
+      description: Data for updating a feature flag.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/UpdateFeatureFlagAttributes"
+        type:
+          $ref: "#/components/schemas/UpdateFeatureFlagDataType"
+      required:
+        - type
+        - attributes
+      type: object
+    UpdateFeatureFlagDataType:
+      description: The resource type.
+      enum:
+        - "feature-flags"
+      example: "feature-flags"
+      type: string
+      x-enum-varnames:
+        - FEATURE_FLAGS
+    UpdateFeatureFlagRequest:
+      description: Request to update a feature flag.
+      properties:
+        data:
+          $ref: "#/components/schemas/UpdateFeatureFlagData"
+      required:
+        - data
       type: object
     UpdateFlakyTestsRequest:
       description: Request to update the state of multiple flaky tests.
@@ -68708,6 +69583,58 @@ components:
           items:
             $ref: "#/components/schemas/ValidationError"
           type: array
+      type: object
+    ValueType:
+      description: The type of values for the feature flag variants.
+      enum:
+        - BOOLEAN
+        - INTEGER
+        - NUMERIC
+        - STRING
+        - JSON
+      example: "BOOLEAN"
+      type: string
+      x-enum-varnames:
+        - BOOLEAN
+        - INTEGER
+        - NUMERIC
+        - STRING
+        - JSON
+    Variant:
+      description: A variant of a feature flag.
+      properties:
+        created_at:
+          description: The timestamp when the variant was created.
+          example: "2023-01-01T00:00:00Z"
+          format: date-time
+          type: string
+        id:
+          description: The unique identifier of the variant.
+          example: "550e8400-e29b-41d4-a716-446655440002"
+          format: uuid
+          type: string
+        key:
+          description: The unique key of the variant.
+          example: "variant-abc123"
+          type: string
+        name:
+          description: The name of the variant.
+          example: "Variant ABC123"
+          type: string
+        updated_at:
+          description: The timestamp when the variant was last updated.
+          example: "2023-01-01T00:00:00Z"
+          format: date-time
+          type: string
+        value:
+          description: The value of the variant as a string.
+          example: "true"
+          type: string
+      required:
+        - id
+        - key
+        - name
+        - value
       type: object
     Version:
       description: Version of the notification rule. It is updated when the rule is modified.
@@ -70893,7 +71820,7 @@ paths:
       summary: Delete datastore
       tags:
         - Actions Datastores
-      x-menu-order: 6
+      x-menu-order: 5
       x-permission:
         operator: OR
         permissions:
@@ -70932,7 +71859,7 @@ paths:
       summary: Get datastore
       tags:
         - Actions Datastores
-      x-menu-order: 4
+      x-menu-order: 3
       x-permission:
         operator: OR
         permissions:
@@ -70977,7 +71904,7 @@ paths:
       summary: Update datastore
       tags:
         - Actions Datastores
-      x-menu-order: 5
+      x-menu-order: 4
       x-permission:
         operator: OR
         permissions:
@@ -71023,7 +71950,7 @@ paths:
       summary: Delete datastore item
       tags:
         - Actions Datastores
-      x-menu-order: 8
+      x-menu-order: 7
       x-permission:
         operator: OR
         permissions:
@@ -71093,7 +72020,7 @@ paths:
       summary: List datastore items
       tags:
         - Actions Datastores
-      x-menu-order: 7
+      x-menu-order: 6
       x-permission:
         operator: OR
         permissions:
@@ -71138,7 +72065,7 @@ paths:
       summary: Update datastore item
       tags:
         - Actions Datastores
-      x-menu-order: 9
+      x-menu-order: 8
       x-permission:
         operator: OR
         permissions:
@@ -71191,7 +72118,7 @@ paths:
       summary: Bulk delete datastore items
       tags:
         - Actions Datastores
-      x-menu-order: 11
+      x-menu-order: 9
       x-permission:
         operator: OR
         permissions:
@@ -74041,7 +74968,7 @@ paths:
       summary: Get all projects
       tags:
         - Case Management
-      x-menu-order: 2
+      x-menu-order: 29
     post:
       description: Create a project.
       operationId: CreateProject
@@ -74077,7 +75004,7 @@ paths:
       summary: Create a project
       tags:
         - Case Management
-      x-menu-order: 1
+      x-menu-order: 28
   /api/v2/cases/projects/{project_id}:
     delete:
       description: Remove a project using the project's `id`.
@@ -74105,7 +75032,7 @@ paths:
       summary: Remove a project
       tags:
         - Case Management
-      x-menu-order: 4
+      x-menu-order: 31
     get:
       description: >-
         Get the details of a project by `project_id`.
@@ -74137,7 +75064,7 @@ paths:
       summary: Get the details of a project
       tags:
         - Case Management
-      x-menu-order: 3
+      x-menu-order: 30
     patch:
       description: >-
         Update a project.
@@ -74176,7 +75103,7 @@ paths:
       summary: Update a project
       tags:
         - Case Management
-      x-menu-order: 5
+      x-menu-order: 32
   /api/v2/cases/projects/{project_id}/notification_rules:
     get:
       description: >-
@@ -74215,7 +75142,7 @@ paths:
       summary: Get notification rules
       tags:
         - Case Management
-      x-menu-order: 1
+      x-menu-order: 17
     post:
       description: Create a notification rule for a project.
       operationId: CreateProjectNotificationRule
@@ -74259,7 +75186,7 @@ paths:
       summary: Create a notification rule
       tags:
         - Case Management
-      x-menu-order: 2
+      x-menu-order: 18
   /api/v2/cases/projects/{project_id}/notification_rules/{notification_rule_id}:
     delete:
       description: Delete a notification rule using the notification rule's `id`.
@@ -74294,7 +75221,7 @@ paths:
       summary: Delete a notification rule
       tags:
         - Case Management
-      x-menu-order: 4
+      x-menu-order: 20
     put:
       description: >-
         Update a notification rule.
@@ -74336,7 +75263,7 @@ paths:
       summary: Update a notification rule
       tags:
         - Case Management
-      x-menu-order: 3
+      x-menu-order: 19
   /api/v2/cases/types:
     get:
       description: Get all case types
@@ -74578,7 +75505,7 @@ paths:
       summary: Archive case
       tags:
         - Case Management
-      x-menu-order: 8
+      x-menu-order: 10
   /api/v2/cases/{case_id}/assign:
     post:
       description: Assign case to a user
@@ -74617,7 +75544,7 @@ paths:
       summary: Assign case
       tags:
         - Case Management
-      x-menu-order: 6
+      x-menu-order: 8
   /api/v2/cases/{case_id}/attributes:
     post:
       description: Update case attributes
@@ -74656,7 +75583,7 @@ paths:
       summary: Update case attributes
       tags:
         - Case Management
-      x-menu-order: 10
+      x-menu-order: 12
   /api/v2/cases/{case_id}/comment:
     post:
       description: Comment case
@@ -74690,7 +75617,7 @@ paths:
       summary: Comment case
       tags:
         - Case Management
-      x-menu-order: 11
+      x-menu-order: 13
   /api/v2/cases/{case_id}/comment/{cell_id}:
     delete:
       description: Delete case comment
@@ -74714,7 +75641,7 @@ paths:
       summary: Delete case comment
       tags:
         - Case Management
-      x-menu-order: 12
+      x-menu-order: 14
   /api/v2/cases/{case_id}/custom_attributes/{custom_attribute_key}:
     delete:
       description: Delete custom attribute from case
@@ -74745,7 +75672,7 @@ paths:
       summary: Delete custom attribute from case
       tags:
         - Case Management
-      x-menu-order: 14
+      x-menu-order: 16
     post:
       description: Update case custom attribute
       operationId: UpdateCaseCustomAttribute
@@ -74784,7 +75711,7 @@ paths:
       summary: Update case custom attribute
       tags:
         - Case Management
-      x-menu-order: 13
+      x-menu-order: 15
   /api/v2/cases/{case_id}/description:
     post:
       description: Update case description
@@ -74823,7 +75750,7 @@ paths:
       summary: Update case description
       tags:
         - Case Management
-      x-menu-order: 4
+      x-menu-order: 5
   /api/v2/cases/{case_id}/priority:
     post:
       description: Update case priority
@@ -74862,7 +75789,7 @@ paths:
       summary: Update case priority
       tags:
         - Case Management
-      x-menu-order: 5
+      x-menu-order: 7
   /api/v2/cases/{case_id}/relationships/incidents:
     post:
       description: Link an incident to a case
@@ -75284,7 +76211,7 @@ paths:
       summary: Update case status
       tags:
         - Case Management
-      x-menu-order: 4
+      x-menu-order: 6
   /api/v2/cases/{case_id}/title:
     post:
       description: Update case title
@@ -75362,7 +76289,7 @@ paths:
       summary: Unarchive case
       tags:
         - Case Management
-      x-menu-order: 9
+      x-menu-order: 11
   /api/v2/cases/{case_id}/unassign:
     post:
       description: Unassign case
@@ -75401,7 +76328,7 @@ paths:
       summary: Unassign case
       tags:
         - Case Management
-      x-menu-order: 7
+      x-menu-order: 9
   /api/v2/catalog/entity:
     get:
       description: Get a list of entities from Software Catalog.
@@ -75509,7 +76436,7 @@ paths:
       summary: Preview catalog entities
       tags:
         - Software Catalog
-      x-menu-order: 3.5
+      x-menu-order: 4
   /api/v2/catalog/entity/{entity_id}:
     delete:
       description: Delete a single entity in Software Catalog.
@@ -75574,7 +76501,7 @@ paths:
       summary: Get a list of entity kinds
       tags:
         - Software Catalog
-      x-menu-order: 4
+      x-menu-order: 6
       x-pagination:
         limitParam: page[limit]
         pageOffsetParam: page[offset]
@@ -75611,7 +76538,7 @@ paths:
       tags:
         - Software Catalog
       x-codegen-request-body-name: body
-      x-menu-order: 5
+      x-menu-order: 7
   /api/v2/catalog/kind/{kind_id}:
     delete:
       description: Delete a single kind in Software Catalog.
@@ -75637,7 +76564,7 @@ paths:
       summary: Delete a single kind
       tags:
         - Software Catalog
-      x-menu-order: 6
+      x-menu-order: 8
   /api/v2/catalog/relation:
     get:
       description: Get a list of entity relations from Software Catalog.
@@ -75683,7 +76610,7 @@ paths:
       summary: Get a list of entity relations
       tags:
         - Software Catalog
-      x-menu-order: 3
+      x-menu-order: 5
       x-pagination:
         limitParam: page[limit]
         pageOffsetParam: page[offset]
@@ -76549,7 +77476,7 @@ paths:
       summary: Create a custom framework
       tags: ["Security Monitoring"]
       x-codegen-request-body-name: body
-      x-menu-order: 4
+      x-menu-order: 26
       "x-permission":
         operator: AND
         permissions:
@@ -76584,7 +77511,7 @@ paths:
       summary: Delete a custom framework
       tags: ["Security Monitoring"]
       x-codegen-request-body-name: body
-      x-menu-order: 4
+      x-menu-order: 22
       "x-permission":
         operator: AND
         permissions:
@@ -76617,7 +77544,7 @@ paths:
       summary: Get a custom framework
       tags: ["Security Monitoring"]
       x-codegen-request-body-name: body
-      x-menu-order: 4
+      x-menu-order: 23
       "x-permission":
         operator: OR
         permissions:
@@ -76656,7 +77583,7 @@ paths:
       summary: Update a custom framework
       tags: ["Security Monitoring"]
       x-codegen-request-body-name: body
-      x-menu-order: 4
+      x-menu-order: 21
       "x-permission":
         operator: AND
         permissions:
@@ -76690,7 +77617,7 @@ paths:
             - security_monitoring_filters_read
       summary: List resource filters
       tags: ["Security Monitoring"]
-      x-menu-order: 26
+      x-menu-order: 24
       "x-permission":
         operator: OR
         permissions:
@@ -76725,7 +77652,7 @@ paths:
       summary: Update resource filters
       tags: ["Security Monitoring"]
       x-codegen-request-body-name: body
-      x-menu-order: 27
+      x-menu-order: 25
       "x-permission":
         operator: OR
         permissions:
@@ -78103,7 +79030,7 @@ paths:
       summary: Get active billing dimensions for cost attribution
       tags:
         - Usage Metering
-      x-menu-order: 5
+      x-menu-order: 11
       "x-permission":
         operator: OR
         permissions:
@@ -78222,7 +79149,7 @@ paths:
       summary: Get Monthly Cost Attribution
       tags:
         - Usage Metering
-      x-menu-order: 5
+      x-menu-order: 8
       "x-permission":
         operator: AND
         permissions:
@@ -78321,7 +79248,7 @@ paths:
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Get the CSM Hosts and Containers Coverage Analysis
       tags: ["CSM Coverage Analysis"]
-      x-menu-order: 1
+      x-menu-order: 2
   /api/v2/csm/onboarding/coverage_analysis/serverless:
     get:
       description: |-
@@ -78342,7 +79269,7 @@ paths:
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Get the CSM Serverless Coverage Analysis
       tags: ["CSM Coverage Analysis"]
-      x-menu-order: 1
+      x-menu-order: 3
   /api/v2/csm/onboarding/serverless/agents:
     get:
       description: Get the list of all CSM Serverless Agents running on your hosts and containers.
@@ -78394,7 +79321,7 @@ paths:
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Get all CSM Serverless Agents
       tags: ["CSM Agents"]
-      x-menu-order: 3
+      x-menu-order: 4
   /api/v2/current_user/application_keys:
     get:
       description: List all application keys available for current user
@@ -78437,7 +79364,7 @@ paths:
       summary: Get all application keys owned by current user
       tags:
         - Key Management
-      x-menu-order: 5
+      x-menu-order: 14
       "x-permission":
         operator: OR
         permissions:
@@ -78476,7 +79403,7 @@ paths:
       tags:
         - Key Management
       x-codegen-request-body-name: body
-      x-menu-order: 4
+      x-menu-order: 13
       "x-permission":
         operator: OR
         permissions:
@@ -78507,7 +79434,7 @@ paths:
       summary: Delete an application key owned by current user
       tags:
         - Key Management
-      x-menu-order: 1
+      x-menu-order: 10
       "x-permission":
         operator: OR
         permissions:
@@ -78543,7 +79470,7 @@ paths:
       summary: Get one application key owned by current user
       tags:
         - Key Management
-      x-menu-order: 3
+      x-menu-order: 12
       "x-permission":
         operator: OR
         permissions:
@@ -78592,7 +79519,7 @@ paths:
       tags:
         - Key Management
       x-codegen-request-body-name: body
-      x-menu-order: 2
+      x-menu-order: 11
       "x-permission":
         operator: OR
         permissions:
@@ -78992,6 +79919,62 @@ paths:
         **Note: Data Access is in preview. If you have any feedback,
         contact [Datadog support](https://docs.datadoghq.com/help/).**
   /api/v2/deployment_gates:
+    get:
+      description: |-
+        Returns a paginated list of all deployment gates for the organization.
+        Use `page[cursor]` and `page[size]` query parameters to paginate through results.
+      operationId: ListDeploymentGates
+      parameters:
+        - description: Cursor for pagination. Use the `meta.page.next_cursor` value from the previous response.
+          in: query
+          name: page[cursor]
+          required: false
+          schema:
+            type: string
+        - description: Number of results per page. Defaults to 50. Must be between 1 and 1000.
+          in: query
+          name: page[size]
+          required: false
+          schema:
+            default: 50
+            format: int64
+            maximum: 1000
+            minimum: 1
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeploymentGatesListResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/HTTPCDGatesBadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HTTPCIAppErrors"
+          description: Internal Server Error
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Get all deployment gates
+      tags: ["Deployment Gates"]
+      x-menu-order: 10
+      x-permission:
+        operator: OR
+        permissions:
+          - deployment_gates_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and may be subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     post:
       description: |-
         Endpoint to create a deployment gate.
@@ -79436,6 +80419,108 @@ paths:
         operator: OR
         permissions:
           - deployment_gates_write
+      x-unstable: |-
+        **Note**: This endpoint is in preview and may be subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/deployments/gates/evaluation:
+    post:
+      description: |-
+        Triggers an asynchronous deployment gate evaluation for the given service and environment.
+        Returns an evaluation ID that can be used to poll for the result via the
+        `GET /api/v2/deployments/gates/evaluation/{id}` endpoint.
+      operationId: TriggerDeploymentGatesEvaluation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DeploymentGatesEvaluationRequest"
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeploymentGatesEvaluationResponse"
+          description: Accepted
+        "400":
+          $ref: "#/components/responses/HTTPCDGatesBadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/HTTPCDGatesNotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HTTPCIAppErrors"
+          description: Internal Server Error
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Trigger a deployment gate evaluation
+      tags: ["Deployment Gates"]
+      x-menu-order: 11
+      x-permission:
+        operator: OR
+        permissions:
+          - deployment_gates_evaluate
+      x-unstable: |-
+        **Note**: This endpoint is in preview and may be subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/deployments/gates/evaluation/{id}:
+    get:
+      description: |-
+        Retrieves the result of a deployment gate evaluation by its evaluation ID.
+        If the evaluation is still in progress, `data.attributes.gate_status` will be `in_progress`;
+        continue polling until it returns `pass` or `fail`.
+        Polling every 10-20 seconds is recommended.
+        The endpoint may return a 404 if called too soon after triggering; retry after a few seconds.
+      operationId: GetDeploymentGatesEvaluationResult
+      parameters:
+        - description: The evaluation ID returned by the trigger endpoint.
+          in: path
+          name: id
+          required: true
+          schema:
+            format: uuid
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeploymentGatesEvaluationResultResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/HTTPCDGatesBadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/HTTPCDGatesNotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HTTPCIAppErrors"
+          description: Internal Server Error
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Get a deployment gate evaluation result
+      tags: ["Deployment Gates"]
+      x-menu-order: 12
+      x-permission:
+        operator: OR
+        permissions:
+          - deployment_gates_evaluate
       x-unstable: |-
         **Note**: This endpoint is in preview and may be subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -79908,7 +80993,7 @@ paths:
       summary: Send an incident event (legacy)
       tags: ["DORA Metrics"]
       x-codegen-request-body-name: body
-      x-menu-order: 28
+      x-menu-order: 10
   /api/v2/downtime:
     get:
       description: Get all scheduled downtimes.
@@ -80056,7 +81141,7 @@ paths:
       summary: Cancel a downtime
       tags:
         - Downtimes
-      x-menu-order: 4
+      x-menu-order: 3
       "x-permission":
         operator: OR
         permissions:
@@ -80116,7 +81201,7 @@ paths:
       summary: Get a downtime
       tags:
         - Downtimes
-      x-menu-order: 5
+      x-menu-order: 4
       "x-permission":
         operator: OR
         permissions:
@@ -80175,7 +81260,7 @@ paths:
       tags:
         - Downtimes
       x-codegen-request-body-name: body
-      x-menu-order: 6
+      x-menu-order: 5
       "x-permission":
         operator: OR
         permissions:
@@ -80562,7 +81647,7 @@ paths:
       summary: Search events
       tags: ["Events"]
       x-codegen-request-body-name: body
-      x-menu-order: 2
+      x-menu-order: 3
       x-pagination:
         cursorParam: body.page.cursor
         cursorPath: meta.page.after
@@ -80608,11 +81693,652 @@ paths:
             - events_read
       summary: Get an event
       tags: ["Events"]
-      x-menu-order: 3
+      x-menu-order: 4
       "x-permission":
         operator: OR
         permissions:
           - events_read
+  /api/v2/feature-flags:
+    get:
+      description: |-
+        Returns a list of feature flags for the organization.
+        Supports filtering by key and archived status.
+      operationId: ListFeatureFlags
+      parameters:
+        - description: Filter feature flags by key (partial matching).
+          example: "flag-search-term"
+          in: query
+          name: key
+          schema:
+            type: string
+        - description: Filter by archived status.
+          example: false
+          in: query
+          name: is_archived
+          schema:
+            type: boolean
+        - description: Maximum number of results to return.
+          example: 10
+          in: query
+          name: limit
+          schema:
+            default: 100
+            maximum: 1000
+            minimum: 1
+            type: integer
+        - description: Number of results to skip.
+          example: 0
+          in: query
+          name: offset
+          schema:
+            default: 0
+            minimum: 0
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListFeatureFlagsResponse"
+          description: OK
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Forbidden
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: List feature flags
+      tags:
+        - Feature Flags
+      x-menu-order: 13
+      x-permission:
+        operator: AND
+        permissions:
+          - feature_flag_config_read
+          - feature_flag_environment_config_read
+    post:
+      description: |-
+        Creates a new feature flag with variants.
+      operationId: CreateFeatureFlag
+      requestBody:
+        content:
+          application/json:
+            example:
+              data:
+                attributes:
+                  description: "Demo feature flag with unique identifier"
+                  key: "feature-flag-demo123"
+                  name: "Feature Flag Demo123"
+                  value_type: "BOOLEAN"
+                  variants:
+                    - key: "variant-demo123"
+                      name: "Variant Demo123"
+                      value: "true"
+                type: "feature-flags"
+            schema:
+              $ref: "#/components/schemas/CreateFeatureFlagRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FeatureFlagResponse"
+          description: Created
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Forbidden
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Conflict
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Create a feature flag
+      tags:
+        - Feature Flags
+      x-menu-order: 12
+      x-permission:
+        operator: AND
+        permissions:
+          - feature_flag_config_write
+          - feature_flag_environment_config_read
+  /api/v2/feature-flags/environments:
+    get:
+      description: |-
+        Returns a list of environments for the organization.
+        Supports filtering by name and key.
+      operationId: ListFeatureFlagsEnvironments
+      parameters:
+        - description: Filter environments by name (partial matching).
+          example: "env-search-term"
+          in: query
+          name: name
+          schema:
+            type: string
+        - description: Filter environments by key (partial matching).
+          example: "env-partial"
+          in: query
+          name: key
+          schema:
+            type: string
+        - description: Maximum number of results to return.
+          example: 10
+          in: query
+          name: limit
+          schema:
+            default: 100
+            maximum: 1000
+            minimum: 1
+            type: integer
+        - description: Number of results to skip.
+          example: 0
+          in: query
+          name: offset
+          schema:
+            default: 0
+            minimum: 0
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListEnvironmentsResponse"
+          description: OK
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Forbidden
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: List environments
+      tags:
+        - Feature Flags
+      x-menu-order: 5
+      x-permission:
+        operator: AND
+        permissions:
+          - feature_flag_environment_config_read
+    post:
+      description: |-
+        Creates a new environment for organizing feature flags.
+      operationId: CreateFeatureFlagsEnvironment
+      requestBody:
+        content:
+          application/json:
+            example:
+              data:
+                attributes:
+                  name: "Environment Demo123"
+                  queries: ["env-demo123", "queries-demo456"]
+                type: "environments"
+            schema:
+              $ref: "#/components/schemas/CreateEnvironmentRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EnvironmentResponse"
+          description: Created
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Forbidden
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Conflict
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Create an environment
+      tags:
+        - Feature Flags
+      x-menu-order: 4
+      x-permission:
+        operator: AND
+        permissions:
+          - feature_flag_environment_config_write
+  /api/v2/feature-flags/environments/{environment_id}:
+    delete:
+      description: |-
+        Deletes an environment. This operation cannot be undone.
+      operationId: DeleteFeatureFlagsEnvironment
+      parameters:
+        - $ref: "#/components/parameters/environment_id"
+      responses:
+        "204":
+          description: No Content
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Delete an environment
+      tags:
+        - Feature Flags
+      x-menu-order: 1
+      x-permission:
+        operator: AND
+        permissions:
+          - feature_flag_environment_config_write
+    get:
+      description: |-
+        Returns the details of a specific environment.
+      operationId: GetFeatureFlagsEnvironment
+      parameters:
+        - $ref: "#/components/parameters/environment_id"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EnvironmentResponse"
+          description: OK
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Get an environment
+      tags:
+        - Feature Flags
+      x-menu-order: 3
+      x-permission:
+        operator: AND
+        permissions:
+          - feature_flag_environment_config_read
+    put:
+      description: |-
+        Updates an existing environment's metadata such as
+         name and description.
+      operationId: UpdateFeatureFlagsEnvironment
+      parameters:
+        - $ref: "#/components/parameters/environment_id"
+      requestBody:
+        content:
+          application/json:
+            example:
+              data:
+                attributes:
+                  name: "Updated Environment XYZ789"
+                  queries: ["updated-env-xyz789", "updated-queries-abc456"]
+                type: "environments"
+            schema:
+              $ref: "#/components/schemas/UpdateEnvironmentRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EnvironmentResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Update an environment
+      tags:
+        - Feature Flags
+      x-menu-order: 2
+      x-permission:
+        operator: AND
+        permissions:
+          - feature_flag_environment_config_write
+  /api/v2/feature-flags/{feature_flag_id}:
+    get:
+      description: |-
+        Returns the details of a specific feature flag
+        including variants and environment status.
+      operationId: GetFeatureFlag
+      parameters:
+        - $ref: "#/components/parameters/feature_flag_id"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FeatureFlagResponse"
+          description: OK
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Get a feature flag
+      tags:
+        - Feature Flags
+      x-menu-order: 11
+      x-permission:
+        operator: AND
+        permissions:
+          - feature_flag_config_read
+          - feature_flag_environment_config_read
+    put:
+      description: |-
+        Updates an existing feature flag's metadata such as
+         name and description. Does not modify targeting rules or allocations.
+      operationId: UpdateFeatureFlag
+      parameters:
+        - $ref: "#/components/parameters/feature_flag_id"
+      requestBody:
+        content:
+          application/json:
+            example:
+              data:
+                attributes:
+                  description: "Updated description for feature flag XYZ789"
+                  name: "Updated Feature Flag XYZ789"
+                type: "feature-flags"
+            schema:
+              $ref: "#/components/schemas/UpdateFeatureFlagRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FeatureFlagResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Update a feature flag
+      tags:
+        - Feature Flags
+      x-menu-order: 10
+      x-permission:
+        operator: AND
+        permissions:
+          - feature_flag_config_write
+          - feature_flag_environment_config_read
+  /api/v2/feature-flags/{feature_flag_id}/archive:
+    post:
+      description: |-
+        Archives a feature flag. Archived flags are
+        hidden from the main list but remain accessible and can be unarchived.
+      operationId: ArchiveFeatureFlag
+      parameters:
+        - $ref: "#/components/parameters/feature_flag_id"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FeatureFlagResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Archive a feature flag
+      tags:
+        - Feature Flags
+      x-menu-order: 9
+      x-permission:
+        operator: AND
+        permissions:
+          - feature_flag_config_write
+          - feature_flag_environment_config_read
+  /api/v2/feature-flags/{feature_flag_id}/environments/{environment_id}/disable:
+    post:
+      description: |-
+        Disable a feature flag in a specific environment.
+      operationId: DisableFeatureFlagEnvironment
+      parameters:
+        - $ref: "#/components/parameters/feature_flag_id"
+        - $ref: "#/components/parameters/environment_id"
+      responses:
+        "200":
+          description: OK
+        "202":
+          description: Accepted - Approval required for this change
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Disable a feature flag in an environment
+      tags:
+        - Feature Flags
+      x-menu-order: 6
+      x-permission:
+        operator: AND
+        permissions:
+          - feature_flag_config_write
+          - feature_flag_environment_config_read
+  /api/v2/feature-flags/{feature_flag_id}/environments/{environment_id}/enable:
+    post:
+      description: |-
+        Enable a feature flag in a specific environment.
+      operationId: EnableFeatureFlagEnvironment
+      parameters:
+        - $ref: "#/components/parameters/feature_flag_id"
+        - $ref: "#/components/parameters/environment_id"
+      responses:
+        "200":
+          description: OK
+        "202":
+          description: Accepted - Approval required for this change
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Enable a feature flag in an environment
+      tags:
+        - Feature Flags
+      x-menu-order: 7
+      x-permission:
+        operator: AND
+        permissions:
+          - feature_flag_config_write
+          - feature_flag_environment_config_read
+  /api/v2/feature-flags/{feature_flag_id}/unarchive:
+    post:
+      description: |-
+        Unarchives a previously archived feature flag,
+        making it visible in the main list again.
+      operationId: UnarchiveFeatureFlag
+      parameters:
+        - $ref: "#/components/parameters/feature_flag_id"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FeatureFlagResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Unarchive a feature flag
+      tags:
+        - Feature Flags
+      x-menu-order: 8
+      x-permission:
+        operator: AND
+        permissions:
+          - feature_flag_config_write
+          - feature_flag_environment_config_read
   /api/v2/hamr:
     get:
       description: |-
@@ -80740,7 +82466,7 @@ paths:
       summary: Get a list of incidents
       tags:
         - Incidents
-      x-menu-order: 5
+      x-menu-order: 50
       x-pagination:
         limitParam: page[size]
         pageOffsetParam: page[offset]
@@ -82343,7 +84069,7 @@ paths:
       summary: Get a list of an incident's integration metadata
       tags:
         - Incidents
-      x-menu-order: 9
+      x-menu-order: 51
       "x-permission":
         operator: OR
         permissions:
@@ -82743,7 +84469,7 @@ paths:
       summary: List all AWS integrations
       tags:
         - AWS Integration
-      x-menu-order: 1
+      x-menu-order: 12
       "x-permission":
         operator: OR
         permissions:
@@ -82776,7 +84502,7 @@ paths:
       tags:
         - AWS Integration
       x-codegen-request-body-name: body
-      x-menu-order: 2
+      x-menu-order: 13
       "x-permission":
         operator: OR
         permissions:
@@ -82920,7 +84646,7 @@ paths:
       summary: Get AWS CCM config
       tags:
         - AWS Integration
-      x-menu-order: 7
+      x-menu-order: 14
       "x-permission":
         operator: OR
         permissions:
@@ -83000,7 +84726,7 @@ paths:
       tags:
         - AWS Integration
       x-codegen-request-body-name: body
-      x-menu-order: 8
+      x-menu-order: 15
       "x-permission":
         operator: OR
         permissions:
@@ -83083,7 +84809,7 @@ paths:
       summary: Get all Amazon EventBridge sources
       tags:
         - AWS Integration
-      x-menu-order: 9
+      x-menu-order: 16
       "x-permission":
         operator: OR
         permissions:
@@ -83117,7 +84843,7 @@ paths:
       tags:
         - AWS Integration
       x-codegen-request-body-name: body
-      x-menu-order: 10
+      x-menu-order: 17
       "x-permission":
         operator: OR
         permissions:
@@ -83420,7 +85146,7 @@ paths:
       summary: Get space information by display name
       tags:
         - Google Chat Integration
-      x-menu-order: 1
+      x-menu-order: 6
   /api/v2/integration/google-chat/organizations/{organization_binding_id}/organization-handles:
     get:
       description: Get a list of all organization handles from the Datadog Google Chat integration.
@@ -83479,7 +85205,7 @@ paths:
       tags:
         - Google Chat Integration
       x-codegen-request-body-name: body
-      x-menu-order: 1
+      x-menu-order: 2
   /api/v2/integration/google-chat/organizations/{organization_binding_id}/organization-handles/{handle_id}:
     delete:
       description: Delete an organization handle from the Datadog Google Chat integration.
@@ -83509,7 +85235,7 @@ paths:
       summary: Delete organization handle
       tags:
         - Google Chat Integration
-      x-menu-order: 1
+      x-menu-order: 5
     get:
       description: Get an organization handle from the Datadog Google Chat integration.
       operationId: GetOrganizationHandle
@@ -83534,7 +85260,7 @@ paths:
       summary: Get organization handle
       tags:
         - Google Chat Integration
-      x-menu-order: 1
+      x-menu-order: 3
     patch:
       description: Update an organization handle from the Datadog Google Chat integration.
       operationId: UpdateOrganizationHandle
@@ -83569,7 +85295,7 @@ paths:
       tags:
         - Google Chat Integration
       x-codegen-request-body-name: body
-      x-menu-order: 1
+      x-menu-order: 4
   /api/v2/integration/jira/accounts:
     get:
       description: |-
@@ -83838,7 +85564,7 @@ paths:
       summary: Get all tenant-based handles
       tags:
         - Microsoft Teams Integration
-      x-menu-order: 1
+      x-menu-order: 2
     post:
       description: Create a tenant-based handle in the Datadog Microsoft Teams integration.
       operationId: CreateTenantBasedHandle
@@ -83872,7 +85598,7 @@ paths:
       tags:
         - Microsoft Teams Integration
       x-codegen-request-body-name: body
-      x-menu-order: 1
+      x-menu-order: 3
   /api/v2/integration/ms-teams/configuration/tenant-based-handles/{handle_id}:
     delete:
       description: Delete a tenant-based handle from the Datadog Microsoft Teams integration.
@@ -83893,7 +85619,7 @@ paths:
       summary: Delete tenant-based handle
       tags:
         - Microsoft Teams Integration
-      x-menu-order: 1
+      x-menu-order: 6
     get:
       description: Get the tenant, team, and channel information of a tenant-based handle from the Datadog Microsoft Teams integration.
       operationId: GetTenantBasedHandle
@@ -83919,7 +85645,7 @@ paths:
       summary: Get tenant-based handle information
       tags:
         - Microsoft Teams Integration
-      x-menu-order: 1
+      x-menu-order: 4
     patch:
       description: Update a tenant-based handle from the Datadog Microsoft Teams integration.
       operationId: UpdateTenantBasedHandle
@@ -83955,7 +85681,7 @@ paths:
       tags:
         - Microsoft Teams Integration
       x-codegen-request-body-name: body
-      x-menu-order: 1
+      x-menu-order: 5
   /api/v2/integration/ms-teams/configuration/workflows-webhook-handles:
     get:
       description: Get a list of all Workflows webhook handles from the Datadog Microsoft Teams integration.
@@ -83982,7 +85708,7 @@ paths:
       summary: Get all Workflows webhook handles
       tags:
         - Microsoft Teams Integration
-      x-menu-order: 1
+      x-menu-order: 7
     post:
       description: Create a Workflows webhook handle in the Datadog Microsoft Teams integration.
       operationId: CreateWorkflowsWebhookHandle
@@ -84016,7 +85742,7 @@ paths:
       tags:
         - Microsoft Teams Integration
       x-codegen-request-body-name: body
-      x-menu-order: 1
+      x-menu-order: 8
   /api/v2/integration/ms-teams/configuration/workflows-webhook-handles/{handle_id}:
     delete:
       description: Delete a Workflows webhook handle from the Datadog Microsoft Teams integration.
@@ -84037,7 +85763,7 @@ paths:
       summary: Delete Workflows webhook handle
       tags:
         - Microsoft Teams Integration
-      x-menu-order: 1
+      x-menu-order: 11
     get:
       description: Get the name of a Workflows webhook handle from the Datadog Microsoft Teams integration.
       operationId: GetWorkflowsWebhookHandle
@@ -84063,7 +85789,7 @@ paths:
       summary: Get Workflows webhook handle information
       tags:
         - Microsoft Teams Integration
-      x-menu-order: 1
+      x-menu-order: 9
     patch:
       description: Update a Workflows webhook handle from the Datadog Microsoft Teams integration.
       operationId: UpdateWorkflowsWebhookHandle
@@ -84099,7 +85825,7 @@ paths:
       tags:
         - Microsoft Teams Integration
       x-codegen-request-body-name: body
-      x-menu-order: 1
+      x-menu-order: 10
   /api/v2/integration/oci/products:
     get:
       description: >-
@@ -87780,7 +89506,7 @@ paths:
       summary: Get restriction query for a given role
       tags:
         - Logs Restriction Queries
-      x-menu-order: 10
+      x-menu-order: 11
       "x-permission":
         operator: OR
         permissions:
@@ -87824,7 +89550,7 @@ paths:
       summary: Get all restriction queries for a given user
       tags:
         - Logs Restriction Queries
-      x-menu-order: 9
+      x-menu-order: 10
       "x-permission":
         operator: OR
         permissions:
@@ -87865,7 +89591,7 @@ paths:
       tags:
         - Logs Restriction Queries
       x-codegen-request-body-name: body
-      x-menu-order: 5
+      x-menu-order: 6
       "x-permission":
         operator: OR
         permissions:
@@ -88011,7 +89737,7 @@ paths:
       tags:
         - Logs Restriction Queries
       x-codegen-request-body-name: body
-      x-menu-order: 4.5
+      x-menu-order: 5
       "x-permission":
         operator: OR
         permissions:
@@ -88058,7 +89784,7 @@ paths:
       tags:
         - Logs Restriction Queries
       x-codegen-request-body-name: body
-      x-menu-order: 8
+      x-menu-order: 9
       "x-permission":
         operator: OR
         permissions:
@@ -88104,7 +89830,7 @@ paths:
       tags:
         - Logs Restriction Queries
       x-codegen-request-body-name: body
-      x-menu-order: 6
+      x-menu-order: 7
       "x-permission":
         operator: OR
         permissions:
@@ -88153,7 +89879,7 @@ paths:
       tags:
         - Logs Restriction Queries
       x-codegen-request-body-name: body
-      x-menu-order: 7
+      x-menu-order: 8
       "x-permission":
         operator: OR
         permissions:
@@ -89940,7 +91666,7 @@ paths:
       tags:
         - Downtimes
       x-codegen-request-body-name: body
-      x-menu-order: 7
+      x-menu-order: 6
       x-pagination:
         limitParam: page[limit]
         pageOffsetParam: page[offset]
@@ -91682,7 +93408,7 @@ paths:
         "429": {$ref: "#/components/responses/TooManyRequestsResponse"}
       summary: List Org Configs
       tags: [Organizations]
-      x-menu-order: 100
+      x-menu-order: 1
       "x-permission":
         operator: OPEN
         permissions: []
@@ -91704,7 +93430,7 @@ paths:
         "429": {$ref: "#/components/responses/TooManyRequestsResponse"}
       summary: Get a specific Org Config value
       tags: [Organizations]
-      x-menu-order: 101
+      x-menu-order: 2
       "x-permission":
         operator: OPEN
         permissions: []
@@ -91730,7 +93456,7 @@ paths:
         "429": {$ref: "#/components/responses/TooManyRequestsResponse"}
       summary: Update a specific Org Config
       tags: [Organizations]
-      x-menu-order: 102
+      x-menu-order: 3
       "x-permission":
         operator: OR
         permissions:
@@ -92242,7 +93968,7 @@ paths:
       summary: Get a finding
       tags:
         - "Security Monitoring"
-      x-menu-order: 2
+      x-menu-order: 3
       x-unstable: |-
         **Note**: This endpoint uses the legacy security findings data model and is planned for deprecation.
         Use the [search security findings endpoint](https://docs.datadoghq.com/api/latest/security-monitoring/#search-security-findings),
@@ -93127,7 +94853,7 @@ paths:
       tags:
         - Metrics
       x-codegen-request-body-name: body
-      x-menu-order: 2
+      x-menu-order: 16
       "x-permission":
         operator: OR
         permissions:
@@ -93168,7 +94894,7 @@ paths:
       tags:
         - Metrics
       x-codegen-request-body-name: body
-      x-menu-order: 1
+      x-menu-order: 15
       "x-permission":
         operator: OR
         permissions:
@@ -93663,7 +95389,7 @@ paths:
       summary: List all WAF custom rules
       tags:
         - "Application Security"
-      x-menu-order: 13
+      x-menu-order: 9
     post:
       description: Create a new WAF custom rule with the given parameters.
       operationId: CreateApplicationSecurityWafCustomRule
@@ -93693,7 +95419,7 @@ paths:
       tags:
         - "Application Security"
       x-codegen-request-body-name: body
-      x-menu-order: 12
+      x-menu-order: 10
   /api/v2/remote_config/products/asm/waf/custom_rules/{custom_rule_id}:
     delete:
       description: Delete a specific WAF custom rule.
@@ -93714,7 +95440,7 @@ paths:
       summary: Delete a WAF Custom Rule
       tags:
         - "Application Security"
-      x-menu-order: 16
+      x-menu-order: 8
       x-terraform-resource: appsec_waf_custom_rule
     get:
       description: Retrieve a WAF custom rule by ID.
@@ -93735,7 +95461,7 @@ paths:
       summary: Get a WAF custom rule
       tags:
         - "Application Security"
-      x-menu-order: 10
+      x-menu-order: 6
       x-terraform-resource: appsec_waf_custom_rule
     put:
       description: |-
@@ -93772,7 +95498,7 @@ paths:
       tags:
         - "Application Security"
       x-codegen-request-body-name: body
-      x-menu-order: 15
+      x-menu-order: 7
       x-terraform-resource: appsec_waf_custom_rule
   /api/v2/remote_config/products/asm/waf/exclusion_filters:
     get:
@@ -93792,7 +95518,7 @@ paths:
       summary: List all WAF exclusion filters
       tags:
         - "Application Security"
-      x-menu-order: 3
+      x-menu-order: 4
       "x-permission":
         operator: AND
         permissions:
@@ -93831,7 +95557,7 @@ paths:
       tags:
         - "Application Security"
       x-codegen-request-body-name: body
-      x-menu-order: 2
+      x-menu-order: 5
       "x-permission":
         operator: AND
         permissions:
@@ -93857,7 +95583,7 @@ paths:
       summary: Delete a WAF exclusion filter
       tags:
         - "Application Security"
-      x-menu-order: 6
+      x-menu-order: 3
       "x-permission":
         operator: AND
         permissions:
@@ -93925,7 +95651,7 @@ paths:
       tags:
         - "Application Security"
       x-codegen-request-body-name: body
-      x-menu-order: 5
+      x-menu-order: 2
       "x-permission":
         operator: AND
         permissions:
@@ -94569,7 +96295,7 @@ paths:
       summary: List roles
       tags:
         - Roles
-      x-menu-order: 1
+      x-menu-order: 2
       "x-permission":
         operator: OR
         permissions:
@@ -94613,7 +96339,7 @@ paths:
       tags:
         - Roles
       x-codegen-request-body-name: body
-      x-menu-order: 2
+      x-menu-order: 3
       "x-permission":
         operator: OR
         permissions:
@@ -94639,7 +96365,7 @@ paths:
       summary: List role templates
       tags:
         - Roles
-      x-menu-order: 16
+      x-menu-order: 14
       x-unstable: "**Note**: This endpoint may be subject to changes."
   /api/v2/roles/{role_id}:
     delete:
@@ -94673,7 +96399,7 @@ paths:
       tags:
         - Roles
       x-codegen-request-body-name: body
-      x-menu-order: 5
+      x-menu-order: 6
     get:
       description: Get a role in the organization specified by the role’s `role_id`.
       operationId: GetRole
@@ -94709,7 +96435,7 @@ paths:
       tags:
         - Roles
       x-codegen-request-body-name: body
-      x-menu-order: 3
+      x-menu-order: 4
     patch:
       description: |-
         Edit a role. Can only be used with application keys belonging to administrators.
@@ -94764,7 +96490,7 @@ paths:
       tags:
         - Roles
       x-codegen-request-body-name: body
-      x-menu-order: 4
+      x-menu-order: 5
       "x-permission":
         operator: OR
         permissions:
@@ -94823,7 +96549,7 @@ paths:
       tags:
         - Roles
       x-codegen-request-body-name: body
-      x-menu-order: 12
+      x-menu-order: 13
       "x-permission":
         operator: OR
         permissions:
@@ -94876,7 +96602,7 @@ paths:
       tags:
         - Roles
       x-codegen-request-body-name: body
-      x-menu-order: 8
+      x-menu-order: 9
       "x-permission":
         operator: OR
         permissions:
@@ -94916,7 +96642,7 @@ paths:
       tags:
         - Roles
       x-codegen-request-body-name: body
-      x-menu-order: 6
+      x-menu-order: 7
     post:
       description: Adds a permission to a role.
       operationId: AddPermissionToRole
@@ -94964,7 +96690,7 @@ paths:
       tags:
         - Roles
       x-codegen-request-body-name: body
-      x-menu-order: 7
+      x-menu-order: 8
       "x-permission":
         operator: OR
         permissions:
@@ -95017,7 +96743,7 @@ paths:
       tags:
         - Roles
       x-codegen-request-body-name: body
-      x-menu-order: 11
+      x-menu-order: 12
       "x-permission":
         operator: OR
         permissions:
@@ -95074,7 +96800,7 @@ paths:
       summary: Get all users of a role
       tags:
         - Roles
-      x-menu-order: 9
+      x-menu-order: 10
     post:
       description: Adds a user to a role.
       operationId: AddUserToRole
@@ -95122,7 +96848,7 @@ paths:
       tags:
         - Roles
       x-codegen-request-body-name: body
-      x-menu-order: 10
+      x-menu-order: 11
       "x-permission":
         operator: OR
         permissions:
@@ -96296,7 +98022,7 @@ paths:
       tags:
         - Organizations
       x-codegen-request-body-name: body
-      x-menu-order: 1
+      x-menu-order: 4
       "x-permission":
         operator: OR
         permissions:
@@ -97026,7 +98752,7 @@ paths:
       tags:
         - Service Scorecards
       x-codegen-request-body-name: body
-      x-menu-order: 1
+      x-menu-order: 5
       x-unstable: |-
         **Note**: This endpoint is in public beta.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -97114,7 +98840,7 @@ paths:
       summary: List all rules
       tags:
         - Service Scorecards
-      x-menu-order: 2
+      x-menu-order: 6
       x-pagination:
         limitParam: page[size]
         pageOffsetParam: page[offset]
@@ -97154,7 +98880,7 @@ paths:
       tags:
         - Service Scorecards
       x-codegen-request-body-name: body
-      x-menu-order: 1
+      x-menu-order: 7
       x-unstable: |-
         **Note**: This endpoint is in public beta.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -97548,7 +99274,7 @@ paths:
       summary: List security findings
       tags:
         - "Security Monitoring"
-      x-menu-order: 1
+      x-menu-order: 14
       x-pagination:
         cursorParam: page[cursor]
         cursorPath: meta.page.after
@@ -97589,7 +99315,7 @@ paths:
       tags:
         - "Security Monitoring"
       x-codegen-request-body-name: body
-      x-menu-order: 46
+      x-menu-order: 17
       "x-permission":
         operator: OR
         permissions:
@@ -97628,7 +99354,7 @@ paths:
       tags:
         - "Security Monitoring"
       x-codegen-request-body-name: body
-      x-menu-order: 44
+      x-menu-order: 16
       "x-permission":
         operator: OR
         permissions:
@@ -97675,7 +99401,7 @@ paths:
       tags:
         - "Security Monitoring"
       x-codegen-request-body-name: body
-      x-menu-order: 45
+      x-menu-order: 18
       "x-permission":
         operator: OR
         permissions:
@@ -97715,7 +99441,7 @@ paths:
       tags:
         - "Security Monitoring"
       x-codegen-request-body-name: body
-      x-menu-order: 48
+      x-menu-order: 20
       "x-permission":
         operator: OR
         permissions:
@@ -97754,7 +99480,7 @@ paths:
       tags:
         - "Security Monitoring"
       x-codegen-request-body-name: body
-      x-menu-order: 47
+      x-menu-order: 19
       "x-permission":
         operator: OR
         permissions:
@@ -97799,7 +99525,7 @@ paths:
       tags:
         - "Security Monitoring"
       x-codegen-request-body-name: body
-      x-menu-order: 2
+      x-menu-order: 15
       x-pagination:
         cursorParam: body.data.attributes.page.cursor
         cursorPath: meta.page.after
@@ -97919,7 +99645,7 @@ paths:
       summary: List assets SBOMs
       tags:
         - "Security Monitoring"
-      x-menu-order: 28
+      x-menu-order: 83
       x-permission:
         operator: OR
         permissions:
@@ -97991,7 +99717,7 @@ paths:
       summary: Get SBOM
       tags:
         - "Security Monitoring"
-      x-menu-order: 27
+      x-menu-order: 82
       x-permission:
         operator: OR
         permissions:
@@ -98122,7 +99848,7 @@ paths:
       summary: List scanned assets metadata
       tags:
         - "Security Monitoring"
-      x-menu-order: 28
+      x-menu-order: 84
       x-permission:
         operator: OR
         permissions:
@@ -98147,7 +99873,7 @@ paths:
       summary: Get the list of signal-based notification rules
       tags:
         - Security Monitoring
-      x-menu-order: 15
+      x-menu-order: 9
       "x-permission":
         operator: OR
         permissions:
@@ -98184,7 +99910,7 @@ paths:
       tags:
         - Security Monitoring
       x-codegen-request-body-name: body
-      x-menu-order: 16
+      x-menu-order: 10
       "x-permission":
         operator: OR
         permissions:
@@ -98215,7 +99941,7 @@ paths:
       summary: Delete a signal-based notification rule
       tags:
         - Security Monitoring
-      x-menu-order: 21
+      x-menu-order: 12
       "x-permission":
         operator: OR
         permissions:
@@ -98251,7 +99977,7 @@ paths:
       summary: Get details of a signal-based notification rule
       tags:
         - Security Monitoring
-      x-menu-order: 18
+      x-menu-order: 11
       "x-permission":
         operator: OR
         permissions:
@@ -98296,7 +100022,7 @@ paths:
       tags:
         - Security Monitoring
       x-codegen-request-body-name: body
-      x-menu-order: 20
+      x-menu-order: 13
       "x-permission":
         operator: OR
         permissions:
@@ -98740,7 +100466,7 @@ paths:
       summary: List vulnerabilities
       tags:
         - "Security Monitoring"
-      x-menu-order: 25
+      x-menu-order: 80
       x-permission:
         operator: OR
         permissions:
@@ -98765,7 +100491,7 @@ paths:
       summary: Get the list of vulnerability notification rules
       tags:
         - Security Monitoring
-      x-menu-order: 15
+      x-menu-order: 4
       "x-permission":
         operator: OR
         permissions:
@@ -98802,7 +100528,7 @@ paths:
       tags:
         - Security Monitoring
       x-codegen-request-body-name: body
-      x-menu-order: 16
+      x-menu-order: 5
       "x-permission":
         operator: OR
         permissions:
@@ -98833,7 +100559,7 @@ paths:
       summary: Delete a vulnerability-based notification rule
       tags:
         - Security Monitoring
-      x-menu-order: 21
+      x-menu-order: 7
       "x-permission":
         operator: OR
         permissions:
@@ -98869,7 +100595,7 @@ paths:
       summary: Get details of a vulnerability notification rule
       tags:
         - Security Monitoring
-      x-menu-order: 18
+      x-menu-order: 6
       "x-permission":
         operator: OR
         permissions:
@@ -98914,7 +100640,7 @@ paths:
       tags:
         - Security Monitoring
       x-codegen-request-body-name: body
-      x-menu-order: 20
+      x-menu-order: 8
       "x-permission":
         operator: OR
         permissions:
@@ -99091,7 +100817,7 @@ paths:
       summary: List vulnerable assets
       tags:
         - "Security Monitoring"
-      x-menu-order: 26
+      x-menu-order: 81
       x-permission:
         operator: OR
         permissions:
@@ -99277,7 +101003,7 @@ paths:
       summary: Get all critical assets
       tags:
         - Security Monitoring
-      x-menu-order: 0
+      x-menu-order: 41
     post:
       description: Create a new critical asset.
       operationId: CreateSecurityMonitoringCriticalAsset
@@ -99312,7 +101038,7 @@ paths:
       tags:
         - Security Monitoring
       x-codegen-request-body-name: body
-      x-menu-order: 0
+      x-menu-order: 42
   /api/v2/security_monitoring/configuration/critical_assets/rules/{rule_id}:
     get:
       description: Get the list of critical assets that affect a specific existing rule by the rule's ID.
@@ -99340,7 +101066,7 @@ paths:
       summary: Get critical assets affecting a specific rule
       tags:
         - Security Monitoring
-      x-menu-order: 0
+      x-menu-order: 46
   /api/v2/security_monitoring/configuration/critical_assets/{critical_asset_id}:
     delete:
       description: Delete a specific critical asset.
@@ -99364,7 +101090,7 @@ paths:
       summary: Delete a critical asset
       tags:
         - Security Monitoring
-      x-menu-order: 0
+      x-menu-order: 45
     get:
       description: Get the details of a specific critical asset.
       operationId: GetSecurityMonitoringCriticalAsset
@@ -99391,7 +101117,7 @@ paths:
       summary: Get a critical asset
       tags:
         - Security Monitoring
-      x-menu-order: 0
+      x-menu-order: 43
     patch:
       description: Update a specific critical asset.
       operationId: UpdateSecurityMonitoringCriticalAsset
@@ -99429,7 +101155,7 @@ paths:
       summary: Update a critical asset
       tags:
         - Security Monitoring
-      x-menu-order: 0
+      x-menu-order: 44
   /api/v2/security_monitoring/configuration/security_filters:
     get:
       description: Get the list of configured security filters with their definitions.
@@ -99452,7 +101178,7 @@ paths:
             - security_monitoring_filters_read
       summary: Get all security filters
       tags: ["Security Monitoring"]
-      x-menu-order: 18
+      x-menu-order: 27
       "x-permission":
         operator: OR
         permissions:
@@ -99494,7 +101220,7 @@ paths:
       summary: Create a security filter
       tags: ["Security Monitoring"]
       x-codegen-request-body-name: body
-      x-menu-order: 17
+      x-menu-order: 28
       "x-permission":
         operator: OR
         permissions:
@@ -99521,7 +101247,7 @@ paths:
             - security_monitoring_filters_write
       summary: Delete a security filter
       tags: ["Security Monitoring"]
-      x-menu-order: 14
+      x-menu-order: 31
       "x-permission":
         operator: OR
         permissions:
@@ -99555,7 +101281,7 @@ paths:
             - security_monitoring_filters_read
       summary: Get a security filter
       tags: ["Security Monitoring"]
-      x-menu-order: 16
+      x-menu-order: 29
       "x-permission":
         operator: OR
         permissions:
@@ -99599,7 +101325,7 @@ paths:
       summary: Update a security filter
       tags: ["Security Monitoring"]
       x-codegen-request-body-name: body
-      x-menu-order: 15
+      x-menu-order: 30
       "x-permission":
         operator: OR
         permissions:
@@ -99650,7 +101376,7 @@ paths:
       summary: Get all suppression rules
       tags:
         - Security Monitoring
-      x-menu-order: 0
+      x-menu-order: 32
     post:
       description: Create a new suppression rule.
       operationId: CreateSecurityMonitoringSuppression
@@ -99685,7 +101411,7 @@ paths:
       tags:
         - Security Monitoring
       x-codegen-request-body-name: body
-      x-menu-order: 0
+      x-menu-order: 33
   /api/v2/security_monitoring/configuration/suppressions/rules:
     post:
       description: Get the list of suppressions that would affect a rule.
@@ -99717,7 +101443,7 @@ paths:
       summary: Get suppressions affecting future rule
       tags:
         - Security Monitoring
-      x-menu-order: 0
+      x-menu-order: 38
   /api/v2/security_monitoring/configuration/suppressions/rules/{rule_id}:
     get:
       description: Get the list of suppressions that affect a specific existing rule by its ID.
@@ -99745,7 +101471,7 @@ paths:
       summary: Get suppressions affecting a specific rule
       tags:
         - Security Monitoring
-      x-menu-order: 0
+      x-menu-order: 39
   /api/v2/security_monitoring/configuration/suppressions/validation:
     post:
       description: Validate a suppression rule.
@@ -99773,7 +101499,7 @@ paths:
       summary: Validate a suppression rule
       tags: ["Security Monitoring"]
       x-codegen-request-body-name: body
-      x-menu-order: 0
+      x-menu-order: 37
       "x-permission":
         operator: OR
         permissions:
@@ -99801,7 +101527,7 @@ paths:
       summary: Delete a suppression rule
       tags:
         - Security Monitoring
-      x-menu-order: 0
+      x-menu-order: 36
     get:
       description: Get the details of a specific suppression rule.
       operationId: GetSecurityMonitoringSuppression
@@ -99828,7 +101554,7 @@ paths:
       summary: Get a suppression rule
       tags:
         - Security Monitoring
-      x-menu-order: 0
+      x-menu-order: 34
     patch:
       description: Update a specific suppression rule.
       operationId: UpdateSecurityMonitoringSuppression
@@ -99866,7 +101592,7 @@ paths:
       summary: Update a suppression rule
       tags:
         - Security Monitoring
-      x-menu-order: 0
+      x-menu-order: 35
   /api/v2/security_monitoring/configuration/suppressions/{suppression_id}/version_history:
     get:
       description: Get a suppression's version history.
@@ -99896,7 +101622,7 @@ paths:
       summary: Get a suppression's version history
       tags:
         - Security Monitoring
-      x-menu-order: 0
+      x-menu-order: 40
   /api/v2/security_monitoring/content_packs/states:
     get:
       description: |-
@@ -99928,7 +101654,7 @@ paths:
       summary: Get content pack states
       tags:
         - Security Monitoring
-      x-menu-order: 3
+      x-menu-order: 47
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -99967,7 +101693,7 @@ paths:
       summary: Activate content pack
       tags:
         - Security Monitoring
-      x-menu-order: 2
+      x-menu-order: 48
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -100005,7 +101731,7 @@ paths:
       summary: Deactivate content pack
       tags:
         - Security Monitoring
-      x-menu-order: 1
+      x-menu-order: 49
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -100047,7 +101773,7 @@ paths:
             - security_monitoring_rules_read
       summary: List rules
       tags: ["Security Monitoring"]
-      x-menu-order: 4
+      x-menu-order: 50
       "x-permission":
         operator: OR
         permissions:
@@ -100082,7 +101808,7 @@ paths:
       summary: Create a detection rule
       tags: ["Security Monitoring"]
       x-codegen-request-body-name: body
-      x-menu-order: 4
+      x-menu-order: 51
       "x-permission":
         operator: OR
         permissions:
@@ -100124,7 +101850,7 @@ paths:
       summary: Bulk export security monitoring rules
       tags: ["Security Monitoring"]
       x-codegen-request-body-name: body
-      x-menu-order: 13
+      x-menu-order: 60
       "x-permission":
         operator: OR
         permissions:
@@ -100171,7 +101897,7 @@ paths:
       summary: Convert a rule from JSON to Terraform
       tags: ["Security Monitoring"]
       x-codegen-request-body-name: body
-      x-menu-order: 12
+      x-menu-order: 59
       "x-permission":
         operator: OR
         permissions:
@@ -100212,7 +101938,7 @@ paths:
       summary: Test a rule
       tags: ["Security Monitoring"]
       x-codegen-request-body-name: body
-      x-menu-order: 9
+      x-menu-order: 56
       "x-permission":
         operator: OR
         permissions:
@@ -100244,7 +101970,7 @@ paths:
       summary: Validate a detection rule
       tags: ["Security Monitoring"]
       x-codegen-request-body-name: body
-      x-menu-order: 10
+      x-menu-order: 57
       "x-permission":
         operator: OR
         permissions:
@@ -100272,7 +101998,7 @@ paths:
             - security_monitoring_rules_write
       summary: Delete an existing rule
       tags: ["Security Monitoring"]
-      x-menu-order: 7
+      x-menu-order: 54
       "x-permission":
         operator: OR
         permissions:
@@ -100300,7 +102026,7 @@ paths:
             - security_monitoring_rules_read
       summary: Get a rule's details
       tags: ["Security Monitoring"]
-      x-menu-order: 5
+      x-menu-order: 52
       "x-permission":
         operator: OR
         permissions:
@@ -100345,7 +102071,7 @@ paths:
       summary: Update an existing rule
       tags: ["Security Monitoring"]
       x-codegen-request-body-name: body
-      x-menu-order: 6
+      x-menu-order: 53
       "x-permission":
         operator: OR
         permissions:
@@ -100385,7 +102111,7 @@ paths:
             - security_monitoring_rules_read
       summary: Convert an existing rule from JSON to Terraform
       tags: ["Security Monitoring"]
-      x-menu-order: 11
+      x-menu-order: 58
       "x-permission":
         operator: OR
         permissions:
@@ -100428,7 +102154,7 @@ paths:
       summary: Test an existing rule
       tags: ["Security Monitoring"]
       x-codegen-request-body-name: body
-      x-menu-order: 8
+      x-menu-order: 55
       "x-permission":
         operator: OR
         permissions:
@@ -100458,7 +102184,7 @@ paths:
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Get a rule's version history
       tags: ["Security Monitoring"]
-      x-menu-order: 25
+      x-menu-order: 61
       "x-permission":
         operator: OR
         permissions:
@@ -100499,7 +102225,7 @@ paths:
             - security_monitoring_signals_read
       summary: Get a quick list of security signals
       tags: ["Security Monitoring"]
-      x-menu-order: 14
+      x-menu-order: 73
       x-pagination:
         cursorParam: page[cursor]
         cursorPath: meta.page.after
@@ -100543,7 +102269,7 @@ paths:
       summary: Get a list of security signals
       tags: ["Security Monitoring"]
       x-codegen-request-body-name: body
-      x-menu-order: 13
+      x-menu-order: 72
       x-pagination:
         cursorParam: body.page.cursor
         cursorPath: meta.page.after
@@ -100577,7 +102303,7 @@ paths:
             - security_monitoring_signals_read
       summary: Get a signal's details
       tags: ["Security Monitoring"]
-      x-menu-order: 13
+      x-menu-order: 74
       "x-permission":
         operator: OR
         permissions:
@@ -100626,7 +102352,7 @@ paths:
       summary: Modify the triage assignee of a security signal
       tags: ["Security Monitoring"]
       x-codegen-request-body-name: body
-      x-menu-order: 10
+      x-menu-order: 77
       "x-permission":
         operator: OR
         permissions:
@@ -100675,7 +102401,7 @@ paths:
       summary: Change the related incidents of a security signal
       tags: ["Security Monitoring"]
       x-codegen-request-body-name: body
-      x-menu-order: 11
+      x-menu-order: 76
       "x-permission":
         operator: OR
         permissions:
@@ -100724,7 +102450,7 @@ paths:
       summary: Change the triage state of a security signal
       tags: ["Security Monitoring"]
       x-codegen-request-body-name: body
-      x-menu-order: 12
+      x-menu-order: 75
       "x-permission":
         operator: OR
         permissions:
@@ -101181,7 +102907,7 @@ paths:
       tags:
         - Metrics
       x-codegen-request-body-name: body
-      x-menu-order: 1
+      x-menu-order: 14
   /api/v2/service_accounts:
     post:
       description: Create a service account for your organization.
@@ -101264,7 +102990,7 @@ paths:
       summary: List application keys for this service account
       tags:
         - Service Accounts
-      x-menu-order: 6
+      x-menu-order: 2
       "x-permission":
         operator: OR
         permissions:
@@ -101305,7 +103031,7 @@ paths:
       tags:
         - Service Accounts
       x-codegen-request-body-name: body
-      x-menu-order: 5
+      x-menu-order: 3
       "x-permission":
         operator: OR
         permissions:
@@ -101337,7 +103063,7 @@ paths:
       summary: Delete an application key for this service account
       tags:
         - Service Accounts
-      x-menu-order: 3
+      x-menu-order: 6
       "x-permission":
         operator: OR
         permissions:
@@ -101372,7 +103098,7 @@ paths:
       summary: Get one application key for this service account
       tags:
         - Service Accounts
-      x-menu-order: 1
+      x-menu-order: 4
       "x-permission":
         operator: OR
         permissions:
@@ -101420,7 +103146,7 @@ paths:
       tags:
         - Service Accounts
       x-codegen-request-body-name: body
-      x-menu-order: 2
+      x-menu-order: 5
       "x-permission":
         operator: OR
         permissions:
@@ -101809,7 +103535,7 @@ paths:
             - security_monitoring_signals_read
       summary: List hist signals
       tags: ["Security Monitoring"]
-      x-menu-order: 42
+      x-menu-order: 69
       "x-permission":
         operator: OR
         permissions:
@@ -101849,7 +103575,7 @@ paths:
             - security_monitoring_signals_read
       summary: Search hist signals
       tags: ["Security Monitoring"]
-      x-menu-order: 40
+      x-menu-order: 71
       "x-permission":
         operator: OR
         permissions:
@@ -101885,7 +103611,7 @@ paths:
             - security_monitoring_signals_read
       summary: Get a hist signal's details
       tags: ["Security Monitoring"]
-      x-menu-order: 41
+      x-menu-order: 70
       "x-permission":
         operator: OR
         permissions:
@@ -101933,7 +103659,7 @@ paths:
         - AuthZ: []
       summary: List threat hunting jobs
       tags: ["Security Monitoring"]
-      x-menu-order: 20
+      x-menu-order: 63
       x-unstable: |-
         **Note**: This endpoint is in beta and may be subject to changes.
         Please check the documentation regularly for updates.
@@ -101972,7 +103698,7 @@ paths:
       summary: Run a threat hunting job
       tags: ["Security Monitoring"]
       x-codegen-request-body-name: body
-      x-menu-order: 19
+      x-menu-order: 62
       "x-permission":
         operator: OR
         permissions:
@@ -102007,7 +103733,7 @@ paths:
       summary: Convert a job result to a signal
       tags: ["Security Monitoring"]
       x-codegen-request-body-name: body
-      x-menu-order: 24
+      x-menu-order: 67
       "x-permission":
         operator: OR
         permissions:
@@ -102043,7 +103769,7 @@ paths:
         - AuthZ: []
       summary: Delete an existing job
       tags: ["Security Monitoring"]
-      x-menu-order: 23
+      x-menu-order: 65
       x-unstable: |-
         **Note**: This endpoint is in beta and may be subject to changes.
         Please check the documentation regularly for updates.
@@ -102074,7 +103800,7 @@ paths:
             - security_monitoring_rules_read
       summary: Get a job's details
       tags: ["Security Monitoring"]
-      x-menu-order: 21
+      x-menu-order: 64
       "x-permission":
         operator: OR
         permissions:
@@ -102110,7 +103836,7 @@ paths:
             - security_monitoring_rules_write
       summary: Cancel a threat hunting job
       tags: ["Security Monitoring"]
-      x-menu-order: 22
+      x-menu-order: 66
       "x-permission":
         operator: OR
         permissions:
@@ -102152,7 +103878,7 @@ paths:
             - security_monitoring_signals_read
       summary: Get a job's hist signals
       tags: ["Security Monitoring"]
-      x-menu-order: 43
+      x-menu-order: 68
       "x-permission":
         operator: OR
         permissions:
@@ -102349,7 +104075,7 @@ paths:
       summary: Get SLO status
       tags:
         - Service Level Objectives
-      x-menu-order: 105
+      x-menu-order: 104
       "x-permission":
         operator: OR
         permissions:
@@ -102666,7 +104392,7 @@ paths:
       summary: Post dependencies for analysis
       tags:
         - Static Analysis
-      x-menu-order: 2
+      x-menu-order: 12
       x-unstable: "**Note**: This endpoint may be subject to changes."
   /api/v2/static-analysis-sca/vulnerabilities/resolve-vulnerable-symbols:
     post:
@@ -102694,7 +104420,7 @@ paths:
       summary: POST request to resolve vulnerable symbols
       tags:
         - Static Analysis
-      x-menu-order: 1
+      x-menu-order: 11
       x-unstable: "**Note**: This endpoint may be subject to changes."
   /api/v2/static-analysis/custom/rulesets/{ruleset_name}:
     delete:
@@ -103221,7 +104947,7 @@ paths:
       summary: Ruleset get multiple
       tags:
         - "Security Monitoring"
-      x-menu-order: 28
+      x-menu-order: 79
       x-unstable: "**Note**: This endpoint may be subject to changes."
   /api/v2/static-analysis/secrets/rules:
     get:
@@ -103245,7 +104971,7 @@ paths:
       summary: Returns a list of Secrets rules
       tags:
         - "Security Monitoring"
-      x-menu-order: 28
+      x-menu-order: 78
       x-unstable: "**Note**: This endpoint may be subject to changes."
   /api/v2/statuspages:
     get:
@@ -104204,7 +105930,7 @@ paths:
       summary: Create a test suite
       tags:
         - Synthetics
-      x-menu-order: 50
+      x-menu-order: 45
       x-permission:
         operator: OR
         permissions:
@@ -104242,7 +105968,7 @@ paths:
       summary: Bulk delete suites
       tags:
         - Synthetics
-      x-menu-order: 70
+      x-menu-order: 46
       x-permission:
         operator: OR
         permissions:
@@ -104311,7 +106037,7 @@ paths:
       summary: Search test suites
       tags:
         - Synthetics
-      x-menu-order: 55
+      x-menu-order: 42
       "x-permission":
         operator: OR
         permissions:
@@ -104349,7 +106075,7 @@ paths:
       summary: Get a suite
       tags:
         - Synthetics
-      x-menu-order: 60
+      x-menu-order: 43
       x-permission:
         operator: OR
         permissions:
@@ -104393,7 +106119,7 @@ paths:
       summary: Edit a test suite
       tags:
         - Synthetics
-      x-menu-order: 65
+      x-menu-order: 44
       x-permission:
         operator: OR
         permissions:
@@ -104436,7 +106162,7 @@ paths:
       summary: Bulk delete tests
       tags:
         - Synthetics
-      x-menu-order: 90
+      x-menu-order: 50
       x-permission:
         operator: OR
         permissions:
@@ -104473,7 +106199,7 @@ paths:
       summary: Create a Network Path test
       tags:
         - Synthetics
-      x-menu-order: 75
+      x-menu-order: 47
       x-permission:
         operator: OR
         permissions:
@@ -104518,7 +106244,7 @@ paths:
       summary: Get a Network Path test
       tags:
         - Synthetics
-      x-menu-order: 80
+      x-menu-order: 48
       x-permission:
         operator: OR
         permissions:
@@ -104568,7 +106294,7 @@ paths:
       summary: Edit a Network Path test
       tags:
         - Synthetics
-      x-menu-order: 85
+      x-menu-order: 49
       x-permission:
         operator: OR
         permissions:
@@ -104617,7 +106343,7 @@ paths:
       tags:
         - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 45
+      x-menu-order: 51
       "x-permission":
         operator: OR
         permissions:
@@ -104874,7 +106600,7 @@ paths:
       summary: Get all teams
       tags:
         - Teams
-      x-menu-order: 1
+      x-menu-order: 20
       x-pagination:
         limitParam: page[size]
         pageParam: page[number]
@@ -104921,7 +106647,7 @@ paths:
       tags:
         - Teams
       x-codegen-request-body-name: body
-      x-menu-order: 2
+      x-menu-order: 21
       "x-permission":
         operator: AND
         permissions:
@@ -104965,7 +106691,7 @@ paths:
       summary: Get team hierarchy links
       tags:
         - Teams
-      x-menu-order: 20
+      x-menu-order: 30
       x-pagination:
         limitParam: page[size]
         pageParam: page[number]
@@ -105009,7 +106735,7 @@ paths:
       summary: Create a team hierarchy link
       tags:
         - Teams
-      x-menu-order: 22
+      x-menu-order: 31
       "x-permission":
         operator: AND
         permissions:
@@ -105048,7 +106774,7 @@ paths:
       summary: Remove a team hierarchy link
       tags:
         - Teams
-      x-menu-order: 23
+      x-menu-order: 33
       "x-permission":
         operator: AND
         permissions:
@@ -105089,7 +106815,7 @@ paths:
       summary: Get a team hierarchy link
       tags:
         - Teams
-      x-menu-order: 21
+      x-menu-order: 32
       "x-permission":
         operator: OR
         permissions:
@@ -105123,7 +106849,7 @@ paths:
       summary: Delete team connections
       tags:
         - Teams
-      x-menu-order: 26
+      x-menu-order: 3
       "x-permission":
         operator: OR
         permissions:
@@ -105199,7 +106925,7 @@ paths:
       summary: List team connections
       tags:
         - Teams
-      x-menu-order: 24
+      x-menu-order: 1
       x-pagination:
         limitParam: page[size]
         pageParam: page[number]
@@ -105240,7 +106966,7 @@ paths:
       summary: Create team connections
       tags:
         - Teams
-      x-menu-order: 25
+      x-menu-order: 2
       "x-permission":
         operator: OR
         permissions:
@@ -105267,12 +106993,6 @@ paths:
           description: OK
         "403":
           $ref: "#/components/responses/ForbiddenResponse"
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/APIErrorResponse"
-          description: Team sync configurations not found
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       security:
@@ -105283,19 +107003,23 @@ paths:
       summary: Get team sync configurations
       tags:
         - Teams
-      x-menu-order: 18
+      x-menu-order: 22
       x-permission:
         operator: OR
         permissions:
           - teams_read
     post:
       description: |-
-        This endpoint attempts to link your existing Datadog teams with GitHub teams by matching their names.
+        This endpoint configures synchronization between your existing Datadog teams and GitHub teams by matching their names.
         It evaluates all current Datadog teams and compares them against teams in the GitHub organization
         connected to your Datadog account, based on Datadog Team handle and GitHub Team slug
         (lowercased and kebab-cased).
 
         This operation is read-only on the GitHub side, no teams will be modified or created.
+
+        Optionally, provide `selection_state` to limit synchronization
+        to specific teams or organizations and their subtrees, instead
+        of syncing all teams.
 
         [A GitHub organization must be connected to your Datadog account](https://docs.datadoghq.com/integrations/github/),
         and the GitHub App integrated with Datadog must have the `Members Read` permission. Matching is performed by comparing the Datadog team handle to the GitHub team slug
@@ -105311,6 +107035,8 @@ paths:
       responses:
         "200":
           description: OK
+        "204":
+          description: No Content
         "403":
           $ref: "#/components/responses/ForbiddenResponse"
         "429":
@@ -105330,7 +107056,7 @@ paths:
       tags:
         - Teams
       x-codegen-request-body-name: body
-      x-menu-order: 19
+      x-menu-order: 23
       x-permission:
         operator: AND
         permissions:
@@ -105387,7 +107113,7 @@ paths:
       summary: Get all member teams
       tags:
         - Teams
-      x-menu-order: 21
+      x-menu-order: 27
       x-pagination:
         limitParam: page[size]
         pageParam: page[number]
@@ -105442,7 +107168,7 @@ paths:
       summary: Add a member team
       tags:
         - Teams
-      x-menu-order: 20
+      x-menu-order: 28
       x-permission:
         operator: OR
         permissions:
@@ -105493,7 +107219,7 @@ paths:
       summary: Remove a member team
       tags:
         - Teams
-      x-menu-order: 22
+      x-menu-order: 29
       x-permission:
         operator: OR
         permissions:
@@ -105535,7 +107261,7 @@ paths:
       summary: Remove a team
       tags:
         - Teams
-      x-menu-order: 5
+      x-menu-order: 26
       "x-permission":
         operator: AND
         permissions:
@@ -105576,7 +107302,7 @@ paths:
       summary: Get a team
       tags:
         - Teams
-      x-menu-order: 3
+      x-menu-order: 24
       "x-permission":
         operator: OR
         permissions:
@@ -105637,7 +107363,7 @@ paths:
       tags:
         - Teams
       x-codegen-request-body-name: body
-      x-menu-order: 4
+      x-menu-order: 25
       "x-permission":
         operator: OR
         permissions:
@@ -105678,7 +107404,7 @@ paths:
       summary: Get links for a team
       tags:
         - Teams
-      x-menu-order: 10
+      x-menu-order: 4
       "x-permission":
         operator: OR
         permissions:
@@ -105731,7 +107457,7 @@ paths:
       tags:
         - Teams
       x-codegen-request-body-name: body
-      x-menu-order: 11
+      x-menu-order: 5
       "x-permission":
         operator: OR
         permissions:
@@ -105774,7 +107500,7 @@ paths:
       summary: Remove a team link
       tags:
         - Teams
-      x-menu-order: 14
+      x-menu-order: 8
       "x-permission":
         operator: OR
         permissions:
@@ -105820,7 +107546,7 @@ paths:
       summary: Get a team link
       tags:
         - Teams
-      x-menu-order: 12
+      x-menu-order: 6
       "x-permission":
         operator: OR
         permissions:
@@ -105873,7 +107599,7 @@ paths:
       tags:
         - Teams
       x-codegen-request-body-name: body
-      x-menu-order: 13
+      x-menu-order: 7
       "x-permission":
         operator: OR
         permissions:
@@ -105928,7 +107654,7 @@ paths:
       summary: Get team memberships
       tags:
         - Teams
-      x-menu-order: 6
+      x-menu-order: 9
       x-pagination:
         limitParam: page[size]
         pageParam: page[number]
@@ -105988,7 +107714,7 @@ paths:
       tags:
         - Teams
       x-codegen-request-body-name: body
-      x-menu-order: 7
+      x-menu-order: 10
       "x-permission":
         operator: OR
         permissions:
@@ -106034,7 +107760,7 @@ paths:
       summary: Remove a user from a team
       tags:
         - Teams
-      x-menu-order: 8
+      x-menu-order: 11
       "x-permission":
         operator: OR
         permissions:
@@ -106096,7 +107822,7 @@ paths:
       tags:
         - Teams
       x-codegen-request-body-name: body
-      x-menu-order: 9
+      x-menu-order: 12
       "x-permission":
         operator: OR
         permissions:
@@ -106136,7 +107862,7 @@ paths:
       summary: Get team notification rules
       tags:
         - Teams
-      x-menu-order: 27
+      x-menu-order: 13
       x-permission:
         operator: OR
         permissions:
@@ -106187,7 +107913,7 @@ paths:
       summary: Create team notification rule
       tags:
         - Teams
-      x-menu-order: 28
+      x-menu-order: 14
       x-permission:
         operator: OR
         permissions:
@@ -106229,7 +107955,7 @@ paths:
       summary: Delete team notification rule
       tags:
         - Teams
-      x-menu-order: 31
+      x-menu-order: 17
       x-permission:
         operator: OR
         permissions:
@@ -106274,7 +108000,7 @@ paths:
       summary: Get team notification rule
       tags:
         - Teams
-      x-menu-order: 29
+      x-menu-order: 15
       x-permission:
         operator: OR
         permissions:
@@ -106325,7 +108051,7 @@ paths:
       summary: Update team notification rule
       tags:
         - Teams
-      x-menu-order: 30
+      x-menu-order: 16
       x-permission:
         operator: OR
         permissions:
@@ -106366,7 +108092,7 @@ paths:
       summary: Get permission settings for a team
       tags:
         - Teams
-      x-menu-order: 17
+      x-menu-order: 18
       "x-permission":
         operator: OR
         permissions:
@@ -106420,7 +108146,7 @@ paths:
       tags:
         - Teams
       x-codegen-request-body-name: body
-      x-menu-order: 18
+      x-menu-order: 19
       "x-permission":
         operator: OR
         permissions:
@@ -106789,7 +108515,7 @@ paths:
       summary: Get hourly usage for application security
       tags:
         - Usage Metering
-      x-menu-order: 38
+      x-menu-order: 2
       "x-permission":
         operator: OR
         permissions:
@@ -106850,7 +108576,7 @@ paths:
       summary: Get billing dimension mapping for usage endpoints
       tags:
         - Usage Metering
-      x-menu-order: 1
+      x-menu-order: 12
       "x-permission":
         operator: OR
         permissions:
@@ -106916,7 +108642,7 @@ paths:
       summary: Get cost across multi-org account
       tags:
         - Usage Metering
-      x-menu-order: 45
+      x-menu-order: 4
       "x-permission":
         operator: AND
         permissions:
@@ -107008,7 +108734,7 @@ paths:
       summary: Get estimated cost across your account
       tags:
         - Usage Metering
-      x-menu-order: 6
+      x-menu-order: 5
       "x-permission":
         operator: AND
         permissions:
@@ -107084,7 +108810,7 @@ paths:
       summary: Get historical cost across your account
       tags:
         - Usage Metering
-      x-menu-order: 5
+      x-menu-order: 6
       "x-permission":
         operator: AND
         permissions:
@@ -107203,7 +108929,7 @@ paths:
       summary: Get hourly usage by product family
       tags:
         - Usage Metering
-      x-menu-order: 1
+      x-menu-order: 9
       "x-permission":
         operator: OR
         permissions:
@@ -107265,7 +108991,7 @@ paths:
       summary: Get hourly usage for Lambda traced invocations
       tags:
         - Usage Metering
-      x-menu-order: 37
+      x-menu-order: 1
       "x-permission":
         operator: OR
         permissions:
@@ -107327,7 +109053,7 @@ paths:
       summary: Get hourly usage for observability pipelines
       tags:
         - Usage Metering
-      x-menu-order: 39
+      x-menu-order: 3
       "x-permission":
         operator: OR
         permissions:
@@ -107426,7 +109152,7 @@ paths:
       summary: Get usage attribution types
       tags:
         - Usage Metering
-      x-menu-order: 5
+      x-menu-order: 10
       "x-permission":
         operator: OR
         permissions:
@@ -107908,7 +109634,7 @@ paths:
       summary: Get user memberships
       tags:
         - Teams
-      x-menu-order: 19
+      x-menu-order: 34
       "x-permission":
         operator: OR
         permissions:
@@ -108429,6 +110155,8 @@ tags:
   - description: |-
       Manage your Datadog Fastly integration accounts and services directly through the Datadog API. See the [Fastly integration page](https://docs.datadoghq.com/integrations/fastly/) for more information.
     name: Fastly Integration
+  - description: Manage feature flags and environments.
+    name: Feature Flags
   - description: |-
       Manage automated deployments across your fleet of hosts.
 

@@ -16,9 +16,8 @@ further_reading:
   text: "Cloud Cost Management"
 ---
 
-<div class="alert alert-info">
-Governance Console is available with the Infrastructure Enterprise plan.
-</div>
+{{< site-region region="gov" >}}<div class="alert alert-danger"> Governance Console is not available for the selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
 
 ## Overview
 
