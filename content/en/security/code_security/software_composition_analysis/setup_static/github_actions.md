@@ -34,6 +34,16 @@ jobs:
         dd_site: "datadoghq.com"
 {{< /code-block >}}
 
+## Inputs
+
+You can set the following parameters for Software Composition Analysis.
+
+| Name         | Description                                                                                                                                        | Required | Default         |
+|--------------|----------------------------------------------------------------------------------------------------------------------------------------------------|----------|-----------------|
+| `dd_api_key` | Your Datadog API key. This key is created by your [Datadog organization][5] and should be stored as a [secret][6].                                 | Yes      |                 |
+| `dd_app_key` | Your Datadog application key. This key is created by your [Datadog organization][5], should include the `code_analysis_read` scope, and should be stored as a [secret][6]. | Yes      |                 |
+| `dd_site`    | The [Datadog site][2] to send information to.                                                                                                      | No       | `datadoghq.com` |
+
 ## Related GitHub Actions
 
 [Datadog Static Code Analysis (SAST)][3] analyzes your first-party code. Static Code Analysis can be set up using the [`datadog-static-analyzer-github-action`][4] GitHub action.
@@ -42,3 +52,5 @@ jobs:
 [2]: /getting_started/site/
 [3]: /getting_started/code_security/?tab=datadoghosted#linking-services-to-code-violations-and-libraries
 [4]: https://github.com/DataDog/datadog-static-analyzer-github-action
+[5]: /account_management/api-app-keys/
+[6]: https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions#creating-secrets-for-a-repository
