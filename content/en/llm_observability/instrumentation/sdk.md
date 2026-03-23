@@ -917,6 +917,21 @@ LLMObs.startToolSpan(spanName, mlApp, sessionID);
 {{% /tab %}}
 {{< /tabs >}}
 
+### Choosing between tool and retrieval spans
+
+Retrieval spans are a specialized subcategory of tool spans. Use the following table to determine which span kind to apply:
+
+| Use `@tool` when | Use `@retrieval` when |
+|---|---|
+| The function calls an external API (web search, calculator, code interpreter) | The function performs a vector similarity search against an embedding store |
+| The function queries a traditional database (SQL, key-value, graph) | The function fetches ranked documents from a knowledge base for RAG |
+| The function reads or writes files, or makes HTTP requests | The function returns a list of documents with relevance scores |
+| The function name contains "retrieve" or "fetch" but does not search a vector database | The function is part of a retrieval-augmented generation (RAG) pipeline performing the document retrieval step |
+
+<div class="alert alert-info"><code>@retrieval</code> is only for vector search operations that return ranked documents from a knowledge base. For all other external calls — including traditional database queries and API requests — use <code>@tool</code>. When in doubt, use <code>@tool</code>.</div>
+
+Retrieval spans also expect document-structured output with a required `text` field and optional `name`, `id`, and `score` fields (see [Enriching spans](#enriching-spans)), while tool spans accept any JSON-serializable input and output.
+
 ### Tasks
 
 {{< tabs >}}
@@ -1190,6 +1205,31 @@ getRelevantDocs = llmobs.wrap({ kind: 'retrieval' }, getRelevantDocs)
 
 Starting a new span before the current span is finished automatically traces a parent-child relationship between the two spans. The parent span represents the larger operation, while the child span represents a smaller nested sub-operation within it.
 
+### Trace hierarchy
+
+The following diagrams show common parent-child relationships between span kinds:
+
+```
+agent (root)                        workflow (root)
+├── llm        ← reasoning step     ├── task       ← input validation
+├── tool       ← external API call  ├── retrieval  ← fetch relevant docs
+│   └── task   ← postprocessing     ├── llm        ← generate response
+├── workflow   ← static sub-pipeline└── task       ← format output
+│   ├── task   ← preprocessing
+│   ├── llm    ← LLM call
+│   └── retrieval ← vector search
+└── llm        ← final response
+```
+
+**Key nesting rules:**
+
+- **Agent** and **workflow** spans are typically root spans. They contain child spans representing the steps they orchestrate.
+- Any span kind can have children. Nesting is determined by the execution context, not by the span kind. For example, a `@tool` span can contain child `@task` or `@llm` spans if the tool function calls other decorated functions.
+- Nesting is automatic: calling a decorated function inside another decorated function creates a parent-child relationship. No explicit parent parameter is required.
+- A function decorated with `@workflow` that calls a function decorated with `@tool` produces a `workflow → tool` trace.
+
+### Basic example
+
 {{< tabs >}}
 {{% tab "Python" %}}
 {{< code-block lang="python" >}}
@@ -1249,12 +1289,170 @@ public class MyJavaClass {
 {{% /tab %}}
 {{< /tabs >}}
 
+### Multi-level nesting example
+
+The following example demonstrates a realistic agent trace with multiple nested span kinds:
+
+{{< tabs >}}
+{{% tab "Python" %}}
+{{< code-block lang="python" >}}
+from ddtrace.llmobs.decorators import agent, llm, tool, task
+
+@agent
+def customer_support_agent(user_message):
+    clean_message = sanitize_input(user_message)
+    intent = classify_intent(clean_message)
+    if intent == "order_status":
+        result = lookup_order(clean_message)
+    response = generate_response(clean_message, result)
+    return response
+
+@task
+def sanitize_input(message):
+    ... # clean and validate user input
+    return cleaned
+
+@llm(model_name="gpt-4o", model_provider="openai")
+def classify_intent(message):
+    ... # LLM call to classify intent
+    return intent
+
+@tool
+def lookup_order(message):
+    order_data = db.query(...)  # external database call
+    return order_data
+
+@llm(model_name="gpt-4o", model_provider="openai")
+def generate_response(message, context):
+    ... # LLM call to generate final response
+    return response
+{{< /code-block >}}
+
+This produces the following trace:
+
+```
+customer_support_agent (agent)
+├── sanitize_input (task)
+├── classify_intent (llm)       ← auto-instrumented OpenAI call
+├── lookup_order (tool)
+└── generate_response (llm)     ← auto-instrumented OpenAI call
+```
+{{% /tab %}}
+{{% tab "Node.js" %}}
+{{< code-block lang="javascript" >}}
+function sanitizeInput (message) {
+  ... // clean and validate user input
+  return cleaned
+}
+sanitizeInput = llmobs.wrap({ kind: 'task' }, sanitizeInput)
+
+function classifyIntent (message) {
+  ... // LLM call to classify intent
+  return intent
+}
+classifyIntent = llmobs.wrap({ kind: 'llm', modelName: 'gpt-4o', modelProvider: 'openai' }, classifyIntent)
+
+function lookupOrder (message) {
+  const orderData = ... // external database call
+  return orderData
+}
+lookupOrder = llmobs.wrap({ kind: 'tool' }, lookupOrder)
+
+function generateResponse (message, context) {
+  ... // LLM call to generate final response
+  return response
+}
+generateResponse = llmobs.wrap({ kind: 'llm', modelName: 'gpt-4o', modelProvider: 'openai' }, generateResponse)
+
+function customerSupportAgent (userMessage) {
+  const cleaned = sanitizeInput(userMessage)
+  const intent = classifyIntent(cleaned)
+  let result
+  if (intent === 'order_status') {
+    result = lookupOrder(cleaned)
+  }
+  return generateResponse(cleaned, result)
+}
+customerSupportAgent = llmobs.wrap({ kind: 'agent' }, customerSupportAgent)
+{{< /code-block >}}
+{{% /tab %}}
+{{% tab "Java" %}}
+{{< code-block lang="java" >}}
+import datadog.trace.api.llmobs.LLMObs;
+import datadog.trace.api.llmobs.LLMObsSpan;
+
+public class CustomerSupport {
+  public String handleRequest(String userMessage) {
+    LLMObsSpan agentSpan = LLMObs.startAgentSpan("customer-support-agent", null, null);
+    try {
+      LLMObsSpan taskSpan = LLMObs.startTaskSpan("sanitize-input", null, null);
+      String cleaned = sanitize(userMessage);
+      taskSpan.finish();
+
+      LLMObsSpan classifySpan = LLMObs.startLLMSpan("classify-intent", "gpt-4o", "openai", null, null);
+      String intent = classifyIntent(cleaned);
+      classifySpan.finish();
+
+      LLMObsSpan toolSpan = LLMObs.startToolSpan("lookup-order", null, null);
+      String orderData = lookupOrder(cleaned);
+      toolSpan.finish();
+
+      LLMObsSpan responseSpan = LLMObs.startLLMSpan("generate-response", "gpt-4o", "openai", null, null);
+      String response = generateResponse(cleaned, orderData);
+      responseSpan.finish();
+
+      return response;
+    } finally {
+      agentSpan.finish();
+    }
+  }
+}
+{{< /code-block >}}
+{{% /tab %}}
+{{< /tabs >}}
+
 
 ## Enriching spans
 
 <div class="alert alert-info">
 The <code>metrics</code> parameter here refers to numeric values attached as attributes on individual spans — not <a href="/llm_observability/monitoring/metrics/">Datadog platform metrics</a>. For certain recognized keys such as <code>input_tokens</code>, <code>output_tokens</code>, and <code>total_tokens</code>, Datadog uses these span attributes to generate corresponding platform metrics (such as <code>ml_obs.span.llm.input.tokens</code>) for use in dashboards and monitors.
 </div>
+
+<div class="alert alert-info">The <code>@workflow</code>, <code>@agent</code>, <code>@tool</code>, and <code>@task</code> decorators automatically capture function inputs and outputs. You only need to call <code>annotate()</code> to add metadata, metrics, tags, or to override the auto-captured values.</div>
+
+### Safe annotation pattern
+
+If your application initializes LLM Observability conditionally (for example, only in certain environments), wrap `annotate()` calls to avoid errors when LLM Observability is not enabled or when the span has already finished:
+
+{{< tabs >}}
+{{% tab "Python" %}}
+{{< code-block lang="python" >}}
+from ddtrace.llmobs import LLMObs
+
+def safe_annotate(**kwargs):
+    try:
+        LLMObs.annotate(**kwargs)
+    except Exception:
+        pass  # LLM Observability is not enabled or span is not active
+{{< /code-block >}}
+{{% /tab %}}
+
+{{% tab "Node.js" %}}
+{{< code-block lang="javascript" >}}
+function safeAnnotate (options) {
+  try {
+    llmobs.annotate(options)
+  } catch (e) {
+    // LLM Observability is not enabled or span is not active
+  }
+}
+{{< /code-block >}}
+{{% /tab %}}
+
+{{% tab "Java" %}}
+In Java, `LLMObsSpan` annotation methods are no-ops after `finish()` is called, so no safe wrapper is needed.
+{{% /tab %}}
+{{< /tabs >}}
 
 {{< tabs >}}
 {{% tab "Python" %}}
