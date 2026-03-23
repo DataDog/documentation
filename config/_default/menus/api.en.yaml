@@ -8901,7 +8901,7 @@ menu:
           - GetFleetAgentInfo
         unstable:
           - v2
-        order: 2
+        order: 3
     - name: List all Datadog Agents
       url: '#list-all-datadog-agents'
       identifier: fleet-automation-list-all-datadog-agents
@@ -8914,7 +8914,7 @@ menu:
           - ListFleetAgents
         unstable:
           - v2
-        order: 1
+        order: 2
     - name: List all available Agent versions
       url: '#list-all-available-agent-versions'
       identifier: fleet-automation-list-all-available-agent-versions
@@ -8927,7 +8927,7 @@ menu:
           - ListFleetAgentVersions
         unstable:
           - v2
-        order: 0
+        order: 1
     - name: Google Chat Integration
       url: /api/latest/google-chat-integration/
       identifier: google-chat-integration
@@ -10916,7 +10916,7 @@ menu:
         operationids:
           - UpdatePipeline
         unstable: []
-        order: 3
+        order: 4
     - name: Get a specific pipeline
       url: '#get-a-specific-pipeline'
       identifier: observability-pipelines-get-a-specific-pipeline
@@ -10928,7 +10928,7 @@ menu:
         operationids:
           - GetPipeline
         unstable: []
-        order: 2
+        order: 3
     - name: Delete a pipeline
       url: '#delete-a-pipeline'
       identifier: observability-pipelines-delete-a-pipeline
@@ -10940,7 +10940,7 @@ menu:
         operationids:
           - DeletePipeline
         unstable: []
-        order: 4
+        order: 5
     - name: Validate an observability pipeline
       url: '#validate-an-observability-pipeline'
       identifier: observability-pipelines-validate-an-observability-pipeline
@@ -10952,7 +10952,7 @@ menu:
         operationids:
           - ValidatePipeline
         unstable: []
-        order: 5
+        order: 6
     - name: Create a new pipeline
       url: '#create-a-new-pipeline'
       identifier: observability-pipelines-create-a-new-pipeline
@@ -10964,7 +10964,7 @@ menu:
         operationids:
           - CreatePipeline
         unstable: []
-        order: 1
+        order: 2
     - name: List pipelines
       url: '#list-pipelines'
       identifier: observability-pipelines-list-pipelines
@@ -10976,7 +10976,7 @@ menu:
         operationids:
           - ListPipelines
         unstable: []
-        order: 0
+        order: 1
     - name: Okta Integration
       url: /api/latest/okta-integration/
       identifier: okta-integration

@@ -70491,7 +70491,7 @@ paths:
       summary: List all available Agent versions
       tags:
         - Fleet Automation
-      x-menu-order: 0
+      x-menu-order: 1
       "x-permission":
         operator: AND
         permissions:
@@ -70574,7 +70574,7 @@ paths:
       summary: List all Datadog Agents
       tags:
         - Fleet Automation
-      x-menu-order: 1
+      x-menu-order: 2
       "x-permission":
         operator: AND
         permissions:
@@ -70622,7 +70622,7 @@ paths:
       summary: Get detailed information about an agent
       tags:
         - Fleet Automation
-      x-menu-order: 2
+      x-menu-order: 3
       "x-permission":
         operator: AND
         permissions:
@@ -91565,7 +91565,7 @@ paths:
       summary: List pipelines
       tags:
         - Observability Pipelines
-      x-menu-order: 0
+      x-menu-order: 1
       "x-permission":
         operator: OR
         permissions:
@@ -91597,7 +91597,7 @@ paths:
       summary: Create a new pipeline
       tags:
         - Observability Pipelines
-      x-menu-order: 1
+      x-menu-order: 2
       "x-permission":
         operator: OR
         permissions:
@@ -91630,7 +91630,7 @@ paths:
       summary: Validate an observability pipeline
       tags:
         - Observability Pipelines
-      x-menu-order: 5
+      x-menu-order: 6
       "x-permission":
         operator: OR
         permissions:
@@ -91672,7 +91672,7 @@ paths:
       summary: Delete a pipeline
       tags:
         - Observability Pipelines
-      x-menu-order: 4
+      x-menu-order: 5
       "x-permission":
         operator: OR
         permissions:
@@ -91705,7 +91705,7 @@ paths:
       summary: Get a specific pipeline
       tags:
         - Observability Pipelines
-      x-menu-order: 2
+      x-menu-order: 3
       "x-permission":
         operator: OR
         permissions:
@@ -91746,7 +91746,7 @@ paths:
       summary: Update a pipeline
       tags:
         - Observability Pipelines
-      x-menu-order: 3
+      x-menu-order: 4
       "x-permission":
         operator: OR
         permissions:
