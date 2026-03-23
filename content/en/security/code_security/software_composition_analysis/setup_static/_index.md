@@ -65,16 +65,6 @@ Datadog Software Composition Analysis runs in your CI pipelines using the [`data
 You must scan your default branch at least once before results appear in <b>Code Security</b>.
 </div>
 
-#### Authentication
-
-To upload results to Datadog, configure the following environment variables as secrets:
-
-| Name         | Description                                                                                                                | Required | Default         |
-|--------------|----------------------------------------------------------------------------------------------------------------------------|----------|-----------------|
-| `DD_API_KEY` | Your Datadog API key. This key is created by your [Datadog organization][1] and should be stored as a secret.            | Yes      |                 |
-| `DD_APP_KEY` | Your Datadog application key. This key, created by your [Datadog organization][2], should include the `code_analysis_read` scope and be stored as a secret.    | Yes      |                 |
-| `DD_SITE`    | The [Datadog site][12] to send information to. Your Datadog site is {{< region-param key="dd_site" code="true" >}}.       | No       | `datadoghq.com` |
-
 {{< whatsnext desc="See instructions based on your CI provider:">}}
     {{< nextlink href="security/code_security/software_composition_analysis/setup_static/github_actions" >}}GitHub Actions{{< /nextlink >}}
     {{< nextlink href="security/code_security/software_composition_analysis/setup_static/gitlab_ci" >}}GitLab CI/CD{{< /nextlink >}}

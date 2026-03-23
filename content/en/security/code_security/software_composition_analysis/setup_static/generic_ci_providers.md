@@ -9,7 +9,15 @@ If you don't use GitHub Actions, GitLab CI/CD, or Azure DevOps, run SCA scans us
 For non-GitHub repositories, if your branch name is custom (not <b>master</b>, <b>main</b>, <b>default</b>, <b>stable</b>, <b>source</b>, <b>prod</b>, or <b>develop</b>), upload once and set the default branch in <a href="https://app.datadoghq.com/source-code/repositories">Repository Settings</a>.
 </div>
 
-Prerequisites:
+## Environment variables
+
+| Name         | Description                                                                                                                | Required | Default         |
+|--------------|----------------------------------------------------------------------------------------------------------------------------|----------|-----------------|
+| `DD_API_KEY` | Your Datadog API key. This key is created by your [Datadog organization][2] and should be stored as a secret.            | Yes      |                 |
+| `DD_APP_KEY` | Your Datadog application key. This key is created by your [Datadog organization][2], should include the `code_analysis_read` scope, and should be stored as a secret. | Yes      |                 |
+| `DD_SITE`    | The [Datadog site][3] to send information to.                                                                              | No       | `datadoghq.com` |
+
+## Prerequisites
 - Unzip
 - Node.js 14 or later
 
@@ -40,3 +48,5 @@ datadog-ci sbom upload /tmp/sbom.json
 The snippet uses the x86_64 Linux version of Datadog's SBOM generator. If you're using a different OS or architecture, update the `DATADOG_SBOM_GENERATOR_URL` accordingly. See all releases [here][1].
 
 [1]: https://github.com/DataDog/datadog-sbom-generator/releases
+[2]: /account_management/api-app-keys/
+[3]: /getting_started/site/

@@ -9,6 +9,16 @@ Run a Datadog Software Composition Analysis (SCA) job in your Azure DevOps pipel
 Datadog Software Composition Analysis CI jobs are only supported on <code>push</code> event triggers. Other event triggers (<code>pull_request</code>, for example) are not supported and can cause issues with the product.
 </div>
 
+## Environment variables
+
+Configure the following environment variables in your Azure DevOps pipeline settings.
+
+| Name         | Description                                                                                                                | Required | Default         |
+|--------------|----------------------------------------------------------------------------------------------------------------------------|----------|-----------------|
+| `DD_API_KEY` | Your Datadog API key. This key is created by your [Datadog organization][1] and should be stored as a secret.            | Yes      |                 |
+| `DD_APP_KEY` | Your Datadog application key. This key is created by your [Datadog organization][1], should include the `code_analysis_read` scope, and should be stored as a secret. | Yes      |                 |
+| `DD_SITE`    | The [Datadog site][2] to send information to.                                                                              | No       | `datadoghq.com` |
+
 ## Set up the pipeline
 
 To add a new pipeline in Azure DevOps, go to **Pipelines > New Pipeline**, select your repository, and then create or select a pipeline.
@@ -45,3 +55,6 @@ jobs:
 {{< /code-block >}}
 
 The snippet uses the x86_64 Linux version of Datadog's SBOM generator. If you're using a different OS or architecture, update the `DATADOG_SBOM_GENERATOR_URL` accordingly.
+
+[1]: /account_management/api-app-keys/
+[2]: /getting_started/site/
