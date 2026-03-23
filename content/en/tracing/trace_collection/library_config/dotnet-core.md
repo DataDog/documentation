@@ -289,8 +289,12 @@ When set to `false`, the consumer span is created when a message is consumed and
 
 `DD_RUNTIME_METRICS_ENABLED`
 : Enables .NET runtime metrics. Valid values are `true` or `false`. <br>
-**Default**: `false`<br>
+**Default**: `true` for .NET 6+ starting v3.40.0+, otherwise `false`. <br>
 Added in version 1.23.0.
+
+`DD_RUNTIME_METRICS_DIAGNOSTICS_METRICS_API_ENABLED`
+: Available starting .NET 6 it controls whether the .NET tracer uses the new [`System.Diagnostics.Metrics`][9] API to collect the metrics instead of the older v1.23.0 `EventListener`-based collector. <br>
+**Default**: `true` on .NET 8+ and on .NET 6/7 when `DD_RUNTIME_METRICS_ENABLED` is not explicitly set, otherwise `false`. <br>
 
 #### Errors
 
