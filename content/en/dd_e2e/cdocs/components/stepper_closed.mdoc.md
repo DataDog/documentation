@@ -2,7 +2,11 @@
 title: Stepper test (closed stepper)
 ---
 
-## User stories
+## Overview
+
+This is a test page used to verify the behavior of a closed stepper (stepper with no `open` attribute).
+
+## Test cases
 
 - The stepper displays only the first step if its `open` attribute is `false` or not present.
 - The `stepper-finished` content is not displayed if the steps are not completed.
@@ -15,6 +19,8 @@ title: Stepper test (closed stepper)
 - The `stepper-finished` content hides itself if the user manually rewinds the active step.
 - The user can reset the stepper.
 - All of the above steps also work using just keyboard navigation.
+
+## Stepper component
 
 {% stepper %}
 

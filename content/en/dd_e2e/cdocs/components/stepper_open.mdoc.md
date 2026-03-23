@@ -2,6 +2,21 @@
 title: Stepper test (open stepper)
 ---
 
+## Overview
+
+This is a test page used to verify the behavior of an open stepper (stepper with `open` set to `true`).
+
+## Test cases
+
+- The stepper displays all steps on initial load.
+- The user can collapse the steps.
+- The stepper advances the active step when the user clicks `Next`.
+- The stepper rewinds when the user clicks `Previous`.
+- The user can expand the steps.
+- All of the above steps also work using just keyboard navigation.
+
+## Stepper component
+
 {% stepper open=true %}
 
 {% step title="Install the database" %}

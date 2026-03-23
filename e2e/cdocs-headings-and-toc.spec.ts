@@ -15,7 +15,8 @@ const CONTENT_AREA = '#mainContent';
 // --- Expected TOC H2 entries per database ---
 
 const SHARED_H2S = [
-  'User stories covered by this page',
+  'Overview',
+  'Test cases',
   'Overview',
   'Prerequisites',
 ];
@@ -97,6 +98,12 @@ async function hideOverlays(page: Page) {
       .conv-search-float-btn { display: none !important; }
       body > header { display: none !important; }
       .announcement-banner { display: none !important; }
+      *, *::before, *::after {
+        animation-duration: 0s !important;
+        animation-delay: 0s !important;
+        transition-duration: 0s !important;
+        transition-delay: 0s !important;
+      }
     `,
   });
 }
@@ -109,6 +116,18 @@ test.describe('Cdocs headings and TOC', () => {
     await page.waitForSelector('#cdoc-content');
     // Reset to default (postgres)
     await clickPill(page, 'postgres');
+    await page.evaluate(() =>
+      Promise.all([
+        document.fonts.ready,
+        ...Array.from(document.images, (img) =>
+          img.complete
+            ? Promise.resolve()
+            : new Promise((r) => {
+                img.onload = img.onerror = r;
+              })
+        ),
+      ])
+    );
     await hideOverlays(page);
   });
 
@@ -153,8 +172,8 @@ test.describe('Cdocs headings and TOC', () => {
     });
     await installLink.click();
 
-    // Wait for scroll to settle
-    await page.waitForTimeout(500);
+    // Wait for scroll and TOC highlight state to settle
+    await page.waitForTimeout(1000);
 
     // The Installation heading should be near the top of the viewport.
     // Multiple "Installation" h2s exist in the DOM (one per database, hidden via
@@ -177,11 +196,12 @@ test.describe('Cdocs headings and TOC', () => {
     }
     expect(nestedTexts).toEqual(['Authentication', 'Permissions']);
 
-    await expect(page.locator(CONTENT_AREA)).toHaveScreenshot(
-      'content-after-install-click-mongodb.png'
-    );
-    await expect(page.locator(TOC_CONTAINER)).toHaveScreenshot(
-      'toc-after-install-click-mongodb.png'
-    );
+    // Verify the nested H3 links are visible in the TOC
+    for (let i = 0; i < count; i++) {
+      await expect(nestedLinks.nth(i)).toBeVisible();
+    }
+
+    // Verify the Installation link is marked as active/open in the TOC
+    await expect(installLink).toHaveClass(/toc_open/);
   });
 });

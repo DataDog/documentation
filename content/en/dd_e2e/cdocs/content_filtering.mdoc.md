@@ -7,7 +7,11 @@ content_filters:
     option_group_id: dd_e2e_database_options
 ---
 
-## User stories covered by this page
+## Overview
+
+This is a test page used to verify content filtering behavior.
+
+## Test cases
 
 - When the user updates a filter selection, the content changes as expected.
 - Conditions using the following functions are returning `true` and `false` as expected:

@@ -5,7 +5,11 @@ content_filters:
     option_group_id: dd_e2e_database_options
 ---
 
-## User stories covered by this page
+## Overview
+
+This is a test page used to verify correctness of the right nav (TOC) throughout filter selection changes.
+
+## Test cases
 
 - The TOC is generated correctly for each filter option, showing only the visible H2 headings on the page each time the user updates their filter selection.
 - All headings have unique IDs assigned to them; no two headings share the same ID, even if they have the same display text.
