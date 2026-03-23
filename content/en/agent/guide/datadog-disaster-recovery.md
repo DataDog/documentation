@@ -77,7 +77,7 @@ Email your new org name to your [Customer Success Manager](mailto:success@datado
 
 After the Datadog team has set your DDR org, use the Datadog [public API endpoint][8] to retrieve the public IDs of the primary and DDR org. 
 
-To link your DDR and primary orgs:
+To link your DDR org to your primary org:
 - Add the `disaster_recovery_status_write` scope to your application key in the primary org. 
 - Run the following commands, replacing the placeholders with the appropriate values.
 
