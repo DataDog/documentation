@@ -24,7 +24,7 @@ The [`datadog-iac-scanner-github-action`][2] runs the [Datadog IaC Scanner][7] i
 | OS      | Architecture    |
 |---------|-----------------|
 | Linux   | x86_64, arm64   |
-| macOS   | arm64           |
+| macOS   | x86_64, arm64   |
 | Windows | x86_64          |
 
 ## Prerequisites
