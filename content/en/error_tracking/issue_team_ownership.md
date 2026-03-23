@@ -26,7 +26,7 @@ You can programmatically assign team ownership at the time an error is raised by
 
 ### APM
 
-Set the `team` attribute on the span:
+Set the `team` attribute on the span, for example:
 
 ```python
 span.set_tag("team", "payments-backend")
