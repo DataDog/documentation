@@ -1230,6 +1230,66 @@
     "description": "Get the details of an event by `event_id`.",
     "summary": "Get an event"
   },
+  "ListFeatureFlags": {
+    "description": "Returns a list of feature flags for the organization.\nSupports filtering by key and archived status.",
+    "summary": "List feature flags"
+  },
+  "CreateFeatureFlag": {
+    "description": "Creates a new feature flag with variants.",
+    "summary": "Create a feature flag",
+    "request_description": "",
+    "request_schema_description": "Request to create a new feature flag."
+  },
+  "ListFeatureFlagsEnvironments": {
+    "description": "Returns a list of environments for the organization.\nSupports filtering by name and key.",
+    "summary": "List environments"
+  },
+  "CreateFeatureFlagsEnvironment": {
+    "description": "Creates a new environment for organizing feature flags.",
+    "summary": "Create an environment",
+    "request_description": "",
+    "request_schema_description": "Request to create a new environment."
+  },
+  "DeleteFeatureFlagsEnvironment": {
+    "description": "Deletes an environment. This operation cannot be undone.",
+    "summary": "Delete an environment"
+  },
+  "GetFeatureFlagsEnvironment": {
+    "description": "Returns the details of a specific environment.",
+    "summary": "Get an environment"
+  },
+  "UpdateFeatureFlagsEnvironment": {
+    "description": "Updates an existing environment's metadata such as\n name and description.",
+    "summary": "Update an environment",
+    "request_description": "",
+    "request_schema_description": "Request to update an environment."
+  },
+  "GetFeatureFlag": {
+    "description": "Returns the details of a specific feature flag\nincluding variants and environment status.",
+    "summary": "Get a feature flag"
+  },
+  "UpdateFeatureFlag": {
+    "description": "Updates an existing feature flag's metadata such as\n name and description. Does not modify targeting rules or allocations.",
+    "summary": "Update a feature flag",
+    "request_description": "",
+    "request_schema_description": "Request to update a feature flag."
+  },
+  "ArchiveFeatureFlag": {
+    "description": "Archives a feature flag. Archived flags are\nhidden from the main list but remain accessible and can be unarchived.",
+    "summary": "Archive a feature flag"
+  },
+  "DisableFeatureFlagEnvironment": {
+    "description": "Disable a feature flag in a specific environment.",
+    "summary": "Disable a feature flag in an environment"
+  },
+  "EnableFeatureFlagEnvironment": {
+    "description": "Enable a feature flag in a specific environment.",
+    "summary": "Enable a feature flag in an environment"
+  },
+  "UnarchiveFeatureFlag": {
+    "description": "Unarchives a previously archived feature flag,\nmaking it visible in the main list again.",
+    "summary": "Unarchive a feature flag"
+  },
   "GetHamrOrgConnection": {
     "description": "Retrieve the High Availability Multi-Region (HAMR) organization connection details for the authenticated organization.\nThis endpoint returns information about the HAMR connection configuration, including the target organization,\ndatacenter, status, and whether this is the primary or secondary organization in the HAMR relationship.",
     "summary": "Get HAMR organization connection"
@@ -1509,6 +1569,26 @@
     "summary": "Update an AWS integration",
     "request_description": "",
     "request_schema_description": "AWS Account Update Request body."
+  },
+  "DeleteAWSAccountCCMConfig": {
+    "description": "Delete the Cloud Cost Management config for an AWS Account Integration Config using Cost and Usage Report\n(CUR) 2.0 by config ID.",
+    "summary": "Delete AWS CCM config"
+  },
+  "GetAWSAccountCCMConfig": {
+    "description": "Get the Cloud Cost Management config for an AWS Account Integration Config using Cost and Usage Report\n(CUR) 2.0 by config ID.",
+    "summary": "Get AWS CCM config"
+  },
+  "UpdateAWSAccountCCMConfig": {
+    "description": "Update the Cloud Cost Management config for an AWS Account Integration Config using Cost and Usage Report\n(CUR) 2.0 by config ID.",
+    "summary": "Update AWS CCM config",
+    "request_description": "Update a Cloud Cost Management config for an AWS Account Integration Config.",
+    "request_schema_description": "AWS CCM Config Create/Update Request body."
+  },
+  "CreateAWSAccountCCMConfig": {
+    "description": "Create the Cloud Cost Management config for an AWS Account Integration Config using Cost and Usage Report\n(CUR) 2.0 by config ID.",
+    "summary": "Create AWS CCM config",
+    "request_description": "Create a Cloud Cost Management config for an AWS Account Integration Config.",
+    "request_schema_description": "AWS CCM Config Create/Update Request body."
   },
   "ListAWSNamespaces": {
     "description": "Get a list of available AWS CloudWatch namespaces that can send metrics to Datadog.",
@@ -2210,7 +2290,7 @@
     "request_schema_description": "The request for a logs list."
   },
   "ListTagConfigurations": {
-    "description": "Returns all metrics for your organization that match the given filter parameters.\nOptionally, paginate by using the `page[cursor]` and/or `page[size]` query parameters.\nTo fetch the first page, pass in a query parameter with either a valid `page[size]` or an empty cursor like `page[cursor]=`. To fetch the next page, pass in the `next_cursor` value from the response as the new `page[cursor]` value.\nOnce the `meta.pagination.next_cursor` value is null, all pages have been retrieved.",
+    "description": "Get a list of actively reporting metrics for your organization. Pagination is optional using the `page[cursor]` and `page[size]` query parameters.",
     "summary": "Get a list of metrics"
   },
   "DeleteBulkTagsMetricsConfiguration": {
@@ -2246,7 +2326,7 @@
     "summary": "Get tag key cardinality details"
   },
   "DeleteTagConfiguration": {
-    "description": "Deletes a metric's tag configuration. Can only be used with application\nkeys from users with the `Manage Tags for Metrics` permission.",
+    "description": "Deletes a metric's tag configuration. Can only be used with application\nkeys from users with the `Manage Tags for Metrics` permission.\nNote: This operation is irreversible.",
     "summary": "Delete a tag configuration"
   },
   "ListTagConfigurationByName": {
@@ -2708,6 +2788,12 @@
     "summary": "Query timeseries data across multiple products",
     "request_description": "",
     "request_schema_description": "A request wrapper around a single timeseries query to be executed."
+  },
+  "BatchRowsQuery": {
+    "description": "Batch query reference table rows by their primary key values.  Returns only found rows in the included array.",
+    "summary": "Batch rows query",
+    "request_description": "",
+    "request_schema_description": ""
   },
   "ListTables": {
     "description": "List all reference tables in this organization.",

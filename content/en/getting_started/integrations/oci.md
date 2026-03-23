@@ -83,6 +83,7 @@ $$\\text"Service Connector Hubs" = \text"Number of compartments in tenancy" / \t
    **Advanced options**:
    - **Compartment**: Specify an existing compartment for Datadog-created resources (default creates a new "Datadog" compartment).
    - **Domain**: Provide an Identity Domain OCID to override where the User and Group are created. Requires the **Identity Domain Administrator** role in that domain.
+   - **Resource tags**: Provide a list of defined tags to be added to all OCI resources deployed by the Datadog QuickStart stack. Enter one tag per line. Do not add commas. Each defined tag should be in the format: `namespace.key:value`. For example, `CostCenter.Environment:prod`. If left blank, no defined tags are added to the OCI resources deployed by the Datadog QuickStart stack.
 
 8. Click **Next**.
 9. Click **Create**, and wait up to 30 minutes for the deployment to complete.

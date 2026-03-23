@@ -35,12 +35,26 @@ Set up the Google Cloud Storage destination and its environment variables when y
     - The Worker uses standard [Google authentication methods][8].
 1. Select the storage class for the created objects.
 1. Select the access level of the created objects.
-1. Optionally, enter in the prefix.
-    - Prefixes are useful for partitioning objects. For example, you can use a prefix as an object key to store objects under a particular directory. If using a prefix for this purpose, it must end in `/` to act as a directory path; a trailing `/` is not automatically added.
-    - See [template syntax][7] if you want to route logs to different object keys based on specific fields in your logs.
-     - **Note**: Datadog recommends that you start your prefixes with the directory name and without a lead slash (`/`). For example, `app-logs/` or `service-logs/`.
-1. Optionally, click **Add Header** to add metadata.
-{{% observability_pipelines/destination_buffer_numbered %}}
+
+
+#### Optional settings
+
+##### Prefix
+
+Enter a prefix that you want to apply to all key objects.
+
+- Prefixes are useful for partitioning objects. For example, you can use a prefix as an object key to store objects under a particular directory. If using a prefix for this purpose, it must end in `/` to act as a directory path; a trailing `/` is not automatically added.
+- See [template syntax][7] if you want to route logs to different object keys based on specific fields in your logs.
+  - **Note**: Datadog recommends that you start your prefixes with the directory name and without a lead slash (`/`). For example, `app-logs/` or `service-logs/`.
+
+##### Metadata
+
+1. Click **Add Header** to add metadata.
+1. Enter values for the header name and value.
+
+##### Buffering options
+
+{{% observability_pipelines/destination_buffer %}}
 
 ### Set secrets
 
@@ -66,9 +80,9 @@ There are no secret identifiers to configure.
 
 A batch of events is flushed when one of these parameters is met. See [event batching][5] for more information.
 
-| Max Events     | Max Bytes       | Timeout (seconds)   |
-|----------------| ----------------| --------------------|
-| None           | 100,000,000     | 900                 |
+| Maximum Events | Maximum Size (MB) | Timeout (seconds)   |
+|----------------|-------------------|---------------------|
+| None           | 100               | 900                 |
 
 [1]: /logs/log_configuration/archives/
 [2]: /logs/log_configuration/rehydrating/

@@ -35,9 +35,16 @@ Set up the Elasticsearch destination and its environment variables when you [set
 			- In the **Dataset** field, specify the format or data source that describes the structure, for example `apache`.
 			- In the **Namespace** field, enter the grouping for organizing your data streams, for example `production`.
 			- In the UI, there is a preview of the data stream name you configured. With the above example inputs, the data stream name that the Worker writes to is `logs-apache-production`.
+
+
+#### Optional settings
+
 1. Enter the name for the Elasticsearch index. See [template syntax][3] if you want to route logs to different indexes based on specific fields in your logs.
 1. Enter the Elasticsearch version.
-{{% observability_pipelines/destination_buffer_numbered %}}
+
+##### Buffering options
+
+{{% observability_pipelines/destination_buffer %}}
 
 ### Set secrets
 
@@ -68,9 +75,9 @@ Set up the Elasticsearch destination and its environment variables when you [set
 
 A batch of events is flushed when one of these parameters is met. See [event batching][2] for more information.
 
-| Max Events     | Max Bytes       | Timeout (seconds)   |
-|----------------|-----------------|---------------------|
-| None           | 10,000,000      | 1                   |
+| Maximum Events | Maximum Size (MB) | Timeout (seconds)   |
+|----------------|-------------------|---------------------|
+| None           | 10                | 1                   |
 
 [1]: https://app.datadoghq.com/observability-pipelines
 [2]: /observability_pipelines/destinations/#event-batching
