@@ -23,6 +23,7 @@ Connect your OpenAI account to LLM Observability with your OpenAI API key. LLM O
 1. Follow the instructions on the tile.
    - Provide your OpenAI API key. Ensure that this key has **write** permission for **model capabilities**.
 1. Enable **Use this API key to evaluate your LLM applications**.
+1. LLM Observability requires that the `complete/chat` API endpoint be available for the selected model. See [OpenAI's model overview page][3] for details about which models support this endpoint.
 
 {{< img src="llm_observability/configuration/openai-tile.png" alt="The OpenAI configuration tile in LLM Observability. Lists instructions for configuring OpenAI and providing your OpenAI API key." style="width:100%;" >}}
 
@@ -30,12 +31,13 @@ LLM Observability does not support [data residency][2] for OpenAI.
 
 [1]: https://app.datadoghq.com/llm/settings/integrations
 [2]: https://platform.openai.com/docs/guides/your-data#which-models-and-features-are-eligible-for-data-residency
+[3]: https://developers.openai.com/api/docs/models
 {{% /tab %}}
 {{% tab "Azure OpenAI" %}}
 
 <div class="alert alert-danger">If you are subject to HIPAA, you are responsible for ensuring that you connect only to an Azure OpenAI account that is subject to a business associate agreement (BAA) and meets all requirements for HIPAA compliance.</div>
 
-Connect your Azure OpenAI account to LLM Observability with your OpenAI API key. Datadog strongly recommends using the `GPT-4o mini` model for evaluations. The selected model version must support [structured output][8].
+Connect your Azure OpenAI account to LLM Observability with your OpenAI API key. Datadog strongly recommends using the `GPT-4o mini` model for evaluations. The selected model version must support [structured output][8], and the Chat Completions API must be available. See a [full list of compatible models][9].
 
 1. In Datadog, navigate to [**LLM Observability > Settings > Integrations**][1].
 1. Select **Connect** on the Azure OpenAI tile.
@@ -47,6 +49,7 @@ Connect your Azure OpenAI account to LLM Observability with your OpenAI API key.
 
 [1]: https://app.datadoghq.com/llm/settings/integrations
 [8]: https://learn.microsoft.com/en-us/azure/ai-foundry/openai/how-to/structured-outputs
+[9]: https://learn.microsoft.com/en-us/azure/foundry/foundry-models/concepts/models-sold-directly-by-azure?tabs=global-standard-aoai%2Cglobal-standard&pivots=azure-openai
 {{% /tab %}}
 {{% tab "Anthropic" %}}
 
