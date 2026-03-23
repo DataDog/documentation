@@ -13,7 +13,6 @@ further_reading:
 ---
 
 ## Overview
-
 <!-- SME NOTE: Experiment metrics are different from Datadog metrics (ingested time-series data points). Consider adding a sentence here clarifying that experiment metrics are aggregations computed over event data to measure user behavior — not the same as Datadog metrics. -->
 
 Create the metrics you want to measure in your experiments. Datadog Experiments metrics can use data from Product Analytics, Real User Monitoring (RUM), or your own data warehouse.
