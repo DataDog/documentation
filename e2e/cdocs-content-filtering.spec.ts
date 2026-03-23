@@ -14,6 +14,8 @@ function toggleable(description: string): string {
   return `.cdoc__toggleable[data-description="${description}"]`;
 }
 
+const CONTENT_AREA = '#mainContent';
+
 // Content descriptions (from the compiled HTML data-description attributes)
 const PROG_LANG_DESCRIPTIONS: Record<string, string> = {
   python: 'Programming Language is Python',
@@ -57,6 +59,13 @@ async function resetToDefaults(page: Page) {
   await clickPill(page, 'database', 'postgres');
 }
 
+/** Hide the fixed-position Ask AI button so it doesn't overlap element screenshots. */
+async function hideAskAiButton(page: Page) {
+  await page.addStyleTag({
+    content: '.conv-search-float-btn { display: none !important; }',
+  });
+}
+
 // --- Tests ---
 
 test.describe('Cdocs content filtering', () => {
@@ -65,12 +74,13 @@ test.describe('Cdocs content filtering', () => {
     await page.waitForSelector('#cdoc-content');
     // Click defaults to clear any persisted state from URL params
     await resetToDefaults(page);
+    await hideAskAiButton(page);
   });
 
   test('initial page snapshot', async ({ page }) => {
-    await expect(page).toHaveScreenshot('content-filtering-defaults.png', {
-      fullPage: true,
-    });
+    await expect(page.locator(CONTENT_AREA)).toHaveScreenshot(
+      'content-filtering-defaults.png'
+    );
   });
 
   test.describe('basic prog_lang filtering', () => {
@@ -214,8 +224,8 @@ test.describe('Cdocs content filtering', () => {
     await clickPill(page, 'prog_lang', 'go');
     await clickPill(page, 'database', 'mysql');
 
-    await expect(page).toHaveScreenshot('content-filtering-go-mysql.png', {
-      fullPage: true,
-    });
+    await expect(page.locator(CONTENT_AREA)).toHaveScreenshot(
+      'content-filtering-go-mysql.png'
+    );
   });
 });

@@ -10,16 +10,16 @@ This folder contains a collection of pages used for e2e tests. These pages are n
 * Page
 * Test objectives
 ---
-* Content filtering
+* [Content filtering](/dd_e2e/cdocs/content_filtering)
 * Tests for changes in content based on the user's filtering selections.
----
-* Navigation and data persistence
-* - When the user navigates to this page, any previous selections they made on other pages apply.
-  - When the user navigates to this page, the default applies if their previous selection is not available.
 ---
 * Headings and TOC
 * - The TOC is generated correctly based on the visible headings on the page.
   - Duplicate headings have their own unique IDs.
+---
+* Navigation and data persistence
+* - When the user navigates to this page, any previous selections they made on other pages apply.
+  - When the user navigates to this page, the default applies if their previous selection is not available.
 {% /table %}
 
 ## Components

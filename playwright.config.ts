@@ -7,14 +7,21 @@ export default defineConfig({
   retries: process.env.CI ? 2 : 0,
   workers: process.env.CI ? 1 : undefined,
   reporter: 'html',
+  expect: {
+    toHaveScreenshot: {
+      scale: 'device',
+    },
+  },
   use: {
     baseURL: 'http://localhost:1313',
     trace: 'on-first-retry',
+    viewport: { width: 1280, height: 720 },
+    deviceScaleFactor: 2,
   },
   projects: [
     {
       name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+      use: { browserName: 'chromium' },
     },
   ],
 });
