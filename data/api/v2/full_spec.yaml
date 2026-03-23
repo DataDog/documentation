@@ -99999,7 +99999,7 @@ paths:
       summary: List vulnerabilities
       tags:
         - "Security Monitoring"
-      x-menu-order: 79
+      x-menu-order: 80
       x-permission:
         operator: OR
         permissions:
@@ -101187,7 +101187,7 @@ paths:
       summary: Get content pack states
       tags:
         - Security Monitoring
-      x-menu-order: 46
+      x-menu-order: 47
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -101306,7 +101306,7 @@ paths:
             - security_monitoring_rules_read
       summary: List rules
       tags: ["Security Monitoring"]
-      x-menu-order: 49
+      x-menu-order: 50
       "x-permission":
         operator: OR
         permissions:
@@ -101802,7 +101802,7 @@ paths:
       summary: Get a list of security signals
       tags: ["Security Monitoring"]
       x-codegen-request-body-name: body
-      x-menu-order: 71
+      x-menu-order: 72
       x-pagination:
         cursorParam: body.page.cursor
         cursorPath: meta.page.after
@@ -103231,7 +103231,7 @@ paths:
       summary: Run a threat hunting job
       tags: ["Security Monitoring"]
       x-codegen-request-body-name: body
-      x-menu-order: 61
+      x-menu-order: 62
       "x-permission":
         operator: OR
         permissions:
@@ -104504,7 +104504,7 @@ paths:
       summary: Returns a list of Secrets rules
       tags:
         - "Security Monitoring"
-      x-menu-order: 77
+      x-menu-order: 78
       x-unstable: "**Note**: This endpoint may be subject to changes."
   /api/v2/statuspages:
     get:
