@@ -338,7 +338,7 @@ The configuration examples above disable JMX authentication and SSL (`-Dcom.sun.
 
 ### Restrict network access with a Kubernetes NetworkPolicy
 
-Apply a [NetworkPolicy][7] that allows ingress on the JMX port only from the Datadog Agent pods. This approach requires no changes to your JMX or Agent configuration and works with any CNI plugin that supports NetworkPolicy (for example, Calico or Cilium).
+Apply a [NetworkPolicy][7] that allows ingress on the JMX port only from the Datadog Agent pods. Apply this approach without changing your JMX or Agent configuration. It is compatible with any CNI plugin that supports NetworkPolicy (for example, Calico or Cilium).
 
 The Datadog Agent DaemonSet applies the label `app.kubernetes.io/component: agent` to its pods. Use this label as the ingress source selector:
 
