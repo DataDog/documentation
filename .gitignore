@@ -326,5 +326,9 @@ layouts/shortcodes/mdoc/en/**/*.ast.json
 # Deprecated generated file for LLMs (keep so it's not merged back in)
 static/llms.txt
 
+# Playwright
+e2e/test-results/
+playwright-report/
+
 # AI
 .claude/*local*
