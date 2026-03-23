@@ -3506,15 +3506,20 @@ menu:
       parent: serverless_gcr
       weight: 701
       identifier: serverless_gcr_containers
+    - name: Jobs (Preview)
+      url: serverless/google_cloud_run/jobs
+      parent: serverless_gcr
+      weight: 702
+      identifier: serverless_gcr_jobs
     - name: Functions
       url: serverless/google_cloud_run/functions
       parent: serverless_gcr
-      weight: 702
+      weight: 703
       identifier: serverless_gcr_functions
     - name: Functions (1st generation)
       url: serverless/google_cloud_run/functions_1st_gen
       parent: serverless_gcr
-      weight: 703
+      weight: 704
       identifier: serverless_gcr_functions_1st_gen
     - name: Libraries & Integrations
       url: serverless/libraries_integrations
