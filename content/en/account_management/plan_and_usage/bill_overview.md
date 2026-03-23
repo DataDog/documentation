@@ -60,7 +60,7 @@ Select a sort option to update the cards displayed. Each product card shows:
 - **Daily Cost** bar chart spanning the previous and current month
 - **Usage** (total units consumed, in natural units — for example, PB of scanned data, custom metrics) (on Total Cost and Usage-related cards)
 
-Click **View Details** on any card to open the [product detail page](#product-detail-page).
+Click **View Details** on any card to open the [product detail page][2].
 
 {{< img src="account_management/plan_and_usage/bill-overview-trends-light.png" alt="Trends tab showing product cards sorted by Highest Total Cost" >}}
 
