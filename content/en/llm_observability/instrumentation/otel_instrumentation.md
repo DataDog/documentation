@@ -56,7 +56,7 @@ This environment variable ensures that `strands-agents` emits traces following t
 
 #### Using Microsoft Foundry
 
-[Microsoft Foundry][9] (formerly Azure AI Foundry) emits OpenTelemetry GenAI traces that follow the v1.37+ semantic conventions. This includes traces from the Foundry Agents Service, Semantic Kernel, and LangChain through `langchain-azure-ai`.
+[Microsoft Foundry][9] (formerly Azure AI Foundry) emits OpenTelemetry GenAI traces that follow the v1.37+ semantic conventions, including the Foundry Agents Service, Semantic Kernel, and LangChain (through `langchain-azure-ai`).
 
 To send Microsoft Foundry traces to LLM Observability, configure the OpenTelemetry exporter in your application:
 
