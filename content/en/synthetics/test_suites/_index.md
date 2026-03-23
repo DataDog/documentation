@@ -32,7 +32,7 @@ Synthetic Monitoring Test Suites let you organize multiple tests into a single c
 
 ## Create a test suite
 
-To create a new Test Suite:
+To create a Synthetic Monitoring Test Suite:
 1. In Datadog, navigate to **Digital Experience**.
 2. Click **New Test Suite**.
 3. Optionally, navigate to the [Synthetic Monitoring tests][1] page, and click **+ New Suite**.
@@ -68,7 +68,49 @@ To create a new Test Suite:
 
 {{< img src="synthetics/test_suites/test_suite_creation_2.png" alt="Synthetic Monitoring Test Suite creation page" style="width:80%;">}}
 
-## View and manage
+## Service level objectives
+
+When you create a test suite, Datadog automatically generates a service level objective (SLO) for it, with no configuration required. By default, the SLO uses a 7-day rolling window with a 99.9% target.
+
+The SLO panel on the [test suite details page][3] shows the current SLO status and error budget. From this view, you can:
+
+- **[Create alert](#create-an-alert)** to set up alerting on meaningful degradation. When an alert already exists, hover over the alert indicator to view additional details.
+- **[View details](#view-details)** by clicking the eye icon to open the full SLO details page.
+- Review **[Contributors](#contributors)** to understand which tests are contributing to error budget consumption.
+- **[Edit the SLO](#edit-the-service-level-objective)** by clicking the {{< img src="icons/pencil-mdi.svg" inline="true" style="width:16px;">}} pencil icon.
+
+
+{{< img src="synthetics/test_suites/test_suite_slo_panel.png" alt="Test suite SLO panel showing the 7-day rolling window, error budget, Create Alert button, and primary contributors." style="width:100%;">}}
+
+### Create an alert
+
+Click **Create alert** from the SLO details page to open the SLO Monitor configuration form, where you can set alert conditions and notification settings.
+
+   {{< img src="synthetics/test_suites/test_suite_slo_create_alert.png" alt="SLO Monitor creation form with alert condition and notification settings." style="width:80%;">}}
+
+### View details
+
+Click the eye icon to open the full SLO details page. From this page, you can view SLO status, error budget burndown, burn rate, and metric timeseries.
+
+   {{< img src="synthetics/test_suites/test_suite_slo_details.png" alt="Full SLO details page for a test suite, showing SLO status, error budget burndown, burn rate, and metric timeseries." style="width:90%;">}}
+
+### Contributors
+
+The contributors section highlights the tests with the largest impact on error budget consumption:
+
+- **Total critical tests**: The total number of critical tests in the suite.
+- **Tests consuming budget**: The number of tests that consumed error budget.
+- **Top contributors**: The top three tests by percentage impact, based on how long each test was in an alert state while the suite was in alert.
+
+   {{< img src="synthetics/test_suites/test_suite_slo_contributors.png" alt="Primary Contributors section showing total critical tests, error budget consumed, and top three contributors by percentage impact." style="width:90%;">}}
+
+### Edit the service level objective
+
+To update the SLO time window (for example, to 30 days) or target, click the {{< img src="icons/pencil-mdi.svg" inline="true" style="width:16px;">}} pencil icon on the SLO panel. Because this SLO is automatically created from a test suite, only the target and warning thresholds can be edited.
+
+   {{< img src="synthetics/test_suites/test_suite_slo_edit.png" alt="Edit SLO page for a test suite, showing the target and time window fields." style="width:90%;">}}
+
+## View and manage test suites
 
 After creating your suite, it appears in the **Suites** tab on the [Synthetic Monitoring tests][1] page, or you can access test suites from **Digital Experience > Test Suites**. 
 
@@ -102,3 +144,4 @@ If execution results look incomplete:
 
 [1]: https://app.datadoghq.com/synthetics/tests
 [2]: /synthetics/notifications/
+[3]: https://app.datadoghq.com/synthetics/test-suite/details
