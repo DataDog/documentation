@@ -54,7 +54,9 @@ If you want to use Live Capture and are using a firewall, you must add these dom
 1. Click the cog for the source or processor that you want to capture events for.
 1. Select **Capture and view events** in the side panel.
 1. Click **Capture**.
-1. **Optional configurations** (in Preview):<br>**Note**: Optional configurations are only available if all active Workers are version 2.13 or later.
+1. **Optional configurations** (in Preview):
+  {{< img src="observability_pipelines/live_capture_optional_config.png" alt="The Live Capture optional configuration modal showing the filter query, capture duration, and Worker selection options" style="width:60%;" >}}
+  **Note**: Optional configurations are only available if all active Workers are version 2.13 or later.
     1. Enter a query to specify which events you want to capture. For more information, see [Search Syntax for Logs][4] or [Search Syntax for Metrics][5].
     1. Enter a capture duration (in seconds or minutes) for how long you want events to be captured.
         - Minimum duration (default if no duration is specified): 30 seconds
