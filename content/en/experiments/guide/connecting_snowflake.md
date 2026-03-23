@@ -84,8 +84,7 @@ To connect your Snowflake account to Datadog for warehouse-native experiment ana
 1. Click **Save**.
 
 <div class="alert alert-info">The grants in the <strong>Recommended Warehouse Settings</strong> section of the Snowflake integration tile are not needed for warehouse-native experiment analysis. The privileges granted in <a href="#step-1-prepare-the-snowflake-service-account">step 1</a> are sufficient.
-<br><br> 
-If you plan to use other warehouse observability functionality in Datadog, see <a href="https://docs.datadoghq.com/integrations/snowflake-web/">Datadog's Snowflake integration documentation</a> to determine which resources to enable.</div>
+<br><br> If you plan to use other warehouse observability functionality in Datadog, see <a href="https://docs.datadoghq.com/integrations/snowflake-web/">Datadog's Snowflake integration documentation</a> to determine which resources to enable.</div>
 
 {{< img src="/product_analytics/experiment/guide/snowflake_main_integration.png" alt="The Snowflake integration tile in Datadog showing the Configure tab with the Add a new Snowflake account form, including an Account URL field and resource toggles for Metrics and Logs." style="width:90%;" >}}
 
