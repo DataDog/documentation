@@ -49,7 +49,7 @@ Notification rules allow you to set general alerting preferences that span acros
 
 ## Notification channels
 
-Notifications can be sent to individuals and teams through email, Slack, Jira, PagerDuty, webhooks, and more.
+Notifications can be sent to individuals and teams through email, Slack, Jira, PagerDuty, webhooks, and more. For finding notifications, you can also use [dynamic routing][6] to automatically deliver notifications to the responsible team based on the `team` tag on findings.
 
 ### Email
 
@@ -83,3 +83,4 @@ To use the webhook, add `@webhook-<WEBHOOK_NAME>` to the rule's notification sec
 [3]: /security/notifications/rules/
 [4]: https://app.datadoghq.com/integrations/webhooks
 [5]: /integrations/webhooks/
+[6]: /security/notifications/rules/#dynamic-routing
