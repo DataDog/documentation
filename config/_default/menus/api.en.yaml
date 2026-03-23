@@ -14243,6 +14243,45 @@ menu:
         unstable:
           - v2
         order: 2
+    - name: Get Test Optimization service settings
+      url: '#get-test-optimization-service-settings'
+      identifier: test-optimization-get-test-optimization-service-settings
+      parent: test-optimization
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetTestOptimizationServiceSettings
+        unstable:
+          - v2
+        order: 3
+    - name: Update Test Optimization service settings
+      url: '#update-test-optimization-service-settings'
+      identifier: test-optimization-update-test-optimization-service-settings
+      parent: test-optimization
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateTestOptimizationServiceSettings
+        unstable:
+          - v2
+        order: 4
+    - name: Delete Test Optimization service settings
+      url: '#delete-test-optimization-service-settings'
+      identifier: test-optimization-delete-test-optimization-service-settings
+      parent: test-optimization
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteTestOptimizationServiceSettings
+        unstable:
+          - v2
+        order: 5
     - name: Workflow Automation
       url: /api/latest/workflow-automation/
       identifier: workflow-automation
