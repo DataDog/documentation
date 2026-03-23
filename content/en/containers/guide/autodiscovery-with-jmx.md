@@ -407,7 +407,7 @@ kubectl create secret generic jmx-credentials \
   -n <APP_NAMESPACE>
 ```
 
-#### 2. Configure the Java application
+#### Step 2 - Configure the Java application
 
 Mount the Secret and update the JVM flags to enable authentication:
 
