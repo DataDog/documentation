@@ -1,14 +1,15 @@
 ---
-title: Messages
+title: Kafka Messages
 aliases:
   - data_streams/live_messages
+  - data_streams/messages
 ---
 
-Messages feature allows identifying the root cause of poison pill messages and to better understand data streams by inspecting message content.
-It allows viewing Kafka messages at specific partitions and offsets.
+In Data Streams Monitoring, Kafka Messages allows you to identify the root cause of poison pill messages and to better understand data streams by inspecting message content.
+With Kafka Messages, you can view your Kafka messages at specific partitions and offsets.
 
 <div class="alert alert-info">
-   Messages is in Preview. Contact your Customer Success Manager for access.
+   Kafka Messages is in Preview. Contact your Customer Success Manager for access.
 </div>
 
 ## Supported data formats
@@ -26,9 +27,9 @@ If a topic has more than one consumer group, setting up the integration on one o
 
 Ensure that the Kafka Consumer check is running correctly by following [these instructions][11]
 
-### Agent version
+### Datadog Agent version
 
-Ensure the agent version you are running is 7.70 or later.
+Ensure the Datadog Agent version you are running is 7.70 or later.
 
 #### Validation
 
