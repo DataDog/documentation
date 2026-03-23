@@ -14,45 +14,60 @@ further_reading:
 {{< jqmath-vanilla >}}
 
 ## Overview
-<!-- SME NOTE: Experiment metrics are different from Datadog metrics (ingested time-series data points).
 
-Consider adding a sentence here clarifying that experiment metrics are aggregations computed over event data to measure user behavior — not the same as Datadog metrics. -->
-
-Create the metrics you want to measure in your experiments. Datadog Experiments metrics can use data from Product Analytics, Real User Monitoring (RUM), or your own data warehouse.
+Create the metrics you want to measure in your experiments. You can use data from Real User Monitoring (RUM), Product Analytics, or your own data warehouse to create Datadog Experiments metrics.
 
 ## Metrics from Product Analytics or RUM data
 
-To create a metric from Product Analytics or RUM data, you must have Datadog's client-side SDK installed in your application and be actively capturing data. If you have not yet installed the SDK, follow [these steps][X].
+### Prerequisites
+To create a metric from Product Analytics or RUM data, you must have Datadog's [client-side SDK][3] installed in your application and be actively capturing data. If you have not yet configured your SDK, select your application type to start collecting data:
+
+- [Android and Android TV][4]
+- [iOS and tvOS][5]
+- [Browser (JavaScript)][6]
+- [React Native][7]
+
+Product Analytics uses the same SDKs and configuration as Real User Monitoring (RUM). After you have configured your SDK using RUM documentation, create your metric in Product Analytics UI.
 
 ### Create a metric
 
+<!-- SME: need to confirm the default Experiment Settings and Units -->
+
 To create a metric for your experiment:
 
-1. Navigate to the [Metrics page][1] within Datadog Product Analytics.
-2. Click **+ Create Metric** at the top right corner.
-3. Click **Select an Event** to see a list of all events collected from the Datadog SDK.
-4. Select one of the [aggregation methods](#aggregation-methods) described below.
+1. Navigate to the [Metrics page][1] in Datadog Product Analytics.
+1. Click **+ Create Metric** at the top right corner.
+1. Click **Select an event** to open the event picker. 
+1. Search for a specific event, or use the **By Type** filter to browse by event type. The chart on the right updates in real time as you configure your metric.
+1. Select an [aggregation method](#aggregation-methods) from the dropdown. The default is **Count of events**.
+1. Click the **Add filter** icon to [filter your metric](#add-filters) by additional properties.
+1. Add a **Name** and **Description** (optional) to your metric.
+1. Click **Save**.
 
-{{< img src="/product_analytics/experiment/exp_create_metric1.png" alt="UI page to create a metric." style="width:90%;" >}}
+{{< img src="/product_analytics/experiment/exp_create_metric_1.png" alt="The Create Metric page showing a configured metric with the 'click on ADD TO CART' event selected, Count of events aggregation, and a real-time bar chart displaying event count data for the past week." style="width:90%;" >}}
 
 ### Add filters
 
-You can add filters to your metrics to filter page views based on referring URL or UTM parameters, or to filter actions to a specific page or value of a custom attribute. As you add filters, you can check metric values in real time using the chart on the right.
+You can filter your metric by:
+- **Event properties**: Country, Browser, or Service.
+- **Data type**: Numerical, String, or Boolean.
+- **Custom property**: A property name you define.
 
-{{< img src="/product_analytics/experiment/exp_filter_by.png" alt="Filter flow to scope your metric by specific properties." style="width:90%;" >}}
+{{< img src="/product_analytics/experiment/exp_filter_by.png" alt="The Add Filters panel showing event properties such as Application Id, Service, and Browser Name, with options to filter by data type or custom property, and a real-time bar chart on the right." style="width:90%;" >}}
 
-## Create metrics from data in your data warehouse
+## Metrics from warehouse data
 
-You can also connect a data warehouse and create experiment metrics using your own data. Datadog runs the experiment analysis pipeline locally in your warehouse, keeping metrics up to date and giving you full visibility into the underlying logic.
+To create a metric from your warehouse data, you must connect the warehouse to Datadog. Select the data source to connect your warehouse to Datadog.
 
-To get started, you need a connected data warehouse. If you have not already done so, see the appropriate guide below:
+- [BigQuery][8]
+- [Databricks][9]
+- [Redshift][10]
+- [Snowflake][11]
 
-[link to 4 warehouse connection guides]
+After you have connected your warehouse, create a metric by doing the following:
 
-Once you've connected a warehouse, creating a metric consists of two stages:
-
-1. Creating a Metric SQL Model to annotate the warehouse table underlying your metrics
-2. Specifying how data in that table should be aggregated by experiment subject (typically user)
+1. **Create a Metric SQL Model** to annotate the warehouse table underlying your metrics
+2. **Map your warehouse data to Datadog** and specify how the data from your warehouse should be aggregated by experiment subject (typically user)
 
 ### Create a Metric SQL Model
 
@@ -89,6 +104,9 @@ Supported aggregation types include:
 {{< img src="/product_analytics/experiment/exp_default_metric_agg.png" alt="Dropdown menu to select the aggregation method for metrics." style="width:90%;" >}}
 
 Metrics are computed per experiment subject (typically user). For instance, a **count of events** metric computes the total number of events for all users in the variant divided by the number of users in that variant.
+
+<!-- ADD AN MATHEMATICAL EQUATION? -->
+
 
 ## Ratio metrics
 
@@ -176,4 +194,12 @@ Datadog supports several advanced options specific to experimentation:
 
 [1]: https://app.datadoghq.com/product-analytics/experimentation-metrics
 [2]: https://en.wikipedia.org/wiki/Delta_method
-[X]: LINK_TO_RUM_GETTING_STARTED
+[3]: /real_user_monitoring/#get-started
+[4]: /real_user_monitoring/application_monitoring/android/setup/?tab=kotlin
+[5]: /real_user_monitoring/application_monitoring/ios/setup/?tab=swift-package-manager--spm
+[6]: /real_user_monitoring/application_monitoring/browser/setup/client/?tab=npm
+[7]: /real_user_monitoring/application_monitoring/react_native/setup/?platform=react_native
+[8]: experiments/guide/connecting_bigquery
+[9]: experiments/guide/connecting_databricks
+[10]: experiments/guide/connecting_redshift
+[11]: experiments/guide/connecting_snowflake
