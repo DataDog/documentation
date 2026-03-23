@@ -72,7 +72,7 @@ The **Product List** tab shows all billing dimensions in a table with cost and u
 
 - **Cost Type**: Filter to show **Committed** costs, **On-Demand** costs, or **All** costs.
 
-Click anywhere on a product row to open the [product detail page](#product-detail-page). Hover over the end of a row to quickly create a cost monitor for that billing dimension.
+Click anywhere on a product row to open the [product detail page][2]. Hover over the end of a row to quickly create a cost monitor for that billing dimension.
 
 #### Table columns
 
