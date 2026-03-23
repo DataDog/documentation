@@ -60,6 +60,17 @@ At the top of the trace view, the banner shows aggregated cost information for t
 
 Selecting an individual LLM span shows similar cost metrics specific to that LLM request.
 
+To query cost-related data in Traces page, use the left side **Cost** facets. 
+
+Alternatively, query the following span attributes directly:
+- `@metrics.input_tokens` / `@metrics.estimated_input_cost`
+- `@metrics.output_tokens` / `@metrics.estimated_output_cost`
+- `@metrics.total_tokens` / `@metrics.estimated_total_cost`
+- `@metrics.non_cached_input_tokens` / `@metrics.estimated_non_cached_input_cost`
+- `@metrics.cache_read_input_tokens` / `@metrics.estimated_cache_read_input_cost`
+- `@metrics.cache_write_input_tokens` / `@metrics.estimated_cache_write_input_cost`
+- `@metrics.reasoning_output_tokens` / `@metrics.estimated_reasoning_output_cost`
+
 [1]: /llm_observability/instrumentation/auto_instrumentation
 [2]: /llm_observability/instrumentation/sdk/?tab=python#monitoring-costs
 [3]: /llm_observability/instrumentation/api/#metrics

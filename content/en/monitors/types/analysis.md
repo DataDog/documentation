@@ -1,6 +1,7 @@
 ---
 title: Analysis Monitor
 description: "Alert on advanced log analysis with Analysis monitors that support querying multiple data sources, chaining data transformations, and running complex SQL queries."
+site_support_id: advanced_analysis
 further_reading:
 - link: "/notebooks/advanced_analysis/"
   tag: "Documentation"
