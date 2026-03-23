@@ -208,9 +208,6 @@ For advanced inheritance configuration, see [Profile Format Reference][3].
 
 ### Why are there no matching devices?
 If no matching devices are found, it may be due to the following reasons:
-  * **The profile is in Draft mode**:
-    * Draft profiles are not applied to the Agent. To start monitoring devices with your profile, open the profile and click **Save & Deploy Profile**.
-    After a profile is applied, you cannot bring it back to draft status.
   * **The profile is applied but is not matching any device(s)**:
     * Profiles are matched to devices using their SysObjectID. Confirm that the SysObjectID in the profile matches one or more of your monitored devices.
   * **Multiple profiles have the same SysObjectID(s)**:
