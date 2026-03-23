@@ -283,6 +283,8 @@ To make matches more precise, you can also do one of the following:
 - Scan the entire event but exclude certain attributes from getting scanned. For example, if you are scanning for personally identifiable information (PII) like physical addresses, you might want to exclude attributes such as `ip_address`.
 - Scan for specific attributes to narrow the scope of the data that is scanned. For example, if you are scanning for physical addresses, you can choose specific attributes such as `street` and `city`.
 
+**Note**: When specifying attribute names, use the attribute path without the `@` prefix. For example, use `function.request.body.password` instead of `@function.request.body.password`. The `@` prefix used in search queries and other parts of Datadog is not supported in this field.
+
 ### Edit scanning rules
 
 To edit scanning rules:
@@ -322,7 +324,7 @@ To redact the attribute:
 2. Click **Add Scanning Rule**.
 3. Check the library rules you want to use.
 4. Select **Specific Attributes** for **Scan entire event or portion of it**.
-5. Enter the name of the attribute you created earlier to specify that you want it scanned.
+5. Enter the name of the attribute you created earlier to specify that you want it scanned. Use the attribute path without the `@` prefix.
 6. Select the action you want when there's a match.
 7. Optionally, add tags.
 8. Click **Add Rules**.
