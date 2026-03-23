@@ -2,7 +2,7 @@
     - The Observability Pipelines Worker listens to this socket address, such as `0.0.0.0:9997`, for your HTTP client logs.
     - The default environment variable is `DD_OP_SOURCE_HTTP_SERVER_ADDRESS`.
 - If you are using plain authentication:
-	- HTTP Server username identifier:
-		- The default identifier is `DD_OP_SOURCE_HTTP_SERVER_USERNAME`.
-	- HTTP Server password identifier:
-		- The default identifier is `DD_OP_SOURCE_HTTP_SERVER_PASSWORD`.
+	- HTTP/S endpoint authentication username.
+		- The default environment variable is `DD_OP_SOURCE_HTTP_SERVER_USERNAME`.
+	- HTTP/S endpoint authentication password.
+		- The default environment variable is `DD_OP_SOURCE_HTTP_SERVER_PASSWORD`.
