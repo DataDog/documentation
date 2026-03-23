@@ -196,6 +196,12 @@ agent diagnose show-metadata agent-telemetry
 | **APM**                                     |                                                                                                                        |
 | trace.enabled                               | Whether the trace-agent process is running.                                                                            |
 | trace.working                               | Whether the trace-agent process is receiving and sending traces.                                                       |
+| **Synthetic Monitoring**                              |                                                                                                                        |
+| synthetics_agent.checks_received            | Number of tests received                                                                                               |
+| synthetics_agent.checks_processed           | Number of tests executed                                                                                               |
+| synthetics_agent.error_test_config          | Number of test config errors                                                                                           |
+| synthetics_agent.traceroute_error           | Number of traceroute errors                                                                                            |
+| synthetics_agent.evp_send_result_failure    | Number of errors when sending results                                                                                  |
 
 Only applicable metrics are emitted. For example, if DBM is not enabled, none of the database related metrics are emitted.
 

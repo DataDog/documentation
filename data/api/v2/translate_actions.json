@@ -1054,6 +1054,10 @@
     "request_description": "Dataset payload",
     "request_schema_description": "Edit request for a dataset."
   },
+  "ListDeploymentGates": {
+    "description": "Returns a paginated list of all deployment gates for the organization.\nUse `page[cursor]` and `page[size]` query parameters to paginate through results.",
+    "summary": "Get all deployment gates"
+  },
   "CreateDeploymentGate": {
     "description": "Endpoint to create a deployment gate.",
     "summary": "Create deployment gate",
@@ -1097,6 +1101,16 @@
     "summary": "Update deployment gate",
     "request_description": "",
     "request_schema_description": "Parameters for updating a deployment gate."
+  },
+  "TriggerDeploymentGatesEvaluation": {
+    "description": "Triggers an asynchronous deployment gate evaluation for the given service and environment.\nReturns an evaluation ID that can be used to poll for the result via the\n`GET /api/v2/deployments/gates/evaluation/{id}` endpoint.",
+    "summary": "Trigger a deployment gate evaluation",
+    "request_description": "",
+    "request_schema_description": "Request body for triggering a deployment gate evaluation."
+  },
+  "GetDeploymentGatesEvaluationResult": {
+    "description": "Retrieves the result of a deployment gate evaluation by its evaluation ID.\nIf the evaluation is still in progress, `data.attributes.gate_status` will be `in_progress`;\ncontinue polling until it returns `pass` or `fail`.\nPolling every 10-20 seconds is recommended.\nThe endpoint may return a 404 if called too soon after triggering; retry after a few seconds.",
+    "summary": "Get a deployment gate evaluation result"
   },
   "GetDomainAllowlist": {
     "description": "Get the domain allowlist for an organization.",
@@ -1229,6 +1243,66 @@
   "GetEvent": {
     "description": "Get the details of an event by `event_id`.",
     "summary": "Get an event"
+  },
+  "ListFeatureFlags": {
+    "description": "Returns a list of feature flags for the organization.\nSupports filtering by key and archived status.",
+    "summary": "List feature flags"
+  },
+  "CreateFeatureFlag": {
+    "description": "Creates a new feature flag with variants.",
+    "summary": "Create a feature flag",
+    "request_description": "",
+    "request_schema_description": "Request to create a new feature flag."
+  },
+  "ListFeatureFlagsEnvironments": {
+    "description": "Returns a list of environments for the organization.\nSupports filtering by name and key.",
+    "summary": "List environments"
+  },
+  "CreateFeatureFlagsEnvironment": {
+    "description": "Creates a new environment for organizing feature flags.",
+    "summary": "Create an environment",
+    "request_description": "",
+    "request_schema_description": "Request to create a new environment."
+  },
+  "DeleteFeatureFlagsEnvironment": {
+    "description": "Deletes an environment. This operation cannot be undone.",
+    "summary": "Delete an environment"
+  },
+  "GetFeatureFlagsEnvironment": {
+    "description": "Returns the details of a specific environment.",
+    "summary": "Get an environment"
+  },
+  "UpdateFeatureFlagsEnvironment": {
+    "description": "Updates an existing environment's metadata such as\n name and description.",
+    "summary": "Update an environment",
+    "request_description": "",
+    "request_schema_description": "Request to update an environment."
+  },
+  "GetFeatureFlag": {
+    "description": "Returns the details of a specific feature flag\nincluding variants and environment status.",
+    "summary": "Get a feature flag"
+  },
+  "UpdateFeatureFlag": {
+    "description": "Updates an existing feature flag's metadata such as\n name and description. Does not modify targeting rules or allocations.",
+    "summary": "Update a feature flag",
+    "request_description": "",
+    "request_schema_description": "Request to update a feature flag."
+  },
+  "ArchiveFeatureFlag": {
+    "description": "Archives a feature flag. Archived flags are\nhidden from the main list but remain accessible and can be unarchived.",
+    "summary": "Archive a feature flag"
+  },
+  "DisableFeatureFlagEnvironment": {
+    "description": "Disable a feature flag in a specific environment.",
+    "summary": "Disable a feature flag in an environment"
+  },
+  "EnableFeatureFlagEnvironment": {
+    "description": "Enable a feature flag in a specific environment.",
+    "summary": "Enable a feature flag in an environment"
+  },
+  "UnarchiveFeatureFlag": {
+    "description": "Unarchives a previously archived feature flag,\nmaking it visible in the main list again.",
+    "summary": "Unarchive a feature flag"
   },
   "GetHamrOrgConnection": {
     "description": "Retrieve the High Availability Multi-Region (HAMR) organization connection details for the authenticated organization.\nThis endpoint returns information about the HAMR connection configuration, including the target organization,\ndatacenter, status, and whether this is the primary or secondary organization in the HAMR relationship.",
@@ -2230,7 +2304,7 @@
     "request_schema_description": "The request for a logs list."
   },
   "ListTagConfigurations": {
-    "description": "Returns all metrics for your organization that match the given filter parameters.\nOptionally, paginate by using the `page[cursor]` and/or `page[size]` query parameters.\nTo fetch the first page, pass in a query parameter with either a valid `page[size]` or an empty cursor like `page[cursor]=`. To fetch the next page, pass in the `next_cursor` value from the response as the new `page[cursor]` value.\nOnce the `meta.pagination.next_cursor` value is null, all pages have been retrieved.",
+    "description": "Get a list of actively reporting metrics for your organization. Pagination is optional using the `page[cursor]` and `page[size]` query parameters.",
     "summary": "Get a list of metrics"
   },
   "DeleteBulkTagsMetricsConfiguration": {
@@ -2266,7 +2340,7 @@
     "summary": "Get tag key cardinality details"
   },
   "DeleteTagConfiguration": {
-    "description": "Deletes a metric's tag configuration. Can only be used with application\nkeys from users with the `Manage Tags for Metrics` permission.",
+    "description": "Deletes a metric's tag configuration. Can only be used with application\nkeys from users with the `Manage Tags for Metrics` permission.\nNote: This operation is irreversible.",
     "summary": "Delete a tag configuration"
   },
   "ListTagConfigurationByName": {
@@ -2728,6 +2802,12 @@
     "summary": "Query timeseries data across multiple products",
     "request_description": "",
     "request_schema_description": "A request wrapper around a single timeseries query to be executed."
+  },
+  "BatchRowsQuery": {
+    "description": "Batch query reference table rows by their primary key values.  Returns only found rows in the included array.",
+    "summary": "Batch rows query",
+    "request_description": "",
+    "request_schema_description": ""
   },
   "ListTables": {
     "description": "List all reference tables in this organization.",
@@ -4110,7 +4190,7 @@
     "summary": "Get team sync configurations"
   },
   "SyncTeams": {
-    "description": "This endpoint attempts to link your existing Datadog teams with GitHub teams by matching their names.\nIt evaluates all current Datadog teams and compares them against teams in the GitHub organization\nconnected to your Datadog account, based on Datadog Team handle and GitHub Team slug\n(lowercased and kebab-cased).\n\nThis operation is read-only on the GitHub side, no teams will be modified or created.\n\n[A GitHub organization must be connected to your Datadog account](https://docs.datadoghq.com/integrations/github/),\nand the GitHub App integrated with Datadog must have the `Members Read` permission. Matching is performed by comparing the Datadog team handle to the GitHub team slug\nusing a normalized exact match; case is ignored and spaces are removed. No modifications are made\nto teams in GitHub. This only creates new teams in Datadog when type is set to `provision`.",
+    "description": "This endpoint configures synchronization between your existing Datadog teams and GitHub teams by matching their names.\nIt evaluates all current Datadog teams and compares them against teams in the GitHub organization\nconnected to your Datadog account, based on Datadog Team handle and GitHub Team slug\n(lowercased and kebab-cased).\n\nThis operation is read-only on the GitHub side, no teams will be modified or created.\n\nOptionally, provide `selection_state` to limit synchronization\nto specific teams or organizations and their subtrees, instead\nof syncing all teams.\n\n[A GitHub organization must be connected to your Datadog account](https://docs.datadoghq.com/integrations/github/),\nand the GitHub App integrated with Datadog must have the `Members Read` permission. Matching is performed by comparing the Datadog team handle to the GitHub team slug\nusing a normalized exact match; case is ignored and spaces are removed. No modifications are made\nto teams in GitHub. This only creates new teams in Datadog when type is set to `provision`.",
     "summary": "Link Teams with GitHub Teams",
     "request_description": "",
     "request_schema_description": "Team sync request."

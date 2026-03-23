@@ -30,13 +30,13 @@ Integrations enable third parties to send observability data—such as metrics, 
 By creating an integration, you can achieve the following benefits:
 
 Correlate your data with user observability data
-: Leverage Datadog to increase the value of your platform by allowing customers to see the data from your platform alongside the rest of their technology stack.
+: Use Datadog to increase the value of your platform by allowing customers to see the data from your platform alongside the rest of their technology stack.
 
 Decrease mean-time-to-resolution (MTTR) for customers 
-: When a customer's account is enriched with data from an integration, they are able to see a broader view of their entire stack, allowing them to debug and remediate issues more quickly. 
+: When a customer's account is enriched with data from an integration, they are able to see a broader view of their entire stack, allowing them to debug and remediate issues sooner.
 
 Increase adoption and visibility 
-: Ensuring native functionality for Datadog reduces friction to adoption, and displaying a tile on the [Integrations page][2] or the [Marketplace page][3] provides key visibility to all of Datadog's customers.
+: Native functionality for Datadog reduces friction to adoption, and displaying a tile on the [Integrations page][2] or the [Marketplace page][3] provides visibility to all Datadog customers.
 
 ## What is an integration tile?
 
@@ -51,92 +51,71 @@ Integration tiles are a component of integrations at Datadog.
 ## Requirements of an official integration
 
 All official integrations must include the following:
-* Telemetry sent to Datadog
-* An out-of-the-box integration dashboard
-* Images on your tile
-* OAuth (for API integrations only)
-* A log pipeline (for log integrations only)
-* Recommended Monitor (for integrations that sends in metrics)
 
-## Getting started 
+- **Telemetry**: Your integration must send at least one type of observability data (metrics, logs, traces, or events) to Datadog.
+- **Out-of-the-box dashboard**: A prebuilt dashboard that visualizes the data your integration sends. See [Create an integration dashboard][10].
+- **Tile images**: Screenshots or diagrams that appear on your tile in the Integrations or Marketplace page. See [Build an integration][11].
 
-### Join the Datadog Partner Network
+Depending on what your integration does, the following are also required:
 
-Before listing an integration on Datadog, first apply to the [Datadog Partner Network's][1] **Technology Partner** track. Once your application has been approved, you can begin developing your integration.
+| Integration type               | Additional requirement         |
+|--------------------------------|--------------------------------|
+| API-based integrations         | [OAuth 2.0 authentication][12] |
+| Log integrations               | [Log pipeline][13]             |
+| Integrations that send metrics | [Monitor template][14]      |
 
-### Request a sandbox account
+## Getting started
 
-All Technology Partners can request a dedicated Datadog sandbox account to help develop their integration. This sandbox account has a free license that you can use to send in data, build out dashboards, and more. 
+### Prerequisites
+
+Before you begin developing an integration:
+
+1. Apply to the [Datadog Partner Network's][1] **Technology Partner** track. After your application is approved, a member of the Datadog Technology Partner team reaches out to schedule an introductory call.
+2. Request a dedicated Datadog sandbox account for development:
+   1. Log in to the [Datadog Partner Portal][1].
+   2. On your personal homepage, click **Learn More** under **Sandbox Access**.
+   3. Select **Request Sandbox Upgrade**.
+
+After your sandbox is created, you can [invite members from your organization][7] to collaborate.
 
 <div class="alert alert-info">If you are already a member of a Datadog organization (including a trial org), you may need to switch to your newly created sandbox. For more information, see the <a href="https://docs.datadoghq.com/account_management/org_switching/">Account Management documentation</a>.</div>
 
-To request a sandbox account:
+### Build your integration
 
-1. Login to the [Datadog Partner Portal][1].
-2. On your personal homepage, click on the **Learn More** button under **Sandbox Access**.
-3. Select **Request Sandbox Upgrade**.
+After you have sandbox access, use the Integration Developer Platform to build your integration:
 
-Creating a developer sandbox may take up to one or two business days. Once your sandbox is created, you can [invite new members from your organization][7] to collaborate with.
-
-### Building an integration overview
-
-Follow these steps to create a new integration with Datadog.
-
-1. **Apply to the Datadog Partner Network.** Once accepted, a member of the Datadog Technology Partner team will reach out to schedule an introductory call.
-2. **Request a Datadog sandbox account** for development via the Datadog Partner Network portal.
-3. **Start developing your integration** using the Integration Developer Platform:
-   1. Define the basic details about your integration.
-   1. Define and write your integration code by following the instructions to create one of the following integration types:
-      - [Agent-based integration][5]
-      - [API-based integration][6]   
-   1. Specify what type of data your integration queries or submits.
-   1. Create a dashboard, and optionally create monitors or security rules.
-   1. Fill in the remaining fields: setup and uninstallation instructions, images, support details, and other key details that help describe the value of your integration.
-4. **Test your integration** in your Datadog sandbox account.
-5. **Submit your integration for review.**
-6. **Once approved, your integration is published.**
+1. Define the basic details about your integration (name, description, and category).
+2. Write your integration code. Choose the type that matches your use case:
+   - **[Agent-based integration][5]**: Collects data from on-host or local sources using the Datadog Agent. Best for monitoring infrastructure, services, or applications running in a customer's environment.
+   - **[API-based integration][6]**: Sends data to Datadog through a REST API. Best for SaaS platforms and cloud services that operate outside of a customer's environment.
+3. Specify the type of telemetry your integration queries or submits (metrics, logs, traces, or events).
+4. Create an out-of-the-box dashboard, and optionally create monitors or security rules.
+5. Complete your integration tile: add setup and uninstallation instructions, images, and support details.
+6. Test your integration in your Datadog sandbox account.
+7. Submit your integration for review. After approval, Datadog publishes it.
 
 ### Responsibilities
 
-As the author of the integration, you are responsible for maintaining the code and ensuring the integration functions properly across all [Datadog sites][8]. If you encounter any setup issues, [contact Support][9].
+As the author of the integration, you are responsible for maintaining the code and helping ensure the integration functions properly across all [Datadog sites][8]. If you encounter setup issues, [contact Support][9].
 
-## Out-of-the-box Integrations vs. Marketplace Offerings
+## Out-of-the-box integrations compared to Marketplace offerings
 
-{{< tabs >}}
-{{% tab "Integrations" %}}
+The [Integrations page][2] includes integrations built by both Datadog and Technology Partners, available at no additional cost to Datadog customers. The [Marketplace page][3] is a commercial platform where Technology Partners can sell offerings—including integrations, software licenses, and professional services—to Datadog customers.
 
-The [Integrations page][101] includes integrations built by both Datadog and our Technology Partners, available at _no cost_ to Datadog customers. 
+|                           | **Out-of-the-box integrations**                                 | **Marketplace offerings**                                                                             |
+|---------------------------|-----------------------------------------------------------------|-------------------------------------------------------------------------------------------------------|
+| **Purpose**               | Connect and transfer data between Datadog and partner platforms | Enhance the Datadog experience with extended capabilities, partner services, and legacy tech coverage |
+| **Availability**          | Included on the [Integrations page][2]                          | Paid, available on the [Marketplace page][3]                                                          |
+| **Built & maintained by** | Datadog or Technology Partners                                  | Technology Partners                                                                                   |
+| **Billing**               | Included in Datadog subscription                                | Additional fees                                                                                       |
 
-{{< img src="extend/integrations/integrations_overview.png" alt="The Datadog Integrations page" style="width:100%;" >}}
-
-[101]: https://app.datadoghq.com/integrations
-
-{{% /tab %}}
-{{% tab "Marketplace" %}}
-
-The [Marketplace page][101] is a commercial platform for Technology Partners to _sell_ a variety of offerings, including integrations, software licenses, and professional services to Datadog customers.
-
-{{< img src="extend/marketplace/marketplace_updated_overview.png" alt="The Datadog Marketplace page" style="width:100%" >}}
-
-[101]: https://app.datadoghq.com/marketplace
-
-{{% /tab %}}
-{{< /tabs >}}
-  
-Marketplace integrations are ideal for:
+Marketplace offerings are ideal for:
 * System integrators with specialized Datadog product expertise.
 * Partners offering professional services to enhance Datadog adoption.
 
-|                          | **OOTB Integrations**                                                                 | **Marketplace Integrations**                                                                                   |
-|--------------------------|----------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------|
-| **Purpose**              | Provide a way to connect and transfer data between Datadog and partner platforms     | Enhance the Datadog experience, including extended capabilities, partner services, and legacy tech coverage    |
-| **Availability**         | Included on the Integrations Page                                                     | Paid, available on the Marketplace                                                                             |
-| **Built & Maintained by**| Datadog or Technology Partners                                                        | Technology Partners                                                                                            |
-| **Billing**              | Included in Datadog subscription                                                      | Additional fees                                               |
+## Go-to-market (GTM) opportunities
 
-## Go-to-Market (GTM) opportunities
-
-Datadog offers GTM support. Please reach out to your partner manager to learn more.
+Datadog offers GTM support. Reach out to your partner manager to learn more.
 
 ## Further reading
 
@@ -151,3 +130,8 @@ Datadog offers GTM support. Please reach out to your partner manager to learn mo
 [7]: https://docs.datadoghq.com/account_management/users/#add-new-members-and-manage-invites
 [8]: https://docs.datadoghq.com/getting_started/site/
 [9]: https://docs.datadoghq.com/help/
+[10]: /developers/integrations/create-an-integration-dashboard/
+[11]: /developers/integrations/build_integration/
+[12]: /developers/integrations/api_integration/#implement-oauth
+[13]: /developers/integrations/log_pipeline/
+[14]: /developers/integrations/create-an-integration-monitor-template/
