@@ -449,8 +449,8 @@
   "CreateProject": {
     "description": "Create a project.",
     "summary": "Create a project",
-    "request_description": "Project payload",
-    "request_schema_description": "Project create request"
+    "request_description": "Project payload.",
+    "request_schema_description": "Project create request."
   },
   "DeleteProject": {
     "description": "Remove a project using the project's `id`.",
@@ -463,8 +463,8 @@
   "UpdateProject": {
     "description": "Update a project.",
     "summary": "Update a project",
-    "request_description": "Project payload",
-    "request_schema_description": "Project update request"
+    "request_description": "Project payload.",
+    "request_schema_description": "Project update request."
   },
   "GetProjectNotificationRules": {
     "description": "Get all notification rules for a project.",
@@ -604,7 +604,7 @@
     "description": "Update the project associated with a case",
     "summary": "Update case project",
     "request_description": "Project update request",
-    "request_schema_description": "Relationship to project"
+    "request_schema_description": "Relationship to project."
   },
   "CreateCaseServiceNowTicket": {
     "description": "Create a new ServiceNow incident ticket and link it to a case",
@@ -900,7 +900,7 @@
     "description": "Validate a budget configuration without creating or modifying it",
     "summary": "Validate budget",
     "request_description": "",
-    "request_schema_description": ""
+    "request_schema_description": "The request object for validating a budget configuration before creating or updating it."
   },
   "DeleteBudget": {
     "description": "Delete a budget",
@@ -1312,7 +1312,7 @@
     "description": "Create or update the High Availability Multi-Region (HAMR) organization connection.\nThis endpoint allows you to configure the HAMR connection between the authenticated organization\nand a target organization, including setting the connection status (ONBOARDING, PASSIVE, FAILOVER, ACTIVE, RECOVERY)",
     "summary": "Create or update HAMR organization connection",
     "request_description": "",
-    "request_schema_description": ""
+    "request_schema_description": "Request payload for creating or updating a HAMR organization connection."
   },
   "ListIncidents": {
     "description": "Get all incidents for the user's organization.",
@@ -1336,13 +1336,13 @@
     "description": "Create a new global incident handle.",
     "summary": "Create global incident handle",
     "request_description": "",
-    "request_schema_description": ""
+    "request_schema_description": "Request payload for creating or updating a global incident handle."
   },
   "UpdateGlobalIncidentHandle": {
     "description": "Update an existing global incident handle.",
     "summary": "Update global incident handle",
     "request_description": "",
-    "request_schema_description": ""
+    "request_schema_description": "Request payload for creating or updating a global incident handle."
   },
   "GetGlobalIncidentSettings": {
     "description": "Retrieve global incident settings for the organization.",
@@ -1352,7 +1352,7 @@
     "description": "Update global incident settings for the organization.",
     "summary": "Update global incident settings",
     "request_description": "",
-    "request_schema_description": ""
+    "request_schema_description": "Request payload for updating global incident settings."
   },
   "ListIncidentNotificationRules": {
     "description": "Lists all notification rules for the organization. Optionally filter by incident type.",
@@ -1410,7 +1410,7 @@
     "description": "Create a new postmortem template for incidents.",
     "summary": "Create postmortem template",
     "request_description": "",
-    "request_schema_description": ""
+    "request_schema_description": "Request body for creating or updating a postmortem template."
   },
   "DeleteIncidentPostmortemTemplate": {
     "description": "Delete a postmortem template.",
@@ -1424,7 +1424,7 @@
     "description": "Update an existing postmortem template.",
     "summary": "Update postmortem template",
     "request_description": "",
-    "request_schema_description": ""
+    "request_schema_description": "Request body for creating or updating a postmortem template."
   },
   "ListIncidentTypes": {
     "description": "Get all incident types.",
@@ -1488,7 +1488,7 @@
     "description": "Create a postmortem attachment for an incident.\n\nThe endpoint accepts markdown for notebooks created in Confluence or Google Docs.\nPostmortems created from notebooks need to be formatted using frontend notebook cells,\nin addition to markdown format.",
     "summary": "Create postmortem attachment",
     "request_description": "",
-    "request_schema_description": ""
+    "request_schema_description": "Request body for creating a postmortem attachment."
   },
   "DeleteIncidentAttachment": {
     "summary": "Delete incident attachment"
@@ -1798,7 +1798,7 @@
     "description": "Create a new tenancy config to establish monitoring and data collection from your OCI environment. Requires OCI authentication credentials and tenancy details. Warning: Datadog recommends interacting with this endpoint only through the Datadog web UI to ensure all necessary OCI resources have been created and configured properly.",
     "summary": "Create tenancy config",
     "request_description": "",
-    "request_schema_description": ""
+    "request_schema_description": "Request body for creating a new OCI tenancy integration configuration."
   },
   "DeleteTenancyConfig": {
     "description": "Delete an existing tenancy config. This will stop all data collection from the specified OCI tenancy and remove the stored configuration. This operation cannot be undone.",
@@ -1812,7 +1812,7 @@
     "description": "Update an existing tenancy config. You can modify authentication credentials, enable/disable collection types, update service filters, and change region settings. Warning: We recommend using the Datadog web UI to avoid unintended update effects.",
     "summary": "Update tenancy config",
     "request_description": "",
-    "request_schema_description": ""
+    "request_schema_description": "Request body for updating an existing OCI tenancy integration configuration."
   },
   "ListOpsgenieServices": {
     "description": "Get a list of all services from the Datadog Opsgenie integration.",
@@ -2729,13 +2729,13 @@
     "description": "Get facet information for account attributes including possible values and counts",
     "summary": "Get account facet info",
     "request_description": "",
-    "request_schema_description": ""
+    "request_schema_description": "Request body for retrieving facet value information for a specified attribute with optional filtering."
   },
   "QueryAccounts": {
     "description": "Query accounts with flexible filtering by account properties",
     "summary": "Query accounts",
     "request_description": "",
-    "request_schema_description": ""
+    "request_schema_description": "Request body for querying accounts with optional filtering, column selection, and sorting."
   },
   "QueryProductAnalyticsScalar": {
     "description": "Compute scalar analytics results for Product Analytics data.\nReturns aggregated values (counts, averages, percentiles) optionally grouped by facets.",
@@ -2753,19 +2753,19 @@
     "description": "Query users filtered by both user properties and event platform data",
     "summary": "Query event filtered users",
     "request_description": "",
-    "request_schema_description": ""
+    "request_schema_description": "Request body for querying users filtered by user properties combined with event platform activity."
   },
   "GetUserFacetInfo": {
     "description": "Get facet information for user attributes including possible values and counts",
     "summary": "Get user facet info",
     "request_description": "",
-    "request_schema_description": ""
+    "request_schema_description": "Request body for retrieving facet value information for a specified attribute with optional filtering."
   },
   "QueryUsers": {
     "description": "Query users with flexible filtering by user properties, with optional wildcard search",
     "summary": "Query users",
     "request_description": "",
-    "request_schema_description": ""
+    "request_schema_description": "Request body for querying users with optional filtering, column selection, and sorting."
   },
   "GetMapping": {
     "description": "Get entity mapping configuration including all available attributes and their properties",
@@ -2775,13 +2775,13 @@
     "description": "Create a new data connection and its fields for an entity",
     "summary": "Create connection",
     "request_description": "",
-    "request_schema_description": ""
+    "request_schema_description": "Request body for creating a new data source connection for an entity."
   },
   "UpdateConnection": {
     "description": "Update an existing data connection by adding, updating, or deleting fields",
     "summary": "Update connection",
     "request_description": "",
-    "request_schema_description": ""
+    "request_schema_description": "Request body for updating an existing data source connection by adding, modifying, or removing fields."
   },
   "DeleteConnection": {
     "description": "Delete an existing data connection for an entity",
@@ -2963,7 +2963,7 @@
     "description": "Create a heatmap snapshot.",
     "summary": "Create replay heatmap snapshot",
     "request_description": "",
-    "request_schema_description": ""
+    "request_schema_description": "Request body for creating a heatmap snapshot."
   },
   "DeleteReplayHeatmapSnapshot": {
     "description": "Delete a heatmap snapshot.",
@@ -2973,7 +2973,7 @@
     "description": "Update a heatmap snapshot.",
     "summary": "Update replay heatmap snapshot",
     "request_description": "",
-    "request_schema_description": ""
+    "request_schema_description": "Request body for updating a heatmap snapshot."
   },
   "DeleteRestrictionPolicy": {
     "description": "Deletes the restriction policy associated with a specified resource.",
@@ -3157,7 +3157,7 @@
     "description": "Create a playlist.",
     "summary": "Create rum replay playlist",
     "request_description": "",
-    "request_schema_description": ""
+    "request_schema_description": "A single RUM replay playlist resource returned by create, update, or get operations."
   },
   "DeleteRumReplayPlaylist": {
     "description": "Delete a playlist.",
@@ -3171,13 +3171,13 @@
     "description": "Update a playlist.",
     "summary": "Update rum replay playlist",
     "request_description": "",
-    "request_schema_description": ""
+    "request_schema_description": "A single RUM replay playlist resource returned by create, update, or get operations."
   },
   "BulkRemoveRumReplayPlaylistSessions": {
     "description": "Remove sessions from a playlist.",
     "summary": "Bulk remove rum replay playlist sessions",
     "request_description": "",
-    "request_schema_description": ""
+    "request_schema_description": "A collection of session identifiers used for bulk add or remove operations on a playlist."
   },
   "ListRumReplayPlaylistSessions": {
     "description": "List sessions in a playlist.",
@@ -3207,7 +3207,7 @@
     "description": "Record a session watch.",
     "summary": "Create rum replay session watch",
     "request_description": "",
-    "request_schema_description": ""
+    "request_schema_description": "A single RUM replay session watch resource returned by create operations."
   },
   "ListRumReplayViewershipHistorySessions": {
     "description": "List watched sessions.",
@@ -3319,7 +3319,7 @@
     "description": "Unassign seats from users for a product code.",
     "summary": "Unassign seats from users",
     "request_description": "",
-    "request_schema_description": ""
+    "request_schema_description": "The request body for unassigning seats from users for a product code."
   },
   "GetSeatsUsers": {
     "description": "Get the list of users assigned seats for a product code.",
@@ -3329,7 +3329,7 @@
     "description": "Assign seats to users for a product code.",
     "summary": "Assign seats to users",
     "request_description": "",
-    "request_schema_description": ""
+    "request_schema_description": "The request body for assigning seats to users for a product code."
   },
   "ListEntityRiskScores": {
     "description": "Get a list of entity risk scores for your organization. Entity risk scores provide security risk assessment for entities like cloud resources, identities, or services based on detected signals, misconfigurations, and identity risks.",
@@ -3892,12 +3892,12 @@
   "CreateSCAResult": {
     "summary": "Post dependencies for analysis",
     "request_description": "",
-    "request_schema_description": ""
+    "request_schema_description": "The top-level request object for submitting a Software Composition Analysis (SCA) scan result."
   },
   "CreateSCAResolveVulnerableSymbols": {
     "summary": "POST request to resolve vulnerable symbols",
     "request_description": "",
-    "request_schema_description": ""
+    "request_schema_description": "The top-level request object for resolving vulnerable symbols in a set of packages."
   },
   "DeleteCustomRuleset": {
     "description": "Delete a custom ruleset",
@@ -3911,13 +3911,13 @@
     "description": "Update an existing custom ruleset",
     "summary": "Update Custom Ruleset",
     "request_description": "",
-    "request_schema_description": ""
+    "request_schema_description": "Request body for creating or updating a custom ruleset."
   },
   "CreateCustomRule": {
     "description": "Create a new custom rule within a ruleset",
     "summary": "Create Custom Rule",
     "request_description": "",
-    "request_schema_description": ""
+    "request_schema_description": "Request body for creating or updating a custom rule."
   },
   "DeleteCustomRule": {
     "description": "Delete a custom rule",
@@ -3935,13 +3935,13 @@
     "description": "Create a new revision for a custom rule",
     "summary": "Create Custom Rule Revision",
     "request_description": "",
-    "request_schema_description": ""
+    "request_schema_description": "Request body for creating a new custom rule revision."
   },
   "RevertCustomRuleRevision": {
     "description": "Revert a custom rule to a previous revision",
     "summary": "Revert Custom Rule Revision",
     "request_description": "",
-    "request_schema_description": ""
+    "request_schema_description": "Request body for reverting a custom rule to a previous revision."
   },
   "GetCustomRuleRevision": {
     "description": "Get a specific revision of a custom rule",
@@ -3951,7 +3951,7 @@
     "description": "Get rules for multiple rulesets in batch.",
     "summary": "Ruleset get multiple",
     "request_description": "",
-    "request_schema_description": ""
+    "request_schema_description": "The request payload for retrieving rules for multiple rulesets in a single batch call."
   },
   "GetSecretsRules": {
     "description": "Returns a list of Secrets rules with ID, Pattern, Description, Priority, and SDS ID.",
@@ -3965,7 +3965,7 @@
     "description": "Creates a new status page.",
     "summary": "Create status page",
     "request_description": "",
-    "request_schema_description": ""
+    "request_schema_description": "Request object for creating a status page."
   },
   "ListDegradations": {
     "description": "Lists all degradations for the organization. Optionally filter by status and page.",
@@ -3987,7 +3987,7 @@
     "description": "Updates an existing status page's attributes.",
     "summary": "Update status page",
     "request_description": "",
-    "request_schema_description": ""
+    "request_schema_description": "Request object for updating a status page."
   },
   "ListComponents": {
     "description": "Lists all components for a status page.",
@@ -3997,7 +3997,7 @@
     "description": "Creates a new component.",
     "summary": "Create component",
     "request_description": "",
-    "request_schema_description": ""
+    "request_schema_description": "Request object for creating a component."
   },
   "DeleteComponent": {
     "description": "Deletes a component by its ID.",
@@ -4011,13 +4011,13 @@
     "description": "Updates an existing component's attributes.",
     "summary": "Update component",
     "request_description": "",
-    "request_schema_description": ""
+    "request_schema_description": "Request object for updating a component."
   },
   "CreateDegradation": {
     "description": "Creates a new degradation.",
     "summary": "Create degradation",
     "request_description": "",
-    "request_schema_description": ""
+    "request_schema_description": "Request object for creating a degradation."
   },
   "DeleteDegradation": {
     "description": "Deletes a degradation by its ID.",
@@ -4031,13 +4031,13 @@
     "description": "Updates an existing degradation's attributes.",
     "summary": "Update degradation",
     "request_description": "",
-    "request_schema_description": ""
+    "request_schema_description": "Request object for updating a degradation."
   },
   "CreateMaintenance": {
     "description": "Schedules a new maintenance.",
     "summary": "Schedule maintenance",
     "request_description": "",
-    "request_schema_description": ""
+    "request_schema_description": "Request object for creating a maintenance."
   },
   "GetMaintenance": {
     "description": "Retrieves a specific maintenance by its ID.",
@@ -4047,7 +4047,7 @@
     "description": "Updates an existing maintenance's attributes.",
     "summary": "Update maintenance",
     "request_description": "",
-    "request_schema_description": ""
+    "request_schema_description": "Request object for updating a maintenance."
   },
   "GetOnDemandConcurrencyCap": {
     "description": "Get the on-demand concurrency cap.",
@@ -4062,12 +4062,12 @@
   "CreateSyntheticsSuite": {
     "summary": "Create a test suite",
     "request_description": "",
-    "request_schema_description": ""
+    "request_schema_description": "Request body for creating or editing a Synthetic test suite."
   },
   "DeleteSyntheticsSuites": {
     "summary": "Bulk delete suites",
     "request_description": "",
-    "request_schema_description": ""
+    "request_schema_description": "Request body for bulk deleting Synthetic test suites."
   },
   "SearchSuites": {
     "description": "Search for test suites.",
@@ -4079,12 +4079,12 @@
   "EditSyntheticsSuite": {
     "summary": "Edit a test suite",
     "request_description": "New suite details to be saved.",
-    "request_schema_description": ""
+    "request_schema_description": "Request body for creating or editing a Synthetic test suite."
   },
   "DeleteSyntheticsTests": {
     "summary": "Bulk delete tests",
     "request_description": "",
-    "request_schema_description": ""
+    "request_schema_description": "Request body for bulk deleting Synthetic tests."
   },
   "CreateSyntheticsNetworkTest": {
     "summary": "Create a Network Path test",
