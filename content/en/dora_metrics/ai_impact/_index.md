@@ -51,7 +51,7 @@ User Activity
 : Compares delivery metrics between active and non-active users of the selected tool. A user is considered active on a given day if they performed any interaction with the tool (for example, accepted a suggestion, used chat, or triggered an agent). Commits are attributed to the active or non-active group based on their author's activity on the day the commit was created.
 
 [1]: /dora_metrics/setup/
-[2]: /integrations/cursor/?tab=datadogextensionforcursor#overview
+[2]: /integrations/cursor/?tab=cursorintegrationindatadog#overview
 [3]: /integrations/anthropic-usage-and-costs/#events
 
 ## Impact metrics
