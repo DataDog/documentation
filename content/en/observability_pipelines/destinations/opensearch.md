@@ -39,9 +39,11 @@ Set up the OpenSearch destination and its environment variables when you [set up
 
 #### Optional settings
 
+##### OpenSearch index
+
 Enter the name of the OpenSearch index. See [template syntax][3] if you want to route logs to different indexes based on specific fields in your logs.
 
-##### Buffering options
+##### Buffering
 
 {{% observability_pipelines/destination_buffer %}}
 
