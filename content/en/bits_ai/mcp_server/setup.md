@@ -31,7 +31,7 @@ Datadog's [Cursor and VS Code extension][1] includes built-in access to the mana
 1. **Restart the IDE.**
 1. Confirm the Datadog MCP Server is available and the [tools][3] are listed: Go to **Cursor Settings** (`Shift` + `Cmd/Ctrl` + `J`), select the **Tools & MCP** tab, and expand the extension's tools list.
 1. If you previously installed the Datadog MCP Server manually, remove it from the IDE's configuration to avoid conflicts.
-1. Make sure you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
+1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
 
 [2]: /ide_plugins/vscode/?tab=cursor#installation
 [3]: /bits_ai/mcp_server#available-tools
@@ -68,7 +68,7 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
 
    <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
 
-1. Make sure you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
+1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
 
 <div class="alert alert-info">If remote authentication is not available, use <a href="#local-binary-authentication">local binary authentication</a> instead.</div>
 
@@ -101,7 +101,7 @@ Connect Claude (including Claude Cowork) to the Datadog MCP Server by adding it 
 
 1. Complete the OAuth login flow when prompted.
 
-1. Make sure you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
+1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
 
 [1]: https://support.claude.com/en/articles/11175166-get-started-with-custom-connectors-using-remote-mcp
 [2]: /getting_started/site/
@@ -139,7 +139,7 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
 
    This opens your browser to complete the OAuth flow. Codex stores the resulting credentials so you don't need to log in again until the token expires.
 
-1. Make sure you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
+1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
 
 [2]: /bits_ai/mcp_server#toolsets
 {{< /site-region >}}
@@ -166,7 +166,7 @@ Datadog's [Cursor and VS Code extension][1] includes built-in access to the mana
 1. Confirm the Datadog MCP Server is available and the [tools][3] are listed: Open the chat panel, select agent mode, and click the **Configure Tools** button.
    {{< img src="bits_ai/mcp_server/vscode_configure_tools_button.png" alt="Configure Tools button in VS Code" style="width:70%;" >}}
 1. If you previously installed the Datadog MCP Server manually, remove it from the IDE's configuration to avoid conflicts. Open the command palette (`Shift` + `Cmd/Ctrl` + `P`) and run `MCP: Open User Configuration`.
-1. Make sure you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
+1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
 
 [2]: /ide_plugins/vscode/?tab=vscode#installation
 [3]: /bits_ai/mcp_server#available-tools
@@ -207,7 +207,7 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
 
 1. You are prompted to login through OAuth. The status indicator in the settings displays a green tick when the connection is successful.
 
-1. Make sure you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
+1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
 
 [1]: /bits_ai/mcp_server#toolsets
 {{% /collapse-content %}}
@@ -234,7 +234,7 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
 
 1. The status indicator in the settings displays a green tick when the connection is successful.
 
-1. Make sure you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
+1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
 
 [1]: /bits_ai/mcp_server#toolsets
 {{% /collapse-content %}}
@@ -285,7 +285,7 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
 
     <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
 
-1. Make sure you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
+1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
 
 Example configuration file locations:
 
@@ -321,7 +321,9 @@ Example configuration file locations:
 <div class="alert alert-info">The Datadog MCP Server is under significant development, and additional supported clients may become available.</div>
 
 ## Required permissions
+
 MCP Server tools require the following [Datadog user role permissions][22]:
+
 | Permission | Required for |
 |------------|-------------|
 | <code style="white-space:nowrap">mcp_read</code> | Tools that read data from Datadog (for example, querying monitors, searching logs, retrieving dashboards) |
@@ -334,7 +336,7 @@ Users with the **Datadog Standard Role** have both MCP Server permissions by def
 1. Click **Edit Role** (pencil icon).
 1. Under the permissions list, select the **MCP Read** and **MCP Write** checkboxes.
 1. Select any other resource-level permissions you need for the role.
-5. Click **Save**.
+1. Click **Save**.
 
 Organization administrators can manage global MCP access and write capabilities from [Organization Settings][27].
 
