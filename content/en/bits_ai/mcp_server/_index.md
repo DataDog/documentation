@@ -41,13 +41,6 @@ This demo shows the Datadog MCP Server being used in Cursor and Claude Code (unm
 - The Datadog MCP Server is not GovCloud compatible.
 - Datadog collects certain information about your usage of the Remote Datadog MCP Server, including how you interact with it, whether errors occurred while using it, what caused those errors, and user identifiers in accordance with the <a href="https://www.datadoghq.com/legal/privacy/" target="_blank">Datadog Privacy Policy</a> and Datadog's <a href="https://www.datadoghq.com/legal/eula/" target="_blank">EULA</a>. This data is used to help improve the server's performance and features, including transitions to and from the server and the applicable Datadog login page for accessing the Services, and context (for example, user prompts) leading to the use of MCP tools. The data is stored for 120 days.
 
-
-## Requirements
-
-Datadog users must have the `MCP Read` [permission][18] to use the MCP Server for read access, and the `MCP Write` [permission][18] for write access.
-
-For setup instructions, see [Set Up the Datadog MCP Server][27].
-
 ## Monitoring the Datadog MCP Server usage
 
 You can track Datadog MCP Server usage for your organization using Datadog metrics and Audit Trail.
