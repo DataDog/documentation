@@ -20,7 +20,7 @@ Fill out the [Preview form](https://www.datadoghq.com/product-preview/bits-assis
 
 ## Overview
 
-Bits Assistant is an AI-powered companion in Datadog that helps you search and act across Datadog using natural language. Bits Assistant is available across the web application, mobile app, and Slack.
+Bits Assistant is an AI-powered companion that helps you search and act across your Datadog environment using natural language. Bits Assistant is available across the web application, mobile app, and Slack.
 
 Ask Bits Assistant questions like:
 - `Summarize high severity incidents that have occurred in the last day`
