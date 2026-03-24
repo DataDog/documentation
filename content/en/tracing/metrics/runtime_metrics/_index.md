@@ -164,8 +164,8 @@ Use the following environment variables to configure runtime metrics in your app
 : **Default**: `8125` <br>
 **Description**: Sets the port for the tracing library's metric submission.
 
-`DD_RUNTIME_METRICS_DIAGNOSTICS_METRICS_API_ENABLED` (Only in .NET v3.40.0+)
-: **Default**: `true` on .NET 8+ and on .NET 6/7 when `DD_RUNTIME_METRICS_ENABLED` is not explicitly set, otherwise `false`. <br>
+`DD_RUNTIME_METRICS_DIAGNOSTICS_METRICS_API_ENABLED`
+: **Default**: `true` starting tracer v3.40.0+ on .NET 8+ and (.NET 6/7 when `DD_RUNTIME_METRICS_ENABLED` is not explicitly set), otherwise `false`. <br>
 **Description**: Available starting .NET 6 it controls whether the .NET tracer uses the new [`System.Diagnostics.Metrics`][9] API to collect the metrics instead of the older v1.23.0 `EventListener`-based collector.
 
 #### Code-based configuration
