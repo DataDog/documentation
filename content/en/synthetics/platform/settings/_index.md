@@ -118,7 +118,7 @@ If you are using the [custom role feature][12], add your user to any custom role
 
 ## Downtimes
 
-For more information, see [Scheduled downtime][25].
+For more information, see [Scheduled Downtime][25].
 
 ## Private locations
 

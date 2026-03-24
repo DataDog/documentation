@@ -1,5 +1,5 @@
 ---
-title: Scheduled downtime
+title: Scheduled Downtime
 description: Pause Synthetic test execution during planned maintenance windows to keep availability metrics accurate and reduce unnecessary test runs.
 further_reading:
 - link: "/synthetics/platform/settings/"
@@ -18,32 +18,38 @@ further_reading:
 
 ## Overview
 
-Scheduled downtime lets you pause Synthetic test execution during planned maintenance windows. Unlike the [Downtime feature for monitors][1], which mutes alerts but allows tests to continue running, Scheduled downtime stops test execution entirely. This keeps your availability and performance metrics accurate and prevents unnecessary test runs and associated costs during expected outages.
+Synthetic Monitoring Scheduled Downtime lets you pause Synthetic test execution during planned maintenance windows. Unlike the [Downtime feature for monitors][1], which mutes alerts but allows tests to continue running, Synthetic Monitoring Scheduled Downtime stops test execution entirely. This keeps your availability and performance metrics accurate and prevents unnecessary test runs and associated costs during expected outages.
 
-With Scheduled downtime, you can:
+**Note**: All downtime references on this page apply to Synthetic Monitoring only. For monitor-level downtime behavior, see [Downtimes][1].
+
+{{< img src="synthetics/settings/synthetics_downtimes_monitors_nav.png" alt="The Monitoring navigation menu with Monitors and Downtimes highlighted, showing the location of Monitor-level downtime" style="width:40%;" >}}
+
+With Synthetic Monitoring Scheduled Downtime, you can:
 
 - Pause tests during deployments, infrastructure updates, or third-party outages.
 - Prevent availability and performance metrics from being skewed by planned maintenance.
 - Reduce costs by stopping test executions during known downtime windows.
 - Apply downtime to individual tests, multiple tests, or test suites in bulk.
+- Resume tests automatically when the downtime window ends.
 
 ## Create a downtime
 
+{{< img src="synthetics/settings/synthetics_downtimes_settings_nav.png" alt="The Digital Experience navigation menu with Synthetic Monitoring and Testing Settings highlighted" style="width:40%;" >}}
+
 1. Navigate to [**Digital Experience > Synthetic Monitoring & Testing > Settings**][2] and click **Downtimes** in the left sidebar.
 2. Click **+ New Downtime**.
-3. Enter a **name** for the downtime.
-4. Define one or more **time slots** to support recurring or multi-window schedules.
-5. Select the **Synthetic tests** the downtime applies to.
-6. Optionally, assign **tags**, **environment**, or **team** metadata.
+3. Enter a name for the downtime.
+4. Define one or more time slots to support recurring or multi-window schedules.
+5. Select the Synthetic tests the downtime applies to.
+6. Optionally, assign tags, environment, or team metadata.
 7. Click **Save**.
 
-Downtimes can be saved in an enabled or disabled state and modified later if needed.
+Downtimes can be saved in an enabled or disabled state and modified at any time.
 
 ## Manage downtimes
 
 The **Downtimes** page provides a list and calendar view of all configured downtimes. Use the calendar to see how scheduled time slots are distributed across the month.
 
-<!-- TODO: Replace with final screenshot from production (current image is a placeholder from staging) -->
 {{< img src="synthetics/settings/synthetics_downtimes_list.png" alt="The Downtimes settings page showing a list of configured downtimes with their name, number of tests, tags, and team, alongside a calendar view of scheduled time slots" style="width:90%;" >}}
 
 Use the filters at the top of the page to find specific downtimes:
@@ -66,7 +72,7 @@ When creating a new Synthetic test, you can attach an existing downtime from the
 
 The test automatically pauses during the downtime's scheduled time slots.
 
-**Note**: You cannot create a new downtime from the test creation form. To create one, navigate to [Settings > Downtimes][2] first, then return to the test creation form.
+**Note**: You cannot create a new downtime from the test creation form. To create one, navigate to [**Settings > Downtimes**][2].
 
 {{< img src="synthetics/settings/downtimes_test_creation.png" alt="The Downtimes section in the test creation form showing a Select downtimes dropdown" style="width:90%;" >}}
 
@@ -79,7 +85,6 @@ To apply an existing downtime to multiple tests or test suites at once:
 3. Click **Add to Downtime** in the bulk actions bar.
 4. Select an existing downtime from the list.
 
-<!-- TODO: Replace with final screenshot from production (current image is a placeholder from staging) -->
 {{< img src="synthetics/settings/synthetics_downtimes_bulk_add.png" alt="The Test Suites page with multiple test suites selected and the Add to Downtime bulk action button highlighted in the actions bar" style="width:90%;" >}}
 
 ## Best practices
@@ -87,11 +92,6 @@ To apply an existing downtime to multiple tests or test suites at once:
 - Use consistent tagging to simplify applying downtime across groups of tests.
 - When viewing the calendar with multiple downtimes configured, filter by a specific downtime to avoid a crowded view.
 - For complex recurrence patterns, split requirements into multiple time slots within the same downtime.
-
-## Known considerations
-
-- The existing [Downtime feature for monitors][1] mutes alerts but allows tests to continue running. Scheduled downtime for Synthetics stops test execution entirely, which means no new evaluations occur and monitors cannot trigger or recover during the downtime window.
-- After a downtime ends, tests resume automatically.
 
 ## Further Reading
 
