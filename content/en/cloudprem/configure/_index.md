@@ -1,6 +1,13 @@
 ---
 title: Configure CloudPrem
 description: Learn how to configure and customize your CloudPrem deployment for optimal performance and security
+further_reading:
+- link: "/cloudprem/install/"
+  tag: "Documentation"
+  text: "Install CloudPrem"
+- link: "/cloudprem/operate/sizing/"
+  tag: "Documentation"
+  text: "Size your cluster"
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/cloudprem/" btn_hidden="false" header="CloudPrem is in Preview" >}}
@@ -14,9 +21,6 @@ After installing CloudPrem, you can configure your deployment to meet your envir
 If you don't see the CloudPrem entry in the Logs menu, it means CloudPrem is not activated on your account. Join the [CloudPrem Preview][1] to activate CloudPrem on your account.
 
 {{< whatsnext desc="Customize your CloudPrem deployment:">}}
-   {{< nextlink href="/cloudprem/install/aws_eks" >}}AWS Configuration{{< /nextlink >}}
-   {{< nextlink href="/cloudprem/install/azure_aks" >}}Azure Configuration{{< /nextlink >}}
-   {{< nextlink href="/cloudprem/operate/sizing/" >}}Size your cluster{{< /nextlink >}}
    {{< nextlink href="/cloudprem/configure/indexes/" >}}Configure indexes{{< /nextlink >}}
    {{< nextlink href="/cloudprem/configure/pipelines/" >}}Configure processing{{< /nextlink >}}
    {{< nextlink href="/cloudprem/configure/ingress/" >}}Configure Ingress{{< /nextlink >}}
