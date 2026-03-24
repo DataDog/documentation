@@ -124,6 +124,8 @@ To return to **Bill Overview**, click **Enable Preview** in the header.
 
 ## Permissions
 
+The following permissions are required to access each section of Bill Overview:
+
 | Section | Required permission |
 |---|---|
 | Bill Overview (cost data) | `BILLING_READ` |
