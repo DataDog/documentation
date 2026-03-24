@@ -19,7 +19,9 @@ Set up the Splunk HEC destination and its environment variables when you [set up
 
 <div class="alert alert-danger">Observability Pipelines compresses logs with the gzip (level 6) algorithm.<br>Only enter the identifiers for the Splunk HEC token and endpoint. Do <b>not</b> enter the actual values.</div>
 
-1. Enter the identifier for your token. If you leave it blank, the [default](#set-secrets) is used.
+1. For the **Token strategy** dropdown menu:
+	- Only select **From Source** if you are using a [Splunk HEC source][5] and enabled **Store HEC token** on the source. Otherwise, an error occurs and you cannot proceed to install the Worker.
+	- If you use the default **Custom** token strategy, enter the identifier for your token. If you leave it blank, the [default](#set-secrets) is used.
 1. Enter the identifier for your endpoint URL. If you leave it blank, the [default](#set-secrets) is used.
 
 #### Optional settings
@@ -83,3 +85,4 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 [2]: /observability_pipelines/destinations/#event-batching
 [3]: /observability_pipelines/destinations/#template-syntax
 [4]: https://help.splunk.com/en/splunk-enterprise/get-started/get-data-in/9.0/get-data-with-http-event-collector/automate-indexed-field-extractions-with-http-event-collector
+[5]: /observability_pipelines/sources/splunk_hec/

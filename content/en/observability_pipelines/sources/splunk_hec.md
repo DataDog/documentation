@@ -9,9 +9,15 @@ products:
 
 {{< product-availability >}}
 
-Use Observability Pipelines' Splunk HTTP Event Collector (HEC) source to receive logs from your Splunk HEC. Select and set up this source when you [set up a pipeline][1].
+Use Observability Pipelines' Splunk HTTP Event Collector (HEC) source to receive logs from your Splunk HEC. You can choose to store the HEC token as event metadata and:
 
-**Note**: Use the Splunk HEC source if you want to [send logs from the Splunk Distribution of the OpenTelemetry Collector to Observability Pipelines](#send-logs-from-the-splunk-distribution-of-the-opentelemetry-collector-to-observability-pipelines).
+- Authenticate logs sent to Observability Pipelines and drop logs that do not have a valid token
+- Use the Enrichment Table processor to map your tokens from a local file, and then process and route your logs based on the tokens
+- Authenticate logs you send to Splunk HEC from Observability Pipelines with valid tokens
+
+**Notes**:
+- Stored Splunk HEC tokens are not shown in [Live Capture][6].
+- Use the Splunk HEC source if you want to [send logs from the Splunk Distribution of the OpenTelemetry Collector to Observability Pipelines](#send-logs-from-the-splunk-distribution-of-the-opentelemetry-collector-to-observability-pipelines).
 
 ## Prerequisites
 
@@ -23,7 +29,10 @@ Select and set up this source when you [set up a pipeline][1]. The information b
 
 <div class="alert alert-danger">Only enter the identifiers for the Splunk HEC address and, if applicable, the TLS key pass. Do <b>not</b> enter the actual values.</div>
 
-- Enter the identifier for your Splunk HEC address. If you leave it blank, the [default](#set-secrets) is used.
+1. Enter the identifier for your Splunk HEC address. If you leave it blank, the [default](#set-secrets) is used.
+1. Only enable **Store HEC token** if you want to do one of the following:
+    - Use a Splunk HEC destination with the **From Source** token strategy.
+    - Use an Enrichment Table processor to map Splunk HEC tokens from a local file.
 
 ### Optional settings
 
@@ -86,3 +95,4 @@ To send logs from the Splunk Distribution of the OpenTelemetry Collector:
 [3]: https://help.splunk.com/en/splunk-observability-cloud/manage-data/splunk-distribution-of-the-opentelemetry-collector/get-started-with-the-splunk-distribution-of-the-opentelemetry-collector/collector-for-linux
 [4]: /observability_pipelines/configuration/set_up_pipelines
 [5]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/
+[6]: /observability_pipelines/configuration/live_capture/
