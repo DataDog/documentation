@@ -30,7 +30,7 @@ Use Observability Pipelines' Datadog Agent source to receive logs or metrics ({{
 
 Set up this source when you [set up a pipeline][1]. You can set up a pipeline in the [UI][6], using the [API][7], or with [Terraform][8]. The instructions in this section is for setting up the source in the UI.
 
-### Optional TLS
+### Optional TLS settings
 
 Toggle the switch to enable TLS. The following certificate and key files are required for TLS:
    - `Server Certificate Path`: The path to the certificate file that has been signed by your Certificate Authority (CA) root file in DER or PEM (X.509) format.
