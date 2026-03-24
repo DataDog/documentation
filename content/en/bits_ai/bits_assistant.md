@@ -20,16 +20,15 @@ Fill out the [Preview form](https://www.datadoghq.com/product-preview/bits-assis
 
 ## Overview
 
-Bits Assistant is an AI-powered companion that helps you search and act across your Datadog environment using natural language. Bits Assistant is available across the web application, mobile app, and Slack.
-
+Bits Assistant is an AI-powered companion in Datadog that helps you search and act across Datadog using natural language. Bits Assistant is available across the web application, mobile app, and Slack.
 Ask Bits Assistant questions like:
 - `Summarize high severity incidents that have occurred in the last day`
-- `Which services have the most errors right now`
-- `Show me what changed in alerts for the checkout service in the last 24 hours`
-- `What's causing 400 errors on the checkout endpoint in the last hour`
-- `How do I configure log collection for the Datadog Agent`
-- `Do we already have monitors for high latency on the payments service`
-- `Summarize the key findings from the Kubernetes overview dashboard`
+- `Which services have the most errors right now?`
+- `Show me what changed in alerts for the checkout service in the last 24 hours.`
+- `What's causing 400 errors on the checkout endpoint in the last hour?`
+- `How do I configure log collection for the Datadog Agent?`
+- `Do we already have monitors for high latency on the payments service?`
+- `Summarize the key findings from Kubernetes overview dashboard.`
 
 ### Permissions
 
@@ -39,7 +38,7 @@ Bits Assistant uses your Datadog role to fetch data, so it can only access the r
 
 ### Skills
 
-Bits Assistant includes skills for specialized tasks.
+Bits Assistant also includes skills that help with specialized tasks.
 
 **Dashboards**
 
@@ -63,7 +62,7 @@ Investigate cost changes and identify the teams or resources responsible.
 
 Example prompts:
 - `Investigate why EC2 costs changed between January and February`
-- `Which teams are responsible for the highest S3 storage costs this month`
+- `Which teams are responsible for the highest S3 storage costs this month?`
 
 ### Web Application
 
@@ -74,7 +73,13 @@ To open Bits Assistant, click **Ask Bits** in the top-right of the navigation ba
 {{< img src="bits_ai/getting_started/bits_assistant_full_page.png" alt="Full-page Bits Assistant interface showing conversation history and prompt suggestions" style="width:100%;">}}
 
 ### Mobile Application
+<div class="alert alert-info">
+Bits Assistant is available on iOS v5.8.4+.
+</div>
 
+1. [Download the mobile app and log in][2].
+2. Tap Bits Assistant on the home screen.
+3. Start chatting with Bits Assistant in chat or voice mode.
 {{< img src="bits_ai/getting_started/bitsai_mobile_app.PNG" alt="View of the Mobile App Home dashboard with Bits AI" style="width:40%;" >}}
 
 ### Slack
@@ -93,3 +98,4 @@ After setup is completed, you can send queries to `@Datadog` in natural language
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /integrations/slack/?tab=applicationforslack
+[2]: /mobile/?tab=ios#installing
