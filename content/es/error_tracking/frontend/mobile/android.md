@@ -1,36 +1,35 @@
 ---
 code_lang: android
 code_lang_weight: 10
-description: Configura Error Tracking en tus aplicaciones Android para monitorizar
-  fallos, excepciones y errores de aplicaciones.
+description: Configura Error Tracking para tus aplicaciones de Android para monitorear
+  fallos, excepciones y errores de la aplicación.
 further_reading:
 - link: /error_tracking/frontend
-  tag: Documentación
+  tag: Documentation
   text: Error Tracking en el frontend
 - link: https://github.com/DataDog/dd-sdk-android
-  tag: Código fuente
-  text: Código fuente de dd-sdk-android
+  tag: Source Code
+  text: Código fuente para dd-sdk-android
 - link: /real_user_monitoring/error_tracking/
-  tag: Documentación
-  text: Para empezar con Error Tracking
+  tag: Documentation
+  text: Comienza con Error Tracking
 - link: /real_user_monitoring/error_tracking/explorer
-  tag: Documentación
-  text: Visualizar los datos de Error Tracking en el Explorer
-title: Notificación de fallos y seguimiento de errores Android
-type: lenguaje de código múltiple
+  tag: Documentation
+  text: Visualiza los datos de Error Tracking en el explorador
+title: Android Crash Reporting and Error Tracking
+type: multi-code-lang
 ---
+## Resumen
 
-## Información general
+El [Error Tracking en Android][1] te brinda una visibilidad completa sobre la salud de tu aplicación móvil al capturar automáticamente fallos, excepciones y errores. Con esta función, puedes:
 
-Android [Error Tracking][1] te ofrece una visibilidad completa del estado de tu aplicación móvil mediante la captura automática de fallos, excepciones y errores. Con esta función, puedes:
+- Monitorear la estabilidad de la aplicación en tiempo real con alertas instantáneas de fallos y seguimiento de la tasa de errores a través de versiones, dispositivos y segmentos de usuarios.
+- Depura problemas más rápido con trazas de pila desofuscadas y cargas automáticas de archivos de mapeo de ProGuard para una identificación más fácil de problemas.
+- Mejora la calidad de la aplicación al identificar características propensas a fallos, rastrear tendencias de errores y priorizar correcciones para una mejor satisfacción del usuario.
+- Accede a tableros de fallos en Android agregados y atributos.
+- Visualiza informes de fallos en Android desofuscados con análisis de tendencias.
 
-- Monitorizar la estabilidad de la aplicación en tiempo real con alertas instantáneas de fallos y un seguimiento de la tasa de errores en cualquier versión, dispositivo y segmento de usuarios.
-- Depurar los problemas con mayor rapidez gracias a las trazas de stack tecnológico desofuscadas y a las cargas automáticas de archivos de asignación de ProGuard para facilitar la identificación de los problemas.
-- Mejorar la calidad de la aplicación detectando las funciones propensas a fallos, realizando un seguimiento de las tendencias de errores y priorizando las correcciones con el fin de mejorar la satisfacción del usuario.
-- Acceder a dashboards y atributos agregados de fallos de Android.
-- Visualizar informes de fallos de Android desofuscados junto a un análisis de las tendencias.
-
-El SDK de Datadog Android es compatible con Android 5.0+ (nivel de la API 21) y Android TV.
+El SDK de Datadog para Android es compatible con Android 5.0+ (nivel de API 21) y Android TV.
 
 Tus informes de fallos aparecen en [**Error Tracking**][2].
 
@@ -38,9 +37,9 @@ Tus informes de fallos aparecen en [**Error Tracking**][2].
 
 Si aún no has configurado el SDK de Android, sigue las [instrucciones de configuración en la aplicación][3] o consulta la [documentación de configuración de Android][4].
 
-### Paso 1: Declarar el SDK de Android como dependencia
+### Paso 1 - Declara el SDK de Android como una dependencia
 
-Declara [dd-sdk-android-rum][5] y el [complemento Gradle][6] como dependencias en el archivo `build.gradle` de tu **módulo de aplicación**:
+Declara [dd-sdk-android-rum][5] y el [plugin de Gradle][6] como dependencias en tu **módulo de aplicación** `build.gradle` archivo:
 
 ```groovy
 buildscript {
@@ -62,25 +61,26 @@ dependencies {
 
 ```
 
-### Paso 2: Especificar la información de la aplicación en la interfaz de usuario
+### Paso 2 - Especifica los detalles de la aplicación en la interfaz de usuario
 
-1. Ve a [**Errors** > **Settings** > **Browser and Mobile** > **+ New Application** (Errores > Configuración > Navegador y móvil > + Nueva aplicación)][7].
-2. Selecciona `android` como tipo de aplicación e introduce un nombre de la aplicación para generar un ID de la aplicación de Datadog y un token de cliente únicos.
-3. Haz clic en **Create Application** (Crear aplicación).
+1. Navega a [**Errors** > **Settings** > **Browser and Mobile** > **+ New Application**][7].
+2. Selecciona `android` como el tipo de aplicación e ingresa un nombre de aplicación para generar un ID de aplicación único de Datadog y un token de cliente.
+3. Haz clic en **Create Application**.
 
 
 
-### Paso 3: Inicializar el SDK de Datadog con el contexto de la aplicación
+### Paso 3 - Inicializa el SDK de Datadog con el contexto de la aplicación
 
-#### Actualizar el fragmento de inicialización
+#### Actualiza el fragmento de inicialización
 
-En el fragmento de inicialización, define un nombre de entorno, un nombre de servicio y un número de versión. En los ejemplos siguientes, `APP_VARIANT_NAME` especifica la variante de la aplicación que genera datos. Para obtener más información, consulta [Uso de etiquetas][10].
+En el fragmento de inicialización, establece un nombre de entorno, un nombre de servicio y un número de versión. En los ejemplos a continuación, `APP_VARIANT_NAME` especifica la variante de la aplicación que genera datos. Para más información, consulta [Using Tags][10].
 
-Durante la inicialización, también puedes definir la frecuencia de muestreo (sesiones RUM) y el consentimiento de seguimiento para el cumplimiento del RGPD, como se describe a continuación. Consulta [otras opciones de configuración][11] para inicializar la biblioteca.
+Durante la inicialización, también puedes establecer la tasa de muestreo (sesiones RUM) y establecer el consentimiento de seguimiento para el cumplimiento del GDPR, como se describe a continuación. Consulta [otras opciones de configuración][11] para inicializar la biblioteca.
 
 {{< site-region region="us" >}}
 {{< tabs >}}
 {{% tab "Kotlin" %}}
+
 ```kotlin
 class SampleApplication : Application() {
     override fun onCreate() {
@@ -96,6 +96,7 @@ class SampleApplication : Application() {
 ```
 {{% /tab %}}
 {{% tab "Java" %}}
+
 ```java
 public class SampleApplication extends Application {
     @Override
@@ -115,6 +116,7 @@ public class SampleApplication extends Application {
 {{< site-region region="eu" >}}
 {{< tabs >}}
 {{% tab "Kotlin" %}}
+
 ```kotlin
 class SampleApplication : Application() {
     override fun onCreate() {
@@ -132,6 +134,7 @@ class SampleApplication : Application() {
 ```
 {{% /tab %}}
 {{% tab "Java" %}}
+
 ```java
 public class SampleApplication extends Application {
     @Override
@@ -152,6 +155,7 @@ public class SampleApplication extends Application {
 {{< site-region region="us3" >}}
 {{< tabs >}}
 {{% tab "Kotlin" %}}
+
 ```kotlin
 class SampleApplication : Application() {
     override fun onCreate() {
@@ -169,6 +173,7 @@ class SampleApplication : Application() {
 ```
 {{% /tab %}}
 {{% tab "Java" %}}
+
 ```java
 public class SampleApplication extends Application {
     @Override
@@ -189,6 +194,7 @@ public class SampleApplication extends Application {
 {{< site-region region="us5" >}}
 {{< tabs >}}
 {{% tab "Kotlin" %}}
+
 ```kotlin
 class SampleApplication : Application() {
     override fun onCreate() {
@@ -206,6 +212,7 @@ class SampleApplication : Application() {
 ```
 {{% /tab %}}
 {{% tab "Java" %}}
+
 ```java
 public class SampleApplication extends Application {
     @Override
@@ -224,8 +231,9 @@ public class SampleApplication extends Application {
 {{< /site-region >}}
 
 {{< site-region region="gov" >}}
-{{< tab >}}
+{{< tabs >}}
 {{% tab "Kotlin" %}}
+
 ```kotlin
 class SampleApplication : Application() {
     override fun onCreate() {
@@ -243,6 +251,7 @@ class SampleApplication : Application() {
 ```
 {{% /tab %}}
 {{% tab "Java" %}}
+
 ```java
 public class SampleApplication extends Application {
     @Override
@@ -263,6 +272,7 @@ public class SampleApplication extends Application {
 {{< site-region region="ap1" >}}
 {{< tabs >}}
 {{% tab "Kotlin" %}}
+
 ```kotlin
 class SampleApplication : Application() {
     override fun onCreate() {
@@ -280,6 +290,7 @@ class SampleApplication : Application() {
 ```
 {{% /tab %}}
 {{% tab "Java" %}}
+
 ```java
 public class SampleApplication extends Application {
     @Override
@@ -300,6 +311,7 @@ public class SampleApplication extends Application {
 {{< site-region region="ap2" >}}
 {{< tabs >}}
 {{% tab "Kotlin" %}}
+
 ```kotlin
 class SampleApplication : Application() {
     override fun onCreate() {
@@ -317,6 +329,7 @@ class SampleApplication : Application() {
 ```
 {{% /tab %}}
 {{% tab "Java" %}}
+
 ```java
 public class SampleApplication extends Application {
     @Override
@@ -334,71 +347,73 @@ public class SampleApplication extends Application {
 {{< /tabs >}}
 {{< /site-region >}}
 
-Las credenciales de inicialización requieren el nombre de variante de tu aplicación y utilizan el valor de `BuildConfig.FLAVOR`. Con la variante, el SDK puede hacer coincidir los errores informados desde tu aplicación con los archivos de asignación cargados por el complemento Gradle. Si no tienes variantes, las credenciales utilizan una cadena vacía. 
+Las credenciales de inicialización requieren el nombre de variante de tu aplicación y utilizan el valor de `BuildConfig.FLAVOR`. Con la variante, el SDK puede relacionar los errores reportados desde tu aplicación con los archivos de mapeo subidos por el complemento de Gradle. Si no tienes variantes, las credenciales utilizan una cadena vacía.
 
-El complemento Gradle carga automáticamente el archivo `mapping.txt` ProGuard adecuado en el momento de la compilación para que puedas ver las trazas (traces) de error de stack tecnológico desofuscadas. Para obtener más información, consulta la sección [Cargar el archivo de asignación](#upload-your-mapping-file).
+El complemento de Gradle sube automáticamente el archivo ProGuard `mapping.txt` apropiado en el momento de la construcción para que puedas ver las trazas de error desofuscadas. Para más información, consulta la sección [Sube tu archivo de mapeo](#upload-your-mapping-file).
 
-#### Activar la función para iniciar el envío de datos
+#### Habilita la función para comenzar a enviar datos
 
-Para permitir que el SDK Android comience a enviar datos:
+Para habilitar el SDK de Android para comenzar a enviar datos:
 
 {{< tabs >}}
 {{% tab "Kotlin" %}}
+
 ```kotlin
-    val rumConfig = RumConfiguration.Builder(applicationId)
-      .trackUserInteractions()
-      .trackLongTasks(durationThreshold) // Not applicable to Error Tracking
-      .useViewTrackingStrategy(strategy)
-      .build()
-    Rum.enable(rumConfig)
+val rumConfig = RumConfiguration.Builder(applicationId)
+    .trackUserInteractions()
+    .trackLongTasks(durationThreshold) // Not applicable to Error Tracking
+    .useViewTrackingStrategy(strategy)
+    .build()
+Rum.enable(rumConfig)
 ```
 {{% /tab %}}
 
 {{% tab "Java" %}}
+
 ```java
-    RumConfiguration rumConfig = new RumConfiguration.Builder(applicationId)
-      .trackUserInteractions()
-      .trackLongTasks(durationThreshold) // Not applicable to Error Tracking
-      .useViewTrackingStrategy(strategy)
-      .build();
-    Rum.enable(rumConfig);
+RumConfiguration rumConfig = new RumConfiguration.Builder(applicationId)
+    .trackUserInteractions()
+    .trackLongTasks(durationThreshold) // Not applicable to Error Tracking
+    .useViewTrackingStrategy(strategy)
+    .build();
+Rum.enable(rumConfig);
 ```
 
 {{% /tab %}}
 {{< /tabs >}}
 
-Consulta [`ViewTrackingStrategy`][12] para activar el seguimiento automático de todas tus vistas (actividades, fragmentos, etc.).
+Consulta [`ViewTrackingStrategy`][12] para habilitar el seguimiento automático de todas tus vistas (actividades, fragmentos y más).
 
-#### Instrumentar tus WebViews (opcional)
+#### Instrumenta tus WebViews (opcional)
 
-Si tu aplicación Android utiliza WebViews para mostrar contenido web, puedes instrumentarlos para rastrear errores y fallos de JavaScript que ocurran dentro del contenido web.
+Si tu aplicación de Android utiliza WebViews para mostrar contenido web, puedes instrumentarlas para rastrear errores de JavaScript y bloqueos que ocurren dentro del contenido web.
 
 Para instrumentar tus WebViews:
 
-1. Añade la dependencia Gradle declarando dd-sdk-android-webview como dependencia en tu archivo build.gradle:
+1. Agrega la dependencia de Gradle declarando dd-sdk-android-webview como dependencia en tu archivo build.gradle:
 
    ```groovy
    dependencies {
     implementation "com.datadoghq:dd-sdk-android-webview:<latest_version>"
    }
    ```
-2. Habilita el seguimiento de WebViews de una instancia WebView dada proporcionando una lista de hosts para realizar un seguimiento:
+2. Habilita el seguimiento de WebView para una instancia de WebView proporcionando una lista de hosts a rastrear:
 
-   ```groovy
+   ```kotlin
    WebViewTracking.enable(webView, hosts)
    ```
 
-Para obtener más información, consulta [Seguimiento de WebViews][8].
+Para más información, consulta [Web View Tracking][8].
 
-### Paso 4: Añadir informes de fallos del NDK
+### Paso 4 - Agregar informes de fallos de NDK
 
-Si tu aplicación Android utiliza código nativo (C/C++) a través del Android NDK (Native Development Kit), puedes realizar un seguimiento de los fallos que se producen en este código nativo. El código nativo se utiliza a menudo para operaciones críticas para el rendimiento, el procesamiento de imágenes o cuando se reutilizan bibliotecas C/C++ existentes.
+Si tu aplicación de Android utiliza código nativo (C/C++) a través del NDK de Android (Kit de Desarrollo Nativo), puedes rastrear los bloqueos que ocurren en este código nativo. El código nativo se utiliza a menudo para operaciones críticas de rendimiento, procesamiento de imágenes o cuando se reutilizan bibliotecas existentes de C/C++.
 
-Sin los informes de fallos del NDK, los fallos de tu código nativo no aparecen en Error Tracking, lo que dificulta la depuración de problemas en esta parte de tu aplicación.
+Sin el informe de fallos del NDK, los fallos en tu código nativo no aparecen en Error Tracking, lo que dificulta la depuración de problemas en esta parte de tu aplicación.
 
-Para activar el informe de fallos del NDK, utiliza el complemento Datadog NDK:
+Para habilitar el informe de fallos del NDK, utiliza el complemento Datadog NDK:
 
-1. Añade la dependencia de Gradle declarando la biblioteca como dependencia en tu archivo `build.gradle`:
+1. Agrega la dependencia de Gradle declarando la biblioteca como una dependencia en tu archivo `build.gradle`:
 
    ```kotlin
     dependencies {
@@ -406,20 +421,21 @@ Para activar el informe de fallos del NDK, utiliza el complemento Datadog NDK:
         //(...)
     }
    ```
-2. Habilita la recopilación de fallos del NDK luego de inicializar el SDK:
+2. Habilita la recopilación de fallos del NDK después de inicializar el SDK:
 
-    ``` kotlin
+    ```kotlin
     NdkCrashReports.enable()
     ```
 
-### Paso 5: Añadir informes de una ANR
+### Paso 5 - Agregar informe de ANR
 
-Una "Aplicación que no responde" ([ANR][18]) es un tipo de error específico de Android que se activa cuando la aplicación no responde durante demasiado tiempo. Puedes añadir informes de ANR a tu configuración de RUM para monitorizar estos problemas con las respuestas de las aplicaciones.
+Un "Aplicación No Responde" ([ANR][18]) es un tipo de error específico de Android que se activa cuando la aplicación no responde durante demasiado tiempo. Puedes agregar el informe de ANR a tu configuración de RUM para monitorear estos problemas de respuesta de la aplicación.
 
-Para habilitar los informes de ANR, añade lo siguiente a tu configuración de RUM:
+Para habilitar el informe de ANR, agrega lo siguiente a tu configuración de RUM:
 
 {{< tabs >}}
 {{% tab "Kotlin" %}}
+
 ```kotlin
 val rumConfig = RumConfiguration.Builder(applicationId)
     .trackUserInteractions()
@@ -431,6 +447,7 @@ Rum.enable(rumConfig)
 ```
 {{% /tab %}}
 {{% tab "Java" %}}
+
 ```java
 RumConfiguration rumConfig = new RumConfiguration.Builder(applicationId)
     .trackUserInteractions()
@@ -443,68 +460,68 @@ Rum.enable(rumConfig);
 {{% /tab %}}
 {{< /tabs >}}
 
-Los casos de ANR sólo se notifican a través del SDK (no a través de los logs).
+Los ANRs solo se informan a través del SDK (no a través de los registros).
 
-#### Notificación de ANR fatales
-Los casos de ANR fatales provocan fallos. La aplicación informa de ellos cuando no responde, lo que lleva a que el sistema operativo Android muestre un cuadro de diálogo emergente al usuario, que decide forzar el cierre de la aplicación a través de la ventana emergente.
+#### Reporta ANRs fatales
+Los ANRs fatales resultan en fallos. La aplicación los reporta cuando no responde, lo que hace que el sistema operativo Android muestre un cuadro de diálogo emergente al usuario, quien puede optar por forzar el cierre de la aplicación.
 
-{{< img src="real_user_monitoring/error_tracking/rum-anr-fatal.png" alt="Informe de fallo fatal en Error Tracking." >}}
+{{< img src="real_user_monitoring/error_tracking/rum-anr-fatal.png" alt="Un informe de fallo fatal en Error Tracking." >}}
 
-- En la página de **Error Tracking**, las ANR fatales se agrupan en función de su similitud, lo que puede dar lugar a la creación de varios **problemas individuales**.
-- Por defecto, Datadog captura las ANR fatales a través de la [API ApplicationExitInfo][19] (disponible a partir de *[Android v30 o posteriores][20]*), que pueden ser leídas en el siguiente lanzamiento de la aplicación.
-- En *[Android v29][21] y anteriores*, no es posible informar de ANR fatales.
+- En la página **Error Tracking**, los ANRs fatales se agrupan según su similitud, lo que puede resultar en la creación de varios **problemas individuales**.
+- Por defecto, Datadog captura ANRs fatales a través de la API [ApplicationExitInfo][19] (disponible desde *[Android 30+][20]*), que se puede leer en el próximo lanzamiento de la aplicación.
+- En *[Android 29][21] y versiones anteriores*, no es posible informar sobre ANRs fatales.
 
-#### Notificación de ANR no fatales
-Los casos de ANR no fatales pueden o no haber provocado el cierre de la aplicación (fallo).
+#### Reporta ANRs no fatales
+Los ANRs no fatales pueden o no haber llevado a la terminación de la aplicación (fallo).
 
-{{< img src="real_user_monitoring/error_tracking/rum-anr-non-fatal.png" alt="Informe de fallo no fatal en Error Tracking." >}}
+{{< img src="real_user_monitoring/error_tracking/rum-anr-non-fatal.png" alt="Un informe de fallo no fatal en Error Tracking." >}}
 
-- En la página de **Error Tracking**, las ANR no fatales se agrupan en un **problema único** debido a su nivel de ruido
-- Por defecto, la notificación de casos de ANR no fatales en *Android v30 o posteriores* está **deshabilitada**, ya que crearía demasiado ruido sobre los casos de ANR fatales. Sin embargo, en *Android v29* y anteriores, la notificación de casos de ANR no fatales está **habilitada** por defecto, ya que en esas versiones no se pueden notificar casos de ANR fatales.
+- En la página **Error Tracking**, los ANRs no fatales se agrupan bajo un **único** problema debido a su nivel de ruido.
+- Por defecto, el informe de ANRs no fatales en *Android 30+* está **deshabilitado** porque generaría demasiado ruido sobre los ANRs fatales. En *Android 29* y versiones anteriores, sin embargo, el informe de ANRs no fatales está **habilitado** por defecto, ya que los ANRs fatales no pueden ser reportados en esas versiones.
 
-Para cualquier versión de Android, puedes anular la configuración predeterminada para la notificación de casos de ANR no fatales definiendo `trackNonFatalAnrs` como `true` o `false` al inicializar el SDK.
+Para cualquier versión de Android, puedes anular la configuración predeterminada para informar ANRs no fatales configurando `trackNonFatalAnrs` a `true` o `false` al inicializar el SDK.
 
 
-###  Paso 6: Obtener trazas de stack tecnológico desofuscadas
+###  Paso 6 - Obtener trazas de pila desofuscadas
 
-Cuando se crea una aplicación Android para producción, el código suele ofuscarse con ProGuard o R8 para reducir el tamaño de la aplicación y proteger la propiedad intelectual. Esta ofuscación hace que las trazas de stack tecnológico de los informes de fallos sean ilegibles, mostrando nombres de clases y métodos sin sentido como `a.b.c()` en lugar de `com.example.MyClass.myMethod()`.
+Cuando tu aplicación de Android se construye para producción, el código se ofusca típicamente usando ProGuard o R8 para reducir el tamaño de la aplicación y proteger la propiedad intelectual. Esta ofuscación hace que las trazas de pila en los informes de fallos sean ilegibles, mostrando nombres de clases y métodos sin sentido como `a.b.c()` en lugar de `com.example.MyClass.myMethod()`.
 
-Para que estas trazas de stack tecnológico sean legibles para la depuración, debes cargar tus archivos de asignación en Datadog. Estos archivos contienen la asignación entre el código ofuscado y el original, lo que permite a Datadog desofuscar automáticamente las trazas de stack tecnológico en tus informes de error.
+Para hacer que estas trazas de pila sean legibles para la depuración, necesitas subir tus archivos de mapeo a Datadog. Estos archivos contienen el mapeo entre el código ofuscado y el original, permitiendo que Datadog desofusque automáticamente las trazas de pila en tus informes de fallos.
 
 #### Cómo funciona
 
-Datadog utiliza un ID de compilación único generado para cada compilación con el fin de hacer coincidir automáticamente las trazas de stack tecnológico con los archivos de asignación correctos. Esto garantiza que:
+Datadog utiliza un ID de construcción único generado para cada construcción para emparejar automáticamente las trazas de pila con los archivos de mapeo correctos. Esto asegura que:
 
-- Las trazas de stack tecnológico siempre se desofuscan con el archivo de asignación correcto, independientemente de cuándo se haya cargado.
-- Puedes cargar archivos de asignación durante las compilaciones de preproducción o producción.
-- El proceso funciona a la perfección en diferentes variantes y entornos de compilación.
+- Las trazas de pila siempre se desofuscan con el archivo de mapeo correcto, independientemente de cuándo se haya subido.
+- Puedes subir archivos de mapeo durante compilaciones de preproducción o producción.
+- El proceso funciona sin problemas a través de diferentes variantes de compilación y entornos.
 
-El proceso de emparejamiento depende de la versión de tu [complemento Gradle para Android][22]:
+El proceso de coincidencia depende de tu versión del [Android Gradle plugin][22]:
 
-- **Versiones 1.13.0 y superiores**: Utiliza el campo `build_id` (requiere el SDK Android para Datadog v2.8.0 o posteriores).
-- **Versiones anteriores**: Utiliza una combinación de los campos `service`, `version` y `variant` 
+- **Versiones 1.13.0 y superiores**: Utiliza el campo `build_id` (requiere el SDK de Datadog para Android 2.8.0 o posterior)
+- **Versiones anteriores**: Utiliza una combinación de los campos `service`, `version` y `variant`
 
-#### Carga de tu archivo de asignación
+#### Sube tu archivo de mapeo
 
-El complemento Gradle para Android automatiza el proceso de carga de archivos de asignación. Una vez configurado, carga automáticamente el archivo de asignación ProGuard/R8 adecuado para cada variante de compilación al compilar la aplicación.
+El plugin de Gradle para Android automatiza el proceso de carga del archivo de mapeo. Después de la configuración, sube automáticamente el archivo de mapeo ProGuard/R8 apropiado para cada variante de compilación cuando construyes tu aplicación.
 
-**Nota**: Al volver a cargar un archivo de asignación no se anula el existente, si la versión no ha cambiado. Para obtener información sobre las limitaciones de tamaño de los archivos y otras restricciones, consulta la sección [Limitaciones](#limitations).
+**Nota**: Volver a subir un archivo de mapeo no reemplaza el existente si la versión no ha cambiado. Para información sobre limitaciones de tamaño de archivo y otras restricciones, consulta la sección [Limitaciones](#limitations).
 
-#### Ejecutar las tareas de carga
+#### Ejecuta las tareas de carga
 
-Después de configurar el complemento, ejecuta las tareas de Gradle para cargar tu archivo de asignación Proguard/R8 y los archivos de símbolos NDK a Datadog:
+Después de configurar el plugin, ejecuta las tareas de Gradle para subir tu archivo de mapeo Proguard/R8 y los archivos de símbolos NDK a Datadog:
 
 ```bash
 ./gradlew uploadMappingRelease
 ./gradlew uploadNdkSymbolFilesRelease
 ```
 
-Para cualquier error, puedes acceder a la ruta del archivo, al número de línea y a un fragmento de código para cada marco de la trace (traza) de stack tecnológico.
+Para cualquier error dado, puedes acceder a la ruta del archivo, número de línea y un fragmento de código para cada marco de la traza de pila relacionada.
 
 {{< tabs >}}
-{{% tab "US" %}}
+{{% tab "EE. UU." %}}
 
-1. Añade el [complemento Gradle para Android][22] a tu proyecto de Gradle utilizando el siguiente fragmento de código.
+1. Agrega el [Android Gradle Plugin][22] a tu proyecto de Gradle usando el siguiente fragmento de código.
 
    ```kotlin
    // In your app's build.gradle script
@@ -513,17 +530,17 @@ Para cualquier error, puedes acceder a la ruta del archivo, al número de línea
    }
    ```
 
-2. [Crea una clave de API Datadog exclusiva][23] y expórtala como una variable de entorno llamada `DD_API_KEY` o `DATADOG_API_KEY`. Alternativamente, pásala como una propiedad de la tarea, o si tienes el archivo `datadog-ci.json` en la raíz de tu proyecto, se puede tomar de una propiedad `apiKey` allí.
-3. También puedes configurar el complemento para cargar archivos a la región UE configurando el complemento en tu script `build.gradle`:
-
+2. [Crea una clave de API dedicada de Datadog][23] y expórtala como una variable de entorno llamada `DD_API_KEY` o `DATADOG_API_KEY`. Alternativamente, pásala como una propiedad de tarea, o si tienes un archivo `datadog-ci.json` en la raíz de tu proyecto, se puede tomar de una propiedad `apiKey` allí.
+3. Opcionalmente, configura el plugin para subir archivos a la región de la UE configurando el plugin en tu script `build.gradle`:
+   
    ```kotlin
    datadog {
        site = "EU1"
    }
    ```
 
-4. Ejecuta la tarea de carga después de tus compilaciones APK ofuscadas:
-
+4. Ejecuta la tarea de carga después de que se construya tu APK ofuscado:
+    
    ```bash
    ./gradlew uploadMappingRelease
    ```
@@ -533,13 +550,13 @@ Para cualquier error, puedes acceder a la ruta del archivo, al número de línea
    ./gradlew uploadNdkSymbolFilesRelease
    ```
 
-**Nota**: Si tu proyecto utiliza opciones adicionales, el complemento proporciona una tarea de carga para cada variante con la ofuscación habilitada. En este caso, inicializa el SDK de Android con un nombre de variante adecuado (la API necesaria está disponible en las versiones `1.8.0` y posteriores).
+**Nota**: Si tu proyecto utiliza sabores adicionales, el plugin proporciona una tarea de carga para cada variante con ofuscación habilitada. En este caso, inicializa el SDK de Android con un nombre de variante adecuado (la API necesaria está disponible en las versiones `1.8.0` y posteriores).
 
 [22]: https://github.com/DataDog/dd-sdk-android-gradle-plugin
 [23]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{% tab "UE" %}}
-1. Añade el [complemento Gradle para Android][22] a tu proyecto de Gradle utilizando el siguiente fragmento de código.
+1. Agrega el [Android Gradle Plugin][22] a tu proyecto de Gradle usando el siguiente fragmento de código.
 
    ```kotlin
    // In your app's build.gradle script
@@ -548,8 +565,8 @@ Para cualquier error, puedes acceder a la ruta del archivo, al número de línea
    }
    ```
 
-2. [Crea una clave de API Datadog exclusiva][23] y expórtala como una variable de entorno llamada `DD_API_KEY` o `DATADOG_API_KEY`. Alternativamente, pásala como una propiedad de la tarea, o si tienes el archivo `datadog-ci.json` en la raíz de tu proyecto, se puede tomar de una propiedad `apiKey` allí.
-3. Configura el complemento para utilizar la región UE, añadiendo el siguiente fragmento en el archivo de script `build.gradle` de tu aplicación:
+2. [Crea una clave de API dedicada de Datadog][23] y expórtala como una variable de entorno llamada `DD_API_KEY` o `DATADOG_API_KEY`. Alternativamente, pásala como una propiedad de tarea, o si tienes un archivo `datadog-ci.json` en la raíz de tu proyecto, se puede tomar de una propiedad `apiKey` allí.
+3. Configura el plugin para usar la región de la UE agregando el siguiente fragmento en el archivo de script `build.gradle` de tu aplicación:
 
    ```kotlin
    datadog {
@@ -557,51 +574,51 @@ Para cualquier error, puedes acceder a la ruta del archivo, al número de línea
    }
    ```
 
-4. Ejecuta la tarea de carga después de tus compilaciones APK ofuscadas:
-
+4. Ejecuta la tarea de carga después de que se construya tu APK ofuscado:
+   
    ```bash
    ./gradlew uploadMappingRelease
    ```
-
+   
 5. Si ejecutas código nativo, ejecuta la tarea de carga de símbolos NDK:
    ```bash
    ./gradlew uploadNdkSymbolFilesRelease
    ```
 
-**Nota**: Si tu proyecto utiliza opciones adicionales, el complemento proporciona una tarea de carga para cada variante con la ofuscación habilitada. En este caso, inicializa el SDK de Android con un nombre de variante adecuado (la API necesaria está disponible en las versiones `1.8.0` y posteriores).
+**Nota**: Si tu proyecto utiliza sabores adicionales, el plugin proporciona una tarea de carga para cada variante con ofuscación habilitada. En este caso, inicializa el SDK de Android con un nombre de variante adecuado (la API necesaria está disponible en las versiones `1.8.0` y posteriores).
 
 [22]: https://github.com/DataDog/dd-sdk-android-gradle-plugin
 [23]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{< /tabs >}}
 
-#### Lista de archivos de asignación cargados
+#### Listar archivos de mapeo subidos
 
-Consulta la página [Símbolos de depuración RUM][24] para ver todos los símbolos cargados.
+Consulta la página de [Símbolos de Depuración RUM][24] para ver todos los símbolos subidos.
 
-## Funciones avanzadas de Error Tracking 
+## Características Avanzadas de Seguimiento de Errores
 
-{{% collapse-content title="Configurar el consentimiento de seguimiento (cumplimiento del RGPD)" level="h4" expanded=false id="set-tracking-consent" %}}
+{{% collapse-content title="Establecer consentimiento de seguimiento (cumplimiento con GDPR)" level="h4" expanded=false id="set-tracking-consent" %}}
 
-Para cumplir con la normativa del RGPD, el SDK requiere el valor de consentimiento de seguimiento en el momento de la inicialización.
+Para cumplir con la regulación GDPR, el SDK requiere el valor de consentimiento de seguimiento al momento de la inicialización.
 
 El consentimiento de seguimiento puede ser uno de los siguientes valores:
 
-- `TrackingConsent.PENDING`: (Predeterminado) El SDK comienza a recopilar los datos y a procesarlos por lotes, pero no los envía al
- endpoint de recopilación. El SDK espera el nuevo valor del consentimiento de rastreo para decidir qué hacer con los datos procesados por lotes.
-- `TrackingConsent.GRANTED`: el SDK comienza a recopilar los datos y los envía al endpoint de recopilación de datos.
-- `TrackingConsent.NOT_GRANTED`: El SDK no recopila ningún dato. No puedes enviar manualmente ningún log, traza o evento.
+- `TrackingConsent.PENDING`: (Predeterminado) El SDK comienza a recopilar y agrupar los datos, pero no los envía al
+ punto de conexión. El SDK espera el nuevo valor de consentimiento de seguimiento para decidir qué hacer con los datos agrupados.
+- `TrackingConsent.GRANTED`: El SDK comienza a recopilar los datos y los envía al punto de conexión de datos.
+- `TrackingConsent.NOT_GRANTED`: El SDK no recopila ningún dato. No puedes enviar manualmente registros, trazas ni eventos.
 
-Para actualizar el consentimiento de seguimiento luego de inicializar el SDK, llama a `Datadog.setTrackingConsent(<NEW CONSENT>)`. El SDK cambia de comportamiento de acuerdo con el nuevo consentimiento. Por ejemplo, si el consentimiento de seguimiento actual es `TrackingConsent.PENDING` y lo actualizas a:
+Para **actualizar el consentimiento de seguimiento** después de que el SDK esté inicializado, llama a `Datadog.setTrackingConsent(<NEW CONSENT>)`. El SDK cambia su comportamiento de acuerdo con el nuevo consentimiento. Por ejemplo, si el consentimiento de seguimiento actual es `TrackingConsent.PENDING` y lo actualizas a:
 
-- `TrackingConsent.GRANTED`: el SDK envía todos los datos actuales procesados por lotes y los datos futuros directamente al endpoint de recopilación de datos.
-- `TrackingConsent.NOT_GRANTED`: el SDK borra todos los datos procesados por lotes y no recopila datos futuros.
+- `TrackingConsent.GRANTED`: El SDK envía todos los datos agrupados actuales y futuros directamente al punto de recolección de datos.
+- `TrackingConsent.NOT_GRANTED`: El SDK borra todos los datos agrupados y no recopila ningún dato futuro.
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Frecuencia de muestreo de sesiones" level="h4" expanded=false id="sample-session-rates" %}}
+{{% collapse-content title="Tasas de muestreo de sesiones" level="h4" expanded=false id="sample-session-rates" %}}
 
-Para controlar los datos que tu aplicación envía a Datadog, puedes especificar una frecuencia de muestreo para las sesiones al [inicializar RUM][11]. La frecuencia es un porcentaje entre 0 y 100. Por defecto, `sessionSamplingRate` se define en 100 (mantener todas las sesiones).
+Para controlar los datos que tu aplicación envía a Datadog, puedes especificar una tasa de muestra para las sesiones al [inicializar RUM][11]. La tasa de muestra es un porcentaje entre 0 y 100. Por defecto, `sessionSamplingRate` está configurado en 100 (mantener todas las sesiones).
 
 ```kotlin
 val rumConfig = RumConfiguration.Builder(applicationId)
@@ -613,12 +630,12 @@ Rum.enable(rumConfig)
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Inicializar el interceptor para realizar un seguimiento de eventos de red" level="h4" expanded=false id="interceptor" %}}
+{{% collapse-content title="Inicializa el interceptor para rastrear eventos de red" level="h4" expanded=false id="interceptor" %}}
 
-El interceptor de red realiza automáticamente un seguimiento de solicitudes y respuestas HTTP, capturando errores de red, tiempos de espera y problemas de rendimiento que pueden ayudarte a correlacionar problemas de red con fallos de la aplicación y problemas con la experiencia del usuario. Para inicializar un interceptor para el seguimiento de eventos de red:
+El interceptor de red rastrea automáticamente las solicitudes y respuestas HTTP, capturando errores de red, tiempos de espera y problemas de rendimiento que pueden ayudarte a correlacionar problemas de red con fallos de la aplicación y problemas de experiencia del usuario. Inicializa un interceptor para rastrear eventos de red:
 
-1. Para el rastreo distribuido, [añade y activa la función de rastreo][13].
-2. Añade la dependencia de Gradle a la biblioteca `dd-sdk-android-okhttp` en el archivo `build.gradle` a nivel de módulo:
+1. Para el trazado distribuido, [agrega y habilita la función de Trazado][13].
+2. Agrega la dependencia de Gradle a la biblioteca `dd-sdk-android-okhttp` en el archivo `build.gradle` a nivel de módulo:
 
     ```groovy
     dependencies {
@@ -626,10 +643,11 @@ El interceptor de red realiza automáticamente un seguimiento de solicitudes y r
     }
     ```
 
-3. Para rastrear tus solicitudes OkHttp como recursos, añade el [interceptor][14] proporcionado:
+3. Para hacer seguimiento de tus solicitudes de OkHttp como recursos, agrega el [interceptor][14] proporcionado:
 
 {{< tabs >}}
 {{% tab "Kotlin" %}}
+
 ```kotlin
 val tracedHostsWithHeaderType = mapOf(
     "example.com" to setOf(
@@ -658,13 +676,14 @@ OkHttpClient okHttpClient = new OkHttpClient.Builder()
 {{% /tab %}}
 {{< /tabs >}}
 
-4. Para crear automáticamente recursos y tramos (spans) RUM para tus solicitudes OkHttp, utiliza el `DatadogInterceptor` como interceptor.
-   - Esto registra cada solicitud procesada por `OkHttpClient` como un recurso, con toda la información relevante (URL, método, código de estado y error) rellenada automáticamente. Sólo se realiza un seguimiento de las solicitudes de red que se iniciaron cuando una vista estaba activa. Para realizar un seguimiento de las solicitudes cuando tu aplicación está en segundo plano, [crea una vista manualmente][15].
-
-5. Para monitorizar los redireccionamientos o reintentos de red, puedes utilizar el `DatadogInterceptor` como [interceptor de red][16]:
+4. Para crear automáticamente recursos y tramos de RUM para tus solicitudes de OkHttp, usa el `DatadogInterceptor` como interceptor.
+   - Esto registra cada solicitud procesada por el `OkHttpClient` como un recurso, con toda la información relevante (URL, método, código de estado y error) completada automáticamente. Solo se rastrean las solicitudes de red que comenzaron cuando una vista está activa. Para hacer seguimiento de solicitudes cuando tu aplicación está en segundo plano, [crea una vista manualmente][15].
+      
+5. Para hacer seguimiento de las redirecciones o reintentos de red, puedes usar el `DatadogInterceptor` como un [interceptor de red][16]:
 
 {{< tabs >}}
 {{% tab "Kotlin" %}}
+
 ```kotlin
 val okHttpClient = OkHttpClient.Builder()
     .addNetworkInterceptor(DatadogInterceptor.Builder(tracedHostsWithHeaderType).build())
@@ -672,6 +691,7 @@ val okHttpClient = OkHttpClient.Builder()
 ```
 {{% /tab %}}
 {{% tab "Java" %}}
+
 ```java
 OkHttpClient okHttpClient = new OkHttpClient.Builder()
     .addNetworkInterceptor(new DatadogInterceptor.Builder(tracedHostsWithHeaderType).build())
@@ -681,51 +701,53 @@ OkHttpClient okHttpClient = new OkHttpClient.Builder()
 {{< /tabs >}}
 
 **Notas**:
-- Para utilizar tramos pero no recursos RUM, puedes utilizar `TracingInterceptor` en lugar de `DatadogInterceptor`, como se ha descrito anteriormente.
-- Si utilizas varios interceptores, añade `DatadogInterceptor` primero.
+- Para usar tramos pero no recursos de RUM, puedes usar el `TracingInterceptor` en lugar de `DatadogInterceptor` como se describió anteriormente.
+- Si utilizas múltiples interceptores, agrega `DatadogInterceptor` primero.
 
-También puedes añadir un `EventListener` para que `OkHttpClient` [realice automáticamente un seguimiento del tiempo de los recursos][17] para proveedores externos y solicitudes de red.
+También puedes agregar un `EventListener` para el `OkHttpClient` para [rastrear automáticamente el tiempo de recursos][17] para proveedores de terceros y solicitudes de red.
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Realizar un seguimiento de eventos en segundo plano" level="h4" expanded=false id="track-background-events" %}}
+{{% collapse-content title="Hacer seguimiento de eventos en segundo plano" level="h4" expanded=false id="track-background-events" %}}
 
-Puedes rastrear eventos como bloqueos y solicitudes de red cuando tu aplicación esté en segundo plano (por ejemplo, si no hay una vista activa disponible).
+Puedes hacer seguimiento de eventos como fallos y solicitudes de red cuando tu aplicación está en segundo plano (por ejemplo, no hay una vista activa disponible). 
 
-Añade el siguiente fragmento durante la configuración:
+Agrega el siguiente fragmento durante la configuración:
 
 {{< tabs >}}
 {{% tab "Kotlin" %}}
+
 ```kotlin
 .trackBackgroundEvents(true)
 ```
 {{% /tab %}}
 {{% tab "Java" %}}
+
 ```java
 .trackBackgroundEvents(true)
 ```
 {{% /tab %}}
 {{< /tabs >}}
-<div class="alert alert-info"><p>El rastreo de eventos en segundo plano puede dar lugar a sesiones adicionales, lo que puede afectar a la facturación. Si tienes dudas, <a href="https://docs.datadoghq.com/help/">contacta con el equipo de soporte de Datadog.</a></p>
+<div class="alert alert-info"><p>El seguimiento de eventos en segundo plano puede llevar a sesiones adicionales, lo que puede afectar la facturación. Para preguntas, <a href="https://docs.datadoghq.com/help/">contacta al soporte de Datadog.</a></p>
 </div>
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Enviar datos cuando el dispositivo está fuera de línea" level="h4" expanded=false id="sending-data-device-offline" %}}
+{{% collapse-content title="Enviando datos cuando el dispositivo está desconectado" level="h4" expanded=false id="sending-data-device-offline" %}}
 
-El SDK de Android garantiza la disponibilidad de los datos cuando el dispositivo de tu usuario está desconectado. En caso de zonas con poca conexión de red o cuando el nivel de carga de la batería del dispositivo es demasiado bajo, todos los eventos se almacenan primero en el dispositivo local en lotes.
+El SDK de Android asegura la disponibilidad de datos cuando el dispositivo del usuario está desconectado. En caso de áreas con baja red, o cuando la batería del dispositivo está demasiado baja, todos los eventos se almacenan primero en el dispositivo local en lotes. 
 
-Cada lote sigue la especificación de admisión. Los lotes se envían en cuanto la red está disponible y el nivel de batería es lo suficientemente alto como para garantizar que el SDK de Datadog no afectará a la experiencia del usuario final. Si la red no está disponible mientras tu aplicación está en primer plano, o si falla una carga de datos, el lote se conserva hasta que pueda enviarse con éxito.
-
-Esto significa que incluso si los usuarios abren tu aplicación mientras están desconectados, no se pierde ningún dato. Para garantizar que el SDK no utilice demasiado espacio de disco, los datos del disco se descartan automáticamente si son demasiado antiguos.
+Cada lote sigue la especificación de entrada. Los lotes se envían tan pronto como la red está disponible y la batería es lo suficientemente alta para asegurar que el SDK de Datadog no afecte la experiencia del usuario final. Si la red no está disponible mientras tu aplicación está en primer plano, o si una carga de datos falla, el lote se mantiene hasta que pueda ser enviado con éxito.
+ 
+Esto significa que incluso si los usuarios abren tu aplicación mientras están desconectados, no se pierde ningún dato. Para asegurar que el SDK no use demasiado espacio en disco, los datos en el disco se descartan automáticamente si se vuelven demasiado antiguos.
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Opciones de configuración del complemento" level="h4" expanded=false id="plugin-config-options" %}}
+{{% collapse-content title="Opciones de configuración del plugin" level="h4" expanded=false id="plugin-config-options" %}}
 
-Existen varias propiedades del complemento que se pueden configurar a través de la extensión del complemento. En caso de que estés utilizando múltiples variantes, puedes definir un valor de propiedad para una opción específica de la variante.
+Hay varias propiedades del plugin que se pueden configurar a través de la extensión del plugin. En caso de que estés usando múltiples variantes, puedes establecer un valor de propiedad para un sabor específico en la variante.
 
-Por ejemplo, para una variante de `fooBarRelease`, puedes utilizar la siguiente configuración:
+Por ejemplo, para una variante `fooBarRelease`, puedes usar la siguiente configuración:
 
 ```kotlin
 datadog {
@@ -741,29 +763,29 @@ datadog {
 }
 ```
 
-La configuración de la tarea para esta variante se combina a partir de las tres configuraciones de opciones proporcionadas en el siguiente orden:
+La configuración de la tarea para esta variante se fusiona de las tres configuraciones de sabor proporcionadas en el siguiente orden:
 
 1. `bar`
 2. `foo`
 3. `fooBar`
 
-Esto resuelve el valor final de la propiedad `versionName` como `fooBar`.
+Esto resuelve el valor final para la propiedad `versionName` como `fooBar`.
 
 | Nombre de la propiedad              | Descripción                                                                                                                                                                                               |
 |----------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `versionName`              | El nombre de la versión de la aplicación (por defecto, la versión declarada en el bloque `android` de tu script `build.gradle` ).                                                                                                               |
-| `serviceName`              | El nombre de servicio de la aplicación (por defecto, el nombre de paquete de tu aplicación tal y como se declara en el bloque `android` de tu script `build.gradle` ).                                                                                                                          |
-| `site`                     | El sitio Datadog al que cargar los datos (US1, US3, US5, EU1, US1_FED, AP1 o AP2).                                                                                                                                       |
-| `remoteRepositoryUrl`      | La URL del repositorio remoto donde se ha desplegado el código fuente. Si no se proporciona, este valor se resuelve desde tu configuración de Git durante el tiempo de ejecución de la tarea.                     |
-| `checkProjectDependencies` | Esta propiedad controla si el complemento debe comprobar si el SDK Android para Datadog está incluido en las dependencias. Si no es así, se ignora `none`, `warn` registra una advertencia y `fail` falla la compilación con un error (por defecto). |
+| `versionName`              | El nombre de la versión de la aplicación (por defecto, la versión declarada en el bloque `android` de tu script `build.gradle`).                                                                                                               |
+| `serviceName`              | El nombre del servicio de la aplicación (por defecto, el nombre del paquete de tu aplicación como se declara en el bloque `android` de tu script `build.gradle`).                                                                                                                          |
+| `site`                     | El sitio de Datadog para cargar tus datos (US1, US3, US5, EU1, US1_FED, AP1 o AP2).                                                                                                                                       |
+| `remoteRepositoryUrl`      | La URL del repositorio remoto donde se desplegó el código fuente. Si no se proporciona esto, este valor se resuelve a partir de tu configuración de Git durante el tiempo de ejecución de la tarea.                     |
+| `checkProjectDependencies` | Esta propiedad controla si el complemento debe verificar si el SDK de Android de Datadog está incluido en las dependencias. Si no, `none` se ignora, `warn` registra una advertencia y `fail` falla la construcción con un error (por defecto). |
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Integrar con un pipeline CI/CD" level="h4" expanded=false id="plugin-config-options" %}}
+{{% collapse-content title="Integrar con un pipeline de CI/CD" level="h4" expanded=false id="plugin-config-options" %}}
 
-Por defecto, la tarea de asignación de cargas es independiente de otras tareas del gráfico de compilación. Cuando necesites asignar cargas, ejecuta la tarea manualmente.
+Por defecto, la tarea de mapeo de carga es independiente de otras tareas en el gráfico de construcción. Ejecuta la tarea manualmente cuando necesites cargar el mapeo.
 
-Si quieres ejecutar esta tarea en un pipeline CI/CD y la tarea es necesaria como parte del gráfico de compilación, puedes configurar la tarea de carga para que se ejecute después de que se genere el archivo de asignación.
+Si deseas ejecutar esta tarea en un pipeline de CI/CD, y la tarea es requerida como parte del gráfico de construcción, puedes configurar la tarea de carga para que se ejecute después de que se genere el archivo de mapeo.
 
 Por ejemplo:
 
@@ -774,11 +796,11 @@ tasks["minify${variant}WithR8"].finalizedBy { tasks["uploadMapping${variant}"] }
 
 ## Limitaciones
 
-### Tamaño de los archivos
-El tamaño [de los archivos de asignación](#upload-your-mapping-file) está limitado a **500 MB** cada uno. Si tu proyecto tiene un archivo de asignación de mayor tamaño, utiliza una de las siguientes opciones para reducir el tamaño del archivo:
+### Tamaño de archivo
+[ Los archivos de mapeo](#upload-your-mapping-file) están limitados en tamaño a **500 MB** cada uno. Si tu proyecto tiene un archivo de mapeo más grande que esto, utiliza una de las siguientes opciones para reducir el tamaño del archivo:
 
-- Define la opción `mappingFileTrimIndents` como `true`. En promedio, esto reduce el tamaño del archivo en un 5%.
-- Configura un mapa de `mappingFilePackagesAliases`: Esto sustituye los nombres de paquetes por alias más cortos. **Nota**: Las trazas de stack tecnológico de Datadog utilizan el mismo alias, en lugar del nombre original del paquete, por lo que es mejor utilizar esta opción para dependencias de terceros.
+- Establece la opción `mappingFileTrimIndents` a `true`. Esto reduce el tamaño de tu archivo en un 5%, en promedio.
+- Establece un mapa de `mappingFilePackagesAliases`: Esto reemplaza los nombres de los paquetes con alias más cortos. **Nota**: El stacktrace de Datadog utiliza el mismo alias en lugar del nombre de paquete original, por lo que es mejor usar esta opción para las dependencias de terceros.
 
 ```kotlin
 datadog {
@@ -792,21 +814,21 @@ datadog {
 }
 ```
 
-### Recopilación
-Al examinar los comportamientos de los informes de fallos RUM para Android, ten en cuenta lo siguiente:
+### Colección
+Al observar los comportamientos de informes de fallos de RUM para Android, considera lo siguiente:
 
-- El fallo sólo puede detectarse una vez inicializado el SDK. Teniendo esto en cuenta, la recomendación es inicializar el SDK lo antes posible en el método `onCreate` de tu aplicación.
-- Los fallos RUM deben estar asociados a una vista RUM. Si un fallo se produce antes de que una vista sea visible (normalmente una actividad o fragmento en un estado `onResume`) o después de que la aplicación sea enviada a un segundo plano por el usuario final que deja de utilizarla, el fallo se silencia y no se informa para su recopilación. Para mitigar esta situación, utiliza el [método][25] `trackBackgroundEvents()`en tu compilador `RumConfiguration`.
-- Solo se conservan los fallos que se producen en las sesiones muestreadas. Si una [frecuencia de muestreo de sesión no es del 100%][24], algunos fallos no se notifican. 
+- El fallo solo puede ser detectado después de que el SDK esté inicializado. Dado esto, la recomendación es inicializar el SDK lo antes posible en el método `onCreate` de tu aplicación.
+- Los fallos de RUM deben estar asociados a una vista de RUM. Si ocurre un fallo antes de que una vista sea visible (típicamente una Actividad o Fragmento en un estado `onResume`), o después de que la aplicación sea enviada al fondo por el usuario al navegar fuera de ella, el fallo se silencia y no se reporta para su recolección. Para mitigar esto, use el método `trackBackgroundEvents()` [método][25] en su constructor `RumConfiguration`.
+- Solo se conservan los fallos que ocurren en sesiones muestreadas. Si una [tasa de muestreo de sesiones no es del 100%][24], algunos fallos no son reportados. 
 
-## Para test tu implementación
+## Prueba tu implementación
 
-Para verificar la configuración de Crash Reporting y Error Tracking Android, necesitas generar un error en tu aplicación y confirmar que el error aparece en Datadog.
+Para verificar la configuración de Crash Reporting y Error Tracking en Android, necesitas provocar un fallo en tu aplicación y confirmar que el error aparece en Datadog.
 
-Para test tu implementación
+Para probar tu implementación:
 
 1. Ejecuta tu aplicación en un emulador de Android o en un dispositivo real.
-2. Ejecuta un código que contenga un error o bloqueo. Por ejemplo:
+2. Ejecuta algún código que contenga un error o fallo. Por ejemplo:
 
    ```kotlin
    fun onEvent() {
@@ -814,13 +836,13 @@ Para test tu implementación
    }
    ```
 
-3. Después de que se produzca el fallo, reinicia tu aplicación y espera a que el SDK Android cargue el informe de fallo en [**Error Tracking**][2].
+3. Después de que ocurra el fallo, reinicia tu aplicación y espera a que el SDK de Android suba el informe de fallos en [**Error Tracking**][2].
 
-## Extensiones Kotlin
+## Extensiones de Kotlin
 
-### extensión `Closeable`
+### `Closeable` extensión
 
-Puedes monitorizar el uso de instancias `Closeable` con el método `useMonitored`, que informa de los errores a Datadog y luego cierra el recurso:
+Puedes hacer seguimiento del uso de la instancia `Closeable` con el método `useMonitored`, que informa de errores a Datadog y cierra el recurso después:
 
 ```kotlin
 val closeable: Closeable = ...
@@ -829,21 +851,21 @@ closeable.useMonitored {
 }
 ```
 
-### Seguimiento de recursos locales
+### Rastrea activos locales como recursos
 
-Puedes rastrear el acceso a los activos mediante la utilización del método de extensión `getAssetAsRumResource`:
+Puedes rastrear el acceso a los activos utilizando el método de extensión `getAssetAsRumResource`:
 
 ```kotlin
 val inputStream = context.getAssetAsRumResource(fileName)
 ```
 
-El uso de los recursos locales puede rastrearse utilizando el método de extensión `getRawResAsRumResource`:
+El uso de los recursos locales se puede rastrear utilizando el método de extensión `getRawResAsRumResource`:
 
 ```kotlin
 val inputStream = context.getRawResAsRumResource(id)
 ```
 
-## Referencias adicionales
+## Lectura adicional
 
 {{< partial name="whats-next/whats-next.html" >}}
 

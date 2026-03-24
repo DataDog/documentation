@@ -1,93 +1,95 @@
 ---
 aliases:
 - /es/agent/docker/tag
+description: Configurar la extracción automática de etiquetas a partir de las etiquetas
+  de contenedores de Docker y variables de entorno
 further_reading:
 - link: /getting_started/tagging/
-  tag: Documentación
-  text: Empezando con las etiquetas (tags)
+  tag: Documentation
+  text: Introducción a las etiquetas
 - link: /getting_started/tagging/using_tags/
-  tag: Documentación
-  text: Cómo usar tags con Datadog
+  tag: Documentation
+  text: Uso de etiquetas con Datadog
 - link: /agent/guide/autodiscovery-management/
-  tag: Documentación
-  text: Limita la recopilación de datos solo a un subconjunto de contenedores
-title: Extracción de etiquetas (tags) del Docker
+  tag: Documentation
+  text: Limitar la recolección de datos a un subconjunto de contenedores
+title: Extracción de etiquetas de Docker
 ---
+## Resumen
 
-## Información general
+El Agente de Datadog puede crear y asignar etiquetas a todas las métricas, trazas y registros emitidos por un contenedor basado en sus etiquetas o variables de entorno.
 
-El Datadog Agent puede crear y asignar etiquetas a todas las métricas, trazas y logs emitidos por un contenedor en base a sus etiquetas o variables de entorno.
+Si está ejecutando el Agente como un binario en un servidor, configure la extracción de etiquetas con las instrucciones de la pestaña [Agente](?tab=agent). Si está ejecutando el Agente como un contenedor, configure su extracción de etiquetas con las instrucciones de la pestaña [Agente contenedorizado](?tab=containerizedagent).
 
-Si estás ejecutando el Agent como un binario en un host, configura tus extracciones de etiquetas con las instrucciones de la pestaña [Agent](?tab=agent). Si estás ejecutando el Agent como un contenedor, configura tu extracción de etiquetas con las instrucciones de la pestaña [Agent contenedorizado](?tab=containerizedagent).
+### Etiquetado listo para usar
 
-### Etiquetado predefinido
+El Agente puede autodetectar y adjuntar etiquetas a todos los datos emitidos por los contenedores. La lista de etiquetas adjuntas depende de la [configuración de cardinalidad del Agente][1]. La [Cardinalidad de Etiquetas][5] puede impactar la facturación, ya que diferentes configuraciones de cardinalidad afectan el número de métricas emitidas.
 
-El Agent puede usar Autodiscovery y asociar etiquetas a todos los datos emitidos por contenedores. La lista de etiquetas asociadas depende de la [configuración de cardinalidad] del Agent[1].
 
-| Etiqueta (tag)                 | Cardinalidad  | Requisito                                 |
+| Etiqueta                 | Cardinalidad  | Requisito                                 |
 |----------------------|--------------|---------------------------------------------|
-| `container_name`     | Alta         | N/D<br/> **Nota**: No incluido en el tiempo de ejecución del contenedor.                                         |
-| `container_id`       | Alta         | N/D                                         |
-| `rancher_container`  | Alta         | Entorno de Rancher                         |
-| `mesos_task`         | Orquestador | Entorno de Mesos                           |
-| `docker_image`       | Baja          | N/D<br/> **Nota**: no incluido en el tiempo de ejecución del contenedor.                                         |
-| `image_name`         | Baja          | N/D                                         |
-| `short_image`        | Baja          | N/D                                         |
-| `image_tag`          | Baja          | N/D                                         |
-| `swarm_service`      | Baja          | Entorno de Swarm                           |
-| `swarm_namespace`    | Baja          | Entorno de Swarm                           |
-| `rancher_stack`      | Baja          | Entorno de Rancher                         |
-| `rancher_service`    | Baja          | Entorno de Rancher                         |
-| `env`                | Baja          | [Etiquetado de servicios unificado][2] activado        |
-| `version`            | Baja          | [Etiquetado de servicios unificado][2] activado        |
-| `service`            | Baja          | [Etiquetado de servicios unificado][2] activado        |
-| `marathon_app`       | Baja          | Entorno de Marathon                        |
-| `chronos_job`        | Baja          | Entorno de Mesos                           |
-| `chronos_job_owner`  | Baja          | Entorno de Mesos                           |
-| `nomad_task`         | Baja          | Entorno de Nomad                           |
-| `nomad_job`          | Baja          | Entorno de Nomad                           |
-| `nomad_group`        | Baja          | Entorno de Nomad                           |
-| `git.commit.sha`     | Baja          | [org.opencontainers.image.revision][3] utilizado |
-| `git.repository_url` | Baja          | [org.opencontainers.image.source][3] utilizado   |
+| `container_name`     | Alta         | N/A<br/> **Nota**: no incluido para el tiempo de ejecución de containerd.                                         |
+| `container_id`       | Alta         | N/A                                         |
+| `rancher_container`  | Alta         | Rancher environment                         |
+| `mesos_task`         | Orquestador | Entorno Mesos                           |
+| `docker_image`       | Bajo          | N/A<br/> **Nota**: no incluido para el tiempo de ejecución de containerd.                                         |
+| `image_name`         | Bajo          | N/A                                         |
+| `short_image`        | Bajo          | N/A                                         |
+| `image_tag`          | Bajo          | N/A                                         |
+| `swarm_service`      | Bajo          | Entorno Swarm                           |
+| `swarm_namespace`    | Bajo          | Entorno Swarm                           |
+| `rancher_stack`      | Bajo          | Entorno Rancher                         |
+| `rancher_service`    | Bajo          | Entorno Rancher                         |
+| `env`                | Bajo          | [Unified service tagging][2] enabled        |
+| `version`            | Bajo          | [Unified service tagging][2] enabled        |
+| `service`            | Bajo          | [Unified service tagging][2] enabled        |
+| `marathon_app`       | Bajo          | Entorno Marathon                        |
+| `chronos_job`        | Bajo          | Entorno Mesos                           |
+| `chronos_job_owner`  | Bajo          | Entorno Mesos                           |
+| `nomad_task`         | Bajo          | Entorno Nomad                           |
+| `nomad_job`          | Bajo          | Entorno Nomad                           |
+| `nomad_group`        | Bajo          | Entorno Nomad                           |
+| `git.commit.sha`     | Bajo          | [org.opencontainers.image.revision][3] utilizado |
+| `git.repository_url` | Bajo          | [org.opencontainers.image.source][3] utilizado   |
 
-### Etiquetado de servicios unificados
+### Unified service tagging
 
-La práctica recomendada por Datadog en entornos contenedorizados es usar el etiquetado de servicios unificado para asignar etiquetas. El etiquetado de servicios unificado asocia toda la telemetría de Datadog mediante el uso de tres etiquetas estándar: `env`, `service` y `version`. Para aprender cómo configurar tu entorno usando el etiquetado unificado, consulta la [documentación de etiquetado de servicios unificado] específica[2].
+Como mejor práctica en entornos contenedorizados, Datadog recomienda utilizar unified service tagging al asignar etiquetas. Unified service tagging vincula la telemetría de Datadog a través del uso de tres etiquetas estándar: `env`, `service` y `version`. Para aprender a configurar su entorno con unified service tagging, consulte la documentación dedicada a unified service tagging [unified service tagging documentation][2].
 
-## Extrae labels como etiquetas
+## Extraer etiquetas como etiquetas
 
-A partir de la versión de Agent v6.0+, el Agent puede recopilar labels para un contenedor cualquiera y usarlas como etiquetas para asociarlas a todos los datos emitidos por este contenedor.
+A partir de la versión 6.0+ del Agente, el Agente puede recopilar etiquetas para un contenedor dado y usarlas como etiquetas para adjuntar a todos los datos emitidos por este contenedor.
 
 {{< tabs >}}
-{{% tab "Containerized Agent" %}}
+{{% tab "Agente contenedorizado" %}}
 
-Para extraer una label de contenedor `<LABEL_NAME>` dada y transformarla en una clave de etiqueta `<TAG_KEY>` dentro de Datadog, añade la variable de entorno a continuación al Datadog Agent:
+Para extraer una etiqueta de contenedor dada `<LABEL_NAME>` y transformarla en una clave de etiqueta `<TAG_KEY>` dentro de Datadog, agregue la siguiente variable de entorno al Agente de Datadog:
 
 ```bash
-DD_CONTAINER_LABELS_AS_TAGS='{"<LABEL_NAME>": "<TAG_KEY>"}'
+DD_CONTAINER_LABELS_AS_TAGS='{"<LABEL_NAME>":"<TAG_KEY>"}'
 ```
 
-Por ejemplo, podrías configurar:
+Por ejemplo, podría configurar:
 
 ```bash
 DD_CONTAINER_LABELS_AS_TAGS='{"com.docker.compose.service":"service_name"}'
 ```
 
-**Nota**: `<LABEL_NAME>` no distingue entre minúsculas y mayúsculas. Por ejemplo, si tienes labels que se llaman `foo` y `FOO`, y configuras `DD_CONTAINER_LABELS_AS_TAGS='{"foo": "bar"}'`, tanto `foo` como `FOO` se asignan a `bar`.
+**Nota**: `<LABEL_NAME>` no es sensible a mayúsculas y minúsculas. Por ejemplo, si tiene etiquetas llamadas `foo` y `FOO`, y configura `DD_CONTAINER_LABELS_AS_TAGS='{"foo": "bar"}'`, tanto `foo` como `FOO` se asignan a `bar`.
 
-**Nota**: `DD_CONTAINER_LABELS_AS_TAGS` es equivalente al antiguo `DD_DOCKER_LABELS_AS_TAGS`, y `DD_CONTAINER_ENV_AS_TAGS` es equivalente al antiguo `DD_DOCKER_ENV_AS_TAGS`.
+**Nota**: `DD_CONTAINER_LABELS_AS_TAGS` es equivalente al antiguo `DD_DOCKER_LABELS_AS_TAGS`, y `DD_CONTAINER_ENV_AS_TAGS` a `DD_DOCKER_ENV_AS_TAGS`.
 
 {{% /tab %}}
-{{% tab "Agent" %}}
+{{% tab "Agente" %}}
 
-Para extraer una label de contenedor `<LABEL_NAME>` dada y transformarla en una clave de etiqueta `<TAG_KEY>` dentro de Datadog, añade el bloque de configuración a continuación en el [Archivo de configuración `datadog.yaml` del Agent][1]:
+Para extraer una etiqueta de contenedor dada `<LABEL_NAME>` y transformarla en una clave de etiqueta `<TAG_KEY>` dentro de Datadog, agregue el siguiente bloque de configuración en el [archivo de configuración del Agente `datadog.yaml`][1]:
 
 ```yaml
 container_labels_as_tags:
   <LABEL_NAME>: <TAG_KEY>
 ```
 
-Po ejemplo, podrías configurar:
+Por ejemplo, podría configurar:
 
 ```yaml
 container_labels_as_tags:
@@ -99,54 +101,54 @@ container_labels_as_tags:
 {{% /tab %}}
 {{< /tabs >}}
 
-## Extrae variables de entorno como etiquetas
+## Extraer variables de entorno como etiquetas
 
-Datadog recopila etiquetas automáticamente de [Docker, Kubernetes, ECS, Swarm, Mesos, Nomad y Rancher][4]. Para extraer aún más etiquetas, usa las opciones presentadas a continuación:
+Datadog recopila automáticamente etiquetas comunes de [Docker, Kubernetes, ECS, Swarm, Mesos, Nomad y Rancher][4]. Para extraer aún más etiquetas, utilice las siguientes opciones:
 
-| Variable de entorno               | Descripción                             |
+| Variable de Entorno               | Descripción                             |
 |------------------------------------|-----------------------------------------|
-| `DD_CONTAINER_LABELS_AS_TAGS`      | Extrae labels de contenedor                |
-| `DD_CONTAINER_ENV_AS_TAGS`         | Extrae variables de entorno de contendedor |
-| `DD_KUBERNETES_POD_LABELS_AS_TAGS` | Extrae etiquetas del pod                      |
-| `DD_CHECKS_TAG_CARDINALITY`        | Añade etiquetas a las métricas de los checks               |
-| `DD_DOGSTATSD_TAG_CARDINALITY`     | Añade etiquetas a las métricas personalizadas              |
+| `DD_CONTAINER_LABELS_AS_TAGS`      | Extraer etiquetas de contenedor                |
+| `DD_CONTAINER_ENV_AS_TAGS`         | Extraer variables de entorno del contenedor |
+| `DD_KUBERNETES_POD_LABELS_AS_TAGS` | Extraer etiquetas de pod                      |
+| `DD_CHECKS_TAG_CARDINALITY`        | Agregar etiquetas a las métricas de verificación               |
+| `DD_DOGSTATSD_TAG_CARDINALITY`     | Agregar etiquetas a métricas personalizadas              |
 
-A partir de la versión del Agent v7.20+, un Agent contenedorizado puede usar Autodiscover en etiquetas de labels de contenedores. Este proceso permite al Agent asociar etiquetas personalizadas a todos los datos emitidos por un contenedor sin modificar el archivo `datadog.yaml` del Agent.
+A partir de la versión 7.20+ del Datadog Agent, un agente contenedorizado puede autodetectar etiquetas a partir de las etiquetas de un contenedor. Este proceso permite que el Agente asocie etiquetas personalizadas a todos los datos emitidos por un contenedor sin modificar el archivo `datadog.yaml` del Agente.
 
-Las etiquetas deberían ser añadidas usando el formato mostrado a continuación:
+Las etiquetas deben ser agregadas utilizando el siguiente formato:
 
 ```yaml
 com.datadoghq.ad.tags: '["<TAG_KEY_1>:<TAG_VALUE_1>", "<TAG_KEY_2>:<TAG_VALUE_2>"]'
 ```
 
-Con Agent v6.0+, el Agent puede recopilar variables de entorno para un contenedor cualquiera y usarlas como etiquetas para asociarlas a todos los datos emitidos por ese contenedor.
+Con el Agente v6.0+, el Agente puede recopilar variables de entorno para un contenedor dado y usarlas como etiquetas para adjuntar a todos los datos emitidos por este contenedor.
 
 {{< tabs >}}
-{{% tab "Containerized Agent" %}}
+{{% tab "Agente contenedorizado" %}}
 
-Para extraer una variable de entorno de contenedor `<ENVVAR_NAME>` dada y transformarla en una clave de etiqueta `<TAG_KEY>` dentro de Datadog, añade la variable de entorno mostrada a continuación al Datadog Agent:
+Para extraer una variable de entorno de contenedor dada `<ENVVAR_NAME>` y transformarla como una clave de etiqueta `<TAG_KEY>` dentro de Datadog, agregue la siguiente variable de entorno al Agente de Datadog:
 
 ```bash
 DD_CONTAINER_ENV_AS_TAGS='{"<ENVVAR_NAME>": "<TAG_KEY>"}'
 ```
 
-Por ejemplo, podrías configurar:
+Por ejemplo, podría configurar:
 
 ```bash
 DD_CONTAINER_ENV_AS_TAGS='{"ENVIRONMENT":"env"}'
 ```
 
 {{% /tab %}}
-{{% tab "Agent" %}}
+{{% tab "Agente" %}}
 
-Para extraer una variable de entorno de contenedor `<ENVVAR_NAME>` dada y transformarla en una clave de etiqueta `<TAG_KEY>` dentro de Datadog, añade el bloque de configuración mostrado a continuación al [Archivo de configuración `datadog.yaml` del Agent][1]:
+Para extraer una variable de entorno de contenedor dada `<ENVVAR_NAME>` y transformarla como una clave de etiqueta `<TAG_KEY>` dentro de Datadog, agregue el siguiente bloque de configuración en el [archivo de configuración del Agente `datadog.yaml`][1]:
 
 ```yaml
 container_env_as_tags:
   <ENVVAR_NAME>: <TAG_KEY>
 ```
 
-Por ejemplo, podrías configurar:
+Por ejemplo, podría configurar:
 
 ```yaml
 container_env_as_tags:
@@ -157,7 +159,7 @@ container_env_as_tags:
 {{% /tab %}}
 {{< /tabs >}}
 
-## Leer más
+## Lectura adicional
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -165,3 +167,4 @@ container_env_as_tags:
 [2]: /es/getting_started/tagging/unified_service_tagging
 [3]: https://github.com/opencontainers/image-spec/blob/02efb9a75ee11e05937b535cc5f228f9343ab2f5/annotations.md#pre-defined-annotation-keys
 [4]: /es/agent/docker/?tab=standard#tagging
+[5]: /es/getting_started/tagging/assigning_tags/?tab=containerizedenvironments#tags-cardinality
