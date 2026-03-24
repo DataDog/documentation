@@ -307,6 +307,7 @@ unsupported_sites:
   dora_metrics: [gov]
   dynamic_instrumentation: [gov]
   dynamic_quotas: [gov]
+  end_user_device_monitoring: [gov]
   eng_reports: [gov]
   events_from_sns_emails: [gov]
   exception_replay: [gov]
