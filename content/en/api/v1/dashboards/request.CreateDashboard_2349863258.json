@@ -13,6 +13,7 @@
         "title": "",
         "title_size": "16",
         "title_align": "left",
+        "description": "Example widget description",
         "time": {},
         "type": "query_value",
         "requests": [
