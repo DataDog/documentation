@@ -37,6 +37,8 @@ In Kubernetes environments, injection is handled by the Datadog Admission Contro
    - Set environment variables (like `LD_PRELOAD`)
    - Mount volumes to persist injected libraries
 
+The default delivery method uses init containers, but SSI supports additional [injection modes][2] that may better suit your environment.
+
 ## Injector behavior
 
 After the injector is loaded into a process's memory space—regardless of platform—it performs the following:
@@ -50,3 +52,4 @@ After the injector is loaded into a process's memory space—regardless of platf
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/trace_collection/automatic_instrumentation/single-step-apm
+[2]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/kubernetes/#configure-injection-modes
