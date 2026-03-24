@@ -27,4 +27,8 @@ If you don't see the CloudPrem entry in the Logs menu, it means CloudPrem is not
    {{< nextlink href="/cloudprem/configure/lambda/" >}}Lambda Search Offloading{{< /nextlink >}}
 {{< /whatsnext >}}
 
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: https://www.datadoghq.com/product-preview/cloudprem/
