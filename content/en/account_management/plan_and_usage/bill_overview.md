@@ -120,7 +120,7 @@ If your organization is on the new **Bill Overview** and you prefer the previous
 
 {{< img src="account_management/plan_and_usage/toggle-back-header.png" alt="Bill Overview page header showing the Disable Preview button" >}}
 
-To return to Bill Overview, click **Enable Preview** in the header.
+To return to **Bill Overview**, click **Enable Preview** in the header.
 
 ## Permissions
 
