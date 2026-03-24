@@ -29,9 +29,9 @@ Specifically, the following information is shown:
     - Dropped
     - Reduced
 
-An example of Live Capture showing the log's `message` field before and after it has been processed by the Parse XML processor.
+An example of Live Capture showing the log's `message` field before and after it has been processed by the Parse JSON processor.
 
-{{< img src="observability_pipelines/processors/live-capture-example.png" alt="The entry column shows the original message field's values and the exit column shows the values parsed as XML" style="width:100%;" >}}
+{{< img src="observability_pipelines/live_capture_parse_json.png" alt="The entry column shows the original message field's values and the exit column shows the values parsed as JSON" style="width:100%;" >}}
 
 ## Permissions
 
