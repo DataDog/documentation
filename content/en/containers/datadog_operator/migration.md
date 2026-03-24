@@ -79,7 +79,7 @@ The migration tooling supports the following Datadog Helm chart configuration op
    kubectl logs job/<DATADOG_RELEASE_NAME>-dda-migration-job --all-containers
    ```
 
-   If there are no configuration mapping errors present in the logs, you may proceed with migrating your current Datadog Helm release.
+   If there are no configuration mapping errors present in the logs, you can proceed with migrating your current Datadog Helm release.
 
 4. **Configure `datadog-values.yaml` to enable migration**.
 
@@ -128,7 +128,7 @@ The migration tooling supports the following Datadog Helm chart configuration op
 
 ## Install Datadog Operator Helm chart
 
-After migrating your Datadog Agent workloads and validating that the Agent pods are reporting as expected, you can proceed to installing the Datadog Operator Helm chart as a standalone Helm release.
+After migrating your Datadog Agent workloads and validating that the Agent pods are reporting as expected, you can proceed to install the Datadog Operator Helm chart as a standalone Helm release.
 
 1. Run:
 
@@ -145,7 +145,7 @@ After migrating your Datadog Agent workloads and validating that the Agent pods 
 
    **Note**: `--take-ownership` lets the Datadog Operator release adopt Datadog CRDs that were previously created by the Operator subchart (enabled through `datadog.operator.enabled`).
 
-2. Verify that the Datadog Operator pod is reporting on the [Containers page][5] in Datadog is reporting as expected.
+2. Verify that the Datadog Operator pod is reporting on the [Containers page][5] in Datadog as expected.
 
 To customize the Operator configuration, create an `operator-values.yaml` file to override the default [Datadog Operator Helm chart values][3].
 
@@ -171,8 +171,8 @@ kubectl apply -f datadog.yaml
 
 For a full list of configuration options, see the [DatadogAgent configuration spec][4].
 
-[1]: https://docs.datadoghq.com/containers/datadog_operator/#why-use-the-datadog-operator-instead-of-a-helm-chart-or-daemonset
-[2]: https://docs.datadoghq.com/containers/datadog_operator/migration_advanced
+[1]: /containers/datadog_operator/#why-use-the-datadog-operator-instead-of-a-helm-chart-or-daemonset
+[2]: /containers/datadog_operator/migration_advanced
 [3]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog-operator/values.yaml
-[4]: https://docs.datadoghq.com/containers/datadog_operator/configuration/
+[4]: /containers/datadog_operator/configuration/
 [5]: https://app.datadoghq.com/containers

@@ -10,7 +10,7 @@ Datadog Kubernetes Cluster Autoscaling is in Preview. Use this form to submit yo
 
 <div class="alert alert-warning">During the Preview period, Datadog recommends <strong>non-production use only</strong> of Datadog Kubernetes Autoscaling.</div>
 
-### Requirements
+## Requirements
 - Datadog Agent v7.75+
 - Datadog Operator v1.23.0+ **or** Datadog Helm chart v3.155.1+
 - [Remote Configuration][1] must be enabled both at the organization level and on the Agents in your target cluster. See [Enabling Remote Configuration][2] for setup instructions.
@@ -21,7 +21,7 @@ Datadog Kubernetes Cluster Autoscaling is in Preview. Use this form to submit yo
 
   By default, all Datadog admin users have Autoscaling Manage, and all Datadog users have read access to view recommendations and reporting.
 
-  To grant Autoscaling Manage to an additional standard or custom role user, add the Autoscaling Manage permission to a custom role. See [Datadog Role Permissions][3] for more information.
+  To grant Autoscaling Manage to an additional standard or custom role user, add the Autoscaling Manage permission to a custom role. See [Datadog Role Permissions][3] for instructions.
 
 ## Setup
 
@@ -55,7 +55,7 @@ datadog:
 Then run `helm upgrade`.
 {{% /tab %}}
 {{< /tabs >}}
-2. If you do not have a pre-existing installation of Karpenter, install the [Datadog `kubectl` plugin][4]. This plugin assists in installing or connecting to your existing Karpenter configuration.
+2. If you do not have an existing installation of Karpenter, install the [Datadog `kubectl` plugin][4]. This plugin assists in installing or connecting to your existing Karpenter configuration.
    ```shell
    kubectl krew install datadog
    ```
@@ -75,7 +75,7 @@ Then run `helm upgrade`.
 
 In Datadog, navigate to [Kubernetes Autoscaling][5]. You can review all your clusters that are available for autoscaling on the [Autoscaling Settings][7] page. Toggle the **Enabled** column for your cluster of choice.
 
-{{< img src="containers/autoscaling/settings.png" alt=" The Autoscaling Settings page showing the Enable Clusters for Autoscaling section. Displays afilterable table of Kubernetes clusters with columns for cluster name, nodes, CPU capacity, memory capacity, CPU usage percentage with visual bars, memory usage percentage with visual bars, autoscaled workloads count, cluster scaling availability, workload scaling availability, and an enabled toggle switch. Toggle switches on the right show which clusters have autoscaling enabled." style="width:100%;" >}}
+{{< img src="containers/autoscaling/settings.png" alt=" The Autoscaling Settings page showing the Enable Clusters for Autoscaling section. Displays a filterable table of Kubernetes clusters with columns for cluster name, nodes, CPU capacity, memory capacity, CPU usage percentage with visual bars, memory usage percentage with visual bars, autoscaled workloads count, cluster scaling availability, workload scaling availability, and an enabled toggle switch. Toggle switches on the right show which clusters have autoscaling enabled." style="width:100%;" >}}
 
 Use the [Cluster Scaling][6] page and select a cluster to review its recommendations. Identify a cluster you want to begin optimizing. During the Preview period, Datadog recommends selecting a **non-production cluster**.
 
