@@ -37,7 +37,7 @@ If your forwarders are globally configured to enable SSL, you need the appropria
 
 Select and set up this source when you [set up a pipeline][6]. The information below is for the source settings in the pipeline UI.
 
-<div class="alert alert-danger">Only enter the identifiers for the OTel HTTP and gRPC listener addresses and, if applicable, the TLS key pass. Do <b>not</b> enter the actual values.</div>
+<div class="alert alert-danger">Only enter the identifiers for the OpenTelemetry HTTP and gRPC listener addresses and, if applicable, the TLS key pass. Do <b>not</b> enter the actual values.</div>
 
 1. Enter the identifier for your HTTP listener address. If you leave it blank, the [default](#set-secrets) is used.
 1. Enter the identifier for your gRPC listener address. If you leave it blank, the [default](#set-secrets) is used.
