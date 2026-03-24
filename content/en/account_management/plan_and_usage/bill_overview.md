@@ -26,7 +26,7 @@ The following filters apply to the **Bill Overview** page:```
 
 the original isn't bad or wrong, just making this fit with the docs tone a little more
 
-- **Product Category**: Filter all views by broader product family (for example, Infrastructure, APM, Logs, Security, AI/ML).
+- **Product Category**: Filter all views by broader product family, such as  Infrastructure, APM, Logs, Security, or AI/ML.
 - **Billing Dimension**: Filter to a specific billing dimension.
 - **Sub-Org**: Filter to a specific child organization.
 - **Group by Sub-Org**: Toggle to group costs by sub-organization.
