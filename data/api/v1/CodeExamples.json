@@ -123,6 +123,11 @@
     },
     {
       "group": "dashboards",
+      "suffix": "_3767278442",
+      "description": "Create a new dashboard with a query_value widget containing a description"
+    },
+    {
+      "group": "dashboards",
       "suffix": "_2261785072",
       "description": "Create a new dashboard with a timeseries widget and an overlay request"
     },
@@ -561,8 +566,8 @@
   "SendPublicDashboardInvitation": [
     {
       "group": "dashboards",
-      "suffix": "",
-      "description": "Send shared dashboard invitation email returns \"OK\" response"
+      "suffix": "_3435926116",
+      "description": "Send shared dashboard invitation email returns OK"
     }
   ],
   "UpdateDashboard": [

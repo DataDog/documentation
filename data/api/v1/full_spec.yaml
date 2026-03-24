@@ -481,6 +481,9 @@ components:
           description: ID of the alert to use in the widget.
           example: ""
           type: string
+        description:
+          description: The description of the widget.
+          type: string
         time:
           $ref: "#/components/schemas/WidgetTime"
         title:
@@ -515,6 +518,9 @@ components:
         alert_id:
           description: ID of the alert to use in the widget.
           example: ""
+          type: string
+        description:
+          description: The description of the widget.
           type: string
         precision:
           description: Number of decimal to show. If not defined, will use the raw value.
@@ -808,6 +814,9 @@ components:
           items:
             $ref: "#/components/schemas/WidgetCustomLink"
           type: array
+        description:
+          description: The description of the widget.
+          type: string
         requests:
           description: List of bar chart widget requests.
           example: ["q": "system.load.1"]
@@ -1015,6 +1024,9 @@ components:
           items:
             $ref: "#/components/schemas/WidgetCustomLink"
           type: array
+        description:
+          description: The description of the widget.
+          type: string
         requests:
           description: |-
             Array of one request object to display in the widget.
@@ -1176,6 +1188,9 @@ components:
         check:
           description: Name of the check to use in the widget.
           example: ""
+          type: string
+        description:
+          description: The description of the widget.
           type: string
         group:
           description: Group reporting a single check.
@@ -1815,6 +1830,9 @@ components:
           items:
             $ref: "#/components/schemas/WidgetCustomLink"
           type: array
+        description:
+          description: The description of the widget.
+          type: string
         legend_size:
           deprecated: true
           description: (Deprecated) The widget legend was replaced by a tooltip and sidebar.
@@ -2608,6 +2626,9 @@ components:
         The event stream is a widget version of the stream of events
         on the Event Stream view. Only available on FREE layout dashboards.
       properties:
+        description:
+          description: The description of the widget.
+          type: string
         event_size:
           $ref: "#/components/schemas/WidgetEventSize"
         query:
@@ -2645,6 +2666,9 @@ components:
     EventTimelineWidgetDefinition:
       description: The event timeline is a widget version of the timeline that appears at the top of the Event Stream view. Only available on FREE layout dashboards.
       properties:
+        description:
+          description: The description of the widget.
+          type: string
         query:
           description: Query to filter the event timeline with.
           example: ""
@@ -3380,6 +3404,9 @@ components:
       description: |-
         The funnel visualization displays a funnel of user sessions that maps a sequence of view navigation and user interaction in your application.
       properties:
+        description:
+          description: The description of the widget.
+          type: string
         requests:
           description: Request payload used to query items.
           example: [{"query": {"data_source": "rum", "query_string": "@browser.name:Chrome", "steps": [{"facet": "@view.name", "value": "/logs"}, {"facet": "@view.name", "value": "/apm/home"}]}, "request_type": "funnel"}]
@@ -3575,6 +3602,9 @@ components:
           items:
             $ref: "#/components/schemas/WidgetCustomLink"
           type: array
+        description:
+          description: The description of the widget.
+          type: string
         requests:
           description: |-
             Array of request objects to display in the widget. May include an optional request for the region layer and/or an optional request for the points layer. Region layer requests must contain a `group-by` tag whose value is a country ISO code.
@@ -3841,6 +3871,9 @@ components:
           items:
             $ref: "#/components/schemas/WidgetCustomLink"
           type: array
+        description:
+          description: The description of the widget.
+          type: string
         events:
           deprecated: true
           description: List of widget events. Deprecated - Use `overlay` request type instead.
@@ -4106,6 +4139,9 @@ components:
           items:
             $ref: "#/components/schemas/WidgetCustomLink"
           type: array
+        description:
+          description: The description of the widget.
+          type: string
         group:
           description: List of tag prefixes to group by.
           items:
@@ -5085,6 +5121,9 @@ components:
         The list stream visualization displays a table of recent events in your application that
         match a search criteria using user-defined columns.
       properties:
+        description:
+          description: The description of the widget.
+          type: string
         legend_size:
           $ref: "#/components/schemas/WidgetLegendSize"
         requests:
@@ -5266,6 +5305,9 @@ components:
             description: Column name.
             type: string
           type: array
+        description:
+          description: The description of the widget.
+          type: string
         indexes:
           description: An array of index names to query in the stream. Use [] to query all indexes at once.
           example: ["days-3", "days-7"]
@@ -8679,6 +8721,9 @@ components:
           description: The number of monitors to display.
           format: int64
           type: integer
+        description:
+          description: The description of the widget.
+          type: string
         display_format:
           $ref: "#/components/schemas/WidgetMonitorSummaryDisplayFormat"
         hide_zero_counts:
@@ -11067,6 +11112,9 @@ components:
         custom_unit:
           description: Display a unit of your choice on the widget.
           type: string
+        description:
+          description: The description of the widget.
+          type: string
         precision:
           description: Number of decimals to show. If not defined, the widget uses the raw value.
           format: int64
@@ -11236,6 +11284,9 @@ components:
           items:
             $ref: "#/components/schemas/WidgetCustomLink"
           type: array
+        description:
+          description: The description of the widget.
+          type: string
         inputs:
           description: Array of workflow inputs to map to dashboard template variables.
           items:
@@ -12198,6 +12249,9 @@ components:
     SLOListWidgetDefinition:
       description: Use the SLO List widget to track your SLOs (Service Level Objectives) on dashboards.
       properties:
+        description:
+          description: The description of the widget.
+          type: string
         requests:
           description: Array of one request object to display in the widget.
           items:
@@ -12745,6 +12799,9 @@ components:
         additional_query_filters:
           description: Additional filters applied to the SLO query.
           type: string
+        description:
+          description: The description of the widget.
+          type: string
         global_time_target:
           description: Defined global time target.
           type: string
@@ -12844,6 +12901,9 @@ components:
           items:
             $ref: "#/components/schemas/WidgetCustomLink"
           type: array
+        description:
+          description: The description of the widget.
+          type: string
         requests:
           $ref: "#/components/schemas/ScatterPlotWidgetDefinitionRequests"
         time:
@@ -13682,6 +13742,9 @@ components:
           items:
             $ref: "#/components/schemas/WidgetCustomLink"
           type: array
+        description:
+          description: The description of the widget.
+          type: string
         filters:
           description: Your environment and primary tag (or * if enabled for your account).
           example: ["*"]
@@ -13721,6 +13784,9 @@ components:
     ServiceSummaryWidgetDefinition:
       description: The service summary displays the graphs of a chosen service in your screenboard. Only available on FREE layout dashboards.
       properties:
+        description:
+          description: The description of the widget.
+          type: string
         display_format:
           $ref: "#/components/schemas/WidgetServiceSummaryDisplayFormat"
         env:
@@ -14408,6 +14474,9 @@ components:
           items:
             $ref: "#/components/schemas/WidgetCustomLink"
           type: array
+        description:
+          description: The description of the widget.
+          type: string
         hide_total:
           description: Show the total value in this widget.
           type: boolean
@@ -18350,6 +18419,9 @@ components:
           items:
             $ref: "#/components/schemas/WidgetCustomLink"
           type: array
+        description:
+          description: The description of the widget.
+          type: string
         has_search_bar:
           $ref: "#/components/schemas/TableWidgetHasSearchBar"
         requests:
@@ -18695,6 +18767,9 @@ components:
           items:
             $ref: "#/components/schemas/WidgetCustomLink"
           type: array
+        description:
+          description: The description of the widget.
+          type: string
         events:
           deprecated: true
           description: List of widget events. Deprecated - Use `overlay` request type instead.
@@ -18869,6 +18944,9 @@ components:
           items:
             $ref: "#/components/schemas/WidgetCustomLink"
           type: array
+        description:
+          description: The description of the widget.
+          type: string
         requests:
           description: List of top list widget requests.
           example: ["q": "system.load.1"]
@@ -19050,6 +19128,9 @@ components:
           items:
             $ref: "#/components/schemas/WidgetCustomLink"
           type: array
+        description:
+          description: The description of the widget.
+          type: string
         requests:
           description: One or more Topology requests.
           items:
@@ -19165,6 +19246,9 @@ components:
           items:
             $ref: "#/components/schemas/WidgetCustomLink"
           type: array
+        description:
+          description: The description of the widget.
+          type: string
         group_by:
           $ref: "#/components/schemas/TreeMapGroupBy"
         requests:

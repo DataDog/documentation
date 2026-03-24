@@ -56,7 +56,7 @@ Toggle the switch to enable **TLS**. The following certificate and key files are
 1. In the **Compression Algorithm** dropdown menu, select a compression algorithm (**gzip**, **zstd**, **lz4**, or **snappy**).
 1. (Optional) Select a **Compression Level** in the dropdown menu. If the level is not specified, the algorithm's default level is used.
 
-##### Buffering options
+##### Buffering
 
 {{% observability_pipelines/destination_buffer %}}
 
