@@ -347,10 +347,6 @@ This configuration enables [App and API Protection (AAP)][12] and [Continuous Pr
                value: "true"
              - name: "DD_PROFILING_ENABLED"
                value: "auto"
-             - name: DD_SERVICE
-               valueFrom:
-                 fieldRef:
-                   fieldPath: metadata.labels['app.kubernetes.io/name']
 {{< /highlight >}}
 
 For a full list of products you can enable through SSI, see [Enable SDK-dependent products and features](#enable-sdk-dependent-products-and-features).
