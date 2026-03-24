@@ -90,7 +90,9 @@ Unified Service Tags (USTs) apply consistent tags across traces, metrics, and lo
 
 ## Enable SDK-dependent products and features
 
-After SSI loads the Datadog SDK into your applications and enables distributed tracing, you can configure additional products that rely on the SDK. These include capabilities such as [Continuous Profiler][21], [Application Security Monitoring][22], and [trace ingestion controls][23].
+After SSI loads the Datadog SDK into your applications and enables distributed tracing, you can configure additional products that rely on the SDK:
+
+{{< ssi-products >}}
 
 Use one of the following setup methods:
 
@@ -113,16 +115,16 @@ To update the SDK versions:
 1. Re-run the Agent installation command. This command also updates the Agent to the latest version.
 1. Restart your applications.
 
-### Define workload selection rules 
+### Define instrumentation rules
 
 {{< callout url="https://www.datadoghq.com/product-preview/single-step-instrumentation-targeting-rules-on-linux/"
  btn_hidden="false" header="Join the Preview!">}}
-Workload selection is in Preview.
+Instrumentation rules are in Preview.
 {{< /callout >}}
 
-Workload selection rules (available for Agent v7.73+) let you control which processes are automatically instrumented by SSI on Linux hosts.
+Instrumentation rules (available for Agent v7.73+) let you control which processes are automatically instrumented by SSI on Linux hosts.
 
-To configure workload selection:
+To configure instrumentation rules:
 
 1. In Datadog, navigate to **APM** > **Service Setup** > [**Workload Selection**][20].
 1. Click **Add or Edit Rules**. 
@@ -189,8 +191,5 @@ If you encounter problems enabling APM with SSI, see the [SSI troubleshooting gu
 [18]: /tracing/trace_collection/automatic_instrumentation/configure_apm_features_linux/
 [19]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/troubleshooting
 [20]: https://app.datadoghq.com/apm/service-setup/workload-selection
-[21]: /profiler/
-[22]: /security/application_security/
-[23]: /tracing/trace_pipeline/ingestion_controls/
 
 
