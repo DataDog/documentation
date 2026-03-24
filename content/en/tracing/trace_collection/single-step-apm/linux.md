@@ -124,7 +124,7 @@ Instrumentation rules (available for Agent v7.73+) let you control which process
 
 To configure instrumentation rules:
 
-1. In Datadog, go to **APM** > **Software Catalog** > **Settings**. Click the **Service Setup** tab, then click [**Manage Instrumentation Rules**][20].
+1. In Datadog, go to **APM** > **Service Setup** > [**Manage Instrumentation Rules**][20].
 1. Click **Add or Edit Rules**.
 1. Define instrumentation rules:
    1. Click **Add New Rule**, then choose **Allow Rule** or **Block Rule** to specify whether matching processes should be instrumented.
