@@ -141,7 +141,7 @@ Workload selection is available for Linux-based apps through a limited availabil
 
 #### Kubernetes workload selection  
 
-Instrumentation rules enable injection based on Kubernetes labels and selectors. Rules to consider:
+Workload selection enables injection based on Kubernetes labels and selectors. Rules to consider:
 
 1. `disabledNamespaces` always takes precedence.
 2. When a pod initializes, the target list is checked from top to bottom. Only the first matching rule applies per pod.
@@ -268,7 +268,7 @@ String limit violations are common if service tags are not explicitly set throug
 If logs show no issues but traces are missing, there may be an application-side misconfiguration. Verify that:
 - Required annotations and labels are present.
 - [Unified Service Tagging][8] is set up correctly.
-- Allow/deny lists for instrumentation rules are properly defined.
+- Allow/deny lists for workload selection are properly defined.
 
 ## Language-specific troubleshooting
 
