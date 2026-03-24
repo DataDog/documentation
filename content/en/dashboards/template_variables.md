@@ -60,25 +60,22 @@ For most sources, template variable values are relevant to your dashboard's glob
 
 **Note**: If you do not see the tag or attribute you're looking for, it may be because that data hasn't been reported to Datadog recently. In addition, all data queried for template variables are subject to the data retention policy. For more information, see [Historical Data][4].
 
-## Dashboard Layouts
-To prevent variables from crowding the header, the dashboard displays a small subset for convenience. You can click on the **+ N** button to quickly examine the additional N variables present on your dashboard. 
+### Dashboard layout
+To prevent variables from crowding the header, the dashboard displays a small subset. You can click on the **+ N** button to see the additional N variables present on your dashboard. 
 
-{{< img src="/dashboards/template_variables/show_additional_template_variable.png" alt="Create saved views by selecting save selections as view" style="width:100%;" >}}
 
-If you need to see all variables at once as you scroll, click on the "Expand template variables" button. 
+If you need to see all variables at once as you scroll, click **Expand template variables**. 
 
-{{< img src="/dashboards/template_variables/expand_template_variable_layout.png" alt="Create saved views by selecting save selections as view" style="width:100%;" >}}
 
 ## Add a template variable
 To add a template variable in a dashboard:
 1. Click **Add Variable** (or **+** if there are existing template variables)
 2. Select from a list of recommended template variables or search for the specific tag you have in mind.
-4. Select the widgets to apply this template variable.
-6. Click the "Save" button to save your changes.
+4. Select the widgets to apply this template variable to.
+6. Click **Save**.
 
-{{< img src="/dashboards/template_variables/add_template_variable.png" alt="Create saved views by selecting save selections as view" style="width:100%;" >}}
 
-### Further Configuration 
+### Configure template variable
 When the template variable side panel is open, you can:
 * Apply (or remove) this variable to selected widgets (note the **Select All** or **Deselect All** options)
 * Switch between filtering and grouping
@@ -86,12 +83,11 @@ When the template variable side panel is open, you can:
 * Select a default dropdown value
 * Preview the dropdown values and further configure them with a search query
 
-{{< img src="/dashboards/template_variables/edit_sidepanel.png" alt="Create saved views by selecting save selections as view" style="width:100%;" >}}
 
-## Edit an existing template variable
-Simply hover over the template variable on the dashboard header and click Edit. This will present the template variable side panel [mentioned above](#further-configuration) where you can customize the variable or apply the variable to more widgets. 
+## Edit a template variable
+1. Hover over the template variable on the dashboard header and click **Edit**. The template variable side panel appears.
+2. Use the options in the panel to customize the variable or apply the variable to more widgets.
 
-{{< img src="/dashboards/template_variables/hover_template_variable.png" alt="Create saved views by selecting save selections as view" style="width:100%;" >}}
 
 ## Saved views
 
