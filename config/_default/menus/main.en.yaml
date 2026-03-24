@@ -4969,6 +4969,11 @@ menu:
       identifier: data_observability
       parent: data_observability_heading
       weight: 60000
+    - name: Guides
+      url: data_observability/guides/
+      identifier: data_observability_guides
+      parent: data_observability
+      weight: 200000
     - name: Quality Monitoring
       url: data_observability/quality_monitoring/
       pre: data-observability-wui
