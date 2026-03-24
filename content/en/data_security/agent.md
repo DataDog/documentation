@@ -73,7 +73,7 @@ Datadog's Vulnerability Management program includes regular assessments of suppo
 Regarding its Container Agent specifically, Datadog performs regular vulnerability static analysis on both its general availability (GA) and release candidate (RC) releases. The Datadog Container Agent can be found in public registries as mentioned in [Docker Agent][10], and additionally, Datadog Agent source code is open source. This empowers customers to perform vulnerability scanning with their preferred tooling based on a cadence that meets their unique needs. This provides the required visibility for customers inclined to monitor the Datadog Agent for potential vulnerabilities.
 
 If you believe you've discovered a bug in Datadog's security, see [Report An Issue][11]. 
-To check the status of a specific CVE, see the [Public Artifact Vulnerabilities Page][19]. For additional information, contact [Datadog Support][12] through your standard support process. When submitting a support ticket through the Datadog website, set the `Product type` field to `Vulnerability Inquiry on Datadog Product`.
+To check the status of a specific CVE, see the [Public Artifact Vulnerabilities page][19]. For additional information, contact [Datadog Support][12] through your standard support process. When submitting a support ticket through the Datadog website, set the `Product type` field to `Vulnerability Inquiry on Datadog Product`.
 
 ## Running as an unprivileged user
 
