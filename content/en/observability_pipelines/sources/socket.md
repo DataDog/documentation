@@ -9,15 +9,17 @@ products:
 
 {{< product-availability >}}
 
-Use Observability Pipelines' Socket source to send logs to the Worker over a socket connection (TCP or UDP). Select and set up this source when you [set up a pipeline][1].
+## Overview
+
+Use Observability Pipelines' Socket source to send logs to the Worker over a socket connection (TCP or UDP).
 
 ## Prerequisites
 
 {{% observability_pipelines/prerequisites/socket %}}
 
-## Set up the source in the pipeline UI
+## Setup
 
-Select and set up this source when you [set up a pipeline][1]. The information below is for the source settings in the pipeline UI.
+Set up this source when you [set up a pipeline][1]. You can set up a pipeline in the [UI][3], using the [API][4], or with [Terraform][5]. The instructions in this section is for setting up the source in the UI.
 
 <div class="alert alert-danger">Only enter the identifiers for the socket address and, if applicable, the TLS key pass. Do <b>not</b> enter the actual values.</div>
 
@@ -89,3 +91,6 @@ If you selected **TCP** mode, toggle the switch to **Enable TLS**. The following
 
 [1]: /observability_pipelines/configuration/set_up_pipelines/
 [2]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/
+[3]: https://app.datadoghq.com/observability-pipelines
+[4]: /api/latest/observability-pipelines/
+[5]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline

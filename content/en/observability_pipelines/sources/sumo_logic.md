@@ -9,15 +9,17 @@ products:
 
 {{< product-availability >}}
 
-Use Observability Pipelines' Sumo Logic Hosted Collector source to receive logs sent to your Sumo Logic Hosted Collector. Select and set up this source when you [set up a pipeline][1].
+## Overview
+
+Use Observability Pipelines' Sumo Logic Hosted Collector source to receive logs sent to your Sumo Logic Hosted Collector.
 
 ## Prerequisites
 
 {{% observability_pipelines/prerequisites/sumo_logic %}}
 
-## Set up the source in the pipeline UI
+## Setup
 
-Select and set up this source when you [set up a pipeline][1]. The information below is for the source settings in the pipeline UI.
+Set up this source when you [set up a pipeline][1]. You can set up a pipeline in the [UI][2], using the [API][3], or with [Terraform][4]. The instructions in this section is for setting up the source in the UI.
 
 - Enter the identifier for your Sumo Logic address. If you leave it blank, the [default](#set-secrets) is used.
     - **Note**: Only enter the identifier for the address. Do **not** enter the actual address.
@@ -49,3 +51,6 @@ In the **Decoding** dropdown menu, select whether your input format is raw **Byt
 {{% observability_pipelines/log_source_configuration/sumo_logic %}}
 
 [1]: /observability_pipelines/configuration/set_up_pipelines/
+[2]: https://app.datadoghq.com/observability-pipelines
+[3]: /api/latest/observability-pipelines/
+[4]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline

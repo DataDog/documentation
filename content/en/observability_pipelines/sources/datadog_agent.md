@@ -16,7 +16,9 @@ further_reading:
 
 {{< product-availability >}}
 
-Use Observability Pipelines' Datadog Agent source to receive logs or metrics ({{< tooltip glossary="preview" case="title" >}}) from the Datadog Agent. Select and set up this source when you [set up a pipeline][1].
+## Overview
+
+Use Observability Pipelines' Datadog Agent source to receive logs or metrics ({{< tooltip glossary="preview" case="title" >}}) from the Datadog Agent.
 
 **Note**: If you are using the Datadog Distribution of OpenTelemetry (DDOT) Collector for logs, you must [use the OpenTelemetry source to send logs to Observability Pipelines][4].
 
@@ -24,9 +26,13 @@ Use Observability Pipelines' Datadog Agent source to receive logs or metrics ({{
 
 {{% observability_pipelines/prerequisites/datadog_agent %}}
 
-## Set up the source in the pipeline UI
+## Setup
 
-Optionally, toggle the switch to enable TLS. If you enable TLS, the following certificate and key files are required.
+Set up this source when you [set up a pipeline][1]. You can set up a pipeline in the [UI][6], using the [API][7], or with [Terraform][8]. The instructions in this section is for setting up the source in the UI.
+
+### Optional TLS
+
+Toggle the switch to enable TLS. The following certificate and key files are required for TLS:
    - `Server Certificate Path`: The path to the certificate file that has been signed by your Certificate Authority (CA) root file in DER or PEM (X.509) format.
    - `CA Certificate Path`: The path to the certificate file that is your Certificate Authority (CA) root file in DER or PEM (X.509) format.
    - `Private Key Path`: The path to the `.key` private key file that belongs to your Server Certificate Path in DER or PEM (PKCS#8) format.
@@ -131,3 +137,6 @@ datadog:
 [1]: /observability_pipelines/configuration/set_up_pipelines/
 [4]: /observability_pipelines/sources/opentelemetry/#send-logs-from-the-datadog-distribution-of-opentelemetry-collector-to-observability-pipelines
 [5]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/
+[6]: https://app.datadoghq.com/observability-pipelines
+[7]: /api/latest/observability-pipelines/
+[8]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline

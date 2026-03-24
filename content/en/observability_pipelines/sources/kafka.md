@@ -9,7 +9,9 @@ products:
 
 {{< product-availability >}}
 
-Use Observability Pipelines' Kafka source to receive logs from your Kafka topics. Select and set up this source when you [set up a pipeline][1]. The Kafka source uses [librdkafka][2].
+## Overview
+
+Use Observability Pipelines' Kafka source to receive logs from your Kafka topics. The Kafka source uses [librdkafka][2].
 
 You can also [send Azure Event Hub logs to Observability Pipelines using the Kafka source][6].
 
@@ -17,9 +19,9 @@ You can also [send Azure Event Hub logs to Observability Pipelines using the Kaf
 
 {{% observability_pipelines/prerequisites/kafka %}}
 
-## Set up the source in the pipeline UI
+## Setup
 
-Select and set up this source when you [set up a pipeline][1]. The information below is for the source settings in the pipeline UI.
+Set up this source when you [set up a pipeline][1]. You can set up a pipeline in the [UI][7], using the [API][8], or with [Terraform][9]. The instructions in this section is for setting up the source in the UI.
 
 <div class="alert alert-danger">Only enter the identifiers for the Kafka servers, username, password, and if applicable, the TLS key pass. Do <b>not</b> enter the actual values.</div>
 
@@ -107,3 +109,6 @@ See the [librdkafka documentation][3] for more information and to ensure your va
 [4]: https://docs.confluent.io/platform/current/clients/librdkafka/html/md_CONFIGURATION.html
 [5]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/
 [6]: /observability_pipelines/sources/azure_event_hubs/
+[7]: https://app.datadoghq.com/observability-pipelines
+[8]: /api/latest/observability-pipelines/
+[9]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline

@@ -9,7 +9,9 @@ products:
 
 {{< product-availability >}}
 
-Use Observability Pipelines' rsyslog or syslog-ng to receive logs sent to rsyslog or syslog-ng. Select and set up this source when you [set up a pipeline][1].
+## Overview
+
+Use Observability Pipelines' rsyslog or syslog-ng to receive logs sent to rsyslog or syslog-ng.
 
 You can also [forward third-party log to syslog](#forward-third-party-logs-to-syslog) and then send them to the Observability Pipelines Worker.
 
@@ -17,9 +19,9 @@ You can also [forward third-party log to syslog](#forward-third-party-logs-to-sy
 
 {{% observability_pipelines/prerequisites/syslog %}}
 
-## Set up the source in the pipeline UI
+## Setup
 
-Select and set up this source when you [set up a pipeline][1]. The information below is for the source settings in the pipeline UI.
+Set up this source when you [set up a pipeline][1]. You can set up a pipeline in the [UI][7], using the [API][8], or with [Terraform][9]. The instructions in this section is for setting up the source in the UI.
 
 To configure your Syslog source:
 
@@ -80,3 +82,6 @@ Syslog is a widely used logging protocol for sending network logs to a central s
 [4]: https://docs.paloaltonetworks.com/pan-os/10-1/pan-os-admin/monitoring/configure-log-forwarding
 [5]: https://knowledgebase.paloaltonetworks.com/KCSArticleDetail?id=kA10g000000ClRxCAK
 [6]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/
+[7]: https://app.datadoghq.com/observability-pipelines
+[8]: /api/latest/observability-pipelines/
+[9]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline

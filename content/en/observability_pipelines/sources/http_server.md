@@ -9,7 +9,9 @@ products:
 
 {{< product-availability >}}
 
-Use Observability Pipelines' HTTP/S Server source to collect HTTP client logs. Select and set up this source when you [set up a pipeline][1].
+## Overview
+
+Use Observability Pipelines' HTTP/S Server source to collect HTTP client logs.
 
 You can also [send AWS vended logs with Datadog Lambda Forwarder to Observability Pipelines](#send-aws-vended-logs-with-the-datadog-lambda-forwarder-to-observability-pipelines).
 
@@ -17,9 +19,9 @@ You can also [send AWS vended logs with Datadog Lambda Forwarder to Observabilit
 
 {{% observability_pipelines/prerequisites/http_server %}}
 
-## Set up the source in the pipeline UI
+## Setup
 
-Select and set up this source when you [set up a pipeline][1]. The information below is for the source settings in the pipeline UI.
+Set up this source when you [set up a pipeline][3]. You can set up a pipeline in the [UI][1], using the [API][4], or with [Terraform][5]. The instructions in this section is for setting up the source in the UI.
 
 To configure your HTTP/S Server source, enter the following:
 
@@ -85,3 +87,6 @@ To send AWS vended logs to Observability Pipelines with the HTTP/S Server source
 
 [1]: https://app.datadoghq.com/observability-pipelines
 [2]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/
+[3]: /observability_pipelines/configuration/set_up_pipelines/
+[4]: /api/latest/observability-pipelines/
+[5]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline

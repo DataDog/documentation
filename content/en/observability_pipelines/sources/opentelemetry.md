@@ -33,9 +33,13 @@ Common scenarios when you might use this source:
 
 If your forwarders are globally configured to enable SSL, you need the appropriate TLS certificates and the password you used to create your private key.
 
-## Set up the source in the pipeline UI
+## Setup
 
-Optionally, toggle the switch to enable TLS. If you enable TLS, the following certificate and key files are required.<br>**Note**: All file paths are made relative to the configuration data directory, which is `/var/lib/observability-pipelines-worker/config/` by default. See [Advanced Worker Configurations][3] for more information. The file must be owned by the `observability-pipelines-worker group` and `observability-pipelines-worker` user, or at least readable by the group or user.
+Set up this source when you [set up a pipeline][6]. You can set up a pipeline in the [UI][10], using the [API][11], or with [Terraform][12]. The instructions in this section is for setting up the source in the UI.
+
+### Optional TLS
+
+Toggle the switch to enable TLS. The following certificate and key files are required for TLS.<br>**Note**: All file paths are made relative to the configuration data directory, which is `/var/lib/observability-pipelines-worker/config/` by default. See [Advanced Worker Configurations][3] for more information. The file must be owned by the `observability-pipelines-worker group` and `observability-pipelines-worker` user, or at least readable by the group or user.
 - `Server Certificate Path`: The path to the certificate file that has been signed by your Certificate Authority (CA) root file in DER or PEM (X.509).
 - `CA Certificate Path`: The path to the certificate file that is your Certificate Authority (CA) root file in DER or PEM (X.509).
 - `Private Key Path`: The path to the `.key` private key file that belongs to your Server Certificate Path in DER or PEM (PKCS #8) format.
@@ -131,3 +135,6 @@ To send logs from the Datadog Distribution of the OpenTelemetry (DDOT) Collector
 [7]: /observability_pipelines/processors/edit_fields#add-field
 [8]: /observability_pipelines/processors/custom_processor
 [9]: https://docs.datadoghq.com/opentelemetry/setup/ddot_collector/install/kubernetes_daemonset/?tab=helm#configure-the-opentelemetry-collector
+[10]: https://app.datadoghq.com/observability-pipelines
+[11]: /api/latest/observability-pipelines/
+[12]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline
