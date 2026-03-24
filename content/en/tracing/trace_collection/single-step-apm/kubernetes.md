@@ -164,11 +164,14 @@ SSI supports multiple injection modes, which control how the injector and APM li
 |------|-------------|--------------|
 | `auto` | Automatically selects the optimal injection method based on cluster capabilities. | Agent 7.76.0+, Helm Chart or Datadog Operator |
 | `init_container` | Uses init containers to copy injector and APM library files into application containers. | Datadog Agent, deployed with Helm Chart or Datadog Operator |
-| `csi` | **Preview.** Mounts injector and APM library files using the [Datadog CSI driver][40]. Reduces pod startup time compared to init container mode. | Agent 7.76.0+, CSI driver 1.2.0+, Helm Chart 3.178.1+ |
+| `csi` | **In Preview.** Mounts injector and APM library files using the [Datadog CSI driver][40]. Reduces pod startup time compared to init container mode. | Agent 7.76.0+, CSI driver 1.2.0+, Helm Chart 3.178.1+ |
 
-**Note**: Before using `csi` mode, install and activate the Datadog CSI driver, and set `datadog.csi.enabled: true` in your `datadog-values.yaml`. See the [CSI driver documentation][40] for installation steps and environment-specific requirements such as GKE Autopilot.
+Before using `csi` mode, install and activate the Datadog CSI driver, and set `datadog.csi.enabled: true` in your `datadog-values.yaml`. See the [CSI driver documentation][40] for installation steps and environment-specific requirements such as GKE Autopilot.
 
-#### Configure injection mode globally with Helm
+#### Configure injection mode globally
+
+{{< tabs >}}
+{{% tab "Helm" %}}
 
 To set the injection mode cluster-wide, add `injectionMode` to your `datadog-values.yaml`:
 
@@ -176,12 +179,18 @@ To set the injection mode cluster-wide, add `injectionMode` to your `datadog-val
 datadog:
   apm:
     instrumentation:
-      injectionMode: init_container
+      injectionMode: <mode>
 ```
 
-Replace `init_container` with the desired mode: `auto`, `init_container`, or `csi`.
+Supported values: `auto`, `init_container`, `csi`.
 
-**Note**: Datadog Operator does not support this setting.
+{{% /tab %}}
+{{% tab "Datadog Operator" %}}
+
+Datadog Operator does not support setting the injection mode globally. To override the injection mode for specific pods, use the [pod annotation](#configure-injection-mode-per-pod).
+
+{{% /tab %}}
+{{< /tabs >}}
 
 #### Configure injection mode per pod
 
@@ -190,10 +199,10 @@ To override the injection mode for a specific pod, add the following annotation 
 ```yaml
 metadata:
   annotations:
-    admission.datadoghq.com/apm-inject.injection-mode: "init_container"
+    admission.datadoghq.com/apm-inject.injection-mode: "<mode>"
 ```
 
-Replace `init_container` with the desired mode: `auto`, `init_container`, or `csi`.
+Supported values: `auto`, `init_container`, `csi`.
 
 ### Target specific workloads
 
