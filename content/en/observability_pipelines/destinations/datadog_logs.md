@@ -52,7 +52,7 @@ Click **Route to Multiple Organizations** to set up routing to multiple Datadog 
 	- **Note**: Only enter the identifier for the API key. Do **not** enter the actual API key.
 1. Click **Save**.
 
-##### Buffering options
+##### Buffering
 
 {{% observability_pipelines/destination_buffer %}}
 

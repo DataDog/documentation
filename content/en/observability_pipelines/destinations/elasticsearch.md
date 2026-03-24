@@ -39,10 +39,12 @@ Set up the Elasticsearch destination and its environment variables when you [set
 
 #### Optional settings
 
+##### Elasticsearch index and version
+
 1. Enter the name for the Elasticsearch index. See [template syntax][3] if you want to route logs to different indexes based on specific fields in your logs.
 1. Enter the Elasticsearch version.
 
-##### Buffering options
+##### Buffering
 
 {{% observability_pipelines/destination_buffer %}}
 

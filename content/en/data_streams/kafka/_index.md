@@ -24,11 +24,11 @@ The setup page provides environment-specific configuration instructions. You can
 
 The **Clusters**, **Topics**, and **Brokers** tabs display health status across your entire Kafka infrastructure. For each topic, you can see partition count, under-replicated and offline partitions, message throughput, and consumer lag.
 
-{{< img src="data_streams/kafka_clusters_overview.png" alt="The Kafka Monitoring clusters view showing cluster list with broker counts, topic names, replication status, and messages-in rate" >}}
+{{< img src="data_streams/kafka_clusters_overview-2.png" alt="The Kafka Monitoring clusters view showing cluster list with broker counts, topic names, replication status, and messages-in rate" >}}
 
 Click into any topic to see a detailed summary, including incoming message rate, maximum lag across all partitions, and whether current lag is approaching the retention limit.
 
-{{< img src="data_streams/kafka_topic_summary.png" alt="Topic detail summary page showing incoming message rate of 0.8 msg/sec, current lag of 1.15 seconds, and lag-vs-retention status" >}}
+{{< img src="data_streams/kafka_topic_summary-2.png" alt="Topic detail summary page showing incoming message rate of 0.8 msg/sec, current lag of 1.15 seconds, and lag-vs-retention status" >}}
 
 From any metric, you can create Datadog monitors, SLOs, and dashboards.
 
@@ -36,7 +36,7 @@ From any metric, you can create Datadog monitors, SLOs, and dashboards.
 
 Change events are overlaid directly on throughput and lag graphs, so you can see whether a configuration or schema change coincided with a degradation.
 
-{{< img src="data_streams/kafka_topics_lag_change.png" alt="Topics view with a topic_config change annotation at 17:02:42 overlaid on the lag-by-topic graph, showing a spike correlated with the change event" >}}
+{{< img src="data_streams/kafka_topics_lag_change-2.png" alt="Topics view with a topic_config change annotation at 17:02:42 overlaid on the lag-by-topic graph, showing a spike correlated with the change event" >}}
 
 To identify exactly what changed, click on detected changes on the overlay and select **View config change**. 
 
