@@ -106,7 +106,7 @@ Toggle the switch to **Enable TLS** if your organization requires secure connect
 - `CA Certificate Path`: The path to the certificate file that is your Certificate Authority (CA) Root File in DER or PEM (X.509).
 - `Private Key Path`: The path to the `.key` private key file that belongs to your Server Certificate Path in DER or PEM (PKCS#8) format.
 
-##### Buffering options
+##### Buffering
 
 {{% observability_pipelines/destination_buffer %}}
 
@@ -180,9 +180,9 @@ See the [Observability Pipelines Metrics][8] for a full list of available health
 
 A batch of events is flushed when one of these parameters is met. See [event batching][6] for more information.
 
-| Max Events     | Max Bytes       | Timeout (seconds)   |
-|----------------|-----------------|---------------------|
-| 1,000          | 10,000,000      | 1                   |
+| Maximum Events | Maximum Size (MB) | Timeout (seconds)   |
+|----------------|-------------------|---------------------|
+| 1,000          | 10                | 1                   |
 
 [1]: https://app.datadoghq.com/observability-pipelines
 [2]: https://cloud.google.com/docs/authentication#auth-flowchart

@@ -1438,21 +1438,26 @@ menu:
       parent: bits_ai_dev_agent
       identifier: bits_ai_dev_agent_setup
       weight: 200
+    - name: Bits AI Security Analyst
+      url: bits_ai/bits_ai_security_analyst
+      identifier: bits_ai_bits_ai_security_analyst
+      parent: bits_ai
+      weight: 3
     - name: Bits Assistant
       url: bits_ai/bits_assistant
       identifier: bits_ai_bits_assistant
       parent: bits_ai
-      weight: 3
+      weight: 4
     - name: MCP Server
       url: bits_ai/mcp_server
       identifier: bits_ai_mcp_server
       parent: bits_ai
-      weight: 4
+      weight: 5
     - name: Setup
       url: bits_ai/mcp_server/setup
       identifier: bits_ai_mcp_server_setup
       parent: bits_ai_mcp_server
-      weight: 401
+      weight: 501
     - name: Dashboards
       url: dashboards/
       pre: dashboard
@@ -2670,10 +2675,17 @@ menu:
       parent: case_management
       identifier: case_management_automation_rules
       weight: 6
+    - name: MCP Server
+      url: incident_response/case_management/mcp_server
+      parent: case_management
+      identifier: case_management_mcp_server
+      weight: 7
     - name: Troubleshooting
       url: incident_response/case_management/troubleshooting
       parent: case_management
       identifier: case_management_troubleshooting
+      weight: 8
+    - name: Agents
       weight: 7
     - name: Agent Builder
       url: actions/agents/
@@ -4685,6 +4697,16 @@ menu:
       parent: dbm_setup_postgres
       identifier: dbm_postgres_supabase
       weight: 307
+    - name: Supabase Cloud
+      url: database_monitoring/setup_postgres/supabase/cloud
+      parent: dbm_postgres_supabase
+      identifier: dbm_supabase_cloud
+      weight: 1000
+    - name: Supabase Self-Hosted
+      url: database_monitoring/setup_postgres/supabase/agent
+      parent: dbm_postgres_supabase
+      identifier: dbm_supabase_agent
+      weight: 2000
     - name: Heroku
       url: database_monitoring/setup_postgres/heroku
       parent: dbm_setup_postgres
@@ -4911,11 +4933,16 @@ menu:
       identifier: data_streams_setup
       parent: data_streams
       weight: 1
-    - name: Kafka Messages
-      url: data_streams/messages
-      identifier: data_streams_kafka_messages
+    - name: Kafka 
+      url: data_streams/kafka
+      identifier: data_streams_kafka
       parent: data_streams
       weight: 2
+    - name: Messages 
+      url: data_streams/kafka/messages 
+      identifier: data_streams_kafka_messages
+      parent: data_streams_kafka 
+      weight: 201
     - name: Schema Tracking
       url: data_streams/schema_tracking
       identifier: data_streams_schema_tracking
@@ -5189,6 +5216,11 @@ menu:
       parent: llm_obs_managed_evaluations
       identifier: llm_obs_managed_evaluations_security
       weight: 40002
+    - name: Connect Your LLM Provider
+      url: llm_observability/evaluations/custom_llm_as_a_judge_evaluations/connect_to_account
+      parent: llm_obs_custom_llm_as_a_judge_evaluations
+      identifier: llm_obs_custom_llm_as_a_judge_evaluations_connect_to_account
+      weight: 40100
     - name: Template Evaluations
       url: llm_observability/evaluations/custom_llm_as_a_judge_evaluations/template_evaluations
       parent: llm_obs_custom_llm_as_a_judge_evaluations
@@ -6877,11 +6909,11 @@ menu:
       parent: cloudprem
       identifier: cloudprem_configure
       weight: 5
-    - name: Retention Policy
-      url: /cloudprem/configure/retention
+    - name: Indexes
+      url: /cloudprem/configure/indexes
       parent: cloudprem_configure
-      identifier: cloudprem_configure_retention_policy
-      weight: 501
+      identifier: cloudprem_configure_indexes
+      weight: 500
     - name: Pipelines
       url: /cloudprem/configure/pipelines
       parent: cloudprem_configure
@@ -8799,7 +8831,7 @@ menu:
       parent: rum
       weight: 13
     - name: Product Analytics
-      url: product_analytics
+      url: product_analytics/
       pre: product-analytics
       identifier: product_analytics
       parent: digital_experience_heading
@@ -8850,30 +8882,31 @@ menu:
       identifier: pa_profiles
       weight: 4
     - name: Experiments
-      url: product_analytics/experimentation/
-      parent: product_analytics
+      url: experiments/
+      pre: experiment-wui
+      parent: digital_experience_heading
       identifier: pa_experiments
-      weight: 5
+      weight: 50000
     - name: Define Metrics
-      url: product_analytics/experimentation/defining_metrics
+      url: experiments/defining_metrics
       parent: pa_experiments
       identifier: pa_experiments_metrics
-      weight: 501
+      weight: 1
     - name: Reading Experiment Results
-      url: product_analytics/experimentation/reading_results
+      url: experiments/reading_results
       parent: pa_experiments
       identifier: pa_experiments_results
-      weight: 502
+      weight: 2
     - name: Minimum Detectable Effects
-      url: product_analytics/experimentation/minimum_detectable_effect
+      url: experiments/minimum_detectable_effect
       parent: pa_experiments
       identifier: pa_experiments_mde
-      weight: 503
+      weight: 3
     - name: Troubleshooting
-      url: product_analytics/experimentation/troubleshooting
+      url: experiments/troubleshooting
       parent: pa_experiments
       identifier: pa_experiments_troubleshooting
-      weight: 504
+      weight: 4
     - name: Guides
       url: product_analytics/guide/
       parent: product_analytics
