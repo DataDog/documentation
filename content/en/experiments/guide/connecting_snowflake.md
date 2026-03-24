@@ -12,9 +12,9 @@ further_reading:
 
 ## Overview
 
-Warehouse-native experiment analysis lets you run statistical computations directly in your Snowflake data warehouse.
+Warehouse-native experiment analysis lets you run statistical computations directly in your data warehouse.
 
-To set this up, connect a Snowflake service account to Datadog and configure your experiment settings. This guide covers:
+To set this up for Snowflake, connect a Snowflake service account to Datadog and configure your experiment settings. This guide covers:
 
 - [Preparing a Snowflake service account](#step-1-prepare-the-snowflake-service-account)
 - [Connecting it to Datadog](#step-2-connect-snowflake-to-datadog)
