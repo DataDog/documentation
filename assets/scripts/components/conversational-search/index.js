@@ -474,18 +474,39 @@ class ConversationalSearch {
         }
     }
 
+    addLoadingIndicator() {
+        const emptyState = this.messagesContainer.querySelector('.conv-search-empty-state');
+        if (emptyState) emptyState.remove();
+
+        const wrapper = document.createElement('div');
+        wrapper.className = 'conv-search-message conv-search-message-assistant conv-search-loading-state';
+
+        const indicator = document.createElement('div');
+        indicator.className = 'conv-search-loading-indicator';
+        indicator.innerHTML =
+            '<span class="conv-search-loading-spinner"></span>' +
+            `<span class="conv-search-status-text">${LOADING_MESSAGES[0]}</span>`;
+
+        wrapper.appendChild(indicator);
+        this.messagesContainer.appendChild(wrapper);
+        this.scrollToBottom(true);
+
+        return wrapper;
+    }
+
     async runFetchConversation(query, responseContainer) {
+        const loadingWrapper = responseContainer;
+        responseContainer.closest('.conv-search-message')?.remove();
+
         this.abortController = new AbortController();
         const startTime = Date.now();
 
-        let msgIndex = 0;
-        responseContainer.innerHTML =
-            `<span class="conv-search-status-text">${LOADING_MESSAGES[0]}</span>` +
-            '<span class="conv-search-cursor"></span>';
+        const loadingState = this.addLoadingIndicator();
 
+        let msgIndex = 0;
         const statusInterval = setInterval(() => {
             if (msgIndex < LOADING_MESSAGES.length - 1) msgIndex++;
-            const el = responseContainer.querySelector('.conv-search-status-text');
+            const el = loadingState.querySelector('.conv-search-status-text');
             if (el) el.textContent = LOADING_MESSAGES[msgIndex];
         }, 3000);
 
@@ -500,6 +521,7 @@ class ConversationalSearch {
             });
         } finally {
             clearInterval(statusInterval);
+            loadingState.remove();
         }
 
         const conversation = response?.conversation || response?.results?.[0]?.conversation;
@@ -508,13 +530,15 @@ class ConversationalSearch {
         }
 
         const answer = conversation?.answer || '';
+        const realContainer = this.addStreamingMessage();
+
         if (answer) {
-            responseContainer.innerHTML = renderMessageWithSources(answer, {
+            realContainer.innerHTML = renderMessageWithSources(answer, {
                 attachTooltips,
                 buildSourceCards
             });
-            injectCodeCopyButtons(responseContainer, this.ctx);
-            addMessageActions(responseContainer.parentElement, query, answer, this.ctx);
+            injectCodeCopyButtons(realContainer, this.ctx);
+            addMessageActions(realContainer.parentElement, query, answer, this.ctx);
             this.scrollToBottom();
 
             this.log('Conversational Search Response', {
@@ -527,7 +551,7 @@ class ConversationalSearch {
                 }
             });
         } else {
-            responseContainer.textContent = 'No response received. Please try again.';
+            realContainer.textContent = 'No response received. Please try again.';
         }
     }
 }

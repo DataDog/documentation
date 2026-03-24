@@ -1,4 +1,4 @@
-// Inline reference chips
+// Inline reference chips (within response text)
 .conv-search-source-ref-wrap {
     position: relative;
     display: inline;
@@ -9,30 +9,32 @@
     align-items: center;
     justify-content: center;
     margin: 0 2px;
-    min-width: 20px;
-    height: 20px;
-    padding: 0 5px;
-    border: 1px solid rgba(231, 231, 231, 0.883);
-    border-radius: 5px;
-    background: rgba(0, 0, 0, 0.04);
-    color: #71717a;
+    min-width: 16px;
+    height: 16px;
+    padding: 0 3px;
+    border: none;
+    border-radius: 4px;
+    background: $conv-primary-200;
+    color: #000;
     cursor: pointer;
     vertical-align: baseline;
-    font-size: 12px;
-    font-weight: 600;
-    line-height: 20px;
+    font-family: 'Roboto Mono', monospace;
+    font-size: 10px;
+    font-weight: 400;
+    line-height: 14px;
     text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.2px;
     position: relative;
     top: -1px;
-    transition: background 0.15s ease, color 0.15s ease;
+    transition: background 0.15s ease;
 
     &:hover {
-        background: rgba(0, 0, 0, 0.10);
-        color: #3f3f46;
+        background: $conv-primary-300;
     }
 
     &:focus-visible {
-        outline: 2px solid rgba(0, 0, 0, 0.12);
+        outline: 2px solid rgba($conv-search-purple, 0.3);
         outline-offset: 1px;
     }
 }
@@ -58,7 +60,6 @@
     display: none;
     pointer-events: auto;
 
-    // Invisible bridge above tooltip to keep hover alive during mouse travel
     &::after {
         content: '';
         position: absolute;
@@ -98,7 +99,7 @@
         word-break: break-word;
 
         &::before {
-            content: '↗';
+            content: '\2197';
             flex-shrink: 0;
             display: flex;
             align-items: center;
@@ -117,32 +118,38 @@
     }
 }
 
+// Source cards section (below response text)
 .conv-search-sources {
-    margin-top: 20px;
+    margin-top: 28px;
     padding-top: 0;
+
+    @media (max-width: 640px) {
+        margin-top: 16px;
+    }
 }
 
 .conv-search-sources-title {
-    margin: 0 0 8px;
-    font-size: 12px;
-    font-weight: 600;
-    color: $conv-search-text-muted;
-    letter-spacing: 0.02em;
+    margin: 0 0 16px;
+    font-size: 20px;
+    font-weight: 700;
+    color: $conv-neutral-700;
+    line-height: 20px;
+
+    @media (max-width: 640px) {
+        font-size: 16px;
+        line-height: 16px;
+        margin-bottom: 16px;
+    }
 }
 
 .conv-search-sources-cards {
     display: flex;
-    gap: 8px;
-    overflow-x: auto;
-    padding-bottom: 4px;
+    flex-wrap: wrap;
+    gap: 16px;
 
-    &::-webkit-scrollbar {
-        height: 3px;
-    }
-
-    &::-webkit-scrollbar-thumb {
-        background: rgba(0, 0, 0, 0.08);
-        border-radius: 2px;
+    @media (max-width: 640px) {
+        flex-direction: column;
+        gap: 8px;
     }
 }
 
@@ -150,27 +157,29 @@
     position: relative;
     display: flex;
     align-items: center;
-    gap: 10px;
-    padding: 10px 12px;
-    width: 240px;
-    min-width: 240px;
-    border: 1px solid $conv-search-border;
-    border-radius: 10px;
-    background: $conv-search-bg;
+    gap: 6px;
+    padding: 7px 16px;
+    height: 36px;
+    flex: 0 1 calc(33.33% - 11px);
+    min-width: 0;
+    border: 1px solid $conv-neutral-400;
+    border-radius: 20px;
+    background: transparent;
     cursor: pointer;
-    transition: border-color 0.15s ease;
+    transition: border-color 0.15s ease, background 0.15s ease;
 
     &:hover {
-        border-color: rgba($conv-search-purple, 0.35);
+        background: $conv-neutral-200;
     }
 
     a {
         flex: 1;
         min-width: 0;
-        color: inherit;
+        color: #000;
         text-decoration: none;
-        font-size: 14px;
-        line-height: 1.4;
+        font-size: 17px;
+        font-weight: 400;
+        line-height: 22px;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -180,19 +189,18 @@
             position: absolute;
             inset: 0;
         }
+
+        @media (max-width: 640px) {
+            font-size: 13px;
+            line-height: 18px;
+        }
     }
-}
 
-.conv-search-source-card-arrow {
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    margin-left: auto;
-    color: #bbb;
-
-    svg {
-        width: 16px;
-        height: 16px;
+    @media (max-width: 640px) {
+        flex: none;
+        width: auto;
+        height: 36px;
+        gap: 2px;
     }
 }
 
@@ -201,13 +209,32 @@
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    min-width: 22px;
-    height: 22px;
-    padding: 0 6px;
-    border-radius: 5px;
-    background: rgba(0, 0, 0, 0.06);
-    color: #555;
-    font-size: 12px;
-    font-weight: 600;
-    line-height: 22px;
+    width: 16px;
+    height: 16px;
+    border-radius: 4px;
+    background: $conv-primary-200;
+    color: #000;
+    font-family: 'Roboto Mono', monospace;
+    font-size: 10px;
+    font-weight: 400;
+    line-height: 14px;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.2px;
+
+    @media (max-width: 640px) {
+        border-radius: 2px;
+    }
+}
+
+.conv-search-source-card-arrow {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    color: $conv-neutral-500;
+
+    svg {
+        width: 16px;
+        height: 16px;
+    }
 }
