@@ -12,11 +12,17 @@ further_reading:
 
 ## Overview
 
-This guide walks through connecting Snowflake to Datadog to enable warehouse-native experiment analysis in three steps: preparing a Snowflake service account, connecting it to Datadog, and configuring experiment settings.
+Warehouse-native experiment analysis lets you run statistical computations directly in your Snowflake data warehouse.
 
-The examples in this guide use `datadog_experiments_user` and `datadog_experiments_role` as the service account's user and role. Replace these with your own values.
+To set this up, connect a Snowflake service account to Datadog and configure your experiment settings. This guide covers:
+
+- [Preparing a Snowflake service account](#step-1-prepare-the-snowflake-service-account)
+- [Connecting it to Datadog](#step-2-connect-snowflake-to-datadog)
+- [Configuring experiment settings](#step-3-configure-experiment-settings)
 
 ## Step 1: Prepare the Snowflake service account
+
+The examples in this guide use `datadog_experiments_user` and `datadog_experiments_role` as the service account's user and role. Replace these with your own values.
 
 ### Create a dedicated service user and role in Snowflake
 
