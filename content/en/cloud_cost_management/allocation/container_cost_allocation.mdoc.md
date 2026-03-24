@@ -280,6 +280,52 @@ Costs are allocated into the following spend types:
 
 {% /if %}
 
+## Cluster idle allocation
+
+Cluster idle costs (identified by `allocated_spend_type:cluster_idle`) represent the cost of resources not reserved by any workload in a cluster. By default, these costs are redistributed to workloads proportionally based on their usage costs (`allocated_spend_type:usage`), using the following destination tags:
+
+- `kube_cluster_name`
+- `kube_namespace`
+- `kube_deployment`
+- `kube_replica_set`
+- `kube_stateful_set`
+- `kube_cronjob`
+- `kube_daemon_set`
+
+To configure cluster idle allocation, go to the [Cluster Idle Allocation settings][22] page and follow these steps:
+
+1. Click **Enable cluster idle allocation**.
+1. Select a redistribution level:
+
+   **Cluster**
+   : Redistributes idle costs at the cluster level. Optionally, select up to two additional destination tags.
+
+   **Node**
+   : Redistributes idle costs at the node level. Datadog also allocates to the `kube_node_name` tag. Optionally, select up to two additional destination tags.
+
+   **Nodepool**
+   : Redistributes idle costs at the nodepool level. Select a nodepool tag.
+
+1. Select destination tags.
+1. Click **Save**.
+
+To disable cluster idle allocation, return to the [Cluster Idle Allocation settings][22] page and click **Disable**.
+
+After redistribution, the following tags are available on your dataset:
+
+| Tag | Description |
+|-----|-------------|
+| `cluster_idle_redistribution_grain` | The redistribution grain used: `NODE`, `NODEPOOL`, or `CLUSTER`. |
+| `cluster_idle_source` | How the idle cost was redistributed. |
+
+Possible values for `cluster_idle_source`:
+
+| Value | Description |
+|-------|-------------|
+| `proportional_usage` | Redistributed to a specific workload based on its usage proportion. |
+| `aggregated_minor_usage` | Redistributed to aggregated minor workloads based on their combined usage proportion. |
+| `unmatched_usage` | Could not redistribute because no usage was found in the pool. |
+
 ## Understanding resources
 
 Depending on the cloud provider, certain resources may or may not be available for cost allocation.
@@ -457,3 +503,4 @@ In addition to Kubernetes pod and Kubernetes node tags, the following non-exhaus
 [19]: https://cloud.google.com/kubernetes-engine/docs/how-to/cost-allocations#limitations
 [20]: https://cloud.google.com/kubernetes-engine/docs/how-to/cost-allocations#enable_breakdown
 [21]: https://app.datadoghq.com/integrations/amazon-web-services
+[22]: https://app.datadoghq.com/cost/settings/cluster-idle-allocation
