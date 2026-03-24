@@ -26,7 +26,7 @@ Ask Bits Assistant questions like:
 - `Summarize high severity incidents that have occurred in the last day`
 - `Which services have the most errors right now`
 - `Show me what changed in alerts for the checkout service in the last 24 hours`
-- `What's causing 400 errors on the checkout endpoint in the last hour?`
+- `What's causing 400 errors on the checkout endpoint in the last hour`
 - `How do I configure log collection for the Datadog Agent?`
 - `Do we already have monitors for high latency on the payments service?`
 - `Summarize the key findings from Kubernetes overview dashboard.`
