@@ -20,13 +20,13 @@ The Public Artifact Vulnerabilities page lets you view vulnerability and respons
 
 The Public Artifact Vulnerabilities page is accessible through the Help page under **Public Artifact Vulnerabilities**.
 
-![Help page with Public Artifact Vulnerabilities link](/images/data_security/public_artifact_vulnerabilities/help-page.png)
+{{< img src="data_security/public_artifact_vulnerabilities/help-page.png" alt="Help page with Public Artifact Vulnerabilities link" style="width:100%;" >}}
 
-![Public Artifact Vulnerabilities page](/images/data_security/public_artifact_vulnerabilities/public-artifact-vulnerabilities-page.png)
+{{< img src="data_security/public_artifact_vulnerabilities/public-artifact-vulnerabilities-page.png" alt="Public Artifact Vulnerabilities page" style="width:100%;" >}}
 
 ## Using the page
 
-### 1. Look up by image and version (artifact-centric)
+### Look up by image and version (artifact-centric)
 
 Use this to see all vulnerabilities for a specific artifact and version (for example, the Datadog Agent image version 7.52.0).
 
@@ -47,9 +47,9 @@ The table loads and shows one row per vulnerability affecting that image/version
 
 You can use the search/filter box above the table to filter these rows by keyword.
 
-![Look up by image and version](/images/data_security/public_artifact_vulnerabilities/by-image-version.png)
+{{< img src="data_security/public_artifact_vulnerabilities/by-image-version.png" alt="Look up by image and version" style="width:100%;" >}}
 
-### 2. Look up by CVE (CVE-centric)
+### Look up by CVE (CVE-centric)
 
 Use this to find which artifacts/versions are affected and the status for each.
 
@@ -71,7 +71,7 @@ The table switches to CVE mode and shows one row per (CVE, artifact, version, st
 
 After you search for a CVE, the table filter clears so all returned rows are visible. You can type in the search box again to filter the current result set.
 
-![Look up by CVE](/images/data_security/public_artifact_vulnerabilities/by-cve.png)
+{{< img src="data_security/public_artifact_vulnerabilities/by-cve.png" alt="Look up by CVE" style="width:100%;" >}}
 
 ## Available artifacts (images)
 
