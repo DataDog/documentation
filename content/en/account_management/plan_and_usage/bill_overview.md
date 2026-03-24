@@ -25,7 +25,7 @@ The [**Bill Overview** page][1] gives administrators a single view of Datadog co
 The following filters apply to the **Bill Overview** page:
 
 - **Product Category**: Filter all views by broader product family, such as  Infrastructure, APM, Logs, Security, or AI/ML.
-- **Billing Dimension**: Filter to a specific billing dimension.
+- **Billing Dimension**: Filter to a specific billing or metering dimension (for example, Infra Hosts, Indexed Logs, or Synthetic Browser Tests).
 - **Sub-Org**: Filter to a specific child organization.
 - **Group by Sub-Org**: Toggle to group costs by sub-organization.
 - **Time range**: Select a billing period. Use the backward and forward arrows to navigate from month to month.
