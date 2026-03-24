@@ -32,7 +32,7 @@ algolia:
 
 Tags are a way of adding dimensions to Datadog telemetries so they can be filtered, aggregated, and compared in Datadog visualizations. [Using tags][1] enables you to observe aggregate performance across several hosts and (optionally) narrow the set further based on specific elements. In summary, tagging is a method to observe aggregate datapoints.
 
-A tag can be formatted as `<value>` or `<key>:<value>`. When using a `<key>:<value>` pair:
+A tag can be formatted as `<key>:<value>` or `<value>`. It is recommended to use the `<key>:<value>` format, as it is often semantically clearer and allows for richer querying capabilities (for example, grouping by key). When using a `<key>:<value>` pair:
 
 - The tag **key** is the identifier. Commonly used tag keys are `env`, `instance`, and `name`.
 - The tag **value** is the specific data or information associated with the key. Tag values are not unique per resource and can be used across many resources in a `<key>:<value>` pair.
@@ -56,7 +56,7 @@ Because containers and cloud environments regularly churn through hosts, using t
 
 Below are Datadog's tagging requirements:
 
-- Tags must **start with a letter** (this applies regardless of whether the tag uses the format `<value>` or `<key>:<value>`). After the leading letter, the tag string may contain the characters listed below:
+- Tags must **start with a letter** (this applies regardless of whether the tag uses the format `<key>:<value>` or `<value>`). After the leading letter, the tag string may contain the characters listed below:
 
     - Letters (all Unicode letters are supported---for example, a, ó, 気, 녕, ك, and ดี)
     - Numbers
