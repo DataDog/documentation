@@ -1,0 +1,11 @@
+.metrics-table-wrapper {
+  table {
+    table-layout: auto;
+
+    td,
+    th {
+      word-break: break-word;
+      overflow-wrap: break-word;
+    }
+  }
+}
