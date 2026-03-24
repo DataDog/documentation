@@ -33,4 +33,5 @@ To get started with RUM for Browser, create an application and configure the Bro
   {{< nextlink href="/real_user_monitoring/application_monitoring/browser/tracking_user_actions">}}<u>Tracking User Actions</u>: Track and analyze user interactions in your browser application with automatic click detection and action performance insights.{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/application_monitoring/browser/frustration_signals">}}<u>Frustration Signals</u>: Identify user friction points with RUM frustration signals (including rage clicks, dead clicks, and error clicks) to improve user experience and reduce abandonment.{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/application_monitoring/browser/troubleshooting">}}<u>Troubleshooting</u>: Common troubleshooting Browser SDK issues.{{< /nextlink >}}
+  {{< nextlink href="/real_user_monitoring/application_monitoring/browser/build_plugins">}}<u>Build Plugins</u>: Integrate Datadog build plugins with your JavaScript bundler to automate source map uploads, action name deobfuscation, and other RUM tasks at build time.{{< /nextlink >}}
 {{< /whatsnext >}}

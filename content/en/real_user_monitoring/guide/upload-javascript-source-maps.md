@@ -19,6 +19,8 @@ If your front-end JavaScript source code is minified, upload your source maps to
 
 <div class="alert alert-info">Only errors collected by <a href="/error_tracking/">Error Tracking</a>, <a href="/real_user_monitoring/">Real User Monitoring (RUM)</a>, and logs from <a href="/logs/log_collection/javascript/">Browser Logs Collection</a> can be unminified.</div>
 
+<div class="alert alert-info">To automate source map uploads as part of your build process, see <a href="/real_user_monitoring/application_monitoring/browser/build_plugins/source_maps">Build Plugins: Source Maps</a>.</div>
+
 ## Instrument your code
 
 Configure your JavaScript bundler such that when minifying your source code, it generates source maps that directly include the related source code in the `sourcesContent` attribute.
