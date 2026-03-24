@@ -39,7 +39,7 @@ Bits Assistant uses your Datadog role to fetch data, so it can only access the r
 
 ### Skills
 
-Bits Assistant also includes skills that help with specialized tasks.
+Bits Assistant includes skills for specialized tasks.
 
 **Dashboards**
 
