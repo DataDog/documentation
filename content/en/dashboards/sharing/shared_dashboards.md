@@ -155,6 +155,10 @@ The following widget types are not supported on shared dashboards. Widgets of th
 
 Shared dashboards support a limited number of timeframe options and do not allow timeframe scrubbing or custom timeframes.
 
+### IP address restrictions
+
+You can restrict access to shared dashboards based on IP address. Email [Datadog support][5] to enable IP address allowlisting. After it's enabled, administrators can manage IP restrictions on the [Public Sharing Settings page][3].
+
 ## Edit Shared Dashboards
 
 <div class="alert alert-danger">Any changes to a dashboard's content or layout are instantly reflected in the shared version. Be cautious when editing to avoid unintentionally sharing private data.</div>
@@ -182,3 +186,4 @@ View all shared dashboards in your organization and your settings on the [Shared
 [2]: https://app.datadoghq.com/dashboard/shared
 [3]: https://app.datadoghq.com/organization-settings/public-sharing
 [4]: /account_management/rbac/data_access/#dashboards-and-notebooks
+[5]: /help/
