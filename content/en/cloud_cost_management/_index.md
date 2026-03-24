@@ -127,6 +127,10 @@ Monitor the freshness and processing status of your cloud cost data on the **Clo
 
 Use this page to troubleshoot data delays or confirm that recent tag pipelines and cost allocation changes have taken effect.
 
+## AI
+
+Use [Bits AI to investigate cost changes][10] and identify the teams, services, or resources driving unexpected spend. You can also query cloud cost data through the [Datadog MCP Server][11] from external AI agents such as Cursor and Claude Code.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -140,3 +144,5 @@ Use this page to troubleshoot data delays or confirm that recent tag pipelines a
 [7]: https://www.datadoghq.com/product-preview/data-access-control/
 [8]: /cloud_cost_management/datadog_costs
 [9]: /cloud_cost_management/setup/permissions
+[10]: /cloud_cost_management/ai/
+[11]: /bits_ai/mcp_server/
