@@ -104,7 +104,7 @@ After connecting your Snowflake account, configure the experiment settings in [D
 1. Select the **Warehouse Connections** tab.
 1. Click **Connect a data warehouse**. If you already have a warehouse connected, click **Edit** instead.
 1. Select the **Snowflake** tile.
-1. Enter the **Account**, **Role**, **Warehouse**, **Database**, and **Schema** you configured in [Step 1](#step-1-prepare-the-snowflake-service-account).
+1. Enter the **Account**, **Role**, **Warehouse**, **Database**, and **Schema** you configured in [Step 1](#step-1-prepare-the-snowflake-service-account). If your database and schema do not appear in the dropdown, type them in to add them.
 1. Click **Save**.
 
 {{< img src="/product_analytics/experiment/guide/snowflake_experiment_setup.png" alt="The Edit Data Warehouse modal with Snowflake selected, showing two sections: Select Snowflake Account with fields for Account, Role, and Warehouse, and Select Database and Schema with fields for Database and Schema." style="width:90%;" >}}
