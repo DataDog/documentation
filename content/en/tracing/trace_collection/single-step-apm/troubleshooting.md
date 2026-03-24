@@ -136,7 +136,7 @@ Datadog maintains an internal deny list to prevent injection into certain proces
 #### Linux workload selection
 
 {{< callout url="https://docs.google.com/forms/d/e/1FAIpQLSdMu6WAsUCD3djkl_oN0Qh7fQmBCiKYyUvuqlYWRyObebAc6Q/viewform" header="Join the Preview!">}}
-Instrumentation rules are available for Linux-based apps through a limited availability preview. To configure allow or deny rules for process injection, sign up for preview access.
+Workload selection is available for Linux-based apps through a limited availability preview. To configure allow or deny rules for process injection, sign up for preview access.
 {{< /callout >}}
 
 #### Kubernetes instrumentation rules
