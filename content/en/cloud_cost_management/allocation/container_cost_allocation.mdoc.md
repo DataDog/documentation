@@ -298,15 +298,15 @@ To configure cluster idle allocation, go to the [Cluster Idle Allocation setting
 1. Select a redistribution level:
 
    **Cluster**
-   : Redistributes idle costs at the cluster level. Optionally, select up to two additional destination tags.
+   : Redistributes idle costs at the cluster level.
 
    **Node**
-   : Redistributes idle costs at the node level. Datadog also allocates to the `kube_node_name` tag. Optionally, select up to two additional destination tags.
+   : Redistributes idle costs at the node level. Datadog also allocates to the `kube_node_name` tag.
 
    **Nodepool**
    : Redistributes idle costs at the nodepool level. Select a nodepool tag.
 
-1. Select destination tags.
+1. Optionally, select up to two additional destination tags.
 1. Click **Save**.
 
 To disable cluster idle allocation, return to the [Cluster Idle Allocation settings][22] page and click **Disable**.
