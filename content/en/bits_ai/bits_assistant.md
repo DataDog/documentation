@@ -63,7 +63,7 @@ Investigate cost changes and identify the teams or resources responsible.
 
 Example prompts:
 - `Investigate why EC2 costs changed between January and February`
-- `Which teams are responsible for the highest S3 storage costs this month?`
+- `Which teams are responsible for the highest S3 storage costs this month`
 
 ### Web Application
 
