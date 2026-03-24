@@ -99,11 +99,11 @@ Click **View Details** on a Trends card, or click any row in the Product List ta
 
 ### Cost Overview
 
-- **Total Cost**: Total cost billed to date for the selected period.
-- **Projected Cost Change**: The projected dollar and percentage change vs. the prior period.
-- **Projected EOM**: Estimated total cost at end of month.
+- **Total Cost**: Total cost billed to date for the selected period
+- **Projected Cost Change**: The projected dollar and percentage change vs. the prior period
+- **Projected EOM**: Estimated total cost at end of month
 - **Daily Cost** bar chart: Day-by-day cost for the previous and current month, with the current month highlighted. Hover over any bar to see the cost for that day. Toggle **Show Usage Charges Only** to isolate on-demand charges.
-- **Drilldown in Cloud Cost**: Dig deeper into your costs with Cloud Cost Management, pre-filtered to the selected billing dimension.
+- **Drilldown in Cloud Cost**: Click to open Cloud Cost Management, pre-filtered to the selected billing dimension.
 
 ### Usage Overview
 
