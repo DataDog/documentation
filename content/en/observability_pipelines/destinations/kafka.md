@@ -56,7 +56,7 @@ Toggle the switch to enable **TLS**. The following certificate and key files are
 1. In the **Compression Algorithm** dropdown menu, select a compression algorithm (**gzip**, **zstd**, **lz4**, or **snappy**).
 1. (Optional) Select a **Compression Level** in the dropdown menu. If the level is not specified, the algorithm's default level is used.
 
-##### Buffering options
+##### Buffering
 
 {{% observability_pipelines/destination_buffer %}}
 
@@ -141,9 +141,9 @@ See the [Observability Pipelines Metrics][8] for a full list of available health
 
 A batch of events is flushed when one of these parameters is met. See [event batching][9] for more information.
 
-| Max Events     | Max Bytes       | Timeout (seconds)   |
-|----------------|-----------------|---------------------|
-| 10,000         | 1,000,000       | 1                   |
+| Maximum Events | Maximum Size (MB) | Timeout (seconds)   |
+|----------------|-------------------|---------------------|
+| 10,000         | 1                 | 1                   |
 
 [1]: https://clickhouse.com/docs/engines/table-engines/integrations/kafka
 [2]: https://docs.snowflake.com/en/user-guide/kafka-connector

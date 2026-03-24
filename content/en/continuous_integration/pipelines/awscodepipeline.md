@@ -126,7 +126,7 @@ If you are using [Test Optimization][8] and your pipeline contains one or more [
 
 The AWS CodePipeline integration supports correlating **CodeBuild** actions with their respective job and pipeline spans. To enable log collection for your CodeBuild actions, see the [AWS log forwarding guide][16].
 
-<div class="alert alert-warning">Log correlation for CodeBuild actions requires the CodeBuild project to have the default CloudWatch log group and log stream names.</div>
+<div class="alert alert-warning">If you use custom CloudWatch log group or log stream names for your CodeBuild actions, enable <a href="/integrations/amazon_web_services/#resource-collection">Cloud Resource Collection</a> in the AWS integration so that Datadog can resolve the custom log group and stream configuration.</div>
 
 Logs are billed separately from CI Visibility. Log retention, exclusion, and indexes are configured in Logs Settings. Logs for AWS CodeBuild can be identified by the `source:codebuild` and `sourcecategory:aws` tags.
 

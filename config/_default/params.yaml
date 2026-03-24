@@ -167,36 +167,42 @@ allowedRegions:
     domain: datadoghq.com
     exact_domains:
       - "navy.oncall.datadoghq.com"
+      - "browser-intake-datadoghq.com"
   - name: US3
     value: us3
     weight: 13
     domain: us3.datadoghq.com
     exact_domains:
       - "teal.oncall.datadoghq.com"
+      - "browser-intake-us3-datadoghq.com"
   - name: US5
     value: us5
     weight: 15
     domain: us5.datadoghq.com
     exact_domains:
       - "coral.oncall.datadoghq.com"
+      - "browser-intake-us5-datadoghq.com"
   - name: EU
     value: eu
     weight: 20
     domain: datadoghq.eu
     exact_domains:
-       "beige.oncall.datadoghq.eu"
+      - "beige.oncall.datadoghq.eu"
+      - "browser-intake-datadoghq.eu"
   - name: AP1
     value: ap1
     weight: 25
     domain: ap1.datadoghq.com
     exact_domains:
       - "saffron.oncall.datadoghq.com"
+      - "browser-intake-ap1-datadoghq.com"
   - name: AP2
     value: ap2
     weight: 30
     domain: ap2.datadoghq.com
     exact_domains:
       - "lava.oncall.datadoghq.com"
+      - "browser-intake-ap2-datadoghq.com"
   - name: US1-FED
     value: gov
     weight: 35
@@ -303,7 +309,7 @@ unsupported_sites:
   eng_reports: [gov]
   events_from_sns_emails: [gov]
   exception_replay: [gov]
-  experimentation: [gov]
+  experiments: [gov]
   feature_flags: [gov]
   forwarding_audit_events: [gov]
   getting_started_feature_flags: [gov]
@@ -328,6 +334,7 @@ unsupported_sites:
   network_config_management: [gov]
   observability_pipelines: [gov]
   on-call: [gov]
+  oracle_fusion_integration_setup: [gov]
   overview_pages: [gov]
   pr_gates: [gov]
   resource_based_sampling: [gov]
