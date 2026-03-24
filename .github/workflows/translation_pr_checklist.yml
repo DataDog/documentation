@@ -1,0 +1,34 @@
+name: Add writer checklist to translation PRs
+
+on:
+  pull_request:
+    types: [opened]
+
+jobs:
+  add-checklist:
+    if: github.actor == 'webops-guacbot[bot]'
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+      contents: read
+    steps:
+      - name: Append writer checklist to PR body
+        uses: actions/github-script@d7906e4ad0b1822421a7e6a35d5ca353c962f410 # v6.4.1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const currentBody = context.payload.pull_request.body || '';
+            const checklist = `
+
+            ---
+
+            ## Writer checklist
+
+            - [ ] **If the build fails:** Build the translated docs locally to troubleshoot — there may be multiple errors, and fixing them one at a time through the preview build is slow. Fix issues directly on the branch. After merging, file a [LCLZTN Jira ticket](https://datadoghq.atlassian.net/jira/core/projects/LCLZTN/forms/form/direct/8484751061275544/31561) with a link to the merged PR, a description of what needs updating in Phrase, and the specific affected file(s).`;
+
+            await github.rest.pulls.update({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.payload.pull_request.number,
+              body: currentBody + checklist
+            });
