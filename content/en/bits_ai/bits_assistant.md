@@ -24,7 +24,7 @@ Bits Assistant is an AI-powered companion that helps you search and act across y
 
 Ask Bits Assistant questions like:
 - `Summarize high severity incidents that have occurred in the last day`
-- `Which services have the most errors right now?`
+- `Which services have the most errors right now`
 - `Show me what changed in alerts for the checkout service in the last 24 hours.`
 - `What's causing 400 errors on the checkout endpoint in the last hour?`
 - `How do I configure log collection for the Datadog Agent?`
