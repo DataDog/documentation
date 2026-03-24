@@ -41,7 +41,7 @@ To customize SDK versions:
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
 1. In Datadog, go to the [Install the Datadog Agent on Linux][15] page.
-1. After you turn on **APM Instrumentation**, click **Customize library versions**.
+1. After you turn on **APM Instrumentation**, click **Customize Library Versions**.
 
    {{< img src="tracing/trace_collection/customize_library_versions.png" alt="The 'Customize library versions' drop-down in the instructions for installing the Datadog Agent on Linux" style="width:100%;" >}}
 
