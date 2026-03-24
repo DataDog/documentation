@@ -21,7 +21,7 @@ Datadog Kubernetes Cluster Autoscaling is in Preview. Use this form to submit yo
 
   By default, all Datadog admin users have Autoscaling Manage, and all Datadog users have read access to view recommendations and reporting.
 
-  To grant Autoscaling Manage to an additional standard or custom role user, add the Autoscaling Manage permission to a custom role. See [Datadog Role Permissions][3] for instructions.
+  To grant Autoscaling Manage to an additional standard or custom role user, see [Datadog Role Permissions][3] for instructions.
 
 ## Setup
 
