@@ -75,9 +75,7 @@ To set up the Microsoft Sentinel destination in Observability Pipelines:
 1. Enter the full table name to which you are sending logs. An example table name: `Custom-MyOPWLogs_CL`.
 1. Enter the Data Collection Rule (DCR) immutable ID, such as `dcr-000a00a000a00000a000000aa000a0aa`.
 
-#### Optional settings
-
-##### Buffering options
+#### Optional buffering
 
 {{% observability_pipelines/destination_buffer %}}
 
@@ -110,9 +108,9 @@ To set up the Microsoft Sentinel destination in Observability Pipelines:
 
 A batch of events is flushed when one of these parameters is met. See [event batching][2] for more information.
 
-| Max Events     | Max Bytes       | Timeout (seconds)   |
-|----------------|-----------------|---------------------|
-| None           | 10,000,000       | 1                   |
+| Maximum Events | Maximum Size (MB) | Timeout (seconds)   |
+|----------------|-------------------|---------------------|
+| None           | 10                | 1                   |
 
 [1]: https://app.datadoghq.com/observability-pipelines
 [2]: /observability_pipelines/destinations/#event-batching

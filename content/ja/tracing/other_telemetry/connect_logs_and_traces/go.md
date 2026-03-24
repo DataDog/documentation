@@ -21,6 +21,8 @@ title: Go ログとトレースの相関付け
 type: multi-code-lang
 ---
 
+{{% tracing-go-v2 %}}
+
 ## 手動挿入
 
 Go トレーサーは、スパン情報と、`%v` 形式の指定子を使ったログステートメントの印刷を可能にします。
@@ -31,15 +33,15 @@ package main
 import (
     "net/http"
 
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+    "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
-    // /posts URL にウェブリクエストようのスパンを作成。
+    // /posts URL への Web リクエスト用に span を作成します。
     span := tracer.StartSpan("web.request", tracer.ResourceName("/posts"))
     defer span.Finish()
 
-    // スパン情報をログメッセージに付加:
+    // log メッセージに span 情報を加えます:
     log.Printf("my log message %v", span)
 }
 ```
@@ -50,8 +52,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 ## logrus ログへの注入
 
-logrus パッケージには、ログとスパンを自動的にリンクするためのフックが用意されています。
-このパッケージは Go トレーサーで利用可能です。
+logrus パッケージ用の hook が用意されており、ログと span を自動でひも付けできます。
 
 ```go
 package main
@@ -59,16 +60,16 @@ package main
 import (
     "github.com/sirupsen/logrus"
 
-    dd_logrus "gopkg.in/DataDog/dd-trace-go.v1/contrib/sirupsen/logrus"
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+    dd_logrus "github.com/DataDog/dd-trace-go/contrib/sirupsen/logrus/v2"
+    "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
 )
 
 func main() {
-    // オプション: ログ形式を変更して JSON を使用 (Go ログコレクションを参照)
+    // 任意: ログ形式を JSON に変更します (Go Log Collection を参照)。
     logrus.SetFormatter(&logrus.JSONFormatter{})
 
-    // Datadog コンテキストログフックを追加
-    logrus.AddHook(&dd_logrus.DDContextLogHook{})
+    // Datadog コンテキスト付きログ用の hook を追加
+    logrus.AddHook(&dd_logrus.DDContextLogHook{}) 
 
     // ...
 }
@@ -86,3 +87,4 @@ func main() {
 
 [1]: /ja/logs/log_collection/go/#configure-your-logger
 [2]: /ja/tracing/troubleshooting/correlated-logs-not-showing-up-in-the-trace-id-panel/?tab=custom
+[3]: /ja/tracing/trace_collection/custom_instrumentation/go/migration
