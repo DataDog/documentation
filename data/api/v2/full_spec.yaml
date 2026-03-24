@@ -81279,9 +81279,9 @@ paths:
           appKeyAuth: []
         - AuthZ:
             - user_access_read
-      summary: Get all datasets
+      summary: Get all Data Access Control datasets
       tags:
-        - Datasets
+        - Data Access Controls
       x-menu-order: 3
       "x-permission":
         operator: OR
@@ -81332,9 +81332,9 @@ paths:
           appKeyAuth: []
         - AuthZ:
             - user_access_manage
-      summary: Create a dataset
+      summary: Create a Data Access Control dataset
       tags:
-        - Datasets
+        - Data Access Controls
       x-codegen-request-body-name: body
       x-menu-order: 1
       x-permission:
@@ -81366,9 +81366,9 @@ paths:
           appKeyAuth: []
         - AuthZ:
             - user_access_manage
-      summary: Delete a dataset
+      summary: Delete a Data Access Control dataset
       tags:
-        - Datasets
+        - Data Access Controls
       x-menu-order: 5
       "x-permission":
         operator: OR
@@ -81402,9 +81402,9 @@ paths:
           appKeyAuth: []
         - AuthZ:
             - user_access_read
-      summary: Get a single dataset by ID
+      summary: Get a Data Access Control dataset by ID
       tags:
-        - Datasets
+        - Data Access Controls
       x-menu-order: 2
       "x-permission":
         operator: OPEN
@@ -81445,9 +81445,9 @@ paths:
           appKeyAuth: []
         - AuthZ:
             - user_access_manage
-      summary: Edit a dataset
+      summary: Edit a Data Access Control dataset
       tags:
-        - Datasets
+        - Data Access Controls
       x-codegen-request-body-name: body
       x-menu-order: 4
       "x-permission":
@@ -111668,10 +111668,13 @@ tags:
       organization.
     name: Dashboard Lists
   - description: |-
-      Data Access Controls in Datadog is a feature that allows administrators and access managers to regulate
+      Manage [Data Access Controls](https://docs.datadoghq.com/account_management/rbac/data_access/)
+      programmatically using Datasets.
+
+      Data Access Controls in Datadog allows administrators and access managers to regulate
       access to sensitive data. By defining Restricted Datasets, you can ensure that only specific teams or roles can
       view certain types of telemetry (for example, logs, traces, metrics, and RUM data).
-    name: Datasets
+    name: Data Access Controls
   - description: |-
       Manage Deployment Gates using this API to reduce the likelihood and impact of incidents caused by deployments. See the [Deployment Gates documentation](https://docs.datadoghq.com/deployment_gates/) for more information.
     name: Deployment Gates
