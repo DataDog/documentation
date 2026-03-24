@@ -30,9 +30,7 @@ To set up the Worker's Google SecOps destination:
 1. Select **JSON** or **Raw** encoding in the dropdown menu.
 1. Enter the log type. See [template syntax][4] if you want to route logs to different log types based on specific fields in your logs.
 
-#### Optional settings
-
-##### Buffering options
+#### Optional buffering
 
 {{% observability_pipelines/destination_buffer %}}
 
@@ -63,9 +61,9 @@ To set up the Worker's Google SecOps destination:
 
 A batch of events is flushed when one of these parameters is met. See [event batching][2] for more information.
 
-| Max Events     | Max Bytes       | Timeout (seconds)   |
-|----------------|-----------------|---------------------|
-| None           | 1,000,000       | 15                  |
+| Maximum Events | Maximum Size (MB) | Timeout (seconds)   |
+|----------------|-------------------|---------------------|
+| None           | 1                 | 15                  |
 
 [1]: https://app.datadoghq.com/observability-pipelines
 [2]: /observability_pipelines/destinations/#event-batching
