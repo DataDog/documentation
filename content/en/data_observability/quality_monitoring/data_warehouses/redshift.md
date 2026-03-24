@@ -21,7 +21,7 @@ Datadog supports both provisioned Redshift clusters and Redshift Serverless work
 Before you begin, make sure you have:
 
 - A Redshift superuser or database user with the ability to create roles and grant privileges.
-- If your Redshift cluster or workgroup restricts network access by IP, add Datadog webhook IPs to your VPC security group inbound rules. For the list of IPs, see the `webhooks` section of {{< region-param key="ip_ranges_url" link="true" text="IP ranges list" >}}.
+- If your Redshift cluster or workgroup restricts network access by IP, add Datadog webhook IPs to your VPC security group inbound rules. For the list of IPs, see the `webhooks` section of the {{< region-param key="ip_ranges_url" link="true" text="IP ranges list" >}}.
 
 ## Set up your account in Redshift
 
@@ -143,7 +143,7 @@ To configure the Redshift integration in Datadog:
 
    {{< img src="data_observability/redshift/data_obs_redshift_on_integrations_page.png" alt="Redshift on the Settings page of Data Observability integrations" style="width:100%;" >}}
 
-3. Select either a connected AWS account or add a new AWS account.
+3. Select a connected AWS account or add a new AWS account.
 
    {{< img src="data_observability/redshift/data_obs_redshift_integration_flow.png" alt="Selecting a connected or new AWS account for the Redshift Data Observability integration." style="width:100%;" >}}
 
@@ -152,19 +152,17 @@ To configure the Redshift integration in Datadog:
 {{< tabs >}}
 {{% tab "Provisioned Cluster" %}}
 
-- **AWS account ID**: Your AWS account ID.
-- **Region**: The AWS region where your cluster is hosted (for example, `us-east-1`).
 - **Cluster identifier**: Your Redshift cluster identifier.
-- **Database**: The name of the database to connect to (defaults to `dev`).
+- **Region**: The AWS region where your cluster is hosted (for example, `us-east-1`).
 - **Database user**: The Datadog user created during setup (for example, `datadog_user`).
+- **Initial database**: The name of the database to connect to (defaults to `dev`).
 
 {{% /tab %}}
 {{% tab "Serverless" %}}
 
-- **AWS account ID**: Your AWS account ID.
+- **Workgroup name**: Your Redshift Serverless workgroup name.
 - **Region**: The AWS region where your workgroup is hosted (for example, `us-east-1`).
-- **Cluster identifier**: Your Redshift Serverless workgroup name.
-- **Database**: The name of the database to connect to (defaults to `dev`).
+- **Initial database**: The name of the database to connect to (defaults to `dev`).
 
 {{% /tab %}}
 {{< /tabs >}}
