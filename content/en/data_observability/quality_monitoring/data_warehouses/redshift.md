@@ -84,6 +84,7 @@ Grant the `datadog_role` to your IAM-mapped database user:
 
 ```sql
 GRANT ROLE datadog_role TO "IAMR:<YOUR_IAM_ROLE_NAME>";
+ALTER USER "IAMR:<YOUR_IAM_ROLE_NAME>" SYSLOG ACCESS UNRESTRICTED;
 ```
 
 {{% /tab %}}
