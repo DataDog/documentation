@@ -280,6 +280,7 @@ unsupported_sites:
   agentless_scanning: [gov] # docs page
   agentless-scanning: [gov] # api page
   amazon_event_bridge: [gov]
+  apm_processing_pipelines: [gov]
   apm_recommendations: [gov]
   app_builder: [gov]
   application_security: [gov]
