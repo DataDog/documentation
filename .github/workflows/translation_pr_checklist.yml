@@ -22,9 +22,10 @@ jobs:
 
             ---
 
-            ## Writer checklist
+            ## If the build fails:
 
-            - [ ] **If the build fails:** Build the translated docs locally to troubleshoot — there may be multiple errors, and fixing them one at a time through the preview build is slow. Fix issues directly on the branch. After merging, file a [LCLZTN Jira ticket](https://datadoghq.atlassian.net/jira/core/projects/LCLZTN/forms/form/direct/8484751061275544/31561) with a link to the merged PR, a description of what needs updating in Phrase, and the specific affected file(s).`;
+            - [ ] Build the translated docs locally to troubleshoot — there may be multiple errors, and fixing them one at a time through the preview build is slow. Fix issues directly on the branch. 
+            - [ ] After merging, file a [LCLZTN Jira ticket](https://datadoghq.atlassian.net/jira/core/projects/LCLZTN/forms/form/direct/8484751061275544/31561) with a link to the merged PR, a description of what needs updating in Phrase, and the specific affected file(s).`;
 
             await github.rest.pulls.update({
               owner: context.repo.owner,
