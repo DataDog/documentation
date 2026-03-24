@@ -41,7 +41,7 @@ Downtimes can be saved in an enabled or disabled state and modified later if nee
 
 ## Manage downtimes
 
-The **Downtimes** page provides a list and calendar view of all configured downtimes. Use the calendar to see how scheduled time slots are distributed across the week.
+The **Downtimes** page provides a list and calendar view of all configured downtimes. Use the calendar to see how scheduled time slots are distributed across the month.
 
 <!-- TODO: Replace with final screenshot from production (current image is a placeholder from staging) -->
 {{< img src="synthetics/settings/synthetics_downtimes_list.png" alt="The Downtimes settings page showing a list of configured downtimes with their name, number of tests, tags, and team, alongside a calendar view of scheduled time slots" style="width:90%;" >}}
