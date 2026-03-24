@@ -19,6 +19,10 @@ further_reading:
       text: "Service Remapping Rules"
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-danger">APM Processing Pipelines are not available for the selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
 {{< img src="/tracing/processing_pipelines/processing_pipelines_overview.jpg" alt="APM data flow diagram showing instrumented applications, ingestion sampling rules, Processing Pipelines, metrics from spans, retention filters, and indexed search" style="width:100%;">}}
 
 APM Processing Pipelines let you transform, normalize, and enrich span attributes after ingestion and before storage, without modifying application code.
