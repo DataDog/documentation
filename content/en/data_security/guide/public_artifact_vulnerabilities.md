@@ -11,7 +11,7 @@ The Public Artifact Vulnerabilities page lets you view vulnerability and respons
 - Which artifacts are affected by a given CVE
 - Status, justification, impact, and action statements for each vulnerability
 
-{{< callout url="#>}}
+{{< callout url="#">}}
   Public Artifact Vulnerabilities page is in Preview.
 {{< /callout >}} 
 
