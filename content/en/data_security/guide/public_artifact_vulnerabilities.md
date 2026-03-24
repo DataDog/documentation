@@ -3,6 +3,10 @@ title: Public Artifact Vulnerabilities
 description: Look up CVE and vulnerability information for Datadog's publicly available artifacts.
 ---
 
+{{< callout url="#">}}
+  Public Artifact Vulnerabilities is in Preview.
+{{< /callout >}} 
+
 ## Overview
 
 The Public Artifact Vulnerabilities page lets you view vulnerability and response information for Datadog's publicly available artifacts and libraries. Use it to look up:
@@ -10,11 +14,6 @@ The Public Artifact Vulnerabilities page lets you view vulnerability and respons
 - Which vulnerabilities affect a given artifact (by image/version)
 - Which artifacts are affected by a given CVE
 - Status, justification, impact, and action statements for each vulnerability
-
-{{< callout url="#">}}
-  Public Artifact Vulnerabilities page is in Preview.
-{{< /callout >}} 
-
 
 ## How to access
 
