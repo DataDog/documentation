@@ -114,7 +114,7 @@ Click **View Details** on a Trends card, or click any row in the Product List ta
 - **Allotment Usage**: Progress bar showing consumed vs. contracted allotment. Displays ">100%" when usage exceeds the allotment.
 - **Drilldown in Usage Attribution**: Opens Usage Attribution pre-filtered to this billing dimension.
 
-## Toggle back to the previous layout
+## Revert to the previous layout
 
 If your organization is on the new **Bill Overview** and you prefer the previous layout, click **Disable Preview** in the page header. This toggle is available to all organizations and persists for your session.
 
