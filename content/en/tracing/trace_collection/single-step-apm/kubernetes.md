@@ -595,7 +595,7 @@ If you don't want to collect trace data for a particular service, host, VM, or c
 
 To remove APM instrumentation and stop sending traces from a specific service, you can do one of the following:
 
-#### Target specific workloads with instrumentation rules (recommended)
+#### Use instrumentation rules to target specific workloads (recommended)
 
 With instrumentation rules (available for Agent v7.64+), you can enable and disable tracing for specific applications. [See configuration details here](#advanced-options).
 
