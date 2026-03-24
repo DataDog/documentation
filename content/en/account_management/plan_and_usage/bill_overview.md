@@ -30,7 +30,7 @@ the original isn't bad or wrong, just making this fit with the docs tone a littl
 - **Billing Dimension**: Filter to a specific billing dimension.
 - **Sub-Org**: Filter to a specific child organization.
 - **Group by Sub-Org**: Toggle to group costs by sub-organization.
-- **Time range**: Select a billing period. Use the back and forward arrows to navigate between months.
+- **Time range**: Select a billing period. Use the backward and forward arrows to navigate from month to month.
 
 ## Cost summary
 
