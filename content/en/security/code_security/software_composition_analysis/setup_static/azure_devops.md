@@ -6,7 +6,7 @@ description: Use Datadog Software Composition Analysis with Azure DevOps to dete
 Run a Datadog Software Composition Analysis (SCA) job in your Azure DevOps pipelines.
 
 <div class="alert alert-danger">
-Datadog Software Composition Analysis CI jobs are only supported on <code>push</code> event triggers. Other event triggers (<code>pull_request</code>, for example) are not supported and can cause issues with the product.
+Datadog Software Composition Analysis CI jobs are only supported on <code>push</code> event triggers. Other event triggers (for example, <code>pull_request</code>) are not supported and can cause issues with the product.
 </div>
 
 ## Environment variables
@@ -16,7 +16,7 @@ Configure the following environment variables in your Azure DevOps pipeline sett
 | Name         | Description                                                                                                                | Required | Default         |
 |--------------|----------------------------------------------------------------------------------------------------------------------------|----------|-----------------|
 | `DD_API_KEY` | Your Datadog API key. This key is created by your [Datadog organization][1] and should be stored as a secret.            | Yes      |                 |
-| `DD_APP_KEY` | Your Datadog application key. This key is created by your [Datadog organization][1], should include the `code_analysis_read` scope, and should be stored as a secret. | Yes      |                 |
+| `DD_APP_KEY` | Your Datadog application key. This key is created by your [Datadog organization][1], must include the `code_analysis_read` scope, and should be stored as a secret. | Yes      |                 |
 | `DD_SITE`    | The [Datadog site][2] to send information to.                                                                              | No       | `datadoghq.com` |
 
 ## Set up the pipeline

@@ -74,7 +74,7 @@ You must scan your default branch at least once before results appear in <b>Code
 
 ## Select your source code management provider
 
-Regardless of which scanning mode you use, connect your source code management provider to enable native features such as inline code snippets and pull request comments. Datadog SCA supports all providers, with native support for GitHub, GitLab, and Azure DevOps.
+Regardless of the scanning mode you use, connect your source code management provider to enable native features such as inline code snippets and pull request comments. Datadog SCA supports all providers and offers native support for GitHub, GitLab, and Azure DevOps.
 
 {{< tabs >}}
 {{% tab "GitHub" %}}

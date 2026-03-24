@@ -6,7 +6,7 @@ description: Use Datadog Software Composition Analysis with GitLab CI/CD to dete
 Run a Datadog Software Composition Analysis (SCA) job in your GitLab CI/CD pipelines.
 
 <div class="alert alert-danger">
-Datadog Software Composition Analysis CI jobs are only supported on <code>push</code> event triggers. Other event triggers (<code>pull_request</code>, for example) are not supported and can cause issues with the product.
+Datadog Software Composition Analysis CI jobs are only supported on <code>push</code> event triggers. Other event triggers (for example, <code>pull_request</code>) are not supported and can cause issues with the product.
 </div>
 
 ## Environment variables
@@ -16,12 +16,12 @@ Configure the following environment variables in your GitLab CI/CD settings.
 | Name         | Description                                                                                                                | Required | Default         |
 |--------------|----------------------------------------------------------------------------------------------------------------------------|----------|-----------------|
 | `DD_API_KEY` | Your Datadog API key. This key is created by your [Datadog organization][2] and should be stored as a secret.            | Yes      |                 |
-| `DD_APP_KEY` | Your Datadog application key. This key is created by your [Datadog organization][2], should include the `code_analysis_read` scope, and should be stored as a secret. | Yes      |                 |
+| `DD_APP_KEY` | Your Datadog application key. This key is created by your [Datadog organization][2], must include the `code_analysis_read` scope, and should be stored as a secret. | Yes      |                 |
 | `DD_SITE`    | The [Datadog site][3] to send information to.                                                                              | No       | `datadoghq.com` |
 
 ## Set up the pipeline
 
-Add the following to your `.gitlab-ci.yml` file, or include it in an [`include`][1] section.
+Add the following to your `.gitlab-ci.yml` file, or place it in an [`include`][1] section.
 
 {{< code-block lang="yaml" filename=".gitlab-ci.yml" collapsible="true" >}}
 # Ensure stages definition is only defined in the root .gitlab-ci.yml file.

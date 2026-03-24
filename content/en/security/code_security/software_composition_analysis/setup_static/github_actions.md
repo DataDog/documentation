@@ -6,8 +6,18 @@ description: Use Datadog Software Composition Analysis with GitHub Actions to de
 Run a Datadog Software Composition Analysis (SCA) job in your GitHub Actions workflows. The action invokes Datadog's recommended SBOM tool, [Datadog SBOM Generator][1], on your codebase and uploads the results to Datadog.
 
 <div class="alert alert-danger">
-Datadog Software Composition Analysis CI jobs are only supported on <code>push</code> event triggers. Other event triggers (<code>pull_request</code>, for example) are not supported and can cause issues with the product.
+Datadog Software Composition Analysis CI jobs are only supported on <code>push</code> event triggers. Other event triggers (for example, <code>pull_request</code>) are not supported and can cause issues with the product.
 </div>
+
+## Inputs
+
+You can set the following parameters for Software Composition Analysis.
+
+| Name         | Description                                                                                                                                        | Required | Default         |
+|--------------|----------------------------------------------------------------------------------------------------------------------------------------------------|----------|-----------------|
+| `dd_api_key` | Your Datadog API key. This key is created by your [Datadog organization][5] and should be stored as a [secret][6].                                 | Yes      |                 |
+| `dd_app_key` | Your Datadog application key. This key is created by your [Datadog organization][5], should include the `code_analysis_read` scope, and should be stored as a [secret][6]. | Yes      |                 |
+| `dd_site`    | The [Datadog site][2] to send information to.                                                                                                      | No       | `datadoghq.com` |
 
 ## Set up the workflow
 
@@ -34,19 +44,10 @@ jobs:
         dd_site: "datadoghq.com"
 {{< /code-block >}}
 
-## Inputs
-
-You can set the following parameters for Software Composition Analysis.
-
-| Name         | Description                                                                                                                                        | Required | Default         |
-|--------------|----------------------------------------------------------------------------------------------------------------------------------------------------|----------|-----------------|
-| `dd_api_key` | Your Datadog API key. This key is created by your [Datadog organization][5] and should be stored as a [secret][6].                                 | Yes      |                 |
-| `dd_app_key` | Your Datadog application key. This key is created by your [Datadog organization][5], should include the `code_analysis_read` scope, and should be stored as a [secret][6]. | Yes      |                 |
-| `dd_site`    | The [Datadog site][2] to send information to.                                                                                                      | No       | `datadoghq.com` |
 
 ## Related GitHub Actions
 
-[Datadog Static Code Analysis (SAST)][3] analyzes your first-party code. Static Code Analysis can be set up using the [`datadog-static-analyzer-github-action`][4] GitHub action.
+To analyze first-party code, use [Datadog Static Code Analysis (SAST)][3] with the [`datadog-static-analyzer-github-action`][4].
 
 [1]: https://github.com/DataDog/datadog-sbom-generator
 [2]: /getting_started/site/
