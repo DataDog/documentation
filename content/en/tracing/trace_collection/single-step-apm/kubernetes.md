@@ -156,15 +156,17 @@ Use the following advanced options to customize how Single Step Instrumentation 
 
 ### Configure injection modes
 
-SSI supports multiple injection modes, which control how the injector and APM library files are delivered to your application containers. You typically do not need to configure this setting manually. Consider adjusting it if you notice significant pod startup delays or higher-than-expected resource usage (CPU, memory) during pod initialization. For more on how the injector works, see [Understanding Injector Behavior with Single Step Instrumentation][41].
+SSI supports multiple injection modes, which control how the injector and APM library files are delivered to your application containers. You typically do not need to configure this setting manually. Consider adjusting it if you notice significant pod startup delays or higher-than-expected resource usage (CPU, memory) during pod initialization. For more on how the injector works, see [Injector Behavior with Single Step Instrumentation][41].
 
-**Note**: For Datadog Agent 7.75 and earlier, the default mode is `init_container`. For Datadog Agent 7.76 and later, the default mode is `auto`.
+**Note**: For Agent 7.75.0 and earlier, the default mode is `init_container`. For Agent 7.76.0 and later, the default mode is `auto`.
 
 | Mode | Description | Requirements |
 |------|-------------|--------------|
-| `auto` | Automatically selects the optimal injection method based on cluster capabilities. | Varies by selected mode |
+| `auto` | Automatically selects the optimal injection method based on cluster capabilities. | Agent 7.76.0+, Helm Chart or Datadog Operator |
 | `init_container` | Uses init containers to copy injector and APM library files into application containers. | Datadog Agent, deployed with Helm Chart or Datadog Operator |
-| `csi` (Preview) | Mounts injector and APM library files using the [Datadog CSI driver][40]. Faster than init container mode.<br><br>**Note:** Before using this mode, [install and activate the Datadog CSI driver][40]. For environment-specific requirements such as GKE Autopilot, see the [CSI driver documentation][40]. | Agent 7.76.0+, CSI driver 1.2.0+, Helm Chart 3.178.1+ |
+| `csi` | **Preview.** Mounts injector and APM library files using the [Datadog CSI driver][40]. Reduces pod startup time compared to init container mode. | Agent 7.76.0+, CSI driver 1.2.0+, Helm Chart 3.178.1+ |
+
+**Note**: Before using `csi` mode, install and activate the Datadog CSI driver. See the [CSI driver documentation][40] for installation steps and environment-specific requirements such as GKE Autopilot.
 
 #### Configure injection mode globally with Helm
 
@@ -174,22 +176,24 @@ To set the injection mode cluster-wide, add `injectionMode` to your `datadog-val
 datadog:
   apm:
     instrumentation:
-      injectionMode: auto
+      injectionMode: init_container
 ```
 
-Replace `auto` with one of: `init_container` or `csi`.
+Replace `init_container` with the desired mode: `auto`, `init_container`, or `csi`.
 
-**Note**: Datadog Operator support for this setting is not available.
+**Note**: Datadog Operator does not support this setting.
 
 #### Configure injection mode per pod
 
 To override the injection mode for a specific pod, add the following annotation to the pod spec:
 
 ```yaml
-admission.datadoghq.com/apm-inject.injection-mode: "auto"
+metadata:
+  annotations:
+    admission.datadoghq.com/apm-inject.injection-mode: "init_container"
 ```
 
-Replace `auto` with one of: `init_container` or `csi`.
+Replace `init_container` with the desired mode: `auto`, `init_container`, or `csi`.
 
 ### Target specific workloads
 
@@ -631,13 +635,13 @@ If you don't want to collect trace data for a particular service, host, VM, or c
 
 To remove APM instrumentation and stop sending traces from a specific service, you can do one of the following:
 
-#### Target specific workloads with instrumentation rules (recommended)
+#### Use workload selection (recommended)
 
-With instrumentation rules (available for Agent v7.64+), you can enable and disable tracing for specific applications. [See configuration details here](#advanced-options).
+With workload selection (available for Agent v7.64+), you can enable and disable tracing for specific applications. [See configuration details here](#advanced-options).
 
 #### Use the Datadog Admission Controller
 
-As an alternative, or for a version of the agent that does not support instrumentation rules, you can also disable pod mutation by adding a label to your pod.
+As an alternative, or for a version of the Agent that does not support workload selection, you can also disable pod mutation by adding a label to your pod.
 
 <div class="alert alert-danger">In addition to disabling SSI, the following steps disable other mutating webhooks. Use with caution.</div>
 
@@ -707,7 +711,7 @@ To control where APM is activated and reduce overhead, consider the following be
 | Mode    | Behavior    | When to use |
 | ---  | ----------- | ----------- |
 | Default | All supported processes in the cluster are instrumented. | Small clusters or prototypes. |
-| Opt-in | Use [instrumentation rules][4] to restrict instrumentation to specific namespaces or pods. | Production clusters, staged rollouts, or cost‑sensitive use cases. |
+| Opt-in | Use [workload selection][4] to restrict instrumentation to specific namespaces or pods. | Production clusters, staged rollouts, or cost‑sensitive use cases. |
 
 #### Example: Enable instrumentation for specific pods
 
@@ -756,7 +760,7 @@ To control where APM is activated and reduce overhead, consider the following be
                  datadoghq.com/apm-instrumentation: "enabled"
    ```
 
-See [instrumentation rules][4] for additional examples.
+See [workload selection][4] for additional examples.
 
 {{% /collapse-content %}}
 
