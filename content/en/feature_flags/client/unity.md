@@ -3,8 +3,6 @@ title: Unity Feature Flags
 description: Set up Datadog Feature Flags for Unity applications.
 aliases:
   - /feature_flags/setup/unity/
-  - /feature_flags/setup/unity-openfeature/
-  - /feature_flags/client/unity-openfeature/
 further_reading:
 - link: "/feature_flags/client/"
   tag: "Documentation"
