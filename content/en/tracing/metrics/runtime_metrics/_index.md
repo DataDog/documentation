@@ -166,7 +166,7 @@ Use the following environment variables to configure runtime metrics in your app
 
 `DD_RUNTIME_METRICS_DIAGNOSTICS_METRICS_API_ENABLED`
 : **Default**: `true` starting tracer v3.40.0+ on .NET 8+ and (.NET 6/7 when `DD_RUNTIME_METRICS_ENABLED` is not explicitly set), otherwise `false`. <br>
-**Description**: Available starting .NET 6 it controls whether the .NET tracer uses the new [`System.Diagnostics.Metrics`][9] API to collect the metrics instead of the older v1.23.0 `EventListener`-based collector.
+**Description**: Available starting .NET 6 it controls whether the .NET tracer uses the new [`System.Diagnostics.Metrics`][9] API to collect the metrics instead of the `EventListener`-based collector.
 
 #### Code-based configuration
 
@@ -306,4 +306,4 @@ Each supported language collects a set of runtime metrics that provide insights 
 [3]: /agent/docker/#dogstatsd-custom-metrics
 [7]: /extend/dogstatsd/unix_socket/
 [8]: /agent/configuration/agent-configuration-files/#main-configuration-file
-[9]: https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.metrics?view=net-6.0
+[9]: https://learn.microsoft.com/dotnet/api/system.diagnostics.metrics

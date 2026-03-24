@@ -293,7 +293,7 @@ When set to `false`, the consumer span is created when a message is consumed and
 Added in version 1.23.0.
 
 `DD_RUNTIME_METRICS_DIAGNOSTICS_METRICS_API_ENABLED`
-: Available starting .NET 6 it controls whether the .NET tracer uses the new [`System.Diagnostics.Metrics`][24] API to collect the metrics instead of the older v1.23.0 `EventListener`-based collector. <br>
+: Available starting .NET 6 it controls whether the .NET tracer uses the new [`System.Diagnostics.Metrics`][24] API to collect the metrics instead of the  `EventListener`-based collector. <br>
 **Default**: `true` on .NET 8+ and on .NET 6/7 when `DD_RUNTIME_METRICS_ENABLED` is not explicitly set, otherwise `false`. <br>
 Added in version 3.40.0.
 
@@ -371,4 +371,4 @@ The following configuration variables are for features that are available for us
 [21]: /tracing/trace_collection/trace_context_propagation/
 [22]: /tracing/trace_collection/library_config/#traces
 [23]: /profiler/
-[24]: https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.metrics?view=net-6.0
+[24]: https://learn.microsoft.com/dotnet/api/system.diagnostics.metrics
