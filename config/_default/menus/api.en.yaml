@@ -2480,7 +2480,7 @@ menu:
           - GetSecretsRules
         unstable:
           - v2
-        order: 77
+        order: 78
     - name: Ruleset get multiple
       url: '#ruleset-get-multiple'
       identifier: security-monitoring-ruleset-get-multiple
@@ -2571,7 +2571,7 @@ menu:
           - RunThreatHuntingJob
         unstable:
           - v2
-        order: 61
+        order: 62
     - name: List threat hunting jobs
       url: '#list-threat-hunting-jobs'
       identifier: security-monitoring-list-threat-hunting-jobs
@@ -2659,7 +2659,7 @@ menu:
         operationids:
           - SearchSecurityMonitoringSignals
         unstable: []
-        order: 71
+        order: 72
     - name: Get a quick list of security signals
       url: '#get-a-quick-list-of-security-signals'
       identifier: security-monitoring-get-a-quick-list-of-security-signals
@@ -2816,7 +2816,7 @@ menu:
         operationids:
           - ListSecurityMonitoringRules
         unstable: []
-        order: 49
+        order: 50
     - name: Deactivate content pack
       url: '#deactivate-content-pack'
       identifier: security-monitoring-deactivate-content-pack
@@ -2855,7 +2855,7 @@ menu:
           - GetContentPacksStates
         unstable:
           - v2
-        order: 46
+        order: 47
     - name: Get a suppression's version history
       url: '#get-a-suppressions-version-history'
       identifier: security-monitoring-get-a-suppressions-version-history
@@ -3181,7 +3181,7 @@ menu:
           - ListVulnerabilities
         unstable:
           - v2
-        order: 79
+        order: 80
     - name: Patch a signal-based notification rule
       url: '#patch-a-signal-based-notification-rule'
       identifier: security-monitoring-patch-a-signal-based-notification-rule
@@ -8232,6 +8232,32 @@ menu:
       url: /api/latest/deployment-gates/
       identifier: deployment-gates
       generated: true
+    - name: Get a deployment gate evaluation result
+      url: '#get-a-deployment-gate-evaluation-result'
+      identifier: deployment-gates-get-a-deployment-gate-evaluation-result
+      parent: deployment-gates
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetDeploymentGatesEvaluationResult
+        unstable:
+          - v2
+        order: 12
+    - name: Trigger a deployment gate evaluation
+      url: '#trigger-a-deployment-gate-evaluation'
+      identifier: deployment-gates-trigger-a-deployment-gate-evaluation
+      parent: deployment-gates
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - TriggerDeploymentGatesEvaluation
+        unstable:
+          - v2
+        order: 11
     - name: Update deployment gate
       url: '#update-deployment-gate'
       identifier: deployment-gates-update-deployment-gate
@@ -8349,6 +8375,19 @@ menu:
         unstable:
           - v2
         order: 1
+    - name: Get all deployment gates
+      url: '#get-all-deployment-gates'
+      identifier: deployment-gates-get-all-deployment-gates
+      parent: deployment-gates
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListDeploymentGates
+        unstable:
+          - v2
+        order: 10
     - name: Domain Allowlist
       url: /api/latest/domain-allowlist/
       identifier: domain-allowlist
@@ -14243,6 +14282,45 @@ menu:
         unstable:
           - v2
         order: 2
+    - name: Get Test Optimization service settings
+      url: '#get-test-optimization-service-settings'
+      identifier: test-optimization-get-test-optimization-service-settings
+      parent: test-optimization
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetTestOptimizationServiceSettings
+        unstable:
+          - v2
+        order: 3
+    - name: Update Test Optimization service settings
+      url: '#update-test-optimization-service-settings'
+      identifier: test-optimization-update-test-optimization-service-settings
+      parent: test-optimization
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateTestOptimizationServiceSettings
+        unstable:
+          - v2
+        order: 4
+    - name: Delete Test Optimization service settings
+      url: '#delete-test-optimization-service-settings'
+      identifier: test-optimization-delete-test-optimization-service-settings
+      parent: test-optimization
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteTestOptimizationServiceSettings
+        unstable:
+          - v2
+        order: 5
     - name: Workflow Automation
       url: /api/latest/workflow-automation/
       identifier: workflow-automation
