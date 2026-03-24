@@ -82,6 +82,10 @@ The Dev Agent runs the setup command at startup and can use any tools installed 
 
 **Note**: For best results, add a [custom instructions file](#configure-custom-instructions) (like `claude.md`) to your repository with instructions on how to build and test your code.
 
+#### Domain allowlist
+
+The Dev Agent sandbox includes a default allowlist of domains for common package registries. The default allowlist covers registries for Go, Java/JVM, JavaScript/TypeScript, .NET/C#, PHP, Python, and Rust.
+
 ## Troubleshooting
 
 ### Creation of PRs fails unexpectedly
