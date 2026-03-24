@@ -17,11 +17,8 @@ further_reading:
     - link: "/tracing/services/service_remapping_rules"
       tag: "Documentation"
       text: "Service Remapping Rules"
+site_support_id: apm_processing_pipelines
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-danger">APM Processing Pipelines are not available for the selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
 
 {{< img src="/tracing/processing_pipelines/processing_pipelines_overview.jpg" alt="APM data flow diagram showing instrumented applications, ingestion sampling rules, Processing Pipelines, metrics from spans, retention filters, and indexed search" style="width:100%;">}}
 
