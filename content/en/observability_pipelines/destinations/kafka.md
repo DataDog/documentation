@@ -52,7 +52,7 @@ Toggle the switch to enable **TLS**. The following certificate and key files are
 ##### Enable SASL authentication
 
 1. Toggle the switch to enable **SASL Authentication**.
-    1. Enter the identifiers for your Kafka SASL username and password. If you leave them blank, the [defaults](#set-secrets) are used.
+1. Enter the identifiers for your Kafka SASL username and password. If you leave them blank, the [defaults](#set-secrets) are used.
 1. Select the mechanism (**PLAIN**, **SCHRAM-SHA-256**, or **SCHRAM-SHA-512**) in the dropdown menu.
 
 ##### Enable compression
