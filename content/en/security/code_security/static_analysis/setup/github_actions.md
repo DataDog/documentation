@@ -2,6 +2,7 @@
 aliases:
 - /continuous_integration/static_analysis/github_actions
 - /static_analysis/github_actions
+- /security/code_security/static_analysis/github_actions
 description: Use Datadog and GitHub to run Static Code Analysis jobs in a CI pipeline.
 title: Static Code Analysis and GitHub Actions
 ---

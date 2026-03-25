@@ -52,6 +52,9 @@ The **Next steps** section of the entity side panel includes the available mitig
 
 ## Configure notifications for Risk Insights
 
+{{< site-region region="gov" >}}<div class="alert alert-danger">Notification rules are not supported for the {{< region-param key="dd_site_name" >}} site.</div>
+{{< /site-region >}}
+
 You can configure Datadog to send you notifications as soon as it detects new threats that match your criteria.
 
 1. Navigate to the **Create a new Risk Insight notification** page. There are two ways to do this:

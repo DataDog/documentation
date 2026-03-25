@@ -1,9 +1,13 @@
 ---
-title: Plan and Usage Settings
+title: Plan & Usage
 description: Access usage reports, plan settings, and billing history for your Datadog account, including multi-organization usage tracking and cost analysis.
 ---
 
 [Administrators][1] can access the [organization settings][2] by clicking Plan & Usage from the Account menu in the bottom of the left side navigation or by selecting Plan & Usage from the header dropdown at the top of the Personal Settings page.
+
+{{< callout url="" btn_hidden="true" header="New: Bill Overview" >}}
+A new **Bill Overview** experience is now in Limited Availability and will start rolling out automatically to all organizations starting March 2026. [Learn more](/account_management/plan_and_usage/bill_overview/).
+{{< /callout >}}
 
 ## Usage reports
 
@@ -41,6 +45,7 @@ Usage data for trial products appears in the **Usage & Cost** tab. You are not b
 {{< img src="account_management/plan_and_usage/trial-management-usage.png" width="70%" alt="Usage & Cost section showing a trial product metric with an indicator icon and tooltip explaining the estimated cost" >}}
 
 [1]: /account_management/users/default_roles/
-[2]: https://app.datadoghq.com/account/billing
+[2]: https://app.datadoghq.com/organization-settings/
 [3]: /account_management/multi_organization/
-[4]: mailto://success@datadoghq.com
+[4]: mailto:success@datadoghq.com
+[5]: /account_management/plan_and_usage/bill_overview/
