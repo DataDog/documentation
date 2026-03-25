@@ -29,9 +29,9 @@ Specifically, the following information is shown:
     - Dropped
     - Reduced
 
-An example of Live Capture showing the log's `message` field before and after it has been processed by the Parse XML processor.
+An example of Live Capture showing the log's `message` field before and after it has been processed by the Parse JSON processor.
 
-{{< img src="observability_pipelines/processors/live-capture-example.png" alt="The entry column shows the original message field's values and the exit column shows the values parsed as XML" style="width:100%;" >}}
+{{< img src="observability_pipelines/live_capture_parse_json.png" alt="The entry column shows the original message field's values and the exit column shows the values parsed as JSON" style="width:100%;" >}}
 
 ## Permissions
 
@@ -54,7 +54,7 @@ If you want to use Live Capture and are using a firewall, you must add these dom
 1. Click the cog for the source or processor that you want to capture events for.
 1. Select **Capture and view events** in the side panel.
 1. Click **Capture**.
-1. **Optional configurations** (in Preview):
+1. **Optional configurations**:
   {{< img src="observability_pipelines/live_capture_optional_config.png" alt="The Live Capture optional configuration modal showing the filter query, capture duration, and Worker selection options" style="width:60%;" >}}
   **Note**: Optional configurations are only available if all active Workers are version 2.13 or later.
     1. Enter a query to specify which events you want to capture. For more information, see [Search Syntax for Logs][4] or [Search Syntax for Metrics][5].
