@@ -4,7 +4,7 @@ title: Scheduled CSV Reports
 
 ## Overview
 
-Scheduled CSV Reports let you automatically receive recurring, structured data exports through email or Slack. This feature supports operational, compliance, and executive stakeholders by delivering periodic snapshots of key metrics, without needing to log into the Datadog platform.
+Scheduled CSV Reports let you automatically receive recurring, structured data exports through email, Slack, or Microsoft Teams. This feature supports operational, compliance, and executive stakeholders by delivering periodic snapshots of key metrics, without needing to log into the Datadog platform.
 
 ## Define a query
 
@@ -25,6 +25,7 @@ To schedule a CSV Report, the query must meet the following conditions:
 5. Add recipients  
    1. **Email recipients**: To add email recipients to your report, enter their email addresses. The email associated with your Datadog account is automatically added as a recipient. You can remove yourself as a recipient by hovering over your email and clicking the trash icon that appears next to it.  
    2. **Slack recipients**: To add Slack recipients, select the Slack workspace and channel from the available dropdowns. If you do not see any Slack workspaces available, ensure you have the Datadog [Slack Integration][5] installed. All public channels within the Slack workspace should be listed automatically. To select a private Slack channel, make sure to invite the Datadog Slack bot to the channel in Slack. To send a test message to Slack, add a channel recipient and click **Send Test Message**.
+   3. **Microsoft Teams recipients**: Select the **Microsoft Teams** tab, then choose a **Tenant**, **Team**, and **Channel** from the available dropdowns. Make sure the [Microsoft Teams integration][7] is installed in your Datadog organization and the Datadog app is added to the target Team in Microsoft Teams. To send a test message, add a channel recipient and click **Send Test Message**.
 
 ## Managing reports
 
@@ -51,3 +52,4 @@ After a report is created, you can subscribe, unsubscribe, edit a schedule, and 
 [4]: /reference_tables/?tab=manualupload
 [5]: /integrations/slack/?tab=datadogforslack
 [6]: /logs/explorer/saved_views/#saved-views
+[7]: /integrations/microsoft_teams/
