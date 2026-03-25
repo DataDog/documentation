@@ -20,41 +20,31 @@ further_reading:
 App and API Protection for Envoy Gateway is in Preview. Use the following instructions to try the preview.
 {{< /callout >}}
 
-You can enable Datadog App and API Protection for traffic managed by [Envoy Gateway][1]. The Datadog Envoy Gateway integration allows Datadog to inspect and protect your traffic for threat detection and blocking directly at the edge of your infrastructure.
+You can enable Datadog [App and API Protection][12] for traffic managed by [Envoy Gateway][1] to inspect and protect traffic at the edge of your infrastructure.
 
 ## Prerequisites
 
 - A running Kubernetes cluster with [Envoy Gateway][1] installed.
 - The [Datadog Agent is installed and configured][2] in your Kubernetes cluster.
-  - Ensure [Remote Configuration][3] is enabled and configured to enable blocking attackers through the Datadog UI.
-  - Ensure [APM is enabled][4] in the Agent to allow the external processor service to send its own traces to the Agent.
-    - Optionally, enable the [Cluster Agent Admission Controller][5] to automatically inject the Datadog Agent host information to the App and API Protection External Processor service.
+  - Verify that [Remote Configuration][3] is enabled and configured to enable blocking attackers through the Datadog UI.
+  - Verify that [APM is enabled][4] in the Agent to allow the security processor service to send its own traces to the Agent.
+    - Optionally, enable the [Cluster Agent Admission Controller][5] to automatically inject the Datadog Agent host information to the App and API Protection Security Processor service.
 
 ## Automated configuration with App and API Protection for Kubernetes
 
 <div class="alert alert-info">
-  App and API Protection for Kubernetes automatically configures your Envoy Gateway for Application Security monitoring. This is the recommended approach for most users as it eliminates manual configuration and simplifies operations.
+  Automated configuration handles security processor deployment and <code>EnvoyExtensionPolicy</code> creation for you. This is the recommended approach for most users.
 </div>
 
-Instead of manually deploying the external processor and configuring `EnvoyExtensionPolicy` (as shown in the manual configuration section below), enable App and API Protection for Kubernetes automatic configuration to handle this for you.
+### Setup
 
-### When to use automatic configuration
-
-Use automatic configuration if you want to:
-- Automatically configure multiple Envoy Gateways across namespaces
-- Simplify deployment and ongoing maintenance
-- Manage configuration through infrastructure-as-code with Helm
-- Centralize Application Security processor management
-
-### Quick setup
-
-1. **Deploy the external processor** using the deployment manifest shown in [Step 1](#step-1-deploy-the-datadog-external-processor-service) below.
+1. **Deploy the security processor** using the deployment manifest shown in [Step 1](#step-1-deploy-the-datadog-external-processor-service) below.
 2. **Enable automatic configuration** using Helm or the Datadog Operator.
 
    {{< tabs >}}
    {{% tab "Datadog Operator" %}}
 
-   Add annotations to your `DatadogAgent` resource. The service name annotation is required and must match your external processor service:
+   Add annotations to your `DatadogAgent` resource. The service name annotation is required and must match your security processor service:
 
    ```yaml
    apiVersion: datadoghq.com/v2alpha1
@@ -85,9 +75,10 @@ Use automatic configuration if you want to:
      appsec:
        injector:
          enabled: true
+         mode: "external"
          processor:
            service:
-             name: datadog-aap-extproc-service  # Required: must match your external processor service name
+             name: datadog-aap-extproc-service  # Required: must match your security processor service name
              namespace: datadog                 # Must match the namespace where the service is deployed
    ```
 
@@ -100,33 +91,31 @@ Use automatic configuration if you want to:
    {{% /tab %}}
    {{< /tabs >}}
 
-   Once enabled, the Datadog Cluster Agent:
+   After you enable this, the Datadog Cluster Agent:
    - Detects your Envoy Gateway installations
    - Creates `EnvoyExtensionPolicy` resources for each Gateway
-   - Configures the policies to route traffic to the external processor
+   - Configures the policies to route traffic to the security processor
 3. **Verify** the configuration by checking for created policies:
    ```bash
    kubectl get envoyextensionpolicy -A
    ```
 
-For detailed configuration options, advanced features, and troubleshooting, see [App and API Protection for Kubernetes](/containers/kubernetes/appsec).
+For configuration options and troubleshooting, see [App and API Protection for Kubernetes](/containers/kubernetes/appsec).
 
 ## Manual configuration (alternative)
 
-If you prefer manual configuration or need fine-grained control over specific gateways, follow the instructions below:
+For fine-grained control over specific gateways, use the manual setup:
 
-1. Deploying the Datadog External Processor service in your cluster.
-2. Configure an `EnvoyExtensionPolicy` that points to the processor service. This will direct traffic from your Envoy Gateway to this service.
+1. Deploy the Datadog Security Processor service in your cluster.
+2. Configure an `EnvoyExtensionPolicy` that points to it.
 
-### Step 1: Deploy the Datadog External Processor service
+### Step 1: Deploy the Datadog security processor service
 
-This service is a gRPC server that Envoy communicates with to have requests and responses analyzed by App and API Protection.
+This gRPC server receives requests and responses from Envoy for App and API Protection analysis.
 
-Create a Kubernetes Deployment and Service for the Datadog External Processor. It's recommended to deploy this service in a namespace accessible by your Envoy Gateway.
+Deploy it in a namespace accessible by your Envoy Gateway. The Docker image is on the [Datadog Go tracer GitHub Registry][6].
 
-The Datadog External Processor Docker image is available on the [Datadog Go tracer GitHub Registry][6].
-
-Here is an example manifest (`datadog-aap-extproc-service.yaml`):
+Example manifest (`datadog-aap-extproc-service.yaml`):
 
 ```yaml
 apiVersion: apps/v1
@@ -151,19 +140,19 @@ spec:
         image: ghcr.io/datadog/dd-trace-go/service-extensions-callout:v2.4.0 # Replace with the latest released version
         ports:
         - name: grpc
-          containerPort: 443 # Default gRPC port for the external processor
+          containerPort: 443 # Default gRPC port for the security processor
         - name: health
           containerPort: 80  # Default health check port
         env:
         # Optional: Agent Configuration
         # If you enabled the Cluster Agent Admission Controller, you can skip this section as the Agent host information is automatically injected.
-        # Otherwise, configure the address of your Datadog Agent for the external processor
+        # Otherwise, configure the address of your Datadog Agent for the security processor
         - name: DD_AGENT_HOST
           value: "<your-datadog-agent-service>.<your-datadog-agent-namespace>.svc.cluster.local"
         - name: DD_TRACE_AGENT_PORT # Optional if your Agent's trace port is the default 8126
           value: "8126"
 
-        # Disable TLS for communication between Envoy Gateway and the external processor. Default is true.
+        # Disable TLS for communication between Envoy Gateway and the security processor. Default is true.
         # Cannot be enabled for now
         - name: DD_SERVICE_EXTENSION_TLS
           value: "false"
@@ -199,9 +188,9 @@ spec:
   type: ClusterIP
 ```
 
-#### Configuration options for the External Processor
+#### Configuration options for the security processor
 
-The Datadog External Processor exposes some settings:
+The Datadog Security Processor exposes some settings:
 
 | Environment variable                      | Default value       | Description                                                                                                                              |
 |-------------------------------------------|---------------------|------------------------------------------------------------------------------------------------------------------------------------------|
@@ -215,24 +204,24 @@ The Datadog External Processor exposes some settings:
 | `DD_SERVICE`                              | `serviceextensions` | Service name shown in the Datadog UI.                                                                                                    |
 
 
-Configure the connection from the external processor to the Datadog Agent using these environment variables:
+Configure the connection from the security processor to the Datadog Agent using these environment variables:
 
 | Environment variable                   | Default value | Description                                                                      |
 |----------------------------------------|---------------|----------------------------------------------------------------------------------|
 | `DD_AGENT_HOST`                        | `localhost`   | Hostname or IP of your Datadog Agent.                                            |
 | `DD_TRACE_AGENT_PORT`                  | `8126`        | Port of the Datadog Agent for trace collection.                                  |
 
-The External Processor is built on top of the [Datadog Go Tracer][7] and inherits all of its environment variables. See [Configuring the Go Tracing Library][8] and [App and API Protection Library Configuration][9].
+The Security Processor is built on top of the [Datadog Go Tracer][7] and inherits all of its environment variables. See [Configuring the Go Tracing Library][8] and [App and API Protection Library Configuration][9].
 
 <div class="alert alert-danger">
-  <strong>Note:</strong> As the Datadog External Processor is built on top of the Datadog Go Tracer, it generally follows the same release process as the tracer, and its Docker images are tagged with the corresponding tracer version (for example, <code>v2.2.2</code>). In some cases, early release versions might be published between official tracer releases, and these images are tagged with a suffix such as <code>-docker.1</code>.
+  <strong>Note:</strong> As the Datadog Security Processor is built on top of the Datadog Go Tracer, it generally follows the same release process as the tracer, and its Docker images are tagged with the corresponding tracer version (for example, <code>v2.2.2</code>). In some cases, early release versions might be published between official tracer releases, and these images are tagged with a suffix such as <code>-docker.1</code>.
 </div>
 
 ### Step 2: Configure an EnvoyExtensionPolicy
 
-Use an `EnvoyExtensionPolicy` to instruct Envoy Gateway to call the Datadog external processor. You can attach the policy to a Gateway or to specific HTTPRoute/GRPCRoute resources.
+Use an `EnvoyExtensionPolicy` to instruct Envoy Gateway to call the Datadog security processor. You can attach the policy to a Gateway or to specific HTTPRoute/GRPCRoute resources.
 
-This sends all traffic on the selected Gateway to the external processor. Here is an example manifest (`datadog-aap-extproc-eep.yaml`):
+This sends all traffic on the selected Gateway to the security processor. Example manifest (`datadog-aap-extproc-eep.yaml`):
 
 ```yaml
 apiVersion: gateway.envoyproxy.io/v1alpha1
@@ -255,11 +244,11 @@ spec:
     - group: ""
       kind: Service
       name: datadog-aap-extproc-service
-      namespace: <your-preferred-namespace> # namespace of the external processor Service
+      namespace: <your-preferred-namespace> # namespace of the security processor Service
       port: 443
 
     # Optional: Enable fail open mode. Default is false.
-    # Normally, if the external processor fails or times out, the filter fails and Envoy
+    # Normally, if the security processor fails or times out, the filter fails and Envoy
     # returns a 5xx error to the downstream client. Setting this to true allows requests
     # to continue without error if a failure occurs.
     failOpen: true
@@ -267,14 +256,14 @@ spec:
     # Optional: Set a timeout by processing message. Default is 200ms.
     # There is a maxium of 2 messages per requests with headers only and 4 messages maximum
     # with body processing enabled.
-    # Note: This timeout also includes the data communication between Envoy and the external processor.
+    # Note: This timeout also includes the data communication between Envoy and the security processor.
     # The timeout should be adjusted to accommodate the additional possible processing time.
     # Larger payloads will require a longer timeout.
     messageTimeout: 200ms
 
     processingMode:
-      # The external processor can dynamically override the processing mode as needed, instructing
-      # Envoy to forward request and response bodies to the external processor.
+      # The security processor can dynamically override the processing mode as needed, instructing
+      # Envoy to forward request and response bodies to the security processor.
       allowModeOverride: true
       # Only enable the request and response header modes by default.
       request: {}
@@ -283,14 +272,14 @@ spec:
 
 #### Cross‑namespace reference
 
-If your external processor `Service` is in a **different namespace** than the policy, add a [ReferenceGrant][10] in the processor’s namespace. For example, you can do this with a manifest such as `datadog-aap-eep-rg.yaml`.
+If your security processor `Service` is in a **different namespace** than the policy, add a [ReferenceGrant][10] in the processor's namespace. For example, you can do this with a manifest such as `datadog-aap-eep-rg.yaml`.
 
 ```yaml
 apiVersion: gateway.networking.k8s.io/v1beta1
 kind: ReferenceGrant
 metadata:
   name: datadog-aap-eep-rg
-  namespace: <your-extproc-namespace>   # namespace of the external processor Service
+  namespace: <your-extproc-namespace>   # namespace of the security processor Service
 spec:
   from:
   - group: gateway.envoyproxy.io
@@ -302,7 +291,7 @@ spec:
     name: datadog-aap-extproc-service
 ```
 
-### Step 3: Validation
+### Step 3: Validate
 
 After applying the policy, traffic through the targeted Gateway/Routes is inspected by App and API Protection.
 
@@ -312,11 +301,11 @@ After applying the policy, traffic through the targeted Gateway/Routes is inspec
 
 ## Limitations
 
-The Envoy Gateway integration has the following limitations:
+Known limitations:
 
 * Observability mode (asynchronous analysis) is not available for Envoy Gateway.
 
-For additional details on the Envoy Gateway integration compatibilities, refer to the [Envoy Gateway integration compatibility page][11].
+For additional details on the Envoy Gateway integration compatibilities, see the [Envoy Gateway integration compatibility page][11].
 
 ## Further Reading
 
@@ -333,3 +322,4 @@ For additional details on the Envoy Gateway integration compatibilities, refer t
 [9]: /security/application_security/policies/library_configuration/
 [10]: https://gateway-api.sigs.k8s.io/api-types/referencegrant/
 [11]: /security/application_security/setup/compatibility/envoy-gateway
+[12]: /security/application_security/
