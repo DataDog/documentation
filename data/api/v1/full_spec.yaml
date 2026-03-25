@@ -25508,7 +25508,7 @@ paths:
       summary: Get the list of available daily custom reports
       tags:
         - Usage Metering
-      x-menu-order: 41
+      x-menu-order: 34
       "x-permission":
         operator: OR
         permissions:
@@ -25556,7 +25556,7 @@ paths:
       summary: Get specified daily custom reports
       tags:
         - Usage Metering
-      x-menu-order: 42
+      x-menu-order: 35
       "x-permission":
         operator: OR
         permissions:
@@ -26622,7 +26622,7 @@ paths:
       tags:
         - Metrics
       x-codegen-request-body-name: body
-      x-menu-order: 1
+      x-menu-order: 7
   /api/v1/downtime:
     get:
       deprecated: true
@@ -27070,7 +27070,7 @@ paths:
       tags:
         - Events
       x-codegen-request-body-name: body
-      x-menu-order: 1
+      x-menu-order: 3
   /api/v1/events/{event_id}:
     get:
       description: |-
@@ -29034,7 +29034,7 @@ paths:
       summary: Delete a Slack integration
       tags:
         - Slack Integration
-      x-menu-order: 1
+      x-menu-order: 6
     get:
       deprecated: true
       description: Get all information about your Datadog-Slack integration.
@@ -29069,7 +29069,7 @@ paths:
       summary: Get info about a Slack integration
       tags:
         - Slack Integration
-      x-menu-order: 4
+      x-menu-order: 9
     post:
       deprecated: true
       description: |-
@@ -29107,7 +29107,7 @@ paths:
       tags:
         - Slack Integration
       x-codegen-request-body-name: body
-      x-menu-order: 3
+      x-menu-order: 8
     put:
       deprecated: true
       description: |-
@@ -29146,7 +29146,7 @@ paths:
       tags:
         - Slack Integration
       x-codegen-request-body-name: body
-      x-menu-order: 2
+      x-menu-order: 7
   /api/v1/integration/slack/configuration/accounts/{account_name}/channels:
     get:
       description: Get a list of all channels configured for your Datadog-Slack integration.
@@ -29772,7 +29772,7 @@ paths:
       tags:
         - Logs
       x-codegen-request-body-name: body
-      x-menu-order: 3
+      x-menu-order: 2
       "x-permission":
         operator: OR
         permissions:
@@ -29800,7 +29800,7 @@ paths:
       summary: Get indexes order
       tags:
         - Logs Indexes
-      x-menu-order: 5
+      x-menu-order: 6
       "x-permission":
         operator: OR
         permissions:
@@ -29842,7 +29842,7 @@ paths:
       tags:
         - Logs Indexes
       x-codegen-request-body-name: body
-      x-menu-order: 6
+      x-menu-order: 7
       "x-permission":
         operator: OR
         permissions:
@@ -31023,7 +31023,7 @@ paths:
       summary: Monitors group search
       tags:
         - Monitors
-      x-menu-order: 2
+      x-menu-order: 10
       "x-permission":
         operator: OR
         permissions:
@@ -31104,7 +31104,7 @@ paths:
       summary: Monitors search
       tags:
         - Monitors
-      x-menu-order: 1
+      x-menu-order: 9
       "x-permission":
         operator: OR
         permissions:
@@ -31475,7 +31475,7 @@ paths:
       tags:
         - Monitors
       x-codegen-request-body-name: body
-      x-menu-order: 2
+      x-menu-order: 12
       "x-permission":
         operator: OR
         permissions:
@@ -31543,7 +31543,7 @@ paths:
       tags:
         - Monitors
       x-codegen-request-body-name: body
-      x-menu-order: 1
+      x-menu-order: 11
       "x-permission":
         operator: OR
         permissions:
@@ -31661,7 +31661,7 @@ paths:
       summary: Get the list of available monthly custom reports
       tags:
         - Usage Metering
-      x-menu-order: 43
+      x-menu-order: 36
       "x-permission":
         operator: OR
         permissions:
@@ -31715,7 +31715,7 @@ paths:
       summary: Get specified monthly custom reports
       tags:
         - Usage Metering
-      x-menu-order: 44
+      x-menu-order: 37
       "x-permission":
         operator: OR
         permissions:
@@ -32444,7 +32444,7 @@ paths:
       summary: Add a security signal to an incident
       tags: ["Security Monitoring"]
       x-codegen-request-body-name: body
-      x-menu-order: 4
+      x-menu-order: 2
       "x-permission":
         operator: OR
         permissions:
@@ -32494,7 +32494,7 @@ paths:
       summary: Modify the triage assignee of a security signal
       tags: ["Security Monitoring"]
       x-codegen-request-body-name: body
-      x-menu-order: 5
+      x-menu-order: 3
       "x-permission":
         operator: OR
         permissions:
@@ -32544,7 +32544,7 @@ paths:
       summary: Change the triage state of a security signal
       tags: ["Security Monitoring"]
       x-codegen-request-body-name: body
-      x-menu-order: 4
+      x-menu-order: 1
       "x-permission":
         operator: OR
         permissions:
@@ -32623,7 +32623,7 @@ paths:
       tags:
         - Metrics
       x-codegen-request-body-name: body
-      x-menu-order: 1
+      x-menu-order: 6
   /api/v1/service_dependencies:
     get:
       description: |-
@@ -32948,7 +32948,7 @@ paths:
       tags:
         - Service Level Objectives
       x-codegen-request-body-name: body
-      x-menu-order: 8
+      x-menu-order: 9
       "x-permission":
         operator: OR
         permissions:
@@ -33003,7 +33003,7 @@ paths:
       summary: Check if SLOs can be safely deleted
       tags:
         - Service Level Objectives
-      x-menu-order: 7
+      x-menu-order: 8
       "x-permission":
         operator: OR
         permissions:
@@ -33296,7 +33296,7 @@ paths:
       summary: Search for SLOs
       tags:
         - Service Level Objectives
-      x-menu-order: 1
+      x-menu-order: 10
       "x-permission":
         operator: OR
         permissions:
@@ -33609,7 +33609,7 @@ paths:
       summary: Get an SLO's history
       tags:
         - Service Level Objectives
-      x-menu-order: 6
+      x-menu-order: 7
       "x-permission":
         operator: OR
         permissions:
@@ -33648,7 +33648,7 @@ paths:
       summary: Get details of batch
       tags:
         - Synthetics
-      x-menu-order: 12
+      x-menu-order: 14
       "x-permission":
         operator: OR
         permissions:
@@ -33676,7 +33676,7 @@ paths:
       summary: Get all locations (public and private)
       tags:
         - Synthetics
-      x-menu-order: 24
+      x-menu-order: 30
       "x-permission":
         operator: OR
         permissions:
@@ -33722,7 +33722,7 @@ paths:
       tags:
         - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 23
+      x-menu-order: 29
       "x-permission":
         operator: OR
         permissions:
@@ -33759,7 +33759,7 @@ paths:
       summary: Delete a private location
       tags:
         - Synthetics
-      x-menu-order: 27
+      x-menu-order: 33
       "x-permission":
         operator: OR
         permissions:
@@ -33799,7 +33799,7 @@ paths:
       summary: Get a private location
       tags:
         - Synthetics
-      x-menu-order: 25
+      x-menu-order: 31
       "x-permission":
         operator: OR
         permissions:
@@ -33847,7 +33847,7 @@ paths:
       tags:
         - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 26
+      x-menu-order: 32
       "x-permission":
         operator: OR
         permissions:
@@ -33868,7 +33868,7 @@ paths:
       summary: Get the default locations
       tags:
         - Synthetics
-      x-menu-order: 29
+      x-menu-order: 34
       "x-permission":
         operator: OR
         permissions:
@@ -33922,7 +33922,7 @@ paths:
       summary: Get the list of all Synthetic tests
       tags:
         - Synthetics
-      x-menu-order: 3
+      x-menu-order: 4
       x-pagination:
         limitParam: page_size
         pageParam: page_number
@@ -34206,7 +34206,7 @@ paths:
       summary: Get an API test
       tags:
         - Synthetics
-      x-menu-order: 6
+      x-menu-order: 8
       "x-permission":
         operator: OR
         permissions:
@@ -34269,7 +34269,7 @@ paths:
       tags:
         - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 16
+      x-menu-order: 21
       "x-permission":
         operator: OR
         permissions:
@@ -34372,7 +34372,7 @@ paths:
       summary: Get a browser test
       tags:
         - Synthetics
-      x-menu-order: 6
+      x-menu-order: 7
       "x-permission":
         operator: OR
         permissions:
@@ -34435,7 +34435,7 @@ paths:
       tags:
         - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 16
+      x-menu-order: 19
       "x-permission":
         operator: OR
         permissions:
@@ -34508,7 +34508,7 @@ paths:
       tags:
         - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 10
+      x-menu-order: 12
       "x-permission":
         operator: OR
         permissions:
@@ -34563,7 +34563,7 @@ paths:
       summary: Get a browser test result
       tags:
         - Synthetics
-      x-menu-order: 11
+      x-menu-order: 13
       "x-permission":
         operator: OR
         permissions:
@@ -34620,7 +34620,7 @@ paths:
       tags:
         - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 17
+      x-menu-order: 23
       "x-permission":
         operator: OR
         permissions:
@@ -34674,7 +34674,7 @@ paths:
       tags:
         - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 2
+      x-menu-order: 3
       "x-permission":
         operator: OR
         permissions:
@@ -34723,7 +34723,7 @@ paths:
       summary: Get a mobile test
       tags:
         - Synthetics
-      x-menu-order: 7
+      x-menu-order: 9
       "x-permission":
         operator: OR
         permissions:
@@ -34786,7 +34786,7 @@ paths:
       tags:
         - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 16
+      x-menu-order: 22
       "x-permission":
         operator: OR
         permissions:
@@ -34867,7 +34867,7 @@ paths:
       summary: Search Synthetic tests
       tags:
         - Synthetics
-      x-menu-order: 5
+      x-menu-order: 6
       "x-permission":
         operator: OR
         permissions:
@@ -34907,7 +34907,7 @@ paths:
       tags:
         - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 14
+      x-menu-order: 16
       "x-permission":
         operator: OR
         permissions:
@@ -34947,7 +34947,7 @@ paths:
       tags:
         - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 13
+      x-menu-order: 15
       "x-permission":
         operator: OR
         permissions:
@@ -34996,7 +34996,7 @@ paths:
       tags:
         - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 15
+      x-menu-order: 17
       "x-permission":
         operator: OR
         permissions:
@@ -35043,7 +35043,7 @@ paths:
       summary: Get a test configuration
       tags:
         - Synthetics
-      x-menu-order: 4
+      x-menu-order: 5
       "x-permission":
         operator: OR
         permissions:
@@ -35106,7 +35106,7 @@ paths:
       tags:
         - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 16
+      x-menu-order: 20
       "x-permission":
         operator: OR
         permissions:
@@ -35241,7 +35241,7 @@ paths:
       tags:
         - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 8
+      x-menu-order: 10
       "x-permission":
         operator: OR
         permissions:
@@ -35294,7 +35294,7 @@ paths:
       summary: Get an API test result
       tags:
         - Synthetics
-      x-menu-order: 9
+      x-menu-order: 11
       "x-permission":
         operator: OR
         permissions:
@@ -35355,7 +35355,7 @@ paths:
       tags:
         - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 16
+      x-menu-order: 18
       "x-permission":
         operator: OR
         permissions:
@@ -35389,7 +35389,7 @@ paths:
       summary: Get all global variables
       tags:
         - Synthetics
-      x-menu-order: 19
+      x-menu-order: 25
       "x-permission":
         operator: OR
         permissions:
@@ -35441,7 +35441,7 @@ paths:
       tags:
         - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 18
+      x-menu-order: 24
       "x-permission":
         operator: OR
         permissions:
@@ -35488,7 +35488,7 @@ paths:
       summary: Delete a global variable
       tags:
         - Synthetics
-      x-menu-order: 22
+      x-menu-order: 28
       "x-permission":
         operator: OR
         permissions:
@@ -35532,7 +35532,7 @@ paths:
       summary: Get a global variable
       tags:
         - Synthetics
-      x-menu-order: 20
+      x-menu-order: 26
     put:
       description: Edit a Synthetic global variable.
       operationId: EditGlobalVariable
@@ -35580,7 +35580,7 @@ paths:
       tags:
         - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 21
+      x-menu-order: 27
       "x-permission":
         operator: OR
         permissions:
@@ -35872,7 +35872,7 @@ paths:
       summary: Get hourly usage for analyzed logs
       tags:
         - Usage Metering
-      x-menu-order: 23
+      x-menu-order: 20
       "x-permission":
         operator: OR
         permissions:
@@ -35934,7 +35934,7 @@ paths:
       summary: Get hourly usage for audit logs
       tags:
         - Usage Metering
-      x-menu-order: 40
+      x-menu-order: 33
       "x-permission":
         operator: OR
         permissions:
@@ -35994,7 +35994,7 @@ paths:
       summary: Get hourly usage for Lambda
       tags:
         - Usage Metering
-      x-menu-order: 19
+      x-menu-order: 16
       "x-permission":
         operator: OR
         permissions:
@@ -36054,7 +36054,7 @@ paths:
       summary: Get billable usage across your account
       tags:
         - Usage Metering
-      x-menu-order: 5
+      x-menu-order: 3
       "x-permission":
         operator: OR
         permissions:
@@ -36116,7 +36116,7 @@ paths:
       summary: Get hourly usage for CI visibility
       tags:
         - Usage Metering
-      x-menu-order: 35
+      x-menu-order: 31
       "x-permission":
         operator: OR
         permissions:
@@ -36178,7 +36178,7 @@ paths:
       summary: Get hourly usage for CSM Pro
       tags:
         - Usage Metering
-      x-menu-order: 28
+      x-menu-order: 25
       "x-permission":
         operator: OR
         permissions:
@@ -36240,7 +36240,7 @@ paths:
       summary: Get hourly usage for cloud workload security
       tags:
         - Usage Metering
-      x-menu-order: 30
+      x-menu-order: 26
       "x-permission":
         operator: OR
         permissions:
@@ -36302,7 +36302,7 @@ paths:
       summary: Get hourly usage for database monitoring
       tags:
         - Usage Metering
-      x-menu-order: 31
+      x-menu-order: 27
       "x-permission":
         operator: OR
         permissions:
@@ -36362,7 +36362,7 @@ paths:
       summary: Get hourly usage for Fargate
       tags:
         - Usage Metering
-      x-menu-order: 18
+      x-menu-order: 15
       "x-permission":
         operator: OR
         permissions:
@@ -36422,7 +36422,7 @@ paths:
       summary: Get hourly usage for hosts and containers
       tags:
         - Usage Metering
-      x-menu-order: 11
+      x-menu-order: 8
       "x-permission":
         operator: OR
         permissions:
@@ -36522,7 +36522,7 @@ paths:
       summary: Get hourly usage attribution
       tags:
         - Usage Metering
-      x-menu-order: 2
+      x-menu-order: 1
       "x-permission":
         operator: OR
         permissions:
@@ -36584,7 +36584,7 @@ paths:
       summary: Get hourly usage for incident management
       tags:
         - Usage Metering
-      x-menu-order: 26
+      x-menu-order: 23
       "x-permission":
         operator: OR
         permissions:
@@ -36645,7 +36645,7 @@ paths:
       summary: Get hourly usage for indexed spans
       tags:
         - Usage Metering
-      x-menu-order: 14
+      x-menu-order: 11
       "x-permission":
         operator: OR
         permissions:
@@ -36707,7 +36707,7 @@ paths:
       summary: Get hourly usage for ingested spans
       tags:
         - Usage Metering
-      x-menu-order: 25
+      x-menu-order: 22
       "x-permission":
         operator: OR
         permissions:
@@ -36769,7 +36769,7 @@ paths:
       summary: Get hourly usage for IoT
       tags:
         - Usage Metering
-      x-menu-order: 27
+      x-menu-order: 24
       "x-permission":
         operator: OR
         permissions:
@@ -36829,7 +36829,7 @@ paths:
       summary: Get hourly usage for logs
       tags:
         - Usage Metering
-      x-menu-order: 12
+      x-menu-order: 9
       "x-permission":
         operator: OR
         permissions:
@@ -36891,7 +36891,7 @@ paths:
       summary: Get hourly logs usage by retention
       tags:
         - Usage Metering
-      x-menu-order: 10
+      x-menu-order: 7
       "x-permission":
         operator: OR
         permissions:
@@ -36957,7 +36957,7 @@ paths:
       summary: Get hourly usage for logs by index
       tags:
         - Usage Metering
-      x-menu-order: 9
+      x-menu-order: 6
       "x-permission":
         operator: OR
         permissions:
@@ -37074,7 +37074,7 @@ paths:
       summary: Get monthly usage attribution
       tags:
         - Usage Metering
-      x-menu-order: 3
+      x-menu-order: 2
       "x-permission":
         operator: OR
         permissions:
@@ -37136,7 +37136,7 @@ paths:
       summary: get hourly usage for network flows
       tags:
         - Usage Metering
-      x-menu-order: 22
+      x-menu-order: 19
       "x-permission":
         operator: OR
         permissions:
@@ -37196,7 +37196,7 @@ paths:
       summary: Get hourly usage for network hosts
       tags:
         - Usage Metering
-      x-menu-order: 21
+      x-menu-order: 18
       "x-permission":
         operator: OR
         permissions:
@@ -37258,7 +37258,7 @@ paths:
       summary: Get hourly usage for online archive
       tags:
         - Usage Metering
-      x-menu-order: 36
+      x-menu-order: 32
       "x-permission":
         operator: OR
         permissions:
@@ -37320,7 +37320,7 @@ paths:
       summary: Get hourly usage for profiled hosts
       tags:
         - Usage Metering
-      x-menu-order: 34
+      x-menu-order: 30
       "x-permission":
         operator: OR
         permissions:
@@ -37380,7 +37380,7 @@ paths:
       summary: Get hourly usage for RUM units
       tags:
         - Usage Metering
-      x-menu-order: 33
+      x-menu-order: 29
       "x-permission":
         operator: OR
         permissions:
@@ -37446,7 +37446,7 @@ paths:
       summary: Get hourly usage for RUM sessions
       tags:
         - Usage Metering
-      x-menu-order: 20
+      x-menu-order: 17
       "x-permission":
         operator: OR
         permissions:
@@ -37509,7 +37509,7 @@ paths:
       summary: Get hourly usage for sensitive data scanner
       tags:
         - Usage Metering
-      x-menu-order: 32
+      x-menu-order: 28
       "x-permission":
         operator: OR
         permissions:
@@ -37571,7 +37571,7 @@ paths:
       summary: Get hourly usage for SNMP devices
       tags:
         - Usage Metering
-      x-menu-order: 24
+      x-menu-order: 21
       "x-permission":
         operator: OR
         permissions:
@@ -37646,7 +37646,7 @@ paths:
       summary: Get usage across your account
       tags:
         - Usage Metering
-      x-menu-order: 8
+      x-menu-order: 5
       "x-permission":
         operator: OR
         permissions:
@@ -37706,7 +37706,7 @@ paths:
       summary: Get hourly usage for synthetics checks
       tags:
         - Usage Metering
-      x-menu-order: 15
+      x-menu-order: 12
       "x-permission":
         operator: OR
         permissions:
@@ -37766,7 +37766,7 @@ paths:
       summary: Get hourly usage for synthetics API checks
       tags:
         - Usage Metering
-      x-menu-order: 16
+      x-menu-order: 13
       "x-permission":
         operator: OR
         permissions:
@@ -37826,7 +37826,7 @@ paths:
       summary: Get hourly usage for synthetics browser checks
       tags:
         - Usage Metering
-      x-menu-order: 17
+      x-menu-order: 14
       "x-permission":
         operator: OR
         permissions:
@@ -37886,7 +37886,7 @@ paths:
       summary: Get hourly usage for custom metrics
       tags:
         - Usage Metering
-      x-menu-order: 13
+      x-menu-order: 10
       "x-permission":
         operator: OR
         permissions:
@@ -37965,7 +37965,7 @@ paths:
       summary: Get all custom metrics by hourly average
       tags:
         - Usage Metering
-      x-menu-order: 7
+      x-menu-order: 4
       "x-permission":
         operator: OR
         permissions:
@@ -38397,7 +38397,7 @@ paths:
       tags:
         - Monitors
       x-codegen-request-body-name: body
-      x-menu-order: 4
+      x-menu-order: 14
   /v1/monitor/unmute_all:
     post:
       deprecated: true
@@ -38422,7 +38422,7 @@ paths:
       tags:
         - Monitors
       x-codegen-request-body-name: body
-      x-menu-order: 3
+      x-menu-order: 13
 security:
   - apiKeyAuth: []
     appKeyAuth: []
