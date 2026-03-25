@@ -139,6 +139,7 @@ You need to generate exports for two data types: **actual** and **amortized**. D
 {{< img src="cloud_cost/run_now.png" alt="Click Run Now button in export side panel to generate exports" style="width:50%" >}}
 
 ### Provide Datadog access to your exports
+Grant Datadog read access to the storage account where your exports are saved.
 
 {{% collapse-content title="Billing accounts" level="h4" %}}
 
@@ -168,6 +169,7 @@ If your exports are in different storage containers, repeat steps one to seven f
 
 If your exports are in different storage containers, repeat steps one to seven for the other storage container.
 {{% /collapse-content %}}
+
 ### Configure Cost Management Reader access
 **Note:** You do not need to configure this access if your scope is **Billing Account**.
 
