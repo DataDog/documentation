@@ -32,11 +32,11 @@ To configure your Datadog Agent source:
 
 <div class="alert alert-danger">Only enter the identifier for the Datadog Agent address and, if applicable, the TLS key pass. Do <b>not</b> enter the actual values.</div>
 
-1. Enter the identifier for your Datadog Agent address. If you leave it blank, the [default](#set-secrets) is used.
+Enter the identifier for your Datadog Agent address. If you leave it blank, the [default](#set-secrets) is used.
 
 ### Optional settings
 
-Toggle the switch to **Enable TLS**. If you enable TLS, the following certificate and key files are required.<br>**Note**: All file paths are made relative to the configuration data directory, which is `/var/lib/observability-pipelines-worker/config/` by default. See [Advanced Worker Configurations][5] for more information. The file must be owned by the `observability-pipelines-worker group` and `observability-pipelines-worker` user, or at least readable by the group or user.
+Toggle the switch to **Enable TLS**. The following certificate and key files are required.<br>**Note**: All file paths are made relative to the configuration data directory, which is `/var/lib/observability-pipelines-worker/config/` by default. See [Advanced Worker Configurations][5] for more information. The file must be owned by the `observability-pipelines-worker` user and group, or at least readable by the group or user.
 - Enter the identifier for your Datadog Agent key pass. If you leave it blank, the [default](#set-secrets) is used.
    - **Note**: Only enter the identifier for the key pass. Do **not** enter the actual key pass.
 - `Server Certificate Path`: The path to the certificate file that has been signed by your Certificate Authority (CA) root file in DER or PEM (X.509) format.
