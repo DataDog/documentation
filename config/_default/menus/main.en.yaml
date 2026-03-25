@@ -3506,15 +3506,20 @@ menu:
       parent: serverless_gcr
       weight: 701
       identifier: serverless_gcr_containers
+    - name: Jobs (Preview)
+      url: serverless/google_cloud_run/jobs
+      parent: serverless_gcr
+      weight: 702
+      identifier: serverless_gcr_jobs
     - name: Functions
       url: serverless/google_cloud_run/functions
       parent: serverless_gcr
-      weight: 702
+      weight: 703
       identifier: serverless_gcr_functions
     - name: Functions (1st generation)
       url: serverless/google_cloud_run/functions_1st_gen
       parent: serverless_gcr
-      weight: 703
+      weight: 704
       identifier: serverless_gcr_functions_1st_gen
     - name: Libraries & Integrations
       url: serverless/libraries_integrations
@@ -4969,6 +4974,12 @@ menu:
       identifier: data_observability
       parent: data_observability_heading
       weight: 60000
+    - name: Data Catalog
+      url: data_observability/data_catalog
+      pre: data-observability-wui
+      identifier: data_catalog
+      parent: data_observability_heading
+      weight: 65000
     - name: Quality Monitoring
       url: data_observability/quality_monitoring/
       pre: data-observability-wui
@@ -7317,16 +7328,21 @@ menu:
       url: /security/code_security/iac_security/setup/
       parent: code_security_iac_security
       weight: 100000
+    - name: GitHub Actions
+      identifier: code_security_iac_security_github_actions
+      url: /security/code_security/iac_security/github_actions/
+      parent: code_security_iac_security
+      weight: 100001
     - name: Exclusions
       identifier: code_security_iac_security_exclusions
       url: /security/code_security/iac_security/exclusions/
       parent: code_security_iac_security
-      weight: 100001
+      weight: 100002
     - name: Rules
       identifier: code_security_iac_security_rules
       url: /security/code_security/iac_security/iac_rules/
       parent: code_security_iac_security
-      weight: 100002
+      weight: 100003
     - name: Developer Tool Integrations
       identifier: dev_tool_int
       url: /security/code_security/dev_tool_int/
