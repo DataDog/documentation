@@ -210,6 +210,7 @@ agent diagnose show-metadata agent-telemetry
 | admission_webhooks.patcher_errors           | Number of admission webhook patcher errors                                                                             |
 | admission_webhooks.rc_provider_configs      | Number of remote configuration provider configs                                                                        |
 | admission_webhooks.rc_provider_configs_invalid | Number of invalid remote configuration provider configs                                                             |
+| admission_webhooks.image_resolution_attempts | Number of image resolution attempts                                                                                   |
 | **Autodiscovery (Cluster Agent)**           |                                                                                                                        |
 | autodiscovery.errors                        | Number of Autodiscovery errors                                                                                         |
 | autodiscovery.watched_resources             | Number of Autodiscovery watched resources                                                                              |
