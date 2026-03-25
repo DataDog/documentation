@@ -45,7 +45,7 @@ Below the cost summary, the **Daily Cost Breakdown** stacked bar chart shows cos
 
 ## Trends tab
 
-The **Trends** tab surfaces products worth investigating based on four sort options:
+The **Trends** tab displays products worth investigating based on four sort options:
 
 - **Highest % Cost Change**
 - **Highest Cost Change ($)**
