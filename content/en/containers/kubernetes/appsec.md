@@ -62,7 +62,7 @@ More proxies are available through manual installation on the global [setup page
   - To the Datadog Agent for traces
 
 ### Sidecar mode
-- Requires Datadog Cluster Agent 7.73.0 or later
+- Requires Datadog Cluster Agent 7.76.0 or later
 - Each gateway pod runs its own processor instance, which increases per-pod resource usage
 - Datadog Operator does not yet support sidecar mode configuration
 
