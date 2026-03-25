@@ -58160,7 +58160,6 @@ components:
         - none
         - false_positive
         - testing_or_maintenance
-        - remediated
         - investigated_case_opened
         - true_positive_benign
         - true_positive_malicious
@@ -58170,7 +58169,6 @@ components:
         - NONE
         - FALSE_POSITIVE
         - TESTING_OR_MAINTENANCE
-        - REMEDIATED
         - INVESTIGATED_CASE_OPENED
         - TRUE_POSITIVE_BENIGN
         - TRUE_POSITIVE_MALICIOUS
@@ -103833,8 +103831,6 @@ paths:
               schema:
                 $ref: "#/components/schemas/SecurityMonitoringSignalResponse"
           description: OK
-        "403":
-          $ref: "#/components/responses/NotAuthorizedResponse"
         "404":
           $ref: "#/components/responses/NotFoundResponse"
         "429":
@@ -103873,17 +103869,25 @@ paths:
                 $ref: "#/components/schemas/SecurityMonitoringSignalTriageUpdateResponse"
           description: OK
         "400":
-          $ref: "#/components/responses/BadRequestResponse"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Bad Request
         "403":
-          $ref: "#/components/responses/NotAuthorizedResponse"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Forbidden
         "404":
-          $ref: "#/components/responses/NotFoundResponse"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Not Found
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
-      security:
-        - apiKeyAuth: []
-          appKeyAuth: []
-        - AuthZ: []
       summary: Modify the triage assignee of a security signal
       tags: ["Security Monitoring"]
       x-codegen-request-body-name: body
@@ -103914,17 +103918,25 @@ paths:
                 $ref: "#/components/schemas/SecurityMonitoringSignalTriageUpdateResponse"
           description: OK
         "400":
-          $ref: "#/components/responses/BadRequestResponse"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Bad Request
         "403":
-          $ref: "#/components/responses/NotAuthorizedResponse"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Forbidden
         "404":
-          $ref: "#/components/responses/NotFoundResponse"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Not Found
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
-      security:
-        - apiKeyAuth: []
-          appKeyAuth: []
-        - AuthZ: []
       summary: Change the related incidents of a security signal
       tags: ["Security Monitoring"]
       x-codegen-request-body-name: body
@@ -103955,17 +103967,25 @@ paths:
                 $ref: "#/components/schemas/SecurityMonitoringSignalTriageUpdateResponse"
           description: OK
         "400":
-          $ref: "#/components/responses/BadRequestResponse"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Bad Request
         "403":
-          $ref: "#/components/responses/NotAuthorizedResponse"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Forbidden
         "404":
-          $ref: "#/components/responses/NotFoundResponse"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Not Found
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
-      security:
-        - apiKeyAuth: []
-          appKeyAuth: []
-        - AuthZ: []
       summary: Change the triage state of a security signal
       tags: ["Security Monitoring"]
       x-codegen-request-body-name: body
