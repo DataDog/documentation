@@ -5006,6 +5006,11 @@ menu:
       identifier: bigquery
       parent: data_warehouses
       weight: 3000000
+    - name: Redshift
+      url: data_observability/quality_monitoring/data_warehouses/redshift
+      identifier: redshift
+      parent: data_warehouses
+      weight: 4000000
     - name: Data Lakes
       url: data_observability/quality_monitoring/data_lakes
       identifier: data_lakes
