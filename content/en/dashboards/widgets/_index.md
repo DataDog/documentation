@@ -47,6 +47,10 @@ To begin using widgets in your dashboards:
 
 For more information, see [Widget Configuration][3] and explore the available [Widget Types][4].
 
+### Organize widgets with tabs
+
+As dashboards grow, use tabs to group widgets into named sections. In edit mode, open a widget's share menu and select **Move to tab** to assign it to an existing tab or create a new one. Tabs appear as a navigation bar at the top of the dashboard, letting viewers jump directly to the section they need. For more information, see [Tabs][5].
+
 ## Data sources
 
 Widgets can visualize data from multiple Datadog sources including:
@@ -93,3 +97,4 @@ Widgets can visualize data from multiple Datadog sources including:
 [2]: /dashboards/
 [3]: /dashboards/widgets/configuration/
 [4]: /dashboards/widgets/types/
+[5]: /dashboards/configure/#tabs
