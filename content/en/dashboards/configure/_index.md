@@ -46,7 +46,7 @@ Use tabs to organize widgets into named sections within a single dashboard. Tabs
 
 ### Create and manage tabs
 
-To add a tab, click on the **Add Widgets** dropdown at the top of the dashboard and click **Add New Tab**. New tabs are named automatically (for example, "Tab 1", "Tab 2") and a dashboard supports up to 100 tabs. Add subsequent tabs using the **+** button on the tab bar. 
+To add a tab, click on the **Add Widgets** dropdown at the top of the dashboard and click **Add New Tab**. New tabs are named automatically (for example, "Tab 1", "Tab 2") and a dashboard supports up to 100 tabs. Add subsequent tabs using the **+** button on the tab bar.
 
 To **rename** a tab, double-click the tab name to edit it inline, or open the tab's options menu (⋮) and select **Rename**. Tab names support up to 100 characters.
 
