@@ -56,9 +56,9 @@ Select a sort option to update the cards displayed. Each product card shows:
 
 - **Total Cost** for the period
 - **Projected EOM** cost
-- **Month-over-month change** (percentage badge)
+- **Month-over-month change**, displayed as a percentage badge
 - **Daily Cost** bar chart spanning the previous and current month
-- **Usage** (total units consumed, in natural units — for example, PB of scanned data, custom metrics) (on Total Cost and Usage-related cards)
+- **Usage**, displayed as total units consumed, in natural units; for example, PB (petabytes) of scanned data, Custom Metrics; displayed only on Total Cost and Usage-related cards
 
 Click **View Details** on any card to open the [product detail page][2].
 
