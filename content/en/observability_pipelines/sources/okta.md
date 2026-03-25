@@ -65,7 +65,7 @@ The following are required to send Okta logs to Observability Pipelines using Am
     sudo chmod 640 /var/lib/observability-pipelines-worker/config/<your-cert-file>
     ```
 1. Deploy the configuration from the Observability Pipelines UI.
-1. Test your endpoint using curl:
+1. Test your endpoint using `curl`:
     ```shell
     curl -X POST https://your-domain.com \
       -u username:password \
