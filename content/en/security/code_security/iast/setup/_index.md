@@ -834,7 +834,12 @@ Two release branches are supported:
 
 And the library supports the following runtimes:
 
-{{< partial name="trace_collection/python/supported_runtimes.html" >}}
+| OS      | CPU                   | Runtime   | Runtime version | Supported ddtrace versions   |
+|---------|-----------------------|-----------|-----------------|------------------------------|
+| Linux   | x86-64, AArch64       | CPython   | 3.9+            | >=4, <5                      |
+| macOS   | Intel, Apple Silicon  | CPython   | 3.9+            | >=4, <5                      |
+| Linux   | x86-64, i686, AArch64 | CPython   | 3.8+            | >=3, <4                      |
+| macOS   | Intel, Apple Silicon  | CPython   | 3.8+            | >=3, <4                      |
 
 #### Web framework compatibility
 ##### Code Security Capability Notes

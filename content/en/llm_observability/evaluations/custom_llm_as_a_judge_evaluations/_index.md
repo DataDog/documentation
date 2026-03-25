@@ -327,6 +327,26 @@ You can:
 - View aggregate results in the LLM Observability Overview page's Evaluation section
 - Create [monitors][4] to alert on performance changes or regression
 
+## Using in experiments
+
+To reuse a custom LLM-as-a-judge evaluation in a local [LLM Experiment][8], reference it by name using `RemoteEvaluator` from the SDK:
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs import LLMObs, RemoteEvaluator
+
+evaluator = RemoteEvaluator(eval_name="quality-assessment")
+
+experiment = LLMObs.experiment(
+    name="my-experiment",
+    task=my_task,
+    dataset=dataset,
+    evaluators=[evaluator],
+)
+experiment.run()
+{{< /code-block >}}
+
+You can mix `RemoteEvaluator` with other local evaluators in the same experiment. For custom input mapping, error handling, and more options, see [RemoteEvaluator][9] in the Evaluation Developer Guide.
+
 ## Best practices for reliable custom evaluations
 
 - **Start small**: Target a single, well-defined failure mode before scaling.
@@ -336,14 +356,29 @@ You can:
 - **Document your rubric**: Clearly define what "Pass" and "Fail" mean to avoid drift over time.
 - **Re-align your evaluator**: Reassess prompt and few-shot examples when the underlying LLM updates.
 
+## Estimated token usage
+
+You can monitor the token usage of your LLM evaluations using the [LLM Evaluations Token Usage dashboard][10].
+
+If you need more details, the following metrics allow you to track the LLM resources consumed to power evaluations:
+
+- `ml_obs.estimated_usage.llm.input.tokens`
+- `ml_obs.estimated_usage.llm.output.tokens`
+- `ml_obs.estimated_usage.llm.total.tokens`
+
+Each of these metrics has `ml_app`, `model_server`, `model_provider`, `model_name`, and `evaluation_name` tags, allowing you to pinpoint specific applications, models, and evaluations contributing to your usage.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/llm/evaluations
-[2]: /llm_observability/evaluations/managed_evaluations#connect-your-llm-provider-account
+[2]: /llm_observability/evaluations/custom_llm_as_a_judge_evaluations/connect_to_account
 [3]: /events/explorer/facets/
 [4]: /monitors/
 [5]: https://arxiv.org/abs/2504.00050
 [6]: /llm_observability/evaluations/evaluation_compatibility
 [7]: /llm_observability/evaluations/custom_llm_as_a_judge_evaluations/template_evaluations/
+[8]: /llm_observability/experiments
+[9]: /llm_observability/guide/evaluation_developer_guide/#using-managed-evaluators
+[10]: https://app.datadoghq.com/dash/integration/llm_evaluations_token_usage

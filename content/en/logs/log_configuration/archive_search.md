@@ -126,14 +126,14 @@ Archive Search scans archived log files within your selected time range. **Scan 
 To optimize performance and reduce costs:
 * **Narrow the time range:** Limit your search to the smallest window possible.
 * **Set Scan Limits:** Admins with `Logs Write Archives` permissions can set a maximum scan size per Archive in the settings.
-* **Use Indexed Attributes (Preview):** This is the most effective way to accelerate searches for high-cardinality data.
+* **Use Lookup Attributes (Preview):** This is the most effective way to accelerate searches for high-cardinality data.
 
-**Note**: Only logs archived after you configure indexed attributes benefit from accelerated searches. Logs archived before this configuration are not affected.
+**Note**: Only logs archived after you configure Lookup attributes benefit from accelerated searches. Logs archived before this configuration are not affected.
 
 
-### Accelerate searches with Indexed Attributes
+### Accelerate searches with Lookup Attributes
 
-You can configure **Search Attributes** on your archives to skip irrelevant data blocks in your storage bucket. For example, if you index `trace_id` or `user_id` you significantly reduce the volume of data scanned and lower your cloud provider's egress fees.
+You can configure **Search Attributes** on your archives to skip irrelevant data blocks in your storage bucket. For example, if you configure `trace_id` or `user_id` you significantly reduce the volume of data scanned and lower your cloud provider's egress fees.
 
 To set this up, see the [Log Archives][7] documentation.
 
@@ -214,4 +214,4 @@ In order to search log events from your archives, Datadog uses a service account
 [4]: https://app.datadoghq.com/logs/archive-search/new
 [5]: https://app.datadoghq.com/logs/archive-search/
 [6]: /logs/guide/logs-rbac/?tab=ui#restrict-access-to-logs
-[7]: /logs/log_configuration/archives/?tab=awss3#archive-search-indexed-attribute
+[7]: /logs/log_configuration/archives/?tab=awss3#archive-search-lookup-attribute
