@@ -49,7 +49,7 @@ For more information, see [Widget Configuration][3] and explore the available [W
 
 ### Organize widgets with tabs
 
-As dashboards grow, use tabs to group widgets into named sections. In edit mode, open a widget's share menu and select **Move to tab** to assign it to an existing tab or create a new one. Tabs appear as a navigation bar at the top of the dashboard, letting viewers jump directly to the section they need. For more information, see [Tabs][5].
+As dashboards grow, use tabs to group widgets into named sections. In edit mode, open a widget's share menu and select **Move to tab** to assign it to an existing tab or create a new one. Tabs appear as a navigation bar at the top of the dashboard, letting viewers navigate directly to the section they need. For more information, see [Tabs][5].
 
 ## Data sources
 
