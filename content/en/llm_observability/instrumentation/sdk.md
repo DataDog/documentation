@@ -1209,16 +1209,26 @@ Starting a new span before the current span is finished automatically traces a p
 
 The following diagrams show common parent-child relationships between span kinds:
 
+**Agent-rooted trace:**
 ```
-agent (root)                        workflow (root)
-├── llm        ← reasoning step     ├── task       ← input validation
-├── tool       ← external API call  ├── retrieval  ← fetch relevant docs
-│   └── task   ← postprocessing     ├── llm        ← generate response
-├── workflow   ← static sub-pipeline└── task       ← format output
-│   ├── task   ← preprocessing
-│   ├── llm    ← LLM call
-│   └── retrieval ← vector search
-└── llm        ← final response
+agent (root)
+├── llm              ← reasoning step
+├── tool             ← external API call
+│   └── task         ← postprocessing
+├── workflow         ← static sub-pipeline
+│   ├── task         ← preprocessing
+│   ├── llm          ← LLM call
+│   └── retrieval    ← vector search
+└── llm              ← final response
+```
+
+**Workflow-rooted trace:**
+```
+workflow (root)
+├── task             ← input validation
+├── retrieval        ← fetch relevant docs
+├── llm              ← generate response
+└── task             ← format output
 ```
 
 **Key nesting rules:**
