@@ -41,7 +41,7 @@ ALTER USER datadog_experiments_user SET DEFAULT_ROLE = datadog_experiments_role;
 ### Grant privileges to the role
 
 1. Identify the tables in Snowflake from which you intend to create metrics.
-1. Run the following commands to grant read privileges to the new role. Replace `<database>`, `<schema>`, and `<table>` with their appropriate values. Run both `GRANT USAGE` commands, then run one of the three `GRANT SELECT` options depending on your access needs.
+1. Run the following commands to grant read privileges to the new role, replacing `<database>`, `<schema>`, and `<table>` with their appropriate values. Run both `GRANT USAGE` commands, then run one `GRANT SELECT` command based on your access needs.
 
 ```sql
 GRANT USAGE ON DATABASE <database> TO ROLE datadog_experiments_role;
