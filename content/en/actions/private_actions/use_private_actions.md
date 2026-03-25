@@ -84,7 +84,6 @@ bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.s
 
 Go to the [Private Action Runners][104] page. You should see a new runner on the list. You can create new connections or start using existing ones.
 
-[100]: /agent/versions/upgrade_to_agent_v7/
 [101]: https://app.datadoghq.com/organization-settings/application-keys
 [102]: https://app.datadoghq.com/organization-settings/api-keys
 [103]: /getting_started/site/
