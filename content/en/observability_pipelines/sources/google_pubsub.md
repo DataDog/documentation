@@ -19,7 +19,7 @@ Use Observability Pipelines' Google Pub/Sub source to pull logs from the Google 
 
 ## Setup
 
-Set up this source when you [set up a pipeline][1]. You can set up a pipeline in the [UI][5], using the [API][6], or with [Terraform][7]. The instructions in this section is for setting up the source in the UI.
+Set up this source when you [set up a pipeline][1]. You can set up a pipeline in the [UI][5], using the [API][6], or with [Terraform][7]. The instructions in this section are for setting up the source in the UI.
 
 1. Enter the name of the source project.
 1. If you have a credentials JSON file, enter the path to your credentials JSON file. The credentials file must be placed under `DD_OP_DATA_DIR/config`. Alternatively, you can use the `GOOGLE_APPLICATION_CREDENTIALS` environment variable to provide the credential path.

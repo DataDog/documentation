@@ -35,7 +35,7 @@ If your forwarders are globally configured to enable SSL, you need the appropria
 
 ## Setup
 
-Set up this source when you [set up a pipeline][6]. You can set up a pipeline in the [UI][10], using the [API][11], or with [Terraform][12]. The instructions in this section is for setting up the source in the UI.
+Set up this source when you [set up a pipeline][6]. You can set up a pipeline in the [UI][10], using the [API][11], or with [Terraform][12]. The instructions in this section are for setting up the source in the UI.
 
 <div class="alert alert-danger">Only enter the identifiers for the OpenTelemetry HTTP and gRPC listener addresses and, if applicable, the TLS key pass. Do <b>not</b> enter the actual values.</div>
 

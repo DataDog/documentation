@@ -19,7 +19,7 @@ Use Observability Pipelines' Socket source to send logs to the Worker over a soc
 
 ## Setup
 
-Set up this source when you [set up a pipeline][1]. You can set up a pipeline in the [UI][3], using the [API][4], or with [Terraform][5]. The instructions in this section is for setting up the source in the UI.
+Set up this source when you [set up a pipeline][1]. You can set up a pipeline in the [UI][3], using the [API][4], or with [Terraform][5]. The instructions in this section are for setting up the source in the UI.
 
 <div class="alert alert-danger">Only enter the identifiers for the socket address and, if applicable, the TLS key pass. Do <b>not</b> enter the actual values.</div>
 

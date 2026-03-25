@@ -21,7 +21,7 @@ Use Observability Pipelines' Splunk HTTP Event Collector (HEC) source to receive
 
 ## Setup
 
-Set up this source when you [set up a pipeline][1]. You can set up a pipeline in the [UI][6], using the [API][7], or with [Terraform][8]. The instructions in this section is for setting up the source in the UI.
+Set up this source when you [set up a pipeline][1]. You can set up a pipeline in the [UI][6], using the [API][7], or with [Terraform][8]. The instructions in this section are for setting up the source in the UI.
 
 <div class="alert alert-danger">Only enter the identifiers for the Splunk HEC address and, if applicable, the TLS key pass. Do <b>not</b> enter the actual values.</div>
 

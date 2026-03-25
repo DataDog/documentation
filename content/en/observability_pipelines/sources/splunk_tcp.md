@@ -19,7 +19,7 @@ Use Observability Pipelines' Splunk Heavy and Universal Forwards (TCP) source to
 
 ## Setup
 
-Set up this source when you [set up a pipeline][1]. You can set up a pipeline in the [UI][2], using the [API][3], or with [Terraform][4]. The instructions in this section is for setting up the source in the UI.
+Set up this source when you [set up a pipeline][1]. You can set up a pipeline in the [UI][2], using the [API][3], or with [Terraform][4]. The instructions in this section are for setting up the source in the UI.
 
 <div class="alert alert-danger">Only enter the identifiers for the Splunk TCP address and, if applicable, the TLS key pass. Do <b>not</b> enter the actual values.</div>
 

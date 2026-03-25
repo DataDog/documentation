@@ -21,7 +21,7 @@ You can also [forward third-party log to syslog](#forward-third-party-logs-to-sy
 
 ## Setup
 
-Set up this source when you [set up a pipeline][1]. You can set up a pipeline in the [UI][7], using the [API][8], or with [Terraform][9]. The instructions in this section is for setting up the source in the UI.
+Set up this source when you [set up a pipeline][1]. You can set up a pipeline in the [UI][7], using the [API][8], or with [Terraform][9]. The instructions in this section are for setting up the source in the UI.
 
 To configure your Syslog source:
 
