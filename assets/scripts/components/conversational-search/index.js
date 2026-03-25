@@ -80,9 +80,10 @@ class ConversationalSearch {
             if (getBooleanFlag(client, USE_LEGACY_MODEL_FLAG_KEY)) {
                 this.selectedModelId = CONV_MODEL_DOCS_PREVIEW;
             }
-            if (getBooleanFlag(client, DISABLE_STREAMING_FLAG_KEY)) {
-                this.streamingDisabled = true;
-            }
+            // TODO(WE-32): Uncomment once server-side streaming is re-enabled.
+            // if (getBooleanFlag(client, DISABLE_STREAMING_FLAG_KEY)) {
+            //     this.streamingDisabled = true;
+            // }
         }).catch(() => {});
     }
 
@@ -409,12 +410,22 @@ class ConversationalSearch {
     }
 
     async runStreamConversation(query, responseContainer) {
+        responseContainer.closest('.conv-search-message')?.remove();
+
         this.abortController = new AbortController();
         const startTime = Date.now();
 
+        const loadingState = this.addLoadingIndicator();
+        let msgIndex = 0;
+        const statusInterval = setInterval(() => {
+            if (msgIndex < LOADING_MESSAGES.length - 1) msgIndex++;
+            const el = loadingState.querySelector('.conv-search-status-text');
+            if (el) el.textContent = LOADING_MESSAGES[msgIndex];
+        }, 3000);
+
         let accumulatedMessage = '';
         let lastRenderTime = 0;
-        responseContainer.innerHTML = '';
+        let realContainer = null;
 
         const response = await streamConversation({
             typesenseConfig,
@@ -428,14 +439,21 @@ class ConversationalSearch {
                 }
 
                 if (chunk?.message !== undefined) {
+                    if (!realContainer) {
+                        clearInterval(statusInterval);
+                        loadingState.remove();
+                        realContainer = this.addStreamingMessage();
+                        realContainer.innerHTML = '';
+                    }
+
                     accumulatedMessage += chunk.message;
 
                     const now = Date.now();
                     if (now - lastRenderTime > RENDER_THROTTLE) {
                         const { displayMarkdown, sources } = extractSources(accumulatedMessage);
-                        responseContainer.innerHTML = inlineRefChips(parseMarkdown(displayMarkdown));
+                        realContainer.innerHTML = inlineRefChips(parseMarkdown(displayMarkdown));
                         if (sources.length > 0) {
-                            responseContainer.appendChild(buildSourceCards(sources));
+                            realContainer.appendChild(buildSourceCards(sources));
                         }
                         lastRenderTime = now;
                         this.scrollToBottom();
@@ -447,18 +465,25 @@ class ConversationalSearch {
             }
         });
 
+        clearInterval(statusInterval);
+        if (loadingState.parentNode) loadingState.remove();
+
         const finalConversationId = response?.results?.[0]?.conversation?.conversation_id;
         if (finalConversationId) {
             this.conversationId = finalConversationId;
         }
 
+        if (!realContainer) {
+            realContainer = this.addStreamingMessage();
+        }
+
         if (accumulatedMessage) {
-            responseContainer.innerHTML = renderMessageWithSources(accumulatedMessage, {
+            realContainer.innerHTML = renderMessageWithSources(accumulatedMessage, {
                 attachTooltips,
                 buildSourceCards
             });
-            injectCodeCopyButtons(responseContainer, this.ctx);
-            addMessageActions(responseContainer.parentElement, query, accumulatedMessage, this.ctx);
+            injectCodeCopyButtons(realContainer, this.ctx);
+            addMessageActions(realContainer.parentElement, query, accumulatedMessage, this.ctx);
             this.scrollToBottom();
 
             this.log('Conversational Search Response', {
@@ -470,7 +495,7 @@ class ConversationalSearch {
                 }
             });
         } else {
-            responseContainer.textContent = 'No response received. Please try again.';
+            realContainer.textContent = 'No response received. Please try again.';
         }
     }
 
