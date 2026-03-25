@@ -14,19 +14,15 @@ further_reading:
 
 Sheets is a spreadsheet tool that you can populate with Datadog data, enabling you to perform complex analysis and build reports without requiring technical expertise. It allows teams to use familiar spreadsheet functions like lookups, pivot tables, and calculations on Datadog data, so you don't have to export and use another tool with stale data.
 
-Sheets lets you manipulate, transform, and analyze data from logs, real user monitoring, and cloud cost monitoring in a familiar spreadsheet interface. It can contain the following tabs:
-
-- **[Table](#table)**: Query live data from a Datadog data source and enrich it with calculated columns, lookups, and filters.
-- **[Pivot](#pivot)**: Summarize and aggregate data from a table with custom dimensions and calculations.
-- **[Sheet](#sheet-preview)** (Preview): A flexible, blank-canvas spreadsheet where you can write formulas referencing data directly from a table to build models, reports, or track operations.
+Sheets lets you manipulate, transform, and analyze data from logs, real user monitoring, and cloud cost monitoring in a familiar spreadsheet interface.
 
 ## Table
 
-Start by creating a table of data, either by building a new query from Sheets or transferring a query from explorer pages, like Logs, RUM, Metrics, or Cloud Cost.
+Start by creating a table of data, either by building a new query from Sheets or transferring a query from explorer pages, such as Logs, RUM, Metrics, or Cloud Cost.
 
 ### Add a new table in Sheets
 
-{{< img src="/sheets/create_table.png" alt="Modal to create a table from Sheets, showing a Logs query with status:error" style="width:90%;" >}}
+{{< img src="/sheets/create_table.png" alt="Modal to create a table from Sheets, showing a Logs query with status:error." style="width:90%;" >}}
 
 1. On the [Datadog Sheets page][1], click **New Spreadsheet**.
 1. Click **Add Data**.<br/>
@@ -170,9 +166,9 @@ Calculate the monthly payment on a $50,000 loan at 6% annual interest over 3 yea
 | <span style="min-width:80px;display:block">Error</span> | Cause | How to handle |
 | -------------------- | ----- | ------------- |
 | `#DIV/0!` | Division by zero | `=IFERROR(A1/B1,0)` |
-| `#VALUE!` | Wrong argument type, for example text passed to a math function | Check input types |
-| `#NUM!` | Invalid numeric value, for example `SQRT(-1)` | Validate inputs with `IF` |
-| `#N/A` | Value not found, for example a failed `VLOOKUP` | `=IFNA(VLOOKUP(...),"not found")` |
+| `#VALUE!` | Wrong argument type; for example, text passed to a math function | Check input types |
+| `#NUM!` | Invalid numeric value; for example, `SQRT(-1)` | Validate inputs with `IF` |
+| `#N/A` | Value not found; for example, a failed `VLOOKUP` | `=IFNA(VLOOKUP(...),"not found")` |
 | `#REF!` | Reference to a cell that no longer exists | Update the formula |
 | `#NAME?` | Unrecognized function name | Check spelling |
 | `#ERROR!` | Formula could not be parsed | Check syntax |
@@ -182,6 +178,8 @@ Calculate the monthly payment on a $50,000 loan at 6% annual interest over 3 yea
 Cells can be formatted as plain text, number, percentage, currency (USD or EUR), or datetime. Formatting affects how values are displayed but not the underlying value used in calculations.
 
 ### Limits
+
+Sheets have the following limits on numbers of rows and columns:
 
 | Dimension | Default | Maximum |
 | --------- | ------- | ------- |
@@ -262,4 +260,4 @@ You must have edit access to restore general access to a restricted spreadsheet.
 [18]: https://app.datadoghq.com/apm/traces
 [19]: https://www.datadoghq.com/product-preview/additional-advanced-querying-data-sources/
 [20]: https://app.datadoghq.com/product-analytics/events
-[21]: /sheets/functions_operators#sheet-functions
+[21]: /sheets/functions_operators#functions
