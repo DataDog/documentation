@@ -55,20 +55,29 @@ The recommended way to install a private action runner is through the Datadog Ag
 {{< tabs >}}
 {{% tab "Linux" %}}
 
-### Create an Application key
+### Using Fleet Automation (recommended)
 
-1. Go to [Application Keys][101].
+1. Go to the [Fleet Automation install page for Linux][100].
+1. In **Customize your Agent coverage**, go to the **Optimization & Remediation** section and enable the toggle **Enable Agent to take action**. This creates an Application key with the `on_prem_runner_write` scope and Actions API Access enabled.
+1. In **Install the Agent**, add an API key and follow the instructions to run the installation command.
+1. After installation, go to the [Private Action Runners][101] page to verify your runner appears on the list.
+
+### Manual installation
+
+#### Create an Application key
+
+1. Go to [Application Keys][102].
 1. Click **New Key** and enter a name.
 1. Under **Scopes**, select **on_prem_runner_write**.
 1. Enable **Actions API Access**.
 1. Click **Create Key** and copy the key value.
 
-### Install or upgrade the Datadog Agent
+#### Install or upgrade the Datadog Agent
 
 Run the following command to install or upgrade the Agent and enable the private action runner. Replace the placeholder values:
-- `<API_KEY>`: Your [Datadog API key][102]
+- `<API_KEY>`: Your [Datadog API key][103]
 - `<APP_KEY>`: The Application key you created
-- `DD_SITE`: Your [Datadog site][103] (for example, `datadoghq.com`)
+- `DD_SITE`: Your [Datadog site][104] (for example, `datadoghq.com`)
 - `DD_PRIVATE_ACTION_RUNNER_ACTIONS_ALLOWLIST`: Comma-separated list of actions to allow. See [Available actions](#available-actions) for the full list.
 
 ```bash
@@ -80,14 +89,15 @@ DD_PRIVATE_ACTION_RUNNER_ACTIONS_ALLOWLIST=com.datadoghq.script.runPredefinedScr
 bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
-### Verify the installation
+#### Verify the installation
 
-Go to the [Private Action Runners][104] page. You should see a new runner on the list. You can create new connections or start using existing ones.
+Go to the [Private Action Runners][101] page. You should see a new runner on the list. You can create new connections or start using existing ones.
 
-[101]: https://app.datadoghq.com/organization-settings/application-keys
-[102]: https://app.datadoghq.com/organization-settings/api-keys
-[103]: /getting_started/site/
-[104]: https://app.datadoghq.com/actions/action-catalog
+[100]: https://app.datadoghq.com/fleet/install-agent/latest?platform=linux
+[101]: https://app.datadoghq.com/actions/action-catalog
+[102]: https://app.datadoghq.com/organization-settings/application-keys
+[103]: https://app.datadoghq.com/organization-settings/api-keys
+[104]: /getting_started/site/
 
 {{% /tab %}}
 
@@ -155,7 +165,18 @@ Go to the [Private Action Runners][104] page. You should see a new runner on the
 
 Follow these steps to install the Private Action Runner on your [Datadog Node Agents][100] and [Datadog Cluster Agent][101].
 
-### Install the Datadog Operator
+### Using Fleet Automation (recommended)
+
+1. Go to the [Fleet Automation install page][106].
+1. In **Select Agent install method**, choose **Datadog Operator**.
+1. In **Select your Kubernetes distribution**, choose the distribution that matches your environment.
+1. In **Customize your Agent coverage**, go to the **Optimization & Remediation** section and enable the toggle **Enable Agent to take action**. This creates an Application key with the `on_prem_runner_write` scope and Actions API Access enabled.
+1. In **Add the Datadog Helm repository**, add an API key.
+1. Follow the remaining Fleet instructions to complete the installation.
+
+### Manual installation
+
+#### Install the Datadog Operator
 
 Install the Datadog Operator version 1.24.0 or later:
 
@@ -167,14 +188,14 @@ helm install datadog-operator datadog/datadog-operator \
     --set image.tag=1.24.0
 ```
 
-### Create an API key and Application key
+#### Create an API key and Application key
 
 1. Create or choose an [API key][102].
 1. Go to [Application Keys][103] and create a new key:
    - Under **Scopes**, select **on_prem_runner_write**.
    - Enable **Actions API Access**.
 
-### Create Kubernetes secrets
+#### Create Kubernetes secrets
 
 ```bash
 kubectl create secret generic datadog-secret \
@@ -182,7 +203,7 @@ kubectl create secret generic datadog-secret \
     --from-literal app-key=<YOUR_APP_KEY>
 ```
 
-### Configure and deploy the Datadog Agent
+#### Configure and deploy the Datadog Agent
 
 Create a `datadog-agent.yaml` file with the following content:
 
@@ -246,7 +267,7 @@ Deploy the Agent:
 kubectl apply -f datadog-agent.yaml
 ```
 
-### Verify the deployment
+#### Verify the deployment
 
 Check that the cluster agent pods are running:
 
@@ -270,6 +291,7 @@ Go to the [Private Action Runners][104] page. You should see a new runner on the
 [103]: https://app.datadoghq.com/organization-settings/application-keys
 [104]: https://app.datadoghq.com/actions/action-catalog
 [105]: /getting_started/site/
+[106]: https://app.datadoghq.com/fleet/install-agent/latest?platform=kubernetes
 
 {{% /tab %}}
 
@@ -493,16 +515,79 @@ Go to the [Private Action Runners][104] page. You should see a new runner on the
 
 {{% tab "Helm" %}}
 
-To install the Private Action Runner using the Datadog Helm chart:
+### Using Fleet Automation (recommended)
 
 1. Go to the [Fleet Automation install page][100].
 1. In **Select Agent install method**, choose **Helm Chart**.
 1. In **Select your Kubernetes distribution**, choose the distribution that matches your environment.
-1. In **Customize your Agent coverage**, go to the **Optimization & Remediation** section and enable the toggle **Enable Agent to take action**. This creates an Application key with the correct scope for you.
+1. In **Customize your Agent coverage**, go to the **Optimization & Remediation** section and enable the toggle **Enable Agent to take action**. This creates an Application key with the `on_prem_runner_write` scope and Actions API Access enabled.
 1. In **Add the Datadog Helm repository**, add an API key.
 1. Follow the remaining Fleet instructions to complete the installation.
 
+### Manual installation
+
+#### Prerequisites
+
+- Helm 3+
+- Kubernetes cluster with access to kubectl
+
+#### Create a Kubernetes secret
+
+Create a secret containing your API key and Application key. The Application key must have the `on_prem_runner_write` scope and **Actions API Access** enabled.
+
+```bash
+kubectl create secret generic datadog-secret \
+  --from-literal=api-key=<API_KEY> \
+  --from-literal=app-key=<APP_KEY>
+```
+
+#### Configure and install the Helm chart
+
+1. Add the Datadog Helm repository:
+
+   ```bash
+   helm repo add datadog https://helm.datadoghq.com
+   helm repo update
+   ```
+
+1. Create a `values.yaml` file with the following content:
+
+   ```yaml
+   datadog:
+     apiKeyExistingSecret: datadog-secret
+     appKeyExistingSecret: datadog-secret
+     site: datadoghq.com
+     clusterName: <YOUR_CLUSTER_NAME>
+     remoteConfiguration:
+       enabled: true
+     privateActionRunner:
+       enabled: true
+   clusterAgent:
+     enabled: true
+     env:
+       - name: DD_PRIVATE_ACTION_RUNNER_ACTIONS_ALLOWLIST
+         value: "com.datadoghq.http.request,com.datadoghq.kubernetes.core.listPod"
+   agents:
+     enabled: true
+     containers:
+           agent:
+             env:
+               - name: DD_PRIVATE_ACTION_RUNNER_ACTIONS_ALLOWLIST
+                 value: "com.datadoghq.http.request,com.datadoghq.kubernetes.core.listPod"
+   ```
+
+1. Install the Datadog Agent with Helm:
+
+   ```bash
+   helm install datadog-agent datadog/datadog -f values.yaml
+   ```
+
+#### Verify the installation
+
+Go to the [Private Action Runners][101] page. You should see a new runner on the list.
+
 [100]: https://app.datadoghq.com/fleet/install-agent/latest?platform=kubernetes
+[101]: https://app.datadoghq.com/actions/action-catalog
 
 {{% /tab %}}
 {{< /tabs >}}
