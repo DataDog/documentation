@@ -105,12 +105,12 @@ Click **View Details** on a Trends card, or click any row in the Product List ta
 
 ### Usage Overview
 
-- **Total Usage**: Total units consumed for the selected period.
-- **Usage Change**: Change in usage vs. the prior period (amount and percentage).
-- **Usage breakdown by sub-dimension**: Individual usage totals for each sub-dimension (for example, Sensitive Data Scanner lists Scanned Events, Scanned Logs, Scanned RUM Sessions, and Scanned Spans separately).
-- **Usage Types** bar chart: Day-by-day usage stacked by sub-dimension.
-- **Allotment Usage**: Progress bar showing consumed vs. contracted allotment. Displays ">100%" when usage exceeds the allotment.
-- **Drilldown in Usage Attribution**: Opens Usage Attribution pre-filtered to this billing dimension.
+- **Total Usage**: Total units consumed for the selected period
+- **Usage Change**: Change in usage vs. the prior period (amount and percentage)
+- **Usage breakdown by sub-dimension**: Individual usage totals for each sub-dimension. For example, Sensitive Data Scanner lists Scanned Events, Scanned Logs, Scanned RUM Sessions, and Scanned Spans separately.
+- **Usage Types** bar chart: Day-by-day usage stacked by sub-dimension
+- **Allotment Usage**: Progress bar showing consumed vs. contracted allotment; displays ">100%" when usage exceeds the allotment
+- **Drilldown in Usage Attribution**: Click to open **Usage Attribution**, pre-filtered to the selected billing dimension.
 
 ## Revert to the previous layout
 
