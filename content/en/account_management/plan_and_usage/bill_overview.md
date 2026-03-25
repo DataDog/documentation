@@ -85,7 +85,7 @@ Click anywhere on a product row to open the [product detail page][2]. Hover over
 | Usage — Total | Total usage in natural units |
 | Usage — Change | Usage change vs. the comparison period |
 
-Toggle between **Monthly** and **Daily** views using the controls above the table. Download the full table as a CSV using the **Download as CSV** button. The table is paginated (10 rows per page by default).
+Toggle between **Monthly** and **Daily** views using the controls above the table. Download the full table as a `.csv` file using the **Download as CSV** button. The table is paginated, displaying 10 rows per page by default.
 
 {{< img src="account_management/plan_and_usage/bill-overview-product-list-light.png" alt="Product List tab showing the billing dimensions table with Cost and Usage columns" >}}
 
