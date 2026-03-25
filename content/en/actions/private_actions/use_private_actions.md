@@ -124,6 +124,7 @@ app_key: <YOUR_APP_KEY>
 
 private_action_runner:
   enabled: true
+  self_enroll: true
   actions_allowlist:
     - "com.datadoghq.script.runPredefinedPowershellScript"
     - "com.datadoghq.http.request"
