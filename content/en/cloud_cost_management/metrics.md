@@ -184,15 +184,9 @@ For a full overview of where tags come from and how they are enriched, see [Tags
 
 Switching from a base metric to its `.shared.resources.allocated` variant changes which [tags][2] are available.
 
-**Tags added on container metrics:**
-- Kubernetes: `kube_namespace`, `kube_deployment`, `kube_daemon_set`, `kube_stateful_set`, `kube_cluster_name`, `kube_node`, `kube_service`, `kube_replica_set`, `kube_cronjob`, `kube_job`, and others
-- Allocation: `allocated_resource`, `allocated_spend_type`, `allocation_metrics_type`
-- ECS: `ecs_cluster_name`, `task_family` (when applicable)
+**Tags added:** Kubernetes tags (`kube_namespace`, `kube_deployment`, `kube_daemon_set`, `kube_stateful_set`, `kube_cluster_name`, `kube_node`, `kube_service`, `kube_replica_set`, `kube_cronjob`, `kube_job`, and others), allocation tags (`allocated_resource`, `allocated_spend_type`, `allocation_metrics_type`), and ECS tags (`ecs_cluster_name`, `task_family`) when applicable.
 
-**Tags removed on container metrics:**
-- `aws_savings_plan_arn`, `aws_savings_plan_expiration_date`, `aws_savings_plan_start_date`
-- `aws_reservation_arn`, `aws_reservation_expiration_date`, `aws_reservation_start_date`
-- Other discount program detail tags
+**Tags removed:** Discount program tags (`aws_savings_plan_arn`, `aws_savings_plan_expiration_date`, `aws_savings_plan_start_date`, `aws_reservation_arn`, `aws_reservation_expiration_date`, `aws_reservation_start_date`, and other discount detail tags).
 
 Use container metrics for workload-level cost analysis. Use base metrics for savings plan or reservation analysis.
 

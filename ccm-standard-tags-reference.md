@@ -25,8 +25,7 @@
 - [Appendix A: AWS CUR Raw Bill Columns](#appendix-a-aws-cur-raw-bill-columns)
 - [Appendix B: Azure Raw Bill Columns](#appendix-b-azure-raw-bill-columns)
 - [Appendix C: GCP Raw Bill Columns](#appendix-c-gcp-raw-bill-columns)
-- [Appendix D: Cost Metrics Reference](#appendix-d-cost-metrics-reference)
-- [Appendix E: Tag Source Classifications](#appendix-e-tag-source-classifications)
+- [Appendix D: Tag Source Classifications](#appendix-d-tag-source-classifications)
 
 ---
 
@@ -102,13 +101,7 @@ An optional **Tag Normalization toggle** in Tag Pipelines settings normalizes va
 
 ### Cost Types
 
-| Cost Type | Description |
-|-----------|-------------|
-| **On-Demand** | Public list price; excludes savings plans, reservations, discounts, taxes, and fees |
-| **Amortized** | Distributes commitment savings over the discount term (accrual basis) |
-| **Unblended** | Charges shown on the date incurred (cost basis) |
-| **Net Amortized** | Amortized cost plus negotiated discounts |
-| **Net Unblended** | Unblended cost plus negotiated discounts |
+For definitions of each cost type (On-Demand, Amortized, Unblended, Net Amortized, Net Unblended), see [Metrics — Cost Types](/cloud_cost_management/metrics/#cost-types).
 
 ---
 
@@ -260,20 +253,9 @@ The full FOCUS spec defines 77 columns across 14 categories. Datadog CCM impleme
 
 **Implemented:** `AvailabilityZone`, `BilledCost`, `BillingAccountId`, `BillingAccountName`, `BillingCurrency`, `BillingPeriodEnd`, `BillingPeriodStart`, `ChargeCategory`, `ChargeDescription`, `ChargeFrequency`, `ChargePeriodEnd`, `ChargePeriodStart`, `EffectiveCost`, `InvoiceIssuer`, `ListCost`, `ListUnitPrice`, `PricingCategory`, `PricingQuantity`, `PricingUnit`, `ProviderName`, `PublisherName`, `RegionId`, `RegionName`, `ResourceId`, `ResourceName`, `ServiceCategory`, `ServiceName`, `SkuId`, `SkuMeter`, `SkuPriceId`, `SubAccountId`, `SubAccountName`, `UsageQuantity`, `UsageUnit`
 
-**Not yet implemented:**
+**Not yet implemented (43 columns):** `AllocatedMethodDetails`, `AllocatedMethodId`, `AllocatedResourceId`, `AllocatedResourceName`, `AllocatedTags`, `CapacityReservationId`, `CapacityReservationStatus`, `ChargeClass`, `ChargeSubcategory`, `HostProviderName`, `InvoiceId`, `ServiceProviderName`, `CommitmentDiscountCategory/Id/Name/Quantity/Status/Type/Unit`, `ContractApplied`, `ContractCommitmentCategory/Cost/Description/Id/PeriodEnd/PeriodStart/Quantity/Type/Unit`, `ContractId`, `ContractPeriodEnd/Start`, `PricingCurrency`, `PricingCurrencyContractedUnitPrice/EffectiveCost/ListUnitPrice`, `ConsumedQuantity`, `ConsumedUnit`, `ContractedCost`, `ContractedUnitPrice`, `ResourceType`, `Tags`, `SkuPriceDetails`, `ServiceSubcategory`
 
-| Category | Columns |
-|----------|---------|
-| Allocation | AllocatedMethodDetails, AllocatedMethodId, AllocatedResourceId, AllocatedResourceName, AllocatedTags |
-| Capacity Reservation | CapacityReservationId, CapacityReservationStatus |
-| Charge | ChargeClass, ChargeSubcategory |
-| Charge Origination | HostProviderName, InvoiceId, ServiceProviderName |
-| Commitment Discount | CommitmentDiscountCategory/Id/Name/Quantity/Status/Type/Unit |
-| Contract *(new v1.2)* | ContractApplied, ContractCommitmentCategory/Cost/Description/Id/PeriodEnd/PeriodStart/Quantity/Type/Unit, ContractId, ContractPeriodEnd/Start |
-| Pricing | PricingCurrency, PricingCurrencyContractedUnitPrice/EffectiveCost/ListUnitPrice |
-| Other | ConsumedQuantity, ConsumedUnit, ContractedCost, ContractedUnitPrice, ResourceType, Tags, SkuPriceDetails, ServiceSubcategory |
-
-> **Note:** OCI already includes many of these additional columns natively (e.g., `ChargeSubcategory`, `CommitmentDiscountCategory/Id/Name/Type`, `ResourceType`, `ServiceCategory`).
+> **Note:** OCI already includes many of these natively (e.g., `ChargeSubcategory`, `CommitmentDiscountCategory/Id/Name/Type`, `ResourceType`, `ServiceCategory`).
 
 ---
 
@@ -436,36 +418,15 @@ The `name` tag is added for top Azure products to correlate cost and observabili
 
 ## 7. OCI (Oracle Cloud) Tags
 
-OCI uses the native FOCUS format. Standard FOCUS columns are documented in [Section 2](#2-focus--the-cross-provider-standard). Below are OCI-specific additions.
+OCI uses the native FOCUS format. Standard FOCUS columns are documented in [Section 2](#2-focus--the-cross-provider-standard).
 
 ### OCI-Specific Extension Tags
 
-| Tag | Description |
-|-----|-------------|
-| `oci_ReferenceNumber` | OCI reference number |
-| `oci_CompartmentId` | OCI compartment ID |
-| `oci_CompartmentName` | OCI compartment name |
-| `oci_OverageFlag` | Whether charge is overage |
-| `oci_UnitPriceOverage` | Unit price for overage |
-| `oci_BilledQuantityOverage` | Billed quantity for overage |
-| `oci_CostOverage` | Cost for overage |
-| `oci_AttributedUsage` | Attributed usage |
-| `oci_AttributedCost` | Attributed cost |
-| `oci_BackReferenceNumber` | Back reference number |
+`oci_ReferenceNumber`, `oci_CompartmentId`, `oci_CompartmentName`, `oci_OverageFlag`, `oci_UnitPriceOverage`, `oci_BilledQuantityOverage`, `oci_CostOverage`, `oci_AttributedUsage`, `oci_AttributedCost`, `oci_BackReferenceNumber`
 
 ### OCI Alias Tags
 
-| Tag | Description |
-|-----|-------------|
-| `compartment_id` | OCI compartment ID (friendly name) |
-| `compartment_name` | OCI compartment name (friendly name) |
-| `tenancy_name` | OCI tenancy name |
-| `tenancy_ocid` | OCI tenancy OCID |
-| `resource_id` | Resource ID |
-| `resource_type` | Resource type |
-| `resource_name` | Resource name |
-| `name` | Resource name (short alias) |
-| `host` | Host identifier |
+`compartment_id`, `compartment_name`, `tenancy_name`, `tenancy_ocid`, `resource_id`, `resource_type`, `resource_name`, `name` (resource name short alias), `host`
 
 ### OCI Additional FOCUS Columns
 
@@ -477,20 +438,13 @@ OCI natively includes FOCUS columns not yet available for other providers: `char
 
 These tags are shared across AWS, Azure, GCP, and OCI container cost allocation:
 
-| Tag | Possible Values | Description |
-|-----|----------------|-------------|
-| `allocated_resource` | `cpu`, `memory`, `gpu`, `persistent_volume`, `local_storage`, `data_transfer`, `managed_service_fee`, `commitment` | Type of resource used by a container workload |
-| `allocated_spend_type` | `Usage`, `Workload idle`, `Cluster idle`, `Not monitored`, `managed_service_fee` | Spend category for container costs |
-| `ecs_cluster_name` | *(ECS cluster name)* | ECS cluster hosting the workload |
-| `kube_cluster_name` | *(K8s cluster name)* | Kubernetes cluster hosting the workload |
-| `orchestrator` | `kubernetes`, `ecs` | Container orchestrator |
-| `pod_name` | *(pod name)* | Kubernetes pod name |
-| `kube_namespace` | *(namespace)* | Kubernetes namespace |
-| `kube_deployment` | *(deployment name)* | Kubernetes deployment |
-| `kube_stateful_set` | *(statefulset name)* | Kubernetes StatefulSet |
-| `persistent_volume_reclaim_policy` | *(reclaim policy)* | PV reclaim policy |
-| `storage_class_name` | *(storage class)* | Kubernetes storage class |
-| `volume_mode` | *(volume mode)* | PV volume mode |
+| Tag | Possible Values |
+|-----|----------------|
+| `allocated_resource` | `cpu`, `memory`, `gpu`, `persistent_volume`, `local_storage`, `data_transfer`, `managed_service_fee`, `commitment` |
+| `allocated_spend_type` | `Usage`, `Workload idle`, `Cluster idle`, `Not monitored`, `managed_service_fee` |
+| `orchestrator` | `kubernetes`, `ecs` |
+
+Additional container tags: `ecs_cluster_name`, `kube_cluster_name`, `pod_name`, `kube_namespace`, `kube_deployment`, `kube_stateful_set`, `persistent_volume_reclaim_policy`, `storage_class_name`, `volume_mode`
 
 ---
 
@@ -707,103 +661,22 @@ Any additional CSV columns beyond these also become user-defined tags on the cos
 These are the raw AWS Cost and Usage Report columns exposed as tags. Most customers use the [alias tags](#aws-alias-tags) above instead.
 
 ### Bill Columns
-| Tag | Description |
-|-----|-------------|
-| `bill/billing_entity` | AWS seller (AWS or AWS Marketplace) |
-| `bill/billing_period_start_date` | Start date of the billing period |
-| `bill/billing_period_end_date` | End date of the billing period |
-| `bill/bill_type` | Type of bill |
-| `bill/payer_account_id` | Account ID of the paying/management account |
-| `bill/invoicing_entity` | The AWS entity that issues the invoice |
-| `bill/invoice_id` | Unique document ID on the invoice |
+`bill/billing_entity`, `bill/billing_period_start_date`, `bill/billing_period_end_date`, `bill/bill_type`, `bill/payer_account_id`, `bill/invoicing_entity`, `bill/invoice_id`
 
 ### Line Item Columns
-| Tag | Description |
-|-----|-------------|
-| `line_item/availability_zone` | Availability zone |
-| `line_item/blended_cost` | Blended cost |
-| `line_item/currency_code` | Currency (USD by default) |
-| `line_item/line_item_description` | Description |
-| `line_item/line_item_type` | Type of charge |
-| `line_item/net_unblended_cost` | Net unblended cost |
-| `line_item/normalization_factor` | Normalization factor |
-| `line_item/normalized_usage_amount` | Normalized usage amount |
-| `line_item/operation` | AWS operation |
-| `line_item/product_code` | Product code (e.g., AmazonEC2) |
-| `line_item/resource_id` | Resource ID |
-| `line_item/unblended_cost` | Unblended cost |
-| `line_item/unblended_rate` | Unblended rate |
-| `line_item/usage_account_id` | Account ID that used this line item |
-| `line_item/usage_amount` | Usage amount |
-| `line_item/usage_start_date` | Start date of usage |
-| `line_item/usage_end_date` | End date of usage |
-| `line_item/usage_type` | Usage details |
-| `line_item/legal_entity` | Provider of AWS services |
+`line_item/availability_zone`, `line_item/blended_cost`, `line_item/currency_code`, `line_item/line_item_description`, `line_item/line_item_type`, `line_item/net_unblended_cost`, `line_item/normalization_factor`, `line_item/normalized_usage_amount`, `line_item/operation`, `line_item/product_code`, `line_item/resource_id`, `line_item/unblended_cost`, `line_item/unblended_rate`, `line_item/usage_account_id`, `line_item/usage_amount`, `line_item/usage_start_date`, `line_item/usage_end_date`, `line_item/usage_type`, `line_item/legal_entity`
 
 ### Product Columns
-| Tag | Description |
-|-----|-------------|
-| `product/capacitystatus` | Capacity status |
-| `product/instance_family` | Instance family |
-| `product/instance_type` | Instance type |
-| `product/instance_type_family` | Instance type family |
-| `product/location` | Location |
-| `product/location_type` | Location type |
-| `product/product_name` | Product name |
-| `product/offering_class` | RI offering class |
-| `product/operating_system` | Operating system |
-| `product/product_family` | Product family |
-| `product/region` | Region |
-| `product/servicecode` | Service code |
-| `product/transfer_type` | Transfer type |
-| `product/vcpu` | Number of vCPUs |
-| `product/memory` | Memory |
+`product/capacitystatus`, `product/instance_family`, `product/instance_type`, `product/instance_type_family`, `product/location`, `product/location_type`, `product/product_name`, `product/offering_class`, `product/operating_system`, `product/product_family`, `product/region`, `product/servicecode`, `product/transfer_type`, `product/vcpu`, `product/memory`
 
 ### Pricing Columns
-| Tag | Description |
-|-----|-------------|
-| `pricing/lease_contract_length` | RI reservation length |
-| `pricing/offering_class` | Pricing offering class |
-| `pricing/public_on_demand_cost` | Public on-demand cost |
-| `pricing/purchase_option` | Payment method |
-| `pricing/term` | Reserved or On-Demand |
-| `pricing/unit` | Pricing unit |
+`pricing/lease_contract_length`, `pricing/offering_class`, `pricing/public_on_demand_cost`, `pricing/purchase_option`, `pricing/term`, `pricing/unit`
 
 ### Reservation Columns
-| Tag | Description |
-|-----|-------------|
-| `reservation/amortized_upfront_fee_for_billing_period` | Amortized upfront fee |
-| `reservation/effective_cost` | Effective cost |
-| `reservation/end_time` | RI end time |
-| `reservation/modification_status` | Modification status |
-| `reservation/net_effective_cost` | Net effective cost |
-| `reservation/net_unused_amortized_upfront_fee_for_billing_period` | Net unused amortized upfront fee |
-| `reservation/net_unused_recurring_fee` | Net unused recurring fee |
-| `reservation/number_of_reservations` | Number of reservations |
-| `reservation/reservation_arn` | RI ARN |
-| `reservation/start_time` | RI start time |
-| `reservation/subscription_id` | Subscription ID |
-| `reservation/total_reserved_units` | Total reserved units |
-| `reservation/unused_amortized_upfront_fee_for_billing_period` | Unused amortized upfront fee |
-| `reservation/unused_quantity` | Unused quantity |
-| `reservation/unused_normalized_unit_quantity` | Unused normalized quantity |
-| `reservation/unused_recurring_fee` | Unused recurring fee |
+`reservation/amortized_upfront_fee_for_billing_period`, `reservation/effective_cost`, `reservation/end_time`, `reservation/modification_status`, `reservation/net_effective_cost`, `reservation/net_unused_amortized_upfront_fee_for_billing_period`, `reservation/net_unused_recurring_fee`, `reservation/number_of_reservations`, `reservation/reservation_arn`, `reservation/start_time`, `reservation/subscription_id`, `reservation/total_reserved_units`, `reservation/unused_amortized_upfront_fee_for_billing_period`, `reservation/unused_quantity`, `reservation/unused_normalized_unit_quantity`, `reservation/unused_recurring_fee`
 
 ### Savings Plan Columns
-| Tag | Description |
-|-----|-------------|
-| `savings_plan/amortized_upfront_commitment_for_billing_period` | Amortized upfront commitment |
-| `savings_plan/end_time` | SP end time |
-| `savings_plan/net_amortized_upfront_commitment_for_billing_period` | Net amortized upfront commitment |
-| `savings_plan/net_recurring_commitment_for_billing_period` | Net recurring commitment |
-| `savings_plan/net_savings_plan_effective_cost` | Net SP effective cost |
-| `savings_plan/offering_type` | SP type (e.g., ComputeSavingsPlans) |
-| `savings_plan/recurring_commitment_for_billing_period` | Recurring commitment |
-| `savings_plan/savings_plan_arn` | SP ARN |
-| `savings_plan/savings_plan_effective_cost` | SP effective cost |
-| `savings_plan/start_time` | SP start time |
-| `savings_plan/total_commitment_to_date` | Total commitment to date |
-| `savings_plan/used_commitment` | Used commitment |
+`savings_plan/amortized_upfront_commitment_for_billing_period`, `savings_plan/end_time`, `savings_plan/net_amortized_upfront_commitment_for_billing_period`, `savings_plan/net_recurring_commitment_for_billing_period`, `savings_plan/net_savings_plan_effective_cost`, `savings_plan/offering_type`, `savings_plan/recurring_commitment_for_billing_period`, `savings_plan/savings_plan_arn`, `savings_plan/savings_plan_effective_cost`, `savings_plan/start_time`, `savings_plan/total_commitment_to_date`, `savings_plan/used_commitment`
 
 ### Additional CUR Column Families
 - `costCategory/*` — AWS Cost Categories defined by the customer
@@ -842,53 +715,11 @@ These are the raw AWS Cost and Usage Report columns exposed as tags. Most custom
 
 ---
 
-## Appendix D: Cost Metrics Reference
-
-### Cloud Provider Metrics
-
-| Provider | Metric | Description |
-|----------|--------|-------------|
-| **AWS** | `aws.cost.amortized` | Amortized cost |
-| **AWS** | `aws.cost.amortized.edp` | Amortized cost with EDP discount |
-| **AWS** | `aws.cost.net.amortized` | Net amortized cost |
-| **AWS** | `aws.cost.blended` | Blended cost |
-| **AWS** | `aws.cost.unblended` | Unblended cost |
-| **AWS** | `aws.cost.net.unblended` | Net unblended cost |
-| **AWS** | `aws.cost.ondemand` | On-demand cost |
-| **AWS** | `aws.usage` | Usage quantity |
-| **Azure** | `azure.cost.actual` | Actual cost |
-| **Azure** | `azure.cost.amortized` | Amortized cost |
-| **Azure** | `azure.usage` | Usage quantity |
-| **Azure** | `azure.cost.discounted.ondemand` | Discounted on-demand cost |
-| **GCP** | `gcp.cost.amortized` | Amortized cost |
-| **GCP** | `gcp.cost.invoice_month` | Invoice month cost |
-| **GCP** | `gcp.cost.usage_date` | Usage date cost |
-| **GCP** | `gcp.cost.ondemand` | On-demand cost |
-| **GCP** | `gcp.usage` | Usage quantity |
-| **OCI** | `oci.cost.amortized` | Amortized cost |
-| **OCI** | `oci.cost.ondemand` | On-demand cost |
-| **OCI** | `oci.usage` | Usage quantity |
-
-### Container Allocation Metrics
-`<provider>.cost.amortized.shared.resources.allocated`, `<provider>.cost.net.amortized.shared.resources.allocated`, `<provider>.usage.shared.resources.allocated` (for each of aws, azure, gcp, oci)
-
-### SaaS Metrics
-`saas.cost.<provider>.amortized`, `saas.cost.<provider>.basis`, `saas.usage_quantity.<provider>` (for each of: databricks, snowflake, openai, confluentcloud, fastly, twilio, mongodb, elasticcloud)
-
-### Other Metrics
-
-| Metric | Description |
-|--------|-------------|
-| `custom.cost.amortized` | Custom costs (amortized) |
-| `custom.cost.basis` | Custom costs (basis) |
-| `custom.usage_quantity` | Custom costs usage quantity |
-| `datadog.cost.amortized` | Datadog usage costs |
-| `all.cost` | Cross-provider unified cost metric |
-| `currency.conversion.to.usd` | Currency conversion rates |
+For the full cost metrics reference (all provider, container, SaaS, custom, and Datadog metrics), see [Metrics](/cloud_cost_management/metrics/).
 
 ---
 
-## Appendix E: Tag Source Classifications
+## Appendix D: Tag Source Classifications
 
 Every tag on cost data is classified by its source, exposed in the Tag Explorer:
 
