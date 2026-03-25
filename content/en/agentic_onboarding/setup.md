@@ -33,9 +33,7 @@ To install the Datadog Onboarding Model Context Protocol (MCP) server, follow th
 1. Open an active Claude Code session with the /mcp command:
 
    <pre>
-   <code>
-   claude mcp add --transport http datadog-onboarding-{{< region-param key=dd_datacenter_lowercase >}} "https://mcp.{{< region-param key=dd_site >}}/api/unstable/mcp-server/mcp?toolsets=onboarding"
-   </code>
+   <code>claude mcp add --transport http datadog-onboarding-{{< region-param key=dd_datacenter_lowercase >}} "https://mcp.{{< region-param key=dd_site >}}/api/unstable/mcp-server/mcp?toolsets=onboarding"</code>
    </pre>
 
 2. Select the MCP server installed in Step 1. You should see a `disconnected - Enter to login` message. Press <kbd>Enter</kbd>.
@@ -55,9 +53,7 @@ To install the Datadog Onboarding Model Context Protocol (MCP) server, follow th
 1. Copy and paste the following deeplink into your browser:
 
    <pre>
-   <code>
-   {{< region-param key=cursor_mcp_install_deeplink >}}
-   </code>
+   <code>{{< region-param key=cursor_mcp_install_deeplink >}}</code>
    </pre>
 
 2. In Cursor, click **Install** for the **datadog-onboarding-{{< region-param key=dd_datacenter_lowercase >}}** server.
