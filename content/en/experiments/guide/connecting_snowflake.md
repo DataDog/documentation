@@ -26,7 +26,7 @@ The examples in this guide use `datadog_experiments_user` and `datadog_experimen
 
 ### Create a dedicated service user and role in Snowflake
 
-1. Use the [Snowflake documentation][1] to create a public-private key pair for enhanced authentication. Note that Datadog only supports unencrypted private keys.
+1. Use the [Snowflake documentation][1] to create a public-private key pair for enhanced authentication. Datadog only supports unencrypted private keys.
 1. Run the following commands in Snowflake to create the user and role in the service account. Replace `<public_key>` with the public key you generated in the previous step.
 
 ```sql
@@ -41,19 +41,19 @@ ALTER USER datadog_experiments_user SET DEFAULT_ROLE = datadog_experiments_role;
 ### Grant privileges to the role
 
 1. Identify the tables in Snowflake from which you intend to create metrics.
-1. Run the following commands to grant read privileges to the new role. Replace `<database>`, `<schema>`, and `<table>` with their appropriate values.
+1. Run the following commands to grant read privileges to the new role. Replace `<database>`, `<schema>`, and `<table>` with their appropriate values. Run both `GRANT USAGE` commands, then run one of the three `GRANT SELECT` options depending on your access needs.
 
 ```sql
 GRANT USAGE ON DATABASE <database> TO ROLE datadog_experiments_role;
 GRANT USAGE ON SCHEMA <database>.<schema> TO ROLE datadog_experiments_role;
 
--- Give read access to single table
+-- Option 1: Give read access to a single table
 GRANT SELECT ON TABLE <database>.<schema>.<table> TO ROLE datadog_experiments_role;
 
--- Give read access to all tables in schema
+-- Option 2: Give read access to all existing tables in the schema
 GRANT SELECT ON ALL TABLES IN SCHEMA <database>.<schema> TO ROLE datadog_experiments_role;
 
--- Give read access to future tables in schema
+-- Option 3: Give read access to all future tables in the schema
 GRANT SELECT ON FUTURE TABLES IN SCHEMA <database>.<schema> TO ROLE datadog_experiments_role;
 ```
 
