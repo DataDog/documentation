@@ -280,6 +280,7 @@ unsupported_sites:
   agentless_scanning: [gov] # docs page
   agentless-scanning: [gov] # api page
   amazon_event_bridge: [gov]
+  apm_processing_pipelines: [gov]
   apm_recommendations: [gov]
   app_builder: [gov]
   application_security: [gov]
@@ -309,7 +310,7 @@ unsupported_sites:
   eng_reports: [gov]
   events_from_sns_emails: [gov]
   exception_replay: [gov]
-  experimentation: [gov]
+  experiments: [gov]
   feature_flags: [gov]
   forwarding_audit_events: [gov]
   getting_started_feature_flags: [gov]
