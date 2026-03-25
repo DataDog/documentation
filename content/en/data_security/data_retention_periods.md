@@ -31,6 +31,9 @@ attributes:
   - product: Bits AI Dev Agent
     data_type: |
        - **Source Code**: 7 days
+  - product: Bits AI SRE
+    data_type: |
+       - **Investigationse**: Retained for the duration of the account
   - product: Browser RUM
     data_type: |
        - **Session, View, Action, and Error Events**: 30 days
