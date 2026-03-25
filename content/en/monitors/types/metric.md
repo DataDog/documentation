@@ -205,7 +205,7 @@ For example, a monitor that evaluates over the last `2h` is split in 12 buckets 
 For more information on the Evaluation Window, see the [Monitor configuration][5] page.
 
 <div class="alert alert-warning">
-<strong>Note for anomaly monitors:</strong> Using <strong>Require a full window of data</strong> with the <code>anomalies()</code> function requires an <strong>evaluation delay greater than 6 minutes</strong>. The anomaly function excludes the most recent data point when it was completed within the last 6 minutes, to avoid false positives from partially-ingested data. With a shorter evaluation delay, the last point in every evaluation window will be null, causing this check to always fail and the monitor to return <strong>No Data</strong> indefinitely. Set the evaluation delay to at least 7 minutes, or set this option to <strong>Do not require</strong>.
+<strong>Note for anomaly monitors:</strong> Using <strong>Require a full window of data</strong> with the <code>anomalies()</code> function may cause unexpected <strong>No Data</strong> states in some configurations. The anomaly function excludes the most recent data point to avoid false positives from partially-ingested data, which can occasionally cause the full window check to fail. Datadog recommends setting this option to <strong>Do not require</strong> for anomaly monitors.
 </div>
 
 #### Other options
