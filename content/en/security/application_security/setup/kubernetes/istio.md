@@ -68,7 +68,7 @@ helm upgrade -i datadog-agent datadog/datadog -f values.yaml
 {{% /tab %}}
 {{% tab "Datadog Operator" %}}
 
-Datadog Operator does not yet support sidecar mode configuration. To use the Operator with Istio, configure external mode by following the instructions on [App and API Protection for Kubernetes][12], or use the [manual configuration](#manual-configuration-alternative) section below.
+Datadog Operator does not yet support sidecar mode configuration. To use the Operator with Istio, configure external mode by following the instructions on [App and API Protection for Kubernetes](/containers/kubernetes/appsec/), or use the [manual configuration](#manual-configuration-alternative) section below.
 
 {{% /tab %}}
 {{< /tabs >}}
