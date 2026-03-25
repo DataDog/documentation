@@ -365,14 +365,14 @@ Pour exclure des hosts, conteneurs ou fonctions spécifiques des scans, consulte
 Sélectionnez la méthode de déploiement utilisée pour installer Agentless Scanning :
 
 {{< tabs >}}
-{{% onglet "Terraform" %}}
+{{% tab "Terraform" %}}
 Pour désinstaller Agentless Scanning, supprimez le module scanner de votre code Terraform. Pour plus d'informations, consultez la documentation du [module Terraform][9].
 
 [9]: https://github.com/DataDog/terraform-module-datadog-agentless-scanner/blob/main/README.md#uninstall
 
 {{% /tab %}}
 
-{{% onglet "AWS CloudFormation" %}}
+{{% tab "AWS CloudFormation" %}}
 Pour désinstaller Agentless Scanning, connectez-vous à votre console AWS et supprimez la stack CloudFormation créée pour Agentless Scanning (le nom de la sous-stack suit le modèle `DatadogIntegration-DatadogAgentlessScanning-...`).
 {{% /tab %}}
 
