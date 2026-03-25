@@ -34,7 +34,7 @@ The following filters apply to the **Bill Overview** page:
 
 At the top of the page, the cost summary shows:
 
-- **Estimated cost to date**: Total estimated cost for the days elapsed in the current billing period (for example, "Estimated Mar 1–Mar 18 Cost").
+- **Estimated cost to date**: Total estimated cost for the days elapsed in the current billing period
 - **Projected total**: Estimated total cost if current usage patterns continue through end of month, with month-over-month percentage change.
 
 ## Daily Cost Breakdown
