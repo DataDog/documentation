@@ -144,7 +144,7 @@ You can route logs from Observability Pipelines to Snowflake using the Amazon S3
 
 The Observability Pipelines Worker requires these policy permissions to send logs to Amazon S3:
 
-- `s3:GetObject`
+- `s3:PutObject`
 
 ### Automatically generated Parquet schema
 
