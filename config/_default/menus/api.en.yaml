@@ -938,7 +938,7 @@ menu:
         operationids:
           - CreateEvent
         unstable: []
-        order: 1
+        order: 3
     - name: Get a list of events
       url: '#get-a-list-of-events'
       identifier: events-get-a-list-of-events
@@ -1401,7 +1401,7 @@ menu:
         operationids:
           - ListLogs
         unstable: []
-        order: 3
+        order: 2
     - name: Logs Indexes
       url: /api/latest/logs-indexes/
       identifier: logs-indexes
@@ -1477,7 +1477,7 @@ menu:
         operationids:
           - UpdateLogsIndexOrder
         unstable: []
-        order: 6
+        order: 7
     - name: Get indexes order
       url: '#get-indexes-order'
       identifier: logs-indexes-get-indexes-order
@@ -1489,7 +1489,7 @@ menu:
         operationids:
           - GetLogsIndexOrder
         unstable: []
-        order: 5
+        order: 6
     - name: Logs Pipelines
       url: /api/latest/logs-pipelines/
       identifier: logs-pipelines
@@ -1774,7 +1774,7 @@ menu:
         operationids:
           - SubmitMetrics
         unstable: []
-        order: 1
+        order: 6
     - name: Search metrics
       url: '#search-metrics'
       identifier: metrics-search-metrics
@@ -1846,7 +1846,7 @@ menu:
         operationids:
           - SubmitDistributionPoints
         unstable: []
-        order: 1
+        order: 7
     - name: Monitors
       url: /api/latest/monitors/
       identifier: monitors
@@ -2073,7 +2073,7 @@ menu:
         operationids:
           - UnmuteAllMonitors
         unstable: []
-        order: 3
+        order: 13
     - name: Mute all monitors
       url: '#mute-all-monitors'
       identifier: monitors-mute-all-monitors
@@ -2085,7 +2085,7 @@ menu:
         operationids:
           - MuteAllMonitors
         unstable: []
-        order: 4
+        order: 14
     - name: Validate an existing monitor
       url: '#validate-an-existing-monitor'
       identifier: monitors-validate-an-existing-monitor
@@ -2109,7 +2109,7 @@ menu:
         operationids:
           - UnmuteMonitor
         unstable: []
-        order: 1
+        order: 11
     - name: Mute a monitor
       url: '#mute-a-monitor'
       identifier: monitors-mute-a-monitor
@@ -2121,7 +2121,7 @@ menu:
         operationids:
           - MuteMonitor
         unstable: []
-        order: 2
+        order: 12
     - name: Edit a monitor
       url: '#edit-a-monitor'
       identifier: monitors-edit-a-monitor
@@ -2181,7 +2181,7 @@ menu:
         operationids:
           - SearchMonitors
         unstable: []
-        order: 1
+        order: 9
     - name: Monitors group search
       url: '#monitors-group-search'
       identifier: monitors-monitors-group-search
@@ -2193,7 +2193,7 @@ menu:
         operationids:
           - SearchMonitorGroups
         unstable: []
-        order: 2
+        order: 10
     - name: Check if a monitor can be deleted
       url: '#check-if-a-monitor-can-be-deleted'
       identifier: monitors-check-if-a-monitor-can-be-deleted
@@ -2480,7 +2480,7 @@ menu:
           - GetSecretsRules
         unstable:
           - v2
-        order: 77
+        order: 78
     - name: Ruleset get multiple
       url: '#ruleset-get-multiple'
       identifier: security-monitoring-ruleset-get-multiple
@@ -2571,7 +2571,7 @@ menu:
           - RunThreatHuntingJob
         unstable:
           - v2
-        order: 61
+        order: 62
     - name: List threat hunting jobs
       url: '#list-threat-hunting-jobs'
       identifier: security-monitoring-list-threat-hunting-jobs
@@ -2659,7 +2659,7 @@ menu:
         operationids:
           - SearchSecurityMonitoringSignals
         unstable: []
-        order: 71
+        order: 72
     - name: Get a quick list of security signals
       url: '#get-a-quick-list-of-security-signals'
       identifier: security-monitoring-get-a-quick-list-of-security-signals
@@ -2816,7 +2816,7 @@ menu:
         operationids:
           - ListSecurityMonitoringRules
         unstable: []
-        order: 49
+        order: 50
     - name: Deactivate content pack
       url: '#deactivate-content-pack'
       identifier: security-monitoring-deactivate-content-pack
@@ -2855,7 +2855,7 @@ menu:
           - GetContentPacksStates
         unstable:
           - v2
-        order: 46
+        order: 47
     - name: Get a suppression's version history
       url: '#get-a-suppressions-version-history'
       identifier: security-monitoring-get-a-suppressions-version-history
@@ -3181,7 +3181,7 @@ menu:
           - ListVulnerabilities
         unstable:
           - v2
-        order: 79
+        order: 80
     - name: Patch a signal-based notification rule
       url: '#patch-a-signal-based-notification-rule'
       identifier: security-monitoring-patch-a-signal-based-notification-rule
@@ -3486,7 +3486,7 @@ menu:
         operationids:
           - EditSecurityMonitoringSignalState
         unstable: []
-        order: 4
+        order: 1
     - name: Modify the triage assignee of a security signal
       url: '#modify-the-triage-assignee-of-a-security-signal'
       identifier: security-monitoring-modify-the-triage-assignee-of-a-security-signal
@@ -3499,7 +3499,7 @@ menu:
         operationids:
           - EditSecurityMonitoringSignalAssignee
         unstable: []
-        order: 5
+        order: 3
     - name: Add a security signal to an incident
       url: '#add-a-security-signal-to-an-incident'
       identifier: security-monitoring-add-a-security-signal-to-an-incident
@@ -3511,7 +3511,7 @@ menu:
         operationids:
           - AddSecurityMonitoringSignalToIncident
         unstable: []
-        order: 4
+        order: 2
     - name: Service Checks
       url: /api/latest/service-checks/
       identifier: service-checks
@@ -3689,7 +3689,7 @@ menu:
         operationids:
           - GetSLOHistory
         unstable: []
-        order: 6
+        order: 7
     - name: Get Corrections For an SLO
       url: '#get-corrections-for-an-slo'
       identifier: service-level-objectives-get-corrections-for-an-slo
@@ -3749,7 +3749,7 @@ menu:
         operationids:
           - SearchSLO
         unstable: []
-        order: 1
+        order: 10
     - name: Check if SLOs can be safely deleted
       url: '#check-if-slos-can-be-safely-deleted'
       identifier: service-level-objectives-check-if-slos-can-be-safely-deleted
@@ -3761,7 +3761,7 @@ menu:
         operationids:
           - CheckCanDeleteSLO
         unstable: []
-        order: 7
+        order: 8
     - name: Bulk Delete SLO Timeframes
       url: '#bulk-delete-slo-timeframes'
       identifier: service-level-objectives-bulk-delete-slo-timeframes
@@ -3773,7 +3773,7 @@ menu:
         operationids:
           - DeleteSLOTimeframeInBulk
         unstable: []
-        order: 8
+        order: 9
     - name: Create an SLO object
       url: '#create-an-slo-object'
       identifier: service-level-objectives-create-an-slo-object
@@ -3873,7 +3873,7 @@ menu:
         operationids:
           - UpdateSlackIntegration
         unstable: []
-        order: 2
+        order: 7
     - name: Create a Slack integration
       url: '#create-a-slack-integration'
       identifier: slack-integration-create-a-slack-integration
@@ -3885,7 +3885,7 @@ menu:
         operationids:
           - CreateSlackIntegration
         unstable: []
-        order: 3
+        order: 8
     - name: Get info about a Slack integration
       url: '#get-info-about-a-slack-integration'
       identifier: slack-integration-get-info-about-a-slack-integration
@@ -3897,7 +3897,7 @@ menu:
         operationids:
           - GetSlackIntegration
         unstable: []
-        order: 4
+        order: 9
     - name: Delete a Slack integration
       url: '#delete-a-slack-integration'
       identifier: slack-integration-delete-a-slack-integration
@@ -3909,7 +3909,7 @@ menu:
         operationids:
           - DeleteSlackIntegration
         unstable: []
-        order: 1
+        order: 6
     - name: Snapshots
       url: /api/latest/snapshots/
       identifier: snapshots
@@ -4085,7 +4085,7 @@ menu:
         operationids:
           - EditGlobalVariable
         unstable: []
-        order: 21
+        order: 27
     - name: Get a global variable
       url: '#get-a-global-variable'
       identifier: synthetics-get-a-global-variable
@@ -4097,7 +4097,7 @@ menu:
         operationids:
           - GetGlobalVariable
         unstable: []
-        order: 20
+        order: 26
     - name: Delete a global variable
       url: '#delete-a-global-variable'
       identifier: synthetics-delete-a-global-variable
@@ -4109,7 +4109,7 @@ menu:
         operationids:
           - DeleteGlobalVariable
         unstable: []
-        order: 22
+        order: 28
     - name: Create a global variable
       url: '#create-a-global-variable'
       identifier: synthetics-create-a-global-variable
@@ -4121,7 +4121,7 @@ menu:
         operationids:
           - CreateGlobalVariable
         unstable: []
-        order: 18
+        order: 24
     - name: Get all global variables
       url: '#get-all-global-variables'
       identifier: synthetics-get-all-global-variables
@@ -4133,7 +4133,7 @@ menu:
         operationids:
           - ListGlobalVariables
         unstable: []
-        order: 19
+        order: 25
     - name: Pause or start a test
       url: '#pause-or-start-a-test'
       identifier: synthetics-pause-or-start-a-test
@@ -4145,7 +4145,7 @@ menu:
         operationids:
           - UpdateTestPauseStatus
         unstable: []
-        order: 16
+        order: 18
     - name: Get an API test result
       url: '#get-an-api-test-result'
       identifier: synthetics-get-an-api-test-result
@@ -4157,7 +4157,7 @@ menu:
         operationids:
           - GetAPITestResult
         unstable: []
-        order: 9
+        order: 11
     - name: Get an API test's latest results summaries
       url: '#get-an-api-tests-latest-results-summaries'
       identifier: synthetics-get-an-api-tests-latest-results-summaries
@@ -4169,7 +4169,7 @@ menu:
         operationids:
           - GetAPITestLatestResults
         unstable: []
-        order: 8
+        order: 10
     - name: Edit a test
       url: '#edit-a-test'
       identifier: synthetics-edit-a-test
@@ -4193,7 +4193,7 @@ menu:
         operationids:
           - PatchTest
         unstable: []
-        order: 16
+        order: 20
     - name: Get a test configuration
       url: '#get-a-test-configuration'
       identifier: synthetics-get-a-test-configuration
@@ -4205,7 +4205,7 @@ menu:
         operationids:
           - GetTest
         unstable: []
-        order: 4
+        order: 5
     - name: Fetch uptime for multiple tests
       url: '#fetch-uptime-for-multiple-tests'
       identifier: synthetics-fetch-uptime-for-multiple-tests
@@ -4217,7 +4217,7 @@ menu:
         operationids:
           - FetchUptimes
         unstable: []
-        order: 15
+        order: 17
     - name: Trigger tests from CI/CD pipelines
       url: '#trigger-tests-from-ci/cd-pipelines'
       identifier: synthetics-trigger-tests-from-ci/cd-pipelines
@@ -4229,7 +4229,7 @@ menu:
         operationids:
           - TriggerCITests
         unstable: []
-        order: 13
+        order: 15
     - name: Trigger Synthetic tests
       url: '#trigger-synthetic-tests'
       identifier: synthetics-trigger-synthetic-tests
@@ -4241,7 +4241,7 @@ menu:
         operationids:
           - TriggerTests
         unstable: []
-        order: 14
+        order: 16
     - name: Search Synthetic tests
       url: '#search-synthetic-tests'
       identifier: synthetics-search-synthetic-tests
@@ -4253,7 +4253,7 @@ menu:
         operationids:
           - SearchTests
         unstable: []
-        order: 5
+        order: 6
     - name: Edit a mobile test
       url: '#edit-a-mobile-test'
       identifier: synthetics-edit-a-mobile-test
@@ -4265,7 +4265,7 @@ menu:
         operationids:
           - UpdateMobileTest
         unstable: []
-        order: 16
+        order: 22
     - name: Get a mobile test
       url: '#get-a-mobile-test'
       identifier: synthetics-get-a-mobile-test
@@ -4277,7 +4277,7 @@ menu:
         operationids:
           - GetMobileTest
         unstable: []
-        order: 7
+        order: 9
     - name: Create a mobile test
       url: '#create-a-mobile-test'
       identifier: synthetics-create-a-mobile-test
@@ -4289,7 +4289,7 @@ menu:
         operationids:
           - CreateSyntheticsMobileTest
         unstable: []
-        order: 2
+        order: 3
     - name: Delete tests
       url: '#delete-tests'
       identifier: synthetics-delete-tests
@@ -4301,7 +4301,7 @@ menu:
         operationids:
           - DeleteTests
         unstable: []
-        order: 17
+        order: 23
     - name: Get a browser test result
       url: '#get-a-browser-test-result'
       identifier: synthetics-get-a-browser-test-result
@@ -4313,7 +4313,7 @@ menu:
         operationids:
           - GetBrowserTestResult
         unstable: []
-        order: 11
+        order: 13
     - name: Get a browser test's latest results summaries
       url: '#get-a-browser-tests-latest-results-summaries'
       identifier: synthetics-get-a-browser-tests-latest-results-summaries
@@ -4325,7 +4325,7 @@ menu:
         operationids:
           - GetBrowserTestLatestResults
         unstable: []
-        order: 10
+        order: 12
     - name: Edit a browser test
       url: '#edit-a-browser-test'
       identifier: synthetics-edit-a-browser-test
@@ -4337,7 +4337,7 @@ menu:
         operationids:
           - UpdateBrowserTest
         unstable: []
-        order: 16
+        order: 19
     - name: Get a browser test
       url: '#get-a-browser-test'
       identifier: synthetics-get-a-browser-test
@@ -4349,7 +4349,7 @@ menu:
         operationids:
           - GetBrowserTest
         unstable: []
-        order: 6
+        order: 7
     - name: Create a browser test
       url: '#create-a-browser-test'
       identifier: synthetics-create-a-browser-test
@@ -4373,7 +4373,7 @@ menu:
         operationids:
           - UpdateAPITest
         unstable: []
-        order: 16
+        order: 21
     - name: Get an API test
       url: '#get-an-api-test'
       identifier: synthetics-get-an-api-test
@@ -4385,7 +4385,7 @@ menu:
         operationids:
           - GetAPITest
         unstable: []
-        order: 6
+        order: 8
     - name: Create an API test
       url: '#create-an-api-test'
       identifier: synthetics-create-an-api-test
@@ -4421,7 +4421,7 @@ menu:
         operationids:
           - ListTests
         unstable: []
-        order: 3
+        order: 4
     - name: Get the default locations
       url: '#get-the-default-locations'
       identifier: synthetics-get-the-default-locations
@@ -4433,7 +4433,7 @@ menu:
         operationids:
           - GetSyntheticsDefaultLocations
         unstable: []
-        order: 29
+        order: 34
     - name: Edit a private location
       url: '#edit-a-private-location'
       identifier: synthetics-edit-a-private-location
@@ -4445,7 +4445,7 @@ menu:
         operationids:
           - UpdatePrivateLocation
         unstable: []
-        order: 26
+        order: 32
     - name: Get a private location
       url: '#get-a-private-location'
       identifier: synthetics-get-a-private-location
@@ -4457,7 +4457,7 @@ menu:
         operationids:
           - GetPrivateLocation
         unstable: []
-        order: 25
+        order: 31
     - name: Delete a private location
       url: '#delete-a-private-location'
       identifier: synthetics-delete-a-private-location
@@ -4469,7 +4469,7 @@ menu:
         operationids:
           - DeletePrivateLocation
         unstable: []
-        order: 27
+        order: 33
     - name: Create a private location
       url: '#create-a-private-location'
       identifier: synthetics-create-a-private-location
@@ -4481,7 +4481,7 @@ menu:
         operationids:
           - CreatePrivateLocation
         unstable: []
-        order: 23
+        order: 29
     - name: Get all locations (public and private)
       url: '#get-all-locations-public-and-private'
       identifier: synthetics-get-all-locations-public-and-private
@@ -4493,7 +4493,7 @@ menu:
         operationids:
           - ListLocations
         unstable: []
-        order: 24
+        order: 30
     - name: Get details of batch
       url: '#get-details-of-batch'
       identifier: synthetics-get-details-of-batch
@@ -4505,7 +4505,7 @@ menu:
         operationids:
           - GetSyntheticsCIBatch
         unstable: []
-        order: 12
+        order: 14
     - name: Tags
       url: /api/latest/tags/
       identifier: tags
@@ -4733,7 +4733,7 @@ menu:
         operationids:
           - GetUsageTopAvgMetrics
         unstable: []
-        order: 7
+        order: 4
     - name: Get hourly usage for custom metrics
       url: '#get-hourly-usage-for-custom-metrics'
       identifier: usage-metering-get-hourly-usage-for-custom-metrics
@@ -4745,7 +4745,7 @@ menu:
         operationids:
           - GetUsageTimeseries
         unstable: []
-        order: 13
+        order: 10
     - name: Get hourly usage for synthetics browser checks
       url: '#get-hourly-usage-for-synthetics-browser-checks'
       identifier: usage-metering-get-hourly-usage-for-synthetics-browser-checks
@@ -4757,7 +4757,7 @@ menu:
         operationids:
           - GetUsageSyntheticsBrowser
         unstable: []
-        order: 17
+        order: 14
     - name: Get hourly usage for synthetics API checks
       url: '#get-hourly-usage-for-synthetics-api-checks'
       identifier: usage-metering-get-hourly-usage-for-synthetics-api-checks
@@ -4769,7 +4769,7 @@ menu:
         operationids:
           - GetUsageSyntheticsAPI
         unstable: []
-        order: 16
+        order: 13
     - name: Get hourly usage for synthetics checks
       url: '#get-hourly-usage-for-synthetics-checks'
       identifier: usage-metering-get-hourly-usage-for-synthetics-checks
@@ -4781,7 +4781,7 @@ menu:
         operationids:
           - GetUsageSynthetics
         unstable: []
-        order: 15
+        order: 12
     - name: Get usage across your account
       url: '#get-usage-across-your-account'
       identifier: usage-metering-get-usage-across-your-account
@@ -4793,7 +4793,7 @@ menu:
         operationids:
           - GetUsageSummary
         unstable: []
-        order: 8
+        order: 5
     - name: Get hourly usage for SNMP devices
       url: '#get-hourly-usage-for-snmp-devices'
       identifier: usage-metering-get-hourly-usage-for-snmp-devices
@@ -4805,7 +4805,7 @@ menu:
         operationids:
           - GetUsageSNMP
         unstable: []
-        order: 24
+        order: 21
     - name: Get hourly usage for sensitive data scanner
       url: '#get-hourly-usage-for-sensitive-data-scanner'
       identifier: usage-metering-get-hourly-usage-for-sensitive-data-scanner
@@ -4817,7 +4817,7 @@ menu:
         operationids:
           - GetUsageSDS
         unstable: []
-        order: 32
+        order: 28
     - name: Get hourly usage for RUM sessions
       url: '#get-hourly-usage-for-rum-sessions'
       identifier: usage-metering-get-hourly-usage-for-rum-sessions
@@ -4829,7 +4829,7 @@ menu:
         operationids:
           - GetUsageRumSessions
         unstable: []
-        order: 20
+        order: 17
     - name: Get hourly usage for RUM units
       url: '#get-hourly-usage-for-rum-units'
       identifier: usage-metering-get-hourly-usage-for-rum-units
@@ -4841,7 +4841,7 @@ menu:
         operationids:
           - GetUsageRumUnits
         unstable: []
-        order: 33
+        order: 29
     - name: Get hourly usage for profiled hosts
       url: '#get-hourly-usage-for-profiled-hosts'
       identifier: usage-metering-get-hourly-usage-for-profiled-hosts
@@ -4853,7 +4853,7 @@ menu:
         operationids:
           - GetUsageProfiling
         unstable: []
-        order: 34
+        order: 30
     - name: Get hourly usage for online archive
       url: '#get-hourly-usage-for-online-archive'
       identifier: usage-metering-get-hourly-usage-for-online-archive
@@ -4865,7 +4865,7 @@ menu:
         operationids:
           - GetUsageOnlineArchive
         unstable: []
-        order: 36
+        order: 32
     - name: Get hourly usage for network hosts
       url: '#get-hourly-usage-for-network-hosts'
       identifier: usage-metering-get-hourly-usage-for-network-hosts
@@ -4877,7 +4877,7 @@ menu:
         operationids:
           - GetUsageNetworkHosts
         unstable: []
-        order: 21
+        order: 18
     - name: get hourly usage for network flows
       url: '#get-hourly-usage-for-network-flows'
       identifier: usage-metering-get-hourly-usage-for-network-flows
@@ -4889,7 +4889,7 @@ menu:
         operationids:
           - GetUsageNetworkFlows
         unstable: []
-        order: 22
+        order: 19
     - name: Get monthly usage attribution
       url: '#get-monthly-usage-attribution'
       identifier: usage-metering-get-monthly-usage-attribution
@@ -4901,7 +4901,7 @@ menu:
         operationids:
           - GetMonthlyUsageAttribution
         unstable: []
-        order: 3
+        order: 2
     - name: Get hourly usage for logs by index
       url: '#get-hourly-usage-for-logs-by-index'
       identifier: usage-metering-get-hourly-usage-for-logs-by-index
@@ -4913,7 +4913,7 @@ menu:
         operationids:
           - GetUsageLogsByIndex
         unstable: []
-        order: 9
+        order: 6
     - name: Get hourly logs usage by retention
       url: '#get-hourly-logs-usage-by-retention'
       identifier: usage-metering-get-hourly-logs-usage-by-retention
@@ -4925,7 +4925,7 @@ menu:
         operationids:
           - GetUsageLogsByRetention
         unstable: []
-        order: 10
+        order: 7
     - name: Get hourly usage for logs
       url: '#get-hourly-usage-for-logs'
       identifier: usage-metering-get-hourly-usage-for-logs
@@ -4937,7 +4937,7 @@ menu:
         operationids:
           - GetUsageLogs
         unstable: []
-        order: 12
+        order: 9
     - name: Get hourly usage for IoT
       url: '#get-hourly-usage-for-iot'
       identifier: usage-metering-get-hourly-usage-for-iot
@@ -4949,7 +4949,7 @@ menu:
         operationids:
           - GetUsageInternetOfThings
         unstable: []
-        order: 27
+        order: 24
     - name: Get hourly usage for ingested spans
       url: '#get-hourly-usage-for-ingested-spans'
       identifier: usage-metering-get-hourly-usage-for-ingested-spans
@@ -4961,7 +4961,7 @@ menu:
         operationids:
           - GetIngestedSpans
         unstable: []
-        order: 25
+        order: 22
     - name: Get hourly usage for indexed spans
       url: '#get-hourly-usage-for-indexed-spans'
       identifier: usage-metering-get-hourly-usage-for-indexed-spans
@@ -4973,7 +4973,7 @@ menu:
         operationids:
           - GetUsageIndexedSpans
         unstable: []
-        order: 14
+        order: 11
     - name: Get hourly usage for incident management
       url: '#get-hourly-usage-for-incident-management'
       identifier: usage-metering-get-hourly-usage-for-incident-management
@@ -4985,7 +4985,7 @@ menu:
         operationids:
           - GetIncidentManagement
         unstable: []
-        order: 26
+        order: 23
     - name: Get hourly usage attribution
       url: '#get-hourly-usage-attribution'
       identifier: usage-metering-get-hourly-usage-attribution
@@ -4997,7 +4997,7 @@ menu:
         operationids:
           - GetHourlyUsageAttribution
         unstable: []
-        order: 2
+        order: 1
     - name: Get hourly usage for hosts and containers
       url: '#get-hourly-usage-for-hosts-and-containers'
       identifier: usage-metering-get-hourly-usage-for-hosts-and-containers
@@ -5009,7 +5009,7 @@ menu:
         operationids:
           - GetUsageHosts
         unstable: []
-        order: 11
+        order: 8
     - name: Get hourly usage for Fargate
       url: '#get-hourly-usage-for-fargate'
       identifier: usage-metering-get-hourly-usage-for-fargate
@@ -5021,7 +5021,7 @@ menu:
         operationids:
           - GetUsageFargate
         unstable: []
-        order: 18
+        order: 15
     - name: Get hourly usage for database monitoring
       url: '#get-hourly-usage-for-database-monitoring'
       identifier: usage-metering-get-hourly-usage-for-database-monitoring
@@ -5033,7 +5033,7 @@ menu:
         operationids:
           - GetUsageDBM
         unstable: []
-        order: 31
+        order: 27
     - name: Get hourly usage for cloud workload security
       url: '#get-hourly-usage-for-cloud-workload-security'
       identifier: usage-metering-get-hourly-usage-for-cloud-workload-security
@@ -5045,7 +5045,7 @@ menu:
         operationids:
           - GetUsageCWS
         unstable: []
-        order: 30
+        order: 26
     - name: Get hourly usage for CSM Pro
       url: '#get-hourly-usage-for-csm-pro'
       identifier: usage-metering-get-hourly-usage-for-csm-pro
@@ -5057,7 +5057,7 @@ menu:
         operationids:
           - GetUsageCloudSecurityPostureManagement
         unstable: []
-        order: 28
+        order: 25
     - name: Get hourly usage for CI visibility
       url: '#get-hourly-usage-for-ci-visibility'
       identifier: usage-metering-get-hourly-usage-for-ci-visibility
@@ -5069,7 +5069,7 @@ menu:
         operationids:
           - GetUsageCIApp
         unstable: []
-        order: 35
+        order: 31
     - name: Get billable usage across your account
       url: '#get-billable-usage-across-your-account'
       identifier: usage-metering-get-billable-usage-across-your-account
@@ -5081,7 +5081,7 @@ menu:
         operationids:
           - GetUsageBillableSummary
         unstable: []
-        order: 5
+        order: 3
     - name: Get hourly usage for Lambda
       url: '#get-hourly-usage-for-lambda'
       identifier: usage-metering-get-hourly-usage-for-lambda
@@ -5093,7 +5093,7 @@ menu:
         operationids:
           - GetUsageLambda
         unstable: []
-        order: 19
+        order: 16
     - name: Get hourly usage for audit logs
       url: '#get-hourly-usage-for-audit-logs'
       identifier: usage-metering-get-hourly-usage-for-audit-logs
@@ -5105,7 +5105,7 @@ menu:
         operationids:
           - GetUsageAuditLogs
         unstable: []
-        order: 40
+        order: 33
     - name: Get hourly usage for analyzed logs
       url: '#get-hourly-usage-for-analyzed-logs'
       identifier: usage-metering-get-hourly-usage-for-analyzed-logs
@@ -5117,7 +5117,7 @@ menu:
         operationids:
           - GetUsageAnalyzedLogs
         unstable: []
-        order: 23
+        order: 20
     - name: Get specified monthly custom reports
       url: '#get-specified-monthly-custom-reports'
       identifier: usage-metering-get-specified-monthly-custom-reports
@@ -5129,7 +5129,7 @@ menu:
         operationids:
           - GetSpecifiedMonthlyCustomReports
         unstable: []
-        order: 44
+        order: 37
     - name: Get the list of available monthly custom reports
       url: '#get-the-list-of-available-monthly-custom-reports'
       identifier: usage-metering-get-the-list-of-available-monthly-custom-reports
@@ -5141,7 +5141,7 @@ menu:
         operationids:
           - GetMonthlyCustomReports
         unstable: []
-        order: 43
+        order: 36
     - name: Get specified daily custom reports
       url: '#get-specified-daily-custom-reports'
       identifier: usage-metering-get-specified-daily-custom-reports
@@ -5153,7 +5153,7 @@ menu:
         operationids:
           - GetSpecifiedDailyCustomReports
         unstable: []
-        order: 42
+        order: 35
     - name: Get the list of available daily custom reports
       url: '#get-the-list-of-available-daily-custom-reports'
       identifier: usage-metering-get-the-list-of-available-daily-custom-reports
@@ -5165,7 +5165,7 @@ menu:
         operationids:
           - GetDailyCustomReports
         unstable: []
-        order: 41
+        order: 34
     - name: Users
       url: /api/latest/users/
       identifier: users
@@ -8232,6 +8232,32 @@ menu:
       url: /api/latest/deployment-gates/
       identifier: deployment-gates
       generated: true
+    - name: Get a deployment gate evaluation result
+      url: '#get-a-deployment-gate-evaluation-result'
+      identifier: deployment-gates-get-a-deployment-gate-evaluation-result
+      parent: deployment-gates
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetDeploymentGatesEvaluationResult
+        unstable:
+          - v2
+        order: 12
+    - name: Trigger a deployment gate evaluation
+      url: '#trigger-a-deployment-gate-evaluation'
+      identifier: deployment-gates-trigger-a-deployment-gate-evaluation
+      parent: deployment-gates
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - TriggerDeploymentGatesEvaluation
+        unstable:
+          - v2
+        order: 11
     - name: Update deployment gate
       url: '#update-deployment-gate'
       identifier: deployment-gates-update-deployment-gate
@@ -8349,6 +8375,19 @@ menu:
         unstable:
           - v2
         order: 1
+    - name: Get all deployment gates
+      url: '#get-all-deployment-gates'
+      identifier: deployment-gates-get-all-deployment-gates
+      parent: deployment-gates
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListDeploymentGates
+        unstable:
+          - v2
+        order: 10
     - name: Domain Allowlist
       url: /api/latest/domain-allowlist/
       identifier: domain-allowlist
@@ -8758,7 +8797,7 @@ menu:
           - TriggerFleetSchedule
         unstable:
           - v2
-        order: 13
+        order: 14
     - name: Update a schedule
       url: '#update-a-schedule'
       identifier: fleet-automation-update-a-schedule
@@ -8771,7 +8810,7 @@ menu:
           - UpdateFleetSchedule
         unstable:
           - v2
-        order: 11
+        order: 12
     - name: Get a schedule by ID
       url: '#get-a-schedule-by-id'
       identifier: fleet-automation-get-a-schedule-by-id
@@ -8784,7 +8823,7 @@ menu:
           - GetFleetSchedule
         unstable:
           - v2
-        order: 10
+        order: 11
     - name: Delete a schedule
       url: '#delete-a-schedule'
       identifier: fleet-automation-delete-a-schedule
@@ -8797,7 +8836,7 @@ menu:
           - DeleteFleetSchedule
         unstable:
           - v2
-        order: 12
+        order: 13
     - name: Create a schedule
       url: '#create-a-schedule'
       identifier: fleet-automation-create-a-schedule
@@ -8810,7 +8849,7 @@ menu:
           - CreateFleetSchedule
         unstable:
           - v2
-        order: 9
+        order: 10
     - name: List all schedules
       url: '#list-all-schedules'
       identifier: fleet-automation-list-all-schedules
@@ -8823,7 +8862,7 @@ menu:
           - ListFleetSchedules
         unstable:
           - v2
-        order: 8
+        order: 9
     - name: Cancel a deployment
       url: '#cancel-a-deployment'
       identifier: fleet-automation-cancel-a-deployment
@@ -8836,7 +8875,7 @@ menu:
           - CancelFleetDeployment
         unstable:
           - v2
-        order: 7
+        order: 8
     - name: Get a configuration deployment by ID
       url: '#get-a-configuration-deployment-by-id'
       identifier: fleet-automation-get-a-configuration-deployment-by-id
@@ -8849,7 +8888,7 @@ menu:
           - GetFleetDeployment
         unstable:
           - v2
-        order: 6
+        order: 7
     - name: Upgrade hosts
       url: '#upgrade-hosts'
       identifier: fleet-automation-upgrade-hosts
@@ -8862,7 +8901,7 @@ menu:
           - CreateFleetDeploymentUpgrade
         unstable:
           - v2
-        order: 5
+        order: 6
     - name: Create a configuration deployment
       url: '#create-a-configuration-deployment'
       identifier: fleet-automation-create-a-configuration-deployment
@@ -8875,7 +8914,7 @@ menu:
           - CreateFleetDeploymentConfigure
         unstable:
           - v2
-        order: 4
+        order: 5
     - name: List all deployments
       url: '#list-all-deployments'
       identifier: fleet-automation-list-all-deployments
@@ -8888,7 +8927,7 @@ menu:
           - ListFleetDeployments
         unstable:
           - v2
-        order: 3
+        order: 4
     - name: Get detailed information about an agent
       url: '#get-detailed-information-about-an-agent'
       identifier: fleet-automation-get-detailed-information-about-an-agent
@@ -8901,7 +8940,7 @@ menu:
           - GetFleetAgentInfo
         unstable:
           - v2
-        order: 2
+        order: 3
     - name: List all Datadog Agents
       url: '#list-all-datadog-agents'
       identifier: fleet-automation-list-all-datadog-agents
@@ -8914,7 +8953,7 @@ menu:
           - ListFleetAgents
         unstable:
           - v2
-        order: 1
+        order: 2
     - name: List all available Agent versions
       url: '#list-all-available-agent-versions'
       identifier: fleet-automation-list-all-available-agent-versions
@@ -8927,7 +8966,7 @@ menu:
           - ListFleetAgentVersions
         unstable:
           - v2
-        order: 0
+        order: 1
     - name: Google Chat Integration
       url: /api/latest/google-chat-integration/
       identifier: google-chat-integration
@@ -10916,7 +10955,7 @@ menu:
         operationids:
           - UpdatePipeline
         unstable: []
-        order: 3
+        order: 4
     - name: Get a specific pipeline
       url: '#get-a-specific-pipeline'
       identifier: observability-pipelines-get-a-specific-pipeline
@@ -10928,7 +10967,7 @@ menu:
         operationids:
           - GetPipeline
         unstable: []
-        order: 2
+        order: 3
     - name: Delete a pipeline
       url: '#delete-a-pipeline'
       identifier: observability-pipelines-delete-a-pipeline
@@ -10940,7 +10979,7 @@ menu:
         operationids:
           - DeletePipeline
         unstable: []
-        order: 4
+        order: 5
     - name: Validate an observability pipeline
       url: '#validate-an-observability-pipeline'
       identifier: observability-pipelines-validate-an-observability-pipeline
@@ -10952,7 +10991,7 @@ menu:
         operationids:
           - ValidatePipeline
         unstable: []
-        order: 5
+        order: 6
     - name: Create a new pipeline
       url: '#create-a-new-pipeline'
       identifier: observability-pipelines-create-a-new-pipeline
@@ -10964,7 +11003,7 @@ menu:
         operationids:
           - CreatePipeline
         unstable: []
-        order: 1
+        order: 2
     - name: List pipelines
       url: '#list-pipelines'
       identifier: observability-pipelines-list-pipelines
@@ -10976,7 +11015,7 @@ menu:
         operationids:
           - ListPipelines
         unstable: []
-        order: 0
+        order: 1
     - name: Okta Integration
       url: /api/latest/okta-integration/
       identifier: okta-integration
@@ -14243,6 +14282,45 @@ menu:
         unstable:
           - v2
         order: 2
+    - name: Get Test Optimization service settings
+      url: '#get-test-optimization-service-settings'
+      identifier: test-optimization-get-test-optimization-service-settings
+      parent: test-optimization
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetTestOptimizationServiceSettings
+        unstable:
+          - v2
+        order: 3
+    - name: Update Test Optimization service settings
+      url: '#update-test-optimization-service-settings'
+      identifier: test-optimization-update-test-optimization-service-settings
+      parent: test-optimization
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateTestOptimizationServiceSettings
+        unstable:
+          - v2
+        order: 4
+    - name: Delete Test Optimization service settings
+      url: '#delete-test-optimization-service-settings'
+      identifier: test-optimization-delete-test-optimization-service-settings
+      parent: test-optimization
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteTestOptimizationServiceSettings
+        unstable:
+          - v2
+        order: 5
     - name: Workflow Automation
       url: /api/latest/workflow-automation/
       identifier: workflow-automation
