@@ -68,7 +68,7 @@ GRANT ALL PRIVILEGES ON FUTURE TABLES IN SCHEMA <database>.datadog_experiments_o
 
 <div class="alert alert-info">The <a href="#create-a-dedicated-service-user-and-role-in-snowflake">role you created</a> must have access to at least one warehouse to compute results.</div>
 
-Creating a dedicated warehouse for Datadog Experiments is optional. Run the following commands to create one. Replace `<wh_size>` with the appropriate value, and enter the warehouse name when configuring experiment settings in [Step 3](#step-3-configure-experiment-settings).
+Creating a dedicated warehouse for Datadog Experiments is optional. Run the following commands to create one. Replace `<wh_size>` with the appropriate value, and enter the warehouse name in [Step 3](#step-3-configure-experiment-settings).
 
 ```sql
 CREATE WAREHOUSE IF NOT EXISTS datadog_experiments_wh
