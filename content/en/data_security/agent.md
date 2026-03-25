@@ -218,8 +218,8 @@ agent diagnose show-metadata agent-telemetry
 | cluster_checks.unscheduled_check            | Number of unscheduled cluster checks                                                                                   |
 | external_metrics.datadog_metrics            | Number of Datadog external metrics                                                                                     |
 | language_detection_patcher.patches          | Number of language detection patcher patches                                                                           |
-| workloadmeta.stored_entities                | Number of entities stored in WorkloadMeta                                                                              |
 | tagger.stored_entities                      | Number of entities stored in the Tagger                                                                                |
+| workloadmeta.stored_entities                | Number of entities stored in WorkloadMeta                                                                              |
 | workloadmeta.pull_errors                    | Number of WorkloadMeta pull errors                                                                                     |
 
 Only applicable metrics are emitted. For example, if DBM is not enabled, none of the database related metrics are emitted.
