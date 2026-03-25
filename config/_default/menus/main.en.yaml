@@ -3034,11 +3034,6 @@ menu:
       parent: infrastructure_livecontainers_explorer
       identifier: infrastructure_livecontainers_resource_utilization
       weight: 10302
-    - name: Kubernetes Autoscaling
-      url: containers/autoscaling
-      parent: infrastructure_livecontainers_explorer
-      identifier: infrastructure_livecontainers_autoscaling
-      weight: 10303
     - name: Remediation
       url: containers/bits_ai_kubernetes_remediation
       parent: infrastructure_livecontainers_explorer
@@ -3054,6 +3049,11 @@ menu:
       parent: containers
       identifier: containers_autoscaling
       weight: 2
+    - name: Cluster 
+      url: containers/autoscaling/cluster
+      parent: containers_autoscaling
+      identifier: containers_autoscaling_cluster
+      weight: 201
     - name: Docker-based
       url: containers/docker/
       parent: containers
