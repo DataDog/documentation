@@ -166,7 +166,7 @@ Use the following environment variables to configure runtime metrics in your app
 
 `DD_RUNTIME_METRICS_DIAGNOSTICS_METRICS_API_ENABLED`
 : **Default**: `true` starting tracer v3.40.0+ on .NET 8+ and (.NET 6/7 when `DD_RUNTIME_METRICS_ENABLED` is not explicitly set), otherwise `false`. <br>
-**Description**: Available starting .NET 6 it controls whether the .NET tracer uses the new [`System.Diagnostics.Metrics`][9] API to collect the metrics instead of the `EventListener`-based collector.
+**Description**: Available starting with .NET 6. It controls whether the .NET tracer uses the new [`System.Diagnostics.Metrics`][9] API to collect the metrics instead of the `EventListener`-based collector.
 
 #### Code-based configuration
 
