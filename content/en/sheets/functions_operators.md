@@ -31,7 +31,7 @@ Use functions and operators in Sheets to analyze and transform your data. Functi
 
 ### Text
 
-| Function | Description | Example | Available in |
+| <span style="min-width:250px;display:block">Function</span> | Description | <span style="min-width:220px;display:block">Example</span> | Available in |
 | ------------ | ------------ | ------------ | ------------ |
 | `REGEXMATCH(text_string, regular_expression)` | Evaluates whether a text string matches a regular expression. | `REGEXMATCH("ABC 123 def", "\\\\d+") => TRUE` | Table, Sheet |
 | `REGEXEXTRACT(text_string, regular_expression)` | Extracts the first substring that matches a specified regex pattern. | `REGEXEXTRACT("ABC 123 def", "\\\\d+") => "123"` | Table, Sheet |
@@ -56,7 +56,7 @@ Use functions and operators in Sheets to analyze and transform your data. Functi
 
 ### Logical
 
-| Function | Description | Example | Available in |
+| <span style="min-width:250px;display:block">Function</span> | Description | <span style="min-width:220px;display:block">Example</span> | Available in |
 | ------------ | ------------ | ------------ | ------------ |
 | `IF(logical_expression, value_if_true, value_if_false)` | Returns one value if a logical expression is TRUE and another if it is FALSE. | `IF(42>9, "all good", "something is wrong in the matrix")` | Table, Sheet |
 | `IFS(logical_test1, value_if_true1, [logical_test2, value_if_true2], …)` | Evaluates one or more condition/value pairs and returns the value for the first true condition. Use TRUE as the final condition to define a default value. | `IFS(A1>90, "A", A1>80, "B", TRUE, "C")` | Table, Sheet |
@@ -72,7 +72,7 @@ Use functions and operators in Sheets to analyze and transform your data. Functi
 
 ### Math
 
-| Function | Description | Example | Available in |
+| <span style="min-width:250px;display:block">Function</span> | Description | <span style="min-width:220px;display:block">Example</span> | Available in |
 | ------------ | ------------ | ------------ | ------------ |
 | `ABS(number)` | Returns the absolute value of a number. | `ABS(26.34)` | Table, Sheet |
 | `CEILING(number, factor)` | Rounds a number up to the nearest integer multiple of the specified factor. | `CEILING(826.645, 10)` | Table, Sheet |
@@ -99,7 +99,7 @@ Use functions and operators in Sheets to analyze and transform your data. Functi
 
 ### Date and time
 
-| Function | Description | Example | Available in |
+| <span style="min-width:250px;display:block">Function</span> | Description | <span style="min-width:220px;display:block">Example</span> | Available in |
 | ------------ | ------------ | ------------ | ------------ |
 | `DATE(year, month, day)` | Converts a provided year, month, and day into a date. | `DATE(2021, 10, 31)` | Table, Sheet |
 | `DATEDIF(start_date, end_date, unit)` | Calculates the number of days, months, or years between two dates. | `DATEDIF("10/17/1979", "8/22/2019", "Y") => 39` | Table, Sheet |
@@ -119,7 +119,7 @@ Use functions and operators in Sheets to analyze and transform your data. Functi
 
 ### Lookup and reference
 
-| Function | Description | Example | Available in |
+| <span style="min-width:250px;display:block">Function</span> | Description | <span style="min-width:220px;display:block">Example</span> | Available in |
 | ------------ | ------------ | ------------ | ------------ |
 | `VLOOKUP(search_key, range, index, [is_sorted])` | Searches for a value in the first column of a range and returns a value in the same row from a specified column. | `VLOOKUP("Apple", A1:C10, 2, FALSE)` | Sheet |
 | `HLOOKUP(search_key, range, index, [is_sorted])` | Searches for a value in the first row of a range and returns a value in the same column from a specified row. | `HLOOKUP("Apple", A1:D3, 2, FALSE)` | Sheet |
@@ -131,7 +131,7 @@ Use functions and operators in Sheets to analyze and transform your data. Functi
 
 ### Statistical
 
-| Function | Description | Example | Available in |
+| <span style="min-width:250px;display:block">Function</span> | Description | <span style="min-width:220px;display:block">Example</span> | Available in |
 | ------------ | ------------ | ------------ | ------------ |
 | `AVERAGE(value1, [value2, ...])` | Returns the numerical average value in a dataset, ignoring text. | `AVERAGE('APM'#"duration")` | Sheet |
 | `AVERAGEIF(range, criteria, [average_range])` | Returns the average of cells that meet a specified criteria. | `AVERAGEIF('APM'#"env", "prod", 'APM'#"duration")` | Sheet |
@@ -146,7 +146,7 @@ Use functions and operators in Sheets to analyze and transform your data. Functi
 
 ### Financial
 
-| Function | Description | Example | Available in |
+| <span style="min-width:250px;display:block">Function</span> | Description | <span style="min-width:220px;display:block">Example</span> | Available in |
 | ------------ | ------------ | ------------ | ------------ |
 | `PMT(rate, number_of_periods, present_value, [future_value], [end_or_beginning])` | Calculates the payment for a loan based on constant payments and a constant interest rate. | `PMT(0.05/12, 60, 20000)` | Sheet |
 | `PV(rate, number_of_periods, payment_amount, [future_value], [end_or_beginning])` | Calculates the present value of an investment. | `PV(0.05/12, 60, -377.42)` | Sheet |
@@ -159,7 +159,7 @@ Use functions and operators in Sheets to analyze and transform your data. Functi
 
 ### Info
 
-| Function | Description | Example | Available in |
+| <span style="min-width:250px;display:block">Function</span> | Description | <span style="min-width:220px;display:block">Example</span> | Available in |
 | ------------ | ------------ | ------------ | ------------ |
 | `ISBLANK(value)` | Tests whether a cell is blank. | `ISBLANK(A1)` | Sheet |
 | `ISNUMBER(value)` | Tests whether a value is a number. | `ISNUMBER(123)` | Sheet |
