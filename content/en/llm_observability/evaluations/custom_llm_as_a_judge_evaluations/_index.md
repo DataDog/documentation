@@ -282,8 +282,10 @@ Under **Evaluation Scope**, define where and how your evaluation runs. This help
    - **Evaluate On**: Choose one of the following:
       - **Traces**: Evaluate only root spans
       - **All Spans**: Evaluate both root and child spans
-   - **Span Names**: (Optional) Limit evaluation to spans with certain names.
-   - **Tags**: (Optional) Limit evaluation to spans with certain tags.
+   - **Query**: (Optional) Enter a query using Datadog query syntax to filter which spans are evaluated. For example:
+      - `@name:agent.workflow` to filter by span name
+      - `env:prod` to filter by tag
+      - `@name:agent.workflow AND env:prod` to filter by span name and tag
    - **Sampling Rate**: (Optional) Apply sampling (for example, 10%) to control evaluation cost.
 
 {{< img src="llm_observability/evaluations/evaluation_scope.png" alt="Configuring the evaluation scope." style="width:100%;" >}}
