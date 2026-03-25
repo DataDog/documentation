@@ -41,7 +41,7 @@ ALTER USER datadog_experiments_user SET DEFAULT_ROLE = datadog_experiments_role;
 ### Grant privileges to the role
 
 1. Identify the tables in Snowflake from which you intend to create metrics.
-1. Run the following commands to grant read privileges to the new role, replacing `<database>`, `<schema>`, and `<table>` with their appropriate values. Run both `GRANT USAGE` commands, then run one `GRANT SELECT` command based on your access needs.
+1. Run the following commands to grant read privileges to the new role, replacing `<database>`, `<schema>`, and `<table>` with their appropriate values. Run both `GRANT USAGE` commands, then run the `GRANT SELECT` option or options that match your access needs.
 
 ```sql
 GRANT USAGE ON DATABASE <database> TO ROLE datadog_experiments_role;
@@ -101,13 +101,13 @@ To connect your Snowflake account to Datadog for warehouse-native experiment ana
 
 ## Step 3: Configure experiment settings
 
-After connecting your Snowflake account, configure the experiment settings in [Datadog Product Analytics][4]:
+After you set up your Snowflake integration, configure the experiment settings in [Datadog Product Analytics][4]:
 
 1. In the left navigation, hover over **Settings**, then click **Experiments**.
 1. Select the **Warehouse Connections** tab.
 1. Click **Connect a data warehouse**. If you already have a warehouse connected, click **Edit** instead.
 1. Select the **Snowflake** tile.
-1. Enter the **Account**, **Role**, **Warehouse**, **Database**, and **Schema** you configured in [Step 1](#step-1-prepare-the-snowflake-service-account). If your database and schema do not appear in the dropdown, type them in to add them.
+1. Enter the **Account**, **Role**, **Warehouse**, **Database**, and **Schema** you configured in [Step 1](#step-1-prepare-the-snowflake-service-account). If your database and schema do not appear in the dropdown, enter them manually to add them to the list.
 1. Click **Save**.
 
 {{< img src="/product_analytics/experiment/guide/snowflake_experiment_setup.png" alt="The Edit Data Warehouse modal with Snowflake selected, showing two sections: Select Snowflake Account with fields for Account, Role, and Warehouse, and Select Database and Schema with fields for Database and Schema." style="width:90%;" >}}
