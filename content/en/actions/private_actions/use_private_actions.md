@@ -22,7 +22,7 @@ further_reading:
 
 ## Overview
 
-Private actions allow your Datadog workflows and apps to interact with services hosted on your private network without exposing your services to the public internet. To use private actions, you must use Docker to install a private action runner on a host in your network, then pair the runner with a Datadog Connection.
+Private actions allow your Datadog workflows and apps to interact with services hosted on your private network without exposing your services to the public internet. To use private actions, you must install a private action runner on a host in your network, then pair the runner with a Datadog Connection.
 
 For more information about how private actions work, see the full [overview page][16].
 
@@ -32,18 +32,462 @@ For more information about how private actions work, see the full [overview page
 
 ## Prerequisites
 
-The private action runner requires a Linux host that is able to reach any internal services you want to call from an action or app.
+Choose your installation method based on your environment:
 
-To use App Builder with private actions, you must be able to point a hostname to the private action runner's container. This hostname must be resolvable by your App users. App Builder calls the hostname using HTTPS, so you must bring your own SSL termination.
+**Agent-based installation (recommended)**
+: - Linux or Windows host with Datadog Agent version 7.77.0 or later
+: - Or Kubernetes cluster with Datadog Operator version 1.24.0 or later
+: - Network access to Datadog: `https://{{< region-param key=dd_site >}}`
+: - An [Application key][20] with `on_prem_runner_write` scope and **Actions API Access** enabled
 
-In addition, the host must have the following:
-- 2GB of RAM
-- Network access to Datadog: https://{{< region-param key=dd_site >}}, https://config.{{< region-param key=dd_site >}}
-- Docker (with Docker Compose if that is your preference) or Kubernetes
+**Standalone installation**
+: - Linux host with 2GB of RAM
+: - Network access to Datadog: `https://{{< region-param key=dd_site >}}`, `https://config.{{< region-param key=dd_site >}}`
+: - Docker (with Docker Compose if preferred) or Kubernetes
+: - To use App Builder with private actions, you must be able to point a hostname to the private action runner's container. This hostname must be resolvable by your App users. App Builder calls the hostname using HTTPS, so you must bring your own SSL termination.
 
 ## Set up a private action runner
 
-### Set up from Datadog
+### Agent-based installation
+
+The recommended way to install a private action runner is through the Datadog Agent. The runner automatically enrolls with Datadog and appears on the [Private Action Runners][6] page.
+
+{{< tabs >}}
+{{% tab "Linux" %}}
+
+### Create an Application key
+
+1. Go to [Application Keys][101].
+1. Click **New Key** and enter a name.
+1. Under **Scopes**, select **on_prem_runner_write**.
+1. Enable **Actions API Access**.
+1. Click **Create Key** and copy the key value.
+
+### Install the Datadog Agent
+
+Run the following command to install the Agent and enable the private action runner. Replace the placeholder values with your own:
+- `<API_KEY>`: Your [Datadog API key][102]
+- `<APP_KEY>`: The Application key you created
+- `DD_SITE`: Your [Datadog site][103] (for example, `datadoghq.com`)
+- `DD_PRIVATE_ACTION_RUNNER_ACTIONS_ALLOWLIST`: Comma-separated list of actions to allow. See [Available actions](#available-actions) for the full list of actions you can add to the allowlist.
+
+```bash
+DD_API_KEY=<API_KEY> \
+DD_APP_KEY=<APP_KEY> \
+DD_SITE="datadoghq.com" \
+DD_PRIVATE_ACTION_RUNNER_ENABLED=true \
+DD_PRIVATE_ACTION_RUNNER_ACTIONS_ALLOWLIST=com.datadoghq.script.runPredefinedScript,com.datadoghq.kubernetes.core.listPod \
+bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
+```
+
+### Verify the installation
+
+Go to the [Private Action Runners][104] page. You should see a new runner on the list. You can create new connections or start using existing ones.
+
+[101]: https://app.datadoghq.com/organization-settings/application-keys
+[102]: https://app.datadoghq.com/organization-settings/api-keys
+[103]: /getting_started/site/
+[104]: https://app.datadoghq.com/actions/action-catalog
+
+{{% /tab %}}
+
+{{% tab "Windows" %}}
+
+### Install or upgrade the Datadog Agent
+
+If you already have the Datadog Agent installed, upgrade to version 7.77.0 or later. See [Upgrade to Agent v7][101] for instructions.
+
+For new installations, download and run the MSI installer. Replace `<API_KEY>` with your [Datadog API key][102] and update `DD_SITE` if you're not using the US1 site.
+
+```powershell
+# Download the installer
+Invoke-WebRequest -Uri "https://s3.amazonaws.com/ddagent-windows-stable/ddagent-cli-7.77.0.msi" -OutFile ddagent-cli-7.77.0.msi
+
+# Install the Agent
+Start-Process -Wait -PassThru msiexec -ArgumentList '/qn /l*v install.log /i ddagent-cli-7.77.0.msi APIKEY="<API_KEY>" SITE="datadoghq.com"'
+```
+
+### Create an Application key
+
+1. Go to [Application Keys][103].
+1. Click **New Key** and enter a name.
+1. Under **Scopes**, select **on_prem_runner_write**.
+1. Enable **Actions API Access**.
+1. Click **Create Key** and copy the key value.
+
+### Configure the Agent
+
+Edit the `C:\ProgramData\Datadog\datadog.yaml` file and add the following configuration:
+
+```yaml
+app_key: <YOUR_APP_KEY>
+
+private_action_runner:
+  enabled: true
+  actions_allowlist:
+    - "com.datadoghq.script.runPredefinedPowershellScript"
+    - "com.datadoghq.http.request"
+```
+
+See [Available actions](#available-actions) for the full list of actions you can add to the allowlist. Not all actions are supported on Windows. Safe choices for Windows include HTTP and `runPredefinedPowershellScript`.
+
+### Restart the Agent
+
+```powershell
+Restart-Service -Force datadogagent
+```
+
+To start the runner on-demand:
+
+```powershell
+Start-Service datadog-agent-action
+```
+
+### Verify the installation
+
+Go to the [Private Action Runners][104] page. You should see a new runner on the list. You can create new connections or start using existing ones.
+
+[101]: /agent/versions/upgrade_to_agent_v7/
+[102]: https://app.datadoghq.com/organization-settings/api-keys
+[103]: https://app.datadoghq.com/organization-settings/application-keys
+[104]: https://app.datadoghq.com/actions/action-catalog
+
+{{% /tab %}}
+
+{{% tab "Kubernetes (Operator)" %}}
+
+Use the Datadog Operator to deploy the private action runner on your Kubernetes cluster.
+
+### Install the Datadog Operator
+
+Install the Datadog Operator version 1.24.0 or later:
+
+```bash
+helm repo add datadog https://helm.datadoghq.com
+helm repo update
+helm install datadog-operator datadog/datadog-operator \
+    --set image.repository=datadog/operator \
+    --set image.tag=1.24.0
+```
+
+### Create an API key and Application key
+
+1. Create or choose an [API key][101].
+1. Go to [Application Keys][102] and create a new key:
+   - Under **Scopes**, select **on_prem_runner_write**.
+   - Enable **Actions API Access**.
+
+### Create Kubernetes secrets
+
+```bash
+kubectl create secret generic datadog-secret \
+    --from-literal api-key=<YOUR_API_KEY> \
+    --from-literal app-key=<YOUR_APP_KEY>
+```
+
+### Configure and deploy the Datadog Agent
+
+Create a `datadog-agent.yaml` file with the following content. Update `<YOUR_CLUSTER_NAME>` and `site` as needed:
+
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+  annotations:
+    agent.datadoghq.com/private-action-runner-enabled: "true"
+    agent.datadoghq.com/private-action-runner-configdata: |
+      private_action_runner:
+        enabled: true
+        actions_allowlist:
+          - "com.datadoghq.script.runPredefinedScript"
+          - "com.datadoghq.kubernetes.core.listPod"
+spec:
+  global:
+    clusterName: <YOUR_CLUSTER_NAME>
+    site: datadoghq.com
+    credentials:
+      apiSecret:
+        secretName: datadog-secret
+        keyName: api-key
+      appSecret:
+        secretName: datadog-secret
+        keyName: app-key
+    kubelet:
+      tlsVerify: false
+  override:
+    nodeAgent:
+      image:
+        name: datadog/agent:7.77.0
+        pullPolicy: IfNotPresent
+    clusterAgent:
+      replicas: 2
+      image:
+        name: datadog/cluster-agent:7.77.0
+        pullPolicy: IfNotPresent
+      env:
+        - name: DD_PRIVATE_ACTION_RUNNER_ENABLED
+          value: "true"
+        - name: DD_PRIVATE_ACTION_RUNNER_ACTIONS_ALLOWLIST
+          value: "com.datadoghq.script.runPredefinedScript,com.datadoghq.kubernetes.core.listPod"
+  features:
+    logCollection:
+      enabled: true
+      containerCollectAll: true
+    liveContainerCollection:
+      enabled: true
+```
+
+Deploy the Agent:
+
+```bash
+kubectl apply -f datadog-agent.yaml
+```
+
+### Verify the deployment
+
+Check that the cluster agent pods are running:
+
+```bash
+kubectl get pods
+```
+
+Check the Private Action Runner logs:
+
+```bash
+kubectl logs -l app.kubernetes.io/component=cluster-agent --tail=1000 | grep private
+```
+
+You should see logs indicating PAR identity secret creation, self-enrollment success, and the runner starting with its URN.
+
+Go to the [Private Action Runners][103] page. You should see a new runner on the list.
+
+[101]: https://app.datadoghq.com/organization-settings/api-keys
+[102]: https://app.datadoghq.com/organization-settings/application-keys
+[103]: https://app.datadoghq.com/actions/action-catalog
+
+{{% /tab %}}
+
+{{% tab "Terraform" %}}
+
+Use Terraform with the Datadog Operator to deploy the private action runner.
+
+### Create an API key and Application key
+
+1. Create or choose an [API key][101].
+1. Go to [Application Keys][102] and create a new key:
+   - Under **Scopes**, select **on_prem_runner_write**.
+   - Enable **Actions API Access**.
+
+### Create the Terraform configuration
+
+Create a Terraform file with the following content. Update `eks_cluster` and other values as needed:
+
+```hcl
+locals {
+  helm_operator_version = "2.19.0"
+  agent_version         = "7.77.0"
+  eks_cluster           = "<YOUR_CLUSTER_NAME>"
+}
+
+variable "datadog_api_key" {
+  type = string
+}
+
+variable "datadog_app_key" {
+  type = string
+}
+
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 5.56.0"
+    }
+    kubernetes = {
+      source  = "hashicorp/kubernetes"
+      version = "~> 3.0.1"
+    }
+    helm = {
+      source  = "hashicorp/helm"
+      version = "~> 3.1.1"
+    }
+  }
+}
+
+provider "aws" {
+  region = "us-east-1"
+}
+
+provider "kubernetes" {
+  host                   = data.aws_eks_cluster.target.endpoint
+  token                  = data.aws_eks_cluster_auth.target.token
+  cluster_ca_certificate = base64decode(data.aws_eks_cluster.target.certificate_authority[0].data)
+}
+
+provider "helm" {
+  helm_driver = "configmap"
+  kubernetes = {
+    host                   = data.aws_eks_cluster.target.endpoint
+    token                  = data.aws_eks_cluster_auth.target.token
+    cluster_ca_certificate = base64decode(data.aws_eks_cluster.target.certificate_authority[0].data)
+  }
+}
+
+data "aws_eks_cluster" "target" {
+  name = local.eks_cluster
+}
+
+data "aws_eks_cluster_auth" "target" {
+  name = local.eks_cluster
+}
+
+resource "kubernetes_namespace_v1" "namespace" {
+  metadata {
+    name = "datadog"
+  }
+}
+
+resource "kubernetes_secret_v1" "datadog" {
+  metadata {
+    name      = "datadog-secret"
+    namespace = "datadog"
+  }
+
+  data = {
+    "api-key" = var.datadog_api_key
+    "app-key" = var.datadog_app_key
+  }
+
+  depends_on = [kubernetes_namespace_v1.namespace]
+}
+
+resource "helm_release" "datadog_operator" {
+  name             = "datadog-operator"
+  repository       = "https://helm.datadoghq.com"
+  chart            = "datadog-operator"
+  version          = local.helm_operator_version
+  namespace        = "datadog"
+  create_namespace = false
+
+  depends_on = [kubernetes_namespace_v1.namespace]
+}
+
+resource "kubernetes_manifest" "datadog_agent" {
+  manifest = {
+    apiVersion = "datadoghq.com/v2alpha1"
+    kind       = "DatadogAgent"
+    metadata = {
+      name      = "datadog"
+      namespace = "datadog"
+      annotations = {
+        "agent.datadoghq.com/private-action-runner-enabled"    = true
+        "agent.datadoghq.com/private-action-runner-configdata" = <<EOF
+private_action_runner:
+  enabled: true
+  actions_allowlist:
+    - com.datadoghq.script.runPredefinedScript
+    - com.datadoghq.kubernetes.core.listPod
+EOF
+      }
+    }
+    spec = {
+      global = {
+        clusterName = local.eks_cluster
+        site        = "datadoghq.com"
+        credentials = {
+          apiSecret = {
+            secretName = "datadog-secret"
+            keyName    = "api-key"
+          }
+          appSecret = {
+            secretName = "datadog-secret"
+            keyName    = "app-key"
+          }
+        }
+      }
+      features = {
+        apm = {
+          enabled = true
+        }
+        liveProcessCollection = {
+          enabled = true
+        }
+        logCollection = {
+          enabled             = true
+          containerCollectAll = true
+        }
+        processDiscovery = {
+          enabled = true
+        }
+      }
+      override = {
+        clusterAgent = {
+          image = {
+            tag = local.agent_version
+          }
+          env = [
+            {
+              name  = "DD_PRIVATE_ACTION_RUNNER_ENABLED"
+              value = "true"
+            },
+            {
+              name  = "DD_PRIVATE_ACTION_RUNNER_ACTIONS_ALLOWLIST"
+              value = join(",", [
+                "com.datadoghq.script.runPredefinedScript",
+                "com.datadoghq.kubernetes.core.listPod",
+              ])
+            },
+          ]
+        }
+        nodeAgent = {
+          image = {
+            tag = local.agent_version
+          }
+        }
+      }
+    }
+  }
+
+  depends_on = [helm_release.datadog_operator]
+}
+```
+
+**Note:** You must first deploy without the `kubernetes_manifest.datadog_agent` resource for the CRDs to be created, then add it back.
+
+### Deploy
+
+```bash
+terraform init
+terraform apply -var="datadog_api_key=<YOUR_API_KEY>" -var="datadog_app_key=<YOUR_APP_KEY>"
+```
+
+### Verify the deployment
+
+Check that the cluster agent pods are running:
+
+```bash
+kubectl get pods -n datadog
+```
+
+Check the Private Action Runner logs:
+
+```bash
+kubectl logs -l app.kubernetes.io/component=cluster-agent -n datadog --tail=1000 | grep private
+```
+
+Go to the [Private Action Runners][103] page. You should see a new runner on the list.
+
+[101]: https://app.datadoghq.com/organization-settings/api-keys
+[102]: https://app.datadoghq.com/organization-settings/application-keys
+[103]: https://app.datadoghq.com/actions/action-catalog
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### Standalone installation
+
+As an alternative to the agent-based installation, you can run the private action runner as a standalone Docker container or Kubernetes deployment.
 
 1. Go to [**Actions Catalog**][6] > **Private Action Runners**, and click **New Private Action Runner**.
 1. Enter a name for your runner and select the allowed actions.
@@ -80,11 +524,10 @@ In addition, the host must have the following:
     1. Install the Helm chart.
 1. Run `kubectl get pods -w` and verify that the status of the Private Action Runner pod becomes `Ready`.
 
-
 {{% /tab %}}
 {{< /tabs >}}
 
-### Set up programmatically
+### Programmatic installation
 
 As an alternative to the UI-based setup, you can enroll and configure a private action runner programmatically using your [API key][19] and [Application key][20]. This approach is ideal for automated deployments, CI/CD pipelines, and infrastructure-as-code workflows.
 
@@ -260,16 +703,172 @@ From the **Private Action Runner** page in [Actions Catalog][6], you can view al
 
 ### Change the allowlist of a runner
 
-To edit the allowlist for a Private Action Runner:
+{{< tabs >}}
+{{% tab "Agent-based" %}}
+
+To edit the allowlist for an agent-based private action runner:
+
+**Linux:**
+1. Edit the `private_action_runner.actions_allowlist` section in `/etc/datadog-agent/datadog.yaml`.
+1. Restart the Agent: `sudo systemctl restart datadog-agent`
+
+**Windows:**
+1. Edit the `private_action_runner.actions_allowlist` section in `C:\ProgramData\Datadog\datadog.yaml`.
+1. Restart the Agent: `Restart-Service -Force datadogagent`
+
+**Kubernetes (Operator):**
+1. Update the `actions_allowlist` in the DatadogAgent manifest annotations and the `DD_PRIVATE_ACTION_RUNNER_ACTIONS_ALLOWLIST` environment variable.
+1. Apply the updated manifest: `kubectl apply -f datadog-agent.yaml`
+
+{{% /tab %}}
+{{% tab "Standalone" %}}
+
+To edit the allowlist for a standalone private action runner:
 
 1. Edit the `actionsAllowlist` section of the `config.yaml` file in your runner's environment and add or remove the relevant actions.
 1. Restart the runner by restarting your container or deployment.
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### Available actions
 
 {{% collapse-content title="Available actions" level="p" %}}
 
 {{< partial name="actions/private_actions_allowlist.html" >}}
 
 {{% /collapse-content %}}
+
+## Configure script actions
+
+The private action runner supports running predefined scripts on your hosts. To use script actions, you must configure the scripts and grant appropriate permissions.
+
+{{< tabs >}}
+{{% tab "Linux" %}}
+
+### Configure scripts
+
+Edit the `/etc/datadog-agent/private-action-runner/script-config.yaml` file:
+
+```yaml
+schemaId: script-credentials-v1
+runPredefinedScript:
+  echo:
+    command: ["echo", "Hello World!"]
+  echo-parametrized:
+    command: ["echo", "{{ parameters.echoValue }}"]
+  aws-sts-get-caller-identity:
+    command: ["aws", "sts", "get-caller-identity"]
+    allowedEnvVars: ["AWS_WEB_IDENTITY_TOKEN_FILE", "AWS_ROLE_ARN", "AWS_CONTAINER_CREDENTIALS_RELATIVE_URI", "AWS_CONTAINER_CREDENTIALS_FULL_URI", "AWS_CONTAINER_AUTHORIZATION_TOKEN", "AWS_REGION", "AWS_DEFAULT_REGION"]
+  restart-service:
+    command: ["sudo", "systemctl", "restart", "{{ parameters.service }}"]
+```
+
+### Grant permissions
+
+Private runner executes scripts from `dd-agent` user. If your scripts require elevated permissions, grant them to the `dd-agent` user:
+
+```bash
+echo "dd-agent ALL=(ALL) NOPASSWD: /usr/bin/systemctl restart nginx" > /etc/sudoers.d/dd-agent
+chmod 440 /etc/sudoers.d/dd-agent
+```
+
+### Configure the connection
+
+If you selected `com.datadoghq.script.runPredefinedScript` in your action allowlist, you should already have a "script" connection linked to your runner. Otherwise, create a new connection and specify `/etc/datadog-agent/private-action-runner/script-config.yaml` as the **path to file**. For more information, see [Handling Private Action Credentials][101].
+
+[101]: /actions/private_actions/private_action_credentials
+
+{{% /tab %}}
+
+{{% tab "Windows" %}}
+
+### Configure scripts
+
+Edit the `C:\ProgramData\Datadog\private-action-runner\powershell-script-config.yaml` file:
+
+```yaml
+schemaId: script-credentials-v1
+runPredefinedPowershellScript:
+  helloWorld:
+    script: |
+      Write-Output "Hello World!"
+  greet:
+    script: |
+      Write-Output "Run script from workflow called {{ parameters.name }} !"
+    parameterSchema:
+      properties:
+        name:
+          type: string
+      required:
+        - name
+  showEnv:
+    script: |
+      Write-Output "This vm name is $env:COMPUTERNAME"
+    allowedEnvVars:
+      - COMPUTERNAME
+  restartService:
+    script: |
+      Restart-Service -Name {{ parameters.serviceName }} -Force
+      Write-Output "Restart triggered for service '{{ parameters.serviceName }}' at $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')"
+    parameterSchema:
+      properties:
+        serviceName:
+          type: string
+      required:
+        - serviceName
+```
+
+### Grant permissions
+
+Private runner executes scripts from `ddagentuser`. If your scripts require elevated permissions, grant them to the `ddagentuser`:
+
+```powershell
+# Grant permissions to ddagentuser to your-file-path
+icacls "C:\<your-file-path>" /grant "ddagentuser:(OI)(CI)RX" /T
+
+# Verify permissions
+icacls "C:\<your-file-path>"
+```
+
+### Configure the connection
+
+If you selected `com.datadoghq.script.runPredefinedPowershellScript` in your action allowlist, you should already have a "script" connection linked to your runner. Otherwise, create a new connection and specify `C:\ProgramData\Datadog\private-action-runner\powershell-script-config.yaml` as the **path to file**. For more information, see [Handling Private Action Credentials][101].
+
+[101]: /actions/private_actions/private_action_credentials
+
+{{% /tab %}}
+{{< /tabs >}}
+
+## Debugging
+
+### View logs
+
+{{< tabs >}}
+{{% tab "Linux" %}}
+
+```bash
+cat /var/log/datadog/private-action-runner.log
+```
+
+{{% /tab %}}
+
+{{% tab "Windows" %}}
+
+```powershell
+Get-Content C:\ProgramData\Datadog\logs\private-action-runner.log
+```
+
+{{% /tab %}}
+
+{{% tab "Kubernetes" %}}
+
+```bash
+kubectl logs -l app.kubernetes.io/component=cluster-agent --tail=1000 | grep private
+```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Further reading
 

@@ -5,13 +5,135 @@ disable_toc: false
 
 ## Overview
 
-This page explains how to update the private action runner (PAR). You can update the PAR using Docker, Docker Compose, or Helm. 
+This page explains how to update the private action runner (PAR). The update process depends on your installation method.
+
+## Agent-based installation
+
+If you installed the PAR through the Datadog Agent, updating the PAR is part of the standard Agent upgrade process.
+
+{{< tabs >}}
+{{% tab "Linux" %}}
+
+Upgrade the Datadog Agent to the latest version. The PAR is bundled with Agent version 7.77.0 and later.
+
+```bash
+sudo apt-get update && sudo apt-get install datadog-agent
+```
+
+Or for RHEL/CentOS:
+
+```bash
+sudo yum update datadog-agent
+```
+
+Restart the Agent after the upgrade:
+
+```bash
+sudo systemctl restart datadog-agent
+```
+
+For detailed upgrade instructions, see [Upgrade to Agent v7][101].
+
+[101]: /agent/versions/upgrade_to_agent_v7/
+
+{{% /tab %}}
+
+{{% tab "Windows" %}}
+
+Download the latest Agent MSI installer from the [Datadog Agent download page][101] and run the installer.
+
+Alternatively, use PowerShell:
+
+```powershell
+# Download the latest installer
+Invoke-WebRequest -Uri "https://s3.amazonaws.com/ddagent-windows-stable/ddagent-cli-latest.msi" -OutFile ddagent-cli-latest.msi
+
+# Run the installer
+Start-Process -Wait -PassThru msiexec -ArgumentList '/qn /i ddagent-cli-latest.msi'
+```
+
+Restart the Agent after the upgrade:
+
+```powershell
+Restart-Service -Force datadogagent
+```
+
+[101]: https://app.datadoghq.com/account/settings#agent/windows
+
+{{% /tab %}}
+
+{{% tab "Kubernetes (Operator)" %}}
+
+Update the Datadog Operator and Agent image versions in your DatadogAgent manifest.
+
+1. Update the Datadog Operator:
+
+```bash
+helm repo update
+helm upgrade datadog-operator datadog/datadog-operator \
+    --set image.repository=datadog/operator \
+    --set image.tag=<NEW_OPERATOR_VERSION>
+```
+
+2. Update the Agent image versions in your `datadog-agent.yaml` manifest:
+
+```yaml
+override:
+  nodeAgent:
+    image:
+      name: datadog/agent:<NEW_AGENT_VERSION>
+  clusterAgent:
+    image:
+      name: datadog/cluster-agent:<NEW_AGENT_VERSION>
+```
+
+3. Apply the updated manifest:
+
+```bash
+kubectl apply -f datadog-agent.yaml
+```
+
+4. Verify the update:
+
+```bash
+kubectl get pods
+kubectl logs -l app.kubernetes.io/component=cluster-agent --tail=100 | grep private
+```
+
+{{% /tab %}}
+
+{{% tab "Terraform" %}}
+
+Update the version variables in your Terraform configuration:
+
+```hcl
+locals {
+  helm_operator_version = "<NEW_OPERATOR_VERSION>"
+  agent_version         = "<NEW_AGENT_VERSION>"
+  # ...
+}
+```
+
+Apply the changes:
+
+```bash
+terraform plan
+terraform apply -var="datadog_api_key=<YOUR_API_KEY>" -var="datadog_app_key=<YOUR_APP_KEY>"
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+## Standalone runner
+
+If you installed the PAR as a standalone container, use one of the following methods to update.
 
 Currently, the PAR is on v{{< private-action-runner-version "private-action-runner" >}}.
 
-## Docker mode
-Navigate to the directory where you started the PAR. Next, navigate to the `config` directory, then the `config.yaml` file. 
+{{< tabs >}}
+{{% tab "Docker" %}}
 
+Navigate to the directory where you started the PAR. Next, navigate to the `config` directory, then the `config.yaml` file. 
 
 Find the current ID of your container:
 ```bash
@@ -23,7 +145,7 @@ Stop the container:
 docker stop <id>
 ```
 
-Start a new container with [the latest image][1]. Environment variables are not needed. Everything is configured in the `config/config.yaml` file.
+Start a new container with [the latest image][101]. Environment variables are not needed. Everything is configured in the `config/config.yaml` file.
 
 Run:
 ```bash
@@ -48,8 +170,13 @@ To check the PAR logs:
 docker logs <id-of-container>
 ```
 
-## Docker Compose mode
-Navigate to the directory containing your `docker-compose.yaml` file.
+[101]: https://api.datadoghq.com/api/v2/on-prem-management-service/runner/latest-image
+
+{{% /tab %}}
+
+{{% tab "Docker Compose" %}}
+
+Navigate to the directory containing your `docker-compose.yaml` file and update the image version:
 
 ```yaml
 services:
@@ -77,12 +204,15 @@ To check the logs:
 docker compose logs runner
 ```
 
-## Helm mode
+{{% /tab %}}
+
+{{% tab "Helm" %}}
+
 When using Helm, there are two options for upgrading the PAR: 
-1. **(Recommended)** Upgrade the chart, which uses the latest version of the PAR. There may be changes to the chart; please review [the changelog][2].
+1. **(Recommended)** Upgrade the chart, which uses the latest version of the PAR. There may be changes to the chart; review [the changelog][101].
 1. Upgrade the runner without upgrading the chart.
 
-#### Upgrading the chart (recommended)
+**Upgrading the chart (recommended)**
 
 Navigate to the directory containing your `values.yaml` file and run:
 
@@ -91,9 +221,9 @@ helm repo update
 helm upgrade <RELEASE_NAME> datadog/private-action-runner -f ./values.yaml
 ```
 
-### Upgrading the PAR only
+**Upgrading the PAR only**
 
-Specify the PAR version in your `values.yaml` under the `common.image.tag` key with the values found [here][3]:
+Specify the PAR version in your `values.yaml` under the `common.image.tag` key with the values found [here][102]:
 
 ```yaml
 common:
@@ -113,6 +243,9 @@ To check the logs:
 kubectl get pods
 kubectl logs <name-of-the-pod>
 ```
-[1]: https://api.datadoghq.com/api/v2/on-prem-management-service/runner/latest-image
-[2]: https://github.com/DataDog/helm-charts/blob/main/charts/private-action-runner/CHANGELOG.md
-[3]: https://github.com/DataDog/helm-charts/blob/main/charts/private-action-runner/values.yaml
+
+[101]: https://github.com/DataDog/helm-charts/blob/main/charts/private-action-runner/CHANGELOG.md
+[102]: https://github.com/DataDog/helm-charts/blob/main/charts/private-action-runner/values.yaml
+
+{{% /tab %}}
+{{< /tabs >}}
