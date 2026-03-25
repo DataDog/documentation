@@ -1,6 +1,12 @@
 .metrics-table-wrapper {
   table {
-    table-layout: auto;
+    table-layout: fixed;
+    width: 100%;
+
+    td:first-child,
+    th:first-child {
+      width: 35%;
+    }
 
     td,
     th {
