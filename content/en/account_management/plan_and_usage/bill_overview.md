@@ -68,10 +68,6 @@ Click **View Details** on any card to open the [product detail page][2].
 
 The **Product List** tab shows all billing dimensions in a table with cost and usage side by side.
 
-#### Additional filter (Product List only)
-
-- **Cost Type**: Filter to show **Committed** costs, **On-Demand** costs, or **All** costs.
-
 Click anywhere on a product row to open the [product detail page][2]. Hover over the end of a row to quickly create a cost monitor for that billing dimension.
 
 #### Table columns
