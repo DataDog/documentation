@@ -203,7 +203,7 @@ agent diagnose show-metadata agent-telemetry
 | synthetics_agent.error_test_config          | Number of test config errors                                                                                           |
 | synthetics_agent.traceroute_error           | Number of traceroute errors                                                                                            |
 | synthetics_agent.evp_send_result_failure    | Number of errors when sending results                                                                                  |
-| **Admission Webhooks (Cluster Agent)**      |                                                                                                                        |
+| **Cluster Agent**                           |                                                                                                                        |
 | admission_webhooks.mutation_attempts        | Number of admission webhook mutation attempts                                                                          |
 | admission_webhooks.library_injection_attempts | Number of library injection attempts                                                                                 |
 | admission_webhooks.library_injection_errors | Number of library injection errors                                                                                     |
@@ -211,18 +211,13 @@ agent diagnose show-metadata agent-telemetry
 | admission_webhooks.rc_provider_configs      | Number of remote configuration provider configs                                                                        |
 | admission_webhooks.rc_provider_configs_invalid | Number of invalid remote configuration provider configs                                                             |
 | admission_webhooks.image_resolution_attempts | Number of image resolution attempts                                                                                   |
-| **Autodiscovery (Cluster Agent)**           |                                                                                                                        |
 | autodiscovery.errors                        | Number of Autodiscovery errors                                                                                         |
 | autodiscovery.watched_resources             | Number of Autodiscovery watched resources                                                                              |
-| **Cluster Checks (Cluster Agent)**          |                                                                                                                        |
 | cluster_checks.configs_dispatched           | Number of cluster check configurations dispatched                                                                      |
 | cluster_checks.configs_dangling             | Number of dangling cluster check configurations                                                                        |
 | cluster_checks.unscheduled_check            | Number of unscheduled cluster checks                                                                                   |
-| **External Metrics (Cluster Agent)**        |                                                                                                                        |
 | external_metrics.datadog_metrics            | Number of Datadog external metrics                                                                                     |
-| **Language Detection (Cluster Agent)**      |                                                                                                                        |
 | language_detection_patcher.patches          | Number of language detection patcher patches                                                                           |
-| **WorkloadMeta and Tagger (Cluster Agent)** |                                                                                                                        |
 | workloadmeta.stored_entities                | Number of entities stored in WorkloadMeta                                                                              |
 | tagger.stored_entities                      | Number of entities stored in the Tagger                                                                                |
 | workloadmeta.pull_errors                    | Number of WorkloadMeta pull errors                                                                                     |
