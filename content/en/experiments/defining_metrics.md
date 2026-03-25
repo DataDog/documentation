@@ -27,24 +27,24 @@ To create a metric from Product Analytics or RUM data, you must have Datadog's [
 - [Browser (JavaScript)][6]
 - [React Native][7]
 
-Product Analytics uses the same SDKs and configuration as Real User Monitoring (RUM). After you have configured your SDK using RUM documentation, create your metric in Product Analytics UI.
+Product Analytics uses the same SDKs and configuration as Real User Monitoring (RUM). After you have configured your SDK using RUM documentation, create your metric in the Product Analytics UI.
 
 ### Create a metric
-
-<!-- SME: need to confirm the default Experiment Settings and Units -->
 
 To create a metric for your experiment:
 
 1. Navigate to the [Metrics page][1] in Datadog Product Analytics.
 1. Click **+ Create Metric** at the top right corner.
-1. Click **Select an event** to open the event picker. 
-1. Search for a specific event, or use the **By Type** filter to browse by event type. The chart on the right updates in real time as you configure your metric.
+1. Click **Select an event** to open the event picker.
+   1. Search for a specific event, or use the **By Type** filter to browse by event type. The chart on the right updates in real time as you configure your metric.
 1. Select an [aggregation method](#aggregation-methods) from the dropdown. The default is **Count of events**.
 1. Click the **Add filter** icon to [filter your metric](#add-filters) by additional properties.
+1. (Optional) Set **Units** for your metric. Count of unique users metrics are typically reported as a percentage. For other metrics, units depend on your business context.
+1. (Optional) Select **Mark as certified** to indicate this metric is approved for important decision-making. Requires the **Product Analytics Certified Metrics Write** permission.
 1. Add a **Name** and **Description** (optional) to your metric.
 1. Click **Save**.
 
-{{< img src="/product_analytics/experiment/exp_create_metric_1.png" alt="The Create Metric page showing a configured metric with the 'click on ADD TO CART' event selected, Count of events aggregation, and a real-time bar chart displaying event count data for the past week." style="width:90%;" >}}
+{{< img src="/product_analytics/experiment/exp_create_metric_2.png" alt="The Create Metric page with the 'click on ADD TO CART' event selected, the aggregation method dropdown set to Count of events, the add filter icon, a Mark as certified toggle, Experiment settings and Units sections, a Name field, and a real-time bar chart on the right." style="width:90%;" >}}
 
 ### Add filters
 
@@ -57,17 +57,14 @@ You can filter your metric by:
 
 ## Metrics from warehouse data
 
-To create a metric from your warehouse data, you must connect the warehouse to Datadog. Select the data source to connect your warehouse to Datadog.
+To create a metric from your warehouse data, you must connect the warehouse to Datadog. Select your warehouse to get started:
 
 - [BigQuery][8]
 - [Databricks][9]
 - [Redshift][10]
 - [Snowflake][11]
 
-After you have connected your warehouse, create a metric by doing the following:
-
-1. **Create a Metric SQL Model** to annotate the warehouse table underlying your metrics
-2. **Map your warehouse data to Datadog** and specify how the data from your warehouse should be aggregated by experiment subject (typically user)
+After you have connected your warehouse, create a Metric SQL Model, map your data to Datadog, and then create a metric.
 
 ### Create a Metric SQL Model
 
@@ -75,13 +72,18 @@ After you have connected your warehouse, create a metric by doing the following:
 2. Click **+ Create Metric SQL Model**.
 3. In the **Write SQL** section, enter a SQL query that returns your data of interest. This is often a `SELECT * FROM` statement but also supports more advanced SQL.
 4. Name your new Metric SQL Model.
-5. Map the columns in your table to the following:
-   - **Timestamp**: The timestamp associated with the metric event. Only rows after a subject is enrolled into the experiment are included in the analysis.
-   - **Subject types**: The subject type (typically user) associated with the event.
-   - **Measures** (optional): Numeric columns to aggregate when creating metrics. Each Metric SQL Model includes an "each record" measure automatically, which counts the number of relevant rows for a specific experiment subject.
-6. Click **Save**.
 
-### Create a metric from SQL models
+### Map your warehouse data to Datadog
+
+1. Map the columns in your table to the following:
+   - **Timestamp**: The timestamp associated with the metric event. Only rows after a subject is enrolled into the experiment are included in the analysis.
+   - **Subject type attribute**: This is typically the `usr.id` associated with the event. You can define this attribute in the [Subject Types][12] page.
+   - **Measures** (optional): Numeric columns to aggregate when creating metrics. Each Metric SQL Model includes an "each record" measure automatically, which counts the number of relevant rows for a specific experiment subject.
+2. Click **Save**.
+
+
+
+### Create a metric using your SQL model
 
 1. Navigate to the [Metrics page][1] within Datadog Product Analytics.
 2. Click **+ Create Metric** at the top right corner.
@@ -105,10 +107,10 @@ Supported aggregation types include:
 
 Metrics are computed per experiment subject (typically user). For instance, a **count of events** metric computes the total number of events for all users in the variant divided by the number of users in that variant.
 
-<!-- ADD AN MATHEMATICAL EQUATION? -->
+<!-- ADD THE CALCULATION? -->
 
 
-## Ratio metrics
+### Ratio metrics
 
 You can also choose to normalize metrics by a different denominator. To do this, click **Create ratio**. This allows you to normalize your metric by another event, using any of the aggregation methods above.
 
@@ -203,3 +205,4 @@ Datadog supports several advanced options specific to experimentation:
 [9]: experiments/guide/connecting_databricks
 [10]: experiments/guide/connecting_redshift
 [11]: experiments/guide/connecting_snowflake
+[12]: https://app.datadoghq.com/product-analytics/experiments/settings/subject-types
