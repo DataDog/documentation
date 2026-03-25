@@ -41,13 +41,6 @@ This demo shows the Datadog MCP Server being used in Cursor and Claude Code (unm
 - The Datadog MCP Server is not GovCloud compatible.
 - Datadog collects certain information about your usage of the Remote Datadog MCP Server, including how you interact with it, whether errors occurred while using it, what caused those errors, and user identifiers in accordance with the <a href="https://www.datadoghq.com/legal/privacy/" target="_blank">Datadog Privacy Policy</a> and Datadog's <a href="https://www.datadoghq.com/legal/eula/" target="_blank">EULA</a>. This data is used to help improve the server's performance and features, including transitions to and from the server and the applicable Datadog login page for accessing the Services, and context (for example, user prompts) leading to the use of MCP tools. The data is stored for 120 days.
 
-
-## Requirements
-
-Datadog users must have the `MCP Read` [permission][18] to use the MCP Server for read access, and the `MCP Write` [permission][18] for write access.
-
-For setup instructions, see [Set Up the Datadog MCP Server][27].
-
 ## Monitoring the Datadog MCP Server usage
 
 You can track Datadog MCP Server usage for your organization using Datadog metrics and Audit Trail.
@@ -70,6 +63,7 @@ The Datadog MCP Server supports _toolsets_, which allow you to use only the tool
 - `alerting`: Tools for validating monitors, searching monitor groups, and retrieving monitor templates
 - `apm`: Tools for in-depth [APM][28] trace analysis, span search, Watchdog insights, and performance investigation
 - `cases`: Tools for [Case Management][38], including creating, searching, and updating cases; managing projects; and linking Jira issues
+- `dashboards`: Tools for retrieving, creating, updating, and deleting [dashboards][41]
 - `dbm`: Tools for interacting with [Database Monitoring][26]
 - `error-tracking`: Tools for interacting with Datadog [Error Tracking][25]
 - `feature-flags`: Tools for managing [feature flags][29], including creating, listing, and updating flags and their environments
@@ -255,6 +249,31 @@ Search Datadog RUM events using advanced query syntax.
 - Show JavaScript errors and console warnings in RUM.
 - Find pages that are loading slowly (more than 3 seconds).
 - Show recent user interactions on product detail pages.
+
+### `get_datadog_dashboard`
+*Toolset: **dashboards***\
+Retrieves a Datadog dashboard by ID, returning its title, description, tags, and widgets. Use `search_datadog_dashboards` first to find dashboard IDs.
+
+- Get the full details of dashboard `ps7-mn3-kwf`.
+- Show me the widgets and layout of the infrastructure overview dashboard.
+- Retrieve the template variables configured on this dashboard.
+
+### `upsert_datadog_dashboard`
+*Toolset: **dashboards***\
+Creates or updates a Datadog [dashboard][41]. To update an existing dashboard, provide the dashboard ID; omit it to create a new one.
+
+- Create a dashboard showing CPU and memory usage across all hosts.
+- Add a timeseries widget for error rate to dashboard `abc-123-def`.
+- Update the title and description of my service overview dashboard.
+
+**Note**: Only grid-layout dashboards support widget updates. Free-form dashboards are not supported.
+
+### `delete_datadog_dashboard`
+*Toolset: **dashboards***\
+Permanently deletes a Datadog dashboard by ID. This action cannot be undone. Use `search_datadog_dashboards` first to find dashboard IDs.
+
+- Delete dashboard `ps7-mn3-kwf`.
+- Remove the old staging environment dashboard.
 
 ### `validate_datadog_monitor`
 *Toolset: **alerting***\
@@ -601,21 +620,6 @@ Guides you through uploading source maps for RUM error mapping.
 
 - Help me upload source maps so my RUM errors show original source code.
 
-### `datadog_code_security_scan`
-*Toolset: **security***\
-Runs a comprehensive security scan that detects both vulnerabilities (SQL injection, XSS, path traversal, and others) and secrets (API keys, passwords, credentials, and others) in parallel.
-
-- Scan my code for security vulnerabilities and hardcoded secrets.
-- Run a full security scan on this pull request.
-- Check this file for any security issues.
-
-### `datadog_sast_scan`
-*Toolset: **security***\
-Scans code for security vulnerabilities using static analysis (SAST), detecting SQL injection, XSS, path traversal, command injection, insecure cryptography, and other security weaknesses.
-
-- Scan this file for security vulnerabilities.
-- Check my code for SQL injection and XSS vulnerabilities.
-
 ### `datadog_secrets_scan`
 *Toolset: **security***\
 Scans code for hardcoded secrets and credentials, detecting AWS keys, API keys, passwords, tokens, private keys, and database credentials.
@@ -818,3 +822,4 @@ The Datadog MCP Server is under significant development. Use [this feedback form
 [38]: /service_management/case_management/
 [39]: /actions/workflows/
 [40]: /bits_ai/mcp_server/setup#local-binary-authentication
+[41]: /dashboards/

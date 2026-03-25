@@ -45,7 +45,7 @@ Set up the Amazon OpenSearch destination and its environment variables when you 
 			1. Enter the ARN of the IAM role you want to assume.
 			1. Optionally, enter the assumed role session name and external ID.
 
-#### Optional buffering options
+#### Optional buffering
 
 {{% observability_pipelines/destination_buffer %}}
 

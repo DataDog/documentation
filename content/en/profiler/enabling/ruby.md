@@ -32,12 +32,8 @@ The following operating systems and architectures are supported:
 - Linux (GNU libc) x86-64, aarch64
 - Alpine Linux (musl libc) x86-64, aarch64
 
-You also need either the [`pkg-config`][16] or the [`pkgconf`][17] system utility installed.
-This utility is available on the software repositories of most Linux distributions. For example:
-
-- The `pkg-config` package is available for [Homebrew][18], and [Debian][19]- and [Ubuntu][20]-based Linux
-- The `pkgconf` package is available for [Arch][21]- and [Alpine][22]-based Linux
-- The `pkgconf-pkg-config` package is available for [Fedora][23]- and [Red-Hat][24]-based Linux
+Versions of the `datadog` gem older than 2.30 also need either the [`pkg-config`][16] or the [`pkgconf`][17] system utility installed.
+This is no longer needed on modern versions.
 
 Continuous Profiler is not supported on serverless platforms, such as AWS Lambda. Additionally, [Single Step APM Instrumentation][25] cannot be used to set up the Ruby Profiler.
 
@@ -50,7 +46,7 @@ To begin profiling applications:
 2. Add the `datadog` gem to your `Gemfile` or `gems.rb` file:
 
     ```ruby
-    gem 'datadog', '~> 2.18'
+    gem 'datadog', '~> 2.30'
     ```
 3. Install the gems with `bundle install`.
 
@@ -94,8 +90,6 @@ end
     ```shell
     bundle exec ddprofrb exec bin/rails s
     ```
-
-    If you're running a version of the gem older than 1.21.0, replace `ddprofrb exec` with `ddtracerb exec`.
 
     **Note**
 

@@ -100,6 +100,20 @@ Use the Library Inventory to understand which dependencies you rely on, where th
 
 To learn more about how the inventory is generated, how Static and Runtime data differ, and how to interpret the library details (usage, vulnerabilities, licenses, versions, and OpenSSF score), see [Library Inventory][14].
 
+### Create tickets from findings
+
+You can create a bidirectional ticket in Jira or ServiceNow directly from any finding to track and remediate issues in your existing workflows. Ticket status remains synced between Datadog and your ticketing tool. For more information, see [Ticketing integrations][19].
+
+<div class="alert alert-info">Ticket creation is only available for library vulnerability findings detected in repositories (Static SCA). Findings detected exclusively in running services do not support ticket creation.</div>
+
+### Mute findings
+
+To suppress a finding, click **Mute** in the finding details panel. This opens a workflow where you can [create an Automation Rule][20] for context-aware filtering by tag values (for example, by `repository`). Muting a finding hides it and excludes it from reports.
+
+<div class="alert alert-info">Muting is only available for library vulnerability findings detected in repositories (Static SCA). Findings detected exclusively in running services cannot be muted.</div>
+
+To restore a muted finding, click **Unmute** in the details panel. You can also use the **Status** filter on the [Vulnerabilities Explorer][11] to review muted findings.
+
 ### Library vulnerability context in APM
 
 SCA enriches the information that Application Performance Monitoring (APM) already collects by flagging libraries that match current vulnerability advisories. Potentially vulnerable services are highlighted directly in the Security view in the [APM Software Catalog][10].
@@ -168,3 +182,5 @@ Software Composition Analysis (SCA) supports the following languages:
 [16]: /pr_gates/
 [17]: /pr_gates/setup
 [18]: /security/code_security/software_composition_analysis/setup_static/?tab=github#link-findings-to-datadog-services-and-teams
+[19]: /security/ticketing_integrations
+[20]: /security/automation_pipelines/mute

@@ -78,7 +78,7 @@ Enter the following details for your Cost and Usage Report:
 
 {{% tab "Terraform" %}}
 
-{{< img src="cloud_cost/setup/aws_terraform_setup.png" alt="CCM setup page with the Terraform selected, showing Step 1 expanded to configure Cost and Usage Report settings including bucket name, region, and export details" style="width:100%" >}}
+{{< img src="cloud_cost/setup/aws_terraform_setup.png" alt="CCM setup page with the Terraform option selected, showing Step 1 expanded to configure Cost and Usage Report settings including bucket name, region, and export details" style="width:100%" >}}
 
 ### Select the resources to create
 
