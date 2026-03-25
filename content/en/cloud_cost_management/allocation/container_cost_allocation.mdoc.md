@@ -311,6 +311,8 @@ To configure cluster idle allocation, go to the [Cluster Idle Allocation setting
 
 To disable cluster idle allocation, return to the [Cluster Idle Allocation settings][22] page and click **Disable**.
 
+**Note**: Any settings change, including disabling, re-enabling, or modifying the redistribution level, re-backfills the last 3 months of data with the latest settings.
+
 After redistribution, the following tags are available on your dataset:
 
 | Tag | Description |
