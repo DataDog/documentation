@@ -7,7 +7,7 @@ disable_toc: false
 
 This page explains how to update the private action runner (PAR). The update process depends on your installation method.
 
-## Agent-based installation
+## Agent-based runner
 
 If you installed the PAR through the Datadog Agent, updating the PAR is part of the standard Agent upgrade process.
 
@@ -62,7 +62,7 @@ Restart-Service -Force datadogagent
 
 {{% /tab %}}
 
-{{% tab "Kubernetes (Operator)" %}}
+{{% tab "Kubernetes (Datadog Operator)" %}}
 
 Update the Datadog Operator and Agent image versions in your DatadogAgent manifest.
 
@@ -102,7 +102,7 @@ kubectl logs -l app.kubernetes.io/component=cluster-agent --tail=100 | grep priv
 
 {{% /tab %}}
 
-{{% tab "Terraform" %}}
+{{% tab "Terraform (Datadog Operator)" %}}
 
 Update the version variables in your Terraform configuration:
 
