@@ -8,10 +8,6 @@ description: Set up the Datadog MCP server to instrument your frontend applicati
 Agentic Onboarding is in Preview.
 {{< /callout >}}
 
-{{< site-region region="gov" >}}
-<div class="alert alert-danger">Agentic Onboarding is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
-
 ## Overview
 
 Agentic Onboarding lets LLM coding agents instrument your frontend applications for [Error Tracking][3], [Real User Monitoring (RUM)][4], and [Product Analytics][5] with a single prompt.
@@ -30,7 +26,7 @@ To install the Datadog Onboarding Model Context Protocol (MCP) server, follow th
 {{< tabs >}}
 {{% tab "Claude Code" %}}
 {{< site-region region="gov" >}}
-<div class="alert alert-danger">Agentic Onboarding is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
+<div class="alert alert-danger">Agentic Onboarding is not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
@@ -52,7 +48,7 @@ To install the Datadog Onboarding Model Context Protocol (MCP) server, follow th
 
 {{% tab "Cursor" %}}
 {{< site-region region="gov" >}}
-<div class="alert alert-danger">Agentic Onboarding is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
+<div class="alert alert-danger">Agentic Onboarding is not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
