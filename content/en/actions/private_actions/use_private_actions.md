@@ -745,106 +745,7 @@ To edit the allowlist for a standalone private action runner:
 
 {{% /collapse-content %}}
 
-## Configure script actions
-
-The private action runner supports running predefined scripts on your hosts. To use script actions, you must configure the scripts and grant appropriate permissions.
-
-{{< tabs >}}
-{{% tab "Linux" %}}
-
-### Configure scripts
-
-Edit the `/etc/datadog-agent/private-action-runner/script-config.yaml` file:
-
-```yaml
-schemaId: script-credentials-v1
-runPredefinedScript:
-  echo:
-    command: ["echo", "Hello World!"]
-  echo-parametrized:
-    command: ["echo", "{{ parameters.echoValue }}"]
-  aws-sts-get-caller-identity:
-    command: ["aws", "sts", "get-caller-identity"]
-    allowedEnvVars: ["AWS_WEB_IDENTITY_TOKEN_FILE", "AWS_ROLE_ARN", "AWS_CONTAINER_CREDENTIALS_RELATIVE_URI", "AWS_CONTAINER_CREDENTIALS_FULL_URI", "AWS_CONTAINER_AUTHORIZATION_TOKEN", "AWS_REGION", "AWS_DEFAULT_REGION"]
-  restart-service:
-    command: ["sudo", "systemctl", "restart", "{{ parameters.service }}"]
-```
-
-### Grant permissions
-
-Private runner executes scripts from `dd-agent` user. If your scripts require elevated permissions, grant them to the `dd-agent` user:
-
-```bash
-echo "dd-agent ALL=(ALL) NOPASSWD: /usr/bin/systemctl restart nginx" > /etc/sudoers.d/dd-agent
-chmod 440 /etc/sudoers.d/dd-agent
-```
-
-### Configure the connection
-
-If you selected `com.datadoghq.script.runPredefinedScript` in your action allowlist, you should already have a "script" connection linked to your runner. Otherwise, create a new connection and specify `/etc/datadog-agent/private-action-runner/script-config.yaml` as the **path to file**. For more information, see [Handling Private Action Credentials][101].
-
-[101]: /actions/private_actions/private_action_credentials
-
-{{% /tab %}}
-
-{{% tab "Windows" %}}
-
-### Configure scripts
-
-Edit the `C:\ProgramData\Datadog\private-action-runner\powershell-script-config.yaml` file:
-
-```yaml
-schemaId: script-credentials-v1
-runPredefinedPowershellScript:
-  helloWorld:
-    script: |
-      Write-Output "Hello World!"
-  greet:
-    script: |
-      Write-Output "Run script from workflow called {{ parameters.name }} !"
-    parameterSchema:
-      properties:
-        name:
-          type: string
-      required:
-        - name
-  showEnv:
-    script: |
-      Write-Output "This vm name is $env:COMPUTERNAME"
-    allowedEnvVars:
-      - COMPUTERNAME
-  restartService:
-    script: |
-      Restart-Service -Name {{ parameters.serviceName }} -Force
-      Write-Output "Restart triggered for service '{{ parameters.serviceName }}' at $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')"
-    parameterSchema:
-      properties:
-        serviceName:
-          type: string
-      required:
-        - serviceName
-```
-
-### Grant permissions
-
-Private runner executes scripts from `ddagentuser`. If your scripts require elevated permissions, grant them to the `ddagentuser`:
-
-```powershell
-# Grant permissions to ddagentuser to your-file-path
-icacls "C:\<your-file-path>" /grant "ddagentuser:(OI)(CI)RX" /T
-
-# Verify permissions
-icacls "C:\<your-file-path>"
-```
-
-### Configure the connection
-
-If you selected `com.datadoghq.script.runPredefinedPowershellScript` in your action allowlist, you should already have a "script" connection linked to your runner. Otherwise, create a new connection and specify `C:\ProgramData\Datadog\private-action-runner\powershell-script-config.yaml` as the **path to file**. For more information, see [Handling Private Action Credentials][101].
-
-[101]: /actions/private_actions/private_action_credentials
-
-{{% /tab %}}
-{{< /tabs >}}
+**Note:** To configure script actions (`runPredefinedScript` for Linux or `runPredefinedPowershellScript` for Windows), see [Run a Script with the Private Action Runner][21].
 
 ## Debugging
 
@@ -899,3 +800,4 @@ kubectl logs -l app.kubernetes.io/component=cluster-agent --tail=1000 | grep pri
 [18]: /account_management/rbac/permissions/#app-builder--workflow-automations
 [19]: /account_management/api-app-keys/#api-keys
 [20]: /account_management/api-app-keys/#application-keys
+[21]: /actions/private_actions/run_script

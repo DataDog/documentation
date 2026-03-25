@@ -5,32 +5,134 @@ disable_toc: false
 
 ## Overview
 
-This page explains how to use the private action runner (PAR), which allows you to run custom scripts and Linux binaries within your Datadog workflows and apps. Unlike standard private actions that call specific APIs or services, the script action gives you the flexibility to execute arbitrary commands, shell scripts, and command-line tools directly from the private action runner in your private network.
+This page explains how to use the private action runner (PAR) to run custom scripts within your Datadog workflows and apps. The script action gives you the flexibility to execute arbitrary commands, shell scripts, and command-line tools directly from the private action runner in your private network.
+
+Script actions are supported on:
+- **Agent-based runners**: Linux (bash scripts) and Windows (PowerShell scripts) via Datadog Agent 7.77.0 or later
+- **Standalone runners**: Linux containers via Docker, Docker Compose, or Kubernetes
 
 <div class="alert alert-danger">
-<strong>Security Notice:</strong> The PAR script action runs within a containerized environment using a dedicated Linux user named <code>scriptuser</code> for enhanced security. Datadog enforces container sandboxing and only accepts signed tasks, but you decide which binaries and scripts are allowed. Always review every command you add to the script action allow-list, especially ones that take dynamic user input. Ensure that your actions are configured with the least privileged commands, and carefully review the permissions you share through connections. For more information, see <a href="/actions/connections/?tab=workflowautomation#connection-security-considerations">connection security considerations</a>.
+<strong>Security Notice:</strong> Datadog enforces container sandboxing and only accepts signed tasks, but you decide which binaries and scripts are allowed. Always review every command you add to the script action allowlist, especially ones that take dynamic user input. Ensure that your actions are configured with the least privileged commands, and carefully review the permissions you share through connections. For more information, see <a href="/actions/connections/?tab=workflowautomation#connection-security-considerations">connection security considerations</a>.
 </div>
 
 ## Use cases
 
-The following table outlines supported and unsupported use cases for the script action:
+The following table outlines supported use cases for the script action:
 
-| Use Case                                            | Supported | Notes                                                                                                                        |
-|-----------------------------------------------------|-----------|------------------------------------------------------------------------------------------------------------------------------|
-| Running Linux binaries (`ls`, `rm`, `find`, `curl`) | Yes   | In order to run native Linux binaries, the relevant files must be accessible to the container.          |
-| Running CLIs (`aws`, `terraform`, `kubectl`)        | Yes   | The CLI and your CLI credentials must be available in the image.                                                       |
-| Running scripts (`bash`, `python`)                  | Yes   | Scripts can be mounted inside the container. Use the [large image][12] to get access to the Python interpreter. |
-| Running privileged commands (`systemctl restart`)   | No    | Because the PAR runs inside a container, it does not have high privilege permissions on the host.                                         |
-| Windows tools (PowerShell)                          | No    | Because the PAR runs inside a Linux container, native Windows tools are not supported.                                             |
+| Use Case                                            | Agent-based | Standalone | Notes                                                                                                                        |
+|-----------------------------------------------------|-------------|------------|------------------------------------------------------------------------------------------------------------------------------|
+| Running Linux binaries (`ls`, `rm`, `find`, `curl`) | Yes         | Yes        | For standalone runners, the relevant files must be accessible to the container.          |
+| Running CLIs (`aws`, `terraform`, `kubectl`)        | Yes         | Yes        | For standalone runners, the CLI and credentials must be available in the image. For agent-based runners, tools must be installed on the host.                                                       |
+| Running bash scripts                                | Yes         | Yes        | For standalone runners, scripts can be mounted inside the container. Use the [large image][12] to get access to the Python interpreter. |
+| Running PowerShell scripts                          | Yes (Windows) | No       | Supported on agent-based Windows runners only.                                             |
+| Running privileged commands (`systemctl restart`)   | Yes         | No         | For agent-based runners, grant permissions to the runner user. For standalone runners, container sandboxing prevents privileged host access.                                         |
 
 ## Prerequisites
 
-To use the script action, you need:
+**For agent-based runners:**
+- Datadog Agent version 7.77.0 or later
+- `com.datadoghq.script.runPredefinedScript` (Linux) or `com.datadoghq.script.runPredefinedPowershellScript` (Windows) in your actions allowlist
+- See [Use Private Actions][1] for installation instructions
 
-- **Custom tools**: For CLI tools not included in the base or the [large image][12], you need to create a custom Docker image.
-- **PAR Version**: 1.7.0 or later. To create a new PAR, see [Set Up a Private Action Runner][2]. To update your PAR version, see [Update the Private Action Runner][11].
+**For standalone runners:**
+- PAR version 1.7.0 or later. To create a new PAR, see [Use Private Actions][1]. To update your PAR version, see [Update the Private Action Runner][11].
+- For CLI tools not included in the base or the [large image][12], create a custom Docker image.
 
-## Set up a PAR script
+## Configuration
+
+{{< tabs >}}
+{{% tab "Agent-based (Linux)" %}}
+
+### Configure scripts
+
+Edit the `/etc/datadog-agent/private-action-runner/script-config.yaml` file:
+
+```yaml
+schemaId: script-credentials-v1
+runPredefinedScript:
+  echo:
+    command: ["echo", "Hello World!"]
+  echo-parametrized:
+    command: ["echo", "{{ parameters.echoValue }}"]
+  aws-sts-get-caller-identity:
+    command: ["aws", "sts", "get-caller-identity"]
+    allowedEnvVars: ["AWS_WEB_IDENTITY_TOKEN_FILE", "AWS_ROLE_ARN", "AWS_CONTAINER_CREDENTIALS_RELATIVE_URI", "AWS_CONTAINER_CREDENTIALS_FULL_URI", "AWS_CONTAINER_AUTHORIZATION_TOKEN", "AWS_REGION", "AWS_DEFAULT_REGION"]
+  restart-service:
+    command: ["sudo", "systemctl", "restart", "{{ parameters.service }}"]
+```
+
+### Grant permissions
+
+The private action runner executes scripts as the `dd-agent` user. If your scripts require elevated permissions, grant them to the `dd-agent` user:
+
+```bash
+echo "dd-agent ALL=(ALL) NOPASSWD: /usr/bin/systemctl restart nginx" > /etc/sudoers.d/dd-agent
+chmod 440 /etc/sudoers.d/dd-agent
+```
+
+### Configure the connection
+
+If you selected `com.datadoghq.script.runPredefinedScript` in your action allowlist, you should already have a "script" connection linked to your runner. Otherwise, create a new connection and specify `/etc/datadog-agent/private-action-runner/script-config.yaml` as the **path to file**. For more information, see [Handling Private Action Credentials][17].
+
+{{% /tab %}}
+
+{{% tab "Agent-based (Windows)" %}}
+
+### Configure scripts
+
+Edit the `C:\ProgramData\Datadog\private-action-runner\powershell-script-config.yaml` file:
+
+```yaml
+schemaId: script-credentials-v1
+runPredefinedPowershellScript:
+  helloWorld:
+    script: |
+      Write-Output "Hello World!"
+  greet:
+    script: |
+      Write-Output "Run script from workflow called {{ parameters.name }} !"
+    parameterSchema:
+      properties:
+        name:
+          type: string
+      required:
+        - name
+  showEnv:
+    script: |
+      Write-Output "This vm name is $env:COMPUTERNAME"
+    allowedEnvVars:
+      - COMPUTERNAME
+  restartService:
+    script: |
+      Restart-Service -Name {{ parameters.serviceName }} -Force
+      Write-Output "Restart triggered for service '{{ parameters.serviceName }}' at $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')"
+    parameterSchema:
+      properties:
+        serviceName:
+          type: string
+      required:
+        - serviceName
+```
+
+### Grant permissions
+
+The private action runner executes scripts as `ddagentuser`. If your scripts require elevated permissions, grant them to the `ddagentuser`:
+
+```powershell
+# Grant permissions to ddagentuser to your-file-path
+icacls "C:\<your-file-path>" /grant "ddagentuser:(OI)(CI)RX" /T
+
+# Verify permissions
+icacls "C:\<your-file-path>"
+```
+
+### Configure the connection
+
+If you selected `com.datadoghq.script.runPredefinedPowershellScript` in your action allowlist, you should already have a "script" connection linked to your runner. Otherwise, create a new connection and specify `C:\ProgramData\Datadog\private-action-runner\powershell-script-config.yaml` as the **path to file**. For more information, see [Handling Private Action Credentials][17].
+
+{{% /tab %}}
+
+{{% tab "Standalone (Docker)" %}}
 
 ### Create a script connection
 
@@ -45,18 +147,18 @@ To use the script action, you need:
 1. After configuring permissions, click **Create**.
 1. Select this new connection when using the script action in your workflows or apps.
 
-## Configuration
+### Configure scripts
 
 Configure script actions through your runner's `config.yaml` file and the script connection (`credentials/script.yaml` by default). If you create a new runner and select the script bundle, you get a default configuration.
 
 ```yaml
-# Add the script action to the allowlist (`config.yaml`)
+# Add the script action to the allowlist (config.yaml)
 actionsAllowlist:
   - com.datadoghq.script.runPredefinedScript
 ```
 
 ```yaml
-# Configure your script connection (`credentials/script.yaml`)
+# Configure your script connection (credentials/script.yaml)
 schemaId: script-credentials-v1
 runPredefinedScript:
   # use "echo" as the "Script name" in the action configuration
@@ -66,9 +168,9 @@ runPredefinedScript:
 
   # another script
   echo-parametrized:
-    # you can use workflow syntax (https://docs.datadoghq.com/actions/workflows/variables/) to retrieve values from the parameters object
+    # you can use workflow syntax to retrieve values from the parameters object
     command: [ "echo", "{{ parameters.echoValue }}" ]
-    # you can use JSON schema (https://json-schema.org/) to validate the parameters
+    # you can use JSON schema to validate the parameters
     parameterSchema:
       properties:
         echoValue:
@@ -78,19 +180,62 @@ runPredefinedScript:
         - echoValue
 ```
 
-### Using the configured scripts
+{{% /tab %}}
 
-In your workflow or app, configure the action to use the `runPredefinedScript` with the script name you defined (for example, `echo` or `echo-parametrized`).
+{{% tab "Standalone (Kubernetes)" %}}
+
+### Configure scripts with Helm
+
+When deploying the private action runner with Helm, configure scripts through your `values.yaml` file:
+
+```yaml
+# values.yaml
+common:
+  actionsAllowlist:
+    - com.datadoghq.script.runPredefinedScript
+
+credentials:
+  script:
+    schemaId: script-credentials-v1
+    runPredefinedScript:
+      echo:
+        command: ["echo", "Hello world"]
+      echo-parametrized:
+        command: ["echo", "{{ parameters.echoValue }}"]
+        parameterSchema:
+          properties:
+            echoValue:
+              type: string
+          required:
+            - echoValue
+```
+
+Deploy or upgrade the runner:
+
+```bash
+helm upgrade --install <RELEASE_NAME> datadog/private-action-runner -f ./values.yaml
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+## Using the configured scripts
+
+In your workflow or app, configure the action to use the script name you defined (for example, `echo` or `echo-parametrized`). For Linux runners, use `runPredefinedScript`. For Windows runners, use `runPredefinedPowershellScript`.
 
 **Note**: There are two levels of variable resolution: one at the workflow level and one at the action level inside the runner.
 
 {{< img src="service_management/par-script-variables.png" alt="The two levels of variables inside the runner." style="width:80%;" >}}
 
-## Large image
+## Standalone runner options
 
-If you want to use tools like [Python][13], SSH, [AWS CLI][14], [Terraform][15], or the [gcloud CLI][16], you can use the `gcr.io/datadoghq/private-action-runner:v{{< private-action-runner-version "private-action-runner" >}}-large` image instead of the default image.
+The following options are available for standalone runners only.
 
-## Advanced usage with custom images
+### Large image
+
+If you want to use tools like [Python][13], SSH, [AWS CLI][14], [Terraform][15], or the [gcloud CLI][16], use the `gcr.io/datadoghq/private-action-runner:v{{< private-action-runner-version "private-action-runner" >}}-large` image instead of the default image.
+
+### Custom images
 
 For binaries not available in Datadog provided images, create a custom image:
 
@@ -149,3 +294,4 @@ print("Hello from Python script!")
 [14]: https://aws.amazon.com/cli/
 [15]: https://developer.hashicorp.com/terraform/cli/commands
 [16]: https://docs.cloud.google.com/sdk/docs/install
+[17]: /actions/private_actions/private_action_credentials
