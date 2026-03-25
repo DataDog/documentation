@@ -5006,6 +5006,11 @@ menu:
       identifier: bigquery
       parent: data_warehouses
       weight: 3000000
+    - name: Redshift
+      url: data_observability/quality_monitoring/data_warehouses/redshift
+      identifier: redshift
+      parent: data_warehouses
+      weight: 4000000
     - name: Data Lakes
       url: data_observability/quality_monitoring/data_lakes
       identifier: data_lakes
@@ -8908,26 +8913,36 @@ menu:
       parent: digital_experience_heading
       identifier: pa_experiments
       weight: 50000
+    - name: Plan and Launch Experiments
+      url: experiments/plan_and_launch_experiments
+      parent: pa_experiments
+      identifier: pa_experiments_plan
+      weight: 1
     - name: Define Metrics
       url: experiments/defining_metrics
       parent: pa_experiments
       identifier: pa_experiments_metrics
-      weight: 1
-    - name: Reading Experiment Results
+      weight: 2
+    - name: Read Experiment Results
       url: experiments/reading_results
       parent: pa_experiments
       identifier: pa_experiments_results
-      weight: 2
+      weight: 3
     - name: Minimum Detectable Effects
       url: experiments/minimum_detectable_effect
       parent: pa_experiments
       identifier: pa_experiments_mde
-      weight: 3
+      weight: 4
     - name: Troubleshooting
       url: experiments/troubleshooting
       parent: pa_experiments
       identifier: pa_experiments_troubleshooting
-      weight: 4
+      weight: 5
+    - name: Guides
+      url: experiments/guide/
+      parent: pa_experiments
+      identifier: pa_experiments_guide
+      weight: 5
     - name: Guides
       url: product_analytics/guide/
       parent: product_analytics
