@@ -3,7 +3,7 @@ This partial contains Ruby traces content for the OTel API.
 It can be included directly in language-specific pages or wrapped in conditionals.
 -->
 
-## Requirements and limitations
+## Requirements and limitations {% #requirements-and-limitations-otel-ruby %}
 
 - Datadog Ruby tracing library `dd-trace-rb` version 1.9.0 or greater.
 - Gem version support 1.1.0 or greater.
@@ -18,7 +18,7 @@ The following OpenTelemetry features implemented in the Datadog library as noted
 | `OpenTelemetry.logger`                | `OpenTelemetry.logger` is set to the same object as `Datadog.logger`. Configure through custom logging. |
 | Trace/span ID generators         | ID generation is performed by the tracing library, with support for 128-bit trace IDs.     |
 
-## Configuring OpenTelemetry to use the Datadog tracing library
+## Configuring OpenTelemetry to use the Datadog tracing library {% #configuring-otel-ruby %}
 
 1. Add your desired manual OpenTelemetry instrumentation to your Ruby code following the [OpenTelemetry Ruby Manual Instrumentation documentation][140]. **Important!** Where those instructions indicate that your code should call the OpenTelemetry SDK, call the Datadog tracing library instead.
 
@@ -45,7 +45,7 @@ The following OpenTelemetry features implemented in the Datadog library as noted
 
 Datadog combines these OpenTelemetry spans with other Datadog APM spans into a single trace of your application. It supports [integration instrumentation][141] and [OpenTelemetry Automatic instrumentation][142] also.
 
-## Adding span events
+## Adding span events {% #adding-span-events-otel-ruby %}
 
 {% alert level="info" %}
 Adding span events requires SDK version 2.3.0 or higher.
@@ -63,7 +63,7 @@ span.add_event(
 
 Read the [OpenTelemetry specification for adding events][103] for more information.
 
-### Recording exceptions
+### Recording exceptions {% #recording-exceptions-otel-ruby %}
 
 To record exceptions, use the `record_exception` API:
 

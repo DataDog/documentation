@@ -3,7 +3,7 @@ This partial contains Go traces content for the OTel API.
 It can be included directly in language-specific pages or wrapped in conditionals.
 -->
 
-## Imports
+## Imports {% #imports-otel-go %}
 
 Import the following packages to setup the Datadog trace provider:
 
@@ -22,7 +22,7 @@ import (
 )
 ```
 
-## Setup
+## Setup {% #setup-otel-go %}
 
 To configure OpenTelemetry to use the Datadog trace provider:
 
@@ -59,7 +59,7 @@ To configure OpenTelemetry to use the Datadog trace provider:
 
 7. Run your application.
 
-## Adding span tags
+## Adding span tags {% #adding-span-tags-otel-go %}
 
 Add custom tags to your spans to attach additional metadata and context:
 
@@ -70,7 +70,7 @@ ctx, span := t.Start(ctx, "read.file")
 span.SetAttributes(attribute.String(ext.ResourceName, "test.json"))
 ```
 
-### Adding tags globally to all spans
+### Adding tags globally to all spans {% #adding-tags-globally-otel-go %}
 
 Add tags to all spans by configuring the tracer with the `WithGlobalTag` option:
 
@@ -85,7 +85,7 @@ otel.SetTracerProvider(provider)
 t := otel.Tracer("")
 ```
 
-### Setting errors on a span
+### Setting errors on a span {% #setting-errors-on-a-span-otel-go %}
 
 To set an error on a span:
 
@@ -101,7 +101,7 @@ EndOptions(span, tracer.WithError(errors.New("myErr")))
 span.End()
 ```
 
-## Adding spans
+## Adding spans {% #adding-spans-otel-go %}
 
 Unlike other Datadog tracing libraries, when tracing Go applications, Datadog recommends that you explicitly manage and pass the Go context of your spans.
 
@@ -112,7 +112,7 @@ ctx, span := t.Start(
 span.End()
 ```
 
-## Adding span events
+## Adding span events {% #adding-span-events-otel-go %}
 
 {% alert level="info" %}
 Adding span events requires SDK version 1.67.0 or higher.
@@ -129,13 +129,13 @@ span.Finish()
 
 Read the [OpenTelemetry specification for adding events][103] for more information.
 
-## Trace client and Agent configuration
+## Trace client and Agent configuration {% #trace-client-agent-config-otel-go %}
 
-### Propagating context with headers extraction and injection
+### Propagating context with headers extraction and injection {% #propagating-context-otel-go %}
 
 You can configure the propagation of context for distributed traces by injecting and extracting headers. Read [Trace Context Propagation][105] for information.
 
-### Resource filtering
+### Resource filtering {% #resource-filtering-otel-go %}
 
 Traces can be excluded based on their resource name, to remove synthetic traffic such as health checks from reporting traces to Datadog. This and other security and fine-tuning configurations can be found on the [Security][106] page.
 

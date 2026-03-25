@@ -358,7 +358,7 @@ helm install datadog-operator datadog/datadog-operator --set introspection.enabl
 
 #### Prérequis
 
-1. Version du chart Helm >= `3.150.0`
+1. Version chart Helm >= `3.152.0`
 1. Agent Datadog >= `v7.69`
 
 #### Configuration générale

@@ -8,13 +8,14 @@ further_reading:
   tag: Documentation
   text: Créer des dashboards avec JSON
 title: Widget Graphique des alertes
+widget_type: alert_graph
 ---
 
 Les graphiques d'alertes sont des graphiques de séries temporelles affichant l'état actuel de la plupart des monitors définis sur votre système :
 
 {{< img src="dashboards/widgets/alert_graph/alert_graph.png" alt="Graphique d'alerte" >}}
 
-Ce widget fonctionne avec les monitors de métrique, d'anomalie, de singularité, de prévision, d'APM et d'intégration.
+Ce widget fonctionne avec les monitors d'alerte basés sur une requête, tels que les monitors de métrique, d'anomalie, de singularité, de prévision, de métriques d'APM et d'intégration.
 
 ## Configuration
 
@@ -28,9 +29,7 @@ Ce widget fonctionne avec les monitors de métrique, d'anomalie, de singularité
 
 ## API
 
-Ce widget peut être utilisé avec l'**API Dashboards**. Consultez la [documentation à ce sujet][1] pour en savoir plus.
-
-Le [schéma JSON][2] utilisé pour le widget Graphique des alertes est le suivant :
+Ce widget peut être utilisé avec l'**[API Dashboards][1]**. Le tableau ci-dessous définit le [schéma JSON du widget][2] :
 
 {{< dashboards-widgets-api >}}
 

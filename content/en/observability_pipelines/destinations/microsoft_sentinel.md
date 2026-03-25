@@ -23,21 +23,117 @@ To set up the Microsoft Sentinel destination, you need to create a Workspace in 
 1. [Add Microsoft Sentinel][6] to the workspace.
 1. [Create a Data Collection Endpoint (DCE)][7].
 1. [Create a Log Analytics Workspace][8] in the workspace if you haven't already.
-1. In the Log Analytics Workspace, navigate to **Settings** > **Tables**.
-    1. Click **+ Create**.
-    1. Define a custom table (for example, `MyOPWLogs`).
-        - **Notes**:<br>- After the table is configured, the prefix `Custom-` and suffix `_CL` are automatically appended to the table name. For example, if you defined the table name in Azure to be `MyOPWLogs`, the full table name is stored as `Custom-MyOPWLogs_CL`. You must use the full table name when you set up the Observability Pipelines Microsoft Sentinel destination.<br>-The full table name can be found in the resource JSON of the DCR under `streamDeclarations`.<br>- You can also use an Azure Table instead of a custom table.
-    1. Select **New Custom Log (DCR-based)**.
-    1. Click **Create a new data collection rule** and select the DCE you created earlier.
-    1. Click **Next**.
-    1. Upload a sample JSON Log. For this example, the following JSON is used for the **Schema and Transformation**, where  `TimeGenerated` is required:
-        ```json
+1. Follow the instructions for the type of table to which you want to send data.
+{{< tabs >}}
+{{% tab "Azure Table" %}}
+1. Create a JSON file for your Data Collection Rule (DCR) parameters. See [Data collection rule (DCR)][1] for more information.
+    - In the `streamDeclarations` property, you must list all log fields you want mapped to the corresponding Azure table column. See [Stream declarations][2] for more information.
+    - In the `transformKql` property, you must list all fields on the log that are dropped and not mapped to the table. See [Data flow properties][3] for more information.
+    - **Note**: Each log field must be listed in one of these properties: either `streamDeclarations` or `transformKql`; otherwise the log is dropped. See [Monitor DCR data collection in Azure Monitor][4] on how to set up an alert when logs are dropped.
+    - For example, this JSON file (`dcr-commonsecuritylog.json`) adds the log fields to be mapped to the [`CommonSecurityLog`][5] table:
+        ```bash
         {
-            "TimeGenerated": "2024-07-22T11:47:51Z",
-            "event": {}
-        }
-        ```
-    1. Click **Create**.
+            "location": "eastus",
+            "kind": "Direct",
+            "properties": {
+            "dataCollectionEndpointId": "<DCE_RESOURCE_ID>",
+            "streamDeclarations": {
+                "Custom-CommonSecurityLog": {
+                "columns": [
+                    { "name": "TimeGenerated",      "type": "datetime" },
+                    { "name": "DeviceVendor",       "type": "string"   },
+                    { "name": "DeviceProduct",      "type": "string"   },
+                    { "name": "DeviceVersion",      "type": "string"   },
+                    { "name": "DeviceEventClassID", "type": "string"   },
+                    { "name": "Activity",           "type": "string"   },
+                    { "name": "LogSeverity",        "type": "string"   },
+                    { "name": "SourceIP",           "type": "string"   },
+                    { "name": "DestinationIP",      "type": "string"   },
+                    { "name": "Message",            "type": "string"   },
+                    { "name": "source_type",        "type": "string"   },
+                    { "name": "path",               "type": "string"   },
+                    { "name": "timestamp",          "type": "string"   }
+                ]
+                }
+            },
+            "destinations": {
+                "logAnalytics": [
+                {
+                    "workspaceResourceId": "<WORKSPACE_RESOURCE_ID>",
+                    "name": "LogAnalyticsDest"
+                }
+                ]
+            },
+            "dataFlows": [
+                {
+                "streams":      ["Custom-CommonSecurityLog"],
+                "destinations": ["LogAnalyticsDest"],
+                "transformKql": "source | project-away source_type, path, timestamp",
+                "outputStream": "Microsoft-CommonSecurityLog"
+                }
+            ]
+            }
+            ```
+    - Replace the placeholders:
+        - `<DCE_RESOURCE_ID>` with the ID of the DCE resource you created in step 2. Run the [`az monitor data-collection endpoint show`][9] command to get the DCE resource ID. For example:
+            ```
+            az monitor data-collection endpoint show \
+            --name "<DCE_NAME>" \
+            --resource-group <RESOURCE_GROUP> \
+            --subscription <SUBSCRIPTION_ID> \
+            --query "id"
+            ```
+        - `<WORKSPACE_RESOURCE_ID>` with the ID of the Logs Analytics Workspace you created in step 3. Run the [`az monitor log-analytics workspace show`][10] command to get the Workspace resource ID. For example:
+            ```
+            az monitor log-analytics workspace show \
+            --workspace-name "<DCE_NAME>" \
+            --resource-group <RESOURCE_GROUP> \
+            --subscription <SUBSCRIPTION_ID> \
+            --query "id"
+            ```
+
+    - See [CommonSecurityLog Columns][6] for a full list of `commonsecuritylog` table columns.
+    - See the [Supported Azure Tables][7] for all available tables to which you can send data.
+1. Run the [`az monitor data-collection rule create`][8] Azure CLI command to create a DCR with the JSON file you created in the previous step. For example, with the `dcr-commonsecuritylog.json` example file:
+    ```bash
+    az monitor data-collection rule create \
+        --resource-group "myResourceGroup" \
+        --location "eastus" \
+        --name "myCollectionRule" \
+        --subscription "mysubscription" \
+        --rule-file "\path\to\json\dcr-commonsecuritylog.json"
+    ```
+
+[1]: https://learn.microsoft.com/en-us/azure/azure-monitor/logs/logs-ingestion-api-overview#data-collection-rule-dcr
+[2]: https://learn.microsoft.com/en-us/azure/azure-monitor/data-collection/data-collection-rule-structure#stream-declarations
+[3]: https://learn.microsoft.com/en-us/azure/azure-monitor/data-collection/data-collection-rule-structure#data-flow-properties
+[4]: https://learn.microsoft.com/en-us/azure/azure-monitor/data-collection/data-collection-monitor
+[5]: https://learn.microsoft.com/en-us/azure/azure-monitor/reference/tables/commonsecuritylog
+[6]: https://learn.microsoft.com/en-us/azure/azure-monitor/reference/tables/commonsecuritylog#columns
+[7]: https://learn.microsoft.com/en-us/azure/azure-monitor/logs/logs-ingestion-api-overview#supported-tables
+[8]: https://learn.microsoft.com/en-us/cli/azure/monitor/data-collection/rule?view=azure-cli-latest#az-monitor-data-collection-rule-create
+[9]: https://learn.microsoft.com/en-us/cli/azure/monitor/data-collection/endpoint?view=azure-cli-latest#az-monitor-data-collection-endpoint-show
+[10]: https://learn.microsoft.com/en-us/cli/azure/monitor/log-analytics/workspace?view=azure-cli-latest#az-monitor-log-analytics-workspace-show
+
+{{% /tab %}}
+{{% tab "Custom table" %}}
+1. In the Log Analytics Workspace, navigate to **Settings** > **Tables**.
+1. Click **+ Create**.
+1. Define a custom table (for example, `MyOPWLogs`).
+    - **Notes**:<br>- After the table is configured, the prefix `Custom-` and suffix `_CL` are automatically appended to the table name. For example, if you defined the table name in Azure to be `MyOPWLogs`, the full table name is stored as `Custom-MyOPWLogs_CL`. You must use the full table name when you set up the Observability Pipelines Microsoft Sentinel destination.<br>-The full table name can be found in the resource JSON of the DCR under `streamDeclarations`.
+1. Select **New Custom Log (DCR-based)**.
+1. Click **Create a new data collection rule** and select the DCE you created earlier.
+1. Click **Next**.
+1. Upload a sample JSON Log. For this example, the following JSON is used for the **Schema and Transformation**, where  `TimeGenerated` is required:
+    ```json
+    {
+        "TimeGenerated": "2024-07-22T11:47:51Z",
+        "event": {}
+    }
+    ```
+1. Click **Create**.
+{{% /tab %}}
+{{< /tabs >}}
 1. In Azure, navigate to **Microsoft Entra ID**.
     1. Click **Add** > **App Registration**.
     1. Click **Create**.
@@ -66,19 +162,41 @@ The table below summarizes the Azure and Microsoft Sentinel information you need
 
 To set up the Microsoft Sentinel destination in Observability Pipelines:
 
+<div class="alert alert-danger">Only enter the identifiers for the Microsoft Sentinel client secret and Data Collection Endpoint. Do <b>not</b> enter the actual values.</div>
+
+1. Enter the identifier for your Microsoft Sentinel client secret. If you leave it blank, the [default](#set-secrets) is used.
+1. Enter the identifier for your Microsoft Sentinel Data Collection endpoint. If you leave it blank, the [default](#set-secrets) is used.
 1. Enter the client ID for your application, such as `550e8400-e29b-41d4-a716-446655440000`.
 1. Enter the directory ID for your tenant, such as `72f988bf-86f1-41af-91ab-2d7cd011db47`. This is the Azure AD tenant ID.
 1. Enter the full table name to which you are sending logs. An example table name: `Custom-MyOPWLogs_CL`.
 1. Enter the Data Collection Rule (DCR) immutable ID, such as `dcr-000a00a000a00000a000000aa000a0aa`.
-1. Optionally, toggle the switch to enable **Buffering Options**.<br>**Note**: Buffering options is in Preview. Contact your account manager to request access.
-	- If left disabled, the maximum size for buffering is 500 events.
-	- If enabled:
-		1. Select the buffer type you want to set (**Memory** or **Disk**).
-		1. Enter the buffer size and select the unit.
 
-### Set the environment variables
+#### Optional buffering
+
+{{% observability_pipelines/destination_buffer %}}
+
+### Set secrets
+
+{{% observability_pipelines/set_secrets_intro %}}
+
+{{< tabs >}}
+{{% tab "Secrets Management" %}}
+
+- Microsoft Sentinel client secret identifier:
+    - References the DCE endpoint URL shown as the **Logs Ingestion Endpoint** or **Data Collection Endpoint** on the DCR Overview page. An example URL: `https://<DCE-ID>.ingest.monitor.azure.com`.
+	- The default identifier is `DESTINATION_MICROSOFT_SENTINEL_CLIENT_SECRET`.
+- Microsoft Sentinel Data Collection endpoint identifier:
+    - References the Azure AD application's client secret, such as `550e8400-e29b-41d4-a716-446655440000`.
+	- The default identifier is `DESTINATION_MICROSOFT_SENTINEL_DCE_URI`.
+
+{{% /tab %}}
+
+{{% tab "Environment Variables" %}}
 
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/microsoft_sentinel %}}
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## How the destination works
 
@@ -86,9 +204,9 @@ To set up the Microsoft Sentinel destination in Observability Pipelines:
 
 A batch of events is flushed when one of these parameters is met. See [event batching][2] for more information.
 
-| Max Events     | Max Bytes       | Timeout (seconds)   |
-|----------------|-----------------|---------------------|
-| None           | 10,000,000       | 1                   |
+| Maximum Events | Maximum Size (MB) | Timeout (seconds)   |
+|----------------|-------------------|---------------------|
+| None           | 10                | 1                   |
 
 [1]: https://app.datadoghq.com/observability-pipelines
 [2]: /observability_pipelines/destinations/#event-batching

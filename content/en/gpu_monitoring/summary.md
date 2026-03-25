@@ -23,13 +23,13 @@ Click on the section titles below to access the corresponding section:
 - [Allocation and Provisioning](#allocation-and-provisioning)
 - [Workload Optimization Opportunities](#workload-optimization-opportunities)
 
-## Usage across Fleet
+## Usage across Fleet
 
 Operational efficiency is a key driver of overall cost. Understanding your GPU fleet utilization can help avoid overprovisioning and reduce idle GPU spend.
 
 ### GPU fleet funnel visualization
 
-This visualization provides a breakdown of your entire GPU fleet across multiple cloud providers, showing all your Kubernetes clusters, hosts, and GPU devices.
+This visualization provides a breakdown of your entire GPU fleet across any major cloud provider (AWS, GCP, Azure, Oracle Cloud), hosted on-premises, or GPUaaS provider like Coreweave and Lambda Labs -- showing all your Kubernetes clusters, hosts, and GPU devices.
 
 The funnel also highlights any performance issues or provisioning inefficiencies in your teams' resource utilization efforts such as idle devices, underutilized GPU cores, or resource starvation that requires rebalancing.
 
@@ -82,7 +82,7 @@ To understand if any device type pools need additional provisioning, check this 
 
 Use this section to identify the number of unmet GPU requests for your Kubernetes clusters.
 
-{{< img src="gpu_monitoring/unmet_requests-2.png" alt="Toplist of kubernetes clusters by number of unmet GPU requests." style="width:90%;" >}}
+{{< img src="gpu_monitoring/unmet-requests-2.png" alt="Toplist of kubernetes clusters by number of unmet GPU requests." style="width:90%;" >}}
 
 If you have Kubernetes clusters with a large number of unmet GPU requests, you can also look at their **Device Type Breakdown** widget to understand which device type the particular service relies on, and the **Device Allocation over time** widget to track historical demands. This helps you to confirm if these clusters and device types are consistently underprovisioned.
 
@@ -120,9 +120,9 @@ For example, you may notice that the SM activity timeseries graph dips lower tha
 
 This widget also helps you to identify "noisy neighbors" (where one or more pods consume a disproportionately large amount of shared resources on a host). For example, another pod can be using all of a given host's CPU, depriving other pods on the host.
 
-### Zombie processes (Processes required)
+### Zombie processes (Live Processes required)
 
-**Note**: This section is only available for customers who have installed [Live Processes][2]. 
+**Note**: This section is only available for customers who have installed the [Live Processes][2] product. 
 
 Zombie processes are often the primary source of wasted GPU spend, as they inappropriately reserve GPU capacity. This widget lists any zombie processes that should be terminated to free up this GPU capacity for other workloads.
 

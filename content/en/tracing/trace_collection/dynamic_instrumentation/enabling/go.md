@@ -4,7 +4,7 @@ description: Set up Dynamic Instrumentation for Go applications to add probes an
 private: false
 code_lang: go
 type: multi-code-lang
-code_lang_weight: 50
+code_lang_weight: 70
 aliases:
     - /dynamic_instrumentation/enabling/go
 further_reading:
@@ -13,13 +13,17 @@ further_reading:
       text: 'Getting Started with Datadog Agent'
 ---
 
-{{< beta-callout-private url="https://www.datadoghq.com/product-preview/live-debugger/" >}}
-    Dynamic Instrumentation for Go is in limited preview and is not available to all customers.
-    Request access to join the waiting list.<br>
-    <b>Note</b>: <a href="#unsupported-features">Some limitations</a> apply to the preview.
-{{< /beta-callout-private >}}
+{{< partial name="dynamic_instrumentation/beta-callout.html" language="Go" limitations_anchor="unsupported-features" >}}
 
-Dynamic Instrumentation is a feature of Datadog tracing libraries that lets you capture application state at runtime without modifying or redeploying code. This page describes how to enable Dynamic Instrumentation for Go applications.
+Dynamic Instrumentation is a feature of the Datadog tracing library that lets you add instrumentation to your application at runtime without code changes or redeployments. Follow these instructions to set up Dynamic Instrumentation for Go.
+
+## Prerequisites
+
+Before you begin, review the [Dynamic Instrumentation prerequisites][9]. Go applications also require:
+
+- [Datadog Agent][6] version 7.73.0 or higher, running on the same host as your application.
+- Go tracing library version 1.74.6 or higher (major version 1), or version 2.2.3 or higher (major version 2). See the [installation instructions][2] for setup details.
+- Linux kernel version 5.17 or higher.
 
 ## Installation
 
@@ -27,8 +31,7 @@ To use Dynamic Instrumentation, you must enable it in both the Datadog Agent and
 
 ### Datadog Agent
 
-1. Install or upgrade your Agent to version [v7.73.0][6] or later.
-2. Enable Dynamic Instrumentation in the Agent configuration using one of the following methods, depending on how you deploy the Agent:
+Enable Dynamic Instrumentation in the Agent configuration using one of the following methods, depending on how you deploy the Agent:
 
 {{< tabs >}}
 {{% tab "Configuration YAML file" %}}
@@ -60,21 +63,18 @@ datadog:
 
 ### Application (tracing library)
 
-1. Follow the [Go tracing library installation instructions][2] to install or upgrade the Go tracing library to one of the following supported versions:
-   - v1.74.6 or later (major version 1)
-   - v2.2.3 or later (major version 2)
-2. Run your service with Dynamic Instrumentation enabled by setting the following environment variable:
+1. Run your service with Dynamic Instrumentation enabled by setting the following environment variable:
 
    ```
    DD_DYNAMIC_INSTRUMENTATION_ENABLED=true
    ```
 
-3. Configure [Unified Service Tags][201] so that you can filter and group your instrumentations and target active clients across these dimensions:
+2. Configure [Unified Service Tags][201] so that you can filter and group your instrumentations and target active clients across these dimensions:
    - `DD_SERVICE`
    - `DD_ENV`
    - `DD_VERSION`
-4. Restart your service.
-5. After the service starts, you can add and manage instrumentations from the [**APM** > **Live Debugger**][3] page.
+3. Restart your service.
+4. After the service starts, you can add and manage instrumentations from the [**APM** > **Live Debugger**][3] page.
 
 [201]: https://docs.datadoghq.com/getting_started/tagging/unified_service_tagging/?tab=kubernetes
 
@@ -96,6 +96,7 @@ See the [Live Debugger documentation][4] for information about adding instrument
 - Log templates and condition expressions
 - PII redaction based on specific classes or types
 - Propagation of additional `DD_TAGS` set on the service to probe result tags
+- Environments where eBPF is unavailable, including many serverless platforms such as AWS Lambda and AWS Fargate
 
 ## Further reading
 
@@ -108,3 +109,4 @@ See the [Live Debugger documentation][4] for information about adding instrument
 [6]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
 [7]: /dynamic_instrumentation/sensitive-data-scrubbing/#redact-based-on-variable-values-with-sensitive-data-scanner
 [8]: /integrations/guide/source-code-integration/?tab=go#embed-git-information-in-your-build-artifacts
+[9]: /dynamic_instrumentation/#prerequisites

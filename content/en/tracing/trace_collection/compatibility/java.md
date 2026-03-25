@@ -218,6 +218,11 @@ Don't see your desired networking framework? Datadog is continually adding addit
 | Vert.x Redis Client     | 3.9-4.x  | Fully Supported | `vertx-redis-client`                                                                       |
 | Vert.x MySQL Client     | 3.9-4.x  | Fully Supported | `vertx-sql-client`																		                                                       |
 
+**Note**: Redis 6.0+ supports inline authentication in commands such as `HELLO`, `MIGRATE`, and `ACL SETUSER`.
+
+  - **Datadog Trace Agent**: The minimum required and recommended version is `7.76.1` to ensure authentication parameters are automatically obfuscated in trace metadata.
+  - **Datadog Lambda Extension** (Serverless environments): The minimum required version is `v28.0.0`.
+
 `dd-java-agent` is also compatible with common JDBC drivers including:
 
 - Apache Derby
@@ -292,11 +297,11 @@ Integrations can be enabled or disabled individually (overriding the default abo
 
 - Running the Java tracer in Bitbucket is not supported.
 - Loading multiple Java Agents that perform APM/tracing functions is not a recommended or supported configuration.
-- When enabling the tracer for Java 24+, you may see warnings related to JNI native access or `sun.misc.Unsafe` memory access. Suppress these warnings by adding the `--illegal-native-access=allow` and `--sun-misc-unsafe-memory-access=allow` environment variables right before the `-javaagent:/path/to/dd-java-agent.jar` argument. See [JEP 472][13] and [JEP 498][14] for more information.
+- When running the tracer with Java 24+, you may see warnings related to JNI native access. Suppress these warnings by adding the `--enable-native-access=ALL-UNNAMED` flag. See [JEP 472][13] for more information.
 
 ## Ahead-of-time (AOT) class loading & linking support
 
-To improve startup time, Ahead-of-time (AOT) class loading & linking makes application classes instantly available in a loaded and linked state when the JVM starts. See [JEP 483][15] and [JEP 514][16] for more information.
+To improve startup time, Ahead-of-time (AOT) class loading & linking makes application classes instantly available in a loaded and linked state when the JVM starts. See [JEP 483][14] and [JEP 514][15] for more information.
 
 ### Requirements
 
@@ -524,6 +529,5 @@ For more information, see [Configure APM and DogstatsD communication mode][11]. 
 [11]: /containers/cluster_agent/admission_controller/?tab=datadogoperator#configure-apm-and-dogstatsd-communication-mode
 [12]: /tracing/trace_collection/library_config/#agent
 [13]: https://openjdk.org/jeps/472
-[14]: https://openjdk.org/jeps/498
-[15]: https://openjdk.org/jeps/483
-[16]: https://openjdk.org/jeps/514
+[14]: https://openjdk.org/jeps/483
+[15]: https://openjdk.org/jeps/514

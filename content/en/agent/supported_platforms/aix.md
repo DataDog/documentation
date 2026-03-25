@@ -124,4 +124,4 @@ installp -e dd-aix-uninstall.log -uv datadog-unix-agent
 [8]: https://app.datadoghq.com/organization-settings/api-keys
 [9]: /agent/configuration/proxy/
 [10]: https://github.com/DataDog/datadog-unix-agent/blob/master/docs/datadog.yaml.example
-[11]: /developers/dogstatsd/?tab=hostagent
+[11]: /extend/dogstatsd/?tab=hostagent

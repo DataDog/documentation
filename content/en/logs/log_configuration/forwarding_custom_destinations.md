@@ -16,6 +16,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/microsoft-sentinel-logs/"
   tag: "Blog"
   text: "Centrally process and govern your logs in Datadog before sending them to Microsoft Sentinel"
+- link: "/security/events_forwarding"
+  tag: "Documentation"
+  text: "Forward security signals, spans, and other event types to custom destinations"
 ---
 
 ## Overview
@@ -37,7 +40,9 @@ The following metrics report on logs that have been forwarded successfully, incl
 ## Set up log forwarding to custom destinations
 
 {{< site-region region="gov" >}}
-<div class="alert alert-danger">Sending logs to a custom destination is outside of the Datadog GovCloud environment, which is outside the control of Datadog. Datadog shall not be responsible for any logs that have left the Datadog GovCloud environment, including without limitation, any obligations or requirements that the user may have related to FedRAMP, DoD Impact Levels, ITAR, export compliance, data residency or similar regulations applicable to such logs.</div>
+<div class="alert alert-danger">Sending logs to a custom destination is outside of the Datadog GovCloud environment, which is outside the control of Datadog. Datadog shall not be responsible for any logs that have left the Datadog GovCloud environment, including without limitation, any obligations or requirements that the user may have related to FedRAMP, DoD Impact Levels, ITAR, export compliance, data residency or similar regulations applicable to such logs.
+<br><br>
+Due to security protocols for the US1-FED site, only port 443 and 8088 are open for log forwarding. To use a different port, contact <a href="https://www.datadoghq.com/support/">Datadog Support</a>.</div>
 {{< /site-region >}}
 
 1. Add webhook IPs from the {{< region-param key="ip_ranges_url" link="true" text="IP ranges list">}} to the allowlist.
@@ -162,3 +167,4 @@ On the [Log Forwarding][4] page, hover over the status for a destination to see 
 [6]: /logs/log_configuration/forwarding_custom_destinations#set-up-log-forwarding-to-custom-destinations
 [7]: /logs/log_configuration/forwarding_custom_destinations#edit-a-destination
 [8]: /logs/log_configuration/forwarding_custom_destinations#delete-a-destination
+[9]: /security/events_forwarding/

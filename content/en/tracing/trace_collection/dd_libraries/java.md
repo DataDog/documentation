@@ -67,7 +67,7 @@ To begin tracing your applications:
     ```
     **Note**: If you have a strong need to reduce the size of your image and omit modules, you can use the [`jdeps`][19] command to identify dependencies. However, required modules can change over time, so do this at your own risk.
 
-    **Note**: When enabling the tracer for Java 24+, you may see warnings related to JNI native access or `sun.misc.Unsafe` memory access. Suppress these warnings by adding the `--illegal-native-access=allow` and `--sun-misc-unsafe-memory-access=allow` environment variables right before the `-javaagent:/path/to/dd-java-agent.jar` argument. See [JEP 472][23] and [JEP 498][24] for more information.
+    **Note**: When running the tracer with Java 24+, you may see warnings related to JNI native access. Suppress these warnings by adding the `--enable-native-access=ALL-UNNAMED` flag. See [JEP 472][23] for more details.
 
     <div class="alert alert-warning">Enabling profiling may impact your bill depending on your APM bundle. See the <a href="https://docs.datadoghq.com/account_management/billing/apm_tracing_profiler/">pricing page</a> for more information.</div>
 
@@ -256,4 +256,3 @@ Or add the JVM system property:
 [21]: https://github.com/DataDog/dd-trace-java/releases
 [22]: https://docs.datadoghq.com/getting_started/support/
 [23]: https://openjdk.org/jeps/472
-[24]: https://openjdk.org/jeps/498
