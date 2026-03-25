@@ -91,7 +91,7 @@ Toggle between **Monthly** and **Daily** views using the controls above the tabl
 
 ## Product detail page
 
-Click **View Details** on a Trends card, or click any row in the Product List table, to open the product detail page for a single billing dimension.
+Click **View Details** on a Trends card or click any row in the **Product List** table to open the product detail page for a single billing dimension.
 
 {{< img src="account_management/plan_and_usage/bill-overview-detail-light.png" alt="Product detail page showing Cost Overview and Usage Overview sections with daily bar charts" >}}
 
