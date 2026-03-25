@@ -63,13 +63,13 @@ The recommended way to install a private action runner is through the Datadog Ag
 1. Enable **Actions API Access**.
 1. Click **Create Key** and copy the key value.
 
-### Install the Datadog Agent
+### Install or upgrade the Datadog Agent
 
-Run the following command to install the Agent and enable the private action runner. Replace the placeholder values with your own:
+Run the following command to install or upgrade the Agent and enable the private action runner. Replace the placeholder values:
 - `<API_KEY>`: Your [Datadog API key][102]
 - `<APP_KEY>`: The Application key you created
 - `DD_SITE`: Your [Datadog site][103] (for example, `datadoghq.com`)
-- `DD_PRIVATE_ACTION_RUNNER_ACTIONS_ALLOWLIST`: Comma-separated list of actions to allow. See [Available actions](#available-actions) for the full list of actions you can add to the allowlist.
+- `DD_PRIVATE_ACTION_RUNNER_ACTIONS_ALLOWLIST`: Comma-separated list of actions to allow. See [Available actions](#available-actions) for the full list.
 
 ```bash
 DD_API_KEY=<API_KEY> \
@@ -84,6 +84,7 @@ bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.s
 
 Go to the [Private Action Runners][104] page. You should see a new runner on the list. You can create new connections or start using existing ones.
 
+[100]: /agent/versions/upgrade_to_agent_v7/
 [101]: https://app.datadoghq.com/organization-settings/application-keys
 [102]: https://app.datadoghq.com/organization-settings/api-keys
 [103]: /getting_started/site/
@@ -97,14 +98,14 @@ Go to the [Private Action Runners][104] page. You should see a new runner on the
 
 If you already have the Datadog Agent installed, upgrade to version 7.77.0 or later. See [Upgrade to Agent v7][101] for instructions.
 
-For new installations, download and run the MSI installer. Replace `<API_KEY>` with your [Datadog API key][102] and update `DD_SITE` if you're not using the US1 site.
+For new installations, download and run the MSI installer. Replace `<API_KEY>` with your [Datadog API key][102] and update `DD_SITE` if you're not using the "datadoghq.com".
 
 ```powershell
 # Download the installer
 Invoke-WebRequest -Uri "https://s3.amazonaws.com/ddagent-windows-stable/ddagent-cli-7.77.0.msi" -OutFile ddagent-cli-7.77.0.msi
 
 # Install the Agent
-Start-Process -Wait -PassThru msiexec -ArgumentList '/qn /l*v install.log /i ddagent-cli-7.77.0.msi APIKEY="<API_KEY>" SITE="datadoghq.com"'
+Start-Process -Wait -PassThru msiexec -ArgumentList '/qn /l*v install.log /i ddagent-cli-7.77.0.msi APIKEY="<API_KEY>" DD_SITE="datadoghq.com"'
 ```
 
 ### Create an Application key
@@ -129,18 +130,14 @@ private_action_runner:
     - "com.datadoghq.http.request"
 ```
 
-See [Available actions](#available-actions) for the full list of actions you can add to the allowlist. Not all actions are supported on Windows. Safe choices for Windows include HTTP and `runPredefinedPowershellScript`.
+See [Available actions](#available-actions) for the full list of actions you can add to the allowlist. Not all actions are supported on Windows yet. Safe choices for Windows include HTTP and `runPredefinedPowershellScript`.
 
 ### Restart the Agent
 
+Restart the Agent to apply the configuration and enroll the runner:
+
 ```powershell
 Restart-Service -Force datadogagent
-```
-
-To start the runner on-demand:
-
-```powershell
-Start-Service datadog-agent-action
 ```
 
 ### Verify the installation
@@ -154,9 +151,9 @@ Go to the [Private Action Runners][104] page. You should see a new runner on the
 
 {{% /tab %}}
 
-{{% tab "Kubernetes (Operator)" %}}
+{{% tab "Kubernetes (Datadog Operator)" %}}
 
-Use the Datadog Operator to deploy the private action runner on your Kubernetes cluster.
+Follow these steps to install the Private Action Runner on your [Datadog Node Agents][100] and [Datadog Cluster Agent][101].
 
 ### Install the Datadog Operator
 
@@ -172,8 +169,8 @@ helm install datadog-operator datadog/datadog-operator \
 
 ### Create an API key and Application key
 
-1. Create or choose an [API key][101].
-1. Go to [Application Keys][102] and create a new key:
+1. Create or choose an [API key][102].
+1. Go to [Application Keys][103] and create a new key:
    - Under **Scopes**, select **on_prem_runner_write**.
    - Enable **Actions API Access**.
 
@@ -187,7 +184,12 @@ kubectl create secret generic datadog-secret \
 
 ### Configure and deploy the Datadog Agent
 
-Create a `datadog-agent.yaml` file with the following content. Update `<YOUR_CLUSTER_NAME>` and `site` as needed:
+Create a `datadog-agent.yaml` file with the following content:
+
+- Set `clusterName` to a meaningful name for your cluster.
+- Update `site` to your [Datadog site][105] if you're not using `datadoghq.com`.
+- The `app-key` in the secret is required for the Private Action Runner.
+- Adjust `actions_allowlist` and `DD_PRIVATE_ACTION_RUNNER_ACTIONS_ALLOWLIST` based on your needs. See [Available actions](#available-actions) for the full list.
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -260,26 +262,31 @@ kubectl logs -l app.kubernetes.io/component=cluster-agent --tail=1000 | grep pri
 
 You should see logs indicating PAR identity secret creation, self-enrollment success, and the runner starting with its URN.
 
-Go to the [Private Action Runners][103] page. You should see a new runner on the list.
+Go to the [Private Action Runners][104] page. You should see a new runner on the list.
 
-[101]: https://app.datadoghq.com/organization-settings/api-keys
-[102]: https://app.datadoghq.com/organization-settings/application-keys
-[103]: https://app.datadoghq.com/actions/action-catalog
+[100]: /containers/kubernetes/
+[101]: /containers/cluster_agent/
+[102]: https://app.datadoghq.com/organization-settings/api-keys
+[103]: https://app.datadoghq.com/organization-settings/application-keys
+[104]: https://app.datadoghq.com/actions/action-catalog
+[105]: /getting_started/site/
 
 {{% /tab %}}
 
-{{% tab "Terraform" %}}
+{{% tab "Terraform (Datadog Operator)" %}}
 
-Use Terraform with the Datadog Operator to deploy the private action runner.
+Follow these steps to install the Private Action Runner on your [Datadog Node Agents][100] and [Datadog Cluster Agent][101] using Terraform.
 
 ### Create an API key and Application key
 
-1. Create or choose an [API key][101].
-1. Go to [Application Keys][102] and create a new key:
+1. Create or choose an [API key][102].
+1. Go to [Application Keys][103] and create a new key:
    - Under **Scopes**, select **on_prem_runner_write**.
    - Enable **Actions API Access**.
 
 ### Create the Terraform configuration
+
+**Note:** You must first deploy without the `kubernetes_manifest.datadog_agent` resource for the CRDs to be created, then add it back.
 
 Create a Terraform file with the following content. Update `eks_cluster` and other values as needed:
 
@@ -453,8 +460,6 @@ EOF
 }
 ```
 
-**Note:** You must first deploy without the `kubernetes_manifest.datadog_agent` resource for the CRDs to be created, then add it back.
-
 ### Deploy
 
 ```bash
@@ -476,11 +481,13 @@ Check the Private Action Runner logs:
 kubectl logs -l app.kubernetes.io/component=cluster-agent -n datadog --tail=1000 | grep private
 ```
 
-Go to the [Private Action Runners][103] page. You should see a new runner on the list.
+Go to the [Private Action Runners][104] page. You should see a new runner on the list.
 
-[101]: https://app.datadoghq.com/organization-settings/api-keys
-[102]: https://app.datadoghq.com/organization-settings/application-keys
-[103]: https://app.datadoghq.com/actions/action-catalog
+[100]: /containers/kubernetes/
+[101]: /containers/cluster_agent/
+[102]: https://app.datadoghq.com/organization-settings/api-keys
+[103]: https://app.datadoghq.com/organization-settings/application-keys
+[104]: https://app.datadoghq.com/actions/action-catalog
 
 {{% /tab %}}
 {{< /tabs >}}
