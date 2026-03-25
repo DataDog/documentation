@@ -489,6 +489,21 @@ Go to the [Private Action Runners][104] page. You should see a new runner on the
 [104]: https://app.datadoghq.com/actions/action-catalog
 
 {{% /tab %}}
+
+{{% tab "Helm" %}}
+
+To install the Private Action Runner using the Datadog Helm chart:
+
+1. Go to the [Fleet Automation install page][100].
+1. In **Select Agent install method**, choose **Helm Chart**.
+1. In **Select your Kubernetes distribution**, choose the distribution that matches your environment.
+1. In **Customize your Agent coverage**, go to the **Optimization & Remediation** section and enable the toggle **Enable Agent to take action**. This creates an Application key with the correct scope for you.
+1. In **Add the Datadog Helm repository**, add an API key.
+1. Follow the remaining Fleet instructions to complete the installation.
+
+[100]: https://app.datadoghq.com/fleet/install-agent/latest?platform=kubernetes
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Standalone installation
