@@ -76319,6 +76319,7 @@ paths:
       x-pagination:
         limitParam: page[size]
         pageParam: page[number]
+        pageStart: 1
         resultsPath: data
     post:
       description: Create a Case
