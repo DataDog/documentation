@@ -140,6 +140,7 @@ Once configured, you can view your OpenTelemetry Collector configuration and bui
 2. Click on any host running the OpenTelemetry Collector (**Note**: Filter for hosts by using any of the OTel Collector facets).
 3. In the Fleet Automation side panel, select the **Info** tab to see build info and the **Configurations** tab to see the full YAML file or a pipeline visualization of your OTel Collector configurations.
 
+{{< img src="/agent/fleet_automation/fleet-automation-yaml-view.png" alt="View OTel Collector configuration YAMLs in Fleet Automation" style="width:100%;" >}}
 
 ### Infrastructure List (Host List)
 
