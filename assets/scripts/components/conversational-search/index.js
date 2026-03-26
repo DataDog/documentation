@@ -21,14 +21,14 @@ const PROVIDER_TYPESENSE = 'typesense';
 let IS_CONVERSATIONAL_SEARCH_ENABLED = false;
 const CONVERSATIONAL_SEARCH_FLAG_KEY = 'docs_conversational_search';
 
-// Single consolidated flag: true → internal docs-ai, false → typesense fallback.
-// Replaces the old USE_LEGACY_MODEL and USE_DOCS_AI_CHAT flags.
-const PROVIDER_FLAG_KEY = 'docs-ai-use-internal-provider';
+// When true, disables the internal docs-ai provider and uses the external Typesense provider.
+// Default: false (internal docs-ai is the primary provider).
+const USE_EXTERNAL_PROVIDER_FLAG_KEY = 'docs-ai-use-external-provider';
 
 // Only relevant when provider is typesense.
 const DISABLE_STREAMING_FLAG_KEY = 'docs-ai-disable-streaming';
 
-const CONV_MODEL_DOCS_STABLE = 'docs-ai-conv-model-v1-stable';
+const EXTERNAL_CONV_MODEL_DOCS_STABLE = 'docs-ai-conv-model-v1-stable';
 
 const RENDER_THROTTLE = 50;
 
@@ -70,7 +70,7 @@ class ConversationalSearch {
         this.isSuggestionQuery = false;
 
         this.provider = PROVIDER_INTERNAL;
-        this.selectedModelId = CONV_MODEL_DOCS_STABLE;
+        this.selectedModelId = EXTERNAL_CONV_MODEL_DOCS_STABLE;
         this.typesenseStreamingDisabled = true;
         // Rewrites the initial user query for better retrieval before answering.
         // Only applied on the first message (no history). Follow-ups use history context instead.
@@ -100,10 +100,10 @@ class ConversationalSearch {
 
     resolveFlags() {
         initializeFeatureFlags().then((client) => {
-            const useInternal = getBooleanFlag(client, PROVIDER_FLAG_KEY, true);
-            this.provider = useInternal ? PROVIDER_INTERNAL : PROVIDER_TYPESENSE;
+            const useTypesense = getBooleanFlag(client, USE_EXTERNAL_PROVIDER_FLAG_KEY);
+            this.provider = useTypesense ? PROVIDER_TYPESENSE : PROVIDER_INTERNAL;
 
-            if (!useInternal) {
+            if (useTypesense) {
                 this.typesenseStreamingDisabled = getBooleanFlag(client, DISABLE_STREAMING_FLAG_KEY);
             }
         }).catch(() => {});
@@ -671,13 +671,24 @@ function initConversationalSearch() {
     if (instance.ready) conversationalSearchInstance = instance;
 }
 
+// The minimum length of the query to auto-submit the conversation.
+// to avoid submitting short queries that are not meaningful.
+const AUTO_SUBMIT_MIN_LENGTH = 10;
+
 function askDocsAI(query, options = {}) {
-    if (IS_CONVERSATIONAL_SEARCH_ENABLED && conversationalSearchInstance) {
-        conversationalSearchInstance.open(options.source || 'entry_button');
-        if (query && query.trim()) {
-            conversationalSearchInstance.input.value = query;
-            setTimeout(() => conversationalSearchInstance.sendMessage(), 100);
-        }
+    if (!IS_CONVERSATIONAL_SEARCH_ENABLED || !conversationalSearchInstance) return;
+
+    const trimmed = (query || '').trim();
+    const inst = conversationalSearchInstance;
+    inst.open(options.source || 'entry_button');
+
+    const isNewConversation = inst.chatHistory.length === 0 && !inst.conversationId;
+    if (!trimmed || !isNewConversation) return;
+
+    inst.input.value = trimmed;
+
+    if (trimmed.length >= AUTO_SUBMIT_MIN_LENGTH) {
+        setTimeout(() => inst.sendMessage(), 100);
     }
 }
 
