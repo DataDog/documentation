@@ -59,11 +59,11 @@ You can filter your metric by:
 
 ### Prerequisites
 
-To create a metric from your warehouse data, you must connect the warehouse to Datadog. Follow the [Snowflake][11] guide to connect your Snowflake data to Datadog. 
+To create a metric from your warehouse data, you must connect the warehouse to Datadog. Follow the [Snowflake][11] guide to connect your Snowflake data to Datadog.
+
+After you connect your warehouse, create a Metric SQL Model to map your data to Datadog, and create a metric.
 
 ### Create a Metric SQL Model
-
-After you connect your warehouse, create a Metric SQL Model to map your data to Datadog, and create a metric. 
 
 On the **Create Metric SQL Model** page, write your SQL query to define and preview your data, and configure your model to map your data to Datadog.
 
@@ -83,11 +83,13 @@ On the **Create Metric SQL Model** page, write your SQL query to define and prev
    - **Timestamp**: The timestamp associated with the metric event. Only the rows created after a subject is enrolled into the experiment are included in the analysis.
    - **Subject Type**: The attribute that is used to randomly populate the experiment groups. This is typically the `usr.id` (for an individual user) or `usr.org_id` (for an organization account). You can define this attribute on the [Subject Types][12] page.
    - **Measures** (optional): The numeric columns to aggregate when creating metrics. Each Metric SQL Model automatically includes an **each record** measure, which counts the number of relevant rows for a specific experiment subject.
-2. Click **Create Metric SQL Model**.
+1. Click **Create Metric SQL Model**.
 
 {{< img src="/product_analytics/experiment/exp_create_metric_sql_models_structure_1.png" alt="The Structure your model panel with the Metric SQL Model Name field set to 'Logs Usage' and highlighted, a Mark as certified toggle, Timestamp column set to USAGE_HOUR, Subject Type set to Organization with ORG_ID selected, a Measures dropdown showing 'Logs Usage (each record)', and the Create Metric SQL Model button highlighted." style="width:80%;" >}}
 
 ### Create a metric using your SQL model
+
+After you create your SQL model, create a metric from it.
 
 1. Navigate to the [Metrics page][1] within Datadog Product Analytics.
 1. Select the **Metrics** tab.
@@ -140,7 +142,6 @@ Datadog supports several advanced options specific to experimentation:
 
 ## Further reading
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 [1]: https://app.datadoghq.com/product-analytics/experimentation-metrics
 [2]: https://en.wikipedia.org/wiki/Delta_method
