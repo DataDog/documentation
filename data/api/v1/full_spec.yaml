@@ -481,6 +481,9 @@ components:
           description: ID of the alert to use in the widget.
           example: ""
           type: string
+        description:
+          description: The description of the widget.
+          type: string
         time:
           $ref: "#/components/schemas/WidgetTime"
         title:
@@ -515,6 +518,9 @@ components:
         alert_id:
           description: ID of the alert to use in the widget.
           example: ""
+          type: string
+        description:
+          description: The description of the widget.
           type: string
         precision:
           description: Number of decimal to show. If not defined, will use the raw value.
@@ -808,6 +814,9 @@ components:
           items:
             $ref: "#/components/schemas/WidgetCustomLink"
           type: array
+        description:
+          description: The description of the widget.
+          type: string
         requests:
           description: List of bar chart widget requests.
           example: ["q": "system.load.1"]
@@ -1015,6 +1024,9 @@ components:
           items:
             $ref: "#/components/schemas/WidgetCustomLink"
           type: array
+        description:
+          description: The description of the widget.
+          type: string
         requests:
           description: |-
             Array of one request object to display in the widget.
@@ -1176,6 +1188,9 @@ components:
         check:
           description: Name of the check to use in the widget.
           example: ""
+          type: string
+        description:
+          description: The description of the widget.
           type: string
         group:
           description: Group reporting a single check.
@@ -1815,6 +1830,9 @@ components:
           items:
             $ref: "#/components/schemas/WidgetCustomLink"
           type: array
+        description:
+          description: The description of the widget.
+          type: string
         legend_size:
           deprecated: true
           description: (Deprecated) The widget legend was replaced by a tooltip and sidebar.
@@ -2608,6 +2626,9 @@ components:
         The event stream is a widget version of the stream of events
         on the Event Stream view. Only available on FREE layout dashboards.
       properties:
+        description:
+          description: The description of the widget.
+          type: string
         event_size:
           $ref: "#/components/schemas/WidgetEventSize"
         query:
@@ -2645,6 +2666,9 @@ components:
     EventTimelineWidgetDefinition:
       description: The event timeline is a widget version of the timeline that appears at the top of the Event Stream view. Only available on FREE layout dashboards.
       properties:
+        description:
+          description: The description of the widget.
+          type: string
         query:
           description: Query to filter the event timeline with.
           example: ""
@@ -2677,6 +2701,43 @@ components:
       type: string
       x-enum-varnames:
         - EVENT_TIMELINE
+    EventsAggregation:
+      description: The type of aggregation that can be performed on events-based queries.
+      example: avg
+      oneOf:
+        - $ref: "#/components/schemas/EventsAggregationValue"
+        - $ref: "#/components/schemas/EventsAggregationPercentile"
+    EventsAggregationPercentile:
+      description: Percentile aggregation.
+      pattern: '^pc[0-9]+(\.[0-9]+)?$'
+      type: string
+    EventsAggregationValue:
+      description: Standard aggregation types for events-based queries.
+      enum:
+        - avg
+        - cardinality
+        - count
+        - delta
+        - earliest
+        - latest
+        - max
+        - median
+        - min
+        - most_frequent
+        - sum
+      type: string
+      x-enum-varnames:
+        - AVG
+        - CARDINALITY
+        - COUNT
+        - DELTA
+        - EARLIEST
+        - LATEST
+        - MAX
+        - MEDIAN
+        - MIN
+        - MOST_FREQUENT
+        - SUM
     FormulaAndFunctionApmDependencyStatName:
       description: APM statistic.
       enum:
@@ -2755,6 +2816,123 @@ components:
         - service
         - name
       type: object
+    FormulaAndFunctionApmMetricStatName:
+      description: APM metric stat name.
+      enum:
+        - errors
+        - error_rate
+        - errors_per_second
+        - latency_avg
+        - latency_max
+        - latency_p50
+        - latency_p75
+        - latency_p90
+        - latency_p95
+        - latency_p99
+        - latency_p999
+        - latency_distribution
+        - hits
+        - hits_per_second
+        - total_time
+        - apdex
+      example: "hits"
+      type: string
+      x-enum-varnames:
+        - ERRORS
+        - ERROR_RATE
+        - ERRORS_PER_SECOND
+        - LATENCY_AVG
+        - LATENCY_MAX
+        - LATENCY_P50
+        - LATENCY_P75
+        - LATENCY_P90
+        - LATENCY_P95
+        - LATENCY_P99
+        - LATENCY_P999
+        - LATENCY_DISTRIBUTION
+        - HITS
+        - HITS_PER_SECOND
+        - TOTAL_TIME
+        - APDEX
+    FormulaAndFunctionApmMetricsDataSource:
+      description: Data source for APM metrics queries.
+      enum:
+        - apm_metrics
+      example: apm_metrics
+      type: string
+      x-enum-varnames:
+        - APM_METRICS
+    FormulaAndFunctionApmMetricsQueryDefinition:
+      description: A formula and functions APM metrics query.
+      properties:
+        data_source:
+          $ref: "#/components/schemas/FormulaAndFunctionApmMetricsDataSource"
+        group_by:
+          description: Optional fields to group the query results by.
+          items:
+            description: A field to group results by.
+            example: "resource_name"
+            type: string
+          type: array
+        name:
+          description: Name of this query to use in formulas.
+          example: "query_errors"
+          type: string
+        operation_mode:
+          description: Optional operation mode to aggregate across operation names.
+          example: "primary"
+          type: string
+        operation_name:
+          description: Name of operation on service. If not provided, the primary operation name is used.
+          example: "web.request"
+          type: string
+        peer_tags:
+          description: Tags to query for a specific downstream entity (peer.service, peer.db_instance, peer.s3, peer.s3.bucket, etc.).
+          items:
+            example: "peer.service:my-service"
+            type: string
+          type: array
+        query_filter:
+          description: Additional filters for the query using metrics query syntax (e.g., env, primary_tag).
+          example: "env:prod"
+          type: string
+        resource_hash:
+          description: The hash of a specific resource to filter by.
+          example: "abc123"
+          type: string
+        resource_name:
+          description: The full name of a specific resource to filter by.
+          example: "GET /api/v1/users"
+          type: string
+        service:
+          description: APM service name.
+          example: "web-store"
+          type: string
+        span_kind:
+          $ref: "#/components/schemas/FormulaAndFunctionApmMetricsSpanKind"
+        stat:
+          $ref: "#/components/schemas/FormulaAndFunctionApmMetricStatName"
+      required:
+        - data_source
+        - name
+        - stat
+      type: object
+    FormulaAndFunctionApmMetricsSpanKind:
+      description: Describes the relationship between the span, its parents, and its children in a trace.
+      enum:
+        - consumer
+        - server
+        - client
+        - producer
+        - internal
+      example: "server"
+      type: string
+      x-enum-varnames:
+        - CONSUMER
+        - SERVER
+        - CLIENT
+        - PRODUCER
+        - INTERNAL
     FormulaAndFunctionApmResourceStatName:
       description: APM resource stat name.
       enum:
@@ -3184,6 +3362,7 @@ components:
         - $ref: "#/components/schemas/FormulaAndFunctionProcessQueryDefinition"
         - $ref: "#/components/schemas/FormulaAndFunctionApmDependencyStatsQueryDefinition"
         - $ref: "#/components/schemas/FormulaAndFunctionApmResourceStatsQueryDefinition"
+        - $ref: "#/components/schemas/FormulaAndFunctionApmMetricsQueryDefinition"
         - $ref: "#/components/schemas/FormulaAndFunctionSLOQueryDefinition"
         - $ref: "#/components/schemas/FormulaAndFunctionCloudCostQueryDefinition"
     FormulaAndFunctionResponseFormat:
@@ -3380,6 +3559,9 @@ components:
       description: |-
         The funnel visualization displays a funnel of user sessions that maps a sequence of view navigation and user interaction in your application.
       properties:
+        description:
+          description: The description of the widget.
+          type: string
         requests:
           description: Request payload used to query items.
           example: [{"query": {"data_source": "rum", "query_string": "@browser.name:Chrome", "steps": [{"facet": "@view.name", "value": "/logs"}, {"facet": "@view.name", "value": "/apm/home"}]}, "request_type": "funnel"}]
@@ -3575,6 +3757,9 @@ components:
           items:
             $ref: "#/components/schemas/WidgetCustomLink"
           type: array
+        description:
+          description: The description of the widget.
+          type: string
         requests:
           description: |-
             Array of request objects to display in the widget. May include an optional request for the region layer and/or an optional request for the points layer. Region layer requests must contain a `group-by` tag whose value is a country ISO code.
@@ -3841,6 +4026,9 @@ components:
           items:
             $ref: "#/components/schemas/WidgetCustomLink"
           type: array
+        description:
+          description: The description of the widget.
+          type: string
         events:
           deprecated: true
           description: List of widget events. Deprecated - Use `overlay` request type instead.
@@ -4106,6 +4294,9 @@ components:
           items:
             $ref: "#/components/schemas/WidgetCustomLink"
           type: array
+        description:
+          description: The description of the widget.
+          type: string
         group:
           description: List of tag prefixes to group by.
           items:
@@ -5085,6 +5276,9 @@ components:
         The list stream visualization displays a table of recent events in your application that
         match a search criteria using user-defined columns.
       properties:
+        description:
+          description: The description of the widget.
+          type: string
         legend_size:
           $ref: "#/components/schemas/WidgetLegendSize"
         requests:
@@ -5266,6 +5460,9 @@ components:
             description: Column name.
             type: string
           type: array
+        description:
+          description: The description of the widget.
+          type: string
         indexes:
           description: An array of index names to query in the stream. Use [] to query all indexes at once.
           example: ["days-3", "days-7"]
@@ -8679,6 +8876,9 @@ components:
           description: The number of monitors to display.
           format: int64
           type: integer
+        description:
+          description: The description of the widget.
+          type: string
         display_format:
           $ref: "#/components/schemas/WidgetMonitorSummaryDisplayFormat"
         hide_zero_counts:
@@ -11043,6 +11243,55 @@ components:
       required:
         - metric
       type: object
+    ProductAnalyticsAudienceAccountSubquery:
+      description: Product Analytics audience account subquery.
+      properties:
+        name:
+          type: string
+        query:
+          type: string
+      type: object
+    ProductAnalyticsAudienceFilters:
+      description: Product Analytics/RUM audience filters.
+      properties:
+        accounts:
+          items:
+            $ref: "#/components/schemas/ProductAnalyticsAudienceAccountSubquery"
+          type: array
+        filter_condition:
+          type: string
+        segments:
+          items:
+            $ref: "#/components/schemas/ProductAnalyticsAudienceSegmentSubquery"
+          type: array
+        users:
+          items:
+            $ref: "#/components/schemas/ProductAnalyticsAudienceUserSubquery"
+          type: array
+      type: object
+    ProductAnalyticsAudienceOccurrenceFilter:
+      properties:
+        operator:
+          type: string
+        value:
+          type: string
+      type: object
+    ProductAnalyticsAudienceSegmentSubquery:
+      description: Product Analytics audience segment subquery.
+      properties:
+        name:
+          type: string
+        segment_id:
+          type: string
+      type: object
+    ProductAnalyticsAudienceUserSubquery:
+      description: Product Analytics audience user subquery.
+      properties:
+        name:
+          type: string
+        query:
+          type: string
+      type: object
     QuerySortOrder:
       default: desc
       description: Direction of sort.
@@ -11066,6 +11315,9 @@ components:
           type: array
         custom_unit:
           description: Display a unit of your choice on the widget.
+          type: string
+        description:
+          description: The description of the widget.
           type: string
         precision:
           description: Number of decimals to show. If not defined, the widget uses the raw value.
@@ -11236,6 +11488,9 @@ components:
           items:
             $ref: "#/components/schemas/WidgetCustomLink"
           type: array
+        description:
+          description: The description of the widget.
+          type: string
         inputs:
           description: Array of workflow inputs to map to dashboard template variables.
           items:
@@ -12198,6 +12453,9 @@ components:
     SLOListWidgetDefinition:
       description: Use the SLO List widget to track your SLOs (Service Level Objectives) on dashboards.
       properties:
+        description:
+          description: The description of the widget.
+          type: string
         requests:
           description: Array of one request object to display in the widget.
           items:
@@ -12745,6 +13003,9 @@ components:
         additional_query_filters:
           description: Additional filters applied to the SLO query.
           type: string
+        description:
+          description: The description of the widget.
+          type: string
         global_time_target:
           description: Defined global time target.
           type: string
@@ -12789,6 +13050,249 @@ components:
       type: string
       x-enum-varnames:
         - SLO
+    SankeyJoinKeys:
+      additionalProperties: false
+      description: Join keys.
+      properties:
+        primary:
+          description: Primary join key.
+          example: "session.id"
+          type: string
+        secondary:
+          description: Secondary join keys.
+          items:
+            description: Secondary join key.
+            type: string
+          type: array
+      required:
+        - primary
+      type: object
+    SankeyNetworkDataSource:
+      default: network
+      description: Network data source type.
+      enum:
+        - network_device_flows
+        - network
+      example: network
+      type: string
+      x-enum-varnames:
+        - NETWORK_DEVICE_FLOWS
+        - NETWORK
+    SankeyNetworkQuery:
+      additionalProperties: false
+      description: Query configuration for Sankey network widget.
+      properties:
+        compute:
+          $ref: "#/components/schemas/SankeyNetworkQueryCompute"
+        data_source:
+          $ref: "#/components/schemas/SankeyNetworkDataSource"
+        group_by:
+          description: Fields to group by.
+          example: ["source", "destination"]
+          items:
+            type: string
+          type: array
+        limit:
+          description: Maximum number of results.
+          example: 100
+          format: int64
+          type: integer
+        mode:
+          $ref: "#/components/schemas/SankeyNetworkQueryMode"
+        query_string:
+          description: Query string for filtering network data.
+          example: "*"
+          type: string
+        should_exclude_missing:
+          description: Whether to exclude missing values.
+          type: boolean
+        sort:
+          $ref: "#/components/schemas/SankeyNetworkQuerySort"
+      required:
+        - data_source
+        - query_string
+        - group_by
+        - limit
+      type: object
+    SankeyNetworkQueryCompute:
+      additionalProperties: false
+      description: Compute aggregation for network queries.
+      properties:
+        aggregation:
+          $ref: "#/components/schemas/EventsAggregation"
+        metric:
+          description: Metric to aggregate.
+          example: ""
+          type: string
+      required:
+        - aggregation
+        - metric
+      type: object
+    SankeyNetworkQueryMode:
+      default: target
+      description: Sankey mode for network queries.
+      enum:
+        - target
+      example: target
+      type: string
+      x-enum-varnames:
+        - TARGET
+    SankeyNetworkQuerySort:
+      description: Sort configuration for network queries.
+      properties:
+        field:
+          description: Field to sort by.
+          type: string
+        order:
+          $ref: "#/components/schemas/WidgetSort"
+      type: object
+    SankeyNetworkRequest:
+      additionalProperties: false
+      description: Sankey widget request for network data source.
+      properties:
+        query:
+          $ref: "#/components/schemas/SankeyNetworkQuery"
+        request_type:
+          $ref: "#/components/schemas/SankeyNetworkRequestType"
+      required:
+        - query
+        - request_type
+      type: object
+    SankeyNetworkRequestType:
+      default: netflow_sankey
+      description: Type of request for network Sankey widget.
+      enum:
+        - netflow_sankey
+      example: netflow_sankey
+      type: string
+      x-enum-varnames:
+        - NETFLOW_SANKEY
+    SankeyRumDataSource:
+      default: rum
+      description: Sankey widget with RUM data source.
+      enum:
+        - rum
+        - product_analytics
+      example: rum
+      type: string
+      x-enum-varnames:
+        - RUM
+        - PRODUCT_ANALYTICS
+    SankeyRumQuery:
+      additionalProperties: false
+      description: Sankey widget with RUM data source query.
+      properties:
+        audience_filters:
+          $ref: "#/components/schemas/ProductAnalyticsAudienceFilters"
+        data_source:
+          $ref: "#/components/schemas/SankeyRumDataSource"
+        entries_per_step:
+          description: Entries per step.
+          format: int64
+          type: integer
+        join_keys:
+          $ref: "#/components/schemas/SankeyJoinKeys"
+        mode:
+          $ref: "#/components/schemas/SankeyRumQueryMode"
+        number_of_steps:
+          description: Number of steps.
+          format: int64
+          type: integer
+        occurrences:
+          $ref: "#/components/schemas/ProductAnalyticsAudienceOccurrenceFilter"
+        query_string:
+          description: Query string.
+          example: "@type:view"
+          type: string
+        source:
+          description: Source.
+          type: string
+        subquery_id:
+          description: Subquery ID.
+          type: string
+        target:
+          description: Target.
+          type: string
+      required:
+        - data_source
+        - query_string
+        - mode
+      type: object
+    SankeyRumQueryMode:
+      default: source
+      description: Sankey mode for RUM queries.
+      enum:
+        - source
+        - target
+      example: source
+      type: string
+      x-enum-varnames:
+        - SOURCE
+        - TARGET
+    SankeyRumRequest:
+      additionalProperties: false
+      description: Sankey widget with RUM data source.
+      properties:
+        query:
+          $ref: "#/components/schemas/SankeyRumQuery"
+        request_type:
+          $ref: "#/components/schemas/SankeyWidgetDefinitionType"
+      required:
+        - query
+        - request_type
+      type: object
+    SankeyWidgetDefinition:
+      additionalProperties: false
+      description: The Sankey diagram visualizes the flow of data between categories, stages or sets of values.
+      properties:
+        requests:
+          description: List of Sankey widget requests.
+          example:
+            - query:
+                data_source: rum
+                mode: source
+                query_string: "@type:view"
+              request_type: sankey
+          items:
+            $ref: "#/components/schemas/SankeyWidgetRequest"
+          minItems: 1
+          type: array
+        show_other_links:
+          description: Whether to show links for "other" category.
+          type: boolean
+        sort_nodes:
+          description: Whether to sort nodes in the Sankey diagram.
+          type: boolean
+        time:
+          $ref: "#/components/schemas/WidgetTime"
+        title:
+          description: Title of your widget.
+          type: string
+        title_align:
+          $ref: "#/components/schemas/WidgetTextAlign"
+        title_size:
+          description: Size of the title.
+          type: string
+        type:
+          $ref: "#/components/schemas/SankeyWidgetDefinitionType"
+      required:
+        - type
+        - requests
+      type: object
+    SankeyWidgetDefinitionType:
+      default: sankey
+      description: Type of the Sankey widget.
+      enum:
+        - sankey
+      example: sankey
+      type: string
+      x-enum-varnames:
+        - SANKEY
+    SankeyWidgetRequest:
+      description: Request definition for Sankey widget.
+      oneOf:
+        - $ref: "#/components/schemas/SankeyRumRequest"
+        - $ref: "#/components/schemas/SankeyNetworkRequest"
     ScatterPlotRequest:
       description: Updated scatter plot.
       properties:
@@ -12844,6 +13348,9 @@ components:
           items:
             $ref: "#/components/schemas/WidgetCustomLink"
           type: array
+        description:
+          description: The description of the widget.
+          type: string
         requests:
           $ref: "#/components/schemas/ScatterPlotWidgetDefinitionRequests"
         time:
@@ -13682,6 +14189,9 @@ components:
           items:
             $ref: "#/components/schemas/WidgetCustomLink"
           type: array
+        description:
+          description: The description of the widget.
+          type: string
         filters:
           description: Your environment and primary tag (or * if enabled for your account).
           example: ["*"]
@@ -13721,6 +14231,9 @@ components:
     ServiceSummaryWidgetDefinition:
       description: The service summary displays the graphs of a chosen service in your screenboard. Only available on FREE layout dashboards.
       properties:
+        description:
+          description: The description of the widget.
+          type: string
         display_format:
           $ref: "#/components/schemas/WidgetServiceSummaryDisplayFormat"
         env:
@@ -14408,6 +14921,9 @@ components:
           items:
             $ref: "#/components/schemas/WidgetCustomLink"
           type: array
+        description:
+          description: The description of the widget.
+          type: string
         hide_total:
           description: Show the total value in this widget.
           type: boolean
@@ -18350,6 +18866,9 @@ components:
           items:
             $ref: "#/components/schemas/WidgetCustomLink"
           type: array
+        description:
+          description: The description of the widget.
+          type: string
         has_search_bar:
           $ref: "#/components/schemas/TableWidgetHasSearchBar"
         requests:
@@ -18695,6 +19214,9 @@ components:
           items:
             $ref: "#/components/schemas/WidgetCustomLink"
           type: array
+        description:
+          description: The description of the widget.
+          type: string
         events:
           deprecated: true
           description: List of widget events. Deprecated - Use `overlay` request type instead.
@@ -18869,6 +19391,9 @@ components:
           items:
             $ref: "#/components/schemas/WidgetCustomLink"
           type: array
+        description:
+          description: The description of the widget.
+          type: string
         requests:
           description: List of top list widget requests.
           example: ["q": "system.load.1"]
@@ -19050,6 +19575,9 @@ components:
           items:
             $ref: "#/components/schemas/WidgetCustomLink"
           type: array
+        description:
+          description: The description of the widget.
+          type: string
         requests:
           description: One or more Topology requests.
           items:
@@ -19165,6 +19693,9 @@ components:
           items:
             $ref: "#/components/schemas/WidgetCustomLink"
           type: array
+        description:
+          description: The description of the widget.
+          type: string
         group_by:
           $ref: "#/components/schemas/TreeMapGroupBy"
         requests:
@@ -23941,6 +24472,7 @@ components:
         - $ref: "#/components/schemas/SLOListWidgetDefinition"
         - $ref: "#/components/schemas/SLOWidgetDefinition"
         - $ref: "#/components/schemas/ScatterPlotWidgetDefinition"
+        - $ref: "#/components/schemas/SankeyWidgetDefinition"
         - $ref: "#/components/schemas/ServiceMapWidgetDefinition"
         - $ref: "#/components/schemas/ServiceSummaryWidgetDefinition"
         - $ref: "#/components/schemas/SplitGraphWidgetDefinition"
@@ -23950,6 +24482,7 @@ components:
         - $ref: "#/components/schemas/ToplistWidgetDefinition"
         - $ref: "#/components/schemas/TopologyMapWidgetDefinition"
         - $ref: "#/components/schemas/TreeMapWidgetDefinition"
+        - $ref: "#/components/schemas/WildcardWidgetDefinition"
     WidgetDisplayType:
       description: Type of display to use for the request.
       enum:
@@ -24721,6 +25254,81 @@ components:
       x-enum-varnames:
         - TIMESERIES
         - TOPLIST
+    WildcardWidgetDefinition:
+      description: >-
+        Custom visualization widget using Vega or Vega-Lite specifications. Combines standard Datadog data requests with a Vega or Vega-Lite JSON specification for flexible, custom visualizations.
+      properties:
+        custom_links:
+          description: List of custom links.
+          items:
+            $ref: "#/components/schemas/WidgetCustomLink"
+          type: array
+        requests:
+          description: List of data requests for the wildcard widget.
+          example: [{"formulas": ["formula": "query1"], "queries": [{"aggregator": "avg", "data_source": "metrics", "name": "query1", "query": "avg:system.cpu.user{*} by {env}"}], "response_format": "scalar"}]
+          items:
+            $ref: "#/components/schemas/WildcardWidgetRequest"
+          type: array
+        specification:
+          $ref: "#/components/schemas/WildcardWidgetSpecification"
+        time:
+          $ref: "#/components/schemas/WidgetTime"
+        title:
+          description: Title of the widget.
+          type: string
+        title_align:
+          $ref: "#/components/schemas/WidgetTextAlign"
+        title_size:
+          description: Size of the title.
+          type: string
+        type:
+          $ref: "#/components/schemas/WildcardWidgetDefinitionType"
+      required:
+        - type
+        - requests
+        - specification
+      type: object
+    WildcardWidgetDefinitionType:
+      default: wildcard
+      description: Type of the wildcard widget.
+      enum:
+        - wildcard
+      example: wildcard
+      type: string
+      x-enum-varnames:
+        - WILDCARD
+    WildcardWidgetRequest:
+      description: >-
+        Request object for the wildcard widget. Each variant represents a distinct data-fetching pattern: scalar formulas, timeseries formulas, list streams, and histograms.
+      oneOf:
+        - $ref: "#/components/schemas/TreeMapWidgetRequest"
+        - $ref: "#/components/schemas/TimeseriesWidgetRequest"
+        - $ref: "#/components/schemas/ListStreamWidgetRequest"
+        - $ref: "#/components/schemas/DistributionWidgetRequest"
+    WildcardWidgetSpecification:
+      description: >-
+        Vega or Vega-Lite specification for custom visualization rendering. See https://vega.github.io/vega-lite/ for the full grammar reference.
+      properties:
+        contents:
+          description: The Vega or Vega-Lite JSON specification object.
+          example: {"$schema": "https://vega.github.io/schema/vega-lite/v5.json", "data": {"name": "table1"}, "description": "A simple bar chart", "encoding": {"x": {"field": "env", "sort": "-y", "type": "nominal"}, "y": {"field": "query1", "type": "quantitative"}}, "mark": "bar"}
+          type: object
+        type:
+          $ref: "#/components/schemas/WildcardWidgetSpecificationType"
+      required:
+        - type
+        - contents
+      type: object
+    WildcardWidgetSpecificationType:
+      description: Type of specification used by the wildcard widget.
+      enum:
+        - vega
+        - vega-lite
+      example: vega-lite
+      type: string
+      x-enum-varnames:
+        - VEGA
+        - VEGA_LITE
   securitySchemes:
     AuthZ:
       description: This API uses OAuth 2 with the implicit grant flow.
@@ -25424,7 +26032,7 @@ paths:
       summary: Get the list of available daily custom reports
       tags:
         - Usage Metering
-      x-menu-order: 41
+      x-menu-order: 34
       "x-permission":
         operator: OR
         permissions:
@@ -25472,7 +26080,7 @@ paths:
       summary: Get specified daily custom reports
       tags:
         - Usage Metering
-      x-menu-order: 42
+      x-menu-order: 35
       "x-permission":
         operator: OR
         permissions:
@@ -26538,7 +27146,7 @@ paths:
       tags:
         - Metrics
       x-codegen-request-body-name: body
-      x-menu-order: 1
+      x-menu-order: 7
   /api/v1/downtime:
     get:
       deprecated: true
@@ -26986,7 +27594,7 @@ paths:
       tags:
         - Events
       x-codegen-request-body-name: body
-      x-menu-order: 1
+      x-menu-order: 3
   /api/v1/events/{event_id}:
     get:
       description: |-
@@ -28950,7 +29558,7 @@ paths:
       summary: Delete a Slack integration
       tags:
         - Slack Integration
-      x-menu-order: 1
+      x-menu-order: 6
     get:
       deprecated: true
       description: Get all information about your Datadog-Slack integration.
@@ -28985,7 +29593,7 @@ paths:
       summary: Get info about a Slack integration
       tags:
         - Slack Integration
-      x-menu-order: 4
+      x-menu-order: 9
     post:
       deprecated: true
       description: |-
@@ -29023,7 +29631,7 @@ paths:
       tags:
         - Slack Integration
       x-codegen-request-body-name: body
-      x-menu-order: 3
+      x-menu-order: 8
     put:
       deprecated: true
       description: |-
@@ -29062,7 +29670,7 @@ paths:
       tags:
         - Slack Integration
       x-codegen-request-body-name: body
-      x-menu-order: 2
+      x-menu-order: 7
   /api/v1/integration/slack/configuration/accounts/{account_name}/channels:
     get:
       description: Get a list of all channels configured for your Datadog-Slack integration.
@@ -29649,6 +30257,8 @@ paths:
         consider use of the Datadog archive capabilities instead of the log list API.
         See [Datadog Logs Archive documentation][2].**
 
+        **Note**: This endpoint is enabled by default for logs customers. To disable it, contact [Datadog support](https://docs.datadoghq.com/help/).
+
         [1]: /logs/guide/collect-multiple-logs-with-pagination
         [2]: https://docs.datadoghq.com/logs/archives
       operationId: ListLogs
@@ -29688,7 +30298,7 @@ paths:
       tags:
         - Logs
       x-codegen-request-body-name: body
-      x-menu-order: 3
+      x-menu-order: 2
       "x-permission":
         operator: OR
         permissions:
@@ -29716,7 +30326,7 @@ paths:
       summary: Get indexes order
       tags:
         - Logs Indexes
-      x-menu-order: 5
+      x-menu-order: 6
       "x-permission":
         operator: OR
         permissions:
@@ -29758,7 +30368,7 @@ paths:
       tags:
         - Logs Indexes
       x-codegen-request-body-name: body
-      x-menu-order: 6
+      x-menu-order: 7
       "x-permission":
         operator: OR
         permissions:
@@ -30939,7 +31549,7 @@ paths:
       summary: Monitors group search
       tags:
         - Monitors
-      x-menu-order: 2
+      x-menu-order: 10
       "x-permission":
         operator: OR
         permissions:
@@ -31020,7 +31630,7 @@ paths:
       summary: Monitors search
       tags:
         - Monitors
-      x-menu-order: 1
+      x-menu-order: 9
       "x-permission":
         operator: OR
         permissions:
@@ -31391,7 +32001,7 @@ paths:
       tags:
         - Monitors
       x-codegen-request-body-name: body
-      x-menu-order: 2
+      x-menu-order: 12
       "x-permission":
         operator: OR
         permissions:
@@ -31459,7 +32069,7 @@ paths:
       tags:
         - Monitors
       x-codegen-request-body-name: body
-      x-menu-order: 1
+      x-menu-order: 11
       "x-permission":
         operator: OR
         permissions:
@@ -31577,7 +32187,7 @@ paths:
       summary: Get the list of available monthly custom reports
       tags:
         - Usage Metering
-      x-menu-order: 43
+      x-menu-order: 36
       "x-permission":
         operator: OR
         permissions:
@@ -31631,7 +32241,7 @@ paths:
       summary: Get specified monthly custom reports
       tags:
         - Usage Metering
-      x-menu-order: 44
+      x-menu-order: 37
       "x-permission":
         operator: OR
         permissions:
@@ -32360,7 +32970,7 @@ paths:
       summary: Add a security signal to an incident
       tags: ["Security Monitoring"]
       x-codegen-request-body-name: body
-      x-menu-order: 4
+      x-menu-order: 2
       "x-permission":
         operator: OR
         permissions:
@@ -32410,7 +33020,7 @@ paths:
       summary: Modify the triage assignee of a security signal
       tags: ["Security Monitoring"]
       x-codegen-request-body-name: body
-      x-menu-order: 5
+      x-menu-order: 3
       "x-permission":
         operator: OR
         permissions:
@@ -32460,7 +33070,7 @@ paths:
       summary: Change the triage state of a security signal
       tags: ["Security Monitoring"]
       x-codegen-request-body-name: body
-      x-menu-order: 4
+      x-menu-order: 1
       "x-permission":
         operator: OR
         permissions:
@@ -32539,7 +33149,7 @@ paths:
       tags:
         - Metrics
       x-codegen-request-body-name: body
-      x-menu-order: 1
+      x-menu-order: 6
   /api/v1/service_dependencies:
     get:
       description: |-
@@ -32864,7 +33474,7 @@ paths:
       tags:
         - Service Level Objectives
       x-codegen-request-body-name: body
-      x-menu-order: 8
+      x-menu-order: 9
       "x-permission":
         operator: OR
         permissions:
@@ -32919,7 +33529,7 @@ paths:
       summary: Check if SLOs can be safely deleted
       tags:
         - Service Level Objectives
-      x-menu-order: 7
+      x-menu-order: 8
       "x-permission":
         operator: OR
         permissions:
@@ -33212,7 +33822,7 @@ paths:
       summary: Search for SLOs
       tags:
         - Service Level Objectives
-      x-menu-order: 1
+      x-menu-order: 10
       "x-permission":
         operator: OR
         permissions:
@@ -33525,7 +34135,7 @@ paths:
       summary: Get an SLO's history
       tags:
         - Service Level Objectives
-      x-menu-order: 6
+      x-menu-order: 7
       "x-permission":
         operator: OR
         permissions:
@@ -33564,7 +34174,7 @@ paths:
       summary: Get details of batch
       tags:
         - Synthetics
-      x-menu-order: 12
+      x-menu-order: 14
       "x-permission":
         operator: OR
         permissions:
@@ -33592,7 +34202,7 @@ paths:
       summary: Get all locations (public and private)
       tags:
         - Synthetics
-      x-menu-order: 24
+      x-menu-order: 30
       "x-permission":
         operator: OR
         permissions:
@@ -33638,7 +34248,7 @@ paths:
       tags:
         - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 23
+      x-menu-order: 29
       "x-permission":
         operator: OR
         permissions:
@@ -33675,7 +34285,7 @@ paths:
       summary: Delete a private location
       tags:
         - Synthetics
-      x-menu-order: 27
+      x-menu-order: 33
       "x-permission":
         operator: OR
         permissions:
@@ -33715,7 +34325,7 @@ paths:
       summary: Get a private location
       tags:
         - Synthetics
-      x-menu-order: 25
+      x-menu-order: 31
       "x-permission":
         operator: OR
         permissions:
@@ -33763,7 +34373,7 @@ paths:
       tags:
         - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 26
+      x-menu-order: 32
       "x-permission":
         operator: OR
         permissions:
@@ -33784,7 +34394,7 @@ paths:
       summary: Get the default locations
       tags:
         - Synthetics
-      x-menu-order: 29
+      x-menu-order: 34
       "x-permission":
         operator: OR
         permissions:
@@ -33838,7 +34448,7 @@ paths:
       summary: Get the list of all Synthetic tests
       tags:
         - Synthetics
-      x-menu-order: 3
+      x-menu-order: 4
       x-pagination:
         limitParam: page_size
         pageParam: page_number
@@ -34122,7 +34732,7 @@ paths:
       summary: Get an API test
       tags:
         - Synthetics
-      x-menu-order: 6
+      x-menu-order: 8
       "x-permission":
         operator: OR
         permissions:
@@ -34185,7 +34795,7 @@ paths:
       tags:
         - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 16
+      x-menu-order: 21
       "x-permission":
         operator: OR
         permissions:
@@ -34288,7 +34898,7 @@ paths:
       summary: Get a browser test
       tags:
         - Synthetics
-      x-menu-order: 6
+      x-menu-order: 7
       "x-permission":
         operator: OR
         permissions:
@@ -34351,7 +34961,7 @@ paths:
       tags:
         - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 16
+      x-menu-order: 19
       "x-permission":
         operator: OR
         permissions:
@@ -34424,7 +35034,7 @@ paths:
       tags:
         - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 10
+      x-menu-order: 12
       "x-permission":
         operator: OR
         permissions:
@@ -34479,7 +35089,7 @@ paths:
       summary: Get a browser test result
       tags:
         - Synthetics
-      x-menu-order: 11
+      x-menu-order: 13
       "x-permission":
         operator: OR
         permissions:
@@ -34536,7 +35146,7 @@ paths:
       tags:
         - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 17
+      x-menu-order: 23
       "x-permission":
         operator: OR
         permissions:
@@ -34590,7 +35200,7 @@ paths:
       tags:
         - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 2
+      x-menu-order: 3
       "x-permission":
         operator: OR
         permissions:
@@ -34639,7 +35249,7 @@ paths:
       summary: Get a mobile test
       tags:
         - Synthetics
-      x-menu-order: 7
+      x-menu-order: 9
       "x-permission":
         operator: OR
         permissions:
@@ -34702,7 +35312,7 @@ paths:
       tags:
         - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 16
+      x-menu-order: 22
       "x-permission":
         operator: OR
         permissions:
@@ -34783,7 +35393,7 @@ paths:
       summary: Search Synthetic tests
       tags:
         - Synthetics
-      x-menu-order: 5
+      x-menu-order: 6
       "x-permission":
         operator: OR
         permissions:
@@ -34823,7 +35433,7 @@ paths:
       tags:
         - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 14
+      x-menu-order: 16
       "x-permission":
         operator: OR
         permissions:
@@ -34863,7 +35473,7 @@ paths:
       tags:
         - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 13
+      x-menu-order: 15
       "x-permission":
         operator: OR
         permissions:
@@ -34912,7 +35522,7 @@ paths:
       tags:
         - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 15
+      x-menu-order: 17
       "x-permission":
         operator: OR
         permissions:
@@ -34959,7 +35569,7 @@ paths:
       summary: Get a test configuration
       tags:
         - Synthetics
-      x-menu-order: 4
+      x-menu-order: 5
       "x-permission":
         operator: OR
         permissions:
@@ -35022,7 +35632,7 @@ paths:
       tags:
         - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 16
+      x-menu-order: 20
       "x-permission":
         operator: OR
         permissions:
@@ -35157,7 +35767,7 @@ paths:
       tags:
         - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 8
+      x-menu-order: 10
       "x-permission":
         operator: OR
         permissions:
@@ -35210,7 +35820,7 @@ paths:
       summary: Get an API test result
       tags:
         - Synthetics
-      x-menu-order: 9
+      x-menu-order: 11
       "x-permission":
         operator: OR
         permissions:
@@ -35271,7 +35881,7 @@ paths:
       tags:
         - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 16
+      x-menu-order: 18
       "x-permission":
         operator: OR
         permissions:
@@ -35305,7 +35915,7 @@ paths:
       summary: Get all global variables
       tags:
         - Synthetics
-      x-menu-order: 19
+      x-menu-order: 25
       "x-permission":
         operator: OR
         permissions:
@@ -35357,7 +35967,7 @@ paths:
       tags:
         - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 18
+      x-menu-order: 24
       "x-permission":
         operator: OR
         permissions:
@@ -35404,7 +36014,7 @@ paths:
       summary: Delete a global variable
       tags:
         - Synthetics
-      x-menu-order: 22
+      x-menu-order: 28
       "x-permission":
         operator: OR
         permissions:
@@ -35448,7 +36058,7 @@ paths:
       summary: Get a global variable
       tags:
         - Synthetics
-      x-menu-order: 20
+      x-menu-order: 26
     put:
       description: Edit a Synthetic global variable.
       operationId: EditGlobalVariable
@@ -35496,7 +36106,7 @@ paths:
       tags:
         - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 21
+      x-menu-order: 27
       "x-permission":
         operator: OR
         permissions:
@@ -35788,7 +36398,7 @@ paths:
       summary: Get hourly usage for analyzed logs
       tags:
         - Usage Metering
-      x-menu-order: 23
+      x-menu-order: 20
       "x-permission":
         operator: OR
         permissions:
@@ -35850,7 +36460,7 @@ paths:
       summary: Get hourly usage for audit logs
       tags:
         - Usage Metering
-      x-menu-order: 40
+      x-menu-order: 33
       "x-permission":
         operator: OR
         permissions:
@@ -35910,7 +36520,7 @@ paths:
       summary: Get hourly usage for Lambda
       tags:
         - Usage Metering
-      x-menu-order: 19
+      x-menu-order: 16
       "x-permission":
         operator: OR
         permissions:
@@ -35970,7 +36580,7 @@ paths:
       summary: Get billable usage across your account
       tags:
         - Usage Metering
-      x-menu-order: 5
+      x-menu-order: 3
       "x-permission":
         operator: OR
         permissions:
@@ -36032,7 +36642,7 @@ paths:
       summary: Get hourly usage for CI visibility
       tags:
         - Usage Metering
-      x-menu-order: 35
+      x-menu-order: 31
       "x-permission":
         operator: OR
         permissions:
@@ -36094,7 +36704,7 @@ paths:
       summary: Get hourly usage for CSM Pro
       tags:
         - Usage Metering
-      x-menu-order: 28
+      x-menu-order: 25
       "x-permission":
         operator: OR
         permissions:
@@ -36156,7 +36766,7 @@ paths:
       summary: Get hourly usage for cloud workload security
       tags:
         - Usage Metering
-      x-menu-order: 30
+      x-menu-order: 26
       "x-permission":
         operator: OR
         permissions:
@@ -36218,7 +36828,7 @@ paths:
       summary: Get hourly usage for database monitoring
       tags:
         - Usage Metering
-      x-menu-order: 31
+      x-menu-order: 27
       "x-permission":
         operator: OR
         permissions:
@@ -36278,7 +36888,7 @@ paths:
       summary: Get hourly usage for Fargate
       tags:
         - Usage Metering
-      x-menu-order: 18
+      x-menu-order: 15
       "x-permission":
         operator: OR
         permissions:
@@ -36338,7 +36948,7 @@ paths:
       summary: Get hourly usage for hosts and containers
       tags:
         - Usage Metering
-      x-menu-order: 11
+      x-menu-order: 8
       "x-permission":
         operator: OR
         permissions:
@@ -36438,7 +37048,7 @@ paths:
       summary: Get hourly usage attribution
       tags:
         - Usage Metering
-      x-menu-order: 2
+      x-menu-order: 1
       "x-permission":
         operator: OR
         permissions:
@@ -36500,7 +37110,7 @@ paths:
       summary: Get hourly usage for incident management
       tags:
         - Usage Metering
-      x-menu-order: 26
+      x-menu-order: 23
       "x-permission":
         operator: OR
         permissions:
@@ -36561,7 +37171,7 @@ paths:
       summary: Get hourly usage for indexed spans
       tags:
         - Usage Metering
-      x-menu-order: 14
+      x-menu-order: 11
       "x-permission":
         operator: OR
         permissions:
@@ -36623,7 +37233,7 @@ paths:
       summary: Get hourly usage for ingested spans
       tags:
         - Usage Metering
-      x-menu-order: 25
+      x-menu-order: 22
       "x-permission":
         operator: OR
         permissions:
@@ -36685,7 +37295,7 @@ paths:
       summary: Get hourly usage for IoT
       tags:
         - Usage Metering
-      x-menu-order: 27
+      x-menu-order: 24
       "x-permission":
         operator: OR
         permissions:
@@ -36745,7 +37355,7 @@ paths:
       summary: Get hourly usage for logs
       tags:
         - Usage Metering
-      x-menu-order: 12
+      x-menu-order: 9
       "x-permission":
         operator: OR
         permissions:
@@ -36807,7 +37417,7 @@ paths:
       summary: Get hourly logs usage by retention
       tags:
         - Usage Metering
-      x-menu-order: 10
+      x-menu-order: 7
       "x-permission":
         operator: OR
         permissions:
@@ -36873,7 +37483,7 @@ paths:
       summary: Get hourly usage for logs by index
       tags:
         - Usage Metering
-      x-menu-order: 9
+      x-menu-order: 6
       "x-permission":
         operator: OR
         permissions:
@@ -36990,7 +37600,7 @@ paths:
       summary: Get monthly usage attribution
       tags:
         - Usage Metering
-      x-menu-order: 3
+      x-menu-order: 2
       "x-permission":
         operator: OR
         permissions:
@@ -37052,7 +37662,7 @@ paths:
       summary: get hourly usage for network flows
       tags:
         - Usage Metering
-      x-menu-order: 22
+      x-menu-order: 19
       "x-permission":
         operator: OR
         permissions:
@@ -37112,7 +37722,7 @@ paths:
       summary: Get hourly usage for network hosts
       tags:
         - Usage Metering
-      x-menu-order: 21
+      x-menu-order: 18
       "x-permission":
         operator: OR
         permissions:
@@ -37174,7 +37784,7 @@ paths:
       summary: Get hourly usage for online archive
       tags:
         - Usage Metering
-      x-menu-order: 36
+      x-menu-order: 32
       "x-permission":
         operator: OR
         permissions:
@@ -37236,7 +37846,7 @@ paths:
       summary: Get hourly usage for profiled hosts
       tags:
         - Usage Metering
-      x-menu-order: 34
+      x-menu-order: 30
       "x-permission":
         operator: OR
         permissions:
@@ -37296,7 +37906,7 @@ paths:
       summary: Get hourly usage for RUM units
       tags:
         - Usage Metering
-      x-menu-order: 33
+      x-menu-order: 29
       "x-permission":
         operator: OR
         permissions:
@@ -37362,7 +37972,7 @@ paths:
       summary: Get hourly usage for RUM sessions
       tags:
         - Usage Metering
-      x-menu-order: 20
+      x-menu-order: 17
       "x-permission":
         operator: OR
         permissions:
@@ -37425,7 +38035,7 @@ paths:
       summary: Get hourly usage for sensitive data scanner
       tags:
         - Usage Metering
-      x-menu-order: 32
+      x-menu-order: 28
       "x-permission":
         operator: OR
         permissions:
@@ -37487,7 +38097,7 @@ paths:
       summary: Get hourly usage for SNMP devices
       tags:
         - Usage Metering
-      x-menu-order: 24
+      x-menu-order: 21
       "x-permission":
         operator: OR
         permissions:
@@ -37562,7 +38172,7 @@ paths:
       summary: Get usage across your account
       tags:
         - Usage Metering
-      x-menu-order: 8
+      x-menu-order: 5
       "x-permission":
         operator: OR
         permissions:
@@ -37622,7 +38232,7 @@ paths:
       summary: Get hourly usage for synthetics checks
       tags:
         - Usage Metering
-      x-menu-order: 15
+      x-menu-order: 12
       "x-permission":
         operator: OR
         permissions:
@@ -37682,7 +38292,7 @@ paths:
       summary: Get hourly usage for synthetics API checks
       tags:
         - Usage Metering
-      x-menu-order: 16
+      x-menu-order: 13
       "x-permission":
         operator: OR
         permissions:
@@ -37742,7 +38352,7 @@ paths:
       summary: Get hourly usage for synthetics browser checks
       tags:
         - Usage Metering
-      x-menu-order: 17
+      x-menu-order: 14
       "x-permission":
         operator: OR
         permissions:
@@ -37802,7 +38412,7 @@ paths:
       summary: Get hourly usage for custom metrics
       tags:
         - Usage Metering
-      x-menu-order: 13
+      x-menu-order: 10
       "x-permission":
         operator: OR
         permissions:
@@ -37881,7 +38491,7 @@ paths:
       summary: Get all custom metrics by hourly average
       tags:
         - Usage Metering
-      x-menu-order: 7
+      x-menu-order: 4
       "x-permission":
         operator: OR
         permissions:
@@ -38313,7 +38923,7 @@ paths:
       tags:
         - Monitors
       x-codegen-request-body-name: body
-      x-menu-order: 4
+      x-menu-order: 14
   /v1/monitor/unmute_all:
     post:
       deprecated: true
@@ -38338,7 +38948,7 @@ paths:
       tags:
         - Monitors
       x-codegen-request-body-name: body
-      x-menu-order: 3
+      x-menu-order: 13
 security:
   - apiKeyAuth: []
     appKeyAuth: []

@@ -3034,11 +3034,6 @@ menu:
       parent: infrastructure_livecontainers_explorer
       identifier: infrastructure_livecontainers_resource_utilization
       weight: 10302
-    - name: Kubernetes Autoscaling
-      url: containers/autoscaling
-      parent: infrastructure_livecontainers_explorer
-      identifier: infrastructure_livecontainers_autoscaling
-      weight: 10303
     - name: Remediation
       url: containers/bits_ai_kubernetes_remediation
       parent: infrastructure_livecontainers_explorer
@@ -3054,6 +3049,11 @@ menu:
       parent: containers
       identifier: containers_autoscaling
       weight: 2
+    - name: Cluster 
+      url: containers/autoscaling/cluster
+      parent: containers_autoscaling
+      identifier: containers_autoscaling_cluster
+      weight: 201
     - name: Docker-based
       url: containers/docker/
       parent: containers
@@ -3506,15 +3506,20 @@ menu:
       parent: serverless_gcr
       weight: 701
       identifier: serverless_gcr_containers
+    - name: Jobs (Preview)
+      url: serverless/google_cloud_run/jobs
+      parent: serverless_gcr
+      weight: 702
+      identifier: serverless_gcr_jobs
     - name: Functions
       url: serverless/google_cloud_run/functions
       parent: serverless_gcr
-      weight: 702
+      weight: 703
       identifier: serverless_gcr_functions
     - name: Functions (1st generation)
       url: serverless/google_cloud_run/functions_1st_gen
       parent: serverless_gcr
-      weight: 703
+      weight: 704
       identifier: serverless_gcr_functions_1st_gen
     - name: Libraries & Integrations
       url: serverless/libraries_integrations
@@ -4933,11 +4938,16 @@ menu:
       identifier: data_streams_setup
       parent: data_streams
       weight: 1
-    - name: Kafka Messages
-      url: data_streams/messages
-      identifier: data_streams_kafka_messages
+    - name: Kafka 
+      url: data_streams/kafka
+      identifier: data_streams_kafka
       parent: data_streams
       weight: 2
+    - name: Messages 
+      url: data_streams/kafka/messages 
+      identifier: data_streams_kafka_messages
+      parent: data_streams_kafka 
+      weight: 201
     - name: Schema Tracking
       url: data_streams/schema_tracking
       identifier: data_streams_schema_tracking
@@ -4964,6 +4974,12 @@ menu:
       identifier: data_observability
       parent: data_observability_heading
       weight: 60000
+    - name: Data Catalog
+      url: data_observability/data_catalog
+      pre: data-observability-wui
+      identifier: data_catalog
+      parent: data_observability_heading
+      weight: 65000
     - name: Quality Monitoring
       url: data_observability/quality_monitoring/
       pre: data-observability-wui
@@ -4990,6 +5006,11 @@ menu:
       identifier: bigquery
       parent: data_warehouses
       weight: 3000000
+    - name: Redshift
+      url: data_observability/quality_monitoring/data_warehouses/redshift
+      identifier: redshift
+      parent: data_warehouses
+      weight: 4000000
     - name: Data Lakes
       url: data_observability/quality_monitoring/data_lakes
       identifier: data_lakes
@@ -5211,6 +5232,11 @@ menu:
       parent: llm_obs_managed_evaluations
       identifier: llm_obs_managed_evaluations_security
       weight: 40002
+    - name: Connect Your LLM Provider
+      url: llm_observability/evaluations/custom_llm_as_a_judge_evaluations/connect_to_account
+      parent: llm_obs_custom_llm_as_a_judge_evaluations
+      identifier: llm_obs_custom_llm_as_a_judge_evaluations_connect_to_account
+      weight: 40100
     - name: Template Evaluations
       url: llm_observability/evaluations/custom_llm_as_a_judge_evaluations/template_evaluations
       parent: llm_obs_custom_llm_as_a_judge_evaluations
@@ -6067,31 +6093,36 @@ menu:
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_mysql
       weight: 217
+    - name: Okta
+      url: observability_pipelines/sources/okta/
+      parent: observability_pipelines_sources
+      identifier: observability_pipelines_sources_okta
+      weight: 218
     - name: Socket
       url: observability_pipelines/sources/socket/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_socket
-      weight: 218
+      weight: 219
     - name: Splunk HEC
       url: observability_pipelines/sources/splunk_hec/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_splunk_hec
-      weight: 219
+      weight: 220
     - name: Splunk TCP
       url: observability_pipelines/sources/splunk_tcp/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_splunk_tcp
-      weight: 220
+      weight: 221
     - name: Sumo Logic Hosted Collector
       url: observability_pipelines/sources/sumo_logic/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_sumo_logic
-      weight: 221
+      weight: 222
     - name: Syslog
       url: observability_pipelines/sources/syslog/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_syslog
-      weight: 222
+      weight: 223
     - name: Processors
       url: observability_pipelines/processors/
       parent: observability_pipelines
@@ -6899,21 +6930,21 @@ menu:
       parent: cloudprem
       identifier: cloudprem_configure
       weight: 5
-    - name: Retention Policy
-      url: /cloudprem/configure/retention
+    - name: Indexes
+      url: /cloudprem/configure/indexes
       parent: cloudprem_configure
-      identifier: cloudprem_configure_retention_policy
-      weight: 501
-    - name: Pipelines
-      url: /cloudprem/configure/pipelines
-      parent: cloudprem_configure
-      identifier: cloudprem_configure_pipelines
-      weight: 502
+      identifier: cloudprem_configure_indexes
+      weight: 500
     - name: Ingress
       url: /cloudprem/configure/ingress
       parent: cloudprem_configure
       identifier: cloudprem_ingress
       weight: 503
+    - name: Lambda Search Offloading
+      url: /cloudprem/configure/lambda
+      parent: cloudprem_configure
+      identifier: cloudprem_configure_lambda
+      weight: 504
     - name: Operate
       url: /cloudprem/operate/
       parent: cloudprem
@@ -7307,16 +7338,21 @@ menu:
       url: /security/code_security/iac_security/setup/
       parent: code_security_iac_security
       weight: 100000
+    - name: GitHub Actions
+      identifier: code_security_iac_security_github_actions
+      url: /security/code_security/iac_security/github_actions/
+      parent: code_security_iac_security
+      weight: 100001
     - name: Exclusions
       identifier: code_security_iac_security_exclusions
       url: /security/code_security/iac_security/exclusions/
       parent: code_security_iac_security
-      weight: 100001
+      weight: 100002
     - name: Rules
       identifier: code_security_iac_security_rules
       url: /security/code_security/iac_security/iac_rules/
       parent: code_security_iac_security
-      weight: 100002
+      weight: 100003
     - name: Developer Tool Integrations
       identifier: dev_tool_int
       url: /security/code_security/dev_tool_int/
@@ -8877,26 +8913,36 @@ menu:
       parent: digital_experience_heading
       identifier: pa_experiments
       weight: 50000
+    - name: Plan and Launch Experiments
+      url: experiments/plan_and_launch_experiments
+      parent: pa_experiments
+      identifier: pa_experiments_plan
+      weight: 1
     - name: Define Metrics
       url: experiments/defining_metrics
       parent: pa_experiments
       identifier: pa_experiments_metrics
-      weight: 1
-    - name: Reading Experiment Results
+      weight: 2
+    - name: Read Experiment Results
       url: experiments/reading_results
       parent: pa_experiments
       identifier: pa_experiments_results
-      weight: 2
+      weight: 3
     - name: Minimum Detectable Effects
       url: experiments/minimum_detectable_effect
       parent: pa_experiments
       identifier: pa_experiments_mde
-      weight: 3
+      weight: 4
     - name: Troubleshooting
       url: experiments/troubleshooting
       parent: pa_experiments
       identifier: pa_experiments_troubleshooting
-      weight: 4
+      weight: 5
+    - name: Guides
+      url: experiments/guide/
+      parent: pa_experiments
+      identifier: pa_experiments_guide
+      weight: 5
     - name: Guides
       url: product_analytics/guide/
       parent: product_analytics
@@ -9189,11 +9235,16 @@ menu:
       parent: account_management
       identifier: safety_center
       weight: 12
-    - name: Plan and Usage
+    - name: Plan & Usage
       url: account_management/plan_and_usage/
       parent: account_management
       identifier: account_management_plan_and_usage
       weight: 13
+    - name: Bill Overview
+      identifier: account_management_bill_overview
+      url: account_management/plan_and_usage/bill_overview/
+      parent: account_management_plan_and_usage
+      weight: 1300
     - name: Cost Details
       identifier: account_management_cost_details
       url: account_management/plan_and_usage/cost_details/
