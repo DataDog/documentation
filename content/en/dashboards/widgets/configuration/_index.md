@@ -108,9 +108,9 @@ The copied widgets can be pasted within Datadog by using <kbd>Ctrl</kbd>/<kbd>Cm
 * **Dashboards**: Adds a new widget positioned under your mouse cursor.
 * **Notebooks**: Adds a new cell at the end of the notebook.
 
-You can also paste the widget into your favorite chat program that displays link previews (like Slack or Microsoft Teams). This displays a snapshot image of your graph along with a direct link to your widget.
+You can also paste the widget into your favorite chat program that displays link previews (like Slack or Microsoft Teams). This displays a snapshot image of your graph along with a direct link to your widget. For more information, see [Widget Snapshots][11].
 
-For more information, see [Datadog Clipboard][9].
+For information on copying widgets for use within Datadog (in dashboards, notebooks, and incidents), see [Datadog Clipboard][9].
 
 ## Groups of widgets
 
@@ -189,3 +189,4 @@ Click on the context menu (three vertical dots) of any dashboard graph to open a
 [8]: /dashboards/guide/custom_time_frames/
 [9]: /dashboards/guide/datadog_clipboard/
 [10]: /dashboards/widgets/split_graph/
+[11]: /dashboards/sharing/widget_snapshots/
