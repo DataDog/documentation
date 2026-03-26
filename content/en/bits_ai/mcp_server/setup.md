@@ -177,7 +177,7 @@ Datadog's [Cursor and VS Code extension][1] includes built-in access to the mana
 
 {{% tab "JetBrains IDEs" %}}
 
-JetBrains offers the [Junie][1] and [AI Assistant][2] plugins for their range of IDEs. Alternatively, many developers use an agent CLI, such as Claude Code or Codex, alongside their IDE.
+JetBrains offers the [Junie][1] and [AI Assistant][2] plugins for their range of IDEs. GitHub offers the [Copilot][4] plugin. Alternatively, many developers use an agent CLI, such as Claude Code or Codex, alongside their IDE.
 
 Point your plugin to the MCP Server endpoint for your regional [Datadog site][3]. For the correct instructions, use the **Datadog Site** selector on the right side of this documentation page to select your site.
 
@@ -231,6 +231,30 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
 1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
 {{% /collapse-content %}}
 
+{{% collapse-content title="GitHub Copilot" level="h4" expanded=false id="github-copilot" %}}
+1. Go to **Tools** > **GitHub Copilot** > **Model Context Protocol (MCP)** and add the following block:
+
+    <pre><code>{
+      "servers": {
+        "datadog": {
+          "type": "http",
+          "url": "{{< region-param key="mcp_server_endpoint" >}}"
+        }
+      }
+    }
+    </code></pre>
+
+1. To enable [product-specific tools][1], include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and LLM Observability tools: 
+
+    <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
+
+1. Click the `Start` element that appears in the editor to start the server. You are prompted to log in through OAuth.
+
+1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
+
+[1]: /bits_ai/mcp_server#toolsets
+{{% /collapse-content %}}
+
 {{% collapse-content title="Agent CLIs" level="h4" expanded=false id="jetbrains-agent-clis" %}}
 Many developers use an agent CLI such as Claude Code or Codex alongside their JetBrains IDE. See the configuration for those CLI tools:
 - [Claude Code][4]
@@ -251,6 +275,7 @@ The [Datadog plugin for JetBrains IDEs][3] integrates with these agent CLIs. For
 [1]: https://plugins.jetbrains.com/plugin/26104-junie-the-ai-coding-agent-by-jetbrains
 [2]: https://plugins.jetbrains.com/plugin/22282-jetbrains-ai-assistant
 [3]: /getting_started/site/
+[4]: https://plugins.jetbrains.com/plugin/17718-github-copilot--your-ai-pair-programmer
 {{% /tab %}}
 
 {{% tab "Other" %}}

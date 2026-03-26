@@ -9,15 +9,17 @@ products:
 
 {{< product-availability >}}
 
-Use Observability Pipelines' Amazon S3 source to receive logs from Amazon S3. Select and set up this source when you [set up a pipeline][1].
+## Overview
+
+Use Observability Pipelines' Amazon S3 source to receive logs from Amazon S3.
 
 ## Prerequisites
 
 {{% observability_pipelines/prerequisites/amazon_s3 %}}
 
-## Set up the source in the pipeline UI
+## Setup
 
-Select and set up this source when you [set up a pipeline][1]. The information below is for the source settings in the pipeline UI.
+Set up this source when you [set up a pipeline][1]. You can set up a pipeline in the [UI][3], using the [API][4], or with [Terraform][5]. The instructions in this section are for setting up the source in the UI.
 
 <div class="alert alert-danger">Only enter the identifiers for the Amazon S3 URL and, if applicable, the TLS key pass. Do <b>not</b> enter the actual values.</div>
 
@@ -73,3 +75,6 @@ Toggle the switch to **Enable TLS**. If you enable TLS, the following certificat
 
 [1]: /observability_pipelines/configuration/set_up_pipelines/
 [2]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/
+[3]: https://app.datadoghq.com/observability-pipelines
+[4]: /api/latest/observability-pipelines/
+[5]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline
