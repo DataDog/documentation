@@ -111,10 +111,10 @@ For new installations, download and run the MSI installer. Replace `<API_KEY>` w
 
 ```powershell
 # Download the installer
-Invoke-WebRequest -Uri "https://s3.amazonaws.com/ddagent-windows-stable/ddagent-cli-7.77.0.msi" -OutFile ddagent-cli-7.77.0.msi
+Invoke-WebRequest -Uri "https://windows-agent.datadoghq.com/datadog-agent-7-latest.amd64.msi" -OutFile datadog-agent-7-latest.amd64.msi
 
 # Install the Agent
-Start-Process -Wait -PassThru msiexec -ArgumentList '/qn /l*v install.log /i ddagent-cli-7.77.0.msi APIKEY="<API_KEY>" DD_SITE="datadoghq.com"'
+Start-Process -Wait -PassThru msiexec -ArgumentList '/qn /l*v install.log /i datadog-agent-7-latest.amd64.msi APIKEY="<API_KEY>" DD_SITE="datadoghq.com"'
 ```
 
 ### Create an Application key
