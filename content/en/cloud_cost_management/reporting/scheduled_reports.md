@@ -12,7 +12,7 @@ further_reading:
 ---
 
 ## Overview
-Scheduled Cloud Cost (CCM) Reports let you automatically receive recurring cost reports through email, Slack, or Microsoft Teams. This feature supports finance, engineering, and executive stakeholders by delivering periodic snapshots of cost metrics, without needing to log into the Datadog platform. Reports are sent as PDFs to your chosen Slack channels or email addresses.
+Scheduled Cloud Cost (CCM) Reports let you automatically receive recurring cost reports through email, Slack, or Microsoft Teams. This feature supports finance, engineering, and executive stakeholders by delivering periodic snapshots of cost metrics, without needing to log into the Datadog platform. Reports are sent as PDFs to your chosen email addresses, Slack channels, or Microsoft Teams channels.
 
 {{< img src="cloud_cost/cost_reports/cloud-cost-scheduled-report-1.png" alt="Schedule Cost Report." style="width:80%;" >}}
 
