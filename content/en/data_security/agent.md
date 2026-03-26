@@ -226,7 +226,7 @@ Only applicable metrics are emitted. For example, if DBM is not enabled, none of
 
 
 [1]: https://github.com/DataDog/datadog-agent/blob/4dc6ed6eb069bdea7e93f2d267ac5086a98c968c/comp/core/agenttelemetry/impl/sender.go#L218-L221
-[2]: https://github.com/DataDog/datadog-agent/blob/main/comp/core/agenttelemetry/impl/config.go#L190
+[2]: https://github.com/search?q=repo%3ADataDog%2Fdatadog-agent+content%3A%2Fvar+defaultProfiles%2F+path%3Acomp%2Fcore%2Fagenttelemetry%2Fimpl%2Fconfig.go+content%3A%2Fprofiles%3A%2F+content%3A%2F-+name%3A+checks%2F+content%3A%2Fmetric%3A%2F+content%3A%2Fexclude%3A%2F&type=code
 
 {{< /site-region >}}
 
