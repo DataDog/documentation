@@ -31,7 +31,7 @@ cascade:
 {{< whatsnext desc="API:" >}}
     {{< nextlink href="synthetics/guide/create-api-test-with-the-api" >}}Create your API tests with the API{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/manage-browser-tests-through-the-api/" >}}Manage your browser tests programmatically{{< /nextlink >}}
-    {{< nextlink href="synthetics/guide/export-tests-to-terraform" >}}Export Synthetic API tests to Terraform{{< /nextlink >}}
+    {{< nextlink href="synthetics/guide/export-tests-to-terraform" >}}Export Synthetic tests to Terraform{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Best Practices:" >}}
