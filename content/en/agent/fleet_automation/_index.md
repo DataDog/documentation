@@ -75,12 +75,21 @@ For each OTel Collector, you can see:
 - The Collector version
 - The distribution of the Collector
 - The configuration YAML of the Collector
+- Pipeline visualization of the Collector
+Examine a Datadog Agent or OpenTelemetry Collector
+Selecting a Datadog Agent or OTel Collector gives you more information about it, including its configuration, connected integrations, audit events, and a support tab that you can use to send a remote flare.
 
 ### Examine a Datadog Agent or OpenTelemetry Collector
 
 Selecting a Datadog Agent or OTel Collector gives you more information about it, including its configuration, connected integrations, audit events, and a support tab that you can use to send a remote flare.
 
 {{< img src="agent/fleet_automation/fleet-automation-view-config.png" alt="An Agent's integration information" style="width:100%;" >}}
+
+### Visualize an OTel Collector Pipeline
+The Pipeline Visualization toggle in the Configurations tab of an OTel Collector provides a pipeline view of the Collector. Use Pipeline Visualization to:
+- Validate telemetry routing between configured OTel Collector components.
+- Spot unexpected data drops along the OTel Collector pipeline.
+- Inspect specific component configuration YAML snippets by hovering over any component.
 
 ### View Agent Audit Trail events
 
