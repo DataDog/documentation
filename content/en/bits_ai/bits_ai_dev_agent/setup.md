@@ -45,9 +45,30 @@ To configure telemetry tagging, see [Tag your APM telemetry with Git information
 You can also configure service-to-repository mapping manually in the Bits AI Dev Agent settings under [**Repositories**][11] > **Service Repository Mapping**.
 
 ### Enable auto-push
-To enable auto-push, so the Dev Agent can push commits directly to a branch, navigate to **Bits AI Dev** > [**Settings**][12], and set the toggle to **Enable**.
+To enable auto-push, so the Dev Agent can push commits directly to a branch, navigate to **Bits AI Dev** > [**Settings**][12] > **General**, and set the toggle to **Enable**.
 
 **Note**: If auto-push is disabled, you must review and approve code in Datadog before the Dev Agent can push it.
+
+### Configure domain allowlist
+
+To configure which external domains agents can reach during agent execution, navigate to **Bits AI Dev** > [**Settings**][12] > **General**, and find the **Domain Allowlist** section. Choose from the following access policies: **No Internet Access**, **Default Allowlist**, **Custom + Default Allowlist**, or **Custom Allowlist**.
+
+The default allowlist includes the following domains:
+
+| Language | Domains |
+|---|---|
+| Clojure/JVM | `repo.clojars.org` |
+| Go | `pkg.go.dev`, `proxy.golang.org`, `vuln.go.dev` |
+| Java/JVM | `repo1.maven.org` |
+| JavaScript/TypeScript | `registry.npmjs.org` |
+| .NET/C# | `api.nuget.org` |
+| PHP | `packagist.org`, `repo.packagist.org` |
+| Python | `files.pythonhosted.org`, `pypi.org`, `pypi.python.org`, `pythonhosted.org` |
+| Rust | `index.crates.io`, `static.crates.io` |
+
+### Enable proactive fixes
+
+To enable proactive fixes, navigate to **Bits AI Dev** > [**Settings**][12] > **General**, and set the **Enable Proactive Fixes** toggle to **Enable**. You can then enable or disable automatic fixes for **Errors** and **Flaky Tests** individually.
 
 ### Configure custom instructions
 
@@ -57,11 +78,11 @@ The Dev Agent ingests custom instruction files from your repository, including:
 - `.windsurfrules`  
 - `copilot-instructions.md`  
 - `claude.md`  
-- `agents.md`  
+- `AGENTS.md`  
 - `agent.md`  
 
 
-You can also define global custom instructions, which apply to all Dev Agent sessions, in **Bits AI** > **Dev Agent** > [**Settings**][12], in the **Agent Instructions** section. 
+You can also define global custom instructions, which apply to all Dev Agent sessions, in **Bits AI Dev** > [**Settings**][12] > **General**, in the **Global Agent Instructions** section. 
 
 ### Configure repository environment
 
@@ -78,13 +99,9 @@ To configure a repository environment:
 1. Run the setup command to ensure it runs successfully.
 1. Save the configuration.
 
-The Dev Agent runs the setup command at startup and can use any tools installed in your environment. The setup command runs with network access enabled to download dependencies. After setup is complete, network access is disabled during Agent execution. Because setup commands execute against code in your repository, enable them only if you trust the repository's code.
+The Dev Agent runs the setup command at startup and can use any tools installed in your environment. The setup command runs with network access enabled to download dependencies. After setup is complete, your [domain allowlist](#configure-domain-allowlist) policy controls outbound network access during agent execution. Because setup commands execute against code in your repository, enable them only if you trust the repository's code.
 
 **Note**: For best results, add a [custom instructions file](#configure-custom-instructions) (like `claude.md`) to your repository with instructions on how to build and test your code.
-
-#### Domain allowlist
-
-The Dev Agent sandbox includes a default allowlist of domains for common package registries. The default allowlist covers registries for Go, Java/JVM, JavaScript/TypeScript, .NET/C#, PHP, Python, and Rust.
 
 ## Troubleshooting
 
