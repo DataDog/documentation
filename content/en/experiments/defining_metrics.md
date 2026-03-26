@@ -27,7 +27,7 @@ To create a metric from Product Analytics or RUM data, you must have Datadog's [
 - [Browser (JavaScript)][6]
 - [React Native][7]
 
-Product Analytics uses the same SDKs and configuration as Real User Monitoring (RUM). After you have configured your SDK using RUM documentation, create your metric in the Product Analytics UI.
+Product Analytics uses the same SDKs and configuration as Real User Monitoring (RUM). After you configure your SDK using the RUM setup documentation, create your metric in the Product Analytics UI.
 
 ### Create a metric
 
@@ -59,14 +59,13 @@ You can filter your metric by:
 
 ### Prerequisites
 
-To create a metric from your warehouse data, you must connect the warehouse to Datadog. Follow the [Snowflake][11] guide to connect your Snowflake data to Datadog.
-
-
-After you have connected your warehouse, create a Metric SQL Model, map your data to Datadog, and then create a metric.
+To create a metric from your warehouse data, you must connect the warehouse to Datadog. Follow the [Snowflake][11] guide to connect your Snowflake data to Datadog. 
 
 ### Create a Metric SQL Model
 
-<!-- add a sentence about how they flow together-->
+After you connect your warehouse, create a Metric SQL Model to map your data to Datadog, and create a metric. 
+
+On the **Create Metric SQL Model** page, write your SQL query to define and preview your data, and configure your model to map your data to Datadog.
 
 #### Write your SQL
 1. Navigate to the [Metrics page][1] in Datadog Product Analytics.
@@ -78,12 +77,12 @@ After you have connected your warehouse, create a Metric SQL Model, map your dat
 {{< img src="/product_analytics/experiment/exp_create_metric_sql_models_writesql.png" alt="The Write SQL section of the Create Metric SQL Model page showing a SELECT query against a logs usage table, with a successful query preview below displaying ORG_ID, USAGE_HOUR, and USAGE_HOUR_END columns." style="width:80%;" >}}
 
 #### Structure your model
-1. Name your new **Metric SQL Model**. The previous image names this model **Logs Usage**.
+1. Name your new **Metric SQL Model** (for example, **Logs Usage**).
 1. (Optional) Toggle on **Mark as certified** to indicate this metric is approved for important decision-making. This requires the **Product Analytics Certified Metrics Write** permission.
 1. Map the columns in your table to the following:
    - **Timestamp**: The timestamp associated with the metric event. Only the rows created after a subject is enrolled into the experiment are included in the analysis.
    - **Subject Type**: The attribute that is used to randomly populate the experiment groups. This is typically the `usr.id` (for an individual user) or `usr.org_id` (for an organization account). You can define this attribute on the [Subject Types][12] page.
-   - **Measures** (optional): The numeric columns to aggregate when creating metrics. Each Metric SQL Model automatically includes an **each record** measure, which counts the number of relevant rows for a specific experiment subject. Adding measures allow them to be reused to create 
+   - **Measures** (optional): The numeric columns to aggregate when creating metrics. Each Metric SQL Model automatically includes an **each record** measure, which counts the number of relevant rows for a specific experiment subject.
 2. Click **Create Metric SQL Model**.
 
 {{< img src="/product_analytics/experiment/exp_create_metric_sql_models_structure_1.png" alt="The Structure your model panel with the Metric SQL Model Name field set to 'Logs Usage' and highlighted, a Mark as certified toggle, Timestamp column set to USAGE_HOUR, Subject Type set to Organization with ORG_ID selected, a Measures dropdown showing 'Logs Usage (each record)', and the Create Metric SQL Model button highlighted." style="width:80%;" >}}
@@ -93,8 +92,8 @@ After you have connected your warehouse, create a Metric SQL Model, map your dat
 1. Navigate to the [Metrics page][1] within Datadog Product Analytics.
 1. Select the **Metrics** tab.
 1. Click **Create Metric** at the top right corner.
-1. Click **Select an Event** to see a list of Metric SQL Models under their data source and select the relevant model (for example, **Logs Usage** under **Snowflake**).
-1. Select one of the [aggregation methods](#aggregation-methods) to specify how Datadog aggregates data to the experiment subject level.
+1. Click **Select an event** to see a list of Metric SQL Models under their data source and select the relevant model (for example, **Logs Usage** under **Snowflake**).
+1. Select an [aggregation method](#aggregation-methods) from the dropdown.
 
 {{< img src="/product_analytics/experiment/exp_create_metric_from_sqlmodel1.png" alt="The Create Metric event picker showing All Events selected, with event types including Snowflake, Actions, Views, Sessions, Errors, and Long Tasks on the left, and the Logs Usage SQL model highlighted under Snowflake on the right." style="width:80%;" >}}
 
@@ -102,7 +101,7 @@ After you have connected your warehouse, create a Metric SQL Model, map your dat
 
 Aggregation methods determine how Datadog summarizes data for each experiment subject. An experiment subject is the unit that is randomized for the experiment. This is typically a user, but can also be an organization, session, or device, depending on how you set up your experiment.
 
-Datadog Experiments support the following aggregation types:
+Datadog Experiments supports the following aggregation types:
 
 - **Count of events** (default)
 - **Count of unique users with the event** (useful for conversion metrics)
@@ -113,7 +112,7 @@ Datadog Experiments support the following aggregation types:
 
 {{< img src="/product_analytics/experiment/exp_default_metric_agg.png" alt="The aggregation method dropdown in the Define the metric panel showing Count of unique users, Count of events (selected), and Sum of... as options, with a description reading 'The number of events performed' on the right." style="width:90%;" >}}
 
-Datadog computes metrics (or aggregations?) for each experiment subject. For example, a **Count of events** aggregation on users calculates the total number of events for all users in the variant (experiment group) divided by the number of users in that variant.
+Datadog computes metrics for each experiment subject. For example, a **Count of events** metric on users calculates the total number of events for all users in the variant (experiment group) divided by the number of users in that variant.
 
 ### Ratio metrics
 
@@ -152,4 +151,3 @@ Datadog supports several advanced options specific to experimentation:
 [7]: /real_user_monitoring/application_monitoring/react_native/setup/?platform=react_native
 [11]: /experiments/guide/connecting_snowflake
 [12]: https://app.datadoghq.com/product-analytics/experiments/settings/subject-types
-[13]: https://app.datadoghq.com/product-analytics/experiments
