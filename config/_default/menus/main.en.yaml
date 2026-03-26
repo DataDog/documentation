@@ -1458,6 +1458,11 @@ menu:
       identifier: bits_ai_mcp_server_setup
       parent: bits_ai_mcp_server
       weight: 501
+    - name: MCP Tools
+      url: bits_ai/mcp_server/tools
+      identifier: bits_ai_mcp_server_tools
+      parent: bits_ai_mcp_server
+      weight: 502
     - name: Dashboards
       url: dashboards/
       pre: dashboard

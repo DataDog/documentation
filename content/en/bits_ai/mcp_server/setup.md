@@ -34,7 +34,7 @@ Datadog's [Cursor and VS Code extension][1] includes built-in access to the mana
 1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
 
 [2]: /ide_plugins/vscode/?tab=cursor#installation
-[3]: /bits_ai/mcp_server#available-tools
+[3]: /bits_ai/mcp_server/tools
 {{< /site-region >}}
 
 {{< site-region region="gov" >}}
@@ -169,7 +169,7 @@ Datadog's [Cursor and VS Code extension][1] includes built-in access to the mana
 1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
 
 [2]: /ide_plugins/vscode/?tab=vscode#installation
-[3]: /bits_ai/mcp_server#available-tools
+[3]: /bits_ai/mcp_server/tools
 {{< /site-region >}}
 
 {{< site-region region="gov" >}}
@@ -433,7 +433,7 @@ Local authentication is recommended for Cline and when remote authentication is 
 [9]: https://kiro.dev/
 [10]: https://kiro.dev/cli/
 [11]: https://cline.bot/
-[12]: /bits_ai/mcp_server#available-tools
+[12]: /bits_ai/mcp_server/tools
 [13]: /account_management/org_settings/service_accounts/
 [14]: https://modelcontextprotocol.io/specification/draft/basic/authorization
 [15]: /ide_plugins/vscode/?tab=cursor
