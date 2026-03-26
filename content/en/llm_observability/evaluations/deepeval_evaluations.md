@@ -65,7 +65,7 @@ dataset = LLMObs.create_dataset(
     ],
 )
 
-def task(input_data: Dict[str, Any], config: Optional[Dict[str, Any]] = None) -> str:
+def task(input_data: Dict[str, Any], config: Optional[Dict[str, Any]] = None, metadata: Optional[Dict[str, Any]] = None) -> str:
     question = input_data['question']
     # Your LLM or processing logic here
     return "Beijing" if "China" in question else "Unknown"

@@ -33,6 +33,15 @@ When writing your application, you can enable development logs by calling the `s
 Datadog.setVerbosity(Log.INFO)
 ```
 
+## RUM Debug Widget
+
+The [RUM Debug Widget][5] provides a floating overlay that displays key metrics such as memory usage, CPU load, and RUM events in real time. It is intended for debugging and development purposes only.
+
+See the [module README][6] for setup instructions.
+
+{{< img src="real_user_monitoring/android/android-rum-debug-widget.png" alt=`The RUM Debug Widget overlay displaying real-time metrics including memory, CPU, threads, and GC rate, with an
+events timeline showing Action, Resource, Slow, and Frozen event markers.` style="width:50%;">}}
+
 ## Migrating to 3.0.0
 
 If you've been using the SDK v2 or SDK v1, there are some breaking changes introduced in version `3.0.0`. See the [migration guide][2] for more information.
@@ -49,3 +58,5 @@ A warning appears when deobfuscation fails for a stack trace. If the stack trace
 [2]: /real_user_monitoring/guide/mobile-sdk-upgrade
 [3]: https://app.datadoghq.com/source-code/setup/rum
 [4]: /real_user_monitoring/guide/debug-symbols
+[5]: https://github.com/DataDog/dd-sdk-android/tree/develop/features/dd-sdk-android-rum-debug-widget
+[6]: https://github.com/DataDog/dd-sdk-android/blob/develop/features/dd-sdk-android-rum-debug-widget/README.md

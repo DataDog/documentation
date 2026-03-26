@@ -613,6 +613,13 @@
       "description": "Create deployment rule returns \"OK\" response"
     }
   ],
+  "TriggerDeploymentGatesEvaluation": [
+    {
+      "group": "deployment_gates",
+      "suffix": "_691804290",
+      "description": "Trigger a deployment gates evaluation returns \"Accepted\" response"
+    }
+  ],
   "UpdateDeploymentGate": [
     {
       "group": "deployment_gates",
@@ -700,6 +707,27 @@
       "group": "fastly_integration",
       "suffix": "",
       "description": "Update Fastly account returns \"OK\" response"
+    }
+  ],
+  "CreateFeatureFlag": [
+    {
+      "group": "feature_flags",
+      "suffix": "",
+      "description": "Create a feature flag returns \"Created\" response"
+    }
+  ],
+  "CreateFeatureFlagsEnvironment": [
+    {
+      "group": "feature_flags",
+      "suffix": "",
+      "description": "Create an environment returns \"Created\" response"
+    }
+  ],
+  "UpdateFeatureFlag": [
+    {
+      "group": "feature_flags",
+      "suffix": "",
+      "description": "Update a feature flag returns \"OK\" response"
     }
   ],
   "MakeGCPSTSDelegate": [
@@ -1279,6 +1307,11 @@
       "group": "observability_pipelines",
       "suffix": "_3024756866",
       "description": "Validate an observability pipeline with OCSF mapper custom mapping returns \"OK\" response"
+    },
+    {
+      "group": "observability_pipelines",
+      "suffix": "_3067748504",
+      "description": "Validate an observability pipeline with OCSF mapper keep_unmatched returns \"OK\" response"
     },
     {
       "group": "observability_pipelines",
@@ -2163,8 +2196,8 @@
   "SyncTeams": [
     {
       "group": "teams",
-      "suffix": "_3215592344",
-      "description": "Sync teams returns \"OK\" response"
+      "suffix": "",
+      "description": "Link Teams with GitHub Teams returns \"No Content\" response"
     }
   ],
   "UpdateTeamLink": [
@@ -2179,6 +2212,11 @@
       "group": "teams",
       "suffix": "",
       "description": "Update a team returns \"OK\" response"
+    },
+    {
+      "group": "teams",
+      "suffix": "_780342264",
+      "description": "Update a team with partial update returns \"OK\" response"
     }
   ],
   "UpdateTeamMembership": [

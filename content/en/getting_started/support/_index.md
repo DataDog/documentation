@@ -5,9 +5,9 @@ further_reading:
 - link: "https://docs.datadoghq.com/agent/troubleshooting/"
   tag: "Documentation"
   text: "Agent Troubleshooting"
-- link: "/account_management/guide/access-your-support-ticket"
+- link: "/account_management/guide/manage-your-support-tickets"
   tag: "Documentation"
-  text: "Access Your Support Ticket"
+  text: "Manage Your support tickets"
 ---
 
 ## Overview

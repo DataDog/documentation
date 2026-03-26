@@ -155,6 +155,10 @@
     "name": "Fastly Integration",
     "description": "Manage your Datadog Fastly integration accounts and services directly through the Datadog API. See the [Fastly integration page](https://docs.datadoghq.com/integrations/fastly/) for more information."
   },
+  "feature-flags": {
+    "name": "Feature Flags",
+    "description": "Manage feature flags and environments."
+  },
   "fleet-automation": {
     "name": "Fleet Automation",
     "description": "Manage automated deployments across your fleet of hosts.\n\nFleet Automation provides two types of deployments:\n\nConfiguration Deployments (`/configure`):\n- Apply configuration file changes to target hosts\n- Support merge-patch operations to update specific configuration fields\n- Support delete operations to remove configuration files\n- Useful for updating Datadog Agent settings, integration configs, and more\n\nPackage Upgrade Deployments (`/upgrade`):\n- Upgrade the Datadog Agent to specific versions"

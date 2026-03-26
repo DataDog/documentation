@@ -40,6 +40,7 @@ The following table shows additional example features and their associated featu
   - [iOS (3.1.0)][3]
   - [Kotlin Multiplatform (1.4.0)][4]
   - [React Native (3.0.0)][5]
+  - [Roku (1.4.0)][6]
 
 ## Setup
 
@@ -99,6 +100,16 @@ DdRum.startFeatureOperation(
 	attributes?: Record<string, any>
 )
 
+```
+{{% /tab %}}
+
+{{% tab "Roku" %}}
+```brightscript
+m.global.datadogRumAgent@.startOperation(
+    name as string,
+    operationKey = invalid as dynamic, ' optional: string or invalid for unkeyed operations
+    context = {} as object             ' optional: AssocArray of custom attributes
+)
 ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -164,6 +175,16 @@ DdRum.succeedFeatureOperation(
 ```
 
 {{% /tab %}}
+
+{{% tab "Roku" %}}
+```brightscript
+m.global.datadogRumAgent@.succeedOperation(
+    name as string,
+    operationKey = invalid as dynamic, ' optional: string or invalid for unkeyed operations
+    context = {} as object             ' optional: AssocArray of custom attributes
+)
+```
+{{% /tab %}}
 {{< /tabs >}}
 
 <div class="alert alert-warning">The <code>operationKey</code> must be the same in the start and end Operation event.</div>
@@ -214,6 +235,17 @@ RUMMonitor.shared().failFeatureOperation(
 	operationKey: String?,
     reason: RUMFeatureOperationFailureReason,  // .error, .abandoned, .other
 	attributes: [AttributeKey: AttributeValue]
+)
+```
+{{% /tab %}}
+
+{{% tab "Roku" %}}
+```brightscript
+m.global.datadogRumAgent@.failOperation(
+    name as string,
+    failureReason as string,           ' "error", "abandoned", or "other"
+    operationKey = invalid as dynamic, ' optional: string or invalid for unkeyed operations
+    context = {} as object             ' optional: AssocArray of custom attributes
 )
 ```
 {{% /tab %}}
@@ -283,3 +315,5 @@ Similarly to metrics, those events come with specific attributes you can use in 
 [3]: https://github.com/DataDog/dd-sdk-ios/releases/tag/3.1.0
 [4]: https://github.com/DataDog/dd-sdk-kotlin-multiplatform/releases/tag/1.4.0
 [5]: https://github.com/DataDog/dd-sdk-reactnative/releases/tag/3.0.0
+
+[6]: https://github.com/DataDog/dd-sdk-roku/releases/tag/1.4.0

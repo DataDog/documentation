@@ -273,15 +273,18 @@ After completing any of the setup methods above, [verify your setup](#verify-you
 {{% collapse-content title="Cloud Shell" level="h3" id="gcp-cloud-shell-setup" %}}
 Use Google Cloud Shell to set up Agentless Scanning for your GCP projects. This method downloads a [setup script](https://github.com/DataDog/integrations-management/tree/main/gcp/agentless) that wraps the [Terraform Datadog Agentless Scanner module for GCP](https://github.com/DataDog/terraform-module-datadog-agentless-scanner/tree/main/gcp#readme), so you do not need to manage Terraform directly. You can review the script before running it.
 
+**Required GCP permissions:** The identity you use in Cloud Shell must have **Owner** or equivalent on the scanner project. The script creates a GCS bucket for Terraform state, so you must also have **Storage** permissions on that project (for example, `roles/storage.admin` or `storage.buckets.create` / `storage.buckets.get` / `storage.buckets.update`). Alternatively, you can **reuse an existing bucket** for Terraform state by setting the `TF_STATE_BUCKET` environment variable to an existing bucket name; the script will not create a bucket in that case. If you see a 403 error on "Setting up Terraform state storage", see [GCP: Failed to create state bucket][26] in the troubleshooting guide.
+
 1. On the [Cloud Security Setup](https://app.datadoghq.com/security/configuration/csm/setup) page, click **Cloud Integrations** > **GCP**.
 1. Expand the account containing the project where you want to deploy the Agentless scanner.
 1. Click the **Enable** button for the GCP project where you want to deploy the Agentless scanner. The **Vulnerability Scanning** modal opens.
 1. In the **How would you like to set up Agentless Scanning?** section, select **Cloud Shell**.
-1. Select an **API key** that has [Remote Configuration](/remote_configuration) enabled.
-1. Create an **Application key**.
+1. Select an **API key** that has [Remote Configuration](/remote_configuration) enabled. An application key is automatically generated.
 1. Select the **GCP projects** you want to scan.
-1. Configure the **Scanner project** (the project where the scanner will be deployed, which must be one of the selected projects) and **Scanner region**.
-1. Click **Open Google Cloud Shell** to open [Google Cloud Shell](https://ssh.cloud.google.com/cloudshell). Review and run the displayed command. The script applies the [Terraform Datadog Agentless Scanner module for GCP](https://github.com/DataDog/terraform-module-datadog-agentless-scanner/tree/main/gcp#readme) to deploy and configure the scanner in your selected project and region.
+1. Configure the scanner:
+   - If you already have scanners deployed, you can choose to **use an existing scanner** (recommended) or **deploy a new scanner**.
+   - If deploying a new scanner, select the Scanner project (which must be one of the selected projects). We recommend installing scanners in every region where you have more than 150 hosts
+1. Click **Copy command** to copy the generated command, and click **Open Google Cloud Shell** to open [Google Cloud Shell](https://ssh.cloud.google.com/cloudshell). Review and run the command. The script applies the [Terraform Datadog Agentless Scanner module for GCP](https://github.com/DataDog/terraform-module-datadog-agentless-scanner/tree/main/gcp#readme) to deploy and configure the scanner in your selected project and region(s).
 1. After the command completes, return to the Datadog setup page and click **Done**.
 {{% /collapse-content %}}
 {{% collapse-content title="Terraform" level="h3" id="gcp-terraform-setup" %}}
@@ -298,6 +301,7 @@ The [Terraform Datadog Agentless Scanner module](https://github.com/DataDog/terr
 After completing any of the setup methods above, [verify your setup](#verify-your-setup).
 
 [25]: https://app.datadoghq.com/security/configuration/csm/setup?active_steps=cloud-accounts&active_sub_step=gcp
+[26]: /security/cloud_security_management/troubleshooting/agentless_scanning#gcp-failed-to-create-state-bucket-storagebucketscreate-403
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -381,7 +385,7 @@ DD_API_KEY="<DD_API_KEY>" \
 DD_APP_KEY="<DD_APP_KEY>" \
 DD_SITE="<DD_SITE>" \
 SCANNER_PROJECT="<SCANNER_PROJECT>" \
-SCANNER_REGIONS="<SCANNER_REGION>" \
+SCANNER_REGIONS="<SCANNER_REGIONS>" \
 PROJECTS_TO_SCAN="<PROJECTS>" \
 python3 gcp_agentless_setup.pyz destroy
 ```
