@@ -3978,6 +3978,18 @@ menu:
           - CreateSyntheticsNetworkTest
         unstable: []
         order: 47
+    - name: Get a fast test result
+      url: '#get-a-fast-test-result'
+      identifier: synthetics-get-a-fast-test-result
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSyntheticsFastTestResult
+        unstable: []
+        order: 52
     - name: Bulk delete tests
       url: '#bulk-delete-tests'
       identifier: synthetics-bulk-delete-tests
