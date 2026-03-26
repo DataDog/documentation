@@ -701,7 +701,7 @@ Adds an agent trigger to a workflow and publishes it, enabling the workflow to b
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /bits_ai/mcp_server#toolsets
+[1]: /bits_ai/mcp_server/setup#toolsets
 [15]: /api/latest/events/
 [20]: /synthetics/
 [21]: /continuous_integration/

@@ -64,7 +64,7 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
        }
     }</code></pre>
 
-1. To enable [product-specific tools][2], include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and LLM Observability tools: 
+1. To enable [product-specific tools](#toolsets), include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and LLM Observability tools: 
 
    <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
 
@@ -73,7 +73,6 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
 <div class="alert alert-info">If remote authentication is not available, use <a href="#local-binary-authentication">local binary authentication</a> instead.</div>
 
 [1]: /getting_started/site/
-[2]: /bits_ai/mcp_server#toolsets
 {{< /site-region >}}
 
 {{< site-region region="gov" >}}
@@ -95,7 +94,7 @@ Connect Claude (including Claude Cowork) to the Datadog MCP Server by adding it 
 1. When prompted for a URL, enter the Datadog MCP Server endpoint for your [Datadog site][2] ({{< region-param key="dd_site_name" >}}). For the correct instructions, use the **Datadog Site** selector on the right side of this documentation page to select your site.
    <pre><code>{{< region-param key="mcp_server_endpoint" >}}</code></pre>
 
-   To enable [product-specific tools][3], include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and LLM Observability tools: 
+   To enable [product-specific tools](#toolsets), include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and LLM Observability tools: 
 
    <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
 
@@ -105,7 +104,6 @@ Connect Claude (including Claude Cowork) to the Datadog MCP Server by adding it 
 
 [1]: https://support.claude.com/en/articles/11175166-get-started-with-custom-connectors-using-remote-mcp
 [2]: /getting_started/site/
-[3]: /bits_ai/mcp_server#toolsets
 {{< /site-region >}}
 
 {{< site-region region="gov" >}}
@@ -127,7 +125,7 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
    url = "{{< region-param key="mcp_server_endpoint" >}}"
    </code></pre>
 
-   To enable [product-specific tools][2], include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and LLM Observability tools: 
+   To enable [product-specific tools](#toolsets), include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and LLM Observability tools: 
 
    <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
 
@@ -140,8 +138,6 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
    This opens your browser to complete the OAuth flow. Codex stores the resulting credentials so you don't need to log in again until the token expires.
 
 1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
-
-[2]: /bits_ai/mcp_server#toolsets
 {{< /site-region >}}
 
 {{< site-region region="gov" >}}
@@ -201,15 +197,13 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
     }
     </code></pre>
 
-1. To enable [product-specific tools][1], include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and LLM Observability tools: 
+1. To enable [product-specific tools](#toolsets), include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and LLM Observability tools: 
 
     <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
 
 1. You are prompted to login through OAuth. The status indicator in the settings displays a green tick when the connection is successful.
 
 1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
-
-[1]: /bits_ai/mcp_server#toolsets
 {{% /collapse-content %}}
 
 {{% collapse-content title="JetBrains AI Assistant" level="h4" expanded=false id="jetbrains-ai-assistant" %}}
@@ -228,15 +222,13 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
     }
     </code></pre>
 
-1. To enable [product-specific tools][1], include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and LLM Observability tools: 
+1. To enable [product-specific tools](#toolsets), include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and LLM Observability tools: 
 
     <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
 
 1. The status indicator in the settings displays a green tick when the connection is successful.
 
 1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
-
-[1]: /bits_ai/mcp_server#toolsets
 {{% /collapse-content %}}
 
 {{% collapse-content title="Agent CLIs" level="h4" expanded=false id="jetbrains-agent-clis" %}}
@@ -281,7 +273,7 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
       }
     }</code></pre>
 
-1. To enable [product-specific tools][1], include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and LLM Observability tools: 
+1. To enable [product-specific tools](#toolsets), include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and LLM Observability tools: 
 
     <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
 
@@ -293,8 +285,6 @@ Example configuration file locations:
 |--------|---------------------|
 | Gemini CLI | `~/.gemini/settings.json` |
 | Kiro CLI | `~/.kiro/settings/mcp.json` |
-
-[1]: /bits_ai/mcp_server#toolsets
 {{< /site-region >}}
 
 {{< site-region region="gov" >}}
@@ -305,6 +295,44 @@ Example configuration file locations:
 [1]: /getting_started/site/
 {{% /tab %}}
 {{< /tabs >}}
+
+## Toolsets
+
+The Datadog MCP Server supports _toolsets_, which allow you to use only the tools you need, saving valuable context window space. These toolsets are available:
+
+- `core`: The default toolset for logs, metrics, traces, dashboards, monitors, incidents, hosts, services, events, and notebooks
+- `alerting`: Tools for validating monitors, searching monitor groups, and retrieving monitor templates
+- `apm`: Tools for in-depth [APM][33] trace analysis, span search, Watchdog insights, and performance investigation
+- `cases`: Tools for [Case Management][41], including creating, searching, and updating cases; managing projects; and linking Jira issues
+- `dashboards`: Tools for retrieving, creating, updating, and deleting [dashboards][43]
+- `dbm`: Tools for interacting with [Database Monitoring][32]
+- `error-tracking`: Tools for interacting with Datadog [Error Tracking][31]
+- `feature-flags`: Tools for managing [feature flags][34], including creating, listing, and updating flags and their environments
+- `llmobs`: Tools for searching and analyzing [LLM Observability][35] spans and experiments
+- `product-analytics`: Tools for interacting with [Product Analytics][40] queries
+- `networks`: Tools for [Cloud Network Monitoring][36] analysis and [Network Device Monitoring][37]
+- `onboarding`: Agentic onboarding tools for guided Datadog setup and configuration
+- `security`: Tools for code security scanning and searching [security signals][38] and [security findings][39]
+- `software-delivery`: Tools for interacting with Software Delivery ([CI Visibility][29] and [Test Optimization][30])
+- `synthetics`: Tools for interacting with Datadog [Synthetic tests][28]
+- `workflows`: Tools for [Workflow Automation][42], including listing, inspecting, executing, and configuring workflows for agent use
+
+To use a toolset, include the `toolsets` query parameter in the endpoint URL when connecting to the MCP Server ([remote authentication](#authentication) only).
+
+{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
+For example, based on your selected [Datadog site][17] ({{< region-param key="dd_site_name" >}}):
+
+- Retrieve only the core tools (this is the default if `toolsets` is not specified):
+  <pre><code>{{< region-param key="mcp_server_endpoint" >}}</code></pre>
+
+- Retrieve only Synthetic Testing-related tools:
+  <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=synthetics</code></pre>
+
+- Retrieve core, Synthetic Testing, and Software Delivery tools:
+  <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=core,synthetics,software-delivery</code></pre>
+
+[17]: /getting_started/site/#navigate-the-datadog-documentation-by-site
+{{< /site-region >}}
 
 ## Supported clients
 
@@ -449,3 +477,19 @@ Local authentication is recommended for Cline and when remote authentication is 
 [25]: /account_management/rbac/permissions/
 [26]: https://app.datadoghq.com/organization-settings/roles
 [27]: https://app.datadoghq.com/organization-settings/preferences
+[28]: /synthetics/
+[29]: /continuous_integration/
+[30]: /tests/
+[31]: /error_tracking/
+[32]: /database_monitoring/
+[33]: /tracing/
+[34]: /feature_flags/
+[35]: /llm_observability/mcp_server/
+[36]: /network_monitoring/cloud_network_monitoring/
+[37]: /network_monitoring/devices/
+[38]: /security/threats/security_signals/
+[39]: /security/misconfigurations/findings/
+[40]: /product_analytics
+[41]: /service_management/case_management/
+[42]: /actions/workflows/
+[43]: /dashboards/

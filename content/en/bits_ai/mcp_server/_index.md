@@ -54,45 +54,6 @@ Datadog also emits two standard metrics that you can use to monitor MCP Server a
 
 Both metrics are tagged with `user_id`, `user_email`, and `client` (the MCP client name, such as `claude` or `cursor`).
 
-## Toolsets
-
-
-The Datadog MCP Server supports _toolsets_, which allow you to use only the tools you need, saving valuable context window space. These toolsets are available:
-
-- `core`: The default toolset for logs, metrics, traces, dashboards, monitors, incidents, hosts, services, events, and notebooks
-- `alerting`: Tools for validating monitors, searching monitor groups, and retrieving monitor templates
-- `apm`: Tools for in-depth [APM][28] trace analysis, span search, Watchdog insights, and performance investigation
-- `cases`: Tools for [Case Management][38], including creating, searching, and updating cases; managing projects; and linking Jira issues
-- `dashboards`: Tools for retrieving, creating, updating, and deleting [dashboards][41]
-- `dbm`: Tools for interacting with [Database Monitoring][26]
-- `error-tracking`: Tools for interacting with Datadog [Error Tracking][25]
-- `feature-flags`: Tools for managing [feature flags][29], including creating, listing, and updating flags and their environments
-- `llmobs`: Tools for searching and analyzing [LLM Observability][30] spans and experiments
-- `product-analytics`: Tools for interacting with [Product Analytics][35] queries
-- `networks`: Tools for [Cloud Network Monitoring][31] analysis and [Network Device Monitoring][32]
-- `onboarding`: Agentic onboarding tools for guided Datadog setup and configuration
-- `security`: Tools for code security scanning and searching [security signals][33] and [security findings][34]
-- `software-delivery`: Tools for interacting with Software Delivery ([CI Visibility][21] and [Test Optimization][24])
-- `synthetics`: Tools for interacting with Datadog [Synthetic tests][20]
-- `workflows`: Tools for [Workflow Automation][39], including listing, inspecting, executing, and configuring workflows for agent use
-
-To use a toolset, include the `toolsets` query parameter in the endpoint URL when connecting to the MCP Server ([remote authentication][27] only). 
-
-{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
-For example, based on your selected [Datadog site][36] ({{< region-param key="dd_site_name" >}}):
-
-- Retrieve only the core tools (this is the default if `toolsets` is not specified):
-  <pre><code>{{< region-param key="mcp_server_endpoint" >}}</code></pre>
-
-- Retrieve only Synthetic Testing-related tools:
-  <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=synthetics</code></pre>
-
-- Retrieve core, Synthetic Testing, and Software Delivery tools:
-  <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=core,synthetics,software-delivery</code></pre>
-
-[36]: /getting_started/site/#navigate-the-datadog-documentation-by-site
-{{< /site-region >}}
-
 ## Available tools
 
 See [Datadog MCP Server Tools][2] for a complete reference of available tools organized by toolset, with example prompts.
@@ -119,24 +80,6 @@ The Datadog MCP Server is under significant development. Use [this feedback form
 [1]: https://modelcontextprotocol.io/
 [2]: /bits_ai/mcp_server/tools
 [16]: /account_management/audit_trail/
-[18]: /account_management/rbac/permissions/#mcp
 [19]: https://docs.google.com/forms/d/e/1FAIpQLSeorvIrML3F4v74Zm5IIaQ_DyCMGqquIp7hXcycnCafx4htcg/viewform
-[20]: /synthetics/
-[21]: /continuous_integration/
-[24]: /tests/
-[25]: /error_tracking/
-[26]: /database_monitoring/
 [27]: /bits_ai/mcp_server/setup
-[28]: /tracing/
-[29]: /feature_flags/
-[30]: /llm_observability/mcp_server/
-[31]: /network_monitoring/cloud_network_monitoring/
-[32]: /network_monitoring/devices/
-[33]: /security/threats/security_signals/
-[34]: /security/misconfigurations/findings/
-[35]: /product_analytics
 [37]: https://help.datadoghq.com/hc/en-us/requests/new
-[38]: /service_management/case_management/
-[39]: /actions/workflows/
-[40]: /bits_ai/mcp_server/setup#local-binary-authentication
-[41]: /dashboards/
