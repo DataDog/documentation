@@ -66,10 +66,6 @@ The default allowlist includes the following domains:
 | Python | `files.pythonhosted.org`, `pypi.org`, `pypi.python.org`, `pythonhosted.org` |
 | Rust | `index.crates.io`, `static.crates.io` |
 
-### Enable proactive fixes
-
-To enable proactive fixes, navigate to **Bits AI Dev** > [**Settings**][12] > **General**, and set the **Enable Proactive Fixes** toggle to **Enable**. You can then enable or disable automatic fixes for **Errors** and **Flaky Tests** individually.
-
 ### Configure custom instructions
 
 The Dev Agent ingests custom instruction files from your repository, including:  
