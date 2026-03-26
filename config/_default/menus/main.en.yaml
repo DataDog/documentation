@@ -6940,11 +6940,16 @@ menu:
       parent: cloudprem_configure
       identifier: cloudprem_ingress
       weight: 503
+    - name: AWS Log Forwarding
+      url: /cloudprem/configure/aws-log-forwarding
+      parent: cloudprem_configure
+      identifier: cloudprem_configure_aws_log_forwarding
+      weight: 504
     - name: Lambda Search Offloading
       url: /cloudprem/configure/lambda
       parent: cloudprem_configure
       identifier: cloudprem_configure_lambda
-      weight: 504
+      weight: 505
     - name: Operate
       url: /cloudprem/operate/
       parent: cloudprem
