@@ -2212,6 +2212,11 @@
       "group": "teams",
       "suffix": "",
       "description": "Update a team returns \"OK\" response"
+    },
+    {
+      "group": "teams",
+      "suffix": "_780342264",
+      "description": "Update a team with partial update returns \"OK\" response"
     }
   ],
   "UpdateTeamMembership": [

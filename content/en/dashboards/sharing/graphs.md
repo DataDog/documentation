@@ -1,6 +1,6 @@
 ---
 title: Share Graphs
-description: Generate embed codes for individual graphs and manage sharing permissions with revocation and IP restrictions.
+description: Generate embed codes for individual graphs and manage sharing permissions with revocation.
 aliases:
     - /graphing/faq/is-there-a-way-to-share-graphs
     - /graphing/faq/is-there-a-way-to-share-or-revoke-previously-shared-graphs
@@ -31,44 +31,38 @@ To share a graph:
 
 {{< img src="dashboards/sharing/graph_share_tab.png" alt="Share tab in a graphing editor" style="width:95%;">}}
 
-All shared graphs are listed in the [Public Sharing Settings page][10]. You can also revoke individual shared graphs or disable all shared graphs from this page.
+All shared graphs are listed in the [Public Sharing Settings page][1]. You can also revoke individual shared graphs or disable all shared graphs from this page.
 
 ## Revoke
 
 To revoke the keys used to share individual (embedded) graphs:
 
-1. Navigate to [**Organization Settings > Public Sharing > Shared Graphs**][1] to see a list of all shared graphs.
+1. Navigate to [**Organization Settings > Public Sharing > Shared Graphs**][2] to see a list of all shared graphs.
 2. Find your graph by using the search bar or by sorting the table columns.
 3. Click on the **Revoke** button next to the graph you want to stop sharing.
 
-## Applying restrictions
-
-You can restrict access on an IP address basis to your dashboard. Email [Datadog support][2] to enable the IP address include listing feature that allows administrators to provide a list of IP addresses that have access to shared dashboards. After it's enabled, manage your restrictions on your organization's [Public Sharing][3] page.
-
 ## API
 
-Datadog has a [dedicated API][4] allowing you to interact with your shared graphs (embeds):
+Datadog has a [dedicated API][3] allowing you to interact with your shared graphs (embeds):
 
 | Endpoint                 | Description                                                             |
 |--------------------------|-------------------------------------------------------------------------|
-| [Get all embeds][5]     | Get a list of previously created embeddable graphs.                     |
-| [Create embed][6]       | Creates a new embeddable graph.                                         |
-| [Get specific embed][7] | Get the HTML fragment for a previously generated embed with `embed_id`. |
-| [Enable embed][8]       | Enable the specified embed.                                             |
-| [Revoke embed][9]       | Revoke the specified embed.                                             |
+| [Get all embeds][4]     | Get a list of previously created embeddable graphs.                     |
+| [Create embed][5]       | Creates a new embeddable graph.                                         |
+| [Get specific embed][6] | Get the HTML fragment for a previously generated embed with `embed_id`. |
+| [Enable embed][7]       | Enable the specified embed.                                             |
+| [Revoke embed][8]       | Revoke the specified embed.                                             |
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: https://app.datadoghq.com/organization-settings/public-sharing/shared-graphs
-[2]: /help/
-[3]: https://app.datadoghq.com/organization-settings/public-sharing/settings
-[4]: /api/latest/embeddable-graphs/
-[5]: /api/latest/embeddable-graphs/#get-all-embeds
-[6]: /api/latest/embeddable-graphs/#create-embed
-[7]: /api/latest/embeddable-graphs/#get-specific-embed
-[8]: /api/latest/embeddable-graphs/#enable-embed
-[9]: /api/latest/embeddable-graphs/#revoke-embed
-[10]: https://app.datadoghq.com/organization-settings/public-sharing
+[1]: https://app.datadoghq.com/organization-settings/public-sharing
+[2]: https://app.datadoghq.com/organization-settings/public-sharing/shared-graphs
+[3]: /api/latest/embeddable-graphs/
+[4]: /api/latest/embeddable-graphs/#get-all-embeds
+[5]: /api/latest/embeddable-graphs/#create-embed
+[6]: /api/latest/embeddable-graphs/#get-specific-embed
+[7]: /api/latest/embeddable-graphs/#enable-embed
+[8]: /api/latest/embeddable-graphs/#revoke-embed

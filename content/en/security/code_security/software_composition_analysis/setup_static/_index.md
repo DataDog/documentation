@@ -17,7 +17,7 @@ To get started:
 3. Choose [where to run SCA scans](#select-where-to-run-static-sca-scans) (Datadog-hosted or CI pipelines).
 4. Follow the setup instructions for your source code provider.
 
-### Supported languages and dependency manifests
+## Supported languages and dependency manifests
 Datadog SCA scans libraries in the following languages using dependency manifests (such as lockfiles and other supported manifest files) to identify vulnerable dependencies.
 
 | Language   | Package Manager    | File                                |
@@ -41,7 +41,7 @@ Datadog SCA scans libraries in the following languages using dependency manifest
 **Note:** If both a `packages.lock.json` and a `.csproj` file are present, the `packages.lock.json` takes precedence and provides more precise version resolution.
 
 ## Select where to run static SCA scans
-By default, scans run when you commit changes that update supported dependency manifests or lockfiles in an enabled repository. You can also run SCA in your CI/CD pipeline; CI jobs are supported for `push` events.
+By default, scans run when you commit changes that update supported dependency manifests or lockfiles in an enabled repository. You can also run SCA in your CI pipelines; CI jobs are supported for `push` events.
 
 ### Scan with Datadog-hosted scanning
 
@@ -54,20 +54,27 @@ To get started, navigate to the [**Code Security** page][2].
 
 <div class="alert alert-info">
 Datadog-hosted SCA scanning is not supported for repositories that contain file names longer than 255 characters. <br>
-For these cases, scan using CI Pipelines.
+For these cases, scan using CI pipelines.
 </div>
 
 ### Scan in CI pipelines
-Datadog Static Code Analysis runs in your CI pipelines using the [`datadog-ci` CLI][8].
 
-Configure your Datadog API and application keys by adding `DD_APP_KEY` and `DD_API_KEY` as secrets. Make sure the application key has the `code_analysis_read` scope.
+Datadog Software Composition Analysis runs in your CI pipelines using the [`datadog-ci` CLI][8].
 
 <div class="alert alert-info">
 You must scan your default branch at least once before results appear in <b>Code Security</b>.
 </div>
 
+{{< whatsnext desc="See instructions based on your CI provider:">}}
+    {{< nextlink href="security/code_security/software_composition_analysis/setup_static/github_actions" >}}GitHub Actions{{< /nextlink >}}
+    {{< nextlink href="security/code_security/software_composition_analysis/setup_static/gitlab_ci" >}}GitLab CI/CD{{< /nextlink >}}
+    {{< nextlink href="security/code_security/software_composition_analysis/setup_static/azure_devops" >}}Azure DevOps{{< /nextlink >}}
+    {{< nextlink href="security/code_security/software_composition_analysis/setup_static/generic_ci_providers" >}}Generic CI Providers{{< /nextlink >}}
+{{< /whatsnext >}}
+
 ## Select your source code management provider
-Datadog SCA supports all source code management providers, with native support for GitHub, GitLab, and Azure DevOps.
+
+Regardless of the scanning mode you use, connect your source code management provider to enable native features such as inline code snippets and pull request comments. Datadog SCA supports all providers and offers native support for GitHub, GitLab, and Azure DevOps.
 
 {{< tabs >}}
 {{% tab "GitHub" %}}
@@ -112,153 +119,9 @@ If you are using another source code management provider, configure SCA to run i
 {{% /tab %}}
 {{< /tabs >}}
 
-### Authentication
+## Link findings to Datadog services and teams
 
-To upload results to Datadog, you must be authenticated. To ensure you're authenticated, configure the following environment variables:
-
-| Name         | Description                                                                                                                | Required | Default         |
-|--------------|----------------------------------------------------------------------------------------------------------------------------|----------|-----------------|
-| `DD_API_KEY` | Your Datadog API key. This key is created by your [Datadog organization][1] and should be stored as a secret.            | Yes      |                 |
-| `DD_APP_KEY` | Your Datadog application key. This key, created by your [Datadog organization][2], should include the `code_analysis_read` scope and be stored as a secret.    | Yes      |                 |
-| `DD_SITE`    | The [Datadog site][12] to send information to. Your Datadog site is {{< region-param key="dd_site" code="true" >}}.       | No       | `datadoghq.com` |
-
-### Running options
-
-There are two ways to run SCA scans from within your CI Pipelines:
-- [**Via Pipelines Integration**](#run-via-pipelines-integration) (GitHub Actions, Azure DevOps)
-- [**Via Customizable Script**](#run-via-customizable-script) (for any provider)
-
-#### Run Via Pipelines Integration
-
-You can run SCA scans automatically as part of your CI/CD workflows using built-in integrations for popular CI providers.
-
-<div class="alert alert-danger">
-Datadog Software Composition Analysis CI jobs are only supported on <code>push</code> event trigger. Other event triggers (<code>pull_request</code>, for example) are not supported and can cause issues with the product.
-</div>
-
-{{< tabs >}}
-{{% tab "GitHub" %}}
-**GitHub Actions**
-
-SCA can run as a job in your GitHub Actions workflows. The action provided below invokes Datadog's recommended SBOM tool, [Datadog SBOM Generator][1], on your codebase and uploads the results into Datadog.
-
-Add the following code snippet in `.github/workflows/datadog-sca.yml`.
-
-Make sure to replace the `dd_site` attribute with the [Datadog site][2] you are using.
-
-{{< code-block lang="yaml" filename="datadog-sca.yml" collapsible="true" >}}
-on: [push]
-
-name: Datadog Software Composition Analysis
-
-jobs:
-  software-composition-analysis:
-    runs-on: ubuntu-latest
-    name: Datadog SBOM Generation and Upload
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v3
-    - name: Check imported libraries are secure and compliant
-      id: datadog-software-composition-analysis
-      uses: DataDog/datadog-sca-github-action@main
-      with:
-        dd_api_key: ${{ secrets.DD_API_KEY }}
-        dd_app_key: ${{ secrets.DD_APP_KEY }}
-        dd_site: "datadoghq.com"
-{{< /code-block >}}
-
-
-**Related GitHub Actions**
-
-[Datadog Static Code Analysis (SAST)][3] analyzes your first-party code. Static Code Analysis can be set up using the [`datadog-static-analyzer-github-action`][4] GitHub action.
-
-[1]: https://github.com/DataDog/datadog-sbom-generator
-[2]: /getting_started/site/
-[3]: /getting_started/code_security/?tab=datadoghosted#linking-services-to-code-violations-and-libraries
-[4]: https://github.com/DataDog/datadog-static-analyzer-github-action
-
-{{% /tab %}}
-{{% tab "Azure DevOps" %}}
-**Azure DevOps Pipelines**
-
-To add a new pipeline in Azure DevOps, go to **Pipelines > New Pipeline**, select your repository, and then create/select a pipeline.
-
-Add the following content to your Azure DevOps pipeline YAML file:
-
-{{< code-block lang="yaml" filename="datadog-sca.yml" collapsible="true" >}}
-trigger:
-  branches:
-    include:
-      # Optionally specify a specific branch to trigger on when merging
-      - "*"
-
-variables:
-  - group: "Datadog"
-
-jobs:
-  - job: DatadogSoftwareCompositionAnalysis
-    displayName: "Datadog Software Composition Analysis"
-    steps:
-      - script: |
-          npm install -g @datadog/datadog-ci
-          export DATADOG_OSV_SCANNER_URL="https://github.com/DataDog/datadog-sbom-generator/releases/latest/download/datadog-sbom-generator_linux_amd64.zip"
-          mkdir -p /tmp/datadog-sbom-generator
-          curl -L -o /tmp/datadog-sbom-generator/datadog-sbom-generator.zip $DATADOG_OSV_SCANNER_URL
-          unzip /tmp/datadog-sbom-generator/datadog-sbom-generator.zip -d /tmp/datadog-sbom-generator
-          chmod 755 /tmp/datadog-sbom-generator/datadog-sbom-generator
-          /tmp/datadog-sbom-generator/datadog-sbom-generator scan --output=/tmp/sbom.json .
-          datadog-ci sbom upload /tmp/sbom.json
-        env:
-          DD_APP_KEY: $(DD_APP_KEY)
-          DD_API_KEY: $(DD_API_KEY)
-          DD_SITE: datadoghq.com
-{{< /code-block >}}
-
-{{% /tab %}}
-{{% tab "Other" %}}
-For all other providers, use the customizable script in the [section below](#run-via-customizable-script) to run SCA scans and upload results to Datadog.
-{{% /tab %}}
-{{< /tabs >}}
-
-#### Run Via Customizable Script
-
-If you use a different CI provider or want more control, you can run SCA scans using a customizable script. This approach lets you manually install and run the scanner, then upload results to Datadog from any environment.
-
-<div class="alert alert-info">
-<b>For non-GitHub repositories</b>, run your first scan on the default branch.<br/>If your branch name is custom (not <b>master</b>, <b>main</b>, <b>default</b>, <b>stable</b>, <b>source</b>, <b>prod</b>, or <b>develop</b>), upload once and set the default branch in <a href="https://app.datadoghq.com/source-code/repositories">Repository Settings</a>.
-</div>
-
-Prerequisites:
-- Unzip
-- Node.js 14 or later
-
-```bash
-# Set the Datadog site to send information to
-export DD_SITE="{{< region-param key="dd_site" code="true" >}}"
-
-# Install dependencies
-npm install -g @datadog/datadog-ci
-
-# Download the latest Datadog SBOM Generator:
-# https://github.com/DataDog/datadog-sbom-generator/releases
-DATADOG_SBOM_GENERATOR_URL=https://github.com/DataDog/datadog-sbom-generator/releases/latest/download/datadog-sbom-generator_linux_amd64.zip
-
-# Install Datadog SBOM Generator
-mkdir /datadog-sbom-generator
-curl -L -o /datadog-sbom-generator/datadog-sbom-generator.zip $DATADOG_SBOM_GENERATOR_URL
-unzip /datadog-sbom-generator/datadog-sbom-generator.zip -d /datadog-sbom-generator
-chmod 755 /datadog-sbom-generator/datadog-sbom-generator
-
-# Run Datadog SBOM Generator to scan your dependencies
-/datadog-sbom-generator/datadog-sbom-generator scan --output=/tmp/sbom.json /path/to/repository
-
-# Upload results to Datadog
-datadog-ci sbom upload /tmp/sbom.json
-```
-
-<div class="alert alert-info">
-This script uses the Linux x86_64 datadog-sbom-generator. For other systems, update the download URL. See all releases <a href="https://github.com/DataDog/datadog-sbom-generator/releases">here</a>.
-</div>
+{{% security-products/link-findings-to-datadog-services-and-teams %}}
 
 ## Upload third-party SBOM to Datadog
 
@@ -283,11 +146,6 @@ datadog-ci sbom upload /path/to/third-party-sbom.json
 <div class="alert alert-info">
 If you already have automatic scanning enabled for a repository, a manual upload will replace any existing result for that commit.
 </div>
-
-
-## Link findings to Datadog services and teams
-
-{{% security-products/link-findings-to-datadog-services-and-teams %}}
 
 
 ## Filter by reachable vulnerabilities
@@ -365,7 +223,7 @@ Datadog stores findings in accordance with our [Data Rentention Periods](https:/
 [5]: /getting_started/code_security/?tab=datadoghosted#linking-services-to-code-violations-and-libraries
 [6]: /account_management/api-app-keys/
 [7]: /integrations/github
-[8]: /integrations/guide/source-code-integration
+[8]: https://github.com/DataDog/datadog-ci
 [9]: /security/code_security/dev_tool_int/github_pull_requests/
 [10]: https://github.com/DataDog/datadog-sbom-generator
 [12]: /getting_started/site/
