@@ -19,7 +19,7 @@ title: Guides d'utilisation de la solution Database Monitoring
     {{< nextlink href="database_monitoring/guide/build_apps_with_dbm_api" >}}Créer des applications avec l'API Database Monitoring{{< /nextlink >}}
 {{< /whatsnext >}}
 
-{{< whatsnext desc="Guides SQL Server :" >}
+{{< whatsnext desc="Guides SQL Server :" >}}
     {{< nextlink href="database_monitoring/guide/sql_alwayson" >}}Explorer les groupes de disponibilité AlwaysOn de SQL Server{{< /nextlink >}}
     {{< nextlink href="database_monitoring/guide/sql_deadlock" >}}Configurer la surveillance des deadlocks sur SQL Server{{< /nextlink >}}
     {{< nextlink href="database_monitoring/guide/sql_extended_events" >}}Configurer la collecte des fins de requêtes et des erreurs de requêtes sur SQL Server{{< /nextlink >}}
