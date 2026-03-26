@@ -102,7 +102,6 @@ After you have connected your warehouse, create a Metric SQL Model, map your dat
 
 Aggregation methods determine how Datadog summarizes data for each experiment subject. An experiment subject is the unit that is randomized for the experiment. This is typically a user, but can also be an organization, session, or device, depending on how you set up your experiment.
 
-
 Datadog Experiments support the following aggregation types:
 
 - **Count of events** (default)
@@ -123,70 +122,6 @@ By default, Datadog divides your metric by the number of experiment subjects. Cl
 Datadog accounts for correlations between the numerator and denominator using the [delta method][2].
 
 {{< img src="/product_analytics/experiment/exp_create_ratio.png" alt="The Edit Metric page showing the '/metric/explorer' event with Count of events aggregation, the Create Ratio button highlighted, a Mark as certified toggle, Experiment settings and Units sections, and the metric named 'Visits to Metric Explorer'." style="width:90%;" >}}
-
-## Examples
-
-The following examples assume you have configured your [client SDK](#prerequisites) and are collecting data, or have connected your [data warehouse](#prerequisites-1) to Datadog. 
-
-### Conversion metric
-
-A conversion metric measures the percentage of experiment subjects who complete a specific action. 
-
-This example launches an experiment to determine the impact of a feature (for example, showing a star rating of the product based on buyer reviews) on users who performed the **"click Add to Cart"** action. 
-
-1. **Create a metric**. Create a **Count of unique users** metric on the **"click Add to Cart"** action.
-    1. Optionally, filter to a page of interest to measure the conversion through a two-step funnel where the first step is the users session begining at a specific page and the second step is the action **"click Add to Cart"**. 
-
-{{< img src="/product_analytics/experiment/exp_define_metrics_conversion_metric_1.png" alt="The Create Metric page showing a 'Conversion metric' with the 'click on ADD TO CART' event selected, the Count of unique users aggregation highlighted in the dropdown with a description reading 'The number of users who performed the event', and a real-time bar chart on the right." style="width:90%;" >}}
-
-
-1. **Create an experiment**. Create a draft experiment and optionally add your hypothesis on the [Experiments][13] page in Datadog Product Analytics.
-
-1. **Create a feature flag**. Create a feature flag to assign users to experiment groups. When subjects (users) visit the page, [subject type attributes][12] (`usr.id`) are randomly assigned to one of two variants: control (False) or treatment (True).
-
-1. **Launch your experiment**. Since only users who visit the page are assigned to the experiment, Datadog calculates this metric using this ratio and gives you the per-user conversion rate for each variant.
-
-$$\text"Number of users that click Add to Cart" /{\text"Number of users enrolled into this variant"}$$
-
-
-You can select your experiment on the [Experiments][13] page to analyze the results. Follow the troubleshooting guide if your experiment results to not appear. 
-
-### Down-funnel conversion rate
-
-Now imagine running a similar experiment on your homepage. To measure conversion on a page later in the funnel, add a ratio to your metric:
-
-[image]
-
-Instead of dividing by the number of users enrolled (which includes all homepage visitors), Datadog divides by the number of users who viewed a product page:
-
-$$\text"Number of users that click Add to Cart" /{\text"Number of users that visit the Product Page"}$$
-
-
-<div class="alert alert-info">While it can be informative to understand down-funnel metrics, Datadog recommends making decisions based on per-assigned-user metrics. Down-funnel conversion metrics may not reflect decreases to top-of-funnel performance.</div>
-
-### Revenue
-
-If you want to attribute business-level impact, create success metrics based on your own data warehouse. For instance, you might have a revenue table that accounts for failed payments and returns. This table is likely more consistent with internal reporting than frontend purchase events.
-
-You can add a revenue table from your warehouse as a [Metric SQL Model](#create-a-metric-sql-model). For instance, create a SQL model such as:
-
-```sql
-SELECT * FROM data_mart.purchase_revenue
-```
-
-After you've mapped the purchase timestamp and amount in Datadog, you can create a per-subject (user) revenue metric:
-
-[image]
-
-For a user-randomized test, Datadog computes revenue as follows:
-
-$$\text"Total revenue for users in this variant" /{\text"Number of users assigned to this variant"}$$
-
-### Page load time
-
-Datadog recommends measuring performance metrics for every experiment to understand impacts to end user experience. For instance, you can measure p90 Largest Contentful Paint using a percentile metric:
-
-[image]
 
 ## Advanced options
 
