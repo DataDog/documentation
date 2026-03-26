@@ -158,11 +158,9 @@ Use the following advanced options to customize how Single Step Instrumentation 
 
 SSI supports multiple injection modes, which control how the injector and APM library files are delivered to your application containers. You typically do not need to configure this setting manually. Consider adjusting it if you notice significant pod startup delays or higher-than-expected resource usage (CPU, memory) during pod initialization. For more on how the injector works, see [Injector Behavior with Single Step Instrumentation][41].
 
-**Note**: For Agent 7.75.0 and earlier, the default mode is `init_container`. For Agent 7.76.0 and later, the default mode is `auto`.
 
 | Mode | Description | Requirements |
 |------|-------------|--------------|
-| `auto` | Automatically selects the optimal injection method based on cluster capabilities. | Agent 7.76.0+, Helm Chart or Datadog Operator |
 | `init_container` | Uses init containers to copy injector and APM library files into application containers. | Agent deployed with Helm Chart or Datadog Operator |
 | `csi` | **In Preview.** Mounts injector and APM library files using the [Datadog CSI driver][40]. Reduces pod startup time compared to init container mode. | Agent 7.76.0+, CSI driver 1.2.0+, Helm Chart 3.178.1+ |
 
@@ -182,7 +180,7 @@ datadog:
       injectionMode: <mode>
 ```
 
-Supported values: `auto`, `init_container`, `csi`.
+Supported values: `init_container`, `csi`.
 
 {{% /tab %}}
 {{% tab "Datadog Operator" %}}
@@ -202,7 +200,7 @@ metadata:
     admission.datadoghq.com/apm-inject.injection-mode: "<mode>"
 ```
 
-Supported values: `auto`, `init_container`, `csi`.
+Supported values: `init_container`, `csi`.
 
 ### Target specific workloads
 
