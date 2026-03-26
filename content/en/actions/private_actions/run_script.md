@@ -1,6 +1,6 @@
 ---
 title: Run a Script with the Private Action Runner
-disable_toc: false
+description: Learn how to use the Private Action Runner to run custom scripts and automate tasks inside your private network.
 ---
 
 ## Overview
@@ -23,7 +23,7 @@ The following table outlines supported use cases for the script action:
 |-----------------------------------------------------|-------------|------------|------------------------------------------------------------------------------------------------------------------------------|
 | Running Linux binaries (`ls`, `rm`, `find`, `curl`) | Yes         | Yes        | For standalone runners, the relevant files must be accessible to the container.          |
 | Running CLIs (`aws`, `terraform`, `kubectl`)        | Yes         | Yes        | For standalone runners, the CLI and credentials must be available in the image. For agent-based runners, tools must be installed on the host.                                                       |
-| Running bash scripts                                | Yes         | Yes        | For standalone runners, scripts can be mounted inside the container. Use the [large image][12] to get access to the Python interpreter. |
+| Running bash scripts                                | Yes         | Yes        | For standalone runners, scripts can be mounted inside the container. Use the [large image][1] to get access to the Python interpreter. |
 | Running PowerShell scripts                          | Yes (Windows) | No       | Supported on agent-based Windows runners only.                                             |
 | Running privileged commands (`systemctl restart`)   | Yes         | No         | For agent-based runners, grant permissions to the runner user. For standalone runners, container sandboxing prevents privileged host access.                                         |
 
@@ -32,11 +32,11 @@ The following table outlines supported use cases for the script action:
 **For agent-based runners:**
 - Datadog Agent version 7.77.0 or later
 - `com.datadoghq.script.runPredefinedScript` (Linux) or `com.datadoghq.script.runPredefinedPowershellScript` (Windows) in your actions allowlist
-- See [Use Private Actions][1] for installation instructions
+- See [Use Private Actions][2] for installation instructions
 
 **For standalone runners:**
-- PAR version 1.7.0 or later. To create a new PAR, see [Use Private Actions][1]. To update your PAR version, see [Update the Private Action Runner][11].
-- For CLI tools not included in the base or the [large image][12], create a custom Docker image.
+- PAR version 1.7.0 or later. To create a new PAR, see [Use Private Actions][2]. To update your PAR version, see [Update the Private Action Runner][3].
+- For CLI tools not included in the base or the [large image][1], create a custom Docker image.
 
 ## Configuration
 
@@ -72,7 +72,9 @@ chmod 440 /etc/sudoers.d/dd-agent
 
 ### Configure the connection
 
-If you selected `com.datadoghq.script.runPredefinedScript` in your action allowlist, you should already have a "script" connection linked to your runner. Otherwise, create a new connection and specify `/etc/datadog-agent/private-action-runner/script-config.yaml` as the **path to file**. For more information, see [Handling Private Action Credentials][17].
+If you selected `com.datadoghq.script.runPredefinedScript` in your action allowlist, you should already have a "script" connection linked to your runner. Otherwise, create a new connection and specify `/etc/datadog-agent/private-action-runner/script-config.yaml` as the **path to file**. For more information, see [Handling Private Action Credentials][4].
+
+[4]: /actions/private_actions/private_action_credentials
 
 {{% /tab %}}
 
@@ -128,7 +130,9 @@ icacls "C:\<your-file-path>"
 
 ### Configure the connection
 
-If you selected `com.datadoghq.script.runPredefinedPowershellScript` in your action allowlist, you should already have a "script" connection linked to your runner. Otherwise, create a new connection and specify `C:\ProgramData\Datadog\private-action-runner\powershell-script-config.yaml` as the **path to file**. For more information, see [Handling Private Action Credentials][17].
+If you selected `com.datadoghq.script.runPredefinedPowershellScript` in your action allowlist, you should already have a "script" connection linked to your runner. Otherwise, create a new connection and specify `C:\ProgramData\Datadog\private-action-runner\powershell-script-config.yaml` as the **path to file**. For more information, see [Handling Private Action Credentials][4].
+
+[4]: /actions/private_actions/private_action_credentials
 
 {{% /tab %}}
 
@@ -136,14 +140,14 @@ If you selected `com.datadoghq.script.runPredefinedPowershellScript` in your act
 
 ### Create a script connection
 
-1. After [setting up a PAR][1], navigate to [**Connections**][2].
+1. After [setting up a PAR][2], navigate to [**Connections**][5].
 1. Click **New Connection**.
 1. Select **Script**.
 1. Enter a **Connection Name**.
-1. In the **Private Action Runner** dropdown, select your PAR. 
-1. Copy and paste the credential file template into your PAR's configuration directory with the commands you want to run. 
+1. In the **Private Action Runner** dropdown, select your PAR.
+1. Copy and paste the credential file template into your PAR's configuration directory with the commands you want to run.
 1. In **Path to file**, ensure the file path matches the path on your runner's filesystem (the default should be sufficient in most use cases).
-1. Click **Next, Confirm Access**. 
+1. Click **Next, Confirm Access**.
 1. After configuring permissions, click **Create**.
 1. Select this new connection when using the script action in your workflows or apps.
 
@@ -179,6 +183,9 @@ runPredefinedScript:
       required:
         - echoValue
 ```
+
+[2]: /actions/private_actions/use_private_actions/
+[5]: /service_management/app_builder/connections/
 
 {{% /tab %}}
 
@@ -233,7 +240,7 @@ The following options are available for standalone runners only.
 
 ### Large image
 
-If you want to use tools like [Python][13], SSH, [AWS CLI][14], [Terraform][15], or the [gcloud CLI][16], use the `gcr.io/datadoghq/private-action-runner:v{{< private-action-runner-version "private-action-runner" >}}-large` image instead of the default image.
+If you want to use tools like [Python][6], SSH, [AWS CLI][7], [Terraform][8], or the [gcloud CLI][9], use the `gcr.io/datadoghq/private-action-runner:v{{< private-action-runner-version "private-action-runner" >}}-large` image instead of the default image.
 
 ### Custom images
 
@@ -278,20 +285,12 @@ echo "Hello from the shell script!"
 print("Hello from Python script!")
 ```
 
-[1]: /actions/private_actions/use_private_actions/#set-up-a-private-action-runner
-[2]: https://app.datadoghq.com/actions/connections
-[3]: https://hub.docker.com/r/datadog/private-action-runner-dev
-[4]: https://app.datadoghq.com/workflow/
-[5]: https://app.datadoghq.com/app-builder/
-[6]: https://api.datadoghq.com/api/v2/on-prem-management-service/runner/latest-image
-[7]: https://app.datadoghq.com/organization-settings/remote-config?resource_type=agents
-[8]: https://github.com/DataDog/helm-charts/blob/main/charts/private-action-runner/CHANGELOG.md
-[9]: https://github.com/DataDog/helm-charts/blob/main/charts/private-action-runner/values.yaml
-[10]: https://app.datadoghq.com/actions/action-catalog#/com.datadoghq.script.runPredefinedScript
-[11]: /actions/private_actions/update_private_action_runner/
-[12]: /actions/private_actions/run_script/#large-image
-[13]: https://www.python.org/
-[14]: https://aws.amazon.com/cli/
-[15]: https://developer.hashicorp.com/terraform/cli/commands
-[16]: https://docs.cloud.google.com/sdk/docs/install
-[17]: /actions/private_actions/private_action_credentials
+[1]: /actions/private_actions/run_script/#large-image
+[2]: /actions/private_actions/use_private_actions/#set-up-a-private-action-runner
+[3]: /actions/private_actions/update_private_action_runner/
+[4]: /actions/private_actions/private_action_credentials
+[5]: https://app.datadoghq.com/actions/connections
+[6]: https://www.python.org/
+[7]: https://aws.amazon.com/cli/
+[8]: https://developer.hashicorp.com/terraform/cli/commands
+[9]: https://docs.cloud.google.com/sdk/docs/install
