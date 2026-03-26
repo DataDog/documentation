@@ -40,7 +40,7 @@ To create a metric for your experiment:
 1. Select an [aggregation method](#aggregation-methods) from the dropdown. The default is **Count of events**.
 1. Click the **Add filter** icon to [filter your metric](#add-filters) by additional properties.
 1. (Optional) Set **Units** for your metric. Count of unique users metrics are typically reported as a percentage. For other metrics, units depend on your business context.
-1. (Optional) Select **Mark as certified** to indicate this metric is approved for important decision-making. Requires the **Product Analytics Certified Metrics Write** permission.
+1. (Optional) Toggle on **Mark as certified** to indicate this metric is approved for important decision-making. This requires the **Product Analytics Certified Metrics Write** permission.
 1. Add a **Name** and **Description** (optional) to your metric.
 1. Click **Save**.
 
@@ -57,6 +57,8 @@ You can filter your metric by:
 
 ## Metrics from warehouse data
 
+### Prerequisites
+
 To create a metric from your warehouse data, you must connect the warehouse to Datadog. Select your warehouse to get started:
 
 - [BigQuery][8]
@@ -68,71 +70,85 @@ After you have connected your warehouse, create a Metric SQL Model, map your dat
 
 ### Create a Metric SQL Model
 
-1. Navigate to the **Metrics SQL Models** page within Datadog Product Analytics.
-2. Click **+ Create Metric SQL Model**.
-3. In the **Write SQL** section, enter a SQL query that returns your data of interest. This is often a `SELECT * FROM` statement but also supports more advanced SQL.
-4. Name your new Metric SQL Model.
+<!-- add a adentence about how they flow -->
 
-### Map your warehouse data to Datadog
+#### Write your SQL
+1. Navigate to the [Metrics page][1] in Datadog Product Analytics.
+1. Select the **Metric SQL Models** tab.
+1. Click **Create Metric SQL Model**.
+1. In the **Write SQL** section, enter a SQL query that returns your data of interest. This is often a `SELECT * FROM` statement but also supports more advanced SQL.
+1. Click **Run** to see a preview of your data.
 
+{{< img src="/product_analytics/experiment/exp_create_metric_sql_models_writesql.png" alt="The Write SQL section of the Create Metric SQL Model page showing a SELECT query against a logs usage table, with a successful query preview below displaying ORG_ID, USAGE_HOUR, and USAGE_HOUR_END columns." style="width:80%;" >}}
+
+#### Structure your model
+1. Name your new **Metric SQL Model**. The previous image names this model **Logs Usage**.
+1. (Optional) Toggle on **Mark as certified** to indicate this metric is approved for important decision-making. This requires the **Product Analytics Certified Metrics Write** permission.
 1. Map the columns in your table to the following:
-   - **Timestamp**: The timestamp associated with the metric event. Only rows after a subject is enrolled into the experiment are included in the analysis.
-   - **Subject type attribute**: This is typically the `usr.id` associated with the event. You can define this attribute in the [Subject Types][12] page.
-   - **Measures** (optional): Numeric columns to aggregate when creating metrics. Each Metric SQL Model includes an "each record" measure automatically, which counts the number of relevant rows for a specific experiment subject.
-2. Click **Save**.
+   - **Timestamp**: The timestamp associated with the metric event. Only the rows created after a subject is enrolled into the experiment are included in the analysis.
+   - **Subject Type**: The attribute that is used to randomly populate the experiment groups. This is typically the `usr.id` (for an individual user) or `usr.org_id` (for an organization account). You can define this attribute on the [Subject Types][12] page.
+   - **Measures** (optional): The numeric columns to aggregate when creating metrics. Each Metric SQL Model automatically includes an **each record** measure, which counts the number of relevant rows for a specific experiment subject. Adding measures allow them to be reused to create 
+2. Click **Create Metric SQL Model**.
 
-
+{{< img src="/product_analytics/experiment/exp_create_metric_sql_models_structure_1.png" alt="The Structure your model panel with the Metric SQL Model Name field set to 'Logs Usage' and highlighted, a Mark as certified toggle, Timestamp column set to USAGE_HOUR, Subject Type set to Organization with ORG_ID selected, a Measures dropdown showing 'Logs Usage (each record)', and the Create Metric SQL Model button highlighted." style="width:80%;" >}}
 
 ### Create a metric using your SQL model
 
 1. Navigate to the [Metrics page][1] within Datadog Product Analytics.
-2. Click **+ Create Metric** at the top right corner.
-3. Click **Select an Event** to see a list of Metric SQL Models and select the relevant model.
-4. Select one of the [aggregation methods](#aggregation-methods) described below.
+1. Select the **Metrics** tab.
+1. Click **Create Metric** at the top right corner.
+1. Click **Select an Event** to see a list of Metric SQL Models under their data source and select the relevant model (for example, **Logs Usage** under **Snowflake**).
+1. Select one of the [aggregation methods](#aggregation-methods) to specify how Datadog aggregates data to the experiment subject level.
+
+{{< img src="/product_analytics/experiment/exp_create_metric_from_sqlmodel1.png" alt="The Create Metric event picker showing All Events selected, with event types including Snowflake, Actions, Views, Sessions, Errors, and Long Tasks on the left, and the Logs Usage SQL model highlighted under Snowflake on the right." style="width:80%;" >}}
 
 ## Aggregation methods
 
-After you've selected your event of interest, you can specify an aggregation method. Aggregation methods specify how Datadog aggregates data to the experiment subject (often user) level.
+Aggregation methods determine how Datadog summarizes data for each experiment subject. An experiment subject is the unit that is randomized for the experiment. This is typically a user, but can also be an organization, session, or device, depending on how you set up your experiment.
 
-Supported aggregation types include:
+
+Datadog Experiments support the following aggregation types:
 
 - **Count of events** (default)
 - **Count of unique users with the event** (useful for conversion metrics)
 - **Sum of an event property** (useful for revenue metrics)
-- **Distinct values of an event property** (useful for distinct pages viewed metrics)
+- **Distinct values of an event property** (useful for page view metrics)
 - **Percentile of an event property** (useful for latency metrics)
-- **Average of an event property**
+- **Average of an event property** (useful for performance or satisfaction metrics)
 
-{{< img src="/product_analytics/experiment/exp_default_metric_agg.png" alt="Dropdown menu to select the aggregation method for metrics." style="width:90%;" >}}
+{{< img src="/product_analytics/experiment/exp_default_metric_agg.png" alt="The aggregation method dropdown in the Define the metric panel showing Count of unique users, Count of events (selected), and Sum of... as options, with a description reading 'The number of events performed' on the right." style="width:90%;" >}}
 
-Metrics are computed per experiment subject (typically user). For instance, a **count of events** metric computes the total number of events for all users in the variant divided by the number of users in that variant.
-
-<!-- ADD THE CALCULATION? -->
-
+Datadog computes metrics (or aggregations?) for each experiment subject. For example, a **Count of events** aggregation on users calculates the total number of events for all users in the variant (experiment group) divided by the number of users in that variant.
 
 ### Ratio metrics
 
-You can also choose to normalize metrics by a different denominator. To do this, click **Create ratio**. This allows you to normalize your metric by another event, using any of the aggregation methods above.
+By default, Datadog divides your metric by the number of experiment subjects. Click **Create ratio** to divide by a different event instead. This lets you measure conversion within a specific subset of users, giving you a more accurate picture of behavior at a specific step in the funnel.
 
-{{< img src="/product_analytics/experiment/exp_create_ratio.png" alt="Button used to create a ratio from the metric." style="width:90%;" >}}
+Datadog accounts for correlations between the numerator and denominator using the [delta method][2].
 
-Datadog's statistical engine accounts for correlations between the numerator and denominator using the [delta method][2].
+{{< img src="/product_analytics/experiment/exp_create_ratio.png" alt="The Edit Metric page showing the '/metric/explorer' event with Count of events aggregation, the Create Ratio button highlighted, a Mark as certified toggle, Experiment settings and Units sections, and the metric named 'Visits to Metric Explorer'." style="width:90%;" >}}
 
 ## Examples
 
 ### Conversion metric
 
-Imagine measuring conversion through a basic, two-step funnel. When users visit the page, they are randomly assigned one of two variants: baseline or treatment. To measure add-to-cart conversion, create a **Count of unique users** metric on the "click Add to Cart" action and optionally filter to the page of interest.
+A conversion metric measures the percentage of experiment subjects who complete a specific action.
+
+Use case: measuring conversion through a two-step funnel.
+
+Experiment steps: 
+1. When users visit the page, subjects are randomly assigned to one of two variants: baseline or treatment. 
+1. Create a **Count of unique users** metric on the **"click Add to Cart"** action.
+1. Optionally, filter to the page of interest.
 
 [image]
 
-Datadog calculates this metric as:
+Since only users who visit the page are assigned to the experiment, Datadog calculates this metric as:
 
 
 $$\text"Number of users that click Add to Cart" /{\text"Number of users enrolled into this variant"}$$
 
-
-Since only users who visit the page are assigned to the experiment, this formula gives the per-user conversion rate.
+This gives you the per-user conversion rate for each variant.
 
 ### Down-funnel conversion rate
 
@@ -145,7 +161,7 @@ Instead of dividing by the number of users enrolled (which includes all homepage
 $$\text"Number of users that click Add to Cart" /{\text"Number of users that visit the Product Page"}$$
 
 
-<div class="alert alert-info">While it can be informative to understand down-funnel metrics, we recommend making decisions based on per-assigned-user metrics. Down-funnel conversion metrics may not reflect decreases to top-of-funnel performance.</div>
+<div class="alert alert-info">While it can be informative to understand down-funnel metrics, Datadog recommends making decisions based on per-assigned-user metrics. Down-funnel conversion metrics may not reflect decreases to top-of-funnel performance.</div>
 
 ### Revenue
 
@@ -163,11 +179,7 @@ After you've mapped the purchase timestamp and amount in Datadog, you can create
 
 For a user-randomized test, Datadog computes revenue as follows:
 
-```
-   Total revenue for users in this variant
------------------------------------------------
-   Number of users assigned to this variant
-```
+$$\text"Total revenue for users in this variant" /{\text"Number of users assigned to this variant"}$$
 
 ### Page load time
 
@@ -193,6 +205,16 @@ Datadog supports several advanced options specific to experimentation:
 
 ## Further reading
 {{< partial name="whats-next/whats-next.html" >}}
+
+<!-- Proposed page structure (goal-oriented, first-time user):
+## Overview
+## Metrics from Product Analytics or RUM data
+## Metrics from warehouse data
+## Examples
+## Aggregation methods
+   ### Ratio metrics
+## Advanced options
+-->
 
 [1]: https://app.datadoghq.com/product-analytics/experimentation-metrics
 [2]: https://en.wikipedia.org/wiki/Delta_method
