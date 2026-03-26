@@ -14333,6 +14333,70 @@ menu:
         unstable:
           - v2
         order: 5
+    - name: Widgets
+      url: /api/latest/widgets/
+      identifier: widgets
+      generated: true
+    - name: Update a widget
+      url: '#update-a-widget'
+      identifier: widgets-update-a-widget
+      parent: widgets
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateWidget
+        unstable: []
+        order: 3
+    - name: Get a widget
+      url: '#get-a-widget'
+      identifier: widgets-get-a-widget
+      parent: widgets
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetWidget
+        unstable: []
+        order: 2
+    - name: Delete a widget
+      url: '#delete-a-widget'
+      identifier: widgets-delete-a-widget
+      parent: widgets
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteWidget
+        unstable: []
+        order: 4
+    - name: Create a widget
+      url: '#create-a-widget'
+      identifier: widgets-create-a-widget
+      parent: widgets
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateWidget
+        unstable: []
+        order: 1
+    - name: Search widgets
+      url: '#search-widgets'
+      identifier: widgets-search-widgets
+      parent: widgets
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - SearchWidgets
+        unstable: []
+        order: 5
     - name: Workflow Automation
       url: /api/latest/workflow-automation/
       identifier: workflow-automation
