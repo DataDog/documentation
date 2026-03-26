@@ -69,8 +69,8 @@ Below are Datadog's tagging requirements:
     All other characters (including, but not limited to, commas, emoji, and spaces) are converted to underscores.
 
 - Tags can be **up to 200 characters** long. If the tag has the format `<key>:<value>`, the `<key>`, `:`, and `<value>` all count toward the character limit.
-- For log attributes and span tags, tags are case-sensitive. For metric tags, tags are converted to lowercase.
-    - Because metric tags are converted to lowercase, `CamelCase` tags are not recommended for metrics. Authentication (crawler) based integrations also convert camel case tags to underscores before lowercasing, for example `TestTag` --> `test_tag`.
+- [Span tags][26] and metric tags are normalized to lowercase. Because of this, using `CamelCase` is not recommended. Authentication (crawler) based integrations also convert camel case tags to underscores before lowercasing, for example `TestTag` --> `test_tag`.
+    - Separate from tags, [span attributes][27] and log attributes are case-sensitive, and are not normalized.
 - When using the format `<key>:<value>`, the key always precedes the first colon of the global tag definition. For example:
 
     | Tag                | Key           | Value          |
@@ -173,3 +173,5 @@ For more information, see [Using Tags][1].
 [23]: /account_management/billing/usage_attribution/
 [24]: /getting_started/tagging/using_tags/#ci-visibility
 [25]: /containers/troubleshooting/log-collection?tab=datadogoperator#missing-host-level-tags-on-new-hosts-or-nodes
+[26]: /tracing/trace_collection/tracing_naming_convention/#span-tags
+[27]: /tracing/trace_collection/tracing_naming_convention/#span-attributes
