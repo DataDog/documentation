@@ -14,7 +14,19 @@ further_reading:
 - link: 'https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_test'
   tag: 'External Site'
   text: 'Manage Synthetic Tests with Terraform'
+products:
+- name: API Tests
+  url: /synthetics/api_tests/
+  icon: synthetics
+- name: Multistep API Tests
+  url: /synthetics/multistep/
+  icon: synthetics
+- name: Browser Tests
+  url: /synthetics/browser_tests/
+  icon: browser
 ---
+
+{{< product-availability >}}
 
 ## Overview
 
