@@ -51,8 +51,8 @@ $conv-float-btn-bg-hover: #4f2384;
     position: fixed;
     inset: 0;
     z-index: 9999;
-    background: rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(4px);
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(2px);
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.25s ease, visibility 0.25s ease;
@@ -119,9 +119,9 @@ $conv-float-btn-bg-hover: #4f2384;
     right: -2%;
     height: 55%;
     background:
-        radial-gradient(ellipse at 20% 85%, rgba(199, 230, 253, 0.45) 0%, transparent 55%),
-        radial-gradient(ellipse at 75% 95%, rgba(255, 209, 228, 0.3) 0%, transparent 50%),
-        radial-gradient(ellipse at 45% 100%, rgba($conv-primary-200, 0.5) 0%, transparent 55%);
+        radial-gradient(ellipse at 15% 85%, rgba(#B0EBFF, 0.4) 0%, transparent 55%),
+        radial-gradient(ellipse at 75% 90%, rgba(#FFD1E4, 0.3) 0%, transparent 50%),
+        radial-gradient(ellipse at 45% 100%, rgba($conv-primary-400, 0.4) 0%, transparent 55%);
     pointer-events: none;
     z-index: 0;
     filter: blur(25px);
@@ -148,10 +148,19 @@ $conv-float-btn-bg-hover: #4f2384;
     gap: 6px;
 }
 
+.conv-search-logo-group {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
 .conv-search-title-icon {
     width: 36px;
     height: 36px;
     flex-shrink: 0;
+    display: block;
 }
 
 .conv-search-title {
@@ -159,6 +168,8 @@ $conv-float-btn-bg-hover: #4f2384;
     font-weight: 700;
     color: #000;
     letter-spacing: 0;
+    line-height: 22px;
+    white-space: nowrap;
 }
 
 .conv-search-info-tooltip {
@@ -226,12 +237,13 @@ $conv-float-btn-bg-hover: #4f2384;
 
 .conv-search-new {
     height: 36px;
-    padding: 0 16px;
+    padding: 7px 16px;
     border-radius: 20px;
     background: rgba(255, 255, 255, 0.6);
     border: 1px solid $conv-primary-200;
     cursor: pointer;
     display: flex;
+    justify-content: center;
     align-items: center;
     gap: 6px;
     font-size: 17px;
@@ -239,6 +251,7 @@ $conv-float-btn-bg-hover: #4f2384;
     font-family: inherit;
     white-space: nowrap;
     color: #000;
+    line-height: 22px;
     transition: background 0.18s ease, border-color 0.18s ease;
 
     &:hover {
@@ -251,19 +264,19 @@ $conv-float-btn-bg-hover: #4f2384;
         border-color: $conv-primary-300;
     }
 
-    svg {
+    svg, img {
         width: 16px;
         height: 16px;
         flex-shrink: 0;
+        display: block;
     }
 
     @media (max-width: 640px) {
         font-size: 13px;
-        height: 32px;
-        padding: 0 12px;
+        padding: 6px 12px;
         gap: 4px;
 
-        svg {
+        svg, img {
             width: 14px;
             height: 14px;
         }

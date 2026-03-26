@@ -6,19 +6,29 @@ import { parseMarkdown, inlineRefChips, extractSources, renderMessageWithSources
 import { attachTooltips, buildSourceCards, showSourceTooltip, closeAllSourceTooltips, repositionTooltip } from './sources';
 import { addMessageActions, injectCodeCopyButtons } from './actions';
 import { streamConversation, fetchConversation, resetTypesenseClient } from './streaming';
+import { streamDocsAiChat } from './docsai-client';
 
 const { env } = document.documentElement.dataset;
 const docsConfig = getConfig(env);
 const typesenseConfig = docsConfig.typesense;
+const docsAiConfig = docsConfig.docsAi;
+
+// --- Providers & feature flags ---------------------------------------------------
+
+const PROVIDER_INTERNAL = 'internal';
+const PROVIDER_TYPESENSE = 'typesense';
 
 let IS_CONVERSATIONAL_SEARCH_ENABLED = false;
 const CONVERSATIONAL_SEARCH_FLAG_KEY = 'docs_conversational_search';
 
-const CONV_MODEL_DOCS_PREVIEW = 'docs-ai-conv-model-v1-preview';
-const CONV_MODEL_DOCS_STABLE = 'docs-ai-conv-model-v1-stable';
-const DEFAULT_CONVERSATION_MODEL_ID = CONV_MODEL_DOCS_STABLE;
-const USE_LEGACY_MODEL_FLAG_KEY = 'docs-ai-use-legacy-model';
+// Single consolidated flag: true → internal docs-ai, false → typesense fallback.
+// Replaces the old USE_LEGACY_MODEL and USE_DOCS_AI_CHAT flags.
+const PROVIDER_FLAG_KEY = 'docs-ai-use-internal-provider';
+
+// Only relevant when provider is typesense.
 const DISABLE_STREAMING_FLAG_KEY = 'docs-ai-disable-streaming';
+
+const CONV_MODEL_DOCS_STABLE = 'docs-ai-conv-model-v1-stable';
 
 const RENDER_THROTTLE = 50;
 
@@ -38,8 +48,6 @@ initializeFeatureFlags().then(async (client) => {
         IS_CONVERSATIONAL_SEARCH_ENABLED = true;
     }
 
-    // /locate tells us if the visitor is a logged-in Datadog app user.
-    // Not used for feature gating — included in every Docs AI log event.
     isDatadogUser = await fetchDatadogUserStatus();
 
     if (IS_CONVERSATIONAL_SEARCH_ENABLED) {
@@ -48,16 +56,26 @@ initializeFeatureFlags().then(async (client) => {
     }
 });
 
+// --- Main class ------------------------------------------------------------------
+
 class ConversationalSearch {
     constructor() {
         this.conversationId = null;
+        this.chatHistory = [];
         this.isOpen = false;
         this.isLoading = false;
         this.abortController = null;
         this.userCancelledRequest = false;
         this.hasLoggedFirstOpen = false;
-        this.selectedModelId = DEFAULT_CONVERSATION_MODEL_ID;
-        this.streamingDisabled = false;
+        this.isSuggestionQuery = false;
+
+        this.provider = PROVIDER_INTERNAL;
+        this.selectedModelId = CONV_MODEL_DOCS_STABLE;
+        this.typesenseStreamingDisabled = true;
+        // Rewrites the initial user query for better retrieval before answering.
+        // Only applied on the first message (no history). Follow-ups use history context instead.
+        this.shouldRewriteQuery = true;
+
         this.isHomepage = document.querySelector('.kind-home') !== null;
         this.homeAiBtnVisible = false;
         this.ready = false;
@@ -69,7 +87,12 @@ class ConversationalSearch {
     }
 
     get ctx() {
-        return { selectedModelId: this.selectedModelId, conversationId: this.conversationId, isDatadogUser };
+        return {
+            provider: this.provider,
+            selectedModelId: this.selectedModelId,
+            conversationId: this.conversationId,
+            isDatadogUser
+        };
     }
 
     log(message, data) { logAction(message, data, this.ctx); }
@@ -77,15 +100,16 @@ class ConversationalSearch {
 
     resolveFlags() {
         initializeFeatureFlags().then((client) => {
-            if (getBooleanFlag(client, USE_LEGACY_MODEL_FLAG_KEY)) {
-                this.selectedModelId = CONV_MODEL_DOCS_PREVIEW;
+            const useInternal = getBooleanFlag(client, PROVIDER_FLAG_KEY, true);
+            this.provider = useInternal ? PROVIDER_INTERNAL : PROVIDER_TYPESENSE;
+
+            if (!useInternal) {
+                this.typesenseStreamingDisabled = getBooleanFlag(client, DISABLE_STREAMING_FLAG_KEY);
             }
-            // TODO(WE-32): Uncomment once server-side streaming is re-enabled.
-            // if (getBooleanFlag(client, DISABLE_STREAMING_FLAG_KEY)) {
-            //     this.streamingDisabled = true;
-            // }
         }).catch(() => {});
     }
+
+    // --- DOM setup ---------------------------------------------------------------
 
     createElements() {
         const template = document.getElementById('conv-search-template');
@@ -127,6 +151,8 @@ class ConversationalSearch {
             container.appendChild(emptyStateTemplate.content.cloneNode(true));
         }
     }
+
+    // --- Events ------------------------------------------------------------------
 
     bindEvents() {
         this.floatButton.addEventListener('click', () => this.open('floating_button'));
@@ -205,7 +231,6 @@ class ConversationalSearch {
 
     bindClickDelegation() {
         this.messagesContainer.addEventListener('click', (e) => {
-            // Ref chip → navigate
             const sourceRefBtn = e.target.closest('.conv-search-source-ref-btn');
             if (sourceRefBtn && this.messagesContainer.contains(sourceRefBtn)) {
                 e.preventDefault();
@@ -214,14 +239,10 @@ class ConversationalSearch {
                 const sourceNumber = sourceRefBtn.dataset.sourceNumber;
                 const tooltipLink = sourceRefBtn.parentNode?.querySelector('.conv-search-source-tooltip a');
 
-                this.log('Conversational Search Source Ref Click', {
-                    conversational_search: {
-                        action: 'source_ref_click',
-                        source_number: sourceNumber ? parseInt(sourceNumber, 10) : null,
-                        source_url: tooltipLink?.href || null,
-                        source_title: tooltipLink?.textContent || null,
-                        conversation_id: this.conversationId
-                    }
+                this.logInteraction('source_ref_click', {
+                    source_number: sourceNumber ? parseInt(sourceNumber, 10) : null,
+                    source_url: tooltipLink?.href || null,
+                    source_title: tooltipLink?.textContent || null
                 });
 
                 if (tooltipLink?.href) {
@@ -234,14 +255,10 @@ class ConversationalSearch {
             if (sourceCard && this.messagesContainer.contains(sourceCard)) {
                 const cardLink = sourceCard.querySelector('a');
                 const badge = sourceCard.querySelector('.conv-search-source-card-number');
-                this.log('Conversational Search Source Card Click', {
-                    conversational_search: {
-                        action: 'source_card_click',
-                        source_number: badge ? parseInt(badge.textContent, 10) : null,
-                        source_url: cardLink?.href || null,
-                        source_title: cardLink?.textContent || null,
-                        conversation_id: this.conversationId
-                    }
+                this.logInteraction('source_card_click', {
+                    source_number: badge ? parseInt(badge.textContent, 10) : null,
+                    source_url: cardLink?.href || null,
+                    source_title: cardLink?.textContent || null
                 });
             }
 
@@ -249,36 +266,29 @@ class ConversationalSearch {
             if (suggestionBtn) {
                 const query = suggestionBtn.dataset.query;
                 if (query) {
-                    this.log('Conversational Search Suggestion Click', {
-                        conversational_search: {
-                            action: 'suggestion_clicked',
-                            suggestion_query: query,
-                            conversation_id: this.conversationId
-                        }
-                    });
+                    this.logInteraction('suggestion_clicked', { suggestion_query: query });
                     this.input.value = query;
+                    this.isSuggestionQuery = true;
                     this.sendMessage();
                 }
             }
 
             const link = e.target.closest('a');
             if (link && this.messagesContainer.contains(link)) {
-                this.log('Conversational Search Link Click', {
-                    conversational_search: {
-                        action: 'link_clicked',
-                        link_url: link.href,
-                        link_text: link.textContent,
-                        conversation_id: this.conversationId
-                    }
+                this.logInteraction('link_clicked', {
+                    link_url: link.href,
+                    link_text: link.textContent
                 });
             }
         });
     }
 
+    // --- Open / Close / Reset ----------------------------------------------------
+
     open(trigger = 'entry_button') {
         if (!this.hasLoggedFirstOpen) {
             this.log('Conversational Search Open', {
-                conversational_search: { action: 'open_first_time', trigger }
+                conversational_search: { action: 'open_first_time', trigger, provider: this.provider }
             });
             this.hasLoggedFirstOpen = true;
         }
@@ -304,9 +314,7 @@ class ConversationalSearch {
     }
 
     newChat() {
-        this.log('Conversational Search New Chat', {
-            conversational_search: { action: 'new_chat', conversation_id: this.conversationId }
-        });
+        this.logInteraction('new_chat');
 
         if (this.abortController) {
             this.userCancelledRequest = true;
@@ -315,6 +323,8 @@ class ConversationalSearch {
         }
 
         this.conversationId = null;
+        this.chatHistory = [];
+        this.isSuggestionQuery = false;
         this.isLoading = false;
         this.sendBtn.disabled = false;
 
@@ -325,6 +335,8 @@ class ConversationalSearch {
         this.input.style.height = 'auto';
         this.input.focus();
     }
+
+    // --- Message DOM helpers -----------------------------------------------------
 
     addMessage(role, content) {
         const emptyState = this.messagesContainer.querySelector('.conv-search-empty-state');
@@ -344,16 +356,12 @@ class ConversationalSearch {
         return contentDiv;
     }
 
-    addStreamingMessage() {
-        const welcome = this.messagesContainer.querySelector('.conv-search-welcome');
-        if (welcome) welcome.remove();
-
+    addResponseContainer() {
         const messageDiv = document.createElement('div');
         messageDiv.className = 'conv-search-message conv-search-message-assistant';
 
         const contentDiv = document.createElement('div');
         contentDiv.className = 'conv-search-message-content';
-        contentDiv.innerHTML = '<span class="conv-search-cursor"></span>';
 
         messageDiv.appendChild(contentDiv);
         this.messagesContainer.appendChild(messageDiv);
@@ -362,144 +370,13 @@ class ConversationalSearch {
         return contentDiv;
     }
 
-    isNearBottom() {
-        const c = this.messagesContainer;
-        return c.scrollHeight - c.scrollTop - c.clientHeight < 100;
-    }
-
-    scrollToBottom(force = false) {
-        if (force || this.isNearBottom()) {
-            this.messagesContainer.scrollTop = this.messagesContainer.scrollHeight;
-        }
-    }
-
-    async sendMessage() {
-        const query = this.input.value.trim();
-        if (!query || this.isLoading) return;
-
-        this.isLoading = true;
-        this.userCancelledRequest = false;
-        this.input.value = '';
-        this.input.style.height = 'auto';
-        this.sendBtn.disabled = true;
-
-        this.addMessage('user', query);
-        const responseContainer = this.addStreamingMessage();
-
-        try {
-            if (this.streamingDisabled) {
-                await this.runFetchConversation(query, responseContainer);
-            } else {
-                await this.runStreamConversation(query, responseContainer);
-            }
-        } catch (error) {
-            if (error.name === 'AbortError' && this.userCancelledRequest) {
-                responseContainer.textContent = 'Request cancelled.';
-            } else {
-                this.logErr('Conversational Search Response Error', error);
-                resetTypesenseClient();
-                responseContainer.textContent = 'Sorry, something went wrong. Please try again.';
-            }
-        } finally {
-            this.isLoading = false;
-            this.sendBtn.disabled = false;
-            this.abortController = null;
-            this.userCancelledRequest = false;
-            this.input.focus();
-        }
-    }
-
-    async runStreamConversation(query, responseContainer) {
-        responseContainer.closest('.conv-search-message')?.remove();
-
-        this.abortController = new AbortController();
-        const startTime = Date.now();
-
-        const loadingState = this.addLoadingIndicator();
-        let msgIndex = 0;
-        const statusInterval = setInterval(() => {
-            if (msgIndex < LOADING_MESSAGES.length - 1) msgIndex++;
-            const el = loadingState.querySelector('.conv-search-status-text');
-            if (el) el.textContent = LOADING_MESSAGES[msgIndex];
-        }, 3000);
-
-        let accumulatedMessage = '';
-        let lastRenderTime = 0;
-        let realContainer = null;
-
-        const response = await streamConversation({
-            typesenseConfig,
-            query,
-            modelId: this.selectedModelId,
-            conversationId: this.conversationId,
-            signal: this.abortController.signal,
-            onChunk: (chunk) => {
-                if (chunk?.conversation_id && !this.conversationId) {
-                    this.conversationId = chunk.conversation_id;
-                }
-
-                if (chunk?.message !== undefined) {
-                    if (!realContainer) {
-                        clearInterval(statusInterval);
-                        loadingState.remove();
-                        realContainer = this.addStreamingMessage();
-                        realContainer.innerHTML = '';
-                    }
-
-                    accumulatedMessage += chunk.message;
-
-                    const now = Date.now();
-                    if (now - lastRenderTime > RENDER_THROTTLE) {
-                        const { displayMarkdown, sources } = extractSources(accumulatedMessage);
-                        realContainer.innerHTML = inlineRefChips(parseMarkdown(displayMarkdown));
-                        if (sources.length > 0) {
-                            realContainer.appendChild(buildSourceCards(sources));
-                        }
-                        lastRenderTime = now;
-                        this.scrollToBottom();
-                    }
-                }
-            },
-            onError: (error) => {
-                this.logErr('Conversational Search Streaming Error', error);
-            }
-        });
-
-        clearInterval(statusInterval);
-        if (loadingState.parentNode) loadingState.remove();
-
-        const finalConversationId = response?.results?.[0]?.conversation?.conversation_id;
-        if (finalConversationId) {
-            this.conversationId = finalConversationId;
-        }
-
-        if (!realContainer) {
-            realContainer = this.addStreamingMessage();
-        }
-
-        if (accumulatedMessage) {
-            realContainer.innerHTML = renderMessageWithSources(accumulatedMessage, {
-                attachTooltips,
-                buildSourceCards
-            });
-            injectCodeCopyButtons(realContainer, this.ctx);
-            addMessageActions(realContainer.parentElement, query, accumulatedMessage, this.ctx);
-            this.scrollToBottom();
-
-            this.log('Conversational Search Response', {
-                conversational_search: {
-                    action: 'response_received',
-                    response_length: accumulatedMessage.length,
-                    conversation_id: this.conversationId,
-                    latency_ms: Date.now() - startTime
-                }
-            });
-        } else {
-            realContainer.textContent = 'No response received. Please try again.';
-        }
-    }
-
-    addLoadingIndicator() {
+    /**
+     * Shows a spinner + status text while waiting for the first content token.
+     * Returns { updateStatus, stop } — call updateStatus(text) when the server
+     * sends a thinking event (auto-rotation is killed on first call); call stop()
+     * to remove the indicator.
+     */
+    startLoading() {
         const emptyState = this.messagesContainer.querySelector('.conv-search-empty-state');
         if (emptyState) emptyState.remove();
 
@@ -516,24 +393,231 @@ class ConversationalSearch {
         this.messagesContainer.appendChild(wrapper);
         this.scrollToBottom(true);
 
-        return wrapper;
-    }
-
-    async runFetchConversation(query, responseContainer) {
-        const loadingWrapper = responseContainer;
-        responseContainer.closest('.conv-search-message')?.remove();
-
-        this.abortController = new AbortController();
-        const startTime = Date.now();
-
-        const loadingState = this.addLoadingIndicator();
-
         let msgIndex = 0;
-        const statusInterval = setInterval(() => {
+        let interval = setInterval(() => {
             if (msgIndex < LOADING_MESSAGES.length - 1) msgIndex++;
-            const el = loadingState.querySelector('.conv-search-status-text');
+            const el = wrapper.querySelector('.conv-search-status-text');
             if (el) el.textContent = LOADING_MESSAGES[msgIndex];
         }, 3000);
+
+        return {
+            updateStatus: (text) => {
+                if (interval) { clearInterval(interval); interval = null; }
+                const el = wrapper.querySelector('.conv-search-status-text');
+                if (el) el.textContent = text;
+            },
+            stop: () => {
+                if (interval) clearInterval(interval);
+                if (wrapper.parentNode) wrapper.remove();
+            }
+        };
+    }
+
+    isNearBottom() {
+        const c = this.messagesContainer;
+        return c.scrollHeight - c.scrollTop - c.clientHeight < 100;
+    }
+
+    scrollToBottom(force = false) {
+        if (force || this.isNearBottom()) {
+            this.messagesContainer.scrollTop = this.messagesContainer.scrollHeight;
+        }
+    }
+
+    // --- Logging helpers ---------------------------------------------------------
+
+    logInteraction(action, extra = {}) {
+        this.log('Conversational Search Interaction', {
+            conversational_search: {
+                action,
+                provider: this.provider,
+                ...(this.conversationId && { conversation_id: this.conversationId }),
+                ...extra
+            }
+        });
+    }
+
+    logResponse({ query, answer, startTime, streaming = true }) {
+        this.log('Conversational Search Response', {
+            conversational_search: {
+                action: 'response_received',
+                provider: this.provider,
+                streaming,
+                response_length: answer.length,
+                ...(this.conversationId && { conversation_id: this.conversationId }),
+                latency_ms: Date.now() - startTime
+            }
+        });
+    }
+
+    // --- Send / dispatch ---------------------------------------------------------
+
+    async sendMessage() {
+        const query = this.input.value.trim();
+        if (!query || this.isLoading) return;
+
+        this.isLoading = true;
+        this.userCancelledRequest = false;
+        this.input.value = '';
+        this.input.style.height = 'auto';
+        this.sendBtn.disabled = true;
+
+        this.addMessage('user', query);
+
+        try {
+            if (this.provider === PROVIDER_INTERNAL) {
+                await this.runInternalStream(query);
+            } else if (this.typesenseStreamingDisabled) {
+                await this.runTypesenseFetch(query);
+            } else {
+                await this.runTypesenseStream(query);
+            }
+        } catch (error) {
+            if (error.name === 'AbortError' && this.userCancelledRequest) {
+                this.addResponseContainer().textContent = 'Request cancelled.';
+            } else {
+                this.logErr('Conversational Search Response Error', error);
+                if (this.provider === PROVIDER_TYPESENSE) resetTypesenseClient();
+                this.addResponseContainer().textContent = 'Sorry, something went wrong. Please try again.';
+            }
+        } finally {
+            this.isLoading = false;
+            this.sendBtn.disabled = false;
+            this.abortController = null;
+            this.userCancelledRequest = false;
+            this.isSuggestionQuery = false;
+            this.input.focus();
+        }
+    }
+
+    // --- Internal docs-ai provider -----------------------------------------------
+
+    async runInternalStream(query) {
+        this.abortController = new AbortController();
+        const startTime = Date.now();
+        const loading = this.startLoading();
+
+        const isFirstMessage = this.chatHistory.length === 0;
+        const isSuggestion = this.isSuggestionQuery;
+        this.chatHistory.push({ role: 'user', content: query });
+
+        let responseContainer = null;
+        let lastRenderTime = 0;
+
+        const answer = await streamDocsAiChat({
+            config: docsAiConfig,
+            query,
+            history: isFirstMessage ? [] : this.chatHistory.slice(0, -1),
+            rewriteQuery: isFirstMessage && this.shouldRewriteQuery && !isSuggestion,
+            signal: this.abortController.signal,
+            onThinking: (message) => {
+                loading.updateStatus(message);
+            },
+            onToken: (_token, fullMessage) => {
+                if (!responseContainer) {
+                    loading.stop();
+                    responseContainer = this.addResponseContainer();
+                }
+
+                const now = Date.now();
+                if (now - lastRenderTime > RENDER_THROTTLE) {
+                    const { displayMarkdown, sources } = extractSources(fullMessage);
+                    responseContainer.innerHTML = inlineRefChips(parseMarkdown(displayMarkdown));
+                    if (sources.length > 0) {
+                        responseContainer.appendChild(buildSourceCards(sources));
+                    }
+                    lastRenderTime = now;
+                    this.scrollToBottom();
+                }
+            },
+            onError: (error) => {
+                this.logErr('Docs AI Streaming Error', error);
+            }
+        });
+        loading.stop();
+
+        if (!responseContainer) {
+            responseContainer = this.addResponseContainer();
+        }
+
+        if (answer) {
+            this.chatHistory.push({ role: 'assistant', content: answer });
+            this.finalizeResponse(responseContainer, query, answer, startTime);
+        } else {
+            responseContainer.textContent = 'No response received. Please try again.';
+        }
+    }
+
+    // --- Typesense provider (streaming) ------------------------------------------
+
+    async runTypesenseStream(query) {
+        this.abortController = new AbortController();
+        const startTime = Date.now();
+        const loading = this.startLoading();
+
+        let responseContainer = null;
+        let accumulatedMessage = '';
+        let lastRenderTime = 0;
+
+        const response = await streamConversation({
+            typesenseConfig,
+            query,
+            modelId: this.selectedModelId,
+            conversationId: this.conversationId,
+            signal: this.abortController.signal,
+            onChunk: (chunk) => {
+                if (chunk?.conversation_id && !this.conversationId) {
+                    this.conversationId = chunk.conversation_id;
+                }
+
+                if (chunk?.message !== undefined) {
+                    if (!responseContainer) {
+                        loading.stop();
+                        responseContainer = this.addResponseContainer();
+                    }
+
+                    accumulatedMessage += chunk.message;
+
+                    const now = Date.now();
+                    if (now - lastRenderTime > RENDER_THROTTLE) {
+                        const { displayMarkdown, sources } = extractSources(accumulatedMessage);
+                        responseContainer.innerHTML = inlineRefChips(parseMarkdown(displayMarkdown));
+                        if (sources.length > 0) {
+                            responseContainer.appendChild(buildSourceCards(sources));
+                        }
+                        lastRenderTime = now;
+                        this.scrollToBottom();
+                    }
+                }
+            },
+            onError: (error) => {
+                this.logErr('Typesense Streaming Error', error);
+            }
+        });
+        loading.stop();
+
+        const finalConversationId = response?.results?.[0]?.conversation?.conversation_id;
+        if (finalConversationId) {
+            this.conversationId = finalConversationId;
+        }
+
+        if (!responseContainer) {
+            responseContainer = this.addResponseContainer();
+        }
+
+        if (accumulatedMessage) {
+            this.finalizeResponse(responseContainer, query, accumulatedMessage, startTime);
+        } else {
+            responseContainer.textContent = 'No response received. Please try again.';
+        }
+    }
+
+    // --- Typesense provider (non-streaming) --------------------------------------
+
+    async runTypesenseFetch(query) {
+        this.abortController = new AbortController();
+        const startTime = Date.now();
+        const loading = this.startLoading();
 
         let response;
         try {
@@ -545,8 +629,7 @@ class ConversationalSearch {
                 signal: this.abortController.signal
             });
         } finally {
-            clearInterval(statusInterval);
-            loadingState.remove();
+            loading.stop();
         }
 
         const conversation = response?.conversation || response?.results?.[0]?.conversation;
@@ -555,31 +638,30 @@ class ConversationalSearch {
         }
 
         const answer = conversation?.answer || '';
-        const realContainer = this.addStreamingMessage();
+        const responseContainer = this.addResponseContainer();
 
         if (answer) {
-            realContainer.innerHTML = renderMessageWithSources(answer, {
-                attachTooltips,
-                buildSourceCards
-            });
-            injectCodeCopyButtons(realContainer, this.ctx);
-            addMessageActions(realContainer.parentElement, query, answer, this.ctx);
-            this.scrollToBottom();
-
-            this.log('Conversational Search Response', {
-                conversational_search: {
-                    action: 'response_received',
-                    streaming: false,
-                    response_length: answer.length,
-                    conversation_id: this.conversationId,
-                    latency_ms: Date.now() - startTime
-                }
-            });
+            this.finalizeResponse(responseContainer, query, answer, startTime, false);
         } else {
-            realContainer.textContent = 'No response received. Please try again.';
+            responseContainer.textContent = 'No response received. Please try again.';
         }
     }
+
+    // --- Shared finalization -----------------------------------------------------
+
+    finalizeResponse(container, query, answer, startTime, streaming = true) {
+        container.innerHTML = renderMessageWithSources(answer, {
+            attachTooltips,
+            buildSourceCards
+        });
+        injectCodeCopyButtons(container, this.ctx);
+        addMessageActions(container.parentElement, query, answer, this.ctx);
+        this.scrollToBottom();
+        this.logResponse({ query, answer, startTime, streaming });
+    }
 }
+
+// --- Bootstrap -------------------------------------------------------------------
 
 let conversationalSearchInstance = null;
 

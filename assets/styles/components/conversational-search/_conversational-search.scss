@@ -335,7 +335,7 @@ $conv-neutral-200: #efefef;
     }
 }
 
-// Lightweight loading indicator (non-streaming fetch path)
+// Loading indicator (spinner + status text, shown before first content token)
 .conv-search-loading-state {
     padding: 0 36px;
 
@@ -363,9 +363,9 @@ $conv-neutral-200: #efefef;
 }
 
 .conv-search-status-text {
-    color: $conv-neutral-600;
-    font-size: 16px;
-    line-height: 22px;
+    color: #3b3b4f;
+    font-size: 13px;
+    margin-left: 0;
     animation: conv-search-fade-in 0.3s ease;
 }
 
