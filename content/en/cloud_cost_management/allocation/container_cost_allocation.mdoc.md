@@ -282,7 +282,7 @@ Costs are allocated into the following spend types:
 
 ## Cluster idle allocation
 
-Cluster idle costs (identified by `allocated_spend_type:cluster_idle`) represent the cost of resources not reserved by any workload in a cluster. By default, these costs are redistributed to workloads proportionally based on their usage costs (`allocated_spend_type:usage`), using the following destination tags:
+Cluster idle costs (identified by `allocated_spend_type:cluster_idle`) represent the cost of resources not reserved by any workload in a cluster. By default, cluster idle allocation is disabled and these costs are not redistributed. After you enable this feature, idle costs are redistributed to workloads proportionally based on their usage costs (`allocated_spend_type:usage`), using the following destination tags:
 
 - `kube_cluster_name`
 - `kube_namespace`
