@@ -52,9 +52,7 @@ Before you begin, confirm you have:
    - `roles/iam.serviceAccountAdmin` (Service Account Admin)
    - `roles/compute.admin` (Compute Admin)
 
-6. **Datadog API and APP Keys**:
-   - API Key: https://app.datadoghq.com/organization-settings/api-keys
-   - APP Key: https://app.datadoghq.com/organization-settings/application-keys
+6. **[Create or retrieve your API key][1]**.
 
 7. **APIs Enabled**:
    ```shell
@@ -70,12 +68,14 @@ Before you begin, confirm you have:
 
 Set the following environment variables to simplify subsequent commands and reduce copy-paste errors.
 
-```
+```shell
 export PROJECT_ID="your-gcp-project-id"
 export REGION="us-central1"
 export CLUSTER_NAME="cloudprem-cluster"
-export DATADOG_SITE="{{< region-param key=dd_site >}}"  # your selected Datadog site
+export DATADOG_SITE="datadoghq.com"  # or datadoghq.eu, us3.datadoghq.com, us5.datadoghq.com
+export BUCKET_NAME="${PROJECT_ID}-cloudprem"
 ```
+
 ### Step 2: Create GKE cluster
 
 Create a GKE cluster with Workload Identity enabled:
@@ -83,17 +83,9 @@ Create a GKE cluster with Workload Identity enabled:
 ```shell
 gcloud container clusters create ${CLUSTER_NAME} \
   --region ${REGION} \
-  --node-locations ${REGION}-a,${REGION}-b,${REGION}-c \
   --num-nodes 1 \
-  --machine-type n1-standard-4 \
-  --disk-type pd-ssd \
-  --disk-size 100 \
-  --enable-autorepair \
-  --enable-autoupgrade \
-  --enable-ip-alias \
   --workload-pool=${PROJECT_ID}.svc.id.goog \
-  --addons HorizontalPodAutoscaling,HttpLoadBalancing,GcePersistentDiskCsiDriver \
-  --release-channel stable
+  --machine-type n1-standard-4
 ```
 
 {{% collapse-content title="Cluster sizing recommendations" level="h4" %}}
@@ -126,15 +118,10 @@ Create a GCS bucket for CloudPrem data storage:
 ```shell
 export BUCKET_NAME="cloudprem-data-${PROJECT_ID}"
 
-gsutil mb -p ${PROJECT_ID} \
-  -c STANDARD \
-  -l ${REGION} \
-  gs://${BUCKET_NAME}
-```
-
-Verify bucket creation:
-```shell
-gsutil ls -L gs://${BUCKET_NAME}
+gcloud storage buckets create gs://${BUCKET_NAME} \
+  --project=${PROJECT_ID} \
+  --location=${REGION} \
+  --uniform-bucket-level-access
 ```
 
 ### Step 4: Create Cloud SQL PostgreSQL instance
@@ -150,13 +137,8 @@ echo "Database password: ${DB_PASSWORD}"
 # Create Cloud SQL instance
 gcloud sql instances create cloudprem-postgres \
   --database-version=POSTGRES_15 \
-  --tier=db-custom-2-7680 \
   --region=${REGION} \
-  --root-password="${DB_PASSWORD}" \
-  --storage-type=SSD \
-  --storage-size=10GB \
-  --storage-auto-increase \
-  --backup
+  --root-password="${DB_PASSWORD}"
 ```
 
 This can take a few minutes. Wait for the instance to be ready:
@@ -245,12 +227,11 @@ gcloud iam service-accounts add-iam-policy-binding \
 
 ### Step 6: Create Kubernetes secrets
 
-Create secret for Datadog API keys:
+Create secret for Datadog API key:
 
 ```shell
 kubectl create secret generic datadog-secret \
-  --from-literal=api-key='YOUR_DATADOG_API_KEY' \
-  --from-literal=app-key='YOUR_DATADOG_APP_KEY' \
+  --from-literal=api-key=${DD_API_KEY} \
   --namespace=datadog-cloudprem
 ```
 
@@ -263,7 +244,7 @@ Create secret for PostgreSQL connection:
 # Example: if password is "abc/def+ghi=" it becomes "abc%2Fdef%2Bghi%3D"
 
 kubectl create secret generic cloudprem-metastore-config \
-  --from-literal=QW_METASTORE_URI="postgresql://postgres:URL_ENCODED_PASSWORD@${DB_PUBLIC_IP}:5432/cloudprem" \
+  --from-literal=QW_METASTORE_URI="postgresql://postgres:${DB_PASSWORD}@${DB_PUBLIC_IP}:5432/cloudprem" \
   --namespace=datadog-cloudprem
 ```
 
@@ -278,72 +259,67 @@ helm repo update
 
 Create a `values.yaml` file:
 
+Set your [Datadog site][2] to {{< region-param key="dd_site" code="true" >}}.
+
 ```yaml
-# values.yaml
+# Datadog configuration
 datadog:
-  site: datadoghq.com  # Change to your Datadog site
-  apiKeyExistingSecret: datadog-secret
+   # The Datadog site to connect to. Defaults to `datadoghq.com`.
+   # site: datadoghq.com
+   # The name of the existing Secret containing the Datadog API key. The secret key name must be `api-key`.
+   apiKeyExistingSecret: datadog-secret
 
 # Service Account with Workload Identity
 serviceAccount:
   create: false
   name: cloudprem-ksa
   extraAnnotations:
-    iam.gke.io/gcp-service-account: cloudprem-sa@YOUR_PROJECT_ID.iam.gserviceaccount.com
+    iam.gke.io/gcp-service-account: cloudprem-sa@${YOUR_PROJECT_ID}.iam.gserviceaccount.com
+
+# CloudPrem node configuration
+config:
+  # The root URI where index data is stored. This should be an gs path.
+  # All indexes created in CloudPrem are stored under this location.
+  default_index_root_uri: gs://${BUCKET_NAME}/indexes
+
+# Internal ingress configuration for access within the VPC
+# Helm chart does not support yet GKE ingress
+#
+# Additional annotations can be added to customize the ALB behavior.
+ingress:
+  internal:
+    enabled: false
 
 # Metastore configuration
+# The metastore is responsible for storing and managing index metadata.
+# It requires a PostgreSQL database connection string to be provided by a Kubernetes secret.
+# The secret should contain a key named `QW_METASTORE_URI` with a value in the format:
+# postgresql://<username>:<password>@<host>:<port>/<database>
+#
+# The metastore connection string is mounted into the pods using extraEnvFrom to reference the secret.
 metastore:
-  replicaCount: 2
   extraEnvFrom:
     - secretRef:
-        name: cloudprem-metastore-config
-  resources:
-    limits:
-      cpu: 2
-      memory: 4Gi
-    requests:
-      cpu: 1
-      memory: 2Gi
-
-# Searcher configuration
-searcher:
-  enabled: true
-  replicaCount: 2
-  resources:
-    limits:
-      cpu: 2
-      memory: 8Gi
-    requests:
-      cpu: 1
-      memory: 4Gi
+        name: cloudprem-metastore-uri
 
 # Indexer configuration
+# The indexer is responsible for processing and indexing incoming data it receives data from various sources (for example, Datadog Agents, log collectors)
+# and transforms it into searchable files called "splits" stored in S3.
+#
+# The indexer is horizontally scalable - you can increase `replicaCount` to handle higher indexing throughput. Resource requests and limits should be tuned based on your indexing workload.
+#
+# The `podSize` parameter sets vCPU, memory, and component-specific settings automatically. The default values are suitable for moderate indexing loads of up to 20 MB/s per indexer pod.
+# See the sizing guide for available tiers and their configurations.
 indexer:
   replicaCount: 2
-  resources:
-    limits:
-      cpu: 2
-      memory: 8Gi
-    requests:
-      cpu: 1
-      memory: 4Gi
+  podSize: xlarge
 
-# Quickwit configuration
-quickwit:
-  version: 0.8
-  listen_address: 0.0.0.0
-
-  # Storage configuration for GCS
-  storage:
-    gcs:
-      bucket: YOUR_BUCKET_NAME
-
-  cloudprem:
-    index:
-      retention: 30d
-      minShards: 12
-    reverseConnection:
-      enabled: true
+# Searcher configuration
+# The `podSize` parameter sets vCPU, memory, and component-specific settings automatically.
+# Choose a tier based on your query complexity, concurrency, and data access patterns.
+searcher:
+  replicaCount: 2
+  podSize: xlarge
 ```
 
 Install CloudPrem:
@@ -351,12 +327,37 @@ Install CloudPrem:
 ```shell
 helm install cloudprem datadog/cloudprem \
   --namespace datadog-cloudprem \
-  --values values.yaml \
-  --timeout 10m \
-  --wait
+  --values values.yaml
 ```
 
-### Step 8: Install Datadog Agent (Recommended)
+### Step 8: Add internal GCE ingress
+
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: cloudprem-internal
+  namespace: datadog-cloudprem
+  annotations:
+    kubernetes.io/ingress.class: "gce-internal"
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: cloudprem-indexer
+            port:
+              number: 7280
+```
+
+```shell
+kubectl apply -f ingress-values.yaml
+```
+
+### Step 9: Install Datadog Agent (Recommended)
 
 Install the Datadog Agent to collect metrics from CloudPrem components and send them to Datadog.
 
@@ -367,112 +368,49 @@ kubectl create namespace datadog
 
 # Copy the API key secret to the datadog namespace
 kubectl get secret datadog-secret -n datadog-cloudprem -o yaml | \
-  sed 's/namespace: datadog-cloudprem/namespace: datadog/' | \
+  sed 's/namespace: datadog-cloudprem/namespace: datadog-agent/' | \
   kubectl apply -f -
 ```
 
-Create a values file for the Datadog Agent (`datadog-agent-values.yaml`):
+Install Datadog operator:
 
 ```yaml
 # Datadog Agent Helm Values for GKE Autopilot
-datadog:
-  site: datadoghq.com  # Change to your Datadog site
-  apiKeyExistingSecret: datadog-secret
-  clusterName: cloudprem-cluster
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+  namespace: datadog
+spec:
+  global:
+    clusterName: <CLUSTER_NAME>
+    site: datadoghq.com
+    credentials:
+      apiSecret:
+        secretName: datadog-secret
+        keyName: api-key
+    env:
+      - name: DD_LOGS_CONFIG_LOGS_DD_URL
+        value: http://<RELEASE_NAME>-indexer.<NAMESPACE_NAME>.svc.cluster.local:7280
+      - name: DD_LOGS_CONFIG_EXPECTED_TAGS_DURATION
+        value: "1000000h"
 
-  # Autopilot-compatible settings
-  criSocketPath: /var/run/containerd/containerd.sock
+  features:
+    logCollection:
+      enabled: true
+      containerCollectAll: true
 
-  logs:
-    enabled: true
-    containerCollectAll: false
-    containerCollectUsingFiles: false
+    dogstatsd:
+        port: 8125
+        useHostPort: false  # Must be false in Autopilot
+        nonLocalTraffic: true
 
-  apm:
-    portEnabled: true
-    port: 8126
-    socketEnabled: false
-
-  # DogStatsD configuration
-  dogstatsd:
-    port: 8125
-    useHostPort: false  # Must be false in Autopilot
-    nonLocalTraffic: true
-    originDetection: false
-    tagCardinality: low
-
-  networkMonitoring:
-    enabled: false
-
-# Cluster Agent
-clusterAgent:
-  enabled: true
-  replicas: 2
-  resources:
-    requests:
-      cpu: 200m
-      memory: 256Mi
-    limits:
-      cpu: 500m
-      memory: 512Mi
-
-# Node Agents
-agents:
-  enabled: true
-  useHostNetwork: false
-
-  containers:
-    agent:
-      env:
-        - name: DD_SYSTEM_PROBE_ENABLED
-          value: "false"
-        - name: DD_PROCESS_AGENT_ENABLED
-          value: "false"
-        - name: DD_APM_ENABLED
-          value: "true"
-        - name: DD_DOGSTATSD_NON_LOCAL_TRAFFIC
-          value: "true"
-
-  resources:
-    requests:
-      cpu: 200m
-      memory: 256Mi
-    limits:
-      cpu: 500m
-      memory: 512Mi
-
-  volumes: []
-  volumeMounts: []
-
-# GKE Autopilot settings
-providers:
-  gke:
-    autopilot: true
-
-systemProbe:
-  enabled: false
-
-# Cluster Checks Runner
-clusterChecksRunner:
-  enabled: true
-  replicas: 2
-  resources:
-    requests:
-      cpu: 100m
-      memory: 128Mi
-    limits:
-      cpu: 200m
-      memory: 256Mi
 ```
 
 Install the Datadog Agent:
 
 ```shell
-helm install datadog-agent datadog/datadog \
-  --namespace datadog \
-  --values datadog-agent-values.yaml \
-  --timeout 10m \
-  --wait
+kubectl apply -f datadog-operator-values.yaml
 ```
 
 Verify the Datadog Agent is running:
@@ -480,11 +418,6 @@ Verify the Datadog Agent is running:
 ```shell
 kubectl get pods -n datadog
 ```
-
-You should see:
-- Node agents (DaemonSet) running on each node
-- Cluster agents (2 replicas)
-- Cluster checks runners (2 replicas)
 
 Update CloudPrem to send metrics to the Datadog Agent's DogStatsD service. Add this to your `values.yaml`:
 
@@ -512,7 +445,7 @@ kubectl get pod -n datadog-cloudprem -l app.kubernetes.io/component=metastore -o
 # Should output: datadog-agent.datadog.svc.cluster.local
 ```
 
-### Step 9: Verify deployment
+### Step 10: Verify deployment
 
 Check pod status:
 ```shell
@@ -532,37 +465,9 @@ cloudprem-searcher-0                   1/1     Running   0          5m
 cloudprem-searcher-1                   1/1     Running   0          5m
 ```
 
-Check services:
-```shell
-kubectl get svc -n datadog-cloudprem
-```
-
 Check metastore logs for successful database connection:
 ```shell
 kubectl logs -n datadog-cloudprem -l app.kubernetes.io/component=metastore --tail=50
-```
-
-You should see log entries indicating successful cluster joining and split operations, with no connection errors.
-
-Verify reverse connection to Datadog:
-```shell
-kubectl logs -n datadog-cloudprem -l app.kubernetes.io/component=control-plane --tail=50 | grep -i "reverse connection\|datadog"
-```
-
-## Configure scaling
-
-Scale indexers and searchers based on your data volume:
-
-```shell
-# Scale indexers
-kubectl scale statefulset cloudprem-indexer \
-  -n datadog-cloudprem \
-  --replicas=4
-
-# Scale searchers
-kubectl scale statefulset cloudprem-searcher \
-  -n datadog-cloudprem \
-  --replicas=4
 ```
 
 ## Uninstall
@@ -615,3 +520,6 @@ gcloud container clusters delete ${CLUSTER_NAME} \
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://app.datadoghq.com/organization-settings/api-keys
+[2]: /getting_started/site/

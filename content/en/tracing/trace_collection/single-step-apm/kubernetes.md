@@ -138,7 +138,9 @@ For complete instructions, see [setting USTs for Kubernetes services][5].
 
 ## Enable SDK-dependent products and features
 
-After SSI loads the Datadog SDK into your applications and enables distributed tracing, you can configure additional products that rely on the SDK. These include capabilities such as [Continuous Profiler][37], [Application Security Monitoring][38], and [trace ingestion controls][39].
+After SSI loads the Datadog SDK into your applications and enables distributed tracing, you can configure additional products that rely on the SDK:
+
+{{< ssi-products >}}
 
 Use one of the following setup methods:
 
@@ -220,7 +222,7 @@ Each target block has the following keys:
 | `namespaceSelector` | The namespace(s) to instrument. Specify using one or more of:<br> - `matchNames`: A list of one or more namespace name(s). <br> - `matchLabels`: A list of one or more label(s) defined in `{key,value}` pairs. <br> - `matchExpressions`: A list of namespace selector requirements. <br><br> Namespaces must meet all criteria to match. For more details, see the [Kubernetes selector documentation][10].|
 | `podSelector`     | The pod(s) to instrument. Specify using one or more of: <br> - `matchLabels`: A list of one or more label(s) defined in `{key,value}` pairs. <br> - `matchExpressions`: A list of pod selector requirements. <br><br> Pods must meet all criteria to match. For more details, see the [Kubernetes selector documentation][10]. |
 | `ddTraceVersions` | The [Datadog APM SDK][9] version to use for each language. |
-| `ddTraceConfigs`  | APM SDK configs that allow setting Unified Service Tags, enabling Datadog products beyond tracing, and customizing other APM settings. [See full list of options][8]. |
+| `ddTraceConfigs`  | APM SDK configs that allow setting [Unified Service Tags][8], enabling [SDK-dependent products](#enable-sdk-dependent-products-and-features) beyond tracing, and customizing other [APM settings][14]. |
 
 The file you need to configure depends on how you enabled Single Step Instrumentation:
 - If you enabled SSI with Datadog Operator, edit `datadog-agent.yaml`.
@@ -372,9 +374,39 @@ This configuration enables APM for all pods except those that have either of the
 
 {{< /collapse-content >}}
 
+{{< collapse-content title="Example 6: Enable additional products with <code>ddTraceConfigs</code>" level="h4" >}}
+
+This configuration enables [App and API Protection (AAP)][12] and [Continuous Profiler][11] for services in the `web-apps` namespace, using `ddTraceConfigs` to set the required environment variables:
+
+{{< highlight yaml "hl_lines=4-20" >}}
+   apm:
+     instrumentation:
+       enabled: true
+       targets:
+         - name: "web-apps-with-security"
+           namespaceSelector:
+             matchNames:
+               - "web-apps"
+           ddTraceVersions:
+             java: "default"
+             python: "default"
+           ddTraceConfigs:
+             - name: "DD_APPSEC_ENABLED"
+               value: "true"
+             - name: "DD_PROFILING_ENABLED"
+               value: "auto"
+{{< /highlight >}}
+
+For a full list of products you can enable through SSI, see [Enable SDK-dependent products and features](#enable-sdk-dependent-products-and-features).
+
+{{< /collapse-content >}}
+
 [8]: /getting_started/tagging/unified_service_tagging/?tab=kubernetes
 [9]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/compatibility/#tracer-libraries
 [10]: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#resources-that-support-set-based-requirements
+[11]: /profiler/
+[12]: /security/application_security/
+[14]: /tracing/trace_collection/library_config/
 
 {{% /tab %}}
 
@@ -642,13 +674,13 @@ If you don't want to collect trace data for a particular service, host, VM, or c
 
 To remove APM instrumentation and stop sending traces from a specific service, you can do one of the following:
 
-#### Use workload selection (recommended)
+#### Use instrumentation rules to target specific workloads (recommended)
 
-With workload selection (available for Agent v7.64+), you can enable and disable tracing for specific applications. [See configuration details here](#advanced-options).
+With instrumentation rules (available for Agent v7.64+), you can enable and disable tracing for specific applications. [See configuration details here](#advanced-options).
 
 #### Use the Datadog Admission Controller
 
-As an alternative, or for a version of the Agent that does not support workload selection, you can also disable pod mutation by adding a label to your pod.
+As an alternative, or for a version of the agent that does not support instrumentation rules, you can also disable pod mutation by adding a label to your pod.
 
 <div class="alert alert-danger">In addition to disabling SSI, the following steps disable other mutating webhooks. Use with caution.</div>
 
@@ -718,7 +750,7 @@ To control where APM is activated and reduce overhead, consider the following be
 | Mode    | Behavior    | When to use |
 | ---  | ----------- | ----------- |
 | Default | All supported processes in the cluster are instrumented. | Small clusters or prototypes. |
-| Opt-in | Use [workload selection][4] to restrict instrumentation to specific namespaces or pods. | Production clusters, staged rollouts, or cost‑sensitive use cases. |
+| Opt-in | Use [instrumentation rules][4] to restrict instrumentation to specific namespaces or pods. | Production clusters, staged rollouts, or cost‑sensitive use cases. |
 
 #### Example: Enable instrumentation for specific pods
 
@@ -767,7 +799,7 @@ To control where APM is activated and reduce overhead, consider the following be
                  datadoghq.com/apm-instrumentation: "enabled"
    ```
 
-See [workload selection][4] for additional examples.
+See [instrumentation rules][4] for additional examples.
 
 {{% /collapse-content %}}
 
@@ -847,11 +879,3 @@ If you encounter problems enabling APM with SSI, see the [SSI troubleshooting gu
 [34]: /containers/guide/sync_container_images/#copy-an-image-to-another-registry-using-crane
 [35]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/troubleshooting
 [36]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/compatibility/
-[37]: /profiler/
-[38]: /security/application_security/
-[39]: /tracing/trace_pipeline/ingestion_controls/
-[40]: /containers/kubernetes/csi_driver/
-[41]: /tracing/guide/injectors/
-
-
-
