@@ -59,18 +59,14 @@ You can filter your metric by:
 
 ### Prerequisites
 
-To create a metric from your warehouse data, you must connect the warehouse to Datadog. Select your warehouse to get started:
+To create a metric from your warehouse data, you must connect the warehouse to Datadog. Follow the [Snowflake][11] guide to connect your Snowflake data to Datadog.
 
-- [BigQuery][8]
-- [Databricks][9]
-- [Redshift][10]
-- [Snowflake][11]
 
 After you have connected your warehouse, create a Metric SQL Model, map your data to Datadog, and then create a metric.
 
 ### Create a Metric SQL Model
 
-<!-- add a adentence about how they flow -->
+<!-- add a sentence about how they flow together-->
 
 #### Write your SQL
 1. Navigate to the [Metrics page][1] in Datadog Product Analytics.
@@ -130,25 +126,30 @@ Datadog accounts for correlations between the numerator and denominator using th
 
 ## Examples
 
+The following examples assume you have configured your [client SDK](#prerequisites) and are collecting data, or have connected your [data warehouse](#prerequisites-1) to Datadog. 
+
 ### Conversion metric
 
-A conversion metric measures the percentage of experiment subjects who complete a specific action.
+A conversion metric measures the percentage of experiment subjects who complete a specific action. 
 
-Use case: measuring conversion through a two-step funnel.
+This example launches an experiment to determine the impact of a feature (for example, showing a star rating of the product based on buyer reviews) on users who performed the **"click Add to Cart"** action. 
 
-Experiment steps: 
-1. When users visit the page, subjects are randomly assigned to one of two variants: baseline or treatment. 
-1. Create a **Count of unique users** metric on the **"click Add to Cart"** action.
-1. Optionally, filter to the page of interest.
+1. **Create a metric**. Create a **Count of unique users** metric on the **"click Add to Cart"** action.
+    1. Optionally, filter to a page of interest to measure the conversion through a two-step funnel where the first step is the users session begining at a specific page and the second step is the action **"click Add to Cart"**. 
 
-[image]
+{{< img src="/product_analytics/experiment/exp_define_metrics_conversion_metric_1.png" alt="The Create Metric page showing a 'Conversion metric' with the 'click on ADD TO CART' event selected, the Count of unique users aggregation highlighted in the dropdown with a description reading 'The number of users who performed the event', and a real-time bar chart on the right." style="width:90%;" >}}
 
-Since only users who visit the page are assigned to the experiment, Datadog calculates this metric as:
 
+1. **Create an experiment**. Create a draft experiment and optionally add your hypothesis on the [Experiments][13] page in Datadog Product Analytics.
+
+1. **Create a feature flag**. Create a feature flag to assign users to experiment groups. When subjects (users) visit the page, [subject type attributes][12] (`usr.id`) are randomly assigned to one of two variants: control (False) or treatment (True).
+
+1. **Launch your experiment**. Since only users who visit the page are assigned to the experiment, Datadog calculates this metric using this ratio and gives you the per-user conversion rate for each variant.
 
 $$\text"Number of users that click Add to Cart" /{\text"Number of users enrolled into this variant"}$$
 
-This gives you the per-user conversion rate for each variant.
+
+You can select your experiment on the [Experiments][13] page to analyze the results. Follow the troubleshooting guide if your experiment results to not appear. 
 
 ### Down-funnel conversion rate
 
@@ -206,15 +207,6 @@ Datadog supports several advanced options specific to experimentation:
 ## Further reading
 {{< partial name="whats-next/whats-next.html" >}}
 
-<!-- Proposed page structure (goal-oriented, first-time user):
-## Overview
-## Metrics from Product Analytics or RUM data
-## Metrics from warehouse data
-## Examples
-## Aggregation methods
-   ### Ratio metrics
-## Advanced options
--->
 
 [1]: https://app.datadoghq.com/product-analytics/experimentation-metrics
 [2]: https://en.wikipedia.org/wiki/Delta_method
@@ -223,8 +215,6 @@ Datadog supports several advanced options specific to experimentation:
 [5]: /real_user_monitoring/application_monitoring/ios/setup/?tab=swift-package-manager--spm
 [6]: /real_user_monitoring/application_monitoring/browser/setup/client/?tab=npm
 [7]: /real_user_monitoring/application_monitoring/react_native/setup/?platform=react_native
-[8]: experiments/guide/connecting_bigquery
-[9]: experiments/guide/connecting_databricks
-[10]: experiments/guide/connecting_redshift
-[11]: experiments/guide/connecting_snowflake
+[11]: /experiments/guide/connecting_snowflake
 [12]: https://app.datadoghq.com/product-analytics/experiments/settings/subject-types
+[13]: https://app.datadoghq.com/product-analytics/experiments
