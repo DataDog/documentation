@@ -44,14 +44,14 @@
 }
 
 .home-ai-btn {
-    $home-ai-main: #b325b5;
+    $home-ai-main: #9654e8;
     display: none;
     align-items: center;
     justify-content: center;
     gap: 6px;
     padding: 0 16px;
     height: 38px;
-    border: 1px solid rgba(255, 255, 255, 0.18);
+    border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 4px;
     background: $home-ai-main;
     color: white;
@@ -78,8 +78,10 @@
 
     &:hover {
         background: darken($home-ai-main, 6%);
-        border-color: rgba(255, 255, 255, 0.3);
-        box-shadow: 0 0 12px rgba($home-ai-main, 0.35);
+        border-color: rgba(255, 255, 255, 0.45);
+        box-shadow:
+            0 4px 8px rgba(150, 84, 232, 0.3),
+            0 4px 16px rgba(227, 210, 255, 0.25);
     }
 
     &:active {
