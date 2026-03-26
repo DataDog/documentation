@@ -20,6 +20,9 @@ further_reading:
 - link: 'https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_test'
   tag: 'External Site'
   text: 'Create and manage Synthetic API Tests with Terraform'
+- link: '/synthetics/guide/export-tests-to-terraform'
+  tag: 'Guide'
+  text: 'Export Synthetic API tests to Terraform'
 ---
 
 ## Overview
