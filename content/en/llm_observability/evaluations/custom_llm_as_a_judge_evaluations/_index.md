@@ -282,8 +282,10 @@ Under **Evaluation Scope**, define where and how your evaluation runs. This help
    - **Evaluate On**: Choose one of the following:
       - **Traces**: Evaluate only root spans
       - **All Spans**: Evaluate both root and child spans
-   - **Span Names**: (Optional) Limit evaluation to spans with certain names.
-   - **Tags**: (Optional) Limit evaluation to spans with certain tags.
+   - **Query**: (Optional) Enter a query using Datadog query syntax to filter which spans are evaluated. For example:
+      - `@name:agent.workflow` to filter by span name
+      - `env:prod` to filter by tag
+      - `@name:agent.workflow AND env:prod` to filter by span name and tag
    - **Sampling Rate**: (Optional) Apply sampling (for example, 10%) to control evaluation cost.
 
 {{< img src="llm_observability/evaluations/evaluation_scope.png" alt="Configuring the evaluation scope." style="width:100%;" >}}
@@ -325,6 +327,26 @@ You can:
 - View aggregate results in the LLM Observability Overview page's Evaluation section
 - Create [monitors][4] to alert on performance changes or regression
 
+## Using in experiments
+
+To reuse a custom LLM-as-a-judge evaluation in a local [LLM Experiment][8], reference it by name using `RemoteEvaluator` from the SDK:
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs import LLMObs, RemoteEvaluator
+
+evaluator = RemoteEvaluator(eval_name="quality-assessment")
+
+experiment = LLMObs.experiment(
+    name="my-experiment",
+    task=my_task,
+    dataset=dataset,
+    evaluators=[evaluator],
+)
+experiment.run()
+{{< /code-block >}}
+
+You can mix `RemoteEvaluator` with other local evaluators in the same experiment. For custom input mapping, error handling, and more options, see [RemoteEvaluator][9] in the Evaluation Developer Guide.
+
 ## Best practices for reliable custom evaluations
 
 - **Start small**: Target a single, well-defined failure mode before scaling.
@@ -336,7 +358,7 @@ You can:
 
 ## Estimated token usage
 
-You can monitor the token usage of your LLM evaluations using the [LLM Evaluations Token Usage dashboard][8].
+You can monitor the token usage of your LLM evaluations using the [LLM Evaluations Token Usage dashboard][10].
 
 If you need more details, the following metrics allow you to track the LLM resources consumed to power evaluations:
 
@@ -357,5 +379,6 @@ Each of these metrics has `ml_app`, `model_server`, `model_provider`, `model_nam
 [5]: https://arxiv.org/abs/2504.00050
 [6]: /llm_observability/evaluations/evaluation_compatibility
 [7]: /llm_observability/evaluations/custom_llm_as_a_judge_evaluations/template_evaluations/
-[8]: https://app.datadoghq.com/dash/integration/llm_evaluations_token_usage
-
+[8]: /llm_observability/experiments
+[9]: /llm_observability/guide/evaluation_developer_guide/#using-managed-evaluators
+[10]: https://app.datadoghq.com/dash/integration/llm_evaluations_token_usage
