@@ -92,7 +92,7 @@ To manually trigger the tests in a suite:
 
 {{< img src="synthetics/test_suites/run_tests_now.png" alt="The Tests in the Suite tab with tests bulk selected and the Run Tests Now button visible" style="width:100%;" >}}
 
-**Note**: The only limitation is that you can run a maximum of 50 tests at a time.
+**Note**: You can run a maximum of 50 tests at a time.
 
 ## Troubleshooting
 
