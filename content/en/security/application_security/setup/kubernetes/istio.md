@@ -68,7 +68,28 @@ helm upgrade -i datadog-agent datadog/datadog -f values.yaml
 {{% /tab %}}
 {{% tab "Datadog Operator" %}}
 
-Datadog Operator does not yet support sidecar mode configuration. To use the Operator with Istio, configure external mode by following the instructions on [App and API Protection for Kubernetes](/containers/kubernetes/appsec/), or use the [manual configuration](#manual-configuration-alternative) section below.
+Add the annotation to your `DatadogAgent` resource to enable the feature, and set the mode using `spec.override.clusterAgent.env`:
+
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+  annotations:
+    agent.datadoghq.com/appsec.injector.enabled: "true"
+spec:
+  override:
+    clusterAgent:
+      env:
+        - name: DD_CLUSTER_AGENT_APPSEC_INJECTOR_MODE
+          value: "sidecar"
+```
+
+Apply with:
+
+```bash
+kubectl apply -f datadog-agent.yaml
+```
 
 {{% /tab %}}
 {{< /tabs >}}

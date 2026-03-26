@@ -204,7 +204,11 @@ metadata:
     agent.datadoghq.com/appsec.injector.processor.service.name: "datadog-aap-extproc-service"  # Required: must match your security processor service name
     agent.datadoghq.com/appsec.injector.processor.service.namespace: "datadog"
 spec:
-  # ... your existing DatadogAgent configuration
+  override:
+    clusterAgent:
+      env:
+        - name: DD_CLUSTER_AGENT_APPSEC_INJECTOR_MODE
+          value: "external"
 ```
 
 Apply the configuration:
