@@ -6038,6 +6038,12 @@ components:
             Scope down exclusion filter to only a subset of logs with a log query.
           example: "*"
           type: string
+        sample_attribute:
+          description: |-
+            Sample attribute to use for the sampling of logs going through this exclusion filter.
+            When set, only the logs with the specified attribute are sampled.
+          example: "@ci.job_id"
+          type: string
         sample_rate:
           description: |-
             Sample rate to apply to logs going through this exclusion filter,
@@ -24482,6 +24488,7 @@ components:
         - $ref: "#/components/schemas/ToplistWidgetDefinition"
         - $ref: "#/components/schemas/TopologyMapWidgetDefinition"
         - $ref: "#/components/schemas/TreeMapWidgetDefinition"
+        - $ref: "#/components/schemas/WildcardWidgetDefinition"
     WidgetDisplayType:
       description: Type of display to use for the request.
       enum:
@@ -25253,6 +25260,81 @@ components:
       x-enum-varnames:
         - TIMESERIES
         - TOPLIST
+    WildcardWidgetDefinition:
+      description: >-
+        Custom visualization widget using Vega or Vega-Lite specifications. Combines standard Datadog data requests with a Vega or Vega-Lite JSON specification for flexible, custom visualizations.
+      properties:
+        custom_links:
+          description: List of custom links.
+          items:
+            $ref: "#/components/schemas/WidgetCustomLink"
+          type: array
+        requests:
+          description: List of data requests for the wildcard widget.
+          example: [{"formulas": ["formula": "query1"], "queries": [{"aggregator": "avg", "data_source": "metrics", "name": "query1", "query": "avg:system.cpu.user{*} by {env}"}], "response_format": "scalar"}]
+          items:
+            $ref: "#/components/schemas/WildcardWidgetRequest"
+          type: array
+        specification:
+          $ref: "#/components/schemas/WildcardWidgetSpecification"
+        time:
+          $ref: "#/components/schemas/WidgetTime"
+        title:
+          description: Title of the widget.
+          type: string
+        title_align:
+          $ref: "#/components/schemas/WidgetTextAlign"
+        title_size:
+          description: Size of the title.
+          type: string
+        type:
+          $ref: "#/components/schemas/WildcardWidgetDefinitionType"
+      required:
+        - type
+        - requests
+        - specification
+      type: object
+    WildcardWidgetDefinitionType:
+      default: wildcard
+      description: Type of the wildcard widget.
+      enum:
+        - wildcard
+      example: wildcard
+      type: string
+      x-enum-varnames:
+        - WILDCARD
+    WildcardWidgetRequest:
+      description: >-
+        Request object for the wildcard widget. Each variant represents a distinct data-fetching pattern: scalar formulas, timeseries formulas, list streams, and histograms.
+      oneOf:
+        - $ref: "#/components/schemas/TreeMapWidgetRequest"
+        - $ref: "#/components/schemas/TimeseriesWidgetRequest"
+        - $ref: "#/components/schemas/ListStreamWidgetRequest"
+        - $ref: "#/components/schemas/DistributionWidgetRequest"
+    WildcardWidgetSpecification:
+      description: >-
+        Vega or Vega-Lite specification for custom visualization rendering. See https://vega.github.io/vega-lite/ for the full grammar reference.
+      properties:
+        contents:
+          description: The Vega or Vega-Lite JSON specification object.
+          example: {"$schema": "https://vega.github.io/schema/vega-lite/v5.json", "data": {"name": "table1"}, "description": "A simple bar chart", "encoding": {"x": {"field": "env", "sort": "-y", "type": "nominal"}, "y": {"field": "query1", "type": "quantitative"}}, "mark": "bar"}
+          type: object
+        type:
+          $ref: "#/components/schemas/WildcardWidgetSpecificationType"
+      required:
+        - type
+        - contents
+      type: object
+    WildcardWidgetSpecificationType:
+      description: Type of specification used by the wildcard widget.
+      enum:
+        - vega
+        - vega-lite
+      example: vega-lite
+      type: string
+      x-enum-varnames:
+        - VEGA
+        - VEGA_LITE
   securitySchemes:
     AuthZ:
       description: This API uses OAuth 2 with the implicit grant flow.
@@ -30454,7 +30536,7 @@ paths:
         Update an index as identified by its name.
         Returns the Index object passed in the request body when the request is successful.
 
-        Using the `PUT` method updates your index’s configuration by **replacing**
+        Using the `PUT` method updates your index's configuration by **replacing**
         your current configuration with the new one sent to your Datadog organization.
       operationId: UpdateLogsIndex
       parameters:
