@@ -27,7 +27,7 @@ further_reading:
 
 Datadog Fleet Automation allows you to centrally govern and remotely manage Datadog Agents and OpenTelemetry (OTel) Collectors at scale to support your evolving observability needs.
 
-{{< img src="/agent/fleet_automation/fleet_automation2.png" alt="The fleet automation page" style="width:100%;" >}}
+{{< img src="/agent/fleet_automation/fleet-automation-main.png" alt="The fleet automation page" style="width:100%;" >}}
 
 ## Use cases
 
@@ -90,6 +90,8 @@ The Pipeline Visualization toggle in the Configurations tab of an OTel Collector
 - Validate telemetry routing between configured OTel Collector components.
 - Spot unexpected data drops along the OTel Collector pipeline.
 - Inspect specific component configuration YAML snippets by hovering over any component.
+
+{{< img src="/agent/fleet_automation/fleet-automation-pipeline-view.png" alt="Otel Collector pipeline view" style="width:100%;" >}}
 
 ### View Agent Audit Trail events
 
