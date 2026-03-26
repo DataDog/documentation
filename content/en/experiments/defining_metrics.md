@@ -89,7 +89,7 @@ On the **Create Metric SQL Model** page, write your SQL query to define and prev
 
 ### Create a metric using your SQL model
 
-After you create your SQL model, create a metric from it.
+After you create your SQL model, use it to create a metric:
 
 1. Navigate to the [Metrics page][1] within Datadog Product Analytics.
 1. Select the **Metrics** tab.
