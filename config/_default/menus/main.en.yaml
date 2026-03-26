@@ -6935,16 +6935,16 @@ menu:
       parent: cloudprem_configure
       identifier: cloudprem_configure_indexes
       weight: 500
-    - name: Pipelines
-      url: /cloudprem/configure/pipelines
-      parent: cloudprem_configure
-      identifier: cloudprem_configure_pipelines
-      weight: 502
     - name: Ingress
       url: /cloudprem/configure/ingress
       parent: cloudprem_configure
       identifier: cloudprem_ingress
       weight: 503
+    - name: Lambda Search Offloading
+      url: /cloudprem/configure/lambda
+      parent: cloudprem_configure
+      identifier: cloudprem_configure_lambda
+      weight: 504
     - name: Operate
       url: /cloudprem/operate/
       parent: cloudprem
