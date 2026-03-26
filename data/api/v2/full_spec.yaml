@@ -58765,7 +58765,7 @@ components:
         - TIMESTAMP_DESCENDING
     SecurityMonitoringStandardDataSource:
       default: logs
-      description: Source of events, either logs, audit trail, or Datadog events.
+      description: Source of events, either logs, audit trail, or Datadog events. `app_sec_spans` is deprecated in favor of `spans`.
       enum:
         - logs
         - audit
