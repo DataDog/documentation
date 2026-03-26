@@ -18,17 +18,17 @@ private: true
 
 ## Overview
 
-Tag policies are centralized, sequentially evaluated aggregation rules that determine which tags are retained on metrics after ingestion. They let you define persistent, account-level controls based on metric names or prefixes to specify which tags to retain or exclude. This helps proactively manage cardinality and reduce costs without requiring code changes.
+Tag policies are centralized, sequentially evaluated rules that let you proactively configure metric tagging behavior before or at ingestion. They help you control which tags are retained or excluded, enabling you to mitigate high cardinality and enforce consistent tag management across your organization.
+
+Tag policies apply at the account level and operate on groups of metrics defined by metric names or prefixes. These rules determine which tags are kept, dropped, or automatically stripped when they contribute to excessive cardinality. Because they apply to both existing metrics and any future metrics that match the defined patterns, tag policies reduce the need for reactive cleanup or code-level changes while helping manage costs effectively.
 
 ## Create a tag policy
 
 After you create a policy, Datadog automatically applies it to all matching metrics.
 
-1. Navigate to [**Metrics → Settings**][4].
+1. Navigate to [**Metrics → Settings**][3].
 2. Click **+ Create Policy**.
-3. Select **Tag Policy**.
-
-Alternatively, create policies from the [Metrics Volume][2] page by opening the **More** menu next to **Export as CSV**.
+3. Select **Set Tag Policy**.
 
 ### Step 1: Set policy details
 
@@ -170,7 +170,7 @@ Starting tags:
 
 ## Metrics without Limits™ compatibility
 
-Tag policies do not automatically override existing [Metrics without Limits™][3] (MWL) per-metric configurations. Existing MWL configurations take precedence and are preserved when tag policies are created or modified.
+Tag policies do not automatically override existing [Metrics without Limits™][2] (MWL) per-metric configurations. Existing MWL configurations take precedence and are preserved when tag policies are created or modified.
 
 If a metric's MWL configuration is deleted, tag policies automatically apply to that metric based on the current policy order.
 
@@ -181,6 +181,5 @@ To exclude a specific metric from all tag policies without deleting them, use th
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/metric/settings/policies
-[2]: https://app.datadoghq.com/metric/volume
-[3]: /metrics/metrics-without-limits/
-[4]: https://app.datadoghq.com/metric/settings
+[2]: /metrics/metrics-without-limits/
+[3]: https://app.datadoghq.com/metric/settings
