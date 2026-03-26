@@ -515,6 +515,17 @@ Instead of manually reordering new steps by dragging and dropping individual ste
 
 {{< img src="synthetics/browser_tests/recording_cursor_step.mp4" alt="Set the cursor on a test step to add additional steps before this step" video="true" width="100%" >}}
 
+## Export a step to Terraform
+
+To copy a step's Terraform configuration to your clipboard:
+
+1. Hover over a step in the recorder.
+2. Click the **Copy Terraform step to clipboard** icon.
+
+{{< img src="synthetics/browser_tests/browser_test_recording_terraform.png" alt="The Copy Terraform step to clipboard icon in the browser test recorder" style="width:100%;" >}}
+
+Paste the configuration into your `.tf` file as part of a `datadog_synthetics_test` resource. For more information, see [Export Synthetic tests to Terraform][15].
+
 ## Use variables
 
 To see all available variables on manually added steps, type `{{` in the input field.
@@ -569,3 +580,4 @@ To edit a browser recording after it's saved:
 [12]: https://www.w3schools.com/xml/xpath_syntax.asp
 [13]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
 [14]: https://app.datadoghq.com/synthetics/tests
+[15]: /synthetics/guide/export-tests-to-terraform
