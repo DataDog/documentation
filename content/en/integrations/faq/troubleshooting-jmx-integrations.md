@@ -49,7 +49,7 @@ If you're able to connect using the command above, run: `beans` and send to the 
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note**: If you're able to see some metrics (`jvm.heap_memory`, `jvm.non_heap_memory`, etc.) it is a sign that JMXFetch is properly running. If you're targeting another application and not seeing related metrics, the likely issue is a misconfiguration in your YAML. If your `bean_regex` does not match beans that appear in JConsole or `list everything`, see [Use Bean regexes to filter your JMX metrics and supply additional tags][8]—MBean property order is not guaranteed; using `use_canonical_bean_name: true` can help.
+**Note**: If you're able to see some metrics (`jvm.heap_memory`, `jvm.non_heap_memory`, etc.) it is a sign that JMXFetch is properly running. If you're targeting another application and not seeing related metrics, the likely issue is a misconfiguration in your YAML. If your `bean_regex` does not match beans that appear in JConsole or `list everything`, see [Use Bean regexes to filter your JMX metrics and supply additional tags][8]—MBean property order is not guaranteed; setting `use_canonical_bean_name: true` (in `init_config`, on an instance, or on an individual `include`/`exclude` filter) can help.
 
 ## Agent troubleshooting
 

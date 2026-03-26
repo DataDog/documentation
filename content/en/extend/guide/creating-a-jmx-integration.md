@@ -20,7 +20,7 @@ The JMX integration contains specific init and instance configs:
 init_config:
     is_jmx: true                   # Identifies the integration type as JMX.
     collect_default_metrics: true  # Collect metrics declared in `metrics.yaml`.
-    use_canonical_bean_name: true  # Optional. When true, match bean_regex against canonical (alphabetically ordered) MBean names. Recommended true for new setups; default false for backward compatibility. Can be overridden per instance.
+    use_canonical_bean_name: true  # Optional. When true, match bean_regex against canonical (alphabetically ordered) MBean names. Recommended true for new setups; default false for backward compatibility. Can be overridden per instance or per include/exclude filter.
 
 instances:
   - host: <HOST>                   # JMX hostname

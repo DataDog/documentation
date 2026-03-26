@@ -68,9 +68,15 @@ Using the [Metrics Explorer][3], you are able to query your metrics and filter t
 
 JMX MBean names have the form `domain:key1=value1,key2=value2,...`. The JMX specification does not guarantee the order of key properties in the bean name string. By default, `bean_regex` matches against the string returned by `ObjectName.toString()`, which preserves registration order. The same MBean may therefore appear as `my.app:type=MyType,name=MyName,scope=MyScope` or `my.app:name=MyName,scope=MyScope,type=MyType` depending on the application.
 
-To make `bean_regex` matching deterministic, set `use_canonical_bean_name` to `true` in `init_config` (applies to all instances) or on an individual instance (overrides `init_config`). The Agent then matches against the canonical form of the MBean name (`ObjectName.getCanonicalName()`), where key properties are sorted alphabetically. For new setups, setting `use_canonical_bean_name: true` is recommended. The default is `false` for backward compatibility.
+To make `bean_regex` matching deterministic, set `use_canonical_bean_name` to `true`. The Agent then matches against the canonical form of the MBean name (`ObjectName.getCanonicalName()`), where key properties are sorted alphabetically. For new setups, setting `use_canonical_bean_name: true` is recommended. The default is `false` for backward compatibility.
 
-Example with canonical bean names (write your `bean_regex` so that key properties are in alphabetical order):
+The parameter can be set at three levels (highest precedence first):
+
+1. **`include`/`exclude` filter** — applies only to that filter's `bean_regex` and `bean_name` matching. Useful for gradual migration when some filters depend on the old property order.
+2. **Instance** — applies to all filters in the instance.
+3. **`init_config`** — applies to all instances.
+
+Example with canonical bean names globally (write your `bean_regex` so that key properties are in alphabetical order):
 
 ```yaml
 init_config:
@@ -93,6 +99,39 @@ instances:
           tags:
               name: $1
               scope: $2
+```
+
+Example with per-filter override — useful when migrating incrementally:
+
+```yaml
+init_config:
+  is_jmx: true
+
+instances:
+  - host: "<JMX_ENDPOINT>"
+    port: "<JMX_PORT>"
+
+    conf:
+      # This filter uses canonical order
+      - include:
+          use_canonical_bean_name: true
+          bean_regex:
+            - "my.app:name=(.*),scope=(.*),type=MyType"
+          attribute:
+            SomeAttribute:
+              metric_type: gauge
+              alias: "my.app.some_metric"
+          tags:
+              name: $1
+              scope: $2
+      # This filter keeps the old toString() order
+      - include:
+          bean_regex:
+            - "my.app:type=Legacy,name=(.*)"
+          attribute:
+            LegacyAttribute:
+              metric_type: gauge
+              alias: "my.app.legacy_metric"
 ```
 
 ## Further Reading
