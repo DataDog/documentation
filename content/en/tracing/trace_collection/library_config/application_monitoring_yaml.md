@@ -11,7 +11,7 @@ further_reading:
 
 ## Overview
 
-On Linux hosts, you can configure Datadog SDKs at the host level using the `application_monitoring.yaml` file. This works for any SDK loaded on the host, including those loaded through Single Step Instrumentation (SSI). All instrumented services on the host inherit these settings.
+On Linux hosts, you can configure Datadog SDKs at the host level using the `application_monitoring.yaml` file. The file works for any SDK loaded on the host, including those loaded through Single Step Instrumentation (SSI). All instrumented services on the host inherit these settings.
 
 ## Configuration steps
 
