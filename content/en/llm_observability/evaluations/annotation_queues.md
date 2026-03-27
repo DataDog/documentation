@@ -12,10 +12,6 @@ further_reading:
 
 ## Overview
 
-{{< callout url="#" btn_hidden="true" header="Preview Feature">}}
-Annotation Queues are in Preview. To request access, contact ml-observability-product@datadoghq.com.
-{{< /callout >}}
-
 Annotation Queues provide a structured workflow for human review of LLM traces. Use annotation queues to:
 - Review traces with complete context including spans, metadata, tool calls, inputs, outputs, and evaluation results
 - Apply structured labels and free-form observations to traces
@@ -23,42 +19,121 @@ Annotation Queues provide a structured workflow for human review of LLM traces. 
 - Validate LLM-as-a-Judge evaluation accuracy
 - Build golden datasets with human-verified labels for testing and validation
 
-## Create and use an annotation queue
+
+## Creating an annotation queue
+
+### Step 1: Configure queue settings
 
 1. Navigate to [**AI Observability > Experiment > Annotations**][2] and select your project.
-1. Click **Create Queue**.
-1. On the **About** tab, configure:
+2. Click **Create Queue** 
+3. On the **About** tab, configure:
    - **Name**: Descriptive name reflecting the queue's purpose (for example, "Failed Evaluations Review - Q1 2026")
    - **Project**: LLM Observability project this queue belongs to
    - **Description** (optional): Explain the queue's purpose and any special instructions for annotators
 
-   Then click **Next**.
-1. On the **Schema** tab, define your new queue's label schema. Use the Preview pane to see how labels appear to annotators as you configure them. 
+4. Then click **Next**.
+5. On the **Schema** tab, define your new queue's label schema. Use the Preview pane to see how labels appear to annotators as you configure them. Each label can be marked as required and can optionally include:
+   - **Assessment criteria**: Allow annotators to indicate pass/fail for that label value
+   - **Reasoning**: Allow annotators to add a short explanation
+6. Review your queue configuration and click **Create** to create the queue.
 
    {{< img src="llm_observability/evaluations/annotation_queues/schema_edit.png" alt="The Edit Queue modal showing the Schema tab with label configuration on the left and a preview pane on the right. The left panel displays fields for configuring a categorical label named failure_type with three categories: hallucination, formatting_error, and refusal. Checkboxes enable Assessment Criteria and Reasoning options. The right preview pane shows how the label appears to annotators with checkboxes for each category, Pass/Fail assessment buttons, and a reasoning text field." style="width:100%;" >}}
 
-   Then click **Create**.
-1. Add interactions. 
-   1. Navigate to [**AI Observability > Traces**][1].
-   1. Filter traces using available facets (evaluation results, error status, application, time range).
-   1. Click on an individual trace, or bulk select multiple traces.
-   1. Click **Flag for Annotation**.
-   1. Select your queue from the drop-down.
-1. Return to the annotation queue you created, and click **Review** to begin annotating.
+### Step 2: Select traces for annotation
 
+You can create add traces to queue manually from Trace Explorer or populate queues automatically using Automation Rules.
+
+{{< tabs >}}
+
+{{% tab "Manually from Trace Explorer" %}}
+Add traces to a queue manually from the Trace Explorer:
+1. Navigate to  [**AI Observability > Traces**][1]
+2. Filter traces using available facets (evaluation results, error status, application, time range)
+3. Select individual traces or bulk select multiple traces
+4. Click **Flag for Annotation**
+5. Choose **Create New Queue** or select an existing queue
+
+[1]: https://app.datadoghq.com/llm/traces
+{{% /tab %}}
+
+{{% tab "Using Automation Rules" %}}
+Instead of manually selecting traces, use Automation Rules to route traces into annotation queues automatically based on filters and sampling criteria. This enables continuous, hands-off queue population without requiring manual trace selection.
+
+To add an annotation queue action to an Automation Rule:
+1. Navigate to  [**AI Observability > Traces**][1]
+2. Apply filters to identify traces you want to route (evaluation failures, latency thresholds, specific applications). See the example queries in [Search Syntax](https://docs.datadoghq.com/logs/explorer/search_syntax/).
+3. Click **Automate Query**
+4. Configure sampling rate (for example, 10% of matching traces).
+5. Under **Actions**, select **Add to Annotation Queue**.
+6. Choose the target queue.
+7. Save the rule.
+
+Traces matching the rule's filters are added to the queue automatically as they arrive.
+
+[1]: https://app.datadoghq.com/llm/traces
+{{% /tab %}}
+{{< /tabs >}}
+
+
+## Annotating traces
+
+### Accessing your queues
+
+Navigate to [**AI Observability > Experiment > Annotations**][2] to see all available annotation queues. Click on a queue to see the trace list, then click **Review** to begin annotating.
+
+Review Mode displays:
+- **Full trace context** (right panel):
+  - Complete span tree with inputs, outputs, metadata
+  - Tool calls and intermediate reasoning steps
+  - Evaluation results on trace and individual spans
+
+- **Annotation controls** (left panel):
+  - Configured labels for this queue
+  - Progress indicator showing position in queue
+  - Navigation controls (Previous, Next)
+  
    {{< img src="llm_observability/evaluations/annotation_queues/review.png" alt="The annotation review interface showing the annotation panel on the left and trace details on the right. The left panel displays label controls including failure_type checkboxes for hallucination, formatting_error, and refusal, plus a requires_escalation assessment with Pass and Fail buttons and a Save button at the bottom. The right panel shows the trace details for citizen_agent with a span tree, evaluation results, and expandable sections for Input and Output displaying JSON-formatted data about a weather information query." style="width:100%;" >}}
+
+### Applying labels
+
+For each trace:
+1. **Review the full trace context**: Expand spans as needed to understand inputs, outputs, tool calls, and evaluation results.
+2. **Apply labels**: Fill in the configured labels based on your assessment.
+3. Annotations are be autosaved.
+    
+### Best practices for annotation
+
+**Be consistent**:
+- Review the queue description and label definitions before starting.
+- When multiple annotators work on the same queue, establish shared understanding of criteria.
+- Document reasoning in notes for borderline cases.
+
+**Provide reasoning**:
+- Use free-form notes to document why you applied specific labels.
+- Note patterns you observe across multiple traces.
+- Reasoning helps refine evaluation criteria and understand failure modes.
 
 ## Managing queues
 
+### Tracking queue progress
+
+The Annotations list page displays a progress bar for each queue showing the ratio of reviewed interactions to total interactions. Use this to monitor annotation completion across queues at a glance.
+
+### Filtering traces by annotation labels
+
+use the **Annotation Labels** facet to filter traces by labels applied in annotation queues. This allows you to:
+- Find all traces tagged with a specific failure mode (for example, `failure_type: hallucination`)
+- Build targeted samples for downstream review, dataset creation, or CSV export for data analysis
+  
 ### Editing queue schema
 
 You can modify a queue's label schema after creation:
-1. Navigate to [**AI Observability > Experiment > Annotations**][2]
-1. Open the queue
-1. If the Details panel is hidden, click **View Details**
-1. Click **Edit**
-1. Add, remove, or modify labels
-1. Click **Save Changes**
+1. Navigate to [**AI Observability > Experiment > Annotations**][2].
+2. Open the queue.
+3. If the Details panel is hidden, click **View Details**.
+4. Click **Edit**.
+5. Add, remove, or modify labels.
+6. Click **Save Changes**.
 
 <div class="alert alert-info">Changing the schema doesn't affect already-applied labels, but annotators will see the updated schema going forward.</div>
 
@@ -66,20 +141,20 @@ You can modify a queue's label schema after creation:
 
 Export annotated traces for analysis or use in other workflows:
 
-1. Navigate to [**AI Observability > Experiment > Annotations**][2]
-1. Open the queue
-1. Select traces (or select all)
-1. Click **Export**
+1. Navigate to [**AI Observability > Experiment > Annotations**][2].
+2. Open the queue.
+3. Select traces (or select all).
+4. Click **Export**.
 
 ### Adding to datasets
 
 Transfer annotated traces to datasets for experiment evaluation:
 
-1. Navigate to [**AI Observability > Experiment > Annotations**][2]
-1. Open the queue
-1. Select traces to transfer
-1. Click **Add to Dataset**
-1. Choose an existing dataset, or create a dataset
+1. Navigate to [**AI Observability > Experiment > Annotations**][2].
+2. Open the queue.
+3. Select traces to transfer.
+4. Click **Add to Dataset**.
+5. Choose an existing dataset, or create a dataset.
 
 Labels are included with each trace as metadata.
 
@@ -88,31 +163,20 @@ See [Datasets][3] for more information about using datasets in experiments.
 ### Deleting queues
 
 To delete a queue:
-1. Navigate to [**AI Observability > Experiment > Annotations**][2]
-1. Open the queue
-1. Click **Delete** in the Details panel
+1. Navigate to [**AI Observability > Experiment > Annotations**][2].
+2. Open the queue.
+3. Click **Delete** in the Details panel.
 
 <div class="alert alert-info">Deleting a queue removes the queue and label associations, but does not delete the underlying traces from LLM Observability. Traces remain accessible in Trace Explorer.</div>
 
 ## Data retention
 
 
-| Data              | Retention period |
-| ----------------- | ---------------- |
-| Traces in queues  | 15 days          |
-| Annotation labels | Indefinite       |
+| Data              | Retention period                                    |
+| ----------------- | ----------------------------------------------------|
+| Traces in queues  | Capped by your organization's trace retention period|
+| Annotation labels | Indefinite                                          |
 
-## Best practices for annotation
-
-**Be consistent**:
-- Review the queue description and label definitions before starting
-- When multiple annotators work on the same queue, establish shared understanding of criteria
-- Document reasoning in notes for borderline cases
-
-**Provide reasoning**:
-- Use free-form notes to document why you applied specific labels
-- Note patterns you observe across multiple traces
-- Reasoning helps refine evaluation criteria and understand failure modes
 
 ## Example workflows
 
@@ -127,6 +191,7 @@ Review failed traces to identify recurring patterns and categorize how your appl
 6. Use failure mode distribution to prioritize fixes
 
 #### Queue configuration
+
 - **Labels**: Free-form notes, categorical `failure_type` label, pass/fail rating
 - **Annotators**: Product managers, engineers, domain experts
 
@@ -144,6 +209,7 @@ Find traces where automated evaluators may be uncertain or incorrect, then have 
 6. Refine evaluation prompts based on disagreements
 
 #### Queue configuration
+
 - **Labels**: Numeric scores matching evaluation criteria (0-10), categorical `judge_accuracy` label, reasoning notes
 - **Annotators**: Subject matter experts who understand evaluation criteria
 
@@ -161,6 +227,7 @@ Build benchmark datasets with human-verified labels for regression testing and c
 6. Continuously expand dataset with new edge cases
 
 #### Queue configuration
+
 - **Labels**: Multiple categorical labels covering quality dimensions, numeric scores, pass/fail rating, notes
 - **Annotators**: Team of domain experts for consistency
 {{% /collapse-content %}}

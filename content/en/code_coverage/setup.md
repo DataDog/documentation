@@ -297,6 +297,8 @@ example/notifications/notifier.go:104.3,104.10 1 3
 
 ### Install the datadog-ci CLI
 
+<div class="alert alert-info">If you use GitHub Actions, you can skip this installation step. The <a href="#uploading-coverage-reports">GitHub Actions upload method</a> below uses a dedicated action that handles <code>datadog-ci</code> installation automatically.</div>
+
 Install the [`datadog-ci`][7] CLI globally using `npm`:
 
 {{< code-block lang="shell" >}}
@@ -357,6 +359,22 @@ To upload your code coverage reports to Datadog, run the following command. Prov
 
 {{< tabs >}}
 {{% tab "GitHub Actions" %}}
+
+Use the [Datadog Code Coverage Upload][101] GitHub Action. This action automatically installs and runs `datadog-ci`, so no additional setup is required:
+
+<pre>
+<code class="language-yaml" data-lang="yaml">
+steps:
+- name: Upload coverage reports to Datadog
+  uses: DataDog/coverage-upload-github-action@v1
+  with:
+    api_key: ${{ secrets.DD_API_KEY }}
+    site: {{< region-param key="dd_site" >}}
+</code>
+</pre>
+
+Alternatively, if you have `datadog-ci` installed, you can run it directly:
+
 <pre>
 <code class="language-yaml" data-lang="yaml">
 steps:
@@ -367,6 +385,8 @@ steps:
     DD_SITE: {{< region-param key="dd_site" >}}
 </code>
 </pre>
+
+[101]: https://github.com/marketplace/actions/datadog-code-coverage-upload
 {{% /tab %}}
 {{% tab "Gitlab" %}}
 <pre>
@@ -453,6 +473,19 @@ If the paths in your report are relative to a different directory in your reposi
 {{< code-block lang="shell" >}}
 datadog-ci coverage upload --base-path=frontend/src .
 {{< /code-block >}}
+
+### Inaccurate coverage from non-executable lines
+
+Some coverage tools include non-executable lines (such as comments, blank lines, and closing brackets) in their reports, counting them as uncovered. This can lower your coverage percentages and produce false negatives for lines that can never be executed.
+
+During upload, the CLI automatically scans your source files to identify these non-executable lines so they can be excluded from coverage calculations.
+
+File fixes support the following languages: Go, Kotlin, C/C++, Swift, Objective-C, and PHP.
+
+You can control this behavior with the following options:
+
+- `--disable-file-fixes`: Disable file fixes generation entirely.
+- `--file-fixes-search-path <dir>`: Override the root directory used to scan source files. By default, the repository root is used. This is useful in monorepos or when your coverage reports only cover a subset of the codebase, as it speeds up the scan by limiting the directory tree traversed.
 
 ### Discrepancy between Datadog UI and coverage report values
 

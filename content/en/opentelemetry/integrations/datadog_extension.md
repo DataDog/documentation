@@ -14,18 +14,18 @@ further_reading:
 
 ## Overview
 
-As of OpenTelemetry Collector Contrib [modules v0.129.0][4] and newer, the Datadog Extension is included in [contrib distributions][5] of OpenTelemetry Collector. It is also available for [custom builds][6] of OpenTelemetry Collector.
+As of OpenTelemetry Collector Contrib [modules v0.129.0][4] and newer, the Datadog Extension is included in [contrib distributions][5] of OpenTelemetry Collector. It is also available for [custom builds][6] of OpenTelemetry Collector. If you are using the Datadog Distribution of OpenTelemetry Collector (DDOT), the Datadog Extension is automatically enabled.
 
-The Datadog Extension allows you to view OpenTelemetry Collector configuration and build information directly within Datadog on the [Infrastructure List][2] and [Resource Catalog][3]. When used with the [Datadog Exporter][1], this extension gives you visibility into your Collector fleet without leaving the Datadog UI.
+The Datadog Extension allows you to view OpenTelemetry Collector configuration and build information directly in Datadog using [Fleet Automation][7], the [Infrastructure List][2], and [Resource Catalog][3]. When used with the [Datadog Exporter][1], this extension gives you visibility into your Collector fleet without leaving the Datadog UI.
 
-{{< img src="/opentelemetry/integrations/datadog_extension_hostlist.png" alt="OpenTelemetry Collector configuration shown in Datadog Host List" style="width:100%;" >}}
+{{< img src="/agent/fleet_automation/fleet-automation-pipeline-view.png" alt="View OTel Collector configurations with Pipeline Visualization in Fleet Automation" style="width:100%;" >}}
 
 ## Key features
 
-- **Collector Configuration Visibility**: View the complete configuration for any Collector in your infrastructure.
+- **Collector Configuration Visibility**: View the complete configuration of any OTel Collector in your infrastructure.
 - **Build Information**: See Collector version, build details, and component information.
-- **Fleet Management**: Monitor and manage your OpenTelemetry Collector fleet from the Datadog UI.
 - **Local Inspection Endpoint**: Use an HTTP endpoint for local debugging and configuration verification.
+- **Fleet Management**: Monitor and manage your OpenTelemetry Collector fleet from the Datadog UI.
 
 ## Setup
 
@@ -133,7 +133,15 @@ service:
 
 ## Viewing Collector configuration
 
-Once configured, you can view your OpenTelemetry Collector configuration and build information in two locations:
+Once configured, you can view your OpenTelemetry Collector configuration and build information in various locations:
+
+### Fleet Automation
+1. Navigate to **[Integrations > Fleet Automation][7]**.
+2. Filter for OTel Collector hosts using the Collector facets, then click a host.
+3. In the side panel, select the **Info** tab to view build information.
+4. Select the **Configurations** tab to view the full YAML file or a pipeline visualization of your OTel Collector configurations.
+
+{{< img src="/agent/fleet_automation/fleet-automation-yaml-view.png" alt="View OTel Collector configuration YAMLs in Fleet Automation" style="width:100%;" >}}
 
 ### Infrastructure List (Host List)
 
@@ -188,3 +196,4 @@ This endpoint provides:
 [4]: https://github.com/open-telemetry/opentelemetry-collector-contrib/releases/tag/v0.129.0
 [5]: https://github.com/open-telemetry/opentelemetry-collector-releases/releases/tag/v0.129.1
 [6]: https://opentelemetry.io/docs/collector/custom-collector/
+[7]: https://app.datadoghq.com/fleet

@@ -107,9 +107,27 @@ An alert is triggered if your test fails for 3 minutes from any 2 of 13 location
 
 ### Configure the test monitor
 
-Design your alert message and add any email address you want your test to send alerts to. You can also use [notifications integrations][10] such as Slack, PagerDuty, Microsoft Teams, and webhooks. In order to trigger a Synthetic alert to these notification tools, you first need to set up the corresponding [integration][11].
+Use this section to build the **message** that you want to send with the notification. The notification includes your custom message and details about any failing locations. Pre-filled monitor messages are included in the message body:
 
-When you're ready to save your test configuration and monitor, click **Create**. 
+{{< img src="/synthetics/browser_tests/browser_tests_pre-filled.png" alt="Synthetic Monitoring monitor section, highlighting the pre-filled monitor messages" style="width:100%;" >}}
+
+For example, the following monitor message creates a monitor that iterates over steps and extracts variables for browser tests:
+
+   ```text
+   {{! List extracted variables across all successful steps }}
+   # Extracted variables
+   {{#each synthetics.attributes.result.steps}}
+   {{#if extractedValue}}
+   * **Name**: `{{extractedValue.name}}`
+   **Value:** {{#if extractedValue.secure}}*Obfuscated (value hidden)*{{else}}`{{{extractedValue.value}}}`{{/if}}
+   {{/if}}
+   {{/each}}
+   ```
+
+When you're ready to save your test configuration and monitor, click **Save & Edit Recording**.
+
+For more information, see [Using Synthetic Test Monitors][13].
+
 
 ## Create a multistep API test
 
@@ -224,6 +242,6 @@ With Datadog's [APM integration with Synthetic Monitoring][14], access the root 
 [10]: /integrations/#cat-notification
 [11]: https://app.datadoghq.com/account/settings
 [12]: https://app.datadoghq.com/synthetics/multi-step/create
-[13]: /synthetics/guide/synthetic-test-monitors
+[13]: /monitors/types/synthetic_monitoring/
 [14]: /synthetics/apm/
 [15]: /synthetics/api_tests/grpc_tests

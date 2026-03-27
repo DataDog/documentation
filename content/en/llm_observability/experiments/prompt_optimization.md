@@ -25,13 +25,14 @@ Prompt Optimization runs your LLM application on a dataset with the current prom
 - Customizable evaluation metrics for domain-specific tasks
 - Built-in stopping conditions to prevent over-optimization
 - Parallel experiment execution for rapid iteration
+- Dataset splitting into train, validation, and test subsets for unbiased performance estimates
 - Full integration with LLM Observability for tracking and debugging
 
 Prompt Optimization supports any use case where the expected output is known and there is a defined way to score the model's predictions. Prompt Optimization's architecture supports any output type, including structured data extraction, free-form text generation, and numerical predictions.
 
 ## Prerequisites
 
-- [`ddtrace`][1] version 4.4.0+
+- [`ddtrace`][1] version 4.6.0+
 - LLM Observability enabled with Datadog [API and application keys][2]
 - A [dataset][3] with representative examples (recommended: 50-100 records)
 - Access to an advanced reasoning model (o3-mini, Claude 3.5 Sonnet, or similar)
@@ -279,6 +280,56 @@ print(f"View in Datadog: {result.best_experiment_url}")
 print(result.summary())
 ```
 
+#### Enable dataset splitting
+
+Split your dataset into train, validation, and test subsets to get an unbiased estimate of prompt performance. Train examples feed the optimization LLM, validation scores rank iterations, and a final test experiment on the best prompt provides an unbiased score.
+
+Use `dataset_split=True` for default 60/20/20 ratios:
+
+```python
+prompt_optimization = LLMObs._prompt_optimization(
+    name="hallucination-detection-optimization",
+    dataset=dataset,
+    task=detection_task,
+    optimization_task=optimization_task,
+    evaluators=[confusion_matrix_evaluator],
+    summary_evaluators=[precision_recall_evaluator],
+    labelization_function=labelization_function,
+    compute_score=compute_score,
+    config={
+        "prompt": "Detect if the AI response contains hallucinated information.",
+    },
+    max_iterations=10,
+    dataset_split=True,  # Default 60/20/20 split
+)
+
+result = prompt_optimization.run(jobs=20)
+
+# Access validation and test results
+print(f"Best validation score: {result.best_score}")
+print(f"Test score: {result.test_score}")
+print(f"Test experiment: {result.test_experiment_url}")
+```
+
+Specify custom ratios with a 3-tuple:
+
+```python
+prompt_optimization = LLMObs._prompt_optimization(
+    # ... same parameters as above ...
+    dataset_split=(0.7, 0.15, 0.15),  # 70% train, 15% valid, 15% test
+)
+```
+
+Use a separate test dataset:
+
+```python
+prompt_optimization = LLMObs._prompt_optimization(
+    # ... same parameters as above ...
+    dataset_split=True,  # Splits main dataset 80/20 into train/valid
+    test_dataset="my-curated-test-set",  # Separate dataset for unbiased testing
+)
+```
+
 #### Configuration options
 
 `config`
@@ -316,6 +367,16 @@ print(result.summary())
 
   Use `AND` conditions to help ensure multiple metrics meet targets before stopping.
 
+`dataset_split`
+: Controls dataset splitting for unbiased evaluation. Accepts the following values:<br/>
+  - `False` (default): No splitting. The full dataset is used for optimization and scoring.<br/>
+  - `True`: Split with default ratios. Uses 60/20/20 (train/valid/test) without `test_dataset`, or 80/20 (train/valid) with `test_dataset`.<br/>
+  - `(train, valid, test)` tuple: Custom 3-way split ratios. Must sum to 1.0. Cannot be combined with `test_dataset`.<br/>
+  - `(train, valid)` tuple: Custom 2-way split ratios. Must sum to 1.0. Requires `test_dataset` for the test set.
+
+`test_dataset`
+: Name of a separate dataset to use for the final test experiment. When provided, Prompt Optimization pulls this dataset automatically, splits the main dataset into train/valid (80/20 by default), and runs a final test experiment on the best prompt using this dataset. Providing `test_dataset` implicitly enables dataset splitting.
+
 #### Configure parallel workers
 
 When you execute optimization, you can configure your number of parallel workers by passing the `jobs` parameter to the `run()` function:
@@ -334,6 +395,31 @@ Higher values reduce total runtime, but may hit API rate limits.
 - `jobs=1` (serial): ~50 minutes (assuming 5s per call)
 - `jobs=20` (parallel): ~5 minutes
 
+## Dataset splitting
+
+When optimizing a prompt, the same dataset is used both to guide improvements and to evaluate the result. This can lead to overfitting, where the prompt performs well on the optimization data but poorly on new inputs. Dataset splitting addresses this by dividing your data into separate subsets with distinct roles:
+
+| Subset | Role | Description |
+|--------|------|-------------|
+| **Train** | Optimization | Examples shown to the reasoning model for analyzing failures and suggesting improvements. |
+| **Validation** | Scoring | Used to score each iteration and select the best prompt. Not seen by the optimizer. |
+| **Test** | Final evaluation | Run once on the best prompt after optimization to provide an unbiased performance estimate. |
+
+### Default ratios
+
+The split ratios depend on how you configure `dataset_split` and `test_dataset`:
+
+| Configuration | Train | Validation | Test |
+|---------------|-------|------------|------|
+| `dataset_split=True` | 60% | 20% | 20% |
+| `dataset_split=True` + `test_dataset` | 80% | 20% | Separate dataset |
+| `(0.7, 0.15, 0.15)` | 70% | 15% | 15% |
+| `(0.8, 0.2)` + `test_dataset` | 80% | 20% | Separate dataset |
+
+Records are shuffled with a fixed seed for reproducibility across runs.
+
+<div class="alert alert-info">Setting <code>dataset_split=False</code> (the default) preserves the previous behavior where the full dataset is used for all phases of optimization.</div>
+
 ## Understanding results
 
 The `OptimizationResult` object provides comprehensive access to optimization outcomes:
@@ -345,13 +431,16 @@ The `OptimizationResult` object provides comprehensive access to optimization ou
 - `best_experiment_url`: Link to the Datadog experiment for detailed analysis
 - `total_iterations`: Number of iterations completed
 - `best_iteration`: Which iteration achieved the best score
+- `test_score`: Score from the final test experiment. Returns `None` when dataset splitting is disabled.
+- `test_experiment_url`: Link to the test experiment in Datadog. Returns `None` when dataset splitting is disabled.
+- `test_results`: Full results from the test experiment. Returns `None` when dataset splitting is disabled.
 
 ### Methods
 
 - `get_history()`: Complete data for all iterations (prompts, scores, results, URLs)
 - `get_score_history()`: List of scores showing progression
 - `get_prompt_history()`: List of prompts showing evolution
-- `summary()`: Human-readable overview with score progression table
+- `summary()`: Human-readable overview with score progression table. When dataset splitting is enabled, the summary includes the test score and test set evaluations.
 
 Example analyzing results:
 
@@ -370,6 +459,17 @@ plt.xlabel('Iteration')
 plt.ylabel('Score')
 plt.title('Prompt Optimization Progress')
 plt.show()
+```
+
+When dataset splitting is enabled, access the test results:
+
+```python
+# Check for overfitting by comparing validation and test scores
+print(f"Best validation score: {result.best_score}")
+print(f"Test score: {result.test_score}")
+print(f"Test experiment: {result.test_experiment_url}")
+
+# A large gap between best_score and test_score may indicate overfitting
 ```
 
 You can also view the prompt used for each iteration in the Config tab of the Experiment page.
@@ -397,6 +497,13 @@ You will find a collection of example scripts in the [Experiment cookbook reposi
 - Create 2-5 distinct, descriptive labels (for example: `CORRECT HIGH CONFIDENCE`, `INCORRECT EDGE CASE`)
 - Ensure balanced label distribution (for example, avoid 95% in one category)
 - Use labels to help the optimizer understand different types of successes and failures
+
+### Dataset splitting
+
+- Use at least 50 records in your dataset before enabling splitting to help ensure each subset has enough examples
+- Start with the default ratios (`dataset_split=True`) before customizing splits
+- Use `test_dataset` when you have a curated hold-out set that represents production traffic
+- Compare `best_score` (validation) with `test_score` to detect overfitting: a large gap suggests the prompt is too specialized to the validation data
 
 ### Optimization model selection
 

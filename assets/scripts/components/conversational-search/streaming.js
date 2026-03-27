@@ -2,6 +2,10 @@ import Typesense from 'typesense';
 
 let client = null;
 
+export function resetTypesenseClient() {
+    client = null;
+}
+
 export function getTypesenseClient(typesenseConfig) {
     if (client) return client;
 
@@ -17,6 +21,20 @@ export function getTypesenseClient(typesenseConfig) {
     });
 
     return client;
+}
+
+/**
+ * Strips Typesense query syntax that breaks hybrid (keyword + vector) search:
+ *  - "double quotes" trigger exact-phrase mode; when 0 keyword hits match,
+ *    Typesense skips vector search entirely and returns 0 results.
+ *  - -dash prefix triggers token exclusion, which is not meaningful for
+ *    a conversational AI query.
+ */
+export function sanitizeQuery(raw) {
+    return raw
+        .replace(/"/g, '')
+        .replace(/(^|\s)-/g, '$1')
+        .trim();
 }
 
 export async function streamConversation({
@@ -42,7 +60,7 @@ export async function streamConversation({
     const commonSearchParams = {
         conversation: true,
         conversation_model_id: modelId,
-        q: query,
+        q: sanitizeQuery(query),
         conversation_stream: true
     };
 
@@ -54,5 +72,38 @@ export async function streamConversation({
         abortSignal: signal,
         isStreamingRequest: true,
         streamConfig: { onChunk, onError }
+    });
+}
+
+export async function fetchConversation({
+    typesenseConfig,
+    query,
+    modelId,
+    conversationId,
+    signal
+}) {
+    const tsClient = getTypesenseClient(typesenseConfig);
+
+    const searchBody = {
+        searches: [
+            {
+                collection: typesenseConfig.docsIndex,
+                preset: 'docs_ai_search_preset'
+            }
+        ]
+    };
+
+    const commonSearchParams = {
+        conversation: true,
+        conversation_model_id: modelId,
+        q: sanitizeQuery(query)
+    };
+
+    if (conversationId) {
+        commonSearchParams.conversation_id = conversationId;
+    }
+
+    return tsClient.apiCall.post('/multi_search', searchBody, commonSearchParams, {}, {
+        abortSignal: signal
     });
 }
