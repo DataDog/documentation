@@ -73,7 +73,7 @@ The Dev Agent ingests custom instruction files from your repository, including:
 - `.cursorrules`  
 - `.windsurfrules`  
 - `copilot-instructions.md`  
-- `claude.md`  
+- `CLAUDE.md`  
 - `AGENTS.md`  
 - `agent.md`  
 
