@@ -15,7 +15,9 @@ Agentic Onboarding lets LLM coding agents instrument your frontend applications 
 Your coding assistant, such as [Cursor][1] or [Claude Code][2], detects your project's frameworks, adds configuration, and provisions required tokens and apps directly from your IDE.
 
 ## Supported frameworks
-Agentic Onboarding is available for the following frameworks. For Error Tracking, RUM, and Product Analytics: Android, Angular, iOS, Next.js, React, Svelte, Vanilla JS, and Vue. For Infrastructure Monitoring with Kubernetes: Terraform, Ansible, Kustomize, and more.
+Agentic Onboarding is available for the following frameworks:
+- **Error Tracking, RUM, and Product Analytics**: Android, Angular, iOS, Next.js, React, Svelte, Vanilla JS, and Vue. 
+- **Infrastructure Monitoring with Kubernetes**: Terraform, Ansible, Kustomize, and more.
 
 ## Setup
 
