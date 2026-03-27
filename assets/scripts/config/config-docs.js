@@ -24,7 +24,7 @@ module.exports = {
             apiIndex: 'docs_api_alias',
             partnersIndex: 'docs_partners_alias'
         },
-        imgUrl: 'https://datadog-docs-staging.imgix.net/',
+        imgUrl: 'https://docs-staging.dd-static.net/',
         gaTag: 'UA-21102638-9'
     },
     development: {
