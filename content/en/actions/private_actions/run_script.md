@@ -118,7 +118,7 @@ runPredefinedPowershellScript:
 
 ### Grant permissions
 
-The private action runner executes scripts as `ddagentuser`. If your scripts require elevated permissions, grant them to the `ddagentuser`:
+The private action runner executes scripts as `ddagentuser`. If your scripts require access to certain resources, grant `ddagentuser` elevated permissions to these resources:
 
 ```powershell
 # Grant permissions to ddagentuser to your-file-path
