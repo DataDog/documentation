@@ -44,7 +44,7 @@ When Datadog ingests a new advisory, it is matched against your last known libra
 
 ## Vulnerability database
 
-Datadog SCA uses a curated proprietary database built from multiple public and private sources, including the [National Vulnerability Database (NVD)][nvd], the [GitHub Advisory Database][ghad], [osv.dev][osv], ecosystem-specific advisories such as [PyPA's Advisory Database][pypa] and the [Global Security Database][gsd], [Datadog GuardDog][guarddog], and Datadog Security Research. This helps Datadog identify known vulnerabilities, malicious packages, and emerging supply chain threats across supported ecosystems. There is a maximum of 2 hours between when a new vulnerability is published and when it appears in Datadog, with emerging vulnerabilities typically appearing in Datadog within minutes.
+Datadog SCA uses a curated proprietary database built from multiple public and private sources, including the [National Vulnerability Database (NVD)][nvd], the [GitHub Advisory Database][ghad], [osv.dev][osv], ecosystem-specific advisories such as [PyPA's Advisory Database][pypa] and the [Global Security Database][gsd], [Datadog GuardDog][guarddog], and Datadog Security Research. This helps Datadog identify known vulnerabilities, malicious packages, and emerging supply chain threats across supported ecosystems. There is a maximum of 1 hour between when a new vulnerability is published and when it appears in Datadog, with emerging vulnerabilities typically appearing in Datadog within minutes.
 
 ## Key capabilities
 
