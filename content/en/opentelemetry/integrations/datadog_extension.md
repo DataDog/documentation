@@ -14,7 +14,7 @@ further_reading:
 
 ## Overview
 
-As of OpenTelemetry Collector Contrib [modules v0.129.0][4] and newer, the Datadog Extension is included in [contrib distributions][5] of OpenTelemetry Collector. It is also available for [custom builds][6] of OpenTelemetry Collector. If you are using the Datadog Distribution of OpenTelemetry Collector (DDOT), the Datadog Extension is automatically enabled.
+As of OpenTelemetry Collector Contrib [modules v0.129.0][4] and newer, the Datadog Extension is included in [contrib distributions][5] of OpenTelemetry Collector. It is also available for [custom builds][6] of OpenTelemetry Collector. In the [DDOT Collector][8], the extension is enabled by default starting with Datadog Agent v7.76.0.
 
 The Datadog Extension allows you to view OpenTelemetry Collector configuration and build information directly in Datadog using [Fleet Automation][7], the [Infrastructure List][2], and [Resource Catalog][3]. When used with the [Datadog Exporter][1], this extension gives you visibility into your Collector fleet without leaving the Datadog UI.
 
@@ -28,6 +28,8 @@ The Datadog Extension allows you to view OpenTelemetry Collector configuration a
 - **Fleet Management**: Monitor and manage your OpenTelemetry Collector fleet from the Datadog UI.
 
 ## Setup
+
+<div class="alert alert-danger">If you use the <a href="/opentelemetry/setup/ddot_collector/">DDOT Collector</a>, do <strong>not</strong> manually add the Datadog Extension on Agent versions earlier than v7.76.0. Adding the extension on these versions causes duplicate Collector entries in Fleet Automation.</div>
 
 ### 1. Add the Datadog Extension to your Collector configuration
 
@@ -197,3 +199,4 @@ This endpoint provides:
 [5]: https://github.com/open-telemetry/opentelemetry-collector-releases/releases/tag/v0.129.1
 [6]: https://opentelemetry.io/docs/collector/custom-collector/
 [7]: https://app.datadoghq.com/fleet
+[8]: /opentelemetry/setup/ddot_collector/
