@@ -520,9 +520,9 @@ Instead of manually reordering new steps by dragging and dropping individual ste
 To copy a step's Terraform configuration to your clipboard:
 
 1. Hover over a step in the recorder.
-2. Click the **Copy Terraform step to clipboard** icon.
+2. Click the **Copy Terraform step snippet** icon.
 
-{{< img src="synthetics/browser_tests/browser_test_recording_terraform.png" alt="The Copy Terraform step to clipboard icon in the browser test recorder" style="width:100%;" >}}
+{{< img src="synthetics/guide/export-tests-to-terraform/browser_test_recording_terraform_2.png" alt="The Copy Terraform step snippet icon in the browser test recorder" style="width:80%;" >}}
 
 Paste the configuration into your `.tf` file as part of a `datadog_synthetics_test` resource. For more information, see [Export Synthetic tests to Terraform][15].
 
