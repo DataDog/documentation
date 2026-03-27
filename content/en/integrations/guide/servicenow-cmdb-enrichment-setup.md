@@ -27,7 +27,7 @@ Before configuring the integration, ensure you have the [ServiceNow tile configu
 Enrich your Datadog hosts with ServiceNow CMDB metadata through host tagging.
 To enable ingestion of host tags:
 
-1. In ServiceNow, configure a [Query Builder][1] query that returns all of the hosts you wish to tag in Datadog. Schedule the query to execute at your desired refresh interval (Datadog recommends every hour) and save it.
+1. In ServiceNow, configure a [Query Builder][1] query that returns all of the hosts you wish to tag in Datadog. Schedule the query to execute at your desired refresh interval and save it.
 1. Navigate to Datadog's ServiceNow integration tile. In the **Configure** section, in the **CMDB Enrichment** tab, select **Host Tagging**.
 1. Under **Query Configuration**, click **Add New Query**.
 1. Select the **ServiceNow Instance** and the **Query** from the dropdown menus.
@@ -50,7 +50,7 @@ With service tagging, you can populate your Datadog [Service Catalog][3] with se
 
 To enable ingestion of service data:
 
-1. In ServiceNow, configure a [Query Builder][1] query that returns all of the services with which you wish to enrich the Service Catalog. Schedule the query to execute at your desired refresh interval (Datadog recommends every hour) and save it.
+1. In ServiceNow, configure a [Query Builder][1] query that returns all of the services with which you wish to enrich the Service Catalog. Schedule the query to execute at your desired refresh interval and save it.
 1. Navigate to Datadog's ServiceNow integration tile. In the **Configure** section, in the **CMDB Enrichment** tab, select **Service Tagging**.
 1. Under **Query Configuration**, click **Add New Query**.
 1. Select the **ServiceNow Instance** and the **Query** from the dropdown menus.
