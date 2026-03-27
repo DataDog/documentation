@@ -13104,8 +13104,7 @@ menu:
           - v2
         operationids:
           - ListServiceNowUsers
-        unstable:
-          - v2
+        unstable: []
         order: 8
     - name: List ServiceNow instances
       url: '#list-servicenow-instances'
@@ -13117,8 +13116,7 @@ menu:
           - v2
         operationids:
           - ListServiceNowInstances
-        unstable:
-          - v2
+        unstable: []
         order: 9
     - name: Update ServiceNow template
       url: '#update-servicenow-template'
@@ -13130,8 +13128,7 @@ menu:
           - v2
         operationids:
           - UpdateServiceNowTemplate
-        unstable:
-          - v2
+        unstable: []
         order: 2
     - name: Get ServiceNow template
       url: '#get-servicenow-template'
@@ -13143,8 +13140,7 @@ menu:
           - v2
         operationids:
           - GetServiceNowTemplate
-        unstable:
-          - v2
+        unstable: []
         order: 3
     - name: Delete ServiceNow template
       url: '#delete-servicenow-template'
@@ -13156,8 +13152,7 @@ menu:
           - v2
         operationids:
           - DeleteServiceNowTemplate
-        unstable:
-          - v2
+        unstable: []
         order: 1
     - name: Create ServiceNow template
       url: '#create-servicenow-template'
@@ -13169,8 +13164,7 @@ menu:
           - v2
         operationids:
           - CreateServiceNowTemplate
-        unstable:
-          - v2
+        unstable: []
         order: 4
     - name: List ServiceNow templates
       url: '#list-servicenow-templates'
@@ -13182,8 +13176,7 @@ menu:
           - v2
         operationids:
           - ListServiceNowTemplates
-        unstable:
-          - v2
+        unstable: []
         order: 5
     - name: List ServiceNow business services
       url: '#list-servicenow-business-services'
@@ -13195,8 +13188,7 @@ menu:
           - v2
         operationids:
           - ListServiceNowBusinessServices
-        unstable:
-          - v2
+        unstable: []
         order: 7
     - name: List ServiceNow assignment groups
       url: '#list-servicenow-assignment-groups'
@@ -13208,8 +13200,7 @@ menu:
           - v2
         operationids:
           - ListServiceNowAssignmentGroups
-        unstable:
-          - v2
+        unstable: []
         order: 6
     - name: Software Catalog
       url: /api/latest/software-catalog/
@@ -14320,6 +14311,70 @@ menu:
           - DeleteTestOptimizationServiceSettings
         unstable:
           - v2
+        order: 5
+    - name: Widgets
+      url: /api/latest/widgets/
+      identifier: widgets
+      generated: true
+    - name: Update a widget
+      url: '#update-a-widget'
+      identifier: widgets-update-a-widget
+      parent: widgets
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateWidget
+        unstable: []
+        order: 3
+    - name: Get a widget
+      url: '#get-a-widget'
+      identifier: widgets-get-a-widget
+      parent: widgets
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetWidget
+        unstable: []
+        order: 2
+    - name: Delete a widget
+      url: '#delete-a-widget'
+      identifier: widgets-delete-a-widget
+      parent: widgets
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteWidget
+        unstable: []
+        order: 4
+    - name: Create a widget
+      url: '#create-a-widget'
+      identifier: widgets-create-a-widget
+      parent: widgets
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateWidget
+        unstable: []
+        order: 1
+    - name: Search widgets
+      url: '#search-widgets'
+      identifier: widgets-search-widgets
+      parent: widgets
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - SearchWidgets
+        unstable: []
         order: 5
     - name: Workflow Automation
       url: /api/latest/workflow-automation/

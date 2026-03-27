@@ -63,7 +63,6 @@ The Datadog MCP Server supports _toolsets_, which allow you to use only the tool
 - `alerting`: Tools for validating monitors, searching monitor groups, and retrieving monitor templates
 - `apm`: Tools for in-depth [APM][28] trace analysis, span search, Watchdog insights, and performance investigation
 - `cases`: Tools for [Case Management][38], including creating, searching, and updating cases; managing projects; and linking Jira issues
-- `dashboards`: Tools for retrieving, creating, updating, and deleting [dashboards][41]
 - `dbm`: Tools for interacting with [Database Monitoring][26]
 - `error-tracking`: Tools for interacting with Datadog [Error Tracking][25]
 - `feature-flags`: Tools for managing [feature flags][29], including creating, listing, and updating flags and their environments
@@ -249,31 +248,6 @@ Search Datadog RUM events using advanced query syntax.
 - Show JavaScript errors and console warnings in RUM.
 - Find pages that are loading slowly (more than 3 seconds).
 - Show recent user interactions on product detail pages.
-
-### `get_datadog_dashboard`
-*Toolset: **dashboards***\
-Retrieves a Datadog dashboard by ID, returning its title, description, tags, and widgets. Use `search_datadog_dashboards` first to find dashboard IDs.
-
-- Get the full details of dashboard `ps7-mn3-kwf`.
-- Show me the widgets and layout of the infrastructure overview dashboard.
-- Retrieve the template variables configured on this dashboard.
-
-### `upsert_datadog_dashboard`
-*Toolset: **dashboards***\
-Creates or updates a Datadog [dashboard][41]. To update an existing dashboard, provide the dashboard ID; omit it to create a new one.
-
-- Create a dashboard showing CPU and memory usage across all hosts.
-- Add a timeseries widget for error rate to dashboard `abc-123-def`.
-- Update the title and description of my service overview dashboard.
-
-**Note**: Only grid-layout dashboards support widget updates. Free-form dashboards are not supported.
-
-### `delete_datadog_dashboard`
-*Toolset: **dashboards***\
-Permanently deletes a Datadog dashboard by ID. This action cannot be undone. Use `search_datadog_dashboards` first to find dashboard IDs.
-
-- Delete dashboard `ps7-mn3-kwf`.
-- Remove the old staging environment dashboard.
 
 ### `validate_datadog_monitor`
 *Toolset: **alerting***\
@@ -822,4 +796,3 @@ The Datadog MCP Server is under significant development. Use [this feedback form
 [38]: /service_management/case_management/
 [39]: /actions/workflows/
 [40]: /bits_ai/mcp_server/setup#local-binary-authentication
-[41]: /dashboards/

@@ -178,6 +178,11 @@
     },
     {
       "group": "dashboards",
+      "suffix": "_2252738813",
+      "description": "Create a new dashboard with apm metrics widget"
+    },
+    {
+      "group": "dashboards",
       "suffix": "_145494973",
       "description": "Create a new dashboard with apm resource stats widget"
     },
