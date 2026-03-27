@@ -6038,6 +6038,12 @@ components:
             Scope down exclusion filter to only a subset of logs with a log query.
           example: "*"
           type: string
+        sample_attribute:
+          description: |-
+            Sample attribute to use for the sampling of logs going through this exclusion filter.
+            When set, only the logs with the specified attribute are sampled.
+          example: "@ci.job_id"
+          type: string
         sample_rate:
           description: |-
             Sample rate to apply to logs going through this exclusion filter,
@@ -30532,7 +30538,7 @@ paths:
         Update an index as identified by its name.
         Returns the Index object passed in the request body when the request is successful.
 
-        Using the `PUT` method updates your index’s configuration by **replacing**
+        Using the `PUT` method updates your index's configuration by **replacing**
         your current configuration with the new one sent to your Datadog organization.
       operationId: UpdateLogsIndex
       parameters:

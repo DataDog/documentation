@@ -1034,7 +1034,7 @@ components:
         type: string
     ResourceID:
       description: |-
-        Identifier, formatted as `type:id`. Supported types: `dashboard`, `integration-service`, `integration-webhook`, `notebook`, `reference-table`, `security-rule`, `slo`, `workflow`, `app-builder-app`, `connection`, `connection-group`, `rum-application`, `cross-org-connection`, `spreadsheet`, `on-call-schedule`, `on-call-escalation-policy`, `on-call-team-routing-rules`, `logs-pipeline`.
+        Identifier, formatted as `type:id`. Supported types: `dashboard`, `integration-service`, `integration-webhook`, `notebook`, `powerpack`, `reference-table`, `security-rule`, `slo`, `synthetics-global-variable`, `synthetics-test`, `synthetics-private-location`, `monitor`, `workflow`, `app-builder-app`, `connection`, `connection-group`, `rum-application`, `cross-org-connection`, `spreadsheet`, `on-call-schedule`, `on-call-escalation-policy`, `on-call-team-routing-rules`, `logs-pipeline`, `case-management-project`.
       example: "dashboard:abc-def-ghi"
       in: path
       name: resource_id
@@ -15235,6 +15235,41 @@ components:
           $ref: "#/components/schemas/CreateOpenAPIResponseAttributes"
         id:
           $ref: "#/components/schemas/ApiID"
+      type: object
+    CreateOrUpdateWidgetRequest:
+      description: Request body for creating or updating a widget.
+      properties:
+        data:
+          $ref: "#/components/schemas/CreateOrUpdateWidgetRequestData"
+      required:
+        - data
+      type: object
+    CreateOrUpdateWidgetRequestAttributes:
+      description: Attributes for creating or updating a widget.
+      properties:
+        definition:
+          $ref: "#/components/schemas/WidgetDefinition"
+        tags:
+          description: User-defined tags for organizing the widget.
+          items:
+            type: string
+          nullable: true
+          type: array
+      required:
+        - definition
+      type: object
+    CreateOrUpdateWidgetRequestData:
+      description: Data for creating or updating a widget.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/CreateOrUpdateWidgetRequestAttributes"
+        type:
+          description: Widgets resource type.
+          example: widgets
+          type: string
+      required:
+        - type
+        - attributes
       type: object
     CreatePageRequest:
       description: Full request to trigger an On-Call Page.
@@ -58765,7 +58800,7 @@ components:
         - TIMESTAMP_DESCENDING
     SecurityMonitoringStandardDataSource:
       default: logs
-      description: Source of events, either logs, audit trail, or Datadog events.
+      description: Source of events, either logs, audit trail, or Datadog events. `app_sec_spans` is deprecated in favor of `spans`.
       enum:
         - logs
         - audit
@@ -64736,214 +64771,6 @@ components:
         sync_type:
           description: The direction and type of synchronization for this property.
           type: string
-      type: object
-    SyntheticsFastTestAssertionResult:
-      additionalProperties: {}
-      description: Result of a single assertion evaluated during a fast test run.
-      type: object
-    SyntheticsFastTestResult:
-      description: |-
-        Fast test result response. Returns `null` if the result is not yet available
-        (the test is still running or timed out before completing).
-      nullable: true
-      properties:
-        data:
-          $ref: "#/components/schemas/SyntheticsFastTestResultData"
-      type: object
-    SyntheticsFastTestResultAttributes:
-      description: Attributes of the fast test result.
-      properties:
-        device:
-          $ref: "#/components/schemas/SyntheticsFastTestResultDevice"
-        location:
-          $ref: "#/components/schemas/SyntheticsFastTestResultLocation"
-        result:
-          $ref: "#/components/schemas/SyntheticsFastTestResultDetail"
-        test_sub_type:
-          $ref: "#/components/schemas/SyntheticsFastTestSubType"
-        test_type:
-          description: The type of the Synthetic test that produced this result (for example, `api` or `browser`).
-          example: api
-          type: string
-        test_version:
-          description: Version of the test at the time the fast test was triggered.
-          format: int64
-          type: integer
-      type: object
-    SyntheticsFastTestResultData:
-      description: Fast test result data object (JSON:API format).
-      properties:
-        attributes:
-          $ref: "#/components/schemas/SyntheticsFastTestResultAttributes"
-        id:
-          description: The UUID of the fast test, used as the result identifier.
-          example: abc12345-1234-1234-1234-abc123456789
-          type: string
-        type:
-          $ref: "#/components/schemas/SyntheticsFastTestResultType"
-      type: object
-    SyntheticsFastTestResultDetail:
-      description: |-
-        Detailed result data for the fast test run. The exact shape of nested fields
-        (`request`, `response`, `assertions`, etc.) depends on the test subtype.
-      properties:
-        assertions:
-          description: Results of each assertion evaluated during the test.
-          items:
-            $ref: "#/components/schemas/SyntheticsFastTestAssertionResult"
-          type: array
-        call_type:
-          description: gRPC call type (for example, `unary`, `healthCheck`, or `reflection`).
-          type: string
-        cert:
-          additionalProperties: {}
-          description: TLS certificate details, present for SSL tests.
-          type: object
-        duration:
-          description: Total duration of the test in milliseconds.
-          format: double
-          type: number
-        failure:
-          $ref: "#/components/schemas/SyntheticsFastTestResultFailure"
-        finished_at:
-          description: Unix timestamp (ms) of when the test finished.
-          format: int64
-          type: integer
-        id:
-          description: The result ID. Set to the fast test UUID because no persistent result ID exists for fast tests.
-          type: string
-        is_fast_retry:
-          description: Whether this result is from an automatic fast retry.
-          type: boolean
-        request:
-          additionalProperties: {}
-          description: Details of the outgoing request made during the test.
-          type: object
-        resolved_ip:
-          description: IP address resolved for the target host.
-          example: "1.2.3.4"
-          type: string
-        response:
-          additionalProperties: {}
-          description: Details of the response received during the test.
-          type: object
-        run_type:
-          description: Run type indicating how this test was triggered (for example, `fast`).
-          type: string
-        started_at:
-          description: Unix timestamp (ms) of when the test started.
-          format: int64
-          type: integer
-        status:
-          description: Status of the test result (`passed` or `failed`).
-          example: passed
-          type: string
-        steps:
-          description: Step results for multistep API tests.
-          items:
-            $ref: "#/components/schemas/SyntheticsFastTestStepResult"
-          type: array
-        timings:
-          additionalProperties: {}
-          description: Timing breakdown of the test request phases (for example, DNS, TCP, TLS, first byte).
-          type: object
-        traceroute:
-          description: Traceroute hop results, present for ICMP and TCP tests.
-          items:
-            $ref: "#/components/schemas/SyntheticsFastTestTracerouteHop"
-          type: array
-        triggered_at:
-          description: Unix timestamp (ms) of when the test was triggered.
-          format: int64
-          type: integer
-        tunnel:
-          description: Whether the test was run through a Synthetics tunnel.
-          type: boolean
-      type: object
-    SyntheticsFastTestResultDevice:
-      description: Device information for browser-based fast tests.
-      properties:
-        id:
-          description: Device identifier.
-          example: chrome.laptop_large
-          type: string
-        name:
-          description: Display name of the device.
-          example: Laptop Large
-          type: string
-      type: object
-    SyntheticsFastTestResultFailure:
-      description: Failure details if the fast test did not pass.
-      properties:
-        code:
-          description: Error code identifying the failure type.
-          example: TIMEOUT
-          type: string
-        message:
-          description: Human-readable description of the failure.
-          example: Connection timed out
-          type: string
-      type: object
-    SyntheticsFastTestResultLocation:
-      description: Location from which the fast test was executed.
-      properties:
-        id:
-          description: ID of the location.
-          example: aws:us-east-1
-          type: string
-        name:
-          description: Display name of the location.
-          example: N. Virginia (AWS)
-          type: string
-        version:
-          description: Agent version running at this location.
-          type: string
-        worker_id:
-          description: Identifier of the specific worker that ran the test.
-          type: string
-      type: object
-    SyntheticsFastTestResultType:
-      default: result
-      description: JSON:API type for a fast test result.
-      enum:
-        - result
-      example: result
-      type: string
-      x-enum-varnames:
-        - RESULT
-    SyntheticsFastTestStepResult:
-      additionalProperties: {}
-      description: Result of a single step in a multistep fast test run.
-      type: object
-    SyntheticsFastTestSubType:
-      description: Subtype of the Synthetic test that produced this result.
-      enum:
-        - dns
-        - grpc
-        - http
-        - icmp
-        - mcp
-        - multi
-        - ssl
-        - tcp
-        - udp
-        - websocket
-      example: http
-      type: string
-      x-enum-varnames:
-        - DNS
-        - GRPC
-        - HTTP
-        - ICMP
-        - MCP
-        - MULTI
-        - SSL
-        - TCP
-        - UDP
-        - WEBSOCKET
-    SyntheticsFastTestTracerouteHop:
-      additionalProperties: {}
-      description: A single traceroute hop result from a fast test run.
       type: object
     SyntheticsGlobalVariable:
       description: Synthetic global variable.
@@ -71926,6 +71753,136 @@ components:
         - FRIDAY
         - SATURDAY
         - SUNDAY
+    WidgetAttributes:
+      description: Attributes of a widget resource.
+      properties:
+        created_at:
+          description: ISO 8601 timestamp of when the widget was created.
+          example: "2024-01-15T00:00:00.000Z"
+          type: string
+        definition:
+          $ref: "#/components/schemas/WidgetDefinition"
+        is_favorited:
+          description: "Will be implemented soon. Currently always returns false."
+          example: false
+          type: boolean
+        modified_at:
+          description: ISO 8601 timestamp of when the widget was last modified.
+          example: "2024-01-15T00:00:00.000Z"
+          type: string
+        tags:
+          description: User-defined tags for organizing widgets.
+          example:
+            - "team:my-team"
+          items:
+            type: string
+          nullable: true
+          type: array
+      required:
+        - definition
+        - tags
+        - is_favorited
+        - created_at
+        - modified_at
+      type: object
+    WidgetData:
+      description: A widget resource object.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/WidgetAttributes"
+        id:
+          description: The unique identifier of the widget.
+          example: "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+          type: string
+        relationships:
+          $ref: "#/components/schemas/WidgetRelationships"
+        type:
+          description: Widgets resource type.
+          example: widgets
+          type: string
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    WidgetDefinition:
+      additionalProperties: {}
+      description: The definition of a widget, including its type and configuration.
+      properties:
+        title:
+          description: The display title of the widget.
+          example: My Widget
+          maxLength: 100
+          minLength: 1
+          type: string
+        type:
+          $ref: "#/components/schemas/WidgetType"
+      required:
+        - type
+        - title
+      type: object
+    WidgetExperienceType:
+      description: Widget experience types that differentiate between the products using the specific widget.
+      enum:
+        - ccm_reports
+        - logs_reports
+        - csv_reports
+        - product_analytics
+      example: ccm_reports
+      type: string
+      x-enum-varnames:
+        - CCM_REPORTS
+        - LOGS_REPORTS
+        - CSV_REPORTS
+        - PRODUCT_ANALYTICS
+    WidgetIncludedUser:
+      description: A user resource included in the response.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/WidgetIncludedUserAttributes"
+        id:
+          description: The unique identifier of the user.
+          example: "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+          type: string
+        type:
+          description: Users resource type.
+          example: users
+          type: string
+      required:
+        - id
+        - type
+      type: object
+    WidgetIncludedUserAttributes:
+      description: Attributes of an included user resource.
+      properties:
+        handle:
+          description: The email handle of the user.
+          example: "john.doe@example.com"
+          type: string
+        name:
+          description: The display name of the user.
+          example: "John Doe"
+          nullable: true
+          type: string
+      type: object
+    WidgetListResponse:
+      description: Response containing a list of widgets.
+      properties:
+        data:
+          description: List of widget resources.
+          items:
+            $ref: "#/components/schemas/WidgetData"
+          type: array
+        included:
+          description: Array of user resources related to the widgets.
+          items:
+            $ref: "#/components/schemas/WidgetIncludedUser"
+          type: array
+        meta:
+          $ref: "#/components/schemas/WidgetSearchMeta"
+      required:
+        - data
+      type: object
     WidgetLiveSpan:
       description: The available timeframes depend on the widget you are using.
       enum:
@@ -71962,6 +71919,108 @@ components:
         - PAST_SIX_MONTHS
         - PAST_ONE_YEAR
         - ALERT
+    WidgetRelationshipData:
+      description: Relationship data referencing a user resource.
+      properties:
+        id:
+          description: The unique identifier of the user.
+          example: "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+          type: string
+        type:
+          description: Users resource type.
+          example: users
+          type: string
+      required:
+        - id
+        - type
+      type: object
+    WidgetRelationshipItem:
+      description: A JSON:API relationship to a user.
+      properties:
+        data:
+          $ref: "#/components/schemas/WidgetRelationshipData"
+      type: object
+    WidgetRelationships:
+      description: Relationships of the widget resource.
+      properties:
+        created_by:
+          $ref: "#/components/schemas/WidgetRelationshipItem"
+          description: The user who created the widget.
+        modified_by:
+          $ref: "#/components/schemas/WidgetRelationshipItem"
+          description: The user who last modified the widget.
+      type: object
+    WidgetResponse:
+      description: Response containing a single widget.
+      properties:
+        data:
+          $ref: "#/components/schemas/WidgetData"
+        included:
+          description: Array of user resources related to the widget.
+          items:
+            $ref: "#/components/schemas/WidgetIncludedUser"
+          type: array
+      required:
+        - data
+      type: object
+    WidgetSearchMeta:
+      description: Metadata about the search results.
+      properties:
+        created_by_anyone_total:
+          description: Total number of widgets created by anyone.
+          format: int64
+          type: integer
+        created_by_you_total:
+          description: Total number of widgets created by the current user.
+          format: int64
+          type: integer
+        favorited_by_you_total:
+          description: Total number of widgets favorited by the current user.
+          format: int64
+          type: integer
+        filtered_total:
+          description: Total number of widgets matching the current filter criteria.
+          format: int64
+          type: integer
+      type: object
+    WidgetType:
+      description: |-
+        Widget types that are allowed to be stored as individual records.
+        This is not a complete list of dashboard and notebook widget types.
+      enum:
+        - bar_chart
+        - change
+        - cloud_cost_summary
+        - cohort
+        - funnel
+        - geomap
+        - list_stream
+        - query_table
+        - query_value
+        - retention_curve
+        - sankey
+        - sunburst
+        - timeseries
+        - toplist
+        - treemap
+      example: bar_chart
+      type: string
+      x-enum-varnames:
+        - BAR_CHART
+        - CHANGE
+        - CLOUD_COST_SUMMARY
+        - COHORT
+        - FUNNEL
+        - GEOMAP
+        - LIST_STREAM
+        - QUERY_TABLE
+        - QUERY_VALUE
+        - RETENTION_CURVE
+        - SANKEY
+        - SUNBURST
+        - TIMESERIES
+        - TOPLIST
+        - TREEMAP
     WorkflowData:
       description: Data related to the workflow.
       properties:
@@ -107888,51 +107947,6 @@ paths:
         operator: OR
         permissions:
           - synthetics_write
-  /api/v2/synthetics/tests/fast/{id}:
-    get:
-      operationId: GetSyntheticsFastTestResult
-      parameters:
-        - description: The UUID of the fast test to retrieve the result for.
-          in: path
-          name: id
-          required: true
-          schema:
-            example: abc12345-1234-1234-1234-abc123456789
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/SyntheticsFastTestResult"
-          description: OK
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/APIErrorResponse"
-          description: API error response.
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/APIErrorResponse"
-          description: API error response.
-        "429":
-          $ref: "#/components/responses/TooManyRequestsResponse"
-      security:
-        - apiKeyAuth: []
-          appKeyAuth: []
-        - AuthZ:
-            - synthetics_read
-      summary: Get a fast test result
-      tags:
-        - Synthetics
-      x-menu-order: 52
-      x-permission:
-        operator: OR
-        permissions:
-          - synthetics_read
   /api/v2/synthetics/tests/network:
     post:
       operationId: CreateSyntheticsNetworkTest
@@ -111411,6 +111425,333 @@ paths:
         operator: OR
         permissions:
           - teams_read
+  /api/v2/widgets/{experience_type}:
+    get:
+      description: Search and list widgets for a given experience type. Supports filtering by widget type, creator, title, and tags, as well as sorting and pagination.
+      operationId: SearchWidgets
+      parameters:
+        - description: The experience type for the widget.
+          in: path
+          name: experience_type
+          required: true
+          schema:
+            $ref: "#/components/schemas/WidgetExperienceType"
+        - description: Filter widgets by widget type.
+          in: query
+          name: filter[widgetType]
+          schema:
+            $ref: "#/components/schemas/WidgetType"
+        - description: Filter widgets by the email handle of the creator.
+          in: query
+          name: filter[creatorHandle]
+          schema:
+            example: "john.doe@example.com"
+            type: string
+        - description: Filter to only widgets favorited by the current user.
+          in: query
+          name: filter[isFavorited]
+          schema:
+            type: boolean
+        - description: Filter widgets by title (substring match).
+          in: query
+          name: filter[title]
+          schema:
+            type: string
+        - description: Filter widgets by tags. Format as bracket-delimited CSV, e.g. `[tag1,tag2]`.
+          in: query
+          name: filter[tags]
+          schema:
+            type: string
+        - description: |-
+            Sort field for the results. Prefix with `-` for descending order.
+            Allowed values: `title`, `created_at`, `modified_at`.
+          in: query
+          name: sort
+          schema:
+            default: "-modified_at"
+            example: "-modified_at"
+            type: string
+        - description: Page number for pagination (0-indexed).
+          in: query
+          name: page[number]
+          schema:
+            default: 0
+            minimum: 0
+            type: integer
+        - description: Number of widgets per page.
+          in: query
+          name: page[size]
+          schema:
+            default: 50
+            maximum: 100
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WidgetListResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Forbidden
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Search widgets
+      tags:
+        - Widgets
+      x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+          - cloud_cost_management_read
+          - generate_log_reports
+          - manage_log_reports
+          - product_analytics_saved_widgets_read
+    post:
+      description: Create a new widget for a given experience type.
+      operationId: CreateWidget
+      parameters:
+        - description: The experience type for the widget.
+          in: path
+          name: experience_type
+          required: true
+          schema:
+            $ref: "#/components/schemas/WidgetExperienceType"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateOrUpdateWidgetRequest"
+        description: Widget request body.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WidgetResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Forbidden
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Create a widget
+      tags:
+        - Widgets
+      x-codegen-request-body-name: body
+      x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+          - cloud_cost_management_write
+          - generate_log_reports
+          - manage_log_reports
+          - product_analytics_saved_widgets_write
+  /api/v2/widgets/{experience_type}/{uuid}:
+    delete:
+      description: Soft-delete a widget by its UUID for a given experience type.
+      operationId: DeleteWidget
+      parameters:
+        - description: The experience type for the widget.
+          in: path
+          name: experience_type
+          required: true
+          schema:
+            $ref: "#/components/schemas/WidgetExperienceType"
+        - description: The UUID of the widget.
+          in: path
+          name: uuid
+          required: true
+          schema:
+            format: uuid
+            type: string
+      responses:
+        "204":
+          description: No Content
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Delete a widget
+      tags:
+        - Widgets
+      x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+          - cloud_cost_management_write
+          - generate_log_reports
+          - manage_log_reports
+          - product_analytics_saved_widgets_write
+    get:
+      description: Retrieve a widget by its UUID for a given experience type.
+      operationId: GetWidget
+      parameters:
+        - description: The experience type for the widget.
+          in: path
+          name: experience_type
+          required: true
+          schema:
+            $ref: "#/components/schemas/WidgetExperienceType"
+        - description: The UUID of the widget.
+          in: path
+          name: uuid
+          required: true
+          schema:
+            format: uuid
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WidgetResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Get a widget
+      tags:
+        - Widgets
+      x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+          - cloud_cost_management_read
+          - generate_log_reports
+          - manage_log_reports
+          - product_analytics_saved_widgets_read
+    put:
+      description: Update a widget by its UUID for a given experience type. This performs a full replacement of the widget definition.
+      operationId: UpdateWidget
+      parameters:
+        - description: The experience type for the widget.
+          in: path
+          name: experience_type
+          required: true
+          schema:
+            $ref: "#/components/schemas/WidgetExperienceType"
+        - description: The UUID of the widget.
+          in: path
+          name: uuid
+          required: true
+          schema:
+            format: uuid
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateOrUpdateWidgetRequest"
+        description: Widget request body.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WidgetResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Update a widget
+      tags:
+        - Widgets
+      x-codegen-request-body-name: body
+      x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+          - cloud_cost_management_write
+          - generate_log_reports
+          - manage_log_reports
+          - product_analytics_saved_widgets_write
   /api/v2/workflows:
     post:
       description: Create a new workflow, returning the workflow ID. This API requires a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key). Alternatively, you can configure these permissions [in the UI](https://docs.datadoghq.com/account_management/api-app-keys/#actions-api-access).
@@ -112136,7 +112477,9 @@ tags:
       Send server-side events to Product Analytics. Server-Side Events Ingestion allows you to collect custom events
       from any server-side source, and retains events for 15 months. Server-side events are helpful for understanding
       causes of a funnel drop-off which are external to the client-side (for example, payment processing error).
-      See the [Product Analytics page](https://docs.datadoghq.com/product_analytics/) for more information.
+
+      **Note**: Sending server-side events impacts billing. Review the [pricing page](https://www.datadoghq.com/pricing/?product=product-analytics#products)
+      and contact your Customer Success Manager for more information.
     name: Product Analytics
   - description: |-
       Manage your Real User Monitoring (RUM) applications, and search or aggregate your RUM events over HTTP. See the [RUM & Session Replay page](https://docs.datadoghq.com/real_user_monitoring/) for more information
@@ -112269,6 +112612,11 @@ tags:
     externalDocs:
       url: https://docs.datadoghq.com/account_management/users
     name: Users
+  - description: |-
+      Create, read, update, and delete saved widgets. Widgets are reusable
+      visualization components stored independently from any dashboard or notebook,
+      partitioned by experience type and identified by a UUID.
+    name: Widgets
   - description: |-
       Datadog Workflow Automation allows you to automate your end-to-end processes by connecting Datadog with the rest of your tech stack. Build workflows to auto-remediate your alerts, streamline your incident and security processes, and reduce manual toil. Workflow Automation supports over 1,000+ OOTB actions, including AWS, JIRA, ServiceNow, GitHub, and OpenAI. Learn more in our Workflow Automation docs [here](https://docs.datadoghq.com/service_management/workflows/).
     externalDocs:
