@@ -17,7 +17,7 @@ further_reading:
 <div class="alert alert-info">A sample application is <a href="https://github.com/DataDog/serverless-gcp-sample-apps/tree/main/cloud-run-jobs/ruby">available on GitHub</a>.</div>
 <div class="alert alert-info">
 For full visibility and access to all Datadog features in Cloud Run Jobs,
-ensure you've <a href="http://localhost:1313/integrations/google_cloud_platform/">installed the Google Cloud integration</a>
+ensure you've <a href="/integrations/google_cloud_platform/">installed the Google Cloud integration</a>
 and are using <a href="https://hub.docker.com/r/datadog/serverless-init">serverless-init version 1.9.0 or later</a>.
 </div>
 
@@ -31,7 +31,7 @@ gem 'datadog'
 
    **Note**: Cloud Run Jobs run to completion rather than serving requests, so auto instrumentation won't create a top-level "job" span. For end-to-end visibility, create your own root span. See the [Ruby Custom Instrumentation][1] instructions.
 
-   See [Tracing Ruby applications][2] for additional information on how to configure the tracer and enable auto instrumentation.
+   For more information on how to configure the tracer and enable auto instrumentation, see [Tracing Ruby applications][2].
 
 2. **Install serverless-init**.
 

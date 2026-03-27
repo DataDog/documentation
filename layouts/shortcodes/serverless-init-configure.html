@@ -15,7 +15,7 @@
      --update-env-vars=DD_SITE=$DD_SITE \
    ```{{ else if eq (.Get "cloudrun_jobs") "true" }}
 
-   The following command deploys the job. After the container is built and pushed to your registry, deploy it with the required Datadog environment variables:
+   The following command deploys the job:
 
    ```shell
    gcloud run jobs deploy <JOB_NAME> \
