@@ -40,9 +40,11 @@ SCA supports two complementary detection modes:
 - **Static detection** scans repositories by analyzing dependency files (lockfiles and manifests). By default, scans run when a commit updates a supported dependency manifest or lockfile in an enabled repository. You can also run SCA in your CI/CD pipeline (CI jobs are supported for `push` events). See [Set up Static SCA][1] to get started.
 - **Runtime detection** identifies libraries that are loaded and used by your services at runtime using instrumentation from Datadog APM. See [Set up Runtime SCA][2] to get started.
 
-Datadog SCA uses a curated proprietary database built from multiple public and private sources, including the [National Vulnerability Database (NVD)][nvd], the [GitHub Advisory Database][ghad], [osv.dev][osv], ecosystem-specific advisories such as [PyPA's Advisory Database][pypa] and the [Global Security Database][gsd], [Datadog GuardDog][guarddog], and Datadog Security Research. This helps Datadog identify known vulnerabilities, malicious packages, and emerging supply chain threats across supported ecosystems. There is a maximum of 2 hours between when a new vulnerability is published and when it appears in Datadog, with emerging vulnerabilities typically appearing in Datadog within minutes.
-
 When Datadog ingests a new advisory, it is matched against your last known library inventory and appears in the Vulnerabilities Explorer even if you have not rescanned the repository. The Repositories Explorer is commit-scoped and reflects what was known at the time the scan ran—so a scan that executed before Datadog ingested the advisory will not show that newly published advisory in the Repositories Explorer for that commit. See [Understanding SCA views](#understanding-sca-views) for more details.
+
+## Vulnerability database
+
+Datadog SCA uses a curated proprietary database built from multiple public and private sources, including the [National Vulnerability Database (NVD)][nvd], the [GitHub Advisory Database][ghad], [osv.dev][osv], ecosystem-specific advisories such as [PyPA's Advisory Database][pypa] and the [Global Security Database][gsd], [Datadog GuardDog][guarddog], and Datadog Security Research. This helps Datadog identify known vulnerabilities, malicious packages, and emerging supply chain threats across supported ecosystems. There is a maximum of 2 hours between when a new vulnerability is published and when it appears in Datadog, with emerging vulnerabilities typically appearing in Datadog within minutes.
 
 ## Key capabilities
 
