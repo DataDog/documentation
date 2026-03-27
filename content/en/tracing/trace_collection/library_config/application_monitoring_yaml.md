@@ -34,7 +34,7 @@ On Linux hosts, you can configure Datadog SDKs at the host level using the `appl
      DD_APM_TRACING_ENABLED: false
    ```
 
-1. Restart services on the host to apply updates to the configurations.
+1. Restart services on the host to apply the configuration changes.
 
 ## Supported configuration options
 
