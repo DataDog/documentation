@@ -70,7 +70,7 @@ To export a step:
 2. Hover over a step in the recorder.
 3. Click the **Copy Terraform step to clipboard** icon.
 
-{{< img src="synthetics/browser_tests/browser_test_recording_terraform.png" alt="The Copy Terraform step to clipboard icon in the browser test recorder" style="width:100%;" >}}
+{{< img src="synthetics/guide/export-tests-to-terraform/browser_test_recording_terraform_2.png" alt="The Copy Terraform step to clipboard icon in the browser test recorder" style="width:80%;" >}}
 
 Paste the copied configuration into your `.tf` file as part of a `datadog_synthetics_test` resource.
 
