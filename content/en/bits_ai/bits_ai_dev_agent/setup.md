@@ -49,7 +49,7 @@ To enable auto-push, so the Dev Agent can push commits directly to a branch, nav
 
 **Note**: If auto-push is disabled, you must review and approve code in Datadog before the Dev Agent can push it.
 
-### Configure domain allowlist
+### Configure internet access
 
 To configure which external domains agents can reach during agent execution, navigate to **Bits AI Dev** > [**Settings**][12] > **General**, and find the **Domain Allowlist** section. Choose from the following access policies: **No Internet Access**, **Default Allowlist**, **Custom + Default Allowlist**, or **Custom Allowlist**.
 
