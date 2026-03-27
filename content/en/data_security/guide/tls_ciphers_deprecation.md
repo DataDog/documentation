@@ -20,7 +20,7 @@ To test your client's cipher suite compatibility, connect to [tls-config-test.da
 
 {{< site-region region="us,eu,us3,us5,ap1,ap2" >}}
 
-Effective September 1, 2026, Datadog will accept the following cipher suites.
+Effective September 1, 2026, Datadog will accept only the following cipher suites:
 
 ### TLS 1.2
 
