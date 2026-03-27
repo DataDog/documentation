@@ -64772,6 +64772,214 @@ components:
           description: The direction and type of synchronization for this property.
           type: string
       type: object
+    SyntheticsFastTestAssertionResult:
+      additionalProperties: {}
+      description: Result of a single assertion evaluated during a fast test run.
+      type: object
+    SyntheticsFastTestResult:
+      description: |-
+        Fast test result response. Returns `null` if the result is not yet available
+        (the test is still running or timed out before completing).
+      nullable: true
+      properties:
+        data:
+          $ref: "#/components/schemas/SyntheticsFastTestResultData"
+      type: object
+    SyntheticsFastTestResultAttributes:
+      description: Attributes of the fast test result.
+      properties:
+        device:
+          $ref: "#/components/schemas/SyntheticsFastTestResultDevice"
+        location:
+          $ref: "#/components/schemas/SyntheticsFastTestResultLocation"
+        result:
+          $ref: "#/components/schemas/SyntheticsFastTestResultDetail"
+        test_sub_type:
+          $ref: "#/components/schemas/SyntheticsFastTestSubType"
+        test_type:
+          description: The type of the Synthetic test that produced this result (for example, `api` or `browser`).
+          example: api
+          type: string
+        test_version:
+          description: Version of the test at the time the fast test was triggered.
+          format: int64
+          type: integer
+      type: object
+    SyntheticsFastTestResultData:
+      description: Fast test result data object (JSON:API format).
+      properties:
+        attributes:
+          $ref: "#/components/schemas/SyntheticsFastTestResultAttributes"
+        id:
+          description: The UUID of the fast test, used as the result identifier.
+          example: abc12345-1234-1234-1234-abc123456789
+          type: string
+        type:
+          $ref: "#/components/schemas/SyntheticsFastTestResultType"
+      type: object
+    SyntheticsFastTestResultDetail:
+      description: |-
+        Detailed result data for the fast test run. The exact shape of nested fields
+        (`request`, `response`, `assertions`, etc.) depends on the test subtype.
+      properties:
+        assertions:
+          description: Results of each assertion evaluated during the test.
+          items:
+            $ref: "#/components/schemas/SyntheticsFastTestAssertionResult"
+          type: array
+        call_type:
+          description: gRPC call type (for example, `unary`, `healthCheck`, or `reflection`).
+          type: string
+        cert:
+          additionalProperties: {}
+          description: TLS certificate details, present for SSL tests.
+          type: object
+        duration:
+          description: Total duration of the test in milliseconds.
+          format: double
+          type: number
+        failure:
+          $ref: "#/components/schemas/SyntheticsFastTestResultFailure"
+        finished_at:
+          description: Unix timestamp (ms) of when the test finished.
+          format: int64
+          type: integer
+        id:
+          description: The result ID. Set to the fast test UUID because no persistent result ID exists for fast tests.
+          type: string
+        is_fast_retry:
+          description: Whether this result is from an automatic fast retry.
+          type: boolean
+        request:
+          additionalProperties: {}
+          description: Details of the outgoing request made during the test.
+          type: object
+        resolved_ip:
+          description: IP address resolved for the target host.
+          example: "1.2.3.4"
+          type: string
+        response:
+          additionalProperties: {}
+          description: Details of the response received during the test.
+          type: object
+        run_type:
+          description: Run type indicating how this test was triggered (for example, `fast`).
+          type: string
+        started_at:
+          description: Unix timestamp (ms) of when the test started.
+          format: int64
+          type: integer
+        status:
+          description: Status of the test result (`passed` or `failed`).
+          example: passed
+          type: string
+        steps:
+          description: Step results for multistep API tests.
+          items:
+            $ref: "#/components/schemas/SyntheticsFastTestStepResult"
+          type: array
+        timings:
+          additionalProperties: {}
+          description: Timing breakdown of the test request phases (for example, DNS, TCP, TLS, first byte).
+          type: object
+        traceroute:
+          description: Traceroute hop results, present for ICMP and TCP tests.
+          items:
+            $ref: "#/components/schemas/SyntheticsFastTestTracerouteHop"
+          type: array
+        triggered_at:
+          description: Unix timestamp (ms) of when the test was triggered.
+          format: int64
+          type: integer
+        tunnel:
+          description: Whether the test was run through a Synthetics tunnel.
+          type: boolean
+      type: object
+    SyntheticsFastTestResultDevice:
+      description: Device information for browser-based fast tests.
+      properties:
+        id:
+          description: Device identifier.
+          example: chrome.laptop_large
+          type: string
+        name:
+          description: Display name of the device.
+          example: Laptop Large
+          type: string
+      type: object
+    SyntheticsFastTestResultFailure:
+      description: Failure details if the fast test did not pass.
+      properties:
+        code:
+          description: Error code identifying the failure type.
+          example: TIMEOUT
+          type: string
+        message:
+          description: Human-readable description of the failure.
+          example: Connection timed out
+          type: string
+      type: object
+    SyntheticsFastTestResultLocation:
+      description: Location from which the fast test was executed.
+      properties:
+        id:
+          description: ID of the location.
+          example: aws:us-east-1
+          type: string
+        name:
+          description: Display name of the location.
+          example: N. Virginia (AWS)
+          type: string
+        version:
+          description: Agent version running at this location.
+          type: string
+        worker_id:
+          description: Identifier of the specific worker that ran the test.
+          type: string
+      type: object
+    SyntheticsFastTestResultType:
+      default: result
+      description: JSON:API type for a fast test result.
+      enum:
+        - result
+      example: result
+      type: string
+      x-enum-varnames:
+        - RESULT
+    SyntheticsFastTestStepResult:
+      additionalProperties: {}
+      description: Result of a single step in a multistep fast test run.
+      type: object
+    SyntheticsFastTestSubType:
+      description: Subtype of the Synthetic test that produced this result.
+      enum:
+        - dns
+        - grpc
+        - http
+        - icmp
+        - mcp
+        - multi
+        - ssl
+        - tcp
+        - udp
+        - websocket
+      example: http
+      type: string
+      x-enum-varnames:
+        - DNS
+        - GRPC
+        - HTTP
+        - ICMP
+        - MCP
+        - MULTI
+        - SSL
+        - TCP
+        - UDP
+        - WEBSOCKET
+    SyntheticsFastTestTracerouteHop:
+      additionalProperties: {}
+      description: A single traceroute hop result from a fast test run.
+      type: object
     SyntheticsGlobalVariable:
       description: Synthetic global variable.
       properties:
@@ -107947,6 +108155,51 @@ paths:
         operator: OR
         permissions:
           - synthetics_write
+  /api/v2/synthetics/tests/fast/{id}:
+    get:
+      operationId: GetSyntheticsFastTestResult
+      parameters:
+        - description: The UUID of the fast test to retrieve the result for.
+          in: path
+          name: id
+          required: true
+          schema:
+            example: abc12345-1234-1234-1234-abc123456789
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SyntheticsFastTestResult"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: API error response.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: API error response.
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - synthetics_read
+      summary: Get a fast test result
+      tags:
+        - Synthetics
+      x-menu-order: 52
+      x-permission:
+        operator: OR
+        permissions:
+          - synthetics_read
   /api/v2/synthetics/tests/network:
     post:
       operationId: CreateSyntheticsNetworkTest

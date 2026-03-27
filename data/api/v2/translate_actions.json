@@ -4104,6 +4104,9 @@
     "request_description": "",
     "request_schema_description": "Request body for bulk deleting Synthetic tests."
   },
+  "GetSyntheticsFastTestResult": {
+    "summary": "Get a fast test result"
+  },
   "CreateSyntheticsNetworkTest": {
     "summary": "Create a Network Path test",
     "request_description": "",
