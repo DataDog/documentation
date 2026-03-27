@@ -41,7 +41,7 @@ Customize your search query by selecting the sorting options to narrow down the 
 
 Select a topic cluster from the list to examine how inputs or outputs about specific topics perform against other topics for each metric or evaluation. You can also see individual prompts and responses for each cluster. For example, you can get an overview of your slowest topics when you overlay by `duration`.
 
-{{< img src="llm_observability/cluster_map/box.png" alt="The box packing layout displays clusters of traces represented by colored circles, and includes a panel listing clusters with topics, trace counts, and failure rates." style="width:100%;" >}}
+{{< img src="llm_observability/cluster_map/QualityClusters_LLMO.png" alt="The box packing layout displays clusters of traces represented by colored circles, and includes a panel listing clusters with topics, trace counts, and failure rates." style="width:100%;" >}}
 
 ## Further Reading
 
