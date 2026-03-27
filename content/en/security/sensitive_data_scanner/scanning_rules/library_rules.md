@@ -29,7 +29,7 @@ These rules can also be viewed in Datadog:
    1. Click **Add Rules to Scanning Group**.<br />
    1. Follow the steps in [Set Up Sensitive Data Scanner][2] to finish the setup.
 
-<div class="alert alert-info">Library rules are available for all data sources (Logs, APM, RUM, LLM Observability, Observability Pipelines, Secret Scanning, and Cloud Storage).</div>
+<div class="alert alert-info">Most library rules are available for all data sources (Logs, APM, RUM, LLM Observability, Observability Pipelines, Secret Scanning, and Cloud Storage).</div>
 
 {{< multifilter-search resource="sds_rules" >}}
 
