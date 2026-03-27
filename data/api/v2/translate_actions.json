@@ -4439,6 +4439,30 @@
     "description": "Get a list of memberships for a user",
     "summary": "Get user memberships"
   },
+  "SearchWidgets": {
+    "description": "Search and list widgets for a given experience type. Supports filtering by widget type, creator, title, and tags, as well as sorting and pagination.",
+    "summary": "Search widgets"
+  },
+  "CreateWidget": {
+    "description": "Create a new widget for a given experience type.",
+    "summary": "Create a widget",
+    "request_description": "Widget request body.",
+    "request_schema_description": "Request body for creating or updating a widget."
+  },
+  "DeleteWidget": {
+    "description": "Soft-delete a widget by its UUID for a given experience type.",
+    "summary": "Delete a widget"
+  },
+  "GetWidget": {
+    "description": "Retrieve a widget by its UUID for a given experience type.",
+    "summary": "Get a widget"
+  },
+  "UpdateWidget": {
+    "description": "Update a widget by its UUID for a given experience type. This performs a full replacement of the widget definition.",
+    "summary": "Update a widget",
+    "request_description": "Widget request body.",
+    "request_schema_description": "Request body for creating or updating a widget."
+  },
   "CreateWorkflow": {
     "description": "Create a new workflow, returning the workflow ID. This API requires a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key). Alternatively, you can configure these permissions [in the UI](https://docs.datadoghq.com/account_management/api-app-keys/#actions-api-access).",
     "summary": "Create a Workflow",
