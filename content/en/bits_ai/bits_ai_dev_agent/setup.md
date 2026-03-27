@@ -51,7 +51,7 @@ To enable auto-push, so the Dev Agent can push commits directly to a branch, nav
 
 ### Configure internet access
 
-To configure which external domains agents can reach during agent execution, navigate to **Bits AI Dev** > [**Settings**][12] > **General**, and find the **Domain Allowlist** section. Choose from the following access policies: **No Internet Access**, **Default Allowlist**, **Custom + Default Allowlist**, or **Custom Allowlist**.
+To configure which external domains agents can reach during agent execution, navigate to **Bits AI Dev** > [**Settings**][12] > **General**, and find the **Internet Access** section. Choose from the following access policies: **No Internet Access**, **Default Allowlist**, **Custom + Default Allowlist**, or **Custom Allowlist**.
 
 The default allowlist includes the following domains:
 
