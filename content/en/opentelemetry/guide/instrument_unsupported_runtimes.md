@@ -21,7 +21,7 @@ This guide walks through instrumenting a [Bun][2] application as an example. Bun
 ## Support level
 
 <div class="alert alert-info">
-This guide falls under the <strong>Custom Components</strong> <a href="/opentelemetry/setup/ddot_collector#support-levels">support level</a>. Datadog provides this documentation as a starting point, but does not directly support the runtime's functionality or the OpenTelemetry SDK's behavior within it. For runtime-specific issues, engage with the <a href="https://opentelemetry.io/community/">OpenTelemetry community</a> or the runtime maintainers.
+This guide falls under the <strong>Custom Components</strong> <a href="/opentelemetry/compatibility/#support-levels">support level</a>. Datadog provides this documentation as a starting point, but does not directly support the runtime's functionality or the OpenTelemetry SDK's behavior within it. For runtime-specific issues, engage with the <a href="https://opentelemetry.io/community/">OpenTelemetry community</a> or the runtime maintainers.
 </div>
 
 ## Prerequisites

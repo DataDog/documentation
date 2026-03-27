@@ -490,6 +490,53 @@ OkHttpClient okHttpClient = new OkHttpClient.Builder()
     {{% /tab %}}
     {{< /tabs >}}
 
+#### Cronet network instrumentation
+
+If you use Cronet instead of OkHttp, you can instrument your `CronetEngine` for automatic RUM resource tracking.
+
+1. Add the Gradle dependencies in the module-level `build.gradle` file:
+
+    ```groovy
+    dependencies {
+        implementation "com.datadoghq:dd-sdk-android-cronet:x.x.x"
+    }
+    ```
+
+2. Instrument the `CronetEngine.Builder`:
+
+    {{< tabs >}}
+    {{% tab "Kotlin" %}}
+
+```kotlin
+val cronetEngine = CronetEngine.Builder(context)
+    .configureDatadogInstrumentation(
+        rumInstrumentationConfiguration = RumNetworkInstrumentationConfiguration(),
+        apmInstrumentationConfiguration = ApmNetworkInstrumentationConfiguration(
+            tracedHosts = listOf("example.com", "example.eu")
+        )
+    )
+    .build()
+```
+
+    {{% /tab %}}
+    {{% tab "Java" %}}
+
+```java
+CronetEngine.Builder builder = new CronetEngine.Builder(context);
+CronetEngine cronetEngine = CronetIntegrationPluginKt
+    .configureDatadogInstrumentation(
+        builder,
+        new RumNetworkInstrumentationConfiguration(),
+        new ApmNetworkInstrumentationConfiguration(
+            Arrays.asList("example.com", "example.eu")
+        )
+    )
+    .build();
+```
+
+    {{% /tab %}}
+    {{< /tabs >}}
+
 #### Apollo instrumentation
 
 1. [Set up][14] RUM monitoring with Datadog Android RUM.
