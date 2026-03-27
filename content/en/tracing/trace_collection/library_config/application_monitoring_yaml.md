@@ -1,5 +1,6 @@
 ---
 title: Configure Datadog SDKs with application_monitoring.yaml on Linux
+description: Configure Datadog SDK settings at the host level on Linux using the application_monitoring.yaml file. Settings apply to all instrumented services on the host.
 aliases:
 - /tracing/trace_collection/configure_apm_features_linux
 - /tracing/trace_collection/automatic_instrumentation/configure_apm_features_linux
