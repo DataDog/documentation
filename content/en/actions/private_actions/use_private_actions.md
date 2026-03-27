@@ -552,6 +552,8 @@ kubectl create secret generic datadog-secret \
 
 1. Create a `values.yaml` file with the following content:
 
+   **Note**: To customize the actions allowlist, use `datadog.privateActionRunner.actionsAllowlist` for the node agent and `clusterAgent.privateActionRunner.actionsAllowlist` for the cluster agent. For all available configuration options, see [datadog.privateActionRunner][102] and [clusterAgent.privateActionRunner][103] in the Helm chart.
+
    ```yaml
    datadog:
      apiKeyExistingSecret: datadog-secret
@@ -588,6 +590,8 @@ Go to the [Private Action Runners][101] page. You should see a new runner on the
 
 [100]: https://app.datadoghq.com/fleet/install-agent/latest?platform=kubernetes
 [101]: https://app.datadoghq.com/actions/action-catalog
+[102]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/values.yaml#L523
+[103]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/values.yaml#L1842
 
 {{% /tab %}}
 {{< /tabs >}}
