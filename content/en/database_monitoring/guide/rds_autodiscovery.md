@@ -71,7 +71,7 @@ database_monitoring:
       enabled: true
 ```
 
-**Note**: The Agent only discovers RDS instances running in the same region as the Agent. To determine the region of the instance, the Agent uses [IMDS (Instance Metadata Service)][8]. If your EC2 instance requires `IMDSv2`, you must configure the Agent to use `IMDSv2` by setting `ec2_prefer_imdsv2: true` in `datadog.yaml`, as shown below:
+**Note**: The Agent only discovers RDS instances running in the same region as the Agent. To determine the region of the current instance, the Agent uses the [IMDS (Instance Metadata Service)][8]. The Agent defaults to using `IMDSv2` in version in Agent versions `7.64.0` and above. In versions prior it defaults to `IMDSv1` and can be configured to use `IMDSv2` by setting `ec2_prefer_imdsv2: true` in `datadog.yaml`, as shown below:
 
 ``` yaml {hl_lines=["1"]}
 ec2_prefer_imdsv2: true
