@@ -187,7 +187,7 @@ To schedule a report on an analysis cell:
 
 6. Add Microsoft Teams recipients.
    - Click on the **Microsoft Teams** tab, then choose a **Tenant**, **Team**, and **Channel**.
-     - Make sure the [Microsoft Teams integration][7] is installed in your Datadog organization.
+     - Ensure the [Microsoft Teams integration][7] is installed in your Datadog organization.
      - The Datadog app must be added to the target Team in Microsoft Teams.
    - To preview the message, add a channel and click **Send Test Message.**
 

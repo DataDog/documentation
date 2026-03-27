@@ -40,7 +40,7 @@ For emails, the report PDF is included as an email attachment and/or as a link, 
 
     - **Slack recipients**: Select your Slack workspace and channel from the dropdowns. If no workspaces appear, make sure you have the Datadog [Slack Integration][2] installed. All public channels within the Slack workspace are listed automatically. For private channels, invite the Datadog Slack bot first. You can test the connection by clicking the **Send Test Message** button.
 
-    - **Microsoft Teams recipients**: Select the **Microsoft Teams** tab, then choose a **Tenant**, **Team**, and **Channel** from the available dropdowns. Make sure the [Microsoft Teams integration][5] is installed in your Datadog organization and the Datadog app is added to the target Team in Microsoft Teams. To send a test message, add a channel recipient and click **Send Test Message**.
+    - **Microsoft Teams recipients**: Select the **Microsoft Teams** tab, then choose a **Tenant**, **Team**, and **Channel** from the available dropdowns. Ensure the [Microsoft Teams integration][5] is installed in your Datadog organization and the Datadog app is added to the target Team in Microsoft Teams. To send a test message, add a channel recipient and click **Send Test Message**.
 
 ## Managing schedules
 A single Cloud Cost (CCM) Report can have multiple schedules with different settings, allowing you to inform different stakeholder groups interested in the same cost data. To view existing schedules, click **Share** and select **Manage Schedules**.

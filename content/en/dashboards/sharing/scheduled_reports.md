@@ -72,13 +72,11 @@ To add Slack recipients, select the Slack workspace and channel from the availab
 
 #### Microsoft Teams recipients
 
-To add Microsoft Teams recipients, select the **Microsoft Teams** tab, then choose a **Tenant**, **Team**, and **Channel** from the available dropdowns.
-
-Before adding Microsoft Teams recipients, make sure:
+Before adding Microsoft Teams recipients, ensure:
 - The [Microsoft Teams integration][9] is installed in your Datadog organization.
 - The Datadog app is added to the target Team in Microsoft Teams.
 
-To send a test message, add a channel recipient and click **Send Test Message**.
+To add Microsoft Teams recipients, select the **Microsoft Teams** tab, then choose a **Tenant**, **Team**, and **Channel** from the available dropdowns. To send a test message, add a channel recipient and click **Send Test Message**.
 
 ## Managing reports
 
