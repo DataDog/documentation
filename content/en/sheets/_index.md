@@ -14,7 +14,11 @@ further_reading:
 
 Sheets is a spreadsheet tool that you can populate with Datadog data, enabling you to perform complex analysis and build reports without requiring technical expertise. It allows teams to use familiar spreadsheet functions like lookups, pivot tables, and calculations on Datadog data, so you don't have to export and use another tool with stale data.
 
-Sheets lets you manipulate, transform, and analyze data from logs, real user monitoring, and cloud cost monitoring in a familiar spreadsheet interface.
+Sheets lets you manipulate, transform, and analyze data from logs, real user monitoring, and cloud cost monitoring in a familiar spreadsheet interface. It can contain the following tabs:
+
+- **[Table](#table)**: Query live data from a Datadog data source and enrich it with calculated columns, lookups, and filters.
+- **[Pivot](#pivot)**: Summarize and aggregate data from a table with custom dimensions and calculations.
+- **[Sheet](#sheet-preview)** (Preview): A flexible, blank-canvas spreadsheet where you can write formulas referencing data directly from a table to build models, reports, or track operations.
 
 ## Table
 
