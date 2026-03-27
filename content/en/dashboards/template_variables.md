@@ -81,7 +81,7 @@ To edit a template variable or add variables:
 1. Hover over the dashboard header and click the {{< ui >}}Edit{{< /ui >}} button.
 1. In edit mode, click on a template variable and make changes in the popover.
 1. To rearrange variables in the header, hover over a variable, then click and drag the drag icon handle.
-1. Click the **+ (plus)** icon to add a new template variable.
+1. Click the {{< ui >}}+{{< /ui >}} icon to add a new template variable.
 1. (Optional) After selecting a tag, click the {{< ui >}}+ Configure Dropdown Values{{< /ui >}} button to rename the variable and set default or available values.
   {{< img src="dashboards/template_variables/edit_template_variable_drag.png" alt="Template variable edit mode popover showing the drag icon allowing you to rearrange the order" style="width:100%;" >}}
 

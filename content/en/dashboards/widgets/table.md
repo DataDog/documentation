@@ -32,7 +32,7 @@ The table visualization displays columns of aggregated data grouped by tag key. 
 ### Options
 
 * Rename column headers by setting aliases, click the {{< ui >}}as...{{< /ui >}} button.
-* Configure whether or not the search bar displays. **Auto** is the default and shows the search bar depending on the size of the widget, this means if your screen gets too small, it prioritizes displaying the data on the widget and hides the search bar, but is still available in full-screen mode.
+* Configure whether or not the search bar displays. {{< ui >}}Auto{{< /ui >}} is the default and shows the search bar depending on the size of the widget, this means if your screen gets too small, it prioritizes displaying the data on the widget and hides the search bar, but is still available in full-screen mode.
 
 #### Column formatting
 

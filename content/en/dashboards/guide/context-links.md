@@ -40,17 +40,17 @@ Users with [edit permissions][3] to dashboards can configure which links are acc
 
 By default, the widget menu displays links to your host, [traces][4], and [logs][5]—along with links that correspond to the widget's data sources. For example, the menu displays a link to the [**RUM Explorer**][6] if your widget uses [RUM data][7]. Click {{< ui >}}More Related Data Actions{{< /ui >}} to see additional links in the dropdown menu. 
 
-The widget contains links to the following pages:  
+The widget contains links to the following pages:
 
 | Link           | Description                                                                           |
 |----------------|---------------------------------------------------------------------------------------|
-| Hosts          | Links to the [Host Map][8] if series consists of more than one host. Links to the [Host Dashboard][9] if series consists of one host.|
-| Containers     | Links to the [Live Container][10] page.                                                |
-| Processeses    | Links to the [Live Process][11] page.                                                 |
-| APM Traces     | Opens a side panel displaying underlying traces that link to the [Trace Explorer][12].|
-| RUM Events     | Links to the [RUM Explorer][13].                                                      |
-| Profiles       | Links to the APM [Profile Explorer][14].                                              |
-| Logs           | Opens a side panel displaying underlying logs that link to the [Log Explorer][15].    |
+| {{< ui >}}Hosts{{< /ui >}}          | Links to the [Host Map][8] if series consists of more than one host. Links to the [Host Dashboard][9] if series consists of one host.|
+| {{< ui >}}Containers{{< /ui >}}     | Links to the [Live Container][10] page.                                                |
+| {{< ui >}}Processeses{{< /ui >}}    | Links to the [Live Process][11] page.                                                 |
+| {{< ui >}}APM Traces{{< /ui >}}     | Opens a side panel displaying underlying traces that link to the [Trace Explorer][12].|
+| {{< ui >}}RUM Events{{< /ui >}}     | Links to the [RUM Explorer][13].                                                      |
+| {{< ui >}}Profiles{{< /ui >}}       | Links to the APM [Profile Explorer][14].                                              |
+| {{< ui >}}Logs{{< /ui >}}           | Opens a side panel displaying underlying logs that link to the [Log Explorer][15].    |
 
 When applicable, context links embed:
 
@@ -60,11 +60,11 @@ When applicable, context links embed:
 
 ### Customize context links
 
-For any [generic widget][16], enter its edit mode to access its **Context Links** section. You can create your own context links, override default links, and promote or hide links.
+For any [generic widget][16], enter its edit mode to access its {{< ui >}}Context Links{{< /ui >}} section. You can create your own context links, override default links, and promote or hide links.
 
 {{< img src="dashboards/guide/context_links/edit-links.png" alt="Edit links" style="width:75%;" >}}
 
-To define custom links or override the default links, specify the link name in the **Label** field and the link path in the **URL** field. Click **+ Add URL Parameter** to use the key-value helper.
+To define custom links or override the default links, specify the link name in the {{< ui >}}Label{{< /ui >}} field and the link path in the {{< ui >}}URL{{< /ui >}} field. Click {{< ui >}}+ Add URL Parameter{{< /ui >}} to use the key-value helper.
 
 
 #### Context Links variables
@@ -85,7 +85,7 @@ When you have to choose between `{{something}}` and `{{something.value}}`:
 * See the [example use case to configure multiple variables](#configure-multiple-variables).
 
 
-In this example, when you click **View in Acme**, the link directs you to `https://prod.acme.io/search?what=basic&when=1643021787564`.
+In this example, when you click {{< ui >}}View in Acme{{< /ui >}}, the link directs you to `https://prod.acme.io/search?what=basic&when=1643021787564`.
 
 {{< img src="dashboards/guide/context_links/view-in-acme.png" alt="Example context link to Acme" style="width:60%;" >}}
 
@@ -144,7 +144,7 @@ Your customer support team's dashboard widget contains a context link that takes
 
 {{< img src="dashboards/guide/context_links/zendesk_interaction.png" alt="Zendesk User Page Context Link" style="width:80%;">}}
 
-Clicking the **Zendesk User Page** link directs you to this user's page in Zendesk.
+Clicking the {{< ui >}}Zendesk User Page{{< /ui >}} link directs you to this user's page in Zendesk.
 
 {{< img src="dashboards/guide/context_links/zendesk_result.png" alt="Zendesk Result" style="width:80%;">}}
 
@@ -185,7 +185,7 @@ Your dashboard widget contains a link that takes you to the appropriate host in 
 
 {{< img src="dashboards/guide/context_links/ec2_interaction.png" alt="Amazon EC2 Query context link" style="width:90%;" >}}
 
-Clicking the **Amazon EC2 Instance Summary** link directs you to the Amazon EC2 instance page in the AWS Console.
+Clicking the {{< ui >}}Amazon EC2 Instance Summary{{< /ui >}} link directs you to the Amazon EC2 instance page in the AWS Console.
 
 {{< img src="dashboards/guide/context_links/ec2_result.png" alt="Amazon EC2 Query Result" style="width:70%;" >}}
 

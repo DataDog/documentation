@@ -47,7 +47,7 @@ Rather than starting from scratch, import a request from an existing widget. Cop
 In the query editor:
 
 1. Expand the {{< ui >}}Data Preview{{< /ui >}} to identify the fields returned from the query.
-2. Next to your query, click **As** to add an alias to your query. This adds clarity, for example, rename `p50:trace.http.request{*} by {service}`→ `p50`.
+2. Next to your query, click {{< ui >}}As{{< /ui >}} to add an alias to your query. This adds clarity, for example, rename `p50:trace.http.request{*} by {service}`→ `p50`.
 
 {{< img src="/dashboards/guide/analyze_p50_vs_p95_latency_with_the_wildcard_widget/refine_query_walkthrough.mp4" alt="Walkthrough of refining a query in the Wildcard widget, including renaming fields and adding a P95 formula" video=true >}}
 
@@ -55,9 +55,9 @@ In the query editor:
 
 At the top of the query editor:
 
-1. Click the **Define Visual** tab.
+1. Click the {{< ui >}}Define Visual{{< /ui >}} tab.
 2. Press <kbd>Cmd</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd> (Mac) or <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd> (Windows/Linux) to open the **Command Palette**.
-3. Select **Auto-select chart**.
+3. Select {{< ui >}}Auto-select chart{{< /ui >}}.
 
 {{< img src="/dashboards/guide/analyze_p50_vs_p95_latency_with_the_wildcard_widget/command_palette.mp4" alt="Your image description" video=true >}}
 
@@ -105,7 +105,7 @@ Use the Command Palette (<kbd>Cmd</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd>) to au
 1. Click {{< ui >}}Save Edits{{< /ui >}}.
 2. At the top of your query editor, click the {{< ui >}}Define Visual{{< /ui >}} tab.
 3. Press <kbd>Cmd</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd> (Mac) or <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd> (Windows/Linux) to open the {{< ui >}}Command Palette{{< /ui >}}.
-4. Select **Auto-select chart**. The graph should automatically change from a bar chart to a scatterplot.
+4. Select {{< ui >}}Auto-select chart{{< /ui >}}. The graph should automatically change from a bar chart to a scatterplot.
 
 {{% /collapse-content %}}
 

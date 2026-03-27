@@ -19,7 +19,7 @@ Watchdog Explains is an investigation assistant that detects anomalies on timese
 
 To disable Watchdog Explains, see [Disabling anomaly detection](#disabling-anomaly-detection).
 
-<div class="alert alert-info">Watchdog Explains is available for <a href="https://docs.datadoghq.com/dashboards/widgets/timeseries/">Timeseries widgets</a> with <strong>Metric</strong> data (avg, sum, min, and max aggregation).</div>
+<div class="alert alert-info">Watchdog Explains is available for <a href="https://docs.datadoghq.com/dashboards/widgets/timeseries/">Timeseries widgets</a> with {{< ui >}}Metrics{{< /ui >}} data (avg, sum, min, and max aggregation).</div>
 
 ## How Watchdog Explains detects anomalies
 

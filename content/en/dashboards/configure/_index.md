@@ -49,7 +49,7 @@ Click {{< ui >}}Configure{{< /ui >}} to open a menu of configuration options ava
 | {{< ui >}}Display UTC time{{< /ui >}} | Toggle between UTC time and your default time zone. |
 | {{< ui >}}Include Flex Logs{{< /ui >}} | Control whether widgets search [Flex Logs][3] or [Standard Indexed][4] logs. Switch between recent and historical data without editing individual widgets. This is a user-level preference that persists across sessions for this dashboard. |
 | {{< ui >}}Increase density{{< /ui >}} | High-density mode displays group widgets in a dashboard side-by-side for increased widget density. This mode turns on by default on large screens for dashboards that use group widgets. |
-| {{< ui >}}Keyboard shortcuts{{< /ui >}} | View a list of available keyboard shortcuts. |
+| {{< ui >}}Keyboard&nbsp;shortcuts{{< /ui >}} | View a list of available keyboard shortcuts. |
 | {{< ui >}}Pause Auto-Refresh{{< /ui >}} | Pause automatic refresh by default for dashboards with relative time ranges to optimize compute usage and reduce background activity. This setting applies to all users who view the dashboard. |
 | {{< ui >}}TV Mode{{< /ui >}} | Toggle to display key performance metrics on large screens or TVs. For more information, see [Using TV mode for Dashboards][5]. |
 | {{< ui >}}Version history{{< /ui >}} | Preview, restore, or clone your dashboard's version history. For more information, see the [Version History guide][6]. |
@@ -71,9 +71,9 @@ Copy, import, or export a dashboard's JSON by clicking the {{< ui >}}Configure{{
 
 | Option                          | Description                                                                                                                                                                |
 |---------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| {{< ui >}}Copy dashboard JSON{{< /ui >}}   | Copy the dashboard's JSON to your clipboard.                                                                                                                               |
-| {{< ui >}}Import dashboard JSON{{< /ui >}} | Paste or import your JSON to the dashboard. This option overwrites all content on the dashboard. If the JSON is already on your clipboard, use `Ctrl V` (`Cmd V` for Mac). |
-| {{< ui >}}Export dashboard JSON{{< /ui >}} | Download a JSON file containing the JSON of your dashboard.                                                                                                                |
+| {{< ui >}}Copy&nbsp;dashboard&nbsp;JSON{{< /ui >}}   | Copy the dashboard's JSON to your clipboard.                                                                                                                               |
+| {{< ui >}}Import&nbsp;dashboard&nbsp;JSON{{< /ui >}} | Paste or import your JSON to the dashboard. This option overwrites all content on the dashboard. If the JSON is already on your clipboard, use `Ctrl V` (`Cmd V` for Mac). |
+| {{< ui >}}Export&nbsp;dashboard&nbsp;JSON{{< /ui >}} | Download a JSON file containing the JSON of your dashboard.                                                                                                                |
 
 Options for copying or exporting the JSON can also be accessed from the {{< ui >}}Share{{< /ui >}} icon in the upper right.
 

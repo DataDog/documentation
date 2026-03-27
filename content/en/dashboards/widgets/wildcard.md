@@ -75,7 +75,7 @@ The Timeseries data format emphasizes data trends over time, while the Scalar fo
 1. Copy from an existing Datadog widget using `cmd+c`.
 1. Open the Wildcard widget [full screen editor][6].
 1. Paste with `cmd+v`.
-1. Click Save.
+1. Click {{< ui >}}Save{{< /ui >}}.
 
 ## Command palette
 

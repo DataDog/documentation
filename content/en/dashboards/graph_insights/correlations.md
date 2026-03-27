@@ -27,7 +27,7 @@ further_reading:
 
 ## Overview
 
-<div class="alert alert-info">Metric Correlations is available for <a href="https://docs.datadoghq.com/dashboards/widgets/timeseries/">Timeseries widgets</a> with the <strong>Metric</strong> data source.</div>
+<div class="alert alert-info">Metric Correlations is available for <a href="https://docs.datadoghq.com/dashboards/widgets/timeseries/">Timeseries widgets</a> with the {{< ui >}}Metrics{{< /ui >}} data source.</div>
 
 Metric Correlations can help you find potential root causes for an observed issue by searching for other metrics that exhibited irregular behavior around the same time. Correlations scans your metrics from different sources such as dashboards, integrations, APM, and custom metrics.
 

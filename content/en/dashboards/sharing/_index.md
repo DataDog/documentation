@@ -29,7 +29,7 @@ Shared visualizations allow you to display metric, trace, and log visualizations
 
 ## View all public dashboards and graphs
 
-To see the complete list of publicly shared dashboards, navigate to [**Organization Settings > Public Sharing > Shared Dashboards**][1]. Click the {{< ui >}}Shared Graphs{{< /ui >}} tab to view publicly shared graphs from your organization. To revoke access, see the [dashboard][2] and [graph][3] documentation.
+To see the complete list of publicly shared dashboards, navigate to [{{< ui >}}Organization Settings{{< /ui >}} > {{< ui >}}Public Sharing{{< /ui >}} > {{< ui >}}Shared Dashboards{{< /ui >}}][1]. Click the {{< ui >}}Shared Graphs{{< /ui >}} tab to view publicly shared graphs from your organization. To revoke access, see the [dashboard][2] and [graph][3] documentation.
 
 ## Further reading
 

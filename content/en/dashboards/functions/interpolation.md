@@ -21,10 +21,10 @@ further_reading:
 The `fill()` function has two parameters:
 
 * **`METHOD`**: The function to use as an interpolation method; choose from:
-    * {{< ui >}}linear{{< /ui >}}: Gives you a linear interpolation between the beginning and the end of the gap.
-    * {{< ui >}}last{{< /ui >}}: Fills the gap with the last value of the gap.
-    * {{< ui >}}zero{{< /ui >}}: Fills the gap with a zero value.
-    * {{< ui >}}null{{< /ui >}}: Deactivates the interpolation.
+    * `linear`: Gives you a linear interpolation between the beginning and the end of the gap.
+    * `last`: Fills the gap with the last value of the gap.
+    * `zero`: Fills the gap with a zero value.
+    * `null`: Deactivates the interpolation.
 
 * `LIMIT` [*optional*, *default*=**300**, *maximum*=**600**]: The interpolation limit (in seconds) that represents the maximum size of a gap you want to interpolate.
 

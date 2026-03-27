@@ -37,7 +37,7 @@ All shared graphs are listed in the [Public Sharing Settings page][10]. You can 
 
 To revoke the keys used to share individual (embedded) graphs:
 
-1. Navigate to [**Organization Settings > Public Sharing > Shared Graphs**][1] to see a list of all shared graphs.
+1. Navigate to [{{< ui >}}Organization Settings{{< /ui >}} > {{< ui >}}Public Sharing{{< /ui >}} > {{< ui >}}Shared Graphs{{< /ui >}}][1] to see a list of all shared graphs.
 2. Find your graph by using the search bar or by sorting the table columns.
 3. Click on the {{< ui >}}Revoke{{< /ui >}} button next to the graph you want to stop sharing.
 

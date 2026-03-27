@@ -47,21 +47,21 @@ Select up to three different time windows from the following:
 
 #### Display preferences
 
-Select whether to show or hide remaining error budget by toggling the `Show error budget` option. 
+Select whether to show or hide remaining error budget by toggling the {{< ui >}}Show error budget{{< /ui >}} option.
 
-If you are visualizing an SLO with multiple groups or a monitor-based SLO with multiple monitors, select your `View mode`:
+If you are visualizing an SLO with multiple groups or a monitor-based SLO with multiple monitors, select your {{< ui >}}View mode{{< /ui >}}:
 
 - For SLOs with groups (metric-based or Time Slice SLO with groups, or monitor-based SLOs with a single monitor broken into groups), there are the following three view modes:
-  - `Overall`: displays the overall SLO status percentages and targets
-  - `Groups`: displays a table of status percentages for each group
-  - `Both`: displays both the overall SLO status percentages and targets and table of status percentages for each group
+  - {{< ui >}}Overall{{< /ui >}}: displays the overall SLO status percentages and targets
+  - {{< ui >}}Groups{{< /ui >}}: displays a table of status percentages for each group
+  - {{< ui >}}Both{{< /ui >}}: displays both the overall SLO status percentages and targets and table of status percentages for each group
 
 - For monitor-based SLOs configured with multiple monitors, there are the following three view modes:
-  - `Overall`: displays the overall SLO status percentages and targets
-  - `Monitors`: displays a table of status percentages for each monitor
-  - `Both`: displays both the overall SLO status percentages and targets and table of status percentages for each monitor
+  - {{< ui >}}Overall{{< /ui >}}: displays the overall SLO status percentages and targets
+  - {{< ui >}}Monitors{{< /ui >}}: displays a table of status percentages for each monitor
+  - {{< ui >}}Both{{< /ui >}}: displays both the overall SLO status percentages and targets and table of status percentages for each monitor
 
-When you set the `View mode` to `Groups`, `Monitors`, or `Both`:
+When you set the {{< ui >}}View mode{{< /ui >}} to {{< ui >}}Groups{{< /ui >}}, {{< ui >}}Monitors{{< /ui >}}, or {{< ui >}}Both{{< /ui >}}:
 - The groups are sorted by ascending status in the smallest time window by default. After adding the widget to a dashboard, you have the ability to sort by status for any of the configured time windows through the widget UI.
 - The widget displays the following:
   + For metric-based and Time Slice SLOs, *all* underlying groups of the SLO are displayed. 

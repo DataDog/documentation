@@ -26,7 +26,7 @@ The [profiling flame graph visualization][1] represents a breakdown of top consu
 ### Configuration
 
 1. Scope your profiling data with tags. For example, `host`, `container_name`, `service`, `env`, or `version`.
-2. To select the resource click the dropdown menu next to {{< ui >}}Show{{< /ui >}}. Options can include `CPU Time`, `Allocated Memory`, or `Thrown Exceptions`.
+2. To select the resource click the dropdown menu next to {{< ui >}}Show{{< /ui >}}. Options can include {{< ui >}}CPU Time{{< /ui >}}, {{< ui >}}Allocated Memory{{< /ui >}}, or {{< ui >}}Thrown Exceptions{{< /ui >}}.
 3. Click the dropdown menu next to {{< ui >}}by{{< /ui >}} and {{< ui >}}for{{< /ui >}} to select the frame granularity and code provenance, respectively.
 4. Give your graph a title or leave the box blank for the suggested title.
 5. Click {{< ui >}}Save{{< /ui >}}.
