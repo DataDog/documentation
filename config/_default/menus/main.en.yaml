@@ -1438,21 +1438,26 @@ menu:
       parent: bits_ai_dev_agent
       identifier: bits_ai_dev_agent_setup
       weight: 200
+    - name: Bits AI Security Analyst
+      url: bits_ai/bits_ai_security_analyst
+      identifier: bits_ai_bits_ai_security_analyst
+      parent: bits_ai
+      weight: 3
     - name: Bits Assistant
       url: bits_ai/bits_assistant
       identifier: bits_ai_bits_assistant
       parent: bits_ai
-      weight: 3
+      weight: 4
     - name: MCP Server
       url: bits_ai/mcp_server
       identifier: bits_ai_mcp_server
       parent: bits_ai
-      weight: 4
+      weight: 5
     - name: Setup
       url: bits_ai/mcp_server/setup
       identifier: bits_ai_mcp_server_setup
       parent: bits_ai_mcp_server
-      weight: 401
+      weight: 501
     - name: Dashboards
       url: dashboards/
       pre: dashboard
@@ -1594,16 +1599,21 @@ menu:
       url: dashboards/sharing/shared_dashboards
       parent: dashboards_sharing
       weight: 1002
+    - name: Secure Embedded Dashboards
+      identifier: dashboards_sharing_secure_embedded_dashboards
+      url: dashboards/sharing/secure_embedded_dashboards
+      parent: dashboards_sharing
+      weight: 1003
     - name: Share Graphs
       identifier: dashboards_sharing_graphs
       url: dashboards/sharing/graphs
       parent: dashboards_sharing
-      weight: 1003
+      weight: 1004
     - name: Scheduled Reports
       identifier: dashboards_reporting
       url: dashboards/sharing/scheduled_reports
       parent: dashboards_sharing
-      weight: 1004
+      weight: 1005
     - name: Guides
       url: dashboards/guide/
       parent: dashboards
@@ -2552,6 +2562,11 @@ menu:
       parent: post_incident
       identifier: post_incident_follow_ups
       weight: 301
+    - name: Postmortems
+      url: incident_response/incident_management/post_incident/postmortems
+      parent: post_incident
+      identifier: post_incident_postmortems
+      weight: 302
     - name: Analytics and Reporting
       url: incident_response/incident_management/analytics_and_reporting
       parent: incidents
@@ -2665,12 +2680,19 @@ menu:
       parent: case_management
       identifier: case_management_automation_rules
       weight: 6
+    - name: MCP Server
+      url: incident_response/case_management/mcp_server
+      parent: case_management
+      identifier: case_management_mcp_server
+      weight: 7
     - name: Troubleshooting
       url: incident_response/case_management/troubleshooting
       parent: case_management
       identifier: case_management_troubleshooting
-      weight: 7
+      weight: 8
     - name: Agents
+      weight: 7
+    - name: Agent Builder
       url: actions/agents/
       pre: robot-wui
       identifier: agents
@@ -3017,11 +3039,6 @@ menu:
       parent: infrastructure_livecontainers_explorer
       identifier: infrastructure_livecontainers_resource_utilization
       weight: 10302
-    - name: Kubernetes Autoscaling
-      url: containers/autoscaling
-      parent: infrastructure_livecontainers_explorer
-      identifier: infrastructure_livecontainers_autoscaling
-      weight: 10303
     - name: Remediation
       url: containers/bits_ai_kubernetes_remediation
       parent: infrastructure_livecontainers_explorer
@@ -3037,6 +3054,11 @@ menu:
       parent: containers
       identifier: containers_autoscaling
       weight: 2
+    - name: Cluster 
+      url: containers/autoscaling/cluster
+      parent: containers_autoscaling
+      identifier: containers_autoscaling_cluster
+      weight: 201
     - name: Docker-based
       url: containers/docker/
       parent: containers
@@ -3489,15 +3511,20 @@ menu:
       parent: serverless_gcr
       weight: 701
       identifier: serverless_gcr_containers
+    - name: Jobs (Preview)
+      url: serverless/google_cloud_run/jobs
+      parent: serverless_gcr
+      weight: 702
+      identifier: serverless_gcr_jobs
     - name: Functions
       url: serverless/google_cloud_run/functions
       parent: serverless_gcr
-      weight: 702
+      weight: 703
       identifier: serverless_gcr_functions
     - name: Functions (1st generation)
       url: serverless/google_cloud_run/functions_1st_gen
       parent: serverless_gcr
-      weight: 703
+      weight: 704
       identifier: serverless_gcr_functions_1st_gen
     - name: Libraries & Integrations
       url: serverless/libraries_integrations
@@ -4680,6 +4707,16 @@ menu:
       parent: dbm_setup_postgres
       identifier: dbm_postgres_supabase
       weight: 307
+    - name: Supabase Cloud
+      url: database_monitoring/setup_postgres/supabase/cloud
+      parent: dbm_postgres_supabase
+      identifier: dbm_supabase_cloud
+      weight: 1000
+    - name: Supabase Self-Hosted
+      url: database_monitoring/setup_postgres/supabase/agent
+      parent: dbm_postgres_supabase
+      identifier: dbm_supabase_agent
+      weight: 2000
     - name: Heroku
       url: database_monitoring/setup_postgres/heroku
       parent: dbm_setup_postgres
@@ -4845,6 +4882,11 @@ menu:
       parent: dbm_setup_documentdb
       identifier: dbm_setup_documentdb_amazon_documentdb
       weight: 801
+    - name: Troubleshooting
+      url: database_monitoring/setup_documentdb/troubleshooting
+      parent: dbm_setup_documentdb
+      identifier: dbm_troubleshooting_documentdb
+      weight: 802
     - name: Connecting DBM and Traces
       url: database_monitoring/connect_dbm_and_apm/
       parent: dbm
@@ -4901,11 +4943,16 @@ menu:
       identifier: data_streams_setup
       parent: data_streams
       weight: 1
-    - name: Kafka Messages
-      url: data_streams/messages
-      identifier: data_streams_kafka_messages
+    - name: Kafka 
+      url: data_streams/kafka
+      identifier: data_streams_kafka
       parent: data_streams
       weight: 2
+    - name: Messages 
+      url: data_streams/kafka/messages 
+      identifier: data_streams_kafka_messages
+      parent: data_streams_kafka 
+      weight: 201
     - name: Schema Tracking
       url: data_streams/schema_tracking
       identifier: data_streams_schema_tracking
@@ -4932,6 +4979,12 @@ menu:
       identifier: data_observability
       parent: data_observability_heading
       weight: 60000
+    - name: Data Catalog
+      url: data_observability/data_catalog
+      pre: data-observability-wui
+      identifier: data_catalog
+      parent: data_observability_heading
+      weight: 65000
     - name: Quality Monitoring
       url: data_observability/quality_monitoring/
       pre: data-observability-wui
@@ -4958,6 +5011,11 @@ menu:
       identifier: bigquery
       parent: data_warehouses
       weight: 3000000
+    - name: Redshift
+      url: data_observability/quality_monitoring/data_warehouses/redshift
+      identifier: redshift
+      parent: data_warehouses
+      weight: 4000000
     - name: Data Lakes
       url: data_observability/quality_monitoring/data_lakes
       identifier: data_lakes
@@ -5179,6 +5237,11 @@ menu:
       parent: llm_obs_managed_evaluations
       identifier: llm_obs_managed_evaluations_security
       weight: 40002
+    - name: Connect Your LLM Provider
+      url: llm_observability/evaluations/custom_llm_as_a_judge_evaluations/connect_to_account
+      parent: llm_obs_custom_llm_as_a_judge_evaluations
+      identifier: llm_obs_custom_llm_as_a_judge_evaluations_connect_to_account
+      weight: 40100
     - name: Template Evaluations
       url: llm_observability/evaluations/custom_llm_as_a_judge_evaluations/template_evaluations
       parent: llm_obs_custom_llm_as_a_judge_evaluations
@@ -6035,31 +6098,36 @@ menu:
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_mysql
       weight: 217
+    - name: Okta
+      url: observability_pipelines/sources/okta/
+      parent: observability_pipelines_sources
+      identifier: observability_pipelines_sources_okta
+      weight: 218
     - name: Socket
       url: observability_pipelines/sources/socket/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_socket
-      weight: 218
+      weight: 219
     - name: Splunk HEC
       url: observability_pipelines/sources/splunk_hec/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_splunk_hec
-      weight: 219
+      weight: 220
     - name: Splunk TCP
       url: observability_pipelines/sources/splunk_tcp/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_splunk_tcp
-      weight: 220
+      weight: 221
     - name: Sumo Logic Hosted Collector
       url: observability_pipelines/sources/sumo_logic/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_sumo_logic
-      weight: 221
+      weight: 222
     - name: Syslog
       url: observability_pipelines/sources/syslog/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_syslog
-      weight: 222
+      weight: 223
     - name: Processors
       url: observability_pipelines/processors/
       parent: observability_pipelines
@@ -6410,10 +6478,10 @@ menu:
       parent: observability_pipelines
       identifier: observability_pipelines_scaling_and_performance
       weight: 7
-    - name: Handling Load and Backpressure
-      url: observability_pipelines/scaling_and_performance/handling_load_and_backpressure/
+    - name: Buffering and Backpressure
+      url: observability_pipelines/scaling_and_performance/buffering_and_backpressure/
       parent: observability_pipelines_scaling_and_performance
-      identifier: observability_pipelines_handling_load_and_backpressure
+      identifier: observability_pipelines_buffering_and_backpressure
       weight: 701
     - name: Scaling Best Practices
       url: observability_pipelines/scaling_and_performance/best_practices_for_scaling_observability_pipelines/
@@ -6867,21 +6935,21 @@ menu:
       parent: cloudprem
       identifier: cloudprem_configure
       weight: 5
-    - name: Retention Policy
-      url: /cloudprem/configure/retention
+    - name: Indexes
+      url: /cloudprem/configure/indexes
       parent: cloudprem_configure
-      identifier: cloudprem_configure_retention_policy
-      weight: 501
-    - name: Pipelines
-      url: /cloudprem/configure/pipelines
-      parent: cloudprem_configure
-      identifier: cloudprem_configure_pipelines
-      weight: 502
+      identifier: cloudprem_configure_indexes
+      weight: 500
     - name: Ingress
       url: /cloudprem/configure/ingress
       parent: cloudprem_configure
       identifier: cloudprem_ingress
       weight: 503
+    - name: Lambda Search Offloading
+      url: /cloudprem/configure/lambda
+      parent: cloudprem_configure
+      identifier: cloudprem_configure_lambda
+      weight: 504
     - name: Operate
       url: /cloudprem/operate/
       parent: cloudprem
@@ -7275,16 +7343,21 @@ menu:
       url: /security/code_security/iac_security/setup/
       parent: code_security_iac_security
       weight: 100000
+    - name: GitHub Actions
+      identifier: code_security_iac_security_github_actions
+      url: /security/code_security/iac_security/github_actions/
+      parent: code_security_iac_security
+      weight: 100001
     - name: Exclusions
       identifier: code_security_iac_security_exclusions
       url: /security/code_security/iac_security/exclusions/
       parent: code_security_iac_security
-      weight: 100001
+      weight: 100002
     - name: Rules
       identifier: code_security_iac_security_rules
       url: /security/code_security/iac_security/iac_rules/
       parent: code_security_iac_security
-      weight: 100002
+      weight: 100003
     - name: Developer Tool Integrations
       identifier: dev_tool_int
       url: /security/code_security/dev_tool_int/
@@ -7310,6 +7383,21 @@ menu:
       url: /security/code_security/dev_tool_int/git_hooks/
       parent: dev_tool_int
       weight: 4
+    - name: MCP Server
+      identifier: dev_tool_int_mcp_server
+      url: /security/code_security/dev_tool_int/mcp_server/
+      parent: dev_tool_int
+      weight: 5
+    - name: Tools Reference
+      identifier: dev_tool_int_mcp_server_tools_reference
+      url: /security/code_security/dev_tool_int/mcp_server/tools_reference/
+      parent: dev_tool_int_mcp_server
+      weight: 1
+    - name: Troubleshooting
+      identifier: dev_tool_int_mcp_server_troubleshooting
+      url: /security/code_security/dev_tool_int/mcp_server/troubleshooting/
+      parent: dev_tool_int_mcp_server
+      weight: 2
     - name: Troubleshooting
       identifier: sec_code_sec_tshoot
       url: /security/code_security/troubleshooting/
@@ -8157,7 +8245,7 @@ menu:
       pre: rum
       identifier: rum
       parent: digital_experience_heading
-      weight: 20000
+      weight: 30000
     - name: Application Monitoring
       url: real_user_monitoring/application_monitoring/
       parent: rum
@@ -8774,7 +8862,7 @@ menu:
       parent: rum
       weight: 13
     - name: Product Analytics
-      url: product_analytics
+      url: product_analytics/
       pre: product-analytics
       identifier: product_analytics
       parent: digital_experience_heading
@@ -8825,25 +8913,41 @@ menu:
       identifier: pa_profiles
       weight: 4
     - name: Experiments
-      url: product_analytics/experimentation/
-      parent: product_analytics
+      url: experiments/
+      pre: experiment-wui
+      parent: digital_experience_heading
       identifier: pa_experiments
-      weight: 5
+      weight: 50000
+    - name: Plan and Launch Experiments
+      url: experiments/plan_and_launch_experiments
+      parent: pa_experiments
+      identifier: pa_experiments_plan
+      weight: 1
     - name: Define Metrics
-      url: product_analytics/experimentation/defining_metrics
+      url: experiments/defining_metrics
       parent: pa_experiments
       identifier: pa_experiments_metrics
-      weight: 501
-    - name: Reading Experiment Results
-      url: product_analytics/experimentation/reading_results
+      weight: 2
+    - name: Read Experiment Results
+      url: experiments/reading_results
       parent: pa_experiments
       identifier: pa_experiments_results
-      weight: 502
+      weight: 3
     - name: Minimum Detectable Effects
-      url: product_analytics/experimentation/minimum_detectable_effect
+      url: experiments/minimum_detectable_effect
       parent: pa_experiments
       identifier: pa_experiments_mde
-      weight: 503
+      weight: 4
+    - name: Troubleshooting
+      url: experiments/troubleshooting
+      parent: pa_experiments
+      identifier: pa_experiments_troubleshooting
+      weight: 5
+    - name: Guides
+      url: experiments/guide/
+      parent: pa_experiments
+      identifier: pa_experiments_guide
+      weight: 5
     - name: Guides
       url: product_analytics/guide/
       parent: product_analytics
@@ -8859,7 +8963,7 @@ menu:
       pre: play-circle
       identifier: session_replay
       parent: digital_experience_heading
-      weight: 60000
+      weight: 50000
     - name: Browser
       url: /session_replay/browser
       parent: session_replay
@@ -9076,196 +9180,206 @@ menu:
       url: account_management/api-app-keys/
       parent: account_management
       weight: 6
+    - name: Personal Access Tokens
+      identifier: account_management_personal_access_tokens
+      url: account_management/personal-access-tokens/
+      parent: account_management
+      weight: 7
     - name: Teams
       identifier: account_management_teams
       url: account_management/teams/
       parent: account_management
-      weight: 7
+      weight: 8
     - name: Team Management
       identifier: account_management_teams_management
       url: account_management/teams/manage/
       parent: account_management_teams
-      weight: 701
+      weight: 801
     - name: Provision with GitHub
       identifier: account_management_provision_github
       url: account_management/teams/github/
       parent: account_management_teams
-      weight: 702
+      weight: 802
     - name: Governance Console
       identifier: account_management_governance_console
       url: account_management/governance_console/
       parent: account_management
-      weight: 8
+      weight: 9
     - name: Controls
       identifier: account_management_governance_console_controls
       url: account_management/governance_console/controls
       parent: account_management_governance_console
-      weight: 801
+      weight: 901
     - name: Multi-Factor Authentication
       identifier: account_management_mfa
       url: account_management/multi-factor_authentication/
       parent: account_management
-      weight: 9
+      weight: 10
     - name: Audit Trail
       url: account_management/audit_trail/
       parent: account_management
       identifier: account_management_audit_trail
-      weight: 10
+      weight: 11
     - name: Events
       url: account_management/audit_trail/events/
       parent: account_management_audit_trail
       identifier: account_management_audit_trail_events
-      weight: 1001
+      weight: 1101
     - name: Forwarding
       url: account_management/audit_trail/forwarding_audit_events/
       parent: account_management_audit_trail
       identifier: account_management_audit_trail_forwarding
-      weight: 1002
+      weight: 1102
     - name: Guides
       url: account_management/audit_trail/guides/
       parent: account_management_audit_trail
       identifier: account_management_audit_trail_guides
-      weight: 1003
+      weight: 1103
     - name: Safety Center
       url: account_management/safety_center/
       parent: account_management
       identifier: safety_center
-      weight: 11
-    - name: Plan and Usage
+      weight: 12
+    - name: Plan & Usage
       url: account_management/plan_and_usage/
       parent: account_management
       identifier: account_management_plan_and_usage
-      weight: 12
+      weight: 13
+    - name: Bill Overview
+      identifier: account_management_bill_overview
+      url: account_management/plan_and_usage/bill_overview/
+      parent: account_management_plan_and_usage
+      weight: 1300
     - name: Cost Details
       identifier: account_management_cost_details
       url: account_management/plan_and_usage/cost_details/
       parent: account_management_plan_and_usage
-      weight: 1201
+      weight: 1301
     - name: Usage Details
       identifier: account_management_usage_details
       url: account_management/plan_and_usage/usage_details/
       parent: account_management_plan_and_usage
-      weight: 1202
+      weight: 1302
     - name: Billing
       identifier: account_management_billing
       url: account_management/billing/
       parent: account_management
-      weight: 13
+      weight: 14
     - name: Pricing
       url: account_management/billing/pricing
       parent: account_management_billing
-      weight: 1301
+      weight: 1401
       identifier: account_management_billing_pricing
     - name: Credit Card
       identifier: account_management_billing_credit_card
       url: account_management/billing/credit_card/
       parent: account_management_billing
-      weight: 1302
+      weight: 1402
     - name: Product Allotments
       url: account_management/billing/product_allotments
       parent: account_management_billing
-      weight: 1303
+      weight: 1403
       identifier: account_management_billing_product_allotments
     - name: Usage Metrics
       identifier: account_management_plan_and_usage_usage_metrics
       url: account_management/billing/usage_metrics/
       parent: account_management_billing
-      weight: 1304
+      weight: 1404
     - name: Usage Attribution
       identifier: account_management_plan_and_usage_usage_attribution
       url: account_management/billing/usage_attribution/
       parent: account_management_billing
-      weight: 1305
+      weight: 1405
     - name: Custom Metrics
       identifier: account_management_billing_custom_metrics
       url: account_management/billing/custom_metrics/
       parent: account_management_billing
-      weight: 1306
+      weight: 1406
     - name: Containers
       identifier: account_management_billing_containers
       url: account_management/billing/containers
       parent: account_management_billing
-      weight: 1307
+      weight: 1407
     - name: Log Management
       identifier: account_management_billing_log_management
       url: account_management/billing/log_management/
       parent: account_management_billing
-      weight: 1308
+      weight: 1408
     - name: APM
       identifier: account_management_billing_apm_tracing_profiler
       url: account_management/billing/apm_tracing_profiler/
       parent: account_management_billing
-      weight: 1309
+      weight: 1409
     - name: Serverless
       identifier: account_management_billing_serverless
       url: account_management/billing/serverless/
       parent: account_management_billing
-      weight: 1310
+      weight: 1410
     - name: Real User Monitoring
       identifier: account_management_billing_rum
       url: account_management/billing/rum/
       parent: account_management_billing
-      weight: 1311
+      weight: 1411
     - name: CI Visibility
       identifier: account_management_billing_ci_visibility
       url: account_management/billing/ci_visibility/
       parent: account_management_billing
-      weight: 1312
+      weight: 1412
     - name: Incident Response
       identifier: account_management_billing_incident_response
       url: account_management/billing/incident_response/
       parent: account_management_billing
-      weight: 1313
+      weight: 1413
     - name: AWS Integration
       identifier: account_management_billing_aws
       url: account_management/billing/aws/
       parent: account_management_billing
-      weight: 1314
+      weight: 1414
     - name: Azure Integration
       identifier: account_management_billing_azure
       url: account_management/billing/azure/
       parent: account_management_billing
-      weight: 1315
+      weight: 1415
     - name: Google Cloud Integration
       identifier: account_management_billing_google_cloud
       url: account_management/billing/google_cloud/
       parent: account_management_billing
-      weight: 1316
+      weight: 1416
     - name: OCI Integration
       identifier: account_management_billing_oci
       url: account_management/billing/oci/
       parent: account_management_billing
-      weight: 1317
+      weight: 1417
     - name: Alibaba Integration
       identifier: account_management_billing_alibaba
       url: account_management/billing/alibaba/
       parent: account_management_billing
-      weight: 1318
+      weight: 1418
     - name: vSphere Integration
       identifier: account_management_billing_vsphere
       url: account_management/billing/vsphere/
       parent: account_management_billing
-      weight: 1319
+      weight: 1419
     - name: Workflow Automation
       identifier: account_management_billing_workflow_automation
       url: account_management/billing/workflow_automation/
       parent: account_management_billing
-      weight: 1320
+      weight: 1420
     - name: Multi-org Accounts
       identifier: account_management_multi_org_accounts
       url: account_management/multi_organization/
       parent: account_management
-      weight: 14
+      weight: 15
     - name: Guides
       identifier: account_management_guides
       url: account_management/guide/
       parent: account_management
-      weight: 15
+      weight: 16
     - name: Cloud-based Authentication
       identifier: account_management_cloud_auth
       url: account_management/cloud_provider_authentication/
       parent: account_management
-      weight: 16
+      weight: 17
     - name: Data Security
       url: data_security/
       pre: security-lock

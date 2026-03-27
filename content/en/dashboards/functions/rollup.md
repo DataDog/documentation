@@ -78,9 +78,9 @@ You can customize how your metrics data is bucketed over time when using the `.r
 
 ## Rollups in monitors
 
-Rollups should usually be avoided in [monitor][5] queries, because of the possibility of misalignment between the rollup interval and the evaluation window of the monitor. The start and end of rollup intervals are aligned to UNIX time, not to the start and end of monitor queries. Therefore, a monitor may evaluate (and trigger on) an incomplete rollup interval containing only a small sample of data. To avoid this issue, delay the evaluation of your monitor by (at least) the length of the setup rollup interval.
+Rollups should usually be avoided in monitor queries, because of the possibility of misalignment between the rollup interval and the evaluation window of the monitor. The start and end of rollup intervals are aligned to UNIX time, not to the start and end of monitor queries. Therefore, a monitor may evaluate (and trigger on) an incomplete rollup interval containing only a small sample of data. To avoid this issue, delay the evaluation of your monitor by (at least) the length of the setup rollup interval.
 
-If your monitors are unexpectedly evaluating in a {{< ui >}}No Data{{< /ui >}} status, consider reviewing your settings for rollups and evaluation windows. For instance, if a monitor has a 4-minute rollup and a 20-minute evaluation window, it produces one data point every 4 minutes, leading to a maximum of 5 data points within the window. If the {{< ui >}}Require Full Window{{< /ui >}} option is enabled, the evaluation may result in {{< ui >}}No Data{{< /ui >}} because the window is not fully populated.
+If your monitor queries are unexpectedly showing {{< ui >}}No Data{{< /ui >}}, consider reviewing your settings for rollups and evaluation windows. For more information, see [Troubleshooting No Data in Monitors][6].
 
 ## Further reading
 
@@ -91,3 +91,4 @@ If your monitors are unexpectedly evaluating in a {{< ui >}}No Data{{< /ui >}} s
 [3]: https://www.datadoghq.com/blog/visualize-statsd-metrics-counts-graphing
 [4]: /metrics/custom_metrics/type_modifiers/
 [5]: /monitors/types/metric/
+[6]: /monitors/guide/troubleshooting-no-data/

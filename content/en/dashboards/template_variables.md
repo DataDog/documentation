@@ -60,43 +60,34 @@ For most sources, template variable values are relevant to your dashboard's glob
 
 **Note**: If you do not see the tag or attribute you're looking for, it may be because that data hasn't been reported to Datadog recently. In addition, all data queried for template variables are subject to the data retention policy. For more information, see [Historical Data][4].
 
+### Dashboard layout
+To prevent variables from crowding the header, the dashboard displays a small subset. You can click on the **+ N** button to see the additional N variables present on your dashboard. 
+
+
+If you need to see all variables at once as you scroll, click **Expand template variables**. 
+
+
 ## Add a template variable
-If template variables are already defined, see [Edit a template variable](#edit-a-template-variable). If your dashboard does not have any template variables, you can click the question mark icon to open a help modal on how to use Dashboard Variables.
-
-{{< img src="/dashboards/template_variables/template_variable_menu.png" alt="Template variable menu showing the Configure Dropdown Values option" style="width:70%;" >}}
-
 To add a template variable in a dashboard:
-1. Click {{< ui >}}Add Variable{{< /ui >}}.
-1. You can add both {{< ui >}}Filter{{< /ui >}} and {{< ui >}}Group by{{< /ui >}} variable types.
-   1. Filter: Add a tag or attribute to filter dashboard queries and visualizations.
-   1. Group by: Add a tag or attribute to show a breakdown of groups within your data.<br>**Note**: `Group by` is only supported on select widgets---Timeseries, Table, Tree Map, Bar Chart, Wildcard, Distribution, Top List, Heatmap, Pie Chart, Geomap, Change, Scatterplot, Query Value, host map, and SLO Summary.
-1. (Optional) After selecting a tag, click the {{< ui >}}+ Configure Dropdown Values{{< /ui >}} button to rename the variable and set default or available values.
-1. Click {{< ui >}}Save{{< /ui >}}.
-1. To add more template variables, see [Edit a template variable](#edit-a-template-variable)
+1. Click {{< ui >}}Add Variable{{< /ui >}} (or {{< ui >}}+{{< /ui >}} if there are existing template variables)
+2. Select from a list of recommended template variables or search for the specific tag you have in mind.
+4. Select the widgets to apply this template variable to.
+6. Click {{< ui >}}Save{{< /ui >}}.
+
+
+### Configure template variable
+When the template variable side panel is open, you can:
+* Apply (or remove) this variable to selected widgets (note the {{< ui >}}Select All{{< /ui >}} or {{< ui >}}Deselect All{{< /ui >}} options)
+* Switch between filtering and grouping
+* Change the display name of the variable (displayed in the header and widget query)
+* Select a default dropdown value
+* Preview the dropdown values and further configure them with a search query
 
 
 ## Edit a template variable
+1. Hover over the template variable on the dashboard header and click **Edit**. The template variable side panel appears.
+2. Use the options in the panel to customize the variable or apply the variable to more widgets.
 
-To edit a template variable or add variables:
-1. Hover over the dashboard header and click the {{< ui >}}Edit{{< /ui >}} button.
-1. In edit mode, click on a template variable and make changes in the popover.
-1. To rearrange variables in the header, hover over a variable, then click and drag the drag icon handle.
-1. Click the {{< ui >}}+{{< /ui >}} icon to add a new template variable.
-1. (Optional) After selecting a tag, click the {{< ui >}}+ Configure Dropdown Values{{< /ui >}} button to rename the variable and set default or available values.
-  {{< img src="dashboards/template_variables/edit_template_variable_drag.png" alt="Template variable edit mode popover showing the drag icon allowing you to rearrange the order" style="width:100%;" >}}
-
-## Apply a template variable to widgets
-
-To add a template variable to widget queries:
-1. Click the {{< ui >}}Edit{{< /ui >}} button in the dashboard header.
-1. In edit mode, click on a template variable to open its popover.
-1. Click {{< ui >}}Select Widgets{{< /ui >}} to enter widget selection mode.
-1. The banner displays the number of sources using the variable. In the example below, the template variable `env` is used in 20 graphs on the dashboard:
-  {{< img src="dashboards/template_variables/apply_template_variable_to_widgets.png" alt="Example dashboard displaying confirmation to apply 'env' template variable to 20 widgets" style="width:100%;" >}}
-1. Click on individual widgets to preview the graph with the template variable interpolated.
-1. To add or remove from all widgets in a group, toggle the checkbox on the right corner of the group.
-1. To add or remove from all widgets on the dashboard, click {{< ui >}}Select All{{< /ui >}} or {{< ui >}}Deselect All{{< /ui >}} in the selection banner.
-1. Click {{< ui >}}Save{{< /ui >}} or {{< ui >}}X{{< /ui >}} in the banner to exit widget selection mode.
 
 ## Saved views
 
