@@ -9110,7 +9110,7 @@ menu:
       identifier: account_management_saml_configuration
       parent: account_management_saml
       weight: 401
-    - name: Renew Your SAML Certificate
+    - name: Renewing SAML Certificates
       url: account_management/saml/renewing/
       identifier: account_management_saml_renewing
       parent: account_management_saml
