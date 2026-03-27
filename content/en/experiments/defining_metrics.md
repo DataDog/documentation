@@ -29,7 +29,7 @@ To create a metric from Product Analytics or RUM data, you must have Datadog's [
 
 Product Analytics uses the same SDKs and configuration as Real User Monitoring (RUM). After you configure your SDK using the RUM setup documentation, create your metric in the Product Analytics UI.
 
-### Create a metric
+### Create a metric using Product Analytics or RUM data
 
 To create a metric for your experiment:
 
@@ -45,11 +45,11 @@ To create a metric for your experiment:
     1. Adjust **Experiment settings** and **Units** as needed. The defaults work for most use cases.
 1. Click **Save**.
 
-{{< img src="/product_analytics/experiment/exp_create_metric_4.png" alt="The Create Metric page with the Metric name field, a metric definition for the 'click on ADD TO CART' event, an annotation highlighting the aggregation method dropdown set to Count of events, an Add Filter icon, a Create Ratio button, the Additional settings section with Mark as certified toggle, Experiment settings, and Units, a bar chart on the right previewing metric data over one week, and the Save button highlighted." style="width:90%;" >}}
+{{< img src="/product_analytics/experiment/exp_create_new_metric.png" alt="The Create Metric page with the Metric name field, a metric definition for the 'click on ADD TO CART' event, an annotation highlighting the aggregation method dropdown set to Count of events, an Add Filter icon, a Create Ratio button, the Additional settings section with Mark as certified toggle, Experiment settings, and Units, a bar chart on the right previewing metric data over one week, and the Save button highlighted." style="width:90%;" >}}
 
 ### Add filters
 
-You can filter your metric by selecting an **Event properties** filter, such as Country, Device Type, or Has Replay. Use the **By Data Type** filter to narrow the list of available properties by type (for example, String or Boolean).
+You can filter your metric by selecting an **Event properties** filter, such as Service, Country, or Device Type. Use the **By Data Type** filter to narrow the list of available properties by type (for example, String or Boolean).
 
 If you do not see the property you need, select **Custom property** to define it manually.
 
@@ -61,9 +61,9 @@ If you do not see the property you need, select **Custom property** to define it
 
 To create a metric from your warehouse data, you must connect the warehouse to Datadog. Follow the [Snowflake][11] guide to connect your Snowflake data to Datadog.
 
-After you connect your warehouse, create a Metric SQL Model to map your data to Datadog. Then use the model to create a metric.
+After you connect your warehouse, create a SQL Model to map your data to Datadog. Then use the model to create a metric.
 
-### Create a Metric SQL Model
+### Create a SQL Model
 
 On the **Create Metric SQL Model** page, write your SQL query to define and preview your data, and configure your model to map the data to Datadog.
 
@@ -73,22 +73,22 @@ Start by writing a query to retrieve your data:
 
 1. Navigate to the [Metrics page][1] in Datadog Product Analytics.
 1. Select the **Metric SQL Models** tab.
-1. Click **Create Metric SQL Model**.
-1. In the **Write SQL** section, enter a SQL query that returns your data of interest. This is often a `SELECT * FROM` statement but also supports more advanced SQL.
+1. Click **Create SQL Model**.
+1. In the **Write SQL** section, enter a SQL query that returns your data of interest. This UI supports both a `SELECT * FROM` statement and more advanced SQL statements.
 1. Click **Run** to see a preview of your data.
 
 {{< img src="/product_analytics/experiment/exp_create_metric_sql_models_writesql_1.png" alt="The Write SQL section of the Create Metric SQL Model page showing a SELECT query for user_id, revenue_timestamp, and amount from a revenue orders table, with a successful query preview below displaying USER_ID, REVENUE_TIMESTAMP, and AMOUNT columns." style="width:80%;" >}}
 
-#### Structure your model
+#### Map your data to Datadog
 
-After previewing your data, configure the model structure:
+After previewing your data, map it to Datadog:
 
-1. Name your new **Metric SQL Model** (for example, **Revenue Orders**).
-1. (Optional) Toggle on **Mark as certified** to indicate this metric SQL model is approved for important decision-making. This requires the **Product Analytics Certified Metrics Write** permission.
+1. Add a  **Metric SQL Model Name** (for example, **Revenue Orders**).
+1. (Optional) Toggle on **Mark as certified** to indicate this SQL model is approved for important decision-making. This requires the **Product Analytics Certified Metrics Write** permission.
 1. Map the columns in your table to the following:
-   - **Timestamp**: The timestamp associated with the metric event. The analysis only includes rows created after the subject enrolls in the experiment.
+   - **Timestamp column**: The column that lists the timestamp associated with the metric event. The analysis only includes rows created after the subject enrolls in the experiment.
    - **Subject Type**: The attribute used to randomly assign experiment groups. On the [Subject Types][12] page, define the subject type and its default warehouse column (for example, `user_id` for an individual user or `org_id` for an organization account).
-   - **Measures** (optional): The numeric columns to aggregate when creating metrics. Each Metric SQL Model automatically includes an **each record** measure, which counts the number of relevant rows for a specific experiment subject.
+   - **Measures** (optional): The numeric columns to aggregate when creating metrics. Each SQL model automatically includes an **each record** measure, which counts the number of relevant rows for a specific experiment subject.
 1. Click **Create Metric SQL Model**.
 
 {{< img src="/product_analytics/experiment/exp_create_metrics_sql_model_structure4.png" alt="The Structure your model panel with the Metric SQL Model Name field set to 'Revenue Orders' and highlighted, a Mark as certified toggle, Timestamp column set to REVENUE_TIMESTAMP, Subject Type set to User with USER_ID selected, a Measures dropdown showing 'Revenue Orders (each record)', and the Create Metric SQL Model button highlighted." style="width:80%;" >}}
@@ -138,8 +138,8 @@ Datadog accounts for correlations between the numerator and denominator using th
 
 Datadog supports several advanced options specific to experimentation:
 
-Timeframe filters
-: - By default, Datadog includes all events between a user's first exposure and the end of the experiment. If you want to measure a time-boxed value such as "sessions within 7 days", you can add a timeframe filter.
+Time frame filters
+: - By default, Datadog includes all events between a user's first exposure and the end of the experiment. If you want to measure a time-boxed value such as "sessions within 7 days", you can add a time frame filter.
   - If selected, the metric only includes events from the specified time window, starting at the moment the user was first enrolled.
 
 Desired metric direction
