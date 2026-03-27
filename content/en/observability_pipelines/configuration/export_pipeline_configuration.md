@@ -1,5 +1,5 @@
 ---
-title: Export Pipeline Configuration to JSON or Terraform
+title: Export a Pipeline Configuration to JSON or Terraform
 disable_toc: false
 further_reading:
 - link: "observability_pipelines/configuration/set_up_pipelines/"
