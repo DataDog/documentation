@@ -140,3 +140,5 @@ phrase:
       dst: "content/{lang}/error_tracking/frontend/mobile/android.md"
     - src: "content/en/gpu_monitoring/fleet.md"
       dst: "content/{lang}/gpu_monitoring/fleet.md"
+    - src: "content/en/serverless/azure_app_service/linux_container.md"
+      dst: "content/{lang}/serverless/azure_app_service/linux_container.md"
