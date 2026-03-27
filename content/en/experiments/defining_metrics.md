@@ -73,18 +73,18 @@ On the **Create Metric SQL Model** page, write your SQL query to define and prev
 1. In the **Write SQL** section, enter a SQL query that returns your data of interest. This is often a `SELECT * FROM` statement but also supports more advanced SQL.
 1. Click **Run** to see a preview of your data.
 
-{{< img src="/product_analytics/experiment/exp_create_metric_sql_models_writesql.png" alt="The Write SQL section of the Create Metric SQL Model page showing a SELECT query against a logs usage table, with a successful query preview below displaying ORG_ID, USAGE_HOUR, and USAGE_HOUR_END columns." style="width:80%;" >}}
+{{< img src="/product_analytics/experiment/exp_create_metric_sql_models_writesql_1.png" alt="The Write SQL section of the Create Metric SQL Model page showing a SELECT query for user_id, revenue_timestamp, and amount from a revenue orders table, with a successful query preview below displaying USER_ID, REVENUE_TIMESTAMP, and AMOUNT columns." style="width:80%;" >}}
 
 #### Structure your model
-1. Name your new **Metric SQL Model** (for example, **Logs Usage**).
+1. Name your new **Metric SQL Model** (for example, **Revenue Orders**).
 1. (Optional) Toggle on **Mark as certified** to indicate this metric SQL model is approved for important decision-making. This requires the **Product Analytics Certified Metrics Write** permission.
 1. Map the columns in your table to the following:
    - **Timestamp**: The timestamp associated with the metric event. Only the rows created after a subject is enrolled into the experiment are included in the analysis.
-   - **Subject Type**: The attribute that is used to randomly populate the experiment groups. This is typically the `usr.id` (for an individual user) or `usr.org_id` (for an organization account). You can define this attribute on the [Subject Types][12] page.
+   - **Subject Type**: The attribute used to randomly assign experiment groups. On the [Subject Types][12] page, define the subject type and its default warehouse column (for example, `user_id` for an individual user or `org_id` for an organization account).
    - **Measures** (optional): The numeric columns to aggregate when creating metrics. Each Metric SQL Model automatically includes an **each record** measure, which counts the number of relevant rows for a specific experiment subject.
 1. Click **Create Metric SQL Model**.
 
-{{< img src="/product_analytics/experiment/exp_create_metric_sql_models_structure_1.png" alt="The Structure your model panel with the Metric SQL Model Name field set to 'Logs Usage' and highlighted, a Mark as certified toggle, Timestamp column set to USAGE_HOUR, Subject Type set to Organization with ORG_ID selected, a Measures dropdown showing 'Logs Usage (each record)', and the Create Metric SQL Model button highlighted." style="width:80%;" >}}
+{{< img src="/product_analytics/experiment/exp_create_metrics_sql_model_structure4.png" alt="The Structure your model panel with the Metric SQL Model Name field set to 'Revenue Orders' and highlighted, a Mark as certified toggle, Timestamp column set to REVENUE_TIMESTAMP, Subject Type set to User with USER_ID selected, a Measures dropdown showing 'Revenue Orders (each record)', and the Create Metric SQL Model button highlighted." style="width:80%;" >}}
 
 ### Create a metric using your SQL model
 
@@ -93,10 +93,10 @@ After you create your SQL model, use it to create a metric:
 1. Navigate to the [Metrics page][1] within Datadog Product Analytics.
 1. Select the **Metrics** tab.
 1. Click **Create Metric** at the top right corner.
-1. Click **Select an event** to see a list of Metric SQL Models under their data source and select the relevant model (for example, **Logs Usage** under **Snowflake**).
+1. Click **Select an event** to see a list of Metric SQL Models under their data source and select the relevant model (for example, **Revenue Orders** under **Snowflake**).
 1. Select an [aggregation method](#aggregation-methods) from the dropdown.
 
-{{< img src="/product_analytics/experiment/exp_create_metric_from_sqlmodel1.png" alt="The Create Metric event picker showing All Events selected, with event types including Snowflake, Actions, Views, Sessions, Errors, and Long Tasks on the left, and the Logs Usage SQL model highlighted under Snowflake on the right." style="width:80%;" >}}
+{{< img src="/product_analytics/experiment/exp_create_metric_from_sqlmodel_2.png" alt="The Create Metric event picker showing All Events selected, with event types including Snowflake, Actions, Views, Sessions, Errors, and Long Tasks on the left, and the Revenue Orders SQL model highlighted under Snowflake on the right, showing Measures: amount and Filterable dimensions: N/A." style="width:80%;" >}}
 
 ## Aggregation methods
 
@@ -117,7 +117,7 @@ Datadog computes metrics for each experiment subject. For example, a **Count of 
 
 ### Ratio metrics
 
-By default, Datadog divides your metric by the number of experiment subjects. Click **Create ratio** to divide by a different event instead. This lets you measure conversion within a specific subset of users, giving you a more accurate picture of behavior at a specific step in the funnel.
+By default, Datadog divides your metric by the number of experiment subjects. Click **Create ratio** to divide by a different value instead. A common example is measuring conversion within a specific subset of users, giving you a more accurate picture of behavior at a specific step in the funnel.
 
 Datadog accounts for correlations between the numerator and denominator using the [delta method][2].
 
