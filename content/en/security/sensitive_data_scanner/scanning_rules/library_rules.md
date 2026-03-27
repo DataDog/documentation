@@ -20,8 +20,6 @@ Phone number and physical address PII detection in logs using machine learning a
 
 The Scanning Rule Library is a collection of predefined rules for detecting common patterns such as email addresses, credit card numbers, API keys, authorization tokens, and more. The recommended keywords are used by default when library rules are created.
 
-**Note:** Most library rules work with all data sources (Logs, APM, RUM, LLM Observability, Observability Pipelines, Secret Scanning, and Cloud Storage). Rules that use machine learning (Human Name Scanner, Phone Number Scanner, Physical Address Scanner) are currently available for Logs only. Check the **Available For** column to see which data sources each rule supports.
-
 These rules can also be viewed in Datadog:
 
 1. Navigate to [Sensitive Data Scanner][1].
@@ -31,7 +29,10 @@ These rules can also be viewed in Datadog:
    1. Click **Add Rules to Scanning Group**.<br />
    1. Follow the steps in [Set Up Sensitive Data Scanner][2] to finish the setup.
 
+<div class="alert alert-info">Library rules are available for all data sources (Logs, APM, RUM, LLM Observability, Observability Pipelines, Secret Scanning, and Cloud Storage).</div>
+
 {{< multifilter-search resource="sds_rules" >}}
+
 
 ## Further Reading
 
