@@ -291,7 +291,7 @@ You can sort notebooks by selecting the ⭐, details, or modified headers to sor
 
 
 [1]: https://app.datadoghq.com/notebook/list
-[2]: https://app.datadoghq.com/notebook/template-gallery
+[2]: https://app.datadoghq.com/notebook/list?location=templates
 [3]: /dashboards/querying/#graphing-editor
 [4]: https://www.markdownguide.org/basic-syntax/#images-1
 [5]: /dashboards/template_variables/

@@ -136,11 +136,9 @@ For custom metrics with connected source code, Datadog can automatically generat
 
 The Source Code section in the metric side panel provides a centralized view of every custom metric and its underlying context.
 
-{{< callout url="https://www.datadoghq.com/product-preview/metrics-source-code-attribution/" >}} Metric Source Code is in Preview. If you're interested in this feature, complete this form. {{< /callout >}}
-
 Use the Source Code section in the metric side panel to identify a metric's source code, understand how it is generated, and determine ownership. It provides visibility into context and ownership, helping you troubleshoot and optimize faster by linking directly to the metric's source file, commit history, and blame data.
 
-{{< img src="metrics/summary/metric_source_code_03042026.png" alt="Source Code Example in Metrics sidepanel" style="width:80%;">}}
+{{< img src="metrics/summary/metric_source_code_03262026.png" alt="Source Code Example in Metrics sidepanel" style="width:80%;">}}
 
 To ensure full coverage of your metric's source code, ensure that you've installed Datadog's [GitHub][36], [Gitlab][37], or [Azure DevOps][38] integration and that all your [repositories][39] are connected.
 

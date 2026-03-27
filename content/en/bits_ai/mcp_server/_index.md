@@ -41,13 +41,6 @@ This demo shows the Datadog MCP Server being used in Cursor and Claude Code (unm
 - The Datadog MCP Server is not GovCloud compatible.
 - Datadog collects certain information about your usage of the Remote Datadog MCP Server, including how you interact with it, whether errors occurred while using it, what caused those errors, and user identifiers in accordance with the <a href="https://www.datadoghq.com/legal/privacy/" target="_blank">Datadog Privacy Policy</a> and Datadog's <a href="https://www.datadoghq.com/legal/eula/" target="_blank">EULA</a>. This data is used to help improve the server's performance and features, including transitions to and from the server and the applicable Datadog login page for accessing the Services, and context (for example, user prompts) leading to the use of MCP tools. The data is stored for 120 days.
 
-
-## Requirements
-
-Datadog users must have the `MCP Read` [permission][18] to use the MCP Server for read access, and the `MCP Write` [permission][18] for write access.
-
-For setup instructions, see [Set Up the Datadog MCP Server][27].
-
 ## Monitoring the Datadog MCP Server usage
 
 You can track Datadog MCP Server usage for your organization using Datadog metrics and Audit Trail.
@@ -80,6 +73,7 @@ The Datadog MCP Server supports _toolsets_, which allow you to use only the tool
 - `security`: Tools for code security scanning and searching [security signals][33] and [security findings][34]
 - `software-delivery`: Tools for interacting with Software Delivery ([CI Visibility][21] and [Test Optimization][24])
 - `synthetics`: Tools for interacting with Datadog [Synthetic tests][20]
+- `workflows`: Tools for [Workflow Automation][39], including listing, inspecting, executing, and configuring workflows for agent use
 
 To use a toolset, include the `toolsets` query parameter in the endpoint URL when connecting to the MCP Server ([remote authentication][27] only). 
 
@@ -600,21 +594,6 @@ Guides you through uploading source maps for RUM error mapping.
 
 - Help me upload source maps so my RUM errors show original source code.
 
-### `datadog_code_security_scan`
-*Toolset: **security***\
-Runs a comprehensive security scan that detects both vulnerabilities (SQL injection, XSS, path traversal, and others) and secrets (API keys, passwords, credentials, and others) in parallel.
-
-- Scan my code for security vulnerabilities and hardcoded secrets.
-- Run a full security scan on this pull request.
-- Check this file for any security issues.
-
-### `datadog_sast_scan`
-*Toolset: **security***\
-Scans code for security vulnerabilities using static analysis (SAST), detecting SQL injection, XSS, path traversal, command injection, insecure cryptography, and other security weaknesses.
-
-- Scan this file for security vulnerabilities.
-- Check my code for SQL injection and XSS vulnerabilities.
-
 ### `datadog_secrets_scan`
 *Toolset: **security***\
 Scans code for hardcoded secrets and credentials, detecting AWS keys, API keys, passwords, tokens, private keys, and database credentials.
@@ -733,6 +712,47 @@ Preview and create Datadog Synthetics HTTP API Tests.
 - Create a Synthetics test on `/path/to/endpoint`.
 - Create a Synthetics test that checks if my domain `mycompany.com` stays up.
 
+### `list_datadog_workflows`
+*Toolset: **workflows***\
+Lists and searches [Workflow Automation][39] workflows. Supports filtering by name, tags, owner, handle, and trigger type (such as `monitor`, `schedule`, `api`, or `incident`). Results can be sorted by fields like `name` or `updatedAt`.
+
+- Show me all published workflows tagged with `team:platform`.
+- List workflows that have an agent trigger configured.
+- Find all workflows related to incident response owned by Alice Smith.
+
+### `get_datadog_workflow`
+*Toolset: **workflows***\
+Retrieves detailed information about a specific workflow, including its triggers, steps, connections, and input schema.
+
+- Get the full details for workflow `00000000-0000-0000-0000-000000000000`.
+- Show me the input parameters and steps for the deployment rollback workflow.
+- What triggers are configured for this workflow?
+
+### `execute_datadog_workflow`
+*Toolset: **workflows***\
+Executes a published workflow that has an agent trigger, with optional input parameters matching the workflow's input schema.
+
+- Run the incident escalation workflow for service `checkout-api` with severity `high`.
+- Execute the deployment rollback workflow for the payments service.
+- Trigger the On-Call notification workflow with the context from this investigation.
+
+**Note**: The workflow must be published and have an agent trigger configured. Use `update_datadog_workflow_with_agent_trigger` to add one if needed.
+
+### `get_datadog_workflow_instance`
+*Toolset: **workflows***\
+Retrieves the status and details of a workflow execution instance, including step results and outputs.
+
+- What's the status of the workflow execution I triggered?
+- Did the incident escalation workflow complete successfully?
+- Show me the detailed outputs from workflow instance `00000000-0000-0000-0000-000000000000`.
+
+### `update_datadog_workflow_with_agent_trigger`
+*Toolset: **workflows***\
+Adds an agent trigger to a workflow and publishes it, enabling the workflow to be executed by AI agents.
+
+- Add an agent trigger to the deployment rollback workflow so I can run it from here.
+- Configure the incident response workflow to be triggerable by an agent.
+
 ## Context efficiency
 
 The Datadog MCP Server is optimized to provide responses in a way that AI agents get relevant context without being overloaded with unnecessary information. For example:
@@ -774,3 +794,5 @@ The Datadog MCP Server is under significant development. Use [this feedback form
 [36]: /getting_started/site/#navigate-the-datadog-documentation-by-site
 [37]: https://help.datadoghq.com/hc/en-us/requests/new
 [38]: /service_management/case_management/
+[39]: /actions/workflows/
+[40]: /bits_ai/mcp_server/setup#local-binary-authentication
