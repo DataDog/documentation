@@ -102425,6 +102425,7 @@ paths:
           - security_monitoring_notification_profiles_write
   /api/v2/security/vulnerabilities:
     get:
+      deprecated: true
       description: |-
         Get a list of vulnerabilities.
 
@@ -102867,9 +102868,9 @@ paths:
         operator: OR
         permissions:
           - appsec_vm_read
+      x-sunset: "2027-01-01"
       x-unstable: |-
-        **Note**: This endpoint is a private preview.
-        If you are interested in accessing this API, [fill out this form](https://forms.gle/kMYC1sDr6WDUBDsx9).
+        **Note**: This endpoint is deprecated. See the [List Security Findings endpoint](https://docs.datadoghq.com/api/latest/security-monitoring/#list-security-findings).
   /api/v2/security/vulnerabilities/notification_rules:
     get:
       description: Returns the list of notification rules for security vulnerabilities.
