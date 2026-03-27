@@ -93,8 +93,12 @@ After you create your SQL model, use it to create a metric:
 1. Navigate to the [Metrics page][1] within Datadog Product Analytics.
 1. Select the **Metrics** tab.
 1. Click **Create Metric** at the top right corner.
-1. Click **Select an event** to see a list of Metric SQL Models under their data source and select the relevant model (for example, **Revenue Orders** under **Snowflake**).
+1. Add a **Name** and **Description** (optional) for your metric.
+1. Click **Select an event** under the **Metric definition** section to see a list of Metric SQL Models under their data source and select the relevant model (for example, **Revenue Orders** under **Snowflake**).
 1. Select an [aggregation method](#aggregation-methods) from the dropdown.
+1. (Optional) Toggle on **Mark as certified** to indicate this metric is approved for important decision-making. This requires the **Product Analytics Certified Metrics Write** permission.
+1. Click **Save**.
+
 
 {{< img src="/product_analytics/experiment/exp_create_metric_from_sqlmodel_2.png" alt="The Create Metric event picker showing All Events selected, with event types including Snowflake, Actions, Views, Sessions, Errors, and Long Tasks on the left, and the Revenue Orders SQL model highlighted under Snowflake on the right, showing Measures: amount and Filterable dimensions: N/A." style="width:80%;" >}}
 
