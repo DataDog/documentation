@@ -16,7 +16,7 @@ further_reading:
 
 As of OpenTelemetry Collector Contrib [modules v0.129.0][4] and newer, the Datadog Extension is included in [contrib distributions][5] of OpenTelemetry Collector. It is also available for [custom builds][6] of OpenTelemetry Collector. If you are using the Datadog Distribution of OpenTelemetry Collector (DDOT), the Datadog Extension is automatically enabled.
 
-The Datadog Extension allows you to view OpenTelemetry Collector configuration and build information directly within Datadog within [Fleet Automation][7], and additionally the [Infrastructure List][2] and [Resource Catalog][3]. When used with the [Datadog Exporter][1], this extension gives you visibility into your Collector fleet without leaving the Datadog UI.
+The Datadog Extension allows you to view OpenTelemetry Collector configuration and build information directly in Datadog using [Fleet Automation][7], the [Infrastructure List][2], and [Resource Catalog][3]. When used with the [Datadog Exporter][1], this extension gives you visibility into your Collector fleet without leaving the Datadog UI.
 
 {{< img src="/agent/fleet_automation/fleet-automation-pipeline-view.png" alt="View OTel Collector configurations with Pipeline Visualization in Fleet Automation" style="width:100%;" >}}
 
@@ -136,9 +136,10 @@ service:
 Once configured, you can view your OpenTelemetry Collector configuration and build information in various locations:
 
 ### Fleet Automation
-1. Navigate to **[Integrations > Fleet Automation][7]** in your Datadog account.
-2. Click on any host running the OpenTelemetry Collector (**Note**: Filter for hosts by using any of the OTel Collector facets).
-3. In the Fleet Automation side panel, select the **Info** tab to see build info and the **Configurations** tab to see the full YAML file or a pipeline visualization of your OTel Collector configurations.
+1. Navigate to **[Integrations > Fleet Automation][7]**.
+2. Filter for OTel Collector hosts using the Collector facets, then click a host.
+3. In the side panel, select the **Info** tab to view build information.
+4. Select the **Configurations** tab to view the full YAML file or a pipeline visualization of your OTel Collector configurations.
 
 {{< img src="/agent/fleet_automation/fleet-automation-yaml-view.png" alt="View OTel Collector configuration YAMLs in Fleet Automation" style="width:100%;" >}}
 
