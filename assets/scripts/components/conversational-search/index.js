@@ -679,6 +679,15 @@ function initConversationalSearch() {
     if (!IS_CONVERSATIONAL_SEARCH_ENABLED || conversationalSearchInstance) return;
     const instance = new ConversationalSearch();
     if (instance.ready) conversationalSearchInstance = instance;
+
+    const homeAiBtn = document.querySelector('.home-ai-btn');
+    if (homeAiBtn) {
+        homeAiBtn.addEventListener('click', () => {
+            const searchInput = document.querySelector('.ais-SearchBox-input');
+            const query = searchInput ? searchInput.value : '';
+            askDocsAI(query, { source: 'home_hero' });
+        });
+    }
 }
 
 // The minimum length of the query to auto-submit the conversation.
