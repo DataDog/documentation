@@ -16,4 +16,5 @@ cascade:
     {{< nextlink href="/account_management/billing/ci_visibility/" >}}CI Visibility Billing Considerations{{< /nextlink >}}
     {{< nextlink href="/continuous_integration/guides/identify_highest_impact_jobs_with_critical_path/" >}}Identify CI Jobs on the Critical Path to Reduce the Pipeline Duration{{< /nextlink >}}
     {{< nextlink href="/continuous_integration/guides/use_ci_jobs_failure_analysis/" >}} Use CI jobs failure analysis to identify root causes in failed jobs{{< /nextlink >}}
+    {{< nextlink href="/continuous_integration/guides/track_reusable_workflows/" >}} Track GitHub Reusable Workflow Usage with Custom Tags{{< /nextlink >}}
 {{< /whatsnext >}}
