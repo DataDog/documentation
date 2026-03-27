@@ -192,7 +192,7 @@ helm install datadog-operator datadog/datadog-operator \
 
 1. Create or choose an [API key][102].
 1. Go to [Application Keys][103] and create a new key:
-   - Under **Scopes**, select **on_prem_runner_write**.
+   - Under **Scopes**, select **on_prem_runner_write**. This scope is required to register the runner and automatically create connections.
    - Enable **Actions API Access**.
 
 #### Create Kubernetes secrets
@@ -303,7 +303,7 @@ Follow these steps to install the Private Action Runner on your [Datadog Node Ag
 
 1. Create or choose an [API key][102].
 1. Go to [Application Keys][103] and create a new key:
-   - Under **Scopes**, select **on_prem_runner_write**.
+   - Under **Scopes**, select **on_prem_runner_write**. This scope is required to register the runner and automatically create connections.
    - Enable **Actions API Access**.
 
 ### Create the Terraform configuration
