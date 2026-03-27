@@ -78,7 +78,7 @@ On the **Create Metric SQL Model** page, write your SQL query to define and prev
 
 #### Structure your model
 1. Name your new **Metric SQL Model** (for example, **Logs Usage**).
-1. (Optional) Toggle on **Mark as certified** to indicate this metric is approved for important decision-making. This requires the **Product Analytics Certified Metrics Write** permission.
+1. (Optional) Toggle on **Mark as certified** to indicate this metric SQL model is approved for important decision-making. This requires the **Product Analytics Certified Metrics Write** permission.
 1. Map the columns in your table to the following:
    - **Timestamp**: The timestamp associated with the metric event. Only the rows created after a subject is enrolled into the experiment are included in the analysis.
    - **Subject Type**: The attribute that is used to randomly populate the experiment groups. This is typically the `usr.id` (for an individual user) or `usr.org_id` (for an organization account). You can define this attribute on the [Subject Types][12] page.
@@ -101,20 +101,20 @@ After you create your SQL model, use it to create a metric:
 
 ## Aggregation methods
 
-Aggregation methods determine how Datadog summarizes data for each experiment subject. An experiment subject is the unit that is randomized for the experiment. This is typically a user, but can also be an organization, session, or device, depending on how you set up your experiment.
+Aggregation methods determine how Datadog summarizes data for each experiment subject. An experiment subject is the unit that is randomized for the experiment. This is typically a user, but can also be an organization, cookie, or device, depending on how you set up your experiment.
 
 Datadog Experiments supports the following aggregation types:
 
 - **Count of events** (default)
 - **Count of unique users with the event** (useful for conversion metrics)
 - **Sum of an event property** (useful for revenue metrics)
-- **Distinct values of an event property** (useful for page view metrics)
+- **Distinct values of an event property** (useful for unique pages viewed metrics)
 - **Percentile of an event property** (useful for latency metrics)
-- **Average of an event property** (useful for performance or satisfaction metrics)
+- **Average of an event property** (useful for satisfaction metrics)
 
 {{< img src="/product_analytics/experiment/exp_default_metric_agg.png" alt="The aggregation method dropdown in the Define the metric panel showing Count of unique users, Count of events (selected), and Sum of... as options, with a description reading 'The number of events performed' on the right." style="width:90%;" >}}
 
-Datadog computes metrics for each experiment subject. For example, a **Count of events** metric on users calculates the total number of events for all users in the variant (experiment group) divided by the number of users in that variant.
+Datadog computes metrics for each experiment subject. For example, a **Count of events** metric on a user-randomized experiment calculates the total number of events for all users in the variant (experiment group) divided by the number of users in that variant.
 
 ### Ratio metrics
 
