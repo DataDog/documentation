@@ -40,7 +40,7 @@ On Linux hosts, you can configure Datadog SDKs at the host level using the `appl
 
 You can set any [library configuration environment variable][1] in `application_monitoring.yaml`.
 
-**Note**: The Go SDK only support APM tracing configuration options. Support for other configurations is coming soon.
+**Note**: The Go SDK only supports APM tracing configuration options.
 
 ## SDK version requirements
 
