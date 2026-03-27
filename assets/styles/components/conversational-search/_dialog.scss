@@ -114,17 +114,17 @@ $conv-float-btn-bg-hover: #4f2384;
 
 .conv-search-aurora {
     position: absolute;
-    bottom: -5%;
-    left: 8%;
-    right: -2%;
-    height: 55%;
+    bottom: -15%;
+    left: -10%;
+    right: -10%;
+    height: 65%;
     background:
-        radial-gradient(ellipse at 15% 85%, rgba(#B0EBFF, 0.4) 0%, transparent 55%),
-        radial-gradient(ellipse at 75% 90%, rgba(#FFD1E4, 0.3) 0%, transparent 50%),
-        radial-gradient(ellipse at 45% 100%, rgba($conv-primary-400, 0.4) 0%, transparent 55%);
+        radial-gradient(ellipse 80% 80% at 33% 65%, rgba($conv-primary-300, 0.55) 0%, transparent 70%),
+        radial-gradient(ellipse 60% 60% at 48% 50%, rgba(#B0EBFF, 0.4) 0%, transparent 70%),
+        radial-gradient(ellipse 45% 50% at 83% 58%, rgba(#FFD1E4, 0.35) 0%, transparent 70%);
     pointer-events: none;
     z-index: 0;
-    filter: blur(25px);
+    filter: blur(45px);
 }
 
 .conv-search-header {
@@ -144,14 +144,13 @@ $conv-float-btn-bg-hover: #4f2384;
 
 .conv-search-title-group {
     display: flex;
-    align-items: center;
+    align-items: stretch;
     gap: 6px;
 }
 
 .conv-search-logo-group {
     display: flex;
     align-items: center;
-    justify-content: center;
     gap: 8px;
     flex-shrink: 0;
 }
@@ -159,39 +158,44 @@ $conv-float-btn-bg-hover: #4f2384;
 .conv-search-title-icon {
     width: 36px;
     height: 36px;
+    aspect-ratio: 1/1;
     flex-shrink: 0;
     display: block;
 }
 
 .conv-search-title {
-    font-size: 17px;
-    font-weight: 700;
     color: #000;
-    letter-spacing: 0;
+    font-size: 17px;
+    font-style: normal;
+    font-weight: 800;
     line-height: 22px;
     white-space: nowrap;
+    font-variant-numeric: lining-nums proportional-nums;
+    font-feature-settings: 'liga' off, 'clig' off;
+    display: flex;
+    align-items: center;
+    margin-top: -2px;
 }
 
 .conv-search-info-tooltip {
-    display: inline-flex;
+    display: flex;
+    align-items: center;
 
     .conv-search-info-btn {
         display: flex;
         align-items: center;
         justify-content: center;
-        width: 22px;
-        height: 22px;
+        width: 16px;
+        height: 16px;
+        aspect-ratio: 1/1;
         padding: 0;
         border: none;
-        border-radius: 50%;
         background: transparent;
         cursor: pointer;
-        transition: background 0.15s ease;
+        transition: opacity 0.15s ease;
         text-decoration: none;
 
         &:hover {
-            background: rgba($conv-search-purple, 0.08);
-
             img {
                 opacity: 0.7;
             }
@@ -200,6 +204,7 @@ $conv-float-btn-bg-hover: #4f2384;
         svg, img {
             width: 16px;
             height: 16px;
+            display: block;
         }
 
         img {
@@ -247,7 +252,7 @@ $conv-float-btn-bg-hover: #4f2384;
     align-items: center;
     gap: 6px;
     font-size: 17px;
-    font-weight: 400;
+    font-weight: 300;
     font-family: inherit;
     white-space: nowrap;
     color: #000;
@@ -262,6 +267,10 @@ $conv-float-btn-bg-hover: #4f2384;
     &:active {
         background: $conv-primary-300;
         border-color: $conv-primary-300;
+    }
+
+    span {
+        margin-top: -2px;
     }
 
     svg, img {

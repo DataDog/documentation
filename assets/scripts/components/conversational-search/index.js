@@ -180,6 +180,7 @@ class ConversationalSearch {
         this.bindHomepageObserver();
         this.bindTooltipEvents();
         this.bindClickDelegation();
+        this.bindScrollFade();
     }
 
     bindHomepageObserver() {
@@ -197,6 +198,15 @@ class ConversationalSearch {
             { threshold: 0 }
         );
         observer.observe(homeAiBtn);
+    }
+
+    bindScrollFade() {
+        this.messagesContainer.addEventListener('scroll', () => {
+            this.messagesContainer.classList.toggle(
+                'has-scrolled',
+                this.messagesContainer.scrollTop > 0
+            );
+        });
     }
 
     bindTooltipEvents() {

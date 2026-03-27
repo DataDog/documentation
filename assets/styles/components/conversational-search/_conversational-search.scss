@@ -120,7 +120,7 @@ $conv-neutral-200: #efefef;
     border: 1px solid $conv-primary-200;
     border-radius: 20px;
     font-size: 17px;
-    font-weight: 400;
+    font-weight: 300;
     cursor: pointer;
     transition: background 0.18s ease, border-color 0.18s ease;
     text-align: left;
@@ -347,31 +347,45 @@ $conv-neutral-200: #efefef;
 .conv-search-loading-indicator {
     display: flex;
     align-items: center;
-    gap: 10px;
-    padding: 10px 0;
+    gap: 12px;
+    padding: 14px 0;
 }
 
 .conv-search-loading-spinner {
-    display: inline-block;
-    width: 18px;
-    height: 18px;
-    border: 2px solid $conv-primary-200;
-    border-top-color: $conv-search-purple;
-    border-radius: 50%;
-    animation: conv-search-spin 0.8s linear infinite;
+    width: 20px;
+    height: 20px;
     flex-shrink: 0;
+    position: relative;
+
+    &::before, &::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: 50%;
+    }
+
+    &::before {
+        border: 2px solid $conv-primary-200;
+    }
+
+    &::after {
+        border: 2px solid transparent;
+        border-top-color: $conv-primary-400;
+        animation: conv-search-spin 0.9s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    }
 }
 
 .conv-search-status-text {
-    color: #3b3b4f;
-    font-size: 13px;
-    margin-left: 0;
+    color: $conv-neutral-600;
+    font-size: 14px;
+    font-weight: 300;
+    letter-spacing: 0.01em;
     animation: conv-search-fade-in 0.3s ease;
 }
 
 @keyframes conv-search-fade-in {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    from { opacity: 0; transform: translateY(2px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 .conv-search-cursor {
@@ -394,6 +408,7 @@ $conv-neutral-200: #efefef;
     padding: 0 36px 36px;
     position: relative;
     z-index: 1;
+
     background: transparent;
 
     @media (max-width: 640px) {
@@ -409,10 +424,10 @@ $conv-neutral-200: #efefef;
 
 .conv-search-input-container {
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    gap: 0;
     padding: 10px 10px 10px 20px;
-    background: white;
+    background: #fff;
     border: 1px solid $conv-primary-300;
     border-radius: 24px;
     box-shadow:
@@ -433,12 +448,15 @@ $conv-neutral-200: #efefef;
     border-radius: 0;
     padding: 0;
     font-size: 20px;
-    font-weight: 400;
+    font-style: normal;
+    font-weight: 300;
     line-height: 28px;
     background: transparent;
     font-family: inherit;
     min-height: 28px;
     max-height: 120px;
+    font-variant-numeric: lining-nums proportional-nums;
+    font-feature-settings: 'liga' off, 'clig' off;
 
     &::placeholder {
         color: $conv-neutral-500;
@@ -541,11 +559,18 @@ $conv-neutral-200: #efefef;
         display: block;
         width: 100%;
         height: 60px;
-        background: linear-gradient(to bottom, white 0%, transparent 100%);
+        background: linear-gradient(to bottom, white 0%, white 1px, transparent 100%);
         pointer-events: none;
         z-index: 2;
         flex-shrink: 0;
-        margin-bottom: -32px;
+        margin-top: -1px;
+        margin-bottom: -59px;
+        opacity: 0;
+        transition: opacity 0.2s ease;
+    }
+
+    &.has-scrolled::before {
+        opacity: 1;
     }
 
     @media (max-width: 640px) {
@@ -553,7 +578,7 @@ $conv-neutral-200: #efefef;
 
         &::before {
             height: 40px;
-            margin-bottom: -24px;
+            margin-bottom: -39px;
         }
     }
 }
