@@ -78,7 +78,7 @@ The rest of this guide explains each step in detail.
 The Datadog Feature Flags SDK ships as two UPM packages:
 
 - **`com.datadoghq.unity`** — core package, required. Includes `DdFlags`, `IFlagsClient`, and direct flag evaluation.
-- **`com.datadoghq.unity.flags.openfeature`** — optional OpenFeature integration. Install this if you want to evaluate flags through the OpenFeature standard API.
+- **`com.datadoghq.unity.flags.openfeature`** — optional OpenFeature integration. Install this if you want to evaluate flags through the OpenFeature standard API. This package declares [NuGetForUnity][5] as a dependency, which is installed automatically and manages the OpenFeature NuGet packages.
 
 **Install the core package:**
 
@@ -88,15 +88,13 @@ The Datadog Feature Flags SDK ships as two UPM packages:
 
 **Install the OpenFeature package (optional):**
 
-3. Install [NuGetForUnity][5] to manage OpenFeature dependencies.
-
-4. Add the `com.datadoghq.unity.flags.openfeature` package from its Git URL.
+3. Add the `com.datadoghq.unity.flags.openfeature` package from its Git URL. NuGetForUnity is installed automatically as a transitive dependency and restores the OpenFeature packages on first project open.
 
 **Android-only steps:**
 
-5. Configure your project to use [Gradle templates][6], and enable both `Custom Main Template` and `Custom Gradle Properties Template`.
+4. Configure your project to use [Gradle templates][6], and enable both `Custom Main Template` and `Custom Gradle Properties Template`.
 
-6. If you build and receive `Duplicate class` errors (common in Unity 2022.x), add the following code to the `dependencies` block of your `mainTemplate.gradle`:
+5. If you build and receive `Duplicate class` errors (common in Unity 2022.x), add the following code to the `dependencies` block of your `mainTemplate.gradle`:
 
    ```groovy
    constraints {
