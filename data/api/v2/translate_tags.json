@@ -411,10 +411,6 @@
     "name": "Users",
     "description": "Create, edit, and disable users."
   },
-  "widgets": {
-    "name": "Widgets",
-    "description": "Create, read, update, and delete saved widgets. Widgets are reusable\nvisualization components stored independently from any dashboard or notebook,\npartitioned by experience type and identified by a UUID."
-  },
   "workflow-automation": {
     "name": "Workflow Automation",
     "description": "Datadog Workflow Automation allows you to automate your end-to-end processes by connecting Datadog with the rest of your tech stack. Build workflows to auto-remediate your alerts, streamline your incident and security processes, and reduce manual toil. Workflow Automation supports over 1,000+ OOTB actions, including AWS, JIRA, ServiceNow, GitHub, and OpenAI. Learn more in our Workflow Automation docs [here](https://docs.datadoghq.com/service_management/workflows/)."
