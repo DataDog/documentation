@@ -99,7 +99,7 @@ The following environment variables are supported:
 : Adds extra tags to cluster check metrics.
 
 `DD_CLUSTER_CHECKS_ADVANCED_DISPATCHING_ENABLED`
-: When true, the leader Cluster Agent collects stats from the cluster-level check runners to optimize check dispatching logic. Default: `true` for Agent v7.73 or later.
+: When true, the leader Cluster Agent collects stats from the cluster-level check runners to optimize check dispatching logic. Default: `true` for Agent v7.73 or later (`false` for earlier versions).
 
 `DD_CLUSTER_CHECKS_CLC_RUNNERS_PORT`
 : The port used by the Cluster Agent client to reach cluster-level check runners and collect their stats. Default: `5005`.
