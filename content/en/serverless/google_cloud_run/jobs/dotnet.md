@@ -75,7 +75,7 @@ logger.LogInformation("Hello World!");
 
 4. **Configure your application**.
 
-{{% serverless-init-configure cloudrun="true" %}}
+{{% serverless-init-configure cloudrun_jobs="true" %}}
 
 5. {{% gcr-service-label %}}
 

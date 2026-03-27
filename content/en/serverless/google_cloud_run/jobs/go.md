@@ -70,7 +70,7 @@ go get github.com/DataDog/dd-trace-go/contrib/net/http/v2
 
 4. **Configure your application**.
 
-{{% serverless-init-configure %}}
+{{% serverless-init-configure cloudrun_jobs="true" %}}
 
 5. {{% gcr-service-label %}}
 
