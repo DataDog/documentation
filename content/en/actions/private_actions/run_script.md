@@ -30,7 +30,7 @@ The following table outlines supported use cases for the script action:
 ## Prerequisites
 
 **For agent-based runners:**
-- Datadog Agent version 7.77.0 or later
+- Datadog Agent version `7.77.0` or later
 - `com.datadoghq.script.runPredefinedScript` (Linux) or `com.datadoghq.script.runPredefinedPowershellScript` (Windows) in your actions allowlist
 - See [Use Private Actions][2] for installation instructions
 
