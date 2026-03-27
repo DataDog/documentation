@@ -104,6 +104,21 @@ Update the Datadog Operator and Agent image versions in your DatadogAgent manife
 
 {{% /tab %}}
 
+{{% tab "Kubernetes (Helm)" %}}
+
+Updating the PAR is part of the standard Datadog Agent Helm chart upgrade process.
+
+```bash
+helm repo update
+helm upgrade datadog-agent datadog/datadog -f values.yaml
+```
+
+For detailed upgrade instructions, see [Upgrading Datadog Helm][101].
+
+[101]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/README.md#upgrading
+
+{{% /tab %}}
+
 {{% tab "Terraform (Datadog Operator)" %}}
 
 Update the version variables in your Terraform configuration:
