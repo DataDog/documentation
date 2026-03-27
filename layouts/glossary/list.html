@@ -91,8 +91,10 @@
                         {{ end }}
 
                         <!-- `$nextTick` filters letter headers on state initialization. -->
-                        <h4 
-                        id="{{ anchorize .Params.Title }}" 
+                        <!-- Backward-compatible anchor for existing links using anchorized title -->
+                        {{ if ne (anchorize .Params.Title) .Params.id }}<span id="{{ anchorize .Params.Title }}" class="d-none"></span>{{ end }}
+                        <h4
+                        id="{{ .Params.id }}"
                         class="glossary-term font-24-28"
                         :style="{scrollMarginTop: `${glossaryNavHeight+30}px`}"
                         x-init="$nextTick(() => appendToFilteredLetters($el.parentElement))"
@@ -111,8 +113,14 @@
                                 {{ $len := len . }}
 
                                 Related terms:
-                                {{ range $index, $related_term := . }}
-                                    <a href="/glossary/#{{ anchorize $related_term }}">{{ $related_term }}</a>
+                                {{ range $index, $related_id := . }}
+                                    {{- $display_name := $related_id -}}
+                                    {{- range $headless_term_pages -}}
+                                        {{- if eq .Params.id $related_id -}}
+                                            {{- $display_name = .Params.Title -}}
+                                        {{- end -}}
+                                    {{- end -}}
+                                    <a href="/glossary/#{{ $related_id }}">{{ $display_name }}</a>
                                     {{ if ne $index (sub $len 1) }}, {{ end }}
                                 {{ end }}
                             </p>

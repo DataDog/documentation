@@ -1,4 +1,5 @@
 ---
+id: security_posture_score
 core_product:
 - security
 - csm

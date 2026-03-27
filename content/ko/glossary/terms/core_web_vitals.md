@@ -1,4 +1,5 @@
 ---
+id: core_web_vitals
 core_product:
 - 실사용자 모니터링
 - 신서틱(Synthetic) 모니터링

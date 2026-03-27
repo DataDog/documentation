@@ -1,4 +1,5 @@
 ---
+id: pipeline_breakdown_execution_time
 title: pipeline breakdown execution time
 core_product:
   - ci-cd
