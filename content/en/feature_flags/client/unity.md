@@ -24,7 +24,7 @@ This page describes how to instrument your Unity application with the Datadog Fe
 
 The Datadog Feature Flags SDK for Unity integrates with [OpenFeature][1], an open standard for feature flag management. This guide explains how to install the SDK, register the Datadog provider, set an evaluation context, and evaluate flags in your application.
 
-<div class="alert alert-info">For most applications, the OpenFeature API is the recommended approach. If you need direct access to the underlying <code>FlagsClient</code>—for example, to manage the client lifecycle independently—see <a href="#direct-flagsclient-integration-advanced">Direct FlagsClient integration</a>.</div>
+<div class="alert alert-info">For most applications, the OpenFeature API is the recommended approach. If you need direct access to the <code>IFlagsClient</code>—for example, to use native flag value types directly—see <a href="#direct-flagsclient-integration-advanced">Direct FlagsClient integration</a>.</div>
 
 ## Getting started
 
@@ -34,6 +34,7 @@ Here's a minimal example to get feature flags working in your Unity app:
 using System.Collections;
 using System.Collections.Generic;
 using Datadog.Unity.Flags;
+using Datadog.Unity.Flags.OpenFeature;
 using OpenFeature;
 using UnityEngine;
 
@@ -46,7 +47,7 @@ public class FlagsBehavior : MonoBehaviour
 
         // 2. Create a client and register the Datadog OpenFeature provider
         var client = DdFlags.Instance.CreateClient();
-        var providerTask = Api.Instance.SetProviderAsync(DdFlags.Instance.CreateProvider());
+        var providerTask = Api.Instance.SetProviderAsync(new DatadogFeatureProvider(client));
         yield return new WaitUntil(() => providerTask.IsCompleted);
 
         // 3. Set the evaluation context
@@ -74,15 +75,28 @@ The rest of this guide explains each step in detail.
 
 ## Installation
 
-Declare the Datadog Unity SDK as a dependency in your project. The Datadog Unity SDK includes feature flags support.
+The Datadog Feature Flags SDK ships as two UPM packages:
+
+- **`com.datadoghq.unity`** — core package, required. Includes `DdFlags`, `IFlagsClient`, and direct flag evaluation.
+- **`com.datadoghq.unity.flags.openfeature`** — optional OpenFeature integration. Install this if you want to evaluate flags through the OpenFeature standard API.
+
+**Install the core package:**
 
 1. Install the [External Dependency Manager for Unity (EDM4U)][2]. This can be done using [Open UPM][3].
 
 2. Add the Datadog SDK Unity package from its Git URL at [https://github.com/DataDog/unity-package][4]. The package URL is `https://github.com/DataDog/unity-package.git`.
 
-3. (Android only) Configure your project to use [Gradle templates][5], and enable both `Custom Main Template` and `Custom Gradle Properties Template`.
+**Install the OpenFeature package (optional):**
 
-4. (Android only) If you build and receive `Duplicate class` errors (common in Unity 2022.x), add the following code to the `dependencies` block of your `mainTemplate.gradle`:
+3. Install [NuGetForUnity][5] to manage OpenFeature dependencies.
+
+4. Add the `com.datadoghq.unity.flags.openfeature` package from its Git URL.
+
+**Android-only steps:**
+
+5. Configure your project to use [Gradle templates][6], and enable both `Custom Main Template` and `Custom Gradle Properties Template`.
+
+6. If you build and receive `Duplicate class` errors (common in Unity 2022.x), add the following code to the `dependencies` block of your `mainTemplate.gradle`:
 
    ```groovy
    constraints {
@@ -96,7 +110,7 @@ Declare the Datadog Unity SDK as a dependency in your project. The Datadog Unity
 
 Initialize Datadog as early as possible in your app lifecycle. Navigate to your `Project Settings` and click on the `Datadog` section to configure your client token, environment, and other settings.
 
-For more information about setting up the Unity SDK, see [Unity Monitoring Setup][6].
+For more information about setting up the Unity SDK, see [Unity Monitoring Setup][7].
 
 ## Enable flags
 
@@ -112,16 +126,21 @@ You can also pass configuration options; see [Advanced configuration](#advanced-
 
 ## Register the provider
 
-Create a `FlagsClient`, then create and register the Datadog provider with the OpenFeature `Api`. You need to hold a reference to the `FlagsClient` to set the evaluation context later.
+Create a `FlagsClient`, then construct a `DatadogFeatureProvider` and register it with the OpenFeature `Api`. Hold a reference to the client — you need it to set the evaluation context.
 
 {{< code-block lang="csharp" >}}
+using Datadog.Unity.Flags.OpenFeature;
 using OpenFeature;
 
 var client = DdFlags.Instance.CreateClient();
-await Api.Instance.SetProviderAsync(DdFlags.Instance.CreateProvider());
+await Api.Instance.SetProviderAsync(new DatadogFeatureProvider(client));
 {{< /code-block >}}
 
-<div class="alert alert-info">Call <code>CreateClient()</code> before <code>CreateProvider()</code>. The provider must be bound to an existing client.</div>
+Retrieve the OpenFeature client anywhere in your app to evaluate flags:
+
+{{< code-block lang="csharp" >}}
+var ofClient = Api.Instance.GetClient();
+{{< /code-block >}}
 
 ## Set the evaluation context
 
@@ -221,7 +240,7 @@ var fontSize = task.Result.AsStructure["fontSize"].AsInteger;
 
 ### Flag evaluation details
 
-When you need evaluation metadata beyond the flag value, use the detail methods. These return both the value and information about why it was chosen:
+When you need evaluation metadata beyond the flag value, use the detail methods:
 
 {{< code-block lang="csharp" >}}
 var task = ofClient.GetStringDetailsAsync("paywall.layout", "control");
@@ -266,11 +285,7 @@ DdFlags.Enable(new FlagsConfiguration(
 
 ## Direct FlagsClient integration (advanced)
 
-For most applications, the OpenFeature API described above is the recommended approach. Use the `FlagsClient` directly only if you need to manage the evaluation context independently of the OpenFeature provider—for example, to update context without triggering a provider state transition.
-
-### Create and use a client
-
-Create and hold a reference to the `FlagsClient`:
+For most applications, the OpenFeature API described above is the recommended approach. Use `IFlagsClient` directly if you do not need the OpenFeature abstraction or want to work with Datadog's native flag types.
 
 {{% collapse-content title="Create a client" level="h4" %}}
 {{< code-block lang="csharp" >}}
@@ -298,7 +313,7 @@ client.SetEvaluationContext(
     {
         if (success)
         {
-            Debug.Log("Flags loaded successfully!");
+            EvaluateFlags(client);
         }
     }
 );
@@ -337,6 +352,17 @@ var config = client.GetObjectValue(
 {{< /code-block >}}
 {{% /collapse-content %}}
 
+{{% collapse-content title="Flag evaluation details" level="h4" %}}
+{{< code-block lang="csharp" >}}
+var details = client.GetBooleanDetails("checkout.new", false);
+
+Debug.Log($"Value: {details.Value}");
+Debug.Log($"Variant: {details.Variant ?? "n/a"}");
+Debug.Log($"Reason: {details.Reason ?? "n/a"}");
+Debug.Log($"Error: {details.Error?.ToString() ?? "none"}");
+{{< /code-block >}}
+{{% /collapse-content %}}
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -345,5 +371,6 @@ var config = client.GetObjectValue(
 [2]: https://github.com/googlesamples/unity-jar-resolver
 [3]: https://openupm.com/packages/com.google.external-dependency-manager/
 [4]: https://github.com/DataDog/unity-package
-[5]: https://docs.unity3d.com/Manual/gradle-templates.html
-[6]: /real_user_monitoring/application_monitoring/unity/setup
+[5]: https://github.com/GlitchEnzo/NuGetForUnity
+[6]: https://docs.unity3d.com/Manual/gradle-templates.html
+[7]: /real_user_monitoring/application_monitoring/unity/setup
