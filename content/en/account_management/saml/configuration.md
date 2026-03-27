@@ -79,6 +79,10 @@ To configure additional SAML providers:
 
 If you use SAML [role mapping][19] or [team mapping][20] and want to use the same mappings in any additional providers you add, make sure the attributes in the new IdP(s) match what is defined in your mappings. If you add a new IdP, make sure to either use the same attribute names as your existing IdP, or add new mappings that align with the new IdP's attributes to ensure roles and teams are assigned correctly when users log in with different IdPs.
 
+## Certificate renewal
+
+For information on how Datadog handles SAML certificate renewal, see [Renew Your SAML Certificate][21].
+
 [1]: /help/
 [2]: https://learn.microsoft.com/en-us/entra/architecture/auth-saml
 [3]: https://auth0.com/docs/protocols/saml-protocol
@@ -99,3 +103,4 @@ If you use SAML [role mapping][19] or [team mapping][20] and want to use the sam
 [18]: /account_management/multi_organization/#setting-up-saml
 [19]: /account_management/saml/mapping/#map-saml-attributes-to-datadog-roles
 [20]: /account_management/saml/mapping/#map-saml-attributes-to-teams
+[21]: /account_management/saml/renewing/
