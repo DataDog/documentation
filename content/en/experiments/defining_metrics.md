@@ -34,18 +34,18 @@ Product Analytics uses the same SDKs and configuration as Real User Monitoring (
 To create a metric for your experiment:
 
 1. Navigate to the [Metrics page][1] in Datadog Product Analytics.
-1. Select the **Metrics** tab and click **+ Create Metric** at the top right corner.
+1. Select the **Metrics** tab and click **Create Metric** at the top right corner.
 1. Add a **Metric name** and **Description** (optional).
 1. Click **Select an event** under the **Metric definition** section to open the event picker.
    1. Search for a specific event, or use the **By Type** filter to browse by event type. The chart on the right updates in real time as you configure your metric.
 1. Select an [aggregation method](#aggregation-methods) from the dropdown. The default is **Count of events**.
-1. Click the **Add filter** icon to [filter your metric](#add-filters) by additional properties.
-1. (Optional) Under the **Additional settings**:
+1. Click the **Add Filter** icon to [filter your metric](#add-filters) by additional properties.
+1. (Optional) Under the **Additional settings** section:
     1. Toggle on **Mark as certified** to indicate this metric is approved for important decision-making. This requires the **Product Analytics Certified Metrics Write** permission.
     1. Adjust **Experiment settings** and **Units** as needed. The defaults work for most use cases.
 1. Click **Save**.
 
-{{< img src="/product_analytics/experiment/exp_create_metric_4.png" alt="The Create Metric page showing a metric definition for the 'click on ADD TO CART' event. An annotation highlights the aggregation method dropdown, which is set to Count of events. A bar chart on the right previews the metric data over one week." style="width:90%;" >}}
+{{< img src="/product_analytics/experiment/exp_create_metric_4.png" alt="The Create Metric page with the Metric name field, a metric definition for the 'click on ADD TO CART' event, an annotation highlighting the aggregation method dropdown set to Count of events, an Add Filter icon, a Create Ratio button, the Additional settings section with Mark as certified toggle, Experiment settings, and Units, a bar chart on the right previewing metric data over one week, and the Save button highlighted." style="width:90%;" >}}
 
 ### Add filters
 
@@ -53,7 +53,7 @@ You can filter your metric by selecting an **Event properties** filter, such as 
 
 If you do not see the property you need, select **Custom property** to define it manually.
 
-{{< img src="/product_analytics/experiment/exp_filter_by.png" alt="The Edit Metric page with the Filter by panel open, showing Event properties such as Application Id, Service, and Browser Name, a By Data Type filter on the left, a Custom property option at the bottom, and a real-time bar chart on the right." style="width:90%;" >}}
+{{< img src="/product_analytics/experiment/exp_filter_by_2.png" alt="The Filter by panel open within the Metric definition section, showing All Properties selected, Event properties such as Application Id, Service, Browser Name, and Country in the center, a By Data Type filter with Numerical, String, and Boolean options on the left, a Custom property option at the bottom, and a real-time bar chart on the right." style="width:90%;" >}}
 
 ## Metrics from warehouse data
 
@@ -98,8 +98,7 @@ After previewing your data, configure the model structure:
 After you create your SQL model, use it to create a metric:
 
 1. Navigate to the [Metrics page][1] in Datadog Product Analytics.
-1. Select the **Metrics** tab.
-1. Click **Create Metric** at the top right corner.
+1. Select the **Metrics** tab and click **Create Metric** at the top right corner.
 1. Add a **Metric name** and **Description** (optional) for your metric.
 1. Click **Select an event** under the **Metric definition** section to open the event picker. Metric SQL Models appear under their data source.
 1. Select the relevant model (for example, **Revenue Orders** under **Snowflake**).
@@ -117,13 +116,13 @@ Aggregation methods determine how Datadog summarizes data for each experiment su
 Datadog Experiments supports the following aggregation types:
 
 - **Count of events** (default)
-- **Count of unique users with the event** (useful for conversion metrics)
+- **Count of unique users** (useful for conversion metrics)
 - **Sum of an event property** (useful for revenue metrics)
 - **Distinct values of an event property** (useful for unique pages viewed metrics)
 - **Percentile of an event property** (useful for latency metrics)
 - **Average of an event property** (useful for satisfaction metrics)
 
-{{< img src="/product_analytics/experiment/exp_default_metric_agg.png" alt="The aggregation method dropdown in the Define the metric panel showing Count of unique users, Count of events (selected), and Sum of... as options, with a description reading 'The number of events performed' on the right." style="width:90%;" >}}
+{{< img src="/product_analytics/experiment/exp_default_metric_agg_1.png" alt="The aggregation method dropdown showing Count of unique users (selected) and Count of events at the top, followed by a SELECT A MEASURE section with Sum of, Distinct values of, Percentile, and Average of options, with a description reading 'The number of users who performed the event' on the right." style="width:90%;" >}}
 
 Datadog computes metrics for each experiment subject. For example, a **Count of events** metric on a user-randomized experiment calculates the total number of events for all users in the variant (experiment group) divided by the number of users in that variant.
 
@@ -139,15 +138,15 @@ Datadog accounts for correlations between the numerator and denominator using th
 
 Datadog supports several advanced options specific to experimentation:
 
-`Timeframe filters`
+Timeframe filters
 : - By default, Datadog includes all events between a user's first exposure and the end of the experiment. If you want to measure a time-boxed value such as "sessions within 7 days", you can add a timeframe filter.
   - If selected, the metric only includes events from the specified time window, starting at the moment the user was first enrolled.
 
-`Desired metric change`
+Desired metric direction
 : - Datadog highlights statistically significant results.
   - Use this setting to specify whether an increase or decrease in this metric is desired.
 
-`Outlier handling`
+Outlier handling
 : - Real world data often includes extreme outliers that can impact experiment results.
   - Use this setting to set a threshold at which data is truncated. For instance, set a 99% upper bound to truncate all results at the metric's 99th percentile.
 
