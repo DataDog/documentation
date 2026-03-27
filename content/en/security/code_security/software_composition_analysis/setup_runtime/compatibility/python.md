@@ -55,13 +55,11 @@ And the library supports the following runtimes:
 
 ### Supported frameworks
 
-| Framework     | Versions    | Runtime Code Analysis (IAST) |
-|---------------|-------------|------------------------------|
-| Django        | `1.8`       | {{< X >}}                    |
-| FastAPI       | `0.86`      | {{< X >}}                    |
-| Flask         | `0.10`      | {{< X >}}                    |
-
-Support for query strings is not available for Flask.
+| Framework     | Versions | Runtime Code Analysis (IAST) |
+|---------------|----------|------------------------------|
+| Django        | `2.2`    | {{< X >}}                    |
+| FastAPI       | `0.86`   | {{< X >}}                    |
+| Flask         | `1.1`    | {{< X >}}                    |
 
 <div class="alert alert-info">If you don't see your framework of choice listed, let us know! Fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send details</a>.</div>
 

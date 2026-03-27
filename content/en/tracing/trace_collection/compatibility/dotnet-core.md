@@ -132,6 +132,11 @@ The [latest version of the .NET Tracer][4] can automatically instrument the foll
 | SQL Server                      | `System.Data` 4.0.0+</br>`System.Data.SqlClient` 4.0.0+</br>`Microsoft.Data.SqlClient` 1.0.0+        | `SqlClient`          |
 | WebClient / WebRequest          | `System.Net.Requests` 4.0+                                                                           | `WebRequest`         |
 
+**Note**: Redis 6.0+ supports inline authentication in commands such as `HELLO`, `MIGRATE`, and `ACL SETUSER`.
+
+  - **Datadog Trace Agent**: The minimum required and recommended version is `7.76.1` to ensure authentication parameters are automatically obfuscated in trace metadata.
+  - **Datadog Lambda Extension** (Serverless environments): The minimum required version is `v28.0.0`.
+
 Don't see the library you're looking for? First, check if the library produces observability data compatible with OpenTelemetry (see [Using OpenTelemetry Instrumentation Libraries][13] for more details). If not, Datadog is continually adding additional support. [Check with the Datadog team][5] for help.
 
 ## End of life .NET runtime versions

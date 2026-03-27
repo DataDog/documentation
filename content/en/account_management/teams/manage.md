@@ -80,7 +80,13 @@ In some cases, a team's membership cannot be directly modified within Datadog by
 - If your org has selected SAML as the only team provisioning source, then the SAML team mappings control team membership. You cannot modify the team membership through Datadog.
 - If a team is managed through an identity provider, then the identity provider controls team membership. You cannot modify the team membership through Datadog.
 
-### Subteams (hierarchical teams)
+### Subteams (hierarchical teams) 
+
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">
+This feature is not supported for your selected Datadog site ({{< region-param key="dd_site_name" >}}).
+</div>
+{{< /site-region >}}
 
 With subteams, you can nest teams within each other to mimic your company's hierarchy in Datadog, allowing for a more complete and accurate ownership model. Subteams also provide an enhanced filtering experience; select a larger team (like a director-level group) to find all the data connected to any of its subteams.
     {{< img src="account_management/teams/teams_filter_hierarchies.png" alt="Filter Hierarchical Teams" >}}

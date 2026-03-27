@@ -11,7 +11,7 @@ If you experience issues setting up or configuring Datadog Code Security, use th
 
 For issues with the Datadog static analyzer, include the following information in a bug report to Datadog Support.
 
-- Your `static-analysis.datadog.yml` file
+- Your `code-security.datadog.yaml` (or legacy `static-analysis.datadog.yml`) file
 - The output of your static analysis tool (such as a CLI) that is run locally or in a CI/CD pipeline
 - The SARIF file produced (if there are any available)
 - The URL of your repository (public or private)
@@ -24,7 +24,7 @@ If you are experiencing performance issues, you can enable the `--performance-st
 
 For performance issues, include the following information:
 
-- Your `static-analysis.datadog.yml` file
+- Your `code-security.datadog.yaml` (or legacy `static-analysis.datadog.yml`) file
 - The output of your static analysis tool (such as a CLI) that is run locally or in a CI/CD pipeline
 - The URL of your repository (public or private)
 
@@ -76,7 +76,7 @@ is too large, consider the following options:
  - Update your configuration to scan only specific directories.
  - Configure the analyzer to run only the rulesets necessary for your codebase.
 
-Updating the configuration is done either in the Datadog application or using the `static-analysis.datadog.yml` file.
+Update the configuration either through the Datadog application or by modifying the `code-security.datadog.yaml` file.
 
 ### `GLIBC_X.YY not found` error message
 
@@ -226,6 +226,22 @@ Runtime application security data is sent with APM traces. See [APM troubleshoot
 
 ### Issues with Python and Flask instrumentation
 If you're running a Flask application, ensure that you are calling the `ddtrace_iast_flask_patch()` function at the top level of the module and before calling `app.run()`. For more information, see the [Flask integration documentation][19].
+
+## How committers are calculated for Code Security
+A **committer** is an active Git contributor identified by the `author_email` field in Git commit metadata.
+
+A committer is counted toward billing if they make **at least three commits in a calendar month** in repositories where Code Security is enabled.
+
+Each unique `author_email` counts as a separate committer. Multiple commits with the same email count as one committer, while commits with different email addresses count separately.
+
+### How email addresses are counted as committers
+Committers are identified based on the normalized `author_email` value in Git commit metadata.
+
+Commits finalized by known GitHub system accounts such as `noreply@github.com` and `actions@github.com` are not counted.
+
+Commits using `@users.noreply.github.com` are not automatically excluded. These addresses are commonly used by developers who choose to hide their public email in GitHub. If the commit can be attributed to an individual developer, it is counted.
+
+For clarification on how committers are counted in your environment, [contact Datadog Support][1].
 
 ## Disabling Code Security capabilities
 ### Disabling static repository scanning

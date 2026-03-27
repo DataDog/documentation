@@ -119,21 +119,31 @@ From the [**Archive Search list view**][5], you can:
 - **Cancel** a running search: preserves logs already retrieved.
 - **Duplicate** a search: opens the Archive Search creation form with the same parameters for efficient reruns.
 
-## Search performance and scan volume
+## Search performance and optimization
 
-Archive Search scans archived log files within the selected time range. **Scan volume** is the total size of those files read during the query. Large scan volumes can increase search time and cost.
+Archive Search scans archived log files within your selected time range. **Scan volume** refers to the total size of the files read during a query. Large scan volumes can increase both search time and cloud egress costs.
 
-To improve query performance and reduce scan volume:
-- Narrow the time range.
-- Administrators with **Logs Write Archives** permission can set maximum scan size per Archive.
+To optimize performance and reduce costs:
+* **Narrow the time range:** Limit your search to the smallest window possible.
+* **Set Scan Limits:** Admins with `Logs Write Archives` permissions can set a maximum scan size per Archive in the settings.
+* **Use Lookup Attributes (Preview):** This is the most effective way to accelerate searches for high-cardinality data.
+
+**Note**: Only logs archived after you configure Lookup attributes benefit from accelerated searches. Logs archived before this configuration are not affected.
+
+
+### Accelerate searches with Lookup Attributes
+
+You can configure **Search Attributes** on your archives to skip irrelevant data blocks in your storage bucket. For example, if you configure `trace_id` or `user_id` you significantly reduce the volume of data scanned and lower your cloud provider's egress fees.
+
+To set this up, see the [Log Archives][7] documentation.
 
 ### Default limit for Rehydration of Results
 
-Admins with the `Logs Write Archives` permission can configure default controls to ensure efficient use of Archive Search * across teams. Click **Settings** to configure:
+Admins with the `Logs Write Archives` permission can configure default controls to ensure efficient use of **Archive Search** across teams. Click **Settings** to configure:
 
-- **Default Rehydration volume limit**: Define the default number of logs (in millions) that can be rehydrated per Archive Search. If the limit is reached, the Archive Search automatically stops, but already rehydrated logs remain accessible. Admins can also allow this limit to be overridden during Archive Search creation.
+- **Default Rehydration volume limit**: Define the default number of logs (in millions) that can be rehydrated per Archive Search in **Search & Rehydration** mode. If the limit is reached, the Archive Search automatically stops, but already rehydrated logs remain accessible. Admins can also allow this limit to be overridden during Archive Search creation.
 
-- **Rehydration retention periods**: Choose which retention periods are available when creating Archive Search. Only the selected durations (for example, 3, 7, 15, 30, 45, 60, 90, or 180 days) appear in the dropdown menu when selecting how long logs should remain searchable in Datadog.
+- **Rehydration retention periods**: Choose which retention periods are available when rehydrating results. Only the selected durations (for example, 3, 7, 15, 30, 45, 60, 90, or 180 days) appear in the dropdown menu when selecting how long logs should remain searchable in Datadog.
 
 ## Cloud-specific permissions
 
@@ -198,9 +208,10 @@ In order to search log events from your archives, Datadog uses a service account
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/logs/log_configuration/archives/?tab=awss3&site=us
-[2]: https://docs.datadoghq.com/observability_pipelines/destinations/amazon_s3/?tab=docker
-[3]: https://docs.datadoghq.com/logs/log_configuration/archives/?tab=awss3&site=us
+[1]: /logs/log_configuration/archives/?tab=awss3
+[2]: /observability_pipelines/destinations/amazon_s3/?tab=docker
+[3]: /logs/log_configuration/archives/?tab=awss3
 [4]: https://app.datadoghq.com/logs/archive-search/new
 [5]: https://app.datadoghq.com/logs/archive-search/
 [6]: /logs/guide/logs-rbac/?tab=ui#restrict-access-to-logs
+[7]: /logs/log_configuration/archives/?tab=awss3#archive-search-lookup-attribute

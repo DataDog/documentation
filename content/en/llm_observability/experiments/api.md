@@ -540,6 +540,7 @@ Push events (spans and metrics) for an experiment.
 | `boolean_value`     | boolean  | Boolean value (when `metric_type` is `boolean`).         |
 | `json_value`        | json     | JSON value (when `metric_type` is `json`).               |
 | `metadata`          | json     | Arbitrary key-value metadata associated with the metric. |
+| `metric_source`     | string   | Optional metric source. One of: `custom`, `summary` (defaults to `custom`). |
 | `error.message`     | string   | Optional error message for the metric.                   |
 | `reasoning`         | string   | Optional explanation for the metric.                     |
 | `assessment`        | string   | Optional assessment. One of: `pass`, `fail`.             |

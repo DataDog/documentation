@@ -241,6 +241,9 @@
   "copy": {
     "other": "Copy"
   },
+  "copied": {
+    "other": "Copied"
+  },
   "response": {
     "other": "Response"
   },
