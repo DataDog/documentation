@@ -48,12 +48,11 @@ To create a metric for your experiment:
 
 ### Add filters
 
-You can filter your metric by:
-- **Event properties**: Country, Browser, or Service.
-- **Data type**: Numerical, String, or Boolean.
-- **Custom property**: A property name you define.
+You can filter your metric by selecting an **Event Properties** filter, such as Country, Device Type, or Has Replay. Use the **By Data Type** filter to narrow the list of available properties by type (for example, String or Boolean).
 
-{{< img src="/product_analytics/experiment/exp_filter_by.png" alt="The Add Filters panel showing event properties such as Application Id, Service, and Browser Name, with options to filter by data type or custom property, and a real-time bar chart on the right." style="width:90%;" >}}
+If you do not see the property you need, select **Custom property** to define it manually.
+
+{{< img src="/product_analytics/experiment/exp_filter_by.png" alt="The Add Filters panel showing event properties such as Application Id, Service, and Browser Name, with a By Data Type filter to narrow properties and a Custom property option, and a real-time bar chart on the right." style="width:90%;" >}}
 
 ## Metrics from warehouse data
 
