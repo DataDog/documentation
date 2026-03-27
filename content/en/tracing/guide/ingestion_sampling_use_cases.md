@@ -1,4 +1,4 @@
-e---
+---
 title: Trace Sampling Use Cases
 description: Explore different trace sampling use cases and strategies to optimize ingestion volume while maintaining troubleshooting capabilities.
 
