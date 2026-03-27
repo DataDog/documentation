@@ -28,7 +28,7 @@
       {{- $shortDefMatch = true -}}
       <!-- Use short definition if available -->
       {{- $tooltipContent = .Params.short_definition -}}
-      {{- $fullDefinitionLink = printf "/glossary/#%s" .Params.id -}}
+      {{- $fullDefinitionLink = printf "%s#%s" ("glossary/" | relLangURL) (replace .Params.id "_" "-") -}}
       {{- else -}}
         {{- warnf "Glossary term '%s' found but has no short_definition" $glossary -}}
     {{- end -}}

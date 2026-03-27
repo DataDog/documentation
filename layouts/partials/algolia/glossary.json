@@ -4,7 +4,7 @@
     {{- range $headless.Resources.ByType "page" -}}
         {{- $page := . -}}
         {{- $object_id := (print $glossaryPage.File.UniqueID "_" $headless.Language.Lang "_" $page.Params.id) -}}
-        {{- $relpermalink := print $glossaryPage.RelPermalink "#" $page.Params.id -}}
+        {{- $relpermalink := print $glossaryPage.RelPermalink "#" (replace $page.Params.id "_" "-") -}}
         {{- $content := .Plain -}}
         {{
             $hugo_context.Scratch.Add "algoliaindex" (

@@ -92,9 +92,9 @@
 
                         <!-- `$nextTick` filters letter headers on state initialization. -->
                         <!-- Backward-compatible anchor for existing links using anchorized title -->
-                        {{ if ne (anchorize .Params.Title) .Params.id }}<span id="{{ anchorize .Params.Title }}" class="d-none"></span>{{ end }}
+                        {{ if ne (anchorize .Params.Title) (replace .Params.id "_" "-") }}<span id="{{ anchorize .Params.Title }}" class="d-none"></span>{{ end }}
                         <h4
-                        id="{{ .Params.id }}"
+                        id="{{ replace .Params.id "_" "-" }}"
                         class="glossary-term font-24-28"
                         :style="{scrollMarginTop: `${glossaryNavHeight+30}px`}"
                         x-init="$nextTick(() => appendToFilteredLetters($el.parentElement))"
@@ -120,7 +120,7 @@
                                             {{- $display_name = .Params.Title -}}
                                         {{- end -}}
                                     {{- end -}}
-                                    <a href="/glossary/#{{ $related_id }}">{{ $display_name }}</a>
+                                    <a href="#{{ replace $related_id "_" "-" }}">{{ $display_name }}</a>
                                     {{ if ne $index (sub $len 1) }}, {{ end }}
                                 {{ end }}
                             </p>
