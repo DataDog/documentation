@@ -1,6 +1,6 @@
 ---
 title: Update the Private Action Runner
-disable_toc: false
+description: Learn how to update the Private Action Runner to the latest version for both agent-based and standalone installations.
 ---
 
 ## Overview
@@ -68,37 +68,37 @@ Update the Datadog Operator and Agent image versions in your DatadogAgent manife
 
 1. Update the Datadog Operator:
 
-```bash
-helm repo update
-helm upgrade datadog-operator datadog/datadog-operator \
-    --set image.repository=datadog/operator \
-    --set image.tag=<NEW_OPERATOR_VERSION>
-```
+   ```bash
+   helm repo update
+   helm upgrade datadog-operator datadog/datadog-operator \
+       --set image.repository=datadog/operator \
+       --set image.tag=<NEW_OPERATOR_VERSION>
+   ```
 
 2. Update the Agent image versions in your `datadog-agent.yaml` manifest:
 
-```yaml
-override:
-  nodeAgent:
-    image:
-      name: datadog/agent:<NEW_AGENT_VERSION>
-  clusterAgent:
-    image:
-      name: datadog/cluster-agent:<NEW_AGENT_VERSION>
-```
+   ```yaml
+   override:
+     nodeAgent:
+       image:
+         name: datadog/agent:<NEW_AGENT_VERSION>
+     clusterAgent:
+       image:
+         name: datadog/cluster-agent:<NEW_AGENT_VERSION>
+   ```
 
 3. Apply the updated manifest:
 
-```bash
-kubectl apply -f datadog-agent.yaml
-```
+   ```bash
+   kubectl apply -f datadog-agent.yaml
+   ```
 
 4. Verify the update:
 
-```bash
-kubectl get pods
-kubectl logs -l app.kubernetes.io/component=cluster-agent --tail=100 | grep private
-```
+   ```bash
+   kubectl get pods
+   kubectl logs -l app.kubernetes.io/component=cluster-agent --tail=100 | grep private
+   ```
 
 {{% /tab %}}
 
@@ -133,7 +133,7 @@ Currently, the PAR is on v{{< private-action-runner-version "private-action-runn
 {{< tabs >}}
 {{% tab "Docker" %}}
 
-Navigate to the directory where you started the PAR. Next, navigate to the `config` directory, then the `config.yaml` file. 
+Navigate to the directory where you started the PAR. Next, navigate to the `config` directory, then the `config.yaml` file.
 
 Find the current ID of your container:
 ```bash
@@ -165,7 +165,7 @@ After confirming the new PAR version is working as expected, remove the old vers
 docker rm <id>
 ```
 
-To check the PAR logs: 
+To check the PAR logs:
 ```bash
 docker logs <id-of-container>
 ```
@@ -208,7 +208,7 @@ docker compose logs runner
 
 {{% tab "Helm" %}}
 
-When using Helm, there are two options for upgrading the PAR: 
+When using Helm, there are two options for upgrading the PAR:
 1. **(Recommended)** Upgrade the chart, which uses the latest version of the PAR. There may be changes to the chart; review [the changelog][101].
 1. Upgrade the runner without upgrading the chart.
 
@@ -233,12 +233,12 @@ common:
     tag: v1.0.0
 ```
 
-Then run: 
+Then run:
 ```bash
 helm upgrade <RELEASE_NAME> datadog/private-action-runner -f ./values.yaml
 ```
 
-To check the logs: 
+To check the logs:
 ```bash
 kubectl get pods
 kubectl logs <name-of-the-pod>

@@ -29,9 +29,9 @@ further_reading:
   text: "How we created a single app to automate repetitive tasks with Datadog Workflow Automation, Datastore, and App Builder"
 ---
 
-Private actions allow your Datadog workflows and apps to interact with services hosted on your private network without exposing them to the public internet. To use private actions, you must install a private action runner on a host in your network and pair the runner with a [connection][2].
+Private actions allow your Datadog workflows and apps to interact with services hosted on your private network without exposing them to the public internet. To use private actions, you must install a private action runner on a host in your network and pair the runner with a [connection][1].
 
-The recommended way to install a private action runner is through the [Datadog Agent][5] (version 7.77.0 or later). This method supports Linux, Windows, and Kubernetes environments. Alternatively, you can install the runner as a standalone Docker container or [Kubernetes][4] deployment. See [Use Private Actions][1] for installation instructions.
+The recommended way to install a private action runner is through the [Datadog Agent][2] (version 7.77.0 or later). This method supports Linux, Windows, and Kubernetes environments. Alternatively, you can install the runner as a standalone Docker container or [Kubernetes][3] deployment. See [Use Private Actions][4] for installation instructions.
 
 <div class="alert alert-danger">To install a private action runner, your organization must have <a href="/remote_configuration">Remote Configuration</a> enabled.</div>
 
@@ -45,14 +45,14 @@ The private action runner continuously polls for tasks from your Datadog account
 
 ## Monitor your Private Action Runners with Datadog Metrics
 
-While setting up your Private Action Runners, you can enable observability metrics to monitor your runners' health and private action usage. These metrics can be used in Datadog products like Dashboards and Monitors. To get started quickly, you can use the provided [out-of-the-box Dashboard][3].
+While setting up your Private Action Runners, you can enable observability metrics to monitor your runners' health and private action usage. These metrics can be used in Datadog products like Dashboards and Monitors. To get started quickly, you can use the provided [out-of-the-box Dashboard][5].
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /actions/private_actions/use_private_actions
-[2]: /service_management/workflows/connections/
-[3]: https://app.datadoghq.com/dash/integration/private_actions_runner
-[4]: https://github.com/DataDog/helm-charts/tree/main/charts/private-action-runner
-[5]: /agent/
+[1]: /service_management/workflows/connections/
+[2]: /agent/
+[3]: https://github.com/DataDog/helm-charts/tree/main/charts/private-action-runner
+[4]: /actions/private_actions/use_private_actions
+[5]: https://app.datadoghq.com/dash/integration/private_actions_runner
