@@ -156,6 +156,54 @@ Use one of the following setup methods:
 
 Use the following advanced options to customize how Single Step Instrumentation behaves in your environment. These settings are optional and typically only needed in specialized setups.
 
+### Configure injection modes
+
+SSI supports multiple injection modes, which control how the injector and APM library files are delivered to your application containers. You typically do not need to configure this setting manually. Consider adjusting it if you notice significant pod startup delays or higher-than-expected resource usage (CPU, memory) during pod initialization. For more on how the injector works, see [Injector Behavior with Single Step Instrumentation][41].
+
+
+| Mode | Description | Requirements |
+|------|-------------|--------------|
+| `init_container` | Uses init containers to copy injector and APM library files into application containers. | Agent deployed with Helm Chart or Datadog Operator |
+| `csi` | **In Preview.** Mounts injector and APM library files using the [Datadog CSI driver][40]. Reduces pod startup time compared to init container mode. | Agent 7.76.0+, CSI driver 1.2.0+, Helm Chart 3.178.1+ |
+
+Before using `csi` mode, install and activate the Datadog CSI driver. If you are deploying with Helm, also set `datadog.csi.enabled: true` in your `datadog-values.yaml`. See the [CSI driver documentation][40] for installation steps and environment-specific requirements such as GKE Autopilot.
+
+#### Configure injection mode globally
+
+{{< tabs >}}
+{{% tab "Helm" %}}
+
+To set the injection mode cluster-wide, add `injectionMode` to your `datadog-values.yaml`:
+
+```yaml
+datadog:
+  apm:
+    instrumentation:
+      injectionMode: <mode>
+```
+
+Supported values: `init_container`, `csi`.
+
+{{% /tab %}}
+{{% tab "Datadog Operator" %}}
+
+Datadog Operator does not support setting the injection mode globally. To override the injection mode for specific pods, use the [pod annotation](#configure-injection-mode-per-pod).
+
+{{% /tab %}}
+{{< /tabs >}}
+
+#### Configure injection mode per pod
+
+To override the injection mode for a specific pod, add the following annotation to the pod spec:
+
+```yaml
+metadata:
+  annotations:
+    admission.datadoghq.com/apm-inject.injection-mode: "<mode>"
+```
+
+Supported values: `init_container`, `csi`.
+
 ### Target specific workloads
 
 By default, SSI instruments all services in all namespaces in your cluster. Depending on your Agent version, use one of the following configuration methods to refine which services are instrumented and how.
@@ -831,6 +879,3 @@ If you encounter problems enabling APM with SSI, see the [SSI troubleshooting gu
 [34]: /containers/guide/sync_container_images/#copy-an-image-to-another-registry-using-crane
 [35]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/troubleshooting
 [36]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/compatibility/
-
-
-
