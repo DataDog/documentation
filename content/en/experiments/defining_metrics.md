@@ -139,16 +139,13 @@ Datadog accounts for correlations between the numerator and denominator using th
 Datadog supports several advanced options specific to experimentation:
 
 Time frame filters
-: - By default, Datadog includes all events between a user's first exposure and the end of the experiment. If you want to measure a time-boxed value such as "sessions within 7 days", you can add a time frame filter.
-  - If selected, the metric only includes events from the specified time window, starting at the moment the user was first enrolled.
+: By default, Datadog includes all events between a user's first exposure and the end of the experiment. If you want to measure a time-boxed value such as "sessions within 7 days", you can add a time frame filter. If selected, the metric only includes events from the specified time window, starting at the moment the user was first enrolled.
 
 Desired metric direction
-: - Datadog highlights statistically significant results.
-  - Use this setting to specify whether an increase or decrease in this metric is desired.
+: Datadog highlights statistically significant results. Use this setting to specify whether an increase or decrease in this metric is desired.
 
 Outlier handling
-: - Real world data often includes extreme outliers that can impact experiment results.
-  - Use this setting to set a threshold at which data is truncated. For instance, set a 99% upper bound to truncate all results at the metric's 99th percentile.
+: Real world data often includes extreme outliers that can impact experiment results. Use this setting to set a threshold at which data is truncated. For example, set a 99% upper bound to truncate all results at the metric's 99th percentile.
 
 ## Further reading
 {{< partial name="whats-next/whats-next.html" >}}
