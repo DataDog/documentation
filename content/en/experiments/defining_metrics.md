@@ -61,7 +61,7 @@ If you do not see the property you need, select **Custom property** to define it
 
 To create a metric from your warehouse data, you must connect the warehouse to Datadog. Follow the [Snowflake][11] guide to connect your Snowflake data to Datadog.
 
-After you connect your warehouse, create a SQL Model to map your data to Datadog. Then use the model to create a metric.
+After you connect your warehouse, create a SQL Model to map your data to Datadog, then use the model to create a metric.
 
 ### Create a SQL Model
 
@@ -74,7 +74,7 @@ Start by writing a query to retrieve your data:
 1. Navigate to the [Metrics page][1] in Datadog Product Analytics.
 1. Select the **Metric SQL Models** tab.
 1. Click **Create SQL Model**.
-1. In the **Write SQL** section, enter a SQL query that returns your data of interest. This UI supports both a `SELECT * FROM` statement and more advanced SQL statements.
+1. In the **Write SQL** section, enter a SQL query that returns your data of interest. The SQL editor supports both `SELECT * FROM` and more advanced SQL statements.
 1. Click **Run** to see a preview of your data.
 
 {{< img src="/product_analytics/experiment/exp_create_metric_sql_models_writesql_1.png" alt="The Write SQL section of the Create Metric SQL Model page showing a SELECT query for user_id, revenue_timestamp, and amount from a revenue orders table, with a successful query preview below displaying USER_ID, REVENUE_TIMESTAMP, and AMOUNT columns." style="width:80%;" >}}
@@ -83,7 +83,7 @@ Start by writing a query to retrieve your data:
 
 After previewing your data, map it to Datadog:
 
-1. Add a  **Metric SQL Model Name** (for example, **Revenue Orders**).
+1. Add a **Metric SQL Model Name** (for example, **Revenue Orders**).
 1. (Optional) Toggle on **Mark as certified** to indicate this SQL model is approved for important decision-making. This requires the **Product Analytics Certified Metrics Write** permission.
 1. Map the columns in your table to the following:
    - **Timestamp column**: The column that lists the timestamp associated with the metric event. The analysis only includes rows created after the subject enrolls in the experiment.
@@ -99,7 +99,7 @@ After you create your SQL model, use it to create a metric:
 
 1. Navigate to the [Metrics page][1] in Datadog Product Analytics.
 1. Select the **Metrics** tab and click **Create Metric** at the top right corner.
-1. Add a **Metric name** and **Description** (optional) for your metric.
+1. Add a **Metric name** and **Description** (optional).
 1. Click **Select an event** under the **Metric definition** section to open the event picker. Metric SQL Models appear under their data source.
 1. Select the relevant model (for example, **Revenue Orders** under **Snowflake**).
 1. Select an [aggregation method](#aggregation-methods) from the dropdown.
@@ -139,13 +139,13 @@ Datadog accounts for correlations between the numerator and denominator using th
 Datadog supports several advanced options specific to experimentation:
 
 Time frame filters
-: By default, Datadog includes all events between a user's first exposure and the end of the experiment. If you want to measure a time-boxed value such as "sessions within 7 days", you can add a time frame filter. If selected, the metric only includes events from the specified time window, starting at the moment the user was first enrolled.
+: By default, Datadog includes all events between a user's first exposure and the end of the experiment. If you want to measure a time-boxed value such as "sessions within 7 days", you can add a time frame filter. If selected, the metric only includes events from the specified time window, starting at the moment the experiment first enrolls the user.
 
 Desired metric direction
 : Datadog highlights statistically significant results. Use this setting to specify whether an increase or decrease in this metric is desired.
 
 Outlier handling
-: Real world data often includes extreme outliers that can impact experiment results. Use this setting to set a threshold at which data is truncated. For example, set a 99% upper bound to truncate all results at the metric's 99th percentile.
+: Real-world data often includes extreme outliers that can impact experiment results. Use this setting to set a threshold at which Datadog truncates data. For example, set a 99% upper bound to truncate all results at the metric's 99th percentile.
 
 ## Further reading
 {{< partial name="whats-next/whats-next.html" >}}
