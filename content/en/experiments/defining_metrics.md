@@ -50,7 +50,7 @@ To create a metric for your experiment:
    1. Adjust **Experiment settings** and **Units** as needed. The defaults work for most use cases.
 1. Click **Save**.
 
-{{< img src="/product_analytics/experiment/exp_create_new_metric.png" alt="The Create Metric page with the Metric name field, a metric definition for the 'click on ADD TO CART' event, an annotation highlighting the aggregation method dropdown set to Count of events, an Add Filter icon, a Create Ratio button, the Additional settings section with Mark as certified toggle, Experiment settings, and Units, a bar chart on the right previewing metric data over one week, and the Save button highlighted." style="width:90%;" >}}
+{{< img src="/product_analytics/experiment/exp_create_new_metric.png" alt="The Create Metric page with the Metric name field set to 'Example metric', a metric definition for the 'click on ADD TO CART' event, an annotation highlighting the aggregation method dropdown set to Count of events, an Add Filter icon, a Create Ratio button, the Additional settings section with Mark as certified toggle, Experiment settings, and Units, a bar chart on the right previewing metric data over one week, and the Save button highlighted." style="width:90%;" >}}
 
 [1]: https://app.datadoghq.com/product-analytics/experimentation-metrics
 [3]: /real_user_monitoring/#get-started
@@ -85,14 +85,11 @@ On the **Create Metric SQL Model** page, write your SQL query to define and prev
 Start by writing a query to retrieve your data:
 
 1. Navigate to the [Metrics page][1] in Datadog Product Analytics.
-1. Select the **Metric SQL Models** tab.
-1. Click **Create SQL Model**.
+1. Select the **Metric SQL Models** tab and click **Create SQL Model**.
 1. In the **Write SQL** section, enter a SQL query that returns your data of interest. The SQL editor supports both `SELECT * FROM` and more advanced SQL statements.
 1. Click **Run** to see a preview of your data.
 
 {{< img src="/product_analytics/experiment/exp_create_metric_sql_models_writesql_1.png" alt="The Write SQL section of the Create Metric SQL Model page showing a SELECT query for user_id, revenue_timestamp, and amount from a revenue orders table, with a successful query preview below displaying USER_ID, REVENUE_TIMESTAMP, and AMOUNT columns." style="width:80%;" >}}
-
-<br>
 
 #### Map your warehouse data to Datadog
 
@@ -107,8 +104,6 @@ After previewing your data, map it to Datadog:
 1. Click **Create Metric SQL Model** to save your SQL model.
 
 {{< img src="/product_analytics/experiment/exp_create_metrics_sql_model_structure4.png" alt="The Structure your model panel with the Metric SQL Model Name field set to 'Revenue Orders' and highlighted, a Mark as certified toggle, Timestamp column set to REVENUE_TIMESTAMP, Subject Type set to User (@usr.id) with USER_ID selected in the column selector, a Measures dropdown showing 'Revenue Orders (each record)', and the Create Metric SQL Model button highlighted." style="width:80%;" >}}
-
-<br>
 
 ### Create a metric using your SQL model
 
@@ -150,7 +145,7 @@ Datadog Experiments supports the following aggregation types:
 
 Datadog computes metrics for each experiment subject. For example, a **Count of events** metric on a user-randomized experiment calculates the total number of events for all users in the variant (experiment group) divided by the number of users in that variant.
 
-### Create a ratio metric
+### Ratio metrics
 
 Click **Create Ratio** to divide your metric by a value other than the default number of experiment subjects. The denominator can use any of the [aggregation methods](#aggregation-methods) listed above. For example, divide purchases by product page views to measure conversion at a specific step in the funnel, rather than across all enrolled users.
 
@@ -174,12 +169,4 @@ Outlier handling
 ## Further reading
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/product-analytics/experimentation-metrics
 [2]: https://en.wikipedia.org/wiki/Delta_method
-[3]: /real_user_monitoring/#get-started
-[4]: /real_user_monitoring/application_monitoring/android/setup/?tab=kotlin
-[5]: /real_user_monitoring/application_monitoring/ios/setup/?tab=swift-package-manager--spm
-[6]: /real_user_monitoring/application_monitoring/browser/setup/client/?tab=npm
-[7]: /real_user_monitoring/application_monitoring/react_native/setup/?platform=react_native
-[11]: /experiments/guide/connecting_snowflake
-[12]: https://app.datadoghq.com/product-analytics/experiments/settings/subject-types
