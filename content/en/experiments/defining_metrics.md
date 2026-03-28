@@ -132,7 +132,7 @@ By default, Datadog divides your metric by the number of experiment subjects. Cl
 
 Datadog accounts for correlations between the numerator and denominator using the [delta method][2].
 
-{{< img src="/product_analytics/experiment/exp_create_ratio.png" alt="The Edit Metric page showing the '/metric/explorer' event with Count of events aggregation, the Create Ratio button highlighted, a Mark as certified toggle, Experiment settings and Units sections, and the metric named 'Visits to Metric Explorer'." style="width:90%;" >}}
+{{< img src="/product_analytics/experiment/exp_create_ratio_newui.png" alt="The Create Metric page with the Metric name field set to 'Example metric', a metric definition for the 'click on ADD TO CART' event with Count of events aggregation and an Add Filter option, the Create Ratio button highlighted, and the Additional settings section with Mark as certified toggle, Experiment settings, and Units." style="width:90%;" >}}
 
 ## Advanced options
 
