@@ -13,86 +13,83 @@ further_reading:
 
 ## Overview
 
-Datadog Experiments uses a warehouse-native architecture, executing statistical models directly on your data. This integration requires a secure connection that allows Datadog to read your metrics and write back experimental results and cohort definitions to a dedicated sandbox in your Unity Catalog.
+This guide walks through connecting Databricks to Datadog to enable warehouse-native experiment analysis in three steps: connecting Databricks to Datadog, setting up resources in Databricks, and configuring experiment-specific settings in Datadog.
 
-The setup process consists of four primary phases:
+## Step 1: Set up the Databricks integration
 
-1. **Identity Setup**: Creating a Databricks Service Principal and OAuth credentials.
-2. **Data Access**: Granting permissions to your metrics and system tables.
-3. **Write-Back Setup**: Configuring a dedicated catalog and schema for results.
-4. **Compute & Finalization**: Assigning a SQL Warehouse and completing the Datadog UI setup.
+Datadog Experiments connects to Databricks through the [Datadog Databricks integration][1]. If you already have a Databricks integration configured for the workspace you'd like to use, you can skip to the next step.
 
-## Prerequisites
+If you haven't set up the Databricks integration yet, see the [Databricks integration documentation][1].
 
-- **Unity Catalog**: This integration requires Unity Catalog to be enabled in your Databricks workspace.
-- **Account Admin Access**: You must be a Databricks Account Admin to create service principals and OAuth secrets.
-- **Datadog Permissions**: You need the `connections_write` and `connections_resolve` permissions in Datadog.
+If you're only using the Databricks integration for warehouse native experiment analysis, you can disable the toggles for collecting other resources.
 
-## Phase 1: Identity and OAuth Setup
+## Step 2: Configure the Databricks workspace for experiments
 
-Datadog recommends using Service Principals with OAuth for authentication. Legacy Personal Access Tokens (PATs) are supported for existing connections but are being phased out for new workspaces.
+The Service Principal used by the Databricks integration needs additional permissions for Datadog Experiments. You will need to grant it read access to your source tables, create an output schema and volume, and grant SQL Warehouse access.
 
-1. **Create Service Principal**: In the Databricks Account Console, navigate to **User Management** > **Service Principals** and click **Add service principal** (e.g., `datadog-experiments-sp`).
-2. **Generate OAuth Secret**: Under the **Credentials & secrets** tab for your new principal, click **Generate secret**. Copy the **Client ID** and **Client Secret** immediately — you cannot view them again.
-3. **Workspace Assignment**: Assign the service principal to the target workspace and grant it the **Workspace access** and **Databricks SQL access** entitlements.
+This can all be done from a SQL Editor if you are logged into your Databricks workspace with a user that has sufficient permissions. Click on “SQL Editor” on the left nav of your workspace.
 
-## Phase 2: Data Access and Governance
+### Grant Read Access to Source Tables
 
-Datadog needs to read your existing data to calculate experiment results and access system tables for metadata synchronization.
-
-### 1. Grant System Table Access
-
-To enable lineage tracking and metadata sync, grant the service principal read access to the Unity Catalog system catalog. Run these commands as a metastore admin:
+Grant the Service Principal read access to the tables you'd like to use to create experiment metrics. Replace `<catalog>`, `<schema>`, and `<table>` with the appropriate values.
 
 ```sql
-GRANT USE CATALOG ON CATALOG system TO `application_id`;
-GRANT USE SCHEMA ON CATALOG system TO `application_id`;
-GRANT SELECT ON CATALOG system TO `application_id`;
+GRANT USE CATALOG ON CATALOG <catalog> TO `<principal>`;
+GRANT USE SCHEMA ON SCHEMA <catalog>.<schema> TO `<principal>`;
+
+-- individual tables
+GRANT SELECT ON TABLE <catalog>.<schema>.<table> TO `<principal>`;
+
+-- all tables
+GRANT SELECT ON ALL TABLES IN SCHEMA <catalog>.<schema> TO `<principal>`;
 ```
 
-### 2. Grant Read Access to Metrics
+### Create a schema for Datadog Experiment output
 
-Grant the service principal SELECT privileges on the production catalogs and schemas containing your experiment metrics:
+Create a schema for Datadog Experiments to write intermediate results and temporary tables by running the following, replacing `<catalog>` and `<principal>` with the appropriate values.
 
 ```sql
-GRANT USE CATALOG ON CATALOG production_data TO `application_id`;
-GRANT USE SCHEMA ON SCHEMA production_data.metrics_schema TO `application_id`;
-GRANT SELECT ON ALL TABLES IN SCHEMA production_data.metrics_schema TO `application_id`;
+CREATE SCHEMA IF NOT EXISTS <catalog>.datadog_experiments_output;
+GRANT USE SCHEMA ON SCHEMA <catalog>.datadog_experiments_output TO `<principal>`;
+GRANT CREATE TABLE ON SCHEMA <catalog>.datadog_experiments_output TO `<principal>`;
 ```
 
-## Phase 3: Write-Back Sandbox Setup
+### Configure a volume for temporary data staging
 
-Datadog Experiments requires a dedicated space to write results. Create a new catalog for this purpose and set the service principal as the owner or grant it full privileges.
+Datadog Experiments uses a [Volume][2] to temporarily save exposure data before copying it into a Databricks table. Create and grant access to this Volume, again replacing `<catalog>` and `<principal>` with the appropriate values.
 
 ```sql
-CREATE CATALOG IF NOT EXISTS datadog_experiments;
-GRANT USE CATALOG ON CATALOG datadog_experiments TO `application_id`;
-
-CREATE SCHEMA IF NOT EXISTS datadog_experiments.output;
-GRANT ALL PRIVILEGES ON SCHEMA datadog_experiments.output TO `application_id`;
+CREATE VOLUME IF NOT EXISTS <catalog>.datadog_experiments_output.datadog_experiments_volume;
+GRANT READ VOLUME ON VOLUME <catalog>.datadog_experiments_output.datadog_experiments_volume TO `<principal>`;
+GRANT WRITE VOLUME ON VOLUME <catalog>.datadog_experiments_output.datadog_experiments_volume TO `<principal>`;
 ```
 
-## Phase 4: Compute and Finalization
+### Grant SQL warehouse access
 
-Datadog uses a Databricks SQL Warehouse to perform its calculations.
+The service principal must have access to the SQL warehouse that Datadog Experiments will use to run queries.
 
-1. **Assign SQL Warehouse**: Identify a Pro or Serverless SQL Warehouse. Datadog does not support Classic warehouses for this integration.
-2. **Grant Compute Access**: In the Warehouse settings, grant the service principal the **CAN USE** permission.
-3. **Configure Datadog UI**:
-   - Navigate to **Product Analytics** > **Experiments** > **Settings**.
-   - Enter your **Workspace URL** and **Account ID** (found in your Databricks Account Console).
-   - Paste your **Client ID** and **Client Secret**.
-   - Enter the **SQL Warehouse ID**.
-   - Specify the **Output Catalog** and **Output Schema** (e.g., `datadog_experiments` and `output`).
-   - Toggle **Enable Data Observability** to **ON** to sync metadata and trace lineage.
-   - Click **Save and Test Connection**.
+1. Navigate to the **SQL Warehouses** page in your Databricks workspace.
+2. Select the warehouse you want Datadog Experiments to use.
+3. Click **Permissions** (top right) and grant the Service Principal `CAN USE` permission.
 
-## Verification
+## Step 3: Configure experiment settings
 
-After the connection is saved, Datadog initiates a sync of your Unity Catalog metadata. Verify the setup by checking:
+1. Navigate to the [Warehouse Connections page][3].
+2. Click **Databricks**.
+3. Select the Databricks account you configured above.
+4. Enter the catalog, schema, and volume name you configured earlier.
 
-- **Schema Sync**: Confirm that your Databricks tables are visible in the Datadog Data Observability settings.
-- **Result Persistence**: After launching a test experiment, check your `datadog_experiments.output` schema in Databricks to confirm Datadog is successfully writing result tables.
+{{< img src="/product_analytics/experiment/guide/databricks_experiment_setup.png" alt="The Edit Data Warehouse modal with Databricks selected, showing input fields for Account, Catalog, Schema, and Volume Name" style="width:90%;" >}}
+
+If your catalog and schema do not show up in the dropdown, you can type them in to add manually.
+
+After you save your warehouse connection, create experiment metrics using your Databricks data. See [Create Experiment Metrics][4].
+
+
+[1]: /integrations/databricks/?tab=useaserviceprincipalforoauth
+[2]: https://docs.databricks.com/aws/en/sql/language-manual/sql-ref-volumes
+[3]: https://app.datadoghq.com/product-analytics/experiments/settings/warehouse-connections
+[4]: /experiments/defining_metrics
 
 ## Further reading
 
