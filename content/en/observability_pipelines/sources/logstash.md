@@ -9,7 +9,9 @@ products:
 
 {{< product-availability >}}
 
-Use Observability Pipelines' Logstash source to receive logs from your Logstash agent. Select and set up this source when you [set up a pipeline][1].
+## Overview
+
+Use Observability Pipelines' Logstash source to receive logs from your Logstash agent.
 
 You can also use the Logstash source to [send logs to Observability Pipelines using Filebeat][2].
 
@@ -17,9 +19,9 @@ You can also use the Logstash source to [send logs to Observability Pipelines us
 
 {{% observability_pipelines/prerequisites/logstash%}}
 
-## Set up the source in the pipeline UI
+## Setup
 
-Select and set up this source when you [set up a pipeline][1]. The information below is for the source settings in the pipeline UI.
+Set up this source when you [set up a pipeline][1]. You can set up a pipeline in the [UI][4], using the [API][5], or with [Terraform][6]. The instructions in this section are for setting up the source in the UI.
 
 <div class="alert alert-danger">Only enter the identifiers for the Logstash address and, if applicable, the TLS key pass. Do <b>not</b> enter the actual values.</div>
 
@@ -62,3 +64,6 @@ Toggle the switch to **Enable TLS**. If you enable TLS, the following certificat
 [1]: /observability_pipelines/configuration/set_up_pipelines/
 [2]: /observability_pipelines/sources/filebeat/
 [3]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/
+[4]: https://app.datadoghq.com/observability-pipelines
+[5]: /api/latest/observability-pipelines/
+[6]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline
