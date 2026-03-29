@@ -41,7 +41,7 @@ To create a metric for your experiment:
 1. Click **Select an event** under the **Metric definition** section to open the event picker. The chart on the right updates in real time as you configure your metric.
    1. Search for a specific event, or use the **By Type** filter to browse by event type.
 1. Select an [aggregation method](#aggregation-methods) from the dropdown. The default is **Count of events**.
-1. Click the **Add Filter** icon to [filter your metric](#add-filters) by additional properties.
+1. Click **Add Filter** to [filter your metric](#add-filters) by additional properties.
 1. (Optional) Under the **Additional settings** section:
    1. Toggle on **Mark as certified** to indicate this metric is approved for important decision-making. This requires the **Product Analytics Certified Metrics Write** permission.
    1. Adjust the [**Experiment settings**](#advanced-options) and **Units** as needed. The defaults work for most use cases.
@@ -163,13 +163,13 @@ Datadog accounts for correlations between the numerator and denominator using th
 Datadog Experiments supports the following advanced options. These can be modified under **Additional settings > Experiment settings** when creating a metric.
 
 Time frame filters
-:  By default, Datadog includes all events between a user's first exposure and the end of the experiment. Use this setting to measure a time-boxed value such as "sessions within 7 days". If you add a time frame filter, the metric only includes events from the specified time window, starting at the moment the experiment first enrolls the user.
+: By default, Datadog includes all events between a user's first exposure and the end of the experiment. Use this setting to measure a time-boxed value such as "sessions within 7 days". If you add a time frame filter, the metric only includes events from the specified time window, starting at the moment the experiment first enrolls the user.
 
 Desired metric direction
 : Datadog highlights statistically significant results. Use this setting to specify whether you want this metric to increase or decrease.
 
 Outlier handling
-: Real-world data often includes extreme outliers that can impact experiment results. Use this setting to set a threshold at which Datadog truncates data. For example, set a 99% upper bound to truncate all results at the metric's 99th percentile. 
+: Real-world data often includes extreme outliers that can impact experiment results. Use this setting to set a threshold at which Datadog truncates data. For example, set a 99% upper bound to truncate all results at the metric's 99th percentile.
 
 ## Further reading
 {{< partial name="whats-next/whats-next.html" >}}
