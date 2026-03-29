@@ -1,5 +1,5 @@
 ---
-title: Connect Databricks for Warehouse Native Experiment Analysis
+title: Connect Databricks for Warehouse-Native Experiment Analysis
 description: Connect a Databricks service account to enable warehouse native experiment analysis.
 private: true
 further_reading:
@@ -12,8 +12,13 @@ further_reading:
 ---
 
 ## Overview
+Warehouse-native experiment analysis lets you run statistical computations directly in your data warehouse.
 
-This guide walks through connecting Databricks to Datadog to enable warehouse-native experiment analysis in three steps: connecting Databricks to Datadog, setting up resources in Databricks, and configuring experiment-specific settings in Datadog.
+To set this up for Databricks, connect a Databricks service account to Datadog and configure your experiment settings. This guide covers:
+
+- connecting Databricks to Datadog
+- setting up resources in Databricks
+- configuring experiment-specific settings in Datadog
 
 ## Step 1: Set up the Databricks integration
 

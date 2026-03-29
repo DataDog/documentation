@@ -12,5 +12,7 @@ cascade:
 {{< whatsnext desc="Connect warehouse data to Datadog Experiments:" >}}
     {{< nextlink href="experiments/guide/connecting_snowflake" >}}Connect Snowflake Data to Datadog Experiments
 {{< /nextlink >}}
+    {{< nextlink href="experiments/guide/connecting_databricks" >}}Connect Databricks Warehouse Data
+{{< /nextlink >}}
 
 {{< /whatsnext >}}
