@@ -7,9 +7,6 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-product-analytics/"
   tag: "Blog"
   text: "Make data-driven design decisions with Product Analytics"
-- link: "/experiments/reading_results"
-  tag: "Documentation"
-  text: "Reading Experiment Results"
 ---
 
 ## Overview
@@ -50,7 +47,7 @@ To create a metric for your experiment:
    1. Adjust **Experiment settings** and **Units** as needed. The defaults work for most use cases.
 1. Click **Save**.
 
-{{< img src="/product_analytics/experiment/exp_create_new_metric.png" alt="The Create Metric page with the Metric name field set to 'Example metric', a metric definition for the 'click on ADD TO CART' event, an annotation highlighting the aggregation method dropdown set to Count of events, an Add Filter icon, a Create Ratio button, the Additional settings section with Mark as certified toggle, Experiment settings, and Units, a bar chart on the right previewing metric data over one week, and the Save button highlighted." style="width:90%;" >}}
+{{< img src="/product_analytics/experiment/exp_create_new_metric.png" alt="The Create Metric page with the Metric name set to 'Example metric', the 'click on ADD TO CART' event selected, the aggregation method dropdown set to Count of events, the Additional settings section, a bar chart preview on the right, and the Save button highlighted." style="width:90%;" >}}
 
 [1]: https://app.datadoghq.com/product-analytics/experimentation-metrics
 [3]: /real_user_monitoring/#get-started
@@ -102,7 +99,7 @@ After previewing your data, map it to Datadog:
      - The column that lists the timestamp associated with the metric event.
      - The analysis only includes rows created after the subject enrolls in the experiment.
    - **Subject Type**
-     - The attribute used to randomly assign experiment groups.
+     - The attribute that Datadog uses to randomly assign experiment groups.
      - On the [Subject Types][12] page, define the subject type and its default warehouse column.
      - For example, you can use `user_id` for an individual user or `org_id` for an organization account.
    - **Measures** (optional)
@@ -120,7 +117,7 @@ After you create your SQL model, use it to create a metric:
 1. Select the **Metrics** tab and click **Create Metric** at the top right corner.
 1. Add a **Metric name** and, optionally, a **Description**.
 1. Click **Select an event** under the **Metric definition** section to open the event picker. The chart on the right updates in real time as you configure your metric.
-   1. Select the relevant SQL model. Your SQL models appear under their data source (for example, **Revenue Orders** under **Snowflake**). 
+   1. Select the relevant SQL model. Your SQL models appear under their data source (for example, **Revenue Orders** under **Snowflake**).
 1. Select an [aggregation method](#aggregation-methods) from the dropdown.
 1. (Optional) Under the **Additional settings** section:
    1. Toggle on **Mark as certified** to indicate this metric is approved for important decision-making. This requires the **Product Analytics Certified Metrics Write** permission.
