@@ -9,15 +9,17 @@ products:
 
 {{< product-availability >}}
 
-Use Observability Pipelines' Splunk Heavy and Universal Forwards (TCP) source to receive logs sent to your Splunk forwarders. Select and set up this source when you [set up a pipeline][1].
+## Overview
+
+Use Observability Pipelines' Splunk Heavy and Universal Forwards (TCP) source to receive logs sent to your Splunk forwarders.
 
 ## Prerequisites
 
 {{% observability_pipelines/prerequisites/splunk_tcp %}}
 
-## Set up the source in the pipeline UI
+## Setup
 
-Select and set up this source when you [set up a pipeline][1]. The information below is for the source settings in the pipeline UI.
+Set up this source when you [set up a pipeline][1]. You can set up a pipeline in the [UI][2], using the [API][3], or with [Terraform][4]. The instructions in this section are for setting up the source in the UI.
 
 <div class="alert alert-danger">Only enter the identifiers for the Splunk TCP address and, if applicable, the TLS key pass. Do <b>not</b> enter the actual values.</div>
 
@@ -56,3 +58,6 @@ Click the toggle to **Enable TLS**. If you enable TLS, the following certificate
 {{% observability_pipelines/log_source_configuration/splunk_tcp %}}
 
 [1]: /observability_pipelines/configuration/set_up_pipelines/
+[2]: https://app.datadoghq.com/observability-pipelines
+[3]: /api/latest/observability-pipelines/
+[4]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline

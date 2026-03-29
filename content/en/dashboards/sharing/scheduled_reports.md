@@ -1,6 +1,6 @@
 ---
 title: Scheduled Reports
-description: Send recurring dashboard PDFs to email addresses and Slack channels with customizable schedules and time frames.
+description: Send recurring dashboard PDFs to email addresses, Slack channels, and Microsoft Teams channels with customizable schedules and time frames.
 disable_toc: false
 aliases:
     - /dashboards/reporting/
@@ -20,7 +20,7 @@ Scheduled reports enable Datadog users to share dashboards as high-density PDFs 
 
 {{< img src="dashboards/scheduled_reports/report_pdf.png" alt="Example report PDF attachment" style="width:90%;" >}}
 
-The report PDF can be sent to Slack channels or email addresses.
+The report PDF can be sent to email addresses, Slack channels, or Microsoft Teams channels.
 
 {{< img src="dashboards/scheduled_reports/report_slack.png" alt="Example report slack with PDF report linked" style="width:90%;" >}}
 
@@ -70,6 +70,14 @@ To add Slack recipients, select the Slack workspace and channel from the availab
 
 **{{< img src="dashboards/scheduled_reports/add_slack_recipients.png" alt="The configuration modal for editing scheduled report email recipients." style="width:90%;" >}}**
 
+#### Microsoft Teams recipients
+
+Before adding Microsoft Teams recipients, ensure:
+- The [Microsoft Teams integration][9] is installed in your Datadog organization.
+- The Datadog app is added to the target Team in Microsoft Teams.
+
+To add Microsoft Teams recipients, select the **Microsoft Teams** tab, then choose a **Tenant**, **Team**, and **Channel** from the available dropdowns. To send a test message, add a channel recipient and click **Send Test Message**.
+
 ## Managing reports
 
 A single dashboard can have multiple scheduled reports with different settings, which allows you to inform different groups of stakeholders interested in the same dashboard. To see the reports on an existing dashboard, click the **Share** button and select **Configure Reports**.
@@ -93,6 +101,8 @@ Additionally, users with the **Org Management** permission can enable or disable
 
 {{< img src="dashboards/scheduled_reports/report_send_to_slack_org_preference.png" alt="The Send to Slack setting under Report Management setting in the Settings tab in Public Sharing within Organization Settings in Datadog with the setting Enabled" style="width:90%;" >}}
 
+Similarly, users with the **Org Management** permission can enable or disable Microsoft Teams recipients for their organization from the **Settings** tab under [Public Sharing][3] in **Organization Settings**.
+
 ## Unsupported widget types
 
 The following widget types are **not** supported and will be shown as empty in the report:
@@ -114,3 +124,4 @@ The following widget types are **not** supported and will be shown as empty in t
 [6]: /dashboards/widgets/hostmap/
 [7]: /dashboards/widgets/run_workflow/
 [8]: /integrations/slack/?tab=datadogforslack
+[9]: /integrations/microsoft_teams/
