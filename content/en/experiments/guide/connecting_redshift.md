@@ -15,13 +15,13 @@ further_reading:
 
 Warehouse-native experiment analysis lets you run statistical computations directly in your data warehouse.
 
-To set this up for Redshift, connect a Redshift cluster to Datadog and configure your experiment settings. This guide covers:
+To set this up for Redshift, connect a Redshift cluster to Datadog using the AWS integration and configure your experiment settings. This guide covers:
 
-- [Preparing a Redshift service account](#step-1-prepare-the-redshift-service-account)
-- [Connecting it to Datadog using the AWS integration](#step-2-connect-redshift-to-datadog-using-aws)
-- [Configuring experiment settings](#step-3-configure-experiment-settings)
+- [Installing the AWS integration and setting IAM permissions](#step-1-prepare-the-redshift-service-account)
+- [Preparing the Redshift Cluster to connect to Datadog](#step-2-connect-redshift-to-datadog-using-aws)
+- [Configuring experiment settings in Datadog](#step-3-configure-experiment-settings)
 
-## Step 1: Install the AWS Integration
+## Step 1: Set up AWS Integration and IAM permissions
 
 Datadog Experiments connects to Redshift through the Datadog AWS integration. If you already have the [AWS integration][1] configured for the account containing your Redshift cluster, skip to [Step 2](#step-2-prepare-the-redshift-service-account).
 
@@ -30,57 +30,24 @@ To set up the AWS integration:
 1. Navigate to [Datadog's integrations page][2] and search for **Amazon Web Services**.
 1. Click the **Amazon Web Services** tile to open its modal.
 1. Click **Add AWS Account(s)** under the **Configuration** tab.
-   1. If you do not yet have the AWS integration installed, **Add AWS Account(s)** appears on the AWS landing page after you select the integration tile. 
-1. Follow the **CloudFormation** setup flow to create an IAM role that allows Datadog to make API calls to your AWS account. See the [AWS integration documentation][1], for more information. 
+   1. If you do not yet have the AWS integration installed, **Add AWS Account(s)** appears on the AWS landing page after you open the integration tile. 
+1. Follow the **CloudFormation** setup flow to create an IAM role that allows Datadog to make API calls to your AWS account.
+   1. Select your **AWS Region**.
+   1. Choose your **Datadog API Key**.
+   1. Toggle off the **Deploy log forwarder** and **Disable All** Log Resources (these are not needed for experiment analysis).
+   1. Select No for **Detect security issues**.
+   1. Click **Open in AWS Console** to launch your CloudFormation template. See the [AWS integration documentation][1] for more information.
+1. Follow your configuration's completion steps under **Deployment Status**.
 
-<!-- does this mean logs in the Send AWS Logs to Datadog section? -->
-<div class="alert alert-info">If you are only using the AWS integration for warehouse-native experiment analysis, you can opt out of collecting other resources.</div>
-
-## Step 2: Prepare the Redshift service account
-
-To give Datadog access to your data warehouse, you must create a user and a dedicated schema where Datadog can store experiment results and intermediate tables.
-
-### Create the Datadog user
-
-1. Your Datadog user in Redshift must have superuser or admin privileges to connect to your Redshift cluster.
-1. Run the following command to create a user with a strong password that Datadog can use to execute queries. Replace `datadog_experiments_user` with your user value and `Your_Secure_Password` with your password.
-
-```sql
-CREATE USER datadog_experiments_user PASSWORD 'Your_Secure_Password';
-```
-
-### Grant read access to metrics
-
-Grant the user read access to the tables or schemas containing your experiment metrics so Datadog can calculate results. Run the `GRANT USAGE` command, then run the `GRANT SELECT` option that match your access needs. Replace `<schema>` and `<table>` with the appropriate values.
-
-```sql
-GRANT USAGE ON SCHEMA <schema> TO datadog_experiments_user;
-
--- individual tables
-GRANT SELECT ON TABLE <schema>.<table> TO datadog_experiments_user;
-
--- all tables
-GRANT SELECT ON ALL TABLES IN SCHEMA <schema> TO datadog_experiments_user;
-```
-
-### 3. Create an output schema
-
-Run the following SQL to create a schema where Datadog stores experiment results and intermediate tables.
-
-```sql
-CREATE SCHEMA IF NOT EXISTS datadog_experiments_output;
-GRANT ALL ON SCHEMA datadog_experiments_output TO datadog_experiments_user;
-```
+<div class="alert alert-info">If you plan to use other warehouse observability functionality in Datadog, see <a href="https://docs.datadoghq.com/integrations/amazon-web-services/#resource-collection">Datadog's Amazon Web Services integration documentation</a> to determine which resources to enable.</div>
 
 ### Create an S3 bucket
 
-Create an S3 bucket for importing exposure events into your warehouse. The bucket name must start with `datadog-experimentation-` (for example, `datadog-experimentation-[AWS account ID]`). Default settings can be used.
+Create an S3 bucket for importing exposure events into your warehouse. The bucket name must start with `datadog-experimentation-` (for example, `datadog-experimentation-[AWS account ID]`). You can use the default settings.
 
 ### Grant additional IAM permissions
 
-Because Datadog Experiments writes data into your warehouse, your AWS IAM role needs additional permissions beyond those required for the [standard Amazon Redshift integration][3].
-
-Add the following permissions to the IAM role used by your Datadog AWS integration:
+Add the following additional permissions to your Datadog AWS integration's IAM role so Datadog Experiments can write data into your warehouse: 
 
 ```json
 {
@@ -142,32 +109,66 @@ Replace the following with the appropriate values:
 | `[S3 bucket ARN]` | `arn:aws:s3:::[bucket-name]` |
 
 
+## Step 2: Prepare the Redshift cluster
+
+Create a Datadog user, a dedicated schema, and an S3 bucket for Datadog to store experiment results.
+
+<div class="alert alert-info">Your Datadog user must have <code>superuser</code> or <code>admin</code> privileges to connect to your Redshift cluster.</div>
+
+
+### Create a Datadog user
+
+Run the following command to create a user with a strong password that Datadog can use to execute queries. Replace `datadog_experiments_user` with your user value and `Your_Strong_Password` with your password.
+
+```sql
+CREATE USER datadog_experiments_user PASSWORD 'Your_Strong_Password';
+```
+
+### Create an output schema
+
+Run the following commands to create a schema where Datadog stores experiment results and intermediate tables. Replace `datadog_experiments_output` with your schema name and `datadog_experiments_user` with your user value.
+
+```sql
+CREATE SCHEMA IF NOT EXISTS datadog_experiments_output;
+GRANT ALL ON SCHEMA datadog_experiments_output TO datadog_experiments_user;
+```
+
+### Grant the user read access to the schema
+
+Grant the user read access to the tables or schemas containing your experiment metrics so Datadog can calculate results. Run the `GRANT USAGE` command, then run the `GRANT SELECT` option that match your access needs. Replace `<schema>` and `<table>` with the appropriate values.
+
+```sql
+GRANT USAGE ON SCHEMA <schema> TO datadog_experiments_user;
+
+-- Option 1: Give read access to a single table
+GRANT SELECT ON TABLE <schema>.<table> TO datadog_experiments_user;
+
+-- Option 2: Give read access to all tables in the schema
+GRANT SELECT ON ALL TABLES IN SCHEMA <schema> TO datadog_experiments_user;
+```
+
+
 ## Step 3: Configure Experiment settings
 
-After you configure your AWS integrations and complete the data warehouse setup, connect Redshift to Datadog:
+After you configure your AWS integrations and complete the data warehouse setup, connect Redshift to Datadog.
 
-1. Navigate to [Product Analytics][2]. In the left navigation, hover over **Settings**, then click **Experiments**.
+<div class="alert alert-info">Datadog supports one warehouse connection per organization. Connecting Redshift replaces any existing warehouse connection (for example, Snowflake).</div>
 
+1. Navigate to [Product Analytics][2]. In the left navigation, hover over **Settings** and click **Experiments**.
 1. Select the **Warehouse Connections** tab.
-
 1. Click **Connect a data warehouse**. If you already have a warehouse connected, click **Edit** instead.
-
 1. Select **Redshift** as your data warehouse.
-
 1. Select your **AWS account** from the dropdown.
-
 1. Under **Cluster Connection**, enter:
    - **AWS region**: The region your Redshift cluster is in (for example, `us-east-1`).
    - **Cluster identifier**: The name of your Redshift cluster.
    - **Cluster endpoint**: The full endpoint URL for your cluster.
    - **Port**: The port your cluster is listening on (default: `5439`).
-
 1. Under **Database and Storage**, enter:
    - **Database**: The database containing your source tables.
    - **Database user**: The service user you created earlier (for example, `datadog_experiments_user`).
    - **Schema**: The schema you created for Datadog Experiments to write to (for example, `datadog_experiments_output`).
    - **Temp S3 bucket**: The S3 bucket you created earlier (for example, `datadog-experimentation-[AWS account ID]`).
-
 1. Click **Save**.
 
 {{< img src="/product_analytics/experiment/guide/redshift_pa_setup.png" alt="The Redshift connection setup page in Datadog showing warehouse type tiles for Snowflake, BigQuery, Redshift (selected), and Databricks, with three sections: Select AWS Account with an AWS account dropdown, Cluster Connection with fields for AWS region, Cluster identifier, Cluster endpoint, and Port, and Database and Storage with fields for Database, Database user, Schema, and Temp S3 bucket." style="width:90%;" >}}
@@ -178,9 +179,10 @@ After you save your warehouse connection, create experiment metrics using your R
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/integrations/amazon-web-services/
+[1]: https://docs.datadoghq.com/getting_started/integrations/aws/
 [2]: https://app.datadoghq.com/product-analytics
 [3]: https://docs.datadoghq.com/integrations/amazon-redshift/#log-collection
 [4]: /experiments/defining_metrics
 [5]: https://app.datadoghq.com/integrations/aws
+
 
