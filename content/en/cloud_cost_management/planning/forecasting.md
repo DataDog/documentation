@@ -30,7 +30,7 @@ With Forecasts, you can:
 
 ## How forecasting works
 
-Cloud Cost Management uses advanced algorithms to deliver accurate cost predictions. The forecasting model analyzes your historical spending data to identify patterns and trends in your cloud costs, including:
+Cloud Cost Management uses forecasting algorithms to generate cost to generate cost predictions. The forecasting model analyzes your historical spending data to identify patterns and trends in your cloud costs, including:
 
 - Recurring costs that happen on a **predictable schedule** (such as weekly or monthly cycles).
 - Whether your costs are **increasing, decreasing, or staying stable** over time.
@@ -66,7 +66,7 @@ The report displays:
 - **Forecast toggle and controls**: Located in the left panel to enable forecasting and select the time period.
 - **Historical costs**: Your actual spending shown in solid colors.
 - **Forecasted costs**: Predicted costs shown with a hatched pattern.
-- **Forecast summary card**: At the top of the page showing the total forecasted cost for the selected period.
+- **Forecast summary card**: Shows the total forecasted cost for the selected period.
 
 ## View forecasts in budgets
 
@@ -83,9 +83,9 @@ To view detailed forecast information:
 1. From the Budgets page, click **View Performance** on any budget to open the detailed budget view.
 2. In the budget performance view, toggle **Show Forecast** to enable forecasting.
 3. The budget performance chart displays:
-   - **Actual costs**: Your current spending shown in solid colors
-   - **Forecasted costs**: Predicted costs shown with a hatched pattern extending beyond your actual costs
-   - **Forecasted Past**: A vertical line indicating where the forecast begins
+   - **Actual costs**: Your current spending shown in solid colors.
+   - **Forecasted costs**: Predicted costs shown with a hatched pattern extending beyond your actual costs.
+   - **Forecasted Past**: A vertical line indicating where the forecast begins.
 
 {{< img src="cloud_cost/forecasts/updated_budget_status_forecast-1.png" alt="Budget performance view showing the forecast toggle and forecasted costs displayed with a hatched pattern" style="width:100%;" >}}
 
