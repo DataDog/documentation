@@ -43,7 +43,7 @@ This demo shows the Datadog MCP Server being used in Cursor and Claude Code (unm
 ## Fair-Use Rate Limits
 
 The MCP Server comes with the following fair-use limits:
-- 50 requests/10 seconds burst limits
+- 50 requests/10 seconds tool call burst limits
 - 5000 daily tool calls
 - 50,000 monthly tool calls. 
 
