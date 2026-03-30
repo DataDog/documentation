@@ -1,7 +1,8 @@
 ---
 title: Use Custom OpenTelemetry Components with Datadog Distribution of OpenTelemetry (DDOT) Collector
-aliases:
-- "/opentelemetry/agent/agent_with_custom_components"
+code_lang: kubernetes
+type: multi-code-lang
+code_lang_weight: 1
 further_reading:
 - link: "/opentelemetry/setup/ddot_collector/install/"
   tag: "Documentation"
