@@ -7,7 +7,7 @@ further_reading:
   text: "Learn about Cloud Cost Management"
 ---
 
-<div class="alert alert-info">CCM Commitment Programs supports Amazon EC2 and RDS Reserved Instances, Amazon EC2 Savings Plans, Amazon ElastiCache Reserved Nodes, and Azure VM Reserved Instances.</div>
+<div class="alert alert-info">CCM Commitment Programs supports Amazon EC2 and RDS Reserved Instances, Amazon EC2 Savings Plans, and Amazon ElastiCache Reserved Nodes.</div>
 
 ## Overview
 
@@ -78,7 +78,7 @@ On-demand hot-spots highlight areas with high on-demand costs, which may indicat
 
 ## Commitments Explorer
 
-Commitments Explorer provides a detailed, interactive table of all your cloud commitment contracts. Browse, search, filter, and sort your commitments by key attributes to track your inventory, monitor expiration dates, and identify opportunities to optimize usage and savings.
+Commitments Explorer provides a detailed, interactive table of all your cloud commitment contracts for the supported products and providers. Browse, search, filter, and sort your commitments by key attributes to track your inventory, monitor expiration dates, and identify opportunities to optimize usage and savings.
 
 {{< img src="cloud_cost/planning/commitments-explorer-3.png" alt="Table of AWS RDS Reserved Instance commitments, highlighting the 'Columns' button, an expired commitment, and a commitment that is expiring soon." style="width:100%;" >}}
 
@@ -90,15 +90,15 @@ The columns displayed in Commitments Explorer vary depending on the product (for
 | Column | Description | Product |
 |---|---|---|
 | Reservation ARN | Unique Amazon Resource Name (ARN) identifying the Reserved Instance commitment. | Amazon EC2, Amazon RDS, Amazon ElastiCache |
-| Payment Model | Payment option for the commitment (for example, No Upfront, Partial Upfront, All Upfront). | Amazon EC2, Amazon RDS, Amazon ElastiCache, Azure VMs |
-| Term | Duration of the commitment (for example, 1 Year, 3 Years). | Amazon EC2, Amazon RDS, Amazon ElastiCache, Azure VMs |
-| Region | AWS or Azure region where the commitment is applied. | Amazon EC2, Amazon RDS, Amazon ElastiCache, Azure VMs |
-| Instance Type | Type and size of the instance covered by the commitment (for example, `db.r6g.large` for RDS or `m5.large` for EC2). | Amazon EC2, Amazon RDS, Amazon ElastiCache, Azure VMs |
-| Start Date | Date when the commitment term begins. | Amazon EC2, Amazon RDS, Amazon ElastiCache, Azure VMs |
-| End Date | Date when the commitment term ends. | Amazon EC2, Amazon RDS, Amazon ElastiCache, Azure VMs |
+| Payment Model | Payment option for the commitment (for example, No Upfront, Partial Upfront, All Upfront). | Amazon EC2, Amazon RDS, Amazon ElastiCache|
+| Term | Duration of the commitment (for example, 1 Year, 3 Years). | Amazon EC2, Amazon RDS, Amazon ElastiCache|
+| Region | AWS or Azure region where the commitment is applied. | Amazon EC2, Amazon RDS, Amazon ElastiCache|
+| Instance Type | Type and size of the instance covered by the commitment (for example, `db.r6g.large` for RDS or `m5.large` for EC2). | Amazon EC2, Amazon RDS, Amazon ElastiCache|
+| Start Date | Date when the commitment term begins. | Amazon EC2, Amazon RDS, Amazon ElastiCache|
+| End Date | Date when the commitment term ends. | Amazon EC2, Amazon RDS, Amazon ElastiCache|
 | Instance # | Number of instances covered by the commitment. | Amazon EC2, Amazon RDS, Amazon ElastiCache |
 | NFU # | Number of Normalization Factor Units (NFUs) covered, which standardizes instance sizes for comparison. | Amazon EC2, Amazon RDS, Amazon ElastiCache |
-| Utilization | Percentage of the commitment used during the selected period. | Amazon EC2, Amazon RDS, Amazon ElastiCache, Azure VMs |
+| Utilization | Percentage of the commitment used during the selected period. | Amazon EC2, Amazon RDS, Amazon ElastiCache|
 | DB Engine | Database engine used by the instance (such as PostgreSQL, MySQL, SQL Server). | Amazon RDS |
 | Multi-AZ | Indicates whether the Reserved Instance covers a multiple availability zone deployment (Yes/No). | Amazon RDS |
 | Node Type | Type and size of the ElastiCache node covered by the commitment. | Amazon ElastiCache |
