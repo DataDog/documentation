@@ -16,13 +16,13 @@ Warehouse-native experiment analysis lets you run statistical computations direc
 
 To set this up for BigQuery, connect a BigQuery service account to Datadog and configure your experiment settings. This guide covers:
 
-- [Preparing the Google Cloud resources](#step-1-prepare-the-google-cloud-resources)
+- [Preparing Google Cloud resources](#step-1-prepare-the-google-cloud-resources)
 - [Granting IAM roles to the service account](#step-2-grant-iam-roles-to-the-service-account)
 - [Configuring experiment settings in Datadog](#step-3-configure-experiment-settings)
 
 ## Prerequisite
 
-Datadog connects to BigQuery through a Google Cloud service account. If you already have a service account connected to Datadog, skip to [Step 1](#step-1-prepare-the-google-cloud-service-account). Otherwise, expand the section below to create one.
+Datadog connects to BigQuery through a Google Cloud service account. If you already have a service account connected to Datadog, skip to [Step 1](#step-1-prepare-the-google-cloud-resources). Otherwise, expand the section below to create one.
 
 {{% collapse-content title="Create a service account" level="h4" %}}
 
@@ -51,7 +51,7 @@ To create a BigQuery dataset for Datadog Experiments to cache intermediate exper
 
 1. Open your [Google Cloud console][1].
 1. In the **Search** bar, search for **BigQuery**.
-1. In the **Explorer** navigation menu, click on your project (for example, `datadog-sandbox`) to expand its sub-menu items.
+1. In the **Explorer** navigation menu, click your project (for example, `datadog-sandbox`) to expand its sub-menu items.
 1. Select **Datasets**, then click **Create dataset**.
    {{< img src="/product_analytics/experiment/exp_bq_gc_create_dataset.png" alt="The BigQuery Datasets page in the Google Cloud console showing the datadog-sandbox project expanded in the left Explorer menu with Datasets selected, a list of datasets with columns for Dataset ID, Type, Location, Create time, and Label, and the Create dataset button highlighted in the top right." style="width:100%;" >}}
 1. Enter a **Dataset ID** (for example, `datadog_experiments_output`).
@@ -64,7 +64,7 @@ See Google's [Create a bucket][2] documentation to create a Cloud Storage bucket
 
 ## Step 2: Grant IAM roles to the service account
 
-Datadog Experiments service account requires specific permissions to run warehouse-native experiment analysis.
+The Datadog Experiments service account requires specific permissions to run warehouse-native experiment analysis.
 
 ### Assign IAM roles at the project level
 
@@ -80,18 +80,18 @@ To assign IAM roles so Datadog Experiments can read and write data, and run jobs
    1. [BigQuery Data Viewer][7]: Allows the service account to read tables used in warehouse-native metrics.
 1. Click **Save**.
 
-{{< img src="/product_analytics/experiment/exp_bq_gc_iam.png" alt="The Google Cloud IAM page showing the Grant access panel for a project, with the Grant access button highlighted on the left, a New principals field highlighted in the Add principals section, and a Select a role dropdown highlighted in the Assign roles section." style="width:100%;" >}}
+   {{< img src="/product_analytics/experiment/exp_bq_gc_iam_role.png" alt="The Google Cloud IAM page showing the Grant access panel for a project, with the Grant access button highlighted on the left, a New principals field highlighted in the Add principals section, and a Select a role dropdown highlighted in the Assign roles section." style="width:100%;" >}}
 
 ### Grant read access to specific source tables
 
 Repeat the following steps for each dataset you need to build experiment metrics:
 
 1. In the [Google Cloud console][1] **Search** bar, search for **BigQuery**.
-1. In the Explorer navigation menu, click on your project (for example, `datadog-sandbox`) to expand its sub-menu items.
+1. In the Explorer navigation menu, click your project (for example, `datadog-sandbox`) to expand its sub-menu items.
 1. Click **Datasets**. From the list, select the **Dataset ID** containing your source tables.
 1. Click the **Share** dropdown and select **Manage permissions**.
    {{< img src="/product_analytics/experiment/exp_bq_gc_permissions.png" alt="The BigQuery dataset page with the Share dropdown expanded and Manage permissions highlighted, showing additional options including Copy link, Authorize Views, Authorize Routines, Authorize Datasets, Manage Subscriptions, and Publish as Listing." style="width:100%;" >}}
-1. Click **Add Principal**.
+1. Click **Add principal**.
 1. In the **New principals** field, enter the service account email.
 1. Using the **Select a role** dropdown, select the **BigQuery Data Viewer** role to grant Datadog Experiments access to view the dataset and all of its content.
 1. Click **Save**.
