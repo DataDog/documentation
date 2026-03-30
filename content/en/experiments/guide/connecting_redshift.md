@@ -26,6 +26,8 @@ Datadog Experiments connects to Redshift through [Datadog's Amazon Web Services 
 
 {{% collapse-content title="Set up the AWS integration" level="h4" %}}
 
+<div class="alert alert-info">Adding an AWS account requires the <strong>AWS Configurations Manage</strong> permission. If your organization uses custom roles, verify that your role includes this permission.</div>
+
 1. Navigate to [Datadog's integrations page][5] and search for **Amazon Web Services**.
 1. Click the **Amazon Web Services** tile to open its modal.
 1. Click **Add AWS Account(s)** under the **Configuration** tab.
@@ -90,8 +92,9 @@ Create an S3 bucket for importing exposure events into your warehouse. The bucke
 
 ### Grant additional IAM permissions
 
-In addition to the permissions listed in the [AWS integration documentation][3], Datadog Experiments requires the following permissions to write data to your warehouse. Replace the placeholder fields with values from your environment.
+In addition to the permissions listed in the [AWS integration documentation][3], Datadog Experiments requires additional IAM permissions to write data to your warehouse.
 
+Use the following table to gather the values for your environment, then add the policy statement below to the IAM role that your Datadog AWS integration uses.
 
 | Field | Example |
 |-------|---------|
@@ -99,7 +102,6 @@ In addition to the permissions listed in the [AWS integration documentation][3],
 | `[Redshift user ARN]` | `arn:aws:redshift:us-east-1:[account-id]:dbuser:[cluster-name]/[user]` |
 | `[Redshift database ARN]` | `arn:aws:redshift:us-east-1:[account-id]:dbname:[cluster-name]` |
 | `[S3 bucket ARN]` | `arn:aws:s3:::[bucket-name]` |
-
 
 ```json
 {
@@ -154,7 +156,7 @@ In addition to the permissions listed in the [AWS integration documentation][3],
 
 ## Step 3: Configure experiment settings
 
-<div class="alert alert-info">Datadog supports one warehouse connection per organization. Connecting Redshift replaces any existing warehouse connection (for example, Snowflake).</div>
+<div class="alert alert-info">Datadog supports one warehouse connection per organization. Connecting Redshift replaces any existing warehouse connection (for example, Snowflake).<br><br>Configuring experiment settings requires the <strong>Product Analytics Settings Write</strong> permission. If your organization uses custom roles, verify that your role includes this permission.</div>
 
 After you set up your AWS integration and Redshift cluster, configure the experiment settings in [Datadog Product Analytics][2]:
 
