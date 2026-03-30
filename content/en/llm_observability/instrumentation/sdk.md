@@ -64,7 +64,8 @@ Enable LLM Observability by running your application using the `ddtrace-run` com
 **Note**: `ddtrace-run` automatically turns on all LLM Observability integrations.
 
 {{< code-block lang="shell">}}
-DD_SITE=<YOUR_DATADOG_SITE> DD_API_KEY=<YOUR_API_KEY> DD_LLMOBS_ENABLED=1 \
+DD_SITE=datadoghq.com \
+DD_API_KEY=<YOUR_API_KEY> DD_LLMOBS_ENABLED=1 \
 DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME> ddtrace-run <YOUR_APP_STARTUP_COMMAND>
 {{< /code-block >}}
 
@@ -100,7 +101,8 @@ Enable LLM Observability by running your application with `NODE_OPTIONS="--impor
 **Note**: `dd-trace/initialize.mjs` automatically turns on all APM integrations.
 
 ```shell
-DD_SITE=<YOUR_DATADOG_SITE> DD_API_KEY=<YOUR_API_KEY> DD_LLMOBS_ENABLED=1 \
+DD_SITE=datadoghq.com \
+DD_API_KEY=<YOUR_API_KEY> DD_LLMOBS_ENABLED=1 \
 DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME> NODE_OPTIONS="--import dd-trace/initialize.mjs" node <YOUR_APP_ENTRYPOINT>
 ```
 
@@ -134,7 +136,8 @@ DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME> NODE_OPTIONS="--import dd-trace/initialize.m
 Enable LLM Observability by running your application with `dd-trace-java` and specifying the required parameters as environment variables or system properties.
 
 ```shell
-DD_SITE=<YOUR_DATADOG_SITE> DD_API_KEY=<YOUR_API_KEY> \
+DD_SITE=datadoghq.com \
+DD_API_KEY=<YOUR_API_KEY> \
 java -javaagent:path/to/your/dd-trace-java-jar/dd-java-agent-SNAPSHOT.jar \
 -Ddd.service=my-app -Ddd.llmobs.enabled=true -Ddd.llmobs.ml.app=my-ml-app -jar path/to/your/app.jar
 ```
