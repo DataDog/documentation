@@ -156,8 +156,9 @@ Use the following table to gather the values for your environment, then add the 
 
 <div class="alert alert-info">Datadog supports one warehouse connection per organization. Connecting Redshift replaces any existing warehouse connection (for example, Snowflake).<br><br>Configuring experiment settings requires the <strong>Product Analytics Settings Write</strong> permission. If your organization uses custom roles, verify that your role includes this permission.</div>
 
-After you set up your AWS integration and Redshift cluster, configure the experiment settings in [Datadog Product Analytics][2]:
+After you set up your AWS integration and Redshift cluster, configure the experiment settings in Datadog:
 
+1. Open [Datadog Product Analytics][2].
 1. In the left navigation, hover over **Settings** and click **Experiments**.
 1. Select the **Warehouse Connections** tab.
 1. Click **Connect a data warehouse**. If you already have a warehouse connected, click **Edit** instead.
