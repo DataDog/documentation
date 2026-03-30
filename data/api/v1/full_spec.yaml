@@ -21443,6 +21443,10 @@ components:
           description: Shows the sum of all Data Jobs Monitoring hosts over all hours in the current date for the given org.
           format: int64
           type: integer
+        data_observability_quality_monitoring_avg:
+          description: Shows the average of all Data Observability Quality Monitoring usage over all hours in the current date for all organizations.
+          format: int64
+          type: integer
         date:
           description: The date for the usage.
           format: date-time
@@ -22338,6 +22342,10 @@ components:
           type: integer
         data_jobs_monitoring_host_hr_sum:
           description: Shows the sum of all Data Jobs Monitoring hosts over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        data_observability_quality_monitoring_avg:
+          description: Shows the average of all Data Observability Quality Monitoring usage over all hours in the current date for the given org.
           format: int64
           type: integer
         dbm_host_top99p_sum:
@@ -23237,6 +23245,10 @@ components:
           type: integer
         data_jobs_monitoring_host_hr_agg_sum:
           description: Shows the sum of Data Jobs Monitoring hosts over all hours in the current months for all organizations
+          format: int64
+          type: integer
+        data_observability_quality_monitoring_avg_sum:
+          description: Shows the sum of the average of all Data Observability Quality Monitoring usage over all hours in the current months for all organizations.
           format: int64
           type: integer
         dbm_host_top99p_sum:
