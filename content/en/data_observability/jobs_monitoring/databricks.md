@@ -30,29 +30,28 @@ Follow these steps to enable Data Observability: Jobs Monitoring for Databricks.
 
 {{% tab "Use a Service Principal for OAuth" %}}
 
-<div class="alert alert-danger">New workspaces must authenticate using OAuth. Workspaces integrated with a Personal Access Token continue to function and can switch to OAuth at any time. After a workspace starts using OAuth, it cannot revert to a Personal Access Token.</div>
+<div class="alert alert-danger">New workspace integrations must authenticate using OAuth. Workspaces already integrated with a Personal Access Token continue to function and can switch to OAuth at any time. After a workspace starts using OAuth, it cannot revert to a Personal Access Token.</div>
 
-1. As a **Databricks account admin**, login to the Databricks Account Console ([AWS][28], [Azure][29]).
-1. Click on **User Management** in the left menu. Under the **Service principals** tab, click **Add service principal**.
-   
+1. As a **Databricks workspace admin**, go to **Settings** by clicking on your profile in the upper-right corner from within a workspace.
+1. Under the **Identity and access** tab, click **Manage** next to **Service principals**. Click **Add service principal**, then **Add new**. Enter a name, then click **Add**.
+
    <div class="alert alert-warning">For Azure Databricks, select the "Databricks managed" management type. Datadog does NOT support "Microsoft Entra ID managed" service principals.</div>
 
-1. Under the **Credentials & secrets** tab, click **Generate secret**.
-   1. Set **Lifetime (days)** to the maximum value allowed (730). 
-   1. Click **Generate**. 
-   1. Take note of your client ID and client secret. 
-   1. Take note of your account ID, which can be found by clicking on your profile in the upper-right corner ([AWS][30], [Azure][31]).
-   
-      **Note**: The account ID will not be visible from within an individual workspace; you must be in the Databricks Account Console.
+1. Click on the name of your new service principal. Under the **Secrets** tab, click **Generate secret**.
+   1. Set **Lifetime (days)** to the maximum value allowed (730).
+
+   1. Click **Generate**.
+
+   1. Take note of your client ID and client secret.
+
   {{< img src="data_jobs/databricks/client-id-secret.png" alt="In Databricks, a modal showing the client ID and secret associated with a new OAuth secret is displayed." style="width:70%;" >}}
-  {{< img src="data_jobs/databricks/account-id.png" alt="In Databricks, a drop-down menu showing the user's account ID is displayed." style="width:70%;" >}}
-1. Click **Workspaces** in the left menu, then select the name of your workspace.
-1. Go to the **Permissions** tab and click **Add permissions**.
-1. Search for the service principal you created and assign it the **Admin** permission.
+
+1. Under the **Permissions** tab, click **Grant access**. Search for the new service principal and grant it the **Manage** permission. Click **Save**.
+1. Go back to the **Identity and access** tab and click **Manage** next to **Groups**. Click the **admins** group and add the new service principal by clicking **Add members**.
 1. In Datadog, open the Databricks integration tile.
 1. On the **Configure** tab, click **Add Databricks Workspace**.
-1. Enter a workspace name, your Databricks workspace URL, account ID, and the client ID and secret you generated.
-   {{< img src="data_jobs/databricks/configure-workspace-form-m2m.png" alt="In the Datadog-Databricks integration tile, a Databricks workspace is displayed. This workspace has a name, URL, account ID, client ID, and client secret." style="width:100%;" >}}
+1. Enter a workspace name, your Databricks workspace URL, and the client ID and secret you generated.
+   {{< img src="data_jobs/databricks/connect-workspace-form-m2m.png" alt="In the Datadog-Databricks integration tile, a Databricks workspace is displayed. This workspace has a name, URL, client ID, and client secret." style="width:100%;" >}}
 1. To gain visibility into your Databricks costs in Data Observability: Jobs Monitoring or [Cloud Cost Management][18], provide the ID of a [Databricks SQL Warehouse][19] that Datadog can use to query your [system tables][20].
    - The service principal must have access to the SQL Warehouse. In the Warehouse configuration page, go to **Permissions** (top right) and grant it `CAN USE` permission.
    - Grant the service principal read access to the Unity Catalog [system tables][20] by running the following commands:
@@ -72,16 +71,12 @@ Follow these steps to enable Data Observability: Jobs Monitoring for Databricks.
 [18]: https://docs.datadoghq.com/cloud_cost_management/
 [19]: https://docs.databricks.com/aws/en/compute/sql-warehouse/
 [20]: https://docs.databricks.com/aws/en/admin/system-tables/
-[28]: https://accounts.cloud.databricks.com/
-[29]: https://accounts.azuredatabricks.net/
-[30]: https://docs.databricks.com/aws/en/admin/account-settings/#locate-your-account-id
-[31]: https://learn.microsoft.com/en-us/azure/databricks/admin/account-settings/#account-id
 
 {{% /tab %}}
 
 {{% tab "Use a Personal Access Token (Legacy)" %}}
 
-<div class="alert alert-danger">This option is only available for workspaces created before July 7, 2025. New workspaces must authenticate using OAuth.</div>
+<div class="alert alert-danger">This option is only available for workspace integrations created before July 7, 2025. New workspace integrations must authenticate using OAuth.</div>
 
 1. In your Databricks workspace, click on your profile in the top right corner and go to **Settings**. Select **Developer** in the left side bar. Next to **Access tokens**, click **Manage**.
 1. Click **Generate new token**, enter "Datadog Integration" in the **Comment** field, set the **Lifetime (days)** value to the maximum allowed (730 days), and create a reminder to update the token before it expires. Then click **Generate**. Take note of your token.
@@ -476,7 +471,7 @@ Additionally, for Datadog to access your Databricks cost data in Data Observabil
 ### Set up Data Observability: Jobs Monitoring with Databricks Networking Restrictions
 With [Databricks Networking Restrictions][12], Datadog may not have access to your Databricks APIs, which is required to collect traces for Databricks job executions along with tags and other metadata.
 
-If you are controlling Databricks API access with [IP access lists][13], allow-listing Datadog's specific {{< region-param key="ip_ranges_url_webhooks" link="true" text="webhook IP addresses" >}} allows Datadog to connect to the Databricks APIs in your workspaces/account. See Databricks's documentation for configuring IP access lists for [individual workspaces][16] and the [account console][17] to give Datadog API access. Updating the IP access lists **at both the workspace and account level is required** for the Databricks integration. **Note:** Datadog only uses Databricks account-level APIs to automatically refresh your service principal's client secret.
+If you are controlling Databricks API access with [IP access lists][13], allow-listing Datadog's specific {{< region-param key="ip_ranges_url_webhooks" link="true" text="webhook IP addresses" >}} allows Datadog to connect to the Databricks APIs in your workspace. See Databricks's documentation for configuring IP access lists for [individual workspaces][16] to give Datadog API access.
 
 **Note**: Monitoring workspaces that use [Databricks Private Link][14] connectivity is not supported.
 
@@ -494,7 +489,6 @@ If you are controlling Databricks API access with [IP access lists][13], allow-l
 [13]: https://docs.databricks.com/en/security/network/front-end/ip-access-list.html
 [14]: https://www.databricks.com/trust/security-features/secure-your-data-with-private-networking
 [16]: https://docs.databricks.com/en/security/network/front-end/ip-access-list-workspace
-[17]: https://docs.databricks.com/aws/en/security/network/front-end/ip-access-list-account
 [18]: https://docs.databricks.com/api/workspace/clusters/edit#spark_env_vars
 [19]: https://docs.databricks.com/aws/en/security/auth/access-control#access-control-lists-overview
 [20]: https://docs.databricks.com/aws/en/security/auth/access-control#job-acls
