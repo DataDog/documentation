@@ -45,10 +45,10 @@ Deployed pipelines can be active or inactive pipelines.
 When viewing deployed pipelines in the UI, you can export the configuration to JSON or Terraform to programmatically create it.
 
 1. Navigate to [Observability Pipelines][1].
-1. Select a deployed pipeline (status can be either `active` or `inactive`) to view the configuration.
+1. Select a deployed pipeline (status can be `active` or `inactive`) to view the configuration.
 1. Click **Export Pipeline**.
    {{< img src="observability_pipelines/export_pipeline/export_deployed_pipeline.png" alt="The export button on a deployed pipeline page" style="width:100%;" >}}
-1. Copy or download the JSON or Terraform file.
+1. Click the copy or download button to export the configuration as JSON or Terraform.
 1. Configure and make changes to the Worker through the API or Terraform before deploying programmatically.
    - [API documentation][5]
    - [Terraform documentation][4]
@@ -62,7 +62,7 @@ When editing a deployed pipeline, you can add new components such as [Packs][6] 
 1. Make changes to your source, destinations, or processors.
 1. Before exiting the pipeline, click **Export Pipeline**.
    {{< img src="observability_pipelines/export_pipeline/export_deployed_pipeline_edit.png" alt="The export button highlighted on the pipeline edit page" style="width:100%;" >}}
-1. Copy or download the updated JSON or Terraform file.
+1. Click the copy or download button to export the configuration as JSON or Terraform.
    - **Note**: After making updates to your pipeline in the UI, the exported configuration includes the latest changes, even if you haven't save the changes.
    {{< img src="observability_pipelines/export_pipeline/export_terraform_modal.png" alt="The export modal showing the pipeline configuration in Terraform" style="width:100%;" >}}
 1. Click the Observability Pipelines logo on the top left side of the page to exit the pipeline without saving the changes made in the UI.
