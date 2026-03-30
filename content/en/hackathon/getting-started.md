@@ -284,31 +284,6 @@ A: <span class="eternal-loader"></span> Loading answer...
     window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
   };
 
-  // SIDEBAR — collapses on a random timer with no pattern
-  function badScheduleSidebarCollapse() {
-    var delay = Math.random() * 7000 + 2000;
-    setTimeout(function() {
-      var sidebar = document.querySelector('.side');
-      if (sidebar) {
-        sidebar.style.transition = 'all 0.3s ease';
-        sidebar.style.overflow = 'hidden';
-        if (sidebar.style.width === '0px') {
-          sidebar.style.width = '';
-          sidebar.style.minWidth = '';
-          sidebar.style.padding = '';
-          sidebar.style.opacity = '1';
-        } else {
-          sidebar.style.width = '0';
-          sidebar.style.minWidth = '0';
-          sidebar.style.padding = '0';
-          sidebar.style.opacity = '0';
-        }
-      }
-      badScheduleSidebarCollapse();
-    }, delay);
-  }
-  badScheduleSidebarCollapse();
-
   // COPY BUTTONS — copy wrong content
   var badCopyOptions = [
     'git checkout -b getting-started-v2-final-FINAL-USE-THIS-ONE',
