@@ -2461,6 +2461,11 @@ menu:
       identifier: event_correlation_analytics
       parent: event_correlation
       weight: 503
+    - name: Maintenance Windows
+      url: events/correlation/maintenance_windows
+      identifier: event_correlation_maintenance_windows
+      parent: event_correlation
+      weight: 504
     - name: Guides
       url: events/guides/
       identifier: events_guides
