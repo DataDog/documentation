@@ -66,7 +66,7 @@ When editing a deployed pipeline, you can add new components such as [Packs][6] 
    {{< img src="observability_pipelines/export_pipeline/export_terraform_modal.png" alt="The export modal showing the pipeline configuration in Terraform" style="width:100%;" >}}
 1. Click the Observability Pipelines logo on the top left side of the page to exit the pipeline without saving the changes made in the UI.
    {{< img src="observability_pipelines/export_pipeline/exit_export_deployed_pipeline.png" alt="The Observability Pipelines log highlighted on the pipeline page" style="width:100%;" >}}
-1. Configure and make changes using the Observability Pipelines API or Terraform.
+1. Use the copied or downloaded configuration to programmatically update your pipeline.
    - [API documentation][5]
    - [Terraform documentation][4]
 
