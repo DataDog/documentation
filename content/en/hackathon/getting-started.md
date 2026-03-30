@@ -10,19 +10,6 @@ description: A getting started guide to help you get started with getting starte
     background: linear-gradient(to right, #6366f1, #ec4899);
     width: 100%; z-index: 9999; transition: width 0.1s;
   }
-  #bad-cookie-banner {
-    position: fixed; bottom: 0; left: 0; right: 0;
-    background: #1a1a2e; color: #fff;
-    padding: 12px 24px; z-index: 10000;
-    display: flex; align-items: center; justify-content: space-between;
-    gap: 10px; font-size: 13px; flex-wrap: wrap;
-  }
-  #bad-cookie-banner p { margin: 0; flex: 1; min-width: 200px; }
-  .bad-cookie-btn {
-    padding: 5px 12px; border: 1px solid #fff;
-    background: transparent; color: #fff; cursor: pointer; font-size: 12px;
-  }
-  #bad-cookie-msg { color: #6ee7b7; font-size: 12px; margin-top: 4px; display: none; width: 100%; }
   #bad-cursor-widget {
     position: fixed; background: white; border: 2px solid #6366f1;
     border-radius: 8px; padding: 8px 12px; font-size: 12px;
@@ -55,19 +42,6 @@ description: A getting started guide to help you get started with getting starte
 </style>
 
 <div id="bad-progress-bar"></div>
-
-<div id="bad-cookie-banner">
-  <p>🍪 We use cookies to improve your experience, track your behavior, remember your preferences, monitor your preferences, improve your tracking, and enhance your experience. Your experience is important to us.</p>
-  <div style="display:flex;gap:6px;flex-wrap:wrap;">
-    <button class="bad-cookie-btn" onclick="badCookieClick()">Accept</button>
-    <button class="bad-cookie-btn" onclick="badCookieClick()">Decline</button>
-    <button class="bad-cookie-btn" onclick="badCookieClick()">Accept All</button>
-    <button class="bad-cookie-btn" onclick="badCookieClick()">Decline All</button>
-    <button class="bad-cookie-btn" onclick="badCookieClick()">Accept Some</button>
-    <button class="bad-cookie-btn" onclick="badCookieClick()">Ask Me Later</button>
-  </div>
-  <div id="bad-cookie-msg">✓ Cookie preferences saved.</div>
-</div>
 
 <div id="bad-cursor-widget">
   <strong>💬 Feedback</strong>
@@ -265,19 +239,6 @@ A: <span class="eternal-loader"></span> Loading answer...
     var bar = document.getElementById('bad-progress-bar');
     if (bar) bar.style.width = ((1 - progress) * 100) + '%';
   });
-
-  // COOKIE BANNER — reappears 25 seconds after any button click
-  window.badCookieClick = function() {
-    var banner = document.getElementById('bad-cookie-banner');
-    var msg = document.getElementById('bad-cookie-msg');
-    if (!banner || !msg) return;
-    msg.style.display = 'block';
-    banner.style.display = 'none';
-    setTimeout(function() {
-      msg.style.display = 'none';
-      banner.style.display = 'flex';
-    }, 25000);
-  };
 
   // BACK TO TOP — scrolls to bottom
   window.badScrollToBottom = function() {
