@@ -32,7 +32,7 @@ Follow these steps to enable Data Observability: Jobs Monitoring for Databricks.
 
 <div class="alert alert-danger">New workspace integrations must authenticate using OAuth. Workspaces already integrated with a Personal Access Token continue to function and can switch to OAuth at any time. After a workspace starts using OAuth, it cannot revert to a Personal Access Token.</div>
 
-#### Create and configure the service principal
+#### Create and configure the service principal in Databricks
 
 1. As a **Databricks workspace admin**, go to **Settings** by clicking your profile in the upper-right corner of the workspace.
 1. On the **Identity and access** tab, click **Manage** next to **Service principals**.
@@ -54,7 +54,7 @@ Follow these steps to enable Data Observability: Jobs Monitoring for Databricks.
 1. Return to the **Identity and access** tab and click **Manage** next to **Groups**.
 1. Click the **admins** group, then click **Add members** to add the new service principal.
 
-#### Add the Databricks workspace
+#### Add the Databricks workspace to Datadog
 
 1. In Datadog, open the Databricks integration tile.
 1. On the **Configure** tab, click **Add Databricks Workspace**.
