@@ -13,6 +13,8 @@ further_reading:
 
 Create the metrics you want to measure in your experiments. You can use data from Real User Monitoring (RUM), Product Analytics, or your own warehouse to create Datadog Experiments metrics.
 
+<div class="alert alert-info">If your organization uses custom roles, you must have the appropriate <a href="https://docs.datadoghq.com/account_management/rbac/permissions/#product-analytics">Product Analytics permissions</a> to create experiment metrics.</div>
+
 ## Create a metric
 
 Select your data source:
