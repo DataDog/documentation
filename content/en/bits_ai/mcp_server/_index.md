@@ -37,11 +37,19 @@ This demo shows the Datadog MCP Server being used in Cursor and Claude Code (unm
 ## Disclaimers
 
 - The Datadog MCP Server is HIPAA-eligible. You are responsible for ensuring that the AI tools you connect to the Datadog MCP Server meet your compliance requirements, such as HIPAA.
-- The Datadog MCP Server has fair-use rate limits in place. For questions or requests, [contact Datadog support][37].
 - The Datadog MCP Server is not GovCloud compatible.
 - Datadog collects certain information about your usage of the Remote Datadog MCP Server, including how you interact with it, whether errors occurred while using it, what caused those errors, and user identifiers in accordance with the <a href="https://www.datadoghq.com/legal/privacy/" target="_blank">Datadog Privacy Policy</a> and Datadog's <a href="https://www.datadoghq.com/legal/eula/" target="_blank">EULA</a>. This data is used to help improve the server's performance and features, including transitions to and from the server and the applicable Datadog login page for accessing the Services, and context (for example, user prompts) leading to the use of MCP tools. The data is stored for 120 days.
 
-## Monitoring the Datadog MCP Server usage
+## Fair-Use Rate Limits
+
+The MCP Server comes with the following fair-use limits:
+- 50 requests/10 seconds burst limits
+- 5000 daily tool calls
+- 50,000 monthly tool calls. 
+
+These limits are **subject to change** and can be adjusted if your use-case requires more. Please contact [Datadog support][37] for requests or questions. 
+
+## Monitoring the Datadog MCP Server Tool Calls
 
 You can track Datadog MCP Server usage for your organization using Datadog metrics and Audit Trail.
 
