@@ -33,9 +33,10 @@ Datadog Experiments connects to Redshift through [Datadog's Amazon Web Services 
 1. Follow the **CloudFormation** setup flow to create an IAM role that allows Datadog to make API calls to your AWS account:
    1. Select your **AWS Region**.
    1. Choose your **Datadog API Key**.
-   1. Toggle off the **Deploy log forwarder** and **Disable All** Log Resources (these are not needed for experiment analysis).
+   1. Create a **Datadog Application Key**.
+   1. Toggle off **Deploy log forwarder** and **Disable All** Log Resources (these are not needed for experiment analysis).
    1. Select **No** for **Detect security issues**.
-   1. Click **Open in AWS Console** to launch your CloudFormation template. See the [AWS integration documentation][1] for instructions navigating the AWS console.
+   1. Click **Open in AWS Console** to launch your CloudFormation template. See the [Getting Started with AWS documentation][6] for instructions navigating the AWS console.
 
 You can follow your configuration's completion steps under **Deployment Status** on the integration setup page in Datadog.
 
@@ -60,7 +61,7 @@ CREATE USER datadog_experiments_user PASSWORD 'Your_Strong_Password';
 
 ### Create an output schema
 
-Run the following commands to create a schema where Datadog stores experiment results and intermediate tables. Replace `datadog_experiments_output` with your schema name and `datadog_experiments_user` with your service user value.
+Run the following commands to create a schema where Datadog can store experiment results and intermediate tables. Replace `datadog_experiments_output` with your schema name and `datadog_experiments_user` with your service user value.
 
 ```sql
 CREATE SCHEMA IF NOT EXISTS datadog_experiments_output;
@@ -69,7 +70,7 @@ GRANT ALL ON SCHEMA datadog_experiments_output TO datadog_experiments_user;
 
 ### Grant the service user read access to the schema
 
-Grant the service user read access to the tables or schemas containing your experiment metrics so Datadog can calculate results. Run the `GRANT USAGE` command, then run the `GRANT SELECT` option that match your access needs. Replace `datadog_experiments_user`, `<schema>`, and `<table>` with the appropriate values.
+Grant the service user read access to the tables or schemas containing your experiment metrics so Datadog can calculate results. Run the `GRANT USAGE` command, then run the `GRANT SELECT` option that matches your access needs. Replace `datadog_experiments_user`, `<schema>`, and `<table>` with the appropriate values.
 
 ```sql
 GRANT USAGE ON SCHEMA <schema> TO datadog_experiments_user;
@@ -89,7 +90,7 @@ Create an S3 bucket for importing exposure events into your warehouse. The bucke
 
 ### Grant additional IAM permissions
 
-In addition to those listed in the [AWS integration documentation][3], Datadog Experiments requires the following permissions to write data to your warehouse. Replace the placeholder fields with values from your environment:
+In addition to the permissions listed in the [AWS integration documentation][3], Datadog Experiments requires the following permissions to write data to your warehouse. Replace the placeholder fields with values from your environment.
 
 
 | Field | Example |
@@ -168,7 +169,7 @@ After you set up your AWS integration and Redshift cluster, configure the experi
    - **Cluster endpoint**: The full endpoint URL for your cluster.
    - **Port**: The port your cluster is listening on (default: `5439`).
 1. Under **Database and Storage**, enter:
-   - **Database**: The database containing your source tables.
+   - **Database**: The name of the database containing your source tables.
    - **Database user**: The service user you created in [Step 1](#create-a-datadog-service-user-in-your-redshift-cluster) (for example, `datadog_experiments_user`).
    - **Schema**: The schema you created in [Step 1](#create-an-output-schema) for Datadog Experiments to write to (for example, `datadog_experiments_output`).
    - **Temp S3 bucket**: The S3 bucket you created in [Step 2](#create-an-s3-bucket) (for example, `datadog-experimentation-[aws_account_id]`).
@@ -182,9 +183,10 @@ After you save your warehouse connection, create experiment metrics using your R
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/getting_started/integrations/aws/
+[1]: https://docs.datadoghq.com/integrations/amazon-web-services/
 [2]: https://app.datadoghq.com/product-analytics
 [3]: https://docs.datadoghq.com/getting_started/integrations/aws/#prerequisites
 [4]: /experiments/defining_metrics
 [5]: https://app.datadoghq.com/integrations/
+[6]: https://docs.datadoghq.com/getting_started/integrations/aws/
 
