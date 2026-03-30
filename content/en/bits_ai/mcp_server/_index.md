@@ -301,6 +301,7 @@ Validates a monitor definition for correctness before creating or updating it.
 
 ### `get_datadog_monitor_templates`
 *Toolset: **alerting***\
+*Permissions Required: `Monitors Read`*\
 Retrieves available monitor templates to help you create monitors.
 
 - Show me the available monitor templates.
@@ -308,6 +309,7 @@ Retrieves available monitor templates to help you create monitors.
 
 ### `search_datadog_monitor_groups`
 *Toolset: **alerting***\
+*Permissions Required: `Monitors Read`*\
 Searches monitor groups by name or criteria.
 
 - Show me all monitor groups in an alerting state.
@@ -386,7 +388,6 @@ Retrieves detailed information about a specific Watchdog story by its ID.
 
 ### `apm_search_change_stories`
 *Toolset: **apm***\
-*Permissions Required: `APM Read`*\
 Searches for change stories (deployments, feature flags, and infrastructure changes) for a service within a time range.
 
 - Show me recent deployments and changes for the payments service.
@@ -433,6 +434,7 @@ Provides guidance for investigating APM service issues like latency, errors, and
 
 ### `search_datadog_cases`
 *Toolset: **cases***\
+*Permissions Required: `Cases Read`*\
 Searches [Case Management][38] cases with filters including status, priority, project, and assignee. Supports time range filtering and pagination.
 
 - Show me all open cases assigned to me.
@@ -441,6 +443,7 @@ Searches [Case Management][38] cases with filters including status, priority, pr
 
 ### `get_datadog_case`
 *Toolset: **cases***\
+*Permissions Required: `Cases Read`*\
 Retrieves detailed information about a specific case by ID or key, including title, status, priority, assignee, and timestamps. Optionally includes timeline activity (comments and status changes) and custom attributes.
 
 - What's the latest update on CASE-1234? Show me the full timeline.
@@ -449,6 +452,7 @@ Retrieves detailed information about a specific case by ID or key, including tit
 
 ### `create_datadog_case`
 *Toolset: **cases***\
+*Permissions Required: `Cases Write`*\
 Creates a new [Case Management][38] case with a title, project, and optional fields like description, priority, and assignee.
 
 - I'm seeing a latency spike on the checkout service. Create a P2 case to track the investigation.
@@ -456,6 +460,7 @@ Creates a new [Case Management][38] case with a title, project, and optional fie
 
 ### `update_datadog_case`
 *Toolset: **cases***\
+*Permissions Required: `Cases Write`*\
 Updates an existing case's fields such as status, priority, title, description, assignee, due date, and custom attributes. Only the fields you provide are updated.
 
 - This issue is now customer-impacting. Escalate CASE-1234 to P1.
@@ -464,6 +469,7 @@ Updates an existing case's fields such as status, priority, title, description, 
 
 ### `add_comment_to_datadog_case`
 *Toolset: **cases***\
+*Permissions Required: `Cases Write`*\
 Adds a comment to a case's timeline. Comments support markdown formatting.
 
 - Add a note to the case summarizing what we found in the logs and traces.
@@ -471,13 +477,15 @@ Adds a comment to a case's timeline. Comments support markdown formatting.
 - Document the root cause analysis findings on this case.
 
 ### `link_jira_issue_to_datadog_case`
-*Toolset: **cases***
+*Toolset: **cases***\
+*Permissions Required: `Cases Write`*
 
 - Link the Jira ticket for the infrastructure migration to this case so we can track both together.
 - Connect PROJ-456 to the Datadog case so the engineering team has visibility.
 
 ### `list_datadog_case_projects`
 *Toolset: **cases***\
+*Permissions Required: `Cases Read`*\
 Lists available [Case Management][38] projects with optional filtering by name or key.
 
 - What projects are available in Case Management?
@@ -485,12 +493,14 @@ Lists available [Case Management][38] projects with optional filtering by name o
 
 ### `get_datadog_case_project`
 *Toolset: **cases***\
+*Permissions Required: `Cases Read`*\
 Retrieves details for a specific case project by ID.
 
 - What project is this case part of?
 
 ### `search_datadog_users`
 *Toolset: **cases***\
+*Permissions Required: `User Access Read`*\
 Searches for Datadog users by email, name, or handle. Useful for finding the right person to assign a case to.
 
 - Find the Datadog user account for jane.doe@example.com.
@@ -524,7 +534,7 @@ Searches Error Tracking Issues across data sources (RUM, Logs, Traces).
 
 ### `get_datadog_error_tracking_issue`
 *Toolset: **error-tracking***\
-*Permissions Required: `Error Tracking Read`, `Cases Read`*\
+*Permissions Required: `Cases Read` and `Error Tracking Read`*\
 Retrieves detailed information about a specific Error Tracking Issue from Datadog.
 
 - Help me solve Error Tracking Issue `550e8400-e29b-41d4-a716-446655440000`.
@@ -533,7 +543,7 @@ Retrieves detailed information about a specific Error Tracking Issue from Datado
 
 ### `list_datadog_feature_flags`
 *Toolset: **feature-flags***\
-*Permissions Required: `Feature Flag Read`*\
+*Permissions Required: `Feature Flag Environment Read` and `Feature Flag Read`*\
 Lists feature flags with pagination support.
 
 - Show me all feature flags in my organization.
@@ -541,7 +551,7 @@ Lists feature flags with pagination support.
 
 ### `get_datadog_feature_flag`
 *Toolset: **feature-flags***\
-*Permissions Required: `Feature Flag Read`*\
+*Permissions Required: `Feature Flag Environment Read` and `Feature Flag Read`*\
 Retrieves details about a specific feature flag.
 
 - Get details for the `dark-mode-enabled` feature flag.
@@ -549,7 +559,7 @@ Retrieves details about a specific feature flag.
 
 ### `create_datadog_feature_flag`
 *Toolset: **feature-flags***\
-*Permissions Required: `Feature Flag Write`*\
+*Permissions Required: `Feature Flag Environment Read` and `Feature Flag Write`*\
 Creates a new feature flag.
 
 - Create a feature flag called `enable-new-dashboard` for gradual rollout.
@@ -565,14 +575,14 @@ Lists environments configured for feature flags.
 
 ### `list_datadog_feature_flag_allocations`
 *Toolset: **feature-flags***\
-*Permissions Required: `Feature Flag Read`*\
+*Permissions Required: `Feature Flag Environment Read` and `Feature Flag Read`*\
 Lists allocations for a feature flag in a specific environment.
 
 - Show me the allocation rules for flag `new-checkout-flow` in production.
 
 ### `update_datadog_feature_flag_environment`
 *Toolset: **feature-flags***\
-*Permissions Required: `Feature Flag Write`*\
+*Permissions Required: `Feature Flag Environment Read` and `Feature Flag Write`*\
 Updates a feature flag configuration in a specific environment.
 
 - Enable the `dark-mode` flag in the staging environment.
@@ -580,7 +590,7 @@ Updates a feature flag configuration in a specific environment.
 
 ### `check_datadog_flag_implementation`
 *Toolset: **feature-flags***\
-*Permissions Required: `Feature Flag Read`*\
+*Permissions Required: `Feature Flag Environment Read` and `Feature Flag Read`*\
 Checks if a feature flag is implemented in code.
 
 - Verify that the `enable-new-dashboard` flag is implemented in my codebase.
@@ -594,6 +604,7 @@ Syncs feature flag allocations for a specific environment.
 
 ### `analyze_cloud_network_monitoring`
 *Toolset: **networks***\
+*Permissions Required: `Network Connections Read`*\
 Investigates network-level issues using [Cloud Network Monitoring][31] data, analyzing network flow data to detect anomalies like elevated retransmission rates.
 
 - Analyze network traffic between my web servers and the database cluster.
@@ -602,6 +613,7 @@ Investigates network-level issues using [Cloud Network Monitoring][31] data, ana
 
 ### `search_ndm_devices`
 *Toolset: **networks***\
+*Permissions Required: `NDM Read`*\
 Searches network devices (routers, switches, firewalls) monitored by Datadog [Network Device Monitoring][32].
 
 - Show me all network devices in the `us-east-1` datacenter.
@@ -610,6 +622,7 @@ Searches network devices (routers, switches, firewalls) monitored by Datadog [Ne
 
 ### `get_ndm_device`
 *Toolset: **networks***\
+*Permissions Required: `NDM Read`*\
 Retrieves detailed information about a specific network device by its device ID.
 
 - Get details for network device `device:abc123`.
@@ -617,6 +630,7 @@ Retrieves detailed information about a specific network device by its device ID.
 
 ### `search_ndm_interfaces`
 *Toolset: **networks***\
+*Permissions Required: `NDM Read`*\
 Retrieves all network interfaces for a specific device.
 
 - Show me all interfaces on device `device:abc123`.
@@ -624,14 +638,14 @@ Retrieves all network interfaces for a specific device.
 
 ### `browser_onboarding`
 *Toolset: **onboarding***\
-*Permissions Required: `RUM Apps Write`*\
+*Permissions Required: `RUM Apps Read`*\
 Guides you through onboarding Browser RUM to Datadog.
 
 - Help me set up Browser RUM monitoring for my web application.
 
 ### `devices_onboarding`
 *Toolset: **onboarding***\
-*Permissions Required: `RUM Apps Write`*\
+*Permissions Required: `RUM Apps Read`*\
 Guides you through onboarding devices to Datadog monitoring.
 
 - Help me set up device monitoring in Datadog.
@@ -678,6 +692,7 @@ Scans code for hardcoded secrets and credentials, detecting AWS keys, API keys, 
 
 ### `search_datadog_security_signals`
 *Toolset: **security***\
+*Permissions Required: `Security Signals Read`*\
 Searches and retrieves security signals from Datadog Security Monitoring, including Cloud SIEM signals, App & API Protection signals, and Workload Protection signals.
 
 - Show me security signals from the last 24 hours.
@@ -686,6 +701,7 @@ Searches and retrieves security signals from Datadog Security Monitoring, includ
 
 ### `security_findings_schema`
 *Toolset: **security***\
+*Permissions Required: `Security Monitoring Findings Read`*\
 Returns the schema (available fields and their types) for security findings. Call this first before using `analyze_security_findings` to discover queryable fields. Supports filtering by finding type and controlling response size.
 
 - What fields are available for security findings?
@@ -694,6 +710,7 @@ Returns the schema (available fields and their types) for security findings. Cal
 
 ### `analyze_security_findings`
 *Toolset: **security***\
+*Permissions Required: `Security Monitoring Findings Read` and `Timeseries`*\
 Primary tool for analyzing security findings using SQL queries. Queries live data from the last 24 hours with flexible SQL aggregations, filtering, and grouping. Call `security_findings_schema` first to discover available fields, then use this tool to query.
 
 - Show me the top 10 rules with the most critical findings.
@@ -702,6 +719,7 @@ Primary tool for analyzing security findings using SQL queries. Queries live dat
 
 ### `search_security_findings`
 *Toolset: **security***\
+*Permissions Required: `Security Monitoring Findings Read`*\
 Fallback tool for retrieving full security finding details. Prefer `analyze_security_findings` for most analysis tasks. Use this tool only when you need complete finding objects or when SQL queries are insufficient.
 
 - Get full details for critical findings in my AWS environment.
@@ -746,6 +764,7 @@ Aggregates Datadog Test Optimization events to quantify reliability and performa
 
 ### `search_datadog_test_events`
 *Toolset: **software-delivery***\
+*Permissions Required: `Test Optimization Read`*\
 Searches [Test Optimization][24] test events with filters and returns details on them.
 
 - Show me failed tests on branch `main` from the last 24 hours.
@@ -755,6 +774,7 @@ Searches [Test Optimization][24] test events with filters and returns details on
 
 ### `get_datadog_code_coverage_branch_summary`
 *Toolset: **software-delivery***\
+*Permissions Required: `Code Coverage read`*\
 Fetches aggregated code coverage summary metrics for a repository branch, including total coverage, patch coverage, and service/codeowner breakdowns.
 
 - What's the code coverage on the `main` branch for `github.com/my-org/my-repo`?
@@ -762,6 +782,7 @@ Fetches aggregated code coverage summary metrics for a repository branch, includ
 
 ### `get_datadog_code_coverage_commit_summary`
 *Toolset: **software-delivery***\
+*Permissions Required: `Code Coverage read`*\
 Fetches aggregated code coverage summary metrics for a repository commit, including total coverage, patch coverage, and service/codeowner breakdowns.
 
 - Show me the code coverage for commit `abc123abc123abc123abc123abc123abc123abcd` in `github.com/my-org/my-repo`.
@@ -778,7 +799,7 @@ Searches Datadog Synthetic tests.
 
 ### `edit_synthetics_tests`
 *Toolset: **synthetics***\
-*Permissions Required: `Synthetics Global Variable Read`, `Synthetics Write`*\
+*Permissions Required: `Synthetics Global Variable Read` and `Synthetics Read` and `Synthetics Write`*\
 Edits Datadog Synthetic HTTP API tests.
 
 - Improve the assertions of the Synthetic test defined on my endpoint `/v1/my/tested/endpoint`.
@@ -787,7 +808,7 @@ Edits Datadog Synthetic HTTP API tests.
 
 ### `synthetics_test_wizard`
 *Toolset: **synthetics***\
-*Permissions Required: `Synthetics Global Variable Read`, `Synthetics Write`*\
+*Permissions Required: `Synthetics Global Variable Read` and `Synthetics Read` and `Synthetics Write`*\
 Preview and create Datadog Synthetics HTTP API Tests.
 
 - Create Synthetics tests on every endpoint defined in this code file.
@@ -796,6 +817,7 @@ Preview and create Datadog Synthetics HTTP API Tests.
 
 ### `list_datadog_workflows`
 *Toolset: **workflows***\
+*Permissions Required: `Workflows Read`*\
 Lists and searches [Workflow Automation][39] workflows. Supports filtering by name, tags, owner, handle, and trigger type (such as `monitor`, `schedule`, `api`, or `incident`). Results can be sorted by fields like `name` or `updatedAt`.
 
 - Show me all published workflows tagged with `team:platform`.
@@ -804,6 +826,7 @@ Lists and searches [Workflow Automation][39] workflows. Supports filtering by na
 
 ### `get_datadog_workflow`
 *Toolset: **workflows***\
+*Permissions Required: `Workflows Read`*\
 Retrieves detailed information about a specific workflow, including its triggers, steps, connections, and input schema.
 
 - Get the full details for workflow `00000000-0000-0000-0000-000000000000`.
@@ -812,6 +835,7 @@ Retrieves detailed information about a specific workflow, including its triggers
 
 ### `execute_datadog_workflow`
 *Toolset: **workflows***\
+*Permissions Required: `Workflows Run`*\
 Executes a published workflow that has an agent trigger, with optional input parameters matching the workflow's input schema.
 
 - Run the incident escalation workflow for service `checkout-api` with severity `high`.
@@ -822,6 +846,7 @@ Executes a published workflow that has an agent trigger, with optional input par
 
 ### `get_datadog_workflow_instance`
 *Toolset: **workflows***\
+*Permissions Required: `Workflows Read`*\
 Retrieves the status and details of a workflow execution instance, including step results and outputs.
 
 - What's the status of the workflow execution I triggered?
@@ -830,6 +855,7 @@ Retrieves the status and details of a workflow execution instance, including ste
 
 ### `update_datadog_workflow_with_agent_trigger`
 *Toolset: **workflows***\
+*Permissions Required: `Workflows Write`*\
 Adds an agent trigger to a workflow and publishes it, enabling the workflow to be executed by AI agents.
 
 - Add an agent trigger to the deployment rollback workflow so I can run it from here.
