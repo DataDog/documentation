@@ -52,7 +52,6 @@ Create a Datadog service user and a dedicated schema for Datadog to store experi
 
 <div class="alert alert-info">You must have <code>superuser</code> or <code>admin</code> privileges in the Redshift database to create the Datadog service user.</div>
 
-
 ### Create a Datadog service user in your Redshift database
 
 Run the following command to create a service user with a strong password that Datadog can use to execute queries. Replace `datadog_experiments_user` with your user value and `Your_Strong_Password` with your password.
@@ -153,7 +152,6 @@ Use the following table to gather the values for your environment, then add the 
 }
 ```
 
-
 ## Step 3: Configure experiment settings
 
 <div class="alert alert-info">Datadog supports one warehouse connection per organization. Connecting Redshift replaces any existing warehouse connection (for example, Snowflake).<br><br>Configuring experiment settings requires the <strong>Product Analytics Settings Write</strong> permission. If your organization uses custom roles, verify that your role includes this permission.</div>
@@ -191,4 +189,3 @@ After you save your warehouse connection, create experiment metrics using your R
 [4]: /experiments/defining_metrics
 [5]: https://app.datadoghq.com/integrations/
 [6]: https://docs.datadoghq.com/getting_started/integrations/aws/
-
