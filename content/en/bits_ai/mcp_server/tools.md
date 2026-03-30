@@ -17,6 +17,8 @@ This page lists the tools available in the Datadog MCP Server and provides examp
 
 <div class="alert alert-info">Datadog MCP Server tools are under significant development and are subject to change. Use <a href="https://docs.google.com/forms/d/e/1FAIpQLSeorvIrML3F4v74Zm5IIaQ_DyCMGqquIp7hXcycnCafx4htcg/viewform">this feedback form</a> to share any feedback, use cases, or issues encountered with your prompts and queries.</div>
 
+## Core tools
+
 ### `search_datadog_events`
 *Toolset: **core***\
 Searches events like monitor alerts, deployment notifications, infrastructure changes, security findings, and service status changes.
@@ -168,30 +170,7 @@ Search Datadog RUM events using advanced query syntax.
 - Find pages that are loading slowly (more than 3 seconds).
 - Show recent user interactions on product detail pages.
 
-### `get_datadog_dashboard`
-*Toolset: **dashboards***\
-Retrieves a Datadog dashboard by ID, returning its title, description, tags, and widgets. Use `search_datadog_dashboards` first to find dashboard IDs.
-
-- Get the full details of dashboard `ps7-mn3-kwf`.
-- Show me the widgets and layout of the infrastructure overview dashboard.
-- Retrieve the template variables configured on this dashboard.
-
-### `upsert_datadog_dashboard`
-*Toolset: **dashboards***\
-Creates or updates a Datadog [dashboard][41]. To update an existing dashboard, provide the dashboard ID; omit it to create a new one.
-
-- Create a dashboard showing CPU and memory usage across all hosts.
-- Add a timeseries widget for error rate to dashboard `abc-123-def`.
-- Update the title and description of my service overview dashboard.
-
-**Note**: Only grid-layout dashboards support widget updates. Free-form dashboards are not supported.
-
-### `delete_datadog_dashboard`
-*Toolset: **dashboards***\
-Permanently deletes a Datadog dashboard by ID. This action cannot be undone. Use `search_datadog_dashboards` first to find dashboard IDs.
-
-- Delete dashboard `ps7-mn3-kwf`.
-- Remove the old staging environment dashboard.
+## Alerting
 
 ### `validate_datadog_monitor`
 *Toolset: **alerting***\
@@ -213,6 +192,8 @@ Searches monitor groups by name or criteria.
 
 - Show me all monitor groups in an alerting state.
 - Find monitor groups related to the checkout service.
+
+## APM
 
 ### `apm_search_spans`
 *Toolset: **apm***\
@@ -317,6 +298,8 @@ Provides guidance for investigating APM service issues like latency, errors, and
 - How should I investigate a latency increase in my API service?
 - Guide me through debugging an error spike in production.
 
+## Cases
+
 ### `search_datadog_cases`
 *Toolset: **cases***\
 Searches [Case Management][38] cases with filters including status, priority, project, and assignee. Supports time range filtering and pagination.
@@ -381,6 +364,35 @@ Searches for Datadog users by email, name, or handle. Useful for finding the rig
 
 - Find the Datadog user account for jane.doe@example.com.
 
+## Dashboards
+
+### `get_datadog_dashboard`
+*Toolset: **dashboards***\
+Retrieves a Datadog dashboard by ID, returning its title, description, tags, and widgets. Use `search_datadog_dashboards` first to find dashboard IDs.
+
+- Get the full details of dashboard `ps7-mn3-kwf`.
+- Show me the widgets and layout of the infrastructure overview dashboard.
+- Retrieve the template variables configured on this dashboard.
+
+### `upsert_datadog_dashboard`
+*Toolset: **dashboards***\
+Creates or updates a Datadog [dashboard][41]. To update an existing dashboard, provide the dashboard ID; omit it to create a new one.
+
+- Create a dashboard showing CPU and memory usage across all hosts.
+- Add a timeseries widget for error rate to dashboard `abc-123-def`.
+- Update the title and description of my service overview dashboard.
+
+**Note**: Only grid-layout dashboards support widget updates. Free-form dashboards are not supported.
+
+### `delete_datadog_dashboard`
+*Toolset: **dashboards***\
+Permanently deletes a Datadog dashboard by ID. This action cannot be undone. Use `search_datadog_dashboards` first to find dashboard IDs.
+
+- Delete dashboard `ps7-mn3-kwf`.
+- Remove the old staging environment dashboard.
+
+## Database Monitoring
+
 ### `search_datadog_dbm_plans`
 *Toolset: **dbm***\
 Searches [Database Monitoring][26] query execution plans, which show how the database engine executes queries, including index usage, join strategies, and cost estimates. Use this to analyze query performance and identify optimization opportunities.
@@ -397,6 +409,8 @@ Searches [Database Monitoring][26] query samples, which represent individual que
 - Find slow queries on `host:db-prod-1` filtered by `@db.user:app_user`.
 - Get recent query samples for `@db.query_signature:abc123def` and analyze performance patterns.
 
+## Error Tracking
+
 ### `search_datadog_error_tracking_issues`
 *Toolset: **error-tracking***\
 Searches Error Tracking Issues across data sources (RUM, Logs, Traces).
@@ -412,6 +426,8 @@ Retrieves detailed information about a specific Error Tracking Issue from Datado
 - Help me solve Error Tracking Issue `550e8400-e29b-41d4-a716-446655440000`.
 - What is the impact of Error Tracking Issue `a3c8f5d2-1b4e-4c9a-8f7d-2e6b9a1c3d5f`?
 - Create a test case to reproduce Error Tracking Issue `7b2d4f6e-9c1a-4e3b-8d5f-1a7c9e2b4d6f`.
+
+## Feature Flags
 
 ### `list_datadog_feature_flags`
 *Toolset: **feature-flags***\
@@ -466,6 +482,8 @@ Syncs feature flag allocations for a specific environment.
 
 - Sync the allocations for flag `new-checkout-flow` in production.
 
+## Networks
+
 ### `analyze_cloud_network_monitoring`
 *Toolset: **networks***\
 Investigates network-level issues using [Cloud Network Monitoring][31] data, analyzing network flow data to detect anomalies like elevated retransmission rates.
@@ -495,6 +513,8 @@ Retrieves all network interfaces for a specific device.
 
 - Show me all interfaces on device `device:abc123`.
 - List the interface statuses for my core router.
+
+## Onboarding
 
 ### `browser_onboarding`
 *Toolset: **onboarding***\
@@ -538,6 +558,8 @@ Guides you through uploading source maps for RUM error mapping.
 
 - Help me upload source maps so my RUM errors show original source code.
 
+## Security
+
 ### `datadog_secrets_scan`
 *Toolset: **security***\
 Scans code for hardcoded secrets and credentials, detecting AWS keys, API keys, passwords, tokens, private keys, and database credentials.
@@ -576,6 +598,8 @@ Fallback tool for retrieving full security finding details. Prefer `analyze_secu
 - Get full details for critical findings in my AWS environment.
 - Retrieve complete finding objects for a specific rule.
 - List all open identity risk findings with full metadata.
+
+## Software Delivery
 
 ### `search_datadog_ci_pipeline_events`
 *Toolset: **software-delivery***\
@@ -632,6 +656,8 @@ Fetches aggregated code coverage summary metrics for a repository commit, includ
 - Show me the code coverage for commit `abc123abc123abc123abc123abc123abc123abcd` in `github.com/my-org/my-repo`.
 - What's the patch coverage for the latest commit on my branch?
 
+## Synthetics
+
 ### `get_synthetics_tests`
 *Toolset: **synthetics***\
 Searches Datadog Synthetic tests.
@@ -655,6 +681,8 @@ Preview and create Datadog Synthetics HTTP API Tests.
 - Create Synthetics tests on every endpoint defined in this code file.
 - Create a Synthetics test on `/path/to/endpoint`.
 - Create a Synthetics test that checks if my domain `mycompany.com` stays up.
+
+## Workflows
 
 ### `list_datadog_workflows`
 *Toolset: **workflows***\
