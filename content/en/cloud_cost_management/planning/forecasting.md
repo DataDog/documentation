@@ -5,7 +5,7 @@ further_reading:
 - link: "/cloud_cost_management/planning/budgets"
   tag: "Documentation"
   text: "Learn about Cloud Cost Management Budgets"
-- link: "/cloud_cost_management/reports/"
+- link: "/cloud_cost_management/reporting/"
   tag: "Documentation"
   text: "Learn about Cloud Cost Management Reports"
 - link: "/cloud_cost_management/"
