@@ -4134,6 +4134,30 @@
     "request_description": "New Network Path test details to be saved.",
     "request_schema_description": "Network Path test request."
   },
+  "GetTestFileDownloadUrl": {
+    "description": "Get a presigned URL to download a file attached to a Synthetic test.\nThe returned URL is temporary and expires after a short period.",
+    "summary": "Get a presigned URL for downloading a test file",
+    "request_description": "",
+    "request_schema_description": "Request body for getting a presigned download URL for a test file."
+  },
+  "GetTestFileMultipartPresignedUrls": {
+    "description": "Get presigned URLs for uploading a file to a Synthetic test using multipart upload.\nReturns the presigned URLs for each part along with the bucket key that references the file.",
+    "summary": "Get presigned URLs for uploading a test file",
+    "request_description": "",
+    "request_schema_description": "Request body for getting presigned URLs for a multipart file upload."
+  },
+  "AbortTestFileMultipartUpload": {
+    "description": "Abort an in-progress multipart file upload for a Synthetic test. This cancels the upload\nand releases any storage used by already-uploaded parts.",
+    "summary": "Abort a multipart upload of a test file",
+    "request_description": "",
+    "request_schema_description": "Request body for aborting a multipart file upload."
+  },
+  "CompleteTestFileMultipartUpload": {
+    "description": "Complete a multipart file upload for a Synthetic test. Call this endpoint after all parts\nhave been uploaded using the presigned URLs obtained from the multipart presigned URLs endpoint.",
+    "summary": "Complete a multipart upload of a test file",
+    "request_description": "",
+    "request_schema_description": "Request body for completing a multipart file upload."
+  },
   "GetTestParentSuites": {
     "description": "Get the list of parent suites and their status for a given Synthetic test.",
     "summary": "Get parent suites for a test"

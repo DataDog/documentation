@@ -65762,6 +65762,149 @@ components:
       type: string
       x-enum-varnames:
         - SUITES
+    SyntheticsTestFileAbortMultipartUploadRequest:
+      description: Request body for aborting a multipart file upload.
+      properties:
+        key:
+          description: The full storage path of the file whose upload should be aborted.
+          example: "org-123/api-upload-file/abc-def-123/2024-01-01T00:00:00_uuid.json"
+          type: string
+        uploadId:
+          description: The upload ID of the multipart upload to abort.
+          example: "upload-id-abc123"
+          type: string
+      required:
+        - uploadId
+        - key
+      type: object
+    SyntheticsTestFileCompleteMultipartUploadPart:
+      description: A completed part of a multipart upload.
+      properties:
+        ETag:
+          description: The ETag returned by the storage provider after uploading the part.
+          example: '"d41d8cd98f00b204e9800998ecf8427e"'
+          type: string
+        PartNumber:
+          description: The 1-indexed part number for the multipart upload.
+          example: 1
+          format: int64
+          type: integer
+      required:
+        - ETag
+        - PartNumber
+      type: object
+    SyntheticsTestFileCompleteMultipartUploadRequest:
+      description: Request body for completing a multipart file upload.
+      properties:
+        key:
+          description: The full storage path for the uploaded file.
+          example: "org-123/api-upload-file/abc-def-123/2024-01-01T00:00:00_uuid.json"
+          type: string
+        parts:
+          description: Array of completed parts with their ETags.
+          items:
+            $ref: "#/components/schemas/SyntheticsTestFileCompleteMultipartUploadPart"
+          type: array
+        uploadId:
+          description: The upload ID returned when the multipart upload was initiated.
+          example: "upload-id-abc123"
+          type: string
+      required:
+        - uploadId
+        - key
+        - parts
+      type: object
+    SyntheticsTestFileDownloadRequest:
+      description: Request body for getting a presigned download URL for a test file.
+      properties:
+        bucketKey:
+          description: The bucket key referencing the file to download.
+          example: "api-upload-file/abc-def-123/2024-01-01T00:00:00_uuid.json"
+          minLength: 1
+          type: string
+      required:
+        - bucketKey
+      type: object
+    SyntheticsTestFileDownloadResponse:
+      description: Response containing a presigned URL for downloading a test file.
+      properties:
+        url:
+          description: A presigned URL to download the file. The URL expires after a short period.
+          example: "https://storage.example.com/presigned-download-url"
+          type: string
+      type: object
+    SyntheticsTestFileMultipartPresignedUrlsParams:
+      description: Presigned URL parameters returned for a multipart upload.
+      properties:
+        key:
+          description: The full storage path for the file being uploaded.
+          example: "org-123/api-upload-file/abc-def-123/2024-01-01T00:00:00_uuid.json"
+          type: string
+        upload_id:
+          description: The upload ID assigned by the storage provider for this multipart upload.
+          example: "upload-id-abc123"
+          type: string
+        urls:
+          additionalProperties:
+            type: string
+          description: A map of part numbers to presigned upload URLs.
+          example:
+            "1": "https://storage.example.com/presigned-upload-url-part-1"
+            "2": "https://storage.example.com/presigned-upload-url-part-2"
+          type: object
+      type: object
+    SyntheticsTestFileMultipartPresignedUrlsPart:
+      description: A part descriptor for initiating a multipart upload.
+      properties:
+        md5:
+          description: Base64-encoded MD5 digest of the part content.
+          example: "1B2M2Y8AsgTpgAmY7PhCfg=="
+          maxLength: 24
+          minLength: 22
+          type: string
+        partNumber:
+          description: The 1-indexed part number for the multipart upload.
+          example: 1
+          format: int64
+          type: integer
+      required:
+        - md5
+        - partNumber
+      type: object
+    SyntheticsTestFileMultipartPresignedUrlsRequest:
+      description: Request body for getting presigned URLs for a multipart file upload.
+      properties:
+        bucketKeyPrefix:
+          $ref: "#/components/schemas/SyntheticsTestFileMultipartPresignedUrlsRequestBucketKeyPrefix"
+        parts:
+          description: Array of part descriptors for the multipart upload.
+          items:
+            $ref: "#/components/schemas/SyntheticsTestFileMultipartPresignedUrlsPart"
+          type: array
+      required:
+        - bucketKeyPrefix
+        - parts
+      type: object
+    SyntheticsTestFileMultipartPresignedUrlsRequestBucketKeyPrefix:
+      description: The bucket key prefix indicating the type of file upload.
+      enum:
+        - api-upload-file
+        - browser-upload-file-step
+      example: "api-upload-file"
+      type: string
+      x-enum-varnames:
+        - API_UPLOAD_FILE
+        - BROWSER_UPLOAD_FILE_STEP
+    SyntheticsTestFileMultipartPresignedUrlsResponse:
+      description: Response containing presigned URLs for multipart file upload and the bucket key.
+      properties:
+        bucketKey:
+          description: The bucket key that references the uploaded file after completion.
+          example: "api-upload-file/abc-def-123/2024-01-01T00:00:00_uuid.json"
+          type: string
+        multipart_presigned_urls_params:
+          $ref: "#/components/schemas/SyntheticsTestFileMultipartPresignedUrlsParams"
+      type: object
     SyntheticsTestOptions:
       description: Object describing the extra options for a Synthetic test.
       properties:
@@ -108849,6 +108992,241 @@ paths:
       tags:
         - Synthetics
       x-menu-order: 49
+      x-permission:
+        operator: OR
+        permissions:
+          - synthetics_write
+          - synthetics_create_edit_trigger
+  /api/v2/synthetics/tests/{public_id}/files/download:
+    post:
+      description: |-
+        Get a presigned URL to download a file attached to a Synthetic test.
+        The returned URL is temporary and expires after a short period.
+      operationId: GetTestFileDownloadUrl
+      parameters:
+        - description: The public ID of the Synthetic test.
+          in: path
+          name: public_id
+          required: true
+          schema:
+            example: abc-def-123
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SyntheticsTestFileDownloadRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SyntheticsTestFileDownloadResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: API error response.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Forbidden.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: API error response.
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - synthetics_read
+      summary: Get a presigned URL for downloading a test file
+      tags:
+        - Synthetics
+      x-menu-order: 59
+      x-permission:
+        operator: OR
+        permissions:
+          - synthetics_read
+  /api/v2/synthetics/tests/{public_id}/files/multipart-presigned-urls:
+    post:
+      description: |-
+        Get presigned URLs for uploading a file to a Synthetic test using multipart upload.
+        Returns the presigned URLs for each part along with the bucket key that references the file.
+      operationId: GetTestFileMultipartPresignedUrls
+      parameters:
+        - description: The public ID of the Synthetic test.
+          in: path
+          name: public_id
+          required: true
+          schema:
+            example: abc-def-123
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SyntheticsTestFileMultipartPresignedUrlsRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SyntheticsTestFileMultipartPresignedUrlsResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: API error response.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Forbidden.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: API error response.
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - synthetics_write
+      summary: Get presigned URLs for uploading a test file
+      tags:
+        - Synthetics
+      x-menu-order: 60
+      x-permission:
+        operator: OR
+        permissions:
+          - synthetics_write
+          - synthetics_create_edit_trigger
+  /api/v2/synthetics/tests/{public_id}/files/multipart-upload-abort:
+    post:
+      description: |-
+        Abort an in-progress multipart file upload for a Synthetic test. This cancels the upload
+        and releases any storage used by already-uploaded parts.
+      operationId: AbortTestFileMultipartUpload
+      parameters:
+        - description: The public ID of the Synthetic test.
+          in: path
+          name: public_id
+          required: true
+          schema:
+            example: abc-def-123
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SyntheticsTestFileAbortMultipartUploadRequest"
+        required: true
+      responses:
+        "204":
+          description: No Content
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: API error response.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Forbidden.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: API error response.
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - synthetics_write
+      summary: Abort a multipart upload of a test file
+      tags:
+        - Synthetics
+      x-menu-order: 62
+      x-permission:
+        operator: OR
+        permissions:
+          - synthetics_write
+          - synthetics_create_edit_trigger
+  /api/v2/synthetics/tests/{public_id}/files/multipart-upload-complete:
+    post:
+      description: |-
+        Complete a multipart file upload for a Synthetic test. Call this endpoint after all parts
+        have been uploaded using the presigned URLs obtained from the multipart presigned URLs endpoint.
+      operationId: CompleteTestFileMultipartUpload
+      parameters:
+        - description: The public ID of the Synthetic test.
+          in: path
+          name: public_id
+          required: true
+          schema:
+            example: abc-def-123
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SyntheticsTestFileCompleteMultipartUploadRequest"
+        required: true
+      responses:
+        "204":
+          description: No Content
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: API error response.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Forbidden.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: API error response.
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - synthetics_write
+      summary: Complete a multipart upload of a test file
+      tags:
+        - Synthetics
+      x-menu-order: 61
       x-permission:
         operator: OR
         permissions:
