@@ -15,7 +15,7 @@ Datadog Event Management supports maintenance windows to suppress case notificat
 
 To create a Maintenance Window:
 1. Navigate to Event Management Settings.
-1. Select Maintenance Windows next to Case Attributes in the left navigation bar.
+1. Select **Maintenance Windows** next to Case Attributes in the left navigation bar.
 1. Click New Maintenance Window in the top right.
 1. Enter a Maintenance Window name.
 1. Set conditions for the cases that should be impacted by this maintenance window using tags or attributes. By default, Event Management cases inherit tags from the alerts they correlate.
