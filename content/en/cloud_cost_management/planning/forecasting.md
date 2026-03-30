@@ -38,7 +38,7 @@ Cloud Cost Management leverages advanced algorithms to deliver accurate cost pre
 
 ### Flexible forecasting options
 
-Forecasts can be generated for various time horizons and rollup intervals to match your planning needs:
+You can generate forecasts for various time horizons and rollup intervals to match your planning needs:
 
 - **Forecast periods**: Predict costs for the next billing period, current month, current year, or a custom date range based on your historical spending data.
 - **Rollup intervals**: View forecasts at daily, weekly, or monthly intervals depending on your analysis requirements.
