@@ -60,7 +60,7 @@ Navigate to [**Cloud Cost > Analyze > Reports**][1] in Datadog to enable forecas
 2. In the left panel, toggle **Show forecast** to enable forecasting.
 3. Select the forecast period from the **Until end of** dropdown (next period, current month, current year, or a custom range).
 
-{{< img src="cloud_cost/forecasts/budget_report_forecast-1.png" alt="Budget report showing the forecast toggle in the left panel and forecasted costs displayed with historical data" style="width:100%;" >}}
+{{< img src="cloud_cost/forecasts/budget_report_forecast-2.png" alt="Budget report showing the forecast toggle in the left panel and forecasted costs displayed with historical data" style="width:100%;" >}}
 
 The report displays:
 - **Forecast toggle and controls**: Located in the left panel to enable forecasting and select the time period.
