@@ -14,7 +14,7 @@ further_reading:
 
 ## Overview
 
-Use the custom tags and measures commands to add user-defined text and numerical tags to your pipeline traces in [CI Pipeline Visibility][11]. You can use the [`datadog-ci` NPM package][1] to add custom tags or measures to a pipeline, job, stage or step span. From these custom tags and measures, you can create facets (string value tags) or measures (numerical value tags).
+Use the custom tags and measures commands to add user-defined text and numerical tags to your pipeline traces in [CI Pipeline Visibility][11]. You can use the [`datadog-ci` NPM package][1] to add custom tags or measures to a pipeline, job, stage, or step span. From these custom tags and measures, you can create facets (string value tags) or measures (numerical value tags).
 
 You can use facets and measures to filter, create visualizations, or create monitors for your pipelines in the [CI Visibility Explorer][10].
 
@@ -41,7 +41,7 @@ npm install -g @datadog/datadog-ci
 
 ## Add tags to pipeline traces
 
-Tags can be added to the pipeline, job, stage or step span.
+Tags can be added to the pipeline, job, stage, or step span.
 
 To do this, run the `tag` command:
 
@@ -69,7 +69,7 @@ To create a facet from a tag, click the gear icon next to a tag name on the [Pip
 
 ## Add measures to pipeline traces
 
-To add numerical tags to the pipeline, job, stage or step span, run the `measure` command:
+To add numerical tags to the pipeline, job, stage, or step span, run the `measure` command:
 
 ```shell
 DATADOG_SITE={{< region-param key="dd_site" >}} datadog-ci measure [--level <pipeline|job|stage|step>] [--measures <measure1>] [--measures <measure2>]...
