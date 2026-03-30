@@ -19483,7 +19483,7 @@ components:
       properties:
         name:
           description: Name of the dataset.
-          example: "Security Audit Dataset"
+          example: "Security Audit DAC"
           type: string
         principals:
           description: |-
@@ -19519,7 +19519,7 @@ components:
           type: string
         name:
           description: Name of the dataset.
-          example: "Security Audit Dataset"
+          example: "Security Audit DAC"
           type: string
         principals:
           description: |-
@@ -82163,17 +82163,14 @@ paths:
           appKeyAuth: []
         - AuthZ:
             - user_access_read
-      summary: Get all datasets
+      summary: Get all Data Access Control datasets
       tags:
-        - Datasets
+        - Data Access Controls
       x-menu-order: 3
       "x-permission":
         operator: OR
         permissions:
           - user_access_read
-      x-unstable: |-
-        **Note: Data Access is in preview. If you have any feedback,
-        contact [Datadog support](https://docs.datadoghq.com/help/).**
     post:
       description: |-
         Create a dataset with the configurations in the request.
@@ -82216,18 +82213,15 @@ paths:
           appKeyAuth: []
         - AuthZ:
             - user_access_manage
-      summary: Create a dataset
+      summary: Create a Data Access Control dataset
       tags:
-        - Datasets
+        - Data Access Controls
       x-codegen-request-body-name: body
       x-menu-order: 1
       x-permission:
         operator: OR
         permissions:
           - user_access_manage
-      x-unstable: |-
-        **Note: Data Access is in preview. If you have any feedback,
-        contact [Datadog support](https://docs.datadoghq.com/help/).**
   /api/v2/datasets/{dataset_id}:
     delete:
       description: Deletes the dataset associated with the ID.
@@ -82250,17 +82244,14 @@ paths:
           appKeyAuth: []
         - AuthZ:
             - user_access_manage
-      summary: Delete a dataset
+      summary: Delete a Data Access Control dataset
       tags:
-        - Datasets
+        - Data Access Controls
       x-menu-order: 5
       "x-permission":
         operator: OR
         permissions:
           - user_access_manage
-      x-unstable: |-
-        **Note: Data Access is in preview. If you have any feedback,
-        contact [Datadog support](https://docs.datadoghq.com/help/).**
     get:
       description: Retrieves the dataset associated with the ID.
       operationId: GetDataset
@@ -82286,16 +82277,13 @@ paths:
           appKeyAuth: []
         - AuthZ:
             - user_access_read
-      summary: Get a single dataset by ID
+      summary: Get a Data Access Control dataset by ID
       tags:
-        - Datasets
+        - Data Access Controls
       x-menu-order: 2
       "x-permission":
         operator: OPEN
         permissions: []
-      x-unstable: |-
-        **Note: Data Access is in preview. If you have any feedback,
-        contact [Datadog support](https://docs.datadoghq.com/help/).**
     put:
       description: |-
         Edits the dataset associated with the ID.
@@ -82329,18 +82317,15 @@ paths:
           appKeyAuth: []
         - AuthZ:
             - user_access_manage
-      summary: Edit a dataset
+      summary: Edit a Data Access Control dataset
       tags:
-        - Datasets
+        - Data Access Controls
       x-codegen-request-body-name: body
       x-menu-order: 4
       "x-permission":
         operator: OR
         permissions:
           - user_access_manage
-      x-unstable: |-
-        **Note: Data Access is in preview. If you have any feedback,
-        contact [Datadog support](https://docs.datadoghq.com/help/).**
   /api/v2/deployment_gates:
     get:
       description: |-
@@ -113189,10 +113174,13 @@ tags:
       organization.
     name: Dashboard Lists
   - description: |-
-      Data Access Controls in Datadog is a feature that allows administrators and access managers to regulate
+      Manage [Data Access Controls](https://docs.datadoghq.com/account_management/rbac/data_access/)
+      programmatically using Datasets.
+
+      Data Access Controls in Datadog allows administrators and access managers to regulate
       access to sensitive data. By defining Restricted Datasets, you can ensure that only specific teams or roles can
       view certain types of telemetry (for example, logs, traces, metrics, and RUM data).
-    name: Datasets
+    name: Data Access Controls
   - description: |-
       Manage Deployment Gates using this API to reduce the likelihood and impact of incidents caused by deployments. See the [Deployment Gates documentation](https://docs.datadoghq.com/deployment_gates/) for more information.
     name: Deployment Gates

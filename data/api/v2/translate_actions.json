@@ -1050,25 +1050,25 @@
   },
   "GetAllDatasets": {
     "description": "Get all datasets that have been configured for an organization.",
-    "summary": "Get all datasets"
+    "summary": "Get all Data Access Control datasets"
   },
   "CreateDataset": {
     "description": "Create a dataset with the configurations in the request.",
-    "summary": "Create a dataset",
+    "summary": "Create a Data Access Control dataset",
     "request_description": "Dataset payload",
     "request_schema_description": "Create request for a dataset."
   },
   "DeleteDataset": {
     "description": "Deletes the dataset associated with the ID.",
-    "summary": "Delete a dataset"
+    "summary": "Delete a Data Access Control dataset"
   },
   "GetDataset": {
     "description": "Retrieves the dataset associated with the ID.",
-    "summary": "Get a single dataset by ID"
+    "summary": "Get a Data Access Control dataset by ID"
   },
   "UpdateDataset": {
     "description": "Edits the dataset associated with the ID.",
-    "summary": "Edit a dataset",
+    "summary": "Edit a Data Access Control dataset",
     "request_description": "Dataset payload",
     "request_schema_description": "Edit request for a dataset."
   },
