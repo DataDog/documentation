@@ -82,6 +82,18 @@ When viewing a test suite, three tabs are available:
 
 {{< img src="synthetics/test_suites/test_suite_summary_2.png" alt="Synthetic Monitoring Test Suite summary page" style="width:100%;">}}
 
+## Run a test suite
+
+To manually trigger the tests in a suite:
+
+1. Navigate to the suite and click the **Tests in the Suite** tab.
+2. Select the tests you want to run using the checkboxes.
+3. Click **Run Tests Now**.
+
+{{< img src="synthetics/test_suites/run_tests_now.png" alt="The Tests in the Suite tab with tests bulk selected and the Run Tests Now button visible" style="width:100%;" >}}
+
+**Note**: You can run a maximum of 50 tests at a time.
+
 ## Troubleshooting
 
 If some tests fail to appear in a suite:
