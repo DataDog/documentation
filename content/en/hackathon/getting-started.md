@@ -1,6 +1,5 @@
 ---
 title: "Contact Support | API Reference | Getting Started"
-kind: guide
 description: A getting started guide to help you get started with getting started.
 ---
 
