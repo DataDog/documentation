@@ -13,7 +13,7 @@ Datadog Event Management supports maintenance windows to suppress case notificat
 ## Create a Maintenance Window
 <div class="alert alert-danger">You must have Case Management Shared Settings Write (cases_shared_settings_write) permissions. For more information, see [Datadog Role Permissions][1].</div>
 
-To create a Maintenance Window:
+To create a [Maintenance Window][2]:
 1. Navigate to Event Management Settings.
 1. Select **Maintenance Windows** next to Case Attributes in the left navigation bar.
 1. Click **New Maintenance Window** in the top right.
@@ -26,8 +26,8 @@ After you save, your Maintenance Window will be added to the Maintenance Window 
 
 ## Sync Maintenance Windows with ServiceNow Changes
 
-To sync Maintenance Windows with ServiceNow Changes so your ServiceNow Changes create, update, or delete case Maintenance Windows:
-1. See [Forward change requests to Datadog][2] and follow the steps to ingest ServiceNow Changes.
+To sync Maintenance Windows with ServiceNow changes so your ServiceNow changes create, update, or delete case Maintenance Windows:
+1. See [Forward change requests to Datadog][3] and follow the steps to ingest ServiceNow changes.
 1. Navigate to Event Management Settings.
 1. Select **Maintenance Windows** next to Case Attributes in the left navigation bar.
 1. Click **Sync from ServiceNow** in the top right
@@ -37,4 +37,5 @@ To sync Maintenance Windows with ServiceNow Changes so your ServiceNow Changes c
 
 
 [1]: https://docs.datadoghq.com/account_management/rbac/permissions/#case_management
-[2]: https://docs.datadoghq.com/integrations/servicenow/?tab=changerequesteventforwarding#forward-change-request-events-to-datadog
+[2]: https://app.datadoghq.com/event/settings/maintenance-windows
+[3]: https://docs.datadoghq.com/integrations/servicenow/?tab=changerequesteventforwarding#forward-change-request-events-to-datadog
