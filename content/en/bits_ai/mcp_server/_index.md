@@ -275,6 +275,22 @@ Search Datadog RUM events using advanced query syntax.
 - Find pages that are loading slowly (more than 3 seconds).
 - Show recent user interactions on product detail pages.
 
+### `create_datadog_notebook`
+*Toolset: **core***\
+*Permissions Required: `Notebooks Read` and `Notebooks Write`*\
+Creates a new Datadog notebook.
+
+- Create a notebook to document the investigation into the checkout service latency spike.
+- Make a new notebook for our weekly performance review.
+
+### `edit_datadog_notebook`
+*Toolset: **core***\
+*Permissions Required: `Notebooks Read` and `Notebooks Write`*\
+Edits an existing Datadog notebook.
+
+- Add a section to notebook abc-123-def with the latest log analysis results.
+- Update the incident response notebook with today's findings.
+
 ### `validate_datadog_monitor`
 *Toolset: **alerting***\
 *Permissions Required: `Monitors Read`*\
