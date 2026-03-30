@@ -38,7 +38,7 @@ To create a metric for your experiment:
 1. Navigate to the [Metrics page][1] in Datadog Product Analytics.
 1. Select the **Metrics** tab and click **Create Metric** at the top right corner.
 1. Add a **Metric name** and, optionally, a **Description**.
-1. Click **Select an event** under the **Metric definition** section to open the event picker. The chart on the right updates in real time as you configure your metric.
+1. Under the **Metric definition** section, click **Select an event** to open the event picker. The chart on the right updates in real time as you configure your metric.
    1. Search for a specific event, or use the **By Type** filter to browse by event type.
 1. Select an [aggregation method](#aggregation-methods) from the dropdown. The default is **Count of events**.
 1. Click **Add Filter** to [filter your metric](#add-filters) by additional properties.
@@ -84,13 +84,13 @@ Start by writing a query to retrieve your data:
 1. Navigate to the [Metrics page][1] in Datadog Product Analytics.
 1. Select the **Metric SQL Models** tab and click **Create SQL Model**.
 1. In the **Write SQL** section, enter a SQL query that returns your data of interest. The SQL editor supports both `SELECT * FROM` and more advanced SQL statements.
-1. Click **Run** to see a preview of your data.
+1. Click **Run** to preview your data.
 
 {{< img src="/product_analytics/experiment/exp_create_metric_sql_models_writesql_1.png" alt="The Write SQL section of the Create Metric SQL Model page showing a SELECT query for user_id, revenue_timestamp, and amount from a revenue orders table, with a successful query preview below displaying USER_ID, REVENUE_TIMESTAMP, and AMOUNT columns." style="width:80%;" >}}
 
 #### Map your warehouse data to Datadog
 
-After previewing your data, map it to Datadog:
+After previewing your data, map it to Datadog. In the **Structure your model** section:
 
 1. Add a **Metric SQL Model Name** (for example, **Revenue Orders**).
 1. (Optional) Toggle on **Mark as certified** to indicate this SQL model is approved for important decision-making. This requires the **Product Analytics Certified Metrics Write** permission.
@@ -100,8 +100,7 @@ After previewing your data, map it to Datadog:
      - The analysis only includes rows created after the subject enrolls in the experiment.
    - **Subject Type**
      - The attribute that Datadog uses to randomly assign experiment groups.
-     - On the [Subject Types][12] page, define the subject type and its default warehouse column.
-     - For example, you can use `user_id` for an individual user or `org_id` for an organization account.
+     - You can define the subject type and its default warehouse column on the [Subject Types][12] page. For example, you can use `user_id` for an individual user or `org_id` for an organization account.
    - **Measures** (optional)
      - The numeric columns from your warehouse table that Datadog can aggregate into metrics (for example, a `revenue` or `amount` column).
      - Each SQL model automatically includes an **each record** measure. Use this measure to count the number of relevant rows in the table for a specific experiment subject.
@@ -116,7 +115,7 @@ After you create your SQL model, use it to create a metric:
 1. Navigate to the [Metrics page][1] in Datadog Product Analytics.
 1. Select the **Metrics** tab and click **Create Metric** at the top right corner.
 1. Add a **Metric name** and, optionally, a **Description**.
-1. Click **Select an event** under the **Metric definition** section to open the event picker. The chart on the right updates in real time as you configure your metric.
+1. Under the **Metric definition** section, click **Select an event** to open the event picker. The chart on the right updates in real time as you configure your metric.
    1. Select the relevant SQL model. Your SQL models appear under their data source (for example, **Revenue Orders** under **Snowflake**).
 1. Select an [aggregation method](#aggregation-methods) from the dropdown.
 1. (Optional) Under the **Additional settings** section:
@@ -152,7 +151,7 @@ Datadog computes metrics for each experiment subject. For example, a **Count of 
 
 ### Ratio metrics
 
-Click **Create Ratio** to divide your metric by a value other than the default number of experiment subjects. The denominator can use any of the [aggregation methods](#aggregation-methods) listed above. For example, divide purchases by product page views to measure conversion at a specific step in the funnel, rather than across all enrolled users.
+Click **Create Ratio** to divide your metric by a value other than the default number of experiment subjects. The denominator can use any of the [aggregation methods](#aggregation-methods). For example, divide purchases by product page views to measure conversion at a specific step in the funnel, rather than across all enrolled users.
 
 Datadog accounts for correlations between the numerator and denominator using the [delta method][2].
 
