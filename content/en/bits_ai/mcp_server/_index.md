@@ -47,7 +47,7 @@ The MCP Server comes with the following fair-use limits:
 - 5000 daily tool calls
 - 50,000 monthly tool calls. 
 
-These limits are **subject to change** and can be adjusted if your use-case requires more. Please contact [Datadog support][37] for requests or questions. 
+These limits are **subject to change** and can be adjusted if your use case requires more. Please contact [Datadog support][37] for requests or questions. 
 
 ## Monitoring the Datadog MCP Server Tool Calls
 
