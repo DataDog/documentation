@@ -54,9 +54,9 @@ Because containers and cloud environments regularly churn through hosts, using t
 
 ## Define tags
 
-Below are Datadog's tagging requirements:
+Tag strings (that is, the entire content of `<key>:<value>` or `<value>`) must meet the following requirements:
 
-- Tags must **start with a letter** (this applies regardless of whether the tag uses the format `<key>:<value>` or `<value>`). After the leading letter, the tag string may contain the characters listed below:
+- Tag strings must **start with a letter** (this applies regardless of whether the tag uses the format `<key>:<value>` or `<value>`). After the leading letter, the tag string may contain the characters listed below:
 
     - Letters (all Unicode letters are supported---for example, a, ó, 気, 녕, ك, and ดี)
     - Numbers
