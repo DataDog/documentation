@@ -30,7 +30,7 @@ With Forecasts, you can:
 
 ## How forecasting works
 
-Cloud Cost Management leverages advanced algorithms to deliver accurate cost predictions. The forecasting model analyzes your historical spending data to identify patterns and trends in your cloud costs, including:
+Cloud Cost Management uses advanced algorithms to deliver accurate cost predictions. The forecasting model analyzes your historical spending data to identify patterns and trends in your cloud costs, including:
 
 - Recurring costs that happen on a **predictable schedule** (such as weekly or monthly cycles).
 - Whether your costs are **increasing, decreasing, or staying stable** over time.
