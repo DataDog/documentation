@@ -11,11 +11,16 @@ further_reading:
       text: 'Instrument your application with custom spans'
 ---
 
-This page demonstrates using Datadog's LLM Observability SDK to instrument a Python, Node.js, or Java LLM application.
+This guide walks you through instrumenting an LLM application and sending your first trace to Datadog.
 
 ### Prerequisites
 
-LLM Observability requires a Datadog API key if you don't have a Datadog Agent running. Find your API key [in Datadog](https://app.datadoghq.com/organization-settings/api-keys).
+Before you begin, make sure you have the following:
+
+- A [Datadog account](https://app.datadoghq.com/)
+- A [Datadog API key](https://app.datadoghq.com/organization-settings/api-keys)
+- Python 3.7+, Node.js 16+, or Java 8+
+- An LLM provider API key (for example, an [OpenAI API key](https://platform.openai.com/api-keys)) if you want to run the example application
 
 ### Setup
 
@@ -96,10 +101,15 @@ Make requests to your application triggering LLM calls and then view traces in t
 
 ### Next steps
 
-After traces are being submitted from your application, you can:
+After traces are being submitted from your application:
 
-- [Configure evaluations][4] that you can use to assess the effectiveness of your LLM application.
-- Add [custom instrumentation][5] to your application and extract data that automatic instrumentation cannot.
+1. **Add custom instrumentation**: Annotate your application with [custom spans][5] to capture business logic beyond auto-instrumented LLM calls.
+2. **Configure evaluations**: Set up [evaluations][4] to assess quality, safety, and effectiveness of your LLM responses.
+3. **Explore monitoring**: Use the [Monitoring][6] tools to query traces, track metrics, and analyze clusters.
+4. **Run experiments**: Compare prompts and models with [Experiments][7] to optimize your application.
+
+[6]: /llm_observability/monitoring
+[7]: /llm_observability/experiments
 
 
 ## Example "Hello World" application

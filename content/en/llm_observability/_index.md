@@ -49,6 +49,8 @@ further_reading:
 
 With LLM Observability, you can monitor, troubleshoot, and evaluate your LLM-powered applications, such as chatbots. You can investigate the root cause of issues, monitor operational performance, and evaluate the quality, privacy, and safety of your LLM applications.
 
+**New to LLM Observability?** Start with [Core Concepts][2] to understand traces, spans, and span kinds, then follow the [Quickstart][6] to send your first trace.
+
 Each request fulfilled by your application is represented as a trace on the [**LLM Observability** page][1] in Datadog.
 
 {{< img src="llm_observability/traces.png" alt="A list of prompt-response pair traces on the LLM Observability page" style="width:100%;" >}}
@@ -59,7 +61,7 @@ A trace can represent:
 - A predetermined LLM workflow, which is a grouping of LLM calls and their contextual operations, such as tool calls or preprocessing steps
 - A dynamic LLM workflow executed by an LLM agent
 
-Each trace contains spans representing each choice made by an agent or each step of a given workflow. A given trace can also include input and output, latency, privacy issues, errors, and more. For more information, see [Terms and Concepts][2].
+Each trace contains spans representing each choice made by an agent or each step of a given workflow. A given trace can also include input and output, latency, privacy issues, errors, and more. For more information, see [Core Concepts][2].
 
 ## Troubleshoot with end-to-end tracing
 
@@ -106,9 +108,15 @@ The [LLM Observability SDK for Python][3] integrates with frameworks such as Ope
 
 For more information, see the [Auto Instrumentation documentation][8].
 
-## Ready to start?
+## Getting started
 
-See the [Setup documentation][5] for instructions on instrumenting your LLM application or follow the [Trace an LLM Application guide][6] to generate a trace using the [LLM Observability SDK for Python][3].
+Follow this learning path to get up and running with LLM Observability:
+
+1. **Learn the fundamentals**: Read [Core Concepts][2] to understand traces, spans, and span kinds.
+2. **Send your first trace**: Follow the [Quickstart][6] to instrument a sample application in under 5 minutes.
+3. **Instrument your application**: See the [Instrumentation documentation][5] for auto-instrumentation, SDK, API, and OpenTelemetry options.
+4. **Configure evaluations**: Set up [evaluations][4] to assess the quality, safety, and effectiveness of your LLM application.
+5. **Run experiments**: Use [Experiments][11] to compare prompts, models, and configurations.
 
 ## Further Reading
 
@@ -117,10 +125,11 @@ See the [Setup documentation][5] for instructions on instrumenting your LLM appl
 [1]: https://app.datadoghq.com/llm/traces
 [2]: /llm_observability/terms
 [3]: /llm_observability/setup/sdk
-[4]: /llm_observability/setup/api
-[5]: /llm_observability/setup
+[4]: /llm_observability/evaluations
+[5]: /llm_observability/instrumentation
 [6]: /llm_observability/quickstart
 [7]: https://app.datadoghq.com/dash/integration/llm_operational_insights
 [8]: /llm_observability/setup/auto_instrumentation
 [9]: /llm_observability/evaluations/managed_evaluations
 [10]: /llm_observability/monitoring/cluster_map
+[11]: /llm_observability/experiments

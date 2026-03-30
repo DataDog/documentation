@@ -1,14 +1,18 @@
 ---
-title: LLM Observability Terms and Concepts
+title: Core Concepts
 aliases:
     - /tracing/llm_observability/core_concepts
     - /llm_observability/core_concepts
     - /tracing/llm_observability/span_kinds
     - /llm_observability/span_kinds
+    - /llm_observability/terms
 further_reading:
-    - link: '/llm_observability/setup'
+    - link: '/llm_observability/quickstart'
       tag: 'Documentation'
-      text: 'Learn how to set up LLM Observability'
+      text: 'Get started with the Quickstart guide'
+    - link: '/llm_observability/instrumentation'
+      tag: 'Documentation'
+      text: 'Learn how to instrument your LLM application'
     - link: '/llm_observability/evaluations'
       tag: 'Guide'
       text: 'Evaluation options for LLM Observability'
@@ -16,7 +20,9 @@ further_reading:
 
 ## Overview
 
-The LLM Observability UI provides many tools to troubleshoot conversation performance and correlate data throughout the product, enabling you to find and resolve issues in large language models (LLMs).
+Understanding these core concepts helps you get the most out of LLM Observability. This page covers the foundational building blocks — spans, traces, and evaluations — that are referenced throughout the documentation.
+
+The LLM Observability UI provides tools to troubleshoot conversation performance and correlate data throughout the product, enabling you to find and resolve issues in large language models (LLMs).
 
 | Concept | Description |
 |---|---|

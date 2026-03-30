@@ -14,7 +14,17 @@ further_reading:
 
 ## Overview
 
-LLM Observability offers several ways to support evaluations. They can be configured by navigating to [**AI Observability > Evaluations**][8].
+LLM Observability offers several ways to evaluate the quality, safety, and effectiveness of your LLM applications. Choose your approach based on the level of customization you need:
+
+| Approach | Code required | Setup time | Best for |
+|---|---|---|---|
+| [Managed evaluations][2] | None | Minutes | Standard quality and safety checks (sentiment, hallucination, toxicity) |
+| [Custom LLM-as-a-Judge][1] | None (UI configuration) | Minutes | Domain-specific criteria using natural language prompts |
+| [External evaluations][3] (SDK/API) | Full code | Varies | Custom evaluation logic, CI/CD pipelines |
+| Third-party frameworks ([Ragas][4], [NeMo][5], [DeepEval][13]) | Moderate | Varies | Teams already using these evaluation frameworks |
+| [Annotation Queues][11] | None | Minutes | Structured human review workflows |
+
+All evaluations can be configured by navigating to [**AI Observability > Evaluations**][8]. For developers building custom evaluators programmatically, see the [Evaluation Developer Guide][10].
 
 ### Custom LLM-as-a-judge evaluations
 
@@ -74,3 +84,4 @@ LLM Observability offers an [Export API][9] that you can use to retrieve spans f
 [10]: /llm_observability/guide/evaluation_developer_guide
 [11]: /llm_observability/evaluations/annotation_queues
 [12]: /security/sensitive_data_scanner/scanning_rules/library_rules/
+[13]: /llm_observability/evaluations/deepeval_evaluations
