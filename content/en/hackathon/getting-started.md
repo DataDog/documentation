@@ -71,7 +71,7 @@ description: A getting started guide to help you get started with getting starte
 
 ---
 
-📅 Last updated: April 3, 1963 &nbsp;·&nbsp; ⏱️ Estimated reading time: 47 minutes &nbsp;·&nbsp; ✅ Last verified: Tomorrow &nbsp;·&nbsp; <span class="eternal-loader"></span> Loading additional metadata...
+📅 Last updated: April 3, 1963 &nbsp;·&nbsp; ⏱️ Estimated reading time: 47 minutes &nbsp;·&nbsp; ✅ Last verified: 🤨 &nbsp;·&nbsp; <span class="eternal-loader"></span> Loading additional metadata...
 
 ## Overview
 
