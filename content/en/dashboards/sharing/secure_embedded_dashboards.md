@@ -1,7 +1,6 @@
 ---
 title: Secure Embedded Dashboards
 description: Embed Datadog dashboards in authenticated websites using backend-generated tokens without exposing credentials to the browser.
-private: true
 further_reading:
 - link: "/dashboards/sharing/shared_dashboards/"
   tag: "Documentation"
