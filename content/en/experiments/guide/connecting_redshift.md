@@ -116,7 +116,7 @@ Add the following additional permissions to your IAM role so Datadog can write d
 
 Create a Datadog user and a dedicated schema for Datadog to store experiment results and intermediate tables.
 
-<div class="alert alert-info">Your Datadog user must have <code>superuser</code> or <code>admin</code> privileges to connect to your Redshift cluster.</div>
+<div class="alert alert-info">You must have <code>superuser</code> or <code>admin</code> privileges in the Redshift cluster to create the Datadog user.</div>
 
 
 ### Create a Datadog user in your Redshift cluster
@@ -184,8 +184,5 @@ After you save your warehouse connection, create experiment metrics using your R
 
 [1]: https://docs.datadoghq.com/getting_started/integrations/aws/
 [2]: https://app.datadoghq.com/product-analytics
-[3]: https://docs.datadoghq.com/integrations/amazon-redshift/#log-collection
 [4]: /experiments/defining_metrics
 [5]: https://app.datadoghq.com/integrations/
-
-
