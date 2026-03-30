@@ -74,7 +74,7 @@ Select an AWS authentication option. If you are only using the [user or role you
     - **Note:** The [user or role you created earlier](#set-up-an-iam-policy-that-allows-workers-to-write-to-the-s3-bucket) must have permission to assume this role so that the Worker can authenticate with AWS.
 1. (Optional) Enter the assumed role session name and external ID.
 
-##### Buffering options
+##### Buffering
 
 {{% observability_pipelines/destination_buffer %}}
 

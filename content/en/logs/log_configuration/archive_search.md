@@ -214,4 +214,4 @@ In order to search log events from your archives, Datadog uses a service account
 [4]: https://app.datadoghq.com/logs/archive-search/new
 [5]: https://app.datadoghq.com/logs/archive-search/
 [6]: /logs/guide/logs-rbac/?tab=ui#restrict-access-to-logs
-[7]: /logs/log_configuration/archives/?tab=awss3#archive-search-indexed-attribute
+[7]: /logs/log_configuration/archives/?tab=awss3#archive-search-lookup-attribute

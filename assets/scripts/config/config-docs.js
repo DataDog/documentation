@@ -32,7 +32,7 @@ module.exports = {
             apiUrl: 'https://dd.datad0g.com/api/unstable/docs-ai',
             apiKey: 'ddpub_docsai_qvrDfIbODspTDsb2Y9Co7h3QlB4kMJYb'
         },
-        imgUrl: 'https://datadog-docs-staging.imgix.net/',
+        imgUrl: 'https://docs-staging.dd-static.net/',
         gaTag: 'UA-21102638-9'
     },
     development: {
