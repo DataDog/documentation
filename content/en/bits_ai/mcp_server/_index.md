@@ -92,6 +92,8 @@ For example, based on your selected [Datadog site][36] ({{< region-param key="dd
 - Retrieve all generally available tools:
   <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=all</code></pre>
 
+<div class="alert alert-info">Enabling all toolsets increases the number of tool definitions sent to your AI client, which consumes context window space. <code>toolsets=all</code> works best with clients that support tool filtering, such as Claude Code.</div>
+
 [36]: /getting_started/site/#navigate-the-datadog-documentation-by-site
 {{< /site-region >}}
 
