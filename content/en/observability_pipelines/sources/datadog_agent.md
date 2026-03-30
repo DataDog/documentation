@@ -163,7 +163,7 @@ datadog:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /observability_pipelines/configuration/set_up_pipelines/
-[4]: /observability_pipelines/sources/opentelemetry/#send-logs-from-the-datadog-distribution-of-opentelemetry-collector-to-observability-pipelines
+[4]: /observability_pipelines/sources/opentelemetry/#send-data-from-the-datadog-distribution-of-opentelemetry-collector-to-observability-pipelines
 [5]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/
 [6]: https://app.datadoghq.com/observability-pipelines
 [7]: /api/latest/observability-pipelines/
