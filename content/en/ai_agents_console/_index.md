@@ -30,7 +30,7 @@ AI Agents Console supports the following integrations:
 
 ### Claude Code
 
-To monitor Claude Code with AI Agents Console, set up the [Anthropic Usage and Costs][4] integration. This integration configures Claude Code to send telemetry to Datadog using the OpenTelemetry protocol (OTLP).
+To monitor Claude Code with AI Agents Console, set up the [Anthropic Usage and Costs][4] integration.
 
 After setup, navigate to the [AI Agents Console][1] and click the **Claude Code** tile to view metrics.
 
