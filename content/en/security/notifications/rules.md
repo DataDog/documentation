@@ -96,7 +96,7 @@ When a finding triggers a notification, the system checks all conditions for eac
 
 ### Fallback channel
 
-When you enable dynamic routing, you must specify a fallback channel. The fallback channel receives notifications in the following cases:
+When you enable dynamic routing, you must specify a fallback channel. The fallback channel receives notifications in any of the following cases:
 
 - The finding has no `team` tag.
 - A team referenced by a `team` tag does not exist in Datadog Teams.
