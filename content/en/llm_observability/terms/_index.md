@@ -20,7 +20,7 @@ further_reading:
 
 ## Overview
 
-Understanding these core concepts helps you get the most out of LLM Observability. This page covers the foundational building blocks — spans, traces, and evaluations — that are referenced throughout the documentation.
+Understanding these core concepts helps you get the most out of LLM Observability. This page covers the foundational building blocks — spans, traces, sessions, and evaluations — that are referenced throughout the documentation.
 
 The LLM Observability UI provides tools to troubleshoot conversation performance and correlate data throughout the product, enabling you to find and resolve issues in large language models (LLMs).
 
@@ -28,6 +28,7 @@ The LLM Observability UI provides tools to troubleshoot conversation performance
 |---|---|
 | [Spans](#spans) | A span is a unit of work representing an operation in your LLM application, and is the building block of a trace. |
 | [Traces](#traces) | A trace represents the work involved in processing a request in your LLM application, and consists of one or more nested spans. A root span is the first span in a trace, and marks the beginning and end of the trace. |
+| [Sessions](#sessions) | A session groups multiple traces from the same user conversation, allowing you to track multi-turn interactions over time. |
 | [Evaluations](#evaluations) | Evaluations are a method for measuring the performance of your LLM application. For example, quality checks like failure to answer or topic relevancy are different types of evaluations that you can track for your LLM application. |
 
 ## Spans
@@ -155,6 +156,20 @@ You can instrument your LLM application to trace and group together all workflow
 
 For a detailed example, see the [LLM Monitoring Jupyter notebook][9] which demonstrates how to create and trace an LLM-powered agent that calls tools and makes decisions based on the data.
 
+## Sessions
+
+A session groups multiple traces from the same user conversation or interaction. For example, in a chatbot application, a session represents the entire back-and-forth conversation between a user and the LLM, while each individual message exchange is a separate trace within that session.
+
+To associate traces with a session, specify a `session_id` when creating root spans. You can also attach user information (`user_handle`, `user_name`, `user_id`) as tags on the span to identify the user behind a session.
+
+Sessions allow you to:
+
+- View all traces from a single user conversation in context
+- Track multi-turn interactions and how earlier responses influence later ones
+- Identify patterns in user behavior across an entire conversation
+
+For implementation details, see [Tracking user sessions][15] in the SDK documentation.
+
 ## Evaluations
 
 LLM Observability offers managed evaluations and quality checks to evaluate the quality, safety, and effectiveness of your LLM conversations. With [evaluations][11], you can understand the performance of conversations and enhance your LLM application's responses. This improves the user experience and ensures valuable, accurate outputs.
@@ -184,3 +199,4 @@ In addition, Datadog's [Sensitive Data Scanner][5] is natively integrated with L
 [12]: /llm_observability/evaluations/managed_evaluations
 [13]: /llm_observability/evaluations/ragas_evaluations
 [14]: /llm_observability/evaluations/submit_nemo_evaluations
+[15]: /llm_observability/instrumentation/sdk#tracking-user-sessions
