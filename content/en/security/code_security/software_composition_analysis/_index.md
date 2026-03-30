@@ -188,9 +188,9 @@ Software Composition Analysis (SCA) supports the following languages:
 [18]: /security/code_security/software_composition_analysis/setup_static/?tab=github#link-findings-to-datadog-services-and-teams
 [19]: /security/ticketing_integrations
 [20]: /security/automation_pipelines/mute
-[nvd]: https://nvd.nist.gov/
-[ghad]: https://docs.github.com/en/code-security/concepts/vulnerability-reporting-and-management/about-the-github-advisory-database
-[osv]: https://google.github.io/osv.dev/data/
-[pypa]: https://github.com/pypa/advisory-database
-[gsd]: https://github.com/cloudsecurityalliance/gsd-database
-[guarddog]: https://github.com/DataDog/guarddog
+[21]: https://nvd.nist.gov/
+[22]: https://docs.github.com/en/code-security/concepts/vulnerability-reporting-and-management/about-the-github-advisory-database
+[23]: https://google.github.io/osv.dev/data/
+[24]: https://github.com/pypa/advisory-database
+[25]: https://github.com/cloudsecurityalliance/gsd-database
+[26]: https://github.com/DataDog/guarddog
