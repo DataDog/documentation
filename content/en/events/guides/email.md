@@ -42,7 +42,7 @@ There are three ways to send events with email, described in the tabs below (**J
 {{< tabs >}}
 {{% tab "JSON" %}}
 
-If you have complete control over the email sent by an application, then you can send a JSON-formatted message. The email body must follow the JSON shape for [**Events API v1**][1] (`POST /api/v1/events`). Select the **v1** API version to see the request body fields. This format allows you to set attributes in the event that appears in Datadog.
+If you have complete control over the email sent by an application, then you can send a JSON-formatted message. The email body must follow the JSON shape for [**Events API v1**][1] (`POST /api/v1/events`). Select the **v1** API version to see the request body fields. The JSON in the email body sets the event fields that show in Datadog.
 
 ### Source email {#source-email-1}
 
@@ -102,7 +102,7 @@ The subject of the email becomes the title of the event and the body of the emai
 {{% /tab %}}
 {{% tab "JSON v2" %}}
 
-If you have complete control over the email sent by an application, then you can send a JSON-formatted message. The email body must follow the JSON shape for [**Events API v2**][1] (`POST /api/v2/events`). This format allows you to set attributes in the event that appears in Datadog.
+If you have complete control over the email sent by an application, then you can send a JSON-formatted message. The email body must follow the JSON shape for [**Events API v2**][1] (`POST /api/v2/events`). The JSON in the email body sets the event fields that show in Datadog.
 
 ### Source email {#source-email-json-v2}
 
@@ -143,6 +143,7 @@ In a `JSON v2` format email, the subject of the email doesn't appear in the even
 
 **Note**: If you are testing the email with a standard email client, the body may be converted to HTML. This causes the body to no longer be pure JSON, resulting in an ignored email.
 
+[1]: /api/latest/events/#post-an-event
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -182,4 +183,3 @@ To understand which emails are being used and receiving events, check the `Last 
 [5]: http://daringfireball.net/projects/markdown/syntax#lin
 [6]: /integrations/guide/events-from-sns-emails/
 [7]: /monitors/notify/#notification-recipients
-[8]: /api/latest/events/#post-an-event
