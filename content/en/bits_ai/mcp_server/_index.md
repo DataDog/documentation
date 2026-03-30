@@ -11,6 +11,9 @@ further_reading:
 - link: "bits_ai/mcp_server/setup"
   tag: "Documentation"
   text: "Set Up the Datadog MCP Server"
+- link: "bits_ai/mcp_server/tools"
+  tag: "Documentation"
+  text: "Datadog MCP Server Tools"
 - link: "bits_ai/"
   tag: "Documentation"
   text: "Bits AI Overview"
@@ -21,7 +24,7 @@ further_reading:
   tag: "Blog"
   text: "Datadog + OpenAI: Codex CLI integration for AI‑assisted DevOps"
 algolia:
-  tags: ["mcp", "mcp server", "setup"]
+  tags: ["mcp", "mcp server"]
   rank: 90
 ---
 
