@@ -39,7 +39,6 @@ Follow these steps to enable Data Observability: Jobs Monitoring for Databricks.
 1. Click **Add service principal**, then click **Add new**.
 1. Enter a name, then click **Add**.
 
-
    <div class="alert alert-warning">For Azure Databricks, select the "Databricks managed" management type. Datadog does NOT support "Microsoft Entra ID managed" service principals.</div>
 
 1. Click on the name of your new service principal. Under the **Secrets** tab, click **Generate secret**.
@@ -54,6 +53,7 @@ Follow these steps to enable Data Observability: Jobs Monitoring for Databricks.
 1. On the **Permissions** tab, click **Grant access**. Search for the new service principal, grant it the **Manage** permission, and click **Save**.
 1. Return to the **Identity and access** tab and click **Manage** next to **Groups**.
 1. Click the **admins** group, then click **Add members** to add the new service principal.
+
 #### Add the Databricks workspace
 
 1. In Datadog, open the Databricks integration tile.
