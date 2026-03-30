@@ -41,7 +41,7 @@ Cloud Cost Management uses forecasting algorithms to generate cost to generate c
 You can generate forecasts for various time horizons and rollup intervals to match your planning needs:
 
 - **Forecast periods**: Predict costs for the next billing period, current month, current year, or a custom date range based on your historical spending data.
-- **Rollup intervals**: View forecasts at daily, weekly, or monthly intervals depending on your analysis requirements.
+- **Rollup intervals**: View forecasts at daily or monthly intervals depending on your analysis requirements.
 
 ### Data requirements
 
