@@ -22,9 +22,9 @@ On a Linux host or VM, use Single Step Instrumentation (SSI) for APM to install 
 To enable APM on a Linux host:
 
 1. In Datadog, go to the [Install the Datadog Agent on Linux][15] page.
-1. In the **Customize your observability coverage** section, go to **Additional features** > **Application Observability**, and turn on **APM Instrumentation**.
+1. In the **Customize your Agent coverage** section, go to **Core Observability** and turn on **Application Performance Monitoring**.
    
-   {{< img src="tracing/trace_collection/linux-apm-instrumentation-toggle.png" alt="The 'Customize your observability coverage' section of in-app instructions for installing the Datadog Agent on Linux" style="width:100%;" >}}
+   {{< img src="tracing/trace_collection/enable_apm.png" alt="The 'Customize your Agent coverage' section of in-app instructions for installing the Datadog Agent on Linux" style="width:100%;" >}}
 
 1. Copy and run the Agent installation command on your Linux host or VM.
 1. Restart your applications.
@@ -41,9 +41,9 @@ To customize SDK versions:
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
 1. In Datadog, go to the [Install the Datadog Agent on Linux][15] page.
-1. After you turn on **APM Instrumentation**, click **Customize library versions**.
+1. After you turn on **APM Instrumentation**, click **Customize Library Versions**.
 
-   {{< img src="tracing/trace_collection/apm-instrumentation-version-pinning.png" alt="The 'Customize library versions' drop-down in the instructions for installing the Datadog Agent on Linux" style="width:100%;" >}}
+   {{< img src="tracing/trace_collection/customize_library_versions.png" alt="The 'Customize library versions' drop-down in the instructions for installing the Datadog Agent on Linux" style="width:100%;" >}}
 
 1. Find your language(s) and use the dropdown to either:
    - Select an exact SDK version, or
@@ -98,7 +98,7 @@ Use one of the following setup methods:
 
 - **[Configure in `application_monitoring.yaml`][18]**:
 
-  Enable products across all services on a host without modifying application command lines.
+  Configure products and features across all services on a host without modifying application command lines.
 
 - **[Set environment variables][17]**:
 
@@ -133,7 +133,7 @@ To configure instrumentation rules:
    1. Name your rule.
    1. Add one or more conditions. See [Define rule conditions](#define-rule-conditions) to learn more.
 
-   {{< img src="tracing/trace_collection/workload_selection_landing.png" alt="The instrumentation rules UI, showing configuration options for defining a rule" style="width:100%;" >}}
+   {{< img src="tracing/trace_collection/define_instrumentation_rule.png" alt="The instrumentation rules UI, showing configuration options for defining a rule" style="width:100%;" >}}
 
 1. (Optional) Drag and drop rules to reorder them.
 
@@ -190,7 +190,7 @@ If you encounter problems enabling APM with SSI, see the [SSI troubleshooting gu
 [15]: https://app.datadoghq.com/fleet/install-agent/latest?platform=linux
 [16]: /getting_started/tagging/unified_service_tagging/?tab=kubernetes#non-containerized-environment
 [17]: /tracing/trace_collection/library_config/
-[18]: /tracing/trace_collection/automatic_instrumentation/configure_apm_features_linux/
+[18]: /tracing/trace_collection/library_config/application_monitoring_yaml/
 [19]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/troubleshooting
 [20]: https://app.datadoghq.com/apm/service-setup/workload-selection
 

@@ -2186,11 +2186,25 @@
       "description": "Create a team with V2 fields returns \"CREATED\" response"
     }
   ],
+  "CreateTeamConnections": [
+    {
+      "group": "teams",
+      "suffix": "",
+      "description": "Create team connections returns \"Created\" response"
+    }
+  ],
   "CreateTeamNotificationRule": [
     {
       "group": "teams",
       "suffix": "",
       "description": "Create team notification rule returns \"OK\" response"
+    }
+  ],
+  "DeleteTeamConnections": [
+    {
+      "group": "teams",
+      "suffix": "",
+      "description": "Delete team connections returns \"No Content\" response"
     }
   ],
   "SyncTeams": [
@@ -2212,6 +2226,11 @@
       "group": "teams",
       "suffix": "",
       "description": "Update a team returns \"OK\" response"
+    },
+    {
+      "group": "teams",
+      "suffix": "_780342264",
+      "description": "Update a team with partial update returns \"OK\" response"
     }
   ],
   "UpdateTeamMembership": [

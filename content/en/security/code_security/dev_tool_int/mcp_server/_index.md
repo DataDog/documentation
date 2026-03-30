@@ -53,7 +53,7 @@ The MCP server is available on the following platforms:
 
 ```shell
 brew update
-brew install --cask datadog-labs/pack/datadog-code-security-mcp
+brew install datadog-labs/pack/datadog-code-security-mcp
 ```
 
 #### GitHub releases
