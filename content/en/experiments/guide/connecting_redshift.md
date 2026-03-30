@@ -114,14 +114,14 @@ Add the following additional permissions to your IAM role so Datadog can write d
 
 ## Step 2: Prepare the Redshift cluster
 
-Create a Datadog user and a dedicated schema for Datadog to store experiment results and intermediate tables.
+Create a Datadog service user and a dedicated schema for Datadog to store experiment results and intermediate tables.
 
-<div class="alert alert-info">You must have <code>superuser</code> or <code>admin</code> privileges in the Redshift cluster to create the Datadog user.</div>
+<div class="alert alert-info">You must have <code>superuser</code> or <code>admin</code> privileges in the Redshift cluster to create the Datadog service user.</div>
 
 
-### Create a Datadog user in your Redshift cluster
+### Create a Datadog service user in your Redshift cluster
 
-Run the following command to create a user with a strong password that Datadog can use to execute queries. Replace `datadog_experiments_user` with your user value and `Your_Strong_Password` with your password.
+Run the following command to create a service user with a strong password that Datadog can use to execute queries. Replace `datadog_experiments_user` with your user value and `Your_Strong_Password` with your password.
 
 ```sql
 CREATE USER datadog_experiments_user PASSWORD 'Your_Strong_Password';
@@ -129,16 +129,16 @@ CREATE USER datadog_experiments_user PASSWORD 'Your_Strong_Password';
 
 ### Create an output schema
 
-Run the following commands to create a schema where Datadog stores experiment results and intermediate tables. Replace `datadog_experiments_output` with your schema name and `datadog_experiments_user` with your user value.
+Run the following commands to create a schema where Datadog stores experiment results and intermediate tables. Replace `datadog_experiments_output` with your schema name and `datadog_experiments_user` with your service user value.
 
 ```sql
 CREATE SCHEMA IF NOT EXISTS datadog_experiments_output;
 GRANT ALL ON SCHEMA datadog_experiments_output TO datadog_experiments_user;
 ```
 
-### Grant the user read access to the schema
+### Grant the service user read access to the schema
 
-Grant the user read access to the tables or schemas containing your experiment metrics so Datadog can calculate results. Run the `GRANT USAGE` command, then run the `GRANT SELECT` option that match your access needs. Replace `datadog_experiments_user`, `<schema>`, and `<table>` with the appropriate values.
+Grant the service user read access to the tables or schemas containing your experiment metrics so Datadog can calculate results. Run the `GRANT USAGE` command, then run the `GRANT SELECT` option that match your access needs. Replace `datadog_experiments_user`, `<schema>`, and `<table>` with the appropriate values.
 
 ```sql
 GRANT USAGE ON SCHEMA <schema> TO datadog_experiments_user;
@@ -151,7 +151,7 @@ GRANT SELECT ON ALL TABLES IN SCHEMA <schema> TO datadog_experiments_user;
 ```
 
 
-## Step 3: Configure Experiment settings
+## Step 3: Configure experiment settings
 
 After you configure your AWS integrations and complete the data warehouse setup, connect Redshift to Datadog for warehouse-native experiment analysis.
 
@@ -169,7 +169,7 @@ After you configure your AWS integrations and complete the data warehouse setup,
    - **Port**: The port your cluster is listening on (default: `5439`).
 1. Under **Database and Storage**, enter:
    - **Database**: The database containing your source tables.
-   - **Database user**: The user you created in [Step 2](#create-a-datadog-user) (for example, `datadog_experiments_user`).
+   - **Database user**: The service user you created in [Step 2](#create-a-datadog-service-user-in-your-redshift-cluster) (for example, `datadog_experiments_user`).
    - **Schema**: The schema you created in [Step 2](#create-an-output-schema) for Datadog Experiments to write to (for example, `datadog_experiments_output`).
    - **Temp S3 bucket**: The S3 bucket you created in [Step 1](#create-an-s3-bucket) (for example, `datadog-experimentation-[aws_account_id]`).
 1. Click **Save**.
