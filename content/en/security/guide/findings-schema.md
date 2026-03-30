@@ -1416,6 +1416,106 @@ These attributes are present on all security findings and describe the fundament
 
 {{% /collapse-content %}}
 
+{{% collapse-content title="Severity Details" level="h3" id="severity-details" %}}
+
+Detailed severity information for the finding, including base and adjusted severity scores and CVSS vectors. See the [schema definition](https://github.com/DataDog/security-finding-schema/blob/main/schema.json) for the full specification.
+
+<table>
+  <thead>
+    <tr>
+      <th style="width: 25%;">Attribute name</th>
+      <th style="width: 15%;">Type</th>
+      <th style="width: 60%;">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>adjusted</code></td>
+      <td>object</td>
+      <td><strong>Path:</strong> <code>@severity_details.adjusted</code><br>Adjusted severity of the finding after accounting for contextual or environmental factors.</td>
+    </tr>
+    <tr>
+      <td><code>base</code></td>
+      <td>object</td>
+      <td><strong>Path:</strong> <code>@severity_details.base</code><br>Base severity of the finding as defined by the original rule, advisory, or scanner, before any contextual adjustments.</td>
+    </tr>
+  </tbody>
+</table>
+
+### Adjusted
+
+Adjusted severity of the finding after accounting for contextual or environmental factors.
+
+<table>
+  <thead>
+    <tr>
+      <th style="width: 25%;">Attribute name</th>
+      <th style="width: 15%;">Type</th>
+      <th style="width: 60%;">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>score</code></td>
+      <td>number</td>
+      <td><strong>Path:</strong> <code>@severity_details.adjusted.score</code><br>Numeric severity score (CVSS scale).</td>
+    </tr>
+    <tr>
+      <td><code>value</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@severity_details.adjusted.value</code><br>Severity level. Valid values: <code>critical</code>, <code>high</code>, <code>medium</code>, <code>low</code>, <code>info</code>, <code>none</code>, <code>unknown</code>.</td>
+    </tr>
+    <tr>
+      <td><code>value_id</code></td>
+      <td>integer</td>
+      <td><strong>Path:</strong> <code>@severity_details.adjusted.value_id</code><br>Numeric representation of the severity. Values: <code>critical</code> = <code>10</code>, <code>high</code> = <code>9</code>, <code>medium</code> = <code>7</code>, <code>low</code> = <code>4</code>, <code>none</code> = <code>0</code>.</td>
+    </tr>
+    <tr>
+      <td><code>vector</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@severity_details.adjusted.vector</code><br>CVSS vector string describing the vulnerability characteristics and environmental modifiers.</td>
+    </tr>
+  </tbody>
+</table>
+
+### Base
+
+Base severity of the finding as defined by the original rule, advisory, or scanner, before any contextual adjustments.
+
+<table>
+  <thead>
+    <tr>
+      <th style="width: 25%;">Attribute name</th>
+      <th style="width: 15%;">Type</th>
+      <th style="width: 60%;">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>score</code></td>
+      <td>number</td>
+      <td><strong>Path:</strong> <code>@severity_details.base.score</code><br>Numeric severity score (CVSS scale).</td>
+    </tr>
+    <tr>
+      <td><code>value</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@severity_details.base.value</code><br>Severity level. Valid values: <code>critical</code>, <code>high</code>, <code>medium</code>, <code>low</code>, <code>info</code>, <code>none</code>, <code>unknown</code>.</td>
+    </tr>
+    <tr>
+      <td><code>value_id</code></td>
+      <td>integer</td>
+      <td><strong>Path:</strong> <code>@severity_details.base.value_id</code><br>Numeric representation of the severity. Values: <code>critical</code> = <code>10</code>, <code>high</code> = <code>9</code>, <code>medium</code> = <code>7</code>, <code>low</code> = <code>4</code>, <code>none</code> = <code>0</code>.</td>
+    </tr>
+    <tr>
+      <td><code>vector</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@severity_details.base.vector</code><br>CVSS vector string describing the base vulnerability characteristics.</td>
+    </tr>
+  </tbody>
+</table>
+
+{{% /collapse-content %}}
+
 {{% collapse-content title="Workflow" level="h3" id="workflow" %}}
 
 All mutable information related to the management of a finding after it was detected. Includes fields that can be updated manually through the UI or automatically through pipelines.
