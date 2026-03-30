@@ -86,21 +86,21 @@ Dynamic routing is only available when **Trigger immediately for each individual
 
 ### How routing works
 
-When a finding triggers a notification, the system checks all conditions for each team tag. If all conditions are satisfied for a team, the notification is sent to its configured channel; otherwise, it is sent to the fallback channel. Each team is handled independently.
+When a finding triggers a notification, the system checks all of the following conditions. If all conditions are met, the notification is delivered to the team's configured notification channel. If any condition is not met, the notification is sent to the fallback channel you configured.
 
 | Condition                             | Description                                                                       |
 | ------------------------------------- | --------------------------------------------------------------------------------- |
 | **Team configured**                   | The team referenced by the finding's `team` tag must exist in [Datadog Teams][3]. |
 | **Team notification channel defined** | A [notification channel][4] must be configured for the team in Datadog Teams.     |
-| **Team tag on finding**               | The security finding must have at least one `team` tag attached.                  |
+| **Team tag on finding**               | The security finding must have exactly one `team` tag attached.                   |
 
 ### Fallback channel
 
 When you enable dynamic routing, you must specify a fallback channel. The fallback channel receives notifications in any of the following cases:
 
-- The finding has no `team` tag.
-- A team referenced by a `team` tag does not exist in Datadog Teams.
-- A team has no notification channel configured.
+- The finding has no `team` tag or more than one `team` tag.
+- The team does not exist in Datadog Teams.
+- The team has no notification channel configured.
 
 The fallback channel is also used for test notifications.
 
