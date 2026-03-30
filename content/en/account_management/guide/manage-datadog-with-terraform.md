@@ -86,7 +86,7 @@ Restriction policies are associated to a specific **resource**, and define the l
 
 ## Data Access Control
 
-[Data Access Control][31] allows you to create Restricted Datasets that limit access to sensitive telemetry—such as Custom Metrics, Logs, APM traces, or RUM sessions—to designated Teams or Roles. Use the [dataset][32] resource to create and manage your Restricted Datasets, or import your existing datasets into your Terraform configuration.
+[Data Access Control][31] allows you to create Restricted Datasets that limit access to sensitive telemetry to designated Teams or Roles. Supported telemetry types include Custom Metrics, Logs, APM traces, and RUM sessions. Use the [dataset][32] resource to create and manage your Restricted Datasets, or import your existing datasets into your Terraform configuration.
 
 ## Further reading
 
