@@ -33,7 +33,7 @@ To sync Maintenance Windows with ServiceNow Changes so your ServiceNow Changes c
 1. Click **Sync from ServiceNow** in the top right
 1. Optionally, define a filter for the ServiceNow changes that should create, update, or delete maintenance windows.
 1. Set conditions for the cases that should be impacted by this maintenance window using tags or attributes. You can dynamically reference a value from your ServiceNow changes by prefacing the attribute with `$`.
-1. Set the ServiceNow change datetime fields that should be used for maintenance window start and end time.
+1. Set the ServiceNow change datetime fields that should be used for maintenance window start and end times.
 
 
 [1]: https://docs.datadoghq.com/account_management/rbac/permissions/#case_management
