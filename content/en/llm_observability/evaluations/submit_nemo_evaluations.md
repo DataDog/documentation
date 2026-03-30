@@ -155,7 +155,7 @@ After you complete the setup steps, you can view NeMo Evaluator's model evaluati
 
 {{< img src="llm_observability/nemo-demo-after-eval.png" alt="An LLM Observability trace with a custom evaluation attached from the NeMo evaluation results" style="width:100%;" >}}
 
-You can view a breakdown of your NeMo Evaluator's model evaluation results in LLM Observability's dashboard and Application Overview, as well as overlay the evaluation results on topic clusters generated on the [Cluster Map][2]. On the traces list, click on **Options** to add the evaluation scores as a column:
+You can view a breakdown of your NeMo Evaluator's model evaluation results in LLM Observability's dashboard and Application Overview, as well as overlay the evaluation results on topic clusters generated on the [Patterns][2] page. On the traces list, click on **Options** to add the evaluation scores as a column:
 
 {{< img src="llm_observability/nemo-demo-traces-view-eval.png" alt="An LLM Observability traces list with a custom evaluation attached from the NeMo evaluation results" style="width:100%;" >}}
 
@@ -164,5 +164,5 @@ You can view a breakdown of your NeMo Evaluator's model evaluation results in LL
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /llm_observability/setup/sdk/python
-[2]: /llm_observability/cluster_map
+[2]: /llm_observability/monitoring/cluster_map
 [3]: https://docs.nvidia.com/nemo-framework/user-guide/latest/overview.html

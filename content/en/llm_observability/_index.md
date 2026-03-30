@@ -75,9 +75,9 @@ Monitor the cost, latency, performance, and usage trends for all your LLM applic
 
 ## Evaluate the quality and effectiveness of your LLM applications
 
-Identify problematic clusters and monitor the quality of responses over time with topical clustering and checks like sentiment, failure to answer, and so on.
+Understand what users are asking your LLM application, identify coverage gaps, and monitor the quality of responses over time with [Patterns][10] — automated hierarchical topic clustering of your production traffic. Overlay evaluations like sentiment, failure to answer, and hallucination to pinpoint quality issues by topic.
 
-{{< img src="llm_observability/cluster_map/box.png" alt="The box packing layout displays clusters of traces represented by colored circles, and includes a panel listing clusters with topics, trace counts, and failure rates." style="width:100%;" >}}
+{{< img src="llm_observability/cluster_map/box.png" alt="The Patterns page displays traces grouped by topic, represented by colored circles, and includes a panel listing topics, trace counts, and failure rates." style="width:100%;" >}}
 
 ## Safeguard sensitive data and identify malicious users
 
@@ -92,7 +92,7 @@ LLM Observability Insights provides a monitoring experience that helps users ide
 Outlier detection is performed across key dimensions:
 - Span name
 - Workflow type
-- [Cluster input/output topics][10]
+- [Patterns input/output topics][10]
 
 These outliers are analyzed over the past week and automatically surfaced in the corresponding time window selected by the user. This enables teams to proactively detect regressions, performance drifts, or unexpected behavior in their LLM applications.
 

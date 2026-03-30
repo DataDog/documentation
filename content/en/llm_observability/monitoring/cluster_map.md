@@ -1,8 +1,9 @@
 ---
-title: Trace Cluster Map
-description: Identify your LLM application's drifts by viewing its Cluster Map.
+title: Patterns
+description: Discover and analyze production traffic patterns in your LLM applications with automated topic clustering.
 aliases:
   - "/llm_observability/cluster_map"
+  - "/llm_observability/monitoring/cluster_map"
 further_reading:
 - link: "/llm_observability/"
   tag: "Documentation"
@@ -10,43 +11,102 @@ further_reading:
 - link: "/llm_observability/terms/"
   tag: "Documentation"
   text: "Learn about LLM Observability Key Terms and Concepts"
+- link: "/llm_observability/experiments/datasets"
+  tag: "Documentation"
+  text: "Learn about Datasets"
 ---
 
 ## Overview
 
-You can identify drifts in your LLM applications by visualizing trace data in clusters on the [Clusters page][1]. Select an application configured with LLM Observability to view cluster information.
+Patterns automatically clusters your LLM application's production traffic into meaningful topics, helping you understand what users are asking, identify coverage gaps, and diagnose failure modes. Select an application configured with LLM Observability to view pattern information on the [**Patterns** page][1].
 
-**Note:** Clustering can take up to **24 hours** after data is ingested to be fully processed and visible on the Cluster Map. During this time, spans that are not yet clustered appear under a **"Pending"** cluster.
-
-Cluster Maps display inputs or outputs, grouped by [topic][2]. Inputs and outputs are clustered separately. Topics are determined by clustering the selected input or output into text embeddings in high dimensions, then projecting them into a 2D space.
+Patterns uses text embeddings to group your application's inputs or outputs into hierarchical topics. Topic labels are automatically generated using an LLM, giving you an interpretable view of production behavior without manual tagging.
 
 {{< img src="llm_observability/cluster_map/scatter.png" alt="The scatter plot displays clusters of traces with color-coded topics and includes a panel listing clusters, trace counts, and failure rates." style="width:100%;" >}}
 
-You can visualize the clusters by using a **Box Packing** or **Scatter Plot** layout.
+<div class="alert alert-info"><strong>Built with Llama</strong>: Patterns uses Llama to generate topic labels based on your instrumented LLM application's inputs and outputs.</div>
 
-- Box Packing gives you a grouped view of each of the clusters and overlays any metrics or evaluations on every trace.
-- Scatter Plot, on the other hand, allows you to view the high dimensional text embeddings in a 2D space, although the distance between each trace may be misleading due to projection distortion.
+**Note:** Clustering can take up to **24 hours** after data is ingested to be fully processed and visible. During this time, spans that are not yet clustered appear under a **Pending** cluster.
 
-Cluster Maps provide an overview of each cluster's performance across operational metrics, such as error types and latency, or [out-of-the-box or custom evaluations][3], enabling you to identify trends such as topic drift and additional quality issues.
+## How Patterns works
 
-<div class="alert alert-info"><strong>Built with Llama</strong>: The Cluster Map uses Llama to generate topic labels based on your instrumented LLM application's inputs and outputs. </div>
+Patterns processes your LLM application's trace data through an automated pipeline:
 
-## Search and manage clusters
+1. **Embedding generation**: Inputs and outputs from your LLM spans are converted into text embeddings.
+2. **Clustering**: Embeddings are grouped into clusters in high-dimensional space based on semantic similarity.
+3. **Topic labeling**: An LLM generates human-readable topic labels for each cluster.
+4. **Hierarchical organization**: Topics are organized into a tree structure, with broad categories containing more specific sub-topics.
+5. **Projection**: High-dimensional clusters are projected into 2D space for visualization.
 
-Customize your search query by selecting the sorting options to narrow down the clusters based on your specific criteria, such as evaluation metrics or time periods, for more targeted analysis.
+Inputs and outputs are clustered separately, so you can analyze what users are asking (inputs) and how your application responds (outputs) independently.
 
-1. Select `inputs` or `outputs` from the dropdown menu to see clusters for inputs or outputs grouped by topic.
+## Explore topics
+
+The Patterns page shows your topics in two views:
+
+### Topic table
+
+The topic table provides a hierarchical view of all discovered topics. Each topic shows:
+
+- **Topic name**: An automatically generated label describing the cluster content.
+- **Trace count**: The number of traces in the topic.
+- **Metrics**: Operational metrics such as error rate, latency, and evaluation scores.
+
+Expand parent topics to see their sub-topics and examine specific areas of your application's traffic.
+
+### Visualizations
+
+You can visualize topics using two layouts:
+
+- **Box Packing**: A grouped view of each cluster, with metrics or evaluations overlaid on every trace. Use this to compare cluster sizes and quality at a glance.
+- **Scatter Plot**: A 2D projection of the high-dimensional embeddings. Traces that are semantically similar appear closer together. Note that distances may be affected by projection distortion.
+
+{{< img src="llm_observability/cluster_map/box.png" alt="The box packing layout displays clusters of traces represented by colored circles, and includes a panel listing clusters with topics, trace counts, and failure rates." style="width:100%;" >}}
+
+## Search and filter topics
+
+Customize your view by selecting sorting options to narrow down topics based on specific criteria:
+
+1. Select **inputs** or **outputs** from the dropdown menu to see topics for inputs or outputs.
 1. Select an evaluation type or an evaluation score to color-code the clusters. For example, `Output Sentiment` for "What is the sentiment of the output?" or `duration` for "How long does it take for an LLM to generate an output (in nanoseconds)?"
 1. Select a field for the clusters to be sorted by: time, duration, or color. Then, select **desc** or **asc** to set the order.
 
-Select a topic cluster from the list to examine how inputs or outputs about specific topics perform against other topics for each metric or evaluation. You can also see individual prompts and responses for each cluster. For example, you can get an overview of your slowest topics when you overlay by `duration`.
+Select a topic from the list to examine how traces about that topic perform against other topics for each metric or evaluation. You can also see individual prompts and responses for each topic.
 
-{{< img src="llm_observability/cluster_map/box.png" alt="The box packing layout displays clusters of traces represented by colored circles, and includes a panel listing clusters with topics, trace counts, and failure rates." style="width:100%;" >}}
+## Curate topics
+
+After reviewing the automatically discovered topics, you can refine them to better reflect your application's domain:
+
+- **Rename**: Update a topic's label to use terminology specific to your domain.
+- **Merge**: Combine similar or duplicate topics into a single topic.
+- **Split**: Break an overly broad topic into more specific sub-topics.
+- **Remove**: Remove irrelevant data points from a topic. Removed points become unassigned and are re-clustered in subsequent runs.
+- **Persist**: Mark a topic as stable so it is preserved across subsequent pipeline runs.
+
+Curated topics act as training signals for future clustering runs, improving the accuracy of topic assignments over time.
+
+## Trigger a new run
+
+You can trigger a new clustering pipeline run to re-analyze your production traffic. After curation changes, triggering a new run incorporates your feedback:
+
+- Persisted topics are maintained as stable anchors.
+- Re-clustering respects your curation decisions (merges, splits, removals).
+- New data since the last run is incorporated into the analysis.
+
+## Use topics to improve your application
+
+Patterns helps you take action on production insights:
+
+- **Identify coverage gaps**: Compare the distribution of production traffic topics against your evaluation [datasets][2] to find under-tested areas.
+- **Build targeted datasets**: Add representative traces from specific topics to datasets for use in [experiments][3].
+- **Monitor quality by topic**: Overlay [evaluations][4] (such as sentiment, failure to answer, or hallucination) to identify which topics have the highest failure rates.
+- **Detect drift**: Track how topic distributions change over time to identify emerging usage patterns or shifts in user behavior.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/llm/clusters
-[2]: /llm_observability/evaluations/managed_evaluations/#enter-a-topic
-[3]: /llm_observability/terms/#evaluations
+[2]: /llm_observability/experiments/datasets
+[3]: /llm_observability/experiments/
+[4]: /llm_observability/evaluations/
