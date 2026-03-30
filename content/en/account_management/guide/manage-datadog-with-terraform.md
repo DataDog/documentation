@@ -84,6 +84,10 @@ See [Managing Multiple-Organization Accounts][3] for more information.
 
 Restriction policies are associated to a specific **resource**, and define the level of access provided to roles, teams, or users. Use the [restriction policy][19] resource to create and manage your restriction policies, or import your existing restriction policies into your Terraform configuration.
 
+## Data Access Control
+
+[Data Access Control][31] allows you to create Restricted Datasets that limit access to sensitive telemetry—such as Custom Metrics, Logs, APM traces, or RUM sessions—to designated Teams or Roles. Use the [dataset][32] resource to create and manage your Restricted Datasets, or import your existing datasets into your Terraform configuration.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -118,3 +122,5 @@ Restriction policies are associated to a specific **resource**, and define the l
 [28]: https://www.terraform.io/
 [29]: https://developer.hashicorp.com/terraform/cli/import
 [30]: https://developer.hashicorp.com/terraform/language/data-sources
+[31]: /account_management/rbac/data_access/
+[32]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/dataset
