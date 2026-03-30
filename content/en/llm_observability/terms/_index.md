@@ -171,9 +171,9 @@ In addition, Datadog's [Sensitive Data Scanner][5] is natively integrated with L
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://react-lm.github.io/
-[2]: /llm_observability/setup/sdk/?tab=model#tracing-spans
-[3]: /llm_observability/setup/auto_instrumentation/
-[4]: /llm_observability/setup/?tab=decorators#instrument-your-llm-application
+[2]: /llm_observability/instrumentation/sdk/?tab=model#tracing-spans
+[3]: /llm_observability/instrumentation/auto_instrumentation/
+[4]: /llm_observability/instrumentation/sdk/?tab=decorators#instrument-your-llm-application
 [5]: /security/sensitive_data_scanner/
 [6]: /llm_observability/evaluations/submit_evaluations
 [7]: https://github.com/DataDog/llm-observability/blob/main/1-llm-span.ipynb

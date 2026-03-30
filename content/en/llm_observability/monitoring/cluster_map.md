@@ -9,7 +9,7 @@ further_reading:
   text: "Learn about LLM Observability"
 - link: "/llm_observability/terms/"
   tag: "Documentation"
-  text: "Learn about LLM Observability Key Terms and Concepts"
+  text: "Learn about LLM Observability Core Concepts"
 ---
 
 ## Overview

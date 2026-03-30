@@ -8,10 +8,10 @@ further_reading:
     - link: '/llm_observability/guide/evaluation_developer_guide'
       tag: 'Documentation'
       text: 'Learn about building custom evaluators'
-    - link: '/llm_observability/setup/sdk'
+    - link: '/llm_observability/instrumentation/sdk'
       tag: 'Documentation'
       text: 'Learn about the LLM Observability SDK for Python'
-    - link: '/llm_observability/setup/api'
+    - link: '/llm_observability/instrumentation/api'
       tag: 'Documentation'
       text: 'Learn about the Evaluations API'
     - link: '/llm_observability/evaluations/submit_nemo_evaluations'
@@ -120,7 +120,7 @@ To submit evaluations for <a href="/llm_observability/instrumentation/otel_instr
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /metrics/custom_metrics/#naming-custom-metrics
-[2]: /llm_observability/setup/api/?tab=model#evaluations-api
-[3]: /llm_observability/setup/sdk/python/#evaluations
-[4]: /llm_observability/setup/sdk/nodejs/#evaluations
+[2]: /llm_observability/instrumentation/api/?tab=model#evaluations-api
+[3]: /llm_observability/instrumentation/sdk/python/#evaluations
+[4]: /llm_observability/instrumentation/sdk/nodejs/#evaluations
 [5]: /llm_observability/guide/evaluation_developer_guide

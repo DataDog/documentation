@@ -59,9 +59,9 @@ To access LLM-specific insights, select an APM span in the [Trace Explorer][5] a
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /llm_observability/setup/sdk/
+[1]: /llm_observability/instrumentation/sdk/
 [2]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/
-[3]: /llm_observability/setup/api/
+[3]: /llm_observability/instrumentation/api/
 [4]: https://app.datadoghq.com/llm/traces
 [5]: https://app.datadoghq.com/apm/traces
 [6]: /llm_observability/terms/#spans

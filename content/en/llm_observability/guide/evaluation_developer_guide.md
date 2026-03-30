@@ -5,7 +5,7 @@ further_reading:
     - link: '/llm_observability/evaluations/external_evaluations'
       tag: 'Documentation'
       text: 'Learn about submitting external evaluations'
-    - link: '/llm_observability/setup/sdk/python'
+    - link: '/llm_observability/instrumentation/sdk/python'
       tag: 'Documentation'
       text: 'Learn about the LLM Observability SDK for Python'
     - link: '/llm_observability/instrumentation/api'

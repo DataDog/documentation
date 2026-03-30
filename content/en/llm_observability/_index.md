@@ -124,12 +124,12 @@ Follow this learning path to get up and running with LLM Observability:
 
 [1]: https://app.datadoghq.com/llm/traces
 [2]: /llm_observability/terms
-[3]: /llm_observability/setup/sdk
+[3]: /llm_observability/instrumentation/sdk
 [4]: /llm_observability/evaluations
 [5]: /llm_observability/instrumentation
 [6]: /llm_observability/quickstart
 [7]: https://app.datadoghq.com/dash/integration/llm_operational_insights
-[8]: /llm_observability/setup/auto_instrumentation
+[8]: /llm_observability/instrumentation/auto_instrumentation
 [9]: /llm_observability/evaluations/managed_evaluations
 [10]: /llm_observability/monitoring/cluster_map
 [11]: /llm_observability/experiments

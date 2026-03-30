@@ -45,7 +45,7 @@ Before you begin, make sure you have the following:
    Replace `<YOUR_DATADOG_API_KEY>` with your Datadog API key.
 
 
-[1]: /llm_observability/setup/sdk/python/#command-line-setup
+[1]: /llm_observability/instrumentation/sdk/python/#command-line-setup
 [2]: /getting_started/site/
 {{% /tab %}}
 
@@ -66,7 +66,7 @@ Before you begin, make sure you have the following:
 
    Replace `<YOUR_DATADOG_API_KEY>` with your Datadog API key.
 
-[1]: /llm_observability/setup/sdk/nodejs/#command-line-setup
+[1]: /llm_observability/instrumentation/sdk/nodejs/#command-line-setup
 [2]: /getting_started/site/
 
 {{% /tab %}}
@@ -88,7 +88,7 @@ Before you begin, make sure you have the following:
 
    Replace `<YOUR_DATADOG_API_KEY>` with your Datadog API key.
 
-[1]: /llm_observability/setup/sdk/java/#command-line-setup
+[1]: /llm_observability/instrumentation/sdk/java/#command-line-setup
 [2]: /getting_started/site/
 
 {{% /tab %}}
@@ -169,13 +169,52 @@ See below for a simple application that can be used to begin exploring the LLM O
    }
 
    main().then(console.log)
+   ```
 
 3. Run the application:
-   ```
+
+   ```shell
    DD_LLMOBS_ENABLED=1 \
    DD_LLMOBS_ML_APP=quickstart-app \
    DD_API_KEY=<YOUR_DATADOG_API_KEY> \
    NODE_OPTIONS="--import dd-trace/initialize.mjs" node app.js
+   ```
+
+{{% /tab %}}
+
+{{% tab "Java" %}}
+1. Create a Maven project with the OpenAI dependency, or add it to your existing project. Save example file `App.java`:
+
+   ```java
+   import com.openai.client.OpenAIClient;
+   import com.openai.client.okhttp.OpenAIOkHttpClient;
+   import com.openai.models.chat.completions.*;
+
+   public class App {
+       public static void main(String[] args) {
+           OpenAIClient client = OpenAIOkHttpClient.fromEnv();
+           ChatCompletion completion = client.chat().completions().create(
+               ChatCompletionCreateParams.builder()
+                   .model("gpt-4o-mini")
+                   .addMessage(ChatCompletionMessageParam.ofSystem(
+                       "You are a helpful customer assistant for a furniture store."))
+                   .addMessage(ChatCompletionMessageParam.ofUser(
+                       "I'd like to buy a chair for my living room."))
+                   .build()
+           );
+           System.out.println(completion.choices().get(0).message().content());
+       }
+   }
+   ```
+
+2. Run the application:
+
+   ```shell
+   java -javaagent:/path/to/dd-java-agent.jar \
+   -Ddd.llmobs.enabled=true \
+   -Ddd.llmobs.ml.app=quickstart-app \
+   -Ddd.api.key=<YOUR_DATADOG_API_KEY> \
+   -jar path/to/your/app.jar
    ```
 
 {{% /tab %}}
@@ -186,8 +225,8 @@ See below for a simple application that can be used to begin exploring the LLM O
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /llm_observability/setup/sdk/python
-[2]: /llm_observability/setup/sdk/nodejs
+[1]: /llm_observability/instrumentation/sdk/python
+[2]: /llm_observability/instrumentation/sdk/nodejs
 [3]: https://app.datadoghq.com/llm/traces
 [4]: /llm_observability/evaluations
 [5]: /llm_observability/instrumentation/custom_instrumentation

@@ -4,10 +4,10 @@ description: Learn how to create LLM-as-a-Judge evaluations from templates for y
 further_reading:
 - link: "/llm_observability/terms/"
   tag: "Documentation"
-  text: "Learn about LLM Observability terms and concepts"
-- link: "/llm_observability/setup"
+  text: "Learn about LLM Observability core concepts"
+- link: "/llm_observability/instrumentation"
   tag: "Documentation"
-  text: "Learn how to set up LLM Observability"
+  text: "Learn how to instrument your LLM application"
 - link: "https://www.datadoghq.com/blog/llm-observability-hallucination-detection/"
   tag: "Blog"
   text: "Detect hallucinations in your RAG LLM applications with Datadog LLM Observability"

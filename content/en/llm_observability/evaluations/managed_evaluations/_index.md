@@ -7,10 +7,10 @@ further_reading:
   text: Gain visibility into Strands Agents workflows with Datadog LLM Observability
 - link: "/llm_observability/terms/"
   tag: "Documentation"
-  text: "Learn about LLM Observability terms and concepts"
-- link: "/llm_observability/setup"
+  text: "Learn about LLM Observability core concepts"
+- link: "/llm_observability/instrumentation"
   tag: "Documentation"
-  text: "Learn how to set up LLM Observability"
+  text: "Learn how to instrument your LLM application"
 aliases:
     - /llm_observability/evaluations/ootb_evaluations
 ---

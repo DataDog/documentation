@@ -1,7 +1,7 @@
 ---
 title: LLM Observability Instrumentation
 further_reading:
-    - link: '/llm_observability/auto_instrumentation'
+    - link: '/llm_observability/instrumentation/auto_instrumentation'
       tag: 'Auto instrumentation'
       text: 'Get started quickly with Automatic Instrumentation'
     - link: https://www.datadoghq.com/blog/llm-otel-semantic-convention
@@ -11,6 +11,17 @@ further_reading:
 
 
 To get started with Datadog LLM Observability, instrument your LLM application or agent(s) by choosing from several approaches based on your programming language and setup. Datadog provides comprehensive instrumentation options designed to capture detailed traces, metrics, and evaluations from your LLM applications and agents with minimal code changes.
+
+## Choose your approach
+
+Use the following table to determine the right instrumentation approach for your application:
+
+| Approach | Languages | Code changes | Best for |
+|---|---|---|---|
+| [Auto-instrumentation][1] | Python, Node.js | None | Applications using supported LLM providers and frameworks (OpenAI, LangChain, AWS Bedrock, Anthropic) |
+| [SDK manual instrumentation][2] | Python, Node.js, Java | Decorators or wrappers | Custom spans around business logic, multi-step workflows, and agent orchestration |
+| [HTTP API][3] | Any | HTTP calls | Languages without SDK support, or custom integrations |
+| [OpenTelemetry][8] | Any (via OTel SDKs) | OTel instrumentation | Teams already using OpenTelemetry or the GenAI Semantic Conventions |
 
 ## Instrumentation Options
 You can instrument your application with the Python, Node.js, or Java SDKs, or by using the LLM Observability API.
@@ -70,10 +81,11 @@ To learn more, see the [HTTP API Documentation][3].
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /llm_observability/auto_instrumentation
+[1]: /llm_observability/instrumentation/auto_instrumentation
 [2]: /llm_observability/instrumentation/sdk
-[3]: /llm_observability/setup/api
+[3]: /llm_observability/instrumentation/api
 [4]: /llm_observability/instrumentation/api/?tab=model#spans-api
 [5]: /llm_observability/instrumentation/api/?tab=model#evaluations-api
 [6]: /llm_observability/instrumentation/sdk#command-line-setup
 [7]: /llm_observability/instrumentation/sdk#in-code-setup
+[8]: /llm_observability/instrumentation/otel_instrumentation

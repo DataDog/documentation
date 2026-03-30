@@ -28,6 +28,6 @@ For your agentic applications, LLM Observability allows you to:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /llm_observability/setup/auto_instrumentation?tab=python#openai-agents
-[2]: /llm_observability/setup/auto_instrumentation?tab=python#langgraph
-[3]: /llm_observability/setup/auto_instrumentation?tab=python#crew-ai
+[1]: /llm_observability/instrumentation/auto_instrumentation?tab=python#openai-agents
+[2]: /llm_observability/instrumentation/auto_instrumentation?tab=python#langgraph
+[3]: /llm_observability/instrumentation/auto_instrumentation?tab=python#crew-ai
