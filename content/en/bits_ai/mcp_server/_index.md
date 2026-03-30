@@ -75,7 +75,7 @@ The Datadog MCP Server supports _toolsets_, which allow you to use only the tool
 - `synthetics`: Tools for interacting with Datadog [Synthetic tests][20]
 - `workflows`: Tools for [Workflow Automation][39], including listing, inspecting, executing, and configuring workflows for agent use
 
-To use a toolset, include the `toolsets` query parameter in the endpoint URL when connecting to the MCP Server ([remote authentication][27] only). 
+To use a toolset, include the `toolsets` query parameter in the endpoint URL when connecting to the MCP Server ([remote authentication][27] only). Use `toolsets=all` to enable all generally available toolsets at once.
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
 For example, based on your selected [Datadog site][36] ({{< region-param key="dd_site_name" >}}):
@@ -88,6 +88,9 @@ For example, based on your selected [Datadog site][36] ({{< region-param key="dd
 
 - Retrieve core, Synthetic Testing, and Software Delivery tools:
   <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=core,synthetics,software-delivery</code></pre>
+
+- Retrieve all generally available tools:
+  <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=all</code></pre>
 
 [36]: /getting_started/site/#navigate-the-datadog-documentation-by-site
 {{< /site-region >}}
