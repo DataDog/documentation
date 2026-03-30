@@ -108,7 +108,7 @@ This section lists the tools available in the Datadog MCP Server and provides ex
 
 ### `search_datadog_events`
 *Toolset: **core***\
-*Permissions Required: `Events`, `Timeseries`*\
+*Permissions Required: `Events` and `Timeseries`*\
 Searches events like monitor alerts, deployment notifications, infrastructure changes, security findings, and service status changes.
 
 - Show me all deployment events from the last 24 hours.
@@ -130,7 +130,7 @@ Retrieves detailed information about an incident.
 
 ### `get_datadog_metric`
 *Toolset: **core***\
-*Permissions Required: `Metrics`, `Timeseries`*\
+*Permissions Required: `Cloud Cost Management Read` or `Metrics` or `Timeseries`*\
 Queries and analyzes historical or real-time metric data, supporting custom queries and aggregations.
 
 - Show me CPU utilization metrics for all hosts in the last 4 hours.
@@ -139,7 +139,7 @@ Queries and analyzes historical or real-time metric data, supporting custom quer
 
 ### `get_datadog_metric_context`
 *Toolset: **core***\
-*Permissions Required: `Metrics`*\
+*Permissions Required: `Cloud Cost Management Read` or `Metrics`*\
 Retrieves detailed information about a metric including metadata, available tags, and tag values for filtering and grouping.
 
 - What tags are available for the `system.cpu.user` metric?
@@ -168,7 +168,7 @@ Fetches a complete trace from Datadog APM using a trace ID.
 
 ### `search_datadog_dashboards`
 *Toolset: **core***\
-*Permissions Required: `Dashboards Read`, `User Access Read`*\
+*Permissions Required: `Dashboards Read` and `User Access Read`*\
 Lists available Datadog dashboards and key details.
 
 - Show me all available dashboards in our account.
@@ -196,7 +196,7 @@ Lists and searches Datadog notebooks with filtering by author, tags, and content
 
 ### `search_datadog_hosts`
 *Toolset: **core***\
-*Permissions Required: `Hosts Read`, `Timeseries`*\
+*Permissions Required: `Hosts Read` and `Timeseries`*\
 Lists and provides information about monitored hosts, supporting filtering and searching.
 
 - Show me all hosts in our production environment.
@@ -232,7 +232,7 @@ Lists services in Datadog's Software Catalog with details and team information.
 
 ### `search_datadog_service_dependencies`
 *Toolset: **core***\
-*Permissions Required: `Service Catalog Read`, `APM Read`*\
+*Permissions Required: `APM Read` and `Service Catalog Read` and `Teams Read`*\
 Retrieves service dependencies (upstream/downstream) and services owned by a team.
 
 - Show me all upstream services that call the checkout service.
@@ -250,7 +250,7 @@ Retrieves spans from APM traces with filters such as service, time, resource, an
 
 ### `analyze_datadog_logs`
 *Toolset: **core***\
-*Permissions Required: `Logs Read Data`, `Logs Read Index Data`, `Timeseries`*\
+*Permissions Required: `Logs Read Data` and `Logs Read Index Data` and `Timeseries`*\
 Analyze Datadog logs using SQL queries for counting, aggregations, and numerical analysis. Use this for statistical analysis.
 
 - Count error logs by service in the last hour.
@@ -259,7 +259,7 @@ Analyze Datadog logs using SQL queries for counting, aggregations, and numerical
 
 ### `search_datadog_logs`
 *Toolset: **core***\
-*Permissions Required: `Logs Read Data`*\
+*Permissions Required: `Logs Read Data` and `Logs Read Index Data`*\
 Searches logs with filters (time, query, service, host, storage tier, and so on) and returns log details. Renamed from `get_logs`.
 
 - Show me error logs from the nginx service in the last hour.
