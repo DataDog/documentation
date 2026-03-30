@@ -25,6 +25,7 @@ AI Agents Console supports the following integrations:
 |------|-------------|
 | [Claude Code][2] | Anthropic's agentic coding tool |
 | [Cursor][3] | AI-powered code editor |
+| GitHub Copilot | Coming soon |
 
 ## Set up an integration
 
