@@ -37,7 +37,7 @@ When building a pipeline that has not been deployed yet, you can set up the pipe
 
 ## Export the configuration of a deployed pipeline
 
-Deployed pipelines can be active or inactive pipelines.
+Deployed pipelines have a Worker installed to send data through the pipeline. A deployed pipeline can be active or inactive.
 
 ### Export a pipeline's configuration
 
