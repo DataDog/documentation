@@ -20,7 +20,6 @@ further_reading:
 
 Setting up and updating a pipeline with Terraform or the API can be time-consuming, manual, and prone to syntax errors. Instead, you can create a pipeline or update an existing pipeline in the UI, and then export the configuration to JSON or Terraform to programmatically create or update the pipeline.
 
-Building a pipeline in the UI helps you make changes to your configuration before exporting and using the API or Terraform to deploy it programmatically.
 
 ## Export the configuration of a pipeline in draft mode
 
