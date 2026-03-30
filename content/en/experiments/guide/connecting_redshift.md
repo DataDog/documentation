@@ -48,10 +48,10 @@ You can follow your configuration's completion steps under **Deployment Status**
 
 Create a Datadog service user and a dedicated schema for Datadog to store experiment results and intermediate tables.
 
-<div class="alert alert-info">You must have <code>superuser</code> or <code>admin</code> privileges in the Redshift cluster to create the Datadog service user.</div>
+<div class="alert alert-info">You must have <code>superuser</code> or <code>admin</code> privileges in the Redshift database to create the Datadog service user.</div>
 
 
-### Create a Datadog service user in your Redshift cluster
+### Create a Datadog service user in your Redshift database
 
 Run the following command to create a service user with a strong password that Datadog can use to execute queries. Replace `datadog_experiments_user` with your user value and `Your_Strong_Password` with your password.
 
@@ -68,9 +68,9 @@ CREATE SCHEMA IF NOT EXISTS datadog_experiments_output;
 GRANT ALL ON SCHEMA datadog_experiments_output TO datadog_experiments_user;
 ```
 
-### Grant the service user read access to the schema
+### Grant the service user read access to your metric data
 
-Grant the service user read access to the tables or schemas containing your experiment metrics so Datadog can calculate results. Run the `GRANT USAGE` command, then run the `GRANT SELECT` option that matches your access needs. Replace `datadog_experiments_user`, `<schema>`, and `<table>` with the appropriate values.
+Grant the service user read access to the tables or schemas that contain your source data. These are the tables you plan to use for experiment metrics, and are typically in a different schema than the output schema created above. Run the `GRANT USAGE` command, then run the `GRANT SELECT` option that matches your access needs. Replace `datadog_experiments_user`, `<schema>`, and `<table>` with the appropriate values.
 
 ```sql
 GRANT USAGE ON SCHEMA <schema> TO datadog_experiments_user;
@@ -106,7 +106,7 @@ In addition to the permissions listed in the [AWS integration documentation][3],
   "Version": "2012-10-17",
   "Statement": [
     {
-      "Sid": "GetClusterCreds",
+      "Sid": "RedshiftGetClusterCredentials",
       "Effect": "Allow",
       "Action": [
         "redshift:GetClusterCredentials"
@@ -130,7 +130,7 @@ In addition to the permissions listed in the [AWS integration documentation][3],
       "Resource": "*"
     },
     {
-      "Sid": "ListTheBucket",
+      "Sid": "ListExperimentationBucket",
       "Effect": "Allow",
       "Action": [
         "s3:ListBucket"
@@ -138,7 +138,7 @@ In addition to the permissions listed in the [AWS integration documentation][3],
       "Resource": "[S3 bucket ARN]"
     },
     {
-      "Sid": "ObjectRW",
+      "Sid": "ReadWriteExperimentationBucket",
       "Effect": "Allow",
       "Action": [
         "s3:GetObject",
