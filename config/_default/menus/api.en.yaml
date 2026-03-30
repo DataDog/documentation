@@ -3942,6 +3942,90 @@ menu:
           - PatchGlobalVariable
         unstable: []
         order: 51
+    - name: Get a specific version of a test
+      url: '#get-a-specific-version-of-a-test'
+      identifier: synthetics-get-a-specific-version-of-a-test
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSyntheticsTestVersion
+        unstable: []
+        order: 53
+    - name: Get version history of a test
+      url: '#get-version-history-of-a-test'
+      identifier: synthetics-get-version-history-of-a-test
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListSyntheticsTestVersions
+        unstable: []
+        order: 57
+    - name: Get parent suites for a test
+      url: '#get-parent-suites-for-a-test'
+      identifier: synthetics-get-parent-suites-for-a-test
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetTestParentSuites
+        unstable: []
+        order: 56
+    - name: Complete a multipart upload of a test file
+      url: '#complete-a-multipart-upload-of-a-test-file'
+      identifier: synthetics-complete-a-multipart-upload-of-a-test-file
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CompleteTestFileMultipartUpload
+        unstable: []
+        order: 61
+    - name: Abort a multipart upload of a test file
+      url: '#abort-a-multipart-upload-of-a-test-file'
+      identifier: synthetics-abort-a-multipart-upload-of-a-test-file
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - AbortTestFileMultipartUpload
+        unstable: []
+        order: 62
+    - name: Get presigned URLs for uploading a test file
+      url: '#get-presigned-urls-for-uploading-a-test-file'
+      identifier: synthetics-get-presigned-urls-for-uploading-a-test-file
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetTestFileMultipartPresignedUrls
+        unstable: []
+        order: 60
+    - name: Get a presigned URL for downloading a test file
+      url: '#get-a-presigned-url-for-downloading-a-test-file'
+      identifier: synthetics-get-a-presigned-url-for-downloading-a-test-file
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetTestFileDownloadUrl
+        unstable: []
+        order: 59
     - name: Edit a Network Path test
       url: '#edit-a-network-path-test'
       identifier: synthetics-edit-a-network-path-test
@@ -3978,6 +4062,18 @@ menu:
           - CreateSyntheticsNetworkTest
         unstable: []
         order: 47
+    - name: Get a fast test result
+      url: '#get-a-fast-test-result'
+      identifier: synthetics-get-a-fast-test-result
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSyntheticsFastTestResult
+        unstable: []
+        order: 52
     - name: Bulk delete tests
       url: '#bulk-delete-tests'
       identifier: synthetics-bulk-delete-tests
@@ -3990,6 +4086,18 @@ menu:
           - DeleteSyntheticsTests
         unstable: []
         order: 50
+    - name: Patch a test suite
+      url: '#patch-a-test-suite'
+      identifier: synthetics-patch-a-test-suite
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - PatchTestSuite
+        unstable: []
+        order: 58
     - name: Edit a test suite
       url: '#edit-a-test-suite'
       identifier: synthetics-edit-a-test-suite
@@ -4074,6 +4182,30 @@ menu:
           - GetOnDemandConcurrencyCap
         unstable: []
         order: 41
+    - name: Get parent tests for a subtest
+      url: '#get-parent-tests-for-a-subtest'
+      identifier: synthetics-get-parent-tests-for-a-subtest
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetApiMultistepSubtestParents
+        unstable: []
+        order: 55
+    - name: Get available subtests for a multistep test
+      url: '#get-available-subtests-for-a-multistep-test'
+      identifier: synthetics-get-available-subtests-for-a-multistep-test
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetApiMultistepSubtests
+        unstable: []
+        order: 54
     - name: Edit a global variable
       url: '#edit-a-global-variable'
       identifier: synthetics-edit-a-global-variable
@@ -13104,8 +13236,7 @@ menu:
           - v2
         operationids:
           - ListServiceNowUsers
-        unstable:
-          - v2
+        unstable: []
         order: 8
     - name: List ServiceNow instances
       url: '#list-servicenow-instances'
@@ -13117,8 +13248,7 @@ menu:
           - v2
         operationids:
           - ListServiceNowInstances
-        unstable:
-          - v2
+        unstable: []
         order: 9
     - name: Update ServiceNow template
       url: '#update-servicenow-template'
@@ -13130,8 +13260,7 @@ menu:
           - v2
         operationids:
           - UpdateServiceNowTemplate
-        unstable:
-          - v2
+        unstable: []
         order: 2
     - name: Get ServiceNow template
       url: '#get-servicenow-template'
@@ -13143,8 +13272,7 @@ menu:
           - v2
         operationids:
           - GetServiceNowTemplate
-        unstable:
-          - v2
+        unstable: []
         order: 3
     - name: Delete ServiceNow template
       url: '#delete-servicenow-template'
@@ -13156,8 +13284,7 @@ menu:
           - v2
         operationids:
           - DeleteServiceNowTemplate
-        unstable:
-          - v2
+        unstable: []
         order: 1
     - name: Create ServiceNow template
       url: '#create-servicenow-template'
@@ -13169,8 +13296,7 @@ menu:
           - v2
         operationids:
           - CreateServiceNowTemplate
-        unstable:
-          - v2
+        unstable: []
         order: 4
     - name: List ServiceNow templates
       url: '#list-servicenow-templates'
@@ -13182,8 +13308,7 @@ menu:
           - v2
         operationids:
           - ListServiceNowTemplates
-        unstable:
-          - v2
+        unstable: []
         order: 5
     - name: List ServiceNow business services
       url: '#list-servicenow-business-services'
@@ -13195,8 +13320,7 @@ menu:
           - v2
         operationids:
           - ListServiceNowBusinessServices
-        unstable:
-          - v2
+        unstable: []
         order: 7
     - name: List ServiceNow assignment groups
       url: '#list-servicenow-assignment-groups'
@@ -13208,8 +13332,7 @@ menu:
           - v2
         operationids:
           - ListServiceNowAssignmentGroups
-        unstable:
-          - v2
+        unstable: []
         order: 6
     - name: Software Catalog
       url: /api/latest/software-catalog/
@@ -14320,6 +14443,70 @@ menu:
           - DeleteTestOptimizationServiceSettings
         unstable:
           - v2
+        order: 5
+    - name: Widgets
+      url: /api/latest/widgets/
+      identifier: widgets
+      generated: true
+    - name: Update a widget
+      url: '#update-a-widget'
+      identifier: widgets-update-a-widget
+      parent: widgets
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateWidget
+        unstable: []
+        order: 3
+    - name: Get a widget
+      url: '#get-a-widget'
+      identifier: widgets-get-a-widget
+      parent: widgets
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetWidget
+        unstable: []
+        order: 2
+    - name: Delete a widget
+      url: '#delete-a-widget'
+      identifier: widgets-delete-a-widget
+      parent: widgets
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteWidget
+        unstable: []
+        order: 4
+    - name: Create a widget
+      url: '#create-a-widget'
+      identifier: widgets-create-a-widget
+      parent: widgets
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateWidget
+        unstable: []
+        order: 1
+    - name: Search widgets
+      url: '#search-widgets'
+      identifier: widgets-search-widgets
+      parent: widgets
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - SearchWidgets
+        unstable: []
         order: 5
     - name: Workflow Automation
       url: /api/latest/workflow-automation/

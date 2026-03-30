@@ -4067,6 +4067,14 @@
     "request_description": "",
     "request_schema_description": "Request object for updating a maintenance."
   },
+  "GetApiMultistepSubtests": {
+    "description": "Get the list of API tests that can be added as subtests to a given API multistep test.\nThe current test is excluded from the list since a test cannot be a subtest of itself.",
+    "summary": "Get available subtests for a multistep test"
+  },
+  "GetApiMultistepSubtestParents": {
+    "description": "Get the list of API multistep tests that include a given subtest,\nalong with their monitor status.",
+    "summary": "Get parent tests for a subtest"
+  },
   "GetOnDemandConcurrencyCap": {
     "description": "Get the on-demand concurrency cap.",
     "summary": "Get the on-demand concurrency cap"
@@ -4099,10 +4107,19 @@
     "request_description": "New suite details to be saved.",
     "request_schema_description": "Request body for creating or editing a Synthetic test suite."
   },
+  "PatchTestSuite": {
+    "description": "Patch a Synthetic test suite using JSON Patch (RFC 6902).\nUse partial updates to modify only specific fields of a test suite.\n\nCommon operations include:\n- Replace field values: `{\"op\": \"replace\", \"path\": \"/name\", \"value\": \"new_name\"}`\n- Add/update tags: `{\"op\": \"add\", \"path\": \"/tags/-\", \"value\": \"new_tag\"}`\n- Remove fields: `{\"op\": \"remove\", \"path\": \"/message\"}`",
+    "summary": "Patch a test suite",
+    "request_description": "JSON Patch document with operations to apply.",
+    "request_schema_description": "JSON Patch request for a Synthetic test suite."
+  },
   "DeleteSyntheticsTests": {
     "summary": "Bulk delete tests",
     "request_description": "",
     "request_schema_description": "Request body for bulk deleting Synthetic tests."
+  },
+  "GetSyntheticsFastTestResult": {
+    "summary": "Get a fast test result"
   },
   "CreateSyntheticsNetworkTest": {
     "summary": "Create a Network Path test",
@@ -4116,6 +4133,42 @@
     "summary": "Edit a Network Path test",
     "request_description": "New Network Path test details to be saved.",
     "request_schema_description": "Network Path test request."
+  },
+  "GetTestFileDownloadUrl": {
+    "description": "Get a presigned URL to download a file attached to a Synthetic test.\nThe returned URL is temporary and expires after a short period.",
+    "summary": "Get a presigned URL for downloading a test file",
+    "request_description": "",
+    "request_schema_description": "Request body for getting a presigned download URL for a test file."
+  },
+  "GetTestFileMultipartPresignedUrls": {
+    "description": "Get presigned URLs for uploading a file to a Synthetic test using multipart upload.\nReturns the presigned URLs for each part along with the bucket key that references the file.",
+    "summary": "Get presigned URLs for uploading a test file",
+    "request_description": "",
+    "request_schema_description": "Request body for getting presigned URLs for a multipart file upload."
+  },
+  "AbortTestFileMultipartUpload": {
+    "description": "Abort an in-progress multipart file upload for a Synthetic test. This cancels the upload\nand releases any storage used by already-uploaded parts.",
+    "summary": "Abort a multipart upload of a test file",
+    "request_description": "",
+    "request_schema_description": "Request body for aborting a multipart file upload."
+  },
+  "CompleteTestFileMultipartUpload": {
+    "description": "Complete a multipart file upload for a Synthetic test. Call this endpoint after all parts\nhave been uploaded using the presigned URLs obtained from the multipart presigned URLs endpoint.",
+    "summary": "Complete a multipart upload of a test file",
+    "request_description": "",
+    "request_schema_description": "Request body for completing a multipart file upload."
+  },
+  "GetTestParentSuites": {
+    "description": "Get the list of parent suites and their status for a given Synthetic test.",
+    "summary": "Get parent suites for a test"
+  },
+  "ListSyntheticsTestVersions": {
+    "description": "Get the paginated version history for a Synthetic test.",
+    "summary": "Get version history of a test"
+  },
+  "GetSyntheticsTestVersion": {
+    "description": "Get a specific version of a Synthetic test by its version number.",
+    "summary": "Get a specific version of a test"
   },
   "PatchGlobalVariable": {
     "description": "Patch a global variable using JSON Patch (RFC 6902).\nThis endpoint allows partial updates to a global variable by specifying only the fields to modify.\n\nCommon operations include:\n- Replace field values: `{\"op\": \"replace\", \"path\": \"/name\", \"value\": \"new_name\"}`\n- Update nested values: `{\"op\": \"replace\", \"path\": \"/value/value\", \"value\": \"new_value\"}`\n- Add/update tags: `{\"op\": \"add\", \"path\": \"/tags/-\", \"value\": \"new_tag\"}`\n- Remove fields: `{\"op\": \"remove\", \"path\": \"/description\"}`",
@@ -4435,6 +4488,30 @@
   "GetUserMemberships": {
     "description": "Get a list of memberships for a user",
     "summary": "Get user memberships"
+  },
+  "SearchWidgets": {
+    "description": "Search and list widgets for a given experience type. Supports filtering by widget type, creator, title, and tags, as well as sorting and pagination.",
+    "summary": "Search widgets"
+  },
+  "CreateWidget": {
+    "description": "Create a new widget for a given experience type.",
+    "summary": "Create a widget",
+    "request_description": "Widget request body.",
+    "request_schema_description": "Request body for creating or updating a widget."
+  },
+  "DeleteWidget": {
+    "description": "Soft-delete a widget by its UUID for a given experience type.",
+    "summary": "Delete a widget"
+  },
+  "GetWidget": {
+    "description": "Retrieve a widget by its UUID for a given experience type.",
+    "summary": "Get a widget"
+  },
+  "UpdateWidget": {
+    "description": "Update a widget by its UUID for a given experience type. This performs a full replacement of the widget definition.",
+    "summary": "Update a widget",
+    "request_description": "Widget request body.",
+    "request_schema_description": "Request body for creating or updating a widget."
   },
   "CreateWorkflow": {
     "description": "Create a new workflow, returning the workflow ID. This API requires a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key). Alternatively, you can configure these permissions [in the UI](https://docs.datadoghq.com/account_management/api-app-keys/#actions-api-access).",
