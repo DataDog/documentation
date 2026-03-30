@@ -11,7 +11,7 @@ further_reading:
 Datadog Event Management supports maintenance windows to suppress case notifications during scheduled system maintenance. A case that matches a maintenance condition and occurs within the maintenance time window will be automatically archived.
 
 ## Create a Maintenance Window
-<div class="alert alert-danger">You must have Case Shared Settings Write (cases_shared_settings_write) permissions. For more information, see [Datadog Role Permissions][1].</div>
+<div class="alert alert-danger">You must have Case Management Shared Settings Write (cases_shared_settings_write) permissions. For more information, see [Datadog Role Permissions][1].</div>
 
 To create a Maintenance Window:
 1. Navigate to Event Management Settings.
