@@ -2,12 +2,12 @@
 title: Forecasting
 description: Predict future cloud costs and make informed decisions with Cloud Cost Management Forecasts.
 further_reading:
-# - link: "/cloud_cost_management/reports/"
-#   tag: "Documentation"
-#   text: "Learn about Cloud Cost Management Reports"
 - link: "/cloud_cost_management/planning/budgets"
   tag: "Documentation"
   text: "Learn about Cloud Cost Management Budgets"
+- link: "/cloud_cost_management/reports/"
+  tag: "Documentation"
+  text: "Learn about Cloud Cost Management Reports"
 - link: "/cloud_cost_management/"
   tag: "Documentation"
   text: "Cloud Cost Management"
@@ -54,12 +54,11 @@ If you have newly created resources or services, forecasts become available once
 
 ## View forecasts in reports
 
-Navigate to [**Cloud Cost > Analyze > Reports**][1] in Datadog to enable forecasts in your cost reports.
+Navigate to [**Cloud Cost > Analyze > Reports**][1] in Datadog to enable forecasts in your budget reports.
 
-1. Create a report or open an existing **Cost** or **Budget** report.
+1. Create a report or open an existing **Budget** report.
 2. In the left panel, toggle **Show forecast** to enable forecasting.
 3. Select the forecast period from the **Until end of** dropdown (next period, current month, current year, or a custom range).
-4. Choose your preferred rollup interval: **Daily**, **Weekly**, or **Monthly**.
 
 {{< img src="cloud_cost/forecasts/report-with-forecast.png" alt="Cost report showing the forecast toggle in the left panel and forecasted costs displayed with historical data" style="width:100%;" >}}
 
@@ -94,5 +93,5 @@ To view detailed forecast information:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-<!-- [1]: https://app.datadoghq.com/cost/analyze/reports -->
+[1]: https://app.datadoghq.com/cost/analyze/reports
 [2]: https://app.datadoghq.com/cost/plan/budgets
