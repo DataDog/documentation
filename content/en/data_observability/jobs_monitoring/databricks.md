@@ -32,8 +32,13 @@ Follow these steps to enable Data Observability: Jobs Monitoring for Databricks.
 
 <div class="alert alert-danger">New workspace integrations must authenticate using OAuth. Workspaces already integrated with a Personal Access Token continue to function and can switch to OAuth at any time. After a workspace starts using OAuth, it cannot revert to a Personal Access Token.</div>
 
-1. As a **Databricks workspace admin**, go to **Settings** by clicking on your profile in the upper-right corner from within a workspace.
-1. Under the **Identity and access** tab, click **Manage** next to **Service principals**. Click **Add service principal**, then **Add new**. Enter a name, then click **Add**.
+#### Create and configure the service principal
+
+1. As a **Databricks workspace admin**, go to **Settings** by clicking your profile in the upper-right corner of the workspace.
+1. On the **Identity and access** tab, click **Manage** next to **Service principals**.
+1. Click **Add service principal**, then click **Add new**.
+1. Enter a name, then click **Add**.
+
 
    <div class="alert alert-warning">For Azure Databricks, select the "Databricks managed" management type. Datadog does NOT support "Microsoft Entra ID managed" service principals.</div>
 
@@ -46,8 +51,11 @@ Follow these steps to enable Data Observability: Jobs Monitoring for Databricks.
 
   {{< img src="data_jobs/databricks/client-id-secret.png" alt="In Databricks, a modal showing the client ID and secret associated with a new OAuth secret is displayed." style="width:70%;" >}}
 
-1. Under the **Permissions** tab, click **Grant access**. Search for the new service principal and grant it the **Manage** permission. Click **Save**.
-1. Go back to the **Identity and access** tab and click **Manage** next to **Groups**. Click the **admins** group and add the new service principal by clicking **Add members**.
+1. On the **Permissions** tab, click **Grant access**. Search for the new service principal, grant it the **Manage** permission, and click **Save**.
+1. Return to the **Identity and access** tab and click **Manage** next to **Groups**.
+1. Click the **admins** group, then click **Add members** to add the new service principal.
+#### Add the Databricks workspace
+
 1. In Datadog, open the Databricks integration tile.
 1. On the **Configure** tab, click **Add Databricks Workspace**.
 1. Enter a workspace name, your Databricks workspace URL, and the client ID and secret you generated.
