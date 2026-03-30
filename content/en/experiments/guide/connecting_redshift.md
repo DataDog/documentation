@@ -51,7 +51,7 @@ Create an S3 bucket for importing exposure events into your warehouse. The bucke
 
 ### Grant additional IAM permissions
 
-Add the following additional permissions to your IAM role so Datadog can write data to your warehouse. Follow the examples in the table to replace the fields in the permissions JSON with the appropriate values:
+In addition to the required IAM permissions listed on the [Amazon Web Services integration page][3], the Datadog Experiments service account requires the following permissions. Use the examples in the table to replace the fields in the permissions JSON with the appropriate values:
 
 
 | Field | Example |
@@ -184,5 +184,6 @@ After you save your warehouse connection, create experiment metrics using your R
 
 [1]: https://docs.datadoghq.com/getting_started/integrations/aws/
 [2]: https://app.datadoghq.com/product-analytics
+[3]: https://docs.datadoghq.com/getting_started/integrations/aws/#prerequisites
 [4]: /experiments/defining_metrics
 [5]: https://app.datadoghq.com/integrations/
