@@ -488,42 +488,41 @@ logger.info("Flag: {} | Value: {} | Variant: {} | Reason: {}",
 
 ## Troubleshooting
 
+### Start here: verify prerequisites
+
+Before investigating specific errors, confirm these prerequisites are in place:
+
+1. **The Datadog Agent is running** and reachable from your application. Use a health check endpoint or verify process status.
+2. **Remote Configuration is enabled on the Agent**: Set `remote_configuration.enabled: true` in `datadog.yaml` or `DD_REMOTE_CONFIG_ENABLED=true`. See [Remote Configuration][1].
+3. **The experimental flagging provider is enabled on the tracer**: Set `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true`.
+4. **Required tracer environment variables are set**: `DD_API_KEY`, `DD_ENV`, and `DD_SITE`.
+5. **The Agent is configured for the correct site**: Set `site` in `datadog.yaml` or `DD_SITE` on the Agent. See [Check Agent Site][2].
+6. **Your `DD_ENV` value appears in the Feature Flag environments list**: Confirm your environment is visible at `https://app.datadoghq.com/feature-flags/settings/environments`.
+
+After confirming all prerequisites, continue with the sections below if flags still aren't working.
+
 ### Provider not ready
 
 **Problem**: `PROVIDER_NOT_READY` errors when evaluating flags
 
 **Common Causes**:
-1. **Experimental flag not enabled**: Feature flagging is disabled by default
-2. **Agent not ready**: Application started before Agent was fully initialized
-3. **No flags configured**: No flags published to your service/environment combination
-4. **Agent Remote Configuration disabled**: Agent not configured for Remote Configuration
+1. **Agent not ready**: Application started before Agent was fully initialized
+2. **No flags configured**: No flags published to your service/environment combination
+3. **Agent Remote Configuration disabled**: Agent not configured for Remote Configuration
 
 **Solutions**:
-1. **Enable experimental feature**:
-   ```bash
-   export DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
-   ```
-2. **Verify feature flagging system started** in application logs:
+1. **Verify feature flagging system started** in application logs:
    ```
    [dd.trace] Feature Flagging system starting
    [dd.trace] Feature Flagging system started
    ```
-3. **Ensure Agent is ready** before app starts (use health checks in Docker/Kubernetes)
-4. **Check EVP Proxy discovered** in logs:
+2. **Verify the Agent is ready** before app starts (use health checks in Docker/Kubernetes)
+3. **Check EVP Proxy discovered** in logs:
    ```
    discovered ... evpProxyEndpoint=evp_proxy/v4/ configEndpoint=v0.7/config
    ```
-5. **Wait for Remote Configuration sync** (can take 30-60 seconds after publishing flags)
-6. **Verify flags are published** in Datadog UI to the correct service and environment
-
-### Feature flagging system not starting
-
-**Problem**: No "Feature Flagging system starting" messages in logs
-
-**Cause**: Experimental flag not enabled in tracer
-
-**Solution**:
-Add `-Ddd.experimental.flagging.provider.enabled=true` to your Java command or set `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true`
+4. **Wait for Remote Configuration sync** (can take 30-60 seconds after publishing flags)
+5. **Verify flags are published** in Datadog UI to the correct service and environment
 
 ### EVP proxy not available error
 
@@ -535,7 +534,7 @@ Add `-Ddd.experimental.flagging.provider.enabled=true` to your Java command or s
 1. **Add Agent health check** in orchestration (Docker Compose, Kubernetes)
 2. **Add startup delay** to application
 3. **Retry logic**: Implement retry on provider initialization failure
-4. **Upgrade Agent**: Ensure using Agent 7.x or later with EVP Proxy support
+4. **Upgrade Agent**: Verify you are using Agent 7.x or later with EVP Proxy support
 
 ### Flags not updating
 
@@ -545,7 +544,7 @@ Add `-Ddd.experimental.flagging.provider.enabled=true` to your Java command or s
 1. Check Remote Configuration is enabled on both Agent and application
 2. Verify Agent can connect to Datadog backend
 3. Check application logs for "No configuration changes" or "Configuration received"
-4. Ensure flags are published (not saved as drafts) in the Datadog UI
+4. Verify flags are published (not saved as drafts) in the Datadog UI
 5. Verify service and environment tags match between app and flag targeting
 
 ### Type mismatch errors
@@ -557,13 +556,70 @@ Add `-Ddd.experimental.flagging.provider.enabled=true` to your Java command or s
 2. Use correct method: `getBooleanValue()`, `getStringValue()`, `getIntegerValue()`, `getDoubleValue()`
 3. Check flag configuration for correct value types
 
+### Debug flag evaluations
+
+If flags evaluate but return unexpected values, use `getBooleanDetails()` instead of `getBooleanValue()`. The `Details` variant of each evaluation method returns a `FlagEvaluationDetails` object that exposes the provider's internal state, including the reason, variant, and any error code.
+
+{{< code-block lang="java" >}}
+FlagEvaluationDetails<Boolean> details =
+    client.getBooleanDetails("your.flag.key", false, context);
+
+logger.info("Flag evaluation details: value={}, variant={}, reason={}, errorCode={}",
+    details.getValue(),
+    details.getVariant(),
+    details.getReason(),
+    details.getErrorCode());
+{{< /code-block >}}
+
+Review the logged output to understand why the provider returned a particular result.
+
+### Monitor provider state changes
+
+If flags were working and then stopped, add event listeners to observe provider life cycle transitions:
+
+{{< code-block lang="java" >}}
+import dev.openfeature.sdk.ProviderEvent;
+
+client.on(ProviderEvent.PROVIDER_READY, (event) -> {
+    logger.info("Feature flag provider is ready");
+});
+
+client.on(ProviderEvent.PROVIDER_ERROR, (event) -> {
+    logger.error("Feature flag provider error: {}", event.getMessage());
+});
+
+client.on(ProviderEvent.PROVIDER_STALE, (event) -> {
+    logger.warn("Feature flag provider configuration is stale");
+});
+
+client.on(ProviderEvent.PROVIDER_CONFIGURATION_CHANGED, (event) -> {
+    logger.info("Feature flag configuration updated");
+});
+{{< /code-block >}}
+
+A `PROVIDER_STALE` or `PROVIDER_ERROR` event after a period of normal operation indicates a loss of connectivity to the Agent or a Remote Configuration disruption.
+
+### Trace Remote Configuration through the Agent
+
+If none of the above resolves the issue, trace the Remote Configuration path from the Datadog backend to your application.
+
+**Check Agent RC status in Fleet Automation**
+
+The [Fleet Automation][3] page (`https://app.datadoghq.com/fleet`) shows the Remote Configuration status for each Agent. Select the Agent your application connects to and confirm Remote Configuration is active. For more detail on what Fleet Automation exposes, see the [Fleet Automation documentation][3].
+
+**Check Agent RC status from the CLI**
+
+Run `datadog-agent status` on the host running the Agent and review the Remote Configuration section of the output. For the full list of Agent CLI commands, see [Agent Commands][4].
+
+**Note**: These steps apply to all Datadog server-side SDK integrations, not only Java.
+
 ### No exposures in Datadog
 
-**Problem**: Flag evaluations aren't appearing in Datadog UI
+**Problem**: Experiment exposures aren't appearing in Datadog
 
 **Solutions**:
-1. Verify the flag's allocation has `doLog=true` configured
-2. Check Datadog Agent is receiving exposure events
+1. Verify the flag is associated with an experiment in the Datadog UI. Exposures are only recorded for flags that are part of an experiment—standard feature flags without an experiment association do not generate exposure events.
+2. Check the Datadog Agent is receiving exposure events
 3. Verify `DD_API_KEY` is correct
 4. Check Agent logs for exposure upload errors
 
@@ -572,3 +628,6 @@ Add `-Ddd.experimental.flagging.provider.enabled=true` to your Java command or s
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /remote_configuration/
+[2]: /agent/troubleshooting/site/
+[3]: /agent/fleet_automation/
+[4]: /agent/configuration/agent-commands/
