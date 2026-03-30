@@ -1,6 +1,6 @@
 ---
 title: Connect Redshift for Warehouse-Native Experiment Analysis
-description: Connect a Redshift service account to enable warehouse native experiment analysis.
+description: Connect a Redshift service account to enable warehouse-native experiment analysis.
 further_reading:
 - link: "/experiments/defining_metrics"
   tag: "Documentation"
@@ -170,7 +170,7 @@ After you set up your AWS integration and Redshift cluster, configure the experi
    - **Port**: The port your cluster is listening on (default: `5439`).
 1. Under **Database and Storage**, enter:
    - **Database**: The name of the database containing your source tables.
-   - **Database user**: The service user you created in [Step 1](#create-a-datadog-service-user-in-your-redshift-cluster) (for example, `datadog_experiments_user`).
+   - **Database user**: The service user you created in [Step 1](#create-a-datadog-service-user-in-your-redshift-database) (for example, `datadog_experiments_user`).
    - **Schema**: The schema you created in [Step 1](#create-an-output-schema) for Datadog Experiments to write to (for example, `datadog_experiments_output`).
    - **Temp S3 bucket**: The S3 bucket you created in [Step 2](#create-an-s3-bucket) (for example, `datadog-experimentation-[aws_account_id]`).
 1. Click **Save**.
