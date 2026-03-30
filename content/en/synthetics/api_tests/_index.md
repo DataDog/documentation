@@ -22,7 +22,7 @@ further_reading:
   text: 'Create and manage Synthetic API Tests with Terraform'
 - link: '/synthetics/guide/export-tests-to-terraform'
   tag: 'Guide'
-  text: 'Export Synthetic API tests to Terraform'
+  text: 'Export Synthetic tests to Terraform'
 ---
 
 ## Overview

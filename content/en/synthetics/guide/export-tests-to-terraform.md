@@ -39,13 +39,13 @@ Export to Terraform is supported for the following test types:
 
 ## Export from the test details page
 
-To export an API test from the test details page:
+To export an API or Browser Test from the test details page:
 
 1. Open any API test in Synthetic Monitoring.
 2. Click **More** in the upper right corner of the page.
-3. Select **Export to Terraform**.
+3. Select **Copy Terraform Snippet**.
 
-{{< img src="synthetics/guide/export-tests-to-terraform/export_to_terraform.png" alt="The More dropdown menu on the test details page with Export to Terraform highlighted" style="width:100%;" >}}
+{{< img src="synthetics/guide/export-tests-to-terraform/copy_terraform.png" alt="The More dropdown menu on the test details page with Copy Terraform Snippet highlighted" style="width:60%;" >}}
 
 The generated HCL configuration is copied to your clipboard. Paste it into your `.tf` file as a `datadog_synthetics_test` resource.
 
