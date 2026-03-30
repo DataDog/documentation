@@ -14,14 +14,15 @@ further_reading:
 ## Overview
 Warehouse-native experiment analysis lets you run statistical computations directly in your data warehouse.
 
-To set this up for BigQuery, connect a Snowflake service account to Datadog and configure your experiment settings. This guide covers:
+To set this up for BigQuery, connect a BigQuery service account to Datadog and configure your experiment settings. This guide covers:
 
-- connecting a Google Cloud Platform (GCP) service account
-- creating resources in GCP
-- granting permissions to the service account
-- configuring experiment-specific settings in Datadog.
+- [Preparing the Google Cloud service account and resources](#step-1-prepare-the-google-cloud-service-account)
+- [Granting IAM roles to the service account](#step-2-grant-iam-roles-to-the-service-account)
+- [Configuring experiment settings in Datadog](#step-3-configure-experiment-settings)
 
-## Step 1: Connect a Google Cloud service account
+## Step 1: Prepare the Google Cloud service account
+
+### Connect a Google Cloud service account
 
 Datadog connects to BigQuery using a service account created for Datadog. If you have already connected BigQuery to Datadog you can continue to use that service account for Datadog Experiments. Otherwise, see the [Google Cloud Platform integration page][1] to create a new service account.
 
@@ -29,23 +30,28 @@ Once you have created a service account, continue on to the next section.
 
 <div class="alert alert-info">If you're only using the Google Cloud integration for warehouse native experiment analysis, you can opt out of collecting other resources.</div>
 
-## Step 2: Create Google Cloud resources
+### Create a BigQuery dataset
 
-Datadog Experiments requires a Google Cloud Storage bucket to stage experiment exposure records and a BigQuery dataset to cache intermediate experiment results. Follow the steps below to create these resources.
+Datadog Experiments uses a BigQuery dataset to cache intermediate experiment results.
 
 1. In the Google Cloud Console, navigate to **BigQuery**.
-1. Click on your project, then click **Create Dataset**.
-1. Enter a dataset ID (e.g., `datadog_experiments_output`), select a data location, and click **Create Dataset**.
-1. Follow [Google's documentation][2] to create a new bucket for Datadog to stage experiment exposure records.
+1. Click your project, then click **Create Dataset**.
+1. Enter a dataset ID (for example, `datadog_experiments_output`).
+1. Select a data location and click **Create Dataset**.
 
-## Step 3: Grant IAM roles to the service account
+### Create a Cloud Storage bucket
 
-In addition to the permissions described in the [Google Cloud Platform integration page][1], the Datadog Experiments service account requires the following permissions:
+Datadog Experiments uses a Cloud Storage bucket to stage experiment exposure records. See [Google's documentation][2] to create a new bucket.
 
-1. [BigQuery Job User][4] — allows the service account to run BigQuery jobs.
-1. [BigQuery Data Owner][5] - grants the service account full access to the Datadog Experiments output dataset.
-1. [Storage Object User][6] - allows the service account to read and write objects in the storage bucket used by Datadog Experiment.
-1. [BigQuery Data Viewer][7] - allows the service account to read table used in warehouse native metrics.
+
+## Step 2: Grant IAM roles to the service account
+
+In addition to the permissions listed in the [Google Cloud Platform integration page][1], the Datadog Experiments service account requires the following permissions:
+
+1. [BigQuery Job User][4]: Allows the service account to run BigQuery jobs.
+1. [BigQuery Data Owner][5]: Grants the service account full access to the Datadog Experiments output dataset.
+1. [Storage Object User][6]: Aallows the service account to read and write objects in the storage bucket used by Datadog Experiment.
+1. [BigQuery Data Viewer][7]: Allows the service account to read table used in warehouse native metrics.
 
 To assign these roles at the project level:
 
@@ -54,15 +60,16 @@ To assign these roles at the project level:
 3. Enter the service account email in the **New principals** field.
 4. Add the roles listed above, then click **Save**.
 
-To grant read access to specific source tables, follow the steps below:
+To grant read access to specific source tables:
 
 1. Navigate to **BigQuery** in the Google Cloud Console.
 1. Select the dataset containing your source tables.
 1. Click **Sharing** > **Permissions**.
 1. Click **Add Principal**, enter the service account email, and assign the **BigQuery Data Viewer** role.
-1. Repeat for each dataset that is needed for building experiment metrics.
 
-## Step 4: Configure experiment settings
+Repeat these last four steps to grant read access to each dataset that is needed for building experiment metrics.
+
+## Step 3: Configure experiment settings
 
 Once your BigQuery service account is connected to Datadog, navigate to the [Experiment Warehouse Connection][8] page and click **Connect a data warehouse** to configure experiment settings.
 
@@ -76,7 +83,7 @@ After you save your warehouse connection, create experiment metrics using your B
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /integrations/google-cloud-platform/ 
+[1]: /integrations/google-cloud-platform/
 [2]: https://docs.cloud.google.com/storage/docs/creating-buckets#console
 [4]: https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.jobUser
 [5]: https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataOwner
