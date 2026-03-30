@@ -91,7 +91,7 @@ Create an S3 bucket for importing exposure events into your warehouse. The bucke
 
 ### Grant additional IAM permissions
 
-In addition to the permissions listed in the [AWS integration documentation][3], Datadog Experiments requires additional IAM permissions to write data to your warehouse.
+In addition to the permissions listed in the [AWS integration documentation][3], Datadog Experiments requires additional IAM permissions run warehouse-native experiment analysis.
 
 Use the following table to gather the values for your environment, then add the policy statement below to the IAM role that your Datadog AWS integration uses.
 
