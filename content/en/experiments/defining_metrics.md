@@ -45,7 +45,7 @@ To create a metric for your experiment:
 1. Select an [aggregation method](#aggregation-methods) from the dropdown. The default is **Count of events**.
 1. Click **Add Filter** to [filter your metric](#add-filters) by additional properties.
 1. (Optional) Under the **Additional settings** section:
-   1. Toggle on **Mark as certified** to indicate this metric is approved for important decision-making. This requires the **Product Analytics Certified Metrics Write** permission.
+   1. Toggle on **Mark as certified** to indicate that this metric is approved for important decision-making. This requires the **Product Analytics Certified Metrics Write** permission.
    1. Adjust the [**Experiment settings**](#advanced-options) and **Units** as needed. The defaults work for most use cases.
 1. Click **Save**.
 
@@ -85,7 +85,7 @@ Start by writing a query to retrieve your data:
 
 1. Navigate to the [Metrics page][1] in Datadog Product Analytics.
 1. Select the **Metric SQL Models** tab and click **Create SQL Model**.
-1. In the **Write SQL** section, enter a SQL query that returns your data of interest. The SQL editor supports both `SELECT * FROM` and more advanced SQL statements.
+1. In the **Write SQL** section, enter a SQL query that returns your data of interest. The SQL editor supports `SELECT * FROM` and more advanced SQL statements.
 1. Click **Run** to preview your data.
 
 {{< img src="/product_analytics/experiment/exp_create_metric_sql_models_writesql_1.png" alt="The Write SQL section of the Create Metric SQL Model page showing a SELECT query for user_id, revenue_timestamp, and amount from a revenue orders table, with a successful query preview below displaying USER_ID, REVENUE_TIMESTAMP, and AMOUNT columns." style="width:80%;" >}}
@@ -95,7 +95,7 @@ Start by writing a query to retrieve your data:
 After previewing your data, map it to Datadog. In the **Structure your model** section:
 
 1. Add a **Metric SQL Model Name** (for example, **Revenue Orders**).
-1. (Optional) Toggle on **Mark as certified** to indicate this SQL model is approved for important decision-making. This requires the **Product Analytics Certified Metrics Write** permission.
+1. (Optional) Toggle on **Mark as certified** to indicate that this SQL model is approved for important decision-making. This requires the **Product Analytics Certified Metrics Write** permission.
 1. Map the columns in your warehouse table to the following:
    - **Timestamp column**
      - The column that lists the timestamp associated with the metric event.
