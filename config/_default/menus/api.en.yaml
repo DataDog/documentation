@@ -3978,6 +3978,54 @@ menu:
           - GetTestParentSuites
         unstable: []
         order: 56
+    - name: Complete a multipart upload of a test file
+      url: '#complete-a-multipart-upload-of-a-test-file'
+      identifier: synthetics-complete-a-multipart-upload-of-a-test-file
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CompleteTestFileMultipartUpload
+        unstable: []
+        order: 61
+    - name: Abort a multipart upload of a test file
+      url: '#abort-a-multipart-upload-of-a-test-file'
+      identifier: synthetics-abort-a-multipart-upload-of-a-test-file
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - AbortTestFileMultipartUpload
+        unstable: []
+        order: 62
+    - name: Get presigned URLs for uploading a test file
+      url: '#get-presigned-urls-for-uploading-a-test-file'
+      identifier: synthetics-get-presigned-urls-for-uploading-a-test-file
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetTestFileMultipartPresignedUrls
+        unstable: []
+        order: 60
+    - name: Get a presigned URL for downloading a test file
+      url: '#get-a-presigned-url-for-downloading-a-test-file'
+      identifier: synthetics-get-a-presigned-url-for-downloading-a-test-file
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetTestFileDownloadUrl
+        unstable: []
+        order: 59
     - name: Edit a Network Path test
       url: '#edit-a-network-path-test'
       identifier: synthetics-edit-a-network-path-test

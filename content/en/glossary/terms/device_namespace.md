@@ -1,4 +1,5 @@
 ---
+id: device_namespace
 title: device namespace
 core_product:
   - network device monitoring

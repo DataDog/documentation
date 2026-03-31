@@ -1,4 +1,5 @@
 ---
+id: signal_correlation
 title: signal correlation
 core_product:
   - security

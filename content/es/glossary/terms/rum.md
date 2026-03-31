@@ -1,4 +1,5 @@
 ---
+id: rum
 core_product:
 - real user monitoring
 title: real user monitoring (RUM)

@@ -313,6 +313,10 @@ metastore:
 indexer:
   replicaCount: 2
   podSize: xlarge
+  persistentVolume:
+    enabled: true
+    storage: 250Gi
+    storageClass: standard-rwo
 
 # Searcher configuration
 # The `podSize` parameter sets vCPU, memory, and component-specific settings automatically.
