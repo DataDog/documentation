@@ -1,4 +1,5 @@
 ---
+id: invocation
 core_product:
 - monitorización serverless
 title: invocación

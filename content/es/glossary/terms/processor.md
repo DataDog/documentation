@@ -1,4 +1,5 @@
 ---
+id: processor
 core_product:
 - log management
 title: procesador

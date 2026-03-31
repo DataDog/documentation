@@ -1,4 +1,5 @@
 ---
+id: dogstatsd
 core_product:
 - datadog agent
 title: DogStatsD
