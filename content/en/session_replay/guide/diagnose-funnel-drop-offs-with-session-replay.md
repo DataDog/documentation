@@ -13,7 +13,7 @@ further_reading:
 
 ## Overview
 
-Conversion funnels show where users drop off, but not always why. The root cause can be a layout issue, a third-party overlay, or a rendering problem on certain devices—issues that don't appear in error logs and are difficult to reproduce without matching exact conditions.
+Conversion funnels show where users drop off, but not always why. The root cause can be a layout issue, a third-party overlay, or a rendering problem on certain devices. These are issues that don't appear in error logs and are difficult to reproduce without matching exact conditions.
 
 This guide walks through a workflow for diagnosing funnel drop-offs by combining [Product Analytics][1] with [Session Replay][2]. Product Analytics narrows down who is dropping off, while Session Replay shows you exactly what they encountered.
 
