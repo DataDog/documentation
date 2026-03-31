@@ -75,7 +75,7 @@ Monitor the cost, latency, performance, and usage trends for all your LLM applic
 
 ## Evaluate the quality and effectiveness of your LLM applications
 
-Understand what users are asking your LLM application, identify coverage gaps, and monitor the quality of responses over time with [Patterns][10] — automated hierarchical topic clustering of your production traffic. Overlay evaluations like sentiment, failure to answer, and hallucination to pinpoint quality issues by topic.
+Understand what users are asking your LLM application, identify coverage gaps, and monitor the quality of responses over time with [Patterns][10] — automated hierarchical topic clustering of your production traffic.
 
 {{< img src="llm_observability/cluster_map/box.png" alt="The Patterns page displays traces grouped by topic, represented by colored circles, and includes a panel listing topics, trace counts, and failure rates." style="width:100%;" >}}
 
