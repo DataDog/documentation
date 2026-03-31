@@ -246,7 +246,7 @@ echo ""
      persistentVolume:
        enabled: true
        storage: 250Gi
-       storageClass: gp3
+       storageClass: <storage class>
 
    # Searcher configuration
    # The searcher is responsible for executing search queries against the indexed data stored in S3.
