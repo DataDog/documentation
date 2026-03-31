@@ -60,6 +60,8 @@ After you create the service principal, continue to [Step 1](#step-1-grant-permi
 
 Navigate to the **SQL Editor** in your Databricks Workspace and run the following commands to give the service principal access to run warehouse-native experiment analysis.
 
+{{< img src="/product_analytics/experiment/guide/databricks_experiments_sql_editor.png" alt="The Edit Data Warehouse modal with Databricks selected, showing input fields for Account, Catalog, Schema, and Volume Name." style="width:90%;" >}}
+
 ### Grant read access to source tables
 
 Grant the service principal read access to the tables containing your experiment metrics. Run both `GRANT USE` commands, then run the `GRANT SELECT` option that matches your access needs. Replace `<catalog>`, `<schema>`, `<table>`, and `<principal>` with the appropriate values.
