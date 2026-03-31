@@ -2825,7 +2825,7 @@
     "description": "Batch query reference table rows by their primary key values.  Returns only found rows in the included array.",
     "summary": "Batch rows query",
     "request_description": "",
-    "request_schema_description": ""
+    "request_schema_description": "Request object for querying multiple rows from a reference table by their identifiers."
   },
   "ListTables": {
     "description": "List all reference tables in this organization.",

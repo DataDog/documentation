@@ -4293,6 +4293,7 @@ components:
         ip_list:
           description: The client IP addresses matched by the exclusion filter (CIDR notation is supported).
           items:
+            description: A single IP address to exclude.
             example: "198.51.100.72"
             type: string
           type: array
@@ -4303,6 +4304,7 @@ components:
         parameters:
           description: A list of parameters matched by the exclusion filter in the HTTP query string and HTTP request body. Nested parameters can be matched by joining fields with a dot character.
           items:
+            description: A request parameter name to exclude from the query string or request body.
             example: "list.search.query"
             type: string
           type: array
@@ -4339,6 +4341,7 @@ components:
         ip_list:
           description: The client IP addresses matched by the exclusion filter (CIDR notation is supported).
           items:
+            description: A single IP address to exclude.
             example: "198.51.100.72"
             type: string
           type: array
@@ -4347,6 +4350,7 @@ components:
         parameters:
           description: A list of parameters matched by the exclusion filter in the HTTP query string and HTTP request body. Nested parameters can be matched by joining fields with a dot character.
           items:
+            description: A request parameter name to exclude from the query string or request body.
             example: "list.search.query"
             type: string
           type: array
@@ -4498,6 +4502,7 @@ components:
         ip_list:
           description: The client IP addresses matched by the exclusion filter (CIDR notation is supported).
           items:
+            description: A single IP address to exclude.
             example: "198.51.100.72"
             type: string
           type: array
@@ -7334,11 +7339,13 @@ components:
       x-enum-varnames:
         - REFERENCE_TABLES_BATCH_ROWS_QUERY
     BatchRowsQueryRequest:
+      description: Request object for querying multiple rows from a reference table by their identifiers.
       properties:
         data:
           $ref: "#/components/schemas/BatchRowsQueryRequestData"
       type: object
     BatchRowsQueryRequestData:
+      description: Data object for a batch rows query request.
       properties:
         attributes:
           $ref: "#/components/schemas/BatchRowsQueryRequestDataAttributes"
@@ -7348,15 +7355,19 @@ components:
         - type
       type: object
     BatchRowsQueryRequestDataAttributes:
+      description: Attributes for a batch rows query request.
       properties:
         row_ids:
+          description: List of row identifiers to query from the reference table.
           example:
             - "row_id_1"
             - "row_id_2"
           items:
+            description: A single row identifier.
             type: string
           type: array
         table_id:
+          description: Unique identifier of the reference table to query.
           example: "00000000-0000-0000-0000-000000000000"
           type: string
       required:
@@ -7364,6 +7375,7 @@ components:
         - table_id
       type: object
     BatchRowsQueryResponse:
+      description: Response object for a batch rows query against a reference table.
       example:
         data:
           id: 00000000-0000-0000-0000-000000000000
@@ -7380,8 +7392,10 @@ components:
           $ref: "#/components/schemas/BatchRowsQueryResponseData"
       type: object
     BatchRowsQueryResponseData:
+      description: Data object for a batch rows query response.
       properties:
         id:
+          description: Unique identifier of the batch query.
           type: string
         relationships:
           $ref: "#/components/schemas/BatchRowsQueryResponseDataRelationships"
@@ -7391,11 +7405,13 @@ components:
         - type
       type: object
     BatchRowsQueryResponseDataRelationships:
+      description: Relationships of the batch rows query response data.
       properties:
         rows:
           $ref: "#/components/schemas/BatchRowsQueryResponseDataRelationshipsRows"
       type: object
     BatchRowsQueryResponseDataRelationshipsRows:
+      description: Relationship data containing the list of matching rows.
       properties:
         data:
           items:
@@ -14857,6 +14873,7 @@ components:
           description: List of queries to define the environment scope.
           example: ["staging", "test"]
           items:
+            description: A query string used to match the environment scope.
             type: string
           minItems: 1
           type: array
@@ -15252,6 +15269,7 @@ components:
         tags:
           description: User-defined tags for organizing the widget.
           items:
+            description: A single user-defined tag.
             type: string
           nullable: true
           type: array
@@ -15308,6 +15326,7 @@ components:
         tags:
           description: Tags to help categorize or filter the page.
           items:
+            description: A single tag for categorizing the page.
             type: string
           type: array
         target:
@@ -23010,6 +23029,7 @@ components:
           description: List of queries to define the environment scope.
           example: ["staging", "test"]
           items:
+            description: A query string used to match the environment scope.
             type: string
           minItems: 1
           type: array
@@ -23040,6 +23060,7 @@ components:
           $ref: "#/components/schemas/EnvironmentsPaginationMetaPage"
       type: object
     EnvironmentsPaginationMetaPage:
+      description: Pagination metadata for environments list responses.
       properties:
         total_count:
           description: Total number of items.
@@ -25216,6 +25237,7 @@ components:
           $ref: "#/components/schemas/FeatureFlagsPaginationMetaPage"
       type: object
     FeatureFlagsPaginationMetaPage:
+      description: Pagination metadata for feature flags list responses.
       properties:
         total_count:
           description: Total number of items.
@@ -41955,6 +41977,7 @@ components:
           description: A list of component IDs whose output is used as the `input` for this component.
           example: ["filter-processor"]
           items:
+            description: A component ID referenced as an input source.
             type: string
           type: array
         key_prefix:
@@ -46023,6 +46046,7 @@ components:
           description: List of log field names to send as indexed fields to Splunk HEC. Available only when `encoding` is `json`.
           example: ["service", "host"]
           items:
+            description: A log field name to index in Splunk.
             type: string
           type: array
         inputs:
@@ -48540,6 +48564,7 @@ components:
         name_aliases:
           description: List of alias names for the permission.
           items:
+            description: An alternative name for the permission.
             type: string
           type: array
         restricted:
@@ -70052,6 +70077,7 @@ components:
           description: List of queries to define the environment scope.
           example: ["staging", "test"]
           items:
+            description: A query string used to match the environment scope.
             type: string
           minItems: 1
           type: array
@@ -72536,6 +72562,7 @@ components:
           example:
             - "team:my-team"
           items:
+            description: A single user-defined tag.
             type: string
           nullable: true
           type: array
