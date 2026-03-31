@@ -8928,7 +8928,7 @@ menu:
       parent: pa_experiments
       identifier: pa_experiments_plan
       weight: 1
-    - name: Define Metrics
+    - name: Create Experiment Metrics
       url: experiments/defining_metrics
       parent: pa_experiments
       identifier: pa_experiments_metrics
