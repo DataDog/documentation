@@ -1,5 +1,5 @@
 ---
-title: Use Custom OpenTelemetry Components with Datadog Distribution of OpenTelemetry (DDOT) Collector
+title: Linux
 code_lang: linux
 type: multi-code-lang
 code_lang_weight: 2
@@ -9,7 +9,7 @@ further_reading:
   text: "Install the DDOT Collector on Linux"
 ---
 
-This guide explains how to build a custom DDOT Collector OCI package with additional OpenTelemetry components not included in the default DDOT Collector, for use on Linux bare-metal hosts. To see a list of components already included in the DDOT Collector by default, see [Included components][1].
+This guide explains how to build a DDOT Collector OCI package with additional OpenTelemetry components not included in the default DDOT Collector, for use on Linux bare-metal hosts. To see a list of components already included in the DDOT Collector by default, see [Included components][1].
 
 ## Prerequisites
 
@@ -30,7 +30,7 @@ To complete this guide, you need the following:
 This ensures all files are compatible:
 
 ```shell
-DD_AGENT_VERSION="{{< version key="agent_version" >}}"
+DD_AGENT_VERSION="7.78.0-rc.4"
 ```
 
 ## Download the Dockerfile
@@ -45,6 +45,14 @@ DD_AGENT_VERSION="{{< version key="agent_version" >}}"
    curl -o Dockerfile https://raw.githubusercontent.com/DataDog/datadog-agent/refs/tags/$DD_AGENT_VERSION/Dockerfiles/agent-ddot/Dockerfile.agent-otel
    ```
 
+The Dockerfile:
+
+- Uses Ubuntu 24.04 as the build environment.
+- Installs Go and necessary dependencies.
+- Downloads and unpacks the DDOT Collector source code.
+- Builds the DDOT Collector (also known as OTel Agent).
+- Builds the [`build-ddot-byoc`][6] tool, which replaces the `otel-agent` binary inside the source OCI package (`AGENT_OCI`) and pushes the result to `OUTPUT_OCI`.
+
 ## Create an OpenTelemetry Collector Builder manifest
 
 Create and customize an OpenTelemetry Collector Builder (OCB) manifest file, which defines the components to be included in your custom DDOT Collector.
@@ -54,7 +62,7 @@ Create and customize an OpenTelemetry Collector Builder (OCB) manifest file, whi
    curl -o manifest.yaml https://raw.githubusercontent.com/DataDog/datadog-agent/refs/tags/$DD_AGENT_VERSION/comp/otelcol/collector-contrib/impl/manifest.yaml
    ```
 2. Open the `manifest.yaml` file and add the additional OpenTelemetry components to the corresponding sections (extensions, exporters, processors, receivers, or connectors).
-   The highlighted line in this example adds a [metrics transform processor][6]:
+   The highlighted line in this example adds a [metrics transform processor][7]:
    {{< highlight json "hl_lines=22" >}}
 connectors:
 # You will see a list of connectors already included by Datadog
@@ -93,13 +101,13 @@ replaces:
 {{< /highlight >}}
 1. Save your changes to the manifest file.
 
-## Build and push the custom OCI package
+## Build and push the DDOT Collector (Agent) package
 
-The build process replaces the `otel-agent` binary inside the Datadog Agent OCI package and pushes the result directly to your registry using the `build-ddot-byoc` tool. This process must be repeated each time you update the Agent version.
+The build process replaces the `otel-agent` binary inside the Datadog Agent OCI package and pushes the result directly to your registry using the `build-ddot-byoc` tool. This process must be repeated each time you update the Agent version to maintain compatibility with new Agent releases.
 
 The build requires:
-- `AGENT_OCI`: the source Datadog Agent OCI package URL (for example, `install.datadoghq.com/agent-package:${DD_AGENT_VERSION}-1`)
-- `OUTPUT_OCI`: your destination registry and image reference. The tag must exactly match the tag used in `AGENT_OCI` (for example, `<YOUR-REGISTRY>/agent-package:${DD_AGENT_VERSION}-1`)
+- `AGENT_OCI`: the source Datadog Agent OCI package URL (for example, `install.datadoghq.com/agent-package:7.78.0-1`)
+- `OUTPUT_OCI`: your destination registry and image reference. The tag must exactly match the tag used in `AGENT_OCI` (for example, `<YOUR-REGISTRY>/agent-package:7.78.0-1`)
 
 <div class="alert alert-warning">The tag for <code>OUTPUT_OCI</code> must exactly match the version tag of <code>AGENT_OCI</code>. The installer uses this tag to verify compatibility between the custom OCI package and the installed Agent version. A mismatched tag will cause the installation to fail.</div>
 
@@ -163,15 +171,109 @@ docker build . \
 
 The tool replaces the `otel-agent` binary inside the OCI package and pushes the result directly to `OUTPUT_OCI`. No separate `docker push` step is needed.
 
-## Install the custom OCI package
+## Install the DDOT Collector (Agent) package
 
-To install the custom OCI package on a Linux host, run:
-```shell
-sudo DD_INSTALLER_REGISTRY_AUTH=gcr DD_INSTALLER_REGISTRY_URL=install.datad0g.com datadog-installer install "oci://us-central1-docker.pkg.dev/datadog-sandbox/ddot-byoc-linux/agent-package:${DD_AGENT_VERSION}-1"
+After the build completes, verify the custom `otel-agent` binary includes your additional components by installing the custom DDOT Collector package.
+
+1. Edit the OpenTelemetry configuration file at `/etc/datadog-agent/otel-config.yaml` to include the additional components.
+   The following example configures an additional [metrics transform processor][7]:
+   ```yaml
+   receivers:
+     otlp:
+       protocols:
+         http:
+           endpoint: "0.0.0.0:4318"
+         grpc:
+           endpoint: "0.0.0.0:4317"
+
+   processors:
+     # Rename system.cpu.usage to system.cpu.usage_time
+     metricstransform:
+       transforms:
+         - include: system.cpu.usage
+           action: update
+           new_name: system.cpu.usage_time
+
+   exporters:
+     datadog:
+       api:
+         site: ${env:DD_SITE}
+         key: ${env:DD_API_KEY}
+       sending_queue:
+         batch:
+           flush_timeout: 10s
+           min_size:  100
+           max_size: 1000
+
+   connectors:
+     datadog/connector:
+       traces:
+
+   service:
+     pipelines:
+       traces:
+         receivers: [otlp]
+         processors: [infraattributes]
+         exporters: [datadog, datadog/connector]
+       metrics:
+         receivers: [otlp, datadog/connector, prometheus]
+         processors: [metricstransform, infraattributes]
+         exporters: [datadog]
+       logs:
+         receivers: [otlp]
+         processors: [infraattributes]
+         exporters: [datadog]
+   ```
+2. <div class="alert alert-info"><strong>Bug bash</strong>: Grant your VM access to datadog-sandbox
+
+   Run the following to get the VM service account email:
+   ```shell
+   curl -s "http://metadata.google.internal/computeMetadata/v1/instance/service-accounts/default/email"    -H "Metadata-Flavor: Google"
+   ```
+   
+   Run the following on your local machine to give the VM service account permissions:
+   ```shell
+   gcloud artifacts repositories add-iam-policy-binding ddot-byoc-linux \
+     --location=us-central1 \
+     --project=datadog-sandbox \
+     --member="serviceAccount:<VM-SERVICE-ACCOUNT>" \
+     --role="roles/artifactregistry.reader"
+   ```
+   </div>
+3. Install the custom DDOT Collector package using the following commands:
+   ```shell
+   DD_INSTALLER_REGISTRY_AUTH=gcr DD_INSTALLER_REGISTRY_URL=install.datad0g.com
+   sudo datadog-installer install "oci://us-central1-docker.pkg.dev/datadog-sandbox/ddot-byoc-linux/agent-package:${DD_AGENT_VERSION}-1"
+   sudo datadog-installer extension install "oci://us-central1-docker.pkg.dev/datadog-sandbox/ddot-byoc-linux/agent-package:${DD_AGENT_VERSION}-1" ddot
+   ```
+4. If the DDOT Collector (Agent) starts, then the build process was successful.
+
+## Troubleshooting
+
+This section discusses some common issues you might encounter while building your custom DDOT Collector, along with their solutions:
+
+### Compatibility issues with `awscontainerinsightreceiver`
+
+**Problem**: You may encounter errors related to `awscontainerinsightreceiver` during the build:
+```text
+# github.com/opencontainers/runc/libcontainer/cgroups/ebpf
+/go/pkg/mod/github.com/opencontainers/runc@v1.1.12/libcontainer/cgroups/ebpf/ebpf_linux.go:190:3: unknown field Replace in struct literal of type link.RawAttachProgramOptions
+# github.com/open-telemetry/opentelemetry-collector-contrib/receiver/awscontainerinsightreceiver/internal/k8sapiserver
+/go/pkg/mod/github.com/open-telemetry/opentelemetry-collector-contrib/receiver/awscontainerinsightreceiver@v0.115.0/internal/k8sapiserver/k8sapiserver.go:47:68: undefined: record.EventRecorderLogger
 ```
 
+**Solution**: Remove `awscontainerinsightreceiver` from the `manifest.yaml` file. This receiver has incompatible libraries and cannot be included in the build.
+
+### Insufficient disk space
+
+**Problem**: You may encounter errors related to insufficient disk space, such as:
+```text
+no space left on device
+```
+
+**Solution**: Clear up Docker space:
 ```shell
-sudo DD_INSTALLER_REGISTRY_AUTH=gcr DD_INSTALLER_REGISTRY_URL=install.datad0g.com datadog-installer extension install "oci://us-central1-docker.pkg.dev/datadog-sandbox/ddot-byoc-linux/agent-package:${DD_AGENT_VERSION}-1" ddot
+docker system prune -a
 ```
 
 ## Further reading
@@ -183,4 +285,5 @@ sudo DD_INSTALLER_REGISTRY_AUTH=gcr DD_INSTALLER_REGISTRY_URL=install.datad0g.co
 [3]: https://github.com/DataDog/datadog-agent
 [4]: https://opentelemetry.io/docs/collector/custom-collector/
 [5]: https://github.com/open-telemetry/opentelemetry-collector/blob/main/cmd/builder/README.md
-[6]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/metricstransformprocessor/README.md
+[6]: https://github.com/DataDog/datadog-agent/tree/main/tools/build-ddot-byoc
+[7]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/metricstransformprocessor/README.md

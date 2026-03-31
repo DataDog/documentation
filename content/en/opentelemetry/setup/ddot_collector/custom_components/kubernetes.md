@@ -1,5 +1,5 @@
 ---
-title: Use Custom OpenTelemetry Components with Datadog Distribution of OpenTelemetry (DDOT) Collector
+title: Kubernetes
 code_lang: kubernetes
 type: multi-code-lang
 code_lang_weight: 1
