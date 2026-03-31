@@ -5957,6 +5957,11 @@ menu:
       parent: ide_plugins
       identifier: ide_plugins_vscode
       weight: 2
+    - name: Code Security
+      url: ide_plugins/vscode/code_security/
+      parent: ide_plugins_vscode
+      identifier: ide_plugins_vscode_code_security
+      weight: 101
     - name: Observability Pipelines
       url: observability_pipelines/
       pre: pipelines

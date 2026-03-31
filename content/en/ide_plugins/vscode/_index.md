@@ -50,7 +50,7 @@ The extension includes these features:
 
 - [**View in IDE**](#view-in-ide): Jump directly from code references in Datadog to your source files.
 
-- [**Static Code Analysis**](#static-code-analysis): Detect and fix problems before you commit changes.
+- [**Code Security**](#code-security): Detect and fix security issues before you commit changes.
 
 - [**Exception Replay**](#exception-replay): Debug your production code.
 
@@ -156,27 +156,13 @@ You can also use this feature to open your source files from an insight (such as
 
 <div class="alert alert-info">To use this feature, first configure <a href="/integrations/guide/source-code-integration/">source code integration</a> for your service.</div>
 
-## Static Code Analysis
+## Code Security
 
-[Static Code Analysis][8] analyzes your code (locally) against predefined rules to detect and fix problems.
-
-The extension runs Static Code Analysis rules on the source files you have open in your workspace. This allows you to detect and fix problems such as maintainability issues, bugs, or security vulnerabilities in the code before you commit your changes.
-
-Static Code Analysis supports scanning for many programming languages. For a complete list, see [Static Code Analysis Rules][9]. For file types belonging to supported languages, issues are shown in the source code editor, and you can directly apply suggested fixes.
+The [**Code Security**][19] features analyze your code locally against predefined rules to detect and fix security issues and vulnerabilities before you commit changes.
 
 {{< img src="/developers/ide_plugins/vscode/static_analysis.mp4" alt="Preview of Static Analysis" style="width:100%" video=true >}}
 
-### Get started with Static Code Analysis
-
-When you start editing a source file, the extension checks for [`static-analysis.datadog.yml`][10] at your source repository's root. It prompts you to create it if necessary.
-
-{{< img src="/developers/ide_plugins/vscode/static-analysis-onboard.png" alt="Onboarding banner for setting up Static Code Analysis with Python files" style="width:75%;" >}}
-
-After you create the configuration file, the analyzer runs automatically in the background whenever you open a file. If you need to enable Static Code Analysis for a particular language, search for the command `Datadog: Configure Static Analysis Languages` in the command palette (`Shift` + `Cmd/Ctrl` + `P`).
-
-You can also run a batch analysis for individual folders and even the entire workspace. In the IDE's file explorer view, right-click a folder and select **Datadog Static Analysis > Analyze Folder** or **Analyze Workspace**.
-
-<div class="alert alert-info">Static Code Analysis does not require a Datadog account, as source files are analyzed locally.</div>
+Find out more in the [Code Security][19] sub-section.
 
 ## Exception Replay
 
@@ -236,9 +222,6 @@ Do you use [Cursor][17], or another fork of VS Code? Find the extension on the [
 [5]: /tracing/error_tracking/
 [6]: /security/code_security/
 [7]: /tests/explorer/
-[8]: /continuous_integration/static_analysis/?tab=githubactions
-[9]: /security/code_security/static_analysis/static_analysis_rules/
-[10]: https://github.com/DataDog/datadog-static-analyzer/blob/main/doc/legacy_config.md
 [11]: /tracing/error_tracking/exception_replay
 [12]: https://www.datadoghq.com/legal/eula/
 [13]: https://www.datadoghq.com/legal/privacy/
@@ -247,3 +230,4 @@ Do you use [Cursor][17], or another fork of VS Code? Find the extension on the [
 [16]: https://github.com/DataDog/datadog-for-vscode/issues?q=is%3Aissue+label%3A%22known+issue%22
 [17]: https://www.cursor.com/
 [18]: /account_management/multi_organization/#custom-sub-domains
+[19]: /ide_plugins/vscode/code_security/
