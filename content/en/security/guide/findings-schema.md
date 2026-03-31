@@ -38,7 +38,7 @@ There are eleven different categories for security findings. Click on a category
     "path": "/api/v2/users/{userID}/profile",
     "resource_name": "GET /api/v2/users/{userID}/profile"
   },
-  "base_severity": "medium",
+  "base_severity": "critical",
   "container_image": {
     "name": "123456789012.dkr.ecr.us-east-1.amazonaws.com/my-app:v1.0.0",
     "registries": [
@@ -78,7 +78,7 @@ There are eleven different categories for security findings. Click on a category
   "service": {
     "name": "chatbot-api"
   },
-  "severity": "medium",
+  "severity": "critical",
   "severity_details": {
     "adjusted": {
       "score": 9.8,
@@ -167,7 +167,7 @@ There are eleven different categories for security findings. Click on a category
 
 ```json
 {
-  "base_severity": "medium",
+  "base_severity": "critical",
   "cloud_resource": {
     "account": {
       "account": "Main production account",
@@ -241,7 +241,7 @@ There are eleven different categories for security findings. Click on a category
     "type": "attack_path",
     "version": 3
   },
-  "severity": "medium",
+  "severity": "critical",
   "severity_details": {
     "adjusted": {
       "score": 9.8,
@@ -337,7 +337,7 @@ There are eleven different categories for security findings. Click on a category
     "cve": "CVE-2024-12345",
     "id": "TRIVY-CVE-2024-12345"
   },
-  "base_severity": "medium",
+  "base_severity": "critical",
   "cloud_resource": {
     "account": {
       "account": "Main production account",
@@ -425,7 +425,7 @@ There are eleven different categories for security findings. Click on a category
       }
     }
   },
-  "severity": "medium",
+  "severity": "critical",
   "severity_details": {
     "adjusted": {
       "score": 9.8,
@@ -520,7 +520,7 @@ There are eleven different categories for security findings. Click on a category
 
 ```json
 {
-  "base_severity": "medium",
+  "base_severity": "critical",
   "cloud_resource": {
     "account": {
       "account": "Main production account",
@@ -605,7 +605,7 @@ There are eleven different categories for security findings. Click on a category
     "type": "cloud_configuration",
     "version": 3
   },
-  "severity": "medium",
+  "severity": "critical",
   "severity_details": {
     "adjusted": {
       "score": 9.8,
@@ -697,7 +697,7 @@ There are eleven different categories for security findings. Click on a category
 
 ```json
 {
-  "base_severity": "medium",
+  "base_severity": "critical",
   "cloud_resource": {
     "account": {
       "account": "Main production account",
@@ -764,7 +764,7 @@ There are eleven different categories for security findings. Click on a category
     "type": "cloud_configuration",
     "version": 3
   },
-  "severity": "medium",
+  "severity": "critical",
   "severity_details": {
     "adjusted": {
       "score": 9.8,
@@ -860,7 +860,7 @@ There are eleven different categories for security findings. Click on a category
     "cve": "CVE-2024-12345",
     "id": "TRIVY-CVE-2024-67890"
   },
-  "base_severity": "medium",
+  "base_severity": "critical",
   "container_image": {
     "name": "123456789012.dkr.ecr.us-east-1.amazonaws.com/my-app:v1.0.0",
     "registries": [
@@ -935,7 +935,7 @@ There are eleven different categories for security findings. Click on a category
   "service": {
     "name": "chatbot-api"
   },
-  "severity": "medium",
+  "severity": "critical",
   "severity_details": {
     "adjusted": {
       "score": 9.8,
@@ -1030,7 +1030,7 @@ There are eleven different categories for security findings. Click on a category
 
 ```json
 {
-  "base_severity": "medium",
+  "base_severity": "critical",
   "cloud_resource": {
     "account": {
       "account": "Main production account",
@@ -1104,7 +1104,7 @@ There are eleven different categories for security findings. Click on a category
     "type": "cloud_configuration",
     "version": 3
   },
-  "severity": "medium",
+  "severity": "critical",
   "severity_details": {
     "adjusted": {
       "score": 9.8,
@@ -1193,7 +1193,7 @@ There are eleven different categories for security findings. Click on a category
 
 ```json
 {
-  "base_severity": "medium",
+  "base_severity": "critical",
   "container_image": {
     "name": "123456789012.dkr.ecr.us-east-1.amazonaws.com/my-app:v1.0.0",
     "registries": [
@@ -1251,7 +1251,7 @@ There are eleven different categories for security findings. Click on a category
   "service": {
     "name": "chatbot-api"
   },
-  "severity": "medium",
+  "severity": "critical",
   "severity_details": {
     "adjusted": {
       "score": 9.8,
@@ -1343,7 +1343,7 @@ There are eleven different categories for security findings. Click on a category
 
 ```json
 {
-  "base_severity": "medium",
+  "base_severity": "critical",
   "container_image": {
     "name": "123456789012.dkr.ecr.us-east-1.amazonaws.com/my-app:v1.0.0",
     "registries": [
@@ -1401,7 +1401,7 @@ There are eleven different categories for security findings. Click on a category
   "service": {
     "name": "chatbot-api"
   },
-  "severity": "medium",
+  "severity": "critical",
   "severity_details": {
     "adjusted": {
       "score": 9.8,
@@ -1493,7 +1493,7 @@ There are eleven different categories for security findings. Click on a category
 
 ```json
 {
-  "base_severity": "medium",
+  "base_severity": "critical",
   "container_image": {
     "name": "123456789012.dkr.ecr.us-east-1.amazonaws.com/my-app:v1.0.0",
     "registries": [
@@ -1551,7 +1551,7 @@ There are eleven different categories for security findings. Click on a category
   "service": {
     "name": "chatbot-api"
   },
-  "severity": "medium",
+  "severity": "critical",
   "severity_details": {
     "adjusted": {
       "score": 9.8,
@@ -1643,7 +1643,7 @@ There are eleven different categories for security findings. Click on a category
 
 ```json
 {
-  "base_severity": "medium",
+  "base_severity": "critical",
   "container_image": {
     "name": "123456789012.dkr.ecr.us-east-1.amazonaws.com/my-app:v1.0.0",
     "registries": [
@@ -1677,7 +1677,7 @@ There are eleven different categories for security findings. Click on a category
     "type": "workload_security",
     "version": 3
   },
-  "severity": "medium",
+  "severity": "critical",
   "severity_details": {
     "adjusted": {
       "score": 9.8,
