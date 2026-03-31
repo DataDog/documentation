@@ -165,7 +165,7 @@ Set the listener address environment variables to the following default values. 
 
 To send logs from the Datadog Distribution of the OpenTelemetry (DDOT) Collector:
 1. Deploy the DDOT Collector using Helm. See [Install the DDOT Collector as a Kubernetes DaemonSet][5] for instructions.
-1. [Set up a pipeline][6] on Observability Pipelines using the [OpenTelemetry source](#set-up-the-source-in-the-pipeline-ui).
+1. [Set up a pipeline][6] on Observability Pipelines using the OpenTelemetry source. Select **Logs** as the pipeline type.
     1. (Optional) Datadog recommends adding an [Edit Fields processor][7] to the pipeline that appends the field `op_otel_ddot:true`.
     1. When you install the Worker, for the OpenTelemetry source environment variables:
         1. Set your HTTP listener to `0.0.0.0:4318`.
@@ -173,14 +173,15 @@ To send logs from the Datadog Distribution of the OpenTelemetry (DDOT) Collector
     1. After you install the Worker and deployed the pipeline, update the OpenTelemetry Collector's [`otel-config.yaml`][9] to include an exporter that sends logs to Observability Pipelines. For example:
         ```
         exporters:
-            otlphttp:
-                endpoint: http://opw-observability-pipelines-worker.default.svc.cluster.local:4318
+            otlp/http:
+                endpoint: http://opw-observability-pipelines-worker.<NAMESPACE>.svc.cluster.local:4318
         ...
         service:
             pipelines:
                 logs:
-                    exporters: [otlphttp]
+                    exporters: [otlp/http]
         ```
+        Replace `<NAMESPACE>` with the Kubernetes namespace where the Observability Pipelines Worker is deployed (for example, `default`).
     1. Redeploy the Datadog Agent with the updated [`otel-config.yaml`][9]. For example, if the Agent is installed in Kubernetes:
         ```
         helm upgrade --install datadog-agent datadog/datadog \
@@ -193,6 +194,7 @@ To send logs from the Datadog Distribution of the OpenTelemetry (DDOT) Collector
     - `DD_OBSERVABILITY_PIPELINES_WORKER_LOGS_ENABLED`
     - `DD_OBSERVABILITY_PIPELINES_WORKER_LOGS_URL`
 - Logs sent from DDOT might have nested objects that prevent Datadog from parsing the logs correctly. To resolve this, Datadog recommends using the [Custom Processor][8] to flatten the nested `resource` object.
+- If the DDOT Collector and the Observability Pipelines Worker are running on the same host, their default OTLP receiver ports (4317/4318) may conflict. In a typical Kubernetes deployment, the Collector and the Worker run in separate pods, so this is not an issue.
 
 [5]: /opentelemetry/setup/ddot_collector/install/kubernetes_daemonset/?tab=datadogoperator
 [6]: /observability_pipelines/configuration/set_up_pipelines/
@@ -206,7 +208,7 @@ To send logs from the Datadog Distribution of the OpenTelemetry (DDOT) Collector
 
 To send metrics from the Datadog Distribution of the OpenTelemetry (DDOT) Collector:
 1. Deploy the DDOT Collector using Helm. See [Install the DDOT Collector as a Kubernetes DaemonSet][5] for instructions.
-1. [Set up a pipeline][6] on Observability Pipelines using the [OpenTelemetry source](#set-up-the-source-in-the-pipeline-ui).
+1. [Set up a pipeline][6] on Observability Pipelines using the OpenTelemetry source. Select **Metrics** as the pipeline type.
     1. (Optional) Datadog recommends adding an [Edit Fields processor][7] to the pipeline that appends the field `op_otel_ddot:true`.
     1. When you install the Worker, for the OpenTelemetry source environment variables:
         1. Set your HTTP listener to `0.0.0.0:4318`.
@@ -214,14 +216,15 @@ To send metrics from the Datadog Distribution of the OpenTelemetry (DDOT) Collec
     1. After you install the Worker and deployed the pipeline, update the OpenTelemetry Collector's [`otel-config.yaml`][9] to include an exporter that sends metrics to Observability Pipelines. For example:
         ```
         exporters:
-            otlphttp:
-                endpoint: http://opw-observability-pipelines-worker.default.svc.cluster.local:4318
+            otlp/http:
+                endpoint: http://opw-observability-pipelines-worker.<NAMESPACE>.svc.cluster.local:4318
         ...
         service:
             pipelines:
                 metrics:
-                    exporters: [otlphttp]
+                    exporters: [otlp/http]
         ```
+        Replace `<NAMESPACE>` with the Kubernetes namespace where the Observability Pipelines Worker is deployed (for example, `default`).
     1. Redeploy the Datadog Agent with the updated [`otel-config.yaml`][9]. For example, if the Agent is installed in Kubernetes:
         ```
         helm upgrade --install datadog-agent datadog/datadog \
@@ -234,6 +237,7 @@ To send metrics from the Datadog Distribution of the OpenTelemetry (DDOT) Collec
     - `DD_OBSERVABILITY_PIPELINES_WORKER_METRICS_ENABLED`
     - `DD_OBSERVABILITY_PIPELINES_WORKER_METRICS_URL`
 - Metrics sent from DDOT might have nested objects that prevent Datadog from parsing the metrics correctly. To resolve this, Datadog recommends using the [Custom Processor][8] to flatten the nested `resource` object.
+- If the DDOT Collector and the Observability Pipelines Worker are running on the same host, their default OTLP receiver ports (4317/4318) may conflict. In a typical Kubernetes deployment, the Collector and the Worker run in separate pods, so this is not an issue.
 
 [5]: /opentelemetry/setup/ddot_collector/install/kubernetes_daemonset/?tab=datadogoperator
 [6]: /observability_pipelines/configuration/set_up_pipelines/
