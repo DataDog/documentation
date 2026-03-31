@@ -1,6 +1,6 @@
 ---
 title: Connect Databricks for Warehouse-Native Experiment Analysis
-description: Connect a Databricks service account to enable warehouse native experiment analysis.
+description: Connect a Databricks service account to enable warehouse-native experiment analysis.
 further_reading:
 - link: "/experiments/defining_metrics"
   tag: "Documentation"
@@ -22,7 +22,7 @@ To set this up for Databricks, connect a Databricks service account to Datadog a
 
 ## Prerequisites
 
-Datadog Experiments connects to Databricks through the [Datadog Databricks integration][1]. If you already have a Databricks integration configured for the workspace you'd like to use, skip to [Step 1](#step-1-grant-permissions-to-the-service-principal). Otherwise, expand the section below to create a service principal.
+Datadog Experiments connects to Databricks through the [Datadog Databricks integration][1]. If you already have a Databricks integration configured for the workspace you want to use, skip to [Step 1](#step-1-grant-permissions-to-the-service-principal). Otherwise, expand the section below to create a service principal.
 
 {{% collapse-content title="Create a Databricks service principal" level="h4" %}}
 
@@ -55,10 +55,9 @@ After you create the service principal, continue to [Step 1](#step-1-grant-permi
 
 <div class="alert alert-info">If you plan to use other warehouse observability functionality in Datadog, see <a href="https://docs.datadoghq.com/integrations/databricks/">Datadog's Databricks integration documentation</a> to determine which resources to enable.</div>
 
-
 ## Step 1: Grant permissions to the service principal
 
-Navigate to the **SQL Editor** in your Databricks Workspace and run the following commands to give the service principal access to run warehouse-native experiment analysis.
+In your Databricks Workspace, open the **SQL Editor**. Run the following commands to grant the service principal permissions for warehouse-native experiment analysis.
 
 {{< img src="/product_analytics/experiment/guide/databricks_experiments_sql_editor.png" alt="The Edit Data Warehouse modal with Databricks selected, showing input fields for Account, Catalog, Schema, and Volume Name." style="width:90%;" >}}
 
