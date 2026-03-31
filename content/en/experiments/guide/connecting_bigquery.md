@@ -20,7 +20,7 @@ To set this up for BigQuery, connect a BigQuery service account to Datadog and c
 - [Granting permissions to Datadog service account](#step-2-grant-permissions-to-the-datadog-service-account)
 - [Configuring experiment settings in Datadog](#step-3-configure-experiment-settings)
 
-## Prerequisite
+## Prerequisites
 
 Datadog connects to BigQuery through a Google Cloud service account. If you already have a service account connected to Datadog, skip to [Step 1](#step-1-prepare-the-google-cloud-resources). Otherwise, expand the section below to create one.
 
