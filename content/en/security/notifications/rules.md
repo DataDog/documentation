@@ -49,7 +49,7 @@ To create a notification rule, specify the conditions under which the rule shoul
    - **Aggregate results over**: Select this option, followed by a time frame from the list, to only get one notification for detections that occurred over that time frame.
    - **Trigger immediately for each individual issue meeting the criteria**: Select this option to get one notification for each detection.<br />**Note**: Selecting this option can result in a large number of notifications.
 1. Under **Destination**, select a routing mode:
-    - **Manual routing**: Click **Add Recipient** and specify the recipients you want to notify. You can notify individuals, teams, create Jira issues, and more. See [Notification channels][2] for more information.
+    - **Manual routing**: Click **Add Recipient** and specify the recipients you want to notify. You can notify individuals or teams, create Jira issues, and more. See [Notification channels][2] for more information.
     - **Dynamic routing** (Preview): Automatically route notifications to the responsible team based on the `team` tag on findings. Specify a **Fallback Channel** for findings that cannot be dynamically routed. See [Dynamic routing](#dynamic-routing) for requirements.<br />**Note**: Dynamic routing is only available when **Trigger immediately for each individual issue meeting the criteria** is selected in step 6.
 1. To send test notifications for this rule, click **Test Notifications**.
   1. In the modal, select the security products you want to test.
