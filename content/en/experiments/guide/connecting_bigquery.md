@@ -34,7 +34,7 @@ Datadog connects to BigQuery through a Google Cloud service account. If you alre
     1. **Service account ID** (this is required and must be unique).
     1. **Service account description**.
 1. Click **Create and continue**.
-   1. **Note**: **Permissions** and **Principals with access** settings are not needed when creating the service account. See [Step 2](#step-2-grant-permissions-to-datadog-the-service-account).
+   1. **Note**: **Permissions** and **Principals with access** settings are not needed when creating the service account. See [Step 2](#step-2-grant-permissions-to-the-datadog-service-account).
 1. Click **Done** to complete creating the service account.
 
 {{% /collapse-content %}}
@@ -107,7 +107,7 @@ After you set up your Google Cloud resources and IAM roles, configure the experi
 1. Click **Connect a data warehouse**. If you already have a warehouse connected, click **Edit** instead.
 1. Select the **BigQuery** tile.
 1. Under **Select BigQuery Account**, enter:
-   - **GCP service account**: The [service account](#prerequisite) you are using for Datadog Experiments.
+   - **GCP service account**: The [service account](#prerequisites) you are using for Datadog Experiments.
    - **Project**: Your Google Cloud project.
 1. Under **Dataset and GCS Bucket**, enter:
    - **Dataset**: The dataset you created in [Step 1](#create-a-bigquery-dataset) (for example, `datadog_experiments_output`).
