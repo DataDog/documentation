@@ -428,6 +428,10 @@ Local authentication is recommended for Cline and when remote authentication is 
 
 {{% /collapse-content %}}
 
+## Toolsets
+
+All toolsets for the MCP Server are documented [here][12]. By default, the base URL only includes the `core` toolset. 
+
 ## Test access to the MCP Server
 
 1. Install the [MCP inspector][2], a developer tool for testing and debugging MCP servers.
