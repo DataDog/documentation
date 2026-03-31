@@ -101,7 +101,7 @@ To connect your Snowflake account to Datadog for warehouse-native experiment ana
 
 ## Step 3: Configure experiment settings
 
-<div class="alert alert-info">Datadog supports one warehouse connection per organization. Connecting BigQuery replaces any existing warehouse connection (for example, Redshift).</div>
+<div class="alert alert-info">Datadog supports one warehouse connection per organization. Connecting Snowflake replaces any existing warehouse connection (for example, Redshift).</div>
 
 After you set up your Snowflake integration, configure the experiment settings in [Datadog Product Analytics][4]:
 
