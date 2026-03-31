@@ -61,7 +61,7 @@ When editing a deployed pipeline, you can add new components such as [Packs][6] 
 1. Before exiting the pipeline, click **Export Pipeline**.
    {{< img src="observability_pipelines/export_pipeline/export_deployed_pipeline_edit.png" alt="The export button highlighted on the pipeline edit page" style="width:100%;" >}}
 1. Click the copy or download button to export the configuration as JSON or Terraform.
-   - **Note**: After making updates to your pipeline in the UI, the exported configuration includes the latest changes, even if you haven't save the changes.
+   - **Note**: After making updates to your pipeline in the UI, the exported configuration includes the latest changes, even if you haven't saved or deployed the changes.
    {{< img src="observability_pipelines/export_pipeline/export_terraform_modal.png" alt="The export modal showing the pipeline configuration in Terraform" style="width:100%;" >}}
 1. Click the Observability Pipelines logo on the top left side of the page to exit the pipeline without saving the changes made in the UI.
    {{< img src="observability_pipelines/export_pipeline/exit_export_deployed_pipeline.png" alt="The Observability Pipelines log highlighted on the pipeline page" style="width:100%;" >}}
