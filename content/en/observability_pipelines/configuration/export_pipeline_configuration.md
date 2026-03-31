@@ -40,7 +40,7 @@ A deployed pipeline has a Worker installed to send data through the pipeline and
 
 ### Export a pipeline's configuration
 
-When viewing deployed pipelines in the UI, you can export the configuration to JSON or Terraform to programmatically create it.
+When viewing a deployed pipeline in the UI, you can export its configuration to JSON or Terraform to programmatically create it.
 
 1. Navigate to [Observability Pipelines][1].
 1. Select a deployed pipeline (status can be `active` or `inactive`) to view the configuration.
@@ -78,4 +78,5 @@ When editing a deployed pipeline, you can add new components such as [Packs][6] 
 [3]: https://docs.datadoghq.com/api/latest/observability-pipelines/#create-a-new-pipeline
 [4]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/observability_pipeline
 [5]: https://docs.datadoghq.com/api/latest/observability-pipelines/#update-a-pipeline
+[6]: /observability_pipelines/packs/
 [7]: /observability_pipelines/configuration/install_the_worker/#api-or-terraform-pipeline-setup
