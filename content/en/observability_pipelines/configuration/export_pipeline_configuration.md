@@ -79,4 +79,4 @@ When editing a deployed pipeline, you can add new components such as [Packs][6] 
 [3]: https://docs.datadoghq.com/api/latest/observability-pipelines/#create-a-new-pipeline
 [4]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/observability_pipeline
 [5]: https://docs.datadoghq.com/api/latest/observability-pipelines/#update-a-pipeline
-[6]: /observability_pipelines/packs/
+[7]: /observability_pipelines/configuration/install_the_worker/#api-or-terraform-pipeline-setup
