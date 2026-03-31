@@ -3,32 +3,33 @@ title: Datadog Extension for VS Code & Cursor
 description: Integrate Datadog telemetry and insights into your source code in VS Code and other code editors.
 is_beta: true
 aliases:
-- '/developers/ide_integrations/vscode/'
-- '/developers/ide_plugins/vscode/'
+    - '/developers/ide_integrations/vscode/'
+    - '/developers/ide_plugins/vscode/'
 further_reading:
-- link: "/continuous_testing/"
-  tag: "Documentation"
-  text: "Learn about Continuous Testing"
-- link: "/integrations/guide/source-code-integration/"
-  tag: "Documentation"
-  text: "Learn about Source Code Integration"
-- link: "/bits_ai/mcp_server/"
-  tag: "Documentation"
-  text: "Learn about the Datadog Model Context Protocol (MCP) Server"
-- link: "https://www.datadoghq.com/blog/datadog-ide-plugins/"
-  tag: "Blog"
-  text: "Reduce context switching while troubleshooting with Datadog's IDE plugins"
-- link: "https://www.datadoghq.com/blog/exception-replay-datadog/"
-  tag: "Blog"
-  text: "Simplify production debugging with Datadog Exception Replay"
-- link: "https://www.datadoghq.com/blog/datadog-cursor-extension/"
-  tag: "Blog"
-  text: "Debug live production issues with the Datadog Cursor extension"
+    - link: '/continuous_testing/'
+      tag: 'Documentation'
+      text: 'Learn about Continuous Testing'
+    - link: '/integrations/guide/source-code-integration/'
+      tag: 'Documentation'
+      text: 'Learn about Source Code Integration'
+    - link: '/bits_ai/mcp_server/'
+      tag: 'Documentation'
+      text: 'Learn about the Datadog Model Context Protocol (MCP) Server'
+    - link: 'https://www.datadoghq.com/blog/datadog-ide-plugins/'
+      tag: 'Blog'
+      text: "Reduce context switching while troubleshooting with Datadog's IDE plugins"
+    - link: 'https://www.datadoghq.com/blog/exception-replay-datadog/'
+      tag: 'Blog'
+      text: 'Simplify production debugging with Datadog Exception Replay'
+    - link: 'https://www.datadoghq.com/blog/datadog-cursor-extension/'
+      tag: 'Blog'
+      text: 'Debug live production issues with the Datadog Cursor extension'
 ---
 
 <!-- TO CONTRIBUTORS: This content also exists in the extension's README file. Remember to update the README when you change anything in this file. -->
 
 {{% site-region region="gov" %}}
+
 <div class="alert alert-danger">
     The Datadog extension for Visual Studio Code is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).
 </div>
@@ -42,29 +43,30 @@ The Datadog extension for VS Code and Cursor brings Datadog to your code editor 
 
 The extension includes these features:
 
-- [**Model Context Protocol (MCP) Server**](?tab=cursor#installation): Connect the editor's AI agent to production telemetry, tools, and contexts from Datadog.
+-   [**Model Context Protocol (MCP) Server**](?tab=cursor#installation): Connect the editor's AI agent to production telemetry, tools, and contexts from Datadog.
 
-- [**Log Annotations**](#log-annotations): Gauge log volumes and search logs from your code.
+-   [**Log Annotations**](#log-annotations): Gauge log volumes and search logs from your code.
 
-- [**Code Insights**](#code-insights): Stay informed about runtime errors, vulnerabilities, and flaky tests without leaving the code.
+-   [**Code Insights**](#code-insights): Stay informed about runtime errors, vulnerabilities, and flaky tests without leaving the code.
 
-- [**View in IDE**](#view-in-ide): Jump directly from code references in Datadog to your source files.
+-   [**View in IDE**](#view-in-ide): Jump directly from code references in Datadog to your source files.
 
-- [**Code Security**](#code-security): Detect and fix security issues before you commit changes.
+-   [**Code Security**](#code-security): Detect and fix security issues before you commit changes.
 
-- [**Exception Replay**](#exception-replay): Debug your production code.
+-   [**Exception Replay**](#exception-replay): Debug your production code.
 
-- [**Fix in Chat**](?tab=cursor#fix-in-chat): Fix code errors, vulnerabilities, and flaky tests with AI-powered suggestions and explanations.
+-   [**Fix in Chat**](?tab=cursor#fix-in-chat): Fix code errors, vulnerabilities, and flaky tests with AI-powered suggestions and explanations.
 
 <div class="alert alert-info">Unless stated otherwise, all extension features are available for both VS Code and any other IDEs based on VS Code forks, such as Cursor.</div>
 
 ## Requirements
 
-- **Datadog account**: Most features require a Datadog account.  
-  - New to Datadog? [Learn more][3] about Datadog's monitoring and security tools and sign up for a free trial.  
-  - If your organization uses a [custom sub-domain][18] such as `myorg.datadoghq.com`, you must indicate it using the `datadog.connection.oauth.setup.domain` setting in the IDE.
+-   **Datadog account**: Most features require a Datadog account.
 
-- **Git**: The extension works better when Git is enabled in the IDE. Ensure this is enabled by checking the `git.enabled` setting.
+    -   New to Datadog? [Learn more][3] about Datadog's monitoring and security tools and sign up for a free trial.
+    -   If your organization uses a [custom sub-domain][18] such as `myorg.datadoghq.com`, you must indicate it using the `datadog.connection.oauth.setup.domain` setting in the IDE.
+
+-   **Git**: The extension works better when Git is enabled in the IDE. Ensure this is enabled by checking the `git.enabled` setting.
 
 ## Installation
 
@@ -74,29 +76,30 @@ Installation procedures may vary among other integrated development environments
 {{% tab "VS Code" %}}
 Install the extension either directly in the IDE, or from the web:
 
-- **In VS Code**: Open the Extensions view (`Shift` + `Cmd/Ctrl` + `X`), search for `datadog`, and select the official extension from Datadog. 
+-   **In VS Code**: Open the Extensions view (`Shift` + `Cmd/Ctrl` + `X`), search for `datadog`, and select the official extension from Datadog.
 
-- **From the web**: Install from the extension's page on [Visual Studio Marketplace][1].
+-   **From the web**: Install from the extension's page on [Visual Studio Marketplace][1].
 
 ### MCP Server setup
 
 The extension includes access to the [Datadog Model Context Protocol (MCP) Server][3]. Ensure the MCP Server is enabled to enhance the editor's AI capabilities with your specific Datadog environment:
 
 1. Open the chat panel, select agent mode, and click the **Configure Tools** button.
-    {{< img src="bits_ai/mcp_server/vscode_configure_tools_button.png" alt="Configure Tools button in VS Code" style="width:60%;" >}}
+   {{< img src="bits_ai/mcp_server/vscode_configure_tools_button.png" alt="Configure Tools button in VS Code" style="width:60%;" >}}
 
 1. Find the Datadog server and tools in the list and check the boxes to enable them (expand or refresh if necessary).
 
 [1]: https://marketplace.visualstudio.com/items?itemName=Datadog.datadog-vscode
 [3]: /bits_ai/mcp_server/
+
 {{% /tab %}}
 
 {{% tab "Cursor" %}}
 Install the extension either directly in the IDE, or from the web:
 
-- **In Cursor**: Open the Extensions view (`Shift` + `Cmd/Ctrl` + `X`), search for `datadog`, and select the official extension from Datadog. 
+-   **In Cursor**: Open the Extensions view (`Shift` + `Cmd/Ctrl` + `X`), search for `datadog`, and select the official extension from Datadog.
 
-- **From the web**: Download the VSIX file from [Open VSX Registry][2], and install with `Extensions: Install from VSIX` in the command palette (`Shift` + `Cmd/Ctrl` + `P`).
+-   **From the web**: Download the VSIX file from [Open VSX Registry][2], and install with `Extensions: Install from VSIX` in the command palette (`Shift` + `Cmd/Ctrl` + `P`).
 
 ### MCP Server setup
 
@@ -107,10 +110,13 @@ The extension includes access to the [Datadog Model Context Protocol (MCP) Serve
 
 [2]: https://open-vsx.org/extension/datadog/datadog-vscode
 [3]: /bits_ai/mcp_server/
+
 {{% /tab %}}
 {{< /tabs >}}
 
-## Log annotations
+## Core features
+
+### Log annotations
 
 Use **Log Annotations** to gauge the volume of logs generated by a given log line in your code. The extension adds annotations above your code to detected logging patterns that match log records in Datadog. Click an annotation to open the [Log Explorer][4] in Datadog and view the matching logs.
 
@@ -120,13 +126,13 @@ You can also search Datadog logs from within the IDE. Select any text in the cod
 
 {{< img src="developers/ide_plugins/vscode/log_search.png" alt="Using the Datadog Log explorer feature" style="width:100%;" >}}
 
-## Code insights
+### Code insights
 
 **Code insights** keep you informed with Datadog-generated insights that are relevant to your code base:
 
-- Runtime errors collected by [Error Tracking][5]  
-- Code and library vulnerabilities reported by [Code Security][6]  
-- Flaky tests detected by [Test Optimization][7]
+-   Runtime errors collected by [Error Tracking][5]
+-   Code and library vulnerabilities reported by [Code Security][6]
+-   Flaky tests detected by [Test Optimization][7]
 
 The extension identifies errors and vulnerabilities in the code with colored squiggles; hover over the line for more details.
 
@@ -138,11 +144,42 @@ You can group code insights by kind, file, priority, or service. You can also ig
 
 {{< img src="/developers/ide_plugins/vscode/code-insights-2.png" alt="The Code Insights view." style="width:100%;" >}}
 
-For specific insights about the file currently open in the active editor, check the **File Insights** view in the IDE's file explorer. This view also lists issues discovered by [Static Code Analysis](#static-code-analysis) within the file.
+For specific insights about the file currently open in the active editor, check the **File Insights** view in the IDE's file explorer. This view also lists issues discovered by [Code Security](#code-security) within the file.
 
 {{< img src="/developers/ide_plugins/vscode/file_insights_view.mp4" alt="File Insights view" style="width:100%" video=true >}}
 
-## View in IDE
+### Code Security
+
+The [**Code Security**][19] features analyze your code locally against predefined rules to detect and fix security issues and vulnerabilities before you commit changes.
+
+{{< img src="/developers/ide_plugins/vscode/static_analysis.mp4" alt="Preview of Static Analysis" style="width:100%" video=true >}}
+
+Find out more in the [Code Security][19] sub-section.
+
+### Exception Replay
+
+**Exception Replay** allows you to inspect the stack trace frames of any Error Tracking code insight and get information about the values of the variables of the code running in production.
+
+To access this feature, you must enable [Error Tracking Exception Replay][11] on Datadog.
+
+After the feature has been enabled, you can see an **Exception Replay** button next to the stack trace section of any instrumented Error Tracking code insight. Click the button to:
+
+-   Access all the information Datadog has about the different frames.
+-   Navigate through the production code.
+-   Review the value of the different variables involved.
+
+Select an Error Tracking code insight from the Code Insights view. Go to the stack trace and click the Exception Replay button. The IDE shows a new activity with two new views:
+
+-   **Variables**: Displays the variables related to a particular stack trace frame.
+-   **Stack Trace**: Lists the stack frames for navigation.
+
+Select a stack trace frame and inspect the values of all the variables that Datadog captured from your production code.
+
+{{< img src="/developers/ide_plugins/vscode/exception_replay.mp4" alt="Preview of Exception Replay" style="width:100%" video=true >}}
+
+## Other features
+
+### View in IDE
 
 <div class="alert alert-info">This feature is only available for VS Code and Cursor. Other forks of VS Code are not supported.</div>
 
@@ -156,36 +193,7 @@ You can also use this feature to open your source files from an insight (such as
 
 <div class="alert alert-info">To use this feature, first configure <a href="/integrations/guide/source-code-integration/">source code integration</a> for your service.</div>
 
-## Code Security
-
-The [**Code Security**][19] features analyze your code locally against predefined rules to detect and fix security issues and vulnerabilities before you commit changes.
-
-{{< img src="/developers/ide_plugins/vscode/static_analysis.mp4" alt="Preview of Static Analysis" style="width:100%" video=true >}}
-
-Find out more in the [Code Security][19] sub-section.
-
-## Exception Replay
-
-**Exception Replay** allows you to inspect the stack trace frames of any Error Tracking code insight and get information about the values of the variables of the code running in production.
-
-To access this feature, you must enable [Error Tracking Exception Replay][11] on Datadog.
-
-After the feature has been enabled, you can see an **Exception Replay** button next to the stack trace section of any instrumented Error Tracking code insight. Click the button to:
-
-- Access all the information Datadog has about the different frames.
-- Navigate through the production code.
-- Review the value of the different variables involved.
-
-Select an Error Tracking code insight from the Code Insights view. Go to the stack trace and click the Exception Replay button. The IDE shows a new activity with two new views:
-
-- **Variables**: Displays the variables related to a particular stack trace frame.
-- **Stack Trace**: Lists the stack frames for navigation.
-
-Select a stack trace frame and inspect the values of all the variables that Datadog captured from your production code.
-
-{{< img src="/developers/ide_plugins/vscode/exception_replay.mp4" alt="Preview of Exception Replay" style="width:100%" video=true >}}
-
-## Fix in Chat
+### Fix in Chat
 
 The **Fix in Chat** button appears in several contexts when the extension identifies errors or issues. Click the button to generate an AI chat prompt that summarizes the problem, includes relevant details and context, and gives specific instructions for the agent.
 
