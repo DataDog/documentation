@@ -48,11 +48,11 @@ There are eleven different categories for security findings. Click on a category
       "sha256:abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890"
     ]
   },
-  "description": "A critical vulnerability was found in the application that allows unauthorized access to sensitive resources. The issue stems from improper input validation in the request handler, which can be exploited to bypass authentication checks.",
+  "description": "The API endpoint exposes user profile data through a route that uses predictable sequential IDs, allowing an attacker to enumerate and access other users' profiles by incrementing the ID parameter.",
   "detection_changed_at": 1738575599859,
   "exposure_time_seconds": 300,
   "finding_id": "AbCdEfGhIjKlMnOpQrStUvWx",
-  "finding_type": "host_and_container_vulnerability",
+  "finding_type": "api_security",
   "first_seen_at": 1738575592659,
   "is_in_security_inbox": false,
   "last_seen_at": 1738624280889,
@@ -70,9 +70,9 @@ There are eleven different categories for security findings. Click on a category
   "resource_type": "example_resource_type",
   "rule": {
     "default_rule_id": "def-000-abc",
-    "id": "TRIVY-CVE-2024-12345",
+    "id": "api-sec-001",
     "name": "Read operation on route use predictable IDs",
-    "type": "vulnerability_advisory",
+    "type": "api_security",
     "version": 3
   },
   "service": {
@@ -92,7 +92,7 @@ There are eleven different categories for security findings. Click on a category
     }
   },
   "status": "open",
-  "title": "Improper input validation in request handler",
+  "title": "Read operation on route use predictable IDs",
   "workflow": {
     "auto_closed_at": 1738575600859,
     "automations": {
@@ -108,13 +108,13 @@ There are eleven different categories for security findings. Click on a category
     "integrations": {
       "cases": {
         "assignee": {
-          "id": "Alice",
-          "name": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+          "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+          "name": "Alice"
         },
         "created_at": 1738575599859,
         "created_by": {
-          "id": "Alice",
-          "name": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+          "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+          "name": "Alice"
         },
         "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
         "jira_issue": {
@@ -126,8 +126,8 @@ There are eleven different categories for security findings. Click on a category
         "status": "open",
         "updated_at": 1738575599859,
         "updated_by": {
-          "id": "Alice",
-          "name": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+          "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+          "name": "Alice"
         }
       }
     },
@@ -138,8 +138,8 @@ There are eleven different categories for security findings. Click on a category
       "is_muted_by_rule": false,
       "muted_at": 1738575599859,
       "muted_by": {
-        "id": "Alice",
-        "name": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+        "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        "name": "Alice"
       },
       "reason": "Resource deleted"
     },
@@ -149,8 +149,8 @@ There are eleven different categories for security findings. Click on a category
         "name": "Alice",
         "updated_at": 1738575600859,
         "updated_by": {
-          "id": "Alice",
-          "name": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+          "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+          "name": "Alice"
         }
       }
     }
@@ -210,11 +210,11 @@ There are eleven different categories for security findings. Click on a category
       "sha256:abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890"
     ]
   },
-  "description": "A critical vulnerability was found in the application that allows unauthorized access to sensitive resources. The issue stems from improper input validation in the request handler, which can be exploited to bypass authentication checks.",
+  "description": "A publicly accessible EC2 instance with an attached IAM role has overly permissive policies that allow lateral movement to sensitive S3 buckets containing production data.",
   "detection_changed_at": 1738575599859,
   "exposure_time_seconds": 300,
   "finding_id": "AbCdEfGhIjKlMnOpQrStUvWx",
-  "finding_type": "host_and_container_vulnerability",
+  "finding_type": "attack_path",
   "first_seen_at": 1738575592659,
   "is_in_security_inbox": false,
   "last_seen_at": 1738624280889,
@@ -236,9 +236,9 @@ There are eleven different categories for security findings. Click on a category
   },
   "rule": {
     "default_rule_id": "def-000-abc",
-    "id": "TRIVY-CVE-2024-12345",
-    "name": "Read operation on route use predictable IDs",
-    "type": "vulnerability_advisory",
+    "id": "def-000-ap1",
+    "name": "EC2 instance with public access and overprivileged IAM role",
+    "type": "attack_path",
     "version": 3
   },
   "severity": "medium",
@@ -255,7 +255,7 @@ There are eleven different categories for security findings. Click on a category
     }
   },
   "status": "open",
-  "title": "Improper input validation in request handler",
+  "title": "Publicly accessible instance with overprivileged IAM role",
   "workflow": {
     "auto_closed_at": 1738575600859,
     "automations": {
@@ -271,13 +271,13 @@ There are eleven different categories for security findings. Click on a category
     "integrations": {
       "cases": {
         "assignee": {
-          "id": "Alice",
-          "name": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+          "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+          "name": "Alice"
         },
         "created_at": 1738575599859,
         "created_by": {
-          "id": "Alice",
-          "name": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+          "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+          "name": "Alice"
         },
         "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
         "jira_issue": {
@@ -289,8 +289,8 @@ There are eleven different categories for security findings. Click on a category
         "status": "open",
         "updated_at": 1738575599859,
         "updated_by": {
-          "id": "Alice",
-          "name": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+          "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+          "name": "Alice"
         }
       }
     },
@@ -301,8 +301,8 @@ There are eleven different categories for security findings. Click on a category
       "is_muted_by_rule": false,
       "muted_at": 1738575599859,
       "muted_by": {
-        "id": "Alice",
-        "name": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+        "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        "name": "Alice"
       },
       "reason": "Resource deleted"
     },
@@ -312,8 +312,8 @@ There are eleven different categories for security findings. Click on a category
         "name": "Alice",
         "updated_at": 1738575600859,
         "updated_by": {
-          "id": "Alice",
-          "name": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+          "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+          "name": "Alice"
         }
       }
     }
@@ -377,7 +377,7 @@ There are eleven different categories for security findings. Click on a category
       "sha256:abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890"
     ]
   },
-  "description": "A critical vulnerability was found in the application that allows unauthorized access to sensitive resources. The issue stems from improper input validation in the request handler, which can be exploited to bypass authentication checks.",
+  "description": "A buffer overflow vulnerability in the Linux kernel allows a local attacker to escalate privileges by exploiting a race condition in the netfilter subsystem.",
   "detection_changed_at": 1738575599859,
   "exposure_time_seconds": 300,
   "finding_id": "AbCdEfGhIjKlMnOpQrStUvWx",
@@ -439,7 +439,7 @@ There are eleven different categories for security findings. Click on a category
     }
   },
   "status": "open",
-  "title": "Improper input validation in request handler",
+  "title": "Buffer overflow in Linux kernel netfilter subsystem",
   "vulnerability": {
     "hash": "abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890",
     "stack": {
@@ -461,13 +461,13 @@ There are eleven different categories for security findings. Click on a category
     "integrations": {
       "cases": {
         "assignee": {
-          "id": "Alice",
-          "name": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+          "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+          "name": "Alice"
         },
         "created_at": 1738575599859,
         "created_by": {
-          "id": "Alice",
-          "name": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+          "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+          "name": "Alice"
         },
         "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
         "jira_issue": {
@@ -479,8 +479,8 @@ There are eleven different categories for security findings. Click on a category
         "status": "open",
         "updated_at": 1738575599859,
         "updated_by": {
-          "id": "Alice",
-          "name": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+          "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+          "name": "Alice"
         }
       }
     },
@@ -491,8 +491,8 @@ There are eleven different categories for security findings. Click on a category
       "is_muted_by_rule": false,
       "muted_at": 1738575599859,
       "muted_by": {
-        "id": "Alice",
-        "name": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+        "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        "name": "Alice"
       },
       "reason": "Resource deleted"
     },
@@ -502,8 +502,8 @@ There are eleven different categories for security findings. Click on a category
         "name": "Alice",
         "updated_at": 1738575600859,
         "updated_by": {
-          "id": "Alice",
-          "name": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+          "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+          "name": "Alice"
         }
       }
     }
@@ -560,11 +560,11 @@ There are eleven different categories for security findings. Click on a category
       "sha256:abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890"
     ]
   },
-  "description": "A critical vulnerability was found in the application that allows unauthorized access to sensitive resources. The issue stems from improper input validation in the request handler, which can be exploited to bypass authentication checks.",
+  "description": "A Terraform configuration defines an S3 bucket without server-side encryption enabled, leaving stored objects unencrypted at rest.",
   "detection_changed_at": 1738575599859,
   "exposure_time_seconds": 300,
   "finding_id": "AbCdEfGhIjKlMnOpQrStUvWx",
-  "finding_type": "host_and_container_vulnerability",
+  "finding_type": "iac_misconfiguration",
   "first_seen_at": 1738575592659,
   "git": {
     "author": {
@@ -600,9 +600,9 @@ There are eleven different categories for security findings. Click on a category
   "resource_type": "example_resource_type",
   "rule": {
     "default_rule_id": "def-000-abc",
-    "id": "TRIVY-CVE-2024-12345",
-    "name": "Read operation on route use predictable IDs",
-    "type": "vulnerability_advisory",
+    "id": "def-000-iac",
+    "name": "S3 bucket should have server-side encryption enabled",
+    "type": "cloud_configuration",
     "version": 3
   },
   "severity": "medium",
@@ -619,7 +619,7 @@ There are eleven different categories for security findings. Click on a category
     }
   },
   "status": "open",
-  "title": "Improper input validation in request handler",
+  "title": "S3 bucket without server-side encryption",
   "vulnerability": {
     "hash": "abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890"
   },
@@ -638,13 +638,13 @@ There are eleven different categories for security findings. Click on a category
     "integrations": {
       "cases": {
         "assignee": {
-          "id": "Alice",
-          "name": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+          "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+          "name": "Alice"
         },
         "created_at": 1738575599859,
         "created_by": {
-          "id": "Alice",
-          "name": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+          "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+          "name": "Alice"
         },
         "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
         "jira_issue": {
@@ -656,8 +656,8 @@ There are eleven different categories for security findings. Click on a category
         "status": "open",
         "updated_at": 1738575599859,
         "updated_by": {
-          "id": "Alice",
-          "name": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+          "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+          "name": "Alice"
         }
       }
     },
@@ -668,8 +668,8 @@ There are eleven different categories for security findings. Click on a category
       "is_muted_by_rule": false,
       "muted_at": 1738575599859,
       "muted_by": {
-        "id": "Alice",
-        "name": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+        "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        "name": "Alice"
       },
       "reason": "Resource deleted"
     },
@@ -679,8 +679,8 @@ There are eleven different categories for security findings. Click on a category
         "name": "Alice",
         "updated_at": 1738575600859,
         "updated_by": {
-          "id": "Alice",
-          "name": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+          "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+          "name": "Alice"
         }
       }
     }
@@ -740,11 +740,11 @@ There are eleven different categories for security findings. Click on a category
       "sha256:abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890"
     ]
   },
-  "description": "A critical vulnerability was found in the application that allows unauthorized access to sensitive resources. The issue stems from improper input validation in the request handler, which can be exploited to bypass authentication checks.",
+  "description": "An IAM user account has not been used in over 90 days and still has active access keys with administrative privileges, creating an unnecessary attack surface.",
   "detection_changed_at": 1738575599859,
   "exposure_time_seconds": 300,
   "finding_id": "AbCdEfGhIjKlMnOpQrStUvWx",
-  "finding_type": "host_and_container_vulnerability",
+  "finding_type": "identity_risk",
   "first_seen_at": 1738575592659,
   "is_in_security_inbox": false,
   "last_seen_at": 1738624280889,
@@ -759,9 +759,9 @@ There are eleven different categories for security findings. Click on a category
   "resource_type": "example_resource_type",
   "rule": {
     "default_rule_id": "def-000-abc",
-    "id": "TRIVY-CVE-2024-12345",
-    "name": "Read operation on route use predictable IDs",
-    "type": "vulnerability_advisory",
+    "id": "def-000-idr",
+    "name": "IAM user inactive for 90+ days with active access keys",
+    "type": "cloud_configuration",
     "version": 3
   },
   "severity": "medium",
@@ -778,7 +778,7 @@ There are eleven different categories for security findings. Click on a category
     }
   },
   "status": "open",
-  "title": "Improper input validation in request handler",
+  "title": "Inactive IAM user with administrative access keys",
   "workflow": {
     "auto_closed_at": 1738575600859,
     "automations": {
@@ -794,13 +794,13 @@ There are eleven different categories for security findings. Click on a category
     "integrations": {
       "cases": {
         "assignee": {
-          "id": "Alice",
-          "name": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+          "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+          "name": "Alice"
         },
         "created_at": 1738575599859,
         "created_by": {
-          "id": "Alice",
-          "name": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+          "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+          "name": "Alice"
         },
         "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
         "jira_issue": {
@@ -812,8 +812,8 @@ There are eleven different categories for security findings. Click on a category
         "status": "open",
         "updated_at": 1738575599859,
         "updated_by": {
-          "id": "Alice",
-          "name": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+          "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+          "name": "Alice"
         }
       }
     },
@@ -824,8 +824,8 @@ There are eleven different categories for security findings. Click on a category
       "is_muted_by_rule": false,
       "muted_at": 1738575599859,
       "muted_by": {
-        "id": "Alice",
-        "name": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+        "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        "name": "Alice"
       },
       "reason": "Resource deleted"
     },
@@ -835,8 +835,8 @@ There are eleven different categories for security findings. Click on a category
         "name": "Alice",
         "updated_at": 1738575600859,
         "updated_by": {
-          "id": "Alice",
-          "name": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+          "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+          "name": "Alice"
         }
       }
     }
@@ -858,7 +858,7 @@ There are eleven different categories for security findings. Click on a category
       "CVE-2024-12345"
     ],
     "cve": "CVE-2024-12345",
-    "id": "TRIVY-CVE-2024-12345"
+    "id": "TRIVY-CVE-2024-67890"
   },
   "base_severity": "medium",
   "container_image": {
@@ -870,11 +870,11 @@ There are eleven different categories for security findings. Click on a category
       "sha256:abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890"
     ]
   },
-  "description": "A critical vulnerability was found in the application that allows unauthorized access to sensitive resources. The issue stems from improper input validation in the request handler, which can be exploited to bypass authentication checks.",
+  "description": "A remote code execution vulnerability in the logging library allows an attacker to execute arbitrary code by sending a crafted log message that exploits unsafe deserialization.",
   "detection_changed_at": 1738575599859,
   "exposure_time_seconds": 300,
   "finding_id": "AbCdEfGhIjKlMnOpQrStUvWx",
-  "finding_type": "host_and_container_vulnerability",
+  "finding_type": "library_vulnerability",
   "first_seen_at": 1738575592659,
   "git": {
     "author": {
@@ -949,7 +949,7 @@ There are eleven different categories for security findings. Click on a category
     }
   },
   "status": "open",
-  "title": "Improper input validation in request handler",
+  "title": "Remote code execution in logging library",
   "vulnerability": {
     "hash": "abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890",
     "stack": {
@@ -971,13 +971,13 @@ There are eleven different categories for security findings. Click on a category
     "integrations": {
       "cases": {
         "assignee": {
-          "id": "Alice",
-          "name": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+          "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+          "name": "Alice"
         },
         "created_at": 1738575599859,
         "created_by": {
-          "id": "Alice",
-          "name": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+          "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+          "name": "Alice"
         },
         "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
         "jira_issue": {
@@ -989,8 +989,8 @@ There are eleven different categories for security findings. Click on a category
         "status": "open",
         "updated_at": 1738575599859,
         "updated_by": {
-          "id": "Alice",
-          "name": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+          "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+          "name": "Alice"
         }
       }
     },
@@ -1001,8 +1001,8 @@ There are eleven different categories for security findings. Click on a category
       "is_muted_by_rule": false,
       "muted_at": 1738575599859,
       "muted_by": {
-        "id": "Alice",
-        "name": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+        "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        "name": "Alice"
       },
       "reason": "Resource deleted"
     },
@@ -1012,8 +1012,8 @@ There are eleven different categories for security findings. Click on a category
         "name": "Alice",
         "updated_at": 1738575600859,
         "updated_by": {
-          "id": "Alice",
-          "name": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+          "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+          "name": "Alice"
         }
       }
     }
@@ -1073,11 +1073,11 @@ There are eleven different categories for security findings. Click on a category
       "sha256:abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890"
     ]
   },
-  "description": "A critical vulnerability was found in the application that allows unauthorized access to sensitive resources. The issue stems from improper input validation in the request handler, which can be exploited to bypass authentication checks.",
+  "description": "An AWS security group allows unrestricted inbound SSH access from any IP address (0.0.0.0/0), exposing the associated instances to brute-force and unauthorized access attempts.",
   "detection_changed_at": 1738575599859,
   "exposure_time_seconds": 300,
   "finding_id": "AbCdEfGhIjKlMnOpQrStUvWx",
-  "finding_type": "host_and_container_vulnerability",
+  "finding_type": "misconfiguration",
   "first_seen_at": 1738575592659,
   "is_in_security_inbox": false,
   "last_seen_at": 1738624280889,
@@ -1099,9 +1099,9 @@ There are eleven different categories for security findings. Click on a category
   },
   "rule": {
     "default_rule_id": "def-000-abc",
-    "id": "TRIVY-CVE-2024-12345",
-    "name": "Read operation on route use predictable IDs",
-    "type": "vulnerability_advisory",
+    "id": "def-000-cfg",
+    "name": "Security group should not allow unrestricted SSH access",
+    "type": "cloud_configuration",
     "version": 3
   },
   "severity": "medium",
@@ -1118,7 +1118,7 @@ There are eleven different categories for security findings. Click on a category
     }
   },
   "status": "open",
-  "title": "Improper input validation in request handler",
+  "title": "Security group allows unrestricted SSH access",
   "workflow": {
     "auto_closed_at": 1738575600859,
     "automations": {
@@ -1134,13 +1134,13 @@ There are eleven different categories for security findings. Click on a category
     "integrations": {
       "cases": {
         "assignee": {
-          "id": "Alice",
-          "name": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+          "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+          "name": "Alice"
         },
         "created_at": 1738575599859,
         "created_by": {
-          "id": "Alice",
-          "name": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+          "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+          "name": "Alice"
         },
         "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
         "jira_issue": {
@@ -1152,8 +1152,8 @@ There are eleven different categories for security findings. Click on a category
         "status": "open",
         "updated_at": 1738575599859,
         "updated_by": {
-          "id": "Alice",
-          "name": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+          "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+          "name": "Alice"
         }
       }
     },
@@ -1164,8 +1164,8 @@ There are eleven different categories for security findings. Click on a category
       "is_muted_by_rule": false,
       "muted_at": 1738575599859,
       "muted_by": {
-        "id": "Alice",
-        "name": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+        "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        "name": "Alice"
       },
       "reason": "Resource deleted"
     },
@@ -1175,8 +1175,8 @@ There are eleven different categories for security findings. Click on a category
         "name": "Alice",
         "updated_at": 1738575600859,
         "updated_by": {
-          "id": "Alice",
-          "name": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+          "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+          "name": "Alice"
         }
       }
     }
@@ -1203,11 +1203,11 @@ There are eleven different categories for security findings. Click on a category
       "sha256:abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890"
     ]
   },
-  "description": "A critical vulnerability was found in the application that allows unauthorized access to sensitive resources. The issue stems from improper input validation in the request handler, which can be exploited to bypass authentication checks.",
+  "description": "A SQL injection vulnerability was detected at runtime in the application's search endpoint. User-supplied input is concatenated directly into a SQL query without parameterized statements.",
   "detection_changed_at": 1738575599859,
   "exposure_time_seconds": 300,
   "finding_id": "AbCdEfGhIjKlMnOpQrStUvWx",
-  "finding_type": "host_and_container_vulnerability",
+  "finding_type": "runtime_code_vulnerability",
   "first_seen_at": 1738575592659,
   "git": {
     "author": {
@@ -1243,9 +1243,9 @@ There are eleven different categories for security findings. Click on a category
   "resource_type": "example_resource_type",
   "rule": {
     "default_rule_id": "def-000-abc",
-    "id": "TRIVY-CVE-2024-12345",
-    "name": "Read operation on route use predictable IDs",
-    "type": "vulnerability_advisory",
+    "id": "rtcv-001-sqli",
+    "name": "SQL injection detected in application endpoint",
+    "type": "application_code_vulnerability",
     "version": 3
   },
   "service": {
@@ -1265,7 +1265,7 @@ There are eleven different categories for security findings. Click on a category
     }
   },
   "status": "open",
-  "title": "Improper input validation in request handler",
+  "title": "SQL injection in search endpoint",
   "vulnerability": {
     "hash": "abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890"
   },
@@ -1284,13 +1284,13 @@ There are eleven different categories for security findings. Click on a category
     "integrations": {
       "cases": {
         "assignee": {
-          "id": "Alice",
-          "name": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+          "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+          "name": "Alice"
         },
         "created_at": 1738575599859,
         "created_by": {
-          "id": "Alice",
-          "name": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+          "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+          "name": "Alice"
         },
         "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
         "jira_issue": {
@@ -1302,8 +1302,8 @@ There are eleven different categories for security findings. Click on a category
         "status": "open",
         "updated_at": 1738575599859,
         "updated_by": {
-          "id": "Alice",
-          "name": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+          "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+          "name": "Alice"
         }
       }
     },
@@ -1314,8 +1314,8 @@ There are eleven different categories for security findings. Click on a category
       "is_muted_by_rule": false,
       "muted_at": 1738575599859,
       "muted_by": {
-        "id": "Alice",
-        "name": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+        "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        "name": "Alice"
       },
       "reason": "Resource deleted"
     },
@@ -1325,8 +1325,8 @@ There are eleven different categories for security findings. Click on a category
         "name": "Alice",
         "updated_at": 1738575600859,
         "updated_by": {
-          "id": "Alice",
-          "name": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+          "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+          "name": "Alice"
         }
       }
     }
@@ -1353,11 +1353,11 @@ There are eleven different categories for security findings. Click on a category
       "sha256:abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890"
     ]
   },
-  "description": "A critical vulnerability was found in the application that allows unauthorized access to sensitive resources. The issue stems from improper input validation in the request handler, which can be exploited to bypass authentication checks.",
+  "description": "An AWS access key was found hardcoded in a configuration file committed to the repository. Exposed credentials can be used to gain unauthorized access to cloud resources.",
   "detection_changed_at": 1738575599859,
   "exposure_time_seconds": 300,
   "finding_id": "AbCdEfGhIjKlMnOpQrStUvWx",
-  "finding_type": "host_and_container_vulnerability",
+  "finding_type": "secret",
   "first_seen_at": 1738575592659,
   "git": {
     "author": {
@@ -1393,9 +1393,9 @@ There are eleven different categories for security findings. Click on a category
   "resource_type": "example_resource_type",
   "rule": {
     "default_rule_id": "def-000-abc",
-    "id": "TRIVY-CVE-2024-12345",
-    "name": "Read operation on route use predictable IDs",
-    "type": "vulnerability_advisory",
+    "id": "sct-001-aws",
+    "name": "AWS access key detected in source code",
+    "type": "credential_exposure",
     "version": 3
   },
   "service": {
@@ -1415,7 +1415,7 @@ There are eleven different categories for security findings. Click on a category
     }
   },
   "status": "open",
-  "title": "Improper input validation in request handler",
+  "title": "Hardcoded AWS access key in configuration file",
   "vulnerability": {
     "hash": "abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890"
   },
@@ -1434,13 +1434,13 @@ There are eleven different categories for security findings. Click on a category
     "integrations": {
       "cases": {
         "assignee": {
-          "id": "Alice",
-          "name": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+          "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+          "name": "Alice"
         },
         "created_at": 1738575599859,
         "created_by": {
-          "id": "Alice",
-          "name": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+          "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+          "name": "Alice"
         },
         "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
         "jira_issue": {
@@ -1452,8 +1452,8 @@ There are eleven different categories for security findings. Click on a category
         "status": "open",
         "updated_at": 1738575599859,
         "updated_by": {
-          "id": "Alice",
-          "name": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+          "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+          "name": "Alice"
         }
       }
     },
@@ -1464,8 +1464,8 @@ There are eleven different categories for security findings. Click on a category
       "is_muted_by_rule": false,
       "muted_at": 1738575599859,
       "muted_by": {
-        "id": "Alice",
-        "name": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+        "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        "name": "Alice"
       },
       "reason": "Resource deleted"
     },
@@ -1475,8 +1475,8 @@ There are eleven different categories for security findings. Click on a category
         "name": "Alice",
         "updated_at": 1738575600859,
         "updated_by": {
-          "id": "Alice",
-          "name": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+          "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+          "name": "Alice"
         }
       }
     }
@@ -1503,11 +1503,11 @@ There are eleven different categories for security findings. Click on a category
       "sha256:abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890"
     ]
   },
-  "description": "A critical vulnerability was found in the application that allows unauthorized access to sensitive resources. The issue stems from improper input validation in the request handler, which can be exploited to bypass authentication checks.",
+  "description": "A cross-site scripting (XSS) vulnerability was found in the application's template rendering. User input is inserted into HTML output without proper escaping, allowing script injection.",
   "detection_changed_at": 1738575599859,
   "exposure_time_seconds": 300,
   "finding_id": "AbCdEfGhIjKlMnOpQrStUvWx",
-  "finding_type": "host_and_container_vulnerability",
+  "finding_type": "static_code_vulnerability",
   "first_seen_at": 1738575592659,
   "git": {
     "author": {
@@ -1543,9 +1543,9 @@ There are eleven different categories for security findings. Click on a category
   "resource_type": "example_resource_type",
   "rule": {
     "default_rule_id": "def-000-abc",
-    "id": "TRIVY-CVE-2024-12345",
-    "name": "Read operation on route use predictable IDs",
-    "type": "vulnerability_advisory",
+    "id": "sast-001-xss",
+    "name": "Reflected XSS via unescaped user input in template",
+    "type": "application_code_vulnerability",
     "version": 3
   },
   "service": {
@@ -1565,7 +1565,7 @@ There are eleven different categories for security findings. Click on a category
     }
   },
   "status": "open",
-  "title": "Improper input validation in request handler",
+  "title": "Cross-site scripting in template rendering",
   "vulnerability": {
     "hash": "abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890"
   },
@@ -1584,13 +1584,13 @@ There are eleven different categories for security findings. Click on a category
     "integrations": {
       "cases": {
         "assignee": {
-          "id": "Alice",
-          "name": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+          "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+          "name": "Alice"
         },
         "created_at": 1738575599859,
         "created_by": {
-          "id": "Alice",
-          "name": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+          "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+          "name": "Alice"
         },
         "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
         "jira_issue": {
@@ -1602,8 +1602,8 @@ There are eleven different categories for security findings. Click on a category
         "status": "open",
         "updated_at": 1738575599859,
         "updated_by": {
-          "id": "Alice",
-          "name": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+          "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+          "name": "Alice"
         }
       }
     },
@@ -1614,8 +1614,8 @@ There are eleven different categories for security findings. Click on a category
       "is_muted_by_rule": false,
       "muted_at": 1738575599859,
       "muted_by": {
-        "id": "Alice",
-        "name": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+        "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        "name": "Alice"
       },
       "reason": "Resource deleted"
     },
@@ -1625,8 +1625,8 @@ There are eleven different categories for security findings. Click on a category
         "name": "Alice",
         "updated_at": 1738575600859,
         "updated_by": {
-          "id": "Alice",
-          "name": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+          "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+          "name": "Alice"
         }
       }
     }
@@ -1653,11 +1653,11 @@ There are eleven different categories for security findings. Click on a category
       "sha256:abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890"
     ]
   },
-  "description": "A critical vulnerability was found in the application that allows unauthorized access to sensitive resources. The issue stems from improper input validation in the request handler, which can be exploited to bypass authentication checks.",
+  "description": "A container process executed a binary that was not part of the original container image. This unexpected process execution may indicate a compromised workload or unauthorized modification.",
   "detection_changed_at": 1738575599859,
   "exposure_time_seconds": 300,
   "finding_id": "AbCdEfGhIjKlMnOpQrStUvWx",
-  "finding_type": "host_and_container_vulnerability",
+  "finding_type": "workload_activity",
   "first_seen_at": 1738575592659,
   "is_in_security_inbox": false,
   "last_seen_at": 1738624280889,
@@ -1672,9 +1672,9 @@ There are eleven different categories for security findings. Click on a category
   "resource_type": "example_resource_type",
   "rule": {
     "default_rule_id": "def-000-abc",
-    "id": "TRIVY-CVE-2024-12345",
-    "name": "Read operation on route use predictable IDs",
-    "type": "vulnerability_advisory",
+    "id": "def-000-wka",
+    "name": "Process launched from unexpected path in container",
+    "type": "workload_security",
     "version": 3
   },
   "severity": "medium",
@@ -1691,7 +1691,7 @@ There are eleven different categories for security findings. Click on a category
     }
   },
   "status": "open",
-  "title": "Improper input validation in request handler",
+  "title": "Unexpected process execution in container",
   "workflow": {
     "auto_closed_at": 1738575600859,
     "automations": {
@@ -1707,13 +1707,13 @@ There are eleven different categories for security findings. Click on a category
     "integrations": {
       "cases": {
         "assignee": {
-          "id": "Alice",
-          "name": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+          "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+          "name": "Alice"
         },
         "created_at": 1738575599859,
         "created_by": {
-          "id": "Alice",
-          "name": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+          "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+          "name": "Alice"
         },
         "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
         "jira_issue": {
@@ -1725,8 +1725,8 @@ There are eleven different categories for security findings. Click on a category
         "status": "open",
         "updated_at": 1738575599859,
         "updated_by": {
-          "id": "Alice",
-          "name": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+          "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+          "name": "Alice"
         }
       }
     },
@@ -1737,8 +1737,8 @@ There are eleven different categories for security findings. Click on a category
       "is_muted_by_rule": false,
       "muted_at": 1738575599859,
       "muted_by": {
-        "id": "Alice",
-        "name": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+        "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        "name": "Alice"
       },
       "reason": "Resource deleted"
     },
@@ -1748,8 +1748,8 @@ There are eleven different categories for security findings. Click on a category
         "name": "Alice",
         "updated_at": 1738575600859,
         "updated_by": {
-          "id": "Alice",
-          "name": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+          "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+          "name": "Alice"
         }
       }
     }
