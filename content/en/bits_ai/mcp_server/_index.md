@@ -41,13 +41,6 @@ This demo shows the Datadog MCP Server being used in Cursor and Claude Code (unm
 - The Datadog MCP Server is not GovCloud compatible.
 - Datadog collects certain information about your usage of the Remote Datadog MCP Server, including how you interact with it, whether errors occurred while using it, what caused those errors, and user identifiers in accordance with the <a href="https://www.datadoghq.com/legal/privacy/" target="_blank">Datadog Privacy Policy</a> and Datadog's <a href="https://www.datadoghq.com/legal/eula/" target="_blank">EULA</a>. This data is used to help improve the server's performance and features, including transitions to and from the server and the applicable Datadog login page for accessing the Services, and context (for example, user prompts) leading to the use of MCP tools. The data is stored for 120 days.
 
-
-## Requirements
-
-Datadog users must have the `MCP Read` [permission][18] to use the MCP Server for read access, and the `MCP Write` [permission][18] for write access.
-
-For setup instructions, see [Set Up the Datadog MCP Server][27].
-
 ## Monitoring the Datadog MCP Server usage
 
 You can track Datadog MCP Server usage for your organization using Datadog metrics and Audit Trail.
@@ -71,6 +64,7 @@ The Datadog MCP Server supports _toolsets_, which allow you to use only the tool
 - `apm`: Tools for in-depth [APM][28] trace analysis, span search, Watchdog insights, and performance investigation
 - `cases`: Tools for [Case Management][38], including creating, searching, and updating cases; managing projects; and linking Jira issues
 - `dbm`: Tools for interacting with [Database Monitoring][26]
+- `ddsql`: (Preview) Tools for querying Datadog data using [DDSQL][41], a SQL dialect with support for infrastructure resources, logs, metrics, RUM, spans, and other Datadog data sources
 - `error-tracking`: Tools for interacting with Datadog [Error Tracking][25]
 - `feature-flags`: Tools for managing [feature flags][29], including creating, listing, and updating flags and their environments
 - `llmobs`: Tools for searching and analyzing [LLM Observability][30] spans and experiments
@@ -82,7 +76,7 @@ The Datadog MCP Server supports _toolsets_, which allow you to use only the tool
 - `synthetics`: Tools for interacting with Datadog [Synthetic tests][20]
 - `workflows`: Tools for [Workflow Automation][39], including listing, inspecting, executing, and configuring workflows for agent use
 
-To use a toolset, include the `toolsets` query parameter in the endpoint URL when connecting to the MCP Server ([remote authentication][27] only). 
+To use a toolset, include the `toolsets` query parameter in the endpoint URL when connecting to the MCP Server ([remote authentication][27] only). Use `toolsets=all` to enable all generally available toolsets at once.
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
 For example, based on your selected [Datadog site][36] ({{< region-param key="dd_site_name" >}}):
@@ -95,6 +89,11 @@ For example, based on your selected [Datadog site][36] ({{< region-param key="dd
 
 - Retrieve core, Synthetic Testing, and Software Delivery tools:
   <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=core,synthetics,software-delivery</code></pre>
+
+- Retrieve all generally available tools:
+  <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=all</code></pre>
+
+<div class="alert alert-info">Enabling all toolsets increases the number of tool definitions sent to your AI client, which consumes context window space. <code>toolsets=all</code> works best with clients that support tool filtering, such as Claude Code.</div>
 
 [36]: /getting_started/site/#navigate-the-datadog-documentation-by-site
 {{< /site-region >}}
@@ -460,6 +459,54 @@ Searches [Database Monitoring][26] query samples, which represent individual que
 - Find slow queries on `host:db-prod-1` filtered by `@db.user:app_user`.
 - Get recent query samples for `@db.query_signature:abc123def` and analyze performance patterns.
 
+<div class="alert alert-info">The <code>ddsql</code> toolset is in Preview.</div>
+
+### `ddsql_get_spec`
+*Toolset: **ddsql***\
+Gets a compact DDSQL capability spec, including supported SQL functions, SQL keywords, and DDSQL-specific differences from standard PostgreSQL. Call this tool before composing queries to understand supported syntax.
+
+- What SQL functions are supported in DDSQL?
+- Show me the DDSQL query syntax rules and differences from PostgreSQL.
+- What aggregate functions can I use in DDSQL?
+
+### `ddsql_schema_search_tables`
+*Toolset: **ddsql***\
+Searches DDSQL datasets and returns tables (public data sources and reference tables) and available metrics.
+
+- What tables are available to query in DDSQL?
+- Search for DDSQL tables related to Kubernetes.
+- Show me the available metrics I can query with DDSQL.
+
+### `ddsql_schema_get_table_columns`
+*Toolset: **ddsql***\
+Gets static SQL columns for a DDSQL table from schema metadata.
+
+- What columns are available in the `aws.ec2_instance` table?
+- Show me the schema for the `k8s.pods` table.
+
+### `ddsql_schema_search_unstructured_fields`
+*Toolset: **ddsql***\
+Searches and ranks fields for unstructured DDSQL sources, such as logs, RUM, and spans, sorted by frequency. Use this tool for schema discovery on searchable sources before falling back to `ddsql_schema_get_table_columns`.
+
+- What fields are available in DDSQL logs?
+- Find fields related to `service` in my RUM data.
+- Show me the most common fields in my span data.
+
+### `ddsql_run_query`
+*Toolset: **ddsql***\
+Runs a DDSQL query and returns results. Supports using SQL syntax to query infrastructure resources, logs, metrics, RUM, spans, and other Datadog data sources. See the [DDSQL Reference][42] for syntax details.
+
+- How many EC2 instances are running in each AWS region?
+- Show me the top 10 services by error log count in the last hour.
+- Query average CPU usage grouped by host for the past 24 hours.
+
+### `ddsql_create_link`
+*Toolset: **ddsql***\
+Generates a Datadog UI link to the [DDSQL Editor][41] with a given query pre-populated.
+
+- Generate a DDSQL Editor link for this query.
+- Create a shareable link to the DDSQL Editor with my infrastructure query.
+
 ### `search_datadog_error_tracking_issues`
 *Toolset: **error-tracking***\
 Searches Error Tracking Issues across data sources (RUM, Logs, Traces).
@@ -803,3 +850,5 @@ The Datadog MCP Server is under significant development. Use [this feedback form
 [38]: /service_management/case_management/
 [39]: /actions/workflows/
 [40]: /bits_ai/mcp_server/setup#local-binary-authentication
+[41]: /ddsql_editor/
+[42]: /ddsql_reference/ddsql_default/

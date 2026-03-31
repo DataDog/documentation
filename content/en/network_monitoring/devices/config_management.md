@@ -18,7 +18,7 @@ Network Configuration Management (NCM) extends [Network Device Monitoring (NDM)]
 - Compare two configuration versions side by side
 - Use AI-generated summaries to understand changes and their potential impact during incidents
 
-{{< img src="/network_device_monitoring/config_mgmt/network_device_config_redacted.png" alt="Network Device Management configuration tab, showing the most recent configuration and an AI summary of what changed." style="width:100%;" >}}
+{{< img src="/network_device_monitoring/config_mgmt/network_device_config_ndm_view.png" alt="Network Device Management configuration tab, showing the most recent configuration and an AI summary of what changed." style="width:100%;" >}}
 
 **Note**: NCM is read-only in Preview. 
 
@@ -90,13 +90,13 @@ Network Configuration Management (NCM) extends [Network Device Monitoring (NDM)]
 
 ## Viewing configurations
 
-Network Configuration Management is accessible from the device side panel in Network Device Monitoring:
+Network Configuration Management is accessible from the NDM device view in Network Device Monitoring:
 
 1. Navigate to [Network Device Monitoring][3].
 2. Select a device from the device list or from any NDM visualization such as [Device Geomap][4] or the [Device Topology][5] map.
-3. Open the **Configuration** tab in the device side panel.
+3. Open the **Configuration** tab in the NDM device view.
 
-   {{< img src="/network_device_monitoring/config_mgmt/config_tab_redacted.png" alt="Network Device Management side panel, highlighting the Configuration tab." style="width:100%;" >}}
+   {{< img src="/network_device_monitoring/config_mgmt/config_tab.png" alt="The NDM device view, highlighting the Configuration tab." style="width:100%;" >}}
 
    On the Configuration tab, you can filter what the configuration list displays:
    - **All**: Shows both running and startup configurations
@@ -129,11 +129,11 @@ To see what changed between configuration versions:
 1. Select two configurations from the history list or timeline using the checkboxes. 
 2. Click **Compare Two Configs** to open the comparison view.
 
-   {{< img src="/network_device_monitoring/config_mgmt/compare_two_configs_2.png" alt="Network Device Management configuration tab, highlighting the Compare Two Configs option." style="width:100%;" >}}
+   {{< img src="/network_device_monitoring/config_mgmt/compare_two_configs_3.png" alt="Network Device Management configuration tab, highlighting the Compare Two Configs option." style="width:100%;" >}}
 
 The comparison view shows both configurations side by side with inline diffs that highlight changed lines. You can switch between different configuration pairs without closing the comparison view.
 
-   {{< img src="/network_device_monitoring/config_mgmt/config_screen_split_2.png" alt="Network Device Management configuration tab, comparing two versions in split view" style="width:90%;" >}}
+   {{< img src="/network_device_monitoring/config_mgmt/config_screen_split_3.png" alt="Network Device Management configuration tab, comparing two versions in split view" style="width:90%;" >}}
 
 ## AI summaries
 

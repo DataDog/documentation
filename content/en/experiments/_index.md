@@ -1,73 +1,53 @@
 ---
-title: Planning and Launching Experiments
-description: Use Datadog Experiments to measure the causal relationship that new experiences or features have on user outcomes.
-aliases:
-  - /product_analytics/experimentation/
+title: Experiments
+description: Plan, run, and analyze randomized experiments across your stack with Datadog Experiments.
 further_reading:
-- link: "https://www.datadoghq.com/blog/datadog-product-analytics"
-  tag: "Blog"
-  text: "Make data-driven design decisions with Product Analytics"
-- link: "/experiments/defining_metrics"
+- link: "/feature_flags/"
   tag: "Documentation"
-  text: "Defining Experiment Metrics"
+  text: "Feature Flags"
+- link: "/product_analytics/"
+  tag: "Documentation"
+  text: "Product Analytics"
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/datadog-experiments/" >}}
 Datadog Experiments is in Preview. Complete the form to request access.
 {{< /callout >}}
 
-## Overview 
-Datadog Experiments allows you to measure the causal relationship that new experiences and features have on user outcomes. Datadog Experiments uses [Feature Flags][4] to randomly allocate traffic between two or more variations, using one of the variations as a control group.
+## Overview
 
-This page walks you through planning and launching your experiments. 
+Datadog Experiments helps teams run and analyze randomized experiments, such as A/B tests. These experiments help you understand how new features affect business outcomes, user behavior, and application performance, so you can make confident, data-backed decisions about what to implement.
 
-## Setup
-To create, configure, and launch your experiment, complete the following steps:
+Datadog Experiments consists of two components:
 
-### Step 1 - Create your experiment
+- An integration with [Datadog Feature Flags][1] for deploying and managing randomized experiments.
+- A statistical analysis of [Real User Monitoring (RUM)][2] and [Product Analytics][3] data to evaluate experiment results.
 
-1. Navigate to the [Experiments][1] page in Datadog Product Analytics.
-2. Click **+ Create Experiment**.
-3. Enter your experiment name and hypothesis.
+## Getting started
 
-{{< img src="/product_analytics/experiment/exp_create_experiment.png" alt="The experiment creation form with fields for experiment name and hypothesis." style="width:80%;" >}}
+To start using Datadog Experiments, configure at least one of the following data sources:
 
-### Step 2 - Add metrics
+- [Real User Monitoring (RUM)][2] for client-side and performance signals.
+- [Product Analytics][3] for user behavior and journey metrics.
 
-After you’ve created an experiment, add your primary metric and optional guardrails. See [Defining Metrics][2] for details on how to create metrics.
+After configuring a data source, follow these steps to launch your experiment:
 
-{{< img src="/product_analytics/experiment/exp_decision_metrics1.png" alt="The metrics configuration panel with options for primary metric and guardrails." style="width:80%;" >}}
+1. **[Create a metric][4]** to evaluate your experiment.
+1. **[Create an experiment][5]** to define your hypothesis and optionally calculate a [sample size][8].
+1. **[Create a feature flag][6]** and implement it using the [SDK][9] to assign users to the control and variant groups. A feature flag is required to launch your experiment.
+1. **[Launch your experiment][7]** to see the impact of your change on business outcomes, user journey, and application performance.
 
-#### Add a sample size calculation (optional)
-
-After selecting your experiment’s metrics, use the optional sample size calculator to determine how small of a change your experiment can reliably detect with your current sample size.
-
-1. Select the **Entrypoint Event** of your experiment. This specifies _when_ in the user journey they will be enrolled into the test. 
-1. Click **Run calculation** to see the [Minimum Detectable Effects][3] (MDE) your experiment has on your metrics. The MDE is the smallest difference that you are able to detect between your experiment’s variants.
-
-{{< img src="/product_analytics/experiment/exp_sample_size.png" alt="The Sample Size Calculator modal with the Entrypoint Event dropdown highlighted." style="width:90%;" >}}
-
-### Step 3 - Launch your experiment
-
-After specifying your metrics, you can launch your experiment.
-
-1. Select a Feature Flag that captures the variants you want to test. If you have not yet created a feature flag, see the [Getting Started with Feature Flags][4] page.
-
-1. Click **Set Up Experiment on Feature Flag** to specify how you want to roll out your experiment. You can either launch the experiment to all traffic, or schedule a gradual rollout.
-
-{{< img src="/product_analytics/experiment/exp_feature_flag.png" alt="Set up an experiment on a Feature Flag." style="width:90%;" >}}
-
-## Next steps
-1. **[Defining metrics][2]**: Define the metrics you want to measure during your experiments.
-1. **[Reading Experiment Results][5]**: Review and explore your experiment results.
-1. **[Minimum Detectable Effects][3]**: Choose appropriately sized MDEs.
-
+{{< img src="/product_analytics/experiment/overview_metrics_view-1.png" alt="The Experiments metrics view showing business, funnel, and performance metrics with control and variant values and relative lift for each metric. A tooltip is open on the Revenue metric showing Non-CUPED values for Revenue per User, Total Revenue, and User Assignment Count across the control and variant groups." style="width:90%;" >}}
 
 ## Further reading
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/product-analytics/experiments
-[2]: /experiments/defining_metrics
-[3]: /experiments/minimum_detectable_effect
-[4]: /getting_started/feature_flags/
-[5]: /experiments/reading_results
+[1]: /feature_flags/
+[2]: /real_user_monitoring/
+[3]: /product_analytics/#getting-started
+[4]: /experiments/defining_metrics
+[5]: /experiments/plan_and_launch_experiments
+[6]: /getting_started/feature_flags/#create-your-first-feature-flag
+[7]: /experiments/plan_and_launch_experiments#step-3---launch-your-experiment
+[8]: /experiments/plan_and_launch_experiments#add-a-sample-size-calculation-optional
+[9]: /getting_started/feature_flags/#feature-flags-sdks
