@@ -140,13 +140,13 @@ Use the Source Code section in the metric side panel to identify a metric's sour
 
 {{< img src="metrics/summary/metric_source_code_03262026.png" alt="Source Code Example in Metrics sidepanel" style="width:80%;">}}
 
-### Troubleshooting Missing Metrics
+### Troubleshooting missing metrics
 
-If a metric doesn’t appear in Source Code, it may be due to how it’s defined.
+If a metric doesn't appear in Source Code, it may be due to how it's defined.
 
 Datadog detects metrics best when names are written as explicit strings. Metrics built using variables, constants, or custom helpers may not be detected.
 
-Common reasons:
+Common reasons for missing metrics:
 - Metric name is generated dynamically  
 - Metric is emitted through custom wrappers  
 - Repository is not fully indexed  
@@ -156,7 +156,7 @@ Best practice:
 
 Example:
 
-Sening metric using a variable (not recommended)
+Sending metric using a variable (not recommended)
 
 ```java
 public static final String METRIC_NAME = "my.metric.name";
@@ -169,7 +169,7 @@ Sending metric as explicit string (recommended):
 timer = meterRegistry.timer("my.metric.name");
 ```
 
-To ensure full coverage of your metric's source code, ensure that you've installed Datadog's [GitHub][36], [Gitlab][37], or [Azure DevOps][38] integration and that all your [repositories][39] are connected.
+To ensure full coverage of your metric's source code, ensure that you've installed Datadog's [GitHub][36], [GitLab][37], or [Azure DevOps][38] integration and that all your [repositories][39] are connected.
 
 ### Tags table
 
