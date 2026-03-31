@@ -3663,6 +3663,18 @@
     "description": "The list endpoint returns security signals that match a search query.\nBoth this endpoint and the POST endpoint can be used interchangeably when listing\nsecurity signals.",
     "summary": "Get a quick list of security signals"
   },
+  "BulkEditSecurityMonitoringSignalsAssignee": {
+    "description": "Change the triage assignees of multiple security signals at once.\nThe maximum number of signals that can be updated in a single request is 199.",
+    "summary": "Bulk update triage assignee of security signals",
+    "request_description": "Attributes describing the signal assignee updates.",
+    "request_schema_description": "Request body for updating the assignee of multiple security signals."
+  },
+  "BulkEditSecurityMonitoringSignalsState": {
+    "description": "Change the triage states of multiple security signals at once.\nThe maximum number of signals that can be updated in a single request is 199.",
+    "summary": "Bulk update triage state of security signals",
+    "request_description": "Attributes describing the signal state updates.",
+    "request_schema_description": "Request body for updating the triage states of multiple security signals."
+  },
   "SearchSecurityMonitoringSignals": {
     "description": "Returns security signals that match a search query.\nBoth this endpoint and the GET endpoint can be used interchangeably for listing\nsecurity signals.",
     "summary": "Get a list of security signals",

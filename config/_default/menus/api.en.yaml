@@ -2660,6 +2660,30 @@ menu:
           - SearchSecurityMonitoringSignals
         unstable: []
         order: 72
+    - name: Bulk update triage state of security signals
+      url: '#bulk-update-triage-state-of-security-signals'
+      identifier: security-monitoring-bulk-update-triage-state-of-security-signals
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - BulkEditSecurityMonitoringSignalsState
+        unstable: []
+        order: 85
+    - name: Bulk update triage assignee of security signals
+      url: '#bulk-update-triage-assignee-of-security-signals'
+      identifier: security-monitoring-bulk-update-triage-assignee-of-security-signals
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - BulkEditSecurityMonitoringSignalsAssignee
+        unstable: []
+        order: 86
     - name: Get a quick list of security signals
       url: '#get-a-quick-list-of-security-signals'
       identifier: security-monitoring-get-a-quick-list-of-security-signals
