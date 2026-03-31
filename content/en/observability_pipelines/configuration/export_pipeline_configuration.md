@@ -29,7 +29,7 @@ When building a pipeline that has not been deployed yet, you can set up the pipe
 1. [Set up a pipeline][2] by adding your source, processors, and destinations.
 1. After your pipeline has been configured, click **Export Pipeline**.
    {{< img src="observability_pipelines/export_pipeline/export_draft_pipeline.png" alt="The export button highlighted in the pipeline UI" style="width:100%;" >}}
-1. Copy or download the JSON or Terraform file to programmatically deploy your pipeline.
+1. Click the copy or download button to export the configuration as JSON or Terraform.
    {{< img src="observability_pipelines/export_pipeline/export_json_modal.png" alt="The export modal showing the pipeline configuration in JSON" style="width:100%;" >}}
 1. Install the Worker through the API or Terraform to start processing data through the pipeline.
    - [API documentation][3]
