@@ -30,13 +30,13 @@ Datadog Experiments connects to Databricks through the [Datadog Databricks integ
 
 1. Click your profile in the upper-right corner and select **Settings**.
 1. Open the **Identity and access** tab.
-1. On the **Service principals** row, click **Manage**.
-1. Click **Add service principal**, then **Add new**.
-1. Enter a service principal name and click **Add**.
+1. On the **Service principals** row, click **Manage**, then:
+   1. Click **Add service principal**, then **Add new**.
+   1. Enter a service principal name and click **Add**.
 1. Click the name of the new service principal to open its details page.
 1. On the **Permissions** tab:
    1. Click **Grant access**.
-   1. Under the **User, Group or Service Principal**, enter the service principal name.
+   1. Enter the service principal name.
    1. In the **Permission** dropdown, select **Manage**.
 1. On the **Secrets** tab:
    1. Click **Generate secret**.
@@ -45,9 +45,9 @@ Datadog Experiments connects to Databricks through the [Datadog Databricks integ
    1. Note your **Client ID** and **Secret**.
    1. Click **Done**.
 1. Return to the **Identity and access** tab.
-1. On the **Groups** row, click **Manage**.
-1. Click the **admins** group, then click **Add members**.
-1. Enter the **service principal** and click **Add**.
+1. On the **Groups** row, click **Manage**, then:
+   1. Click the **admins** group, then click **Add members**.
+   1. Enter the **service principal** and click **Add**.
 
 After you create the service principal, continue to [Step 1](#step-1-grant-permissions-to-the-service-principal) to grant the required permissions.
 
