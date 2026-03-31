@@ -492,7 +492,11 @@ logger.info("Flag: {} | Value: {} | Variant: {} | Reason: {}",
 
 Before investigating specific errors, confirm these prerequisites are in place:
 
-1. **The Datadog Agent is running** and reachable from your application. Use a health check endpoint or verify process status.
+1. **The Datadog Agent is running** and reachable from your application. Verify by querying the Agent's info endpoint:
+   ```bash
+   curl http://localhost:8126/info
+   ```
+   A successful JSON response confirms the Agent is running. The `endpoints` array in the response lists what the Agent supports, which is useful for the checks below.
 2. **Remote Configuration is enabled on the Agent**: Set `remote_configuration.enabled: true` in `datadog.yaml` or `DD_REMOTE_CONFIG_ENABLED=true`. See [Remote Configuration][1].
 3. **The experimental flagging provider is enabled on the tracer**: Set `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true`.
 4. **Required tracer environment variables are set**: `DD_API_KEY`, `DD_ENV`, and `DD_SITE`.
@@ -500,61 +504,6 @@ Before investigating specific errors, confirm these prerequisites are in place:
 6. **Your `DD_ENV` value appears in the Feature Flag environments list**: Confirm your environment is visible at `https://app.datadoghq.com/feature-flags/settings/environments`.
 
 After confirming all prerequisites, continue with the sections below if flags still aren't working.
-
-### Provider not ready
-
-**Problem**: `PROVIDER_NOT_READY` errors when evaluating flags
-
-**Common Causes**:
-1. **Agent not ready**: Application started before Agent was fully initialized
-2. **No flags configured**: No flags published to your service/environment combination
-3. **Agent Remote Configuration disabled**: Agent not configured for Remote Configuration
-
-**Solutions**:
-1. **Verify feature flagging system started** in application logs:
-   ```
-   [dd.trace] Feature Flagging system starting
-   [dd.trace] Feature Flagging system started
-   ```
-2. **Verify the Agent is ready** before app starts (use health checks in Docker/Kubernetes)
-3. **Check EVP Proxy discovered** in logs:
-   ```
-   discovered ... evpProxyEndpoint=evp_proxy/v4/ configEndpoint=v0.7/config
-   ```
-4. **Wait for Remote Configuration sync** (can take 30-60 seconds after publishing flags)
-5. **Verify flags are published** in Datadog UI to the correct service and environment
-
-### EVP proxy not available error
-
-**Problem**: Logs show "EVP Proxy not available" or "agent does not support EVP proxy"
-
-**Cause**: Application started before Agent was fully initialized
-
-**Solutions**:
-1. **Add Agent health check** in orchestration (Docker Compose, Kubernetes)
-2. **Add startup delay** to application
-3. **Retry logic**: Implement retry on provider initialization failure
-4. **Upgrade Agent**: Verify you are using Agent 7.x or later with EVP Proxy support
-
-### Flags not updating
-
-**Problem**: Flag configuration changes aren't reflected in the application
-
-**Solutions**:
-1. Check Remote Configuration is enabled on both Agent and application
-2. Verify Agent can connect to Datadog backend
-3. Check application logs for "No configuration changes" or "Configuration received"
-4. Verify flags are published (not saved as drafts) in the Datadog UI
-5. Verify service and environment tags match between app and flag targeting
-
-### Type mismatch errors
-
-**Problem**: `TYPE_MISMATCH` errors when evaluating flags
-
-**Solutions**:
-1. Verify the flag type in Datadog UI matches the evaluation method
-2. Use correct method: `getBooleanValue()`, `getStringValue()`, `getIntegerValue()`, `getDoubleValue()`
-3. Check flag configuration for correct value types
 
 ### Debug flag evaluations
 
@@ -575,7 +524,7 @@ Review the logged output to understand why the provider returned a particular re
 
 ### Monitor provider state changes
 
-If flags were working and then stopped, add event listeners to observe provider life cycle transitions:
+Add event listeners early in your application startup to observe provider life cycle transitions:
 
 {{< code-block lang="java" >}}
 import dev.openfeature.sdk.ProviderEvent;
@@ -598,6 +547,46 @@ client.on(ProviderEvent.PROVIDER_CONFIGURATION_CHANGED, (event) -> {
 {{< /code-block >}}
 
 A `PROVIDER_STALE` or `PROVIDER_ERROR` event after a period of normal operation indicates a loss of connectivity to the Agent or a Remote Configuration disruption.
+
+### Provider not ready
+
+**Problem**: `PROVIDER_NOT_READY` errors when evaluating flags
+
+`PROVIDER_NOT_READY` is returned when flag evaluation is attempted before the provider has received its first configuration from Remote Configuration. This state persists until the tracer receives its initial flag configuration payload from the Agent.
+
+**Common causes**:
+1. **Async initialization**: `setProvider()` was used instead of `setProviderAndWait()`. Evaluations that happen before the first Remote Configuration payload arrives return `PROVIDER_NOT_READY`.
+2. **Initialization timeout**: `setProviderAndWait()` timed out (default 30 seconds) and threw `ProviderNotReadyError`, which was caught. The application continues evaluating flags while still waiting for the first configuration.
+3. **Agent Remote Configuration disabled**: Agent not configured for Remote Configuration
+
+**Solutions**:
+1. **Enable debug logging** to see the feature flagging system startup sequence. These messages are emitted at DEBUG level—set `DD_TRACE_DEBUG=true` to see them:
+   ```
+   [dd.trace] Feature Flagging system starting
+   [dd.trace] Feature Flagging system started
+   ```
+2. **Verify the Agent exposes the required endpoints** by querying `http://localhost:8126/info`. The `endpoints` array should include `v0.7/config` and `evp_proxy/v4/`.
+3. **Check EVP Proxy discovered** in debug-level logs (`DD_TRACE_DEBUG=true`):
+   ```
+   discovered ... evpProxyEndpoint=evp_proxy/v4/ configEndpoint=v0.7/config
+   ```
+4. **Wait for Remote Configuration sync** (can take 30-60 seconds after publishing flags)
+5. **Verify flags are published** in Datadog UI to the correct service and environment
+
+### EVP proxy not available error
+
+**Problem**: Agent logs show:
+```
+Cannot create backend API client since agentless mode is disabled, and agent does not support EVP proxy
+```
+
+**Cause**: The Agent does not expose the EVP proxy endpoint, either because it started after the tracer connected or because the Agent version is too old.
+
+**Solutions**:
+1. **Add Agent health check** in orchestration (Docker Compose, Kubernetes)
+2. **Add startup delay** to application
+3. **Retry logic**: Implement retry on provider initialization failure
+4. **Upgrade Agent**: Verify you are using Agent 7.x or later with EVP Proxy support
 
 ### Trace Remote Configuration through the Agent
 
