@@ -17,7 +17,6 @@ further_reading:
 ---
 
 ## Overview
-Thus a change
 
 Patterns automatically clusters your LLM application's production traffic into meaningful topics, helping you understand what users are asking, identify coverage gaps, and diagnose failure modes. Select an application configured with LLM Observability to view pattern information on the [**Patterns** page][1].
 
