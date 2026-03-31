@@ -20,8 +20,7 @@ Fill out the [Preview form](https://www.datadoghq.com/product-preview/bits-assis
 
 ## Overview
 
-Bits Assistant is an AI-powered companion in Datadog that helps you search and act across Datadog using natural language. Bits Assistant is available across the web application, mobile app, and Slack. To use Bits Assistant, make sure the **Bits Assistant Access** permission is enabled.
-
+Bits Assistant is an AI-powered companion in Datadog that helps you search and act across Datadog using natural language. Bits Assistant is available across the web application, mobile app, and Slack.
 Ask Bits Assistant questions like:
 - `Summarize high severity incidents that have occurred in the last day`
 - `Which services have the most errors right now?`
@@ -30,6 +29,12 @@ Ask Bits Assistant questions like:
 - `How do I configure log collection for the Datadog Agent?`
 - `Do we already have monitors for high latency on the payments service?`
 - `Summarize the key findings from Kubernetes overview dashboard.`
+
+### Permissions
+
+To use Bits Assistant, make sure the **Bits Assistant Access** permission is enabled.
+
+Bits Assistant uses your Datadog role to fetch data, so it can only access the resources you have permission to view or modify. For example, if you do not have permission to edit a dashboard, Bits Assistant cannot edit that dashboard on your behalf.
 
 ### Skills
 

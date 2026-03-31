@@ -20,7 +20,7 @@ The NetFlow view in Network Device Monitoring provides visibility into network t
 
 The NetFlow view displays traffic metrics aggregated by device and interface. Use it to identify which devices or interfaces are consuming the most bandwidth, generating the most packets, or contributing to traffic spikes.
 
-{{< img src="network_device_monitoring/netflow/netflow_home_2.png" alt="The NetFlow Monitoring page containing a collapsible legend for traffic volume, device health, flows and more." style="width:100%;" >}}
+{{< img src="network_device_monitoring/netflow/netflow.png" alt="The NetFlow Monitoring page containing a collapsible legend for traffic volume, device health, flows and more." style="width:100%;" >}}
 
 ## Side Navigation
 

@@ -1,4 +1,5 @@
 ---
+id: free_text
 core_product:
 - serverless_aws_lambda
 related_terms:

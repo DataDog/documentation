@@ -1,4 +1,5 @@
 ---
+id: daemonset
 core_product:
 - infrastructure monitoring
 title: 데몬셋

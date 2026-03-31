@@ -111,7 +111,7 @@ Select an AWS authentication option. If you are only using the [user or role you
     - **Note:** The [user or role you created earlier](#set-up-an-iam-policy-that-allows-workers-to-write-to-the-s3-bucket) must have permission to assume this role so that the Worker can authenticate with AWS.
 1. (Optional) Enter the assumed role session name and external ID.
 
-##### Buffering options
+##### Buffering
 
 {{% observability_pipelines/destination_buffer %}}
 
@@ -175,9 +175,9 @@ The Observability Pipelines Worker requires these policy permissions to send log
 
 A batch of events is flushed when one of these parameters is met. See [event batching][7] for more information.
 
-| Max Events     | Max Bytes       | Timeout (seconds)   |
-|----------------| ----------------| --------------------|
-| None           | 100,000,000     | 900                 |
+| Maximum Events | Maximum Size (MB) | Timeout (seconds)   |
+|----------------|-------------------|---------------------|
+| None           | 100               | 900                 |
 
 [1]: /logs/log_configuration/archives/
 [2]: /logs/log_configuration/rehydrating/

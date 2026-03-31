@@ -34,6 +34,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-iac-security/"
   tag: "Blog"
   text: "Prevent cloud misconfigurations from reaching production with Datadog IaC Security"
+- link: "/tests/guides/setup_new_flaky_pr_gate/"
+  tag: "Documentation"
+  text: "Set up a New Flaky Test PR Gate"
 ---
 
 ## Overview
@@ -106,6 +109,12 @@ You can create rules to block code changes from being merged when a pull request
 
 {{< img src="pr_gates/setup/flaky_tests.png" alt="A PR Gate rule that fails when a pull request introduces at least one new flaky test" style="width:80%" >}}
 
+Use this PR Gate together with [Early Flake Detection][1] to detect new flaky tests.
+
+Read [how to set up a New Flaky Test PR Gate][2].
+
+[1]: /tests/flaky_tests/early_flake_detection
+[2]: /tests/guides/setup_new_flaky_pr_gate/
 {{% /tab %}}
 {{< /tabs >}}
 

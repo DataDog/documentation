@@ -1,4 +1,5 @@
 ---
+id: screenboard
 title: screenboard
 core_product:
   - dashboards
