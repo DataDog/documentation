@@ -2160,6 +2160,13 @@
       "description": "Save new value for on-demand concurrency cap returns \"OK\" response"
     }
   ],
+  "CreateTeamMembership": [
+    {
+      "group": "teams",
+      "suffix": "",
+      "description": "Add a user to a team returns \"Represents a user's association to a team\" response"
+    }
+  ],
   "AddTeamHierarchyLink": [
     {
       "group": "teams",
