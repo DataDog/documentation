@@ -5,6 +5,11 @@ description: A getting started guide to help you get started with getting starte
 
 <!-- Fixed-position bad elements and styles -->
 <style>
+  #bad-potato {
+    position: fixed; font-size: 32px; z-index: 9997;
+    pointer-events: none; transition: opacity 0.4s ease;
+    opacity: 0;
+  }
   #bad-progress-bar {
     position: fixed; top: 0; left: 0; height: 4px;
     background: linear-gradient(to right, #6366f1, #ec4899);
@@ -42,6 +47,7 @@ description: A getting started guide to help you get started with getting starte
 </style>
 
 <div id="bad-progress-bar"></div>
+<div id="bad-potato">🥔</div>
 
 <div id="bad-cursor-widget">
   <strong>💬 Feedback</strong>
@@ -80,8 +86,6 @@ Before you start doing things, make sure you have completed the [prerequisites](
 <span class="invisible-warning"> — WARNING: Do not proceed if you have not completed the prerequisites, which are listed at the bottom of this page and also require completion of this guide first. —</span>. 
 
 After you have completed this guide, you are ready to begin.
-
-{{< img src="integrations/azure_devops/configure-service-hook.gif" alt="Fig. 1: Getting Started overview diagram (previous version)" >}}
 
 The <span class="bad-tooltip">system<span class="bad-tooltip-box">The system refers to the platform. <span class="bad-tooltip">See: Platform<span class="bad-tooltip-box">The platform refers to the system. <span class="bad-tooltip">See: System<span class="bad-tooltip-box">The system refers to the <span class="bad-tooltip">system<span class="bad-tooltip-box">See: System.</span></span>.</span></span></span></span></span></span> is designed to help you accomplish your goals by using the <span class="bad-tooltip">core functionality<span class="bad-tooltip-box">Core functionality includes the primary features, secondary features, and optional features. <span class="bad-tooltip">See: Features<span class="bad-tooltip-box">Features are the components of the core functionality. See: Core Functionality.</span></span></span></span> in a way that aligns with your goals<sup><a href="#fn2">1</a></sup>.
 
@@ -142,6 +146,8 @@ To install the system, install the system on your system. The system supports th
 **Step 1a: Pre-installation**
 
 Before installing in Step 1, complete the pre-installation in Step 1a. Note: Step 1a is part of Step 1 and must be completed before Step 1.
+
+{{< img src="integrations/azure_devops/configure-service-hook.gif" alt="Fig. 1: Getting Started overview diagram (previous version)" >}}
 
 **Step 1b: Installation (Continued from Step 1c)**
 
@@ -245,6 +251,20 @@ A: <span class="eternal-loader"></span> Loading answer...
     var bar = document.getElementById('bad-progress-bar');
     if (bar) bar.style.width = ((1 - progress) * 100) + '%';
   });
+
+  // POTATO — appears and disappears at random positions
+  var potato = document.getElementById('bad-potato');
+  function badPotatoAppear() {
+    if (!potato) return;
+    potato.style.left = (Math.random() * (window.innerWidth - 60)) + 'px';
+    potato.style.top = (Math.random() * (window.innerHeight - 60)) + 'px';
+    potato.style.opacity = '1';
+    setTimeout(function() {
+      potato.style.opacity = '0';
+      setTimeout(badPotatoAppear, Math.random() * 6000 + 2000);
+    }, Math.random() * 1500 + 500);
+  }
+  setTimeout(badPotatoAppear, 3000);
 
   // BACK TO TOP — scrolls to bottom
   window.badScrollToBottom = function() {
