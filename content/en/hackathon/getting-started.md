@@ -54,19 +54,17 @@ description: A getting started guide to help you get started with getting starte
 
 <div class="alert alert-info" style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
   <span>Was this page helpful?</span>
-  <button class="btn btn-sm btn-outline-primary" onclick="alert('Thank you for your feedback! (This form is not monitored.)')">👍 Yes</button>
-  <button class="btn btn-sm btn-outline-primary" onclick="alert('Thank you for your feedback! (This form is not monitored.)')">👎 No</button>
-  <button class="btn btn-sm btn-outline-primary" onclick="alert('Thank you for your feedback! (This form is not monitored.)')">🤷 Maybe</button>
-  <span style="font-size:11px;color:#6b7280;margin-left:auto;">⚠️ Please rate this page before reading it.</span>
+  <button class="btn btn-sm btn-outline-primary" onclick="alert('Thank you, our sense of worth is dependent solely on your validation.')">👍 Yes</button>
+  <button class="btn btn-sm btn-outline-primary" onclick="alert('Rude.')">👎 No</button>
+  <button class="btn btn-sm btn-outline-primary" onclick="alert('Can you be more specific? Btw, this form is not monitored.')">🤷 Maybe</button>
+  <span style="font-size:11px;color:#6b7280;margin-left:auto;">⚠️ Please rate this page before reading it please.</span>
 </div>
-
-<marquee style="font-size:12px;color:#92400e;background:#fef3c7;border:1px solid #fcd34d;padding:4px 0;display:block;margin:8px 0;">🚨 CRITICAL UPDATE 🚨 &nbsp;&nbsp;&nbsp; Important changes have been made to this page. Please re-read from the beginning. &nbsp;&nbsp;&nbsp; 🚨 CRITICAL UPDATE 🚨 &nbsp;&nbsp;&nbsp; Important changes have been made to this page. Please re-read from the beginning.</marquee>
 
 ## Next Steps
 
 1. Complete this guide.
 2. Return to [Getting Started](#overview) to begin.
-3. Review the [Prerequisites](#overview-1) before starting.
+3. Review the [Prerequisites](#overview-1) before starting. Probably.
 4. Proceed to [Getting Started (Advanced)](#overview).
 
 ---
@@ -75,36 +73,44 @@ description: A getting started guide to help you get started with getting starte
 
 ## Overview
 
-Welcome to Getting Started! This guide will help you get started. Before you begin, make sure you have completed the [prerequisites](#overview-1)<span class="invisible-warning"> — WARNING: Do not proceed if you have not completed the prerequisites, which are listed at the bottom of this page and also require completion of this guide first. —</span>. After you have completed this guide, you are ready to begin.
+Welcome to Getting Started! This guide will help you get started. Note that the steps to get started are deprecated, but the other steps to get started are currently good, and in the future we plan to have even better steps for getting started. 
 
-The <span class="bad-tooltip">system<span class="bad-tooltip-box">The system refers to the platform. <span class="bad-tooltip">See: Platform<span class="bad-tooltip-box">The platform refers to the system. <span class="bad-tooltip">See: System<span class="bad-tooltip-box">The system refers to the <span class="bad-tooltip">system<span class="bad-tooltip-box">See: System.</span></span>.</span></span></span></span></span></span> is designed to help you accomplish your goals by using the <span class="bad-tooltip">core functionality<span class="bad-tooltip-box">Core functionality includes the primary features, secondary features, and optional features. <span class="bad-tooltip">See: Features<span class="bad-tooltip-box">Features are the components of the core functionality. See: Core Functionality.</span></span></span></span> in a way that aligns with your intended use case<sup><a href="#fn2">1</a></sup>.
+Before you start doing things, make sure you have completed the [prerequisites](#overview-1).
+
+<span class="invisible-warning"> — WARNING: Do not proceed if you have not completed the prerequisites, which are listed at the bottom of this page and also require completion of this guide first. —</span>. 
+
+After you have completed this guide, you are ready to begin.
+
+{{< img src="integrations/azure_devops/configure-service-hook.gif" alt="Fig. 1: Getting Started overview diagram (previous version)" >}}
+
+The <span class="bad-tooltip">system<span class="bad-tooltip-box">The system refers to the platform. <span class="bad-tooltip">See: Platform<span class="bad-tooltip-box">The platform refers to the system. <span class="bad-tooltip">See: System<span class="bad-tooltip-box">The system refers to the <span class="bad-tooltip">system<span class="bad-tooltip-box">See: System.</span></span>.</span></span></span></span></span></span> is designed to help you accomplish your goals by using the <span class="bad-tooltip">core functionality<span class="bad-tooltip-box">Core functionality includes the primary features, secondary features, and optional features. <span class="bad-tooltip">See: Features<span class="bad-tooltip-box">Features are the components of the core functionality. See: Core Functionality.</span></span></span></span> in a way that aligns with your goals<sup><a href="#fn2">1</a></sup>.
 
 <div class="alert alert-danger">
   <strong>⚠️🚨‼️ CRITICAL CRITICAL WARNING ⚠️🚨‼️</strong>
   <div class="alert alert-warning" style="margin:8px 0;">
-    <strong>⚠️ WARNING INSIDE THE WARNING</strong>
+    <strong>⚠️ WARNING</strong>
     <div class="alert alert-info" style="margin:8px 0;">
-      <strong>ℹ️ NOTE INSIDE THE WARNING INSIDE THE WARNING</strong><br>
+      <strong>ℹ️ NOTE</strong><br>
       This is important. <span class="bad-tooltip">Click here for more information<span class="bad-tooltip-box">For more information, hover over "Click here for more information."</span></span>.
     </div>
-    Do not proceed without reading the note above, which is inside this warning, which is inside the critical warning below.
+    Do not proceed without reading the note from before.
   </div>
   Read all warnings before reading this warning.
 </div>
 
-<p class="invisible-warning">IMPORTANT: Steps 2, 3, and 4 must be completed in reverse order. This note will only be visible to users who have completed Step 6, which appears before Step 2.</p>
+<p class="invisible-warning">IMPORTANT: Steps 2, 3, and 4 must be completed in reverse order. This note will only be visible to users who have completed Step 6, which appears before Step 2. If you don't see Step 6, there's probably something wrong with your computer. If you see this note before completing Step 6, there's probably something else wrong with your computer. Steps 2-4 are works in progress but will be posted soon.</p>
 
 ---
 
-## Step 3: Verify Installation
+## Step 0: Verify Installation
 
-_Note: Complete [Step 1](#step-1-install) and [Step 2](#step-7-configure) before proceeding to Step 3. If you have already completed Step 3, proceed to [Step 1](#step-1-install)._
+_Note: Complete [Step 1](#step-1-install) and [Step 2](#step-7-configure) before proceeding to Step 0. If you have already completed Step 0, proceed to [Step 7](#step-7-configure)._
 
 Run the following command to verify that the <span class="bad-tooltip">installation<span class="bad-tooltip-box">Installation is the process of installing the system. See: <span class="bad-tooltip">System<span class="bad-tooltip-box">The system is what you install during installation.</span></span></span></span> was successful:
 
 ```shell
-# Verify installation
-$ verify --check installtion --flag=treu --output=/dev/null
+# Verify installation (be sure to use all 24 ls)
+$ verify --check installllllllllllllllllllllll --flag=probs --output=/dev/null
 
 # Expected output:
 > SUCCESS: Installation verified.
@@ -115,8 +121,10 @@ If you do not see the expected output, proceed to [Step 3](#step-3-verify-instal
 
 <div class="alert alert-info">
   <strong>ℹ️ BY THE WAY</strong><br>
-  Before completing this step, you will need <strong>administrative access to the system</strong><sup><a href="#fn1">2</a></sup>. This is a prerequisite. It is mentioned here, in Step 3, for convenience.
+  Before completing this step, you will need <strong>administrative access to the system</strong><sup><a href="#fn1">2</a></sup>. This is a prerequisite. It is mentioned here, in Step 0, for your convenience!
 </div>
+
+<marquee style="font-size:12px;color:#92400e;background:#fef3c7;border:1px solid #fcd34d;padding:4px 0;display:block;margin:8px 0;">🚨 CRITICAL UPDATE 🚨 &nbsp;&nbsp;&nbsp; Important changes have been made to this page. Please re-read from the beginning. &nbsp;&nbsp;&nbsp; 🚨 CRITICAL UPDATE 🚨 &nbsp;&nbsp;&nbsp; Important changes have been made to this page. Please re-read from the beginning.</marquee>
 
 ---
 
@@ -124,12 +132,12 @@ If you do not see the expected output, proceed to [Step 3](#step-3-verify-instal
 
 To install the system, install the system on your system. The system supports the following systems: the system, the legacy system, and the system (enterprise). [Click here](#step-1-install) for a full list of supported systems.
 
-| Parameter | Description | <span style="color:#dc2626;">Optional</span> | <span style="color:#6b7280;">Required</span> |
+| Parameter | Description | Optional |Required |
 |-----------|-------------|----------|----------|
-| `--system` | Specifies the system | <span style="color:#dc2626;font-weight:700;">required</span> | <span style="color:#6b7280;">optional</span> |
-| `--flag` | Sets a flag | <span style="color:#dc2626;font-weight:700;">required</span> | <span style="color:#6b7280;">optional</span> |
-| `--config` | See [Step 1](#step-1-install) | <span style="color:#dc2626;font-weight:700;">required</span> | <span style="color:#6b7280;">optional</span> |
-| `--optional` | This parameter is required | <span style="color:#dc2626;font-weight:700;">required</span> | <span style="color:#dc2626;font-weight:700;">required</span> |
+| `--system` | Specifies the system | required| optional|
+| `--flag` | Sets a flag |required | optional |
+| `--config` | See [Step 1](#step-1-install) | required | optional |
+| `--optional` | This parameter is required | required | required |
 
 **Step 1a: Pre-installation**
 
@@ -143,7 +151,7 @@ Continue the installation from Step 1c. If you have not completed Step 1c, compl
 
 ## Step 7: Configure
 
-<p style="font-family:'Courier New',monospace;color:#7c3aed;">Configure the system by modifying the <strong>configuration</strong> file. The configuration file is located in the configuration directory, which is specified in the configuration file.</p>
+Configure the system by modifying the <strong>configuration</strong> file. The configuration file is located in the configuration directory, which is specified in the configuration file.
 
 ```yaml
 # Configuration file (config.yml)
@@ -163,13 +171,11 @@ Complete [Step 5](#step-5-complete) before completing Step 7. Step 5 appears aft
 
 ## Step 5: Complete
 
-<small style="color:#9ca3af;">(Step 4 is optional. It is required.)</small>
-
 Congratulations! <span class="bad-tooltip">You have completed Getting Started<span class="bad-tooltip-box">You have not yet completed Getting Started. Please return to the <a href="#overview" style="color:white;">Overview</a> to begin.</span></span>. You are now ready to begin [Getting Started](#overview).
 
 <div class="alert alert-warning">
   <strong>⚠️ IMPORTANT</strong><br>
-  Before completing this step, make sure you have completed <a href="#step-7-configure">Step 2</a>, <a href="#step-3-verify-installation">Step 3</a>, <a href="#step-1-install">Step 1</a>, and <a href="#step-5-complete">Step 5</a>. If you have not completed Step 5, complete Step 5 first.
+  Before completing this step, make sure you have completed <a href="#step-7-configure">Step 2</a>, <a href="#step-0-verify-installation">Step 0</a>, <a href="#step-1-install">Step 1</a>, and <a href="#step-5-complete">Step 5</a>. If you have not completed Step 5, complete Step 5 first.
 </div>
 
 ---
@@ -202,11 +208,11 @@ A: Getting Started is a guide to help you get started. See: [Getting Started](#o
 **Q: I followed all the steps but nothing happened.**
 A: This is expected. Proceed to [Step 1](#step-1-install).
 
-**Q: I am on Step 3 but I haven't done Steps 1 or 2.**
-A: This is correct. See: [Step 3](#step-3-verify-installation).
+**Q: I am on Step 5 but I haven't done Steps 2, 3, 4. I don't see them anywhere.**
+A: This is correct. 
 
 **Q: Where are the prerequisites?**
-A: The prerequisites are listed in the Prerequisites section. The Prerequisites section is located [here](#step-3-verify-installation).
+A: The prerequisites are listed in the Prerequisites section. The Prerequisites section is located [here](#step-0-verify-installation).
 
 **Q: I have completed all steps and I still have not gotten started.**
 A: <span class="eternal-loader"></span> Loading answer...
@@ -275,27 +281,27 @@ A: <span class="eternal-loader"></span> Loading answer...
   setTimeout(interceptCopyButtons, 3000);
 
   // CURSOR FEEDBACK WIDGET
-  var widget = document.getElementById('bad-cursor-widget');
-  var widgetText = document.getElementById('bad-cursor-text');
-  var phrases = [
-    'Was this sentence helpful?',
-    'Rate this paragraph',
-    'Was this word clear?',
-    'Feedback on this comma?',
-    'Was this space helpful?',
-    'How would you rate this heading?',
-    'Was this period necessary?',
-  ];
-  var widgetVisible = false;
-  document.addEventListener('mousemove', function(e) {
-    if (!widgetVisible || !widget) return;
-    widget.style.left = (e.clientX + 16) + 'px';
-    widget.style.top = (e.clientY - 10) + 'px';
-  });
-  setInterval(function() {
-    widgetVisible = !widgetVisible;
-    if (widget) widget.style.display = widgetVisible ? 'block' : 'none';
-    if (widgetText) widgetText.textContent = phrases[Math.floor(Math.random() * phrases.length)];
-  }, 8000);
+  // var widget = document.getElementById('bad-cursor-widget');
+  // var widgetText = document.getElementById('bad-cursor-text');
+  // var phrases = [
+  //   'Was this sentence helpful?',
+  //   'Rate this paragraph',
+  //   'Was this word clear?',
+  //   'Feedback on this comma?',
+  //   'Was this space helpful?',
+  //   'How would you rate this heading?',
+  //   'Was this period necessary?',
+  // ];
+  // var widgetVisible = false;
+  // document.addEventListener('mousemove', function(e) {
+  //   if (!widgetVisible || !widget) return;
+  //   widget.style.left = (e.clientX + 16) + 'px';
+  //   widget.style.top = (e.clientY - 10) + 'px';
+  // });
+  // setInterval(function() {
+  //   widgetVisible = !widgetVisible;
+  //   if (widget) widget.style.display = widgetVisible ? 'block' : 'none';
+  //   if (widgetText) widgetText.textContent = phrases[Math.floor(Math.random() * phrases.length)];
+  // }, 8000);
 })();
 </script>
