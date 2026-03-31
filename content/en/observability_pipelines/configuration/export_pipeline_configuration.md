@@ -47,7 +47,7 @@ When viewing deployed pipelines in the UI, you can export the configuration to J
 1. Click **Export Pipeline**.
    {{< img src="observability_pipelines/export_pipeline/export_deployed_pipeline.png" alt="The export button on a deployed pipeline page" style="width:100%;" >}}
 1. Click the copy or download button to export the configuration as JSON or Terraform.
-1. Configure and make changes to the Worker through the API or Terraform before deploying programmatically.
+1. Update the JSON or Terraform configuration for any additional changes you want to make and then deploy the configuration programmatically.
    - [API documentation][5]
    - [Terraform documentation][4]
 
