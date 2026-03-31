@@ -27,7 +27,9 @@ algolia:
 
 The Datadog MCP Server acts as a bridge between your observability data in Datadog and any AI agents that support the [Model Context Protocol (MCP)][1]. Providing structured access to relevant Datadog contexts, features, and tools, the MCP Server lets you query and retrieve observability insights directly from AI-powered clients such as Cursor, OpenAI Codex, Claude Code, or your own AI agent.
 
-Ready to get started? See [Set Up the Datadog MCP Server][27] for connection instructions.
+**Ready to get started?** Select your agent below or see [Set Up the Datadog MCP Server][27] for connection instructions.
+
+{{< partial name="mcp_server/mcp_server_agents.html" >}}
 
 This demo shows the Datadog MCP Server being used in Cursor and Claude Code (unmute for audio):
 
