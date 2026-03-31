@@ -5957,11 +5957,26 @@ menu:
       parent: ide_plugins
       identifier: ide_plugins_vscode
       weight: 2
+    - name: Logs
+      url: ide_plugins/vscode/logs/
+      parent: ide_plugins_vscode
+      identifier: ide_plugins_vscode_logs
+      weight: 101
+    - name: Code Insights
+      url: ide_plugins/vscode/code_insights/
+      parent: ide_plugins_vscode
+      identifier: ide_plugins_vscode_code_insights
+      weight: 102
+    - name: Exception Replay
+      url: ide_plugins/vscode/exception_replay/
+      parent: ide_plugins_vscode
+      identifier: ide_plugins_vscode_exception_replay
+      weight: 103
     - name: Code Security
       url: ide_plugins/vscode/code_security/
       parent: ide_plugins_vscode
       identifier: ide_plugins_vscode_code_security
-      weight: 101
+      weight: 104
     - name: Observability Pipelines
       url: observability_pipelines/
       pre: pipelines
