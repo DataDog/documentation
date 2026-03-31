@@ -15,13 +15,6 @@ description: A getting started guide to help you get started with getting starte
     background: linear-gradient(to right, #6366f1, #ec4899);
     width: 100%; z-index: 9999; transition: width 0.1s;
   }
-  #bad-cursor-widget {
-    position: fixed; background: white; border: 2px solid #6366f1;
-    border-radius: 8px; padding: 8px 12px; font-size: 12px;
-    pointer-events: none; z-index: 9998; display: none;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15); white-space: nowrap;
-  }
-  #bad-cursor-widget strong { font-size: 11px; color: #6366f1; display: block; margin-bottom: 2px; }
   #bad-back-to-top {
     position: fixed; right: 24px; bottom: 72px;
     background: #632ca6; color: white; border: none;
@@ -48,22 +41,16 @@ description: A getting started guide to help you get started with getting starte
 
 <div id="bad-progress-bar"></div>
 <div id="bad-potato">🥔</div>
-
-<div id="bad-cursor-widget">
-  <strong>💬 Feedback</strong>
-  <span id="bad-cursor-text">Was this sentence helpful?</span>
-</div>
-
 <button id="bad-back-to-top" onclick="badScrollToBottom()">↑ Back to top</button>
 
-<div class="alert alert-warning">⚠️ <strong>NOTICE:</strong> This page is deprecated. For the most current information, <a href="#overview">click here</a>.</div>
+<marquee style="font-size:12px;color:#92400e;background:#fef3c7;border:1px solid #fcd34d;padding:4px 0;display:block;margin:0 0 8px;">🚨 CRITICAL UPDATE 🚨 &nbsp;&nbsp;&nbsp; Important changes have been made to this page. Please re-read from the beginning. &nbsp;&nbsp;&nbsp; 🚨 CRITICAL UPDATE 🚨 &nbsp;&nbsp;&nbsp; Important changes have been made to this page. Please re-read from the beginning.</marquee>
 
 <div class="alert alert-info" style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
   <span>Was this page helpful?</span>
   <button class="btn btn-sm btn-outline-primary" onclick="alert('Thank you, our sense of worth is dependent solely on your validation.')">👍 Yes</button>
   <button class="btn btn-sm btn-outline-primary" onclick="alert('Rude.')">👎 No</button>
   <button class="btn btn-sm btn-outline-primary" onclick="alert('Can you be more specific? Btw, this form is not monitored.')">🤷 Maybe</button>
-  <span style="font-size:11px;color:#6b7280;margin-left:auto;">⚠️ Please rate this page before reading it please.</span>
+  <span style="font-size:11px;color:#6b7280;margin-left:auto;">⚠️ Please rate this page before reading it.</span>
 </div>
 
 ## Next Steps
@@ -79,11 +66,11 @@ description: A getting started guide to help you get started with getting starte
 
 ## Overview
 
-Welcome to Getting Started! This guide will help you get started. Note that the steps to get started are deprecated, but the other steps to get started are currently good, and in the future we plan to have even better steps for getting started. 
+Welcome to Getting Started! This guide will help you get started. Note that the steps to get started are deprecated, but the other steps to get started are currently good, and in the future we plan to have even better steps for getting started.
 
 Before you start doing things, make sure you have completed the [prerequisites](#overview-1).
 
-<span class="invisible-warning"> — WARNING: Do not proceed if you have not completed the prerequisites, which are listed at the bottom of this page and also require completion of this guide first. —</span>. 
+<span class="invisible-warning"> — WARNING: Do not proceed if you have not completed the prerequisites, which are listed at the bottom of this page and also require completion of this guide first. —</span>
 
 After you have completed this guide, you are ready to begin.
 
@@ -102,13 +89,11 @@ The <span class="bad-tooltip">system<span class="bad-tooltip-box">The system ref
   Read all warnings before reading this warning.
 </div>
 
-<p class="invisible-warning">IMPORTANT: Steps 2, 3, and 4 must be completed in reverse order. This note will only be visible to users who have completed Step 6, which appears before Step 2. If you don't see Step 6, there's probably something wrong with your computer. If you see this note before completing Step 6, there's probably something else wrong with your computer. Steps 2-4 are works in progress but will be posted soon.</p>
-
 ---
 
-## Step 0: Verify Installation
+## Step 3: Verify Installation
 
-_Note: Complete [Step 1](#step-1-install) and [Step 2](#step-7-configure) before proceeding to Step 0. If you have already completed Step 0, proceed to [Step 7](#step-7-configure)._
+_Note: Complete [Step 1](#step-1-install) and Step 2 before proceeding to Step 3. If you have already completed Step 3, proceed to [Step 1](#step-1-install)._
 
 Run the following command to verify that the <span class="bad-tooltip">installation<span class="bad-tooltip-box">Installation is the process of installing the system. See: <span class="bad-tooltip">System<span class="bad-tooltip-box">The system is what you install during installation.</span></span></span></span> was successful:
 
@@ -125,10 +110,8 @@ If you do not see the expected output, proceed to [Step 3](#step-3-verify-instal
 
 <div class="alert alert-info">
   <strong>ℹ️ BY THE WAY</strong><br>
-  Before completing this step, you will need <strong>administrative access to the system</strong><sup><a href="#fn1">2</a></sup>. This is a prerequisite. It is mentioned here, in Step 0, for your convenience!
+  Before completing this step, you will need <strong>administrative access to the system</strong><sup><a href="#fn1">2</a></sup>. This is a prerequisite. It is mentioned here, in Step 3, for your convenience.
 </div>
-
-<marquee style="font-size:12px;color:#92400e;background:#fef3c7;border:1px solid #fcd34d;padding:4px 0;display:block;margin:8px 0;">🚨 CRITICAL UPDATE 🚨 &nbsp;&nbsp;&nbsp; Important changes have been made to this page. Please re-read from the beginning. &nbsp;&nbsp;&nbsp; 🚨 CRITICAL UPDATE 🚨 &nbsp;&nbsp;&nbsp; Important changes have been made to this page. Please re-read from the beginning.</marquee>
 
 ---
 
@@ -136,10 +119,10 @@ If you do not see the expected output, proceed to [Step 3](#step-3-verify-instal
 
 To install the system, install the system on your system. The system supports the following systems: the system, the legacy system, and the system (enterprise). [Click here](#step-1-install) for a full list of supported systems.
 
-| Parameter | Description | Optional |Required |
+| Parameter | Description | Optional | Required |
 |-----------|-------------|----------|----------|
-| `--system` | Specifies the system | required| optional|
-| `--flag` | Sets a flag |required | optional |
+| `--system` | Specifies the system | required | optional |
+| `--flag` | Sets a flag | required | optional |
 | `--config` | See [Step 1](#step-1-install) | required | optional |
 | `--optional` | This parameter is required | required | required |
 
@@ -173,15 +156,19 @@ After saving the configuration file, [verify](#step-3-verify-installation) that 
 
 Complete [Step 5](#step-5-complete) before completing Step 7. Step 5 appears after Step 7 for organizational purposes.
 
+_Note: Steps 2, 4, 5, and 6 are covered in [Getting Started (Advanced)](#overview)._
+
 ---
 
 ## Step 5: Complete
+
+<small style="color:#9ca3af;">(Step 4 is optional. It is required.)</small>
 
 Congratulations! <span class="bad-tooltip">You have completed Getting Started<span class="bad-tooltip-box">You have not yet completed Getting Started. Please return to the <a href="#overview" style="color:white;">Overview</a> to begin.</span></span>. You are now ready to begin [Getting Started](#overview).
 
 <div class="alert alert-warning">
   <strong>⚠️ IMPORTANT</strong><br>
-  Before completing this step, make sure you have completed <a href="#step-7-configure">Step 2</a>, <a href="#step-0-verify-installation">Step 0</a>, <a href="#step-1-install">Step 1</a>, and <a href="#step-5-complete">Step 5</a>. If you have not completed Step 5, complete Step 5 first.
+  Before completing this step, make sure you have completed <a href="#step-3-verify-installation">Step 3</a>, <a href="#step-7-configure">Step 7</a>, <a href="#step-1-install">Step 1</a>, and <a href="#step-5-complete">Step 5</a>. If you have not completed Step 5, complete Step 5 first.
 </div>
 
 ---
@@ -214,11 +201,14 @@ A: Getting Started is a guide to help you get started. See: [Getting Started](#o
 **Q: I followed all the steps but nothing happened.**
 A: This is expected. Proceed to [Step 1](#step-1-install).
 
-**Q: I am on Step 5 but I haven't done Steps 2, 3, 4. I don't see them anywhere.**
-A: This is correct. 
+**Q: I completed Step 3 before Step 1. Is that okay?**
+A: Yes. Proceed to [Step 3](#step-3-verify-installation).
+
+**Q: Where are Steps 2, 4, 5, and 6?**
+A: Steps 2, 4, 5, and 6 are covered in [Getting Started (Advanced)](#overview). Complete those steps before completing this guide.
 
 **Q: Where are the prerequisites?**
-A: The prerequisites are listed in the Prerequisites section. The Prerequisites section is located [here](#step-0-verify-installation).
+A: The prerequisites are listed in the Prerequisites section. The Prerequisites section is located [here](#step-3-verify-installation).
 
 **Q: I have completed all steps and I still have not gotten started.**
 A: <span class="eternal-loader"></span> Loading answer...
@@ -295,33 +285,8 @@ A: <span class="eternal-loader"></span> Loading answer...
     });
   }
 
-  // Run on load and after short delay to catch dynamically added buttons
   document.addEventListener('DOMContentLoaded', interceptCopyButtons);
   setTimeout(interceptCopyButtons, 1500);
   setTimeout(interceptCopyButtons, 3000);
-
-  // CURSOR FEEDBACK WIDGET
-  // var widget = document.getElementById('bad-cursor-widget');
-  // var widgetText = document.getElementById('bad-cursor-text');
-  // var phrases = [
-  //   'Was this sentence helpful?',
-  //   'Rate this paragraph',
-  //   'Was this word clear?',
-  //   'Feedback on this comma?',
-  //   'Was this space helpful?',
-  //   'How would you rate this heading?',
-  //   'Was this period necessary?',
-  // ];
-  // var widgetVisible = false;
-  // document.addEventListener('mousemove', function(e) {
-  //   if (!widgetVisible || !widget) return;
-  //   widget.style.left = (e.clientX + 16) + 'px';
-  //   widget.style.top = (e.clientY - 10) + 'px';
-  // });
-  // setInterval(function() {
-  //   widgetVisible = !widgetVisible;
-  //   if (widget) widget.style.display = widgetVisible ? 'block' : 'none';
-  //   if (widgetText) widgetText.textContent = phrases[Math.floor(Math.random() * phrases.length)];
-  // }, 8000);
 })();
 </script>
