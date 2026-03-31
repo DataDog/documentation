@@ -5,11 +5,14 @@ products:
 - name: Logs
   icon: logs
   url: /observability_pipelines/configuration/?tab=logs#pipeline-types
+- name: Metrics
+  icon: metrics
+  url: /observability_pipelines/configuration/?tab=metrics#pipeline-types
 ---
 
 {{< product-availability >}}
 
-Use Observability Pipelines' Elasticsearch destination to send logs to Elasticsearch.
+Use Observability Pipelines' Elasticsearch destination to send logs or metrics ({{< tooltip glossary="preview" case="title" >}}) to Elasticsearch.
 
 ## Setup
 
@@ -26,23 +29,26 @@ Set up the Elasticsearch destination and its environment variables when you [set
 		- Uses Elasticsearch's [Bulk API][5] to send batched events directly into a standard index.
 		- Choose this mode when you want direct control over index naming and lifecycle management. Data is appended to the index you specify, and you are responsible for handling rollovers, deletions, and mappings.
 		- To configure **Bulk** mode:
-			- In the **Index** field, optionally enter the name of the Elasticsearch index. You can use [template syntax][3] to dynamically route logs to different indexes based on specific fields in your logs, for example `logs-{{service}}`.
+			- In the **Index** field, optionally enter the name of the Elasticsearch index. You can use [template syntax][3] to dynamically route data to different indexes based on specific fields in your logs, for example `logs-{{service}}` or `metrics-{{service}}`.
 	- **Data streams** mode
 		- Uses [Elasticsearch Data Streams][4] for log storage. Data streams automatically manage backing indexes and rollovers, making them ideal for time series log data.
 		- Choose this mode when you want Elasticsearch to manage the index lifecycle for you. Data streams ensures smooth rollovers, Index Lifecycle Management (ILM) compatibility, and optimized handling of time-based data.
-		- To configure **Data streams** mode, optionally define the data stream name (default is `logs-generic-default`) by entering the following information:
-			- In the **Type** field, enter the category of data being ingested, for example `logs`.
+		- To configure **Data streams** mode, optionally define the data stream name (default is `logs-generic-default` for logs and `metrics-generic-default` for metrics) by entering the following information:
+			- In the **Type** field, enter the category of data being ingested, for example `logs` or `metrics`.
 			- In the **Dataset** field, specify the format or data source that describes the structure, for example `apache`.
 			- In the **Namespace** field, enter the grouping for organizing your data streams, for example `production`.
-			- In the UI, there is a preview of the data stream name you configured. With the above example inputs, the data stream name that the Worker writes to is `logs-apache-production`.
-
+			- In the UI, there is a preview of the data stream name you configured. With the above example inputs, the data stream name that the Worker writes to is `logs-apache-production` for logs and `metrics-apache-production` for metrics.
 
 #### Optional settings
 
 ##### Elasticsearch index and version
 
-1. Enter the name for the Elasticsearch index. See [template syntax][3] if you want to route logs to different indexes based on specific fields in your logs.
+1. If you selected **Bulk** mode, you can enter the name for the Elasticsearch index. See [template syntax][3] if you want to route data to different indexes based on specific fields in your data.
 1. Enter the Elasticsearch version.
+
+##### Compression
+
+Toggle the switch to enable **Compression**. Select a compression algorithm in the dropdown menu.
 
 ##### Buffering
 
