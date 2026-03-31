@@ -15,98 +15,91 @@ further_reading:
   tag: "Documentation"
   text: "Learn about Datasets"
 ---
+{{< callout url="https://www.datadoghq.com/product/ai/llm-observability/" btn_hidden="false" header="Join the Preview">}}
+Topic Pattern Analysis is in Preview.
+{{< /callout >}}
 
 ## Overview
 
-Patterns automatically clusters your LLM application's production traffic into meaningful topics, helping you understand what users are asking, identify coverage gaps, and diagnose failure modes. Select an application configured with LLM Observability to view pattern information on the [**Patterns** page][1].
+Patterns automatically clusters your LLM application's production traffic into meaningful topics, helping you understand what users are asking, identify coverage gaps, and diagnose failure modes.
 
-Patterns uses text embeddings to group your application's inputs or outputs into hierarchical topics. Topic labels are automatically generated using an LLM, giving you an interpretable view of production behavior without manual tagging.
+## How it works
 
-{{< img src="llm_observability/cluster_map/scatter.png" alt="The scatter plot displays clusters of traces with color-coded topics and includes a panel listing clusters, trace counts, and failure rates." style="width:100%;" >}}
+Patterns uses text embeddings to group your application's inputs into hierarchical topics. Topic labels are automatically generated using an LLM, giving you an interpretable view of production behavior without manual tagging.
 
-<div class="alert alert-info"><strong>Built with Llama</strong>: Patterns uses Llama to generate topic labels based on your instrumented LLM application's inputs and outputs.</div>
+When you run a pipeline, Pattern Analysis:
 
-**Note:** Clustering can take up to **24 hours** after data is ingested to be fully processed and visible. During this time, spans that are not yet clustered appear under a **Pending** cluster.
+1. Pulls LLM interactions from your production traffic based on your filter and sampling configuration
+2. Embeds interactions semantically and clusters them
+3. Names each cluster with an AI-generated label and summary
+4. Organizes clusters into a parent-child topic hierarchy
 
-## How Patterns works
+Each topic shows its interaction volume, share of total traffic, and a coherence score — a measure of how semantically similar the interactions within the topic are to each other (0.0–1.0). Interactions that don't fit any cluster are collected into an Outliers group.
 
-Patterns processes your LLM application's trace data through an automated pipeline:
+## Explore your Patterns
 
-1. **Embedding generation**: Inputs and outputs from your LLM spans are converted into text embeddings.
-2. **Clustering**: Embeddings are grouped into clusters in high-dimensional space based on semantic similarity.
-3. **Topic labeling**: An LLM generates human-readable topic labels for each cluster.
-4. **Hierarchical organization**: Topics are organized into a tree structure, with broad categories containing more specific sub-topics.
-5. **Projection**: High-dimensional clusters are projected into 2D space for visualization.
+### Read the summary metrics
 
-Inputs and outputs are clustered separately, so you can analyze what users are asking (inputs) and how your application responds (outputs) independently.
+The top of the Patterns page shows three numbers from your most recent run:
+1. **Total interactions:** How many interactions were analyzed
+2. **Identified topics:** The total number of distinct topics found, including parent and child topics
+3. **Classified:** The percentage of analyzed interactions assigned to a named topic — interactions in Outliers count as unclassified
 
-## Explore topics
+A high **Classified** percentage (above 80%) means the pipeline found meaningful structure in your traffic. A low percentage suggests high variance across interaction types, or a filter that spans very different use cases.
+
+### Navigate the Topic list
 
 The Patterns page shows your topics in two views:
 
-### Topic table
+### Topic heirarchy
 
 The topic table provides a hierarchical view of all discovered topics. Each topic shows:
 
-- **Topic name**: An automatically generated label describing the cluster content.
-- **Trace count**: The number of traces in the topic.
-- **Metrics**: Operational metrics such as error rate, latency, and evaluation scores.
+- **Topic name** — auto-generated based on the interactions in the cluster
+- **Summary** — a plain-language description of what the topic represents
+- **Interactions** — count and percentage of total traffic
+- **Coherence** — how tightly clustered the interactions are
 
 Expand parent topics to see their sub-topics and examine specific areas of your application's traffic.
 
-### Visualizations
+### Drill into a topic
 
-You can visualize topics using two layouts:
+Click any topic name to open the detail view. Here you can:
 
-- **Box Packing**: A grouped view of each cluster, with metrics or evaluations overlaid on every trace. Use this to compare cluster sizes and quality at a glance.
-- **Scatter Plot**: A 2D projection of the high-dimensional embeddings. Traces that are semantically similar appear closer together. Note that distances may be affected by projection distortion.
-
-{{< img src="llm_observability/cluster_map/box.png" alt="The box packing layout displays clusters of traces represented by colored circles, and includes a panel listing clusters with topics, trace counts, and failure rates." style="width:100%;" >}}
-
-## Search and filter topics
-
-Customize your view by selecting sorting options to narrow down topics based on specific criteria:
-
-1. Select **inputs** or **outputs** from the dropdown menu to see topics for inputs or outputs.
-1. Select an evaluation type or an evaluation score to color-code the clusters. For example, `Output Sentiment` for "What is the sentiment of the output?" or `duration` for "How long does it take for an LLM to generate an output (in nanoseconds)?"
-1. Select a field for the clusters to be sorted by: time, duration, or color. Then, select **desc** or **asc** to set the order.
-
-Select a topic from the list to examine how traces about that topic perform against other topics for each metric or evaluation. You can also see individual prompts and responses for each topic.
-
-## Curate topics
-
-After reviewing the automatically discovered topics, you can refine them to better reflect your application's domain:
-
-- **Rename**: Update a topic's label to use terminology specific to your domain.
-- **Merge**: Combine similar or duplicate topics into a single topic.
-- **Split**: Break an overly broad topic into more specific sub-topics.
-- **Remove**: Remove irrelevant data points from a topic. Removed points become unassigned and are re-clustered in subsequent runs.
-- **Persist**: Mark a topic as stable so it is preserved across subsequent pipeline runs.
-
-Curated topics act as training signals for future clustering runs, improving the accuracy of topic assignments over time.
+- Read the *summary* of what this topic represents
+- View the scatter plot — each dot is an interaction, plotted by semantic similarity. - Tighter clusters mean higher coherence.
+- Browse the interactions table — real user inputs and outputs from production, with the sub-topic label and a confidence score for each
+- Navigate to child topics listed below the scatter plot
 
 ## Trigger a new run
 
-You can trigger a new clustering pipeline run to re-analyze your production traffic. After curation changes, triggering a new run incorporates your feedback:
+You can trigger a new clustering pipeline run to re-analyze your production traffic.
 
-- Persisted topics are maintained as stable anchors.
-- Re-clustering respects your curation decisions (merges, splits, removals).
-- New data since the last run is incorporated into the analysis.
+1. Click Run Pipeline.
+2. Configure your analysis:
+- Filter: Scope to a specific application, environment, or span type. 
+- Sampling rate: Set what percentage of matching interactions to include. The pipeline processes up to 50,000 records per run; if your filter matches more than that, records are randomly sampled down to the cap.
+3. Click Run. The pipeline runs in the background and takes approximately 50 minutes — you can close the page.
+
+When the pipeline completes, the Patterns page updates with the run date, lookback window, and status.
+
 
 ## Use topics to improve your application
 
-Patterns helps you take action on production insights:
+### Understand your production traffic
 
-- **Identify coverage gaps**: Compare the distribution of production traffic topics against your evaluation [datasets][2] to find under-tested areas.
-- **Build targeted datasets**: Add representative traces from specific topics to datasets for use in [experiments][3].
-- **Monitor quality by topic**: Overlay [evaluations][4] (such as sentiment, failure to answer, or hallucination) to identify which topics have the highest failure rates.
-- **Detect drift**: Track how topic distributions change over time to identify emerging usage patterns or shifts in user behavior.
+The topic list answers the question teams ask first: *what are users actually doing with this application?*
 
-## Further Reading
+Use traffic percentage to identify your most common use cases. Use the parent-child hierarchy to move from a high-level pattern down to the specific sub-patterns underneath.
 
-{{< partial name="whats-next/whats-next.html" >}}
+### Find eval coverage gaps
 
-[1]: https://app.datadoghq.com/llm/clusters
-[2]: /llm_observability/experiments/datasets
-[3]: /llm_observability/experiments/
-[4]: /llm_observability/evaluations/
+Compare your topic distribution against what your golden datasets actually cover. Topics that represent high production volume but have no corresponding eval cases are where your test coverage has gaps — and where model regressions are least likely to be caught before they reach users.
+
+### Diagnose failure patterns
+
+Scope your pipeline filter to spans with poor quality scores or failed evaluations, then run the pipeline. The resulting topic taxonomy shows which types of requests are failing most — giving you a structured way to prioritize fixes instead of debugging trace by trace.
+
+### Track how traffic evolves
+
+Re-run the pipeline periodically and compare topic distributions over time. When a new topic appears near the top that wasn't there last month, that's a signal your users have found a new use case — or a new failure mode.
