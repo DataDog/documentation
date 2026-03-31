@@ -55,6 +55,7 @@ module.exports = {
     datadogWebpackPlugin({
       auth: {
         apiKey: process.env.DATADOG_API_KEY,
+        site: 'datadoghq.com', // Optional: defaults to datadoghq.com
       },
       errorTracking: {
         sourcemaps: {
@@ -70,6 +71,8 @@ module.exports = {
 
 <div class="alert alert-info">This example uses webpack. The configuration object is identical across all supported bundlers — only the import and plugin function name differ. See <a href="/real_user_monitoring/application_monitoring/browser/build_plugins/">Build Plugins</a> for installation instructions for your bundler.</div>
 
+For the best debugging experience, pair source map uploads with the [Source Code Context][5] plugin. Source maps provide file mapping for de-obfuscation, and source code context enables inline source code display in Error Tracking stack traces. See the [Source Code Context][5] page for the `rum.sourceCodeContext` configuration.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -78,3 +81,4 @@ module.exports = {
 [2]: /real_user_monitoring/
 [3]: /real_user_monitoring/guide/upload-javascript-source-maps#instrument-your-code
 [4]: /real_user_monitoring/application_monitoring/browser/build_plugins/
+[5]: /real_user_monitoring/application_monitoring/browser/build_plugins/source_code_context
