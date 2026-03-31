@@ -169,6 +169,312 @@ To delete a queue:
 
 <div class="alert alert-info">Deleting a queue removes the queue and label associations, but does not delete the underlying traces from LLM Observability. Traces remain accessible in Trace Explorer.</div>
 
+## API
+
+The Annotation Queues API allows you to programmatically create annotation queues and add interactions to them using your Datadog API key and Application key.
+### Create annotation queue
+
+Use this endpoint to create a new annotation queue in a project.
+
+Endpoint
+: `https://api.{{< region-param key="dd_site" code="true" >}}/api/unstable/llm-obs/v1/annotation-queues`
+
+Method
+: `POST`
+
+#### Headers (required)
+- `DD-API-KEY=<YOUR_DATADOG_API_KEY>`
+- `DD-APPLICATION-KEY=<YOUR_DATADOG_APPLICATION_KEY>`
+- `Content-Type="application/json"`
+
+#### Request
+
+{{< tabs >}}
+{{% tab "Model" %}}
+| Field | Type | Description |
+|-------|------|-------------|
+| data [*required*] | [CreateAnnotationQueueRequest](#createannotationqueuerequest) | Entry point into the request body. |
+{{% /tab %}}
+
+{{% tab "Example" %}}
+{{< code-block lang="json" >}}
+{
+  "data": {
+    "type": "queues",
+    "attributes": {
+      "name": "Failed Evaluations Review",
+      "project_id": "a1b2c3d4-0000-0000-0000-000000000000",
+      "description": "Queue for reviewing traces that failed automated evaluations"
+    }
+  }
+}
+{{< /code-block >}}
+{{% /tab %}}
+{{< /tabs >}}
+
+#### Code example
+
+{{< tabs >}}
+{{% tab "Curl" %}}
+{{< code-block lang="bash" >}}
+curl -X POST "https://api.datadoghq.com/api/unstable/llm-obs/v1/annotation-queues" \
+-H "DD-API-KEY: <YOUR_DATADOG_API_KEY>" \
+-H "DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>" \
+-H "Content-Type: application/json" \
+-d @- << EOF
+{
+  "data": {
+    "type": "queues",
+    "attributes": {
+      "name": "Failed Evaluations Review",
+      "project_id": "a1b2c3d4-0000-0000-0000-000000000000",
+      "description": "Queue for reviewing traces that failed automated evaluations"
+    }
+  }
+}
+EOF
+{{< /code-block >}}
+{{% /tab %}}
+{{< /tabs >}}
+
+#### Response
+
+{{< tabs >}}
+{{% tab "Model" %}}
+| Field | Type | Description |
+|-------|------|-------------|
+| data | [AnnotationQueueResource](#annotationqueueresource) | The created annotation queue. |
+{{% /tab %}}
+
+{{% tab "Example" %}}
+{{< code-block lang="json" >}}
+{
+  "data": {
+    "type": "queues",
+    "id": "f5e6d7c8-0000-0000-0000-000000000000",
+    "attributes": {
+      "project_id": "a1b2c3d4-0000-0000-0000-000000000000",
+      "name": "Failed Evaluations Review",
+      "description": "Queue for reviewing traces that failed automated evaluations",
+      "created_by": "b2c3d4e5-0000-0000-0000-000000000000",
+      "created_at": "2026-03-25T12:00:00Z",
+      "modified_by": "b2c3d4e5-0000-0000-0000-000000000000",
+      "modified_at": "2026-03-25T12:00:00Z",
+      "owned_by": "b2c3d4e5-0000-0000-0000-000000000000",
+      "annotation_schema": null
+    }
+  }
+}
+{{< /code-block >}}
+{{% /tab %}}
+{{< /tabs >}}
+
+### Add interactions to a queue
+
+Use this endpoint to add traces to an existing annotation queue.
+
+Endpoint
+: `https://api.{{< region-param key="dd_site" code="true" >}}/api/unstable/llm-obs/v1/annotation-queues/{queueId}/interactions`
+
+Method
+: `POST`
+
+#### Headers (required)
+- `DD-API-KEY=<YOUR_DATADOG_API_KEY>`
+- `DD-APPLICATION-KEY=<YOUR_DATADOG_APPLICATION_KEY>`
+- `Content-Type="application/json"`
+
+#### Path parameters
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| queueId [*required*] | string | The ID of the annotation queue to add interactions to. |
+
+#### Request
+
+{{< tabs >}}
+{{% tab "Model" %}}
+| Field | Type | Description |
+|-------|------|-------------|
+| data [*required*] | [AddInteractionsRequest](#addinteractionsrequest) | Entry point into the request body. |
+{{% /tab %}}
+
+{{% tab "Example" %}}
+{{< code-block lang="json" >}}
+{
+  "data": {
+    "type": "interactions",
+    "attributes": {
+      "interactions": [
+        {
+          "type": "trace",
+          "content_id": "6903738200000000af2d3775dfc70530"
+        },
+        {
+          "type": "trace",
+          "content_id": "7a14849300000000bf3e4886efd81641"
+        }
+      ]
+    }
+  }
+}
+{{< /code-block >}}
+{{% /tab %}}
+{{< /tabs >}}
+
+#### Code example
+
+{{< tabs >}}
+{{% tab "Curl" %}}
+{{< code-block lang="bash" >}}
+curl -X POST "https://api.datadoghq.com/api/unstable/llm-obs/v1/annotation-queues/f5e6d7c8-0000-0000-0000-000000000000/interactions" \
+-H "DD-API-KEY: <YOUR_DATADOG_API_KEY>" \
+-H "DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>" \
+-H "Content-Type: application/json" \
+-d @- << EOF
+{
+  "data": {
+    "type": "interactions",
+    "attributes": {
+      "interactions": [
+        {
+          "type": "trace",
+          "content_id": "6903738200000000af2d3775dfc70530"
+        },
+        {
+          "type": "trace",
+          "content_id": "7a14849300000000bf3e4886efd81641"
+        }
+      ]
+    }
+  }
+}
+EOF
+{{< /code-block >}}
+{{% /tab %}}
+{{< /tabs >}}
+
+#### Response
+
+{{< tabs >}}
+{{% tab "Model" %}}
+| Field | Type | Description |
+|-------|------|-------------|
+| data | [AddInteractionsResponse](#addinteractionsresponse) | The result of adding interactions to the queue. |
+{{% /tab %}}
+
+{{% tab "Example" %}}
+{{< code-block lang="json" >}}
+{
+  "data": {
+    "type": "interactions",
+    "id": "f5e6d7c8-0000-0000-0000-000000000000",
+    "attributes": {
+      "interactions": [
+        {
+          "id": "a1b2c3d4-0000-0000-0000-000000000001",
+          "type": "trace",
+          "content_id": "6903738200000000af2d3775dfc70530",
+          "already_existed": false
+        },
+        {
+          "id": "a1b2c3d4-0000-0000-0000-000000000002",
+          "type": "trace",
+          "content_id": "7a14849300000000bf3e4886efd81641",
+          "already_existed": false
+        }
+      ]
+    }
+  }
+}
+{{< /code-block >}}
+{{% /tab %}}
+{{< /tabs >}}
+
+### API standards
+
+#### CreateAnnotationQueueRequest
+
+| Field | Type | Description |
+|-------|------|-------------|
+| type [*required*] | string | Resource type. Set to `queues`. |
+| attributes [*required*] | [CreateAnnotationQueueAttributes](#createannotationqueueattributes) | The queue creation attributes. |
+
+#### CreateAnnotationQueueAttributes
+
+| Field | Type | Description |
+|-------|------|-------------|
+| name [*required*] | string | The name of the annotation queue. Must be unique within the project. |
+| project_id [*required*] | string | The UUID of the LLM Observability project this queue belongs to. |
+| description | string | A description of the queue's purpose and instructions for annotators. |
+
+#### AnnotationQueueResource
+
+| Field | Type | Description |
+|-------|------|-------------|
+| type | string | Resource type. Value: `queues`. |
+| id | string | The unique ID of the annotation queue. |
+| attributes | [AnnotationQueueAttributes](#annotationqueueattributes) | The queue attributes. |
+
+#### AnnotationQueueAttributes
+
+| Field | Type | Description |
+|-------|------|-------------|
+| project_id | string | The UUID of the LLM Observability project. |
+| name | string | The name of the annotation queue. |
+| description | string | The queue description. |
+| created_by | string | UUID of the user who created the queue. |
+| created_at | string | ISO 8601 timestamp of queue creation. |
+| modified_by | string | UUID of the user who last modified the queue. |
+| modified_at | string | ISO 8601 timestamp of last modification. |
+| owned_by | string | UUID of the queue owner. |
+| experiment_id | string | UUID of the associated experiment, if any. |
+| annotation_schema | object | The label schema configuration. Null for queues created via the API. |
+
+#### AddInteractionsRequest
+
+| Field | Type | Description |
+|-------|------|-------------|
+| type [*required*] | string | Resource type. Set to `interactions`. |
+| attributes [*required*] | [AddInteractionsAttributes](#addinteractionsattributes) | The interaction attributes. |
+
+#### AddInteractionsAttributes
+
+| Field | Type | Description |
+|-------|------|-------------|
+| interactions [*required*] | [[InteractionParams](#interactionparams)] | List of interactions to add to the queue. |
+
+#### InteractionParams
+
+| Field | Type | Description |
+|-------|------|-------------|
+| type [*required*] | string | The interaction type. Allowed values: `trace`, `experiment_trace`. |
+| content_id [*required*] | string | The trace ID or experiment trace ID to add. |
+| skip_content | boolean | If true, skip fetching and storing the trace content. Default: false. |
+
+#### AddInteractionsResponse
+
+| Field | Type | Description |
+|-------|------|-------------|
+| type | string | Resource type. Value: `interactions`. |
+| id | string | The queue ID. |
+| attributes | [AddInteractionsResponseAttributes](#addinteractionsresponseattributes) | The response attributes. |
+
+#### AddInteractionsResponseAttributes
+
+| Field | Type | Description |
+|-------|------|-------------|
+| interactions | [[InteractionResult](#interactionresult)] | List of interaction results. |
+
+#### InteractionResult
+
+| Field | Type | Description |
+|-------|------|-------------|
+| id | string | The unique ID of the interaction. |
+| type | string | The interaction type (`trace` or `experiment_trace`). |
+| content_id | string | The trace ID or experiment trace ID. |
+| already_existed | boolean | Whether this interaction was already in the queue. |
+
 ## Data retention
 
 
