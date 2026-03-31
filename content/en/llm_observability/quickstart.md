@@ -19,6 +19,8 @@ LLM Observability requires a Datadog API key if you don't have a Datadog Agent r
 
 ### Setup
 
+Follow the setup instructions in our [in-app onboarding flow](https://app.datadoghq.com/llm/applications?setupMethod=manual&showOnboarding=true) for an interactive quickstart experience.
+
 {{< tabs >}}
 {{% tab "Python" %}}
 
