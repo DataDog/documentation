@@ -14,7 +14,7 @@ further_reading:
 
 Warehouse-native experiment analysis lets you run statistical computations directly in your data warehouse.
 
-To set this up for Redshift, connect a Redshift cluster to Datadog using the AWS integration and configure your experiment settings. This guide covers:
+To set this up for Amazon Redshift, connect a Redshift cluster to Datadog using the AWS integration and configure your experiment settings. This guide covers:
 
 - [Preparing the Redshift cluster](#step-1-prepare-the-redshift-cluster)
 - [Creating AWS resources and granting IAM permissions](#step-2-create-aws-resources-and-grant-iam-permissions)
@@ -38,7 +38,7 @@ Datadog Experiments connects to Redshift through [Datadog's Amazon Web Services 
    1. Create a **Datadog Application Key**.
    1. Toggle off **Deploy log forwarder** and **Disable All** Log Resources (these are not needed for experiment analysis).
    1. Select **No** for **Detect security issues**.
-   1. Click **Open in AWS Console** to launch your CloudFormation template. See the [Getting Started with AWS documentation][6] for instructions navigating the AWS console.
+   1. Click **Open in AWS Console** to launch your CloudFormation template. See the [Getting Started with AWS documentation][6] for instructions on navigating the AWS console.
 
 You can follow your configuration's completion steps under **Deployment Status** on the integration setup page in Datadog.
 
@@ -178,7 +178,7 @@ After you set up your AWS integration and Redshift cluster, configure the experi
 
 {{< img src="/product_analytics/experiment/guide/redshift_pa_setup.png" alt="The Redshift connection setup page in Datadog showing warehouse type tiles for Snowflake, BigQuery, Redshift (selected), and Databricks, with three sections: Select AWS Account with an AWS account dropdown, Cluster Connection with fields for AWS region, Cluster identifier, Cluster endpoint, and Port, and Database and Storage with fields for Database, Database user, Schema, and Temp S3 bucket." style="width:90%;" >}}
 
-After you save your warehouse connection, create experiment metrics using your Redshift data. See [Create Experiment Metrics][4].
+After you save your warehouse connection, [create experiment metrics][4] using your Redshift data.
 
 ## Further reading
 
