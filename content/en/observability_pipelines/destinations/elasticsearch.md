@@ -43,7 +43,7 @@ Set up the Elasticsearch destination and its environment variables when you [set
 
 ##### Elasticsearch index and version
 
-1. If you selected **Bulk** mode, you can enter the name for the Elasticsearch index. See [template syntax][3] if you want to route data to different indexes based on specific fields in your data.
+1. If you selected **Bulk** mode, enter the name for the Elasticsearch index. See [template syntax][3] if you want to route data to different indexes based on specific fields in your data.
 1. Enter the Elasticsearch version.
 
 ##### Compression
