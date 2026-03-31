@@ -34,7 +34,7 @@ The AWS instance ID is returned in a successful response.
 Update your configuration to allow access to the EC2 metadata endpoint.
 
 If your hosts are using IMDSv2 and restricting access to IMDSv1, you also need to:
-1. Use Agent `7.64.0` or above to default to IMDSv2. In prior versions set the environment variable `DD_EC2_PREFER_IMDSV2` to `true`.
+1. Use Agent `7.64.0` or above to default to IMDSv2. In prior versions, set the environment variable `DD_EC2_PREFER_IMDSV2` to `true`.
 2. Increase the [IMDS hop limit][1] from `1` to `2` to allow access from containerized environments.
 
 [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instancedata-data-retrieval.html
