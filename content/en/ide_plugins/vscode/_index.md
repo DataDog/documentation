@@ -43,9 +43,9 @@ The Datadog extension for VS Code and Cursor brings Datadog to your code editor 
 
 The extension includes these features:
 
--   [**Model Context Protocol (MCP) Server**](?tab=cursor#installation): Connect the editor's AI agent to production telemetry, tools, and contexts from Datadog.
+-   [**Model Context Protocol (MCP) Server**](?tab=cursor#installation): Connect the editor's AI agent to production telemetry, tools, and context from Datadog.
 
--   [**Log Annotations**](#log-annotations): Gauge log volumes and search logs from your code.
+-   [**Logs**](#logs): Gauge log volumes and search logs from your code.
 
 -   [**Code Insights**](#code-insights): Stay informed about runtime errors, vulnerabilities, and flaky tests without leaving the code.
 
@@ -70,7 +70,7 @@ The extension includes these features:
 
 ## Installation
 
-Installation procedures may vary among other integrated development environments (IDEs).
+Installation steps may vary for other VS Code-based editors.
 
 {{< tabs >}}
 {{% tab "VS Code" %}}
@@ -160,7 +160,7 @@ The **View in VS Code** or **View in Cursor** feature provides a link from Datad
 
 You can also use this feature to open your source files from an insight (such as an error from Error Tracking):
 
-{{< img src="/developers/ide_plugins/vscode/view-in-vscode-error.png" alt="An Error Tracking issue in the Datadog showing the View in VS Code button" style="width:100%;" >}}
+{{< img src="/developers/ide_plugins/vscode/view-in-vscode-error.png" alt="An Error Tracking issue in Datadog showing the View in VS Code button" style="width:100%;" >}}
 
 <div class="alert alert-info">To use this feature, first configure <a href="/integrations/guide/source-code-integration/">source code integration</a> for your service.</div>
 
@@ -197,11 +197,7 @@ Read the [End-User License Agreement][12] carefully before downloading or using 
 [1]: https://marketplace.visualstudio.com/items?itemName=Datadog.datadog-vscode
 [2]: https://open-vsx.org/extension/datadog/datadog-vscode
 [3]: https://www.datadoghq.com/
-[4]: /logs/explorer/
 [5]: /tracing/error_tracking/
-[6]: /security/code_security/
-[7]: /tests/explorer/
-[11]: /tracing/error_tracking/exception_replay
 [12]: https://www.datadoghq.com/legal/eula/
 [13]: https://www.datadoghq.com/legal/privacy/
 [14]: mailto:team-ide-integration@datadoghq.com

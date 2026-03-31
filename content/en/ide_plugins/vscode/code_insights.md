@@ -15,7 +15,7 @@ further_reading:
 
 ## Overview
 
-**Code insights** keep you informed with Datadog-generated insights that are relevant to your code base:
+**Code Insights** keep you informed with Datadog-generated insights that are relevant to your codebase:
 
 -   Runtime errors collected by [Error Tracking][1]
 -   Code and library vulnerabilities reported by [Code Security][2]
