@@ -22,7 +22,7 @@ Synthetic Monitoring Scheduled Downtime lets you pause Synthetic test execution 
 
 **Note**: All downtime references on this page apply to Synthetic Monitoring only. For monitor-level downtime behavior, see [Downtimes][1].
 
-{{< img src="synthetics/settings/synthetics_downtimes.png" alt="The Downtimes page in Synthetic Monitoring Settings showing a list of configured downtimes on the left with a monthly calendar view of their scheduled time slots on the right" style="width:100%;" >}}
+{{< img src="synthetics/settings/synthetics_downtimes_updated.png" alt="The Downtimes page in Synthetic Monitoring Settings showing a list of configured downtimes on the left with a monthly calendar view of their scheduled time slots on the right" style="width:100%;" >}}
 
 With Synthetic Monitoring Scheduled Downtime, you can:
 
@@ -48,7 +48,7 @@ Downtimes can be saved in an enabled or disabled state and modified at any time.
 
 The **Downtimes** page provides a list and calendar view of all configured downtimes. Use the calendar to see how scheduled time slots are distributed across the month.
 
-{{< img src="synthetics/settings/synthetics_downtimes.png" alt="The Downtimes page in Synthetic Monitoring Settings showing a list of configured downtimes on the left with a monthly calendar view of their scheduled time slots on the right" style="width:90%;" >}}
+{{< img src="synthetics/settings/synthetics_downtimes_updated.png" alt="The Downtimes page in Synthetic Monitoring Settings showing a list of configured downtimes on the left with a monthly calendar view of their scheduled time slots on the right" style="width:90%;" >}}
 
 Use the filters at the top of the page to find specific downtimes:
 
