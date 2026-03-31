@@ -33,8 +33,6 @@ When building a pipeline that has not been deployed yet, you can set up the pipe
    {{< img src="observability_pipelines/export_pipeline/export_json_modal.png" alt="The export modal showing the pipeline configuration in JSON" style="width:100%;" >}}
 1. Deploy the pipeline configuration using the [API][3] or [Terraform][4].
 1. [Install the Worker][7] to start sending and processing data through the pipeline.
-   - [API documentation][3]
-   - [Terraform documentation][4]
 
 ## Export the configuration of a deployed pipeline
 
