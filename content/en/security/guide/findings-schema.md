@@ -65,9 +65,9 @@ There are eleven different categories for security findings. Click on a category
   "remediation": {
     "is_available": false
   },
-  "resource_id": "example-resource-id",
-  "resource_name": "example-resource",
-  "resource_type": "example_resource_type",
+  "resource_id": "api-endpoint-001",
+  "resource_name": "GET /api/v2/users/{userID}/profile",
+  "resource_type": "api_endpoint",
   "rule": {
     "default_rule_id": "def-000-abc",
     "id": "api-sec-001",
@@ -224,9 +224,9 @@ There are eleven different categories for security findings. Click on a category
   "origin": [
     "agentless-scanner"
   ],
-  "resource_id": "example-resource-id",
-  "resource_name": "example-resource",
-  "resource_type": "example_resource_type",
+  "resource_id": "arn:aws:ec2:us-east-1:123456789012:instance/i-012abcd34efghi56",
+  "resource_name": "i-012abcd34efghi56",
+  "resource_type": "aws_ec2_instance",
   "risk_details": {
     "is_publicly_accessible": {
       "evidence": {
@@ -399,9 +399,9 @@ There are eleven different categories for security findings. Click on a category
   "remediation": {
     "is_available": false
   },
-  "resource_id": "example-resource-id",
-  "resource_name": "example-resource",
-  "resource_type": "example_resource_type",
+  "resource_id": "arn:aws:ec2:us-east-1:123456789012:instance/i-012abcd34efghi56",
+  "resource_name": "i-012abcd34efghi56",
+  "resource_type": "aws_ec2_instance",
   "risk_details": {
     "has_exploit_available": {
       "evidence": {
@@ -595,9 +595,9 @@ There are eleven different categories for security findings. Click on a category
   "remediation": {
     "is_available": false
   },
-  "resource_id": "example-resource-id",
-  "resource_name": "example-resource",
-  "resource_type": "example_resource_type",
+  "resource_id": "github.com/example-org/terraform/main.tf:aws_s3_bucket.data",
+  "resource_name": "aws_s3_bucket.data",
+  "resource_type": "terraform_resource",
   "rule": {
     "default_rule_id": "def-000-abc",
     "id": "def-000-iac",
@@ -754,9 +754,9 @@ There are eleven different categories for security findings. Click on a category
   "origin": [
     "agentless-scanner"
   ],
-  "resource_id": "example-resource-id",
-  "resource_name": "example-resource",
-  "resource_type": "example_resource_type",
+  "resource_id": "arn:aws:iam::123456789012:user/legacy-admin",
+  "resource_name": "legacy-admin",
+  "resource_type": "aws_iam_user",
   "rule": {
     "default_rule_id": "def-000-abc",
     "id": "def-000-idr",
@@ -855,9 +855,9 @@ There are eleven different categories for security findings. Click on a category
 {
   "advisory": {
     "aliases": [
-      "CVE-2024-12345"
+      "CVE-2024-67890"
     ],
-    "cve": "CVE-2024-12345",
+    "cve": "CVE-2024-67890",
     "id": "TRIVY-CVE-2024-67890"
   },
   "base_severity": "critical",
@@ -891,7 +891,7 @@ There are eleven different categories for security findings. Click on a category
     "default_branch": "main",
     "is_default_branch": false,
     "repository_id": "123456789",
-    "repository_url": "https://github.com/example-org/terraform/",
+    "repository_url": "https://github.com/example-org/my-app/",
     "sha": "abcdef1234567890abcdef1234567890abcdef12"
   },
   "is_in_security_inbox": false,
@@ -903,17 +903,17 @@ There are eleven different categories for security findings. Click on a category
     "agentless-scanner"
   ],
   "package": {
-    "name": "linux",
-    "normalized_name": "linux",
+    "name": "lodash",
+    "normalized_name": "lodash",
     "scope": "production",
-    "version": "5.4.0-205.225"
+    "version": "4.17.20"
   },
   "remediation": {
     "is_available": false
   },
-  "resource_id": "example-resource-id",
-  "resource_name": "example-resource",
-  "resource_type": "example_resource_type",
+  "resource_id": "lodash:4.17.20",
+  "resource_name": "lodash",
+  "resource_type": "software_package",
   "risk_details": {
     "has_exploit_available": {
       "evidence": {
@@ -921,7 +921,7 @@ There are eleven different categories for security findings. Click on a category
           "GitHub"
         ],
         "exploit_urls": [
-          "https://github.com/example/POC-CVE-2024-12345"
+          "https://github.com/example/POC-CVE-2024-67890"
         ]
       }
     },
@@ -953,7 +953,7 @@ There are eleven different categories for security findings. Click on a category
   "vulnerability": {
     "hash": "abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890",
     "stack": {
-      "ecosystem": "deb"
+      "ecosystem": "npm"
     }
   },
   "workflow": {
@@ -1087,9 +1087,9 @@ There are eleven different categories for security findings. Click on a category
   "origin": [
     "agentless-scanner"
   ],
-  "resource_id": "example-resource-id",
-  "resource_name": "example-resource",
-  "resource_type": "example_resource_type",
+  "resource_id": "arn:aws:ec2:us-east-1:123456789012:security-group/sg-0123456789abcdef0",
+  "resource_name": "sg-0123456789abcdef0",
+  "resource_type": "aws_security_group",
   "risk_details": {
     "is_publicly_accessible": {
       "evidence": {
@@ -1224,7 +1224,7 @@ There are eleven different categories for security findings. Click on a category
     "default_branch": "main",
     "is_default_branch": false,
     "repository_id": "123456789",
-    "repository_url": "https://github.com/example-org/terraform/",
+    "repository_url": "https://github.com/example-org/my-app/",
     "sha": "abcdef1234567890abcdef1234567890abcdef12"
   },
   "is_in_security_inbox": false,
@@ -1238,9 +1238,9 @@ There are eleven different categories for security findings. Click on a category
   "remediation": {
     "is_available": false
   },
-  "resource_id": "example-resource-id",
-  "resource_name": "example-resource",
-  "resource_type": "example_resource_type",
+  "resource_id": "my-app:/api/search",
+  "resource_name": "my-app",
+  "resource_type": "application_service",
   "rule": {
     "default_rule_id": "def-000-abc",
     "id": "rtcv-001-sqli",
@@ -1374,7 +1374,7 @@ There are eleven different categories for security findings. Click on a category
     "default_branch": "main",
     "is_default_branch": false,
     "repository_id": "123456789",
-    "repository_url": "https://github.com/example-org/terraform/",
+    "repository_url": "https://github.com/example-org/my-app/",
     "sha": "abcdef1234567890abcdef1234567890abcdef12"
   },
   "is_in_security_inbox": false,
@@ -1388,9 +1388,9 @@ There are eleven different categories for security findings. Click on a category
   "remediation": {
     "is_available": false
   },
-  "resource_id": "example-resource-id",
-  "resource_name": "example-resource",
-  "resource_type": "example_resource_type",
+  "resource_id": "github.com/example-org/my-app/config/settings.py:42",
+  "resource_name": "settings.py",
+  "resource_type": "source_code_file",
   "rule": {
     "default_rule_id": "def-000-abc",
     "id": "sct-001-aws",
@@ -1524,7 +1524,7 @@ There are eleven different categories for security findings. Click on a category
     "default_branch": "main",
     "is_default_branch": false,
     "repository_id": "123456789",
-    "repository_url": "https://github.com/example-org/terraform/",
+    "repository_url": "https://github.com/example-org/my-app/",
     "sha": "abcdef1234567890abcdef1234567890abcdef12"
   },
   "is_in_security_inbox": false,
@@ -1538,9 +1538,9 @@ There are eleven different categories for security findings. Click on a category
   "remediation": {
     "is_available": false
   },
-  "resource_id": "example-resource-id",
-  "resource_name": "example-resource",
-  "resource_type": "example_resource_type",
+  "resource_id": "github.com/example-org/my-app/src/templates/profile.html:18",
+  "resource_name": "profile.html",
+  "resource_type": "source_code_file",
   "rule": {
     "default_rule_id": "def-000-abc",
     "id": "sast-001-xss",
@@ -1667,9 +1667,9 @@ There are eleven different categories for security findings. Click on a category
   "origin": [
     "agentless-scanner"
   ],
-  "resource_id": "example-resource-id",
-  "resource_name": "example-resource",
-  "resource_type": "example_resource_type",
+  "resource_id": "k8s-pod:default/my-app-7b9d5c8f4-x2k9m",
+  "resource_name": "my-app-7b9d5c8f4-x2k9m",
+  "resource_type": "kubernetes_pod",
   "rule": {
     "default_rule_id": "def-000-abc",
     "id": "def-000-wka",
