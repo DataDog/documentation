@@ -260,11 +260,6 @@ module "lambda-datadog" {
 [3]: https://github.com/DataDog/terraform-aws-lambda-datadog?tab=readme-ov-file#inputs
 [4]: /getting_started/site/
 {{% /tab %}}
-{{% tab "Onboarding MCP Tool" %}}
-
-{{< lambda-onboarding-mcp-tool >}}
-
-{{% /tab %}}
 {{% tab "Custom" %}}
 
 1. Install the Datadog Tracer

@@ -282,11 +282,6 @@ Fill in the environment variable placeholders:
 [1]: /getting_started/site/
 
 {{% /tab %}}
-{{% tab "Onboarding MCP Tool" %}}
-
-{{< lambda-onboarding-mcp-tool >}}
-
-{{% /tab %}}
 {{% tab "Custom" %}}
 ### Install the Datadog Lambda Extension
 

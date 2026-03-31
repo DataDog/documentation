@@ -104,7 +104,7 @@ To get started:
    ```console
    Add Datadog for Kubernetes to my project
    ```
-  {{% /tab %}}
+   {{% /tab %}}
 
    {{% tab "Serverless Monitoring" %}}
    ```console

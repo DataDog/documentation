@@ -190,7 +190,7 @@ The [Datadog CloudFormation macro][1] automatically transforms your SAM applicat
     ```
 
     Note that the minor version of the `datadog-lambda-js` package always matches the layer version. For example, `datadog-lambda-js v0.5.0` matches the content of layer version 5.
-   
+
     You cannot install the Datadog Lambda Library as a layer if you are deploying your Lambda function as a container image.
 
 2. Install the Datadog Lambda Extension
@@ -311,7 +311,7 @@ To configure Datadog using SST v3, follow these steps:
   1. Configure the Datadog Lambda Library and Datadog Lambda Extension layers
 
      - The available `<RUNTIME>` options are: {{< latest-lambda-layer-version layer="node-versions" >}}.
-  
+
   2. Add `dd-trace` and `datadog-lambda-js` to the `nodejs.install` list
 
   3. Fill in the environment variable placeholders:
@@ -321,16 +321,11 @@ To configure Datadog using SST v3, follow these steps:
      - Replace `<SERVICE_NAME>` with the name of the Lambda function's service
      - Replace `<DATADOG_SITE>` with {{< region-param key="dd_site" code="true" >}}. (Ensure the correct [Datadog site][1] is selected on this page)
      - Replace `<VERSION>` with the version number of the Lambda function
-    
+
   4. [Apply the Datadog wrapper in your function code][2]
 
 [1]: /getting_started/site/
 [2]: https://docs.datadoghq.com/serverless/guide/handler_wrapper
-{{% /tab %}}
-{{% tab "Onboarding MCP Tool" %}}
-
-{{< lambda-onboarding-mcp-tool >}}
-
 {{% /tab %}}
 {{% tab "Custom" %}}
 
