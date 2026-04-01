@@ -29,6 +29,7 @@ const USE_EXTERNAL_PROVIDER_FLAG_KEY = 'docs-ai-use-external-provider';
 const DISABLE_STREAMING_FLAG_KEY = 'docs-ai-disable-streaming';
 
 const EXTERNAL_CONV_MODEL_DOCS_STABLE = 'docs-ai-conv-model-v1-stable';
+const INTERNAL_CONVERSATION_ID_PREFIX = 'dd_docsai_';
 
 const RENDER_THROTTLE = 50;
 
@@ -97,6 +98,14 @@ class ConversationalSearch {
 
     log(message, data) { logAction(message, data, this.ctx); }
     logErr(message, error) { logError(message, error, this.ctx); }
+
+    generateInternalConversationId() {
+        if (window.crypto?.randomUUID) {
+            return `${INTERNAL_CONVERSATION_ID_PREFIX}${window.crypto.randomUUID()}`;
+        }
+
+        return `${INTERNAL_CONVERSATION_ID_PREFIX}${Date.now()}_${Math.random().toString(36).slice(2, 11)}`;
+    }
 
     resolveFlags() {
         initializeFeatureFlags().then((client) => {
@@ -509,6 +518,9 @@ class ConversationalSearch {
 
         const isFirstMessage = this.chatHistory.length === 0;
         const isSuggestion = this.isSuggestionQuery;
+        if (!this.conversationId) {
+            this.conversationId = this.generateInternalConversationId();
+        }
         this.chatHistory.push({ role: 'user', content: query });
 
         let responseContainer = null;
@@ -518,6 +530,7 @@ class ConversationalSearch {
             config: docsAiConfig,
             query,
             history: isFirstMessage ? [] : this.chatHistory.slice(0, -1),
+            conversationId: this.conversationId,
             rewriteQuery: isFirstMessage && this.shouldRewriteQuery && !isSuggestion,
             signal: this.abortController.signal,
             onThinking: (message) => {
