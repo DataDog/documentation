@@ -30,17 +30,16 @@ Before you begin, verify that you have the following:
 
 - A running Kubernetes cluster with [Istio][1] installed.
 - The [Datadog Agent is installed and configured][2] in your Kubernetes cluster.
-  - Verify that [Remote Configuration][3] is enabled and configured to enable blocking attackers through the Datadog UI.
-  - Verify that [APM is enabled][4] in the Agent. *This allows the security processor service to send its own traces to the Agent.*
-    - Optionally, enable the [Cluster Agent Admission Controller][5] to automatically inject the Datadog Agent host information to the App and API Protection Security Processor service.
+  - Enable and configure [Remote Configuration][3] to enable blocking attackers through the Datadog UI.
+  - Enable [APM][4] in the Agent. This allows the security processor service to send its own traces to the Agent.
+    - Optionally, enable the [Cluster Agent Admission Controller][5] to automatically inject the Datadog Agent host information to the App and API Protection security processor service.
 
 ## Automated configuration with App and API Protection for Kubernetes
 
 <div class="alert alert-info">
-  Automated configuration uses <strong>sidecar mode</strong>: the security processor runs as a container injected into your Istio gateway pods. No separate processor deployment is needed.
+  <p>Automated configuration uses <strong>sidecar mode</strong>: the security processor runs as a container injected into your Istio gateway pods. No separate processor deployment is needed.</p>
+  <p>For <strong>external mode</strong> setup, see <a href="/containers/kubernetes/appsec/">App and API Protection for Kubernetes</a>.</p>
 </div>
-
-For **external mode** setup, see [App and API Protection for Kubernetes][12].
 
 ### Setup
 
@@ -109,7 +108,7 @@ For sidecar resource tuning and troubleshooting, see [App and API Protection for
 ## Manual configuration (alternative)
 
 For fine-grained control over specific gateways or sidecars, use the manual setup below. This involves two steps:
-1. Deploying the Datadog Security Processor service.
+1. Deploying the Datadog security processor service.
 2. Configuring an `EnvoyFilter` to direct traffic from your Istio Ingress Gateway (or sidecars) to this service.
 
 ### Step 1: Deploy the Datadog security processor service
@@ -188,7 +187,7 @@ spec:
 
 #### Configuration options for the security processor
 
-The Datadog Security Processor exposes some settings:
+The Datadog security processor exposes some settings:
 
 | Environment variable                      | Default value       | Description                                                                                                                              |
 |-------------------------------------------|---------------------|------------------------------------------------------------------------------------------------------------------------------------------|
@@ -207,17 +206,15 @@ Configure the connection from the security processor to the Datadog Agent using 
 | `DD_AGENT_HOST`                        | `localhost`   | Hostname or IP of your Datadog Agent.                                            |
 | `DD_TRACE_AGENT_PORT`                  | `8126`        | Port of the Datadog Agent for trace collection.                                  |
 
-The Security Processor is built on top of the [Datadog Go Tracer][7] and inherits all of its environment variables. See [Configuring the Go Tracing Library][8] and [App and API Protection Library Configuration][9].
+The security processor is built on top of the [Datadog Go Tracer][7] and inherits all of its environment variables. See [Configuring the Go Tracing Library][8] and [App and API Protection Library Configuration][9].
 
-<div class="alert alert-danger">
-  <strong>Note:</strong> As the Datadog Security Processor is built on top of the Datadog Go Tracer, it generally follows the same release process as the tracer, and its Docker images are tagged with the corresponding tracer version (for example, <code>v2.2.2</code>). In some cases, early release versions might be published between official tracer releases, and these images are tagged with a suffix such as <code>-docker.1</code>.
+<div class="alert alert-info">
+  Because the Datadog security processor is built on top of the Datadog Go tracer, it generally follows the same release process as the tracer, and its Docker images are tagged with the corresponding tracer version (for example, <code>v2.2.2</code>). In some cases, early release versions might be published between official tracer releases, and these images are tagged with a suffix such as <code>-docker.1</code>.
 </div>
 
 ### Step 2: Configure an EnvoyFilter
 
 Create an `EnvoyFilter` resource to send traffic from your Istio Ingress Gateway or sidecar proxies to the `datadog-aap-extproc-service` you deployed.
-
-Choose the tab matching where you want to apply App and API Protection:
 
 {{< tabs >}}
 {{% tab "Istio Ingress Gateway" %}}
@@ -226,7 +223,7 @@ Applies App and API Protection to all traffic through your Istio Ingress Gateway
 
 The following example manifest (`datadog-aap-gateway-filter.yaml`) targets the default Istio Ingress Gateway in the `istio-system` namespace with the label `istio: ingressgateway`.
 
-**Note**: Read the provided example configuration carefully and adapt it to match your infrastructure and environment. You can find more configuration options in the [Envoy security processor documentation][10].
+**Note**: Read the provided example configuration carefully and adapt it to match your infrastructure and environment. You can find more configuration options in the [Envoy security processor documentation](https://www.envoyproxy.io/docs/envoy/latest/api-v3/extensions/filters/http/ext_proc/v3/ext_proc.proto).
 
 ```yaml
 apiVersion: networking.istio.io/v1alpha3
@@ -304,7 +301,7 @@ spec:
             ## (cf https://www.envoyproxy.io/docs/envoy/latest/api-v3/extensions/filters/http/ext_proc/v3/ext_proc.proto#envoy-v3-api-field-extensions-filters-http-ext-proc-v3-externalprocessor-observability-mode)
             #observability_mode: true
             ## Optional: When in asynchronous mode, the message_timeout is not used. This deferred
-            ## timeout starts when the http request is finished, to let the Security Processor
+            ## timeout starts when the http request is finished, to let the security processor
             ## process all processing messages. Default is 5s.
             #deferred_close_timeout: 5s
 
@@ -334,7 +331,7 @@ spec:
               - endpoint:
                   address:
                     socket_address:
-                      # Address of the Datadog Security Processor service
+                      # Address of the Datadog security processor service
                       address: "datadog-aap-extproc-service.<your-preferred-namespace>.svc.cluster.local" # Adjust if your service name or namespace is different
                       port_value: 443
 ```
@@ -419,7 +416,7 @@ spec:
             ## (cf https://www.envoyproxy.io/docs/envoy/latest/api-v3/extensions/filters/http/ext_proc/v3/ext_proc.proto#envoy-v3-api-field-extensions-filters-http-ext-proc-v3-externalprocessor-observability-mode)
             #observability_mode: true
             ## Optional: When in asynchronous mode, the message_timeout is not used. This deferred
-            ## timeout starts when the http request is finished, to let the Security Processor
+            ## timeout starts when the http request is finished, to let the security processor
             ## process all processing messages. Default is 5s.
             #deferred_close_timeout: 5s
 
@@ -449,7 +446,7 @@ spec:
               - endpoint:
                   address:
                     socket_address:
-                      # Address of the Datadog Security Processor service
+                      # Address of the Datadog security processor service
                       address: "datadog-aap-extproc-service.<your-preferred-namespace>.svc.cluster.local" # Adjust if your service name or namespace is different
                       port_value: 443
 ```
@@ -457,7 +454,7 @@ spec:
 {{% /tab %}}
 {{< /tabs >}}
 
-After you apply the `EnvoyFilter`, traffic through your Istio Ingress Gateway or selected sidecars is processed by the Datadog Security Processor.
+After you apply the `EnvoyFilter`, the Datadog security processor starts handling traffic through your Istio Ingress Gateway or selected sidecars.
 
 ### Step 3: Validate
 
@@ -469,7 +466,7 @@ After you apply the `EnvoyFilter`, traffic through your Istio Ingress Gateway or
 
 Known limitations:
 
-* Inspection of request and response bodies is supported when using the Datadog Security Processor image version `v2.2.2` or later.
+* Inspection of request and response bodies is supported when using the Datadog security processor image version `v2.2.2` or later.
 
 For additional details on the Istio integration compatibilities, see the [Istio integration compatibility page][11].
 

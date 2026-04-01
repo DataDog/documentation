@@ -64,7 +64,7 @@ More proxies are available through manual installation on the global [setup page
 ### Sidecar mode
 - Requires Datadog Cluster Agent 7.76.0 or later
 - Each gateway pod runs its own processor instance, which increases per-pod resource usage
-- Datadog Operator does not yet support sidecar mode configuration
+- Datadog Operator does not support sidecar mode configuration
 
 ### Proxy compatibility
 - For specific proxy version compatibility, see:
@@ -87,9 +87,9 @@ Before enabling App and API Protection for Kubernetes, verify that you have:
 App and API Protection for Kubernetes supports two deployment modes:
 
 - **External mode** (recommended): A single, centralized Application Security processor deployment serves all gateway traffic in your cluster. This is the preferred approach for most environments.
-- **Sidecar mode**: The Application Security processor runs as a sidecar container injected directly into each gateway pod. No separate processor deployment is needed. See [Sidecar mode](#sidecar-mode) for setup details.
+- **Sidecar mode**: The Application Security processor runs as a sidecar container injected directly into each gateway pod. No separate processor deployment is needed. See [Set up sidecar mode](#set-up-sidecar-mode) for setup details.
 
-The following sections describe the external mode architecture and setup. For sidecar mode, skip to [Sidecar mode](#sidecar-mode).
+The following sections describe the external mode architecture and setup. For sidecar mode, skip to [Set up sidecar mode](#set-up-sidecar-mode).
 
 ### Architecture (external mode)
 
@@ -265,7 +265,7 @@ For **Istio**, check that `EnvoyFilter` resources were created:
 kubectl get envoyfilter -n istio-system
 ```
 
-The Datadog Cluster Agent produces events for each operation done in the cluster whenever it results in failure or success.
+The Datadog Cluster Agent produces events for each operation that results in failure or success done in the cluster.
 
 #### Test traffic processing
 
@@ -282,19 +282,35 @@ Send requests through your gateway and verify they appear in the Datadog [App an
 | Helm Parameter | Datadog Operator Annotation | Type | Default | Description |
 |----------------|----------------------------|------|---------|-------------|
 | `enabled` | `agent.datadoghq.com/appsec.injector.enabled` | Boolean | `false` | Enable or disable the integration |
-| `mode` | N/A | String | `""` | Injection mode: `"sidecar"` or `"external"`. When empty, defaults to sidecar. |
+| `mode` | N/A | String | `""`; when empty, defaults to sidecar | Injection mode: `"sidecar"` or `"external"` |
 | `autoDetect` | `agent.datadoghq.com/appsec.injector.autoDetect` | Boolean | `true` | Automatically detect and configure supported proxies |
 | `proxies` | `agent.datadoghq.com/appsec.injector.proxies` | JSON array | `[]` | Manual list of proxy types to configure. Valid values: `"envoy-gateway"`, `"istio"`, `"istio-gateway"` |
 | `processor.service.name` | `agent.datadoghq.com/appsec.injector.processor.service.name` | String |   | **Required.** Name of the security processor Kubernetes Service |
-| `processor.service.namespace` | `agent.datadoghq.com/appsec.injector.processor.service.namespace` | String | Defaults to the namespace where the Cluster Agent is running | Namespace where the security processor Service is deployed |
+| `processor.service.namespace` | `agent.datadoghq.com/appsec.injector.processor.service.namespace` | String | Defaults to the namespace where the Cluster Agent is running | Namespace where the security processor service is deployed |
 | `processor.address` | `agent.datadoghq.com/appsec.injector.processor.address` | String | `{service.name}.{service.namespace}.svc` | Full service address override |
 | `processor.port` | `agent.datadoghq.com/appsec.injector.processor.port` | Integer | `443` | Port of the security processor service |
+
+### Upgrading from external mode
+
+If you are upgrading from a previous version that used external mode, the default mode has changed to sidecar. To continue using external mode, explicitly set `mode: "external"` in your Helm values:
+
+```yaml
+datadog:
+  appsec:
+    injector:
+      enabled: true
+      mode: "external"
+      processor:
+        service:
+          name: datadog-aap-extproc-service
+          namespace: datadog
+```
 
 ### Proxy types
 
 - `envoy-gateway`: Configures Envoy Gateway using `EnvoyExtensionPolicy` resources
 - `istio`: Configures Istio using global `EnvoyFilter` resources in the Istio system namespace for Istio-managed Kubernetes Gateway API GatewayClasses
-- `istio-gateway`: Configures native Istio Gateway resources using `EnvoyFilter` resources
+- `istio-gateway`: Configures native Istio Gateway using `EnvoyFilter` resources
 
 ### Opting out specific resources
 
@@ -379,7 +395,7 @@ All errors are logged as Kubernetes events. Check for events on the Gateway or G
 - Check that the ClusterRoleBinding references the correct service account
 - Make sure you are using the newest version of the Datadog Helm Chart or Operator.
 
-## Sidecar mode
+## Set up sidecar mode
 
 In sidecar mode, the security processor runs as a container injected directly into each gateway pod. The Cluster Agent handles injection automatically, so you don't need a separate processor deployment or service.
 
@@ -408,24 +424,8 @@ helm upgrade -i datadog-agent datadog/datadog -f values.yaml
 ```
 
 <div class="alert alert-warning">
-  <strong>Note:</strong> Datadog Operator does not yet support sidecar mode configuration. Use Helm to configure sidecar mode.
+  Datadog Operator does not support sidecar mode configuration. Use Helm to configure sidecar mode.
 </div>
-
-### Upgrading from external mode
-
-If you are upgrading from a previous version that used external mode, the default mode has changed to sidecar. To continue using external mode, explicitly set `mode: "external"` in your Helm values:
-
-```yaml
-datadog:
-  appsec:
-    injector:
-      enabled: true
-      mode: "external"
-      processor:
-        service:
-          name: datadog-aap-extproc-service
-          namespace: datadog
-```
 
 ### Sidecar configuration reference
 

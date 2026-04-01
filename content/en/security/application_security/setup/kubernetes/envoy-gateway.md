@@ -26,20 +26,20 @@ You can enable Datadog [App and API Protection][12] for traffic managed by [Envo
 
 - A running Kubernetes cluster with [Envoy Gateway][1] installed.
 - The [Datadog Agent is installed and configured][2] in your Kubernetes cluster.
-  - Verify that [Remote Configuration][3] is enabled and configured to enable blocking attackers through the Datadog UI.
-  - Verify that [APM is enabled][4] in the Agent to allow the security processor service to send its own traces to the Agent.
-    - Optionally, enable the [Cluster Agent Admission Controller][5] to automatically inject the Datadog Agent host information to the App and API Protection Security Processor service.
+  - Enable and configure [Remote Configuration][3] to enable blocking attackers through the Datadog UI.
+  - Enable [APM][4] in the Agent to allow the security processor service to send its own traces to the Agent.
+    - Optionally, enable the [Cluster Agent Admission Controller][5] to automatically inject the Datadog Agent host information to the App and API Protection security processor service.
 
 ## Automated configuration with App and API Protection for Kubernetes
 
 <div class="alert alert-info">
-  Automated configuration handles security processor deployment and <code>EnvoyExtensionPolicy</code> creation for you. This is the recommended approach for most users.
+  Automated configuration handles security processor deployment and <code>EnvoyExtensionPolicy</code> creation. This is the recommended approach for most users.
 </div>
 
 ### Setup
 
-1. **Deploy the security processor** using the deployment manifest shown in [Step 1](#step-1-deploy-the-datadog-external-processor-service) below.
-2. **Enable automatic configuration** using Helm or the Datadog Operator.
+1. **Deploy the security processor** using the deployment manifest shown in [Deploy the Datadog security processor service](#step-1-deploy-the-datadog-security-processor-service) below.
+2. **Enable automatic configuration** using the Datadog Operator or Helm.
 
    {{< tabs >}}
    {{% tab "Datadog Operator" %}}
@@ -104,7 +104,7 @@ You can enable Datadog [App and API Protection][12] for traffic managed by [Envo
    kubectl get envoyextensionpolicy -A
    ```
 
-For configuration options and troubleshooting, see [App and API Protection for Kubernetes](/containers/kubernetes/appsec).
+For configuration options and troubleshooting, see [App and API Protection for Kubernetes][13].
 
 ## Manual configuration (alternative)
 
@@ -215,10 +215,10 @@ Configure the connection from the security processor to the Datadog Agent using 
 | `DD_AGENT_HOST`                        | `localhost`   | Hostname or IP of your Datadog Agent.                                            |
 | `DD_TRACE_AGENT_PORT`                  | `8126`        | Port of the Datadog Agent for trace collection.                                  |
 
-The Security Processor is built on top of the [Datadog Go Tracer][7] and inherits all of its environment variables. See [Configuring the Go Tracing Library][8] and [App and API Protection Library Configuration][9].
+The security processor is built on top of the [Datadog Go Tracer][7] and inherits all of its environment variables. See [Configuring the Go Tracing Library][8] and [App and API Protection Library Configuration][9].
 
-<div class="alert alert-danger">
-  <strong>Note:</strong> As the Datadog Security Processor is built on top of the Datadog Go Tracer, it generally follows the same release process as the tracer, and its Docker images are tagged with the corresponding tracer version (for example, <code>v2.2.2</code>). In some cases, early release versions might be published between official tracer releases, and these images are tagged with a suffix such as <code>-docker.1</code>.
+<div class="alert alert-info">
+  Because the Datadog security processor is built on top of the Datadog Go tracer, it generally follows the same release process as the tracer, and its Docker images are tagged with the corresponding tracer version (for example, <code>v2.2.2</code>). In some cases, early release versions might be published between official tracer releases, and these images are tagged with a suffix such as <code>-docker.1</code>.
 </div>
 
 ### Step 2: Configure an EnvoyExtensionPolicy
@@ -305,9 +305,7 @@ After applying the policy, traffic through the targeted Gateway/Routes is inspec
 
 ## Limitations
 
-Known limitations:
-
-* Observability mode (asynchronous analysis) is not available for Envoy Gateway.
+Observability mode (asynchronous analysis) is not available for Envoy Gateway.
 
 For additional details on the Envoy Gateway integration compatibilities, see the [Envoy Gateway integration compatibility page][11].
 
@@ -327,3 +325,4 @@ For additional details on the Envoy Gateway integration compatibilities, see the
 [10]: https://gateway-api.sigs.k8s.io/api-types/referencegrant/
 [11]: /security/application_security/setup/compatibility/envoy-gateway
 [12]: /security/application_security/
+[13]: /containers/kubernetes/appsec
