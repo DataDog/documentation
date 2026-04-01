@@ -55,7 +55,7 @@ Stored sessions are accessible in a dedicated **Managed Archive UI**, separate f
 
 {{< img src="real_user_monitoring/managed_archive/ma1.png" alt="The Managed Archive UI showing a table of stored sessions with light-indexed attributes" style="width:100%;" >}}
 
-Once a session is recovered, its row in the Managed Archive UI is visually marked and the session becomes available in the RUM Explorer.
+Once a session is recovered, the corresponding row in the Managed Archive UI is visually marked and the session becomes available in the RUM Explorer.
 
 ## Set up
 
@@ -63,9 +63,10 @@ Once a session is recovered, its row in the Managed Archive UI is visually marke
 
 To enable session storage for an application:
 
-1. In Datadog, navigate to **Digital Experience > RUM > Managed Archive**.
+1. In Datadog, navigate to **Digital Experience > Real User Monitoring > Manage Applications**.
 2. Select your application.
-3. Toggle **Store sessions** on.
+3. Go to **Routing > Managed Archive**.
+4. Toggle **Enable Managed Archive** on and select the storage period.
 
 {{< img src="real_user_monitoring/managed_archive/ma2.png" alt="The Managed Archive configuration panel showing the Store sessions toggle" style="width:70%;" >}}
 
@@ -75,13 +76,17 @@ Configuration is done at the application level, enabling you to apply different 
 
 Recovered sessions are available for 30 days with all their events and attributes, including performance events. There is no difference between a recovered session and a session retained by a retention filter in terms of investigation capabilities.
 
-Sessions already indexed and available in the RUM Explorer can also be recovered, which will extend their retention by 30 days.
-
 In the Managed Archive UI, click **Recover** on the row of the session you want to recover.
 
 {{< img src="real_user_monitoring/managed_archive/ma1.png" alt="A session row in the Managed Archive UI with the Recover button highlighted" style="width:100%;" >}}
 
-You can query on recovered sessions in the RUM Explorer by querying on `@session.retention_reason:rehydration`, `@session.matching_retention_filter.name:rehydration` or `@session.matching_retention_filter.id:rehydration`. Recovered sessions that were initially retained by a retention filter have `@session.was_retained:true`.
+You can query on recovered sessions in the RUM Explorer by querying on:
+
+- `@session.retention_reason:recovery`
+- `@session.matching_retention_filter.name:recovery`
+- `@session.matching_retention_filter.id:recovery`
+
+Recovered sessions that were initially retained by a retention filter have `@session.was_retained:true`.
 
 ## Permissions
 
