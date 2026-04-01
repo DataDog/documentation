@@ -96,7 +96,75 @@ These configurations can be applied through either the <code>docker</code> comma
 
 [1]: /agent/docker/
 {{% /tab %}}
-{{% tab "Kubernetes (Daemonset)" %}}
+{{% tab "Datadog Operator" %}}
+
+1. Follow the [Kubernetes Agent setup][1].
+
+2. Enable the preferred protocol in your Operator's manifest:
+
+   For gRPC:
+   ```yaml
+   features:
+     otlp:
+       receiver:
+         protocols:
+           grpc:
+             enabled: true
+       logs:
+         enabled: false
+   ```
+   For HTTP:
+   ```yaml
+   features:
+     otlp:
+       receiver:
+         protocols:
+           http:
+             enabled: true
+       logs:
+         enabled: false
+   ```
+
+This enables each protocol in the default port (`4317` for OTLP/gRPC and `4318` for OTLP/HTTP). Metrics and traces are enabled by default.
+
+[1]: /agent/kubernetes/?tab=helm
+{{% /tab %}}
+{{% tab "Helm" %}}
+
+1. Follow the [Kubernetes Agent setup][1].
+
+2. Enable the OTLP endpoints in the Agent by editing the `datadog.otlp` section of the `values.yaml` file:
+
+   For gRPC:
+   ```
+   otlp:
+    receiver:
+      protocols:
+        grpc:
+          endpoint: 0.0.0.0:4317
+          enabled: true
+    logs:
+      enabled: false
+   ```
+
+   For HTTP:
+   ```
+   otlp:
+    receiver:
+      protocols:
+        http:
+          endpoint: 0.0.0.0:4318
+          enabled: true
+    logs:
+      enabled: false
+   ```
+
+This enables each protocol in the default port (`4317` for OTLP/gRPC and `4318` for OTLP/HTTP). Metrics and traces are enabled by default.
+
+
+[1]: /agent/kubernetes/?tab=helm
+{{% /tab %}}
+{{% tab "Manual (Daemonset)" %}}
 
 1. Follow the [Kubernetes Agent setup][1].
 
@@ -134,95 +202,6 @@ These configurations can be applied through either the <code>docker</code> comma
    ```
 
 [1]: /agent/kubernetes/?tab=daemonset
-{{% /tab %}}
-
-{{% tab "Kubernetes (Helm) - values.yaml" %}}
-
-1. Follow the [Kubernetes Agent setup][1].
-
-2. Enable the OTLP endpoints in the Agent by editing the `datadog.otlp` section of the `values.yaml` file:
-
-   For gRPC:
-   ```
-   otlp:
-    receiver:
-      protocols:
-        grpc:
-          endpoint: 0.0.0.0:4317
-          enabled: true
-    logs:
-      enabled: false
-   ```
-
-   For HTTP:
-   ```
-   otlp:
-    receiver:
-      protocols:
-        http:
-          endpoint: 0.0.0.0:4318
-          enabled: true
-    logs:
-      enabled: false
-   ```
-
-This enables each protocol in the default port (`4317` for OTLP/gRPC and `4318` for OTLP/HTTP). Metrics and traces are enabled by default.
-
-
-[1]: /agent/kubernetes/?tab=helm
-{{% /tab %}}
-
-{{% tab "Kubernetes (Helm) - set" %}}
-
-1. Follow the [Kubernetes Agent setup][1].
-
-2. Enable the preferred protocol:
-
-   For gRPC:
-   ```
-   --set "datadog.otlp.receiver.protocols.grpc.enabled=true"
-   ```
-   For HTTP:
-   ```
-   --set "datadog.otlp.receiver.protocols.http.enabled=true"
-   ```
-
-This enables each protocol in the default port (`4317` for OTLP/gRPC and `4318` for OTLP/HTTP).
-
-[1]: /agent/kubernetes/?tab=helm
-{{% /tab %}}
-{{% tab "Kubernetes (Operator)" %}}
-
-1. Follow the [Kubernetes Agent setup][1].
-
-2. Enable the preferred protocol in your Operator's manifest:
-
-   For gRPC:
-   ```yaml
-   features:
-     otlp:
-       receiver:
-         protocols:
-           grpc:
-             enabled: true
-       logs:
-         enabled: false
-   ```
-   For HTTP:
-   ```yaml
-   features:
-     otlp:
-       receiver:
-         protocols:
-           http:
-             enabled: true
-       logs:
-         enabled: false
-   ```
-
-This enables each protocol in the default port (`4317` for OTLP/gRPC and `4318` for OTLP/HTTP). Metrics and traces are enabled by default.
-
-[1]: /agent/kubernetes/?tab=helm
 {{% /tab %}}
 {{% tab "AWS Lambda" %}}
 
@@ -269,7 +248,26 @@ Set the following environment variables in the Datadog Agent container:
 - `DD_OTLP_CONFIG_LOGS_ENABLED=true`
 
 {{% /tab %}}
-{{% tab "Kubernetes (Daemonset)" %}}
+{{% tab "Datadog Operator" %}}
+
+In your `datadog-agent.yaml` file:
+
+{{% /tab %}}
+{{% tab "Helm" %}}
+
+In your `values.yaml` file:
+
+```yaml
+datadog:
+  logs:
+    enabled: true
+  otlp:
+    logs:
+      enabled: true
+```
+
+{{% /tab %}}
+{{% tab "Manual (Daemonset)" %}}
 
 Set the following environment variables in the core Agent container:
 
@@ -283,26 +281,6 @@ Set the following environment variables in the core Agent container:
 For more information, see [log collection with your DaemonSet][8].
 
 [8]: /containers/guide/kubernetes_daemonset/#log-collection
-{{% /tab %}}
-{{% tab "Kubernetes (Helm)" %}}
-
-In your `values.yaml` file:
-
-```yaml
-datadog:
-  logs:
-    enabled: true
-  otlp:
-    logs:
-      enabled: true
-```
-
-Or using `--set`:
-
-```
---set "datadog.logs.enabled=true" --set "datadog.otlp.logs.enabled=true"
-```
-
 {{% /tab %}}
 {{< /tabs >}}
 
