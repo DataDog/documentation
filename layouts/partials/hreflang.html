@@ -15,7 +15,7 @@ The reason being for example we don't want to promote an english page on a japan
 
 <!-- self reference the md equivalent page for llms -->
 {{ $mdLink := (replaceRE "/$" ".md" .Permalink) }}
-<link rel="alternate" type="text/markdown" href="{{ $mdLink }}"/>
+<link rel="alternate" type="text/markdown" href="{{ $mdLink }}" title="Markdown Version"/>
 
 <!-- self reference the current page -->
 <link rel="alternate" hreflang="{{ $dot.Lang }}" href="{{ $dot.Permalink }}"/>
