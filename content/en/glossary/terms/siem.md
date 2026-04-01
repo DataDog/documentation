@@ -1,4 +1,5 @@
 ---
+id: siem
 title: security information and event management (SIEM)
 core_product:
   - security

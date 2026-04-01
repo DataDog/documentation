@@ -343,6 +343,10 @@ metastore:
 indexer:
   replicaCount: 2
   podSize: xlarge
+  persistentVolume:
+    enabled: true
+    storage: 250Gi
+    storageClass: managed-csi
 
    # Searcher configuration
    # The searcher is responsible for executing search queries against the indexed data stored in S3.

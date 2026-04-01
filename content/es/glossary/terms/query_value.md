@@ -1,4 +1,5 @@
 ---
+id: query_value
 core_product:
 - dashboards
 related_terms:

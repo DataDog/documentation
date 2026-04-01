@@ -13,6 +13,10 @@ CloudPrem puede desplegarse en distintos entornos, desde servicios de Kubernetes
 
 ## Requisitos previos
 
+<div class="alert alert-info">
+Si no ves la entrada de CloudPrem en el menú Logs, significa que CloudPrem no está activado en tu cuenta. Únete a la <a href="https://www.datadoghq.com/product-preview/cloudprem/">vista previa de CloudPrem</a> para activar CloudPrem en tu cuenta.
+</div>
+
 ### Requisitos del clúster de Kubernetes
 
 | Requisito            | Información                                                                                  |
@@ -33,8 +37,12 @@ CloudPrem admite los siguientes tipos de almacenamiento de objetos:
 
 ## Kubernetes gestionado en la nube
 
-{{< whatsnext desc="Select the installation guide that matches your environment:">}}
-  {{< nextlink href="/cloudprem/install/aws_eks/" >}}Instalar en AWS EKS{{< /nextlink >}}
-  {{< nextlink href="/cloudprem/install/azure_aks/" >}}Instalar en Azure AKS{{< /nextlink >}}
-  {{< nextlink href="/cloudprem/install/docker/" >}}Instalar localmente con Docker para pruebas{{< /nextlink >}}
+{{< whatsnext desc="Selecciona la guía de instalación que coincide con tu entorno:">}}
+  {{< nextlink href="/cloudprem/install/aws_eks" >}}Instalar en AWS EKS{{< /nextlink >}}
+  {{< nextlink href="/cloudprem/install/azure_aks" >}}Instalar en Azure AKS{{< /nextlink >}}
+  {{< nextlink href="/cloudprem/install/gcp_gke" >}}Instalar en GCP GKE{{< /nextlink >}}
+  {{< nextlink href="/cloudprem/install/docker" >}}Instalar de forma local con Docker para testear{{< /nextlink >}}
+  {{< nextlink href="/cloudprem/install/custom_k8s" >}}Instalar en Kubernetes con PostgreSQL y MinIO{{< /nextlink >}}
 {{< /whatsnext >}}
+
+[1]: https://www.datadoghq.com/product-preview/cloudprem/
