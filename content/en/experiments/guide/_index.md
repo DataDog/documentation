@@ -14,5 +14,7 @@ cascade:
 {{< /nextlink >}}
     {{< nextlink href="experiments/guide/connecting_redshift" >}}Connect Redshift Data Warehouse
 {{< /nextlink >}}
+    {{< nextlink href="experiments/guide/connecting_databricks" >}}Connect Databricks Warehouse Data
+{{< /nextlink >}}
 
 {{< /whatsnext >}}
