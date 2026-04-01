@@ -9,7 +9,7 @@
   {{ errorf "integration-api-key-picker shortcode error: No integration ID found. Set 'app_id' in page frontmatter or pass 'id' param. %s" .Position }}
 {{- end -}}
 
-{{- $tile_url := printf "/integrations/%s" $integration_id -}}
+{{- $tile_url := printf "https://app.datadoghq.com/integrations/%s" $integration_id -}}
 
 <div class="shortcode-wrapper shortcode-integration-api-key-picker">
 {{- if eq $type "api-key" -}}
