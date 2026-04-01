@@ -24,12 +24,13 @@ Set up the Elasticsearch destination and its environment variables when you [set
 
 1. Enter the identifier for your Elasticsearch endpoint URL. If you leave it blank, the [default](#set-secrets) is used.
 1. Enter the identifier for your Elasticsearch password. If you leave it blank, the [default](#set-secrets) is used.
+1. (Optional) Enter the Elasticsearch version.
 1. In the **Mode** dropdown menu, select **Bulk** or **Data streams**.
 	- **Bulk** mode
 		- Uses Elasticsearch's [Bulk API][5] to send batched events directly into a standard index.
 		- Choose this mode when you want direct control over index naming and lifecycle management. Data is appended to the index you specify, and you are responsible for handling rollovers, deletions, and mappings.
 		- To configure **Bulk** mode:
-			- In the **Index** field, optionally enter the name of the Elasticsearch index. You can use [template syntax][3] to dynamically route data to different indexes based on specific fields in your logs, for example `logs-{{service}}` or `metrics-{{service}}`.
+			- (Optional) In the **Index** field, enter the name of the Elasticsearch index. You can use [template syntax][3] to dynamically route data to different indexes based on specific fields in your logs, for example `logs-{{service}}` or `metrics-{{service}}`.
 	- **Data streams** mode
 		- Uses [Elasticsearch Data Streams][4] for log storage. Data streams automatically manage backing indexes and rollovers, making them ideal for time series log data.
 		- Choose this mode when you want Elasticsearch to manage the index lifecycle for you. Data streams ensures smooth rollovers, Index Lifecycle Management (ILM) compatibility, and optimized handling of time-based data.
@@ -40,11 +41,6 @@ Set up the Elasticsearch destination and its environment variables when you [set
 			- In the UI, there is a preview of the data stream name you configured. With the above example inputs, the data stream name that the Worker writes to is `logs-apache-production` for logs and `metrics-apache-production` for metrics.
 
 #### Optional settings
-
-##### Elasticsearch index and version
-
-1. If you selected **Bulk** mode, enter the name for the Elasticsearch index. See [template syntax][3] if you want to route data to different indexes based on specific fields in your data.
-1. Enter the Elasticsearch version.
 
 ##### Compression
 
