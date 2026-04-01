@@ -719,6 +719,14 @@ components:
       schema:
         default: false
         type: boolean
+    IncidentUserDefinedFieldIDPathParameter:
+      description: The ID of the incident user-defined field.
+      in: path
+      name: field_id
+      required: true
+      schema:
+        example: "00000000-0000-0000-0000-000000000000"
+        type: string
     Include:
       description: Include relationship data.
       explode: true
@@ -1034,7 +1042,7 @@ components:
         type: string
     ResourceID:
       description: |-
-        Identifier, formatted as `type:id`. Supported types: `dashboard`, `integration-service`, `integration-webhook`, `notebook`, `powerpack`, `reference-table`, `security-rule`, `slo`, `synthetics-global-variable`, `synthetics-test`, `synthetics-private-location`, `monitor`, `workflow`, `app-builder-app`, `connection`, `connection-group`, `rum-application`, `cross-org-connection`, `spreadsheet`, `on-call-schedule`, `on-call-escalation-policy`, `on-call-team-routing-rules`, `logs-pipeline`, `case-management-project`.
+        Identifier, formatted as `type:id`. Supported types: `dashboard`, `integration-service`, `integration-webhook`, `notebook`, `powerpack`, `reference-table`, `security-rule`, `slo`, `synthetics-global-variable`, `synthetics-test`, `synthetics-private-location`, `monitor`, `workflow`, `app-builder-app`, `connection`, `connection-group`, `rum-application`, `cross-org-connection`, `spreadsheet`, `on-call-schedule`, `on-call-escalation-policy`, `on-call-team-routing-rules`, `logs-pipeline`, `case-management-project`, `monitor-notification-rule`.
       example: "dashboard:abc-def-ghi"
       in: path
       name: resource_id
@@ -32866,6 +32874,380 @@ components:
         type:
           $ref: "#/components/schemas/UsersType"
       type: object
+    IncidentUserDefinedFieldAttributesCreateRequest:
+      description: Attributes for creating an incident user-defined field.
+      properties:
+        category:
+          $ref: "#/components/schemas/IncidentUserDefinedFieldCategory"
+        collected:
+          $ref: "#/components/schemas/IncidentUserDefinedFieldCollected"
+        default_value:
+          description: The default value for the field. Must be one of the valid values when valid_values is set.
+          example: "critical"
+          nullable: true
+          type: string
+        display_name:
+          description: The human-readable name shown in the UI. Defaults to a formatted version of the name if not provided.
+          example: "Root Cause"
+          type: string
+        name:
+          description: The unique identifier of the field. Must start with a letter or digit and contain only letters, digits, underscores, or periods.
+          example: "root_cause"
+          type: string
+        ordinal:
+          description: A decimal string representing the field's display order in the UI.
+          example: "1.5"
+          nullable: true
+          type: string
+        required:
+          description: When true, users must fill out this field on incidents.
+          example: false
+          type: boolean
+        tag_key:
+          description: For metric tag-type fields only, the metric tag key that powers the autocomplete options.
+          example: "datacenter"
+          nullable: true
+          type: string
+        type:
+          $ref: "#/components/schemas/IncidentUserDefinedFieldFieldType"
+        valid_values:
+          description: The list of allowed values for dropdown and multiselect fields. Limited to 1000 values.
+          items:
+            $ref: "#/components/schemas/IncidentUserDefinedFieldValidValue"
+          type: array
+      required:
+        - name
+        - type
+      type: object
+    IncidentUserDefinedFieldAttributesResponse:
+      description: Attributes of an incident user-defined field.
+      properties:
+        attached_to:
+          description: The resource type this field is attached to. Always "incidents".
+          example: "incidents"
+          readOnly: true
+          type: string
+        category:
+          $ref: "#/components/schemas/IncidentUserDefinedFieldCategory"
+        collected:
+          $ref: "#/components/schemas/IncidentUserDefinedFieldCollected"
+        created:
+          description: Timestamp when the field was created.
+          example: "2026-03-18T08:40:05.185406Z"
+          format: date-time
+          readOnly: true
+          type: string
+        default_value:
+          description: The default value for the field.
+          example: "critical"
+          nullable: true
+          type: string
+        deleted:
+          description: Timestamp when the field was soft-deleted, or null if not deleted.
+          example:
+          format: date-time
+          nullable: true
+          readOnly: true
+          type: string
+        display_name:
+          description: The human-readable name shown in the UI.
+          example: "Root Cause"
+          type: string
+        metadata:
+          $ref: "#/components/schemas/IncidentUserDefinedFieldMetadata"
+        modified:
+          description: Timestamp when the field was last modified.
+          example: "2026-03-18T08:40:05.185406Z"
+          format: date-time
+          nullable: true
+          readOnly: true
+          type: string
+        name:
+          description: The unique identifier of the field.
+          example: "root_cause"
+          type: string
+        ordinal:
+          description: A decimal string representing the field's display order in the UI.
+          example: "1.5"
+          nullable: true
+          type: string
+        prerequisite:
+          description: Reserved for future use. Always null.
+          example:
+          nullable: true
+          readOnly: true
+          type: string
+        required:
+          description: When true, users must fill out this field on incidents.
+          example: false
+          type: boolean
+        reserved:
+          description: When true, this field is reserved for system use and cannot be deleted.
+          example: false
+          readOnly: true
+          type: boolean
+        table_id:
+          description: Reserved for internal use. Always 0.
+          example: 0
+          format: int64
+          readOnly: true
+          type: integer
+        tag_key:
+          description: For metric tag-type fields only, the metric tag key that powers the autocomplete options.
+          example:
+          nullable: true
+          type: string
+        type:
+          description: The data type of the field. 1=dropdown, 2=multiselect, 3=textbox, 4=textarray, 5=metrictag, 6=autocomplete, 7=number, 8=datetime.
+          example: 3
+          format: int32
+          maximum: 8
+          minimum: 1
+          nullable: true
+          type: integer
+        valid_values:
+          description: The list of allowed values for dropdown, multiselect, and autocomplete fields.
+          items:
+            $ref: "#/components/schemas/IncidentUserDefinedFieldValidValue"
+          nullable: true
+          type: array
+      required:
+        - attached_to
+        - category
+        - collected
+        - created
+        - default_value
+        - deleted
+        - display_name
+        - metadata
+        - modified
+        - name
+        - ordinal
+        - prerequisite
+        - required
+        - reserved
+        - table_id
+        - tag_key
+        - type
+        - valid_values
+      type: object
+    IncidentUserDefinedFieldAttributesUpdateRequest:
+      description: Attributes for updating an incident user-defined field. All fields are optional.
+      properties:
+        category:
+          $ref: "#/components/schemas/IncidentUserDefinedFieldCategory"
+        collected:
+          $ref: "#/components/schemas/IncidentUserDefinedFieldCollected"
+        default_value:
+          description: The default value for the field. Must be one of the valid values when valid_values is set.
+          example: "critical"
+          nullable: true
+          type: string
+        display_name:
+          description: The human-readable name shown in the UI.
+          example: "Root Cause"
+          type: string
+        ordinal:
+          description: A decimal string representing the field's display order in the UI.
+          example: "1.5"
+          nullable: true
+          type: string
+        required:
+          description: When true, users must fill out this field on incidents.
+          example: false
+          nullable: true
+          type: boolean
+        valid_values:
+          description: The list of allowed values for dropdown and multiselect fields. Limited to 1000 values.
+          items:
+            $ref: "#/components/schemas/IncidentUserDefinedFieldValidValue"
+          nullable: true
+          type: array
+      type: object
+    IncidentUserDefinedFieldCategory:
+      description: 'The section in which the field appears: "what_happened" or "why_it_happened". When null, the field appears in the Attributes section.'
+      enum:
+        - what_happened
+        - why_it_happened
+      example: what_happened
+      nullable: true
+      type: string
+      x-enum-varnames:
+        - WHAT_HAPPENED
+        - WHY_IT_HAPPENED
+    IncidentUserDefinedFieldCollected:
+      description: The lifecycle stage at which the app prompts users to fill out this field. Cannot be set on required fields.
+      enum:
+        - active
+        - stable
+        - resolved
+        - completed
+      example: active
+      nullable: true
+      type: string
+      x-enum-varnames:
+        - ACTIVE
+        - STABLE
+        - RESOLVED
+        - COMPLETED
+    IncidentUserDefinedFieldCreateData:
+      description: Data for creating an incident user-defined field.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/IncidentUserDefinedFieldAttributesCreateRequest"
+        relationships:
+          $ref: "#/components/schemas/IncidentUserDefinedFieldCreateRelationships"
+        type:
+          $ref: "#/components/schemas/IncidentUserDefinedFieldType"
+      required:
+        - type
+        - attributes
+        - relationships
+      type: object
+    IncidentUserDefinedFieldCreateRelationships:
+      description: Relationships for creating an incident user-defined field.
+      properties:
+        incident_type:
+          $ref: "#/components/schemas/RelationshipToIncidentType"
+      required:
+        - incident_type
+      type: object
+    IncidentUserDefinedFieldCreateRequest:
+      description: Request body for creating an incident user-defined field.
+      properties:
+        data:
+          $ref: "#/components/schemas/IncidentUserDefinedFieldCreateData"
+      required:
+        - data
+      type: object
+    IncidentUserDefinedFieldFieldType:
+      description: The data type of the field. 1=dropdown, 2=multiselect, 3=textbox, 4=textarray, 5=metrictag, 6=autocomplete, 7=number, 8=datetime.
+      enum:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+        - 7
+        - 8
+      example: 3
+      format: int32
+      type: integer
+      x-enum-varnames:
+        - DROPDOWN
+        - MULTISELECT
+        - TEXTBOX
+        - TEXTARRAY
+        - METRICTAG
+        - AUTOCOMPLETE
+        - NUMBER
+        - DATETIME
+    IncidentUserDefinedFieldListMeta:
+      description: Pagination metadata for the user-defined field list response.
+      properties:
+        offset:
+          description: The offset of the current page.
+          example: 0
+          format: int64
+          type: integer
+        size:
+          description: The total number of items in the current page.
+          example: 5
+          format: int64
+          type: integer
+      type: object
+    IncidentUserDefinedFieldListResponse:
+      description: Response containing a list of incident user-defined fields.
+      properties:
+        data:
+          description: An array of user-defined field objects.
+          items:
+            $ref: "#/components/schemas/IncidentUserDefinedFieldResponseData"
+          type: array
+        meta:
+          $ref: "#/components/schemas/IncidentUserDefinedFieldListMeta"
+      required:
+        - data
+        - meta
+      type: object
+    IncidentUserDefinedFieldMetadata:
+      description: Metadata for autocomplete-type user-defined fields, describing how to populate autocomplete options.
+      nullable: true
+      properties:
+        category:
+          description: The category of the autocomplete source.
+          example: "teams_and_services"
+          type: string
+        search_limit_param:
+          description: The query parameter used to limit the number of autocomplete results.
+          example: "page[size]"
+          type: string
+        search_params:
+          additionalProperties: {}
+          description: Additional query parameters to include in the search URL.
+          type: object
+        search_query_param:
+          description: The query parameter used to pass typed input to the search URL.
+          example: "filter"
+          type: string
+        search_result_path:
+          description: The JSON path to the results in the response body.
+          example: "$.data[*].attributes.name"
+          type: string
+        search_url:
+          description: The URL used to populate autocomplete options.
+          example: "/api/v2/incidents/config/services"
+          type: string
+      required:
+        - category
+        - search_url
+        - search_query_param
+        - search_limit_param
+        - search_result_path
+        - search_params
+      type: object
+    IncidentUserDefinedFieldRelationships:
+      description: Relationships of an incident user-defined field.
+      properties:
+        created_by_user:
+          $ref: "#/components/schemas/RelationshipToUser"
+        incident_type:
+          $ref: "#/components/schemas/RelationshipToIncidentType"
+        last_modified_by_user:
+          $ref: "#/components/schemas/RelationshipToUser"
+      required:
+        - created_by_user
+        - last_modified_by_user
+        - incident_type
+      type: object
+    IncidentUserDefinedFieldResponse:
+      description: Response containing a single incident user-defined field.
+      properties:
+        data:
+          $ref: "#/components/schemas/IncidentUserDefinedFieldResponseData"
+      required:
+        - data
+      type: object
+    IncidentUserDefinedFieldResponseData:
+      description: Data object for an incident user-defined field response.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/IncidentUserDefinedFieldAttributesResponse"
+        id:
+          description: The unique identifier of the user-defined field.
+          example: "00000000-0000-0000-0000-000000000000"
+          type: string
+        relationships:
+          $ref: "#/components/schemas/IncidentUserDefinedFieldRelationships"
+        type:
+          $ref: "#/components/schemas/IncidentUserDefinedFieldType"
+      required:
+        - id
+        - type
+        - attributes
+        - relationships
+      type: object
     IncidentUserDefinedFieldType:
       description: The incident user defined fields type.
       enum:
@@ -32874,6 +33256,53 @@ components:
       type: string
       x-enum-varnames:
         - USER_DEFINED_FIELD
+    IncidentUserDefinedFieldUpdateData:
+      description: Data for updating an incident user-defined field.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/IncidentUserDefinedFieldAttributesUpdateRequest"
+        id:
+          description: The unique identifier of the user-defined field to update.
+          example: "00000000-0000-0000-0000-000000000000"
+          type: string
+        type:
+          $ref: "#/components/schemas/IncidentUserDefinedFieldType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    IncidentUserDefinedFieldUpdateRequest:
+      description: Request body for updating an incident user-defined field.
+      properties:
+        data:
+          $ref: "#/components/schemas/IncidentUserDefinedFieldUpdateData"
+      required:
+        - data
+      type: object
+    IncidentUserDefinedFieldValidValue:
+      description: A valid value for an incident user-defined field.
+      properties:
+        description:
+          description: A detailed description of the valid value.
+          example: "A critical severity incident."
+          type: string
+        display_name:
+          description: The human-readable display name for this value.
+          example: "Critical"
+          type: string
+        short_description:
+          description: A short description of the valid value.
+          example: "Critical"
+          type: string
+        value:
+          description: The identifier that is stored when this option is selected.
+          example: "critical"
+          type: string
+      required:
+        - display_name
+        - value
+      type: object
     IncidentsResponse:
       description: Response with a list of incidents.
       properties:
@@ -58781,6 +59210,155 @@ components:
       description: Version of the updated signal. If server side version is higher, update will be rejected.
       format: int64
       type: integer
+    SecurityMonitoringSignalsBulkAssigneeUpdateAttributes:
+      description: Attributes describing the new assignees for a bulk signal update.
+      properties:
+        assignee:
+          description: UUID of the user to assign to the signal. Use an empty string to unassign.
+          example: 773b045d-ccf8-4808-bd3b-955ef6a8c940
+          type: string
+        version:
+          $ref: "#/components/schemas/SecurityMonitoringSignalVersion"
+      required:
+        - assignee
+      type: object
+    SecurityMonitoringSignalsBulkAssigneeUpdateData:
+      description: Data for updating the assignees for multiple security signals.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/SecurityMonitoringSignalsBulkAssigneeUpdateAttributes"
+        id:
+          description: The unique ID of the security signal.
+          example: AAAAAWgN8Xwgr1vKDQAAAABBV2dOOFh3ZzZobm1mWXJFYTR0OA
+          type: string
+        type:
+          $ref: "#/components/schemas/SecurityMonitoringSignalType"
+      required:
+        - id
+        - attributes
+      type: object
+    SecurityMonitoringSignalsBulkAssigneeUpdateRequest:
+      description: Request body for updating the assignee of multiple security signals.
+      properties:
+        data:
+          description: An array of signal assignee updates.
+          items:
+            $ref: "#/components/schemas/SecurityMonitoringSignalsBulkAssigneeUpdateData"
+          maxItems: 199
+          type: array
+      required:
+        - data
+      type: object
+    SecurityMonitoringSignalsBulkStateUpdateData:
+      description: Data for updating the state for multiple security signals.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/SecurityMonitoringSignalStateUpdateAttributes"
+        id:
+          description: The unique ID of the security signal.
+          example: AAAAAWgN8Xwgr1vKDQAAAABBV2dOOFh3ZzZobm1mWXJFYTR0OA
+          type: string
+        type:
+          $ref: "#/components/schemas/SecurityMonitoringSignalType"
+      required:
+        - id
+        - attributes
+      type: object
+    SecurityMonitoringSignalsBulkStateUpdateRequest:
+      description: Request body for updating the triage states of multiple security signals.
+      properties:
+        data:
+          description: An array of signal state updates.
+          items:
+            $ref: "#/components/schemas/SecurityMonitoringSignalsBulkStateUpdateData"
+          maxItems: 199
+          type: array
+      required:
+        - data
+      type: object
+    SecurityMonitoringSignalsBulkTriageEvent:
+      description: A single signal event entry in a bulk triage update response.
+      properties:
+        event:
+          $ref: "#/components/schemas/SecurityMonitoringSignalsBulkTriageEventAttributes"
+        id:
+          description: The unique ID of the security signal.
+          example: AAAAAWgN8Xwgr1vKDQAAAABBV2dOOFh3ZzZobm1mWXJFYTR0OA
+          type: string
+      required:
+        - id
+        - event
+      type: object
+    SecurityMonitoringSignalsBulkTriageEventAttributes:
+      description: Triage attributes of a security signal returned in a bulk update response.
+      properties:
+        archive_comment:
+          $ref: "#/components/schemas/SecurityMonitoringSignalArchiveComment"
+        archive_comment_timestamp:
+          description: Timestamp of the last edit to the archive comment.
+          format: int64
+          type: integer
+        archive_comment_user:
+          $ref: "#/components/schemas/SecurityMonitoringTriageUser"
+        archive_reason:
+          $ref: "#/components/schemas/SecurityMonitoringSignalArchiveReason"
+        assignee:
+          $ref: "#/components/schemas/SecurityMonitoringTriageUser"
+        id:
+          description: The unique ID of the security signal.
+          example: AAAAAWgN8Xwgr1vKDQAAAABBV2dOOFh3ZzZobm1mWXJFYTR0OA
+          type: string
+        incident_ids:
+          $ref: "#/components/schemas/SecurityMonitoringSignalIncidentIds"
+        state:
+          $ref: "#/components/schemas/SecurityMonitoringSignalState"
+        state_update_timestamp:
+          description: Timestamp of the last state update.
+          format: int64
+          type: integer
+        state_update_user:
+          $ref: "#/components/schemas/SecurityMonitoringTriageUser"
+      required:
+        - id
+        - state
+        - assignee
+        - incident_ids
+      type: object
+    SecurityMonitoringSignalsBulkTriageUpdateResponse:
+      description: Response for a bulk triage update of security signals.
+      properties:
+        result:
+          $ref: "#/components/schemas/SecurityMonitoringSignalsBulkTriageUpdateResult"
+        status:
+          description: The status of the bulk operation.
+          example: done
+          type: string
+        type:
+          description: The type of the response.
+          example: status
+          type: string
+      required:
+        - type
+        - status
+        - result
+      type: object
+    SecurityMonitoringSignalsBulkTriageUpdateResult:
+      description: The result payload of a bulk signal triage update.
+      properties:
+        count:
+          description: The number of signals updated.
+          example: 2
+          format: int64
+          type: integer
+        events:
+          description: The list of updated signals.
+          items:
+            $ref: "#/components/schemas/SecurityMonitoringSignalsBulkTriageEvent"
+          type: array
+      required:
+        - count
+        - events
+      type: object
     SecurityMonitoringSignalsListResponse:
       description: "The response object with all security signals matching the request\nand pagination information."
       properties:
@@ -86100,6 +86678,445 @@ paths:
       x-unstable: |-
         **Note**: This endpoint is in public beta.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/incidents/config/user-defined-fields:
+    get:
+      description: Get a list of all incident user-defined fields.
+      operationId: ListIncidentUserDefinedFields
+      parameters:
+        - description: The number of results to return per page. Must be between 0 and 1000.
+          in: query
+          name: page[size]
+          schema:
+            default: 1000
+            format: int64
+            maximum: 1000
+            minimum: 0
+            type: integer
+        - description: The page number to retrieve, starting at 0.
+          in: query
+          name: page[number]
+          schema:
+            default: 0
+            format: int64
+            minimum: 0
+            type: integer
+        - description: When true, include soft-deleted fields in the response.
+          in: query
+          name: include-deleted
+          schema:
+            default: false
+            type: boolean
+        - description: Filter results to fields associated with the given incident type UUID.
+          in: query
+          name: filter[incident-type]
+          schema:
+            type: string
+        - description: Comma-separated list of related resources to include. Supported values are "last_modified_by_user", "created_by_user", and "incident_type".
+          in: query
+          name: include
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          attached_to: "incidents"
+                          category: "what_happened"
+                          collected: "active"
+                          created: "2026-03-18T08:40:04.437887Z"
+                          default_value:
+                          deleted:
+                          display_name: "Root Cause"
+                          metadata:
+                          modified: "2026-03-18T08:40:04.437887Z"
+                          name: "root_cause"
+                          ordinal: "1.1"
+                          prerequisite:
+                          required: false
+                          reserved: false
+                          table_id: 0
+                          tag_key:
+                          type: 1
+                          valid_values:
+                            - description: "A bug in the service code."
+                              display_name: "Service Bug"
+                              value: "service_bug"
+                        id: "6f8f42e0-6a84-4495-9a24-6decb0a87de0"
+                        relationships:
+                          created_by_user:
+                            data:
+                              id: "00000000-0000-0000-0000-000000000001"
+                              type: "users"
+                          incident_type:
+                            data:
+                              id: "7459c30c-c661-4171-9474-db3a486377b2"
+                              type: "incident_types"
+                          last_modified_by_user:
+                            data:
+                              id: "00000000-0000-0000-0000-000000000001"
+                              type: "users"
+                        type: "user_defined_field"
+                    meta:
+                      offset: 0
+                      size: 1
+              schema:
+                $ref: "#/components/schemas/IncidentUserDefinedFieldListResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - incident_read
+      summary: Get a list of incident user-defined fields
+      tags:
+        - Incidents
+      x-menu-order: 52
+      x-permission:
+        operator: AND
+        permissions:
+          - incident_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    post:
+      description: Create an incident user-defined field.
+      operationId: CreateIncidentUserDefinedField
+      parameters:
+        - description: Comma-separated list of related resources to include. Supported values are "last_modified_by_user", "created_by_user", and "incident_type".
+          in: query
+          name: include
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/IncidentUserDefinedFieldCreateRequest"
+        description: Incident user-defined field payload.
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        attached_to: "incidents"
+                        category:
+                        collected:
+                        created: "2026-03-18T08:40:05.185406Z"
+                        default_value:
+                        deleted:
+                        display_name: "Root Cause"
+                        metadata:
+                        modified: "2026-03-18T08:40:05.185406Z"
+                        name: "root_cause"
+                        ordinal: "9"
+                        prerequisite:
+                        required: false
+                        reserved: false
+                        table_id: 0
+                        tag_key:
+                        type: 3
+                        valid_values:
+                      id: "82263487-b540-4c12-8797-58ac1d4fed17"
+                      relationships:
+                        created_by_user:
+                          data:
+                            id: "2f2c94fe-cd6e-4f8e-b9c7-d5755aca09a6"
+                            type: "users"
+                        incident_type:
+                          data:
+                            id: "7459c30c-c661-4171-9474-db3a486377b2"
+                            type: "incident_types"
+                        last_modified_by_user:
+                          data:
+                            id: "2f2c94fe-cd6e-4f8e-b9c7-d5755aca09a6"
+                            type: "users"
+                      type: "user_defined_field"
+              schema:
+                $ref: "#/components/schemas/IncidentUserDefinedFieldResponse"
+          description: CREATED
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - incident_settings_write
+      summary: Create an incident user-defined field
+      tags:
+        - Incidents
+      x-codegen-request-body-name: body
+      x-menu-order: 53
+      x-permission:
+        operator: AND
+        permissions:
+          - incident_settings_write
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/incidents/config/user-defined-fields/{field_id}:
+    delete:
+      description: Delete an incident user-defined field.
+      operationId: DeleteIncidentUserDefinedField
+      parameters:
+        - $ref: "#/components/parameters/IncidentUserDefinedFieldIDPathParameter"
+      responses:
+        "204":
+          description: No Content
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - incident_settings_write
+      summary: Delete an incident user-defined field
+      tags:
+        - Incidents
+      x-menu-order: 56
+      x-permission:
+        operator: AND
+        permissions:
+          - incident_settings_write
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    get:
+      description: Get details of an incident user-defined field.
+      operationId: GetIncidentUserDefinedField
+      parameters:
+        - $ref: "#/components/parameters/IncidentUserDefinedFieldIDPathParameter"
+        - description: Comma-separated list of related resources to include. Supported values are "last_modified_by_user", "created_by_user", and "incident_type".
+          in: query
+          name: include
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        attached_to: "incidents"
+                        category: "what_happened"
+                        collected: "active"
+                        created: "2026-03-18T08:40:04.437887Z"
+                        default_value:
+                        deleted:
+                        display_name: "Root Cause"
+                        metadata:
+                        modified: "2026-03-18T08:40:04.437887Z"
+                        name: "root_cause"
+                        ordinal: "1.1"
+                        prerequisite:
+                        required: false
+                        reserved: false
+                        table_id: 0
+                        tag_key:
+                        type: 1
+                        valid_values:
+                          - description: "A bug in the service code."
+                            display_name: "Service Bug"
+                            value: "service_bug"
+                      id: "6f8f42e0-6a84-4495-9a24-6decb0a87de0"
+                      relationships:
+                        created_by_user:
+                          data:
+                            id: "00000000-0000-0000-0000-000000000001"
+                            type: "users"
+                        incident_type:
+                          data:
+                            id: "7459c30c-c661-4171-9474-db3a486377b2"
+                            type: "incident_types"
+                        last_modified_by_user:
+                          data:
+                            id: "00000000-0000-0000-0000-000000000001"
+                            type: "users"
+                      type: "user_defined_field"
+              schema:
+                $ref: "#/components/schemas/IncidentUserDefinedFieldResponse"
+          description: OK
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - incident_read
+      summary: Get an incident user-defined field
+      tags:
+        - Incidents
+      x-menu-order: 54
+      x-permission:
+        operator: AND
+        permissions:
+          - incident_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    patch:
+      description: Update an incident user-defined field.
+      operationId: UpdateIncidentUserDefinedField
+      parameters:
+        - $ref: "#/components/parameters/IncidentUserDefinedFieldIDPathParameter"
+        - description: Comma-separated list of related resources to include. Supported values are "last_modified_by_user", "created_by_user", and "incident_type".
+          in: query
+          name: include
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/IncidentUserDefinedFieldUpdateRequest"
+        description: Incident user-defined field update payload.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        attached_to: "incidents"
+                        category: "what_happened"
+                        collected:
+                        created: "2026-03-18T08:39:49.913895Z"
+                        default_value:
+                        deleted:
+                        display_name: "Root Cause"
+                        metadata:
+                        modified: "2026-03-18T08:39:49.922909Z"
+                        name: "root_cause"
+                        ordinal: "8"
+                        prerequisite:
+                        required: false
+                        reserved: false
+                        table_id: 0
+                        tag_key:
+                        type: 3
+                        valid_values:
+                      id: "13a731a3-a010-450e-b6a3-3d450a26170c"
+                      relationships:
+                        created_by_user:
+                          data:
+                            id: "8e7d4859-0916-4df8-b51c-5f5a4ea7815e"
+                            type: "users"
+                        incident_type:
+                          data:
+                            id: "95edc42f-c55d-46fa-92a1-a182646454af"
+                            type: "incident_types"
+                        last_modified_by_user:
+                          data:
+                            id: "8e7d4859-0916-4df8-b51c-5f5a4ea7815e"
+                            type: "users"
+                      type: "user_defined_field"
+              schema:
+                $ref: "#/components/schemas/IncidentUserDefinedFieldResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - incident_settings_write
+      summary: Update an incident user-defined field
+      tags:
+        - Incidents
+      x-codegen-request-body-name: body
+      x-menu-order: 55
+      x-permission:
+        operator: AND
+        permissions:
+          - incident_settings_write
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/incidents/import:
     post:
       description: |-
@@ -98743,6 +99760,7 @@ paths:
         - On-Call Team Routing Rules: `on-call-team-routing-rules`
         - Logs Pipelines: `logs-pipeline`
         - Case Management Projects: `case-management-project`
+        - Monitor Notification Rules: `monitor-notification-rule`
 
         #### Supported relations for resources
         Resource Type               | Supported Relations
@@ -98771,6 +99789,7 @@ paths:
         On-Call Team Routing Rules  | `viewer`, `editor`
         Logs Pipelines              | `viewer`, `processors_editor`, `editor`
         Case Management Projects    | `viewer`, `contributor`, `manager`
+        Monitor Notification Rules  | `viewer`, `editor`
       operationId: UpdateRestrictionPolicy
       parameters:
         - $ref: "#/components/parameters/ResourceID"
@@ -104804,6 +105823,90 @@ paths:
         operator: OR
         permissions:
           - security_monitoring_signals_read
+  /api/v2/security_monitoring/signals/bulk/assignee:
+    patch:
+      description: |-
+        Change the triage assignees of multiple security signals at once.
+        The maximum number of signals that can be updated in a single request is 199.
+      operationId: BulkEditSecurityMonitoringSignalsAssignee
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SecurityMonitoringSignalsBulkAssigneeUpdateRequest"
+        description: Attributes describing the signal assignee updates.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SecurityMonitoringSignalsBulkTriageUpdateResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Bulk update triage assignee of security signals
+      tags: ["Security Monitoring"]
+      x-codegen-request-body-name: body
+      x-menu-order: 86
+      "x-permission":
+        operator: OR
+        permissions:
+          - security_monitoring_signals_write
+  /api/v2/security_monitoring/signals/bulk/state:
+    patch:
+      description: |-
+        Change the triage states of multiple security signals at once.
+        The maximum number of signals that can be updated in a single request is 199.
+      operationId: BulkEditSecurityMonitoringSignalsState
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SecurityMonitoringSignalsBulkStateUpdateRequest"
+        description: Attributes describing the signal state updates.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SecurityMonitoringSignalsBulkTriageUpdateResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Bulk update triage state of security signals
+      tags: ["Security Monitoring"]
+      x-codegen-request-body-name: body
+      x-menu-order: 85
+      "x-permission":
+        operator: OR
+        permissions:
+          - security_monitoring_signals_write
   /api/v2/security_monitoring/signals/search:
     post:
       description: |-
