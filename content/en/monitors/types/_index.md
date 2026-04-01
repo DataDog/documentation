@@ -39,6 +39,7 @@ further_reading:
 {{< nextlink href="/monitors/types/forecasts" >}}<strong>Forecast</strong>: Alert when a metric is projected to cross a threshold.{{< /nextlink >}}
 {{< nextlink href="/monitors/types/integration" >}}<strong>Integration</strong>: Monitor metric values or health status from a specific integration.{{< /nextlink >}}
 {{< nextlink href="/monitors/types/process" >}}<strong>Live Process</strong>: Check if one or more processes are running on a host.{{< /nextlink >}}
+{{< nextlink href="/monitors/types/llm_observability" >}}<strong>LLM Observability</strong>: Monitor LLM application performance, errors, token usage, and evaluation scores.{{< /nextlink >}}
 {{< nextlink href="/monitors/types/log" >}}<strong>Logs</strong>: Alert when a specified type of log exceeds a user-defined threshold over a given period of time.{{< /nextlink >}}
 {{< nextlink href="/monitors/types/network" >}}<strong>Network</strong>: Check the status of TCP/HTTP endpoints.{{< /nextlink >}}
 {{< nextlink href="/monitors/types/network_path" >}}<strong>Network Path</strong>: Monitor on Network Path traffic.{{< /nextlink >}}
