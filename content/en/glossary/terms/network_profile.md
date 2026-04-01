@@ -1,4 +1,5 @@
 ---
+id: network_profile
 title: network profile
 core_product:
   - cloud network monitoring

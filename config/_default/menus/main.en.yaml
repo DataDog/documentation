@@ -6013,11 +6013,16 @@ menu:
       parent: observability_pipelines_configuration
       identifier: observability_pipelines_update_existing_pipelines
       weight: 106
+    - name: Export Pipeline
+      url: observability_pipelines/configuration/export_pipeline_configuration/
+      parent: observability_pipelines_configuration
+      identifier: observability_pipelines_export_pipeline_configuration
+      weight: 107
     - name: Access Control
       url: observability_pipelines/configuration/access_control
       parent: observability_pipelines_configuration
       identifier: observability_pipelines_access_control
-      weight: 107
+      weight: 108
     - name: Sources
       url: observability_pipelines/sources/
       parent: observability_pipelines
@@ -8933,7 +8938,7 @@ menu:
       parent: pa_experiments
       identifier: pa_experiments_plan
       weight: 1
-    - name: Define Metrics
+    - name: Create Experiment Metrics
       url: experiments/defining_metrics
       parent: pa_experiments
       identifier: pa_experiments_metrics
@@ -9039,6 +9044,11 @@ menu:
       parent: session_replay
       identifier: session_replay_heatmaps
       weight: 4
+    - name: Guides
+      url: /session_replay/guide
+      parent: session_replay
+      identifier: session_replay_guide
+      weight: 5
     - name: Account Management
       url: account_management/
       pre: cog-2

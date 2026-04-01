@@ -1,4 +1,5 @@
 ---
+id: measure
 title: measure
 core_product:
   - log management

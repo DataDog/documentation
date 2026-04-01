@@ -1,4 +1,5 @@
 ---
+id: histogram
 core_product:
 - モニター
 title: histogram

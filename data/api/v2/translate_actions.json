@@ -1468,6 +1468,30 @@
     "request_description": "Incident type payload.",
     "request_schema_description": "Patch request for an incident type."
   },
+  "ListIncidentUserDefinedFields": {
+    "description": "Get a list of all incident user-defined fields.",
+    "summary": "Get a list of incident user-defined fields"
+  },
+  "CreateIncidentUserDefinedField": {
+    "description": "Create an incident user-defined field.",
+    "summary": "Create an incident user-defined field",
+    "request_description": "Incident user-defined field payload.",
+    "request_schema_description": "Request body for creating an incident user-defined field."
+  },
+  "DeleteIncidentUserDefinedField": {
+    "description": "Delete an incident user-defined field.",
+    "summary": "Delete an incident user-defined field"
+  },
+  "GetIncidentUserDefinedField": {
+    "description": "Get details of an incident user-defined field.",
+    "summary": "Get an incident user-defined field"
+  },
+  "UpdateIncidentUserDefinedField": {
+    "description": "Update an incident user-defined field.",
+    "summary": "Update an incident user-defined field",
+    "request_description": "Incident user-defined field update payload.",
+    "request_schema_description": "Request body for updating an incident user-defined field."
+  },
   "ImportIncident": {
     "description": "Import an incident from an external system. This endpoint allows you to create incidents with\nhistorical data such as custom timestamps for detection, declaration, and resolution.\nImported incidents do not execute integrations or notification rules.",
     "summary": "Import an incident",
@@ -2825,7 +2849,7 @@
     "description": "Batch query reference table rows by their primary key values.  Returns only found rows in the included array.",
     "summary": "Batch rows query",
     "request_description": "",
-    "request_schema_description": ""
+    "request_schema_description": "Request object for querying multiple rows from a reference table by their identifiers."
   },
   "ListTables": {
     "description": "List all reference tables in this organization.",
@@ -3662,6 +3686,18 @@
   "ListSecurityMonitoringSignals": {
     "description": "The list endpoint returns security signals that match a search query.\nBoth this endpoint and the POST endpoint can be used interchangeably when listing\nsecurity signals.",
     "summary": "Get a quick list of security signals"
+  },
+  "BulkEditSecurityMonitoringSignalsAssignee": {
+    "description": "Change the triage assignees of multiple security signals at once.\nThe maximum number of signals that can be updated in a single request is 199.",
+    "summary": "Bulk update triage assignee of security signals",
+    "request_description": "Attributes describing the signal assignee updates.",
+    "request_schema_description": "Request body for updating the assignee of multiple security signals."
+  },
+  "BulkEditSecurityMonitoringSignalsState": {
+    "description": "Change the triage states of multiple security signals at once.\nThe maximum number of signals that can be updated in a single request is 199.",
+    "summary": "Bulk update triage state of security signals",
+    "request_description": "Attributes describing the signal state updates.",
+    "request_schema_description": "Request body for updating the triage states of multiple security signals."
   },
   "SearchSecurityMonitoringSignals": {
     "description": "Returns security signals that match a search query.\nBoth this endpoint and the GET endpoint can be used interchangeably for listing\nsecurity signals.",

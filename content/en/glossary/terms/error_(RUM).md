@@ -1,4 +1,5 @@
 ---
+id: error_rum
 title: error
 core_product:
   - real user monitoring
