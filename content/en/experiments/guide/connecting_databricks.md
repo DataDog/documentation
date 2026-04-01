@@ -45,7 +45,7 @@ Datadog Experiments connects to Databricks through the [Datadog Databricks integ
    1. Click **Generate**.
    1. Note your **Secret** and **Client ID**.
    1. Click **Done**.
-1. In the left menu, click **Identity and access**.
+1. In the **Settings** menu, click **Identity and access**.
 1. On the **Groups** row, click **Manage**, then:
    1. Click **admins**, then **Add members**.
    1. Enter the service principal name and click **Add**.
