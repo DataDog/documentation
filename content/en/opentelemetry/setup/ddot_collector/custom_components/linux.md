@@ -240,10 +240,9 @@ After the build completes, verify the custom `otel-agent` binary includes your a
      --role="roles/artifactregistry.reader"
    ```
    </div>
-3. Install the custom DDOT Collector package using the following commands:
+3. Install the custom DDOT Collector package using the following command:
    ```shell
-   sudo DD_INSTALLER_REGISTRY_AUTH=gcr datadog-installer install "oci://us-central1-docker.pkg.dev/datadog-sandbox/ddot-byoc-linux/agent-package:7.78.0-rc.4-1"
-   sudo DD_INSTALLER_REGISTRY_AUTH=gcr datadog-installer extension install "oci://us-central1-docker.pkg.dev/datadog-sandbox/ddot-byoc-linux/agent-package:7.78.0-rc.4-1" ddot
+   sudo DD_INSTALLER_REGISTRY_AUTH=gcr DD_OTELCOLLECTOR_ENABLED=true datadog-installer install "oci://us-central1-docker.pkg.dev/datadog-sandbox/ddot-byoc-linux/agent-package:7.78.0-rc.4-1"
    ```
 4. If the DDOT Collector (Agent) starts, then the build process was successful.
 
