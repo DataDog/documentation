@@ -176,42 +176,43 @@ This enables each protocol in the default port (`4317` for OTLP/gRPC and `4318` 
 {{% /tab %}}
 {{% tab "Manual (Daemonset)" %}}
 
-1. Follow the [Kubernetes Agent setup][1].
+1.  Follow the [Manual Kubernetes installation guide][1] for the base installation.
 
-2. Configure the following environment variables in both the trace Agent container and the core Agent container:
+2.  Configure the following environment variables in both the `trace-agent` container and the core `agent` container:
 
-   For gRPC:
-   ```
-   name: DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_GRPC_ENDPOINT # enables gRPC receiver on port 4317
-   value: "0.0.0.0:4317"
-   ```
+    For gRPC:
+    ```yaml
+    name: DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_GRPC_ENDPOINT # enables gRPC receiver on port 4317
+    value: "0.0.0.0:4317"
+    ```
 
-   For HTTP:
-   ```
-   name: DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_HTTP_ENDPOINT # enables HTTP receiver on port 4318
-   value: "0.0.0.0:4318"
-   ```
-3. Map the container ports 4317 or 4318 to the host port for the core Agent container:
+    For HTTP:
+    ```yaml
+    name: DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_HTTP_ENDPOINT # enables HTTP receiver on port 4318
+    value: "0.0.0.0:4318"
+    ```
 
-   For gRPC:
-   ```
-   ports:
-     - containerPort: 4317
-       hostPort: 4317
-       name: traceportgrpc
-       protocol: TCP
-   ```
+3. Map the container ports 4317 or 4318 to the host port for the core `agent` container:
 
-   For HTTP
-   ```
-   ports:
-     - containerPort: 4318
-       hostPort: 4318
-       name: traceporthttp
-       protocol: TCP
-   ```
+    For gRPC:
+    ```yaml
+    ports:
+      - containerPort: 4317
+        hostPort: 4317
+        name: traceportgrpc
+        protocol: TCP
+    ```
 
-[1]: /agent/kubernetes/?tab=daemonset
+    For HTTP
+    ```yaml
+    ports:
+      - containerPort: 4318
+        hostPort: 4318
+        name: traceporthttp
+        protocol: TCP
+    ```
+
+[1]: /containers/guide/kubernetes_daemonset/
 {{% /tab %}}
 {{% tab "AWS Lambda" %}}
 
