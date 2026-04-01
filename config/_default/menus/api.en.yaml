@@ -9671,6 +9671,71 @@ menu:
         unstable:
           - v2
         order: 49
+    - name: Update an incident user-defined field
+      url: '#update-an-incident-user-defined-field'
+      identifier: incidents-update-an-incident-user-defined-field
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateIncidentUserDefinedField
+        unstable:
+          - v2
+        order: 55
+    - name: Get an incident user-defined field
+      url: '#get-an-incident-user-defined-field'
+      identifier: incidents-get-an-incident-user-defined-field
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetIncidentUserDefinedField
+        unstable:
+          - v2
+        order: 54
+    - name: Delete an incident user-defined field
+      url: '#delete-an-incident-user-defined-field'
+      identifier: incidents-delete-an-incident-user-defined-field
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteIncidentUserDefinedField
+        unstable:
+          - v2
+        order: 56
+    - name: Create an incident user-defined field
+      url: '#create-an-incident-user-defined-field'
+      identifier: incidents-create-an-incident-user-defined-field
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateIncidentUserDefinedField
+        unstable:
+          - v2
+        order: 53
+    - name: Get a list of incident user-defined fields
+      url: '#get-a-list-of-incident-user-defined-fields'
+      identifier: incidents-get-a-list-of-incident-user-defined-fields
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListIncidentUserDefinedFields
+        unstable:
+          - v2
+        order: 52
     - name: Update an incident type
       url: '#update-an-incident-type'
       identifier: incidents-update-an-incident-type

@@ -1468,6 +1468,30 @@
     "request_description": "Incident type payload.",
     "request_schema_description": "Patch request for an incident type."
   },
+  "ListIncidentUserDefinedFields": {
+    "description": "Get a list of all incident user-defined fields.",
+    "summary": "Get a list of incident user-defined fields"
+  },
+  "CreateIncidentUserDefinedField": {
+    "description": "Create an incident user-defined field.",
+    "summary": "Create an incident user-defined field",
+    "request_description": "Incident user-defined field payload.",
+    "request_schema_description": "Request body for creating an incident user-defined field."
+  },
+  "DeleteIncidentUserDefinedField": {
+    "description": "Delete an incident user-defined field.",
+    "summary": "Delete an incident user-defined field"
+  },
+  "GetIncidentUserDefinedField": {
+    "description": "Get details of an incident user-defined field.",
+    "summary": "Get an incident user-defined field"
+  },
+  "UpdateIncidentUserDefinedField": {
+    "description": "Update an incident user-defined field.",
+    "summary": "Update an incident user-defined field",
+    "request_description": "Incident user-defined field update payload.",
+    "request_schema_description": "Request body for updating an incident user-defined field."
+  },
   "ImportIncident": {
     "description": "Import an incident from an external system. This endpoint allows you to create incidents with\nhistorical data such as custom timestamps for detection, declaration, and resolution.\nImported incidents do not execute integrations or notification rules.",
     "summary": "Import an incident",
