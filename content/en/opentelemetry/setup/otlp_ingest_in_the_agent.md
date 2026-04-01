@@ -100,7 +100,7 @@ These configurations can be applied through either the <code>docker</code> comma
 
 1.  Follow the [Kubernetes Agent setup][1] for the base installation.
 
-2.  Enable the preferred protocol HTTP or gRPC in your Operator's `datadog-agent.yaml` manifest:
+2.  Enable the preferred protocol gRPC or HTTP in your Operator's `datadog-agent.yaml` manifest:
 
     For gRPC:
     ```yaml
@@ -142,38 +142,37 @@ This enables each protocol in the default port (`4317` for OTLP/gRPC and `4318` 
 {{% /tab %}}
 {{% tab "Helm" %}}
 
-1. Follow the [Kubernetes Agent setup][1].
+1.  Follow the [Kubernetes Agent setup][1] for the base installation.
 
-2. Enable the OTLP endpoints in the Agent by editing the `datadog.otlp` section of the `values.yaml` file:
+2.  Enable the preferred protocol gRPC or HTTP in your Helm's `datadog-values.yaml` file:
 
-   For gRPC:
-   ```
-   otlp:
-    receiver:
-      protocols:
-        grpc:
-          endpoint: 0.0.0.0:4317
-          enabled: true
-    logs:
-      enabled: false
-   ```
+    For gRPC:
+    ```yaml
+    datadog:
+      # (...)
+      otlp:
+        receiver:
+          protocols:
+            grpc:
+              enabled: true
+    ```
 
-   For HTTP:
-   ```
-   otlp:
-    receiver:
-      protocols:
-        http:
-          endpoint: 0.0.0.0:4318
-          enabled: true
-    logs:
-      enabled: false
-   ```
+    For HTTP:
+    ```yaml
+    datadog:
+      # (...)
+      otlp:
+        receiver:
+          protocols:
+            http:
+              enabled: true
+    ```
+
+{{% k8s-helm-redeploy %}}
 
 This enables each protocol in the default port (`4317` for OTLP/gRPC and `4318` for OTLP/HTTP). Metrics and traces are enabled by default.
 
-
-[1]: /agent/kubernetes/?tab=helm
+[1]: /agent/kubernetes/
 {{% /tab %}}
 {{% tab "Manual (Daemonset)" %}}
 
@@ -284,16 +283,20 @@ spec:
 {{% /tab %}}
 {{% tab "Helm" %}}
 
-In your `values.yaml` file:
+In your `datadog-values.yaml` file:
 
 ```yaml
 datadog:
-  logs:
-    enabled: true
+  # (...)
   otlp:
+    #(... enable gRPC or HTTP ingestion...)
     logs:
       enabled: true
+  logs:
+    enabled: true
 ```
+
+{{% k8s-helm-redeploy %}}
 
 {{% /tab %}}
 {{% tab "Manual (Daemonset)" %}}
