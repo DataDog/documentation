@@ -72,7 +72,7 @@ The test automatically pauses during the downtime's scheduled time slots.
 
 **Note**: You cannot create a downtime from the test creation form. To create one, navigate to [**Settings > Downtimes**][2].
 
-{{< img src="synthetics/settings/add_downtime_to_test.png" alt="The Downtimes section in the test creation form showing a Select downtimes dropdown expanded with available downtimes listed and a Manage downtimes link" style="width:90%;" >}}
+{{< img src="synthetics/settings/add_downtime_to_test_2.png" alt="The Downtimes section in the test creation form showing a Select downtimes dropdown expanded with available downtimes listed and a Manage downtimes link" style="width:90%;" >}}
 
 ### From the Tests or Test Suites page
 
