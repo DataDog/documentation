@@ -68,6 +68,10 @@ Use the following task definition as a starting point:
                     "value": "true"
                 },
                 {
+                    "name": "DD_OTELCOLLECTOR_INSTALLATION_METHOD",
+                    "value": "ecs-fargate"
+                },
+                {
                     "name": "DD_SITE",
                     "value": "<DATADOG_SITE>"
                 },

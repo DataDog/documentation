@@ -92,6 +92,8 @@ spec:
               value: "<DATADOG_SITE>"
             - name: DD_OTELCOLLECTOR_ENABLED
               value: "true"
+            - name: DD_OTELCOLLECTOR_INSTALLATION_METHOD
+              value: "eks-fargate"
             - name: DD_EKS_FARGATE
               value: "true"
             - name: DD_LOGS_ENABLED
