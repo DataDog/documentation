@@ -1,11 +1,11 @@
 ---
 algolia:
   tags:
-  - tráfico de red
-  - destinos
-  - puertos
-  - almacenamiento de datos en buffer
-  - direcciones IP estáticas
+  - network traffic
+  - destinations
+  - ports
+  - data buffering
+  - static IP addresses
 aliases:
 - /es/account_management/faq/what-are-the-required-ip-s-and-ports-i-need-open-to-connect-to-the-datadog-service
 - /es/account_management/faq/can-i-whitelist-the-ip-addresses-for-data-coming-from-datadog-via-webhook-and-integrations
@@ -14,31 +14,30 @@ aliases:
 - /es/agent/guide/network
 further_reading:
 - link: /getting_started/site
-  tag: Documentación
-  text: Más información sobre el sitio de Datadog
+  tag: Documentation
+  text: Aprende sobre el sitio de Datadog
 - link: /logs/
-  tag: Documentación
-  text: Recopilar logs
+  tag: Documentation
+  text: Recopila tus registros
 - link: /infrastructure/process
-  tag: Documentación
-  text: Recopilar procesos
-- link: rastreo
-  tag: Documentación
-  text: Recopilar trazas (traces)
+  tag: Documentation
+  text: Recopila tus procesos
+- link: tracing
+  tag: Documentation
+  text: Recopila tus trazas
 title: Tráfico de red
 ---
-
-## Información general
+## Resumen
 
 <div class="alert alert-danger">
-El tráfico siempre se inicia desde el Agent hacia Datadog. Nunca se inician sesiones desde Datadog hacia el Agent.
+El tráfico siempre es iniciado por el Agente hacia Datadog. Nunca se inician sesiones desde Datadog de regreso al Agente.
 </div>
 
-Todo el tráfico del Agent se envía a través de SSL. El destino depende del sitio y servicio de Datadog. Para ver los destinos basados en tu [sitio de Datadog][11], haz clic en el selector `DATADOG SITE` de la derecha.
+Todo el tráfico del Agente se envía a través de SSL. El destino depende del servicio y sitio de Datadog. Para ver destinos basados en tu [sitio de Datadog][11], haz clic en el selector `DATADOG SITE` a la derecha.
 
 ## Instalación
 
-Añade los siguientes dominios a tu lista de inclusión para permitir la instalación del Agent:
+Agrega los siguientes dominios a tu lista de inclusión para permitir la instalación del Agente:
 
 - `install.datadoghq.com`
 - `yum.datadoghq.com`
@@ -48,57 +47,57 @@ Añade los siguientes dominios a tu lista de inclusión para permitir la instala
 
 ## Destinos
 <div class="alert alert-warning">
-A partir de la versión 7.67.0, el Agent convierte los sitios Datadog en nombres de dominio completos (añadiendo un punto al final del dominio) para reducir el número de consultas DNS.
-Por ejemplo, envía las cargas útiles de APM a <code>trace.agent.datadoghq.com.</code>.<br>
-Este comportamiento se puede desactivar en la versión 7.72.0 y posteriores configurando <code>convert_dd_site_fqdn.enabled</code> como <code>falso</code> en la configuración, o con la variable de entorno <code>DD_CONVERT_DD_SITE_FQDN_ENABLED=false</code>.
+A partir de la versión 7.67.0, el Agente convierte los sitios de Datadog en nombres de dominio completamente calificados (agregando un punto al final del dominio) para reducir el número de consultas DNS.
+Por ejemplo, envía cargas útiles de APM a <code>trace.agent.datadoghq.com.</code>.<br>
+Este comportamiento se puede desactivar en la versión 7.72.0 y posteriores configurando <code>convert_dd_site_fqdn.enabled</code> a <code>false</code> en la configuración, o con la variable de entorno <code>DD_CONVERT_DD_SITE_FQDN_ENABLED=false</code>.
 </div>
 
 [APM][1]
 : `trace.agent.`{{< region-param key="dd_site" code="true" >}}<br>
 `instrumentation-telemetry-intake.`{{< region-param key="dd_site" code="true" >}}
 
-[LLM Observabilty][23]
+[LLM Observabilidad][23]
 : `llmobs-intake.`{{< region-param key="dd_site" code="true" >}}
 
-[Imágenes de contenedor][13]
+[Imágenes de Contenedor][13]
 : `contimage-intake.`{{< region-param key="dd_site" code="true" >}}
 
-[Live Containers][3], [Live Process][4], [Monitorización de red en la nube][24], [Universal Service Monitoring][25]
+[Contenedores en Vivo][3], [Proceso en Vivo][4], [Monitoreo de Red en la Nube][24], [Monitoreo de Servicio Universal][25]
 : `process.`{{< region-param key="dd_site" code="true" >}}
 
-[Monitorización de dispositivos de red][10]
+[Monitoreo de Dispositivos de Red][10]
 : `ndm-intake.`{{< region-param key="dd_site" code="true" >}}<br>
 `snmp-traps-intake.`{{< region-param key="dd_site" code="true" >}}<br>
 `ndmflow-intake.`{{< region-param key="dd_site" code="true" >}}
 
-[Network Path][14]
+[Ruta de Red][14]
 : `netpath-intake.`{{< region-param key="dd_site" code="true" >}}
 
 [Orquestador][5]
 : `orchestrator.`{{< region-param key="dd_site" code="true" >}}<br>
 `contlcycle-intake.`{{< region-param key="dd_site" code="true" >}}
 
-[Generación de perfiles][7]
+[Perfilado][7]
 : `intake.profile.`{{< region-param key="dd_site" code="true" >}}
 
-[Real User Monitoring (RUM)][6]
+[Monitoreo de Usuario Real (RUM)][6]
 : {{< region-param key="browser_sdk_endpoint_domain" code="true" >}}
 
-[Cloud Security Vulnerabilities][29]
+[Vulnerabilidades de Seguridad en la Nube][29]
 : `sbom-intake.`{{< region-param key="dd_site" code="true" >}}
 
-[Localizaciones privadas de la monitorización Synthetic][8]
-: Synthetics Worker v1.5.0 o posteriores: `intake.synthetics.`{{< region-param key="dd_site" code="true" >}} es el único endpoint que necesitas configurar.<br>
-Resultados de la prueba de API para las versiones de Synthetics Worker superiores a la 0.1.6: `intake.synthetics.`{{< region-param key="dd_site" code="true" >}}<br>
-Resultados de la prueba del navegador para las versiones de Synthetics Worker superiores a la 0.2.0: `intake-v2.synthetics.`{{< region-param key="dd_site" code="true" >}}<br>
-Resultados de la prueba de API para las versiones de Synthetics Worker anteriores a la 0.1.5: `api.`{{< region-param key="dd_site" code="true" >}}
+[Monitoreo Sintético en Ubicaciones Privadas][8]
+: Trabajador Sintético v1.5.0 o posterior: `intake.synthetics.`{{< region-param key="dd_site" code="true" >}} es el único punto final que necesitas configurar.<br>
+Resultados de pruebas de API para el Trabajador Sintético > v0.1.6: `intake.synthetics.`{{< region-param key="dd_site" code="true" >}}<br>
+Resultados de pruebas de navegador para el Trabajador Sintético > v0.2.0: `intake-v2.synthetics.`{{< region-param key="dd_site" code="true" >}}<br>
+Resultados de pruebas de API para el Trabajador Sintético < v0.1.5: `api.`{{< region-param key="dd_site" code="true" >}}
 
 {{% site-region region="us,eu,us3,us5,ap1,ap2" %}}
 
-[Configuración remota][101]
+[Configuración Remota][101]
 : `config.`{{< region-param key="dd_site" code="true" >}}
 
-[Monitorización de base de datos][102]
+[Monitoreo de Base de Datos][102]
 : `dbm-metrics-intake.`{{< region-param key="dd_site" code="true" >}}<br>
 `dbquery-intake.`{{< region-param key="dd_site" code="true" >}}
 
@@ -107,85 +106,87 @@ Resultados de la prueba de API para las versiones de Synthetics Worker anteriore
 
 {{% /site-region %}}
 
-[Logs][30] & [Logs HIPAA][31]
-: TCP: {{< region-param key=tcp_endpoint code="true" >}}<br>
-HTTP: {{< region-param key=agent_http_endpoint code="true" >}}<br>
-Otros: Consultar [endpoints de logs][32]
+{{% logs-tcp-disclaimer %}}
 
-[Logs HIPAA legacy][31]
+[Registros][30] & [registros HIPAA][31]
+: (Obsoleto) TCP: {{< region-param key=tcp_endpoint code="true" >}}<br>
+HTTP: {{< region-param key=agent_http_endpoint code="true" >}}<br>
+Otro: Ver [puntos finales de registros][32]
+
+[Registros HIPAA legado][31] (Obsoleto, TCP no soportado)
 : {{< region-param key=hipaa_logs_legacy code="true" >}}
 
-[Métricas][26], [Checks de servicio][27], [Eventos][28] y otros metadatos del Agent 
+[Métricas][26], [Verificaciones de Servicio][27], [Eventos][28], y otros metadatos del Agente
 : `<VERSION>-app.agent.`{{< region-param key="dd_site" code="true" >}}<br>
-Por ejemplo, el Agent v7.31.0 informa a `7-31-0-app.agent.`{{< region-param key="dd_site" code="true" >}}. Debes añadir `*.agent.`{{< region-param key="dd_site" code="true" >}} a tu lista de inclusión en tu(s) firewall(s).<br>
-Desde la versión 6.1.0, el Agent también consulta la API de Datadog para proporcionar funciones no críticas (por ejemplo, mostrar la validez de la clave de la API configurada):<br>
-Agent v7.18.0 o 6.18.0 y posteriores: `api.`{{< region-param key="dd_site" code="true" >}}<br>
-Agent < v7.18.0 o 6.18.0: `app.`{{< region-param key="dd_site" code="true" >}}
+Por ejemplo, el Agente v7.31.0 reporta a `7-31-0-app.agent.`{{< region-param key="dd_site" code="true" >}}. Debes agregar `*.agent.`{{< region-param key="dd_site" code="true" >}} a tu lista de inclusión en tu(s) firewall(s).<br>
+Desde v6.1.0, el Agente también consulta la API de Datadog para proporcionar funcionalidad no crítica (Por ejemplo, mostrar la validez de la clave API configurada):<br>
+Agente v7.18.0 o 6.18.0 y versiones posteriores: `api.`{{< region-param key="dd_site" code="true" >}}<br>
+Agente < v7.18.0 o 6.18.0: `app.`{{< region-param key="dd_site" code="true" >}}
 
-[Flare del Agent][12]
+[Agente flare][12]
 : `<VERSION>-flare.agent.`{{< region-param key="dd_site" code="true" >}}<br>
-Por ejemplo, la versión 7.31.0 del Agent envía datos de flare a `7-31-0-flare.agent.`{{< region-param key="dd_site" code="true" >}}. Debes añadir `*.agent.`{{< region-param key="dd_site" code="true" >}} a la lista de inclusión en tus firewalls.<br>
+Por ejemplo, el Agente v7.31.0 envía datos de flare a `7-31-0-flare.agent.`{{< region-param key="dd_site" code="true" >}}. Debes agregar `*.agent.`{{< region-param key="dd_site" code="true" >}} a tu lista de inclusión en tu(s) firewall(s).<br>
 
 ### Direcciones IP estáticas
 
-Todos estos dominios son registros **CNAME** que apuntan a un conjunto de direcciones IP estáticas. Puedes encontrar estas direcciones en `https://ip-ranges.`{{< region-param key="dd_site" code="true" >}}.
+Todos estos dominios son registros **CNAME** que apuntan a un conjunto de direcciones IP estáticas. Estas direcciones se pueden encontrar en `https://ip-ranges.`{{< region-param key="dd_site" code="true" >}}.
 
-La información se estructura como JSON siguiendo este esquema:
+La información está estructurada como JSON siguiendo este esquema:
 
 {{< code-block lang="text" disable_copy="true" >}}
 {
-    "version": 1, // <-- se incrementa cada vez que se modifica esta información
-    "modified": "YYYY-MM-DD-HH-MM-SS", // <-- fecha y hora de la última modificación
-    "agents": { // <-- las IP utilizadas por el Agent para enviar métricas a Datadog
-        "prefixes_ipv4": [ // <-- lista de bloques CIDR IPv4
+    "version": 1,                          // <-- incremented every time this information is changed
+    "modified": "YYYY-MM-DD-HH-MM-SS",     // <-- timestamp of the last modification
+    "agents": {                            // <-- the IPs used by the Agent to submit metrics to Datadog
+        "prefixes_ipv4": [                 // <-- list of IPv4 CIDR blocks
             "a.b.c.d/x",
             ...
         ],
-        "prefixes_ipv6": [ // <-- lista de bloques CIDR IPv6
+        "prefixes_ipv6": [                 // <-- list of IPv6 CIDR blocks
             ...
         ]
     },
-    "api": {...}, // <-- las IP utilizadas por el Agent para funciones no críticas (consulta de información desde la API).
-    "apm": {...}, // <-- las IP utilizadas por el Agent para enviar datos de APM a Datadog
-    "logs": {...}, // <-- las IP utilizadas por el Agent para enviar los logs a Datadog
-    "process": {...}, // <-- las IP utilizadas por el Agent para enviar datos de proceso a Datadog
-    "orchestrator": {...}, // <-- las IP utilizadas por el Agent para enviar datos del contenedor a Datadog
-    "remote-configuration": {...}, // <-- las IP utilizadas por el Agent para recuperar su configuración dinámica
-    "synthetics": {...}, // <-- las IP de source (fuente) utilizadas por los trabajadores de Synthetic (no utilizadas por el Agent)
-    "synthetics-private-locations": {...}, // <-- las IP utilizadas por los trabajadores de Synthetics Private Locations para enviar datos a Datadog (no utilizadas por el Agent)
-    "webhooks": {...}                      // <-- las IP de source (fuente) utilizadas por Datadog para conectarse a infraestructuras de terceros a través de HTTP (no utilizadas por el Agent)
+    "api": {...},                          // <-- the IPs used by the Agent for non-critical functionality (querying information from API)
+    "apm": {...},                          // <-- the IPs used by the Agent to submit APM data to Datadog
+    "logs": {...},                         // <-- the IPs used by the Agent to submit logs to Datadog
+    "process": {...},                      // <-- the IPs used by the Agent to submit process data to Datadog
+    "orchestrator": {...},                 // <-- the IPs used by the Agent to submit container data to Datadog
+    "remote-configuration": {...},         // <-- the IPs used by the Agent to retrieve its dynamic configuration
+    "synthetics": {...},                   // <-- the source IPs used by Synthetic workers (not used by the Agent)
+    "synthetics-private-locations": {...}, // <-- the IPs used by Synthetics Private Locations workers to submit data to Datadog (not used by the Agent)
+    "webhooks": {...}                      // <-- the source IPs used by Datadog to connect to 3rd party infrastructure over HTTP (not used by the Agent)
 }
 {{< /code-block >}}
 
-Cada sección tiene un endpoint específico. Por ejemplo:
+Cada sección tiene un endpoint dedicado, por ejemplo:
 
 - `https://ip-ranges.{{< region-param key="dd_site" >}}/logs.json` para las IPs utilizadas para recibir datos de logs a través de TCP.
 - `https://ip-ranges.{{< region-param key="dd_site" >}}/apm.json` para las IPs utilizadas para recibir datos de APM.
 
 ### Inclusión
 
-Añade todos los `ip-ranges` a tu lista de inclusión. Aunque solo un subconjunto esté activo en un momento dado, con el paso del tiempo se producen variaciones en el conjunto debido al funcionamiento y mantenimiento regulares de la red.
+Agrega todos los `ip-ranges` a tu lista de inclusión. Aunque solo un subconjunto está activo en un momento dado, hay variaciones a lo largo del tiempo dentro de todo el conjunto debido a la operación y mantenimiento regular de la red.
 
 ## Puertos abiertos
 
 <div class="alert alert-danger">
-Todo el tráfico saliente se envía por SSL a través de TCP o UDP.
+Todo el tráfico saliente se envía a través de SSL por TCP o UDP.
 <br><br>
-Asegúrate de que solo puedan acceder al Agent tus aplicaciones o fuentes de red de confianza mediante una regla de cortafuegos o una restricción de red similar. El acceso que no es de confianza puede permitir a actores maliciosos realizar varias acciones invasivas, entre otras, escribir trazas y métricas en tu cuenta de Datadog u obtener información sobre tu configuración y tus servicios.
+Asegúrate de que el Agente sea accesible solo por tus aplicaciones o fuentes de red de confianza utilizando una regla de firewall o una restricción de red similar. El acceso no confiable puede permitir que actores maliciosos realicen varias acciones invasivas, incluyendo, pero no limitado a, escribir trazas y métricas en tu cuenta de Datadog, o obtener información sobre tu configuración y servicios.
 </div>
 
-Abre los siguientes puertos para beneficiarte de todas las funcionalidades del **Agent**:
+Abre los siguientes puertos para beneficiarte de todas las funcionalidades del **Agente**:
 
-#### Salida
+#### Saliente
 
 {{% site-region region="us,eu" %}}
 
-| Producto/Función | Puerto | Protocolo | Descripción |
-| ------  | ---- | ------- | ----------- |
-| Agent<br>APM<br>Contenedores<br>Procesos activos<br>Métricas<br>Monitorización de redes en la nube<br>Universal Service Monitoring | 443 | TCP | La mayoría de los datos del Agent utilizan el puerto 443. |
-| [Autoescala personalizada del Agent][22] | 8443 | TCP |  |
-| Recopilación de logs | {{< region-param key=web_integrations_port >}} | TCP | Registro a través de TCP. Consulta [endpoints de logs][21] para otros tipos de connection (conexión). |
-| NTP | 123 | UDP | Protocolo de tiempo de red (NTP). Consulta [Destinos NTP predeterminados][20].<br>Para obtener información sobre la solución de problemas NTP, consulta [Problemas NTP][19]. |
+| Producto/Funcionalidad                                                                                                                                                    | Puerto                                           | Protocolo         | Descripción                                                                                                                                                                                 |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------- | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Agente<br>APM<br>Contenedores<br>Procesos en Vivo<br>Métricas<br>Monitoreo de Red en la Nube<br>Monitoreo Universal de Servicios                                                      | 443                                            | TCP              | La mayoría de los datos del Agente utilizan el puerto 443.                                                                                                                                                              |
+| [Escalado Automático de Agentes Personalizados][22]                                                                                                                                           | 8443                                           | TCP              |                                                                                                                                                                                             |
+| Recolección de registros                                                                                                                                                           | {{< region-param key=web_integrations_port >}} | (Obsoleto) TCP | Registro a través de TCP. <br>**Nota**: La recolección de registros TCP **no está soportada**. Datadog no proporciona **garantías de entrega o confiabilidad** al usar TCP, y los datos de registro pueden perderse sin previo aviso. Para una ingestión confiable, utiliza el punto de entrada HTTP, un Agente oficial de Datadog o una integración de reenvío en su lugar. Para otros tipos de conexión, consulta [puntos finales de registros][21]. |
+| NTP                                                                                                                                                                      | 123                                            | UDP              | Protocolo de Tiempo de Red (NTP). Consulta [objetivos NTP predeterminados][20].<br> Para información sobre la solución de problemas de NTP, consulta [problemas de NTP][19].                                                                |
 
 [19]: /es/agent/faq/network-time-protocol-ntp-offset-issues/
 [20]: /es/integrations/ntp/#overview
@@ -196,54 +197,54 @@ Abre los siguientes puertos para beneficiarte de todas las funcionalidades del *
 
 {{% site-region region="us3,us5,gov,ap1,ap2" %}}
 
-| Producto/Función | Puerto | Protocolo | Descripción |
-| ------  | ---- | ------- | ----------- |
-| Agent<br>APM<br>Contenedores<br>Procesos activos<br>Métricas<br>Monitorización de redes en la nube<br>Universal Service Monitoring | 443 | TCP | La mayoría de los datos del Agent utilizan el puerto 443. |
-| NTP | 123 | UDP | Protocolo de tiempo de red (NTP). Consulta [Destinos NTP predeterminados][20].<br>Para obtener información sobre la solución de problemas NTP, consulta [Problemas NTP][19]. |
+| Producto/Funcionalidad                                                                                               | Puerto | Protocolo | Descripción                                                                                                                  |
+| ------------------------------------------------------------------------------------------------------------------- | ---- | -------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| Agente<br>APM<br>Contenedores<br>Procesos en Vivo<br>Métricas<br>Monitoreo de Red en la Nube<br>Monitoreo de Servicio Universal | 443  | TCP      | La mayoría de los datos del Agente utiliza el puerto 443.                                                                                               |
+| NTP                                                                                                                 | 123  | UDP      | Protocolo de Tiempo de Red (NTP). Vea [objetivos NTP predeterminados][20].<br>Para información sobre la solución de problemas de NTP, vea [problemas de NTP][19]. |
 
 [19]: /es/agent/faq/network-time-protocol-ntp-offset-issues/
 [20]: /es/integrations/ntp/#overview
 
 {{% /site-region %}}
 
-#### Entrada
+#### Entrante
 
-Solo se utiliza para los servicios del Agent que se comunican entre sí de manera local dentro del host.
+Utilizado para servicios de Agente que se comunican entre sí localmente dentro del host solamente.
 
-| Producto/Función | Puerto | Protocolo | Descripción |
-| ------  | ---- | ------- | ----------- |
-| [GUI de navegador del Agent][16] | 5002 | TCP |  |
-| Receptor de APM | 8126 | TCP | Incluye el rastreo y el generador de perfiles. |
-| [DogStatsD][18] | 8125 | UDP | Puerto para DogStatsD a menos que `dogstatsd_non_local_traffic` esté configurado como true. Este puerto está disponible en IPv4 localhost: `127.0.0.1`. |
-| servidor de go_expvar (APM) | 5012 | TCP | Para obtener más información, consulta [la documentación de integración de go_expar][15]. |
-| servidor de integración de go_expvar | 5000 | TCP | Para obtener más información, consulta [la documentación de integración de go_expar][15]. |
-| API DE LA IPC | 5001 | TCP | Puerto utilizado para la comunicación entre procesos (IPC). |
-| Depuración del Agent del proceso | 6062 | TCP | Endpoints de depuración para el Agent del proceso. |
-| Tiempo de ejecución del Agent del proceso | 6162 | TCP | Parámetros de configuración del tiempo de ejecución para el Agent del proceso. |
+| Producto/Funcionalidad        | Puerto | Protocolo | Descripción                                                                                                                    |
+| ---------------------------- | ---- | -------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| [Interfaz Gráfica del Navegador del Agente][16]      | 5002 | TCP      |                                                                                                                                |
+| Receptor APM                 | 8126 | TCP      | Incluye Trazado y el Profiler.                                                                                             |
+| [DogStatsD][18]              | 8125 | UDP      | Puerto para DogStatsD a menos que `dogstatsd_non_local_traffic` esté configurado como verdadero. Este puerto está disponible en localhost IPv4: `127.0.0.1`. |
+| servidor go_expvar (APM)       | 5012 | TCP      | Para más información, vea [la documentación de integración de go_expar][15].                                                        |
+| servidor de integración go_expvar | 5000 | TCP      | Para más información, vea [la documentación de integración de go_expar][15].                                                        |
+| API IPC                      | 5001 | TCP      | Puerto utilizado para Comunicación entre Procesos (IPC).                                                                               |
+| Depurador del Agente de Proceso          | 6062 | TCP      | Puntos finales de depuración para el Agente de Proceso.                                                                                         |
+| Tiempo de ejecución del Agente de Proceso        | 6162 | TCP      | Configuraciones de tiempo de ejecución para el Agente de Proceso.                                                                          |
 
 ## Configurar puertos
 
-Si necesitas cambiar un puerto de entrada, porque el puerto predeterminado ya lo utiliza un servicio existente en tu red, edita el archivo de configuración `datadog.yaml`. Puedes encontrar la mayoría de los puertos en la sección **Configuración avanzada** del archivo:
+Si necesita cambiar un puerto de entrada porque el puerto predeterminado ya está en uso por un servicio existente en su red, edite el archivo de configuración `datadog.yaml`. Puede encontrar la mayoría de los puertos en la sección **Configuración Avanzada** del archivo:
 
 {{< code-block lang="yaml" filename="datadog.yaml" disable_copy="true" collapsible="true" >}}
 ## @param expvar_port - integer - optional - default: 5000
 ## @env DD_EXPVAR_PORT - integer - optional - default: 5000
-## El puerto para el servidor go_expvar.
+## The port for the go_expvar server.
 #
 # expvar_port: 5000
 
 ## @param cmd_port - integer - optional - default: 5001
 ## @env DD_CMD_PORT - integer - optional - default: 5001
-## El puerto en el que escucha la API IPC.
+## The port on which the IPC api listens.
 #
 # cmd_port: 5001
 
 ## @param GUI_port - integer - optional
 ## @env DD_GUI_PORT - integer - optional
-## El puerto al que sirve la GUI del navegador.
-## El parámetro 'GUI_port: -1' desactiva completamente la GUI
-## De forma predeterminada es:
-##  * Windows y macOS : `5002`
+## The port for the browser GUI to be served.
+## Setting 'GUI_port: -1' turns off the GUI completely
+## Default is:
+##  * Windows & macOS : `5002`
 ##  * Linux: `-1`
 ##
 #
@@ -251,13 +252,13 @@ Si necesitas cambiar un puerto de entrada, porque el puerto predeterminado ya lo
 
 {{< /code-block >}}
 
-El receptor de APM y los puertos DogStatsD se encuentran en las secciones **Trace Collection Configuration** (Configuración de la recopilación de trazas) y **DogStatsD Configuration** (Configuración de DogStatsD) en el archivo de configuración `datadog.yaml`, respectivamente:
+El receptor APM y los puertos de DogStatsD se encuentran en las secciones **Configuración de Recolección de Trazas** y **Configuración de DogStatsD** del archivo de configuración `datadog.yaml`, respectivamente:
 
 {{< code-block lang="yaml" filename="datadog.yaml" disable_copy="true" collapsible="true" >}}
 ## @param dogstatsd_port - integer - optional - default: 8125
 ## @env DD_DOGSTATSD_PORT - integer - optional - default: 8125
-## Anula el puerto DogStatsD del Agent.
-## Nota: Asegúrate de que tu cliente realiza el envío al mismo puerto UDP.
+## Override the Agent DogStatsD port.
+## Note: Make sure your client is sending to the same UDP port.
 #
 # dogstatsd_port: 8125
 
@@ -265,42 +266,44 @@ El receptor de APM y los puertos DogStatsD se encuentran en las secciones **Trac
 
 ## @param receiver_port - integer - optional - default: 8126
 ## @env DD_APM_RECEIVER_PORT - integer - optional - default: 8126
-## El puerto en el que debe escuchar el receptor de trazas.
-## Configurar con el valor 0 para desactivar el receptor HTTP.
+## The port that the trace receiver should listen on.
+## Set to 0 to disable the HTTP receiver.
 #
 # receiver_port: 8126
 {{< /code-block >}}
 
-<div class="alert alert-danger">Si cambias aquí el valor del puerto DogStatsD o del puerto receptor APM, debes cambiar también la configuración de la biblioteca de rastreo APM para el puerto correspondiente. Consulta la información sobre la configuración de puertos en los <a href="/tracing/trace_collection/library_config/">documentos de configuración de bibliotecas para tu lenguaje</a>.</div>
+<div class="alert alert-danger">Si cambia el valor del puerto de DogStatsD o del puerto del receptor APM aquí, también debe cambiar la configuración de la biblioteca de trazado APM para el puerto correspondiente. Consulte la información sobre la configuración de puertos en la <a href="/tracing/trace_collection/library_config/">documentación de Configuración de la Biblioteca para su lenguaje</a>.</div>
 
-## Utilizar proxies
+## Usando proxies
 
-Para obtener una guía de configuración detallada sobre la configuración del proxy, consulta la página: [Configuración del proxy del Agent][9].
+Para una guía de configuración detallada sobre la configuración de proxies, consulte [Configuración del Proxy del Agente][9].
 
-## Almacenamiento de datos en búfer
+## Almacenamiento en búfer de datos
 
-Si la red deja de estar disponible, el Agent almacena las métricas en la memoria.
-El uso máximo de la memoria para almacenar las métricas se define en el parámetro de configuración `forwarder_retry_queue_payloads_max_size`. Cuando se alcanza este límite, las métricas se eliminan.
+Si la red se vuelve inaccesible, el Agente almacena las métricas en memoria.
+El uso máximo de memoria para almacenar las métricas está definido por la configuración `forwarder_retry_queue_payloads_max_size`. Cuando se alcanza este límite, se descartan las métricas.
 
-La versión 7.27.0 (o posterior) del Agent almacena las métricas en disco cuando se alcanza el límite de la memoria. Habilita esta función al establecer `forwarder_storage_max_size_in_bytes` como un valor positivo que indique el tamaño máximo de espacio de almacenamiento, en bytes, que el Agent puede utilizar para almacenar las métricas en disco.
+El Agente v7.27.0 o posterior almacena las métricas en disco cuando se alcanza el límite de memoria. Habilite esta capacidad configurando `forwarder_storage_max_size_in_bytes` a un valor positivo que indique la cantidad máxima de espacio de almacenamiento, en bytes, que el Agente puede usar para almacenar las métricas en disco.
 
-Las métricas se almacenan en la carpeta que define el parámetro `forwarder_storage_path`. Por defecto, en los sistemas Unix es`/opt/datadog-agent/run/transactions_to_retry` y en Windows `C:\ProgramData\Datadog\run\transactions_to_retry`.
+Las métricas se almacenan en la carpeta definida por la configuración `forwarder_storage_path`, que por defecto es `/opt/datadog-agent/run/transactions_to_retry` en sistemas Unix, y `C:\ProgramData\Datadog\run\transactions_to_retry` en Windows.
 
-Para evitar que se agote el espacio de almacenamiento, el Agent almacena las métricas en el disco sólo si el espacio de almacenamiento total utilizado es inferior al 80 %. Este límite se define mediante la configuración de `forwarder_storage_max_disk_ratio`.
+Para evitar quedarse sin espacio de almacenamiento, el Agente almacena las métricas en disco solo si el espacio total de almacenamiento utilizado es inferior al 80 por ciento. Este límite está definido por la configuración `forwarder_storage_max_disk_ratio`.
 
-## Instalación de Datadog Operator
+## Instalando el Operador de Datadog
 
-Si estás instalando el Datadog Operator en un entorno Kubernetes con conectividad limitada, debes permitir los siguientes endpoints para el puerto TCP 443, en función de tu ubicación:
+Si está instalando el Operador de Datadog en un entorno de Kubernetes con conectividad limitada, necesita permitir los siguientes puntos finales para el puerto TCP 443, según su registro:
 
-- `gcr.io/datadoghq` (GCR US)
-- `eu.gcr.io/datadoghq` (IGC Europa)
-- `asia.gcr.io/datadoghq` (IGC Asia)
+- `registry.datadoghq.com` (Registro de Contenedores de Datadog)
+  - `us-docker.pkg.dev/datadog-prod/public-images` (puede recibir redirecciones de `registry.datadoghq.com`)
+- `gcr.io/datadoghq` (GCR EE. UU.)
+- `eu.gcr.io/datadoghq` (GCR Europa)
+- `asia.gcr.io/datadoghq` (GCR Asia)
 - `datadoghq.azurecr.io` (Azure)
 - `public.ecr.aws/datadog` (AWS)
 - `docker.io/datadog` (DockerHub)
 
 
-## Referencias adicionales
+## Lectura Adicional
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -321,7 +324,7 @@ Si estás instalando el Datadog Operator en un entorno Kubernetes con conectivid
 [15]: /es/integrations/go_expvar/
 [16]: /es/agent/basic_agent_usage/#gui
 [17]: /es/tracing/
-[18]: /es/developers/dogstatsd/
+[18]: /es/extend/dogstatsd/
 [19]: /es/agent/faq/network-time-protocol-ntp-offset-issues/
 [20]: /es/integrations/ntp/#overview
 [21]: /es/logs/log_collection/#logging-endpoints
@@ -330,7 +333,7 @@ Si estás instalando el Datadog Operator en un entorno Kubernetes con conectivid
 [24]: /es/network_monitoring/cloud_network_monitoring/
 [25]: /es/universal_service_monitoring/
 [26]: /es/metrics/
-[27]: /es/developers/service_checks/
+[27]: /es/extend/service_checks/
 [28]: /es/events/
 [29]: /es/security/cloud_security_management/vulnerabilities/
 [30]: /es/logs/
