@@ -25,19 +25,19 @@ aliases:
 - /es/agent/basic_agent_usage/linux/
 further_reading:
 - link: /logs/
-  tag: Documentation
+  tag: Documentación
   text: Recoge tus registros
 - link: /infrastructure/process/
-  tag: Documentation
+  tag: Documentación
   text: Recoge tus procesos
 - link: /tracing/
-  tag: Documentation
+  tag: Documentación
   text: Recoge tus trazas
 - link: /agent/architecture/#agent-architecture
-  tag: Documentation
+  tag: Documentación
   text: Descubre más sobre la arquitectura del Agente
 - link: /agent/configuration/network#configure-ports
-  tag: Documentation
+  tag: Documentación
   text: Configura los puertos de entrada
 platform: Linux
 title: Linux

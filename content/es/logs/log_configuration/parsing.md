@@ -13,10 +13,10 @@ aliases:
 description: Analiza tus registros utilizando el Procesador Grok
 further_reading:
 - link: https://learn.datadoghq.com/courses/log-pipelines
-  tag: Learning Center
+  tag: Centro de aprendizaje
   text: Aprende a construir y modificar tuberías de registros
 - link: /logs/log_configuration/processors
-  tag: Documentation
+  tag: Documentación
   text: Aprende a procesar tus registros
 - link: https://www.youtube.com/watch?v=AwW70AUmaaQ&list=PLdh-RwQzDsaM9Sq_fi-yXuzhmE7nOlqLE&index=3
   tag: Video
@@ -29,7 +29,7 @@ further_reading:
   tag: FAQ
   text: Análisis de Registros - Mejores Prácticas
 - link: /logs/logging_without_limits/
-  tag: Documentation
+  tag: Documentación
   text: Controla el volumen de registros indexados por Datadog
 title: Análisis
 ---

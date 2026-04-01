@@ -14,17 +14,17 @@ description: Configura tu Agente de Datadog para recopilar registros de tu host,
 disable_sidebar: true
 further_reading:
 - link: https://app.datadoghq.com/release-notes?category=Log%20Management
-  tag: Release Notes
+  tag: Notas de la versión
   text: Consulta las últimas versiones de Gestión de Registros de Datadog (se requiere
     inicio de sesión en la aplicación)
 - link: /logs/log_collection/
-  tag: Documentation
+  tag: Documentación
   text: Comienza a recopilar tus registros
 - link: https://learn.datadoghq.com/courses/intro-to-log-management
-  tag: Learning Center
+  tag: Centro de aprendizaje
   text: Introducción a la Gestión de Registros
 - link: https://dtdg.co/fe
-  tag: Foundation Enablement
+  tag: Establecer las bases
   text: Únete a una sesión interactiva para optimizar tu Gestión de Registros
 - link: https://www.datadoghq.com/blog/accelerate-incident-investigations-with-log-anomaly-detection/
   tag: Blog
@@ -51,7 +51,7 @@ further_reading:
   tag: Blog
   text: Monitorea los registros DNS para análisis de red y seguridad
 - link: https://www.datadoghq.com/architecture/a-guide-to-log-management-indexing-strategies-with-datadog/
-  tag: Architecture Center
+  tag: Centro de arquitectura
   text: Una guía sobre Estrategias de Indexación en la Gestión de Registros con Datadog
 - link: https://www.datadoghq.com/blog/archive-search/
   tag: Blog

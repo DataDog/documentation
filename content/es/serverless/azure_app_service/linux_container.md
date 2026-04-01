@@ -4,10 +4,10 @@ aliases:
 - /es/serverless/azure_app_services/azure_app_services_container
 further_reading:
 - link: /integrations/azure_app_services/
-  tag: Documentation
+  tag: Documentación
   text: Servicio de Aplicaciones de Azure
 - link: /integrations/azure_app_service_environment/
-  tag: Documentation
+  tag: Documentación
   text: Entorno de Servicio de Aplicaciones de Azure
 title: Instrumentar Servicio de Aplicaciones de Azure - Contenedores de Linux
 ---

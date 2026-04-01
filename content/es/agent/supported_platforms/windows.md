@@ -12,22 +12,22 @@ aliases:
 description: Funcionalidad básica del Agente de Datadog en la plataforma Windows.
 further_reading:
 - link: /logs/
-  tag: Documentation
+  tag: Documentación
   text: Recopila tus registros
 - link: /infrastructure/process/
-  tag: Documentation
+  tag: Documentación
   text: Recopila tus procesos
 - link: /tracing/
-  tag: Documentation
+  tag: Documentación
   text: Recopila tus trazas
 - link: /agent/architecture/#agent-architecture
-  tag: Documentation
+  tag: Documentación
   text: Descubre más sobre la arquitectura del Agente
 - link: /agent/configuration/network#configure-ports
-  tag: Documentation
+  tag: Documentación
   text: Configura los puertos de entrada
 - link: /agent/guide/windows-agent-ddagent-user
-  tag: Documentation
+  tag: Documentación
   text: Aprende más sobre el Usuario del Agente de Datadog para Windows
 platform: Windows
 title: Windows

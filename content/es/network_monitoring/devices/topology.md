@@ -9,7 +9,7 @@ further_reading:
   tag: Blog
   text: Visualiza las relaciones en tu red local con el Mapa de Topología de Dispositivos
 - link: /network_monitoring/devices/data
-  tag: Documentation
+  tag: Documentación
   text: Datos recopilados con la Monitorización de Dispositivos de Red
 - link: https://www.datadoghq.com/blog/monitor-snmp-with-datadog/
   tag: Blog

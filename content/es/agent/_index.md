@@ -24,16 +24,16 @@ cascade:
 description: Instala y configura el Agente para recopilar datos
 further_reading:
 - link: /logs/
-  tag: Documentation
+  tag: Documentación
   text: Recopila tus registros
 - link: /infrastructure/process/
-  tag: Documentation
+  tag: Documentación
   text: Recopila tus procesos
 - link: /tracing/
-  tag: Documentation
+  tag: Documentación
   text: Recopila tus trazas
 - link: /agent/faq/why-should-i-install-the-agent-on-my-cloud-instances/
-  tag: Documentation
+  tag: Documentación
   text: ¿Por qué instalar el Agente en instancias en la nube?
 - link: https://www.datadoghq.com/blog/dont-fear-the-agent/
   tag: Blog

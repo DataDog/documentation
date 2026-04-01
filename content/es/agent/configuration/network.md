@@ -14,16 +14,16 @@ aliases:
 - /es/agent/guide/network
 further_reading:
 - link: /getting_started/site
-  tag: Documentation
+  tag: Documentación
   text: Aprende sobre el sitio de Datadog
 - link: /logs/
-  tag: Documentation
+  tag: Documentación
   text: Recopila tus registros
 - link: /infrastructure/process
-  tag: Documentation
+  tag: Documentación
   text: Recopila tus procesos
 - link: tracing
-  tag: Documentation
+  tag: Documentación
   text: Recopila tus trazas
 title: Tráfico de red
 ---

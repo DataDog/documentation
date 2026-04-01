@@ -14,17 +14,17 @@ description: Configurez votre Agent Datadog pour collecter les journaux de votre
 disable_sidebar: true
 further_reading:
 - link: https://app.datadoghq.com/release-notes?category=Log%20Management
-  tag: Release Notes
+  tag: Notes de version
   text: Découvrez les dernières versions de la gestion des journaux Datadog (connexion
     à l'application requise)
 - link: /logs/log_collection/
   tag: Documentation
   text: Commencez à collecter vos journaux
 - link: https://learn.datadoghq.com/courses/intro-to-log-management
-  tag: Learning Center
+  tag: Centre d'apprentissage
   text: Présentation de Log Management
 - link: https://dtdg.co/fe
-  tag: Foundation Enablement
+  tag: Validation des bases
   text: Participer à une session interactive pour optimiser votre gestion des logs
 - link: https://www.datadoghq.com/blog/accelerate-incident-investigations-with-log-anomaly-detection/
   tag: Blog
@@ -51,7 +51,7 @@ further_reading:
   tag: Blog
   text: Surveiller les logs de DNS pour analyser le réseau et la sécurité
 - link: https://www.datadoghq.com/architecture/a-guide-to-log-management-indexing-strategies-with-datadog/
-  tag: Architecture Center
+  tag: Centre d'architecture
   text: Un guide sur les stratégies d'indexation de la gestion des journaux avec Datadog
 - link: https://www.datadoghq.com/blog/archive-search/
   tag: Blog

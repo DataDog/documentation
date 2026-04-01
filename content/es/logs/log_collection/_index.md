@@ -18,22 +18,22 @@ further_reading:
   tag: Blog
   text: Cómo gestionar archivos de registro utilizando Logrotate
 - link: /agent/logs/advanced_log_collection
-  tag: Documentation
+  tag: Documentación
   text: Configuraciones avanzadas de recopilación de registros
 - link: /logs/log_configuration/processors
-  tag: Documentation
+  tag: Documentación
   text: Descubre cómo procesar tus registros
 - link: /logs/log_configuration/parsing
-  tag: Documentation
+  tag: Documentación
   text: Aprende más sobre el análisis
 - link: /logs/live_tail/
-  tag: Documentation
+  tag: Documentación
   text: Funcionalidad de cola en vivo de Datadog
 - link: /logs/explorer/
-  tag: Documentation
+  tag: Documentación
   text: Ve cómo explorar tus registros
 - link: /logs/logging_without_limits/
-  tag: Documentation
+  tag: Documentación
   text: Registro Sin Límites*
 title: Recopilación de Registros e Integraciones
 ---

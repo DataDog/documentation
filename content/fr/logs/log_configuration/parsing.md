@@ -13,7 +13,7 @@ aliases:
 description: Analyser vos logs à l'aide du processeur Grok
 further_reading:
 - link: https://learn.datadoghq.com/courses/log-pipelines
-  tag: Learning Center
+  tag: Centre d'apprentissage
   text: Apprenez à créer et modifier des pipelines de logs
 - link: /logs/log_configuration/processors
   tag: Documentation
