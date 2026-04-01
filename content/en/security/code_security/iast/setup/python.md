@@ -21,7 +21,7 @@ further_reading:
       text: "Troubleshooting Application Security"
 ---
 
-You can detect code-level vulnerabilities and monitor application security in Python applicationss running in Docker, Kubernetes, Amazon ECS, and AWS Fargate.
+You can detect code-level vulnerabilities and monitor application security in Python applications running in Docker, Kubernetes, Amazon ECS, and AWS Fargate.
 
 NOTE: Code-Level Vulnerability detection in Python is in Preview.
 

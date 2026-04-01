@@ -1,4 +1,5 @@
 ---
+id: custom_span
 title: custom span
 core_product:
   - ci-cd

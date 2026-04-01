@@ -97,7 +97,7 @@ Build searches in the Log Explorer using facets or by clicking fields directly i
 
 If you don't already have a Datadog account, sign up for a [free trial][2]. After you log in to your Datadog account:
 
-1. Navigate to [Cloud SIEM][3].
+1. Navigate to [Cloud SIEM][12].
 1. Click **Enable Cloud SIEM**.
 1. Follow the onboarding steps.
 
@@ -275,3 +275,4 @@ See which rules are the noisiest by calculating the percentage of signals that a
 [9]: /security/cloud_siem/content_packs/
 [10]: /logs/explorer/search_syntax/
 [11]: /logs/explorer/
+[12]: https://app.datadoghq.com/security/siem/intro

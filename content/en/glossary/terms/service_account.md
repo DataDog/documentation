@@ -1,4 +1,5 @@
 ---
+id: service_account
 title: service account
 ---
 A service account is a non-human user that can be assigned a role and own application keys.

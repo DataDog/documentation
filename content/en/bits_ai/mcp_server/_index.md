@@ -37,18 +37,19 @@ This demo shows the Datadog MCP Server being used in Cursor and Claude Code (unm
 ## Disclaimers
 
 - The Datadog MCP Server is HIPAA-eligible. You are responsible for ensuring that the AI tools you connect to the Datadog MCP Server meet your compliance requirements, such as HIPAA.
-- The Datadog MCP Server has fair-use rate limits in place. For questions or requests, [contact Datadog support][37].
 - The Datadog MCP Server is not GovCloud compatible.
 - Datadog collects certain information about your usage of the Remote Datadog MCP Server, including how you interact with it, whether errors occurred while using it, what caused those errors, and user identifiers in accordance with the <a href="https://www.datadoghq.com/legal/privacy/" target="_blank">Datadog Privacy Policy</a> and Datadog's <a href="https://www.datadoghq.com/legal/eula/" target="_blank">EULA</a>. This data is used to help improve the server's performance and features, including transitions to and from the server and the applicable Datadog login page for accessing the Services, and context (for example, user prompts) leading to the use of MCP tools. The data is stored for 120 days.
 
+## Fair-Use Rate Limits
 
-## Requirements
+The MCP Server comes with the following fair-use limits:
+- 50 requests/10 seconds tool call burst limits
+- 5000 daily tool calls
+- 50,000 monthly tool calls. 
 
-Datadog users must have the `MCP Read` [permission][18] to use the MCP Server for read access, and the `MCP Write` [permission][18] for write access.
+These limits are **subject to change** and can be adjusted if your use case requires more. Please contact [Datadog support][37] for requests or questions. 
 
-For setup instructions, see [Set Up the Datadog MCP Server][27].
-
-## Monitoring the Datadog MCP Server usage
+## Monitoring the Datadog MCP Server Tool Calls
 
 You can track Datadog MCP Server usage for your organization using Datadog metrics and Audit Trail.
 
@@ -71,6 +72,7 @@ The Datadog MCP Server supports _toolsets_, which allow you to use only the tool
 - `apm`: Tools for in-depth [APM][28] trace analysis, span search, Watchdog insights, and performance investigation
 - `cases`: Tools for [Case Management][38], including creating, searching, and updating cases; managing projects; and linking Jira issues
 - `dbm`: Tools for interacting with [Database Monitoring][26]
+- `ddsql`: (Preview) Tools for querying Datadog data using [DDSQL][41], a SQL dialect with support for infrastructure resources, logs, metrics, RUM, spans, and other Datadog data sources
 - `error-tracking`: Tools for interacting with Datadog [Error Tracking][25]
 - `feature-flags`: Tools for managing [feature flags][29], including creating, listing, and updating flags and their environments
 - `llmobs`: Tools for searching and analyzing [LLM Observability][30] spans and experiments
@@ -82,7 +84,7 @@ The Datadog MCP Server supports _toolsets_, which allow you to use only the tool
 - `synthetics`: Tools for interacting with Datadog [Synthetic tests][20]
 - `workflows`: Tools for [Workflow Automation][39], including listing, inspecting, executing, and configuring workflows for agent use
 
-To use a toolset, include the `toolsets` query parameter in the endpoint URL when connecting to the MCP Server ([remote authentication][27] only). 
+To use a toolset, include the `toolsets` query parameter in the endpoint URL when connecting to the MCP Server ([remote authentication][27] only). Use `toolsets=all` to enable all generally available toolsets at once.
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
 For example, based on your selected [Datadog site][36] ({{< region-param key="dd_site_name" >}}):
@@ -96,6 +98,11 @@ For example, based on your selected [Datadog site][36] ({{< region-param key="dd
 - Retrieve core, Synthetic Testing, and Software Delivery tools:
   <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=core,synthetics,software-delivery</code></pre>
 
+- Retrieve all generally available tools:
+  <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=all</code></pre>
+
+<div class="alert alert-info">Enabling all toolsets increases the number of tool definitions sent to your AI client, which consumes context window space. <code>toolsets=all</code> works best with clients that support tool filtering, such as Claude Code.</div>
+
 [36]: /getting_started/site/#navigate-the-datadog-documentation-by-site
 {{< /site-region >}}
 
@@ -107,6 +114,7 @@ This section lists the tools available in the Datadog MCP Server and provides ex
 
 ### `search_datadog_events`
 *Toolset: **core***\
+*Permissions Required: `Events` and `Timeseries`*\
 Searches events like monitor alerts, deployment notifications, infrastructure changes, security findings, and service status changes.
 
 - Show me all deployment events from the last 24 hours.
@@ -117,6 +125,7 @@ Searches events like monitor alerts, deployment notifications, infrastructure ch
 
 ### `get_datadog_incident`
 *Toolset: **core***\
+*Permissions Required: `Incidents Read`*\
 Retrieves detailed information about an incident.
 
 - Get details for incident ABC123.
@@ -127,6 +136,7 @@ Retrieves detailed information about an incident.
 
 ### `get_datadog_metric`
 *Toolset: **core***\
+*Permissions Required: `Cloud Cost Management Read` or `Metrics` or `Timeseries`*\
 Queries and analyzes historical or real-time metric data, supporting custom queries and aggregations.
 
 - Show me CPU utilization metrics for all hosts in the last 4 hours.
@@ -135,6 +145,7 @@ Queries and analyzes historical or real-time metric data, supporting custom quer
 
 ### `get_datadog_metric_context`
 *Toolset: **core***\
+*Permissions Required: `Cloud Cost Management Read` or `Metrics`*\
 Retrieves detailed information about a metric including metadata, available tags, and tag values for filtering and grouping.
 
 - What tags are available for the `system.cpu.user` metric?
@@ -143,6 +154,7 @@ Retrieves detailed information about a metric including metadata, available tags
 
 ### `search_datadog_monitors`
 *Toolset: **core***\
+*Permissions Required: `Monitors Read`*\
 Retrieves information about Datadog monitors, including their statuses, thresholds, and alert conditions.
 
 - List all monitors that are currently alerting.
@@ -151,6 +163,7 @@ Retrieves information about Datadog monitors, including their statuses, threshol
 
 ### `get_datadog_trace`
 *Toolset: **core***\
+*Permissions Required: `APM Read`*\
 Fetches a complete trace from Datadog APM using a trace ID.
 
 - Get the complete trace for ID 7d5d747be160e280504c099d984bcfe0.
@@ -161,6 +174,7 @@ Fetches a complete trace from Datadog APM using a trace ID.
 
 ### `search_datadog_dashboards`
 *Toolset: **core***\
+*Permissions Required: `Dashboards Read` and `User Access Read`*\
 Lists available Datadog dashboards and key details.
 
 - Show me all available dashboards in our account.
@@ -171,6 +185,7 @@ Lists available Datadog dashboards and key details.
 
 ### `get_datadog_notebook`
 *Toolset: **core***\
+*Permissions Required: `Notebooks Read`*\
 Retrieves detailed information about a specific notebook by ID, including name, status, and author.
 
 - Get details for notebook abc-123-def.
@@ -178,6 +193,7 @@ Retrieves detailed information about a specific notebook by ID, including name, 
 
 ### `search_datadog_notebooks`
 *Toolset: **core***\
+*Permissions Required: `Notebooks Read`*\
 Lists and searches Datadog notebooks with filtering by author, tags, and content.
 
 - Show me all notebooks created by the platform team.
@@ -186,6 +202,7 @@ Lists and searches Datadog notebooks with filtering by author, tags, and content
 
 ### `search_datadog_hosts`
 *Toolset: **core***\
+*Permissions Required: `Hosts Read` and `Timeseries`*\
 Lists and provides information about monitored hosts, supporting filtering and searching.
 
 - Show me all hosts in our production environment.
@@ -194,6 +211,7 @@ Lists and provides information about monitored hosts, supporting filtering and s
 
 ### `search_datadog_incidents`
 *Toolset: **core***\
+*Permissions Required: `Incidents Read`*\
 Retrieves a list of Datadog incidents, including their state, severity, and metadata.
 
 - Show me all active incidents by severity.
@@ -202,6 +220,7 @@ Retrieves a list of Datadog incidents, including their state, severity, and meta
 
 ### `search_datadog_metrics`
 *Toolset: **core***\
+*Permissions Required: `Metrics`*\
 Lists available metrics, with options for filtering and metadata.
 
 - Show me all available Redis metrics.
@@ -210,6 +229,7 @@ Lists available metrics, with options for filtering and metadata.
 
 ### `search_datadog_services`
 *Toolset: **core***\
+*Permissions Required: `Service Catalog Read`*\
 Lists services in Datadog's Software Catalog with details and team information.
 
 - Show me all services in our microservices architecture.
@@ -218,6 +238,7 @@ Lists services in Datadog's Software Catalog with details and team information.
 
 ### `search_datadog_service_dependencies`
 *Toolset: **core***\
+*Permissions Required: `APM Read` and `Service Catalog Read` and `Teams Read`*\
 Retrieves service dependencies (upstream/downstream) and services owned by a team.
 
 - Show me all upstream services that call the checkout service.
@@ -226,6 +247,7 @@ Retrieves service dependencies (upstream/downstream) and services owned by a tea
 
 ### `search_datadog_spans`
 *Toolset: **core***\
+*Permissions Required: `APM Read`*\
 Retrieves spans from APM traces with filters such as service, time, resource, and so on.
 
 - Show me spans with errors from the checkout service.
@@ -234,6 +256,7 @@ Retrieves spans from APM traces with filters such as service, time, resource, an
 
 ### `analyze_datadog_logs`
 *Toolset: **core***\
+*Permissions Required: `Logs Read Data` and `Logs Read Index Data` and `Timeseries`*\
 Analyze Datadog logs using SQL queries for counting, aggregations, and numerical analysis. Use this for statistical analysis.
 
 - Count error logs by service in the last hour.
@@ -242,6 +265,7 @@ Analyze Datadog logs using SQL queries for counting, aggregations, and numerical
 
 ### `search_datadog_logs`
 *Toolset: **core***\
+*Permissions Required: `Logs Read Data` and `Logs Read Index Data`*\
 Searches logs with filters (time, query, service, host, storage tier, and so on) and returns log details. Renamed from `get_logs`.
 
 - Show me error logs from the nginx service in the last hour.
@@ -250,14 +274,32 @@ Searches logs with filters (time, query, service, host, storage tier, and so on)
 
 ### `search_datadog_rum_events`
 *Toolset: **core***\
+*Permissions Required: `RUM Apps Read`*\
 Search Datadog RUM events using advanced query syntax.
 
 - Show JavaScript errors and console warnings in RUM.
 - Find pages that are loading slowly (more than 3 seconds).
 - Show recent user interactions on product detail pages.
 
+### `create_datadog_notebook`
+*Toolset: **core***\
+*Permissions Required: `Notebooks Read` and `Notebooks Write`*\
+Creates a new Datadog notebook.
+
+- Create a notebook to document the investigation into the checkout service latency spike.
+- Make a new notebook for our weekly performance review.
+
+### `edit_datadog_notebook`
+*Toolset: **core***\
+*Permissions Required: `Notebooks Read` and `Notebooks Write`*\
+Edits an existing Datadog notebook.
+
+- Add a section to notebook abc-123-def with the latest log analysis results.
+- Update the incident response notebook with today's findings.
+
 ### `validate_datadog_monitor`
 *Toolset: **alerting***\
+*Permissions Required: `Monitors Read`*\
 Validates a monitor definition for correctness before creating or updating it.
 
 - Validate this monitor definition before I create it.
@@ -265,6 +307,7 @@ Validates a monitor definition for correctness before creating or updating it.
 
 ### `get_datadog_monitor_templates`
 *Toolset: **alerting***\
+*Permissions Required: `Monitors Read`*\
 Retrieves available monitor templates to help you create monitors.
 
 - Show me the available monitor templates.
@@ -272,6 +315,7 @@ Retrieves available monitor templates to help you create monitors.
 
 ### `search_datadog_monitor_groups`
 *Toolset: **alerting***\
+*Permissions Required: `Monitors Read`*\
 Searches monitor groups by name or criteria.
 
 - Show me all monitor groups in an alerting state.
@@ -279,6 +323,7 @@ Searches monitor groups by name or criteria.
 
 ### `apm_search_spans`
 *Toolset: **apm***\
+*Permissions Required: `APM Read`*\
 Searches for spans using APM query syntax, with support for pagination and tag filtering.
 
 - Show me spans with errors from the checkout service in the last hour.
@@ -287,6 +332,7 @@ Searches for spans using APM query syntax, with support for pagination and tag f
 
 ### `apm_explore_trace`
 *Toolset: **apm***\
+*Permissions Required: `APM Read`*\
 Executes queries on trace data for deep analysis and exploration of specific spans within a trace.
 
 - Explore the spans in trace `abc123` and show me the database calls.
@@ -294,6 +340,7 @@ Executes queries on trace data for deep analysis and exploration of specific spa
 
 ### `apm_trace_summary`
 *Toolset: **apm***\
+*Permissions Required: `APM Read`*\
 Generates an AI-powered summary of a trace, providing high-level analysis of what the trace shows.
 
 - Summarize trace `7d5d747be160e280504c099d984bcfe0`.
@@ -301,6 +348,7 @@ Generates an AI-powered summary of a trace, providing high-level analysis of wha
 
 ### `apm_trace_comparison`
 *Toolset: **apm***\
+*Permissions Required: `APM Read`*\
 Compares two traces to identify performance differences and bottlenecks between a fast trace and a slow trace.
 
 - Compare these two traces to find out why one is slower.
@@ -308,6 +356,7 @@ Compares two traces to identify performance differences and bottlenecks between 
 
 ### `apm_analyze_trace_metrics`
 *Toolset: **apm***\
+*Permissions Required: `APM Read`*\
 Analyzes APM trace metrics over time for a specific operation, querying metric data and providing AI-generated analysis.
 
 - Analyze latency trends for the `web.request` operation on `service:api` over the last 6 hours.
@@ -315,6 +364,7 @@ Analyzes APM trace metrics over time for a specific operation, querying metric d
 
 ### `apm_discover_span_tags`
 *Toolset: **apm***\
+*Permissions Required: `APM Read`*\
 Discovers available tag keys on spans within a time range.
 
 - What tags are available on spans for `service:checkout`?
@@ -322,12 +372,14 @@ Discovers available tag keys on spans within a time range.
 
 ### `apm_get_primary_tag_keys`
 *Toolset: **apm***\
+*Permissions Required: `APM Read`*\
 Retrieves the primary tag keys configured for the organization.
 
 - What are my organization's primary tag keys?
 
 ### `apm_search_watchdog_stories`
 *Toolset: **apm***\
+*Permissions Required: `APM Read`*\
 Searches for Watchdog anomaly detection stories for a service within a time range, providing AI-powered insights into latency, error rate, and traffic anomalies.
 
 - Show me Watchdog anomalies for the checkout service in the last 24 hours.
@@ -335,6 +387,7 @@ Searches for Watchdog anomaly detection stories for a service within a time rang
 
 ### `apm_get_watchdog_story`
 *Toolset: **apm***\
+*Permissions Required: `APM Read`*\
 Retrieves detailed information about a specific Watchdog story by its ID.
 
 - Get the details of Watchdog story `abc123`.
@@ -348,6 +401,7 @@ Searches for change stories (deployments, feature flags, and infrastructure chan
 
 ### `apm_latency_bottleneck_analysis`
 *Toolset: **apm***\
+*Permissions Required: `APM Read`*\
 Analyzes latency bottlenecks across traces in an anomaly period by calculating self-time.
 
 - What are the latency bottlenecks for the checkout service during this anomaly?
@@ -355,6 +409,7 @@ Analyzes latency bottlenecks across traces in an anomaly period by calculating s
 
 ### `apm_latency_tag_analysis`
 *Toolset: **apm***\
+*Permissions Required: `APM Read`*\
 Compares span tags between an anomaly period and a baseline period to identify what changed.
 
 - Compare tags between the anomaly window and baseline to find what changed.
@@ -362,6 +417,7 @@ Compares span tags between an anomaly period and a baseline period to identify w
 
 ### `apm_search_recommendations`
 *Toolset: **apm***\
+*Permissions Required: `APM Read`*\
 Searches for APM recommendations from Datadog.
 
 - Show me APM recommendations for my services.
@@ -369,12 +425,14 @@ Searches for APM recommendations from Datadog.
 
 ### `apm_get_recommendation`
 *Toolset: **apm***\
+*Permissions Required: `APM Read`*\
 Retrieves full details of a specific APM recommendation by ID.
 
 - Get the details of recommendation `abc123`.
 
 ### `apm_investigation_methodology`
 *Toolset: **apm***\
+*Permissions Required: `APM Read`*\
 Provides guidance for investigating APM service issues like latency, errors, and performance problems.
 
 - How should I investigate a latency increase in my API service?
@@ -382,6 +440,7 @@ Provides guidance for investigating APM service issues like latency, errors, and
 
 ### `search_datadog_cases`
 *Toolset: **cases***\
+*Permissions Required: `Cases Read`*\
 Searches [Case Management][38] cases with filters including status, priority, project, and assignee. Supports time range filtering and pagination.
 
 - Show me all open cases assigned to me.
@@ -390,6 +449,7 @@ Searches [Case Management][38] cases with filters including status, priority, pr
 
 ### `get_datadog_case`
 *Toolset: **cases***\
+*Permissions Required: `Cases Read`*\
 Retrieves detailed information about a specific case by ID or key, including title, status, priority, assignee, and timestamps. Optionally includes timeline activity (comments and status changes) and custom attributes.
 
 - What's the latest update on CASE-1234? Show me the full timeline.
@@ -398,6 +458,7 @@ Retrieves detailed information about a specific case by ID or key, including tit
 
 ### `create_datadog_case`
 *Toolset: **cases***\
+*Permissions Required: `Cases Write`*\
 Creates a new [Case Management][38] case with a title, project, and optional fields like description, priority, and assignee.
 
 - I'm seeing a latency spike on the checkout service. Create a P2 case to track the investigation.
@@ -405,6 +466,7 @@ Creates a new [Case Management][38] case with a title, project, and optional fie
 
 ### `update_datadog_case`
 *Toolset: **cases***\
+*Permissions Required: `Cases Write`*\
 Updates an existing case's fields such as status, priority, title, description, assignee, due date, and custom attributes. Only the fields you provide are updated.
 
 - This issue is now customer-impacting. Escalate CASE-1234 to P1.
@@ -413,6 +475,7 @@ Updates an existing case's fields such as status, priority, title, description, 
 
 ### `add_comment_to_datadog_case`
 *Toolset: **cases***\
+*Permissions Required: `Cases Write`*\
 Adds a comment to a case's timeline. Comments support markdown formatting.
 
 - Add a note to the case summarizing what we found in the logs and traces.
@@ -420,13 +483,15 @@ Adds a comment to a case's timeline. Comments support markdown formatting.
 - Document the root cause analysis findings on this case.
 
 ### `link_jira_issue_to_datadog_case`
-*Toolset: **cases***
+*Toolset: **cases***\
+*Permissions Required: `Cases Write`*
 
 - Link the Jira ticket for the infrastructure migration to this case so we can track both together.
 - Connect PROJ-456 to the Datadog case so the engineering team has visibility.
 
 ### `list_datadog_case_projects`
 *Toolset: **cases***\
+*Permissions Required: `Cases Read`*\
 Lists available [Case Management][38] projects with optional filtering by name or key.
 
 - What projects are available in Case Management?
@@ -434,18 +499,21 @@ Lists available [Case Management][38] projects with optional filtering by name o
 
 ### `get_datadog_case_project`
 *Toolset: **cases***\
+*Permissions Required: `Cases Read`*\
 Retrieves details for a specific case project by ID.
 
 - What project is this case part of?
 
 ### `search_datadog_users`
 *Toolset: **cases***\
+*Permissions Required: `User Access Read`*\
 Searches for Datadog users by email, name, or handle. Useful for finding the right person to assign a case to.
 
 - Find the Datadog user account for jane.doe@example.com.
 
 ### `search_datadog_dbm_plans`
 *Toolset: **dbm***\
+*Permissions Required: `Database Monitoring Read`*\
 Searches [Database Monitoring][26] query execution plans, which show how the database engine executes queries, including index usage, join strategies, and cost estimates. Use this to analyze query performance and identify optimization opportunities.
 
 - Show me execution plans for slow queries on `host:db-prod-1` from the last hour.
@@ -454,14 +522,64 @@ Searches [Database Monitoring][26] query execution plans, which show how the dat
 
 ### `search_datadog_dbm_samples`
 *Toolset: **dbm***\
+*Permissions Required: `Database Monitoring Read`*\
 Searches [Database Monitoring][26] query samples, which represent individual query executions with performance metrics. Use this to analyze database activity patterns, identify slow queries, and investigate database performance issues.
 
 - Show me query samples with `@duration:>1000000000` (duration greater than 1 second) from `db:mydb`.
 - Find slow queries on `host:db-prod-1` filtered by `@db.user:app_user`.
 - Get recent query samples for `@db.query_signature:abc123def` and analyze performance patterns.
 
+<div class="alert alert-info">The <code>ddsql</code> toolset is in Preview.</div>
+
+### `ddsql_get_spec`
+*Toolset: **ddsql***\
+Gets a compact DDSQL capability spec, including supported SQL functions, SQL keywords, and DDSQL-specific differences from standard PostgreSQL. Call this tool before composing queries to understand supported syntax.
+
+- What SQL functions are supported in DDSQL?
+- Show me the DDSQL query syntax rules and differences from PostgreSQL.
+- What aggregate functions can I use in DDSQL?
+
+### `ddsql_schema_search_tables`
+*Toolset: **ddsql***\
+Searches DDSQL datasets and returns tables (public data sources and reference tables) and available metrics.
+
+- What tables are available to query in DDSQL?
+- Search for DDSQL tables related to Kubernetes.
+- Show me the available metrics I can query with DDSQL.
+
+### `ddsql_schema_get_table_columns`
+*Toolset: **ddsql***\
+Gets static SQL columns for a DDSQL table from schema metadata.
+
+- What columns are available in the `aws.ec2_instance` table?
+- Show me the schema for the `k8s.pods` table.
+
+### `ddsql_schema_search_unstructured_fields`
+*Toolset: **ddsql***\
+Searches and ranks fields for unstructured DDSQL sources, such as logs, RUM, and spans, sorted by frequency. Use this tool for schema discovery on searchable sources before falling back to `ddsql_schema_get_table_columns`.
+
+- What fields are available in DDSQL logs?
+- Find fields related to `service` in my RUM data.
+- Show me the most common fields in my span data.
+
+### `ddsql_run_query`
+*Toolset: **ddsql***\
+Runs a DDSQL query and returns results. Supports using SQL syntax to query infrastructure resources, logs, metrics, RUM, spans, and other Datadog data sources. See the [DDSQL Reference][42] for syntax details.
+
+- How many EC2 instances are running in each AWS region?
+- Show me the top 10 services by error log count in the last hour.
+- Query average CPU usage grouped by host for the past 24 hours.
+
+### `ddsql_create_link`
+*Toolset: **ddsql***\
+Generates a Datadog UI link to the [DDSQL Editor][41] with a given query pre-populated.
+
+- Generate a DDSQL Editor link for this query.
+- Create a shareable link to the DDSQL Editor with my infrastructure query.
+
 ### `search_datadog_error_tracking_issues`
 *Toolset: **error-tracking***\
+*Permissions Required: `Error Tracking Read`*\
 Searches Error Tracking Issues across data sources (RUM, Logs, Traces).
 
 - Show me all Error Tracking Issues in the checkout service from the last 24 hours.
@@ -470,6 +588,7 @@ Searches Error Tracking Issues across data sources (RUM, Logs, Traces).
 
 ### `get_datadog_error_tracking_issue`
 *Toolset: **error-tracking***\
+*Permissions Required: `Cases Read` and `Error Tracking Read`*\
 Retrieves detailed information about a specific Error Tracking Issue from Datadog.
 
 - Help me solve Error Tracking Issue `550e8400-e29b-41d4-a716-446655440000`.
@@ -478,6 +597,7 @@ Retrieves detailed information about a specific Error Tracking Issue from Datado
 
 ### `list_datadog_feature_flags`
 *Toolset: **feature-flags***\
+*Permissions Required: `Feature Flag Environment Read` and `Feature Flag Read`*\
 Lists feature flags with pagination support.
 
 - Show me all feature flags in my organization.
@@ -485,6 +605,7 @@ Lists feature flags with pagination support.
 
 ### `get_datadog_feature_flag`
 *Toolset: **feature-flags***\
+*Permissions Required: `Feature Flag Environment Read` and `Feature Flag Read`*\
 Retrieves details about a specific feature flag.
 
 - Get details for the `dark-mode-enabled` feature flag.
@@ -492,6 +613,7 @@ Retrieves details about a specific feature flag.
 
 ### `create_datadog_feature_flag`
 *Toolset: **feature-flags***\
+*Permissions Required: `Feature Flag Environment Read` and `Feature Flag Write`*\
 Creates a new feature flag.
 
 - Create a feature flag called `enable-new-dashboard` for gradual rollout.
@@ -499,6 +621,7 @@ Creates a new feature flag.
 
 ### `list_datadog_feature_flag_environments`
 *Toolset: **feature-flags***\
+*Permissions Required: `Feature Flag Environment Read`*\
 Lists environments configured for feature flags.
 
 - Show me the available feature flag environments.
@@ -506,12 +629,14 @@ Lists environments configured for feature flags.
 
 ### `list_datadog_feature_flag_allocations`
 *Toolset: **feature-flags***\
+*Permissions Required: `Feature Flag Environment Read` and `Feature Flag Read`*\
 Lists allocations for a feature flag in a specific environment.
 
 - Show me the allocation rules for flag `new-checkout-flow` in production.
 
 ### `update_datadog_feature_flag_environment`
 *Toolset: **feature-flags***\
+*Permissions Required: `Feature Flag Environment Read` and `Feature Flag Write`*\
 Updates a feature flag configuration in a specific environment.
 
 - Enable the `dark-mode` flag in the staging environment.
@@ -519,18 +644,21 @@ Updates a feature flag configuration in a specific environment.
 
 ### `check_datadog_flag_implementation`
 *Toolset: **feature-flags***\
+*Permissions Required: `Feature Flag Environment Read` and `Feature Flag Read`*\
 Checks if a feature flag is implemented in code.
 
 - Verify that the `enable-new-dashboard` flag is implemented in my codebase.
 
 ### `sync_datadog_feature_flag_allocations`
 *Toolset: **feature-flags***\
+*Permissions Required: `Feature Flag Write`*\
 Syncs feature flag allocations for a specific environment.
 
 - Sync the allocations for flag `new-checkout-flow` in production.
 
 ### `analyze_cloud_network_monitoring`
 *Toolset: **networks***\
+*Permissions Required: `Network Connections Read`*\
 Investigates network-level issues using [Cloud Network Monitoring][31] data, analyzing network flow data to detect anomalies like elevated retransmission rates.
 
 - Analyze network traffic between my web servers and the database cluster.
@@ -539,6 +667,7 @@ Investigates network-level issues using [Cloud Network Monitoring][31] data, ana
 
 ### `search_ndm_devices`
 *Toolset: **networks***\
+*Permissions Required: `NDM Read`*\
 Searches network devices (routers, switches, firewalls) monitored by Datadog [Network Device Monitoring][32].
 
 - Show me all network devices in the `us-east-1` datacenter.
@@ -547,6 +676,7 @@ Searches network devices (routers, switches, firewalls) monitored by Datadog [Ne
 
 ### `get_ndm_device`
 *Toolset: **networks***\
+*Permissions Required: `NDM Read`*\
 Retrieves detailed information about a specific network device by its device ID.
 
 - Get details for network device `device:abc123`.
@@ -554,6 +684,7 @@ Retrieves detailed information about a specific network device by its device ID.
 
 ### `search_ndm_interfaces`
 *Toolset: **networks***\
+*Permissions Required: `NDM Read`*\
 Retrieves all network interfaces for a specific device.
 
 - Show me all interfaces on device `device:abc123`.
@@ -561,18 +692,21 @@ Retrieves all network interfaces for a specific device.
 
 ### `browser_onboarding`
 *Toolset: **onboarding***\
+*Permissions Required: `RUM Apps Read`*\
 Guides you through onboarding Browser RUM to Datadog.
 
 - Help me set up Browser RUM monitoring for my web application.
 
 ### `devices_onboarding`
 *Toolset: **onboarding***\
+*Permissions Required: `RUM Apps Read`*\
 Guides you through onboarding devices to Datadog monitoring.
 
 - Help me set up device monitoring in Datadog.
 
 ### `kubernetes_onboarding`
 *Toolset: **onboarding***\
+*Permissions Required: None*\
 Guides you through onboarding Kubernetes clusters to Datadog.
 
 - Help me set up Datadog monitoring for my Kubernetes cluster.
@@ -585,12 +719,14 @@ Guides you through onboarding LLM Observability in Datadog.
 
 ### `test_optimization_onboarding`
 *Toolset: **onboarding***\
+*Permissions Required: None*\
 Guides you through onboarding Test Optimization in Datadog.
 
 - Help me set up Test Optimization for my CI pipeline.
 
 ### `serverless_onboarding`
 *Toolset: **onboarding***\
+*Permissions Required: None*\
 Guides you through onboarding serverless applications to Datadog.
 
 - Help me monitor my AWS Lambda functions with Datadog.
@@ -601,21 +737,6 @@ Guides you through uploading source maps for RUM error mapping.
 
 - Help me upload source maps so my RUM errors show original source code.
 
-### `datadog_code_security_scan`
-*Toolset: **security***\
-Runs a comprehensive security scan that detects both vulnerabilities (SQL injection, XSS, path traversal, and others) and secrets (API keys, passwords, credentials, and others) in parallel.
-
-- Scan my code for security vulnerabilities and hardcoded secrets.
-- Run a full security scan on this pull request.
-- Check this file for any security issues.
-
-### `datadog_sast_scan`
-*Toolset: **security***\
-Scans code for security vulnerabilities using static analysis (SAST), detecting SQL injection, XSS, path traversal, command injection, insecure cryptography, and other security weaknesses.
-
-- Scan this file for security vulnerabilities.
-- Check my code for SQL injection and XSS vulnerabilities.
-
 ### `datadog_secrets_scan`
 *Toolset: **security***\
 Scans code for hardcoded secrets and credentials, detecting AWS keys, API keys, passwords, tokens, private keys, and database credentials.
@@ -625,6 +746,7 @@ Scans code for hardcoded secrets and credentials, detecting AWS keys, API keys, 
 
 ### `search_datadog_security_signals`
 *Toolset: **security***\
+*Permissions Required: `Security Signals Read`*\
 Searches and retrieves security signals from Datadog Security Monitoring, including Cloud SIEM signals, App & API Protection signals, and Workload Protection signals.
 
 - Show me security signals from the last 24 hours.
@@ -633,6 +755,7 @@ Searches and retrieves security signals from Datadog Security Monitoring, includ
 
 ### `security_findings_schema`
 *Toolset: **security***\
+*Permissions Required: `Security Monitoring Findings Read`*\
 Returns the schema (available fields and their types) for security findings. Call this first before using `analyze_security_findings` to discover queryable fields. Supports filtering by finding type and controlling response size.
 
 - What fields are available for security findings?
@@ -641,6 +764,7 @@ Returns the schema (available fields and their types) for security findings. Cal
 
 ### `analyze_security_findings`
 *Toolset: **security***\
+*Permissions Required: `Security Monitoring Findings Read` and `Timeseries`*\
 Primary tool for analyzing security findings using SQL queries. Queries live data from the last 24 hours with flexible SQL aggregations, filtering, and grouping. Call `security_findings_schema` first to discover available fields, then use this tool to query.
 
 - Show me the top 10 rules with the most critical findings.
@@ -649,6 +773,7 @@ Primary tool for analyzing security findings using SQL queries. Queries live dat
 
 ### `search_security_findings`
 *Toolset: **security***\
+*Permissions Required: `Security Monitoring Findings Read`*\
 Fallback tool for retrieving full security finding details. Prefer `analyze_security_findings` for most analysis tasks. Use this tool only when you need complete finding objects or when SQL queries are insufficient.
 
 - Get full details for critical findings in my AWS environment.
@@ -657,6 +782,7 @@ Fallback tool for retrieving full security finding details. Prefer `analyze_secu
 
 ### `search_datadog_ci_pipeline_events`
 *Toolset: **software-delivery***\
+*Permissions Required: `CI Visibility Read`*\
 Searches CI events with filters and returns details on them.
 
 - Show me all the pipelines for my commit `58b1488`.
@@ -665,6 +791,7 @@ Searches CI events with filters and returns details on them.
 
 ### `aggregate_datadog_ci_pipeline_events`
 *Toolset: **software-delivery***\
+*Permissions Required: `CI Visibility Read`*\
 Aggregates CI pipeline events to produce statistics, metrics, and grouped analytics.
 
 - What's the average job duration for the last 7 days?
@@ -673,6 +800,7 @@ Aggregates CI pipeline events to produce statistics, metrics, and grouped analyt
 
 ### `get_datadog_flaky_tests`
 *Toolset: **software-delivery***\
+*Permissions Required: `Test Optimization Read`*\
 Searches Datadog [Test Optimization][24] for flaky tests and returns triage details (failure rate, category, owners, history, CI impact), with pagination and sorting.
 
 - Find active flaky tests for the checkout service owned by `@team-abc`, sorted by failure rate.
@@ -681,6 +809,7 @@ Searches Datadog [Test Optimization][24] for flaky tests and returns triage deta
 
 ### `aggregate_datadog_test_events`
 *Toolset: **software-delivery***\
+*Permissions Required: `Test Optimization Read`*\
 Aggregates Datadog Test Optimization events to quantify reliability and performance trends with aggregation functions, optional metrics, group-by facets, and configurable test levels.
 
 - Count the number of failed tests over the last week, grouped by branch.
@@ -689,6 +818,7 @@ Aggregates Datadog Test Optimization events to quantify reliability and performa
 
 ### `search_datadog_test_events`
 *Toolset: **software-delivery***\
+*Permissions Required: `Test Optimization Read`*\
 Searches [Test Optimization][24] test events with filters and returns details on them.
 
 - Show me failed tests on branch `main` from the last 24 hours.
@@ -698,6 +828,7 @@ Searches [Test Optimization][24] test events with filters and returns details on
 
 ### `get_datadog_code_coverage_branch_summary`
 *Toolset: **software-delivery***\
+*Permissions Required: `Code Coverage read`*\
 Fetches aggregated code coverage summary metrics for a repository branch, including total coverage, patch coverage, and service/codeowner breakdowns.
 
 - What's the code coverage on the `main` branch for `github.com/my-org/my-repo`?
@@ -705,6 +836,7 @@ Fetches aggregated code coverage summary metrics for a repository branch, includ
 
 ### `get_datadog_code_coverage_commit_summary`
 *Toolset: **software-delivery***\
+*Permissions Required: `Code Coverage read`*\
 Fetches aggregated code coverage summary metrics for a repository commit, including total coverage, patch coverage, and service/codeowner breakdowns.
 
 - Show me the code coverage for commit `abc123abc123abc123abc123abc123abc123abcd` in `github.com/my-org/my-repo`.
@@ -712,6 +844,7 @@ Fetches aggregated code coverage summary metrics for a repository commit, includ
 
 ### `get_synthetics_tests`
 *Toolset: **synthetics***\
+*Permissions Required: `Synthetics Read`*\
 Searches Datadog Synthetic tests.
 
 - Help me understand why the Synthetic test on endpoint `/v1/my/tested/endpoint` is failing.
@@ -720,6 +853,7 @@ Searches Datadog Synthetic tests.
 
 ### `edit_synthetics_tests`
 *Toolset: **synthetics***\
+*Permissions Required: `Synthetics Global Variable Read` and `Synthetics Read` and `Synthetics Write`*\
 Edits Datadog Synthetic HTTP API tests.
 
 - Improve the assertions of the Synthetic test defined on my endpoint `/v1/my/tested/endpoint`.
@@ -728,6 +862,7 @@ Edits Datadog Synthetic HTTP API tests.
 
 ### `synthetics_test_wizard`
 *Toolset: **synthetics***\
+*Permissions Required: `Synthetics Global Variable Read` and `Synthetics Read` and `Synthetics Write`*\
 Preview and create Datadog Synthetics HTTP API Tests.
 
 - Create Synthetics tests on every endpoint defined in this code file.
@@ -736,6 +871,7 @@ Preview and create Datadog Synthetics HTTP API Tests.
 
 ### `list_datadog_workflows`
 *Toolset: **workflows***\
+*Permissions Required: `Workflows Read`*\
 Lists and searches [Workflow Automation][39] workflows. Supports filtering by name, tags, owner, handle, and trigger type (such as `monitor`, `schedule`, `api`, or `incident`). Results can be sorted by fields like `name` or `updatedAt`.
 
 - Show me all published workflows tagged with `team:platform`.
@@ -744,6 +880,7 @@ Lists and searches [Workflow Automation][39] workflows. Supports filtering by na
 
 ### `get_datadog_workflow`
 *Toolset: **workflows***\
+*Permissions Required: `Workflows Read`*\
 Retrieves detailed information about a specific workflow, including its triggers, steps, connections, and input schema.
 
 - Get the full details for workflow `00000000-0000-0000-0000-000000000000`.
@@ -752,6 +889,7 @@ Retrieves detailed information about a specific workflow, including its triggers
 
 ### `execute_datadog_workflow`
 *Toolset: **workflows***\
+*Permissions Required: `Workflows Run`*\
 Executes a published workflow that has an agent trigger, with optional input parameters matching the workflow's input schema.
 
 - Run the incident escalation workflow for service `checkout-api` with severity `high`.
@@ -762,6 +900,7 @@ Executes a published workflow that has an agent trigger, with optional input par
 
 ### `get_datadog_workflow_instance`
 *Toolset: **workflows***\
+*Permissions Required: `Workflows Read`*\
 Retrieves the status and details of a workflow execution instance, including step results and outputs.
 
 - What's the status of the workflow execution I triggered?
@@ -770,6 +909,7 @@ Retrieves the status and details of a workflow execution instance, including ste
 
 ### `update_datadog_workflow_with_agent_trigger`
 *Toolset: **workflows***\
+*Permissions Required: `Workflows Write`*\
 Adds an agent trigger to a workflow and publishes it, enabling the workflow to be executed by AI agents.
 
 - Add an agent trigger to the deployment rollback workflow so I can run it from here.
@@ -818,3 +958,5 @@ The Datadog MCP Server is under significant development. Use [this feedback form
 [38]: /service_management/case_management/
 [39]: /actions/workflows/
 [40]: /bits_ai/mcp_server/setup#local-binary-authentication
+[41]: /ddsql_editor/
+[42]: /ddsql_reference/ddsql_default/

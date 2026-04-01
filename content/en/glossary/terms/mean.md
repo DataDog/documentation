@@ -1,4 +1,5 @@
 ---
+id: mean
 title: mean
 core_product:
   - metrics

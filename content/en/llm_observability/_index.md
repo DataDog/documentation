@@ -96,7 +96,7 @@ Outlier detection is performed across key dimensions:
 
 These outliers are analyzed over the past week and automatically surfaced in the corresponding time window selected by the user. This enables teams to proactively detect regressions, performance drifts, or unexpected behavior in their LLM applications.
 
-{{< img src="llm_observability/llm-insights.png" alt="An 'Insights' banner across the top of the LLM Observability Monitor page. The banner displays 10 insights and has a View Insights button that leads to a side panel with further details." style="width:100%;" >}}
+{{< img src="llm_observability/Overview_LLMO.png" alt="An 'Insights' banner across the top of the LLM Observability Monitor page. The banner displays 8 insights and has a View Insights button that leads to a side panel with further details." style="width:100%;" >}}
 
 ## Use integrations with LLM Observability
 
