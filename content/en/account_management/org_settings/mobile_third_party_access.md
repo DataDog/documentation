@@ -1,5 +1,7 @@
 ---
 title: Mobile and Third-Party Access
+aliases:
+- /account_management/org_settings/oauth_apps/
 description: Manage and monitor OAuth applications in your organization, including permissions, Application Scope Management, user access, and application status controls.
 further_reading:
 - link: "/account_management/org_settings/"
@@ -24,7 +26,7 @@ Only users with the Datadog Admin role or the `org_authorized_apps_read` and `or
 
 ### Enable
 
-Enabled OAuth applications allow users with necessary permissions to authorize access on their behalf. OAuth applications include the Datadog Mobile App and MCP (Model Context Protocol) OAuth clients registered through Dynamic Client Registration.
+Enabled OAuth applications allow users with necessary permissions to authorize access on their behalf. OAuth applications include the Datadog Mobile App.
 
 ### Disable
 
