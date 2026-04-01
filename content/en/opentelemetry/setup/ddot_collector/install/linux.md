@@ -38,8 +38,8 @@ To complete this guide, you need the following:
 <div class="alert alert-info"><strong>Bug bash</strong>: To install the DDOT Collector on a Linux host, use the following one-line installation command:
 
 ```shell
-sudo chmod +X install_script_agent7.sh
-DD_API_KEY=<DATADOG_API_KEY> DD_SITE="datad0g.com" DD_REPO_URL="datad0g.com" DD_INSTALLER_REGISTRY_URL="install.datad0g.com" DD_AGENT_DIST_CHANNEL=beta DD_AGENT_MAJOR_VERSION=7 DD_AGENT_MINOR_VERSION=78.0~rc.4-1 DD_OTELCOLLECTOR_ENABLED=true ./install_script_agent7.sh"
+sudo chmod +x install_script_agent7.sh
+DD_API_KEY=<DATADOG_API_KEY> DD_SITE="datad0g.com" DD_REPO_URL="datad0g.com" DD_INSTALLER_REGISTRY_URL="install.datad0g.com" DD_AGENT_DIST_CHANNEL=beta DD_AGENT_MAJOR_VERSION=7 DD_AGENT_MINOR_VERSION=78.0~rc.4-1 DD_OTELCOLLECTOR_ENABLED=true ./install_script_agent7.sh
 ```
 </div>
 
