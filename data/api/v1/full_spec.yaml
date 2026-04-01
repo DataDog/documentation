@@ -4686,7 +4686,6 @@ components:
         - sca_fargate_usage
         - sds_scanned_bytes_usage
         - serverless_apps_usage
-        - serverless_apps_apm_usage
         - siem_analyzed_logs_add_on_usage
         - siem_ingested_bytes_usage
         - snmp_usage
@@ -4774,7 +4773,6 @@ components:
         - SCA_FARGATE_USAGE
         - SDS_SCANNED_BYTES_USAGE
         - SERVERLESS_APPS_USAGE
-        - SERVERLESS_APPS_APM_USAGE
         - SIEM_ANALYZED_LOGS_ADD_ON_USAGE
         - SIEM_INGESTED_BYTES_USAGE
         - SNMP_USAGE
@@ -9265,8 +9263,6 @@ components:
         - published_app_percentage
         - serverless_apps_usage
         - serverless_apps_percentage
-        - serverless_apps_apm_usage
-        - serverless_apps_apm_percentage
         - snmp_usage
         - snmp_percentage
         - universal_service_monitoring_usage
@@ -9432,8 +9428,6 @@ components:
         - PUBLISHED_APP_PERCENTAGE
         - SERVERLESS_APPS_USAGE
         - SERVERLESS_APPS_PERCENTAGE
-        - SERVERLESS_APPS_APM_USAGE
-        - SERVERLESS_APPS_APM_PERCENTAGE
         - SNMP_USAGE
         - SNMP_PERCENTAGE
         - UNIVERSAL_SERVICE_MONITORING_USAGE
@@ -10089,14 +10083,6 @@ components:
           type: number
         sds_scanned_bytes_usage:
           description: The total Sensitive Data Scanner usage by tag(s).
-          format: double
-          type: number
-        serverless_apps_apm_percentage:
-          description: The percentage of Serverless Apps APM usage by tag(s).
-          format: double
-          type: number
-        serverless_apps_apm_usage:
-          description: The total Serverless Apps APM usage by tag(s).
           format: double
           type: number
         serverless_apps_percentage:
