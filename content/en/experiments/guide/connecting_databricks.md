@@ -91,7 +91,7 @@ GRANT CREATE TABLE ON SCHEMA <catalog>.datadog_experiments_output TO `<principal
 
 ### Configure a volume for temporary data staging
 
-Datadog Experiments uses a [volume][2] to temporarily save exposure data before copying it into a Databricks table. Run the following commands to create and grant access to this volume. Replace `<catalog>` and `<principal>` with the appropriate values.
+Datadog Experiments uses a [volume][2] to temporarily save exposure data before copying it into a Databricks table. Run the following commands to create and grant access to this volume. Replace `datadog_experiments_output` with your output schema name, and `<catalog>` and `<principal>` with the appropriate values.
 
 ```sql
 CREATE VOLUME IF NOT EXISTS <catalog>.datadog_experiments_output.datadog_experiments_volume;
