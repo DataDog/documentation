@@ -3934,15 +3934,15 @@ menu:
       parent: cloud_cost
       identifier: cloud_cost_planning
       weight: 7
-    - name: Forecasting
-      url: cloud_cost_management/planning/forecasting
-      parent: cloud_cost_planning
-      identifier: cloud_cost_planning_forecasting
-      weight: 701
     - name: Budgets
       url: cloud_cost_management/planning/budgets
       parent: cloud_cost_planning
       identifier: cloud_cost_planning_budgets
+      weight: 701
+    - name: Forecasting
+      url: cloud_cost_management/planning/forecasting
+      parent: cloud_cost_planning
+      identifier: cloud_cost_planning_forecasting
       weight: 702
     - name: Commitment Programs
       url: cloud_cost_management/planning/commitment_programs
