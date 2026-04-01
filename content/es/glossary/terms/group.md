@@ -1,4 +1,5 @@
 ---
+id: group
 core_product:
 - dashboards
 related_terms:

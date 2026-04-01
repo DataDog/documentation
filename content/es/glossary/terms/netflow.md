@@ -1,4 +1,5 @@
 ---
+id: netflow
 core_product:
 - network performance monitoring
 title: NetFlow

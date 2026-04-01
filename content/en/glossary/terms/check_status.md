@@ -1,4 +1,5 @@
 ---
+id: check_status
 title: check status
 core_product:
   - dashboards

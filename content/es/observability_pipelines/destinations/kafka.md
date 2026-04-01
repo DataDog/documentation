@@ -56,7 +56,7 @@ Alterna al interruptor para activar TLS** (Activar TLS). Se requieren los siguie
 1. En el menú desplegable **Compression Algorithm** (Algoritmo de compresión), selecciona un algoritmo de compresión (**gzip**, **zstd**, **lz4** o **snappy**).
 1. (Opcional) Selecciona un **nivel de compresión** en el menú desplegable. Si no se especifica el nivel, se utiliza el nivel por defecto del algoritmo.
 
-##### Opciones de almacenamiento en buffer
+##### Almacenamiento en buffer
 
 {{% observability_pipelines/destination_buffer %}}
 

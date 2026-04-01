@@ -38,7 +38,7 @@ Learn more about the [compatibility requirements][6].
 ### Configure the prompt
 
 1. In Datadog, navigate to the LLM Observability [Evaluations page][1]. Select **Create Evaluation**, then select **Create your own**.
-   {{< img src="llm_observability/evaluations/custom_llm_judge_1-3.png" alt="The LLM Observability Evaluations page with the Create Evaluation side panel opened. The first item, 'Create your own,' is selected. " style="width:100%;" >}}
+   {{< img src="llm_observability/evaluations/EvalConfig_LLMO.png" alt="The LLM Observability Evaluations page with the Create Evaluation side panel opened." style="width:100%;" >}}
 1. Provide a clear, descriptive **evaluation name** (for example, `factuality-check` or `tone-eval`). You can use this name when querying evaluation results. The name must be unique within your application.
 1. Use the **Account** drop-down menu to select the LLM provider and corresponding account to use for your LLM judge. To connect a new account, see [connect an LLM provider][2].
     - If you select an **Amazon Bedrock** account, choose a region the account is configured for.
@@ -282,8 +282,10 @@ Under **Evaluation Scope**, define where and how your evaluation runs. This help
    - **Evaluate On**: Choose one of the following:
       - **Traces**: Evaluate only root spans
       - **All Spans**: Evaluate both root and child spans
-   - **Span Names**: (Optional) Limit evaluation to spans with certain names.
-   - **Tags**: (Optional) Limit evaluation to spans with certain tags.
+   - **Query**: (Optional) Enter a query using Datadog query syntax to filter which spans are evaluated. For example:
+      - `@name:agent.workflow` to filter by span name
+      - `env:prod` to filter by tag
+      - `@name:agent.workflow AND env:prod` to filter by span name and tag
    - **Sampling Rate**: (Optional) Apply sampling (for example, 10%) to control evaluation cost.
 
 {{< img src="llm_observability/evaluations/evaluation_scope.png" alt="Configuring the evaluation scope." style="width:100%;" >}}
