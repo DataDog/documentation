@@ -1,4 +1,5 @@
 ---
+id: mute
 title: mute
 core_product:
   - alerts
