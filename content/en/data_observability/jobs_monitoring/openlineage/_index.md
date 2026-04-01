@@ -8,6 +8,18 @@ further_reading:
   - link: '/data_observability/jobs_monitoring/openlineage/datadog_agent_for_openlineage/'
     tag: 'Documentation'
     text: 'Set up Datadog Agent for OpenLineage Proxy'
+  - link: '/data_observability/jobs_monitoring/openlineage/event_types/'
+    tag: 'Documentation'
+    text: 'Event Types and Lifecycle'
+  - link: '/data_observability/jobs_monitoring/openlineage/facets/'
+    tag: 'Documentation'
+    text: 'Supported Facets'
+  - link: '/data_observability/jobs_monitoring/openlineage/integrations_and_naming/'
+    tag: 'Documentation'
+    text: 'Integrations and Dataset Naming'
+  - link: '/data_observability/jobs_monitoring/openlineage/custom_events/'
+    tag: 'Documentation'
+    text: 'Building Custom OpenLineage Events'
 ---
 
 <div class="alert alert-info"> Custom jobs using OpenLineage is in Preview.</div>
@@ -124,6 +136,29 @@ client = OpenLineageClient.from_environment()
 {{% /tab %}}
 {{< /tabs >}}
 
+## How Datadog processes OpenLineage events
+
+{{< img src="data_observability/openlineage/01_architecture_overview.png" alt="Architecture overview showing event sources (Spark, Airflow, dbt, Custom) sending OpenLineage events to the Datadog API, which processes them into the Lineage Graph, Data Quality Metrics, Job Run Monitoring, and Data Catalog." style="width:100%;" >}}
+
+Datadog processes three OpenLineage event types:
+
+| Event Type | Purpose | When Emitted |
+|---|---|---|
+| **RunEvent** | Tracks job execution lifecycle | At runtime (START, RUNNING, COMPLETE, FAIL, ABORT) |
+| **DatasetEvent** | Describes dataset metadata changes | At design-time, independent of any run |
+| **JobEvent** | Describes job metadata and static lineage | At design-time, independent of any run |
+
+For full details on event structure, lifecycle, and examples, see [Event Types and Lifecycle][5].
+
+### What shows up in Datadog
+
+- **Lineage graph**: Job and dataset nodes with data flow edges, column-level lineage, and parent-child job hierarchies
+- **Data quality metrics**: Time-series metrics including `row_count`, `bytes`, `freshness`, and column-level `nullness` and `uniqueness`
+- **Job run monitoring (APM)**: Execution spans with duration, error tracking, and trace hierarchy across integrations
+- **Data catalog**: Dataset schemas, ownership, documentation, and tags
+
+For the full list of supported facets, see [Supported Facets][6]. For integration-specific details and dataset naming conventions, see [Integrations and Dataset Naming][7].
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -132,3 +167,7 @@ client = OpenLineageClient.from_environment()
 [2]: https://openlineage.io/docs/client/python/#predefined-datadog-sites
 [3]: /getting_started/site/#access-the-datadog-site
 [4]: /data_observability/jobs_monitoring/openlineage/datadog_agent_for_openlineage/
+[5]: /data_observability/jobs_monitoring/openlineage/event_types/
+[6]: /data_observability/jobs_monitoring/openlineage/facets/
+[7]: /data_observability/jobs_monitoring/openlineage/integrations_and_naming/
+[8]: /data_observability/jobs_monitoring/openlineage/custom_events/
