@@ -106,7 +106,8 @@ Grant the service principal access to the SQL warehouse that Datadog Experiments
 1. Navigate to **SQL Warehouses** in your Databricks Workspace.
 1. Select the warehouse for Datadog Experiments.
 1. At the top right corner, click **Permissions**.
-1. Grant the service principal the **Can use** permission and close the permission dialog.
+1. Grant the service principal the **Can use** permission.
+1. Close the **Manage permissions** modal.
 
 ## Step 2: Connect Databricks to Datadog
 
