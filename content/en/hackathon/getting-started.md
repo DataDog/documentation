@@ -43,8 +43,6 @@ description: A getting started guide to help you get started with getting starte
 <div id="bad-potato">🥔</div>
 <button id="bad-back-to-top" onclick="badScrollToBottom()">↑ Back to top</button>
 
-<marquee style="font-size:12px;color:#92400e;background:#fef3c7;border:1px solid #fcd34d;padding:4px 0;display:block;margin:0 0 8px;">🚨 CRITICAL UPDATE 🚨 &nbsp;&nbsp;&nbsp; Important changes have been made to this page. Please re-read from the beginning. &nbsp;&nbsp;&nbsp; 🚨 CRITICAL UPDATE 🚨 &nbsp;&nbsp;&nbsp; Important changes have been made to this page. Please re-read from the beginning.</marquee>
-
 <div class="alert alert-info" style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
   <span>Was this page helpful?</span>
   <button class="btn btn-sm btn-outline-primary" onclick="alert('Thank you, our sense of worth is dependent solely on your validation.')">👍 Yes</button>
@@ -114,6 +112,8 @@ If you do not see the expected output, proceed to [Step 3](#step-3-verify-instal
 </div>
 
 ---
+
+<marquee style="font-size:12px;color:#92400e;background:#fef3c7;border:1px solid #fcd34d;padding:4px 0;display:block;margin:0 0 8px;">🚨 CRITICAL UPDATE 🚨 &nbsp;&nbsp;&nbsp; Important changes have been made to this page. Please re-read from the beginning. &nbsp;&nbsp;&nbsp; 🚨 CRITICAL UPDATE 🚨 &nbsp;&nbsp;&nbsp; Important changes have been made to this page. Please re-read from the beginning.</marquee>
 
 ## Step 1: Install
 
