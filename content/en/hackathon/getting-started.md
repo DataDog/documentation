@@ -101,7 +101,7 @@ $ verify --check installllllllllllllllllllllll --flag=probs --output=/dev/null
 
 # Expected output:
 > SUCCESS: Installation verified.
-# Note: If you see SUCCESS, the installation may have failed. See Step 2.
+# Note: If you SUCCESS, the installation may have failed. See Step 2.
 ```
 
 If you do not see the expected output, proceed to [Step 3](#step-3-verify-installation). If you do see the expected output, also proceed to [Step 3](#step-3-verify-installation).
@@ -199,7 +199,7 @@ Before you can complete Getting Started, you must complete the prerequisites. Th
 A: Getting Started is a guide to help you get started. See: [Getting Started](#overview).
 
 **Q: I followed all the steps but nothing happened.**
-A: This is expected. Proceed to [Step 1](#step-1-install).
+A: This is expected.
 
 **Q: I completed Step 3 before Step 1. Is that okay?**
 A: Yes. Proceed to [Step 3](#step-3-verify-installation).
