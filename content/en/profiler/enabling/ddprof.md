@@ -200,8 +200,21 @@ You can configure logging to one of several endpoints:
 
 ### Global
 
-If you want to instrument all running process, you can try out the `--global` option.
-Global mode is intended for debug purposes. This requires elevated permissions. Depending on your setup, this can mean running as root, granting `CAP_PERFMON`, `CAP_SYSADMIN`, or setting `perf_event_paranoid` to `-1`.
+<div class="alert alert-warning">
+The <code>--global</code> option is deprecated. For full host profiling, consider using <a href="https://github.com/DataDog/dd-otel-host-profiler">dd-otel-host-profiler</a> instead. <code>dd-otel-host-profiler</code> is in preview phase.
+</div>
+
+For full host profiling, Datadog recommends the [dd-otel-host-profiler](https://github.com/DataDog/dd-otel-host-profiler). This eBPF-based profiler:
+
+- Supports multiple languages (C, C++, Rust, Go, Hotspot JVM, Python, Ruby, PHP, Node.js, Perl, and more)
+- Is developed in collaboration with the OpenTelemetry Profiling SIG
+- Provides better performance and lower overhead than the `--global` option
+
+To get started, see the [installation and configuration documentation](https://github.com/DataDog/dd-otel-host-profiler#running-the-profiler).
+
+#### Legacy --global option
+
+The `--global` option is still available but deprecated. Global mode is intended for debug purposes only and requires elevated permissions. Depending on your setup, this can mean running as root, granting `CAP_PERFMON`, `CAP_SYSADMIN`, or setting `perf_event_paranoid` to `-1`.
 
 ```bash
 ./ddprof --environment staging --global --service_version full-host-profile
