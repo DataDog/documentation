@@ -38,7 +38,7 @@ Indexers receive logs from Datadog Agents, then process, index, and store them a
 | **Performance** | 5 MB/s per vCPU | Baseline throughput to determine initial sizing. Actual performance depends on log characteristics (size, number of attributes, nesting level) |
 | **Memory** | 4 GB RAM per vCPU | |
 | **Minimum Pod Size** | 2 vCPUs, 8 GB RAM | Recommended minimum for indexer pods |
-| **Storage Capacity** | At least 200 GB | Required for temporary data while creating and merging index files |
+| **Storage Capacity** | At least 250 GB | Required for temporary data while creating and merging index files |
 | **Storage Type** | Local SSDs (preferred) | Local HDDs or network-attached block storage (Amazon EBS, Azure Managed Disks) can also be used |
 | **Disk I/O** | ~20 MB/s per vCPU | Equivalent to 320 IOPS per vCPU for Amazon EBS (assuming 64 KB IOPS) |
 

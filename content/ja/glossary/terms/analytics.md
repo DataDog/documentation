@@ -1,4 +1,5 @@
 ---
+id: analytics
 core_product:
 - log management
 title: 分析
