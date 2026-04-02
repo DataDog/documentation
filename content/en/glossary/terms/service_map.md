@@ -1,4 +1,5 @@
 ---
+id: service_map
 title: Service Map
 core_product:
   - apm

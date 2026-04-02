@@ -1,4 +1,5 @@
 ---
+id: docker
 core_product:
 - monitorización de la infraestructura
 title: Docker

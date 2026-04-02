@@ -31,6 +31,7 @@ Datadog's [Cursor and VS Code extension][1] includes built-in access to the mana
 1. **Restart the IDE.**
 1. Confirm the Datadog MCP Server is available and the [tools][3] are listed: Go to **Cursor Settings** (`Shift` + `Cmd/Ctrl` + `J`), select the **Tools & MCP** tab, and expand the extension's tools list.
 1. If you previously installed the Datadog MCP Server manually, remove it from the IDE's configuration to avoid conflicts.
+1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
 
 [2]: /ide_plugins/vscode/?tab=cursor#installation
 [3]: /bits_ai/mcp_server#available-tools
@@ -63,9 +64,13 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
        }
     }</code></pre>
 
-1. To enable [product-specific tools][2], include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and LLM Observability tools: 
+1. To enable [product-specific tools][2], include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and LLM Observability tools (use `toolsets=all` to enable all generally available toolsets, best for clients that support tool filtering):
 
    <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
+
+1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
+
+<div class="alert alert-info">If remote authentication is not available, use <a href="#local-binary-authentication">local binary authentication</a> instead.</div>
 
 [1]: /getting_started/site/
 [2]: /bits_ai/mcp_server#toolsets
@@ -76,8 +81,6 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
 <div class="alert alert-danger">Datadog MCP Server is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
 
 {{< /site-region >}}
-
-<div class="alert alert-info">If remote authentication is not available, use <a href="#local-binary-authentication">local binary authentication</a> instead.</div>
 
 [1]: /getting_started/site/
 {{% /tab %}}
@@ -92,11 +95,13 @@ Connect Claude (including Claude Cowork) to the Datadog MCP Server by adding it 
 1. When prompted for a URL, enter the Datadog MCP Server endpoint for your [Datadog site][2] ({{< region-param key="dd_site_name" >}}). For the correct instructions, use the **Datadog Site** selector on the right side of this documentation page to select your site.
    <pre><code>{{< region-param key="mcp_server_endpoint" >}}</code></pre>
 
-   To enable [product-specific tools][3], include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and LLM Observability tools: 
+   To enable [product-specific tools][3], include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and LLM Observability tools (use `toolsets=all` to enable all generally available toolsets, best for clients that support tool filtering):
 
    <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
 
 1. Complete the OAuth login flow when prompted.
+
+1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
 
 [1]: https://support.claude.com/en/articles/11175166-get-started-with-custom-connectors-using-remote-mcp
 [2]: /getting_started/site/
@@ -122,17 +127,19 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
    url = "{{< region-param key="mcp_server_endpoint" >}}"
    </code></pre>
 
-   To enable [product-specific tools][2], include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and LLM Observability tools: 
+   To enable [product-specific tools][2], include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and LLM Observability tools (use `toolsets=all` to enable all generally available toolsets, best for clients that support tool filtering):
 
    <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
 
-2. Log in to the Datadog MCP Server:
+1. Log in to the Datadog MCP Server:
 
    ```shell
    codex mcp login datadog
    ```
 
    This opens your browser to complete the OAuth flow. Codex stores the resulting credentials so you don't need to log in again until the token expires.
+
+1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
 
 [2]: /bits_ai/mcp_server#toolsets
 {{< /site-region >}}
@@ -159,6 +166,7 @@ Datadog's [Cursor and VS Code extension][1] includes built-in access to the mana
 1. Confirm the Datadog MCP Server is available and the [tools][3] are listed: Open the chat panel, select agent mode, and click the **Configure Tools** button.
    {{< img src="bits_ai/mcp_server/vscode_configure_tools_button.png" alt="Configure Tools button in VS Code" style="width:70%;" >}}
 1. If you previously installed the Datadog MCP Server manually, remove it from the IDE's configuration to avoid conflicts. Open the command palette (`Shift` + `Cmd/Ctrl` + `P`) and run `MCP: Open User Configuration`.
+1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
 
 [2]: /ide_plugins/vscode/?tab=vscode#installation
 [3]: /bits_ai/mcp_server#available-tools
@@ -173,7 +181,7 @@ Datadog's [Cursor and VS Code extension][1] includes built-in access to the mana
 
 {{% tab "JetBrains IDEs" %}}
 
-JetBrains offers the [Junie][1] and [AI Assistant][2] plugins for their range of IDEs. Alternatively, many developers use an agent CLI, such as Claude Code or Codex, alongside their IDE.
+JetBrains offers the [Junie][1] and [AI Assistant][2] plugins for their range of IDEs. GitHub offers the [Copilot][4] plugin. Alternatively, many developers use an agent CLI, such as Claude Code or Codex, alongside their IDE.
 
 Point your plugin to the MCP Server endpoint for your regional [Datadog site][3]. For the correct instructions, use the **Datadog Site** selector on the right side of this documentation page to select your site.
 
@@ -181,48 +189,76 @@ Point your plugin to the MCP Server endpoint for your regional [Datadog site][3]
 Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-param key="mcp_server_endpoint" >}}</code>.
 
 {{% collapse-content title="Junie" level="h4" expanded=false id="jetbrains-junie" %}}
-Go to **Tools** > **Junie** > **MCP Settings** and add the following block:
+1. Go to **Tools** > **Junie** > **MCP Settings** and add the following block:
 
-<pre><code>{
-  "mcpServers": {
-    "datadog": {
-      "type": "http",
-      "url": "{{< region-param key="mcp_server_endpoint" >}}"
+    <pre><code>{
+      "mcpServers": {
+        "datadog": {
+          "type": "http",
+          "url": "{{< region-param key="mcp_server_endpoint" >}}"
+        }
+      }
     }
-  }
-}
-</code></pre>
+    </code></pre>
 
-To enable [product-specific tools][1], include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and LLM Observability tools: 
+1. To enable [product-specific tools][1], include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and LLM Observability tools (use `toolsets=all` to enable all generally available toolsets, best for clients that support tool filtering):
 
-<pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
+    <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
 
-You are prompted to login through OAuth. The status indicator in the settings displays a green tick when the connection is successful.
+1. You are prompted to login through OAuth. The status indicator in the settings displays a green tick when the connection is successful.
+
+1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
 
 [1]: /bits_ai/mcp_server#toolsets
 {{% /collapse-content %}}
 
 {{% collapse-content title="JetBrains AI Assistant" level="h4" expanded=false id="jetbrains-ai-assistant" %}}
-Go to **Tools** > **AI Assistant** > **Model Context Protocol (MCP)** and add the following block:
+1. Go to **Tools** > **AI Assistant** > **Model Context Protocol (MCP)** and add the following block:
 
-<pre><code>{
-  "mcpServers": {
-    "datadog": {
-      "url": "{{< region-param key="mcp_server_endpoint" >}}"
-      "headers": {
-        "DD_API_KEY": "&lt;YOUR_API_KEY&gt;",
-        "DD_APPLICATION_KEY": "&lt;YOUR_APP_KEY&gt;"
+    <pre><code>{
+      "mcpServers": {
+        "datadog": {
+          "url": "{{< region-param key="mcp_server_endpoint" >}}"
+          "headers": {
+            "DD_API_KEY": "&lt;YOUR_API_KEY&gt;",
+            "DD_APPLICATION_KEY": "&lt;YOUR_APP_KEY&gt;"
+          }
+        }
       }
     }
-  }
-}
-</code></pre>
+    </code></pre>
 
-To enable [product-specific tools][1], include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and LLM Observability tools: 
+1. To enable [product-specific tools][1], include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and LLM Observability tools (use `toolsets=all` to enable all generally available toolsets, best for clients that support tool filtering):
 
-<pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
+    <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
 
-The status indicator in the settings displays a green tick when the connection is successful.
+1. The status indicator in the settings displays a green tick when the connection is successful.
+
+1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
+
+[1]: /bits_ai/mcp_server#toolsets
+{{% /collapse-content %}}
+
+{{% collapse-content title="GitHub Copilot" level="h4" expanded=false id="github-copilot" %}}
+1. Go to **Tools** > **GitHub Copilot** > **Model Context Protocol (MCP)** and add the following block:
+
+    <pre><code>{
+      "servers": {
+        "datadog": {
+          "type": "http",
+          "url": "{{< region-param key="mcp_server_endpoint" >}}"
+        }
+      }
+    }
+    </code></pre>
+
+1. To enable [product-specific tools][1], include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and LLM Observability tools (use `toolsets=all` to enable all generally available toolsets, best for clients that support tool filtering):
+
+    <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
+
+1. Click the `Start` element that appears in the editor to start the server. You are prompted to log in through OAuth.
+
+1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
 
 [1]: /bits_ai/mcp_server#toolsets
 {{% /collapse-content %}}
@@ -247,6 +283,7 @@ The [Datadog plugin for JetBrains IDEs][3] integrates with these agent CLIs. For
 [1]: https://plugins.jetbrains.com/plugin/26104-junie-the-ai-coding-agent-by-jetbrains
 [2]: https://plugins.jetbrains.com/plugin/22282-jetbrains-ai-assistant
 [3]: /getting_started/site/
+[4]: https://plugins.jetbrains.com/plugin/17718-github-copilot--your-ai-pair-programmer
 {{% /tab %}}
 
 {{% tab "Other" %}}
@@ -269,9 +306,11 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
       }
     }</code></pre>
 
-1. To enable [product-specific tools][1], include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and LLM Observability tools: 
+1. To enable [product-specific tools][1], include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and LLM Observability tools (use `toolsets=all` to enable all generally available toolsets, best for clients that support tool filtering):
 
     <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
+
+1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
 
 Example configuration file locations:
 
@@ -305,6 +344,26 @@ Example configuration file locations:
 | [Goose][8], [Kiro][9], [Kiro CLI][10], [Cline][11] | Various | See the **Other** tab above. Use local binary authentication for Cline if remote authentication is unreliable. |
 
 <div class="alert alert-info">The Datadog MCP Server is under significant development, and additional supported clients may become available.</div>
+
+## Required permissions
+
+MCP Server tools require the following [Datadog user role permissions][22]:
+
+| Permission | Required for |
+|------------|-------------|
+| <code style="white-space:nowrap">mcp_read</code> | Tools that read data from Datadog (for example, querying monitors, searching logs, retrieving dashboards) |
+| <code style="white-space:nowrap">mcp_write</code> | Tools that create or modify resources in Datadog (for example, creating monitors, muting hosts) |
+
+In addition to `mcp_read` or `mcp_write`, users need the standard Datadog permissions for the underlying resource. For example, using an MCP tool that reads monitors requires both `mcp_read` and the [Monitors Read][24] permission. See [Datadog Role Permissions][25] for the full list of resource-level permissions.
+
+Users with the **Datadog Standard Role** have both MCP Server permissions by default. If your organization uses [custom roles][23], add the permissions manually:
+1. Go to [**Organization Settings > Roles**][26] as an administrator, and click the role you want to update.
+1. Click **Edit Role** (pencil icon).
+1. Under the permissions list, select the **MCP Read** and **MCP Write** checkboxes.
+1. Select any other resource-level permissions you need for the role.
+1. Click **Save**.
+
+Organization administrators can manage global MCP access and write capabilities from [Organization Settings][27].
 
 ## Authentication
 
@@ -348,7 +407,7 @@ Local authentication is recommended for Cline and when remote authentication is 
 
 2. Run `datadog_mcp_cli login` manually to walk through the OAuth login flow and choose a [Datadog site][21].
 
-3. Configure your AI client to use the stdio transport with `datadog_mcp_cli` as the command. For example (replace `<USERNAME>` with your username):
+3. Configure your AI client to use the stdio transport with `datadog_mcp_cli` as the command. For example, in macOS (replace `<USERNAME>` with your OS username):
    ```json
    {
      "mcpServers": {
@@ -362,12 +421,19 @@ Local authentication is recommended for Cline and when remote authentication is 
    }
    ```
 
-   On Windows, replace the `command` path with the location of the downloaded `.exe` file (for example, `C:\Users\<USERNAME>\bin\datadog_mcp_cli.exe`).
+   For other operating systems, replace the `command` path with the location of the downloaded binary:
+   - Linux: `/home/<USERNAME>/.local/bin/datadog_mcp_cli`
+   - Windows: `<USERNAME>\bin\datadog_mcp_cli.exe`
 
    <div class="alert alert-tip">For Claude Code, you can instead run: 
    <pre><code>claude mcp add datadog --scope user -- ~/.local/bin/datadog_mcp_cli</code></pre></div>
 
+4. Fully restart your AI client to apply the configuration and load the MCP Server.
 {{% /collapse-content %}}
+
+## Toolsets
+
+All toolsets for the MCP Server are documented [here][12]. By default, the base URL only includes the `core` toolset. 
 
 ## Test access to the MCP Server
 
@@ -409,3 +475,9 @@ Local authentication is recommended for Cline and when remote authentication is 
 [19]: https://claude.ai
 [20]: https://coterm.datadoghq.com/mcp-cli/datadog_mcp_cli.exe
 [21]: /getting_started/site/
+[22]: /account_management/rbac/permissions/#mcp
+[23]: /account_management/rbac/?tab=datadogapplication#custom-roles
+[24]: /account_management/rbac/permissions/#monitors
+[25]: /account_management/rbac/permissions/
+[26]: https://app.datadoghq.com/organization-settings/roles
+[27]: https://app.datadoghq.com/organization-settings/preferences

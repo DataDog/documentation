@@ -133,15 +133,15 @@ For host or Docker injection, modifying the `auto_inject` version is not recomme
 
 Datadog maintains an internal deny list to prevent injection into certain processes (for example, IDEs or databases). If a process command or entrypoint is on this list, the injector skips the injection process.  
 
-#### Linux workload selection
+#### Linux instrumentation rules
 
 {{< callout url="https://docs.google.com/forms/d/e/1FAIpQLSdMu6WAsUCD3djkl_oN0Qh7fQmBCiKYyUvuqlYWRyObebAc6Q/viewform" header="Join the Preview!">}}
-Workload selection is available for Linux-based apps through a limited availability preview. To configure allow or deny rules for process injection, sign up for preview access.
+Instrumentation rules are available for Linux-based apps through a limited availability preview. To configure allow or deny rules for process injection, sign up for preview access.
 {{< /callout >}}
 
-#### Kubernetes workload selection  
+#### Kubernetes instrumentation rules
 
-Workload selection enables injection based on Kubernetes labels and selectors. Rules to consider:
+Instrumentation rules enable injection based on Kubernetes labels and selectors. Rules to consider:
 
 1. `disabledNamespaces` always takes precedence.
 2. When a pod initializes, the target list is checked from top to bottom. Only the first matching rule applies per pod.
@@ -268,7 +268,7 @@ String limit violations are common if service tags are not explicitly set throug
 If logs show no issues but traces are missing, there may be an application-side misconfiguration. Verify that:
 - Required annotations and labels are present.
 - [Unified Service Tagging][8] is set up correctly.
-- Allow/deny lists for workload selection are properly defined.
+- Allow/deny lists for instrumentation rules are properly defined.
 
 ## Language-specific troubleshooting
 

@@ -52,7 +52,7 @@ Toggle the switch to enable TLS. If you enable TLS, the following certificate an
 
 Enter the number of seconds to wait before sending TCP keepalive probes on an idle connection.
 
-##### Buffering options
+##### Buffering
 
 {{% observability_pipelines/destination_buffer %}}
 

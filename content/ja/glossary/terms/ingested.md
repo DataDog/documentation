@@ -1,4 +1,5 @@
 ---
+id: ingested
 core_product:
 - log management
 - apm

@@ -1,4 +1,5 @@
 ---
+id: heatmap
 title: heatmap
 core_product:
   - dashboards
