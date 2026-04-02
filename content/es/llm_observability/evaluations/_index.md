@@ -20,7 +20,7 @@ También puedes [Enviar evaluaciones personalizadas][2] utilizando la API de Dat
 
 ### Integraciones de evaluación
 
-Datadog también admite integraciones con algunos marcos de evaluación de terceros, como [Ragas][3] y [NeMo][4].
+Datadog también admite integraciones con algunos marcos de evaluación de terceros, como [NeMo][3].
 
 ### Integración de Sensitive Data Scanner
 
@@ -30,6 +30,5 @@ Al escanear de forma proactiva los datos confidenciales, LLM Observability garan
 
 [1]: /es/llm_observability/evaluations/ootb_evaluations
 [2]: /es/llm_observability/evaluations/submit_evaluations
-[3]: /es/llm_observability/evaluations/ragas_evaluations
-[4]: /es/llm_observability/evaluations/submit_nemo_evaluations
+[3]: /es/llm_observability/evaluations/submit_nemo_evaluations
 [5]: /es/security/sensitive_data_scanner/
