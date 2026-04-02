@@ -15,12 +15,12 @@ This is just a simple rendering test that checks whether anything is amiss on in
 
 ### Basic image
 
-{% img src="/images/logos/datadog_logo.svg" alt="Datadog logo" style="width:80%;" /%}
+{% img src="dd_e2e/dashboard.png" alt="Datadog logo" style="width:80%;" /%}
 
 ### With custom width
 
-{% img src="/images/logos/datadog_logo.svg" alt="Datadog logo at 50% width" style="width:50%;" /%}
+{% img src="dd_e2e/dashboard.png" alt="Datadog logo at 50% width" style="width:50%;" /%}
 
 ### With custom max-width
 
-{% img src="/images/logos/datadog_logo.svg" alt="Datadog logo with max-width" style="max-width:300px;" /%}
+{% img src="dd_e2e/dashboard.png" alt="Datadog logo with max-width" style="max-width:300px;" /%}
