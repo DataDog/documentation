@@ -122,7 +122,7 @@ From the heatmap view, click the **Change Screenshot** button. A dropdown appear
 
 **Existing screenshots**
 
-Choose from screenshots previously saved by you or your teammates. This ensures everyone in your organization analyzes the same view state.
+Choose from screenshots previously saved by you or your teammates. This helps ensure everyone in your organization analyzes the same view state.
 
 **Take new screenshot**
 
@@ -132,14 +132,12 @@ Capture a screenshot directly from your live application. Use this option when t
 
 1. Click **Take new screenshot**.
 
-   {{< img src="real_user_monitoring/session_replay/heatmaps/heatmaps-take-new-screenshot-selected.png" alt="The Change Screenshot dropdown with Take new screenshot selected." style="width:100%;">}}
-
 
 1. Navigate to the page you want to capture in the embedded browser.
 1. Scroll and interact with the page to display the content you want.
 1. Select a masking level to prevent sensitive data from appearing in your heatmap screenshot. Individual element-level privacy settings configured in your code still take precedence. For more information, see [Privacy options][5].
 
-   {{< img src="real_user_monitoring/session_replay/heatmaps/heatmaps-take-new-screenshot.png" alt="The Take New Screenshot panel showing navigation instructions and a masking level selector." style="width:100%;">}}
+   {{< img src="real_user_monitoring/session_replay/heatmaps/heatmaps-take-new-screenshot.png" alt="The Take new screenshot panel showing navigation instructions and a masking level selector." style="width:100%;">}}
 
 1. Click **Take Screenshot**. A preview of the screenshot opens.
 1. Review the preview and click **Confirm** to apply the screenshot to your heatmap.
