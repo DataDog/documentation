@@ -2,29 +2,35 @@
 title: Instrumenting Azure API Management
 code_lang: azure_apim
 type: multi-code-lang
-code_lang_weight: 60
+code_lang_weight: 70
 further_reading:
 - link: "/integrations/guide/azure-integrations/"
   tag: "Documentation"
   text: "Azure integrations"
+- link: "/tracing/guide/ignoring_apm_resources/"
+  tag: "Documentation"
+  text: "Ignoring Unwanted Resources in APM"
+- link: "/tracing/trace_collection/trace_context_propagation/"
+  tag: "Documentation"
+  text: "Trace Context Propagation"
 ---
 
-Datadog APM can create **inferred spans** for requests that pass through Azure API Management to your backend services. The spans power end-to-end traces, service maps, and sampling based on the API Management gateway.
+Datadog APM can create **inferred spans** for requests that pass through Azure API Management to your backend services. The spans enable end-to-end traces, service maps, and sampling based on the API Management gateway.
 
 Inferred spans for Azure API Management are supported for **.NET**, **JavaScript** (Node.js), and **Python** only. Other runtimes (for example Go, Java, or PHP) do not emit Azure API Management inferred spans, even if they support inferred spans for other gateways.
 
 ## Prerequisites
 
-- `DD_TRACE_INFERRED_PROXY_SERVICES_ENABLED` is set in your application settings.
+- `DD_TRACE_INFERRED_PROXY_SERVICES_ENABLED=true` is set in your application settings.
 - Your backend uses a **supported runtime**, **minimum tracer version**, and **web framework** from the table below.
 
 ### Supported runtimes and web frameworks
 
 | Runtime | Datadog Tracer | Minimum tracer version | Frameworks |
 | ------- | -------------- | ---------------------- | ---------- |
-| Node.js | `dd-trace-js` | [v5.87.0][2]+ | express, fastify, hapi, koa, microgateway-core, next, paperplane, restify, router, apollo |
-| Python | `dd-trace-py` | [v4.6.0][3]+ | aiohttp, asgi, bottle, cherrypy, django, djangorestframework, falcon, fastapi, flask, molten, pyramid, sanic, starlette, tornado, wsgi |
-| .NET | `dd-trace-dotnet` | [v3.39.0][1]+ | ASP.NET, ASP.NET Core |
+| Node.js | `dd-trace-js` | v5.87.0+ | express, fastify, hapi, koa, microgateway-core, next, paperplane, restify, router, apollo |
+| Python | `dd-trace-py` | v4.6.0+ | aiohttp, asgi, bottle, cherrypy, django, djangorestframework, falcon, fastapi, flask, molten, pyramid, sanic, starlette, tornado, wsgi |
+| .NET | `dd-trace-dotnet` | v3.39.0+ | ASP.NET, ASP.NET Core |
 
 ## Setup
 
@@ -34,10 +40,10 @@ To create inferred spans, Azure API Management must pass the following headers t
 | ------ | ----- |
 | `x-dd-proxy` | `azure-apim` |
 | `x-dd-proxy-request-time-ms` | Request timestamp in Unix milliseconds |
-| `x-dd-proxy-httpMethod` | HTTP method (e.g. from `context.Operation.Method`) |
-| `x-dd-proxy-path` | URL template (e.g. from `context.Operation.UrlTemplate`) |
-| `x-dd-proxy-region` | Deployment region (e.g. from `context.Deployment.Region`) |
-| `x-dd-proxy-domain-name` | Request host (e.g. from `context.Request.OriginalUrl.Host`) |
+| `x-dd-proxy-httpmethod` | HTTP method (for example, from `context.Operation.Method`) |
+| `x-dd-proxy-path` | URL template (for example, from `context.Operation.UrlTemplate`) |
+| `x-dd-proxy-region` | Deployment region (for example, from `context.Deployment.Region`) |
+| `x-dd-proxy-domain-name` | Request host (for example, from `context.Request.OriginalUrl.Host`) |
 
 ### Inbound policy
 
@@ -50,7 +56,7 @@ Add the following policy to the **inbound** section of your API in Azure API Man
 <set-header name="x-dd-proxy-request-time-ms" exists-action="override">
     <value>@(new DateTimeOffset(context.Timestamp).ToUnixTimeMilliseconds().ToString())</value>
 </set-header>
-<set-header name="x-dd-proxy-httpMethod" exists-action="override">
+<set-header name="x-dd-proxy-httpmethod" exists-action="override">
     <value>@(context.Operation.Method)</value>
 </set-header>
 <set-header name="x-dd-proxy-path" exists-action="override">
@@ -64,7 +70,7 @@ Add the following policy to the **inbound** section of your API in Azure API Man
 </set-header>
 ```
 
-You can add this policy at the API level in the Azure portal under **API Management** → your API → **Design** → **Inbound processing** → **Code view**, or via the Azure API Management REST API or policies in your API definition.
+You can add this policy at the API level in the Azure portal under **API Management** > your API > **Design** → **Inbound processing** → **Code view** (see [Set or edit Azure API Management policies][4]), using the Azure API Management REST API, or policies in your API definition.
 
 ## Update sampling rules
 
@@ -92,6 +98,4 @@ DD_TRACE_SAMPLING_RULES='[{"sample_rate":0.5}]'
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v3.39.0
-[2]: https://github.com/DataDog/dd-trace-js/releases/tag/v5.87.0
-[3]: https://github.com/DataDog/dd-trace-py/releases/tag/v4.6.0
+[4]: https://learn.microsoft.com/en-us/azure/api-management/set-edit-policies
