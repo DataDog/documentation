@@ -1,6 +1,6 @@
 import { test, expect, type Page } from '@playwright/test';
 
-const PAGE_URL = '/dd_e2e/cdocs/headings_and_toc/';
+const PAGE_URL = '/dd_e2e/cdocs/integration/headings_and_toc/';
 
 // --- Selectors ---
 

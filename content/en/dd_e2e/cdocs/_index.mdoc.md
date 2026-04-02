@@ -10,10 +10,10 @@ This folder contains a collection of pages used for e2e tests. These pages are n
 * Page
 * Test objective
 ---
-* [Content filtering](/dd_e2e/cdocs/content_filtering)
+* [Content filtering](/dd_e2e/cdocs/integration/content_filtering)
 * The content changes based on the user's filtering selections.
 ---
-* [Headings and TOC](/dd_e2e/cdocs/headings_and_toc)
+* [Headings and TOC](/dd_e2e/cdocs/integration/headings_and_toc)
 * The TOC (right nav) is correct for any given filter selection.
 ---
 * Navigation and data persistence (TODO)
