@@ -2,6 +2,10 @@
 title: Oracle Fusion Integration Setup
 description: "Configure Oracle Fusion to authorize Datadog to access its REST APIs using OAuth 2.0."
 site_support_id: oracle_fusion_integration_setup
+further_reading:
+- link: "https://www.datadoghq.com/blog/oracle-fusion-applications-integration/"
+  tag: "Blog"
+  text: "Monitor Oracle Fusion Applications with Datadog"
 ---
 
 
@@ -103,6 +107,10 @@ To associate the integration user with the confidential application so that OAut
 
 This association confirms that tokens issued when Datadog authenticates using client credentials carry the identity and roles of the integration user.
 
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://docs.oracle.com/en/cloud/saas/applications-common/25d/farca/configure_oauth.html
 [2]: /logs/explorer/

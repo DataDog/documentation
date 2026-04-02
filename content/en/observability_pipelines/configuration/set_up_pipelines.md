@@ -35,6 +35,8 @@ You can create a pipeline with one of the following methods:
 - [API](#set-up-a-pipeline-with-the-api)
 - [Terraform](#set-up-a-pipeline-with-terraform)
 
+See [Export a Pipeline Configuration to JSON or Terraform][14] if you want to programmatically deploy a pipeline created in the UI.
+
 ## Set up a pipeline in the UI
 
 {{< tabs >}}
@@ -180,3 +182,4 @@ To delete a pipeline in the UI:
 [11]: /observability_pipelines/configuration/update_existing_pipelines/?
 [12]: /observability_pipelines/configuration/install_the_worker/
 [13]: /monitors/types/metric/
+[14]: /observability_pipelines/configuration/export_pipeline_configuration/

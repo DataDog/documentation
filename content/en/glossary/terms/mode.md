@@ -1,4 +1,5 @@
 ---
+id: mode
 title: mode
 core_product:
   - metrics
