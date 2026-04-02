@@ -25,4 +25,21 @@ test.describe('Cdocs site region component', () => {
       'site-region-initial.png'
     );
   });
+
+  test('selecting a different site updates visible content', async ({ page }) => {
+    await expect(page.locator('[data-region="us"]')).not.toHaveClass(/d-none/);
+
+    await page.click('.js-region-select .btn');
+    await page.click('.js-region-select .dropdown-item[data-value="eu"]');
+
+    await expect(page.locator('[data-region="eu"]')).not.toHaveClass(/d-none/);
+    await expect(page.locator('[data-region="us"]')).toHaveClass(/d-none/);
+
+    await expect(page.locator(CONTENT_AREA)).toHaveScreenshot(
+      'site-region-eu-selected.png'
+    );
+
+    await page.click('.js-region-select .btn');
+    await page.click('.js-region-select .dropdown-item[data-value="us"]');
+  });
 });

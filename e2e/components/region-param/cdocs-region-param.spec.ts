@@ -25,4 +25,20 @@ test.describe('Cdocs region param component', () => {
       'region-param-initial.png'
     );
   });
+
+  test('selecting a different site updates region params', async ({ page }) => {
+    await expect(page.locator('span.js-region-param[data-region-param="dd_site"]')).toHaveText('datadoghq.com');
+
+    await page.click('.js-region-select .btn');
+    await page.click('.js-region-select .dropdown-item[data-value="eu"]');
+
+    await expect(page.locator('span.js-region-param[data-region-param="dd_site"]')).toHaveText('datadoghq.eu');
+
+    await expect(page.locator(CONTENT_AREA)).toHaveScreenshot(
+      'region-param-eu-selected.png'
+    );
+
+    await page.click('.js-region-select .btn');
+    await page.click('.js-region-select .dropdown-item[data-value="us"]');
+  });
 });
