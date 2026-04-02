@@ -16,6 +16,8 @@ further_reading:
 
 {{< product-availability >}}
 
+## Overview
+
 Use Observability Pipelines' Datadog Agent source to receive logs or metrics ({{< tooltip glossary="preview" case="title" >}}) from the Datadog Agent.
 
 **Note**: If you are using the Datadog Distribution of OpenTelemetry (DDOT) Collector for logs, you must [use the OpenTelemetry source to send logs to Observability Pipelines][4].
@@ -24,7 +26,11 @@ Use Observability Pipelines' Datadog Agent source to receive logs or metrics ({{
 
 {{% observability_pipelines/prerequisites/datadog_agent %}}
 
-## Set up the source in the pipeline UI
+## Setup
+
+Set up this source when you [set up a pipeline][1]. You can set up a pipeline in the [UI][6], using the [API][7], or with [Terraform][8]. The instructions in this section are for setting up the source in the UI.
+
+### Optional TLS settings
 
 Select and set up this source when you [set up a pipeline][1]. The information below is for the source settings in the pipeline UI.
 
@@ -159,3 +165,6 @@ datadog:
 [1]: /observability_pipelines/configuration/set_up_pipelines/
 [4]: /observability_pipelines/sources/opentelemetry/#send-logs-from-the-datadog-distribution-of-opentelemetry-collector-to-observability-pipelines
 [5]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/
+[6]: https://app.datadoghq.com/observability-pipelines
+[7]: /api/latest/observability-pipelines/
+[8]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline

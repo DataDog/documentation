@@ -1,4 +1,5 @@
 ---
+id: flaky_test
 core_product:
 - ci-cd
 short_definition: 不安定なテストとは、同じコミットに対して複数回テストを実行したときに、成功と失敗の両方のステータスを示すテストのことです。

@@ -2160,6 +2160,13 @@
       "description": "Save new value for on-demand concurrency cap returns \"OK\" response"
     }
   ],
+  "CreateTeamMembership": [
+    {
+      "group": "teams",
+      "suffix": "",
+      "description": "Add a user to a team returns \"Represents a user's association to a team\" response"
+    }
+  ],
   "AddTeamHierarchyLink": [
     {
       "group": "teams",
@@ -2186,11 +2193,25 @@
       "description": "Create a team with V2 fields returns \"CREATED\" response"
     }
   ],
+  "CreateTeamConnections": [
+    {
+      "group": "teams",
+      "suffix": "",
+      "description": "Create team connections returns \"Created\" response"
+    }
+  ],
   "CreateTeamNotificationRule": [
     {
       "group": "teams",
       "suffix": "",
       "description": "Create team notification rule returns \"OK\" response"
+    }
+  ],
+  "DeleteTeamConnections": [
+    {
+      "group": "teams",
+      "suffix": "",
+      "description": "Delete team connections returns \"No Content\" response"
     }
   ],
   "SyncTeams": [

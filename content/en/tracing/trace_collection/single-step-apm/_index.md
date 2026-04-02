@@ -73,5 +73,5 @@ If you encounter problems enabling APM with SSI, see the [SSI troubleshooting gu
 [14]: /getting_started/tagging/unified_service_tagging
 [15]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/troubleshooting
 [16]: /tracing/trace_collection/custom_instrumentation/
-[17]: /tracing/trace_collection/automatic_instrumentation/configure_apm_features_linux/
+[17]: /tracing/trace_collection/library_config/application_monitoring_yaml/
 [18]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/compatibility/

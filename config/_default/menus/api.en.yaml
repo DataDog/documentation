@@ -2660,6 +2660,30 @@ menu:
           - SearchSecurityMonitoringSignals
         unstable: []
         order: 72
+    - name: Bulk update triage state of security signals
+      url: '#bulk-update-triage-state-of-security-signals'
+      identifier: security-monitoring-bulk-update-triage-state-of-security-signals
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - BulkEditSecurityMonitoringSignalsState
+        unstable: []
+        order: 85
+    - name: Bulk update triage assignee of security signals
+      url: '#bulk-update-triage-assignee-of-security-signals'
+      identifier: security-monitoring-bulk-update-triage-assignee-of-security-signals
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - BulkEditSecurityMonitoringSignalsAssignee
+        unstable: []
+        order: 86
     - name: Get a quick list of security signals
       url: '#get-a-quick-list-of-security-signals'
       identifier: security-monitoring-get-a-quick-list-of-security-signals
@@ -3942,6 +3966,90 @@ menu:
           - PatchGlobalVariable
         unstable: []
         order: 51
+    - name: Get a specific version of a test
+      url: '#get-a-specific-version-of-a-test'
+      identifier: synthetics-get-a-specific-version-of-a-test
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSyntheticsTestVersion
+        unstable: []
+        order: 53
+    - name: Get version history of a test
+      url: '#get-version-history-of-a-test'
+      identifier: synthetics-get-version-history-of-a-test
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListSyntheticsTestVersions
+        unstable: []
+        order: 57
+    - name: Get parent suites for a test
+      url: '#get-parent-suites-for-a-test'
+      identifier: synthetics-get-parent-suites-for-a-test
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetTestParentSuites
+        unstable: []
+        order: 56
+    - name: Complete a multipart upload of a test file
+      url: '#complete-a-multipart-upload-of-a-test-file'
+      identifier: synthetics-complete-a-multipart-upload-of-a-test-file
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CompleteTestFileMultipartUpload
+        unstable: []
+        order: 61
+    - name: Abort a multipart upload of a test file
+      url: '#abort-a-multipart-upload-of-a-test-file'
+      identifier: synthetics-abort-a-multipart-upload-of-a-test-file
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - AbortTestFileMultipartUpload
+        unstable: []
+        order: 62
+    - name: Get presigned URLs for uploading a test file
+      url: '#get-presigned-urls-for-uploading-a-test-file'
+      identifier: synthetics-get-presigned-urls-for-uploading-a-test-file
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetTestFileMultipartPresignedUrls
+        unstable: []
+        order: 60
+    - name: Get a presigned URL for downloading a test file
+      url: '#get-a-presigned-url-for-downloading-a-test-file'
+      identifier: synthetics-get-a-presigned-url-for-downloading-a-test-file
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetTestFileDownloadUrl
+        unstable: []
+        order: 59
     - name: Edit a Network Path test
       url: '#edit-a-network-path-test'
       identifier: synthetics-edit-a-network-path-test
@@ -4002,6 +4110,18 @@ menu:
           - DeleteSyntheticsTests
         unstable: []
         order: 50
+    - name: Patch a test suite
+      url: '#patch-a-test-suite'
+      identifier: synthetics-patch-a-test-suite
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - PatchTestSuite
+        unstable: []
+        order: 58
     - name: Edit a test suite
       url: '#edit-a-test-suite'
       identifier: synthetics-edit-a-test-suite
@@ -4086,6 +4206,30 @@ menu:
           - GetOnDemandConcurrencyCap
         unstable: []
         order: 41
+    - name: Get parent tests for a subtest
+      url: '#get-parent-tests-for-a-subtest'
+      identifier: synthetics-get-parent-tests-for-a-subtest
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetApiMultistepSubtestParents
+        unstable: []
+        order: 55
+    - name: Get available subtests for a multistep test
+      url: '#get-available-subtests-for-a-multistep-test'
+      identifier: synthetics-get-available-subtests-for-a-multistep-test
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetApiMultistepSubtests
+        unstable: []
+        order: 54
     - name: Edit a global variable
       url: '#edit-a-global-variable'
       identifier: synthetics-edit-a-global-variable
@@ -9551,6 +9695,71 @@ menu:
         unstable:
           - v2
         order: 49
+    - name: Update an incident user-defined field
+      url: '#update-an-incident-user-defined-field'
+      identifier: incidents-update-an-incident-user-defined-field
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateIncidentUserDefinedField
+        unstable:
+          - v2
+        order: 55
+    - name: Get an incident user-defined field
+      url: '#get-an-incident-user-defined-field'
+      identifier: incidents-get-an-incident-user-defined-field
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetIncidentUserDefinedField
+        unstable:
+          - v2
+        order: 54
+    - name: Delete an incident user-defined field
+      url: '#delete-an-incident-user-defined-field'
+      identifier: incidents-delete-an-incident-user-defined-field
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteIncidentUserDefinedField
+        unstable:
+          - v2
+        order: 56
+    - name: Create an incident user-defined field
+      url: '#create-an-incident-user-defined-field'
+      identifier: incidents-create-an-incident-user-defined-field
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateIncidentUserDefinedField
+        unstable:
+          - v2
+        order: 53
+    - name: Get a list of incident user-defined fields
+      url: '#get-a-list-of-incident-user-defined-fields'
+      identifier: incidents-get-a-list-of-incident-user-defined-fields
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListIncidentUserDefinedFields
+        unstable:
+          - v2
+        order: 52
     - name: Update an incident type
       url: '#update-an-incident-type'
       identifier: incidents-update-an-incident-type
@@ -13116,8 +13325,7 @@ menu:
           - v2
         operationids:
           - ListServiceNowUsers
-        unstable:
-          - v2
+        unstable: []
         order: 8
     - name: List ServiceNow instances
       url: '#list-servicenow-instances'
@@ -13129,8 +13337,7 @@ menu:
           - v2
         operationids:
           - ListServiceNowInstances
-        unstable:
-          - v2
+        unstable: []
         order: 9
     - name: Update ServiceNow template
       url: '#update-servicenow-template'
@@ -13142,8 +13349,7 @@ menu:
           - v2
         operationids:
           - UpdateServiceNowTemplate
-        unstable:
-          - v2
+        unstable: []
         order: 2
     - name: Get ServiceNow template
       url: '#get-servicenow-template'
@@ -13155,8 +13361,7 @@ menu:
           - v2
         operationids:
           - GetServiceNowTemplate
-        unstable:
-          - v2
+        unstable: []
         order: 3
     - name: Delete ServiceNow template
       url: '#delete-servicenow-template'
@@ -13168,8 +13373,7 @@ menu:
           - v2
         operationids:
           - DeleteServiceNowTemplate
-        unstable:
-          - v2
+        unstable: []
         order: 1
     - name: Create ServiceNow template
       url: '#create-servicenow-template'
@@ -13181,8 +13385,7 @@ menu:
           - v2
         operationids:
           - CreateServiceNowTemplate
-        unstable:
-          - v2
+        unstable: []
         order: 4
     - name: List ServiceNow templates
       url: '#list-servicenow-templates'
@@ -13194,8 +13397,7 @@ menu:
           - v2
         operationids:
           - ListServiceNowTemplates
-        unstable:
-          - v2
+        unstable: []
         order: 5
     - name: List ServiceNow business services
       url: '#list-servicenow-business-services'
@@ -13207,8 +13409,7 @@ menu:
           - v2
         operationids:
           - ListServiceNowBusinessServices
-        unstable:
-          - v2
+        unstable: []
         order: 7
     - name: List ServiceNow assignment groups
       url: '#list-servicenow-assignment-groups'
@@ -13220,8 +13421,7 @@ menu:
           - v2
         operationids:
           - ListServiceNowAssignmentGroups
-        unstable:
-          - v2
+        unstable: []
         order: 6
     - name: Software Catalog
       url: /api/latest/software-catalog/
@@ -13621,6 +13821,30 @@ menu:
       url: /api/latest/status-pages/
       identifier: status-pages
       generated: true
+    - name: Unpublish status page
+      url: '#unpublish-status-page'
+      identifier: status-pages-unpublish-status-page
+      parent: status-pages
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UnpublishStatusPage
+        unstable: []
+        order: 7
+    - name: Publish status page
+      url: '#publish-status-page'
+      identifier: status-pages-publish-status-page
+      parent: status-pages
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - PublishStatusPage
+        unstable: []
+        order: 6
     - name: Update maintenance
       url: '#update-maintenance'
       identifier: status-pages-update-maintenance
@@ -13632,7 +13856,7 @@ menu:
         operationids:
           - UpdateMaintenance
         unstable: []
-        order: 17
+        order: 19
     - name: Get maintenance
       url: '#get-maintenance'
       identifier: status-pages-get-maintenance
@@ -13644,7 +13868,7 @@ menu:
         operationids:
           - GetMaintenance
         unstable: []
-        order: 19
+        order: 21
     - name: Schedule maintenance
       url: '#schedule-maintenance'
       identifier: status-pages-schedule-maintenance
@@ -13656,7 +13880,7 @@ menu:
         operationids:
           - CreateMaintenance
         unstable: []
-        order: 16
+        order: 18
     - name: Update degradation
       url: '#update-degradation'
       identifier: status-pages-update-degradation
@@ -13668,7 +13892,7 @@ menu:
         operationids:
           - UpdateDegradation
         unstable: []
-        order: 12
+        order: 14
     - name: Get degradation
       url: '#get-degradation'
       identifier: status-pages-get-degradation
@@ -13680,7 +13904,7 @@ menu:
         operationids:
           - GetDegradation
         unstable: []
-        order: 14
+        order: 16
     - name: Delete degradation
       url: '#delete-degradation'
       identifier: status-pages-delete-degradation
@@ -13692,7 +13916,7 @@ menu:
         operationids:
           - DeleteDegradation
         unstable: []
-        order: 15
+        order: 17
     - name: Create degradation
       url: '#create-degradation'
       identifier: status-pages-create-degradation
@@ -13704,7 +13928,7 @@ menu:
         operationids:
           - CreateDegradation
         unstable: []
-        order: 11
+        order: 13
     - name: Update component
       url: '#update-component'
       identifier: status-pages-update-component
@@ -13716,7 +13940,7 @@ menu:
         operationids:
           - UpdateComponent
         unstable: []
-        order: 7
+        order: 9
     - name: Get component
       url: '#get-component'
       identifier: status-pages-get-component
@@ -13728,7 +13952,7 @@ menu:
         operationids:
           - GetComponent
         unstable: []
-        order: 9
+        order: 11
     - name: Delete component
       url: '#delete-component'
       identifier: status-pages-delete-component
@@ -13740,7 +13964,7 @@ menu:
         operationids:
           - DeleteComponent
         unstable: []
-        order: 10
+        order: 12
     - name: Create component
       url: '#create-component'
       identifier: status-pages-create-component
@@ -13752,7 +13976,7 @@ menu:
         operationids:
           - CreateComponent
         unstable: []
-        order: 6
+        order: 8
     - name: List components
       url: '#list-components'
       identifier: status-pages-list-components
@@ -13764,7 +13988,7 @@ menu:
         operationids:
           - ListComponents
         unstable: []
-        order: 8
+        order: 10
     - name: Update status page
       url: '#update-status-page'
       identifier: status-pages-update-status-page
@@ -13812,7 +14036,7 @@ menu:
         operationids:
           - ListMaintenances
         unstable: []
-        order: 18
+        order: 20
     - name: List degradations
       url: '#list-degradations'
       identifier: status-pages-list-degradations
@@ -13824,7 +14048,7 @@ menu:
         operationids:
           - ListDegradations
         unstable: []
-        order: 13
+        order: 15
     - name: Create status page
       url: '#create-status-page'
       identifier: status-pages-create-status-page
@@ -14332,6 +14556,70 @@ menu:
           - DeleteTestOptimizationServiceSettings
         unstable:
           - v2
+        order: 5
+    - name: Widgets
+      url: /api/latest/widgets/
+      identifier: widgets
+      generated: true
+    - name: Update a widget
+      url: '#update-a-widget'
+      identifier: widgets-update-a-widget
+      parent: widgets
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateWidget
+        unstable: []
+        order: 3
+    - name: Get a widget
+      url: '#get-a-widget'
+      identifier: widgets-get-a-widget
+      parent: widgets
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetWidget
+        unstable: []
+        order: 2
+    - name: Delete a widget
+      url: '#delete-a-widget'
+      identifier: widgets-delete-a-widget
+      parent: widgets
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteWidget
+        unstable: []
+        order: 4
+    - name: Create a widget
+      url: '#create-a-widget'
+      identifier: widgets-create-a-widget
+      parent: widgets
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateWidget
+        unstable: []
+        order: 1
+    - name: Search widgets
+      url: '#search-widgets'
+      identifier: widgets-search-widgets
+      parent: widgets
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - SearchWidgets
+        unstable: []
         order: 5
     - name: Workflow Automation
       url: /api/latest/workflow-automation/

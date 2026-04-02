@@ -719,6 +719,14 @@ components:
       schema:
         default: false
         type: boolean
+    IncidentUserDefinedFieldIDPathParameter:
+      description: The ID of the incident user-defined field.
+      in: path
+      name: field_id
+      required: true
+      schema:
+        example: "00000000-0000-0000-0000-000000000000"
+        type: string
     Include:
       description: Include relationship data.
       explode: true
@@ -1034,7 +1042,7 @@ components:
         type: string
     ResourceID:
       description: |-
-        Identifier, formatted as `type:id`. Supported types: `dashboard`, `integration-service`, `integration-webhook`, `notebook`, `reference-table`, `security-rule`, `slo`, `workflow`, `app-builder-app`, `connection`, `connection-group`, `rum-application`, `cross-org-connection`, `spreadsheet`, `on-call-schedule`, `on-call-escalation-policy`, `on-call-team-routing-rules`, `logs-pipeline`.
+        Identifier, formatted as `type:id`. Supported types: `dashboard`, `integration-service`, `integration-webhook`, `notebook`, `powerpack`, `reference-table`, `security-rule`, `slo`, `synthetics-global-variable`, `synthetics-test`, `synthetics-private-location`, `monitor`, `workflow`, `app-builder-app`, `connection`, `connection-group`, `rum-application`, `cross-org-connection`, `spreadsheet`, `on-call-schedule`, `on-call-escalation-policy`, `on-call-team-routing-rules`, `logs-pipeline`, `case-management-project`, `monitor-notification-rule`.
       example: "dashboard:abc-def-ghi"
       in: path
       name: resource_id
@@ -4293,6 +4301,7 @@ components:
         ip_list:
           description: The client IP addresses matched by the exclusion filter (CIDR notation is supported).
           items:
+            description: A single IP address to exclude.
             example: "198.51.100.72"
             type: string
           type: array
@@ -4303,6 +4312,7 @@ components:
         parameters:
           description: A list of parameters matched by the exclusion filter in the HTTP query string and HTTP request body. Nested parameters can be matched by joining fields with a dot character.
           items:
+            description: A request parameter name to exclude from the query string or request body.
             example: "list.search.query"
             type: string
           type: array
@@ -4339,6 +4349,7 @@ components:
         ip_list:
           description: The client IP addresses matched by the exclusion filter (CIDR notation is supported).
           items:
+            description: A single IP address to exclude.
             example: "198.51.100.72"
             type: string
           type: array
@@ -4347,6 +4358,7 @@ components:
         parameters:
           description: A list of parameters matched by the exclusion filter in the HTTP query string and HTTP request body. Nested parameters can be matched by joining fields with a dot character.
           items:
+            description: A request parameter name to exclude from the query string or request body.
             example: "list.search.query"
             type: string
           type: array
@@ -4498,6 +4510,7 @@ components:
         ip_list:
           description: The client IP addresses matched by the exclusion filter (CIDR notation is supported).
           items:
+            description: A single IP address to exclude.
             example: "198.51.100.72"
             type: string
           type: array
@@ -7334,11 +7347,13 @@ components:
       x-enum-varnames:
         - REFERENCE_TABLES_BATCH_ROWS_QUERY
     BatchRowsQueryRequest:
+      description: Request object for querying multiple rows from a reference table by their identifiers.
       properties:
         data:
           $ref: "#/components/schemas/BatchRowsQueryRequestData"
       type: object
     BatchRowsQueryRequestData:
+      description: Data object for a batch rows query request.
       properties:
         attributes:
           $ref: "#/components/schemas/BatchRowsQueryRequestDataAttributes"
@@ -7348,15 +7363,19 @@ components:
         - type
       type: object
     BatchRowsQueryRequestDataAttributes:
+      description: Attributes for a batch rows query request.
       properties:
         row_ids:
+          description: List of row identifiers to query from the reference table.
           example:
             - "row_id_1"
             - "row_id_2"
           items:
+            description: A single row identifier.
             type: string
           type: array
         table_id:
+          description: Unique identifier of the reference table to query.
           example: "00000000-0000-0000-0000-000000000000"
           type: string
       required:
@@ -7364,6 +7383,7 @@ components:
         - table_id
       type: object
     BatchRowsQueryResponse:
+      description: Response object for a batch rows query against a reference table.
       example:
         data:
           id: 00000000-0000-0000-0000-000000000000
@@ -7380,8 +7400,10 @@ components:
           $ref: "#/components/schemas/BatchRowsQueryResponseData"
       type: object
     BatchRowsQueryResponseData:
+      description: Data object for a batch rows query response.
       properties:
         id:
+          description: Unique identifier of the batch query.
           type: string
         relationships:
           $ref: "#/components/schemas/BatchRowsQueryResponseDataRelationships"
@@ -7391,11 +7413,13 @@ components:
         - type
       type: object
     BatchRowsQueryResponseDataRelationships:
+      description: Relationships of the batch rows query response data.
       properties:
         rows:
           $ref: "#/components/schemas/BatchRowsQueryResponseDataRelationshipsRows"
       type: object
     BatchRowsQueryResponseDataRelationshipsRows:
+      description: Relationship data containing the list of matching rows.
       properties:
         data:
           items:
@@ -14857,6 +14881,7 @@ components:
           description: List of queries to define the environment scope.
           example: ["staging", "test"]
           items:
+            description: A query string used to match the environment scope.
             type: string
           minItems: 1
           type: array
@@ -15236,6 +15261,42 @@ components:
         id:
           $ref: "#/components/schemas/ApiID"
       type: object
+    CreateOrUpdateWidgetRequest:
+      description: Request body for creating or updating a widget.
+      properties:
+        data:
+          $ref: "#/components/schemas/CreateOrUpdateWidgetRequestData"
+      required:
+        - data
+      type: object
+    CreateOrUpdateWidgetRequestAttributes:
+      description: Attributes for creating or updating a widget.
+      properties:
+        definition:
+          $ref: "#/components/schemas/WidgetDefinition"
+        tags:
+          description: User-defined tags for organizing the widget.
+          items:
+            description: A single user-defined tag.
+            type: string
+          nullable: true
+          type: array
+      required:
+        - definition
+      type: object
+    CreateOrUpdateWidgetRequestData:
+      description: Data for creating or updating a widget.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/CreateOrUpdateWidgetRequestAttributes"
+        type:
+          description: Widgets resource type.
+          example: widgets
+          type: string
+      required:
+        - type
+        - attributes
+      type: object
     CreatePageRequest:
       description: Full request to trigger an On-Call Page.
       example:
@@ -15273,6 +15334,7 @@ components:
         tags:
           description: Tags to help categorize or filter the page.
           items:
+            description: A single tag for categorizing the page.
             type: string
           type: array
         target:
@@ -22975,6 +23037,7 @@ components:
           description: List of queries to define the environment scope.
           example: ["staging", "test"]
           items:
+            description: A query string used to match the environment scope.
             type: string
           minItems: 1
           type: array
@@ -23005,6 +23068,7 @@ components:
           $ref: "#/components/schemas/EnvironmentsPaginationMetaPage"
       type: object
     EnvironmentsPaginationMetaPage:
+      description: Pagination metadata for environments list responses.
       properties:
         total_count:
           description: Total number of items.
@@ -25181,6 +25245,7 @@ components:
           $ref: "#/components/schemas/FeatureFlagsPaginationMetaPage"
       type: object
     FeatureFlagsPaginationMetaPage:
+      description: Pagination metadata for feature flags list responses.
       properties:
         total_count:
           description: Total number of items.
@@ -32809,6 +32874,380 @@ components:
         type:
           $ref: "#/components/schemas/UsersType"
       type: object
+    IncidentUserDefinedFieldAttributesCreateRequest:
+      description: Attributes for creating an incident user-defined field.
+      properties:
+        category:
+          $ref: "#/components/schemas/IncidentUserDefinedFieldCategory"
+        collected:
+          $ref: "#/components/schemas/IncidentUserDefinedFieldCollected"
+        default_value:
+          description: The default value for the field. Must be one of the valid values when valid_values is set.
+          example: "critical"
+          nullable: true
+          type: string
+        display_name:
+          description: The human-readable name shown in the UI. Defaults to a formatted version of the name if not provided.
+          example: "Root Cause"
+          type: string
+        name:
+          description: The unique identifier of the field. Must start with a letter or digit and contain only letters, digits, underscores, or periods.
+          example: "root_cause"
+          type: string
+        ordinal:
+          description: A decimal string representing the field's display order in the UI.
+          example: "1.5"
+          nullable: true
+          type: string
+        required:
+          description: When true, users must fill out this field on incidents.
+          example: false
+          type: boolean
+        tag_key:
+          description: For metric tag-type fields only, the metric tag key that powers the autocomplete options.
+          example: "datacenter"
+          nullable: true
+          type: string
+        type:
+          $ref: "#/components/schemas/IncidentUserDefinedFieldFieldType"
+        valid_values:
+          description: The list of allowed values for dropdown and multiselect fields. Limited to 1000 values.
+          items:
+            $ref: "#/components/schemas/IncidentUserDefinedFieldValidValue"
+          type: array
+      required:
+        - name
+        - type
+      type: object
+    IncidentUserDefinedFieldAttributesResponse:
+      description: Attributes of an incident user-defined field.
+      properties:
+        attached_to:
+          description: The resource type this field is attached to. Always "incidents".
+          example: "incidents"
+          readOnly: true
+          type: string
+        category:
+          $ref: "#/components/schemas/IncidentUserDefinedFieldCategory"
+        collected:
+          $ref: "#/components/schemas/IncidentUserDefinedFieldCollected"
+        created:
+          description: Timestamp when the field was created.
+          example: "2026-03-18T08:40:05.185406Z"
+          format: date-time
+          readOnly: true
+          type: string
+        default_value:
+          description: The default value for the field.
+          example: "critical"
+          nullable: true
+          type: string
+        deleted:
+          description: Timestamp when the field was soft-deleted, or null if not deleted.
+          example:
+          format: date-time
+          nullable: true
+          readOnly: true
+          type: string
+        display_name:
+          description: The human-readable name shown in the UI.
+          example: "Root Cause"
+          type: string
+        metadata:
+          $ref: "#/components/schemas/IncidentUserDefinedFieldMetadata"
+        modified:
+          description: Timestamp when the field was last modified.
+          example: "2026-03-18T08:40:05.185406Z"
+          format: date-time
+          nullable: true
+          readOnly: true
+          type: string
+        name:
+          description: The unique identifier of the field.
+          example: "root_cause"
+          type: string
+        ordinal:
+          description: A decimal string representing the field's display order in the UI.
+          example: "1.5"
+          nullable: true
+          type: string
+        prerequisite:
+          description: Reserved for future use. Always null.
+          example:
+          nullable: true
+          readOnly: true
+          type: string
+        required:
+          description: When true, users must fill out this field on incidents.
+          example: false
+          type: boolean
+        reserved:
+          description: When true, this field is reserved for system use and cannot be deleted.
+          example: false
+          readOnly: true
+          type: boolean
+        table_id:
+          description: Reserved for internal use. Always 0.
+          example: 0
+          format: int64
+          readOnly: true
+          type: integer
+        tag_key:
+          description: For metric tag-type fields only, the metric tag key that powers the autocomplete options.
+          example:
+          nullable: true
+          type: string
+        type:
+          description: The data type of the field. 1=dropdown, 2=multiselect, 3=textbox, 4=textarray, 5=metrictag, 6=autocomplete, 7=number, 8=datetime.
+          example: 3
+          format: int32
+          maximum: 8
+          minimum: 1
+          nullable: true
+          type: integer
+        valid_values:
+          description: The list of allowed values for dropdown, multiselect, and autocomplete fields.
+          items:
+            $ref: "#/components/schemas/IncidentUserDefinedFieldValidValue"
+          nullable: true
+          type: array
+      required:
+        - attached_to
+        - category
+        - collected
+        - created
+        - default_value
+        - deleted
+        - display_name
+        - metadata
+        - modified
+        - name
+        - ordinal
+        - prerequisite
+        - required
+        - reserved
+        - table_id
+        - tag_key
+        - type
+        - valid_values
+      type: object
+    IncidentUserDefinedFieldAttributesUpdateRequest:
+      description: Attributes for updating an incident user-defined field. All fields are optional.
+      properties:
+        category:
+          $ref: "#/components/schemas/IncidentUserDefinedFieldCategory"
+        collected:
+          $ref: "#/components/schemas/IncidentUserDefinedFieldCollected"
+        default_value:
+          description: The default value for the field. Must be one of the valid values when valid_values is set.
+          example: "critical"
+          nullable: true
+          type: string
+        display_name:
+          description: The human-readable name shown in the UI.
+          example: "Root Cause"
+          type: string
+        ordinal:
+          description: A decimal string representing the field's display order in the UI.
+          example: "1.5"
+          nullable: true
+          type: string
+        required:
+          description: When true, users must fill out this field on incidents.
+          example: false
+          nullable: true
+          type: boolean
+        valid_values:
+          description: The list of allowed values for dropdown and multiselect fields. Limited to 1000 values.
+          items:
+            $ref: "#/components/schemas/IncidentUserDefinedFieldValidValue"
+          nullable: true
+          type: array
+      type: object
+    IncidentUserDefinedFieldCategory:
+      description: 'The section in which the field appears: "what_happened" or "why_it_happened". When null, the field appears in the Attributes section.'
+      enum:
+        - what_happened
+        - why_it_happened
+      example: what_happened
+      nullable: true
+      type: string
+      x-enum-varnames:
+        - WHAT_HAPPENED
+        - WHY_IT_HAPPENED
+    IncidentUserDefinedFieldCollected:
+      description: The lifecycle stage at which the app prompts users to fill out this field. Cannot be set on required fields.
+      enum:
+        - active
+        - stable
+        - resolved
+        - completed
+      example: active
+      nullable: true
+      type: string
+      x-enum-varnames:
+        - ACTIVE
+        - STABLE
+        - RESOLVED
+        - COMPLETED
+    IncidentUserDefinedFieldCreateData:
+      description: Data for creating an incident user-defined field.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/IncidentUserDefinedFieldAttributesCreateRequest"
+        relationships:
+          $ref: "#/components/schemas/IncidentUserDefinedFieldCreateRelationships"
+        type:
+          $ref: "#/components/schemas/IncidentUserDefinedFieldType"
+      required:
+        - type
+        - attributes
+        - relationships
+      type: object
+    IncidentUserDefinedFieldCreateRelationships:
+      description: Relationships for creating an incident user-defined field.
+      properties:
+        incident_type:
+          $ref: "#/components/schemas/RelationshipToIncidentType"
+      required:
+        - incident_type
+      type: object
+    IncidentUserDefinedFieldCreateRequest:
+      description: Request body for creating an incident user-defined field.
+      properties:
+        data:
+          $ref: "#/components/schemas/IncidentUserDefinedFieldCreateData"
+      required:
+        - data
+      type: object
+    IncidentUserDefinedFieldFieldType:
+      description: The data type of the field. 1=dropdown, 2=multiselect, 3=textbox, 4=textarray, 5=metrictag, 6=autocomplete, 7=number, 8=datetime.
+      enum:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+        - 7
+        - 8
+      example: 3
+      format: int32
+      type: integer
+      x-enum-varnames:
+        - DROPDOWN
+        - MULTISELECT
+        - TEXTBOX
+        - TEXTARRAY
+        - METRICTAG
+        - AUTOCOMPLETE
+        - NUMBER
+        - DATETIME
+    IncidentUserDefinedFieldListMeta:
+      description: Pagination metadata for the user-defined field list response.
+      properties:
+        offset:
+          description: The offset of the current page.
+          example: 0
+          format: int64
+          type: integer
+        size:
+          description: The total number of items in the current page.
+          example: 5
+          format: int64
+          type: integer
+      type: object
+    IncidentUserDefinedFieldListResponse:
+      description: Response containing a list of incident user-defined fields.
+      properties:
+        data:
+          description: An array of user-defined field objects.
+          items:
+            $ref: "#/components/schemas/IncidentUserDefinedFieldResponseData"
+          type: array
+        meta:
+          $ref: "#/components/schemas/IncidentUserDefinedFieldListMeta"
+      required:
+        - data
+        - meta
+      type: object
+    IncidentUserDefinedFieldMetadata:
+      description: Metadata for autocomplete-type user-defined fields, describing how to populate autocomplete options.
+      nullable: true
+      properties:
+        category:
+          description: The category of the autocomplete source.
+          example: "teams_and_services"
+          type: string
+        search_limit_param:
+          description: The query parameter used to limit the number of autocomplete results.
+          example: "page[size]"
+          type: string
+        search_params:
+          additionalProperties: {}
+          description: Additional query parameters to include in the search URL.
+          type: object
+        search_query_param:
+          description: The query parameter used to pass typed input to the search URL.
+          example: "filter"
+          type: string
+        search_result_path:
+          description: The JSON path to the results in the response body.
+          example: "$.data[*].attributes.name"
+          type: string
+        search_url:
+          description: The URL used to populate autocomplete options.
+          example: "/api/v2/incidents/config/services"
+          type: string
+      required:
+        - category
+        - search_url
+        - search_query_param
+        - search_limit_param
+        - search_result_path
+        - search_params
+      type: object
+    IncidentUserDefinedFieldRelationships:
+      description: Relationships of an incident user-defined field.
+      properties:
+        created_by_user:
+          $ref: "#/components/schemas/RelationshipToUser"
+        incident_type:
+          $ref: "#/components/schemas/RelationshipToIncidentType"
+        last_modified_by_user:
+          $ref: "#/components/schemas/RelationshipToUser"
+      required:
+        - created_by_user
+        - last_modified_by_user
+        - incident_type
+      type: object
+    IncidentUserDefinedFieldResponse:
+      description: Response containing a single incident user-defined field.
+      properties:
+        data:
+          $ref: "#/components/schemas/IncidentUserDefinedFieldResponseData"
+      required:
+        - data
+      type: object
+    IncidentUserDefinedFieldResponseData:
+      description: Data object for an incident user-defined field response.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/IncidentUserDefinedFieldAttributesResponse"
+        id:
+          description: The unique identifier of the user-defined field.
+          example: "00000000-0000-0000-0000-000000000000"
+          type: string
+        relationships:
+          $ref: "#/components/schemas/IncidentUserDefinedFieldRelationships"
+        type:
+          $ref: "#/components/schemas/IncidentUserDefinedFieldType"
+      required:
+        - id
+        - type
+        - attributes
+        - relationships
+      type: object
     IncidentUserDefinedFieldType:
       description: The incident user defined fields type.
       enum:
@@ -32817,6 +33256,53 @@ components:
       type: string
       x-enum-varnames:
         - USER_DEFINED_FIELD
+    IncidentUserDefinedFieldUpdateData:
+      description: Data for updating an incident user-defined field.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/IncidentUserDefinedFieldAttributesUpdateRequest"
+        id:
+          description: The unique identifier of the user-defined field to update.
+          example: "00000000-0000-0000-0000-000000000000"
+          type: string
+        type:
+          $ref: "#/components/schemas/IncidentUserDefinedFieldType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    IncidentUserDefinedFieldUpdateRequest:
+      description: Request body for updating an incident user-defined field.
+      properties:
+        data:
+          $ref: "#/components/schemas/IncidentUserDefinedFieldUpdateData"
+      required:
+        - data
+      type: object
+    IncidentUserDefinedFieldValidValue:
+      description: A valid value for an incident user-defined field.
+      properties:
+        description:
+          description: A detailed description of the valid value.
+          example: "A critical severity incident."
+          type: string
+        display_name:
+          description: The human-readable display name for this value.
+          example: "Critical"
+          type: string
+        short_description:
+          description: A short description of the valid value.
+          example: "Critical"
+          type: string
+        value:
+          description: The identifier that is stored when this option is selected.
+          example: "critical"
+          type: string
+      required:
+        - display_name
+        - value
+      type: object
     IncidentsResponse:
       description: Response with a list of incidents.
       properties:
@@ -41920,6 +42406,7 @@ components:
           description: A list of component IDs whose output is used as the `input` for this component.
           example: ["filter-processor"]
           items:
+            description: A component ID referenced as an input source.
             type: string
           type: array
         key_prefix:
@@ -45988,6 +46475,7 @@ components:
           description: List of log field names to send as indexed fields to Splunk HEC. Available only when `encoding` is `json`.
           example: ["service", "host"]
           items:
+            description: A log field name to index in Splunk.
             type: string
           type: array
         inputs:
@@ -48505,6 +48993,7 @@ components:
         name_aliases:
           description: List of alias names for the permission.
           items:
+            description: An alternative name for the permission.
             type: string
           type: array
         restricted:
@@ -58160,6 +58649,7 @@ components:
         - none
         - false_positive
         - testing_or_maintenance
+        - remediated
         - investigated_case_opened
         - true_positive_benign
         - true_positive_malicious
@@ -58169,6 +58659,7 @@ components:
         - NONE
         - FALSE_POSITIVE
         - TESTING_OR_MAINTENANCE
+        - REMEDIATED
         - INVESTIGATED_CASE_OPENED
         - TRUE_POSITIVE_BENIGN
         - TRUE_POSITIVE_MALICIOUS
@@ -58719,6 +59210,155 @@ components:
       description: Version of the updated signal. If server side version is higher, update will be rejected.
       format: int64
       type: integer
+    SecurityMonitoringSignalsBulkAssigneeUpdateAttributes:
+      description: Attributes describing the new assignees for a bulk signal update.
+      properties:
+        assignee:
+          description: UUID of the user to assign to the signal. Use an empty string to unassign.
+          example: 773b045d-ccf8-4808-bd3b-955ef6a8c940
+          type: string
+        version:
+          $ref: "#/components/schemas/SecurityMonitoringSignalVersion"
+      required:
+        - assignee
+      type: object
+    SecurityMonitoringSignalsBulkAssigneeUpdateData:
+      description: Data for updating the assignees for multiple security signals.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/SecurityMonitoringSignalsBulkAssigneeUpdateAttributes"
+        id:
+          description: The unique ID of the security signal.
+          example: AAAAAWgN8Xwgr1vKDQAAAABBV2dOOFh3ZzZobm1mWXJFYTR0OA
+          type: string
+        type:
+          $ref: "#/components/schemas/SecurityMonitoringSignalType"
+      required:
+        - id
+        - attributes
+      type: object
+    SecurityMonitoringSignalsBulkAssigneeUpdateRequest:
+      description: Request body for updating the assignee of multiple security signals.
+      properties:
+        data:
+          description: An array of signal assignee updates.
+          items:
+            $ref: "#/components/schemas/SecurityMonitoringSignalsBulkAssigneeUpdateData"
+          maxItems: 199
+          type: array
+      required:
+        - data
+      type: object
+    SecurityMonitoringSignalsBulkStateUpdateData:
+      description: Data for updating the state for multiple security signals.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/SecurityMonitoringSignalStateUpdateAttributes"
+        id:
+          description: The unique ID of the security signal.
+          example: AAAAAWgN8Xwgr1vKDQAAAABBV2dOOFh3ZzZobm1mWXJFYTR0OA
+          type: string
+        type:
+          $ref: "#/components/schemas/SecurityMonitoringSignalType"
+      required:
+        - id
+        - attributes
+      type: object
+    SecurityMonitoringSignalsBulkStateUpdateRequest:
+      description: Request body for updating the triage states of multiple security signals.
+      properties:
+        data:
+          description: An array of signal state updates.
+          items:
+            $ref: "#/components/schemas/SecurityMonitoringSignalsBulkStateUpdateData"
+          maxItems: 199
+          type: array
+      required:
+        - data
+      type: object
+    SecurityMonitoringSignalsBulkTriageEvent:
+      description: A single signal event entry in a bulk triage update response.
+      properties:
+        event:
+          $ref: "#/components/schemas/SecurityMonitoringSignalsBulkTriageEventAttributes"
+        id:
+          description: The unique ID of the security signal.
+          example: AAAAAWgN8Xwgr1vKDQAAAABBV2dOOFh3ZzZobm1mWXJFYTR0OA
+          type: string
+      required:
+        - id
+        - event
+      type: object
+    SecurityMonitoringSignalsBulkTriageEventAttributes:
+      description: Triage attributes of a security signal returned in a bulk update response.
+      properties:
+        archive_comment:
+          $ref: "#/components/schemas/SecurityMonitoringSignalArchiveComment"
+        archive_comment_timestamp:
+          description: Timestamp of the last edit to the archive comment.
+          format: int64
+          type: integer
+        archive_comment_user:
+          $ref: "#/components/schemas/SecurityMonitoringTriageUser"
+        archive_reason:
+          $ref: "#/components/schemas/SecurityMonitoringSignalArchiveReason"
+        assignee:
+          $ref: "#/components/schemas/SecurityMonitoringTriageUser"
+        id:
+          description: The unique ID of the security signal.
+          example: AAAAAWgN8Xwgr1vKDQAAAABBV2dOOFh3ZzZobm1mWXJFYTR0OA
+          type: string
+        incident_ids:
+          $ref: "#/components/schemas/SecurityMonitoringSignalIncidentIds"
+        state:
+          $ref: "#/components/schemas/SecurityMonitoringSignalState"
+        state_update_timestamp:
+          description: Timestamp of the last state update.
+          format: int64
+          type: integer
+        state_update_user:
+          $ref: "#/components/schemas/SecurityMonitoringTriageUser"
+      required:
+        - id
+        - state
+        - assignee
+        - incident_ids
+      type: object
+    SecurityMonitoringSignalsBulkTriageUpdateResponse:
+      description: Response for a bulk triage update of security signals.
+      properties:
+        result:
+          $ref: "#/components/schemas/SecurityMonitoringSignalsBulkTriageUpdateResult"
+        status:
+          description: The status of the bulk operation.
+          example: done
+          type: string
+        type:
+          description: The type of the response.
+          example: status
+          type: string
+      required:
+        - type
+        - status
+        - result
+      type: object
+    SecurityMonitoringSignalsBulkTriageUpdateResult:
+      description: The result payload of a bulk signal triage update.
+      properties:
+        count:
+          description: The number of signals updated.
+          example: 2
+          format: int64
+          type: integer
+        events:
+          description: The list of updated signals.
+          items:
+            $ref: "#/components/schemas/SecurityMonitoringSignalsBulkTriageEvent"
+          type: array
+      required:
+        - count
+        - events
+      type: object
     SecurityMonitoringSignalsListResponse:
       description: "The response object with all security signals matching the request\nand pagination information."
       properties:
@@ -58765,7 +59405,7 @@ components:
         - TIMESTAMP_DESCENDING
     SecurityMonitoringStandardDataSource:
       default: logs
-      description: Source of events, either logs, audit trail, or Datadog events.
+      description: Source of events, either logs, audit trail, or Datadog events. `app_sec_spans` is deprecated in favor of `spans`.
       enum:
         - logs
         - audit
@@ -64678,6 +65318,40 @@ components:
       required:
         - data
       type: object
+    SuiteJsonPatchRequest:
+      description: JSON Patch request for a Synthetic test suite.
+      properties:
+        data:
+          $ref: "#/components/schemas/SuiteJsonPatchRequestData"
+      required:
+        - data
+      type: object
+    SuiteJsonPatchRequestData:
+      description: Data object for a JSON Patch request on a Synthetic test suite.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/SuiteJsonPatchRequestDataAttributes"
+        type:
+          $ref: "#/components/schemas/SuiteJsonPatchType"
+      type: object
+    SuiteJsonPatchRequestDataAttributes:
+      description: Attributes for a JSON Patch request on a Synthetic test suite.
+      properties:
+        json_patch:
+          description: JSON Patch operations following RFC 6902.
+          items:
+            $ref: "#/components/schemas/JsonPatchOperation"
+          type: array
+      type: object
+    SuiteJsonPatchType:
+      default: suites_json_patch
+      description: Type for a JSON Patch request on a Synthetic test suite, `suites_json_patch`.
+      enum:
+        - suites_json_patch
+      example: suites_json_patch
+      type: string
+      x-enum-varnames:
+        - SUITES_JSON_PATCH
     SuiteSearchResponseType:
       default: suites_search
       description: Type for the Synthetics suites search response, `suites_search`.
@@ -64736,6 +65410,114 @@ components:
         sync_type:
           description: The direction and type of synchronization for this property.
           type: string
+      type: object
+    SyntheticsApiMultistepParentTestAttributes:
+      description: Attributes of a parent API multistep test.
+      properties:
+        child_name:
+          description: The name of the child subtest.
+          example: My API Subtest
+          type: string
+        child_public_id:
+          description: The public ID of the child subtest.
+          example: xyz-uvw-789
+          type: string
+        monitor_id:
+          description: The associated monitor ID.
+          example: 12345678
+          format: int64
+          type: integer
+        name:
+          description: Name of the parent test.
+          example: My Multistep Test
+          type: string
+        overall_state:
+          description: The overall state of the parent test.
+          example: 0
+          format: int64
+          type: integer
+        overall_state_modified:
+          description: Timestamp of when the overall state was last modified.
+          example: "2024-01-01T00:00:00+00:00"
+          type: string
+        public_id:
+          description: The public ID of the parent test.
+          example: abc-def-123
+          type: string
+      type: object
+    SyntheticsApiMultistepParentTestData:
+      description: Data object for a parent API multistep test.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/SyntheticsApiMultistepParentTestAttributes"
+        id:
+          description: The public ID of the parent test.
+          example: abc-def-123
+          type: string
+        type:
+          $ref: "#/components/schemas/SyntheticsApiMultistepParentTestType"
+      type: object
+    SyntheticsApiMultistepParentTestType:
+      default: parent_test
+      description: Type of the parent test resource.
+      enum:
+        - parent_test
+      example: parent_test
+      type: string
+      x-enum-varnames:
+        - PARENT_TEST
+    SyntheticsApiMultistepParentTestsResponse:
+      description: |-
+        Response containing the list of parent tests for an API multistep subtest.
+      properties:
+        data:
+          description: List of parent tests that include this subtest.
+          items:
+            $ref: "#/components/schemas/SyntheticsApiMultistepParentTestData"
+          type: array
+      type: object
+    SyntheticsApiMultistepSubtestAttributes:
+      description: Attributes of a Synthetic API multistep subtest.
+      properties:
+        name:
+          description: Name of the subtest.
+          example: My API Test
+          type: string
+        public_id:
+          description: The public ID of the subtest.
+          example: abc-def-123
+          type: string
+      type: object
+    SyntheticsApiMultistepSubtestData:
+      description: Data object for a Synthetic API multistep subtest.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/SyntheticsApiMultistepSubtestAttributes"
+        id:
+          description: The public ID of the subtest.
+          example: abc-def-123
+          type: string
+        type:
+          $ref: "#/components/schemas/SyntheticsApiMultistepSubtestType"
+      type: object
+    SyntheticsApiMultistepSubtestType:
+      default: subtest
+      description: Type of the subtest resource.
+      enum:
+        - subtest
+      example: subtest
+      type: string
+      x-enum-varnames:
+        - SUBTEST
+    SyntheticsApiMultistepSubtestsResponse:
+      description: |-
+        Response containing the list of available subtests for an API multistep test.
+      properties:
+        data:
+          description: List of API tests that can be added as subtests.
+          items:
+            $ref: "#/components/schemas/SyntheticsApiMultistepSubtestData"
+          type: array
       type: object
     SyntheticsFastTestAssertionResult:
       additionalProperties: {}
@@ -65583,6 +66365,149 @@ components:
       type: string
       x-enum-varnames:
         - SUITES
+    SyntheticsTestFileAbortMultipartUploadRequest:
+      description: Request body for aborting a multipart file upload.
+      properties:
+        key:
+          description: The full storage path of the file whose upload should be aborted.
+          example: "org-123/api-upload-file/abc-def-123/2024-01-01T00:00:00_uuid.json"
+          type: string
+        uploadId:
+          description: The upload ID of the multipart upload to abort.
+          example: "upload-id-abc123"
+          type: string
+      required:
+        - uploadId
+        - key
+      type: object
+    SyntheticsTestFileCompleteMultipartUploadPart:
+      description: A completed part of a multipart upload.
+      properties:
+        ETag:
+          description: The ETag returned by the storage provider after uploading the part.
+          example: '"d41d8cd98f00b204e9800998ecf8427e"'
+          type: string
+        PartNumber:
+          description: The 1-indexed part number for the multipart upload.
+          example: 1
+          format: int64
+          type: integer
+      required:
+        - ETag
+        - PartNumber
+      type: object
+    SyntheticsTestFileCompleteMultipartUploadRequest:
+      description: Request body for completing a multipart file upload.
+      properties:
+        key:
+          description: The full storage path for the uploaded file.
+          example: "org-123/api-upload-file/abc-def-123/2024-01-01T00:00:00_uuid.json"
+          type: string
+        parts:
+          description: Array of completed parts with their ETags.
+          items:
+            $ref: "#/components/schemas/SyntheticsTestFileCompleteMultipartUploadPart"
+          type: array
+        uploadId:
+          description: The upload ID returned when the multipart upload was initiated.
+          example: "upload-id-abc123"
+          type: string
+      required:
+        - uploadId
+        - key
+        - parts
+      type: object
+    SyntheticsTestFileDownloadRequest:
+      description: Request body for getting a presigned download URL for a test file.
+      properties:
+        bucketKey:
+          description: The bucket key referencing the file to download.
+          example: "api-upload-file/abc-def-123/2024-01-01T00:00:00_uuid.json"
+          minLength: 1
+          type: string
+      required:
+        - bucketKey
+      type: object
+    SyntheticsTestFileDownloadResponse:
+      description: Response containing a presigned URL for downloading a test file.
+      properties:
+        url:
+          description: A presigned URL to download the file. The URL expires after a short period.
+          example: "https://storage.example.com/presigned-download-url"
+          type: string
+      type: object
+    SyntheticsTestFileMultipartPresignedUrlsParams:
+      description: Presigned URL parameters returned for a multipart upload.
+      properties:
+        key:
+          description: The full storage path for the file being uploaded.
+          example: "org-123/api-upload-file/abc-def-123/2024-01-01T00:00:00_uuid.json"
+          type: string
+        upload_id:
+          description: The upload ID assigned by the storage provider for this multipart upload.
+          example: "upload-id-abc123"
+          type: string
+        urls:
+          additionalProperties:
+            type: string
+          description: A map of part numbers to presigned upload URLs.
+          example:
+            "1": "https://storage.example.com/presigned-upload-url-part-1"
+            "2": "https://storage.example.com/presigned-upload-url-part-2"
+          type: object
+      type: object
+    SyntheticsTestFileMultipartPresignedUrlsPart:
+      description: A part descriptor for initiating a multipart upload.
+      properties:
+        md5:
+          description: Base64-encoded MD5 digest of the part content.
+          example: "1B2M2Y8AsgTpgAmY7PhCfg=="
+          maxLength: 24
+          minLength: 22
+          type: string
+        partNumber:
+          description: The 1-indexed part number for the multipart upload.
+          example: 1
+          format: int64
+          type: integer
+      required:
+        - md5
+        - partNumber
+      type: object
+    SyntheticsTestFileMultipartPresignedUrlsRequest:
+      description: Request body for getting presigned URLs for a multipart file upload.
+      properties:
+        bucketKeyPrefix:
+          $ref: "#/components/schemas/SyntheticsTestFileMultipartPresignedUrlsRequestBucketKeyPrefix"
+        parts:
+          description: Array of part descriptors for the multipart upload.
+          items:
+            $ref: "#/components/schemas/SyntheticsTestFileMultipartPresignedUrlsPart"
+          type: array
+      required:
+        - bucketKeyPrefix
+        - parts
+      type: object
+    SyntheticsTestFileMultipartPresignedUrlsRequestBucketKeyPrefix:
+      description: The bucket key prefix indicating the type of file upload.
+      enum:
+        - api-upload-file
+        - browser-upload-file-step
+      example: "api-upload-file"
+      type: string
+      x-enum-varnames:
+        - API_UPLOAD_FILE
+        - BROWSER_UPLOAD_FILE_STEP
+    SyntheticsTestFileMultipartPresignedUrlsResponse:
+      description: Response containing presigned URLs for multipart file upload and the bucket key.
+      properties:
+        bucketKey:
+          description: The bucket key that references the uploaded file after completion.
+          example: "api-upload-file/abc-def-123/2024-01-01T00:00:00_uuid.json"
+          type: string
+        multipart_presigned_urls_params:
+          $ref: "#/components/schemas/SyntheticsTestFileMultipartPresignedUrlsParams"
+      type: object
     SyntheticsTestOptions:
       description: Object describing the extra options for a Synthetic test.
       properties:
@@ -65717,6 +66642,70 @@ components:
         - from
         - to
       type: object
+    SyntheticsTestParentSuiteAttributes:
+      description: Object containing details about a parent suite of a Synthetic test.
+      properties:
+        child_name:
+          description: The name of the child test within the suite.
+          example: My API Test
+          type: string
+        child_public_id:
+          description: The public ID of the child test within the suite.
+          example: xyz-uvw-789
+          type: string
+        monitor_id:
+          description: The associated monitor ID.
+          example: 12345678
+          format: int64
+          type: integer
+        name:
+          description: Name of the parent suite.
+          example: My Suite
+          type: string
+        overall_state:
+          description: The overall state of the parent suite.
+          example: 0
+          format: int64
+          type: integer
+        overall_state_modified:
+          description: Timestamp of when the overall state was last modified.
+          example: "2024-01-01T00:00:00+00:00"
+          type: string
+        public_id:
+          description: The public ID of the parent suite.
+          example: abc-def-123
+          type: string
+      type: object
+    SyntheticsTestParentSuiteData:
+      description: Data object for a parent suite.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/SyntheticsTestParentSuiteAttributes"
+        id:
+          description: The public ID of the parent suite.
+          example: abc-def-123
+          type: string
+        type:
+          $ref: "#/components/schemas/SyntheticsTestParentSuiteType"
+      type: object
+    SyntheticsTestParentSuiteType:
+      default: parent_suite
+      description: Type of the parent suite resource.
+      enum:
+        - parent_suite
+      example: parent_suite
+      type: string
+      x-enum-varnames:
+        - PARENT_SUITE
+    SyntheticsTestParentSuitesResponse:
+      description: Response containing the list of parent suites for a Synthetic test.
+      properties:
+        data:
+          description: List of parent suites for the given test.
+          items:
+            $ref: "#/components/schemas/SyntheticsTestParentSuiteData"
+          type: array
+      type: object
     SyntheticsTestPauseStatus:
       description: |-
         Define whether you want to start (`live`) or pause (`paused`) a
@@ -65729,6 +66718,208 @@ components:
       x-enum-varnames:
         - LIVE
         - PAUSED
+    SyntheticsTestVersionActionMetadata:
+      description: Object containing metadata about a change action.
+      properties:
+        after_value:
+          description: The value of the property after the change.
+        before_value:
+          description: The value of the property before the change.
+        diff_patches:
+          description: List of diff patches for text changes.
+          items:
+            $ref: "#/components/schemas/SyntheticsTestVersionDiffPatches"
+          nullable: true
+          type: array
+        property_path:
+          description: The dot-separated path of the property that was changed.
+          type: string
+      type: object
+    SyntheticsTestVersionAttributes:
+      description: Attributes of a specific Synthetic test version.
+      properties:
+        author:
+          $ref: "#/components/schemas/SyntheticsTestVersionAuthor"
+        change_metadata:
+          description: |-
+            List of metadata describing individual changes in this version.
+            Only returned when the `include_change_metadata` query parameter is `true`.
+          items:
+            $ref: "#/components/schemas/SyntheticsTestVersionChangeMetadataItem"
+          type: array
+        payload:
+          additionalProperties: {}
+          description: The full test configuration at this version.
+          type: object
+        version_payload_created_at:
+          description: Timestamp of when this version was created.
+          example: "2024-01-01T00:00:00+00:00"
+          format: date-time
+          type: string
+      type: object
+    SyntheticsTestVersionAuthor:
+      description: Object describing the author of a test version.
+      properties:
+        email:
+          description: Email address of the author.
+          example: john.doe@example.com
+          type: string
+        handle:
+          description: The author's Datadog handle (login username).
+          example: john.doe
+          type: string
+        id:
+          description: UUID of the author.
+          example: "00000000-0000-0000-0000-000000000000"
+          type: string
+        name:
+          description: Display name of the author.
+          example: John Doe
+          type: string
+      type: object
+    SyntheticsTestVersionChangeAttributes:
+      description: Attributes of a version change record.
+      properties:
+        author_uuid:
+          description: UUID of the user who created this version.
+          example: "00000000-0000-0000-0000-000000000000"
+          type: string
+        change_metadata:
+          description: List of metadata describing individual changes in this version.
+          items:
+            $ref: "#/components/schemas/SyntheticsTestVersionChangeMetadataItem"
+          type: array
+        version_number:
+          description: The sequential version number.
+          example: 5
+          format: int64
+          type: integer
+        version_payload_created_at:
+          description: Timestamp of when this version was created.
+          example: "2024-01-01T00:00:00+00:00"
+          format: date-time
+          type: string
+      type: object
+    SyntheticsTestVersionChangeData:
+      description: Data object for a version change record.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/SyntheticsTestVersionChangeAttributes"
+        id:
+          description: UUID of the version change record.
+          example: "00000000-0000-0000-0000-000000000000"
+          type: string
+        type:
+          $ref: "#/components/schemas/SyntheticsTestVersionChangeType"
+      type: object
+    SyntheticsTestVersionChangeMetadataItem:
+      description: Object describing a single change within a version.
+      properties:
+        action:
+          description: The action that was performed (for example, `updated` or `created`).
+          type: string
+        action_metadata:
+          $ref: "#/components/schemas/SyntheticsTestVersionActionMetadata"
+      type: object
+    SyntheticsTestVersionChangeType:
+      default: version_metadata
+      description: Type of the version metadata resource.
+      enum:
+        - version_metadata
+      example: version_metadata
+      type: string
+      x-enum-varnames:
+        - VERSION_METADATA
+    SyntheticsTestVersionData:
+      description: Data object for a specific Synthetic test version.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/SyntheticsTestVersionAttributes"
+        id:
+          description: UUID of the version record.
+          example: "00000000-0000-0000-0000-000000000000"
+          type: string
+        type:
+          $ref: "#/components/schemas/SyntheticsTestVersionType"
+      type: object
+    SyntheticsTestVersionDiffPatchDiff:
+      description: Object describing a single text diff operation.
+      properties:
+        change_text:
+          description: The text that was changed.
+          type: string
+        operation:
+          description: The diff operation applied.
+          type: string
+      type: object
+    SyntheticsTestVersionDiffPatches:
+      description: Object describing a patch in the diff.
+      properties:
+        diffs:
+          description: List of individual diff operations.
+          items:
+            $ref: "#/components/schemas/SyntheticsTestVersionDiffPatchDiff"
+          type: array
+        length1:
+          description: Length of the original text segment.
+          format: int64
+          type: integer
+        length2:
+          description: Length of the modified text segment.
+          format: int64
+          type: integer
+        start1:
+          description: Start position in the original text.
+          format: int64
+          type: integer
+        start2:
+          description: Start position in the modified text.
+          format: int64
+          type: integer
+      type: object
+    SyntheticsTestVersionHistoryMeta:
+      description: Pagination metadata for a version history response.
+      properties:
+        next_last_version_number:
+          description: |-
+            The version number to use as the `last_version_number` query parameter
+            to fetch the next page. `null` indicates there are no more pages.
+          example: 3
+          format: int64
+          nullable: true
+          type: integer
+        retention_period_in_days:
+          description: The number of days that version history is retained.
+          example: 30
+          format: int64
+          type: integer
+      type: object
+    SyntheticsTestVersionHistoryResponse:
+      description: Response containing the paginated version history for a Synthetic test.
+      properties:
+        data:
+          description: List of version change records.
+          items:
+            $ref: "#/components/schemas/SyntheticsTestVersionChangeData"
+          type: array
+        meta:
+          $ref: "#/components/schemas/SyntheticsTestVersionHistoryMeta"
+      type: object
+    SyntheticsTestVersionResponse:
+      description: Response containing a specific version of a Synthetic test.
+      properties:
+        data:
+          $ref: "#/components/schemas/SyntheticsTestVersionData"
+      type: object
+    SyntheticsTestVersionType:
+      default: version
+      description: Type of the version resource.
+      enum:
+        - version
+      example: version
+      type: string
+      x-enum-varnames:
+        - VERSION
     SyntheticsVariableParser:
       description: Details of the parser to use for the global variable.
       example:
@@ -69464,6 +70655,7 @@ components:
           description: List of queries to define the environment scope.
           example: ["staging", "test"]
           items:
+            description: A query string used to match the environment scope.
             type: string
           minItems: 1
           type: array
@@ -71926,6 +73118,137 @@ components:
         - FRIDAY
         - SATURDAY
         - SUNDAY
+    WidgetAttributes:
+      description: Attributes of a widget resource.
+      properties:
+        created_at:
+          description: ISO 8601 timestamp of when the widget was created.
+          example: "2024-01-15T00:00:00.000Z"
+          type: string
+        definition:
+          $ref: "#/components/schemas/WidgetDefinition"
+        is_favorited:
+          description: "Will be implemented soon. Currently always returns false."
+          example: false
+          type: boolean
+        modified_at:
+          description: ISO 8601 timestamp of when the widget was last modified.
+          example: "2024-01-15T00:00:00.000Z"
+          type: string
+        tags:
+          description: User-defined tags for organizing widgets.
+          example:
+            - "team:my-team"
+          items:
+            description: A single user-defined tag.
+            type: string
+          nullable: true
+          type: array
+      required:
+        - definition
+        - tags
+        - is_favorited
+        - created_at
+        - modified_at
+      type: object
+    WidgetData:
+      description: A widget resource object.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/WidgetAttributes"
+        id:
+          description: The unique identifier of the widget.
+          example: "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+          type: string
+        relationships:
+          $ref: "#/components/schemas/WidgetRelationships"
+        type:
+          description: Widgets resource type.
+          example: widgets
+          type: string
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    WidgetDefinition:
+      additionalProperties: {}
+      description: The definition of a widget, including its type and configuration.
+      properties:
+        title:
+          description: The display title of the widget.
+          example: My Widget
+          maxLength: 100
+          minLength: 1
+          type: string
+        type:
+          $ref: "#/components/schemas/WidgetType"
+      required:
+        - type
+        - title
+      type: object
+    WidgetExperienceType:
+      description: Widget experience types that differentiate between the products using the specific widget.
+      enum:
+        - ccm_reports
+        - logs_reports
+        - csv_reports
+        - product_analytics
+      example: ccm_reports
+      type: string
+      x-enum-varnames:
+        - CCM_REPORTS
+        - LOGS_REPORTS
+        - CSV_REPORTS
+        - PRODUCT_ANALYTICS
+    WidgetIncludedUser:
+      description: A user resource included in the response.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/WidgetIncludedUserAttributes"
+        id:
+          description: The unique identifier of the user.
+          example: "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+          type: string
+        type:
+          description: Users resource type.
+          example: users
+          type: string
+      required:
+        - id
+        - type
+      type: object
+    WidgetIncludedUserAttributes:
+      description: Attributes of an included user resource.
+      properties:
+        handle:
+          description: The email handle of the user.
+          example: "john.doe@example.com"
+          type: string
+        name:
+          description: The display name of the user.
+          example: "John Doe"
+          nullable: true
+          type: string
+      type: object
+    WidgetListResponse:
+      description: Response containing a list of widgets.
+      properties:
+        data:
+          description: List of widget resources.
+          items:
+            $ref: "#/components/schemas/WidgetData"
+          type: array
+        included:
+          description: Array of user resources related to the widgets.
+          items:
+            $ref: "#/components/schemas/WidgetIncludedUser"
+          type: array
+        meta:
+          $ref: "#/components/schemas/WidgetSearchMeta"
+      required:
+        - data
+      type: object
     WidgetLiveSpan:
       description: The available timeframes depend on the widget you are using.
       enum:
@@ -71962,6 +73285,108 @@ components:
         - PAST_SIX_MONTHS
         - PAST_ONE_YEAR
         - ALERT
+    WidgetRelationshipData:
+      description: Relationship data referencing a user resource.
+      properties:
+        id:
+          description: The unique identifier of the user.
+          example: "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+          type: string
+        type:
+          description: Users resource type.
+          example: users
+          type: string
+      required:
+        - id
+        - type
+      type: object
+    WidgetRelationshipItem:
+      description: A JSON:API relationship to a user.
+      properties:
+        data:
+          $ref: "#/components/schemas/WidgetRelationshipData"
+      type: object
+    WidgetRelationships:
+      description: Relationships of the widget resource.
+      properties:
+        created_by:
+          $ref: "#/components/schemas/WidgetRelationshipItem"
+          description: The user who created the widget.
+        modified_by:
+          $ref: "#/components/schemas/WidgetRelationshipItem"
+          description: The user who last modified the widget.
+      type: object
+    WidgetResponse:
+      description: Response containing a single widget.
+      properties:
+        data:
+          $ref: "#/components/schemas/WidgetData"
+        included:
+          description: Array of user resources related to the widget.
+          items:
+            $ref: "#/components/schemas/WidgetIncludedUser"
+          type: array
+      required:
+        - data
+      type: object
+    WidgetSearchMeta:
+      description: Metadata about the search results.
+      properties:
+        created_by_anyone_total:
+          description: Total number of widgets created by anyone.
+          format: int64
+          type: integer
+        created_by_you_total:
+          description: Total number of widgets created by the current user.
+          format: int64
+          type: integer
+        favorited_by_you_total:
+          description: Total number of widgets favorited by the current user.
+          format: int64
+          type: integer
+        filtered_total:
+          description: Total number of widgets matching the current filter criteria.
+          format: int64
+          type: integer
+      type: object
+    WidgetType:
+      description: |-
+        Widget types that are allowed to be stored as individual records.
+        This is not a complete list of dashboard and notebook widget types.
+      enum:
+        - bar_chart
+        - change
+        - cloud_cost_summary
+        - cohort
+        - funnel
+        - geomap
+        - list_stream
+        - query_table
+        - query_value
+        - retention_curve
+        - sankey
+        - sunburst
+        - timeseries
+        - toplist
+        - treemap
+      example: bar_chart
+      type: string
+      x-enum-varnames:
+        - BAR_CHART
+        - CHANGE
+        - CLOUD_COST_SUMMARY
+        - COHORT
+        - FUNNEL
+        - GEOMAP
+        - LIST_STREAM
+        - QUERY_TABLE
+        - QUERY_VALUE
+        - RETENTION_CURVE
+        - SANKEY
+        - SUNBURST
+        - TIMESERIES
+        - TOPLIST
+        - TREEMAP
     WorkflowData:
       description: Data related to the workflow.
       properties:
@@ -85253,6 +86678,445 @@ paths:
       x-unstable: |-
         **Note**: This endpoint is in public beta.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/incidents/config/user-defined-fields:
+    get:
+      description: Get a list of all incident user-defined fields.
+      operationId: ListIncidentUserDefinedFields
+      parameters:
+        - description: The number of results to return per page. Must be between 0 and 1000.
+          in: query
+          name: page[size]
+          schema:
+            default: 1000
+            format: int64
+            maximum: 1000
+            minimum: 0
+            type: integer
+        - description: The page number to retrieve, starting at 0.
+          in: query
+          name: page[number]
+          schema:
+            default: 0
+            format: int64
+            minimum: 0
+            type: integer
+        - description: When true, include soft-deleted fields in the response.
+          in: query
+          name: include-deleted
+          schema:
+            default: false
+            type: boolean
+        - description: Filter results to fields associated with the given incident type UUID.
+          in: query
+          name: filter[incident-type]
+          schema:
+            type: string
+        - description: Comma-separated list of related resources to include. Supported values are "last_modified_by_user", "created_by_user", and "incident_type".
+          in: query
+          name: include
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          attached_to: "incidents"
+                          category: "what_happened"
+                          collected: "active"
+                          created: "2026-03-18T08:40:04.437887Z"
+                          default_value:
+                          deleted:
+                          display_name: "Root Cause"
+                          metadata:
+                          modified: "2026-03-18T08:40:04.437887Z"
+                          name: "root_cause"
+                          ordinal: "1.1"
+                          prerequisite:
+                          required: false
+                          reserved: false
+                          table_id: 0
+                          tag_key:
+                          type: 1
+                          valid_values:
+                            - description: "A bug in the service code."
+                              display_name: "Service Bug"
+                              value: "service_bug"
+                        id: "6f8f42e0-6a84-4495-9a24-6decb0a87de0"
+                        relationships:
+                          created_by_user:
+                            data:
+                              id: "00000000-0000-0000-0000-000000000001"
+                              type: "users"
+                          incident_type:
+                            data:
+                              id: "7459c30c-c661-4171-9474-db3a486377b2"
+                              type: "incident_types"
+                          last_modified_by_user:
+                            data:
+                              id: "00000000-0000-0000-0000-000000000001"
+                              type: "users"
+                        type: "user_defined_field"
+                    meta:
+                      offset: 0
+                      size: 1
+              schema:
+                $ref: "#/components/schemas/IncidentUserDefinedFieldListResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - incident_read
+      summary: Get a list of incident user-defined fields
+      tags:
+        - Incidents
+      x-menu-order: 52
+      x-permission:
+        operator: AND
+        permissions:
+          - incident_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    post:
+      description: Create an incident user-defined field.
+      operationId: CreateIncidentUserDefinedField
+      parameters:
+        - description: Comma-separated list of related resources to include. Supported values are "last_modified_by_user", "created_by_user", and "incident_type".
+          in: query
+          name: include
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/IncidentUserDefinedFieldCreateRequest"
+        description: Incident user-defined field payload.
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        attached_to: "incidents"
+                        category:
+                        collected:
+                        created: "2026-03-18T08:40:05.185406Z"
+                        default_value:
+                        deleted:
+                        display_name: "Root Cause"
+                        metadata:
+                        modified: "2026-03-18T08:40:05.185406Z"
+                        name: "root_cause"
+                        ordinal: "9"
+                        prerequisite:
+                        required: false
+                        reserved: false
+                        table_id: 0
+                        tag_key:
+                        type: 3
+                        valid_values:
+                      id: "82263487-b540-4c12-8797-58ac1d4fed17"
+                      relationships:
+                        created_by_user:
+                          data:
+                            id: "2f2c94fe-cd6e-4f8e-b9c7-d5755aca09a6"
+                            type: "users"
+                        incident_type:
+                          data:
+                            id: "7459c30c-c661-4171-9474-db3a486377b2"
+                            type: "incident_types"
+                        last_modified_by_user:
+                          data:
+                            id: "2f2c94fe-cd6e-4f8e-b9c7-d5755aca09a6"
+                            type: "users"
+                      type: "user_defined_field"
+              schema:
+                $ref: "#/components/schemas/IncidentUserDefinedFieldResponse"
+          description: CREATED
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - incident_settings_write
+      summary: Create an incident user-defined field
+      tags:
+        - Incidents
+      x-codegen-request-body-name: body
+      x-menu-order: 53
+      x-permission:
+        operator: AND
+        permissions:
+          - incident_settings_write
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/incidents/config/user-defined-fields/{field_id}:
+    delete:
+      description: Delete an incident user-defined field.
+      operationId: DeleteIncidentUserDefinedField
+      parameters:
+        - $ref: "#/components/parameters/IncidentUserDefinedFieldIDPathParameter"
+      responses:
+        "204":
+          description: No Content
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - incident_settings_write
+      summary: Delete an incident user-defined field
+      tags:
+        - Incidents
+      x-menu-order: 56
+      x-permission:
+        operator: AND
+        permissions:
+          - incident_settings_write
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    get:
+      description: Get details of an incident user-defined field.
+      operationId: GetIncidentUserDefinedField
+      parameters:
+        - $ref: "#/components/parameters/IncidentUserDefinedFieldIDPathParameter"
+        - description: Comma-separated list of related resources to include. Supported values are "last_modified_by_user", "created_by_user", and "incident_type".
+          in: query
+          name: include
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        attached_to: "incidents"
+                        category: "what_happened"
+                        collected: "active"
+                        created: "2026-03-18T08:40:04.437887Z"
+                        default_value:
+                        deleted:
+                        display_name: "Root Cause"
+                        metadata:
+                        modified: "2026-03-18T08:40:04.437887Z"
+                        name: "root_cause"
+                        ordinal: "1.1"
+                        prerequisite:
+                        required: false
+                        reserved: false
+                        table_id: 0
+                        tag_key:
+                        type: 1
+                        valid_values:
+                          - description: "A bug in the service code."
+                            display_name: "Service Bug"
+                            value: "service_bug"
+                      id: "6f8f42e0-6a84-4495-9a24-6decb0a87de0"
+                      relationships:
+                        created_by_user:
+                          data:
+                            id: "00000000-0000-0000-0000-000000000001"
+                            type: "users"
+                        incident_type:
+                          data:
+                            id: "7459c30c-c661-4171-9474-db3a486377b2"
+                            type: "incident_types"
+                        last_modified_by_user:
+                          data:
+                            id: "00000000-0000-0000-0000-000000000001"
+                            type: "users"
+                      type: "user_defined_field"
+              schema:
+                $ref: "#/components/schemas/IncidentUserDefinedFieldResponse"
+          description: OK
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - incident_read
+      summary: Get an incident user-defined field
+      tags:
+        - Incidents
+      x-menu-order: 54
+      x-permission:
+        operator: AND
+        permissions:
+          - incident_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    patch:
+      description: Update an incident user-defined field.
+      operationId: UpdateIncidentUserDefinedField
+      parameters:
+        - $ref: "#/components/parameters/IncidentUserDefinedFieldIDPathParameter"
+        - description: Comma-separated list of related resources to include. Supported values are "last_modified_by_user", "created_by_user", and "incident_type".
+          in: query
+          name: include
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/IncidentUserDefinedFieldUpdateRequest"
+        description: Incident user-defined field update payload.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        attached_to: "incidents"
+                        category: "what_happened"
+                        collected:
+                        created: "2026-03-18T08:39:49.913895Z"
+                        default_value:
+                        deleted:
+                        display_name: "Root Cause"
+                        metadata:
+                        modified: "2026-03-18T08:39:49.922909Z"
+                        name: "root_cause"
+                        ordinal: "8"
+                        prerequisite:
+                        required: false
+                        reserved: false
+                        table_id: 0
+                        tag_key:
+                        type: 3
+                        valid_values:
+                      id: "13a731a3-a010-450e-b6a3-3d450a26170c"
+                      relationships:
+                        created_by_user:
+                          data:
+                            id: "8e7d4859-0916-4df8-b51c-5f5a4ea7815e"
+                            type: "users"
+                        incident_type:
+                          data:
+                            id: "95edc42f-c55d-46fa-92a1-a182646454af"
+                            type: "incident_types"
+                        last_modified_by_user:
+                          data:
+                            id: "8e7d4859-0916-4df8-b51c-5f5a4ea7815e"
+                            type: "users"
+                      type: "user_defined_field"
+              schema:
+                $ref: "#/components/schemas/IncidentUserDefinedFieldResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - incident_settings_write
+      summary: Update an incident user-defined field
+      tags:
+        - Incidents
+      x-codegen-request-body-name: body
+      x-menu-order: 55
+      x-permission:
+        operator: AND
+        permissions:
+          - incident_settings_write
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/incidents/import:
     post:
       description: |-
@@ -87924,9 +89788,6 @@ paths:
       tags:
         - ServiceNow Integration
       x-menu-order: 6
-      x-unstable: |-
-        **Note**: This endpoint is in public beta and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/integration/servicenow/business_services/{instance_id}:
     get:
       description: |-
@@ -87966,9 +89827,6 @@ paths:
       tags:
         - ServiceNow Integration
       x-menu-order: 7
-      x-unstable: |-
-        **Note**: This endpoint is in public beta and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/integration/servicenow/handles:
     get:
       description: |-
@@ -87987,9 +89845,6 @@ paths:
       tags:
         - ServiceNow Integration
       x-menu-order: 5
-      x-unstable: |-
-        **Note**: This endpoint is in public beta and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     post:
       description: |-
         Create a new ServiceNow template.
@@ -88019,9 +89874,6 @@ paths:
       tags:
         - ServiceNow Integration
       x-menu-order: 4
-      x-unstable: |-
-        **Note**: This endpoint is in public beta and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/integration/servicenow/handles/{template_id}:
     delete:
       description: |-
@@ -88057,9 +89909,6 @@ paths:
       tags:
         - ServiceNow Integration
       x-menu-order: 1
-      x-unstable: |-
-        **Note**: This endpoint is in public beta and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     get:
       description: |-
         Get a ServiceNow template by ID.
@@ -88098,9 +89947,6 @@ paths:
       tags:
         - ServiceNow Integration
       x-menu-order: 3
-      x-unstable: |-
-        **Note**: This endpoint is in public beta and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     put:
       description: |-
         Update a ServiceNow template by ID.
@@ -88145,9 +89991,6 @@ paths:
       tags:
         - ServiceNow Integration
       x-menu-order: 2
-      x-unstable: |-
-        **Note**: This endpoint is in public beta and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/integration/servicenow/instances:
     get:
       description: |-
@@ -88172,9 +90015,6 @@ paths:
       tags:
         - ServiceNow Integration
       x-menu-order: 9
-      x-unstable: |-
-        **Note**: This endpoint is in public beta and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/integration/servicenow/users/{instance_id}:
     get:
       description: |-
@@ -88214,9 +90054,6 @@ paths:
       tags:
         - ServiceNow Integration
       x-menu-order: 8
-      x-unstable: |-
-        **Note**: This endpoint is in public beta and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/integrations:
     get:
       operationId: ListIntegrations
@@ -97923,6 +99760,7 @@ paths:
         - On-Call Team Routing Rules: `on-call-team-routing-rules`
         - Logs Pipelines: `logs-pipeline`
         - Case Management Projects: `case-management-project`
+        - Monitor Notification Rules: `monitor-notification-rule`
 
         #### Supported relations for resources
         Resource Type               | Supported Relations
@@ -97951,6 +99789,7 @@ paths:
         On-Call Team Routing Rules  | `viewer`, `editor`
         Logs Pipelines              | `viewer`, `processors_editor`, `editor`
         Case Management Projects    | `viewer`, `contributor`, `manager`
+        Monitor Notification Rules  | `viewer`, `editor`
       operationId: UpdateRestrictionPolicy
       parameters:
         - $ref: "#/components/parameters/ResourceID"
@@ -101777,6 +103616,7 @@ paths:
           - security_monitoring_notification_profiles_write
   /api/v2/security/vulnerabilities:
     get:
+      deprecated: true
       description: |-
         Get a list of vulnerabilities.
 
@@ -102219,9 +104059,9 @@ paths:
         operator: OR
         permissions:
           - appsec_vm_read
+      x-sunset: "2027-01-01"
       x-unstable: |-
-        **Note**: This endpoint is a private preview.
-        If you are interested in accessing this API, [fill out this form](https://forms.gle/kMYC1sDr6WDUBDsx9).
+        **Note**: This endpoint is deprecated. See the [List Security Findings endpoint](https://docs.datadoghq.com/api/latest/security-monitoring/#list-security-findings).
   /api/v2/security/vulnerabilities/notification_rules:
     get:
       description: Returns the list of notification rules for security vulnerabilities.
@@ -103983,6 +105823,90 @@ paths:
         operator: OR
         permissions:
           - security_monitoring_signals_read
+  /api/v2/security_monitoring/signals/bulk/assignee:
+    patch:
+      description: |-
+        Change the triage assignees of multiple security signals at once.
+        The maximum number of signals that can be updated in a single request is 199.
+      operationId: BulkEditSecurityMonitoringSignalsAssignee
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SecurityMonitoringSignalsBulkAssigneeUpdateRequest"
+        description: Attributes describing the signal assignee updates.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SecurityMonitoringSignalsBulkTriageUpdateResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Bulk update triage assignee of security signals
+      tags: ["Security Monitoring"]
+      x-codegen-request-body-name: body
+      x-menu-order: 86
+      "x-permission":
+        operator: OR
+        permissions:
+          - security_monitoring_signals_write
+  /api/v2/security_monitoring/signals/bulk/state:
+    patch:
+      description: |-
+        Change the triage states of multiple security signals at once.
+        The maximum number of signals that can be updated in a single request is 199.
+      operationId: BulkEditSecurityMonitoringSignalsState
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SecurityMonitoringSignalsBulkStateUpdateRequest"
+        description: Attributes describing the signal state updates.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SecurityMonitoringSignalsBulkTriageUpdateResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Bulk update triage state of security signals
+      tags: ["Security Monitoring"]
+      x-codegen-request-body-name: body
+      x-menu-order: 85
+      "x-permission":
+        operator: OR
+        permissions:
+          - security_monitoring_signals_write
   /api/v2/security_monitoring/signals/search:
     post:
       description: |-
@@ -104040,6 +105964,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/SecurityMonitoringSignalResponse"
           description: OK
+        "403":
+          $ref: "#/components/responses/NotAuthorizedResponse"
         "404":
           $ref: "#/components/responses/NotFoundResponse"
         "429":
@@ -104078,25 +106004,17 @@ paths:
                 $ref: "#/components/schemas/SecurityMonitoringSignalTriageUpdateResponse"
           description: OK
         "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/APIErrorResponse"
-          description: Bad Request
+          $ref: "#/components/responses/BadRequestResponse"
         "403":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/APIErrorResponse"
-          description: Forbidden
+          $ref: "#/components/responses/NotAuthorizedResponse"
         "404":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/APIErrorResponse"
-          description: Not Found
+          $ref: "#/components/responses/NotFoundResponse"
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ: []
       summary: Modify the triage assignee of a security signal
       tags: ["Security Monitoring"]
       x-codegen-request-body-name: body
@@ -104127,25 +106045,17 @@ paths:
                 $ref: "#/components/schemas/SecurityMonitoringSignalTriageUpdateResponse"
           description: OK
         "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/APIErrorResponse"
-          description: Bad Request
+          $ref: "#/components/responses/BadRequestResponse"
         "403":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/APIErrorResponse"
-          description: Forbidden
+          $ref: "#/components/responses/NotAuthorizedResponse"
         "404":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/APIErrorResponse"
-          description: Not Found
+          $ref: "#/components/responses/NotFoundResponse"
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ: []
       summary: Change the related incidents of a security signal
       tags: ["Security Monitoring"]
       x-codegen-request-body-name: body
@@ -104176,25 +106086,17 @@ paths:
                 $ref: "#/components/schemas/SecurityMonitoringSignalTriageUpdateResponse"
           description: OK
         "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/APIErrorResponse"
-          description: Bad Request
+          $ref: "#/components/responses/BadRequestResponse"
         "403":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/APIErrorResponse"
-          description: Forbidden
+          $ref: "#/components/responses/NotAuthorizedResponse"
         "404":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/APIErrorResponse"
-          description: Not Found
+          $ref: "#/components/responses/NotFoundResponse"
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ: []
       summary: Change the triage state of a security signal
       tags: ["Security Monitoring"]
       x-codegen-request-body-name: body
@@ -106765,7 +108667,7 @@ paths:
         permissions:
           - status_pages_settings_read
     post:
-      description: Creates a new status page.
+      description: "Creates a new status page. **Note**: Publishing a status page on creation via the `enabled` property will be deprecated. Use the dedicated [publish](#publish-status-page) status page endpoint after creation instead."
       operationId: CreateStatusPage
       parameters:
         - description: "Comma-separated list of resources to include. Supported values: created_by_user, last_modified_by_user."
@@ -106853,7 +108755,7 @@ paths:
       summary: List degradations
       tags:
         - Status Pages
-      x-menu-order: 13
+      x-menu-order: 15
       x-permission:
         operator: AND
         permissions:
@@ -106911,7 +108813,7 @@ paths:
       summary: List maintenances
       tags:
         - Status Pages
-      x-menu-order: 18
+      x-menu-order: 20
       x-permission:
         operator: AND
         permissions:
@@ -106985,7 +108887,7 @@ paths:
         permissions:
           - status_pages_settings_read
     patch:
-      description: Updates an existing status page's attributes.
+      description: "Updates an existing status page's attributes. **Note**: Publishing and unpublishing via the `enabled` property will be deprecated on this endpoint. Use the dedicated [publish](#publish-status-page) and [unpublish](#unpublish-status-page) status page endpoints instead."
       operationId: UpdateStatusPage
       parameters:
         - description: Whether to delete existing subscribers when updating a status page's type.
@@ -107068,7 +108970,7 @@ paths:
       summary: List components
       tags:
         - Status Pages
-      x-menu-order: 8
+      x-menu-order: 10
       x-permission:
         operator: AND
         permissions:
@@ -107112,7 +109014,7 @@ paths:
       summary: Create component
       tags:
         - Status Pages
-      x-menu-order: 6
+      x-menu-order: 8
       x-permission:
         operator: AND
         permissions:
@@ -107150,7 +109052,7 @@ paths:
       summary: Delete component
       tags:
         - Status Pages
-      x-menu-order: 10
+      x-menu-order: 12
       x-permission:
         operator: AND
         permissions:
@@ -107196,7 +109098,7 @@ paths:
       summary: Get component
       tags:
         - Status Pages
-      x-menu-order: 9
+      x-menu-order: 11
       x-permission:
         operator: AND
         permissions:
@@ -107248,7 +109150,7 @@ paths:
       summary: Update component
       tags:
         - Status Pages
-      x-menu-order: 7
+      x-menu-order: 9
       x-permission:
         operator: AND
         permissions:
@@ -107299,7 +109201,7 @@ paths:
       summary: Create degradation
       tags:
         - Status Pages
-      x-menu-order: 11
+      x-menu-order: 13
       x-permission:
         operator: AND
         permissions:
@@ -107337,7 +109239,7 @@ paths:
       summary: Delete degradation
       tags:
         - Status Pages
-      x-menu-order: 15
+      x-menu-order: 17
       x-permission:
         operator: AND
         permissions:
@@ -107383,7 +109285,7 @@ paths:
       summary: Get degradation
       tags:
         - Status Pages
-      x-menu-order: 14
+      x-menu-order: 16
       x-permission:
         operator: AND
         permissions:
@@ -107441,7 +109343,7 @@ paths:
       summary: Update degradation
       tags:
         - Status Pages
-      x-menu-order: 12
+      x-menu-order: 14
       x-permission:
         operator: AND
         permissions:
@@ -107491,7 +109393,7 @@ paths:
       summary: Schedule maintenance
       tags:
         - Status Pages
-      x-menu-order: 16
+      x-menu-order: 18
       x-permission:
         operator: AND
         permissions:
@@ -107536,7 +109438,7 @@ paths:
       summary: Get maintenance
       tags:
         - Status Pages
-      x-menu-order: 19
+      x-menu-order: 21
       x-permission:
         operator: AND
         permissions:
@@ -107592,11 +109494,149 @@ paths:
       summary: Update maintenance
       tags:
         - Status Pages
-      x-menu-order: 17
+      x-menu-order: 19
       x-permission:
         operator: AND
         permissions:
           - status_pages_incident_write
+  /api/v2/statuspages/{page_id}/publish:
+    post:
+      description: Publishes a status page. For pages of type `public`, makes the status page available on the public internet and requires the `status_pages_public_page_publish` permission. For pages of type `internal`, makes the status page available under the `status-pages/$domain_prefix/view` route within the Datadog organization and requires the `status_pages_internal_page_publish` permission. The `status_pages_settings_write` permission is temporarily honored as we migrate publishing functionality from the update status page endpoint to the publish status page endpoint.
+      operationId: PublishStatusPage
+      parameters:
+        - description: The ID of the status page.
+          in: path
+          name: page_id
+          required: true
+          schema:
+            format: uuid
+            type: string
+      responses:
+        "204":
+          description: No Content
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ: []
+      summary: Publish status page
+      tags:
+        - Status Pages
+      x-menu-order: 6
+      x-permission:
+        operator: OR
+        permissions:
+          - status_pages_settings_write
+          - status_pages_public_page_publish
+          - status_pages_internal_page_publish
+  /api/v2/statuspages/{page_id}/unpublish:
+    post:
+      description: Unpublishes a status page. For pages of type `public`, removes the status page from the public internet and requires the `status_pages_public_page_publish` permission. For pages of type `internal`, removes the `status-pages/$domain_prefix/view` route from the Datadog organization and requires the `status_pages_internal_page_publish` permission. The `status_pages_settings_write` permission is temporarily honored as we migrate unpublishing functionality from the update status page endpoint to the unpublish status page endpoint.
+      operationId: UnpublishStatusPage
+      parameters:
+        - description: The ID of the status page.
+          in: path
+          name: page_id
+          required: true
+          schema:
+            format: uuid
+            type: string
+      responses:
+        "204":
+          description: No Content
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ: []
+      summary: Unpublish status page
+      tags:
+        - Status Pages
+      x-menu-order: 7
+      x-permission:
+        operator: OR
+        permissions:
+          - status_pages_settings_write
+          - status_pages_public_page_publish
+          - status_pages_internal_page_publish
+  /api/v2/synthetics/api-multistep/subtests/{public_id}:
+    get:
+      description: |-
+        Get the list of API tests that can be added as subtests to a given API multistep test.
+        The current test is excluded from the list since a test cannot be a subtest of itself.
+      operationId: GetApiMultistepSubtests
+      parameters:
+        - description: The public ID of the API multistep test.
+          in: path
+          name: public_id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SyntheticsApiMultistepSubtestsResponse"
+          description: OK
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - synthetics_read
+      summary: Get available subtests for a multistep test
+      tags:
+        - Synthetics
+      x-menu-order: 54
+      x-permission:
+        operator: OR
+        permissions:
+          - synthetics_read
+  /api/v2/synthetics/api-multistep/subtests/{public_id}/parents:
+    get:
+      description: |-
+        Get the list of API multistep tests that include a given subtest,
+        along with their monitor status.
+      operationId: GetApiMultistepSubtestParents
+      parameters:
+        - description: The public ID of the subtest.
+          in: path
+          name: public_id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SyntheticsApiMultistepParentTestsResponse"
+          description: OK
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: API error response.
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - synthetics_read
+      summary: Get parent tests for a subtest
+      tags:
+        - Synthetics
+      x-menu-order: 55
+      x-permission:
+        operator: OR
+        permissions:
+          - synthetics_read
   /api/v2/synthetics/settings/on_demand_concurrency_cap:
     get:
       description: Get the on-demand concurrency cap.
@@ -107872,6 +109912,62 @@ paths:
         operator: OR
         permissions:
           - synthetics_write
+  /api/v2/synthetics/suites/{public_id}/jsonpatch:
+    patch:
+      description: |-
+        Patch a Synthetic test suite using JSON Patch (RFC 6902).
+        Use partial updates to modify only specific fields of a test suite.
+
+        Common operations include:
+        - Replace field values: `{"op": "replace", "path": "/name", "value": "new_name"}`
+        - Add/update tags: `{"op": "add", "path": "/tags/-", "value": "new_tag"}`
+        - Remove fields: `{"op": "remove", "path": "/message"}`
+      operationId: PatchTestSuite
+      parameters:
+        - description: The public ID of the Synthetic test suite to patch.
+          in: path
+          name: public_id
+          required: true
+          schema:
+            example: 123-abc-456
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SuiteJsonPatchRequest"
+        description: JSON Patch document with operations to apply.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SyntheticsSuiteResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: API error response.
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - synthetics_write
+      summary: Patch a test suite
+      tags:
+        - Synthetics
+      x-codegen-request-body-name: body
+      x-menu-order: 58
+      x-permission:
+        operator: OR
+        permissions:
+          - synthetics_write
+          - synthetics_create_edit_trigger
   /api/v2/synthetics/tests/bulk-delete:
     post:
       operationId: DeleteSyntheticsTests
@@ -108093,6 +110189,400 @@ paths:
         permissions:
           - synthetics_write
           - synthetics_create_edit_trigger
+  /api/v2/synthetics/tests/{public_id}/files/download:
+    post:
+      description: |-
+        Get a presigned URL to download a file attached to a Synthetic test.
+        The returned URL is temporary and expires after a short period.
+      operationId: GetTestFileDownloadUrl
+      parameters:
+        - description: The public ID of the Synthetic test.
+          in: path
+          name: public_id
+          required: true
+          schema:
+            example: abc-def-123
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SyntheticsTestFileDownloadRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SyntheticsTestFileDownloadResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: API error response.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Forbidden.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: API error response.
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - synthetics_read
+      summary: Get a presigned URL for downloading a test file
+      tags:
+        - Synthetics
+      x-menu-order: 59
+      x-permission:
+        operator: OR
+        permissions:
+          - synthetics_read
+  /api/v2/synthetics/tests/{public_id}/files/multipart-presigned-urls:
+    post:
+      description: |-
+        Get presigned URLs for uploading a file to a Synthetic test using multipart upload.
+        Returns the presigned URLs for each part along with the bucket key that references the file.
+      operationId: GetTestFileMultipartPresignedUrls
+      parameters:
+        - description: The public ID of the Synthetic test.
+          in: path
+          name: public_id
+          required: true
+          schema:
+            example: abc-def-123
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SyntheticsTestFileMultipartPresignedUrlsRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SyntheticsTestFileMultipartPresignedUrlsResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: API error response.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Forbidden.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: API error response.
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - synthetics_write
+      summary: Get presigned URLs for uploading a test file
+      tags:
+        - Synthetics
+      x-menu-order: 60
+      x-permission:
+        operator: OR
+        permissions:
+          - synthetics_write
+          - synthetics_create_edit_trigger
+  /api/v2/synthetics/tests/{public_id}/files/multipart-upload-abort:
+    post:
+      description: |-
+        Abort an in-progress multipart file upload for a Synthetic test. This cancels the upload
+        and releases any storage used by already-uploaded parts.
+      operationId: AbortTestFileMultipartUpload
+      parameters:
+        - description: The public ID of the Synthetic test.
+          in: path
+          name: public_id
+          required: true
+          schema:
+            example: abc-def-123
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SyntheticsTestFileAbortMultipartUploadRequest"
+        required: true
+      responses:
+        "204":
+          description: No Content
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: API error response.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Forbidden.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: API error response.
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - synthetics_write
+      summary: Abort a multipart upload of a test file
+      tags:
+        - Synthetics
+      x-menu-order: 62
+      x-permission:
+        operator: OR
+        permissions:
+          - synthetics_write
+          - synthetics_create_edit_trigger
+  /api/v2/synthetics/tests/{public_id}/files/multipart-upload-complete:
+    post:
+      description: |-
+        Complete a multipart file upload for a Synthetic test. Call this endpoint after all parts
+        have been uploaded using the presigned URLs obtained from the multipart presigned URLs endpoint.
+      operationId: CompleteTestFileMultipartUpload
+      parameters:
+        - description: The public ID of the Synthetic test.
+          in: path
+          name: public_id
+          required: true
+          schema:
+            example: abc-def-123
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SyntheticsTestFileCompleteMultipartUploadRequest"
+        required: true
+      responses:
+        "204":
+          description: No Content
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: API error response.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Forbidden.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: API error response.
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - synthetics_write
+      summary: Complete a multipart upload of a test file
+      tags:
+        - Synthetics
+      x-menu-order: 61
+      x-permission:
+        operator: OR
+        permissions:
+          - synthetics_write
+          - synthetics_create_edit_trigger
+  /api/v2/synthetics/tests/{public_id}/parent-suites:
+    get:
+      description: Get the list of parent suites and their status for a given Synthetic test.
+      operationId: GetTestParentSuites
+      parameters:
+        - description: The public ID of the Synthetic test.
+          in: path
+          name: public_id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SyntheticsTestParentSuitesResponse"
+          description: OK
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: API error response.
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - synthetics_read
+      summary: Get parent suites for a test
+      tags:
+        - Synthetics
+      x-menu-order: 56
+      x-permission:
+        operator: OR
+        permissions:
+          - synthetics_read
+  /api/v2/synthetics/tests/{public_id}/version_history:
+    get:
+      description: Get the paginated version history for a Synthetic test.
+      operationId: ListSyntheticsTestVersions
+      parameters:
+        - description: The public ID of the Synthetic test.
+          in: path
+          name: public_id
+          required: true
+          schema:
+            type: string
+        - description: The version number of the last item from the previous page. Omit to get the first page.
+          in: query
+          name: last_version_number
+          required: false
+          schema:
+            format: int64
+            type: integer
+        - description: Maximum number of version records to return per page.
+          in: query
+          name: limit
+          required: false
+          schema:
+            format: int64
+            maximum: 50
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SyntheticsTestVersionHistoryResponse"
+          description: OK
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: API error response.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: API error response.
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - synthetics_read
+      summary: Get version history of a test
+      tags:
+        - Synthetics
+      x-menu-order: 57
+      x-permission:
+        operator: OR
+        permissions:
+          - synthetics_read
+  /api/v2/synthetics/tests/{public_id}/version_history/{version_number}:
+    get:
+      description: Get a specific version of a Synthetic test by its version number.
+      operationId: GetSyntheticsTestVersion
+      parameters:
+        - description: The public ID of the Synthetic test.
+          in: path
+          name: public_id
+          required: true
+          schema:
+            type: string
+        - description: The version number to retrieve.
+          in: path
+          name: version_number
+          required: true
+          schema:
+            format: int64
+            type: integer
+        - description: If `true`, include change metadata in the response.
+          in: query
+          name: include_change_metadata
+          required: false
+          schema:
+            type: boolean
+        - description: |-
+            If `true`, only check whether the version exists without returning its full payload.
+            Returns an empty object if the version exists, or 404 if not.
+          in: query
+          name: only_check_existence
+          required: false
+          schema:
+            type: boolean
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SyntheticsTestVersionResponse"
+          description: OK
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: API error response.
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - synthetics_read
+      summary: Get a specific version of a test
+      tags:
+        - Synthetics
+      x-menu-order: 53
+      x-permission:
+        operator: OR
+        permissions:
+          - synthetics_read
   /api/v2/synthetics/variables/{variable_id}/jsonpatch:
     patch:
       description: |-
@@ -111438,6 +113928,333 @@ paths:
         operator: OR
         permissions:
           - teams_read
+  /api/v2/widgets/{experience_type}:
+    get:
+      description: Search and list widgets for a given experience type. Supports filtering by widget type, creator, title, and tags, as well as sorting and pagination.
+      operationId: SearchWidgets
+      parameters:
+        - description: The experience type for the widget.
+          in: path
+          name: experience_type
+          required: true
+          schema:
+            $ref: "#/components/schemas/WidgetExperienceType"
+        - description: Filter widgets by widget type.
+          in: query
+          name: filter[widgetType]
+          schema:
+            $ref: "#/components/schemas/WidgetType"
+        - description: Filter widgets by the email handle of the creator.
+          in: query
+          name: filter[creatorHandle]
+          schema:
+            example: "john.doe@example.com"
+            type: string
+        - description: Filter to only widgets favorited by the current user.
+          in: query
+          name: filter[isFavorited]
+          schema:
+            type: boolean
+        - description: Filter widgets by title (substring match).
+          in: query
+          name: filter[title]
+          schema:
+            type: string
+        - description: Filter widgets by tags. Format as bracket-delimited CSV, e.g. `[tag1,tag2]`.
+          in: query
+          name: filter[tags]
+          schema:
+            type: string
+        - description: |-
+            Sort field for the results. Prefix with `-` for descending order.
+            Allowed values: `title`, `created_at`, `modified_at`.
+          in: query
+          name: sort
+          schema:
+            default: "-modified_at"
+            example: "-modified_at"
+            type: string
+        - description: Page number for pagination (0-indexed).
+          in: query
+          name: page[number]
+          schema:
+            default: 0
+            minimum: 0
+            type: integer
+        - description: Number of widgets per page.
+          in: query
+          name: page[size]
+          schema:
+            default: 50
+            maximum: 100
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WidgetListResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Forbidden
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Search widgets
+      tags:
+        - Widgets
+      x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+          - cloud_cost_management_read
+          - generate_log_reports
+          - manage_log_reports
+          - product_analytics_saved_widgets_read
+    post:
+      description: Create a new widget for a given experience type.
+      operationId: CreateWidget
+      parameters:
+        - description: The experience type for the widget.
+          in: path
+          name: experience_type
+          required: true
+          schema:
+            $ref: "#/components/schemas/WidgetExperienceType"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateOrUpdateWidgetRequest"
+        description: Widget request body.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WidgetResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Forbidden
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Create a widget
+      tags:
+        - Widgets
+      x-codegen-request-body-name: body
+      x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+          - cloud_cost_management_write
+          - generate_log_reports
+          - manage_log_reports
+          - product_analytics_saved_widgets_write
+  /api/v2/widgets/{experience_type}/{uuid}:
+    delete:
+      description: Soft-delete a widget by its UUID for a given experience type.
+      operationId: DeleteWidget
+      parameters:
+        - description: The experience type for the widget.
+          in: path
+          name: experience_type
+          required: true
+          schema:
+            $ref: "#/components/schemas/WidgetExperienceType"
+        - description: The UUID of the widget.
+          in: path
+          name: uuid
+          required: true
+          schema:
+            format: uuid
+            type: string
+      responses:
+        "204":
+          description: No Content
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Delete a widget
+      tags:
+        - Widgets
+      x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+          - cloud_cost_management_write
+          - generate_log_reports
+          - manage_log_reports
+          - product_analytics_saved_widgets_write
+    get:
+      description: Retrieve a widget by its UUID for a given experience type.
+      operationId: GetWidget
+      parameters:
+        - description: The experience type for the widget.
+          in: path
+          name: experience_type
+          required: true
+          schema:
+            $ref: "#/components/schemas/WidgetExperienceType"
+        - description: The UUID of the widget.
+          in: path
+          name: uuid
+          required: true
+          schema:
+            format: uuid
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WidgetResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Get a widget
+      tags:
+        - Widgets
+      x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+          - cloud_cost_management_read
+          - generate_log_reports
+          - manage_log_reports
+          - product_analytics_saved_widgets_read
+    put:
+      description: Update a widget by its UUID for a given experience type. This performs a full replacement of the widget definition.
+      operationId: UpdateWidget
+      parameters:
+        - description: The experience type for the widget.
+          in: path
+          name: experience_type
+          required: true
+          schema:
+            $ref: "#/components/schemas/WidgetExperienceType"
+        - description: The UUID of the widget.
+          in: path
+          name: uuid
+          required: true
+          schema:
+            format: uuid
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateOrUpdateWidgetRequest"
+        description: Widget request body.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WidgetResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Update a widget
+      tags:
+        - Widgets
+      x-codegen-request-body-name: body
+      x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+          - cloud_cost_management_write
+          - generate_log_reports
+          - manage_log_reports
+          - product_analytics_saved_widgets_write
   /api/v2/workflows:
     post:
       description: Create a new workflow, returning the workflow ID. This API requires a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key). Alternatively, you can configure these permissions [in the UI](https://docs.datadoghq.com/account_management/api-app-keys/#actions-api-access).
@@ -112163,7 +114980,9 @@ tags:
       Send server-side events to Product Analytics. Server-Side Events Ingestion allows you to collect custom events
       from any server-side source, and retains events for 15 months. Server-side events are helpful for understanding
       causes of a funnel drop-off which are external to the client-side (for example, payment processing error).
-      See the [Product Analytics page](https://docs.datadoghq.com/product_analytics/) for more information.
+
+      **Note**: Sending server-side events impacts billing. Review the [pricing page](https://www.datadoghq.com/pricing/?product=product-analytics#products)
+      and contact your Customer Success Manager for more information.
     name: Product Analytics
   - description: |-
       Manage your Real User Monitoring (RUM) applications, and search or aggregate your RUM events over HTTP. See the [RUM & Session Replay page](https://docs.datadoghq.com/real_user_monitoring/) for more information
@@ -112296,6 +115115,11 @@ tags:
     externalDocs:
       url: https://docs.datadoghq.com/account_management/users
     name: Users
+  - description: |-
+      Create, read, update, and delete saved widgets. Widgets are reusable
+      visualization components stored independently from any dashboard or notebook,
+      partitioned by experience type and identified by a UUID.
+    name: Widgets
   - description: |-
       Datadog Workflow Automation allows you to automate your end-to-end processes by connecting Datadog with the rest of your tech stack. Build workflows to auto-remediate your alerts, streamline your incident and security processes, and reduce manual toil. Workflow Automation supports over 1,000+ OOTB actions, including AWS, JIRA, ServiceNow, GitHub, and OpenAI. Learn more in our Workflow Automation docs [here](https://docs.datadoghq.com/service_management/workflows/).
     externalDocs:
