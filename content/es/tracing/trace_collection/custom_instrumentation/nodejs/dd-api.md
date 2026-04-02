@@ -11,7 +11,7 @@ code_lang_weight: 1
 description: Instrumenta manualmente tu aplicación Node.js para enviar trazas (traces)
   personalizadas a Datadog.
 further_reading:
-- link: /tracing/trace_collection/trace_context_propagation/nodejs/
+- link: /tracing/trace_collection/trace_context_propagation/
   tag: Documentación
   text: Propagación del contexto de traza
 - link: tracing/other_telemetry/connect_logs_and_traces
@@ -20,7 +20,7 @@ further_reading:
 - link: tracing/glossary/
   tag: Documentación
   text: Explora tus servicios, recursos y trazas
-title: Instrumentación personalizada de Node.js con la API de Datadog
+title: Instrumentación personalizada de Node.js con la API Datadog
 type: multi-code-lang
 ---
 
@@ -32,10 +32,10 @@ Si no utilizas la instrumentación de biblioteca compatible (consulta [Compatibi
 
 También es posible que desees ampliar la funcionalidad de la biblioteca `dd-trace` u obtener un control más preciso sobre la instrumentación de tu aplicación. La biblioteca proporciona varias técnicas para conseguirlo.
 
-## Añadir etiquetas
+## Añadir etiquetas (tags)
 
 La instrumentación incorporada y tu propia instrumentación personalizada crean
-tramos alrededor de operaciones significativas.
+tramos (span) alrededor de operaciones significativas.
 
 {{< tabs >}}
 {{% tab "Locally" %}}
@@ -51,16 +51,16 @@ Para más información, lee [Detalles de la API de `Scope`][1].
 Puedes añadir etiquetas a un tramo mediante el método `setTag` o `addTags` en un tramo. Los tipos de valor admitidos son cadena, número y objeto.
 
 ```javascript
-// añade una etiqueta foo:bar
+// add a foo:bar tag
 span.setTag('foo', 'bar')
 
-// añade una etiqueta user_id:5
+// add a user_id:5 tag
 span.setTag('user_id', 5)
 
-// añade etiquetas obj.first:foo y obj.second:bar
+// add a obj.first:foo and obj.second:bar tags
 span.setTag('obj', { first: 'foo', second: 'bar' })
 
-// añade etiquetas foo:bar y baz:qux
+// add a foo:bar and baz:qux tags
 span.addTags({
   foo: 'bar',
   baz: 'qux'
@@ -76,7 +76,7 @@ span.addTags({
 Puedes añadir etiquetas a cada tramo configurándolos directamente en el rastreador, ya sea con la variable de entorno `DD_TAGS` separada por comas o con la opción `tags` en la inicialización del rastreador:
 
 ```javascript
-// equivalente a DD_TAGS=foo:bar,baz:qux
+// equivalent to DD_TAGS=foo:bar,baz:qux
 tracer.init({
   tags: {
     foo: 'bar',
@@ -84,7 +84,7 @@ tracer.init({
   }
 })
 
-// Todos los tramos ahora tendrán estas etiquetas
+// All spans will now have these tags
 ```
 
 {{% /tab %}}
@@ -94,9 +94,9 @@ tracer.init({
 Algunas integraciones de Datadog admiten hooks de tramo que pueden utilizarse para actualizar el tramo justo antes de que termine. Esto es útil para modificar o añadir etiquetas a un tramo que de otro modo es inaccesible desde tu código.
 
 ```javascript
-// en la parte superior del punto de entrada justo después de tracer.init()
+// at the top of the entry point right after tracer.init()
 tracer.use('express', {
-  // hook se ejecutará justo antes de que finalice el tramo de solicitud
+  // hook will be executed right before the request span is finished
   hooks: {
     request: (span, req, res) => {
       span.setTag('customer.id', req.query.customer_id)
@@ -113,7 +113,7 @@ Para obtener más información, lee [Detalles de la API para complementos indivi
 
 {{% tab "Errors" %}}
 
-Los errores pueden añadirse a un tramo con la etiqueta especial `error`, que admite objetos de error. Esto divide el error en tres etiquetas: `error.type`, `error.msg` y `error.stack`.
+Los errores pueden añadirse a un tramo con la etiqueta especial `error` que admite objetos de error. Esta acción divide el error en tres etiquetas: `error.type`, `error.message` y `error.stack`.
 
 ```javascript
 try {
@@ -223,11 +223,11 @@ Puedes envolver un función existente sin cambiar su código. Esto es útil para
 
 ```javascript
 
-// Después que se definen las funciones
+// After the functions are defined
 getIngredients = tracer.wrap('get_ingredients', { resource: 'resource_name' }, getIngredients)
 assembleSandwich = tracer.wrap('assemble_sandwich', { resource: 'resource_name' }, assembleSandwich)
 
-// Donde se definen las rutas
+// Where routes are defined
 app.get('/make-sandwich', (req, res) => {
 
   const sandwich = tracer.trace('sandwich.make', { resource: 'resource_name' }, () => {
@@ -252,7 +252,7 @@ Para más información, lee [Detalles de la API de `tracer.trace()`][1].
 Puede que no quieras instrumentar algunas solicitudes de una aplicación. Un caso común sería el check de estado u otro tráfico Synthetic. Estas pueden ignorarse usando la opción `blocklist` o `allowlist` en el complemento `http`.
 
 ```javascript
-// en la parte superior del punto de entrada justo después de tracer.init()
+// at the top of the entry point right after tracer.init()
 tracer.use('http', {
   blocklist: ['/health', '/ping']
 })
@@ -270,7 +270,58 @@ tracer.use('http', {
 
 Además, se pueden excluir trazas en función de su nombre de recurso, para que el Agent no los envíe a Datadog. Ésta y otras configuraciones de seguridad y ajuste del Agent se pueden encontrar en la página [Seguridad][3] o en [Ignorar recursos no deseados][4].
 
-## Leer más
+## dd-trace-api
+
+{{< callout btn_hidden="true" header="ddtrace-api está en vista previa">}}
+El paquete <code>dd-trace-api</code> está en vista previa y puede que no incluya todas las llamadas a la API que necesitas. Si buscas una funcionalidad más completa, utiliza la API como se describe en las secciones anteriores.
+<br><br>Los siguientes pasos solo son necesarios si quieres probar el paquete <code>dd-trace-api</code> en vista previa.{{< /callout >}}
+
+El [paquete dd-trace-api][5] proporciona una API pública estable para la instrumentación personalizada de Node.js de Datadog APM. Este paquete solo implementa la interfaz API, y no la funcionalidad subyacente que crea y envía tramos a Datadog.
+
+Esta separación entre interfaz (`dd-trace-api`) e implementación (`dd-trace`) ofrece varias ventajas:
+
+- Puedes confiar en una API que cambia con menos frecuencia y de forma más predecible para tu instrumentación personalizada
+- Si solo utilizas la instrumentación automática, puedes ignorar por completo los cambios en la API
+- Si implementas la instrumentación tanto de un solo paso como personalizada evitarás depender de varias copias del paquete `dd-trace`
+
+Para utilizar `dd-trace-api`:
+
+1. Instala las bibliotecas `dd-trace` y `dd-trace-api` en tu aplicación. **Nota**: `dd-trace` está instalado para la instrumentación de un solo paso, pero necesitas instalar `dd-trace-api` manualmente en tu aplicación.
+   ```shell
+   npm install dd-trace dd-trace-api
+   ```
+
+2. Instrumenta tu aplicación Node.js utilizando `dd-trace`. Si estás utilizando la instrumentación de un solo paso, puedes saltarte esta etapa.
+   ```shell
+    node --require dd-trace/init app.js
+   ```
+
+3. Una vez configurado esto, puedes escribir la instrumentación personalizada exactamente igual que en los ejemplos de las secciones anteriores, pero necesitas `dd-trace-api` en lugar de `dd-trace`.
+
+   Por ejemplo:
+```javascript
+const tracer = require('dd-trace-api')
+const express = require('express')
+const app = express()
+
+app.get('/make-sandwich', (req, res) => {
+  const sandwich = tracer.trace('sandwich.make', { resource: 'resource_name' }, () => {
+    const ingredients = tracer.trace('get_ingredients', { resource: 'resource_name' }, () => {
+      return getIngredients()
+    })
+
+    return tracer.trace('assemble_sandwich', { resource: 'resource_name' }, () => {
+      assembleSandwich(ingredients)
+    })
+  })
+
+  res.end(sandwich)
+})
+```
+
+Consulta la [definición de la API][6] de ese paquete para ver la lista completa de llamadas a la API compatibles.
+
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -278,3 +329,5 @@ Además, se pueden excluir trazas en función de su nombre de recurso, para que 
 [2]: /es/tracing/glossary/#spans
 [3]: /es/tracing/security
 [4]: /es/tracing/guide/ignoring_apm_resources/
+[5]: https://npm.im/dd-trace-api
+[6]: https://github.com/DataDog/dd-trace-api-js/blob/master/index.d.ts

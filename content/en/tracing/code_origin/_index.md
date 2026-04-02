@@ -46,12 +46,54 @@ In Trace Explorer, select a span from an enabled service to see Code Origin deta
 
 ### Compatibility requirements
 
-| Runtime Language | Tracing Library Version | Frameworks |
-|---|---|---|
-| Java | 1.47.0+ | Spring Boot/Data, gRPC servers, Micronaut 4, Kafka consumers|
-| Python | 2.15.0+ | Django, Flask, Starlette and derivatives|
-| Node.js | 4.49.0+ | Fastify, Express (5.54.0+)|
-| .NET | 3.15.0+ | ASP.NET, ASP.NET Core|
+{{% tabs %}}
+
+{{% tab "Java" %}}
+
+| Tracing Library Version | Frameworks |
+|---|---|
+| 1.47.0+ | Spring Boot/Data, gRPC servers, Micronaut 4, Kafka consumers |
+
+**Limitation:** On JDK 18 and below, classes compiled with the `-parameters` flag may not be supported. Spring 6+, Spring Boot 3+, and Scala use this flag by default.
+
+{{% /tab %}}
+
+{{% tab "Python" %}}
+
+| Tracing Library Version | Frameworks |
+|---|---|
+| 2.15.0+ | Django, Flask, Starlette, and derivatives |
+
+{{% /tab %}}
+
+{{% tab "Node.js" %}}
+
+| Tracing Library Version | Frameworks |
+|---|---|
+| 4.49.0+ | Fastify |
+| 5.54.0+ | Express |
+
+**Note:** NestJS is not supported, even though the underlying framework is either Express or Fastify.
+
+{{% /tab %}}
+
+{{% tab ".NET" %}}
+
+| Tracing Library Version | Frameworks |
+|---|---|
+| 3.15.0+ | ASP.NET, ASP.NET Core |
+
+{{% /tab %}}
+
+{{% tab "PHP" %}}
+
+| Tracing Library Version | Frameworks |
+|---|---|
+| 1.11.0+ | All supported web frameworks |
+
+{{% /tab %}}
+
+{{% /tabs %}}
 
 ### Enable Code Origin
 
@@ -121,7 +163,7 @@ export DD_CODE_ORIGIN_FOR_SPANS_ENABLED=true
 [1]: https://app.datadoghq.com/apm/traces
 [2]: /tracing/services/service_page/
 [3]: /tracing/services/resource_page/
-[4]: /developers/ide_plugins/
+[4]: /ide_plugins/
 [5]: /dynamic_instrumentation/
 [6]: /tracing/trace_collection/
 [7]: /integrations/guide/source-code-integration/

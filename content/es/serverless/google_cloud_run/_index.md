@@ -6,9 +6,12 @@ further_reading:
 - link: /integrations/google-cloud-run/
   tag: Documentación
   text: Integración Google Cloud Run
+- link: /serverless/guide/disable_serverless
+  tag: Documentación
+  text: Desactivar Serverless Monitoring
 - link: https://www.datadoghq.com/blog/collect-traces-logs-from-cloud-run-with-datadog/
   tag: Blog
-  text: Recopila trazas, logs y métricas personalizadas de servicios de Cloud Run
+  text: Recopilar trazas, logs y métricas personalizadas de servicios de Cloud Run
 title: Google Cloud Run
 ---
 

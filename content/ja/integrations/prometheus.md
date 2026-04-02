@@ -73,7 +73,7 @@ Prometheus に接続して:
 
 **注**: [OpenMetrics チェック][1]の方が効率性が高く Prometheus のテキスト形式を完全にサポートしているので、OpenMetrics チェックの使用をお勧めします。Prometheus チェックは、メトリクスのエンドポイントがテキスト形式をサポートしていない場合にのみ使用してください。
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 このインテグレーションによって取得されたメトリクスはすべて、<a href="https://docs.datadoghq.com/developers/metrics/custom_metrics">カスタムメトリクス</a>と見なされます。
 </div>
 

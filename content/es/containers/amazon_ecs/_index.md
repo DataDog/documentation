@@ -4,6 +4,7 @@ algolia:
   - ecs
 aliases:
 - /es/agent/amazon_ecs/
+description: Instalar y configurar el Datadog Agent en Amazon Elastic Container Service
 further_reading:
 - link: /agent/amazon_ecs/logs/
   tag: Documentación
@@ -30,11 +31,21 @@ title: Amazon ECS
 
 Amazon ECS es un servicio escalable de orquestación de contenedores de alto rendimiento compatible con contenedores de Docker. Con el Datadog Agent, puedes monitorizar contenedores y tareas de ECS en cada instancia EC2 de tu clúster.
 
+Para configurar Amazon ECS con Datadog, puedes utilizar **Fleet Automation** o la **instalación manual**. Si prefieres la instalación manual, ejecuta un contenedor del Agent por host de Amazon EC2 creando una definición de tarea del Datadog Agent e implementándola como servicio daemon. A continuación, cada Agent monitoriza los demás contenedores de tu host. Consulta la sección [Instalación manual](#install-manually) para obtener más detalles.
+
+
+## Configuración de Fleet Automation
+Sigue la [guía de instalación de la aplicación en Fleet Automation][32] para completar la configuración en ECS. Tras completar los pasos descritos en la guía de la aplicación, [Fleet Automation][33] genera una definición de tarea o plantilla de CloudFormation lista para usar, con tu clave de API preinyectada.
+
+{{< img src="agent/basic_agent_usage/ecs_install_page.png" alt="Pasos de instalación en la aplicación para el Datadog Agent en ECS." style="width:90%;">}}
+
 <div class="alert alert-info">
 Si deseas monitorizar <strong>ECS en Fargate</strong>, consulta <a href="/integrations/ecs_fargate/">Amazon ECS en AWS Fargate</a>.
 </div>
 
-## Configuración
+<br>
+
+## Configuración manual
 
 Para monitorizar tus contenedores y tareas de ECS, despliega el Datadog Agent como un contenedor **una vez en cada instancia de EC2** en tu clúster de ECS. Para ello, crea una definición de tarea para el contenedor de Datadog Agent y despliégala como servicio daemon. Cada contenedor de Datadog Agent luego monitoriza los otros contenedores en su respectiva instancia de EC2.
 
@@ -211,10 +222,10 @@ Para recopilar la información de Live Process de todos tus contenedores y envia
 }
 {{< /highlight >}}
 
-#### Cloud Network Monitoring
+#### Monitorización de redes en la nube
 
-<div class="alert alert-warning">
-Esta función sólo está disponible para Linux.
+<div class="alert alert-danger">
+Esta función solo está disponible para Linux.
 </div>
 
 Consulta el archivo de ejemplo [datadog-agent-sysprobe-ecs.json][25].
@@ -356,3 +367,5 @@ Puedes ejecutar el Agent en modo `awsvpc`, pero Datadog no lo recomienda porque 
 [29]: #set-up-additional-agent-features
 [30]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definitions.html
 [31]: /es/network_monitoring/network_path
+[32]: https://app.datadoghq.com/fleet/install-agent/latest?platform=ecs
+[33]:https://app.datadoghq.com/fleet/install-agent/latest?platform=ecs

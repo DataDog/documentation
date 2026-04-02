@@ -5,20 +5,16 @@ title: Puppet
 ---
 Este módulo instala el Datadog Agent y envía informes de Puppet a Datadog.
 
-### Requisitos
+## Requisitos previos
 
-El módulo Puppet Datadog admite Linux y Windows y es compatible con la versión 7.34.x o posterior de Puppet o con la versión 2021.7.x o posterior
-de Puppet Enterprise. Para obtener información detallada sobre la compatibilidad, consulta la [página del módulo en Puppet Forge][1].
+El módulo Puppet Datadog admite Linux y Windows, y es compatible con las versiones >= 7.34.x de Puppet o con
+las versiones >= 2021.7.x de Puppet Enterprise. Para obtener información detallada sobre la compatibilidad, consulta la [página del módulo en Puppet Forge][1].
 
-### Instalación
+## Instalación
 
-Instala el módulo Puppet de [datadog_agent][1] en la ruta del módulo de tu nodo maestro Puppet:
+Sigue la [guia de instalacion en la aplicación en Fleet Automation][9] para seleccionar las funciones requeridas, copiar el fragmento de manifiesto generado, agregarlo a tu manifiesto de Puppet y aplicar tu despliegue estandar de Puppet para implementar el Agent. Consulta el [módulo del Datadog Agent][1] o la [sección de configuraciones avanzadas](#advanced-configurations) para consultar configuraciones adicionales, incluyendo la gestión de actualizaciones del Agent, la habilitación de integraciones del Agent y la configuración de informes de ejecución de Puppet.
 
-```shell
-puppet module install datadog-datadog_agent
-```
-
-#### Actualización
+### Actualización del Agent
 
 > [!IMPORTANTE]
 > La v4.x del módulo Puppet Datadog deja de ser compatible con la v6 o anterior de Puppet y con la v5 del Datadog Agent. Para actualizar o instalar la v5 del Datadog Agent
@@ -100,6 +96,9 @@ Una vez que el módulo `datadog_agent` esté instalado en tu `puppetserver`/`pup
     ```
 
 5. (Opcional) Para recopilar métricas y eventos sobre Puppet, consulta la sección [Informes](#reporting).
+
+
+## Configuraciones avanzadas
 
 ### Actualización de las integraciones
 
@@ -350,3 +349,4 @@ class { "datadog_agent":
 [6]: https://github.com/DataDog/puppet-datadog-agent/blob/master/manifests/integrations/mongo.pp
 [7]: https://github.com/DataDog/puppet-datadog-agent/tree/master/manifests/integrations
 [8]: https://github.com/DataDog/puppet-datadog-agent/blob/master/manifests/init.pp
+[9]: https://app.datadoghq.com/fleet/install-agent/latest?platform=puppet

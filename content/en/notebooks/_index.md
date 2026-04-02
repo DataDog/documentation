@@ -1,10 +1,14 @@
 ---
 title: Notebooks
+description: "Create collaborative rich text documents with live Datadog graphs for investigations, postmortems, runbooks, and data-driven storytelling."
 aliases:
   - /graphing/notebooks/
   - /notebooks_new/
   - /notebooks_legacy/
 further_reading:
+- link: https://www.datadoghq.com/blog/cloud-cost-management-oci
+  tag: Blog
+  text: Manage and optimize your OCI costs with Datadog Cloud Cost Management
 - link: "https://www.datadoghq.com/blog/collaborative-notebooks-datadog/"
   tag: "Blog"
   text: "Tell data-driven stories with Collaborative Notebooks"
@@ -24,7 +28,7 @@ further_reading:
 
 ## Overview
 
-Notebooks are collaborative rich text documents that give you all the power of Datadog graphs. Multiple users can work together to put together an investigation or postmortem featuring live data from your incident. Notebooks are also great for runbooks and documentation featuring real insights into your systems alongside your content.
+Notebooks are collaborative rich text documents that give you all the power of Datadog graphs. Multiple users can work together to put together an investigation or [postmortem][8] featuring live data from your incident. Notebooks are also great for runbooks and documentation featuring real insights into your systems alongside your content.
 
 ## Creating a notebook
 
@@ -35,7 +39,7 @@ You can create a notebook in two places:
 
 ### Notebook templates
 
-In the [Template Gallery][2], see ready-to-use templates which you can create new notebooks from. Templates include an Incident Response postmortem, an Incident Report, and SLO Specification. You can also create a new custom template to build reusable notebook structures.
+In the [Template Gallery][2], see ready-to-use templates which you can create new notebooks from. Templates include an Incident Response [postmortem][8], an Incident Report, and SLO Specification. You can also create a new custom template to build reusable notebook structures.
 
 ## Editing a notebook
 
@@ -73,7 +77,7 @@ Additional graph configuration options are accessible under the three-dot ellips
 
 ### Rich text features
 
-Notebooks support commonly used rich text features like bold, italics, inline code, and headers. Notebooks also support a variety of list types such as bullet, numbered, or check list. 
+Notebooks support commonly used rich text features like bold, italics, inline code, and headers. Notebooks also support a variety of list types such as bullet, numbered, or check list.
 
 | Feature       | Description                                                                                                                |
 |---------------|----------------------------------------------------------------------------------------------------------------------------|
@@ -109,7 +113,7 @@ At the bottom-left corner of a notebook, click the keyboard icon to view a list 
 
 Additionally, you can use the following shortcuts to cut and paste widgets (<kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>X</kbd>, <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>V</kbd>).
 
-### Table of contents 
+### Table of contents
 
 Notebooks automatically generate a table of contents from any headers or graphs you insert into your document. You can create a header using the markdown shortcut `#` or by selecting text and clicking **Header** in the toolbar.
 
@@ -141,7 +145,7 @@ Click the icons on the image action tray to adjust the size, alignment, add a ca
 
 ## Adding comments to a notebook
 
-You can add comments on content in the body of the notebook. To comment on text, highlight the text and click on the comment icon in the toolbar. 
+You can add comments on content in the body of the notebook. To comment on text, highlight the text and click on the comment icon in the toolbar.
 
 <!-- TODO Add updated image from new notebooks -->
 
@@ -179,6 +183,8 @@ At the top of the notebook, you can see avatar images of all of the users curren
 
 Notebooks support template variables. Dynamically scope visualizations by adding and selecting template variable values. For more information, see [Template Variables][5].
 
+<div class="alert alert-danger">Some Analysis features have limited or no support for template variables. For more information, see <a href="/notebooks/guide/template_variables_analysis_notebooks">Template Variable Support in Analysis Notebooks</a>.</div>
+
 ### Time controls
 
 By default, all graphs are linked to the global time frame set in the notebook header.
@@ -210,36 +216,41 @@ From a notebook, click the cog icon and click **Version history** to open the Ve
 
 ### Graph snapshots
 
-Notebooks can be set to automatically take snapshots of graphs that might expire. Enable this by clicking **Turn on snapshots** in the cog menu of any notebook. Use the cog menu to view snapshots or turn off automatic snapshots. Turn off automatic snapshots to remove access to existing snapshots.
+Notebooks automatically snapshot graphs with fixed time ranges to preserve the view before data retention limits apply. No setup is required. Use the kebab menu next to a graph to view or download a snapshot.
 
-{{< img src="notebooks/cog_snapshots.png" alt="Cog menu option to turn on snapshots" style="width:100%;">}}
+{{< img src="notebooks/kebab_snapshots.png" alt="Kebab menu option to view or download a snapshot" style="width:100%;">}}
 
- Notebooks with snapshots enabled automatically capture a static image of any graphs with a fixed time range (for example, `Aug 18, 12:00 am - Aug 19, 11:59 pm`). These snapshots update when the graph is updated, as long as the new graph also has a fixed time range. Changing the graph to a global time range (like `Past 1 Hour`) removes the snapshot.
+Snapshots are static images of graphs with a fixed time range (for example, `Aug 18, 12:00 am - Aug 19, 11:59 pm`). A snapshot updates when the graph is updated, as long as the graph continues to use a fixed time range. Switching the graph to a global time range (for example, `Past 1 hour`) removes the snapshot.
 
-You can preview the existing snapshot on any fixed-time graph by hovering over the camera icon while in edit mode.
+You can preview snapshot status for a notebook by hovering over the graph snapshot indicator under the notebook title. The preview shows the time of the most recent snapshot and the number of snapshots created.
 
-To share a version of your notebook with snapshots, from the cog menu, click **View snapshots**. Copy the URL, or append `&view=snapshots` to the URL of any notebook that has snapshots enabled.
+{{< img src="notebooks/hover_graph_snapshots.png" alt="Snapshot indicator showing how many snapshots have been generated" style="width:100%;">}}
+
+When a notebook contains a graph with data that is past its data retention limits, the notebook displays an inline snapshot of the graph. The snapshot is a static image, but it is replaced if you edit the underlying graph.
 
 ### Permissions
 
 By default, all users have full access to notebooks.
 
+Use our access controls to restrict view and edit access to only yourself:
+1. While viewing a notebook, click the **Share** button in the upper right.
+1. Select **Private to me**.
+1. Click **Save**.
+
 Use granular access controls to limit the [roles][7] that may edit a particular notebook:
-1. While viewing a notebook, click on the cog in the upper right. The settings menu opens.
-1. Select **Permissions**.
-1. Click **Restrict Access**.
-1. The dialog box updates to show that members of your organization have **Viewer** access by default.
+1. While viewing a notebook, click the **Share** button in the upper right.
+1. Select **Custom**.
+1. Update the Organization access to **Viewer** to revoke edit access from the rest of the organization.
 1. Use the dropdown to select one or more roles, teams, or users that may edit the notebook.
 1. Click **Add**.
 1. The dialog box updates to show that the role you selected has the **Editor** permission.
 1. Click **Save**.
 
-**Note:** To maintain your edit access to the notebook, the system requires you to include at least one role that you are a member of before saving. 
+**Note:** To maintain your edit access to the notebook, the system requires you to include at least one role that you are a member of before saving.
 
 You must have edit access to restore general access to a restricted notebook. Complete the following steps:
-1. While viewing the notebook, click on the cog in the upper right. The settings menu opens.
-1. Select **Permissions**.
-1. Click **Restore Full Access**.
+1. While viewing a notebook, click the **Share** button in the upper right.
+1. Select **My Org**.
 1. Click **Save**.
 
 ## Finding notebooks
@@ -280,9 +291,10 @@ You can sort notebooks by selecting the ⭐, details, or modified headers to sor
 
 
 [1]: https://app.datadoghq.com/notebook/list
-[2]: https://app.datadoghq.com/notebook/template-gallery
+[2]: https://app.datadoghq.com/notebook/list?location=templates
 [3]: /dashboards/querying/#graphing-editor
 [4]: https://www.markdownguide.org/basic-syntax/#images-1
 [5]: /dashboards/template_variables/
 [6]: /notebooks/guide/version_history
 [7]: /account_management/rbac/
+[8]: /incident_response/incident_management/post_incident/postmortems

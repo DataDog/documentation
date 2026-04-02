@@ -6,7 +6,7 @@ further_reading:
       tag: 'Documentation'
       text: 'Instrument Your Application'
 ---
-<div class="alert alert-warning">This documentation is for the PHP tracer v0.x. If you are looking for the PHP tracer v1.x documentation, see the latest <a href="/tracing/trace_collection/compatibility/php/">PHP Compatibility Requirements
+<div class="alert alert-danger">This documentation is for the PHP tracer v0.x. If you are looking for the PHP tracer v1.x documentation, see the latest <a href="/tracing/trace_collection/compatibility/php/">PHP Compatibility Requirements
 </a> documentation.</div>
 
 ## Runtime support policy for PHP APM
@@ -144,6 +144,11 @@ To request support for additional CLI libraries, contact our awesome [support te
 | PhpRedis                                                                | 3, 4, 5                    | PHP 7, 8        |
 | Predis                                                                  | 1.1                        | Fully Supported |
 | SQLSRV                                                                  | *(Any Supported PHP)*      | Fully Supported |
+
+**Note**: Redis 6.0+ supports inline authentication in commands such as `HELLO`, `MIGRATE`, and `ACL SETUSER`.
+
+  - **Datadog Trace Agent**: The minimum required and recommended version is `7.76.1` to ensure authentication parameters are automatically obfuscated in trace metadata.
+  - **Datadog Lambda Extension** (Serverless environments): The minimum required version is `v28.0.0`.
 
 To request support for additional datastores, contact our awesome [support team][3].
 

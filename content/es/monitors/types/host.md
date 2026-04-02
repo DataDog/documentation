@@ -25,7 +25,7 @@ La monitorización de infraestructura proporciona visibilidad de todo tu entorno
 
 Cada Datadog Agent informa de un check de servicio llamado `datadog.agent.up` con el estado `OK`. Puedez monitorizar este check a través de uno o más hosts utilizando un monitor de host.
 
-<div class="alert alert-warning">Los Agents AIX no informan del check de servicio <code>Datadog.Agent.up</code>. Puedes utilizar la métrica <code>datadog.agent.running</code> para monitorizar el tiempo de actividad de un Agent AIX. La métrica emite un valor de <code>1</code> si el Agent está informando a Datadog.</div>
+<div class="alert alert-danger">Los AIX Agents no informan del check de servicio <code>datadog.agent.up</code>. Puedes utilizar la métrica <code>datadog.agent.running</code> para monitorizar el tiempo de actividad de un AIX Agent. La métrica emite un valor de <code>1</code> si el Agent está informando a Datadog.</div>
 
 ## Creación de un monitor
 

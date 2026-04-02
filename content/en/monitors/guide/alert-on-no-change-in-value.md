@@ -1,5 +1,6 @@
 ---
 title: Alert on No Change in value
+description: "Configure metric monitors to trigger alerts when values remain unchanged over time using diff() and abs() functions."
 aliases:
   - /monitors/faq/how-can-i-configure-a-metric-monitor-to-alert-on-no-change-in-value
 further_reading:

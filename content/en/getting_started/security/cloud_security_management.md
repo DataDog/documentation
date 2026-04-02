@@ -1,5 +1,6 @@
 ---
 title: Getting Started with Cloud Security
+description: Deploy Datadog Cloud Security for unified visibility across your infrastructure. Configure threat detection, misconfigurations, identity risks, and vulnerabilities.
 aliases:
 - /getting_started/cloud_security_management
 further_reading:
@@ -29,11 +30,15 @@ further_reading:
 
 With Cloud Security, Security and DevOps teams can act on the shared context of observability and security data to quickly prioritize and remediate issues. This guide walks you through best practices for getting your team up and running with Cloud Security.
 
+{{< site-region region="gov" >}}
+<div class="alert alert-danger">Agentless Scanning is not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
 ## Phase 1: Deployment
 
 1. Using [Agentless][34] and/or the [Datadog Agent (version 7.46 or above)][4], [enable Cloud Security for your cloud resources and infrastructure][5]:
     - **[Threats][3]**: Kubernetes, Docker, and host-based installations.
-    - **[Misconfigurations][2]**: AWS, Azure, GCP, Kubernetes, and Docker instructions.
+    - **[Misconfigurations][2]**: AWS, Azure, GCP, OCI, Kubernetes, and Docker instructions.
     - **[Identity Risks][28]**: Enable AWS resource collection and Cloudtrail logs forwarding.
     - **[Vulnerabilities][6]**: Container image scanning and host scanning instructions for AWS, Azure, Kubernetes, ECS EC2 instances, and host-based installations.
 1. Check out the [Cloud Security homepage][13] to get an overview of your organization's risks and threats.

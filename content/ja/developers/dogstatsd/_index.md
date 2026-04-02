@@ -42,7 +42,7 @@ DogStatsD は、Docker Hub と GCR で利用できます。
 |--------------------------------------------------|-----------------------------------------------------------|
 | [hub.docker.com/r/datadog/dogstatsd][3]          | [gcr.io/datadoghq/dogstatsd][4]                           |
 
-<div class="alert alert-warning">Docker Hub にはイメージのプルレート制限があります。Docker Hub をご利用でない場合は、Datadog Agent および Cluster Agent の構成を更新して、GCR または ECR からプルすることをお勧めします。手順については、<a href="/agent/guide/changing_container_registry">コンテナレジストリの変更</a>を参照してください。</div>
+<div class="alert alert-danger">Docker Hub にはイメージのプルレート制限があります。Docker Hub をご利用でない場合は、Datadog Agent および Cluster Agent の構成を更新して、GCR または ECR からプルすることをお勧めします。手順については、<a href="/agent/guide/changing_container_registry">コンテナレジストリの変更</a>を参照してください。</div>
 
 ## 仕組み
 
@@ -109,7 +109,7 @@ StatsD メトリクスの収集に使用するポートを変更する必要が�
 
 Kubernetes 以外の環境での発信点検出は、[Datagram Format and Shell Usage][2] の DogStatsD プロトコルの拡張機能に基づきます。Agent でこの機能を有効にするには、`DD_DOGSTATSD_ORIGIN_DETECTION_CLIENT` 環境変数を `true` に設定します。
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   既定では、すべての DogStatsD クライアントで発信点検出が有効になっていますが、Datadog Agent では既定で有効になっていません。クライアントで発信点検出を無効化するには、使用している特定の DogStatsD ライブラリのドキュメントを参照してください。
 </div>
 
@@ -359,7 +359,7 @@ options = {
 initialize(**options)
 ```
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   デフォルトでは、Python DogStatsD クライアントインスタンス (<code>statsd</code> グローバルインスタンスを含む) はプロセス間で共有できませんが、スレッドセーフです。このため、親プロセスと各子プロセスは、クライアントの独自のインスタンスを作成するか、<code>disable_buffering</code> を <code>True</code> に設定してバッファリングを明示的に無効にする必要があります。詳細については、<a href="https://datadogpy.readthedocs.io/en/latest/#datadog-dogstatsd">datadog.dogstatsd</a> のドキュメントを参照してください。
 </div>
 

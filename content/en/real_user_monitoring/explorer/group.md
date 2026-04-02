@@ -1,5 +1,6 @@
 ---
 title: Group RUM Events
+description: "Group and aggregate RUM events by fields to analyze patterns, measure performance, and gain insights into user behavior."
 further_reading:
 - link: "/real_user_monitoring/explorer/search/"
   tag: "Documentation"

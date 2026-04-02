@@ -26,7 +26,15 @@ further_reading:
 
 If you already have data or services registered in Backstage or ServiceNow, you can import these services into Datadog directly. 
 
-## Import from Backstage
+## Entities from Backstage
+
+### Sync Backstage entities into Datadog Software Catalog
+
+Use the [Datadog Backstage plugin][3] to automatically sync your Backstage catalog entities to the Datadog Software Catalog [entity model][5] on a configurable schedule. The plugin runs as a Backstage backend service and supports entity filtering (for example, you can sync only entities with a specific Backstage component type, such as services or repositories).
+
+You need a Datadog [API key][6], [application key][7], and [Datadog site][8] parameter (for example, `datadoghq.com`) to configure the plugin. For installation and configuration instructions, see the [plugin README][9].
+
+### Import entity descriptor files from Backstage
 
 {{< img src="/tracing/software_catalog/software-catalog-backstage-import.png" alt="Service panel highlighting backstage metadata, links and definition" style="width:90%;" >}}
 
@@ -51,11 +59,11 @@ During import, Datadog maps Backstage data to Datadog data:
 | `spec.dependsOn` | `dependsOn` |
 | Other `spec` values | Mapped to custom tags |
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 The Software Catalog processes the entire YAML file as a whole. If any section of the YAML file does not have <code>kind:component</code> or <code>kind:system</code>, the entire <code>catalog-info.yaml</code> file is rejected. Schema version v3.0 is required to use kind:system and the <code>dependsOn</code> field.
 </div>
 
-### Example YAML for catalog-info.yaml
+#### Example YAML for catalog-info.yaml
 {{< code-block lang="yaml" filename="catalog-info.yaml" collapsible="true" >}}
 apiVersion: backstage.io/v1alpha1
 kind: Component
@@ -83,3 +91,9 @@ To populate your Datadog Software Catalog with services from your ServiceNow Con
 {{< partial name="whats-next/whats-next.html" >}}
 
 [2]: /integrations/servicenow/#service-ingestion
+[3]: https://www.npmjs.com/package/@datadog/backstage-plugin-datadog-entity-sync-backend
+[5]: /internal_developer_portal/software_catalog/entity_model/
+[6]: /account_management/api-app-keys/#api-keys
+[7]: /account_management/api-app-keys/#application-keys
+[8]: /getting_started/site/
+[9]: https://github.com/DataDog/datadog-backstage-plugins/blob/main/plugins/datadog-entity-sync-backend/README.md

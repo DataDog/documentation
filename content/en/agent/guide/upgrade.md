@@ -1,5 +1,6 @@
 ---
 title: Upgrade to Datadog Agent 7
+description: Instructions for upgrading from Datadog Agent 5 or 6 to Agent 7 across Linux, Windows, and macOS platforms with Python 3 compatibility notes.
 aliases:
 - /agent/versions/upgrade_to_agent_v7/
 - /agent/upgrade/

@@ -45,7 +45,7 @@ Consideraciones sobre la seguridad de los datos
 Configura lo siguiente en los [Indicadores de base de datos][3] y, a continuación, **reinicia el servidor** para que los ajustes surtan efecto:
 
 {{< tabs >}}
-{{% tab "MySQL 5.7 o posterior" %}}
+{{% tab "MySQL ≥ 5.7" %}}
 | Parámetro | Valor | Descripción |
 | --- | --- | --- |
 | `performance_schema` | `on` | Obligatorio. Habilita el [esquema de rendimiento][9]. |
@@ -278,11 +278,62 @@ Si tienes un clúster Kubernetes, utiliza el [Datadog Cluster Agent][1] para la 
 
 Sigue las instrucciones para [habilitar checks de clúster][2], si no están habilitados en tu clúster Kubernetes. Puedes declarar la configuración de MySQL mediante archivos estáticos integrados en el contenedor del Cluster Agent o utilizando anotaciones de servicios:
 
+### Operator
+
+Utilizando como referencia las [instrucciones para operadores en Kubernetes y en las integraciones][3], sigue los pasos que se indican a continuación para configurar la integración MySQL:
+
+1. Cree o actualice el archivo `datadog-agent.yaml` con la siguiente configuración:
+
+    ```yaml
+    apiVersion: datadoghq.com/v2alpha1
+    kind: DatadogAgent
+    metadata:
+      name: datadog
+    spec:
+      global:
+        clusterName: <CLUSTER_NAME>
+        site: <DD_SITE>
+        credentials:
+          apiSecret:
+            secretName: datadog-agent-secret
+            keyName: api-key
+
+      features:
+        clusterChecks:
+          enabled: true
+
+      override:
+        nodeAgent:
+          image:
+            name: agent
+            tag: <AGENT_VERSION>
+
+        clusterAgent:
+          extraConfd:
+            configDataMap:
+              mysql.yaml: |-
+                cluster_check: true
+                init_config:
+                instances:
+                - host: <INSTANCE_ENDPOINT>
+                  port: <PORT>
+                  username: datadog
+                  password: 'ENC[datadog_user_database_password]'
+                  dbm: true
+                  gcp:
+                    project_id: '<PROJECT_ID'
+                    instance_id: '<INSTANCE_ID'
+    ```
+
+2. Aplica los cambios al Datadog Operator utilizando el siguiente comando:
+
+    ```shell
+    kubectl apply -f datadog-agent.yaml
+    ```
+
 ### Helm
 
-Realiza los siguientes pasos para instalar el [Datadog Cluster Agent][1] en tu clúster Kubernetes. Sustituye los valores para que coincidan con tu cuenta y tu entorno.
-
-1. Sigue las [instrucciones de instalación del Datadog Agent][3] para Helm.
+1. Completa las [instrucciones de instalación del Datadog Agent][4] para Helm.
 2. Actualiza tu archivo de configuración YAML (`datadog-values.yaml` en las instrucciones de instalación del Cluster Agent) para incluir lo siguiente:
     ```yaml
     clusterAgent:
@@ -292,19 +343,20 @@ Realiza los siguientes pasos para instalar el [Datadog Cluster Agent][1] en tu c
           init_config:
           instances:
             - dbm: true
-              host: <INSTANCE_ADDRESS>
-              port: 3306
+              host: <INSTANCE_ENDPOINT>
+              port: <PORT>
               username: datadog
               password: 'ENC[datadog_user_database_password]'
               gcp:
-                project_id: '<PROJECT_ID>'
-                instance_id: '<INSTANCE_ID>'
+                project_id: '<PROJECT_ID'
+                instance_id: '<INSTANCE_ID'
 
     clusterChecksRunner:
       enabled: true
     ```
 
 3. Despliega el Agent con el archivo de configuración anterior desde la línea de comandos:
+
     ```shell
     helm install datadog-agent -f datadog-values.yaml datadog/datadog
     ```
@@ -312,10 +364,6 @@ Realiza los siguientes pasos para instalar el [Datadog Cluster Agent][1] en tu c
 <div class="alert alert-info">
 For Windows, append <code>--set targetSystem=windows</code> to the <code>helm install</code> command.
 </div>
-
-[1]: https://app.datadoghq.com/organization-settings/api-keys
-[2]: /es/getting_started/site
-[3]: /es/containers/kubernetes/installation/?tab=helm#installation
 
 ### Configuración con archivos integrados
 
@@ -326,19 +374,19 @@ cluster_check: true  # Make sure to include this flag
 init_config:
 instances:
   - dbm: true
-    host: '<INSTANCE_ADDRESS>'
-    port: 3306
+    host: <INSTANCE_ENDPOINT>
+    port: <PORT>
     username: datadog
     password: 'ENC[datadog_user_database_password]'
-    # After adding your project and instance, configure the Datadog Google Cloud (GCP) integration to pull additional cloud data such as CPU, Memory, etc.
     gcp:
-      project_id: '<PROJECT_ID>'
-      instance_id: '<INSTANCE_ID>'
+      project_id: '<PROJECT_ID'
+      instance_id: '<INSTANCE_ID'
 ```
 
 ### Configuración con anotaciones de servicios de Kubernetes
 
-En lugar de montar un archivo, puedes declarar la configuración de la instancia como servicio Kubernetes. Para configurar este check en un Agent que se ejecuta en Kubernetes, crea un servicio en el mismo espacio de nombres que el Datadog Cluster Agent:
+En lugar de montar un archivo, puedes declarar la configuración de la instancia como servicio Kubernetes. Para configurar este check para un Agent que se ejecuta en Kubernetes, crea un servicio con la siguiente sintaxis:
+
 
 ```yaml
 apiVersion: v1
@@ -355,8 +403,8 @@ metadata:
       [
         {
           "dbm": true,
-          "host": "<INSTANCE_ADDRESS>",
-          "port": 3306,
+          "host": "<INSTANCE_ENDPOINT>",
+          "port": <PORT>,
           "username": "datadog",
           "password": "ENC[datadog_user_database_password]",
           "gcp": {
@@ -367,20 +415,22 @@ metadata:
       ]
 spec:
   ports:
-  - port: 3306
+  - port: <PORT>
     protocol: TCP
-    targetPort: 3306
+    targetPort: <PORT>
     name: mysql
 ```
 
-Para obtener información adicional sobre la configuración de los campos `project_id` e `instance_id`, consulta la [sección GCP del archivo `mysql.conf.yaml`][4].
-
 El Cluster Agent registra automáticamente esta configuración y comienza a ejecutar el check de SQL Server.
 
-[1]: /es/agent/cluster_agent
-[2]: /es/agent/cluster_agent/clusterchecks/
-[3]: https://helm.sh
-[4]: https://github.com/DataDog/integrations-core/blob/master/mysql/datadog_checks/mysql/data/conf.yaml.example
+Para evitar exponer la contraseña del usuario de `datadog` en texto plano, utilice el [paquete de gestión de secretos][6] de Agent y declare la contraseña utilizando la sintaxis de `ENC[]`.
+
+[1]: /es/containers/cluster_agent/setup/
+[2]: /es/containers/cluster_agent/clusterchecks/
+[3]: /es/containers/kubernetes/integrations/?tab=datadogoperator
+[4]: /es/containers/kubernetes/integrations/?tab=helm
+[5]: /es/containers/kubernetes/integrations/?tab=annotations#configuration
+[6]: /es/agent/configuration/secrets-management
 
 {{% /tab %}}
 

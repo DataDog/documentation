@@ -1,5 +1,6 @@
 ---
 title: Migrating to On Missing Data Configuration
+description: "Migrate from legacy No Data configurations to On Missing Data options for better handling of missing data in metric monitors."
 further_reading:
 - link: "/api/latest/monitors/"
   tag: "API"

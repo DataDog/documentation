@@ -10,6 +10,6 @@ First, set up the **[Google Cloud Integration][1]** to collect metrics and logs 
 
 Then, instrument your application using one of the following guides:
 
-{{% container-languages path="in_container" %}}
+{{% container-languages path="google_cloud_run/containers/in_container" %}}
 
 [1]: /integrations/google-cloud-platform/

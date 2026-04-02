@@ -93,7 +93,7 @@ La [última versión del rastreador .NET][5] puede instrumentar automáticamente
 | WCF (servidor)                    | Integrado                                                                                  | `Wcf`                |
 | WebClient/WebRequest          | Integrado                                                                                  | `WebRequest`         |
 
-¿No ves la biblioteca que buscas? En primer lugar, comprueba si la biblioteca produce datos de observabilidad compatibles con OpenTelemetry (por ejemplo, [rastreo basado en actividad][11]). Si no es así, Datadog añade continuamente compatibilidad adicional. [Consulta al equipo de Datadog ][6] para obtener ayuda.
+¿No ves la librería que buscas? En primer lugar, comprueba si la librería produce datos de observabilidad compatibles con OpenTelemetry (por ejemplo, [rastreo basado en actividad][11]). Si no es así, Datadog añade continuamente compatibilidad adicional. [Consulta al equipo de Datadog ][6] para obtener ayuda.
 
 ## Integraciones basadas en OpenTelemetry
 
@@ -101,7 +101,7 @@ Algunas bibliotecas proporcionan [Rastreo basado en actividad][11] integrado. Es
 
 Para estas bibliotecas, establece `DD_TRACE_OTEL_ENABLED` en `true`, y el rastreador .NET capturará automáticamente sus trazas. Esto es compatible desde la [versión 2.21.0][4].
 
-La siguiente lista de bibliotecas se han probado con esta configuración:
+La siguiente lista de librerías se han probado con esta configuración:
 
 | Marco o biblioteca            | Paquete NuGet                                                                 | Nombre de la integración     | Instrucciones específicas         |
 | ------------------------------- | ----------------------------------------------------------------------------- | -------------------- | ----------------------------- |
@@ -111,7 +111,7 @@ La siguiente lista de bibliotecas se han probado con esta configuración:
 
 El SDK de Azure proporciona soporte integrado para OpenTelemetry. Actívalo al establecer la variable de entorno `AZURE_EXPERIMENTAL_ENABLE_ACTIVITY_SOURCE` en `true` o al establecer el conmutador de contexto `Azure.Experimental.EnableActivitySource` en `true` en el código de tu aplicación. Consulta la [documentación del SDK de Azure][12] para obtener más detalles.
 
-## Versiones compatibles del Datadog Agent 
+## Versiones compatibles del Datadog Agent
 
 | **Versión del Datadog Agent**   | **Versión del paquete** |
 |-----------------------------|---------------------|

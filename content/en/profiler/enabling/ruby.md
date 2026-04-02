@@ -32,14 +32,10 @@ The following operating systems and architectures are supported:
 - Linux (GNU libc) x86-64, aarch64
 - Alpine Linux (musl libc) x86-64, aarch64
 
-You also need either the [`pkg-config`][16] or the [`pkgconf`][17] system utility installed.
-This utility is available on the software repositories of most Linux distributions. For example:
+Versions of the `datadog` gem older than 2.30 also need either the [`pkg-config`][16] or the [`pkgconf`][17] system utility installed.
+This is no longer needed on modern versions.
 
-- The `pkg-config` package is available for [Homebrew][18], and [Debian][19]- and [Ubuntu][20]-based Linux
-- The `pkgconf` package is available for [Arch][21]- and [Alpine][22]-based Linux
-- The `pkgconf-pkg-config` package is available for [Fedora][23]- and [Red-Hat][24]-based Linux
-
-Continuous Profiler is not supported on serverless platforms, such as AWS Lambda.
+Continuous Profiler is not supported on serverless platforms, such as AWS Lambda. Additionally, [Single Step APM Instrumentation][25] cannot be used to set up the Ruby Profiler.
 
 ## Installation
 
@@ -50,11 +46,11 @@ To begin profiling applications:
 2. Add the `datadog` gem to your `Gemfile` or `gems.rb` file:
 
     ```ruby
-    gem 'datadog', '~> 2.18'
+    gem 'datadog', '~> 2.30'
     ```
 3. Install the gems with `bundle install`.
 
-4. Enable the profiler:
+4. Enable the profiler using **one** of the following approaches:
 
    {{< tabs >}}
 {{% tab "Environment variables" %}}
@@ -95,8 +91,6 @@ end
     bundle exec ddprofrb exec bin/rails s
     ```
 
-    If you're running a version of the gem older than 1.21.0, replace `ddprofrb exec` with `ddtracerb exec`.
-
     **Note**
 
     If starting the application with `ddprofrb exec` is not an option (for example, when using the Phusion Passenger web server), you can alternatively start the profiler by adding the following to your application entry point (such as `config.ru`, for a web application):
@@ -107,7 +101,7 @@ end
 
 6. Optional: Set up [Source Code Integration][4] to connect your profiling data with your Git repositories.
 
-7. A minute or two after starting your Ruby application, your profiles will show up on the [Datadog APM > Profiler page][5].
+7. A couple of minutes after you start your application, your profiles appear on the [Datadog APM > Profiler page][5]. If they do not, refer to the [Troubleshooting][26] guide.
 
 ## Configuration
 
@@ -173,3 +167,5 @@ The [Getting Started with Profiler][6] guide takes a sample service with a perfo
 [22]: https://pkgs.alpinelinux.org/packages?name=pkgconf
 [23]: https://packages.fedoraproject.org/pkgs/pkgconf/pkgconf-pkg-config
 [24]: https://rpmfind.net/linux/rpm2html/search.php?query=pkgconf-pkg-config
+[25]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/
+[26]: /profiler/profiler_troubleshooting/ruby/

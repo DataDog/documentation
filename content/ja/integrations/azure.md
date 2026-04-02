@@ -113,7 +113,7 @@ Microsoft Azure に接続すると、以下のことができます。
 - Datadog が生成したメトリクスを取得することで、Azure 環境に対する独自の洞察を提供できます。
 - Azure アプリケーションのログ、メトリクス、APM トレース、ユーザーアクティビティなどのデータを、Datadog 組織内で相関付けることができます。
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Datadog の Azure インテグレーションは、<a href="https://docs.microsoft.com/en-us/azure/azure-monitor/platform/metrics-supported">Azure Monitor からすべてのメトリクス</a>を収集するように構築されています。Datadog では継続的にドキュメントを更新してすべてのサブインテグレーションを表示できるように努めていますが、新しいメトリクスやサービスがクラウドサービスから次々にリリースされるため、インテグレーション一覧が追い付かないことがあります。<br><code>azure.*.status</code> および <code>azure.*.count</code> メトリクスは、Datadog により Azure Resource Health から生成されています。詳細は、<a href="https://docs.datadoghq.com/integrations/guide/azure-status-metric">Azure のステータスとカウントメトリクス</a>をご覧ください。
 </div>
 

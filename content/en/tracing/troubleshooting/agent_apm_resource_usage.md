@@ -1,5 +1,6 @@
 ---
 title: Agent Resource Usage by APM
+description: Monitor and optimize Datadog Agent CPU and memory usage for APM workloads to prevent resource exhaustion.
 ---
 
 

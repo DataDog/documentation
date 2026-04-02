@@ -15,7 +15,7 @@ further_reading:
 title: Variables d'environnement de l'Agent
 ---
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Si vous utilisez l'Agent v5, référez-vous au <a href="https://github.com/DataDog/docker-dd-agent#environment-variables">référentiel GitHub de l'Agent Docker</a>.
 </div>
 

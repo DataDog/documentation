@@ -58,6 +58,6 @@ fetch("https://api.cloudcraft.co{{ .path }}", requestOptions)
   .catch(error => console.log('error', error));
 {{- end -}}
 
-{{- $p := printf "partials/api/openapi-code-javascript-%s.html" .method -}}
+{{- $p := printf "api/openapi-code-javascript-%s.html" .method -}}
 {{- $pr := partial $p (dict "payload" .payload "path" .path) }}
 {{- highlight (trim $pr "\n\r") "javascript" -}}

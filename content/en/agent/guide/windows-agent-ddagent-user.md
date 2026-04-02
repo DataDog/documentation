@@ -1,5 +1,6 @@
 ---
 title: Datadog Windows Agent User
+description: Guide to the ddagentuser account used by the Windows Agent, covering installation, permissions, security policies, and integration considerations.
 aliases:
   - /agent/faq/windows-agent-ddagent-user/
 algolia:

@@ -69,5 +69,5 @@ Alternatively, use one of these methods to ensure your pop-up is closed and your
 [1]: https://javascript.info/alert-prompt-confirm
 [2]: /synthetics/browser_tests/#test-configuration
 [3]: /synthetics/browser_tests/advanced_options/#optional-step
-[4]: /synthetics/browser_tests/actions#test-your-ui-with-custom-javascript
+[4]: /synthetics/browser_tests/test_steps#test-your-ui-with-custom-javascript
 [5]: /synthetics/browser_tests

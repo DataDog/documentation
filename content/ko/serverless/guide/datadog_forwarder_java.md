@@ -3,11 +3,11 @@ title: Datadog 포워더를 사용해 Java 서버리스 애플리케이션 계�
 ---
 ## 개요
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Datadog 서버리스를 처음 사용하신다면 <a href="/serverless/installation/go">Datadog Lambda 확장을 사용해 Lambda 함수를 계측하는 방법</a>을 따르세요. Lambda가 즉시 사용 가능한 기능을 제공하기 전에 Datadog 포워더를 사용하여 Datadog 서버리스를 설정한 경우, 이 가이드를 사용하여 인스턴스를 유지 관리하세요.
 </div>
 
-<div class="alert alert-danger">
+<div class="alert alert-warning">
 일부 예전 버전의 <code>datadog-lambda-java</code>에서는  <code>log4j <=2.14.0</code>을 전이 종속성으로 가져옵니다. <a href="#upgrading">업그레이드 지침</a>은 아래를 참고하세요.
 </div>
 

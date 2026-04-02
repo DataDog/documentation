@@ -1,12 +1,12 @@
 ---
-description: Test Visibility Explorer에서 테스트 실행을 검색하는 데 사용할 수 있는 기본 패싯에 대해 알아보세요.
+description: Test Optimization Explorer에서 테스트 실행을 검색하는 데 사용할 수 있는 기본 패싯에 대해 알아보세요.
 further_reading:
 - link: tests/search/
   tag: 설명서
   text: 테스트 검색 방법
 - link: tests/explorer/
   tag: 설명서
-  text: Test Visibility Explorer란?
+  text: Test Optimization Explorer에 대해 자세히 알아보기
 title: 테스트 실행 패싯
 ---
 
@@ -14,27 +14,27 @@ title: 테스트 실행 패싯
 
 패싯은 테스트의 사용자 정의 태그 및 속성입니다. 이는 [정성적](#qualitative-facets) 및 [정량적](#qualitative-measures) 데이터 분석 모두에 유용합니다. 패싯을 사용하면 [CI 테스트 모니터][1]와 [대시보드][2] 및 [노트북][3]에 표시되는 검색어에서 테스트를 조작할 수 있습니다.
 
-[테스트 실행 검색][5]에는 [패싯 생성](#creating-facets)이 **필요하지 않습니다**. 자동 완성 기능은 기존 패싯을 사용하지만 들어오는 테스트 실행과 일치하는 모든 입력도 적용됩니다.
+테스트 실행을 검색하는 데 [패싯 생성](#creating-facets)은 **필수**가 아닙니다. 자동 완성 기능은 기존 패싯을 사용하지만 인커밍 테스트 실행과 일치하는 모든 입력도 적용됩니다.
 
 ## 일반 패싯 
 
-[**Software Delivery** > **Test Visibility** > **Test Runs**][7]으로 이동하여 테스트 실행 목록의 왼쪽 패싯 목록에 액세스합니다.
+[**Software Delivery** > **Test Optimization** > **Test Runs**][7]으로 이동하여 테스트 실행 목록의 왼쪽에 있는 패싯 목록에 액세스합니다.
 
-{{< img src="/continuous_integration/facets-tests.png" text="Test Visibility Explorer의 Test Runs 페이지에 있는 패싯 목록" style="width:100%" >}}
+{{< img src="/continuous_integration/facets-tests.png" text="Test Optimization Explorer의 테스트 실행 페이지에 있는 패싯 목록" style="width:100%" >}}
 
-Test Visibility Explore에서 패싯을 사용하여 다음을 수행할 수 있습니다.
+Test Optimization Explorer에서 패싯을 사용하여 다음을 할 수 있습니다.
 
-- [테스트 실행 검색 및 필터링][5]
+- 테스트 실행 검색 및 필터링
 - 테스트 분석 수행
 - 테스트 실행 완료 후 트러블슈팅 시작
 
- [Test Visibility Explorer][4]에는 다음과 같은 기본 패싯이 포함되어 있습니다.
+[Test Optimization Explorer][4]에는 다음과 같은 기본 제공 패싯이 포함되어 있습니다.
 
 | 패싯 | 설명 |
 |---|---|
 | CI 제공자 | CI 제공자 이름(GitHub, GitLab 등). |
 | 파이프라인 이름 | CI 파이프라인 이름 |
-| 노드 이름 | 파이프라인, 단계 또는 작업을 실행한 CI 노드의 이름 |
+| 노드 이름 | 파이프라인, 단계 또는 작업을 실행한 CI 노드의 이름. |
 | 노드 라벨 | 파이프라인, 단계 또는 작업을 실행한 CI 노드와 연결된 라벨 |
 | 파이프라인 URL | 파이프라인 실행을 위한 제공자 URL |
 | 파이프라인 ID | 파이프라인 ID |
@@ -62,7 +62,7 @@ Test Visibility Explore에서 패싯을 사용하여 다음을 수행할 수 있
 | 작성자 날짜 | Git 작성자 날짜 |
 | Env | CI 파이프라인이 실행되는 환경 |
 | 리소스 | CI 파이프라인에서 활용하는 리소스 |
-| 작업 이름 | CI 파이프라인 내에서 수행되는 작업 |
+| 오퍼레이션 이름 | CI 파이프라인 내에서 수행되는 작업 |
 | 오류 유형 | CI 실행 중에 발생한 오류 유형 |
 | 유형 | CI 실행 또는 엔터티의 유형 |
 | 완전한 트레이스 | CI 파이프라인 실행의 전체 트레이스 |
@@ -80,7 +80,7 @@ Test Visibility Explore에서 패싯을 사용하여 다음을 수행할 수 있
 
 **참고:** 태그 필터링에는 패싯이 필요하지 않지만 조사 중에 자주 사용하는 태그에 대한 패싯을 정의하면 해결 시간을 줄이는 데 도움이 될 수 있습니다.
 
-### 정량적 측정값
+### 정량적 측정 값
 
 다음의 경우 정량적 측정을 사용하세요.
 
@@ -125,7 +125,7 @@ Test Runs 사이드 패널에서 패싯을 추가하면 대부분의 패싯 세�
 
 {{< img src="tests/explorer/create_facet.png" alt="Test Runs 사이드 패널에서 실패한 테스트 실행의 패싯 생성" style="width:100%;">}}
 
-1. 패싯을 생성할 필드가 포함된 [Test Visibility Explorer][4]에서 관심 있는 테스트 실행으로 이동합니다.
+1. 패싯을 생성할 필드가 포함된 [Test Optimization Explorer][4]에서 관심 있는 테스트 실행으로 이동합니다.
 2. 목록에서 테스트 실행을 선택하여 Test Runs 사이드 패널을 엽니다.
 3. 원하는 필드(테스트 실행을 위한 **Other tags** 섹션)를 클릭하고 거기에서 패싯을 만듭니다.
 
@@ -138,7 +138,7 @@ Test Runs 사이드 패널에서 패싯을 추가하면 대부분의 패싯 세�
 
 {{< img src="continuous_integration/add_facet.png" alt="패싯 사이드 패널에서 패싯 추가" style="width:30%;">}}
 
-이 패싯의 기본 필드(키) 이름을 정의합니다.
+이 패싯의 기본 필드(키) 이름을 정의하세요.
 
 - 인프라스트럭처 태그에는 태그 키 이름을 사용합니다.
 - `@` 접두사가 있는 테스트 실행 속성의 속성 경로를 사용합니다.
@@ -153,6 +153,5 @@ Test Runs 사이드 패널에서 패싯을 추가하면 대부분의 패싯 세�
 [2]: /ko/dashboards/
 [3]: /ko/notebooks/
 [4]: /ko/tests/explorer
-[5]: /ko/tests/search
 [6]: /ko/tests/explorer/search_syntax/
 [7]: https://app.datadoghq.com/ci/test-runs

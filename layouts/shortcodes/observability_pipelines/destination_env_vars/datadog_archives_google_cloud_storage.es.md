@@ -1,0 +1,1 @@
+No hay variables de entorno para configurar.

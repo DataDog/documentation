@@ -43,7 +43,7 @@ Accédez à la [page **Log Forwarding**][14] pour configurer une archive afin de
 {{% tab "AWS S3" %}}
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">La délégation des rôles AWS n'est pas prise en charge par le site gouvernemental Datadog. En effet, il nécessite l'utilisation de clés d'accès.</div>
+<div class="alert alert-danger">La délégation des rôles AWS n'est pas prise en charge par le site gouvernemental Datadog. En effet, il nécessite l'utilisation de clés d'accès.</div>
 {{< /site-region >}}
 
 Si ce n'est pas déjà fait, configurez l'[intégration AWS][1] pour le compte AWS associé à votre compartiment S3.
@@ -75,7 +75,7 @@ Si vous ne l'avez pas encore fait, configurez l'[intégration Google Cloud][1] 
 ### Créer un compartiment de stockage
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">L'envoi de logs vers une archive s'effectue en dehors de l'environnement GovCloud Datadog, et échappe donc au contrôle de Datadog. Datadog ne saurait en aucun cas être tenu responsable des logs quittant l'environnement GovCloud Datadog. Cela inclut, sans toutefois s'y limiter, toutes les obligations ou exigences incombant à l'utilisateur au sujet du programme FedRAMP, des niveaux d'impact du Département de la Défense des États-Unis, de la Réglementation américaine sur le trafic d'armes au niveau international (ITAR), de la conformité relative aux exportations, de la résidence des données ou de toute autre réglementation applicable auxdits logs. ( </div>
+<div class="alert alert-danger">L'envoi de logs vers une archive s'effectue en dehors de l'environnement GovCloud Datadog, et échappe donc au contrôle de Datadog. Datadog ne saurait en aucun cas être tenu responsable des logs quittant l'environnement GovCloud Datadog. Cela inclut, sans toutefois s'y limiter, toutes les obligations ou exigences incombant à l'utilisateur au sujet du programme FedRAMP, des niveaux d'impact du Département de la Défense des États-Unis, de la Réglementation américaine sur le trafic d'armes au niveau international (ITAR), de la conformité relative aux exportations, de la résidence des données ou de toute autre réglementation applicable auxdits logs. ( </div>
 {{< /site-region >}}
 
 {{< tabs >}}

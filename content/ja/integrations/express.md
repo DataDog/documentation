@@ -26,7 +26,7 @@ version: '1.0'
 
 ## 概要
 
-<div class="alert alert-danger">Express インテグレーションは非推奨となり、Datadog APM に置き換わりました。Datadog APM は、Express インテグレーションと同じ<a href="https://docs.datadoghq.com/tracing/runtime_metrics/nodejs/">メトリクス</a>を生成し、その他多くの機能とインテグレーションを備えています。Express インテグレーションは今後アップデートされないため、Datadog では <a href="https://docs.datadoghq.com/tracing/connect_logs_and_traces/nodejs/">APM</a> へのアップグレードを強く推奨しています。</div>
+<div class="alert alert-warning">Express インテグレーションは非推奨となり、Datadog APM に置き換わりました。Datadog APM は、Express インテグレーションと同じ<a href="https://docs.datadoghq.com/tracing/runtime_metrics/nodejs/">メトリクス</a>を生成し、その他多くの機能とインテグレーションを備えています。Express インテグレーションは今後アップデートされないため、Datadog では <a href="https://docs.datadoghq.com/tracing/connect_logs_and_traces/nodejs/">APM</a> へのアップグレードを強く推奨しています。</div>
 
 Datadog の [Connect-Datadog ミドルウェア][1]をアプリケーションに追加すると、以下のことができます。
 

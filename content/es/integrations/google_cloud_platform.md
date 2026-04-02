@@ -75,7 +75,7 @@
 <!--  EXTRAÍDO DE https://github.com/DataDog/integrations-internal-core -->
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning"><a href="https://cloud.google.com/iam/docs/service-account-impersonation">La suplantación de cuenta de servicio</a> no está disponible para el <a href="/getting_started/site">sitio de Datadog </a> seleccionado ({{< region-param key="dd_site_name" >}})</div>
+<div class="alert alert-danger"><a href="https://cloud.google.com/iam/docs/service-account-impersonation">La suplantación de cuenta de servicio</a> no está disponible para el <a href="/getting_started/site">sitio de Datadog </a> seleccionado ({{< region-param key="dd_site_name" >}})</div>
 {{< /site-region >}}
 
 
@@ -84,7 +84,7 @@
 Utiliza esta guía para empezar a monitorizar tu entorno de Google Cloud. Este enfoque simplifica la configuración de los entornos de Google Cloud con varios proyectos, lo que permite maximizar la cobertura de la monitorización.
 
 {{% collapse-content title="Ver la lista completa de integraciones de Google Cloud" level="h4" %}}
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 La integración de Google Cloud de Datadog recopila <a href="https://cloud.google.com/monitoring/api/metrics_gcp">todas las métricas de Google Cloud</a>. Datadog actualiza continuamente los documentos para mostrar todas las integraciones dependientes, pero la lista de integraciones a veces no está actualizada con las últimas métricas y servicios en la nube.
 
  Si no ves una integración para un servicio específico de Google Cloud, ponte en contacto con <a href="https://www.datadoghq.com/support/">el servicio de asistencia de Datadog </a>.

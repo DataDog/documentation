@@ -1,5 +1,6 @@
 ---
 title: Beta Functions
+description: Use rolling average beta functions to smooth metric data over different time spans in dashboard queries.
 aliases:
     - /graphing/functions/beta/
 ---

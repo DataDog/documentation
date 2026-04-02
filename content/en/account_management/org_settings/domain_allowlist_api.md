@@ -1,5 +1,6 @@
 ---
 title: Domain Allowlist API
+description: How to use the API to configure domain allowlist settings to restrict email domains that can receive Datadog notifications for monitor and scheduled reports.
 further_reading:
 - link: "https://app.datadoghq.com/organization-settings/domain-allowlist"
   tag: "In the app"

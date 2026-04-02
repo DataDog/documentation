@@ -13,7 +13,10 @@ further_reading:
   text: "Monitor SQL Server and Azure managed databases with Datadog DBM"
 - link: "https://www.datadoghq.com/blog/mongodb-database-monitoring/"
   tag: "Blog"
-  text: "Track and troubleshoot MongoDB performance"
+  text: "Track and troubleshoot MongoDB performance with Datadog Database Monitoring"
+- link: "https://www.datadoghq.com/blog/datadog-database-research/"
+  tag: "Blog"
+  text: "How microservice architectures have shaped the usage of database technologies"
 - link: "/database_monitoring/data_collected/"
   tag: "Documentation"
   text: "Data Collected"
@@ -23,9 +26,6 @@ further_reading:
 - link: "https://dtdg.co/fe"
   tag: "Foundation Enablement"
   text: "Join an interactive session to level up your Database Monitoring"
-- link: "https://www.datadoghq.com/blog/mongodb-database-monitoring/"
-  tag: "Blog"
-  text: "Track and troubleshoot MongoDB performance with Datadog Database Monitoring"
 algolia:
   tags: ['database monitoring', 'dbm']
 cascade:
@@ -42,7 +42,7 @@ Datadog Database Monitoring provides deep visibility into databases across all o
 
 ## Getting started
 
-Datadog Database Monitoring supports self-hosted and managed cloud versions of **Postgres**, **MySQL**, **Oracle**, **SQL Server**, **MongoDB**, and **Amazon DocumentDB**. To get started with Datadog Database Monitoring, configure your database and install the Datadog Agent. For setup instructions, select your database technology:
+Datadog Database Monitoring supports self-hosted and managed cloud versions of **Postgres**, **MySQL**, **Oracle**, **SQL Server**, **MongoDB**, **Amazon DocumentDB**, and **ClickHouse**. To get started with Datadog Database Monitoring, configure your database and install the Datadog Agent. For setup instructions, select your database technology:
 
 ### Postgres
 
@@ -72,6 +72,11 @@ Datadog Database Monitoring supports self-hosted and managed cloud versions of *
 ### Amazon DocumentDB
 
 {{< partial name="dbm/dbm-setup-documentdb" >}}
+<p></p>
+
+### ClickHouse
+
+{{< partial name="dbm/dbm-setup-clickhouse" >}}
 <p></p>
 
 ## Explore Datadog Database Monitoring

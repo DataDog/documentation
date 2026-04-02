@@ -37,6 +37,11 @@ Each explorer focuses on a specific use case:
 
 - **Signal Explorer**: List of actionable alerts such as Credential Stuffing Attack or Command Injection. Signals have workflow capabilities, a description, severity, and correlated Traces. Interactions include user assignment workflows, automated protection, analytics, search, and pivoting to Trace Explorer.
 - **Trace Explorer**: List of evidence for business logic events, such as logins, or attack payloads. Interactions include analytics and search.
+- **Users Explorer**: Lists authenticated users associated with one or more traces. Interactions include: 
+  - Bulk actions for user analytics and blocking
+  - Drill-down into the history of any user
+  - Search
+  - Pivoting to other explorers
 - **Attackers Explorer**: List of Flagged and Suspicious Attackers. Interactions include: 
   - Bulk actions for attacker analytics and blocking
   - Drill-down into the history of any attacker
@@ -56,13 +61,59 @@ There are two sections to the Attackers Explorer:
 2. The list of attackers with security metrics.
 
 
-### Investigate an IP
+### Investigate an attacker
 
-Click on any row to view the history and attributes of the IP.
+1. In **View by**, click **IP**, **User Agent**, **ASN**, or **Cluster**.
+2. Click on any row to view the details pane for the attacker.
 
 <!-- {{< img src="security/application_security/threats/attacker-explorer/ip_drawer.png" alt="Investigate and IP address with AAP Attackers Explorer"  >}} -->
 
-IPs can be blocked or added to the Passlist from the IP drawer.
+An attacker can be blocked or added to the Passlist from its details.
+
+### Attacker details
+
+Details common to all attacker views:
+
+- **Blocking Status:** Indicates whether the attacker IP is actively being blocked, helping you confirm if immediate action is needed.
+- **Threat Intelligence:** Show Datadog definitions **Suspicious** or **Flagged**.
+- **Last Information:** Provides contextual network origin (for example, route, public/private status, geolocation), which helps you understand attacker infrastructure and scope.
+- **Associated Users:** Shows which user accounts (if any) were affected or linked to the IP, assisting with lateral movement tracking and potential account compromise identification.
+- **Security Traces:** Visualizes the timeline and volume of suspicious activity (for example, **151k AAP traces**), helping SOC teams correlate events and identify peaks in attack behavior.
+
+View-specific details:
+
+- IP:
+  - **Threat Intel:** See [Threat Intelligence][4].
+  - **History:** Displays past activity to detect patterns or repeated attacks.
+  - **Associated Users:** Identifies user accounts associated with the IP.
+  - **Endpoint Requests:** Lists HTTP requests to reveal attack methods or targets.
+  - **Signals:** Displays triggered detections to assess threat severity.
+  - **Clusters:** Points to affected app clusters to gauge impact scope.
+  - **Top User Agents:** Lists the most frequent user agents used by the attacker (for example, scripts, scanners, or browsers), helping to identify automation tools or custom clients involved in the attack.
+- User Agent:
+  - **Associated IPs**: Displays IPs using the same User Agent, with trace counts and recent activity bars per IP.
+  - **Associated Users** Lists user accounts tied to this User Agent, helping detect possible account compromise.
+  - **Blocking History**: Shows past blocks on the User Agent, useful for spotting repeated offenses.
+  - **Endpoint Requests**: Detail which endpoints were targeted and how often.
+  - **Signals**: Shows triggered alerts from this User Agent, flagging rule violations or suspicious behavior.
+- ASN:
+  - **AS:** Identifies the Autonomous System, helping to trace malicious traffic back to its network owner or hosting provider.
+  - **Signals:** Shows the volume and severity of security alerts (for example, CRITICAL, HIGH), indicating how active or threatening the ASN's traffic is.
+  - **Services:** Lists affected services and environments, helping you understand which parts of the infrastructure are being targeted.
+  - **Last activity:** Indicates the most recent time malicious activity was observed from this ASN, helping prioritize investigation of current threats.
+  - **Traffic Distribution:** Visualizes the proportion of normal vs suspicious traffic, helping analysts assess if an ASN is primarily used for attacks or mixed usage.
+- Cluster:
+  - **Similarity Overview:** Shows shared attributes across IPs, user agents, locations, and domains.
+    - **IPs per ASN:** Identifies autonomous systems used by attackers.
+    - **IPs per User Agent:** Detects automation, spoofing, or reuse across campaigns.
+    - **IPs per Location:** Identifies geographic distribution of attacking IPs.
+    - **IPs per Domain:** Traces attacker infrastructure and detects suspicious domains.
+  - **Threat Intel Category:** Classifies the type of threat.
+  - **Threat Intel Intention:** Indicates the likely purpose of the malicious activity.
+  - **Users per IP:** Measures breadth of compromise or impersonation.
+  - **Services:** Identifies impacted services and environments.
+  - **Cluster Activity:** Displays behavioral trends and enables trace inspection.
+
 
 ### Best practices for blocking with Attackers Explorer
 
@@ -153,3 +204,4 @@ This adds the IP addresses to the [Denylist][2] for the specified duration.
 [1]: https://app.datadoghq.com/security/appsec/attackers
 [2]: https://app.datadoghq.com/security/appsec/denylist
 [3]: https://app.datadoghq.com/security/appsec/passlist
+[4]: /security/threat_intelligence

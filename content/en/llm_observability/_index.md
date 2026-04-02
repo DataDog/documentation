@@ -3,6 +3,18 @@ title: LLM Observability
 aliases:
     - /tracing/llm_observability/
 further_reading:
+- link: "https://www.datadoghq.com/blog/llm-observability-at-datadog-dashboards"
+  tag: "Blog"
+  text: "Building reliable dashboard agents with Datadog LLM Observability"
+- link: https://www.datadoghq.com/blog/manage-ai-cost-and-performance-with-datadog/
+  tag: Blog
+  text: "Driving AI ROI: How Datadog connects cost, performance, and infrastructure so you can scale responsibly"
+- link: https://www.datadoghq.com/blog/llm-otel-semantic-convention
+  tag: Blog
+  text: Datadog LLM Observability natively supports OpenTelemetry GenAI Semantic Conventions
+- link: https://www.datadoghq.com/blog/llm-aws-strands
+  tag: Blog
+  text: Gain visibility into Strands Agents workflows with Datadog LLM Observability
 - link: "https://www.datadoghq.com/blog/anthropic-integration-datadog-llm-observability/"
   tag: "Blog"
   text: "Monitor your Anthropic applications with Datadog LLM Observability"
@@ -24,7 +36,14 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/detect-abuse-ai-infrastructure/"
   tag: "Blog"
   text: "Abusing AI infrastructure: How mismanaged credentials and resources expose LLM applications"
+- link: "https://www.datadoghq.com/blog/llm-observability-at-datadog-nlq"
+  tag: "Blog"
+  text: "How we cut our NLQ agent debugging time from hours to minutes with LLM Observability"
 ---
+
+{{< learning-center-callout header="Try Getting Started with LLM Observability in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/llm-obs-getting-started">}}
+  Learn how to monitor your LLM application's performance, costs, traces, token usage, and errors to identify and resolve issues.
+{{< /learning-center-callout >}}
 
 ## Overview
 
@@ -58,7 +77,7 @@ Monitor the cost, latency, performance, and usage trends for all your LLM applic
 
 Identify problematic clusters and monitor the quality of responses over time with topical clustering and checks like sentiment, failure to answer, and so on.
 
-{{< img src="llm_observability/cluster_map/box.png" alt="The box packing layout displays clusters of traces represented by colored circles, and includes a panel listing clusters with topics, trace counts, and failure rates." style="width:100%;" >}}
+{{< img src="llm_observability/cluster_map/QualityClusters_LLMO.png" alt="The box packing layout displays clusters of traces represented by colored circles, and includes a panel listing clusters with topics, trace counts, and failure rates." style="width:100%;" >}}
 
 ## Safeguard sensitive data and identify malicious users
 
@@ -77,7 +96,7 @@ Outlier detection is performed across key dimensions:
 
 These outliers are analyzed over the past week and automatically surfaced in the corresponding time window selected by the user. This enables teams to proactively detect regressions, performance drifts, or unexpected behavior in their LLM applications.
 
-{{< img src="llm_observability/llm-insights.png" alt="An 'Insights' banner across the top of the LLM Observability Monitor page. The banner displays 10 insights and has a View Insights button that leads to a side panel with further details." style="width:100%;" >}}
+{{< img src="llm_observability/Overview_LLMO.png" alt="An 'Insights' banner across the top of the LLM Observability Monitor page. The banner displays 8 insights and has a View Insights button that leads to a side panel with further details." style="width:100%;" >}}
 
 ## Use integrations with LLM Observability
 
@@ -103,5 +122,5 @@ See the [Setup documentation][5] for instructions on instrumenting your LLM appl
 [6]: /llm_observability/quickstart
 [7]: https://app.datadoghq.com/dash/integration/llm_operational_insights
 [8]: /llm_observability/setup/auto_instrumentation
-[9]: /llm_observability/evaluations/ootb_evaluations
+[9]: /llm_observability/evaluations/managed_evaluations
 [10]: /llm_observability/monitoring/cluster_map

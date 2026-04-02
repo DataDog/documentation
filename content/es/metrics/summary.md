@@ -21,9 +21,9 @@ Busca tus métricas por nombre de métrica o etiqueta (tag) utilizando los campo
 
 {{< img src="metrics/summary/tag_advanced_filtering.png" alt="Página de resumen de métricas SIN equipo:* ingresado en la barra de búsqueda por etiquetas" style="width:75%;">}}
 
-También puede descubrir métricas relevantes utilizando el soporte mejorado de concordancia difusa en el campo de búsqueda de métricas:
+También puedes detectar métricas relevantes utilizando la compatibilidad mejorada de concordancia difusa en el campo de búsqueda de métricas:
 
-{{< img src="metrics/summary/metric_advanced_filtering_fuzzy.png" alt="The metrics summary Page ( página) with fuzzy search searching shopist checkout" style="width:75%;">}}
+{{< img src="metrics/summary/metric_advanced_filtering_fuzzy.png" alt="La página de resumen de métricas con búsqueda difusa que busca el pago en Shopist" style="width:75%;">}}
 
 El filtrado por etiquetas admite la sintaxis booleana y de comodín para que puedas identificar: 
 * Métricas que están etiquetadas con una clave de etiqueta concreta, por ejemplo, `team`: `team:*`
@@ -149,12 +149,13 @@ Para cualquier clave concreta de etiqueta, puedes:
 
 ### Activos relacionados con métricas
 
-{{< img src="metrics/summary/related_assets_dashboards.png" alt="Activos relacionados para un nombre de métricas especificado" style="width:80%;">}}
+{{< img src="metrics/summary/related_assets_dashboards_08_05_2025.png" alt="Activos relacionados para un nombre de métricas específico" style="width:80%;">}}
 
 Para determinar el valor de cualquier nombre de métrica para tu organización, utiliza Activos relacionados de métricas. Los activos relacionados de métricas se refieren a cualquier dashboard, notebook, monitor, o SLO que consulta una métrica en particular.
 
 1. Desplázate hasta la parte inferior del panel lateral de detalles de la métrica, hasta la sección **Recursos relacionados**.
 2. Haz clic en el botón desplegable para ver el tipo de recurso relacionado que te interesa en (dashboards, monitores, notebooks, SLOs). Además, puedes utilizar la barra de búsqueda para validar activos específicos.
+3. La columna **Tags** (Etiquetas) muestra exactamente qué etiquetas se utilizan en cada activo.
 
 ## Explorador de la cardinalidad de etiquetas de métricas personalizadas
 

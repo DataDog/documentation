@@ -343,7 +343,7 @@ DdSdkReactNative.setAttributes({
 
 ## Rastrear la navegación de la vista
 
-Debido a que React Native ofrece una amplia gama de bibliotecas para crear navegación en pantalla, sólo el seguimiento de vistas manual es compatible por defecto. Para ver las sesiones de seguimiento de errores o RUM en Datadog, debes implementar el seguimiento de vistas.
+Debido a que React Native ofrece una amplia gama de librerías para crear navegación en pantalla, sólo el seguimiento de vistas manual es compatible por defecto. Para ver las sesiones de seguimiento de errores o RUM en Datadog, debes implementar el seguimiento de vistas.
 
 Puedes iniciar y detener manualmente una vista utilizando los siguientes métodos `startView()` y `stopView`.
 
@@ -365,8 +365,8 @@ DdRum.stopView('<view-key>', { 'custom.bar': 42 }, Date.now());
 
 Utiliza una de las integraciones de Datadog para realizar un rastreo automático de las visitas para las siguientes bibliotecas:
 
--   Si utilizas la biblioteca [`react-native-navigation`][10], añade el paquete `@datadog/mobile-react-native-navigation` y sigue las [instrucciones de configuración][11].
--   Si utilizas la biblioteca [`react-navigation`][12], añade el paquete `@datadog/mobile-react-navigation` y sigue las [instrucciones de configuración][11].
+-   Si utilizas la librería [`react-native-navigation`][10], añade el paquete `@datadog/mobile-react-native-navigation` y sigue las [instrucciones de configuración][11].
+-   Si utilizas la librería [`react-navigation`][12], añade el paquete `@datadog/mobile-react-navigation` y sigue las [instrucciones de configuración][11].
 
 Si tienes algún problema para configurar el rastreo de vistas con `@datadog/mobile-react-navigation`, puedes consultar este [ejemplo de aplicación][13] de Datadog como referencia.
 

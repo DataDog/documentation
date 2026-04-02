@@ -1,5 +1,6 @@
 ---
 title: How to update an anomaly detection monitor to account for local time zone
+description: "Configure anomaly detection monitors to account for local time zones and daylight saving time to prevent false alerts from local activity patterns."
 further_reading:
 - link: "/monitors/types/anomaly/"
   tag: "Documentation"
@@ -8,7 +9,7 @@ further_reading:
   tag: "Documentation"
   text: "Configure monitor notifications"
 aliases:
-- /monitors/faq/how-to-update-anomaly-monitor-timezone  
+- /monitors/faq/how-to-update-anomaly-monitor-timezone
 ---
 
 Datadog monitors use UTC time, which by default does not track local time zones. Depending on the type of system you have, your data could be impacted by local activity happening in your time zone. For example, a lunch surge could cause a spike in the middle of the day, and this surge could be detected as an unexpected anomaly. If you are getting unexpected anomalies caused by local activity, update your anomaly detection monitor to account for your local timezone.

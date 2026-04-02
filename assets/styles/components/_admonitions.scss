@@ -1,0 +1,101 @@
+.alert {
+  background-color: transparent;
+  border: none;
+  border-radius: 0;
+  position: relative;
+  padding: 8px 12px 8px 16px;
+  font-size: 18px;
+  line-height: 27px;
+  color: #4a4a4a;
+  -webkit-font-smoothing: subpixel-antialiased;
+}
+
+.alert.alert-info p, .alert.alert-danger p, .alert.alert-warning p, .alert.alert-tip p {
+  color: #4a4a4a;
+}
+
+.alert::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 8px;
+  bottom: 8px;
+  width: 4px;
+}
+
+.alert-info {
+  background-color: transparent;
+  padding-top: 32px;
+}
+
+.alert-info::before {
+  background-color: #006bc2;
+}
+
+.alert-info::after {
+  content: 'NOTE';
+  position: absolute;
+  top: 8px;
+  left: 16px;
+  color: #004A8C;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+
+.alert-danger {
+  background-color: transparent;
+  padding-top: 32px;
+}
+
+.alert-danger::before {
+  background-color: #facc00;
+}
+
+.alert-danger::after {
+  content: 'CAUTION';
+  position: absolute;
+  top: 8px;
+  left: 16px;
+  color: #7F4205;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.alert-warning {
+  background-color: transparent;
+  padding-top: 32px;
+}
+
+.alert-warning::before {
+  background-color: #eb364b;
+}
+
+.alert-warning::after {
+  content: 'WARNING';
+  position: absolute;
+  top: 8px;
+  left: 16px;
+  color: #9B3908;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.alert-tip {
+  background-color: transparent;
+  padding-top: 32px;
+}
+
+.alert-tip::before {
+  background-color: #9364cd;
+}
+
+.alert-tip::after {
+  content: 'TIP';
+  position: absolute;
+  top: 8px;
+  left: 16px;
+  color: #4A2C6A;
+  font-size: 14px;
+  font-weight: 600;
+}

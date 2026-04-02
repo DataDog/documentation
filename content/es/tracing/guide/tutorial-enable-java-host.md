@@ -2,10 +2,10 @@
 further_reading:
 - link: /tracing/trace_collection/library_config/java/
   tag: Documentación
-  text: Opciones adicionales de configuración de bibliotecas de rastreo
+  text: Opciones adicionales de configuración de librerías de rastreo
 - link: /tracing/trace_collection/dd_libraries/java/
   tag: Documentación
-  text: Instrucciones detalladas de configuración de bibliotecas de rastreo
+  text: Instrucciones detalladas de configuración de librerías de rastreo
 - link: /tracing/trace_collection/compatibility/java/
   tag: Documentación
   text: Marcos de trabajo compatibles Java para la instrumentación automática
@@ -14,7 +14,7 @@ further_reading:
   text: Configuración manual de trazas (traces) y tramos (spans)
 - link: https://github.com/DataDog/dd-trace-java
   tag: Código fuente
-  text: Rastreo del repositorio de código fuente abierto de bibliotecas
+  text: Rastreo del repositorio de código fuente abierto de librerías
 title: Tutorial - Habilitación del rastreo de una aplicación Java en el mismo host
   que el Datadog Agent
 ---
@@ -52,7 +52,7 @@ Verifica que el Agent se está ejecutando y enviando datos a Datadog, accediendo
 <div class="alert alert-info">Si al cabo de unos minutos no ves tu host en Datadog en (<strong>Infraestructure > Host map</strong> (Infraestructura > Asignación de hosts), asegúrate de haber utilizado la clave de API correcta para tu organización, disponible en <a href="https://app.datadoghq.com/organization-settings/api-keys"><strong>Organization Settings > API Keys</strong></a> (Parámetros de organización > Claves de API).</div>
 
 
-## Instalación y ejecución de la aplicación de ejemplo Java 
+## Instalación y ejecución de la aplicación de ejemplo Java
 
 A continuación, instala una aplicación de ejemplo para rastrear. El código de ejemplo para este tutorial se puede encontrar en [github.com/DataDog/apm-tutorial-java-host][9]. Clona el repositorio git ejecutando:
 
@@ -149,7 +149,7 @@ Ejecuta más llamadas a la API para ver la aplicación en acción. Cuando hayas 
 
 ## Instalación del rastreo de Datadog
 
-A continuación, descarga la biblioteca de rastreo Java (a veces denominada Java Agent). Desde tu directorio `apm-tutorial-java-host`, ejecuta:
+A continuación, descarga la librería de rastreo Java (a veces denominada Java Agent). Desde tu directorio `apm-tutorial-java-host`, ejecuta:
 
 {{< code-block lang="sh" >}}
 curl -Lo dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
@@ -161,7 +161,7 @@ Si tu sistema operativo no es compatible con curl, puedes ir directamente a `'ht
 
 Para empezar a generar y recopilar trazas, reinicia la aplicación de ejemplo con marcas adicionales que hagan que los datos de rastreo se envíen a Datadog.
 
-<div class="alert alert-warning"><strong>Nota</strong>: Las marcas de estos comandos de ejemplo, en particular la frecuencia de muestreo, no son necesariamente apropiadas para los entornos que no figuran en este tutorial. Para obtener más información sobre qué necesitas utilizar en tu entorno real, consulta <a href="#tracing-configuration">Configuración del rastreo</a>.</div>
+<div class="alert alert-danger"><strong>Nota</strong>: Las marcas de estos comandos de ejemplo, en particular la frecuencia de muestreo, no son necesariamente apropiadas para los entornos que no figuran en este tutorial. Para obtener más información sobre qué necesitas utilizar en tu entorno real, consulta <a href="#tracing-configuration">Configuración del rastreo</a>.</div>
 
 
 {{< tabs >}}
@@ -240,7 +240,7 @@ Una traza `GET /notes` tiene este aspecto:
 
 ### Configuración del rastreo
 
-La biblioteca de rastreo Java utiliza el Agent incorporado y el soporte de monitorización Java. La marca `-javaagent:../dd-java-agent.jar` indica a la máquina virtual Java dónde encontrar la biblioteca de rastreo Java para que pueda ejecutarse como un Agent Java. Para obtener más información sobre Agents Java, consulta [https://www.baeldung.com/java-instrumentation][7].
+La librería de rastreo Java utiliza el Agent incorporado y el soporte de monitorización Java. La marca `-javaagent:../dd-java-agent.jar` indica a la máquina virtual Java dónde encontrar la librería de rastreo Java para que pueda ejecutarse como un Agent Java. Para obtener más información sobre Agents Java, consulta [https://www.baeldung.com/java-instrumentation][7].
 
 Además de la marca `javaagent`, que habilita el Java Agent, los comandos de inicio especifican tres parámetros de [etiquetado unificado de servicios[10] para identificar de forma única tu aplicación en Datadog. Especifica siempre las etiquetas `env`, `service`y `version` para cada aplicación monitorizada.
 
@@ -249,7 +249,7 @@ Por último, la marca `dd.trace.sample.rate` configura la frecuencia de muestreo
 Fíjate que la marca de la frecuencia de muestreo en el comando aparece antes que la marca `-jar`. Esto se debe a que se trata de un parámetro para la máquina virtual Java y no para tu aplicación. Cuando añadas el Agent Java a tu aplicación, asegúrate de especificar la marca en la ubicación correcta.
 
 
-## Añadir la instrumentación manual a la aplicación Java 
+## Añadir la instrumentación manual a la aplicación Java
 
 La instrumentación automática es práctica, pero a veces prefieres utilizar tramos más precisos. La API de rastreo DD Java Datadog te permite especificar tramos en tu código mediante anotaciones o código.
 
@@ -315,7 +315,7 @@ Los siguientes pasos te guiarán a través de la adición de anotaciones al cód
 
 {{% tab "Maven" %}}
 
-a. Abre `notes/pom.xml` y descomenta las líneas que configuran dependencias para el rastreo manual. La biblioteca `dd-trace-api` se utiliza para las anotaciones `@Trace`, y `opentracing-util` y `opentracing-api` se utilizan para la creación manual de tramos.
+a. Abre `notes/pom.xml` y descomenta las líneas que configuran dependencias para el rastreo manual. La librería `dd-trace-api` se utiliza para las anotaciones `@Trace`, y `opentracing-util` y `opentracing-api` se utilizan para la creación manual de tramos.
 
 b. Ejecuta:
 
@@ -335,7 +335,7 @@ b. Ejecuta:
 
 {{% tab "Gradle" %}}
 
-a. Abre `notes/build.gradle` y descomenta las líneas que configuran dependencias para el rastreo manual. La biblioteca `dd-trace-api` se utiliza para las anotaciones `@Trace`, y `opentracing-util` y `opentracing-api` se utilizan para la creación manual de tramos.
+a. Abre `notes/build.gradle` y descomenta las líneas que configuran dependencias para el rastreo manual. La librería `dd-trace-api` se utiliza para las anotaciones `@Trace`, y `opentracing-util` y `opentracing-api` se utilizan para la creación manual de tramos.
 
 b. Ejecuta:
    ```sh
@@ -422,7 +422,7 @@ sh ./scripts/gradle_instrumented_run.sh
 
    {{< img src="tracing/guide/tutorials/tutorial-java-container-distributed.png" alt="Gráfico de llamas de una traza distribuida." style="width:100%;" >}}
 
-Observa que no has cambiado nada en la aplicación `notes`. Datadog instrumenta automáticamente tanto la biblioteca `okHttp` utilizada para realizar la llamada HTTP de `notes` a `calendar`, como la biblioteca Jetty utilizada para escuchar solicitudes HTTP en `notes` y `calendar`. Esto permite que la información de rastreo pase de una aplicación a la otra, registrando un rastreo distribuido.
+Observa que no has cambiado nada en la aplicación `notes`. Datadog instrumenta automáticamente tanto la librería `okHttp` utilizada para realizar la llamada HTTP de `notes` a `calendar`, como la librería Jetty utilizada para escuchar solicitudes HTTP en `notes` y `calendar`. Esto permite que la información de rastreo pase de una aplicación a la otra, registrando un rastreo distribuido.
 
 
 ## Solucionar problemas

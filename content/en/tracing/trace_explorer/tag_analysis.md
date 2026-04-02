@@ -1,5 +1,6 @@
 ---
 title: Tag Analysis
+description: Identify tags and attributes that contribute to anomalies in tracing data using automated comparison analysis.
 private: true
 further_reading:
 - link: 'tracing/trace_explorer'

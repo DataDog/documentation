@@ -1,5 +1,6 @@
 ---
 title: Setting up Remote Configuration for Tracing
+description: Learn how to set up and use Remote Configuration to dynamically manage tracing library settings without restarting applications.
 further_reading:
 - link: "remote_configuration"
   tag: "Documentation"
@@ -89,7 +90,7 @@ datadog:
 
 ### At the organization level
 
-<div class="alert alert-danger"><strong>Datadog does not recommend disabling Remote Configuration at the organization level. Disabling Remote Configuration at the organization level prevents Datadog components in several products across your organization from receiving configurations from Datadog.</strong></div>
+<div class="alert alert-warning"><strong>Datadog does not recommend disabling Remote Configuration at the organization level. Disabling Remote Configuration at the organization level prevents Datadog components in several products across your organization from receiving configurations from Datadog.</strong></div>
 
 To disable Remote Configuration at the organization level:
 1. Ensure you have the required `org_management` permission.

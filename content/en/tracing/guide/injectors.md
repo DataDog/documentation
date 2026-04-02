@@ -1,5 +1,6 @@
 ---
 title: Understanding Injector Behavior with Single Step Instrumentation
+description: Learn how the injector works with Single Step Instrumentation to automatically instrument applications at runtime without manual configuration.
 further_reading:
 - link: tracing/trace_collection/automatic_instrumentation/single-step-apm
   tag: Documentation
@@ -32,9 +33,11 @@ In Kubernetes environments, injection is handled by the Datadog Admission Contro
 
 1. Evaluates whether the pod should be instrumented based on configured selectors (such as namespaces, labels, or specific pod properties).
 1. Mutates the pod spec to:
-   - Add init containers to download injector and tracer libraries
+   - Use the Datadog CSI driver to mount the injector and tracer libraries
    - Set environment variables (like `LD_PRELOAD`)
    - Mount volumes to persist injected libraries
+
+The default delivery method uses init containers, but SSI supports additional [injection modes][2] that may better suit your environment.
 
 ## Injector behavior
 
@@ -49,3 +52,4 @@ After the injector is loaded into a process's memory space—regardless of platf
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/trace_collection/automatic_instrumentation/single-step-apm
+[2]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/kubernetes/#configure-injection-modes

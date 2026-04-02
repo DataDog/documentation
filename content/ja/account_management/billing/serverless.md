@@ -6,7 +6,7 @@ title: サーバーレスの請求
 
 Datadog 使用量ページを確認すれば、アカウントの請求対象およびサーバーレス使用量の合計を追跡できます。過去 1 か月間の概要と、経時的な使用量の両方を確認できます。
 
-Datadog サーバーレスモニタリングは、Datadog 内で追跡・監視されている呼び出しとアクティブな Lambda 関数の組み合わせに基づいて請求されます。プランに基づく関連メトリクスは、Plan and Usage ページの Serverless タブにある[課金フィルター][1]で確認できます。プランと使用量の詳細については、[カスタマーサクセス][3]マネージャーにお問い合わせください。
+Datadog Serverless monitoring の料金は、Datadog で追跡・監視している呼び出し回数とアクティブな Lambda 関数の組み合わせに基づいて計算されます。プランと利用状況の詳細は、担当の [Customer Success][3] マネージャーにお問い合わせください。
 
 Lambda 関数は、[Datadog AWS インテグレーション][10]を通して、または [Lambda 拡張機能][11]や [Forwarder][12] レイヤーで直接インストルメンテーションを行い監視することが可能です。
 
@@ -26,7 +26,7 @@ API を使用して Datadog が監視する AWS Lambda 関数を制限するに�
 
 ### タグ
 
-Datadog accepts a comma-separated list of tags in the form `key:value`. This list defines a filter that is used when collecting metrics from the associated AWS service. These `key:value` pairs can both allow and exclude tags. To indicate an exclusion, add a `!` before the tag key. Wildcards, such as `?` (for single characters) and `*` (for multiple characters), can also be used.
+Datadog は、`key:value` の形式でタグのカンマ区切りのリストを受け付けます。このリストは、関連する AWS サービスからメトリクスを収集する際に使用されるフィルターを定義します。これらの `key:value` のペアは、タグを許可することも除外することもできます。除外を示すには、タグキーの前に `!` を追加します。また、`?` (1文字) や `*` (複数文字) などのワイルドカードを使用することもできます。
 
 このフィルターは、許可されたすべてのタグがないリソース、つまり、許可されたタグのリストが "OR" ステートメントを形成するリソースのみを除外します。
 
@@ -38,8 +38,7 @@ Datadog accepts a comma-separated list of tags in the form `key:value`. This lis
 
 例: `datadog:monitored,env:production,instance-type:c1.*,!region:us-east-1`
 
-This filter only collects EC2 instances that contain the tag
-`datadog:monitored` OR the tag `env:production` OR an instance-type tag with a `c1.*` value AND NOT a `region:us-east-1` tag.
+このフィルターは、`datadog:monitored` タグまたは `env:production` タグまたは `c1.*` 値を持つインスタンスタイプタグを含み、かつ `region:us-east-1` タグでない EC2 インスタンスのみを収集します。
 
 ## インスツルメンテーション
 

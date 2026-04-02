@@ -1,6 +1,8 @@
 ---
 aliases:
 - /es/tracing/advanced/setting_primary_tags_to_scope/
+description: Aprende a establecer etiquetas primarias para delimitar y filtrar los
+  datos de APM en diferentes entornos, servicios y versiones para una mejor organización.
 further_reading:
 - link: /tracing/other_telemetry/connect_logs_and_traces/
   tag: Documentación
@@ -79,6 +81,7 @@ Ve a la página [Configuración de APM][6] para definir, cambiar o eliminar tus 
 * Los cambios pueden tardar hasta dos horas en reflejarse en la interfaz de usuario.
 * El rastreador siempre añade etiquetas (tags) `resource`, `name` y `service` a los tramos (spans). Datadog recomienda no añadirlas nunca como etiquetas a nivel de host para evitar confusiones.
 * Las etiquetas (tags) primarias adicionales admiten hasta 100 valores únicos por etiqueta. Para ver más detalles, consulta las [directrices sobre volúmenes de datos de APM][9].
+* Las etiquetas primarias adicionales pueden ser etiquetas de host o de contenedor. Las etiquetas de tramo añadidas por el rastreador no pueden utilizarse como etiquetas primarias.
 
 Si cambias una etiqueta (tag) primaria previamente configurada, ten en cuenta lo siguiente:
 

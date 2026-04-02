@@ -1,6 +1,8 @@
 ---
 aliases:
 - /es/graphing/functions/rollup/
+description: Controla la agregación temporal y los intervalos de puntos de datos mediante
+  funciones de rollup personalizadas y rollups móviles para métricas.
 further_reading:
 - link: /dashboards/guide/rollup-cardinality-visualizations
   tag: Documentación

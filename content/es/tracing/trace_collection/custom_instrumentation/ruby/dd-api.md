@@ -42,15 +42,15 @@ Asegúrate de que necesitas el gem adecuado para tu [versión del rastreador de 
 
 ## Añadir etiquetas
 
-Añade [etiquetas (tags) de tramo (span)][1] personalizadas a tus [tramos][2] para personalizar tu capacidad de observación dentro de Datadog. Las etiquetas de tramo se aplican a tus trazas entrantes, lo que te permite correlacionar el comportamiento observado con información a nivel de código, como el nivel de comerciante, el importe del pago o el ID de usuario.
+Añade [etiquetas (tags) de tramo (span)][1] personalizadas a tus [tramos][2] para personalizar tu capacidad de observación dentro de Datadog. Las span tags se aplican a tus trazas entrantes, lo que te permite correlacionar el comportamiento observado con información a nivel de código, como el nivel de comerciante, el importe del pago o el ID de usuario.
 
-### Añadir etiquetas de tramo personalizadas
+### Añadir span tags personalizadas
 
 Añade etiquetas personalizadas a tus tramos correspondientes a cualquier valor dinámico dentro de tu código de aplicación como `customer.id`.
 
 #### Tramos activos
 
-Accede al [tramo][1] activo actual desde cualquier método de tu código. 
+Accede al [tramo][1] activo actual desde cualquier método de tu código.
 
 **Nota**: Si se llama al método y no hay ningún tramo activo, `active_span` es `nil`.
 
@@ -167,7 +167,7 @@ end
 
 ## Añadir tramos
 
-Si no estás usando una instrumentación de biblioteca compatible (ver [compatibilidad de biblioteca][4]), puedes instrumentar manualmente tu código. Añade rastreo a tu código utilizando el método `Datadog::Tracing.trace`, que puedes envolver alrededor de cualquier código Ruby.
+Si no estás usando una instrumentación de librería compatible (ver [compatibilidad de librería][4]), puedes instrumentar manualmente tu código. Añade rastreo a tu código utilizando el método `Datadog::Tracing.trace`, que puedes envolver alrededor de cualquier código Ruby.
 
 Para rastrear cualquier código Ruby, puedes utilizar el método `Datadog::Tracing.trace`:
 

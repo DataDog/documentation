@@ -4,11 +4,11 @@
     ```shell
     helm repo add datadog https://helm.datadoghq.com
     ```
-   Si ya dispones del repositorio de gráficos de Datadog, ejecuta el siguiente comando para asegurarte de que está actualizado:
+    Si ya dispones del repositorio de gráficos de Datadog, ejecuta el siguiente comando para asegurarte de que está actualizado:
     ```shell
     helm repo update
     ```
- 1. Ejecuta el comando proporcionado en la interfaz de usuario para instalar el worker. El comando se rellena automáticamente con las variables de entorno que introdujiste anteriormente.
+ 1. Ejecuta el comando proporcionado en la interfaz de usuario para instalar el Worker. El comando se rellena automáticamente con las variables de entorno que introdujiste anteriormente.
     ```shell
     helm upgrade --install opw \
     -f azure_aks.yaml \
@@ -19,7 +19,7 @@
     --set service.ports[0].protocol=TCP,service.ports[0].port=<SERVICE_PORT>,service.ports[0].targetPort=<TARGET_PORT> \
     datadog/observability-pipelines-worker
     ```
-    **Nota**: Por defecto, Kubernetes Service asigna el puerto entrante `<SERVICE_PORT>` al puerto en el que escuchas al worker (`<TARGET_PORT>`). Si quieres asignar el puerto del pod del worker a un puerto entrante diferente de Kubernetes Service, utiliza los siguientes valores `service.ports[0].port` y `service.ports[0].targetPort` en el comando:
+    **Nota**: Por defecto, el servicio Kubernetes asigna el puerto entrante `<SERVICE_PORT>` al puerto en el que escucha el worker (`<TARGET_PORT>`). Si quieres asignar el puerto del pod del worker a un puerto entrante diferente del servicio Kubernetes, utiliza los siguientes valores `service.ports[0].port` y `service.ports[0].targetPort` en el comando:
     ```
     --set service.ports[0].protocol=TCP,service.ports[0].port=8088,service.ports[0].targetPort=8282
     ```
@@ -28,4 +28,4 @@
 Si quieres realizar cambios en la configuración de tu pipeline, consulta [Actualizar pipelines existentes][702].
 
 [701]: /resources/yaml/observability_pipelines/v2/setup/azure_aks.yaml
-[702]: /es/observability_pipelines/update_existing_pipelines
+[702]: /es/observability_pipelines/configuration/update_existing_pipelines

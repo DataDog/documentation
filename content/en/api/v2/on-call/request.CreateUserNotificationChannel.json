@@ -1,0 +1,14 @@
+{
+  "data": {
+    "attributes": {
+      "config": {
+        "address": "foo@bar.com",
+        "formats": [
+          "html"
+        ],
+        "type": "email"
+      }
+    },
+    "type": "notification_channels"
+  }
+}

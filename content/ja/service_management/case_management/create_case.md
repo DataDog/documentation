@@ -7,7 +7,7 @@ title: ケースの作成
 ---
 
 {{% site-region region="gov,ap1" %}}
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Case Management は現在、{{< region-param key=dd_datacenter code="true" >}} サイトでは利用できません。
 </div>
 {{% /site-region %}}

@@ -131,7 +131,7 @@ template:
          - name: OTEL_SERVICE_NAME
            value: "<SERVICE>"
 ```
-<div class="alert alert-warning"><strong>注</strong>: <code>OTEL_SERVICE_NAME</code> 環境変数は、<code>OTEL_RESOURCE_ATTRIBUTES</code> 環境変数内の <code>service.name</code> 属性より優先されます。</div>
+<div class="alert alert-danger"><strong>注</strong>: <code>OTEL_SERVICE_NAME</code> 環境変数は、<code>OTEL_RESOURCE_ATTRIBUTES</code> 環境変数内の <code>service.name</code> 属性より優先されます。</div>
 
 ##### 部分構成
 
@@ -309,7 +309,7 @@ APM データに対して、Datadog は以下の優先順位で `version` タグ
 
 {{% tab "ECS" %}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 ECS Fargate 上で Fluent Bit や FireLens を使用する場合、統合サービスタグ付けはメトリクスとトレースに対してのみ利用可能で、ログ収集には対応していません。
 </div>
 
@@ -514,7 +514,7 @@ OpenTelemetry を使用する場合、以下の[リソース属性][16] を、�
 1: `deployment.environment` は [OpenTelemetry セマンティック規約 v1.27.0][17] において `deployment.environment.name` が推奨されるため非推奨となります。
 2: `deployment.environment.name` は Datadog Agent 7.58.0+ および Datadog Exporter v0.110.0+ でサポートされています。
 
-<div class="alert alert-warning"><code>DD_SERVICE</code>、<code>DD_ENV</code>、<code>DD_VERSION</code> のような Datadog 固有の環境変数は、OpenTelemetry 構成では既定ではサポートされていません。</div>
+<div class="alert alert-danger"><code>DD_SERVICE</code>、<code>DD_ENV</code>、<code>DD_VERSION</code> のような Datadog 固有の環境変数は、OpenTelemetry 構成では既定ではサポートされていません。</div>
 
 {{< tabs >}}
 {{% tab "環境変数" %}}

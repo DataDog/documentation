@@ -43,7 +43,7 @@ Hipchat インテグレーションを使用して、Datadog は、HipChat ル�
 
 `@hipchat-<CHAT_NAME>` を使用して、HipChat ルームとグラフを共有したり、Monitor アラートを送信することもできます。
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 HipChat API V1 トークンを使用している場合、チャットハンドルにカンマや角括弧などの特殊文字が含まれていても、ハンドルの入力時に特殊文字をエスケープする必要はありません。オートコンプリートボックスが自動的にこれを行います。
 </div>
 

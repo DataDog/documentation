@@ -1,6 +1,6 @@
 ---
 title: Issue Team Ownership
-description: Automatically assign issues to teams based on Git CODEOWNERS files.
+description: Automatically assign issues to teams based on service owners, Git CODEOWNERS files, or the team attribute.
 further_reading:
 - link: '/error_tracking/auto_assign/'
   tag: 'Documentation'
@@ -12,40 +12,92 @@ further_reading:
 
 ## Overview
 
-Issue Team Ownership automates your triaging work by assigning issues to the right teams. Your team owns an issue if it is either:
-- code owner of the top-level stack frame of the issue according to GitHub `CODEOWNERS`.
-- owner of the service where the issue happens.
+Issue Team Ownership automates your triaging work by assigning issues to the right teams. There are three independent ways to infer team ownership, in order of priority:
 
-**Note**: Stack frames of third-party files are not taken into account. Only the top-most stack frame related to a file present in your repository is considered.
+1. [Team attribute](#team-attribute): based on the `team` attribute set on the error event at runtime.
+2. [CODEOWNERS](#codeowners-file): based on the top-level stack frame of the issue according to GitHub `CODEOWNERS`.
+3. [Service ownership](#service-ownership): based on the owner of the service where the issue happens.
 
-## Leverage team ownership
+## Team attribute
 
-Team ownership information appears on the issue details panel when available:
+You can programmatically assign team ownership at the time an error is raised by setting the `team` attribute to a Datadog team handle.
 
-{{< img src="error_tracking/ownership-details.png" alt="Team ownership information on issue details" style="width:80%;" >}}
+**Note**: After a team is assigned to an issue through the `team` attribute, the assignment is immutable.
 
-You can also use issue team ownership to filter issues by teams in the Error Tracking Explorer.
+### APM
 
-{{< img src="error_tracking/ownership-sidebar.png" alt="Team ownership information on sidebar" style="width:80%;" >}}
+Set the `team` attribute on the span, for example:
 
-## Setup
+```python
+span.set_tag("team", "payments-backend")
+```
 
-### Configure Source Code Integration
+### Logs
+
+Set the `team` attribute on the log. See the [Log Collection documentation][4] for details on adding attributes to your logs.
+
+### RUM
+
+Set the `team` attribute on the RUM event:
+
+```javascript
+datadogRum.addError(error, { team: 'payments-frontend' });
+```
+
+## CODEOWNERS file
+
+Your team owns an issue if it is the code owner of the top-level stack frame of the issue according to your GitHub `CODEOWNERS` file.
+
+**Notes**:
+-  Stack frames of third-party files are not taken into account. Only the top-most stack frame related to a file present in your repository is considered.
+- After a team is assigned to an issue through CODEOWNERS, the assignment is immutable.
+- Issue Team Ownership only supports GitHub.
+
+### Setup
 
 1. Ensure [Source Code Integration][1] is set up.
 2. Install [the GitHub integration][2].
-3. Make sure all requested permissions (Contents, Members) are granted for the GitHub integration.
-
-### Set up a CODEOWNERS file
-Create a valid `CODEOWNERS` file in your repository following [GitHub's CODEOWNERS standards][3].
-
-### Link GitHub teams to Datadog teams
-
-In Datadog, go to [**Teams**](https://app.datadoghq.com/teams) > Select your team > **Settings** > **GitHub Connection** to map your Datadog teams to the corresponding GitHub teams defined in your `CODEOWNERS` file.
+3. Make sure the GitHub integration has all requested permissions (Contents and Members).
+4. Create a valid `CODEOWNERS` file in your repository following [GitHub's CODEOWNERS standards][3].
+5. In Datadog, go to [**Teams**](https://app.datadoghq.com/teams) > Select your team > **Settings** > **GitHub Connection** to map your Datadog teams to the corresponding GitHub teams defined in your `CODEOWNERS` file.
 
 {{< img src="error_tracking/team-github-connection.jpg" alt="Linking GitHub teams to Datadog teams" style="width:80%;" >}}
 
-**Note**: Issue Team Ownership only supports GitHub.
+## Service ownership
+
+Your team owns an issue if it owns the service where the issue happens. Service ownership is inferred from your existing service ownership configuration in Datadog. No additional setup is required.
+
+**Note**: Teams assigned through service ownership cannot be removed from an issue and are dynamically updated based on the current service ownership.
+
+## Use team ownership
+
+Team ownership information appears on the issue details panel when available:
+
+{{< img src="error_tracking/ownership-details-2.png" alt="Team ownership information on issue details" style="width:80%;" >}}
+
+You can also use issue team ownership to filter issues by teams in the Error Tracking Explorer.
+
+{{< img src="error_tracking/ownership-search-bar.png" alt="Team owner filtering in the search bar" style="width:80%;" >}}
+
+### Manage team ownership for issues
+
+In addition to automatic team ownership, you can manually add or remove teams from issues.
+
+#### Add a team
+
+To add a team to an issue:
+
+1. Open the issue details panel.
+2. Click **Add team**.
+3. Select the team to add.
+
+#### Remove a team
+
+To remove a team from an issue:
+
+1. Open the issue details panel.
+2. Click the team to remove.
+3. Click **Unlink team from issue**.
 
 ## Configuration
 
@@ -60,3 +112,4 @@ Issue Team Ownership is enabled by default for all services once the setup requi
 [1]: /integrations/guide/source-code-integration
 [2]: /integrations/github/
 [3]: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+[4]: /logs/log_collection/

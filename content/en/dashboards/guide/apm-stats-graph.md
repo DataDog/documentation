@@ -1,5 +1,6 @@
 ---
 title: Configuring An APM Stats Graph
+description: Configure dashboard graphs using APM statistics data with proper levels of detail and parameter selection.
 disable_toc: false
 aliases:
 - /dashboards/querying/#configuring-an-apm-stats-graph

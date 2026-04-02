@@ -86,13 +86,13 @@ La extensión de Datadog para Azure App Service proporciona capacidades de rastr
 
 Azure Container Apps es una plataforma serverless totalmente gestionada para desplegar y escalar aplicaciones basadas en contenedores. Datadog proporciona la monitorización y la recopilación de log para Container Apps a través de la [integración Azure][9].
 
-Datadog también ofrece una solución, ahora en Vista previa, para [instrumentar tus aplicaciones de contenedor][10] con un Agent diseñado específicamente para permitir el rastreo, las métricas personalizadas y la recopilación directa de logs.
+Datadog también ofrece una solución para [instrumentar tus aplicaciones de Container Apps][10] con un Agent específico para permitir el rastreo, las métricas personalizadas y la recopilación directa de logs.
 
 ### Google Cloud Run
 
 Google Cloud Run es una solución informática asíncrona, liviana y basada en eventos que te permite crear funciones pequeñas con un solo propósito. Para monitorizar las funciones serverless que se ejecutan en Google Cloud Platform, habilita la [integración de Google Cloud Platform][11].
 
-Datadog también ofrece una solución, ahora en Vista previa, para [instrumentar tus aplicaciones Cloud Run][12] con un Agent especialmente diseñado para permitir el rastreo, las métricas personalizadas y la recopilación directa de logs.
+Datadog también ofrece una solución para [instrumentar tus aplicaciones de Cloud Run][12] con un Agent específico para permitir el rastreo, las métricas personalizadas y la recopilación directa de logs.
 
 ## Referencias adicionales
 
@@ -104,7 +104,7 @@ Datadog también ofrece una solución, ahora en Vista previa, para [instrumentar
 [4]: /es/serverless/custom_metrics
 [5]: /es/serverless/distributed_tracing
 [6]: /es/serverless/deployment_tracking
-[7]: /es/infrastructure/serverless/azure_app_services/#overview
+[7]: /es/serverless/azure_app_service/#overview
 [8]: https://app.datadoghq.com/functions?cloud=azure&config_serverless-azure-app=true&group=service
 [9]: /es/integrations/azure/#log-collection
 [10]: /es/serverless/azure_container_apps

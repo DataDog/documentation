@@ -1,6 +1,8 @@
 ---
 aliases:
 - /es/tracing/guide/inferred-service-opt-in
+description: Descubre automáticamente dependencias de servicios como bases de datos
+  y colas mediante el análisis de solicitudes salientes.
 further_reading:
 - link: /tracing/services/service_page/
   tag: Documentación
@@ -113,13 +115,13 @@ exporters:
 **Ejemplo**: [collector.yaml][2].
 
 [1]: https://github.com/open-telemetry/opentelemetry-collector-contrib/releases/tag/v0.95.0
-[2]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/collector.yaml#L335-L357
+[2]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/collector.yaml#L375-L395
 {{% /tab %}}
 {{< /tabs >}}
 
 ## Nombrar entidades inferidas
 
-Para determinar los nombres y los tipos de las dependencias de servicios inferidos, Datadog utiliza atributos de tramo (span) estándar y los asigna a atributos `peer.*`. Por ejemplo, las API externas inferidas utilizan el esquema de nomenclatura por defecto `net.peer.name` como `api.stripe.com`, `api.twilio.com` y `us6.api.mailchimp.com`. Las bases de datos inferidas utilizan el esquema de nomenclatura por defecto `db.instance`.
+Para determinar los nombres y tipos de las dependencias de servicio inferidas, Datadog utiliza atributos estándar de tramo y los asigna a atributos de `peer.*`. Por ejemplo, las API externas inferidas utilizan el esquema de nomenclatura predeterminado `net.peer.name` como `api.stripe.com`, `api.twilio.com` y `us6.api.mailchimp.com`. Las bases de datos inferidas utilizan el esquema de nomenclatura predeterminado `db.instance`. Puedes renombrar entidades inferidas creando [reglas de renombrado][5].
 
 ### Etiquetas (tags) pares
 
@@ -163,7 +165,7 @@ Con los servicios inferidos, las dependencias de servicios se detectan automáti
 
 Habilita `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED` para asegurarte de que ninguna integración Datadog defina nombres de servicios diferentes del nombre global del servicio por defecto. Esto también mejora la forma en que las conexiones servicio-a-servicio y los servicios inferidos son representados en las visualizaciones de Datadog, a través de todos los lenguajes de bibliotecas de rastreo e integraciones compatibles.
 
-<div class="alert alert-warning">La activación de esta opción puede afectar a métricas de APM, métricas de tramos personalizadas, análisis de trazas (traces), filtros de retención, análisis de datos confidenciales, monitores, dashboards o notebooks existentes que hacen referencia a los antiguos nombres de servicios. Actualiza estos recursos para utilizar la etiqueta global de servicio por defecto (<code>servicio:&lt;DD_SERVICE&gt;)</code>.</div>
+<div class="alert alert-danger">La activación de esta opción puede afectar a las métricas existentes de APM, las métricas personalizadas de tramo, los análisis de traza, los filtros de retención, los escaneos de datos confidenciales, los monitores, los dashboards o los notebooks que hacen referencia a los antiguos nombres de servicio. Actualiza estos activos para utilizar la etiqueta de servicio global predeterminada<code>(service:&lt;DD_SERVICE&gt;)</code>.</div>
 
 Para obtener instrucciones sobre cómo eliminar servicios anulados y migrar a servicios inferidos, consulta la guía [Anulación de servicios][4].
 
@@ -171,6 +173,8 @@ Para obtener instrucciones sobre cómo eliminar servicios anulados y migrar a se
 [2]: /es/tracing/services/service_page
 [3]: /es/database_monitoring/
 [4]: /es/tracing/guide/service_overrides
+[5]: /es/tracing/services/renaming_rules/
+
 {{< /site-region >}}
 {{< site-region region="gov" >}}
 <div class="alert alert-info">La función de servicios inferidos no está disponible por defecto en tu centro de datos. Rellena este <a href="https://docs.google.com/forms/d/1imGm-4SfOPjwAr6fwgMgQe88mp4Y-n_zV0K3DcNW4UA" target="_blank">formulario</a> para solicitar acceso.</div>

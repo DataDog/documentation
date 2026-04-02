@@ -42,7 +42,7 @@ Runtime metrics are available for several programming languages and runtimes, wi
 - **Library Version**: 0.29.0+
 - **Runtimes**: Java 8+
 
-<div class="alert alert-warning">JMX metrics collection is not supported in AWS Lambda environments.</div>
+<div class="alert alert-danger">JMX metrics collection is not supported in AWS Lambda environments.</div>
 
 {{% /tab %}}
 
@@ -84,11 +84,11 @@ Runtime metrics are available for several programming languages and runtimes, wi
 
 {{% tab ".NET" %}}
 
-  - **Enabled By Default**: No
+  - **Enabled By Default**: Yes, on .NET 6+ (v3.40.0+).
   - **Library Version**: 1.23.0+
   - **Runtimes**: .NET Framework 4.6.1+ and .NET Core 3.1+ (including .NET 5 and newer).
 
-#### Permissions for Internet Information Services (IIS)
+#### Permissions for Internet Information Services (IIS) (.NET Framework only)
 
 On .NET Framework, metrics are collected using performance counters. Users in non-interactive logon sessions (that includes IIS application pool accounts and some service accounts) must be added to the **Performance Monitoring Users** group to access counter data.
 
@@ -103,12 +103,12 @@ net localgroup "Performance Monitor Users" "IIS APPPOOL\DefaultAppPool" /add
 {{% /tab %}}
 {{% tab "PHP" %}}
 
-<div class="alert alert-warning">Runtime metrics for PHP is not supported.</div>
+<div class="alert alert-danger">Runtime metrics for PHP is not supported.</div>
 
 {{% /tab %}}
 {{% tab "C++" %}}
 
-<div class="alert alert-warning">Runtime metrics for C++ is not supported.</div>
+<div class="alert alert-danger">Runtime metrics for C++ is not supported.</div>
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -125,7 +125,7 @@ Enable [DogStatsD for the Agent][2]. By default, the Datadog Agent is configured
 
 When running the Agent in containerized environments, additional configuration is required:
 
-1. Set `dogstatsd_non_local_traffic: true` in your main [`datadog.yaml` configuration file][8], or set the [environment variable][3] `DD_DOGSTATSD_NON_LOCAL_TRAFFIC=true`.
+1. Verify that DogStatsD non-local traffic is enabled. This setting is enabled by default. If you have previously disabled it, set `dogstatsd_non_local_traffic: true` in your main [`datadog.yaml` configuration file][8], or set the [environment variable][3] `DD_DOGSTATSD_NON_LOCAL_TRAFFIC=true`.
 2. Follow these container-specific setup instructions:
 
 {{< partial name="apm/apm-runtime-metrics-containers.html" >}}
@@ -149,7 +149,7 @@ Configure runtime metrics in your application using environment variables. Some 
 Use the following environment variables to configure runtime metrics in your application:
 
 `DD_RUNTIME_METRICS_ENABLED`
-: **Default**: `true` for Java, `false` for all other languages <br>
+: **Default**: `true` for Java and .NET 6+ (v3.40.0+), `false` for all other languages and runtimes. <br>
 **Description**: Enables the collection of runtime metrics. Metrics are sent to the Datadog agent, as configured for the instrumented application.
 
 `DD_RUNTIME_METRICS_RUNTIME_ID_ENABLED`
@@ -163,6 +163,10 @@ Use the following environment variables to configure runtime metrics in your app
 `DD_DOGSTATSD_PORT`
 : **Default**: `8125` <br>
 **Description**: Sets the port for the tracing library's metric submission.
+
+`DD_RUNTIME_METRICS_DIAGNOSTICS_METRICS_API_ENABLED`
+: **Default**: `true` starting tracer v3.40.0+ on .NET 8+ and (.NET 6/7 when `DD_RUNTIME_METRICS_ENABLED` is not explicitly set), otherwise `false`. <br>
+**Description**: Available starting with .NET 6. It controls whether the .NET tracer uses the new [`System.Diagnostics.Metrics`][9] API to collect the metrics instead of the `EventListener`-based collector.
 
 #### Code-based configuration
 
@@ -187,7 +191,7 @@ from ddtrace.runtime import RuntimeMetrics
 RuntimeMetrics.enable()
 ```
 
-<div class="alert alert-warning">This only applies if you are not using <code>ddtrace-run</code></div>
+<div class="alert alert-danger">This only applies if you are not using <code>ddtrace-run</code></div>
 {{% /tab %}}
 
 {{% tab "Ruby" %}}
@@ -298,7 +302,8 @@ Each supported language collects a set of runtime metrics that provide insights 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[2]: /developers/dogstatsd/#setup
+[2]: /extend/dogstatsd/#setup
 [3]: /agent/docker/#dogstatsd-custom-metrics
-[7]: /developers/dogstatsd/unix_socket/
+[7]: /extend/dogstatsd/unix_socket/
 [8]: /agent/configuration/agent-configuration-files/#main-configuration-file
+[9]: https://learn.microsoft.com/dotnet/api/system.diagnostics.metrics

@@ -26,6 +26,8 @@ further_reading:
 
 After you set up the tracing library with your code and configure the Agent to collect APM data, optionally configure the tracing library as desired, including setting up [Unified Service Tagging][1].
 
+{{% apm-config-visibility %}}
+
 Tracer settings can be configured with the following environment variables:
 
 ### Unified Service Tagging
@@ -123,14 +125,6 @@ Whether to report the system's hostname for each trace. When disabled, the hostn
 : **Configuration**: `startupLogs`<br>
 **Default**: `false`<br>
 Enable tracer startup configuration and diagnostic log.
-
-`DD_SPAN_SAMPLING_RULES`
-: **Configuration**: `spanSamplingRules`<br>
-**Default**: `[]`<br>
-Span sampling rules to keep individual spans when the rest of the trace would otherwise be dropped. A JSON array of objects. Rules are applied in configured order to determine the span's sample rate. The `sample_rate` value must be between 0.0 and 1.0 (inclusive).
-For more information, see [Ingestion Mechanisms][3].<br>
-**Example:**<br>
-  - Set the span sample rate to 50% for the service `my-service` and operation name `http.request`, up to 50 traces per second: `'[{"service": "my-service", "name": "http.request", "sample_rate":0.5, "max_per_second": 50}]'`
 
 `DD_SPAN_SAMPLING_RULES_FILE`
 : **Configuration**: N/A<br>

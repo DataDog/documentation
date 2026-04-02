@@ -9,11 +9,14 @@ further_reading:
       text: "Set up Sensitive Data Scanner"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/human-name-pii-detection-in-logs-using-machine-learning/" btn_hidden="false" >}}
-Human name PII detection in logs using machine learning is in Preview. To enroll, click <b>Request Access</b>.
+## Overview
+{{< callout url="https://www.datadoghq.com/product-preview/phone-number-physical-address-pii-detection-in-logs-using-machine-learning/" btn_hidden="false" >}}
+Phone number and physical address PII detection in logs using machine learning are in Preview. To enroll, click <b>Request Access</b>.
 {{< /callout >}}
 
-## Overview
+{{< site-region region="gov" >}}
+<div class="alert alert-info">Human Name Scanner detects personal names in logs using machine learning. The feature is in Preview for the {{< region-param key="dd_site_name" >}} site. Fill out the <a href="https://www.datadoghq.com/product-preview/human-name-pii-detection-in-logs-using-machine-learning/">form</a> to request access.</a></div>
+{{< /site-region >}}
 
 The Scanning Rule Library is a collection of predefined rules for detecting common patterns such as email addresses, credit card numbers, API keys, authorization tokens, and more. The recommended keywords are used by default when library rules are created.
 
@@ -26,7 +29,10 @@ These rules can also be viewed in Datadog:
    1. Click **Add Rules to Scanning Group**.<br />
    1. Follow the steps in [Set Up Sensitive Data Scanner][2] to finish the setup.
 
+<div class="alert alert-info">Most library rules are available for all data sources (Logs, APM, RUM, LLM Observability, Observability Pipelines, Secret Scanning, and Cloud Storage). Check the <b>Available For</b> column to see which data sources each rule supports.</div>
+
 {{< multifilter-search resource="sds_rules" >}}
+
 
 ## Further Reading
 

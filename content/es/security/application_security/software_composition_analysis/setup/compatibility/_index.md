@@ -10,7 +10,7 @@ title: Requisitos de compatibilidad
 type: lenguaje de código múltiple
 ---
 
-Se admiten las siguientes capacidades ASM asociadas a la biblioteca de rastreo de cada lenguaje:
+Se admiten las siguientes capacidades ASM asociadas a la librería de rastreo de cada lenguaje:
 
 | Capacidad ASM                         | Java    | .NET     | Node.js                                          | Python        | Go              | Ruby          | PHP           |
 |----------------------------------------|---------|----------|--------------------------------------------------|---------------|-----------------|---------------|---------------|

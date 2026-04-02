@@ -8,7 +8,7 @@ further_reading:
   - link: 'synthetics/browser_tests'
     tag: 'Documentation'
     text: 'Configure a Browser Test'
-  - link: 'real_user_monitoring/browser'
+  - link: 'real_user_monitoring/application_monitoring/browser'
     tag: 'Documentation'
     text: 'RUM Browser Monitoring'
 
@@ -43,6 +43,6 @@ Further customize your tests and test steps to suit your needs, just as you woul
 [1]: /real_user_monitoring/
 [2]: /synthetics/browser_tests
 [3]: https://app.datadoghq.com/rum/sessions
-[4]: /real_user_monitoring/session_replay/browser/
-[5]: /synthetics/browser_tests/actions
+[4]: /session_replay/browser/
+[5]: /synthetics/browser_tests/test_steps
 [6]: /synthetics/browser_tests/?tab=requestoptions#test-configuration

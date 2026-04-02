@@ -38,7 +38,7 @@ title: Software Composition Analysis
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">선택한 <a href="/getting_started/site">Datadog 사이트에서는</a> Application Security Management가 지원되지 않습니다({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-danger">선택한 <a href="/getting_started/site">Datadog 사이트에서는</a> Application Security Management가 지원되지 않습니다({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 ## 개요

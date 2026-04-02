@@ -3,9 +3,9 @@ aliases:
 - /es/sensitive_data_scanner/scanning_rules
 disable_toc: false
 further_reading:
-- link: /security/sensitive_data_scanner/guide/best_practices_for_creating_custom_rules/
-  tag: Documentación
-  text: Prácticas recomendadas para crear reglas de análisis personalizadas
+- link: https://www.datadoghq.com/blog/cloudcraft-security/
+  tag: Blog
+  text: Identificar y priorizar visualmente los riesgos de seguridad con Cloudcraft
 title: Reglas de análisis
 ---
 

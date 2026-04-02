@@ -1,34 +1,70 @@
 ---
+app_id: azure-app-services
+app_uuid: 8ff64e3c-1588-478d-9ace-20433839978a
+assets:
+  dashboards:
+    azure_app_service: assets/dashboards/azure_app_service.json
+    azure_functions: assets/dashboards/azure_functions.json
+  integration:
+    auto_install: true
+    events:
+      creates_events: false
+    metrics:
+      check:
+      - azure.app_services.requests
+      metadata_path: metadata.csv
+      prefix: azure.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 143
+    source_type_name: Azure App Services
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
-- cloud
+- nube
 - azure
 custom_kind: integración
 dependencies: []
-description: Realiza un seguimiento de las métricas clave de Azure App Service.
-doc_link: https://docs.datadoghq.com/integrations/azure_app_services/
+display_on_public_website: true
 draft: false
 git_integration_title: azure_app_services
-has_logo: true
 integration_id: azure-app-services
-integration_title: Microsoft Azure App Service
+integration_title: Azure App Services
 integration_version: ''
 is_public: true
-manifest_version: '1.0'
+manifest_version: 2.0.0
 name: azure_app_services
-public_title: Integración de Datadog y Microsoft Azure App Service
-short_description: Realiza un seguimiento de las métricas clave de Azure App Service.
-version: '1.0'
+public_title: Azure App Services
+short_description: Creación rápida y sencilla de aplicaciones web y móviles para todas
+  las plataformas y dispositivos.
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Cloud
+  - Category::Azure
+  - Offering::Integration
+  configuration: README.md#Setup
+  description: Creación rápida y sencilla de aplicaciones web y móviles para todas
+    las plataformas y dispositivos.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Azure App Services
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
+<!--  FUENTE https://github.com/DataDog/integrations-internal-core -->
 ## Información general
 
-Azure App Service es una plataforma como servicio que ejecuta aplicaciones web, móviles, API y de lógica empresarial y gestiona automáticamente los recursos requeridos por estas aplicaciones.
+Azure App Service es una plataforma como servicio (PaaS) que ejecuta aplicaciones web, móviles, de API y de lógica empresarial, al tiempo que gestiona automáticamente los recursos que requieren dichas aplicaciones.
 
-Obtén métricas de Azure App Service para:
+Utiliza la integración de Datadog para recopilar métricas de Azure App Service y:
 
 - Visualizar el rendimiento de tu aplicación
-- Correlacionar el rendimiento de tus aplicaciones Azure con el resto de tus aplicaciones
+- Correlaciona el rendimiento de Azure App con el resto de tu infraestructura
 
 ### Vista de Azure App Service 
 
@@ -40,24 +76,24 @@ Utiliza la vista de Azure App Service para:
 
 - Realizar un seguimiento del uso de tus aplicaciones web, aplicaciones de funciones y planes de Azure App Service
 
-- Obtener información sobre los costes de tus planes de Azure App Service visualizando el número de instancias activas y viendo cuáles son aplicaciones en ejecución que están enviando trazas (traces) o logs a Datadog
+- Conoce los costes de tus App Service Plans al visualizar las instancias activas e identificar qué aplicaciones están enviando trazas o logs a Datadog
 
-- Determinar qué aplicaciones se ejecutan en qué planes de Azure App Service para identificar las aplicaciones que podrían estar afectando a los costes o al rendimiento
+- Asigna las aplicaciones a tus App Service Plans para identificar las aplicaciones que pueden estar generando costes o afectando al rendimiento.
 
-Para habilitar Datadog APM y las métricas personalizadas para tus aplicaciones que se ejecutan en Azure App Service, consulta la documentación de la [extensión Datadog Azure App Service][1].
+Para habilitar Datadog APM y métricas personalizadas para aplicaciones que se ejecutan en Azure App Service, consulta la [extensión de Datadog Azure App Service][1].
 
 ## Configuración
 
 ### Instalación
 
-Si aún no lo has hecho, configura la [integración Microsoft Azure][2]. No es necesario realizar ningún otro paso de instalación.
+Si aún no lo has hecho, configura la [integración de Microsoft Azure][1]. No se requiere ningún paso de instalación adicional.
 
-Para conocer opciones de monitorización adicionales, incluyendo los logs y la inyección de ID de rastreo, consulta la [extensión Azure App Service][1].
+Para opciones adicionales de monitorización, como la recolección de logs y la inyección de ID de trazas, consulta la [extensión de Azure App Service][1].
 
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "azure-app-services" >}}
+{{< get-metrics-from-git "azure_app_services" >}}
 
 
 ### Eventos
@@ -68,9 +104,9 @@ La integración Azure App Service no incluye eventos.
 
 La integración Azure App Service no incluye checks de servicio.
 
-## Resolución de problemas
+## Solucionar problemas
 
-¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][4].
+¿Necesitas ayuda? Ponte en contacto con el [soporte de Datadog][4].
 
 [1]: https://docs.datadoghq.com/es/serverless/azure_app_services/
 [2]: https://docs.datadoghq.com/es/integrations/azure/

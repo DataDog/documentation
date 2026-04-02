@@ -64,7 +64,7 @@ version: '1.0'
 <!--  EXTRAÍDO DE https://github.com/DataDog/integrations-internal-core -->
 ## Información general
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Si estás configurando AWS CloudTrail para Cloud SIEM, consulta la guía <a href="https://docs.datadoghq.com/security_platform/cloud_siem/guide/aws-config-guide-for-cloud-siem/">Configuración de AWS para Cloud SIEM</a>.
 </div>
 

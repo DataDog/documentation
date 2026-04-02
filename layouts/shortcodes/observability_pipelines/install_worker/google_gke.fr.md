@@ -28,4 +28,4 @@
 Consultez la section [Mise à jour des pipelines existants][802] si vous souhaitez apporter des modifications à la configuration de votre pipeline.
 
 [801]: /resources/yaml/observability_pipelines/v2/setup/google_gke.yaml
-[802]: /fr/observability_pipelines/update_existing_pipelines
+[802]: /fr/observability_pipelines/configuration/update_existing_pipelines

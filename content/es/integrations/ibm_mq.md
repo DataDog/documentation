@@ -186,7 +186,7 @@ Cada vez que se produce una actualización del Agent, estos archivos se borran y
 
 De manera alternativa, si utilizas Linux, asegúrese de que el conector del tiempo de ejecución pueda encontrar las bibliotecas una vez instalado el Cliente de MQ. Por ejemplo, con ldconfig:
 
-Pon la localización de la biblioteca en un archivo de configuración ld.
+Pon la localización de la librería en un archivo de configuración ld.
 
 ```shell
 sudo sh -c "echo /opt/mqm/lib64 > /etc/ld.so.conf.d/mqm64.conf"

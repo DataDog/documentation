@@ -23,19 +23,27 @@ further_reading:
 
 Supported languages:
 
-| Language | Version |
-|---|---|
-| Swift | >= 5.7 |
-| Objective-C | >= 2.0 |
-| Xcode | >= 14.3 |
+| Language    | Version |
+| ----------- | ------- |
+| Swift       | >= 6.2  |
+| Objective-C | >= 2.0  |
+| Xcode       | >= 26.0 |
 
 Supported platforms:
 
-| Platform | Version |
-|---|---|
-| iOS | >= 11.0 |
-| macOS | >= 10.13 |
-| tvOS | >= 11.0 |
+| Platform     | Version  |
+| ------------ | -------- |
+| iOS / iPadOS | >= 15.0  |
+| macOS        | >= 11.0  |
+| tvOS         | >= 15.0  |
+| macCatalyst  | >= 13.0  |
+
+Supported test frameworks:
+
+| Framework     | SDK version  | Support level                                     |
+| ------------- | ------------ | ------------------------------------------------- |
+| XCTest        | All versions | Full support                                      |
+| Swift Testing | >= 2.7.0     | Observation only; advanced features not supported |
 
 ## Installing the Swift testing SDK
 
@@ -70,8 +78,6 @@ There are three ways you can install the testing framework:
 .product(name: "DatadogSDKTesting", package: "dd-sdk-swift-testing")
 {{< /code-block >}}
 
-3. If you run UI Tests and don't use RUM, also add the dependency to your applications running the tests.
-
 
 [1]: https://github.com/DataDog/dd-sdk-swift-testing
 {{% /tab %}}
@@ -90,8 +96,6 @@ target 'MyApp' do
 end
 {{< /code-block >}}
 
-2. If you run UI Tests and don't use RUM, also add the dependency to the app running the tests.
-
 {{% /tab %}}
 {{% tab "Framework linking" %}}
 
@@ -101,12 +105,11 @@ end
 
 {{< img src="continuous_integration/swift_link.png" alt="Swift Linking XCFramework" >}}
 
-3. If you run UI Tests and don't use RUM, also link the app running the tests with this library.
-
 [1]: https://github.com/DataDog/dd-sdk-swift-testing/releases
 {{% /tab %}}
 {{< /tabs >}}
-<div class="alert alert-warning"><strong>Note</strong>: This framework is useful only for testing and should only be linked with the application when running tests. Do not distribute the framework to your users. </div>
+
+<div class="alert alert-danger">This framework is useful only for testing and should only be linked with the application when running tests. Do not distribute the framework to your users. </div>
 
 ## Instrumenting your tests
 
@@ -118,7 +121,7 @@ To enable testing instrumentation, add the following environment variables to yo
 
 {{< img src="continuous_integration/swift_env.png" alt="Swift Environments" >}}
 
-<div class="alert alert-warning">You should have your main target in the variables expansion of the environment variables; if not selected, variables are not valid. </div>
+<div class="alert alert-danger">You should have your main target in the variables expansion of the environment variables; if not selected, variables are not valid. </div>
 
 For UI Tests, environment variables need to be set only in the test target, because the framework automatically injects these values to the application.
 
@@ -208,9 +211,44 @@ Environment variables need to be set only in the test target, because the framew
 
 ### Test Optimisation SDK
 
-If you don't use RUM, you can link your application target with the Test SDK. The SDK adds auto-intrumentation to your application, gathers network requests and logs, and attaches them to the test traces.
+If you don't use RUM, you can link your application target with the Test SDK. The SDK adds auto-instrumentation to your application, gathers network requests and logs, and attaches them to the test traces.
 
 Environment variables need to be set only in the test target, because the framework automatically injects these values to the application.
+
+## Swift Testing framework
+
+Starting from version 2.7.0, the Datadog SDK supports the Swift Testing framework for test observation. Only observation is supported; advanced Swift Testing features are not supported.
+
+### Setting up Swift Testing observation
+
+The dependency setup is the same as for XCTest. See [Installing the Swift testing SDK](#installing-the-swift-testing-sdk) for installation instructions.
+
+To enable observation for your Swift Testing tests:
+
+1. Import `DatadogSDKTesting` in your test source files:
+
+{{< code-block lang="swift" >}}
+import DatadogSDKTesting
+import Testing
+{{< /code-block >}}
+
+2. Add the `.datadogTesting` trait to your test suites or standalone test functions:
+
+{{< code-block lang="swift" >}}
+@Suite(.datadogTesting)
+struct MyTestSuite {
+    @Test func myTest() {
+        // ...
+    }
+}
+
+// For standalone test functions:
+@Test(.datadogTesting) func myStandaloneTest() {
+    // ...
+}
+{{< /code-block >}}
+
+The remaining configuration, including environment variables and CI provider setup, is the same as for XCTest. See [Instrumenting your tests](#instrumenting-your-tests) for details.
 
 ## Additional optional configuration
 
@@ -241,7 +279,7 @@ The framework enables auto-instrumentation of all supported libraries, but in so
 
 `DD_DISABLE_CRASH_HANDLER`
 : Disables crash handling and reporting. (Boolean)
-<div class="alert alert-warning"><strong>Important</strong>: If you disable crash reporting, tests that crash are not reported at all, and don't appear as test failures. If you need to disable crash handling for any of your tests, run them as a separate target, so you don't disable it for the others.</div>
+<div class="alert alert-danger">If you disable crash reporting, tests that crash are not reported at all, and don't appear as test failures. If you need to disable crash handling for any of your tests, run them as a separate target, so you don't disable it for the others.</div>
 
 ### Network auto-instrumentation
 

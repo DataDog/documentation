@@ -1,8 +1,8 @@
 ---
-title: Cancelar tu suscripción a Cloudcraft
+title: Cancelar tu suscripción a Cloudcraft (independiente)
 ---
 
-Puedes cancelar tu suscripción a Cloudcraft desde la aplicación de Cloudcraft.
+La cancelación de tu suscripción a Cloudcraft (independiente) puede hacerse desde dentro de la aplicación Cloudcraft.
 
 Sólo el propietario de la cuenta puede cancelar una suscripción a Cloudcraft, que entra en vigor al final de tu ciclo actual de facturación. Al cancelar tu suscripción, tu cuenta pasa al plan gratuito.
 
@@ -26,7 +26,7 @@ Si no ves la opción **Cancel subscription** (Cancelar suscripción), es posible
 - Si compraste tu suscripción a través del equipo de ventas de Datadog, no se renueva automáticamente y expira al final de tu ciclo de facturación.
 - Si adquiriste tu suscripción a través de AWS Marketplace, el proceso de cancelación debe realizarse a través de tu cuenta de AWS. Para obtener más información, consulta [Cancelar la suscripción a tu producto][2] en la página de documentación de AWS Marketplace.
 
-<div class="alert alert-danger">Cancelar una suscripción no elimina tus datos de los servidores de Cloudcraft. En su lugar, cambia tu cuenta al plan gratuito. Si deseas eliminar tu cuenta y todos los datos de los servidores de Cloudcraft, <a href="https://app.cloudcraft.co/support" rel="help" title="Cloudcraft support">ponte en contacto con el equipo de asistencia de Cloudcraft</a>.
+<div class="alert alert-warning">Cancelar una suscripción no elimina tus datos de los servidores de Cloudcraft. En su lugar, cambia tu cuenta al plan gratuito. Si deseas eliminar tu cuenta y todos los datos de los servidores de Cloudcraft, <a href="https://app.cloudcraft.co/support" rel="help" title="Cloudcraft support">ponte en contacto con el equipo de asistencia de Cloudcraft </a>.
 </div>
 
 [1]: /es/cloudcraft/getting-started/using-bits-menu/

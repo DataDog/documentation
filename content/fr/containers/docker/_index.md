@@ -35,7 +35,7 @@ title: Agent Docker pour Docker, containerd et Podman
 
 L'Agent Datadog Docker est la version conteneurisée de l'[Agent][1]. installé sur le host. L'Agent Docker prend en charge les runtimes Docker, containerd et Podman. L'[image Docker officielle][2] est disponible sur Docker Hub, Google Container Registry (GCR) et ECR-Public.
 
-<div class="alert alert-warning">Docker Hub est soumis à des limites de pull d'images. Si vous n'êtes pas client Docker Hub, Datadog vous recommande de mettre à jour la configuration de votre Agent Datadog et de votre Agent de cluster afin de récupérer les images à partir de GCR ou ECR. Pour connaître la marche à suivre, consultez la section <a href="/agent/guide/changing_container_registry">Modifier votre registre de conteneurs</a>.</div>
+<div class="alert alert-danger">Docker Hub est soumis à des limites de pull d'images. Si vous n'êtes pas client Docker Hub, Datadog vous recommande de mettre à jour la configuration de votre Agent Datadog et de votre Agent de cluster afin de récupérer les images à partir de GCR ou ECR. Pour connaître la marche à suivre, consultez la section <a href="/agent/guide/changing_container_registry">Modifier votre registre de conteneurs</a>.</div>
 
 L'image est disponible en versions pour architectures x86 64 bits et Arm v8.
 

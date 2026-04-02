@@ -25,7 +25,7 @@ title: ライブプロセス
 ---
 
 
-"<div class="alert alert-warning">
+"<div class="alert alert-info">
 Live Processes および Live Process Monitoring は Enterprise プランに含まれています。他のプランをご利用の場合、この機能をリクエストするにはアカウント担当者または <a href="mailto:success@datadoghq.com">success@datadoghq.com</a> へご連絡ください。
 </div>"
 
@@ -156,7 +156,7 @@ DaemonSet の作成に使用された `datadog-agent.yaml` マニフェスト内
 {{% /tab %}}
 {{% tab "AWS ECS Fargate" %}}
 
-<div class="alert alert-warning">Datadog で ECS Fargate プロセスを表示できます。ECS Fargate コンテナとの関係を確認するには、Datadog Agent v7.50.0 以降を使用します。</div>
+<div class="alert alert-info">Datadog で ECS Fargate プロセスを表示できます。ECS Fargate コンテナとの関係を確認するには、Datadog Agent v7.50.0 以降を使用します。</div>
 
 プロセスを収集するには、Datadog Agent がタスク内でコンテナとして実行されている必要があります。
 

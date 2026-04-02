@@ -5,7 +5,7 @@ private: true
 title: Dogstream
 ---
 
-<div class="alert alert-danger">
+<div class="alert alert-warning">
 Se trata de una función obsoleta del Agent 5. Se interrumpen las nuevas versiones de funciones.
 <br>
 </div>
@@ -61,8 +61,8 @@ Si tu analizador personalizado de logs no funciona, el primer check que debes ha
 
 * Si todo va bien deberías ver `dogstream: parsing {filename} with {function name} (requested {config option text})`.
 
-<div class="alert alert-warning">
-Para comprobar que los dogstreams funcionan, añade (no edites) una línea a cualquier archivo de log que hayas configurado para su supervisión con el Agent. El Agent solo <a href="/Glosario/#tail">sigue</a> el final de cada archivo de log, por lo que no detecta los cambios que haces en otras partes del archivo.
+<div class="alert alert-danger">
+Para comprobar que los dogstreams funcionan, añade una línea (no edites una existente) a cualquier archivo de log que hayas configurado para ser monitorizado por el Agent. El Agent solo <a href="/glossary/#tail">sigue</a> el final de cada archivo de log, por lo que no detecta los cambios que haces en otras partes del archivo.
 </div>
 
 ### Funciones de análisis de escritura

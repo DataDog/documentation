@@ -1,5 +1,6 @@
 ---
 title: APM Troubleshooting
+description: Comprehensive troubleshooting guide for APM issues including trace retention, service configuration, and connection errors.
 aliases:
     - /tracing/faq/my-trace-agent-log-renders-empty-service-error/
     - /tracing/troubleshooting/faq_apm/
@@ -33,6 +34,9 @@ further_reading:
 - link: '/tracing/services/inferred_services'
   tag: 'Documentation'
   text: 'Inferred Service dependencies'
+- link: https://learn.datadoghq.com/courses/troubleshooting-apm-instrumentation-on-a-host
+  tag: Learning Center
+  text: Troubleshooting APM Instrumentation on a Host
 ---
 
 If you experience unexpected behavior while using Datadog APM, read the information on this page to help resolve the issue. Datadog recommends regularly updating to the latest version of the Datadog tracing libraries you use, as each release contains improvements and fixes. If you continue to experience issues, reach out to [Datadog support][1].
@@ -312,6 +316,12 @@ During startup, Datadog tracing libraries emit logs that reflect the configurati
 
 {{% /collapse-content %}}
 
+{{% collapse-content title="SDK configurations" level="h4" %}}
+
+Configuration values are automatically reported by the SDKs and can be viewed in the UI. This can be used to troubleshoot instrumentation issues caused by misconfiguration. For details, see the [SDK configurations page][33].
+
+{{% /collapse-content %}}
+
 ## Additional support
 
 If you still need additional support, open a ticket with Datadog Support.
@@ -335,7 +345,7 @@ When you open a [support ticket][1], the Datadog support team may ask for the fo
 
 6. **Custom tracing code**: Custom instrumentation, configuration, and adding span tags can significantly impact trace visualizations in Datadog.
 
-7. **Version information**: Knowing what language, framework, Datadog Agent, and Datadog tracer versions you are using allows Support to verify [Compatiblity Requirements][15], check for known issues, or recommend a version upgrades. For example:
+7. **Version information**: Knowing what language, framework, Datadog Agent, and Datadog tracer versions you are using allows Support to verify [Compatibility Requirements][15], check for known issues, or recommend a version upgrades. For example:
     
 {{% /collapse-content %}}
 
@@ -375,4 +385,4 @@ When you open a [support ticket][1], the Datadog support team may ask for the fo
 [30]: /tracing/services/inferred_services
 [31]: /tracing/trace_pipeline/metrics/#apm-traces-estimated-usage-dashboard
 [32]: https://app.datadoghq.com/services
-
+[33]: /tracing/troubleshooting/sdk_configurations/

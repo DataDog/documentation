@@ -141,13 +141,17 @@ Define variables para tus tests de API HTTP con JavaScript:
 
 {{< img src="synthetics/api_tests/http_javascript.png" alt="Definir tests de API HTTP con Javascript" style="width:90%;" >}}
 
+<div class="alert alert-info">Las capacidades de JavaScript no son compatibles con los tests de API en ubicaciones privadas de Windows.</div>
+
    {{% /tab %}}
 
-{{< /tabs >}}
+   {{< /tabs >}}
 
 ### Definición de aserciones
 
 Las aserciones definen cuál es el resultado esperado de un test. Después de hacer clic en **URL del test**, se añaden aserciones básicas de `response time`, `status code` y `header` `content-type` basadas en la respuesta obtenida. Debes definir al menos una aserción para que sea monitorizada por tu test.
+
+<div class="alert alert-info">Las secciones de aserciones de cabecera, cuerpo y JavaScript solo sirven para definir aserciones. No se pueden utilizar para realizar solicitudes HTTP adicionales.</div>
 
 | Tipo          | Operador                                                                                               | Tipo de valor                                                      |
 |---------------|--------------------------------------------------------------------------------------------------------|----------------------------------------------------------------|
@@ -211,37 +215,7 @@ Para visualizar tu lista de variables, escribe `{{` en el campo de tu elección.
 
 Un test se considera `FAILED` si no satisface una o más aserciones o si la solicitud ha fallado prematuramente. En algunos casos, el test puede fallar sin comprobar las aserciones respecto al endpoint.
 
-Los errores más comunes incluyen los siguientes:
-
-`AUTHENTICATION_ERROR`
-: La monitorización Synthetic desactiva automáticamente los reintentos de tests cuando se producen fallos de autenticación. Esta medida de seguridad permanece vigente hasta que se actualiza el test con credenciales válidas. De este modo se evitan ejecuciones de tests innecesarios que generarían falsas alertas e incrementarían el uso facturable.
-
-`CONNREFUSED`
-: No se ha podido establecer una conexión, ya que la máquina de destino la ha rechazado continuamente.
-
-`CONNRESET`
-: El servidor remoto ha cerrado bruscamente la conexión. Entre las posibles causas se incluyen que el servidor web haya encontrado un error o falla al responder, o que se haya perdido la conectividad del servidor web.
-
-`DNS`:
-No se ha encontrado la entrada DNS para la URL del test. Entre las posibles causas se incluyen una URL de test mal configurada o una configuración incorrecta de las entradas DNS.
-
-`Error performing HTTP/2 request`
-: No se ha podido realizar la solicitud. Para obtener más información, consulta la página de [errores][16] específicos.
-
-`INVALID_REQUEST` 
-: La configuración del test no es válida (por ejemplo, un error tipográfico en la URL).
-
-`SSL`
-: No se ha podido realizar la conexión SSL. [Para obtener más información, consulta la página de errores específica][12].
-
-`TIMEOUT`
-: La solicitud no se ha podido completar en un plazo razonable. Pueden ocurrir dos tipos de `TIMEOUT`:
-  - `TIMEOUT: The request couldn't be completed in a reasonable time.` indica que la duración de la solicitud ha alcanzado el tiempo de espera definido en el test (por defecto se define en 60s).
-  Para cada solicitud, en la cascada de la red sólo se muestran las etapas completadas de la solicitud. Por ejemplo, en el caso de que sólo se muestre `Total response time`, el tiempo de espera se produjo durante la resolución DNS.
-  - `TIMEOUT: Overall test execution couldn't be completed in a reasonable time.` indica que la duración del test (solicitud + aserciones) alcanza la duración máxima (60,5 segundos).
-
-`MALFORMED_RESPONSE`
-: El servidor remoto respondió con una carga útil que no cumple con las especificaciones HTTP. Este error puede producirse cuando los servidores remotos difieren en su compatibilidad con HTTP. Para evitar problemas, ejecuta los tests con una versión HTTP constante: HTTP/2 (si está disponible) o HTTP/1.1.
+Para obtener una lista completa de los códigos de error HTTP y SSL, consulta [Errores de tests de API][12].
 
 ## Permisos
 
@@ -268,7 +242,7 @@ Si estás utilizando la [función de rol personalizado][14], añade tu usuario a
 [9]: /es/monitors/notify/?tab=is_recoveryis_alert_recovery#conditional-variables
 [10]: /es/synthetics/guide/synthetic-test-monitors
 [11]: /es/synthetics/settings/#global-variables
-[12]: /es/synthetics/api_tests/errors/#ssl-errors
+[12]: /es/synthetics/api_tests/errors/
 [13]: /es/account_management/rbac/
 [14]: /es/account_management/rbac#custom-roles
 [15]: /es/account_management/rbac/#create-a-custom-role

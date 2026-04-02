@@ -119,7 +119,7 @@ tritonserver --cache-config local,size=1048576
 ```
 
 Nvidia Triton también ofrece la posibilidad de exponer [métricas personalizadas][6] a través de su endpoint Openemtrics. Datadog también puede recopilar estas métricas personalizadas utilizando la opción `extra_metrics`.
-<div class="alert alert-warning">Estas métricas Nvidia Triton personalizadas se consideran métricas estándar en Datadog.</div>
+<div class="alert alert-danger">Estas métricas Nvidia Triton personalizadas se consideran métricas estándar en Datadog.</div>
 
 ### Configuración
 

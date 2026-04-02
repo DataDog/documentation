@@ -201,7 +201,7 @@ instances:
       instance_endpoint: '<AWS_INSTANCE_ENDPOINT>'
 ```
 
-<div class="alert alert-warning"><strong>Important</strong>: Use the Aurora instance endpoint here, not the cluster endpoint.</div>
+<div class="alert alert-danger">Use the Aurora instance endpoint here, not the cluster endpoint.</div>
 
 [Restart the Agent][3] to start sending MySQL metrics to Datadog.
 
@@ -236,7 +236,7 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
     "username": "datadog",
     "password": "<UNIQUEPASSWORD>"
   }]' \
-  gcr.io/datadoghq/agent:${DD_AGENT_VERSION}
+  registry.datadoghq.com/agent:${DD_AGENT_VERSION}
 ```
 
 ### Dockerfile
@@ -244,14 +244,14 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
 Labels can also be specified in a `Dockerfile`, so you can build and deploy a custom agent without changing any infrastructure configuration:
 
 ```Dockerfile
-FROM gcr.io/datadoghq/agent:7.36.1
+FROM registry.datadoghq.com/agent:<AGENT_VERSION>
 
 LABEL "com.datadoghq.ad.check_names"='["mysql"]'
 LABEL "com.datadoghq.ad.init_configs"='[{}]'
 LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<AWS_INSTANCE_ENDPOINT>", "port": 3306,"username": "datadog","password": "ENC[datadog_user_database_password]"}]'
 ```
 
-<div class="alert alert-warning"><strong>Important</strong>: Use the Aurora instance endpoint as the host, not the cluster endpoint.</div>
+<div class="alert alert-danger">Use the Aurora instance endpoint as the host, not the cluster endpoint.</div>
 
 
 [1]: /agent/docker/integrations/?tab=docker
@@ -339,6 +339,7 @@ Using the [Operator instructions in Kubernetes and Integrations][3] as a referen
       enabled: true
     ```
 
+
 3. Deploy the Agent with the above configuration file from the command line:
 
     ```shell
@@ -369,7 +370,7 @@ instances:
 
 ### Configure with Kubernetes service annotations
 
-Rather than mounting a file, you can declare the instance configuration as a Kubernetes Service. To configure this check for an Agent running on Kubernetes, create a Service in the same namespace as the Datadog Cluster Agent:
+Rather than mounting a file, you can declare the instance configuration as a Kubernetes Service. To configure this check for an Agent running on Kubernetes, create a service using the following syntax:
 
 
 ```yaml

@@ -23,7 +23,7 @@ further_reading:
   text: "Understand how to read a Datadog Trace"
 ---
 
-<div class="alert alert-danger">
+<div class="alert alert-warning">
 This page describes deprecated features with configuration information relevant to legacy App Analytics, useful for troubleshooting or modifying some old setups. To have full control over your traces, use <a href="/tracing/trace_ingestion">ingestion controls</a> and <a href="/tracing/trace_retention">retention filters</a> instead.
 </div>
 

@@ -3,19 +3,16 @@ title: Reliability Overview
 aliases:
 - /software_catalog/eng_reports/reliability_overview/
 further_reading:
-- link: "/service_management/service_level_objectives/"
+- link: "/service_level_objectives/"
   tag: "Documentation"
   text: "Service Level Objectives"
-- link: "service_management/incident_management/"
+- link: "/incident_response/incident_management/"
   tag: "Documentation"
   text: "Incident Management"
 - link: "dashboards/"
   tag: "Documentation"
   text: "Datadog Dashboards"
 ---
-
-{{< callout url="https://www.datadoghq.com/product-preview/engineering-reports/" d_target="#signupModal" btn_hidden="false" header="Join the Preview for Engineering Reports!" >}}
-{{< /callout >}}
 
 ## Overview
 
@@ -45,7 +42,7 @@ You can update your Reliability Overview report view in the following ways:
 
 ### Schedule reports
 
-Set up scheduled reports for your stakeholders that are delivered as PDFs through email or Slack on a recurring basis.
+Set up scheduled reports for your stakeholders that are delivered as PDFs through email, Slack, or Microsoft Teams on a recurring basis.
 
 To schedule reports, click on **Schedule Report** in the top right corner (or **Manage Reports** if you've already set up reports). Refer to the [Scheduled Reports documentation][1] for more information.
 

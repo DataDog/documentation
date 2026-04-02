@@ -1,4 +1,5 @@
 ---
+id: extract_etl
 related_terms: null
 title: extracción, transformación y carga (ETL)
 ---

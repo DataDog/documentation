@@ -65,7 +65,7 @@ spec:
               value: '{{ .Get "language" }}'
             - name: DD_HEALTH_PORT
               value: '12345'
-          image: gcr.io/datadoghq/serverless-init:latest
+          image: gcr.io/datadoghq/serverless-init:<YOUR_TAG>
           name: serverless-init-1
           resources:
             limits:
@@ -90,6 +90,8 @@ spec:
       percent: 100
 ```
 
+This example uses the latest version of serverless-init. See the [latest releases on Docker Hub][1004] to pin a specific version.
+
 See the [Environment Variables](#environment-variables) for more information.
 
 In this example, the environment variables, startup health check, and volume mount are already added. If you don't want to enable logs, remove the shared volume.
@@ -104,3 +106,4 @@ gcloud run services replace <FILENAME>.yaml
 [1001]: /getting_started/tagging/unified_service_tagging
 [1002]: /getting_started/site/
 [1003]: https://app.datadoghq.com/organization-settings/api-keys
+[1004]: https://hub.docker.com/r/datadog/serverless-init

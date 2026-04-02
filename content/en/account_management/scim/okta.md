@@ -1,5 +1,6 @@
 ---
 title: Configure SCIM with Okta
+description: Synchronize users and teams from Okta to Datadog using SCIM for automated user provisioning, team management, and access control.
 algolia:
   tags: ["scim", "identity provider", "IdP", "Okta"]
 further_reading:

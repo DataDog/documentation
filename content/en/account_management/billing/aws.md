@@ -8,7 +8,9 @@ aliases:
 
 Datadog bills for AWS hosts running the Datadog Agent and all EC2 instances picked up by the Datadog-AWS integration. **You are not billed twice** if you are running the Agent on an EC2 instance picked up by the AWS integration.
 
-**IMPORTANT**: Datadog uses EC2 instance metadata to ensure you aren't billed twice for hosts both running the agent and being crawled by the AWS integration. If your EC2 instances are configured to require the use of [Instance Metadata Service Version 2 (IMDSv2)][1], then you must set the parameter `ec2_prefer_imdsv2` to `true` in your [Agent configuration][2] to avoid double-billing.
+**IMPORTANT**: Datadog uses EC2 instance metadata to ensure you aren't billed twice for hosts both running the agent and being crawled by the AWS integration. If your EC2 instances are configured to require the use of [Instance Metadata Service Version 2 (IMDSv2)][1] over IMSDv1, you must do one of the following to avoid double-billing:
+- Use Agent version `7.64.0` or above
+- Set the parameter `ec2_prefer_imdsv2` to `true` in your [Agent configuration][2]
 
 When you set up the Fargate and Lambda integration tiles, and any custom metrics, it impacts your Datadog bill.
 
@@ -50,7 +52,23 @@ datadog:monitored,env:production,instance-type:c1.*,!region:us-east-1
  
 ### CloudWatch Metric Streams with Amazon Data Firehose
 
-You can optionally [send CloudWatch metrics to Datadog using CloudWatch Metric Streams and Amazon Data Firehose][8] instead of using the default API polling method. If your organization uses the CloudWatch Metric Streams with Kinesis method, AWS resource exclusion rules defined in the Datadog AWS integration page do not apply. You must manage all rules for including and excluding metric namespaces or specific metric names in the CloudWatch Metric Streams configuration for each of your AWS accounts within the AWS console.
+You can optionally [send CloudWatch metrics to Datadog using CloudWatch Metric Streams and Amazon Data Firehose][8] instead of using the default API polling method. Tag filtering configured in the AWS Integration tile **also applies** to CloudWatch Metric Streams.
+
+## Check if a host is monitored by the Agent or AWS
+
+In the Infrastructure Host list:
+
+- **Monitored by AWS Integration**
+
+  If a host displays only the AWS logo, or if its metrics are limited to the `aws.*` namespace, it indicates that the host is monitored exclusively through the AWS integration.
+
+  {{< img src="account_management/billing/infra-aws.png" alt="Infrastructure Host list showing multiple hosts with only the AWS logo, indicating monitoring through the AWS integration." >}}
+
+- **Monitored by the Datadog Agent**
+
+  If a host displays the Datadog Agent logo but not the AWS logo, or if its metrics are collected from the Datadog Agent (such as `datadog.*`, `system.*`, etc.), it indicates that the host is being monitored by the Datadog Agent.
+
+  {{< img src="account_management/billing/infra-agent.png" alt="Infrastructure Host List showing a host with the Datadog Agent logo but no AWS logo, indicating monitoring through the Datadog Agent." >}}
 
 ## Troubleshooting
 

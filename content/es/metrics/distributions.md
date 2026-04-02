@@ -92,7 +92,7 @@ También puedes crear un SLO basado en métricas utilizando consultas de umbral:
 1. Activa los percentiles en tu métrica de distribución en la página Resumen de métricas.
 2. Crea un nuevo SLO basado en métricas y define el numerador como el número de "buenos" eventos con una consulta sobre tu métrica de distribución elegida utilizando el agregador "valores de count...".
 3. Especifica un valor umbral y un operador de comparación.
-{{< img src="metrics/distributions/threshold_SLO.jpg" alt="Consultas de umbrales para SLOs" style="width:80%;">}}
+{{< img src="metrics/distributions/threshold_SLO.png" alt="Consultas de umbral para SLOs" style="width:80%;">}}
 
 ## Personaliza el etiquetado
 

@@ -42,7 +42,7 @@ short_description: Mesurez les temps d'exécution, les erreurs et les nombres d'
 version: '1.0'
 ---
 
-<div class="alert alert-warning">Cette documentation aborde uniquement l'ingestion de métriques AWS Lambda depuis Amazon CloudWatch. Consultez la <a href="/serverless">documentation relative à l'Informatique sans serveur Datadog</a> pour recueillir en temps réel des données de télémétrie depuis vos fonctions Lambda.</div>
+<div class="alert alert-danger">Cette documentation aborde uniquement l'ingestion de métriques AWS Lambda depuis Amazon CloudWatch. Consultez la <a href="/serverless">documentation relative à l'Informatique sans serveur Datadog</a> pour recueillir en temps réel des données de télémétrie depuis vos fonctions Lambda.</div>
 
 ## Présentation
 
@@ -75,7 +75,7 @@ Une fois l'installation terminée, vous pouvez consulter l'ensemble de vos fonct
 
 ## Données collectées
 
-<div class="alert alert-warning">Si vous utilisez des extensions AWS Lambda, la métrique <em>duration</em> transmise par AWS inclut la durée <em>post_runtime_extensions_duration</em> utilisée par les extensions Lambda <a href="https://aws.amazon.com/blogs/compute/performance-and-functionality-improvements-for-aws-lambda-extensions/">effectuant des activités après l'envoi de la réponse de la fonction</a>. Pour surveiller les performances réelles de la fonction, utilisez le calcul <em>durée - post_runtime_extensions_duration</em> ou la <a href="https://docs.datadoghq.com/serverless/enhanced_lambda_metrics/">métrique optimisée Datadog</a> <em>aws.lambda.enhanced.runtime_duration</em>.</div>
+<div class="alert alert-danger">Si vous utilisez des extensions AWS Lambda, la métrique <em>duration</em> transmise par AWS inclut la durée <em>post_runtime_extensions_duration</em> utilisée par les extensions Lambda <a href="https://aws.amazon.com/blogs/compute/performance-and-functionality-improvements-for-aws-lambda-extensions/">effectuant des activités après l'envoi de la réponse de la fonction</a>. Pour surveiller les performances réelles de la fonction, utilisez le calcul <em>durée - post_runtime_extensions_duration</em> ou la <a href="https://docs.datadoghq.com/serverless/enhanced_lambda_metrics/">métrique optimisée Datadog</a> <em>aws.lambda.enhanced.runtime_duration</em>.</div>
 
 Chacune des métriques récupérées à partir d'AWS se voit assigner les mêmes tags que ceux qui apparaissent dans la console AWS, y compris, mais sans s'y limiter, le nom de la fonction et les groupes de sécurité.
 

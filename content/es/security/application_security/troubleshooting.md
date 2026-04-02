@@ -27,7 +27,7 @@ Existe una serie de pasos que deben ejecutarse correctamente para que la informa
 
 Para comprobar si AAP se está ejecutando, puedes utilizar la métrica `datadog.apm.appsec_host`.
 
-1. Ve a **Métricas > Resumen** en Datadog.
+1. Ve a **Metrics > Summary** (Métricas > Resumen) en Datadog.
 2. Busca la métrica `datadog.apm.appsec_host` . Si la métrica no existe, entonces no hay servicios ejecutando AAP. Si la métrica existe, los servicios se informan mediante las etiquetas (tags) de métricas `host` y `service`.
 3. Selecciona la métrica y busca `service` en la sección **Etiquetas** para ver qué servicios están ejecutando AAP.
 
@@ -365,7 +365,7 @@ Por ejemplo, el siguiente log de inicio muestra que AAP está deshabilitado:
 
 Habilita logs de depuración con la variable de entorno `DD_TRACE_DEBUG=1`. La biblioteca AAP generará logs para el resultado de error estándar.
 
-**Nota:** AAP sólo envía logs cuando está habilitado. Utiliza la variable de entorno `DD_APPSEC_ENABLED=1` para habilitar AAP.
+**Nota:** AAP solo envía logs cuando está habilitado. Utiliza la variable de entorno `DD_APPSEC_ENABLED=1` para habilitar AAP.
 
 [1]: /es/tracing/troubleshooting/tracer_startup_logs/
 {{< /programming-lang >}}
@@ -540,7 +540,7 @@ Espera un minuto a que el Agent reenvíe las trazas y luego comprueba que estas 
 
 Para comprobar si AAP se está ejecutando, puedes utilizar la métrica `datadog.apm.appsec_host`.
 
-1. Ve a **Métricas > Resumen** en Datadog.
+1. Ve a **Metrics > Summary** (Métricas > Resumen) en Datadog.
 2. Busca la métrica `datadog.apm.appsec_host` . Si la métrica no existe, entonces no hay servicios ejecutando AAP. Si la métrica existe, los servicios se informan mediante las etiquetas de métricas `host` y `service`.
 3. Selecciona la métrica y busca `service` en la sección **Etiquetas** para ver qué servicios están ejecutando AAP.
 
@@ -560,6 +560,9 @@ Asegúrate de que la variable de entorno `DD_INSTRUMENTATION_TELEMETRY_ENABLED` 
 
 Para desactivar AAP, utiliza uno de los siguientes métodos.
 
+Si habilitaste AAP utilizando la variable de entorno `DD_APPSEC_ENABLED=true`, utiliza la sección DD_APPSEC_ENABLED a continuación.
+Si habilitaste AAP mediante la [Configuración remota][16], utiliza el método de configuración remota que se indica a continuación.
+
 ### DD_APPSEC_ENABLED
 
 Si la variable de entorno `DD_APPSEC_ENABLED=true` está configurada para tu servicio, elimina la variable de entorno `DD_APPSEC_ENABLED=true` de la configuración de tu aplicación y reinicia tu servicio.
@@ -569,21 +572,21 @@ Si tu servicio es un servicio PHP, define explícitamente la variable de entorno
 ### Configuración remota
 
 Si AAP se habilitó mediante [configuración remota][16], haz lo siguiente: 
-  1. Ve a [Servicios][15].
-  2. Selecciona **Gestión de amenazas en modo monitorización**.
-  3. En la faceta **Gestión de amenazas**, activa **Monitoring Only**, **No data**, and **Ready to block** (Sólo monitorización, Sin datos y Listo para el bloqueo).
+  1. Ve a [Services (Servicios)][15].
+  2. Selecciona **App & API Protection in Monitoring Mode** (App & API Protection en modo de monitorización).
+  3. En la faceta **App & API Protection**, activa **Monitoring Only** (Solo monitorización), **No data** (Sin datos) y **Ready to block** (Listo para bloquear).
   4. Haz clic en un servicio.
-  5. En los detalles del servicio, en **Detección de amenazas**, haz clic en **Deactivate** (Desactivar).
+  5. En los detalles del servicio, en **App & API Protection**, haz clic en **Deactivate** (Desactivar).
 
 <div class="alert alert-info">Si AAP se habilitó mediante <a href="https://app.datadoghq.com/organization-settings/remote-config">configuración remota</a>, puedes utilizar el botón <strong>Deactivate</strong> (Desactivar). Si AAP se habilitó mediante configuración local, el botón <strong>Deactivate</strong> (Desactivar) no es una opción.</div>
 
 ### Desactivar en bloque
 
 Para deshabilitar AAP en tus servicios de forma masiva, haz lo siguiente: 
-  1. Ve a [Servicios][15].
-  2. En la faceta **Gestión de amenazas**, activa **Monitoring Only**, **No data**, and **Ready to block** (Sólo monitorización, Sin datos y Listo para el bloqueo).
+  1. Ve a [Services (Servicios)][15].
+  3. En la faceta **App & API Protection**, activa **Monitoring Only** (Solo monitorización), **No data** (Sin datos) y **Ready to block** (Listo para bloquear).
   3. Selecciona las casillas de verificación de servicios en las que quieres deshabilitar la detección de amenazas.
-  4. En **Acciones masivas**, selecciona **Desactivar detección de amenazas en (número) servicios**.
+  4. En **Bulk Actions** (Acciones en bloque), selecciona **Deactivate Threat detection on (number of) services** (Desactivar detección de amenazas en (número) servicios).
 
 
 ## ¿Necesitas más ayuda?

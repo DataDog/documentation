@@ -64,6 +64,6 @@ response = https.request(request)
 puts response.read_body
 {{- end -}}
 
-{{- $p := printf "partials/api/openapi-code-ruby-%s.html" .method -}}
+{{- $p := printf "api/openapi-code-ruby-%s.html" .method -}}
 {{- $pr := partial $p (dict "payload" .payload "path" .path) }}
 {{- highlight (trim $pr "\n\r") "ruby" -}}

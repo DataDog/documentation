@@ -1,10 +1,17 @@
 ---
 title: Template Variables
+description: Use template variables to dynamically filter dashboard widgets by tags, attributes, and facets for flexible data exploration.
 aliases:
     - /graphing/dashboards/template_variables/correlate-metrics-and-events-using-dashboard-template-variables
     - /graphing/dashboards/template_variables/how-do-i-overlay-events-onto-my-dashboards
     - /graphing/dashboards/template_variables/
 further_reading:
+- link: "https://www.datadoghq.com/blog/datadog-executive-dashboards"
+  tag: "Blog"
+  text: "Design effective executive dashboards with Datadog"
+- link: "https://www.datadoghq.com/blog/zendesk-cost-optimization"
+  tag: "Blog"
+  text: "Optimizing Datadog at scale: Cost-efficient observability at Zendesk"
 - link: "https://www.datadoghq.com/blog/template-variable-associated-values/"
   tag: "Blog"
   text: "Use associated template variables to refine your dashboards"
@@ -38,45 +45,49 @@ A template variable is defined by:
 * **Default Value**: The tag or attribute value that appears automatically when the dashboard is loaded. Defaults to `*`.
 * **Available Values**: The tag or attribute values available for selection in the dropdown menu. Defaults to `(all)`. The list of available values always includes `*`, which queries all values of the tag or attribute.
 
-**Note**: If you do not see the tag or attribute you're looking for, it may be because that data hasn't been reported to Datadog recently. For more information, see [Historical Data][4].
+### Template variable values
+Template variable values (values available using the template variable dropdown menus) are populated based on the sources that widgets in the dashboard are using. For example, if your dashboard has widgets querying logs, only values from logs are shown. If your dashboard has widgets querying logs, metrics, and RUM, values from logs, metrics, and RUM are shown.
+
+For most sources, template variable values are relevant to your dashboard's global time frame. For example:
+- If your dashboard's time frame is set to the last 15 minutes, only template variable values from the last 15 minutes are shown. 
+- If your dashboard time frame is set to last August 15th from 12:00 a.m. to 11:59 p.m., only values from that timeframe are shown.
+
+| Data Source                                     | Data query period   |
+|--------------------------------------           |---------------------|
+| Metrics                                         | Now - 48 hours      |
+| Cloud cost                                      | Now - 48 hours      |
+| All other sources                               | Dashboard time frame |
+
+**Note**: If you do not see the tag or attribute you're looking for, it may be because that data hasn't been reported to Datadog recently. In addition, all data queried for template variables are subject to the data retention policy. For more information, see [Historical Data][4].
+
+### Dashboard layout
+To prevent variables from crowding the header, the dashboard displays a small subset. You can click on the **+ N** button to see the additional N variables present on your dashboard. 
+
+
+If you need to see all variables at once as you scroll, click **Expand template variables**. 
+
 
 ## Add a template variable
-If template variables are already defined, see [Edit a template variable](#edit-a-template-variable). If your dashboard does not have any template variables, you can click the question mark icon to open a help modal on how to use Dashboard Variables.
-
-{{< img src="/dashboards/template_variables/template_variable_menu.png" alt="Template variable menu showing the Configure Dropdown Values option" style="width:70%;" >}}
-
 To add a template variable in a dashboard:
-1. Click **Add Variable**.
-1. You can add both **Filter** and **Group by** variable types.
-   1. Filter: Add a tag or attribute to filter dashboard queries and visualizations.
-   1. Group by: Add a tag or attribute to show a breakdown of groups within your data.<br>**Note**: `Group by` is only supported on select widgets---Timeseries, Table, Tree Map, Bar Chart, Wildcard, Distribution, Top List, Heatmap, Pie Chart, Geomap, Change, Scatterplot, Query Value, host map, and SLO Summary.
-1. (Optional) After selecting a tag, click the **+ Configure Dropdown Values** button to rename the variable and set default or available values.
-1. Click **Save**.
-1. To add more template variables, see [Edit a template variable](#edit-a-template-variable)
+1. Click **Add Variable** (or **+** if there are existing template variables)
+2. Select from a list of recommended template variables or search for the specific tag you have in mind.
+4. Select the widgets to apply this template variable to.
+6. Click **Save**.
+
+
+### Configure template variable
+When the template variable side panel is open, you can:
+* Apply (or remove) this variable to selected widgets (note the **Select All** or **Deselect All** options)
+* Switch between filtering and grouping
+* Change the display name of the variable (displayed in the header and widget query)
+* Select a default dropdown value
+* Preview the dropdown values and further configure them with a search query
 
 
 ## Edit a template variable
+1. Hover over the template variable on the dashboard header and click **Edit**. The template variable side panel appears.
+2. Use the options in the panel to customize the variable or apply the variable to more widgets.
 
-To edit a template variable or add variables:
-1. Hover over the dashboard header and click the **Edit** button.
-1. In edit mode, click on a template variable and make changes in the popover.
-1. To rearrange variables in the header, hover over a variable, then click and drag the drag icon handle.
-1. Click the **+ (plus)** icon to add a new template variable.
-1. (Optional) After selecting a tag, click the **+ Configure Dropdown Values** button to rename the variable and set default or available values.
-  {{< img src="dashboards/template_variables/edit_template_variable_drag.png" alt="Template variable edit mode popover showing the drag icon allowing you to rearrange the order" style="width:100%;" >}}
-
-## Apply a template variable to widgets
-
-To add a template variable to widget queries:
-1. Click the **Edit** button in the dashboard header.
-1. In edit mode, click on a template variable to open its popover.
-1. Click **Select Widgets** to enter widget selection mode.
-1. The banner displays the number of sources using the variable. In the example below, the template variable `env` is used in 20 graphs on the dashboard:
-  {{< img src="dashboards/template_variables/apply_template_variable_to_widgets.png" alt="Example dashboard displaying confirmation to apply 'env' template variable to 20 widgets" style="width:100%;" >}}
-1. Click on individual widgets to preview the graph with the template variable interpolated.
-1. To add or remove from all widgets in a group, toggle the checkbox on the right corner of the group.
-1. To add or remove from all widgets on the dashboard, click **Select All** or **Deselect All** in the selection banner.
-1. Click **Save** or **X** in the banner to exit widget selection mode.
 
 ## Saved views
 

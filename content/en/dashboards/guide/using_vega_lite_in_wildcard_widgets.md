@@ -1,5 +1,6 @@
 ---
 title: Using Vega-Lite with Wildcard Widgets in Datadog
+description: Create advanced custom visualizations using Vega-Lite grammar in Wildcard widgets with context menus and interactivity.
 further_reading:
 - link: "https://docs.datadoghq.com/dashboards/widgets/wildcard/"
   tag: "Documentation"

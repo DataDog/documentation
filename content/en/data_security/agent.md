@@ -44,7 +44,7 @@ For example, to verify an .msi file named `ddagent-cli-7.49.1.msi`:
 Get-AuthenticodeSignature ddagent-cli-7.49.1.msi | fl
 {{< /code-block >}}
 
-If the output of the command is `A certificate chain could not be built to a trusted root authority`, the machine may need a DigiCert root CA update. 
+If the output of the command is `A certificate chain could not be built to a trusted root authority`, the machine may need a DigiCert root CA update.
 
 ## Information security
 
@@ -72,7 +72,8 @@ Datadog's Vulnerability Management program includes regular assessments of suppo
 
 Regarding its Container Agent specifically, Datadog performs regular vulnerability static analysis on both its general availability (GA) and release candidate (RC) releases. The Datadog Container Agent can be found in public registries as mentioned in [Docker Agent][10], and additionally, Datadog Agent source code is open source. This empowers customers to perform vulnerability scanning with their preferred tooling based on a cadence that meets their unique needs. This provides the required visibility for customers inclined to monitor the Datadog Agent for potential vulnerabilities.
 
-If you believe you've discovered a bug in Datadog's security, see [Report An Issue][11]. To submit a vulnerability inquiry on a specific product as an existing customer, reach out to [Datadog Support][12] through your standard support process. If submitting a support ticket through the Datadog website, set the `Product type` field to `Vulnerability Inquiry on Datadog Product`.
+If you believe you've discovered a bug in Datadog's security, see [Report An Issue][11]. 
+To check the status of a specific CVE, see the [Public Artifact Vulnerabilities page][19]. For additional information, contact [Datadog Support][12] through your standard support process. When submitting a support ticket through the Datadog website, set the `Product type` field to `Vulnerability Inquiry on Datadog Product`.
 
 ## Running as an unprivileged user
 
@@ -92,7 +93,7 @@ For more information, see the [Secrets Management][14] documentation.
 
 {{< site-region region="gov" >}}
 
-The Agent on non-government sites collects environmental, performance, and feature usage information about the Datadog Agent. When the Agent detects a government site, or the [Datadog Agent FIPS Proxy][1] is used, the Agent automatically disables this telemetry collection. When such detection is impossible (for example, if a proxy is being used), Agent telemetry is emitted, but immediately dropped at Datadog's intake. 
+The Agent on non-government sites collects environmental, performance, and feature usage information about the Datadog Agent. When the Agent detects a government site, or the [Datadog Agent FIPS Proxy][1] is used, the Agent automatically disables this telemetry collection. When such detection is impossible (for example, if a proxy is being used), Agent telemetry is emitted, but immediately dropped at Datadog's intake.
 
 To avoid this data from being emitted in the first place, Datadog recommends disabling Agent telemetry explicitly by updating the `agent_telemetry` setting in the Agent configuration file, as shown in the example below.
 
@@ -188,9 +189,20 @@ agent diagnose show-metadata agent-telemetry
 | **API**                                     |                                                                                                                        |
 | api_server.request_duration_seconds         | CLI commands execution performance (if executed)                                                                       |
 | **Events**                                  |                                                                                                                        |
-| agent_bsod                                  | Agent-related BSOD information (occurs only in rare conditions when Datadog Cloud Network Monitoring is enabled)       |
+| agent_bsod                                  | Agent-related Blue Screen of Death (BSOD) data, including the BugCheck code, four associated arguments, and the unsymbolized crashing call stack |
 | **Service Discovery**                       |                                                                                                                        |
 | service_discovery.discovered_services       | Number of services detected by the Agent's Service Discovery feature                                                   |
+| **GPU Monitoring**                          |                                                                                                                        |
+| gpu.device_total                            | Total number of GPUs in the system                                                                                     |
+| **APM**                                     |                                                                                                                        |
+| trace.enabled                               | Whether the trace-agent process is running.                                                                            |
+| trace.working                               | Whether the trace-agent process is receiving and sending traces.                                                       |
+| **Synthetic Monitoring**                              |                                                                                                                        |
+| synthetics_agent.checks_received            | Number of tests received                                                                                               |
+| synthetics_agent.checks_processed           | Number of tests executed                                                                                               |
+| synthetics_agent.error_test_config          | Number of test config errors                                                                                           |
+| synthetics_agent.traceroute_error           | Number of traceroute errors                                                                                            |
+| synthetics_agent.evp_send_result_failure    | Number of errors when sending results                                                                                  |
 
 Only applicable metrics are emitted. For example, if DBM is not enabled, none of the database related metrics are emitted.
 
@@ -222,3 +234,4 @@ Only applicable metrics are emitted. For example, if DBM is not enabled, none of
 [16]: https://keys.datadoghq.com/DATADOG_RPM_KEY_B01082D3.public
 [17]: https://keys.datadoghq.com/DATADOG_RPM_KEY_4F09D16B.public
 [18]: https://keys.datadoghq.com/DATADOG_APT_KEY_06462314.public
+[19]: /data_security/guide/public_artifact_vulnerabilities/

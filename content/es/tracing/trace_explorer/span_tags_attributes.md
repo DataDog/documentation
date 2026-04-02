@@ -15,7 +15,7 @@ Los metadatos de tramo se componen de **atributos** y **etiquetas**.
 
 * Los **[Atributos de tramo](#span-attributes)** son el contenido del tramo, recopilado con la instrumentación automática o manual en la aplicación
 
-* Las **[Etiquetas de tramo](#span-tags)** son enriquecimientos de contexto relacionados con el tramo, por ejemplo etiquetas de host o contenedor que describen la infraestructura en la que se ejecuta el servicio. 
+* Las **[Etiquetas de tramo](#span-tags)** son enriquecimientos de contexto relacionados con el tramo, por ejemplo etiquetas de host o contenedor que describen la infraestructura en la que se ejecuta el servicio.
 
 Puedes consultar tramos por cualquier etiqueta y atributo de tramo desde el [Trace Explorer][6].
 
@@ -31,7 +31,7 @@ Por ejemplo, para encontrar tramos que representan llamadas a una tabla `users` 
 
 ### Etiquetas de tramo
 
-Las etiquetas de tramo son contextos alrededor de tu tramo, enriquecidos en función del host o del contenedor en el que se ejecuta el servicio desde el que se emite el tramo. No es necesario anteponer un carácter `@` para buscar etiquetas de tramo.
+Las span tags son contextos alrededor de tu tramo, enriquecidos en función del host o del contenedor en el que se ejecuta el servicio desde el que se emite el tramo. No es necesario anteponer un carácter `@` para buscar span tags.
 
 ## Facetas
 
@@ -111,7 +111,7 @@ Crear una faceta en un atributo/etiqueta de tramo no es obligatorio para buscar 
 
 ### Crear facetas desde el panel lateral de trazas
 
-La forma más sencilla de crear una faceta es añadirla desde el panel lateral de trazas, de manera que casi todos los detalles de la faceta (como la ruta del campo y el tipo subyacente) ya aparezcan rellenados. En el [Explorador de trazas][1], navega hasta un tramo de interés que contenga el campo a partir del cual quieres crear la faceta. Abre el panel lateral de trazas para este tramo seleccionándolo de la lista. Haz clic en el campo deseado (en las etiquetas de tramo o de infraestructura) y crea una faceta a partir de ahí:
+La forma más sencilla de crear una faceta es añadirla desde el panel lateral de trazas, de manera que casi todos los detalles de la faceta (como la ruta del campo y el tipo subyacente) ya aparezcan rellenados. En el [Explorador de trazas][1], navega hasta un tramo de interés que contenga el campo a partir del cual quieres crear la faceta. Abre el panel lateral de trazas para este tramo seleccionándolo de la lista. Haz clic en el campo deseado (en las span tags o de infraestructura) y crea una faceta a partir de ahí:
 
 - Si el campo contiene un valor numérico, puedes crear una faceta o una medida.
 - Si el campo contiene un valor de cadena, solo está disponible la creación de facetas.

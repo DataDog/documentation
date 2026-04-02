@@ -1,5 +1,5 @@
 ---
-title: Configuración de la biblioteca de rastreo de Datadog
+title: Configuración de la librería de rastreo de Datadog
 type: multi-code-lang
 ---
 
@@ -13,7 +13,7 @@ Para consultar las opciones de configuración específicas de tu lenguaje de pro
 
 Para instrumentar una aplicación escrita en un lenguaje que aún no es compatible con las bibliotecas oficiales, consulta la lista de [bibliotecas de rastreo comunitarias][1].
 
-## Opciones comunes de configuración 
+## Opciones comunes de configuración
 Las siguientes opciones de configuración se comportan de forma coherente en las últimas versiones de todos los SDK de Datadog, a menos que se indique lo contrario:
 
 ### Agent
@@ -79,12 +79,12 @@ Las siguientes opciones de configuración se comportan de forma coherente en las
 `DD_APM_TRACING_ENABLED`
 : **Por defecto**: `true` <br>
 **Entrada admitida**: Booleana <br>
-**Descripción**: Activa o desactiva el envío de trazas (trace) desde la aplicación, sin que ello afecte a otras funciones de biblioteca como la creación de perfiles, Datadog App and API Protection (AAP), Data Streams Monitor (DSM), etc.
+**Descripción**: Activa o desactiva el envío de trazas (trace) desde la aplicación, sin que ello afecte a otras funciones de librería como la creación de perfiles, Datadog App and API Protection (AAP), Data Streams Monitor (DSM), etc.
 
 `DD_TRACE_ENABLED`
 : **Por defecto**: `true` <br>
 **Entrada admitida**: Booleana <br>
-**Caveats**: Desactiva completamente la biblioteca, incluyendo otras características de biblioteca, en Node.js, PHP, Ruby, .NET y C++. Desactiva parcialmente la biblioteca en Java y Python. Se comporta de forma idéntica a `DD_APM_TRACING_ENABLED` en Go.<br>
+**Caveats**: Desactiva completamente la librería, incluyendo otras características de librería, en Node.js, PHP, Ruby, .NET y C++. Desactiva parcialmente la librería en Java y Python. Se comporta de forma idéntica a `DD_APM_TRACING_ENABLED` en Go.<br>
 **Descripción**: Activa o desactiva el envío de trazas desde la aplicación.
 
 `DD_LOGS_INJECTION`
@@ -109,7 +109,7 @@ Las siguientes opciones de configuración se comportan de forma coherente en las
 : **Por defecto**: `-1`. Si no se define, el rastreador transfiere al Datadog Agent el control de la frecuencia de muestreo. <br>
 **Entrada admitida**: Un número entre 0.0 y 1.0, ambos inclusive. <br>
 **Caveats**: Esta variable ha quedado obsoleta en favor de `DD_TRACE_SAMPLING_RULES`, que proporciona un control del muestreo más flexible y granular. <br>
-**Descripción**: Controla la frecuencia de muestreo de la ingesta de trazas entre el Agent y el backend. Debe ser un número entre 0,0 y 1,0, donde 1,0 significa que todas las trazas se envían al backend y 0,0 significa que no se envía ninguna traza. Tiene una precisión de hasta 6 dígitos, se aplica globalmente a todas las trazas y no admite objetivos por servicio o por operación. 
+**Descripción**: Controla la frecuencia de muestreo de la ingesta de trazas entre el Agent y el backend. Debe ser un número entre 0,0 y 1,0, donde 1,0 significa que todas las trazas se envían al backend y 0,0 significa que no se envía ninguna traza. Tiene una precisión de hasta 6 dígitos, se aplica globalmente a todas las trazas y no admite objetivos por servicio o por operación.
 
 `DD_TRACE_SAMPLING_RULES`
 : **Por defecto**: `null`. Si no se define o no hay reglas que coincidan, el rastreador transfiere al Datadog Agent el ajuste dinámico de la frecuencia de muestreo en las trazas. <br>
@@ -236,7 +236,7 @@ Las siguientes opciones de configuración se comportan de forma coherente en las
 : **Por defecto**: `user.id,session.id,account.id` <br>
 **Entrada admitida**:  Una cadena separada por comas que representa una lista de claves de equipaje que distinguen entre mayúsculas y minúsculas <br>
 **Caveats**: No admitido en Java, Ruby, Go, C++ y .NET <br>
-**Descripción**: Una lista separada por comas de claves de equipaje que se aplican automáticamente como etiquetas de tramos al tramo local raíz local. Por ejemplo, una clave de equipaje `user.id` se etiqueta como `baggage.user.id`. <br>
+**Descripción**: Una lista separada por comas de claves de equipaje que se aplican automáticamente como span tagss al tramo local raíz local. Por ejemplo, una clave de equipaje `user.id` se etiqueta como `baggage.user.id`. <br>
 Esta función sólo se aplica al equipaje extraído de las cabeceras HTTP entrantes. No se incluye el equipaje definido con la API de equipaje.
   - Para etiquetar todas las piezas de equipaje, define el valor en `*`. Utilízalo con precaución para evitar exponer datos confidenciales en las etiquetas.
   - Para desactivar esta función, define el valor como una cadena vacía.

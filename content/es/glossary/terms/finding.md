@@ -1,7 +1,9 @@
 ---
+id: finding
 core_product:
 - seguridad
-- csm
+- protección de cargas de trabajo
+- cloud security
 title: hallazgo
 ---
 

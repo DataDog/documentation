@@ -1,91 +1,32 @@
 ---
 app_id: airbyte
-app_uuid: 5994a02c-8754-40c3-9e99-a39ffc862b1c
-assets:
-  dashboards:
-    airbyte_overview: assets/dashboards/airbyte_overview.json
-  integration:
-    auto_install: true
-    metrics:
-      check:
-      - airbyte.metrics_reporter.est_num_metrics_emitted_by_reporter
-      - airbyte.worker.attempt.created
-      - airbyte.cron.jobs_run
-      metadata_path: metadata.csv
-      prefix: airbyte.
-    process_signatures:
-    - airbyte-cron
-    - airbyte-metrics-reporter
-    - airbyte-server
-    - airbyte-workers
-    - uvicorn connector_builder.entrypoint:app
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 10386
-    source_type_name: Airbyte
-  monitors:
-    Sync Jobs are taking a longer time than usual: assets/monitors/long_running_jobs.json
-author:
-  homepage: https://www.datadoghq.com
-  name: Datadog
-  sales_email: info@datadoghq.com (日本語対応)
-  support_email: help@datadoghq.com
 categories:
 - ai/ml
 - data stores
-custom_kind: インテグレーション
-dependencies:
-- https://github.com/DataDog/integrations-core/blob/master/airbyte/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: airbyte
-integration_id: airbyte
-integration_title: Airbyte
-integration_version: ''
-is_public: true
-manifest_version: 2.0.0
-name: airbyte
-public_title: Airbyte
-short_description: Airbyte のデプロイの状態を監視します。
+custom_kind: integration
+description: Airbyte デプロイメントの状態を監視します。
+integration_version: 1.0.0
+media: []
 supported_os:
 - linux
 - windows
 - macos
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::AI/ML
-  - Category::Data Stores
-  - Supported OS::Linux
-  - Supported OS::Windows
-  - Supported OS::macOS
-  - Submitted Data Type::Metrics
-  - Offering::Integration
-  configuration: README.md#Setup
-  description: Airbyte のデプロイの状態を監視します。
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: Airbyte
+title: Airbyte
 ---
-
-<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
-
-
 ## 概要
 
-このチェックは [Airbyte][1] を監視します。メトリクスは [DogStatsD][2] を通じて Datadog に送信されます。
+このチェックは [Airbyte](https://airbyte.com/) を監視します。メトリクスは [DogStatsD](https://docs.datadoghq.com/developers/dogstatsd) 経由で Datadog に送信されます。
 
 ## セットアップ
 
 ### インストール
 
-Airbyte インテグレーションを適切に動作させるには、以下のステップをすべて実施する必要があります。ステップを開始する前に、StatsD/DogStatsD マッピング機能が含まれる [Datadog Agent][3] (バージョン `>=6.17` または `>=7.17`) をインストールしてください。
+Airbyte インテグレーションを正しく動作させるには、以下の手順をすべて実施する必要があります。開始前に、StatsD/DogStatsD のマッピング機能を含む [Datadog Agent をインストール](https://app.datadoghq.com/account/settings/agent/latest) し、バージョン `>=6.17` または `>=7.17` を使用してください。
 
-### 構成
+### 設定
 
-1. [Datadogにメトリクスを送信する][4]ように Airbyte デプロイを構成します。
-2. [Datadog Agent メインコンフィギュレーションファイル][5] `datadog.yaml` に以下の構成を追加して更新します。
+1. Airbyte デプロイメントを [Datadog にメトリクスを送信するよう設定](https://docs.airbyte.com/operator-guides/collecting-metrics/) します。
+1. [Datadog Agent のメイン設定ファイル](https://docs.datadoghq.com/agent/guide/agent-configuration-files/) `datadog.yaml` に、次の設定を追加します:
 
 ```yaml
 dogstatsd_mapper_profiles:
@@ -147,31 +88,71 @@ dogstatsd_mapper_profiles:
         name: "airbyte.cron.jobs_run"
 ```
 
-3. Agent と Airbyte を[再起動][6]します。
+3. [Agent を再起動](https://docs.datadoghq.com/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent) し、Airbyte も再起動します。
 
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "airbyte" >}}
 
+| | |
+| --- | --- |
+| **airbyte.cron.jobs_run** <br>(count) | CRON タイプごとの CRON 実行回数|
+| **airbyte.cron.workflows_healed** <br>(count) | 自己修復 CRON が修復したワークフロー数|
+| **airbyte.metrics_reporter.est_num_metrics_emitted_by_reporter** <br>(count) | 直近の間隔で reporter が出力したメトリクスの推定数。件数が厳密ではないため、あくまで推定値です。|
+| **airbyte.metrics_reporter.num_orphan_running_jobs** <br>(gauge) | 実行中として報告されているジョブのうち、非アクティブまたは非推奨の connection に紐づくジョブ数<br>_単位は job_ |
+| **airbyte.metrics_reporter.num_pending_jobs** <br>(gauge) | 保留中のジョブ数<br>_単位は job_ |
+| **airbyte.metrics_reporter.num_running_jobs** <br>(gauge) | 実行中のジョブ数<br>_単位は job_ |
+| **airbyte.metrics_reporter.num_total_scheduled_syncs_last_day** <br>(gauge) | 過去 1 日間に実行された sync ジョブ総数<br>_単位は job_ |
+| **airbyte.metrics_reporter.num_unusually_long_syncs** <br>(gauge) | 過去の実績と比べて異常に長い sync ジョブ数<br>_単位は job_ |
+| **airbyte.metrics_reporter.oldest_pending_job_age_secs** <br>(gauge) | 最も古い保留中ジョブの経過時間 (秒)<br>_単位は second_ |
+| **airbyte.metrics_reporter.oldest_running_job_age_secs** <br>(gauge) | 最も古い実行中ジョブの経過時間 (秒)<br>_単位は second_ |
+| **airbyte.orchestrator.source_hearbeat_failure** <br>(count) | ソースから heartbeat が届かないことによるレプリケーション失敗回数|
+| **airbyte.server.breaking_change_detected** <br>(count) | 破壊的なスキーマ変更が検出された回数|
+| **airbyte.server.schema_change_auto_propagated** <br>(count) | 反映されたスキーマ変更数。|
+| **airbyte.worker.activity.check_connection** <br>(count) | check connection アクティビティの開始回数<br>_単位は connection_ |
+| **airbyte.worker.activity.dbt_transformation** <br>(count) | DBT transformation アクティビティの開始回数。|
+| **airbyte.worker.activity.discover_catalog** <br>(count) | discover catalog アクティビティの開始回数。|
+| **airbyte.worker.activity.failure** <br>(count) | アクティビティ失敗回数。activity タグで区別されます。|
+| **airbyte.worker.activity.normalization** <br>(count) | normalization アクティビティの開始回数。|
+| **airbyte.worker.activity.normalization_summary_check** <br>(count) | normalization summary check アクティビティの開始回数。|
+| **airbyte.worker.activity.refresh_schema** <br>(count) | refresh schema アクティビティの開始回数。|
+| **airbyte.worker.activity.replication** <br>(count) | replication アクティビティの開始回数。|
+| **airbyte.worker.activity.spec** <br>(count) | spec アクティビティの開始回数。|
+| **airbyte.worker.activity.submit_check_destination_connection** <br>(count) | submit check connection アクティビティの開始回数<br>_単位は connection_ |
+| **airbyte.worker.activity.submit_check_source_connection** <br>(count) | submit check connection アクティビティの開始回数<br>_単位は connection_ |
+| **airbyte.worker.activity.webhook_operation** <br>(count) | webhook operation アクティビティの開始回数。|
+| **airbyte.worker.attempt.completed** <br>(count) | 完了した新規 attempt 数。attempt ごとに 1 件記録されます。<br>_単位は attempt_ |
+| **airbyte.worker.attempt.created** <br>(count) | 作成された新規 attempt 数。attempt ごとに 1 件記録されます。<br>_単位は attempt_ |
+| **airbyte.worker.attempt.created_by_release_stage** <br>(count) | 新規 attempt の作成数。release stage のタグが付くため、attempt は重複カウントされます。<br>_単位は attempt_ |
+| **airbyte.worker.attempt.failed_by_failure_origin** <br>(count) | 失敗した attempt が持つ failure origin の件数。1 つの失敗に複数の origin があり得るため、同じ失敗が複数回カウントされる場合があります。failure origin と failure type のタグで区別されます。<br>_単位は attempt_ |
+| **airbyte.worker.attempt.failed_by_release_stage** <br>(count) | 失敗した attempt 数。release stage のタグが付くため、attempt は重複カウントされます。<br>_単位は attempt_ |
+| **airbyte.worker.attempt.succeeded_by_release_stage** <br>(count) | 成功した attempt 数。release stage のタグが付くため、attempt は重複カウントされます。<br>_単位は attempt_ |
+| **airbyte.worker.destination_buffer_size** <br>(gauge) | レプリケーション worker の destination buffer queue サイズ<br>_単位は record_ |
+| **airbyte.worker.destination_message_read** <br>(count) | destination から読み取られたメッセージ数<br>_単位は message_ |
+| **airbyte.worker.destination_message_sent** <br>(count) | destination に送信されたメッセージ数<br>_単位は message_ |
+| **airbyte.worker.job.cancelled_by_release_stage** <br>(count) | キャンセルされたジョブ数。release stage のタグが付くため、ジョブは重複カウントされます。<br>_単位は job_ |
+| **airbyte.worker.job.created_by_release_stage** <br>(count) | 作成された新規ジョブ数。release stage のタグが付くため、ジョブは重複カウントされます。<br>_単位は job_ |
+| **airbyte.worker.job.failed_by_release_stage** <br>(count) | 失敗したジョブ数。release stage のタグが付くため、ジョブは重複カウントされます。<br>_単位は job_ |
+| **airbyte.worker.job.succeeded_by_release_stage** <br>(count) | 成功したジョブ数。release stage のタグが付くため、ジョブは重複カウントされます。<br>_単位は job_ |
+| **airbyte.worker.notifications_sent** <br>(count) | 送信された通知数|
+| **airbyte.worker.replication_bytes_synced** <br>(count) | レプリケーション中に同期されたバイト数<br>_単位は byte_ |
+| **airbyte.worker.replication_records_synced** <br>(count) | レプリケーション中に同期されたレコード数<br>_単位は record_ |
+| **airbyte.worker.source_buffer_size** <br>(gauge) | レプリケーション worker の source buffer queue サイズ<br>_単位は record_ |
+| **airbyte.worker.source_message_read** <br>(count) | source から読み取られたメッセージ数<br>_単位は message_ |
+| **airbyte.worker.state_commit.close_successful** <br>(count) | connection の終了時に、最終 state flush が正常に完了した回数|
+| **airbyte.worker.state_commit.not_attempted** <br>(count) | 早期終了により state commit が試みられなかった回数<br>_単位は attempt_ |
+| **airbyte.worker.temporal_workflow.attempt** <br>(count) | temporal workflow の attempt 数<br>_単位は attempt_ |
+| **airbyte.worker.temporal_workflow.failure** <br>(count) | temporal workflow の失敗回数|
+| **airbyte.worker.temporal_workflow.success** <br>(count) | temporal workflow の正常な sync 回数<br>_単位は success_ |
 
-### サービスチェック
+### サービス チェック
 
-Airbyte チェックには、サービスのチェック機能は含まれません。
+Airbyte チェックにはサービス チェックは含まれません。
 
 ### イベント
 
-Airbyte チェックには、イベントは含まれません。
+Airbyte チェックにはイベントは含まれません。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
-
-[1]: https://airbyte.com/
-[2]: https://docs.datadoghq.com/ja/developers/dogstatsd
-[3]: https://app.datadoghq.com/account/settings/agent/latest
-[4]: https://docs.airbyte.com/operator-guides/collecting-metrics/
-[5]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/
-[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
-[7]: https://github.com/DataDog/integrations-core/blob/master/airbyte/metadata.csv
-[8]: https://docs.datadoghq.com/ja/help/
+サポートが必要な場合は、[Datadog サポート](https://docs.datadoghq.com/help/) にお問い合わせください。

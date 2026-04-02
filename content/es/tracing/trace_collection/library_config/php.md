@@ -20,11 +20,11 @@ further_reading:
 - link: /opentelemetry/interoperability/environment_variable_support
   tag: Documentación
   text: Configuraciones de variables de entorno de OpenTelemetry
-title: Configuración del rastreo de bibliotecas de PHP
+title: Configuración del rastreo de librerías de PHP
 type: lenguaje de código múltiple
 ---
 
-Después de configurar la biblioteca de rastreo con tu código y de configurar el Agent para recopilar datos de APM, también puedes configurar la biblioteca de rastreo como prefieras e incluir la configuración del [etiquetado de servicios unificado][1].
+Después de configurar la librería de rastreo con tu código y de configurar el Agent para recopilar datos de APM, también puedes configurar la librería de rastreo como prefieras e incluir la configuración del [etiquetado de servicios unificado][1].
 
 El rastreador PHP puede configurarse mediante variables de entorno y parámetros INI.
 
@@ -60,7 +60,7 @@ php_value datadog.service my-app
 
 ## NGINX y PHP-FPM
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 <strong>Nota:</strong> PHP-FPM no admite el valor <code>falso</code> en las directivas <code>env[...]</code>. Utiliza <code>1</code> en lugar de <code>verdadero</code> y <code>0</code> en lugar de <code>false</code>.
 </div>
 
@@ -483,7 +483,7 @@ Define el nivel de log del generador de perfiles. Los valores aceptables son `of
 
 ### Propagación del contexto de rastreo
 
-Consulta [Propagación del contexto de rastreo][11] para obtener información sobre cómo configurar la biblioteca de rastreo PHP para extraer e inyectar cabeceras para propagar el contexto de rastreo distribuido.
+Consulta [Propagación del contexto de rastreo][11] para obtener información sobre cómo configurar la librería de rastreo PHP para extraer e inyectar cabeceras para propagar el contexto de rastreo distribuido.
 
 `DD_TRACE_PROPAGATION_STYLE_INJECT`
 : **INI**: `Datadog.rastrear.propagation_style_inject`<br>
@@ -603,7 +603,7 @@ Al definir la configuración específica de una integración, utiliza el nombre,
 
 ## Asignar nombres de recursos a URI normalizados
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Ten en cuenta que al configurar cualquiera de los siguientes: <code>DD_TRACE_RESOURCE_URI_FRAGMENT_REGEX</code>, <code>DD_TRACE_RESOURCE_URI_MAPPING_INCOMING</code> y <code>DD_TRACE_RESOURCE_URI_MAPPING_OUTGOING</code> se optará por el nuevo enfoque de normalización de recursos y cualquier valor en <code>DD_TRACE_RESOURCE_URI_MAPPING</code> será ignorado.
 </div>
 
@@ -657,7 +657,7 @@ Esta configuración es un CSV de patrones que pueden contener el comodín `*`. P
 
 Los patrones pueden aplicarse a una parte de un fragmento específico. Por ejemplo `path/*-fix` normalizaría la URL `/some/path/changing-fix/nested` a `/some/path/?-fix/nested`
 
-Ten en cuenta que `DD_TRACE_RESOURCE_URI_MAPPING_INCOMING` sólo se aplica a las solicitudes entrantes (por ejemplo, los marcos web), mientras que `DD_TRACE_RESOURCE_URI_MAPPING_OUTGOING` sólo se aplica a las solicitudes salientes (por ejemplo, las solicitudes `curl` y `guzzle`).
+Ten en cuenta que `DD_TRACE_RESOURCE_URI_MAPPING_INCOMING` sólo se aplica a las solicitudes entrantes (por ejemplo, los web frameworks), mientras que `DD_TRACE_RESOURCE_URI_MAPPING_OUTGOING` sólo se aplica a las solicitudes salientes (por ejemplo, las solicitudes `curl` y `guzzle`).
 
 ##### Restricciones `open_basedir`
 

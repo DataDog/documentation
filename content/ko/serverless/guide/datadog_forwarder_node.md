@@ -4,7 +4,7 @@ title: Datadog 포워더를 사용하여 Node.js 서버리스 애플리케이션
 
 ## 개요
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Datadog 서버리스 신규 사용자인 경우 <a href="/serverless/installation/nodejs">Datadog Lambda 확장을 사용해 Lambda 함수를 계측하기 위한 지침을 따르세요.</a> Lambda에서 즉시 사용할 수 있는 기능을 제공하기 전 Datadog 포워더를 사용해 Datadog 서버리스를 설정한 경우 이 가이드를 따라 인스턴스를 유지 관리하세요.
 </div>
 

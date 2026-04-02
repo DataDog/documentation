@@ -1,5 +1,6 @@
 ---
 title: Selecting the right colors for your graphs
+description: Choose appropriate colors for graph series to ensure clear data distinction and effective troubleshooting for teams.
 further_reading:
 - link: "/dashboards/guide/consistent_color_palette"
   tag: Documentation
@@ -28,7 +29,7 @@ The Classic color palette has visual accessibility support.
 
 #### Consistent/Semantic
 
-The Consistent palette assigns a fixed color consistently to a series of data, based on its tav value. This makes it easier to correlate data across different charts. However, it **does not** guarantee unique colors for adjacent data series within the same widget, and it does not have accessibility support. For more information, see [Understanding Duplicate Colors in the Consistent Palette][3].
+The Consistent palette assigns a fixed color consistently to a series of data, based on its tag value. This makes it easier to correlate data across different charts. However, it **does not** guarantee unique colors for adjacent data series within the same widget, and it does not have accessibility support. For more information, see [Understanding Duplicate Colors in the Consistent Palette][3].
 
 {{< img src="dashboards/guide/colors/4_consistent_palette.png" alt="A color palette for the Consistent/Semantic palette." style="width:70%;" >}}
 

@@ -136,7 +136,7 @@ datadog:
 {{% /tab %}}
 {{< /tabs >}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 <strong>Avertissement pour les installations non privilégiées</strong>
 <br/><br/>
 Lors d’une installation non privilégiée, l’Agent doit pouvoir lire les fichiers de logs dans <code>/var/log/pods</code>.

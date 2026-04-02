@@ -1,12 +1,12 @@
 environment: preview
-img_url: "https://datadog-docs-staging.imgix.net/"
+img_url: "https://docs-staging.dd-static.net/"
 static_url: "https://docs-staging.datadoghq.com/"
 ga: UA-21102638-9
 
 header_scripts:
   - hotjar: true
   - google-site-tag: false
-  - google-tag-manager: false
+  - google-tag-manager: true
   - marketo: false
 
 footer_scripts:

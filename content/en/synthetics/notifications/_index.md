@@ -1,15 +1,18 @@
 ---
 title: Synthetic Monitoring Notifications
 further_reading:
-- link: "synthetics/notifications/template_variables"
-  tag: "Documentation"
-  text: "Use template variables in your Synthetic Monitoring notifications"
-- link: "synthetics/notifications/conditional_alerting"
-  tag: "Documentation"
-  text: "Use conditional alerting in your Synthetic Monitoring notifications"
 - link: "/synthetics/notifications/statuspage/"
   tag: "Documentation"
-  text: "Learn how to integrate Synthetic monitors with Statuspage"
+  text: "Integrate Synthetic monitors with Statuspage"
+- link: "/synthetics/guide/how-synthetics-monitors-trigger-alerts/"
+  tag: "Guide"
+  text: "Understand how Synthetic monitors evaluate results and trigger alerts"
+- link: "/monitors/notifications/"
+  tag: "Documentation"
+  text: "Configure monitor notifications"
+- link: "/monitors/downtimes/"
+  tag: "Documentation"
+  text: "Suppress notifications with monitor downtimes"
 ---
 
 ## Overview
@@ -18,18 +21,9 @@ Customize your alerts in [Synthetic Monitoring][1] to give on-call responders me
 
 <div class="alert alert-info">Synthetic Monitoring notifications are not supported in your <a href="https://docs.datadoghq.com/continuous_testing/">Continuous Testing CI/CD pipelines.</a></div>
 
-You can customize notifications using:
-
-- **[Pre-filled content](#pre-filled-monitor-messages)**: Start with a structured starting point.
-- **[Templated variables][2]**: Enrich your notifications with dynamic content.
-- **[Conditional logic][3]**: Adapt alert messages across different test types and workflows.
-- **[Advanced usage][4]**: Structure complex messages using handlebars templating.
-- **[Custom notification display](#display-custom-notifications-message)**: Show only your custom message without default enriched content.
-- **[Simulate notifications](#simulate-notifications)**: Test your notification messages by sending simulated notifications.
-
 ## Pre-filled monitor messages
 
-Synthetic Monitoring provides pre-filled messages with metadata such as:
+Synthetic Monitoring provides pre-filled messages with no setup required; each alert includes the test name, failing locations, a link to the result, and metadata such as:
 
 - Test name
 - Monitor ID
@@ -37,17 +31,21 @@ Synthetic Monitoring provides pre-filled messages with metadata such as:
 - Last failed test run information
 - Time the test started failing
 
-These values appear by default in most notification channels. You can override or extend the message using [templating][2].
+These values appear automatically in most notification channels without any configuration.
 
-   {{< img src="/synthetics/browser_tests/browser_tests_pre-filled.png" alt="Synthetic Monitoring monitor section, highlighting the pre-filled monitor messages" style="width:100%;" >}}
+{{< img src="/synthetics/browser_tests/browser_tests_pre-filled.png" alt="Synthetic Monitoring monitor section, highlighting the pre-filled monitor messages" style="width:100%;" >}}
 
-**Examples**:
+To include additional test result data beyond the defaults, use handlebar formatting in your monitor message.
+
+{{< collapse-content title="Pre-filled examples by test type" level="h4" >}}
 
 {{< tabs >}}
 {{% tab "API request response" %}}
 
+Display the HTTP request and response details from an API test, including the method, URL, headers, body, status code, and any redirects.
+
 **Request:**
-```handlebars
+```shell
 {{#with synthetics.attributes.result.request}}
 We made a {{method}} request to `{{{url}}}`{{#if headers}} with the following headers:
 
@@ -65,7 +63,7 @@ We made a {{method}} request to `{{{url}}}`{{#if headers}} with the following he
 ```
 
 **Response:**
-```handlebars
+```shell
 {{#with synthetics.attributes.result.response}}
 We received an HTTP {{httpVersion}} response with a {{statusCode}} status code{{#if headers}} with the following headers:
 
@@ -91,7 +89,9 @@ The body's size was {{eval "humanize_bytes(bodySize)"}}{{#if body}} and containe
 {{% /tab %}}
 {{% tab "WebSocket tests" %}}
 
-```handlebars
+Display WebSocket test details including the handshake status, request message, and response close status with reason.
+
+```shell
 {{! Websocket request and response details }}
 {{#with synthetics.attributes.result}}
 {{#if handshake }}
@@ -117,10 +117,10 @@ and the response closed with status code {{response.close.statusCode}} and reaso
 {{% /tab %}}
 {{% tab "API tests variables" %}}
 
-Iterate over extracted variables for API tests:
+List all config and extracted variables from an API test, showing their names, types, and values. Obfuscated values are hidden for security.
 
 **Config variables:**
-```handlebars
+```shell
 {{#each synthetics.attributes.result.variables.config}}
 * **Name:** {{name}}
   Type: {{type}}
@@ -129,7 +129,7 @@ Iterate over extracted variables for API tests:
 ```
 
 **Extracted Variables (Only visible for recovery notifications):**
-```handlebars
+```shell
 {{#each synthetics.attributes.result.variables.extracted}}
 * **Name:** {{name}}
   Global Variable ID: {{id}}
@@ -140,9 +140,9 @@ Iterate over extracted variables for API tests:
 {{% /tab %}}
 {{% tab "Multistep API variables" %}}
 
-Iterate over steps extracting variables for multistep API tests:
+Loop through all steps in a multistep API test and display variables extracted by each successful step.
 
-```handlebars
+```shell
 {{! List extracted variables across all successful steps }}
 # Extracted Variables
 {{#each synthetics.attributes.result.steps}}
@@ -156,9 +156,9 @@ Iterate over steps extracting variables for multistep API tests:
 {{% /tab %}}
 {{% tab "Browser and mobile test variables" %}}
 
-Iterate over steps extracting variables for browser and mobile tests:
+Loop through all steps in a browser or mobile test and display variables extracted by steps that use the "Extract variable" action.
 
-```handlebars
+```shell
 {{#each synthetics.attributes.result.steps}}
   {{#if extractedValue}}
   * **Name**: {{extractedValue.name}}
@@ -170,11 +170,14 @@ Iterate over steps extracting variables for browser and mobile tests:
 {{% /tab %}}
 {{< /tabs >}}
 
+{{< /collapse-content >}}
+
 ## Display custom notifications message
 
 Synthetic Monitoring notifications support the ability to display **only the custom notification message** in alert notifications, hiding all default enriched content such as query details, tags, screenshots, and footers.
 
 By default, all monitors include enriched details in the alert message. This may include:
+
 - Test metadata
 - Failing step information
 - Screenshots
@@ -183,22 +186,36 @@ By default, all monitors include enriched details in the alert message. This may
 
 ### Notification presets
 
-You can select from the following options to hide or display the information relevant to you:
+Use presets to control which content appears:
 
-| Preset            | Description                                                                 |
-|-------------------|-----------------------------------------------------------------------------|
-| `show_all`        | (Default) Includes all enriched data and metadata.                          |                                |
-| `hide_handles`    | Hides `@notification` handles (for example, `@slack-channel`).                         |
-| `hide_all`        | Hides all additional content except for the custom message and event link.  |
+<table style="table-layout: fixed;">
+  <thead>
+    <tr>
+      <th style="width: 140px;">Preset</th>
+      <th>What it shows</th>
+      <th>When to use it</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="width: 120px;"><code>show_all</code></td>
+      <td>All enriched data, metadata, and handles</td>
+      <td>Default; best for email and ticketing channels</td>
+    </tr>
+    <tr>
+      <td style="width: 120px;"><code>hide_handles</code></td>
+      <td>All enriched data, but hides <code>@notification</code> handles (for example, <code>@slack-channel</code>)</td>
+      <td>Prevents duplicate pages when a channel is already notified at the monitor level</td>
+    </tr>
+    <tr>
+      <td style="width: 120px;"><code>hide_all</code></td>
+      <td>Custom message and event link only</td>
+      <td>Chat channels where you control the full message format</td>
+    </tr>
+  </tbody>
+</table>
 
 {{< img src="/monitors/monitor_types/synthetic_monitoring/content_in_notification.png" alt="Synthetic Monitoring monitor page, highlighting the content displayed in notification drop-down" style="width:80%;" >}}
-
-### Example
-
-| Channel | `show_all`  | `hide_all` |
-|---------|--------------------|---------------------|
-| Email   | Full test detail, screenshot, step info | Only custom message and event link |
-| Slack   | Rich content + preview of failed run | Custom message only |
 
 See [Monitor Notifications][5] for more information.
 
@@ -238,6 +255,13 @@ Simulated notifications include **[TEST]** in their subject lines and use a defa
   - **Recovery notifications**: Simulated success data
 - All users receive the same simulated data regardless of their test setup.
 
+## Next steps
+
+- [Template variables][2]: Include HTTP status codes, extracted variables, or step details in your messages.
+- [Conditional alerting][3]: Change the message by test type, failure reason, or recovery state.
+- [Advanced notifications][4]: Use Handlebars helpers to loop over steps or build structured messages.
+- [Understanding Synthetic Monitor Alerting][6]: How notifications evaluate test results and trigger alerts.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -247,5 +271,7 @@ Simulated notifications include **[TEST]** in their subject lines and use a defa
 [3]: /synthetics/notifications/conditional_alerting
 [4]: /synthetics/notifications/advanced_notifications
 [5]: /monitors/notifications
+[6]: /synthetics/guide/how-synthetics-monitors-trigger-alerts/
+
 
 

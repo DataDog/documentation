@@ -311,7 +311,7 @@ If the false positive was caused by a unique setting in your service, you can ad
 
 If the attack is ongoing, you might want to disrupt the attacker as you investigate further. Disrupting the attacker slows down the attack and reduce the number of compromised accounts. 
 
-<div class="alert alert-info"> <strong>Note</strong>: This is a common step, although you might want to skip this step in the following circumstances:
+<div class="alert alert-info">This is a common step, although you might want to skip this step in the following circumstances:
 
 * The accounts have little immediate value. You can block these post-compromise without causing harm.  
 * You want to maintain maximum visibility into the attack by avoiding any action that alerts the attacker to the investigation and causes them to change tactics.

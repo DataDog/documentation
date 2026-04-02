@@ -214,15 +214,11 @@ Para configurar la recopilación de métricas de Database Monitoring para un Age
          instance_endpoint: '<AWS_INSTANCE_ENDPOINT>'
          region: '<REGION>'
 
-       ## Required for Postgres 9.6: Uncomment these lines to use the functions created in the setup
-       # pg_stat_statements_view: datadog.pg_stat_statements()
-       # pg_stat_activity_view: datadog.pg_stat_activity()
-
        ## Optional: Connect to a different database if needed for `custom_queries`
        # dbname: '<DB_NAME>'
    ```
 
-<div class="alert alert-warning"><strong>Importante</strong>: Utiliza aquí el endpoint de la instancia de Aurora, no el endpoint del clúster.</div>
+<div class="alert alert-danger">Utiliza el endpoint de la instancia Aurora aquí, y no el endpoint del clúster.</div>
 
 2. [Reinicia el Agent][2].
 
@@ -439,14 +435,11 @@ instances:
     tags:
     - "dbinstanceidentifier:<DB_INSTANCE_NAME>"
 
-    ## Required: For Postgres 9.6, uncomment these lines to use the functions created in the setup
-    # pg_stat_statements_view: datadog.pg_stat_statements()
-    # pg_stat_activity_view: datadog.pg_stat_activity()
 ```
 
 ### Configuración con anotaciones de servicios de Kubernetes
 
-En lugar de montar un archivo, puedes declarar la configuración de instancia como un servicio de Kubernetes. Para configurar este check para un Agent que se ejecuta en Kubernetes, crea un servicio en el mismo espacio de nombres que el Datadog Cluster Agent:
+En lugar de montar un archivo, puedes declarar la configuración de la instancia como servicio Kubernetes. Para configurar este check para un Agent que se ejecuta en Kubernetes, crea un servicio con la siguiente sintaxis:
 
 #### Anotaciones de Autodiscovery v2
 
@@ -459,7 +452,7 @@ metadata:
     tags.datadoghq.com/env: '<ENV>'
     tags.datadoghq.com/service: '<SERVICE>'
   annotations:
-    ad.datadoghq.com/<CONTAINER_NAME>.checks: |
+    ad.datadoghq.com/service.checks: |
       {
         "postgres": {
           "init_config": <INIT_CONFIG>,
@@ -480,7 +473,7 @@ metadata:
             }
           ]
         }
-      }      
+      }
 spec:
   ports:
   - port: 5432

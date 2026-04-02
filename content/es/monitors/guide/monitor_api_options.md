@@ -1,4 +1,7 @@
 ---
+description: Referencia completa para las opciones de configuración de la API monitores
+  (noun), incluidos los parámetros comunes, los permisos, las alertas de anomalías
+  y las alertas de métricas.
 title: Opciones de la API Monitor
 ---
 

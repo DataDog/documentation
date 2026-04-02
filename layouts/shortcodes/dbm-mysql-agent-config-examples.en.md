@@ -67,7 +67,7 @@ instances:
 
 ### Collecting schemas
 
-<div class="alert alert-warning">Datadog Agent v7.65+ is required for MySQL schema collection.</div>
+<div class="alert alert-danger">Datadog Agent v7.65+ is required for MySQL schema collection.</div>
 
 To enable this feature, use the `collect_schemas` option. See the sample [mysql.d/conf.yaml](https://github.com/DataDog/integrations-core/blob/master/mysql/datadog_checks/mysql/data/conf.yaml.example) for more details.
 

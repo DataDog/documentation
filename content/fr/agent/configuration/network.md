@@ -29,7 +29,7 @@ title: Trafic réseau
 
 ## Présentation
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Le trafic est toujours généré par l'Agent et envoyé à Datadog. Aucune session n'est jamais initiée par Datadog et transmise à l'Agent.
 </div>
 
@@ -218,7 +218,7 @@ Toutes les `ip-ranges` doivent être ajoutées à votre liste d'inclusion. Bien 
 
 ## Ports ouverts
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 L'intégralité du trafic sortant est protégé par SSL et envoyé via TCP ou UDP.
 <br><br>
 Pour garantir que seules vos applications ou sources réseau de confiance puissent accéder à l'Agent, utilisez une règle de pare-feu ou une restriction réseau similaire. L'absence de contrôle d'accès permet à des entités malveillantes d'effectuer un grand nombre d'opérations invasives, notamment de générer des traces et métriques dans votre compte Datadog, ou encore d'obtenir des informations sur votre configuration et sur vos services.
@@ -423,7 +423,7 @@ Les ports du récepteur APM et de DogStatsD sont respectivement indiqués aux se
 # receiver_port: 8126
 {{< /code-block >}}
 
-<div class="alert alert-warning">SI vous souhaitez modifier la valeur du port DogStatsD ou du port du récepteur APM, vous devez également modifier le port correspondant dans la configuration de la bibliothèque de tracing APM. Consultez les informations sur la configuration des ports dans la <a href="/tracing/trace_collection/library_config/">documentation relative à la configuration de la bibliothèque pour votre langage</a>.</div>
+<div class="alert alert-danger">SI vous souhaitez modifier la valeur du port DogStatsD ou du port du récepteur APM, vous devez également modifier le port correspondant dans la configuration de la bibliothèque de tracing APM. Consultez les informations sur la configuration des ports dans la <a href="/tracing/trace_collection/library_config/">documentation relative à la configuration de la bibliothèque pour votre langage</a>.</div>
 
 ## Utilisation d'un proxy
 

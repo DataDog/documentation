@@ -463,7 +463,7 @@ Datadog App and API Protection Service Extension Docker 이미지는 다음 구�
 | `DD_AGENT_HOST`                        | `localhost`   | Datadog Agent가 실행되는 호스트 이름입니다.                         |
 | `DD_TRACE_AGENT_PORT`                  | `8126`        | 트레이스 수집용 Datadog Agent 포트입니다.                       |
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>참고:</strong> GCP Service Extensions 통합은 Datadog Go Tracer에 기반하여 만들어졌습니다. 트레이서와 동일한 릴리스 프로세스를 따르며, Docker 이미지에 해당 트레이스 버전 태그가 지정됩니다.
 </div>
 

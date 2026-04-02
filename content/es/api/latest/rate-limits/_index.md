@@ -1,6 +1,6 @@
 ---
 title: Límites de tasa
-type: documentación
+type: api
 ---
 
 {{< h2 >}}Límites de tasa{{< /h2 >}}
@@ -18,8 +18,8 @@ En cuanto a la política de límite de tasa de API:
 - El límite de tasa de envío es de `250,000` eventos por minuto y organización.
 - Los límites de tasa para los endpoints varían y se incluyen en los encabezados que se detallan a continuación. Estos pueden ampliarse bajo demanda.
 
-<div class="alert alert-warning">
- La lista no incluye todos los límites de tasa de las API de Datadog. Si experimentas limitaciones de tasa, ponte en contacto con <a href="https://www.datadoghq.com/support/">el soporte</a> para obtener más información sobre las API que utilizas y sus límites.</div>
+<div class="alert alert-danger">
+La lista anterior no incluye todos los límites de velocidad de las APIs de Datadog. Si experimentas limitaciones de velocidad, ponte en contacto con <a href="https://www.datadoghq.com/support/">el servicio de asistencia</a> para obtener más información sobre las APIs que utilizas y sus límites.</div>
 
 | Cabeceras de límites de tasa      | Descripción                                              |
 | ----------------------- | -------------------------------------------------------- |

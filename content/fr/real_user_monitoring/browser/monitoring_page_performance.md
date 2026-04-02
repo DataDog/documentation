@@ -36,7 +36,7 @@ Vous pouvez accéder aux données de télémétrie de performance de vos vues da
 
 ## Durées des événements et signaux Web essentiels
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   Les données de télémétrie Core Web Vitals de Datadog sont disponibles à partir du package <a href="https://github.com/DataDog/browser-sdk">@datadog/browser-rum</a> v2.2.0+.
 </div>
 

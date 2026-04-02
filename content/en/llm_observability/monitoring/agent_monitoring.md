@@ -22,12 +22,7 @@ For your agentic applications, LLM Observability allows you to:
 
 - Monitor error rate, latency build up, or cost 
 - Visualize agent decisions, such as tools used or agent a task was handed off to
-- Trace and troubleshoot end-to-end requests of agent executions 
-
-
-{{< callout url="http://www.datadoghq.com/product-preview/llm-observability" btn_hidden="false" header="Join the Preview!">}}
-LLM Observability's Graph-based Visualization for Agentic Systems is in Preview.
-{{< /callout >}}
+- Trace and troubleshoot end-to-end requests of agent executions
 
 ## Further reading
 

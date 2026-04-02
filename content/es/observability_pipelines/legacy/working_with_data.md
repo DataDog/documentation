@@ -22,7 +22,7 @@ title: (LEGACY) Trabajar con datos
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Observability Pipelines no está disponible en el sitio US1-FED Datadog.</div>
+<div class="alert alert-danger">Observability Pipelines no está disponible en el sitio US1-FED Datadog.</div>
 {{< /site-region >}}
 
 ## Información general

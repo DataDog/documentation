@@ -10,7 +10,7 @@ title: Go コンパイル タイム インスツルメンテーションのト�
 
 このガイドでは、 [Orchestrion][1] が管理するビルドのトラブル シューティング方法を説明します。これらの手順は、ビルド プロセスに関するインサイトを Datadog が収集するのに役立ち、不具合報告の支援にもなります。
 
-<div class="alert alert-warning"> 生成されたファイルには、ソース コードや依存関係名など、機微なプロジェクト情報が含まれる場合があります。このような情報を公開で共有することに懸念がある場合は、Datadog サポートに連絡し、非公開でデータを共有してください。 </div>
+<div class="alert alert-danger"> 生成されたファイルには、ソース コードや依存関係名など、機微なプロジェクト情報が含まれる場合があります。このような情報を公開で共有することに懸念がある場合は、Datadog サポートに連絡し、非公開でデータを共有してください。 </div>
 
 ## ワーク ツリーの保持
 
@@ -42,7 +42,7 @@ Orchestrion のログ出力は、 `ORCHESTRION_LOG_LEVEL` 環境変数または 
 | `DEBUG` | 詳細なロギング |
 | `TRACE` | 極めて詳細なロギング |
 
-<div class="alert alert-warning"> <code>ORCHESTRION_LOG_LEVEL</code> を <code>DEBUG</code> または <code>TRACE</code> レベルに設定すると、ビルド パフォーマンスに大きな影響を与える可能性があります。通常運用ではこれらの設定は推奨されません。 </div>
+<div class="alert alert-danger"> <code>ORCHESTRION_LOG_LEVEL</code> を <code>DEBUG</code> または <code>TRACE</code> レベルに設定すると、ビルド パフォーマンスに大きな影響を与える可能性があります。通常運用ではこれらの設定は推奨されません。 </div>
 
 ### ログ ファイル出力
 

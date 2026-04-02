@@ -21,10 +21,6 @@ Una función de Lambda puede iniciar muchos entornos de ejecución de forma simu
 
 Las distribuciones ofrecen las agregaciones `avg`, `sum`, `max`, `min` y `count` de forma predeterminada. En la página Metric Summary (Resumen de métrica), puedes habilitar agregaciones percentiles (p50, p75, p90, p95, p99) y también [gestionar etiquetas][3]. Para monitorizar la distribución de un tipo de métrica gauge, utiliza `avg` tanto para las [agregaciones temporales como espaciales][4]. Para monitorizar la distribución de un tipo de métrica count, utiliza `sum` tanto para las [agregaciones temporales como espaciales][4]. Lee la guía [Consulta al gráfico][5] para saber cómo funcionan las agregaciones temporales y espaciales.
 
-### Envío de métricas históricas
-
-Para enviar métricas históricas (solo se permiten marcas de tiempo dentro de los últimos 20 minutos), debes utilizar el [Datadog Forwarder](#with-the-datadog-forwarder), ya que la [Datadog Lambda Extension](#with-the-datadog-lambda-extension) solo puede enviar métricas con la marca de tiempo actual debido a la limitación del protocolo de StatsD.
-
 ### Envío de muchos puntos de datos
 
 Cuando se utiliza el Forwarder para enviar muchos puntos de datos para la misma métrica y el mismo conjunto de etiquetas, por ejemplo, dentro de un gran bucle `for`, puede haber un impacto notable en el rendimiento de Lambda y también un impacto en el coste de CloudWatch. Para evitar la sobrecarga, puedes agregar los puntos de datos en tu aplicación. Consulta el siguiente ejemplo de Python:
@@ -123,19 +119,19 @@ import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayV2ProxyRequestEvent;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayV2ProxyResponseEvent;
 
-// importar el compilador del cliente statsd
+// import the statsd client builder
 import com.timgroup.statsd.NonBlockingStatsDClientBuilder;
 import com.timgroup.statsd.StatsDClient;
 
 public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, APIGatewayV2ProxyResponseEvent> {
 
-    // instanciar el cliente statsd
+    // instantiate the statsd client
     private static final StatsDClient Statsd = new NonBlockingStatsDClientBuilder().hostname("localhost").build();
 
     @Override
     public APIGatewayV2ProxyResponseEvent handleRequest(APIGatewayV2ProxyRequestEvent request, Context context) {
 
-        // enviar una métrica de distribución
+        // submit a distribution metric
         Statsd.recordDistributionValue("my.custom.java.metric", 1, new String[]{"tag:value"});
 
         APIGatewayV2ProxyResponseEvent response = new APIGatewayV2ProxyResponseEvent();
@@ -144,7 +140,7 @@ public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, AP
     }
 
     static {
-        // asegurarse de que todas las métricas se descargan antes del cierre
+        // ensure all metrics are flushed before shutdown
         Runtime.getRuntime().addShutdownHook(new Thread() {
             @Override
             public void run() {

@@ -112,7 +112,7 @@ Now that you have a working Java application, configure it to enable tracing.
 
    This automatically instruments the application with Datadog services.
 
-   <div class="alert alert-warning"><strong>Note</strong>: The flags on these sample commands, particularly the sample rate, are not necessarily appropriate for environments outside this tutorial. For information about what to use in your real environment, read <a href="#tracing-configuration">Tracing configuration</a>.</div>
+   <div class="alert alert-warning">The flags on these sample commands, particularly the sample rate, are not necessarily appropriate for environments outside this tutorial. For information about what to use in your real environment, read <a href="#tracing-configuration">Tracing configuration</a>.</div>
 
 3. [Universal Service Tags][10] identify traced services across different versions and deployment environments so that they can be correlated within Datadog, and so you can use them to search and filter. The three environment variables used for Unified Service Tagging are `DD_SERVICE`, `DD_ENV`, and `DD_VERSION`. For applications deployed with Docker, these environment variables can be added within the Dockerfile or the `docker-compose` file.
    For this tutorial, the `all-docker-compose.yaml` file already has these environment variables defined:
@@ -141,7 +141,7 @@ Add the Datadog Agent in the services section of your `all-docker-compose.yaml` 
    ```yaml
      datadog-agent:
        container_name: datadog-agent
-       image: "gcr.io/datadoghq/agent:latest"
+       image: "registry.datadoghq.com/agent:latest"
        pid: host
        environment:
          - DD_API_KEY=<DD_API_KEY_HERE>
@@ -339,7 +339,7 @@ The sample project includes a second application called `calendar` that returns 
    ENTRYPOINT ["java" , "-javaagent:../dd-java-agent.jar", "-Ddd.trace.sample.rate=1", "-jar" , "target/calendar-0.0.1-SNAPSHOT.jar"]
    ```
 
-   <div class="alert alert-warning"><strong>Note</strong>: Again, the flags, particularly the sample rate, are not necessarily appropriate for environments outside this tutorial. For information about what to use in your real environment, read <a href="#tracing-configuration">Tracing configuration</a>.</div>
+   <div class="alert alert-warning">Again, the flags, particularly the sample rate, are not necessarily appropriate for environments outside this tutorial. For information about what to use in your real environment, read <a href="#tracing-configuration">Tracing configuration</a>.</div>
 
 3. Open `docker/all-docker-compose.yaml` and uncomment the environment variables for the `calendar` service to set up the Agent host and Unified Service Tags for the app and for Docker:
 

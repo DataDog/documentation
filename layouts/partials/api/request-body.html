@@ -70,7 +70,7 @@
                       </ul>
 
                       <div class="tab-content">
-                          <div role="tabpanel" class="tab-pane active js-tab-model" id="{{ $operationid | lower }}-request-model">
+                          <div role="tabpanel" class="tab-pane active js-tab-model" id="{{ $operationid | lower }}-request-model" data-title="{{ i18n "model" }}">
 
                               {{ if in $html "schema-table" }}
                                   {{ $html | safeHTML }}
@@ -95,7 +95,7 @@
                               {{ end }}
 
                           </div>
-                          <div role="tabpanel" class="tab-pane js-tab-example" id="{{ $operationid | lower }}-{{ $version }}-request-example">
+                          <div role="tabpanel" class="tab-pane js-tab-example" id="{{ $operationid | lower }}-{{ $version }}-request-example" data-title="{{ i18n "example" }}">
                               <div class="code-snippet-wrapper">
 
                                 {{ $fileNonExistCount := 0 }}

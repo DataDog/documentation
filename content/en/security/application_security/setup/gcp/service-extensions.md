@@ -7,6 +7,9 @@ aliases:
   - /security/application_security/threats_detection/gcp-service-extensions
   - /security/application_security/setup/gcp-service-extensions
   - /security/application_security/setup/gcp/alb
+  - /security/application_security/setup/standalone/gcp-service-extensions
+  - /security/application_security/threats/setup/standalone/gcp-service-extensions
+  - /security/application_security/setup/threat_detection/gcp-service-extensions
 further_reading:
     - link: 'https://github.com/DataDog/dd-trace-go/tree/main/contrib/envoyproxy/go-control-plane/cmd/serviceextensions'
       tag: "Source Code"
@@ -85,7 +88,7 @@ To set up the App and API Protection Service Extension in GCP, use the Google Cl
     5. Optionally, enable the `fail_open` to still allow the traffic to pass through if the service extension fails or times out.
 
     <br>
-    <div class="alert alert-warning">
+    <div class="alert alert-danger">
       <strong>Note:</strong> By default, if the service extension fails or times out, the proxy will return a 5xx error. To prevent this, enable the <code>fail_open</code> setting. When enabled, request or response processing continues without error even if the extension fails, ensuring your application remains available.
     </div>
 
@@ -497,7 +500,7 @@ Configure the container to send traces to your Datadog Agent using the following
 
 The App and API Protection GCP Service Extensions integration is built on top of the [Datadog Go Tracer][6] and inherits all of its environment variables. See [Configuring the Go Tracing Library][7] and [App and API Protection Library Configuration][8].
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>Note:</strong> As the App and API Protection GCP Service Extensions integration is built on top of the Datadog Go Tracer, it generally follows the same release process as the tracer, and its Docker images are tagged with the corresponding tracer version (for example, <code>v2.2.2</code>). In some cases, early release versions might be published between official tracer releases, and these images are tagged with a suffix such as <code>-docker.1</code>.
 </div>
 

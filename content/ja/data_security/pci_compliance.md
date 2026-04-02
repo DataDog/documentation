@@ -1,51 +1,34 @@
 ---
-disable_toc: false
 further_reading:
-- link: https://www.datadoghq.com/blog/datadog-pci-compliance-log-management-apm/
-  tag: ブログ
-  text: Datadog から PCI に準拠したログ管理と APM を発表
+- link: https://trust.datadoghq.com/
+  tag: Datadog Trust Center
+  text: Datadog のセキュリティ体制を確認し、セキュリティ ドキュメントを参照できます
 title: PCI DSS 準拠
 ---
 
-{{% site-region region="us3,us5,eu,ap1,gov" %}}
-<div class="alert alert-warning">
-APM およびログ管理における PCI DSS 準拠は、<a href="/getting_started/site/">US1 サイト</a>の Datadog 組織でのみ利用可能です。
-</div>
-{{% /site-region %}}
-
-{{% site-region region="us" %}}
-<div class="alert alert-warning">
-APM およびログ管理における PCI DSS 準拠は、<a href="/getting_started/site/">US1 サイト</a>の Datadog 組織でのみ利用可能です。
-</div>
-
 ## 概要
 
-Payment Card Industry (PCI) データセキュリティ基準 (DSS) には、すべての加盟店、サービスプロバイダー、および金融機関を対象とした厳格な監視およびデータセキュリティの要件が定められています。これらの要件を満たすために、組織は PCI で規制されるデータと規制されないデータを別のアプリケーションに分離して監視する必要がありました。
+Payment Card Industry (PCI) Data Security Standard (DSS) は、加盟店、サービス プロバイダ、金融機関のすべてに対して、厳格な監視とデータ セキュリティ要件を課しています。これらの要件を満たすため、多くの組織では、PCI の規制対象データ (例えばカード会員データ) と非規制データを、監視やコンプライアンスの目的に応じて別々のアプリケーションに分離します。
 
-Datadog は、PCI に準拠したログ管理およびアプリケーションパフォーマンス監視 (APM) の機能を [US1 サイト][1]内で提供しており、PCI の規制対象かどうかにかかわらず、すべてのログを 1 か所に集めることができます。開始方法については、[PCI 準拠の Datadog 組織をセットアップする](#set-up-a-pci-compliant-Datadog-organization)を参照してください。
+**Datadog のツールとポリシーは PCI v4.0 に準拠しています**。Datadog の環境の全体像と、関連する PCI-DSS コントロールにおける顧客責任との関係を把握するため、[Datadog Trust Center][1] から顧客責任マトリクス (Customer Responsibility Matrix) と準拠証明書 (AoC) をダウンロードしてください。
 
-## PCI 準拠の Datadog 組織をセットアップする
+Datadog の準拠証明書 (AoC) は、サービス プロバイダとして Connected PCI 環境を維持するために整備しているツールとポリシーを示すものです。Datadog プラットフォームは、カード会員データ環境 (CDE) への接続を Connected PCI 環境としてサポートしますが、カード会員データ (CHD) を保存・処理・転送するための CDE そのものとしては機能しません。
+CHD が Datadog プラットフォームに入り込まないようにする責任は、お客様にあります。
 
-{{< tabs >}}
+## PCI 準拠のための推奨ツール
 
-{{% tab "ログ管理" %}}
+PCI 準拠の維持を支援するため、**Datadog は次のツールとプロセスの利用を強く推奨します**。
+- [**Sensitive Data Scanner**][2]: 機密性の高いカード会員データを検出・分類し、マスキングします 
+- [**Audit Trail**][3]: 詳細な監査イベントを最大 90 日間検索・分析し、長期保管やアーカイブに活用します 
+- [**File Integrity Monitoring**][4]: 重要なファイルやディレクトリの変更を監視します 
+- [**Cloud Security Management**][5]: 業界ベンチマークやその他の統制の要件に対する適合状況を追跡します 
 
-{{% pci-logs %}}
-
-{{% /tab %}}
-
-{{% tab "APM" %}}
-
-{{% pci-apm %}}
-
-{{% /tab %}}
-
-{{< /tabs >}}
-
-[1]: /ja/getting_started/site/
-
-{{% /site-region %}}
-
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://trust.datadoghq.com/?itemUid=53e1508c-665e-45a8-9ce0-03fdf9ae1efb&source=click
+[2]: /ja/security/sensitive_data_scanner/
+[3]: /ja/account_management/audit_trail/
+[4]: /ja/security/workload_protection/
+[5]: /ja/security/cloud_security_management/#track-your-organizations-health

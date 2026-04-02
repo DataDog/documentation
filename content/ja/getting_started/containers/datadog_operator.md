@@ -66,7 +66,7 @@ title: Datadog Operator の概要
 
 ### 単一コンテナでの Agent 実行
 
-<div class="alert alert-warning">Operator v1.4.0 以降で利用可能</div>
+<div class="alert alert-danger">Operator v1.4.0 以降で利用可能</div>
 
 デフォルトでは、Datadog Operator は複数の Agent コンテナを実行するポッドを持つ Agent DaemonSet を作成します。Datadog Operator v1.4.0 では、Agent を単一コンテナで実行できる設定が導入されました。単一コンテナ内のすべての Agent に特権を付与しないようにするため、この機能は `system-probe` または `security-agent` が不要な場合にのみ適用されます。詳細は Agent Data Security ページの [非特権ユーザーとしての実行][7] を参照してください。
 

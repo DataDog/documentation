@@ -25,7 +25,7 @@ Synthetic 브라우저 테스트에는 Real User Monitoring SDK가 포함되어 
 
 ## RUM 애플리케이션에서 Synthetic 데이터 허용
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 대상 애플리케이션이 이미 RUM으로 계측된 경우 신서틱(Synthetic) 테스트 설정내에서 RUM 데이터 수집을 활성화하면 안 됩니다. 이렇게 하면 예기치 않은 동작이 발생할 수 있습니다.</div>
 
 브라우저 테스트 기록에서 **Start Recording** 버튼 위의 **Collect RUM Data on**을 클릭하고 데이터를 수집할 애플리케이션을 선택합니다. 기록 및 테스트 구성을 저장한 후 RUM은 테스트 데이터를 수집하고 브라우저 테스트 실행에서 세션 기록을 생성합니다.

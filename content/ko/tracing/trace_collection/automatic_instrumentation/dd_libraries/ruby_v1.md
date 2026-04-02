@@ -3,7 +3,7 @@ dependencies:
 - https://github.com/DataDog/dd-trace-rb/blob/release/docs/legacy/GettingStarted-v1.md
 title: (레거시) Ruby 애플리케이션 추적
 ---
-<div class="alert alert-warning">이 문서는 <code>ddtrace</code> gem v1.x용입니다. <code>datadog</code> gem v2.0 이상을 사용하는 경우 최신 <a href="https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/dd_libraries/ruby/">Ruby 애플리케이션 추적</a> 설명서를 참조하세요.
+<div class="alert alert-danger">이 문서는 <code>ddtrace</code> gem v1.x용입니다. <code>datadog</code> gem v2.0 이상을 사용하는 경우 최신 <a href="https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/dd_libraries/ruby/">Ruby 애플리케이션 추적</a> 설명서를 참조하세요.
 
 `ddtrace`는 Datadog의 Ruby용 추적 클라이언트입니다. 웹 서버와 데이터베이스, 마이크로서비스에서 요청을 추적하여 개발자가 병목 현상과 문제가 되는 요청에 대한 높은 가시성을 확보할 수 있도록 합니다.
 

@@ -104,16 +104,16 @@ Para configurar el muestreo probabilístico, realiza una de las siguientes accio
         hash_seed: 22 #A seed used for the hash algorithm. This must match other agents and OTel
   ```
 
-**Si utilizas una configuración mixta de bibliotecas de muestreo de Datadog y SDK de OTel**:
+**Si utilizas una configuración mixta de librerías de muestreo de Datadog y SDK de OTel**:
 
-- El muestreo probabilístico se aplicará a tramos (spans) procedentes tanto de Datadog como de bibliotecas de rastreo de OTel.
+- El muestreo probabilístico se aplicará a tramos (spans) procedentes tanto de Datadog como de librerías de rastreo de OTel.
 - Si envías tramos (spans) tanto a las instancias del Datadog Agent **como** a OTel Collector, configura la misma inicialización entre el Datadog Agent (`DD_APM_PROBABILISTIC_SAMPLER_HASH_SEED`) y OTel Collector (`hash_seed`) para garantizar un muestreo coherente.
 
-<div class="alert alert-warning"><code>DD_OTLP_CONFIG_TRACES_PROBABILISTIC_SAMPLER_SAMPLING_PERCENTAGE</code> está obsoleto y se ha sustituido por <code>DD_APM_PROBABILISTIC_SAMPLER_SAMPLING_PERCENTAGE</code>.</div>
+<div class="alert alert-danger"><code>DD_OTLP_CONFIG_TRACES_PROBABILISTIC_SAMPLER_SAMPLING_PERCENTAGE</code> está obsoleto y se ha sustituido por <code>DD_APM_PROBABILISTIC_SAMPLER_SAMPLING_PERCENTAGE</code>.</div>
 
 #### Consideraciones
 
-- El muestreador probabilístico ignorará la prioridad de muestreo de tramos (spans) que se configuren en el nivel de la biblioteca de rastreo. Como resultado, el muestreo probabilístico es **incompatible con el [muestreo basado en la fase inicial][16]**. Esto significa que el muestreo probabilístico puede omitir las trazas (traces) muestreadas sobre la base de la fase inicial.
+- El muestreador probabilístico ignorará la prioridad de muestreo de tramos (spans) que se configuren en el nivel de la librería de rastreo. Como resultado, el muestreo probabilístico es **incompatible con el [muestreo basado en la fase inicial][16]**. Esto significa que el muestreo probabilístico puede omitir las trazas (traces) muestreadas sobre la base de la fase inicial.
 - Los tramos (spans) no capturados por el muestreador probabilístico aún pueden capturarse con los [muestreadores de errores y eventos raros][12].
 - Para un muestreo coherente, todos los rastreadores deben admitir los [ID de trazas (traces) de 128 bits][17].
 

@@ -1,5 +1,6 @@
 ---
 title: Scope metric-based SLO queries
+description: Configure scoping and filtering for metric-based SLO queries using compatible semantic tags in dashboard widgets.
 disable_toc: false
 further_reading:
 - link: "/dashboards/widgets/slo/"
@@ -49,5 +50,5 @@ The SLO widget filters the SLO metric queries by those additional tags for your 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /dashboards/widgets/slo/
-[2]: /service_management/service_level_objectives/metric/
+[2]: /service_level_objectives/metric/
 [3]: /dashboards/template_variables/

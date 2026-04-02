@@ -1,33 +1,20 @@
 ---
+app_id: capistrano
 categories:
-- automation
-- configuration & deployment
-- developer tools
-- orchestration
-- provisioning
+- automatización
+- configuración y despliegue
+- herramientas de desarrollo
+- orquestación
+- suministro
 custom_kind: integración
-dependencies: []
-description: Captura y busca despliegues, y superponlos en gráficas de métricas clave.
-doc_link: https://docs.datadoghq.com/integrations/capistrano/
-draft: false
-git_integration_title: capistrano
-has_logo: true
-integration_id: capistrano
-integration_title: Capistrano
-integration_version: ''
-is_public: true
-manifest_version: '1.0'
-name: capistrano
-public_title: Integración de Datadog y Capistrano
-short_description: Captura y busca despliegues, y superponlos en gráficas de métricas
-  clave.
-version: '1.0'
+description: Capistrano es un DSL de Ruby para ejecutar scripts en varios servidores,
+  principalmente para desplegar aplicaciones web.
+media: []
+title: Capistrano
 ---
-
-<!--  EXTRAÍDO DE https://github.com/DataDog/dogweb -->
 ## Información general
 
-[Capistrano][1] es una herramienta de automatización y despliegue de servidores remotos escrita en Ruby.
+[Capistrano](http://capistranorb.com) es una herramienta de automatización y despliegue de servidores remotos escrita en Ruby.
 
 Instala la integración Capistrano de Datadog para:
 
@@ -59,9 +46,9 @@ set :datadog_api_key, "${your_api_key}"
 
 Después de haber configurado tu `Capfile` y de haber ejecutado al menos una tarea de Capistrano:
 
-1. Navega hasta tu [flujo de eventos][2].
-2. Ingresa `sources:capistrano` en la barra de búsqueda o haz clic en 'Capistrano' en la lista FROM de integraciones de la izquierda.
-3. Ingresa `priority:all` en la barra de búsqueda o haz clic en 'All' en la lista PRIORITY de la izquierda. Las tareas de Capistrano se envían con prioridad baja de manera predeterminada, por lo que no aparecen en la vista de flujo de eventos predeterminada (prioridad normal).
+1. Ve a tu [flujo de eventos](https://app.datadoghq.com/event/stream).
+1. Ingresa `sources:capistrano` en la barra de búsqueda o haz clic en 'Capistrano' en la lista FROM de integraciones de la izquierda.
+1. Ingresa `priority:all` en la barra de búsqueda o haz clic en 'All' en la lista PRIORITY de la izquierda. Las tareas de Capistrano se envían con prioridad baja de manera predeterminada, por lo que no aparecen en la vista de flujo de eventos predeterminada (prioridad normal).
 
 {{< img src="integrations/capistrano/capistranoevents.mp4" video="true" >}}
 
@@ -79,10 +66,6 @@ La integración Capistrano no incluye eventos.
 
 La integración Capistrano no incluye checks de servicio.
 
-## Resolución de problemas
+## Solucionar problemas
 
-¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][3].
-
-[1]: http://capistranorb.com
-[2]: https://app.datadoghq.com/event/stream
-[3]: https://docs.datadoghq.com/es/help/
+¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog](https://docs.datadoghq.com/help/).

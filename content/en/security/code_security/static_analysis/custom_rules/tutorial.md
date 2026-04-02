@@ -1,6 +1,6 @@
 ---
 description: Learn how to define a custom rule within Datadog.
-title: Static Code Analysis Custom Rule Tutorial
+title: Static Code Analysis Custom Rule Creation Tutorial
 ---
 
 
@@ -99,17 +99,20 @@ function visit(query, filename, code) {
 ## Step 3: Use the rule
 
 To use the rule, do one of the following:
- - Create a `static-analysis.datadog.yaml` file at the root of your repository with the ruleset.
+ - Create a `code-security.datadog.yaml` file at the root of your repository with the ruleset.
  - Add the rule in [your settings][3], either for the org-wide or repo-level configuration.
 
-A valid configuration for using this ruleset (and no other ruleset) look like this:
+A valid configuration for using this ruleset (and no other ruleset) looks like the following:
 
 ```yaml
-rulesets:
-  - tutorial
+schema-version: v1.0
+sast:
+  use-default-rulesets: false
+  use-rulesets:
+    - tutorial
 ```
 
-{{< img src="/security/code_security/custom_rule_tutorial_configuration.png" alt="Configuration with Custom Rule" style="width:100%;" >}}
+{{< img src="/security/code_security/custom_rule_tutorial_configuration2.png" alt="Configuration with Custom Rule" style="width:100%;" >}}
 
 [1]: https://app.datadoghq.com/ci/code-analysis/static-analysis/custom-rulesets
 [2]: https://tree-sitter.github.io/tree-sitter/using-parsers/queries/index.html

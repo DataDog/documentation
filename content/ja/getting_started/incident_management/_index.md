@@ -37,7 +37,7 @@ title: Incident Management の概要
 ---
 
 {{% site-region region="gov" %}}
-<div class="alert alert-warning">選択した Datadog サイト ({{< region-param key="dd_site_name" >}}) では Incident Management は利用できません。</div>
+<div class="alert alert-danger">選択した Datadog サイト ({{< region-param key="dd_site_name" >}}) では Incident Management は利用できません。</div>
 {{% /site-region %}}
 
 ## 概要

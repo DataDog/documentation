@@ -1,4 +1,6 @@
 ---
+description: 2024 年 10 月 1 日の hourly および summary usage API の変更について、新しい RUM キーや非推奨となる
+  Indexed Logs のグルーピングを解説する移行ガイド。
 title: Hourly Usage と Summary Usage API での Indexed Logs と RUM の移行
 ---
 

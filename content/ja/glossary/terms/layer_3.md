@@ -1,7 +1,8 @@
 ---
+id: layer_3
 core_product:
 - network device monitoring
-- network performance monitoring
+- クラウドネットワークモニタリング
 synonyms:
 - ネットワーク層
 title: レイヤー 3

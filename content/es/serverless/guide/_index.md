@@ -11,12 +11,13 @@ title: Guías de Serverless Monitoring
 
 ## Guías generales sobre las aplicaciones serverless
 
-{{< whatsnext desc="Best practices for monitoring your serverless applications" >}}
-    {{< nextlink href="/serverless/guide/connect_invoking_resources" >}}Mayor visibilidad de los recursos que invocan funciones de Lambda{{< /nextlink >}}
-    {{< nextlink href="/serverless/guide/serverless_warnings" >}}Advertencias de las aplicaciones serverless{{< /nextlink >}}
-    {{< nextlink href="/serverless/guide/serverless_tagging" >}}Etiquetado serverless{{< /nextlink >}}
-    {{< nextlink href="/serverless/guide/agent_configuration" >}}Configuración del Agent{{< /nextlink >}}
-    {{< nextlink href="/serverless/guide/opentelemetry" >}}Serverless y OpenTelemetry{{< /nextlink >}}
+{{< whatsnext desc="Prácticas recomendadas para la monitorización de tus aplicaciones sin servidor" >}}
+    {{< nextlink href="/serverless/guide/connect_invoking_resources" >}}Visibilidad detallada de los recursos que invocan funciones Lambda{{< /nextlink >}}
+    {{< nextlink href="/serverless/guide/serverless_warnings" >}}Advertencias sin servidor{{< /nextlink >}}
+    {{< nextlink href="/serverless/guide/serverless_tagging" >}}Etiquetado sin servidor{{< /nextlink >}}
+    {{< nextlink href="/serverless/guide/agent_configuration" >}}Configuración de Agent{{< /nextlink >}}
+    {{< nextlink href="/serverless/guide/opentelemetry" >}}Sin servidor y OpenTelemetry{{< /nextlink >}}
+    {{< nextlink href="/serverless/guide/disable_serverless" >}}Desactivar la monitorización sin servidor{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Azure App Service y Container Apps" >}}

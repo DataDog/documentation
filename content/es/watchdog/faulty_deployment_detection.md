@@ -1,4 +1,7 @@
 ---
+description: Detecta despliegues de código defectuosos en cuestión de minutos mediante
+  el análisis automático del rendimiento de nuevos despliegues de Watchdog en comparación
+  con las versiones anteriores.
 title: Detección automática de una implementación con errores
 ---
 

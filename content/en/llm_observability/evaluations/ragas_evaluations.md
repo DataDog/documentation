@@ -3,7 +3,7 @@ title: Ragas Evaluations
 aliases:
  - /llm_observability/ragas_evaluations
 further_reading:
-    - link: '/llm_observability/evaluations/submit_evaluations'
+    - link: '/llm_observability/evaluations/external_evaluations'
       tag: 'Documentation'
       text: 'Submit Evaluations'
 ---
@@ -14,7 +14,7 @@ further_reading:
 
 For a simplified setup guide, see [Ragas Quickstart][7].
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Datadog recommends that you use sampling for Ragas evaluations. These LLM-as-a-judge evaluations are powered by your LLM provider's account. Evaluations are automatically traced and sent to Datadog. These traces contain LLM spans, which may affect your LLM Observability billing. See <a href="#sampling">Sampling</a>.
 </div>
 

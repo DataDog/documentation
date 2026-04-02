@@ -56,8 +56,8 @@ Además, la [ruta de red][5], una función de CNM, está disponible en Vista pre
 {{< whatsnext desc="Esta sección incluye los siguientes temas:">}}
     {{< nextlink href="network_monitoring/cloud_network_monitoring/setup" >}}<u>Configuración</u>: configura el Agent para recopilar datos de red.{{< /nextlink >}}
     {{< nextlink href="network_monitoring/cloud_network_monitoring/network_analytics" >}}<u>Análisis de red</u>: grafica tus datos de red entre cada cliente y servidor disponible.{{< /nextlink >}}
-    {{< nextlink href="network_monitoring/cloud_network_monitoring/network_map" >}}<u>Mapa de redes</u>: asigna tus datos de red entre tus etiquetas.{{< /nextlink >}}
-    {{< nextlink href="monitors/types/cloud_network_monitoring/" >}}<u>Monitores recomendados </u>: configura los monitores de CNM recomendados.{{< /nextlink >}}
+    {{< nextlink href="network_monitoring/cloud_network_monitoring/network_map" >}}<u>Mapa de red</u>: asigna tus datos de red entre tus etiquetas.{{< /nextlink >}}
+    {{< nextlink href="monitors/types/cloud_network_monitoring/#common-monitors" >}}<u>Monitores comunes</u>: configura monitores de CNM comunes.{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Referencias adicionales

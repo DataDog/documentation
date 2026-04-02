@@ -117,7 +117,7 @@ La integración de Commvault y Datadog recupera datos para los siguientes endpoi
 
 - Dashboard
 - Almacenamiento
-    - Operaciones de biblioteca
+    - Operaciones de librería
     - Operaciones de grupos de almacenamiento
     - Almacenamiento local
 - Monitorización

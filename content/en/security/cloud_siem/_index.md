@@ -6,6 +6,12 @@ aliases:
   - /security_platform/cloud_siem/
   - /security/cloud_siem/security_home/
 further_reading:
+- link: "https://www.datadoghq.com/blog/observability-pipelines-mssp"
+  tag: "Blog"
+  text: "Simplify log collection and aggregation for MSSPs with Datadog Observability Pipelines"
+- link: "https://www.datadoghq.com/blog/cloud-siem-enterprise-security"
+  tag: "Blog"
+  text: "Datadog Cloud SIEM: Driving innovation in security operations"
 - link: "https://www.datadoghq.com/blog/track-issues-datadog-case-management/"
   tag: "Blog"
   text: "Proactively track, triage, and assign issues with Datadog Case Management"
@@ -68,7 +74,7 @@ Cloud SIEM embeds both cloud and on-premises telemetry directly into security wo
 
 ### Flexible cost control for security data
 
-As your organization scales, controlling the ingestion cost of security logs without compromising visibility is critical. Cloud SIEM is integrated with Datadog Log Management so you can choose the appropriate retention and querying capability for  your security logs. This flexibility helps you balance cost efficiency with your threat detection needs. 
+As your organization scales, controlling the ingestion cost of security logs without compromising visibility is critical. Cloud SIEM is integrated with Datadog Log Management so you can choose the appropriate retention and querying capability for  your security logs. This flexibility helps you balance cost efficiency with your threat detection needs.
 
 Store logs using one of the available options:
 - [Standard indexing][6] for logs that need to be queried frequently with the most compute.
@@ -91,7 +97,7 @@ Build searches in the Log Explorer using facets or by clicking fields directly i
 
 If you don't already have a Datadog account, sign up for a [free trial][2]. After you log in to your Datadog account:
 
-1. Navigate to [Cloud SIEM][3].
+1. Navigate to [Cloud SIEM][12].
 1. Click **Enable Cloud SIEM**.
 1. Follow the onboarding steps.
 
@@ -260,7 +266,7 @@ See which rules are the noisiest by calculating the percentage of signals that a
 
 [1]: https://securitylabs.datadoghq.com/
 [2]: https://www.datadoghq.com/product/cloud-siem/
-[3]: https://app.datadoghq.com/security/home?
+[3]: https://app.datadoghq.com/security/siem/home?
 [4]: /getting_started/security/cloud_siem/
 [5]: /security/cloud_siem/investigate_security_signals/#case-management
 [6]: /logs/log_configuration/indexes
@@ -269,3 +275,4 @@ See which rules are the noisiest by calculating the percentage of signals that a
 [9]: /security/cloud_siem/content_packs/
 [10]: /logs/explorer/search_syntax/
 [11]: /logs/explorer/
+[12]: https://app.datadoghq.com/security/siem/intro

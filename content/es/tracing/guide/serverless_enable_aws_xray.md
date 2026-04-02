@@ -36,7 +36,7 @@ El [complemento de Datadog Serverless Framework][3] activa automáticamente X-Ra
 
 [Empieza a utilizar el complemento Serverless Framework][5] y [lee la documentación][3].
 
-Por último, [instala e importa la biblioteca de cliente de X-Ray en tu función de Lambda](#installing-the-x-ray-client-libraries).
+Por último, [instala e importa la librería de cliente de X-Ray en tu función de Lambda](#installing-the-x-ray-client-libraries).
 
 #### Configuración manual
 
@@ -47,21 +47,21 @@ Si no utilizas Serverless Framework para desplegar tu aplicación serverless, si
 3. En la pestaña **Logs/Tracing** (Logs/Rastreo), selecciona **Enable X-Ray Tracing** (Activar rastreo de X-Ray).
 4. Para que estos cambios surtan efecto, ve a **Resources** (Recursos) en el panel de navegación izquierdo y selecciona **Actions** (Acciones) y haz clic en **Deploy API** (Desplegar API).
 
-**Nota: Datadog Lambda Layer y la biblioteca de cliente incluyen el SDK de X-Ray como dependencia, por lo que no es necesario instalarlo explícitamente en los proyectos.
+**Nota: Datadog Lambda Layer y la librería de cliente incluyen el SDK de X-Ray como dependencia, por lo que no es necesario instalarlo explícitamente en los proyectos.
 
-Por último, [instala e importa la biblioteca de cliente de X-Ray en tu función de Lambda](#installing-the-x-ray-client-libraries).
+Por último, [instala e importa la librería de cliente de X-Ray en tu función de Lambda](#installing-the-x-ray-client-libraries).
 
 #### Instalación de las bibliotecas de cliente de X-Ray
 
-La biblioteca de cliente de X-Ray ofrece información sobre tus solicitudes HTTP a APIs y sobre las llamadas a DynamoDB, S3, MySQL y PostgreSQL (autoalojado, Amazon RDS y Amazon Aurora), SQS y SNS.
+La librería de cliente de X-Ray ofrece información sobre tus solicitudes HTTP a APIs y sobre las llamadas a DynamoDB, S3, MySQL y PostgreSQL (autoalojado, Amazon RDS y Amazon Aurora), SQS y SNS.
 
-Instala la biblioteca, impórtalo en tus proyectos de Lambda y parchea los servicios que desees instrumentar.
+Instala la librería, impórtalo en tus proyectos de Lambda y parchea los servicios que desees instrumentar.
 
 {{< programming-lang-wrapper langs="nodejs,python,go,ruby,java,.NET" >}}
 
 {{< programming-lang lang="nodejs" >}}
 
-Instala la biblioteca de rastreo de X-Ray
+Instala la librería de rastreo de X-Ray
 
 ```bash
 
@@ -110,7 +110,7 @@ Para más información sobre la configuración, la creación de subsegmentos y e
 
 {{< programming-lang lang="python" >}}
 
-Instala la biblioteca de rastreo de X-Ray:
+Instala la librería de rastreo de X-Ray:
 
 ```bash
 pip install aws-xray-sdk

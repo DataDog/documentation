@@ -1,20 +1,21 @@
 ---
+description: Autodiscovery を利用してコンテナ化された Kubernetes 環境でインテグレーションを設定するための、詳細な構成例。
 further_reading:
 - link: /agent/kubernetes/log/
   tag: ドキュメント
   text: アプリケーションログの収集
 - link: /agent/kubernetes/apm/
   tag: ドキュメント
-  text: アプリケーショントレースの収集
+  text: アプリケーション トレースを収集する
 - link: /agent/kubernetes/prometheus/
   tag: ドキュメント
-  text: Prometheus メトリクスの収集
+  text: Prometheus メトリクスを収集する
 - link: /agent/guide/autodiscovery-management/
   tag: ドキュメント
-  text: データ収集をコンテナのサブセットのみに制限
+  text: データ収集を特定のコンテナのみに制限する
 - link: /agent/kubernetes/tag/
   tag: ドキュメント
-  text: コンテナから送信された全データにタグを割り当て
+  text: コンテナから出力されるすべてのデータにタグを付与する
 title: 'オートディスカバリー: シナリオ & 例'
 ---
 
@@ -134,14 +135,14 @@ spec:
 
 **docker-compose.yaml**
 
-Datadog Agent v7.36+ の場合:
+Datadog Agent v7.36 以上の場合:
 
 ```yaml
 labels:
   com.datadoghq.ad.checks: '{"redisdb": {"instances": [{"host": "%%host%%","port":"6379","password":"%%env_REDIS_PASSWORD%%"}], "logs": [{"type": "file", "path": "/var/log/redis_6379.log", "source": "redis", "service": "redis_service"}]}}'
 ```
 
-古いバージョンの Agent の場合:
+旧バージョンの Agent の場合:
 
 ```yaml
 labels:
@@ -152,8 +153,8 @@ labels:
 ```
 
 {{% /tab %}}
-{{% tab "ローカルファイル" %}}
-1. ホストに `conf.d/redisdb.d/conf.yaml` ファイルを作成します。
+{{% tab "Local file" %}}
+1. ホストに `conf.d/redisdb.d/conf.yaml` ファイルを作成します:
 
    ```yaml
    ad_identifiers:
@@ -171,7 +172,7 @@ labels:
        service: "redis_service"
    ```
 
-2. ホスト の `conf.d/` フォルダーをコンテナ化 Agent の `conf.d` フォルダーにマウントします。
+2. ホストの `conf.d/` フォルダーをコンテナ化された Agent の `conf.d` フォルダーにマウントします。
 {{% /tab %}}
 {{% tab "ConfigMap" %}}
 
@@ -222,7 +223,7 @@ data:
 {{% /tab %}}
 {{% tab "Key-value store" %}}
 
-以下の etcd コマンドは、カスタム `password` パラメーターを使用して Redis インテグレーションテンプレートを作成します。
+次の etcd コマンドは `password` パラメーターを含む Redis インテグレーション テンプレートを作成します:
 
 ```conf
 etcdctl mkdir /datadog/check_configs/redis
@@ -297,8 +298,8 @@ datadog:
 {{< /tabs >}}
 
 これらの例はすべて、[オートディスカバリー テンプレート変数][7]を使用しています。
-- `%%host%%` には、コンテナの IP が動的に設定されます。
-- `%%env_REDIS_PASSWORD%%` は Agent プロセスから見た `REDIS_PASSWORD` という名前の環境変数を参照します。 
+- `%%host%%` はコンテナの IP で動的に置き換えられます。
+- `%%env_REDIS_PASSWORD%%` は Agent プロセスから見える `REDIS_PASSWORD` という環境変数を参照します。
 
 ## すべての Apache コンテナを対象とした HTTP チェック付きの Apache インテグレーション
 
@@ -414,13 +415,13 @@ spec:
 
 **Dockerfile** 
 
-Datadog Agent v7.36+ の場合:
+Datadog Agent v7.36 以上の場合:
 
 ```yaml
 LABEL "com.datadoghq.ad.checks"='{"apache": {"instances": [{"apache_status_url": "http://%%host%%/server-status?auto", "min_collection_interval": 30}]}, "http_check":{"instances": [{"name":"my_website_1","url":"http://%%host%%/website_1","timeout":1},{"name":"my_website_2","url":"http://%%host%%/website_2","timeout":1}]}}'
 ```
 
-それより前のバージョンの Agent の場合:
+旧バージョンの Agent の場合:
 ```dockerfile
 LABEL "com.datadoghq.ad.check_names"='["apache", "http_check"]'
 LABEL "com.datadoghq.ad.init_configs"='[{},{}]'
@@ -428,7 +429,7 @@ LABEL "com.datadoghq.ad.instances"='[[{"apache_status_url": "http://%%host%%/ser
 ```
 
 {{% /tab %}}
-{{% tab "ローカルファイル" %}}
+{{% tab "Local file" %}}
 
 * ホストに `conf.d/` フォルダーと `conf.d/apache.d` フォルダーを作成します。
 * ホストの `conf.d/apache.d/conf.yaml` の下にカスタムオートディスカバリー構成を追加します。
@@ -617,9 +618,9 @@ datadog:
 {{< /tabs >}}
 
 これらの例はすべて、[オートディスカバリー テンプレート変数][7]を使用しています。
-- `%%host%%` には、コンテナの IP が動的に設定されます。
+- `%%host%%` はコンテナの IP で動的に置き換えられます。
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

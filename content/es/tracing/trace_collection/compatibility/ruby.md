@@ -21,25 +21,26 @@ La biblioteca de Datadog Trace de Ruby es de código abierto. Consulta el reposi
 
 ### Intérpretes compatibles de Ruby 
 
-| Tipo  | Documentación              | Versión   | Tipo de soporte técnico              | Compatibilidad con versiones de Gem |
+<!-- Asegúrate de que todos los comentarios de "# TODO: Ruby 3.5 - " estén abordados antes de incluir 3.5 en nuestros documentos públicos de soporte -->
+| Tipo  | Documentación              | Versión   | Tipo de soporte              | Soporte de la versión del Gem |
 |-------|----------------------------|-----------|---------------------------|---------------------|
-| MRI   | https://www.ruby-lang.org/ | 3.4       | [última](#support-latest) | Última              |
-|       |                            | 3.3       | [última](#support-latest) | Última              |
-|       |                            | 3.2       | [última](#support-latest) | Última              |
-|       |                            | 3.1       | [última](#support-latest) | Última              |
-|       |                            | 3.0       | [última](#support-latest) | Última              |
-|       |                            | 2.7       | [última](#support-latest) | Última              |
-|       |                            | 2.6       | [última](#support-latest) | Última              |
-|       |                            | 2.5       | [última](#support-latest) | Último              |
+| MRI   | https://www.ruby-lang.org/ | 3.4       | [Más reciente](#support-latest) | Más reciente              |
+|       |                            | 3.3       | [Más reciente](#support-latest) | Más reciente              |
+|       |                            | 3.2       | [Más reciente](#support-latest) | Más reciente              |
+|       |                            | 3.1       | [Más reciente](#support-latest) | Más reciente              |
+|       |                            | 3.0       | [Más reciente](#support-latest) | Más reciente              |
+|       |                            | 2.7       | [Más reciente](#support-latest) | Más reciente              |
+|       |                            | 2.6       | [Más reciente](#support-latest) | Más reciente              |
+|       |                            | 2.5       | [Más reciente](#support-latest) | Más reciente              |
 |       |                            | 2.4       | [EOL](#support-eol)       | < 2.0.0             |
 |       |                            | 2.3       | [EOL](#support-eol)       | < 2.0.0             |
 |       |                            | 2.2       | [EOL](#support-eol)       | < 2.0.0             |
 |       |                            | 2.1       | [EOL](#support-eol)       | < 2.0.0             |
 |       |                            | 2.0       | [EOL](#support-eol)       | < 0.50.0            |
 |       |                            | 1.9       | [EOL](#support-eol)       | < 0.27.0            |
-| JRuby | https://www.jruby.org      | 9.4       | [última](#support-latest) | Último              |
-|       |                            | 9.3       | [última](#support-latest) | Último              |
-|       |                            | 9.2.21.0+ | [última](#support-latest) | Último              |
+| JRuby | https://www.jruby.org      | 9.4       | [Más reciente](#support-latest) | Más reciente              |
+|       |                            | 9.3       | [Más reciente](#support-latest) | Más reciente              |
+|       |                            | 9.2.21.0+ | [Más reciente](#support-latest) | Más reciente              |
 
 ### Servidores web compatibles
 
@@ -49,7 +50,7 @@ La biblioteca de Datadog Trace de Ruby es de código abierto. Consulta el reposi
 | Unicorn   | https://bogomips.org/unicorn/     | 4.8+ / 5.1+  | [última](#support-latest) |
 | Passenger | https://www.phusionpassenger.com/ | v5.0 o posterior         | [última](#support-latest) |
 
-### Marcos de rastreo compatibles
+### Frameworks de rastreo compatibles
 
 | Tipo        | Documentación                                   | Versión | Tipo de compatibilidad        | Compatibilidad con versiones de gem |
 |-------------|-------------------------------------------------|---------|---------------------|---------------------|
@@ -60,7 +61,7 @@ La biblioteca de Datadog Trace de Ruby es de código abierto. Consulta el reposi
 
 | Sistema operativo            | Tipo de compatibilidad                            | Versión del paquete |
 |---------------|-----------------------------------------|-----------------|
-| Linux x86_64  | [última](#support-latest)               | Última          |
+| Linux x86_64  | [última](#support-latest)               | Último          |
 | Linux aarch64 | [última](#support-latest)               | Último          |
 | macOS         | Solo entornos de desarrolladores                    | Último          |
 | MS Windows    | [No implementada](#support-unimplemented) | Último          |
@@ -90,7 +91,7 @@ Para consultar una lista de integraciones disponibles y sus opciones de configur
 | Active Record              | `active_record`            | `>= 4.0`                                    | `>= 4.0`                                    | [Enlace][8]        | [Enlace](https://github.com/rails/rails/tree/master/activerecord)              |
 | Active Support             | `active_support`           | `>= 4.0`                                    | `>= 4.0`                                    | [Enlace][9]        | [Enlace](https://github.com/rails/rails/tree/master/activesupport)             |
 | AWS                        | `aws`                      | `>= 2.0`                                    | `>= 2.0`                                    | [Enlace][10]       | [Enlace](https://github.com/AWS/AWS-sdk-Ruby)                                  |
-| Concurrent Ruby            | `concurrent_ruby`          | `>= 0.9`                                    | `>= 0.9`                                    | [Enlace][11]       | [Enlace](https://github.com/Ruby-moneda/actualidad-Ruby)                  |
+| Concurrent Ruby            | `concurrent_ruby`          | `>= 0.9`                                    | `>= 0.9`                                    | [Enlace][11]       | [Enlace](https://github.com/ruby-concurrency/concurrent-ruby)                  |
 | Dalli                      | `dalli`                    | `>= 2.0`                                    | `>= 2.0`                                    | [Enlace][12]       | [Enlace](https://github.com/petergoldstein/dalli)                              |
 | DelayedJob                 | `delayed_job`              | `>= 4.1`                                    | `>= 4.1`                                    | [Enlace][13]       | [Enlace](https://github.com/collectiveidea/delayed_job)                        |
 | Elasticsearch              | `elasticsearch`            | `>= 1.0`                                    | `>= 1.0`                                    | [Enlace][14]       | [Enlace](https://github.com/elastic/elasticsearch-Ruby)                        |
@@ -129,6 +130,7 @@ Para consultar una lista de integraciones disponibles y sus opciones de configur
 | Sneakers                   | `sneakers`                 | `>= 2.12.0`                                 | `>= 2.12.0`                                 | [Enlace][46]       | [Enlace](https://github.com/jondot/sneakers)                                   |
 | Stripe                     | `stripe`                   | `>= 5.15.0`                                 | `>= 5.15.0`                                 | [Enlace][47]       | [Enlace](https://github.com/stripe/stripe-Ruby)                                |
 | Sucker Punch               | `sucker_punch`             | `>= 2.0`                                    | `>= 2.0`                                    | [Enlace][48]       | [Enlace](https://github.com/brandonhilkert/sucker_punch)                       |
+| WaterDrop                  | `waterdrop`                | `>= 2.8.8.rc1`                              | `>= 2.8.8.rc1`                              | [Enlace][55]       | [Enlace](https://github.com/karafka/waterdrop) |
 
 ### Política de soporte técnico
 

@@ -1,4 +1,6 @@
 ---
+description: Solucionar errores de resolución de nombres de host en implementaciones
+  en contenedores de Datadog Agent en Kubernetes, Docker, y plataformas en la nube.
 title: Detección de nombres de host en contenedores
 ---
 
@@ -44,7 +46,7 @@ rules:
       - get
 ```
 
-El error más común que impide la conexión a la API de Kubelet es la verificación del certificado TLS de Kubelet. En muchas distribuciones de Kubernetes el certificado Kubelet o bien:
+El error más común que impide la conexión a la API de Kubelet es la verificación del certificado TLS de Kubelet. En muchas distribuciones de Kubernetes, el certificado de Kubelet presenta una de dos limitaciones comunes:
 * No está firmado por la CA clúster.
 * No contiene un SAN correspondiente a la dirección a la que se puede acceder.
 

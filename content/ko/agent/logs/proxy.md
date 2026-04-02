@@ -13,7 +13,7 @@ title: 로그를 위한 TCP Agent 프록시
 ---
 
 {{% site-region region="us3,eu,us5,gov,ap1,ap2" %}}
-<div class="alert alert-warning">
+<div class="alert alert-danger">
     < region-param key="dd_site_name" > }} 사이트에서는 TCP를 사용할 수 없습니다. 자세한 내용은 <a href="/도움/도움말/">지원팀에</a> 문의하세요.
 </div>
 {{% /site-region %}}

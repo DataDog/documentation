@@ -1,5 +1,6 @@
 ---
 title: Tutorial - Enabling Tracing for a Python Application on the Same Host as the Datadog Agent
+description: Step-by-step tutorial to enable distributed tracing for a Python application running on the same host as the Datadog Agent.
 
 further_reading:
 - link: /tracing/trace_collection/library_config/python/

@@ -167,7 +167,7 @@ Agent는 루트 다중 테넌트 컨테이너 데이터베이스(CDB)에만 연�
 
 데이터베이스 모니터링은 Oracle 데이터베이스에 대한 커스텀 쿼리를 지원합니다. 사용 가능한 설정 옵션에 대해 자세히 알아보려면 [conf.yaml.example][4]을 참조하세요.
 
-<div class="alert alert-warning">커스텀 쿼리를 실행하면 Oracle에서 부과하는 추가 비용 또는 수수료가 발생할 수 있습니다.</div>
+<div class="alert alert-danger">커스텀 쿼리를 실행하면 Oracle에서 부과하는 추가 비용 또는 수수료가 발생할 수 있습니다.</div>
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
 [2]: https://app.datadoghq.com/dash/integration/30990/dbm-oracle-database-overview

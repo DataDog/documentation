@@ -21,8 +21,8 @@ assets:
     source_type_id: 10432
     source_type_name: RapDev Infoblox
   monitors:
-    Infoblox DHCP Monitor: assets/monitors/infoblox_dhcp_monitor.json
-    Infoblox DNS Monitor: assets/monitors/infoblox_dns_monitor.json
+    DHCP is not working: assets/monitors/infoblox_dhcp_monitor.json
+    DNS has failed: assets/monitors/infoblox_dns_monitor.json
 author:
   homepage: https://www.rapdev.io
   name: RapDev
@@ -32,7 +32,7 @@ author:
 categories:
 - マーケットプレイス
 - セキュリティ
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -111,4 +111,4 @@ Network Identity Operating System (NIOS) は Infoblox のコアネットワー�
 [6]: mailto:support@rapdev.io
 [7]: mailto:sales@rapdev.io
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/rapdev-infoblox" target="_blank">こちらをクリック</a>してください。
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。利用するには、<a href="https://app.datadoghq.com/marketplace/app/rapdev-infoblox" target="_blank">Marketplace でこのアプリケーションを購入してください</a>。

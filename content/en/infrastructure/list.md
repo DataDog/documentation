@@ -17,7 +17,7 @@ further_reading:
 
 ## Overview
 
-The Infrastructure list shows all of your hosts monitored by Datadog with activity during the last two hours (default) and up to one week. Search your hosts or group them by tags. In Datadog, navigate to [**Infrastructure > Hosts**][10] to view the Infrastructure list. This list should not be used to estimate your infrastructure host billing. See the [billing][11] page to learn about billing.
+The Infrastructure List gives you a live inventory of all hosts reporting to Datadog through the Agent or cloud integrations. By default, it shows hosts with activity in the last two hours, but you can extend the view to cover up to one week. Search your hosts or group them by tags. In Datadog, navigate to [**Infrastructure > Hosts**][10] to view the Infrastructure list. This list should not be used to estimate your infrastructure host billing. See the [billing][11] page to learn about billing.
 
 ## Hosts
 
@@ -159,7 +159,7 @@ for host in infra['rows']:
 [5]: /logs/
 [6]: /agent/configuration/agent-configuration-files/
 [7]: /api/v1/hosts/#get-the-total-number-of-active-hosts
-[8]: /developers/guide/query-the-infrastructure-list-via-the-api/
+[8]: /extend/guide/query-the-infrastructure-list-via-the-api/
 [9]: https://github.com/DataDog/Miscellany/tree/master/get_hostname_agentversion
 [10]: https://app.datadoghq.com/infrastructure
 [11]: https://docs.datadoghq.com/account_management/billing/

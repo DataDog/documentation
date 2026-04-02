@@ -1,4 +1,7 @@
 ---
+description: Explora diferentes casos de uso y estrategias de muestreo de trazas para
+  optimizar el volumen de ingesta y mantener al mismo tiempo la capacidad de resolución
+  de problemas.
 further_reading:
 - link: /tracing/guide/trace_ingestion_volume_control/
   tag: Guía
@@ -47,7 +50,7 @@ La ingesta de las trazas completas de transacciones garantiza la visibilidad sob
 
 Las trazas completas pueden ser ingeridas con mecanismos de [muestreo basado en la fase inicial][4]: la decisión de mantener o descartar la traza se determina a partir del primer tramo de la traza, la *fase inicial* (head), cuando se crea la traza. Esta decisión se propaga a través del contexto de la solicitud a los siguientes servicios de descarga.
 
-{{< img src="/tracing/guide/ingestion_sampling_use_cases/head-based-sampling.png" alt="Muestreo basado en la fase inicial" style="width:100%;" >}}
+{{< img src="/tracing/guide/ingestion_sampling_use_cases/head-based-sampling.png" alt="Muestro basado en la fase inicial" style="width:100%;" >}}
 
 Para decidir qué trazas conservar y cuáles descartar, el Datadog Agent calcula [frecuencias de muestreo predeterminadas][5] para cada servicio para aplicar en la creación de trazas, basándose en el tráfico de la aplicación:
 - Para aplicaciones con poco tráfico, se aplica una frecuencia de muestreo del 100%.
@@ -95,7 +98,7 @@ Las trazas con tramos de error suelen ser síntomas de fallos del sistema. Mante
 
 Además de las trazas de muestreo basado en la fase inicial, puedes aumentar la tasa de muestreo de errores para que cada Agent conserve tramos de errores adicionales, aunque las trazas relacionadas no se conserven mediante el muestreo basado en la fase inicial.
 
-{{< img src="/tracing/guide/ingestion_sampling_use_cases/error-tramos (spans)-sampling.png" alt="Muestreo de errores" style="width:100%;" >}}
+{{< img src="/tracing/guide/ingestion_sampling_use_cases/error-spans-sampling.png" alt="Muestreo de errores" style="width:100%;" >}}
 
 **Notas:**
 - Es posible que los fragmentos distribuidos de las partes de trazas no se ingieran, ya que el muestreo se realiza localmente a nivel del Datadog Agent.
@@ -146,7 +149,7 @@ El servicio backend `web-store` está llamando a una base de datos Mongo múltip
 {{< img src="/tracing/guide/ingestion_sampling_use_cases/single-span-sampling3.png" alt="Muestreo de tramos de base de datos" style="width:100%;" >}}
 
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

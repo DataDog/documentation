@@ -442,11 +442,16 @@ apm_config:
       ## Enables a Luhn checksum check to reduce false positives.
       ## This option increases CPU usage.
       luhn: false
+      ## A list of known safe keys to skip obfuscation.
+      keep_values:
+       - some_key_to_keep
 ```
 - `credit_cards.enabled`: Set to false to disable this obfuscator.
   - Environment Variable: `DD_APM_OBFUSCATION_CREDIT_CARDS_ENABLED`
 - `credit_cards.luhn`: Set to true to enable a Luhn checksum check that validates numbers to eliminate false positives. This increases CPU usage and the performance cost of this check.
   - Environment Variable: `DD_APM_OBFUSCATION_CREDIT_CARDS_LUHN`
+- `credit_cards.keep_values`: Set to a list of known safe keys to skip credit card obfuscation.
+  - Environment Variable: `DD_APM_OBFUSCATION_CREDIT_CARDS_KEEP_VALUES`
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -659,7 +664,7 @@ Some tracing libraries provide an interface for processing spans to manually mod
 
 {{< site-region region="gov" >}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Instrumentation telemetry is not available for the {{< region-param key="dd_site_name" >}} site, but is enabled by default. To avoid errors, {{< region-param key="dd_site_name" >}} users should disable this capability by setting <code>DD_INSTRUMENTATION_TELEMETRY_ENABLED=false</code> on their application and <code>DD_APM_TELEMETRY_ENABLED=false</code> on their Agent.
 </div>
 

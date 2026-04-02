@@ -9,11 +9,11 @@ assets:
     metrics:
       check: azure.analysisservices_servers.command_pool_job_queue_length
       metadata_path: metadata.csv
-      prefix: azure.servicios_analisis_servidores
+      prefix: azure.analysisservices_servers
     service_checks:
       metadata_path: assets/service_checks.json
     source_type_id: 276
-    source_type_name: Análisis Azure servicios
+    source_type_name: Servicios de Azure Analysis
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -28,12 +28,12 @@ display_on_public_website: true
 draft: false
 git_integration_title: azure_analysis_services
 integration_id: azure-analysisservices
-integration_title: Análisis Azure servicios
+integration_title: Servicios de Azure Analysis
 integration_version: ''
 is_public: true
 manifest_version: 2.0.0
 name: azure_analysis_services
-public_title: Análisis Azure servicios
+public_title: Servicios de Azure Analysis
 short_description: Rastrea las métricas clave de Azure Analysis Services.
 supported_os: []
 tile:
@@ -47,7 +47,7 @@ tile:
   media: []
   overview: README.md#Overview
   support: README.md#Support
-  title: Análisis Azure servicios
+  title: Servicios de Azure Analysis
 ---
 
 <!--  EXTRAÍDO DE https://github.com/DataDog/integrations-internal-core -->
@@ -66,7 +66,7 @@ Si aún no lo has hecho, primero configura la [integración Microsoft Azure][1].
 ## Datos recopilados
 
 ### Métricas
-{{ get-metrics-from-git "azure-analysisservices" }}
+{{< get-metrics-from-git "azure_analysis_services" >}}
 
 
 ### Eventos

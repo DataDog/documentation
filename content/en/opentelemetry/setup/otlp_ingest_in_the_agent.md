@@ -33,14 +33,14 @@ To get started, you first [instrument your application][3] with OpenTelemetry SD
 
 Read the OpenTelemetry instrumentation documentation to understand how to point your instrumentation to the Agent. The `receiver` section described below follows the [OpenTelemetry Collector OTLP receiver configuration schema][5].
 
-<div class="alert alert-warning"><strong>Note</strong>: The supported setup is an ingesting Agent deployed on every OpenTelemetry-data generating host. You cannot send OpenTelemetry telemetry from collectors or instrumented apps running one host to an Agent on a different host. But, provided the Agent is local to the collector or SDK instrumented app, you can set up multiple pipelines.</div>
+<div class="alert alert-warning">The supported setup is an ingesting Agent deployed on every OpenTelemetry-data generating host. You cannot send OpenTelemetry telemetry from collectors or instrumented apps running one host to an Agent on a different host. But, provided the Agent is local to the collector or SDK instrumented app, you can set up multiple pipelines.</div>
 
 ## Enabling OTLP Ingestion on the Datadog Agent
 
 {{< tabs >}}
 {{% tab "Host" %}}
 
-OTLP ingestion is off by default, and you can turn it on by updating your `datadog.yaml` file configuration or by setting environment variables. The following `datadog.yaml` configurations enable endpoints on the default ports.
+OTLP ingestion is off by default, and you can turn it on by updating your `datadog.yaml` file configuration or by setting environment variables. The following `datadog.yaml` configurations enable endpoints on the default ports. When enabled, metrics and traces ingestion is on by default. Logs ingestion is disabled by default to prevent unexpected logs billing.
 
 {{% otel-endpoint-note %}}
 
@@ -52,6 +52,8 @@ otlp_config:
     protocols:
       grpc:
         endpoint: 0.0.0.0:4317
+  logs:
+    enabled: false
 ```
 For HTTP, default port 4318:
 
@@ -61,6 +63,8 @@ otlp_config:
     protocols:
       http:
         endpoint: 0.0.0.0:4318
+  logs:
+    enabled: false
 ```
 
 Alternatively, configure the endpoints by providing the port through the environment variables:
@@ -72,9 +76,166 @@ These must be passed to both the core Agent and trace Agent processes. If runnin
 
 Configure either gRPC or HTTP for this feature. Here is [an example application that shows configuration for both][1].
 
-OTLP logs ingestion on the Datadog Agent is disabled by default so that you don't have unexpected logs product usage that may impact billing. To enable OTLP logs ingestion:
+[1]: https://gist.github.com/gbbr/4a54dd02d34ad05e694952e0a02e1c67
+{{% /tab %}}
+{{% tab "Docker" %}}
 
-1. Explicitly enable log collection as a whole by following [Host Agent Log collection setup][2]:
+1. Follow the [Datadog Docker Agent setup][1].
+
+2. For the Datadog Agent container, set the following endpoint environment variables and expose the corresponding port:
+   - For gRPC: Set `DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_GRPC_ENDPOINT` to `0.0.0.0:4317` and expose port `4317`.
+   - For HTTP: Set `DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_HTTP_ENDPOINT` to `0.0.0.0:4318` and expose port `4318`.
+
+<div class="alert alert-danger">
+<strong>Known Issue</strong>: Starting with Agent version 7.61.0, OTLP ingestion pipelines may fail to start in Docker environments, displaying the error: <code>Error running the OTLP ingest pipeline: failed to register process metrics: process does not exist</code>.<br><br>
+If you are using an affected version, you can use one of these workarounds:<br><br>
+1. Set the environment variable <code>HOST_PROC</code> to <code>/proc</code> in your Agent Docker container.<br>
+2. Remove <code>/proc/:/host/proc/:ro</code> from <code>volumes</code> in your Agent Docker container.<br>
+3. Set <code>pid</code> to <code>host</code> in your Agent Docker container.<br><br>
+These configurations can be applied through either the <code>docker</code> command or Docker compose file.</div>
+
+[1]: /agent/docker/
+{{% /tab %}}
+{{% tab "Datadog Operator" %}}
+
+1.  Follow the [Kubernetes Agent setup][1] for the base installation.
+
+2.  Enable the preferred protocol gRPC or HTTP in your Operator's `datadog-agent.yaml` manifest:
+
+    For gRPC:
+    ```yaml
+    apiVersion: datadoghq.com/v2alpha1
+    kind: DatadogAgent
+    metadata:
+      name: datadog
+    spec:
+      # (...)
+      features:
+        otlp:
+          receiver:
+            protocols:
+              grpc:
+                enabled: true
+    ```
+    
+    For HTTP:
+    ```yaml
+    apiVersion: datadoghq.com/v2alpha1
+    kind: DatadogAgent
+    metadata:
+      name: datadog
+    spec:
+      # (...)
+      features:
+        otlp:
+          receiver:
+            protocols:
+              http:
+                enabled: true
+    ```
+
+{{% k8s-operator-redeploy %}}
+
+This enables each protocol in the default port (`4317` for OTLP/gRPC and `4318` for OTLP/HTTP). Metrics and traces are enabled by default.
+
+[1]: /agent/kubernetes/
+{{% /tab %}}
+{{% tab "Helm" %}}
+
+1.  Follow the [Kubernetes Agent setup][1] for the base installation.
+
+2.  Enable the preferred protocol gRPC or HTTP in your Helm's `datadog-values.yaml` file:
+
+    For gRPC:
+    ```yaml
+    datadog:
+      # (...)
+      otlp:
+        receiver:
+          protocols:
+            grpc:
+              enabled: true
+    ```
+
+    For HTTP:
+    ```yaml
+    datadog:
+      # (...)
+      otlp:
+        receiver:
+          protocols:
+            http:
+              enabled: true
+    ```
+
+{{% k8s-helm-redeploy %}}
+
+This enables each protocol in the default port (`4317` for OTLP/gRPC and `4318` for OTLP/HTTP). Metrics and traces are enabled by default.
+
+[1]: /agent/kubernetes/
+{{% /tab %}}
+{{% tab "Manual (Daemonset)" %}}
+
+1.  Follow the [Manual Kubernetes installation guide][1] for the base installation.
+
+2.  Configure the following environment variables in both the `trace-agent` container and the core `agent` container:
+
+    For gRPC:
+    ```yaml
+    name: DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_GRPC_ENDPOINT # enables gRPC receiver on port 4317
+    value: "0.0.0.0:4317"
+    ```
+
+    For HTTP:
+    ```yaml
+    name: DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_HTTP_ENDPOINT # enables HTTP receiver on port 4318
+    value: "0.0.0.0:4318"
+    ```
+
+3. Map the container ports 4317 or 4318 to the host port for the core `agent` container:
+
+    For gRPC:
+    ```yaml
+    ports:
+      - containerPort: 4317
+        hostPort: 4317
+        name: traceportgrpc
+        protocol: TCP
+    ```
+
+    For HTTP
+    ```yaml
+    ports:
+      - containerPort: 4318
+        hostPort: 4318
+        name: traceporthttp
+        protocol: TCP
+    ```
+
+[1]: /containers/guide/kubernetes_daemonset/
+{{% /tab %}}
+{{% tab "AWS Lambda" %}}
+
+For detailed instructions on using OpenTelemetry with AWS Lambda and Datadog, including:
+
+- Instrumenting your Lambda functions with OpenTelemetry
+- Using OpenTelemetry API support within Datadog tracers
+- Sending OpenTelemetry traces to the Datadog Lambda Extension
+
+See the Serverless documentation for [AWS Lambda and OpenTelemetry][100].
+
+[100]: /serverless/aws_lambda/opentelemetry/
+{{% /tab %}}
+{{< /tabs >}}
+
+### Enabling OTLP logs ingestion
+
+OTLP logs ingestion is disabled by default to avoid unexpected billing. To enable it, you must explicitly enable both log collection and OTLP logs ingestion.
+
+{{< tabs >}}
+{{% tab "Host" %}}
+
+1. Enable log collection by following [Host Agent Log collection setup][7]:
 
    ```yaml
    logs_enabled: true
@@ -88,177 +249,71 @@ OTLP logs ingestion on the Datadog Agent is disabled by default so that you don'
        enabled: true
    ```
 
-[1]: https://gist.github.com/gbbr/4a54dd02d34ad05e694952e0a02e1c67
-[2]: /agent/logs/
+[7]: /agent/logs/
 {{% /tab %}}
 {{% tab "Docker" %}}
 
-1. Follow the [Datadog Docker Agent setup][1].
+Set the following environment variables in the Datadog Agent container:
 
-2. For the Datadog Agent container, set the following endpoint environment variables and expose the corresponding port:
-   - For gRPC: Set `DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_GRPC_ENDPOINT` to `0.0.0.0:4317` and expose port `4317`.
-   - For HTTP: Set `DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_HTTP_ENDPOINT` to `0.0.0.0:4318` and expose port `4318`.
+- `DD_LOGS_ENABLED=true`
+- `DD_OTLP_CONFIG_LOGS_ENABLED=true`
 
-3. If you want to enable OTLP logs ingestion, set the following endpoint environment variables in the Datadog Agent container:
-   - Set `DD_LOGS_ENABLED` to true.
-   - Set `DD_OTLP_CONFIG_LOGS_ENABLED` to true.
-
-<div class="alert alert-warning">
-<strong>Known Issue</strong>: Starting with Agent version 7.61.0, OTLP ingestion pipelines may fail to start in Docker environments, displaying the error: <code>Error running the OTLP ingest pipeline: failed to register process metrics: process does not exist</code>.<br><br>
-If you are using an affected version, you can use one of these workarounds:<br><br>
-1. Set the environment variable <code>HOST_PROC</code> to <code>/proc</code> in your Agent Docker container.<br>
-2. Remove <code>/proc/:/host/proc/:ro</code> from <code>volumes</code> in your Agent Docker container.<br>
-3. Set <code>pid</code> to <code>host</code> in your Agent Docker container.<br><br>
-These configurations can be applied through either the <code>docker</code> command or Docker compose file.</div>
-
-[1]: /agent/docker/
 {{% /tab %}}
-{{% tab "Kubernetes (Daemonset)" %}}
+{{% tab "Datadog Operator" %}}
 
-1. Follow the [Kubernetes Agent setup][1].
+In your `datadog-agent.yaml` file
+```yaml
+spec:
+  # (...)
+  features:
+    otlp:
+      #(... enable gRPC or HTTP ingestion...)
+    logCollection:
+      enabled: true
+  override:
+    nodeAgent:
+      containers:
+        agent:
+          env:
+            - name: DD_OTLP_CONFIG_LOGS_ENABLED
+              value: "true"
+```
 
-2. Configure the following environment variables in both the trace Agent container and the core Agent container:
+{{% k8s-operator-redeploy %}}
 
-   For gRPC:
-   ```
-   name: DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_GRPC_ENDPOINT # enables gRPC receiver on port 4317
-   value: "0.0.0.0:4317"
-   ```
-
-   For HTTP:
-   ```
-   name: DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_HTTP_ENDPOINT # enables HTTP receiver on port 4318
-   value: "0.0.0.0:4318"
-   ```
-3. Map the container ports 4317 or 4318 to the host port for the core Agent container:
-
-   For gRPC:
-   ```
-   ports:
-     - containerPort: 4317
-       hostPort: 4317
-       name: traceportgrpc
-       protocol: TCP
-   ```
-
-   For HTTP
-   ```
-   ports:
-     - containerPort: 4318
-       hostPort: 4318
-       name: traceporthttp
-       protocol: TCP
-   ```
-
-4. If you want to enable OTLP logs ingestion, set the following endpoint environment variables in the core Agent container:
-
-   Enable [log collection with your DaemonSet][2]:
-   ```
-   name: DD_LOGS_ENABLED
-   value: "true"
-   ```
-
-   And enable OTLP logs ingestion:
-   ```
-   name: DD_OTLP_CONFIG_LOGS_ENABLED
-   value: "true"
-   ```
-
-[1]: /agent/kubernetes/?tab=daemonset
-[2]: /containers/guide/kubernetes_daemonset/#log-collection
 {{% /tab %}}
+{{% tab "Helm" %}}
 
-{{% tab "Kubernetes (Helm) - values.yaml" %}}
+In your `datadog-values.yaml` file:
 
-1. Follow the [Kubernetes Agent setup][1].
+```yaml
+datadog:
+  # (...)
+  otlp:
+    #(... enable gRPC or HTTP ingestion...)
+    logs:
+      enabled: true
+  logs:
+    enabled: true
+```
 
-2. Enable the OTLP endpoints in the Agent by editing the `datadog.otlp` section of the `values.yaml` file:
+{{% k8s-helm-redeploy %}}
 
-   For gRPC:
-   ```
-   otlp:
-    receiver:
-      protocols:
-        grpc:
-          endpoint: 0.0.0.0:4317
-          enabled: true
-   ```
-
-   For HTTP:
-   ```
-   otlp:
-    receiver:
-      protocols:
-        http:
-          endpoint: 0.0.0.0:4318
-          enabled: true
-   ```
-
-This enables each protocol in the default port (`4317` for OTLP/gRPC and `4318` for OTLP/HTTP).
-
-
-[1]: /agent/kubernetes/?tab=helm
 {{% /tab %}}
+{{% tab "Manual (Daemonset)" %}}
 
-{{% tab "Kubernetes (Helm) - set" %}}
+Set the following environment variables in the core Agent container:
 
-1. Follow the [Kubernetes Agent setup][1].
+```yaml
+- name: DD_LOGS_ENABLED
+  value: "true"
+- name: DD_OTLP_CONFIG_LOGS_ENABLED
+  value: "true"
+```
 
-2. Enable the preferred protocol:
+For more information, see [log collection with your DaemonSet][8].
 
-   For gRPC:
-   ```
-   --set "datadog.otlp.receiver.protocols.grpc.enabled=true"
-   ```
-   For HTTP:
-   ```
-   --set "datadog.otlp.receiver.protocols.http.enabled=true"
-   ```
-
-This enables each protocol in the default port (`4317` for OTLP/gRPC and `4318` for OTLP/HTTP).
-
-[1]: /agent/kubernetes/?tab=helm
-{{% /tab %}}
-{{% tab "Kubernetes (Operator)" %}}
-
-1. Follow the [Kubernetes Agent setup][1].
-
-2. Enable the preferred protocol in your Operator's manifest:
-
-   For gRPC:
-   ```yaml
-   features:
-     otlp:
-       receiver:
-         protocols:
-           grpc:
-             enabled: true
-   ```
-   For HTTP:
-   ```yaml
-   features:
-     otlp:
-       receiver:
-         protocols:
-           http:
-             enabled: true
-   ```
-
-This enables each protocol in the default port (`4317` for OTLP/gRPC and `4318` for OTLP/HTTP).
-
-[1]: /agent/kubernetes/?tab=helm
-{{% /tab %}}
-{{% tab "AWS Lambda" %}}
-
-For detailed instructions on using OpenTelemetry with AWS Lambda and Datadog, including:
-
-- Instrumenting your Lambda functions with OpenTelemetry
-- Using OpenTelemetry API support within Datadog tracers
-- Sending OpenTelemetry traces to the Datadog Lambda Extension
-
-See the Serverless documentation for [AWS Lambda and OpenTelemetry][100].
-
-[100]: /serverless/aws_lambda/opentelemetry/
+[8]: /containers/guide/kubernetes_daemonset/#log-collection
 {{% /tab %}}
 {{< /tabs >}}
 

@@ -190,7 +190,7 @@ SELinux が enforcing モードの場合は、datadog-agent ポッドに [`spc_t
 新しく作成した <a href="https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/manifests/openshift/scc.yaml">datadog-agent SCC</a> に、<a href="https://docs.datadoghq.com/agent/kubernetes/daemonset_setup/?tab=k8sfile#configure-rbac-permissions">datadog-agent サービスアカウント</a>を追加することを忘れないでください。それには、<code>system:serviceaccount:<datadog-agent namespace>:<datadog-agent service account name></code> を <code>users</code> セクションに追加する必要があります。
 </div>
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 <b>OpenShift 4.0+</b>: OpenShift インストーラーを、サポート対象のクラウドプロバイダーで使用した場合は、ホストのタグとエイリアスを取得するために、<code>scc.yaml</code> マニフェストで <code>allowHostNetwork: true</code>、Agent 構成で <code>hostNetwork: true</code> で SCC をデプロイする必要があります。そうしないと、ポッドのネットワークからメタデータサーバーへのアクセスが制限されます。
 </div>
 

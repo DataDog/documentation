@@ -1,5 +1,6 @@
 ---
 title: Kubernetes distributions
+description: Platform-specific installation and configuration instructions for Datadog Agent on various Kubernetes distributions
 aliases:
 - /agent/kubernetes/distributions
 further_reading:
@@ -42,8 +43,6 @@ These configurations can then be customized to add any Datadog feature.
 ## AWS Elastic Kubernetes Service (EKS) {#EKS}
 
 No specific configuration is required.
-
-If you are using AWS Bottlerocket OS on your nodes, add the following to enable container monitoring (`containerd` check):
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
@@ -548,10 +547,10 @@ spec:
   override:
     clusterAgent:
       image:
-        name: gcr.io/datadoghq/cluster-agent:latest
+        name: registry.datadoghq.com/cluster-agent:latest
     nodeAgent:
       image:
-        name: gcr.io/datadoghq/agent:latest
+        name: registry.datadoghq.com/agent:latest
       tolerations:
         - key: node-role.kubernetes.io/controlplane
           operator: Exists

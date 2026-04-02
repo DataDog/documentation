@@ -7,9 +7,6 @@ further_reading:
 is_public: true
 title: Control de acceso a los datos
 ---
-{{< callout url="https://www.datadoghq.com/product-preview/" header="Únete a la Vista previa">}}
-El Control de acceso a los datos está en Vista previa
-{{< /callout >}}
 
 ## Información general
 
@@ -31,7 +28,9 @@ El Control de acceso a los datos se basa en etiquetas (tags) y atributos en tus 
 
 El Control de acceso a los datos permite crear un conjunto de datos restringido, especificando los datos a los que sólo pueden acceder los usuarios de los equipos o roles designados.
 
-### Sitio de Datadog
+Para ver todos tus conjuntos de datos restringidos, ve a [Organization Settings][6] (Configuración de la organización) y selecciona [Data Access Controls][7] (Controles de acceso a datos) a la izquierda, bajo el título **Access** (Acceso).
+
+### Sitio Datadog
 
 Inicia sesión como usuario con el rol Admin Datadog o como cualquier usuario con un rol de tu organización con el [permiso `user_access_manage`][5].
 
@@ -41,13 +40,13 @@ Inicia sesión como usuario con el rol Admin Datadog o como cualquier usuario co
 
 Para crear un conjunto de datos restringido, identifica los datos que quieres restringir con una consulta.
 
-{{< img src="/account_management/rbac/restricted_dataset.png" alt="Crea un diálogo de conjunto de datos restringido. Selecciona datos en RUM, APM, logs y métricas coincidentes con la etiqueta service:hr. Concede acceso al equipo con acceso privilegiado.">}}
+{{< img src="/account_management/rbac/restricted_dataset-2.png" alt="Crea un cuadro de diálogo de Conjunto de datos restingidos. Selecciona datos de RUM, APM, logs y métricas que coincidan con la etiqueta service:hr. Concede acceso a un equipo de Acceso privilegiado.">}}
 
-Nombra el conjunto de datos
-: Ponle un nombre descriptivo para ayudar a los usuarios a saber qué datos contiene el conjunto de datos.
+Nombre del conjunto de datos
+: un nombre descriptivo para ayudar a los usuarios a entender qué datos contiene el conjunto de datos.
 
 Selecciona los datos que se incluirán en este conjunto de datos
-: Define los límites que describen qué datos restringir a un conjunto específico de usuarios. Los límites son sentencias de consulta con limitaciones que permiten a un gestor de acceso definir el contexto de datos sensibles que deben protegerse. Los tipos de telemetría admitidos son métricas personalizadas, RUM, trazas (traces) de APM, logs y pipelines de CI Visibility.
+: la definición de límites que describe qué datos restringir a un conjunto específico de usuarios. Los límites son declaraciones de consulta con limitaciones que permiten a un gestor de acceso definir el alcance de los datos confidenciales que deben protegerse. Los [tipos de telemetría compatibles][10] son métricas personalizadas, sesiones de RUM, trazas de APM, logs, costes de la nube, problemas de Error Tracking e información del repositorio de Software Delivery (pipelines de CI Visibility).
 
 Concede acceso
 : Seleccione uno o varios equipos o roles que pueden acceder al contenido del conjunto de datos restringido. Los usuarios que no pertenezcan a estos grupos no podrán acceder a estos datos.
@@ -56,12 +55,52 @@ Puedes crear un máximo de 10 pares clave:valor por conjunto de datos restringid
 
 Tras rellenar todos los campos para definir el conjunto de datos, haz clic en **Create Restricted Dataset** (Crear conjunto de datos restringido) para aplicarlo a tu organización.
 
-Puedes crear un máximo de 100 conjuntos de datos restringidos. Si necesitas un límite superior, ponte en contacto con el servicio de asistencia.
+Puedes crear un máximo de 100 conjuntos de datos restringidos en el plan Enterprise, y un máximo de 10 conjuntos de datos en otros planes. Si necesitas un límite superior, ponte en contacto con el servicio de asistencia.
 
-### API
-La API de control de acceso a los datos está en fase de desarrollo y debe considerarse inestable. Las versiones futuras pueden ser incompatibles con versiones anteriores. 
+### Tipos de telemetría compatibles {#supported-telemetry}
 
-La compatibilidad con Terraform se anunciará una vez que el Control de acceso a los datos esté disponible de forma general.
+- Trazas de APM
+- Logs
+- Sesiones RUM
+
+Si lo deseas, puedes solicitar una vista previa de lo siguiente:
+- Costes de la nube
+- Métricas personalizadas
+    - **Nota:** No se admiten las métricas estándar y OpenTelemetry (OpenTelemetry)
+- Problemas de seguimiento de errores
+- LLM Observability
+- Información sobre el repositorio de Software Delivery (en pipelines de CI Visibility)
+
+## Restricciones de uso
+
+Después de activar el Control de acceso a datos, Datadog desactiva o limita otras funciones para controlar el acceso a datos confidenciales. Consulta la lista de funciones afectadas a continuación para ver cómo se restringen.
+
+### Real User Monitoring (RUM)
+
+#### Session Replay: retención ampliada
+Por defecto, los datos de Session Replay se conservan durante 30 días. Para ampliar la retención a 15 meses, puedes activar la Retención ampliada en las repeticiones de sesiones individuales. Al crear un conjunto de datos restringido para RUM, Datadog desactiva la opción de Retención ampliada. 
+
+#### Session Replay: listas de reproducción
+
+Las listas de reproducción son colecciones de Session Replays que se pueden agregar en una estructura similar a una carpeta. Al crear un conjunto de datos restringido para RUM, Datadog desactiva las listas de reproducción de Session Replay.
+
+### Logs
+El Control de acceso a datos es independiente de la función existente [Permisos RBAC de logs][11], también conocida como consultas de restricción de logs. Datadog recomienda utilizar una única solución para restringir los datos de los logs. Si limitas el acceso de los usuarios utilizando tanto el Control de acceso a datos como las consultas de restricción de logs, se aplicarán ambos conjuntos de restricciones.
+
+### Monitores
+Los usuarios pueden crear monitores que consulten y alerten sobre la telemetría activa. Mientras que el usuario solo puede consultar directamente los datos a los que está autorizado a acceder, el monitor funciona como un usuario del sistema con pleno acceso a los datos.
+
+Si te preocupa el acceso no autorizado a datos a través de monitores, Datadog te recomienda que realices un seguimiento de los monitores que crean tus usuarios. A continuación, restringe el acceso a la creación de monitores que lean datos confidenciales.
+
+### Información sobre el repositorio de Software Delivery (pipelines de CI Visibility)
+
+* **Telemetría compatible**: solo los pipelines de CI Visibility son compatibles. No se admiten los tests de Test Optimizations.
+* **Logs de CI**: los logs de CI se almacenan en el producto de Log Management. Para restringir el acceso a los logs de CI, crea un conjunto de datos de logs.
+* **Etiquetas de conjuntos de datos compatibles**: solo se admiten las siguientes etiquetas:
+  * `@git.repository_url`
+  * `@git.repository.id`
+  * `@gitlab.groups`
+
 
 ## Seleccione etiquetas para el acceso
 
@@ -72,7 +111,7 @@ Si tienes demasiadas combinaciones de etiquetas o atributos, para ajustarte a es
 ### Ejemplo compatible
 
 #### Conjunto de datos restringido 1
-- Tipo de telemetría: RUM  
+- Tipo de telemetría: RUM
    - Filtros: `@application.id:ABCD`
 
 #### Conjunto de datos restringido 2
@@ -83,23 +122,23 @@ Si tienes demasiadas combinaciones de etiquetas o atributos, para ajustarte a es
 
 ### Ejemplo no compatible
 
-#### Conjunto de datos restringido 1: 
-* Tipo de telemetría: RUM 
+#### Conjunto de datos restringido 1:
+* Tipo de telemetría: RUM
     * Filtros: `@application.id:ABCD`
 
 #### Conjunto de datos restringido 2:
-* Tipo de telemetría: RUM 
+* Tipo de telemetría: RUM
     * Filtros: `env:prod`
 
 El conjunto de datos restringido 1 utiliza `@application.id` como etiqueta para los datos de RUM, por lo que un nuevo conjunto de datos restringido no puede cambiar a una etiqueta diferente. En su lugar, considera la posibilidad de reconfigurar el conjunto de datos restringido 2 para que utilice `@application.id` o de cambiar todos tus conjuntos de datos restringidos con datos de RUM para que utilicen otra etiqueta.
 
 ### Ejemplo no compatible
 
-#### Conjunto de datos restringido 1: 
-* Tipo de telemetría: RUM 
+#### Conjunto de datos restringido 1:
+* Tipo de telemetría: RUM
     * Filtros: `@application.id:ABCD`
 
-#### Conjunto de datos restringido 2: 
+#### Conjunto de datos restringido 2:
 * Tipo de telemetría: RUM
     * Filtros: `@application.id:IJKL` `env:prod`
 
@@ -121,7 +160,7 @@ Por ejemplo, si tienes una sola aplicación que está instrumentada con Real Use
     * Tipo de telemetría: RUM
         * Filtros: `@application.id:<rum-app-id>`
 * **Acceso concedido:**
-    * Equipos o roles de los usuarios que pueden ver estos datos RUM
+    * Equipos o roles de los usuarios que pueden ver estos datos de RUM
 
 Este ejemplo de configuración protegería los datos de RUM de esta aplicación y mantendría otros datos de esta aplicación disponibles para los usuarios existentes en tu organización.
 
@@ -148,7 +187,7 @@ Este ejemplo de configuración protege todos los datos compatibles de `NewServic
 
 ### Equipos y roles
 
-El Control de acceso a los datos permite conceder acceso a los usuarios a través de roles o equipos de Datadog. A la hora de conceder acceso, ten en cuenta la configuración del control de acceso existente y la estrategia de acceso. Si estás siguiendo un enfoque basado en el servicio y ya estás [personalizando el Catálogo de servicios][9], aprovecha el modelo de propiedad del servicio utilizando Equipos como parte de tu configuración del Control de acceso a los datos.
+El Control de acceso de datos admite la concesión de acceso a los usuarios a través de roles o equipos de Datadog. Al conceder el acceso, ten en cuenta tu configuración de control de acceso existente y la estrategia de acceso. Si estás siguiendo un enfoque basado en servicios y ya estás [personalizando el Software Catalog][9], aprovecha el modelo de propiedad de servicios utilizando Teams como parte de tu configuración de Control de acceso a datos.
 
 **Nota:** Los equipos utilizados para el Control de acceso a los datos deben configurarse de tal manera que la adición o eliminación de usuarios sólo pueda ser realizada por los miembros del equipo o por un administrador, no por `Anyone in the organization`.
 
@@ -163,6 +202,8 @@ Cuando se explora Datadog con las restricciones activadas, los usuarios sin perm
 ### Dashboards y notebooks
 
 De forma similar a la exploración de datos en un explorador de datos como el Explorador RUM o el Explorador de métricas, la visualización de datos en dashboards en una organización que tiene habilitados los conjuntos de datos restringidos sólo muestra los datos a los que el usuario puede acceder. Dado que los dashboards son objetos compartidos a los que pueden acceder otras personas, es posible que dos usuarios que tengan accesos diferentes vean el mismo dashboard o notebook al mismo tiempo pero con datos diferentes.
+
+**Nota**: Los visores de [Dashboards compartidos][12] ven todos los datos de telemetría mostrados en el dashboard de acuerdo con los permisos del creador. Revisa el contenido de tu dashboard antes de compartirlo para asegurarte de que no se exponen datos sensibles o confidenciales.
 
 ### API
 
@@ -180,4 +221,7 @@ Cuando se consultan datos a través de las API Datadog con restricciones activad
 [6]: https://app.datadoghq.com/organization-settings/
 [7]: https://app.datadoghq.com/organization-settings/data-access-controls/
 [8]: /es/data_security/
-[9]: /es/service_catalog/customize/
+[9]: /es/software_catalog/customize/
+[10]: /es/account_management/rbac/data_access/#supported-telemetry
+[11]: /es/logs/guide/logs-rbac/?tab=ui#restrict-access-to-logs
+[12]: /es/dashboards/sharing/shared_dashboards/

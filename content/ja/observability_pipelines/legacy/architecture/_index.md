@@ -7,7 +7,7 @@ title: (レガシー) OPW アグリゲーターアーキテクチャのベスト
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Observability Pipelines は、US1-FED Datadog サイトでは利用できません。</div>
+<div class="alert alert-danger">Observability Pipelines は、US1-FED Datadog サイトでは利用できません。</div>
 {{< /site-region >}}
 
 {{% observability_pipelines/legacy_warning %}}

@@ -9,7 +9,7 @@ description: "Learn how to control span ingestion"
 
 {{< img src="tracing/apm_lifecycle/trace_pipeline.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Trace Pipeline" >}}
 
-Collect traces from your intrumented applications to gain end-to-end visibility into your applications. Query and visualize distributed traces from the [Trace Explorer][1], understand how requests flow through your microservices and easily investigate errors and performance issues.
+Collect traces from your instrumented applications to gain end-to-end visibility into your applications. Query and visualize distributed traces from the [Trace Explorer][1], understand how requests flow through your microservices and easily investigate errors and performance issues.
 
 With APM, both the **ingestion** and the **retention** of traces are fully customizable.
 
@@ -25,6 +25,12 @@ Set up tracing to gain end-to-end visibility into your applications with fine-gr
 The [Ingestion Control page][3] overviews ingestion volumes and configuration settings across your services.
 
 {{< img src="tracing/trace_indexing_and_ingestion/ingestion_controls_page.png" style="width:100%;" alt="Ingestion Control Page Overview" >}}
+
+## Processing pipelines
+
+Transform, normalize, and enrich span attributes after ingestion with [Processing Pipelines][7]. Standardize attribute naming across services, consolidate inconsistent keys, and extract structured data from span values, without modifying application code.
+
+{{< img src="tracing/processing_pipelines/manage_pipelines.png" style="width:100%;" alt="Processing Pipelines" >}}
 
 ## Generating metrics from spans
 
@@ -51,3 +57,4 @@ Learn about how to track and monitor your volume of ingested and indexed data, i
 [4]: /tracing/trace_pipeline/generate_metrics
 [5]: /tracing/trace_pipeline/trace_retention
 [6]: /tracing/trace_pipeline/metrics
+[7]: /tracing/trace_pipeline/processing_pipelines

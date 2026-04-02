@@ -1,5 +1,6 @@
 ---
 title: Basic Agent Autodiscovery
+description: Automatically monitor containerized services with Datadog Agent Autodiscovery. Configure templates to dynamically detect and monitor services across containers.
 aliases:
  - /agent/autodiscovery/basic_autodiscovery
  - /getting_started/agent/autodiscovery

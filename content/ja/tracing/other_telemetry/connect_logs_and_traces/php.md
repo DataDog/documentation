@@ -27,7 +27,7 @@ type: multi-code-lang
 
 PHP トレーサーは、[Monolog][4] や [Laminas Log][5] のような PSR-3 準拠のロガーをサポートしています。
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>注</strong>: JSON フォーマットでログを生成するように、ロギングライブラリを設定してください。これにより、
   <ul>
     <li><a href="/logs/log_configuration/parsing">カスタムパースルール</a>は必要なくなります。</li>
@@ -93,7 +93,7 @@ PHP トレーサーは、プレースホルダーを対応する値に置き換�
 
 ## 手動挿入
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 <strong>注:</strong> 関数 <code>\DDTrace\current_context()</code> はバージョン <a href="https://github.com/DataDog/dd-trace-php/releases/tag/0.61.0">0.61.0</a> で導入され、10 進数形式のトレース識別子を返します。
 </div>
 

@@ -2,10 +2,10 @@
 further_reading:
 - link: /tracing/trace_collection/library_config/java/
   tag: Documentación
-  text: Opciones adicionales de configuración de bibliotecas de rastreo
+  text: Opciones adicionales de configuración de librerías de rastreo
 - link: /tracing/trace_collection/dd_libraries/java/
   tag: Documentación
-  text: Instrucciones detalladas de configuración de bibliotecas de rastreo
+  text: Instrucciones detalladas de configuración de librerías de rastreo
 - link: /tracing/trace_collection/compatibility/java/
   tag: Documentación
   text: Marcos de trabajo compatibles Java para la instrumentación automática
@@ -14,7 +14,7 @@ further_reading:
   text: Configuración manual de trazas (traces) y tramos (spans)
 - link: https://github.com/DataDog/dd-trace-java
   tag: Código fuente
-  text: Rastreo del repositorio de código fuente abierto de bibliotecas
+  text: Rastreo del repositorio de código fuente abierto de librerías
 title: Tutorial - Habilitación del rastreo de una aplicación Java en Amazon ECS con
   Fargate
 ---
@@ -39,7 +39,7 @@ Para obtener documentación general sobre la configuración del rastreo en Java,
 - Un repositorio Amazon ECR para alojar imágenes
 - Un usuario IAM de AWS con permiso `AdministratorAccess`. Debes añadir el perfil a tu archivo de credenciales local utilizando las claves de acceso y acceso secreto. Para obtener más información, consulta el [uso del archivo de credenciales y los perfiles de credenciales AWS][20].
 
-## Instalación de la aplicación de ejemplo Java 
+## Instalación de la aplicación de ejemplo Java
 
 El código de ejemplo para este tutorial está en GitHub, en [github.com/DataDog/apm-tutorial-java-host][9]. Para empezar, clona el repositorio:
 
@@ -105,7 +105,7 @@ Tu aplicación (sin el rastreo habilitado) está contenedorizada y se encuentra 
 
 ### Despliegue de la aplicación
 
-Inicia la aplicación y envía algunas solicitudes sin rastreo. Después de haber visto cómo funciona la aplicación, podrás instrumentarla utilizando la biblioteca de rastreo y el Datadog Agent.
+Inicia la aplicación y envía algunas solicitudes sin rastreo. Después de haber visto cómo funciona la aplicación, podrás instrumentarla utilizando la librería de rastreo y el Datadog Agent.
 
 Para empezar, utiliza un script Terraform para desplegar en Amazon ECS:
 
@@ -174,7 +174,7 @@ Ahora que ya tienes una aplicación Java en funcionamiento, configúrala para ha
 
    Ahora ambos servicios tendrán la instrumentación automática.
 
-   <div class="alert alert-warning"><strong>Nota</strong>: Las marcas de estos comandos de ejemplo, en particular la frecuencia de muestreo, no son necesariamente apropiadas para los entornos que no figuran en este tutorial. Para obtener más información sobre qué necesitas utilizar en tu entorno real, consulta <a href="#tracing-configuration">Configuración del rastreo</a>.</div>
+   <div class="alert alert-danger"><strong>Nota</strong>: Las marcas de estos comandos de ejemplo, en particular la frecuencia de muestreo, no son necesariamente apropiadas para los entornos que no figuran en este tutorial. Para obtener más información sobre qué necesitas utilizar en tu entorno real, consulta <a href="#tracing-configuration">Configuración del rastreo</a>.</div>
 
 3. La instrumentación automática es práctica, pero a veces prefieres utilizar tramos más precisos. La API de rastreo DD Java Datadog te permite especificar tramos en tu código mediante anotaciones o código. Añade algunas anotaciones al código para rastrear en algunos métodos de ejemplo.
 
@@ -233,7 +233,7 @@ Ahora que ya tienes una aplicación Java en funcionamiento, configúrala para ha
         }
    ```
 
-7. Actualiza tu compilación Maven abriendo `notes/pom.xml` y descomentando las líneas que configuran dependencias para el rastreo manual. La biblioteca `dd-trace-api` se utiliza para las anotaciones `@Trace`, y `opentracing-util` y `opentracing-api` se utilizan para la creación manual de tramos.
+7. Actualiza tu compilación Maven abriendo `notes/pom.xml` y descomentando las líneas que configuran dependencias para el rastreo manual. La librería `dd-trace-api` se utiliza para las anotaciones `@Trace`, y `opentracing-util` y `opentracing-api` se utilizan para la creación manual de tramos.
 
 8. Añade el Datadog Agent a cada una de las definiciones de tareas `notes` y `calendar`, añadiendo un Agent en un contenedor junto a cada tarea AWS, en lugar de instalarlo en cualquier lugar. Abre `terraform/Fargate/Instrumented/main.tf` y fíjate que esta muestra ya tiene las configuraciones básicas necesarias para ejecutar el Datadog Agent en ECS Fargate y recopilar trazas): la clave de API (que configuras en el siguiente paso) y la habilitación de APM. La definición se proporciona tanto en la tarea `notes` como en la tarea `calendar`.
 
@@ -315,7 +315,7 @@ Ahora que ya tienes una aplicación Java en funcionamiento, configúrala para ha
 
 ### Configuración del rastreo
 
-La biblioteca de rastreo Java utiliza el Agent incorporado y el soporte de monitorización Java. La marca `-javaagent:../dd-java-agent.jar` en el archivo Docker indica a la máquina virtual Java dónde encontrar la biblioteca de rastreo Java para que pueda ejecutarse como un Agent Java. Para obtener más información sobre Agents Java, consulta [https://www.baeldung.com/java-instrumentation][7].
+La librería de rastreo Java utiliza el Agent incorporado y el soporte de monitorización Java. La marca `-javaagent:../dd-java-agent.jar` en el archivo Docker indica a la máquina virtual Java dónde encontrar la librería de rastreo Java para que pueda ejecutarse como un Agent Java. Para obtener más información sobre Agents Java, consulta [https://www.baeldung.com/java-instrumentation][7].
 
 La marca `dd.trace.sample.rate` configura la frecuencia de muestreo para esta aplicación. El comando ENTRYPOINT en el archivo Docker configura su valor en `1`, lo que significa que el 100% de todas las solicitudes al servicio `notes` se envían al backend Datadog para su análisis y visualización. Para una aplicación de prueba de bajo volumen, esto está bien. Pero no lo hagas en producción o en entornos de gran volumen, ya que esto generará un volumen muy elevado de datos. En su lugar, muestrea algunas de tus solicitudes. Elige un valor entre 0 y 1. Por ejemplo, `-Ddd.trace.sample.rate=0.1` envía trazas (traces) del 10% de tus solicitudes a Datadog. Consulta la documentación para obtener más información sobre [parámetros de configuración del rastreo][14] y [mecanismos de muestreo][15].
 
@@ -398,7 +398,7 @@ El rastreo de una única aplicación es un buen comienzo, pero el verdadero valo
 
 {{< img src="tracing/guide/tutorials/tutorial-java-container-distributed.png" alt="Gráfico de llamas de una traza distribuida." style="width:100%;" >}}
 
-Observa que no has cambiado nada en la aplicación `notes`. Datadog instrumenta automáticamente tanto la biblioteca `okHttp` utilizada para realizar la llamada HTTP de `notes` a `calendar`, como la biblioteca Jetty utilizada para escuchar solicitudes HTTP en `notes` y `calendar`. Esto permite que la información de rastreo pase de una aplicación a la otra, registrando un rastreo distribuido.
+Observa que no has cambiado nada en la aplicación `notes`. Datadog instrumenta automáticamente tanto la librería `okHttp` utilizada para realizar la llamada HTTP de `notes` a `calendar`, como la librería Jetty utilizada para escuchar solicitudes HTTP en `notes` y `calendar`. Esto permite que la información de rastreo pase de una aplicación a la otra, registrando un rastreo distribuido.
 
 Cuando hayas terminado de explorar, borra todos los recursos y elimina los despliegues:
 

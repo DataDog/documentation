@@ -14,7 +14,7 @@ API를 사용해 대시보드 목록과 상호 작용하여 대시보드 전체�
 
 ## 대시보드 목록 항목 가져오기
 
-<div class="alert alert-danger">
+<div class="alert alert-warning">
 이 엔드포인트는 오래되었습니다. 대신 <a href="https://docs.datadoghq.com/api#get-items-of-a-dashboard-list">대시보드 목록 v2 엔드포인트 항목 가져오기</a>를 사용하세요.
 </div>
 
@@ -374,7 +374,7 @@ curl -X GET \
 
 ## 대시보드 목록에 항목 추가
 
-<div class="alert alert-danger">
+<div class="alert alert-warning">
 이 엔드포인트는 오래되었습니다. 대신 <a href="https://docs.datadoghq.com/api#add-items-to-a-dashboard-list">대시보드 목록 v2 엔드포인트에 항목 추가</a>를 사용하세요.
 </div>
 
@@ -625,7 +625,7 @@ curl -X ADD -H "Content-type: application/json" \
 
 ## 대시보드 목록 항목 업데이트
 
-<div class="alert alert-danger">
+<div class="alert alert-warning">
 이 엔드포인트는 오래되었습니다. 대신 <a href="https://docs.datadoghq.com/api#update-items-of-a-dashboard-list">대시보드 목록 v2 엔드포인트의 항목 업데이트</a>를 사용하세요.
 </div>
 
@@ -878,7 +878,7 @@ curl -X UPDATE -H "Content-type: application/json" \
 
 ## 대시보드 목록에서 항목 삭제
 
-<div class="alert alert-danger"> 이 엔드포인트는 오래되었습니다. 대신 <a href="https://docs.datadoghq.com/api#delete-items-from-a-dashboard-list">대시보드 목록 v2 엔드포인트에서 항목 삭제</a>를 사용하세요.
+<div class="alert alert-warning"> 이 엔드포인트는 오래되었습니다. 대신 <a href="https://docs.datadoghq.com/api#delete-items-from-a-dashboard-list">대시보드 목록 v2 엔드포인트에서 항목 삭제</a>를 사용하세요.
 </div>
 
 ### 서명

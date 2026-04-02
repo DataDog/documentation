@@ -3,7 +3,7 @@ title: Datadog Forwarder を使用した Go サーバーレスアプリケーシ
 ---
 ## 概要
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Datadog Serverless の新規ユーザーの場合、代わりに <a href="/serverless/installation/go">Datadog Lambda Extension を使用して Lambda 関数をインスツルメントする手順</a>に従ってください。Lambda がすぐに使える機能を提供する前に、Datadog Forwarder で Datadog Serverless をセットアップした場合は、このガイドを使用してインスタンスを維持してください。
 </div>
 
@@ -23,7 +23,7 @@ Datadog Serverless の新規ユーザーの場合、代わりに <a href="/serve
 次のコマンドを実行して、[Datadog Lambda ライブラリ][3]をローカルにインストールします。
 
 ```
-go get github.com/DataDog/datadog-lambda-go
+go get github.com/DataDog/dd-trace-go/contrib/aws/datadog-lambda-go/v2
 ```
 
 ### インスツルメントする
@@ -38,9 +38,9 @@ go get github.com/DataDog/datadog-lambda-go
 
     import (
       "github.com/aws/aws-lambda-go/lambda"
-      "github.com/DataDog/datadog-lambda-go"
-      "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
-      httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http"
+      ddlambda "github.com/DataDog/dd-trace-go/contrib/aws/datadog-lambda-go/v2"
+      "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
+      httptrace "github.com/DataDog/dd-trace-go/contrib/net/http/v2"
     )
     ```
 3. Datadog Lambda ライブラリが提供するラッパーを使用して、Lambda 関数ハンドラーをラップします。
@@ -63,7 +63,7 @@ go get github.com/DataDog/datadog-lambda-go
       // Trace an HTTP request
       req, _ := http.NewRequestWithContext(ctx, "GET", "https://www.datadoghq.com", nil)
       client := http.Client{}
-      client = *httptrace.WrapClient(&client)
+      client = httptrace.WrapClient(&client)
       client.Do(req)
 
       // Connect your Lambda logs and traces
@@ -101,7 +101,7 @@ package main
 
 import (
   "github.com/aws/aws-lambda-go/lambda"
-  "github.com/DataDog/datadog-lambda-go"
+  ddlambda "github.com/DataDog/dd-trace-go/contrib/aws/datadog-lambda-go/v2"
 )
 
 func main() {

@@ -98,7 +98,7 @@ Después de analizar los datos de Snowflake, Datadog completa el [dashboard de i
 No se requiere ningún paso de instalación.
 
 ### Configuración
-<div class="alert alert-warning">Nota: Las cuentas de Snowflake conectadas a través de PrivateLink no son compatibles actualmente con la integración Snowflake.
+<div class="alert alert-danger">Nota: Las cuentas de Snowflake conectadas a través de PrivateLink no son compatibles actualmente con la integración Snowflake.
 Se recomienda la integración del Snowflake original con el Agent para configuraciones de PrivateLink.</div>
 
 #### Conecta tu cuenta de Snowflake
@@ -388,7 +388,7 @@ La integración de Snowflake Web no incluye ningún check de servicio.
 
 ## Check del Agent: Snowflake
 
-<div class="alert alert-danger">El check del Agent de Snowflake ya no es compatible; se recomienda cambiar a la nueva integración de Snowflake para obtener funciones adicionales y un menor volumen de llamadas a la API para Snowflake.</div>
+<div class="alert alert-warning">El check del Agent de Snowflake ya no es compatible; se recomienda cambiar a la nueva integración de Snowflake para obtener funciones adicionales y un menor volumen de llamadas a la API para Snowflake.</div>
 
 ## Agent: información general
 
@@ -409,7 +409,7 @@ El check de Snowflake está incluido en el paquete del [Datadog Agent][24].
 
 ### Agent: configuración
 
-<div class="alert alert-warning">Snowflake recomienda otorgar permisos a un rol alternativo como `SYSADMIN`. Lee más sobre cómo controlar el <a href="https://docs.snowflake.com/en/user-guide/security-access-control-considerations.html#control-the-assignment-of-the-accountadmin-role-to-users">rol ACCOUNTADMIN</a> para obtener más información.</div>
+<div class="alert alert-danger">Snowflake recomienda otorgar permisos a un rol alternativo como `SYSADMIN`. Lee más sobre cómo controlar el <a href="https://docs.snowflake.com/en/user-guide/security-access-control-considerations.html#control-the-assignment-of-the-accountadmin-role-to-users">rol ACCOUNTADMIN</a> para obtener más información.</div>
 
 1. Crea un rol y un usuario específicos de Datadog para monitorizar Snowflake. En Snowflake, ejecuta lo siguiente para crear un rol personalizado con acceso al esquema ACCOUNT_USAGE.
 

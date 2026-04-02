@@ -1,5 +1,6 @@
 ---
 title: Migrating to New Plan & Usage CSV Headers the week of February 19, 2024
+description: Update your automation for the new Plan & Usage CSV headers that align cost data with in-app displays, effective February 19, 2024.
 further_reading:
 - link: "/account_management/plan_and_usage/"
   tag: "Documentation"

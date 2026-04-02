@@ -15,7 +15,7 @@ title: 컴파일된 언어의 네이티브 프로파일러 활성화
 type: multi-code-lang
 ---
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 <code>ddprof</code>는 베타 버전입니다. Datadog에서는 프로덕션에 배포하기 전 민감하지 않은 환경에서 프로파일러를 평가할 것을 권장합니다.
 </div>
 

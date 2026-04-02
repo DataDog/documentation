@@ -4,12 +4,26 @@ rum_sdk_platform_options:
   - id: ios
   - id: react_native
 
+rum_sdk_platform_options_v2:
+  - id: android
+    default: true
+  - id: ios
+  - id: react_native
+  - id: flutter
+
+rum_sdk_profiling_options:
+  - id: browser
+    default: true
+  - id: android
+  - id: ios
+
 rum_session_replay_sdk_options:
   - id: android
     default: true
   - id: ios
   - id: kotlin_multiplatform
   - id: react_native
+  - id: flutter
 
 rum_mobile_proxy_protocol_options:
   - id: http_https
@@ -27,3 +41,19 @@ rum_browser_sdk_version_for_proxying_options:
   default: true
 - id: gte_4_34_0
 - id: lt_4_34_0
+
+rum_browser_sdk_version_for_advanced_config_options:
+- id: lt_2_13_0
+- id: gte_2_13_0
+- id: gte_2_17_0
+- id: gte_4_13_0
+- id: gte_4_49_0
+- id: gte_5_22_0
+- id: gte_5_28_0
+- id: gte_6_4_0
+  default: true 
+
+rum_react_native_framework_options:
+- id: react_native
+  default: true
+- id: expo
