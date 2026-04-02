@@ -492,11 +492,7 @@ logger.info("Flag: {} | Value: {} | Variant: {} | Reason: {}",
 
 Before investigating specific errors, confirm these prerequisites are in place:
 
-1. **The Datadog Agent is running** and reachable from your application. Verify by querying the Agent's info endpoint:
-   ```bash
-   curl http://localhost:8126/info
-   ```
-   A successful JSON response confirms the Agent is running. The `endpoints` array in the response lists what the Agent supports, which is useful for the checks below.
+1. **The Datadog Agent is running** and reachable from your application. See <a href="/tracing/troubleshooting/connection_errors/" target="_blank">APM Connection Errors</a> for steps to verify Agent connectivity.
 2. **Remote Configuration is enabled on the Agent**: Set `remote_configuration.enabled: true` in `datadog.yaml` or `DD_REMOTE_CONFIG_ENABLED=true`. See [Remote Configuration][1].
 3. **The experimental flagging provider is enabled on the tracer**: Set `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true`.
 4. **Required tracer environment variables are set**: `DD_API_KEY`, `DD_ENV`, and `DD_SITE`.
