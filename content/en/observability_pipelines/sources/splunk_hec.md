@@ -15,16 +15,16 @@ Use Observability Pipelines' Splunk HTTP Event Collector (HEC) source to receive
 - Send logs from Observability Pipelines to Splunk HEC with the original token sent with the event.
 
 **Notes**:
-- Stored Splunk HEC tokens are not shown in [Live Capture][6].
+- Stored Splunk HEC tokens are not shown in [Live Capture][9].
 - Use the Splunk HEC source if you want to [send logs from the Splunk Distribution of the OpenTelemetry Collector to Observability Pipelines](#send-logs-from-the-splunk-distribution-of-the-opentelemetry-collector-to-observability-pipelines).
 
 ## Prerequisites
 
 {{% observability_pipelines/prerequisites/splunk_hec %}}
 
-## Set up the source in the pipeline UI
+## Setup
 
-Select and set up this source when you [set up a pipeline][1]. The information below is for the source settings in the pipeline UI.
+Set up this source when you [set up a pipeline][1]. You can set up a pipeline in the [UI][6], using the [API][7], or with [Terraform][8]. The instructions in this section are for setting up the source in the UI.
 
 <div class="alert alert-danger">Only enter the identifiers for the Splunk HEC address and, if applicable, the TLS key pass. Do <b>not</b> enter the actual values.</div>
 
@@ -94,4 +94,7 @@ To send logs from the Splunk Distribution of the OpenTelemetry Collector:
 [3]: https://help.splunk.com/en/splunk-observability-cloud/manage-data/splunk-distribution-of-the-opentelemetry-collector/get-started-with-the-splunk-distribution-of-the-opentelemetry-collector/collector-for-linux
 [4]: /observability_pipelines/configuration/set_up_pipelines
 [5]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/
-[6]: /observability_pipelines/configuration/live_capture/
+[6]: https://app.datadoghq.com/observability-pipelines
+[7]: /api/latest/observability-pipelines/
+[8]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline
+[9]: /observability_pipelines/configuration/live_capture/
