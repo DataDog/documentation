@@ -1,4 +1,5 @@
 import { test, expect, type Page } from '@playwright/test';
+import { hideOverlays } from '../../helpers';
 
 const CONTENT_FILTERING_URL = '/dd_e2e/cdocs/integration/content_filtering/';
 const STICKY_DATA_URL = '/dd_e2e/cdocs/integration/sticky_data/';
@@ -38,16 +39,6 @@ async function expectHidden(page: Page, description: string) {
   await expect(el).toHaveClass(/cdoc__hidden/);
 }
 
-/** Hide fixed/floating elements that can overlap content and block clicks. */
-async function hideOverlays(page: Page) {
-  await page.addStyleTag({
-    content: `
-      .conv-search-float-btn { display: none !important; }
-      body > header { display: none !important; }
-      .announcement-banner { display: none !important; }
-    `,
-  });
-}
 
 // --- Tests ---
 

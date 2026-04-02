@@ -1,17 +1,9 @@
 import { test, expect } from '@playwright/test';
+import { hideOverlays } from '../../helpers';
 
 const PAGE_URL = '/dd_e2e/cdocs/components/callout/';
 const CONTENT_AREA = '#mainContent';
 
-async function hideOverlays(page: import('@playwright/test').Page) {
-  await page.addStyleTag({
-    content: `
-      .conv-search-float-btn { display: none !important; }
-      body > header { display: none !important; }
-      .announcement-banner { display: none !important; }
-    `,
-  });
-}
 
 test.describe('Cdocs callout component', () => {
   test.beforeEach(async ({ page }) => {

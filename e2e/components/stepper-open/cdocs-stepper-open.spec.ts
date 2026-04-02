@@ -1,4 +1,5 @@
 import { test, expect, type Page } from '@playwright/test';
+import { hideOverlays } from '../../helpers';
 
 const PAGE_URL = '/dd_e2e/cdocs/components/stepper_open/';
 
@@ -40,15 +41,6 @@ async function expectActiveStep(page: Page, index: number) {
   }
 }
 
-async function hideOverlays(page: Page) {
-  await page.addStyleTag({
-    content: `
-      .conv-search-float-btn { display: none !important; }
-      body > header { display: none !important; }
-      .announcement-banner { display: none !important; }
-    `,
-  });
-}
 
 // --- Tests ---
 

@@ -1,4 +1,5 @@
 import { test, expect, type Page } from '@playwright/test';
+import { hideOverlays } from '../../helpers';
 
 const PAGE_URL = '/dd_e2e/cdocs/integration/content_filtering/';
 
@@ -59,16 +60,6 @@ async function resetToDefaults(page: Page) {
   await clickPill(page, 'database', 'postgres');
 }
 
-/** Hide fixed/floating elements that can overlap content and block clicks. */
-async function hideOverlays(page: Page) {
-  await page.addStyleTag({
-    content: `
-      .conv-search-float-btn { display: none !important; }
-      body > header { display: none !important; }
-      .announcement-banner { display: none !important; }
-    `,
-  });
-}
 
 // --- Tests ---
 

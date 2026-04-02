@@ -1,4 +1,5 @@
 import { test, expect, type Page } from '@playwright/test';
+import { hideOverlays } from '../../helpers';
 
 const PAGE_URL = '/dd_e2e/cdocs/components/stepper_closed/';
 
@@ -79,16 +80,6 @@ async function completeAllSteps(page: Page) {
   await clickNavBtn(page, FINISH_BTN);
 }
 
-/** Hide fixed/floating elements that can overlap content and block clicks. */
-async function hideOverlays(page: Page) {
-  await page.addStyleTag({
-    content: `
-      .conv-search-float-btn { display: none !important; }
-      body > header { display: none !important; }
-      .announcement-banner { display: none !important; }
-    `,
-  });
-}
 
 // --- Tests ---
 
