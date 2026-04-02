@@ -6618,9 +6618,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cdocs-data@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-data-v1.3.2.tgz":
-  version: 1.3.2
-  resolution: "cdocs-data@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-data-v1.3.2.tgz"
+"cdocs-data@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/jen.gilbert/conditional-filters-revamp/cdocs-data-v1.5.0-rc.3.tgz":
+  version: 1.5.0-rc.3
+  resolution: "cdocs-data@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/jen.gilbert/conditional-filters-revamp/cdocs-data-v1.5.0-rc.3.tgz"
   dependencies:
     "@types/semver": "npm:^7.7.0"
     js-yaml: "npm:^4.1.0"
@@ -6632,18 +6632,18 @@ __metadata:
     typedoc-plugin-zod: "npm:^1.3.1"
     uuid: "npm:^11.0.5"
     zod: "npm:^4.1.12"
-  checksum: 10/83ba74da164764200040aeca9871864ab3aaecb543355b8b20f240412486b2e996d43960d26b4129419eac6838f2eb0aa0946174325324f481361070edab7e28
+  checksum: 10/621159a8de2004bc979fa4a724d08168ed30b6effb53b79cb4472fc9646d6093479ec44dde4fd6d58945834e7cad93fbfa98d50e9308c394840c093fed7600b6
   languageName: node
   linkType: hard
 
-"cdocs-hugo-integration@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-hugo-integration-v2.15.0.tgz":
-  version: 2.15.0
-  resolution: "cdocs-hugo-integration@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-hugo-integration-v2.15.0.tgz"
+"cdocs-hugo-integration@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/jen.gilbert/conditional-filters-revamp-integration/cdocs-hugo-integration-v2.16.0-rc.1.tgz":
+  version: 2.16.0-rc.1
+  resolution: "cdocs-hugo-integration@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/jen.gilbert/conditional-filters-revamp-integration/cdocs-hugo-integration-v2.16.0-rc.1.tgz"
   dependencies:
     "@prettier/sync": "npm:^0.5.2"
     "@types/markdown-it": "npm:^14.1.2"
     "@vitejs/plugin-react": "npm:^4.3.3"
-    cdocs-data: "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-data-v1.3.2.tgz"
+    cdocs-data: "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/jen.gilbert/conditional-filters-revamp/cdocs-data-v1.5.0-rc.3.tgz"
     cdocs-markdoc: "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-markdoc-v1.2.1.tgz"
     chokidar: "npm:^4.0.3"
     chroma-highlight: "npm:^2.4.2"
@@ -6663,7 +6663,7 @@ __metadata:
     vite: "npm:^5.4.10"
     vite-plugin-singlefile: "npm:^2.0.2"
     zod: "npm:^4.1.12"
-  checksum: 10/81b9ee967e91ee79de1b278fad1eb6008c995611bd895507e8a71a0bcc79e790abd40ad349baf37aca099d1e5b6125261cb7b0d3ad772f0b3e58134dcdeaf0dd
+  checksum: 10/2b2b7ba9fbae95b40c7ad4e50eb5ffce103636c9a2049685b6264c05ac8a1a45d89170bbe6ab6166e9f5adf462e4b44644c5f047586f6c0133849c1b1334ee73
   languageName: node
   linkType: hard
 
@@ -7713,7 +7713,7 @@ __metadata:
     acorn: "npm:^7.4.1"
     alpinejs: "npm:^3.13.7"
     bootstrap: "npm:^5.2"
-    cdocs-hugo-integration: "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-hugo-integration-v2.15.0.tgz"
+    cdocs-hugo-integration: "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/jen.gilbert/conditional-filters-revamp-integration/cdocs-hugo-integration-v2.16.0-rc.1.tgz"
     cross-env: "npm:^5.2.1"
     del: "npm:4.1.1"
     eslint: "npm:^6.8.0"
