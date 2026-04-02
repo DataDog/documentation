@@ -12,4 +12,4 @@ This page contains examples of the video component.
 
 ### Basic video
 
-{% img src="/images/dd_e2e/cdocs/sample_video.mp4" alt="Sample video demonstration" video="true" /%}
+{% img src="dd_e2e/dashboard.mp4" alt="Dashboard widget demo" video="true" /%}
