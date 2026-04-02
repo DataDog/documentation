@@ -11,7 +11,7 @@ further_reading:
       text: "User management"
     - link: "/account_management/org_settings/mobile_third_party_access"
       tag: "Documentation"
-      text: "OAuth Apps"
+      text: "Mobile and Third-Party Access"
 ---
 
 ## Overview

@@ -97,7 +97,7 @@ To apply sharing settings across all your orgs, reach out to [Datadog Support][1
 
 ### Mobile and Third-Party Access
 
-The [**Mobile and Third-Party Access**][15] page allows you to view or manage Datadog Mobile and Third-Party applications in your organization.
+The [**Mobile and Third-Party Access**][15] page allows you to view and manage mobile and third-party applications in your organization.
 
 ## Compliance
 

@@ -32,7 +32,7 @@ Enabled OAuth applications allow users with necessary permissions to authorize a
 
 Disabling OAuth access for an application revokes access to this application for all users in your organization. While the application remains installed, users are no longer able to use the application and are prompted with an error if they attempt to authorize it.
 
-There are two ways to disable an application from the Mobile and Third-Party Access page:
+To disable an application from the Mobile and Third-Party Access page:
 1. Hover over your application in the apps table to reveal the **Disable** button on the right side of the row.
 {{< img src="account_management/mobile_third_party_access/disable-app-table.png" alt="Apps table showing the Disable button on hover" style="width:100%;">}}
 
@@ -49,15 +49,17 @@ Revoking a user's OAuth access to an application removes all access to that appl
 
 ### Application Scope Management
 
-The allowed scopes for an application can be modified by enabling Application Scope Management. Adding or removing a scope will affect the access for this application for all users in your organization. When a scope is disabled, all existing authorizations in your organization for that application that have the scope granted will be revoked.
+Enable Application Scope Management to modify the allowed scopes for an application. Adding or removing a scope affects access to this application for all users in your organization. Disabling a scope revokes all existing authorizations in your organization for that application.
 
-Currently, only MCP applications have support for Application Scope Management.
+Only MCP applications support Application Scope Management.
 
-1. In the **Application Scope Management** view, use the **Allowed** checkbox for each scope to control whether the application can be granted that scope.
+1. On the **Mobile and Third-Party Access page**, click an application to open its detail view.
+
+2. Select the **Scopes** tab and use the **Allowed** checkbox for each scope to control whether to grant the application that scope.
+
+3. Click Enable to save the scope configuration.
 
 {{< img src="account_management/mobile_third_party_access/scope-restrictions-enable.png" alt="Application Scope Management view with Enable and Restore to Full Access buttons" style="width:100%;">}}
-
-2. After making your changes, click **Enable** to save the scope configuration.
 
 ## Further Reading
 
@@ -66,5 +68,3 @@ Currently, only MCP applications have support for Application Scope Management.
 [1]: https://app.datadoghq.com/organization-settings/
 [2]: /account_management/rbac/permissions/#general-permissions
 [3]: /account_management/rbac/?tab=datadogapplication#custom-role
-[4]: /account_management/rbac/permissions/
-[5]: https://app.datadoghq.com/organization-settings/oauth-applications
