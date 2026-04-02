@@ -39,7 +39,7 @@ Set up the Google Cloud Storage destination and its environment variables when y
 
 #### Optional settings
 
-##### Prefix
+##### Prefix to apply to all key objects
 
 Enter a prefix that you want to apply to all key objects.
 
@@ -52,7 +52,7 @@ Enter a prefix that you want to apply to all key objects.
 1. Click **Add Header** to add metadata.
 1. Enter values for the header name and value.
 
-##### Buffering options
+##### Buffering
 
 {{% observability_pipelines/destination_buffer %}}
 
@@ -80,9 +80,9 @@ There are no secret identifiers to configure.
 
 A batch of events is flushed when one of these parameters is met. See [event batching][5] for more information.
 
-| Max Events     | Max Bytes       | Timeout (seconds)   |
-|----------------| ----------------| --------------------|
-| None           | 100,000,000     | 900                 |
+| Maximum Events | Maximum Size (MB) | Timeout (seconds)   |
+|----------------|-------------------|---------------------|
+| None           | 100               | 900                 |
 
 [1]: /logs/log_configuration/archives/
 [2]: /logs/log_configuration/rehydrating/

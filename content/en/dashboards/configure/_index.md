@@ -17,6 +17,7 @@ Configure individual dashboards to:
 - [View configuration actions to customize your dashboard display and view dashboard related activities](#configuration-actions)
 - [Restrict access to individual dashboards with Permissions](#permissions)
 - [Customize views with template variables](#template-variables)
+- [Organize widgets into named sections with Tabs](#tabs)
 
 ## Dashboard details
 
@@ -38,6 +39,24 @@ Update Markdown-supported dashboard descriptions or associate [teams][1] with a 
  - Add and configure dashboard template variables
  - Apply template variables to dashboard widgets
  - Use template variables to create Saved views
+
+## Tabs
+
+Use tabs to organize widgets into named sections within a single dashboard. Tabs help manage large dashboards by grouping related widgets together, reducing visual clutter, and letting viewers navigate directly to the content they need.
+
+### Create and manage tabs
+
+To add a tab, click on the **Add Widgets** dropdown at the top of the dashboard and click **Add New Tab**. New tabs are named automatically (for example, "Tab 1", "Tab 2") and a dashboard supports up to 100 tabs. Add subsequent tabs using the **+** button on the tab bar.
+
+To **rename** a tab, double-click the tab name to edit it inline, or open the tab's options menu (⋮) and select **Rename**. Tab names support up to 100 characters.
+
+To **reorder** tabs, drag and drop them into the desired position.
+
+To **delete** a tab, open the tab's options menu (⋮) and select **Delete**.
+
+### Move widgets to a tab
+
+In edit mode, open a widget's share menu and select **Move to tab**, then choose a destination tab or create a new one. If the selected widget is a group, all nested widgets move together. If the selected widget is a nested widget, it becomes a top-level widget in the destination tab. The widget is placed in the next available position on the destination tab.
 
 ## Configuration actions
 

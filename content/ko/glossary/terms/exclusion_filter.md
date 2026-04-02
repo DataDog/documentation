@@ -1,4 +1,5 @@
 ---
+id: exclusion_filter
 core_product:
 - log management
 title: 제외 필터

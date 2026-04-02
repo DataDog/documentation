@@ -27,7 +27,7 @@ further_reading:
 
 Datadog Fleet Automation allows you to centrally govern and remotely manage Datadog Agents and OpenTelemetry (OTel) Collectors at scale to support your evolving observability needs.
 
-{{< img src="/agent/fleet_automation/fleet_automation2.png" alt="The fleet automation page" style="width:100%;" >}}
+{{< img src="/agent/fleet_automation/fleet-automation-main.png" alt="The fleet automation page" style="width:100%;" >}}
 
 ## Use cases
 
@@ -75,16 +75,24 @@ For each OTel Collector, you can see:
 - The Collector version
 - The distribution of the Collector
 - The configuration YAML of the Collector
+- Pipeline visualization of the Collector
 
 ### Examine a Datadog Agent or OpenTelemetry Collector
-
 Selecting a Datadog Agent or OTel Collector gives you more information about it, including its configuration, connected integrations, audit events, and a support tab that you can use to send a remote flare.
 
 {{< img src="agent/fleet_automation/fleet-automation-view-config.png" alt="An Agent's integration information" style="width:100%;" >}}
 
+### Visualize an OTel Collector Pipeline
+The **Pipeline Visualization** toggle in the **Configurations** tab of an OTel Collector provides a pipeline view of the Collector. Use Pipeline Visualization to:
+- Validate telemetry routing between configured OTel Collector components.
+- Spot unexpected data drops along the OTel Collector pipeline.
+- Inspect specific component configuration YAML snippets by hovering over any component.
+
+{{< img src="/agent/fleet_automation/fleet-automation-pipeline-view.png" alt="OTel Collector pipeline view" style="width:100%;" >}}
+
 ### View Agent Audit Trail events
 
-The Audit Events tab displays Audit Trail events associated with the selected Agent.
+The **Audit Events** tab displays Audit Trail events associated with the selected Agent.
 Use this tab to:
 - Identify configuration changes, API key updates, installs, upgrades and support flares.
 - Determine when changes were made and from where
