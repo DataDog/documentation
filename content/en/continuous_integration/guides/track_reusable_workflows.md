@@ -30,11 +30,11 @@ CI Visibility does not automatically extract reusable workflow metadata (such as
 
 ## Add reusable workflow tags from the called workflow
 
-The most reliable way to tag reusable workflow metadata is to add a tagging step **inside the reusable workflow itself**. This ensures that every caller automatically gets the tags without any extra configuration.
+The most reliable way to tag reusable workflow metadata is to add a tagging step **inside the reusable workflow itself**. This way, every caller automatically gets the tags without extra configuration.
 
-GitHub exposes the [`github.workflow_ref`][6] context variable inside a reusable workflow run. This value contains the full reference to the called workflow, including the version or branch ref (for example, `my-org/shared-workflows/.github/workflows/build.yml@refs/tags/v2.1.0`).
+GitHub does not include reusable workflow metadata (such as the called workflow's ref or path) in the webhook events that Datadog receives, and the [`github.workflow_ref`][6] context variable resolves to the **caller** workflow's ref, not the called workflow's. To work around this, query the [GitHub Actions REST API][8] from within the workflow to look up the `referenced_workflows` for the current run:
 
-Add a step at the beginning of your reusable workflow to extract and tag the relevant metadata:
+**Reusable workflow:**
 
 ```yaml
 # my-org/shared-workflows/.github/workflows/build.yml
@@ -46,6 +46,9 @@ on:
       build-target:
         required: true
         type: string
+    secrets:
+      DD_API_KEY:
+        required: true
 
 jobs:
   build:
@@ -55,8 +58,11 @@ jobs:
         env:
           DATADOG_API_KEY: ${{ secrets.DD_API_KEY }}
           DATADOG_SITE: {{< region-param key="dd_site" >}}
+          GH_TOKEN: ${{ github.token }}
         run: |
-          WORKFLOW_REF="${{ github.workflow_ref }}"
+          # Look up the reusable workflow ref from the GitHub API
+          WORKFLOW_REF=$(gh api repos/${{ github.repository }}/actions/runs/${{ github.run_id }} \
+            --jq '.referenced_workflows[0] | "\(.path)@\(.ref)"')
 
           # Extract the version or branch ref (the part after '@')
           WORKFLOW_VERSION="${WORKFLOW_REF##*@}"
@@ -64,7 +70,7 @@ jobs:
           # Extract the workflow path (the part before '@')
           WORKFLOW_PATH="${WORKFLOW_REF%%@*}"
 
-          # Extract the source repository (the part before the first '/')
+          # Extract the source repository
           WORKFLOW_REPO="${WORKFLOW_PATH%%/.github/*}"
 
           npx @datadog/datadog-ci tag --level job \
@@ -78,6 +84,23 @@ jobs:
         run: echo "Building ${{ inputs.build-target }}"
 ```
 
+**Caller workflow:**
+
+```yaml
+# In a caller repository's workflow
+name: CI
+
+on: [push]
+
+jobs:
+  call-shared-build:
+    uses: my-org/shared-workflows/.github/workflows/build.yml@v2.1.0
+    with:
+      build-target: production
+    secrets:
+      DD_API_KEY: ${{ secrets.DD_API_KEY }}
+```
+
 This produces the following tags on the job span:
 
 | Tag | Example value | Description |
@@ -87,9 +110,11 @@ This produces the following tags on the job span:
 | `reusable_workflow.repo` | `my-org/shared-workflows` | The repository that owns the reusable workflow. |
 | `reusable_workflow.caller_repo` | `my-org/frontend-app` | The repository that called the reusable workflow. |
 
+{{< img src="ci/guides/track_reusable_workflows/reusable_workflow_tags.jpg" alt="Reusable workflow custom tags on a job span in CI Visibility" style="width:80%;" >}}
+
 ## Add reusable workflow tags from the caller workflow
 
-If you cannot modify the shared workflow, you can tag the metadata from the **caller** workflow instead. In this case, the version is known statically since it is declared in the `uses` field:
+If you cannot modify the shared workflow, you can tag the metadata from a separate job in the **caller** workflow instead. Use the same [GitHub Actions REST API][8] approach to look up the reusable workflow ref automatically:
 
 ```yaml
 # In a caller repository's workflow
@@ -112,13 +137,20 @@ jobs:
         env:
           DATADOG_API_KEY: ${{ secrets.DD_API_KEY }}
           DATADOG_SITE: {{< region-param key="dd_site" >}}
+          GH_TOKEN: ${{ github.token }}
         run: |
-          npx @datadog/datadog-ci tag --level pipeline \
-            --tags "reusable_workflow.ref:refs/tags/v2.1.0" \
-            --tags "reusable_workflow.repo:my-org/shared-workflows"
-```
+          WORKFLOW_REF=$(gh api repos/${{ github.repository }}/actions/runs/${{ github.run_id }} \
+            --jq '.referenced_workflows[0] | "\(.path)@\(.ref)"')
 
-<div class="alert alert-info">When tagging from the caller, the version value must be maintained manually. If you pin to a new version but forget to update the tag, the data in CI Visibility becomes stale. Tagging from inside the reusable workflow (as shown in the previous section) avoids this problem.</div>
+          WORKFLOW_VERSION="${WORKFLOW_REF##*@}"
+          WORKFLOW_PATH="${WORKFLOW_REF%%@*}"
+          WORKFLOW_REPO="${WORKFLOW_PATH%%/.github/*}"
+
+          npx @datadog/datadog-ci tag --level pipeline \
+            --tags "reusable_workflow.ref:${WORKFLOW_VERSION}" \
+            --tags "reusable_workflow.path:${WORKFLOW_PATH}" \
+            --tags "reusable_workflow.repo:${WORKFLOW_REPO}"
+```
 
 ## Track reusable workflow inputs
 
@@ -145,4 +177,5 @@ If your reusable workflow accepts [inputs][7] that affect build behavior (for ex
 [5]: https://app.datadoghq.com/organization-settings/api-keys
 [6]: https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/accessing-contextual-information-about-workflow-runs#github-context
 [7]: https://docs.github.com/en/actions/sharing-automations/reusing-workflows#using-inputs-and-secrets-in-a-reusable-workflow
-[8]: /continuous_integration/explorer/
+[8]: https://docs.github.com/en/rest/actions/workflow-runs#get-a-workflow-run
+[9]: /continuous_integration/explorer/
