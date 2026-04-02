@@ -2461,6 +2461,11 @@ menu:
       identifier: event_correlation_analytics
       parent: event_correlation
       weight: 503
+    - name: Maintenance Windows
+      url: events/correlation/maintenance_windows
+      identifier: event_correlation_maintenance_windows
+      parent: event_correlation
+      weight: 504
     - name: Guides
       url: events/guides/
       identifier: events_guides
@@ -3934,11 +3939,16 @@ menu:
       parent: cloud_cost_planning
       identifier: cloud_cost_planning_budgets
       weight: 701
+    - name: Forecasting
+      url: cloud_cost_management/planning/forecasting
+      parent: cloud_cost_planning
+      identifier: cloud_cost_planning_forecasting
+      weight: 702
     - name: Commitment Programs
       url: cloud_cost_management/planning/commitment_programs
       parent: cloud_cost_planning
       identifier: cloud_cost_planning_commitment_programs
-      weight: 702
+      weight: 703
     - name: Cost Changes
       url: cloud_cost_management/cost_changes
       parent: cloud_cost
@@ -6003,11 +6013,16 @@ menu:
       parent: observability_pipelines_configuration
       identifier: observability_pipelines_update_existing_pipelines
       weight: 106
+    - name: Export Pipeline
+      url: observability_pipelines/configuration/export_pipeline_configuration/
+      parent: observability_pipelines_configuration
+      identifier: observability_pipelines_export_pipeline_configuration
+      weight: 107
     - name: Access Control
       url: observability_pipelines/configuration/access_control
       parent: observability_pipelines_configuration
       identifier: observability_pipelines_access_control
-      weight: 107
+      weight: 108
     - name: Sources
       url: observability_pipelines/sources/
       parent: observability_pipelines
@@ -8923,7 +8938,7 @@ menu:
       parent: pa_experiments
       identifier: pa_experiments_plan
       weight: 1
-    - name: Define Metrics
+    - name: Create Experiment Metrics
       url: experiments/defining_metrics
       parent: pa_experiments
       identifier: pa_experiments_metrics
@@ -9029,6 +9044,11 @@ menu:
       parent: session_replay
       identifier: session_replay_heatmaps
       weight: 4
+    - name: Guides
+      url: /session_replay/guide
+      parent: session_replay
+      identifier: session_replay_guide
+      weight: 5
     - name: Account Management
       url: account_management/
       pre: cog-2

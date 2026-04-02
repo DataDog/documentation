@@ -10,10 +10,6 @@ further_reading:
   text: "Product Analytics"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/datadog-experiments/" >}}
-Datadog Experiments is in Preview. Complete the form to request access.
-{{< /callout >}}
-
 ## Overview
 
 Datadog Experiments helps teams run and analyze randomized experiments, such as A/B tests. These experiments help you understand how new features affect business outcomes, user behavior, and application performance, so you can make confident, data-backed decisions about what to implement.
@@ -21,7 +17,7 @@ Datadog Experiments helps teams run and analyze randomized experiments, such as 
 Datadog Experiments consists of two components:
 
 - An integration with [Datadog Feature Flags][1] for deploying and managing randomized experiments.
-- A statistical analysis of [Real User Monitoring (RUM)][2] and [Product Analytics][3] data to evaluate experiment results.
+- A statistical analysis of [Real User Monitoring (RUM)][2], [Product Analytics][3], and [warehouse][10] data to evaluate experiment results.
 
 ## Getting started
 
@@ -29,12 +25,13 @@ To start using Datadog Experiments, configure at least one of the following data
 
 - [Real User Monitoring (RUM)][2] for client-side and performance signals.
 - [Product Analytics][3] for user behavior and journey metrics.
+- [Data warehouse][10] for running experiment analysis directly in your warehouse using Snowflake, BigQuery, Redshift, or Databricks.
 
 After configuring a data source, follow these steps to launch your experiment:
 
+1. **[Create a feature flag][6]** and implement it using the [SDK][9] to assign users to the control and variant groups. A feature flag is required to launch your experiment.
 1. **[Create a metric][4]** to evaluate your experiment.
 1. **[Create an experiment][5]** to define your hypothesis and optionally calculate a [sample size][8].
-1. **[Create a feature flag][6]** and implement it using the [SDK][9] to assign users to the control and variant groups. A feature flag is required to launch your experiment.
 1. **[Launch your experiment][7]** to see the impact of your change on business outcomes, user journey, and application performance.
 
 {{< img src="/product_analytics/experiment/overview_metrics_view-1.png" alt="The Experiments metrics view showing business, funnel, and performance metrics with control and variant values and relative lift for each metric. A tooltip is open on the Revenue metric showing Non-CUPED values for Revenue per User, Total Revenue, and User Assignment Count across the control and variant groups." style="width:90%;" >}}
@@ -51,3 +48,4 @@ After configuring a data source, follow these steps to launch your experiment:
 [7]: /experiments/plan_and_launch_experiments#step-3---launch-your-experiment
 [8]: /experiments/plan_and_launch_experiments#add-a-sample-size-calculation-optional
 [9]: /getting_started/feature_flags/#feature-flags-sdks
+[10]: /experiments/guide/

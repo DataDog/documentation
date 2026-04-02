@@ -1,4 +1,5 @@
 ---
+id: test_batch
 core_product:
 - monitorización Synthetic
 title: lote de prueba

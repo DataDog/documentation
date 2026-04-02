@@ -1,4 +1,5 @@
 ---
+id: space_aggregation
 core_product:
 - 메트릭
 title: 공간 집계
