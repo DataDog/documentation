@@ -129,7 +129,7 @@ The metric description helps you understand what a metric represents, why it exi
 
 #### AI-generated description
 
-For custom metrics with connected source code, Datadog can automcatically create AI-generated descriptions to provide additional context. These descriptions are fully editable, and human edits always take precedence. 
+For custom metrics with connected source code, Datadog can automatically create AI-generated descriptions to provide additional context. These descriptions are fully editable, and human edits always take precedence.
 
 To enable auto-generated descriptions from source code, ensure that you've installed Datadog's [GitHub][36], [GitLab][37], or [Azure DevOps][38] integration and that all your [repositories][39] are connected.
 
