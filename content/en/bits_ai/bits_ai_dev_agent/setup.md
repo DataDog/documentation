@@ -9,7 +9,9 @@ Bits AI Dev Agent integrates with GitHub to open, update, and iterate on pull re
 
 ## Prerequisites
 
-To set up Bits AI Dev Agent, you need the **Bits Dev Agent Write** (`bits_dev_agent_write`) permission. This permission is added by default to the Datadog Standard Role. If your organization uses Custom Roles, an admin must manually add it. For details, see [Access Control][1].
+To set up Bits AI Dev Agent, you need the **Bits Dev Agent Write** (`bits_dev_write`) permission. This permission is included in managed Datadog roles such as the Datadog Standard Role.
+
+If your organization uses custom roles, an admin must add this permission manually. For details, see [Access Control][1].
 
 ## Setup
 
