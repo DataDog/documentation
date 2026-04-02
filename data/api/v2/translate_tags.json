@@ -125,7 +125,7 @@
   },
   "datasets": {
     "name": "Datasets",
-    "description": "Data Access Controls in Datadog is a feature that allows administrators and access managers to regulate\naccess to sensitive data. By defining Restricted Datasets, you can ensure that only specific teams or roles can\nview certain types of telemetry (for example, logs, traces, metrics, and RUM data)."
+    "description": "Data Access Controls in Datadog is a feature that allows administrators and access managers to regulate\naccess to sensitive data. By defining Restricted Datasets, you can ensure that only specific teams or roles can\nview certain types of telemetry (for example, logs, traces, custom metrics, and RUM data)."
   },
   "deployment-gates": {
     "name": "Deployment Gates",

@@ -2660,6 +2660,30 @@ menu:
           - SearchSecurityMonitoringSignals
         unstable: []
         order: 72
+    - name: Bulk update triage state of security signals
+      url: '#bulk-update-triage-state-of-security-signals'
+      identifier: security-monitoring-bulk-update-triage-state-of-security-signals
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - BulkEditSecurityMonitoringSignalsState
+        unstable: []
+        order: 85
+    - name: Bulk update triage assignee of security signals
+      url: '#bulk-update-triage-assignee-of-security-signals'
+      identifier: security-monitoring-bulk-update-triage-assignee-of-security-signals
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - BulkEditSecurityMonitoringSignalsAssignee
+        unstable: []
+        order: 86
     - name: Get a quick list of security signals
       url: '#get-a-quick-list-of-security-signals'
       identifier: security-monitoring-get-a-quick-list-of-security-signals
@@ -9671,6 +9695,71 @@ menu:
         unstable:
           - v2
         order: 49
+    - name: Update an incident user-defined field
+      url: '#update-an-incident-user-defined-field'
+      identifier: incidents-update-an-incident-user-defined-field
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateIncidentUserDefinedField
+        unstable:
+          - v2
+        order: 55
+    - name: Get an incident user-defined field
+      url: '#get-an-incident-user-defined-field'
+      identifier: incidents-get-an-incident-user-defined-field
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetIncidentUserDefinedField
+        unstable:
+          - v2
+        order: 54
+    - name: Delete an incident user-defined field
+      url: '#delete-an-incident-user-defined-field'
+      identifier: incidents-delete-an-incident-user-defined-field
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteIncidentUserDefinedField
+        unstable:
+          - v2
+        order: 56
+    - name: Create an incident user-defined field
+      url: '#create-an-incident-user-defined-field'
+      identifier: incidents-create-an-incident-user-defined-field
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateIncidentUserDefinedField
+        unstable:
+          - v2
+        order: 53
+    - name: Get a list of incident user-defined fields
+      url: '#get-a-list-of-incident-user-defined-fields'
+      identifier: incidents-get-a-list-of-incident-user-defined-fields
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListIncidentUserDefinedFields
+        unstable:
+          - v2
+        order: 52
     - name: Update an incident type
       url: '#update-an-incident-type'
       identifier: incidents-update-an-incident-type
