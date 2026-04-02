@@ -73,7 +73,7 @@ You need to generate exports for two data types: **actual** and **amortized**. D
    {{< img src="cloud_cost/improved_export_destination_2.png" alt="Export Destination with File partitioning and Overwrite data settings" >}}
 
 8. On the **Review + create** tab, select **Create**.
-9. For faster processing, generate the first exports manually by clicking **Run Now**.
+9. Generate the first exports manually by clicking **Run Now** and wait for **successful completion** before moving on to the next step.
 
 {{< img src="cloud_cost/run_now.png" alt="Click Run Now button in export side panel to generate exports" style="width:50%" >}}
 
