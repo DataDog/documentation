@@ -24,6 +24,8 @@ Datadog supports OpenTelemetry runtime metrics for the following languages:
 - Java
 - .NET
 - Go
+- NodeJS
+- Python
 
 For details about host and container metrics mapping, see [OpenTelemetry Metrics Mapping][1].
 
@@ -91,6 +93,46 @@ OTEL_METRIC_EXPORT_INTERVAL=10000
 [4]: https://opentelemetry.io/docs/instrumentation/net/manual/
 [5]: https://github.com/open-telemetry/opentelemetry-dotnet-contrib/tree/main/src/OpenTelemetry.Instrumentation.Runtime
 [7]: https://opentelemetry.io/docs/specs/otel/configuration/sdk-environment-variables/#periodic-exporting-metricreader
+
+{{% /tab %}}
+
+{{% tab "NodeJS" %}}
+
+#### Automatic instrumentation
+
+If you use [OpenTelemetry automatic instrumentation][3] for Node.js applications, runtime metrics are enabled by default through the [`@opentelemetry/instrumentation-runtime-node`][5] package.
+
+**Note**: Runtime metrics are only exported if a `MeterProvider` and metric exporter are configured. Set the `OTEL_METRICS_EXPORTER` environment variable or programmatically configure a `metricReader` in your SDK initialization.
+
+#### Manual instrumentation
+
+If you use [OpenTelemetry manual instrumentation][4], see the documentation for the [`@opentelemetry/instrumentation-runtime-node`][5] library.
+
+[3]: https://opentelemetry.io/docs/zero-code/js/
+[4]: https://opentelemetry.io/docs/languages/js/instrumentation/
+[5]: https://github.com/open-telemetry/opentelemetry-js-contrib/tree/main/packages/instrumentation-runtime-node
+
+{{% /tab %}}
+
+{{% tab "Python" %}}
+
+Runtime metrics are not enabled by default for Python applications. Install the [`opentelemetry-instrumentation-system-metrics`][5] package:
+
+```shell
+pip install opentelemetry-instrumentation-system-metrics
+```
+
+If you use [automatic instrumentation][3], `opentelemetry-instrument` discovers and enables the package after installation. If you use [manual instrumentation][4], enable it in your application:
+
+```python
+from opentelemetry.instrumentation.system_metrics import SystemMetricsInstrumentor
+
+SystemMetricsInstrumentor().instrument()
+```
+
+[3]: https://opentelemetry.io/docs/languages/python/automatic/
+[4]: https://opentelemetry.io/docs/languages/python/instrumentation/
+[5]: https://github.com/open-telemetry/opentelemetry-python-contrib/tree/main/instrumentation/opentelemetry-instrumentation-system-metrics
 
 {{% /tab %}}
 
@@ -233,6 +275,67 @@ The following tables list the Datadog runtime metrics that are supported through
 | `runtime.dotnet.aspnetcore.`<br>`connections.total` | The total number of HTTP connections established to the server. (.NET Core only) | N/A |
 | `runtime.dotnet.aspnetcore.`<br>`connections.current` | The current number of active HTTP connections to the server. (.NET Core only) | N/A |
 | `runtime.dotnet.aspnetcore.`<br>`connections.queue_length` | The current length of the HTTP server connection queue. (.NET Core only) | N/A |
+
+{{% /tab %}}
+
+{{% tab "NodeJS" %}}
+
+| Datadog metric | Description |  OpenTelemetry metric |
+| --- | --- | --- |
+| `runtime.node.cpu.user` | CPU usage in user code. | N/A |
+| `runtime.node.cpu.system` | CPU usage in system code. | N/A |
+| `runtime.node.cpu.total` | Total CPU usage. | N/A |
+| `runtime.node.mem.rss` | Resident set size. | `process.memory.usage` |
+| `runtime.node.mem.heap_total` | Total heap memory. | N/A |
+| `runtime.node.mem.heap_used` | Heap memory usage. | N/A |
+| `runtime.node.mem.total` | Total system memory size. | N/A |
+| `runtime.node.mem.free` | Free system memory size. | `system.memory.usage` |
+| `runtime.node.mem.external` | External memory. | N/A |
+| `runtime.node.heap.total_heap_size` | Total heap size. | N/A |
+| `runtime.node.heap.total_heap_size_executable` | Total executable heap size. | N/A |
+| `runtime.node.heap.total_physical_size` | Total physical heap size. | N/A |
+| `runtime.node.heap.used_heap_size` | Used heap size. | N/A |
+| `runtime.node.heap.heap_size_limit` | Heap size limit. | N/A |
+| `runtime.node.heap.malloced_memory` | Malloced memory. | N/A |
+| `runtime.node.heap.peak_malloced_memory` | Peak allocated memory. | N/A |
+| `runtime.node.heap.size.by.space` | Heap space size. | `v8js.memory.heap.limit` |
+| `runtime.node.heap.used_size.by.space` | Heap space used size. | `v8js.memory.heap.used` |
+| `runtime.node.heap.available_size.by.space` | Heap space available size. | `v8js.memory.heap.space.available_size` |
+| `runtime.node.heap.physical_size.by.space` | Heap space physical size. | `v8js.memory.heap.space.physical_size` |
+| `runtime.node.process.uptime` | Process uptime. | N/A |
+| `runtime.node.event_loop.delay.max` | Maximum event loop delay. | N/A |
+| `runtime.node.event_loop.delay.min` | Minimum event loop delay. | N/A |
+| `runtime.node.event_loop.delay.avg` | Average event loop delay. | N/A |
+| `runtime.node.event_loop.delay.sum` | Total event loop delay. | N/A |
+| `runtime.node.event_loop.delay.median` | Median event loop delay. | N/A |
+| `runtime.node.event_loop.delay.95percentile` | 95th percentile event loop delay. | N/A |
+| `runtime.node.event_loop.delay.count` | Event loop iteration count where a delay is detected. | N/A |
+| `runtime.node.event_loop.utilization` | Fraction of time the event loop is active. | `nodejs.eventloop.utilization` |
+| `runtime.node.gc.pause.max` | Maximum garbage collection pause. | N/A |
+| `runtime.node.gc.pause.min` | Minimum garbage collection pause. | N/A |
+| `runtime.node.gc.pause.avg` | Average garbage collection pause. | N/A |
+| `runtime.node.gc.pause.sum` | Total garbage collection pause. | N/A |
+| `runtime.node.gc.pause.median` | Median garbage collection pause. | N/A |
+| `runtime.node.gc.pause.95percentile` | 95th percentile garbage collection pause. | N/A |
+| `runtime.node.gc.pause.count` | Number of garbage collections. | N/A |
+| `runtime.node.gc.pause.by.type.max` | Maximum garbage collection pause by type. | N/A |
+| `runtime.node.gc.pause.by.type.min` | Minimum garbage collection pause by type. | N/A |
+| `runtime.node.gc.pause.by.type.avg` | Average garbage collection pause by type. | N/A |
+| `runtime.node.gc.pause.by.type.sum` | Total garbage collection pause by type. | N/A |
+| `runtime.node.gc.pause.by.type.median` | Median garbage collection pause by type. | N/A |
+| `runtime.node.gc.pause.by.type.95percentile` | 95th percentile garbage collection pause by type. | N/A |
+| `runtime.node.gc.pause.by.type.count` | Number of garbage collections by type. | N/A |
+
+{{% /tab %}}
+
+{{% tab "Python" %}}
+
+There are no existing metric mappings between Datadog and OpenTelemetry for Python runtime metrics due to mismatching metric types between the two systems.
+
+For more information, see [Datadog Python runtime metrics][8] and the [OpenTelemetry Python system metrics instrumentation][9].
+
+[8]: /tracing/metrics/runtime_metrics/?tab=python
+[9]: https://github.com/open-telemetry/opentelemetry-python-contrib/tree/main/instrumentation/opentelemetry-instrumentation-system-metrics
 
 {{% /tab %}}
 
