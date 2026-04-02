@@ -407,7 +407,7 @@ Local authentication is recommended for Cline and when remote authentication is 
 
 2. Run `datadog_mcp_cli login` manually to walk through the OAuth login flow and choose a [Datadog site][21].
 
-3. Configure your AI client to use the stdio transport with `datadog_mcp_cli` as the command. For example (replace `<USERNAME>` with your username):
+3. Configure your AI client to use the stdio transport with `datadog_mcp_cli` as the command. For example, in macOS (replace `<USERNAME>` with your OS username):
    ```json
    {
      "mcpServers": {
@@ -421,11 +421,14 @@ Local authentication is recommended for Cline and when remote authentication is 
    }
    ```
 
-   On Windows, replace the `command` path with the location of the downloaded `.exe` file (for example, `C:\Users\<USERNAME>\bin\datadog_mcp_cli.exe`).
+   For other operating systems, replace the `command` path with the location of the downloaded binary:
+   - Linux: `/home/<USERNAME>/.local/bin/datadog_mcp_cli`
+   - Windows: `<USERNAME>\bin\datadog_mcp_cli.exe`
 
    <div class="alert alert-tip">For Claude Code, you can instead run: 
    <pre><code>claude mcp add datadog --scope user -- ~/.local/bin/datadog_mcp_cli</code></pre></div>
 
+4. Fully restart your AI client to apply the configuration and load the MCP Server.
 {{% /collapse-content %}}
 
 ## Toolsets
