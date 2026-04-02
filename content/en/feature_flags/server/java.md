@@ -497,9 +497,9 @@ Before investigating specific errors, confirm these prerequisites are in place:
 3. **The experimental flagging provider is enabled on the tracer**: Set `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true`.
 4. **Required tracer environment variables are set**: `DD_API_KEY`, `DD_ENV`, and `DD_SITE`.
 5. **The Agent is configured for the correct site**: Set `site` in `datadog.yaml` or `DD_SITE` on the Agent. See [Check Agent Site][2].
-6. **Your `DD_ENV` value appears in the Feature Flag environments list**: Confirm your environment is visible at `https://app.datadoghq.com/feature-flags/settings/environments`.
+6. **Your `DD_ENV` value appears in the Feature Flag environments list**: Confirm your environment is visible in the [Feature Flag Environments][5] settings.
 
-After confirming all prerequisites, continue with the sections below if flags still aren't working.
+After confirming all prerequisites, continue with the following sections if feature flags still aren't working.
 
 ### Debug flag evaluations
 
@@ -584,20 +584,6 @@ Cannot create backend API client since agentless mode is disabled, and agent doe
 3. **Retry logic**: Implement retry on provider initialization failure
 4. **Upgrade Agent**: Verify you are using Agent 7.x or later with EVP Proxy support
 
-### Trace Remote Configuration through the Agent
-
-If none of the above resolves the issue, trace the Remote Configuration path from the Datadog backend to your application.
-
-**Check Agent RC status in Fleet Automation**
-
-The [Fleet Automation][3] page (`https://app.datadoghq.com/fleet`) shows the Remote Configuration status for each Agent. Select the Agent your application connects to and confirm Remote Configuration is active. For more detail on what Fleet Automation exposes, see the [Fleet Automation documentation][3].
-
-**Check Agent RC status from the CLI**
-
-Run `datadog-agent status` on the host running the Agent and review the Remote Configuration section of the output. For the full list of Agent CLI commands, see [Agent Commands][4].
-
-**Note**: These steps apply to all Datadog server-side SDK integrations, not only Java.
-
 ### No exposures in Datadog
 
 **Problem**: Experiment exposures aren't appearing in Datadog
@@ -614,5 +600,4 @@ Run `datadog-agent status` on the host running the Agent and review the Remote C
 
 [1]: /remote_configuration/
 [2]: /agent/troubleshooting/site/
-[3]: /agent/fleet_automation/
-[4]: /agent/configuration/agent-commands/
+[5]: https://app.datadoghq.com/feature-flags/settings/environments
