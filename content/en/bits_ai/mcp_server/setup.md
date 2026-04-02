@@ -309,8 +309,6 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
 
 1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
 
-<div class="alert alert-info">If remote authentication is not available, use <a href="#local-binary-authentication">local binary authentication</a> instead.</div>
-
 [1]: /bits_ai/mcp_server#toolsets
 [2]: https://kiro.dev/docs/mcp/configuration/
 {{< /site-region >}}
