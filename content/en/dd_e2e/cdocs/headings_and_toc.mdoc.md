@@ -7,17 +7,9 @@ content_filters:
 
 ## Overview
 
-This is a test page used to verify correctness of the right nav (TOC) throughout filter selection changes.
-
-## Test cases
-
-- The TOC is generated correctly for each filter option, showing only the visible H2 headings on the page each time the user updates their filter selection.
-- All headings have unique IDs assigned to them; no two headings share the same ID, even if they have the same display text.
-- When the user clicks "Installation", the page scrolls to that heading, and the TOC displays the correct H3 headings for that section.
-
-## Overview
-
 This page tests that the table of contents updates correctly when content filters change which headings are visible. Several headings are intentionally repeated across database options to verify unique ID generation.
+
+**Everything below this line is fake test content.**
 
 ## Prerequisites
 

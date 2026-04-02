@@ -16,8 +16,6 @@ const CONTENT_AREA = '#mainContent';
 
 const SHARED_H2S = [
   'Overview',
-  'Test cases',
-  'Overview',
   'Prerequisites',
 ];
 
