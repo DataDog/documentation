@@ -2,7 +2,7 @@
 title: Cost
 description: Monitor your LLM tokens and costs.
 ---
-{{< img src="llm_observability/cost_tracking_overview.png" alt="Cost view for an app in LLM Observability." style="width:100%;" >}}
+{{< img src="llm_observability/Cost_LLMO.png" alt="Cost view for an app in LLM Observability." style="width:100%;" >}}
 
 Datadog LLM Observability automatically calculates an estimated cost for each LLM request, using providers' public pricing models and token counts annotated on LLM/embedding spans.
 
@@ -59,6 +59,17 @@ Click any trace or span to open a detailed side-panel view that includes cost me
 At the top of the trace view, the banner shows aggregated cost information for the full trace, including estimated cost and total tokens. Hovering over these values reveals a breakdown of input and output token/costs.
 
 Selecting an individual LLM span shows similar cost metrics specific to that LLM request.
+
+To query cost-related data in Traces page, use the left side **Cost** facets. 
+
+Alternatively, query the following span attributes directly:
+- `@metrics.input_tokens` / `@metrics.estimated_input_cost`
+- `@metrics.output_tokens` / `@metrics.estimated_output_cost`
+- `@metrics.total_tokens` / `@metrics.estimated_total_cost`
+- `@metrics.non_cached_input_tokens` / `@metrics.estimated_non_cached_input_cost`
+- `@metrics.cache_read_input_tokens` / `@metrics.estimated_cache_read_input_cost`
+- `@metrics.cache_write_input_tokens` / `@metrics.estimated_cache_write_input_cost`
+- `@metrics.reasoning_output_tokens` / `@metrics.estimated_reasoning_output_cost`
 
 [1]: /llm_observability/instrumentation/auto_instrumentation
 [2]: /llm_observability/instrumentation/sdk/?tab=python#monitoring-costs

@@ -1,4 +1,5 @@
 ---
+id: image
 title: image
 core_product:
   - dashboards

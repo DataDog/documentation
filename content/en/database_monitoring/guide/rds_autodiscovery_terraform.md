@@ -13,13 +13,15 @@ Supported Agent versions
 : 7.74.0+
 
 What this provisions
-: - An EC2 instance (`t3.medium`) running Datadog Agent 7
+: - An EC2 instance (`t3.medium`) running the latest version of Datadog Agent
   - An IAM role assigned to the EC2 instance, granting it permission to call `rds:DescribeDBInstances`
   - A security group allowing outbound internet access, applied to the EC2 instance
 
 Prerequisites
-: - Existing RDS instances running in your account, with the tag `use_dbm:true` applied
+: - Familiarity with Terraform, AWS Security Groups, and VPC networking (including VPC peering if deploying the Agent in a separate VPC)
+  - Existing RDS instances running in your account, with the tag `use_dbm:true` applied
   - Terraform >= 1.3.0
+  - A **public subnet** in your VPC (or a private subnet with a NAT gateway) so the Agent can reach `datadoghq.com`
 
 ## Overview
 
@@ -162,9 +164,10 @@ resource "aws_security_group" "agent" {
 resource "aws_instance" "agent" {
   ami                         = data.aws_ami.amazon_linux_2.id
   instance_type               = "t3.medium"
-  subnet_id                   = "subnet-xxxxxxxxxxxxxxxxx" # replace with your subnet ID
+  subnet_id                   = "subnet-xxxxxxxxxxxxxxxxx" # replace with your public subnet ID
   iam_instance_profile        = aws_iam_instance_profile.agent.name
   vpc_security_group_ids      = [aws_security_group.agent.id]
+  associate_public_ip_address = true
   user_data_replace_on_change = true
 
   user_data = <<-EOF
@@ -206,7 +209,7 @@ resource "aws_instance" "agent" {
         collect_schemas:
           enabled: true
         collect_settings:
-          enabled: ture
+          enabled: true
         aws:
           instance_endpoint: "%%host%%"
           region: "%%extra_region%%"

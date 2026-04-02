@@ -1,4 +1,5 @@
 ---
+id: trace_root_span
 core_product:
 - apm
 short_definition: Une span est dite « racine de trace » lorsqu'elle représente la

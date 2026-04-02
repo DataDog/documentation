@@ -1,55 +1,54 @@
 ---
-description: Aprende a identificar y limpiar el desorden de monitor (noun) analizando
-  los patrones de uso de monitor (noun), identificando los monitores no utilizados
-  o redundantes y aplicando las prácticas recomendadas de gestión de monitor (noun)
-  para mejorar la calidad de las alertas y reducir el ruido.
+description: Aprenda a identificar y limpiar el desorden de seguimientos analizando
+  los patrones de uso de los seguimientos, identificando seguimientos no utilizados
+  o redundantes, e implementando las mejores prácticas para la gestión de seguimientos
+  con el fin de mejorar la calidad de las alertas y reducir el ruido.
 further_reading:
 - link: monitors/guide/monitor_best_practices
-  tag: Documentación
-  text: Prácticas recomendadas de monitores
+  tag: Documentation
+  text: Mejores prácticas de seguimiento
 - link: monitors/quality
-  tag: Documentación
-  text: Monitor Quality
-title: Limpia el desorden de monitor (noun)
+  tag: Documentation
+  text: Calidad de seguimiento
+title: Limpiar el desorden de seguimientos
 ---
+## Resumen
 
-## Información general
+El desorden de seguimientos se acumula con el tiempo, resultando en ruido, alertas duplicadas y un aumento de la fricción operativa. Esta guía describe un enfoque claro para identificar y limpiar seguimientos desordenados, con casos de uso que le ayudarán a optimizar sus flujos de trabajo de alertas.
 
-El desorden de monitor (noun) se acumula con el tiempo, dando lugar a ruido, alertas duplicadas y una mayor fricción operativa. En esta guía se describe un enfoque claro para identificar y limpiar los monitores desordenados, con casos de uso que te ayudarán a agilizar tus procesos de alertas.
+También proporciona mejores prácticas para ayudar a mantener un entorno de seguimiento limpio, facilitando la escalabilidad y la gobernanza de su estrategia de seguimiento a medida que sus sistemas crecen.
 
-También se proporcionan prácticas recomendadas para ayudar a mantener un entorno de monitorización limpio, lo que facilita la escalabilidad y el gobierno de tu estrategia de monitorización a medida que crecen tus sistemas.
+### Requisitos Previos
 
-### Requisitos previos
+Debe tener los [permisos de escritura de seguimientos][10].
 
-Debes tener los [Permisos de escritura de los monitores][10].
+### Casos de uso
 
-### Casos prácticos
+Esta guía cubre varios casos de uso clave para limpiar el desorden de seguimientos:
 
-Esta guía cubre varios casos de uso clave para limpiar el desorden de monitor (noun):
+- **[Seguimientos silenciados a largo plazo](#muted-for-a-long-period-of-time)**: Seguimientos que han estado silenciados durante períodos prolongados—semanas o incluso meses.
+- **[Seguimientos atascados en estado de ALERTA](#in-the-alerted-state-for-a-long-period-of-time)**: Seguimientos que han permanecido en estado de ALERTA durante un tiempo inusualmente largo sin ser reconocidos o resueltos.
+- **[Seguimientos duplicados](#duplicate-monitors)**: Múltiples seguimientos que se activan bajo la misma condición, métrica o servicio—frecuentemente debido a silos de equipo o falta de coordinación.
+- **[Seguimientos inestables y ruidosos](#flappy-and-noisy-monitors)**: Seguimientos que se activan y resuelven con frecuencia (es decir, "flap") o producen altos volúmenes de alertas de bajo valor.
+- **[Seguimientos mal configurados](#misconfigured-monitors)**: Seguimientos con enlaces rotos a tableros, retrasos de evaluación faltantes, constituyentes de alerta faltantes o incorrectos, o etiquetas y convenciones de nombres desactualizadas.
 
-- **[Monitores silenciados durante mucho tiempo](#muted-for-a-long-period-of-time)**: Monitores que han estado silenciados durante largos periodos de tiempo: semanas o incluso meses.
-- **[Monitores atascados en estado de ALERTA](#in-the-alerted-state-for-a-long-period-of-time)**: Monitores que han permanecido en estado de "Alerta" durante un tiempo inusualmente largo sin ser reconocidos ni resueltos.
-- **[Monitores duplicados](#duplicate-monitors)**: Múltiples monitores que se activan en el mismo estado, métrica o servicio, a menudo debido a silos de equipo o falta de coordinación.
-- **[Monitores ruidosos](#floppy-and-noisy-monitors)**: Monitores que se activan y resuelven con frecuencia (es decir, "aletean") o producen grandes volúmenes de alertas de poco valor.
-- **[Monitores mal configurados](#misconfigured-monitors)**: Monitores con enlaces rotos a dashboards, retardos de evaluación faltantes, componentes de alerta faltantes o incorrectos o tags (etiquetas) y convenciones de nomenclatura obsoletas.
+## Silenciado durante un largo período de tiempo
 
-## Silenciado durante un largo periodo de tiempo
+Los seguimientos sirven como un sistema de alerta temprana para fallas, amenazas de seguridad y problemas de rendimiento. Sin embargo, tener los seguimientos silenciados durante un largo período de tiempo anula ese propósito; el silencio prolongado a menudo indica que un seguimiento es obsoleto, irrelevante o demasiado ruidoso para ser útil. Estos deben ser revisados y reactivados con la configuración adecuada o retirados para reducir el desorden y eliminar seguimientos obsoletos de su entorno de alertas.
 
-Los monitores sirven como sistema de alerta temprana de fallos, amenazas a la seguridad y problemas de rendimiento. Sin embargo, tener monitores silenciados durante un largo periodo de tiempo frustra ese objetivo, el silenciamiento prolongado a menudo indica que un monitor (noun) es obsoleto, irrelevante o demasiado ruidoso para ser útil. Deberían revisarse y volver a activarse con el ajuste adecuado o retirarse para reducir el desorden y eliminar los monitores obsoletos de tu entorno de alerta.
+Limpie los seguimientos que no están proporcionando valor y reemplace los silencios prolongados con horarios limitados en el tiempo:
 
-Elimina los monitores que no aporten valor y sustituye los silenciamientos prolongados por programaciones temporales:
+### 1. Inspeccione los seguimientos
 
-### 1. Inspeccionar los monitores
+Audite los seguimientos que han estado silenciados durante un largo período de tiempo para entender cuáles son realmente necesarios o útiles. Algunos seguimientos pueden estar silenciados por una buena razón y desea evitar eliminarlos.
 
-Audita los monitores que han estado silenciados durante un largo periodo de tiempo para saber cuáles son realmente necesarios o útiles. Puede que algunos monitores estén silenciados por un buen motivo y quieras evitar eliminarlos.
+Para ver esos seguimientos, navegue a la página de [Calidad del Seguimiento][1] y encuentre la lista de seguimientos que han estado silenciados por más de 60 días. También puede encontrar seguimientos silenciados en la [**Lista de Seguimientos**][8] con la consulta `muted_elapsed:<number_of_days>d`.
 
-Para ver esos monitores, ve a la page (página) [Calidad de monitor (noun)][1] y busca la lista de monitores que han estado silenciados durante más de 60 días. También puedes encontrar monitores silenciados en la [**Lista de Monitores**][8] con la consulta `muted_elapsed:<number_of_days>d`.
+Después de obtener su lista, puede tomar acción en cada seguimiento desde la página de [Calidad del seguimiento] o realizar una eliminación masiva de seguimientos mediante los pasos 2 y 3.
 
-Después de tener tu lista, puedes realizar una acción en cada monitor (noun) de la page (página) Calidad de monitor (noun) o hacer una eliminación masiva de monitores con los pasos 2 y 3.
+### 2. Obtenga la lista de ID de seguimientos
 
-### 2. Obtener la lista de identificadores de monitor (noun)
-
-Obtén una lista de tus identificadores de monitor (noun) para automatizar los cambios mediante programación. Empieza por los monitores que llevan silenciados más de 60 días.
+Obtenga una lista de sus ID de seguimientos para automatizar los cambios. Comience con los seguimientos que han estado silenciados por más de 60 días.
 
 El siguiente comando CURL obtiene esa información:
 
@@ -64,11 +63,11 @@ curl -s -X GET "{{< region-param key=dd_api >}}/api/v1/monitor/search" \
   | @csv' > monitors_muted.csv
 ```
 
-Esto te proporciona los detalles de tus monitores en un archivo CSV para facilitar tu lectura. Puedes refinar la consulta para tu caso de uso específico.
+Esto le proporciona los detalles de sus seguimientos en un archivo CSV para facilitar la lectura. Puede refinar la consulta para su caso de uso específico.
 
-### 3. Borrar los monitores
+### 3. Elimine los seguimientos
 
-Con tu lista de monitores que han estado silenciados durante más de 60 días (del step (UI) / paso (generic) 2), puedes borrarlos con el siguiente script. Antes de ejecutar el script, pon la columna de identificador de monitor (noun) **primero** en la tabla.
+Con su lista de seguimientos que han estado silenciados por más de 60 días (del Paso 2), puede eliminarlos con el siguiente script. Antes de ejecutar el script, coloque la columna de ID de seguimiento **primero** en la tabla.
 
 ```shell
 input_file="monitors_muted.csv"
@@ -83,11 +82,11 @@ tail -n +2 "$input_file" | awk -F',' '{print $1}' | while read -r monitor_id; do
 done
 ```
 
-## En estado de ALERTA durante un largo periodo de tiempo
+## En un estado de ALERTA durante un largo período de tiempo
 
-Las alertas persistentes sugieren uno de dos problemas: o bien el problema no es procesable o bien el umbral de monitor (noun) está mal configurado. Ambos casos erosionan la confianza en las alertas y contribuyen a la fatiga de las alertas. Estos monitores deben revisarse y editarse o eliminarse.
+Las alertas persistentes sugieren uno de dos problemas: o el problema no es accionable, o el umbral del seguimiento está mal configurado. Ambos casos erosionan la confianza en las alertas y contribuyen a la fatiga de alertas. Estos seguimientos deben ser revisados y editados, o eliminados.
 
-A continuación se indica cómo obtener la lista de monitores que han estado en estado de ALERTA durante más de 60 días:
+Aquí está cómo obtener la lista de seguimientos que han estado en estado de ALERTA por más de 60 días:
 
 ```shell
 curl -s -X GET "{{< region-param key=dd_api >}}/api/v1/monitor/search" \
@@ -100,23 +99,23 @@ curl -s -X GET "{{< region-param key=dd_api >}}/api/v1/monitor/search" \
   | @csv' > monitors_alerted_too_long.csv
 ```
 
-Para borrar, utiliza el mismo proceso en el [comando Borrar monitores](#3-delete-the-monitors). Sustituye el `input_file` por `monitors_alerted_too_long.csv`.
+Para eliminar, utilice el mismo proceso en el comando [Eliminar seguimientos](#3-delete-the-monitors). Reemplaza el `input_file` con `monitors_alerted_too_long.csv`.
 
-## Monitores duplicados
+## Seguimientos duplicados
 
-La creación de monitores separados que solo se diferencian por una tag (etiqueta), puede dar lugar a una duplicación innecesaria. Por ejemplo, monitorizar el uso de la CPU con un monitor (noun) para `prod` y otro para `staging` aumenta el número de monitores (noun).
+Crear seguimientos separados que solo difieran por una etiqueta puede llevar a una duplicación innecesaria. Por ejemplo, monitorear el uso de CPU con un seguimiento para `prod` y otro para `staging` aumenta el conteo de seguimientos.
 
-Los monitores redundantes crean ruido y confusión innecesarios. En muchos casos, pueden consolidarse en un único [monitor (noun) **multialerta**][2] con el alcance y el etiquetado adecuados, lo que reduce la duplicación y hace que las alertas sean más manejables.
+Los seguimientos redundantes crean ruido y confusión innecesarios. En muchos casos, estos pueden ser consolidados en un solo [**multi-alerta**] con un contexto adecuado y etiquetado, reduciendo la duplicación y haciendo las alertas más manejables.
 
-Si necesitas enviar notificaciones diferentes en función del valor de la tag (etiqueta) que activó la alerta, utiliza [variables de monitor (noun)][3] para personalizar dinámicamente el mensaje en función de la tag (etiqueta) que superó el umbral.
+Si necesitas enviar diferentes notificaciones dependiendo del valor de la etiqueta que activó la alerta, utiliza [variables de monitor][3] para personalizar dinámicamente el mensaje basado en la etiqueta que superó el umbral.
 
-## Monitores ruidosos
+## Seguimientos inestables y ruidosos
 
-Los monitores ruidosos insensibilizan a los equipos ante los problemas reales. El aleteo (cuando un monitor (noun) cambia con frecuencia entre los estados de alerta y recuperación) suele indicar umbrales inestables, retrasos en la evaluación faltantes o volatilidad subyacente del sistema.
+Los seguimientos ruidosos desensibilizan a los equipos ante problemas reales. El parpadeo (cuando un seguimiento cambia frecuentemente entre estados de alerta y recuperación) a menudo indica umbrales inestables, retrasos de evaluación faltantes o volatilidad subyacente del sistema.
 
-Para reducir el ruido, revisa la agregación de evaluación del monitor (noun) y la configuración del umbral. Ajusta los parámetros para estabilizar el comportamiento de la alerta o elimina el monitor (noun) si ya no aporta valor.
+Para reducir el ruido, revise la agregación de evaluación del seguimiento y la configuración del umbral. Ajuste la configuración para estabilizar el comportamiento de las alertas, o elimine el seguimiento si ya no proporciona valor.
 
-A continuación se explica cómo obtener una lista de los monitores que están generando un alto volumen de alertas:
+Aquí se explica cómo obtener una lista de seguimientos que están generando un alto volumen de alertas:
 
 ```shell
 curl -s -X GET "{{< region-param key=dd_api >}}/api/v1/monitor/search" \
@@ -129,18 +128,18 @@ curl -s -X GET "{{< region-param key=dd_api >}}/api/v1/monitor/search" \
   | @csv' > noisy_monitors.csv
 ```
 
-Para borrar, utiliza el mismo proceso en el [comando Borrar monitores](#3-delete-the-monitors). Sustituye el `input_file` por `noisy_monitors.csv`.
+Para eliminar, utilice el mismo proceso en el comando [Eliminar seguimientos](#3-delete-the-monitors). Reemplaza el `input_file` con `noisy_monitors.csv`.
 
-## Monitores mal configurados
+## Seguimientos mal configurados
 
-Los monitores mal configurados son monitores activos que pueden tener un uso adecuado, pero son ineficaces porque no se te notifica. Estas configuraciones erróneas socavan la fiabilidad del monitor (noun) y dificultan la depuración o la clasificación. Limpiarlos garantiza que las alertas sean precisas, procesables e integradas en los procesos de observabilidad.
+Los seguimientos mal configurados son seguimientos activos que pueden tener un uso adecuado, pero son ineficientes porque no recibirá notificaciones. Estas malas configuraciones socavan la fiabilidad del seguimiento y dificultan la depuración o el triage. Corregir estas configuraciones garantiza que sus alertas sean precisas, accionables e integradas en sus flujos de trabajo de observabilidad.
 
-### Asa rota
-Utiliza la [**Page (página) Calidad de monitor (noun)**][4] para visualizar qué monitores tienen un asa rota. Las notificaciones de estos monitores no pueden llegar a su destino.
+### Identificador roto
+Utilice la página de [**Calidad del seguimiento**][4] para visualizar qué seguimientos tienen un identificador roto. Las notificaciones de estos seguimientos no pueden llegar a su destino.
 
-**Datadog recomienda** revisar los destinatarios de los monitores para asegurarse de su correcta entrega o borrar el monitor (noun).
+**Datadog recomienda** revisar los destinatarios de los seguimientos para asegurar una entrega adecuada, o eliminar el seguimiento.
 
-A continuación se indica cómo obtener la lista de monitores que tienen asas mal configuradas:
+Aquí se explica cómo obtener la lista de seguimientos que tienen identificadores mal configurados:
 
 ```shell
 curl -s -X GET "{{< region-param key=dd_api >}}/api/v1/monitor/search" \
@@ -153,16 +152,16 @@ curl -s -X GET "{{< region-param key=dd_api >}}/api/v1/monitor/search" \
   | @csv' > monitors_broken_handle.csv
 ```
 
-Para borrar, utiliza el mismo proceso en el [comando Borrar monitores](#3-delete-the-monitors). Sustituye el `input_file` por `monitors_broken_handle.csv`.
+Para eliminar, utilice el mismo proceso en el comando [Eliminar Seguimientos](#3-delete-the-monitors). Reemplaza el `input_file` con `monitors_broken_handle.csv`.
 
 ### Falta un retraso
-Este problema afecta principalmente a los monitores basados en métricas de AWS. Dado que Datadog recupera las métricas de AWS a través de la API, a menudo se produce un retraso antes de que los datos estén disponibles. Si no se tienes esto en cuenta, los monitores pueden activar falsos positivos debido a datos incompletos o retrasados.
+Este problema afecta principalmente a los seguimientos basados en métricas de AWS. Debido a que Datadog recupera métricas de AWS a través de la API, a menudo hay un retraso incorporado antes de que los datos estén disponibles. Si no tiene en cuenta esto, los seguimientos pueden activar falsos positivos debido a datos incompletos o retrasados.
 
-Puedes encontrar los monitores afectados en la page (página) [Calidad de monitor (noun)][4] , donde se marcan los monitores que carecen de un retraso de evaluación.
+Puede encontrar los seguimientos afectados en la página de [Calidad del seguimiento][4], donde se marcan los seguimientos que carecen de un retraso de evaluación.
 
-**Datadog recomienda** añadir un retraso a todos los monitores que utilicen las métricas de AWS. Un retraso de 300 segundos (5 minutos) suele ser suficiente para tener en cuenta la latencia de la ingesta de datos.
+**Datadog recomienda** agregar un retraso a todos los seguimientos que utilizan métricas de AWS. Un retraso de 300 segundos (5 minutos) es típicamente suficiente para tener en cuenta la latencia de ingestión de datos.
 
-A continuación se indica cómo obtener la lista de monitores a los que les falta un retraso:
+Aquí se explica cómo obtener la lista de seguimientos que carecen de un retraso:
 
 ```shell
 curl -s -X GET "{{< region-param key=dd_api >}}/api/v1/monitor/search" \
@@ -175,17 +174,17 @@ curl -s -X GET "{{< region-param key=dd_api >}}/api/v1/monitor/search" \
   | @csv' > monitors_missing_delay.csv
 ```
 
-Para obtener más información, consulta la [Guía de resolución de problemas de AWS][7].
+Para más información, consulte la [guía de solución de problemas de AWS][7].
 
-### Componente faltante
+### Constituyente faltante
 
-Los monitores composite (compuesto) evalúan su estado basándose en la combinación lógica de dos o más monitores (llamados constituyentes). Si alguno de esos monitores constituyentes se elimina o deja de estar disponible, el monitor (noun) composite (compuesto) deja de ser válido o fiable.
+Los seguimientos compuestos evalúan su estado en función de la combinación lógica de dos o más seguimientos (llamados constituyentes). Si alguno de esos seguimientos constituyentes es eliminado o se vuelve no disponible, el seguimiento compuesto se vuelve inválido o poco confiable.
 
-Un componente faltante significa normalmente que al menos uno de los monitores de entrada originales se ha eliminado después de que se creara el monitor (noun) composite (compuesto). Esto hace que el composite (compuesto) esté incompleto y pueda inducir a error en el comportamiento de alerta.
+Un constituyente faltante generalmente significa que al menos uno de los seguimientos de entrada originales ha sido eliminado después de que se creó el seguimiento compuesto. Esto provoca que el seguimiento compuesto esté incompleto y potencialmente engañoso en el comportamiento de alerta.
 
-**Datadog recomienda** revisar los monitores composite (compuesto) para sustituir o restaurar los constituyentes faltantes o eliminar el monitor (noun) composite (compuesto). Encontrarás la lista de monitores composite (compuesto) con constituyentes faltantes en la página [Calidad de monitor (noun)][4].
+**Datadog recomienda** revisar los seguimientos compuestos para reemplazar o restaurar los constituyentes faltantes, o eliminar el seguimiento compuesto. Puede encontrar la lista de seguimientos compuestos con constituyentes faltantes en la página de [Calidad del seguimiento][4].
 
-Para obtener mediante programación la lista de monitores a los que les faltan componentes:
+Para obtener programáticamente la lista de seguimientos que carecen de constituyentes:
 
 ```bash
 curl -s -X GET "{{< region-param key=dd_api >}}/api/v1/monitor/search" \
@@ -198,28 +197,28 @@ curl -s -X GET "{{< region-param key=dd_api >}}/api/v1/monitor/search" \
   | @csv' > monitors_missing_constituent.csv
 ```
 
-Para borrar, utiliza el mismo proceso en el [comando Borrar monitores](#3-delete-the-monitors). Sustituye el `input_file` por `monitors_missing_constituent.csv`.
+Para eliminar, utilice el mismo proceso en el comando [Eliminar Seguimientos](#3-delete-the-monitors). Reemplaza el `input_file` con `monitors_missing_constituent.csv`.
 
-Para obtener más información, consulta [Monitor (noun) composite (compuesto)][11].
+Para más información, consulte [Seguimiento Compuesto][11].
 
-## Prácticas recomendadas para evitar el desorden de monitor (noun)
+## Mejores prácticas para evitar el desorden de seguimientos
 
-| Prácticas recomendadas | Descripción | Despliegue |
+| Mejor Práctica | Descripción | Implementación |
 |---------------|-------------|----------------|
-| **Eliminar redundancia** | Evita crear varios monitores que rastreen la misma señal con alcances ligeramente diferentes (como por región, equipo o entorno). | Utiliza **agrupar monitores con tags (etiquetas)**, que son más fáciles de gestionar y escalar. |
-| **Configurar una propiedad clara** | Cada monitor (noun) debe tener un propietario claro para dirigir las alertas a los responsables adecuados y evitar confusiones. | Utiliza las tags (etiquetas) `team:` y las asas de notificación (`@slack-xyz`, `@pagerduty-twilio`). Utiliza el filtro **Creator** (Creador) de la [Lista de monitores][8] para auditar a los creadores más frecuentes de monitor (noun). |
-| **Revisar monitores ruidosos o inactivos** | Los monitores que alertan con demasiada frecuencia o que no alertan nunca pueden causar fatiga o indicar una mala configuración. | Utiliza la [**Page (página) Calidad de monitor (noun)**][4] para identificar y limpiar los monitores ruidosos, rotos u obsoletos. |
-| **Aprovechar las plantillas de monitor (noun)** | Para los patrones comunes (como las métricas RED o la latencia de la API), utiliza plantillas para reducir la duplicación y garantizar la normalización. | Utiliza [plantillas reutilizables][5] para reducir la duplicación y garantizar la normalización en todos los equipos. |
-| **Establece una política de etiquetado** | Las tags (etiquetas) coherentes y significativas te permiten filtrar, agrupar y enrutar fácilmente los monitores. | Utiliza etiquetas coherentes (como `service:`, `env:`, `team:`) y establece una [Política de etiquetado][6]. De este modo se pueden crear dashboards con alcance, alertas y rastreo del cumplimiento. |
-| **Dashboard de calidad de monitor (noun)** | Visualiza las tendencias en la higiene de monitor (noun) en todos los equipos, servicios y entornos para identificar de forma proactiva las deficiencias y rastrear las mejoras. | Configura un [**Dashboard de calidad de monitor (noun)**](#template-monitor-quality-dashboard) para rastrear las mejoras a lo largo del tiempo y priorizar los esfuerzos de limpieza a escala. |
+| **Eliminar redundancia** | Evite crear múltiples seguimientos que rastreen la misma señal con contextos ligeramente diferentes (como por región, equipo o entorno). | Utiliza **seguimientos agrupados por etiquetas**, que son más fáciles de gestionar y escalar. |
+| **Establece una propiedad clara** | Cada seguimiento debe tener un responsable claro para dirigir las alertas a los encargados adecuados y evitar confusiones. | Utiliza `team:` etiquetas y manejadores de notificación (`@slack-xyz`, `@pagerduty-twilio`). Utiliza el filtro **Creador** en la [Lista de Seguimientos][8] para auditar a los creadores de seguimientos más frecuentes. |
+| **Revisa seguimientos ruidosos o inactivos** | Los seguimientos que alertan con demasiada frecuencia o que nunca alertan pueden causar fatiga o señalar una mala configuración. | Utiliza la [**Página de Calidad de Seguimiento**][4] para identificar y limpiar seguimientos ruidosos, rotos o desactualizados. |
+| **Aprovecha las plantillas de seguimientos** | Para patrones comunes (como métricas ROJAS o latencia de API), utiliza plantillas para reducir la duplicación y asegurar la estandarización. | Utiliza [plantillas reutilizables][5] para reducir la duplicación y asegurar la estandarización entre equipos. |
+| **Establece una Política de Etiquetado** | Etiquetas consistentes y significativas te permiten filtrar, agrupar y dirigir seguimientos fácilmente. | Utiliza etiquetas consistentes (como `service:`, `env:`, `team:`) y establece una [Política de Etiquetado][6]. Esto permite tableros, alertas y seguimiento de cumplimiento con alcance definido. |
+| **Tablero de Calidad de Seguimiento** | Visualiza tendencias en la higiene de seguimientos entre equipos, servicios y entornos para identificar proactivamente brechas y rastrear mejoras. | Configura un [**tablero de Calidad de Seguimiento**](#template-monitor-quality-dashboard) para rastrear mejoras a lo largo del tiempo y priorizar esfuerzos de limpieza a gran escala. |
 
-## Dashboard de calidad de monitor de plantilla
+## Plantilla para Tablero de Calidad de Seguimiento
 
-Para ayudarte a empezar, importa la siguiente definición del dashboard de JSON directamente a tu cuenta de Datadog.
+Para ayudarte a comenzar, importa la siguiente definición de tablero JSON directamente en tu cuenta de Datadog.
 
-1. En la aplicación, ve a [**Dashboards**][9] y haz clic en **New Dashboard** (Nuevo dashboard).
-2. En la parte superior de la page (página), haz clic en **Configure** (Configurar) y selecciona **Import dashboard JSON...** (Importar JSON del dashboard...).
-3. Copia y pega el siguiente JSON para crear un dashboard de calidad de monitor (noun):
+1. En la aplicación, navega a [**Tableros**][9] y haz clic en **Nuevo Tablero**.
+2. En la parte superior de la página, haz clic en **Configurar** y selecciona **Importar JSON del tablero...**.
+3. Copia y pega el siguiente JSON para construir un tablero de Calidad de Seguimiento:
 
 ```json
 {
@@ -1403,7 +1402,7 @@ Para ayudarte a empezar, importa la siguiente definición del dashboard de JSON 
 }
 ```
 
-## Referencias adicionales
+## Lectura adicional
 
 {{< partial name="whats-next/whats-next.html" >}}
 
