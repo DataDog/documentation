@@ -45,7 +45,7 @@ curl -X POST "https://data-obs-intake.datadoghq.com/api/v1/lineage" \
           "facets": {
             "jobType": {
               "_producer": "your-producer-id",
-              "_schemaURL": "https://openlineage.io/spec/facets/2-0-2/JobTypeJobFacet.json",
+              "_schemaURL": "https://openlineage.io/spec/facets/2-0-3/JobTypeJobFacet.json",
               "processingType": "BATCH",
               "integration": "custom",
               "jobType": "JOB"
