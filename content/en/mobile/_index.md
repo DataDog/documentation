@@ -317,7 +317,7 @@ If you are automatically logged out during the 90 day token period, you will sti
 Check that you have notifications enabled for the Datadog app in your device app settings. If you would like to ensure that notifications bypass Do Not Disturb, check that Critical Alerts is toggled on.
 
 ### Will I recieve notifications for all organizations that I am signed into?
-Yes, regardless of the organization that you switch to, you will recieve notifications for all the organizations that you are signed into. This includes critical push notifications. 
+Yes, regardless of the organization that you switch to, you receive notifications for all organizations you are signed into. This includes critical push notifications. 
 
 ### What happens if a user is disabled?
 The mobile app token will be invalid and force the user to log out.
