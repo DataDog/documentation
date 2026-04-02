@@ -2,6 +2,9 @@
 title: Get Started with AI Guard
 private: true
 further_reading:
+- link: "https://www.datadoghq.com/blog/ai-guard"
+  tag: "Blog"
+  text: "Protect agentic AI applications with Datadog AI Guard"
 - link: /security/ai_guard/
   tag: Documentation
   text: AI Guard

@@ -7,6 +7,9 @@ aliases:
   - /guides/autodiscovery/
   - /agent/kubernetes/integrations
 further_reading:
+- link: "https://www.datadoghq.com/blog/monitor-karpenter-datadog"
+  tag: "Blog"
+  text: "Monitor Karpenter with Datadog"
 - link: "/agent/kubernetes/log/"
   tag: "Documentation"
   text: "Collect your application logs"

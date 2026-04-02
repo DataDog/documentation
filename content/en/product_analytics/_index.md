@@ -5,6 +5,15 @@ aliases:
 - /real_user_monitoring/product_analytics
 - /real_user_monitoring/guide/rum-for-product-analytics
 further_reading:
+- link: "https://www.datadoghq.com/blog/product-data-best-practices"
+  tag: "Blog"
+  text: "What your product data is actually saying"
+- link: "https://www.datadoghq.com/blog/guardrail-metrics"
+  tag: "Blog"
+  text: "Make use of guardrail metrics and stop babysitting your releases"
+- link: "https://www.datadoghq.com/blog/product-analytics-faster-decisions"
+  tag: "Blog"
+  text: "Make faster, better product decisions with Datadog Product Analytics"
 - link: "https://www.datadoghq.com/blog/rum-product-analytics-bridging-teams"
   tag: "Blog"
   text: "From performance to impact: Bridging frontend teams through shared context"

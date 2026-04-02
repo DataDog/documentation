@@ -2,6 +2,9 @@
 title: Observability Pipelines
 disable_toc: false
 further_reading:
+- link: "https://www.datadoghq.com/blog/monitoring-load-balancer-logs"
+  tag: "Blog"
+  text: "Monitor your application and network load balancer logs"
 - link: "https://www.datadoghq.com/blog/observability-pipelines-mssp"
   tag: "Blog"
   text: "Simplify log collection and aggregation for MSSPs with Datadog Observability Pipelines"

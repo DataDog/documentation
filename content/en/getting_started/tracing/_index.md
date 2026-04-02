@@ -19,6 +19,9 @@ further_reading:
     - link: 'https://dtdg.co/fe'
       tag: 'Foundation Enablement'
       text: 'Join an interactive session to boost your APM understanding'
+    - link: "https://www.datadoghq.com/blog/analyzing-roundtrip-query-latency"
+      tag: "Blog"
+      text: "Analyzing round trip query latency"
 ---
 
 ## Overview

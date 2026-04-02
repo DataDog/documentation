@@ -2,6 +2,9 @@
 title: Database Monitoring
 description: Learn about Database Monitoring and get started
 further_reading:
+- link: "https://www.datadoghq.com/blog/analyzing-roundtrip-query-latency"
+  tag: "Blog"
+  text: "Analyzing round trip query latency"
 - link: "https://www.datadoghq.com/blog/database-monitoring-recommendations/"
   tag: "Blog"
   text: "Improve database host and query performance with Database Monitoring Recommendations"

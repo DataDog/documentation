@@ -26,6 +26,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/proactive-app-recommendations/"
     tag: "Blog"
     text: "Improve performance and reliability with Proactive App Recommendations"
+  - link: "https://www.datadoghq.com/blog/apm-recommendations"
+    tag: "Blog"
+    text: "Improve performance and reliability with APM Recommendations"
 
 multifiltersearch:
   # "id" must match the corresponding key in the "data" object

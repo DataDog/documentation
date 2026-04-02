@@ -7,6 +7,12 @@ aliases:
     - /account_management/faq/api-app-key-management/
 algolia:
   tags: ['api key']
+
+further_reading:
+- link: "https://www.datadoghq.com/blog/datadog-terraform-provider-v4"
+  tag: "Blog"
+  text: "Announcing the Datadog Terraform provider v4.0.0"
+
 ---
 
 ## API keys
@@ -174,6 +180,10 @@ If any unusual activity is identified, or you need additional help securing your
 ## Troubleshooting
 
 Need help? Contact [Datadog support][19].
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: https://app.datadoghq.com/organization-settings/application-keys

@@ -2,6 +2,9 @@
 title: Cost Explorer
 description: Query and analyze cloud costs in real time with flexible filters and visualizations.
 further_reading:
+- link: "https://www.datadoghq.com/blog/monitor-karpenter-datadog"
+  tag: "Blog"
+  text: "Monitor Karpenter with Datadog"
 - link: "/cloud_cost_management/reporting/"
   tag: "Documentation"
   text: "Create and save cost reports"

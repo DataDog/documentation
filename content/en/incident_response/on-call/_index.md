@@ -3,6 +3,12 @@ title: On-Call
 aliases:
 - /service_management/on-call/
 further_reading:
+- link: "https://www.datadoghq.com/blog/designing-on-call-sounds"
+  tag: "Blog"
+  text: "How we designed empathetic alert sounds for on-call engineers"
+- link: "https://www.datadoghq.com/blog/cloud-security-oci"
+  tag: "Blog"
+  text: "Protect your OCI resources with Datadog Cloud Security"
 - link: 'https://www.datadoghq.com/blog/datadog-on-call/'
   tag: 'Blog'
   text: 'Enrich your on-call experience by using Datadog On-Call'

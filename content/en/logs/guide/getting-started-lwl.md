@@ -2,6 +2,9 @@
 title: Logging Without Limits™ Guide
 
 further_reading:
+- link: "https://www.datadoghq.com/blog/monitoring-load-balancer-logs"
+  tag: "Blog"
+  text: "Monitor your application and network load balancer logs"
 - link: "/logs/explorer/"
   tag: "Documentation"
   text: "Learn more about Log Explorer"

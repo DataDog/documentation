@@ -4,6 +4,9 @@ description: Automatically scale Kubernetes workloads using Datadog metrics and 
 aliases:
 - /containers/monitoring/autoscaling
 further_reading:
+- link: "https://www.datadoghq.com/blog/autoscaling-custom-metrics"
+  tag: "Blog"
+  text: "Scaling Kubernetes workloads on custom metrics"
 - link: https://www.datadoghq.com/blog/kubernetes-custom-query-autoscaling
   tag: Blog
   text: Optimize Kubernetes workloads with Custom Query Scaling

@@ -10,6 +10,9 @@ aliases:
   - /developers/metrics/
   - /metrics/guide/tag-configuration-cardinality-estimation-tool/
 further_reading:
+- link: "https://www.datadoghq.com/blog/datadog-risk-management"
+  tag: "Blog"
+  text: "How we centralize and remediate risks with Datadog Case Management"
 - link: "/extend/dogstatsd/"
   tag: "Documentation"
   text: "Learn more about DogStatsD"

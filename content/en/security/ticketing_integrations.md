@@ -25,6 +25,9 @@ further_reading:
   - link: "/incident_response/case_management/"
     tag: "Documentation"
     text: "Case Management"
+  - link: "https://www.datadoghq.com/blog/cloud-security-oci"
+    tag: "Blog"
+    text: "Protect your OCI resources with Datadog Cloud Security"
 ---
 
 {{< product-availability >}}
@@ -271,3 +274,7 @@ Users can also [create Jira issues for security findings][18] and [attach securi
 [20]: /security/ticketing_integrations/#supported-products
 [21]: /integrations/servicenow/
 [22]: /integrations/guide/servicenow-itom-itsm-setup/
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}

@@ -2,6 +2,9 @@
 title: HIPAA Compliance
 disable_toc: false
 further_reading:
+- link: "https://www.datadoghq.com/blog/datadog-achieves-iso-42001"
+  tag: "Blog"
+  text: "Datadog achieves ISO 42001 certification for responsible AI"
 - link: "https://www.datadoghq.com/blog/hipaa-compliant-log-management/"
   tag: "Blog"
   text: "HIPAA-compliant observability and security for health information systems"

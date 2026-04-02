@@ -2,6 +2,9 @@
 title: Sheets
 description: "Analyze Datadog data in a familiar spreadsheet interface with tables, pivot tables, lookups, calculated columns, and flexible spreadsheets."
 further_reading:
+- link: "https://www.datadoghq.com/blog/audit-reports-datadog-sheets"
+  tag: "Blog"
+  text: "Generate audit-ready vulnerability and compliance reports with Datadog Sheets"
 - link: "/sheets/functions_operators"
   tag: "Documentation"
   text: "Functions and Operators"

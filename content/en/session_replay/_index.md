@@ -9,6 +9,9 @@ aliases:
 - /real_user_monitoring/session_replay/browser/developer_tools
 - /product_analytics/session_replay/browser/developer_tools
 further_reading:
+- link: "https://www.datadoghq.com/blog/javascript-css-optimization"
+  tag: "Blog"
+  text: "How to optimize JavaScript code with CSS"
 - link: 'https://www.datadoghq.com/blog/session-replay-datadog/'
   tag: 'Blog'
   text: 'Use Datadog Session Replay to view real-time user journeys'

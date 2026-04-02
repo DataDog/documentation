@@ -11,6 +11,9 @@ further_reading:
   - link: "/metrics/open_telemetry/otlp_metric_types/"
     tag: "Documentation"
     text: "OTLP Metric Types"
+  - link: "https://www.datadoghq.com/blog/javascript-cache"
+    tag: "Blog"
+    text: "Configuring JavaScript caches for better performance"
 ---
 ## Overview
 

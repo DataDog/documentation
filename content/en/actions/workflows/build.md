@@ -8,6 +8,9 @@ aliases:
 algolia:
   tags: ['workflow', 'workflows', 'workflow automation']
 further_reading:
+- link: "https://www.datadoghq.com/blog/bits-ai-sre-deeper-reasoning"
+  tag: "Blog"
+  text: "Meet the new Bits AI SRE: Deeper reasoning, twice as fast"
 - link: "/getting_started/workflow_automation/"
   tag: "Documentation"
   text: "Getting Started with Workflow Automation"

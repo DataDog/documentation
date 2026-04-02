@@ -17,6 +17,9 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/datadog-feature-flags-cloud-resilience/'
       tag: 'Blog'
       text: 'How Datadog Feature Flags is resilient to cloud provider failures'
+    - link: "https://www.datadoghq.com/blog/guardrail-metrics"
+      tag: "Blog"
+      text: "Make use of guardrail metrics and stop babysitting your releases"
 site_support_id: getting_started_feature_flags
 ---
 

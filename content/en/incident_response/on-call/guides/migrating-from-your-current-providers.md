@@ -3,6 +3,9 @@ title: Migrating from your current on-call provider
 aliases:
 - /service_management/on-call/guides/migrating-from-your-current-providers/
 further_reading:
+- link: "https://www.datadoghq.com/blog/servicenow-datadog-incident-response"
+  tag: "Blog"
+  text: "Integrate ServiceNow ITSM with Datadog to Accelerate Incident Response"
 - link: "/incident_response/on-call/"
   tag: "Documentation"
   text: "On-Call"

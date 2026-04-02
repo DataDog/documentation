@@ -4,6 +4,9 @@ further_reading:
   - link: https://www.datadoghq.com/blog/bits-ai-security-analyst/
     tag: Blog
     text: Automate Cloud SIEM investigations with Bits AI Security Analyst
+  - link: "https://www.datadoghq.com/blog/cloud-siem-whats-new-rsa-2026"
+    tag: "Blog"
+    text: "What's new in Cloud SIEM: AI-powered investigations, enhanced threat intelligence, and scalable security operations"
 ---
 
 ## Overview

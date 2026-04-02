@@ -6,6 +6,9 @@ aliases:
   - /logs/guide/reference-tables/
   - /integrations/guide/reference-tables
 further_reading:
+- link: "https://www.datadoghq.com/blog/observability-pipelines-servicenow-cmdb-enrichment"
+  tag: "Blog"
+  text: "Enrich logs with ServiceNow CMDB context before routing to any SIEM or logging tool"
 - link: "https://www.datadoghq.com/blog/observability-pipelines-mssp"
   tag: "Blog"
   text: "Simplify log collection and aggregation for MSSPs with Datadog Observability Pipelines"

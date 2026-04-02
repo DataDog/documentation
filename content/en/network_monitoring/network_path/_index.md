@@ -3,6 +3,9 @@ title: Network Path
 description: Investigate network traffic paths
 is_beta: true
 further_reading:
+- link: "https://www.datadoghq.com/blog/bits-ai-sre-deeper-reasoning"
+  tag: "Blog"
+  text: "Meet the new Bits AI SRE: Deeper reasoning, twice as fast"
 - link: "https://www.datadoghq.com/blog/datadog-network-path-monitoring/"
   tag: "Blog"
   text: "Get end-to-end network visibility with Datadog Network Path"

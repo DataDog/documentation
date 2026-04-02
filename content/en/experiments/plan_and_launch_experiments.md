@@ -4,6 +4,9 @@ description: Use Datadog Experiments to measure the causal relationship that new
 aliases:
   - /product_analytics/experimentation/
 further_reading:
+- link: "https://www.datadoghq.com/blog/experiments"
+  tag: "Blog"
+  text: "Measure the business impact of every product change with Datadog Experiments"
 - link: "https://www.datadoghq.com/blog/datadog-product-analytics"
   tag: "Blog"
   text: "Make data-driven design decisions with Product Analytics"

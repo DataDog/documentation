@@ -3,6 +3,9 @@ title: Configuration
 aliases:
 - /service_management/events/correlation/configuration/
 further_reading:
+- link: "https://www.datadoghq.com/blog/servicenow-datadog-incident-response"
+  tag: "Blog"
+  text: "Integrate ServiceNow ITSM with Datadog to Accelerate Incident Response"
 - link: "service_management/events/correlation/triage_and_notify"
   tag: "Documentation"
   text: "Learn about triaging and notifiying on cases"

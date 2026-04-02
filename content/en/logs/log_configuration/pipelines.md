@@ -4,6 +4,9 @@ description: "Parse, enrich, and manage your logs with Datadog pipelines and pro
 aliases:
   - /logs/processing/pipelines/
 further_reading:
+- link: "https://www.datadoghq.com/blog/monitoring-load-balancer-logs"
+  tag: "Blog"
+  text: "Monitor your application and network load balancer logs"
 - link: "https://www.datadoghq.com/blog/cloud-siem-ocsf-processor"
   tag: "Blog"
   text: "Normalize any logs for Cloud SIEM with Datadog's OCSF processor"

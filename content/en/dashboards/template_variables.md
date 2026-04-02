@@ -6,6 +6,9 @@ aliases:
     - /graphing/dashboards/template_variables/how-do-i-overlay-events-onto-my-dashboards
     - /graphing/dashboards/template_variables/
 further_reading:
+- link: "https://www.datadoghq.com/blog/datadog-migration-mindset"
+  tag: "Blog"
+  text: "Approaching your observability migration with the right mindset"
 - link: "https://www.datadoghq.com/blog/datadog-executive-dashboards"
   tag: "Blog"
   text: "Design effective executive dashboards with Datadog"

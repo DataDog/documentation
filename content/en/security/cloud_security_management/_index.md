@@ -48,6 +48,12 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/datadog-cloud-security-compliance"
     tag: "Blog"
     text: "Scale compliance across global frameworks with Datadog Cloud Security"
+  - link: "https://www.datadoghq.com/blog/ec2-ami-risks"
+    tag: "Blog"
+    text: "AWS AMI security: How misconfigured and public AMIs expand your cloud attack surface"
+  - link: "https://www.datadoghq.com/blog/cloud-security-oci"
+    tag: "Blog"
+    text: "Protect your OCI resources with Datadog Cloud Security"
 algolia:
   tags: ['csm', 'cloud security management', 'inbox']
 cascade:

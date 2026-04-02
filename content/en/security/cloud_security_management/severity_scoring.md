@@ -1,6 +1,9 @@
 ---
 title: Severity Scoring
 further_reading:
+- link: "https://www.datadoghq.com/blog/devsecops-2026-study-learnings"
+  tag: "Blog"
+  text: "Key learnings from the 2026 State of DevSecOps study"
 - link: "/security/cloud_security_management/misconfigurations/"
   tag: "Documentation"
   text: "Start tracking misconfigurations with Cloud Security Misconfigurations"

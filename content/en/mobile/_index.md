@@ -6,6 +6,9 @@ aliases:
 algolia:
   tags: ["Datadog mobile app", "mobile device"]
 further_reading:
+- link: "https://www.datadoghq.com/blog/designing-on-call-sounds"
+  tag: "Blog"
+  text: "How we designed empathetic alert sounds for on-call engineers"
 - link: "/mobile/shortcut_configurations/"
   tag: "Documentation"
   text: "Shortcut Configurations"

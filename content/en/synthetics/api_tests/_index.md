@@ -5,6 +5,9 @@ aliases:
   - /synthetics/uptime_check
   - /synthetics/api_test
 further_reading:
+- link: "https://www.datadoghq.com/blog/simplifying-troubleshooting-with-synthetic-monitoring"
+  tag: "Blog"
+  text: "Simplifying troubleshooting across the user journey with Datadog Synthetic Monitoring"
 - link: "/synthetics/guide/version_history/"
   tag: "Guide"
   text: "Version History for Synthetic Monitoring"

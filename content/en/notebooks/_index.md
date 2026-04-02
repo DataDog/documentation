@@ -6,6 +6,12 @@ aliases:
   - /notebooks_new/
   - /notebooks_legacy/
 further_reading:
+- link: "https://www.datadoghq.com/blog/servicenow-datadog-incident-response"
+  tag: "Blog"
+  text: "Integrate ServiceNow ITSM with Datadog to Accelerate Incident Response"
+- link: "https://www.datadoghq.com/blog/monitor-karpenter-datadog"
+  tag: "Blog"
+  text: "Monitor Karpenter with Datadog"
 - link: https://www.datadoghq.com/blog/cloud-cost-management-oci
   tag: Blog
   text: Manage and optimize your OCI costs with Datadog Cloud Cost Management

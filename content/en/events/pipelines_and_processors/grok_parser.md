@@ -3,6 +3,12 @@ title: Grok Parser
 aliases:
 - /service_management/events/pipelines_and_processors/grok_parser/
 description: Create custom grok rules to parse the full message or specific attributes of raw events into structured data
+
+further_reading:
+- link: "https://www.datadoghq.com/blog/monitoring-load-balancer-logs"
+  tag: "Blog"
+  text: "Monitor your application and network load balancer logs"
+
 ---
 
 ## Overview
@@ -658,6 +664,9 @@ MyParsingRule Usage\:\s+%{number:usage}%{data:ignore}
 
 If your events contain ASCII control characters, they are serialized upon ingestion. These can be handled by explicitly escaping the serialized value within your grok parser.
 
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/google/re2/wiki/Syntax
 [2]: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones

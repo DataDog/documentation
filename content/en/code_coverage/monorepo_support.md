@@ -8,6 +8,9 @@ further_reading:
   - link: "https://www.datadoghq.com/product/software-catalog/"
     tag: "Product page"
     text: "Datadog Software Catalog"
+  - link: "https://www.datadoghq.com/blog/datadog-code-coverage"
+    tag: "Blog"
+    text: "Identify untested code across every level of your codebase"
 ---
 
 ## Overview

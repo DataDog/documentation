@@ -5,6 +5,9 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/managing-datadog-with-terraform/'
       tag: 'Blog'
       text: 'Managing Datadog with Terraform'
+    - link: "https://www.datadoghq.com/blog/datadog-terraform-provider-v4"
+      tag: "Blog"
+      text: "Announcing the Datadog Terraform provider v4.0.0"
 ---
 
 ## Overview

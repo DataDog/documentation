@@ -6,6 +6,9 @@ aliases:
     - /monitors/create/types/anomaly/
 description: "Detects anomalous behavior for a metric based on historical data"
 further_reading:
+- link: "https://www.datadoghq.com/blog/monitoring-load-balancer-logs"
+  tag: "Blog"
+  text: "Monitor your application and network load balancer logs"
 - link: "https://www.datadoghq.com/blog/velocloud-sdwan-integration"
   tag: "Blog"
   text: "Monitor Arista VeloCloud SD-WAN performance with Datadog"

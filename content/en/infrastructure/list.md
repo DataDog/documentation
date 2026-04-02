@@ -4,6 +4,9 @@ aliases:
   - /hostnames
   - /graphing/infrastructure/list/
 further_reading:
+- link: "https://www.datadoghq.com/blog/nutanix-integration"
+  tag: "Blog"
+  text: "Monitor Nutanix clusters, hosts, and VMs with Datadog"
 - link: "/infrastructure/hostmap/"
   tag: "Documentation"
   text: "Host Map"

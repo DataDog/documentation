@@ -5,6 +5,12 @@ products:
 - name: Logs
   icon: logs
   url: /observability_pipelines/configuration/?tab=logs#pipeline-types
+
+further_reading:
+- link: "https://www.datadoghq.com/blog/observability-pipelines-servicenow-cmdb-enrichment"
+  tag: "Blog"
+  text: "Enrich logs with ServiceNow CMDB context before routing to any SIEM or logging tool"
+
 ---
 
 {{< product-availability >}}
@@ -206,6 +212,10 @@ The metrics below are common to all processors consuming the same Reference Tabl
 
 `pipelines.reference_table_fetched_keys_total`
 : For each request sent to the Reference Tables API, this counter is incremented with the number of rows fetched in that request.
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /reference_tables/?tab=cloudstorage
 [2]: /integrations/salesforce/#optional-enable-ingestion-of-reference-tables

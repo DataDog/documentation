@@ -4,6 +4,9 @@ disable_toc: true
 aliases:
   - /security/cloud_siem/content_packs
 further_reading:
+- link: "https://www.datadoghq.com/blog/cloud-siem-whats-new-rsa-2026"
+  tag: "Blog"
+  text: "What's new in Cloud SIEM: AI-powered investigations, enhanced threat intelligence, and scalable security operations"
 - link: "https://www.datadoghq.com/blog/cloud-siem-enterprise-security"
   tag: "Blog"
   text: "Datadog Cloud SIEM: Driving innovation in security operations"

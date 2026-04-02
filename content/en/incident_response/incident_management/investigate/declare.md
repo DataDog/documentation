@@ -3,6 +3,12 @@ title: Declare an Incident
 aliases:
 - /service_management/incident_management/declare/
 - /incident_response/incident_management/declare
+
+further_reading:
+- link: "https://www.datadoghq.com/blog/servicenow-datadog-incident-response"
+  tag: "Blog"
+  text: "Integrate ServiceNow ITSM with Datadog to Accelerate Incident Response"
+
 ---
 
 ## Overview
@@ -118,6 +124,10 @@ You can declare an incident from individual Handoff Notification cards.
 {{< whatsnext desc="Add helpful information to your incident and give context to everyone that is involved in the investigation.">}}
     {{< nextlink href="/incident_response/incident_management/investigate/describe" >}}Describe the Incident: Add context and details{{< /nextlink >}}
 {{< /whatsnext >}}
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/incidents
 [2]: /incident_response/incident_management/setup_and_configuration/information

@@ -26,6 +26,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/correlate-traces-datadog-rum-otel/"
     tag: "Blog"
     text: "Correlate Datadog RUM events with traces from OpenTelemetry-instrumented applications"
+  - link: "https://www.datadoghq.com/blog/rum-apm-single-step"
+    tag: "Blog"
+    text: "Enable end-to-end visibility into your Java apps with a single command"
 algolia:
   tags: ['rum traces']
 ---

@@ -49,6 +49,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/human-name-detection"
     tag: "Blog"
     text: "Detect human names in logs with ML in Sensitive Data Scanner"
+  - link: "https://www.datadoghq.com/blog/monitoring-load-balancer-logs"
+    tag: "Blog"
+    text: "Monitor your application and network load balancer logs"
 cascade:
     algolia:
         rank: 70

@@ -6,6 +6,9 @@ aliases:
 - /real_user_monitoring/mobile_and_tv_monitoring/application_launch_monitoring/android
 - /real_user_monitoring/mobile_and_tv_monitoring/android/application_launch_monitoring
 further_reading:
+- link: "https://www.datadoghq.com/blog/rum-mobile-app-launch-monitoring"
+  tag: "Blog"
+  text: "Measure and improve mobile app startup performance with Datadog RUM"
 - link: https://github.com/DataDog/dd-sdk-android
   tag: "Source Code"
   text: Source code for dd-sdk-android

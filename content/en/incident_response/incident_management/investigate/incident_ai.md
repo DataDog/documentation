@@ -7,6 +7,9 @@ aliases:
 - /service_management/incident_management/incident_ai/
 - /incident_response/incident_management/incident_ai
 further_reading:
+- link: "https://www.datadoghq.com/blog/servicenow-datadog-incident-response"
+  tag: "Blog"
+  text: "Integrate ServiceNow ITSM with Datadog to Accelerate Incident Response"
 - link: "/bits_ai/bits_ai_sre/"
   tag: "Documentation"
   text: "Learn about Bits AI SRE"

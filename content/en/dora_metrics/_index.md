@@ -5,6 +5,9 @@ aliases:
 - /continuous_integration/dora_metrics
 is_beta: true
 further_reading:
+- link: "https://www.datadoghq.com/blog/devsecops-2026-study-learnings"
+  tag: "Blog"
+  text: "Key learnings from the 2026 State of DevSecOps study"
 - link: "/dora_metrics/calculation/"
   tag: "Documentation"
   text: "Learn how Datadog calculates DORA metrics"

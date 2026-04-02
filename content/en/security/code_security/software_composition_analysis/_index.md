@@ -23,6 +23,12 @@ further_reading:
   - link: /pr_gates/
     tag: Documentation
     text: PR Gates
+  - link: "https://www.datadoghq.com/blog/remediate-faster-code-security"
+    tag: "Blog"
+    text: "Remediate transitive vulnerabilities faster with Datadog Software Composition Analysis"
+  - link: "https://www.datadoghq.com/blog/devsecops-2026-study-learnings"
+    tag: "Blog"
+    text: "Key learnings from the 2026 State of DevSecOps study"
 
 ---
 ## Overview

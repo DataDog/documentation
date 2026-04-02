@@ -5,6 +5,9 @@ aliases:
 - /product_analytics/analytics_explorer/
 - /product_analytics/journeys
 further_reading:
+- link: "https://www.datadoghq.com/blog/product-analytics-faster-decisions"
+  tag: "Blog"
+  text: "Make faster, better product decisions with Datadog Product Analytics"
 - link: "/real_user_monitoring/explorer/search/"
   tag: "Documentation"
   text: "Explore your views within Datadog"

@@ -1,6 +1,9 @@
 ---
 title: AI Guard
 further_reading:
+- link: "https://www.datadoghq.com/blog/datadog-achieves-iso-42001"
+  tag: "Blog"
+  text: "Datadog achieves ISO 42001 certification for responsible AI"
 - link: /security/ai_guard/onboarding/
   tag: Documentation
   text: Get Started with AI Guard

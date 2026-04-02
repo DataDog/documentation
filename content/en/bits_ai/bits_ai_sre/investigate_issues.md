@@ -3,6 +3,12 @@ title: Investigate Issues
 description: "Use Bits AI SRE to automatically investigate monitor alerts and provide root cause analysis for faster incident resolution."
 aliases:
 - /bits_ai/bits_ai_sre/investigate_alerts/
+
+further_reading:
+- link: "https://www.datadoghq.com/blog/bits-ai-sre-deeper-reasoning"
+  tag: "Blog"
+  text: "Meet the new Bits AI SRE: Deeper reasoning, twice as fast"
+
 ---
 
 ## Start a Bits AI SRE investigation
@@ -168,3 +174,7 @@ The Reports tab enables you to track the number of investigations run over time 
 [15]: /account_management/rbac/permissions/#bits-ai
 [16]: https://app.datadoghq.com/bits-ai/investigations/new
 [17]: /source_code/#tag-your-apm-telemetry-with-git-information
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}

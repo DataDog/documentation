@@ -8,6 +8,9 @@ aliases:
 - /service_management/service_level_objectives/ootb_dashboard
 - /service_management/service_level_objectives/
 further_reading:
+- link: "https://www.datadoghq.com/blog/rum-mobile-app-launch-monitoring"
+  tag: "Blog"
+  text: "Measure and improve mobile app startup performance with Datadog RUM"
 - link: "https://www.datadoghq.com/blog/slo-monitoring-tracking/"
   tag: "Blog"
   text: "Track the status and error budget of your SLOs with Datadog"

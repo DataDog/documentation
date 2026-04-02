@@ -5,6 +5,9 @@ aliases:
 - /service_management/incident_management/integrations/slack/
 - /incident_response/incident_management/integrations/slack/
 further_reading:
+- link: "https://www.datadoghq.com/blog/servicenow-datadog-incident-response"
+  tag: "Blog"
+  text: "Integrate ServiceNow ITSM with Datadog to Accelerate Incident Response"
 - link: "integrations/slack/"
   tag: "Documentation"
   text: "Install the Slack Integration"
