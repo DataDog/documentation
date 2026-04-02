@@ -83,33 +83,23 @@ To get started:
 
    {{< tabs >}}
    {{% tab "Error Tracking" %}}
-   ```console
-   Add Datadog Error Tracking to my project
-   ```
+   {{< code-block lang="text" >}}Add Datadog Error Tracking to my project{{< /code-block >}}
    {{% /tab %}}
 
    {{% tab "Real User Monitoring" %}}
-   ```console
-   Add Datadog Real User Monitoring to my project
-   ```
+   {{< code-block lang="text" >}}Add Datadog Real User Monitoring to my project{{< /code-block >}}
    {{% /tab %}}
 
    {{% tab "Product Analytics" %}}
-   ```console
-   Add Datadog Product Analytics to my project
-   ```
+   {{< code-block lang="text" >}}Add Datadog Product Analytics to my project{{< /code-block >}}
    {{% /tab %}}
 
    {{% tab "Infrastructure Monitoring" %}}
-   ```console
-   Add Datadog for Kubernetes to my project
-   ```
+   {{< code-block lang="text" >}}Add Datadog for Kubernetes to my project{{< /code-block >}}
    {{% /tab %}}
 
    {{% tab "Serverless Monitoring" %}}
-   ```console
-   Instrument my AWS Lambda functions with Datadog
-   ```
+   {{< code-block lang="text" >}}Instrument my AWS Lambda functions with Datadog{{< /code-block >}}
    {{% /tab %}}
    {{< /tabs >}}
 
