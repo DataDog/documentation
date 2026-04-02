@@ -1,5 +1,6 @@
 ---
 title: Table
+draft: true
 ---
 
 ## Overview

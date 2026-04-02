@@ -1,5 +1,6 @@
 ---
 title: Sticky data test
+draft: true
 content_filters:
   - trait_id: prog_lang
     option_group_id: dd_e2e_mobile_prog_lang_options

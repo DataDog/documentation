@@ -1,5 +1,6 @@
 ---
 title: Check mark
+draft: true
 ---
 
 ## Overview

@@ -1,5 +1,6 @@
 ---
 title: Content filtering tests
+draft: true
 content_filters:
   - trait_id: prog_lang
     option_group_id: dd_e2e_backend_prog_lang_options
