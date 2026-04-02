@@ -27,9 +27,9 @@ Before investigating specific errors, confirm these prerequisites are in place:
 3. **The experimental flagging provider is enabled on the tracer**: Set `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true`.
 4. **Required tracer environment variables are set**: `DD_API_KEY`, `DD_ENV`, and `DD_SITE`.
 5. **The Agent is configured for the correct site**: Set `site` in `datadog.yaml` or `DD_SITE` on the Agent. See [Check Agent Site][3].
-6. **Your `DD_ENV` value appears in the Feature Flag environments list**: Confirm your environment is visible at `https://app.datadoghq.com/feature-flags/settings/environments`.
+6. **Your `DD_ENV` value appears in the Feature Flag environments list**: Confirm your environment is visible in the [Environments][6] list in Feature Flags Settings.
 
-After confirming all prerequisites, continue with the sections below if flags still aren't working.
+After confirming all prerequisites, continue with the following sections if feature flags still aren't working.
 
 ## Flags not updating
 
@@ -54,11 +54,11 @@ After confirming all prerequisites, continue with the sections below if flags st
 
 ## Trace Remote Configuration through the Agent
 
-If flags are not reaching your application and the steps above don't resolve the issue, trace the Remote Configuration path from the Datadog backend to your Agent.
+If the other troubleshooting steps fail to resolve the issue, trace the Remote Configuration path from the Datadog backend to your Agent.
 
 **Check Agent RC status in Fleet Automation**
 
-The [Fleet Automation][4] page (`https://app.datadoghq.com/fleet`) shows the Remote Configuration status for each Agent. Select the Agent your application connects to and confirm Remote Configuration is active. For more detail on what Fleet Automation exposes, see the [Fleet Automation documentation][4].
+The [Fleet Automation][7] page shows the Remote Configuration status for each Agent. Select the Agent your application connects to and confirm Remote Configuration is active. For more detail on what Fleet Automation exposes, see the [Fleet Automation documentation][4].
 
 **Check Agent RC status from the CLI**
 
@@ -73,3 +73,5 @@ Run `datadog-agent status` on the host running the Agent and review the Remote C
 [3]: /agent/troubleshooting/site/
 [4]: /agent/fleet_automation/
 [5]: /agent/configuration/agent-commands/
+[6]: https://app.datadoghq.com/feature-flags/settings/environments
+[7]: https://app.datadoghq.com/fleet
