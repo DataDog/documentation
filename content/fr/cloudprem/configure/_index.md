@@ -23,7 +23,7 @@ Si vous ne voyez pas l'entrée CloudPrem dans le menu Logs, cela signifie que Cl
 
 {{< whatsnext desc="Personnaliser votre déploiement CloudPrem :">}}
    {{< nextlink href="/cloudprem/configure/indexes/" >}}Configurer les index{{< /nextlink >}}
-   {{< nextlink href="/cloudprem/configure/pipelines/" >}}}Configurer le traitement{{< /nextlink >}}
+   {{< nextlink href="/cloudprem/configure/pipelines/" >}}Configurer le traitement{{< /nextlink >}}
    {{< nextlink href="/cloudprem/configure/ingress/" >}}Configurer l'ingress{{< /nextlink >}}
    {{< nextlink href="/cloudprem/configure/lambda/" >}}Lambda Search Offloading{{< /nextlink >}}
 {{< /whatsnext >}}

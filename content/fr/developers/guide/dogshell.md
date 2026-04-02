@@ -84,7 +84,7 @@ dog metric post test_dogshell_metric 1.0 --tags "test:one,example:one"
 
 Une fois la commande exécutée, recherchez `test_dogshell_metric` dans le [Metrics Explorer][5].
 
-{{< img src="developers/guide/dogshell_test1.png" alt="Observation de test_dogshell_metric depuis le Metrics Explorer" >}}
+{{< img src="extend/guide/dogshell_test1.png" alt="Observation de test_dogshell_metric depuis le Metrics Explorer" >}}
 
 [1]: https://github.com/DataDog/datadogpy
 [2]: /fr/metrics/custom_metrics/dogstatsd_metrics_submission/
