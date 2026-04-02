@@ -128,7 +128,7 @@ Choose from screenshots previously saved by you or your teammates. This helps en
 
 Capture a screenshot directly from your live application. Use this option when the state you need—such as an open modal, a hover menu, or a specific scroll position—does not exist in your recorded replays.
 
-**Prerequisite**: Install the [Datadog Test Recorder][6] Chrome extension before using this option.
+**Prerequisite**: Install the [Datadog Test Recorder][6] Chrome extension before using this option. The extension loads your live application in an embedded browser within Datadog, letting you navigate to the exact page and UI state you want to capture.
 
 1. Click **Take new screenshot**.
 
