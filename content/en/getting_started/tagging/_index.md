@@ -66,7 +66,7 @@ Tag strings (that is, the entire content of `<key>:<value>` or `<value>`) must m
     - Periods
     - Forward slashes
 
-    All other characters (including, but not limited to, commas, emoji, and spaces) are converted to underscores.
+    All other characters (including, but not limited to, commas, emoji, back slashes, and spaces) are converted to underscores.
 
 - Tags can be **up to 200 characters** long. If the tag has the format `<key>:<value>`, the `<key>`, `:`, and `<value>` all count toward the character limit.
 - [Span tags][26] and metric tags are normalized to lowercase. Because of this, using `CamelCase` is not recommended. Authentication (crawler) based integrations also convert camel case tags to underscores before lowercasing, for example `TestTag` --> `test_tag`.
