@@ -11,7 +11,6 @@ function pill(optionId: string): string {
 
 const TOC_NAV = '#TableOfContents';
 const TOC_CONTAINER = '.js-toc-container';
-const CONTENT_AREA = '#mainContent';
 
 // --- Expected TOC H2 entries per database ---
 
