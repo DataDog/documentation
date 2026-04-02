@@ -37,7 +37,13 @@ Common use cases include:
 
 ## How Managed Archive works
 
-Once enabled all ingested sessions (excluding Synthetic Monitoring sessions) are stored automatically for the configured storage period. A set of session tags and attributes are available to help you identify sessions to recover:
+Once enabled all ingested sessions (excluding Synthetic Monitoring sessions) are stored automatically for the configured storage period. These sessions are accessible in a dedicated **Managed Archive UI**, separate from the [RUM Explorer][2].
+
+{{< img src="real_user_monitoring/managed_archive/ma1.png" alt="The Managed Archive UI showing a table of stored sessions with light-indexed attributes" style="width:100%;" >}}
+
+<div class="alert alert-info">It takes 24 hours for a newly ingested session to appear in the Managed Archive.</div>
+
+All stored sessions, including sessions retained by retention filters or already recovered are shown in the Managed Archive UI. A set of session tags and attributes are available to help you navigate and identify sessions to recover:
 
 | Attribute | Description |
 |---|---|
@@ -50,10 +56,6 @@ Once enabled all ingested sessions (excluding Synthetic Monitoring sessions) are
 | `country` | Country of the session |
 | `service` | Service name |
 | `version` | Application version |
-
-Stored sessions are accessible in a dedicated **Managed Archive UI**, separate from the [RUM Explorer][2]. The Managed Archive UI lists stored sessions and lets you filter on the tags and attributes listed above. All stored sessions, including sessions retained by retention filters or already recovered are shown in the Managed Archive UI.
-
-{{< img src="real_user_monitoring/managed_archive/ma1.png" alt="The Managed Archive UI showing a table of stored sessions with light-indexed attributes" style="width:100%;" >}}
 
 Once a session is recovered, the corresponding row in the Managed Archive UI is visually marked and the session becomes available in the RUM Explorer.
 
