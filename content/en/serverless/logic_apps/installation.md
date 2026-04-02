@@ -15,6 +15,11 @@ Azure Logic Apps is a fully managed service, and the Datadog Agent cannot be dir
 Datadog collects Logic Apps logs through [Azure Automated Log Forwarding][1]. This service automatically configures diagnostic settings for new Logic Apps to forward logs to Datadog. Datadog uses these ingested logs to generate traces for your Logic App executions.
 
 ## Prerequisites
+
+{{< callout url="https://www.datadoghq.com/product-preview/serverless-monitoring-for-azure-logic-apps/" btn_hidden="false" header="Request Access">}}
+  Serverless Monitoring for Azure Logic Apps is in Preview. Request access to get started.
+{{< /callout >}}
+
 - The [Azure Automated Log Forwarding][1] service must be installed
 
 ## Setup
