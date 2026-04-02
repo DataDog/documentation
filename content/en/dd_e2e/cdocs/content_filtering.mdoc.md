@@ -7,23 +7,7 @@ content_filters:
     option_group_id: dd_e2e_database_options
 ---
 
-## Overview
-
-This is a test page used to verify content filtering behavior.
-
-## Test cases
-
-- When the user updates a filter selection, the content changes as expected.
-- Conditions using the following functions are returning `true` and `false` as expected:
-  - `and`
-  - `or`
-  - `includes`
-  - `not`
-- The filters are usable through keyboard-only navigation.
-
-## Basic filtering
-
-This section verifies that the page's content changes when the user updates a filter.
+## Currently selected filters
 
 {% if equals($prog_lang, "python") %}
 The selected programming language is Python.
@@ -57,11 +41,11 @@ The selected database is MySQL.
 The selected database is MongoDB.
 {% /if %}
 
-## Functions
+## Function tests
 
 ### `and`
 
-Select Go and MySQL to reveal additional content in this section.
+Selecting Go and MySQL should reveal additional content in this section.
 
 {% if and(equals($prog_lang, "go"), equals($database, "mysql")) %}
 The `and` function returned `true`: The selected programming language is Go, and the selected database is MySQL.
@@ -69,7 +53,7 @@ The `and` function returned `true`: The selected programming language is Go, and
 
 ### `or`
 
-Select Go, Ruby, or Python to reveal additional content in this section.
+Selecting Go, Ruby, or Python should reveal additional content in this section.
 
 {% if or(equals($prog_lang, "go"), equals($prog_lang, "ruby"), equals($prog_lang, "python")) %}
 The `or` function returned `true`: The selected programming language is Go, Ruby, or Python.
@@ -77,7 +61,7 @@ The `or` function returned `true`: The selected programming language is Go, Ruby
 
 ### `includes`
 
-Select Go, Ruby, or Python to reveal additional content in this section.
+Selecting Go, Ruby, or Python should reveal additional content in this section.
 
 {% if includes($prog_lang, ["go", "ruby", "python"]) %}
 The `includes` function returned `true`: The selected programming language is Go, Ruby, or Python.
@@ -85,7 +69,7 @@ The `includes` function returned `true`: The selected programming language is Go
 
 ### `not`
 
-Select a language other than Javascript to reveal additional content in this section.
+Selecting a language other than Javascript should reveal additional content in this section.
 
 {% if not(equals($prog_lang, "javascript")) %}
 The `not` function returned `true`: The selected programming language is not Javascript.
