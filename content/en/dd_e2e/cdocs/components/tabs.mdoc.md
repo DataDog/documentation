@@ -7,16 +7,6 @@ draft: true
 
 This page contains examples of the tabs component.
 
-## Test cases
-
-- The first tab in each group is selected on initial load.
-- Only the active tab's content is visible in each group.
-- Tab buttons display the correct labels.
-- Clicking a tab reveals its content and hides the previously active tab's content.
-- The mixed content tab displays nested components (code block, alert) when selected.
-- The tables tab displays table content when selected.
-- The URL updates with a `tab` query parameter when a tab is clicked.
-- When there are too many tabs to fit in a traditional layout, the tabs automatically switch to pills.
 
 ## Examples
 

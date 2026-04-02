@@ -7,9 +7,6 @@ draft: true
 
 This page contains examples of the underline component.
 
-## Test cases
-
-This is just a simple rendering test that checks whether anything is amiss on initial page load.
 
 ## Examples
 

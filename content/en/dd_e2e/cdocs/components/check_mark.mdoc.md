@@ -7,9 +7,6 @@ draft: true
 
 This page contains examples of the check mark component.
 
-## Test cases
-
-This is just a simple rendering test that checks whether anything is amiss on initial page load.
 
 ## Examples
 
@@ -17,9 +14,11 @@ This is just a simple rendering test that checks whether anything is amiss on in
 
 Log collection is supported: {% x/ %}
 
-### Check marks in a list
+### Check marks in a table
 
-- Metrics collection {% x/ %}
-- Log collection {% x/ %}
-- APM tracing {% x/ %}
-- Custom metrics {% x/ %}
+| Feature | Supported |
+|---|---|
+| Metrics collection | {% x/ %} |
+| Log collection | {% x/ %} |
+| APM tracing | {% x/ %} |
+| Custom metrics | {% x/ %} |

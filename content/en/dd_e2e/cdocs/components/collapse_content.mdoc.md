@@ -7,15 +7,6 @@ draft: true
 
 This page contains examples of the collapse content component.
 
-## Test cases
-
-- The expanded section is open on initial load and its content is visible.
-- The collapsed sections are closed on initial load and their content is hidden.
-- Clicking a collapsed section expands it and reveals its content.
-- Clicking an expanded section collapses it and hides its content.
-- Each heading level (h1-h5) renders the correct heading tag.
-- The rich content section shows nested components (code block, alert) when expanded.
-- Keyboard navigation (Enter/Space on the summary) toggles sections.
 
 ## Examples
 
