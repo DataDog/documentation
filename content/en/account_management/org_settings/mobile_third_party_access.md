@@ -57,7 +57,7 @@ Only MCP applications support Application Scope Management.
 
 2. Select the **Scopes** tab and use the **Allowed** checkbox for each scope to control whether to grant the application that scope.
 
-3. Click Enable to save the scope configuration.
+3. Click **Enable** to save the scope configuration.
 
 {{< img src="account_management/mobile_third_party_access/scope-restrictions-enable.png" alt="Application Scope Management view with Enable and Restore to Full Access buttons" style="width:100%;">}}
 
