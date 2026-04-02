@@ -488,18 +488,9 @@ logger.info("Flag: {} | Value: {} | Variant: {} | Reason: {}",
 
 ## Troubleshooting
 
-### Start here: verify prerequisites
+For prerequisite checks, flags not updating, no exposures, and Agent-level Remote Configuration tracing, see [Feature Flags Troubleshooting][5].
 
-Before investigating specific errors, confirm these prerequisites are in place:
-
-1. **The Datadog Agent is running** and reachable from your application. See <a href="/tracing/troubleshooting/connection_errors/" target="_blank">APM Connection Errors</a> for steps to verify Agent connectivity.
-2. **Remote Configuration is enabled on the Agent**: Set `remote_configuration.enabled: true` in `datadog.yaml` or `DD_REMOTE_CONFIG_ENABLED=true`. See [Remote Configuration][1].
-3. **The experimental flagging provider is enabled on the tracer**: Set `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true`.
-4. **Required tracer environment variables are set**: `DD_API_KEY`, `DD_ENV`, and `DD_SITE`.
-5. **The Agent is configured for the correct site**: Set `site` in `datadog.yaml` or `DD_SITE` on the Agent. See [Check Agent Site][2].
-6. **Your `DD_ENV` value appears in the Feature Flag environments list**: Confirm your environment is visible in the [Feature Flag Environments][5] settings.
-
-After confirming all prerequisites, continue with the following sections if feature flags still aren't working.
+The sections below cover Java-specific issues.
 
 ### Debug flag evaluations
 
@@ -584,20 +575,12 @@ Cannot create backend API client since agentless mode is disabled, and agent doe
 3. **Retry logic**: Implement retry on provider initialization failure
 4. **Upgrade Agent**: Verify you are using Agent 7.x or later with EVP Proxy support
 
-### No exposures in Datadog
-
-**Problem**: Experiment exposures aren't appearing in Datadog
-
-**Solutions**:
-1. Verify the flag is associated with an experiment in the Datadog UI. Exposures are only recorded for flags that are part of an experiment—standard feature flags without an experiment association do not generate exposure events.
-2. Check the Datadog Agent is receiving exposure events
-3. Verify `DD_API_KEY` is correct
-4. Check Agent logs for exposure upload errors
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /remote_configuration/
 [2]: /agent/troubleshooting/site/
-[5]: https://app.datadoghq.com/feature-flags/settings/environments
+[3]: /agent/fleet_automation/
+[4]: /agent/configuration/agent-commands/
+[5]: /feature_flags/troubleshooting/

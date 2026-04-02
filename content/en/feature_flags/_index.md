@@ -17,6 +17,9 @@ further_reading:
 - link: "/feature_flags/guide/migrate_from_statsig"
   tag: "Guide"
   text: "Migrate Your Feature Flags from Statsig"
+- link: "/feature_flags/troubleshooting/"
+  tag: "Documentation"
+  text: "Feature Flags Troubleshooting"
 ---
 
 ## Overview
