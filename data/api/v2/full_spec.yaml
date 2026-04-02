@@ -25277,7 +25277,7 @@ components:
         product:
           description: |-
             Name of the product the dataset is for. Possible values are 'apm', 'rum',
-            'metrics' (Custom Metrics), 'logs', 'error_tracking', 'cloud_cost', and 'sd_repoinfo'.
+            'metrics', 'logs', 'error_tracking', 'cloud_cost', and 'sd_repoinfo'.
           example: "logs"
           type: string
       required:
@@ -108667,7 +108667,7 @@ paths:
         permissions:
           - status_pages_settings_read
     post:
-      description: Creates a new status page.
+      description: "Creates a new status page. **Note**: Publishing a status page on creation via the `enabled` property will be deprecated. Use the dedicated [publish](#publish-status-page) status page endpoint after creation instead."
       operationId: CreateStatusPage
       parameters:
         - description: "Comma-separated list of resources to include. Supported values: created_by_user, last_modified_by_user."
@@ -108755,7 +108755,7 @@ paths:
       summary: List degradations
       tags:
         - Status Pages
-      x-menu-order: 13
+      x-menu-order: 15
       x-permission:
         operator: AND
         permissions:
@@ -108813,7 +108813,7 @@ paths:
       summary: List maintenances
       tags:
         - Status Pages
-      x-menu-order: 18
+      x-menu-order: 20
       x-permission:
         operator: AND
         permissions:
@@ -108887,7 +108887,7 @@ paths:
         permissions:
           - status_pages_settings_read
     patch:
-      description: Updates an existing status page's attributes.
+      description: "Updates an existing status page's attributes. **Note**: Publishing and unpublishing via the `enabled` property will be deprecated on this endpoint. Use the dedicated [publish](#publish-status-page) and [unpublish](#unpublish-status-page) status page endpoints instead."
       operationId: UpdateStatusPage
       parameters:
         - description: Whether to delete existing subscribers when updating a status page's type.
@@ -108970,7 +108970,7 @@ paths:
       summary: List components
       tags:
         - Status Pages
-      x-menu-order: 8
+      x-menu-order: 10
       x-permission:
         operator: AND
         permissions:
@@ -109014,7 +109014,7 @@ paths:
       summary: Create component
       tags:
         - Status Pages
-      x-menu-order: 6
+      x-menu-order: 8
       x-permission:
         operator: AND
         permissions:
@@ -109052,7 +109052,7 @@ paths:
       summary: Delete component
       tags:
         - Status Pages
-      x-menu-order: 10
+      x-menu-order: 12
       x-permission:
         operator: AND
         permissions:
@@ -109098,7 +109098,7 @@ paths:
       summary: Get component
       tags:
         - Status Pages
-      x-menu-order: 9
+      x-menu-order: 11
       x-permission:
         operator: AND
         permissions:
@@ -109150,7 +109150,7 @@ paths:
       summary: Update component
       tags:
         - Status Pages
-      x-menu-order: 7
+      x-menu-order: 9
       x-permission:
         operator: AND
         permissions:
@@ -109201,7 +109201,7 @@ paths:
       summary: Create degradation
       tags:
         - Status Pages
-      x-menu-order: 11
+      x-menu-order: 13
       x-permission:
         operator: AND
         permissions:
@@ -109239,7 +109239,7 @@ paths:
       summary: Delete degradation
       tags:
         - Status Pages
-      x-menu-order: 15
+      x-menu-order: 17
       x-permission:
         operator: AND
         permissions:
@@ -109285,7 +109285,7 @@ paths:
       summary: Get degradation
       tags:
         - Status Pages
-      x-menu-order: 14
+      x-menu-order: 16
       x-permission:
         operator: AND
         permissions:
@@ -109343,7 +109343,7 @@ paths:
       summary: Update degradation
       tags:
         - Status Pages
-      x-menu-order: 12
+      x-menu-order: 14
       x-permission:
         operator: AND
         permissions:
@@ -109393,7 +109393,7 @@ paths:
       summary: Schedule maintenance
       tags:
         - Status Pages
-      x-menu-order: 16
+      x-menu-order: 18
       x-permission:
         operator: AND
         permissions:
@@ -109438,7 +109438,7 @@ paths:
       summary: Get maintenance
       tags:
         - Status Pages
-      x-menu-order: 19
+      x-menu-order: 21
       x-permission:
         operator: AND
         permissions:
@@ -109494,11 +109494,73 @@ paths:
       summary: Update maintenance
       tags:
         - Status Pages
-      x-menu-order: 17
+      x-menu-order: 19
       x-permission:
         operator: AND
         permissions:
           - status_pages_incident_write
+  /api/v2/statuspages/{page_id}/publish:
+    post:
+      description: Publishes a status page. For pages of type `public`, makes the status page available on the public internet and requires the `status_pages_public_page_publish` permission. For pages of type `internal`, makes the status page available under the `status-pages/$domain_prefix/view` route within the Datadog organization and requires the `status_pages_internal_page_publish` permission. The `status_pages_settings_write` permission is temporarily honored as we migrate publishing functionality from the update status page endpoint to the publish status page endpoint.
+      operationId: PublishStatusPage
+      parameters:
+        - description: The ID of the status page.
+          in: path
+          name: page_id
+          required: true
+          schema:
+            format: uuid
+            type: string
+      responses:
+        "204":
+          description: No Content
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ: []
+      summary: Publish status page
+      tags:
+        - Status Pages
+      x-menu-order: 6
+      x-permission:
+        operator: OR
+        permissions:
+          - status_pages_settings_write
+          - status_pages_public_page_publish
+          - status_pages_internal_page_publish
+  /api/v2/statuspages/{page_id}/unpublish:
+    post:
+      description: Unpublishes a status page. For pages of type `public`, removes the status page from the public internet and requires the `status_pages_public_page_publish` permission. For pages of type `internal`, removes the `status-pages/$domain_prefix/view` route from the Datadog organization and requires the `status_pages_internal_page_publish` permission. The `status_pages_settings_write` permission is temporarily honored as we migrate unpublishing functionality from the update status page endpoint to the unpublish status page endpoint.
+      operationId: UnpublishStatusPage
+      parameters:
+        - description: The ID of the status page.
+          in: path
+          name: page_id
+          required: true
+          schema:
+            format: uuid
+            type: string
+      responses:
+        "204":
+          description: No Content
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ: []
+      summary: Unpublish status page
+      tags:
+        - Status Pages
+      x-menu-order: 7
+      x-permission:
+        operator: OR
+        permissions:
+          - status_pages_settings_write
+          - status_pages_public_page_publish
+          - status_pages_internal_page_publish
   /api/v2/synthetics/api-multistep/subtests/{public_id}:
     get:
       description: |-
@@ -114679,7 +114741,7 @@ tags:
   - description: |-
       Data Access Controls in Datadog is a feature that allows administrators and access managers to regulate
       access to sensitive data. By defining Restricted Datasets, you can ensure that only specific teams or roles can
-      view certain types of telemetry (for example, logs, traces, custom metrics, and RUM data).
+      view certain types of telemetry (for example, logs, traces, metrics, and RUM data).
     name: Datasets
   - description: |-
       Manage Deployment Gates using this API to reduce the likelihood and impact of incidents caused by deployments. See the [Deployment Gates documentation](https://docs.datadoghq.com/deployment_gates/) for more information.
