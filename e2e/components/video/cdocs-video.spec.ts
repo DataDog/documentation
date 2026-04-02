@@ -4,7 +4,6 @@ import { hideOverlays } from '../../helpers';
 const PAGE_URL = '/dd_e2e/cdocs/components/video/';
 const CONTENT_AREA = '#mainContent';
 
-
 test.describe('Cdocs video component', () => {
     test.beforeEach(async ({ page }) => {
         await page.goto(PAGE_URL);
