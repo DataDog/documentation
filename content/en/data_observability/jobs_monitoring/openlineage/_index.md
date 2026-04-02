@@ -23,7 +23,7 @@ Replace the hostname in the examples with the relevant [Datadog site][2] for you
 
 **Note**: To centralize configuration and avoid distributing API keys to every application, you can [set up the Datadog Agent as an OpenLineage proxy][4].
 
-**Note**: Datadog requires the `jobType` [job facet][5] to process run events.
+**Note**: Datadog requires the `jobType` [Job Facet][5] to process run events.
 
 Use one of the following options to send [OpenLineage events][1] to Datadog:
 
