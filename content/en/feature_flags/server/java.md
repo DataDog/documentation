@@ -492,12 +492,10 @@ logger.info("Flag: {} | Value: {} | Variant: {} | Reason: {}",
 
 Before investigating specific errors, confirm these prerequisites are in place:
 
-1. **The Datadog Agent is running** and reachable from your application. See <a href="/tracing/troubleshooting/connection_errors/" target="_blank">APM Connection Errors</a> for steps to verify Agent connectivity.
-2. **Remote Configuration is enabled on the Agent**: Set `remote_configuration.enabled: true` in `datadog.yaml` or `DD_REMOTE_CONFIG_ENABLED=true`. See [Remote Configuration][1].
-3. **The experimental flagging provider is enabled on the tracer**: Set `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true`.
-4. **Required tracer environment variables are set**: `DD_API_KEY`, `DD_ENV`, and `DD_SITE`.
-5. **The Agent is configured for the correct site**: Set `site` in `datadog.yaml` or `DD_SITE` on the Agent. See [Check Agent Site][2].
-6. **Your `DD_ENV` value appears in the Feature Flag environments list**: Confirm your environment is visible in the [Feature Flag Environments][5] settings.
+1. **The Datadog Agent is healthy and reachable**: See [APM Connection Errors][2] to verify Agent connectivity.
+2. **The experimental flagging provider is enabled on the tracer**: Set `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true`.
+3. **Required tracer environment variables are set**: `DD_API_KEY`, `DD_ENV`, and `DD_SITE`.
+4. **Your `DD_ENV` value appears in the Feature Flag environments list**: Confirm your environment is visible in the [Feature Flag Environments][5] settings.
 
 After confirming all prerequisites, continue with the following sections if feature flags still aren't working.
 
@@ -553,7 +551,6 @@ A `PROVIDER_STALE` or `PROVIDER_ERROR` event after a period of normal operation 
 **Common causes**:
 1. **Async initialization**: `setProvider()` was used instead of `setProviderAndWait()`. Evaluations that happen before the first Remote Configuration payload arrives return `PROVIDER_NOT_READY`.
 2. **Initialization timeout**: `setProviderAndWait()` timed out (default 30 seconds) and threw `ProviderNotReadyError`, which was caught. The application continues evaluating flags while still waiting for the first configuration.
-3. **Agent Remote Configuration disabled**: Agent not configured for Remote Configuration
 
 **Solutions**:
 1. **Enable debug logging** to see the feature flagging system startup sequence. These messages are emitted at DEBUG level—set `DD_TRACE_DEBUG=true` to see them:
@@ -561,43 +558,26 @@ A `PROVIDER_STALE` or `PROVIDER_ERROR` event after a period of normal operation 
    [dd.trace] Feature Flagging system starting
    [dd.trace] Feature Flagging system started
    ```
-2. **Verify the Agent exposes the required endpoints** by querying `http://localhost:8126/info`. The `endpoints` array should include `v0.7/config` and `evp_proxy/v4/`.
-3. **Check EVP Proxy discovered** in debug-level logs (`DD_TRACE_DEBUG=true`):
-   ```
-   discovered ... evpProxyEndpoint=evp_proxy/v4/ configEndpoint=v0.7/config
-   ```
-4. **Wait for Remote Configuration sync** (can take 30-60 seconds after publishing flags)
-5. **Verify flags are published** in Datadog UI to the correct service and environment
+2. **Wait for Remote Configuration sync** (can take 30-60 seconds after publishing flags)
+3. **Verify flags are published** in Datadog UI to the correct service and environment
+4. If none of these apply, verify the Datadog Agent is healthy and reachable. See [APM Connection Errors][2].
 
 ### EVP proxy not available error
 
-**Problem**: Agent logs show:
-```
-Cannot create backend API client since agentless mode is disabled, and agent does not support EVP proxy
-```
+**Problem**: Logs show `Cannot create backend API client since agentless mode is disabled, and agent does not support EVP proxy`.
 
-**Cause**: The Agent does not expose the EVP proxy endpoint, either because it started after the tracer connected or because the Agent version is too old.
-
-**Solutions**:
-1. **Add Agent health check** in orchestration (Docker Compose, Kubernetes)
-2. **Add startup delay** to application
-3. **Retry logic**: Implement retry on provider initialization failure
-4. **Upgrade Agent**: Verify you are using Agent 7.x or later with EVP Proxy support
+Verify the Datadog Agent is healthy and reachable. See [APM Connection Errors][2].
 
 ### No exposures in Datadog
 
 **Problem**: Experiment exposures aren't appearing in Datadog
 
-**Solutions**:
-1. Verify the flag is associated with an experiment in the Datadog UI. Exposures are only recorded for flags that are part of an experiment—standard feature flags without an experiment association do not generate exposure events.
-2. Check the Datadog Agent is receiving exposure events
-3. Verify `DD_API_KEY` is correct
-4. Check Agent logs for exposure upload errors
+**Solution**: Verify the flag is associated with an experiment in the Datadog UI. Exposures are only recorded for flags that are part of an experiment—standard feature flags without an experiment association do not generate exposure events.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /remote_configuration/
-[2]: /agent/troubleshooting/site/
+[2]: /tracing/troubleshooting/connection_errors/
 [5]: https://app.datadoghq.com/feature-flags/settings/environments
