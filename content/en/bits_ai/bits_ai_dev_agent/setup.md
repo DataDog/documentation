@@ -49,9 +49,27 @@ To enable auto-push, so the Dev Agent can push commits directly to a branch, nav
 
 **Note**: If auto-push is disabled, you must review and approve code in Datadog before the Dev Agent can push it.
 
+### Configure custom instructions
+
+The Dev Agent ingests custom instruction files from your repository, including:
+
+- `.cursorrules`
+- `.windsurfrules`
+- `copilot-instructions.md`
+- `CLAUDE.md`
+- `AGENTS.md`
+- `agent.md`
+
+
+You can also define global custom instructions, which apply to all Dev Agent sessions, in **Bits AI Dev** > [**Settings**][12] > **General**, in the **Global Agent Instructions** section.
+
+## Environment setup
+
+Configure the Dev Agent's runtime environment, including network access policies and repository-specific tooling.
+
 ### Configure internet access
 
-To configure which external domains agents can reach during agent execution, navigate to **Bits AI Dev** > [**Settings**][12] > **General**, and find the **Internet Access** section. Choose from the following access policies: **No Internet Access**, **Default Allowlist**, **Custom + Default Allowlist**, or **Custom Allowlist**.
+By default, the Dev Agent has **no internet access** during agent execution. To configure which external domains agents can reach, navigate to **Bits AI Dev** > [**Settings**][12] > **General**, and find the **Internet Access** section. Choose from the following access policies: **No Internet Access**, **Default Allowlist**, **Custom + Default Allowlist**, or **Custom Allowlist**.
 
 The default allowlist includes the following domains:
 
@@ -65,20 +83,6 @@ The default allowlist includes the following domains:
 | PHP | `packagist.org`, `repo.packagist.org` |
 | Python | `files.pythonhosted.org`, `pypi.org`, `pypi.python.org`, `pythonhosted.org` |
 | Rust | `index.crates.io`, `static.crates.io` |
-
-### Configure custom instructions
-
-The Dev Agent ingests custom instruction files from your repository, including:  
-
-- `.cursorrules`  
-- `.windsurfrules`  
-- `copilot-instructions.md`  
-- `CLAUDE.md`  
-- `AGENTS.md`  
-- `agent.md`  
-
-
-You can also define global custom instructions, which apply to all Dev Agent sessions, in **Bits AI Dev** > [**Settings**][12] > **General**, in the **Global Agent Instructions** section. 
 
 ### Configure repository environment
 
