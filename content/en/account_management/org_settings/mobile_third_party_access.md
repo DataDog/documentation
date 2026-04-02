@@ -49,7 +49,7 @@ Revoking a user's OAuth access to an application removes all access to that appl
 
 ### Application Scope Management
 
-Enable Application Scope Management to modify the allowed scopes for an application. Adding or removing a scope affects access to this application for all users in your organization. Disabling a scope revokes all existing authorizations in your organization for that application.
+Enable Application Scope Management to modify the allowed scopes for an application. Adding or removing a scope affects access to this application for all users in your organization. Disabling a scope revokes any existing authorizations for applications that have the scope granted.
 
 Only MCP applications support Application Scope Management.
 
