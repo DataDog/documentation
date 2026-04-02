@@ -4,7 +4,7 @@ title: Cdocs e2e tests
 
 This folder contains a collection of pages used for e2e tests. These pages are not published to production.
 
-## Cdocs integration features
+## Integration test pages
 
 {% table %}
 * Page
@@ -16,12 +16,12 @@ This folder contains a collection of pages used for e2e tests. These pages are n
 * [Headings and TOC](/dd_e2e/cdocs/integration/headings_and_toc)
 * The TOC (right nav) is correct for any given filter selection.
 ---
-* Navigation and data persistence (TODO)
+* [Sticky data](/dd_e2e/cdocs/integration/sticky_data)
 * - When the user navigates to this page, any previous selections they made on other pages apply.
   - When the user navigates to this page, the default applies if their previous selection is not available.
 {% /table %}
 
-## Components
+## Component test pages
 
 {% table %}
 * Page
