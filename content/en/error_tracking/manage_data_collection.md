@@ -14,10 +14,11 @@ further_reading:
 
 Error Tracking provides fine-grained control of which errors to ingest, helping you reduce noise and avoid unexpected costs.
 
-You can define what data is included in Error Tracking in two ways:
+You can define what data is included in Error Tracking in three ways:
 
 - [Rules](#rules-inclusion)
 - [Rate limits](#rate-limits)
+- [Excluding issues][3]
 
 You can configure both rules and rate limits on the [**Error Tracking** > **Settings**][1] page.
 
@@ -154,5 +155,6 @@ When Dynamic Sampling is applied, the following steps are recommended:
 
 [1]: https://app.datadoghq.com/error-tracking/settings/rules
 [2]: /error_tracking/troubleshooting/?tab=java#errors-are-not-found-in-error-tracking
+[3]: /error_tracking/issue_states/#excluding-an-issue
 [4]: /events/
 [5]: https://app.datadoghq.com/error-tracking/settings/rate-limits
