@@ -62,7 +62,7 @@ Access to Event Management Pipelines is controlled by two permissions:
 - **`events_write_pipelines`**: Allows you to create, edit, and delete pipelines, including modifying pipeline attributes such as filter queries and pipeline ordering.
 - **`events_write_processors`**: Allows you to create, edit, and delete processors within a pipeline.
 
-Administrators can assign these permissions to roles to control who can modify pipeline and processor configurations.
+Administrators can assign these permissions to roles using [Role Based Access Control][13] to control who can modify pipeline and processor configurations.
 
 
 ## Further reading
