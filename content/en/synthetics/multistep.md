@@ -180,6 +180,8 @@ Multistep API tests can run:
 
 {{% synthetics-alerting-monitoring %}}
 
+{{% synthetics-downtimes %}}
+
 {{% synthetics-variables %}}
 
 ### Extract variables

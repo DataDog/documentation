@@ -8064,6 +8064,11 @@ menu:
       url: synthetics/platform/settings
       parent: synthetics_platform
       weight: 706
+    - name: Scheduled Downtime
+      identifier: synthetics_platform_downtime
+      url: synthetics/platform/downtime
+      parent: synthetics_platform
+      weight: 707
     - name: Exploring Synthetics Data
       url: synthetics/explore/
       parent: synthetics
