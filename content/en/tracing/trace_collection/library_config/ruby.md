@@ -19,7 +19,13 @@ After you set up the tracing library with your code and configure the Agent to c
 
 {{% apm-config-visibility %}}
 
-For information about configuring the Ruby tracing library, see [Additional Ruby configuration][2].
+For additional configuration options beyond the environment variables listed below, see [Additional Ruby configuration][2].
+
+## Configurations keys
+
+The previous version of this configuration documentation is still available at [Configuring the Ruby Tracing Library (legacy)][4].
+
+{{< partial name="apm/registry-config-list.html" >}}
 
 ## Further Reading
 
@@ -28,4 +34,5 @@ For information about configuring the Ruby tracing library, see [Additional Ruby
 [1]: /getting_started/tagging/unified_service_tagging/
 [2]: /tracing/trace_collection/dd_libraries/ruby/#additional-configuration
 [3]: /opentelemetry/interoperability/environment_variable_support
+[4]: /tracing/trace_collection/library_config_legacy/ruby/
 
