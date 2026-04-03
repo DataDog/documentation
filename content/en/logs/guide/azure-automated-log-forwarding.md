@@ -71,6 +71,10 @@ The sections below provide instructions for completing each page of the template
 1. Review the finalized deployment details.
 2. Click **Create**.
 
+## Resource tag filtering
+
+You can use tag filters to control which Azure resources have their logs forwarded to Datadog. For tag filter syntax, wildcard support, and examples, see [Resource tag filtering][16] in the Azure getting started guide.
+
 ## Architecture
 
 ### Services used
@@ -156,3 +160,4 @@ The script first discovers any instances running in each subscription, then prom
 [13]: https://learn.microsoft.com/azure/azure-monitor/essentials/diagnostic-settings
 [14]: https://app.datadoghq.com/integrations/azure/add?config_azure-new-onboarding=true
 [15]: https://learn.microsoft.com/azure/azure-functions/
+[16]: /getting_started/integrations/azure/#resource-tag-filtering-1
