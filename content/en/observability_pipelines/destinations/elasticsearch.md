@@ -32,8 +32,8 @@ Set up the Elasticsearch destination and its environment variables when you [set
 		- To configure **Bulk** mode:
 			- (Optional) In the **Index** field, enter the name of the Elasticsearch index. You can use [template syntax][3] to dynamically route data to different indexes based on specific fields in your logs, for example `logs-{{service}}` or `metrics-{{service}}`.
 	- **Data streams** mode
-		- Uses [Elasticsearch Data Streams][4] for log storage. Data streams automatically manage backing indexes and rollovers, making them ideal for time series log data.
-		- Choose this mode when you want Elasticsearch to manage the index lifecycle for you. Data streams ensures smooth rollovers, Index Lifecycle Management (ILM) compatibility, and optimized handling of time-based data.
+		- Uses [Elasticsearch Data Streams][4] for data storage. Data streams automatically manage backing indexes and rollovers, making them ideal for time series log data.
+		- Choose this mode when you want Elasticsearch to manage the index lifecycle for you. Data streams ensure smooth rollovers, Index Lifecycle Management (ILM) compatibility, and optimized handling of time-based data.
 		- To configure **Data streams** mode, optionally define the data stream name (default is `logs-generic-default` for logs and `metrics-generic-default` for metrics) by entering the following information:
 			- In the **Type** field, enter the category of data being ingested, for example `logs` or `metrics`.
 			- In the **Dataset** field, specify the format or data source that describes the structure, for example `apache`.
@@ -44,7 +44,7 @@ Set up the Elasticsearch destination and its environment variables when you [set
 
 ##### Compression
 
-Toggle the switch to enable **Compression**. Select a compression algorithm in the dropdown menu.
+You might want to use compression if you are sending a high volume of events to your Elasticsearch clusters. Toggle the switch to enable **Compression**. Select a compression algorithm (**gzip**, **snappy**, **zlib**, **zstd**) in the dropdown menu. The default is no compression.
 
 ##### Buffering
 
