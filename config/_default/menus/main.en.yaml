@@ -5889,6 +5889,11 @@ menu:
       url: feature_flags/feature_flag_mcp_server
       parent: feature_flags
       identifier: feature_flags_mcp_server
+      weight: 7
+    - name: Troubleshooting
+      url: feature_flags/troubleshooting
+      parent: feature_flags
+      identifier: feature_flags_troubleshooting
       weight: 8
     - name: Guides
       url: feature_flags/guide
