@@ -19,7 +19,7 @@ Link GitHub pull requests to Error Tracking issues and track the full life cycle
 With linked pull requests, you can:
 
 - **Track issue resolution**: See which pull requests are addressing an Error Tracking issue directly from the issue panel.
-- **Automatically resolve issues**: When a linked pull request is merged, Datadog automatically moves the issue to **RESOLVED** status.
+- **Automatically resolve issues**: When a linked pull request is merged, Datadog automatically moves the issue to `Resolved` status.
 
 ## Prerequisites
 
