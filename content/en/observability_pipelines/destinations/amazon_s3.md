@@ -10,6 +10,10 @@ products:
 
 {{< product-availability >}}
 
+{{< callout url="#" btn_hidden="true" header="false">}}
+The Amazon S3 destination is in Preview. Contact your account manager for access.
+{{< /callout >}}
+
 ## Overview
 
 Use the Amazon S3 destination to send logs in JSON or Parquet format to Amazon S3. See [Automatically generated Parquet schema](#automatically-generated-parquet-schema).
