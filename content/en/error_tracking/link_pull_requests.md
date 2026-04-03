@@ -76,3 +76,4 @@ Linked pull requests trigger automatic issue state transitions:
 [1]: https://app.datadoghq.com/error-tracking
 [2]: /integrations/github/
 [3]: /integrations/guide/source-code-integration
+[4]: /account_management/rbac/permissions/#error-tracking
