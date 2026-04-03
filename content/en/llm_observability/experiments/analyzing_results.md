@@ -139,7 +139,7 @@ To build a widget using LLM Experiments data, use `LLM Observability > Experimen
 
 For record level data aggregation, use `Traces`; otherwise, use `All Spans`.
 
-You can group or filter by `@experiment.status` to compare metrics across experiments in different states (for example, running vs. completed).
+Group or filter by `@experiment.status` to compare metrics across running or completed experiments.
 
 ### Widget examples
 #### Plotting performance over time broken down by a metadata field
