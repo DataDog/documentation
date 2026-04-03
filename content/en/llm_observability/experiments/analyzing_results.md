@@ -49,6 +49,15 @@ To find a trace by evaluation, search: `@evaluation.<name>.value:<criteria>`
 | Score           | `@evaluation.correctness.value:>=0.35` |
 | Categorical     | `@evaluation.violation.value:(not_fun OR not_nice)` |
 
+#### Find traces by experiment status
+
+To filter traces by the status of the experiment they belong to, search: `@experiment.status:<status>`
+
+| Status | Example search term |
+| ------ | ------------------- |
+| Running | `@experiment.status:running` |
+| Completed | `@experiment.status:completed` |
+
 #### Find traces by metric
 
 LLM Experiments automatically collects duration, token count, and cost metrics.
@@ -129,6 +138,8 @@ Datadog suggests that you:
 To build a widget using LLM Experiments data, use `LLM Observability > Experiments` as data source. Then, use the [search syntax on this page](#searching-for-specific-records) to narrow down the events to plot. 
 
 For record level data aggregation, use `Traces`; otherwise, use `All Spans`.
+
+You can group or filter by `@experiment.status` to compare metrics across experiments in different states (for example, running vs. completed).
 
 
 ### Widget examples
