@@ -141,7 +141,6 @@ For record level data aggregation, use `Traces`; otherwise, use `All Spans`.
 
 You can group or filter by `@experiment.status` to compare metrics across experiments in different states (for example, running vs. completed).
 
-
 ### Widget examples
 #### Plotting performance over time broken down by a metadata field
 {{< img src="llm_observability/experiments/widget-metadata.png" alt="Widget using LLM Experiments data. Graph showing the performance over time broken down by a metadata field." style="width:100%;" >}}
