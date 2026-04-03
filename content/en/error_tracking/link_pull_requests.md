@@ -31,7 +31,8 @@ You need the following [permission][1] to link your PRs to Error Tracking issues
 
 - Error Tracking Issue Write
 
-## Link a pull request to an issue
+## Link and manage pull requests
+### Link a pull request to an issue
 
 To link a pull request to an Error Tracking issue:
 
