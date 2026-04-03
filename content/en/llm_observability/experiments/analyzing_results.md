@@ -51,7 +51,7 @@ To find a trace by evaluation, search: `@evaluation.<name>.value:<criteria>`
 
 #### Find traces by experiment status
 
-To filter traces by the status of the experiment they belong to, search: `@experiment.status:<status>`
+To find a trace by experiment status, search: `@experiment.status:<status>`
 
 | Status | Example search term |
 | ------ | ------------------- |
