@@ -2304,16 +2304,21 @@ menu:
       parent: error_tracking_ticketing_systems
       identifier: error_tracking_case_management
       weight: 101
+    - name: Link Pull Requests
+      url: error_tracking/link_pull_requests
+      parent: error_tracking
+      identifier: error_tracking_link_pull_requests
+      weight: 15
     - name: Troubleshooting
       url: error_tracking/troubleshooting
       parent: error_tracking
       identifier: error_tracking_troubleshooting
-      weight: 15
+      weight: 16
     - name: Guides
       url: error_tracking/guides
       parent: error_tracking
       identifier: error_tracking_guides
-      weight: 16
+      weight: 17
     - name: Change Tracking
       url: change_tracking/
       pre: graph-3
