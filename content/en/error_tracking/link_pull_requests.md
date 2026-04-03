@@ -46,7 +46,7 @@ Datadog detects the issue URL and automatically creates the link.
 
 **Note**: Updating a pull request description to add or remove issue URLs automatically updates the links.
 
-## View linked pull requests
+### View linked pull requests
 
 Linked pull requests appear in the Error Tracking issue panel.
 
