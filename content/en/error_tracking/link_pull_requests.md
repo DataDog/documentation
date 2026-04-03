@@ -1,5 +1,5 @@
 ---
-title: Link Pull Requests
+title: Link Pull Requests to Error Tracking Issues
 further_reading:
   - link: '/error_tracking/issue_states/'
     tag: 'Documentation'
