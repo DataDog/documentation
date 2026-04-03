@@ -4190,6 +4190,11 @@ menu:
       parent: tracing_proxies
       identifier: tracing_proxies_apigateway
       weight: 2116
+    - name: Azure API Management
+      url: tracing/trace_collection/proxy_setup/azure_apim
+      parent: tracing_proxies
+      identifier: tracing_proxies_azure_apim
+      weight: 2117
     - name: Span Tag Semantics
       url: tracing/trace_collection/tracing_naming_convention
       parent: tracing_trace_collection
