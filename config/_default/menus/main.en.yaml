@@ -5261,7 +5261,7 @@ menu:
       url: llm_observability/evaluations/submit_nemo_evaluations
       parent: llm_obs_external_evaluations
       identifier: llm_obs_submit_nemo_evaluations
-      weight: 40202
+      weight: 40201
     - name: DeepEval Evaluations
       url: llm_observability/evaluations/deepeval_evaluations
       parent: llm_obs_external_evaluations
