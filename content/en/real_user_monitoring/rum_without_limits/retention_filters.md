@@ -130,6 +130,29 @@ For example, to exclude sessions from South Korea while retaining all other sess
 
 **Note**: There is no way to prevent a specific event from being retained. You can use negative queries (for instance, adding `-@error.message:"Script error."` to a retention filter targeting RUM Errors) to minimize the volume of undesired events, but other retention filters may still make a positive retention decision about a session that contains the event you tried to filter out.
 
+## Retention quotas
+
+Retention quotas let you cap the number of sessions retained per day across your retention filters. This gives you tighter cost control and prevents unexpected billing spikes caused by traffic surges or misconfigured filters.
+
+{{< img src="real_user_monitoring/rum_without_limits/quota.png" alt="The retention quota configuration panel showing the daily quota threshold, reset time, and behavior options." style="width:80%" >}}
+
+<div class="alert alert-info">Sessions retained by <a href="/real_user_monitoring/rum_without_limits/retention_filters/#permanent-retention-filters">Permanent Retention Filters</a> are not counted toward the quota.</div>
+
+### How quotas work
+
+You define a daily quota as a maximum number of retained sessions. Once the quota is reached, you can choose one of two behaviors:
+
+- **Stop retention**: No additional sessions are retained for the rest of the day. All incoming sessions are discarded by the retention filters until the quota resets.
+- **Slow down retention**: Retention continues at 10% of its normal rate. Sessions that would have been retained are instead sampled down by 90%, allowing a trickle of data to continue flowing in.
+
+Any configuration change (quota limit, retention behavior, reset time) is instantly applied.
+
+### Monitoring quota usage
+
+The `rum.measure.sessions.blocked_quota` metric tracks the volume of sessions that were blocked after the quota was reached.
+
+{{< img src="real_user_monitoring/rum_without_limits/quota2.png" alt="The retention quota metric showing the volume of sessions blocked after the quota was reached." style="width:100%" >}}
+
 ## Cross-product retention filters
 
 Cross-product retention filters allow you to optimize the correlation between different products to retain richer telemetry. When configuring a RUM retention filter, you can enable a cross-product retention filter for APM traces.
@@ -174,7 +197,7 @@ See [Retention Filter Best Practices][5].
 
 ## API
 
-Retention filters can be managed through [APIs][6] or Datadog's dedicated [Terraform modules][7].
+Retention filters, retention quotas and cross product retention filters can be managed through [APIs][6] or Datadog's dedicated [Terraform modules][7].
 
 ## Next steps
 
