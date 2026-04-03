@@ -54,7 +54,7 @@ To view linked pull requests:
 
 ### Unlink a pull request
 
-To unlink a pull request from an issue, edit the pull request description and remove the Error Tracking issue URL.
+To unlink a pull request from an issue, open the GitHub pull request and remove the Error Tracking issue URL from the description.
 
 ## Automatic state changes
 
