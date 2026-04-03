@@ -1,9 +1,9 @@
 {
   "metadata": {
-    "generated_at": "2026-03-13T11:13:54.313971+00:00",
+    "generated_at": "2026-04-03T12:52:45.281353+00:00",
     "language": "ruby",
-    "total_registry_entries": 2341,
-    "matched_entries": 341
+    "total_registry_entries": 2383,
+    "matched_entries": 358
   },
   "configurations": [
     {
@@ -590,6 +590,18 @@
       "type": "boolean",
       "default_value": "false",
       "from_version": "v2.23.0",
+      "to_version": "v2.30.0",
+      "deprecated": false,
+      "aliases": [],
+      "implem_aliases": [],
+      "category": "trace_logging"
+    },
+    {
+      "name": "DD_EXPERIMENTAL_PROPAGATE_PROCESS_TAGS_ENABLED",
+      "description": "Controls whether process-level tags (such as entrypoint metadata) are collected and included in tracing metadata. If unset, this is enabled by default.",
+      "type": "boolean",
+      "default_value": "true",
+      "from_version": "v2.30.0",
       "to_version": null,
       "deprecated": false,
       "aliases": [],
@@ -836,6 +848,18 @@
       "type": "boolean",
       "default_value": "true",
       "from_version": null,
+      "to_version": null,
+      "deprecated": false,
+      "aliases": [],
+      "implem_aliases": [],
+      "category": "profiling"
+    },
+    {
+      "name": "DD_PROFILING_EXPERIMENTAL_USE_SYSTEM_DNS",
+      "description": "Use system resolver for dns instead of built-in libdatadog one",
+      "type": "boolean",
+      "default_value": "true",
+      "from_version": "v2.30.0",
       "to_version": null,
       "deprecated": false,
       "aliases": [],
@@ -2037,6 +2061,20 @@
       "integration_pattern": "DD_TRACE_<INTEGRATION>_ANALYTICS_SAMPLE_RATE"
     },
     {
+      "name": "DD_TRACE_ETHON_DISTRIBUTED_TRACING",
+      "description": "If enabled, activates distributed tracing for the `ethon` integration",
+      "type": "boolean",
+      "default_value": "true",
+      "from_version": "v2.30.0",
+      "to_version": null,
+      "deprecated": false,
+      "aliases": [],
+      "implem_aliases": [],
+      "category": "trace_integrations",
+      "integration_name": "ETHON",
+      "integration_pattern": "DD_TRACE_<INTEGRATION>_DISTRIBUTED_TRACING"
+    },
+    {
       "name": "DD_TRACE_ETHON_ENABLED",
       "description": "Enables tracing for the Ethon integration.",
       "type": "boolean",
@@ -2105,6 +2143,20 @@
       "category": "trace_integrations",
       "integration_name": "EXCON",
       "integration_pattern": "DD_TRACE_<INTEGRATION>_ANALYTICS_SAMPLE_RATE"
+    },
+    {
+      "name": "DD_TRACE_EXCON_DISTRIBUTED_TRACING",
+      "description": "If enabled, activates distributed tracing for the `excon` integration",
+      "type": "boolean",
+      "default_value": "true",
+      "from_version": "v2.30.0",
+      "to_version": null,
+      "deprecated": false,
+      "aliases": [],
+      "implem_aliases": [],
+      "category": "trace_integrations",
+      "integration_name": "EXCON",
+      "integration_pattern": "DD_TRACE_<INTEGRATION>_DISTRIBUTED_TRACING"
     },
     {
       "name": "DD_TRACE_EXCON_ENABLED",
@@ -2203,6 +2255,20 @@
       "category": "trace_integrations",
       "integration_name": "FARADAY",
       "integration_pattern": "DD_TRACE_<INTEGRATION>_ANALYTICS_SAMPLE_RATE"
+    },
+    {
+      "name": "DD_TRACE_FARADAY_DISTRIBUTED_TRACING",
+      "description": "If enabled, activates distributed tracing for the `faraday` integration",
+      "type": "boolean",
+      "default_value": "true",
+      "from_version": "v2.30.0",
+      "to_version": null,
+      "deprecated": false,
+      "aliases": [],
+      "implem_aliases": [],
+      "category": "trace_integrations",
+      "integration_name": "FARADAY",
+      "integration_pattern": "DD_TRACE_<INTEGRATION>_DISTRIBUTED_TRACING"
     },
     {
       "name": "DD_TRACE_FARADAY_ENABLED",
@@ -2431,6 +2497,20 @@
       "integration_pattern": "DD_TRACE_<INTEGRATION>_ANALYTICS_SAMPLE_RATE"
     },
     {
+      "name": "DD_TRACE_GRPC_DISTRIBUTED_TRACING",
+      "description": "If enabled, activates distributed tracing for the `grpc` integration",
+      "type": "boolean",
+      "default_value": "true",
+      "from_version": "v2.30.0",
+      "to_version": null,
+      "deprecated": false,
+      "aliases": [],
+      "implem_aliases": [],
+      "category": "trace_integrations",
+      "integration_name": "GRPC",
+      "integration_pattern": "DD_TRACE_<INTEGRATION>_DISTRIBUTED_TRACING"
+    },
+    {
       "name": "DD_TRACE_GRPC_ENABLED",
       "description": "Enables instrumentation for grpc. When disabled, spans for grpc operations are not created.",
       "type": "boolean",
@@ -2531,6 +2611,20 @@
       "integration_pattern": "DD_TRACE_<INTEGRATION>_ANALYTICS_SAMPLE_RATE"
     },
     {
+      "name": "DD_TRACE_HTTPCLIENT_DISTRIBUTED_TRACING",
+      "description": "If enabled, activates distributed tracing for the `httpclient` integration",
+      "type": "boolean",
+      "default_value": "true",
+      "from_version": "v2.30.0",
+      "to_version": null,
+      "deprecated": false,
+      "aliases": [],
+      "implem_aliases": [],
+      "category": "trace_integrations",
+      "integration_name": "HTTPCLIENT",
+      "integration_pattern": "DD_TRACE_<INTEGRATION>_DISTRIBUTED_TRACING"
+    },
+    {
       "name": "DD_TRACE_HTTPCLIENT_ENABLED",
       "description": "Enables tracing for the httpclient integration.",
       "type": "boolean",
@@ -2616,6 +2710,20 @@
       "category": "trace_integrations",
       "integration_name": "HTTPRB",
       "integration_pattern": "DD_TRACE_<INTEGRATION>_ANALYTICS_SAMPLE_RATE"
+    },
+    {
+      "name": "DD_TRACE_HTTPRB_DISTRIBUTED_TRACING",
+      "description": "If enabled, activates distributed tracing for the `httprb` integration",
+      "type": "boolean",
+      "default_value": "true",
+      "from_version": "v2.30.0",
+      "to_version": null,
+      "deprecated": false,
+      "aliases": [],
+      "implem_aliases": [],
+      "category": "trace_integrations",
+      "integration_name": "HTTPRB",
+      "integration_pattern": "DD_TRACE_<INTEGRATION>_DISTRIBUTED_TRACING"
     },
     {
       "name": "DD_TRACE_HTTPRB_ENABLED",
@@ -2716,6 +2824,18 @@
       "category": "trace_propagation"
     },
     {
+      "name": "DD_TRACE_HTTP_DISTRIBUTED_TRACING",
+      "description": "If enabled, activates distributed tracing for the `net/http` integration",
+      "type": "boolean",
+      "default_value": "true",
+      "from_version": "v2.30.0",
+      "to_version": null,
+      "deprecated": false,
+      "aliases": [],
+      "implem_aliases": [],
+      "category": "trace_propagation"
+    },
+    {
       "name": "DD_TRACE_HTTP_ENABLED",
       "description": "Enables instrumentation for http. When disabled, spans for http operations are not created.",
       "type": "boolean",
@@ -2801,6 +2921,20 @@
       "category": "trace_integrations",
       "integration_name": "KAFKA",
       "integration_pattern": "DD_TRACE_<INTEGRATION>_ENABLED"
+    },
+    {
+      "name": "DD_TRACE_KARAFKA_DISTRIBUTED_TRACING",
+      "description": "If enabled, activates distributed tracing for the `karafka` integration",
+      "type": "boolean",
+      "default_value": "false",
+      "from_version": "v2.30.0",
+      "to_version": null,
+      "deprecated": false,
+      "aliases": [],
+      "implem_aliases": [],
+      "category": "trace_integrations",
+      "integration_name": "KARAFKA",
+      "integration_pattern": "DD_TRACE_<INTEGRATION>_DISTRIBUTED_TRACING"
     },
     {
       "name": "DD_TRACE_KARAFKA_ENABLED",
@@ -3378,6 +3512,20 @@
       "integration_pattern": "DD_TRACE_<INTEGRATION>_ANALYTICS_SAMPLE_RATE"
     },
     {
+      "name": "DD_TRACE_QUE_DISTRIBUTED_TRACING",
+      "description": "If enabled, activates distributed tracing for the `que` integration",
+      "type": "boolean",
+      "default_value": "true",
+      "from_version": "v2.30.0",
+      "to_version": null,
+      "deprecated": false,
+      "aliases": [],
+      "implem_aliases": [],
+      "category": "trace_integrations",
+      "integration_name": "QUE",
+      "integration_pattern": "DD_TRACE_<INTEGRATION>_DISTRIBUTED_TRACING"
+    },
+    {
       "name": "DD_TRACE_QUE_ENABLED",
       "description": "Enables tracing for the Que integration.",
       "type": "boolean",
@@ -3490,6 +3638,20 @@
       "integration_pattern": "DD_TRACE_<INTEGRATION>_ANALYTICS_SAMPLE_RATE"
     },
     {
+      "name": "DD_TRACE_RACK_DISTRIBUTED_TRACING",
+      "description": "If enabled, activates distributed tracing for the `rack` integration",
+      "type": "boolean",
+      "default_value": "true",
+      "from_version": "v2.30.0",
+      "to_version": null,
+      "deprecated": false,
+      "aliases": [],
+      "implem_aliases": [],
+      "category": "trace_integrations",
+      "integration_name": "RACK",
+      "integration_pattern": "DD_TRACE_<INTEGRATION>_DISTRIBUTED_TRACING"
+    },
+    {
       "name": "DD_TRACE_RACK_ENABLED",
       "description": "Enables tracing for the Rack integration.",
       "type": "boolean",
@@ -3530,6 +3692,20 @@
       "category": "trace_integrations",
       "integration_name": "RAILS",
       "integration_pattern": "DD_TRACE_<INTEGRATION>_ANALYTICS_SAMPLE_RATE"
+    },
+    {
+      "name": "DD_TRACE_RAILS_DISTRIBUTED_TRACING",
+      "description": "If enabled, activates distributed tracing for the `rails` integration",
+      "type": "boolean",
+      "default_value": "true",
+      "from_version": "v2.30.0",
+      "to_version": null,
+      "deprecated": false,
+      "aliases": [],
+      "implem_aliases": [],
+      "category": "trace_integrations",
+      "integration_name": "RAILS",
+      "integration_pattern": "DD_TRACE_<INTEGRATION>_DISTRIBUTED_TRACING"
     },
     {
       "name": "DD_TRACE_RAILS_ENABLED",
@@ -3797,6 +3973,20 @@
       "integration_pattern": "DD_TRACE_<INTEGRATION>_ANALYTICS_SAMPLE_RATE"
     },
     {
+      "name": "DD_TRACE_REST_CLIENT_DISTRIBUTED_TRACING",
+      "description": "If enabled, activates distributed tracing for the `rest-client` integration",
+      "type": "boolean",
+      "default_value": "true",
+      "from_version": "v2.30.0",
+      "to_version": null,
+      "deprecated": false,
+      "aliases": [],
+      "implem_aliases": [],
+      "category": "trace_integrations",
+      "integration_name": "REST_CLIENT",
+      "integration_pattern": "DD_TRACE_<INTEGRATION>_DISTRIBUTED_TRACING"
+    },
+    {
       "name": "DD_TRACE_REST_CLIENT_ENABLED",
       "description": "Enables tracing for the RestClient integration.",
       "type": "boolean",
@@ -4007,6 +4197,20 @@
       "integration_pattern": "DD_TRACE_<INTEGRATION>_ANALYTICS_SAMPLE_RATE"
     },
     {
+      "name": "DD_TRACE_SIDEKIQ_DISTRIBUTED_TRACING",
+      "description": "If enabled, activates distributed tracing for the `sidekiq` integration",
+      "type": "boolean",
+      "default_value": "false",
+      "from_version": "v2.30.0",
+      "to_version": null,
+      "deprecated": false,
+      "aliases": [],
+      "implem_aliases": [],
+      "category": "trace_integrations",
+      "integration_name": "SIDEKIQ",
+      "integration_pattern": "DD_TRACE_<INTEGRATION>_DISTRIBUTED_TRACING"
+    },
+    {
       "name": "DD_TRACE_SIDEKIQ_ENABLED",
       "description": "Enables tracing for the Sidekiq integration.",
       "type": "boolean",
@@ -4047,6 +4251,20 @@
       "category": "trace_integrations",
       "integration_name": "SINATRA",
       "integration_pattern": "DD_TRACE_<INTEGRATION>_ANALYTICS_SAMPLE_RATE"
+    },
+    {
+      "name": "DD_TRACE_SINATRA_DISTRIBUTED_TRACING",
+      "description": "If enabled, activates distributed tracing for the `sinatra` integration",
+      "type": "boolean",
+      "default_value": "true",
+      "from_version": "v2.30.0",
+      "to_version": null,
+      "deprecated": false,
+      "aliases": [],
+      "implem_aliases": [],
+      "category": "trace_integrations",
+      "integration_name": "SINATRA",
+      "integration_pattern": "DD_TRACE_<INTEGRATION>_DISTRIBUTED_TRACING"
     },
     {
       "name": "DD_TRACE_SINATRA_ENABLED",
@@ -4285,6 +4503,20 @@
       "integration_pattern": "DD_TRACE_<INTEGRATION>_SERVICE_NAME"
     },
     {
+      "name": "DD_TRACE_WATERDROP_DISTRIBUTED_TRACING",
+      "description": "If enabled, activates distributed tracing for the `waterdrop` integration",
+      "type": "boolean",
+      "default_value": "false",
+      "from_version": "v2.30.0",
+      "to_version": null,
+      "deprecated": false,
+      "aliases": [],
+      "implem_aliases": [],
+      "category": "trace_integrations",
+      "integration_name": "WATERDROP",
+      "integration_pattern": "DD_TRACE_<INTEGRATION>_DISTRIBUTED_TRACING"
+    },
+    {
       "name": "DD_TRACE_WATERDROP_ENABLED",
       "description": "Enables tracing for the WaterDrop integration.",
       "type": "boolean",
@@ -4354,7 +4586,9 @@
       "from_version": "v2.23.0",
       "to_version": null,
       "deprecated": false,
-      "aliases": [],
+      "aliases": [
+        "OTEL_EXPORTER_OTLP_ENDPOINT"
+      ],
       "implem_aliases": [],
       "category": "otel"
     },
@@ -4390,7 +4624,9 @@
       "from_version": "v2.24.0",
       "to_version": null,
       "deprecated": false,
-      "aliases": [],
+      "aliases": [
+        "OTEL_EXPORTER_OTLP_PROTOCOL"
+      ],
       "implem_aliases": [],
       "category": "otel"
     },
@@ -4426,7 +4662,9 @@
       "from_version": "v2.24.0",
       "to_version": null,
       "deprecated": false,
-      "aliases": [],
+      "aliases": [
+        "OTEL_EXPORTER_OTLP_TIMEOUT"
+      ],
       "implem_aliases": [],
       "category": "otel"
     },

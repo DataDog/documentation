@@ -1,9 +1,9 @@
 {
   "metadata": {
-    "generated_at": "2026-03-13T11:13:54.292223+00:00",
+    "generated_at": "2026-04-03T12:52:45.258791+00:00",
     "language": "nodejs",
-    "total_registry_entries": 2341,
-    "matched_entries": 568
+    "total_registry_entries": 2383,
+    "matched_entries": 570
   },
   "configurations": [
     {
@@ -1174,6 +1174,18 @@
       "type": "boolean",
       "default_value": "false",
       "from_version": "v5.83.0",
+      "to_version": "v5.93.0",
+      "deprecated": false,
+      "aliases": [],
+      "implem_aliases": [],
+      "category": "trace_logging"
+    },
+    {
+      "name": "DD_EXPERIMENTAL_PROPAGATE_PROCESS_TAGS_ENABLED",
+      "description": "Controls whether process-level tags (such as entrypoint metadata) are collected and included in tracing metadata. If unset, this is enabled by default.",
+      "type": "boolean",
+      "default_value": "true",
+      "from_version": "v5.93.0",
       "to_version": null,
       "deprecated": false,
       "aliases": [],
@@ -2371,7 +2383,7 @@
     {
       "name": "DD_PROFILING_WALLTIME_ENABLED",
       "description": "If set to `false`, disables the Wall time profiling. Defaults to `true`.",
-      "type": null,
+      "type": "boolean",
       "default_value": null,
       "from_version": "v5.83.0",
       "to_version": "v5.88.0",
@@ -2515,7 +2527,8 @@
       "to_version": null,
       "deprecated": false,
       "aliases": [
-        "DD_SERVICE_NAME"
+        "DD_SERVICE_NAME",
+        "OTEL_SERVICE_NAME"
       ],
       "implem_aliases": [],
       "category": "general"
@@ -2582,7 +2595,7 @@
     },
     {
       "name": "DD_SPAN_SAMPLING_RULES",
-      "description": ".",
+      "description": "Span sampling rules to keep individual spans when the rest of the trace would otherwise be dropped. A JSON array of objects. Rules are applied in configured order to determine the span's sample rate. The sample_rate value must be between 0.0 and 1.0 (inclusive). For more information, see Ingestion Mechanisms. Example: - Set the span sample rate to 50% for the service my-service and operation name http.request, up to 50 traces per second: '[{\"service\": \"my-service\", \"name\": \"http.request\", \"sample_rate\":0.5, \"max_per_second\": 50}]'",
       "type": "array",
       "default_value": null,
       "from_version": "v5.88.0",
@@ -4213,7 +4226,9 @@
       "from_version": "v5.83.0",
       "to_version": "latest",
       "deprecated": false,
-      "aliases": [],
+      "aliases": [
+        "DD_TRACING_ENABLED"
+      ],
       "implem_aliases": [],
       "category": "trace_core"
     },
@@ -5184,6 +5199,20 @@
       "integration_pattern": "DD_TRACE_<INTEGRATION>_ENABLED"
     },
     {
+      "name": "DD_TRACE_LANGGRAPH_ENABLED",
+      "description": "To enable the LangGraph Integration. ",
+      "type": "boolean",
+      "default_value": "true",
+      "from_version": "v5.91.0",
+      "to_version": null,
+      "deprecated": false,
+      "aliases": [],
+      "implem_aliases": [],
+      "category": "trace_integrations",
+      "integration_name": "LANGGRAPH",
+      "integration_pattern": "DD_TRACE_<INTEGRATION>_ENABLED"
+    },
+    {
       "name": "DD_TRACE_LDAPJS_ENABLED",
       "description": "Enables instrumentation for ldapjs. When disabled, spans for ldapjs operations are not created.",
       "type": "boolean",
@@ -5273,7 +5302,10 @@
       "from_version": "v5.88.0",
       "to_version": null,
       "deprecated": false,
-      "aliases": [],
+      "aliases": [
+        "DD_LOG_LEVEL",
+        "OTEL_LOG_LEVEL"
+      ],
       "implem_aliases": [],
       "category": "trace_logging"
     },
@@ -6063,7 +6095,9 @@
       "from_version": "v5.88.0",
       "to_version": null,
       "deprecated": false,
-      "aliases": [],
+      "aliases": [
+        "OTEL_PROPAGATORS"
+      ],
       "implem_aliases": [],
       "category": "trace_propagation"
     },
@@ -6949,7 +6983,9 @@
       "from_version": "v5.83.0",
       "to_version": null,
       "deprecated": false,
-      "aliases": [],
+      "aliases": [
+        "OTEL_EXPORTER_OTLP_ENDPOINT"
+      ],
       "implem_aliases": [],
       "category": "otel"
     },
@@ -6961,7 +6997,9 @@
       "from_version": "v5.83.0",
       "to_version": "v5.88.0",
       "deprecated": false,
-      "aliases": [],
+      "aliases": [
+        "OTEL_EXPORTER_OTLP_HEADERS"
+      ],
       "implem_aliases": [],
       "category": "otel"
     },
@@ -6999,7 +7037,9 @@
       "from_version": "v5.88.0",
       "to_version": null,
       "deprecated": false,
-      "aliases": [],
+      "aliases": [
+        "OTEL_EXPORTER_OTLP_PROTOCOL"
+      ],
       "implem_aliases": [],
       "category": "otel"
     },
@@ -7011,7 +7051,9 @@
       "from_version": "v5.83.0",
       "to_version": null,
       "deprecated": false,
-      "aliases": [],
+      "aliases": [
+        "OTEL_EXPORTER_OTLP_TIMEOUT"
+      ],
       "implem_aliases": [],
       "category": "otel"
     },
@@ -7023,7 +7065,9 @@
       "from_version": "v5.83.0",
       "to_version": null,
       "deprecated": false,
-      "aliases": [],
+      "aliases": [
+        "OTEL_EXPORTER_OTLP_ENDPOINT"
+      ],
       "implem_aliases": [],
       "category": "otel"
     },
@@ -7059,7 +7103,9 @@
       "from_version": "v5.88.0",
       "to_version": null,
       "deprecated": false,
-      "aliases": [],
+      "aliases": [
+        "OTEL_EXPORTER_OTLP_PROTOCOL"
+      ],
       "implem_aliases": [],
       "category": "otel"
     },
@@ -7095,7 +7141,9 @@
       "from_version": "v5.88.0",
       "to_version": null,
       "deprecated": false,
-      "aliases": [],
+      "aliases": [
+        "OTEL_EXPORTER_OTLP_TIMEOUT"
+      ],
       "implem_aliases": [],
       "category": "otel"
     },

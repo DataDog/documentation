@@ -1,9 +1,9 @@
 {
   "metadata": {
-    "generated_at": "2026-03-13T11:13:54.318780+00:00",
+    "generated_at": "2026-04-03T12:52:45.289458+00:00",
     "language": "rust",
-    "total_registry_entries": 2341,
-    "matched_entries": 34
+    "total_registry_entries": 2383,
+    "matched_entries": 47
   },
   "configurations": [
     {
@@ -228,7 +228,9 @@
       "from_version": null,
       "to_version": null,
       "deprecated": false,
-      "aliases": [],
+      "aliases": [
+        "DD_TRACING_ENABLED"
+      ],
       "implem_aliases": [],
       "category": "trace_core"
     },
@@ -367,6 +369,30 @@
       "category": "general"
     },
     {
+      "name": "OTEL_EXPORTER_OTLP_ENDPOINT",
+      "description": "Specifies the base URL for sending OTLP data for all signals unless overridden. **Default (gRPC)**: `http://localhost:4317`. **Default (HTTP)**: `http://localhost:4318`.",
+      "type": "string",
+      "default_value": null,
+      "from_version": "v0.3.0",
+      "to_version": null,
+      "deprecated": false,
+      "aliases": [],
+      "implem_aliases": [],
+      "category": "otel"
+    },
+    {
+      "name": "OTEL_EXPORTER_OTLP_HEADERS",
+      "description": "Configuration key to set custom headers for OTLP export (fallback for metrics-specific headers). Used when metrics-specific OTLP headers are not set. Format: api-key=key,other=value.",
+      "type": "map",
+      "default_value": "",
+      "from_version": "v0.3.0",
+      "to_version": null,
+      "deprecated": false,
+      "aliases": [],
+      "implem_aliases": [],
+      "category": "otel"
+    },
+    {
       "name": "OTEL_EXPORTER_OTLP_LOGS_ENDPOINT",
       "description": "Specifies the URL for sending OTLP logs. Takes precedence over `OTEL_EXPORTER_OTLP_ENDPOINT`. : **Default (gRPC)**: `http://localhost:4317` : **Default (HTTP)**: `http://localhost:4318/v1/logs`",
       "type": "string",
@@ -374,7 +400,9 @@
       "from_version": "v0.3.0",
       "to_version": null,
       "deprecated": false,
-      "aliases": [],
+      "aliases": [
+        "OTEL_EXPORTER_OTLP_ENDPOINT"
+      ],
       "implem_aliases": [],
       "category": "otel"
     },
@@ -386,7 +414,9 @@
       "from_version": "v0.3.0",
       "to_version": null,
       "deprecated": false,
-      "aliases": [],
+      "aliases": [
+        "OTEL_EXPORTER_OTLP_HEADERS"
+      ],
       "implem_aliases": [],
       "category": "otel"
     },
@@ -410,6 +440,94 @@
       "from_version": "v0.3.0",
       "to_version": null,
       "deprecated": false,
+      "aliases": [
+        "OTEL_EXPORTER_OTLP_TIMEOUT"
+      ],
+      "implem_aliases": [],
+      "category": "otel"
+    },
+    {
+      "name": "OTEL_EXPORTER_OTLP_METRICS_ENDPOINT",
+      "description": "If non-empty, used as the OTLP metrics endpoint. Otherwise falls back to `OTEL_EXPORTER_OTLP_ENDPOINT`, then to `http://<DD_TRACE_AGENT_URL host>:4317/4318` based on protocol. For `http/protobuf`, `/v1/metrics` is appended if missing.",
+      "type": "string",
+      "default_value": null,
+      "from_version": "v0.3.0",
+      "to_version": null,
+      "deprecated": false,
+      "aliases": [
+        "OTEL_EXPORTER_OTLP_ENDPOINT"
+      ],
+      "implem_aliases": [],
+      "category": "otel"
+    },
+    {
+      "name": "OTEL_EXPORTER_OTLP_METRICS_HEADERS",
+      "description": "Specifies a comma-separated list of key-value pairs to be used as headers on outgoing OTLP metrics requests (for example, `api-key=key,other-config=value`). Takes precedence over the general `OTEL_EXPORTER_OTLP_HEADERS`.",
+      "type": "map",
+      "default_value": null,
+      "from_version": "v0.3.0",
+      "to_version": null,
+      "deprecated": false,
+      "aliases": [],
+      "implem_aliases": [],
+      "category": "otel"
+    },
+    {
+      "name": "OTEL_EXPORTER_OTLP_METRICS_PROTOCOL",
+      "description": "Specifies the OTLP transport protocol to use for metrics data. Takes precedence over the general `OTEL_EXPORTER_OTLP_PROTOCOL`. **Accepted values**: `grpc`, `http/protobuf`, `http/json`.",
+      "type": "string",
+      "default_value": null,
+      "from_version": "v0.3.0",
+      "to_version": null,
+      "deprecated": false,
+      "aliases": [],
+      "implem_aliases": [],
+      "category": "otel"
+    },
+    {
+      "name": "OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE",
+      "description": "Controls metrics aggregation temporality. Accepted values: `delta` or `cumulative` (case-insensitive); empty/invalid values are treated as `delta`.",
+      "type": "string",
+      "default_value": "delta",
+      "from_version": "v0.3.0",
+      "to_version": null,
+      "deprecated": false,
+      "aliases": [],
+      "implem_aliases": [],
+      "category": "otel"
+    },
+    {
+      "name": "OTEL_EXPORTER_OTLP_METRICS_TIMEOUT",
+      "description": "Used as the exporter network timeout (ms) for OTLP metrics requests. If set to `0`, the library falls back to `OTEL_EXPORTER_OTLP_TIMEOUT`.",
+      "type": "int",
+      "default_value": null,
+      "from_version": "v0.3.0",
+      "to_version": null,
+      "deprecated": false,
+      "aliases": [],
+      "implem_aliases": [],
+      "category": "otel"
+    },
+    {
+      "name": "OTEL_EXPORTER_OTLP_PROTOCOL",
+      "description": "Used as the fallback OTLP protocol for metrics when `OTEL_EXPORTER_OTLP_METRICS_PROTOCOL` is unset. Parsed values: `grpc`, `http/protobuf`, `http/json` (case-insensitive). Note: `http/json` is currently unsupported for metrics and disables metrics export; `grpc`/`http/protobuf` require the corresponding Cargo features (`metrics-grpc`/`metrics-http`).",
+      "type": "string",
+      "default_value": "grpc",
+      "from_version": "v0.3.0",
+      "to_version": null,
+      "deprecated": false,
+      "aliases": [],
+      "implem_aliases": [],
+      "category": "otel"
+    },
+    {
+      "name": "OTEL_EXPORTER_OTLP_TIMEOUT",
+      "description": "Configuration key to set the request timeout for OTLP export (fallback for metrics-specific timeout). Used when the metrics-specific OTLP timeout is not set. Default value is 10000ms.",
+      "type": "int",
+      "default_value": "10000",
+      "from_version": "v0.3.0",
+      "to_version": null,
+      "deprecated": false,
       "aliases": [],
       "implem_aliases": [],
       "category": "otel"
@@ -419,6 +537,54 @@
       "description": "Datadog SDKs that support OTLP log export should default to otlp; all others should default to None/null.",
       "type": "string",
       "default_value": "otlp",
+      "from_version": "v0.3.0",
+      "to_version": null,
+      "deprecated": false,
+      "aliases": [],
+      "implem_aliases": [],
+      "category": "otel"
+    },
+    {
+      "name": "OTEL_METRICS_EXPORTER",
+      "description": "Specifies the metrics exporter to be used. **Notes**: The only accepted values are `otlp` and `none`. A value of `none` disables the emission of OTel metrics, as well as APM runtime metrics (equivalent to `DD_RUNTIME_METRICS_ENABLED=false`)",
+      "type": "string",
+      "default_value": "otlp",
+      "from_version": "v0.3.0",
+      "to_version": null,
+      "deprecated": false,
+      "aliases": [],
+      "implem_aliases": [],
+      "category": "otel"
+    },
+    {
+      "name": "OTEL_METRIC_EXPORT_INTERVAL",
+      "description": "**Description**: Specifies the time interval (in milliseconds) between metric export attempts. **Default**: 10000 (10s) **Notes**: This default value is Datadog's recommended configuration and differs from the OpenTelemetry specification's default of 60000ms.",
+      "type": "int",
+      "default_value": "10000",
+      "from_version": "v0.3.0",
+      "to_version": null,
+      "deprecated": false,
+      "aliases": [],
+      "implem_aliases": [],
+      "category": "otel"
+    },
+    {
+      "name": "OTEL_METRIC_EXPORT_TIMEOUT",
+      "description": "**Description**: Specifies the maximum allowed time (in milliseconds) to collect and export metrics. **Default**: 7500 (7.5s) **Notes**: This default value is Datadog's recommended configuration and differs from the OpenTelemetry specification's default of 30000ms.",
+      "type": "int",
+      "default_value": "7500",
+      "from_version": "v0.3.0",
+      "to_version": null,
+      "deprecated": false,
+      "aliases": [],
+      "implem_aliases": [],
+      "category": "otel"
+    },
+    {
+      "name": "OTEL_RESOURCE_ATTRIBUTES",
+      "description": "Set OpenTelemetry resource attributes as a list of `(key, value)` pairs.",
+      "type": "map",
+      "default_value": "",
       "from_version": "v0.3.0",
       "to_version": null,
       "deprecated": false,

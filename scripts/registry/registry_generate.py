@@ -1,24 +1,68 @@
 #!/usr/bin/env python3
 """
-Single-pass script that fetches configuration keys from the Datadog registry
-API, classifies them into categories, fuses categories into human-readable
-groups, and writes the final config_category_descriptions_registry.json.
+Fetch configuration keys from the Datadog Feature Parity Registry API,
+classify them into semantic categories, and extract per-language JSON files
+for Hugo templates.
 
-Combines the logic of extract_patterns_from_registry.py and
-generate_category_descriptions.py — no intermediate JSON file needed.
+Single script — one API call, all outputs.
+
+## Usage
+  python3 scripts/registry/registry_generate.py                    # all languages
+  python3 scripts/registry/registry_generate.py --language golang   # single language
+  python3 scripts/registry/registry_generate.py --output-dir ./out  # custom output dir
+
+## Outputs (in data/registry/)
+  - config_category_descriptions_registry.json  — full categories reference
+  - categories.json                             — slim ordered list for Hugo
+  - {language}.json                             — per-language config files
 """
 
+import argparse
 import json
 import os
+import re
 import urllib.request
 from collections import defaultdict
+from datetime import datetime, timezone
 
 API_URL = "https://dd-feature-parity.azurewebsites.net/configurations/"
-DATA_DIR = os.path.join(os.path.dirname(__file__), "..", "..", "data", "registry")
-OUTPUT_FILE = os.path.join(DATA_DIR, "config_category_descriptions_registry.json")
-CATEGORIES_FILE = os.path.join(DATA_DIR, "categories.json")
 
-# ──────────────────────────────────────────────────────────────────────
+# ══════════════════════════════════════════════════════════════════════
+# Constants for per-language extraction
+# ══════════════════════════════════════════════════════════════════════
+
+# Maps registry language names to Hugo code_lang output filenames.
+# When a registry language maps to multiple Hugo pages (e.g. dotnet),
+# the same data is written to each output file.
+LANGUAGE_TO_OUTPUT_FILES = {
+    "golang": ["go"],
+    "dotnet": ["dotnet-core", "dotnet-framework"],
+    "nodejs": ["nodejs"],
+    "python": ["python"],
+    "java": ["java"],
+    "ruby": ["ruby"],
+    "php": ["php"],
+    "rust": ["rust"],
+    "cpp": ["cpp"],
+}
+
+# Versions at or below this threshold are considered "initial" and the "Since"
+# field is hidden (the config existed from the start of registry tracking).
+# Use bare semver (no "v" prefix). Configs with from_version <= threshold
+# won't display a "Since" badge.
+SINCE_THRESHOLDS = {
+    "golang": "2.3.0",
+    "java": "1.54.0",
+    "ruby": "2.22.0",
+    "dotnet": "3.37.0",
+    "python": "3.12.0",    # TODO: update to real initial version once known
+    "rust": "0.1.0",
+    "php": "1.1.1",         # TODO: update to real initial version once known
+    "cpp": "1.1.1",         # TODO: update to real initial version once known
+    "nodejs": "5.55.0",
+}
+
+# ══════════════════════════════════════════════════════════════════════
 # Category definitions: fuse fine-grained categories into 20 groups.
 #
 # Each entry:
@@ -28,7 +72,7 @@ CATEGORIES_FILE = os.path.join(DATA_DIR, "categories.json")
 #   "pattern"     – glob/regex hint to match configuration keys
 #   "sources"     – list of category IDs from config_patterns.json that
 #                   are merged into this group
-# ──────────────────────────────────────────────────────────────────────
+# ══════════════════════════════════════════════════════════════════════
 
 CATEGORY_DEFS = [
     # ── 1. General Settings ──────────────────────────────────────────
@@ -269,22 +313,39 @@ CATEGORY_DEFS = [
     },
 ]
 
+KIND_DESCRIPTIONS = {
+    "DD_TRACE_<INTEGRATION>_ENABLED": "Enable or disable tracing for a specific integration.",
+    "DD_TRACE_<INTEGRATION>_ANALYTICS_ENABLED": "Enable App Analytics (trace search) for spans produced by this integration.",
+    "DD_TRACE_<INTEGRATION>_ANALYTICS_SAMPLE_RATE": "Set the App Analytics sample rate for this integration (0.0 to 1.0).",
+    "DD_TRACE_<INTEGRATION>_PEER_SERVICE": "Override the peer.service tag for outbound requests from this integration.",
+    "DD_TRACE_<INTEGRATION>_SERVICE_NAME": "Override the service name for spans produced by this integration.",
+    "DD_TRACE_<INTEGRATION>_DISTRIBUTED_TRACING": "Enable or disable distributed trace propagation for this integration.",
+    "DD_TRACE_<INTEGRATION>_ERROR_STATUS_CODES": "Define which HTTP status codes are treated as errors for this integration.",
+}
+MIN_KIND_COUNT = 5
+
 
 # ══════════════════════════════════════════════════════════════════════
-# Step 1 — Fetch entries from registry API
+# Phase 1: Fetch & normalize entries
 # ══════════════════════════════════════════════════════════════════════
 
-def fetch_entries(url):
-    """Fetch configuration entries from the registry API and normalise them
-    into a flat dict: { key: { "key", "languages", "description", ... } }
-    """
+def fetch_raw_data(url):
+    """Fetch the raw JSON array from the registry API."""
     print(f"Fetching {url} ...")
     req = urllib.request.Request(url, headers={"Accept": "application/json"})
-    with urllib.request.urlopen(req) as resp:
+    with urllib.request.urlopen(req, timeout=30) as resp:
         data = json.loads(resp.read().decode())
+    print(f"  Received {len(data)} registry entries")
+    return data
 
+
+def normalize_entries(raw_data):
+    """Normalize raw API data into a flat dict for category classification.
+
+    Returns: { key: { "key", "languages", "description", ... } }
+    """
     entries = {}
-    for item in data:
+    for item in raw_data:
         key = item["name"]
         if not key:
             continue
@@ -320,12 +381,12 @@ def fetch_entries(url):
             "type": config_type,
         }
 
-    print(f"  Fetched {len(entries)} unique keys")
+    print(f"  Normalized {len(entries)} unique keys")
     return entries
 
 
 # ══════════════════════════════════════════════════════════════════════
-# Step 2 — Classify integration keys
+# Phase 2: Classify integration keys
 # ══════════════════════════════════════════════════════════════════════
 
 def classify_integration_keys(entries):
@@ -445,7 +506,7 @@ def classify_integration_keys(entries):
 
 
 # ══════════════════════════════════════════════════════════════════════
-# Step 3 — Build fine-grained categories
+# Phase 3: Build fine-grained categories
 # ══════════════════════════════════════════════════════════════════════
 
 def build_categories(entries, integration_keys, integration_names):
@@ -453,29 +514,29 @@ def build_categories(entries, integration_keys, integration_names):
     categories = defaultdict(list)
 
     key_overrides = {
-        # general → trace_sampling
+        # general -> trace_sampling
         "DD_MAX_TRACES_PER_SECOND": "general_sampling",
         "DD_PRIORITY_SAMPLING": "general_sampling",
         "DD_PRIORITY_SAMPLING_FORCE": "general_sampling",
         "DD_PRIORITIZATION_TYPE": "general_sampling",
-        # general → trace_propagation
+        # general -> trace_propagation
         "DD_WRITER_BAGGAGE_INJECT": "propagation_config",
         "DD_DISTRIBUTED_TRACING": "propagation_config",
-        # general → debugging
+        # general -> debugging
         "DD_DISTRIBUTED_DEBUGGER_ENABLED": "dynamic_instrumentation",
-        # general → instrumentation
+        # general -> instrumentation
         "DD_INJECTION_ENABLED": "instrumentation_general",
         "DD_INJECT_FORCE": "instrumentation_general",
         "DD_UNSAFE_CLASS_INJECTION": "instrumentation_general",
         "DD_DOTNET_TRACER_HOME": "instrumentation_general",
         "DD_DETECT_AOT_TRAINING_MODE": "instrumentation_general",
         "DD_VISITOR_CLASS_PARSING": "instrumentation_general",
-        # general → trace_integrations
+        # general -> trace_integrations
         "DD_DISABLED_INTEGRATIONS": "general_integration_misc",
         "DD_INTEGRATIONS_ENABLED": "general_integration_misc",
         "DD_DISABLE_DATADOG_RAILS": "general_integration_misc",
         "DD_JDK_SOCKET_ENABLED": "general_integration_misc",
-        # general → trace_core
+        # general -> trace_core
         "DD_MESSAGE_BROKER_SPLIT_BY_DESTINATION": "trace_core_behavior",
         "DD_OBFUSCATION_QUERY_STRING_REGEXP": "trace_obfuscation",
         "DD_ID_GENERATION_STRATEGY": "trace_core_behavior",
@@ -484,32 +545,32 @@ def build_categories(entries, integration_keys, integration_names):
         "DD_STACK_TRACE_LENGTH_LIMIT": "trace_core_behavior",
         "DD_WRITER_TYPE": "trace_core_behavior",
         "DD_OPTIMIZED_MAP_ENABLED": "trace_core_behavior",
-        # general → runtime_metrics
+        # general -> runtime_metrics
         "DD_METRIC_AGENT_PORT": "dogstatsd",
         "DD_HEALTH_METRICS_ENABLED": "runtime_metrics",
         "DD_RUNTIME_ID_ENABLED": "runtime_metrics",
-        # general → logs
+        # general -> logs
         "DD_APP_LOGS_COLLECTION_ENABLED": "logs_submission",
-        # general → civisibility
+        # general -> civisibility
         "DD_TESTSESSION_COMMAND": "test_optimization",
         "DD_TESTSESSION_WORKINGDIRECTORY": "test_optimization",
         "DD_PLAYWRIGHT_WORKER": "test_optimization",
         "DD_VITEST_WORKER": "test_optimization",
         "DD_PIPELINE_EXECUTION_ID": "test_optimization",
         "DD_ACTION_EXECUTION_ID": "test_optimization",
-        # trace_core → trace_logging
+        # trace_core -> trace_logging
         "DD_TRACE_BEAUTIFUL_LOGS": "trace_logging",
         "DD_TRACE_ENCODING_DEBUG": "trace_debug",
         "DD_TRACE_LOGFILE_RETENTION_DAYS": "trace_logging",
         "DD_TRACE_LOGGING_RATE": "trace_logging",
         "DD_TRACE_TRIAGE": "trace_debug",
-        # trace_core → trace_propagation / http
+        # trace_core -> trace_propagation / http
         "DD_TRACE_REQUEST_HEADER_TAGS": "trace_header_tags",
         "DD_TRACE_REQUEST_HEADER_TAGS_COMMA_ALLOWED": "trace_header_tags",
         "DD_TRACE_SQL_COMMENT_INJECTION_MODE": "trace_propagation",
-        # trace_core → trace_sampling
+        # trace_core -> trace_sampling
         "DD_TRACE_WEBSOCKET_MESSAGES_INHERIT_SAMPLING": "trace_sampling",
-        # trace_core → integration misc
+        # trace_core -> integration misc
         "DD_TRACE_DISABLED_INSTRUMENTATIONS": "trace_integration_misc",
         "DD_TRACE_DISABLED_PLUGINS": "trace_integration_misc",
         "DD_TRACE_DISABLED_ACTIVITY_SOURCES": "trace_integration_misc",
@@ -777,7 +838,7 @@ def build_categories(entries, integration_keys, integration_names):
 
 
 # ══════════════════════════════════════════════════════════════════════
-# Step 4 — Helpers
+# Phase 4: Helpers
 # ══════════════════════════════════════════════════════════════════════
 
 def detect_suffix_patterns(entries, integration_map):
@@ -811,12 +872,12 @@ def _build_integration_detail(name, keys):
 
 
 # ══════════════════════════════════════════════════════════════════════
-# Step 5 — Build final fused output (replaces generate_category_descriptions)
+# Phase 5: Build fused output
 # ══════════════════════════════════════════════════════════════════════
 
 def build_fused_output(entries, categories, integration_map, suffix_patterns):
     """Build the final JSON output with fused categories, descriptions,
-    integration details, and kindCounts — all in one pass."""
+    integration details, and kindCounts."""
 
     result = {
         "metadata": {
@@ -842,14 +903,12 @@ def build_fused_output(entries, categories, integration_map, suffix_patterns):
         languages = set()
         for src in defn["sources"]:
             if src == "__integrations__":
-                # Build integration details inline
                 details = {
                     name: _build_integration_detail(name, ikeys)
                     for name, ikeys in sorted(integration_map.items())
                 }
                 cat_entry["integrationCount"] = len(integration_map)
                 cat_entry["commonSuffixes"] = list(suffix_patterns.keys())
-                # kindCounts
                 kind_counts = {}
                 for detail in details.values():
                     for pattern in detail.values():
@@ -874,7 +933,6 @@ def build_fused_output(entries, categories, integration_map, suffix_patterns):
 
         result["categories"].append(cat_entry)
 
-    # Quick overview: category title → key count
     result["categories_list"] = {
         cat["title"]: cat["keyCount"]
         for cat in result["categories"]
@@ -891,24 +949,16 @@ def build_fused_output(entries, categories, integration_map, suffix_patterns):
     return result
 
 
-# ══════════════════════════════════════════════════════════════════════
-# Main
-# ══════════════════════════════════════════════════════════════════════
-
-KIND_DESCRIPTIONS = {
-    "DD_TRACE_<INTEGRATION>_ENABLED": "Enable or disable tracing for a specific integration.",
-    "DD_TRACE_<INTEGRATION>_ANALYTICS_ENABLED": "Enable App Analytics (trace search) for spans produced by this integration.",
-    "DD_TRACE_<INTEGRATION>_ANALYTICS_SAMPLE_RATE": "Set the App Analytics sample rate for this integration (0.0 to 1.0).",
-    "DD_TRACE_<INTEGRATION>_PEER_SERVICE": "Override the peer.service tag for outbound requests from this integration.",
-    "DD_TRACE_<INTEGRATION>_SERVICE_NAME": "Override the service name for spans produced by this integration.",
-    "DD_TRACE_<INTEGRATION>_DISTRIBUTED_TRACING": "Enable or disable distributed trace propagation for this integration.",
-    "DD_TRACE_<INTEGRATION>_ERROR_STATUS_CODES": "Define which HTTP status codes are treated as errors for this integration.",
-}
-MIN_KIND_COUNT = 5
+def write_full_categories(output, output_dir):
+    """Write config_category_descriptions_registry.json — the full reference."""
+    path = os.path.join(output_dir, "config_category_descriptions_registry.json")
+    with open(path, "w") as f:
+        json.dump(output, f, indent=2)
+    print(f"Wrote {path}")
 
 
-def write_categories_json(output):
-    """Write a slim categories.json for Hugo: ordered array of category metadata."""
+def write_slim_categories(output, output_dir):
+    """Write categories.json — slim ordered array for Hugo templates."""
     categories = []
     for cat in output["categories"]:
         entry = {
@@ -920,7 +970,6 @@ def write_categories_json(output):
             entry["commonSuffixes"] = cat["commonSuffixes"]
         if "integrationCount" in cat:
             entry["integrationPattern"] = "DD_TRACE_<INTEGRATION>_*"
-            # Build kinds list: only patterns with >= MIN_KIND_COUNT integrations
             kinds = []
             for pattern, count in cat.get("kindCounts", {}).items():
                 if count >= MIN_KIND_COUNT:
@@ -929,52 +978,249 @@ def write_categories_json(output):
                         "description": KIND_DESCRIPTIONS.get(pattern, ""),
                         "count": count,
                     })
-            # Sort by count descending
             kinds.sort(key=lambda k: -k["count"])
             entry["kinds"] = kinds
         categories.append(entry)
 
-    os.makedirs(os.path.dirname(CATEGORIES_FILE), exist_ok=True)
-    with open(CATEGORIES_FILE, "w") as f:
+    path = os.path.join(output_dir, "categories.json")
+    with open(path, "w") as f:
         json.dump(categories, f, indent=2)
-    print(f"Wrote {CATEGORIES_FILE} ({len(categories)} categories)")
+    print(f"Wrote {path} ({len(categories)} categories)")
 
+
+# ══════════════════════════════════════════════════════════════════════
+# Phase 6: Per-language extraction
+# ══════════════════════════════════════════════════════════════════════
+
+def parse_semver(version_str: str) -> tuple:
+    """Extract a (major, minor, patch) tuple from a version string.
+
+    Handles formats like "v1.2.3", "1.2.3", "1.54", and
+    "datadog-opentelemetry-v0.1.0" (strips known prefixes).
+    Returns (0, 0, 0) if unparseable.
+    """
+    if not version_str:
+        return (0, 0, 0)
+    match = re.search(r'v?(\d+\.\d+(?:\.\d+)?)', version_str)
+    if not match:
+        return (0, 0, 0)
+    parts = match.group(1).split(".")
+    major = int(parts[0])
+    minor = int(parts[1]) if len(parts) > 1 else 0
+    patch = int(parts[2]) if len(parts) > 2 else 0
+    return (major, minor, patch)
+
+
+def normalize_version(version_str: str) -> str:
+    """Normalize a version string to always have a 'v' prefix and 3-part semver.
+
+    "1.54" -> "v1.54.0", "v2.3.0" -> "v2.3.0",
+    "datadog-opentelemetry-v0.1.0" -> "v0.1.0"
+    Returns empty string if unparseable.
+    """
+    sem = parse_semver(version_str)
+    if sem == (0, 0, 0) and version_str:
+        return version_str  # can't parse, return as-is
+    return f"v{sem[0]}.{sem[1]}.{sem[2]}"
+
+
+def extract_for_language(raw_data, language):
+    """
+    Filter raw registry entries to only those implemented by the given language.
+
+    For each registry entry, we iterate over its configuration versions and
+    check if any implementation matches the requested language. When a match
+    is found, we extract the relevant fields.
+
+    If multiple implementations exist for the same language within a version,
+    we take the one with the broadest range (to="latest", or the last listed).
+    """
+    results = []
+
+    for entry in raw_data:
+        entry_name = entry["name"]
+
+        for config in entry.get("configurations", []):
+            matching_impls = [
+                impl for impl in config.get("implementations", [])
+                if impl.get("language", "").lower() == language.lower()
+            ]
+
+            if not matching_impls:
+                continue
+
+            # Pick the best implementation: prefer the one that goes to "latest"
+            best_impl = matching_impls[0]
+            for impl in matching_impls:
+                if impl.get("to") == "latest":
+                    best_impl = impl
+                    break
+
+            results.append({
+                "name": entry_name,
+                "description": config.get("description"),
+                "type": config.get("type"),
+                "default_value": config.get("defaultValue"),
+                "from_version": best_impl.get("from"),
+                "to_version": best_impl.get("to"),
+                "deprecated": config.get("deprecated", False),
+                "aliases": config.get("aliases", []),
+                "implem_aliases": best_impl.get("aliases", []),
+            })
+
+    results.sort(key=lambda x: x["name"])
+    return results
+
+
+def build_category_lookup(fused_output):
+    """Build a category lookup dict from the in-memory fused output.
+
+    Returns: dict mapping key name -> {"category": str, ...}
+    For trace_integrations keys, also includes "integration_name" and
+    "integration_pattern".
+    """
+    key_to_category = {}
+
+    for cat in fused_output.get("categories", []):
+        cat_id = cat["id"]
+
+        for key in cat.get("keys", []):
+            key_to_category[key] = {"category": cat_id}
+
+        if "integrations" in cat:
+            for integration_name, key_pattern_map in cat["integrations"].items():
+                for key, pattern in key_pattern_map.items():
+                    key_to_category[key] = {
+                        "category": cat_id,
+                        "integration_name": integration_name,
+                        "integration_pattern": pattern,
+                    }
+
+    return key_to_category
+
+
+def annotate_categories(results, key_to_category):
+    """Add category, integration_name, and integration_pattern fields to each config entry."""
+    for entry in results:
+        info = key_to_category.get(entry["name"], {})
+        entry["category"] = info.get("category", "other")
+        if "integration_name" in info:
+            entry["integration_name"] = info["integration_name"]
+            entry["integration_pattern"] = info["integration_pattern"]
+
+
+def process_versions(results, language):
+    """Normalize from_version to 'vX.Y.Z' format and remove it when at or below the threshold."""
+    threshold_str = SINCE_THRESHOLDS.get(language)
+    threshold = parse_semver(threshold_str) if threshold_str else None
+
+    for entry in results:
+        raw = entry.get("from_version")
+        if not raw:
+            entry["from_version"] = None
+            continue
+
+        normalized = normalize_version(raw)
+        sem = parse_semver(raw)
+
+        if threshold and sem <= threshold:
+            entry["from_version"] = None
+        else:
+            entry["from_version"] = normalized
+
+
+def write_language_json(results, language, raw_data, output_dir):
+    """Write per-language JSON file(s) to output_dir."""
+    output = {
+        "metadata": {
+            "generated_at": datetime.now(timezone.utc).isoformat(),
+            "language": language,
+            "total_registry_entries": len(raw_data),
+            "matched_entries": len(results),
+        },
+        "configurations": results,
+    }
+
+    for output_name in LANGUAGE_TO_OUTPUT_FILES[language]:
+        output_path = os.path.join(output_dir, f"{output_name}.json")
+        with open(output_path, "w") as f:
+            json.dump(output, f, indent=2, ensure_ascii=False)
+        print(f"  {output_path}")
+
+
+# ══════════════════════════════════════════════════════════════════════
+# Main
+# ══════════════════════════════════════════════════════════════════════
 
 def main():
-    # 1. Fetch from registry API
-    entries = fetch_entries(API_URL)
+    parser = argparse.ArgumentParser(
+        description="Generate registry configuration data for Hugo templates."
+    )
+    parser.add_argument(
+        "--language",
+        nargs="*",
+        default=list(LANGUAGE_TO_OUTPUT_FILES.keys()),
+        help="Language(s) to extract (default: all). Options: python, java, golang, nodejs, dotnet, ruby, php, rust, cpp",
+    )
+    parser.add_argument(
+        "--output-dir",
+        default=os.path.join(os.path.dirname(__file__), "..", "..", "data", "registry"),
+        help="Path to the output directory (default: data/registry/)",
+    )
+    parser.add_argument(
+        "--debug",
+        action="store_true",
+        help="Write config_category_descriptions_registry.json (full categories reference for debugging classification).",
+    )
+    args = parser.parse_args()
 
-    # 2. Classify integrations
+    languages = [lang.lower() for lang in args.language]
+    output_dir = os.path.abspath(args.output_dir)
+
+    invalid = [lang for lang in languages if lang not in LANGUAGE_TO_OUTPUT_FILES]
+    if invalid:
+        valid = ", ".join(sorted(LANGUAGE_TO_OUTPUT_FILES))
+        parser.error(f"Unknown language(s): {', '.join(invalid)}. Valid options: {valid}")
+
+    os.makedirs(output_dir, exist_ok=True)
+
+    # ── Single API fetch ─────────────────────────────────────────────
+    raw_data = fetch_raw_data(API_URL)
+
+    # ── Phase 1: Categories ──────────────────────────────────────────
+    entries = normalize_entries(raw_data)
     integration_keys, integration_map, integration_names = classify_integration_keys(entries)
-
-    # 3. Classify remaining keys into fine-grained categories
     categories = build_categories(entries, integration_keys, integration_names)
-
-    # 4. Detect suffix patterns
     suffix_patterns = detect_suffix_patterns(entries, integration_map)
+    fused_output = build_fused_output(entries, categories, integration_map, suffix_patterns)
 
-    # 5. Fuse into final output
-    output = build_fused_output(entries, categories, integration_map, suffix_patterns)
+    if args.debug:
+        write_full_categories(fused_output, output_dir)
+    write_slim_categories(fused_output, output_dir)
 
-    os.makedirs(os.path.dirname(OUTPUT_FILE), exist_ok=True)
-    with open(OUTPUT_FILE, "w") as f:
-        json.dump(output, f, indent=2)
-
-    # 6. Write slim categories.json for Hugo
-    write_categories_json(output)
-
-    print(f"\nWrote {OUTPUT_FILE}")
-    print(f"  {output['metadata']['totalCategories']} categories")
-    print(f"  {output['metadata']['totalIntegrations']} integrations")
-    total_keys = sum(c["keyCount"] for c in output["categories"])
-    print(f"  {total_keys} keys covered (of {output['metadata']['totalUniqueKeys']} unique)")
-
+    print(f"\n  {fused_output['metadata']['totalCategories']} categories")
+    print(f"  {fused_output['metadata']['totalIntegrations']} integrations")
+    total_keys = sum(c["keyCount"] for c in fused_output["categories"])
+    print(f"  {total_keys} keys covered (of {fused_output['metadata']['totalUniqueKeys']} unique)")
     print()
-    for cat in output["categories"]:
+    for cat in fused_output["categories"]:
         extra = ""
         if "integrationCount" in cat:
             extra = f" + {cat['integrationCount']} integrations"
         print(f"  [{cat['id']}] {cat['title']}: {cat['keyCount']} keys{extra}")
+
+    # ── Phase 2: Per-language extraction ─────────────────────────────
+    key_to_category = build_category_lookup(fused_output)
+
+    print(f"\nExtracting per-language configurations...")
+    for language in languages:
+        results = extract_for_language(raw_data, language)
+        annotate_categories(results, key_to_category)
+        process_versions(results, language)
+        write_language_json(results, language, raw_data, output_dir)
+        print(f"  {language}: {len(results)} configurations")
+
+    print("\nDone.")
 
 
 if __name__ == "__main__":

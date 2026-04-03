@@ -1,8 +1,8 @@
 {
   "metadata": {
-    "generated_at": "2026-03-13T11:13:54.285241+00:00",
+    "generated_at": "2026-04-03T12:52:45.252313+00:00",
     "language": "dotnet",
-    "total_registry_entries": 2341,
+    "total_registry_entries": 2383,
     "matched_entries": 304
   },
   "configurations": [
@@ -2035,7 +2035,9 @@
       "from_version": null,
       "to_version": null,
       "deprecated": false,
-      "aliases": [],
+      "aliases": [
+        "DD_EXPERIMENTAL_PROFILING_ENABLED"
+      ],
       "implem_aliases": [],
       "category": "profiling"
     },
@@ -2150,7 +2152,8 @@
       "to_version": null,
       "deprecated": false,
       "aliases": [
-        "DD_SERVICE_NAME"
+        "DD_SERVICE_NAME",
+        "OTEL_SERVICE_NAME"
       ],
       "implem_aliases": [],
       "category": "general"
@@ -2767,7 +2770,9 @@
       "from_version": null,
       "to_version": null,
       "deprecated": false,
-      "aliases": [],
+      "aliases": [
+        "DD_TRACING_ENABLED"
+      ],
       "implem_aliases": [],
       "category": "trace_core"
     },

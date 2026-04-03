@@ -37,17 +37,17 @@
       {
         "pattern": "DD_TRACE_<INTEGRATION>_ENABLED",
         "description": "Enable or disable tracing for a specific integration.",
-        "count": 822
+        "count": 825
       },
       {
         "pattern": "DD_TRACE_<INTEGRATION>_ANALYTICS_ENABLED",
         "description": "Enable App Analytics (trace search) for spans produced by this integration.",
-        "count": 224
+        "count": 225
       },
       {
         "pattern": "DD_TRACE_<INTEGRATION>_ANALYTICS_SAMPLE_RATE",
         "description": "Set the App Analytics sample rate for this integration (0.0 to 1.0).",
-        "count": 194
+        "count": 195
       },
       {
         "pattern": "DD_TRACE_<INTEGRATION>_PEER_SERVICE",

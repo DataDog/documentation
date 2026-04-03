@@ -3,20 +3,21 @@
     "description": "Categorized configuration key patterns with titles and descriptions",
     "source": "https://dd-feature-parity.azurewebsites.net/configurations/",
     "totalCategories": 20,
-    "totalIntegrations": 861,
-    "totalUniqueKeys": 2341
+    "totalIntegrations": 864,
+    "totalUniqueKeys": 2383
   },
   "categories": [
     {
       "id": "general",
       "title": "General Settings",
       "description": "Top-level Datadog configuration: API and application keys, service identity (name, environment, version), Agent connection (host, port, socket), intake site, hostname, global tags, proxy settings, tracing toggle, Data Jobs, Lambda handler, and APM receiver tuning.",
-      "keyCount": 61,
+      "keyCount": 71,
       "languages": [
         "dotnet",
         "golang",
         "java",
         "nodejs",
+        "php",
         "ruby",
         "rust"
       ],
@@ -25,6 +26,13 @@
         "DD_AGENT_FEATURE_POLLING_ENABLED",
         "DD_AGENT_HOST",
         "DD_AGENT_PORT",
+        "DD_APIM_CALLOUT_HEALTHCHECK_PORT",
+        "DD_APIM_CALLOUT_HOST",
+        "DD_APIM_CALLOUT_PORT",
+        "DD_APIM_CALLOUT_REQUEST_TIMEOUT",
+        "DD_APIM_CALLOUT_TLS",
+        "DD_APIM_CALLOUT_TLS_CERT_FILE",
+        "DD_APIM_CALLOUT_TLS_KEY_FILE",
         "DD_API_KEY",
         "DD_API_KEY_FILE",
         "DD_APM_ENABLE_RARE_SAMPLER",
@@ -62,11 +70,14 @@
         "DD_LAMBDA_HANDLER",
         "DD_LEGACY_CONTEXT_MANAGER_ENABLED",
         "DD_MEASURE_METHODS",
+        "DD_MEASURE_NATIVE_METHODS",
         "DD_MINI_AGENT_PATH",
         "DD_PRIMARY_TAG",
         "DD_PROXY_HTTPS",
         "DD_PROXY_NO_PROXY",
         "DD_RABBITMQ_PROPAGATION_ENABLED",
+        "DD_ROOT_JS_SESSION_ID",
+        "DD_SERVERLESS_COMPAT_PATH",
         "DD_SERVERLESS_PUBSUB_ENABLED",
         "DD_SERVICE",
         "DD_SERVICE_MAPPING",
@@ -88,12 +99,13 @@
       "id": "trace_core",
       "title": "Tracing Core",
       "description": "Core distributed tracing engine: Agent connection (URL, port, timeout, socket), trace and span ID generation (128-bit), span lifecycle (limits, buffer sizes, flush intervals, partial flush, abandoned span timeout), scope management, peer service and service mapping, resource URI normalization, query string obfuscation, DB client configuration (split-by-host/instance, metadata fetching, DBM propagation), cloud payload tagging, span attribute schema, global tags, class/classloader exclusions, executor control, and tracer internal metrics.",
-      "keyCount": 139,
+      "keyCount": 142,
       "languages": [
         "dotnet",
         "golang",
         "java",
         "nodejs",
+        "php",
         "ruby",
         "rust"
       ],
@@ -183,6 +195,7 @@
         "DD_TRACE_MEASURE_PEAK_MEMORY_USAGE",
         "DD_TRACE_MEMORY_LIMIT",
         "DD_TRACE_METHODS",
+        "DD_TRACE_NATIVE_METHODS",
         "DD_TRACE_NATIVE_SPAN_EVENTS",
         "DD_TRACE_OBFUSCATION_QUERY_STRING_REGEXP",
         "DD_TRACE_OBFUSCATION_QUERY_STRING_REGEXP_TIMEOUT",
@@ -216,6 +229,8 @@
         "DD_TRACE_SEND_RETRIES",
         "DD_TRACE_SERIALVERSIONUID_FIELD_INJECTION",
         "DD_TRACE_SERVICE_MAPPING",
+        "DD_TRACE_SIDECAR_BACKPRESSURE_BYTES",
+        "DD_TRACE_SIDECAR_BACKPRESSURE_QUEUE",
         "DD_TRACE_SIDECAR_CONNECTION_MODE",
         "DD_TRACE_SIDECAR_TRACE_SENDER",
         "DD_TRACE_SOURCES_PATH",
@@ -249,6 +264,7 @@
         "golang",
         "java",
         "nodejs",
+        "php",
         "ruby",
         "rust"
       ],
@@ -273,12 +289,13 @@
       "id": "trace_propagation",
       "title": "Trace Propagation",
       "description": "Distributed trace context propagation (Datadog, B3, W3C TraceContext styles), extraction and injection behavior, baggage handling, request and response header tagging, HTTP client and server configuration (error status codes, query string tagging, URL resource name mapping, split-by-domain), and SQL comment context injection for Database Monitoring.",
-      "keyCount": 46,
+      "keyCount": 49,
       "languages": [
         "dotnet",
         "golang",
         "java",
         "nodejs",
+        "php",
         "ruby",
         "rust"
       ],
@@ -319,6 +336,9 @@
         "DD_TRACE_HTTP_SERVER_PATH_RESOURCE_NAME_MAPPING",
         "DD_TRACE_HTTP_URL_CONNECTION_CLASS_NAME",
         "DD_TRACE_HTTP_URL_QUERY_PARAM_ALLOWED",
+        "DD_TRACE_HTTP_URL_QUERY_STRING_ALLOWLIST",
+        "DD_TRACE_HTTP_URL_QUERY_STRING_ALLOWLIST_CLIENT",
+        "DD_TRACE_HTTP_URL_QUERY_STRING_ALLOWLIST_SERVER",
         "DD_TRACE_HTTP_URL_QUERY_STRING_DISABLED",
         "DD_TRACE_PROPAGATION_BEHAVIOR_EXTRACT",
         "DD_TRACE_PROPAGATION_EXTRACT_FIRST",
@@ -335,7 +355,7 @@
       "id": "trace_integrations",
       "title": "Trace Integrations",
       "description": "Per-integration tracing configuration following the DD_TRACE_<INTEGRATION>_* pattern: enable/disable, analytics, service name, and peer service overrides for 800+ library integrations. Also includes JMXFetch settings, integration-specific options (JMS, Kafka, RabbitMQ, Redis, gRPC, Spark, Spring, etc.), and controls for disabling specific integrations or instrumentations.",
-      "integrationCount": 861,
+      "integrationCount": 864,
       "commonSuffixes": [
         "_ENABLED",
         "_ANALYTICS_ENABLED",
@@ -346,9 +366,9 @@
         "_ERROR_STATUS_CODES"
       ],
       "kindCounts": {
-        "DD_TRACE_<INTEGRATION>_ENABLED": 822,
-        "DD_TRACE_<INTEGRATION>_ANALYTICS_ENABLED": 224,
-        "DD_TRACE_<INTEGRATION>_ANALYTICS_SAMPLE_RATE": 194,
+        "DD_TRACE_<INTEGRATION>_ENABLED": 825,
+        "DD_TRACE_<INTEGRATION>_ANALYTICS_ENABLED": 225,
+        "DD_TRACE_<INTEGRATION>_ANALYTICS_SAMPLE_RATE": 195,
         "DD_TRACE_<INTEGRATION>_PEER_SERVICE": 17,
         "DD_TRACE_<INTEGRATION>_SERVICE_NAME": 17,
         "DD_TRACE_<INTEGRATION>_DISTRIBUTED_TRACING": 15,
@@ -374,6 +394,7 @@
         "DD_TRACE_<INTEGRATION>_HTTP_PEER_SERVICE": 1,
         "DD_TRACE_<INTEGRATION>_HTTP_SERVICE_NAME": 1,
         "DD_TRACE_<INTEGRATION>_RESOURCE_PATTERN": 1,
+        "DD_TRACE_<INTEGRATION>_EXPORTER": 1,
         "DD_TRACE_<INTEGRATION>_REPORT_HTTP_STATUS": 1,
         "DD_TRACE_<INTEGRATION>_SPLIT_BY_HOST": 1,
         "DD_<INTEGRATION>_ANALYTICS_ENABLED": 1,
@@ -426,6 +447,11 @@
           "DD_TRACE_ACTIVE_RECORD_ANALYTICS_ENABLED": "DD_TRACE_<INTEGRATION>_ANALYTICS_ENABLED",
           "DD_TRACE_ACTIVE_RECORD_ANALYTICS_SAMPLE_RATE": "DD_TRACE_<INTEGRATION>_ANALYTICS_SAMPLE_RATE",
           "DD_TRACE_ACTIVE_RECORD_ENABLED": "DD_TRACE_<INTEGRATION>_ENABLED"
+        },
+        "ACTIVE_STORAGE": {
+          "DD_TRACE_ACTIVE_STORAGE_ANALYTICS_ENABLED": "DD_TRACE_<INTEGRATION>_ANALYTICS_ENABLED",
+          "DD_TRACE_ACTIVE_STORAGE_ANALYTICS_SAMPLE_RATE": "DD_TRACE_<INTEGRATION>_ANALYTICS_SAMPLE_RATE",
+          "DD_TRACE_ACTIVE_STORAGE_ENABLED": "DD_TRACE_<INTEGRATION>_ENABLED"
         },
         "ACTIVE_SUPPORT": {
           "DD_TRACE_ACTIVE_SUPPORT_ANALYTICS_ENABLED": "DD_TRACE_<INTEGRATION>_ANALYTICS_ENABLED",
@@ -2138,6 +2164,9 @@
         "MOCHA_EACH": {
           "DD_TRACE_MOCHA_EACH_ENABLED": "DD_TRACE_<INTEGRATION>_ENABLED"
         },
+        "MODELCONTEXTPROTOCOL_SDK": {
+          "DD_TRACE_MODELCONTEXTPROTOCOL_SDK_ENABLED": "DD_TRACE_<INTEGRATION>_ENABLED"
+        },
         "MOLECULER": {
           "DD_TRACE_MOLECULER_ENABLED": "DD_TRACE_<INTEGRATION>_ENABLED"
         },
@@ -2305,6 +2334,9 @@
           "DD_TRACE_OPENAI_ANALYTICS_SAMPLE_RATE": "DD_TRACE_<INTEGRATION>_ANALYTICS_SAMPLE_RATE",
           "DD_TRACE_OPENAI_ENABLED": "DD_TRACE_<INTEGRATION>_ENABLED"
         },
+        "OPENAI_AGENTS": {
+          "DD_TRACE_OPENAI_AGENTS_ENABLED": "DD_TRACE_<INTEGRATION>_ENABLED"
+        },
         "OPENSEARCH": {
           "DD_TRACE_OPENSEARCH_ANALYTICS_ENABLED": "DD_TRACE_<INTEGRATION>_ANALYTICS_ENABLED",
           "DD_TRACE_OPENSEARCH_ANALYTICS_SAMPLE_RATE": "DD_TRACE_<INTEGRATION>_ANALYTICS_SAMPLE_RATE",
@@ -2365,7 +2397,8 @@
           "DD_TRACE_OSGI_ENABLED": "DD_TRACE_<INTEGRATION>_ENABLED"
         },
         "OTEL": {
-          "DD_TRACE_OTEL_ENABLED": "DD_TRACE_<INTEGRATION>_ENABLED"
+          "DD_TRACE_OTEL_ENABLED": "DD_TRACE_<INTEGRATION>_ENABLED",
+          "DD_TRACE_OTEL_EXPORTER": "DD_TRACE_<INTEGRATION>_EXPORTER"
         },
         "PASSPORT": {
           "DD_TRACE_PASSPORT_ENABLED": "DD_TRACE_<INTEGRATION>_ENABLED"
@@ -3518,6 +3551,7 @@
         "golang",
         "java",
         "nodejs",
+        "php",
         "ruby",
         "rust"
       ],
@@ -3576,6 +3610,7 @@
         "golang",
         "java",
         "nodejs",
+        "php",
         "ruby"
       ],
       "keys": [
@@ -3747,12 +3782,13 @@
       "id": "appsec",
       "title": "Application Security",
       "description": "Datadog Application Security: ASM (WAF rules, RASP, threat blocking, blocked response templates, request body parsing, IP header resolution, SCA), user event tracking, IAST code vulnerability detection (taint tracking, detection mode, redaction, security controls, weak cipher/hash detection), API Security (endpoint schema discovery, request/response sampling), CWS, and error tracking for handled exceptions.",
-      "keyCount": 93,
+      "keyCount": 94,
       "languages": [
         "dotnet",
         "golang",
         "java",
         "nodejs",
+        "php",
         "ruby"
       ],
       "keys": [
@@ -3781,6 +3817,7 @@
         "DD_APPSEC_HELPER_LOG_LEVEL",
         "DD_APPSEC_HELPER_PATH",
         "DD_APPSEC_HELPER_RUNTIME_PATH",
+        "DD_APPSEC_HELPER_RUST_REDIRECTION",
         "DD_APPSEC_HTTP_BLOCKED_TEMPLATE_HTML",
         "DD_APPSEC_HTTP_BLOCKED_TEMPLATE_JSON",
         "DD_APPSEC_HTTP_BLOCKED_TEMPLATE_TEXT",
@@ -3861,6 +3898,7 @@
         "golang",
         "java",
         "nodejs",
+        "php",
         "ruby"
       ],
       "keys": [
@@ -3921,6 +3959,7 @@
         "golang",
         "java",
         "nodejs",
+        "php",
         "ruby"
       ],
       "keys": [
@@ -4047,6 +4086,7 @@
       "languages": [
         "java",
         "nodejs",
+        "php",
         "ruby"
       ],
       "keys": [
@@ -4074,6 +4114,7 @@
       "keyCount": 18,
       "languages": [
         "dotnet",
+        "golang",
         "java",
         "nodejs",
         "ruby",
@@ -4110,6 +4151,7 @@
         "golang",
         "java",
         "nodejs",
+        "php",
         "ruby",
         "rust"
       ],
@@ -4166,6 +4208,7 @@
         "golang",
         "java",
         "nodejs",
+        "php",
         "ruby",
         "rust"
       ],
@@ -4202,6 +4245,7 @@
         "golang",
         "java",
         "nodejs",
+        "php",
         "ruby",
         "rust"
       ],
@@ -4223,18 +4267,20 @@
       "id": "otel",
       "title": "OpenTelemetry Compatibility",
       "description": "Standard OpenTelemetry environment variables supported by Datadog SDKs: SDK toggle, service name, resource attributes, propagators, trace sampler, OTLP exporter configuration (endpoint, headers, protocol for traces, logs, and metrics), batch span processor settings, HTTP instrumentation header capture, and Datadog-specific OTel metrics bridge.",
-      "keyCount": 52,
+      "keyCount": 63,
       "languages": [
         "dotnet",
         "golang",
         "java",
         "nodejs",
+        "php",
         "ruby",
         "rust"
       ],
       "keys": [
         "DD_METRICS_OTEL_CARDINALITY_LIMIT",
         "DD_METRICS_OTEL_ENABLED",
+        "DD_METRICS_OTEL_EXPORTER",
         "DD_METRICS_OTEL_INTERVAL",
         "DD_METRICS_OTEL_METER_NAMES",
         "DD_METRICS_OTEL_TIMEOUT",
@@ -4244,6 +4290,11 @@
         "DD_OTLP_METRICS_PROTOCOL",
         "DD_OTLP_METRICS_TEMPORALITY_PREFERENCE",
         "DD_OTLP_METRICS_TIMEOUT",
+        "DD_OTLP_TRACES_COMPRESSION",
+        "DD_OTLP_TRACES_ENDPOINT",
+        "DD_OTLP_TRACES_HEADERS",
+        "DD_OTLP_TRACES_PROTOCOL",
+        "DD_OTLP_TRACES_TIMEOUT",
         "OTEL_BLRP_EXPORT_TIMEOUT",
         "OTEL_BLRP_MAX_EXPORT_BATCH_SIZE",
         "OTEL_BLRP_MAX_QUEUE_SIZE",
@@ -4266,6 +4317,11 @@
         "OTEL_EXPORTER_OTLP_METRICS_TIMEOUT",
         "OTEL_EXPORTER_OTLP_PROTOCOL",
         "OTEL_EXPORTER_OTLP_TIMEOUT",
+        "OTEL_EXPORTER_OTLP_TRACES_COMPRESSION",
+        "OTEL_EXPORTER_OTLP_TRACES_ENDPOINT",
+        "OTEL_EXPORTER_OTLP_TRACES_HEADERS",
+        "OTEL_EXPORTER_OTLP_TRACES_PROTOCOL",
+        "OTEL_EXPORTER_OTLP_TRACES_TIMEOUT",
         "OTEL_INSTRUMENTATION_HTTP_CLIENT_CAPTURE_REQUEST_HEADERS",
         "OTEL_INSTRUMENTATION_HTTP_CLIENT_CAPTURE_RESPONSE_HEADERS",
         "OTEL_INSTRUMENTATION_HTTP_SERVER_CAPTURE_REQUEST_HEADERS",
@@ -4317,15 +4373,17 @@
       "id": "ai_observability",
       "title": "AI & LLM Observability",
       "description": "AI observability features: AI Guard content scanning (enable, endpoint, size limits), LLM Observability (LLMObs enable, ML app name), and per-provider integration settings for OpenAI, LangChain, and Vertex AI (span capture, prompt/completion sampling, content size limits).",
-      "keyCount": 19,
+      "keyCount": 20,
       "languages": [
         "golang",
         "java",
         "nodejs",
+        "php",
         "python",
         "ruby"
       ],
       "keys": [
+        "DD_AI_GUARD_BLOCK",
         "DD_AI_GUARD_ENABLED",
         "DD_AI_GUARD_ENDPOINT",
         "DD_AI_GUARD_MAX_CONTENT_SIZE",
@@ -4351,12 +4409,13 @@
       "id": "instrumentation",
       "title": "Instrumentation & Platform",
       "description": "Instrumentation setup and platform-specific configuration: auto-injection (enable, install metadata), .NET tracer home, third-party library detection, code origin for spans, module resolver settings, and platform adapters for Azure App Services, Datadog Service Extension sidecar, and HAProxy SPOA.",
-      "keyCount": 50,
+      "keyCount": 51,
       "languages": [
         "dotnet",
         "golang",
         "java",
         "nodejs",
+        "php",
         "ruby"
       ],
       "keys": [
@@ -4368,6 +4427,7 @@
         "DD_AZURE_RESOURCE_GROUP",
         "DD_CODE_ORIGIN_FOR_SPANS_ENABLED",
         "DD_CODE_ORIGIN_FOR_SPANS_EXPERIMENTAL_EXIT_SPANS_ENABLED",
+        "DD_CODE_ORIGIN_FOR_SPANS_INTERFACE_SUPPORT",
         "DD_CODE_ORIGIN_FOR_SPANS_MAX_USER_FRAMES",
         "DD_CODE_ORIGIN_MAX_USER_FRAMES",
         "DD_DETECT_AOT_TRAINING_MODE",
@@ -4414,14 +4474,14 @@
     }
   ],
   "categories_list": {
-    "General Settings": 61,
-    "Tracing Core": 139,
+    "General Settings": 71,
+    "Tracing Core": 142,
     "Trace Sampling": 14,
-    "Trace Propagation": 46,
+    "Trace Propagation": 49,
     "Trace Integrations": 50,
     "Trace Logging & Experimental": 42,
     "Continuous Profiling": 162,
-    "Application Security": 93,
+    "Application Security": 94,
     "Dynamic Instrumentation & Debugging": 45,
     "CI Visibility": 113,
     "Crash Tracking & Diagnostics": 15,
@@ -4430,9 +4490,9 @@
     "Data Streams Monitoring": 4,
     "Instrumentation Telemetry": 20,
     "Remote Configuration": 11,
-    "OpenTelemetry Compatibility": 52,
+    "OpenTelemetry Compatibility": 63,
     "Real User Monitoring (RUM)": 15,
-    "AI & LLM Observability": 19,
-    "Instrumentation & Platform": 50
+    "AI & LLM Observability": 20,
+    "Instrumentation & Platform": 51
   }
 }

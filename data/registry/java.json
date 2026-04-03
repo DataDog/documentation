@@ -1,8 +1,8 @@
 {
   "metadata": {
-    "generated_at": "2026-03-13T11:13:54.301717+00:00",
+    "generated_at": "2026-04-03T12:52:45.268610+00:00",
     "language": "java",
-    "total_registry_entries": 2341,
+    "total_registry_entries": 2383,
     "matched_entries": 1406
   },
   "configurations": [
@@ -4398,7 +4398,9 @@
       "from_version": "v1.57.0",
       "to_version": null,
       "deprecated": false,
-      "aliases": [],
+      "aliases": [
+        "DD_EXPERIMENTAL_PROFILING_ENABLED"
+      ],
       "implem_aliases": [],
       "category": "profiling"
     },
@@ -5499,7 +5501,8 @@
       "to_version": "latest",
       "deprecated": false,
       "aliases": [
-        "DD_SERVICE_NAME"
+        "DD_SERVICE_NAME",
+        "OTEL_SERVICE_NAME"
       ],
       "implem_aliases": [],
       "category": "general"
@@ -8764,7 +8767,9 @@
       "from_version": null,
       "to_version": "latest",
       "deprecated": false,
-      "aliases": [],
+      "aliases": [
+        "DD_TRACING_ENABLED"
+      ],
       "implem_aliases": [],
       "category": "trace_core"
     },
@@ -20019,7 +20024,9 @@
       "from_version": "v1.56.0",
       "to_version": null,
       "deprecated": false,
-      "aliases": [],
+      "aliases": [
+        "OTEL_EXPORTER_OTLP_ENDPOINT"
+      ],
       "implem_aliases": [],
       "category": "otel"
     },
@@ -20031,7 +20038,9 @@
       "from_version": "v1.56.0",
       "to_version": null,
       "deprecated": false,
-      "aliases": [],
+      "aliases": [
+        "OTEL_EXPORTER_OTLP_HEADERS"
+      ],
       "implem_aliases": [],
       "category": "otel"
     },
@@ -20067,7 +20076,9 @@
       "from_version": "v1.56.0",
       "to_version": null,
       "deprecated": false,
-      "aliases": [],
+      "aliases": [
+        "OTEL_EXPORTER_OTLP_TIMEOUT"
+      ],
       "implem_aliases": [],
       "category": "otel"
     },
