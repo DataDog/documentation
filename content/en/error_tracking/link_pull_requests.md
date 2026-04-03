@@ -41,7 +41,7 @@ To link a pull request to an Error Tracking issue:
 
 Datadog detects the issue URL and automatically creates the link.
 
-**Note**: Updating a pull request description to add or remove issue URLs automatically updates the links.
+<div class="alert alert-info">Updating a pull request description to add or remove issue URLs automatically updates the link.</div>
 
 ### View linked pull requests
 
