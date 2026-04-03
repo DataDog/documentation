@@ -114,6 +114,8 @@ Use natural language prompts to request information or take action from Slack:
 | Find related incidents             | `@Datadog Are there any related incidents?`<br />`@Datadog Find me incidents related to DDoS attacks from the past month`                       |
 | Early detection inquiry            | `@Datadog A customer is unable to check out. Is there an incident?`<br />`@Datadog Are there any incidents now impacting the payments service?` |
 
+## Trigger a Bits AI SRE investigation from incident Slack channels or the web UI
+
 ## Customize postmortem templates with AI incident variables
 
 1. In Datadog, navigate to your incident [Postmortem Templates][3].
