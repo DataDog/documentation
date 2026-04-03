@@ -15,6 +15,11 @@ further_reading:
     tag: "Blog"
     text: "Unify and correlate frontend and backend data with retention filters"
 ---
+
+{{< learning-center-callout header="Try \"RUM Retention Filters\" in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/rum-retention-filters" hide_image="false" >}}
+  Learn how to use RUM retention filters to control which session data is stored and optimize your observability budget.
+{{< /learning-center-callout >}}
+
 ## Overview
 
 Retention filters are a set of queries, similar to those used in the RUM Session Explorer, that are executed against the RUM events (sessions, views, actions, resources, and so on) as they are ingested. These filters determine whether a session is stored for the standard 30-day RUM retention period or discarded.
