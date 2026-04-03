@@ -14,7 +14,7 @@ further_reading:
 
 ## Overview
 
-Link GitHub pull requests to Error Tracking issues to track the full lifecycle of an error, from detection to resolution. After you paste an Error Tracking issue URL in a pull request description, Datadog automatically links the PR to the issue and resolves the issue when the PR is merged.
+Link GitHub pull requests to Error Tracking issues and track the full life cycle of an error, from detection to resolution. This link enables Datadog to automatically resolve the Error Tracking issue when the associated PR is merged.
 
 With linked pull requests, you can:
 
