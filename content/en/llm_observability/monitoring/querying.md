@@ -72,13 +72,13 @@ The LLM Observability Trace Explorer shares the same query syntax as Datadog's [
 
 Use the `@evaluation` attribute to find spans or traces by [evaluation][3] result.
 
-#### Custom evaluations
-You can search spans by the results of [custom evaluations][4]. For example, if you have a custom evaluation called `user_mood` with categorical values `happy`, `sad`, and `tired`, you could use the query: `@evaluation.user_mood.value:happy`.
+#### Evaluations
+You can search spans by the results of [evaluations][4]. For example, if you have an evaluation called `user_mood` with categorical values `happy`, `sad`, and `tired`, you could use the query: `@evaluation.user_mood.value:happy`.
 
 | Query | Match |
 | ----- | ----- |
-| `@evaluation.user_satisfaction.value:>5` | Spans or traces that scored higher than 5 according to a custom evaluation called `user_satisfaction` |
-| `@evaluation.user_mood.value:happy` | Spans or traces that were evaluated as `happy` according to a custom evaluation called `user_mood` that has the categorical values `happy`, `sad`, and `tired` |
+| `@evaluation.user_satisfaction.value:>5` | Spans or traces that scored higher than 5 according to an evaluation called `user_satisfaction` |
+| `@evaluation.user_mood.value:happy` | Spans or traces that were evaluated as `happy` according to an evaluation called `user_mood` that has the categorical values `happy`, `sad`, and `tired` |
 
 ### Metadata queries
 
