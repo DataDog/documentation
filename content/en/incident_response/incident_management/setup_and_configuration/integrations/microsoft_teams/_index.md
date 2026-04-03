@@ -113,32 +113,7 @@ Use the "More actions" menu on any message inside an incident team on the far ri
 
 ## Microsoft Teams commands
 
-You can view the full list of available commands at any time by typing `@Datadog help` in Microsoft Teams.
-
-<table>
-  <thead>
-    <tr>
-      <th scope="col">Category</th>
-      <th scope="col">Command</th>
-      <th scope="col">Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td rowspan="3">Global commands (run anywhere)</td>
-      <td><code>@Datadog incident</code></td>
-      <td>Declare a new incident.</td>
-    </tr>
-    <tr>
-      <td><code>@Datadog list incidents</code></td>
-      <td>Show a list of all open incidents.</td>
-    </tr>
-    <tr>
-      <td><code>@Datadog help</code></td>
-      <td>Show all supported commands.</td>
-    </tr>
-  </tbody>
-</table>
+For a full list of available `@Datadog` commands, see the [Microsoft Teams integration documentation][5].
 
 
 ## Further reading
@@ -149,3 +124,4 @@ You can view the full list of available commands at any time by typing `@Datadog
 [2]: https://app.datadoghq.com/incidents/settings#Integrations
 [3]: /integrations/microsoft-teams/?tab=datadogapprecommended#datadog-incident-management-in-microsoft-teams
 [4]: /incident_response/incident_management/setup_and_configuration/notification_rules
+[5]: /integrations/microsoft-teams/#datadog-incident-management-in-microsoft-teams

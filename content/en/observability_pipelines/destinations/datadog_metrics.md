@@ -46,9 +46,9 @@ There are no secret identifiers for this destination.
 
 A batch of events is flushed when one of these parameters is met. See [event batching][2] for more information.
 
-| Max Events     | Max Bytes       | Timeout (seconds)   |
-|----------------|-----------------|---------------------|
-| 100,000        | None            | 2                   |
+| Maximum Events | Maximum Size (MB) | Timeout (seconds)   |
+|----------------|-------------------|---------------------|
+| 100,000        | None              | 2                   |
 
 ## AWS PrivateLink
 

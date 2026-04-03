@@ -1,9 +1,9 @@
 announcement_banner:
-  desktop_message: "<span>Join Datadog at DASH—coming to NYC June 9-10. Register now for Super Early Bird savings of $700 until March 31</span>"
-  mobile_message: "<span>Join us at DASH—June 9-10. Save $700 until March 31</span>"
+  desktop_message: "<span>Datadog Live Seoul 2026: AI & Observability의 미래 (4/16), 지금 바로 등록하세요!</span>"
+  external_link: "https://events.datadoghq.com/ko/events/datadog-live-seoul-2026"
+  mobile_message: "<span>Datadog Live Seoul 2026 (4/16), 지금 등록하세요!</span>"
   background_color: "#000000"
   custom_classes: 'dash-announcement-banner'
-  external_link: https://dash.datadoghq.com/?utm_source=events&utm_medium=internal&utm_campaign=summit-202606dash&utm_term=HPbanner
 disclaimer: 이 페이지는 아직 한국어로 제공되지 않습니다. 번역 작업 중입니다. <br>현재 번역 프로젝트에 대한 질문이나 피드백이 있으신
   경우<a href="https://docs.datadoghq.com/ko/help/"> 언제든지 연락주시기 바랍니다.</a>
 meta_description: 클라우드 스케일 모니터링의 선두주자, Datadog

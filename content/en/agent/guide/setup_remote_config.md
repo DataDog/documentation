@@ -17,7 +17,7 @@ further_reading:
   text: "Centrally govern and remotely manage Datadog Agents at scale with Fleet Automation"
 ---
 
-This page covers configuring and using {{< tooltip glossary="Remote Configuration" case="title" >}} with [Fleet Automation][11]. The following Fleet Automation features require Remote Configuration:
+This page covers configuring and using {{< tooltip glossary="remote_configuration" case="title" >}} with [Fleet Automation][11]. The following Fleet Automation features require Remote Configuration:
 | Feature | Description | Minimum Agent Version |
 |---------|-------------|------------------------|
 | **[Agent flares][9]** | Send a flare from the Datadog site using Fleet Automation | 7.47+<br>7.66+ recommended |
