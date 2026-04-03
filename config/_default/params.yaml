@@ -339,6 +339,7 @@ unsupported_sites:
   network_config_management: [gov]
   observability_pipelines: [gov]
   on-call: [gov]
+  oracle-fusion: [gov]
   oracle_fusion_integration_setup: [gov]
   overview_pages: [gov]
   pr_gates: [gov]
