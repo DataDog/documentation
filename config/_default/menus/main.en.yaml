@@ -2304,16 +2304,21 @@ menu:
       parent: error_tracking_ticketing_systems
       identifier: error_tracking_case_management
       weight: 101
+    - name: Link Pull Requests
+      url: error_tracking/link_pull_requests
+      parent: error_tracking
+      identifier: error_tracking_link_pull_requests
+      weight: 15
     - name: Troubleshooting
       url: error_tracking/troubleshooting
       parent: error_tracking
       identifier: error_tracking_troubleshooting
-      weight: 15
+      weight: 16
     - name: Guides
       url: error_tracking/guides
       parent: error_tracking
       identifier: error_tracking_guides
-      weight: 16
+      weight: 17
     - name: Change Tracking
       url: change_tracking/
       pre: graph-3
@@ -4185,6 +4190,11 @@ menu:
       parent: tracing_proxies
       identifier: tracing_proxies_apigateway
       weight: 2116
+    - name: Azure API Management
+      url: tracing/trace_collection/proxy_setup/azure_apim
+      parent: tracing_proxies
+      identifier: tracing_proxies_azure_apim
+      weight: 2117
     - name: Span Tag Semantics
       url: tracing/trace_collection/tracing_naming_convention
       parent: tracing_trace_collection
@@ -8064,6 +8074,11 @@ menu:
       url: synthetics/platform/settings
       parent: synthetics_platform
       weight: 706
+    - name: Scheduled Downtime
+      identifier: synthetics_platform_downtime
+      url: synthetics/platform/downtime
+      parent: synthetics_platform
+      weight: 707
     - name: Exploring Synthetics Data
       url: synthetics/explore/
       parent: synthetics

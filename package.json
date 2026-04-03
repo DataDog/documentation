@@ -23,6 +23,7 @@
         "deploy:live": "customhugo deploy --target live -e live --maxDeletes -1 --workers 100 --logLevel info",
         "build:apiPages": "node -e 'require(\"./assets/scripts/build-api-pages.js\").init()'",
         "jest-test": "./node_modules/.bin/jest ./assets/scripts/tests",
+        "test:e2e": "npx playwright test",
         "postinstall": "husky",
         "prepack": "pinst --disable",
         "postpack": "pinst --enable"
@@ -90,6 +91,7 @@
         "@babel/plugin-proposal-object-rest-spread": "^7.20.7",
         "@babel/preset-env": "^7.24.0",
         "@datadog/datadog-ci": "^2.36.0",
+        "@playwright/test": "^1.58.2",
         "acorn": "^7.4.1",
         "cross-env": "^5.2.1",
         "eslint": "^6.8.0",
