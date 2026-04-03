@@ -58,7 +58,7 @@ To unlink a pull request from an issue, open the GitHub pull request and remove 
 
 ## Automatic state changes
 
-Linked pull requests trigger automatic issue state transitions. If you link or merge a pull request, the linked Error Tracking issue state is updated accordingly:
+Linked pull requests trigger automatic issue state transitions: 
 
 | Initial state | Action | Resulting state |
 |---|---|---|
