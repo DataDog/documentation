@@ -25,7 +25,7 @@ With linked pull requests, you can:
 
 - Install [the GitHub integration][2] with read permissions for pull requests.
 - Enable [Source Code Integration][3] so that Datadog can process GitHub webhooks and link pull requests to Error Tracking issues.
-- Verify that you have the [**Error Tracking Issue Write** permission][4]. This is required to link your PRs to Error Tracking issues. 
+- Verify that you have the [**Error Tracking Issue Write** permission][4]. This is required to link your PRs to Error Tracking issues.
 
 ## Link and manage pull requests
 ### Link a pull request to an issue
@@ -58,7 +58,7 @@ To unlink a pull request from an issue, open the GitHub pull request and remove 
 
 ## Automatic state changes
 
-Linked pull requests trigger automatic issue state transitions: 
+Linked pull requests trigger automatic issue state transitions:
 
 | Initial state | Action | Resulting state |
 |---|---|---|
