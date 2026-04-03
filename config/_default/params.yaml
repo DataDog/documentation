@@ -147,6 +147,7 @@ code_language_ids:
     logs: "Logs"
     topology: "Topology Map"
     geomap: "Geomap"
+    azure_apim: "Azure API Management"
 branch: ""
 
 signupclass: sign-up-trigger
@@ -277,9 +278,11 @@ unsupported_sites:
   actions: [gov]
   adaptive_sampling: [gov]
   agent_flare: [gov]
+  agentic_onboarding: [gov]
   agentless_scanning: [gov] # docs page
   agentless-scanning: [gov] # api page
   amazon_event_bridge: [gov]
+  apm_processing_pipelines: [gov]
   apm_recommendations: [gov]
   app_builder: [gov]
   application_security: [gov]
@@ -297,9 +300,11 @@ unsupported_sites:
   continuous_delivery: [gov]
   continuous_integration: [gov]
   correlation: [gov] #Event management correlation
+  coterm: [gov]
   cloudprem: [gov]
   csm_jira: [us,us3,us5,eu,ap1,ap2]
   data_jobs: [gov]
+  data_observability: [gov]
   data_streams: [gov]
   datadog_disaster_recovery: [gov]
   ddot_collector: [gov]
@@ -309,7 +314,7 @@ unsupported_sites:
   eng_reports: [gov]
   events_from_sns_emails: [gov]
   exception_replay: [gov]
-  experimentation: [gov]
+  experiments: [gov]
   feature_flags: [gov]
   forwarding_audit_events: [gov]
   getting_started_feature_flags: [gov]
@@ -334,6 +339,7 @@ unsupported_sites:
   network_config_management: [gov]
   observability_pipelines: [gov]
   on-call: [gov]
+  oracle-fusion: [gov]
   oracle_fusion_integration_setup: [gov]
   overview_pages: [gov]
   pr_gates: [gov]

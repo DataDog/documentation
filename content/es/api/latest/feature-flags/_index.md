@@ -1,0 +1,3 @@
+---
+title: Indicadores de características
+---

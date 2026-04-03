@@ -26,8 +26,6 @@ The MCP server exposes the following tools that AI coding assistants can call to
 
 | Tool                                                        | Description                                                 | Auth Required |
 | ----------------------------------------------------------- | ----------------------------------------------------------- | :-----------: |
-| [`datadog_code_security_scan`][6] | Comprehensive scan (SAST + Secrets + SCA + IaC) in parallel |      Yes      |
-| [`datadog_sast_scan`][7]                   | Static Application Security Testing                         |      Yes      |
 | [`datadog_secrets_scan`][8]             | Hardcoded secrets detection                                 |      Yes      |
 | [`datadog_sca_scan`][9]                     | Dependency vulnerability scanning (CVEs)                    |      Yes      |
 | [`datadog_iac_scan`][10]                     | Infrastructure-as-Code security scanning                    |      Yes      |
@@ -55,7 +53,7 @@ The MCP server is available on the following platforms:
 
 ```shell
 brew update
-brew install --cask datadog-labs/pack/datadog-code-security-mcp
+brew install datadog-labs/pack/datadog-code-security-mcp
 ```
 
 #### GitHub releases
@@ -250,8 +248,6 @@ datadog-code-security-mcp generate-sbom . --json
 [3]: /account_management/api-app-keys/
 [4]: https://github.com/DataDog/datadog-sbom-generator/releases
 [5]: https://github.com/DataDog/datadog-iac-scanner/releases
-[6]: /security/code_security/dev_tool_int/mcp_server/tools_reference/#datadog_code_security_scan
-[7]: /security/code_security/dev_tool_int/mcp_server/tools_reference/#datadog_sast_scan
 [8]: /security/code_security/dev_tool_int/mcp_server/tools_reference/#datadog_secrets_scan
 [9]: /security/code_security/dev_tool_int/mcp_server/tools_reference/#datadog_sca_scan
 [10]: /security/code_security/dev_tool_int/mcp_server/tools_reference/#datadog_iac_scan
