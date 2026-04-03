@@ -106,7 +106,7 @@ To search traces based on attributes of its nested spans, use the `@child` attri
 | Query | Match |
 | ----- | ----- |
 | `@child.@evaluation.hallucination.value:"hallucination found"` | Traces with a hallucinating sub-span |
-| `@child.@meta.span.name:retrieval AND @meta.span.kind:workflow`| Workflow traces that contain a retrieval span |
+| `@child.@meta.span.kind:retrieval AND @meta.span.kind:workflow`| Workflow traces that contain a retrieval span |
 
 Use the `@trace` attribute to access trace-level information, such as estimated total cost, number of LLM calls, or number of tools.
 
