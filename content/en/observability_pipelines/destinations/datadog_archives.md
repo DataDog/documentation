@@ -27,13 +27,13 @@ If you already have Datadog Log Archives configured, skip to [Set up the destina
 
 {{% observability_pipelines/configure_log_archive/amazon_s3/instructions %}}
 
-#### Set up an IAM policy that allows Workers to write to the S3 bucket
+### Set up an IAM policy that allows Workers to write to the S3 bucket
 
 1. Navigate to the [IAM console][11].
 1. Select **Policies** in the left side menu.
 1. Click **Create policy**.
 1. Click **JSON** in the **Specify permissions** section.
-1. Copy the below policy and paste it into the **Policy editor**. Replace `<MY_BUCKET_NAME>` and `<MY_BUCKET_NAME_1_/_MY_OPTIONAL_BUCKET_PATH_1>` with the information for the S3 bucket you created earlier.
+1. Copy the below policy and paste it into the **Policy editor**. Replace `<MY_BUCKET_NAME_1>` and `<MY_BUCKET_NAME_1_/_MY_OPTIONAL_BUCKET_PATH_1>` with the information for the S3 bucket you created earlier.
     ```json
     {
         "Version": "2012-10-17",
@@ -48,7 +48,7 @@ If you already have Datadog Log Archives configured, skip to [Set up the destina
                 "Sid": "DatadogRehydrateLogArchivesListBucket",
                 "Effect": "Allow",
                 "Action": "s3:ListBucket",
-                "Resource": "arn:aws:s3:::<MY_BUCKET_NAME>"
+                "Resource": "arn:aws:s3:::<MY_BUCKET_NAME_1>"
             }
         ]
     }
