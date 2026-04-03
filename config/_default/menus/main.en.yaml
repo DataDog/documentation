@@ -5277,6 +5277,11 @@ menu:
       parent: llm_obs_external_evaluations
       identifier: llm_obs_deepeval_evaluations
       weight: 40301
+    - name: Pydantic Evaluations
+      url: llm_observability/evaluations/pydantic_evaluations
+      parent: llm_obs_external_evaluations
+      identifier: llm_obs_pydantic_evaluations
+      weight: 40302
     - name: Annotation Queues
       url: llm_observability/evaluations/annotation_queues
       parent: llm_obs_evaluations
