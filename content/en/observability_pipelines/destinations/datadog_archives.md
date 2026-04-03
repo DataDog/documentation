@@ -1,8 +1,6 @@
 ---
 title: Datadog Archives Destination
 disable_toc: false
-aliases:
-- /observability_pipelines/destinations/amazon_s3/
 products:
 - name: Logs
   icon: logs
@@ -15,7 +13,7 @@ products:
 
 Use the Datadog Archives destination to send logs to Amazon S3 for [archiving][1] in Datadog-rehydratable format. You can [rehydrate][2] these logs later when you want to analyze and investigate them in Datadog.
 
-**Note**: If you want to send your logs to Amazon S3 in JSON or Parquet format, use the Amazon S3 destination.
+**Note**: Use the [Amazon S3][12] destination if you want to send your logs to Amazon S3 in JSON or Parquet format.
 
 You can also [route logs to Snowflake using the Datadog Archives destination](#route-logs-to-snowflake-using-the-datadog-archives-destination).
 
@@ -28,6 +26,29 @@ To use the Datadog Archives destination, you must install Datadog's [AWS integra
 If you already have Datadog Log Archives configured, skip to [Set up the destination for your pipeline](#set-up-the-destination-for-your-pipeline).
 
 {{% observability_pipelines/configure_log_archive/amazon_s3/instructions %}}
+
+### Set up an IAM policy that allows Workers to write to the S3 bucket
+
+1. Navigate to the [IAM console][11].
+1. Select **Policies** in the left side menu.
+1. Click **Create policy**.
+1. Click **JSON** in the **Specify permissions** section.
+1. Copy the below policy and paste it into the **Policy editor**. Replace `<MY_BUCKET_NAME_1>` and `<MY_BUCKET_NAME_1>/<MY_OPTIONAL_BUCKET_PATH_1>` with the information for the S3 bucket you created earlier.
+    
+            },
+            {
+                "Sid": "DatadogRehydrateLogArchivesListBucket",
+                "Effect": "Allow",
+                "Action": "s3:ListBucket",
+                "Resource": "arn:aws:s3:::<MY_BUCKET_NAME_1>"
+            }
+        ]
+    }
+    ```
+1. Click **Next**.
+1. Enter a descriptive policy name.
+1. Optionally, add tags.
+1. Click **Create policy**.
 
 {{< tabs >}}
 {{% tab "Docker" %}}
@@ -136,7 +157,7 @@ You can route logs from Observability Pipelines to Snowflake using the Datadog A
 
 #### Permissions
 
-To send logs to Amazon S3, the Observability Pipelines Worker requires the following policy permissions:
+The Observability Pipelines Worker requires these policy permissions to send logs to Amazon S3:
 
 - `s3:ListBucket`
 - `s3:PutObject`
@@ -160,3 +181,5 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 [8]: /observability_pipelines/destinations/#template-syntax
 [9]: /logs/log_configuration/archives/?tab=awss3#storage-class
 [10]: https://aws.amazon.com/s3/storage-classes/intelligent-tiering/
+[11]: https://console.aws.amazon.com/iam/
+[12]: /observability_pipelines/destinations/amazon_s3/
