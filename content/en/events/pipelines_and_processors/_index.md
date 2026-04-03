@@ -81,3 +81,4 @@ Administrators can assign these permissions to roles using [Role Based Access Co
 [10]: /events/pipelines_and_processors/service_remapper
 [11]: /events/pipelines_and_processors/status_remapper
 [12]: /events/pipelines_and_processors/string_builder_processor
+[13]: /account_management/rbac/permissions/
