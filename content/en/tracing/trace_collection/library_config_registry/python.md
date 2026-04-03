@@ -24,11 +24,17 @@ further_reading:
       text: "OpenTelemetry Environment Variable Configurations"
 ---
 
-This is the new page with registry configurations
--> Backport everything needed from the current one.
--> Python is not implemented yet, we should forward to the current one to be safe
+After you set up the tracing library with your code and configure the Agent to collect APM data, optionally configure the tracing library as desired, including setting up [Unified Service Tagging][1].
 
-## All registry configurations
+{{% apm-config-visibility %}}
+
+When using **ddtrace-run**, the following [environment variable options][2] can be used.
+
+It is recommended to use `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` to set `env`, `service`, and `version` for your services. Refer to the [Unified Service Tagging][1] documentation for recommendations on how to configure these environment variables.
+
+## Configurations keys
+
+The previous version of this configuration documentation is still available at [Configuring the Python Tracing Library (legacy)][16].
 
 {{< partial name="apm/registry-config-list.html" >}}
 
@@ -45,3 +51,4 @@ This is the new page with registry configurations
 [13]: /agent/configuration/network/#configure-ports
 [14]: /opentelemetry/interoperability/environment_variable_support
 [15]: /tracing/trace_collection/library_config/#traces
+[16]: /tracing/trace_collection/library_config/python/

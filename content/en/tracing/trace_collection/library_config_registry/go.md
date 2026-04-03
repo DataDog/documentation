@@ -24,10 +24,55 @@ further_reading:
   text: "OpenTelemetry Environment Variable Configurations"
 ---
 
-This is the new page with registry configurations
--> Backport everything needed from the current one.
+After you [set up the tracing library with your code, configure the Agent to collect APM data, and activate the Go integration][1], start the tracer and configure the library as desired. {{% tracing-go-v2 %}}
 
-## All registry configurations
+{{% apm-config-visibility %}}
+
+Datadog recommends using `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` to set `env`, `service`, and `version` for your services.
+
+Read the [Unified Service Tagging][2] documentation for recommendations on how to configure these environment variables. These variables are available for versions 1.24.0+ of the Go tracer.
+
+You may also elect to provide `env`, `service`, and `version` through the tracer's API:
+
+```go
+package main
+
+import (
+    "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
+)
+
+func main() {
+    tracer.Start(
+        tracer.WithEnv("prod"),
+        tracer.WithService("test-go"),
+        tracer.WithServiceVersion("abc123"),
+    )
+
+    // When the tracer is stopped, it will flush everything it has to the Datadog Agent before quitting.
+    // Make sure this line stays in your main function.
+    defer tracer.Stop()
+
+    // If you expect your application to be shut down by SIGTERM (for example, a container in Kubernetes),
+    // you might want to listen for that signal and explicitly stop the tracer to ensure no data is lost
+    sigChan := make(chan os.Signal, 1)
+    signal.Notify(sigChan, syscall.SIGTERM)
+    go func() {
+        <-sigChan
+        tracer.Stop()
+    }()
+}
+```
+
+The Go tracer supports additional environment variables and functions for configuration.
+See all available options in the [configuration documentation][20] (or [configuration documentation v1][3]).
+
+## Configure APM environment name
+
+The [APM environment name][7] may be configured [in the Agent][8] or using the [WithEnv][20] start option of the tracer.
+
+## Configurations keys
+
+The previous version of this configuration documentation is still available at [Configuring the Go Tracing Library (legacy)][21].
 
 {{< partial name="apm/registry-config-list.html" >}}
 
@@ -53,5 +98,5 @@ This is the new page with registry configurations
 [18]: /tracing/trace_collection/trace_context_propagation/
 [19]: /opentelemetry/interoperability/environment_variable_support
 [20]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/ddtrace/tracer#StartOption
-[21]: /tracing/trace_collection/library_config/#traces
+[21]: /tracing/trace_collection/library_config/go/
 [22]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/contrib

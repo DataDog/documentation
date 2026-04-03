@@ -24,10 +24,17 @@ further_reading:
       text: "OpenTelemetry Environment Variable Configurations"
 ---
 
-This is the new page with registry configurations
--> Backport everything needed from the current one.
+After you set up the tracing library with your code and configure the Agent to collect APM data, optionally configure the tracing library as desired, including setting up [Unified Service Tagging][1].
 
-## All registry configurations
+{{% apm-config-visibility %}}
+
+It is recommended that you use `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` to set `env`, `service`, and `version` for your services. Review the [Unified Service Tagging][1] documentation for recommendations on configuring these environment variables.
+
+For more examples of how to work with the library see [API documentation][2].
+
+## Configurations keys
+
+The previous version of this configuration documentation is still available at [Configuring the Node.js Tracing Library (legacy)][17].
 
 {{< partial name="apm/registry-config-list.html" >}}
 
@@ -45,3 +52,4 @@ This is the new page with registry configurations
 [14]: /opentelemetry/interoperability/environment_variable_support
 [15]: /tracing/trace_collection/custom_instrumentation/nodejs/otel/
 [16]: /tracing/trace_collection/library_config/#traces
+[17]: /tracing/trace_collection/library_config/nodejs/
