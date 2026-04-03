@@ -57,7 +57,7 @@ To view linked pull requests:
 
 {{< img src="error_tracking/pull-request-find.png" alt="View pull requests linked to an Error Tracking issue" style="height:300px;" >}}
 
-## Unlink a pull request
+### Unlink a pull request
 
 To unlink a pull request from an issue, edit the pull request description and remove the Error Tracking issue URL.
 
