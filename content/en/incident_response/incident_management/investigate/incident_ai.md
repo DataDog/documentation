@@ -114,6 +114,42 @@ Use natural language prompts to request information or take action from Slack:
 | Find related incidents             | `@Datadog Are there any related incidents?`<br />`@Datadog Find me incidents related to DDoS attacks from the past month`                       |
 | Early detection inquiry            | `@Datadog A customer is unable to check out. Is there an incident?`<br />`@Datadog Are there any incidents now impacting the payments service?` |
 
+## Trigger a Bits AI SRE investigation from incident Slack channels or the web UI
+
+Start a Bits AI SRE investigation directly from your incident Slack channel or the Datadog Incident Management web UI, without leaving your incident response workflow. This reduces context switching during active incidents and allows the AI agent to investigate alongside your team using the same shared context.
+
+**Prerequisites**
+Before using this feature, verify the following:
+- **Bits AI SRE** is enabled for your organization.
+- **Datadog Incident Management** is configured with Slack integration. See the Slack Integration Guide for setup instructions.
+- **Datadog Slack write** permissions are enabled for your workspace. This is a common issue, so if Bits AI SRE does not respond in the channel, check this first.
+- You are triggering from a **properly configured Datadog Incident Management Slack channel**. The Incident Investigation flow only activates when the system detects a valid incident channel. Triggering from a non-incident channel falls back to a General Investigation.
+
+**From Slack,** type `@Datadog investigate` in the incident channel to kick off an investigation during an active incident. You can include additional context inline to help the agent narrow its scope from the start:
+
+| Prompt                      | Behavior                                    |
+|-----------------------------|---------------------------------------------|
+| `@Datadog investigate we're seeing high error rates in the payments service since the deploy at 2pm` | Triggers investigation with responder-provided focus area |
+| `@Datadog investigate, I think this is related to the redis cache` | Triggers investigation with a hypothesis seed |
+                                                                                                        
+When triggered, the agent automatically pulls in the incident’s timeline, linked telemetry signals (traces, metrics, and logs), and any context you provide in the prompt. It then posts updates back to the channel as a thread reply, with a final root cause summary and recommended next steps surfaced to the broader channel when the investigation completes.
+
+<img width="434" height="607" alt="Trigger Bits AI SRE investigations from incident Slack channels" src="https://github.com/user-attachments/assets/8784b425-21a4-424e-a43d-27c19f9a03c3" />
+
+**From the web UI,** you can trigger an investigation directly from the “Investigation” section on the overview page of the incident without switching to Slack.
+
+<img width="3024" height="1650" alt="Bits AI SRE investigation button" src="https://github.com/user-attachments/assets/531ea1cb-d39a-48ab-98a9-74adcb1d0949" />
+<img width="1512" height="825" alt="Bits AI SRE investigation on web ui concluded" src="https://github.com/user-attachments/assets/e7d29e2d-5368-4d65-806f-2fe7a391caea" />
+
+When triggered, the investigation is embedded in the incident web UI, and Bits AI SRE appears as a responder in the Responder Roles section of the page.
+
+**Best practices**
+- **Provide context at trigger time.** Early in an incident, the timeline may have few entries and limited linked signals. Include a description of the problem or links to relevant telemetry in your `@Datadog investigate` prompt to improve the quality and confidence of findings.
+- **Link telemetry signals before investigating.** Investigations with two or more linked Datadog telemetry signals are treated as high-context and produce higher-confidence root cause hypotheses. Link traces, metrics, or logs to the incident before triggering.
+- **One investigation at a time.** Only one active investigation per incident is supported. If an investigation is already running when you send `@Datadog investigate`, the system notifies you and links the existing investigation. You can start a new investigation after the current one completes.
+
+For setup instructions and prerequisites, see [Slack Integration Guide](https://docs.datadoghq.com/integrations/slack/?tab=datadogforslack). For a full walkthrough of the investigation workflow, see the [Bits AI SRE Guide](https://docs.datadoghq.com/bits_ai/bits_ai_sre).
+
 ## Customize postmortem templates with AI incident variables
 
 1. In Datadog, navigate to your incident [Postmortem Templates][3].
