@@ -106,7 +106,7 @@ Toggle the switch to **Enable TLS** if your organization requires secure connect
 - `CA Certificate Path`: The path to the certificate file that is your Certificate Authority (CA) Root File in DER or PEM (X.509).
 - `Private Key Path`: The path to the `.key` private key file that belongs to your Server Certificate Path in DER or PEM (PKCS#8) format.
 
-##### Buffering options
+##### Buffering
 
 {{% observability_pipelines/destination_buffer %}}
 

@@ -1,4 +1,5 @@
 ---
+id: table
 title: table
 core_product:
   - dashboards

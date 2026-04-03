@@ -28,7 +28,7 @@ To determine your account type, see the [Azure documentation][10]. **Note:** If 
 
 ## Setup
 
-You can setup using the [API][13], [Terraform][14], or directly in Datadog by following the instructions below.
+You can set up using the [API][13], [Terraform][14], or directly in Datadog by following the instructions below.
 
 {{% site-region region="us3" %}}
 **Note**: If you are using Datadog's **US3** site, you may have set up the Datadog Azure Native integration using the [Datadog Resource method][1] through the Azure Portal. To support Cloud Cost Management, you need to [create an app registration][2].
@@ -40,6 +40,60 @@ You can setup using the [API][13], [Terraform][14], or directly in Datadog by fo
 
 ### Configure the Azure integration
 Navigate to [Setup & Configuration][3], add an Azure account and follow the steps to configure the Azure integration.
+
+{{< tabs >}}
+
+{{% tab "Terraform" %}}
+
+{{< img src="cloud_cost/setup/azure_terraform_setup.png" alt="CCM setup page with the Terraform option selected, showing Step 1 and Step 2 expanded to configure scope and export details" style="width:100%" >}}
+
+### Select scope type
+
+Use the dropdown to select the scope type for your account. CCM supports the billing account, subscription, and resource group scope type.
+
+### Select the resources to create
+
+The Terraform configuration supports three setups depending on your existing Azure resources:
+
+* **New setup**: Select **Create storage account and container** to create a storage account, container, and cost exports.
+* **Existing storage account and container**: Unselect **Create storage account and container** and select **Create cost exports** to use existing storage but create new cost exports.
+* **Existing storage account, container, and cost exports**: Unselect both options to use existing storage and cost exports.
+
+### Configure the scope and export details
+
+Enter the following details for your configuration:
+
+* **Billing account or Subscription ID**: Depending on the scope selected in Step 1, the relevant billing account ID or subscription ID.
+* **Resource group name**: The name of your existing resource group in the selected scope. A pre-existing resource group is required for the Terraform setup.
+* **Location**: The Azure location of your resource group. For example, `East US 2`.
+* **Storage account and container name**: Depending on the resources you have selected to create, the names of your new or pre-existing storage account and container.
+* **Actual cost export name and path**: The name and path of your actual cost export.
+* **Amortized cost export name and path**: The name and path of your amortized cost export.
+  * **Note:** The following prefix formats are not supported: empty, starting with `/` (such as `/` or `/cost`), or ending with `/` (such as `cost/`). Prefixes containing `/` in the middle are supported (such as `cost/hourly`).
+
+### Copy generated Azure resource Terraform HCL and apply changes
+
+After the fields in Step 2 are complete, Step 3 enables and displays the generated Terraform HCL. Follow the instructions to set up your Terraform configuration files with this code. Resolve any issues that appear while running `terraform plan` or `terraform apply` before returning to CCM to configure cost exports.
+
+### Access Azure console to configure exports
+
+{{< img src="cloud_cost/setup/azure_toggle_file_partitioning.png" alt="Toggle on file partitioning for both exports" style="width:50%" >}}
+
+Open the Azure console link to locate your cost exports. If needed, change the current scope to the correct one for your exports. For both actual and amortized exports, select them and click **Edit** to toggle on File Partitioning if not already enabled.
+
+{{< img src="cloud_cost/run_now.png" alt="Click Run Now button in export side panel to generate exports" style="width:50%" >}}
+
+Save the File Partitioning changes and click **Run Now**. Return to CCM once both export runs have succeeded.
+
+### Copy generated Datadog HCL and apply changes
+
+Follow the instructions in the **Apply Datadog Terraform HCL** step. Resolve any issues that appear while running `terraform plan` or `terraform apply` before returning to CCM to confirm account creation.
+
+{{% /tab %}}
+
+{{% tab "Manual" %}}
+
+{{< img src="cloud_cost/setup/azure_manual_setup.png" alt="CCM setup page with the Manual option selected, showing Step 1 and Step 2 expanded to configure scope type and select existing exports" style="width:100%" >}}
 
 ### Generate cost exports
 
@@ -80,14 +134,14 @@ You need to generate exports for two data types: **actual** and **amortized**. D
    {{< img src="cloud_cost/improved_export_destination_2.png" alt="Export Destination with File partitioning and Overwrite data settings" >}}
 
 8. On the **Review + create** tab, select **Create**.
-9. For faster processing, generate the first exports manually by clicking **Run Now**.
+9. Generate the first exports manually by clicking **Run Now**. Wait for successful completion before continuing.
 
 {{< img src="cloud_cost/run_now.png" alt="Click Run Now button in export side panel to generate exports" style="width:50%" >}}
 
 ### Provide Datadog access to your exports
+Grant Datadog read access to the storage account where your exports are saved.
 
-{{< tabs >}}
-{{% tab "Billing Accounts" %}}
+{{% collapse-content title="Billing accounts" level="h4" %}}
 
 1. In the Exports tab, click on the export's Storage Account to navigate to it.
 2. Click the Containers tab.
@@ -100,10 +154,9 @@ You need to generate exports for two data types: **actual** and **amortized**. D
     - Select **Review + assign**.
 
 If your exports are in different storage containers, repeat steps one to seven for the other storage container.
-{{% /tab %}}
 
-{{% tab "Subscriptions & Resource Groups" %}}
-
+{{% /collapse-content %}} 
+{{% collapse-content title="Subscriptions and resource groups" level="h4" %}}
 1. In the Exports tab, click on the export's Storage Account to navigate to it.
 2. Click the Containers tab.
 3. Choose the storage container your bills are in.
@@ -115,6 +168,7 @@ If your exports are in different storage containers, repeat steps one to seven f
     - Select **Review + assign**.
 
 If your exports are in different storage containers, repeat steps one to seven for the other storage container.
+{{% /collapse-content %}}
 
 ### Configure Cost Management Reader access
 **Note:** You do not need to configure this access if your scope is **Billing Account**.
@@ -125,7 +179,7 @@ If your exports are in different storage containers, repeat steps one to seven f
 4. Choose **Cost Management Reader**, then click Next.
 5. Assign these permissions to the app registration.
 
-This ensures complete cost accuracy by allowing periodic cost calculations against Microsoft Cost Management.
+This helps ensure complete cost accuracy by allowing periodic cost calculations against Microsoft Cost Management.
 
 **Note**: Data can take up to 48 to 72 hours after setup to stabilize in Datadog.
 
@@ -133,6 +187,8 @@ This ensures complete cost accuracy by allowing periodic cost calculations again
 
 {{% /tab %}}
 {{< /tabs >}}
+
+
 
 **Note**: If you have the proper permissions on the app registration but your network is blocking Datadog's webhook IPs, you may encounter errors that appear to be permission-related.
 

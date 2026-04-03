@@ -126,16 +126,36 @@ Archive Search scans archived log files within your selected time range. **Scan 
 To optimize performance and reduce costs:
 * **Narrow the time range:** Limit your search to the smallest window possible.
 * **Set Scan Limits:** Admins with `Logs Write Archives` permissions can set a maximum scan size per Archive in the settings.
-* **Use Lookup Attributes (Preview):** This is the most effective way to accelerate searches for high-cardinality data.
+* **Use Partition Attributes (Preview):** The most effective way to accelerate searches on low-cardinality data like `service`, `env`, or `status`. Datadog skips entire partitions that don't match your query.
+* **Use Lookup Attributes (Preview):** The most effective way to accelerate searches on high-cardinality data like `trace_id` or `user_id`.
 
-**Note**: Only logs archived after you configure Lookup attributes benefit from accelerated searches. Logs archived before this configuration are not affected.
+**Note**: Only logs archived after you configure Partition or Lookup attributes benefit from accelerated searches. Logs archived before this configuration are not affected.
 
+
+### Accelerate searches with Partition Attributes
+
+You can configure **Partition Attributes** on your archives to group logs by low-cardinality field values at write time. Use attributes like `service`, `source`, `env`, or `status`.
+
+Logs that share the same partition values are co-located in storage. When you search, Datadog evaluates your query against partition metadata and skips partitions that don't match, reducing the total data scanned.
+
+To set this up, see the [Log Archives][8] documentation.
 
 ### Accelerate searches with Lookup Attributes
 
-You can configure **Search Attributes** on your archives to skip irrelevant data blocks in your storage bucket. For example, if you configure `trace_id` or `user_id` you significantly reduce the volume of data scanned and lower your cloud provider's egress fees.
+You can configure **Lookup Attributes** on your archives to skip irrelevant data blocks in your storage bucket. For example, if you configure `trace_id` or `user_id` you significantly reduce the volume of data scanned and lower your cloud provider's egress fees.
 
 To set this up, see the [Log Archives][7] documentation.
+
+### Partition vs. Lookup attributes
+
+| | Partition | Lookup |
+|---|---|---|
+| Cardinality | Low (tens to hundreds) | High (millions of values) |
+| Typical attributes | `service`, `source`, `env`, `status` | `trace_id`, `container_id`, `user_id`, `transaction_id` |
+| How it helps | Prunes entire partitions from scan | Pinpoints individual log entries |
+| Best used for | Broad filtering by environment/service | Ad-hoc investigations on specific identifiers |
+
+For maximum search performance, combine both: partition attributes narrow the search scope to the relevant data segments, while lookup attributes let you find specific logs within those segments instantly.
 
 ### Default limit for Rehydration of Results
 
@@ -214,4 +234,5 @@ In order to search log events from your archives, Datadog uses a service account
 [4]: https://app.datadoghq.com/logs/archive-search/new
 [5]: https://app.datadoghq.com/logs/archive-search/
 [6]: /logs/guide/logs-rbac/?tab=ui#restrict-access-to-logs
-[7]: /logs/log_configuration/archives/?tab=awss3#archive-search-indexed-attribute
+[7]: /logs/log_configuration/archives/?tab=awss3#archive-search-lookup-attribute
+[8]: /logs/log_configuration/archives/?tab=awss3#archive-search-partition-attribute

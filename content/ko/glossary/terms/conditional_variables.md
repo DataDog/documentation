@@ -1,4 +1,5 @@
 ---
+id: conditional_variables
 core_product:
 - 알림
 title: 조건 변수

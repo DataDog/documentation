@@ -111,7 +111,9 @@ To update the SLO time window (for example, to 30 days) or target, click the {{<
 
 ## View and manage test suites
 
-After creating your suite, it appears in the **Suites** tab on the [Synthetic Monitoring tests][1] page, or you can access test suites from **Digital Experience > Test Suites**. 
+After creating your suite, it appears in the **Suites** tab on the [Synthetic Monitoring tests][1] page, or you can access test suites from **Digital Experience > Test Suites**.
+
+To apply a [Scheduled downtime][3] to one or more test suites, select them using the checkboxes and click **Add to Downtime** in the bulk actions bar.
 
 When viewing a test suite, three tabs are available:
 
@@ -122,6 +124,18 @@ When viewing a test suite, three tabs are available:
 **Note**: Test runs appear in the suite only from the date the test was added. To view earlier results, check the individual test page. If you rename a test, previous runs remain listed under the original name. A maximum of 300 tests can be added per suite.
 
 {{< img src="synthetics/test_suites/test_suite_summary_2.png" alt="Synthetic Monitoring Test Suite summary page" style="width:100%;">}}
+
+## Run a test suite
+
+To manually trigger the tests in a suite:
+
+1. Navigate to the suite and click the **Tests in the Suite** tab.
+2. Select the tests you want to run using the checkboxes.
+3. Click **Run Tests Now**.
+
+{{< img src="synthetics/test_suites/run_tests_now.png" alt="The Tests in the Suite tab with tests bulk selected and the Run Tests Now button visible" style="width:100%;" >}}
+
+**Note**: You can run a maximum of 50 tests at a time.
 
 ## Troubleshooting
 
@@ -143,3 +157,4 @@ If execution results look incomplete:
 
 [1]: https://app.datadoghq.com/synthetics/tests
 [2]: /synthetics/notifications/
+[3]: /synthetics/platform/downtime/

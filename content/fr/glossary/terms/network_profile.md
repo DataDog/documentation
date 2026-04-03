@@ -1,4 +1,5 @@
 ---
+id: network_profile
 core_product:
 - network performance monitoring
 - Surveillance d'appareils réseau
