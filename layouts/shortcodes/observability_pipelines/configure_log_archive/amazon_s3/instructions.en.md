@@ -1,4 +1,4 @@
-#### Create an Amazon S3 bucket
+### Create an Amazon S3 bucket
 
 1. Navigate to [Amazon S3 buckets][401].
 1. Click **Create bucket**.
