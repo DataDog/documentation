@@ -55,6 +55,22 @@ You can add processors after you create a pipeline. The processors available are
 - [String Builder Processor][12]
 
 
+## Pipeline permissions
+
+Access to Event Management Pipelines is controlled by two permissions:
+
+- **`events_write_pipelines`**: Grants the ability to create, edit, and delete pipelines, including modifying pipeline attributes such as filter queries and pipeline ordering.
+- **`events_write_processors`**: Grants the ability to create, edit, and delete processors within a pipeline.
+
+Administrators can assign these permissions to roles to control who can modify pipeline and processor configurations.
+
+<div class="alert alert-warning">Access to Event Management Pipelines is controlled by two permissions:
+
+- **`events_write_pipelines`**: Grants the ability to create, edit, and delete pipelines, including modifying pipeline attributes such as filter queries and pipeline ordering.
+- **`events_write_processors`**: Grants the ability to create, edit, and delete processors within a pipeline.
+
+Administrators can assign these permissions to roles to control who can modify pipeline and processor configurations.</div>
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
