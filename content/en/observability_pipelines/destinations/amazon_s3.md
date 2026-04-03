@@ -12,7 +12,7 @@ products:
 
 ## Overview
 
-Use the Amazon S3 destination to send logs in JSON or Parquet format to Amazon S3. See [Automatically generated Parquet schema](#automatically-generated-parquet-schema) for more information.
+Use the Amazon S3 destination to send logs in JSON or Parquet format to Amazon S3. See [Automatically generated Parquet schema](#automatically-generated-parquet-schema) for more information on Parquet.
 
 You can also [route logs to Snowflake using the Amazon S3 destination](#route-logs-to-snowflake-using-the-amazon-s3-destination).
 
