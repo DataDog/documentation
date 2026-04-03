@@ -18,5 +18,10 @@
       {{- end -}}<br>
     {{- end -}}
   {{- end -}}
-  {{ .description | markdownify }}
+  {{- $desc := .description | default "" -}}
+  {{- if or (eq $desc "null") (lt (len $desc) 5) -}}
+    <em class="text-warning">No description provided.</em>
+  {{- else -}}
+    {{ $desc | markdownify }}
+  {{- end -}}
 </dd>
