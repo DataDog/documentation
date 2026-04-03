@@ -17,7 +17,7 @@ further_reading:
 <div class="alert alert-info">A sample application is <a href="https://github.com/DataDog/serverless-gcp-sample-apps/tree/main/cloud-run/in-container/java">available on GitHub</a>.</div>
 <div class="alert alert-info">
 For full visibility and access to all Datadog features in Cloud Run Jobs,
-ensure you’ve <a href="http://localhost:1313/integrations/google_cloud_platform/">installed the Google Cloud integration</a>
+ensure you’ve <a href="/integrations/google_cloud_platform/">installed the Google Cloud integration</a>
 and are using <a href="https://hub.docker.com/r/datadog/serverless-init">serverless-init version 1.9.0 or later</a>.
 </div>
 
@@ -85,7 +85,7 @@ logger.info("Hello World!");
 
 4. **Configure your application**.
 
-{{% serverless-init-configure %}}
+{{% serverless-init-configure cloudrun_jobs="true" %}}
 
 5. {{% gcr-service-label %}}
 
@@ -96,6 +96,8 @@ logger.info("Hello World!");
    To send custom metrics, [install the DogStatsD client][5] and [view code examples][6]. In serverless, only the *distribution* metric type is supported.
 
 {{% serverless-init-env-vars-in-container language="java" defaultSource="cloudrun" %}}
+
+{{% svl-tracing-env %}}
 
 ## Troubleshooting
 
@@ -109,5 +111,5 @@ logger.info("Hello World!");
 [2]: /tracing/trace_collection/custom_instrumentation/java/dd-api#adding-spans
 [3]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/java/
 [4]: /tracing/other_telemetry/connect_logs_and_traces/java/
-[5]: /developers/dogstatsd/?tab=java#install-the-dogstatsd-client
+[5]: /extend/dogstatsd/?tab=java#install-the-dogstatsd-client
 [6]: /metrics/custom_metrics/dogstatsd_metrics_submission/?tab=java#code-examples-5

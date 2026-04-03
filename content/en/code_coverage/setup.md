@@ -8,6 +8,9 @@ further_reading:
   - link: "/code_coverage/configuration"
     tag: "Documentation"
     text: "Configure Code Coverage"
+  - link: "/code_coverage/flags"
+    tag: "Documentation"
+    text: "Organize coverage data with flags"
   - link: "/code_coverage/data_collected"
     tag: "Documentation"
     text: "Learn what data is collected for Code Coverage"
@@ -15,10 +18,6 @@ further_reading:
     tag: "Documentation"
     text: "Learn how Code Coverage supports large monorepos"
 ---
-
-{{< callout url="http://datadoghq.com/product-preview/code-coverage/" >}}
-Code Coverage is in Preview. This product replaces Test Optimization's <a href="https://docs.datadoghq.com/tests/code_coverage">code coverage</a> feature, which is being deprecated. Complete the form to request access for the new Code Coverage product.
-{{< /callout >}}
 
 Setting up Code Coverage involves the following steps:
 
@@ -91,9 +90,12 @@ Navigate to [Roles settings][4], click `Edit` on the role you need, add the `Cod
 
 ## PR Gates
 
-If you wish to gate on PR coverage, configure PR Gates rules in Datadog.
+If you wish to gate on PR coverage, you can configure PR Gates rules in one of two ways:
 
-Navigate to [PR Gates rule creation][5] and configure a rule to gate on total or patch coverage.
+- **Datadog UI**: Navigate to [PR Gates rule creation][5] and configure a rule to gate on total or patch coverage.
+- **YAML configuration file**: Define gates in your [`code-coverage.datadog.yml`][14] file. This allows you to manage gates as code alongside your repository.
+
+Rules from both sources are evaluated when a pull request is opened or updated. See [Configuration][14] for YAML gate syntax and examples.
 
 ## Upload code coverage reports
 
@@ -295,15 +297,9 @@ example/notifications/notifier.go:104.3,104.10 1 3
 
 ### Install the datadog-ci CLI
 
-Install the [`datadog-ci`][7] CLI globally using `npm`:
+<div class="alert alert-info">If you use GitHub Actions, you can skip this installation step. The <a href="#uploading-coverage-reports">GitHub Actions upload method</a> below uses a dedicated action that handles <code>datadog-ci</code> installation automatically.</div>
 
-{{< code-block lang="shell" >}}
-npm install -g @datadog/datadog-ci
-{{< /code-block >}}
-
-#### Standalone binary
-
-If installing Node.js in the CI is an issue, standalone binaries are provided with [Datadog CI releases][8]. Only _linux-x64_, _linux-arm64_, _darwin-x64_, _darwin-arm64_ (MacOS) and _win-x64_ (Windows) are supported. To install, run the following from your terminal:
+Standalone binaries are provided with [Datadog CI releases][8]. The _linux-x64_, _linux-arm64_, _darwin-x64_, _darwin-arm64_ (MacOS), and _win-x64_ (Windows) architectures are supported. To install, run the following from your terminal:
 
 {{< tabs >}}
 {{% tab "Linux" %}}
@@ -340,6 +336,14 @@ Start-Process -FilePath "./datadog-ci.exe" -ArgumentList version
 {{% /tab %}}
 {{< /tabs >}}
 
+#### npm
+
+Alternatively, if Node.js is available in your CI environment, install the [`datadog-ci`][7] CLI globally using `npm`:
+
+{{< code-block lang="shell" >}}
+npm install -g @datadog/datadog-ci
+{{< /code-block >}}
+
 #### Docker image
 
 Alternatively, you can update your CI job to run in a container based on the [Datadog CI Docker image][13].
@@ -355,6 +359,22 @@ To upload your code coverage reports to Datadog, run the following command. Prov
 
 {{< tabs >}}
 {{% tab "GitHub Actions" %}}
+
+Use the [Datadog Code Coverage Upload][101] GitHub Action. This action automatically installs and runs `datadog-ci`, so no additional setup is required:
+
+<pre>
+<code class="language-yaml" data-lang="yaml">
+steps:
+- name: Upload coverage reports to Datadog
+  uses: DataDog/coverage-upload-github-action@v1
+  with:
+    api_key: ${{ secrets.DD_API_KEY }}
+    site: {{< region-param key="dd_site" >}}
+</code>
+</pre>
+
+Alternatively, if you have `datadog-ci` installed, you can run it directly:
+
 <pre>
 <code class="language-yaml" data-lang="yaml">
 steps:
@@ -365,6 +385,8 @@ steps:
     DD_SITE: {{< region-param key="dd_site" >}}
 </code>
 </pre>
+
+[101]: https://github.com/marketplace/actions/datadog-code-coverage-upload
 {{% /tab %}}
 {{% tab "Gitlab" %}}
 <pre>
@@ -376,6 +398,15 @@ test:
     - datadog-ci coverage upload . # make sure to add the DD_API_KEY CI/CD variable
 </code>
 </pre>
+{{% /tab %}}
+{{% tab "Azure Pipelines" %}}
+<code class="language-yaml" data-lang="yaml">
+- script: datadog-ci coverage upload --format=clover coverage/clover.xml
+  displayName: 'Upload coverage to Datadog'
+  env:
+    DD_API_KEY: $(DD_API_KEY)
+    DD_SITE: 'datadoghq.com'
+</code>
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -443,6 +474,19 @@ If the paths in your report are relative to a different directory in your reposi
 datadog-ci coverage upload --base-path=frontend/src .
 {{< /code-block >}}
 
+### Inaccurate coverage from non-executable lines
+
+Some coverage tools include non-executable lines (such as comments, blank lines, and closing brackets) in their reports, counting them as uncovered. This can lower your coverage percentages and produce false negatives for lines that can never be executed.
+
+During upload, the CLI automatically scans your source files to identify these non-executable lines so they can be excluded from coverage calculations.
+
+File fixes support the following languages: Go, Kotlin, C/C++, Swift, Objective-C, and PHP.
+
+You can control this behavior with the following options:
+
+- `--disable-file-fixes`: Disable file fixes generation entirely.
+- `--file-fixes-search-path <dir>`: Override the root directory used to scan source files. By default, the repository root is used. This is useful in monorepos or when your coverage reports only cover a subset of the codebase, as it speeds up the scan by limiting the directory tree traversed.
+
 ### Discrepancy between Datadog UI and coverage report values
 
 Datadog automatically merges coverage reports for the same commit.
@@ -460,12 +504,13 @@ Datadog deduplicates overlapping files across reports, which can result in diffe
 [2]: /account_management/rbac/permissions/#custom-roles
 [3]: /account_management/rbac/permissions/#managed-roles
 [4]: https://app.datadoghq.com/organization-settings/roles
-[5]: https://app.datadoghq.com/ci/pr-gates/rule/create
+[5]: https://app.datadoghq.com/ci/pr-gates/rule/create?dataSource=code_coverage
 [6]: /code_coverage/data_collected/#code-coverage-report-upload
 [7]: https://www.npmjs.com/package/@datadog/datadog-ci
 [8]: https://github.com/DataDog/datadog-ci/releases
 [9]: https://app.datadoghq.com/organization-settings/api-keys
-[10]: https://github.com/DataDog/datadog-ci/blob/master/packages/datadog-ci/src/commands/coverage/README.md
+[10]: https://github.com/DataDog/datadog-ci/tree/master/packages/plugin-coverage
 [11]: https://app.datadoghq.com/ci/code-coverage
 [12]: #integrate-with-source-code-provider
 [13]: https://hub.docker.com/r/datadog/ci
+[14]: /code_coverage/configuration#pr-gates

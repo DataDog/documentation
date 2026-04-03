@@ -12,9 +12,12 @@ products:
   url: /notebooks/
   icon: notebook
 further_reading:
+- link: "bits_ai/mcp_server"
+  tag: "Documentation"
+  text: "Datadog MCP Server"
 - link: "/ddsql_editor/"
   tag: "Documentation"
-  text: "Learn more about DDSQL Editor"
+  text: "DDSQL Editor"
 ---
 
 {{< product-availability >}}
@@ -23,10 +26,13 @@ further_reading:
 
 DDSQL is SQL for Datadog data. It implements several standard SQL operations, such as `SELECT`, and allows queries against unstructured data. You can perform actions like getting exactly the data you want by writing your own `SELECT` statement, or querying tags as if they are standard table columns.
 
+You can run DDSQL queries from AI agents using the [Datadog MCP Server][10] `ddsql` toolset (Preview).
+
 This documentation covers the SQL support available and includes:
 - [Syntax compatible with PostgreSQL](#syntax)
 - [Data types](#data-types)
 - [Type literals](#type-literals)
+- [Arrays](#arrays)
 - [SQL functions](#functions)
 - [Regular expressions](#regular-expressions)
 - [Window functions](#window-functions)
@@ -179,7 +185,7 @@ DDSQL supports the following data types:
 
 ### Array types
 
-All data types support array types. Arrays can contain multiple values of the same data type.
+All data types support array types. See [Arrays](#arrays) for array literals, element access, and array functions.
 
 ## Type literals
 
@@ -197,17 +203,6 @@ DDSQL supports explicit type literals using the syntax `[TYPE] [value]`.
 
 The type prefix can be omitted and the type is automatically inferred from the value. For example, `'hello world'` is inferred as `VARCHAR`, `123` as `BIGINT`, and `true` as `BOOLEAN`. Use explicit type prefixes when values could be ambiguous; for example,`TIMESTAMP '2025-01-01'` would be inferred as `VARCHAR` without the prefix.
 
-### Array literals
-
-Array literals use the syntax `ARRAY[value1, value2, ...]`. The array type is automatically inferred from the values.
-
-{{< code-block lang="sql" >}}
-SELECT ARRAY['apple', 'banana', 'cherry'] AS fruits; -- Inferred as VARCHAR array
-SELECT ARRAY[1, 2, 3] AS numbers;                    -- Inferred as BIGINT array
-SELECT ARRAY[true, false, true] AS flags;            -- Inferred as BOOLEAN array
-SELECT ARRAY[1.1, 2.2, 3.3] AS decimals;             -- Inferred as DECIMAL array
-{{< /code-block >}}
-
 ### Example
 
 {{< code-block lang="sql" >}}
@@ -219,6 +214,105 @@ SELECT
 FROM products
 WHERE created_at > TIMESTAMP '2025-01-01';
 {{< /code-block >}}
+
+## Arrays
+
+Arrays are ordered collections of values that all share the same data type. Every DDSQL base type has a corresponding array type.
+
+### Array literals
+
+Use the `ARRAY[value1, value2, ...]` syntax to construct an array literal. The array's type is automatically inferred from the values.
+
+{{< code-block lang="sql" >}}
+SELECT ARRAY['apple', 'banana', 'cherry'] AS fruits;  -- VARCHAR array
+SELECT ARRAY[1, 2, 3] AS numbers;                     -- BIGINT array
+SELECT ARRAY[true, false, true] AS flags;             -- BOOLEAN array
+SELECT ARRAY[1.1, 2.2, 3.3] AS decimals;              -- DECIMAL array
+{{< /code-block >}}
+
+### Element access
+
+Access individual array elements with a 1-based subscript. Accessing an index that is out of bounds returns `NULL`.
+
+{{< code-block lang="sql" >}}
+SELECT ARRAY['a', 'b', 'c'][1];   -- Returns 'a'
+SELECT ARRAY['a', 'b', 'c'][2];   -- Returns 'b'
+SELECT ARRAY['a', 'b', 'c'][10];  -- Returns NULL (out of bounds)
+{{< /code-block >}}
+
+To access elements of an array column, use the same subscript syntax:
+
+{{< code-block lang="sql" >}}
+SELECT recipients[1] AS first_recipient
+FROM emails
+{{< /code-block >}}
+
+### Array functions
+
+The following functions operate on arrays:
+
+| Function | Return Type | Description |
+|----------|-------------|-------------|
+| `CARDINALITY(array a)` | `BIGINT` | Returns the number of elements in the array. |
+| `ARRAY_POSITION(array a, typeof_array value)` | `BIGINT` | Returns the 1-based index of the first occurrence of `value` in the array, or `NULL` if not found. |
+| `STRING_TO_ARRAY(string s, string delimiter)` | `VARCHAR[]` | Splits a string into an array of strings on the given delimiter. |
+| `ARRAY_TO_STRING(array a, string delimiter)` | `VARCHAR` | Joins array elements into a string with the given delimiter. |
+| `ARRAY_AGG(expression e)` | array of input type | Aggregates values from multiple rows into an array. |
+| `UNNEST(array a [, array b...])` | rows of a [, b...] | Expands one or more arrays into a set of rows. Only valid in a `FROM` clause. |
+
+{{% collapse-content title="Examples" level="h3" %}}
+
+### `CARDINALITY`
+{{< code-block lang="sql" >}}
+SELECT
+  CARDINALITY(recipients) AS recipient_count
+FROM
+  emails
+{{< /code-block >}}
+
+### `ARRAY_POSITION`
+{{< code-block lang="sql" >}}
+SELECT
+  ARRAY_POSITION(recipients, 'hello@example.com') AS position
+FROM
+  emails
+{{< /code-block >}}
+
+### `STRING_TO_ARRAY`
+{{< code-block lang="sql" >}}
+SELECT
+  STRING_TO_ARRAY('a,b,c,d,e,f', ',') AS parts
+{{< /code-block >}}
+
+### `ARRAY_TO_STRING`
+{{< code-block lang="sql" >}}
+SELECT
+  ARRAY_TO_STRING(ARRAY['a', 'b', 'c'], ',') AS joined_string
+{{< /code-block >}}
+
+### `ARRAY_AGG`
+{{< code-block lang="sql" >}}
+SELECT
+  sender,
+  ARRAY_AGG(subject) AS subjects,
+  ARRAY_AGG(DISTINCT subject) AS distinct_subjects
+FROM
+  emails
+GROUP BY
+  sender
+{{< /code-block >}}
+
+### `UNNEST`
+{{< code-block lang="sql" >}}
+SELECT
+  sender,
+  recipient
+FROM
+  emails,
+  UNNEST(recipients) AS recipient
+{{< /code-block >}}
+
+{{% /collapse-content %}}
 
 ## Functions
 
@@ -443,6 +537,7 @@ Supported extraction units:
 | `day`             | `timestamp` / `interval` | day of the month                             |
 | `dow`             | `timestamp`              | day of the week `1` (Monday) to `7` (Sunday) |
 | `doy`             | `timestamp`              | day of the year (`1` - `366`)                |
+| `epoch`           | `timestamp` / `interval` | seconds since 1970-01-01 00:00:00 UTC (for timestamps), or total number of seconds (for intervals) |
 | `hour`            | `timestamp` / `interval` | hour of the day (`0` - `23`)                 |
 | `minute`          | `timestamp` / `interval` | minute of the hour (`0` - `59`)              |
 | `second`          | `timestamp` / `interval` | second of the minute (`0` - `59`)            |
@@ -458,6 +553,27 @@ SELECT
   EXTRACT(year FROM purchase_date) AS purchase_year
 FROM
   sales
+{{< /code-block >}}
+
+{{< code-block lang="sql" >}}
+-- Get the Unix epoch of a timestamp
+SELECT EXTRACT(epoch FROM TIMESTAMP '2021-01-01 00:00:00+00')
+-- Returns: 1609459200
+{{< /code-block >}}
+
+{{< code-block lang="sql" >}}
+-- Get the total seconds in an interval
+SELECT EXTRACT(epoch FROM INTERVAL '1 day 2 hours')
+-- Returns: 93600
+{{< /code-block >}}
+
+{{< code-block lang="sql" >}}
+-- Calculate how many seconds ago each event occurred
+SELECT
+  event_time,
+  EXTRACT(epoch FROM now()) - EXTRACT(epoch FROM event_time) AS seconds_ago
+FROM
+  events
 {{< /code-block >}}
 
 ### `TO_TIMESTAMP`
@@ -583,47 +699,6 @@ WHERE
   purchase_date > NOW() - INTERVAL '1 hour'
 {{< /code-block >}}
 
-### `CARDINALITY`
-{{< code-block lang="sql" >}}
-SELECT
-  CARDINALITY(recipients)
-FROM
-  emails
-{{< /code-block >}}
-
-### `ARRAY_POSITION`
-{{< code-block lang="sql" >}}
-SELECT
-  ARRAY_POSITION(recipients, 'hello@example.com')
-FROM
-  emails
-{{< /code-block >}}
-
-### `STRING_TO_ARRAY`
-{{< code-block lang="sql" >}}
-SELECT
-  STRING_TO_ARRAY('a,b,c,d,e,f', ',')
-{{< /code-block >}}
-
-### `ARRAY_TO_STRING`
-{{< code-block lang="sql" >}}
-SELECT
-  ARRAY_TO_STRING(ARRAY['a', 'b', 'c'], ',') AS joined_string
-{{< /code-block >}}
-
-### `ARRAY_AGG`
-{{< code-block lang="sql" >}}
-SELECT
-  sender,
-  ARRAY_AGG(subject) subjects,
-  ARRAY_AGG(ALL subject) all_subjects,
-  ARRAY_AGG(DISTINCT subject) distinct_subjects
-FROM
-  emails
-GROUP BY
-  sender
-{{< /code-block >}}
-
 ### `APPROX_PERCENTILE`
 {{< code-block lang="sql" >}}
 -- Calculate the median (50th percentile) response time
@@ -641,16 +716,6 @@ FROM
   logs
 GROUP BY
   service_name
-{{< /code-block >}}
-
-### `UNNEST`
-{{< code-block lang="sql" >}}
-SELECT
-  sender,
-  recipient
-FROM
-  emails,
-  UNNEST(recipients) AS recipient
 {{< /code-block >}}
 
 {{% /collapse-content %}}
@@ -790,12 +855,7 @@ This table provides an overview of the supported window functions. For comprehen
 | json_array_elements_text(text json)           | rows of text | Expands a JSON array into a set of rows. This form is only allowed in a FROM clause.                                                                                                                                                                                                                           |
 
 ## Table functions
-
-{{< callout url="https://www.datadoghq.com/product-preview/logs-metrics-support-in-ddsql-editor/" >}}
-Querying Logs and Metrics through DDSQL is in Preview. Use this form to request access.
-{{< /callout >}}
-
-Table functions are used to query Logs and Metrics
+Table functions are used to query logs, metrics, and other unstructured data sources.
 
 <table style="width: 100%; table-layout: fixed;">
   <thead>
@@ -810,25 +870,27 @@ Table functions are used to query Logs and Metrics
       <td>
         <pre>
 dd.logs(
-    filter => varchar,
     columns => array < varchar >,
+    filter ? => varchar,
     indexes ? => array < varchar >,
+    storage ? => varchar,
     from_timestamp ? => timestamp,
     to_timestamp ? => timestamp
 ) AS (column_name type [, ...])</pre>
       </td>
-      <td>Returns log data as a table. The columns parameter specifies which log fields to extract, and the AS clause defines the schema of the returned table. Optional: filtering by index or time range. When time is not specified, we default to the past 1 hour of data.</td>
+      <td>Returns log data as a table. The columns parameter specifies which log fields to extract. Nested fields are accessed using dot notation, and non-core fields need to be prepended by <code>@</code>. The AS clause defines the schema of the returned table. Optional: filtering by index or time range. When time is not specified, DDSQL defaults to the global time setting, which in DDSQL Editor is set to the past 1 hour. Optional: specifying the storage to use (for example, <code>hot</code>, <code>flex_tier</code>). When not specified, the default is hot storage.</td>
       <td>
         {{< code-block lang="sql" >}}
-SELECT timestamp, host, service, message
+SELECT timestamp, host, service, message, asset_id
 FROM dd.logs(
     filter  => 'source:java',
-    columns => ARRAY['timestamp','host', 'service','message']
+    columns => ARRAY['timestamp','host','service','message','@asset.id']
 ) AS (
     timestamp TIMESTAMP,
     host      VARCHAR,
     service   VARCHAR,
-    message   VARCHAR
+    message   VARCHAR,
+    asset_id  VARCHAR
 ){{< /code-block >}}
       </td>
     </tr>
@@ -875,6 +937,76 @@ ORDER BY timestamp, service;{{< /code-block >}}
   </tbody>
 </table>
 
+{{% collapse-content title="Examples" level="h3" %}}
+
+### Absolute timestamps
+
+{{< code-block lang="sql" >}}
+SELECT *
+FROM dd.logs(
+    columns => ARRAY['timestamp','host','service','message'],
+    from_timestamp => TIMESTAMP '2025-07-10 00:00:00.000-04:00',
+    to_timestamp => TIMESTAMP '2025-07-17 00:00:00.000-04:00'
+) AS (
+    timestamp TIMESTAMP,
+    host      VARCHAR,
+    service   VARCHAR,
+    message   VARCHAR
+)
+{{< /code-block >}}
+
+### Relative timestamps
+
+{{< code-block lang="sql" >}}
+SELECT *
+FROM dd.logs(
+    columns => ARRAY['timestamp','host','service','message'],
+    from_timestamp => now() - INTERVAL '7 days',
+    to_timestamp => now()
+) AS (
+    timestamp TIMESTAMP,
+    host      VARCHAR,
+    service   VARCHAR,
+    message   VARCHAR
+)
+{{< /code-block >}}
+
+### Optional parameters
+
+{{< code-block lang="sql" >}}
+SELECT *
+FROM dd.logs(
+    columns => ARRAY['timestamp','host','service','message'],
+    filter  => 'source:java',
+    indexes => ARRAY['trino'],
+    storage => 'hot'
+) AS (
+    timestamp TIMESTAMP,
+    host      VARCHAR,
+    service   VARCHAR,
+    message   VARCHAR
+)
+{{< /code-block >}}
+
+### Nested field access
+
+Column aliases cannot contain dots; replace them with underscores or any other valid character when defining the alias.
+
+{{< code-block lang="sql" >}}
+SELECT timestamp, host, asset_id, view_url, data_resource_type
+FROM dd.logs(
+    filter  => 'service:mcp',
+    columns => ARRAY['timestamp','host','@asset.id','@view.url','@data.resource.type']
+) AS (
+    timestamp TIMESTAMP,
+    host      VARCHAR,
+    asset_id  VARCHAR,
+    view_url  VARCHAR,
+    data_resource_type VARCHAR
+)
+{{< /code-block >}}
+
+{{% /collapse-content %}}
 
 ## Tags
 
@@ -933,3 +1065,4 @@ FROM aws.ec2_instance
 [7]: https://unicode-org.github.io/icu/userguide/strings/regexp.html#set-expressions-character-classes
 [8]: https://unicode-org.github.io/icu/userguide/strings/regexp.html#flag-options
 [9]: https://unicode-org.github.io/icu/userguide/strings/regexp.html#find-and-replace
+[10]: /bits_ai/mcp_server/

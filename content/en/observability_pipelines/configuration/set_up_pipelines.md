@@ -35,6 +35,8 @@ You can create a pipeline with one of the following methods:
 - [API](#set-up-a-pipeline-with-the-api)
 - [Terraform](#set-up-a-pipeline-with-terraform)
 
+See [Export a Pipeline Configuration to JSON or Terraform][14] if you want to programmatically deploy a pipeline created in the UI.
+
 ## Set up a pipeline in the UI
 
 {{< tabs >}}
@@ -43,7 +45,7 @@ You can create a pipeline with one of the following methods:
 1. Navigate to [Observability Pipelines][1].
 1. Select a [template][2] based on your use case.
 1. Select and set up your [source][3].
-1. Add [processors][4] to transform, redact, and enrich your log data.
+1. Add [processors][4] to transform, redact, and enrich your log data. **Note**: For a pipeline canvas, there is a limit of 25 processors groups and a total of 150 processors.
     - If you want to copy a processor, click the copy icon for that processor and then use `command-v` to paste it.
 1. Select and set up [destinations][5] for your processed logs.
 
@@ -72,7 +74,7 @@ You can create a pipeline with one of the following methods:
 [3]: /observability_pipelines/sources/
 [4]: /observability_pipelines/processors/
 [5]: /observability_pipelines/destinations/
-[6]: /observability_pipelines/search_syntax/logs/
+[11]: /observability_pipelines/search_syntax/logs/
 
 {{% /tab %}}
 {{% tab "Metrics" %}}
@@ -82,7 +84,7 @@ You can create a pipeline with one of the following methods:
 1. Navigate to [Observability Pipelines][1].
 1. Select the [Metric Tag Governance][2] template.
 1. Set up the [Datadog Agent][3] source.
-1. Add [processors][4] to filter and transform your metrics.
+1. Add [processors][4] to filter and transform your metrics. **Note**: For a pipeline canvas, there is a limit of 25 processors groups and a total of 150 processors.
     - If you want to copy a processor, click the copy icon for that processor and then paste it (`Cmd+V` on Mac, `Ctrl+V` on Windows/Linux).
 1. Set up the [Datadog Metrics][5] destination.
 
@@ -122,13 +124,11 @@ If you want to make changes to your pipeline after you have deployed it, see [Up
 1. After creating the pipeline, [install the Worker][7] to send data through the pipeline.
     - See [Environment Variables][9] for the list of environment variables you need for the different sources, processor, and destinations when you install the Worker.
 
-**Note**: Pipelines created using the API are read-only in the UI. Use the [update a pipeline][8] endpoint to make any changes to an existing pipeline.
+Use the [update a pipeline][8] endpoint to make any changes to an existing pipeline.
 
 See [Advanced Worker Configurations][5] for bootstrapping options.
 
 ## Set up a pipeline with Terraform
-
-<div class="alert alert-info">Creating pipelines using Terraform is in Preview. Fill out the <a href="https://www.datadoghq.com/product-preview/observability-pipelines-api-and-terraform-support/"> form</a> to request access.</div>
 
 <div class="alert alert-warning"><a href="https://github.com/DataDog/terraform-provider-datadog/releases/tag/v3.84.0">Terraform 3.84.0</a> replaces standalone processors with <a href="/observability_pipelines/processors/#processor-groups">processor groups</a> and is a breaking change. If you want to upgrade to Terraform 3.84.0, see the <a href="https://github.com/DataDog/terraform-provider-datadog/pull/3346">PR description</a> for instructions on how to migrate your existing resources.</div>
 
@@ -137,7 +137,7 @@ See [Advanced Worker Configurations][5] for bootstrapping options.
 1. After creating the pipeline, [install the Worker][7] to send data through the pipeline.
     - See [Environment Variables][9] for the list of environment variables you need for the different sources, processor, and destinations when you install the Worker.
 
-Pipelines created using Terraform are read-only in the UI. Use the [datadog_observability_pipeline][10] module to make any changes to an existing pipeline.
+Use the [datadog_observability_pipeline][10] module to make any changes to an existing pipeline.
 
 See [Advanced Worker Configurations][5] for bootstrapping options.
 
@@ -164,7 +164,6 @@ To delete a pipeline in the UI:
 - A pipeline must have at least one destination. If a processor group only has one destination, that destination cannot be deleted.
 - For log pipelines:
   - You can add a total of three destinations for a log pipeline.
-  - A specific destination can only be added once. For example, you cannot add multiple Splunk HEC destinations.
 
 ## Further Reading
 
@@ -183,3 +182,4 @@ To delete a pipeline in the UI:
 [11]: /observability_pipelines/configuration/update_existing_pipelines/?
 [12]: /observability_pipelines/configuration/install_the_worker/
 [13]: /monitors/types/metric/
+[14]: /observability_pipelines/configuration/export_pipeline_configuration/

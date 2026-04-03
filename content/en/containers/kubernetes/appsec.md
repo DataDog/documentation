@@ -1,6 +1,7 @@
 ---
 title: App and API Protection for Kubernetes
 description: Automatically enable App and API Protection for your Kubernetes ingress proxies and gateways
+site_support_id: containers_kubernetes_appsec
 aliases:
     - /agent/kubernetes/appsec
     - /security/application_security/setup/kubernetes/appsec-injector
@@ -46,24 +47,33 @@ App and API Protection for Kubernetes uses a Kubernetes controller (running in t
 ### Supported proxies
 
 - **Envoy Gateway**: Automatically creates `EnvoyExtensionPolicy` resources
-- **Istio**: Automatically creates `EnvoyFilter` resources in the Istio system namespace
+- **Istio**: Automatically creates `EnvoyFilter` resources in the Istio system namespace for Istio-managed Kubernetes Gateway API GatewayClasses
+- **Istio (native Gateway)**: Automatically configures native Istio Gateway resources
 
-More proxies are available via manual installation on the global [setup page][10].
+More proxies are available through manual installation on the global [setup page][10].
 
 ## Limitations
 
+### External mode
 - Requires Datadog Cluster Agent 7.73.0 or later
-- External processor must be manually deployed and scaled
+- Security processor must be manually deployed and scaled
 - Deployed service may require an appropriate network policy:
   - From the proxy pods on the service port
   - To the Datadog Agent for traces
+
+### Sidecar mode
+- Requires Datadog Cluster Agent 7.76.0 or later
+- Each gateway pod runs its own processor instance, which increases per-pod resource usage
+- Datadog Operator does not support sidecar mode configuration
+
+### Proxy compatibility
 - For specific proxy version compatibility, see:
   - [Envoy Gateway compatibility][8]
   - [Istio compatibility][9]
 
 ## Prerequisites
 
-Before enabling App and API Protection for Kubernetes, ensure you have:
+Before enabling App and API Protection for Kubernetes, verify that you have:
 
 - A running Kubernetes cluster (version 1.20 or later)
 - [Datadog Cluster Agent 7.73.0+][1] installed and configured in your cluster
@@ -74,16 +84,21 @@ Before enabling App and API Protection for Kubernetes, ensure you have:
 
 ## How it works
 
-App and API Protection for Kubernetes uses **External Mode**, where a single Application Security processor deployment serves all gateway traffic in your cluster.
+App and API Protection for Kubernetes supports two deployment modes:
 
-### Architecture
+- **External mode** (recommended): A single, centralized Application Security processor deployment serves all gateway traffic in your cluster. This is the preferred approach for most environments.
+- **Sidecar mode**: The Application Security processor runs as a sidecar container injected directly into each gateway pod. No separate processor deployment is needed. See [Set up sidecar mode](#set-up-sidecar-mode) for setup details.
 
--  **External Processor Deployment**: You deploy a centralized Application Security processor as a Kubernetes Deployment with an associated Service.
+The following sections describe the external mode architecture and setup. For sidecar mode, skip to [Set up sidecar mode](#set-up-sidecar-mode).
+
+### Architecture (external mode)
+
+-  **Security Processor Deployment**: You deploy a centralized Application Security processor as a Kubernetes Deployment with an associated Service.
 -  **Automatic Proxy Detection**: The controller watches for supported proxy resources in your cluster using Kubernetes informers.
 -  **Automatic Configuration**: When proxies are detected, the controller creates the necessary configuration:
-   - For Envoy Gateway: Creates `EnvoyExtensionPolicy` resources that reference the external processor service
+   - For Envoy Gateway: Creates `EnvoyExtensionPolicy` resources that reference the security processor service
    - For Istio: Creates `EnvoyFilter` resources in the Istio system namespace
--  **Traffic Processing**: Gateways route traffic to the external processor via the Kubernetes service for security analysis.
+-  **Traffic Processing**: Gateways route traffic to the security processor through the Kubernetes service for security analysis.
 
 ### Benefits
 
@@ -91,17 +106,15 @@ App and API Protection for Kubernetes uses **External Mode**, where a single App
 - **Centralized Management**: One deployment to monitor, scale, and configure
 - **Infrastructure-as-Code**: Manage configuration through Helm values
 - **Non-Invasive**: No application code changes required
-- **Scalable**: Easily add new gateways without additional configuration
+- **Scalable**: Add new gateways without additional configuration
 
 ## Setup
 
-### Step 1: Deploy the external processor
+### Step 1: Deploy the security processor
 
-Deploy the Datadog Application Security external processor service. This processor analyzes traffic forwarded from your gateways.
+Deploy the security processor service, which analyzes traffic forwarded from your gateways. For proxy-specific deployment details, see the [Envoy Gateway][6] or [Istio][7] documentation.
 
-For detailed deployment instructions and configuration options, see the [Envoy Gateway documentation][6] or [Istio documentation][7].
-
-Example processor deployment:
+Example deployment:
 
 ```yaml
 apiVersion: apps/v1
@@ -170,18 +183,16 @@ kubectl apply -f datadog-aap-extproc-service.yaml
 
 ### Step 2: Enable automatic configuration
 
-Enable automatic configuration in the Datadog Cluster Agent and configure it to use your external processor service.
+Point the Datadog Cluster Agent at your security processor service using Helm or the Datadog Operator.
 
-Configure the integration using either Helm or the Datadog Operator.
-
-**Note:** The processor service name (`datadog-aap-extproc-service`) must match the name of the service you deployed in Step 1.
+**Note:** The processor service name (`datadog-aap-extproc-service`) must match the service you deployed in Step 1.
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
 
 This option requires Datadog Operator v1.22.0+.
 
-Add annotations to your `DatadogAgent` resource. The service name annotation is required and must match your external processor service:
+Add annotations to your `DatadogAgent` resource. The service name annotation is required and must match your security processor service:
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -190,10 +201,14 @@ metadata:
   name: datadog
   annotations:
     agent.datadoghq.com/appsec.injector.enabled: "true"
-    agent.datadoghq.com/appsec.injector.processor.service.name: "datadog-aap-extproc-service"  # Required: must match your external processor service name
+    agent.datadoghq.com/appsec.injector.processor.service.name: "datadog-aap-extproc-service"  # Required: must match your security processor service name
     agent.datadoghq.com/appsec.injector.processor.service.namespace: "datadog"
 spec:
-  # ... your existing DatadogAgent configuration
+  override:
+    clusterAgent:
+      env:
+        - name: DD_CLUSTER_AGENT_APPSEC_INJECTOR_MODE
+          value: "external"
 ```
 
 Apply the configuration:
@@ -212,9 +227,10 @@ datadog:
   appsec:
     injector:
       enabled: true
+      mode: "external"
       processor:
         service:
-          name: datadog-aap-extproc-service  # Required: must match your external processor service name
+          name: datadog-aap-extproc-service  # Required: must match your security processor service name
           namespace: datadog                 # Must match the namespace where the service is deployed
 ```
 
@@ -227,15 +243,13 @@ helm upgrade -i datadog-agent datadog/datadog -f values.yaml
 {{% /tab %}}
 {{< /tabs >}}
 
-### Step 3: Verify installation
+### Step 3: Verify the installation
 
-After applying your configuration, verify the Datadog Cluster Agent has started automatic configuration:
+Check that the Cluster Agent detected your proxies:
 
 ```bash
 kubectl logs -n datadog deployment/datadog-cluster-agent | grep appsec
 ```
-
-Look for log messages indicating it has started and detected proxies.
 
 #### Verify proxy configuration
 
@@ -251,11 +265,11 @@ For **Istio**, check that `EnvoyFilter` resources were created:
 kubectl get envoyfilter -n istio-system
 ```
 
-The Datadog Cluster Agent will produce events for each operation done in the cluster whenever it resulted in failure or success.
+The Datadog Cluster Agent produces events for each operation that results in failure or success done in the cluster.
 
 #### Test traffic processing
 
-Send requests through your gateway and verify they appear in the Datadog App and API Protection UI:
+Send requests through your gateway and verify they appear in the Datadog [App and API Protection][5] UI:
 
 1. Navigate to [Security > Application Security][5] in Datadog.
 2. Look for security signals from your gateway traffic.
@@ -268,17 +282,35 @@ Send requests through your gateway and verify they appear in the Datadog App and
 | Helm Parameter | Datadog Operator Annotation | Type | Default | Description |
 |----------------|----------------------------|------|---------|-------------|
 | `enabled` | `agent.datadoghq.com/appsec.injector.enabled` | Boolean | `false` | Enable or disable the integration |
+| `mode` | N/A | String | `""`; when empty, defaults to sidecar | Injection mode: `"sidecar"` or `"external"` |
 | `autoDetect` | `agent.datadoghq.com/appsec.injector.autoDetect` | Boolean | `true` | Automatically detect and configure supported proxies |
-| `proxies` | `agent.datadoghq.com/appsec.injector.proxies` | JSON array | `[]` | Manual list of proxy types to configure. Valid values: `["envoy-gateway"]`, `["istio"]` |
-| `processor.service.name` | `agent.datadoghq.com/appsec.injector.processor.service.name` | String |   | **Required.** Name of the external processor Kubernetes Service |
-| `processor.service.namespace` | `agent.datadoghq.com/appsec.injector.processor.service.namespace` | String | Defaults to the namespace where the Cluster Agent is running | Namespace where the external processor Service is deployed |
+| `proxies` | `agent.datadoghq.com/appsec.injector.proxies` | JSON array | `[]` | Manual list of proxy types to configure. Valid values: `"envoy-gateway"`, `"istio"`, `"istio-gateway"` |
+| `processor.service.name` | `agent.datadoghq.com/appsec.injector.processor.service.name` | String |   | **Required.** Name of the security processor Kubernetes Service |
+| `processor.service.namespace` | `agent.datadoghq.com/appsec.injector.processor.service.namespace` | String | Defaults to the namespace where the Cluster Agent is running | Namespace where the security processor service is deployed |
 | `processor.address` | `agent.datadoghq.com/appsec.injector.processor.address` | String | `{service.name}.{service.namespace}.svc` | Full service address override |
-| `processor.port` | `agent.datadoghq.com/appsec.injector.processor.port` | Integer | `443` | Port of the external processor service |
+| `processor.port` | `agent.datadoghq.com/appsec.injector.processor.port` | Integer | `443` | Port of the security processor service |
+
+### Upgrading from external mode
+
+If you are upgrading from a previous version that used external mode, the default mode has changed to sidecar. To continue using external mode, explicitly set `mode: "external"` in your Helm values:
+
+```yaml
+datadog:
+  appsec:
+    injector:
+      enabled: true
+      mode: "external"
+      processor:
+        service:
+          name: datadog-aap-extproc-service
+          namespace: datadog
+```
 
 ### Proxy types
 
 - `envoy-gateway`: Configures Envoy Gateway using `EnvoyExtensionPolicy` resources
-- `istio`: Configures Istio using global `EnvoyFilter` resources in the Istio system namespace
+- `istio`: Configures Istio using global `EnvoyFilter` resources in the Istio system namespace for Istio-managed Kubernetes Gateway API GatewayClasses
+- `istio-gateway`: Configures native Istio Gateway using `EnvoyFilter` resources
 
 ### Opting out specific resources
 
@@ -296,7 +328,7 @@ spec:
   # ... gateway configuration
 ```
 
-Resources with the `appsec.datadoghq.com/enabled: "false"` label will be ignored. This is useful when you want to:
+Resources with the `appsec.datadoghq.com/enabled: "false"` label are ignored. This is useful when you want to:
 - Manually configure specific gateways
 - Temporarily disable App and API Protection for testing
 - Exclude certain gateways from security monitoring
@@ -305,7 +337,7 @@ Resources with the `appsec.datadoghq.com/enabled: "false"` label will be ignored
 
 ## Troubleshooting
 
-All errors are logged as Kubernetes events. Make sure to check for events on the Gateway or GatewayClass you wish to instrument.
+All errors are logged as Kubernetes events. Check for events on the Gateway or GatewayClass you want to instrument.
 
 ### Automatic configuration not detecting proxies
 
@@ -314,7 +346,7 @@ All errors are logged as Kubernetes events. Make sure to check for events on the
 **Solutions**:
 - Check that `autoDetect` is set to `true` or proxies are manually specified
 - Verify the Cluster Agent logs for proxy detection messages
-- Ensure your proxies are installed and have the expected Kubernetes resources (Gateway, GatewayClass)
+- Verify that your proxies are installed and have the expected Kubernetes resources (Gateway, GatewayClass)
 - Try manually specifying proxy types using the `proxies` parameter
 
 ### EnvoyExtensionPolicy or EnvoyFilter not created
@@ -324,7 +356,7 @@ All errors are logged as Kubernetes events. Make sure to check for events on the
 **Solutions**:
 - Check Cluster Agent logs for RBAC permission errors
 - Verify the Cluster Agent service account has permissions to create `EnvoyExtensionPolicy` or `EnvoyFilter` resources
-- Ensure the processor service exists and is accessible
+- Verify that the processor service exists and is accessible
 - Check for conflicting existing policies or filters
 
 ### Traffic not being processed
@@ -332,21 +364,21 @@ All errors are logged as Kubernetes events. Make sure to check for events on the
 **Symptom**: No security events appear in the Datadog UI.
 
 **Solutions**:
-- Verify the external processor deployment is running: `kubectl get pods -n datadog -l app=datadog-aap-extproc`
+- Verify the security processor deployment is running: `kubectl get pods -n datadog -l app=datadog-aap-extproc`
 - Look for warning logs in your reverse proxies concerning this part of the configuration.
 - Check processor logs for connection errors: `kubectl logs -n datadog -l app=datadog-aap-extproc`
 - Verify the processor service is correctly configured and resolvable
 - Test connectivity from gateway pods to the processor service
-- Ensure [Remote Configuration][4] is enabled in your Datadog Agent
+- Verify that [Remote Configuration][4] is enabled in your Datadog Agent
 
-### External processor connection issues
+### Security processor connection issues
 
-**Symptom**: Gateways cannot reach the external processor.
+**Symptom**: Gateways cannot reach the security processor.
 
 **Solutions**:
 - Verify the processor service name and namespace match your configuration
 - Check for NetworkPolicy rules blocking cross-namespace traffic
-- For Envoy Gateway: Ensure `ReferenceGrant` resources exist for cross-namespace service references
+- For Envoy Gateway: Verify that `ReferenceGrant` resources exist for cross-namespace service references
 - Test DNS resolution from gateway pods: `nslookup datadog-aap-extproc-service.datadog.svc.cluster.local`
 - Verify the processor port configuration matches the service definition
 
@@ -362,6 +394,54 @@ All errors are logged as Kubernetes events. Make sure to check for events on the
   - `gateway.networking.k8s.io/gatewayclasses`
 - Check that the ClusterRoleBinding references the correct service account
 - Make sure you are using the newest version of the Datadog Helm Chart or Operator.
+
+## Set up sidecar mode
+
+In sidecar mode, the security processor runs as a container injected directly into each gateway pod. The Cluster Agent handles injection automatically, so you don't need a separate processor deployment or service.
+
+### When to use sidecar mode
+
+- You prefer not to manage a separate processor deployment and service
+- You want the processor co-located with each gateway pod
+- You are using Istio with the automated configuration (see [Enabling App and API Protection for Istio][7])
+
+### Setup
+
+Add the following to your Helm `values.yaml`. No `processor.service.*` values are needed because the injector handles processor deployment automatically.
+
+```yaml
+datadog:
+  appsec:
+    injector:
+      enabled: true
+      # mode defaults to "sidecar" when omitted
+```
+
+Install or upgrade the Datadog Helm chart (v3.153+):
+
+```bash
+helm upgrade -i datadog-agent datadog/datadog -f values.yaml
+```
+
+<div class="alert alert-warning">
+  Datadog Operator does not support sidecar mode configuration. Use Helm to configure sidecar mode.
+</div>
+
+### Sidecar configuration reference
+
+All sidecar parameters are nested under `datadog.appsec.injector.sidecar` in your Helm `values.yaml`:
+
+| Helm Parameter | Type | Default | Description |
+|----------------|------|---------|-------------|
+| `sidecar.image` | String | `ghcr.io/datadog/dd-trace-go/service-extensions-callout` | Sidecar container image |
+| `sidecar.imageTag` | String | `v2.6.0` | Sidecar container image tag |
+| `sidecar.port` | Integer | `8080` | gRPC listening port for the sidecar processor |
+| `sidecar.healthPort` | Integer | `8081` | Health check port for the sidecar processor |
+| `sidecar.bodyParsingSizeLimit` | Integer | `0` | Maximum request body size in bytes to process. `0` disables body processing. Use `-1` to disable body parsing entirely. |
+| `sidecar.resources.requests.cpu` | String | `10m` | CPU request for the sidecar container |
+| `sidecar.resources.requests.memory` | String | `128Mi` | Memory request for the sidecar container |
+| `sidecar.resources.limits.cpu` | String | `""` | CPU limit for the sidecar container (optional) |
+| `sidecar.resources.limits.memory` | String | `""` | Memory limit for the sidecar container (optional) |
 
 ## Further Reading
 

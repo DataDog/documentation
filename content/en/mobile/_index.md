@@ -101,6 +101,10 @@ You can initiate a page to an individual or team, and also override existing shi
 
 To configure On-Call notifications on your mobile device, see the guide to [Set up your Mobile Device for Datadog On-Call][21].
 
+<div class="alert alert-info">
+If you only need to access On-Call on mobile and want to restrict access to sensitive telemetry data on mobile devices, contact Datadog support.
+</div>
+
 ## Incidents
 
 {{< tabs >}}
@@ -280,7 +284,7 @@ On the Services page, you can view, search and filter all services that you have
 {{% /tab %}}
 {{< /tabs >}}
 
-On the Bits AI home page, you can ask questions about your organization's system health. Bits AI supports natural language querying for logs and APM traces. For more information, see [Chat with Bits AI][27].
+On the Bits AI home page, you can ask questions about your organization's system health. Bits AI supports natural language querying for logs and APM traces. For more information, see [Bits Assistant][27].
 
 ### Bits AI SRE
 {{< tabs >}}
@@ -311,6 +315,9 @@ If you are automatically logged out during the 90 day token period, you will sti
 
 ### Why am I not receiving notifications?
 Check that you have notifications enabled for the Datadog app in your device app settings. If you would like to ensure that notifications bypass Do Not Disturb, check that Critical Alerts is toggled on.
+
+### Will I receive notifications for all organizations that I am signed into?
+Yes, regardless of the organization that you switch to, you receive notifications for all organizations you are signed into. This includes critical push notifications. 
 
 ### What happens if a user is disabled?
 The mobile app token will be invalid and force the user to log out.
@@ -350,6 +357,6 @@ For help with troubleshooting, [contact Datadog support][13]. You can also send 
 [24]: /dashboards/configure/#configuration-actions
 [25]: /logs/explorer/watchdog_insights/
 [26]: /watchdog/insights/?tab=logmanagement
-[27]: /bits_ai/chat_with_bits_ai/
+[27]: /bits_ai/bits_assistant/
 [28]: /bits_ai/bits_ai_sre/
 [29]: /account_management/multi_organization/#custom-sub-domains

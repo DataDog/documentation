@@ -52,28 +52,33 @@ The **Next steps** section of the entity side panel includes the available mitig
 
 ## Configure notifications for Risk Insights
 
+{{< site-region region="gov" >}}<div class="alert alert-danger">Notification rules are not supported for the {{< region-param key="dd_site_name" >}} site.</div>
+{{< /site-region >}}
+
 You can configure Datadog to send you notifications as soon as it detects new threats that match your criteria.
 
 1. Navigate to the **Create a new Risk Insight notification** page. There are two ways to do this:
    - In Datadog, go to the [Risk Insights Explorer][4], then click **Create Notification Rule**.
-   - In Datadog, go to **Cloud SIEM** > [**Settings**][7]. Under **Products**, in the **Cloud SIEM** section, click **Risk Insights**; then, under **Notification rules**, click **New notification rule**.
+   - In Datadog, go to **Cloud SIEM** > **Settings**. Under **Products**, in the **Cloud SIEM** section, click [**Risk Insights**][7]; then, under **Notification rules**, click **New notification rule**.
 1. Under **Define entity attributes**, specify the attributes that should trigger notifications when Datadog detects them on an entity. Beside **Entities matching**, start typing entity attributes and values. As you type, the preview table dynamically displays risk insights that match your criteria.
    <div class="alert alert-info">This step is optional, but if you don't enter any attributes, the notification defaults to sending alerts for all entities.</div>
 1. Under **Set notification conditions**, specify the risk score threshold to trigger notifications for.
 1. Under **Configure notification**, enter a name for the notification, and recipients to send it to.
    - Optionally, you can also turn on re-notifications, and specify the period of time that should pass before Datadog re-notifies the recipients that the risk insight still meets the criteria you specified.
+1. To verify your setup, click **Test Notification** to send a test notification to the configured recipients.
+1. Click **Save Notification**.
 
 ## Risk scoring
 
-An entity's risk score approximates the entity's risk level over the past 14 days of activity.
+An entity's risk score approximates the entity's risk level over the past 14 days of activity. Datadog calculates the risk score from the characteristics of the entity's associated signals, such as the severity level of the signal, and how many times the signal has fired.
 
-The risk score is calculated from the characteristics of the entity's associated signals, such as the severity level of the signal and how many times the signal has fired.
+### View and customize signal score impacts
 
-### Signal's score impact
+Each signal has a score impact based on its severity. Datadog assigns a default number of points to each signal severity. To view or override the default score impacts for your organization, as well as impacts for misconfigurations and identity risks, go to the [Risk Insights settings page][7].
 
-Each signal has a score impact. You can see a signal's score impact in the entity panel.
+If you change the score impacts, Datadog immediately and retroactively applies them to all existing entity risk scores. You can use the updated scores to assess the impact of your changes on your Risk Insight notifications moving forward, so you can reduce the noise and increase the signal they provide.
 
-**Note**: A signal's score impact lasts for 2 weeks, after which the score drops to `0`.
+<div class="alert alert-info">A signal's score impact lasts for 14 days, after which the score drops to <code>0</code>.</div>
 
 | Signal Severity | Number of points |
 |-----------------|------------------|
@@ -82,17 +87,17 @@ Each signal has a score impact. You can see a signal's score impact in the entit
 | `Medium`        | `5`              |
 | `Low` and `Info`| `0`              |
 
-### Entity's severity threshold
+### Entity severity thresholds
 
 The severity threshold of an entity is calculated by adding up the score impact for all signals associated with the entity.
 
-| Entity's Severity Threshold | Sum of the score impact for all related signals  |
-|-----------------------------| -------------------------------------------------|
-| `Critical`                  | Greater than or equal to `100`.                   |
-| `High`                      | Greater than or equal to `50` and less than `100`.|
-| `Medium`                    | Greater than or equal to `25` and less than `50`. |
-| `Low`                       | Greater than or equal to `10` and less than `25`. |
-| `Info`                      | Less than `10`.                                   |
+| Entity's Severity Threshold | Sum of the score impact for all related signals    |
+|-----------------------------|----------------------------------------------------|
+| `Critical`                  | Greater than or equal to `100`.                    |
+| `High`                      | Greater than or equal to `50` and less than `100`. |
+| `Medium`                    | Greater than or equal to `25` and less than `50`.  |
+| `Low`                       | Greater than or equal to `10` and less than `25`.  |
+| `Info`                      | Less than `10`.                                    |
 
 ## Further reading
 

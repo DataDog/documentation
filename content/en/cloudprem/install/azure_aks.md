@@ -5,10 +5,11 @@ aliases:
 description: Learn how to install and configure CloudPrem on Azure AKS
 ---
 
-## Overview
 {{< callout url="https://www.datadoghq.com/product-preview/cloudprem/" btn_hidden="false" header="CloudPrem is in Preview" >}}
   Join the CloudPrem Preview to access new self-hosted log management features.
 {{< /callout >}}
+
+## Overview
 
 This document walks you through the process of configuring your Azure environment and installing CloudPrem on Azure AKS.
 
@@ -337,19 +338,15 @@ metastore:
 # and transforms it into searchable files called "splits" stored in S3.
 #
 # The indexer is horizontally scalable - you can increase `replicaCount` to handle higher indexing throughput.
-# Resource requests and limits should be tuned based on your indexing workload.
-#
-# The default values are suitable for moderate indexing loads of up to 20 MB/s per indexer pod.
+# The `podSize` parameter sets vCPU, memory, and component-specific settings automatically.
+# See the sizing guide for available tiers and their configurations.
 indexer:
   replicaCount: 2
-
-  resources:
-    requests:
-      cpu: "4"
-      memory: "8Gi"
-    limits:
-      cpu: "4"
-      memory: "8Gi"
+  podSize: xlarge
+  persistentVolume:
+    enabled: true
+    storage: 250Gi
+    storageClass: managed-csi
 
    # Searcher configuration
    # The searcher is responsible for executing search queries against the indexed data stored in S3.
@@ -366,14 +363,7 @@ indexer:
    # Memory is particularly important for searchers as they cache frequently accessed index data in memory.
    searcher:
      replicaCount: 2
-
-     resources:
-       requests:
-         cpu: "4"
-         memory: "16Gi"
-       limits:
-         cpu: "4"
-         memory: "16Gi"
+     podSize: xlarge
 {{< /code-block >}}
 
 1. Install or upgrade the Helm chart

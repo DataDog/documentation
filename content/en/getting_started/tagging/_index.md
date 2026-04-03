@@ -62,6 +62,7 @@ Below are Datadog's tagging requirements:
     - Underscores
     - Minuses
     - Colons
+    - Commas
     - Periods
     - Slashes
 
