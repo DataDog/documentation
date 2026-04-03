@@ -5267,16 +5267,11 @@ menu:
       parent: llm_obs_custom_llm_as_a_judge_evaluations
       identifier: llm_obs_custom_llm_as_a_judge_evaluations_template
       weight: 40101
-    - name: Ragas
-      url: llm_observability/evaluations/ragas_evaluations
-      parent: llm_obs_external_evaluations
-      identifier: llm_obs_ragas_evaluations
-      weight: 40201
     - name: NeMo
       url: llm_observability/evaluations/submit_nemo_evaluations
       parent: llm_obs_external_evaluations
       identifier: llm_obs_submit_nemo_evaluations
-      weight: 40202
+      weight: 40201
     - name: DeepEval Evaluations
       url: llm_observability/evaluations/deepeval_evaluations
       parent: llm_obs_external_evaluations
