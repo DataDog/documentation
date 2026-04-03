@@ -72,13 +72,12 @@ To create a Synthetic Monitoring Test Suite:
 
 When you create a test suite, Datadog automatically generates a service level objective (SLO) for it, with no configuration required. By default, the SLO uses a 7-day rolling window with a 99.9% target.
 
-The SLO panel on the [test suite details page][3] shows the current SLO status and error budget. From this view, you can:
+The SLO panel on the Test Suite details page shows the current SLO status and error budget. From this view, you can:
 
 - **[Create alert](#create-an-alert)** to set up alerting when SLO performance degrades significantly. When an alert already exists, hover over the alert indicator to view additional details.
 - **[View details](#view-details)** by clicking the eye icon to open the full SLO details page.
 - **[View contributors](#contributors)** to see which tests are consuming error budget.
 - **[Edit the SLO](#edit-the-service-level-objective)** by clicking the {{< img src="icons/pencil-mdi.svg" inline="true" style="width:16px;">}} pencil icon.
-
 
 {{< img src="synthetics/test_suites/test_suite_slo_panel.png" alt="Test suite SLO panel showing the 7-day rolling window, error budget, Create Alert button, and primary contributors." style="width:100%;">}}
 
@@ -144,4 +143,3 @@ If execution results look incomplete:
 
 [1]: https://app.datadoghq.com/synthetics/tests
 [2]: /synthetics/notifications/
-[3]: https://app.datadoghq.com/synthetics/test-suite/details
