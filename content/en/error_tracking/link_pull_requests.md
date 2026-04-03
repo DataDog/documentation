@@ -32,9 +32,10 @@ With linked pull requests, you can:
 
 To link a pull request to an Error Tracking issue:
 
-1. In [Error Tracking][1], open the issue you want to link.
-1. Copy the issue URL from the Actions dropdown of the issue panel.
-1. Paste the issue URL into the description of your GitHub pull request.
+1. Navigate to [Datadog Error Tracking][1].
+1. Select the issue you want to link to open its side panel.
+1. In the top right corner, click the **Actions** dropdown, then select **Link a Pull Request** to copy the issue URL.
+1. Open your GitHub pull request and paste the issue URL into the description.
 
 {{< img src="error_tracking/pull-request-add.png" alt="Link a pull request to an Error Tracking issue" style="height:300px;" >}}
 
