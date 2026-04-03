@@ -29,21 +29,8 @@ You can also [route logs to Snowflake using the Amazon S3 destination](#route-lo
 1. Select **Policies** in the left side menu.
 1. Click **Create policy**.
 1. Click **JSON** in the **Specify permissions** section.
-1. Copy the below policy and paste it into the **Policy editor**. Replace `<MY_BUCKET_NAME_1_/_MY_OPTIONAL_BUCKET_PATH_1>` with the information for the S3 bucket you created earlier.
-    ```json
-    {
-        "Version": "2012-10-17",
-        "Statement": [
-            {
-                "Sid": "DatadogOPUpload",
-                "Effect": "Allow",
-                "Action": [
-                    "s3:PutObject"
-                ],
-                "Resource": "arn:aws:s3:::<MY_BUCKET_NAME_1_/_MY_OPTIONAL_BUCKET_PATH_1>/*"
-            }
-        ]
-    }
+1. Copy the below policy and paste it into the **Policy editor**. Replace `<MY_BUCKET_NAME_1>/<MY_OPTIONAL_BUCKET_PATH_1>` with the information for the S3 bucket you created earlier.
+    
     ```
 1. Click **Next**.
 1. Enter a descriptive policy name.
