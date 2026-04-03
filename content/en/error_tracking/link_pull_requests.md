@@ -67,7 +67,7 @@ Linked pull requests trigger automatic issue state transitions:
 | Issue is `Resolved` | A linked PR is reopened | Issue moves to `Reviewed` |
 | Issue is `Resolved` | A new open PR is linked to the issue | Issue moves to `Reviewed` |
 
-If an issue is linked to multiple pull requests, the issue moves to `Resolved` only when the last open (non-closed, non-merged) PR is merged. Closing a PR without merging does not resolve the issue.
+<div class="alert alert-info">If an issue is linked to multiple pull requests, the issue moves to `Resolved` only when the last open (non-closed, non-merged) PR is merged. <br><br> Closing a PR without merging does not resolve the issue.</div>
 
 ## Further reading
 
