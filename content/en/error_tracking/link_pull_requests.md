@@ -45,13 +45,11 @@ Datadog detects the issue URL and automatically creates the link.
 
 ### View linked pull requests
 
-Linked pull requests appear in the Error Tracking issue panel.
 
 To view linked pull requests:
-
-1. In [Error Tracking][1], open an issue.
-1. Linked pull requests are displayed in the Actions dropdown of the issue panel.
-
+1. Navigate to [Datadog Error Tracking][1].
+1. Select the issue you want to link to open its side panel.
+1. In the top right corner, click the **Actions** dropdown to see the linked PR under **PULL REQUESTS**.
 {{< img src="error_tracking/pull-request-find.png" alt="View pull requests linked to an Error Tracking issue" style="height:300px;" >}}
 
 ### Unlink a pull request
