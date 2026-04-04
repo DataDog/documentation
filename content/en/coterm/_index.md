@@ -13,7 +13,7 @@ Datadog CoTerm is a CLI utility that can record terminal sessions and add a laye
 
 With CoTerm, you can:
 
-- **Record terminal sessions and analyze these recordings in Datadog**. 
+- **Record terminal sessions and analyze these recordings in Datadog**.
 
    Investigating terminal sessions provides context about how system and security incidents were caused and remediated.
 - **Protect against the accidental execution of dangerous terminal commands**.
@@ -34,9 +34,8 @@ For your security, CoTerm uses [Sensitive Data Scanner][2] to detect and obfusca
 
 You can review your recorded terminal sessions and process data in Datadog:
 
-- **As replays**: Watch [terminal sessions][6] in a video-like player.
+- **As replays**: Watch [terminal sessions][5] in a video-like player, with full-text search over session contents.
 - **As events**: In [Event Explorer][4], each recorded command appears as an event.
-- **As logs**: In [Log Explorer][5], you can perform full-text searches and queries of terminal sessions as multi-line logs.
 
 ## Known limitations
 
@@ -52,5 +51,4 @@ You can review your recorded terminal sessions and process data in Datadog:
 [2]: /security/sensitive_data_scanner/
 [3]: /incident_response/case_management/
 [4]: http://app.datadoghq.com/event/explorer?query=source%3Acoterm_process_info
-[5]: https://app.datadoghq.com/logs?query=service%3Addcoterm
-[6]: https://app.datadoghq.com/terminal-streams
+[5]: https://app.datadoghq.com/terminal-streams
