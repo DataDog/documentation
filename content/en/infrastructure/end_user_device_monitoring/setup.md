@@ -11,7 +11,7 @@ further_reading:
 End User Device Monitoring is in Preview. To enroll, click <b>Request Access</b>.
 {{< /callout >}}
 
-This page explains how to configure the Datadog Agent to enable End User Device Monitoring.
+Once invited to the Preview, refer to this page, which explains how to configure the Datadog Agent to enable End User Device Monitoring.
 
 ## Supported platforms
 
@@ -30,6 +30,8 @@ This page explains how to configure the Datadog Agent to enable End User Device 
 {{< code-block lang="yaml" >}}
 infrastructure_mode: end_user_device
 {{< /code-block >}}
+
+Note: Do not skip this step. Without this parameter, you may be subject to host billing. 
 
 1. Configure [Network Path][10] to see the hop-by-hop view of a traceroute from the End User Device to a specific destination.
 
