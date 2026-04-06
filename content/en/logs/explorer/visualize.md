@@ -34,7 +34,7 @@ For a list of individual logs, choose which information of interest to display a
 
 With the **Options** button, control the **Content** height and display in the table per log.
 
-{{< img src="logs/explorer/list_view_controls.mp4" alt="Configuring the display table" video=true style="width:80%;">}}
+{{< img src="logs/explorer/list_view_controls.mp4" alt="Configuring columns and display options" video=true style="width:80%;">}}
 
 The default **sort** for logs in the list visualization is by timestamp, with the most recent logs on top. This is the fastest and therefore recommended sorting method for general purposes. Surface logs with lowest or highest value for a measure first, or sort your logs lexicographically for the unique value of facet, ordering a column according to that facet.
 
