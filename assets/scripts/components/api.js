@@ -174,6 +174,8 @@ if (dataVersionToggles.length) {
 // Date-based API version selector (x-datadog-api-versioning / x-datadog-api-versioned)
 // Uses event delegation so it works regardless of DOM load order or collapsed sections.
 document.addEventListener('click', (e) => {
+    alert("b")
+
     const tab = e.target.closest('.js-api-date-version-tab');
     if (!tab) return;
 
@@ -184,6 +186,8 @@ document.addEventListener('click', (e) => {
     const operationId = tab.dataset.operationId;
 
     if (!selectedVersion || !operationId) return;
+
+    alert("a")
 
     // Update active state on all tabs for this operation
     document.querySelectorAll(`.js-api-date-version-tab[data-operation-id="${operationId}"]`).forEach((t) => {
