@@ -2997,11 +2997,6 @@ menu:
       identifier: end_user_device_monitoring
       parent: infrastructure_heading
       weight: 40000
-    - name: Setup
-      url: infrastructure/end_user_device_monitoring/setup/
-      identifier: end_user_device_monitoring_setup
-      parent: end_user_device_monitoring
-      weight: 1
     - name: Hosts
       url: infrastructure/hostmap/
       identifier: hosts

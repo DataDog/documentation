@@ -281,7 +281,7 @@ unsupported_sites:
   agentic_onboarding: [gov]
   agentless_scanning: [gov] # docs page
   agentless-scanning: [gov] # api page
-  amazon_event_bridge: [gov]
+  amazon-event-bridge: [gov]
   apm_processing_pipelines: [gov]
   apm_recommendations: [gov]
   app_builder: [gov]
@@ -328,6 +328,7 @@ unsupported_sites:
   high_availability_datadog_agent: [gov]
   iac_security: [gov]
   incident_ai: [gov]
+  jetbrains-ides: [gov]
   inferred_entity_remapping_rules: [gov]
   internal_developer_portal: [gov]
   jira_error_tracking: [gov]
