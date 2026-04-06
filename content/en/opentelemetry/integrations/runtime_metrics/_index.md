@@ -172,35 +172,35 @@ The following tables list the Datadog runtime metrics that are supported through
 
 | Datadog metric | Description |  OpenTelemetry metric |
 | --- | --- | --- |
-| `jvm.heap_memory` | The total Java heap memory used. | `process.runtime.jvm.memory.usage` <br> `jvm.memory.used` |
-| `jvm.heap_memory_committed` | The total Java heap memory committed to be used. | `process.runtime.jvm.memory.committed` <br> `jvm.memory.committed` |
-| `jvm.heap_memory_init` | The initial Java heap memory allocated. | `process.runtime.jvm.memory.init` <br> `jvm.memory.init` |
-| `jvm.heap_memory_max` | The maximum Java heap memory available. | `process.runtime.jvm.memory.limit` <br> `jvm.memory.limit` |
-| `jvm.non_heap_memory` | The total Java non-heap memory used. Non-heap memory is: `Metaspace + CompressedClassSpace + CodeCache`. | `process.runtime.jvm.memory.usage` <br> `jvm.memory.used` |
-| `jvm.non_heap_memory_committed` | The total Java non-heap memory committed to be used. | `process.runtime.jvm.memory.committed` <br> `jvm.memory.committed` |
-| `jvm.non_heap_memory_init` | The initial Java non-heap memory allocated. | `process.runtime.jvm.memory.init` <br> `jvm.memory.init` |
-| `jvm.non_heap_memory_max` | The maximum Java non-heap memory available. | `process.runtime.jvm.memory.limit` <br> `jvm.memory.limit` |
-| `jvm.gc.old_gen_size` | The current Java heap memory usage of the Old Generation memory pool. | `process.runtime.jvm.memory.usage` <br> `jvm.memory.used` |
-| `jvm.gc.eden_size` | The current Java heap memory usage of the Eden memory pool. | `process.runtime.jvm.memory.usage` <br> `jvm.memory.used` |
-| `jvm.gc.survivor_size` | The current Java heap memory usage of the Survivor memory pool. | `process.runtime.jvm.memory.usage` <br> `jvm.memory.used` |
-| `jvm.gc.metaspace_size` | The current Java non-heap memory usage of the Metaspace memory pool. | `process.runtime.jvm.memory.usage` <br> `jvm.memory.used` |
-| `jvm.thread_count` | The number of live threads. | `process.runtime.jvm.threads.count` <br> `jvm.thread.count` |
-| `jvm.loaded_classes` | Number of classes currently loaded. | `process.runtime.jvm.classes.current_loaded` <br> `jvm.class.count` |
+| `jvm.heap_memory` | The total Java heap memory used. | `jvm.memory.heap.used` |
+| `jvm.heap_memory_committed` | The total Java heap memory committed to be used. | `jvm.memory.heap.committed` |
+| `jvm.heap_memory_init` | The initial Java heap memory allocated. | `jvm.memory.heap.init` |
+| `jvm.heap_memory_max` | The maximum Java heap memory available. | `jvm.memory.heap.max` |
+| `jvm.non_heap_memory` | The total Java non-heap memory used. Non-heap memory is: `Metaspace + CompressedClassSpace + CodeCache`. | `jvm.memory.nonheap.used` |
+| `jvm.non_heap_memory_committed` | The total Java non-heap memory committed to be used. | `jvm.memory.nonheap.committed` |
+| `jvm.non_heap_memory_init` | The initial Java non-heap memory allocated. | `jvm.memory.nonheap.init` |
+| `jvm.non_heap_memory_max` | The maximum Java non-heap memory available. | `jvm.memory.nonheap.max` |
+| `jvm.gc.old_gen_size` | The current Java heap memory usage of the Old Generation memory pool. | `process.runtime.jvm.memory.usage` <br> `jvm.memory.used` <br> `jvm.memory.pool.used` |
+| `jvm.gc.eden_size` | The current Java heap memory usage of the Eden memory pool. | `process.runtime.jvm.memory.usage` <br> `jvm.memory.used` <br> `jvm.memory.pool.used` |
+| `jvm.gc.survivor_size` | The current Java heap memory usage of the Survivor memory pool. | `process.runtime.jvm.memory.usage` <br> `jvm.memory.used` <br> `jvm.memory.pool.used` |
+| `jvm.gc.metaspace_size` | The current Java non-heap memory usage of the Metaspace memory pool. | `process.runtime.jvm.memory.usage` <br> `jvm.memory.used` <br> `jvm.memory.pool.used` |
+| `jvm.thread_count` | The number of live threads. | `jvm.threads.count` |
+| `jvm.loaded_classes` | Number of classes currently loaded. | `process.runtime.jvm.classes.current_loaded` <br> `jvm.class.count` <br> `jvm.classes.loaded` |
 | `jvm.cpu_load.system` | Recent CPU utilization for the whole system. | `process.runtime.jvm.system.cpu.utilization` <br> `jvm.system.cpu.utilization` |
 | `jvm.cpu_load.process` | Recent CPU utilization for the process. | `process.runtime.jvm.cpu.utilization` <br> `jvm.cpu.recent_utilization` |
-| `jvm.buffer_pool.direct.used` | Measure of memory used by direct buffers. | `process.runtime.jvm.buffer.usage` <br> `jvm.buffer.memory.usage` |
-| `jvm.buffer_pool.direct.count` | Number of direct buffers in the pool. | `process.runtime.jvm.buffer.count`<br> `jvm.buffer.count` |
-| `jvm.buffer_pool.direct.limit` | Measure of total memory capacity of direct buffers. | `process.runtime.jvm.buffer.limit` <br> `jvm.buffer.memory.limit` |
-| `jvm.buffer_pool.mapped.used` | Measure of memory used by mapped buffers. | `process.runtime.jvm.buffer.usage`<br> `jvm.buffer.memory.usage` |
-| `jvm.buffer_pool.mapped.count` | Number of mapped buffers in the pool. | `process.runtime.jvm.buffer.count`<br> `jvm.buffer.count` |
-| `jvm.buffer_pool.mapped.limit` | Measure of total memory capacity of mapped buffers. | `process.runtime.jvm.buffer.limit` <br> `jvm.buffer.memory.limit` |
+| `jvm.buffer_pool.direct.used` | Measure of memory used by direct buffers. | `process.runtime.jvm.buffer.usage` <br> `jvm.buffer.memory.used` |
+| `jvm.buffer_pool.direct.count` | Number of direct buffers in the pool. | `process.runtime.jvm.buffer.count` <br> `jvm.buffer.count` |
+| `jvm.buffer_pool.direct.capacity` | Measure of total memory capacity of direct buffers. | `jvm.buffer.memory.limit` |
+| `jvm.buffer_pool.mapped.used` | Measure of memory used by mapped buffers. | `process.runtime.jvm.buffer.usage` <br> `jvm.buffer.memory.used` |
+| `jvm.buffer_pool.mapped.count` | Number of mapped buffers in the pool. | `process.runtime.jvm.buffer.count` <br> `jvm.buffer.count` |
+| `jvm.buffer_pool.mapped.capacity` | Measure of total memory capacity of mapped buffers. | `jvm.buffer.memory.limit` |
 | `jvm.gc.parnew.time` | The approximate accumulated garbage collection time elapsed. | N/A |
 | `jvm.gc.cms.count` | The total number of garbage collections that have occurred. | N/A |
-| `jvm.gc.major_collection_count` | The rate of major garbage collections. Set `new_gc_metrics: true` to receive this metric. | N/A |
-| `jvm.gc.minor_collection_count` | The rate of minor garbage collections. Set `new_gc_metrics: true` to receive this metric. | N/A |
-| `jvm.gc.major_collection_time` | The fraction of time spent in major garbage collection. Set `new_gc_metrics: true` to receive this metric. | N/A |
-| `jvm.gc.minor_collection_time` | The fraction of time spent in minor garbage collection. Set `new_gc_metrics: true` to receive this metric. | N/A |
-| `jvm.os.open_file_descriptors` | The number of open file descriptors. | N/A |
+| `jvm.gc.major_collection_count` | The rate of major garbage collections. Set `new_gc_metrics: true` to receive this metric. | `jvm.gc.collections.count` |
+| `jvm.gc.minor_collection_count` | The rate of minor garbage collections. Set `new_gc_metrics: true` to receive this metric. | `jvm.gc.collections.count` |
+| `jvm.gc.major_collection_time` | The fraction of time spent in major garbage collection. Set `new_gc_metrics: true` to receive this metric. | `jvm.gc.collections.elapsed` |
+| `jvm.gc.minor_collection_time` | The fraction of time spent in minor garbage collection. Set `new_gc_metrics: true` to receive this metric. | `jvm.gc.collections.elapsed` |
+| `jvm.os.open_file_descriptors` | The number of open file descriptors. | `jvm.file_descriptor.count` |
 
 {{% /tab %}}
 
@@ -209,8 +209,8 @@ The following tables list the Datadog runtime metrics that are supported through
 | Datadog metric | Description |  OpenTelemetry metric |
 | --- | --- | --- |
 | `runtime.go.num_goroutine` | Number of goroutines spawned. | `process.runtime.go.goroutines` |
-| `runtime.go.num_cgo_call` | Number of CGO calls made. |`process.runtime.go.cgo.calls` |
-| `runtime.go.mem_stats.lookups` | Number of pointer lookups performed by the runtime. | `process.runtime.go.mem.lookups` |
+| `runtime.go.num_cgo_call` | Number of CGO calls made. | `process.runtime.go.cgo.calls` |
+| `runtime.go.mem_stats.lookups` | Number of pointer lookups performed by the runtime. | N/A |
 | `runtime.go.mem_stats.heap_alloc` | Bytes of allocated heap objects. | `process.runtime.go.mem.heap_alloc` |
 | `runtime.go.mem_stats.heap_sys` | Bytes of heap memory obtained from the operating system. | `process.runtime.go.mem.heap_sys` |
 | `runtime.go.mem_stats.heap_idle` | Bytes in idle (unused) spans. | `process.runtime.go.mem.heap_idle` |
@@ -219,6 +219,11 @@ The following tables list the Datadog runtime metrics that are supported through
 | `runtime.go.mem_stats.heap_objects` | Number of allocated heap objects. | `process.runtime.go.mem.heap_objects` |
 | `runtime.go.mem_stats.pause_total_ns` | Cumulative nanoseconds in garbage collection (GC). | `process.runtime.go.gc.pause_total_ns` |
 | `runtime.go.mem_stats.num_gc` | Number of completed GC cycles. | `process.runtime.go.gc.count` |
+| `runtime.go.metrics.gc_gomemlimit.bytes` | A soft memory limit to the Go runtime. | `go.memory.limit` |
+| `runtime.go.metrics.gc_heap_goal.bytes` | Heap size target for the end of the GC cycle. | `go.memory.gc.goal` |
+| `runtime.go.metrics.sched_goroutines.goroutines` | Number of live goroutines. | `go.goroutine.count` |
+| `runtime.go.metrics.sched_gomaxprocs.threads` | The current GOMAXPROCS setting. | `go.processor.limit` |
+| `runtime.go.metrics.gc_gogc.percent` | The current GOGC setting. | `go.config.gogc` |
 | `runtime.go.num_cpu` | Number of CPUs detected by the runtime. | N/A |
 | `runtime.go.mem_stats.alloc` | Bytes of allocated heap objects. | N/A |
 | `runtime.go.mem_stats.total_alloc` | Cumulative bytes allocated for heap objects. | N/A |
@@ -242,6 +247,7 @@ The following tables list the Datadog runtime metrics that are supported through
 | `runtime.go.gc_stats.pause_quantiles.25p` | Distribution of GC pause times: 25th percentile. | N/A |
 | `runtime.go.gc_stats.pause_quantiles.50p` | Distribution of GC pause times: 50th percentile. | N/A |
 | `runtime.go.gc_stats.pause_quantiles.75p` | Distribution of GC pause times: 75th percentile. | N/A |
+| `runtime.go.gc_stats.pause_quantiles.95p` | Distribution of GC pause times: 95th percentile. | N/A |
 | `runtime.go.gc_stats.pause_quantiles.max` | Distribution of GC pause times: maximum values. | N/A |
 
 {{% /tab %}}
@@ -250,21 +256,21 @@ The following tables list the Datadog runtime metrics that are supported through
 
 | Datadog metric | Description |  OpenTelemetry metric |
 | --- | --- | --- |
-| `runtime.dotnet.threads.contention_count` | The number of times a thread stopped to wait on a lock. | `process.runtime.dotnet.`<br>`monitor.lock_contention.count` |
-| `runtime.dotnet.exceptions.count` | The number of first-chance exceptions. | `process.runtime.dotnet.`<br>`exceptions.count` |
-| `runtime.dotnet.gc.size.gen0` | The size of the gen 0 heap. | `process.runtime.dotnet.`<br>`gc.heap.size` |
-| `runtime.dotnet.gc.size.gen1` | The size of the gen 1 heap. | `process.runtime.dotnet.`<br>`gc.heap.size` |
-| `runtime.dotnet.gc.size.gen2` | The size of the gen 2 heap. | `process.runtime.dotnet.`<br>`gc.heap.size` |
-| `runtime.dotnet.gc.size.loh` | The size of the large object heap. | `process.runtime.dotnet.`<br>`gc.heap.size` |
-| `runtime.dotnet.gc.count.gen0` | The number of gen 0 garbage collections. | `process.runtime.dotnet.`<br>`gc.collections.count` |
-| `runtime.dotnet.gc.count.gen1` | The number of gen 1 garbage collections. | `process.runtime.dotnet.`<br>`gc.collections.count` |
-| `runtime.dotnet.gc.count.gen2` | The number of gen 2 garbage collections. | `process.runtime.dotnet.`<br>`gc.collections.count` |
-| `runtime.dotnet.cpu.system` | The number of milliseconds executing in the kernel. | N/A |
-| `runtime.dotnet.cpu.user` | The number of milliseconds executing outside the kernel. | N/A |
+| `runtime.dotnet.threads.contention_count` | The number of times a thread stopped to wait on a lock. | N/A |
+| `runtime.dotnet.exceptions.count` | The number of first-chance exceptions. | N/A |
+| `runtime.dotnet.gc.size.gen0` | The size of the gen 0 heap. | `dotnet.gc.last_collection.heap.size` <br> `process.runtime.dotnet.gc.heap.size` |
+| `runtime.dotnet.gc.size.gen1` | The size of the gen 1 heap. | `dotnet.gc.last_collection.heap.size` <br> `process.runtime.dotnet.gc.heap.size` |
+| `runtime.dotnet.gc.size.gen2` | The size of the gen 2 heap. | `dotnet.gc.last_collection.heap.size` <br> `process.runtime.dotnet.gc.heap.size` |
+| `runtime.dotnet.gc.size.loh` | The size of the large object heap. | `dotnet.gc.last_collection.heap.size` <br> `process.runtime.dotnet.gc.heap.size` |
+| `runtime.dotnet.gc.count.gen0` | The number of gen 0 garbage collections. | `dotnet.gc.collections` <br> `process.runtime.dotnet.gc.collections.count` |
+| `runtime.dotnet.gc.count.gen1` | The number of gen 1 garbage collections. | `dotnet.gc.collections` <br> `process.runtime.dotnet.gc.collections.count` |
+| `runtime.dotnet.gc.count.gen2` | The number of gen 2 garbage collections. | `dotnet.gc.collections` <br> `process.runtime.dotnet.gc.collections.count` |
+| `runtime.dotnet.cpu.system` | The number of milliseconds executing in the kernel. | `dotnet.process.cpu.time` |
+| `runtime.dotnet.cpu.user` | The number of milliseconds executing outside the kernel. | `dotnet.process.cpu.time` |
 | `runtime.dotnet.cpu.percent` | The percentage of total CPU used by the application. | N/A |
 | `runtime.dotnet.mem.committed` | Memory usage. | N/A |
-| `runtime.dotnet.threads.count` | The number of threads. | N/A |
-| `runtime.dotnet.threads.workers_count` | The number of workers in the threadpool. (.NET Core only) | N/A |
+| `runtime.dotnet.threads.count` | The number of threads. | `process.thread.count` |
+| `runtime.dotnet.threads.workers_count` | The number of workers in the threadpool. (.NET Core only) | `process.runtime.dotnet.thread_pool.threads.count` |
 | `runtime.dotnet.threads.contention_time` | The cumulated time spent by threads waiting on a lock. (.NET Core only) | N/A |
 | `runtime.dotnet.gc.memory_load` | The percentage of the total memory used by the process. The garbage collection (GC) changes its behavior when this value gets above 85. (.NET Core only) | N/A |
 | `runtime.dotnet.gc.pause_time` | The amount of time the GC paused the application threads. (.NET Core only) | N/A |
