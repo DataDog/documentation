@@ -22,114 +22,102 @@ further_reading:
 To try the preview of App and API Protection for Istio, use the following setup instructions.
 {{< /callout >}}
 
-You can enable App and API Protection for your services within an Istio service mesh. The Datadog Istio integration allows Datadog to inspect and protect your traffic for threat detection and blocking directly at the edge of your infrastructure. This can be applied at the Istio Ingress Gateway or at the sidecar level.
+You can enable App and API Protection within an Istio service mesh to inspect and protect traffic at the edge of your infrastructure. This works at the Istio Ingress Gateway or at the sidecar level.
 
 ## Prerequisites
 
-Before you begin, ensure you have the following:
+Before you begin, verify that you have the following:
 
 - A running Kubernetes cluster with [Istio][1] installed.
 - The [Datadog Agent is installed and configured][2] in your Kubernetes cluster.
-  - Ensure [Remote Configuration][3] is enabled and configured to enable blocking attackers through the Datadog UI.
-  - Ensure [APM is enabled][4] in the Agent. *This allows the external processor service to send its own traces to the Agent.*
-    - Optionally, enable the [Cluster Agent Admission Controller][5] to automatically inject the Datadog Agent host information to the App and API Protection External Processor service.
+  - Enable and configure [Remote Configuration][3] to enable blocking attackers through the Datadog UI.
+  - Enable [APM][4] in the Agent. This allows the security processor service to send its own traces to the Agent.
+    - Optionally, enable the [Cluster Agent Admission Controller][5] to automatically inject the Datadog Agent host information to the App and API Protection security processor service.
 
 ## Automated configuration with App and API Protection for Kubernetes
 
 <div class="alert alert-info">
-  App and API Protection for Kubernetes automatically configures your Istio ingress gateways for Application Security monitoring. This is the recommended approach for most users as it eliminates manual configuration and simplifies operations.
+  <p>Automated configuration uses <strong>sidecar mode</strong>: the security processor runs as a container injected into your Istio gateway pods. No separate processor deployment is needed.</p>
+  <p>For <strong>external mode</strong> setup, see <a href="/containers/kubernetes/appsec/">App and API Protection for Kubernetes</a>.</p>
 </div>
 
-Instead of manually deploying the external processor and configuring `EnvoyFilter` (as shown in the manual configuration section below), enable App and API Protection for Kubernetes automatic configuration to handle this for you.
+### Setup
 
-### When to use automatic configuration
+Enable automatic configuration using Helm or the Datadog Operator.
 
-Use automatic configuration if you want to:
-- Automatically configure Istio ingress gateways for Application Security
-- Simplify deployment and ongoing maintenance
-- Manage configuration through infrastructure-as-code with Helm
-- Centralize Application Security processor management
+{{< tabs >}}
+{{% tab "Helm" %}}
 
-### Quick setup
+Add the following to your `values.yaml`:
 
-1. **Deploy the external processor** using the deployment manifest shown in [Step 1](#step-1-deploy-the-datadog-external-processor-service) below.
-2. **Enable automatic configuration** using Helm or the Datadog Operator.
+```yaml
+datadog:
+  appsec:
+    injector:
+      enabled: true
+      # mode defaults to "sidecar" when omitted
+```
 
-   {{< tabs >}}
-   {{% tab "Datadog Operator" %}}
+Install or upgrade the Datadog Helm chart:
 
-   Add annotations to your `DatadogAgent` resource. The service name annotation is required and must match your external processor service:
+```bash
+helm upgrade -i datadog-agent datadog/datadog -f values.yaml
+```
 
-   ```yaml
-   apiVersion: datadoghq.com/v2alpha1
-   kind: DatadogAgent
-   metadata:
-     name: datadog
-     annotations:
-       agent.datadoghq.com/appsec.injector.enabled: "true"
-       agent.datadoghq.com/appsec.injector.processor.service.name: "datadog-aap-extproc-service"  # Required
-       agent.datadoghq.com/appsec.injector.processor.service.namespace: "datadog"
-   spec:
-     # ... your existing DatadogAgent configuration
-   ```
+{{% /tab %}}
+{{% tab "Datadog Operator" %}}
 
-   Apply the configuration:
+Add the annotation to your `DatadogAgent` resource to enable the feature, and set the mode using `spec.override.clusterAgent.env`:
 
-   ```bash
-   kubectl apply -f datadog-agent.yaml
-   ```
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+  annotations:
+    agent.datadoghq.com/appsec.injector.enabled: "true"
+spec:
+  override:
+    clusterAgent:
+      env:
+        - name: DD_CLUSTER_AGENT_APPSEC_INJECTOR_MODE
+          value: "sidecar"
+```
 
-   {{% /tab %}}
-   {{% tab "Helm" %}}
+Apply with:
 
-   Add the following to your `values.yaml`:
+```bash
+kubectl apply -f datadog-agent.yaml
+```
 
-   ```yaml
-   datadog:
-     appsec:
-       injector:
-         enabled: true
-         processor:
-           service:
-             name: datadog-aap-extproc-service  # Required: must match your external processor service name
-             namespace: datadog                 # Must match the namespace where the service is deployed
-   ```
+{{% /tab %}}
+{{< /tabs >}}
 
-   Install or upgrade the Datadog Helm chart:
+After you enable this, the Datadog Cluster Agent:
+- Injects a sidecar processor container into your Istio gateway pods
+- Creates `EnvoyFilter` resources to route traffic to the co-located sidecar processor
+- Monitors for new Istio gateways and configures them automatically
 
-   ```bash
-   helm upgrade -i datadog-agent datadog/datadog -f values.yaml
-   ```
+**Verify** the configuration by checking for created filters:
+```bash
+kubectl get envoyfilter -n istio-system
+```
 
-   {{% /tab %}}
-   {{< /tabs >}}
-
-   Once enabled, the Datadog Cluster Agent:
-   - Detects your Istio installation
-   - Creates `EnvoyFilter` resources in the Istio system namespace (typically `istio-system`)
-   - Configures the filters to route traffic to the external processor
-4. **Verify** the configuration by checking for created filters:
-   ```bash
-   kubectl get envoyfilter -n istio-system
-   ```
-
-For detailed configuration options, advanced features, and troubleshooting, see [App and API Protection for Kubernetes](/containers/kubernetes/appsec).
+For sidecar resource tuning and troubleshooting, see [App and API Protection for Kubernetes][12].
 
 ## Manual configuration (alternative)
 
-If you prefer manual configuration or need fine-grained control over specific gateways or sidecars, follow the instructions below. Enabling the threat detection for Istio involves two main steps:
-1. Deploying the Datadog External Processor service.
+For fine-grained control over specific gateways or sidecars, use the manual setup below. This involves two steps:
+1. Deploying the Datadog security processor service.
 2. Configuring an `EnvoyFilter` to direct traffic from your Istio Ingress Gateway (or sidecars) to this service.
 
-### Step 1: Deploy the Datadog External Processor Service
+### Step 1: Deploy the Datadog security processor service
 
-This service is a gRPC server that Envoy communicates with to have requests and responses analyzed by App and API Protection.
+This gRPC server receives requests and responses from Envoy for App and API Protection analysis.
 
-Create a Kubernetes Deployment and Service for the Datadog External Processor. It's recommended to deploy this service in a namespace accessible by your Istio Ingress Gateway.
+Deploy it in a namespace accessible by your Istio Ingress Gateway. The Docker image is on the [Datadog Go tracer GitHub Registry][6].
 
-The Datadog External Processor Docker image is available on the [Datadog Go tracer GitHub Registry][6].
-
-Here is an example manifest (`datadog-aap-extproc-service.yaml`):
+Example manifest (`datadog-aap-extproc-service.yaml`):
 
 ```yaml
 apiVersion: apps/v1
@@ -154,13 +142,13 @@ spec:
         image: ghcr.io/datadog/dd-trace-go/service-extensions-callout:v2.2.2 # Replace with the latest released version
         ports:
         - name: grpc
-          containerPort: 443 # Default gRPC port for the external processor
+          containerPort: 443 # Default gRPC port for the security processor
         - name: health
           containerPort: 80  # Default health check port
         env:
         # ---- Optional: Agent Configuration ----
         # If you enabled the Cluster Agent Admission Controller, you can skip this section as the Agent host information is automatically injected.
-        # Otherwise, configure the address of your Datadog Agent for the external processor
+        # Otherwise, configure the address of your Datadog Agent for the security processor
         - name: DD_AGENT_HOST
           value: "<your-datadog-agent-service>.<your-datadog-agent-namespace>.svc.cluster.local"
         - name: DD_TRACE_AGENT_PORT # Optional if your Agent's trace port is the default 8126
@@ -197,9 +185,9 @@ spec:
   type: ClusterIP
 ```
 
-#### Configuration options for the External Processor
+#### Configuration options for the security processor
 
-The Datadog External Processor exposes some settings:
+The Datadog security processor exposes some settings:
 
 | Environment variable                      | Default value       | Description                                                                                                                              |
 |-------------------------------------------|---------------------|------------------------------------------------------------------------------------------------------------------------------------------|
@@ -211,33 +199,31 @@ The Datadog External Processor exposes some settings:
 | `DD_SERVICE`                              | `serviceextensions` | Service name shown in the Datadog UI.                                                                                                    |
 
 
-Configure the connection from the external processor to the Datadog Agent using these environment variables:
+Configure the connection from the security processor to the Datadog Agent using these environment variables:
 
 | Environment variable                   | Default value | Description                                                                      |
 |----------------------------------------|---------------|----------------------------------------------------------------------------------|
 | `DD_AGENT_HOST`                        | `localhost`   | Hostname or IP of your Datadog Agent.                                            |
 | `DD_TRACE_AGENT_PORT`                  | `8126`        | Port of the Datadog Agent for trace collection.                                  |
 
-The External Processor is built on top of the [Datadog Go Tracer][7] and inherits all of its environment variables. See [Configuring the Go Tracing Library][8] and [App and API Protection Library Configuration][9].
+The security processor is built on top of the [Datadog Go Tracer][7] and inherits all of its environment variables. See [Configuring the Go Tracing Library][8] and [App and API Protection Library Configuration][9].
 
-<div class="alert alert-danger">
-  <strong>Note:</strong> As the Datadog External Processor is built on top of the Datadog Go Tracer, it generally follows the same release process as the tracer, and its Docker images are tagged with the corresponding tracer version (for example, <code>v2.2.2</code>). In some cases, early release versions might be published between official tracer releases, and these images are tagged with a suffix such as <code>-docker.1</code>.
+<div class="alert alert-info">
+  Because the Datadog security processor is built on top of the Datadog Go tracer, it generally follows the same release process as the tracer, and its Docker images are tagged with the corresponding tracer version (for example, <code>v2.2.2</code>). In some cases, early release versions might be published between official tracer releases, and these images are tagged with a suffix such as <code>-docker.1</code>.
 </div>
 
 ### Step 2: Configure an EnvoyFilter
 
-Next, create an `EnvoyFilter` resource to instruct your Istio Ingress Gateway or specific sidecar proxies to send traffic to the `datadog-aap-extproc-service` you deployed. This filter tells Envoy how to connect to the external processor and what traffic to send.
-
-Choose the appropriate configuration based on whether you want to apply App and API Protection at the Ingress Gateway or directly on your application's sidecar proxies.
+Create an `EnvoyFilter` resource to send traffic from your Istio Ingress Gateway or sidecar proxies to the `datadog-aap-extproc-service` you deployed.
 
 {{< tabs >}}
 {{% tab "Istio Ingress Gateway" %}}
 
-This configuration applies App and API Protection to all traffic passing through your Istio Ingress Gateway. This is a common approach to protect all North-South traffic entering your service mesh.
+Applies App and API Protection to all traffic through your Istio Ingress Gateway (North-South traffic).
 
-Below is an example manifest (`datadog-aap-gateway-filter.yaml`) that targets the default Istio Ingress Gateway that typically runs in the `istio-system` namespace with the label `istio: ingressgateway`.
+The following example manifest (`datadog-aap-gateway-filter.yaml`) targets the default Istio Ingress Gateway in the `istio-system` namespace with the label `istio: ingressgateway`.
 
-**Note**: Please read the provided example configuration carefully and adapt it to match your infrastructure and environment. You can find more configuration options available in the [Envoy external processor documentation][10].
+**Note**: Read the provided example configuration carefully and adapt it to match your infrastructure and environment. You can find more configuration options in the [Envoy security processor documentation](https://www.envoyproxy.io/docs/envoy/latest/api-v3/extensions/filters/http/ext_proc/v3/ext_proc.proto).
 
 ```yaml
 apiVersion: networking.istio.io/v1alpha3
@@ -283,7 +269,7 @@ spec:
               #timeout: 0s
 
             ## Optional: Enable fail open mode. Default is false.
-            ## Normally, if the external processor fails or times out, the filter fails and Envoy
+            ## Normally, if the security processor fails or times out, the filter fails and Envoy
             ## returns a 5xx error to the downstream client. Setting this to true allows requests
             ## to continue without error if a failure occurs.
             failure_mode_allow: true # It won't cause 5xx error if an error occurs.
@@ -295,27 +281,27 @@ spec:
               response_header_mode: SEND
 
             ## Optional for headers analysis only but **mandatory** for body processing.
-            ## The external processor can dynamically override the processing mode as needed instructing
-            ## Envoy to forward request and response bodies to the external processor. Body processing is
-            ## enabled when DD_APPSEC_BODY_PARSING_SIZE_LIMIT is set on the external processor container.
+            ## The security processor can dynamically override the processing mode as needed instructing
+            ## Envoy to forward request and response bodies to the security processor. Body processing is
+            ## enabled when DD_APPSEC_BODY_PARSING_SIZE_LIMIT is set on the security processor container.
             allow_mode_override: true
 
             ## Optional: Set a timeout by processing message. Default is 200ms.
             ## There is a maxium of 2 messages per requests with headers only and 4 messages maximum
             ## with body processing enabled.
-            ## Note: This timeout also includes the data communication between Envoy and the external processor.
+            ## Note: This timeout also includes the data communication between Envoy and the security processor.
             ## Optional: When the body processing is enabled, the timeout should be adjusted to accommodate
             ## the additional possible processing time. Larger payloads will require a longer timeout. 
             #message_timeout: 200ms
 
             ## Optional: Enable asynchronous mode analysis. Default is false.
-            ## This mode will disable all blocking capabilities. The external processor should also be
+            ## This mode will disable all blocking capabilities. The security processor should also be
             ## configured with the DD_SERVICE_EXTENSION_OBSERVABILITY_MODE environment variable.
             ## Beware, there is no flow control implemented in Envoy
             ## (cf https://www.envoyproxy.io/docs/envoy/latest/api-v3/extensions/filters/http/ext_proc/v3/ext_proc.proto#envoy-v3-api-field-extensions-filters-http-ext-proc-v3-externalprocessor-observability-mode)
             #observability_mode: true
             ## Optional: When in asynchronous mode, the message_timeout is not used. This deferred
-            ## timeout starts when the http request is finished, to let the External Processor
+            ## timeout starts when the http request is finished, to let the security processor
             ## process all processing messages. Default is 5s.
             #deferred_close_timeout: 5s
 
@@ -345,7 +331,7 @@ spec:
               - endpoint:
                   address:
                     socket_address:
-                      # Address of the Datadog External Processor service
+                      # Address of the Datadog security processor service
                       address: "datadog-aap-extproc-service.<your-preferred-namespace>.svc.cluster.local" # Adjust if your service name or namespace is different
                       port_value: 443
 ```
@@ -398,7 +384,7 @@ spec:
               #timeout: 0s
 
             ## Optional: Enable fail open mode. Default is false.
-            ## Normally, if the external processor fails or times out, the filter fails and Envoy
+            ## Normally, if the security processor fails or times out, the filter fails and Envoy
             ## returns a 5xx error to the downstream client. Setting this to true allows requests
             ## to continue without error if a failure occurs.
             failure_mode_allow: true # It won't cause 5xx error if an error occurs.
@@ -410,27 +396,27 @@ spec:
               response_header_mode: SEND
 
             ## Optional for headers analysis only but **mandatory** for body processing.
-            ## The external processor can dynamically override the processing mode as needed instructing
-            ## Envoy to forward request and response bodies to the external processor. Body processing is
-            ## enabled when DD_APPSEC_BODY_PARSING_SIZE_LIMIT is set on the external processor container.
+            ## The security processor can dynamically override the processing mode as needed instructing
+            ## Envoy to forward request and response bodies to the security processor. Body processing is
+            ## enabled when DD_APPSEC_BODY_PARSING_SIZE_LIMIT is set on the security processor container.
             allow_mode_override: true
 
             ## Optional: Set a timeout by processing message. Default is 200ms.
             ## There is a maxium of 2 messages per requests with headers only and 4 messages maximum
             ## with body processing enabled.
-            ## Note: This timeout also includes the data communication between Envoy and the external processor.
+            ## Note: This timeout also includes the data communication between Envoy and the security processor.
             ## Optional: When the body processing is enabled, the timeout should be adjusted to accommodate
             ## the additional possible processing time. Larger payloads will require a longer timeout. 
             #message_timeout: 200ms
 
             ## Optional: Enable asynchronous mode analysis. Default is false.
-            ## This mode will disable all blocking capabilities. The external processor should also be
+            ## This mode will disable all blocking capabilities. The security processor should also be
             ## configured with the DD_SERVICE_EXTENSION_OBSERVABILITY_MODE environment variable.
             ## Beware, there is no flow control implemented in Envoy
             ## (cf https://www.envoyproxy.io/docs/envoy/latest/api-v3/extensions/filters/http/ext_proc/v3/ext_proc.proto#envoy-v3-api-field-extensions-filters-http-ext-proc-v3-externalprocessor-observability-mode)
             #observability_mode: true
             ## Optional: When in asynchronous mode, the message_timeout is not used. This deferred
-            ## timeout starts when the http request is finished, to let the External Processor
+            ## timeout starts when the http request is finished, to let the security processor
             ## process all processing messages. Default is 5s.
             #deferred_close_timeout: 5s
 
@@ -460,7 +446,7 @@ spec:
               - endpoint:
                   address:
                     socket_address:
-                      # Address of the Datadog External Processor service
+                      # Address of the Datadog security processor service
                       address: "datadog-aap-extproc-service.<your-preferred-namespace>.svc.cluster.local" # Adjust if your service name or namespace is different
                       port_value: 443
 ```
@@ -468,9 +454,9 @@ spec:
 {{% /tab %}}
 {{< /tabs >}}
 
-After applying the chosen `EnvoyFilter`, traffic passing through your Istio Ingress Gateway or selected sidecars will be processed by the Datadog External Processor service, enabling App and API Protection features.
+After you apply the `EnvoyFilter`, the Datadog security processor starts handling traffic through your Istio Ingress Gateway or selected sidecars.
 
-### Step 3: Validation
+### Step 3: Validate
 
 {{% appsec-getstarted-2-plusrisk %}}
 
@@ -478,11 +464,11 @@ After applying the chosen `EnvoyFilter`, traffic passing through your Istio Ingr
 
 ## Limitations
 
-The Istio integration has the following limitations:
+Known limitations:
 
-* Inspection of request and response bodies is supported when using the Datadog External Processor image version `v2.2.2` or later.
+* Inspection of request and response bodies is supported when using the Datadog security processor image version `v2.2.2` or later.
 
-For additional details on the Istio integration compatibilities, refer to the [Istio integration compatibility page][11].
+For additional details on the Istio integration compatibilities, see the [Istio integration compatibility page][11].
 
 ## Further Reading
 
@@ -499,3 +485,4 @@ For additional details on the Istio integration compatibilities, refer to the [I
 [9]: /security/application_security/policies/library_configuration/
 [10]: https://www.envoyproxy.io/docs/envoy/latest/api-v3/extensions/filters/http/ext_proc/v3/ext_proc.proto
 [11]: /security/application_security/setup/compatibility/istio
+[12]: /containers/kubernetes/appsec/
