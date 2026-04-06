@@ -2660,6 +2660,30 @@ menu:
           - SearchSecurityMonitoringSignals
         unstable: []
         order: 72
+    - name: Bulk update triage state of security signals
+      url: '#bulk-update-triage-state-of-security-signals'
+      identifier: security-monitoring-bulk-update-triage-state-of-security-signals
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - BulkEditSecurityMonitoringSignalsState
+        unstable: []
+        order: 85
+    - name: Bulk update triage assignee of security signals
+      url: '#bulk-update-triage-assignee-of-security-signals'
+      identifier: security-monitoring-bulk-update-triage-assignee-of-security-signals
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - BulkEditSecurityMonitoringSignalsAssignee
+        unstable: []
+        order: 86
     - name: Get a quick list of security signals
       url: '#get-a-quick-list-of-security-signals'
       identifier: security-monitoring-get-a-quick-list-of-security-signals
@@ -9671,6 +9695,71 @@ menu:
         unstable:
           - v2
         order: 49
+    - name: Update an incident user-defined field
+      url: '#update-an-incident-user-defined-field'
+      identifier: incidents-update-an-incident-user-defined-field
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateIncidentUserDefinedField
+        unstable:
+          - v2
+        order: 55
+    - name: Get an incident user-defined field
+      url: '#get-an-incident-user-defined-field'
+      identifier: incidents-get-an-incident-user-defined-field
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetIncidentUserDefinedField
+        unstable:
+          - v2
+        order: 54
+    - name: Delete an incident user-defined field
+      url: '#delete-an-incident-user-defined-field'
+      identifier: incidents-delete-an-incident-user-defined-field
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteIncidentUserDefinedField
+        unstable:
+          - v2
+        order: 56
+    - name: Create an incident user-defined field
+      url: '#create-an-incident-user-defined-field'
+      identifier: incidents-create-an-incident-user-defined-field
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateIncidentUserDefinedField
+        unstable:
+          - v2
+        order: 53
+    - name: Get a list of incident user-defined fields
+      url: '#get-a-list-of-incident-user-defined-fields'
+      identifier: incidents-get-a-list-of-incident-user-defined-fields
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListIncidentUserDefinedFields
+        unstable:
+          - v2
+        order: 52
     - name: Update an incident type
       url: '#update-an-incident-type'
       identifier: incidents-update-an-incident-type
@@ -13732,6 +13821,30 @@ menu:
       url: /api/latest/status-pages/
       identifier: status-pages
       generated: true
+    - name: Unpublish status page
+      url: '#unpublish-status-page'
+      identifier: status-pages-unpublish-status-page
+      parent: status-pages
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UnpublishStatusPage
+        unstable: []
+        order: 7
+    - name: Publish status page
+      url: '#publish-status-page'
+      identifier: status-pages-publish-status-page
+      parent: status-pages
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - PublishStatusPage
+        unstable: []
+        order: 6
     - name: Update maintenance
       url: '#update-maintenance'
       identifier: status-pages-update-maintenance
@@ -13743,7 +13856,7 @@ menu:
         operationids:
           - UpdateMaintenance
         unstable: []
-        order: 17
+        order: 19
     - name: Get maintenance
       url: '#get-maintenance'
       identifier: status-pages-get-maintenance
@@ -13755,7 +13868,7 @@ menu:
         operationids:
           - GetMaintenance
         unstable: []
-        order: 19
+        order: 21
     - name: Schedule maintenance
       url: '#schedule-maintenance'
       identifier: status-pages-schedule-maintenance
@@ -13767,7 +13880,7 @@ menu:
         operationids:
           - CreateMaintenance
         unstable: []
-        order: 16
+        order: 18
     - name: Update degradation
       url: '#update-degradation'
       identifier: status-pages-update-degradation
@@ -13779,7 +13892,7 @@ menu:
         operationids:
           - UpdateDegradation
         unstable: []
-        order: 12
+        order: 14
     - name: Get degradation
       url: '#get-degradation'
       identifier: status-pages-get-degradation
@@ -13791,7 +13904,7 @@ menu:
         operationids:
           - GetDegradation
         unstable: []
-        order: 14
+        order: 16
     - name: Delete degradation
       url: '#delete-degradation'
       identifier: status-pages-delete-degradation
@@ -13803,7 +13916,7 @@ menu:
         operationids:
           - DeleteDegradation
         unstable: []
-        order: 15
+        order: 17
     - name: Create degradation
       url: '#create-degradation'
       identifier: status-pages-create-degradation
@@ -13815,7 +13928,7 @@ menu:
         operationids:
           - CreateDegradation
         unstable: []
-        order: 11
+        order: 13
     - name: Update component
       url: '#update-component'
       identifier: status-pages-update-component
@@ -13827,7 +13940,7 @@ menu:
         operationids:
           - UpdateComponent
         unstable: []
-        order: 7
+        order: 9
     - name: Get component
       url: '#get-component'
       identifier: status-pages-get-component
@@ -13839,7 +13952,7 @@ menu:
         operationids:
           - GetComponent
         unstable: []
-        order: 9
+        order: 11
     - name: Delete component
       url: '#delete-component'
       identifier: status-pages-delete-component
@@ -13851,7 +13964,7 @@ menu:
         operationids:
           - DeleteComponent
         unstable: []
-        order: 10
+        order: 12
     - name: Create component
       url: '#create-component'
       identifier: status-pages-create-component
@@ -13863,7 +13976,7 @@ menu:
         operationids:
           - CreateComponent
         unstable: []
-        order: 6
+        order: 8
     - name: List components
       url: '#list-components'
       identifier: status-pages-list-components
@@ -13875,7 +13988,7 @@ menu:
         operationids:
           - ListComponents
         unstable: []
-        order: 8
+        order: 10
     - name: Update status page
       url: '#update-status-page'
       identifier: status-pages-update-status-page
@@ -13923,7 +14036,7 @@ menu:
         operationids:
           - ListMaintenances
         unstable: []
-        order: 18
+        order: 20
     - name: List degradations
       url: '#list-degradations'
       identifier: status-pages-list-degradations
@@ -13935,7 +14048,7 @@ menu:
         operationids:
           - ListDegradations
         unstable: []
-        order: 13
+        order: 15
     - name: Create status page
       url: '#create-status-page'
       identifier: status-pages-create-status-page

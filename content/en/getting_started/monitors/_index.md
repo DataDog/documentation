@@ -95,16 +95,16 @@ For this example, leave the other settings in this section on the defaults. For 
 
 ### Notifications and automations
 
-When this monitor is triggered to alert, a notification message is sent. In this message, you can include conditional values, instructions for resolution, or a summary of what the alert is. At a minimum, a notification must have a title and message.
+When this monitor is triggered to alert, a notification is sent. In this notification, you can include conditional values, instructions for resolution, or a summary of what the alert is. At a minimum, a notification must have a title and message.
 
-#### Title
+#### Notification title
 
 The title must be unique for each monitor. Since this is a multi alert monitor, names are available for each group element (`host` and `device`) with message template variables:
 ```text
 Disk space is low on {{device.name}} / {{host.name}}
 ```
 
-#### Message
+#### Notification message
 
 Use the message to tell your team how to resolve the issue, for example:
 ```text
@@ -115,7 +115,7 @@ Steps to free up disk space:
 4. Remove duplicate files
 ```
 
-To add conditional messages based on alert vs. warning thresholds, see the available [Notification Variables][8] you can include in your message.
+To add conditional messages based on alert vs. warning thresholds, see the available [notification variables][8] you can include in your message.
 
 #### Notify your services and your team members
 
@@ -135,7 +135,7 @@ Click **Edit Access** to restrict the editing of your monitor to its creator, te
 
 For more information, see [Granular Access Control][10].
 
-## View Monitors and Triage Alerts on Mobile
+## View monitors and triage alerts on mobile
 
 You can view Monitor Saved Views from your mobile home screen or view and mute monitors by downloading the [Datadog Mobile App][11], available on the [Apple App Store][12] and [Google Play Store][13]. This helps with triaging when you are away from your laptop or desktop.
 
