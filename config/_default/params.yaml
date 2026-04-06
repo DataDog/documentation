@@ -279,7 +279,7 @@ unsupported_sites:
   agent_flare: [gov]
   agentless_scanning: [gov] # docs page
   agentless-scanning: [gov] # api page
-  amazon_event_bridge: [gov]
+  amazon-event-bridge: [gov]
   apm_recommendations: [gov]
   app_builder: [gov]
   application_security: [gov]
@@ -323,7 +323,7 @@ unsupported_sites:
   high_availability_datadog_agent: [gov]
   iac_security: [gov]
   incident_ai: [gov]
-  jetbrains_ides: [gov]
+  jetbrains-ides: [gov]
   inferred_entity_remapping_rules: [gov]
   internal_developer_portal: [gov]
   jira_error_tracking: [gov]
