@@ -1376,6 +1376,65 @@ components:
         - layout_type
         - widgets
       type: object
+    Dashboard_Version20260601:
+      description: |-
+        Dashboard object for API version 2026-06-01 (default).
+        Widgets use the `layout` field with `x`, `y`, `width`, and `height` integer coordinates for grid positioning.
+      properties:
+        id:
+          description: ID of the dashboard.
+          example: "123-abc-456"
+          readOnly: true
+          type: string
+        layout_type:
+          $ref: "#/components/schemas/DashboardLayoutType"
+        title:
+          description: Title of the dashboard.
+          type: string
+        url:
+          description: The URL of the dashboard.
+          readOnly: true
+          type: string
+        widgets:
+          description: List of widgets to display on the dashboard.
+          items:
+            $ref: "#/components/schemas/Widget_Version20260601"
+          type: array
+      required:
+        - title
+        - layout_type
+        - widgets
+      type: object
+    Dashboard_Version20260701:
+      description: |-
+        Dashboard object for API version 2026-07-01.
+        The widget `layout` field has been removed. Widgets now use the required `position` field
+        with `column`, `row`, `span_columns`, and `span_rows` for named grid-slot positioning.
+      properties:
+        id:
+          description: ID of the dashboard.
+          example: "123-abc-456"
+          readOnly: true
+          type: string
+        layout_type:
+          $ref: "#/components/schemas/DashboardLayoutType"
+        title:
+          description: Title of the dashboard.
+          type: string
+        url:
+          description: The URL of the dashboard.
+          readOnly: true
+          type: string
+        widgets:
+          description: List of widgets to display on the dashboard.
+          items:
+            $ref: "#/components/schemas/Widget_Version20260701"
+          type: array
+      required:
+        - title
+        - layout_type
+        - widgets
+      type: object
     DashboardBulkActionData:
       description: Dashboard bulk action request data.
       example: {"id": "123-abc-456", "type": "dashboard"}
@@ -24327,6 +24386,102 @@ components:
       required:
         - definition
       type: object
+    Widget_Version20260601:
+      description: |-
+        Widget object for API version 2026-06-01 (default).
+        Position is specified using the `layout` object with `x`, `y`, `width`, and `height` integer coordinates.
+      properties:
+        definition:
+          $ref: "#/components/schemas/WidgetDefinition"
+        id:
+          description: ID of the widget.
+          format: int64
+          type: integer
+        layout:
+          description: |-
+            The position and dimensions of the widget on the dashboard grid.
+            Required for dashboards with `free` layout type or fixed `reflow_type`.
+          properties:
+            height:
+              description: The height of the widget. Non-negative integer.
+              format: int64
+              minimum: 0
+              type: integer
+            is_column_break:
+              description: Whether the widget should be the first one on the second column in high density mode.
+              type: boolean
+            width:
+              description: The width of the widget. Non-negative integer.
+              format: int64
+              minimum: 0
+              type: integer
+            x:
+              description: The position on the x (horizontal) axis. Non-negative integer.
+              format: int64
+              minimum: 0
+              type: integer
+            y:
+              description: The position on the y (vertical) axis. Non-negative integer.
+              format: int64
+              minimum: 0
+              type: integer
+          required:
+            - x
+            - y
+            - width
+            - height
+          type: object
+      required:
+        - definition
+      type: object
+    Widget_Version20260701:
+      description: |-
+        Widget object for API version 2026-07-01.
+        The `layout` field is removed. Widgets now require the `position` field using named
+        grid-slot fields: `column`, `row`, `span_columns`, and `span_rows`.
+        Requests that include a `layout` field return a validation error.
+      properties:
+        definition:
+          $ref: "#/components/schemas/WidgetDefinition"
+        id:
+          description: ID of the widget.
+          format: int64
+          type: integer
+        position:
+          description: |-
+            Named grid-slot position for the widget. Replaces the `layout` field from API version 2026-06-01.
+            Widgets are placed using zero-based column and row slot indices with optional span counts.
+          properties:
+            column:
+              description: Zero-based column slot index where the widget starts.
+              format: int64
+              minimum: 0
+              type: integer
+            row:
+              description: Zero-based row slot index where the widget starts.
+              format: int64
+              minimum: 0
+              type: integer
+            span_columns:
+              default: 1
+              description: Number of column slots the widget spans. Defaults to 1.
+              format: int64
+              minimum: 1
+              type: integer
+            span_rows:
+              default: 1
+              description: Number of row slots the widget spans. Defaults to 1.
+              format: int64
+              minimum: 1
+              type: integer
+          required:
+            - column
+            - row
+          type: object
+      required:
+        - definition
+        - position
+      type: object
     WidgetAggregator:
       description: Aggregator used for the request.
       enum:
@@ -26302,7 +26457,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Dashboard"
+                oneOf:
+                  - $ref: "#/components/schemas/Dashboard_Version20260601"
+                  - $ref: "#/components/schemas/Dashboard_Version20260701"
+                x-datadog-api-versioned: true
           description: OK
         "400":
           content:
@@ -27024,7 +27182,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Dashboard"
+                oneOf:
+                  - $ref: "#/components/schemas/Dashboard_Version20260601"
+                  - $ref: "#/components/schemas/Dashboard_Version20260701"
+                x-datadog-api-versioned: true
           description: OK
         "403":
           content:
@@ -27075,7 +27236,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Dashboard"
+                oneOf:
+                  - $ref: "#/components/schemas/Dashboard_Version20260601"
+                  - $ref: "#/components/schemas/Dashboard_Version20260701"
+                x-datadog-api-versioned: true
           description: OK
         "400":
           content:
@@ -39284,3 +39448,25 @@ tags:
       url: https://docs.datadoghq.com/integrations/webhooks
     name: Webhooks Integration
 x-group-parameters: true
+
+x-datadog-api-versioning:
+  versions:
+    "2026-06-01":
+      base: true
+    "2026-07-01":
+      breaking_changes:
+        - tag: "Dashboards"
+          description: |
+            The `Widget` object's `layout` field — which contained `x`, `y`, `width`, and `height`
+            integer coordinate properties — has been removed and replaced with a required `position` object.
+
+            The new `position` object uses named grid-slot fields: `column`, `row`, `span_columns`, and `span_rows`.
+            Requests that include a `layout` field on widgets in this version return a validation error.
+            Update all widget definitions to use `position` before adopting this API version.
+      changes:
+        - operationId: "GetDashboard"
+          description: "Response schema updated to `Dashboard_Version20260701`. Widget objects now include a required `position` field instead of `layout`."
+        - operationId: "CreateDashboard"
+          description: "Response schema updated to `Dashboard_Version20260701`. Widget objects in the response now use `position` instead of `layout`."
+        - operationId: "UpdateDashboard"
+          description: "Response schema updated to `Dashboard_Version20260701`. Widget objects in the response now use `position` instead of `layout`."

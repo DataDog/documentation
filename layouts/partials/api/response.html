@@ -7,6 +7,7 @@
 {{ $isDateVersioned := .isDateVersioned | default false }}
 {{ $apiVersionsList  := .apiVersionsList  | default slice }}
 {{ $baseVersion      := .baseVersion      | default "" }}
+{{ $spec             := .spec             | default dict }}
 {{ $s := newScratch }}
 
 <h3 class="mt-3 mb-2">{{ i18n "response" }}</h3>
@@ -120,6 +121,14 @@
                                     {{ if and $isVersionedSchema $isDateVersioned (gt (len $apiVersionsList) 0) }}
                                         {{/* Versioned schema: render each oneOf item as a version-specific pane */}}
                                         {{ range $vIdx, $variantSchema := (index $schema "oneOf") }}
+                                            {{/* Resolve $ref if the spec is not dereferenced */}}
+                                            {{ $schemaRef := index $variantSchema "$ref" }}
+                                            {{ if and $schemaRef $spec }}
+                                                {{ $refParts  := split $schemaRef "/" }}
+                                                {{ $schemaName := index $refParts (sub (len $refParts) 1) }}
+                                                {{ $resolved   := index $spec.components.schemas $schemaName }}
+                                                {{ if $resolved }}{{ $variantSchema = $resolved }}{{ end }}
+                                            {{ end }}
                                             {{ $vInfo   := index $apiVersionsList $vIdx | default (dict "date" (printf "variant-%d" $vIdx) "isBase" (eq $vIdx 0)) }}
                                             {{ $vDate   := $vInfo.date }}
                                             {{ $vHtml   := "" }}

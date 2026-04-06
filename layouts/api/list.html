@@ -230,7 +230,7 @@
                       {{ partial "api/request-body.html" (dict "context" $dot "body" $endpoint.action.requestBody "resourcePage" $resourcePage "operationid" $endpoint.action.operationId "translate_action" $translate_action "version" $versionNum "isDateVersioned" $isDateVersioned "apiVersionsList" $apiVersionsList "baseVersion" $baseVersion) }}
 
                       <!-- response -->
-                      {{ partial "api/response.html" (dict "responses" $endpoint.action.responses "resourcePage" $resourcePage "operationid" $endpoint.action.operationId "translate_action" $translate_action "version" $versionNum "isDateVersioned" $isDateVersioned "apiVersionsList" $apiVersionsList "baseVersion" $baseVersion) }}
+                      {{ partial "api/response.html" (dict "responses" $endpoint.action.responses "resourcePage" $resourcePage "operationid" $endpoint.action.operationId "translate_action" $translate_action "version" $versionNum "isDateVersioned" $isDateVersioned "apiVersionsList" $apiVersionsList "baseVersion" $baseVersion "spec" $adat) }}
 
                       <!-- code example -->
                       {{ partial "api/code-example.html" (dict "context" $dot "resourcePage" $resourcePage "operationid" $endpoint.action.operationId "securitySchemes" $adat.components.securitySchemes "endpoint" $endpoint "version" $versionNum) }}
