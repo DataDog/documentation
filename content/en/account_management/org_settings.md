@@ -95,9 +95,9 @@ To apply sharing settings across all your orgs, reach out to [Datadog Support][1
 
 **Note**: OrgAdmin permission is required to view and manage sharing settings and resources.
 
-### OAuth Apps
+### Mobile and Third-Party Access
 
-The [**OAuth Apps**][15] page allows you to view or manage OAuth applications in your organization.
+The [**Mobile and Third-Party Access**][15] page allows you to view and manage mobile and third-party applications in your organization.
 
 ## Compliance
 
@@ -167,5 +167,5 @@ Users with the `Org Management` permission can enable or disable the idle time s
 [12]: /events/guides/email/
 [13]: /synthetics/settings/?tab=specifyvalue#overview
 [14]: /account_management/safety_center
-[15]: /account_management/org_settings/oauth_apps
+[15]: /account_management/org_settings/mobile_third_party_access
 [16]: /help/
