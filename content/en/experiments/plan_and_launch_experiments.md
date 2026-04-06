@@ -13,53 +13,101 @@ further_reading:
 ---
 
 ## Overview
-Use Datadog Experiments to measure the causal relationship that new experiences and features have on user outcomes. Datadog Experiments uses [Feature Flags][4] to randomly allocate traffic between two or more variations, using one of the variations as a control group.
 
-This page walks you through planning and launching your experiments.
+Datadog Experiments allows you to measure the causal relationship that new experiences and features have on user outcomes. Experiments use [feature flags][4] to randomly allocate traffic between two or more variations, using one of the variations as a control group.
+
+Experiments have a primary metric as well as optional secondary metrics. These metrics are compared between the experiment variants using Datadog's statistical analysis engine.
 
 ## Setup
+
 To create, configure, and launch your experiment, complete the following steps:
 
 ### Step 1 - Create your experiment
 
+If you have already created a feature flag for your experiment, you can create an experiment from the flag detail page:
+
+{{< img src="/product_analytics/experiment/TODO_create_from_flag.png" alt="Creating an experiment from the feature flag detail page." style="width:80%;" >}}
+
+You can also draft experiments before creating a feature flag:
+
 1. Navigate to the [Experiments][1] page in Datadog Product Analytics.
-2. Click **+ Create Experiment**.
-3. Enter your experiment name and hypothesis.
+1. Click **+ Create Experiment**.
+1. Enter your experiment name and hypothesis.
 
 {{< img src="/product_analytics/experiment/exp_create_experiment.png" alt="The experiment creation form with fields for experiment name and hypothesis." style="width:80%;" >}}
 
-### Step 2 - Add metrics
+### Step 2 - Create experiment plan
+
+#### Add metrics
 
 After you have created an experiment, add your primary metric and optional guardrails. See [Defining Metrics][2] for details on how to create metrics.
 
 {{< img src="/product_analytics/experiment/exp_decision_metrics1.png" alt="The metrics configuration panel with options for primary metric and guardrails." style="width:80%;" >}}
 
+#### Configure optional analysis settings
+
+##### Statistical analysis plan
+
+Datadog's default sequential statistical analysis is suitable for most situations and promotes good statistical patterns. This framework gives statistically valid confidence intervals at any point throughout the experiment, allowing for flexible decision making.
+
+If you'd like to use a different statistical method, you can specify that in the analysis settings. To learn more about analysis options, see [Choosing a statistical analysis plan][TODO_stats_plan_link].
+
+{{< img src="/product_analytics/experiment/TODO_statistical_analysis.png" alt="The statistical analysis plan configuration options." style="width:80%;" >}}
+
+##### Exploration dimensions
+
+If you'd like to segment experiment results by subject (user) properties, you can specify that in the analysis settings. You can also add analysis dimensions later.
+
+{{< img src="/product_analytics/experiment/TODO_exploration_dimensions.png" alt="The exploration dimensions configuration options." style="width:80%;" >}}
+
 #### Add a sample size calculation (optional)
 
-After selecting your experiment’s metrics, use the optional sample size calculator to determine how small of a change your experiment can reliably detect with your current sample size.
+After selecting your experiment's metrics, use the optional sample size calculator to determine how small of a change your experiment can reliably detect with your current sample size.
 
-1. Select the **Entrypoint Event** of your experiment. This specifies _when_ in the user journey they will be enrolled into the test.
-1. Click **Run calculation** to see the [Minimum Detectable Effects][3] (MDE) your experiment has on your metrics. The MDE is the smallest difference you can detect between your experiment’s variants.
+1. Select the **Entrypoint Event** of your experiment. This specifies _when_ in the user journey they are enrolled into the test. For example, if you plan to run an experiment on users who visit the homepage, select the homepage view as your entry point.
+1. Click **Run calculation** to see the [Minimum Detectable Effects][3] (MDE) your experiment has on your metrics. The MDE is the smallest difference you can detect between your experiment's variants.
 
-{{< img src="/product_analytics/experiment/exp_sample_size.png" alt="The Sample Size Calculator modal with the Entrypoint Event dropdown highlighted." style="width:90%;" >}}
+{{< img src="/product_analytics/experiment/TODO_sample_size_calc.png" alt="The Sample Size Calculator with Entrypoint Event and MDE results." style="width:90%;" >}}
+
+#### Add notifications (optional)
+
+You can specify one or more notification channels to get updates on your experiment.
+
+{{< img src="/product_analytics/experiment/TODO_notifications.png" alt="The experiment notifications configuration." style="width:80%;" >}}
 
 ### Step 3 - Launch your experiment
 
-After specifying your metrics, you can launch your experiment.
+After at least one metric has been added, you can launch your experiment.
 
-1. Select a feature flag that captures the variants you want to test. If you have not yet created a feature flag, see the [Getting Started with Feature Flags][4] page.
-
-1. Click **Set Up Experiment on Feature Flag** to specify how you want to roll out your experiment. You can either launch the experiment to all traffic, or schedule a gradual rollout.
+If you created your experiment from the feature flag page, your feature flag is already pre-added to the experiment. If your experiment does not yet have an associated flag, you can either link an existing flag or create a new one. To learn more about feature flags, see the [Getting Started with Feature Flags][4] page.
 
 {{< img src="/product_analytics/experiment/exp_feature_flag.png" alt="Set up an experiment on a Feature Flag." style="width:90%;" >}}
 
+You can either launch your experiment right away or schedule a staged rollout.
+
+#### Staged experiment rollouts
+
+If you want to gradually ramp up experiment traffic, you can add a rollout schedule. Datadog automatically captures a representative sample of traffic to use for control.
+
+**Note**: Datadog randomizes eligible users in two steps:
+1. A sample of traffic to be tracked in the experiment.
+2. A random allocation of users into experimental variants.
+
+Any users not included in the first sampling receive the baseline variant and are not included in experiment analysis. Of users included in the experiment, the proportion of users in each variant remains constant. This approach avoids correlations between the user's received variant and the time in which they were enrolled into the experiment, preventing time-varying metrics from introducing bias into experiment results.
+
+#### Monitoring experiment rollout
+
+After your experiment is live, you can monitor early traffic on the **Flag & Exposures** page. The exposure balance check section verifies that the expected balance of users across variants is present. The exposure log gives a realtime list of traffic getting enrolled into your experiment.
+
+{{< img src="/product_analytics/experiment/TODO_flag_exposures.png" alt="The Flag and Exposures page showing exposure balance and exposure log." style="width:90%;" >}}
+
 ## Next steps
-1. **[Defining metrics][2]**: Define the metrics you want to measure during your experiments.
+
 1. **[Reading Experiment Results][5]**: Review and explore your experiment results.
 1. **[Minimum Detectable Effects][3]**: Choose appropriately sized MDEs.
 
-
 ## Further reading
+
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/product-analytics/experiments
