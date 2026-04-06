@@ -27,7 +27,7 @@ O para realizar un muestreo basado en las etiquetas de la URL HTTP:
 DD_TRACE_SAMPLING_RULES='[{"tags": {"http.url": "http://.*/healthcheck$"}, "sample_rate": 0.0}]'
 ```
 
-<div class="alert alert-info">Las decisiones de muestreo se determinan utilizando el primer tramo de una traza. Si el tramo que contiene la etiqueta con la que quieres filtrar no es una {{< tooltip glossary="trace root span" case="sentence" >}}, esta regla no se aplica.</div>
+<div class="alert alert-info">Las decisiones de muestreo se determinan utilizando el primer tramo de una traza. Si el tramo que contiene la etiqueta con la que quieres filtrar no es una {{< tooltip glossary="trace_root_span" case="sentence" >}}, esta regla no se aplica.</div>
 
 ## Filtrado
 

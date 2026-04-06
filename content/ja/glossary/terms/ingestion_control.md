@@ -1,4 +1,5 @@
 ---
+id: ingestion_control
 core_product:
 - apm
 title: 取り込みのコントロール

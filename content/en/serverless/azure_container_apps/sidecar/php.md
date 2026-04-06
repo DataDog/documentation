@@ -86,6 +86,8 @@ logInfo('Hello World!');
 
 {{% serverless-init-env-vars-sidecar language="php" defaultSource="containerapp" %}}
 
+{{% svl-tracing-env %}}
+
 ## Troubleshooting
 
 {{% serverless-init-troubleshooting productNames="Azure Container Apps" %}}

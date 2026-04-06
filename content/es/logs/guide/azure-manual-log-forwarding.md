@@ -35,7 +35,7 @@ Puedes reenviar tus logs a través de una cuenta de [Azure Container App][4] o [
 
 **Nota**: Los recursos solo pueden transmitirse a una cuenta de almacenamiento en la misma región de Azure.
 
-[200]: https://portal.azure.com/#create/Microsoft.Template/uri/CustomDeploymentBlade/uri/https%3A%2F%2Fddazurelfo.blob.core.windows.net%2Ftemplates%2Fforwarder.json
+[200]: https://portal.azure.com/#create/Microsoft.Template/uri/CustomDeploymentBlade/uri/https%3A%2F%2Fraw.githubusercontent.com%2FDataDog%2Fintegrations-management%2Fmain%2Fazure%2Flogging_install%2Fdist%2Fforwarder.json
 [201]: https://learn.microsoft.com/azure/azure-monitor/platform/diagnostic-settings
 {{% /tab %}}
 

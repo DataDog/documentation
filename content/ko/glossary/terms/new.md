@@ -1,4 +1,5 @@
 ---
+id: new
 short_definition: NEW는 최근에 출시된, 완전히 개발되어 프로덕션(운영) 환경에서 사용할 준비가 된 제품 또는 기능을 의미합니다.
 title: new
 ---

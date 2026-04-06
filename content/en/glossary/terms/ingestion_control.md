@@ -1,4 +1,5 @@
 ---
+id: ingestion_control
 title: ingestion control
 core_product:
   - apm

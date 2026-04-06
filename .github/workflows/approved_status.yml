@@ -16,22 +16,24 @@ permissions:
 jobs:
   send_status:
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write
     if: >
       github.event.pull_request.draft == false &&
       !contains(github.event.pull_request.labels.*.name, 'ci/skip') &&
       !contains(github.event.pull_request.head.ref, 'datadog-api-spec/test/') &&
       contains(github.event.pull_request.head.ref, 'datadog-api-spec/generated/')
     steps:
-      - name: Get GitHub App token
-        id: get_token
-        uses: actions/create-github-app-token@d72941d797fd3113feb6b93fd0dec494b13a2547 # v1.12.0
+      - name: Get GitHub token
+        id: octo-sts
+        uses: DataDog/dd-octo-sts-action@96a25462dbcb10ebf0bfd6e2ccc917d2ab235b9a # v1.0.4
         with:
-          app-id: ${{ secrets.PIPELINE_GITHUB_APP_ID }}
-          private-key: ${{ secrets.PIPELINE_GITHUB_APP_PRIVATE_KEY }}
-          repositories: datadog-api-spec
+          scope: DataDog/datadog-api-spec
+          policy: documentation.github.post-review-status.pull-request
       - name: Post PR review status check
         uses: DataDog/github-actions/post-review-status@65b4875f33ad773d7ba4b005a2cb5f35020295f3 # v2.3.0
         with:
-          github-token: ${{ steps.get_token.outputs.token }}
+          github-token: ${{ steps.octo-sts.outputs.token }}
           repo: datadog-api-spec
           context: documentation/master
+

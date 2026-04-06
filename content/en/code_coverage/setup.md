@@ -297,15 +297,9 @@ example/notifications/notifier.go:104.3,104.10 1 3
 
 ### Install the datadog-ci CLI
 
-Install the [`datadog-ci`][7] CLI globally using `npm`:
+<div class="alert alert-info">If you use GitHub Actions, you can skip this installation step. The <a href="#uploading-coverage-reports">GitHub Actions upload method</a> below uses a dedicated action that handles <code>datadog-ci</code> installation automatically.</div>
 
-{{< code-block lang="shell" >}}
-npm install -g @datadog/datadog-ci
-{{< /code-block >}}
-
-#### Standalone binary
-
-If installing Node.js in the CI is an issue, standalone binaries are provided with [Datadog CI releases][8]. Only _linux-x64_, _linux-arm64_, _darwin-x64_, _darwin-arm64_ (MacOS) and _win-x64_ (Windows) are supported. To install, run the following from your terminal:
+Standalone binaries are provided with [Datadog CI releases][8]. The _linux-x64_, _linux-arm64_, _darwin-x64_, _darwin-arm64_ (MacOS), and _win-x64_ (Windows) architectures are supported. To install, run the following from your terminal:
 
 {{< tabs >}}
 {{% tab "Linux" %}}
@@ -342,6 +336,14 @@ Start-Process -FilePath "./datadog-ci.exe" -ArgumentList version
 {{% /tab %}}
 {{< /tabs >}}
 
+#### npm
+
+Alternatively, if Node.js is available in your CI environment, install the [`datadog-ci`][7] CLI globally using `npm`:
+
+{{< code-block lang="shell" >}}
+npm install -g @datadog/datadog-ci
+{{< /code-block >}}
+
 #### Docker image
 
 Alternatively, you can update your CI job to run in a container based on the [Datadog CI Docker image][13].
@@ -357,6 +359,22 @@ To upload your code coverage reports to Datadog, run the following command. Prov
 
 {{< tabs >}}
 {{% tab "GitHub Actions" %}}
+
+Use the [Datadog Code Coverage Upload][101] GitHub Action. This action automatically installs and runs `datadog-ci`, so no additional setup is required:
+
+<pre>
+<code class="language-yaml" data-lang="yaml">
+steps:
+- name: Upload coverage reports to Datadog
+  uses: DataDog/coverage-upload-github-action@v1
+  with:
+    api_key: ${{ secrets.DD_API_KEY }}
+    site: {{< region-param key="dd_site" >}}
+</code>
+</pre>
+
+Alternatively, if you have `datadog-ci` installed, you can run it directly:
+
 <pre>
 <code class="language-yaml" data-lang="yaml">
 steps:
@@ -367,6 +385,8 @@ steps:
     DD_SITE: {{< region-param key="dd_site" >}}
 </code>
 </pre>
+
+[101]: https://github.com/marketplace/actions/datadog-code-coverage-upload
 {{% /tab %}}
 {{% tab "Gitlab" %}}
 <pre>
@@ -454,6 +474,19 @@ If the paths in your report are relative to a different directory in your reposi
 datadog-ci coverage upload --base-path=frontend/src .
 {{< /code-block >}}
 
+### Inaccurate coverage from non-executable lines
+
+Some coverage tools include non-executable lines (such as comments, blank lines, and closing brackets) in their reports, counting them as uncovered. This can lower your coverage percentages and produce false negatives for lines that can never be executed.
+
+During upload, the CLI automatically scans your source files to identify these non-executable lines so they can be excluded from coverage calculations.
+
+File fixes support the following languages: Go, Kotlin, C/C++, Swift, Objective-C, and PHP.
+
+You can control this behavior with the following options:
+
+- `--disable-file-fixes`: Disable file fixes generation entirely.
+- `--file-fixes-search-path <dir>`: Override the root directory used to scan source files. By default, the repository root is used. This is useful in monorepos or when your coverage reports only cover a subset of the codebase, as it speeds up the scan by limiting the directory tree traversed.
+
 ### Discrepancy between Datadog UI and coverage report values
 
 Datadog automatically merges coverage reports for the same commit.
@@ -476,7 +509,7 @@ Datadog deduplicates overlapping files across reports, which can result in diffe
 [7]: https://www.npmjs.com/package/@datadog/datadog-ci
 [8]: https://github.com/DataDog/datadog-ci/releases
 [9]: https://app.datadoghq.com/organization-settings/api-keys
-[10]: https://github.com/DataDog/datadog-ci/blob/master/packages/datadog-ci/src/commands/coverage/README.md
+[10]: https://github.com/DataDog/datadog-ci/tree/master/packages/plugin-coverage
 [11]: https://app.datadoghq.com/ci/code-coverage
 [12]: #integrate-with-source-code-provider
 [13]: https://hub.docker.com/r/datadog/ci

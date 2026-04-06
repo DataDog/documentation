@@ -159,11 +159,11 @@ _Requires:_ [Manual enablement][2]
 
 Heap Live Objects (Preview, v2.18.0+)
 : The number of objects allocated by each method in heap memory that have not yet been garbage collected. This is useful for investigating the overall memory usage of your service and identifying potential memory leaks.<br />
-_Requires: Ruby 3.1+_ and [manual enablement][2] (Not yet compatible with Ruby 4)
+_Requires: Ruby 3.1+_ and [manual enablement][2]
 
 Heap Live Size (Preview, v2.18.0+)
 : The amount of heap memory allocated by each method that has not yet been garbage collected. This is useful for investigating the overall memory usage of your service and identifying potential memory leaks.<br />
-_Requires: Ruby 3.1+_ and [manual enablement][2] (Not yet compatible with Ruby 4)
+_Requires: Ruby 3.1+_ and [manual enablement][2]
 
 GVL profiling (in Timeline) (v2.11.0+)
 : Records time when threads are prevented from working by other "noisy neighbor" threads, including background threads. This is useful for investigating latency spikes in the application when using the timeline visualization.<br />

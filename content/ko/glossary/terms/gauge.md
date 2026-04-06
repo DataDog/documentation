@@ -1,4 +1,5 @@
 ---
+id: gauge
 core_product:
 - 메트릭
 title: 게이지

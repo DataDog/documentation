@@ -40,7 +40,7 @@ Log in as a user assigned the Datadog Admin role, or any user with a role in you
 
 In order to create a Restricted Dataset, identify the data to be restricted with a query.
 
-{{< img src="/account_management/rbac/restricted_dataset-2.png" alt="Create a Restricted Dataset dialog. Selects data in RUM, APM, Logs, and Metrics matching the tag service:hr. Grants access to a Privileged access team.">}}
+{{< img src="/account_management/rbac/restricted_dataset-3.png" alt="Create a Restricted Dataset dialog. Selects data in RUM, APM, Logs, and Metrics matching the tag service:hr. Grants access to a Privileged access team.">}}
 
 Name Dataset
 : A descriptive name to help users understand what data is contained in the dataset.
@@ -69,7 +69,7 @@ The following are available as a Preview upon request:
     - **Note:** Standard and OpenTelemetry (OTel) metrics are not supported
 - Error Tracking issues
 - LLM Observability
-- Software Delivery repository info (in CI Visibility pipelines)
+- Software Delivery repository info (in CI Visibility pipelines, Test Optimization, and Code Coverage products)
 
 ## Usage constraints
 
@@ -78,7 +78,7 @@ After you turn on Data Access Control, Datadog disables or limits other features
 ### Real User Monitoring (RUM)
 
 #### Session Replay: Extended Retention
-By default, Session Replay data is retained for 30 days. To extend retention to 15 months, you can enable Extended Retention on individual session replays. When you create a restricted dataset for RUM, Datadog disables the option for Extended Retention. 
+By default, Session Replay data is retained for 30 days. To extend retention to 15 months, you can enable Extended Retention on individual session replays. When you create a restricted dataset for RUM, Datadog disables the option for Extended Retention.
 
 #### Session Replay: Playlists
 
@@ -101,6 +101,10 @@ If you are concerned about unauthorized data access through monitors, Datadog re
   * `@git.repository.id`
   * `@gitlab.groups`
 
+### LLM Observability
+
+When using [OpenTelemetry instrumentation][13], some data sent to LLM Observability may also be written to APM traces, as well as metrics and monitors. If you are protecting sensitive data with a Restricted Dataset on LLM Observability, consider also configuring Restricted Datasets on APM, metrics, or monitors with matching data boundaries.
+
 
 ## Select tags for access
 
@@ -117,7 +121,7 @@ If you have too many combinations of tags or attributes to fit within these cons
 #### Restricted Dataset 2
 * Telemetry type: RUM
     * Filters: `@application.id:EFGH`
-* Telemetry type: Metrics
+* Telemetry type: Custom Metrics
     * Filters: `env:prod`
 
 ### Not supported example
@@ -174,7 +178,7 @@ For example, if you have a service `NewService` that is instrumented with Real U
 * **Select data to be included in this Dataset:**
     * Telemetry type: RUM
         * Filters: `@service:NewService`
-    * Telemetry type: Metrics
+    * Telemetry type: Custom Metrics
         * Filters: `@service:NewService`
     * Telemetry type: APM
         * Filters: `@service:NewService`
@@ -225,3 +229,4 @@ When querying data through Datadog APIs with restrictions enabled, users without
 [10]: /account_management/rbac/data_access/#supported-telemetry
 [11]: /logs/guide/logs-rbac/?tab=ui#restrict-access-to-logs
 [12]: /dashboards/sharing/shared_dashboards/
+[13]: /llm_observability/instrumentation/otel_instrumentation/

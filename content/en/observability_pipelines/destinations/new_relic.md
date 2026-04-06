@@ -22,7 +22,10 @@ Set up the New Relic destination and its environment variables when you [set up 
 1.  Enter the identifier for your account ID. If you leave it blank, the [default](#set-secrets) is used.
 1.  Enter the identifier for your license. If you leave it blank, the [default](#set-secrets) is used.
 1. Select the data center region (**US** or **EU**) of your New Relic account.
-{{% observability_pipelines/destination_buffer_numbered %}}
+
+#### Optional buffering
+
+{{% observability_pipelines/destination_buffer %}}
 
 ### Set secrets
 
@@ -51,9 +54,9 @@ Set up the New Relic destination and its environment variables when you [set up 
 
 A batch of events is flushed when one of these parameters is met. See [event batching][2] for more information.
 
-| Max Events     | Max Bytes       | Timeout (seconds)   |
-|----------------|-----------------|---------------------|
-| 100            | 1,000,000       | 1                   |
+| Maximum Events | Maximum Size (MB) | Timeout (seconds)   |
+|----------------|-------------------|---------------------|
+| 100            | 1                 | 1                   |
 
 [1]: https://app.datadoghq.com/observability-pipelines
 [2]: /observability_pipelines/destinations/#event-batching

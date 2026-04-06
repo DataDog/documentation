@@ -40,6 +40,7 @@ The following vulnerability management capabilities are available across Code Se
 - [Ticketing integrations][13] with Jira and Datadog Case Management, with bidirectional syncing
 - [Notifications][14]
 - [Automation pipelines][15] for automatically muting vulnerabilities and assigning due dates by severity
+- [MCP server][17] to run Code Security scans directly from AI coding assistants (in Preview)
 
 ## Static Code Analysis (SAST)
 Static Code Analysis (SAST) analyzes pre-production code to identify security and quality issues. You can embed best security and development practices throughout the software development lifecycle with:
@@ -76,6 +77,8 @@ Secret Scanning identifies and validates leaked secrets in your codebase. [Reque
 ## Supply Chain Security
 Prevent malicious packages from entering your development environments with Datadog Supply Chain Security Firewall, supported for GitHub. [Request access to the Preview][11].
 
+## Code Security MCP Server (Preview)
+The [Code Security MCP Server][17] is a local Model Context Protocol (MCP) server that brings SAST, secrets detection, SCA, IaC scanning, and SBOM generation directly into AI coding assistants such as Cursor, Claude Desktop, and VS Code. Read the [MCP Server documentation][17] to get started.
 
 ## Further Reading
 
@@ -97,3 +100,4 @@ Prevent malicious packages from entering your development environments with Data
 [14]: /security/notifications/
 [15]: /security/automation_pipelines/
 [16]: /security/code_security/dev_tool_int/
+[17]: /security/code_security/dev_tool_int/mcp_server/
