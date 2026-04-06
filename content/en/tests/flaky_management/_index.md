@@ -206,18 +206,18 @@ Set up notifications to track changes to your flaky tests. Notifications are sen
 - A user or policy changes the state of a flaky test.
 - The remediation flow for a flaky test succeeds or fails.
 
-You can send notifications to email addresses or Slack channels (see the [Datadog Slack integration][5]), and route messages based on test code owners. When multiple code owners are specified, a flaky test must belong to all of them for the notification rule to match. If no code owners are specified, all selected recipients are notified of all flaky test changes in the repository. Configure notifications for each repository from the [**Flaky Test Policies**][13] page in Software Delivery settings.
+You can send notifications to email addresses or Slack channels (see the [Datadog Slack integration][5]), and route messages based on test code owners. When multiple code owners are specified, a flaky test must be owned by all specified code owners for the notification rule to match. If no code owners are specified, all selected recipients are notified of all flaky test changes in the repository. Configure notifications for each repository from the [**Flaky Test Policies**][13] page in Software Delivery settings.
 
 Notifications are bundled over a short period to reduce noise.
 
 ### Notification types
 
-| Notification Type | Description |
+| Notification type | Description |
 |---|---|
 | **New flaky test detected** | A new flaky test is detected on the default branch of the repository. |
 | **Test quarantined** | A test is quarantined by an automated policy rule (time-based, branch-based, or failure rate). |
 | **Test disabled** | A test is disabled by an automated policy rule (time-based, branch-based, or failure rate). |
-| **Fix successful** | A test passes all retries in the remediation flow and is marked as fix in progress. |
+| **Fix successful** | A test passes all retries in the remediation flow and is marked as "fix in progress". |
 | **Fix failed** | A test fails during the remediation flow. |
 | **Manual state change** | A user manually changes the state of a flaky test. |
 
