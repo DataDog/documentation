@@ -63,7 +63,7 @@ After you've created and tested your monitor, add it to your listing in the Deve
 2. Click **Import Monitor**.
 3. Search for and select the monitor you created. You can include up to 10 monitors per integration.
 4. For each monitor, provide a **Display Name** and **Description**. These appear on the [**Monitors > Templates**][2] page:
-    - **Display Name**: A concise title that clearly communicates what the alert covers. Use active voice and start with an object followed by a verb (for example, `Database latency exceeds threshold`). Do not use template variables.
+    - **Display Name**: A concise title that clearly communicates what the alert covers. Use active voice and start with the resource or metric followed by a verb (for example, `Database latency exceeds threshold`). Do not use template variables.
 
       | Needs revision                                         | Better                                | Best                                          |
       |--------------------------------------------------------|---------------------------------------|-----------------------------------------------|
