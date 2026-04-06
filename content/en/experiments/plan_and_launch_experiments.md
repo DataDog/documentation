@@ -16,7 +16,7 @@ further_reading:
 
 Datadog Experiments allows you to measure the causal relationship that new experiences and features have on user outcomes. Experiments use [feature flags][4] to randomly allocate traffic between two or more variations, using one of the variations as a control group.
 
-Experiments have a primary metric as well as optional secondary metrics. These metrics are compared between the experiment variants using Datadog's statistical analysis engine.
+Experiments have a primary metric as well as optional secondary metrics. Datadog's statistical analysis engine compares these metrics across experiment variants.
 
 ## Setup
 
@@ -36,7 +36,7 @@ You can also draft experiments before creating a feature flag:
 
 {{< img src="/product_analytics/experiment/exp_create_experiment.png" alt="The experiment creation form with fields for experiment name and hypothesis." style="width:80%;" >}}
 
-### Step 2 - Create experiment plan
+### Step 2 - Create your experiment plan
 
 #### Add metrics
 
@@ -48,15 +48,15 @@ After you have created an experiment, add your primary metric and optional guard
 
 ##### Statistical analysis plan
 
-Datadog's default sequential statistical analysis is suitable for most situations and promotes good statistical patterns. This framework gives statistically valid confidence intervals at any point throughout the experiment, allowing for flexible decision making.
+Datadog's default sequential statistical analysis is suitable for most situations and promotes good statistical patterns. This framework gives statistically valid confidence intervals at any point throughout the experiment, so you can make decisions at any point during the experiment.
 
-If you'd like to use a different statistical method, you can specify that in the analysis settings. To learn more about analysis options, see [Choosing a statistical analysis plan][TODO_stats_plan_link].
+To use a different statistical method, specify that in the analysis settings. To learn more about analysis options, see [Choosing a statistical analysis plan][TODO_stats_plan_link].
 
 {{< img src="/product_analytics/experiment/TODO_statistical_analysis.png" alt="The statistical analysis plan configuration options." style="width:80%;" >}}
 
 ##### Exploration dimensions
 
-If you'd like to segment experiment results by subject (user) properties, you can specify that in the analysis settings. You can also add analysis dimensions later.
+To segment experiment results by subject (user) properties, specify exploration dimensions in the analysis settings. You can also add analysis dimensions later.
 
 {{< img src="/product_analytics/experiment/TODO_exploration_dimensions.png" alt="The exploration dimensions configuration options." style="width:80%;" >}}
 
@@ -77,9 +77,12 @@ You can specify one or more notification channels to get updates on your experim
 
 ### Step 3 - Launch your experiment
 
-After at least one metric has been added, you can launch your experiment.
+After you add at least one metric, you can launch your experiment.
 
-If you created your experiment from the feature flag page, your feature flag is already pre-added to the experiment. If your experiment does not yet have an associated flag, you can either link an existing flag or create a new one. To learn more about feature flags, see the [Getting Started with Feature Flags][4] page.
+- If you created your experiment from the feature flag page, your feature flag is already pre-added.
+- If your experiment does not have an associated flag, link an existing flag or create a new one.
+
+To learn more about feature flags, see the [Getting Started with Feature Flags][4] page.
 
 {{< img src="/product_analytics/experiment/exp_feature_flag.png" alt="Set up an experiment on a Feature Flag." style="width:90%;" >}}
 
@@ -93,11 +96,11 @@ If you want to gradually ramp up experiment traffic, you can add a rollout sched
 1. A sample of traffic to be tracked in the experiment.
 2. A random allocation of users into experimental variants.
 
-Any users not included in the first sampling receive the baseline variant and are not included in experiment analysis. Of users included in the experiment, the proportion of users in each variant remains constant. This approach avoids correlations between the user's received variant and the time in which they were enrolled into the experiment, preventing time-varying metrics from introducing bias into experiment results.
+Any users not included in the first sampling receive the baseline variant and do not appear in experiment analysis. Of users included in the experiment, the proportion in each variant remains constant. This approach avoids correlations between the user's received variant and their enrollment time. It prevents time-varying metrics from introducing bias into experiment results.
 
 #### Monitoring experiment rollout
 
-After your experiment is live, you can monitor early traffic on the **Flag & Exposures** page. The exposure balance check section verifies that the expected balance of users across variants is present. The exposure log gives a realtime list of traffic getting enrolled into your experiment.
+After your experiment is live, you can monitor early traffic on the **Flag & Exposures** page. The exposure balance check section verifies that the expected balance of users across variants is present. The exposure log gives a real-time list of traffic getting enrolled into your experiment.
 
 {{< img src="/product_analytics/experiment/TODO_flag_exposures.png" alt="The Flag and Exposures page showing exposure balance and exposure log." style="width:90%;" >}}
 
