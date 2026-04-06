@@ -17920,6 +17920,8 @@ components:
         - assertPageLacks
         - assertRequests
         - click
+        - drag
+        - drop
         - extractFromJavascript
         - extractFromEmailBody
         - extractVariable
@@ -17950,6 +17952,8 @@ components:
         - ASSERT_PAGE_LACKS
         - ASSERT_REQUESTS
         - CLICK
+        - DRAG
+        - DROP
         - EXTRACT_FROM_JAVASCRIPT
         - EXTRACT_FROM_EMAIL_BODY
         - EXTRACT_VARIABLE
