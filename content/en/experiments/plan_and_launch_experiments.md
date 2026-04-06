@@ -9,7 +9,7 @@ further_reading:
   text: "Make data-driven design decisions with Product Analytics"
 - link: "/experiments/defining_metrics"
   tag: "Documentation"
-  text: "Defining Experiment Metrics"
+  text: "Create Experiment Metrics"
 ---
 
 ## Overview
@@ -106,7 +106,7 @@ After your experiment is live, you can monitor early traffic on the **Flag & Exp
 
 ## Next steps
 
-1. **[Reading Experiment Results][5]**: Review and explore your experiment results.
+1. **[Read Experiment Results][5]**: Review and explore your experiment results.
 1. **[Minimum Detectable Effects][3]**: Choose appropriately sized MDEs.
 
 ## Further reading
