@@ -176,8 +176,6 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
 
 1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
 
-[1]: https://www.warp.dev/
-[2]: /getting_started/site/
 [3]: /bits_ai/mcp_server#toolsets
 {{< /site-region >}}
 
@@ -185,6 +183,8 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
 <div class="alert alert-danger">Datadog MCP Server is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
+[1]: https://www.warp.dev/
+[2]: /getting_started/site/
 {{% /tab %}}
 
 {{% tab "VS Code" %}}
