@@ -8792,7 +8792,7 @@ menu:
         operationids:
           - UnarchiveFeatureFlag
         unstable: []
-        order: 8
+        order: 14
     - name: Enable a feature flag in an environment
       url: '#enable-a-feature-flag-in-an-environment'
       identifier: feature-flags-enable-a-feature-flag-in-an-environment
@@ -8804,7 +8804,7 @@ menu:
         operationids:
           - EnableFeatureFlagEnvironment
         unstable: []
-        order: 7
+        order: 13
     - name: Disable a feature flag in an environment
       url: '#disable-a-feature-flag-in-an-environment'
       identifier: feature-flags-disable-a-feature-flag-in-an-environment
@@ -8816,7 +8816,31 @@ menu:
         operationids:
           - DisableFeatureFlagEnvironment
         unstable: []
-        order: 6
+        order: 12
+    - name: Update targeting rules for a flag
+      url: '#update-targeting-rules-for-a-flag'
+      identifier: feature-flags-update-targeting-rules-for-a-flag
+      parent: feature-flags
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateAllocationsForFeatureFlagInEnvironment
+        unstable: []
+        order: 10
+    - name: Create targeting rules for a flag env
+      url: '#create-targeting-rules-for-a-flag-env'
+      identifier: feature-flags-create-targeting-rules-for-a-flag-env
+      parent: feature-flags
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateAllocationsForFeatureFlagInEnvironment
+        unstable: []
+        order: 11
     - name: Archive a feature flag
       url: '#archive-a-feature-flag'
       identifier: feature-flags-archive-a-feature-flag
@@ -8828,7 +8852,7 @@ menu:
         operationids:
           - ArchiveFeatureFlag
         unstable: []
-        order: 9
+        order: 15
     - name: Update a feature flag
       url: '#update-a-feature-flag'
       identifier: feature-flags-update-a-feature-flag
@@ -8840,7 +8864,7 @@ menu:
         operationids:
           - UpdateFeatureFlag
         unstable: []
-        order: 10
+        order: 16
     - name: Get a feature flag
       url: '#get-a-feature-flag'
       identifier: feature-flags-get-a-feature-flag
@@ -8852,7 +8876,55 @@ menu:
         operationids:
           - GetFeatureFlag
         unstable: []
-        order: 11
+        order: 17
+    - name: Stop a progressive rollout
+      url: '#stop-a-progressive-rollout'
+      identifier: feature-flags-stop-a-progressive-rollout
+      parent: feature-flags
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - StopExposureSchedule
+        unstable: []
+        order: 6
+    - name: Start a progressive rollout
+      url: '#start-a-progressive-rollout'
+      identifier: feature-flags-start-a-progressive-rollout
+      parent: feature-flags
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - StartExposureSchedule
+        unstable: []
+        order: 9
+    - name: Resume a progressive rollout
+      url: '#resume-a-progressive-rollout'
+      identifier: feature-flags-resume-a-progressive-rollout
+      parent: feature-flags
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ResumeExposureSchedule
+        unstable: []
+        order: 7
+    - name: Pause a progressive rollout
+      url: '#pause-a-progressive-rollout'
+      identifier: feature-flags-pause-a-progressive-rollout
+      parent: feature-flags
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - PauseExposureSchedule
+        unstable: []
+        order: 8
     - name: Update an environment
       url: '#update-an-environment'
       identifier: feature-flags-update-an-environment
@@ -8924,7 +8996,7 @@ menu:
         operationids:
           - CreateFeatureFlag
         unstable: []
-        order: 12
+        order: 18
     - name: List feature flags
       url: '#list-feature-flags'
       identifier: feature-flags-list-feature-flags
@@ -8936,7 +9008,7 @@ menu:
         operationids:
           - ListFeatureFlags
         unstable: []
-        order: 13
+        order: 19
     - name: Fleet Automation
       url: /api/latest/fleet-automation/
       identifier: fleet-automation
