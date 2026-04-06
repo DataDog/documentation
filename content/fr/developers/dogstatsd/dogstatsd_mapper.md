@@ -13,12 +13,12 @@ title: Mapper DogStatsD
 
 Depuis la version 7.17 de l'Agent, le Mapper DogstatsD vous permet de convertir des éléments du nom d'une métrique transmise à DogStatsD en des tags. Cette création de tags passe par l'utilisation de règles de mappage, qui reposent sur des wildcards et des regex. Vous pouvez ainsi convertir la métrique suivante :
 
-- `airflow.job.duration.<TYPE_TÂCHE>.<NOM_TÂCHE>`
+- `airflow.job.duration.<JOB_TYPE>.<JOB_NAME>`
 
 en la métrique `airflow.job.duration`, avec les deux tags :
 
-- `job_type:<TYPE_TÂCHE>`
-- `job_name:<NOM_TÂCHE>`.
+- `job_type:<JOB_TYPE>`
+- `job_name:<JOB_NAME>`.
 
 Pour créer une règle de mappage :
 
@@ -31,27 +31,27 @@ Un bloc de règle de mappage dispose des éléments suivants :
 
 ```yaml
 dogstatsd_mapper_profiles:
-    - name: '<NOM_PROFIL>'
-      prefix: '<PRÉFIXE_PROFIL>'
+    - name: <PROFILE_NAME>
+      prefix: <PROFILE_PREFIX>
       mappings:
-          - match: '<MÉTRIQUE_À_RECHERCHER>'
-            match_type: '<TYPE_DE_CORRESPONDANCE>'
-            name: '<NOM_MÉTRIQUE_MAPPÉE>'
+          - match: <METRIC_TO_MATCH>
+            match_type: <MATCH_TYPE>
+            name: <MAPPED_METRIC_NAME>
             tags:
-                '<CLÉ_TAG>': '<VALEUR_TAG_À_RÉUTILISER>'
+                <TAG_KEY>: <TAG_VALUE_TO_EXPAND>
 ```
 
 Voici l'explication des paramètres fictifs de la commande :
 
-| Paramètre fictif             |  Définition                                                                                                                               | Obligatoire                |
+| Placeholder             |  Définition                                                                                                                               | Obligatoire                |
 | ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------- |
-|  `<NOM_PROFIL>`       | Le nom du profil de la règle de mappage.                                                                                              | oui                     |
-| `<PRÉFIXE_PROFIL>`      | Le préfixe du nom de métrique associé au profil.                                                                                        | oui                     |
-| `<MÉTRIQUE_À_RECHERCHER>`     | Le nom de métrique à utiliser pour extraire des groupes, que ce soit avec une une [recherche wildcard](#correspondance-avec-wildcard) ou une [regex](#correspondance-avec-regex).         | oui                     |
-| `<TYPE_CORRESPONDANCE>`          | Le type de correspondance à appliquer à `<MÉTRIQUE_À_RECHERCHER>`. Valeurs autorisées : [`wildcard`](#correspondance-avec-wildcard) ou [`regex`](#correspondance-avec-regex).    | non, valeur par défaut : `wildcard` |
-| `<NOM_MÉTRIQUE_MAPPÉE>`  | Le nom de la nouvelle métrique à envoyer à Datadog, avec les tags définis dans le même groupe.                                                           | oui                     |
-| `<CLÉ_TAG>`             | La clé de tag à appliquer aux tags recueillis.                                                                                           | non                      |
-| `<VALEUR_TAG_À_RÉUTILISER>` | Les tags recueillis avec la correspondance `<MATCH_TYPE>` à ajouter.                                                                                     | non                      |
+|  `<PROFILE_NAME>`       | Le nom du profil de la règle de mappage.                                                                                              | oui                     |
+| `<PROFILE_PREFIX>`      | Le préfixe du nom de métrique associé au profil.                                                                                        | oui                     |
+| `<METRIC_TO_MATCH>`     | Le nom de métrique à utiliser pour extraire des groupes, que ce soit avec une une [recherche wildcard](#correspondance-avec-wildcard) ou une [regex](#correspondance-avec-regex).         | oui                     |
+| `<MATCH_TYPE>`          | Le type de correspondance à appliquer à `<METRIC_TO_MATCH>`. Valeurs autorisées : [`wildcard`](#correspondance-avec-wildcard) ou [`regex`](#correspondance-avec-regex).    | non, valeur par défaut : `wildcard` |
+| `<MAPPED_METRIC_NAME>`  | Le nom de la nouvelle métrique à envoyer à Datadog, avec les tags définis dans le même groupe.                                                           | oui                     |
+| `<TAG_KEY>`             | La clé de tag à appliquer aux tags recueillis.                                                                                           | no                      |
+| `<TAG_VALUE_TO_EXPAND>` | Les tags recueillis avec la correspondance `<MATCH_TYPE>` à ajouter.                                                                                     | no                      |
 
 ## Correspondance avec wildcard
 
@@ -67,12 +67,12 @@ dogstatsd_mapper_profiles:
     - name: my_custom_metric_profile
       prefix: custom_metric.
       mappings:
-          - match: 'custom_metric.process.*.*'
+          - match: custom_metric.process.*.*
             match_type: wildcard
             name: custom_metric.process
             tags:
-                tag_key_1: '$1'
-                tag_key_2: '$2'
+                tag_key_1: $1
+                tag_key_2: $2
 ```
 
 Cela envoie la métrique `custom_metric.process` à Datadog, avec les tags `tag_key_1:value_1` et `tag_key_2:value_2`.
@@ -91,12 +91,12 @@ dogstatsd_mapper_profiles:
     - name: my_custom_metric_profile
       prefix: custom_metric.
       mappings:
-          - match: 'custom_metric\.process\.([\w_]+)\.(.+)'
+          - match: custom_metric\.process\.([\w_]+)\.(.+)
             match_type: regex
             name: custom_metric.process
             tags:
-                tag_key_1: '$1'
-                tag_key_2: '$2'
+                tag_key_1: $1
+                tag_key_2: $2
 ```
 
 Cela envoie la métrique `custom_metric.process` à Datadog, avec les tags `tag_key_1:value_1` et `tag_key_2:value.with.dots._2`.
@@ -110,11 +110,11 @@ dogstatsd_mapper_profiles:
     - name: my_custom_metric_profile
       prefix: custom_metric.
       mappings:
-          - match: 'custom_metric.process.*.*'
+          - match: custom_metric.process.*.*
             match_type: wildcard
-            name: 'custom_metric.process.prod.$1.live'
+            name: custom_metric.process.prod.$1.live
             tags:
-                tag_key_2: '$2'
+                tag_key_2: $2
 ```
 
 Cela envoie la métrique `custom_metric.process.prod.value_1.live` à Datadog, avec le tag `tag_key_2:value_2`.
@@ -123,4 +123,4 @@ Cela envoie la métrique `custom_metric.process.prod.value_1.live` à Datadog, a
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/agent/guide/agent-configuration-files/#agent-main-configuration-file
+[1]: /fr/agent/configuration/agent-configuration-files/#agent-main-configuration-file
