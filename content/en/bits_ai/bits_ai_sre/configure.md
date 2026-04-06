@@ -28,7 +28,8 @@ For monitor alert investigations, a summary of the findings is available on the 
 1. Ensure the [Datadog Slack app][3] is installed in your Slack workspace.
 1. In your monitor, go to **Configure notifications and automations** and add the `@slack-{channel-name}` handle. This sends monitor notifications to your chosen Slack channel.
 1. Lastly, go to [**Bits AI SRE** > **Settings** > **Integrations**][4] and connect your Slack workspace. This allows Bits to write its findings directly under the monitor notification in Slack.
-   <div class="alert alert-info">Each Slack workspace can only be connected to one Datadog organization.</div>
+
+<div class="alert alert-info">Each Slack workspace can only be connected to one Datadog organization.</div>
 
 ### Microsoft Teams
 
