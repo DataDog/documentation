@@ -8792,7 +8792,7 @@ menu:
         operationids:
           - UnarchiveFeatureFlag
         unstable: []
-        order: 8
+        order: 14
     - name: Enable a feature flag in an environment
       url: '#enable-a-feature-flag-in-an-environment'
       identifier: feature-flags-enable-a-feature-flag-in-an-environment
@@ -8804,7 +8804,7 @@ menu:
         operationids:
           - EnableFeatureFlagEnvironment
         unstable: []
-        order: 7
+        order: 13
     - name: Disable a feature flag in an environment
       url: '#disable-a-feature-flag-in-an-environment'
       identifier: feature-flags-disable-a-feature-flag-in-an-environment
@@ -8816,7 +8816,31 @@ menu:
         operationids:
           - DisableFeatureFlagEnvironment
         unstable: []
-        order: 6
+        order: 12
+    - name: Update targeting rules for a flag
+      url: '#update-targeting-rules-for-a-flag'
+      identifier: feature-flags-update-targeting-rules-for-a-flag
+      parent: feature-flags
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateAllocationsForFeatureFlagInEnvironment
+        unstable: []
+        order: 10
+    - name: Create targeting rules for a flag env
+      url: '#create-targeting-rules-for-a-flag-env'
+      identifier: feature-flags-create-targeting-rules-for-a-flag-env
+      parent: feature-flags
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateAllocationsForFeatureFlagInEnvironment
+        unstable: []
+        order: 11
     - name: Archive a feature flag
       url: '#archive-a-feature-flag'
       identifier: feature-flags-archive-a-feature-flag
@@ -8828,7 +8852,7 @@ menu:
         operationids:
           - ArchiveFeatureFlag
         unstable: []
-        order: 9
+        order: 15
     - name: Update a feature flag
       url: '#update-a-feature-flag'
       identifier: feature-flags-update-a-feature-flag
@@ -8840,7 +8864,7 @@ menu:
         operationids:
           - UpdateFeatureFlag
         unstable: []
-        order: 10
+        order: 16
     - name: Get a feature flag
       url: '#get-a-feature-flag'
       identifier: feature-flags-get-a-feature-flag
@@ -8852,7 +8876,55 @@ menu:
         operationids:
           - GetFeatureFlag
         unstable: []
-        order: 11
+        order: 17
+    - name: Stop a progressive rollout
+      url: '#stop-a-progressive-rollout'
+      identifier: feature-flags-stop-a-progressive-rollout
+      parent: feature-flags
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - StopExposureSchedule
+        unstable: []
+        order: 6
+    - name: Start a progressive rollout
+      url: '#start-a-progressive-rollout'
+      identifier: feature-flags-start-a-progressive-rollout
+      parent: feature-flags
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - StartExposureSchedule
+        unstable: []
+        order: 9
+    - name: Resume a progressive rollout
+      url: '#resume-a-progressive-rollout'
+      identifier: feature-flags-resume-a-progressive-rollout
+      parent: feature-flags
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ResumeExposureSchedule
+        unstable: []
+        order: 7
+    - name: Pause a progressive rollout
+      url: '#pause-a-progressive-rollout'
+      identifier: feature-flags-pause-a-progressive-rollout
+      parent: feature-flags
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - PauseExposureSchedule
+        unstable: []
+        order: 8
     - name: Update an environment
       url: '#update-an-environment'
       identifier: feature-flags-update-an-environment
@@ -8924,7 +8996,7 @@ menu:
         operationids:
           - CreateFeatureFlag
         unstable: []
-        order: 12
+        order: 18
     - name: List feature flags
       url: '#list-feature-flags'
       identifier: feature-flags-list-feature-flags
@@ -8936,7 +9008,7 @@ menu:
         operationids:
           - ListFeatureFlags
         unstable: []
-        order: 13
+        order: 19
     - name: Fleet Automation
       url: /api/latest/fleet-automation/
       identifier: fleet-automation
@@ -13821,6 +13893,30 @@ menu:
       url: /api/latest/status-pages/
       identifier: status-pages
       generated: true
+    - name: Unpublish status page
+      url: '#unpublish-status-page'
+      identifier: status-pages-unpublish-status-page
+      parent: status-pages
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UnpublishStatusPage
+        unstable: []
+        order: 7
+    - name: Publish status page
+      url: '#publish-status-page'
+      identifier: status-pages-publish-status-page
+      parent: status-pages
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - PublishStatusPage
+        unstable: []
+        order: 6
     - name: Update maintenance
       url: '#update-maintenance'
       identifier: status-pages-update-maintenance
@@ -13832,7 +13928,7 @@ menu:
         operationids:
           - UpdateMaintenance
         unstable: []
-        order: 17
+        order: 19
     - name: Get maintenance
       url: '#get-maintenance'
       identifier: status-pages-get-maintenance
@@ -13844,7 +13940,7 @@ menu:
         operationids:
           - GetMaintenance
         unstable: []
-        order: 19
+        order: 21
     - name: Schedule maintenance
       url: '#schedule-maintenance'
       identifier: status-pages-schedule-maintenance
@@ -13856,7 +13952,7 @@ menu:
         operationids:
           - CreateMaintenance
         unstable: []
-        order: 16
+        order: 18
     - name: Update degradation
       url: '#update-degradation'
       identifier: status-pages-update-degradation
@@ -13868,7 +13964,7 @@ menu:
         operationids:
           - UpdateDegradation
         unstable: []
-        order: 12
+        order: 14
     - name: Get degradation
       url: '#get-degradation'
       identifier: status-pages-get-degradation
@@ -13880,7 +13976,7 @@ menu:
         operationids:
           - GetDegradation
         unstable: []
-        order: 14
+        order: 16
     - name: Delete degradation
       url: '#delete-degradation'
       identifier: status-pages-delete-degradation
@@ -13892,7 +13988,7 @@ menu:
         operationids:
           - DeleteDegradation
         unstable: []
-        order: 15
+        order: 17
     - name: Create degradation
       url: '#create-degradation'
       identifier: status-pages-create-degradation
@@ -13904,7 +14000,7 @@ menu:
         operationids:
           - CreateDegradation
         unstable: []
-        order: 11
+        order: 13
     - name: Update component
       url: '#update-component'
       identifier: status-pages-update-component
@@ -13916,7 +14012,7 @@ menu:
         operationids:
           - UpdateComponent
         unstable: []
-        order: 7
+        order: 9
     - name: Get component
       url: '#get-component'
       identifier: status-pages-get-component
@@ -13928,7 +14024,7 @@ menu:
         operationids:
           - GetComponent
         unstable: []
-        order: 9
+        order: 11
     - name: Delete component
       url: '#delete-component'
       identifier: status-pages-delete-component
@@ -13940,7 +14036,7 @@ menu:
         operationids:
           - DeleteComponent
         unstable: []
-        order: 10
+        order: 12
     - name: Create component
       url: '#create-component'
       identifier: status-pages-create-component
@@ -13952,7 +14048,7 @@ menu:
         operationids:
           - CreateComponent
         unstable: []
-        order: 6
+        order: 8
     - name: List components
       url: '#list-components'
       identifier: status-pages-list-components
@@ -13964,7 +14060,7 @@ menu:
         operationids:
           - ListComponents
         unstable: []
-        order: 8
+        order: 10
     - name: Update status page
       url: '#update-status-page'
       identifier: status-pages-update-status-page
@@ -14012,7 +14108,7 @@ menu:
         operationids:
           - ListMaintenances
         unstable: []
-        order: 18
+        order: 20
     - name: List degradations
       url: '#list-degradations'
       identifier: status-pages-list-degradations
@@ -14024,7 +14120,7 @@ menu:
         operationids:
           - ListDegradations
         unstable: []
-        order: 13
+        order: 15
     - name: Create status page
       url: '#create-status-page'
       identifier: status-pages-create-status-page

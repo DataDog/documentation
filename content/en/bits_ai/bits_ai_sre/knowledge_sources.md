@@ -27,9 +27,8 @@ To maximize the value of this integration, document the services, dependencies, 
 
 ## Bits.md
 
-{{< callout url="https://datadoghq.com/product-preview/bits-ai-sre-pilot-features" >}}
-<b>Bits.md</b> is in Preview. Click <strong>Request Access</strong> to join the Preview program.
-{{< /callout >}}
+<div class="alert alert-info">
+Bits.md is in Preview for all customers.</div>
 
 You can proactively guide how Bits investigates your environment by creating a `bits.md` file at [**Bits AI SRE** > **Settings** > **Bits.md**][2].
 
@@ -104,7 +103,7 @@ Rule:
 
 At the end of an investigation, let Bits AI SRE know whether the conclusion it made was correct.
 
-{{< img src="bits_ai/help_bits_ai_learn_1.png" alt="An investigation conclusion with the helpful and unhelpful rating buttons highlighted" style="width:100%;" >}}
+{{< img src="bits_ai/help_bits_ai_learn_2.png" alt="Post-investigation root cause feedback flow" style="width:100%;" >}}
 
 If the conclusion was inaccurate, provide Bits AI SRE with the correct root cause, highlighting what it missed, and explaining what it should do differently next time. Your feedback should:
 - Identify the actual root cause (not just observed effects or symptoms)
