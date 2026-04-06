@@ -8938,15 +8938,15 @@ menu:
       parent: digital_experience_heading
       identifier: pa_experiments
       weight: 50000
-    - name: Plan and Launch Experiments
-      url: experiments/plan_and_launch_experiments
-      parent: pa_experiments
-      identifier: pa_experiments_plan
-      weight: 1
     - name: Create Experiment Metrics
       url: experiments/defining_metrics
       parent: pa_experiments
       identifier: pa_experiments_metrics
+      weight: 1
+    - name: Plan and Launch Experiments
+      url: experiments/plan_and_launch_experiments
+      parent: pa_experiments
+      identifier: pa_experiments_plan
       weight: 2
     - name: Read Experiment Results
       url: experiments/reading_results
