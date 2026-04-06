@@ -1,10 +1,6 @@
 ---
 title: End User Device Monitoring
 description: Monitor employee desktops and laptops to detect performance, connectivity, and application issues across your organization.
-further_reading:
-   - link: "/infrastructure/end_user_device_monitoring/setup"
-     tag: "Documentation"
-     text: "Set up End User Device Monitoring"
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/end-user-device-monitoring/" btn_hidden="false" >}}
@@ -33,10 +29,6 @@ Use [Fleet Automation][6] to manage the Agents installed on those devices, inclu
 | **Wi-Fi monitoring**              | Monitor Wi-Fi metrics such as signal quality, transmission rate, and access point transitions with the [WiFi/WLAN integration][2], which helps identify connectivity issues and overloaded access points. |
 | **Windows crash detection**       | Detect Blue Screen of Death (BSOD) events on Windows devices with the [Windows Crash Detection integration][3], which generates Datadog events showing when system crashes occur.                         |
 | **Network path analysis**         | Use [Network Path][4] to trace network traffic from an end-user device to its destination and identify where latency or connectivity issues occur.                                                        |
-
-## Further reading
-
-{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /infrastructure/process
 [2]: /integrations/wlan/

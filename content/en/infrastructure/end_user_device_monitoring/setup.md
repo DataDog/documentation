@@ -1,6 +1,7 @@
 ---
 title: Set up End User Device Monitoring
 description: Set up End User Device Monitoring to collect performance and connectivity data from employee desktops and laptops.
+private: true
 further_reading:
    - link: "/infrastructure/end_user_device_monitoring/"
      tag: "Documentation"
@@ -11,7 +12,11 @@ further_reading:
 End User Device Monitoring is in Preview. To enroll, click <b>Request Access</b>.
 {{< /callout >}}
 
-Once invited to the Preview, refer to this page, which explains how to configure the Datadog Agent to enable End User Device Monitoring.
+## Overview
+
+Managing employee devices at scale is difficult when performance issues, connectivity problems, and crashes are hard to detect before they affect users. End User Device Monitoring gives IT teams visibility into the health and performance of employee desktops and laptops, both physical and virtual, from a single location in Datadog. This page covers how End User Device Monitoring works and its key capabilities.
+
+<div class="alert alert-danger">You must receive confirmation of Preview access before data appears in Datadog. After submitting your request, wait for an access confirmation before completing the setup steps below.</div>
 
 ## Supported platforms
 
@@ -20,6 +25,8 @@ Once invited to the Preview, refer to this page, which explains how to configure
 - Linux
 
 ## Configure the Datadog Agent
+
+1. Confirm that you have received access to the Preview. If you have not received confirmation, [request access][12] and wait for approval before continuing.
 
 1. Install the Datadog Agent (v7.76 or later is required):
    - [Windows installation instructions][1]
@@ -77,3 +84,4 @@ To collect additional data from monitored devices, enable one or more of the fol
 [9]: /integrations/wincrashdetect/
 [10]: /network_monitoring/network_path/setup/?tab=windows
 [11]: /infrastructure/end_user_device_monitoring/#key-capabilities
+[12]: https://www.datadoghq.com/product-preview/end-user-device-monitoring/
