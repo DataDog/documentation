@@ -10,7 +10,7 @@ Agentic Onboarding is in Preview.
 
 ## Overview
 
-Agentic Onboarding lets LLM coding agents instrument your frontend applications for [Error Tracking][3], [Real User Monitoring (RUM)][4], [Product Analytics][5], Infrastructure Monitoring[8], and [Serverless Monitoring][7] with a single prompt.
+Agentic Onboarding lets LLM coding agents instrument your frontend applications for [Error Tracking][3], [Real User Monitoring (RUM)][4], [Product Analytics][5], [Infrastructure Monitoring][8], and [Serverless Monitoring][7] with a single prompt.
 
 Your coding assistant, such as [Cursor][1] or [Claude Code][2], detects your project's frameworks, adds configuration, and provisions required tokens and apps directly from your IDE.
 
