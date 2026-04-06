@@ -28,7 +28,7 @@ To maximize the value of this integration, document the services, dependencies, 
 ## Bits.md
 
 <div class="alert alert-info">
-bits.md is now in Preview for all customers.</div>
+bits.md is in Preview for all customers.</div>
 
 You can proactively guide how Bits investigates your environment by creating a `bits.md` file at [**Bits AI SRE** > **Settings** > **Bits.md**][2].
 

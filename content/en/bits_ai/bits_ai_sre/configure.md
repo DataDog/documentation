@@ -31,11 +31,12 @@ For monitor alert investigations, a summary of the findings is available on the 
    <div class="alert alert-info">Each Slack workspace can only be connected to one Datadog organization.</div>
 
 ### Microsoft Teams
-<div class="alert alert-info">
-The Microsoft Teams integration with Bits AI SRE is now in Preview for all customers.</div>
 
 1. [Connect your Microsoft tenant to Datadog][12].
 1. In your monitor, go to **Configure notifications and automations** and add the `@teams-{handle-name}` handle. This sends monitor notifications to your chosen MS Teams channel. Bits will append its findings to these notifications.
+
+<div class="alert alert-info">
+The Microsoft Teams integration with Bits AI SRE is in Preview for all customers.</div>
 
 ### Datadog Case Management
 
