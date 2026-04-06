@@ -3980,6 +3980,21 @@ menu:
       parent: tracing
       identifier: tracing_glossary
       weight: 1
+    - name: APM Basic
+      url: tracing/apm_basic/
+      parent: tracing
+      identifier: apm_basic
+      weight: 1.5
+    - name: Setup
+      url: tracing/apm_basic/setup/
+      parent: apm_basic
+      identifier: apm_basic_setup
+      weight: 1
+    - name: Guides
+      url: tracing/apm_basic/guide/
+      parent: apm_basic
+      identifier: apm_basic_guides
+      weight: 2
     - name: Application Instrumentation
       url: tracing/trace_collection/
       parent: tracing
