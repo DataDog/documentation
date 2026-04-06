@@ -1,0 +1,27 @@
+---
+title: Region param
+draft: true
+---
+
+## Overview
+
+This page contains examples of the region param component.
+
+
+## Examples
+
+### Plain text
+
+{% region-param key="dd_site" code=false link=false text="Datadog site" /%}
+
+### Code format
+
+{% region-param key="dd_site" code=true link=false text="Datadog site" /%}
+
+### Link format
+
+{% region-param key="dd_site" code=false link=true text="Visit your Datadog site" /%}
+
+### Code and link combined
+
+{% region-param key="dd_site" code=true link=true text="Go to your site" /%}
