@@ -217,7 +217,7 @@ Notifications are bundled over a short period to reduce noise.
 | **New flaky test detected** | A new flaky test is detected on the default branch of the repository. |
 | **Test quarantined** | A test is quarantined by an automated policy rule (time-based, branch-based, or failure rate). |
 | **Test disabled** | A test is disabled by an automated policy rule (time-based, branch-based, or failure rate). |
-| **Fix successful** | A test passes all retries in the remediation flow and is marked as fixed. |
+| **Fix successful** | A test passes all retries in the remediation flow and is marked as fix in progress. |
 | **Fix failed** | A test fails during the remediation flow. |
 | **Manual status change** | A user manually changes the status of a flaky test. |
 
