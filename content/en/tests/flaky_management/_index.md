@@ -201,9 +201,25 @@ Flaky Tests Management uses AI to automatically assign a root cause category to 
 
 ## Receive notifications
 
-Set up notifications to track changes to your flaky tests. Whenever a user or a policy changes the state of a flaky test, a message is sent to your selected recipients. You can send notifications to email addresses or Slack channels (see the [Datadog Slack integration][5]), and route messages based on test code owners. If no code owners are specified, all selected recipients are notified of all flaky test changes in the repository. Configure notification for each repository from the  [**Flaky Test Policies**][13] page in Software Delivery settings.
+Set up notifications to track changes to your flaky tests. Notifications are sent when:
+- A new flaky test is detected on the default branch of the repository.
+- A user or policy changes the status of a flaky test.
+- The remediation flow for a flaky test succeeds or fails.
 
-Notifications are not sent immediately; they are batched every few minutes to reduce noise.
+You can send notifications to email addresses or Slack channels (see the [Datadog Slack integration][5]), and route messages based on test code owners. If no code owners are specified, all selected recipients are notified of all flaky test changes in the repository. Configure notifications for each repository from the [**Flaky Test Policies**][13] page in Software Delivery settings.
+
+Notifications are bundled over a short period to reduce noise.
+
+### Notification types
+
+| Notification Type | Description |
+|---|---|
+| **New flaky test detected** | A new flaky test is detected on the default branch of the repository. |
+| **Test quarantined** | A test is quarantined by an automated policy rule (time-based, branch-based, or failure rate). |
+| **Test disabled** | A test is disabled by an automated policy rule (time-based, branch-based, or failure rate). |
+| **Fix successful** | A test passes all retries in the remediation flow and is marked as fixed. |
+| **Fix failed** | A test fails during the remediation flow. |
+| **Manual status change** | A user manually changes the status of a flaky test. |
 
 {{< img src="tests/flaky_management_notifications_settings-2.png" alt="Notifications settings UI" style="width:100%;" >}}
 
