@@ -16,10 +16,6 @@ To configure GitHub:
 1. Install the [GitHub integration][13].
 1. [Tag your APM telemetry with Git information][14] to link running application versions to specific repositories and commits.
 
-{{< callout url="http://datadoghq.com/product-preview/bits-ai-sre-pilot-features" >}}
-A subset of third-party integrations is in Preview. Click <strong>Request Access</strong> to join the Preview program.
-{{< /callout >}}
-
 ## Send investigation findings to ITSM and collaboration platforms
 
 By default, all investigations are listed on the [Bits AI Investigations][1] page.
@@ -34,11 +30,12 @@ For monitor alert investigations, a summary of the findings is available on the 
 1. Lastly, go to [**Bits AI SRE** > **Settings** > **Integrations**][4] and connect your Slack workspace. This allows Bits to write its findings directly under the monitor notification in Slack.
    <div class="alert alert-info">Each Slack workspace can only be connected to one Datadog organization.</div>
 
-<!-- Commenting out this feature which was delayed
 ### Microsoft Teams
+<div class="alert alert-info">
+The Microsoft Teams integration with Bits AI SRE is now in Preview for all customers.</div>
+
 1. [Connect your Microsoft tenant to Datadog][12].
 1. In your monitor, go to **Configure notifications and automations** and add the `@teams-{handle-name}` handle. This sends monitor notifications to your chosen MS Teams channel. Bits will append its findings to these notifications.
--->
 
 ### Datadog Case Management
 
