@@ -17,9 +17,7 @@ further_reading:
 
 If your front-end JavaScript source code is minified, upload your source maps to Datadog to de-obfuscate your different stack traces. For any given error, you can access the file path, line number, and code snippet for each frame of the related stack trace. Datadog can also link stack frames to your source code in your repository.
 
-<div class="alert alert-info">Only errors collected by <a href="/error_tracking/">Error Tracking</a>, <a href="/real_user_monitoring/">Real User Monitoring (RUM)</a>, and logs from <a href="/logs/log_collection/javascript/">Browser Logs Collection</a> can be unminified.</div>
-
-<div class="alert alert-info">To automate source map uploads as part of your build process, see <a href="/real_user_monitoring/application_monitoring/browser/build_plugins/source_maps">Build Plugins: Source Maps</a>.</div>
+<div class="alert alert-info"><ul><li>Only errors collected by <a href="/error_tracking/">Error Tracking</a>, <a href="/real_user_monitoring/">Real User Monitoring (RUM)</a>, and logs from <a href="/logs/log_collection/javascript/">Browser Logs Collection</a> can be unminified.</li><li>To automate source map uploads as part of your build process, see <a href="/real_user_monitoring/application_monitoring/browser/build_plugins/source_maps">Build Plugins: Source Maps</a>.</li></ul></div>
 
 ## Instrument your code
 

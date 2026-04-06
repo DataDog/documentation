@@ -27,7 +27,8 @@ Available plugins:
 
 Install the Datadog build plugin package for your bundler:
 
-### Webpack
+{{< tabs >}}
+{{% tab "Webpack" %}}
 
 ```bash
 npm install --save-dev @datadog/webpack-plugin
@@ -46,7 +47,8 @@ module.exports = {
 };
 ```
 
-### Vite
+{{% /tab %}}
+{{% tab "Vite" %}}
 
 ```bash
 npm install --save-dev @datadog/vite-plugin
@@ -66,7 +68,8 @@ export default defineConfig({
 });
 ```
 
-### esbuild
+{{% /tab %}}
+{{% tab "esbuild" %}}
 
 ```bash
 npm install --save-dev @datadog/esbuild-plugin
@@ -85,7 +88,8 @@ require('esbuild').build({
 });
 ```
 
-### Rollup
+{{% /tab %}}
+{{% tab "Rollup" %}}
 
 ```bash
 npm install --save-dev @datadog/rollup-plugin
@@ -104,7 +108,8 @@ export default {
 };
 ```
 
-### Rspack
+{{% /tab %}}
+{{% tab "Rspack" %}}
 
 ```bash
 npm install --save-dev @datadog/rspack-plugin
@@ -122,6 +127,9 @@ module.exports = {
   ],
 };
 ```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Configuration
 

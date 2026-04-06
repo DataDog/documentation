@@ -8301,21 +8301,6 @@ menu:
       parent: rum_browser
       identifier: rum_browser_build_plugins
       weight: 103
-    - name: Source Maps
-      url: real_user_monitoring/application_monitoring/browser/build_plugins/source_maps/
-      parent: rum_browser_build_plugins
-      identifier: rum_browser_build_plugins_source_maps
-      weight: 10301
-    - name: Action Name Deobfuscation
-      url: real_user_monitoring/application_monitoring/browser/build_plugins/action_name_deobfuscation/
-      parent: rum_browser_build_plugins
-      identifier: rum_browser_build_plugins_action_name_deobfuscation
-      weight: 10302
-    - name: Source Code Context
-      url: real_user_monitoring/application_monitoring/browser/build_plugins/source_code_context/
-      parent: rum_browser_build_plugins
-      identifier: rum_browser_build_plugins_source_code_context
-      weight: 10303
     - name: Data Collected
       url: real_user_monitoring/application_monitoring/browser/data_collected/
       parent: rum_browser
