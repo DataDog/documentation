@@ -25886,6 +25886,14 @@ components:
     FlakyTestsSearchFilter:
       description: Search filter settings.
       properties:
+        include_history:
+          default: false
+          description: |-
+            Whether to include the status change history for each flaky test in the response.
+            When set to true, each test will include a 'history' array with chronological status changes.
+            Defaults to false.
+          example: true
+          type: boolean
         query:
           default: "*"
           description: |-
@@ -25931,14 +25939,6 @@ components:
       properties:
         filter:
           $ref: "#/components/schemas/FlakyTestsSearchFilter"
-        include_history:
-          default: false
-          description: |-
-            Whether to include the status change history for each flaky test in the response.
-            When set to true, each test will include a `history` array with chronological status changes.
-            Defaults to false.
-          example: true
-          type: boolean
         page:
           $ref: "#/components/schemas/FlakyTestsSearchPageOptions"
         sort:
