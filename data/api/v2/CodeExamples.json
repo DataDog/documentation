@@ -716,6 +716,13 @@
       "description": "Create a feature flag returns \"Created\" response"
     }
   ],
+  "CreateAllocationsForFeatureFlagInEnvironment": [
+    {
+      "group": "feature_flags",
+      "suffix": "_3662093014",
+      "description": "Create allocation for a flag in an environment returns \"Created\" response"
+    }
+  ],
   "CreateFeatureFlagsEnvironment": [
     {
       "group": "feature_flags",
@@ -728,6 +735,13 @@
       "group": "feature_flags",
       "suffix": "",
       "description": "Update a feature flag returns \"OK\" response"
+    }
+  ],
+  "UpdateAllocationsForFeatureFlagInEnvironment": [
+    {
+      "group": "feature_flags",
+      "suffix": "_3789036209",
+      "description": "Update targeting rules for a flag in an environment returns \"OK\" response"
     }
   ],
   "MakeGCPSTSDelegate": [
@@ -2158,6 +2172,13 @@
       "group": "synthetics",
       "suffix": "",
       "description": "Save new value for on-demand concurrency cap returns \"OK\" response"
+    }
+  ],
+  "CreateTeamMembership": [
+    {
+      "group": "teams",
+      "suffix": "",
+      "description": "Add a user to a team returns \"Represents a user's association to a team\" response"
     }
   ],
   "AddTeamHierarchyLink": [

@@ -719,6 +719,14 @@ components:
       schema:
         default: false
         type: boolean
+    IncidentUserDefinedFieldIDPathParameter:
+      description: The ID of the incident user-defined field.
+      in: path
+      name: field_id
+      required: true
+      schema:
+        example: "00000000-0000-0000-0000-000000000000"
+        type: string
     Include:
       description: Include relationship data.
       explode: true
@@ -1034,7 +1042,7 @@ components:
         type: string
     ResourceID:
       description: |-
-        Identifier, formatted as `type:id`. Supported types: `dashboard`, `integration-service`, `integration-webhook`, `notebook`, `powerpack`, `reference-table`, `security-rule`, `slo`, `synthetics-global-variable`, `synthetics-test`, `synthetics-private-location`, `monitor`, `workflow`, `app-builder-app`, `connection`, `connection-group`, `rum-application`, `cross-org-connection`, `spreadsheet`, `on-call-schedule`, `on-call-escalation-policy`, `on-call-team-routing-rules`, `logs-pipeline`, `case-management-project`.
+        Identifier, formatted as `type:id`. Supported types: `dashboard`, `integration-service`, `integration-webhook`, `notebook`, `powerpack`, `reference-table`, `security-rule`, `slo`, `synthetics-global-variable`, `synthetics-test`, `synthetics-private-location`, `monitor`, `workflow`, `app-builder-app`, `connection`, `connection-group`, `rum-application`, `cross-org-connection`, `spreadsheet`, `on-call-schedule`, `on-call-escalation-policy`, `on-call-team-routing-rules`, `logs-pipeline`, `case-management-project`, `monitor-notification-rule`.
       example: "dashboard:abc-def-ghi"
       in: path
       name: resource_id
@@ -1253,6 +1261,15 @@ components:
       required: true
       schema:
         example: "550e8400-e29b-41d4-a716-446655440001"
+        format: uuid
+        type: string
+    exposure_schedule_id:
+      description: The ID of the exposure schedule.
+      in: path
+      name: exposure_schedule_id
+      required: true
+      schema:
+        example: "550e8400-e29b-41d4-a716-446655440010"
         format: uuid
         type: string
     feature_flag_id:
@@ -3326,6 +3343,334 @@ components:
         - WARN
         - ERROR
         - OK
+    Allocation:
+      description: Targeting rule (allocation) details for a feature flag environment.
+      properties:
+        created_at:
+          description: The timestamp when the targeting rule allocation was created.
+          example: "2024-01-01T12:00:00Z"
+          format: date-time
+          type: string
+        environment_ids:
+          description: Environment IDs associated with this targeting rule allocation.
+          example:
+            - "550e8400-e29b-41d4-a716-446655440001"
+          items:
+            description: Environment ID linked to this targeting rule allocation.
+            format: uuid
+            type: string
+          type: array
+        experiment_id:
+          description: The experiment ID linked to this targeting rule allocation.
+          example: "550e8400-e29b-41d4-a716-446655440030"
+          nullable: true
+          type: string
+        exposure_schedule:
+          $ref: "#/components/schemas/AllocationExposureSchedule"
+        guardrail_metrics:
+          description: Guardrail metrics associated with this targeting rule allocation.
+          items:
+            $ref: "#/components/schemas/GuardrailMetric"
+          type: array
+        id:
+          description: The unique identifier of the targeting rule allocation.
+          example: "550e8400-e29b-41d4-a716-446655440020"
+          format: uuid
+          type: string
+        key:
+          description: The unique key of the targeting rule allocation.
+          example: "prod-rollout"
+          type: string
+        name:
+          description: The display name of the targeting rule.
+          example: "Production Rollout"
+          type: string
+        order_position:
+          description: Sort order position within the environment.
+          example: 0
+          format: int64
+          type: integer
+        targeting_rules:
+          description: Conditions associated with this targeting rule allocation.
+          items:
+            $ref: "#/components/schemas/TargetingRule"
+          type: array
+        type:
+          $ref: "#/components/schemas/AllocationType"
+        updated_at:
+          description: The timestamp when the targeting rule allocation was last updated.
+          example: "2024-01-01T12:00:00Z"
+          format: date-time
+          type: string
+        variant_weights:
+          description: Weighted variant assignments for this targeting rule allocation.
+          items:
+            $ref: "#/components/schemas/VariantWeight"
+          type: array
+      required:
+        - name
+        - key
+        - targeting_rules
+        - variant_weights
+        - order_position
+        - environment_ids
+        - type
+        - guardrail_metrics
+        - created_at
+        - updated_at
+      type: object
+    AllocationDataRequest:
+      description: Data wrapper for allocation request payloads.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/UpsertAllocationRequest"
+        type:
+          $ref: "#/components/schemas/AllocationDataType"
+      required:
+        - type
+        - attributes
+      type: object
+    AllocationDataResponse:
+      description: Data wrapper for targeting rule allocation responses.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/Allocation"
+        id:
+          description: The unique identifier of the targeting rule allocation.
+          example: "550e8400-e29b-41d4-a716-446655440020"
+          format: uuid
+          type: string
+        type:
+          $ref: "#/components/schemas/AllocationDataType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    AllocationDataType:
+      description: The resource type.
+      enum:
+        - "allocations"
+      example: "allocations"
+      type: string
+      x-enum-varnames:
+        - ALLOCATIONS
+    AllocationExposureGuardrailTrigger:
+      description: Guardrail trigger details for a progressive rollout.
+      properties:
+        allocation_exposure_schedule_id:
+          description: The progressive rollout ID this trigger belongs to.
+          example: "550e8400-e29b-41d4-a716-446655440010"
+          format: uuid
+          type: string
+        created_at:
+          description: The timestamp when this trigger was created.
+          example: "2024-01-01T12:00:00Z"
+          format: date-time
+          type: string
+        flagging_variant_id:
+          description: The variant ID that triggered this event.
+          example: "550e8400-e29b-41d4-a716-446655440001"
+          format: uuid
+          type: string
+        id:
+          description: The unique identifier of the guardrail trigger.
+          example: "550e8400-e29b-41d4-a716-446655440080"
+          format: uuid
+          type: string
+        metric_id:
+          description: The metric ID associated with the trigger.
+          example: "metric-error-rate"
+          type: string
+        triggered_action:
+          description: The action that was triggered.
+          example: "PAUSE"
+          type: string
+        updated_at:
+          description: The timestamp when this trigger was last updated.
+          example: "2024-01-01T12:00:00Z"
+          format: date-time
+          type: string
+      required:
+        - id
+        - allocation_exposure_schedule_id
+        - flagging_variant_id
+        - metric_id
+        - triggered_action
+        - created_at
+        - updated_at
+      type: object
+    AllocationExposureRolloutStep:
+      description: Exposure progression step details.
+      properties:
+        allocation_exposure_schedule_id:
+          description: The progressive rollout ID this step belongs to.
+          example: "550e8400-e29b-41d4-a716-446655440010"
+          format: uuid
+          type: string
+        created_at:
+          description: The timestamp when the progression step was created.
+          example: "2024-01-01T12:00:00Z"
+          format: date-time
+          type: string
+        exposure_ratio:
+          description: The exposure ratio for this step.
+          example: 0.1
+          format: double
+          maximum: 1
+          minimum: 0
+          type: number
+        grouped_step_index:
+          description: Logical index grouping related steps.
+          example: 0
+          format: int64
+          minimum: 0
+          type: integer
+        id:
+          description: The unique identifier of the progression step.
+          example: "550e8400-e29b-41d4-a716-446655440040"
+          format: uuid
+          type: string
+        interval_ms:
+          description: Step duration in milliseconds.
+          example: 3600000
+          format: int64
+          nullable: true
+          type: integer
+        is_pause_record:
+          description: Whether this step represents a pause record.
+          example: false
+          type: boolean
+        order_position:
+          description: Sort order for the progression step.
+          example: 0
+          format: int64
+          type: integer
+        updated_at:
+          description: The timestamp when the progression step was last updated.
+          example: "2024-01-01T12:00:00Z"
+          format: date-time
+          type: string
+      required:
+        - id
+        - allocation_exposure_schedule_id
+        - order_position
+        - exposure_ratio
+        - is_pause_record
+        - grouped_step_index
+        - created_at
+        - updated_at
+      type: object
+    AllocationExposureSchedule:
+      description: Progressive release details for a targeting rule allocation.
+      properties:
+        absolute_start_time:
+          description: The absolute UTC start time for this schedule.
+          example: "2025-06-13T12:00:00Z"
+          format: date-time
+          nullable: true
+          type: string
+        allocation_id:
+          description: The targeting rule allocation ID this progressive rollout belongs to.
+          example: "550e8400-e29b-41d4-a716-446655440020"
+          format: uuid
+          type: string
+        control_variant_id:
+          description: The control variant ID used for experiment comparisons.
+          example: "550e8400-e29b-41d4-a716-446655440012"
+          nullable: true
+          type: string
+        created_at:
+          description: The timestamp when the schedule was created.
+          example: "2024-01-01T12:00:00Z"
+          format: date-time
+          type: string
+        guardrail_triggered_action:
+          description: Last guardrail action triggered for this schedule.
+          example: "PAUSE"
+          nullable: true
+          type: string
+        guardrail_triggers:
+          description: Guardrail trigger records for this schedule.
+          items:
+            $ref: "#/components/schemas/AllocationExposureGuardrailTrigger"
+          type: array
+        id:
+          description: The unique identifier of the progressive rollout.
+          example: "550e8400-e29b-41d4-a716-446655440010"
+          format: uuid
+          type: string
+        rollout_options:
+          $ref: "#/components/schemas/RolloutOptions"
+        rollout_steps:
+          description: Ordered progression steps for exposure.
+          items:
+            $ref: "#/components/schemas/AllocationExposureRolloutStep"
+          type: array
+        updated_at:
+          description: The timestamp when the schedule was last updated.
+          example: "2024-01-01T12:00:00Z"
+          format: date-time
+          type: string
+      required:
+        - allocation_id
+        - rollout_options
+        - rollout_steps
+        - guardrail_triggers
+        - created_at
+        - updated_at
+      type: object
+    AllocationExposureScheduleData:
+      description: Data wrapper for progressive rollout schedule responses.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/AllocationExposureSchedule"
+        id:
+          description: The unique identifier of the progressive rollout.
+          example: "550e8400-e29b-41d4-a716-446655440010"
+          format: uuid
+          type: string
+        type:
+          $ref: "#/components/schemas/AllocationExposureScheduleDataType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    AllocationExposureScheduleDataType:
+      description: The resource type for progressive rollout schedules.
+      enum:
+        - "allocation_exposure_schedules"
+      example: "allocation_exposure_schedules"
+      type: string
+      x-enum-varnames:
+        - ALLOCATION_EXPOSURE_SCHEDULES
+    AllocationExposureScheduleResponse:
+      description: Response containing a progressive rollout schedule.
+      properties:
+        data:
+          $ref: "#/components/schemas/AllocationExposureScheduleData"
+      required:
+        - data
+      type: object
+    AllocationResponse:
+      description: Response containing a single targeting rule (allocation).
+      properties:
+        data:
+          $ref: "#/components/schemas/AllocationDataResponse"
+      required:
+        - data
+      type: object
+    AllocationType:
+      description: The type of targeting rule (called allocation in the API model).
+      enum:
+        - FEATURE_GATE
+        - CANARY
+      example: "FEATURE_GATE"
+      type: string
+      x-enum-varnames:
+        - FEATURE_GATE
+        - CANARY
     Annotation:
       description: "A list of annotations used in the workflow. These are like sticky notes for your workflow!"
       properties:
@@ -4293,6 +4638,7 @@ components:
         ip_list:
           description: The client IP addresses matched by the exclusion filter (CIDR notation is supported).
           items:
+            description: A single IP address to exclude.
             example: "198.51.100.72"
             type: string
           type: array
@@ -4303,6 +4649,7 @@ components:
         parameters:
           description: A list of parameters matched by the exclusion filter in the HTTP query string and HTTP request body. Nested parameters can be matched by joining fields with a dot character.
           items:
+            description: A request parameter name to exclude from the query string or request body.
             example: "list.search.query"
             type: string
           type: array
@@ -4339,6 +4686,7 @@ components:
         ip_list:
           description: The client IP addresses matched by the exclusion filter (CIDR notation is supported).
           items:
+            description: A single IP address to exclude.
             example: "198.51.100.72"
             type: string
           type: array
@@ -4347,6 +4695,7 @@ components:
         parameters:
           description: A list of parameters matched by the exclusion filter in the HTTP query string and HTTP request body. Nested parameters can be matched by joining fields with a dot character.
           items:
+            description: A request parameter name to exclude from the query string or request body.
             example: "list.search.query"
             type: string
           type: array
@@ -4498,6 +4847,7 @@ components:
         ip_list:
           description: The client IP addresses matched by the exclusion filter (CIDR notation is supported).
           items:
+            description: A single IP address to exclude.
             example: "198.51.100.72"
             type: string
           type: array
@@ -7334,11 +7684,13 @@ components:
       x-enum-varnames:
         - REFERENCE_TABLES_BATCH_ROWS_QUERY
     BatchRowsQueryRequest:
+      description: Request object for querying multiple rows from a reference table by their identifiers.
       properties:
         data:
           $ref: "#/components/schemas/BatchRowsQueryRequestData"
       type: object
     BatchRowsQueryRequestData:
+      description: Data object for a batch rows query request.
       properties:
         attributes:
           $ref: "#/components/schemas/BatchRowsQueryRequestDataAttributes"
@@ -7348,15 +7700,19 @@ components:
         - type
       type: object
     BatchRowsQueryRequestDataAttributes:
+      description: Attributes for a batch rows query request.
       properties:
         row_ids:
+          description: List of row identifiers to query from the reference table.
           example:
             - "row_id_1"
             - "row_id_2"
           items:
+            description: A single row identifier.
             type: string
           type: array
         table_id:
+          description: Unique identifier of the reference table to query.
           example: "00000000-0000-0000-0000-000000000000"
           type: string
       required:
@@ -7364,6 +7720,7 @@ components:
         - table_id
       type: object
     BatchRowsQueryResponse:
+      description: Response object for a batch rows query against a reference table.
       example:
         data:
           id: 00000000-0000-0000-0000-000000000000
@@ -7380,8 +7737,10 @@ components:
           $ref: "#/components/schemas/BatchRowsQueryResponseData"
       type: object
     BatchRowsQueryResponseData:
+      description: Data object for a batch rows query response.
       properties:
         id:
+          description: Unique identifier of the batch query.
           type: string
         relationships:
           $ref: "#/components/schemas/BatchRowsQueryResponseDataRelationships"
@@ -7391,11 +7750,13 @@ components:
         - type
       type: object
     BatchRowsQueryResponseDataRelationships:
+      description: Relationships of the batch rows query response data.
       properties:
         rows:
           $ref: "#/components/schemas/BatchRowsQueryResponseDataRelationshipsRows"
       type: object
     BatchRowsQueryResponseDataRelationshipsRows:
+      description: Relationship data containing the list of matching rows.
       properties:
         data:
           items:
@@ -12718,6 +13079,92 @@ components:
         - SEARCH
         - CONTAINER
         - CALLOUTVALUE
+    Condition:
+      description: Targeting condition details.
+      properties:
+        attribute:
+          description: The user or request attribute to evaluate.
+          example: "country"
+          type: string
+        created_at:
+          description: The timestamp when the condition was created.
+          example: "2024-01-01T12:00:00Z"
+          format: date-time
+          type: string
+        id:
+          description: The unique identifier of the condition.
+          example: "550e8400-e29b-41d4-a716-446655440070"
+          format: uuid
+          type: string
+        operator:
+          $ref: "#/components/schemas/ConditionOperator"
+        updated_at:
+          description: The timestamp when the condition was last updated.
+          example: "2024-01-01T12:00:00Z"
+          format: date-time
+          type: string
+        value:
+          description: Values used by the selected operator.
+          example: ["US", "CA"]
+          items:
+            description: Target value for the selected operator.
+            type: string
+          type: array
+      required:
+        - id
+        - operator
+        - attribute
+        - value
+        - created_at
+        - updated_at
+      type: object
+    ConditionOperator:
+      description: The operator used in a targeting condition.
+      enum:
+        - LT
+        - LTE
+        - GT
+        - GTE
+        - MATCHES
+        - NOT_MATCHES
+        - ONE_OF
+        - NOT_ONE_OF
+        - IS_NULL
+        - EQUALS
+      example: "ONE_OF"
+      type: string
+      x-enum-varnames:
+        - LT
+        - LTE
+        - GT
+        - GTE
+        - MATCHES
+        - NOT_MATCHES
+        - ONE_OF
+        - NOT_ONE_OF
+        - IS_NULL
+        - EQUALS
+    ConditionRequest:
+      description: Condition request payload for targeting rules.
+      properties:
+        attribute:
+          description: The user or request attribute to evaluate.
+          example: "user_tier"
+          type: string
+        operator:
+          $ref: "#/components/schemas/ConditionOperator"
+        value:
+          description: Values used by the selected operator.
+          example: ["premium", "enterprise"]
+          items:
+            description: Target value for the selected operator.
+            type: string
+          type: array
+      required:
+        - operator
+        - attribute
+        - value
+      type: object
     ConfigCatCredentials:
       description: The definition of the `ConfigCatCredentials` object.
       oneOf:
@@ -14144,6 +14591,14 @@ components:
         data:
           $ref: "#/components/schemas/ActionConnectionData"
       type: object
+    CreateAllocationsRequest:
+      description: Request to create targeting rules (allocations) for a feature flag in an environment.
+      properties:
+        data:
+          $ref: "#/components/schemas/AllocationDataRequest"
+      required:
+        - data
+      type: object
     CreateAppRequest:
       description: A request object for creating a new app.
       example:
@@ -14857,6 +15312,7 @@ components:
           description: List of queries to define the environment scope.
           example: ["staging", "test"]
           items:
+            description: A query string used to match the environment scope.
             type: string
           minItems: 1
           type: array
@@ -15252,6 +15708,7 @@ components:
         tags:
           description: User-defined tags for organizing the widget.
           items:
+            description: A single user-defined tag.
             type: string
           nullable: true
           type: array
@@ -15308,6 +15765,7 @@ components:
         tags:
           description: Tags to help categorize or filter the page.
           items:
+            description: A single tag for categorizing the page.
             type: string
           type: array
         target:
@@ -23010,6 +23468,7 @@ components:
           description: List of queries to define the environment scope.
           example: ["staging", "test"]
           items:
+            description: A query string used to match the environment scope.
             type: string
           minItems: 1
           type: array
@@ -23040,6 +23499,7 @@ components:
           $ref: "#/components/schemas/EnvironmentsPaginationMetaPage"
       type: object
     EnvironmentsPaginationMetaPage:
+      description: Pagination metadata for environments list responses.
       properties:
         total_count:
           description: Total number of items.
@@ -24379,6 +24839,78 @@ components:
           example: "One or several indexes are missing or invalid. Results hold data from the other indexes."
           type: string
       type: object
+    ExposureRolloutStepRequest:
+      description: Rollout step request payload.
+      properties:
+        exposure_ratio:
+          description: The exposure ratio for this step.
+          example: 0.5
+          format: double
+          maximum: 1
+          minimum: 0
+          type: number
+        grouped_step_index:
+          description: Logical index grouping related steps.
+          example: 1
+          format: int64
+          minimum: 0
+          type: integer
+        id:
+          description: The unique identifier of the progression step.
+          example: "550e8400-e29b-41d4-a716-446655440040"
+          format: uuid
+          type: string
+        interval_ms:
+          description: Step duration in milliseconds.
+          example: 3600000
+          format: int64
+          nullable: true
+          type: integer
+        is_pause_record:
+          description: Whether this step represents a pause record.
+          example: false
+          type: boolean
+      required:
+        - exposure_ratio
+        - is_pause_record
+        - grouped_step_index
+      type: object
+    ExposureScheduleRequest:
+      description: Progressive release request payload.
+      properties:
+        absolute_start_time:
+          description: The absolute UTC start time for this schedule.
+          example: "2025-06-13T12:00:00Z"
+          format: date-time
+          nullable: true
+          type: string
+        control_variant_id:
+          description: The control variant ID used for experiment comparisons.
+          example: "550e8400-e29b-41d4-a716-446655440012"
+          nullable: true
+          type: string
+        control_variant_key:
+          description: The control variant key used during creation workflows.
+          example: "control"
+          nullable: true
+          type: string
+        id:
+          description: The unique identifier of the progressive rollout.
+          example: "550e8400-e29b-41d4-a716-446655440010"
+          format: uuid
+          type: string
+        rollout_options:
+          $ref: "#/components/schemas/RolloutOptionsRequest"
+        rollout_steps:
+          description: Ordered progression steps for exposure.
+          items:
+            $ref: "#/components/schemas/ExposureRolloutStepRequest"
+          minItems: 1
+          type: array
+      required:
+        - rollout_options
+        - rollout_steps
+      type: object
     ExternalUser:
       description: Definition of a user.
       properties:
@@ -25102,6 +25634,12 @@ components:
           description: Indicates whether this feature flag requires approval for changes.
           example: false
           type: boolean
+        tags:
+          description: Tags associated with the feature flag.
+          example: []
+          items:
+            type: string
+          type: array
         updated_at:
           description: The timestamp when the feature flag was last updated.
           example: "2023-01-01T00:00:00Z"
@@ -25147,6 +25685,14 @@ components:
           description: The name of the environment.
           example: "env-search-term"
           type: string
+        environment_queries:
+          description: Queries that target this environment.
+          example:
+            - "test-feature-flag"
+            - "env-search-term"
+          items:
+            type: string
+          type: array
         is_production:
           description: Indicates whether the environment is production.
           example: false
@@ -25216,6 +25762,7 @@ components:
           $ref: "#/components/schemas/FeatureFlagsPaginationMetaPage"
       type: object
     FeatureFlagsPaginationMetaPage:
+      description: Pagination metadata for feature flags list responses.
       properties:
         total_count:
           description: Total number of items.
@@ -29327,6 +29874,47 @@ components:
         example: "env:production"
         type: string
       type: array
+    GuardrailMetric:
+      description: Guardrail metric details.
+      properties:
+        metric_id:
+          description: The metric ID to monitor.
+          example: "metric-error-rate"
+          type: string
+        trigger_action:
+          $ref: "#/components/schemas/GuardrailTriggerAction"
+        triggered_by:
+          description: The signal or system that triggered the action.
+          example: "guardrail_monitor"
+          nullable: true
+          type: string
+      required:
+        - metric_id
+        - trigger_action
+      type: object
+    GuardrailMetricRequest:
+      description: Guardrail metric request payload.
+      properties:
+        metric_id:
+          description: The metric ID to monitor.
+          example: "metric-error-rate"
+          type: string
+        trigger_action:
+          $ref: "#/components/schemas/GuardrailTriggerAction"
+      required:
+        - metric_id
+        - trigger_action
+      type: object
+    GuardrailTriggerAction:
+      description: Action to perform when a guardrail threshold is triggered.
+      enum:
+        - PAUSE
+        - ABORT
+      example: "PAUSE"
+      type: string
+      x-enum-varnames:
+        - PAUSE
+        - ABORT
     HTTPBody:
       description: The definition of `HTTPBody` object.
       properties:
@@ -32844,6 +33432,380 @@ components:
         type:
           $ref: "#/components/schemas/UsersType"
       type: object
+    IncidentUserDefinedFieldAttributesCreateRequest:
+      description: Attributes for creating an incident user-defined field.
+      properties:
+        category:
+          $ref: "#/components/schemas/IncidentUserDefinedFieldCategory"
+        collected:
+          $ref: "#/components/schemas/IncidentUserDefinedFieldCollected"
+        default_value:
+          description: The default value for the field. Must be one of the valid values when valid_values is set.
+          example: "critical"
+          nullable: true
+          type: string
+        display_name:
+          description: The human-readable name shown in the UI. Defaults to a formatted version of the name if not provided.
+          example: "Root Cause"
+          type: string
+        name:
+          description: The unique identifier of the field. Must start with a letter or digit and contain only letters, digits, underscores, or periods.
+          example: "root_cause"
+          type: string
+        ordinal:
+          description: A decimal string representing the field's display order in the UI.
+          example: "1.5"
+          nullable: true
+          type: string
+        required:
+          description: When true, users must fill out this field on incidents.
+          example: false
+          type: boolean
+        tag_key:
+          description: For metric tag-type fields only, the metric tag key that powers the autocomplete options.
+          example: "datacenter"
+          nullable: true
+          type: string
+        type:
+          $ref: "#/components/schemas/IncidentUserDefinedFieldFieldType"
+        valid_values:
+          description: The list of allowed values for dropdown and multiselect fields. Limited to 1000 values.
+          items:
+            $ref: "#/components/schemas/IncidentUserDefinedFieldValidValue"
+          type: array
+      required:
+        - name
+        - type
+      type: object
+    IncidentUserDefinedFieldAttributesResponse:
+      description: Attributes of an incident user-defined field.
+      properties:
+        attached_to:
+          description: The resource type this field is attached to. Always "incidents".
+          example: "incidents"
+          readOnly: true
+          type: string
+        category:
+          $ref: "#/components/schemas/IncidentUserDefinedFieldCategory"
+        collected:
+          $ref: "#/components/schemas/IncidentUserDefinedFieldCollected"
+        created:
+          description: Timestamp when the field was created.
+          example: "2026-03-18T08:40:05.185406Z"
+          format: date-time
+          readOnly: true
+          type: string
+        default_value:
+          description: The default value for the field.
+          example: "critical"
+          nullable: true
+          type: string
+        deleted:
+          description: Timestamp when the field was soft-deleted, or null if not deleted.
+          example:
+          format: date-time
+          nullable: true
+          readOnly: true
+          type: string
+        display_name:
+          description: The human-readable name shown in the UI.
+          example: "Root Cause"
+          type: string
+        metadata:
+          $ref: "#/components/schemas/IncidentUserDefinedFieldMetadata"
+        modified:
+          description: Timestamp when the field was last modified.
+          example: "2026-03-18T08:40:05.185406Z"
+          format: date-time
+          nullable: true
+          readOnly: true
+          type: string
+        name:
+          description: The unique identifier of the field.
+          example: "root_cause"
+          type: string
+        ordinal:
+          description: A decimal string representing the field's display order in the UI.
+          example: "1.5"
+          nullable: true
+          type: string
+        prerequisite:
+          description: Reserved for future use. Always null.
+          example:
+          nullable: true
+          readOnly: true
+          type: string
+        required:
+          description: When true, users must fill out this field on incidents.
+          example: false
+          type: boolean
+        reserved:
+          description: When true, this field is reserved for system use and cannot be deleted.
+          example: false
+          readOnly: true
+          type: boolean
+        table_id:
+          description: Reserved for internal use. Always 0.
+          example: 0
+          format: int64
+          readOnly: true
+          type: integer
+        tag_key:
+          description: For metric tag-type fields only, the metric tag key that powers the autocomplete options.
+          example:
+          nullable: true
+          type: string
+        type:
+          description: The data type of the field. 1=dropdown, 2=multiselect, 3=textbox, 4=textarray, 5=metrictag, 6=autocomplete, 7=number, 8=datetime.
+          example: 3
+          format: int32
+          maximum: 8
+          minimum: 1
+          nullable: true
+          type: integer
+        valid_values:
+          description: The list of allowed values for dropdown, multiselect, and autocomplete fields.
+          items:
+            $ref: "#/components/schemas/IncidentUserDefinedFieldValidValue"
+          nullable: true
+          type: array
+      required:
+        - attached_to
+        - category
+        - collected
+        - created
+        - default_value
+        - deleted
+        - display_name
+        - metadata
+        - modified
+        - name
+        - ordinal
+        - prerequisite
+        - required
+        - reserved
+        - table_id
+        - tag_key
+        - type
+        - valid_values
+      type: object
+    IncidentUserDefinedFieldAttributesUpdateRequest:
+      description: Attributes for updating an incident user-defined field. All fields are optional.
+      properties:
+        category:
+          $ref: "#/components/schemas/IncidentUserDefinedFieldCategory"
+        collected:
+          $ref: "#/components/schemas/IncidentUserDefinedFieldCollected"
+        default_value:
+          description: The default value for the field. Must be one of the valid values when valid_values is set.
+          example: "critical"
+          nullable: true
+          type: string
+        display_name:
+          description: The human-readable name shown in the UI.
+          example: "Root Cause"
+          type: string
+        ordinal:
+          description: A decimal string representing the field's display order in the UI.
+          example: "1.5"
+          nullable: true
+          type: string
+        required:
+          description: When true, users must fill out this field on incidents.
+          example: false
+          nullable: true
+          type: boolean
+        valid_values:
+          description: The list of allowed values for dropdown and multiselect fields. Limited to 1000 values.
+          items:
+            $ref: "#/components/schemas/IncidentUserDefinedFieldValidValue"
+          nullable: true
+          type: array
+      type: object
+    IncidentUserDefinedFieldCategory:
+      description: 'The section in which the field appears: "what_happened" or "why_it_happened". When null, the field appears in the Attributes section.'
+      enum:
+        - what_happened
+        - why_it_happened
+      example: what_happened
+      nullable: true
+      type: string
+      x-enum-varnames:
+        - WHAT_HAPPENED
+        - WHY_IT_HAPPENED
+    IncidentUserDefinedFieldCollected:
+      description: The lifecycle stage at which the app prompts users to fill out this field. Cannot be set on required fields.
+      enum:
+        - active
+        - stable
+        - resolved
+        - completed
+      example: active
+      nullable: true
+      type: string
+      x-enum-varnames:
+        - ACTIVE
+        - STABLE
+        - RESOLVED
+        - COMPLETED
+    IncidentUserDefinedFieldCreateData:
+      description: Data for creating an incident user-defined field.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/IncidentUserDefinedFieldAttributesCreateRequest"
+        relationships:
+          $ref: "#/components/schemas/IncidentUserDefinedFieldCreateRelationships"
+        type:
+          $ref: "#/components/schemas/IncidentUserDefinedFieldType"
+      required:
+        - type
+        - attributes
+        - relationships
+      type: object
+    IncidentUserDefinedFieldCreateRelationships:
+      description: Relationships for creating an incident user-defined field.
+      properties:
+        incident_type:
+          $ref: "#/components/schemas/RelationshipToIncidentType"
+      required:
+        - incident_type
+      type: object
+    IncidentUserDefinedFieldCreateRequest:
+      description: Request body for creating an incident user-defined field.
+      properties:
+        data:
+          $ref: "#/components/schemas/IncidentUserDefinedFieldCreateData"
+      required:
+        - data
+      type: object
+    IncidentUserDefinedFieldFieldType:
+      description: The data type of the field. 1=dropdown, 2=multiselect, 3=textbox, 4=textarray, 5=metrictag, 6=autocomplete, 7=number, 8=datetime.
+      enum:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+        - 7
+        - 8
+      example: 3
+      format: int32
+      type: integer
+      x-enum-varnames:
+        - DROPDOWN
+        - MULTISELECT
+        - TEXTBOX
+        - TEXTARRAY
+        - METRICTAG
+        - AUTOCOMPLETE
+        - NUMBER
+        - DATETIME
+    IncidentUserDefinedFieldListMeta:
+      description: Pagination metadata for the user-defined field list response.
+      properties:
+        offset:
+          description: The offset of the current page.
+          example: 0
+          format: int64
+          type: integer
+        size:
+          description: The total number of items in the current page.
+          example: 5
+          format: int64
+          type: integer
+      type: object
+    IncidentUserDefinedFieldListResponse:
+      description: Response containing a list of incident user-defined fields.
+      properties:
+        data:
+          description: An array of user-defined field objects.
+          items:
+            $ref: "#/components/schemas/IncidentUserDefinedFieldResponseData"
+          type: array
+        meta:
+          $ref: "#/components/schemas/IncidentUserDefinedFieldListMeta"
+      required:
+        - data
+        - meta
+      type: object
+    IncidentUserDefinedFieldMetadata:
+      description: Metadata for autocomplete-type user-defined fields, describing how to populate autocomplete options.
+      nullable: true
+      properties:
+        category:
+          description: The category of the autocomplete source.
+          example: "teams_and_services"
+          type: string
+        search_limit_param:
+          description: The query parameter used to limit the number of autocomplete results.
+          example: "page[size]"
+          type: string
+        search_params:
+          additionalProperties: {}
+          description: Additional query parameters to include in the search URL.
+          type: object
+        search_query_param:
+          description: The query parameter used to pass typed input to the search URL.
+          example: "filter"
+          type: string
+        search_result_path:
+          description: The JSON path to the results in the response body.
+          example: "$.data[*].attributes.name"
+          type: string
+        search_url:
+          description: The URL used to populate autocomplete options.
+          example: "/api/v2/incidents/config/services"
+          type: string
+      required:
+        - category
+        - search_url
+        - search_query_param
+        - search_limit_param
+        - search_result_path
+        - search_params
+      type: object
+    IncidentUserDefinedFieldRelationships:
+      description: Relationships of an incident user-defined field.
+      properties:
+        created_by_user:
+          $ref: "#/components/schemas/RelationshipToUser"
+        incident_type:
+          $ref: "#/components/schemas/RelationshipToIncidentType"
+        last_modified_by_user:
+          $ref: "#/components/schemas/RelationshipToUser"
+      required:
+        - created_by_user
+        - last_modified_by_user
+        - incident_type
+      type: object
+    IncidentUserDefinedFieldResponse:
+      description: Response containing a single incident user-defined field.
+      properties:
+        data:
+          $ref: "#/components/schemas/IncidentUserDefinedFieldResponseData"
+      required:
+        - data
+      type: object
+    IncidentUserDefinedFieldResponseData:
+      description: Data object for an incident user-defined field response.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/IncidentUserDefinedFieldAttributesResponse"
+        id:
+          description: The unique identifier of the user-defined field.
+          example: "00000000-0000-0000-0000-000000000000"
+          type: string
+        relationships:
+          $ref: "#/components/schemas/IncidentUserDefinedFieldRelationships"
+        type:
+          $ref: "#/components/schemas/IncidentUserDefinedFieldType"
+      required:
+        - id
+        - type
+        - attributes
+        - relationships
+      type: object
     IncidentUserDefinedFieldType:
       description: The incident user defined fields type.
       enum:
@@ -32852,6 +33814,53 @@ components:
       type: string
       x-enum-varnames:
         - USER_DEFINED_FIELD
+    IncidentUserDefinedFieldUpdateData:
+      description: Data for updating an incident user-defined field.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/IncidentUserDefinedFieldAttributesUpdateRequest"
+        id:
+          description: The unique identifier of the user-defined field to update.
+          example: "00000000-0000-0000-0000-000000000000"
+          type: string
+        type:
+          $ref: "#/components/schemas/IncidentUserDefinedFieldType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    IncidentUserDefinedFieldUpdateRequest:
+      description: Request body for updating an incident user-defined field.
+      properties:
+        data:
+          $ref: "#/components/schemas/IncidentUserDefinedFieldUpdateData"
+      required:
+        - data
+      type: object
+    IncidentUserDefinedFieldValidValue:
+      description: A valid value for an incident user-defined field.
+      properties:
+        description:
+          description: A detailed description of the valid value.
+          example: "A critical severity incident."
+          type: string
+        display_name:
+          description: The human-readable display name for this value.
+          example: "Critical"
+          type: string
+        short_description:
+          description: A short description of the valid value.
+          example: "Critical"
+          type: string
+        value:
+          description: The identifier that is stored when this option is selected.
+          example: "critical"
+          type: string
+      required:
+        - display_name
+        - value
+      type: object
     IncidentsResponse:
       description: Response with a list of incidents.
       properties:
@@ -36212,6 +37221,18 @@ components:
           example: 35
           format: int64
           type: integer
+      type: object
+    ListAllocationsResponse:
+      description: Response containing a list of targeting rules (allocations).
+      properties:
+        data:
+          description: List of targeting rules (allocations).
+          items:
+            $ref: "#/components/schemas/AllocationDataResponse"
+            description: Allocation item.
+          type: array
+      required:
+        - data
       type: object
     ListAppKeyRegistrationsResponse:
       description: A paginated list of app key registrations.
@@ -41955,6 +42976,7 @@ components:
           description: A list of component IDs whose output is used as the `input` for this component.
           example: ["filter-processor"]
           items:
+            description: A component ID referenced as an input source.
             type: string
           type: array
         key_prefix:
@@ -46023,6 +47045,7 @@ components:
           description: List of log field names to send as indexed fields to Splunk HEC. Available only when `encoding` is `json`.
           example: ["service", "host"]
           items:
+            description: A log field name to index in Splunk.
             type: string
           type: array
         inputs:
@@ -47679,6 +48702,17 @@ components:
         - ARRAY_NUMBER
         - ARRAY_BOOLEAN
         - ARRAY_OBJECT
+    OverwriteAllocationsRequest:
+      description: Request to overwrite targeting rules (allocations) for a feature flag in an environment.
+      properties:
+        data:
+          description: Targeting rules (allocations) to replace existing ones with.
+          items:
+            $ref: "#/components/schemas/AllocationDataRequest"
+          type: array
+      required:
+        - data
+      type: object
     PageUrgency:
       default: high
       description: On-Call Page urgency level.
@@ -48540,6 +49574,7 @@ components:
         name_aliases:
           description: List of alias names for the permission.
           items:
+            description: An alternative name for the permission.
             type: string
           type: array
         restricted:
@@ -53445,6 +54480,53 @@ components:
       type: string
       x-enum-varnames:
         - ROLES
+    RolloutOptions:
+      description: Applied progression options for a progressive rollout.
+      properties:
+        autostart:
+          description: Whether the schedule starts automatically.
+          example: false
+          type: boolean
+        selection_interval_ms:
+          description: Interval in milliseconds for uniform interval strategies.
+          example: 3600000
+          format: int64
+          type: integer
+        strategy:
+          $ref: "#/components/schemas/RolloutStrategy"
+      required:
+        - strategy
+        - autostart
+        - selection_interval_ms
+      type: object
+    RolloutOptionsRequest:
+      description: Rollout options request payload.
+      properties:
+        autostart:
+          description: Whether the schedule should begin automatically.
+          example: false
+          nullable: true
+          type: boolean
+        selection_interval_ms:
+          description: Interval in milliseconds for uniform interval strategies.
+          example: 3600000
+          format: int64
+          type: integer
+        strategy:
+          $ref: "#/components/schemas/RolloutStrategy"
+      required:
+        - strategy
+      type: object
+    RolloutStrategy:
+      description: The progression strategy used by a progressive rollout.
+      enum:
+        - UNIFORM_INTERVALS
+        - NO_ROLLOUT
+      example: "UNIFORM_INTERVALS"
+      type: string
+      x-enum-varnames:
+        - UNIFORM_INTERVALS
+        - NO_ROLLOUT
     RoutingRule:
       description: Represents a routing rule, including its attributes, relationships, and unique identifier.
       properties:
@@ -58195,6 +59277,7 @@ components:
         - none
         - false_positive
         - testing_or_maintenance
+        - remediated
         - investigated_case_opened
         - true_positive_benign
         - true_positive_malicious
@@ -58204,6 +59287,7 @@ components:
         - NONE
         - FALSE_POSITIVE
         - TESTING_OR_MAINTENANCE
+        - REMEDIATED
         - INVESTIGATED_CASE_OPENED
         - TRUE_POSITIVE_BENIGN
         - TRUE_POSITIVE_MALICIOUS
@@ -58754,6 +59838,155 @@ components:
       description: Version of the updated signal. If server side version is higher, update will be rejected.
       format: int64
       type: integer
+    SecurityMonitoringSignalsBulkAssigneeUpdateAttributes:
+      description: Attributes describing the new assignees for a bulk signal update.
+      properties:
+        assignee:
+          description: UUID of the user to assign to the signal. Use an empty string to unassign.
+          example: 773b045d-ccf8-4808-bd3b-955ef6a8c940
+          type: string
+        version:
+          $ref: "#/components/schemas/SecurityMonitoringSignalVersion"
+      required:
+        - assignee
+      type: object
+    SecurityMonitoringSignalsBulkAssigneeUpdateData:
+      description: Data for updating the assignees for multiple security signals.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/SecurityMonitoringSignalsBulkAssigneeUpdateAttributes"
+        id:
+          description: The unique ID of the security signal.
+          example: AAAAAWgN8Xwgr1vKDQAAAABBV2dOOFh3ZzZobm1mWXJFYTR0OA
+          type: string
+        type:
+          $ref: "#/components/schemas/SecurityMonitoringSignalType"
+      required:
+        - id
+        - attributes
+      type: object
+    SecurityMonitoringSignalsBulkAssigneeUpdateRequest:
+      description: Request body for updating the assignee of multiple security signals.
+      properties:
+        data:
+          description: An array of signal assignee updates.
+          items:
+            $ref: "#/components/schemas/SecurityMonitoringSignalsBulkAssigneeUpdateData"
+          maxItems: 199
+          type: array
+      required:
+        - data
+      type: object
+    SecurityMonitoringSignalsBulkStateUpdateData:
+      description: Data for updating the state for multiple security signals.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/SecurityMonitoringSignalStateUpdateAttributes"
+        id:
+          description: The unique ID of the security signal.
+          example: AAAAAWgN8Xwgr1vKDQAAAABBV2dOOFh3ZzZobm1mWXJFYTR0OA
+          type: string
+        type:
+          $ref: "#/components/schemas/SecurityMonitoringSignalType"
+      required:
+        - id
+        - attributes
+      type: object
+    SecurityMonitoringSignalsBulkStateUpdateRequest:
+      description: Request body for updating the triage states of multiple security signals.
+      properties:
+        data:
+          description: An array of signal state updates.
+          items:
+            $ref: "#/components/schemas/SecurityMonitoringSignalsBulkStateUpdateData"
+          maxItems: 199
+          type: array
+      required:
+        - data
+      type: object
+    SecurityMonitoringSignalsBulkTriageEvent:
+      description: A single signal event entry in a bulk triage update response.
+      properties:
+        event:
+          $ref: "#/components/schemas/SecurityMonitoringSignalsBulkTriageEventAttributes"
+        id:
+          description: The unique ID of the security signal.
+          example: AAAAAWgN8Xwgr1vKDQAAAABBV2dOOFh3ZzZobm1mWXJFYTR0OA
+          type: string
+      required:
+        - id
+        - event
+      type: object
+    SecurityMonitoringSignalsBulkTriageEventAttributes:
+      description: Triage attributes of a security signal returned in a bulk update response.
+      properties:
+        archive_comment:
+          $ref: "#/components/schemas/SecurityMonitoringSignalArchiveComment"
+        archive_comment_timestamp:
+          description: Timestamp of the last edit to the archive comment.
+          format: int64
+          type: integer
+        archive_comment_user:
+          $ref: "#/components/schemas/SecurityMonitoringTriageUser"
+        archive_reason:
+          $ref: "#/components/schemas/SecurityMonitoringSignalArchiveReason"
+        assignee:
+          $ref: "#/components/schemas/SecurityMonitoringTriageUser"
+        id:
+          description: The unique ID of the security signal.
+          example: AAAAAWgN8Xwgr1vKDQAAAABBV2dOOFh3ZzZobm1mWXJFYTR0OA
+          type: string
+        incident_ids:
+          $ref: "#/components/schemas/SecurityMonitoringSignalIncidentIds"
+        state:
+          $ref: "#/components/schemas/SecurityMonitoringSignalState"
+        state_update_timestamp:
+          description: Timestamp of the last state update.
+          format: int64
+          type: integer
+        state_update_user:
+          $ref: "#/components/schemas/SecurityMonitoringTriageUser"
+      required:
+        - id
+        - state
+        - assignee
+        - incident_ids
+      type: object
+    SecurityMonitoringSignalsBulkTriageUpdateResponse:
+      description: Response for a bulk triage update of security signals.
+      properties:
+        result:
+          $ref: "#/components/schemas/SecurityMonitoringSignalsBulkTriageUpdateResult"
+        status:
+          description: The status of the bulk operation.
+          example: done
+          type: string
+        type:
+          description: The type of the response.
+          example: status
+          type: string
+      required:
+        - type
+        - status
+        - result
+      type: object
+    SecurityMonitoringSignalsBulkTriageUpdateResult:
+      description: The result payload of a bulk signal triage update.
+      properties:
+        count:
+          description: The number of signals updated.
+          example: 2
+          format: int64
+          type: integer
+        events:
+          description: The list of updated signals.
+          items:
+            $ref: "#/components/schemas/SecurityMonitoringSignalsBulkTriageEvent"
+          type: array
+      required:
+        - count
+        - events
+      type: object
     SecurityMonitoringSignalsListResponse:
       description: "The response object with all security signals matching the request\nand pagination information."
       properties:
@@ -65760,6 +66993,149 @@ components:
       type: string
       x-enum-varnames:
         - SUITES
+    SyntheticsTestFileAbortMultipartUploadRequest:
+      description: Request body for aborting a multipart file upload.
+      properties:
+        key:
+          description: The full storage path of the file whose upload should be aborted.
+          example: "org-123/api-upload-file/abc-def-123/2024-01-01T00:00:00_uuid.json"
+          type: string
+        uploadId:
+          description: The upload ID of the multipart upload to abort.
+          example: "upload-id-abc123"
+          type: string
+      required:
+        - uploadId
+        - key
+      type: object
+    SyntheticsTestFileCompleteMultipartUploadPart:
+      description: A completed part of a multipart upload.
+      properties:
+        ETag:
+          description: The ETag returned by the storage provider after uploading the part.
+          example: '"d41d8cd98f00b204e9800998ecf8427e"'
+          type: string
+        PartNumber:
+          description: The 1-indexed part number for the multipart upload.
+          example: 1
+          format: int64
+          type: integer
+      required:
+        - ETag
+        - PartNumber
+      type: object
+    SyntheticsTestFileCompleteMultipartUploadRequest:
+      description: Request body for completing a multipart file upload.
+      properties:
+        key:
+          description: The full storage path for the uploaded file.
+          example: "org-123/api-upload-file/abc-def-123/2024-01-01T00:00:00_uuid.json"
+          type: string
+        parts:
+          description: Array of completed parts with their ETags.
+          items:
+            $ref: "#/components/schemas/SyntheticsTestFileCompleteMultipartUploadPart"
+          type: array
+        uploadId:
+          description: The upload ID returned when the multipart upload was initiated.
+          example: "upload-id-abc123"
+          type: string
+      required:
+        - uploadId
+        - key
+        - parts
+      type: object
+    SyntheticsTestFileDownloadRequest:
+      description: Request body for getting a presigned download URL for a test file.
+      properties:
+        bucketKey:
+          description: The bucket key referencing the file to download.
+          example: "api-upload-file/abc-def-123/2024-01-01T00:00:00_uuid.json"
+          minLength: 1
+          type: string
+      required:
+        - bucketKey
+      type: object
+    SyntheticsTestFileDownloadResponse:
+      description: Response containing a presigned URL for downloading a test file.
+      properties:
+        url:
+          description: A presigned URL to download the file. The URL expires after a short period.
+          example: "https://storage.example.com/presigned-download-url"
+          type: string
+      type: object
+    SyntheticsTestFileMultipartPresignedUrlsParams:
+      description: Presigned URL parameters returned for a multipart upload.
+      properties:
+        key:
+          description: The full storage path for the file being uploaded.
+          example: "org-123/api-upload-file/abc-def-123/2024-01-01T00:00:00_uuid.json"
+          type: string
+        upload_id:
+          description: The upload ID assigned by the storage provider for this multipart upload.
+          example: "upload-id-abc123"
+          type: string
+        urls:
+          additionalProperties:
+            type: string
+          description: A map of part numbers to presigned upload URLs.
+          example:
+            "1": "https://storage.example.com/presigned-upload-url-part-1"
+            "2": "https://storage.example.com/presigned-upload-url-part-2"
+          type: object
+      type: object
+    SyntheticsTestFileMultipartPresignedUrlsPart:
+      description: A part descriptor for initiating a multipart upload.
+      properties:
+        md5:
+          description: Base64-encoded MD5 digest of the part content.
+          example: "1B2M2Y8AsgTpgAmY7PhCfg=="
+          maxLength: 24
+          minLength: 22
+          type: string
+        partNumber:
+          description: The 1-indexed part number for the multipart upload.
+          example: 1
+          format: int64
+          type: integer
+      required:
+        - md5
+        - partNumber
+      type: object
+    SyntheticsTestFileMultipartPresignedUrlsRequest:
+      description: Request body for getting presigned URLs for a multipart file upload.
+      properties:
+        bucketKeyPrefix:
+          $ref: "#/components/schemas/SyntheticsTestFileMultipartPresignedUrlsRequestBucketKeyPrefix"
+        parts:
+          description: Array of part descriptors for the multipart upload.
+          items:
+            $ref: "#/components/schemas/SyntheticsTestFileMultipartPresignedUrlsPart"
+          type: array
+      required:
+        - bucketKeyPrefix
+        - parts
+      type: object
+    SyntheticsTestFileMultipartPresignedUrlsRequestBucketKeyPrefix:
+      description: The bucket key prefix indicating the type of file upload.
+      enum:
+        - api-upload-file
+        - browser-upload-file-step
+      example: "api-upload-file"
+      type: string
+      x-enum-varnames:
+        - API_UPLOAD_FILE
+        - BROWSER_UPLOAD_FILE_STEP
+    SyntheticsTestFileMultipartPresignedUrlsResponse:
+      description: Response containing presigned URLs for multipart file upload and the bucket key.
+      properties:
+        bucketKey:
+          description: The bucket key that references the uploaded file after completion.
+          example: "api-upload-file/abc-def-123/2024-01-01T00:00:00_uuid.json"
+          type: string
+        multipart_presigned_urls_params:
+          $ref: "#/components/schemas/SyntheticsTestFileMultipartPresignedUrlsParams"
+      type: object
     SyntheticsTestOptions:
       description: Object describing the extra options for a Synthetic test.
       properties:
@@ -66591,6 +67967,47 @@ components:
         description: Tag associated with your event.
         type: string
       type: array
+    TargetingRule:
+      description: Targeting rule details.
+      properties:
+        conditions:
+          description: Conditions evaluated by this targeting rule.
+          items:
+            $ref: "#/components/schemas/Condition"
+          type: array
+        created_at:
+          description: The timestamp when the targeting rule was created.
+          example: "2024-01-01T12:00:00Z"
+          format: date-time
+          type: string
+        id:
+          description: The unique identifier of the targeting rule.
+          example: "550e8400-e29b-41d4-a716-446655440060"
+          format: uuid
+          type: string
+        updated_at:
+          description: The timestamp when the targeting rule was last updated.
+          example: "2024-01-01T12:00:00Z"
+          format: date-time
+          type: string
+      required:
+        - id
+        - conditions
+        - created_at
+        - updated_at
+      type: object
+    TargetingRuleRequest:
+      description: Targeting rule request payload.
+      properties:
+        conditions:
+          description: Conditions that must match for this rule.
+          items:
+            $ref: "#/components/schemas/ConditionRequest"
+          minItems: 1
+          type: array
+      required:
+        - conditions
+      type: object
     Targets:
       description: |-
         List of recipients to notify when a notification rule is triggered. Many different target types are supported,
@@ -69907,6 +71324,7 @@ components:
           description: List of queries to define the environment scope.
           example: ["staging", "test"]
           items:
+            description: A query string used to match the environment scope.
             type: string
           minItems: 1
           type: array
@@ -70775,6 +72193,51 @@ components:
       properties:
         data:
           $ref: "#/components/schemas/WorkflowDataUpdate"
+      type: object
+    UpsertAllocationRequest:
+      description: Request to create or update a targeting rule (allocation) for a feature flag environment.
+      properties:
+        experiment_id:
+          description: The experiment ID for experiment-linked allocations.
+          example: "550e8400-e29b-41d4-a716-446655440030"
+          nullable: true
+          type: string
+        exposure_schedule:
+          $ref: "#/components/schemas/ExposureScheduleRequest"
+        guardrail_metrics:
+          description: Guardrail metrics used to monitor and auto-pause or abort.
+          items:
+            $ref: "#/components/schemas/GuardrailMetricRequest"
+          type: array
+        id:
+          description: The unique identifier of the targeting rule allocation.
+          example: "550e8400-e29b-41d4-a716-446655440020"
+          format: uuid
+          type: string
+        key:
+          description: The unique key of the targeting rule allocation.
+          example: "prod-rollout"
+          type: string
+        name:
+          description: The display name of the targeting rule.
+          example: "Production Rollout"
+          type: string
+        targeting_rules:
+          description: Targeting rules that determine audience eligibility.
+          items:
+            $ref: "#/components/schemas/TargetingRuleRequest"
+          type: array
+        type:
+          $ref: "#/components/schemas/AllocationType"
+        variant_weights:
+          description: Variant distribution weights.
+          items:
+            $ref: "#/components/schemas/VariantWeightRequest"
+          type: array
+      required:
+        - name
+        - key
+        - type
       type: object
     UpsertCatalogEntityRequest:
       description: Create or update entity request.
@@ -71670,6 +73133,60 @@ components:
         - name
         - value
       type: object
+    VariantWeight:
+      description: Variant weight details.
+      properties:
+        created_at:
+          description: The timestamp when the variant weight was created.
+          example: "2024-01-01T12:00:00Z"
+          format: date-time
+          type: string
+        id:
+          description: Unique identifier of the variant weight assignment.
+          example: "59061199-e2ff-46e9-8b40-2193e3b21687"
+          format: uuid
+          type: string
+        updated_at:
+          description: The timestamp when the variant weight was last updated.
+          example: "2024-01-01T12:00:00Z"
+          format: date-time
+          type: string
+        value:
+          description: The percentage weight for the variant.
+          example: 50
+          format: double
+          type: number
+        variant:
+          $ref: "#/components/schemas/Variant"
+        variant_id:
+          description: The variant ID.
+          example: "550e8400-e29b-41d4-a716-446655440001"
+          format: uuid
+          type: string
+      required:
+        - variant_id
+        - value
+      type: object
+    VariantWeightRequest:
+      description: Variant weight request payload.
+      properties:
+        value:
+          description: The percentage weight for this variant.
+          example: 50
+          format: double
+          type: number
+        variant_id:
+          description: The variant ID to assign weight to.
+          example: "550e8400-e29b-41d4-a716-446655440001"
+          format: uuid
+          type: string
+        variant_key:
+          description: The variant key to assign weight to.
+          example: "control"
+          type: string
+      required:
+        - value
+      type: object
     Version:
       description: Version of the notification rule. It is updated when the rule is modified.
       example: 1
@@ -72391,6 +73908,7 @@ components:
           example:
             - "team:my-team"
           items:
+            description: A single user-defined tag.
             type: string
           nullable: true
           type: array
@@ -84178,7 +85696,7 @@ paths:
       summary: List feature flags
       tags:
         - Feature Flags
-      x-menu-order: 13
+      x-menu-order: 19
       x-permission:
         operator: AND
         permissions:
@@ -84239,7 +85757,7 @@ paths:
       summary: Create a feature flag
       tags:
         - Feature Flags
-      x-menu-order: 12
+      x-menu-order: 18
       x-permission:
         operator: AND
         permissions:
@@ -84491,6 +86009,274 @@ paths:
         operator: AND
         permissions:
           - feature_flag_environment_config_write
+  /api/v2/feature-flags/exposure-schedules/{exposure_schedule_id}/pause:
+    post:
+      description: |-
+        Pauses a progressive rollout while preserving rollout state.
+      operationId: PauseExposureSchedule
+      parameters:
+        - $ref: "#/components/parameters/exposure_schedule_id"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    absolute_start_time: "2025-06-13T12:00:00Z"
+                    allocation_id: "550e8400-e29b-41d4-a716-446655440020"
+                    control_variant_id: "550e8400-e29b-41d4-a716-446655440012"
+                    created_at: "2024-01-01T12:00:00Z"
+                    guardrail_triggered_action:
+                    guardrail_triggers: []
+                    id: "550e8400-e29b-41d4-a716-446655440010"
+                    rollout_options:
+                      autostart: false
+                      selection_interval_ms: 3600000
+                      strategy: "UNIFORM_INTERVALS"
+                    rollout_steps: []
+                    updated_at: "2024-01-01T12:00:00Z"
+              schema:
+                $ref: "#/components/schemas/AllocationExposureScheduleResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Not Found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Conflict
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Pause a progressive rollout
+      tags:
+        - Feature Flags
+      x-menu-order: 8
+      x-permission:
+        operator: AND
+        permissions:
+          - feature_flag_config_write
+  /api/v2/feature-flags/exposure-schedules/{exposure_schedule_id}/resume:
+    post:
+      description: |-
+        Resumes progression for a previously paused progressive rollout.
+      operationId: ResumeExposureSchedule
+      parameters:
+        - $ref: "#/components/parameters/exposure_schedule_id"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    absolute_start_time: "2025-06-13T12:00:00Z"
+                    allocation_id: "550e8400-e29b-41d4-a716-446655440020"
+                    control_variant_id: "550e8400-e29b-41d4-a716-446655440012"
+                    created_at: "2024-01-01T12:00:00Z"
+                    guardrail_triggered_action:
+                    guardrail_triggers: []
+                    id: "550e8400-e29b-41d4-a716-446655440010"
+                    rollout_options:
+                      autostart: false
+                      selection_interval_ms: 3600000
+                      strategy: "UNIFORM_INTERVALS"
+                    rollout_steps: []
+                    updated_at: "2024-01-01T12:00:00Z"
+              schema:
+                $ref: "#/components/schemas/AllocationExposureScheduleResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Not Found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Conflict
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Resume a progressive rollout
+      tags:
+        - Feature Flags
+      x-menu-order: 7
+      x-permission:
+        operator: AND
+        permissions:
+          - feature_flag_config_write
+  /api/v2/feature-flags/exposure-schedules/{exposure_schedule_id}/start:
+    post:
+      description: |-
+        Starts a progressive rollout and begins progression.
+      operationId: StartExposureSchedule
+      parameters:
+        - $ref: "#/components/parameters/exposure_schedule_id"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    absolute_start_time: "2025-06-13T12:00:00Z"
+                    allocation_id: "550e8400-e29b-41d4-a716-446655440020"
+                    control_variant_id: "550e8400-e29b-41d4-a716-446655440012"
+                    created_at: "2024-01-01T12:00:00Z"
+                    guardrail_triggered_action:
+                    guardrail_triggers: []
+                    id: "550e8400-e29b-41d4-a716-446655440010"
+                    rollout_options:
+                      autostart: false
+                      selection_interval_ms: 3600000
+                      strategy: "UNIFORM_INTERVALS"
+                    rollout_steps: []
+                    updated_at: "2024-01-01T12:00:00Z"
+              schema:
+                $ref: "#/components/schemas/AllocationExposureScheduleResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Not Found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Conflict
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Start a progressive rollout
+      tags:
+        - Feature Flags
+      x-menu-order: 9
+      x-permission:
+        operator: AND
+        permissions:
+          - feature_flag_config_write
+  /api/v2/feature-flags/exposure-schedules/{exposure_schedule_id}/stop:
+    post:
+      description: |-
+        Stops a progressive rollout and marks it as aborted.
+      operationId: StopExposureSchedule
+      parameters:
+        - $ref: "#/components/parameters/exposure_schedule_id"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    absolute_start_time: "2025-06-13T12:00:00Z"
+                    allocation_id: "550e8400-e29b-41d4-a716-446655440020"
+                    control_variant_id: "550e8400-e29b-41d4-a716-446655440012"
+                    created_at: "2024-01-01T12:00:00Z"
+                    guardrail_triggered_action:
+                    guardrail_triggers: []
+                    id: "550e8400-e29b-41d4-a716-446655440010"
+                    rollout_options:
+                      autostart: false
+                      selection_interval_ms: 3600000
+                      strategy: "UNIFORM_INTERVALS"
+                    rollout_steps: []
+                    updated_at: "2024-01-01T12:00:00Z"
+              schema:
+                $ref: "#/components/schemas/AllocationExposureScheduleResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Not Found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Conflict
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Stop a progressive rollout
+      tags:
+        - Feature Flags
+      x-menu-order: 6
+      x-permission:
+        operator: AND
+        permissions:
+          - feature_flag_config_write
   /api/v2/feature-flags/{feature_flag_id}:
     get:
       description: |-
@@ -84526,7 +86312,7 @@ paths:
       summary: Get a feature flag
       tags:
         - Feature Flags
-      x-menu-order: 11
+      x-menu-order: 17
       x-permission:
         operator: AND
         permissions:
@@ -84584,7 +86370,7 @@ paths:
       summary: Update a feature flag
       tags:
         - Feature Flags
-      x-menu-order: 10
+      x-menu-order: 16
       x-permission:
         operator: AND
         permissions:
@@ -84631,12 +86417,206 @@ paths:
       summary: Archive a feature flag
       tags:
         - Feature Flags
-      x-menu-order: 9
+      x-menu-order: 15
       x-permission:
         operator: AND
         permissions:
           - feature_flag_config_write
           - feature_flag_environment_config_read
+  /api/v2/feature-flags/{feature_flag_id}/environments/{environment_id}/allocations:
+    post:
+      description: |-
+        Creates a new targeting rule (allocation) for a specific feature flag in a specific environment.
+      operationId: CreateAllocationsForFeatureFlagInEnvironment
+      parameters:
+        - $ref: "#/components/parameters/feature_flag_id"
+        - $ref: "#/components/parameters/environment_id"
+      requestBody:
+        content:
+          application/json:
+            example:
+              data:
+                attributes:
+                  key: "prod-rollout"
+                  name: "Production Rollout"
+                  type: "FEATURE_GATE"
+                  variant_weights:
+                    - value: 50
+                      variant_id: "550e8400-e29b-41d4-a716-446655440001"
+                    - value: 50
+                      variant_id: "550e8400-e29b-41d4-a716-446655440002"
+                type: "allocations"
+            schema:
+              $ref: "#/components/schemas/CreateAllocationsRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        created_at: "2024-01-01T12:00:00Z"
+                        environment_ids:
+                          - "550e8400-e29b-41d4-a716-446655440001"
+                        guardrail_metrics: []
+                        id: "550e8400-e29b-41d4-a716-446655440020"
+                        key: "prod-rollout"
+                        name: "Production Rollout"
+                        order_position: 0
+                        targeting_rules: []
+                        type: "FEATURE_GATE"
+                        updated_at: "2024-01-01T12:00:00Z"
+                        variant_weights:
+                          - value: 50
+                            variant_id: "550e8400-e29b-41d4-a716-446655440001"
+                      id: "550e8400-e29b-41d4-a716-446655440020"
+                      type: "allocations"
+              schema:
+                $ref: "#/components/schemas/AllocationResponse"
+          description: Created
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AllocationResponse"
+          description: Accepted - Approval required for this change
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Not Found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Conflict
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Create targeting rules for a flag env
+      tags:
+        - Feature Flags
+      x-menu-order: 11
+      x-permission:
+        operator: AND
+        permissions:
+          - feature_flag_config_write
+    put:
+      description: |-
+        Updates targeting rules (allocations) for a specific feature flag in a specific environment.
+        This operation replaces the existing allocation set with the request payload.
+      operationId: UpdateAllocationsForFeatureFlagInEnvironment
+      parameters:
+        - $ref: "#/components/parameters/feature_flag_id"
+        - $ref: "#/components/parameters/environment_id"
+      requestBody:
+        content:
+          application/json:
+            example:
+              data:
+                - attributes:
+                    key: "prod-rollout"
+                    name: "Production Rollout"
+                    type: "FEATURE_GATE"
+                    variant_weights:
+                      - value: 50
+                        variant_id: "550e8400-e29b-41d4-a716-446655440001"
+                      - value: 50
+                        variant_id: "550e8400-e29b-41d4-a716-446655440002"
+                  type: "allocations"
+            schema:
+              $ref: "#/components/schemas/OverwriteAllocationsRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          created_at: "2024-01-01T12:00:00Z"
+                          environment_ids:
+                            - "550e8400-e29b-41d4-a716-446655440001"
+                          guardrail_metrics: []
+                          id: "550e8400-e29b-41d4-a716-446655440020"
+                          key: "prod-rollout"
+                          name: "Production Rollout"
+                          order_position: 0
+                          targeting_rules: []
+                          type: "FEATURE_GATE"
+                          updated_at: "2024-01-01T12:00:00Z"
+                          variant_weights:
+                            - value: 50
+                              variant_id: "550e8400-e29b-41d4-a716-446655440001"
+                        id: "550e8400-e29b-41d4-a716-446655440020"
+                        type: "allocations"
+              schema:
+                $ref: "#/components/schemas/ListAllocationsResponse"
+          description: OK
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListAllocationsResponse"
+          description: Accepted - Approval required for this change
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Not Found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Conflict
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Update targeting rules for a flag
+      tags:
+        - Feature Flags
+      x-menu-order: 10
+      x-permission:
+        operator: AND
+        permissions:
+          - feature_flag_config_write
   /api/v2/feature-flags/{feature_flag_id}/environments/{environment_id}/disable:
     post:
       description: |-
@@ -84670,7 +86650,7 @@ paths:
       summary: Disable a feature flag in an environment
       tags:
         - Feature Flags
-      x-menu-order: 6
+      x-menu-order: 12
       x-permission:
         operator: AND
         permissions:
@@ -84709,7 +86689,7 @@ paths:
       summary: Enable a feature flag in an environment
       tags:
         - Feature Flags
-      x-menu-order: 7
+      x-menu-order: 13
       x-permission:
         operator: AND
         permissions:
@@ -84756,7 +86736,7 @@ paths:
       summary: Unarchive a feature flag
       tags:
         - Feature Flags
-      x-menu-order: 8
+      x-menu-order: 14
       x-permission:
         operator: AND
         permissions:
@@ -85927,6 +87907,445 @@ paths:
           - incident_settings_write
       x-unstable: |-
         **Note**: This endpoint is in public beta.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/incidents/config/user-defined-fields:
+    get:
+      description: Get a list of all incident user-defined fields.
+      operationId: ListIncidentUserDefinedFields
+      parameters:
+        - description: The number of results to return per page. Must be between 0 and 1000.
+          in: query
+          name: page[size]
+          schema:
+            default: 1000
+            format: int64
+            maximum: 1000
+            minimum: 0
+            type: integer
+        - description: The page number to retrieve, starting at 0.
+          in: query
+          name: page[number]
+          schema:
+            default: 0
+            format: int64
+            minimum: 0
+            type: integer
+        - description: When true, include soft-deleted fields in the response.
+          in: query
+          name: include-deleted
+          schema:
+            default: false
+            type: boolean
+        - description: Filter results to fields associated with the given incident type UUID.
+          in: query
+          name: filter[incident-type]
+          schema:
+            type: string
+        - description: Comma-separated list of related resources to include. Supported values are "last_modified_by_user", "created_by_user", and "incident_type".
+          in: query
+          name: include
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          attached_to: "incidents"
+                          category: "what_happened"
+                          collected: "active"
+                          created: "2026-03-18T08:40:04.437887Z"
+                          default_value:
+                          deleted:
+                          display_name: "Root Cause"
+                          metadata:
+                          modified: "2026-03-18T08:40:04.437887Z"
+                          name: "root_cause"
+                          ordinal: "1.1"
+                          prerequisite:
+                          required: false
+                          reserved: false
+                          table_id: 0
+                          tag_key:
+                          type: 1
+                          valid_values:
+                            - description: "A bug in the service code."
+                              display_name: "Service Bug"
+                              value: "service_bug"
+                        id: "6f8f42e0-6a84-4495-9a24-6decb0a87de0"
+                        relationships:
+                          created_by_user:
+                            data:
+                              id: "00000000-0000-0000-0000-000000000001"
+                              type: "users"
+                          incident_type:
+                            data:
+                              id: "7459c30c-c661-4171-9474-db3a486377b2"
+                              type: "incident_types"
+                          last_modified_by_user:
+                            data:
+                              id: "00000000-0000-0000-0000-000000000001"
+                              type: "users"
+                        type: "user_defined_field"
+                    meta:
+                      offset: 0
+                      size: 1
+              schema:
+                $ref: "#/components/schemas/IncidentUserDefinedFieldListResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - incident_read
+      summary: Get a list of incident user-defined fields
+      tags:
+        - Incidents
+      x-menu-order: 52
+      x-permission:
+        operator: AND
+        permissions:
+          - incident_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    post:
+      description: Create an incident user-defined field.
+      operationId: CreateIncidentUserDefinedField
+      parameters:
+        - description: Comma-separated list of related resources to include. Supported values are "last_modified_by_user", "created_by_user", and "incident_type".
+          in: query
+          name: include
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/IncidentUserDefinedFieldCreateRequest"
+        description: Incident user-defined field payload.
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        attached_to: "incidents"
+                        category:
+                        collected:
+                        created: "2026-03-18T08:40:05.185406Z"
+                        default_value:
+                        deleted:
+                        display_name: "Root Cause"
+                        metadata:
+                        modified: "2026-03-18T08:40:05.185406Z"
+                        name: "root_cause"
+                        ordinal: "9"
+                        prerequisite:
+                        required: false
+                        reserved: false
+                        table_id: 0
+                        tag_key:
+                        type: 3
+                        valid_values:
+                      id: "82263487-b540-4c12-8797-58ac1d4fed17"
+                      relationships:
+                        created_by_user:
+                          data:
+                            id: "2f2c94fe-cd6e-4f8e-b9c7-d5755aca09a6"
+                            type: "users"
+                        incident_type:
+                          data:
+                            id: "7459c30c-c661-4171-9474-db3a486377b2"
+                            type: "incident_types"
+                        last_modified_by_user:
+                          data:
+                            id: "2f2c94fe-cd6e-4f8e-b9c7-d5755aca09a6"
+                            type: "users"
+                      type: "user_defined_field"
+              schema:
+                $ref: "#/components/schemas/IncidentUserDefinedFieldResponse"
+          description: CREATED
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - incident_settings_write
+      summary: Create an incident user-defined field
+      tags:
+        - Incidents
+      x-codegen-request-body-name: body
+      x-menu-order: 53
+      x-permission:
+        operator: AND
+        permissions:
+          - incident_settings_write
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/incidents/config/user-defined-fields/{field_id}:
+    delete:
+      description: Delete an incident user-defined field.
+      operationId: DeleteIncidentUserDefinedField
+      parameters:
+        - $ref: "#/components/parameters/IncidentUserDefinedFieldIDPathParameter"
+      responses:
+        "204":
+          description: No Content
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - incident_settings_write
+      summary: Delete an incident user-defined field
+      tags:
+        - Incidents
+      x-menu-order: 56
+      x-permission:
+        operator: AND
+        permissions:
+          - incident_settings_write
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    get:
+      description: Get details of an incident user-defined field.
+      operationId: GetIncidentUserDefinedField
+      parameters:
+        - $ref: "#/components/parameters/IncidentUserDefinedFieldIDPathParameter"
+        - description: Comma-separated list of related resources to include. Supported values are "last_modified_by_user", "created_by_user", and "incident_type".
+          in: query
+          name: include
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        attached_to: "incidents"
+                        category: "what_happened"
+                        collected: "active"
+                        created: "2026-03-18T08:40:04.437887Z"
+                        default_value:
+                        deleted:
+                        display_name: "Root Cause"
+                        metadata:
+                        modified: "2026-03-18T08:40:04.437887Z"
+                        name: "root_cause"
+                        ordinal: "1.1"
+                        prerequisite:
+                        required: false
+                        reserved: false
+                        table_id: 0
+                        tag_key:
+                        type: 1
+                        valid_values:
+                          - description: "A bug in the service code."
+                            display_name: "Service Bug"
+                            value: "service_bug"
+                      id: "6f8f42e0-6a84-4495-9a24-6decb0a87de0"
+                      relationships:
+                        created_by_user:
+                          data:
+                            id: "00000000-0000-0000-0000-000000000001"
+                            type: "users"
+                        incident_type:
+                          data:
+                            id: "7459c30c-c661-4171-9474-db3a486377b2"
+                            type: "incident_types"
+                        last_modified_by_user:
+                          data:
+                            id: "00000000-0000-0000-0000-000000000001"
+                            type: "users"
+                      type: "user_defined_field"
+              schema:
+                $ref: "#/components/schemas/IncidentUserDefinedFieldResponse"
+          description: OK
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - incident_read
+      summary: Get an incident user-defined field
+      tags:
+        - Incidents
+      x-menu-order: 54
+      x-permission:
+        operator: AND
+        permissions:
+          - incident_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    patch:
+      description: Update an incident user-defined field.
+      operationId: UpdateIncidentUserDefinedField
+      parameters:
+        - $ref: "#/components/parameters/IncidentUserDefinedFieldIDPathParameter"
+        - description: Comma-separated list of related resources to include. Supported values are "last_modified_by_user", "created_by_user", and "incident_type".
+          in: query
+          name: include
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/IncidentUserDefinedFieldUpdateRequest"
+        description: Incident user-defined field update payload.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        attached_to: "incidents"
+                        category: "what_happened"
+                        collected:
+                        created: "2026-03-18T08:39:49.913895Z"
+                        default_value:
+                        deleted:
+                        display_name: "Root Cause"
+                        metadata:
+                        modified: "2026-03-18T08:39:49.922909Z"
+                        name: "root_cause"
+                        ordinal: "8"
+                        prerequisite:
+                        required: false
+                        reserved: false
+                        table_id: 0
+                        tag_key:
+                        type: 3
+                        valid_values:
+                      id: "13a731a3-a010-450e-b6a3-3d450a26170c"
+                      relationships:
+                        created_by_user:
+                          data:
+                            id: "8e7d4859-0916-4df8-b51c-5f5a4ea7815e"
+                            type: "users"
+                        incident_type:
+                          data:
+                            id: "95edc42f-c55d-46fa-92a1-a182646454af"
+                            type: "incident_types"
+                        last_modified_by_user:
+                          data:
+                            id: "8e7d4859-0916-4df8-b51c-5f5a4ea7815e"
+                            type: "users"
+                      type: "user_defined_field"
+              schema:
+                $ref: "#/components/schemas/IncidentUserDefinedFieldResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - incident_settings_write
+      summary: Update an incident user-defined field
+      tags:
+        - Incidents
+      x-codegen-request-body-name: body
+      x-menu-order: 55
+      x-permission:
+        operator: AND
+        permissions:
+          - incident_settings_write
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/incidents/import:
     post:
@@ -98571,6 +100990,7 @@ paths:
         - On-Call Team Routing Rules: `on-call-team-routing-rules`
         - Logs Pipelines: `logs-pipeline`
         - Case Management Projects: `case-management-project`
+        - Monitor Notification Rules: `monitor-notification-rule`
 
         #### Supported relations for resources
         Resource Type               | Supported Relations
@@ -98599,6 +101019,7 @@ paths:
         On-Call Team Routing Rules  | `viewer`, `editor`
         Logs Pipelines              | `viewer`, `processors_editor`, `editor`
         Case Management Projects    | `viewer`, `contributor`, `manager`
+        Monitor Notification Rules  | `viewer`, `editor`
       operationId: UpdateRestrictionPolicy
       parameters:
         - $ref: "#/components/parameters/ResourceID"
@@ -104632,6 +107053,90 @@ paths:
         operator: OR
         permissions:
           - security_monitoring_signals_read
+  /api/v2/security_monitoring/signals/bulk/assignee:
+    patch:
+      description: |-
+        Change the triage assignees of multiple security signals at once.
+        The maximum number of signals that can be updated in a single request is 199.
+      operationId: BulkEditSecurityMonitoringSignalsAssignee
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SecurityMonitoringSignalsBulkAssigneeUpdateRequest"
+        description: Attributes describing the signal assignee updates.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SecurityMonitoringSignalsBulkTriageUpdateResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Bulk update triage assignee of security signals
+      tags: ["Security Monitoring"]
+      x-codegen-request-body-name: body
+      x-menu-order: 86
+      "x-permission":
+        operator: OR
+        permissions:
+          - security_monitoring_signals_write
+  /api/v2/security_monitoring/signals/bulk/state:
+    patch:
+      description: |-
+        Change the triage states of multiple security signals at once.
+        The maximum number of signals that can be updated in a single request is 199.
+      operationId: BulkEditSecurityMonitoringSignalsState
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SecurityMonitoringSignalsBulkStateUpdateRequest"
+        description: Attributes describing the signal state updates.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SecurityMonitoringSignalsBulkTriageUpdateResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Bulk update triage state of security signals
+      tags: ["Security Monitoring"]
+      x-codegen-request-body-name: body
+      x-menu-order: 85
+      "x-permission":
+        operator: OR
+        permissions:
+          - security_monitoring_signals_write
   /api/v2/security_monitoring/signals/search:
     post:
       description: |-
@@ -104689,6 +107194,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/SecurityMonitoringSignalResponse"
           description: OK
+        "403":
+          $ref: "#/components/responses/NotAuthorizedResponse"
         "404":
           $ref: "#/components/responses/NotFoundResponse"
         "429":
@@ -104727,25 +107234,17 @@ paths:
                 $ref: "#/components/schemas/SecurityMonitoringSignalTriageUpdateResponse"
           description: OK
         "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/APIErrorResponse"
-          description: Bad Request
+          $ref: "#/components/responses/BadRequestResponse"
         "403":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/APIErrorResponse"
-          description: Forbidden
+          $ref: "#/components/responses/NotAuthorizedResponse"
         "404":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/APIErrorResponse"
-          description: Not Found
+          $ref: "#/components/responses/NotFoundResponse"
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ: []
       summary: Modify the triage assignee of a security signal
       tags: ["Security Monitoring"]
       x-codegen-request-body-name: body
@@ -104776,25 +107275,17 @@ paths:
                 $ref: "#/components/schemas/SecurityMonitoringSignalTriageUpdateResponse"
           description: OK
         "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/APIErrorResponse"
-          description: Bad Request
+          $ref: "#/components/responses/BadRequestResponse"
         "403":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/APIErrorResponse"
-          description: Forbidden
+          $ref: "#/components/responses/NotAuthorizedResponse"
         "404":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/APIErrorResponse"
-          description: Not Found
+          $ref: "#/components/responses/NotFoundResponse"
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ: []
       summary: Change the related incidents of a security signal
       tags: ["Security Monitoring"]
       x-codegen-request-body-name: body
@@ -104825,25 +107316,17 @@ paths:
                 $ref: "#/components/schemas/SecurityMonitoringSignalTriageUpdateResponse"
           description: OK
         "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/APIErrorResponse"
-          description: Bad Request
+          $ref: "#/components/responses/BadRequestResponse"
         "403":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/APIErrorResponse"
-          description: Forbidden
+          $ref: "#/components/responses/NotAuthorizedResponse"
         "404":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/APIErrorResponse"
-          description: Not Found
+          $ref: "#/components/responses/NotFoundResponse"
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ: []
       summary: Change the triage state of a security signal
       tags: ["Security Monitoring"]
       x-codegen-request-body-name: body
@@ -107414,7 +109897,7 @@ paths:
         permissions:
           - status_pages_settings_read
     post:
-      description: Creates a new status page.
+      description: "Creates a new status page. **Note**: Publishing a status page on creation via the `enabled` property will be deprecated. Use the dedicated [publish](#publish-status-page) status page endpoint after creation instead."
       operationId: CreateStatusPage
       parameters:
         - description: "Comma-separated list of resources to include. Supported values: created_by_user, last_modified_by_user."
@@ -107502,7 +109985,7 @@ paths:
       summary: List degradations
       tags:
         - Status Pages
-      x-menu-order: 13
+      x-menu-order: 15
       x-permission:
         operator: AND
         permissions:
@@ -107560,7 +110043,7 @@ paths:
       summary: List maintenances
       tags:
         - Status Pages
-      x-menu-order: 18
+      x-menu-order: 20
       x-permission:
         operator: AND
         permissions:
@@ -107634,7 +110117,7 @@ paths:
         permissions:
           - status_pages_settings_read
     patch:
-      description: Updates an existing status page's attributes.
+      description: "Updates an existing status page's attributes. **Note**: Publishing and unpublishing via the `enabled` property will be deprecated on this endpoint. Use the dedicated [publish](#publish-status-page) and [unpublish](#unpublish-status-page) status page endpoints instead."
       operationId: UpdateStatusPage
       parameters:
         - description: Whether to delete existing subscribers when updating a status page's type.
@@ -107717,7 +110200,7 @@ paths:
       summary: List components
       tags:
         - Status Pages
-      x-menu-order: 8
+      x-menu-order: 10
       x-permission:
         operator: AND
         permissions:
@@ -107761,7 +110244,7 @@ paths:
       summary: Create component
       tags:
         - Status Pages
-      x-menu-order: 6
+      x-menu-order: 8
       x-permission:
         operator: AND
         permissions:
@@ -107799,7 +110282,7 @@ paths:
       summary: Delete component
       tags:
         - Status Pages
-      x-menu-order: 10
+      x-menu-order: 12
       x-permission:
         operator: AND
         permissions:
@@ -107845,7 +110328,7 @@ paths:
       summary: Get component
       tags:
         - Status Pages
-      x-menu-order: 9
+      x-menu-order: 11
       x-permission:
         operator: AND
         permissions:
@@ -107897,7 +110380,7 @@ paths:
       summary: Update component
       tags:
         - Status Pages
-      x-menu-order: 7
+      x-menu-order: 9
       x-permission:
         operator: AND
         permissions:
@@ -107948,7 +110431,7 @@ paths:
       summary: Create degradation
       tags:
         - Status Pages
-      x-menu-order: 11
+      x-menu-order: 13
       x-permission:
         operator: AND
         permissions:
@@ -107986,7 +110469,7 @@ paths:
       summary: Delete degradation
       tags:
         - Status Pages
-      x-menu-order: 15
+      x-menu-order: 17
       x-permission:
         operator: AND
         permissions:
@@ -108032,7 +110515,7 @@ paths:
       summary: Get degradation
       tags:
         - Status Pages
-      x-menu-order: 14
+      x-menu-order: 16
       x-permission:
         operator: AND
         permissions:
@@ -108090,7 +110573,7 @@ paths:
       summary: Update degradation
       tags:
         - Status Pages
-      x-menu-order: 12
+      x-menu-order: 14
       x-permission:
         operator: AND
         permissions:
@@ -108140,7 +110623,7 @@ paths:
       summary: Schedule maintenance
       tags:
         - Status Pages
-      x-menu-order: 16
+      x-menu-order: 18
       x-permission:
         operator: AND
         permissions:
@@ -108185,7 +110668,7 @@ paths:
       summary: Get maintenance
       tags:
         - Status Pages
-      x-menu-order: 19
+      x-menu-order: 21
       x-permission:
         operator: AND
         permissions:
@@ -108241,11 +110724,73 @@ paths:
       summary: Update maintenance
       tags:
         - Status Pages
-      x-menu-order: 17
+      x-menu-order: 19
       x-permission:
         operator: AND
         permissions:
           - status_pages_incident_write
+  /api/v2/statuspages/{page_id}/publish:
+    post:
+      description: Publishes a status page. For pages of type `public`, makes the status page available on the public internet and requires the `status_pages_public_page_publish` permission. For pages of type `internal`, makes the status page available under the `status-pages/$domain_prefix/view` route within the Datadog organization and requires the `status_pages_internal_page_publish` permission. The `status_pages_settings_write` permission is temporarily honored as we migrate publishing functionality from the update status page endpoint to the publish status page endpoint.
+      operationId: PublishStatusPage
+      parameters:
+        - description: The ID of the status page.
+          in: path
+          name: page_id
+          required: true
+          schema:
+            format: uuid
+            type: string
+      responses:
+        "204":
+          description: No Content
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ: []
+      summary: Publish status page
+      tags:
+        - Status Pages
+      x-menu-order: 6
+      x-permission:
+        operator: OR
+        permissions:
+          - status_pages_settings_write
+          - status_pages_public_page_publish
+          - status_pages_internal_page_publish
+  /api/v2/statuspages/{page_id}/unpublish:
+    post:
+      description: Unpublishes a status page. For pages of type `public`, removes the status page from the public internet and requires the `status_pages_public_page_publish` permission. For pages of type `internal`, removes the `status-pages/$domain_prefix/view` route from the Datadog organization and requires the `status_pages_internal_page_publish` permission. The `status_pages_settings_write` permission is temporarily honored as we migrate unpublishing functionality from the update status page endpoint to the unpublish status page endpoint.
+      operationId: UnpublishStatusPage
+      parameters:
+        - description: The ID of the status page.
+          in: path
+          name: page_id
+          required: true
+          schema:
+            format: uuid
+            type: string
+      responses:
+        "204":
+          description: No Content
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ: []
+      summary: Unpublish status page
+      tags:
+        - Status Pages
+      x-menu-order: 7
+      x-permission:
+        operator: OR
+        permissions:
+          - status_pages_settings_write
+          - status_pages_public_page_publish
+          - status_pages_internal_page_publish
   /api/v2/synthetics/api-multistep/subtests/{public_id}:
     get:
       description: |-
@@ -108869,6 +111414,241 @@ paths:
       tags:
         - Synthetics
       x-menu-order: 49
+      x-permission:
+        operator: OR
+        permissions:
+          - synthetics_write
+          - synthetics_create_edit_trigger
+  /api/v2/synthetics/tests/{public_id}/files/download:
+    post:
+      description: |-
+        Get a presigned URL to download a file attached to a Synthetic test.
+        The returned URL is temporary and expires after a short period.
+      operationId: GetTestFileDownloadUrl
+      parameters:
+        - description: The public ID of the Synthetic test.
+          in: path
+          name: public_id
+          required: true
+          schema:
+            example: abc-def-123
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SyntheticsTestFileDownloadRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SyntheticsTestFileDownloadResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: API error response.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Forbidden.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: API error response.
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - synthetics_read
+      summary: Get a presigned URL for downloading a test file
+      tags:
+        - Synthetics
+      x-menu-order: 59
+      x-permission:
+        operator: OR
+        permissions:
+          - synthetics_read
+  /api/v2/synthetics/tests/{public_id}/files/multipart-presigned-urls:
+    post:
+      description: |-
+        Get presigned URLs for uploading a file to a Synthetic test using multipart upload.
+        Returns the presigned URLs for each part along with the bucket key that references the file.
+      operationId: GetTestFileMultipartPresignedUrls
+      parameters:
+        - description: The public ID of the Synthetic test.
+          in: path
+          name: public_id
+          required: true
+          schema:
+            example: abc-def-123
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SyntheticsTestFileMultipartPresignedUrlsRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SyntheticsTestFileMultipartPresignedUrlsResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: API error response.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Forbidden.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: API error response.
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - synthetics_write
+      summary: Get presigned URLs for uploading a test file
+      tags:
+        - Synthetics
+      x-menu-order: 60
+      x-permission:
+        operator: OR
+        permissions:
+          - synthetics_write
+          - synthetics_create_edit_trigger
+  /api/v2/synthetics/tests/{public_id}/files/multipart-upload-abort:
+    post:
+      description: |-
+        Abort an in-progress multipart file upload for a Synthetic test. This cancels the upload
+        and releases any storage used by already-uploaded parts.
+      operationId: AbortTestFileMultipartUpload
+      parameters:
+        - description: The public ID of the Synthetic test.
+          in: path
+          name: public_id
+          required: true
+          schema:
+            example: abc-def-123
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SyntheticsTestFileAbortMultipartUploadRequest"
+        required: true
+      responses:
+        "204":
+          description: No Content
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: API error response.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Forbidden.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: API error response.
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - synthetics_write
+      summary: Abort a multipart upload of a test file
+      tags:
+        - Synthetics
+      x-menu-order: 62
+      x-permission:
+        operator: OR
+        permissions:
+          - synthetics_write
+          - synthetics_create_edit_trigger
+  /api/v2/synthetics/tests/{public_id}/files/multipart-upload-complete:
+    post:
+      description: |-
+        Complete a multipart file upload for a Synthetic test. Call this endpoint after all parts
+        have been uploaded using the presigned URLs obtained from the multipart presigned URLs endpoint.
+      operationId: CompleteTestFileMultipartUpload
+      parameters:
+        - description: The public ID of the Synthetic test.
+          in: path
+          name: public_id
+          required: true
+          schema:
+            example: abc-def-123
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SyntheticsTestFileCompleteMultipartUploadRequest"
+        required: true
+      responses:
+        "204":
+          description: No Content
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: API error response.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Forbidden.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: API error response.
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - synthetics_write
+      summary: Complete a multipart upload of a test file
+      tags:
+        - Synthetics
+      x-menu-order: 61
       x-permission:
         operator: OR
         permissions:

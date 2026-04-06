@@ -1,4 +1,5 @@
 ---
+id: reference_table
 core_product:
 - log management
 title: リファレンステーブル

@@ -1,4 +1,5 @@
 ---
+id: crawler_delay
 core_product:
 - infrastructure monitoring
 title: 크롤러 지연
