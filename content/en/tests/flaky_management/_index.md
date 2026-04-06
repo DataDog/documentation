@@ -19,24 +19,24 @@ further_reading:
 
 ## Overview
 
-The [Flaky Tests Management][1] page provides a centralized view to track, triage, and remediate flaky tests across your organization. You can view every test's status along with key impact metrics like number of pipeline failures, CI time wasted, and failure rate.
+The [Flaky Tests Management][1] page provides a centralized view to track, triage, and remediate flaky tests across your organization. You can view every test's state along with key impact metrics like number of pipeline failures, CI time wasted, and failure rate.
 
 From this UI, you can act on flaky tests to mitigate their impact. Quarantine or disable problematic tests to keep known flakes from breaking builds, and create cases and Jira issues to track work toward fixes.
 
 {{< img src="tests/flaky_management-2.png" alt="Overview of the Flaky Tests Management UI" style="width:100%;" >}}
 
-## Change a flaky test's status
+## Change a flaky test's state
 
-Use the status drop-down to change how a flaky test is handled in your CI pipeline. This can help reduce CI noise while retaining traceability and control. Available statuses are:
+Use the state drop-down to change how a flaky test is handled in your CI pipeline. This can help reduce CI noise while retaining traceability and control. Available states are:
 
-| Status    | Description |
+| State     | Description |
 | ----------- | ----------- |
 | **Active** | The test is known to be flaky and is running in CI. |
 | **Quarantined** | Keep the test running in the background, but failures don't affect CI status or break pipelines. This is useful for isolating flaky tests without blocking merges. Datadog tags test run events with `@test.test_management.is_quarantined:true` when quarantined. |
 | **Disabled** | Skip the test entirely in CI. Use this when a test is no longer relevant or needs to be temporarily removed from the pipeline. Datadog tags test run events with `@test.test_management.is_disabled:true` when disabled. |
-| **Fixed** | The test has passed consistently and is no longer flaky. If supported, use the [remediation flow](#confirm-fixes-for-flaky-tests) to confirm the fix and automatically apply this status after it is merged into the default branch. |
+| **Fixed** | The test has passed consistently and is no longer flaky. If supported, use the [remediation flow](#confirm-fixes-for-flaky-tests) to confirm the fix and automatically apply this state after it is merged into the default branch. |
 
-<div class="alert alert-info">Status actions have minimum version requirements for each programming language's instrumentation library. See <a href="#compatibility">Compatibility</a> for details.</div>
+<div class="alert alert-info">State actions have minimum version requirements for each programming language's instrumentation library. See <a href="#compatibility">Compatibility</a> for details.</div>
 
 ## Configure policies to automate the flaky test lifecycle
 
@@ -61,7 +61,7 @@ Configure automated Flaky Test Policies to govern how flaky tests are handled in
            <p>Toggle to allow flaky tests to be quarantined for this repository.</p>
            <p>Customize automation rules based on:</p>
            <ul>
-             <li><strong>Time</strong>: Quarantine a test if its status is <code>Active</code> for a specified number of days. The rule is triggered every day at 12:15 UTC.</li>
+             <li><strong>Time</strong>: Quarantine a test if its state is <code>Active</code> for a specified number of days. The rule is triggered every day at 12:15 UTC.</li>
              <li><strong>Branch</strong>: Quarantine an <code>Active</code> test if it flakes in one or more specified branches.</li>
              <li><strong>Failure rate</strong>: Quarantine an <code>Active</code> test if its failure rate over the last 7 days is greater or equal to the specified threshold. The rule is triggered every 15 minutes.</li>
            </ul>
@@ -73,7 +73,7 @@ Configure automated Flaky Test Policies to govern how flaky tests are handled in
            <p>Toggle to allow flaky tests to be disabled for this repository. You may want to do this after quarantining or to protect specific branches from flakiness.</p>
            <p>Customize automation rules based on:</p>
            <ul>
-             <li><strong>Status and time</strong>: Disable a test if it has a specified status for a specified number of days. The rule is triggered every day at 12:30 UTC.</li>
+             <li><strong>State and time</strong>: Disable a test if it has a specified state for a specified number of days. The rule is triggered every day at 12:30 UTC.</li>
              <li><strong>Branch</strong>: Disable an <code>Active</code> or <code>Quarantined</code> test if it flakes in one or more specified branches.</li>
              <li><strong>Failure rate</strong>: Disable an <code>Active</code> or <code>Quarantined</code> test if its failure rate over the last 7 days is greater or equal to the specified threshold. The rule is triggered every 15 minutes.</li>
            </ul>
@@ -85,7 +85,7 @@ Configure automated Flaky Test Policies to govern how flaky tests are handled in
        </tr>
        <tr>
          <td><strong>Fixed</strong></td>
-         <td>If a flaky test no longer flakes for 30 days, it is automatically moved to Fixed status. This automation is default behavior and can't be customized.</td>
+         <td>If a flaky test no longer flakes for 30 days, it is automatically moved to the Fixed state. This automation is default behavior and can't be customized.</td>
        </tr>
      </tbody>
    </table>
@@ -128,7 +128,7 @@ When you fix a flaky test, Test Optimization's remediation flow can confirm the 
     - If all retries pass, marks the fix as **in progress** in the Flaky Tests Management UI, associates it with the branch used for the fix, and waits for that branch to be merged.
       - Tags the last test retry with `@test.test_management.attempt_to_fix_passed:true` in test run events.
       - Starts a 14-day [grace period](#grace-period-mechanism) to give time for the fix to propagate everywhere in the repository.
-    - If any retry fails, keeps the test's current status (`Active`, `Quarantined`, or `Disabled`).
+    - If any retry fails, keeps the test's current state (`Active`, `Quarantined`, or `Disabled`).
       - Tags the last test retry with `@test.test_management.attempt_to_fix_passed:false` in test run events.
 
 ### Track fixes that are in progress
