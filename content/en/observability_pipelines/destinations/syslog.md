@@ -42,11 +42,9 @@ To set up the syslog destination in the UI:
 
 ##### Enable TLS
 
-Toggle the switch to enable TLS. If you enable TLS, the following certificate and key files are required:
-- Enter the identifier for your syslog key pass. If you leave it blank, the [default](#set-secrets) is used.
-- `Server Certificate Path`: The path to the certificate file that has been signed by your Certificate Authority (CA) root file in DER or PEM (X.509).
-- `CA Certificate Path`: The path to the certificate file that is your Certificate Authority (CA) root file in DER or PEM (X.509).
-- `Private Key Path`: The path to the `.key` private key file that belongs to your Server Certificate Path in DER or PEM (PKCS#8) format.
+Toggle the switch to **Enable TLS**.
+- If you are using Secrets Management, enter the identifier for the syslog key pass. See [Set secrets](#set-secrets) for the defaults used.
+{{% observability_pipelines/tls_settings %}}
 
 ##### Wait time for TCP keepalive probes
 

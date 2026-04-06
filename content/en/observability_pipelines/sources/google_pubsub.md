@@ -27,10 +27,8 @@ Set up this source when you [set up a pipeline][1]. You can set up a pipeline in
     - The Worker uses standard [Google authentication methods][4].
 1. Enter the subscription name.
 1. Select the decoder you want to use (Bytes, GELF, JSON, syslog).
-1. Optionally, toggle the switch to enable TLS. If you enable TLS, the following certificate and key files are required.<br>**Note**: All file paths are made relative to the configuration data directory, which is `/var/lib/observability-pipelines-worker/config/` by default. See [Advanced Worker Configurations][3] for more information. The file must be owned by the `observability-pipelines-worker group` and `observability-pipelines-worker` user, or at least readable by the group or user.
-    - `Server Certificate Path`: The path to the certificate file that has been signed by your Certificate Authority (CA) root file in DER or PEM (X.509).
-    - `CA Certificate Path`: The path to the certificate file that is your Certificate Authority (CA) root file in DER or PEM (X.509).
-    - `Private Key Path`: The path to the `.key` private key file that belongs to your Server Certificate Path in DER or PEM (PKCS #8) format.
+1. Optionally, toggle the switch to **Enable TLS**.
+{{% observability_pipelines/tls_settings %}}
 
 ## Set secrets
 
@@ -52,7 +50,6 @@ There are no default secret identifiers for this source.
 
 [1]: /observability_pipelines/configuration/set_up_pipelines/
 [2]: https://cloud.google.com/kubernetes-engine/docs/concepts/workload-identity
-[3]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/
 [4]: https://cloud.google.com/docs/authentication#auth-flowchart
 [5]: https://app.datadoghq.com/observability-pipelines
 [6]: /api/latest/observability-pipelines/

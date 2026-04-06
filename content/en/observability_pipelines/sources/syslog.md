@@ -32,11 +32,9 @@ To configure your Syslog source:
 
 ### Optional settings
 
-Toggle the switch to **Enable TLS**. If you enable TLS, the following certificate and key files are required.<br>**Note**: All file paths are made relative to the configuration data directory, which is `/var/lib/observability-pipelines-worker/config/` by default. See [Advanced Worker Configurations][6] for more information. The file must be owned by the `observability-pipelines-worker group` and `observability-pipelines-worker` user, or at least readable by the group or user.
-- Enter the identifier for your syslog key pass. If you leave it blank, the [default](#set-secrets) is used.
-- `Server Certificate Path`: The path to the certificate file that has been signed by your Certificate Authority (CA) root file in DER or PEM (X.509) format.
-- `CA Certificate Path`: The path to the certificate file that is your Certificate Authority (CA) root file in DER or PEM (X.509) format.
-- `Private Key Path`: The path to the `.key` private key file that belongs to your Server Certificate Path in DER or PEM (PKCS#8) format.
+Toggle the switch to **Enable TLS**.
+- If you are using Secrets Management, enter the identifier for the syslog key pass. See [Set secrets](#set-secrets) for the defaults used.
+{{% observability_pipelines/tls_settings %}}
 
 ## Set secrets
 
@@ -81,7 +79,6 @@ Syslog is a widely used logging protocol for sending network logs to a central s
 [3]: https://help.fortinet.com/fadc/4-5-1/olh/Content/FortiADC/handbook/log_remote.htm
 [4]: https://docs.paloaltonetworks.com/pan-os/10-1/pan-os-admin/monitoring/configure-log-forwarding
 [5]: https://knowledgebase.paloaltonetworks.com/KCSArticleDetail?id=kA10g000000ClRxCAK
-[6]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/
 [7]: https://app.datadoghq.com/observability-pipelines
 [8]: /api/latest/observability-pipelines/
 [9]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline

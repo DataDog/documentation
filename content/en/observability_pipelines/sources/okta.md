@@ -34,13 +34,7 @@ The following are required to send Okta logs to Observability Pipelines using Am
 1. In the **Decoding** dropdown menu, select **Bytes**.
 1. Toggle the switch to **Enable TLS**.
     - If you are using Secrets Management, enter the identifier for the HTTP/S Server key pass. See [Set secrets][2] for the defaults used.
-    - The following certificate and key files are required.
-      - `Server Certificate Path`: The path to the certificate file that has been signed by your Certificate Authority (CA) root file in DER, PEM, or CRT (X.509).
-      - `CA Certificate Path`: The path to the certificate file that is your Certificate Authority (CA) root file in DER, PEM, or CERT (X.509).
-      - `Private Key Path`: The path to the `.key` private key file that belongs to your Server Certificate Path in DER, PEM, or CERT (PKCS #8) format.
-      - **Notes**:
-        - The configuration data directory `/var/lib/observability-pipelines-worker/config/` is automatically appended to the file paths. See [Advanced Worker Configurations][5] for more information.
-        - The file must be readable by the `observability-pipelines-worker` group and user.
+    {{% observability_pipelines/tls_settings %}}
 1. Copy your certificates into the configuration directory:
     ```shell
     # Create the configuration directory
@@ -96,5 +90,4 @@ After configuring the Amazon EventBridge, you can view your Okta logs in [Log Ex
 [2]: /observability_pipelines/sources/http_server/?tab=secretsmanagement#set-secrets
 [3]: /observability_pipelines/configuration/install_the_worker/?tab=docker#pipeline-ui-setup
 [4]: https://help.okta.com/en-us/content/topics/reports/log-streaming/add-aws-eb-log-stream.htm
-[5]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/
 [6]: https://app.datadoghq.com/logs

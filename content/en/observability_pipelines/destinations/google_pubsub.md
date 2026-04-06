@@ -101,10 +101,9 @@ Set up the Google Pub/Sub destination and its environment variables when you [se
 
 ##### Enable TLS
 
-Toggle the switch to **Enable TLS** if your organization requires secure connections with custom certificates.
-- `Server Certificate Path`: The path to the certificate file that has been signed by your Certificate Authority (CA) Root File in DER or PEM (X.509).
-- `CA Certificate Path`: The path to the certificate file that is your Certificate Authority (CA) Root File in DER or PEM (X.509).
-- `Private Key Path`: The path to the `.key` private key file that belongs to your Server Certificate Path in DER or PEM (PKCS#8) format.
+Toggle the switch to **Enable TLS**.
+- If you are using Secrets Management, enter the identifier for the Google Pub/Sub key pass. See [Set secrets](#set-secrets) for the defaults used.
+{{% observability_pipelines/tls_settings %}}
 
 ##### Buffering
 

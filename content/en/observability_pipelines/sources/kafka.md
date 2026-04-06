@@ -40,11 +40,9 @@ Set up this source when you [set up a pipeline][1]. You can set up a pipeline in
 
 #### Enable TLS
 
-Toggle the switch to **Enable TLS**. If you enable TLS, the following certificate and key files are required.<br>**Note**: All file paths are made relative to the configuration data directory, which is `/var/lib/observability-pipelines-worker/config/` by default. See [Advanced Worker Configurations][5] for more information. The file must be owned by the `observability-pipelines-worker group` and `observability-pipelines-worker` user, or at least readable by the group or user.
-- Enter the identifier for your Kafka key pass. If you leave it blank, the [default](#set-secrets) is used.
-- `Server Certificate Path`: The path to the certificate file that has been signed by your Certificate Authority (CA) root file in DER or PEM (X.509).
-- `CA Certificate Path`: The path to the certificate file that is your Certificate Authority (CA) root file in DER or PEM (X.509).
-- `Private Key Path`: The path to the `.key` private key file that belongs to your Server Certificate Path in DER or PEM (PKCS#8) format.
+Toggle the switch to **Enable TLS**.
+- If you are using Secrets Management, enter the identifier for the Kafka key pass. See [Set secrets](#set-secrets) for the defaults used.
+{{% observability_pipelines/tls_settings %}}
 
 #### Add additional librdkafka options
 
@@ -107,7 +105,6 @@ See the [librdkafka documentation][3] for more information and to ensure your va
 [2]: https://github.com/confluentinc/librdkafka/tree/master
 [3]: https://docs.confluent.io/platform/current/clients/librdkafka/html/md_CONFIGURATION.html
 [4]: https://docs.confluent.io/platform/current/clients/librdkafka/html/md_CONFIGURATION.html
-[5]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/
 [6]: /observability_pipelines/sources/azure_event_hubs/
 [7]: https://app.datadoghq.com/observability-pipelines
 [8]: /api/latest/observability-pipelines/

@@ -29,11 +29,9 @@ Set up this source when you [set up a pipeline][1]. You can set up a pipeline in
 
 ### Optional settings
 
-Toggle the switch to **Enable TLS**. If you enable TLS, the following certificate and key files are required.<br>**Note**: All file paths are made relative to the configuration data directory, which is `/var/lib/observability-pipelines-worker/config/` by default. See [Advanced Worker Configurations][5] for more information. The file must be owned by the `observability-pipelines-worker group` and `observability-pipelines-worker` user, or at least readable by the group or user.
-- Enter the identifier for your Splunk HEC key pass. If you leave it blank, the [default](#set-secrets) is used.
-- `Server Certificate Path`: The path to the certificate file that has been signed by your Certificate Authority (CA) root file in DER or PEM (X.509).
-- `CA Certificate Path`: The path to the certificate file that is your Certificate Authority (CA) root file in DER or PEM (X.509).
-- `Private Key Path`: The path to the `.key` private key file that belongs to your Server Certificate Path in DER or PEM (PKCS#8) format.
+Toggle the switch to **Enable TLS**.
+- If you are using Secrets Management, enter the identifier for the Splunk HEC key pass. See [Set secrets](#set-secrets) for the defaults used.
+{{% observability_pipelines/tls_settings %}}
 
 ## Set secrets
 
@@ -87,7 +85,6 @@ To send logs from the Splunk Distribution of the OpenTelemetry Collector:
 [2]: https://help.splunk.com/en/splunk-observability-cloud/manage-data/splunk-distribution-of-the-opentelemetry-collector/get-started-with-the-splunk-distribution-of-the-opentelemetry-collector/collector-for-kubernetes
 [3]: https://help.splunk.com/en/splunk-observability-cloud/manage-data/splunk-distribution-of-the-opentelemetry-collector/get-started-with-the-splunk-distribution-of-the-opentelemetry-collector/collector-for-linux
 [4]: /observability_pipelines/configuration/set_up_pipelines
-[5]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/
 [6]: https://app.datadoghq.com/observability-pipelines
 [7]: /api/latest/observability-pipelines/
 [8]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline

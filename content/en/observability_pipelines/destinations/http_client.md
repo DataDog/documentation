@@ -41,12 +41,9 @@ Toggle the switch to **Enable Compression**. If enabled:
 
 #### Enable TLS
 
-Toggle the switch to enable TLS. If you enable TLS, the following certificate and key files are required:
-- Enter the identifier for your HTTP Client key pass. If you leave it blank, the [default](#set-secrets) is used.
-	- **Note**: Only enter the identifier for the key pass. Do **not** enter the actual key pass.
-- `Server Certificate Path`: The path to the certificate file that has been signed by your Certificate Authority (CA) root file in DER or PEM (X.509).
-- `CA Certificate Path`: The path to the certificate file that is your Certificate Authority (CA) root file in DER or PEM (X.509).
-- `Private Key Path`: The path to the `.key` private key file that belongs to your Server Certificate Path in DER or PEM (PKCS#8) format.
+Toggle the switch to **Enable TLS**.
+- If you are using Secrets Management, enter the identifier for the HTTP Client key pass. See [Set secrets](#set-secrets) for the defaults used.
+{{% observability_pipelines/tls_settings %}}
 
 #### Buffering
 
