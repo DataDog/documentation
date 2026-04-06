@@ -28,7 +28,7 @@ Once invited to the Preview, refer to this page, which explains how to configure
 
 1. In the main `datadog.yaml` configuration file, set the following parameter:
 
-   <div class="alert alert-danger">Do not skip this step. Without this parameter, you may be subject to host billing.</div>
+   <div class="alert alert-danger">This parameter is required. Without it, devices are billed as hosts.</div>
 
    {{< code-block lang="yaml" >}}
 infrastructure_mode: end_user_device
