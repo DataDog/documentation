@@ -65,9 +65,9 @@ After you've created and tested your monitor, add it to your listing in the Deve
 4. For each monitor, provide a **Display Name** and **Description**. These appear on the [**Monitors > Templates**][2] page:
     - **Display Name**: A concise title that clearly communicates what the alert covers. Use active voice and start with an object followed by a verb (for example, `Database latency exceeds threshold`). Do not use template variables.
 
-    | Needs revision                                         | Better                                | Best                                          |
-    |--------------------------------------------------------|---------------------------------------|-----------------------------------------------|
-    | High Unacknowledged Messages reported on {{host.name}} | High Unacknowledged Messages reported | Unacknowledged Messages are higher than usual |
+      | Needs revision                                         | Better                                | Best                                          |
+      |--------------------------------------------------------|---------------------------------------|-----------------------------------------------|
+      | High Unacknowledged Messages reported on {{host.name}} | High Unacknowledged Messages reported | Unacknowledged Messages are higher than usual |
 
     - **Description**: A short explanation that helps users decide whether the monitor is relevant to them. Describe why this alert matters and what impact it addresses.
 
