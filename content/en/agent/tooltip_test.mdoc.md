@@ -11,11 +11,11 @@ Default case: {% glossary-tooltip term="new" /%}
 
 Title case: {% glossary-tooltip term="new" case="title" /%}
 
-Title case: {% glossary-tooltip term="snmp" case="title" /%}
+Title case (no short definition): {% glossary-tooltip term="snmp" case="title" /%}
 
 Sentence case: {% glossary-tooltip term="new" case="sentence" /%}
 
-Sentence case: {% glossary-tooltip term="snmp" case="sentence" /%}
+Sentence case (no short definition): {% glossary-tooltip term="snmp" case="sentence" /%}
 
 Lower case: {% glossary-tooltip term="new" case="lower" /%}
 
