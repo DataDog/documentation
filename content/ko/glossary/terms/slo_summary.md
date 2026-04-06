@@ -1,9 +1,10 @@
 ---
+id: slo_summary
 core_product:
 - 대시보드
 related_terms:
-- 서비스 수준 목표(SLO)
-- 대시보드
+- slo
+- dashboard
 title: SLO 위젯
 ---
 SLO 위젯은 기존 서비스 수준 목표의 상태, 예산 및 남은 오류 예산을 시각화합니다. SLO의 모든 기본 그룹을 표시하고 위젯에서 Windows 시간별로 그룹을 정렬할 수 있습니다. 

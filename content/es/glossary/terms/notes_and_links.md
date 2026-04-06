@@ -1,8 +1,9 @@
 ---
+id: notes_and_links
 core_product:
 - dashboards
 related_terms:
-- texto libre
+- free_text
 - dashboard
 title: notas y enlaces
 ---

@@ -2304,16 +2304,21 @@ menu:
       parent: error_tracking_ticketing_systems
       identifier: error_tracking_case_management
       weight: 101
+    - name: Link Pull Requests
+      url: error_tracking/link_pull_requests
+      parent: error_tracking
+      identifier: error_tracking_link_pull_requests
+      weight: 15
     - name: Troubleshooting
       url: error_tracking/troubleshooting
       parent: error_tracking
       identifier: error_tracking_troubleshooting
-      weight: 15
+      weight: 16
     - name: Guides
       url: error_tracking/guides
       parent: error_tracking
       identifier: error_tracking_guides
-      weight: 16
+      weight: 17
     - name: Change Tracking
       url: change_tracking/
       pre: graph-3
@@ -2992,11 +2997,6 @@ menu:
       identifier: end_user_device_monitoring
       parent: infrastructure_heading
       weight: 40000
-    - name: Setup
-      url: infrastructure/end_user_device_monitoring/setup/
-      identifier: end_user_device_monitoring_setup
-      parent: end_user_device_monitoring
-      weight: 1
     - name: Hosts
       url: infrastructure/hostmap/
       identifier: hosts
@@ -3939,11 +3939,16 @@ menu:
       parent: cloud_cost_planning
       identifier: cloud_cost_planning_budgets
       weight: 701
+    - name: Forecasting
+      url: cloud_cost_management/planning/forecasting
+      parent: cloud_cost_planning
+      identifier: cloud_cost_planning_forecasting
+      weight: 702
     - name: Commitment Programs
       url: cloud_cost_management/planning/commitment_programs
       parent: cloud_cost_planning
       identifier: cloud_cost_planning_commitment_programs
-      weight: 702
+      weight: 703
     - name: Cost Changes
       url: cloud_cost_management/cost_changes
       parent: cloud_cost
@@ -4180,6 +4185,11 @@ menu:
       parent: tracing_proxies
       identifier: tracing_proxies_apigateway
       weight: 2116
+    - name: Azure API Management
+      url: tracing/trace_collection/proxy_setup/azure_apim
+      parent: tracing_proxies
+      identifier: tracing_proxies_azure_apim
+      weight: 2117
     - name: Span Tag Semantics
       url: tracing/trace_collection/tracing_naming_convention
       parent: tracing_trace_collection
@@ -5252,16 +5262,11 @@ menu:
       parent: llm_obs_custom_llm_as_a_judge_evaluations
       identifier: llm_obs_custom_llm_as_a_judge_evaluations_template
       weight: 40101
-    - name: Ragas
-      url: llm_observability/evaluations/ragas_evaluations
-      parent: llm_obs_external_evaluations
-      identifier: llm_obs_ragas_evaluations
-      weight: 40201
     - name: NeMo
       url: llm_observability/evaluations/submit_nemo_evaluations
       parent: llm_obs_external_evaluations
       identifier: llm_obs_submit_nemo_evaluations
-      weight: 40202
+      weight: 40201
     - name: DeepEval Evaluations
       url: llm_observability/evaluations/deepeval_evaluations
       parent: llm_obs_external_evaluations
@@ -6008,11 +6013,16 @@ menu:
       parent: observability_pipelines_configuration
       identifier: observability_pipelines_update_existing_pipelines
       weight: 106
+    - name: Export Pipeline
+      url: observability_pipelines/configuration/export_pipeline_configuration/
+      parent: observability_pipelines_configuration
+      identifier: observability_pipelines_export_pipeline_configuration
+      weight: 107
     - name: Access Control
       url: observability_pipelines/configuration/access_control
       parent: observability_pipelines_configuration
       identifier: observability_pipelines_access_control
-      weight: 107
+      weight: 108
     - name: Sources
       url: observability_pipelines/sources/
       parent: observability_pipelines
@@ -8054,6 +8064,11 @@ menu:
       url: synthetics/platform/settings
       parent: synthetics_platform
       weight: 706
+    - name: Scheduled Downtime
+      identifier: synthetics_platform_downtime
+      url: synthetics/platform/downtime
+      parent: synthetics_platform
+      weight: 707
     - name: Exploring Synthetics Data
       url: synthetics/explore/
       parent: synthetics
@@ -8928,7 +8943,7 @@ menu:
       parent: pa_experiments
       identifier: pa_experiments_plan
       weight: 1
-    - name: Define Metrics
+    - name: Create Experiment Metrics
       url: experiments/defining_metrics
       parent: pa_experiments
       identifier: pa_experiments_metrics
@@ -9034,6 +9049,11 @@ menu:
       parent: session_replay
       identifier: session_replay_heatmaps
       weight: 4
+    - name: Guides
+      url: /session_replay/guide
+      parent: session_replay
+      identifier: session_replay_guide
+      weight: 5
     - name: Account Management
       url: account_management/
       pre: cog-2
