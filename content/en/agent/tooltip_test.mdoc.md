@@ -7,7 +7,7 @@ Note: I made this page before we introduced Playwright. I'll set that up soon.
 
 ## Case tests
 
-Default case: {% glossary-glossary-tooltip term="new" /%}
+Default case: {% glossary-tooltip term="new" /%}
 
 Title case: {% glossary-tooltip term="new" case="title" /%}
 
