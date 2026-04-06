@@ -17,12 +17,9 @@ further_reading:
 Incident AI transforms how your team manages incidents by automating coordination tasks and providing intelligent insights throughout the incident lifecycle. Built into Datadog Incident Management, it works in Slack and the Datadog platform to help you respond faster and learn from every incident.
 
 Key capabilities include:
-- **Incident summaries**: Get context-aware summaries when you join incident channels.
-- **Related incident detection**: Automatic detection of related incidents to identify systemic issues and recurring issues.
-- **Request information or take action**: Declare incidents, update severity and status, search incident history, and more—all through conversational prompts in Slack.
-- **AI-enhanced notifications**: Dynamically populate stakeholder updates with AI-generated summaries of contributing factors, impact, and remediation across email, MS Teams, Slack, and other channels.
-- **Automated follow-ups**: Incident AI collects action items mentioned during incidents and suggests them as follow-up tasks when the incident is resolved.
-- **Intelligent postmortems**: Generate comprehensive first drafts with AI-powered sections covering executive summaries, timelines, customer impact, and lessons learned—giving responders a strong foundation to build on.
+- **AI-driven incident coordination**: Use conversational prompts in Slack to declare incidents, update status and severity, search incident history, and receive next-step recommendations throughout the incident lifecycle.
+- **Automated insights and summaries**: Instantly receive incident summaries, AI-generated detection of related and recurring issues, and actionable contributing factors—directly in Slack and Datadog.
+- **AI-powered stakeholder updates and postmortems**: Dynamically populate notifications across email, MS Teams, Slack, and more with AI-generated summaries, and generate comprehensive postmortem drafts with executive summaries, impact analysis, timelines, and lessons learned.
 
 ## Get started with incident coordination
 
@@ -37,7 +34,8 @@ Incident AI helps coordinate incidents—especially those involving multiple tea
       - **Push Slack channel messages to the incident timeline**
       - **Activate Incident AI features in incident Slack channels for your organization**<br />
       **Note**: Incident AI's incident management features can only be activated for one Datadog organization within a single Slack workspace.
-1. To interact with Incident AI in a Slack channel, invite it by running the `@Datadog` command.
+1. [Chat with Incident AI](#chat-with-incident-ai) in a Slack channel, invite it by running the `@Datadog` command.
+1. [Start a Bits AI SRE investigation](#bits-ai-investigation).
 
 ## Customize stakeholder notifications
 
@@ -114,7 +112,7 @@ Use natural language prompts to request information or take action from Slack:
 | Find related incidents             | `@Datadog Are there any related incidents?`<br />`@Datadog Find me incidents related to DDoS attacks from the past month`                       |
 | Early detection inquiry            | `@Datadog A customer is unable to check out. Is there an incident?`<br />`@Datadog Are there any incidents now impacting the payments service?` |
 
-## Trigger a Bits AI SRE investigation from incident Slack channels or the web UI
+## Trigger a Bits AI SRE investigation from incident Slack channels or the web UI {#bits-ai-investigation}
 
 Start a Bits AI SRE investigation directly from your incident Slack channel or the Datadog Incident Management web UI, without leaving your incident response workflow. This reduces context switching during active incidents and allows the AI agent to investigate alongside your team using the same shared context.
 
@@ -131,15 +129,14 @@ Before using this feature, verify the following:
 |-----------------------------|---------------------------------------------|
 | `@Datadog investigate we're seeing high error rates in the payments service since the deploy at 2pm` | Triggers investigation with responder-provided focus area |
 | `@Datadog investigate, I think this is related to the redis cache` | Triggers investigation with a hypothesis seed |
-                                                                                                        
-When triggered, the agent automatically pulls in the incident’s timeline, linked telemetry signals (traces, metrics, and logs), and any context you provide in the prompt. It then posts updates back to the channel as a thread reply, with a final root cause summary and recommended next steps surfaced to the broader channel when the investigation completes.
 
-<img width="434" height="607" alt="Trigger Bits AI SRE investigations from incident Slack channels" src="https://github.com/user-attachments/assets/8784b425-21a4-424e-a43d-27c19f9a03c3" />
+When triggered, the agent automatically pulls in the incident's timeline, linked telemetry signals (traces, metrics, and logs), and any context you provide in the prompt. It then posts updates back to the channel as a thread reply, with a final root cause summary and recommended next steps surfaced to the broader channel when the investigation completes.
 
-**From the web UI,** you can trigger an investigation directly from the “Investigation” section on the overview page of the incident without switching to Slack.
+{{< img src="incident_response/incident_management/incident_ai/Triggering_investigations_slack.png" alt="A Datadog incident Slack channel showing a completed Bits AI SRE investigation with root cause findings and a View Full Investigation button" style="width:80%;" >}}
 
-<img width="3024" height="1650" alt="Bits AI SRE investigation button" src="https://github.com/user-attachments/assets/531ea1cb-d39a-48ab-98a9-74adcb1d0949" />
-<img width="1512" height="825" alt="Bits AI SRE investigation on web ui concluded" src="https://github.com/user-attachments/assets/e7d29e2d-5368-4d65-806f-2fe7a391caea" />
+**From the web UI,** you can trigger an investigation directly from the "Investigation" section on the overview page of the incident without switching to Slack.
+
+{{< img src="incident_response/incident_management/incident_ai/Triggering_investigations_web.png" alt="The Incident Management overview page showing a completed Bits AI SRE investigation in the Investigation section with a View Full Investigation button" >}}
 
 When triggered, the investigation is embedded in the incident web UI, and Bits AI SRE appears as a responder in the Responder Roles section of the page.
 
@@ -148,7 +145,7 @@ When triggered, the investigation is embedded in the incident web UI, and Bits A
 - **Link telemetry signals before investigating.** Investigations with two or more linked Datadog telemetry signals are treated as high-context and produce higher-confidence root cause hypotheses. Link traces, metrics, or logs to the incident before triggering.
 - **One investigation at a time.** Only one active investigation per incident is supported. If an investigation is already running when you send `@Datadog investigate`, the system notifies you and links the existing investigation. You can start a new investigation after the current one completes.
 
-For setup instructions and prerequisites, see [Slack Integration Guide](https://docs.datadoghq.com/integrations/slack/?tab=datadogforslack). For a full walkthrough of the investigation workflow, see the [Bits AI SRE Guide](https://docs.datadoghq.com/bits_ai/bits_ai_sre).
+For setup instructions and prerequisites, see the [Slack Integration][7] documentation. For a full walkthrough of the investigation workflow, see [Bits AI SRE][8].
 
 ## Customize postmortem templates with AI incident variables
 
@@ -188,3 +185,5 @@ For more information on generating and managing postmortems, see [Incident Postm
 [4]: https://app.datadoghq.com/incidents/settings?section=integrations
 [5]: /incident_response/incident_management/post_incident/follow-ups
 [6]: /incident_response/incident_management/post_incident/postmortems
+[7]: /integrations/slack/?tab=datadogforslack
+[8]: /bits_ai/bits_ai_sre
