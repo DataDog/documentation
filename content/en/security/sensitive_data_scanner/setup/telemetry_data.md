@@ -5,6 +5,8 @@ aliases:
   - /sensitive_data_scanner/setup/telemetry_data
   - /security/sensitive_data_scanner/guide/best_practices_for_creating_custom_rules
   - /sensitive_data_scanner/guide/best_practices_for_creating_custom_rules
+  - /security/sensitive_data_scanner/guide/redact_uuids_in_logs/
+  - /security/sensitive_data_scanner/guide/redact_all_emails_except_from_specific_domain_logs/
 further_reading:
   - link: "/security/sensitive_data_scanner/scanning_rules/library_rules"
     tag: "Documentation"
