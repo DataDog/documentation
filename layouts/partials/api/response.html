@@ -4,6 +4,9 @@
 {{ $resourcePage := .resourcePage }}
 {{ $translate_action := .translate_action }}
 {{ $version := .version }}
+{{ $isDateVersioned := .isDateVersioned | default false }}
+{{ $apiVersionsList  := .apiVersionsList  | default slice }}
+{{ $baseVersion      := .baseVersion      | default "" }}
 {{ $s := newScratch }}
 
 <h3 class="mt-3 mb-2">{{ i18n "response" }}</h3>
@@ -113,27 +116,58 @@
                                         <p>{{- . | markdownify -}}</p>
                                     {{ end }}
 
-
-                                    {{ if in $html "schema-table" }}
-                                        {{ $html | safeHTML }}
+                                    {{ $isVersionedSchema := index $schema "x-datadog-api-versioned" | default false }}
+                                    {{ if and $isVersionedSchema $isDateVersioned (gt (len $apiVersionsList) 0) }}
+                                        {{/* Versioned schema: render each oneOf item as a version-specific pane */}}
+                                        {{ range $vIdx, $variantSchema := (index $schema "oneOf") }}
+                                            {{ $vInfo   := index $apiVersionsList $vIdx | default (dict "date" (printf "variant-%d" $vIdx) "isBase" (eq $vIdx 0)) }}
+                                            {{ $vDate   := $vInfo.date }}
+                                            {{ $vHtml   := "" }}
+                                            {{ range $prop, $propDef := $variantSchema.properties }}
+                                                {{ $vHtml = print $vHtml "<div class=\"row\"><div class=\"col-12 first-column\"><div class=\"row table-row first-row\"><div class=\"col-4 column\"><p class=\"key\">" $prop "</p></div><div class=\"col-2 column\"><p>" ($propDef.type | default "object") "</p></div><div class=\"col-6 column\"><p>" ($propDef.description | default "&nbsp;") "</p></div></div></div></div>" }}
+                                            {{ end }}
+                                            <div class="api-versioned-schema-pane {{ if ne $vDate $baseVersion }}d-none{{ end }}"
+                                                 data-api-date-version="{{ $vDate }}"
+                                                 data-operation-id="{{ $operationid }}">
+                                                {{ if $vHtml }}
+                                                    <div class="table-response schema-table row has-no-expands">
+                                                        <div class="col-12">
+                                                            <div class="row table-header">
+                                                                <div class="col-4 column"><p class="font-semibold">{{ i18n "field" }}</p></div>
+                                                                <div class="col-2 column"><p class="font-semibold">{{ i18n "type" }}</p></div>
+                                                                <div class="col-6 column"><p class="font-semibold">{{ i18n "description" }}</p></div>
+                                                            </div>
+                                                            {{ $vHtml | safeHTML }}
+                                                        </div>
+                                                    </div>
+                                                {{ else }}
+                                                    <p class="text-muted fst-italic">No properties documented for this version.</p>
+                                                {{ end }}
+                                            </div>
+                                        {{ end }}
                                     {{ else }}
-                                        <div class="table-response schema-table row {{ if not (in $html "js-collapse-trigger") }}has-no-expands{{ end }} {{ if (in $html "hide-table") }}d-none{{ end }}">
-                                          <p class="expand-all js-expand-all text-primary text-end">Expand All</p>
-                                          <div class="col-12">
-                                            <div class="row table-header">
-                                              <div class="col-4 column">
-                                                <p class="font-semibold">{{ i18n "field" }}</p>
-                                              </div>
-                                              <div class="col-2 column">
-                                                <p class="font-semibold">{{ i18n "type" }}</p>
-                                              </div>
-                                              <div class="col-6 column">
-                                                <p class="font-semibold">{{ i18n "description" }}</p>
+                                        {{/* Standard (non-versioned) schema rendering */}}
+                                        {{ if in $html "schema-table" }}
+                                            {{ $html | safeHTML }}
+                                        {{ else }}
+                                            <div class="table-response schema-table row {{ if not (in $html "js-collapse-trigger") }}has-no-expands{{ end }} {{ if (in $html "hide-table") }}d-none{{ end }}">
+                                              <p class="expand-all js-expand-all text-primary text-end">Expand All</p>
+                                              <div class="col-12">
+                                                <div class="row table-header">
+                                                  <div class="col-4 column">
+                                                    <p class="font-semibold">{{ i18n "field" }}</p>
+                                                  </div>
+                                                  <div class="col-2 column">
+                                                    <p class="font-semibold">{{ i18n "type" }}</p>
+                                                  </div>
+                                                  <div class="col-6 column">
+                                                    <p class="font-semibold">{{ i18n "description" }}</p>
+                                                  </div>
+                                                </div>
+                                                {{ $html | safeHTML }}
                                               </div>
                                             </div>
-                                            {{ $html | safeHTML }}
-                                          </div>
-                                        </div>
+                                        {{ end }}
                                     {{ end }}
 
                                 </div>

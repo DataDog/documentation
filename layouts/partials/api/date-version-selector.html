@@ -1,0 +1,30 @@
+{{/*
+  Renders date-based API version selector tabs for a versioned operation.
+  Params:
+    operationId  - string, the endpoint's operationId
+    versions     - slice of dicts: {date string, isBase bool}
+    baseVersion  - string, the date of the default selected version
+*/}}
+{{ $operationId := .operationId }}
+{{ $versions    := .versions }}
+{{ $baseVersion := .baseVersion }}
+
+<ul class="nav nav-tabs response-toggle border-none justify-content-md-end mb-0"
+    role="tablist"
+    aria-label="API date version">
+  {{ range $versions }}
+    <li class="nav-item">
+      <a class="nav-link me-1 js-api-date-version-tab {{ if eq .date $baseVersion }}active{{ end }}"
+         href="#"
+         role="tab"
+         data-api-date-version="{{ .date }}"
+         data-operation-id="{{ $operationId }}">
+        {{- .date -}}
+        {{- if .isBase }}
+          <span class="badge bg-secondary ms-1 api-version-default-badge"
+                title="Default — non-versioned requests use this version">default</span>
+        {{- end }}
+      </a>
+    </li>
+  {{ end }}
+</ul>
