@@ -45,12 +45,12 @@ Forwarding rules require data-type-specific permissions. The following table lis
 | Security Signals | [`security_monitoring_signals_write`][1] |
 | Cloud Workload Security Events | [`security_monitoring_cws_agent_rules_write`][1] |
 
-## Set up events forwarding
+## Set up Events Forwarding
 
 Events Forwarding uses the same destination types and configuration as log forwarding. For detailed instructions on setting up destinations, see [Forwarding Logs to Custom Destinations][2].
 
 {{< site-region region="gov" >}}
-<div class="alert alert-danger">Sending events to a custom destination is outside of the Datadog GovCloud environment, which is outside the control of Datadog. Datadog shall not be responsible for any events that have left the Datadog GovCloud environment, including without limitation, any obligations or requirements that the user may have related to FedRAMP, DoD Impact Levels, ITAR, export compliance, data residency or similar regulations applicable to such events.</div>
+<div class="alert alert-danger"><ul><li>Sending events to a custom destination is outside of the Datadog GovCloud environment, which is outside the control of Datadog. Datadog shall not be responsible for any events that have left the Datadog GovCloud environment, including without limitation, any obligations or requirements that the user may have related to FedRAMP, DoD Impact Levels, ITAR, export compliance, data residency, or similar regulations applicable to such events.</li><li>Due to security protocols for the GovCloud site, only ports <code>443</code> and <code>8088</code> are available for Events Forwarding. If your custom destination uses a different port, contact <a href="/help">Datadog Support</a> to explore opening your port for outbound communications.</li></ul></div>
 {{< /site-region >}}
 
 To set up a forwarding rule:

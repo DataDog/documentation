@@ -3,37 +3,33 @@ aliases:
 - /es/real_user_monitoring/guide/getting-started-feature-flags/
 - /es/real_user_monitoring/guide/setup-feature-flag-data-collection/
 beta: true
-description: Aprender a configurar RUM para capturar datos de indicadores de características
-  y analizar el rendimiento en Datadog
+description: Aprende a configurar RUM para capturar datos de Feature Flag y analizar
+  el rendimiento en Datadog
 disable_toc: false
 further_reading:
-- link: /real_user_monitoring/guide/setup-feature-flag-data-collection/
-  tag: Documentación
-  text: Configurar la recopilación de datos de indicadores de características
 - link: /real_user_monitoring/explorer/
-  tag: Documentación
-  text: Más información sobre el Explorador RUM
+  tag: Documentation
+  text: Conoce el explorador de RUM
 - link: https://www.datadoghq.com/blog/feature-flag-tracking/
   tag: Blog
-  text: Para garantizar la seguridad de la versión con el seguimiento de los indicadores
-    de características en Datadog RUM
-title: Configurar Feature Flag Tracking
+  text: Asegura la seguridad de las versiones con Feature Flag Tracking en Datadog
+    RUM
+title: Configura Feature Flag Tracking
 ---
+Los datos de Feature Flag proporcionan una mayor visibilidad sobre la experiencia del usuario y el seguimiento del rendimiento. Permite determinar qué usuarios están viendo una Feature Flag específica y evaluar si los cambios introducidos están impactando la experiencia del usuario o afectando negativamente el rendimiento.
 
-Los datos de los indicadores de características proporcionan una mayor visibilidad de la experiencia del usuario y la monitorización del rendimiento. Permite determinar a qué usuarios se está mostrando una característica específica y evaluar si los cambios introducidos están repercutiendo en la experiencia del usuario o afectando el rendimiento.
+Al enriquecer tus datos de RUM con datos de Feature Flag, puedes estar seguro de que tu funcionalidad se lanza con éxito sin causar accidentalmente un error o una regresión en el rendimiento. Con esta capa adicional de información, puedes correlacionar los lanzamientos con el rendimiento, identificar problemas en lanzamientos específicos y solucionar problemas más rápido.
 
-Al mejorar tus datos RUM con datos de indicadores de características, puedes estar seguro de que tu función se lanza correctamente sin causar involuntariamente un error o una regresión del rendimiento. Con esta capa adicional de información, puedes correlacionar los lanzamientos de funciones con el rendimiento, identificar los problemas con lanzamientos específicos y solucionar los problemas más rápidamente.
+## Configura el seguimiento de RUM
 
-## Configurar la monitorización de RUM
-
-El seguimiento de los indicadores de características está disponible en los SDK de RUM Browser, iOS, Android, Flutter y React Native.
+Feature Flag Tracking está disponible en el SDK de RUM para explorador, iOS, Android, Flutter y React Native.
 
 {{< tabs >}}
-{{% tab "Navegador" %}}
+{{% tab "Explorador" %}}
 
-Para activar la recopilación de datos de los indicadores de características para el SDK del navegador:
+Para habilitar la recolección de datos de Feature Flag para el SDK del explorador:
 
-1. Configura [Monitorización del navegador de RUM][1]. Necesitas la versión >= 4.25.0 del SDK de RUM del navegador.
+1. Configura [el seguimiento de RUM para explorador][1]. Necesitas la versión del SDK de RUM del explorador >= 4.25.0.
 
 2. Inicializa el SDK de RUM y configura el parámetro de inicialización `enableExperimentalFeatures` con ` ["feature_flags"]`.
 
@@ -54,7 +50,7 @@ Para activar la recopilación de datos de los indicadores de características pa
    </details>
 
    <details>
-     <summary>CDN async</summary>
+     <summary>CDN asíncrono</summary>
 
    ```javascript
    window.DD_RUM.onReady(function() {
@@ -68,7 +64,7 @@ Para activar la recopilación de datos de los indicadores de características pa
    </details>
 
    <details>
-     <summary>Sincronización de CDN</summary>
+     <summary>CDN síncrono</summary>
 
    ```javascript
    window.DD_RUM &&
@@ -81,52 +77,52 @@ Para activar la recopilación de datos de los indicadores de características pa
    </details>
    <br/>
 
-[1]: /es/real_user_monitoring/browser#setup
+[1]: /es/real_user_monitoring/application_monitoring/browser#setup
 {{% /tab %}}
 {{% tab "iOS" %}}
 
-Para activar la recopilación de datos de indicadores de características para tu aplicación de iOS:
+Para habilitar la recopilación de datos de Feature Flag para su aplicación iOS:
 
-1. Configura [Monitorización de RUM iOS][1]. Necesitas la versión >= 1.16.0 del SDK de iOS RUM.
+1. Configura [el seguimiento de RUM para iOS][1]. Necesita la versión del SDK de RUM para iOS >= 1.16.0.
 
 [1]: https://docs.datadoghq.com/es/real_user_monitoring/ios/?tab=swift
 {{% /tab %}}
 {{% tab "Android" %}}
 
-Para activar la recopilación de datos de indicadores de características para tu aplicación de Android:
+Para habilitar la recopilación de datos de Feature Flag para su aplicación Android:
 
-1. Configura [Monitorización de RUM Android][1]. Necesitas la versión >= 1.18.0 del SDK de Android RUM.
+1. Configura [el seguimiento de RUM para Android][1]. Necesita la versión del SDK de RUM para Android >= 1.18.0.
 
 [1]: https://docs.datadoghq.com/es/real_user_monitoring/android/?tab=kotlin
 {{% /tab %}}
 {{% tab "Flutter" %}}
 
-Para activar la recopilación de datos de indicadores de características para tu aplicación de Flutter:
+Para habilitar la recopilación de datos de Feature Flag para su aplicación Flutter:
 
-1. Configura [Monitorización de RUM Flutter][1]. Necesitas la versión >= 1.3.2 del complemento de Flutter.
+1. Configura [el seguimiento de RUM para Flutter][1]. Necesita la versión del Plugin de Flutter >= 1.3.2.
 
-[1]: https://docs.datadoghq.com/es/real_user_monitoring/mobile_and_tv_monitoring/setup/flutter/
+[1]: https://docs.datadoghq.com/es/real_user_monitoring/application_monitoring/flutter/setup
 {{% /tab %}}
 {{% tab "React Native" %}}
 
-Para activar la recopilación de datos de indicadores de características para tu aplicación de React Native:
+Para habilitar la recopilación de datos de Feature Flag para su aplicación React Native:
 
-1. Configura [Monitorización de RUM React Native][1]. Necesitas la versión >= 1.7.0 del SDK de React Native RUM.
+1. Configura [el seguimiento de RUM para React Native][1]. Necesita la versión del SDK de RUM para React Native >= 1.7.0.
 
 [1]: https://docs.datadoghq.com/es/real_user_monitoring/reactnative/
 {{% /tab %}}
 {{< /tabs >}}
 
-## Establecer una integración de indicadores de características
+## Configura una integración de Feature Flag
 
-Puedes empezar a recopilar datos de indicadores de características con [soluciones personalizadas de gestión de indicadores de características](#custom-feature-flag-management), o utilizando uno de los socios de integración de Datadog que se enumeran a continuación.
+Puede comenzar a recopilar datos de Feature Flag con [soluciones personalizadas de gestión de Feature Flag](#custom-feature-flag-management), o utilizando uno de los socios de integración de Datadog que se enumeran a continuación.
 
 <div class="alert alert-danger">
 
-**Nota**: Los siguientes caracteres especiales no son compatibles con Feature Flag Tracking: `.` `:` , `+`, `-`, `=`, `&&`, `||`, `>`, `<`, `!`, `(`, `)`, `{`, `}`, `[`, `]`, `^`, `"`, `“`, `”`, `~`, `*`, `?`, `\`. Datadog recomienda evitar estos caracteres siempre que sea posible en los nombres de los indicadores de características. Si tienes que utilizar uno de estos caracteres, sustitúyelo antes de enviar los datos a Datadog. Por ejemplo
+**Nota**: Los siguientes caracteres especiales no son compatibles con el seguimiento de Feature Flag: `.`, `:`, `+`, `-`, `=`, `&&`, `||`, `>`, `<`, `!`, `(`, `)`, `{`, `}`, `[`, `]`, `^`, `"`, `“`, `”`, `~`, `*`, `?`, `\`. Datadog recomienda evitar estos caracteres cuando sea posible en los nombres de sus Feature Flags. Si se requiere utilizar uno de estos caracteres, reemplace el carácter antes de enviar los datos a Datadog. Por ejemplo:
 
   ```javascript
-  datadogRum.addFeatureFlagEvaluation(key.replace(':', '_'), value);
+  datadogRum.addFeatureFlagEvaluation(key.replaceAll(':', '_'), value);
   ```
 
 </div>
@@ -137,20 +133,20 @@ Puedes empezar a recopilar datos de indicadores de características con [solucio
 
 ### Integración de Amplitude
 
-Antes de inicializar esta integración de indicadores de características, asegúrate de haber [configurado la monitorización de RUM](#set-up-rum-monitoring).
+Antes de inicializar esta integración de Feature Flag, asegúrese de haber [configurado el seguimiento de RUM](#set-up-rum-monitoring).
 
 {{< tabs >}}
-{{% tab "Navegador" %}}
+{{% tab "Explorador" %}}
 
-Inicializa el SDK de Amplitude y crea un oyente de exposición que informe de las evaluaciones del indicador de característica a Datadog con el siguiente fragmento de código:
+Inicialice el SDK de Amplitude y cree un oyente de exposición que informe las evaluaciones de Feature Flag a Datadog utilizando el siguiente fragmento de código:
 
-Para más información sobre la inicialización del SDK de Amplitude, consulta la [documentación del SDK de JavaScript][1] de Amplitude.
+Para más información sobre cómo inicializar el SDK de Amplitude, consulte la [documentación del SDK de JavaScript de Amplitude][1].
 
 ```javascript
   const experiment = Experiment.initialize("CLIENT_DEPLOYMENT_KEY", {
     exposureTrackingProvider: {
       track(exposure: Exposure)  {
-        // Envía el indicador de características cuando Amplitude informa la exposición
+        // Send the feature flag when Amplitude reports the exposure
         datadogRum.addFeatureFlagEvaluation(exposure.flag_key, exposure.variant);
       }
     }
@@ -163,21 +159,21 @@ Para más información sobre la inicialización del SDK de Amplitude, consulta l
 {{% /tab %}}
 {{% tab "iOS" %}}
 
-Inicializa el SDK de Amplitude y crea un inspector que informe de las evaluaciones de los indicadores de característica en Datadog con el siguiente fragmento de código.
+Inicialice el SDK de Amplitude y cree un inspector que informe las evaluaciones de Feature Flag a Datadog utilizando el fragmento de código a continuación.
 
-Para más información sobre la inicialización del SDK de Amplitude, consulta la [documentación del SDK de iOS][1] de Amplitude.
+Para más información sobre cómo inicializar el SDK de Amplitude, consulte la [documentación del SDK de iOS de Amplitude][1].
 
 ```swift
   class DatadogExposureTrackingProvider : ExposureTrackingProvider {
     func track(exposure: Exposure) {
-      // Envía el indicador de características cuando Amplitude informa la exposición
+      // Send the feature flag when Amplitude reports the exposure
       if let variant = exposure.variant {
         RUMMonitor.shared().addFeatureFlagEvaluation(name: exposure.flagKey, value: variant)
       }
     }
   }
 
-  // En el inicio:
+  // In initialization:
   ExperimentConfig config = ExperimentConfigBuilder()
     .exposureTrackingProvider(DatadogExposureTrackingProvider(analytics))
     .build()
@@ -189,25 +185,25 @@ Para más información sobre la inicialización del SDK de Amplitude, consulta l
 {{% /tab %}}
 {{% tab "Android" %}}
 
-Inicializa el SDK de Amplitude y crea un inspector que informe de las evaluaciones de los indicadores de característica en Datadog con el siguiente fragmento de código.
+Inicialice el SDK de Amplitude y cree un inspector que informe las evaluaciones de Feature Flag a Datadog utilizando el fragmento de código a continuación.
 
-Para más información sobre la inicialización del SDK de Amplitude, consulta la [documentación del SDK de Android][1] de Amplitude.
+Para más información sobre cómo inicializar el SDK de Amplitude, consulte la [documentación del SDK de Android de Amplitude][1].
 
 ```kotlin
-  internal class DatadogExposureTrackingProvider : ExposureTrackingProvider {
-    override fun track(exposure: Exposure) {
-        // Envía el indicador de características cuando Amplitude informa la exposición
-        GlobalRumMonitor.get().addFeatureFlagEvaluation(
-            exposure.flagKey,
-            exposure.variant.orEmpty()
-        )
-    }
+internal class DatadogExposureTrackingProvider : ExposureTrackingProvider {
+  override fun track(exposure: Exposure) {
+      // Send the feature flag when Amplitude reports the exposure
+      GlobalRumMonitor.get().addFeatureFlagEvaluation(
+          exposure.flagKey,
+          exposure.variant.orEmpty()
+      )
   }
+}
 
-  // En el inicio:
-  val config = ExperimentConfig.Builder()
-      .exposureTrackingProvider(DatadogExposureTrackingProvider())
-      .build()
+// In initialization:
+val config = ExperimentConfig.Builder()
+    .exposureTrackingProvider(DatadogExposureTrackingProvider())
+    .build()
 ```
 
 [1]: https://www.docs.developers.amplitude.com/experiment/sdks/android-sdk/
@@ -216,7 +212,7 @@ Para más información sobre la inicialización del SDK de Amplitude, consulta l
 {{% /tab %}}
 {{% tab "Flutter" %}}
 
-Amplitude no admite esta integración. Crea un tique con Amplitude para solicitar esta característica.
+Amplitude no es compatible con esta integración. Cree un ticket con Amplitude para solicitar esta función.
 
 
 {{% /tab %}}
@@ -224,12 +220,12 @@ Amplitude no admite esta integración. Crea un tique con Amplitude para solicita
 
 ### Integración de ConfigCat
 
-Antes de inicializar esta integración de indicadores de características, asegúrate de haber [configurado la monitorización de RUM](#set-up-rum-monitoring).
+Antes de inicializar esta integración de Feature Flag, asegúrese de haber [configurado el seguimiento de RUM](#set-up-rum-monitoring).
 
 {{< tabs >}}
-{{% tab "Navegador" %}}
+{{% tab "Explorador" %}}
 
-Al inicializar el SDK de ConfigCat JavaScript, suscríbete al evento `flagEvaluated` e informa de las evaluaciones de los indicadores de características a Datadog:
+Al inicializar el SDK de Javascript de ConfigCat, suscríbase al evento `flagEvaluated` e informe las evaluaciones de Feature Flag a Datadog:
 
 ```javascript
 const configCatClient = configcat.getClient(
@@ -244,7 +240,7 @@ const configCatClient = configcat.getClient(
 );
 ```
 
-Para obtener más información sobre la inicialización del SDK de ConfigCat JavaScript, consulta la [documentación del SDK de JavaScript SDK][1] de ConfigCat.
+Para más información sobre cómo inicializar el SDK de Javascript de ConfigCat, consulte la [documentación del SDK de JavaScript de ConfigCat][1].
 
 [1]: https://configcat.com/docs/sdk-reference/js
 
@@ -252,7 +248,7 @@ Para obtener más información sobre la inicialización del SDK de ConfigCat Jav
 {{% /tab %}}
 {{% tab "iOS" %}}
 
-Al inicializar el SDK de ConfigCat Swift iOS, suscríbete al evento `flagEvaluated` e informa de las evaluaciones de los indicadores de características a Datadog:
+Al inicializar el SDK de ConfigCat Swift para iOS, suscríbase al evento `flagEvaluated` e informe las evaluaciones de Feature Flag a Datadog:
 
 ```swift
   let client = ConfigCatClient.get(sdkKey: "#YOUR-SDK-KEY#") { options in
@@ -262,7 +258,7 @@ Al inicializar el SDK de ConfigCat Swift iOS, suscríbete al evento `flagEvaluat
   }
 ```
 
-Para obtener más información sobre la inicialización del SDK de Swift (iOS) de ConfigCat, consulta la [documentación del SDK de Swift iOS][1] de ConfigCat.
+Para más información sobre cómo inicializar el SDK de ConfigCat Swift (iOS), consulte la [documentación del SDK de Swift para iOS de ConfigCat][1].
 
 [1]: https://configcat.com/docs/sdk-reference/ios
 
@@ -270,17 +266,17 @@ Para obtener más información sobre la inicialización del SDK de Swift (iOS) d
 {{% /tab %}}
 {{% tab "Android" %}}
 
-Al inicializar el SDK de ConfigCat Android, suscríbete al evento `flagEvaluated` e informa de las evaluaciones de los indicadores de características a Datadog:
+Al inicializar el SDK de ConfigCat para Android, suscríbase al evento `flagEvaluated` e informe las evaluaciones de Feature Flag a Datadog:
 
 ```java
-  ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> {
-    options.hooks().addOnFlagEvaluated(details -> {
-        GlobalRumMonitor.get().addFeatureFlagEvaluation(details.key, details.value);
-    });
+ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> {
+  options.hooks().addOnFlagEvaluated(details -> {
+      GlobalRumMonitor.get().addFeatureFlagEvaluation(details.key, details.value);
   });
+});
 ```
 
-Para más información sobre la inicialización del SDK de ConfigCat Android, consulta la [documentación del SDK de Android][1] de ConfigCat.
+Para más información sobre cómo inicializar el SDK de ConfigCat para Android, consulte la [documentación del SDK de Android de ConfigCat][1].
 
 [1]: https://configcat.com/docs/sdk-reference/android
 
@@ -288,7 +284,7 @@ Para más información sobre la inicialización del SDK de ConfigCat Android, co
 {{% /tab %}}
 {{% tab "Flutter" %}}
 
-Al inicializar el SDK de ConfigCat Dart, suscríbete al evento `flagEvaluated` e informa de las evaluaciones de los indicadores de características a Datadog:
+Al inicializar el SDK de ConfigCat para Dart, suscríbase al evento `flagEvaluated` e informe las evaluaciones de Feature Flag a Datadog:
 
 ```dart
   final client = ConfigCatClient.get(
@@ -304,7 +300,7 @@ Al inicializar el SDK de ConfigCat Dart, suscríbete al evento `flagEvaluated` e
   );
 ```
 
-Para obtener más información sobre la inicialización del SDK de ConfigCat Dart (Flutter), consulta la [documentación del SDK de Dart][1] de ConfigCat.
+Para obtener más información sobre la inicialización del SDK de ConfigCat Dart (Flutter), consulte la [documentación del SDK de Dart de ConfigCat][1].
 
 [1]: https://configcat.com/docs/sdk-reference/dart
 
@@ -314,7 +310,7 @@ Para obtener más información sobre la inicialización del SDK de ConfigCat Dar
 
 {{% tab "React Native" %}}
 
-Al inicializar el SDK de ConfigCat React, suscríbete al evento `flagEvaluated` e informa de las evaluaciones de los indicadores de características a Datadog:
+Al inicializar el SDK de ConfigCat React, suscríbase al evento `flagEvaluated` y reporte las evaluaciones de Feature Flag a Datadog:
 
 ```typescript
 <ConfigCatProvider
@@ -331,21 +327,21 @@ Al inicializar el SDK de ConfigCat React, suscríbete al evento `flagEvaluated` 
 </ConfigCatProvider>
 ```
 
-Para obtener más información sobre la inicialización del SDK de ConfigCat React, consulta la [documentación del SDK de React][1] de ConfigCat.
+Para obtener más información sobre la inicialización del SDK de ConfigCat React, consulte la [documentación del SDK de React de ConfigCat][1].
 
 [1]: https://configcat.com/docs/sdk-reference/react
 
 {{% /tab %}}
 {{< /tabs >}}
 
-### Gestión de indicadores de características personalizadas
+### Gestión de Feature Flag personalizada
 
-Antes de inicializar esta integración de indicadores de características personalizadas, asegúrate de haber [configurado la monitorización de RUM](#set-up-rum-monitoring).
+Antes de inicializar una integración personalizada de Feature Flag, asegúrese de haber [configurado el seguimiento de RUM](#set-up-rum-monitoring).
 
 {{< tabs >}}
 {{% tab "Navegador" %}}
 
-Cada vez que se evalúe un indicador de característica, añade la siguiente función para enviar la información del indicador de característica a RUM:
+Cada vez que se evalúe un Feature Flag, agregue la siguiente función para enviar la información del Feature Flag a RUM:
 
 ```javascript
 datadogRum.addFeatureFlagEvaluation(key, value);
@@ -354,7 +350,7 @@ datadogRum.addFeatureFlagEvaluation(key, value);
 {{% /tab %}}
 {{% tab "iOS" %}}
 
-Cada vez que se evalúe un indicador de característica, añade la siguiente función para enviar la información del indicador de característica a RUM:
+Cada vez que se evalúe un Feature Flag, agregue la siguiente función para enviar la información del Feature Flag a RUM:
 
    ```swift
    RUMMonitor.shared().addFeatureFlagEvaluation(key, value);
@@ -363,7 +359,7 @@ Cada vez que se evalúe un indicador de característica, añade la siguiente fun
 {{% /tab %}}
 {{% tab "Android" %}}
 
-Cada vez que se evalúe un indicador de característica, añade la siguiente función para enviar la información del indicador de característica a RUM:
+Cada vez que se evalúe un Feature Flag, agregue la siguiente función para enviar la información del Feature Flag a RUM:
 
    ```kotlin
    GlobalRumMonitor.get().addFeatureFlagEvaluation(key, value);
@@ -372,7 +368,7 @@ Cada vez que se evalúe un indicador de característica, añade la siguiente fun
 {{% /tab %}}
 {{% tab "Flutter" %}}
 
-Cada vez que se evalúe un indicador de característica, añade la siguiente función para enviar la información del indicador de característica a RUM:
+Cada vez que se evalúe un Feature Flag, agregue la siguiente función para enviar la información del Feature Flag a RUM:
 
    ```dart
    DatadogSdk.instance.rum?.addFeatureFlagEvaluation(key, value);
@@ -380,7 +376,7 @@ Cada vez que se evalúe un indicador de característica, añade la siguiente fun
 {{% /tab %}}
 {{% tab "React Native" %}}
 
-Cada vez que se evalúe un indicador de característica, añade la siguiente función para enviar la información del indicador de característica a RUM:
+Cada vez que se evalúe un Feature Flag, agregue la siguiente función para enviar la información del Feature Flag a RUM:
 
    ```javascript
    DdRum.addFeatureFlagEvaluation(key, value);
@@ -391,14 +387,14 @@ Cada vez que se evalúe un indicador de característica, añade la siguiente fun
 
 ### Integración de DevCycle
 
-Antes de inicializar esta integración de indicadores de características, asegúrate de haber [configurado la monitorización de RUM](#set-up-rum-monitoring).
+Antes de inicializar esta integración de Feature Flag, asegúrese de haber [configurado el seguimiento de RUM](#set-up-rum-monitoring).
 
 {{< tabs >}}
-{{% tab "Navegador" %}}
+{{% tab "Explorador" %}}
 
-Inicializa el SDK de DevCycle y suscríbete al evento `variableEvaluated`, eligiendo suscribirte a todas las evaluaciones de variables `variableEvaluated:*` o a evaluaciones de variables concretas `variableEvaluated:my-variable-key`.
+Inicialice el SDK de DevCycle y suscríbase al evento `variableEvaluated`, eligiendo suscribirse a todas las evaluaciones de variables `variableEvaluated:*` o a evaluaciones de variables particulares `variableEvaluated:my-variable-key`.
 
-Para obtener más información sobre la inicialización del SDK de DevCycle, consulta la [documentación del SDK de JavaScript de DevCycle][5] y para obtener más información sobre el sistema de evento de DevCycle, consulta la [documentación del evento de SDK de DevCycle][6].
+Para obtener más información sobre la inicialización del SDK de DevCycle, consulte la [documentación del SDK de JavaScript de DevCycle][5] y para obtener más información sobre el sistema de eventos de DevCycle, consulte la [Documentación de Eventos del SDK de DevCycle][6].
 
 ```javascript
 const user = { user_id: "<USER_ID>" };
@@ -408,7 +404,7 @@ const dvcClient = initialize("<DVC_CLIENT_SDK_KEY>", user, dvcOptions);
 dvcClient.subscribe(
     "variableEvaluated:*",
     (key, variable) => {
-        // rastrear todas las evualaciones de variables
+        // track all variable evaluations
         datadogRum.addFeatureFlagEvaluation(key, variable.value);
     }
 )
@@ -416,7 +412,7 @@ dvcClient.subscribe(
 dvcClient.subscribe(
     "variableEvaluated:my-variable-key",
     (key, variable) => {
-        // rastrear una evaluación de variable particular
+        // track a particular variable evaluation
         datadogRum.addFeatureFlagEvaluation(key, variable.value);
     }
 )
@@ -428,28 +424,28 @@ dvcClient.subscribe(
 {{% /tab %}}
 {{% tab "iOS" %}}
 
-DevCycle no admite esta integración. Crea un tique con [DevCycle][1] para solicitar esta característica.
+DevCycle no admite esta integración. Cree un ticket con [DevCycle][1] para solicitar esta característica.
 
 [1]: https://devcycle.com/contact/request-support
 
 {{% /tab %}}
 {{% tab "Android" %}}
 
-DevCycle no admite esta integración. Crea un tique con [DevCycle][1] para solicitar esta característica.
+DevCycle no admite esta integración. Cree un ticket con [DevCycle][1] para solicitar esta característica.
 
 [1]: https://devcycle.com/contact/request-support
 
 {{% /tab %}}
 {{% tab "Flutter" %}}
 
-DevCycle no admite esta integración. Crea un tique con [DevCycle][1] para solicitar esta característica.
+DevCycle no admite esta integración. Cree un ticket con [DevCycle][1] para solicitar esta característica.
 
 [1]: https://devcycle.com/contact/request-support
 
 {{% /tab %}}
 {{% tab "React Native" %}}
 
-DevCycle no admite esta integración. Crea un tique con [DevCycle][1] para solicitar esta característica.
+DevCycle no admite esta integración. Cree un ticket con [DevCycle][1] para solicitar esta característica.
 
 [1]: https://devcycle.com/contact/request-support
 
@@ -458,14 +454,14 @@ DevCycle no admite esta integración. Crea un tique con [DevCycle][1] para solic
 
 ### Integración de Eppo
 
-Antes de inicializar esta integración de indicadores de características, asegúrate de haber [configurado la monitorización de RUM](#set-up-rum-monitoring).
+Antes de inicializar esta integración de Feature Flag, asegúrese de haber [configurado el seguimiento de RUM](#set-up-rum-monitoring).
 
 {{< tabs >}}
 {{% tab "Navegador" %}}
 
-Inicializa el SDK de Eppo y crea un registrador de asignaciones que informe adicionalmente de las evaluaciones de indicadores de características a Datadog con el fragmento de código que se muestra a continuación.
+Inicializa el SDK de Eppo y crea un registrador de asignaciones que, además, reporte las evaluaciones de las banderas de características a Datadog utilizando el fragmento de código que se muestra a continuación.
 
-Para más información sobre la inicialización del SDK de Eppo, consulta la [documentación del SDK de Eppo JavaScript][1].
+Para obtener más información sobre la inicialización del SDK de Eppo, consulte la [documentación del SDK de JavaScript de Eppo][1].
 
 ```typescript
 const assignmentLogger: IAssignmentLogger = {
@@ -484,9 +480,9 @@ await eppoInit({
 {{% /tab %}}
 {{% tab "iOS" %}}
 
-Inicializa el SDK de Eppo y crea un registrador de asignaciones que informe adicionalmente de las evaluaciones de indicadores de características a Datadog con el fragmento de código que se muestra a continuación.
+Inicializa el SDK de Eppo y crea un registrador de asignaciones que, además, reporte las evaluaciones de las banderas de características a Datadog utilizando el fragmento de código que se muestra a continuación.
 
-Para más información sobre la inicialización del SDK de Eppo, consulta la [documentación del SDK de iOS de Eppo][1].
+Para obtener más información sobre la inicialización del SDK de Eppo, consulta la [documentación del SDK de iOS de Eppo][1].
 
 ```swift
 func IAssignmentLogger(assignment: Assignment) {
@@ -501,9 +497,9 @@ let eppoClient = EppoClient(apiKey: "mock-api-key", assignmentLogger: IAssignmen
 {{% /tab %}}
 {{% tab "Android" %}}
 
-Inicializa el SDK de Eppo y crea un registrador de asignaciones que informe adicionalmente de las evaluaciones de indicadores de características a Datadog con el fragmento de código que se muestra a continuación.
+Inicialice el SDK de Eppo y cree un registrador de asignaciones que además reporte las evaluaciones de las banderas de características a Datadog utilizando el fragmento de código que se muestra a continuación.
 
-Para más información sobre la inicialización del SDK de Eppo, consulta la [documentación del SDK de Android de Eppo][1].
+Para obtener más información sobre la inicialización del SDK de Eppo, consulte la [documentación del SDK de Android de Eppo][1].
 
 ```java
 AssignmentLogger logger = new AssignmentLogger() {
@@ -526,16 +522,16 @@ EppoClient eppoClient = new EppoClient.Builder()
 {{% /tab %}}
 {{% tab "Flutter" %}}
 
-Eppo no admite esta integración. [Ponte en contacto con Eppo][1] para solicitarla.
+Eppo no admite esta integración. [Contacta a Eppo][1] para solicitar esta característica.
 
 [1]: mailto:support@geteppo.com
 
 {{% /tab %}}
 {{% tab "React Native" %}}
 
-Inicializa el SDK de Eppo y crea un registrador de asignaciones que informe adicionalmente de las evaluaciones de indicadores de características a Datadog con el fragmento de código que se muestra a continuación.
+Inicializa el SDK de Eppo y crea un registrador de asignaciones que, además, reporte las evaluaciones de las banderas de características a Datadog utilizando el fragmento de código que se muestra a continuación.
 
-Para más información sobre la inicialización del SDK de Eppo, consulta la [documentación del SDK de React Native de Eppo][1].
+Para obtener más información sobre la inicialización del SDK de Eppo, consulte la [documentación del SDK de React Native de Eppo][1].
 
 ```typescript
 const assignmentLogger: IAssignmentLogger = {
@@ -555,16 +551,16 @@ await eppoInit({
 {{% /tab %}}
 {{< /tabs >}}
 
-### Integración de Flagsmith
+### integración de Flagsmith
 
-Antes de inicializar esta integración de indicadores de características, asegúrate de haber [configurado la monitorización de RUM](#set-up-rum-monitoring).
+Antes de inicializar esta integración de bandera de características, asegúrese de haber [configurado el seguimiento de RUM](#set-up-rum-monitoring).
 
 {{< tabs >}}
 {{% tab "Navegador" %}}
 
-Inicializa el SDK de Flagsmith con la opción `datadogRum`, que informa de las evaluaciones de indicadores de características a Datadog con el fragmento de código que se muestra a continuación.
+Inicializa el SDK de Flagsmith con la opción `datadogRum`, que reporta las evaluaciones de las banderas de características a Datadog utilizando el fragmento de código que se muestra a continuación.
 
-   Opcionalmente, puedes configurar el cliente para que los rasgos de Flagsmith se envíen a Datadog a través de `datadogRum.setUser()`. Para más información sobre la inicialización del SDK de Flagsmith, consulta la [documentación del SDK de JavaScript de Flagsmith][1].
+   Opcionalmente, puedes configurar el cliente para que los rasgos de Flagsmith se envíen a Datadog a través de `datadogRum.setUser()`. Para más información sobre cómo inicializar el SDK de Flagsmith, consulta la [documentación del SDK de JavaScript de Flagsmith][1].
 
    ```javascript
     // Initialize the Flagsmith SDK
@@ -582,35 +578,35 @@ Inicializa el SDK de Flagsmith con la opción `datadogRum`, que informa de las e
 {{% /tab %}}
 {{% tab "iOS" %}}
 
-Flagsmith no admite esta integración. Crea un tique con Flagsmith para solicitar esta característica.
+Flagsmith no soporta esta integración. Crea un ticket con Flagsmith para solicitar esta característica.
 
 
 {{% /tab %}}
 {{% tab "Android" %}}
 
-Flagsmith no admite esta integración. Crea un tique con Flagsmith para solicitar esta característica.
+Flagsmith no soporta esta integración. Crea un ticket con Flagsmith para solicitar esta característica.
 
 {{% /tab %}}
 {{% tab "Flutter" %}}
 
-Flagsmith no admite esta integración. Crea un tique con Flagsmith para solicitar esta característica.
+Flagsmith no soporta esta integración. Crea un ticket con Flagsmith para solicitar esta característica.
 
 {{% /tab %}}
 {{% tab "React Native" %}}
 
-Flagsmith no admite actualmente esta integración. Crea un tique con Flagsmith para solicitar esta característica.
+Flagsmith actualmente no soporta esta integración. Crea un ticket con Flagsmith para solicitar esta característica.
 
 {{% /tab %}}
 {{< /tabs >}}
 
-### Integración de GrowthBook
+### integración de GrowthBook
 
 {{< tabs >}}
 {{% tab "Navegador" %}}
 
-Al inicializar el SDK de GrowthBook, informa de las evaluaciones del indicador de características a Datadog mediante la devolución de llamada `onFeatureUsage`.
+Al inicializar el SDK de GrowthBook, reporta las evaluaciones de las banderas de características a Datadog utilizando el callback `onFeatureUsage`.
 
-Para obtener más información sobre la inicialización del SDK de GrowthBook, consulta la [documentación del SDK de GrowthBook JavaScript][1].
+Para más información sobre cómo inicializar el SDK de GrowthBook, consulta la [documentación del SDK de JavaScript de GrowthBook][1].
 
 ```javascript
 const gb = new GrowthBook({
@@ -628,14 +624,14 @@ gb.init();
 {{% /tab %}}
 {{% tab "iOS" %}}
 
-GrowthBook no admite esta integración. Ponte en contacto con GrowthBook para solicitar esta característica.
+GrowthBook no soporta esta integración. Contacta a GrowthBook para solicitar esta característica.
 
 {{% /tab %}}
 {{% tab "Android" %}}
 
-Al inicializar el SDK de GrowthBook, informa de las evaluaciones de los indicadores de características a Datadog llamando a `setFeatureUsageCallback`.
+Al inicializar el SDK de GrowthBook, reporta las evaluaciones de las banderas de características a Datadog llamando a `setFeatureUsageCallback`.
 
-Para obtener más información sobre la inicialización del SDK de GrowthBook, consulta la [documentación del SDK de Android de GrowthBook][1].
+Para más información sobre cómo inicializar el SDK de GrowthBook, consulta la [documentación del SDK de Android de GrowthBook][1].
 
 ```kotlin
 val gbBuilder = GBSDKBuilder(...)
@@ -652,9 +648,9 @@ val gb = gbBuilder.initialize()
 {{% /tab %}}
 {{% tab "Flutter" %}}
 
-Al inicializar el SDK de GrowthBook, informa de las evaluaciones de los indicadores de características a Datadog llamando a `setFeatureUsageCallback`.
+Al inicializar el SDK de GrowthBook, reporta las evaluaciones de las banderas de características a Datadog llamando a `setFeatureUsageCallback`.
 
-Para obtener más información sobre la inicialización del SDK de GrowthBook, consulta la [documentación del SDK de Flutter de GrowthBook][1].
+Para más información sobre cómo inicializar el SDK de GrowthBook, consulta la [documentación del SDK de Flutter de GrowthBook][1].
 
 ```dart
 final gbBuilder = GBSDKBuilderApp(...);
@@ -669,9 +665,9 @@ final gb = await gbBuilder.initialize();
 {{% /tab %}}
 {{% tab "React Native" %}}
 
-Al inicializar el SDK de GrowthBook, informa de las evaluaciones del indicador de características a Datadog mediante la devolución de llamada `onFeatureUsage`.
+Al inicializar el SDK de GrowthBook, reporta las evaluaciones de las banderas de características a Datadog utilizando el callback `onFeatureUsage`.
 
-Para obtener más información sobre la inicialización del SDK de GrowthBook, consulta la [documentación del SDK de React Native de GrowthBook][1].
+Para más información sobre cómo inicializar el SDK de GrowthBook, consulta la [documentación del SDK de React Native de GrowthBook][1].
 
 ```javascript
 const gb = new GrowthBook({
@@ -689,16 +685,68 @@ gb.init();
 {{% /tab %}}
 {{< /tabs >}}
 
-### Integración de LaunchDarkly
+### integración de Kameleoon
 
-Antes de inicializar esta integración de indicadores de características, asegúrate de haber [configurado la monitorización de RUM](#set-up-rum-monitoring).
+Antes de inicializar esta integración de bandera de características, asegúrate de haber [configurado el monitoreo de RUM](#set-up-rum-monitoring).
 
 {{< tabs >}}
 {{% tab "Navegador" %}}
 
-Inicializa el SDK de LaunchDarkly y crea un inspector que informe de las evaluaciones de los indicadores de característica a Datadog con el siguiente fragmento de código.
+Después de crear e inicializar el SDK de Kameleoon, suscríbete al evento `Evaluation` utilizando el manejador `onEvent`.
 
- Para más información sobre la inicialización del SDK de LaunchDarkly, consulta la [documentación del SDK de LaunchDarkly JavaScript][1].
+Para más información sobre el SDK, consulta la [documentación del SDK de JavaScript de Kameleoon][1].
+
+```javascript
+client.onEvent(EventType.Evaluation, ({ featureKey, variation }) => {
+  datadogRum.addFeatureFlagEvaluation(featureKey, variation.key);
+});
+```
+
+[1]: https://developers.kameleoon.com/feature-management-and-experimentation/web-sdks/js-sdk
+{{% /tab %}}
+{{% tab "iOS" %}}
+
+Kameleoon no soporta esta integración. Contacta a product@kameleoon.com para solicitar esta función.
+
+{{% /tab %}}
+{{% tab "Android" %}}
+
+Kameleoon no soporta esta integración. Contacta a product@kameleoon.com para solicitar esta función.
+
+{{% /tab %}}
+{{% tab "Flutter" %}}
+
+Kameleoon no soporta esta integración. Contacta a product@kameleoon.com para solicitar esta función.
+
+{{% /tab %}}
+{{% tab "React Native" %}}
+
+Después de crear e inicializar el SDK de Kameleoon, suscríbete al evento `Evaluation` utilizando el manejador `onEvent`.
+
+Aprende más sobre la inicialización del SDK en la [documentación del SDK de Kameleoon React Native][1].
+
+```javascript
+const { onEvent } = useInitialize();
+
+onEvent(EventType.Evaluation, ({ featureKey, variation }) => {
+  datadogRum.addFeatureFlagEvaluation(featureKey, variation.key);
+});
+```
+
+[1]: https://developers.kameleoon.com/feature-management-and-experimentation/web-sdks/react-js-sdk
+{{% /tab %}}
+{{< /tabs >}}
+
+### Integración de LaunchDarkly
+
+Antes de inicializar esta integración de bandera de características, asegúrate de haber [configurado el seguimiento de RUM](#set-up-rum-monitoring).
+
+{{< tabs >}}
+{{% tab "Navegador" %}}
+
+Inicializa el SDK de LaunchDarkly y crea un inspector que informe sobre las evaluaciones de las banderas de características a Datadog utilizando el fragmento de código que se muestra a continuación.
+
+ Para más información sobre la inicialización del SDK de LaunchDarkly, consulta la [documentación del SDK de JavaScript de LaunchDarkly][1].
 
 ```javascript
 const client = LDClient.initialize("<CLIENT_SIDE_ID>", "<CONTEXT>", {
@@ -719,25 +767,25 @@ const client = LDClient.initialize("<CLIENT_SIDE_ID>", "<CONTEXT>", {
 {{% /tab %}}
 {{% tab "iOS" %}}
 
-LaunchDarkly no admite esta integración. Crea un tique con LaunchDarkly para solicitar esta característica.
+LaunchDarkly no soporta esta integración. Crea un ticket con LaunchDarkly para solicitar esta característica.
 
 
 {{% /tab %}}
 {{% tab "Android" %}}
 
-LaunchDarkly no admite esta integración. Crea un tique con LaunchDarkly para solicitar esta característica.
+LaunchDarkly no soporta esta integración. Crea un ticket con LaunchDarkly para solicitar esta característica.
 
 
 {{% /tab %}}
 {{% tab "Flutter" %}}
 
-LaunchDarkly no admite esta integración. Crea un tique con LaunchDarkly para solicitar esta característica.
+LaunchDarkly no soporta esta integración. Crea un ticket con LaunchDarkly para solicitar esta característica.
 
 
 {{% /tab %}}
 {{% tab "React Native" %}}
 
-LaunchDarkly no admite actualmente esta integración. Crea un tique con LaunchDarkly para solicitar esta característica.
+LaunchDarkly actualmente no soporta esta integración. Crea un ticket con LaunchDarkly para solicitar esta característica.
 
 
 {{% /tab %}}
@@ -746,14 +794,14 @@ LaunchDarkly no admite actualmente esta integración. Crea un tique con LaunchDa
 
 ### Integración de Split
 
-Antes de inicializar esta integración de indicadores de características, asegúrate de haber [configurado la monitorización de RUM](#set-up-rum-monitoring).
+Antes de inicializar esta integración de bandera de características, asegúrate de haber [configurado el seguimiento de RUM](#set-up-rum-monitoring).
 
 {{< tabs >}}
 {{% tab "Navegador" %}}
 
-Inicializa el SDK de Split y crea un receptor de impresiones que informe las evaluaciones de los indicadores de características a Datadog mediante el uso del siguiente fragmento de código:
+Inicializa el SDK de Split y crea un listener de impresiones que informe sobre las evaluaciones de las banderas de características a Datadog utilizando el siguiente fragmento de código:
 
-Para más información sobre la inicialización del SDK de Split, consulta la [documentación del SDK de JavaScript][1] de Split.
+Para más información sobre la inicialización del SDK de Split, consulta la [documentación del SDK de JavaScript de Split][1].
 
 ```javascript
 const factory = SplitFactory({
@@ -780,13 +828,13 @@ const client = factory.client();
 {{% /tab %}}
 {{% tab "iOS" %}}
 
-Inicializa el SDK de Split y crea un inspector que informe de las evaluaciones de los indicadores de característica en Datadog con el siguiente fragmento de código.
+Inicializa el SDK de Split y crea un inspector que informe sobre las evaluaciones de las banderas de características a Datadog utilizando el fragmento de código a continuación.
 
-Para más información sobre la inicialización del SDK de Split, consulta la [documentación del SDK de iOS][1] de Split.
+Para más información sobre la inicialización del SDK de Split, consulta la [documentación del SDK de iOS de Split][1].
 
 ```swift
   let config = SplitClientConfig()
-  // Envía el indicador de característica cuando Split informa la impresión
+  // Send the feature flag when Split reports the impression
   config.impressionListener = { impression in
       if let feature = impression.feature,
           let treatment = impression.treatment {
@@ -800,28 +848,28 @@ Para más información sobre la inicialización del SDK de Split, consulta la [d
 {{% /tab %}}
 {{% tab "Android" %}}
 
-Inicializa el SDK de Split y crea un inspector que informe de las evaluaciones de los indicadores de característica en Datadog con el siguiente fragmento de código.
+Inicializa el SDK de Split y crea un inspector que informe sobre las evaluaciones de las banderas de características a Datadog utilizando el fragmento de código a continuación.
 
-Para más información sobre la inicialización del SDK de Split, consulta la [documentación del SDK de Android][1] de Split.
+Para más información sobre la inicialización del SDK de Split, consulta la [documentación del SDK de Android de Split][1].
 
 ```kotlin
-  internal class DatadogSplitImpressionListener : ImpressionListener {
-    override fun log(impression: Impression) {
-        // Envía el indicador de característica cuando Split informa la impresión
-        GlobalRumMonitor.get().addFeatureFlagEvaluation(
-            impression.split(),
-            impression.treatment()
-        )
-    }
-    override fun close() {
-    }
+internal class DatadogSplitImpressionListener : ImpressionListener {
+  override fun log(impression: Impression) {
+      // Send the feature flag when Split reports the impression
+      GlobalRumMonitor.get().addFeatureFlagEvaluation(
+          impression.split(),
+          impression.treatment()
+      )
   }
+  override fun close() {
+  }
+}
 
-  // En el inicio:
-  val apikey = BuildConfig.SPLIT_API_KEY
-  val config = SplitClientConfig.builder()
-      .impressionListener(DatadogSplitImpressionListener())
-      .build()
+// In initialization:
+val apikey = BuildConfig.SPLIT_API_KEY
+val config = SplitClientConfig.builder()
+    .impressionListener(DatadogSplitImpressionListener())
+    .build()
 ```
 
 
@@ -829,13 +877,13 @@ Para más información sobre la inicialización del SDK de Split, consulta la [d
 {{% /tab %}}
 {{% tab "Flutter" %}}
 
-Inicializa el SDK de Split y crea un inspector que informe de las evaluaciones de los indicadores de característica en Datadog con el siguiente fragmento de código.
+Inicializa el SDK de Split y crea un inspector que informe sobre las evaluaciones de las banderas de características a Datadog utilizando el fragmento de código a continuación.
 
-Para más información sobre la inicialización del SDK de Split, consulta la [documentación del complemento de Flutter][1] de Split.
+Para más información sobre la inicialización del SDK de Split, consulta la [documentación del plugin de Flutter de Split][1].
 
 ```dart
   StreamSubscription<Impression> impressionsStream = _split.impressionsStream().listen((impression) {
-    // Envía el indicador de característica cuando Split informa la impresión
+    // Send the feature flag when Split reports the impression
     final split = impression.split;
     final treatment = impression.treatment;
     if (split != null && treatment != null) {
@@ -849,9 +897,9 @@ Para más información sobre la inicialización del SDK de Split, consulta la [d
 {{% /tab %}}
 {{% tab "React Native" %}}
 
-Inicializa el SDK de Split y crea un receptor de impresiones que informe las evaluaciones de los indicadores de características a Datadog mediante el uso del siguiente fragmento de código:
+Inicializa el SDK de Split y crea un listener de impresiones que informe sobre las evaluaciones de las banderas de características a Datadog utilizando el siguiente fragmento de código:
 
-Para más información sobre la inicialización del SDK de Split, consulta la [documentación del SDK de React Native][1] de Split.
+Para más información sobre la inicialización del SDK de Split, consulta la [documentación del SDK de React Native de Split][1].
 
 ```javascript
 const factory = SplitFactory({
@@ -880,15 +928,15 @@ const client = factory.client();
 
 ### Integración de Statsig
 
-Antes de inicializar esta integración de indicadores de características, asegúrate de haber [configurado la monitorización de RUM](#set-up-rum-monitoring).
+Antes de inicializar esta integración de bandera de características, asegúrate de haber [configurado el monitoreo de RUM](#set-up-rum-monitoring).
 
 {{< tabs >}}
 {{% tab "Navegador" %}}
 
 Inicializa el SDK de Statsig con `statsig.initialize`.
 
-1. Actualiza tu versión de SDK del Navegador RUM a la versión 4.25.0 o posterior.
-2. Inicializa el SDK RUM y configura el parámetro de inicialización `enableExperimentalFeatures` con `["feature_flags"]`.
+1. Actualiza tu versión del SDK de RUM para navegadores a 4.25.0 o superior.
+2. Inicializa el SDK de RUM y configura el parámetro de inicialización `enableExperimentalFeatures` con `["feature_flags"]`.
 3. Inicializa el SDK de Statsig (`>= v4.34.0`) e implementa la opción `gateEvaluationCallback` como se muestra a continuación:
 
    ```javascript
@@ -906,31 +954,31 @@ Inicializa el SDK de Statsig con `statsig.initialize`.
 {{% /tab %}}
 {{% tab "iOS" %}}
 
-Statsig no admite esta integración. Ponte en contacto con support@statsig.com para solicitar esta característica.
+Statsig no admite esta integración. Contacta a support@statsig.com para solicitar esta característica.
 
 {{% /tab %}}
 {{% tab "Android" %}}
 
-Statsig no admite esta integración. Ponte en contacto con support@statsig.com para solicitar esta característica.
+Statsig no admite esta integración. Contacta a support@statsig.com para solicitar esta característica.
 
 {{% /tab %}}
 {{% tab "Flutter" %}}
 
-Statsig no admite esta integración. Ponte en contacto con support@statsig.com para solicitar esta característica.
+Statsig no admite esta integración. Contacta a support@statsig.com para solicitar esta característica.
 
 {{% /tab %}}
 {{% tab "React Native" %}}
 
-Statsig no admite actualmente esta integración. Ponte en contacto con support@statsig.com para solicitar esta característica.
+Statsig actualmente no admite esta integración. Contacta a support@statsig.com para solicitar esta característica.
 
 {{% /tab %}}
 {{< /tabs >}}
 
-### Siguientes pasos
+### Próximos pasos
 
-[Ve y analiza][1] tus indicadores de características.
+[Visualización y análisis][1] de tus banderas de características.
 
-## Referencias adicionales
+## Lectura adicional
 
 {{< partial name="whats-next/whats-next.html" >}}
 

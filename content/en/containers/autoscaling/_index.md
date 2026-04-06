@@ -433,7 +433,7 @@ As an alternative to Autoscaling, you can also deploy Datadog's scaling recommen
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent/remote_config
-[2]: /agent/remote_config/?tab=configurationyamlfile#enabling-remote-configuration
+[2]: /agent/remote_config/?tab=configurationyamlfile#enable-remote-configuration
 [3]: https://helm.sh/
 [4]: https://kubernetes.io/docs/tasks/tools/install-kubectl/
 [5]: /containers/kubernetes/distributions
