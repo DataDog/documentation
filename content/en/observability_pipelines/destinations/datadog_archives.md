@@ -33,7 +33,7 @@ If you already have Datadog Log Archives configured, skip to [Set up the destina
 1. Select **Policies** in the left side menu.
 1. Click **Create policy**.
 1. Click **JSON** in the **Specify permissions** section.
-1. Copy the below policy and paste it into the **Policy editor**. Replace `<MY_BUCKET_NAME_1>` and `<MY_BUCKET_NAME_1>/<MY_OPTIONAL_BUCKET_PATH_1>` with the information for the S3 bucket you created earlier.
+1. Copy the below policy and paste it into the **Policy editor**. Replace `<MY_BUCKET_NAME_1>` and `<MY_BUCKET_NAME_1>/<MY_OPTIONAL_BUCKET_PATH_1>` with the information for the S3 bucket you created in the previous section.
     ```json
     {
         "Version": "2012-10-17",
