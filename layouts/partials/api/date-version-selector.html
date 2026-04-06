@@ -14,17 +14,16 @@
     aria-label="API date version">
   {{ range $versions }}
     <li class="nav-item">
-      <a class="nav-link me-1 js-api-date-version-tab {{ if eq .date $baseVersion }}active{{ end }}"
-         href="#"
-         role="tab"
-         data-api-date-version="{{ .date }}"
-         data-operation-id="{{ $operationId }}">
+      <button type="button"
+              class="nav-link me-1 js-api-date-version-tab {{ if eq .date $baseVersion }}active{{ end }}"
+              data-api-date-version="{{ .date }}"
+              data-operation-id="{{ $operationId }}">
         {{- .date -}}
         {{- if .isBase }}
           <span class="badge bg-secondary ms-1 api-version-default-badge"
                 title="Default — non-versioned requests use this version">default</span>
         {{- end }}
-      </a>
+      </button>
     </li>
   {{ end }}
 </ul>
