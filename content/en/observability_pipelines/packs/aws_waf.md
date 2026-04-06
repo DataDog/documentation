@@ -7,13 +7,13 @@ description: Learn more about the AWS WAF pack.
 
 {{< img src="observability_pipelines/packs/aws_waf.png" alt="The AWS WAF pack" style="width:25%;" >}}
 
-AWS WAF logs capture web request allow and block decisions along with rule match events.
+AWS WAF captures AWS WAF logs from CloudWatch, S3, or Firehose.
 
 What this pack does:
 
-- Keeps blocked, rate-limited, and rule-matched requests
-- Drops allowed traffic with no rule matches
-- Normalizes rule action and IP fields
+- Extracts metrics by action and terminating rule
+- Optional drop/sample ALLOW
+- Drops unused fields, cleans null, and redacts credentials
 
 ## Further Reading
 

@@ -7,13 +7,13 @@ description: Learn more about the Check Point pack.
 
 {{< img src="observability_pipelines/packs/checkpoint.png" alt="The Check Point pack" style="width:25%;" >}}
 
-Check Point firewall logs capture traffic, threat prevention, and security policy events.
+Processes Check Point logs in CEF format, with or without syslog prefix.
 
 What this pack does:
 
-- Keeps blocked, dropped, and threat prevention events
-- Drops allowed and routine traffic
-- Normalizes action, severity, and blade fields
+- Parses and renames fields
+- Generates metrics by severity and by event name
+- Drops Accept traffic; samples low-severity events
 
 ## Further Reading
 

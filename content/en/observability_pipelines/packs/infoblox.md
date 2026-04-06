@@ -7,13 +7,13 @@ description: Learn more about the Infoblox pack.
 
 {{< img src="observability_pipelines/packs/infoblox.png" alt="The Infoblox pack" style="width:25%;" >}}
 
-Infoblox logs capture DNS queries, DHCP leases, and security events.
+Infoblox NIOS syslog captures DNS, DHCP, audit, and CEF activity from appliances.
 
 What this pack does:
 
-- Keeps threat detections and policy violations
-- Drops routine DNS queries and DHCP renewals
-- Normalizes query type, response, and client fields
+- Parses logs into structured fields
+- Extracts DNS response code and DHCP event metrics
+- Normalizes request data and samples high-volume events
 
 ## Further Reading
 

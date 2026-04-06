@@ -7,13 +7,13 @@ description: Learn more about the Cisco Meraki pack.
 
 {{< img src="observability_pipelines/packs/cisco_meraki.png" alt="The Cisco Meraki pack" style="width:25%;" >}}
 
-Cisco Meraki logs capture network events including firewall, wireless, and security appliance activity.
+Cisco Meraki captures appliance events, flows, VPN firewall, NAT flows, and URL activity.
 
 What this pack does:
 
-- Keeps security alerts and blocked events
-- Drops routine traffic and connectivity events
-- Normalizes device, event type, and action fields
+- Parses syslog to structured fields
+- Extracts log-type, flow action, and transport metrics
+- Normalizes attributes and samples high-volume events
 
 ## Further Reading
 

@@ -7,13 +7,13 @@ description: Learn more about the Zscaler ZPA pack.
 
 {{< img src="observability_pipelines/packs/zscaler_zpa.png" alt="The Zscaler ZPA pack" style="width:25%;" >}}
 
-Zscaler Private Access (ZPA) logs capture user access events, policy decisions, and application activity.
+Zscaler Private Access captures private app access, sessions, and connections.
 
 What this pack does:
 
-- Keeps blocked and failed access events
-- Drops routine successful connections
-- Normalizes user, application, and policy fields
+- Normalizes ZPA fields, drops null/empty fields, maps key fields
+- Samples successful and Browser Access traffic
+- Tags failed or blocked connections
 
 ## Further Reading
 

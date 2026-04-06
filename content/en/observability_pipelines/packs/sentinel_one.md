@@ -1,19 +1,19 @@
 ---
-title: SentinelOne
-description: Learn more about the SentinelOne pack.
+title: SentinelOne Cloud Funnel EDR
+description: Learn more about the SentinelOne Cloud Funnel EDR pack.
 ---
 
 ## Overview
 
-{{< img src="observability_pipelines/packs/sentinel_one.png" alt="The SentinelOne pack" style="width:25%;" >}}
+{{< img src="observability_pipelines/packs/sentinel_one.png" alt="The SentinelOne Cloud Funnel EDR pack" style="width:25%;" >}}
 
-SentinelOne logs capture endpoint detection, threat hunting, and response events.
+SentinelOne Cloud Funnel streams EDR and Deep Visibility events as JSON to cloud storage.
 
 What this pack does:
 
-- Keeps threats, alerts, and policy violation events
-- Drops benign process and telemetry events
-- Normalizes severity and classification fields
+- Drops low-value types
+- Removes unused fields per event type (DNS, File, Process, Network, Registry, etc.)
+- Optional counter-field removal
 
 ## Further Reading
 

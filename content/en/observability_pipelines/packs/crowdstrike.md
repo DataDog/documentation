@@ -1,19 +1,19 @@
 ---
-title: CrowdStrike
-description: Learn more about the CrowdStrike pack.
+title: CrowdStrike FDR
+description: Learn more about the CrowdStrike FDR pack.
 ---
 
 ## Overview
 
-{{< img src="observability_pipelines/packs/crowdstrike.png" alt="The CrowdStrike pack" style="width:25%;" >}}
+{{< img src="observability_pipelines/packs/crowdstrike.png" alt="The CrowdStrike FDR pack" style="width:25%;" >}}
 
-CrowdStrike Falcon logs capture endpoint detection and response (EDR) events, threat intelligence, and incident data.
+Falcon Data Replicator (FDR) provides endpoint detection and response.
 
 What this pack does:
 
-- Keeps detections, alerts, and incident events
-- Drops routine process and network telemetry
-- Normalizes severity and detection fields
+- Drops high-volume, low-signal operational events
+- Drops sensor health and telemetry-only events
+- Drops benign process execution events
 
 ## Further Reading
 
