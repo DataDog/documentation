@@ -8296,51 +8296,71 @@ menu:
       parent: rum_browser
       identifier: rum_advanced
       weight: 102
+    - name: Build Plugins
+      url: real_user_monitoring/application_monitoring/browser/build_plugins/
+      parent: rum_browser
+      identifier: rum_browser_build_plugins
+      weight: 103
+    - name: Source Maps
+      url: real_user_monitoring/application_monitoring/browser/build_plugins/source_maps/
+      parent: rum_browser_build_plugins
+      identifier: rum_browser_build_plugins_source_maps
+      weight: 10301
+    - name: Action Name Deobfuscation
+      url: real_user_monitoring/application_monitoring/browser/build_plugins/action_name_deobfuscation/
+      parent: rum_browser_build_plugins
+      identifier: rum_browser_build_plugins_action_name_deobfuscation
+      weight: 10302
+    - name: Source Code Context
+      url: real_user_monitoring/application_monitoring/browser/build_plugins/source_code_context/
+      parent: rum_browser_build_plugins
+      identifier: rum_browser_build_plugins_source_code_context
+      weight: 10303
     - name: Data Collected
       url: real_user_monitoring/application_monitoring/browser/data_collected/
       parent: rum_browser
       identifier: rum_data_collected
-      weight: 103
+      weight: 104
     - name: Monitoring Page Performance
       url: real_user_monitoring/application_monitoring/browser/monitoring_page_performance/
       parent: rum_browser
       identifier: page_performance
-      weight: 104
+      weight: 105
     - name: Optimizing Performance
       url: real_user_monitoring/application_monitoring/browser/optimizing_performance/
       parent: rum_browser
       identifier: rum_optimizing_performance
-      weight: 105
+      weight: 106
     - name: Monitoring Resource Performance
       url: real_user_monitoring/application_monitoring/browser/monitoring_resource_performance/
       parent: rum_browser
       identifier: resource_performance
-      weight: 106
+      weight: 107
     - name: Collecting Browser Errors
       url: real_user_monitoring/application_monitoring/browser/collecting_browser_errors/
       parent: rum_browser
       identifier: collect_errors
-      weight: 107
+      weight: 108
     - name: Tracking User Actions
       url: real_user_monitoring/application_monitoring/browser/tracking_user_actions/
       parent: rum_browser
       identifier: track_actions
-      weight: 108
+      weight: 109
     - name: Frustration Signals
       url: real_user_monitoring/application_monitoring/browser/frustration_signals/
       parent: rum_browser
       identifier: rum_frustration_signals
-      weight: 109
+      weight: 110
     - name: Error Tracking
       url: real_user_monitoring/application_monitoring/browser/error_tracking/
       parent: rum_browser
       identifier: rum_browser_error_tracking
-      weight: 110
+      weight: 111
     - name: Troubleshooting
       url: real_user_monitoring/application_monitoring/browser/troubleshooting/
       parent: rum_browser
       identifier: troubleshooting
-      weight: 111
+      weight: 112
     - name: Android and Android TV
       url: real_user_monitoring/application_monitoring/android
       parent: application_monitoring
