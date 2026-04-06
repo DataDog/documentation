@@ -121,6 +121,55 @@
           {{ if $endpoint }}
           <!-- get action strings from params, why? because they are translated here -->
           {{ $translate_action := (index $translate_actions $endpoint.action.operationId) | default (dict) }}
+
+          {{/* ---- Date-based API versioning detection (x-datadog-api-versioning) ---- */}}
+          {{ $dvScratch := newScratch }}
+          {{ $dvScratch.Set "isDateVersioned" false }}
+          {{ range $respCode, $resp := $endpoint.action.responses }}
+            {{ range $mt, $content := $resp.content }}
+              {{ if index $content.schema "x-datadog-api-versioned" }}
+                {{ $dvScratch.Set "isDateVersioned" true }}
+              {{ end }}
+            {{ end }}
+          {{ end }}
+          {{ with $endpoint.action.requestBody }}
+            {{ range $mt, $content := .content }}
+              {{ if index $content.schema "x-datadog-api-versioned" }}
+                {{ $dvScratch.Set "isDateVersioned" true }}
+              {{ end }}
+            {{ end }}
+          {{ end }}
+          {{ $isDateVersioned := $dvScratch.Get "isDateVersioned" }}
+
+          {{ $apiVersionsList := slice }}
+          {{ $baseVersion    := "" }}
+          {{ if $isDateVersioned }}
+            {{ $apiVersioningData := index $adat "x-datadog-api-versioning" | default dict }}
+            {{ $versionMap        := $apiVersioningData.versions | default dict }}
+            {{ $dateKeys          := slice }}
+            {{ range $d, $_ := $versionMap }}
+              {{ $dateKeys = append $d $dateKeys }}
+            {{ end }}
+            {{ $dateKeys = sort $dateKeys }}
+            {{/* find the version marked base:true */}}
+            {{ $bvScratch := newScratch }}
+            {{ $bvScratch.Set "bv" "" }}
+            {{ range $dateKeys }}
+              {{ if (index $versionMap .).base }}
+                {{ $bvScratch.Set "bv" . }}
+              {{ end }}
+            {{ end }}
+            {{ $baseVersion = $bvScratch.Get "bv" }}
+            {{ if and (eq $baseVersion "") (gt (len $dateKeys) 0) }}
+              {{ $baseVersion = index $dateKeys 0 }}
+            {{ end }}
+            {{ range $dateKeys }}
+              {{ $vd := index $versionMap . }}
+              {{ $apiVersionsList = append (dict "date" . "isBase" ($vd.base | default false)) $apiVersionsList }}
+            {{ end }}
+          {{ end }}
+          {{/* ---- End date-based API versioning detection ---- */}}
+
           <div class="row endpoint">
               <div class="col-12">
                   <div class="endpoint-content">
@@ -159,6 +208,14 @@
                         {{- end -}}
                       </p>
 
+                      {{ if $isDateVersioned }}
+                      <!-- Date-based API version selector -->
+                      <div class="d-flex justify-content-end align-items-center gap-2 mt-1 mb-2">
+                        <small class="text-muted fw-semibold">API version:</small>
+                        {{ partial "api/date-version-selector.html" (dict "operationId" $endpoint.action.operationId "versions" $apiVersionsList "baseVersion" $baseVersion) }}
+                      </div>
+                      {{ end }}
+
                       <h3 class="mt-2">{{ i18n "overview" }}</h3>
                       <p>
                        {{ $translate_action.description | default $endpoint.action.description | $dot.Page.RenderString }}
@@ -170,10 +227,10 @@
                       {{ partial "api/arguments.html" (dict "context" $dot "endpoint" $endpoint) }}
 
                       <!-- request body -->
-                      {{ partial "api/request-body.html" (dict "context" $dot "body" $endpoint.action.requestBody "resourcePage" $resourcePage "operationid" $endpoint.action.operationId "translate_action" $translate_action "version" $versionNum) }}
+                      {{ partial "api/request-body.html" (dict "context" $dot "body" $endpoint.action.requestBody "resourcePage" $resourcePage "operationid" $endpoint.action.operationId "translate_action" $translate_action "version" $versionNum "isDateVersioned" $isDateVersioned "apiVersionsList" $apiVersionsList "baseVersion" $baseVersion) }}
 
                       <!-- response -->
-                      {{ partial "api/response.html" (dict "responses" $endpoint.action.responses "resourcePage" $resourcePage "operationid" $endpoint.action.operationId "translate_action" $translate_action "version" $versionNum) }}
+                      {{ partial "api/response.html" (dict "responses" $endpoint.action.responses "resourcePage" $resourcePage "operationid" $endpoint.action.operationId "translate_action" $translate_action "version" $versionNum "isDateVersioned" $isDateVersioned "apiVersionsList" $apiVersionsList "baseVersion" $baseVersion) }}
 
                       <!-- code example -->
                       {{ partial "api/code-example.html" (dict "context" $dot "resourcePage" $resourcePage "operationid" $endpoint.action.operationId "securitySchemes" $adat.components.securitySchemes "endpoint" $endpoint "version" $versionNum) }}

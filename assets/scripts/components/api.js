@@ -171,6 +171,34 @@ if (dataVersionToggles.length) {
     });
 }
 
+// Date-based API version selector (x-datadog-api-versioning / x-datadog-api-versioned)
+const apiDateVersionTabs = document.querySelectorAll('.js-api-date-version-tab');
+
+if (apiDateVersionTabs.length) {
+    apiDateVersionTabs.forEach((tab) => {
+        tab.addEventListener('click', (e) => {
+            e.preventDefault();
+            const selectedVersion = tab.dataset.apiDateVersion;
+            const operationId = tab.dataset.operationId;
+
+            // Update active tab state for this operation's selector
+            document.querySelectorAll(`.js-api-date-version-tab[data-operation-id="${operationId}"]`).forEach((t) => {
+                t.classList.remove('active');
+            });
+            tab.classList.add('active');
+
+            // Show the matching version pane, hide all others for this operation
+            document.querySelectorAll(`.api-versioned-schema-pane[data-operation-id="${operationId}"]`).forEach((pane) => {
+                if (pane.dataset.apiDateVersion === selectedVersion) {
+                    pane.classList.remove('d-none');
+                } else {
+                    pane.classList.add('d-none');
+                }
+            });
+        });
+    });
+}
+
 // Scroll the active top level nav item into view below Docs search input
 if (bodyClassContains('api')) {
     setSidenavMaxHeight();
