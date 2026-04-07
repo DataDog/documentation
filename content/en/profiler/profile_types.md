@@ -32,13 +32,9 @@ Allocated Memory
 : The amount of heap memory allocated by each method, including allocations which were subsequently freed.<br />
 _Requires: Java 11_
 
-Heap Live Objects (in Preview, 1.17.0+)
-: The number of objects allocated by each method in heap memory that have not yet been garbage collected. This is useful for investigating the overall memory usage of your service and identifying potential memory leaks.<br />
-_Requires: Java 11_ <br />
-
-Heap Live Size (in Preview, 1.39.0+)
-: The amount of heap memory allocated by each method that has not yet been garbage collected. This is useful for investigating the overall memory usage of your service and identifying potential memory leaks.<br />
-_Requires: Java 11.0.23+, 17.0.11+, 21.0.3+ or 22+_ <br />
+Live Heap (v1.61.0+)
+: The objects and memory allocated by each method that have not yet been garbage collected. This is useful for investigating the overall memory usage of your service and identifying potential memory leaks. The profiler automatically uses the most accurate method available for your JVM version.<br />
+_Requires: Java 11+_
 
 Wall Time in Native Code
 : The elapsed time spent by each method. Elapsed time includes time when code is running on CPU, waiting for I/O, and anything else that happens while the method is running.
