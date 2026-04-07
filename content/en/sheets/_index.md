@@ -8,9 +8,6 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/advanced-analysis-tools/"
   tag: "Blog"
   text: "Explore your data with Sheets, DDSQL Editor, and Notebooks for advanced analysis in Datadog"
-- link: "https://www.datadoghq.com/blog/javascript-css-optimization"
-  tag: "Blog"
-  text: "How to optimize JavaScript code with CSS"
 ---
 
 ## Overview
