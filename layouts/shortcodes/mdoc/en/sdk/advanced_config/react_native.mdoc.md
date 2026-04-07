@@ -1,28 +1,11 @@
----
-title: React Native Advanced Configuration
-description: Learn about advanced configuration options for your React Native setup.
-aliases:
-    - /real_user_monitoring/react-native/advanced_configuration/
-    - /real_user_monitoring/reactnative/advanced_configuration/
-    - /real_user_monitoring/mobile_and_tv_monitoring/setup/react_native/
-    - /real_user_monitoring/mobile_and_tv_monitoring/react_native/advanced_configuration
-further_reading:
-    - link: https://github.com/DataDog/dd-sdk-reactnative
-      tag: "Source Code"
-      text: Source code for dd-sdk-reactnative
-    - link: real_user_monitoring/reactnative/
-      tag: Documentation
-      text: Learn about React Native monitoring
-    - link: real_user_monitoring/guide/monitor-hybrid-react-native-applications
-      tag: Documentation
-      text: Monitor hybrid React Native applications
----
-
-## Overview
+<!--
+This partial contains advanced configuration instructions for the React Native SDK.
+It can be included directly in language-specific pages or wrapped in conditionals.
+-->
 
 If you have not set up the SDK yet, follow the [in-app setup instructions][1] or see the [React Native RUM setup documentation][2].
 
-## Testing with Jest
+## Jest testing
 
 Testing apps using `'@datadog/mobile-react-native'` might require completing extra steps, since Native Modules do not exist in testing environments.
 
@@ -55,278 +38,275 @@ If you use a test runner other than Jest, you need to create the mocks for your 
 
 You can specify the following parameters in your configuration when initializing the SDK:
 
-### Core Configuration
+### Core configuration
 
 `clientToken`
-: Required<br/>
-**Type**: String<br/>
+: Required  
+**Type**: String  
 A [Datadog client token][4].
 
 `env`
-: Required<br/>
-**Type**: String<br/>
+: Required  
+**Type**: String  
 The application's environment, for example: prod, pre-prod, and staging. Follows the [tag syntax requirements][5].
 
 `rumConfiguration`
-: Optional<br/>
-**Type**: `RumConfiguration`<br/>
-The Datadog RUM configuration. RUM is **disabled by default**. See [RUM Configuration][20].
+: Optional  
+**Type**: `RumConfiguration`  
+The Datadog RUM configuration. RUM is **disabled by default**. See [RUM configuration][20].
 
 `logsConfiguration`
-: Optional<br/>
-**Default**: `undefined`<br/>
-**Type**: `LogsConfiguration`<br/>
-The Datadog Logs configuration. Logs is **disabled by default**: use an empty configuration `{}` to enable. See [Logs Configuration][21].
+: Optional  
+**Default**: `undefined`  
+**Type**: `LogsConfiguration`  
+The Datadog Logs configuration. Logs is **disabled by default**: use an empty configuration `{}` to enable. See [Logs configuration][21].
 
 `traceConfiguration`
-: Optional<br/>
-**Type**: `TraceConfiguration`<br/>
-The Datadog Trace configuration. Trace is **disabled by default**: use an empty configuration `{}` to enable. See [Trace Configuration][22].
+: Optional  
+**Type**: `TraceConfiguration`  
+The Datadog Trace configuration. Trace is **disabled by default**: use an empty configuration `{}` to enable. See [Trace configuration][22].
 
 `site`
-: Optional<br/>
-**Type**: String<br/>
-**Default**: `US1`<br/>
+: Optional  
+**Type**: String  
+**Default**: `US1`  
 [The Datadog site parameter of your organization][6].
 
 `service`
-: Optional<br/>
-**Type**: String<br/>
+: Optional  
+**Type**: String  
 The service name for your application. Follows the [tag syntax requirements][5].
 
 `verbosity`
-: Optional<br/>
-**Type**: SdkVerbosity<br/>
-**Default**: `undefined`<br/>
+: Optional  
+**Type**: SdkVerbosity  
+**Default**: `undefined`  
 Verbosity for internal SDK logging. Set to `SdkVerbosity.DEBUG` to debug your SDK implementation.
 
 `version`
-: Optional<br/>
-**Type**: String<br/>
+: Optional  
+**Type**: String  
 The application's version. For example: 1.2.3, 6c44da20, and 2020.02.13. Follows the [tag syntax requirements][5].
 
 `versionSuffix`
-: Optional<br/>
-**Type**: String<br/>
+: Optional  
+**Type**: String  
 Add a suffix to the reported version of the app. Accepted characters are alphanumerics and `_`, `-`, `:`, `.`, `/`. Other special characters are converted to underscores. A dash (`-`) is automatically added between the version and the suffix. Follows the [tag syntax requirements][5].
 
 `proxyConfig`
-: Optional<br/>
-**Type**: ProxyConfiguration<br/>
+: Optional  
+**Type**: ProxyConfiguration  
 Optional [proxy configuration][9].
 
 `uploadFrequency`
-: Optional<br/>
-**Type**: UploadFrequency<br/>
-**Default**: `UploadFrequency.AVERAGE`<br/>
+: Optional  
+**Type**: UploadFrequency  
+**Default**: `UploadFrequency.AVERAGE`  
 Sets the preferred frequency for uploading batches of data.
 
 `batchSize`
-: Optional<br/>
-**Type**: BatchSize<br/>
-**Default**: `BatchSize.MEDIUM`<br/>
+: Optional  
+**Type**: BatchSize  
+**Default**: `BatchSize.MEDIUM`  
 Defines the Datadog SDK policy when batching data together before uploading it to Datadog servers. Smaller batches mean smaller but more network requests, whereas larger batches mean fewer but larger network requests.
 
-### RUM Configuration
+### RUM configuration
 
 `applicationId`
-: **Required**<br/>
-**Type**: String<br/>
+: **Required**  
+**Type**: String  
 The RUM application ID.
 
 `trackInteractions`
-: Optional<br/>
-**Type**: Boolean<br/>
-**Default**: `false` <br/>
+: Optional  
+**Type**: Boolean  
+**Default**: `false`   
 Enables automatic collection of user actions.
 
 `trackResources`
-: Optional<br/>
-**Type**: Boolean<br/>
-**Default**: `false` <br/>
+: Optional  
+**Type**: Boolean  
+**Default**: `false`   
 Enables collection of resource events.
 
 `trackErrors`
-: Optional<br/>
-**Type**: Boolean<br/>
-**Default**: `false` <br/>
+: Optional  
+**Type**: Boolean  
+**Default**: `false`   
 Enables collection of React Native crashes.
 
 `trackFrustrations`
-: Optional<br/>
-**Type**: Boolean<br/>
-**Default**: `true` <br/>
+: Optional  
+**Type**: Boolean  
+**Default**: `true`   
 Enables [automatic collection of user frustrations][7]. Only error taps are supported. Implies `trackInteractions: true`.
 
 `sessionSampleRate`
-: Optional<br/>
-**Type**: Number<br/>
-**Default**: `100`<br/>
+: Optional  
+**Type**: Number  
+**Default**: `100`  
 The percentage of sessions to track: `100` for all, `0` for none. Only tracked sessions send RUM events.
 
 `resourceTraceSampleRate`
-: Optional<br/>
-**Type**: Number<br/>
-**Default**: `100`<br/>
+: Optional  
+**Type**: Number  
+**Default**: `100`  
 The percentage of requests to trace: `100` for all, `0` for none. For more information, see [Connect RUM and Traces][8].
 
 `nativeCrashReportEnabled`
-: Optional<br/>
-**Type**: Boolean<br/>
-**Default**: `false` <br/>
+: Optional  
+**Type**: Boolean  
+**Default**: `false`   
 Enables crash reporting for native platforms (iOS, Android).
 
 `nativeLongTaskThresholdMs`
-: Optional<br/>
-**Type**: Number | false<br/>
-**Default**: `200`<br/>
+: Optional  
+**Type**: Number | false  
+**Default**: `200`  
 The threshold for native long tasks reporting in milliseconds. Setting it to `0` or `false` disables native long task reporting. Values below `100` are raised to `100`. Values above `5000` are lowered to `5000`.
 
 `nativeViewTracking`
-: Optional<br/>
-**Type**: Boolean<br/>
-**Default**: `false`<br/>
+: Optional  
+**Type**: Boolean  
+**Default**: `false`  
 Enables native views tracking. Set to `true` if you use a custom navigation system relying on native views.
 
 `nativeInteractionTracking`
-: Optional<br/>
-**Type**: Boolean<br/>
-**Default**: `false`<br/>
+: Optional  
+**Type**: Boolean  
+**Default**: `false`  
 Enables native interaction tracking. Set to `true` if you want to track interactions on native screens.
 
 `firstPartyHosts`
-: Optional<br/>
-**Type**: List<br/>
-**Default**: `[]`<br/>
+: Optional  
+**Type**: List  
+**Default**: `[]`  
 List of your backends hosts to enable tracing with. For more information, see [Connect RUM and Traces][8].
 
 `telemetrySampleRate`
-: Optional<br/>
-**Type**: Number<br/>
-**Default**: `20`<br/>
-Telemetry data (such as errors and debug logs) about SDK execution is sent to Datadog in order to detect and solve potential issues. Set this option to `0` to opt out from telemetry collection.
+: Optional  
+**Type**: Number  
+**Default**: `20`  
+Telemetry data (such as errors and debug logs) about SDK execution is sent to Datadog to detect and solve potential issues. Set this option to `0` to opt out from telemetry collection.
 
 `longTaskThresholdMs`
-: Optional<br/>
-**Type**: Number | false<br/>
-**Default**: `0`<br/>
+: Optional  
+**Type**: Number | false  
+**Default**: `0`  
 The threshold for JavaScript long tasks reporting in milliseconds. Setting it to `0` or `false` disables JavaScript long task reporting. Values below `100` are raised to `100`. Values above `5000` are lowered to `5000`.
 
 `vitalsUpdateFrequency`
-: Optional<br/>
-**Type**: VitalsUpdateFrequency<br/>
-**Default**: `VitalsUpdateFrequency.AVERAGE`<br/>
+: Optional  
+**Type**: VitalsUpdateFrequency  
+**Default**: `VitalsUpdateFrequency.AVERAGE`  
 Sets the preferred frequency for collecting mobile vitals.
 
 `trackBackgroundEvents`
-: Optional<br/>
-**Type**: Boolean<br/>
-**Default**: `false`<br/>
+: Optional  
+**Type**: Boolean  
+**Default**: `false`  
 Enables tracking of RUM event when no RUM View is active. By default, background events are not tracked. Enabling this feature might increase the number of sessions tracked and impact your billing.
 
 `useAccessibilityLabel`
-: Optional<br/>
-**Type**: Boolean<br/>
-**Default**: `true`<br/>
+: Optional  
+**Type**: Boolean  
+**Default**: `true`  
 Determines whether the accessibility labels are used to name RUM actions (default is true).
 
 `trackNonFatalAnrs`
-: Optional<br/>
-**Type**: Boolean<br/>
-**Default**: `true`
-On Android 29 and below, `false` on Android 30+. Enables tracking of non-fatal ANRs on Android. By default, the reporting of non-fatal ANRs on Android 30+ is disabled because it would create too much noise over fatal ANRs.  On Android 29 and below, however, the reporting of non-fatal ANRs is enabled by default, as fatal ANRs cannot be reported on those versions.
+: Optional  
+**Type**: Boolean  
+**Default**: `true` on Android 29 and below, `false` on Android 30+.  
+Enables tracking of non-fatal ANRs on Android. By default, the reporting of non-fatal ANRs on Android 30+ is disabled because it would create too much noise over fatal ANRs. On Android 29 and below, however, the reporting of non-fatal ANRs is enabled by default, as fatal ANRs cannot be reported on those versions.
 
 `trackWatchdogTerminations`
-: Optional<br/>
-**Type**: Boolean<br/>
-**Default**: `false`
+: Optional  
+**Type**: Boolean  
+**Default**: `false`  
 Determines whether the SDK should track application termination by the watchdog on iOS.
 
 `trackMemoryWarnings`
-: Optional<br/>
-**Type**: Boolean<br/>
-**Default**: `true`
-Enables tracking of memory warnings as RUM events on iOS. When enabled, the SDK will automatically record a RUM event each time the app receives a memory warning from the operating system.
+: Optional  
+**Type**: Boolean  
+**Default**: `true`  
+Enables tracking of memory warnings as RUM events on iOS. When enabled, the SDK automatically records a RUM event each time the app receives a memory warning from the operating system.
 
 `appHangThreshold`
-: Optional<br/>
-**Type**: Number<br/>
-**Default**: `undefined`
-The app hang threshold in seconds for non-fatal app hangs on iOS. App hangs are an iOS-specific type of error that happens when the application is unresponsive for too long. By default, app hangs reporting is disabled, but you can enable it and set your own threshold to monitor app hangs that last more than a specified
-duration by using this parameter. Set the `appHangThreshold` parameter to the minimal duration you want
-app hangs to be reported. For example, enter 0.25 to report hangs lasting at least 250 ms.
-See [Configure the app hang threshold][19] for more guidance on what to set this value to.
+: Optional  
+**Type**: Number  
+**Default**: `undefined`  
+The app hang threshold in seconds for non-fatal app hangs on iOS. App hangs are an iOS-specific type of error that happens when the application is unresponsive for too long. By default, app hangs reporting is disabled, but you can enable it and set your own threshold to monitor app hangs that last more than a specified duration by using this parameter. Set the `appHangThreshold` parameter to the minimal duration you want app hangs to be reported. For example, enter 0.25 to report hangs lasting at least 250 ms. See [Configure the app hang threshold][19] for more guidance on what to set this value to.
 
 `initialResourceThreshold`
-: Optional<br/>
-**Type**: Number<br/>
-**Default**: `0.1` (seconds)
+: Optional  
+**Type**: Number  
+**Default**: `0.1` (seconds)  
 The amount of time after a view starts where a Resource should be considered when calculating Time to Network-Settled (TNS). TNS is calculated using all resources that start within the specified threshold, in seconds.
 
 `errorEventMapper`
-: Optional<br/>
-**Type**: `ErrorEventMapper` <br/>
-**Default**: `null`<br/>
-Custom function to modify the attributes of a RUM Error event before it is sent to Datadog
+: Optional  
+**Type**: `ErrorEventMapper`   
+**Default**: `null`  
+Custom function to modify the attributes of a RUM Error event before it is sent to Datadog.
 
 `actionEventMapper`
-: Optional<br/>
-**Type**: `ActionEventMapper` <br/>
-**Default**: `null`<br/>
-Custom function to modify the attributes of a RUM Action event before it is sent to Datadog
+: Optional  
+**Type**: `ActionEventMapper`   
+**Default**: `null`  
+Custom function to modify the attributes of a RUM Action event before it is sent to Datadog.
 
 `resourceEventMapper`
-: Optional<br/>
-**Type**: `ResourceEventMapper` <br/>
-**Default**: `null`<br/>
-Custom function to modify the attributes of a RUM Resource event before it is sent to Datadog
+: Optional  
+**Type**: `ResourceEventMapper`   
+**Default**: `null`  
+Custom function to modify the attributes of a RUM Resource event before it is sent to Datadog.
 
 `customEndpoint`
-: Optional<br/>
-**Type**: String<br/>
-**Default**: `undefined`<br/>
+: Optional  
+**Type**: String  
+**Default**: `undefined`  
 Sets a target custom server for RUM.
 
-### Logs Configuration
+### Logs configuration
 
 `bundleLogsWithRum`
-: Optional<br/>
-**Type**: Boolean<br/>
-**Default**: `true`<br/>
+: Optional  
+**Type**: Boolean  
+**Default**: `true`  
 Enables RUM correlation with logs (default is true).
 
 `bundleLogsWithTraces`
-: Optional<br/>
-**Type**: Boolean<br/>
-**Default**: `true`<br/>
+: Optional  
+**Type**: Boolean  
+**Default**: `true`  
 Enables trace correlation with logs.
 
 `logEventMapper`
-: Optional<br/>
-**Type**: `LogEventMapper` <br/>
-**Default**: `null`<br/>
-Custom function to modify the attributes of a Log event before it is sent to Datadog
+: Optional  
+**Type**: `LogEventMapper`   
+**Default**: `null`  
+Custom function to modify the attributes of a Log event before it is sent to Datadog.
 
 `customEndpoint`
-: Optional<br/>
-**Type**: String<br/>
-**Default**: `undefined`<br/>
+: Optional  
+**Type**: String  
+**Default**: `undefined`  
 Sets a target custom server for Logs.
 
-### Trace Configuration
+### Trace configuration
 
 `customEndpoint`
-: Optional<br/>
-**Type**: String<br/>
-**Default**: `undefined`<br/>
+: Optional  
+**Type**: String  
+**Default**: `undefined`  
 Sets a target custom server for Traces.
-
 
 ## Manual instrumentation
 
 If automatic instrumentation doesn't suit your needs, you can manually create RUM Events and Logs:
 
 ### Send logs
+
 When you instrument your code to send logs, it can include debug, info, warn, or error details:
 
 ```javascript
@@ -336,7 +316,8 @@ DdLogs.warn('Lorem ipsum dolor sit amet…', {});
 DdLogs.error('Lorem ipsum dolor sit amet…', {});
 ```
 
-### Manually track RUM Views
+### Manually track RUM views
+
 To manually track RUM Views, provide a `view key`, `view name`, and `action name` at initialization. Depending on your needs, you can choose one of the following strategies:
 
 ```javascript
@@ -345,7 +326,8 @@ DdRum.startView('<view-key>', 'View Name', {}, Date.now());
 DdRum.stopView('<view-key>', { custom: 42 }, Date.now());
 ```
 
-### Manually track RUM Actions
+### Manually track RUM actions
+
 You can manually track RUM actions:
 
 ```javascript
@@ -360,14 +342,16 @@ DdRum.startAction(RumActionType.TAP, 'action name', {}, Date.now());
 DdRum.stopAction({}, Date.now());
 ```
 
-### Manually track RUM Errors
+### Manually track RUM errors
+
 You can manually track RUM errors:
 
 ```javascript
 DdRum.addError('<message>', ErrorSource.SOURCE, '<stacktrace>', {}, Date.now());
 ```
 
-### Manually track RUM Resources
+### Manually track RUM resources
+
 You can manually track RUM resources:
 
 ```javascript
@@ -378,7 +362,7 @@ DdRum.stopResource('<res-key>', 200, 'xhr', (size = 1337), {}, Date.now());
 
 ### Notify the SDK that your view finished loading
 
-You can notify the SDK that your view has finished loading by calling the `addViewLoadingTime` method on `DdRum`. 
+You can notify the SDK that your view has finished loading by calling the `addViewLoadingTime` method on `DdRum`.
 Call this method when your view is fully loaded and ready to be displayed to the user:
 
 ```javascript
@@ -392,6 +376,7 @@ After the loading time is sent, it is accessible as `@view.loading_time` and is 
 **Note**: This API is experimental.
 
 ### Add custom timings
+
 You can add custom timings:
 
 ```javascript
@@ -399,6 +384,7 @@ DdRum.addTiming('<timing-name>');
 ```
 
 ### Manually send spans
+
 You can send spans manually:
 
 ```javascript
@@ -411,14 +397,14 @@ DdTrace.finishSpan(spanId, { custom: 21 }, Date.now());
 
 You can attach user information to all RUM events to get more detailed information from your RUM sessions.
 
-### Track User Sessions
+### Track user sessions
 
-Adding user information to your RUM sessions makes it easy to:
+Adding user information to your RUM sessions makes it possible to:
 * Follow the journey of a given user
 * Know which users are the most impacted by errors
 * Monitor performance for your most important users
 
-{{< img src="real_user_monitoring/browser/advanced_configuration/user-api.png" alt="User API in RUM UI" >}}
+{% img src="real_user_monitoring/browser/advanced_configuration/user-api.png" alt="User API in RUM UI" /%}
 
 | Attribute   | Type   | Description                                                                     |
 | ----------- | ------ | ------------------------------------------------------------------------------- |
@@ -620,7 +606,7 @@ Events include additional context:
 |               | `errorEvent.additionalInformation.attributes`    | Contains the global attributes set by `DdSdkReactNative.addAttributes`. |
 | ResourceEvent | `resourceEvent.resourceContext`                  | [XMLHttpRequest][15] corresponding to the resource or `undefined`.      |
 |               | `resourceEvent.additionalInformation.userInfo`   | Contains the global user info set by `DdSdkReactNative.setUserInfo`.        |
-|               | `resourceEvent.additionalInformation.attributes` | Contains the global attributes set by `DdSdkReactNative.setAttributes`. |
+|               | `resourceEvent.additionalInformation.attributes` | Contains the global attributes set by `DdSdkReactNative.addAttributes`. |
 
 ## Retrieve the RUM session ID
 
@@ -654,7 +640,7 @@ import {
 } from '@datadog/mobile-react-native';
 
 const datadogConfiguration = new DatadogProviderConfiguration(
-    '<CLIENT_TOKEN>', 
+    '<CLIENT_TOKEN>',
     '<ENVIRONMENT_NAME>',
     initializationMode: InitializationMode.ASYNC,
     rumConfiguration: {
@@ -677,7 +663,7 @@ All interactions with the RUM SDK (view tracking, actions, resources tracing, an
 
 Logs are not recorded and calling a `DdLogs` method before the actual initialization might break logging.
 
-If you experience any issue setting up the asynchronous initialization of Datadog, you can check out our [example application][17].
+If you experience any issue setting up the asynchronous initialization of Datadog, see the [example application][17].
 
 ## Delaying the initialization
 
@@ -750,13 +736,9 @@ const configuration = {
 };
 ```
 
-## Monitoring hybrid React Native applications
+## Hybrid app monitoring
 
 See [Monitor hybrid React Native applications][18].
-
-## Further reading
-
-{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/rum/application/create
 [2]: /real_user_monitoring/application_monitoring/react_native
@@ -769,7 +751,7 @@ See [Monitor hybrid React Native applications][18].
 [9]: /real_user_monitoring/guide/proxy-mobile-rum-data/
 [10]: https://github.com/wix/react-native-navigation
 [11]: /real_user_monitoring/application_monitoring/react_native/integrated_libraries/
-[12]: https://github.com/application_monitoring/eact-navigation/react-navigation
+[12]: https://github.com/react-navigation/react-navigation
 [13]: https://github.com/DataDog/dd-sdk-reactnative-examples/tree/main/rum-react-navigation
 [14]: https://github.com/DefinitelyTyped/DefinitelyTyped/blob/683ec4a2b420ff6bd3873a7338416ad3ec0b6595/types/react-native-side-menu/index.d.ts#L2
 [15]: https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
