@@ -51,7 +51,7 @@ Use the legend at the bottom of the diagram to filter monitors by alerting statu
 
 Hover over a resource or service with monitors to see a count breakdown of associated monitors by status. The hover panel includes an **Investigate with Bits AI SRE** button that loads the three most recent alerting events for the selected monitor. From there, you can initiate a new investigation or view an existing one.
 
-{{< img src="datadog_cloudcraft/overlays/cloudcraft_monitors_overlay_hover_panel.png" alt="Cloudcraft Monitors overlay hover panel showing a monitor count breakdown by status and the Investigate with Bits AI SRE button." style="width:100%;" >}}
+{{< img src="datadog_cloudcraft/overlays/cloudcraft_monitors_overlay_hover_panel.png" alt="Cloudcraft Monitors overlay hover panel showing a monitor count breakdown by status and the Investigate with Bits AI SRE button." style="width:80%;" >}}
 
 For more information, see [Bits AI SRE][1].
 
