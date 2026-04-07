@@ -37,7 +37,7 @@ Configure the `rum.sourceCodeContext` object in your build plugin options:
 | Parameter | Type | Required | Default | Description |
 |-----------|------|----------|---------|-------------|
 | `rum.sourceCodeContext.service` | String | Yes | None | Service name. Must match the RUM SDK `service` initialization parameter. |
-| `rum.sourceCodeContext.version` | String | No | None | Release version. If set, must match the RUM SDK `version` initialization parameter. |
+| `rum.sourceCodeContext.version` | String | No | None | Release version. If omitted, source code context is not associated with a specific version. If set, must match the RUM SDK `version` initialization parameter. |
 
 ## Example
 
