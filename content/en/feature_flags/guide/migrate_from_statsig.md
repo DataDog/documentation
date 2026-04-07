@@ -1,19 +1,19 @@
 ---
 title: Migrate Your Feature Flags from Statsig
-description: Learn how to migrate feature flags from Statsig to Eppo by Datadog.
+description: Learn how to migrate feature flags from Statsig to Datadog.
 ---
 
-This guide outlines the process for migrating your feature flagging logic from Statsig to Datadog. It covers conceptual mappings, SDK installation, initialization, and flag evaluation.
+This guide outlines the process for migrating your feature flagging logic from Statsig to [Datadog Feature Flags][1]. It covers conceptual mappings, SDK installation, initialization, and flag evaluation.
 
-## **Summary checklist**
+## Summary checklist
 
 * Replace statsig-js with @datadog/openfeature-browser.  
-* Swap statsig.initialize with OpenFeature.setProvider.  
-* Convert checkGate to client.getBooleanValue.  
-* Convert getConfig to client.getObjectValue or client.getStringValue.  
-* Ensure targetingKey is used in the context to identify users.
+* Swap statsig.initialize with OpenFeature.setProvider.
+* Convert checkGate to client.getBooleanValue.
+* Convert getConfig to client.getObjectValue or client.getStringValue.
+* The targetingKey must be used in the context to identify users.  
 
-## **1\. Conceptual Mapping**
+## 1. Conceptual Mapping
 
 The core concepts between Statsig and Datadog are similar, but the terminology differs slightly.
 
@@ -24,43 +24,43 @@ The core concepts between Statsig and Datadog are similar, but the terminology d
 | **Experiment** | **Feature Flag** (w/ Targeting) | A Datadog Flag can be configured with percentage-based rollouts and specific targeting rules to run experiments. |
 | **User/StatsigUser** | **Evaluation Context** | The context (attributes) passed to the SDK to evaluate flags. |
 
-## **2\. SDK Installation**
+## 2. SDK installation
 
 Datadog recommends using the **OpenFeature** standard for their Feature Flagging SDKs. This provides a vendor-neutral API while using Datadog as the underlying provider.
 
 **Remove Statsig:**
 ```
-npm uninstall statsig-js  
-\# or  
+npm uninstall statsig-js
+\# or
 yarn remove statsig-js
 ```
 **Install Datadog & OpenFeature:**
 ```
-npm install @datadog/openfeature-browser @openfeature/web-sdk  
-\# or  
+npm install @datadog/openfeature-browser @openfeature/web-sdk
+\# or
 yarn add @datadog/openfeature-browser @openfeature/web-sdk
 ```
-**Note:** For server-side implementations (Node.js, Go, etc.), see the specific Datadog Server SDK documentation, but the OpenFeature pattern remains similar.
+**Note:** For server-side implementations (Node.js, Go, etc.), see the [Datadog Server SDK documentation][1], but the OpenFeature pattern remains similar.
 
-## **3\. Initialization**
+## 3. Initialization
 
-You must replace the statsig.initialize() call with the OpenFeature provider setup.
+You must replace the `statsig.initialize()` call with the OpenFeature provider setup.
 
-### **Statsig (old)**
+### Statsig (old)
 ```
 import statsig from 'statsig-js';
 
-await statsig.initialize(  
-  'client-sdk-key',  
-  { userID: 'user-123' }  
+await statsig.initialize(
+  'client-sdk-key',
+  { userID: 'user-123' }
 );
 ```
-### **Datadog (new)**
+### Datadog (new)
 ```
-import { DatadogProvider } from '@datadog/openfeature-browser';  
+import { DatadogProvider } from '@datadog/openfeature-browser';
 import { OpenFeature } from '@openfeature/web-sdk';
 
-// 1\. Configure the Datadog Provider  
+// 1. Configure the Datadog Provider
 const provider \= new DatadogProvider({  
   clientToken: '\<YOUR\_DATADOG\_CLIENT\_TOKEN\>',  
   applicationId: '\<YOUR\_DATADOG\_APPLICATION\_ID\>',  
@@ -71,10 +71,10 @@ const provider \= new DatadogProvider({
   enableExposureLogging: true, // Replaces Statsig's automatic exposure logging  
 });
 
-// 2\. Register the provider  
+// 2. Register the provider 
 await OpenFeature.setProviderAndWait(provider);
 ```
-## **4\. Evaluating Flags (Checking Gates)**
+## 4. Evaluating flags (checking gates)
 
 Replace checkGate calls with OpenFeature's getBooleanValue.
 
@@ -88,7 +88,7 @@ if (isEnabled) {
   // Show old design  
 }
 ```
-### **Datadog (new)**
+### Datadog (new)
 ```
 const client \= OpenFeature.getClient();
 
@@ -101,16 +101,16 @@ if (isEnabled) {
   // Show old design  
 }
 ```
-## **5\. Getting Configuration (Dynamic Configs)**
+## 5. Getting configuration (dynamic configs)
 
-If you were using getConfig or getExperiment to retrieve non-Boolean values (strings, JSON, numbers), use the appropriate typed method in OpenFeature.
+If you were using `getConfig` or `getExperiment` to retrieve non-Boolean values (strings, JSON, numbers), use the appropriate typed method in OpenFeature.
 
-### **Statsig (Old)**
+### Statsig (old)
 ```
 const config \= statsig.getConfig('banner\_config');  
 const title \= config.get('title', 'Welcome');
 ```
-### **Datadog (New)**
+### Datadog (new)
 ```
 const client \= OpenFeature.getClient();
 
@@ -118,11 +118,11 @@ const client \= OpenFeature.getClient();
 const bannerConfig \= client.getObjectValue('banner\_config', { title: 'Welcome' });  
 const title \= bannerConfig.title;
 ```
-## **6\. Updating User Context**
+## 6. Updating user context
 
-Statsig updates user context via updateUser. In OpenFeature \+ Datadog, you set the **Context**.
+Statsig updates user context using `updateUser`. In OpenFeature \+ Datadog, you set the **Context**.
 
-### **Statsig (Old)**
+### Statsig (old)
 ```
 await statsig.updateUser({  
   userID: 'user-456',  
@@ -130,7 +130,7 @@ await statsig.updateUser({
   custom: { plan: 'premium' }  
 });
 ```
-### **Datadog (New)**
+### Datadog (new)
 ```
 // Set the context for all future flag evaluations  
 await OpenFeature.setContext({  
@@ -139,11 +139,11 @@ await OpenFeature.setContext({
   plan: 'premium'  
 });
 ```
-## **7\. Tracking & Exposure**
+## 7. Tracking and exposure
 
 In Statsig, checking a gate automatically logs an exposure.
 
 In Datadog:
 
-1. Ensure enableExposureLogging: true is set in the DatadogProvider config.  
+1. Ensure `enableExposureLogging: true` is set in the DatadogProvider config.  
 2. Events are sent to Datadog RUM. You can view these in the **Feature Flags** list or the **RUM** explorer.
