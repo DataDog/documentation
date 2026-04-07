@@ -23,9 +23,10 @@ With Commitment Programs, you can:
 Use Commitment Programs to understand and optimize your cloud commitments.
 
 1. Go to [**Cloud Cost > Planning > Commitment Programs**][1] in Cloud Cost Management.
-2. Use filters to focus on specific accounts, regions, or services.
+2. Use the product selector to choose a commitment type and the time frame selector to set the reporting period.
 3. Gain insights into your KPIs, commitment costs, and renewal recommendations:
    - Review KPIs in the [Commitments overview](#commitments-overview) section.
+   - Analyze areas of on-demand spend to understand how to improve your coverage in the [On-demand hot-spots](#on-demand-hot-spots) section.
    - View active commitments by type in the [Commitments inventory](#commitments-inventory) table.
    - Identify savings plans generating the most waste in [Least used savings plans](#least-used-savings-plans).
 4. Take action based on these insights:
@@ -51,19 +52,13 @@ On-demand hot-spots highlight areas with high on-demand costs, which may indicat
 
 {{< img src="cloud_cost/planning/commitments-on-demand-2.png" alt="On-Demand Hot-Spots table for AWS RDS showing region, instance family, DB engine, coverage percentage, and on-demand cost." style="width:100%;" >}}
 
-Use the **Cost** and **Hours** tabs to toggle between on-demand spend in dollars or usage in hours. Use the **Region** and **Instance Family** filters to narrow results. 
+Use the **Cost** and **Hours** tabs to toggle between on-demand spend in dollars or usage in hours. Use the available filters to narrow results—filters vary based on the selected product.
 
-The table shows the following columns:
-
-- **Region**: Region where the on-demand usage is occurring.
-- **Instance Family**: Instance family associated with the on-demand usage.
-- **DB Engine**: Database engine running on-demand, such as Aurora PostgreSQL, PostgreSQL, SQL Server, or Aurora MySQL.
-- **Coverage**: Percentage of usage covered by commitments.
-- **On-Demand Cost**: Total on-demand cost, sorted in descending order to surface the highest-spend hot-spots first.
+The table columns correspond to the filters for the selected product, showing the dimensions that characterize the on-demand usage (such as region, instance family, or database engine), along with **Coverage** (percentage of usage covered by commitments) and **On-Demand Cost** (sorted in descending order to surface the highest-spend hot-spots first).
 
 ## Commitments inventory
 
-Commitments Inventory provides a detailed view of your active commitments, organized by commitment type.
+Commitments Inventory provides a detailed view of commitments active during the selected time frame, organized by commitment type. This includes commitments expiring soon (within 30 days) and commitments that have already expired within the selected period.
 
 {{< img src="cloud_cost/planning/commitments-inventory-1.png" alt="Commitments Inventory section showing the Savings Plans tab with a utilization chart and a table of EC2 savings plan commitments." style="width:100%;" >}}
 
@@ -113,7 +108,7 @@ Least Used Savings Plans helps you identify which savings plans are generating t
 
 **How to use commitment programs**:  
 1. Go to the **Commitments Overview** and check the utilization KPI.
-2. Filter by account, region, or instance family to pinpoint which commitments are underutilized.
+2. In the **Commitments inventory**, sort by utilization in ascending order to identify the least-used commitments. For savings plans, also check the **Savings Plans with most waste** table in the [Least used savings plans](#least-used-savings-plans) section.
 3. Reallocate workloads to use these commitments more effectively, or consider modifying or selling unused commitments if your cloud provider allows it.
 
 ### Plan for expiring commitments
@@ -133,6 +128,15 @@ Least Used Savings Plans helps you identify which savings plans are generating t
 1. Use **On-demand hot-spots** to identify which services, regions, or accounts have significant and steady on-demand costs.
 2. Analyze usage patterns to confirm they are predictable.
 3. Purchase new commitments to cover the consistent usage and reduce costs.
+
+### Reduce waste by shifting workloads to cover unused savings plans
+
+**Scenario**: You have underutilized savings plans and high on-demand costs running in parallel.
+
+**How to use commitment programs**:
+1. Use the **Least used savings plans** section to identify recurring patterns of low utilization—for example, consistently unused capacity on certain days or hours.
+2. Identify on-demand workloads that could be scheduled during those low-utilization windows to take advantage of unused savings plan coverage.
+3. Shift or reschedule those workloads to reduce on-demand spend and improve savings plan utilization.
 
 ## Further reading
 {{< partial name="whats-next/whats-next.html" >}}
