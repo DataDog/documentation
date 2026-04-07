@@ -26,7 +26,7 @@ To set up the Microsoft Sentinel destination, you need to create a Workspace in 
 1. Follow the instructions for the type of table to which you want to send data.
 {{< tabs >}}
 {{% tab "Azure Table" %}}
-1. Create a JSON file for your Data Collection Rule (DCR) parameters. See [Data collection rule (DCR)][1] for more information.
+1. Create a JSON file for your Data Collection Rule (DCR) parameters. See [Data collection rule (DCR)][1] for more information and [Supported Azure Tables][7] for all available tables to which you can send data.
     - In the `streamDeclarations` property, you must list all log fields you want mapped to the corresponding Azure table column. See [Stream declarations][2] for more information.
     - In the `transformKql` property, you must list all fields on the log that are dropped and not mapped to the table. See [Data flow properties][3] for more information.
     - **Note**: Each log field must be listed in one of these properties: either `streamDeclarations` or `transformKql`; otherwise the log is dropped. See [Monitor DCR data collection in Azure Monitor][4] on how to set up an alert when logs are dropped.
@@ -93,7 +93,6 @@ To set up the Microsoft Sentinel destination, you need to create a Workspace in 
             ```
 
     - See [CommonSecurityLog Columns][6] for a full list of `commonsecuritylog` table columns.
-    - See the [Supported Azure Tables][7] for all available tables to which you can send data.
 1. Run the [`az monitor data-collection rule create`][8] Azure CLI command to create a DCR with the JSON file you created in the previous step. For example, with the `dcr-commonsecuritylog.json` example file:
     ```bash
     az monitor data-collection rule create \

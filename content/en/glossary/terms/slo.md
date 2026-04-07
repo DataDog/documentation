@@ -1,4 +1,5 @@
 ---
+id: slo
 title: Service Level Objective (SLO)
 core_product:
   - slos

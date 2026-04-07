@@ -38,7 +38,7 @@ Learn more about the [compatibility requirements][6].
 ### Configure the prompt
 
 1. In Datadog, navigate to the LLM Observability [Evaluations page][1]. Select **Create Evaluation**, then select **Create your own**.
-   {{< img src="llm_observability/evaluations/custom_llm_judge_1-3.png" alt="The LLM Observability Evaluations page with the Create Evaluation side panel opened. The first item, 'Create your own,' is selected. " style="width:100%;" >}}
+   {{< img src="llm_observability/evaluations/EvalConfig_LLMO.png" alt="The LLM Observability Evaluations page with the Create Evaluation side panel opened." style="width:100%;" >}}
 1. Provide a clear, descriptive **evaluation name** (for example, `factuality-check` or `tone-eval`). You can use this name when querying evaluation results. The name must be unique within your application.
 1. Use the **Account** drop-down menu to select the LLM provider and corresponding account to use for your LLM judge. To connect a new account, see [connect an LLM provider][2].
     - If you select an **Amazon Bedrock** account, choose a region the account is configured for.
@@ -276,6 +276,8 @@ Assessment Criteria is not currently available for JSON evaluations.
 {{< img src="llm_observability/evaluations/custom_llm_judge_5-2.png" alt="Configuring the custom evaluation output under Structured Output, including reasoning and assessment criteria." style="width:100%;" >}}
 
 ### Define the evaluation scope: Filtering and sampling
+
+<div class="alert alert-info">Span fields used in evaluations are limited to 250 KB each. Fields exceeding this size are truncated before being sent to the LLM judge.</div>
 
 Under **Evaluation Scope**, define where and how your evaluation runs. This helps control coverage (which spans are included) and cost (how many spans are sampled).
    - **Application**: Select the application you want to evaluate.

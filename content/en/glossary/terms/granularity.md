@@ -1,4 +1,5 @@
 ---
+id: granularity
 title: granularity
 core_product:
   - dashboards
