@@ -8,21 +8,21 @@ If you have not set up the Datadog Unity SDK for RUM yet, follow the [in-app set
 ### Advanced initialization options
 
 `Custom Endpoint`
-: Optional<br/>
-**Type**: String<br/>
-**Default**: `true`<br/>
+: Optional  
+**Type**: String  
+**Default**: `true`  
 Send data to a custom endpoint instead of the default Datadog endpoint. This is useful for proxying data through a custom server.
 
 `SDK Verbosity`
-: Optional<br/>
-**Type**: Enum<br/>
-**Default**: `Warn`<br/>
+: Optional  
+**Type**: Enum  
+**Default**: `Warn`  
 The level of debugging information the Datadog SDK should output. Higher levels output more information. This option is helpful for getting debugging information from the SDK when something is not working as expected, or removing the SDK-related debugging entries from console logs.
 
 `Telemetry Sample Rate`
-: Optional<br/>
-**Type**: Double<br/>
-**Default**: `20`<br/>
+: Optional  
+**Type**: Double  
+**Default**: `20`  
 The percentage rate at which Datadog sends internal telemetry data. A value of 100 means all telemetry data is sampled and sent to Datadog.
 
 ### Automatic view tracking

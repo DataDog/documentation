@@ -41,264 +41,264 @@ You can specify the following parameters in your configuration when initializing
 ### Core configuration
 
 `clientToken`
-: Required<br/>
-**Type**: String<br/>
+: Required  
+**Type**: String  
 A [Datadog client token][4].
 
 `env`
-: Required<br/>
-**Type**: String<br/>
+: Required  
+**Type**: String  
 The application's environment, for example: prod, pre-prod, and staging. Follows the [tag syntax requirements][5].
 
 `rumConfiguration`
-: Optional<br/>
-**Type**: `RumConfiguration`<br/>
+: Optional  
+**Type**: `RumConfiguration`  
 The Datadog RUM configuration. RUM is **disabled by default**. See [RUM configuration][20].
 
 `logsConfiguration`
-: Optional<br/>
-**Default**: `undefined`<br/>
-**Type**: `LogsConfiguration`<br/>
+: Optional  
+**Default**: `undefined`  
+**Type**: `LogsConfiguration`  
 The Datadog Logs configuration. Logs is **disabled by default**: use an empty configuration `{}` to enable. See [Logs configuration][21].
 
 `traceConfiguration`
-: Optional<br/>
-**Type**: `TraceConfiguration`<br/>
+: Optional  
+**Type**: `TraceConfiguration`  
 The Datadog Trace configuration. Trace is **disabled by default**: use an empty configuration `{}` to enable. See [Trace configuration][22].
 
 `site`
-: Optional<br/>
-**Type**: String<br/>
-**Default**: `US1`<br/>
+: Optional  
+**Type**: String  
+**Default**: `US1`  
 [The Datadog site parameter of your organization][6].
 
 `service`
-: Optional<br/>
-**Type**: String<br/>
+: Optional  
+**Type**: String  
 The service name for your application. Follows the [tag syntax requirements][5].
 
 `verbosity`
-: Optional<br/>
-**Type**: SdkVerbosity<br/>
-**Default**: `undefined`<br/>
+: Optional  
+**Type**: SdkVerbosity  
+**Default**: `undefined`  
 Verbosity for internal SDK logging. Set to `SdkVerbosity.DEBUG` to debug your SDK implementation.
 
 `version`
-: Optional<br/>
-**Type**: String<br/>
+: Optional  
+**Type**: String  
 The application's version. For example: 1.2.3, 6c44da20, and 2020.02.13. Follows the [tag syntax requirements][5].
 
 `versionSuffix`
-: Optional<br/>
-**Type**: String<br/>
+: Optional  
+**Type**: String  
 Add a suffix to the reported version of the app. Accepted characters are alphanumerics and `_`, `-`, `:`, `.`, `/`. Other special characters are converted to underscores. A dash (`-`) is automatically added between the version and the suffix. Follows the [tag syntax requirements][5].
 
 `proxyConfig`
-: Optional<br/>
-**Type**: ProxyConfiguration<br/>
+: Optional  
+**Type**: ProxyConfiguration  
 Optional [proxy configuration][9].
 
 `uploadFrequency`
-: Optional<br/>
-**Type**: UploadFrequency<br/>
-**Default**: `UploadFrequency.AVERAGE`<br/>
+: Optional  
+**Type**: UploadFrequency  
+**Default**: `UploadFrequency.AVERAGE`  
 Sets the preferred frequency for uploading batches of data.
 
 `batchSize`
-: Optional<br/>
-**Type**: BatchSize<br/>
-**Default**: `BatchSize.MEDIUM`<br/>
+: Optional  
+**Type**: BatchSize  
+**Default**: `BatchSize.MEDIUM`  
 Defines the Datadog SDK policy when batching data together before uploading it to Datadog servers. Smaller batches mean smaller but more network requests, whereas larger batches mean fewer but larger network requests.
 
 ### RUM configuration
 
 `applicationId`
-: **Required**<br/>
-**Type**: String<br/>
+: **Required**  
+**Type**: String  
 The RUM application ID.
 
 `trackInteractions`
-: Optional<br/>
-**Type**: Boolean<br/>
-**Default**: `false` <br/>
+: Optional  
+**Type**: Boolean  
+**Default**: `false`   
 Enables automatic collection of user actions.
 
 `trackResources`
-: Optional<br/>
-**Type**: Boolean<br/>
-**Default**: `false` <br/>
+: Optional  
+**Type**: Boolean  
+**Default**: `false`   
 Enables collection of resource events.
 
 `trackErrors`
-: Optional<br/>
-**Type**: Boolean<br/>
-**Default**: `false` <br/>
+: Optional  
+**Type**: Boolean  
+**Default**: `false`   
 Enables collection of React Native crashes.
 
 `trackFrustrations`
-: Optional<br/>
-**Type**: Boolean<br/>
-**Default**: `true` <br/>
+: Optional  
+**Type**: Boolean  
+**Default**: `true`   
 Enables [automatic collection of user frustrations][7]. Only error taps are supported. Implies `trackInteractions: true`.
 
 `sessionSampleRate`
-: Optional<br/>
-**Type**: Number<br/>
-**Default**: `100`<br/>
+: Optional  
+**Type**: Number  
+**Default**: `100`  
 The percentage of sessions to track: `100` for all, `0` for none. Only tracked sessions send RUM events.
 
 `resourceTraceSampleRate`
-: Optional<br/>
-**Type**: Number<br/>
-**Default**: `100`<br/>
+: Optional  
+**Type**: Number  
+**Default**: `100`  
 The percentage of requests to trace: `100` for all, `0` for none. For more information, see [Connect RUM and Traces][8].
 
 `nativeCrashReportEnabled`
-: Optional<br/>
-**Type**: Boolean<br/>
-**Default**: `false` <br/>
+: Optional  
+**Type**: Boolean  
+**Default**: `false`   
 Enables crash reporting for native platforms (iOS, Android).
 
 `nativeLongTaskThresholdMs`
-: Optional<br/>
-**Type**: Number | false<br/>
-**Default**: `200`<br/>
+: Optional  
+**Type**: Number | false  
+**Default**: `200`  
 The threshold for native long tasks reporting in milliseconds. Setting it to `0` or `false` disables native long task reporting. Values below `100` are raised to `100`. Values above `5000` are lowered to `5000`.
 
 `nativeViewTracking`
-: Optional<br/>
-**Type**: Boolean<br/>
-**Default**: `false`<br/>
+: Optional  
+**Type**: Boolean  
+**Default**: `false`  
 Enables native views tracking. Set to `true` if you use a custom navigation system relying on native views.
 
 `nativeInteractionTracking`
-: Optional<br/>
-**Type**: Boolean<br/>
-**Default**: `false`<br/>
+: Optional  
+**Type**: Boolean  
+**Default**: `false`  
 Enables native interaction tracking. Set to `true` if you want to track interactions on native screens.
 
 `firstPartyHosts`
-: Optional<br/>
-**Type**: List<br/>
-**Default**: `[]`<br/>
+: Optional  
+**Type**: List  
+**Default**: `[]`  
 List of your backends hosts to enable tracing with. For more information, see [Connect RUM and Traces][8].
 
 `telemetrySampleRate`
-: Optional<br/>
-**Type**: Number<br/>
-**Default**: `20`<br/>
+: Optional  
+**Type**: Number  
+**Default**: `20`  
 Telemetry data (such as errors and debug logs) about SDK execution is sent to Datadog to detect and solve potential issues. Set this option to `0` to opt out from telemetry collection.
 
 `longTaskThresholdMs`
-: Optional<br/>
-**Type**: Number | false<br/>
-**Default**: `0`<br/>
+: Optional  
+**Type**: Number | false  
+**Default**: `0`  
 The threshold for JavaScript long tasks reporting in milliseconds. Setting it to `0` or `false` disables JavaScript long task reporting. Values below `100` are raised to `100`. Values above `5000` are lowered to `5000`.
 
 `vitalsUpdateFrequency`
-: Optional<br/>
-**Type**: VitalsUpdateFrequency<br/>
-**Default**: `VitalsUpdateFrequency.AVERAGE`<br/>
+: Optional  
+**Type**: VitalsUpdateFrequency  
+**Default**: `VitalsUpdateFrequency.AVERAGE`  
 Sets the preferred frequency for collecting mobile vitals.
 
 `trackBackgroundEvents`
-: Optional<br/>
-**Type**: Boolean<br/>
-**Default**: `false`<br/>
+: Optional  
+**Type**: Boolean  
+**Default**: `false`  
 Enables tracking of RUM event when no RUM View is active. By default, background events are not tracked. Enabling this feature might increase the number of sessions tracked and impact your billing.
 
 `useAccessibilityLabel`
-: Optional<br/>
-**Type**: Boolean<br/>
-**Default**: `true`<br/>
+: Optional  
+**Type**: Boolean  
+**Default**: `true`  
 Determines whether the accessibility labels are used to name RUM actions (default is true).
 
 `trackNonFatalAnrs`
-: Optional<br/>
-**Type**: Boolean<br/>
-**Default**: `true` on Android 29 and below, `false` on Android 30+.<br/>
+: Optional  
+**Type**: Boolean  
+**Default**: `true` on Android 29 and below, `false` on Android 30+.  
 Enables tracking of non-fatal ANRs on Android. By default, the reporting of non-fatal ANRs on Android 30+ is disabled because it would create too much noise over fatal ANRs. On Android 29 and below, however, the reporting of non-fatal ANRs is enabled by default, as fatal ANRs cannot be reported on those versions.
 
 `trackWatchdogTerminations`
-: Optional<br/>
-**Type**: Boolean<br/>
-**Default**: `false`<br/>
+: Optional  
+**Type**: Boolean  
+**Default**: `false`  
 Determines whether the SDK should track application termination by the watchdog on iOS.
 
 `trackMemoryWarnings`
-: Optional<br/>
-**Type**: Boolean<br/>
-**Default**: `true`<br/>
+: Optional  
+**Type**: Boolean  
+**Default**: `true`  
 Enables tracking of memory warnings as RUM events on iOS. When enabled, the SDK automatically records a RUM event each time the app receives a memory warning from the operating system.
 
 `appHangThreshold`
-: Optional<br/>
-**Type**: Number<br/>
-**Default**: `undefined`<br/>
+: Optional  
+**Type**: Number  
+**Default**: `undefined`  
 The app hang threshold in seconds for non-fatal app hangs on iOS. App hangs are an iOS-specific type of error that happens when the application is unresponsive for too long. By default, app hangs reporting is disabled, but you can enable it and set your own threshold to monitor app hangs that last more than a specified duration by using this parameter. Set the `appHangThreshold` parameter to the minimal duration you want app hangs to be reported. For example, enter 0.25 to report hangs lasting at least 250 ms. See [Configure the app hang threshold][19] for more guidance on what to set this value to.
 
 `initialResourceThreshold`
-: Optional<br/>
-**Type**: Number<br/>
-**Default**: `0.1` (seconds)<br/>
+: Optional  
+**Type**: Number  
+**Default**: `0.1` (seconds)  
 The amount of time after a view starts where a Resource should be considered when calculating Time to Network-Settled (TNS). TNS is calculated using all resources that start within the specified threshold, in seconds.
 
 `errorEventMapper`
-: Optional<br/>
-**Type**: `ErrorEventMapper` <br/>
-**Default**: `null`<br/>
+: Optional  
+**Type**: `ErrorEventMapper`   
+**Default**: `null`  
 Custom function to modify the attributes of a RUM Error event before it is sent to Datadog.
 
 `actionEventMapper`
-: Optional<br/>
-**Type**: `ActionEventMapper` <br/>
-**Default**: `null`<br/>
+: Optional  
+**Type**: `ActionEventMapper`   
+**Default**: `null`  
 Custom function to modify the attributes of a RUM Action event before it is sent to Datadog.
 
 `resourceEventMapper`
-: Optional<br/>
-**Type**: `ResourceEventMapper` <br/>
-**Default**: `null`<br/>
+: Optional  
+**Type**: `ResourceEventMapper`   
+**Default**: `null`  
 Custom function to modify the attributes of a RUM Resource event before it is sent to Datadog.
 
 `customEndpoint`
-: Optional<br/>
-**Type**: String<br/>
-**Default**: `undefined`<br/>
+: Optional  
+**Type**: String  
+**Default**: `undefined`  
 Sets a target custom server for RUM.
 
 ### Logs configuration
 
 `bundleLogsWithRum`
-: Optional<br/>
-**Type**: Boolean<br/>
-**Default**: `true`<br/>
+: Optional  
+**Type**: Boolean  
+**Default**: `true`  
 Enables RUM correlation with logs (default is true).
 
 `bundleLogsWithTraces`
-: Optional<br/>
-**Type**: Boolean<br/>
-**Default**: `true`<br/>
+: Optional  
+**Type**: Boolean  
+**Default**: `true`  
 Enables trace correlation with logs.
 
 `logEventMapper`
-: Optional<br/>
-**Type**: `LogEventMapper` <br/>
-**Default**: `null`<br/>
+: Optional  
+**Type**: `LogEventMapper`   
+**Default**: `null`  
 Custom function to modify the attributes of a Log event before it is sent to Datadog.
 
 `customEndpoint`
-: Optional<br/>
-**Type**: String<br/>
-**Default**: `undefined`<br/>
+: Optional  
+**Type**: String  
+**Default**: `undefined`  
 Sets a target custom server for Logs.
 
 ### Trace configuration
 
 `customEndpoint`
-: Optional<br/>
-**Type**: String<br/>
-**Default**: `undefined`<br/>
+: Optional  
+**Type**: String  
+**Default**: `undefined`  
 Sets a target custom server for Traces.
 
 ## Manual instrumentation
