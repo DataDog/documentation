@@ -6214,6 +6214,7 @@ components:
             The available values depend on retention plans specified in your organization's contract/subscriptions.
           example: 360
           format: int64
+          nullable: true
           type: integer
         num_retention_days:
           description: |-
@@ -6286,6 +6287,7 @@ components:
             **Note**: Changing this value affects all logs already in this index. It may also affect billing.
           example: 360
           format: int64
+          nullable: true
           type: integer
         num_retention_days:
           description: |-
