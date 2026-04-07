@@ -16,12 +16,6 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/manage-monitors-with-datadog-teams/"
   tag: "Blog"
   text: "Manage your monitors more efficiently with Datadog Teams"
-- link: "https://www.datadoghq.com/blog/javascript-cache"
-  tag: "Blog"
-  text: "Configuring JavaScript caches for better performance"
-- link: "https://www.datadoghq.com/blog/monitoring-load-balancer-logs"
-  tag: "Blog"
-  text: "Monitor your application and network load balancer logs"
 ---
 
 ## Overview
