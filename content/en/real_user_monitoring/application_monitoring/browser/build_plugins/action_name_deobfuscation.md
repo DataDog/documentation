@@ -17,9 +17,9 @@ further_reading:
 
 ## Overview
 
-When you enable the [`enablePrivacyForActionName`][1] initialization parameter, action names are masked for privacy. In minified builds, action names can also become unreadable because bundlers obfuscate DOM element text and attributes used to generate them.
+When you enable the [`enablePrivacyForActionName`][1] initialization parameter, action names are masked for privacy. In minified builds, action names can also become unreadable because bundlers obfuscate the DOM element text and attributes that RUM uses to generate action names.
 
-The Action Name Deobfuscation build plugin solves both problems by instrumenting your source code at build time. It uses a WebAssembly-based code transformer to identify relevant strings and creates a privacy dictionary that maps obfuscated values back to their original text. A runtime helper injected into your bundle collects these mappings so the RUM SDK can resolve readable action names.
+The Action Name Deobfuscation build plugin addresses both issues by instrumenting your source code at build time to generate a privacy dictionary that maps obfuscated values back to their original text. The RUM SDK uses this dictionary to resolve readable action names.
 
 ## Prerequisites
 
@@ -32,7 +32,7 @@ Configure the `rum.privacy` object in your build plugin options:
 
 | Parameter | Type | Required | Default | Description |
 |-----------|------|----------|---------|-------------|
-| `rum.privacy.include` | Array of RegExp or String | No | JS/TS files (`/\.(?:c\|m)?(?:j\|t)sx?$/`) | File patterns to process for action name deobfuscation. |
+| `rum.privacy.include` | Array of RegExp or String | No | JS/TS files (.js, .ts, .jsx, .tsx, .mjs, .cjs, and variants) | File patterns to process for action name deobfuscation. |
 | `rum.privacy.exclude` | Array of RegExp or String | No | `node_modules`, `.preval.` files | File patterns to skip. |
 
 ## Example
@@ -72,7 +72,7 @@ module.exports = {
 };
 ```
 
-<div class="alert alert-info">These examples use webpack. The configuration object is identical across all supported bundlers. See <a href="/real_user_monitoring/application_monitoring/browser/build_plugins/">Build Plugins</a> for installation instructions for your bundler.</div>
+<div class="alert alert-info">These examples use webpack. The configuration object is identical across all supported bundlers. See <a href="/real_user_monitoring/application_monitoring/browser/build_plugins/">Build Plugins</a> for installation instructions.</div>
 
 ## Further reading
 

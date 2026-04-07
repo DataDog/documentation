@@ -1,6 +1,6 @@
 ---
 title: Source Maps
-description: "Automatically upload JavaScript source maps to Datadog at build time to de-obfuscate stack traces in Error Tracking and RUM."
+description: "Automatically upload JavaScript source maps to Datadog at build time to deobfuscate stack traces in Error Tracking and RUM."
 algolia:
   tags: ['source maps', 'build plugins', 'error tracking']
 further_reading:
@@ -17,7 +17,7 @@ further_reading:
 
 ## Overview
 
-The Source Maps build plugin automatically uploads JavaScript source maps to Datadog during your build, enabling de-obfuscated stack traces in [Error Tracking][1] and [RUM][2]. This replaces the need to manually run `datadog-ci sourcemaps upload` or configure CI/CD pipelines for source map uploads.
+The Source Maps build plugin automatically uploads JavaScript source maps to Datadog during your build, enabling deobfuscated stack traces in [Error Tracking][1] and [RUM][2]. This replaces the need to manually run `datadog-ci sourcemaps upload` or configure CI/CD pipelines for source map uploads.
 
 The plugin hooks into the build process, discovers all `.js` files with corresponding `.map` source map files from the build output, and uploads them to Datadog with git metadata.
 
@@ -34,11 +34,11 @@ Configure the `errorTracking.sourcemaps` object in your build plugin options:
 
 | Parameter | Type | Required | Default | Description |
 |-----------|------|----------|---------|-------------|
-| `errorTracking.sourcemaps.service` | String | Yes | — | Service name. Must match the RUM SDK `service` initialization parameter. |
-| `errorTracking.sourcemaps.releaseVersion` | String | Yes | — | Release version. Must match the RUM SDK `version` initialization parameter. |
-| `errorTracking.sourcemaps.minifiedPathPrefix` | String | Yes | — | URL prefix or absolute path where your minified JavaScript files are served. For example, `https://example.com/static/` or `/static/`. |
+| `errorTracking.sourcemaps.service` | String | Yes | None | Service name. Must match the RUM SDK `service` initialization parameter. |
+| `errorTracking.sourcemaps.releaseVersion` | String | Yes | None | Release version. Must match the RUM SDK `version` initialization parameter. |
+| `errorTracking.sourcemaps.minifiedPathPrefix` | String | Yes | None | URL or root-relative path prefix for your minified JavaScript files are served. For example, `https://example.com/static/` or `/static/`. |
 | `errorTracking.sourcemaps.bailOnError` | Boolean | No | `false` | If `true`, the build fails when a source map upload error occurs. |
-| `errorTracking.sourcemaps.dryRun` | Boolean | No | `false` | If `true`, the plugin validates and prepares uploads without sending data to Datadog. |
+| `errorTracking.sourcemaps.dryRun` | Boolean | No | `false` | If `true`, the plugin runs through the upload process without sending data to Datadog. Use this to verify your configuration. |
 | `errorTracking.sourcemaps.maxConcurrency` | Number | No | `20` | Maximum number of concurrent source map uploads. |
 
 The following environment variables override configuration values:
@@ -71,7 +71,7 @@ module.exports = {
 
 <div class="alert alert-info">This example uses webpack. The configuration object is identical across all supported bundlers — only the import and plugin function name differ. See <a href="/real_user_monitoring/application_monitoring/browser/build_plugins/">Build Plugins</a> for installation instructions for your bundler.</div>
 
-For the best debugging experience, pair source map uploads with the [Source Code Context][5] plugin. Source maps provide file mapping for de-obfuscation, and source code context enables inline source code display in Error Tracking stack traces. See the [Source Code Context][5] page for the `rum.sourceCodeContext` configuration.
+To also display inline source code in Error Tracking stack traces, pair source map uploads with the [Source Code Context][5] plugin. Source maps provide the file mapping; source code context provides the service and version association.
 
 ## Further reading
 

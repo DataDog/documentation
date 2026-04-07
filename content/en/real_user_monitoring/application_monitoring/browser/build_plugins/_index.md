@@ -16,12 +16,7 @@ further_reading:
 
 Datadog build plugins integrate with your JavaScript bundler to automate common RUM tasks during your build process. They are available for webpack, Vite, esbuild, Rollup, and Rspack.
 
-Build plugins are complementary to the RUM Browser SDK. You still need to configure the SDK as described in the [Browser Monitoring Setup][1]. Build plugins add build-time automation on top of your existing SDK configuration.
-
-Available plugins:
-- **[Source Maps][2]**: Automatically upload source maps to Datadog during your build, enabling de-obfuscated stack traces.
-- **[Action Name Deobfuscation][3]**: Restore readable action names in minified builds by generating a build-time privacy dictionary.
-- **[Source Code Context][4]**: Display source code inline in Error Tracking stack traces by injecting service and version metadata.
+Build plugins are complementary to the RUM Browser SDK. You still need to configure the SDK as described in the [Browser Monitoring Setup][1].
 
 ## Installation
 
@@ -137,11 +132,11 @@ The following shared configuration options apply to all plugins:
 
 | Parameter | Type | Required | Default | Description |
 |-----------|------|----------|---------|-------------|
-| `auth.apiKey` | String | Yes (for upload features) | — | Your Datadog API key. Can also be set with the `DATADOG_API_KEY` environment variable. |
+| `auth.apiKey` | String | Yes (Source Maps only) | None | Your Datadog API key. Can also be set with the `DATADOG_API_KEY` environment variable. |
 | `auth.site` | String | No | `datadoghq.com` | Your Datadog site. Can also be set with the `DATADOG_SITE` or `DD_SITE` environment variable. |
 | `logLevel` | String | No | `warn` | Log verbosity level. One of `debug`, `info`, `warn`, `error`, or `none`. |
 
-The following example shows the full configuration skeleton with all available plugin options:
+The following example shows the full configuration structure:
 
 ```javascript
 datadogWebpackPlugin({
@@ -165,7 +160,7 @@ datadogWebpackPlugin({
 ## Available plugins
 
 {{< whatsnext desc="Configure individual build plugins:" >}}
-  {{< nextlink href="/real_user_monitoring/application_monitoring/browser/build_plugins/source_maps" >}}<u>Source Maps</u>: Automatically upload source maps to Datadog during your build.{{< /nextlink >}}
+  {{< nextlink href="/real_user_monitoring/application_monitoring/browser/build_plugins/source_maps" >}}<u>Source Maps</u>: Automatically upload source maps to Datadog during your build, enabling deobfuscated stack traces.{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/application_monitoring/browser/build_plugins/action_name_deobfuscation" >}}<u>Action Name Deobfuscation</u>: Restore readable action names in minified builds.{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/application_monitoring/browser/build_plugins/source_code_context" >}}<u>Source Code Context</u>: Display source code inline in Error Tracking stack traces.{{< /nextlink >}}
 {{< /whatsnext >}}
@@ -175,6 +170,3 @@ datadogWebpackPlugin({
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /real_user_monitoring/application_monitoring/browser/setup/
-[2]: /real_user_monitoring/application_monitoring/browser/build_plugins/source_maps
-[3]: /real_user_monitoring/application_monitoring/browser/build_plugins/action_name_deobfuscation
-[4]: /real_user_monitoring/application_monitoring/browser/build_plugins/source_code_context

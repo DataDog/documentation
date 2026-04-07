@@ -22,7 +22,7 @@ further_reading:
 
 When viewing errors in [Error Tracking][1], Datadog can display the source code lines surrounding each frame in the stack trace. The Source Code Context build plugin enables this feature by injecting a small runtime snippet into your bundle that associates stack traces with your `service` and `version` metadata.
 
-At build time, the plugin injects a small, SSR-safe snippet that writes metadata to `window.DD_SOURCE_CODE_CONTEXT`. At runtime, the RUM SDK reads `DD_SOURCE_CODE_CONTEXT` to tag errors with the correct service and version for source code resolution. This works in conjunction with [uploaded source maps][2] — source maps provide the file mapping, and `DD_SOURCE_CODE_CONTEXT` provides the service and version association.
+At build time, the plugin injects a snippet that writes metadata to `window.DD_SOURCE_CODE_CONTEXT`. At runtime, the RUM SDK reads `window.DD_SOURCE_CODE_CONTEXT` to tag errors with the correct service and version for source code resolution. This works in conjunction with [uploaded source maps][2] — source maps provide the file mapping, and `window.DD_SOURCE_CODE_CONTEXT` provides the service and version association.
 
 ## Prerequisites
 
@@ -36,8 +36,8 @@ Configure the `rum.sourceCodeContext` object in your build plugin options:
 
 | Parameter | Type | Required | Default | Description |
 |-----------|------|----------|---------|-------------|
-| `rum.sourceCodeContext.service` | String | Yes | — | Service name. Must match the RUM SDK `service` initialization parameter. |
-| `rum.sourceCodeContext.version` | String | No | — | Release version. If set, must match the RUM SDK `version` initialization parameter. |
+| `rum.sourceCodeContext.service` | String | Yes | None | Service name. Must match the RUM SDK `service` initialization parameter. |
+| `rum.sourceCodeContext.version` | String | No | None | Release version. If set, must match the RUM SDK `version` initialization parameter. |
 
 ## Example
 
