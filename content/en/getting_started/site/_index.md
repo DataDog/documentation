@@ -8,9 +8,6 @@ further_reading:
 - link: '/agent/configuration/dual-shipping/'
   tag: 'Guide'
   text: 'Dual Shipping'
-- link: "https://www.datadoghq.com/blog/resource-catalog-natural-language-querying"
-  tag: "Blog"
-  text: "Use plain English to query your multi-cloud infrastructure in Resource Catalog"
 algolia:
   tags: ['site','datadog site']
 ---

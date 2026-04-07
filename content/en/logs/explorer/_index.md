@@ -25,9 +25,6 @@ further_reading:
     - link: https://www.datadoghq.com/blog/ai-powered-log-parsing
       tag: Blog
       text: Accelerate investigations with AI-powered log parsing
-    - link: "https://www.datadoghq.com/blog/oracle-fusion-applications-integration"
-      tag: "Blog"
-      text: "Monitor Oracle Fusion Cloud Applications with Datadog"
 ---
 
 ## Overview

@@ -5,9 +5,6 @@ aliases:
 - /cloud_cost_management/monitors
 - /cloud_cost_management/reporting/monitors
 further_reading:
-- link: "https://www.datadoghq.com/blog/monitor-karpenter-datadog"
-  tag: "Blog"
-  text: "Monitor Karpenter with Datadog"
 - link: "https://www.datadoghq.com/blog/ccm-cost-monitors/"
   tag: "Blog"
   text: "React quickly to cost overruns with Cost Monitors for Datadog Cloud Cost Management"

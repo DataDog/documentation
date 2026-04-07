@@ -18,9 +18,6 @@ further_reading:
 - link: 'https://www.datadoghq.com/blog/zendesk-session-replay-integration/'
   tag: 'Blog'
   text: 'Visually replay user-facing issues with Zendesk and Datadog Session Replay'
-- link: "https://www.datadoghq.com/blog/javascript-css-optimization"
-  tag: "Blog"
-  text: "How to optimize JavaScript code with CSS"
 - link: '/real_user_monitoring/explorer'
   tag: 'Documentation'
   text: 'Visualize your RUM data in the Explorer'

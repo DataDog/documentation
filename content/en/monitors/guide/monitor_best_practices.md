@@ -2,9 +2,6 @@
 title: Monitor Best Practices
 description: "Learn best practices for creating effective monitors including clear titles, multi-alerts, context, and using Monitor Quality for optimization."
 further_reading:
-- link: "https://www.datadoghq.com/blog/datadog-migration-mindset"
-  tag: "Blog"
-  text: "Approaching your observability migration with the right mindset"
 - link: "/monitors/"
   tag: "Documentation"
   text: "Learn more about monitors"

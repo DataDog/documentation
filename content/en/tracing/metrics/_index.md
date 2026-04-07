@@ -11,9 +11,6 @@ further_reading:
     - link: 'monitors/'
       tag: "Documentation"
       text: 'Create and manage monitors to notify your teams when it matters.'
-    - link: "https://www.datadoghq.com/blog/guardrail-metrics"
-      tag: "Blog"
-      text: "Make use of guardrail metrics and stop babysitting your releases"
 ---
 
 ## Trace metrics

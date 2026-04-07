@@ -7,9 +7,6 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-risk-management"
   tag: "Blog"
   text: "How we centralize and remediate risks with Datadog Case Management"
-- link: "https://www.datadoghq.com/blog/cloud-security-oci"
-  tag: "Blog"
-  text: "Protect your OCI resources with Datadog Cloud Security"
 - link: https://www.datadoghq.com/blog/datadog-forms
   tag: Blog
   text: Turn feedback into action across your engineering org with Datadog Forms

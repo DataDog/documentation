@@ -11,12 +11,6 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/autodiscovery-docker-monitoring/"
   tag: "Blog"
   text: "Learn more about Autodiscovery"
-- link: "https://www.datadoghq.com/blog/monitor-karpenter-datadog"
-  tag: "Blog"
-  text: "Monitor Karpenter with Datadog"
-- link: "https://www.datadoghq.com/blog/datadog-migration-mindset"
-  tag: "Blog"
-  text: "Approaching your observability migration with the right mindset"
 algolia:
   tags: ['unified service tags','unified','unified service','service tags']
 ---

@@ -21,12 +21,6 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/ai-powered-metrics-monitoring/"
   tag: "Blog"
   text: "Anomaly detection, predictive correlations - Using AI-assisted metrics monitoring"
-- link: "https://www.datadoghq.com/blog/monitoring-load-balancer-logs"
-  tag: "Blog"
-  text: "Monitor your application and network load balancer logs"
-- link: "https://www.datadoghq.com/blog/velocloud-sdwan-integration"
-  tag: "Blog"
-  text: "Monitor Arista VeloCloud SD-WAN performance with Datadog"
 algolia:
   rank: 70
   tags: ['anomaly', 'anomaly monitor']
