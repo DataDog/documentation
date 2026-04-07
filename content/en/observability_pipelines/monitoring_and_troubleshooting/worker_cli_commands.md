@@ -22,7 +22,7 @@ If you are using a containerized environment, use the `docker exec` or `kubectl 
 |-----------|-----------------------------------------------------------------------------------------------------------------------|
 | `run`     | Run the observability pipeline worker.                                                                                |
 | `tap`     | Tap a pipeline to observe events from source or transform components. See [tap options](#tap-options).                |
-| `top`     | Lists the components of the pipeline and provides statistics such as input and output data rates for each component.  |
+| `top`     | Lists the components of the pipeline and provides statistics such as input and output data rates for each component.Enter `?` to see all available keybinds.  |
 
 ### Tap options
 

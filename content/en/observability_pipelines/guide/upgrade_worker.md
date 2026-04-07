@@ -56,7 +56,7 @@ Worker version 2.14.0 gives you access to the following:
 - For the Enrichment Table processor, the local cache retention time of entries not found in a Reference Table has been increased from 10 minutes to 30 minutes.
 - The Database Source SQL validation checks have been improved.
 - The Sensitive Data Scanner library has been updated with new and updated OOTB scanning rules for PII, credentials, and financial data, and minor bugs have been fixed.
-- New keybinds to the `vector top` command for scrolling, sorting and filtering have been added. Press `?` when using `vector top` to see all available keybinds.
+- The `observability-pipelines-worker top` command has new keybinds for scrolling, sorting and filtering.
 - The `component_latency_seconds` histogram and `component_latency_mean_seconds` gauge internal metrics have been added, exposing the time an event spends in a single processor including the processor buffer.
 - The Datadog Logs destination has been updated to default to `zstd` compression instead of no compression.
 
@@ -85,7 +85,7 @@ Worker version 2.13.2 gives you access to the following:
 
 #### Fixes
 
-- Fix *exists* and *missing* queries to match with objects.
+- Fix `exists` and `missing` queries to match with objects.
 
 ---
 
