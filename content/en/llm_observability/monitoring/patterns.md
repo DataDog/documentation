@@ -1,9 +1,6 @@
 ---
 title: Patterns
 description: Discover and analyze production traffic patterns in your LLM applications with automated topic clustering.
-aliases:
-  - "/llm_observability/cluster_map"
-  - "/llm_observability/monitoring/cluster_map"
 further_reading:
 - link: "/llm_observability/"
   tag: "Documentation"
