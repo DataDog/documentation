@@ -27,9 +27,6 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/mobile-apps-synthetic-tests/"
   tag: "Blog"
   text: "How to build reliable and accurate synthetic tests for your mobile apps"
-- link: "https://www.datadoghq.com/blog/mobile-apps-synthetic-tests/"
-  tag: "Blog"
-  text: "How to build reliable and accurate synthetic tests for your mobile apps"
 cascade:
   algolia:
     tags: ['mobile_testing']
