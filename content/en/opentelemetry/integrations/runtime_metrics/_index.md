@@ -149,10 +149,6 @@ After setup is complete, you can view runtime metrics in:
 
 ## Data collected
 
-When using OpenTelemetry runtime metrics with Datadog, you receive both:
-- Original OpenTelemetry runtime metrics
-- Mapped Datadog runtime metrics for equivalent metrics
-
 The following tables list the OpenTelemetry runtime metrics used in Datadog's out-of-the-box in-app experiences. "N/A" indicates that no OpenTelemetry equivalent metric is available.
 
 <div class="alert alert-danger"> OpenTelemetry runtime metrics are mapped to Datadog by metric name. Do not rename host metrics for OpenTelemetry runtime metrics as this breaks the mapping.</div>
