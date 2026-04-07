@@ -70,6 +70,19 @@ Custom links enhance data interaction by connecting widget data values to releva
 
 To customize interactions with data inline your generic widgets, see [Context Links][2].
 
+## Widget descriptions
+
+Widget descriptions let you add a text description to any dashboard widget, including timeseries, geomap, and bar chart widgets. Use descriptions to provide context about a metric, such as what it represents, how to interpret it, or what action to take.
+
+To add a description:
+1. Open the graph editor for the widget.
+2. In the **Description** field at the bottom of the editor, enter a description.
+3. Click **Save**.
+
+After saving, hover over the description icon in the top-left corner of the widget to view the description.
+
+{{< img src="dashboards/widgets/configuration/widget-description-hover.png" alt="A bar chart widget titled 'Avg CPU User % by Service (Top 10)' with the cursor hovering over the description icon in the top-left corner, displaying the description tooltip above the widget." >}}
+
 ## Metrics info
 
 On a metric graph, click the context menu (three vertical dots) to find the **Metrics Info** option. This opens a panel with a description of the metric. Clicking on the metric name in this panel opens the metric in the metric summary page for further analysis or edits.
@@ -134,28 +147,28 @@ View the graph in [full screen mode](#full-screen).
 
 Click on the export icon of any dashboard graph to open an options menu:
 
-| Option                 | Description                                                        |
-|------------------------|--------------------------------------------------------------------|
-| Copy                   | Create a copy of the dashboard graph.                              |
-| Share snapshot         | Create and send a snapshot of your graph.                          |
+| Option         | Description                               |
+|----------------|-------------------------------------------|
+| Copy           | Create a copy of the dashboard graph.     |
+| Share snapshot | Create and send a snapshot of your graph. |
 
 #### Use within Datadog
 
-| Option                 | Description                                                        |
-|------------------------|--------------------------------------------------------------------|
-| Declare incident       | Declare an incident from the graph.                                |
-| Add to incident        | Add the graph to an existing incident.                             |
-| Create case            | Create a case from the graph.                                      |
-| Save to notebook       | Save the graph to a notebook.                                      |
-| Link to widget         | Get a link to the widget copied to your clipboard.                 |
+| Option           | Description                                        |
+|------------------|----------------------------------------------------|
+| Declare incident | Declare an incident from the graph.                |
+| Add to incident  | Add the graph to an existing incident.             |
+| Create case      | Create a case from the graph.                      |
+| Save to notebook | Save the graph to a notebook.                      |
+| Link to widget   | Get a link to the widget copied to your clipboard. |
 
 #### Share externally
 
-| Format | Description            |
-| -----  | ----------------------- |
-| Download as PNG    | Download the widget in PNG format. |
-| Download as SVG    | Download the widget in SVG format. |
-| Download as CSV    | Download the widget in CSV format. |
+| Format          | Description                        |
+|-----------------|------------------------------------|
+| Download as PNG | Download the widget in PNG format. |
+| Download as SVG | Download the widget in SVG format. |
+| Download as CSV | Download the widget in CSV format. |
 
 ### Edit
 
@@ -165,15 +178,15 @@ Click on the pencil icon of any dashboard graph to make edits.
 
 Click on the context menu (three vertical dots) of any dashboard graph to open an options menu:
 
-| Option                 | Description                                                        |
-|------------------------|--------------------------------------------------------------------|
-| Edit                              | Edit the graph.                                         |
-| Clone                             | Create an adjacent copy of the graph.                   |
-| Split graph                       | Create a [split graph][10].                             |
-| Create custom links               | Create [custom links](#custom-links).                   |
-| Create monitor                    | Create a monitor preconfigured with the graph's query.  |
-| Metrics info (metric graphs only) | Get a description of the metrics in this graph. You can click on the metric names to open them in the Metric Summary page.            |
-| Delete                            | Delete the graph.                                       |
+| Option                            | Description                                                                                                                |
+|-----------------------------------|----------------------------------------------------------------------------------------------------------------------------|
+| Edit                              | Edit the graph.                                                                                                            |
+| Clone                             | Create an adjacent copy of the graph.                                                                                      |
+| Split graph                       | Create a [split graph][10].                                                                                                |
+| Create custom links               | Create [custom links](#custom-links).                                                                                      |
+| Create monitor                    | Create a monitor preconfigured with the graph's query.                                                                     |
+| Metrics info (metric graphs only) | Get a description of the metrics in this graph. You can click on the metric names to open them in the Metric Summary page. |
+| Delete                            | Delete the graph.                                                                                                          |
 
 ## Further Reading
 
