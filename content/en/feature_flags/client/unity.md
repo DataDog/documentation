@@ -1,8 +1,6 @@
 ---
 title: Unity Feature Flags
 description: Set up Datadog Feature Flags for Unity applications.
-aliases:
-  - /feature_flags/setup/unity/
 further_reading:
 - link: "/feature_flags/client/"
   tag: "Documentation"
@@ -27,7 +25,7 @@ Declare the Datadog Unity SDK as a dependency in your project. The Datadog Unity
 
 1. Install the [External Dependency Manager for Unity (EDM4U)][1]. This can be done using [Open UPM][2].
 
-2. Add the Datadog SDK Unity package from its Git URL at [https://github.com/DataDog/unity-package][3]. The package URL is `https://github.com/DataDog/unity-package.git`.
+2. Add the [Datadog SDK Unity package][3] using its Git URL `https://github.com/DataDog/unity-package.git`.
 
 3. (Android only) Configure your project to use [Gradle templates][4], and enable both `Custom Main Template` and `Custom Gradle Properties Template`.
 
@@ -77,7 +75,7 @@ var checkoutClient = DdFlags.Instance.CreateClient("checkout");
 
 ## Set the evaluation context
 
-Define who or what the flag evaluation applies to using a `FlagsEvaluationContext`. The evaluation context includes user or session information used to determine which flag variations should be returned. Call this method before evaluating flags to ensure proper targeting.
+Define who or what the flag evaluation applies to using a `FlagsEvaluationContext`. The evaluation context includes user or session information used to determine which flag variations should be returned. Call this method before evaluating flags to help ensure proper targeting.
 
 {{< code-block lang="csharp" >}}
 client.SetEvaluationContext(
@@ -103,7 +101,7 @@ client.SetEvaluationContext(
 );
 {{< /code-block >}}
 
-This method fetches flag assignments from the server asynchronously in the background. The operation is non-blocking and thread-safe. Flag updates are available for subsequent evaluations once the background operation completes.
+This method fetches flag assignments from the server asynchronously in the background. The operation is non-blocking and thread-safe. Flag updates are available for subsequent evaluations after the background operation completes.
 
 ## Evaluate flags
 
