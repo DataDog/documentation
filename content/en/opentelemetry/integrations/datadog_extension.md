@@ -29,7 +29,7 @@ The Datadog Extension allows you to view OpenTelemetry Collector configuration a
 
 ## Setup
 
-<div class="alert alert-danger">If you use the <a href="/opentelemetry/setup/ddot_collector/">DDOT Collector</a>, do <strong>not</strong> manually add the Datadog Extension on Agent versions earlier than v7.76.0. Adding the extension on these versions causes duplicate Collector entries in Fleet Automation.</div>
+<div class="alert alert-danger">If you use the <a href="/opentelemetry/setup/ddot_collector/">DDOT Collector</a>, do <strong>not</strong> manually add the Datadog Extension. It is already enabled by default on Agent v7.76.0+, and manually adding it on earlier versions causes duplicate Collector entries in Fleet Automation.</div>
 
 ### 1. Add the Datadog Extension to your Collector configuration
 
