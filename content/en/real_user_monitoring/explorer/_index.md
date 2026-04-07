@@ -4,12 +4,6 @@ description: "Explore and analyze RUM data to investigate performance issues, na
 aliases:
 - /real_user_monitoring/rum_explorer
 further_reading:
-- link: "https://www.datadoghq.com/blog/rum-mobile-app-launch-monitoring"
-  tag: "Blog"
-  text: "Measure and improve mobile app startup performance with Datadog RUM"
-- link: "https://www.datadoghq.com/blog/rum-apm-retention-filters"
-  tag: "Blog"
-  text: "Unify and correlate frontend and backend data with retention filters"
 - link: "/real_user_monitoring/explorer/search/"
   tag: "Documentation"
   text: "Learn more about search in the RUM Explorer"
@@ -19,6 +13,12 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/modern-frontend-monitoring/"
   tag: "Blog"
   text: "Start monitoring single-page applications"
+- link: "https://www.datadoghq.com/blog/rum-mobile-app-launch-monitoring"
+  tag: "Blog"
+  text: "Measure and improve mobile app startup performance with Datadog RUM"
+- link: "https://www.datadoghq.com/blog/rum-apm-retention-filters"
+  tag: "Blog"
+  text: "Unify and correlate frontend and backend data with retention filters"
 ---
 
 ## Overview

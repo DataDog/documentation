@@ -6,9 +6,6 @@ aliases:
 algolia:
   tags: ["Datadog mobile app", "mobile device"]
 further_reading:
-- link: "https://www.datadoghq.com/blog/designing-on-call-sounds"
-  tag: "Blog"
-  text: "How we designed empathetic alert sounds for on-call engineers"
 - link: "/mobile/shortcut_configurations/"
   tag: "Documentation"
   text: "Shortcut Configurations"
@@ -27,6 +24,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/mobile-app-reduce-mttr/"
   tag: "Blog"
   text: "Reduce your mean time to repair with the Datadog mobile app"
+- link: "https://www.datadoghq.com/blog/designing-on-call-sounds"
+  tag: "Blog"
+  text: "How we designed empathetic alert sounds for on-call engineers"
 ---
 
 The Datadog Mobile app enables you to view alerts from Datadog on your mobile device. When receiving an alert through On-Call, Slack, or email, you can investigate issues by opening monitor graphs and dashboards on your mobile device.

@@ -2,15 +2,15 @@
 title: Getting Started with Datadog Sites
 description: Learn about different Datadog sites for your region and security requirements, including government-compliant options.
 further_reading:
-- link: "https://www.datadoghq.com/blog/resource-catalog-natural-language-querying"
-  tag: "Blog"
-  text: "Use plain English to query your multi-cloud infrastructure in Resource Catalog"
 - link: 'https://learn.datadoghq.com/courses/dashboards-slos'
   tag: 'Learning Center'
   text: 'Create Business-Critical Insights Using Dashboards and SLOs'
 - link: '/agent/configuration/dual-shipping/'
   tag: 'Guide'
   text: 'Dual Shipping'
+- link: "https://www.datadoghq.com/blog/resource-catalog-natural-language-querying"
+  tag: "Blog"
+  text: "Use plain English to query your multi-cloud infrastructure in Resource Catalog"
 algolia:
   tags: ['site','datadog site']
 ---

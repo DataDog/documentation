@@ -4,15 +4,6 @@ description: "Parse, enrich, and manage your logs with Datadog pipelines and pro
 aliases:
   - /logs/processing/pipelines/
 further_reading:
-- link: "https://www.datadoghq.com/blog/monitoring-load-balancer-logs"
-  tag: "Blog"
-  text: "Monitor your application and network load balancer logs"
-- link: "https://www.datadoghq.com/blog/cloud-siem-ocsf-processor"
-  tag: "Blog"
-  text: "Normalize any logs for Cloud SIEM with Datadog's OCSF processor"
-- link: https://www.datadoghq.com/blog/internal-monitoring-email-delivery
-  tag: Blog
-  text: How we use Datadog to get comprehensive, fine-grained visibility into our email delivery system
 - link: "/logs/log_configuration/processors"
   tag: "Documentation"
   text: "Consult the full list of available Processors"
@@ -37,6 +28,15 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/ocsf-common-data-model/"
   tag: "Blog"
   text: "Normalize your data with the OCSF Common Data Model in Datadog Cloud SIEM"
+- link: "https://www.datadoghq.com/blog/monitoring-load-balancer-logs"
+  tag: "Blog"
+  text: "Monitor your application and network load balancer logs"
+- link: "https://www.datadoghq.com/blog/cloud-siem-ocsf-processor"
+  tag: "Blog"
+  text: "Normalize any logs for Cloud SIEM with Datadog's OCSF processor"
+- link: https://www.datadoghq.com/blog/internal-monitoring-email-delivery
+  tag: Blog
+  text: "How we use Datadog to get comprehensive, fine-grained visibility into our email delivery system"
 ---
 
 ## Overview

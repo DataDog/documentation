@@ -16,7 +16,7 @@ further_reading:
   tag: "Blog"
   text: "Understand user experience through network performance with Datadog Synthetic Monitoring"
 - link: "/synthetics/network_path_tests/glossary/"
-  tag: "Doc"
+  tag: "Documentation"
   text: "Network Path terms and concepts"
 ---
 

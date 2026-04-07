@@ -4,15 +4,6 @@ disable_toc: true
 aliases:
   - /security/cloud_siem/content_packs
 further_reading:
-- link: "https://www.datadoghq.com/blog/cloud-siem-whats-new-rsa-2026"
-  tag: "Blog"
-  text: "What's new in Cloud SIEM: AI-powered investigations, enhanced threat intelligence, and scalable security operations"
-- link: "https://www.datadoghq.com/blog/cloud-siem-enterprise-security"
-  tag: "Blog"
-  text: "Datadog Cloud SIEM: Driving innovation in security operations"
-- link: https://www.datadoghq.com/blog/oci-content-pack
-  tag: Blog
-  text: Monitor OCI Audit Logs with Datadog Cloud SIEM
 - link: "/security/cloud_siem/detection_rules"
   tag: "Documentation"
   text: "Create log detection rules"
@@ -34,6 +25,15 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/ocsf-common-data-model/"
   tag: "Blog"
   text: "Normalize your data with the OCSF Common Data Model in Datadog Cloud SIEM"
+- link: "https://www.datadoghq.com/blog/cloud-siem-whats-new-rsa-2026"
+  tag: "Blog"
+  text: "What's new in Cloud SIEM: AI-powered investigations, enhanced threat intelligence, and scalable security operations"
+- link: "https://www.datadoghq.com/blog/cloud-siem-enterprise-security"
+  tag: "Blog"
+  text: "Datadog Cloud SIEM: Driving innovation in security operations"
+- link: https://www.datadoghq.com/blog/oci-content-pack
+  tag: Blog
+  text: Monitor OCI Audit Logs with Datadog Cloud SIEM
 ---
 
 ## Overview

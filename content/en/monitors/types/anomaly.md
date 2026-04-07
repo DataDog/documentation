@@ -6,12 +6,6 @@ aliases:
     - /monitors/create/types/anomaly/
 description: "Detects anomalous behavior for a metric based on historical data"
 further_reading:
-- link: "https://www.datadoghq.com/blog/monitoring-load-balancer-logs"
-  tag: "Blog"
-  text: "Monitor your application and network load balancer logs"
-- link: "https://www.datadoghq.com/blog/velocloud-sdwan-integration"
-  tag: "Blog"
-  text: "Monitor Arista VeloCloud SD-WAN performance with Datadog"
 - link: "/monitors/notify/"
   tag: "Documentation"
   text: "Configure your monitor notifications"
@@ -26,7 +20,13 @@ further_reading:
   text: Anomalies function
 - link: "https://www.datadoghq.com/blog/ai-powered-metrics-monitoring/"
   tag: "Blog"
-  text: Anomaly detection, predictive correlations - Using AI-assisted metrics monitoring
+  text: "Anomaly detection, predictive correlations - Using AI-assisted metrics monitoring"
+- link: "https://www.datadoghq.com/blog/monitoring-load-balancer-logs"
+  tag: "Blog"
+  text: "Monitor your application and network load balancer logs"
+- link: "https://www.datadoghq.com/blog/velocloud-sdwan-integration"
+  tag: "Blog"
+  text: "Monitor Arista VeloCloud SD-WAN performance with Datadog"
 algolia:
   rank: 70
   tags: ['anomaly', 'anomaly monitor']

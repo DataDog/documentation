@@ -13,9 +13,6 @@ aliases:
     - /dashboards/timeboards/
 description: Visualize your data to gain insight
 further_reading:
-  - link: "https://app.datadoghq.com/release-notes?category=Dashboards"
-    tag: "Release Notes"
-    text: "Check out the latest Datadog Dashboards releases! (App login required)."
   - link: "/dashboards/sharing/"
     tag: "Documentation"
     text: "Share your Graphs outside of Datadog"
@@ -34,9 +31,6 @@ further_reading:
   - link: "https://dtdg.co/fe"
     tag: "Foundation Enablement"
     text: "Join an interactive session on better visualizations with Dashboards"
-  - link: "https://www.datadoghq.com/blog/rum-mobile-app-launch-monitoring"
-    tag: "Blog"
-    text: "Measure and improve mobile app startup performance with Datadog RUM"
 cascade:
     algolia:
         rank: 70

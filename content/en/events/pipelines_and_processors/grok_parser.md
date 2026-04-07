@@ -3,12 +3,10 @@ title: Grok Parser
 aliases:
 - /service_management/events/pipelines_and_processors/grok_parser/
 description: Create custom grok rules to parse the full message or specific attributes of raw events into structured data
-
 further_reading:
 - link: "https://www.datadoghq.com/blog/monitoring-load-balancer-logs"
   tag: "Blog"
   text: "Monitor your application and network load balancer logs"
-
 ---
 
 ## Overview

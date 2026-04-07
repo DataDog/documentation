@@ -6,15 +6,15 @@ aliases:
   - /service_management/app_builder/build
 disable_toc: false
 further_reading:
-- link: "https://www.datadoghq.com/blog/bits-ai-sre-deeper-reasoning"
-  tag: "Blog"
-  text: "Meet the new Bits AI SRE: Deeper reasoning, twice as fast"
 - link: "/actions/actions_catalog/"
   tag: "Documentation"
   text: "Action Catalog"
 - link: "https://learn.datadoghq.com/courses/getting-started-app-builder/"
   tag: "Learning Center"
   text: "Getting Started with App Builder"
+- link: "https://www.datadoghq.com/blog/bits-ai-sre-deeper-reasoning"
+  tag: "Blog"
+  text: "Meet the new Bits AI SRE: Deeper reasoning, twice as fast"
 ---
 
 You can create an app or edit existing apps from the [App Builder][1] page. The page lists information about existing apps, including the following:

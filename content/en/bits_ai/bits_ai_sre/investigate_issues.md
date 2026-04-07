@@ -3,12 +3,10 @@ title: Investigate Issues
 description: "Use Bits AI SRE to automatically investigate monitor alerts and provide root cause analysis for faster incident resolution."
 aliases:
 - /bits_ai/bits_ai_sre/investigate_alerts/
-
 further_reading:
 - link: "https://www.datadoghq.com/blog/bits-ai-sre-deeper-reasoning"
   tag: "Blog"
   text: "Meet the new Bits AI SRE: Deeper reasoning, twice as fast"
-
 ---
 
 ## Start a Bits AI SRE investigation

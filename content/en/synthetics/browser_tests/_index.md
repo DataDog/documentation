@@ -5,15 +5,9 @@ aliases:
   - /synthetics/browser_check
   - /synthetics/browser_test
 further_reading:
-- link: "https://www.datadoghq.com/blog/simplifying-troubleshooting-with-synthetic-monitoring"
-  tag: "Blog"
-  text: "Simplifying troubleshooting across the user journey with Datadog Synthetic Monitoring"
 - link: "/synthetics/guide/version_history/"
   tag: "Guide"
   text: "Version History for Synthetic Monitoring"
-- link: "https://www.datadoghq.com/blog/test-creation-best-practices/"
-  tag: "Blog"
-  text: "Best practices for creating end-to-end tests"
 - link: 'https://learn.datadoghq.com/courses/getting-started-with-synthetic-browser-testing'
   tag: 'Learning Center'
   text: 'Datadog Learning Center: Getting started with Synthetic Browser Testing'
@@ -23,12 +17,18 @@ further_reading:
 - link: "/synthetics/guide/synthetic-test-monitors"
   tag: "Documentation"
   text: "Learn about Synthetic test monitors"
-- link: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_test"
-  tag: "External Site"
-  text: "Create and manage Synthetic Browser Tests with Terraform"
+- link: "https://www.datadoghq.com/blog/test-creation-best-practices/"
+  tag: "Blog"
+  text: "Best practices for creating end-to-end tests"
+- link: "https://www.datadoghq.com/blog/simplifying-troubleshooting-with-synthetic-monitoring"
+  tag: "Blog"
+  text: "Simplifying troubleshooting across the user journey with Datadog Synthetic Monitoring"
 - link: "https://www.datadoghq.com/blog/ambassador-browser-tests/"
   tag: "Blog"
   text: "How I helped my client scale their browser tests with Datadog"
+- link: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_test"
+  tag: "External Site"
+  text: "Create and manage Synthetic Browser Tests with Terraform"
 ---
 
 ## Overview

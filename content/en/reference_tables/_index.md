@@ -6,12 +6,6 @@ aliases:
   - /logs/guide/reference-tables/
   - /integrations/guide/reference-tables
 further_reading:
-- link: "https://www.datadoghq.com/blog/observability-pipelines-servicenow-cmdb-enrichment"
-  tag: "Blog"
-  text: "Enrich logs with ServiceNow CMDB context before routing to any SIEM or logging tool"
-- link: "https://www.datadoghq.com/blog/observability-pipelines-mssp"
-  tag: "Blog"
-  text: "Simplify log collection and aggregation for MSSPs with Datadog Observability Pipelines"
 - link: "/logs/log_configuration/processors"
   tag: "Documentation"
   text: "Use the lookup processor to enrich logs from a Reference Table"
@@ -39,6 +33,12 @@ further_reading:
 - link: 'https://www.datadoghq.com/blog/add-context-with-reference-tables-in-cloud-siem/'
   tag: 'Blog'
   text: 'Add more context to Cloud SIEM detections and investigations with Datadog Reference Tables'
+- link: "https://www.datadoghq.com/blog/observability-pipelines-servicenow-cmdb-enrichment"
+  tag: "Blog"
+  text: "Enrich logs with ServiceNow CMDB context before routing to any SIEM or logging tool"
+- link: "https://www.datadoghq.com/blog/observability-pipelines-mssp"
+  tag: "Blog"
+  text: "Simplify log collection and aggregation for MSSPs with Datadog Observability Pipelines"
 ---
 
 ## Overview

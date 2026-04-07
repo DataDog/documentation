@@ -1,12 +1,10 @@
 ---
 title: AWS Elastic Load Balancer Logs
 description: Learn more about the AWS Elastic Load Balancer Logs pack.
-
 further_reading:
 - link: "https://www.datadoghq.com/blog/monitoring-load-balancer-logs"
   tag: "Blog"
   text: "Monitor your application and network load balancer logs"
-
 ---
 
 ## Overview

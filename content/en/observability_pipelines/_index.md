@@ -2,15 +2,6 @@
 title: Observability Pipelines
 disable_toc: false
 further_reading:
-- link: "https://www.datadoghq.com/blog/monitoring-load-balancer-logs"
-  tag: "Blog"
-  text: "Monitor your application and network load balancer logs"
-- link: "https://www.datadoghq.com/blog/observability-pipelines-mssp"
-  tag: "Blog"
-  text: "Simplify log collection and aggregation for MSSPs with Datadog Observability Pipelines"
-- link: https://www.datadoghq.com/blog/manage-metrics-cost-control-with-observability-pipelines
-  tag: Blog
-  text: Manage metric volume and tags in your environment with Observability Pipelines
 - link: "/observability_pipelines/configuration/explore_templates/"
   tag: "documentation"
   text: "Set up pipelines"
@@ -65,6 +56,15 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/observability-pipelines-otel-cost-control/"
   tag: "Blog"
   text: "Use OpenTelemetry with Observability Pipelines for vendor-neutral log collection and cost control"
+- link: "https://www.datadoghq.com/blog/monitoring-load-balancer-logs"
+  tag: "Blog"
+  text: "Monitor your application and network load balancer logs"
+- link: "https://www.datadoghq.com/blog/observability-pipelines-mssp"
+  tag: "Blog"
+  text: "Simplify log collection and aggregation for MSSPs with Datadog Observability Pipelines"
+- link: https://www.datadoghq.com/blog/manage-metrics-cost-control-with-observability-pipelines
+  tag: Blog
+  text: Manage metric volume and tags in your environment with Observability Pipelines
 ---
 
 ## Overview

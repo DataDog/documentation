@@ -14,15 +14,15 @@ aliases:
     - /tracing/trace_collection/library_injection_remote
     - /tracing/trace_collection/automatic_instrumentation
 further_reading:
-- link: "https://www.datadoghq.com/blog/rum-apm-single-step"
-  tag: "Blog"
-  text: "Enable end-to-end visibility into your Java apps with a single command"
 - link: "tracing/trace_collection/compatibility"
   tag: "Documentation"
   text: "Compatibility requirements"
 - link: "/tracing/glossary/"
   tag: "Documentation"
   text: "APM Terms and Concepts"
+- link: "https://www.datadoghq.com/blog/rum-apm-single-step"
+  tag: "Blog"
+  text: "Enable end-to-end visibility into your Java apps with a single command"
 - link: "https://www.datadoghq.com/architecture/instrument-your-app-using-the-datadog-operator-and-admission-controller/"
   tag: "Architecture Center"
   text: "Instrument your app using the Datadog Operator and Admission Controller"

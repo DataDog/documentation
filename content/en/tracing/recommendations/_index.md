@@ -29,7 +29,6 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/apm-recommendations"
     tag: "Blog"
     text: "Improve performance and reliability with APM Recommendations"
-
 multifiltersearch:
   # "id" must match the corresponding key in the "data" object
   headers:
@@ -88,7 +87,6 @@ multifiltersearch:
       scope: Backend services
       recommendation_description: A backend application times out while calling a downstream dependency because the dependency responds too slowly, causing request failures that impact end users and increase the risk of cascading failures upstream.
       recommendation_prerequisite: APM + RUM
-
 ---
 
 APM Recommendations help you improve your applications' performance and reliability by surfacing optimization opportunities from your collected telemetry. These recommendations are designed to:

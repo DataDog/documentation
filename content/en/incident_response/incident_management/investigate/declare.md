@@ -3,12 +3,10 @@ title: Declare an Incident
 aliases:
 - /service_management/incident_management/declare/
 - /incident_response/incident_management/declare
-
 further_reading:
 - link: "https://www.datadoghq.com/blog/servicenow-datadog-incident-response"
   tag: "Blog"
   text: "Integrate ServiceNow ITSM with Datadog to Accelerate Incident Response"
-
 ---
 
 ## Overview

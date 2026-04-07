@@ -2,12 +2,10 @@
 title: Getting Started with Software Delivery
 description: Explore CI Visibility, feature flags, test optimization, and test impact analysis tools for software delivery workflows.
 disable_toc: true
-
 further_reading:
 - link: "https://www.datadoghq.com/blog/improve-test-cover-across-codebases-with-code-coverage"
   tag: "Blog"
   text: "Improve test coverage across codebases with Datadog Code Coverage"
-
 ---
 
 {{< whatsnext desc=" ">}}

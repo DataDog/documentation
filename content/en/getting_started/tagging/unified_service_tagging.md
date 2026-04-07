@@ -2,12 +2,6 @@
 title: Unified Service Tagging
 description: Connect telemetry across traces, metrics, and logs using standardized env, service, and version tags for consistent monitoring.
 further_reading:
-- link: "https://www.datadoghq.com/blog/monitor-karpenter-datadog"
-  tag: "Blog"
-  text: "Monitor Karpenter with Datadog"
-- link: "https://www.datadoghq.com/blog/datadog-migration-mindset"
-  tag: "Blog"
-  text: "Approaching your observability migration with the right mindset"
 - link: "/getting_started/tagging/using_tags"
   tag: "Documentation"
   text: "Learn how to use tags in the Datadog app"
@@ -17,6 +11,12 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/autodiscovery-docker-monitoring/"
   tag: "Blog"
   text: "Learn more about Autodiscovery"
+- link: "https://www.datadoghq.com/blog/monitor-karpenter-datadog"
+  tag: "Blog"
+  text: "Monitor Karpenter with Datadog"
+- link: "https://www.datadoghq.com/blog/datadog-migration-mindset"
+  tag: "Blog"
+  text: "Approaching your observability migration with the right mindset"
 algolia:
   tags: ['unified service tags','unified','unified service','service tags']
 ---

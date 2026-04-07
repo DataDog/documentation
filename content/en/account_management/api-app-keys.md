@@ -7,12 +7,10 @@ aliases:
     - /account_management/faq/api-app-key-management/
 algolia:
   tags: ['api key']
-
 further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-terraform-provider-v4"
   tag: "Blog"
   text: "Announcing the Datadog Terraform provider v4.0.0"
-
 ---
 
 ## API keys

@@ -1,18 +1,18 @@
 ---
 title: AI Guard
 further_reading:
-- link: "https://www.datadoghq.com/blog/datadog-achieves-iso-42001"
-  tag: "Blog"
-  text: "Datadog achieves ISO 42001 certification for responsible AI"
 - link: /security/ai_guard/onboarding/
   tag: Documentation
   text: Get Started with AI Guard
-- link: "https://www.datadoghq.com/blog/llm-guardrails-best-practices/"
-  tag: "Blog"
-  text: "LLM guardrails: Best practices for deploying LLM apps securely"
 - link: https://www.datadoghq.com/blog/ai-guard/
   tag: Blog
   text: Protect agentic AI applications with Datadog AI Guard
+- link: "https://www.datadoghq.com/blog/llm-guardrails-best-practices/"
+  tag: "Blog"
+  text: "LLM guardrails: Best practices for deploying LLM apps securely"
+- link: "https://www.datadoghq.com/blog/datadog-achieves-iso-42001"
+  tag: "Blog"
+  text: "Datadog achieves ISO 42001 certification for responsible AI"
 ---
 
 {{< site-region region="gov" >}}<div class="alert alert-danger">AI Guard isn't available in the {{< region-param key="dd_site_name" >}} site.</div>

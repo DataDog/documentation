@@ -5,21 +5,9 @@ aliases:
 - /continuous_integration/dora_metrics
 is_beta: true
 further_reading:
-- link: "https://www.datadoghq.com/blog/devsecops-2026-study-learnings"
-  tag: "Blog"
-  text: "Key learnings from the 2026 State of DevSecOps study"
 - link: "/dora_metrics/calculation/"
   tag: "Documentation"
   text: "Learn how Datadog calculates DORA metrics"
-- link: "https://app.datadoghq.com/release-notes?category=Software%20Delivery"
-  tag: "Release Notes"
-  text: "Check out the latest Software Delivery releases! (App login required)"
-- link: "https://www.datadoghq.com/blog/dora-metrics-software-delivery/"
-  tag: "Blog"
-  text: "Best practices for using DORA metrics to improve software delivery"
-- link: "https://www.datadoghq.com/blog/datadog-dora-metrics/"
-  tag: "Blog"
-  text: "3 ways to drive software delivery success with Datadog DORA Metrics"
 - link: "/continuous_delivery/deployments"
   tag: "Documentation"
   text: "Learn about Deployment Visibility"
@@ -32,6 +20,18 @@ further_reading:
 - link: "/software_catalog"
   tag: "Documentation"
   text: "Learn about the Software Catalog"
+- link: "https://app.datadoghq.com/release-notes?category=Software%20Delivery"
+  tag: "Release Notes"
+  text: "Check out the latest Software Delivery releases! (App login required)"
+- link: "https://www.datadoghq.com/blog/dora-metrics-software-delivery/"
+  tag: "Blog"
+  text: "Best practices for using DORA metrics to improve software delivery"
+- link: "https://www.datadoghq.com/blog/datadog-dora-metrics/"
+  tag: "Blog"
+  text: "3 ways to drive software delivery success with Datadog DORA Metrics"
+- link: "https://www.datadoghq.com/blog/devsecops-2026-study-learnings"
+  tag: "Blog"
+  text: "Key learnings from the 2026 State of DevSecOps study"
 ---
 
 ## Overview

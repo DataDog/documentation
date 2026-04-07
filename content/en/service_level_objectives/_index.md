@@ -8,12 +8,6 @@ aliases:
 - /service_management/service_level_objectives/ootb_dashboard
 - /service_management/service_level_objectives/
 further_reading:
-- link: "https://www.datadoghq.com/blog/rum-mobile-app-launch-monitoring"
-  tag: "Blog"
-  text: "Measure and improve mobile app startup performance with Datadog RUM"
-- link: "https://www.datadoghq.com/blog/slo-monitoring-tracking/"
-  tag: "Blog"
-  text: "Track the status and error budget of your SLOs with Datadog"
 - link: "https://learn.datadoghq.com/courses/intro-to-slo"
   tag: "Learning Center"
   text: "Introduction to Service Level Objectives"
@@ -29,15 +23,21 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/define-and-manage-slos/"
   tag: "Blog"
   text: "Best practices for managing your SLOs with Datadog"
-- link: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/service_level_objective"
-  tag: "External Site"
-  text: "Create and manage SLOs with Terraform"
 - link: "https://www.datadoghq.com/blog/burn-rate-is-better-error-rate/"
   tag: "Blog"
   text: "Burn Rate is a Better Error Rate"
 - link: "https://www.datadoghq.com/blog/datadog-executive-dashboards"
   tag: "Blog"
   text: "Design effective executive dashboards with Datadog"
+- link: "https://www.datadoghq.com/blog/rum-mobile-app-launch-monitoring"
+  tag: "Blog"
+  text: "Measure and improve mobile app startup performance with Datadog RUM"
+- link: "https://www.datadoghq.com/blog/slo-monitoring-tracking/"
+  tag: "Blog"
+  text: "Track the status and error budget of your SLOs with Datadog"
+- link: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/service_level_objective"
+  tag: "External Site"
+  text: "Create and manage SLOs with Terraform"
 ---
 
 {{< jqmath-vanilla >}}

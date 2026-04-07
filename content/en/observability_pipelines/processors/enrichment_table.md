@@ -5,12 +5,10 @@ products:
 - name: Logs
   icon: logs
   url: /observability_pipelines/configuration/?tab=logs#pipeline-types
-
 further_reading:
 - link: "https://www.datadoghq.com/blog/observability-pipelines-servicenow-cmdb-enrichment"
   tag: "Blog"
   text: "Enrich logs with ServiceNow CMDB context before routing to any SIEM or logging tool"
-
 ---
 
 {{< product-availability >}}
