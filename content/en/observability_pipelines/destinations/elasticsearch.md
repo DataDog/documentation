@@ -22,10 +22,10 @@ Set up the Elasticsearch destination and its environment variables when you [set
 
 <div class="alert alert-danger">Only enter the identifiers for the Elasticsearch endpoint URL, username, and password. Do <b>not</b> enter the actual values.</div>
 
+1. Enter the identifiers for your Elasticsearch username and password. If you leave it blank, the [default](#set-secrets) is used.
 1. Enter the identifier for your Elasticsearch endpoint URL. If you leave it blank, the [default](#set-secrets) is used.
-1. Enter the identifier for your Elasticsearch password. If you leave it blank, the [default](#set-secrets) is used.
 1. (Optional) Enter the Elasticsearch version.
-1. In the **Mode** dropdown menu, select **Bulk** or **Data streams**.
+1. In the **Mode** dropdown menu, select **Bulk** or **Data stream**.
 	- **Bulk** mode
 		- Uses Elasticsearch's [Bulk API][5] to send batched events directly into a standard index.
 		- Choose this mode when you want direct control over index naming and lifecycle management. Data is appended to the index you specify, and you are responsible for handling rollovers, deletions, and mappings.
@@ -34,21 +34,45 @@ Set up the Elasticsearch destination and its environment variables when you [set
 	- **Data streams** mode
 		- Uses [Elasticsearch Data Streams][4] for data storage. Data streams automatically manage backing indexes and rollovers, making them ideal for time series log data.
 		- Choose this mode when you want Elasticsearch to manage the index lifecycle for you. Data streams ensure smooth rollovers, Index Lifecycle Management (ILM) compatibility, and optimized handling of time-based data.
-		- To configure **Data streams** mode, optionally define the data stream name (default is `logs-generic-default` for logs and `metrics-generic-default` for metrics) by entering the following information:
-			- In the **Type** field, enter the category of data being ingested, for example `logs` or `metrics`.
-			- In the **Dataset** field, specify the format or data source that describes the structure, for example `apache`.
-			- In the **Namespace** field, enter the grouping for organizing your data streams, for example `production`.
-			- In the UI, there is a preview of the data stream name you configured. With the above example inputs, the data stream name that the Worker writes to is `logs-apache-production` for logs and `metrics-apache-production` for metrics.
+		- To configure **Data streams** mode, optionally specify the data stream name and configure routing and syncing settings.
+			1. In the **Type** field, enter the category of data being ingested, for example `logs` or `metrics`.
+			1. In the **Dataset** field, specify the format or data source that describes the structure, for example `apache`.
+			1. In the **Namespace** field, enter the grouping for organizing your data streams, for example `production`.
+			1. Enable the **Auto routing** toggle to automatically route events to a data stream based on the event content.
+			1. Enable the **Sync fields** toggle to synchronize data stream fields with the Elasticsearch index mapping.
+			- In the UI, there is a preview of the data stream name you configured. If the fields are left blank, the default data stream name used is `logs-generic-default` for logs and `metrics-generic-default` for metrics. With the above example inputs, the data stream name that the Worker writes to is:
+				- `logs-apache-production` for logs
+				- `metrics-apache-production` for metrics
 
 #### Optional settings
 
+##### Enable TLS
+
+Toggle the switch to **Enable TLS**.
+- If you are using Secrets Management, enter the identifier for the key pass. See [Set secrets](#set-secrets) for the default used if the field is left blank.
+- The following certificate and key files are required for TLS:
+  - `Server Certificate Path`: The path to the certificate file that has been signed by your Certificate Authority (CA) root file in DER, PEM, or CRT (X.509).
+  - `CA Certificate Path`: The path to the certificate file that is your Certificate Authority (CA) root file in DER, PEM, or CERT (X.509).
+  - `Private Key Path`: The path to the `.key` private key file that belongs to your Server Certificate Path in DER, PEM, or CERT (PKCS #8) format.
+  - **Notes**:
+    - The configuration data directory `/var/lib/observability-pipelines-worker/config/` is automatically appended to the file paths. See [Advanced Worker Configurations][6] for more information.
+    - The file must be readable by the `observability-pipelines-worker` group and user.
+
 ##### Compression
 
-You might want to use compression if you are sending a high volume of events to your Elasticsearch clusters. Toggle the switch to enable **Compression**. Select a compression algorithm (**gzip**, **snappy**, **zlib**, **zstd**) in the dropdown menu. The default is no compression.
+You might want to use compression if you are sending a high volume of events to your Elasticsearch clusters.
+
+Toggle the switch to enable **Compression**. Select a compression algorithm (**gzip**, **snappy**, **zlib**, **zstd**) in the dropdown menu. The default is no compression.
 
 ##### Buffering
 
 {{% observability_pipelines/destination_buffer %}}
+
+##### Advanced options
+
+1. In the **ID Key** field, enter the name of the field used as the document ID in Elasticsearch.
+1. In the **Pipeline** field, enter the name of an Elasticsearch ingest pipeline to apply to events before indexing.
+1. Enable the **Retry partial failures** toggle to retry a failed bulk request when some events in a batch fail while others succeed.
 
 ### Set secrets
 
@@ -88,3 +112,4 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 [3]: /observability_pipelines/destinations/#template-syntax
 [4]: https://www.elastic.co/docs/reference/fleet/data-streams
 [5]: https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-bulk
+[6]: /configuration/install_the_worker/advanced_worker_configurations/
