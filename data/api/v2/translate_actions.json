@@ -1296,6 +1296,22 @@
     "request_description": "",
     "request_schema_description": "Request to update an environment."
   },
+  "PauseExposureSchedule": {
+    "description": "Pauses a progressive rollout while preserving rollout state.",
+    "summary": "Pause a progressive rollout"
+  },
+  "ResumeExposureSchedule": {
+    "description": "Resumes progression for a previously paused progressive rollout.",
+    "summary": "Resume a progressive rollout"
+  },
+  "StartExposureSchedule": {
+    "description": "Starts a progressive rollout and begins progression.",
+    "summary": "Start a progressive rollout"
+  },
+  "StopExposureSchedule": {
+    "description": "Stops a progressive rollout and marks it as aborted.",
+    "summary": "Stop a progressive rollout"
+  },
   "GetFeatureFlag": {
     "description": "Returns the details of a specific feature flag\nincluding variants and environment status.",
     "summary": "Get a feature flag"
@@ -1309,6 +1325,18 @@
   "ArchiveFeatureFlag": {
     "description": "Archives a feature flag. Archived flags are\nhidden from the main list but remain accessible and can be unarchived.",
     "summary": "Archive a feature flag"
+  },
+  "CreateAllocationsForFeatureFlagInEnvironment": {
+    "description": "Creates a new targeting rule (allocation) for a specific feature flag in a specific environment.",
+    "summary": "Create targeting rules for a flag env",
+    "request_description": "",
+    "request_schema_description": "Request to create targeting rules (allocations) for a feature flag in an environment."
+  },
+  "UpdateAllocationsForFeatureFlagInEnvironment": {
+    "description": "Updates targeting rules (allocations) for a specific feature flag in a specific environment.\nThis operation replaces the existing allocation set with the request payload.",
+    "summary": "Update targeting rules for a flag",
+    "request_description": "",
+    "request_schema_description": "Request to overwrite targeting rules (allocations) for a feature flag in an environment."
   },
   "DisableFeatureFlagEnvironment": {
     "description": "Disable a feature flag in a specific environment.",

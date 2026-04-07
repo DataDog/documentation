@@ -10,7 +10,14 @@ products:
 
 {{< product-availability >}}
 
-Use Observability Pipelines' Datadog Metrics destination to send metrics to Datadog. You can also use [AWS PrivateLink](#aws-privatelink) to send metrics from Observability Pipelines to Datadog.
+{{< callout url="https://www.datadoghq.com/product-preview/metrics-ingestion-and-cardinality-control-in-observability-pipelines/"
+ btn_hidden="false" header="Join the Preview!">}}
+Sending metrics to Observability Pipelines is in Preview. Fill out the form to request access.
+{{< /callout >}}
+
+## Overview
+
+Use Observability Pipelines' Datadog Metrics destination ({{< tooltip glossary="preview" case="title" >}}) to send metrics to Datadog. You can also use [AWS PrivateLink](#aws-privatelink) to send metrics from Observability Pipelines to Datadog.
 
 ## Setup
 

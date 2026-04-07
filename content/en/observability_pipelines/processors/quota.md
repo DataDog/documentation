@@ -83,7 +83,7 @@ If you are partitioning by `service` and have two services: `a` and `b`, you can
 |  `b`    | Events | 50    |
 
 [1]: /monitors/types/metric/?tab=threshold
-[2]: /observability_pipelines/destinations/amazon_s3/
+[2]: /observability_pipelines/destinations/datadog_archives/
 [3]: /observability_pipelines/destinations/azure_storage/
 [4]: /observability_pipelines/destinations/google_cloud_storage/
 [5]: /help/
