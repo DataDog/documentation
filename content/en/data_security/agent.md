@@ -216,7 +216,6 @@ agent diagnose show-metadata agent-telemetry
 | cluster_checks.configs_dispatched           | Number of cluster check configurations dispatched                                                                      |
 | cluster_checks.configs_dangling             | Number of dangling cluster check configurations                                                                        |
 | cluster_checks.unscheduled_check            | Number of unscheduled cluster checks                                                                                   |
-| external_metrics.datadog_metrics            | Number of Datadog external metrics                                                                                     |
 | language_detection_patcher.patches          | Number of language detection patcher patches                                                                           |
 | tagger.stored_entities                      | Number of entities stored in the Tagger                                                                                |
 | workloadmeta.stored_entities                | Number of entities stored in WorkloadMeta                                                                              |
