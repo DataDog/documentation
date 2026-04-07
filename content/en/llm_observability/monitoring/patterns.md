@@ -32,7 +32,7 @@ When you run a pipeline, Pattern Analysis:
 
 1. Pulls LLM interactions from your production traffic based on your filter and sampling configuration
 2. Embeds interactions semantically and clusters them
-3. Names each cluster with an AI-generated label and summary
+3. Names each cluster with an AI-generated label and summary using our in-house models
 4. Organizes clusters into a parent-child topic hierarchy
 
 Each topic shows its interaction volume, share of total traffic, and a coherence score — a measure of how semantically similar the interactions within the topic are to each other (0.0–1.0). Interactions that don't fit any cluster are collected into an Outliers group.
@@ -46,7 +46,7 @@ The top of the Patterns page shows three numbers from your most recent run:
 2. **Identified topics:** The total number of distinct topics found, including parent and child topics
 3. **Classified:** The percentage of analyzed interactions assigned to a named topic — interactions in Outliers count as unclassified
 
-A high **Classified** percentage (above 80%) means the pipeline found meaningful structure in your traffic. A low percentage suggests high variance across interaction types, or a filter that spans very different use cases.
+A high **Classified** percentage (above 80%) means the pipeline found meaningful structure in your traffic. A low percentage suggests high variance across interaction types or a filter that spans very different use cases.
 
 {{< img src="llm_observability/Patterns.png" alt="The Patterns page displays traces grouped by topic." style="width:100%;" >}}
 
@@ -82,10 +82,10 @@ You can trigger a new clustering pipeline run to re-analyze your production traf
 
 1. Click Run Pipeline.
 2. Configure your analysis:
-- Filter: Scope to a specific application, environment, or span type. 
-- Sampling rate: Set what percentage of matching interactions to include. The pipeline processes up to 50,000 records per run; if your filter matches more than that, records are randomly sampled down to the cap.
-- Minimum Cluster Size (Advanced): Set the minium threshold for topic formation
-3. Click Run. The pipeline runs in the background and takes approximately 50 minutes — you can close the page.
+    - Filter: Scope to a specific application, environment, or span type. 
+    - Sampling rate: Set what percentage of matching interactions to include. The pipeline processes up to 10,000 records per run; if your filter matches more than that, records are randomly sampled down to the cap.
+    - Minimum Cluster Size (Advanced): Set the minium threshold for topic formation
+3. Click Run. The pipeline runs in the background and takes between 5 to 10 minutes — you can close the page or visualize the progress of the pipeline hovering on the status pill.
 
 When the pipeline completes, the Patterns page updates with the run date, lookback window, and status.
 

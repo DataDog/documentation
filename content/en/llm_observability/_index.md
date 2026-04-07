@@ -123,4 +123,4 @@ See the [Setup documentation][5] for instructions on instrumenting your LLM appl
 [7]: https://app.datadoghq.com/dash/integration/llm_operational_insights
 [8]: /llm_observability/setup/auto_instrumentation
 [9]: /llm_observability/evaluations/managed_evaluations
-[10]: /llm_observability/monitoring/cluster_map
+[10]: /llm_observability/monitoring/patterns

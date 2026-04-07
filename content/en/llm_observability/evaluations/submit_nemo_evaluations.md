@@ -164,5 +164,4 @@ You can view a breakdown of your NeMo Evaluator's model evaluation results in LL
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /llm_observability/setup/sdk/python
-[2]: /llm_observability/monitoring/cluster_map
-[3]: https://docs.nvidia.com/nemo-framework/user-guide/latest/overview.html
+[2]: https://docs.nvidia.com/nemo-framework/user-guide/latest/overview.html
