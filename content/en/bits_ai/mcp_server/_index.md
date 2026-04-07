@@ -69,7 +69,7 @@ The Datadog MCP Server supports _toolsets_, which allow you to use only the tool
 
 - `core`: The default toolset for logs, metrics, traces, dashboards, monitors, incidents, hosts, services, events, and notebooks
 - `alerting`: Tools for validating monitors, searching monitor groups, and retrieving monitor templates
-- `apm`: Tools for in-depth [APM][28] trace analysis, span search, Watchdog insights, and performance investigation
+- `apm`: ([Preview](https://www.datadoghq.com/product-preview/apm-mcp-toolset/)) Tools for in-depth [APM][28] trace analysis, span search, Watchdog insights, and performance investigation
 - `cases`: Tools for [Case Management][38], including creating, searching, and updating cases; managing projects; and linking Jira issues
 - `dbm`: Tools for interacting with [Database Monitoring][26]
 - `ddsql`: (Preview) Tools for querying Datadog data using [DDSQL][41], a SQL dialect with support for infrastructure resources, logs, metrics, RUM, spans, and other Datadog data sources
@@ -320,6 +320,8 @@ Searches monitor groups by name or criteria.
 
 - Show me all monitor groups in an alerting state.
 - Find monitor groups related to the checkout service.
+
+<div class="alert alert-info">The <code>apm</code> toolset is in Preview. <a href="https://www.datadoghq.com/product-preview/apm-mcp-toolset/">Sign up for access.</a></div>
 
 ### `apm_search_spans`
 *Toolset: **apm***\
