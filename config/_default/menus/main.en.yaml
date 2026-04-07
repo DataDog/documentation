@@ -2997,11 +2997,6 @@ menu:
       identifier: end_user_device_monitoring
       parent: infrastructure_heading
       weight: 40000
-    - name: Setup
-      url: infrastructure/end_user_device_monitoring/setup/
-      identifier: end_user_device_monitoring_setup
-      parent: end_user_device_monitoring
-      weight: 1
     - name: Hosts
       url: infrastructure/hostmap/
       identifier: hosts
@@ -9085,9 +9080,9 @@ menu:
       parent: organization_settings
       identifier: login_methods
       weight: 202
-    - name: OAuth Apps
-      identifier: account_management_org_settings_oauth_apps
-      url: account_management/org_settings/oauth_apps
+    - name: Mobile and Third-Party Access
+      identifier: account_management_org_settings_mobile_third_party_access
+      url: account_management/org_settings/mobile_third_party_access
       parent: organization_settings
       weight: 203
     - name: Custom Organization Landing Page

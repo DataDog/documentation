@@ -1263,6 +1263,15 @@ components:
         example: "550e8400-e29b-41d4-a716-446655440001"
         format: uuid
         type: string
+    exposure_schedule_id:
+      description: The ID of the exposure schedule.
+      in: path
+      name: exposure_schedule_id
+      required: true
+      schema:
+        example: "550e8400-e29b-41d4-a716-446655440010"
+        format: uuid
+        type: string
     feature_flag_id:
       description: The ID of the feature flag.
       in: path
@@ -3334,6 +3343,334 @@ components:
         - WARN
         - ERROR
         - OK
+    Allocation:
+      description: Targeting rule (allocation) details for a feature flag environment.
+      properties:
+        created_at:
+          description: The timestamp when the targeting rule allocation was created.
+          example: "2024-01-01T12:00:00Z"
+          format: date-time
+          type: string
+        environment_ids:
+          description: Environment IDs associated with this targeting rule allocation.
+          example:
+            - "550e8400-e29b-41d4-a716-446655440001"
+          items:
+            description: Environment ID linked to this targeting rule allocation.
+            format: uuid
+            type: string
+          type: array
+        experiment_id:
+          description: The experiment ID linked to this targeting rule allocation.
+          example: "550e8400-e29b-41d4-a716-446655440030"
+          nullable: true
+          type: string
+        exposure_schedule:
+          $ref: "#/components/schemas/AllocationExposureSchedule"
+        guardrail_metrics:
+          description: Guardrail metrics associated with this targeting rule allocation.
+          items:
+            $ref: "#/components/schemas/GuardrailMetric"
+          type: array
+        id:
+          description: The unique identifier of the targeting rule allocation.
+          example: "550e8400-e29b-41d4-a716-446655440020"
+          format: uuid
+          type: string
+        key:
+          description: The unique key of the targeting rule allocation.
+          example: "prod-rollout"
+          type: string
+        name:
+          description: The display name of the targeting rule.
+          example: "Production Rollout"
+          type: string
+        order_position:
+          description: Sort order position within the environment.
+          example: 0
+          format: int64
+          type: integer
+        targeting_rules:
+          description: Conditions associated with this targeting rule allocation.
+          items:
+            $ref: "#/components/schemas/TargetingRule"
+          type: array
+        type:
+          $ref: "#/components/schemas/AllocationType"
+        updated_at:
+          description: The timestamp when the targeting rule allocation was last updated.
+          example: "2024-01-01T12:00:00Z"
+          format: date-time
+          type: string
+        variant_weights:
+          description: Weighted variant assignments for this targeting rule allocation.
+          items:
+            $ref: "#/components/schemas/VariantWeight"
+          type: array
+      required:
+        - name
+        - key
+        - targeting_rules
+        - variant_weights
+        - order_position
+        - environment_ids
+        - type
+        - guardrail_metrics
+        - created_at
+        - updated_at
+      type: object
+    AllocationDataRequest:
+      description: Data wrapper for allocation request payloads.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/UpsertAllocationRequest"
+        type:
+          $ref: "#/components/schemas/AllocationDataType"
+      required:
+        - type
+        - attributes
+      type: object
+    AllocationDataResponse:
+      description: Data wrapper for targeting rule allocation responses.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/Allocation"
+        id:
+          description: The unique identifier of the targeting rule allocation.
+          example: "550e8400-e29b-41d4-a716-446655440020"
+          format: uuid
+          type: string
+        type:
+          $ref: "#/components/schemas/AllocationDataType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    AllocationDataType:
+      description: The resource type.
+      enum:
+        - "allocations"
+      example: "allocations"
+      type: string
+      x-enum-varnames:
+        - ALLOCATIONS
+    AllocationExposureGuardrailTrigger:
+      description: Guardrail trigger details for a progressive rollout.
+      properties:
+        allocation_exposure_schedule_id:
+          description: The progressive rollout ID this trigger belongs to.
+          example: "550e8400-e29b-41d4-a716-446655440010"
+          format: uuid
+          type: string
+        created_at:
+          description: The timestamp when this trigger was created.
+          example: "2024-01-01T12:00:00Z"
+          format: date-time
+          type: string
+        flagging_variant_id:
+          description: The variant ID that triggered this event.
+          example: "550e8400-e29b-41d4-a716-446655440001"
+          format: uuid
+          type: string
+        id:
+          description: The unique identifier of the guardrail trigger.
+          example: "550e8400-e29b-41d4-a716-446655440080"
+          format: uuid
+          type: string
+        metric_id:
+          description: The metric ID associated with the trigger.
+          example: "metric-error-rate"
+          type: string
+        triggered_action:
+          description: The action that was triggered.
+          example: "PAUSE"
+          type: string
+        updated_at:
+          description: The timestamp when this trigger was last updated.
+          example: "2024-01-01T12:00:00Z"
+          format: date-time
+          type: string
+      required:
+        - id
+        - allocation_exposure_schedule_id
+        - flagging_variant_id
+        - metric_id
+        - triggered_action
+        - created_at
+        - updated_at
+      type: object
+    AllocationExposureRolloutStep:
+      description: Exposure progression step details.
+      properties:
+        allocation_exposure_schedule_id:
+          description: The progressive rollout ID this step belongs to.
+          example: "550e8400-e29b-41d4-a716-446655440010"
+          format: uuid
+          type: string
+        created_at:
+          description: The timestamp when the progression step was created.
+          example: "2024-01-01T12:00:00Z"
+          format: date-time
+          type: string
+        exposure_ratio:
+          description: The exposure ratio for this step.
+          example: 0.1
+          format: double
+          maximum: 1
+          minimum: 0
+          type: number
+        grouped_step_index:
+          description: Logical index grouping related steps.
+          example: 0
+          format: int64
+          minimum: 0
+          type: integer
+        id:
+          description: The unique identifier of the progression step.
+          example: "550e8400-e29b-41d4-a716-446655440040"
+          format: uuid
+          type: string
+        interval_ms:
+          description: Step duration in milliseconds.
+          example: 3600000
+          format: int64
+          nullable: true
+          type: integer
+        is_pause_record:
+          description: Whether this step represents a pause record.
+          example: false
+          type: boolean
+        order_position:
+          description: Sort order for the progression step.
+          example: 0
+          format: int64
+          type: integer
+        updated_at:
+          description: The timestamp when the progression step was last updated.
+          example: "2024-01-01T12:00:00Z"
+          format: date-time
+          type: string
+      required:
+        - id
+        - allocation_exposure_schedule_id
+        - order_position
+        - exposure_ratio
+        - is_pause_record
+        - grouped_step_index
+        - created_at
+        - updated_at
+      type: object
+    AllocationExposureSchedule:
+      description: Progressive release details for a targeting rule allocation.
+      properties:
+        absolute_start_time:
+          description: The absolute UTC start time for this schedule.
+          example: "2025-06-13T12:00:00Z"
+          format: date-time
+          nullable: true
+          type: string
+        allocation_id:
+          description: The targeting rule allocation ID this progressive rollout belongs to.
+          example: "550e8400-e29b-41d4-a716-446655440020"
+          format: uuid
+          type: string
+        control_variant_id:
+          description: The control variant ID used for experiment comparisons.
+          example: "550e8400-e29b-41d4-a716-446655440012"
+          nullable: true
+          type: string
+        created_at:
+          description: The timestamp when the schedule was created.
+          example: "2024-01-01T12:00:00Z"
+          format: date-time
+          type: string
+        guardrail_triggered_action:
+          description: Last guardrail action triggered for this schedule.
+          example: "PAUSE"
+          nullable: true
+          type: string
+        guardrail_triggers:
+          description: Guardrail trigger records for this schedule.
+          items:
+            $ref: "#/components/schemas/AllocationExposureGuardrailTrigger"
+          type: array
+        id:
+          description: The unique identifier of the progressive rollout.
+          example: "550e8400-e29b-41d4-a716-446655440010"
+          format: uuid
+          type: string
+        rollout_options:
+          $ref: "#/components/schemas/RolloutOptions"
+        rollout_steps:
+          description: Ordered progression steps for exposure.
+          items:
+            $ref: "#/components/schemas/AllocationExposureRolloutStep"
+          type: array
+        updated_at:
+          description: The timestamp when the schedule was last updated.
+          example: "2024-01-01T12:00:00Z"
+          format: date-time
+          type: string
+      required:
+        - allocation_id
+        - rollout_options
+        - rollout_steps
+        - guardrail_triggers
+        - created_at
+        - updated_at
+      type: object
+    AllocationExposureScheduleData:
+      description: Data wrapper for progressive rollout schedule responses.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/AllocationExposureSchedule"
+        id:
+          description: The unique identifier of the progressive rollout.
+          example: "550e8400-e29b-41d4-a716-446655440010"
+          format: uuid
+          type: string
+        type:
+          $ref: "#/components/schemas/AllocationExposureScheduleDataType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    AllocationExposureScheduleDataType:
+      description: The resource type for progressive rollout schedules.
+      enum:
+        - "allocation_exposure_schedules"
+      example: "allocation_exposure_schedules"
+      type: string
+      x-enum-varnames:
+        - ALLOCATION_EXPOSURE_SCHEDULES
+    AllocationExposureScheduleResponse:
+      description: Response containing a progressive rollout schedule.
+      properties:
+        data:
+          $ref: "#/components/schemas/AllocationExposureScheduleData"
+      required:
+        - data
+      type: object
+    AllocationResponse:
+      description: Response containing a single targeting rule (allocation).
+      properties:
+        data:
+          $ref: "#/components/schemas/AllocationDataResponse"
+      required:
+        - data
+      type: object
+    AllocationType:
+      description: The type of targeting rule (called allocation in the API model).
+      enum:
+        - FEATURE_GATE
+        - CANARY
+      example: "FEATURE_GATE"
+      type: string
+      x-enum-varnames:
+        - FEATURE_GATE
+        - CANARY
     Annotation:
       description: "A list of annotations used in the workflow. These are like sticky notes for your workflow!"
       properties:
@@ -12742,6 +13079,92 @@ components:
         - SEARCH
         - CONTAINER
         - CALLOUTVALUE
+    Condition:
+      description: Targeting condition details.
+      properties:
+        attribute:
+          description: The user or request attribute to evaluate.
+          example: "country"
+          type: string
+        created_at:
+          description: The timestamp when the condition was created.
+          example: "2024-01-01T12:00:00Z"
+          format: date-time
+          type: string
+        id:
+          description: The unique identifier of the condition.
+          example: "550e8400-e29b-41d4-a716-446655440070"
+          format: uuid
+          type: string
+        operator:
+          $ref: "#/components/schemas/ConditionOperator"
+        updated_at:
+          description: The timestamp when the condition was last updated.
+          example: "2024-01-01T12:00:00Z"
+          format: date-time
+          type: string
+        value:
+          description: Values used by the selected operator.
+          example: ["US", "CA"]
+          items:
+            description: Target value for the selected operator.
+            type: string
+          type: array
+      required:
+        - id
+        - operator
+        - attribute
+        - value
+        - created_at
+        - updated_at
+      type: object
+    ConditionOperator:
+      description: The operator used in a targeting condition.
+      enum:
+        - LT
+        - LTE
+        - GT
+        - GTE
+        - MATCHES
+        - NOT_MATCHES
+        - ONE_OF
+        - NOT_ONE_OF
+        - IS_NULL
+        - EQUALS
+      example: "ONE_OF"
+      type: string
+      x-enum-varnames:
+        - LT
+        - LTE
+        - GT
+        - GTE
+        - MATCHES
+        - NOT_MATCHES
+        - ONE_OF
+        - NOT_ONE_OF
+        - IS_NULL
+        - EQUALS
+    ConditionRequest:
+      description: Condition request payload for targeting rules.
+      properties:
+        attribute:
+          description: The user or request attribute to evaluate.
+          example: "user_tier"
+          type: string
+        operator:
+          $ref: "#/components/schemas/ConditionOperator"
+        value:
+          description: Values used by the selected operator.
+          example: ["premium", "enterprise"]
+          items:
+            description: Target value for the selected operator.
+            type: string
+          type: array
+      required:
+        - operator
+        - attribute
+        - value
+      type: object
     ConfigCatCredentials:
       description: The definition of the `ConfigCatCredentials` object.
       oneOf:
@@ -14167,6 +14590,14 @@ components:
       properties:
         data:
           $ref: "#/components/schemas/ActionConnectionData"
+      type: object
+    CreateAllocationsRequest:
+      description: Request to create targeting rules (allocations) for a feature flag in an environment.
+      properties:
+        data:
+          $ref: "#/components/schemas/AllocationDataRequest"
+      required:
+        - data
       type: object
     CreateAppRequest:
       description: A request object for creating a new app.
@@ -24408,6 +24839,78 @@ components:
           example: "One or several indexes are missing or invalid. Results hold data from the other indexes."
           type: string
       type: object
+    ExposureRolloutStepRequest:
+      description: Rollout step request payload.
+      properties:
+        exposure_ratio:
+          description: The exposure ratio for this step.
+          example: 0.5
+          format: double
+          maximum: 1
+          minimum: 0
+          type: number
+        grouped_step_index:
+          description: Logical index grouping related steps.
+          example: 1
+          format: int64
+          minimum: 0
+          type: integer
+        id:
+          description: The unique identifier of the progression step.
+          example: "550e8400-e29b-41d4-a716-446655440040"
+          format: uuid
+          type: string
+        interval_ms:
+          description: Step duration in milliseconds.
+          example: 3600000
+          format: int64
+          nullable: true
+          type: integer
+        is_pause_record:
+          description: Whether this step represents a pause record.
+          example: false
+          type: boolean
+      required:
+        - exposure_ratio
+        - is_pause_record
+        - grouped_step_index
+      type: object
+    ExposureScheduleRequest:
+      description: Progressive release request payload.
+      properties:
+        absolute_start_time:
+          description: The absolute UTC start time for this schedule.
+          example: "2025-06-13T12:00:00Z"
+          format: date-time
+          nullable: true
+          type: string
+        control_variant_id:
+          description: The control variant ID used for experiment comparisons.
+          example: "550e8400-e29b-41d4-a716-446655440012"
+          nullable: true
+          type: string
+        control_variant_key:
+          description: The control variant key used during creation workflows.
+          example: "control"
+          nullable: true
+          type: string
+        id:
+          description: The unique identifier of the progressive rollout.
+          example: "550e8400-e29b-41d4-a716-446655440010"
+          format: uuid
+          type: string
+        rollout_options:
+          $ref: "#/components/schemas/RolloutOptionsRequest"
+        rollout_steps:
+          description: Ordered progression steps for exposure.
+          items:
+            $ref: "#/components/schemas/ExposureRolloutStepRequest"
+          minItems: 1
+          type: array
+      required:
+        - rollout_options
+        - rollout_steps
+      type: object
     ExternalUser:
       description: Definition of a user.
       properties:
@@ -25131,6 +25634,12 @@ components:
           description: Indicates whether this feature flag requires approval for changes.
           example: false
           type: boolean
+        tags:
+          description: Tags associated with the feature flag.
+          example: []
+          items:
+            type: string
+          type: array
         updated_at:
           description: The timestamp when the feature flag was last updated.
           example: "2023-01-01T00:00:00Z"
@@ -25176,6 +25685,14 @@ components:
           description: The name of the environment.
           example: "env-search-term"
           type: string
+        environment_queries:
+          description: Queries that target this environment.
+          example:
+            - "test-feature-flag"
+            - "env-search-term"
+          items:
+            type: string
+          type: array
         is_production:
           description: Indicates whether the environment is production.
           example: false
@@ -29357,6 +29874,47 @@ components:
         example: "env:production"
         type: string
       type: array
+    GuardrailMetric:
+      description: Guardrail metric details.
+      properties:
+        metric_id:
+          description: The metric ID to monitor.
+          example: "metric-error-rate"
+          type: string
+        trigger_action:
+          $ref: "#/components/schemas/GuardrailTriggerAction"
+        triggered_by:
+          description: The signal or system that triggered the action.
+          example: "guardrail_monitor"
+          nullable: true
+          type: string
+      required:
+        - metric_id
+        - trigger_action
+      type: object
+    GuardrailMetricRequest:
+      description: Guardrail metric request payload.
+      properties:
+        metric_id:
+          description: The metric ID to monitor.
+          example: "metric-error-rate"
+          type: string
+        trigger_action:
+          $ref: "#/components/schemas/GuardrailTriggerAction"
+      required:
+        - metric_id
+        - trigger_action
+      type: object
+    GuardrailTriggerAction:
+      description: Action to perform when a guardrail threshold is triggered.
+      enum:
+        - PAUSE
+        - ABORT
+      example: "PAUSE"
+      type: string
+      x-enum-varnames:
+        - PAUSE
+        - ABORT
     HTTPBody:
       description: The definition of `HTTPBody` object.
       properties:
@@ -36663,6 +37221,18 @@ components:
           example: 35
           format: int64
           type: integer
+      type: object
+    ListAllocationsResponse:
+      description: Response containing a list of targeting rules (allocations).
+      properties:
+        data:
+          description: List of targeting rules (allocations).
+          items:
+            $ref: "#/components/schemas/AllocationDataResponse"
+            description: Allocation item.
+          type: array
+      required:
+        - data
       type: object
     ListAppKeyRegistrationsResponse:
       description: A paginated list of app key registrations.
@@ -48132,6 +48702,17 @@ components:
         - ARRAY_NUMBER
         - ARRAY_BOOLEAN
         - ARRAY_OBJECT
+    OverwriteAllocationsRequest:
+      description: Request to overwrite targeting rules (allocations) for a feature flag in an environment.
+      properties:
+        data:
+          description: Targeting rules (allocations) to replace existing ones with.
+          items:
+            $ref: "#/components/schemas/AllocationDataRequest"
+          type: array
+      required:
+        - data
+      type: object
     PageUrgency:
       default: high
       description: On-Call Page urgency level.
@@ -53899,6 +54480,53 @@ components:
       type: string
       x-enum-varnames:
         - ROLES
+    RolloutOptions:
+      description: Applied progression options for a progressive rollout.
+      properties:
+        autostart:
+          description: Whether the schedule starts automatically.
+          example: false
+          type: boolean
+        selection_interval_ms:
+          description: Interval in milliseconds for uniform interval strategies.
+          example: 3600000
+          format: int64
+          type: integer
+        strategy:
+          $ref: "#/components/schemas/RolloutStrategy"
+      required:
+        - strategy
+        - autostart
+        - selection_interval_ms
+      type: object
+    RolloutOptionsRequest:
+      description: Rollout options request payload.
+      properties:
+        autostart:
+          description: Whether the schedule should begin automatically.
+          example: false
+          nullable: true
+          type: boolean
+        selection_interval_ms:
+          description: Interval in milliseconds for uniform interval strategies.
+          example: 3600000
+          format: int64
+          type: integer
+        strategy:
+          $ref: "#/components/schemas/RolloutStrategy"
+      required:
+        - strategy
+      type: object
+    RolloutStrategy:
+      description: The progression strategy used by a progressive rollout.
+      enum:
+        - UNIFORM_INTERVALS
+        - NO_ROLLOUT
+      example: "UNIFORM_INTERVALS"
+      type: string
+      x-enum-varnames:
+        - UNIFORM_INTERVALS
+        - NO_ROLLOUT
     RoutingRule:
       description: Represents a routing rule, including its attributes, relationships, and unique identifier.
       properties:
@@ -67339,6 +67967,47 @@ components:
         description: Tag associated with your event.
         type: string
       type: array
+    TargetingRule:
+      description: Targeting rule details.
+      properties:
+        conditions:
+          description: Conditions evaluated by this targeting rule.
+          items:
+            $ref: "#/components/schemas/Condition"
+          type: array
+        created_at:
+          description: The timestamp when the targeting rule was created.
+          example: "2024-01-01T12:00:00Z"
+          format: date-time
+          type: string
+        id:
+          description: The unique identifier of the targeting rule.
+          example: "550e8400-e29b-41d4-a716-446655440060"
+          format: uuid
+          type: string
+        updated_at:
+          description: The timestamp when the targeting rule was last updated.
+          example: "2024-01-01T12:00:00Z"
+          format: date-time
+          type: string
+      required:
+        - id
+        - conditions
+        - created_at
+        - updated_at
+      type: object
+    TargetingRuleRequest:
+      description: Targeting rule request payload.
+      properties:
+        conditions:
+          description: Conditions that must match for this rule.
+          items:
+            $ref: "#/components/schemas/ConditionRequest"
+          minItems: 1
+          type: array
+      required:
+        - conditions
+      type: object
     Targets:
       description: |-
         List of recipients to notify when a notification rule is triggered. Many different target types are supported,
@@ -71525,6 +72194,51 @@ components:
         data:
           $ref: "#/components/schemas/WorkflowDataUpdate"
       type: object
+    UpsertAllocationRequest:
+      description: Request to create or update a targeting rule (allocation) for a feature flag environment.
+      properties:
+        experiment_id:
+          description: The experiment ID for experiment-linked allocations.
+          example: "550e8400-e29b-41d4-a716-446655440030"
+          nullable: true
+          type: string
+        exposure_schedule:
+          $ref: "#/components/schemas/ExposureScheduleRequest"
+        guardrail_metrics:
+          description: Guardrail metrics used to monitor and auto-pause or abort.
+          items:
+            $ref: "#/components/schemas/GuardrailMetricRequest"
+          type: array
+        id:
+          description: The unique identifier of the targeting rule allocation.
+          example: "550e8400-e29b-41d4-a716-446655440020"
+          format: uuid
+          type: string
+        key:
+          description: The unique key of the targeting rule allocation.
+          example: "prod-rollout"
+          type: string
+        name:
+          description: The display name of the targeting rule.
+          example: "Production Rollout"
+          type: string
+        targeting_rules:
+          description: Targeting rules that determine audience eligibility.
+          items:
+            $ref: "#/components/schemas/TargetingRuleRequest"
+          type: array
+        type:
+          $ref: "#/components/schemas/AllocationType"
+        variant_weights:
+          description: Variant distribution weights.
+          items:
+            $ref: "#/components/schemas/VariantWeightRequest"
+          type: array
+      required:
+        - name
+        - key
+        - type
+      type: object
     UpsertCatalogEntityRequest:
       description: Create or update entity request.
       oneOf:
@@ -72417,6 +73131,60 @@ components:
         - id
         - key
         - name
+        - value
+      type: object
+    VariantWeight:
+      description: Variant weight details.
+      properties:
+        created_at:
+          description: The timestamp when the variant weight was created.
+          example: "2024-01-01T12:00:00Z"
+          format: date-time
+          type: string
+        id:
+          description: Unique identifier of the variant weight assignment.
+          example: "59061199-e2ff-46e9-8b40-2193e3b21687"
+          format: uuid
+          type: string
+        updated_at:
+          description: The timestamp when the variant weight was last updated.
+          example: "2024-01-01T12:00:00Z"
+          format: date-time
+          type: string
+        value:
+          description: The percentage weight for the variant.
+          example: 50
+          format: double
+          type: number
+        variant:
+          $ref: "#/components/schemas/Variant"
+        variant_id:
+          description: The variant ID.
+          example: "550e8400-e29b-41d4-a716-446655440001"
+          format: uuid
+          type: string
+      required:
+        - variant_id
+        - value
+      type: object
+    VariantWeightRequest:
+      description: Variant weight request payload.
+      properties:
+        value:
+          description: The percentage weight for this variant.
+          example: 50
+          format: double
+          type: number
+        variant_id:
+          description: The variant ID to assign weight to.
+          example: "550e8400-e29b-41d4-a716-446655440001"
+          format: uuid
+          type: string
+        variant_key:
+          description: The variant key to assign weight to.
+          example: "control"
+          type: string
+      required:
         - value
       type: object
     Version:
@@ -84928,7 +85696,7 @@ paths:
       summary: List feature flags
       tags:
         - Feature Flags
-      x-menu-order: 13
+      x-menu-order: 19
       x-permission:
         operator: AND
         permissions:
@@ -84989,7 +85757,7 @@ paths:
       summary: Create a feature flag
       tags:
         - Feature Flags
-      x-menu-order: 12
+      x-menu-order: 18
       x-permission:
         operator: AND
         permissions:
@@ -85241,6 +86009,274 @@ paths:
         operator: AND
         permissions:
           - feature_flag_environment_config_write
+  /api/v2/feature-flags/exposure-schedules/{exposure_schedule_id}/pause:
+    post:
+      description: |-
+        Pauses a progressive rollout while preserving rollout state.
+      operationId: PauseExposureSchedule
+      parameters:
+        - $ref: "#/components/parameters/exposure_schedule_id"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    absolute_start_time: "2025-06-13T12:00:00Z"
+                    allocation_id: "550e8400-e29b-41d4-a716-446655440020"
+                    control_variant_id: "550e8400-e29b-41d4-a716-446655440012"
+                    created_at: "2024-01-01T12:00:00Z"
+                    guardrail_triggered_action:
+                    guardrail_triggers: []
+                    id: "550e8400-e29b-41d4-a716-446655440010"
+                    rollout_options:
+                      autostart: false
+                      selection_interval_ms: 3600000
+                      strategy: "UNIFORM_INTERVALS"
+                    rollout_steps: []
+                    updated_at: "2024-01-01T12:00:00Z"
+              schema:
+                $ref: "#/components/schemas/AllocationExposureScheduleResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Not Found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Conflict
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Pause a progressive rollout
+      tags:
+        - Feature Flags
+      x-menu-order: 8
+      x-permission:
+        operator: AND
+        permissions:
+          - feature_flag_config_write
+  /api/v2/feature-flags/exposure-schedules/{exposure_schedule_id}/resume:
+    post:
+      description: |-
+        Resumes progression for a previously paused progressive rollout.
+      operationId: ResumeExposureSchedule
+      parameters:
+        - $ref: "#/components/parameters/exposure_schedule_id"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    absolute_start_time: "2025-06-13T12:00:00Z"
+                    allocation_id: "550e8400-e29b-41d4-a716-446655440020"
+                    control_variant_id: "550e8400-e29b-41d4-a716-446655440012"
+                    created_at: "2024-01-01T12:00:00Z"
+                    guardrail_triggered_action:
+                    guardrail_triggers: []
+                    id: "550e8400-e29b-41d4-a716-446655440010"
+                    rollout_options:
+                      autostart: false
+                      selection_interval_ms: 3600000
+                      strategy: "UNIFORM_INTERVALS"
+                    rollout_steps: []
+                    updated_at: "2024-01-01T12:00:00Z"
+              schema:
+                $ref: "#/components/schemas/AllocationExposureScheduleResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Not Found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Conflict
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Resume a progressive rollout
+      tags:
+        - Feature Flags
+      x-menu-order: 7
+      x-permission:
+        operator: AND
+        permissions:
+          - feature_flag_config_write
+  /api/v2/feature-flags/exposure-schedules/{exposure_schedule_id}/start:
+    post:
+      description: |-
+        Starts a progressive rollout and begins progression.
+      operationId: StartExposureSchedule
+      parameters:
+        - $ref: "#/components/parameters/exposure_schedule_id"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    absolute_start_time: "2025-06-13T12:00:00Z"
+                    allocation_id: "550e8400-e29b-41d4-a716-446655440020"
+                    control_variant_id: "550e8400-e29b-41d4-a716-446655440012"
+                    created_at: "2024-01-01T12:00:00Z"
+                    guardrail_triggered_action:
+                    guardrail_triggers: []
+                    id: "550e8400-e29b-41d4-a716-446655440010"
+                    rollout_options:
+                      autostart: false
+                      selection_interval_ms: 3600000
+                      strategy: "UNIFORM_INTERVALS"
+                    rollout_steps: []
+                    updated_at: "2024-01-01T12:00:00Z"
+              schema:
+                $ref: "#/components/schemas/AllocationExposureScheduleResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Not Found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Conflict
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Start a progressive rollout
+      tags:
+        - Feature Flags
+      x-menu-order: 9
+      x-permission:
+        operator: AND
+        permissions:
+          - feature_flag_config_write
+  /api/v2/feature-flags/exposure-schedules/{exposure_schedule_id}/stop:
+    post:
+      description: |-
+        Stops a progressive rollout and marks it as aborted.
+      operationId: StopExposureSchedule
+      parameters:
+        - $ref: "#/components/parameters/exposure_schedule_id"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    absolute_start_time: "2025-06-13T12:00:00Z"
+                    allocation_id: "550e8400-e29b-41d4-a716-446655440020"
+                    control_variant_id: "550e8400-e29b-41d4-a716-446655440012"
+                    created_at: "2024-01-01T12:00:00Z"
+                    guardrail_triggered_action:
+                    guardrail_triggers: []
+                    id: "550e8400-e29b-41d4-a716-446655440010"
+                    rollout_options:
+                      autostart: false
+                      selection_interval_ms: 3600000
+                      strategy: "UNIFORM_INTERVALS"
+                    rollout_steps: []
+                    updated_at: "2024-01-01T12:00:00Z"
+              schema:
+                $ref: "#/components/schemas/AllocationExposureScheduleResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Not Found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Conflict
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Stop a progressive rollout
+      tags:
+        - Feature Flags
+      x-menu-order: 6
+      x-permission:
+        operator: AND
+        permissions:
+          - feature_flag_config_write
   /api/v2/feature-flags/{feature_flag_id}:
     get:
       description: |-
@@ -85276,7 +86312,7 @@ paths:
       summary: Get a feature flag
       tags:
         - Feature Flags
-      x-menu-order: 11
+      x-menu-order: 17
       x-permission:
         operator: AND
         permissions:
@@ -85334,7 +86370,7 @@ paths:
       summary: Update a feature flag
       tags:
         - Feature Flags
-      x-menu-order: 10
+      x-menu-order: 16
       x-permission:
         operator: AND
         permissions:
@@ -85381,12 +86417,206 @@ paths:
       summary: Archive a feature flag
       tags:
         - Feature Flags
-      x-menu-order: 9
+      x-menu-order: 15
       x-permission:
         operator: AND
         permissions:
           - feature_flag_config_write
           - feature_flag_environment_config_read
+  /api/v2/feature-flags/{feature_flag_id}/environments/{environment_id}/allocations:
+    post:
+      description: |-
+        Creates a new targeting rule (allocation) for a specific feature flag in a specific environment.
+      operationId: CreateAllocationsForFeatureFlagInEnvironment
+      parameters:
+        - $ref: "#/components/parameters/feature_flag_id"
+        - $ref: "#/components/parameters/environment_id"
+      requestBody:
+        content:
+          application/json:
+            example:
+              data:
+                attributes:
+                  key: "prod-rollout"
+                  name: "Production Rollout"
+                  type: "FEATURE_GATE"
+                  variant_weights:
+                    - value: 50
+                      variant_id: "550e8400-e29b-41d4-a716-446655440001"
+                    - value: 50
+                      variant_id: "550e8400-e29b-41d4-a716-446655440002"
+                type: "allocations"
+            schema:
+              $ref: "#/components/schemas/CreateAllocationsRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        created_at: "2024-01-01T12:00:00Z"
+                        environment_ids:
+                          - "550e8400-e29b-41d4-a716-446655440001"
+                        guardrail_metrics: []
+                        id: "550e8400-e29b-41d4-a716-446655440020"
+                        key: "prod-rollout"
+                        name: "Production Rollout"
+                        order_position: 0
+                        targeting_rules: []
+                        type: "FEATURE_GATE"
+                        updated_at: "2024-01-01T12:00:00Z"
+                        variant_weights:
+                          - value: 50
+                            variant_id: "550e8400-e29b-41d4-a716-446655440001"
+                      id: "550e8400-e29b-41d4-a716-446655440020"
+                      type: "allocations"
+              schema:
+                $ref: "#/components/schemas/AllocationResponse"
+          description: Created
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AllocationResponse"
+          description: Accepted - Approval required for this change
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Not Found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Conflict
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Create targeting rules for a flag env
+      tags:
+        - Feature Flags
+      x-menu-order: 11
+      x-permission:
+        operator: AND
+        permissions:
+          - feature_flag_config_write
+    put:
+      description: |-
+        Updates targeting rules (allocations) for a specific feature flag in a specific environment.
+        This operation replaces the existing allocation set with the request payload.
+      operationId: UpdateAllocationsForFeatureFlagInEnvironment
+      parameters:
+        - $ref: "#/components/parameters/feature_flag_id"
+        - $ref: "#/components/parameters/environment_id"
+      requestBody:
+        content:
+          application/json:
+            example:
+              data:
+                - attributes:
+                    key: "prod-rollout"
+                    name: "Production Rollout"
+                    type: "FEATURE_GATE"
+                    variant_weights:
+                      - value: 50
+                        variant_id: "550e8400-e29b-41d4-a716-446655440001"
+                      - value: 50
+                        variant_id: "550e8400-e29b-41d4-a716-446655440002"
+                  type: "allocations"
+            schema:
+              $ref: "#/components/schemas/OverwriteAllocationsRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          created_at: "2024-01-01T12:00:00Z"
+                          environment_ids:
+                            - "550e8400-e29b-41d4-a716-446655440001"
+                          guardrail_metrics: []
+                          id: "550e8400-e29b-41d4-a716-446655440020"
+                          key: "prod-rollout"
+                          name: "Production Rollout"
+                          order_position: 0
+                          targeting_rules: []
+                          type: "FEATURE_GATE"
+                          updated_at: "2024-01-01T12:00:00Z"
+                          variant_weights:
+                            - value: 50
+                              variant_id: "550e8400-e29b-41d4-a716-446655440001"
+                        id: "550e8400-e29b-41d4-a716-446655440020"
+                        type: "allocations"
+              schema:
+                $ref: "#/components/schemas/ListAllocationsResponse"
+          description: OK
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListAllocationsResponse"
+          description: Accepted - Approval required for this change
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Not Found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Conflict
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Update targeting rules for a flag
+      tags:
+        - Feature Flags
+      x-menu-order: 10
+      x-permission:
+        operator: AND
+        permissions:
+          - feature_flag_config_write
   /api/v2/feature-flags/{feature_flag_id}/environments/{environment_id}/disable:
     post:
       description: |-
@@ -85420,7 +86650,7 @@ paths:
       summary: Disable a feature flag in an environment
       tags:
         - Feature Flags
-      x-menu-order: 6
+      x-menu-order: 12
       x-permission:
         operator: AND
         permissions:
@@ -85459,7 +86689,7 @@ paths:
       summary: Enable a feature flag in an environment
       tags:
         - Feature Flags
-      x-menu-order: 7
+      x-menu-order: 13
       x-permission:
         operator: AND
         permissions:
@@ -85506,7 +86736,7 @@ paths:
       summary: Unarchive a feature flag
       tags:
         - Feature Flags
-      x-menu-order: 8
+      x-menu-order: 14
       x-permission:
         operator: AND
         permissions:
