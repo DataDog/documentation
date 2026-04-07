@@ -14,11 +14,11 @@ The Datadog organization landing page is the first page your users see when they
 
 **Note**: Trial organizations default to the Quick Start guide, and Studio organizations default to the Studio page. These take precedence over the priority list above.
 
-## Set a custom organization landing page
+## Set a custom landing page for your organization
 
-Only users with the Datadog Admin Role or the Org Management (`org_management`) permission can set the custom landing page for an organization. Custom organization landing pages are not available during free trial periods.
+Only users with the Datadog Admin Role or the Org Management (`org_management`) permission can set the custom landing page for an organization. Custom landing pages are not available during free trial periods.
 
-To set a custom organization landing page:
+To set a custom landing page, follow the steps below:
 
 1. Navigate to [**Organization Settings**][1].
 2. From the tabs on the left, select [**Preferences**][2].
@@ -26,7 +26,7 @@ To set a custom organization landing page:
 4. Use the dropdown list to select a dashboard.
 5. Click the **Save** button.
 
-As an administrator, you can also enforce your chosen home page and disallow users from setting their own landing page.
+As an administrator, you can also enforce a home page for your organization and prevent users from setting their own landing page.
 
 ## Use the default landing page
 

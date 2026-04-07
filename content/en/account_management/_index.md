@@ -66,7 +66,7 @@ The visual accessibility preference has five different settings to address color
 
 ### Home page
 
-Set a personal home page to control which page you see when you log in to Datadog or navigate to the root URL. Your personal home page takes precedence over the [custom organization landing page][15].
+Set a personal home page to control which page you see when you log in to Datadog or navigate to the root URL. Your personal home page takes precedence over the [organization landing page][15], if allowed.
 
 To set a personal home page:
 
