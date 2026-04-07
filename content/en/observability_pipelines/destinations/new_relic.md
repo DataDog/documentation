@@ -9,6 +9,8 @@ products:
 
 {{< product-availability >}}
 
+## Overview
+
 Use Observability Pipelines' New Relic destination to send logs to New Relic.
 
 ## Setup

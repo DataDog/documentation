@@ -9,6 +9,8 @@ products:
 
 {{< product-availability >}}
 
+## Overview
+
 Use Observability Pipelines' Elasticsearch destination to send logs to Elasticsearch.
 
 ## Setup

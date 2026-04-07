@@ -9,6 +9,8 @@ products:
 
 {{< product-availability >}}
 
+## Overview
+
 Use Observability Pipelines' CrowdStrike Next-Gen SIEM destination to send logs to CrowdStrike Next-Gen SIEM.
 
 ## Setup

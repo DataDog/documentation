@@ -9,6 +9,8 @@ products:
 
 {{< product-availability >}}
 
+## Overview
+
 Use Observability Pipelines' syslog destinations to send logs to rsyslog or syslog-ng.
 
 ## Setup

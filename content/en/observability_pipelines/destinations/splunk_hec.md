@@ -9,6 +9,8 @@ products:
 
 {{< product-availability >}}
 
+## Overview
+
 Use Observability Pipelines' Splunk HTTP Event Collector (HEC) destination to send logs to Splunk HEC.
 
 ## Setup

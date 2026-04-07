@@ -9,6 +9,8 @@ products:
 
 {{< product-availability >}}
 
+## Overview
+
 Use Observability Pipelines' Microsoft Sentinel destination to send logs to Microsoft Sentinel. See [Logs Ingestion API][3] for API call limits in Microsoft Sentinel.
 
 ## Setup

@@ -9,6 +9,8 @@ products:
 
 {{< product-availability >}}
 
+## Overview
+
 Use Observability Pipelines' Amazon OpenSearch destination to send logs to Amazon OpenSearch.
 
 ## Setup

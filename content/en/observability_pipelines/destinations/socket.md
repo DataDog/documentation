@@ -9,6 +9,8 @@ products:
 
 {{< product-availability >}}
 
+## Overview
+
 Use Observability Pipelines' Socket destination to send logs to a socket endpoint.
 
 ## Setup

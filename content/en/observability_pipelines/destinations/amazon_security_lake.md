@@ -9,6 +9,8 @@ products:
 
 {{< product-availability >}}
 
+## Overview
+
 Use Observability Pipelines' Amazon Security Lake destination to send logs to Amazon Security Lake.
 
 ## Prerequisites

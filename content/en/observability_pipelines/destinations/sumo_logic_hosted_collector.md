@@ -9,6 +9,8 @@ products:
 
 {{< product-availability >}}
 
+## Overview
+
 Use Observability Pipelines' Sumo Logic destination to send logs to your Sumo Logic Hosted Collector.
 
 ## Setup

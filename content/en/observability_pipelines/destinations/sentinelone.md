@@ -13,6 +13,8 @@ products:
 
 {{< product-availability >}}
 
+## Overview
+
 Use Observability Pipelines' SentinelOne destination to send logs to SentinelOne.
 
 ## Setup

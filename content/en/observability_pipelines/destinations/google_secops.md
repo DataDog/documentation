@@ -9,6 +9,8 @@ products:
 
 {{< product-availability >}}
 
+## Overview
+
 Use Observability Pipelines' Google SecOps destination to send logs to Google SecOps.
 
 The Observability Pipelines Worker uses standard Google authentication methods. See [Authentication methods at Google][3] for more information about choosing the authentication method for your use case.
