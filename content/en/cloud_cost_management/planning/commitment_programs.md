@@ -93,7 +93,7 @@ Use the **Columns** button to show or hide additional columns.
 
 Least Used Savings Plans helps you identify which savings plans are generating the most waste. Use this section to determine when that waste occurs and take action to improve utilization.
 
-{{< img src="cloud_cost/planning/commitment-programs-least-used-savings-plans-1.png" alt="Least Used Savings Plans section showing a bar chart of daily average unused savings plan spend by day of week, a table of the most wasteful savings plans with waste amount, utilization, and ARN, and a heatmap of hourly unused committed spend percentage by day of week." style="width:100%;" >}}
+{{< img src="cloud_cost/planning/commitment-programs-least-used-savings-plans-1.png" alt="Least Used Savings Plans section showing a bar chart of daily average unused savings plan spend by day of week, a table of the most wasteful savings plans with waste amount, utilization, and ARN, and a heat map of hourly unused committed spend percentage by day of week." style="width:100%;" >}}
 
 **Daily average unused Savings Plans**: A bar chart showing the average daily cost of unused savings plan spend for each day of the week. Use this to spot patterns, such as higher waste on weekends when workloads may be lower.
 
@@ -103,7 +103,7 @@ Least Used Savings Plans helps you identify which savings plans are generating t
 - **Utilization**: Percentage of the savings plan being used, shown as a percentage and progress bar.
 - **Savings Plan ARN**: Unique identifier for the savings plan.
 
-**Hourly unused committed spend percentage**: A heatmap showing the percentage of committed spend that went unused, broken down by hour (UTC) and day of week. Darker cells indicate higher unused percentages, making it possible to identify specific time windows where commitments are consistently underused.
+**Hourly unused committed spend percentage**: A heat map showing the percentage of committed spend that went unused, broken down by hour (UTC) and day of week. Darker cells indicate higher unused percentages, making it possible to identify specific time windows where commitments are consistently underused.
 
 ## Example use cases
 
