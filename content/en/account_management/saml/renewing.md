@@ -13,7 +13,7 @@ When Datadog rotates its SAML certificate, you need to update the certificate st
 
 Datadog automatically renews SAML certificates and notifies you before a certificate expires.
 
-## Renewing certificates
+## Renew certificates
 
 1. Sign in to Datadog as an organization administrator.
 1. Download the [SAML metadata XML file][1].
