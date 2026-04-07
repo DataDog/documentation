@@ -224,7 +224,6 @@ metadata:
         enabled: true
         actions_allowlist:
           - "com.datadoghq.script.runPredefinedScript"
-          - "com.datadoghq.kubernetes.core.listPod"
     cluster-agent.datadoghq.com/private-action-runner-enabled: "true"
     cluster-agent.datadoghq.com/private-action-runner-configdata: |
       private_action_runner:
@@ -425,7 +424,6 @@ private_action_runner:
   enabled: true
   actions_allowlist:
     - com.datadoghq.script.runPredefinedScript
-    - com.datadoghq.kubernetes.core.listPod
 EOF
         "cluster-agent.datadoghq.com/private-action-runner-enabled"    = true
         "cluster-agent.datadoghq.com/private-action-runner-configdata" = <<EOF

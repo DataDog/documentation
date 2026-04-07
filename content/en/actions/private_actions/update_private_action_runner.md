@@ -72,39 +72,19 @@ Update the Datadog Operator and Agent image versions in your DatadogAgent manife
    helm repo update
    helm upgrade datadog-operator datadog/datadog-operator \
        --set image.repository=datadog/operator \
-       --set image.tag=1.25.0
+       --set image.tag=latest # you can pin a specific version, see available tags on [Docker Hub][102]
    ```
 
-2. For Datadog Operator `1.25.0`, make sure your `datadog-agent.yaml` keeps the cluster-agent PAR configuration and command override:
+2. Update the Agent image versions in your `datadog-agent.yaml` manifest:
 
    ```yaml
-   metadata:
-     annotations:
-       agent.datadoghq.com/private-action-runner-enabled: "true"
-       agent.datadoghq.com/private-action-runner-configdata: |
-         private_action_runner:
-           enabled: true
-           actions_allowlist:
-             - "com.datadoghq.script.runPredefinedScript"
-             - "com.datadoghq.kubernetes.core.listPod"
-       cluster-agent.datadoghq.com/private-action-runner-enabled: "true"
-       cluster-agent.datadoghq.com/private-action-runner-configdata: |
-         private_action_runner:
-           enabled: true
-           actions_allowlist:
-             - "com.datadoghq.script.runPredefinedScript"
-             - "com.datadoghq.kubernetes.core.listPod"
-   spec:
-     override:
-       clusterAgent:
-         containers:
-           cluster-agent:
-             command:
-               - /entrypoint.sh
-             args:
-               - datadog-cluster-agent
-               - start
-               - -E=/etc/datadog-agent/privateactionrunner.yaml
+   override:
+     nodeAgent:
+       image:
+         name: datadog/agent:<NEW_AGENT_VERSION>
+     clusterAgent:
+       image:
+         name: datadog/cluster-agent:<NEW_AGENT_VERSION>
    ```
 
 3. Apply the updated manifest:
