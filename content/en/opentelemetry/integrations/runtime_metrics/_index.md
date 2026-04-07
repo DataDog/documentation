@@ -153,14 +153,7 @@ When using OpenTelemetry runtime metrics with Datadog, you receive both:
 - Original OpenTelemetry runtime metrics
 - Mapped Datadog runtime metrics for equivalent metrics
 
-The OpenTelemetry runtime metrics have the following prefixes based on their source:
-
-| Source | Prefix |
-| --- | --- |
-| [OTel Collector Datadog Exporter][100] | `otel.process.runtime.*` |
-| [Datadog Agent OTLP Ingest][101] | `process.runtime.*` |
-
-The following tables list the Datadog runtime metrics that are supported through OpenTelemetry mapping. "N/A" indicates that there is no OpenTelemetry equivalent metric available.
+The following tables list the OpenTelemetry runtime metrics used in Datadog's out-of-the-box in-app experiences. "N/A" indicates that no OpenTelemetry equivalent metric is available.
 
 <div class="alert alert-danger"> OpenTelemetry runtime metrics are mapped to Datadog by metric name. Do not rename host metrics for OpenTelemetry runtime metrics as this breaks the mapping.</div>
 
@@ -336,12 +329,20 @@ The following tables list the Datadog runtime metrics that are supported through
 
 {{% tab "Python" %}}
 
-There are no existing metric mappings between Datadog and OpenTelemetry for Python runtime metrics due to mismatching metric types between the two systems.
+The following table lists the conceptual equivalences between OpenTelemetry and Datadog Python runtime metrics. There are no direct mappings due to mismatching metric types between the two systems.
 
-For more information, see [Datadog Python runtime metrics][8] and the [OpenTelemetry Python system metrics instrumentation][9].
-
-[8]: /tracing/metrics/runtime_metrics/?tab=python
-[9]: https://github.com/open-telemetry/opentelemetry-python-contrib/tree/main/instrumentation/opentelemetry-instrumentation-system-metrics
+| Datadog metric | Description | OpenTelemetry metric |
+| --- | --- | --- |
+| `runtime.python.cpu.time.sys` | Number of seconds executing in the kernel. | `process.cpu.time` (`type: system`) |
+| `runtime.python.cpu.time.user` | Number of seconds executing outside the kernel. | `process.cpu.time` (`type: user`) |
+| `runtime.python.cpu.percent` | CPU utilization percentage. OTel divides by 100 × number of cores. | `process.cpu.utilization` |
+| `runtime.python.cpu.ctx_switch.voluntary` | Number of voluntary context switches. | `process.context_switches` (`type: voluntary`) |
+| `runtime.python.cpu.ctx_switch.involuntary` | Number of involuntary context switches. | `process.context_switches` (`type: involuntary`) |
+| `runtime.python.gc.count.gen0` | Number of generation 0 objects. | `process.runtime.{python_implementation}.gc_count` (`count: 0`) |
+| `runtime.python.gc.count.gen1` | Number of generation 1 objects. | `process.runtime.{python_implementation}.gc_count` (`count: 1`) |
+| `runtime.python.gc.count.gen2` | Number of generation 2 objects. | `process.runtime.{python_implementation}.gc_count` (`count: 2`) |
+| `runtime.python.mem.rss` | Resident set memory. | `process.memory.usage` |
+| `runtime.python.thread_count` | Number of threads. | `process.thread.count` |
 
 {{% /tab %}}
 
