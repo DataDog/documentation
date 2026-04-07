@@ -32,7 +32,7 @@ For a list of individual logs, choose which information of interest to display a
 - The **table**, with interactions available in the first row. This is the preferred method to **sort**, **rearrange**, or **remove** columns.
 - The **facet panel** on the left, or the _log side panel_ on the right. This is the preferred option to **add** a column for a field.
 
-With the **Options** button, control the **Content** height and display in the table per log.
+With the **Options** button, control the Content Height and Content Display in the table per log.
 
 {{< img src="logs/explorer/list_view_controls.mp4" alt="Configuring columns and display options" video=true style="width:80%;">}}
 
