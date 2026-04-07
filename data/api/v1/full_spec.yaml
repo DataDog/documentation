@@ -3475,8 +3475,10 @@ components:
       x-enum-varnames:
         - FORMULA
     FreeTextWidgetDefinition:
-      description: Free text is a widget that allows you to add headings to your screenboard. Commonly used to state the overall purpose of the dashboard. Only available on FREE layout dashboards.
+      description: Free text is a widget that allows you to add headings to your dashboard. Commonly used to state the overall purpose of the dashboard.
       properties:
+        background_color:
+          $ref: "#/components/schemas/WidgetBackgroundColor"
         color:
           description: Color of the text.
           type: string
@@ -3917,11 +3919,10 @@ components:
       x-enum-varnames:
         - GROUP
     GroupWidgetDefinition:
-      description: The groups widget allows you to keep similar graphs together on your timeboard. Each group has a custom header, can hold one to many graphs, and is collapsible.
+      description: The group widget allows you to keep similar graphs together on your dashboard. Each group has a custom header, can hold one to many graphs, and is collapsible.
       properties:
         background_color:
-          description: Background color of the group title.
-          type: string
+          $ref: "#/components/schemas/WidgetBackgroundColor"
         banner_img:
           description: URL of image to display as a banner for the group.
           type: string
@@ -4685,6 +4686,7 @@ components:
         - sca_fargate_usage
         - sds_scanned_bytes_usage
         - serverless_apps_usage
+        - serverless_apps_apm_usage
         - siem_analyzed_logs_add_on_usage
         - siem_ingested_bytes_usage
         - snmp_usage
@@ -4772,6 +4774,7 @@ components:
         - SCA_FARGATE_USAGE
         - SDS_SCANNED_BYTES_USAGE
         - SERVERLESS_APPS_USAGE
+        - SERVERLESS_APPS_APM_USAGE
         - SIEM_ANALYZED_LOGS_ADD_ON_USAGE
         - SIEM_INGESTED_BYTES_USAGE
         - SNMP_USAGE
@@ -4779,7 +4782,7 @@ components:
         - VULN_MANAGEMENT_HOSTS_USAGE
         - WORKFLOW_EXECUTIONS_USAGE
     IFrameWidgetDefinition:
-      description: The iframe widget allows you to embed a portion of any other web page on your dashboard. Only available on FREE layout dashboards.
+      description: The iframe widget allows you to embed a portion of any other web page on your dashboard.
       properties:
         type:
           $ref: "#/components/schemas/IFrameWidgetDefinitionType"
@@ -5051,7 +5054,7 @@ components:
         - message
       type: object
     ImageWidgetDefinition:
-      description: The image widget allows you to embed an image on your dashboard. An image can be a PNG, JPG, or animated GIF. Only available on FREE layout dashboards.
+      description: The image widget allows you to embed an image on your dashboard. An image can be a PNG, JPG, or animated GIF.
       properties:
         has_background:
           default: true
@@ -5452,7 +5455,7 @@ components:
         - query
       type: object
     LogStreamWidgetDefinition:
-      description: The Log Stream displays a log flow matching the defined query. Only available on FREE layout dashboards.
+      description: The Log Stream displays a log flow matching the defined query.
       properties:
         columns:
           description: Which columns to display on the widget.
@@ -6037,6 +6040,12 @@ components:
             Default query is `*`, meaning all logs flowing in the index would be excluded.
             Scope down exclusion filter to only a subset of logs with a log query.
           example: "*"
+          type: string
+        sample_attribute:
+          description: |-
+            Sample attribute to use for the sampling of logs going through this exclusion filter.
+            When set, only the logs with the specified attribute are sampled.
+          example: "@ci.job_id"
           type: string
         sample_rate:
           description: |-
@@ -8867,7 +8876,7 @@ components:
           $ref: "#/components/schemas/MonitorOverallStates"
       type: object
     MonitorSummaryWidgetDefinition:
-      description: The monitor summary widget displays a summary view of all your Datadog monitors, or a subset based on a query. Only available on FREE layout dashboards.
+      description: The monitor summary widget displays a summary view of all your Datadog monitors, or a subset based on a query.
       properties:
         color_preference:
           $ref: "#/components/schemas/WidgetColorPreference"
@@ -9256,6 +9265,8 @@ components:
         - published_app_percentage
         - serverless_apps_usage
         - serverless_apps_percentage
+        - serverless_apps_apm_usage
+        - serverless_apps_apm_percentage
         - snmp_usage
         - snmp_percentage
         - universal_service_monitoring_usage
@@ -9421,6 +9432,8 @@ components:
         - PUBLISHED_APP_PERCENTAGE
         - SERVERLESS_APPS_USAGE
         - SERVERLESS_APPS_PERCENTAGE
+        - SERVERLESS_APPS_APM_USAGE
+        - SERVERLESS_APPS_APM_PERCENTAGE
         - SNMP_USAGE
         - SNMP_PERCENTAGE
         - UNIVERSAL_SERVICE_MONITORING_USAGE
@@ -10076,6 +10089,14 @@ components:
           type: number
         sds_scanned_bytes_usage:
           description: The total Sensitive Data Scanner usage by tag(s).
+          format: double
+          type: number
+        serverless_apps_apm_percentage:
+          description: The percentage of Serverless Apps APM usage by tag(s).
+          format: double
+          type: number
+        serverless_apps_apm_usage:
+          description: The total Serverless Apps APM usage by tag(s).
           format: double
           type: number
         serverless_apps_percentage:
@@ -12998,7 +13019,7 @@ components:
         - METRIC
         - TIME_SLICE
     SLOWidgetDefinition:
-      description: Use the SLO and uptime widget to track your SLOs (Service Level Objectives) and uptime on screenboards and timeboards.
+      description: Use the SLO and uptime widget to track your SLOs (Service Level Objectives) and uptime on dashboards.
       properties:
         additional_query_filters:
           description: Additional filters applied to the SLO query.
@@ -14229,7 +14250,7 @@ components:
       x-enum-varnames:
         - SERVICEMAP
     ServiceSummaryWidgetDefinition:
-      description: The service summary displays the graphs of a chosen service in your screenboard. Only available on FREE layout dashboards.
+      description: The service summary displays the graphs of a chosen service in your dashboard.
       properties:
         description:
           description: The description of the widget.
@@ -17899,6 +17920,8 @@ components:
         - assertPageLacks
         - assertRequests
         - click
+        - drag
+        - drop
         - extractFromJavascript
         - extractFromEmailBody
         - extractVariable
@@ -17929,6 +17952,8 @@ components:
         - ASSERT_PAGE_LACKS
         - ASSERT_REQUESTS
         - CLICK
+        - DRAG
+        - DROP
         - EXTRACT_FROM_JAVASCRIPT
         - EXTRACT_FROM_EMAIL_BODY
         - EXTRACT_VARIABLE
@@ -18859,7 +18884,7 @@ components:
         - BAR
         - TREND
     TableWidgetDefinition:
-      description: The table visualization is available on timeboards and screenboards. It displays columns of metrics grouped by tag key.
+      description: The table visualization is available on dashboards. It displays columns of metrics grouped by tag key.
       properties:
         custom_links:
           description: List of custom links.
@@ -24341,6 +24366,9 @@ components:
           description: Specifies the scale type. Possible values are `linear`, `log`, `sqrt`, and `pow##` (for example `pow2` or `pow0.5`).
           type: string
       type: object
+    WidgetBackgroundColor:
+      description: "Background color of the widget. Supported values are `white`, `blue`, `purple`, `pink`, `orange`, `yellow`, `green`, `gray`, `vivid_blue`, `vivid_purple`, `vivid_pink`, `vivid_orange`, `vivid_yellow`, `vivid_green`, and `transparent`."
+      type: string
     WidgetChangeType:
       description: Show the absolute or the relative change.
       enum:
@@ -30532,7 +30560,7 @@ paths:
         Update an index as identified by its name.
         Returns the Index object passed in the request body when the request is successful.
 
-        Using the `PUT` method updates your index’s configuration by **replacing**
+        Using the `PUT` method updates your index's configuration by **replacing**
         your current configuration with the new one sent to your Datadog organization.
       operationId: UpdateLogsIndex
       parameters:

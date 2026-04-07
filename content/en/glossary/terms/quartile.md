@@ -1,4 +1,5 @@
 ---
+id: quartile
 title: quartile
 core_product:
   - dashboards

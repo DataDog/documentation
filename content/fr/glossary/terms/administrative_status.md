@@ -1,4 +1,5 @@
 ---
+id: administrative_status
 synonyms:
 - statut d'administration
 title: statut dʼadministration

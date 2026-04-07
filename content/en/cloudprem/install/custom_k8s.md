@@ -205,6 +205,10 @@ metastore:
 indexer:
   replicaCount: 2
   podSize: xlarge
+  persistentVolume:
+    enabled: true
+    storage: 250Gi
+    storageClass: <storage class>
   extraEnvFrom:
     - secretRef:
         name: cloudprem-minio-credentials

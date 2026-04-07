@@ -1296,6 +1296,22 @@
     "request_description": "",
     "request_schema_description": "Request to update an environment."
   },
+  "PauseExposureSchedule": {
+    "description": "Pauses a progressive rollout while preserving rollout state.",
+    "summary": "Pause a progressive rollout"
+  },
+  "ResumeExposureSchedule": {
+    "description": "Resumes progression for a previously paused progressive rollout.",
+    "summary": "Resume a progressive rollout"
+  },
+  "StartExposureSchedule": {
+    "description": "Starts a progressive rollout and begins progression.",
+    "summary": "Start a progressive rollout"
+  },
+  "StopExposureSchedule": {
+    "description": "Stops a progressive rollout and marks it as aborted.",
+    "summary": "Stop a progressive rollout"
+  },
   "GetFeatureFlag": {
     "description": "Returns the details of a specific feature flag\nincluding variants and environment status.",
     "summary": "Get a feature flag"
@@ -1309,6 +1325,18 @@
   "ArchiveFeatureFlag": {
     "description": "Archives a feature flag. Archived flags are\nhidden from the main list but remain accessible and can be unarchived.",
     "summary": "Archive a feature flag"
+  },
+  "CreateAllocationsForFeatureFlagInEnvironment": {
+    "description": "Creates a new targeting rule (allocation) for a specific feature flag in a specific environment.",
+    "summary": "Create targeting rules for a flag env",
+    "request_description": "",
+    "request_schema_description": "Request to create targeting rules (allocations) for a feature flag in an environment."
+  },
+  "UpdateAllocationsForFeatureFlagInEnvironment": {
+    "description": "Updates targeting rules (allocations) for a specific feature flag in a specific environment.\nThis operation replaces the existing allocation set with the request payload.",
+    "summary": "Update targeting rules for a flag",
+    "request_description": "",
+    "request_schema_description": "Request to overwrite targeting rules (allocations) for a feature flag in an environment."
   },
   "DisableFeatureFlagEnvironment": {
     "description": "Disable a feature flag in a specific environment.",
@@ -1467,6 +1495,30 @@
     "summary": "Update an incident type",
     "request_description": "Incident type payload.",
     "request_schema_description": "Patch request for an incident type."
+  },
+  "ListIncidentUserDefinedFields": {
+    "description": "Get a list of all incident user-defined fields.",
+    "summary": "Get a list of incident user-defined fields"
+  },
+  "CreateIncidentUserDefinedField": {
+    "description": "Create an incident user-defined field.",
+    "summary": "Create an incident user-defined field",
+    "request_description": "Incident user-defined field payload.",
+    "request_schema_description": "Request body for creating an incident user-defined field."
+  },
+  "DeleteIncidentUserDefinedField": {
+    "description": "Delete an incident user-defined field.",
+    "summary": "Delete an incident user-defined field"
+  },
+  "GetIncidentUserDefinedField": {
+    "description": "Get details of an incident user-defined field.",
+    "summary": "Get an incident user-defined field"
+  },
+  "UpdateIncidentUserDefinedField": {
+    "description": "Update an incident user-defined field.",
+    "summary": "Update an incident user-defined field",
+    "request_description": "Incident user-defined field update payload.",
+    "request_schema_description": "Request body for updating an incident user-defined field."
   },
   "ImportIncident": {
     "description": "Import an incident from an external system. This endpoint allows you to create incidents with\nhistorical data such as custom timestamps for detection, declaration, and resolution.\nImported incidents do not execute integrations or notification rules.",
@@ -2825,7 +2877,7 @@
     "description": "Batch query reference table rows by their primary key values.  Returns only found rows in the included array.",
     "summary": "Batch rows query",
     "request_description": "",
-    "request_schema_description": ""
+    "request_schema_description": "Request object for querying multiple rows from a reference table by their identifiers."
   },
   "ListTables": {
     "description": "List all reference tables in this organization.",
@@ -3002,7 +3054,7 @@
     "summary": "Get a restriction policy"
   },
   "UpdateRestrictionPolicy": {
-    "description": "Updates the restriction policy associated with a resource.\n\n#### Supported resources\nRestriction policies can be applied to the following resources:\n- Dashboards: `dashboard`\n- Integration Services: `integration-service`\n- Integration Webhooks: `integration-webhook`\n- Notebooks: `notebook`\n- Powerpacks: `powerpack`\n- Reference Tables: `reference-table`\n- Security Rules: `security-rule`\n- Service Level Objectives: `slo`\n- Synthetic Global Variables: `synthetics-global-variable`\n- Synthetic Tests: `synthetics-test`\n- Synthetic Private Locations: `synthetics-private-location`\n- Monitors: `monitor`\n- Workflows: `workflow`\n- App Builder Apps: `app-builder-app`\n- Connections: `connection`\n- Connection Groups: `connection-group`\n- RUM Applications: `rum-application`\n- Cross Org Connections: `cross-org-connection`\n- Spreadsheets: `spreadsheet`\n- On-Call Schedules: `on-call-schedule`\n- On-Call Escalation Policies: `on-call-escalation-policy`\n- On-Call Team Routing Rules: `on-call-team-routing-rules`\n- Logs Pipelines: `logs-pipeline`\n- Case Management Projects: `case-management-project`\n\n#### Supported relations for resources\nResource Type               | Supported Relations\n----------------------------|--------------------------\nDashboards                  | `viewer`, `editor`\nIntegration Services        | `viewer`, `editor`\nIntegration Webhooks        | `viewer`, `editor`\nNotebooks                   | `viewer`, `editor`\nPowerpacks                  | `viewer`, `editor`\nSecurity Rules              | `viewer`, `editor`\nService Level Objectives    | `viewer`, `editor`\nSynthetic Global Variables  | `viewer`, `editor`\nSynthetic Tests             | `viewer`, `editor`\nSynthetic Private Locations | `viewer`, `editor`\nMonitors                    | `viewer`, `editor`\nReference Tables            | `viewer`, `editor`\nWorkflows                   | `viewer`, `runner`, `editor`\nApp Builder Apps            | `viewer`, `editor`\nConnections                 | `viewer`, `resolver`, `editor`\nConnection Groups           | `viewer`, `editor`\nRUM Application             | `viewer`, `editor`\nCross Org Connections       | `viewer`, `editor`\nSpreadsheets                | `viewer`, `editor`\nOn-Call Schedules           | `viewer`, `overrider`, `editor`\nOn-Call Escalation Policies | `viewer`, `editor`\nOn-Call Team Routing Rules  | `viewer`, `editor`\nLogs Pipelines              | `viewer`, `processors_editor`, `editor`\nCase Management Projects    | `viewer`, `contributor`, `manager`",
+    "description": "Updates the restriction policy associated with a resource.\n\n#### Supported resources\nRestriction policies can be applied to the following resources:\n- Dashboards: `dashboard`\n- Integration Services: `integration-service`\n- Integration Webhooks: `integration-webhook`\n- Notebooks: `notebook`\n- Powerpacks: `powerpack`\n- Reference Tables: `reference-table`\n- Security Rules: `security-rule`\n- Service Level Objectives: `slo`\n- Synthetic Global Variables: `synthetics-global-variable`\n- Synthetic Tests: `synthetics-test`\n- Synthetic Private Locations: `synthetics-private-location`\n- Monitors: `monitor`\n- Workflows: `workflow`\n- App Builder Apps: `app-builder-app`\n- Connections: `connection`\n- Connection Groups: `connection-group`\n- RUM Applications: `rum-application`\n- Cross Org Connections: `cross-org-connection`\n- Spreadsheets: `spreadsheet`\n- On-Call Schedules: `on-call-schedule`\n- On-Call Escalation Policies: `on-call-escalation-policy`\n- On-Call Team Routing Rules: `on-call-team-routing-rules`\n- Logs Pipelines: `logs-pipeline`\n- Case Management Projects: `case-management-project`\n- Monitor Notification Rules: `monitor-notification-rule`\n\n#### Supported relations for resources\nResource Type               | Supported Relations\n----------------------------|--------------------------\nDashboards                  | `viewer`, `editor`\nIntegration Services        | `viewer`, `editor`\nIntegration Webhooks        | `viewer`, `editor`\nNotebooks                   | `viewer`, `editor`\nPowerpacks                  | `viewer`, `editor`\nSecurity Rules              | `viewer`, `editor`\nService Level Objectives    | `viewer`, `editor`\nSynthetic Global Variables  | `viewer`, `editor`\nSynthetic Tests             | `viewer`, `editor`\nSynthetic Private Locations | `viewer`, `editor`\nMonitors                    | `viewer`, `editor`\nReference Tables            | `viewer`, `editor`\nWorkflows                   | `viewer`, `runner`, `editor`\nApp Builder Apps            | `viewer`, `editor`\nConnections                 | `viewer`, `resolver`, `editor`\nConnection Groups           | `viewer`, `editor`\nRUM Application             | `viewer`, `editor`\nCross Org Connections       | `viewer`, `editor`\nSpreadsheets                | `viewer`, `editor`\nOn-Call Schedules           | `viewer`, `overrider`, `editor`\nOn-Call Escalation Policies | `viewer`, `editor`\nOn-Call Team Routing Rules  | `viewer`, `editor`\nLogs Pipelines              | `viewer`, `processors_editor`, `editor`\nCase Management Projects    | `viewer`, `contributor`, `manager`\nMonitor Notification Rules  | `viewer`, `editor`",
     "summary": "Update a restriction policy",
     "request_description": "Restriction policy payload",
     "request_schema_description": "Update request for a restriction policy."
@@ -3663,6 +3715,18 @@
     "description": "The list endpoint returns security signals that match a search query.\nBoth this endpoint and the POST endpoint can be used interchangeably when listing\nsecurity signals.",
     "summary": "Get a quick list of security signals"
   },
+  "BulkEditSecurityMonitoringSignalsAssignee": {
+    "description": "Change the triage assignees of multiple security signals at once.\nThe maximum number of signals that can be updated in a single request is 199.",
+    "summary": "Bulk update triage assignee of security signals",
+    "request_description": "Attributes describing the signal assignee updates.",
+    "request_schema_description": "Request body for updating the assignee of multiple security signals."
+  },
+  "BulkEditSecurityMonitoringSignalsState": {
+    "description": "Change the triage states of multiple security signals at once.\nThe maximum number of signals that can be updated in a single request is 199.",
+    "summary": "Bulk update triage state of security signals",
+    "request_description": "Attributes describing the signal state updates.",
+    "request_schema_description": "Request body for updating the triage states of multiple security signals."
+  },
   "SearchSecurityMonitoringSignals": {
     "description": "Returns security signals that match a search query.\nBoth this endpoint and the GET endpoint can be used interchangeably for listing\nsecurity signals.",
     "summary": "Get a list of security signals",
@@ -3980,7 +4044,7 @@
     "summary": "List status pages"
   },
   "CreateStatusPage": {
-    "description": "Creates a new status page.",
+    "description": "Creates a new status page. **Note**: Publishing a status page on creation via the `enabled` property will be deprecated. Use the dedicated [publish](#publish-status-page) status page endpoint after creation instead.",
     "summary": "Create status page",
     "request_description": "",
     "request_schema_description": "Request object for creating a status page."
@@ -4002,7 +4066,7 @@
     "summary": "Get status page"
   },
   "UpdateStatusPage": {
-    "description": "Updates an existing status page's attributes.",
+    "description": "Updates an existing status page's attributes. **Note**: Publishing and unpublishing via the `enabled` property will be deprecated on this endpoint. Use the dedicated [publish](#publish-status-page) and [unpublish](#unpublish-status-page) status page endpoints instead.",
     "summary": "Update status page",
     "request_description": "",
     "request_schema_description": "Request object for updating a status page."
@@ -4067,6 +4131,22 @@
     "request_description": "",
     "request_schema_description": "Request object for updating a maintenance."
   },
+  "PublishStatusPage": {
+    "description": "Publishes a status page. For pages of type `public`, makes the status page available on the public internet and requires the `status_pages_public_page_publish` permission. For pages of type `internal`, makes the status page available under the `status-pages/$domain_prefix/view` route within the Datadog organization and requires the `status_pages_internal_page_publish` permission. The `status_pages_settings_write` permission is temporarily honored as we migrate publishing functionality from the update status page endpoint to the publish status page endpoint.",
+    "summary": "Publish status page"
+  },
+  "UnpublishStatusPage": {
+    "description": "Unpublishes a status page. For pages of type `public`, removes the status page from the public internet and requires the `status_pages_public_page_publish` permission. For pages of type `internal`, removes the `status-pages/$domain_prefix/view` route from the Datadog organization and requires the `status_pages_internal_page_publish` permission. The `status_pages_settings_write` permission is temporarily honored as we migrate unpublishing functionality from the update status page endpoint to the unpublish status page endpoint.",
+    "summary": "Unpublish status page"
+  },
+  "GetApiMultistepSubtests": {
+    "description": "Get the list of API tests that can be added as subtests to a given API multistep test.\nThe current test is excluded from the list since a test cannot be a subtest of itself.",
+    "summary": "Get available subtests for a multistep test"
+  },
+  "GetApiMultistepSubtestParents": {
+    "description": "Get the list of API multistep tests that include a given subtest,\nalong with their monitor status.",
+    "summary": "Get parent tests for a subtest"
+  },
   "GetOnDemandConcurrencyCap": {
     "description": "Get the on-demand concurrency cap.",
     "summary": "Get the on-demand concurrency cap"
@@ -4099,6 +4179,12 @@
     "request_description": "New suite details to be saved.",
     "request_schema_description": "Request body for creating or editing a Synthetic test suite."
   },
+  "PatchTestSuite": {
+    "description": "Patch a Synthetic test suite using JSON Patch (RFC 6902).\nUse partial updates to modify only specific fields of a test suite.\n\nCommon operations include:\n- Replace field values: `{\"op\": \"replace\", \"path\": \"/name\", \"value\": \"new_name\"}`\n- Add/update tags: `{\"op\": \"add\", \"path\": \"/tags/-\", \"value\": \"new_tag\"}`\n- Remove fields: `{\"op\": \"remove\", \"path\": \"/message\"}`",
+    "summary": "Patch a test suite",
+    "request_description": "JSON Patch document with operations to apply.",
+    "request_schema_description": "JSON Patch request for a Synthetic test suite."
+  },
   "DeleteSyntheticsTests": {
     "summary": "Bulk delete tests",
     "request_description": "",
@@ -4119,6 +4205,42 @@
     "summary": "Edit a Network Path test",
     "request_description": "New Network Path test details to be saved.",
     "request_schema_description": "Network Path test request."
+  },
+  "GetTestFileDownloadUrl": {
+    "description": "Get a presigned URL to download a file attached to a Synthetic test.\nThe returned URL is temporary and expires after a short period.",
+    "summary": "Get a presigned URL for downloading a test file",
+    "request_description": "",
+    "request_schema_description": "Request body for getting a presigned download URL for a test file."
+  },
+  "GetTestFileMultipartPresignedUrls": {
+    "description": "Get presigned URLs for uploading a file to a Synthetic test using multipart upload.\nReturns the presigned URLs for each part along with the bucket key that references the file.",
+    "summary": "Get presigned URLs for uploading a test file",
+    "request_description": "",
+    "request_schema_description": "Request body for getting presigned URLs for a multipart file upload."
+  },
+  "AbortTestFileMultipartUpload": {
+    "description": "Abort an in-progress multipart file upload for a Synthetic test. This cancels the upload\nand releases any storage used by already-uploaded parts.",
+    "summary": "Abort a multipart upload of a test file",
+    "request_description": "",
+    "request_schema_description": "Request body for aborting a multipart file upload."
+  },
+  "CompleteTestFileMultipartUpload": {
+    "description": "Complete a multipart file upload for a Synthetic test. Call this endpoint after all parts\nhave been uploaded using the presigned URLs obtained from the multipart presigned URLs endpoint.",
+    "summary": "Complete a multipart upload of a test file",
+    "request_description": "",
+    "request_schema_description": "Request body for completing a multipart file upload."
+  },
+  "GetTestParentSuites": {
+    "description": "Get the list of parent suites and their status for a given Synthetic test.",
+    "summary": "Get parent suites for a test"
+  },
+  "ListSyntheticsTestVersions": {
+    "description": "Get the paginated version history for a Synthetic test.",
+    "summary": "Get version history of a test"
+  },
+  "GetSyntheticsTestVersion": {
+    "description": "Get a specific version of a Synthetic test by its version number.",
+    "summary": "Get a specific version of a test"
   },
   "PatchGlobalVariable": {
     "description": "Patch a global variable using JSON Patch (RFC 6902).\nThis endpoint allows partial updates to a global variable by specifying only the fields to modify.\n\nCommon operations include:\n- Replace field values: `{\"op\": \"replace\", \"path\": \"/name\", \"value\": \"new_name\"}`\n- Update nested values: `{\"op\": \"replace\", \"path\": \"/value/value\", \"value\": \"new_value\"}`\n- Add/update tags: `{\"op\": \"add\", \"path\": \"/tags/-\", \"value\": \"new_tag\"}`\n- Remove fields: `{\"op\": \"remove\", \"path\": \"/description\"}`",
@@ -4438,6 +4560,30 @@
   "GetUserMemberships": {
     "description": "Get a list of memberships for a user",
     "summary": "Get user memberships"
+  },
+  "SearchWidgets": {
+    "description": "Search and list widgets for a given experience type. Supports filtering by widget type, creator, title, and tags, as well as sorting and pagination.",
+    "summary": "Search widgets"
+  },
+  "CreateWidget": {
+    "description": "Create a new widget for a given experience type.",
+    "summary": "Create a widget",
+    "request_description": "Widget request body.",
+    "request_schema_description": "Request body for creating or updating a widget."
+  },
+  "DeleteWidget": {
+    "description": "Soft-delete a widget by its UUID for a given experience type.",
+    "summary": "Delete a widget"
+  },
+  "GetWidget": {
+    "description": "Retrieve a widget by its UUID for a given experience type.",
+    "summary": "Get a widget"
+  },
+  "UpdateWidget": {
+    "description": "Update a widget by its UUID for a given experience type. This performs a full replacement of the widget definition.",
+    "summary": "Update a widget",
+    "request_description": "Widget request body.",
+    "request_schema_description": "Request body for creating or updating a widget."
   },
   "CreateWorkflow": {
     "description": "Create a new workflow, returning the workflow ID. This API requires a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key). Alternatively, you can configure these permissions [in the UI](https://docs.datadoghq.com/account_management/api-app-keys/#actions-api-access).",
