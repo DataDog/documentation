@@ -27,6 +27,9 @@ Set up this source when you [set up a pipeline][1]. You can set up a pipeline in
     - The Worker uses standard [Google authentication methods][4].
 1. Enter the subscription name.
 1. Select the decoder you want to use (Bytes, GELF, JSON, syslog).
+
+### Optional TLS settings
+
 {{% observability_pipelines/tls_settings %}}
 
 ## Set secrets

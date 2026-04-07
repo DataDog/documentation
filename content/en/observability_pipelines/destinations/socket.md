@@ -29,7 +29,7 @@ Set up the Socket destination and its environment variables when you [set up a p
 
 {{% observability_pipelines/tls_settings %}}
 
-#### Buffering
+##### Buffering
 
 {{% observability_pipelines/destination_buffer %}}
 
