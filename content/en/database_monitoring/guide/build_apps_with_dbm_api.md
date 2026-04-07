@@ -501,4 +501,4 @@ python identify_sequential_scans.py
 [1]: /api/latest/metrics/#query-scalar-data-across-multiple-products
 [2]: /database_monitoring/setup_postgres/
 [3]: /getting_started/site/
-[4]: https://app.datadoghq.com/databases/samples
+[4]: https://app.datadoghq.com/databases/queries?view=samples

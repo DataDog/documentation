@@ -70,4 +70,4 @@ When you select a query, the custom tags are shown on the **Sample Details** pag
 [1]: /database_monitoring/#getting-started
 [2]: https://google.github.io/sqlcommenter
 [3]: https://github.com/basecamp/marginalia
-[4]: https://app.datadoghq.com/databases/samples
+[4]: https://app.datadoghq.com/databases/queries?view=samples

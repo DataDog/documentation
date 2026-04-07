@@ -20,14 +20,12 @@ The Samples page shows a snapshot in time of running and recently finished queri
 
 ## Search and filter
 
-The Samples page shows queries on all supported database products together (unlike on the Query Metrics page where you select which database you want to dive into). Filter on the `source` facet to see data for a particular database (Postgres or MySQL).
-
 Enter tags into the Search field to filter the list of query samples, or use the facets listed on the left side. The facets include:
 
-- **Core**: Services, database product sources (Postgres or MySQL), host, and duration.
+- **Core**: Services, database product (Postgres, MySQL, etc.), host, and duration.
 - **Network**: Client IP address and ports for applications or proxies that connect to the database.
 - **Database**: Database names, an explain plan cost slider, indexes, a row count slider for the number of rows returned or affected by queries, query statements, and users.
-- **Postgres and MySQL specific facets**
+- **Database product specific facets**
 
 Click **Options** to add columns to the table. Click on column headers to sort by a particular metric.
 
@@ -89,5 +87,5 @@ For quick access to dashboards that showcase database-related infrastructure and
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/databases/samples
+[1]: https://app.datadoghq.com/databases/queries?view=samples
 [2]: /database_monitoring/data_collected/#which-queries-are-tracked

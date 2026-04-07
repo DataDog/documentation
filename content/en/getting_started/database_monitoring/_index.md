@@ -68,7 +68,7 @@ The command continues to run until you stop it by pressing Ctrl + C.
 
 Which query consumes the most database time? To find out, use the Query Metrics view.
 
-1. On the [Database Monitoring][6] page, click the **Query metrics** tab in the UI.
+1. On the [Database Monitoring][6] page, navigate to the **Queries** page and select the **Query Metrics** view.
 
 2. Sort the Normalized Query table by **Percent time** to see the query that the database spends the most time executing.
 
@@ -78,19 +78,17 @@ Which query consumes the most database time? To find out, use the Query Metrics 
 
 ## Troubleshoot a slow query
 
-In addition to identifying slow queries, Datadog Database Monitoring can help you diagnose them. A query's Explain Plan describes the steps that the database takes to resolve the query. View an Explain Plan by clicking on a sample in the Query Samples view.
+In addition to identifying slow queries, Datadog Database Monitoring can help you diagnose them. A query's Explain Plan describes the steps that the database takes to resolve the query. View an Explain Plan by clicking on a sample in the Explain Plans view.
 
-1. Navigate to the Query Samples view within [Database Monitoring][6] by selecting the **Samples** tab.
+1. Navigate to the **Queries** page within [Database Monitoring][6] and select the **Explain Plans** view.
 
-2. In the **In** dropdown, select **Explain Plans**. 
-
-3. Sort the Normalized Query table by **Duration**.
+2. Sort the Normalized Query table by **Duration**.
 
    {{< img src="database_monitoring/dbm_qs_explain_plan_duration.png" alt="Normalized query samples sorted by duration">}}
 
-4. Find a query in the table with data in the **Explain Plan** column and click on it to open the Sample Details page. 
+3. Find a query in the table with data in the **Explain Plan** column and click on it to open the Sample Details page. 
 
-5. Under **Explain Plan**, click **List View**. This Explain Plan at the bottom of the Explain Plan Sample page shows that the query requires an _Index Scan_.
+4. Under **Explain Plan**, click **List View**. This Explain Plan at the bottom of the Explain Plan Sample page shows that the query requires an _Index Scan_.
 
    {{< img src="database_monitoring/dbm_qs_explain_plan_list_view.png" alt="Query explain plan showing Index Scan">}}
 
