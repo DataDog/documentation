@@ -36,7 +36,7 @@ Choose your installation method based on your environment:
 
 **Agent-based installation (recommended)**
 : - Linux or Windows host with Datadog Agent version 7.77.0 or later
-: - Or Kubernetes cluster with Datadog Operator version 1.24.0 or later
+: - Or Kubernetes cluster with Datadog Operator version 1.25.0
 : - Network access to Datadog: `https://{{< region-param key=dd_site >}}`
 : - An [Application key][20] with `on_prem_runner_write` scope and **Actions API Access** enabled
 
@@ -178,14 +178,14 @@ Follow these steps to install the Private Action Runner on your [Datadog Node Ag
 
 #### Install the Datadog Operator
 
-Install the Datadog Operator version 1.24.0 or later:
+Install the Datadog Operator version 1.25.0:
 
 ```bash
 helm repo add datadog https://helm.datadoghq.com
 helm repo update
 helm install datadog-operator datadog/datadog-operator \
     --set image.repository=datadog/operator \
-    --set image.tag=1.24.0
+    --set image.tag=1.25.0
 ```
 
 #### Create an API key and Application key
@@ -210,7 +210,7 @@ Create a `datadog-agent.yaml` file with the following content:
 - Set `clusterName` to a meaningful name for your cluster.
 - Update `site` to your [Datadog site][105] if you're not using `datadoghq.com`.
 - The `app-key` in the secret is required for the Private Action Runner.
-- Adjust `actions_allowlist` and `DD_PRIVATE_ACTION_RUNNER_ACTIONS_ALLOWLIST` based on your needs. See [Available actions](#available-actions) for the full list.
+- Adjust `actions_allowlist` based on your needs. See [Available actions](#available-actions) for the full list.
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -220,6 +220,13 @@ metadata:
   annotations:
     agent.datadoghq.com/private-action-runner-enabled: "true"
     agent.datadoghq.com/private-action-runner-configdata: |
+      private_action_runner:
+        enabled: true
+        actions_allowlist:
+          - "com.datadoghq.script.runPredefinedScript"
+          - "com.datadoghq.kubernetes.core.listPod"
+    cluster-agent.datadoghq.com/private-action-runner-enabled: "true"
+    cluster-agent.datadoghq.com/private-action-runner-configdata: |
       private_action_runner:
         enabled: true
         actions_allowlist:
@@ -239,20 +246,16 @@ spec:
     kubelet:
       tlsVerify: false
   override:
-    nodeAgent:
-      image:
-        name: datadog/agent:7.77.0
-        pullPolicy: IfNotPresent
     clusterAgent:
       replicas: 2
-      image:
-        name: datadog/cluster-agent:7.77.0
-        pullPolicy: IfNotPresent
-      env:
-        - name: DD_PRIVATE_ACTION_RUNNER_ENABLED
-          value: "true"
-        - name: DD_PRIVATE_ACTION_RUNNER_ACTIONS_ALLOWLIST
-          value: "com.datadoghq.script.runPredefinedScript,com.datadoghq.kubernetes.core.listPod"
+      containers:
+        cluster-agent:
+          command:
+            - /entrypoint.sh
+          args:
+            - datadog-cluster-agent
+            - start
+            - -E=/etc/datadog-agent/privateactionrunner.yaml
   features:
     logCollection:
       enabled: true
@@ -314,9 +317,10 @@ Create a Terraform file with the following content. Update `eks_cluster` and oth
 
 ```hcl
 locals {
-  helm_operator_version = "2.19.0"
-  agent_version         = "7.77.0"
-  eks_cluster           = "<YOUR_CLUSTER_NAME>"
+  helm_chart_version = "2.19.0"
+  operator_version   = "1.25.0"
+  agent_version      = "7.77.0"
+  eks_cluster        = "<YOUR_CLUSTER_NAME>"
 }
 
 variable "datadog_api_key" {
@@ -395,9 +399,14 @@ resource "helm_release" "datadog_operator" {
   name             = "datadog-operator"
   repository       = "https://helm.datadoghq.com"
   chart            = "datadog-operator"
-  version          = local.helm_operator_version
+  version          = local.helm_chart_version
   namespace        = "datadog"
   create_namespace = false
+
+  set {
+    name  = "image.tag"
+    value = local.operator_version
+  }
 
   depends_on = [kubernetes_namespace_v1.namespace]
 }
@@ -412,6 +421,14 @@ resource "kubernetes_manifest" "datadog_agent" {
       annotations = {
         "agent.datadoghq.com/private-action-runner-enabled"    = true
         "agent.datadoghq.com/private-action-runner-configdata" = <<EOF
+private_action_runner:
+  enabled: true
+  actions_allowlist:
+    - com.datadoghq.script.runPredefinedScript
+    - com.datadoghq.kubernetes.core.listPod
+EOF
+        "cluster-agent.datadoghq.com/private-action-runner-enabled"    = true
+        "cluster-agent.datadoghq.com/private-action-runner-configdata" = <<EOF
 private_action_runner:
   enabled: true
   actions_allowlist:
@@ -455,19 +472,16 @@ EOF
           image = {
             tag = local.agent_version
           }
-          env = [
-            {
-              name  = "DD_PRIVATE_ACTION_RUNNER_ENABLED"
-              value = "true"
-            },
-            {
-              name  = "DD_PRIVATE_ACTION_RUNNER_ACTIONS_ALLOWLIST"
-              value = join(",", [
-                "com.datadoghq.script.runPredefinedScript",
-                "com.datadoghq.kubernetes.core.listPod",
-              ])
-            },
-          ]
+          containers = {
+            "cluster-agent" = {
+              command = ["/entrypoint.sh"]
+              args = [
+                "datadog-cluster-agent",
+                "start",
+                "-E=/etc/datadog-agent/privateactionrunner.yaml",
+              ]
+            }
+          }
         }
         nodeAgent = {
           image = {
@@ -828,7 +842,9 @@ To edit the allowlist for an agent-based private action runner:
 1. Restart the Agent: `Restart-Service -Force datadogagent`
 
 **Kubernetes (Operator):**
-1. Update the `actions_allowlist` in the DatadogAgent manifest annotations and the `DD_PRIVATE_ACTION_RUNNER_ACTIONS_ALLOWLIST` environment variable.
+1. Update the `actions_allowlist` in both DatadogAgent manifest annotations:
+   - `agent.datadoghq.com/private-action-runner-configdata`
+   - `cluster-agent.datadoghq.com/private-action-runner-configdata`
 1. Apply the updated manifest: `kubectl apply -f datadog-agent.yaml`
 
 {{% /tab %}}
