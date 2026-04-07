@@ -3,18 +3,6 @@ title: Monitors
 description: "Use the Monitors overlay in Cloudcraft to view monitor states for your resources and services, and investigate alerting monitors with Bits AI SRE."
 site_support_id: cloudcraft_monitors_overlay
 further_reading:
-- link: "/datadog_cloudcraft/overlays/infrastructure/"
-  tag: "Documentation"
-  text: "Infrastructure overlay"
-- link: "/datadog_cloudcraft/overlays/observability/"
-  tag: "Documentation"
-  text: "Observability overlay"
-- link: "/datadog_cloudcraft/overlays/security/"
-  tag: "Documentation"
-  text: "Security overlay"
-- link: "/datadog_cloudcraft/overlays/ccm/"
-  tag: "Documentation"
-  text: "Cloud Cost Management overlay"
 - link: "/bits_ai/bits_ai_sre/"
   tag: "Documentation"
   text: "Bits AI SRE"
