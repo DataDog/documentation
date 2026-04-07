@@ -27,8 +27,6 @@ Set up the Socket destination and its environment variables when you [set up a p
 
 ##### Enable TLS
 
-If you enabled **TCP** mode, you can toggle the switch to **Enable TLS**.
-- If you are using Secrets Management, enter the identifier for the socket key pass. See [Set secrets](#set-secrets) for the defaults used.
 {{% observability_pipelines/tls_settings %}}
 
 #### Buffering

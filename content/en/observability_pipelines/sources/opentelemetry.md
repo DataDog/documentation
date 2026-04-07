@@ -44,8 +44,6 @@ Set up this source when you [set up a pipeline][6]. You can set up a pipeline in
 
 ### Optional TLS settings
 
-Toggle the switch to **Enable TLS**.
-- If you are using Secrets Management, enter the identifier for the OTel TLS key pass. See [Set secrets](#set-secrets) for the defaults used.
 {{% observability_pipelines/tls_settings %}}
 
 {{< img src="observability_pipelines/sources/otel_settings.png" alt="The OpenTelemetry source settings" style="width:35%;" >}}

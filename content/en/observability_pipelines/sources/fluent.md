@@ -27,8 +27,6 @@ Set up this source when you [set up a pipeline][1]. You can set up a pipeline in
 
 ### Optional settings
 
-Toggle the switch to **Enable TLS**.
-- If you are using Secrets Management, enter the identifier for the Fluent key pass. See [Set secrets](#set-secrets) for the defaults used.
 {{% observability_pipelines/tls_settings %}}
 
 ## Set secrets

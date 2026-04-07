@@ -42,8 +42,6 @@ To set up the syslog destination in the UI:
 
 ##### Enable TLS
 
-Toggle the switch to **Enable TLS**.
-- If you are using Secrets Management, enter the identifier for the syslog key pass. See [Set secrets](#set-secrets) for the defaults used.
 {{% observability_pipelines/tls_settings %}}
 
 ##### Wait time for TCP keepalive probes

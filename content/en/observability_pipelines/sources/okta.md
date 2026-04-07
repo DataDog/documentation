@@ -32,9 +32,7 @@ The following are required to send Okta logs to Observability Pipelines using Am
 1. Select your authorization strategy. If you selected **Plain**:
     - Enter the identifiers for the HTTP/S Server username and password. See [Set secrets][2] for the defaults used.
 1. In the **Decoding** dropdown menu, select **Bytes**.
-1. Toggle the switch to **Enable TLS**.
-    - If you are using Secrets Management, enter the identifier for the HTTP/S Server key pass. See [Set secrets][2] for the defaults used.
-    {{% observability_pipelines/tls_settings %}}
+{{% observability_pipelines/tls_settings %}}
 1. Copy your certificates into the configuration directory:
     ```shell
     # Create the configuration directory

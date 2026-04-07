@@ -43,8 +43,6 @@ Set up the Kafka destination and its environment variables when you [set up a pi
 
 ##### Enable TLS
 
-Toggle the switch to **Enable TLS**.
-- If you are using Secrets Management, enter the identifier for the Kafka TLS key pass. See [Set secrets](#set-secrets) for the defaults used.
 {{% observability_pipelines/tls_settings %}}
 
 ##### Enable SASL authentication

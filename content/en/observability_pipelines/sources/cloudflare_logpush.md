@@ -36,9 +36,7 @@ The following are required to send Cloudflare Logpush logs to Observability Pipe
 1. Select your authorization strategy. If you selected **Plain**:
     - Enter the identifiers for the HTTP/S Server username and password. See [Set secrets][3] for the defaults used.
 1. In the **Decoding** dropdown menu, select **Bytes**.
-1. Toggle the switch to **Enable TLS**.
-    - If you are using Secrets Management, enter the identifier for the HTTP/S Server key pass. See [Set secrets][3] for the defaults used.
-    {{% observability_pipelines/tls_settings %}}
+{{% observability_pipelines/tls_settings %}}
 1. Copy your certificates into the configuration directory:
     ```shell
     # Create the configuration directory

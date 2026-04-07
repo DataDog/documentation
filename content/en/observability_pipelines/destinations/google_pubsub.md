@@ -101,8 +101,6 @@ Set up the Google Pub/Sub destination and its environment variables when you [se
 
 ##### Enable TLS
 
-Toggle the switch to **Enable TLS**.
-- If you are using Secrets Management, enter the identifier for the Google Pub/Sub key pass. See [Set secrets](#set-secrets) for the defaults used.
 {{% observability_pipelines/tls_settings %}}
 
 ##### Buffering

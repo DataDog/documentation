@@ -42,8 +42,6 @@ Enter the identifier for your Datadog Agent address. If you leave it blank, the 
 
 ### Optional settings
 
-Toggle the switch to **Enable TLS**.
-- If you are using Secrets Management, enter the identifier for the Datadog Agent key pass. See [Set secrets](#set-secrets) for the defaults used.
 {{% observability_pipelines/tls_settings %}}
 
 ## Set secrets

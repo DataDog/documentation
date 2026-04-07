@@ -1,6 +1,6 @@
 Toggle the switch to **Enable TLS**.
-- If you are using Secrets Management, enter the identifier for the {{ .Get 0 }} key pass. See [Set secrets](#set-secrets) for the defaults used.
-- The following certificate and key files are required.
+- If you are using Secrets Management, enter the identifier for the key pass. See [Set secrets](#set-secrets) for the default used if the field is left blanks.
+- The following certificate and key files are required:
   - `Server Certificate Path`: The path to the certificate file that has been signed by your Certificate Authority (CA) root file in DER, PEM, or CRT (X.509).
   - `CA Certificate Path`: The path to the certificate file that is your Certificate Authority (CA) root file in DER, PEM, or CERT (X.509).
   - `Private Key Path`: The path to the `.key` private key file that belongs to your Server Certificate Path in DER, PEM, or CERT (PKCS #8) format.

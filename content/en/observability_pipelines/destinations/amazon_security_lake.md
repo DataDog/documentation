@@ -41,8 +41,6 @@ Set up the Amazon Security Lake destination and its environment variables when y
 
 ##### Enable TLS
 
-Toggle the switch to **Enable TLS**.
-- If you are using Secrets Management, enter the identifier for the Amazon Security Lake key pass. See [Set secrets](#set-secrets) for the defaults used.
 {{% observability_pipelines/tls_settings %}}
 
 ##### Buffering

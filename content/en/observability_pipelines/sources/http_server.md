@@ -35,8 +35,6 @@ To configure your HTTP/S Server source, enter the following:
 
 ### Optional settings
 
-Toggle the switch to **Enable TLS**.
-- If you are using Secrets Management, enter the identifier for the HTTP Server key pass. See [Set secrets](#set-secrets) for the defaults used.
 {{% observability_pipelines/tls_settings %}}
 
 ## Set secrets

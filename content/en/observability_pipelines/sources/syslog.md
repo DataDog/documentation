@@ -32,8 +32,6 @@ To configure your Syslog source:
 
 ### Optional settings
 
-Toggle the switch to **Enable TLS**.
-- If you are using Secrets Management, enter the identifier for the syslog key pass. See [Set secrets](#set-secrets) for the defaults used.
 {{% observability_pipelines/tls_settings %}}
 
 ## Set secrets

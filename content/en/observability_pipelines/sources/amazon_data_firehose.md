@@ -35,8 +35,6 @@ Select an **AWS authentication** option. If you select **Assume role**:
 
 #### Enable TLS
 
-Toggle the switch to **Enable TLS**.
-- If you are using Secrets Management, enter the identifier for the Amazon Data Firehose key pass. See [Set secrets](#set-secrets) for the defaults used.
 {{% observability_pipelines/tls_settings %}}
 
 ## Set secrets
