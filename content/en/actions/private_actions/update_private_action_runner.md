@@ -100,7 +100,7 @@ Update the Datadog Operator and Agent image versions in your DatadogAgent manife
    kubectl logs -l app.kubernetes.io/component=cluster-agent --tail=100 | grep private
    ```
 
-[102]: https://hub.docker.com/r/datadog/operator/tags?name=latest
+[102]: https://hub.docker.com/r/datadog/operator/tags
 
 {{% /tab %}}
 
