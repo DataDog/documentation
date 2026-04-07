@@ -5,15 +5,18 @@ aliases:
   - /synthetics/uptime_check
   - /synthetics/api_test
 further_reading:
-- link: "/synthetics/guide/version_history/"
-  tag: "Guide"
-  text: "Version History for Synthetic Monitoring"
 - link: '/getting_started/synthetics/api_test'
   tag: 'Documentation'
   text: 'Get started with API tests'
 - link: '/synthetics/private_locations'
   tag: 'Documentation'
   text: 'Run API tests on internal endpoints'
+- link: '/synthetics/guide/export-tests-to-terraform'
+  tag: 'Guide'
+  text: 'Export Synthetic tests to Terraform'
+- link: "/synthetics/guide/version_history/"
+  tag: "Guide"
+  text: "Version History for Synthetic Monitoring"
 - link: 'https://www.datadoghq.com/blog/monitor-apis-with-datadog'
   tag: 'Blog'
   text: 'Monitor your workflows with Datadog SSL, TLS, and Multistep API tests'
@@ -23,9 +26,6 @@ further_reading:
 - link: 'https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_test'
   tag: 'External Site'
   text: 'Create and manage Synthetic API Tests with Terraform'
-- link: '/synthetics/guide/export-tests-to-terraform'
-  tag: 'Guide'
-  text: 'Export Synthetic tests to Terraform'
 ---
 
 ## Overview

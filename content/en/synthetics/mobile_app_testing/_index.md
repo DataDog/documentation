@@ -6,9 +6,6 @@ aliases:
 - /mobile_app_testing
 - /mobile_app_testing/mobile_app_tests/
 further_reading:
-- link: "/synthetics/guide/version_history/"
-  tag: "Guide"
-  text: "Version History for Synthetic Monitoring"
 - link: "/synthetics/mobile_app_testing/"
   tag: "Documentation"
   text: "Learn how to create Synthetic mobile app tests"
@@ -18,6 +15,9 @@ further_reading:
 - link: "/continuous_testing/"
   tag: "Documentation"
   text: "Learn about Continuous Testing & CI/CD"
+- link: "/synthetics/guide/version_history/"
+  tag: "Guide"
+  text: "Version History for Synthetic Monitoring"
 - link: "https://www.datadoghq.com/blog/simplifying-troubleshooting-with-synthetic-monitoring"
   tag: "Blog"
   text: "Simplifying troubleshooting across the user journey with Datadog Synthetic Monitoring"

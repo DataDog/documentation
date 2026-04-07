@@ -9,6 +9,12 @@ aliases:
 - /real_user_monitoring/session_replay/browser/developer_tools
 - /product_analytics/session_replay/browser/developer_tools
 further_reading:
+- link: '/real_user_monitoring/explorer'
+  tag: 'Documentation'
+  text: 'Visualize your RUM data in the Explorer'
+- link: '/integrations/content_security_policy_logs'
+  tag: 'Documentation'
+  text: 'Detect and aggregate CSP violations with Datadog'
 - link: 'https://www.datadoghq.com/blog/session-replay-datadog/'
   tag: 'Blog'
   text: 'Use Datadog Session Replay to view real-time user journeys'
@@ -18,12 +24,6 @@ further_reading:
 - link: 'https://www.datadoghq.com/blog/zendesk-session-replay-integration/'
   tag: 'Blog'
   text: 'Visually replay user-facing issues with Zendesk and Datadog Session Replay'
-- link: '/real_user_monitoring/explorer'
-  tag: 'Documentation'
-  text: 'Visualize your RUM data in the Explorer'
-- link: '/integrations/content_security_policy_logs'
-  tag: 'Documentation'
-  text: 'Detect and aggregate CSP violations with Datadog'
 ---
 
 ## Overview

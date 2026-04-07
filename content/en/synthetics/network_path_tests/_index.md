@@ -3,6 +3,9 @@ title: Network Path Testing
 description: Analyze global Network Paths with managed locations and private environments.
 aliases:
 further_reading:
+- link: "/synthetics/network_path_tests/glossary/"
+  tag: "Documentation"
+  text: "Network Path terms and concepts"
 - link: "https://www.datadoghq.com/blog/simplifying-troubleshooting-with-synthetic-monitoring"
   tag: "Blog"
   text: "Simplifying troubleshooting across the user journey with Datadog Synthetic Monitoring"
@@ -15,9 +18,6 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/synthetic-monitoring-network-path/"
   tag: "Blog"
   text: "Understand user experience through network performance with Datadog Synthetic Monitoring"
-- link: "/synthetics/network_path_tests/glossary/"
-  tag: "Documentation"
-  text: "Network Path terms and concepts"
 ---
 
 ## Overview
