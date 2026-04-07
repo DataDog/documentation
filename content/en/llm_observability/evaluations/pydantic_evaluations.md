@@ -17,7 +17,6 @@ You can use LLM Observability to run Pydantic evaluations and scalar Pydantic re
 
 1. Set up an [LLM Observability Experiment][2] and an [LLM Observability Dataset][4].
 2. Provide a Pydantic evaluator to the `evaluators` parameter in an LLMObs `Experiment` as demonstrated in the following code sample. (Optional) Provide a Pydantic report evaluator to the `summary_evaluators` parameter in an LLMObs `Experiment`. **Note**: Only Pydantic report evaluators that return a `ScalarResult` are supported.
-    a. For a working example, see [Datadog's Pydantic demo in GitHub][6].
 
 ```python 
 
@@ -127,8 +126,10 @@ results = experiment.run(jobs=4, raise_errors=True)
 print(f"View experiment: {experiment.url}")
 ```
 
+For a working example, see [Datadog's Pydantic demo in GitHub][6].
+
 ### Usage
-After you run an experiment with a Pydantic evaluation, you can view the Pydantic evaluation results per instance in the corresponding experiment run in Datadog. In the experiment below, two Pydantic evaluations (a custom Pydantic evaluator with the name "ComprehensiveCheck" and a built-in evaluator with the name "EqualsExpected") and one Pydantic report evaluator (a custom Pydantic report evaluator with the name "TotalCasesEvaluator") were run:
+After you run an experiment with a Pydantic evaluation, you can view the Pydantic evaluation results per instance in the corresponding experiment run in Datadog. In the following experiment, two Pydantic evaluations (a custom Pydantic evaluator with the name "ComprehensiveCheck" and a built-in evaluator with the name "EqualsExpected") and one Pydantic report evaluator (a custom Pydantic report evaluator with the name "TotalCasesEvaluator") were run:
 
 {{< img src="llm_observability/pydantic-experiment-result.png" alt="An LLM Observability experiment with a Pydantic evaluator." style="width:100%;" >}}
 
