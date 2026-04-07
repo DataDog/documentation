@@ -57,11 +57,11 @@ The build system automatically fetches:
 ### Related Repositories
 These repositories are dependencies of or closely related to this project. They may be cloned as siblings of this repo in the same parent directory:
 
-- **`DataDog/documentation-ci`** — GitLab CI configuration for this repo. Contains `documentation-gitlab-config.yml`, which defines all CI jobs, the Docker build image URL (`FF_BUILD_IMAGE_URL`), GitHub token setup via `dd-octo-sts`, and trust policies. Changes here affect pipeline behavior for all branches.
+- **`DataDog/documentation-ci`** (https://github.com/DataDog/documentation-ci) — GitLab CI configuration for this repo. Contains `documentation-gitlab-config.yml`, which defines all CI jobs, the Docker build image URL (`FF_BUILD_IMAGE_URL`), GitHub token setup via `dd-octo-sts`, and trust policies. Changes here affect pipeline behavior for all branches.
 
-- **`DataDog/websites-images`** — Builds the Docker image used by CI (`webops-site-build`). When a PR merges here, a new image is published and the image tag in `documentation-ci` must be bumped to pick it up. CI failures related to the build environment (network issues, missing tools, broken scripts baked into the image) often trace back here.
+- **`DataDog/websites-images`** (https://github.com/DataDog/websites-images) — Builds the Docker image used by CI (`webops-site-build`). When a PR merges here, a new image is published and the image tag in `documentation-ci` must be bumped to pick it up. CI failures related to the build environment (network issues, missing tools, broken scripts baked into the image) often trace back here.
 
-- **`DataDog/websites-sources`** — Provides integration data consumed during the build via S3. The `make websites_sources_data` target downloads this data. The S3 path is controlled by the `FF_S3_PATH` env var (default: `staging`).
+- **`DataDog/websites-sources`** (https://github.com/DataDog/websites-sources) — Provides integration data consumed during the build via S3. The `make websites_sources_data` target downloads this data. The S3 path is controlled by the `FF_S3_PATH` env var (default: `staging`).
 
 ### Configuration
 - `config/` - Hugo configuration for different environments (development, preview, live)
