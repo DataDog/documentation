@@ -71,8 +71,8 @@ Set a personal home page to control which page you see when you log in to Datado
 To set a personal home page:
 
 1. Navigate to [**Personal Settings > Home Page**][16].
-1. Select the page you want as your home page.
-1. Click the **Save** button.
+2. Select the page you want as your home page.
+3. Click the **Save** button.
 
 To revert to the organization default, return to [**Personal Settings > Home Page**][16] and clear your selection.
 
