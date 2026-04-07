@@ -301,6 +301,7 @@ unsupported_sites:
   continuous_integration: [gov]
   correlation: [gov] #Event management correlation
   coterm: [gov]
+  cloudcraft_monitors_overlay: [gov]
   cloudprem: [gov]
   csm_jira: [us,us3,us5,eu,ap1,ap2]
   data_jobs: [gov]
