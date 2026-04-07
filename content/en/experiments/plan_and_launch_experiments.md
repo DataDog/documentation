@@ -14,32 +14,49 @@ further_reading:
 
 ## Overview
 
-Create, configure, and launch experiments to measure how new features affect user outcomes. Before you begin, ensure you have a [feature flag][4] and at least one [experiment metric][2].
-
-
-To create, configure, and launch your experiment, complete the following steps:
+Create, configure, and launch experiments to measure how new features affect user outcomes. 
 
 ## Create your experiment
 
-If you have already created a feature flag for your experiment, you can create an experiment from the flag detail page:
+If you have already created a feature flag for your experiment, you can create an experiment from the flag detail page.
 
-<!-- {{< img src="/product_analytics/experiment/TODO_create_from_flag.png" alt="Creating an experiment from the feature flag detail page." style="width:80%;" >}} -->
+{{< img src="/product_analytics/experiment/exp_plan_launch_ff_new_experiment.png" alt="The feature flag detail page for a flag called new_product_photos, showing targeting rules and rollouts with a 50/50 split between control and treatment variants, and a Create New Experiment button highlighted at the bottom." style="width:80%;" >}}
 
-You can also draft experiments before creating a feature flag:
+
+You can also draft your experiment before creating a feature flag: 
 
 1. Navigate to the [Experiments][1] page in Datadog Product Analytics.
-1. Click **+ Create Experiment**.
+1. Click **Create Experiment**.
 1. Enter your experiment name and hypothesis.
+1. Click **Create Draft Experiment** to save your draft experiment and open the experiment's configuration page.
 
-{{< img src="/product_analytics/experiment/exp_create_experiment.png" alt="The experiment creation form with fields for experiment name and hypothesis." style="width:80%;" >}}
+{{< img src="/product_analytics/experiment/exp_plan_launch_create_experiment.png" alt="The Create new draft experiment dialog with an experiment name of New Product Photos Experiment, a hypothesis about higher-resolution product photos increasing add-to-cart conversions, and a Create Draft Experiment button highlighted." style="width:80%;" >}}
 
 ## Configure your experiment
 
-### Add metrics
+After creating your experiment, complete the configuration on the experiment detail page.
 
-After you have created an experiment, add your primary metric and optional guardrails. See [Defining Metrics][2] for details on how to create metrics.
+Under the **Decision metrics** section:
+- select the subject type for calculating metrics from the **Calculate metrics by** dropdown. The default is **User (@usr.id)**.
+- Add a primary metric to measure the main outcome of your experiment.
+- Optionally, add secondary metrics to monitor for unintended effects on other areas like performance, engagement, or revenue.
 
-{{< img src="/product_analytics/experiment/exp_decision_metrics1.png" alt="The metrics configuration panel with options for primary metric and guardrails." style="width:80%;" >}}
+See [Defining Metrics][2] to create metrics.
+
+{{< img src="/product_analytics/experiment/exp_plan_launch_decision_metric.png" alt="The metrics configuration panel with options for primary metric and guardrails." style="width:80%;" >}}
+
+Under the **Run a sample size calculation** section (optional):
+- Click **sample size calculator** to open the **Sample Size Calculator** side panel.
+- Select an **Entry point** event to specify when users are enrolled into the experiment.
+- Optionally, add a filter to narrow the entry point audience.
+- Set the **Number of variants** and **Traffic exposure** percentage.
+- Under **Additional inputs**, configure the statistical **Power** (default 80%) and an optional **Target experiment duration** in weeks.
+- Click **Run Calculation** to estimate the [Minimum Detectable Effects][3] for your metrics.
+
+{{< img src="/product_analytics/experiment/exp_plan_launch_sample_size.png" alt="The Sample Size Calculator side panel showing calculation details with Add to Cart Conversion as the primary metric and Number of cart views as a guardrail, an entry point set to click on ADD TO CART, two variants at 100% traffic exposure, and additional inputs for power and target experiment duration." style="width:80%;" >}}
+
+
+
 
 
 {{% collapse-content title="Additional configuration settings" level="h4" expanded=false %}}
@@ -108,8 +125,8 @@ After your experiment is live, you can monitor early traffic on the **Flag & Exp
 
 ## Next steps
 
-1. **[Read Experiment Results][5]**: Review and explore your experiment results.
-1. **[Minimum Detectable Effects][3]**: Choose appropriately sized MDEs.
+- **[Read Experiment Results][5]**: Review and explore your experiment results.
+- **[Minimum Detectable Effects][3]**: Choose appropriately sized MDEs.
 
 ## Further reading
 
