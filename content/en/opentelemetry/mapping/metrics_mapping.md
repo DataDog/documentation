@@ -19,10 +19,6 @@ Datadog products and visualizations are built on metrics and tags that follow sp
 
 <div class="alert alert-info"><strong>Want to unify OpenTelemetry and Datadog metrics in your queries?</strong> Learn how to <a href="/metrics/open_telemetry/query_metrics">query across Datadog and OpenTelemetry metrics</a> from the Metrics Query Editor.</div>
 
-## How OpenTelemetry metrics appear in Datadog
-
-OpenTelemetry metrics are sent to Datadog with their original metric names. The Datadog platform maps these metrics to their Datadog equivalents, so you can use them across Datadog products and visualizations.
-
 ## Metrics mappings
 
 The following table shows the metric mappings for various integrations. Use the search and filter controls to find the mappings for a specific integration.
@@ -46,5 +42,4 @@ For more information, see [OpenTelemetry integrations][11].
 [9]: /opentelemetry/otel_collector_datadog_exporter/?tab=onahost#containers-overview-dashboard
 [10]: /tracing/trace_explorer/trace_view/
 [11]: /opentelemetry/integrations/
-[12]: /opentelemetry/integrations/host_metrics/
 
