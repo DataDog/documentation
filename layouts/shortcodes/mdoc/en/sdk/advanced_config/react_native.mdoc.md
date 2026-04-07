@@ -606,7 +606,7 @@ Events include additional context:
 |               | `errorEvent.additionalInformation.attributes`    | Contains the global attributes set by `DdSdkReactNative.addAttributes`. |
 | ResourceEvent | `resourceEvent.resourceContext`                  | [XMLHttpRequest][15] corresponding to the resource or `undefined`.      |
 |               | `resourceEvent.additionalInformation.userInfo`   | Contains the global user info set by `DdSdkReactNative.setUserInfo`.        |
-|               | `resourceEvent.additionalInformation.attributes` | Contains the global attributes set by `DdSdkReactNative.setAttributes`. |
+|               | `resourceEvent.additionalInformation.attributes` | Contains the global attributes set by `DdSdkReactNative.addAttributes`. |
 
 ## Retrieve the RUM session ID
 
@@ -751,7 +751,7 @@ See [Monitor hybrid React Native applications][18].
 [9]: /real_user_monitoring/guide/proxy-mobile-rum-data/
 [10]: https://github.com/wix/react-native-navigation
 [11]: /real_user_monitoring/application_monitoring/react_native/integrated_libraries/
-[12]: https://github.com/application_monitoring/eact-navigation/react-navigation
+[12]: https://github.com/react-navigation/react-navigation
 [13]: https://github.com/DataDog/dd-sdk-reactnative-examples/tree/main/rum-react-navigation
 [14]: https://github.com/DefinitelyTyped/DefinitelyTyped/blob/683ec4a2b420ff6bd3873a7338416ad3ec0b6595/types/react-native-side-menu/index.d.ts#L2
 [15]: https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest

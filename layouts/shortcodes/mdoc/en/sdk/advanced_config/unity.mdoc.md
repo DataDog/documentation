@@ -10,7 +10,7 @@ If you have not set up the Datadog Unity SDK for RUM yet, follow the [in-app set
 `Custom Endpoint`
 : Optional  
 **Type**: String  
-**Default**: `true`  
+**Default**: `undefined`  
 Send data to a custom endpoint instead of the default Datadog endpoint. This is useful for proxying data through a custom server.
 
 `SDK Verbosity`
@@ -75,7 +75,7 @@ For example:
 ```csharp
 // in your network client:
 
-DatadogSdk.Instance.Rum.startResource(
+DatadogSdk.Instance.Rum.StartResource(
     "resource-key",
     RumHttpMethod.Get,
     url,
@@ -83,7 +83,7 @@ DatadogSdk.Instance.Rum.startResource(
 
 // Later
 
-DatadogSdk.Instance.Rum.stopResource(
+DatadogSdk.Instance.Rum.StopResource(
     "resource-key",
     200,
     RumResourceType.Image
