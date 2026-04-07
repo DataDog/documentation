@@ -1,4 +1,5 @@
 ---
+id: cold_start_serverless
 core_product:
 - serverless monitoring
 - infrastructure monitoring

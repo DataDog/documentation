@@ -60,6 +60,12 @@ The build system automatically fetches:
 - `Makefile` + `Makefile.config` - Build orchestration
 - Environment-specific parameters in `config/{env}/params.yaml`
 
+## Critical Rules
+
+- **NEVER push directly to `master`.** Always create a PR and go through the review process. Direct pushes bypass branch protection and code review.
+- **Obey the git hooks set up in .husky.** Do not use `--no-verify` or other workarounds to skip repository git hooks.
+- **This is a PUBLIC repository. NEVER include internal or sensitive information in documentation content, commit messages, PR titles, PR descriptions, or code comments.** This includes: customer names, incident details (Sev 1s, outages, etc.), internal URLs, internal Slack conversations, Jira ticket details beyond the ticket key, internal bugs or implementation details, or any context that isn't appropriate for public visibility. Documentation should describe how to use features, not reference internal issues (e.g., not "there's currently a bug in the backend that processes this"). PR descriptions should describe *what changed in the docs*, not *why internally* (e.g., not "a customer hit a Sev 1 because..."). Keep all content concise and focused on the user-facing documentation change itself.
+
 ## Branch and PR Guidelines
 
 ### Branch Naming

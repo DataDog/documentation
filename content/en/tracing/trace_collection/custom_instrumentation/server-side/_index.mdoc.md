@@ -92,8 +92,6 @@ aliases:
   - /tracing/trace_collection/custom_instrumentation/elixir
   # Swift alias
   - /tracing/trace_collection/custom_instrumentation/swift
-  # Go migration alias
-  - /tracing/trace_collection/custom_instrumentation/go/migration
   # Index aliases for old URL structures
   - /tracing/trace_collection/custom_instrumentation/dd_libraries/
   - /tracing/trace_collection/custom_instrumentation/otel_instrumentation/
@@ -158,7 +156,7 @@ Datadog does not provide an Elixir tracing library. To send traces to Datadog, u
 {% /if %}
 
 <!-- Full content for languages with full OTel support (not C++, not Elixir) -->
-{% if not(or(equals($prog_lang, "cpp"), equals($prog_lang, "elixir"))) %}
+{% if not(includes($prog_lang, ["cpp", "elixir"])) %}
 
 ## Overview
 
@@ -206,7 +204,7 @@ Datadog does not provide an Elixir tracing library. To send traces to Datadog, u
 
 <!-- Only show DD API content for languages that support it (not Rust/Elixir) -->
 {% if equals($api_type, "dd_api") %}
-{% if not(or(equals($prog_lang, "rust"), equals($prog_lang, "elixir"))) %}
+{% if not(includes($prog_lang, ["rust", "elixir"])) %}
 
 ## Overview
 

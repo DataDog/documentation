@@ -834,7 +834,12 @@ Two release branches are supported:
 
 And the library supports the following runtimes:
 
-{{< partial name="trace_collection/python/supported_runtimes.html" >}}
+| OS      | CPU                   | Runtime   | Runtime version | Supported ddtrace versions   |
+|---------|-----------------------|-----------|-----------------|------------------------------|
+| Linux   | x86-64, AArch64       | CPython   | 3.9+            | >=4, <5                      |
+| macOS   | Intel, Apple Silicon  | CPython   | 3.9+            | >=4, <5                      |
+| Linux   | x86-64, i686, AArch64 | CPython   | 3.8+            | >=3, <4                      |
+| macOS   | Intel, Apple Silicon  | CPython   | 3.8+            | >=3, <4                      |
 
 #### Web framework compatibility
 ##### Code Security Capability Notes
@@ -843,13 +848,11 @@ And the library supports the following runtimes:
 
 #### Supported frameworks
 
-| Framework   | Versions     | Runtime Code Analysis (IAST)    |
-|-------------|--------------|---------------------------------|
-| Django      | 1.8          | <i class="icon-check-bold"></i> |
-| FastAPI     | 0.86         | <i class="icon-check-bold"></i> |
-| Flask       | 0.10         | <i class="icon-check-bold"></i> |
-
-Support for query strings is not available for Flask.
+| Framework   | Versions | Runtime Code Analysis (IAST)    |
+|-------------|----------|---------------------------------|
+| Django      | 2.2      | <i class="icon-check-bold"></i> |
+| FastAPI     | 0.86     | <i class="icon-check-bold"></i> |
+| Flask       | 1.1      | <i class="icon-check-bold"></i> |
 
 <div class="alert alert-info">If you don't see your framework of choice listed, let us know! Fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send details</a>.</div>
 

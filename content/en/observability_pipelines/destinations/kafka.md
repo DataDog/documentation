@@ -31,6 +31,9 @@ Set up the Kafka destination and its environment variables when you [set up a pi
 
 ### Set up the destination
 
+<div class="alert alert-danger">Only enter the identifiers for the Kafka bootstrap servers and, if applicable, the SASL username and password and the TLS key pass. Do <b>not</b> enter the actual values.</div>
+
+1. Enter the identifier for your Kafka bootstrap servers. If you leave it blank, the [default](#set-secrets) is used.
 1. Enter the name of the topic you want to send logs to.
 1. In the **Encoding** dropdown menu, select either `JSON` or `Raw message` as the output format.
 
@@ -41,6 +44,7 @@ Set up the Kafka destination and its environment variables when you [set up a pi
 ##### Enable TLS
 
 Toggle the switch to enable **TLS**. The following certificate and key files are required.<br>**Note**: All file paths are made relative to the configuration data directory, which is `/var/lib/observability-pipelines-worker/config/` by default. See [Advanced Worker Configurations][6] for more information. The file must be owned by the `observability-pipelines-worker group` and `observability-pipelines-worker` user, or at least readable by the group or user.
+- Enter the identifier for your Kafka TLS key pass. If you leave it blank, the [default](#set-secrets) is used.
 - `Server Certificate Path`: The path to the certificate file that has been signed by your Certificate Authority (CA) root file in DER or PEM (X.509).
 - `CA Certificate Path`: The path to the certificate file that is your Certificate Authority (CA) root file in DER or PEM (X.509).
 - `Private Key Path`: The path to the `.key` private key file that belongs to your Server Certificate Path in DER or PEM (PKCS#8) format.
@@ -48,6 +52,7 @@ Toggle the switch to enable **TLS**. The following certificate and key files are
 ##### Enable SASL authentication
 
 1. Toggle the switch to enable **SASL Authentication**.
+1. Enter the identifiers for your Kafka SASL username and password. If you leave them blank, the [defaults](#set-secrets) are used.
 1. Select the mechanism (**PLAIN**, **SCHRAM-SHA-256**, or **SCHRAM-SHA-512**) in the dropdown menu.
 
 ##### Enable compression
@@ -56,7 +61,7 @@ Toggle the switch to enable **TLS**. The following certificate and key files are
 1. In the **Compression Algorithm** dropdown menu, select a compression algorithm (**gzip**, **zstd**, **lz4**, or **snappy**).
 1. (Optional) Select a **Compression Level** in the dropdown menu. If the level is not specified, the algorithm's default level is used.
 
-##### Buffering options
+##### Buffering
 
 {{% observability_pipelines/destination_buffer %}}
 
@@ -119,7 +124,7 @@ These are the available librdkafka options:
 
 See the [librdkafka documentation][7] for more information and to ensure your values have the correct type and are within range.
 
-## How the destination works
+## Metrics
 
 See the [Observability Pipelines Metrics][8] for a full list of available health metrics.
 
@@ -129,17 +134,21 @@ See the [Observability Pipelines Metrics][8] for a full list of available health
 
 {{% observability_pipelines/metrics/component %}}
 
-#### Buffer metrics (when buffering is enabled)
+### Buffer metrics (when enabled)
 
-{{% observability_pipelines/metrics/buffer %}}
+{{% observability_pipelines/metrics/buffer/destinations %}}
+
+#### Deprecated buffer metrics
+
+{{% observability_pipelines/metrics/buffer/deprecated_destination_metrics %}}
 
 ### Event batching
 
 A batch of events is flushed when one of these parameters is met. See [event batching][9] for more information.
 
-| Max Events     | Max Bytes       | Timeout (seconds)   |
-|----------------|-----------------|---------------------|
-| 10,000         | 1,000,000       | 1                   |
+| Maximum Events | Maximum Size (MB) | Timeout (seconds)   |
+|----------------|-------------------|---------------------|
+| 10,000         | 1                 | 1                   |
 
 [1]: https://clickhouse.com/docs/engines/table-engines/integrations/kafka
 [2]: https://docs.snowflake.com/en/user-guide/kafka-connector

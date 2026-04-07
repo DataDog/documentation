@@ -41,13 +41,22 @@ Searching by keyword executes a search across all available information (input, 
 
 #### Find traces by evaluation
 
-To find a trace by evaluation, search: `@evaluation.external.<name>.value:<criteria>`
+To find a trace by evaluation, search: `@evaluation.<name>.value:<criteria>`
 
 | Evaluation type | Example search term |
 | --------------- | ----------- |
-| Boolean         | `@evaluation.external.has_risk_pred.value:true` |
-| Score           | `@evaluation.external.correctness.value:>=0.35` |
-| Categorical     | `@evaluation.external.violation.value:(not_fun OR not_nice)` |
+| Boolean         | `@evaluation.has_risk_pred.value:true` |
+| Score           | `@evaluation.correctness.value:>=0.35` |
+| Categorical     | `@evaluation.violation.value:(not_fun OR not_nice)` |
+
+#### Find traces by experiment status
+
+To find a trace by experiment status, search: `@experiment.status:<status>`
+
+| Status | Example search term |
+| ------ | ------------------- |
+| Running | `@experiment.status:running` |
+| Completed | `@experiment.status:completed` |
 
 #### Find traces by metric
 
@@ -130,6 +139,7 @@ To build a widget using LLM Experiments data, use `LLM Observability > Experimen
 
 For record level data aggregation, use `Traces`; otherwise, use `All Spans`.
 
+Group or filter by `@experiment.status` to compare metrics across running or completed experiments.
 
 ### Widget examples
 #### Plotting performance over time broken down by a metadata field

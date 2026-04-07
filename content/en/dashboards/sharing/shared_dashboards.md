@@ -103,12 +103,15 @@ By default, public dashboards are accessible for one year before they expire and
 
 ## Embedded shared dashboards
 
-You can embed shared dashboards into a website using an iframe. Access to these embedded dashboards is restricted to allowlisted request referrers.
-This feature is not supported on Safari web browsers.
+You can embed shared dashboards into a website using an iFrame. There are two types of embedded dashboards: basic and secure.
 
-The HTTP request's referrer header is checked against the allowlisted entries for validation. In most cases, typing `window.location.origin` into your browser console should give you the expected referrer. However, if you have any special manipulation on browser headers (for example, browser privacy settings) you should check the actual network request. 
+### Basic embed
 
-To share an embedded dashboard:
+Basic embedded dashboards restrict access based on allowlisted request referrers. This feature is not supported on Safari web browsers.
+
+The HTTP request's referrer header is checked against the allowlisted entries for validation. In most cases, typing `window.location.origin` into your browser console gives you the expected referrer. However, if you have any special manipulation on browser headers (for example, browser privacy settings), check the actual network request.
+
+To share a basic embedded dashboard:
 
 1. Click **Share** in the upper-right corner of the dashboard.
 2. Select **Share Dashboard**.
@@ -116,6 +119,12 @@ To share an embedded dashboard:
 4. Configure the desired time, variable, and color options in the **Configure Dashboard** step.
 5. Add the referrers that you want to allowlist.
 6. Click **Share Dashboard** to create the share URL.
+
+### Secure embed
+
+Secure embedded dashboards use a backend-generated token to authenticate each page load instead of relying on referrer allowlists. Your application server holds the credential and generates a unique iFrame URL per session, so the credential is never exposed to the browser. Secure embeds work in browsers that block third-party cookies, including Safari.
+
+For setup instructions, see [Secure Embedded Dashboards][6].
 
 ## Configuration Options
 
@@ -155,6 +164,10 @@ The following widget types are not supported on shared dashboards. Widgets of th
 
 Shared dashboards support a limited number of timeframe options and do not allow timeframe scrubbing or custom timeframes.
 
+### IP address restrictions
+
+You can restrict access to shared dashboards based on IP address. Email [Datadog support][5] to enable IP address allowlisting. After it's enabled, administrators can manage IP restrictions on the [Public Sharing Settings page][3].
+
 ## Edit Shared Dashboards
 
 <div class="alert alert-danger">Any changes to a dashboard's content or layout are instantly reflected in the shared version. Be cautious when editing to avoid unintentionally sharing private data.</div>
@@ -182,3 +195,5 @@ View all shared dashboards in your organization and your settings on the [Shared
 [2]: https://app.datadoghq.com/dashboard/shared
 [3]: https://app.datadoghq.com/organization-settings/public-sharing
 [4]: /account_management/rbac/data_access/#dashboards-and-notebooks
+[5]: /help/
+[6]: /dashboards/sharing/secure_embedded_dashboards/

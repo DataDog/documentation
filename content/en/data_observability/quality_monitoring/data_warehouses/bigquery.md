@@ -7,11 +7,18 @@ further_reading:
   - link: '/data_observability/'
     tag: 'Documentation'
     text: 'Learn about Data Observability'
+  - link: '/monitors/types/data_observability/'
+    tag: 'Documentation'
+    text: 'Data Observability Monitors'
 ---
 
 ## Overview
 
 The BigQuery integration connects Datadog to your Google Cloud project to sync metadata, query history, and table-level metrics. Use it to monitor data freshness, detect anomalies, and trace lineage across your data stack.
+
+## Prerequisites
+
+If your Google Cloud project restricts network access by IP, add the Datadog webhook IPs to your allowlist. For the list of IPs, see the `webhooks` section of {{< region-param key="ip_ranges_url" link="true" text="IP ranges list" >}}.
 
 ## Configure the BigQuery integration in Datadog
 
@@ -100,6 +107,8 @@ Once the service account has been created and the necessary roles and APIs have 
 
 After you configure the integration, Datadog begins syncing your information schema and query history in the background. Initial syncs can take several hours depending on the size of your BigQuery deployment.
 
+After the initial sync completes, create a [Data Observability monitor][14] to start alerting on freshness, row count, column-level metrics, and custom SQL metrics.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -117,3 +126,4 @@ After you configure the integration, Datadog begins syncing your information sch
 [11]: https://cloud.google.com/compute/docs/reference/rest/v1
 [12]: https://cloud.google.com/resource-manager/reference/rest
 [13]: https://cloud.google.com/bigquery/docs/reference/rest
+[14]: /monitors/types/data_observability/

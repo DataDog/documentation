@@ -9,11 +9,6 @@ products:
 
 {{< product-availability >}}
 
-{{< callout url=https://www.datadoghq.com/product-preview/use-reference-tables-in-stream-with-op-to-control-costs/
- btn_hidden="false" header="Join the Preview!">}}
- The Enrichment Table processor using Reference Tables is in Preview. Use this form to request access.
-{{< /callout >}}
-
 ## Overview
 
 Logs can contain information like IP addresses, user IDs, or service names that often need additional context. With the Enrichment Table processor, you can add context to your logs, using lookup datasets stored in Datadog [Reference Tables][1], local files, or MaxMind GeoIP tables. The processor matches logs based on a specified key and appends information from your lookup file to the log. If you use Reference Tables, you can connect to and enrich logs with SaaS-based datasets directly stored in ServiceNow, Snowflake, S3, and more.
@@ -73,7 +68,7 @@ In Datadog's Snowflake integration documentation, see [Reference Tables][3] for 
 To set up the Enrichment Table processor:
 
 1. Click **Add enrichment**.
-1. Define a **filter query**. Only logs that match the specified [filter query](#filter-query-syntax) are sent through the processor. **Note**: All logs, regardless of whether they match the filter query, are sent to the next step in the pipeline.
+1. Define a **filter query**. Only logs that match the specified filter query are sent through the processor. **Note**: All logs, regardless of whether they match the filter query, are sent to the next step in the pipeline. See [Search Syntax][8] for more information.
 1. In the **Set lookup mapping** section, select the type of lookup dataset you want to use.
   {{< tabs >}}
   {{% tab "Reference Table" %}}
@@ -148,15 +143,17 @@ merchant_info {
 
 ### Using Reference Tables
 
-[Reference Tables][4] allow you to store information like customer details, asset lists, and service dependency information in Datadog. The Enrichment Table processor pulls rows from Reference Tables on demand and caches them locally. Table rows persists in the cache for about 10 minutes. After that, they are evicted or refreshed.
+[Reference Tables][4] allow you to store information like customer details, asset lists, and service dependency information in Datadog. The Enrichment Table processor pulls rows from Reference Tables on demand and caches them locally. Table rows persist in the cache for about 10 minutes (30 minutes for a negative lookup, where the row was not found in the table). After that, they are evicted or refreshed.
 
 When the processor encounters a log that does not have a corresponding row in the cache, the log data is buffered in memory until the row is retrieved from the Reference Table. If the buffer reaches its maximum capacity, it begins sending the oldest buffered logs downstream without enrichment. The processor does not exert upstream backpressure.
 
-If an authentication error occurs while connecting to the Reference Table or after a series of failed requests, Datadog flushes buffered logs downstream without enrichment, to prevent the logs from waiting indefinitely and causing the buffer to stop accepting new logs. The processor periodically retries requests and automatically resumes normal operations when a request succeeds.
+A request to read the Reference Tables is sent every second or when 250 keys are queued for a lookup.
+
+If an authentication error occurs while connecting to the Reference Table or after a series of failed requests, Datadog flushes buffered logs downstream without enrichment, to prevent the logs from waiting indefinitely, and the buffer stops accepting new logs. The processor periodically retries requests and automatically resumes normal operations when a request succeeds.
 
 If an error that causes a log to be sent without enrichment occurs, you can view it in the Worker logs. It also increments the [`pipelines.component_errors_total`](#processor-metrics) metric.
 
-Datadog does not recommend using the processor on a log field with high cardinality (more than 5,000 possible values). The Reference Tables API is subject to rate limits and might deny Worker requests. Reach out to [Datadog support][5] if you continue to notice rate limit warnings in the Worker logs while running the processor.
+Datadog does not recommend using the processor on a log field with high cardinality (in the order of 10,000 or more possible values within a time frame of 10 minutes). The Reference Tables API is subject to rate limits and might deny Worker requests. Reach out to [Datadog support][5] if you continue to notice rate limit warnings in the Worker logs while running the processor.
 
 ### Metrics
 
@@ -169,9 +166,9 @@ To see metrics about your Enrichment Table processor, add the tags `component_ty
 
 `pipelines.component_errors_total`
 : Number of logs that cannot be enriched because of an error. These errors are reported with the tag `error_code=did_not_enrich_event`.
-: The tag `reason` may contain the following values:<br>- `target_exists`: The target value to store the enriched data already exists and is not an object.<br>- `too_many_pending_lookups`: The buffer or lookup queue is full.<br>- `lookup_failed`: The lookup key was either not found in the log, not a string, or an authentication error occurred.
+: The tag `reason` may contain the following values:<br>- `target_exists`: The target value to store the enriched data already exists and is not an object.<br>- `too_many_pending_lookups`: The buffer or lookup queue is full.<br>- `lookup_failed`: The lookup key was not found in the log, not a string, or not an integer.
 
-#### Buffer metrics (when buffering is enabled)
+#### Buffer metrics (when enabled)
 
 To see buffer metrics for your Enrichment Table processor, add these tags to buffer metrics:
 
@@ -179,14 +176,27 @@ To see buffer metrics for your Enrichment Table processor, add these tags to buf
 - `component_id=<processor_id>`
 - `buffer_id=enrichment_table_buffer`
 
-{{% observability_pipelines/metrics/buffer %}}
+{{% observability_pipelines/metrics/buffer/processors %}}
 
 #### Reference Table metrics
 
-To see metrics about your Enrichment Table processor using a Reference Table, add the tags `component_type:enrichment_table` and `component_id:reference_table_<table-id>` to the metrics:
+To see metrics about your Enrichment Table processor using a Reference Table, add the tags `component_type:enrichment_table` and `component_id=<processor_id>` to the metrics below. The tag `reference_table:<table_uuid>` can also be used to aggregate across all processors using the same Reference Table.
 
 `pipelines.enrichment_rows_not_found_total`
 : This counter is incremented for each processed log that does not have a corresponding row in the table.
+
+`pipelines.enrichment_cache_hits_total`
+: Number of cache hits, that is logs that could be enriched without being buffered.
+
+`pipelines.enrichment_cache_misses_total`
+: Number of cache misses, that is logs that required buffering and sending a request to the Reference Tables API.
+
+`pipelines.component_errors_total`
+: Number of logs that cannot be enriched because of an error. These errors are reported with the tag `error_code=did_not_enrich_event`.
+: The tag `reason` may contain the following values:<br>- `target_exists`: The target value to store the enriched data already exists and is not an object.<br>- `too_many_pending_lookups`: The buffer or lookup queue is full.<br>- `lookup_failed`: The lookup key was not found in the log, not a string or an integer.<br>- `reference_table_read_error`: Unrecoverable errors or too many consecutive errors occurred while trying to read the Reference Table.
+
+
+The metrics below are common to all processors consuming the same Reference Table and use the tags `component_type:enrichment_table`, `component_id=reference_table_<table_uuid>` and `reference_table:<table_uuid>`.
 
 `pipelines.reference_table_cached_rows`
 : This gauge metric reports the number of rows stored in the local cache. The tag `found:true` reports rows existing in the table, and `found:false` reports rows that do not exist in the table.
@@ -197,8 +207,6 @@ To see metrics about your Enrichment Table processor using a Reference Table, ad
 `pipelines.reference_table_fetched_keys_total`
 : For each request sent to the Reference Tables API, this counter is incremented with the number of rows fetched in that request.
 
-{{% observability_pipelines/processors/filter_syntax %}}
-
 [1]: /reference_tables/?tab=cloudstorage
 [2]: /integrations/salesforce/#optional-enable-ingestion-of-reference-tables
 [3]: /integrations/snowflake-web/#reference-tables
@@ -206,3 +214,4 @@ To see metrics about your Enrichment Table processor using a Reference Table, ad
 [5]: /help/
 [6]: /integrations/databricks/?tab=useaserviceprincipalforoauth#reference-table-configuration
 [7]: /integrations/guide/servicenow-cmdb-enrichment-setup/#reference-tables
+[8]: /observability_pipelines/search_syntax/logs/

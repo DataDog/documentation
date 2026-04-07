@@ -14,7 +14,7 @@ further_reading:
 
 ## Overview
 
-Use the custom tags and measures commands to add user-defined text and numerical tags to your pipeline traces in [CI Pipeline Visibility][11]. You can use the [`datadog-ci` NPM package][1] to add custom tags to a pipeline trace or a job span, in addition to adding measures to a pipeline trace or a job span. From these custom tags and measures, you can create facets (string value tags) or measures (numerical value tags).
+Use the custom tags and measures commands to add user-defined text and numerical tags to your pipeline traces in [CI Pipeline Visibility][11]. You can use the [`datadog-ci` NPM package][1] to add custom tags or measures to a pipeline, job, stage, or step span. From these custom tags and measures, you can create facets (string value tags) or measures (numerical value tags).
 
 You can use facets and measures to filter, create visualizations, or create monitors for your pipelines in the [CI Visibility Explorer][10].
 
@@ -25,7 +25,7 @@ Custom tags and measures work with the following CI providers:
 - Buildkite
 - CircleCI
 - GitLab (SaaS or self-hosted >= 14.1)
-- GitHub.com (SaaS): For adding tags and measures to GitHub jobs, see the [section below](#add-tags-and-measures-to-github-jobs).
+- GitHub.com (SaaS)
 - Jenkins: For Jenkins, follow [these instructions][5] to set up custom tags in your pipelines.
 - Azure DevOps Pipelines
 
@@ -41,12 +41,12 @@ npm install -g @datadog/datadog-ci
 
 ## Add tags to pipeline traces
 
-Tags can be added to the pipeline span or to the job span.
+Tags can be added to the pipeline, job, stage, or step span.
 
 To do this, run the `tag` command:
 
 ```shell
-DATADOG_SITE={{< region-param key="dd_site" >}} datadog-ci tag [--level <pipeline|job>] [--tags <tag1>] [--tags <tag2>] ...
+DATADOG_SITE={{< region-param key="dd_site" >}} datadog-ci tag [--level <pipeline|job|stage|step>] [--tags <tag1>] [--tags <tag2>] ...
 ```
 
 You must specify a valid [Datadog API key][3] using the environment variable `DATADOG_API_KEY` and the [Datadog site][12] using the environment variable `DATADOG_SITE`.
@@ -69,10 +69,10 @@ To create a facet from a tag, click the gear icon next to a tag name on the [Pip
 
 ## Add measures to pipeline traces
 
-To add numerical tags to the pipeline span or the job span, run the `measure` command:
+To add numerical tags to the pipeline, job, stage, or step span, run the `measure` command:
 
 ```shell
-DATADOG_SITE={{< region-param key="dd_site" >}} datadog-ci measure [--level <pipeline|job>] [--measures <measure1>] [--measures <measure2>]...
+DATADOG_SITE={{< region-param key="dd_site" >}} datadog-ci measure [--level <pipeline|job|stage|step>] [--measures <measure1>] [--measures <measure2>]...
 ```
 
 You must specify a valid [Datadog API key][3] using the environment variable `DATADOG_API_KEY` and the [Datadog site][12] using the environment variable `DATADOG_SITE`.
@@ -91,13 +91,20 @@ DATADOG_SITE={{< region-param key="dd_site" >}} datadog-ci measure --level job -
 
 To create a measure, click the gear icon next to a measures name on the [Pipeline Executions page][4] and click **Create Measure**.
 
-## Add tags and measures to GitHub jobs
+## Troubleshooting
 
+### Limitations
 
-Starting with `datadog-ci` version `4.1.1`, no additional action is required, even when using custom names or matrix strategies.
+- The maximum amount of tags that can be added to a pipeline or job is 100.
+- The maximum amount of measures that can be added to a pipeline or job is 100.
+- The maximum length of a tag or measure is 300 characters (key + value).
+
+### GitHub Actions custom commands not appearing in Datadog
+
+Older versions of the datadog-ci CLI may require additional setup:
 
 <details>
-<summary><strong>For datadog-ci versions prior to 4.1.1</strong></summary>
+<summary><strong>For datadog-ci versions prior to 4.1.1 in GitHub Actions</strong></summary>
 
 If you are using `datadog-ci` version `2.29.0` to `4.1.0` and the job name does not match the entry defined in the workflow configuration file (the GitHub [job ID][7]), the `DD_GITHUB_JOB_NAME` environment variable needs to be exposed, pointing to the job name. For example:
 
@@ -126,12 +133,6 @@ If you are using `datadog-ci` version `2.29.0` to `4.1.0` and the job name does 
         - run: datadog-ci tag ...
     ```
 </details>
-
-## Limitations
-
-- The maximum amount of tags that can be added to a pipeline or job is 100.
-- The maximum amount of measures that can be added to a pipeline or job is 100.
-- The maximum length of a tag or measure is 300 characters (key + value).
 
 ## Further reading
 
