@@ -45,6 +45,16 @@ Ensure [remote configuration][3] is set up for the agent running the Kafka Consu
 1. In Datadog, under [Remote Configuration][13], check that remote configuration is enabled at the organization level.
 2. In Datadog, under [Remote Configuration][13], check that the agent running the Kafka Consumer integration has remote configuration enabled, and is using an API key with remote configuration enabled.
 
+## Kafka ACL permissions
+
+If your Kafka cluster uses ACLs, the Datadog Agent user requires the following minimum permissions to read messages:
+
+| Resource Name | Resource Type | Operation |
+|---------------|---------------|-----------|
+| `*`           | `TOPIC`       | `Read`    |
+
+These permissions are in addition to the [Kafka Monitoring permissions][14].
+
 ## Required permissions
 
 You must have the `Data Streams Monitoring Capture Messages` permission, and these logs permissions that are part of the Datadog Standard role:
@@ -94,3 +104,4 @@ To enable permissions, edit an existing role or create a new one on the [Roles p
 [11]: /integrations/kafka-consumer/?tab=host#validation
 [12]: https://app.datadoghq.com/fleet
 [13]: https://app.datadoghq.com/organization-settings/remote-config
+[14]: /data_streams/kafka/#kafka-acl-permissions
