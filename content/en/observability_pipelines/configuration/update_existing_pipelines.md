@@ -11,6 +11,8 @@ For existing pipelines in Observability Pipelines, you can update and deploy cha
 
 This document goes through updating the pipeline in the UI. You can also use the [update a pipeline][2] API or [datadog_observability_pipeline][3] Terraform resource to update existing pipelines.
 
+See [Export a Pipeline Configuration to JSON or Terraform][4] if you want to programmatically deploy a pipeline updated in the UI.
+
 ## Update an existing pipeline
 
 1. Navigate to [Observability Pipelines][1].
@@ -238,3 +240,4 @@ On the Worker installation page:
 [1]: https://app.datadoghq.com/observability-pipelines
 [2]: /api/latest/observability-pipelines/#update-a-pipeline
 [3]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/observability_pipeline
+[4]: /observability_pipelines/configuration/export_pipeline_configuration/

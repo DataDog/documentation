@@ -96,133 +96,123 @@ These configurations can be applied through either the <code>docker</code> comma
 
 [1]: /agent/docker/
 {{% /tab %}}
-{{% tab "Kubernetes (Daemonset)" %}}
+{{% tab "Datadog Operator" %}}
 
-1. Follow the [Kubernetes Agent setup][1].
+1.  Follow the [Kubernetes Agent setup][1] for the base installation.
 
-2. Configure the following environment variables in both the trace Agent container and the core Agent container:
+2.  Enable the preferred protocol gRPC or HTTP in your Operator's `datadog-agent.yaml` manifest:
 
-   For gRPC:
-   ```
-   name: DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_GRPC_ENDPOINT # enables gRPC receiver on port 4317
-   value: "0.0.0.0:4317"
-   ```
+    For gRPC:
+    ```yaml
+    apiVersion: datadoghq.com/v2alpha1
+    kind: DatadogAgent
+    metadata:
+      name: datadog
+    spec:
+      # (...)
+      features:
+        otlp:
+          receiver:
+            protocols:
+              grpc:
+                enabled: true
+    ```
+    
+    For HTTP:
+    ```yaml
+    apiVersion: datadoghq.com/v2alpha1
+    kind: DatadogAgent
+    metadata:
+      name: datadog
+    spec:
+      # (...)
+      features:
+        otlp:
+          receiver:
+            protocols:
+              http:
+                enabled: true
+    ```
 
-   For HTTP:
-   ```
-   name: DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_HTTP_ENDPOINT # enables HTTP receiver on port 4318
-   value: "0.0.0.0:4318"
-   ```
-3. Map the container ports 4317 or 4318 to the host port for the core Agent container:
-
-   For gRPC:
-   ```
-   ports:
-     - containerPort: 4317
-       hostPort: 4317
-       name: traceportgrpc
-       protocol: TCP
-   ```
-
-   For HTTP
-   ```
-   ports:
-     - containerPort: 4318
-       hostPort: 4318
-       name: traceporthttp
-       protocol: TCP
-   ```
-
-[1]: /agent/kubernetes/?tab=daemonset
-{{% /tab %}}
-
-{{% tab "Kubernetes (Helm) - values.yaml" %}}
-
-1. Follow the [Kubernetes Agent setup][1].
-
-2. Enable the OTLP endpoints in the Agent by editing the `datadog.otlp` section of the `values.yaml` file:
-
-   For gRPC:
-   ```
-   otlp:
-    receiver:
-      protocols:
-        grpc:
-          endpoint: 0.0.0.0:4317
-          enabled: true
-    logs:
-      enabled: false
-   ```
-
-   For HTTP:
-   ```
-   otlp:
-    receiver:
-      protocols:
-        http:
-          endpoint: 0.0.0.0:4318
-          enabled: true
-    logs:
-      enabled: false
-   ```
+{{% k8s-operator-redeploy %}}
 
 This enables each protocol in the default port (`4317` for OTLP/gRPC and `4318` for OTLP/HTTP). Metrics and traces are enabled by default.
 
-
-[1]: /agent/kubernetes/?tab=helm
+[1]: /agent/kubernetes/
 {{% /tab %}}
+{{% tab "Helm" %}}
 
-{{% tab "Kubernetes (Helm) - set" %}}
+1.  Follow the [Kubernetes Agent setup][1] for the base installation.
 
-1. Follow the [Kubernetes Agent setup][1].
+2.  Enable the preferred protocol gRPC or HTTP in your Helm's `datadog-values.yaml` file:
 
-2. Enable the preferred protocol:
+    For gRPC:
+    ```yaml
+    datadog:
+      # (...)
+      otlp:
+        receiver:
+          protocols:
+            grpc:
+              enabled: true
+    ```
 
-   For gRPC:
-   ```
-   --set "datadog.otlp.receiver.protocols.grpc.enabled=true"
-   ```
-   For HTTP:
-   ```
-   --set "datadog.otlp.receiver.protocols.http.enabled=true"
-   ```
+    For HTTP:
+    ```yaml
+    datadog:
+      # (...)
+      otlp:
+        receiver:
+          protocols:
+            http:
+              enabled: true
+    ```
 
-This enables each protocol in the default port (`4317` for OTLP/gRPC and `4318` for OTLP/HTTP).
-
-[1]: /agent/kubernetes/?tab=helm
-{{% /tab %}}
-{{% tab "Kubernetes (Operator)" %}}
-
-1. Follow the [Kubernetes Agent setup][1].
-
-2. Enable the preferred protocol in your Operator's manifest:
-
-   For gRPC:
-   ```yaml
-   features:
-     otlp:
-       receiver:
-         protocols:
-           grpc:
-             enabled: true
-       logs:
-         enabled: false
-   ```
-   For HTTP:
-   ```yaml
-   features:
-     otlp:
-       receiver:
-         protocols:
-           http:
-             enabled: true
-       logs:
-         enabled: false
-   ```
+{{% k8s-helm-redeploy %}}
 
 This enables each protocol in the default port (`4317` for OTLP/gRPC and `4318` for OTLP/HTTP). Metrics and traces are enabled by default.
 
-[1]: /agent/kubernetes/?tab=helm
+[1]: /agent/kubernetes/
+{{% /tab %}}
+{{% tab "Manual (Daemonset)" %}}
+
+1.  Follow the [Manual Kubernetes installation guide][1] for the base installation.
+
+2.  Configure the following environment variables in both the `trace-agent` container and the core `agent` container:
+
+    For gRPC:
+    ```yaml
+    name: DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_GRPC_ENDPOINT # enables gRPC receiver on port 4317
+    value: "0.0.0.0:4317"
+    ```
+
+    For HTTP:
+    ```yaml
+    name: DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_HTTP_ENDPOINT # enables HTTP receiver on port 4318
+    value: "0.0.0.0:4318"
+    ```
+
+3. Map the container ports 4317 or 4318 to the host port for the core `agent` container:
+
+    For gRPC:
+    ```yaml
+    ports:
+      - containerPort: 4317
+        hostPort: 4317
+        name: traceportgrpc
+        protocol: TCP
+    ```
+
+    For HTTP
+    ```yaml
+    ports:
+      - containerPort: 4318
+        hostPort: 4318
+        name: traceporthttp
+        protocol: TCP
+    ```
+
+[1]: /containers/guide/kubernetes_daemonset/
 {{% /tab %}}
 {{% tab "AWS Lambda" %}}
 
@@ -269,7 +259,48 @@ Set the following environment variables in the Datadog Agent container:
 - `DD_OTLP_CONFIG_LOGS_ENABLED=true`
 
 {{% /tab %}}
-{{% tab "Kubernetes (Daemonset)" %}}
+{{% tab "Datadog Operator" %}}
+
+In your `datadog-agent.yaml` file
+```yaml
+spec:
+  # (...)
+  features:
+    otlp:
+      #(... enable gRPC or HTTP ingestion...)
+    logCollection:
+      enabled: true
+  override:
+    nodeAgent:
+      containers:
+        agent:
+          env:
+            - name: DD_OTLP_CONFIG_LOGS_ENABLED
+              value: "true"
+```
+
+{{% k8s-operator-redeploy %}}
+
+{{% /tab %}}
+{{% tab "Helm" %}}
+
+In your `datadog-values.yaml` file:
+
+```yaml
+datadog:
+  # (...)
+  otlp:
+    #(... enable gRPC or HTTP ingestion...)
+    logs:
+      enabled: true
+  logs:
+    enabled: true
+```
+
+{{% k8s-helm-redeploy %}}
+
+{{% /tab %}}
+{{% tab "Manual (Daemonset)" %}}
 
 Set the following environment variables in the core Agent container:
 
@@ -283,26 +314,6 @@ Set the following environment variables in the core Agent container:
 For more information, see [log collection with your DaemonSet][8].
 
 [8]: /containers/guide/kubernetes_daemonset/#log-collection
-{{% /tab %}}
-{{% tab "Kubernetes (Helm)" %}}
-
-In your `values.yaml` file:
-
-```yaml
-datadog:
-  logs:
-    enabled: true
-  otlp:
-    logs:
-      enabled: true
-```
-
-Or using `--set`:
-
-```
---set "datadog.logs.enabled=true" --set "datadog.otlp.logs.enabled=true"
-```
-
 {{% /tab %}}
 {{< /tabs >}}
 

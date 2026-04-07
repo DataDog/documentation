@@ -1,4 +1,5 @@
 ---
+id: finding
 core_product:
 - security
 - csm

@@ -84,6 +84,8 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/nodejs-vulnerability-apm"
     tag: "Blog"
     text: "Mitigation for Node.js denial-of-service vulnerability affecting Datadog APM"
+algolia:
+    tags: ["security", "datadog security", "cloud siem", "cloud security", "application security", "threat detection"]
 cascade:
     algolia:
         rank: 70
