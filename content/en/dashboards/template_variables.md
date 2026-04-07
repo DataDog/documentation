@@ -6,6 +6,15 @@ aliases:
     - /graphing/dashboards/template_variables/how-do-i-overlay-events-onto-my-dashboards
     - /graphing/dashboards/template_variables/
 further_reading:
+- link: "/dashboards/"
+  tag: "Documentation"
+  text: "Create Dashboards in Datadog"
+- link: "/dashboards/sharing/"
+  tag: "Documentation"
+  text: "Share your Graphs outside of Datadog"
+- link: "/dashboards/widgets/"
+  tag: "Documentation"
+  text: "Discover Widgets for your Dashboard"
 - link: "https://www.datadoghq.com/blog/datadog-executive-dashboards"
   tag: "Blog"
   text: "Design effective executive dashboards with Datadog"
@@ -21,15 +30,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/template-variable-available-values/"
   tag: "Blog"
   text: "Filter dashboards faster with template variable available values"
-- link: "/dashboards/"
-  tag: "Documentation"
-  text: "Create Dashboards in Datadog"
-- link: "/dashboards/sharing/"
-  tag: "Documentation"
-  text: "Share your Graphs outside of Datadog"
-- link: "/dashboards/widgets/"
-  tag: "Documentation"
-  text: "Discover Widgets for your Dashboard"
+- link: "https://www.datadoghq.com/blog/datadog-migration-mindset"
+  tag: "Blog"
+  text: "Approaching your observability migration with the right mindset"
 ---
 
 ## Overview

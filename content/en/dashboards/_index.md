@@ -16,6 +16,12 @@ further_reading:
   - link: "/dashboards/sharing/"
     tag: "Documentation"
     text: "Share your Graphs outside of Datadog"
+  - link: "https://datadoghq.dev/integrations-core/guidelines/dashboards/#best-practices"
+    tag: "Best Practices"
+    text: "Create great integration dashboards"
+  - link: "https://dtdg.co/fe"
+    tag: "Foundation Enablement"
+    text: "Join an interactive session on better visualizations with Dashboards"
   - link: "https://www.datadoghq.com/blog/datadog-clipboard/"
     tag: "Blog"
     text: "Add Dashboard widgets to your clipboard"
@@ -25,12 +31,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/datadog-executive-dashboards"
     tag: "Blog"
     text: "Design effective executive dashboards with Datadog"
-  - link: "https://datadoghq.dev/integrations-core/guidelines/dashboards/#best-practices"
-    tag: "Best Practices"
-    text: "Create great integration dashboards"
-  - link: "https://dtdg.co/fe"
-    tag: "Foundation Enablement"
-    text: "Join an interactive session on better visualizations with Dashboards"
+  - link: "https://app.datadoghq.com/release-notes?category=Dashboards"
+    tag: "Release Notes"
+    text: "Check out the latest Datadog Dashboards releases! (App login required)."
 cascade:
     algolia:
         rank: 70
