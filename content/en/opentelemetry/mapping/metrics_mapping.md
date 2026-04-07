@@ -21,9 +21,7 @@ Datadog products and visualizations are built on metrics and tags that follow sp
 
 ## How OpenTelemetry metrics appear in Datadog
 
-To differentiate metrics from the OpenTelemetry Collector's [hostmetrics][12] receiver and the Datadog Agent, Datadog prepends `otel.` to any received metric that starts with `system.` or `process.`. Datadog does not recommend monitoring the same infrastructure with both the Datadog Agent and the OpenTelemetry Collector
-
-<div class="alert alert-info">Datadog is evaluating ways to improve the OTLP metric experience, including potentially deprecating this <code>otel</code> prefix.</div>
+OpenTelemetry metrics are sent to Datadog with their original metric names. The Datadog platform maps these metrics to their Datadog equivalents, so you can use them across Datadog products and visualizations.
 
 ## Metrics mappings
 

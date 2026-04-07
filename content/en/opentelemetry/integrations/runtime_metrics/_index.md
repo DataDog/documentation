@@ -111,12 +111,7 @@ When using OpenTelemetry runtime metrics with Datadog, you receive both:
 - Original OpenTelemetry runtime metrics
 - Mapped Datadog runtime metrics for equivalent metrics
 
-The OpenTelemetry runtime metrics have the following prefixes based on their source:
-
-| Source | Prefix |
-| --- | --- |
-| [OTel Collector Datadog Exporter][100] | `otel.process.runtime.*` |
-| [Datadog Agent OTLP Ingest][101] | `process.runtime.*` |
+OpenTelemetry runtime metrics use the `process.runtime.*` prefix regardless of whether they are sent through the [OTel Collector Datadog Exporter][100] or [Datadog Agent OTLP Ingest][101].
 
 The following tables list the Datadog runtime metrics that are supported through OpenTelemetry mapping. "N/A" indicates that there is no OpenTelemetry equivalent metric available.
 
