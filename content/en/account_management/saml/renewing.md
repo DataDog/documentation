@@ -24,7 +24,8 @@ Datadog automatically renews SAML certificates and notifies you before a certifi
     1. Initiate a SAML login flow from your IdP or from the Datadog login page.
     1. Confirm that users can sign in with SSO.
 
-**Note**: If you manage multiple environments (for example, commercial and federal regions), repeat these steps for each Datadog SAML application in your IdP that uses a separate certificate.
+<div class="alert alert-info">If you manage multiple environments (for example, commercial and federal regions), repeat these steps for each Datadog SAML application in your IdP that uses a separate certificate.
+</div>
 
 ## Further reading
 
