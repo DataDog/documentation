@@ -22,7 +22,7 @@ further_reading:
   text: "Querying"
 ---
 
-The Distribution visualization shows data aggregated across one or several tags, such as *hosts*. Unlike the [heatmap][1], a distribution graph's x-axis is quantity rather than time.
+The Distribution visualization shows data aggregated across one or several tags, such as *hosts*. Unlike the [heat map][1], a distribution graph's x-axis is quantity rather than time.
 
 This visualization displays only a single query; additional queries are disregarded.
 
@@ -34,12 +34,21 @@ This visualization displays only a single query; additional queries are disregar
 
 ### Configuration
 
-1. Choose the data to graph.The Distribution visualization supports metrics, live processes, APM request latency, log events, and RUM events.
-**Note**: This visualization type is useful only when data is aggregated across tag keys, such as for each `host`.
-1. Make a selection in the "`avg`/`max`/`min`/`sum by`/" control to see your data across the associated tags.
+1. Choose the data to graph. The Distribution visualization supports metrics, live processes, APM request latency, log events, and RUM events.
+   **Note**: This visualization type is useful only when data is aggregated across tag keys, such as for each `host`.
+1. Make a selection in the `avg`/`last`/`max`/`min`/`sum` control to see your data across the associated tags.
 1. Customize your graph with the available options.
 
 ### Options
+
+#### Histogram of points vs. histogram of groups
+
+The Distribution widget supports two histogram types:
+
+- **Histogram of points**: Each individual datapoint (for example, a raw request latency measurement) contributes to a bucket based on its value. Use this when you want to see the full distribution of measurements across all recordings.
+- **Histogram of groups**: Each group (such as a service or host) is first reduced to a single aggregated value (for example, the p75 latency), and then those aggregated values are distributed across buckets. The resulting shape reflects the spread of per-group summary values, not individual measurements.
+
+**Note**: Because these two types aggregate data differently, switching between them can significantly change the shape of the histogram.
 
 #### Percentile markers
 
@@ -47,7 +56,7 @@ With APM request distributions, you can add percentile markers on the x-axis.
 
 {{< img src="dashboards/widgets/options/distribution_marker_controls.jpg" alt="Marker control preferences" style="width:80%;">}}
 
-#### X-axis and Y-axis controls
+#### X-axis and y-axis controls
 
 Axis controls are available through the UI and the JSON editor.
 
