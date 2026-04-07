@@ -4,6 +4,15 @@ description: Automatically scale Kubernetes workloads using Datadog metrics and 
 aliases:
 - /containers/monitoring/autoscaling
 further_reading:
+- link: "/infrastructure/containers/kubernetes_resource_utilization"
+  tag: "Documentation"
+  text: "Kubernetes Resource Utilization"
+- link: "/account_management/rbac/permissions"
+  tag: "Documentation"
+  text: "Datadog Role Permissions"
+- link: "/agent/remote_config/"
+  tag: "Documentation"
+  text: "Remote Configuration"
 - link: "https://www.datadoghq.com/blog/autoscaling-custom-metrics"
   tag: "Blog"
   text: "Scaling Kubernetes workloads on custom metrics"
@@ -16,15 +25,6 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-kubernetes-autoscaling/"
   tag: "Blog"
   text: "Rightsize workloads and reduce costs with Datadog Kubernetes Autoscaling"
-- link: "/infrastructure/containers/kubernetes_resource_utilization"
-  tag: "Documentation"
-  text: "Kubernetes Resource Utilization"
-- link: "/account_management/rbac/permissions"
-  tag: "Documentation"
-  text: "Datadog Role Permissions"
-- link: "/agent/remote_config/"
-  tag: "Documentation"
-  text: "Remote Configuration"
 ---
 
 {{< site-region region="gov" >}}
