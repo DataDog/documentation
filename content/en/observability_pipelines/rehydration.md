@@ -4,9 +4,6 @@ description: Learn about using Rehydration to pull archived logs and processing 
 disable_toc: false
 private: true
 further_reading:
-- link: "https://www.datadoghq.com/blog/observability-pipelines-servicenow-cmdb-enrichment"
-  tag: "Blog"
-  text: "Enrich logs with ServiceNow CMDB context before routing to any SIEM or logging tool"
 - link: https://www.datadoghq.com/blog/rehydrate-archived-logs-with-observability-pipelines
   tag: Blog
   text: Rehydrate archived logs in any SIEM or logging vendor with Observability Pipelines
