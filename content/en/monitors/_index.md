@@ -32,12 +32,6 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/human-name-detection"
     tag: "Blog"
     text: "Detect human names in logs with ML in Sensitive Data Scanner"
-  - link: "https://www.datadoghq.com/blog/rum-mobile-app-launch-monitoring"
-    tag: "Blog"
-    text: "Measure and improve mobile app startup performance with Datadog RUM"
-  - link: "https://www.datadoghq.com/blog/monitor-karpenter-datadog"
-    tag: "Blog"
-    text: "Monitor Karpenter with Datadog"
 cascade:
     algolia:
         rank: 70
