@@ -27,6 +27,7 @@ from pydantic_evals.evaluators import (
     Evaluator,
     EvaluatorContext,
     EvaluatorOutput,
+    LLMJudge,
     ReportEvaluator,
     ReportEvaluatorContext,
 )
@@ -104,11 +105,18 @@ def task(input_data: Dict[str, Any], config: Optional[Dict[str, Any]] = None, me
     # Your LLM or processing logic here
     return "Beijing" if "China" in question else "Unknown"
 
+
+llm_judge = LLMJudge(
+    rubric='Response provides the same answer as expected, possibly with explanation',
+    include_input=True,
+    include_expected_output=True,
+)
+
 experiment = LLMObs.experiment(
     name="<EXPERIMENT_NAME>",
     task=my_task, 
     dataset=dataset,
-    evaluators=[EqualsExpected(), ComprehensiveCheck()],
+    evaluators=[EqualsExpected(), ComprehensiveCheck(), llm_judge],
     summary_evaluators=[TotalCasesEvaluator()],
     description="<EXPERIMENT_DESCRIPTION>",
 )
