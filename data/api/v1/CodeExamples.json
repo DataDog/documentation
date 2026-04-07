@@ -123,6 +123,11 @@
     },
     {
       "group": "dashboards",
+      "suffix": "_3767278442",
+      "description": "Create a new dashboard with a query_value widget containing a description"
+    },
+    {
+      "group": "dashboards",
       "suffix": "_2261785072",
       "description": "Create a new dashboard with a timeseries widget and an overlay request"
     },
@@ -170,6 +175,11 @@
       "group": "dashboards",
       "suffix": "_798168180",
       "description": "Create a new dashboard with apm dependency stats widget"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_2252738813",
+      "description": "Create a new dashboard with apm metrics widget"
     },
     {
       "group": "dashboards",
@@ -388,6 +398,21 @@
     },
     {
       "group": "dashboards",
+      "suffix": "_258152475",
+      "description": "Create a new dashboard with sankey widget and network data source"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_373890042",
+      "description": "Create a new dashboard with sankey widget and product analytics data source"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_2932151909",
+      "description": "Create a new dashboard with sankey widget and rum data source"
+    },
+    {
+      "group": "dashboards",
       "suffix": "_2342457693",
       "description": "Create a new dashboard with scatterplot widget"
     },
@@ -450,6 +475,11 @@
       "group": "dashboards",
       "suffix": "_3982498788",
       "description": "Create a new dashboard with timeseries widget containing style attributes"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_1705253330",
+      "description": "Create a new dashboard with timeseries widget using has_value_labels"
     },
     {
       "group": "dashboards",
@@ -556,8 +586,8 @@
   "SendPublicDashboardInvitation": [
     {
       "group": "dashboards",
-      "suffix": "",
-      "description": "Send shared dashboard invitation email returns \"OK\" response"
+      "suffix": "_3435926116",
+      "description": "Send shared dashboard invitation email returns OK"
     }
   ],
   "UpdateDashboard": [
@@ -735,6 +765,11 @@
     },
     {
       "group": "logs_pipelines",
+      "suffix": "_2599033345",
+      "description": "Create a pipeline with nested pipeline processor returns \"OK\" response"
+    },
+    {
+      "group": "logs_pipelines",
       "suffix": "_501419705",
       "description": "Create a pipeline with schema processor"
     }
@@ -813,6 +848,16 @@
       "group": "monitors",
       "suffix": "",
       "description": "Create a monitor returns \"OK\" response"
+    },
+    {
+      "group": "monitors",
+      "suffix": "_2608995690",
+      "description": "Create a monitor with aggregate augmented query variables returns \"OK\" response"
+    },
+    {
+      "group": "monitors",
+      "suffix": "_2082938111",
+      "description": "Create a monitor with aggregate filtered query variables returns \"OK\" response"
     },
     {
       "group": "monitors",
@@ -913,6 +958,11 @@
     }
   ],
   "CreateSLO": [
+    {
+      "group": "service_level_objectives",
+      "suffix": "_707861409",
+      "description": "Create a new metric SLO object using bad events formula returns \"OK\" response"
+    },
     {
       "group": "service_level_objectives",
       "suffix": "_512760759",

@@ -5,21 +5,40 @@ import { logAction, logError } from './logger';
 import { parseMarkdown, inlineRefChips, extractSources, renderMessageWithSources } from './markdown';
 import { attachTooltips, buildSourceCards, showSourceTooltip, closeAllSourceTooltips, repositionTooltip } from './sources';
 import { addMessageActions, injectCodeCopyButtons } from './actions';
-import { streamConversation, resetTypesenseClient } from './streaming';
+import { streamConversation, fetchConversation, resetTypesenseClient } from './streaming';
+import { streamDocsAiChat } from './docsai-client';
 
 const { env } = document.documentElement.dataset;
 const docsConfig = getConfig(env);
 const typesenseConfig = docsConfig.typesense;
+const docsAiConfig = docsConfig.docsAi;
+
+// --- Providers & feature flags ---------------------------------------------------
+
+const PROVIDER_INTERNAL = 'internal';
+const PROVIDER_TYPESENSE = 'typesense';
 
 let IS_CONVERSATIONAL_SEARCH_ENABLED = false;
 const CONVERSATIONAL_SEARCH_FLAG_KEY = 'docs_conversational_search';
 
-const CONV_MODEL_DOCS_PREVIEW = 'docs-ai-conv-model-v1-preview';
-const CONV_MODEL_DOCS_STABLE = 'docs-ai-conv-model-v1-stable';
-const DEFAULT_CONVERSATION_MODEL_ID = CONV_MODEL_DOCS_STABLE;
-const USE_LEGACY_MODEL_FLAG_KEY = 'DOCS_AI_USE_LEGACY_MODEL';
+// When true, disables the internal docs-ai provider and uses the external Typesense provider.
+// Default: false (internal docs-ai is the primary provider).
+const USE_EXTERNAL_PROVIDER_FLAG_KEY = 'docs-ai-use-external-provider';
+
+// Only relevant when provider is typesense.
+const DISABLE_STREAMING_FLAG_KEY = 'docs-ai-disable-streaming';
+
+const EXTERNAL_CONV_MODEL_DOCS_STABLE = 'docs-ai-conv-model-v1-stable';
+const INTERNAL_CONVERSATION_ID_PREFIX = 'dd_docsai_';
 
 const RENDER_THROTTLE = 50;
+
+const LOADING_MESSAGES = [
+    'Searching documentation…',
+    'Reviewing relevant pages…',
+    'Analyzing content…',
+    'Generating answer…'
+];
 
 let isDatadogUser = false;
 
@@ -30,8 +49,6 @@ initializeFeatureFlags().then(async (client) => {
         IS_CONVERSATIONAL_SEARCH_ENABLED = true;
     }
 
-    // /locate tells us if the visitor is a logged-in Datadog app user.
-    // Not used for feature gating — included in every Docs AI log event.
     isDatadogUser = await fetchDatadogUserStatus();
 
     if (IS_CONVERSATIONAL_SEARCH_ENABLED) {
@@ -40,39 +57,68 @@ initializeFeatureFlags().then(async (client) => {
     }
 });
 
+// --- Main class ------------------------------------------------------------------
+
 class ConversationalSearch {
     constructor() {
         this.conversationId = null;
+        this.chatHistory = [];
         this.isOpen = false;
         this.isLoading = false;
         this.abortController = null;
         this.userCancelledRequest = false;
         this.hasLoggedFirstOpen = false;
-        this.selectedModelId = DEFAULT_CONVERSATION_MODEL_ID;
+        this.isSuggestionQuery = false;
+
+        this.provider = PROVIDER_INTERNAL;
+        this.selectedModelId = EXTERNAL_CONV_MODEL_DOCS_STABLE;
+        this.typesenseStreamingDisabled = true;
+        // Rewrites the initial user query for better retrieval before answering.
+        // Only applied on the first message (no history). Follow-ups use history context instead.
+        this.shouldRewriteQuery = true;
+
         this.isHomepage = document.querySelector('.kind-home') !== null;
         this.homeAiBtnVisible = false;
         this.ready = false;
 
         if (!this.createElements()) return;
         this.bindEvents();
-        this.resolveModelFromFlag();
+        this.resolveFlags();
         this.ready = true;
     }
 
     get ctx() {
-        return { selectedModelId: this.selectedModelId, conversationId: this.conversationId, isDatadogUser };
+        return {
+            provider: this.provider,
+            selectedModelId: this.selectedModelId,
+            conversationId: this.conversationId,
+            isDatadogUser
+        };
     }
 
     log(message, data) { logAction(message, data, this.ctx); }
     logErr(message, error) { logError(message, error, this.ctx); }
 
-    resolveModelFromFlag() {
+    generateInternalConversationId() {
+        if (window.crypto?.randomUUID) {
+            return `${INTERNAL_CONVERSATION_ID_PREFIX}${window.crypto.randomUUID()}`;
+        }
+
+        return `${INTERNAL_CONVERSATION_ID_PREFIX}${Date.now()}_${Math.random().toString(36).slice(2, 11)}`;
+    }
+
+    resolveFlags() {
         initializeFeatureFlags().then((client) => {
-            if (getBooleanFlag(client, USE_LEGACY_MODEL_FLAG_KEY)) {
-                this.selectedModelId = CONV_MODEL_DOCS_PREVIEW;
+            const useTypesense = getBooleanFlag(client, USE_EXTERNAL_PROVIDER_FLAG_KEY);
+            this.provider = useTypesense ? PROVIDER_TYPESENSE : PROVIDER_INTERNAL;
+
+            if (useTypesense) {
+                this.typesenseStreamingDisabled = getBooleanFlag(client, DISABLE_STREAMING_FLAG_KEY);
             }
         }).catch(() => {});
     }
+
+    // --- DOM setup ---------------------------------------------------------------
 
     createElements() {
         const template = document.getElementById('conv-search-template');
@@ -115,6 +161,8 @@ class ConversationalSearch {
         }
     }
 
+    // --- Events ------------------------------------------------------------------
+
     bindEvents() {
         this.floatButton.addEventListener('click', () => this.open('floating_button'));
         this.closeBtn.addEventListener('click', () => this.close());
@@ -141,6 +189,7 @@ class ConversationalSearch {
         this.bindHomepageObserver();
         this.bindTooltipEvents();
         this.bindClickDelegation();
+        this.bindScrollFade();
     }
 
     bindHomepageObserver() {
@@ -158,6 +207,15 @@ class ConversationalSearch {
             { threshold: 0 }
         );
         observer.observe(homeAiBtn);
+    }
+
+    bindScrollFade() {
+        this.messagesContainer.addEventListener('scroll', () => {
+            this.messagesContainer.classList.toggle(
+                'has-scrolled',
+                this.messagesContainer.scrollTop > 0
+            );
+        });
     }
 
     bindTooltipEvents() {
@@ -192,7 +250,6 @@ class ConversationalSearch {
 
     bindClickDelegation() {
         this.messagesContainer.addEventListener('click', (e) => {
-            // Ref chip → navigate
             const sourceRefBtn = e.target.closest('.conv-search-source-ref-btn');
             if (sourceRefBtn && this.messagesContainer.contains(sourceRefBtn)) {
                 e.preventDefault();
@@ -201,14 +258,10 @@ class ConversationalSearch {
                 const sourceNumber = sourceRefBtn.dataset.sourceNumber;
                 const tooltipLink = sourceRefBtn.parentNode?.querySelector('.conv-search-source-tooltip a');
 
-                this.log('Conversational Search Source Ref Click', {
-                    conversational_search: {
-                        action: 'source_ref_click',
-                        source_number: sourceNumber ? parseInt(sourceNumber, 10) : null,
-                        source_url: tooltipLink?.href || null,
-                        source_title: tooltipLink?.textContent || null,
-                        conversation_id: this.conversationId
-                    }
+                this.logInteraction('source_ref_click', {
+                    source_number: sourceNumber ? parseInt(sourceNumber, 10) : null,
+                    source_url: tooltipLink?.href || null,
+                    source_title: tooltipLink?.textContent || null
                 });
 
                 if (tooltipLink?.href) {
@@ -221,14 +274,10 @@ class ConversationalSearch {
             if (sourceCard && this.messagesContainer.contains(sourceCard)) {
                 const cardLink = sourceCard.querySelector('a');
                 const badge = sourceCard.querySelector('.conv-search-source-card-number');
-                this.log('Conversational Search Source Card Click', {
-                    conversational_search: {
-                        action: 'source_card_click',
-                        source_number: badge ? parseInt(badge.textContent, 10) : null,
-                        source_url: cardLink?.href || null,
-                        source_title: cardLink?.textContent || null,
-                        conversation_id: this.conversationId
-                    }
+                this.logInteraction('source_card_click', {
+                    source_number: badge ? parseInt(badge.textContent, 10) : null,
+                    source_url: cardLink?.href || null,
+                    source_title: cardLink?.textContent || null
                 });
             }
 
@@ -236,36 +285,29 @@ class ConversationalSearch {
             if (suggestionBtn) {
                 const query = suggestionBtn.dataset.query;
                 if (query) {
-                    this.log('Conversational Search Suggestion Click', {
-                        conversational_search: {
-                            action: 'suggestion_clicked',
-                            suggestion_query: query,
-                            conversation_id: this.conversationId
-                        }
-                    });
+                    this.logInteraction('suggestion_clicked', { suggestion_query: query });
                     this.input.value = query;
+                    this.isSuggestionQuery = true;
                     this.sendMessage();
                 }
             }
 
             const link = e.target.closest('a');
             if (link && this.messagesContainer.contains(link)) {
-                this.log('Conversational Search Link Click', {
-                    conversational_search: {
-                        action: 'link_clicked',
-                        link_url: link.href,
-                        link_text: link.textContent,
-                        conversation_id: this.conversationId
-                    }
+                this.logInteraction('link_clicked', {
+                    link_url: link.href,
+                    link_text: link.textContent
                 });
             }
         });
     }
 
+    // --- Open / Close / Reset ----------------------------------------------------
+
     open(trigger = 'entry_button') {
         if (!this.hasLoggedFirstOpen) {
             this.log('Conversational Search Open', {
-                conversational_search: { action: 'open_first_time', trigger }
+                conversational_search: { action: 'open_first_time', trigger, provider: this.provider }
             });
             this.hasLoggedFirstOpen = true;
         }
@@ -291,9 +333,7 @@ class ConversationalSearch {
     }
 
     newChat() {
-        this.log('Conversational Search New Chat', {
-            conversational_search: { action: 'new_chat', conversation_id: this.conversationId }
-        });
+        this.logInteraction('new_chat');
 
         if (this.abortController) {
             this.userCancelledRequest = true;
@@ -302,6 +342,8 @@ class ConversationalSearch {
         }
 
         this.conversationId = null;
+        this.chatHistory = [];
+        this.isSuggestionQuery = false;
         this.isLoading = false;
         this.sendBtn.disabled = false;
 
@@ -312,6 +354,8 @@ class ConversationalSearch {
         this.input.style.height = 'auto';
         this.input.focus();
     }
+
+    // --- Message DOM helpers -----------------------------------------------------
 
     addMessage(role, content) {
         const emptyState = this.messagesContainer.querySelector('.conv-search-empty-state');
@@ -331,22 +375,61 @@ class ConversationalSearch {
         return contentDiv;
     }
 
-    addStreamingMessage() {
-        const welcome = this.messagesContainer.querySelector('.conv-search-welcome');
-        if (welcome) welcome.remove();
-
+    addResponseContainer() {
         const messageDiv = document.createElement('div');
         messageDiv.className = 'conv-search-message conv-search-message-assistant';
 
         const contentDiv = document.createElement('div');
         contentDiv.className = 'conv-search-message-content';
-        contentDiv.innerHTML = '<span class="conv-search-cursor"></span>';
 
         messageDiv.appendChild(contentDiv);
         this.messagesContainer.appendChild(messageDiv);
         this.scrollToBottom(true);
 
         return contentDiv;
+    }
+
+    /**
+     * Shows a spinner + status text while waiting for the first content token.
+     * Returns { updateStatus, stop } — call updateStatus(text) when the server
+     * sends a thinking event (auto-rotation is killed on first call); call stop()
+     * to remove the indicator.
+     */
+    startLoading() {
+        const emptyState = this.messagesContainer.querySelector('.conv-search-empty-state');
+        if (emptyState) emptyState.remove();
+
+        const wrapper = document.createElement('div');
+        wrapper.className = 'conv-search-message conv-search-message-assistant conv-search-loading-state';
+
+        const indicator = document.createElement('div');
+        indicator.className = 'conv-search-loading-indicator';
+        indicator.innerHTML =
+            '<span class="conv-search-loading-spinner"></span>' +
+            `<span class="conv-search-status-text">${LOADING_MESSAGES[0]}</span>`;
+
+        wrapper.appendChild(indicator);
+        this.messagesContainer.appendChild(wrapper);
+        this.scrollToBottom(true);
+
+        let msgIndex = 0;
+        let interval = setInterval(() => {
+            if (msgIndex < LOADING_MESSAGES.length - 1) msgIndex++;
+            const el = wrapper.querySelector('.conv-search-status-text');
+            if (el) el.textContent = LOADING_MESSAGES[msgIndex];
+        }, 3000);
+
+        return {
+            updateStatus: (text) => {
+                if (interval) { clearInterval(interval); interval = null; }
+                const el = wrapper.querySelector('.conv-search-status-text');
+                if (el) el.textContent = text;
+            },
+            stop: () => {
+                if (interval) clearInterval(interval);
+                if (wrapper.parentNode) wrapper.remove();
+            }
+        };
     }
 
     isNearBottom() {
@@ -360,6 +443,34 @@ class ConversationalSearch {
         }
     }
 
+    // --- Logging helpers ---------------------------------------------------------
+
+    logInteraction(action, extra = {}) {
+        this.log('Conversational Search Interaction', {
+            conversational_search: {
+                action,
+                provider: this.provider,
+                ...(this.conversationId && { conversation_id: this.conversationId }),
+                ...extra
+            }
+        });
+    }
+
+    logResponse({ query, answer, startTime, streaming = true }) {
+        this.log('Conversational Search Response', {
+            conversational_search: {
+                action: 'response_received',
+                provider: this.provider,
+                streaming,
+                response_length: answer.length,
+                ...(this.conversationId && { conversation_id: this.conversationId }),
+                latency_ms: Date.now() - startTime
+            }
+        });
+    }
+
+    // --- Send / dispatch ---------------------------------------------------------
+
     async sendMessage() {
         const query = this.input.value.trim();
         if (!query || this.isLoading) return;
@@ -371,34 +482,105 @@ class ConversationalSearch {
         this.sendBtn.disabled = true;
 
         this.addMessage('user', query);
-        const responseContainer = this.addStreamingMessage();
 
         try {
-            await this.runStreamConversation(query, responseContainer);
+            if (this.provider === PROVIDER_INTERNAL) {
+                await this.runInternalStream(query);
+            } else if (this.typesenseStreamingDisabled) {
+                await this.runTypesenseFetch(query);
+            } else {
+                await this.runTypesenseStream(query);
+            }
         } catch (error) {
             if (error.name === 'AbortError' && this.userCancelledRequest) {
-                responseContainer.textContent = 'Request cancelled.';
+                this.addResponseContainer().textContent = 'Request cancelled.';
             } else {
                 this.logErr('Conversational Search Response Error', error);
-                resetTypesenseClient();
-                responseContainer.textContent = 'Sorry, something went wrong. Please try again.';
+                if (this.provider === PROVIDER_TYPESENSE) resetTypesenseClient();
+                this.addResponseContainer().textContent = 'Sorry, something went wrong. Please try again.';
             }
         } finally {
             this.isLoading = false;
             this.sendBtn.disabled = false;
             this.abortController = null;
             this.userCancelledRequest = false;
+            this.isSuggestionQuery = false;
             this.input.focus();
         }
     }
 
-    async runStreamConversation(query, responseContainer) {
+    // --- Internal docs-ai provider -----------------------------------------------
+
+    async runInternalStream(query) {
         this.abortController = new AbortController();
         const startTime = Date.now();
+        const loading = this.startLoading();
 
+        const isFirstMessage = this.chatHistory.length === 0;
+        const isSuggestion = this.isSuggestionQuery;
+        if (!this.conversationId) {
+            this.conversationId = this.generateInternalConversationId();
+        }
+        this.chatHistory.push({ role: 'user', content: query });
+
+        let responseContainer = null;
+        let lastRenderTime = 0;
+
+        const answer = await streamDocsAiChat({
+            config: docsAiConfig,
+            query,
+            history: isFirstMessage ? [] : this.chatHistory.slice(0, -1),
+            conversationId: this.conversationId,
+            rewriteQuery: isFirstMessage && this.shouldRewriteQuery && !isSuggestion,
+            signal: this.abortController.signal,
+            onThinking: (message) => {
+                loading.updateStatus(message);
+            },
+            onToken: (_token, fullMessage) => {
+                if (!responseContainer) {
+                    loading.stop();
+                    responseContainer = this.addResponseContainer();
+                }
+
+                const now = Date.now();
+                if (now - lastRenderTime > RENDER_THROTTLE) {
+                    const { displayMarkdown, sources } = extractSources(fullMessage);
+                    responseContainer.innerHTML = inlineRefChips(parseMarkdown(displayMarkdown));
+                    if (sources.length > 0) {
+                        responseContainer.appendChild(buildSourceCards(sources));
+                    }
+                    lastRenderTime = now;
+                    this.scrollToBottom();
+                }
+            },
+            onError: (error) => {
+                this.logErr('Docs AI Streaming Error', error);
+            }
+        });
+        loading.stop();
+
+        if (!responseContainer) {
+            responseContainer = this.addResponseContainer();
+        }
+
+        if (answer) {
+            this.chatHistory.push({ role: 'assistant', content: answer });
+            this.finalizeResponse(responseContainer, query, answer, startTime);
+        } else {
+            responseContainer.textContent = 'No response received. Please try again.';
+        }
+    }
+
+    // --- Typesense provider (streaming) ------------------------------------------
+
+    async runTypesenseStream(query) {
+        this.abortController = new AbortController();
+        const startTime = Date.now();
+        const loading = this.startLoading();
+
+        let responseContainer = null;
         let accumulatedMessage = '';
         let lastRenderTime = 0;
-        responseContainer.innerHTML = '';
 
         const response = await streamConversation({
             typesenseConfig,
@@ -412,6 +594,11 @@ class ConversationalSearch {
                 }
 
                 if (chunk?.message !== undefined) {
+                    if (!responseContainer) {
+                        loading.stop();
+                        responseContainer = this.addResponseContainer();
+                    }
+
                     accumulatedMessage += chunk.message;
 
                     const now = Date.now();
@@ -427,37 +614,77 @@ class ConversationalSearch {
                 }
             },
             onError: (error) => {
-                this.logErr('Conversational Search Streaming Error', error);
+                this.logErr('Typesense Streaming Error', error);
             }
         });
+        loading.stop();
 
         const finalConversationId = response?.results?.[0]?.conversation?.conversation_id;
         if (finalConversationId) {
             this.conversationId = finalConversationId;
         }
 
-        if (accumulatedMessage) {
-            responseContainer.innerHTML = renderMessageWithSources(accumulatedMessage, {
-                attachTooltips,
-                buildSourceCards
-            });
-            injectCodeCopyButtons(responseContainer, this.ctx);
-            addMessageActions(responseContainer.parentElement, query, accumulatedMessage, this.ctx);
-            this.scrollToBottom();
+        if (!responseContainer) {
+            responseContainer = this.addResponseContainer();
+        }
 
-            this.log('Conversational Search Response', {
-                conversational_search: {
-                    action: 'response_received',
-                    response_length: accumulatedMessage.length,
-                    conversation_id: this.conversationId,
-                    latency_ms: Date.now() - startTime
-                }
-            });
+        if (accumulatedMessage) {
+            this.finalizeResponse(responseContainer, query, accumulatedMessage, startTime);
         } else {
             responseContainer.textContent = 'No response received. Please try again.';
         }
     }
+
+    // --- Typesense provider (non-streaming) --------------------------------------
+
+    async runTypesenseFetch(query) {
+        this.abortController = new AbortController();
+        const startTime = Date.now();
+        const loading = this.startLoading();
+
+        let response;
+        try {
+            response = await fetchConversation({
+                typesenseConfig,
+                query,
+                modelId: this.selectedModelId,
+                conversationId: this.conversationId,
+                signal: this.abortController.signal
+            });
+        } finally {
+            loading.stop();
+        }
+
+        const conversation = response?.conversation || response?.results?.[0]?.conversation;
+        if (conversation?.conversation_id) {
+            this.conversationId = conversation.conversation_id;
+        }
+
+        const answer = conversation?.answer || '';
+        const responseContainer = this.addResponseContainer();
+
+        if (answer) {
+            this.finalizeResponse(responseContainer, query, answer, startTime, false);
+        } else {
+            responseContainer.textContent = 'No response received. Please try again.';
+        }
+    }
+
+    // --- Shared finalization -----------------------------------------------------
+
+    finalizeResponse(container, query, answer, startTime, streaming = true) {
+        container.innerHTML = renderMessageWithSources(answer, {
+            attachTooltips,
+            buildSourceCards
+        });
+        injectCodeCopyButtons(container, this.ctx);
+        addMessageActions(container.parentElement, query, answer, this.ctx);
+        this.scrollToBottom();
+        this.logResponse({ query, answer, startTime, streaming });
+    }
 }
+
+// --- Bootstrap -------------------------------------------------------------------
 
 let conversationalSearchInstance = null;
 
@@ -465,15 +692,35 @@ function initConversationalSearch() {
     if (!IS_CONVERSATIONAL_SEARCH_ENABLED || conversationalSearchInstance) return;
     const instance = new ConversationalSearch();
     if (instance.ready) conversationalSearchInstance = instance;
+
+    const homeAiBtn = document.querySelector('.home-ai-btn');
+    if (homeAiBtn) {
+        homeAiBtn.addEventListener('click', () => {
+            const searchInput = document.querySelector('.ais-SearchBox-input');
+            const query = searchInput ? searchInput.value : '';
+            askDocsAI(query, { source: 'home_hero' });
+        });
+    }
 }
 
+// The minimum length of the query to auto-submit the conversation.
+// to avoid submitting short queries that are not meaningful.
+const AUTO_SUBMIT_MIN_LENGTH = 10;
+
 function askDocsAI(query, options = {}) {
-    if (IS_CONVERSATIONAL_SEARCH_ENABLED && conversationalSearchInstance) {
-        conversationalSearchInstance.open(options.source || 'entry_button');
-        if (query && query.trim()) {
-            conversationalSearchInstance.input.value = query;
-            setTimeout(() => conversationalSearchInstance.sendMessage(), 100);
-        }
+    if (!IS_CONVERSATIONAL_SEARCH_ENABLED || !conversationalSearchInstance) return;
+
+    const trimmed = (query || '').trim();
+    const inst = conversationalSearchInstance;
+    inst.open(options.source || 'entry_button');
+
+    const isNewConversation = inst.chatHistory.length === 0 && !inst.conversationId;
+    if (!trimmed || !isNewConversation) return;
+
+    inst.input.value = trimmed;
+
+    if (trimmed.length >= AUTO_SUBMIT_MIN_LENGTH) {
+        setTimeout(() => inst.sendMessage(), 100);
     }
 }
 

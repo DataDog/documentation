@@ -363,6 +363,191 @@ See the [Manual tab](?tab=manual#instrumentation) for descriptions of all enviro
 {{% /tab %}}
 {{< /tabs >}}
 
+{{% svl-tracing-env %}}
+
+### Deployment slots
+
+<div class="alert alert-info">Deployment slot instrumentation is in Preview. During the Preview, telemetry from slots appears under the main web app. To distinguish between slot and production telemetry, configure <a href="/getting_started/tagging/unified_service_tagging/">unified service tagging</a> with distinct values for each slot.</div>
+
+{{% collapse-content title="Instrument a deployment slot" level="h4" %}}
+
+To instrument a [deployment slot][101] instead of the main web app, use one of the following methods.
+
+[101]: https://learn.microsoft.com/en-us/azure/app-service/deploy-staging-slots
+
+{{< tabs >}}
+{{% tab "Datadog CLI" %}}
+
+Using the [Datadog CLI][1] (v5.9.0+), add the `--slot` flag. Use `--env` to set a distinct environment tag for the slot:
+
+```shell
+datadog-ci aas instrument -s <subscription-id> -g <resource-group-name> -n <app-service-name> --slot <slot-name> --env <slot-env>
+```
+
+Alternatively, provide the full slot resource ID with the `--resource-id` flag:
+
+```shell
+datadog-ci aas instrument --resource-id /subscriptions/<subscription-id>/resourceGroups/<resource-group>/providers/Microsoft.Web/sites/<app-name>/slots/<slot-name> --env <slot-env>
+```
+
+[1]: https://github.com/DataDog/datadog-ci#how-to-install-the-cli
+
+{{% /tab %}}
+{{% tab "Terraform" %}}
+
+Use the [Datadog Windows Web App Slot module][1]:
+
+```tf
+module "my_web_app_slot" {
+  source  = "DataDog/web-app-datadog/azurerm//modules/windows-slot"
+  version = "~> 1.0"
+
+  name                = "staging"             // Replace with your slot name
+  app_service_id      = module.my_web_app.id  // Reference to your main web app
+  resource_group_name = "my-resource-group"   // Replace with your resource group
+
+  datadog_api_key = var.datadog_api_key
+  datadog_service = "my-service" // Replace with your service name
+  datadog_env     = "staging"    // Set a distinct value for each slot
+  datadog_version = "0.0.0"      // Replace with your application version
+
+  site_config = {
+    application_stack = {
+      node_version = "~22" // change for your specific runtime
+    }
+  }
+  app_settings = {
+    DD_TRACE_ENABLED = "true" // Example setting
+  }
+}
+```
+
+Run `terraform apply`, and follow any prompts.
+
+[1]: https://registry.terraform.io/modules/DataDog/web-app-datadog/azurerm/latest/submodules/windows-slot
+
+{{% /tab %}}
+{{% tab "Bicep" %}}
+
+Update your template to target a deployment slot instead of the main web app:
+
+```bicep
+@secure()
+param datadogApiKey string
+
+param webAppName string
+param slotName string
+
+resource webApp 'Microsoft.Web/sites@2025-03-01' existing = {
+  name: webAppName
+}
+
+resource slot 'Microsoft.Web/sites/slots@2025-03-01' = {
+  parent: webApp
+  name: slotName
+  // ...
+  properties: {
+    // ...
+    siteConfig: {
+      // ...
+      appSettings: [
+        //... Your existing app settings
+        { name: 'DD_API_KEY', value: datadogApiKey }
+        { name: 'DD_SITE', value: 'datadoghq.com' }  // Replace with your Datadog site
+        { name: 'DD_SERVICE', value: 'my-service' }  // Replace with your service name
+        { name: 'DD_ENV', value: 'staging' }          // Set a distinct value for each slot
+        { name: 'DD_VERSION', value: '0.0.0' }       // Replace with your application version
+        // Add any additional options here
+      ]
+    }
+  }
+}
+
+resource datadogExtension 'Microsoft.Web/sites/slots/siteextensions@2025-03-01' = {
+  parent: slot
+  // Uncomment the extension for your runtime:
+  // name: 'Datadog.AzureAppServices.Node.Apm'
+  // name: 'Datadog.AzureAppServices.DotNet'
+  // name: 'Datadog.AzureAppServices.Java.Apm'
+}
+```
+
+Deploy your updated template:
+
+```shell
+az deployment group create --resource-group <RESOURCE GROUP> --template-file <TEMPLATE FILE>
+```
+
+**Note**: You need to stop and start the slot (not the main app) for the extension to take effect.
+
+{{% /tab %}}
+{{% tab "ARM Template" %}}
+
+Update your template to target a deployment slot instead of the main web app:
+
+```jsonc
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "webAppName": {
+      "type": "string"
+    },
+    "slotName": {
+      "type": "string"
+    },
+    // ...
+    "datadogApiKey": {
+      "type": "securestring"
+    }
+  },
+  "resources": {
+    "slot": {
+      "type": "Microsoft.Web/sites/slots",
+      "apiVersion": "2025-03-01",
+      "name": "[concat(parameters('webAppName'), '/', parameters('slotName'))]",
+      // ...
+      "properties": {
+        // ...
+        "siteConfig": {
+          // ...
+          "appSettings": [
+            //... Your existing app settings
+            { "name": "DD_API_KEY", "value": "[parameters('datadogApiKey')]" },
+            { "name": "DD_SITE", "value": "datadoghq.com" }, // Replace with your Datadog site
+            { "name": "DD_SERVICE", "value": "my-service" }, // Replace with your service name
+            { "name": "DD_ENV", "value": "staging" },        // Set a distinct value for each slot
+            { "name": "DD_VERSION", "value": "0.0.0" },      // Replace with your application version
+            // Add any additional options here
+          ]
+        }
+      }
+    },
+    "datadogExtension": {
+      "type": "Microsoft.Web/sites/slots/siteextensions",
+      "apiVersion": "2025-03-01",
+      // Uncomment the extension for your runtime:
+      // "name": "[concat(parameters('webAppName'), '/', parameters('slotName'), '/Datadog.AzureAppServices.Node.Apm')]"
+      // "name": "[concat(parameters('webAppName'), '/', parameters('slotName'), '/Datadog.AzureAppServices.DotNet')]"
+      // "name": "[concat(parameters('webAppName'), '/', parameters('slotName'), '/Datadog.AzureAppServices.Java.Apm')]"
+    }
+  }
+}
+```
+
+Deploy your updated template:
+
+```bash
+az deployment group create --resource-group <RESOURCE GROUP> --template-file <TEMPLATE FILE>
+```
+
+**Note**: You need to stop and start the slot (not the main app) for the extension to take effect.
+
+{{% /tab %}}
+{{< /tabs >}}
+
+{{% /collapse-content %}}
+
 ## Custom metrics
 
 The Azure App Service extension includes an instance of [DogStatsD][1], Datadog's metrics aggregation service. This enables you to submit custom metrics, service checks, and events directly to Datadog from Azure Web Apps and Functions with the extension.
@@ -690,6 +875,14 @@ Many organizations use [Azure Resource Management (ARM) templates](https://docs.
 {{% /tab %}}
 {{< /tabs >}}
 
+## Profiling
+
+<div class="alert alert-info">
+Datadog's Continuous Profiler is available in preview for .NET and Node.js on Windows Azure App Service.
+</div>
+
+To enable the [Continuous Profiler][6], set the environment variable `DD_PROFILING_ENABLED=true`.
+
 ## Deployment
 
 {{% aas-workflow-windows %}}
@@ -727,3 +920,4 @@ Still need help? Contact [Datadog support][4].
 [3]: /integrations/azure/
 [4]: /help
 [5]: https://app.datadoghq.com/integrations/azure
+[6]: /profiler/

@@ -190,6 +190,8 @@ Google has integrated Cloud Run functions into the Cloud Run UI. Starting August
 
    For more information on how to add labels, see Google Cloud's [Configure labels for services][12] documentation.
 
+{{% svl-tracing-env %}}
+
 ## Example functions
 The following examples contain a sample function with tracing and metrics set up.
 

@@ -1,4 +1,5 @@
 ---
+id: outlier
 title: outlier
 core_product:
     - alerts

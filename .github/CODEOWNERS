@@ -167,6 +167,9 @@ content/en/dora_metrics/                          @Datadog/ci-app-backend @Datad
 content/en/code_analysis/                         @Datadog/static-analysis @Datadog/documentation
 content/en/quality_gates/                         @Datadog/ci-app-backend @Datadog/documentation
 
+# MCP Server
+content/en/bits_ai/mcp_server/                   @DataDog/mcp-services @DataDog/documentation
+
 # DDSQL Editor References
 content/en/ddsql_reference/*.md                   @Datadog/documentation @Datadog/advanced-query-guild
 

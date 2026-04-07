@@ -40,7 +40,7 @@ Log in as a user assigned the Datadog Admin role, or any user with a role in you
 
 In order to create a Restricted Dataset, identify the data to be restricted with a query.
 
-{{< img src="/account_management/rbac/restricted_dataset-2.png" alt="Create a Restricted Dataset dialog. Selects data in RUM, APM, Logs, and Metrics matching the tag service:hr. Grants access to a Privileged access team.">}}
+{{< img src="/account_management/rbac/restricted_dataset-3.png" alt="Create a Restricted Dataset dialog. Selects data in RUM, APM, Logs, and Metrics matching the tag service:hr. Grants access to a Privileged access team.">}}
 
 Name Dataset
 : A descriptive name to help users understand what data is contained in the dataset.
@@ -69,7 +69,7 @@ The following are available as a Preview upon request:
     - **Note:** Standard and OpenTelemetry (OTel) metrics are not supported
 - Error Tracking issues
 - LLM Observability
-- Software Delivery repository info (in CI Visibility pipelines)
+- Software Delivery repository info (in CI Visibility pipelines, Test Optimization, and Code Coverage products)
 
 ## Usage constraints
 
@@ -121,7 +121,7 @@ If you have too many combinations of tags or attributes to fit within these cons
 #### Restricted Dataset 2
 * Telemetry type: RUM
     * Filters: `@application.id:EFGH`
-* Telemetry type: Metrics
+* Telemetry type: Custom Metrics
     * Filters: `env:prod`
 
 ### Not supported example
@@ -178,7 +178,7 @@ For example, if you have a service `NewService` that is instrumented with Real U
 * **Select data to be included in this Dataset:**
     * Telemetry type: RUM
         * Filters: `@service:NewService`
-    * Telemetry type: Metrics
+    * Telemetry type: Custom Metrics
         * Filters: `@service:NewService`
     * Telemetry type: APM
         * Filters: `@service:NewService`

@@ -1,4 +1,5 @@
 ---
+id: arn
 core_product:
 - infrastructure monitoring
 title: Amazon Resource Name (ARN)

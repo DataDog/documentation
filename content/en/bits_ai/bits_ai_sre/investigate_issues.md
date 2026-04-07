@@ -37,7 +37,7 @@ To use the Slack integration, [connect your Slack workspace to Bits AI SRE][8].
 
 In Slack, reply to a monitor notification with `@Datadog Investigate this alert`.
 
-#### APM latency
+#### APM latency (Preview)
 
 {{< callout url="http://datadoghq.com/product-preview/bits-ai-sre-pilot-features" >}}
 Bits AI SRE investigations started from APM latency graphs and APM Watchdog stories are in Preview. Click <strong>Request Access</strong> to join the Preview program.
@@ -53,11 +53,7 @@ Bits AI SRE investigations started from APM latency graphs and APM Watchdog stor
 
 On a Watchdog APM latency story, click **Investigate with Bits AI SRE**.
 
-#### General prompt
-
-{{< callout url="http://datadoghq.com/product-preview/bits-ai-sre-pilot-features" >}}
-Starting Bits AI SRE investigations from chat prompts is in Preview. Click <strong>Request Access</strong> to join the Preview program.
-{{< /callout >}}
+#### General prompt (Preview)
 
 Click on [New Investigation][16] and describe the issue you want to troubleshoot. Include as much relevant context as possible:
 - Observed symptoms (e.g., errors, latency) including any links to Datadog telemetry that indicate this
@@ -74,6 +70,9 @@ Bad example:
 - App is slow. What’s wrong?
 
 You can also trigger an investigation from Slack.  Mention Datadog in a message: `@Datadog Investigate high CPU in ai-gateway in prod over the last 30 minutes`. If invoked within a Slack thread, Bits AI SRE automatically uses the entire thread as investigation context.
+
+<div class="alert alert-info">
+Starting Bits AI SRE investigations from a prompt is in Preview for all customers. During this period, the number of investigations per day is rate-limited. This limit does not apply to generally available entry points, such as monitors.</div>
 
 ### Enable automatic investigations
 
@@ -102,9 +101,8 @@ Bits is able to run investigations on the following monitor types:
   - APM (`APM Metrics` type only; `Trace Analytics` is not supported)
   - Synthetics API and Browser tests (Preview)
 
-{{< callout url="http://datadoghq.com/product-preview/bits-ai-sre-pilot-features" >}}
-Starting Bits AI SRE investigations from Synthetic tests is now in Preview. Click <strong>Request Access</strong> to join the Preview program.
-{{< /callout >}}
+<div class="alert alert-info">
+Starting Bits AI SRE investigations from Synthetic tests is in Preview for all customers.</div>
 
 ## How Bits AI SRE investigates
 When Bits AI SRE investigates an issue, it operates in a continuous loop of observation, reasoning, and action. It begins by forming hypotheses about the potential root cause, then uses its tools to query telemetry data to validate or invalidate those hypotheses. Each step builds on prior findings. As new evidence emerges, Bits AI SRE updates its understanding, refines its reasoning, and chains together additional investigative steps—adapting and course-correcting until it converges on the most likely root cause.
@@ -140,9 +138,8 @@ Bits uses the following data sources during investigations:
 - ServiceNow
 - Confluence
 
-{{< callout url="http://datadoghq.com/product-preview/bits-ai-sre-pilot-features" >}}
-A subset of third-party integrations are in Preview. Click <strong>Request Access</strong> to join the Preview program.
-{{< /callout >}}
+<div class="alert alert-info">
+Third-party integrations are in Preview for all customers.</div>
 
 For best practices on maximizing the effectiveness of investigations, see [Knowledge sources][9].
 
