@@ -80,6 +80,8 @@ const tracer = require('dd-trace/init')
 
 5. A couple of minutes after you start your application, your profiles appear on the [APM > Profiler page][5]. If they do not, refer to the [Troubleshooting][9] guide.
 
+6. Optional: [Upload Source Maps][10] (in Preview.) If you use source maps and you deploy them with your application the profiler will read them and produce mapped locations in profiles. Source maps in `.map` files as well as inline source maps are both supported. If you want to reduce deployment sizes (typically in serverless environments) you can choose to not deploy source maps and instead upload them to Datadog. You need to use dd-trace version 5.93.0 or newer for uploaded source maps to work, and your deployed source files still must contain the `@sourceMappingURL` annotation as an indication that they need to be mapped using the uploaded maps.
+
 ## Not sure what to do next?
 
 The [Getting Started with Profiler][6] guide takes a sample service with a performance problem and shows you how to use Continuous Profiler to understand and fix the problem.
@@ -97,3 +99,4 @@ The [Getting Started with Profiler][6] guide takes a sample service with a perfo
 [7]: /profiler/enabling/supported_versions/
 [8]: /serverless/aws_lambda/profiling/
 [9]: /profiler/profiler_troubleshooting/nodejs/
+[10]: /real_user_monitoring/guide/upload-javascript-source-maps/
