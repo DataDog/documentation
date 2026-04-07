@@ -129,6 +129,25 @@ In Project Settings, you can manage membership, configure the auto-closing of ca
 **Note**: A case can only be synced with one external resource at a time, per project. To enable ServiceNow syncing, Jira automatic creation and syncing must be disabled. Only cases using the core statuses of "Open", "In Progress" and "Closed" can sync with ServiceNow.
 {{% /collapse-content %}}
 
+{{% collapse-content title="Linear Configuration" level="h4" expanded=false id="linear" %}}
+1. Ensure the [Linear integration][5] is configured.
+1. In Case Management project settings, enable **Linear** for manual Linear issue creation from the project.
+1. Select a Linear workspace and team to create issues in.
+1. You can opt into the automatic creation of a Linear issue for each case created in the project.
+1. For the following attributes—case title, description, assignee, comments, status, and priority—select one of the options below:
+  | Option                        | Description                                                                                                                             |
+  |-------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------|
+  | Once to Linear at case creation | The field syncs from Case Management to Linear only at the time the case is created. Subsequent changes are not reflected on either side. |
+  | Two-way sync (bi-directional) | Changes in Case Management are reflected in Linear, and vice versa.                                                                      |
+  | Don't sync                    | The field does not sync to Linear.                                                                                                       |
+1. For case status, select which states they map to on the Linear side.
+1. Save changes.
+
+**Notes**:
+- Only cases using the core statuses of "Open", "In Progress" and "Closed" can sync with Linear.
+- Two-way syncing requires [webhook support][6].
+{{% /collapse-content %}}
+
 ## Incident auto-escalation
 
 Manual incident declaration during high event volumes can cause delays and increase risk exposure during critical situations. Incident auto-escalation from Cases allows you to automatically declare incidents when cases match your defined criteria, removing the need for manual intervention.
@@ -147,3 +166,5 @@ When enabled, any case that meets your specified query criteria (at any point in
 [2]: /integrations/jira/#configure-a-jira-webhook
 [3]: /integrations/servicenow/#itom-and-itsm-setup
 [4]: /incident_response/on-call/
+[5]: /integrations/linear/
+[6]: /integrations/linear/#configure-a-linear-webhook
