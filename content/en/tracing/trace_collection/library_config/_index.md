@@ -4,7 +4,7 @@ description: Configure Datadog tracing libraries with environment variables, run
 type: multi-code-lang
 ---
 
-hello.
+hello. hello
 This page describes configuration options that behave consistently across all languages. To view these common configuration options, see [Common configuration options](#common-configuration-options).
 
 {{% apm-config-visibility %}}
