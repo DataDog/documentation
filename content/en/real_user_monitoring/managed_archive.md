@@ -26,7 +26,7 @@ With Managed Archive teams can:
 
 - **Store everything**: Store all sessions for several months automatically
 - **Recover on demand**: Bring back specific sessions for full investigation
-- **Investigate seamlessly**: Explore recovered sessions like regularly retained sessions
+- **Investigate in depth**: Explore recovered sessions like regularly retained sessions
 
 Common use cases include:
 
