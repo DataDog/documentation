@@ -76,7 +76,7 @@ Widget descriptions let you add a text description to any dashboard widget, incl
 
 To add a description:
 1. Open the graph editor for the widget.
-2. In the **Description** field at the bottom of the editor, enter a description.
+2. Enter a **Description** at the bottom of the editor.
 3. Click **Save**.
 
 After saving, hover over the description icon in the top-left corner of the widget to view the description.
