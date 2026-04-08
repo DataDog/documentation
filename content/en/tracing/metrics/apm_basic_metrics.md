@@ -63,7 +63,7 @@ The same translations apply for the `universal.http.server` operation that captu
 
 ## Usage
 
-Navigate to [**Infrastructure > Universal Service Monitoring**][8], filter by APM Basic telemetry type, and click on a service. The **Performance** tab displays service-level graphs on hits, latency, requests, errors, and more. You can also access these metrics when creating a [monitor](#create-a-monitor) or an [SLO](#create-an-slo), or by looking at a [dashboard](#access-a-defined-dashboard) in the [Software Catalog][2].
+Navigate to [**APM > Software Catalog**][8], filter by APM Basic telemetry type, and click on a service. The **Performance** tab displays service-level graphs on hits, latency, requests, errors, and more. You can also access these metrics when creating a [monitor](#create-a-monitor) or an [SLO](#create-an-slo), or by looking at a [dashboard](#access-a-defined-dashboard) in the [Software Catalog][2].
 
 ### Create a monitor
 

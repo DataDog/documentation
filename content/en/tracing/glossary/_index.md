@@ -51,7 +51,7 @@ For additional definitions and descriptions of important APM terms such as _span
 
 [APM Basic][29] provides RED metrics (requests, errors, duration) for services that are not instrumented with tracing libraries. It uses eBPF in the Datadog Agent to automatically discover services and collect health metrics without requiring code changes. Services monitored by APM Basic appear in the [Software Catalog][4] and [Service Map][5] alongside fully instrumented services. On hosts where [Single Step Instrumentation][24] is not applicable, APM Basic provides automatic baseline monitoring.
 
-APM Basic reports metrics under the `universal.http.server` (inbound traffic) and `universal.http.client` (outbound traffic) operation names. For setup instructions, see [Setting Up APM Basic][30].
+APM Basic reports metrics under the `universal.http.server` (inbound traffic) and `universal.http.client` (outbound traffic) operation names. For setup instructions, see [APM Basic][30].
 
 ## Services
 

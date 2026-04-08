@@ -36,11 +36,9 @@ cascade:
 
 ## Overview
 
-APM Basic automatically discovers services running in your infrastructure and collects request, error, and duration (RED) metrics from network traffic — without requiring code changes or instrumentation. It relies solely on the presence of a configured Datadog Agent and [Unified Service Tagging][6].
+APM Basic automatically discovers services running in your infrastructure and collects request, error, and duration (RED) metrics from network traffic—without requiring code changes or instrumentation. It relies solely on a configured Datadog Agent and [Unified Service Tagging][6].
 
 On hosts where [Single Step Instrumentation][1] is not applicable, APM Basic provides automatic baseline monitoring. Services monitored by APM Basic appear in the [Software Catalog][2] and [Service Map][3] alongside your fully instrumented services, and work with [Deployment Tracking][7], Monitors, Dashboards, and SLOs.
-
-For distributed tracing and deeper application-level insights, instrument your services with [Datadog tracing libraries][5] or [Single Step Instrumentation][1].
 
 <div class="alert alert-info">Hosts monitored with APM Basic are billed at the APM Basic host rate. After you add instrumentation to a service, that host automatically moves to the standard APM tier. For details, see <a href="/account_management/billing/apm_tracing_profiler/">APM Billing</a>.</div>
 
@@ -144,7 +142,7 @@ Additional protocols and traffic encryption methods are in <a href="#additional-
     - Your service is running in a container.
     - **In Preview:** For non-containerized services, see the [instructions here](#additional-configuration).
 - If on Windows:
-    - Your service is running on a virtual machine.
+    - Your service is running on a VM.
 - Datadog Agent is installed alongside your service. Installing a tracing library is _not_ required.
 - The `env` tag for [Unified Service Tagging][6] has been applied to your deployment. The `service` and `version` tags are optional.
 

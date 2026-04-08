@@ -16,7 +16,7 @@ further_reading:
   text: "Creating context with service maps (Datadog + Airbnb)"
 ---
 
-The Service Map decomposes your application into all its component [services][1] and draws the observed dependencies between these services in real time, so you can identify bottlenecks and understand how data flows through your architecture. The Service Map includes services discovered through both full APM instrumentation and [APM Basic][8] (eBPF-based monitoring).
+The Service Map decomposes your application into all its component [services][1] and draws the observed dependencies between these services in real time, so you can identify bottlenecks and understand how data flows through your architecture. This includes services discovered through both full APM instrumentation and [APM Basic][8] (eBPF-based monitoring).
 
 {{< img src="tracing/visualization/services_map/service_map_overview_3.png" alt="Service Map Overview" >}}
 
