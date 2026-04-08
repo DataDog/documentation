@@ -1,45 +1,28 @@
----
-title: Unity Advanced Configuration
-description: Learn how to configure Unity Monitoring.
-aliases:
-    - /real_user_monitoring/unity/advanced_configuration
-    - /real_user_monitoring/otel
-    - /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/otel
-    - /real_user_monitoring/mobile_and_tv_monitoring/setup/otel
-    - /real_user_monitoring/unity/otel_support/
-    - /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/unity
-    - /real_user_monitoring/mobile_and_tv_monitoring/unity/advanced_configuration
-further_reading:
-- link: https://github.com/DataDog/dd-sdk-unity
-  tag: "Source Code"
-  text: Source code for dd-sdk-unity
-- link: real_user_monitoring/explorer/
-  tag: Documentation
-  text: Learn how to explore your RUM data
+<!--
+This partial contains advanced configuration instructions for the Unity SDK.
+It can be included directly in language-specific pages or wrapped in conditionals.
+-->
 
----
-## Overview
+If you have not set up the Datadog Unity SDK for RUM yet, follow the [in-app setup instructions][1] or see the [RUM Unity setup documentation][2]. Learn how to set up [OpenTelemetry with RUM Unity](#opentelemetry-setup).
 
-If you have not set up the Datadog Unity SDK for RUM yet, follow the [in-app setup instructions][1] or refer to the [RUM Unity setup documentation][2]. Learn how to set up [OpenTelemetry with RUM Unity](#opentelemetry-setup).
-
-### Advanced Initialization Options
+### Advanced initialization options
 
 `Custom Endpoint`
-: Optional<br/>
-**Type**: String<br/>
-**Default**: `true`<br/>
+: Optional  
+**Type**: String  
+**Default**: `undefined`  
 Send data to a custom endpoint instead of the default Datadog endpoint. This is useful for proxying data through a custom server.
 
 `SDK Verbosity`
-: Optional<br/>
-**Type**: Enum<br/>
-**Default**: `Warn`<br/>
-The level of debugging information the Datadog SDK should output. Higher levels will output more information. This option is helpful for getting debugging information from the SDK when something is not working as expected, or removing the SDK-related debugging entries from console logs.
+: Optional  
+**Type**: Enum  
+**Default**: `Warn`  
+The level of debugging information the Datadog SDK should output. Higher levels output more information. This option is helpful for getting debugging information from the SDK when something is not working as expected, or removing the SDK-related debugging entries from console logs.
 
 `Telemetry Sample Rate`
-: Optional<br/>
-**Type**: Double<br/>
-**Default**: `20`
+: Optional  
+**Type**: Double  
+**Default**: `20`  
 The percentage rate at which Datadog sends internal telemetry data. A value of 100 means all telemetry data is sampled and sent to Datadog.
 
 ### Automatic view tracking
@@ -54,7 +37,7 @@ To manually register instantaneous RUM actions such as `RumActionType.Tap`, use 
 
 For example:
 
-```cs
+```csharp
 void DownloadResourceTapped(string resourceName) {
     DatadogSdk.Instance.Rum.AddAction(
         RumActionType.Tap,
@@ -71,7 +54,7 @@ Datadog provides `DatadogTrackedWebRequest` as a drop in replacement for `UnityW
 
 You can use it the same way as you would any other `UnityWebRequest`:
 
-```cs
+```csharp
 var request = DatadogTrackedWebRequest.Get("https://httpbin.org/headers");
 yield return request.SendWebRequest();
 
@@ -80,7 +63,7 @@ Debug.Log("Got result: " + request.downloadHandler.text);
 
 ### Track custom resources
 
-In addition to tracking resources automatically using `DatadogTrackedWebRequest, you can track specific custom resources such as network requests or third-party provider APIs using the following methods:
+In addition to tracking resources automatically using `DatadogTrackedWebRequest`, you can track specific custom resources such as network requests or third-party provider APIs using the following methods:
 
 - `DdRum.StartResource`
 - `DdRum.StopResource`
@@ -89,10 +72,10 @@ In addition to tracking resources automatically using `DatadogTrackedWebRequest,
 
 For example:
 
-```cs
+```csharp
 // in your network client:
 
-DatadogSdk.Instance.Rum.startResource(
+DatadogSdk.Instance.Rum.StartResource(
     "resource-key",
     RumHttpMethod.Get,
     url,
@@ -100,7 +83,7 @@ DatadogSdk.Instance.Rum.startResource(
 
 // Later
 
-DatadogSdk.Instance.Rum.stopResource(
+DatadogSdk.Instance.Rum.StopResource(
     "resource-key",
     200,
     RumResourceType.Image
@@ -113,7 +96,7 @@ The `string` used for `resourceKey` in both calls must be unique for the resourc
 
 To track specific errors, notify `DdRum` when an error occurs with the exception, the source, and any additional attributes.
 
-```cs
+```csharp
 try
 {
   // Error prone code
@@ -139,13 +122,13 @@ To set a custom global attribute, use `DdRum.AddAttribute`.
 
 ### Track user sessions
 
-Adding user information to your RUM sessions makes it easy to:
+Adding user information to your RUM sessions makes it possible to:
 
 * Follow the journey of a given user
 * Know which users are the most impacted by errors
 * Monitor performance for your most important users
 
-{{< img src="real_user_monitoring/browser/advanced_configuration/user-api.png" alt="User API in the RUM UI" style="width:90%" >}}
+{% img src="real_user_monitoring/browser/advanced_configuration/user-api.png" alt="User API in the RUM UI" style="width:90%" /%}
 
 | Attribute   | Type   | Description                                                                     |
 | ----------- | ------ | ------------------------------------------------------------------------------- |
@@ -157,7 +140,7 @@ To identify user sessions, use `DatadogSdk.SetUserInfo`.
 
 For example:
 
-```cs
+```csharp
 DatadogSdk.Instance.SetUserInfo("1234", "John Doe", "john@doe.com");
 ```
 
@@ -169,7 +152,7 @@ To remove an existing attribute, set it to `null`.
 
 For example:
 
-```cs
+```csharp
 DatadogSdk.Instance.AddUserExtraInfo(new ()
 {
  { "attribute_1", "foo" },
@@ -181,13 +164,9 @@ DatadogSdk.Instance.AddUserExtraInfo(new ()
 
 Use `ClearAllData` to clear all data that has not been sent to Datadog.
 
-```cs
+```csharp
 DatadogSdk.instance.ClearAllData();
 ```
-
-## Further reading
-
-{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/rum/application/create
 [2]: /real_user_monitoring/application_monitoring/unity/setup/
