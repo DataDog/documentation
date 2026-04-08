@@ -7,11 +7,9 @@ Real User Monitoring offers Mobile Vitals, which includes a set of datapoints in
 
 You can view Mobile Vitals for your application by navigating to **Digital Experience > Performance Summary** and selecting your application.
 
-{% img src="real_user_monitoring/android/android-mobile-vitals.png" alt="Mobile Vitals on the Performance Summary tab" style="width:90%;" /%}
+{% img src="real_user_monitoring/android/mobile-vitals.png" alt="Mobile Vitals on the Performance Summary tab" style="width:90%;" /%}
 
-To access the RUM mobile app performance dashboard, switch to the **Performance** tab, then click the **View Dashboard** link.
-
-{% img src="real_user_monitoring/android/android-perf-dash-link.png" alt="Access the mobile performance dashboard from the Performance tab" style="width:90%;" /%}
+To access the RUM mobile app performance dashboard, click the **Performance Dashboard** link.
 
 Understand your application's overall health and performance with the line graphs displaying datapoints across various application versions. To filter on application version or see specific sessions and views, click on a graph.
 
