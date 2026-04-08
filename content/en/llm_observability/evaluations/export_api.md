@@ -331,6 +331,7 @@ Both endpoints have the same response format. [Results are paginated](/logs/guid
 | tool_definitions        | [[ToolDefinition](#tooldefinition)]                       | List of tools available in an LLM request. |
 | metrics        | Dict[key (string), float]                      | Datadog metrics to collect. |
 | evaluation        | Dict[key (string), [SpanEvalMetric](#spanevalmetric)]                      | A map of evaluations associated with the span. |
+| intent        | string                       | The intent of an MCP tool call. |
 
 ### SearchedIO
 

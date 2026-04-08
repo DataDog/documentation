@@ -164,7 +164,7 @@ SSI supports multiple injection modes, which control how the injector and APM li
 | Mode | Description | Requirements |
 |------|-------------|--------------|
 | `init_container` | Uses init containers to copy injector and APM library files into application containers. | Agent deployed with Helm Chart or Datadog Operator |
-| `csi` | **In Preview.** Mounts injector and APM library files using the [Datadog CSI driver][40]. Reduces pod startup time compared to init container mode. | Agent 7.76.0+, CSI driver 1.2.0+, Helm Chart 3.178.1+ |
+| `csi` | **In Preview.** Mounts injector and APM library files using the [Datadog CSI driver][40]. Reduces pod startup time compared to init container mode. | Agent 7.76.0+, CSI driver 1.2.0+, Helm Chart 3.178.1+ or Datadog Operator 1.25.0+ |
 
 Before using `csi` mode, install and activate the Datadog CSI driver. If you are deploying with Helm, also set `datadog.csi.enabled: true` in your `datadog-values.yaml`. See the [CSI driver documentation][40] for installation steps and environment-specific requirements such as GKE Autopilot.
 
@@ -187,7 +187,18 @@ Supported values: `init_container`, `csi`.
 {{% /tab %}}
 {{% tab "Datadog Operator" %}}
 
-Datadog Operator does not support setting the injection mode globally. To override the injection mode for specific pods, use the [pod annotation](#configure-injection-mode-per-pod).
+To set the injection mode cluster-wide, add `injectionMode` to your `datadog-agent.yaml`:
+
+```yaml
+features:
+  apm:
+    instrumentation:
+      injectionMode: <mode>
+```
+
+Supported values: `init_container`, `csi`.
+
+If you are using Datadog Operator earlier than 1.25.0, use the [pod annotation](#configure-injection-mode-per-pod) to override the injection mode for specific pods.
 
 {{% /tab %}}
 {{< /tabs >}}
