@@ -2975,22 +2975,6 @@ menu:
       parent: infrastructure_resource_catalog
       identifier: infrastructure_resource_changes
       weight: 10003
-    - name: Universal Service Monitoring
-      url: universal_service_monitoring/
-      pre: usm
-      identifier: usm_parent
-      parent: infrastructure_heading
-      weight: 30000
-    - name: Setup
-      url: universal_service_monitoring/setup/
-      parent: usm_parent
-      identifier: universal_service_monitoring_setup
-      weight: 1
-    - name: Guides
-      url: universal_service_monitoring/guide/
-      parent: usm_parent
-      identifier: universal_service_monitoring_guides
-      weight: 2
     - name: End User Device Monitoring
       url: infrastructure/end_user_device_monitoring/
       pre: desktop-wui
@@ -3980,21 +3964,6 @@ menu:
       parent: tracing
       identifier: tracing_glossary
       weight: 1
-    - name: APM Basic
-      url: tracing/apm_basic/
-      parent: tracing
-      identifier: apm_basic
-      weight: 1.5
-    - name: Setup
-      url: tracing/apm_basic/setup/
-      parent: apm_basic
-      identifier: apm_basic_setup
-      weight: 1
-    - name: Guides
-      url: tracing/apm_basic/guide/
-      parent: apm_basic
-      identifier: apm_basic_guides
-      weight: 2
     - name: Application Instrumentation
       url: tracing/trace_collection/
       parent: tracing
@@ -4215,6 +4184,11 @@ menu:
       parent: tracing_trace_collection
       identifier: tracing_span_links
       weight: 213
+    - name: APM Basic
+      url: tracing/trace_collection/apm_basic/
+      parent: tracing_trace_collection
+      identifier: tracing_apm_basic
+      weight: 214
     - name: APM Metrics Collection
       url: tracing/metrics/
       parent: tracing
@@ -4230,6 +4204,11 @@ menu:
       parent: tracing_metrics
       identifier: tracing_runtime_metrics
       weight: 302
+    - name: APM Basic Metrics
+      url: tracing/metrics/apm_basic_metrics/
+      parent: tracing_metrics
+      identifier: tracing_apm_basic_metrics
+      weight: 303
     - name: Trace Pipeline Configuration
       url: tracing/trace_pipeline/
       parent: tracing

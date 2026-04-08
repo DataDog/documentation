@@ -27,6 +27,10 @@ Ingested span and traces are kept for 15 minutes. Indexed spans and traces that 
 Enable [runtime metrics collection][3] in supported tracing libraries to gain insights into an application's performance. These metrics are sent to the Datadog Agent over the configured DogStatsD port.
 
 
+## APM Basic metrics
+
+[APM Basic][4] reports metrics under the `universal.http.*` namespace instead of the `trace.*` namespace used by full APM. For details on APM Basic metric names, query syntax, and how to use them in monitors, SLOs, and dashboards, see [APM Basic Metrics][5].
+
 ## Next steps
 
 {{< whatsnext desc="Use what you set up:" >}}
@@ -42,3 +46,5 @@ Enable [runtime metrics collection][3] in supported tracing libraries to gain in
 [1]: /tracing/metrics/metrics_namespace/
 [2]: /tracing/trace_pipeline/ingestion_mechanisms
 [3]: /tracing/metrics/runtime_metrics/
+[4]: /tracing/trace_collection/apm_basic/
+[5]: /tracing/metrics/apm_basic_metrics/

@@ -1,20 +1,122 @@
 ---
-title: Setting up Universal Service Monitoring
-description: "Configure Universal Service Monitoring with Datadog Agent across different platforms including Kubernetes, Docker, ECS, and Windows environments."
+title: APM Basic
+description: "Monitor service health metrics across your infrastructure without code instrumentation using APM Basic and the Datadog Agent."
+aliases:
+- /universal_service_monitoring/
+- /tracing/universal_service_monitoring/
+- /universal_service_monitoring/setup/
+- /tracing/apm_basic/
+- /tracing/apm_basic/setup/
 further_reading:
-- link: "/universal_service_monitoring/"
+- link: "/tracing/metrics/apm_basic_metrics/"
   tag: "Documentation"
-  text: "Learn about Universal Service Monitoring"
+  text: "Using APM Basic metrics in monitors, SLOs, and dashboards"
 - link: "https://www.datadoghq.com/blog/universal-service-monitoring-datadog/"
   tag: "Blog"
   text: "Golden signals in seconds with Universal Service Monitoring"
+- link: "/getting_started/tagging/unified_service_tagging/"
+  tag: "Documentation"
+  text: "Unified Service Tagging"
+- link: "/tracing/software_catalog/"
+  tag: "Documentation"
+  text: "Discover and catalog the services reporting to Datadog"
+- link: "/tracing/services/service_page/"
+  tag: "Documentation"
+  text: "Learn more about services in Datadog"
+- link: "/tracing/services/services_map/"
+  tag: "Documentation"
+  text: "Read about the Service Map"
+- link: "https://www.datadoghq.com/blog/monitor-connection-churn-datadog/"
+  tag: "Blog"
+  text: "Best practices for monitoring and remediating connection churn"
+cascade:
+    algolia:
+        rank: 70
 ---
 
+## Overview
 
-## Supported versions and compatibility
+APM Basic provides visibility into your service health metrics _without requiring code instrumentation_. It relies solely on the presence of a configured Datadog Agent and [Unified Service Tagging][6] to automatically discover services and collect request, error, and duration (RED) metrics from network traffic.
+
+APM Basic is designed for services that are not yet instrumented with tracing libraries. On hosts where [Single Step Instrumentation][1] is not applicable, APM Basic provides automatic baseline monitoring. Services monitored by APM Basic appear in the [Software Catalog][2] and [Service Map][3] alongside your fully instrumented services, and work with [Deployment Tracking][7], Monitors, Dashboards, and SLOs.
+
+<div class="alert alert-info">Hosts monitored with APM Basic are billed at the APM Basic host rate. After you add instrumentation to a service, that host automatically moves to the standard APM tier. For details, see <a href="/account_management/billing/apm_tracing_profiler/">APM Billing</a>.</div>
+
+## What APM Basic monitors
+
+APM Basic collects RED metrics for every discovered service:
+
+| Metric | Description |
+|--------|-------------|
+| Request count | Total number of inbound and outbound HTTP requests |
+| Error rate | Percentage of requests that returned error status codes |
+| Latency (duration) | Response time distribution for requests |
+
+These metrics are reported under two operation names:
+
+- `universal.http.server`: health metrics for inbound traffic to your service
+- `universal.http.client`: health metrics for outbound traffic from your service
+
+An operation name of `universal.http.server` or `universal.http.client` on a service page indicates that the service telemetry comes from APM Basic.
+
+<div class="alert alert-info">APM Basic uses the <code>service_monitoring_config</code> Agent configuration and reports metrics under the <code>universal.http.*</code> namespace. These names are unchanged from the former Universal Service Monitoring feature.</div>
+
+### Supported protocols
+
+| Protocol | Status |
+|----------|--------|
+| HTTP/1.1 | Generally available |
+| HTTP/2 | Generally available |
+| gRPC | Generally available |
+| HTTPS/TLS (Linux) | Generally available |
+| HTTPS/TLS (Windows, IIS only) | Generally available |
+| HTTPS/TLS (Windows, non-IIS) | Not supported |
+| Additional protocols | [Preview][4] |
+
+## How it works
+
+When APM Basic is enabled, the Datadog Agent's `system-probe` component uses eBPF to observe network traffic at the kernel level. It parses HTTP request and response metadata from this traffic and aggregates the data into service health metrics. Because this operates at the kernel level, it works regardless of the programming language or framework your services use.
+
+**Note**: On Windows, APM Basic uses Event Tracing for Windows (ETW) through the `Microsoft-Windows-HttpService` provider instead of eBPF. This provider is only available for IIS-based services. Non-IIS services on Windows support HTTP monitoring only, not HTTPS.
+
+## APM Basic and full APM
+
+APM Basic provides baseline service monitoring. For distributed tracing and deeper application-level insights, instrument your services with [Datadog tracing libraries][5] or [Single Step Instrumentation][1].
+
+| Capability | APM Basic | APM |
+|------------|-----------|-----|
+| RED metrics (requests, errors, duration) | {{< X >}} | {{< X >}} |
+| Service List and Service Pages | {{< X >}} | {{< X >}} |
+| Service Map | {{< X >}} | {{< X >}} |
+| No code instrumentation required | {{< X >}} | |
+| Distributed traces | | {{< X >}} |
+| Trace search and analytics | | {{< X >}} |
+| Flame graphs and span-level detail | | {{< X >}} |
+
+## Automatic service tagging
+
+APM Basic automatically discovers services running in your infrastructure. If it does not find [unified service tags][6], it assigns them a name based on one of the following tags: `app`, `short_image`, `kube_container_name`, `container_name`, `kube_deployment`, `kube_service`.
+
+To update a service's name, set up [Unified Service Tagging][6].
+
+## Exploring your services
+
+After you configure the Agent, wait about five minutes for your services to appear in the [Software Catalog][2]. Click a service to see the service details page.
+
+After enabling APM Basic, you can:
+
+- Navigate to **APM** > **Software Catalog** or **APM** > **Service Map** to [visualize your services and their dependencies][2].
+- Click into specific Service pages to see golden signal metrics (requests, errors, and duration), and correlate these against recent code changes with [Deployment Tracking][7].
+- Create [monitors][8], [dashboards][9], and [SLOs][10] using the `universal.http.*` metrics.
+
+## Setup
+
+<div class="alert alert-info">APM Basic uses the same Agent configuration as the former Universal Service Monitoring. Configuration keys such as <code>service_monitoring_config</code> and environment variables like <code>DD_SYSTEM_PROBE_SERVICE_MONITORING_ENABLED</code> are unchanged.</div>
+
+### Supported versions and compatibility
 
 Required Agent version
-: Universal Service Monitoring requires that the Datadog Agent installed alongside your containerized service be at least version 6.40 or 7.40. As noted below, some features in Preview require higher versions.
+: APM Basic requires that the Datadog Agent installed alongside your containerized service be at least version 6.40 or 7.40. As noted below, some features in Preview require higher versions.
 
 Supported Linux platforms
 : Linux Kernel 4.14 and greater<br/>
@@ -28,13 +130,13 @@ Supported application-layer protocols
 HTTPS (OpenSSL)
 
 Known limitations
-: Universal Service Monitoring requires the use of Datadog's `system-probe`, which is not supported on Google Kubernetes Engine (GKE) Autopilot.
+: APM Basic requires the use of Datadog's `system-probe`, which is not supported on Google Kubernetes Engine (GKE) Autopilot.
 
 <div class="alert alert-info">
-Additional protocols and traffic encryption methods are in <a href="/universal_service_monitoring/additional_protocols/">Preview</a>. If you have feedback about what platforms and protocols you'd like to see supported, <a href="/help/">contact Support</a>.
+Additional protocols and traffic encryption methods are in <a href="#additional-configuration">Preview</a>. If you have feedback about what platforms and protocols you'd like to see supported, <a href="/help/">contact Support</a>.
 </div>
 
-## Prerequisites
+### Prerequisites
 
 - If on Linux:
     - Your service is running in a container.
@@ -42,27 +144,27 @@ Additional protocols and traffic encryption methods are in <a href="/universal_s
 - If on Windows:
     - Your service is running on a virtual machine.
 - Datadog Agent is installed alongside your service. Installing a tracing library is _not_ required.
-- The `env` tag for [Unified Service Tagging][1] has been applied to your deployment. The `service` and `version` tags are optional.
+- The `env` tag for [Unified Service Tagging][6] has been applied to your deployment. The `service` and `version` tags are optional.
 
-## How USM detects service names
+### How APM Basic detects service names
 
 <div class="alert alert-warning">
-Universal Service Monitoring detects service names from environment variables that exist when a process starts. USM reads these values from the operating system: from <code>/proc/PID/environ</code> on Linux, or through system APIs on Windows.
+APM Basic detects service names from environment variables that exist when a process starts. APM Basic reads these values from the operating system: from <code>/proc/PID/environ</code> on Linux, or through system APIs on Windows.
 </div>
 
-USM recognizes the following environment variables:
+APM Basic recognizes the following environment variables:
 - `DD_SERVICE`: Explicitly sets the service name
 - `DD_ENV`: Sets the environment tag
 - `DD_VERSION`: Sets the version tag
 - `DD_TAGS`: Additional tags; can include the `service:name` tag
 
-### Key limitation: USM and programmatically-set environment variables for APM
+#### Key limitation: APM Basic and programmatically-set environment variables for APM
 
-If you set environment variables programmatically **inside your application code** (such as `System.setProperty("dd.service", "my-service")` in Java, or `Environment.SetEnvironmentVariable("DD_SERVICE", "my-service")` in .NET), these environment variables are **not** detected by USM, even though these values work for APM tracing instrumentation.
+If you set environment variables programmatically **inside your application code** (such as `System.setProperty("dd.service", "my-service")` in Java, or `Environment.SetEnvironmentVariable("DD_SERVICE", "my-service")` in .NET), these environment variables are **not** detected by APM Basic, even though these values work for APM tracing instrumentation.
 
-This happens because USM runs in the Datadog Agent as a separate process and only sees the environment variables that were set when your process started. Conversely, APM instrumentation libraries run inside your application process and can read runtime environment changes.
+This happens because APM Basic runs in the Datadog Agent as a separate process and only sees the environment variables that were set when your process started. Conversely, APM instrumentation libraries run inside your application process and can read runtime environment changes.
 
-**To ensure USM detection, set environment variables before the application starts**:
+**To help ensure APM Basic detection, set environment variables before the application starts**:
 
 {{< tabs >}}
 {{% tab "Docker" %}}
@@ -90,9 +192,9 @@ java -jar myapp.jar
 {{% /tab %}}
 {{< /tabs >}}
 
-## Enabling Universal Service Monitoring
+### Enabling APM Basic
 
-Enable Universal Service Monitoring in your Agent by using one of the following methods depending on how your service is deployed and your Agent configured:
+Enable APM Basic in your Agent by using one of the following methods depending on how your service is deployed and your Agent configured:
 
 {{< tabs >}}
 {{% tab "Helm" %}}
@@ -133,7 +235,7 @@ agents:
 
 Datadog Operator v1.0.0 or greater is required.
 
-To enable Universal Service Monitoring with the [Datadog Operator][1], update your `datadog-agent.yaml` manifest. In the `DatadogAgent` resource, set `spec.features.usm.enabled` to `true`:
+To enable APM Basic with the [Datadog Operator][1], update your `datadog-agent.yaml` manifest. In the `DatadogAgent` resource, set `spec.features.usm.enabled` to `true`:
 
    ```yaml
    apiVersion: datadoghq.com/v2alpha1
@@ -175,7 +277,7 @@ To enable Universal Service Monitoring with the [Datadog Operator][1], update yo
          annotations:
            container.apparmor.security.beta.kubernetes.io/system-probe: unconfined
     ```
-2. Enable Universal Service Monitoring with the following environment variables in the Agent daemonset. If you are running a container per Agent process, add the following environment variables to the `process-agent` container. Otherwise, add them to the `agent` container.
+2. Enable APM Basic with the following environment variables in the Agent daemonset. If you are running a container per Agent process, add the following environment variables to the `process-agent` container. Otherwise, add them to the `agent` container.
 
    ```yaml
    ...
@@ -425,7 +527,7 @@ services:
      - /etc/zypp:/host/etc/zypp
      - /etc/pki:/host/etc/pki
      - /etc/yum/vars:/host/etc/yum/vars
-     - /etc/dnf/vars:/host/etc/dnf/vars
+     - /etc/dnf:/host/etc/dnf/vars
      - /etc/rhsm:/host/etc/rhsm
     cap_add:
      - SYS_ADMIN
@@ -461,7 +563,7 @@ must not have a running `apparmor` instance.
 
 If the operating system does not have a running `apparmor` instance, use the same `docker-compose.yml` file from the `Docker-Compose` [section][1] beside the field `security_opt`.
 
-[1]: /universal_service_monitoring/setup/?tab=dockercompose#enabling-universal-service-monitoring
+[1]: /tracing/trace_collection/apm_basic/?tab=dockercompose#enabling-apm-basic
 
 {{% /tab %}}
 {{% tab "Configuration files (Linux)" %}}
@@ -516,7 +618,7 @@ service_monitoring_config:
 
 {{% tab "ECS" %}}
 
-For ECS, enable USM and the system probe with the following JSON task definition. Deploy the task definition as a [daemon service][1].
+For ECS, enable APM Basic and the system probe with the following JSON task definition. Deploy the task definition as a [daemon service][1].
 
 ```json
 {
@@ -760,7 +862,7 @@ For optional HTTPS support, also add:
 ]
 ```
 
-If you use load balancers with your services, enable additional cloud integrations to allow Universal Service Monitoring to discover cloud-managed entities:
+If you use load balancers with your services, enable additional cloud integrations to allow APM Basic to discover cloud-managed entities:
 
 1. Install the [AWS Integration][2] for visibility in AWS Load Balancer.
 2. Enable ENI and EC2 metric collection.
@@ -799,7 +901,7 @@ service_monitoring_config:
 ```
 
 <div class="alert alert-warning">
-<strong>Important limitation for non-IIS Windows services:</strong> Universal Service Monitoring on Windows uses Event Tracing for Windows (ETW) through the <code>Microsoft-Windows-HttpService</code> provider for HTTPS traffic monitoring. This ETW provider is only available for IIS-based services. Non-IIS services (such as custom .NET applications, Node.js servers, Java servers, or other HTTP servers running on Windows) <strong>do not support HTTPS monitoring</strong> through USM. Only plain HTTP traffic can be monitored for non-IIS Windows services.
+<strong>Important limitation for non-IIS Windows services:</strong> APM Basic on Windows uses Event Tracing for Windows (ETW) through the <code>Microsoft-Windows-HttpService</code> provider for HTTPS traffic monitoring. This ETW provider is only available for IIS-based services. Non-IIS services (such as custom .NET applications, Node.js servers, Java servers, or other HTTP servers running on Windows) <strong>do not support HTTPS monitoring</strong> through APM Basic. Only plain HTTP traffic can be monitored for non-IIS Windows services.
 </div>
 
 ### IIS and non-IIS service support
@@ -815,13 +917,13 @@ service_monitoring_config:
 
 {{< /tabs >}}
 
-## Additional configuration
+### Additional configuration
 
 The following systems or services require additional configuration:
 
 {{< collapse-content title="Non-containerized services on Linux" level="h4" >}}
 <div class="alert alert-info">
-Universal Service Monitoring is available to monitor services running bare-metal on Linux virtual machines.
+APM Basic is available to monitor services running bare-metal on Linux virtual machines.
 </div>
 
 Requires Agent version 7.42 or greater.
@@ -851,7 +953,7 @@ DD_SYSTEM_PROBE_PROCESS_SERVICE_INFERENCE_ENABLED=true
 
 {{< collapse-content title="Go TLS Monitoring" level="h4" >}}
 <div class="alert alert-info">
-Universal Service Monitoring is in Preview to monitor TLS encrypted traffic from services implemented in Golang.
+APM Basic is in Preview to monitor TLS encrypted traffic from services implemented in Golang.
 </div>
 
 <strong>Note</strong>:
@@ -900,7 +1002,7 @@ agents:
 {{< collapse-content title="Node.js TLS Monitoring" level="h4" >}}
 
 <div class="alert alert-info">
-Universal Service Monitoring is in Preview to monitor HTTP, HTTP/2, and gRPC requests from services implemented in Node.js.
+APM Basic is in Preview to monitor HTTP, HTTP/2, and gRPC requests from services implemented in Node.js.
 </div>
 
 Requires Agent version 7.54 or greater.
@@ -943,7 +1045,7 @@ agents:
 
 {{< collapse-content title="Istio Monitoring" level="h4" >}}
 
-Universal Service Monitoring is available to monitor services behind <a href="https://istio.io/latest/docs/tasks/security/authentication/mtls-migration/">Istio mTLS</a> and to capture encrypted HTTPs, HTTP/2, and gRPC traffic.
+APM Basic is available to monitor services behind <a href="https://istio.io/latest/docs/tasks/security/authentication/mtls-migration/">Istio mTLS</a> and to capture encrypted HTTPs, HTTP/2, and gRPC traffic.
 
 Requires Agent version 7.50 or greater.
 
@@ -985,7 +1087,7 @@ agents:
 {{< /collapse-content >}}
 
 {{< collapse-content title="HTTP/2 monitoring" level="h4" >}}
-Universal Service Monitoring can capture HTTP/2 and gRPC traffic.
+APM Basic can capture HTTP/2 and gRPC traffic.
 
 <strong>Note</strong>:
 <br>
@@ -1081,7 +1183,7 @@ agents:
 {{< /collapse-content >}}
 
 
-## Path exclusion and replacement
+### Path exclusion and replacement
 
 Use `http_replace_rules` or `DD_SYSTEM_PROBE_NETWORK_HTTP_REPLACE_RULES` to configure the Agent to drop HTTP endpoints that match a regex, or to convert matching endpoints into a different format.
 
@@ -1142,11 +1244,17 @@ agents:
 {{< /tabs >}}
 
 
-<div class="alert alert-info"><strong>Support for additional protocols and encryption methods</strong><p>USM is in Preview for discovering cloud services and decoding additional protocols and traffic encryption methods. For more information and to request access to the Preview, read <a href="/universal_service_monitoring/additional_protocols/">Cloud Service Discovery and Additional Protocols</a>.</p></div>
-
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /getting_started/tagging/unified_service_tagging
+[1]: /tracing/trace_collection/single-step-apm/
+[2]: /tracing/software_catalog/
+[3]: /tracing/services/services_map/
+[4]: #additional-configuration
+[5]: /tracing/trace_collection/
+[6]: /getting_started/tagging/unified_service_tagging
+[7]: /tracing/services/deployment_tracking/
+[8]: /monitors/types/apm/?tab=apmmetrics
+[9]: /dashboards/
+[10]: /service_level_objectives/metric/

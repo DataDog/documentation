@@ -240,4 +240,4 @@ Control costs and manage data volume by configuring [ingestion controls][11] and
 [10]: /internal_developer_portal/software_catalog/entity_model/
 [11]: /tracing/trace_pipeline/ingestion_controls/
 [12]: /tracing/trace_pipeline/trace_retention/
-[13]: /tracing/apm_basic/
+[13]: /tracing/trace_collection/apm_basic/
