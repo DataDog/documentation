@@ -2081,6 +2081,13 @@ components:
       properties:
         data:
           $ref: "#/components/schemas/AWSCloudAuthPersonaMappingsData"
+          example:
+            - attributes:
+                account_identifier: "test@test.com"
+                account_uuid: "12bbdc5c-5966-47e0-8733-285f9e44bcf4"
+                arn_pattern: "arn:aws:iam::123456789012:user/testuser"
+              id: "c5c758c6-18c2-4484-ae3f-46b84128404a"
+              type: aws_cloud_auth_config
       required:
         - data
       type: object
@@ -31079,6 +31086,11 @@ components:
       properties:
         data:
           $ref: "#/components/schemas/IncidentHandlesResponseData"
+          example:
+            - attributes:
+                name: "@incident-sev-1"
+              id: "12ceee6d-a7c0-4407-bc54-30e54140d7f0"
+              type: incident_handles
         included:
           $ref: "#/components/schemas/IncidentHandleIncludedResponse"
       required:
@@ -35471,6 +35483,12 @@ components:
       properties:
         data:
           $ref: "#/components/schemas/JiraAccountsData"
+          example:
+            - attributes:
+                consumer_key: "consumer-key-1"
+                instance_url: "https://example.atlassian.net"
+              id: "account-1"
+              type: jira-account
         meta:
           $ref: "#/components/schemas/JiraAccountsMeta"
       required:
@@ -35792,6 +35810,17 @@ components:
       properties:
         data:
           $ref: "#/components/schemas/JiraIssueTemplatesData"
+          example:
+            - attributes:
+                fields:
+                  description:
+                    payload: "Test Description"
+                    type: "json"
+                issue_type_id: "10001"
+                name: "Bug Report Template"
+                project_id: "PROJECT-1"
+              id: "65b3341b-0680-47f9-a6d4-134db45c603e"
+              type: jira-issue-template
         included:
           $ref: "#/components/schemas/JiraAccountsData"
       required:
@@ -38101,6 +38130,14 @@ components:
       properties:
         data:
           $ref: "#/components/schemas/ListFindingsData"
+          example:
+            - attributes:
+                evaluation: fail
+                resource: "arn:aws:s3:::my-bucket"
+                resource_type: aws_s3_bucket
+                status: open
+              id: "abc-123-xyz"
+              type: finding
         meta:
           $ref: "#/components/schemas/ListFindingsMeta"
       required:
@@ -48738,6 +48775,12 @@ components:
       properties:
         data:
           $ref: "#/components/schemas/OutcomesBatchResponseData"
+          example:
+            - attributes:
+                service_name: my-service
+                state: pass
+              id: "outcome-abc123"
+              type: rule-outcome
         meta:
           $ref: "#/components/schemas/OutcomesBatchResponseMeta"
       required:
@@ -63050,6 +63093,13 @@ components:
       properties:
         data:
           $ref: "#/components/schemas/ServiceNowAssignmentGroupsData"
+          example:
+            - attributes:
+                group_name: "IT Operations"
+                group_sys_id: "abc123def456"
+                instance_id: "65b3341b-0680-47f9-a6d4-134db45c603e"
+              id: "65b3341b-0680-47f9-a6d4-134db45c603e"
+              type: assignment_groups
       required:
         - data
       type: object
@@ -63157,6 +63207,13 @@ components:
       properties:
         data:
           $ref: "#/components/schemas/ServiceNowBusinessServicesData"
+          example:
+            - attributes:
+                instance_id: "65b3341b-0680-47f9-a6d4-134db45c603e"
+                service_name: "IT Support"
+                service_sys_id: "abc123def456"
+              id: "65b3341b-0680-47f9-a6d4-134db45c603e"
+              type: business_services
       required:
         - data
       type: object
@@ -63213,6 +63270,11 @@ components:
       properties:
         data:
           $ref: "#/components/schemas/ServiceNowInstancesData"
+          example:
+            - attributes:
+                instance_name: "my-servicenow-instance"
+              id: "65b3341b-0680-47f9-a6d4-134db45c603e"
+              type: instance
       required:
         - data
       type: object
@@ -63458,6 +63520,13 @@ components:
       properties:
         data:
           $ref: "#/components/schemas/ServiceNowTemplatesData"
+          example:
+            - attributes:
+                handle_name: "incident-template"
+                instance_id: "65b3341b-0680-47f9-a6d4-134db45c603e"
+                servicenow_tablename: "incident"
+              id: "65b3341b-0680-47f9-a6d4-134db45c603e"
+              type: servicenow_templates
       required:
         - data
       type: object
@@ -63584,6 +63653,14 @@ components:
       properties:
         data:
           $ref: "#/components/schemas/ServiceNowUsersData"
+          example:
+            - attributes:
+                email: "john.doe@example.com"
+                instance_id: "65b3341b-0680-47f9-a6d4-134db45c603e"
+                user_name: "john.doe"
+                user_sys_id: "abc123def456"
+              id: "65b3341b-0680-47f9-a6d4-134db45c603e"
+              type: users
       required:
         - data
       type: object
