@@ -7863,6 +7863,38 @@ menu:
       identifier: sds_guides
       parent: sensitive_data_scanner
       weight: 3
+    - name: Journey Monitoring
+      url: journey_monitoring/
+      pre: journey-monitoring
+      identifier: journey_monitoring
+      parent: digital_experience_heading
+      weight: 25000
+    - name: Map
+      url: /journey_monitoring/map
+      parent: journey_monitoring
+      identifier: journey_monitoring_map
+      weight: 1
+    - name: Suggested Journeys
+      url: /journey_monitoring/map/suggested_journeys
+      parent: journey_monitoring_map
+      identifier: journey_monitoring_map_suggested_journeys
+      weight: 1
+    - name: Report
+      url: /journey_monitoring/details_report
+      parent: journey_monitoring
+      identifier: journey_monitoring_details_report
+      weight: 2
+    - name: Variants
+      url: /journey_monitoring/details_report/variants
+      parent: journey_monitoring_details_report
+      identifier: journey_monitoring_details_report_variants
+      weight: 1
+    - name: Uptime
+      url: /journey_monitoring/uptime
+      parent: journey_monitoring
+      identifier: journey_monitoring_uptime
+      weight: 3
+      weight: 1
     - name: Synthetic Testing and Monitoring
       url: synthetics/
       pre: synthetics
