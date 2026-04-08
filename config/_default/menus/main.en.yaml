@@ -5204,10 +5204,10 @@ menu:
       parent: llm_obs_monitoring
       identifier: llm_obs_correlate_apm
       weight: 302
-    - name: Cluster Map
-      url: llm_observability/monitoring/cluster_map/
+    - name: Patterns
+      url: llm_observability/monitoring/patterns/
       parent: llm_obs_monitoring
-      identifier: llm_obs_cluster_map
+      identifier: llm_obs_patterns
       weight: 303
     - name: Agent Monitoring
       url: llm_observability/monitoring/agent_monitoring
