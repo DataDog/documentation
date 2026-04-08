@@ -632,7 +632,7 @@
                 "service_name": "my-service",
                 "state": "pass"
               },
-              "id": "string",
+              "id": "outcome-abc123",
               "relationships": {
                 "rule": {
                   "data": {

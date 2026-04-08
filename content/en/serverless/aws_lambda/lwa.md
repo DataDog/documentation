@@ -9,10 +9,6 @@ further_reading:
       text: "AWS Lambda Integration"
 ---
 
-{{< callout url="#" btn_hidden="true" header="Join the Preview!" >}}
-Lambda Web Adapter is in Preview.
-{{< /callout >}}
-
 ## Overview
 
 The AWS [Lambda Web Adapter][1] is a framework that allows developers to run web applications on AWS Lambda. 
