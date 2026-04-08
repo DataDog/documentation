@@ -539,8 +539,8 @@ NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConf
 {{< /tabs >}}
 
 **Notes**:
-    - Tracing auto-instrumentation uses `URLSession` swizzling and is opt-in. If you do not specify `urlSessionTracking` and `firstPartyHosts` configurations, swizzling is not applied.
-    - Tracing works automatically without `URLSessionInstrumentation`, but trace timings are more accurate after enabling it.
+- Tracing auto-instrumentation uses `URLSession` swizzling and is opt-in. If you do not specify `urlSessionTracking` and `firstPartyHosts` configurations, swizzling is not applied.
+- Tracing works automatically without `URLSessionInstrumentation`, but trace timings are more accurate after enabling it.
 
 ## Batch collection
 
