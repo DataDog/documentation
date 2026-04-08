@@ -89,7 +89,13 @@ The live-heap profiler:
 - Not available on Windows
 - For JMC users, the Datadog live-heap event is `datadog.HeapLiveObject`; the JFR fallback emits `jdk.OldObjectSample`
 
-To disable live heap profiling:
+To disable live heap profiling entirely (both Datadog engine and JFR fallback):
+
+| Environment Variable | System Property |
+|---------------------|-----------------|
+| `DD_PROFILING_HEAP_ENABLED=false` | `-Ddd.profiling.heap.enabled=false` |
+
+To disable only the Datadog native engine implementation (the JFR fallback `jdk.OldObjectSample` remains active on older JDKs):
 
 | Environment Variable | System Property |
 |---------------------|-----------------|
@@ -121,15 +127,16 @@ The [Trace to Profiling integration][3] identifies code hotspots in slow traces.
 
 The following settings allow fine-grained control over the profiler engines. These are typically not needed for standard use cases. For detailed information about each profiler type, see the corresponding sections above: [CPU profiling](#cpu-profiling), [Wallclock](#wallclock), [Allocation profiling](#allocation-profiling), and [Live heap profiling](#live-heap-profiling).
 
-**Note**: `DD_PROFILING_HEAP_ENABLED` / `-Ddd.profiling.heap.enabled` is a legacy setting that controls the JFR-based heap profiling fallback in isolation. In v1.61.0+, use `DD_PROFILING_DDPROF_LIVEHEAP_ENABLED` to enable or disable live heap profiling as a whole.
+**Note**: `DD_PROFILING_HEAP_ENABLED` / `-Ddd.profiling.heap.enabled` is the main toggle for all live heap profiling. When set to `false`, it disables both the Datadog native engine and the JFR `jdk.OldObjectSample` fallback. `DD_PROFILING_DDPROF_LIVEHEAP_ENABLED` is a Datadog-engine-specific override that only controls the native implementation; the JFR fallback is unaffected by it.
 
 | Environment variable | System property | Description |
 |---------------------|-----------------|-------------|
+| `DD_PROFILING_HEAP_ENABLED` | `-Ddd.profiling.heap.enabled` | Master toggle for all live heap profiling, including both the Datadog native engine and the JFR `jdk.OldObjectSample` fallback (default: true on supported platforms since v1.61.0) |
 | `DD_PROFILING_DDPROF_ENABLED` | `-Ddd.profiling.ddprof.enabled` | Enable the Datadog profiler engine (Linux only, default: true since v1.7.0) |
 | `DD_PROFILING_DDPROF_CPU_ENABLED` | `-Ddd.profiling.ddprof.cpu.enabled` | Enable CPU profiling with the Datadog engine |
 | `DD_PROFILING_DDPROF_WALL_ENABLED` | `-Ddd.profiling.ddprof.wall.enabled` | Enable wallclock profiling (default: true since v1.7.0) |
 | `DD_PROFILING_DDPROF_ALLOC_ENABLED` | `-Ddd.profiling.ddprof.alloc.enabled` | Enable allocation profiling with the Datadog engine |
-| `DD_PROFILING_DDPROF_LIVEHEAP_ENABLED` | `-Ddd.profiling.ddprof.liveheap.enabled` | Enable or disable live heap profiling (default: true since v1.61.0; requires JDK 11+ with automatic engine selection) |
+| `DD_PROFILING_DDPROF_LIVEHEAP_ENABLED` | `-Ddd.profiling.ddprof.liveheap.enabled` | Override for the Datadog native engine live heap implementation only; does not affect the JFR fallback (default: enabled on JDK 11+ when safe, requires `DD_PROFILING_HEAP_ENABLED=true`) |
 | `DD_PROFILING_ENABLED_EVENTS` | `-Ddd.profiling.enabled.events` | Enable specific JFR events (for example: `jdk.ObjectAllocationInNewTLAB,jdk.ObjectAllocationOutsideTLAB`) |
 
 ### JDK Mission Control (JMC) event reference
