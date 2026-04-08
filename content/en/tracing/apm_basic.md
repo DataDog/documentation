@@ -36,9 +36,9 @@ cascade:
 
 ## Overview
 
-APM Basic automatically discovers services running in your infrastructure and collects request, error, and duration (RED) metrics from network traffic—without requiring code changes or instrumentation. It relies solely on a configured Datadog Agent and [Unified Service Tagging][6].
+APM Basic is the entry-level APM tier for services that are not instrumented. It automatically discovers services and collects request, error, and duration (RED) metrics from network traffic—without requiring code changes or instrumentation. It relies solely on a configured Datadog Agent and [Unified Service Tagging][6].
 
-On hosts where [Single Step Instrumentation][1] is not applicable, APM Basic provides automatic baseline monitoring. Services monitored by APM Basic appear in the [Software Catalog][2] and [Service Map][3] alongside your fully instrumented services, and work with [Deployment Tracking][7], Monitors, Dashboards, and SLOs.
+Services monitored by APM Basic appear in the [Software Catalog][2] and [Service Map][3] alongside your fully instrumented services, and work with [Deployment Tracking][7], Monitors, Dashboards, and SLOs. For full distributed tracing and request-level debugging, use APM with [Single Step Instrumentation][1].
 
 <div class="alert alert-info">Hosts monitored with APM Basic are billed at the APM Basic host rate. After you add instrumentation to a service, that host automatically moves to the standard APM tier. For details, see <a href="/account_management/billing/apm_tracing_profiler/">APM Billing</a>.</div>
 
@@ -59,7 +59,7 @@ These metrics are reported under two operation names:
 
 An operation name of `universal.http.server` or `universal.http.client` on a service page indicates that the service telemetry comes from APM Basic.
 
-<div class="alert alert-info">APM Basic uses the <code>service_monitoring_config</code> Agent configuration and reports metrics under the <code>universal.http.*</code> namespace. These names are unchanged from the former Universal Service Monitoring feature.</div>
+<div class="alert alert-info">APM Basic reports metrics under the <code>universal.http.*</code> namespace, not <code>trace.*</code>. The <code>universal.http.*</code> prefix indicates these metrics are collected without instrumentation. These names are unchanged from the former Universal Service Monitoring feature.</div>
 
 ### Supported protocols
 
@@ -73,7 +73,7 @@ An operation name of `universal.http.server` or `universal.http.client` on a ser
 | HTTPS/TLS (Windows, non-IIS) | Not supported |
 | Additional protocols | [Preview][4] |
 
-## How it works
+## How APM Basic works (eBPF)
 
 When APM Basic is enabled, the Datadog Agent's `system-probe` component uses eBPF to observe network traffic at the kernel level. It parses HTTP request and response metadata from this traffic and aggregates the data into service health metrics. Because this operates at the kernel level, it works regardless of the programming language or framework your services use.
 
@@ -81,7 +81,17 @@ When APM Basic is enabled, the Datadog Agent's `system-probe` component uses eBP
 
 ## APM Basic and full APM
 
-APM Basic provides baseline service monitoring. For distributed tracing and deeper application-level insights, instrument your services with [Datadog tracing libraries][5] or [Single Step Instrumentation][1]. After you add instrumentation, existing monitors, dashboards, and SLOs that use `universal.http.*` metrics continue to work.
+APM Basic provides baseline service monitoring. For distributed tracing and deeper application-level insights, instrument your services using [Single Step Instrumentation][1] (recommended) or [Datadog tracing libraries][5]. After you add instrumentation, existing monitors, dashboards, and SLOs that use `universal.http.*` metrics continue to work.
+
+**Use APM Basic when:**
+- You need visibility into services that are not instrumented
+- You cannot instrument a service (legacy systems, third-party services, short-lived jobs)
+- You want baseline health coverage for lower-priority environments
+
+**Use full APM when:**
+- You need distributed tracing and request-level debugging
+- You are troubleshooting latency or errors across services
+- You want flame graphs, span-level detail, or trace search
 
 | Capability | APM Basic | APM |
 |------------|-----------|-----|
