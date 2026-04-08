@@ -29,7 +29,7 @@ To instrument an LLM application with the SDK:
 2. Configure the SDK by providing [the required environment variables][6] in your application startup command, or programmatically [in-code][7]. Ensure you have configured your Datadog API key, Datadog site, and machine learning (ML) app name.
 
 #### Auto-instrumentation
-Auto-instrumentation captures LLM calls for Python and Node.js applications without requiring code changes. It allows you to get out-of-the-box traces and observability into popular frameworks and providers. For additional details and a full list of supported frameworks and providers, see the [Auto-instrumentation Documentation][1].
+Auto-instrumentation captures LLM calls for Python, Node.js, and Java applications without requiring code changes. It allows you to get out-of-the-box traces and observability into popular frameworks and providers. For additional details and a full list of supported frameworks and providers, see the [Auto-instrumentation Documentation][1].
 
 Auto-instrumentation automatically captures:
 - Input prompts and output completions
