@@ -164,9 +164,9 @@ SSI supports multiple injection modes, which control how the injector and APM li
 | Mode | Description | Requirements |
 |------|-------------|--------------|
 | `init_container` | Uses init containers to copy injector and APM library files into application containers. | Agent deployed with Helm Chart or Datadog Operator |
-| `csi` | **In Preview.** Mounts injector and APM library files using the [Datadog CSI driver][40]. Reduces pod startup time compared to init container mode. | Agent 7.76.0+, CSI driver 1.2.0+, Helm Chart 3.178.1+ or Datadog Operator 1.25.0+ |
+| `csi` | **In Preview.** Mounts injector and APM library files using the [Datadog CSI driver][37]. Reduces pod startup time compared to init container mode. | Agent 7.76.0+, CSI driver 1.2.0+, Helm Chart 3.178.1+ or Datadog Operator 1.25.0+ |
 
-Before using `csi` mode, install and activate the Datadog CSI driver. If you are deploying with Helm, also set `datadog.csi.enabled: true` in your `datadog-values.yaml`. See the [CSI driver documentation][40] for installation steps and environment-specific requirements such as GKE Autopilot.
+Before using `csi` mode, install and activate the Datadog CSI driver. If you are deploying with Helm, also set `datadog.csi.enabled: true` in your `datadog-values.yaml`. See the [CSI driver documentation][37] for installation steps and environment-specific requirements such as GKE Autopilot.
 
 #### Configure injection mode globally
 
@@ -890,3 +890,4 @@ If you encounter problems enabling APM with SSI, see the [SSI troubleshooting gu
 [34]: /containers/guide/sync_container_images/#copy-an-image-to-another-registry-using-crane
 [35]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/troubleshooting
 [36]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/compatibility/
+[37]: /containers/kubernetes/csi_driver/
