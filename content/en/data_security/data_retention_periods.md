@@ -137,8 +137,7 @@ attributes:
   - product: Product Analytics
     data_type: |
        - **Events**: 15 months
-       - **User Profiles (RUM enabled)**: 30 days
-       - **User Profiles (Product Analytics enabled)**: 15 months
+       - **User Profiles**: 30 days with RUM, extended to 15 months with Product Analytics
   - product: PR Gates
     data_type: |
        - **Gate evaluations**: 30 days
