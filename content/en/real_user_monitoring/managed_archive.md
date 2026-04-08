@@ -76,7 +76,7 @@ Configuration is done at the application level, enabling you to apply different 
 
 ## Recover sessions
 
-Recovered sessions are available for 30 days with all their events and attributes, including performance events. There is no difference between a recovered session and a session retained by a retention filter in terms of investigation capabilities.
+Recovered sessions are available for 30 days with all their events and attributes, including performance events. Recovered sessions have the same investigation capabilities as sessions retained by a retention filter
 
 In the Managed Archive UI, click **Recover** on the row of the session you want to recover.
 
