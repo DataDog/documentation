@@ -19628,7 +19628,7 @@ components:
           description: The description of the widget.
           type: string
         requests:
-          description: One or more Topology requests.
+          description: One Topology request.
           items:
             $ref: "#/components/schemas/TopologyRequest"
           minItems: 1
@@ -19657,10 +19657,14 @@ components:
       x-enum-varnames:
         - TOPOLOGY_MAP
     TopologyQuery:
+      description: A topology data source query.
+      oneOf:
+        - $ref: "#/components/schemas/TopologyQueryDataStreamsOrServiceMap"
+    TopologyQueryDataStreamsOrServiceMap:
       description: Query to service-based topology data sources like the service map or data streams.
       properties:
         data_source:
-          $ref: "#/components/schemas/TopologyQueryDataSource"
+          $ref: "#/components/schemas/TopologyQueryDataStreamsOrServiceMapDataSource"
         filters:
           description: Your environment and primary tag (or * if enabled for your account).
           example: ["env:prod", "az:us-east"]
@@ -19669,16 +19673,24 @@ components:
             type: string
           minItems: 1
           type: array
+        query_string:
+          description: A search string for filtering services, used in `data_streams` queries only. When set, this replaces the `service` field
+          example: "service:myservice"
+          type: string
         service:
           description: Name of the service
-          example: myService
+          example: myservice
           type: string
+      required:
+        - data_source
+        - filters
       type: object
-    TopologyQueryDataSource:
+    TopologyQueryDataStreamsOrServiceMapDataSource:
       description: Name of the data source
       enum:
         - data_streams
         - service_map
+      example: data_streams
       type: string
       x-enum-varnames:
         - DATA_STREAMS
