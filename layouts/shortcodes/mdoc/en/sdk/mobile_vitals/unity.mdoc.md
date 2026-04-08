@@ -3,6 +3,12 @@ This partial contains mobile vitals information for the Unity SDK.
 It can be included directly in platform-specific pages or wrapped in conditionals.
 -->
 
+{% partial file="sdk/mobile_vitals/overview.mdoc.md" /%}
+
+## Telemetry
+
+The following telemetry provide insight into your mobile application's performance.
+
 | Measurement | Description |
 | --- | --- |
 | Refresh rate | To ensure a smooth, jank-free user experience, your application should render frames in under 60Hz. {% br /%}{% br /%} RUM tracks the application's main thread display refresh rate using `@view.refresh_rate_average` and `@view.refresh_rate_min` view attributes. {% br /%}{% br /%} **Note:** Refresh rates are normalized on a range of zero to 60fps. For example, if your application runs at 100fps on a device capable of rendering 120fps, Datadog reports 50fps in **Mobile Vitals**. |
