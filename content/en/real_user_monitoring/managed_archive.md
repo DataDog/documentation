@@ -18,15 +18,13 @@ Managed Archive is in Preview.
 
 Datadog's [RUM without Limits][1] provides an accurate, long-term overview of application health and performance, even if only a fraction of session data is retained by retention filters. But any session can be useful to solve an unexpected support ticket, perform a compliance audit, or conduct a retroactive investigation.
 
-RUM Managed Archive acts as a **safety net**: all ingested sessions are stored automatically so that no user interaction is ever permanently lost, and specific sessions can be recovered on demand for full investigation in RUM whenever they are needed.
-
-{{< img src="real_user_monitoring/managed_archive/ma1.png" alt="Diagram showing the RUM without Limits lifecycle: ingest, retain with filters, store in Managed Archive, and recover on demand" style="width:100%;" >}}
-
-With Managed Archive, teams can:
+RUM Managed Archive acts as a **safety net**, enabling teams to:
 
 - **Store everything**: Store all sessions for several months automatically
 - **Recover on demand**: Bring back specific sessions for full investigation
 - **Investigate in depth**: Explore recovered sessions like regularly retained sessions
+
+{{< img src="real_user_monitoring/managed_archive/ma1.png" alt="Diagram showing the RUM without Limits lifecycle: ingest, retain with filters, store in Managed Archive, and recover on demand" style="width:100%;" >}}
 
 Common use cases include:
 
