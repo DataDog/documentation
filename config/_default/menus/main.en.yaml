@@ -3964,6 +3964,11 @@ menu:
       parent: tracing
       identifier: tracing_glossary
       weight: 1
+    - name: APM Basic
+      url: tracing/apm_basic/
+      parent: tracing
+      identifier: tracing_apm_basic
+      weight: 1.5
     - name: Application Instrumentation
       url: tracing/trace_collection/
       parent: tracing
@@ -4184,11 +4189,6 @@ menu:
       parent: tracing_trace_collection
       identifier: tracing_span_links
       weight: 213
-    - name: APM Basic
-      url: tracing/trace_collection/apm_basic/
-      parent: tracing_trace_collection
-      identifier: tracing_apm_basic
-      weight: 214
     - name: APM Metrics Collection
       url: tracing/metrics/
       parent: tracing

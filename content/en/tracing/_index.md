@@ -150,4 +150,4 @@ For troubleshooting assistance, read the [APM Troubleshooting][29] guide.
 [28]: /tracing/services/resource_page/
 [29]: /tracing/troubleshooting/
 [30]: /tracing/dynamic_instrumentation/
-[31]: /tracing/trace_collection/apm_basic/
+[31]: /tracing/apm_basic/

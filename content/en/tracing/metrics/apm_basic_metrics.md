@@ -10,7 +10,7 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/universal-service-monitoring-datadog/"
   tag: "Blog"
   text: "Automatically discover, map, and monitor all your services in seconds with Universal Service Monitoring"
-- link: "/tracing/trace_collection/apm_basic"
+- link: "/tracing/apm_basic"
   tag: "Documentation"
   text: "Learn about APM Basic"
 - link: "/tracing/metrics"
@@ -123,7 +123,7 @@ For more information, see the [Dashboards documentation][16].
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/trace_collection/apm_basic
+[1]: /tracing/apm_basic
 [2]: /tracing/software_catalog
 [3]: /tracing/services/deployment_tracking/
 [4]: /service_level_objectives

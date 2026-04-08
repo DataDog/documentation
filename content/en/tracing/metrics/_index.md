@@ -46,5 +46,5 @@ Enable [runtime metrics collection][3] in supported tracing libraries to gain in
 [1]: /tracing/metrics/metrics_namespace/
 [2]: /tracing/trace_pipeline/ingestion_mechanisms
 [3]: /tracing/metrics/runtime_metrics/
-[4]: /tracing/trace_collection/apm_basic/
+[4]: /tracing/apm_basic/
 [5]: /tracing/metrics/apm_basic_metrics/

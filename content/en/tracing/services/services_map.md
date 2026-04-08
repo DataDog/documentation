@@ -106,4 +106,4 @@ The Service Map is rendered based on complete traces that include the root spans
 [5]: /tracing/glossary/#trace
 [6]: /tracing/troubleshooting/connection_errors
 [7]: /tracing/services/service_page/#service-health
-[8]: /tracing/trace_collection/apm_basic/
+[8]: /tracing/apm_basic/

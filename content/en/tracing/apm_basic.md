@@ -5,8 +5,8 @@ aliases:
 - /universal_service_monitoring/
 - /tracing/universal_service_monitoring/
 - /universal_service_monitoring/setup/
-- /tracing/apm_basic/
 - /tracing/apm_basic/setup/
+- /tracing/trace_collection/apm_basic/
 further_reading:
 - link: "/tracing/metrics/apm_basic_metrics/"
   tag: "Documentation"
@@ -36,9 +36,11 @@ cascade:
 
 ## Overview
 
-APM Basic provides visibility into your service health metrics _without requiring code instrumentation_. It relies solely on the presence of a configured Datadog Agent and [Unified Service Tagging][6] to automatically discover services and collect request, error, and duration (RED) metrics from network traffic.
+APM Basic automatically discovers services running in your infrastructure and collects request, error, and duration (RED) metrics from network traffic — without requiring code changes or instrumentation. It relies solely on the presence of a configured Datadog Agent and [Unified Service Tagging][6].
 
-APM Basic is designed for services that are not yet instrumented with tracing libraries. On hosts where [Single Step Instrumentation][1] is not applicable, APM Basic provides automatic baseline monitoring. Services monitored by APM Basic appear in the [Software Catalog][2] and [Service Map][3] alongside your fully instrumented services, and work with [Deployment Tracking][7], Monitors, Dashboards, and SLOs.
+On hosts where [Single Step Instrumentation][1] is not applicable, APM Basic provides automatic baseline monitoring. Services monitored by APM Basic appear in the [Software Catalog][2] and [Service Map][3] alongside your fully instrumented services, and work with [Deployment Tracking][7], Monitors, Dashboards, and SLOs.
+
+For distributed tracing and deeper application-level insights, instrument your services with [Datadog tracing libraries][5] or [Single Step Instrumentation][1].
 
 <div class="alert alert-info">Hosts monitored with APM Basic are billed at the APM Basic host rate. After you add instrumentation to a service, that host automatically moves to the standard APM tier. For details, see <a href="/account_management/billing/apm_tracing_profiler/">APM Billing</a>.</div>
 
@@ -563,7 +565,7 @@ must not have a running `apparmor` instance.
 
 If the operating system does not have a running `apparmor` instance, use the same `docker-compose.yml` file from the `Docker-Compose` [section][1] beside the field `security_opt`.
 
-[1]: /tracing/trace_collection/apm_basic/?tab=dockercompose#enabling-apm-basic
+[1]: /tracing/apm_basic/?tab=dockercompose#enabling-apm-basic
 
 {{% /tab %}}
 {{% tab "Configuration files (Linux)" %}}

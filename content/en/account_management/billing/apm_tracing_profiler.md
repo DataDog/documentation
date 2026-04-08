@@ -195,6 +195,6 @@ Yes. Let Datadog know if you are interested in buying Data Streams Monitoring wi
 [12]: /tracing/trace_collection/dd_libraries/
 [13]: /tracing/trace_pipeline/trace_retention/
 [14]: /tracing/trace_pipeline/metrics
-[15]: /tracing/trace_collection/apm_basic/
+[15]: /tracing/apm_basic/
 [16]: https://www.datadoghq.com/pricing/?product=serverless-monitoring&tab=aws-fargate#products
-[17]: /tracing/trace_collection/apm_basic/
+[17]: /tracing/apm_basic/
