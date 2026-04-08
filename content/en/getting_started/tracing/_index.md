@@ -216,6 +216,10 @@ After you set up tracing and your application is sending data to Datadog, explor
 
 [Software Catalog][9] provides a consolidated view of your services, combining ownership metadata, performance insights, security analysis, and cost allocation in one place. Configure [service metadata][10] using tags, annotations, or a `service.datadog.yaml` file to enrich your services with ownership information, runbooks, and documentation links.
 
+### APM Basic
+
+Services that are not instrumented with tracing libraries can still receive baseline monitoring through [APM Basic][13]. APM Basic uses eBPF in the Datadog Agent to automatically collect RED metrics (requests, errors, duration) without requiring code changes. On hosts where Single Step Instrumentation is not applicable, APM Basic provides automatic service visibility.
+
 ### Trace ingestion and retention
 
 Control costs and manage data volume by configuring [ingestion controls][11] and [retention filters][12]. Ingestion controls let you customize sampling rates at the Datadog Agent or tracing library level, while retention filters determine which spans are indexed for search and analytics.
@@ -236,3 +240,4 @@ Control costs and manage data volume by configuring [ingestion controls][11] and
 [10]: /internal_developer_portal/software_catalog/entity_model/
 [11]: /tracing/trace_pipeline/ingestion_controls/
 [12]: /tracing/trace_pipeline/trace_retention/
+[13]: /tracing/apm_basic/

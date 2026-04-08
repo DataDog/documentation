@@ -36,6 +36,7 @@ For additional definitions and descriptions of important APM terms such as _span
 
 | Concept                         | Description                                                                                                                                                                                                          |
 |---------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [APM Basic](#apm-basic)         | APM Basic provides RED metrics (requests, errors, duration) for services that are not instrumented with tracing libraries. It uses eBPF in the Datadog Agent to automatically discover services and collect health metrics without code changes. |
 | [Service](#services)            | Services are the building blocks of modern microservice architectures - broadly a service groups together endpoints, queries, or jobs for the purposes of building your application.                                  |
 | [Resource](#resources)          | Resources represent a particular domain of a customer application - they are typically an instrumented web endpoint, database query, or background job.                                                              |
 | [Monitors][23]                   | APM metric monitors work like regular metric monitors, but with controls tailored specifically to APM. Use these monitors to receive alerts at the service level on hits, errors, and a variety of latency measures. |
@@ -45,6 +46,12 @@ For additional definitions and descriptions of important APM terms such as _span
 | [Ingestion Controls](#ingestion-controls) | Ingestion controls are used to send up to 100% of traces to Datadog for live search and analytics for 15 minutes.
 | [Instrumentation](#instrumentation) | Instrumentation is the process of adding code to your application to capture and report observability data. |
 | [Baggage](#baggage) | Baggage is contextual information that is passed between traces, metrics, and logs in the form of key-value pairs. |
+
+## APM Basic
+
+[APM Basic][29] provides RED metrics (requests, errors, duration) for services that are not instrumented with tracing libraries. It uses eBPF in the Datadog Agent to automatically discover services and collect health metrics without requiring code changes. Services monitored by APM Basic appear in the [Software Catalog][4] and [Service Map][5] alongside fully instrumented services. On hosts where [Single Step Instrumentation][24] is not applicable, APM Basic provides automatic baseline monitoring.
+
+APM Basic reports metrics under the `universal.http.server` (inbound traffic) and `universal.http.client` (outbound traffic) operation names. For setup instructions, see [Setting Up APM Basic][30].
 
 ## Services
 
@@ -145,3 +152,5 @@ To learn more, read supported [propagation formats][28] for your application's l
 [26]: /tracing/trace_collection/
 [27]: /tracing/trace_collection/trace_context_propagation
 [28]: /tracing/trace_collection/trace_context_propagation/#supported-formats
+[29]: /tracing/apm_basic/
+[30]: /tracing/apm_basic/setup/

@@ -6,7 +6,11 @@ aliases:
 - /account_management/billing/apm_tracing_profiling/
 ---
 
-APM is available through three tiers: APM, APM Pro, and APM Enterprise. APM gives you deep visibility into your applications, with distributed tracing capabilities, seamless correlation between traces, logs, and other telemetry, and out-of-the-box performance dashboards for your service. With Continuous Profiler in APM Enterprise, you can pinpoint the slowest and most resource-intensive methods, in aggregate at the service and endpoint levels, as well as for every distributed trace. With Data Streams Monitoring (DSM) in APM Pro and APM Enterprise, you can easily track the end-to-end performance of your data streaming pipelines and event-driven applications that use Kafka, SQS, and RabbitMQ.
+APM is available through four tiers: APM Basic, APM, APM Pro, and APM Enterprise.
+
+[APM Basic][17] provides RED metrics (requests, errors, duration) and service health monitoring for services that are not instrumented with tracing libraries. APM Basic uses eBPF in the Datadog Agent to automatically discover services and collect health metrics without requiring code changes. Hosts monitored with APM Basic are billed at the APM Basic host rate. After you add instrumentation to a service, that host automatically moves to the standard APM tier.
+
+APM gives you deep visibility into your applications, with distributed tracing capabilities, correlation between traces, logs, and other telemetry, and out-of-the-box performance dashboards for your service. With Continuous Profiler in APM Enterprise, you can pinpoint the slowest and most resource-intensive methods, in aggregate at the service and endpoint levels, as well as for every distributed trace. With Data Streams Monitoring (DSM) in APM Pro and APM Enterprise, you can track the end-to-end performance of your data streaming pipelines and event-driven applications that use Kafka, SQS, and RabbitMQ.
 
 
 | Billing Parameter  | Price                                      | Ingested and Indexed Spans                                                                 | Billing                                                                                                                                                                                                                                                                                                                          |
@@ -21,7 +25,7 @@ APM is available through three tiers: APM, APM Pro, and APM Enterprise. APM give
 **Notes**:  
    - If you're using a non-Fargate container based environment, you get billed for the underlying host deploying the Datadog Agent.
    - One profiled container is a container that is running the Continuous Profiler service. This does not include containers that are not being profiled. For instance, a DNS service container that is NOT profiled, running concurrently with your application container that IS profiled, is not counted towards the four profiler containers allotment.
-   - [Universal Service Monitoring][15] is included in all APM tiers (APM, APM Pro, APM Enterprise) at no additional cost.
+   - [APM Basic][17] monitoring is included in all APM tiers (APM, APM Pro, APM Enterprise) at no additional cost. APM Basic is also available as a standalone tier for hosts that do not require full APM instrumentation.
 
 For more information, see the [Pricing page][7].
 
@@ -192,5 +196,6 @@ Yes. Let Datadog know if you are interested in buying Data Streams Monitoring wi
 [12]: /tracing/trace_collection/dd_libraries/
 [13]: /tracing/trace_pipeline/trace_retention/
 [14]: /tracing/trace_pipeline/metrics
-[15]: /universal_service_monitoring/
+[15]: /tracing/apm_basic/
 [16]: https://www.datadoghq.com/pricing/?product=serverless-monitoring&tab=aws-fargate#products
+[17]: /tracing/apm_basic/

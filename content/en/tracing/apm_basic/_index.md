@@ -8,6 +8,9 @@ further_reading:
 - link: "/tracing/apm_basic/setup/"
   tag: "Documentation"
   text: "Setting up APM Basic"
+- link: "https://www.datadoghq.com/blog/universal-service-monitoring-datadog/"
+  tag: "Blog"
+  text: "Golden signals in seconds with Universal Service Monitoring"
 - link: "/getting_started/tagging/unified_service_tagging/"
   tag: "Documentation"
   text: "Unified Service Tagging"
@@ -20,6 +23,9 @@ further_reading:
 - link: "/tracing/services/services_map/"
   tag: "Documentation"
   text: "Read about the Service Map"
+- link: "https://www.datadoghq.com/blog/monitor-connection-churn-datadog/"
+  tag: "Blog"
+  text: "Best practices for monitoring and remediating connection churn"
 cascade:
     algolia:
         rank: 70
@@ -27,21 +33,11 @@ cascade:
 
 ## Overview
 
-<!-- TODO: Write overview. Key points:
-- APM Basic provides RED metrics (requests, errors, duration) for services that are not
-  instrumented with tracing libraries.
-- It uses eBPF in the Datadog Agent to detect HTTP traffic at the kernel level.
-- No code changes or library installation required.
-- APM Basic automatically covers hosts where Single Step Instrumentation (SSI) is not
-  applicable, providing baseline service visibility across your entire infrastructure.
-- Frame as a complement to full APM, not a competing entry point.
--->
+APM Basic provides visibility into your service health metrics _without requiring code instrumentation_. It relies solely on the presence of a configured Datadog Agent and [Unified Service Tagging][6] to automatically discover services and collect request, error, and duration (RED) metrics from network traffic.
 
-APM Basic provides visibility into your service health metrics _without requiring code instrumentation_. It uses eBPF (extended Berkeley Packet Filter) in the Datadog Agent to automatically discover services and collect request, error, and duration (RED) metrics from network traffic.
+APM Basic is designed for services that are not yet instrumented with tracing libraries. On hosts where [Single Step Instrumentation][1] is not applicable, APM Basic provides automatic baseline monitoring. Services monitored by APM Basic appear in the [Software Catalog][2] and [Service Map][3] alongside your fully instrumented services, and work with [Deployment Tracking][7], Monitors, Dashboards, and SLOs.
 
-APM Basic is designed for services that are not yet instrumented with tracing libraries. On hosts where [Single Step Instrumentation][1] is not applicable, APM Basic provides automatic baseline monitoring. Services monitored by APM Basic appear in the [Software Catalog][2] and [Service Map][3] alongside your fully instrumented services.
-
-<div class="alert alert-info">For billing information about APM Basic, see <a href="/account_management/billing/apm_tracing_profiler/">APM Billing</a>.</div>
+<div class="alert alert-info">Hosts monitored with APM Basic are billed at the APM Basic host rate. After you add instrumentation to a service, that host automatically moves to the standard APM tier. For details, see <a href="/account_management/billing/apm_tracing_profiler/">APM Billing</a>.</div>
 
 ## What APM Basic monitors
 
@@ -58,10 +54,9 @@ These metrics are reported under two operation names:
 - `universal.http.server`: health metrics for inbound traffic to your service
 - `universal.http.client`: health metrics for outbound traffic from your service
 
-<!-- TODO: Confirm whether universal.http.* metric names are changing with this launch
-or later. The config key service_monitoring_config is also staying as-is for now. -->
+An operation name of `universal.http.server` or `universal.http.client` on a service page indicates that the service telemetry comes from APM Basic.
 
-<div class="alert alert-info">APM Basic uses the <code>service_monitoring_config</code> Agent configuration and reports metrics under the <code>universal.http.*</code> namespace. These names reflect the underlying technology and are unchanged from the former Universal Service Monitoring feature.</div>
+<div class="alert alert-info">APM Basic uses the <code>service_monitoring_config</code> Agent configuration and reports metrics under the <code>universal.http.*</code> namespace. These names are unchanged from the former Universal Service Monitoring feature.</div>
 
 ### Supported protocols
 
@@ -77,24 +72,21 @@ or later. The config key service_monitoring_config is also staying as-is for now
 
 ## How it works
 
+APM Basic uses eBPF (extended Berkeley Packet Filter) to provide automatic service discovery and health monitoring without requiring code instrumentation.
+
 When APM Basic is enabled, the Datadog Agent's `system-probe` component loads eBPF programs into the Linux kernel. These programs:
 
-1. Hook into network-related system calls to observe inbound and outbound traffic.
-2. Parse traffic at the application layer (Layer 7), extracting HTTP request and response metadata.
+1. Hook into network-related system calls (syscalls) to observe inbound and outbound traffic.
+2. Parse HTTP(S) traffic directly from the kernel network stack at the application layer (Layer 7), extracting request and response metadata.
 3. Aggregate the data into service health metrics and report them to Datadog.
 
 Because eBPF operates at the kernel level, it works regardless of the programming language or framework your services use.
 
-**Note**: On Windows, APM Basic uses Event Tracing for Windows (ETW) through the `Microsoft-Windows-HttpService` provider instead of eBPF. This provider is only available for IIS-based services.
+**Note**: On Windows, APM Basic uses Event Tracing for Windows (ETW) through the `Microsoft-Windows-HttpService` provider instead of eBPF. This provider is only available for IIS-based services. Non-IIS services on Windows support HTTP monitoring only, not HTTPS.
 
 ## APM Basic and full APM
 
-<!-- TODO: Confirm feature comparison with PM. This table should match what's on the
-pricing page once that's updated. -->
-
-APM Basic provides baseline service monitoring. For distributed tracing and deeper
-application-level insights, instrument your services with [Datadog tracing libraries][5] or
-[Single Step Instrumentation][1].
+APM Basic provides baseline service monitoring. For distributed tracing and deeper application-level insights, instrument your services with [Datadog tracing libraries][5] or [Single Step Instrumentation][1].
 
 | Capability | APM Basic | APM |
 |------------|-----------|-----|
@@ -114,9 +106,7 @@ To update a service's name, set up [Unified Service Tagging][6].
 
 ## Exploring your services
 
-After you configure the Agent, wait about five minutes for your services to appear in the [Software Catalog][2]. Click a service to see the service details page. An operation name of `universal.http.server` or `universal.http.client` in the upper left indicates that the service telemetry comes from APM Basic.
-
-The `universal.http.server` operation name captures health metrics for inbound traffic to your service. The corresponding `universal.http.client` operation name represents outbound traffic to other destinations.
+After you configure the Agent, wait about five minutes for your services to appear in the [Software Catalog][2]. Click a service to see the service details page.
 
 After enabling APM Basic, you can:
 
