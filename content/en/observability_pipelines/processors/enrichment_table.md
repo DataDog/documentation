@@ -96,6 +96,9 @@ To set up the Enrichment Table processor:
       - **Note**: All file paths are made relative to the configuration data directory, which is `/var/lib/observability-pipelines-worker/config/` by default. The file must be owned by the `observability-pipelines-worker group` and `observability-pipelines-worker` user, or at least readable by the group or user. See [Advanced Worker Configurations][1] for more information.
   1. Enter the column name. The column name in the enrichment table is used for matching the source attribute value. See the [Enrichment file example](#enrichment-file-example) for more information.
   1. Enter the source attribute of the log. The source attribute's value is what you want Observability Pipelines to find in the Reference Table.
+  1. (Optional) Toggle **Use Secret as source attribute** to use a secret as a source attribute. See [Use Secret as source attribute example](#use-secret-as-source-attribute-example) for more information.
+      1. Select the type of secret (**Datadog API Key**, **Splunk HEC token**, or **Custom**).
+          - If you select **Custom**, enter the secret name. **Note**: Do **not** enter actual secret values.
   1. Enter the target attribute. The target attribute's value stores the information found in the Reference Table as a JSON object.
   1. Click **Save**.
 
@@ -138,6 +141,36 @@ merchant_info {
     "state":"Colorado"
 }
 ```
+
+##### Use Secret as source attribute example
+
+For the file lookup option, you can enable **Use Secret as source attribute** to map to a secret, such as a Datadog API key or Splunk HEC token, in your local CSV file.
+
+**Note**: If you want to map to Splunk HEC tokens, you must use a [Splunk HEC source][9] and enable **Store HEC token** on the source.
+
+For example, if you want to filter and route logs based on Splunk HEC tokens:
+
+1. Enable **Store HEC token** on the Splunk HEC source to store the token in the event metadata.
+1. Use the Enrichment Table processor file lookup to map the HEC token to a value and add that value to the event so you can filter and route logs based on that value.
+
+Example of a local lookup CSV file with Splunk HEC tokens mapped to a value:
+
+| Splunk HEC token (secret) | HEC token value |
+| ------------------------- | --------------- |
+| `abcdef`                  | `hec_token_one` |
+| `uvwxyz`                  | `hec_token_two` |
+
+The HEC token value added to an example log:
+
+```
+{
+  "message": "this is a test"
+  "token_value": "hec_token_one"
+}
+
+```
+
+You can filter and route logs based on `token_value: hec_token_one`.
 
 ## How the processor works
 
@@ -215,3 +248,4 @@ The metrics below are common to all processors consuming the same Reference Tabl
 [6]: /integrations/databricks/?tab=useaserviceprincipalforoauth#reference-table-configuration
 [7]: /integrations/guide/servicenow-cmdb-enrichment-setup/#reference-tables
 [8]: /observability_pipelines/search_syntax/logs/
+[9]: /observability_pipelines/sources/splunk_hec/?tab=secretsmanagement
