@@ -953,6 +953,11 @@ menu:
     #   parent: sdk
     #   identifier: sdk_advanced_configuration
     #   weight: 2
+    # - name: Data Collected
+    #   url: client_sdks/data_collected/
+    #   parent: sdk
+    #   identifier: sdk_data_collected
+    #   weight: 3
     - name: Extend Datadog
       url: extend/
       pre: dev-code
