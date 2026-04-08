@@ -1,34 +1,8 @@
-import { test, expect, type Page } from '@playwright/test';
-import { hideOverlays } from '../../helpers';
+import { test, expect } from '@playwright/test';
+import { clickPill, expectFilterHidden, expectFilterVisible, hideOverlays } from '../../helpers';
 
 const PAGE_URL = '/dd_e2e/cdocs/integration/conditionally_displayed_filters/show_if/';
 const CONTENT_AREA = '#mainContent';
-
-// --- Selectors ---
-
-/** Returns a selector for a filter pill button. */
-function pill(filterId: string, optionId: string): string {
-    return `button.cdoc-pill[data-filter-id="${filterId}"][data-option-id="${optionId}"]`;
-}
-
-/** Returns a selector matching any pill for a given filter. */
-function filterPills(filterId: string): string {
-    return `button.cdoc-pill[data-filter-id="${filterId}"]`;
-}
-
-// --- Helpers ---
-
-async function clickPill(page: Page, filterId: string, optionId: string) {
-    await page.click(pill(filterId, optionId));
-}
-
-async function expectFilterVisible(page: Page, filterId: string) {
-    await expect(page.locator(filterPills(filterId)).first()).toBeVisible();
-}
-
-async function expectFilterHidden(page: Page, filterId: string) {
-    await expect(page.locator(filterPills(filterId)).first()).toBeHidden();
-}
 
 // --- Tests ---
 
