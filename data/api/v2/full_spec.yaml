@@ -2081,6 +2081,13 @@ components:
       properties:
         data:
           $ref: "#/components/schemas/AWSCloudAuthPersonaMappingsData"
+          example:
+            - attributes:
+                account_identifier: "test@test.com"
+                account_uuid: "12bbdc5c-5966-47e0-8733-285f9e44bcf4"
+                arn_pattern: "arn:aws:iam::123456789012:user/testuser"
+              id: "c5c758c6-18c2-4484-ae3f-46b84128404a"
+              type: aws_cloud_auth_config
       required:
         - data
       type: object
@@ -9743,6 +9750,110 @@ components:
         - name
         - expression
       type: object
+    CampaignResponse:
+      description: Response containing campaign data.
+      properties:
+        data:
+          $ref: "#/components/schemas/CampaignResponseData"
+      required:
+        - data
+      type: object
+    CampaignResponseAttributes:
+      description: Campaign attributes.
+      properties:
+        created_at:
+          description: Creation time of the campaign.
+          example: "2023-12-15T10:30:00Z"
+          format: date-time
+          type: string
+        description:
+          description: The description of the campaign.
+          example: Campaign to improve security posture for Q1 2024.
+          type: string
+        due_date:
+          description: The due date of the campaign.
+          example: "2024-03-31T23:59:59Z"
+          format: date-time
+          type: string
+        entity_scope:
+          description: Entity scope query to filter entities for this campaign.
+          example: kind:service AND team:platform
+          type: string
+        guidance:
+          description: Guidance for the campaign.
+          example: Please ensure all services pass the security requirements.
+          type: string
+        key:
+          description: The unique key for the campaign.
+          example: q1-security-2024
+          type: string
+        modified_at:
+          description: Time of last campaign modification.
+          example: "2024-01-05T14:20:00Z"
+          format: date-time
+          type: string
+        name:
+          description: The name of the campaign.
+          example: Q1 Security Campaign
+          type: string
+        owner:
+          description: The UUID of the campaign owner.
+          example: 550e8400-e29b-41d4-a716-446655440000
+          type: string
+        start_date:
+          description: The start date of the campaign.
+          example: "2024-01-01T00:00:00Z"
+          format: date-time
+          type: string
+        status:
+          description: The status of the campaign.
+          example: in_progress
+          type: string
+      required:
+        - key
+        - name
+        - owner
+        - status
+        - start_date
+        - created_at
+        - modified_at
+      type: object
+    CampaignResponseData:
+      description: Campaign data.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/CampaignResponseAttributes"
+        id:
+          description: The unique ID of the campaign.
+          example: c10ODp0VCrrIpXmz
+          type: string
+        type:
+          $ref: "#/components/schemas/CampaignType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    CampaignStatus:
+      description: The status of the campaign.
+      enum:
+        - in_progress
+        - not_started
+        - completed
+      example: in_progress
+      type: string
+      x-enum-varnames:
+        - IN_PROGRESS
+        - NOT_STARTED
+        - COMPLETED
+    CampaignType:
+      description: The JSON:API type for campaigns.
+      enum:
+        - campaign
+      example: campaign
+      type: string
+      x-enum-varnames:
+        - CAMPAIGN
     Case:
       description: A case
       properties:
@@ -14811,6 +14922,78 @@ components:
           example: Postmortem-IR-123
           type: string
       type: object
+    CreateCampaignRequest:
+      description: Request to create a new campaign.
+      properties:
+        data:
+          $ref: "#/components/schemas/CreateCampaignRequestData"
+      required:
+        - data
+      type: object
+    CreateCampaignRequestAttributes:
+      description: Attributes for creating a new campaign.
+      properties:
+        description:
+          description: The description of the campaign.
+          example: Campaign to improve security posture for Q1 2024.
+          type: string
+        due_date:
+          description: The due date of the campaign.
+          example: "2024-03-31T23:59:59Z"
+          format: date-time
+          type: string
+        entity_scope:
+          description: Entity scope query to filter entities for this campaign.
+          example: kind:service AND team:platform
+          type: string
+        guidance:
+          description: Guidance for the campaign.
+          example: Please ensure all services pass the security requirements.
+          type: string
+        key:
+          description: The unique key for the campaign.
+          example: q1-security-2024
+          type: string
+        name:
+          description: The name of the campaign.
+          example: Q1 Security Campaign
+          type: string
+        owner_id:
+          description: The UUID of the campaign owner.
+          example: 550e8400-e29b-41d4-a716-446655440000
+          type: string
+        rule_ids:
+          description: Array of rule IDs associated with this campaign.
+          example: ["q8MQxk8TCqrHnWkx", "r9NRyl9UDrsIoXly"]
+          items:
+            description: The unique ID of a scorecard rule.
+            type: string
+          type: array
+        start_date:
+          description: The start date of the campaign.
+          example: "2024-01-01T00:00:00Z"
+          format: date-time
+          type: string
+        status:
+          $ref: "#/components/schemas/CampaignStatus"
+      required:
+        - name
+        - key
+        - owner_id
+        - start_date
+        - rule_ids
+      type: object
+    CreateCampaignRequestData:
+      description: Data for creating a new campaign.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/CreateCampaignRequestAttributes"
+        type:
+          $ref: "#/components/schemas/CampaignType"
+      required:
+        - type
+        - attributes
+      type: object
     CreateCaseRequestArray:
       description: List of requests to create cases for security findings.
       properties:
@@ -15852,7 +16035,7 @@ components:
       description: Scorecard create rule request data.
       properties:
         attributes:
-          $ref: "#/components/schemas/RuleAttributes"
+          $ref: "#/components/schemas/RuleAttributesRequest"
         type:
           $ref: "#/components/schemas/RuleType"
       type: object
@@ -25638,6 +25821,7 @@ components:
           description: Tags associated with the feature flag.
           example: []
           items:
+            description: A tag associated with the feature flag.
             type: string
           type: array
         updated_at:
@@ -25691,6 +25875,7 @@ components:
             - "test-feature-flag"
             - "env-search-term"
           items:
+            description: A query string targeting the environment.
             type: string
           type: array
         is_production:
@@ -30901,6 +31086,11 @@ components:
       properties:
         data:
           $ref: "#/components/schemas/IncidentHandlesResponseData"
+          example:
+            - attributes:
+                name: "@incident-sev-1"
+              id: "12ceee6d-a7c0-4407-bc54-30e54140d7f0"
+              type: incident_handles
         included:
           $ref: "#/components/schemas/IncidentHandleIncludedResponse"
       required:
@@ -35293,6 +35483,12 @@ components:
       properties:
         data:
           $ref: "#/components/schemas/JiraAccountsData"
+          example:
+            - attributes:
+                consumer_key: "consumer-key-1"
+                instance_url: "https://example.atlassian.net"
+              id: "account-1"
+              type: jira-account
         meta:
           $ref: "#/components/schemas/JiraAccountsMeta"
       required:
@@ -35614,6 +35810,17 @@ components:
       properties:
         data:
           $ref: "#/components/schemas/JiraIssueTemplatesData"
+          example:
+            - attributes:
+                fields:
+                  description:
+                    payload: "Test Description"
+                    type: "json"
+                issue_type_id: "10001"
+                name: "Bug Report Template"
+                project_id: "PROJECT-1"
+              id: "65b3341b-0680-47f9-a6d4-134db45c603e"
+              type: jira-issue-template
         included:
           $ref: "#/components/schemas/JiraAccountsData"
       required:
@@ -37376,6 +37583,22 @@ components:
       required:
         - data
       type: object
+    ListCampaignsResponse:
+      description: Response containing a list of campaigns.
+      properties:
+        data:
+          $ref: "#/components/schemas/ListCampaignsResponseData"
+        meta:
+          $ref: "#/components/schemas/PaginatedResponseMeta"
+      required:
+        - data
+        - meta
+      type: object
+    ListCampaignsResponseData:
+      description: Array of campaigns.
+      items:
+        $ref: "#/components/schemas/CampaignResponseData"
+      type: array
     ListConnectionsResponse:
       description: Response containing the list of all data source connections configured for an entity.
       example:
@@ -37907,6 +38130,14 @@ components:
       properties:
         data:
           $ref: "#/components/schemas/ListFindingsData"
+          example:
+            - attributes:
+                evaluation: fail
+                resource: "arn:aws:s3:::my-bucket"
+                resource_type: aws_s3_bucket
+                status: open
+              id: "abc-123-xyz"
+              type: finding
         meta:
           $ref: "#/components/schemas/ListFindingsMeta"
       required:
@@ -38079,6 +38310,19 @@ components:
           example: "/api/v2/scorecard/rules?page%5Blimit%5D=2&page%5Boffset%5D=2&page%5Bsize%5D=2"
           type: string
       type: object
+    ListScorecardsResponse:
+      description: Response containing a list of scorecards.
+      properties:
+        data:
+          $ref: "#/components/schemas/ListScorecardsResponseData"
+      required:
+        - data
+      type: object
+    ListScorecardsResponseData:
+      description: Array of scorecards.
+      items:
+        $ref: "#/components/schemas/ScorecardListResponseData"
+      type: array
     ListSecurityFindingsResponse:
       description: The expected response schema when listing security findings.
       properties:
@@ -48531,6 +48775,12 @@ components:
       properties:
         data:
           $ref: "#/components/schemas/OutcomesBatchResponseData"
+          example:
+            - attributes:
+                service_name: my-service
+                state: pass
+              id: "outcome-abc123"
+              type: rule-outcome
         meta:
           $ref: "#/components/schemas/OutcomesBatchResponseMeta"
       required:
@@ -48724,6 +48974,35 @@ components:
       x-enum-varnames:
         - LOW
         - HIGH
+    PaginatedResponseMeta:
+      description: Metadata for scores response.
+      properties:
+        count:
+          description: Number of entities in this response.
+          example: 10
+          format: int64
+          type: integer
+        limit:
+          description: Pagination limit.
+          example: 10
+          format: int64
+          type: integer
+        offset:
+          description: Pagination offset.
+          example: 0
+          format: int64
+          type: integer
+        total:
+          description: Total number of entities available.
+          example: 150
+          format: int64
+          type: integer
+      required:
+        - count
+        - total
+        - limit
+        - offset
+      type: object
     Pagination:
       description: Pagination object.
       properties:
@@ -54642,6 +54921,38 @@ components:
         owner:
           description: Owner of the rule.
           type: string
+        scope_query:
+          description: A query to filter which entities this rule applies to.
+          example: "kind:service"
+          type: string
+        scorecard_name:
+          description: The scorecard name to which this rule must belong.
+          example: Deployments automated via Deployment Trains
+          type: string
+      type: object
+    RuleAttributesRequest:
+      description: Attributes for creating or updating a rule. Server-managed fields (created_at, modified_at, custom) are excluded.
+      properties:
+        description:
+          description: Explanation of the rule.
+          type: string
+        enabled:
+          description: If enabled, the rule is calculated as part of the score.
+          example: true
+          type: boolean
+        level:
+          $ref: "#/components/schemas/RuleLevel"
+        name:
+          description: Name of the rule.
+          example: Team Defined
+          type: string
+        owner:
+          description: Owner of the rule.
+          type: string
+        scope_query:
+          description: A query to filter which entities this rule applies to.
+          example: "kind:service"
+          type: string
         scorecard_name:
           description: The scorecard name to which this rule must belong.
           example: Deployments automated via Deployment Trains
@@ -57147,6 +57458,56 @@ components:
       type: string
       x-enum-varnames:
         - USERS
+    ScorecardListResponseAttributes:
+      description: Scorecard attributes.
+      properties:
+        created_at:
+          description: Creation time of the scorecard.
+          example: "2023-01-15T10:30:00Z"
+          format: date-time
+          type: string
+        description:
+          description: The description of the scorecard.
+          example: Best practices for observability.
+          type: string
+        modified_at:
+          description: Time of last scorecard modification.
+          example: "2024-01-05T14:20:00Z"
+          format: date-time
+          type: string
+        name:
+          description: The name of the scorecard.
+          example: Observability Best Practices
+          type: string
+      required:
+        - name
+        - created_at
+        - modified_at
+      type: object
+    ScorecardListResponseData:
+      description: Scorecard data.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/ScorecardListResponseAttributes"
+        id:
+          description: The unique ID of the scorecard.
+          example: q8MQxk8TCqrHnWkx
+          type: string
+        type:
+          $ref: "#/components/schemas/ScorecardListType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    ScorecardListType:
+      description: The JSON:API type for scorecard list.
+      enum:
+        - scorecard
+      example: scorecard
+      type: string
+      x-enum-varnames:
+        - SCORECARD
     ScorecardType:
       default: scorecard
       description: The JSON:API type for scorecard.
@@ -62732,6 +63093,13 @@ components:
       properties:
         data:
           $ref: "#/components/schemas/ServiceNowAssignmentGroupsData"
+          example:
+            - attributes:
+                group_name: "IT Operations"
+                group_sys_id: "abc123def456"
+                instance_id: "65b3341b-0680-47f9-a6d4-134db45c603e"
+              id: "65b3341b-0680-47f9-a6d4-134db45c603e"
+              type: assignment_groups
       required:
         - data
       type: object
@@ -62839,6 +63207,13 @@ components:
       properties:
         data:
           $ref: "#/components/schemas/ServiceNowBusinessServicesData"
+          example:
+            - attributes:
+                instance_id: "65b3341b-0680-47f9-a6d4-134db45c603e"
+                service_name: "IT Support"
+                service_sys_id: "abc123def456"
+              id: "65b3341b-0680-47f9-a6d4-134db45c603e"
+              type: business_services
       required:
         - data
       type: object
@@ -62895,6 +63270,11 @@ components:
       properties:
         data:
           $ref: "#/components/schemas/ServiceNowInstancesData"
+          example:
+            - attributes:
+                instance_name: "my-servicenow-instance"
+              id: "65b3341b-0680-47f9-a6d4-134db45c603e"
+              type: instance
       required:
         - data
       type: object
@@ -63140,6 +63520,13 @@ components:
       properties:
         data:
           $ref: "#/components/schemas/ServiceNowTemplatesData"
+          example:
+            - attributes:
+                handle_name: "incident-template"
+                instance_id: "65b3341b-0680-47f9-a6d4-134db45c603e"
+                servicenow_tablename: "incident"
+              id: "65b3341b-0680-47f9-a6d4-134db45c603e"
+              type: servicenow_templates
       required:
         - data
       type: object
@@ -63266,6 +63653,14 @@ components:
       properties:
         data:
           $ref: "#/components/schemas/ServiceNowUsersData"
+          example:
+            - attributes:
+                email: "john.doe@example.com"
+                instance_id: "65b3341b-0680-47f9-a6d4-134db45c603e"
+                user_name: "john.doe"
+                user_sys_id: "abc123def456"
+              id: "65b3341b-0680-47f9-a6d4-134db45c603e"
+              type: users
       required:
         - data
       type: object
@@ -71125,6 +71520,80 @@ components:
           description: The display name of the datastore.
           type: string
       type: object
+    UpdateCampaignRequest:
+      description: Request to update a campaign.
+      properties:
+        data:
+          $ref: "#/components/schemas/UpdateCampaignRequestData"
+      required:
+        - data
+      type: object
+    UpdateCampaignRequestAttributes:
+      description: Attributes for updating a campaign.
+      properties:
+        description:
+          description: The description of the campaign.
+          example: Campaign to improve security posture for Q1 2024.
+          type: string
+        due_date:
+          description: The due date of the campaign.
+          example: "2024-03-31T23:59:59Z"
+          format: date-time
+          type: string
+        entity_scope:
+          description: Entity scope query to filter entities for this campaign.
+          example: kind:service AND team:platform
+          type: string
+        guidance:
+          description: Guidance for the campaign.
+          example: Please ensure all services pass the security requirements.
+          type: string
+        key:
+          description: The unique key for the campaign.
+          example: q1-security-2024
+          type: string
+        name:
+          description: The name of the campaign.
+          example: Q1 Security Campaign
+          type: string
+        owner_id:
+          description: The UUID of the campaign owner.
+          example: 550e8400-e29b-41d4-a716-446655440000
+          type: string
+        rule_ids:
+          description: Array of rule IDs associated with this campaign.
+          example: ["q8MQxk8TCqrHnWkx", "r9NRyl9UDrsIoXly"]
+          items:
+            description: The unique ID of a scorecard rule.
+            type: string
+          type: array
+        start_date:
+          description: The start date of the campaign.
+          example: "2024-01-01T00:00:00Z"
+          format: date-time
+          type: string
+        status:
+          description: The status of the campaign.
+          example: in_progress
+          type: string
+      required:
+        - name
+        - owner_id
+        - status
+        - start_date
+        - rule_ids
+      type: object
+    UpdateCampaignRequestData:
+      description: Data for updating a campaign.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/UpdateCampaignRequestAttributes"
+        type:
+          $ref: "#/components/schemas/CampaignType"
+      required:
+        - type
+        - attributes
+      type: object
     UpdateConnectionRequest:
       description: Request body for updating an existing data source connection by adding, modifying, or removing fields.
       example:
@@ -71707,7 +72176,7 @@ components:
       description: Data for the request to update a scorecard rule.
       properties:
         attributes:
-          $ref: "#/components/schemas/RuleAttributes"
+          $ref: "#/components/schemas/RuleAttributesRequest"
         type:
           $ref: "#/components/schemas/RuleType"
       type: object
@@ -103410,6 +103879,394 @@ paths:
         permissions:
           - user_access_invite
           - user_access_manage
+  /api/v2/scorecard/campaigns:
+    get:
+      description: Fetches all scorecard campaigns.
+      operationId: ListScorecardCampaigns
+      parameters:
+        - description: Maximum number of campaigns to return.
+          in: query
+          name: page[limit]
+          required: false
+          schema:
+            default: 10
+            example: 10
+            format: int64
+            type: integer
+        - description: Offset for pagination.
+          in: query
+          name: page[offset]
+          required: false
+          schema:
+            default: 0
+            example: 0
+            format: int64
+            type: integer
+        - description: Filter campaigns by name (full-text search).
+          in: query
+          name: filter[campaign][name]
+          required: false
+          schema:
+            example: security
+            type: string
+        - description: Filter campaigns by status.
+          in: query
+          name: filter[campaign][status]
+          required: false
+          schema:
+            example: in_progress
+            type: string
+        - description: Filter campaigns by owner UUID.
+          in: query
+          name: filter[campaign][owner]
+          required: false
+          schema:
+            example: 550e8400-e29b-41d4-a716-446655440000
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          created_at: "2026-01-01T00:00:00Z"
+                          entity_scope: kind:service
+                          key: test-campaign-1
+                          modified_at: "2026-01-01T00:00:00Z"
+                          name: Test Campaign 1
+                          owner: ""
+                          start_date: "2026-01-01T00:00:00Z"
+                          status: in_progress
+                        id: campaign-1
+                        meta:
+                          entity_count: 25
+                          rule_count: 2
+                        relationships:
+                          rules:
+                            data:
+                              - id: rule-1
+                                type: rule
+                              - id: rule-2
+                                type: rule
+                        type: campaign
+                    meta:
+                      count: 1
+                      limit: 10
+                      offset: 0
+                      total: 1
+              schema:
+                $ref: "#/components/schemas/ListCampaignsResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - apm_service_catalog_read
+            - cases_read
+      summary: List all campaigns
+      tags:
+        - Scorecards
+      x-menu-order: 8
+    post:
+      description: Creates a new scorecard campaign.
+      operationId: CreateScorecardCampaign
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateCampaignRequest"
+        description: Campaign data.
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        created_at: "2026-01-01T00:00:00Z"
+                        key: minimal-campaign
+                        modified_at: "2026-01-01T00:00:00Z"
+                        name: Minimal Campaign
+                        owner: 21f98ae1-4ae2-11eb-958f-07e105a6e810
+                        start_date: "2026-01-01T00:00:00Z"
+                        status: in_progress
+                      id: campaign-2
+                      relationships:
+                        rules:
+                          data:
+                            - id: rule-1
+                              type: rule
+                      type: campaign
+              schema:
+                $ref: "#/components/schemas/CampaignResponse"
+          description: Created
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - apm_service_catalog_write
+            - cases_write
+      summary: Create a new campaign
+      tags:
+        - Scorecards
+      x-menu-order: 9
+  /api/v2/scorecard/campaigns/{campaign_id}:
+    delete:
+      description: Deletes a single campaign by ID or key.
+      operationId: DeleteScorecardCampaign
+      parameters:
+        - description: Campaign ID or key.
+          in: path
+          name: campaign_id
+          required: true
+          schema:
+            example: c10ODp0VCrrIpXmz
+            type: string
+      responses:
+        "204":
+          description: No Content
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - apm_service_catalog_write
+            - cases_write
+      summary: Delete a campaign
+      tags:
+        - Scorecards
+      x-menu-order: 12
+    get:
+      description: Fetches a single campaign by ID or key.
+      operationId: GetScorecardCampaign
+      parameters:
+        - description: Campaign ID or key.
+          in: path
+          name: campaign_id
+          required: true
+          schema:
+            example: c10ODp0VCrrIpXmz
+            type: string
+        - description: Include related data (for example, scores).
+          in: query
+          name: include
+          required: false
+          schema:
+            example: scores
+            type: string
+        - description: Include metadata (entity and rule counts).
+          in: query
+          name: include_meta
+          required: false
+          schema:
+            example: true
+            type: boolean
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        created_at: "2026-01-01T00:00:00Z"
+                        key: test-campaign
+                        modified_at: "2026-01-01T00:00:00Z"
+                        name: Test Campaign
+                        owner: ""
+                        start_date: "2026-01-01T00:00:00Z"
+                        status: in_progress
+                      id: c2b79b87-327c-40fa-b726-228f1a60bbb4
+                      relationships:
+                        campaign_score:
+                          data:
+                            id: c2b79b87-327c-40fa-b726-228f1a60bbb4
+                            type: score
+                        rule_scores:
+                          data:
+                            - id: rule-1
+                              type: score
+                        rules:
+                          data:
+                            - id: rule-1
+                              type: rule
+                      type: campaign
+                    included:
+                      - attributes:
+                          aggregation: campaign
+                          denominator: 13
+                          numerator: 10
+                          score: 76.92
+                          total_fail: 2
+                          total_no_data: 0
+                          total_pass: 10
+                          total_skip: 1
+                        id: c2b79b87-327c-40fa-b726-228f1a60bbb4
+                        type: score
+              schema:
+                $ref: "#/components/schemas/CampaignResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - apm_service_catalog_read
+            - cases_read
+      summary: Get a campaign
+      tags:
+        - Scorecards
+      x-menu-order: 10
+    put:
+      description: Updates an existing campaign.
+      operationId: UpdateScorecardCampaign
+      parameters:
+        - description: Campaign ID or key.
+          in: path
+          name: campaign_id
+          required: true
+          schema:
+            example: c10ODp0VCrrIpXmz
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateCampaignRequest"
+        description: Campaign data.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        created_at: "2026-01-01T00:00:00Z"
+                        description: Updated Description
+                        key: updated-campaign
+                        modified_at: "2026-01-02T00:00:00Z"
+                        name: Updated Campaign
+                        owner: 21f98ae1-4ae2-11eb-958f-07e105a6e810
+                        start_date: "2026-01-01T00:00:00Z"
+                        status: completed
+                      id: 9c15b9ca-5abd-4875-84c2-02e166a45959
+                      relationships:
+                        rules:
+                          data:
+                            - id: rule-1
+                              type: rule
+                            - id: rule-2
+                              type: rule
+                      type: campaign
+              schema:
+                $ref: "#/components/schemas/CampaignResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - apm_service_catalog_write
+            - cases_write
+      summary: Update a campaign
+      tags:
+        - Scorecards
+      x-menu-order: 11
   /api/v2/scorecard/outcomes:
     get:
       description: Fetches all rule outcomes.
@@ -103438,21 +104295,21 @@ paths:
           schema:
             example: name
             type: string
-        - description: Filter the outcomes on a specific service name.
+        - description: Filter outcomes on a specific service name.
           in: query
           name: filter[outcome][service_name]
           required: false
           schema:
             example: web-store
             type: string
-        - description: Filter the outcomes by a specific state.
+        - description: Filter outcomes by a specific state.
           in: query
           name: filter[outcome][state]
           required: false
           schema:
             example: fail
             type: string
-        - description: Filter outcomes on whether a rule is enabled/disabled.
+        - description: Filter outcomes based on whether a rule is enabled or disabled.
           in: query
           name: filter[rule][enabled]
           required: false
@@ -103477,6 +104334,25 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          created_at: "2026-01-06T12:51:32.000546001Z"
+                          modified_at: "2026-01-06T12:51:32.000546001Z"
+                          remarks: test
+                          service_name: my-service
+                          state: pass
+                        id: a75tJIv_kNQ
+                        relationships:
+                          rule:
+                            data:
+                              id: rule-1
+                              type: rule
+                        type: outcome
+                    links:
+                      next: /api/v2/scorecard/outcomes?page%5Blimit%5D=100&page%5Boffset%5D=100
               schema:
                 $ref: "#/components/schemas/OutcomesResponse"
           description: OK
@@ -103493,18 +104369,15 @@ paths:
             - apm_service_catalog_read
       summary: List all rule outcomes
       tags:
-        - Service Scorecards
-      x-menu-order: 2
+        - Scorecards
+      x-menu-order: 4
       x-pagination:
         limitParam: page[size]
         pageOffsetParam: page[offset]
         resultsPath: data
-      x-unstable: |-
-        **Note**: This endpoint is in public beta.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     post:
       description: Updates multiple scorecard rule outcomes in a single batched request.
-      operationId: UpdateScorecardOutcomesAsync
+      operationId: UpdateScorecardOutcomes
       requestBody:
         content:
           application/json:
@@ -103528,16 +104401,14 @@ paths:
           appKeyAuth: []
         - AuthZ:
             - apm_service_catalog_write
-      summary: Update Scorecard outcomes asynchronously
+      summary: Update Scorecard outcomes
       tags:
-        - Service Scorecards
+        - Scorecards
       x-codegen-request-body-name: body
-      x-menu-order: 1
-      x-unstable: |-
-        **Note**: This endpoint is in public beta.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+      x-menu-order: 3
   /api/v2/scorecard/outcomes/batch:
     post:
+      deprecated: true
       description: Sets multiple service-rule outcomes in a single batched request.
       operationId: CreateScorecardOutcomesBatch
       requestBody:
@@ -103551,6 +104422,25 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          modified_at: "2026-03-11T07:37:20.758067Z"
+                          remarks: test remarks
+                          service_name: my-service
+                          state: pass
+                        id: nFs2_9E97Zo
+                        relationships:
+                          rule:
+                            data:
+                              id: rule-1
+                              type: rule
+                        type: outcome
+                    meta:
+                      total_received: 1
+                      total_staged: 1
               schema:
                 $ref: "#/components/schemas/OutcomesBatchResponse"
           description: OK
@@ -103567,11 +104457,12 @@ paths:
             - apm_service_catalog_write
       summary: Create outcomes batch
       tags:
-        - Service Scorecards
+        - Scorecards
       x-codegen-request-body-name: body
-      x-menu-order: 5
+      x-menu-order: 7
+      x-sunset: "2026-04-01"
       x-unstable: |-
-        **Note**: This endpoint is in public beta.
+        **Note**: This endpoint is in Preview.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/scorecard/rules:
     get:
@@ -103640,6 +104531,34 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          category: Test Scorecard
+                          created_at: "2026-01-06T12:51:32Z"
+                          custom: true
+                          enabled: true
+                          level: 3
+                          modified_at: "2026-01-06T12:51:32Z"
+                          name: Test Rule 1
+                          scorecard_name: Test Scorecard
+                        id: rule-1
+                        relationships:
+                          scorecard:
+                            data:
+                              id: scorecard-1
+                              type: scorecard
+                        type: rule
+                    included:
+                      - attributes:
+                          description: Scorecard Description
+                          name: Test Scorecard
+                        id: scorecard-1
+                        type: scorecard
+                    links:
+                      next: /api/v2/scorecard/rules?include=scorecard&page%5Blimit%5D=100&page%5Boffset%5D=100
               schema:
                 $ref: "#/components/schemas/ListRulesResponse"
           description: OK
@@ -103656,21 +104575,28 @@ paths:
             - apm_service_catalog_read
       summary: List all rules
       tags:
-        - Service Scorecards
-      x-menu-order: 6
+        - Scorecards
+      x-menu-order: 5
       x-pagination:
         limitParam: page[size]
         pageOffsetParam: page[offset]
         resultsPath: data
-      x-unstable: |-
-        **Note**: This endpoint is in public beta.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     post:
       description: Creates a new rule.
       operationId: CreateScorecardRule
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      enabled: true
+                      name: My Rule
+                      owner: Datadog
+                      scorecard_name: My Scorecard
+                    type: rule
             schema:
               $ref: "#/components/schemas/CreateRuleRequest"
         description: Rule attributes.
@@ -103679,6 +104605,26 @@ paths:
         "201":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        category: Test Scorecard
+                        created_at: "2026-01-06T12:51:32Z"
+                        custom: true
+                        enabled: true
+                        level: 3
+                        modified_at: "2026-01-06T12:51:32Z"
+                        name: Test Rule
+                        scorecard_name: Test Scorecard
+                      id: rule-1
+                      relationships:
+                        scorecard:
+                          data:
+                            id: scorecard-1
+                            type: scorecard
+                      type: rule
               schema:
                 $ref: "#/components/schemas/CreateRuleResponse"
           description: Created
@@ -103695,12 +104641,9 @@ paths:
             - apm_service_catalog_write
       summary: Create a new rule
       tags:
-        - Service Scorecards
+        - Scorecards
       x-codegen-request-body-name: body
-      x-menu-order: 7
-      x-unstable: |-
-        **Note**: This endpoint is in public beta.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+      x-menu-order: 1
   /api/v2/scorecard/rules/{rule_id}:
     delete:
       description: Deletes a single rule.
@@ -103725,11 +104668,8 @@ paths:
             - apm_service_catalog_write
       summary: Delete a rule
       tags:
-        - Service Scorecards
-      x-menu-order: 3
-      x-unstable: |-
-        **Note**: This endpoint is in public beta.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+        - Scorecards
+      x-menu-order: 6
     put:
       description: Updates an existing rule.
       operationId: UpdateScorecardRule
@@ -103738,6 +104678,18 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      description: Updated Description
+                      enabled: false
+                      name: Updated Rule
+                      owner: team:updated-team
+                      scope_query: kind:service
+                      scorecard_name: Updated Scorecard
+                    type: rule
             schema:
               $ref: "#/components/schemas/UpdateRuleRequest"
         description: Rule attributes.
@@ -103746,6 +104698,33 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        category: Updated Scorecard
+                        created_at: "2026-01-06T12:51:32Z"
+                        custom: true
+                        description: Updated Description
+                        enabled: false
+                        level: 1
+                        modified_at: "2026-01-06T13:00:00Z"
+                        name: Updated Rule
+                        owner: team:updated-team
+                        scope_query: kind:service
+                        scorecard_name: Updated Scorecard
+                      id: rule-1
+                      relationships:
+                        scope:
+                          data:
+                            id: ae07a16e-1319-5e61-bdba-b3026bc2bdcd
+                            type: entity-scope
+                        scorecard:
+                          data:
+                            id: scorecard-2
+                            type: scorecard
+                      type: rule
               schema:
                 $ref: "#/components/schemas/UpdateRuleResponse"
           description: Rule updated successfully
@@ -103760,14 +104739,90 @@ paths:
           appKeyAuth: []
         - AuthZ:
             - apm_service_catalog_write
-      summary: Update an existing rule
+      summary: Update an existing scorecard rule
       tags:
-        - Service Scorecards
+        - Scorecards
       x-codegen-request-body-name: body
-      x-menu-order: 4
-      x-unstable: |-
-        **Note**: This endpoint is in public beta.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+      x-menu-order: 2
+  /api/v2/scorecard/scorecards:
+    get:
+      description: Fetches all scorecards.
+      operationId: ListScorecards
+      parameters:
+        - description: Offset for pagination.
+          in: query
+          name: page[offset]
+          required: false
+          schema:
+            default: 0
+            example: 0
+            format: int64
+            type: integer
+        - description: Maximum number of scorecards to return.
+          in: query
+          name: page[size]
+          required: false
+          schema:
+            default: 100
+            example: 10
+            format: int64
+            type: integer
+        - description: Filter by scorecard ID.
+          in: query
+          name: filter[scorecard][id]
+          required: false
+          schema:
+            example: q8MQxk8TCqrHnWkx
+            type: string
+        - description: Filter by scorecard name (partial match).
+          in: query
+          name: filter[scorecard][name]
+          required: false
+          schema:
+            example: Observability
+            type: string
+        - description: Filter by scorecard description (partial match).
+          in: query
+          name: filter[scorecard][description]
+          required: false
+          schema:
+            example: Best Practices
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          created_at: "2026-01-01T00:00:00Z"
+                          description: Best practices for observability.
+                          modified_at: "2026-01-05T14:20:00Z"
+                          name: Observability Best Practices
+                        id: q8MQxk8TCqrHnWkx
+                        type: scorecard
+              schema:
+                $ref: "#/components/schemas/ListScorecardsResponse"
+          description: OK
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - apm_service_catalog_read
+      summary: List all scorecards
+      tags:
+        - Scorecards
+      x-menu-order: 13
   /api/v2/seats/users:
     delete:
       description: |-
@@ -116262,6 +117317,9 @@ tags:
       Note: SCIM provisioning for Datadog teams is only available for select organizations at this point. Request access by contacting Datadog support, or see the [SCIM page](https://docs.datadoghq.com/account_management/scim/) for more information.
     name: SCIM
   - description: |-
+      API to create and update scorecard rules and outcomes. See [Scorecards](https://docs.datadoghq.com/service_catalog/scorecards) for more information.
+    name: Scorecards
+  - description: |-
       The seats API allows you to view, assign, and unassign seats for your organization.
     name: Seats
   - description: |-
@@ -116285,11 +117343,6 @@ tags:
       balance feature development with platform stability,
       and improve communication with internal and external users.
     name: Service Level Objectives
-  - description: |-
-      API to create and update scorecard rules and outcomes. See [Service Scorecards](https://docs.datadoghq.com/service_catalog/scorecards) for more information.
-
-      This feature is currently in BETA. If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
-    name: Service Scorecards
   - description: Manage your ServiceNow Integration. ServiceNow is a cloud-based platform that helps organizations manage digital workflows for enterprise operations.
     name: ServiceNow Integration
   - description: |-

@@ -52,7 +52,9 @@ The IAM role running CloudPrem needs the following permissions to invoke and dep
         "lambda:UpdateFunctionCode",
         "lambda:PublishVersion",
         "lambda:ListVersionsByFunction",
-        "lambda:DeleteFunction"
+        "lambda:DeleteFunction",
+        "lambda:InvokeFunction",
+        "lambda:TagResource"
       ],
       "Resource": "arn:aws:lambda:<REGION>:<ACCOUNT_ID>:function:cloudprem-*"
     },
