@@ -3777,11 +3777,19 @@
     "request_description": "Attributes describing the signal update.",
     "request_schema_description": "Request body for changing the related incidents of a given security monitoring signal."
   },
+  "GetInvestigationLogQueriesMatchingSignal": {
+    "description": "Get the list of investigation log queries available for a given security signal.",
+    "summary": "Get investigation queries for a signal"
+  },
   "EditSecurityMonitoringSignalState": {
     "description": "Change the triage state of a security signal.",
     "summary": "Change the triage state of a security signal",
     "request_description": "Attributes describing the signal update.",
     "request_schema_description": "Request body for changing the state of a given security monitoring signal."
+  },
+  "GetSuggestedActionsMatchingSignal": {
+    "description": "Get the list of suggested actions for a given security signal.",
+    "summary": "Get suggested actions for a signal"
   },
   "ListScanningGroups": {
     "description": "List all the Scanning groups in your organization.",
