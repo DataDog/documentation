@@ -1,23 +1,9 @@
----
-title: Kotlin Multiplatform Advanced Configuration
-description: "Configure advanced Kotlin Multiplatform RUM SDK settings for cross-platform mobile applications on iOS and Android."
-aliases:
-    - /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/kotlin-multiplatform
-    - /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/kotlin_multiplatform
-    - /real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform/advanced_configuration
-    - /real_user_monitoring/kotlin-multiplatform
-    - /real_user_monitoring/kotlin_multiplatform
-further_reading:
-- link: https://github.com/DataDog/dd-sdk-kotlin-multiplatform
-  tag: "Source Code"
-  text: Source code for dd-sdk-kotlin-multiplatform
-- link: /real_user_monitoring
-  tag: Documentation
-  text: Explore Datadog RUM
----
-## Overview
+<!--
+This partial contains advanced configuration instructions for the Kotlin Multiplatform SDK.
+It can be included directly in language-specific pages or wrapped in conditionals.
+-->
 
-If you have not set up the SDK yet, follow the [in-app setup instructions][1] or refer to the [Kotlin Multiplatform RUM setup documentation][2]. 
+If you have not set up the SDK yet, follow the [in-app setup instructions][1] or see the [Kotlin Multiplatform RUM setup documentation][2].
 
 ## Enrich user sessions
 
@@ -42,10 +28,10 @@ In addition to RUM's default attributes, you can measure where your application 
 ```kotlin
 fun onHeroImageLoaded() {
     GlobalRumMonitor.get().addTiming("hero_image")
-} 
+}
 ```
 
-Once the timing is sent, the timing is accessible as `@view.custom_timings.<timing_name>`. For example: `@view.custom_timings.hero_image`. You must [create a measure][8] before graphing it in RUM analytics or in dashboards. 
+After the timing is sent, the timing is accessible as `@view.custom_timings.<timing_name>`. For example: `@view.custom_timings.hero_image`. You must [create a measure][8] before graphing it in RUM analytics or in dashboards.
 
 ### Custom actions
 
@@ -54,7 +40,7 @@ In addition to [tracking actions automatically][5], you can also track specific 
 The action type should be one of the following: "custom", "click", "tap", "scroll", "swipe", "back".
 
 ```kotlin
-fun onUserInteraction() { 
+fun onUserInteraction() {
     GlobalRumMonitor.get().addAction(actionType, name, actionAttributes)
 }
 ```
@@ -98,7 +84,7 @@ fun loadResource() {
         GlobalRumMonitor.get().stopResource(resourceKey, resourceKind, additionalAttributes)
     } catch (e: Exception) {
         GlobalRumMonitor.get().stopResourceWithError(resourceKey, message, origin, e)
-    } 
+    }
 }
 ```
 
@@ -106,7 +92,7 @@ fun loadResource() {
 
 ### Custom errors
 
-To track specific errors, notify the monitor when an error occurs with the message, source, exception, and additional attributes. Refer to the [Attributes collected documentation][7].
+To track specific errors, notify the monitor when an error occurs with the message, source, exception, and additional attributes. See the [Attributes collected documentation][7].
 
 ```kotlin
 GlobalRumMonitor.get().addError(message, source, throwable, attributes)
@@ -163,7 +149,7 @@ Adding user information to your RUM sessions helps you to:
 * Know which users are the most impacted by errors
 * Monitor performance for your most important users
 
-{{< img src="real_user_monitoring/browser/advanced_configuration/user-api.png" alt="User API in RUM UI" >}}
+{% img src="real_user_monitoring/browser/advanced_configuration/user-api.png" alt="User API in RUM UI" /%}
 
 | Attribute   | Type   | Description                                                                     |
 | ----------- | ------ | ------------------------------------------------------------------------------- |
@@ -189,49 +175,51 @@ GlobalRumMonitor.get().removeAttribute(key)
 
 ## Track background events
 
-You can track events such as crashes and network requests when your application is in the background (for example, no active view is available). 
+You can track events such as crashes and network requests when your application is in the background (for example, no active view is available).
 
 Add the following snippet during RUM configuration:
 
 ```kotlin
 .trackBackgroundEvents(true)
 ```
-<div class="alert alert-info"><p>Tracking background events may lead to additional sessions, which can impact billing. For questions, <a href="https://docs.datadoghq.com/help/">contact Datadog support.</a></p>
-</div>
+
+{% alert level="info" %}
+Tracking background events may lead to additional sessions, which can impact billing. For questions, [contact Datadog support][a1].
+{% /alert %}
 
 ## Initialization parameters
 
 You can use the following methods in `Configuration.Builder` when creating the Datadog configuration to initialize the library:
 
-`useSite(DatadogSite)` 
+`useSite(DatadogSite)`
 : Switches target data to EU, US1, US3, US5, US1_FED, AP1, and AP2 sites.
 
-`setBatchSize([SMALL|MEDIUM|LARGE])` 
+`setBatchSize([SMALL|MEDIUM|LARGE])`
 : Defines the individual batch size for requests sent to Datadog.
 
-`setUploadFrequency([FREQUENT|AVERAGE|RARE])` 
+`setUploadFrequency([FREQUENT|AVERAGE|RARE])`
 : Defines the frequency for requests made to Datadog endpoints (if requests are available).
 
-`setBatchProcessingLevel(LOW|MEDIUM|HIGH)` 
+`setBatchProcessingLevel(LOW|MEDIUM|HIGH)`
 : Defines the number of batches sent in each upload cycle.
 
 `trackCrashes(Boolean)`
 : Allows you to control whether JVM/iOS crashes are tracked or not. The default value is `true`.
- 
+
 You can use the following methods in `RumConfiguration.Builder` when creating the RUM configuration to enable RUM features:
 
 ### Common configuration methods
 
-`trackLongTasks(durationThreshold)` 
+`trackLongTasks(durationThreshold)`
 : Enables tracking tasks taking longer than `durationThreshold` on the main thread as long tasks in Datadog. See [Automatically track long tasks](#automatically-track-long-tasks) for more information.
 
-`setVitalsUpdateFrequency([FREQUENT|AVERAGE|RARE|NEVER])` 
+`setVitalsUpdateFrequency([FREQUENT|AVERAGE|RARE|NEVER])`
 : Sets the preferred frequency for collecting mobile vitals.
 
-`setSessionSampleRate(<sampleRate>)` 
+`setSessionSampleRate(<sampleRate>)`
 : Sets the RUM sessions sample rate. (A value of 0 means no RUM events are sent. A value of 100 means all sessions are kept.)
 
-`setSessionListener(RumSessionListener)` 
+`setSessionListener(RumSessionListener)`
 : Sets a listener to be notified on when a new RUM Session starts.
 
 `setTelemetrySampleRate`
@@ -247,7 +235,7 @@ You can use the following methods in `RumConfiguration.Builder` when creating th
 : Sets the EventMapper for the RUM ActionEvent. You can use this interface implementation to modify the ActionEvent attributes before serialization.
 
 `setErrorEventMapper`
-: Sets the EventMapper for the RUM ErrorEvent. you can use this interface implementation to modify the ErrorEvent attributes before serialization.
+: Sets the EventMapper for the RUM ErrorEvent. You can use this interface implementation to modify the ErrorEvent attributes before serialization.
 
 `setLongTaskEventMapper`
 : Sets the EventMapper for the RUM LongTaskEvent. You can use this interface implementation to modify the LongTaskEvent attributes before serialization.
@@ -262,26 +250,26 @@ You can use the following methods in `RumConfiguration.Builder` when creating th
 
 These methods can be accessed only from Android source set.
 
-`trackNonFatalAnrs(Boolean)` 
+`trackNonFatalAnrs(Boolean)`
 : Enables tracking non-fatal ANRs. This is enabled by default on Android API 29 and below, and disabled by default on Android API 30 and above.
 
-`trackUserInteractions(Array<ViewAttributesProvider>)` 
+`trackUserInteractions(Array<ViewAttributesProvider>)`
 : Enables tracking user interactions (such as tap, scroll, or swipe). The parameter also allows you to add custom attributes to the RUM Action events based on the widget with which the user interacted.
 
-`useViewTrackingStrategy(strategy)` 
+`useViewTrackingStrategy(strategy)`
 : Defines the strategy used to track views. See [Automatically track views](#automatically-track-views) for more information.
 
 ### iOS configuration methods
 
-`trackUiKitViews(UIKitRUMViewsPredicate)` 
+`trackUiKitViews(UIKitRUMViewsPredicate)`
 : Enable automatic tracking of `UIViewController`s as RUM views. See [Automatically track views](#automatically-track-views) for more information.
 
-`trackUiKitActions(UIKitRUMActionsPredicate)` 
+`trackUiKitActions(UIKitRUMActionsPredicate)`
 : Enable automatic tracking of `UITouch` events as RUM actions. The predicate implementation should return RUM action parameters if the given interaction should be accepted, or `null` to ignore it. By default, all touches are accepted.
 
-`setAppHangThreshold(Long)` 
+`setAppHangThreshold(Long)`
 : Enables app hangs monitoring with the given threshold (in milliseconds). See [Add app hang reporting][10] for more information.
- 
+
 ### Automatically track views
 
 #### Android
@@ -294,12 +282,11 @@ To automatically track your views (such as activities and fragments), provide a 
 `FragmentViewTrackingStrategy`
 : Every fragment in your application is considered a distinct view.
 
-`MixedViewTrackingStrategy` 
+`MixedViewTrackingStrategy`
 : Every activity or fragment in your application is considered a distinct view.
 
 `NavigationViewTrackingStrategy`
 : Recommended for Android Jetpack Navigation library users. Each Navigation destination is considered a distinct view.
-
 
 For instance, to set each fragment as a distinct view, use the following configuration in your [setup][1]:
 
@@ -339,9 +326,8 @@ val strategy = ActivityViewTrackingStrategy(
     }
 )
 ```
-   
-**Note**: By default, the library is using `ActivityViewTrackingStrategy`. If you decide not to provide a view tracking strategy, you must manually send the views by calling the `startView` and `stopView` methods yourself.
 
+**Note**: By default, the library is using `ActivityViewTrackingStrategy`. If you decide not to provide a view tracking strategy, you must manually send the views by calling the `startView` and `stopView` methods yourself.
 
 #### iOS
 
@@ -356,7 +342,7 @@ class YourCustomPredicate: UIKitRUMViewsPredicate {
 
     override fun createView(viewController: UIViewController): RUMView? {
         return when (viewController) {
-          is HomeViewController -> RUMView("Home)
+          is HomeViewController -> RUMView("Home")
           is DetailsViewController -> RUMView("Details")
           else -> null
         }
@@ -403,32 +389,32 @@ val rumConfig = RumConfiguration.Builder(applicationId)
   .build()
 ```
 
-   When implementing the `EventMapper<T>` interface, only some attributes are modifiable for each event type:
-     
-   | Event type    | Attribute key        | Description                                      |
-   | ------------- | -------------------- | ------------------------------------------------ |
-   | ViewEvent     | `view.referrer`      | URL that linked to the initial view of the page. |
-   |               | `view.url`           | URL of the view.                                 |
-   |               | `view.name`          | Name of the view.                                |
-   | ActionEvent   | `action.target.name` | Target name.                                     |
-   |               | `view.referrer`      | URL that linked to the initial view of the page. |
-   |               | `view.url`           | URL of the view.                                 |
-   |               | `view.name`          | Name of the view.                                |
-   | ErrorEvent    | `error.message`      | Error message.                                   |
-   |               | `error.stack`        | Stacktrace of the error.                         |
-   |               | `error.resource.url` | URL of the resource.                             |
-   |               | `view.referrer`      | URL that linked to the initial view of the page. |
-   |               | `view.url`           | URL of the view.                                 |
-   |               | `view.name`          | Name of the view.                                |
-   | ResourceEvent | `resource.url`       | URL of the resource.                             |
-   |               | `view.referrer`      | URL that linked to the initial view of the page. |
-   |               | `view.url`           | URL of the view.                                 |
-   |               | `view.name`          | Name of the view.                                |
-   | LongTaskEvent | `view.referrer`      | URL that linked to the initial view of the page. |
-   |               | `view.url`           | URL of the view.                                 |
-   |               | `view.name`          | Name of the view.                                |
-   
-   **Note**: If you return null from the `EventMapper<T>` implementation, the event is dropped.
+When implementing the `EventMapper<T>` interface, only some attributes are modifiable for each event type:
+
+| Event type    | Attribute key        | Description                                      |
+| ------------- | -------------------- | ------------------------------------------------ |
+| ViewEvent     | `view.referrer`      | URL that linked to the initial view of the page. |
+|               | `view.url`           | URL of the view.                                 |
+|               | `view.name`          | Name of the view.                                |
+| ActionEvent   | `action.target.name` | Target name.                                     |
+|               | `view.referrer`      | URL that linked to the initial view of the page. |
+|               | `view.url`           | URL of the view.                                 |
+|               | `view.name`          | Name of the view.                                |
+| ErrorEvent    | `error.message`      | Error message.                                   |
+|               | `error.stack`        | Stacktrace of the error.                         |
+|               | `error.resource.url` | URL of the resource.                             |
+|               | `view.referrer`      | URL that linked to the initial view of the page. |
+|               | `view.url`           | URL of the view.                                 |
+|               | `view.name`          | Name of the view.                                |
+| ResourceEvent | `resource.url`       | URL of the resource.                             |
+|               | `view.referrer`      | URL that linked to the initial view of the page. |
+|               | `view.url`           | URL of the view.                                 |
+|               | `view.name`          | Name of the view.                                |
+| LongTaskEvent | `view.referrer`      | URL that linked to the initial view of the page. |
+|               | `view.url`           | URL of the view.                                 |
+|               | `view.name`          | Name of the view.                                |
+
+**Note**: If you return null from the `EventMapper<T>` implementation, the event is dropped.
 
 ## Retrieve the RUM session ID
 
@@ -442,10 +428,6 @@ GlobalRumMonitor.get().getCurrentSessionId { sessionId ->
 }
 ```
 
-## Further reading
-
-{{< partial name="whats-next/whats-next.html" >}}
-
 [1]: https://app.datadoghq.com/rum/application/create
 [2]: /real_user_monitoring/application_monitoring/kotlin_multiplatform
 [3]: /real_user_monitoring/application_monitoring/kotlin_multiplatform/data_collected
@@ -456,3 +438,4 @@ GlobalRumMonitor.get().getCurrentSessionId { sessionId ->
 [8]: /real_user_monitoring/explorer/search/#setup-facets-and-measures
 [9]: /real_user_monitoring/application_monitoring/kotlin_multiplatform/#sending-data-when-device-is-offline
 [10]: /real_user_monitoring/error_tracking/mobile/ios/#add-app-hang-reporting
+[a1]: https://docs.datadoghq.com/help/

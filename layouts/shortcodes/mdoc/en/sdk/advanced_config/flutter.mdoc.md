@@ -1,96 +1,77 @@
----
-title: Flutter Advanced Configuration
-description: Learn how to configure Flutter Monitoring.
-aliases:
-    - /real_user_monitoring/flutter/advanced_configuration
-    - /real_user_monitoring/otel
-    - /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/otel
-    - /real_user_monitoring/mobile_and_tv_monitoring/setup/otel
-    - /real_user_monitoring/flutter/otel_support/
-    - /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/flutter
-    - /real_user_monitoring/mobile_and_tv_monitoring/flutter/advanced_configuration
-further_reading:
-- link: https://github.com/DataDog/dd-sdk-flutter
-  tag: "Source Code"
-  text: Source code for dd-sdk-flutter
-- link: real_user_monitoring/explorer/
-  tag: Documentation
-  text: Learn how to explore your RUM data
-- link: https://www.datadoghq.com/blog/monitor-flutter-application-performance-with-mobile-rum/
-  tag: Blog
-  text: Monitor Flutter application performance with Datadog Mobile RUM
-
----
-## Overview
+<!--
+This partial contains advanced configuration instructions for the Flutter SDK.
+It can be included directly in language-specific pages or wrapped in conditionals.
+-->
 
 If you have not set up the Datadog Flutter SDK for RUM yet, follow the [in-app setup instructions][1] or see the [RUM Flutter setup documentation][2]. Learn how to set up [OpenTelemetry with RUM Flutter](#opentelemetry-setup). For additional manual instrumentation functions, such as automatic view tracking, see [Flutter Libraries for RUM][3].
 
 ## Initialization parameters
+
 You can specify the following parameters in your configuration when initializing the SDK.
 
 `clientToken`
-: Required<br/>
-**Type**: String<br/>
+: Required  
+**Type**: String  
 A client token for RUM or logging/APM. You can obtain this token in Datadog.
 
 `env`
-: Required<br/>
-**Type**: String<br/>
+: Required  
+**Type**: String  
 The environment name sent to Datadog. You can use `env` to filter events by environment (for example, `staging` or `production`).
 
 `site`
-: Required<br/>
-**Type**: Enum<br/>
+: Required  
+**Type**: Enum  
 The Datadog site that data is sent to. Enum values: `us1`, `us3`, `us5`, `eu1`, `us1Fed`, `ap1`, and `ap2`.
 
 `nativeCrashReportEnabled`
-: Optional<br/>
-**Type**: Boolean<br/>
-**Default**: `false`<br/>
+: Optional  
+**Type**: Boolean  
+**Default**: `false`  
 Enables native crash reporting.
 
 `service`
-: Optional<br/>
-**Type**: String<br/>
+: Optional  
+**Type**: String  
 The service name for the application.
 
 `uploadFrequency`
-: Optional<br/>
-**Type**: Enum<br/>
-**Default**: `average`<br/>
+: Optional  
+**Type**: Enum  
+**Default**: `average`  
 The frequency at which the Datadog SDK tries to upload data batches. Enum values: `frequent`, `average`, and `rare`.
 
 `batchSize`
-: Optional<br/>
-**Type**: Enum<br/>
-**Default**: `medium`<br/>
+: Optional  
+**Type**: Enum  
+**Default**: `medium`  
 Defines the Datadog SDK policy for batching data before uploading it to Datadog servers. Larger batches result in larger (but fewer) network requests. Smaller batches result in smaller (but more) network requests. Enum values: `small`, `medium`, and `large`.
 
 `batchProcessingLevel`
-: Optional<br/>
-**Type**: Enum<br/>
-**Default**: `medium`
+: Optional  
+**Type**: Enum  
+**Default**: `medium`  
 Defines the maximum number of batches processed sequentially without a delay, within one reading and uploading cycle. With higher levels, more data is sent in a single upload cycle, and more CPU and memory are used to process the data. With lower levels, less data is sent in a single upload cycle, and less CPU and memory are used to process the data. Enum values: `low`, `medium`, and `high`.
 
 `version`
-: Optional<br/>
-**Type**: String<br/>
+: Optional  
+**Type**: String  
 The application's version number. Because `version` is a Datadog tag, it must comply with the rules in [Defining Tags][4].
 
 `flavor`
-: Optional<br/>
-**Type**: String<br/>
+: Optional  
+**Type**: String  
 The flavor (variant) of the application. For stack trace deobfuscation, this must match the flavor set during symbol upload.
 
 `firstPartyHosts`
-: Optional<br/>
-**Type**: List&lt;String&gt;<br/>
+: Optional  
+**Type**: List&lt;String&gt;  
 A list of first party hosts, used in conjunction with Datadog network tracking packages. Overrides any values set in `firstPartyHostsWithTracinHeaders`. To specify different headers per host, use `firstPartyHostsWithTracingHeaders` instead.
 
 `firstPartyHostsWithTracingHeaders`
-: Optional<br/>
-**Type**: Map&lt;String, Set&lt;TracingHeaderType&gt;&gt;<br/>
-A map of first party hosts and the types of tracing headers Datadog automatically injects on resource calls, used in conjunction with Datadog network tracking packages. For example:<br/>
+: Optional  
+**Type**: Map&lt;String, Set&lt;TracingHeaderType&gt;&gt;  
+A map of first party hosts and the types of tracing headers Datadog automatically injects on resource calls, used in conjunction with Datadog network tracking packages. For example:
   ```dart
   final configuration = DatadogConfiguration(
    clientToken: <CLIENT_TOKEN>,
@@ -108,8 +89,8 @@ A map of first party hosts and the types of tracing headers Datadog automaticall
   - `tracecontext`: W3C [trace context header][8]
 
 `rumConfiguration`
-: Optional<br/>
-**Type**: Object<br/>
+: Optional  
+**Type**: Object  
 See [RUM configuration](#rum-configuration).
 
 ### RUM configuration
@@ -117,67 +98,67 @@ See [RUM configuration](#rum-configuration).
 Use the following parameters for the `DatadogRumConfiguration` class.
 
 `applicationId`
-: Required<br/>
-**Type**: String</br>
+: Required  
+**Type**: String  
 The RUM application ID.
 
 `sessionSamplingRate`
-: Optional<br/>
-**Type**: Double<br/>
-**Default**: `100.0`<br/>
+: Optional  
+**Type**: Double  
+**Default**: `100.0`  
 The sampling rate for RUM sessions. Must be between `0.0` (no RUM events are sent) and `100.0` (all RUM events are sent).
 
 `traceSampleRate`
-: Optional<br/>
-**Type**: Double<br/>
-**Default**: `20.0`<br/>
+: Optional  
+**Type**: Double  
+**Default**: `20.0`  
 The sampling rate for resource tracing. Must be between `0.0` (no resources include APM tracing) and `100.0` (all resources include APM tracing).
 
 `traceContextInjection`
-: Optional<br/>
-**Type**: Enum<br/>
-**Default**: `all`<br/>
+: Optional  
+**Type**: Enum  
+**Default**: `all`  
 The strategy for injecting trace context into requests. Enum values can be `all` (inject trace context into all requests) or `sampled` (inject trace context into only sampled requests).
 
 `detectLongTasks`
-: Optional<br/>
-**Type**: Boolean<br/>
-**Default**: `true`<br/>
+: Optional  
+**Type**: Boolean  
+**Default**: `true`  
 Enable or disable long task detection. This capability attempts to detect when an application is doing too much work on the main isolate or native thread, which could prevent your app from rendering at a smooth framerate.
 
 `longTaskThreshold`
-: Optional<br/>
-**Type**: Double<br/>
-**Default**: `0.1`<br/>
+: Optional  
+**Type**: Double  
+**Default**: `0.1`  
 The amount of elapsed time that distinguishes a _long task_, in seconds. If the main isolate takes more than this amount of time to process a microtask, it appears as a long task in Datadog RUM Explorer. Minimum value: `0.02`. On Flutter Web, which always uses a value of `0.05` seconds, this argument is ignored.
 
 `trackFrustrations`
-: Optional<br/>
-**Type**: Boolean<br/>
-**Default**: `true`<br/>
+: Optional  
+**Type**: Boolean  
+**Default**: `true`  
 Enables [automatic collection of user frustrations][9].
 
 `vitalUpdateFrequency`
-: Optional<br/>
-**Type**: Enum<br/>
-**Default**: `average`<br/>
+: Optional  
+**Type**: Enum  
+**Default**: `average`  
 The preferred frequency for collecting mobile vitals. Enum values: `frequent` (100ms),`average` (500ms), and `rare` (1000ms). To disable mobile vitals collection, set this parameter to `null`.
 
 `reportFlutterPerformance`
-: Optional<br/>
-**Type**: Boolean<br/>
-**Default**: `false`
+: Optional  
+**Type**: Boolean  
+**Default**: `false`  
 Enables reporting Flutter-specific performance metrics, including build and raster times.
 
 `customEndpoint`
-: Optional<br/>
-**Type**: String<br/>
+: Optional  
+**Type**: String  
 A custom endpoint for sending RUM data.
 
 `telemetrySampleRate`
-: Optional<br/>
-**Type**: Double<br/>
-**Default**: `20.0`
+: Optional  
+**Type**: Double  
+**Default**: `20.0`  
 The sampling rate for telemetry data, such as errors and debug logs.
 
 ## Tracking from background isolates
@@ -202,9 +183,9 @@ void _backgroundWork(SendPort port) async {
 }
 ```
 
-`attachToBackgroundIsolate` must be called **after** Datadog is initialized in your main isolate, otherwise the call will silently fail and tracking will not be available.
+`attachToBackgroundIsolate` must be called **after** Datadog is initialized in your main isolate, otherwise the call silently fails and tracking is not available.
 
-If you are using [Datadog Tracking HTTP Client][10] to automatically track resources, `attachToBackgroundIsolate` will automatically start tracking resources from the calling isolate.  However, using `Client` from the `http` package or `Dio` will require you re-initialize HTTP tracking for those packages from the background isolate.
+If you are using [Datadog Tracking HTTP Client][10] to automatically track resources, `attachToBackgroundIsolate` automatically starts tracking resources from the calling isolate. However, using `Client` from the `http` package or `Dio` requires you to re-initialize HTTP tracking for those packages from the background isolate.
 
 ## Automatically track resources
 
@@ -221,7 +202,7 @@ final configuration = DatadogConfiguration(
 
 **Note**: The Datadog Tracking HTTP Client modifies [`HttpOverrides.global`][11]. If you are using your own custom `HttpOverrides`, you may need to inherit from [`DatadogHttpOverrides`][12]. In this case, you do not need to call `enableHttpTracking`. Versions of `datadog_tracking_http_client` >= 1.3 check the value of `HttpOverrides.current` and use this for client creation, so you only need to make sure to initialize `HttpOverrides.global` prior to initializing Datadog.
 
-In order to enable Datadog [Distributed Tracing][13], you must set the `DatadogConfiguration.firstPartyHosts` property in your configuration object to a domain that supports distributed tracing. You can also modify the sampling rate for distributed tracing by setting the `tracingSamplingRate` on your `DatadogRumConfiguration`.
+To enable Datadog [distributed tracing][13], you must set the `DatadogConfiguration.firstPartyHosts` property in your configuration object to a domain that supports distributed tracing. You can also modify the sampling rate for distributed tracing by setting the `traceSampleRate` on your `DatadogRumConfiguration`.
 
 - `firstPartyHosts` does not allow wildcards, but matches any subdomains for a given domain. For example, `api.example.com` matches `staging.api.example.com` and `prod.api.example.com`, not `news.example.com`.
 
@@ -262,7 +243,7 @@ void _onHeroImageLoaded() {
 }
 ```
 
-Once you set the timing, it is accessible as `@view.custom_timings.<timing_name>`. For example, `@view.custom_timings.hero_image`.
+After you set the timing, it is accessible as `@view.custom_timings.<timing_name>`. For example, `@view.custom_timings.hero_image`.
 
 To create visualizations in your dashboards, [create a measure][15] first.
 
@@ -339,13 +320,13 @@ To set a custom global attribute, use `DdRum.addAttribute`.
 
 ### Track user sessions
 
-Adding user information to your RUM sessions makes it easy to:
+Adding user information to your RUM sessions makes it possible to:
 
 * Follow the journey of a given user
 * Know which users are the most impacted by errors
 * Monitor performance for your most important users
 
-{{< img src="real_user_monitoring/browser/advanced_configuration/user-api.png" alt="User API in the RUM UI" style="width:90%" >}}
+{% img src="real_user_monitoring/browser/advanced_configuration/user-api.png" alt="User API in the RUM UI" style="width:90%" /%}
 
 | Attribute   | Type   | Description                                                                     |
 | ----------- | ------ | ------------------------------------------------------------------------------- |
@@ -490,10 +471,6 @@ if (DatadogSdk.instance.isFirstPartyHost(host)){
  print('$host is a first party host.');
 }
 ```
-
-## Further reading
-
-{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/rum/application/create
 [2]: /real_user_monitoring/application_monitoring/flutter/setup/
