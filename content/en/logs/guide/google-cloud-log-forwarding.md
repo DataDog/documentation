@@ -4,6 +4,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/stream-logs-datadog-dataflow-template/"
   tag: "Blog"
   text: "Stream your Google Cloud logs to Datadog with Dataflow"
+- link: "https://learn.datadoghq.com/courses/getting-started-gcp"
+  tag: "Learning Center"
+  text: "Getting Started with Observability in Google Cloud with Datadog"
 ---
 
 ## Overview
