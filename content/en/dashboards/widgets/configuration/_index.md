@@ -72,7 +72,7 @@ To customize interactions with data inline your generic widgets, see [Context Li
 
 ## Widget descriptions
 
-Widget descriptions let you add a text description to any dashboard widget, including timeseries, geomap, and bar chart widgets. Use descriptions to provide context about a metric, such as what it represents, how to interpret it, or what action to take.
+Widget descriptions let you add a text description to any dashboard widget. Use descriptions to provide context about a metric, such as what it represents, how to interpret it, or what action to take.
 
 To add a description:
 1. Open the graph editor for the widget.
