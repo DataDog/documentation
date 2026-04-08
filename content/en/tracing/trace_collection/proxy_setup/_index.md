@@ -8,6 +8,7 @@ algolia:
   tags: ['proxies','tracing proxies','proxy']
 ---
 
+hello
 You can set up tracing to include collecting trace information about proxies.
 
 {{< partial name="apm/apm-proxies.html" >}}
