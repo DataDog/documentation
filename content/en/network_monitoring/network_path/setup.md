@@ -348,6 +348,17 @@ Agent `v7.73+` is required.
         # The TTL is reset each time the connection is seen again.
         # pathtest_ttl: 35m
 
+        ## @param filters - list - optional
+        ## Include or exclude specific domains or IP ranges from dynamic monitoring.
+        ## Filters are applied sequentially, with later filters taking precedence.
+        ## See the [filter syntax](#filter-syntax) section for details and examples.
+        #
+        # filters:
+        #   - match_domain: '*.example.com'
+        #     type: exclude
+        #   - match_ip: 10.0.0.0/8
+        #     type: exclude
+
     ```
 
 3. Restart the Agent after making these configuration changes to start seeing network paths.
@@ -401,6 +412,17 @@ Agent `v7.73+` is required.
         # The `pathtest_ttl` refers to the duration (time-to-live) a connection will be monitored when it's not seen anymore.
         # The TTL is reset each time the connection is seen again.
         # pathtest_ttl: 35m
+
+        ## @param filters - list - optional
+        ## Include or exclude specific domains or IP ranges from dynamic monitoring.
+        ## Filters are applied sequentially, with later filters taking precedence.
+        ## See the [filter syntax](#filter-syntax) section for details and examples.
+        #
+        # filters:
+        #   - match_domain: '*.example.com'
+        #     type: exclude
+        #   - match_ip: 10.0.0.0/8
+        #     type: exclude
     ```
 
 3. Restart the Agent after making these configuration changes to start seeing network paths.
@@ -446,6 +468,17 @@ datadog:
     ## The TTL is reset each time the connection is seen again.
     #
     # pathtest_ttl: 35m
+
+    ## @param filters - list - optional
+    ## Include or exclude specific domains or IP ranges from dynamic monitoring.
+    ## Filters are applied sequentially, with later filters taking precedence.
+    ## See the [filter syntax](#filter-syntax) section for details and examples.
+    #
+    # filters:
+    #   - match_domain: '*.example.com'
+    #     type: exclude
+    #   - match_ip: 10.0.0.0/8
+    #     type: exclude
 
 ```
 [1]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/README.md
@@ -512,6 +545,22 @@ network_path:
       - match_domain: 'api.datadoghq.com'
         type: include
 ```
+
+### Source public IP resolution
+
+Network Path resolves the source host's public IP address to provide accurate path visualization for internet-bound traffic. The Agent contacts external IP check services over HTTPS to determine the public IP of the host.
+
+If your network restricts outbound traffic, add the following URLs to your firewall allowlist:
+
+| URL | Provider |
+|-----|----------|
+| `https://icanhazip.com` | Cloudflare |
+| `https://ipinfo.io/ip` | IPinfo |
+| `https://checkip.amazonaws.com` | Amazon |
+| `https://api.ipify.org` | ipify |
+| `https://whatismyip.akamai.com` | Akamai |
+
+The Agent tries each service in order and uses the first successful response. All requests are made over HTTPS (port 443). If none of the services are reachable, the source public IP is unavailable and the path visualization may lack source IP metadata.
 
 ## Troubleshooting
 

@@ -67,7 +67,8 @@ This behavior can be disabled in version 7.72.0 and later by setting <code>conve
 `ndmflow-intake.`{{< region-param key="dd_site" code="true" >}}
 
 [Network Path][14]
-: `netpath-intake.`{{< region-param key="dd_site" code="true" >}}
+: `netpath-intake.`{{< region-param key="dd_site" code="true" >}}<br>
+Network Path also contacts external services over HTTPS to resolve the source host's public IP. If your network restricts outbound traffic, add the following to your allowlist: `icanhazip.com`, `ipinfo.io`, `checkip.amazonaws.com`, `api.ipify.org`, `whatismyip.akamai.com`. See [Network Path Setup][33] for details.
 
 [Orchestrator][5]
 : `orchestrator.`{{< region-param key="dd_site" code="true" >}}<br>
@@ -335,3 +336,4 @@ If you are installing the Datadog Operator in a Kubernetes environment with limi
 [30]: /logs/
 [31]: /data_security/logs/#hipaa-enabled-customers
 [32]: /logs/log_collection/#logging-endpoints
+[33]: /network_monitoring/network_path/setup/#source-public-ip-resolution
