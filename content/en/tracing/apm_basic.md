@@ -83,7 +83,7 @@ When APM Basic is enabled, the Datadog Agent's `system-probe` component uses eBP
 
 ## APM Basic and full APM
 
-APM Basic provides baseline service monitoring. For distributed tracing and deeper application-level insights, instrument your services with [Datadog tracing libraries][5] or [Single Step Instrumentation][1].
+APM Basic provides baseline service monitoring. For distributed tracing and deeper application-level insights, instrument your services with [Datadog tracing libraries][5] or [Single Step Instrumentation][1]. After you add instrumentation, existing monitors, dashboards, and SLOs that use `universal.http.*` metrics continue to work.
 
 | Capability | APM Basic | APM |
 |------------|-----------|-----|
