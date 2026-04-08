@@ -30,7 +30,7 @@ To complete this guide, you need the following:
 This ensures all files are compatible:
 
 ```shell
-DD_AGENT_VERSION="7.78.0-rc.4"
+DD_AGENT_VERSION="7.78.0-rc.7"
 ```
 
 ## Download the Dockerfile
@@ -263,7 +263,7 @@ After the build completes, verify the custom `otel-agent` binary includes your a
    <div class="alert alert-info"><strong>Bug bash</strong>: Use the following command:
 
    ```shell
-   sudo DD_INSTALLER_REGISTRY_AUTH=gcr DD_OTELCOLLECTOR_ENABLED=true datadog-installer install "oci://us-central1-docker.pkg.dev/datadog-sandbox/ddot-byoc-linux/agent-package:7.78.0-rc.4-1"
+   sudo DD_INSTALLER_REGISTRY_AUTH=gcr DD_OTELCOLLECTOR_ENABLED=true datadog-installer install "oci://us-central1-docker.pkg.dev/datadog-sandbox/ddot-byoc-linux/agent-package:7.78.0-rc.7-1"
    ```
    </div>
 5. If the DDOT Collector (Agent) starts, then the build process was successful.
