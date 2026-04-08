@@ -24,7 +24,7 @@ RUM Managed Archive acts as a **safety net**, enabling teams to:
 - **Recover on demand**: Bring back specific sessions for full investigation
 - **Investigate in depth**: Explore recovered sessions like regularly retained sessions
 
-{{< img src="real_user_monitoring/managed_archive/ma1.png" alt="Diagram showing the RUM without Limits lifecycle: ingest, retain with filters, store in Managed Archive, and recover on demand" style="width:100%;" >}}
+{{< img src="real_user_monitoring/managed_archive/managed_archive_lifecycle.png" alt="Diagram showing the RUM without Limits lifecycle: ingest, retain with filters, store in Managed Archive, and recover on demand" style="width:100%;" >}}
 
 Common use cases include:
 
@@ -37,7 +37,7 @@ Common use cases include:
 
 After you enable Managed Archive, all ingested sessions (excluding Synthetic Monitoring sessions) are stored automatically for the configured storage period. These sessions are accessible in a dedicated **Managed Archive UI**, separate from the [RUM Explorer][2].
 
-{{< img src="real_user_monitoring/managed_archive/ma1.png" alt="The Managed Archive UI showing a table of stored sessions with light-indexed attributes" style="width:100%;" >}}
+{{< img src="real_user_monitoring/managed_archive/managed_archive_ui.png" alt="The Managed Archive UI showing a table of stored sessions with light-indexed attributes" style="width:100%;" >}}
 
 All stored sessions, including sessions retained by retention filters or already recovered, are shown in the Managed Archive UI. A set of session tags and attributes are available to help you navigate and identify sessions to recover:
 
@@ -61,9 +61,9 @@ Access to Managed Archive and Recovery is controlled through role-based access c
 
 | Permission | Capability | Default Role |
 |---|---|---|
-| `rum_rehydration_read` | View the Managed Archive configuration and stored sessions, but cannot edit the configuration or recover sessions | Admin |
-| `rum_rehydration_write` | Turn session storage on or off for an application | Admin |
-| `rum_rehydration_index` | Recover sessions | Admin |
+| `rum_recovery_read` | View the Managed Archive configuration and stored sessions, but cannot edit the configuration or recover sessions | Admin |
+| `rum_recovery_write` | Turn session storage on or off for an application | Admin |
+| `rum_recovery_index` | Recover sessions | Admin |
 
 ## Setup
 
@@ -76,7 +76,7 @@ To enable session storage for an application:
 3. Go to **Routing > Managed Archive**.
 4. Toggle **Enable Managed Archive** on and select the storage period.
 
-{{< img src="real_user_monitoring/managed_archive/ma2.png" alt="The Managed Archive configuration panel showing the Store sessions toggle" style="width:70%;" >}}
+{{< img src="real_user_monitoring/managed_archive/managed_archive_setup.png" alt="The Managed Archive configuration panel showing the Store sessions toggle" style="width:70%;" >}}
 
 <div class="alert alert-info">It takes 24 hours for a newly ingested session to appear in the Managed Archive.</div>
 
@@ -84,11 +84,9 @@ Configuration is done at the application level, which means you can apply differ
 
 ## Recover sessions
 
-Recovered sessions are available for 30 days with all their events and attributes, including performance events. Recovered sessions have the same investigation capabilities as sessions retained by a retention filter
-
 In the Managed Archive UI, click **Recover** on the row of the session you want to recover.
 
-{{< img src="real_user_monitoring/managed_archive/ma1.png" alt="A session row in the Managed Archive UI with the Recover button highlighted" style="width:100%;" >}}
+Recovered sessions are available for 30 days with all their events and attributes. Recovered sessions have the same investigation capabilities as sessions retained by a retention filter
 
 After recovering a session, find it in the RUM Explorer by querying on:
 
