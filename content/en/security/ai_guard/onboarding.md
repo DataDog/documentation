@@ -635,11 +635,13 @@ The method returns an Evaluation object containing:
 For multi-modal inputs, you can pass an array of content parts instead of a string. This is useful when including images or other media:
 
 ```ruby
-Datadog::AIGuard.message(role: :user) do |message|
-  message.text("What's in this image?")
-  message.image_url("data:image/jpeg;base64,..."),
+Datadog::AIGuard.evaluate(
+  Datadog::AIGuard.message(role: :user) do |message|
+    message.text("What's in this image?")
+    message.image_url("data:image/jpeg;base64,...")
+  end,
   allow_raise: true
-end
+)
 ```
 
 #### Example: Evaluate a tool call {#ruby-example-evaluate-tool-call}
