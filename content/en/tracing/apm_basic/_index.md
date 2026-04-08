@@ -72,15 +72,7 @@ An operation name of `universal.http.server` or `universal.http.client` on a ser
 
 ## How it works
 
-APM Basic uses eBPF (extended Berkeley Packet Filter) to provide automatic service discovery and health monitoring without requiring code instrumentation.
-
-When APM Basic is enabled, the Datadog Agent's `system-probe` component loads eBPF programs into the Linux kernel. These programs:
-
-1. Hook into network-related system calls (syscalls) to observe inbound and outbound traffic.
-2. Parse HTTP(S) traffic directly from the kernel network stack at the application layer (Layer 7), extracting request and response metadata.
-3. Aggregate the data into service health metrics and report them to Datadog.
-
-Because eBPF operates at the kernel level, it works regardless of the programming language or framework your services use.
+When APM Basic is enabled, the Datadog Agent's `system-probe` component uses eBPF to observe network traffic at the kernel level. It parses HTTP request and response metadata from this traffic and aggregates the data into service health metrics. Because this operates at the kernel level, it works regardless of the programming language or framework your services use.
 
 **Note**: On Windows, APM Basic uses Event Tracing for Windows (ETW) through the `Microsoft-Windows-HttpService` provider instead of eBPF. This provider is only available for IIS-based services. Non-IIS services on Windows support HTTP monitoring only, not HTTPS.
 
