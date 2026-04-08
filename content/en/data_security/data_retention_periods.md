@@ -137,7 +137,7 @@ attributes:
   - product: Product Analytics
     data_type: |
        - **Events**: 15 months
-       - **User Profiles**: 30 days with RUM, extended to 15 months with Product Analytics
+       - **User Profiles**: 15 months, 30 days if [Product Analytics is not enabled][1]
   - product: PR Gates
     data_type: |
        - **Gate evaluations**: 30 days
@@ -175,3 +175,5 @@ attributes:
 ### Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://app.datadoghq.com/rum/list?fromUser=false&refresh_mode=sliding&from_ts=1775594844887&to_ts=1775681244887&live=true
