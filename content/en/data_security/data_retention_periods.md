@@ -137,7 +137,7 @@ attributes:
   - product: Product Analytics
     data_type: |
        - **Events**: 15 months
-       - **User Profiles (Product Analytics disabled)**: 30 days
+       - **User Profiles (RUM enabled)**: 30 days
        - **User Profiles (Product Analytics enabled)**: 15 months
   - product: PR Gates
     data_type: |
