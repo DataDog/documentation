@@ -5,7 +5,7 @@ further_reading:
   text: Transmitir tus logs de Google Cloud a Datadog con Dataflow
 - link: https://learn.datadoghq.com/courses/getting-started-gcp
   tag: Centro de aprendizaje
-  text: Primeros pasos con la observabilidad en Google Cloud con Datadog
+  text: Empezando con la observabilidad en Google Cloud con Datadog
 title: Configuración del reenvío de logs de Google Cloud
 ---
 
