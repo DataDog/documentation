@@ -44,20 +44,40 @@ Incidents carry three timestamp attributes that influence analytics:
 
 Incident Management reports the following analytic measures, which you can use to power analytic queries in Dashboard and Notebook widgets:
 
-- `Customer Impact Duration`: The duration during which customers were impacted, based on the impacts defined on the incident.
-{{< img src="service_management/incidents/analytics/Customer Impact Duration.png" alt="customer impact duration" style="width:100%;">}}
-- `Status Active Duration`: The duration that the incident was in an "active" state, based on the incident timeline.
-{{< img src="service_management/incidents/analytics/Status Active Duration.png" alt="status active duration" style="width:100%;">}}
-- `Status Stable Duration`: The duration that the incident was in a "stable" state, based on the incident timeline.
-{{< img src="service_management/incidents/analytics/StatusStableDuration.png" alt="status stable duration" style="width:100%;">}}
-- `Time to Detect`: The duration from the earliest customer impact to the incident's detection time.
-{{< img src="service_management/incidents/analytics/TimeToDetect.png" alt="time to detect graphic" style="width:100%;">}}
-- `Time to Repair`: The duration from the incident's detection time to the last customer impact.
-{{< img src="service_management/incidents/analytics/TimeToRepair.png" alt="time to repair graphic" style="width:100%;">}}
-- `Time to Resolve`: The duration from the incident's declaration time to the time it was resolved.
-{{< img src="service_management/incidents/analytics/TimeToResolve.png" alt="time to resolve graphic" style="width:100%;">}}
-- `Time to Internal Response`: The duration from incident's detection time to incident's declaration time.
-{{< img src="service_management/incidents/analytics/TimeToInternalResponse.png" alt="time to internal response graphic" style="width:100%;">}}
+{{< collapse-content title="Customer Impact Duration" level="h4" >}}
+The duration during which customers were impacted, based on the impacts defined on the incident.
+{{< img src="service_management/incidents/analytics/Customer Impact Duration.png" alt="customer impact duration" style="width:80%;">}}
+{{< /collapse-content >}}
+
+{{< collapse-content title="Status Active Duration" level="h4" >}}
+The duration that the incident was in an "active" state, based on the incident timeline.
+{{< img src="service_management/incidents/analytics/Status Active Duration.png" alt="status active duration" style="width:80%;">}}
+{{< /collapse-content >}}
+
+{{< collapse-content title="Status Stable Duration" level="h4" >}}
+The duration that the incident was in a "stable" state, based on the incident timeline.
+{{< img src="service_management/incidents/analytics/StatusStableDuration.png" alt="status stable duration" style="width:80%;">}}
+{{< /collapse-content >}}
+
+{{< collapse-content title="Time to Detect" level="h4" >}}
+The duration from the earliest customer impact to the incident's detection time.
+{{< img src="service_management/incidents/analytics/TimeToDetect.png" alt="time to detect graphic" style="width:80%;">}}
+{{< /collapse-content >}}
+
+{{< collapse-content title="Time to Repair" level="h4" >}}
+The duration from the incident's detection time to the last customer impact.
+{{< img src="service_management/incidents/analytics/TimeToRepair.png" alt="time to repair graphic" style="width:80%;">}}
+{{< /collapse-content >}}
+
+{{< collapse-content title="Time to Resolve" level="h4" >}}
+The duration from the incident's declaration time to the time it was resolved.
+{{< img src="service_management/incidents/analytics/TimeToResolve.png" alt="time to resolve graphic" style="width:80%;">}}
+{{< /collapse-content >}}
+
+{{< collapse-content title="Time to Internal Response" level="h4" >}}
+The duration from incident's detection time to incident's declaration time.
+{{< img src="service_management/incidents/analytics/TimeToInternalResponse.png" alt="time to internal response graphic" style="width:80%;">}}
+{{< /collapse-content >}}
 
 In addition to these defaults, you can create new measures by adding custom *Number* property fields in your [Incident Settings][7].
 
