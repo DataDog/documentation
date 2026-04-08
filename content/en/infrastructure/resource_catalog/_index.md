@@ -86,7 +86,7 @@ Clicking on a host opens a side panel with details including:
 - **Agent configuration** information
 - **Infra map** which displays a [Cloudcraft diagram][17]
 
-{{< img src="/infrastructure/resource_catalog/resource_catalog_host_side_panel.png" alt="Resource Catalog with the host side panel open" width="100%">}}
+{{< img src="/infrastructure/resource_catalog/resource_catalog_host_side_panel-2.png" alt="Resource Catalog with the host side panel open" width="100%">}}
 
 Clicking on any resource opens a side panel with details including:
 
