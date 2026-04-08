@@ -13,7 +13,7 @@ What this pack does:
 
 - Extracts metrics by action and terminating rule
 - Optionally, drops and samples `ALLOW` logs
-- Drops unused fields, cleans null, and redacts credentials
+- Drops unused fields, null fields, and redacts credentials
 
 ## Further Reading
 
