@@ -2624,6 +2624,30 @@ menu:
         unstable:
           - v2
         order: 69
+    - name: Get suggested actions for a signal
+      url: '#get-suggested-actions-for-a-signal'
+      identifier: security-monitoring-get-suggested-actions-for-a-signal
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSuggestedActionsMatchingSignal
+        unstable: []
+        order: 88
+    - name: Get investigation queries for a signal
+      url: '#get-investigation-queries-for-a-signal'
+      identifier: security-monitoring-get-investigation-queries-for-a-signal
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetInvestigationLogQueriesMatchingSignal
+        unstable: []
+        order: 87
     - name: Change the related incidents of a security signal
       url: '#change-the-related-incidents-of-a-security-signal'
       identifier: security-monitoring-change-the-related-incidents-of-a-security-signal
