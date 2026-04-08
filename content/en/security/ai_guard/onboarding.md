@@ -630,6 +630,18 @@ The method returns an Evaluation object containing:
 - `reason`: natural language summary of the decision.
 - `tags`: list of tags linked to the evaluation (for example, ```["indirect-prompt-injection", "instruction-override", "destructive-tool-call"]```)
 
+#### Example: Evaluate a user prompt with content parts {#ruby-example-evaluate-user-prompt-content-parts}
+
+For multi-modal inputs, you can pass an array of content parts instead of a string. This is useful when including images or other media:
+
+```ruby
+Datadog::AIGuard.message(role: :user) do |message|
+  message.text("What's in this image?")
+  message.image_url("data:image/jpeg;base64,..."),
+  allow_raise: true
+end
+```
+
 #### Example: Evaluate a tool call {#ruby-example-evaluate-tool-call}
 
 Like evaluating user prompts, the method can also be used to evaluate tool calls:
