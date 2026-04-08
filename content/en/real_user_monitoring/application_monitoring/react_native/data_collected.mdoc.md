@@ -9,10 +9,10 @@ further_reading:
 - link: https://github.com/DataDog/dd-sdk-reactnative
   tag: "Source Code"
   text: Source code for dd-sdk-reactnative
-- link: real_user_monitoring/explorer/
+- link: /real_user_monitoring/explorer/
   tag: Documentation
   text: Learn how to explore your RUM data
-- link: real_user_monitoring/guide/monitor-hybrid-react-native-applications
+- link: /real_user_monitoring/guide/monitor-hybrid-react-native-applications
   tag: Documentation
   text: Monitor hybrid React Native applications
 ---

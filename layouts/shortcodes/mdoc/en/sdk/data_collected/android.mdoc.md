@@ -13,7 +13,7 @@ There are additional [attributes that are specific to a given event type](#event
 
 | Event Type     | Retention | Description     |
 |----------------|-----------|-------------------|
-| Session  | 30 days   | A session represents a real user journey on your mobile application. It begins when the user launches the application, and the session remains live as long as the user stays active. During the user journey, all RUM events generated as part of the session will share the same `session.id` attribute. **Note:** The session resets after 15 minutes of inactivity. If the application is killed by the OS, you can reset the session while the application is in the background. |
+| Session  | 30 days   | A session represents a real user journey on your mobile application. It begins when the user launches the application, and the session remains live as long as the user stays active. During the user journey, all RUM events generated as part of the session share the same `session.id` attribute. **Note:** The session resets after 15 minutes of inactivity. If the application is killed by the OS, you can reset the session while the application is in the background. |
 | View     | 30 days   | A view represents a unique screen (or screen segment) on your mobile application. A view starts and stops when the `onActivityResumed` and `onActivityPaused` callbacks are called through the `ActivityLifecycleCallbacks` interface. Each occurrence is classified as a distinct view. While a user stays on a view, RUM event attributes (Errors, Resources, and Actions) get attached to the view with a unique `view.id`.                     |
 | Resource  | 15 days   | A resource represents network requests to first-party hosts, APIs, and third-party providers in your mobile application. All requests generated during a user session are attached to the view with a unique `resource.id`.                                                                                           |
 | Error     | 30 days   | An error represents an exception or crash emitted by the mobile application attached to the view it is generated in.                                                                                                                                            |
@@ -107,7 +107,7 @@ You can enable [tracking user info][10] globally to collect and apply user attri
 | Attribute name   | Type   | Description                 |
 |------------------|--------|-----------------------------|
 | `usr.email` | string | Email of the user. |
-| `user.id`     | string | Identifier of the user. |
+| `usr.id`     | string | Identifier of the user. |
 | `usr.name` | string | Name of the user. |
 
 ## Event-specific attributes

@@ -5,7 +5,7 @@ It can be included directly in language-specific pages or wrapped in conditional
 
 ## Overview
 
-The RUM iOS SDK generates events that have associated telemetry and attributes. Telemetry are quantifiable values that can be used for measurements related to the event. Attributes are non-quantifiable values used to slice telemetry values (group by) in analytics.
+The RUM iOS SDK generates events that have associated telemetry and attributes. Telemetry is quantifiable values that can be used for measurements related to the event. Attributes are non-quantifiable values used to slice telemetry values (group by) in analytics.
 
 Every RUM event has all of the [default attributes](#default-attributes), for example, the device type (`device.type`) and user information such as their name (`usr.name`) and their country (`geo.country`).
 
@@ -38,7 +38,7 @@ When the application leaves the foreground, RUM automatically stops the current 
 
 ## Default attributes
 
-RUM collects common attributes for all events and attributes specific to each event by default listed below. You can also choose to enrich your user session data with [additional events][6] to default events specific to your application monitoring and business analytics needs.
+By default, RUM collects common attributes for all events and event-specific attributes listed below. You can also choose to enrich your user session data with [additional events][6] to default events specific to your application monitoring and business analytics needs.
 
 ### Common core attributes
 
