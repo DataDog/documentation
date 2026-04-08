@@ -79,7 +79,7 @@ CATEGORY_DEFS = [
     {
         "id": "general",
         "title": "General Settings",
-        "description": "Top-level Datadog configuration: API and application keys, service identity (name, environment, version), Agent connection (host, port, socket), intake site, hostname, global tags, proxy settings, tracing toggle, Data Jobs, Lambda handler, and APM receiver tuning.",
+        "description": "Top-level Datadog configuration: API keys, service identity, Agent connection, intake site, hostname, global tags, and proxy settings.",
         "pattern": "DD_(SERVICE|ENV|VERSION|TAGS|API_KEY|SITE|AGENT_HOST|AGENT_PORT|HOSTNAME|LOG_LEVEL|TRACING_ENABLED|APM_|APP_|APPLICATION_).*",
         "sources": ["general", "apm_settings", "app_config"],
     },
@@ -87,7 +87,7 @@ CATEGORY_DEFS = [
     {
         "id": "trace_core",
         "title": "Tracing Core",
-        "description": "Core distributed tracing engine: Agent connection (URL, port, timeout, socket), trace and span ID generation (128-bit), span lifecycle (limits, buffer sizes, flush intervals, partial flush, abandoned span timeout), scope management, peer service and service mapping, resource URI normalization, query string obfuscation, DB client configuration (split-by-host/instance, metadata fetching, DBM propagation), cloud payload tagging, span attribute schema, global tags, class/classloader exclusions, executor control, and tracer internal metrics.",
+        "description": "Core distributed tracing engine: Agent connection, trace and span ID generation, span lifecycle management, peer service mapping, resource normalization, query string obfuscation, and DB client configuration.",
         "pattern": "DD_TRACE_.*",
         "sources": [
             "trace_core_behavior",
@@ -109,7 +109,7 @@ CATEGORY_DEFS = [
     {
         "id": "trace_sampling",
         "title": "Trace Sampling",
-        "description": "Sampling rules and rates that determine which traces and spans are kept or dropped: global sample rate, per-service and per-operation sampling rules, rate limiting, span-level sampling rules, priority sampling, and sampling mechanism validation.",
+        "description": "Sampling rules and rates that determine which traces and spans are kept or dropped, including per-service rules, rate limiting, and priority sampling.",
         "pattern": "DD_TRACE_(SAMPLE_RATE|SAMPLING_|RATE_LIMIT).*|DD_SPAN_SAMPLING_.*",
         "sources": ["trace_sampling", "general_sampling"],
     },
@@ -117,7 +117,7 @@ CATEGORY_DEFS = [
     {
         "id": "trace_propagation",
         "title": "Trace Propagation",
-        "description": "Distributed trace context propagation (Datadog, B3, W3C TraceContext styles), extraction and injection behavior, baggage handling, request and response header tagging, HTTP client and server configuration (error status codes, query string tagging, URL resource name mapping, split-by-domain), and SQL comment context injection for Database Monitoring.",
+        "description": "Distributed trace context propagation, extraction and injection behavior, baggage handling, header tagging, HTTP client and server configuration, and SQL comment injection for Database Monitoring.",
         "pattern": "DD_TRACE_(PROPAGATION_|BAGGAGE_|HTTP_|HEADER_|RESPONSE_HEADER_|REQUEST_HEADER_).*|DD_PROPAGATION_.*|DD_HTTP_.*",
         "sources": [
             "trace_propagation",
@@ -132,7 +132,7 @@ CATEGORY_DEFS = [
     {
         "id": "trace_integrations",
         "title": "Trace Integrations",
-        "description": "Per-integration tracing configuration following the DD_TRACE_<INTEGRATION>_* pattern: enable/disable, analytics, service name, and peer service overrides for 800+ library integrations. Also includes JMXFetch settings, integration-specific options (JMS, Kafka, RabbitMQ, Redis, gRPC, Spark, Spring, etc.), and controls for disabling specific integrations or instrumentations.",
+        "description": "Per-integration tracing configuration: enable/disable, analytics, service name, and peer service overrides for library integrations. Also includes JMXFetch settings and controls for disabling specific instrumentations.",
         "pattern": "DD_TRACE_<INTEGRATION>_(ENABLED|ANALYTICS_ENABLED|ANALYTICS_SAMPLE_RATE|SERVICE_NAME|PEER_SERVICE|PROPAGATION_ENABLED)|DD_JMXFETCH_.*|DD_TRACE_JMXFETCH_.*",
         "sources": [
             "__integrations__",
@@ -146,7 +146,7 @@ CATEGORY_DEFS = [
     {
         "id": "trace_logging",
         "title": "Trace Logging & Experimental",
-        "description": "Tracer log output settings (log file path, log level, startup logs, debug mode, log rotation) and experimental/preview features that may change across versions, including experimental exporter, JEE split-by-deployment, long-running span flush intervals, state tracking, and preview toggles for security, profiling, and test optimization.",
+        "description": "Tracer log output settings and experimental features that may change across versions.",
         "pattern": "DD_TRACE_(LOG_|STARTUP_LOG|DEBUG|BEAUTIFUL_LOGS|ENCODING_DEBUG|TRIAGE|EXPERIMENTAL_).*|DD_EXPERIMENTAL_.*",
         "sources": [
             "trace_logging",
@@ -160,7 +160,7 @@ CATEGORY_DEFS = [
     {
         "id": "profiling",
         "title": "Continuous Profiling",
-        "description": "Datadog Continuous Profiler: enable/disable, API key and upload configuration, profiling types (CPU, wall-clock, allocation, heap, GC, timeline, execution trace, wait), async-profiler and native ddprof engine options, code hotspots, endpoint profiling, context attributes, JFR settings, stack depth limits, backpressure sampling, and experimental profiling features.",
+        "description": "Continuous Profiler configuration: enable/disable, upload settings, profiling types, engine options, code hotspots, endpoint profiling, and experimental features.",
         "pattern": "DD_PROFILING_.*",
         "sources": [
             "profiling_general",
@@ -175,7 +175,7 @@ CATEGORY_DEFS = [
     {
         "id": "appsec",
         "title": "Application Security",
-        "description": "Datadog Application Security: ASM (WAF rules, RASP, threat blocking, blocked response templates, request body parsing, IP header resolution, SCA), user event tracking, IAST code vulnerability detection (taint tracking, detection mode, redaction, security controls, weak cipher/hash detection), API Security (endpoint schema discovery, request/response sampling), CWS, and error tracking for handled exceptions.",
+        "description": "Application Security configuration: ASM threat detection and blocking, user event tracking, IAST vulnerability detection, API Security schema discovery, and error tracking.",
         "pattern": "DD_APPSEC_.*|DD_IAST_.*|DD_API_SECURITY_.*",
         "sources": [
             "appsec_general",
@@ -190,7 +190,7 @@ CATEGORY_DEFS = [
     {
         "id": "debugging",
         "title": "Dynamic Instrumentation & Debugging",
-        "description": "Remote debugging capabilities: Dynamic Instrumentation (live probes, capture timeouts, serialization depth, redaction rules, bytecode verification, source file tracking), Exception Replay (automatic variable capture on exceptions, callstack and intermediate span capture), and Symbol Database (class/method symbol uploads for source-level debugging).",
+        "description": "Remote debugging capabilities: Dynamic Instrumentation for live probes, Exception Replay for automatic variable capture, and Symbol Database for source-level debugging.",
         "pattern": "DD_DYNAMIC_INSTRUMENTATION_.*|DD_EXCEPTION_(REPLAY_|DEBUGGING_).*|DD_SYMBOL_DATABASE_.*",
         "sources": [
             "dynamic_instrumentation",
@@ -202,7 +202,7 @@ CATEGORY_DEFS = [
     {
         "id": "civisibility",
         "title": "CI Visibility",
-        "description": "CI Visibility and Test Optimization: agentless test reporting, test session configuration, code coverage collection (line-level, report upload), git metadata (commit SHA, branch, author, repository URL), flaky test retry, early flake detection, known/impacted test analysis, test skipping, build instrumentation, CI provider integration, and test framework support (JUnit, TestNG, Playwright, Vitest, Scalatest).",
+        "description": "CI Visibility and Test Optimization: test reporting, code coverage collection, git metadata, flaky test management, test skipping, and CI provider integration.",
         "pattern": "DD_CIVISIBILITY_.*|DD_TEST_.*|DD_GIT_.*",
         "sources": [
             "civisibility_general",
@@ -217,7 +217,7 @@ CATEGORY_DEFS = [
     {
         "id": "crashtracking",
         "title": "Crash Tracking & Diagnostics",
-        "description": "Crash Tracking for capturing and reporting JVM and native crashes: enable/disable, agentless mode, error intake, proxy settings, upload timeout, debug autoconfig, and heap snapshot configuration (count, destination, interval).",
+        "description": "Crash tracking for capturing and reporting application crashes, and heap snapshot configuration.",
         "pattern": "DD_CRASHTRACKING_.*|DD_HEAP_.*",
         "sources": ["crashtracking", "heap_config"],
     },
@@ -225,7 +225,7 @@ CATEGORY_DEFS = [
     {
         "id": "logs",
         "title": "Log Submission & Correlation",
-        "description": "Direct log submission to Datadog (batch size, period, host, integrations, minimum level), agentless log forwarding, log injection for trace-log correlation, and OpenTelemetry log export settings.",
+        "description": "Direct log submission to Datadog, agentless log forwarding, log injection for trace-log correlation, and OpenTelemetry log export.",
         "pattern": "DD_LOGS_.*|DD_AGENTLESS_LOG_.*",
         "sources": ["logs_submission", "agentless_logging"],
     },
@@ -233,7 +233,7 @@ CATEGORY_DEFS = [
     {
         "id": "runtime_metrics",
         "title": "Runtime Metrics",
-        "description": "Runtime metrics collection (JVM, GC, event loop, thread metrics) and the DogStatsD connection used for metric submission: host, port, socket path, flush interval, and StatsD client tuning.",
+        "description": "Runtime metrics collection and DogStatsD connection configuration for metric submission.",
         "pattern": "DD_RUNTIME_METRICS_.*|DD_DOGSTATSD_.*",
         "sources": ["runtime_metrics", "dogstatsd"],
     },
@@ -241,7 +241,7 @@ CATEGORY_DEFS = [
     {
         "id": "data_streams",
         "title": "Data Streams Monitoring",
-        "description": "Data Streams Monitoring (DSM) for tracking end-to-end latency across message queues and streaming pipelines: enable/disable, bucket duration, legacy header support, and transaction extractors.",
+        "description": "Data Streams Monitoring for tracking end-to-end latency across message queues and streaming pipelines.",
         "pattern": "DD_DATA_STREAMS_.*",
         "sources": ["data_streams"],
     },
@@ -249,7 +249,7 @@ CATEGORY_DEFS = [
     {
         "id": "telemetry",
         "title": "Instrumentation Telemetry",
-        "description": "Tracer self-reporting telemetry: enable/disable, agentless and agent-proxy modes, heartbeat and metrics intervals, dependency collection, log collection, debug options, and telemetry forwarder configuration.",
+        "description": "Tracer self-reporting telemetry: heartbeat intervals, dependency and log collection, and telemetry forwarder configuration.",
         "pattern": "DD_TELEMETRY_.*|DD_INSTRUMENTATION_TELEMETRY_.*",
         "sources": ["telemetry", "instrumentation_telemetry"],
     },
@@ -257,7 +257,7 @@ CATEGORY_DEFS = [
     {
         "id": "remote_config",
         "title": "Remote Configuration",
-        "description": "Remote Configuration for receiving live configuration updates from Datadog: enable/disable, poll interval, integrity checks, payload size limits, TUF root verification, and boot timeout.",
+        "description": "Remote Configuration for receiving live configuration updates from Datadog.",
         "pattern": "DD_REMOTE_.*|DD_RC_.*",
         "sources": ["remote_config", "remote_config_advanced"],
     },
@@ -265,7 +265,7 @@ CATEGORY_DEFS = [
     {
         "id": "otel",
         "title": "OpenTelemetry Compatibility",
-        "description": "Standard OpenTelemetry environment variables supported by Datadog SDKs: SDK toggle, service name, resource attributes, propagators, trace sampler, OTLP exporter configuration (endpoint, headers, protocol for traces, logs, and metrics), batch span processor settings, HTTP instrumentation header capture, and Datadog-specific OTel metrics bridge.",
+        "description": "Standard OpenTelemetry environment variables supported by Datadog SDKs: resource attributes, propagators, trace sampler, OTLP exporter configuration, and batch span processor settings.",
         "pattern": "OTEL_.*|DD_OTLP_.*|DD_METRICS_OTEL_.*",
         "sources": [
             "otel_general",
@@ -283,7 +283,7 @@ CATEGORY_DEFS = [
     {
         "id": "rum",
         "title": "Real User Monitoring (RUM)",
-        "description": "Backend RUM injection settings: application ID, client token, session and session replay sample rates, privacy level, resource and user interaction tracking, long task monitoring, and RUM service/environment/version identification.",
+        "description": "Backend Real User Monitoring injection settings: session configuration, privacy level, and resource tracking.",
         "pattern": "DD_RUM_.*",
         "sources": ["rum"],
     },
@@ -291,7 +291,7 @@ CATEGORY_DEFS = [
     {
         "id": "ai_observability",
         "title": "AI & LLM Observability",
-        "description": "AI observability features: AI Guard content scanning (enable, endpoint, size limits), LLM Observability (LLMObs enable, ML app name), and per-provider integration settings for OpenAI, LangChain, and Vertex AI (span capture, prompt/completion sampling, content size limits).",
+        "description": "AI observability features: AI Guard content scanning, LLM Observability, and per-provider integration settings.",
         "pattern": "DD_AI_GUARD_.*|DD_LLMOBS_.*|DD_OPENAI_.*",
         "sources": ["ai_guard", "llm_observability", "openai_integration"],
     },
@@ -299,7 +299,7 @@ CATEGORY_DEFS = [
     {
         "id": "instrumentation",
         "title": "Instrumentation & Platform",
-        "description": "Instrumentation setup and platform-specific configuration: auto-injection (enable, install metadata), .NET tracer home, third-party library detection, code origin for spans, module resolver settings, and platform adapters for Azure App Services, Datadog Service Extension sidecar, and HAProxy SPOA.",
+        "description": "Instrumentation setup and platform-specific configuration: auto-injection, third-party library detection, code origin for spans, and platform adapters.",
         "pattern": "DD_INSTRUMENTATION_.*|DD_THIRD_PARTY_.*|DD_CODE_ORIGIN_.*|DD_INTEGRATION_.*|DD_RESOLVER_.*|DD_AAS_.*|DD_AZURE_.*|DD_SERVICE_EXTENSION_.*",
         "sources": [
             "instrumentation_general",
