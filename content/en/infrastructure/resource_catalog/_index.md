@@ -101,12 +101,12 @@ Clicking on a host opens a side panel with details including:
 
 Clicking on any resource opens a side panel with details including:
 
-- **Resource information** such as the resource type, name, account, and tags associated with the resource.
-- **Resource definition** in JSON showing the full configuration of the asset.
-- **Recent Changes** showing a 7-day history of changes to the resource
-- **Relationship** view showing interdependencies between resources
-- **Service and team ownership** of the resource
-- **Security risks** that the resource is exposed to, including misconfigurations, signals, identity risks, and vulnerabilities
+- **Resource Info** including resource-specific tags and the resource's definition in JSON format 
+- **Metrics**
+- **Relationships**
+- **Logs**
+- **Changes**
+- **Security** 
 
 ## Resource Changes (in Preview)
 
