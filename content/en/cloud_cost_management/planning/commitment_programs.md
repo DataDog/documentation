@@ -7,7 +7,7 @@ further_reading:
   text: "Learn about Cloud Cost Management"
 ---
 
-<div class="alert alert-info">CCM Commitment Programs supports Reserved Instances and Savings Plans, for EC2, RDS, and ElastiCache on AWS, and Virtual Machines on Azure.</div>
+<div class="alert alert-info">CCM Commitment Programs supports Reserved Instances and Savings Plans, for EC2, RDS, and ElastiCache on AWS.</div>
 
 ## Overview
 
