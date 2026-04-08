@@ -16,7 +16,7 @@ further_reading:
   text: "Learn about Datasets"
 ---
 {{< callout url="https://www.datadoghq.com/product/ai/llm-observability/" btn_hidden="false" header="Join the Preview">}}
-Topic Pattern Analysis is in Preview.
+Patterns is in Preview.
 {{< /callout >}}
 
 ## Overview
@@ -27,7 +27,7 @@ Patterns automatically clusters your LLM application's production traffic into m
 
 Patterns uses text embeddings to group your application's inputs into hierarchical topics. Topic labels are automatically generated using an LLM, giving you an interpretable view of production behavior without manual tagging.
 
-When you run a pipeline, Pattern Analysis:
+When you run a pipeline, Patterns:
 
 1. Pulls LLM interactions from your production traffic based on your filter and sampling configuration
 2. Embeds interactions semantically and clusters them
