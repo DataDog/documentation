@@ -48,7 +48,8 @@ It's recommended to use <a href="https://www.php.net/supported-versions">officia
 
 | PHP Version    | Support level        | Package version |
 |:---------------|:---------------------|:----------------|
-| 8.4.x          | General Availability | > `1.5.0+`     |
+| 8.5.x          | General Availability | > `1.14.0+`     |
+| 8.4.x          | General Availability | > `1.5.0+`      |
 | 8.3.x          | General Availability | > `0.93.0+`     |
 | 8.2.x          | General Availability | > `0.82.0+`     |
 | 8.1.x          | General Availability | > `0.66.0+`     |
