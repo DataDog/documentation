@@ -12,7 +12,7 @@ AWS WAF captures AWS WAF logs from CloudWatch, S3, or Firehose.
 What this pack does:
 
 - Extracts metrics by action and terminating rule
-- Optional drop/sample ALLOW
+- Optionally, drops and samples `ALLOW` logs
 - Drops unused fields, cleans null, and redacts credentials
 
 ## Further Reading
