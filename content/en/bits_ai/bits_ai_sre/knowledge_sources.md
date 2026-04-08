@@ -112,7 +112,7 @@ If the conclusion was inaccurate, provide Bits AI SRE with the correct root caus
 
 **Example high-quality root cause feedback**: "High memory usage in auth-service pod due to memory leak in session cache, causing OOM kills every 2 hours starting at 2025-11-15 14:30 UTC. This is evidenced by `https://app.datadoghq.com/logs?<rest_of_link>`"
 
-Every piece of feedback you provide creates a **memory**. Bits AI SRE dynamically selects which memories to use in future investigations to improve its performance. It applies past corrections in similar contexts, reuses effective queries, and refines how it prioritizes investigative steps. Over time, this enables Bits AI SRE to adapt to your environment, becoming more accurate and efficient with each investigation.
+All positive feedback and any negative feedback with detail provided in Bits' chat creates **memory**. Bits AI SRE dynamically selects which memories to use in future investigations to improve its performance. It applies past corrections in similar contexts, reuses effective queries, and refines how it prioritizes investigative steps. Over time, this enables Bits AI SRE to adapt to your environment, becoming more accurate and efficient with each investigation.
 
 To manage memories, including viewing and deleting them, go to the **Memories** column of the [Monitor Management][1] page.
 
