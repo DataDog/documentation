@@ -12,7 +12,7 @@ further_reading:
 
 ## Overview
 
-Monitor the usage of Flex compute through various graphs on the [Flex Logs Controls][1] page. Make informed decisions using data on cost-performance tradeoffs and balance operational success with financial efficiency.
+Monitor the usage of Flex compute through various graphs on the [Flex Logs Controls][1] page. Track concurrent query utilization and Fair Use limit impact to make informed decisions on cost-performance tradeoffs.
 
 {{< img src="/logs/guide/flex_compute/flex_compute_graphs_1.png" alt="Dashboard showing the query performance and compute size metrics, including query slowdowns, top sources of slowdowns, and compute usage over time" style="width:100%;" >}}
 
@@ -20,7 +20,7 @@ Monitor the usage of Flex compute through various graphs on the [Flex Logs Contr
 
 Flex compute is limited by two factors:
 - The number of concurrent queries
-- The maximum number of logs that can be scanned per query
+- The per-query [Fair Use limit][4] on addressable logs
 
 Query slowdowns occur when the concurrent query limit is reached, and a query is retrying to find an available slot to run in. If an available slot is not found, the query will not run. Datadog displays an error message advising you to retry your query at a later time.
 
@@ -31,9 +31,23 @@ Query slowdowns occur when the concurrent query limit is reached, and a query is
 - **Top sources of slowdowns:** Breaks down whether delays originate from the Log Explorer, dashboards, or API queries, making it easier to target areas for optimization.
 - **Drilldowns:** Click on a dashboard or user to open directly to the dashboard or the user history of Flex queries in [Audit Trail][2]. **Note**: Only Logs List queries are audited. This does not include queries used for visualizations, such as timeseries or top list.
 
+## Monitoring Fair Use limits
+
+Each Flex compute tier enforces a per-query limit on the number of [addressable logs][4]. Queries that exceed this limit are rejected. The **Compute Usage - Fair Use Limit** section on the [Flex Logs Controls][1] page provides visibility into how these limits affect your queries.
+
+{{< img src="/logs/guide/flex_compute/flex_compute_fair_use.png" alt="Dashboard showing Fair Use limit metrics, including rejected queries over time, percentage of limited queries by day, and top sources of limited queries" style="width:100%;" >}}
+
+### Available metrics
+
+- **Rejected queries over time:** Shows the number of queries rejected due to the Fair Use limit as a timeseries, helping you identify spikes in rejected queries.
+- **Percentage of limited queries by day of the week:** Provides an overview of the percentage of queries reaching the Fair Use limit by day, helping identify patterns in compute demand.
+- **Top sources of limited queries:** Breaks down whether rejected queries originate from the Log Explorer, dashboards, or API queries, and identifies the top dashboards and users affected. Click on a dashboard or user to open the dashboard directly or view the user's history of Flex queries in [Audit Trail][2].
+
 ## Optimization recommendations
 
 Use this information to optimize your usage.
+
+### Reduce concurrent query slowdowns
 
 1. **Reach out to outlier users to:**
    - Discuss their querying needs
@@ -46,6 +60,12 @@ Use this information to optimize your usage.
 1. **Consider upgrading your Flex compute size** to increase the concurrent query limit if you notice sustained query slowdowns.
 1. **Scope to the index** you are querying. If the logs you are querying belong to a specific index, scoping to that index can speed up your search.
 
+### Reduce Fair Use limit rejections
+
+1. **Narrow query time ranges** to reduce the number of addressable logs targeted by each query.
+1. **Scope queries to a specific index** using `index:<name>` to reduce the number of addressable logs counted by the query.
+1. **Consider upgrading your Flex compute size** if queries regularly reach the Fair Use limit. Larger compute tiers support a higher number of addressable logs per query.
+
 To learn more about compute sizes, see the [Flex Logs][3] documentation.
 
 ## Further reading
@@ -55,3 +75,4 @@ To learn more about compute sizes, see the [Flex Logs][3] documentation.
 [1]: https://app.datadoghq.com/logs/pipelines/flex-logs-controls
 [2]: /account_management/audit_trail/#explore-audit-events
 [3]: /logs/log_configuration/flex_logs/
+[4]: /logs/log_configuration/flex_logs/#fair-use-limit
