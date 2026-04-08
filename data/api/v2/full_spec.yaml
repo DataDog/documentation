@@ -25814,6 +25814,7 @@ components:
           description: Tags associated with the feature flag.
           example: []
           items:
+            description: A tag associated with the feature flag.
             type: string
           type: array
         updated_at:
@@ -25867,6 +25868,7 @@ components:
             - "test-feature-flag"
             - "env-search-term"
           items:
+            description: A query string targeting the environment.
             type: string
           type: array
         is_production:
