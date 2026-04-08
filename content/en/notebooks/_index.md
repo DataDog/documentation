@@ -28,7 +28,7 @@ further_reading:
 
 ## Overview
 
-Notebooks are collaborative rich text documents that give you all the power of Datadog graphs. Multiple users can work together to put together an investigation or postmortem featuring live data from your incident. Notebooks are also great for runbooks and documentation featuring real insights into your systems alongside your content.
+Notebooks are collaborative rich text documents that give you all the power of Datadog graphs. Multiple users can work together to put together an investigation or [postmortem][8] featuring live data from your incident. Notebooks are also great for runbooks and documentation featuring real insights into your systems alongside your content.
 
 ## Creating a notebook
 
@@ -39,7 +39,7 @@ You can create a notebook in two places:
 
 ### Notebook templates
 
-In the [Template Gallery][2], see ready-to-use templates which you can create new notebooks from. Templates include an Incident Response postmortem, an Incident Report, and SLO Specification. You can also create a new custom template to build reusable notebook structures.
+In the [Template Gallery][2], see ready-to-use templates which you can create new notebooks from. Templates include an Incident Response [postmortem][8], an Incident Report, and SLO Specification. You can also create a new custom template to build reusable notebook structures.
 
 ## Editing a notebook
 
@@ -291,9 +291,10 @@ You can sort notebooks by selecting the ⭐, details, or modified headers to sor
 
 
 [1]: https://app.datadoghq.com/notebook/list
-[2]: https://app.datadoghq.com/notebook/template-gallery
+[2]: https://app.datadoghq.com/notebook/list?location=templates
 [3]: /dashboards/querying/#graphing-editor
 [4]: https://www.markdownguide.org/basic-syntax/#images-1
 [5]: /dashboards/template_variables/
 [6]: /notebooks/guide/version_history
 [7]: /account_management/rbac/
+[8]: /incident_response/incident_management/post_incident/postmortems

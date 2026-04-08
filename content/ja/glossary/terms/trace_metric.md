@@ -1,4 +1,5 @@
 ---
+id: trace_metric
 core_product:
 - apm
 title: トレースメトリクス

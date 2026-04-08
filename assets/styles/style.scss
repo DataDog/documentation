@@ -69,6 +69,7 @@ $baseImgURL: '{{.Site.Params.img_url}}';
 @import 'components/expression-language';
 @import 'components/ddsql-schema';
 @import 'components/admonitions';
+@import 'components/metrics-table';
 
 @import 'components/main-nav'; // imported from websites-modules
 @import 'components/mobile-nav'; // imported from websites-modules
@@ -76,6 +77,7 @@ $baseImgURL: '{{.Site.Params.img_url}}';
 @import 'components/demo-request-modal'; // imported from websites-modules
 
 @import 'components/collapsible-section'; // Collapsible section styles
+@import 'components/stepper';
 
 @import 'components/tooltip'; // Tooltip shortcode styles
 @import "components/multifilter-search";

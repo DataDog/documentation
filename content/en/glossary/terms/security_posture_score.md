@@ -1,4 +1,5 @@
 ---
+id: security_posture_score
 title: security posture score
 synonyms:
   - posture score

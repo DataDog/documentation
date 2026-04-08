@@ -75,9 +75,9 @@ Monitor the cost, latency, performance, and usage trends for all your LLM applic
 
 ## Evaluate the quality and effectiveness of your LLM applications
 
-Identify problematic clusters and monitor the quality of responses over time with topical clustering and checks like sentiment, failure to answer, and so on.
+Understand what users are asking your LLM application, identify coverage gaps, and monitor the quality of responses over time with [Patterns][10] — automated hierarchical topic clustering of your production traffic.
 
-{{< img src="llm_observability/cluster_map/box.png" alt="The box packing layout displays clusters of traces represented by colored circles, and includes a panel listing clusters with topics, trace counts, and failure rates." style="width:100%;" >}}
+{{< img src="llm_observability/topic-detail.png" alt="Topic detail view showing scatter plot of interaction embeddings alongside a table of interactions with topic labels and confidence score" style="width:100%;" >}}
 
 ## Safeguard sensitive data and identify malicious users
 
@@ -92,11 +92,11 @@ LLM Observability Insights provides a monitoring experience that helps users ide
 Outlier detection is performed across key dimensions:
 - Span name
 - Workflow type
-- [Cluster input/output topics][10]
+- [Patterns input/output topics][10]
 
 These outliers are analyzed over the past week and automatically surfaced in the corresponding time window selected by the user. This enables teams to proactively detect regressions, performance drifts, or unexpected behavior in their LLM applications.
 
-{{< img src="llm_observability/llm-insights.png" alt="An 'Insights' banner across the top of the LLM Observability Monitor page. The banner displays 10 insights and has a View Insights button that leads to a side panel with further details." style="width:100%;" >}}
+{{< img src="llm_observability/Overview_LLMO.png" alt="An 'Insights' banner across the top of the LLM Observability Monitor page. The banner displays 8 insights and has a View Insights button that leads to a side panel with further details." style="width:100%;" >}}
 
 ## Use integrations with LLM Observability
 
@@ -123,4 +123,4 @@ See the [Setup documentation][5] for instructions on instrumenting your LLM appl
 [7]: https://app.datadoghq.com/dash/integration/llm_operational_insights
 [8]: /llm_observability/setup/auto_instrumentation
 [9]: /llm_observability/evaluations/managed_evaluations
-[10]: /llm_observability/monitoring/cluster_map
+[10]: /llm_observability/monitoring/patterns

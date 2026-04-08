@@ -155,6 +155,10 @@
     "name": "Fastly Integration",
     "description": "Manage your Datadog Fastly integration accounts and services directly through the Datadog API. See the [Fastly integration page](https://docs.datadoghq.com/integrations/fastly/) for more information."
   },
+  "feature-flags": {
+    "name": "Feature Flags",
+    "description": "Manage feature flags and environments."
+  },
   "fleet-automation": {
     "name": "Fleet Automation",
     "description": "Manage automated deployments across your fleet of hosts.\n\nFleet Automation provides two types of deployments:\n\nConfiguration Deployments (`/configure`):\n- Apply configuration file changes to target hosts\n- Support merge-patch operations to update specific configuration fields\n- Support delete operations to remove configuration files\n- Useful for updating Datadog Agent settings, integration configs, and more\n\nPackage Upgrade Deployments (`/upgrade`):\n- Upgrade the Datadog Agent to specific versions"
@@ -281,7 +285,7 @@
   },
   "product-analytics": {
     "name": "Product Analytics",
-    "description": "Send server-side events to Product Analytics. Server-Side Events Ingestion allows you to collect custom events\nfrom any server-side source, and retains events for 15 months. Server-side events are helpful for understanding\ncauses of a funnel drop-off which are external to the client-side (for example, payment processing error).\nSee the [Product Analytics page](https://docs.datadoghq.com/product_analytics/) for more information."
+    "description": "Send server-side events to Product Analytics. Server-Side Events Ingestion allows you to collect custom events\nfrom any server-side source, and retains events for 15 months. Server-side events are helpful for understanding\ncauses of a funnel drop-off which are external to the client-side (for example, payment processing error).\n\n**Note**: Sending server-side events impacts billing. Review the [pricing page](https://www.datadoghq.com/pricing/?product=product-analytics#products)\nand contact your Customer Success Manager for more information."
   },
   "rum": {
     "name": "RUM",
@@ -331,6 +335,10 @@
     "name": "SCIM",
     "description": "Provision Datadog users and teams using SCIM APIs.\n\nNote: SCIM provisioning for Datadog teams is only available for select organizations at this point. Request access by contacting Datadog support, or see the [SCIM page](https://docs.datadoghq.com/account_management/scim/) for more information."
   },
+  "scorecards": {
+    "name": "Scorecards",
+    "description": "API to create and update scorecard rules and outcomes. See [Scorecards](https://docs.datadoghq.com/service_catalog/scorecards) for more information."
+  },
   "seats": {
     "name": "Seats",
     "description": "The seats API allows you to view, assign, and unassign seats for your organization."
@@ -354,10 +362,6 @@
   "service-level-objectives": {
     "name": "Service Level Objectives",
     "description": "[Service Level Objectives](https://docs.datadoghq.com/monitors/service_level_objectives/#configuration)\n(SLOs) are a key part of the site reliability engineering toolkit.\nSLOs provide a framework for defining clear targets around application performance,\nwhich ultimately help teams provide a consistent customer experience,\nbalance feature development with platform stability,\nand improve communication with internal and external users."
-  },
-  "service-scorecards": {
-    "name": "Service Scorecards",
-    "description": "API to create and update scorecard rules and outcomes. See [Service Scorecards](https://docs.datadoghq.com/service_catalog/scorecards) for more information.\n\nThis feature is currently in BETA. If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/)."
   },
   "servicenow-integration": {
     "name": "ServiceNow Integration",
@@ -406,6 +410,10 @@
   "users": {
     "name": "Users",
     "description": "Create, edit, and disable users."
+  },
+  "widgets": {
+    "name": "Widgets",
+    "description": "Create, read, update, and delete saved widgets. Widgets are reusable\nvisualization components stored independently from any dashboard or notebook,\npartitioned by experience type and identified by a UUID."
   },
   "workflow-automation": {
     "name": "Workflow Automation",

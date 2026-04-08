@@ -185,6 +185,38 @@ After you save, Datadog begins syncing your information schema and query history
 
 After the initial sync completes, create a [Data Observability monitor][5] to start alerting on freshness, row count, column-level metrics, and custom SQL metrics.
 
+## Troubleshoot permissions
+
+If Datadog is unable to see expected databases, schemas, or tables in your Snowflake account, follow these steps to verify that the Datadog role has the correct access.
+
+<div class="alert alert-info">The Snowflake console enables secondary roles by default, which can make it appear that a role has more access than it actually does. Step 2 below helps ensure you are testing with only the Datadog role's permissions.</div>
+
+1. Set the role and user to the same ones provisioned for Datadog:
+   ```sql
+   USE ROLE DATADOG_ROLE;
+   ```
+
+2. Disable secondary roles so that only the Datadog role's grants are active:
+   ```sql
+   USE SECONDARY ROLES NONE;
+   ```
+
+3. Check that the correct role is set and no secondary roles are in use:
+   ```sql
+   SELECT CURRENT_ROLE(), CURRENT_SECONDARY_ROLES();
+   ```
+
+4. List the databases the Datadog role can access:
+   ```sql
+   SELECT database_name FROM snowflake.information_schema.databases;
+   ```
+
+5. Check access to specific schemas or tables:
+   ```sql
+   SHOW SCHEMAS IN DATABASE "<DATABASE_NAME>";
+   SHOW TABLES IN SCHEMA "<DATABASE_NAME>"."<SCHEMA_NAME>";
+   ```
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}

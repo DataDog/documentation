@@ -613,6 +613,13 @@
       "description": "Create deployment rule returns \"OK\" response"
     }
   ],
+  "TriggerDeploymentGatesEvaluation": [
+    {
+      "group": "deployment_gates",
+      "suffix": "_691804290",
+      "description": "Trigger a deployment gates evaluation returns \"Accepted\" response"
+    }
+  ],
   "UpdateDeploymentGate": [
     {
       "group": "deployment_gates",
@@ -700,6 +707,41 @@
       "group": "fastly_integration",
       "suffix": "",
       "description": "Update Fastly account returns \"OK\" response"
+    }
+  ],
+  "CreateFeatureFlag": [
+    {
+      "group": "feature_flags",
+      "suffix": "",
+      "description": "Create a feature flag returns \"Created\" response"
+    }
+  ],
+  "CreateAllocationsForFeatureFlagInEnvironment": [
+    {
+      "group": "feature_flags",
+      "suffix": "_3662093014",
+      "description": "Create allocation for a flag in an environment returns \"Created\" response"
+    }
+  ],
+  "CreateFeatureFlagsEnvironment": [
+    {
+      "group": "feature_flags",
+      "suffix": "",
+      "description": "Create an environment returns \"Created\" response"
+    }
+  ],
+  "UpdateFeatureFlag": [
+    {
+      "group": "feature_flags",
+      "suffix": "",
+      "description": "Update a feature flag returns \"OK\" response"
+    }
+  ],
+  "UpdateAllocationsForFeatureFlagInEnvironment": [
+    {
+      "group": "feature_flags",
+      "suffix": "_3789036209",
+      "description": "Update targeting rules for a flag in an environment returns \"OK\" response"
     }
   ],
   "MakeGCPSTSDelegate": [
@@ -1267,6 +1309,11 @@
   "ValidatePipeline": [
     {
       "group": "observability_pipelines",
+      "suffix": "_884022323",
+      "description": "Validate a metrics pipeline with opentelemetry source returns \"OK\" response"
+    },
+    {
+      "group": "observability_pipelines",
       "suffix": "",
       "description": "Validate an observability pipeline returns \"OK\" response"
     },
@@ -1274,6 +1321,11 @@
       "group": "observability_pipelines",
       "suffix": "_3024756866",
       "description": "Validate an observability pipeline with OCSF mapper custom mapping returns \"OK\" response"
+    },
+    {
+      "group": "observability_pipelines",
+      "suffix": "_3067748504",
+      "description": "Validate an observability pipeline with OCSF mapper keep_unmatched returns \"OK\" response"
     },
     {
       "group": "observability_pipelines",
@@ -1535,6 +1587,34 @@
       "group": "rum_retention_filters",
       "suffix": "",
       "description": "Update a RUM retention filter returns \"Updated\" response"
+    }
+  ],
+  "CreateScorecardRule": [
+    {
+      "group": "scorecards",
+      "suffix": "",
+      "description": "Create a new rule returns \"Created\" response"
+    }
+  ],
+  "CreateScorecardOutcomesBatch": [
+    {
+      "group": "scorecards",
+      "suffix": "",
+      "description": "Create outcomes batch returns \"OK\" response"
+    }
+  ],
+  "UpdateScorecardOutcomes": [
+    {
+      "group": "scorecards",
+      "suffix": "_2262047257",
+      "description": "Update Scorecard outcomes asynchronously returns \"Accepted\" response"
+    }
+  ],
+  "UpdateScorecardRule": [
+    {
+      "group": "scorecards",
+      "suffix": "_1831541184",
+      "description": "Update an existing rule returns \"Rule updated successfully\" response"
     }
   ],
   "AttachJiraIssue": [
@@ -1977,34 +2057,6 @@
       "description": "Create a new SLO report returns \"OK\" response"
     }
   ],
-  "CreateScorecardRule": [
-    {
-      "group": "service_scorecards",
-      "suffix": "",
-      "description": "Create a new rule returns \"Created\" response"
-    }
-  ],
-  "CreateScorecardOutcomesBatch": [
-    {
-      "group": "service_scorecards",
-      "suffix": "",
-      "description": "Create outcomes batch returns \"OK\" response"
-    }
-  ],
-  "UpdateScorecardOutcomesAsync": [
-    {
-      "group": "service_scorecards",
-      "suffix": "",
-      "description": "Update Scorecard outcomes asynchronously returns \"Accepted\" response"
-    }
-  ],
-  "UpdateScorecardRule": [
-    {
-      "group": "service_scorecards",
-      "suffix": "",
-      "description": "Update an existing rule returns \"Rule updated successfully\" response"
-    }
-  ],
   "UpsertCatalogEntity": [
     {
       "group": "software_catalog",
@@ -2122,6 +2174,13 @@
       "description": "Save new value for on-demand concurrency cap returns \"OK\" response"
     }
   ],
+  "CreateTeamMembership": [
+    {
+      "group": "teams",
+      "suffix": "",
+      "description": "Add a user to a team returns \"Represents a user's association to a team\" response"
+    }
+  ],
   "AddTeamHierarchyLink": [
     {
       "group": "teams",
@@ -2148,6 +2207,13 @@
       "description": "Create a team with V2 fields returns \"CREATED\" response"
     }
   ],
+  "CreateTeamConnections": [
+    {
+      "group": "teams",
+      "suffix": "",
+      "description": "Create team connections returns \"Created\" response"
+    }
+  ],
   "CreateTeamNotificationRule": [
     {
       "group": "teams",
@@ -2155,11 +2221,18 @@
       "description": "Create team notification rule returns \"OK\" response"
     }
   ],
+  "DeleteTeamConnections": [
+    {
+      "group": "teams",
+      "suffix": "",
+      "description": "Delete team connections returns \"No Content\" response"
+    }
+  ],
   "SyncTeams": [
     {
       "group": "teams",
-      "suffix": "_3215592344",
-      "description": "Sync teams returns \"OK\" response"
+      "suffix": "",
+      "description": "Link Teams with GitHub Teams returns \"No Content\" response"
     }
   ],
   "UpdateTeamLink": [
@@ -2174,6 +2247,11 @@
       "group": "teams",
       "suffix": "",
       "description": "Update a team returns \"OK\" response"
+    },
+    {
+      "group": "teams",
+      "suffix": "_780342264",
+      "description": "Update a team with partial update returns \"OK\" response"
     }
   ],
   "UpdateTeamMembership": [

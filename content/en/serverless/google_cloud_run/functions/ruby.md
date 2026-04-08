@@ -73,6 +73,8 @@ logger.info "Hello World!"
 
 {{% serverless-init-env-vars-sidecar language="ruby" function="true" defaultSource="cloudrun" %}}
 
+{{% svl-tracing-env %}}
+
 ## Troubleshooting
 
 {{% serverless-init-troubleshooting productNames="Cloud Run services" %}}
