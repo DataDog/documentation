@@ -13,7 +13,7 @@ What this pack does:
 
 - Parses and renames fields
 - Generates metrics by severity and by event name
-- Drops Accept traffic; samples low-severity events
+- Drops `Accept` traffic; samples low-severity events
 
 ## Further Reading
 
