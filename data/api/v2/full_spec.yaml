@@ -1263,6 +1263,15 @@ components:
         example: "550e8400-e29b-41d4-a716-446655440001"
         format: uuid
         type: string
+    exposure_schedule_id:
+      description: The ID of the exposure schedule.
+      in: path
+      name: exposure_schedule_id
+      required: true
+      schema:
+        example: "550e8400-e29b-41d4-a716-446655440010"
+        format: uuid
+        type: string
     feature_flag_id:
       description: The ID of the feature flag.
       in: path
@@ -2072,6 +2081,13 @@ components:
       properties:
         data:
           $ref: "#/components/schemas/AWSCloudAuthPersonaMappingsData"
+          example:
+            - attributes:
+                account_identifier: "test@test.com"
+                account_uuid: "12bbdc5c-5966-47e0-8733-285f9e44bcf4"
+                arn_pattern: "arn:aws:iam::123456789012:user/testuser"
+              id: "c5c758c6-18c2-4484-ae3f-46b84128404a"
+              type: aws_cloud_auth_config
       required:
         - data
       type: object
@@ -3334,6 +3350,334 @@ components:
         - WARN
         - ERROR
         - OK
+    Allocation:
+      description: Targeting rule (allocation) details for a feature flag environment.
+      properties:
+        created_at:
+          description: The timestamp when the targeting rule allocation was created.
+          example: "2024-01-01T12:00:00Z"
+          format: date-time
+          type: string
+        environment_ids:
+          description: Environment IDs associated with this targeting rule allocation.
+          example:
+            - "550e8400-e29b-41d4-a716-446655440001"
+          items:
+            description: Environment ID linked to this targeting rule allocation.
+            format: uuid
+            type: string
+          type: array
+        experiment_id:
+          description: The experiment ID linked to this targeting rule allocation.
+          example: "550e8400-e29b-41d4-a716-446655440030"
+          nullable: true
+          type: string
+        exposure_schedule:
+          $ref: "#/components/schemas/AllocationExposureSchedule"
+        guardrail_metrics:
+          description: Guardrail metrics associated with this targeting rule allocation.
+          items:
+            $ref: "#/components/schemas/GuardrailMetric"
+          type: array
+        id:
+          description: The unique identifier of the targeting rule allocation.
+          example: "550e8400-e29b-41d4-a716-446655440020"
+          format: uuid
+          type: string
+        key:
+          description: The unique key of the targeting rule allocation.
+          example: "prod-rollout"
+          type: string
+        name:
+          description: The display name of the targeting rule.
+          example: "Production Rollout"
+          type: string
+        order_position:
+          description: Sort order position within the environment.
+          example: 0
+          format: int64
+          type: integer
+        targeting_rules:
+          description: Conditions associated with this targeting rule allocation.
+          items:
+            $ref: "#/components/schemas/TargetingRule"
+          type: array
+        type:
+          $ref: "#/components/schemas/AllocationType"
+        updated_at:
+          description: The timestamp when the targeting rule allocation was last updated.
+          example: "2024-01-01T12:00:00Z"
+          format: date-time
+          type: string
+        variant_weights:
+          description: Weighted variant assignments for this targeting rule allocation.
+          items:
+            $ref: "#/components/schemas/VariantWeight"
+          type: array
+      required:
+        - name
+        - key
+        - targeting_rules
+        - variant_weights
+        - order_position
+        - environment_ids
+        - type
+        - guardrail_metrics
+        - created_at
+        - updated_at
+      type: object
+    AllocationDataRequest:
+      description: Data wrapper for allocation request payloads.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/UpsertAllocationRequest"
+        type:
+          $ref: "#/components/schemas/AllocationDataType"
+      required:
+        - type
+        - attributes
+      type: object
+    AllocationDataResponse:
+      description: Data wrapper for targeting rule allocation responses.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/Allocation"
+        id:
+          description: The unique identifier of the targeting rule allocation.
+          example: "550e8400-e29b-41d4-a716-446655440020"
+          format: uuid
+          type: string
+        type:
+          $ref: "#/components/schemas/AllocationDataType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    AllocationDataType:
+      description: The resource type.
+      enum:
+        - "allocations"
+      example: "allocations"
+      type: string
+      x-enum-varnames:
+        - ALLOCATIONS
+    AllocationExposureGuardrailTrigger:
+      description: Guardrail trigger details for a progressive rollout.
+      properties:
+        allocation_exposure_schedule_id:
+          description: The progressive rollout ID this trigger belongs to.
+          example: "550e8400-e29b-41d4-a716-446655440010"
+          format: uuid
+          type: string
+        created_at:
+          description: The timestamp when this trigger was created.
+          example: "2024-01-01T12:00:00Z"
+          format: date-time
+          type: string
+        flagging_variant_id:
+          description: The variant ID that triggered this event.
+          example: "550e8400-e29b-41d4-a716-446655440001"
+          format: uuid
+          type: string
+        id:
+          description: The unique identifier of the guardrail trigger.
+          example: "550e8400-e29b-41d4-a716-446655440080"
+          format: uuid
+          type: string
+        metric_id:
+          description: The metric ID associated with the trigger.
+          example: "metric-error-rate"
+          type: string
+        triggered_action:
+          description: The action that was triggered.
+          example: "PAUSE"
+          type: string
+        updated_at:
+          description: The timestamp when this trigger was last updated.
+          example: "2024-01-01T12:00:00Z"
+          format: date-time
+          type: string
+      required:
+        - id
+        - allocation_exposure_schedule_id
+        - flagging_variant_id
+        - metric_id
+        - triggered_action
+        - created_at
+        - updated_at
+      type: object
+    AllocationExposureRolloutStep:
+      description: Exposure progression step details.
+      properties:
+        allocation_exposure_schedule_id:
+          description: The progressive rollout ID this step belongs to.
+          example: "550e8400-e29b-41d4-a716-446655440010"
+          format: uuid
+          type: string
+        created_at:
+          description: The timestamp when the progression step was created.
+          example: "2024-01-01T12:00:00Z"
+          format: date-time
+          type: string
+        exposure_ratio:
+          description: The exposure ratio for this step.
+          example: 0.1
+          format: double
+          maximum: 1
+          minimum: 0
+          type: number
+        grouped_step_index:
+          description: Logical index grouping related steps.
+          example: 0
+          format: int64
+          minimum: 0
+          type: integer
+        id:
+          description: The unique identifier of the progression step.
+          example: "550e8400-e29b-41d4-a716-446655440040"
+          format: uuid
+          type: string
+        interval_ms:
+          description: Step duration in milliseconds.
+          example: 3600000
+          format: int64
+          nullable: true
+          type: integer
+        is_pause_record:
+          description: Whether this step represents a pause record.
+          example: false
+          type: boolean
+        order_position:
+          description: Sort order for the progression step.
+          example: 0
+          format: int64
+          type: integer
+        updated_at:
+          description: The timestamp when the progression step was last updated.
+          example: "2024-01-01T12:00:00Z"
+          format: date-time
+          type: string
+      required:
+        - id
+        - allocation_exposure_schedule_id
+        - order_position
+        - exposure_ratio
+        - is_pause_record
+        - grouped_step_index
+        - created_at
+        - updated_at
+      type: object
+    AllocationExposureSchedule:
+      description: Progressive release details for a targeting rule allocation.
+      properties:
+        absolute_start_time:
+          description: The absolute UTC start time for this schedule.
+          example: "2025-06-13T12:00:00Z"
+          format: date-time
+          nullable: true
+          type: string
+        allocation_id:
+          description: The targeting rule allocation ID this progressive rollout belongs to.
+          example: "550e8400-e29b-41d4-a716-446655440020"
+          format: uuid
+          type: string
+        control_variant_id:
+          description: The control variant ID used for experiment comparisons.
+          example: "550e8400-e29b-41d4-a716-446655440012"
+          nullable: true
+          type: string
+        created_at:
+          description: The timestamp when the schedule was created.
+          example: "2024-01-01T12:00:00Z"
+          format: date-time
+          type: string
+        guardrail_triggered_action:
+          description: Last guardrail action triggered for this schedule.
+          example: "PAUSE"
+          nullable: true
+          type: string
+        guardrail_triggers:
+          description: Guardrail trigger records for this schedule.
+          items:
+            $ref: "#/components/schemas/AllocationExposureGuardrailTrigger"
+          type: array
+        id:
+          description: The unique identifier of the progressive rollout.
+          example: "550e8400-e29b-41d4-a716-446655440010"
+          format: uuid
+          type: string
+        rollout_options:
+          $ref: "#/components/schemas/RolloutOptions"
+        rollout_steps:
+          description: Ordered progression steps for exposure.
+          items:
+            $ref: "#/components/schemas/AllocationExposureRolloutStep"
+          type: array
+        updated_at:
+          description: The timestamp when the schedule was last updated.
+          example: "2024-01-01T12:00:00Z"
+          format: date-time
+          type: string
+      required:
+        - allocation_id
+        - rollout_options
+        - rollout_steps
+        - guardrail_triggers
+        - created_at
+        - updated_at
+      type: object
+    AllocationExposureScheduleData:
+      description: Data wrapper for progressive rollout schedule responses.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/AllocationExposureSchedule"
+        id:
+          description: The unique identifier of the progressive rollout.
+          example: "550e8400-e29b-41d4-a716-446655440010"
+          format: uuid
+          type: string
+        type:
+          $ref: "#/components/schemas/AllocationExposureScheduleDataType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    AllocationExposureScheduleDataType:
+      description: The resource type for progressive rollout schedules.
+      enum:
+        - "allocation_exposure_schedules"
+      example: "allocation_exposure_schedules"
+      type: string
+      x-enum-varnames:
+        - ALLOCATION_EXPOSURE_SCHEDULES
+    AllocationExposureScheduleResponse:
+      description: Response containing a progressive rollout schedule.
+      properties:
+        data:
+          $ref: "#/components/schemas/AllocationExposureScheduleData"
+      required:
+        - data
+      type: object
+    AllocationResponse:
+      description: Response containing a single targeting rule (allocation).
+      properties:
+        data:
+          $ref: "#/components/schemas/AllocationDataResponse"
+      required:
+        - data
+      type: object
+    AllocationType:
+      description: The type of targeting rule (called allocation in the API model).
+      enum:
+        - FEATURE_GATE
+        - CANARY
+      example: "FEATURE_GATE"
+      type: string
+      x-enum-varnames:
+        - FEATURE_GATE
+        - CANARY
     Annotation:
       description: "A list of annotations used in the workflow. These are like sticky notes for your workflow!"
       properties:
@@ -9406,6 +9750,110 @@ components:
         - name
         - expression
       type: object
+    CampaignResponse:
+      description: Response containing campaign data.
+      properties:
+        data:
+          $ref: "#/components/schemas/CampaignResponseData"
+      required:
+        - data
+      type: object
+    CampaignResponseAttributes:
+      description: Campaign attributes.
+      properties:
+        created_at:
+          description: Creation time of the campaign.
+          example: "2023-12-15T10:30:00Z"
+          format: date-time
+          type: string
+        description:
+          description: The description of the campaign.
+          example: Campaign to improve security posture for Q1 2024.
+          type: string
+        due_date:
+          description: The due date of the campaign.
+          example: "2024-03-31T23:59:59Z"
+          format: date-time
+          type: string
+        entity_scope:
+          description: Entity scope query to filter entities for this campaign.
+          example: kind:service AND team:platform
+          type: string
+        guidance:
+          description: Guidance for the campaign.
+          example: Please ensure all services pass the security requirements.
+          type: string
+        key:
+          description: The unique key for the campaign.
+          example: q1-security-2024
+          type: string
+        modified_at:
+          description: Time of last campaign modification.
+          example: "2024-01-05T14:20:00Z"
+          format: date-time
+          type: string
+        name:
+          description: The name of the campaign.
+          example: Q1 Security Campaign
+          type: string
+        owner:
+          description: The UUID of the campaign owner.
+          example: 550e8400-e29b-41d4-a716-446655440000
+          type: string
+        start_date:
+          description: The start date of the campaign.
+          example: "2024-01-01T00:00:00Z"
+          format: date-time
+          type: string
+        status:
+          description: The status of the campaign.
+          example: in_progress
+          type: string
+      required:
+        - key
+        - name
+        - owner
+        - status
+        - start_date
+        - created_at
+        - modified_at
+      type: object
+    CampaignResponseData:
+      description: Campaign data.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/CampaignResponseAttributes"
+        id:
+          description: The unique ID of the campaign.
+          example: c10ODp0VCrrIpXmz
+          type: string
+        type:
+          $ref: "#/components/schemas/CampaignType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    CampaignStatus:
+      description: The status of the campaign.
+      enum:
+        - in_progress
+        - not_started
+        - completed
+      example: in_progress
+      type: string
+      x-enum-varnames:
+        - IN_PROGRESS
+        - NOT_STARTED
+        - COMPLETED
+    CampaignType:
+      description: The JSON:API type for campaigns.
+      enum:
+        - campaign
+      example: campaign
+      type: string
+      x-enum-varnames:
+        - CAMPAIGN
     Case:
       description: A case
       properties:
@@ -12742,6 +13190,92 @@ components:
         - SEARCH
         - CONTAINER
         - CALLOUTVALUE
+    Condition:
+      description: Targeting condition details.
+      properties:
+        attribute:
+          description: The user or request attribute to evaluate.
+          example: "country"
+          type: string
+        created_at:
+          description: The timestamp when the condition was created.
+          example: "2024-01-01T12:00:00Z"
+          format: date-time
+          type: string
+        id:
+          description: The unique identifier of the condition.
+          example: "550e8400-e29b-41d4-a716-446655440070"
+          format: uuid
+          type: string
+        operator:
+          $ref: "#/components/schemas/ConditionOperator"
+        updated_at:
+          description: The timestamp when the condition was last updated.
+          example: "2024-01-01T12:00:00Z"
+          format: date-time
+          type: string
+        value:
+          description: Values used by the selected operator.
+          example: ["US", "CA"]
+          items:
+            description: Target value for the selected operator.
+            type: string
+          type: array
+      required:
+        - id
+        - operator
+        - attribute
+        - value
+        - created_at
+        - updated_at
+      type: object
+    ConditionOperator:
+      description: The operator used in a targeting condition.
+      enum:
+        - LT
+        - LTE
+        - GT
+        - GTE
+        - MATCHES
+        - NOT_MATCHES
+        - ONE_OF
+        - NOT_ONE_OF
+        - IS_NULL
+        - EQUALS
+      example: "ONE_OF"
+      type: string
+      x-enum-varnames:
+        - LT
+        - LTE
+        - GT
+        - GTE
+        - MATCHES
+        - NOT_MATCHES
+        - ONE_OF
+        - NOT_ONE_OF
+        - IS_NULL
+        - EQUALS
+    ConditionRequest:
+      description: Condition request payload for targeting rules.
+      properties:
+        attribute:
+          description: The user or request attribute to evaluate.
+          example: "user_tier"
+          type: string
+        operator:
+          $ref: "#/components/schemas/ConditionOperator"
+        value:
+          description: Values used by the selected operator.
+          example: ["premium", "enterprise"]
+          items:
+            description: Target value for the selected operator.
+            type: string
+          type: array
+      required:
+        - operator
+        - attribute
+        - value
+      type: object
     ConfigCatCredentials:
       description: The definition of the `ConfigCatCredentials` object.
       oneOf:
@@ -14168,6 +14702,14 @@ components:
         data:
           $ref: "#/components/schemas/ActionConnectionData"
       type: object
+    CreateAllocationsRequest:
+      description: Request to create targeting rules (allocations) for a feature flag in an environment.
+      properties:
+        data:
+          $ref: "#/components/schemas/AllocationDataRequest"
+      required:
+        - data
+      type: object
     CreateAppRequest:
       description: A request object for creating a new app.
       example:
@@ -14379,6 +14921,78 @@ components:
           description: The title of the attachment.
           example: Postmortem-IR-123
           type: string
+      type: object
+    CreateCampaignRequest:
+      description: Request to create a new campaign.
+      properties:
+        data:
+          $ref: "#/components/schemas/CreateCampaignRequestData"
+      required:
+        - data
+      type: object
+    CreateCampaignRequestAttributes:
+      description: Attributes for creating a new campaign.
+      properties:
+        description:
+          description: The description of the campaign.
+          example: Campaign to improve security posture for Q1 2024.
+          type: string
+        due_date:
+          description: The due date of the campaign.
+          example: "2024-03-31T23:59:59Z"
+          format: date-time
+          type: string
+        entity_scope:
+          description: Entity scope query to filter entities for this campaign.
+          example: kind:service AND team:platform
+          type: string
+        guidance:
+          description: Guidance for the campaign.
+          example: Please ensure all services pass the security requirements.
+          type: string
+        key:
+          description: The unique key for the campaign.
+          example: q1-security-2024
+          type: string
+        name:
+          description: The name of the campaign.
+          example: Q1 Security Campaign
+          type: string
+        owner_id:
+          description: The UUID of the campaign owner.
+          example: 550e8400-e29b-41d4-a716-446655440000
+          type: string
+        rule_ids:
+          description: Array of rule IDs associated with this campaign.
+          example: ["q8MQxk8TCqrHnWkx", "r9NRyl9UDrsIoXly"]
+          items:
+            description: The unique ID of a scorecard rule.
+            type: string
+          type: array
+        start_date:
+          description: The start date of the campaign.
+          example: "2024-01-01T00:00:00Z"
+          format: date-time
+          type: string
+        status:
+          $ref: "#/components/schemas/CampaignStatus"
+      required:
+        - name
+        - key
+        - owner_id
+        - start_date
+        - rule_ids
+      type: object
+    CreateCampaignRequestData:
+      description: Data for creating a new campaign.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/CreateCampaignRequestAttributes"
+        type:
+          $ref: "#/components/schemas/CampaignType"
+      required:
+        - type
+        - attributes
       type: object
     CreateCaseRequestArray:
       description: List of requests to create cases for security findings.
@@ -15421,7 +16035,7 @@ components:
       description: Scorecard create rule request data.
       properties:
         attributes:
-          $ref: "#/components/schemas/RuleAttributes"
+          $ref: "#/components/schemas/RuleAttributesRequest"
         type:
           $ref: "#/components/schemas/RuleType"
       type: object
@@ -24408,6 +25022,78 @@ components:
           example: "One or several indexes are missing or invalid. Results hold data from the other indexes."
           type: string
       type: object
+    ExposureRolloutStepRequest:
+      description: Rollout step request payload.
+      properties:
+        exposure_ratio:
+          description: The exposure ratio for this step.
+          example: 0.5
+          format: double
+          maximum: 1
+          minimum: 0
+          type: number
+        grouped_step_index:
+          description: Logical index grouping related steps.
+          example: 1
+          format: int64
+          minimum: 0
+          type: integer
+        id:
+          description: The unique identifier of the progression step.
+          example: "550e8400-e29b-41d4-a716-446655440040"
+          format: uuid
+          type: string
+        interval_ms:
+          description: Step duration in milliseconds.
+          example: 3600000
+          format: int64
+          nullable: true
+          type: integer
+        is_pause_record:
+          description: Whether this step represents a pause record.
+          example: false
+          type: boolean
+      required:
+        - exposure_ratio
+        - is_pause_record
+        - grouped_step_index
+      type: object
+    ExposureScheduleRequest:
+      description: Progressive release request payload.
+      properties:
+        absolute_start_time:
+          description: The absolute UTC start time for this schedule.
+          example: "2025-06-13T12:00:00Z"
+          format: date-time
+          nullable: true
+          type: string
+        control_variant_id:
+          description: The control variant ID used for experiment comparisons.
+          example: "550e8400-e29b-41d4-a716-446655440012"
+          nullable: true
+          type: string
+        control_variant_key:
+          description: The control variant key used during creation workflows.
+          example: "control"
+          nullable: true
+          type: string
+        id:
+          description: The unique identifier of the progressive rollout.
+          example: "550e8400-e29b-41d4-a716-446655440010"
+          format: uuid
+          type: string
+        rollout_options:
+          $ref: "#/components/schemas/RolloutOptionsRequest"
+        rollout_steps:
+          description: Ordered progression steps for exposure.
+          items:
+            $ref: "#/components/schemas/ExposureRolloutStepRequest"
+          minItems: 1
+          type: array
+      required:
+        - rollout_options
+        - rollout_steps
+      type: object
     ExternalUser:
       description: Definition of a user.
       properties:
@@ -25131,6 +25817,13 @@ components:
           description: Indicates whether this feature flag requires approval for changes.
           example: false
           type: boolean
+        tags:
+          description: Tags associated with the feature flag.
+          example: []
+          items:
+            description: A tag associated with the feature flag.
+            type: string
+          type: array
         updated_at:
           description: The timestamp when the feature flag was last updated.
           example: "2023-01-01T00:00:00Z"
@@ -25176,6 +25869,15 @@ components:
           description: The name of the environment.
           example: "env-search-term"
           type: string
+        environment_queries:
+          description: Queries that target this environment.
+          example:
+            - "test-feature-flag"
+            - "env-search-term"
+          items:
+            description: A query string targeting the environment.
+            type: string
+          type: array
         is_production:
           description: Indicates whether the environment is production.
           example: false
@@ -25277,7 +25979,7 @@ components:
         product:
           description: |-
             Name of the product the dataset is for. Possible values are 'apm', 'rum',
-            'metrics' (Custom Metrics), 'logs', 'error_tracking', 'cloud_cost', and 'sd_repoinfo'.
+            'metrics', 'logs', 'error_tracking', 'cloud_cost', and 'sd_repoinfo'.
           example: "logs"
           type: string
       required:
@@ -29357,6 +30059,47 @@ components:
         example: "env:production"
         type: string
       type: array
+    GuardrailMetric:
+      description: Guardrail metric details.
+      properties:
+        metric_id:
+          description: The metric ID to monitor.
+          example: "metric-error-rate"
+          type: string
+        trigger_action:
+          $ref: "#/components/schemas/GuardrailTriggerAction"
+        triggered_by:
+          description: The signal or system that triggered the action.
+          example: "guardrail_monitor"
+          nullable: true
+          type: string
+      required:
+        - metric_id
+        - trigger_action
+      type: object
+    GuardrailMetricRequest:
+      description: Guardrail metric request payload.
+      properties:
+        metric_id:
+          description: The metric ID to monitor.
+          example: "metric-error-rate"
+          type: string
+        trigger_action:
+          $ref: "#/components/schemas/GuardrailTriggerAction"
+      required:
+        - metric_id
+        - trigger_action
+      type: object
+    GuardrailTriggerAction:
+      description: Action to perform when a guardrail threshold is triggered.
+      enum:
+        - PAUSE
+        - ABORT
+      example: "PAUSE"
+      type: string
+      x-enum-varnames:
+        - PAUSE
+        - ABORT
     HTTPBody:
       description: The definition of `HTTPBody` object.
       properties:
@@ -30343,6 +31086,11 @@ components:
       properties:
         data:
           $ref: "#/components/schemas/IncidentHandlesResponseData"
+          example:
+            - attributes:
+                name: "@incident-sev-1"
+              id: "12ceee6d-a7c0-4407-bc54-30e54140d7f0"
+              type: incident_handles
         included:
           $ref: "#/components/schemas/IncidentHandleIncludedResponse"
       required:
@@ -34735,6 +35483,12 @@ components:
       properties:
         data:
           $ref: "#/components/schemas/JiraAccountsData"
+          example:
+            - attributes:
+                consumer_key: "consumer-key-1"
+                instance_url: "https://example.atlassian.net"
+              id: "account-1"
+              type: jira-account
         meta:
           $ref: "#/components/schemas/JiraAccountsMeta"
       required:
@@ -35056,6 +35810,17 @@ components:
       properties:
         data:
           $ref: "#/components/schemas/JiraIssueTemplatesData"
+          example:
+            - attributes:
+                fields:
+                  description:
+                    payload: "Test Description"
+                    type: "json"
+                issue_type_id: "10001"
+                name: "Bug Report Template"
+                project_id: "PROJECT-1"
+              id: "65b3341b-0680-47f9-a6d4-134db45c603e"
+              type: jira-issue-template
         included:
           $ref: "#/components/schemas/JiraAccountsData"
       required:
@@ -36664,6 +37429,18 @@ components:
           format: int64
           type: integer
       type: object
+    ListAllocationsResponse:
+      description: Response containing a list of targeting rules (allocations).
+      properties:
+        data:
+          description: List of targeting rules (allocations).
+          items:
+            $ref: "#/components/schemas/AllocationDataResponse"
+            description: Allocation item.
+          type: array
+      required:
+        - data
+      type: object
     ListAppKeyRegistrationsResponse:
       description: A paginated list of app key registrations.
       properties:
@@ -36806,6 +37583,22 @@ components:
       required:
         - data
       type: object
+    ListCampaignsResponse:
+      description: Response containing a list of campaigns.
+      properties:
+        data:
+          $ref: "#/components/schemas/ListCampaignsResponseData"
+        meta:
+          $ref: "#/components/schemas/PaginatedResponseMeta"
+      required:
+        - data
+        - meta
+      type: object
+    ListCampaignsResponseData:
+      description: Array of campaigns.
+      items:
+        $ref: "#/components/schemas/CampaignResponseData"
+      type: array
     ListConnectionsResponse:
       description: Response containing the list of all data source connections configured for an entity.
       example:
@@ -37337,6 +38130,14 @@ components:
       properties:
         data:
           $ref: "#/components/schemas/ListFindingsData"
+          example:
+            - attributes:
+                evaluation: fail
+                resource: "arn:aws:s3:::my-bucket"
+                resource_type: aws_s3_bucket
+                status: open
+              id: "abc-123-xyz"
+              type: finding
         meta:
           $ref: "#/components/schemas/ListFindingsMeta"
       required:
@@ -37509,6 +38310,19 @@ components:
           example: "/api/v2/scorecard/rules?page%5Blimit%5D=2&page%5Boffset%5D=2&page%5Bsize%5D=2"
           type: string
       type: object
+    ListScorecardsResponse:
+      description: Response containing a list of scorecards.
+      properties:
+        data:
+          $ref: "#/components/schemas/ListScorecardsResponseData"
+      required:
+        - data
+      type: object
+    ListScorecardsResponseData:
+      description: Array of scorecards.
+      items:
+        $ref: "#/components/schemas/ScorecardListResponseData"
+      type: array
     ListSecurityFindingsResponse:
       description: The expected response schema when listing security findings.
       properties:
@@ -47961,6 +48775,12 @@ components:
       properties:
         data:
           $ref: "#/components/schemas/OutcomesBatchResponseData"
+          example:
+            - attributes:
+                service_name: my-service
+                state: pass
+              id: "outcome-abc123"
+              type: rule-outcome
         meta:
           $ref: "#/components/schemas/OutcomesBatchResponseMeta"
       required:
@@ -48132,6 +48952,17 @@ components:
         - ARRAY_NUMBER
         - ARRAY_BOOLEAN
         - ARRAY_OBJECT
+    OverwriteAllocationsRequest:
+      description: Request to overwrite targeting rules (allocations) for a feature flag in an environment.
+      properties:
+        data:
+          description: Targeting rules (allocations) to replace existing ones with.
+          items:
+            $ref: "#/components/schemas/AllocationDataRequest"
+          type: array
+      required:
+        - data
+      type: object
     PageUrgency:
       default: high
       description: On-Call Page urgency level.
@@ -48143,6 +48974,35 @@ components:
       x-enum-varnames:
         - LOW
         - HIGH
+    PaginatedResponseMeta:
+      description: Metadata for scores response.
+      properties:
+        count:
+          description: Number of entities in this response.
+          example: 10
+          format: int64
+          type: integer
+        limit:
+          description: Pagination limit.
+          example: 10
+          format: int64
+          type: integer
+        offset:
+          description: Pagination offset.
+          example: 0
+          format: int64
+          type: integer
+        total:
+          description: Total number of entities available.
+          example: 150
+          format: int64
+          type: integer
+      required:
+        - count
+        - total
+        - limit
+        - offset
+      type: object
     Pagination:
       description: Pagination object.
       properties:
@@ -53899,6 +54759,53 @@ components:
       type: string
       x-enum-varnames:
         - ROLES
+    RolloutOptions:
+      description: Applied progression options for a progressive rollout.
+      properties:
+        autostart:
+          description: Whether the schedule starts automatically.
+          example: false
+          type: boolean
+        selection_interval_ms:
+          description: Interval in milliseconds for uniform interval strategies.
+          example: 3600000
+          format: int64
+          type: integer
+        strategy:
+          $ref: "#/components/schemas/RolloutStrategy"
+      required:
+        - strategy
+        - autostart
+        - selection_interval_ms
+      type: object
+    RolloutOptionsRequest:
+      description: Rollout options request payload.
+      properties:
+        autostart:
+          description: Whether the schedule should begin automatically.
+          example: false
+          nullable: true
+          type: boolean
+        selection_interval_ms:
+          description: Interval in milliseconds for uniform interval strategies.
+          example: 3600000
+          format: int64
+          type: integer
+        strategy:
+          $ref: "#/components/schemas/RolloutStrategy"
+      required:
+        - strategy
+      type: object
+    RolloutStrategy:
+      description: The progression strategy used by a progressive rollout.
+      enum:
+        - UNIFORM_INTERVALS
+        - NO_ROLLOUT
+      example: "UNIFORM_INTERVALS"
+      type: string
+      x-enum-varnames:
+        - UNIFORM_INTERVALS
+        - NO_ROLLOUT
     RoutingRule:
       description: Represents a routing rule, including its attributes, relationships, and unique identifier.
       properties:
@@ -54013,6 +54920,38 @@ components:
           type: string
         owner:
           description: Owner of the rule.
+          type: string
+        scope_query:
+          description: A query to filter which entities this rule applies to.
+          example: "kind:service"
+          type: string
+        scorecard_name:
+          description: The scorecard name to which this rule must belong.
+          example: Deployments automated via Deployment Trains
+          type: string
+      type: object
+    RuleAttributesRequest:
+      description: Attributes for creating or updating a rule. Server-managed fields (created_at, modified_at, custom) are excluded.
+      properties:
+        description:
+          description: Explanation of the rule.
+          type: string
+        enabled:
+          description: If enabled, the rule is calculated as part of the score.
+          example: true
+          type: boolean
+        level:
+          $ref: "#/components/schemas/RuleLevel"
+        name:
+          description: Name of the rule.
+          example: Team Defined
+          type: string
+        owner:
+          description: Owner of the rule.
+          type: string
+        scope_query:
+          description: A query to filter which entities this rule applies to.
+          example: "kind:service"
           type: string
         scorecard_name:
           description: The scorecard name to which this rule must belong.
@@ -56519,6 +57458,56 @@ components:
       type: string
       x-enum-varnames:
         - USERS
+    ScorecardListResponseAttributes:
+      description: Scorecard attributes.
+      properties:
+        created_at:
+          description: Creation time of the scorecard.
+          example: "2023-01-15T10:30:00Z"
+          format: date-time
+          type: string
+        description:
+          description: The description of the scorecard.
+          example: Best practices for observability.
+          type: string
+        modified_at:
+          description: Time of last scorecard modification.
+          example: "2024-01-05T14:20:00Z"
+          format: date-time
+          type: string
+        name:
+          description: The name of the scorecard.
+          example: Observability Best Practices
+          type: string
+      required:
+        - name
+        - created_at
+        - modified_at
+      type: object
+    ScorecardListResponseData:
+      description: Scorecard data.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/ScorecardListResponseAttributes"
+        id:
+          description: The unique ID of the scorecard.
+          example: q8MQxk8TCqrHnWkx
+          type: string
+        type:
+          $ref: "#/components/schemas/ScorecardListType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    ScorecardListType:
+      description: The JSON:API type for scorecard list.
+      enum:
+        - scorecard
+      example: scorecard
+      type: string
+      x-enum-varnames:
+        - SCORECARD
     ScorecardType:
       default: scorecard
       description: The JSON:API type for scorecard.
@@ -58761,6 +59750,17 @@ components:
       required:
         - data
       type: object
+    SecurityMonitoringSignalInvestigationQueryTemplateVariables:
+      additionalProperties:
+        items:
+          description: A value for this template variable extracted from the signal.
+          type: string
+        type: array
+      description: Template variables applied to the investigation log query, mapping attribute paths to values extracted from the signal.
+      example:
+        "@userIdentity.arn":
+          - foo
+      type: object
     SecurityMonitoringSignalListRequest:
       description: The request for a security signal list.
       properties:
@@ -59143,6 +60143,82 @@ components:
       properties:
         data:
           $ref: "#/components/schemas/SecurityMonitoringSignalStateUpdateData"
+      required:
+        - data
+      type: object
+    SecurityMonitoringSignalSuggestedAction:
+      description: A suggested action for a security signal.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/SecurityMonitoringSignalSuggestedActionAttributes"
+        id:
+          description: The unique ID of the suggested action.
+          example: w00-t10-992
+          type: string
+        type:
+          $ref: "#/components/schemas/SecurityMonitoringSignalSuggestedActionType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    SecurityMonitoringSignalSuggestedActionAttributes:
+      description: Attributes of a suggested action for a security signal. The available fields depend on the action type.
+      properties:
+        name:
+          description: The name of the investigation log query.
+          example: Cloudtrail events for user ARN
+          type: string
+        query_filter:
+          description: The log query filter for the investigation.
+          example: 'source:cloudtrail @userIdentity.arn:"foo"'
+          type: string
+        template_variables:
+          $ref: "#/components/schemas/SecurityMonitoringSignalInvestigationQueryTemplateVariables"
+        title:
+          description: The title of the recommended blog post.
+          example: Monitor Okta logs to track system access and unusual activity
+          type: string
+        url:
+          description: The URL of the suggested action.
+          example: /logs?query=source%3Acloudtrail+%40userIdentity.arn%3A%22foo%22
+          type: string
+      type: object
+    SecurityMonitoringSignalSuggestedActionList:
+      description: List of suggested actions for a security signal.
+      example:
+        - attributes:
+            name: Cloudtrail events for user ARN
+            query_filter: 'source:cloudtrail @userIdentity.arn:"foo"'
+            template_variables:
+              "@userIdentity.arn":
+                - foo
+            url: /logs?query=source%3Acloudtrail+%40userIdentity.arn%3A%22foo%22
+          id: w00-t10-992
+          type: investigation_log_queries
+        - attributes:
+            title: Monitor Okta logs to track system access and unusual activity
+            url: https://www.datadoghq.com/blog/monitor-activity-with-okta/
+          id: bxy-o8v-i1a
+          type: recommended_blog_posts
+      items:
+        $ref: "#/components/schemas/SecurityMonitoringSignalSuggestedAction"
+      type: array
+    SecurityMonitoringSignalSuggestedActionType:
+      description: The type of the suggested action resource.
+      enum:
+        - investigation_log_queries
+        - recommended_blog_posts
+      example: investigation_log_queries
+      type: string
+      x-enum-varnames:
+        - INVESTIGATION_LOG_QUERIES
+        - RECOMMENDED_BLOG_POSTS
+    SecurityMonitoringSignalSuggestedActionsResponse:
+      description: Response with suggested actions for a security signal.
+      properties:
+        data:
+          $ref: "#/components/schemas/SecurityMonitoringSignalSuggestedActionList"
       required:
         - data
       type: object
@@ -62104,6 +63180,13 @@ components:
       properties:
         data:
           $ref: "#/components/schemas/ServiceNowAssignmentGroupsData"
+          example:
+            - attributes:
+                group_name: "IT Operations"
+                group_sys_id: "abc123def456"
+                instance_id: "65b3341b-0680-47f9-a6d4-134db45c603e"
+              id: "65b3341b-0680-47f9-a6d4-134db45c603e"
+              type: assignment_groups
       required:
         - data
       type: object
@@ -62211,6 +63294,13 @@ components:
       properties:
         data:
           $ref: "#/components/schemas/ServiceNowBusinessServicesData"
+          example:
+            - attributes:
+                instance_id: "65b3341b-0680-47f9-a6d4-134db45c603e"
+                service_name: "IT Support"
+                service_sys_id: "abc123def456"
+              id: "65b3341b-0680-47f9-a6d4-134db45c603e"
+              type: business_services
       required:
         - data
       type: object
@@ -62267,6 +63357,11 @@ components:
       properties:
         data:
           $ref: "#/components/schemas/ServiceNowInstancesData"
+          example:
+            - attributes:
+                instance_name: "my-servicenow-instance"
+              id: "65b3341b-0680-47f9-a6d4-134db45c603e"
+              type: instance
       required:
         - data
       type: object
@@ -62512,6 +63607,13 @@ components:
       properties:
         data:
           $ref: "#/components/schemas/ServiceNowTemplatesData"
+          example:
+            - attributes:
+                handle_name: "incident-template"
+                instance_id: "65b3341b-0680-47f9-a6d4-134db45c603e"
+                servicenow_tablename: "incident"
+              id: "65b3341b-0680-47f9-a6d4-134db45c603e"
+              type: servicenow_templates
       required:
         - data
       type: object
@@ -62638,6 +63740,14 @@ components:
       properties:
         data:
           $ref: "#/components/schemas/ServiceNowUsersData"
+          example:
+            - attributes:
+                email: "john.doe@example.com"
+                instance_id: "65b3341b-0680-47f9-a6d4-134db45c603e"
+                user_name: "john.doe"
+                user_sys_id: "abc123def456"
+              id: "65b3341b-0680-47f9-a6d4-134db45c603e"
+              type: users
       required:
         - data
       type: object
@@ -67339,6 +68449,47 @@ components:
         description: Tag associated with your event.
         type: string
       type: array
+    TargetingRule:
+      description: Targeting rule details.
+      properties:
+        conditions:
+          description: Conditions evaluated by this targeting rule.
+          items:
+            $ref: "#/components/schemas/Condition"
+          type: array
+        created_at:
+          description: The timestamp when the targeting rule was created.
+          example: "2024-01-01T12:00:00Z"
+          format: date-time
+          type: string
+        id:
+          description: The unique identifier of the targeting rule.
+          example: "550e8400-e29b-41d4-a716-446655440060"
+          format: uuid
+          type: string
+        updated_at:
+          description: The timestamp when the targeting rule was last updated.
+          example: "2024-01-01T12:00:00Z"
+          format: date-time
+          type: string
+      required:
+        - id
+        - conditions
+        - created_at
+        - updated_at
+      type: object
+    TargetingRuleRequest:
+      description: Targeting rule request payload.
+      properties:
+        conditions:
+          description: Conditions that must match for this rule.
+          items:
+            $ref: "#/components/schemas/ConditionRequest"
+          minItems: 1
+          type: array
+      required:
+        - conditions
+      type: object
     Targets:
       description: |-
         List of recipients to notify when a notification rule is triggered. Many different target types are supported,
@@ -70456,6 +71607,80 @@ components:
           description: The display name of the datastore.
           type: string
       type: object
+    UpdateCampaignRequest:
+      description: Request to update a campaign.
+      properties:
+        data:
+          $ref: "#/components/schemas/UpdateCampaignRequestData"
+      required:
+        - data
+      type: object
+    UpdateCampaignRequestAttributes:
+      description: Attributes for updating a campaign.
+      properties:
+        description:
+          description: The description of the campaign.
+          example: Campaign to improve security posture for Q1 2024.
+          type: string
+        due_date:
+          description: The due date of the campaign.
+          example: "2024-03-31T23:59:59Z"
+          format: date-time
+          type: string
+        entity_scope:
+          description: Entity scope query to filter entities for this campaign.
+          example: kind:service AND team:platform
+          type: string
+        guidance:
+          description: Guidance for the campaign.
+          example: Please ensure all services pass the security requirements.
+          type: string
+        key:
+          description: The unique key for the campaign.
+          example: q1-security-2024
+          type: string
+        name:
+          description: The name of the campaign.
+          example: Q1 Security Campaign
+          type: string
+        owner_id:
+          description: The UUID of the campaign owner.
+          example: 550e8400-e29b-41d4-a716-446655440000
+          type: string
+        rule_ids:
+          description: Array of rule IDs associated with this campaign.
+          example: ["q8MQxk8TCqrHnWkx", "r9NRyl9UDrsIoXly"]
+          items:
+            description: The unique ID of a scorecard rule.
+            type: string
+          type: array
+        start_date:
+          description: The start date of the campaign.
+          example: "2024-01-01T00:00:00Z"
+          format: date-time
+          type: string
+        status:
+          description: The status of the campaign.
+          example: in_progress
+          type: string
+      required:
+        - name
+        - owner_id
+        - status
+        - start_date
+        - rule_ids
+      type: object
+    UpdateCampaignRequestData:
+      description: Data for updating a campaign.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/UpdateCampaignRequestAttributes"
+        type:
+          $ref: "#/components/schemas/CampaignType"
+      required:
+        - type
+        - attributes
+      type: object
     UpdateConnectionRequest:
       description: Request body for updating an existing data source connection by adding, modifying, or removing fields.
       example:
@@ -71038,7 +72263,7 @@ components:
       description: Data for the request to update a scorecard rule.
       properties:
         attributes:
-          $ref: "#/components/schemas/RuleAttributes"
+          $ref: "#/components/schemas/RuleAttributesRequest"
         type:
           $ref: "#/components/schemas/RuleType"
       type: object
@@ -71524,6 +72749,51 @@ components:
       properties:
         data:
           $ref: "#/components/schemas/WorkflowDataUpdate"
+      type: object
+    UpsertAllocationRequest:
+      description: Request to create or update a targeting rule (allocation) for a feature flag environment.
+      properties:
+        experiment_id:
+          description: The experiment ID for experiment-linked allocations.
+          example: "550e8400-e29b-41d4-a716-446655440030"
+          nullable: true
+          type: string
+        exposure_schedule:
+          $ref: "#/components/schemas/ExposureScheduleRequest"
+        guardrail_metrics:
+          description: Guardrail metrics used to monitor and auto-pause or abort.
+          items:
+            $ref: "#/components/schemas/GuardrailMetricRequest"
+          type: array
+        id:
+          description: The unique identifier of the targeting rule allocation.
+          example: "550e8400-e29b-41d4-a716-446655440020"
+          format: uuid
+          type: string
+        key:
+          description: The unique key of the targeting rule allocation.
+          example: "prod-rollout"
+          type: string
+        name:
+          description: The display name of the targeting rule.
+          example: "Production Rollout"
+          type: string
+        targeting_rules:
+          description: Targeting rules that determine audience eligibility.
+          items:
+            $ref: "#/components/schemas/TargetingRuleRequest"
+          type: array
+        type:
+          $ref: "#/components/schemas/AllocationType"
+        variant_weights:
+          description: Variant distribution weights.
+          items:
+            $ref: "#/components/schemas/VariantWeightRequest"
+          type: array
+      required:
+        - name
+        - key
+        - type
       type: object
     UpsertCatalogEntityRequest:
       description: Create or update entity request.
@@ -72417,6 +73687,60 @@ components:
         - id
         - key
         - name
+        - value
+      type: object
+    VariantWeight:
+      description: Variant weight details.
+      properties:
+        created_at:
+          description: The timestamp when the variant weight was created.
+          example: "2024-01-01T12:00:00Z"
+          format: date-time
+          type: string
+        id:
+          description: Unique identifier of the variant weight assignment.
+          example: "59061199-e2ff-46e9-8b40-2193e3b21687"
+          format: uuid
+          type: string
+        updated_at:
+          description: The timestamp when the variant weight was last updated.
+          example: "2024-01-01T12:00:00Z"
+          format: date-time
+          type: string
+        value:
+          description: The percentage weight for the variant.
+          example: 50
+          format: double
+          type: number
+        variant:
+          $ref: "#/components/schemas/Variant"
+        variant_id:
+          description: The variant ID.
+          example: "550e8400-e29b-41d4-a716-446655440001"
+          format: uuid
+          type: string
+      required:
+        - variant_id
+        - value
+      type: object
+    VariantWeightRequest:
+      description: Variant weight request payload.
+      properties:
+        value:
+          description: The percentage weight for this variant.
+          example: 50
+          format: double
+          type: number
+        variant_id:
+          description: The variant ID to assign weight to.
+          example: "550e8400-e29b-41d4-a716-446655440001"
+          format: uuid
+          type: string
+        variant_key:
+          description: The variant key to assign weight to.
+          example: "control"
+          type: string
+      required:
         - value
       type: object
     Version:
@@ -84928,7 +86252,7 @@ paths:
       summary: List feature flags
       tags:
         - Feature Flags
-      x-menu-order: 13
+      x-menu-order: 19
       x-permission:
         operator: AND
         permissions:
@@ -84989,7 +86313,7 @@ paths:
       summary: Create a feature flag
       tags:
         - Feature Flags
-      x-menu-order: 12
+      x-menu-order: 18
       x-permission:
         operator: AND
         permissions:
@@ -85241,6 +86565,274 @@ paths:
         operator: AND
         permissions:
           - feature_flag_environment_config_write
+  /api/v2/feature-flags/exposure-schedules/{exposure_schedule_id}/pause:
+    post:
+      description: |-
+        Pauses a progressive rollout while preserving rollout state.
+      operationId: PauseExposureSchedule
+      parameters:
+        - $ref: "#/components/parameters/exposure_schedule_id"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    absolute_start_time: "2025-06-13T12:00:00Z"
+                    allocation_id: "550e8400-e29b-41d4-a716-446655440020"
+                    control_variant_id: "550e8400-e29b-41d4-a716-446655440012"
+                    created_at: "2024-01-01T12:00:00Z"
+                    guardrail_triggered_action:
+                    guardrail_triggers: []
+                    id: "550e8400-e29b-41d4-a716-446655440010"
+                    rollout_options:
+                      autostart: false
+                      selection_interval_ms: 3600000
+                      strategy: "UNIFORM_INTERVALS"
+                    rollout_steps: []
+                    updated_at: "2024-01-01T12:00:00Z"
+              schema:
+                $ref: "#/components/schemas/AllocationExposureScheduleResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Not Found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Conflict
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Pause a progressive rollout
+      tags:
+        - Feature Flags
+      x-menu-order: 8
+      x-permission:
+        operator: AND
+        permissions:
+          - feature_flag_config_write
+  /api/v2/feature-flags/exposure-schedules/{exposure_schedule_id}/resume:
+    post:
+      description: |-
+        Resumes progression for a previously paused progressive rollout.
+      operationId: ResumeExposureSchedule
+      parameters:
+        - $ref: "#/components/parameters/exposure_schedule_id"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    absolute_start_time: "2025-06-13T12:00:00Z"
+                    allocation_id: "550e8400-e29b-41d4-a716-446655440020"
+                    control_variant_id: "550e8400-e29b-41d4-a716-446655440012"
+                    created_at: "2024-01-01T12:00:00Z"
+                    guardrail_triggered_action:
+                    guardrail_triggers: []
+                    id: "550e8400-e29b-41d4-a716-446655440010"
+                    rollout_options:
+                      autostart: false
+                      selection_interval_ms: 3600000
+                      strategy: "UNIFORM_INTERVALS"
+                    rollout_steps: []
+                    updated_at: "2024-01-01T12:00:00Z"
+              schema:
+                $ref: "#/components/schemas/AllocationExposureScheduleResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Not Found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Conflict
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Resume a progressive rollout
+      tags:
+        - Feature Flags
+      x-menu-order: 7
+      x-permission:
+        operator: AND
+        permissions:
+          - feature_flag_config_write
+  /api/v2/feature-flags/exposure-schedules/{exposure_schedule_id}/start:
+    post:
+      description: |-
+        Starts a progressive rollout and begins progression.
+      operationId: StartExposureSchedule
+      parameters:
+        - $ref: "#/components/parameters/exposure_schedule_id"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    absolute_start_time: "2025-06-13T12:00:00Z"
+                    allocation_id: "550e8400-e29b-41d4-a716-446655440020"
+                    control_variant_id: "550e8400-e29b-41d4-a716-446655440012"
+                    created_at: "2024-01-01T12:00:00Z"
+                    guardrail_triggered_action:
+                    guardrail_triggers: []
+                    id: "550e8400-e29b-41d4-a716-446655440010"
+                    rollout_options:
+                      autostart: false
+                      selection_interval_ms: 3600000
+                      strategy: "UNIFORM_INTERVALS"
+                    rollout_steps: []
+                    updated_at: "2024-01-01T12:00:00Z"
+              schema:
+                $ref: "#/components/schemas/AllocationExposureScheduleResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Not Found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Conflict
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Start a progressive rollout
+      tags:
+        - Feature Flags
+      x-menu-order: 9
+      x-permission:
+        operator: AND
+        permissions:
+          - feature_flag_config_write
+  /api/v2/feature-flags/exposure-schedules/{exposure_schedule_id}/stop:
+    post:
+      description: |-
+        Stops a progressive rollout and marks it as aborted.
+      operationId: StopExposureSchedule
+      parameters:
+        - $ref: "#/components/parameters/exposure_schedule_id"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    absolute_start_time: "2025-06-13T12:00:00Z"
+                    allocation_id: "550e8400-e29b-41d4-a716-446655440020"
+                    control_variant_id: "550e8400-e29b-41d4-a716-446655440012"
+                    created_at: "2024-01-01T12:00:00Z"
+                    guardrail_triggered_action:
+                    guardrail_triggers: []
+                    id: "550e8400-e29b-41d4-a716-446655440010"
+                    rollout_options:
+                      autostart: false
+                      selection_interval_ms: 3600000
+                      strategy: "UNIFORM_INTERVALS"
+                    rollout_steps: []
+                    updated_at: "2024-01-01T12:00:00Z"
+              schema:
+                $ref: "#/components/schemas/AllocationExposureScheduleResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Not Found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Conflict
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Stop a progressive rollout
+      tags:
+        - Feature Flags
+      x-menu-order: 6
+      x-permission:
+        operator: AND
+        permissions:
+          - feature_flag_config_write
   /api/v2/feature-flags/{feature_flag_id}:
     get:
       description: |-
@@ -85276,7 +86868,7 @@ paths:
       summary: Get a feature flag
       tags:
         - Feature Flags
-      x-menu-order: 11
+      x-menu-order: 17
       x-permission:
         operator: AND
         permissions:
@@ -85334,7 +86926,7 @@ paths:
       summary: Update a feature flag
       tags:
         - Feature Flags
-      x-menu-order: 10
+      x-menu-order: 16
       x-permission:
         operator: AND
         permissions:
@@ -85381,12 +86973,206 @@ paths:
       summary: Archive a feature flag
       tags:
         - Feature Flags
-      x-menu-order: 9
+      x-menu-order: 15
       x-permission:
         operator: AND
         permissions:
           - feature_flag_config_write
           - feature_flag_environment_config_read
+  /api/v2/feature-flags/{feature_flag_id}/environments/{environment_id}/allocations:
+    post:
+      description: |-
+        Creates a new targeting rule (allocation) for a specific feature flag in a specific environment.
+      operationId: CreateAllocationsForFeatureFlagInEnvironment
+      parameters:
+        - $ref: "#/components/parameters/feature_flag_id"
+        - $ref: "#/components/parameters/environment_id"
+      requestBody:
+        content:
+          application/json:
+            example:
+              data:
+                attributes:
+                  key: "prod-rollout"
+                  name: "Production Rollout"
+                  type: "FEATURE_GATE"
+                  variant_weights:
+                    - value: 50
+                      variant_id: "550e8400-e29b-41d4-a716-446655440001"
+                    - value: 50
+                      variant_id: "550e8400-e29b-41d4-a716-446655440002"
+                type: "allocations"
+            schema:
+              $ref: "#/components/schemas/CreateAllocationsRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        created_at: "2024-01-01T12:00:00Z"
+                        environment_ids:
+                          - "550e8400-e29b-41d4-a716-446655440001"
+                        guardrail_metrics: []
+                        id: "550e8400-e29b-41d4-a716-446655440020"
+                        key: "prod-rollout"
+                        name: "Production Rollout"
+                        order_position: 0
+                        targeting_rules: []
+                        type: "FEATURE_GATE"
+                        updated_at: "2024-01-01T12:00:00Z"
+                        variant_weights:
+                          - value: 50
+                            variant_id: "550e8400-e29b-41d4-a716-446655440001"
+                      id: "550e8400-e29b-41d4-a716-446655440020"
+                      type: "allocations"
+              schema:
+                $ref: "#/components/schemas/AllocationResponse"
+          description: Created
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AllocationResponse"
+          description: Accepted - Approval required for this change
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Not Found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Conflict
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Create targeting rules for a flag env
+      tags:
+        - Feature Flags
+      x-menu-order: 11
+      x-permission:
+        operator: AND
+        permissions:
+          - feature_flag_config_write
+    put:
+      description: |-
+        Updates targeting rules (allocations) for a specific feature flag in a specific environment.
+        This operation replaces the existing allocation set with the request payload.
+      operationId: UpdateAllocationsForFeatureFlagInEnvironment
+      parameters:
+        - $ref: "#/components/parameters/feature_flag_id"
+        - $ref: "#/components/parameters/environment_id"
+      requestBody:
+        content:
+          application/json:
+            example:
+              data:
+                - attributes:
+                    key: "prod-rollout"
+                    name: "Production Rollout"
+                    type: "FEATURE_GATE"
+                    variant_weights:
+                      - value: 50
+                        variant_id: "550e8400-e29b-41d4-a716-446655440001"
+                      - value: 50
+                        variant_id: "550e8400-e29b-41d4-a716-446655440002"
+                  type: "allocations"
+            schema:
+              $ref: "#/components/schemas/OverwriteAllocationsRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          created_at: "2024-01-01T12:00:00Z"
+                          environment_ids:
+                            - "550e8400-e29b-41d4-a716-446655440001"
+                          guardrail_metrics: []
+                          id: "550e8400-e29b-41d4-a716-446655440020"
+                          key: "prod-rollout"
+                          name: "Production Rollout"
+                          order_position: 0
+                          targeting_rules: []
+                          type: "FEATURE_GATE"
+                          updated_at: "2024-01-01T12:00:00Z"
+                          variant_weights:
+                            - value: 50
+                              variant_id: "550e8400-e29b-41d4-a716-446655440001"
+                        id: "550e8400-e29b-41d4-a716-446655440020"
+                        type: "allocations"
+              schema:
+                $ref: "#/components/schemas/ListAllocationsResponse"
+          description: OK
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListAllocationsResponse"
+          description: Accepted - Approval required for this change
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Not Found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Conflict
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Update targeting rules for a flag
+      tags:
+        - Feature Flags
+      x-menu-order: 10
+      x-permission:
+        operator: AND
+        permissions:
+          - feature_flag_config_write
   /api/v2/feature-flags/{feature_flag_id}/environments/{environment_id}/disable:
     post:
       description: |-
@@ -85420,7 +87206,7 @@ paths:
       summary: Disable a feature flag in an environment
       tags:
         - Feature Flags
-      x-menu-order: 6
+      x-menu-order: 12
       x-permission:
         operator: AND
         permissions:
@@ -85459,7 +87245,7 @@ paths:
       summary: Enable a feature flag in an environment
       tags:
         - Feature Flags
-      x-menu-order: 7
+      x-menu-order: 13
       x-permission:
         operator: AND
         permissions:
@@ -85506,7 +87292,7 @@ paths:
       summary: Unarchive a feature flag
       tags:
         - Feature Flags
-      x-menu-order: 8
+      x-menu-order: 14
       x-permission:
         operator: AND
         permissions:
@@ -102180,6 +103966,394 @@ paths:
         permissions:
           - user_access_invite
           - user_access_manage
+  /api/v2/scorecard/campaigns:
+    get:
+      description: Fetches all scorecard campaigns.
+      operationId: ListScorecardCampaigns
+      parameters:
+        - description: Maximum number of campaigns to return.
+          in: query
+          name: page[limit]
+          required: false
+          schema:
+            default: 10
+            example: 10
+            format: int64
+            type: integer
+        - description: Offset for pagination.
+          in: query
+          name: page[offset]
+          required: false
+          schema:
+            default: 0
+            example: 0
+            format: int64
+            type: integer
+        - description: Filter campaigns by name (full-text search).
+          in: query
+          name: filter[campaign][name]
+          required: false
+          schema:
+            example: security
+            type: string
+        - description: Filter campaigns by status.
+          in: query
+          name: filter[campaign][status]
+          required: false
+          schema:
+            example: in_progress
+            type: string
+        - description: Filter campaigns by owner UUID.
+          in: query
+          name: filter[campaign][owner]
+          required: false
+          schema:
+            example: 550e8400-e29b-41d4-a716-446655440000
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          created_at: "2026-01-01T00:00:00Z"
+                          entity_scope: kind:service
+                          key: test-campaign-1
+                          modified_at: "2026-01-01T00:00:00Z"
+                          name: Test Campaign 1
+                          owner: ""
+                          start_date: "2026-01-01T00:00:00Z"
+                          status: in_progress
+                        id: campaign-1
+                        meta:
+                          entity_count: 25
+                          rule_count: 2
+                        relationships:
+                          rules:
+                            data:
+                              - id: rule-1
+                                type: rule
+                              - id: rule-2
+                                type: rule
+                        type: campaign
+                    meta:
+                      count: 1
+                      limit: 10
+                      offset: 0
+                      total: 1
+              schema:
+                $ref: "#/components/schemas/ListCampaignsResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - apm_service_catalog_read
+            - cases_read
+      summary: List all campaigns
+      tags:
+        - Scorecards
+      x-menu-order: 8
+    post:
+      description: Creates a new scorecard campaign.
+      operationId: CreateScorecardCampaign
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateCampaignRequest"
+        description: Campaign data.
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        created_at: "2026-01-01T00:00:00Z"
+                        key: minimal-campaign
+                        modified_at: "2026-01-01T00:00:00Z"
+                        name: Minimal Campaign
+                        owner: 21f98ae1-4ae2-11eb-958f-07e105a6e810
+                        start_date: "2026-01-01T00:00:00Z"
+                        status: in_progress
+                      id: campaign-2
+                      relationships:
+                        rules:
+                          data:
+                            - id: rule-1
+                              type: rule
+                      type: campaign
+              schema:
+                $ref: "#/components/schemas/CampaignResponse"
+          description: Created
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - apm_service_catalog_write
+            - cases_write
+      summary: Create a new campaign
+      tags:
+        - Scorecards
+      x-menu-order: 9
+  /api/v2/scorecard/campaigns/{campaign_id}:
+    delete:
+      description: Deletes a single campaign by ID or key.
+      operationId: DeleteScorecardCampaign
+      parameters:
+        - description: Campaign ID or key.
+          in: path
+          name: campaign_id
+          required: true
+          schema:
+            example: c10ODp0VCrrIpXmz
+            type: string
+      responses:
+        "204":
+          description: No Content
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - apm_service_catalog_write
+            - cases_write
+      summary: Delete a campaign
+      tags:
+        - Scorecards
+      x-menu-order: 12
+    get:
+      description: Fetches a single campaign by ID or key.
+      operationId: GetScorecardCampaign
+      parameters:
+        - description: Campaign ID or key.
+          in: path
+          name: campaign_id
+          required: true
+          schema:
+            example: c10ODp0VCrrIpXmz
+            type: string
+        - description: Include related data (for example, scores).
+          in: query
+          name: include
+          required: false
+          schema:
+            example: scores
+            type: string
+        - description: Include metadata (entity and rule counts).
+          in: query
+          name: include_meta
+          required: false
+          schema:
+            example: true
+            type: boolean
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        created_at: "2026-01-01T00:00:00Z"
+                        key: test-campaign
+                        modified_at: "2026-01-01T00:00:00Z"
+                        name: Test Campaign
+                        owner: ""
+                        start_date: "2026-01-01T00:00:00Z"
+                        status: in_progress
+                      id: c2b79b87-327c-40fa-b726-228f1a60bbb4
+                      relationships:
+                        campaign_score:
+                          data:
+                            id: c2b79b87-327c-40fa-b726-228f1a60bbb4
+                            type: score
+                        rule_scores:
+                          data:
+                            - id: rule-1
+                              type: score
+                        rules:
+                          data:
+                            - id: rule-1
+                              type: rule
+                      type: campaign
+                    included:
+                      - attributes:
+                          aggregation: campaign
+                          denominator: 13
+                          numerator: 10
+                          score: 76.92
+                          total_fail: 2
+                          total_no_data: 0
+                          total_pass: 10
+                          total_skip: 1
+                        id: c2b79b87-327c-40fa-b726-228f1a60bbb4
+                        type: score
+              schema:
+                $ref: "#/components/schemas/CampaignResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - apm_service_catalog_read
+            - cases_read
+      summary: Get a campaign
+      tags:
+        - Scorecards
+      x-menu-order: 10
+    put:
+      description: Updates an existing campaign.
+      operationId: UpdateScorecardCampaign
+      parameters:
+        - description: Campaign ID or key.
+          in: path
+          name: campaign_id
+          required: true
+          schema:
+            example: c10ODp0VCrrIpXmz
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateCampaignRequest"
+        description: Campaign data.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        created_at: "2026-01-01T00:00:00Z"
+                        description: Updated Description
+                        key: updated-campaign
+                        modified_at: "2026-01-02T00:00:00Z"
+                        name: Updated Campaign
+                        owner: 21f98ae1-4ae2-11eb-958f-07e105a6e810
+                        start_date: "2026-01-01T00:00:00Z"
+                        status: completed
+                      id: 9c15b9ca-5abd-4875-84c2-02e166a45959
+                      relationships:
+                        rules:
+                          data:
+                            - id: rule-1
+                              type: rule
+                            - id: rule-2
+                              type: rule
+                      type: campaign
+              schema:
+                $ref: "#/components/schemas/CampaignResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - apm_service_catalog_write
+            - cases_write
+      summary: Update a campaign
+      tags:
+        - Scorecards
+      x-menu-order: 11
   /api/v2/scorecard/outcomes:
     get:
       description: Fetches all rule outcomes.
@@ -102208,21 +104382,21 @@ paths:
           schema:
             example: name
             type: string
-        - description: Filter the outcomes on a specific service name.
+        - description: Filter outcomes on a specific service name.
           in: query
           name: filter[outcome][service_name]
           required: false
           schema:
             example: web-store
             type: string
-        - description: Filter the outcomes by a specific state.
+        - description: Filter outcomes by a specific state.
           in: query
           name: filter[outcome][state]
           required: false
           schema:
             example: fail
             type: string
-        - description: Filter outcomes on whether a rule is enabled/disabled.
+        - description: Filter outcomes based on whether a rule is enabled or disabled.
           in: query
           name: filter[rule][enabled]
           required: false
@@ -102247,6 +104421,25 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          created_at: "2026-01-06T12:51:32.000546001Z"
+                          modified_at: "2026-01-06T12:51:32.000546001Z"
+                          remarks: test
+                          service_name: my-service
+                          state: pass
+                        id: a75tJIv_kNQ
+                        relationships:
+                          rule:
+                            data:
+                              id: rule-1
+                              type: rule
+                        type: outcome
+                    links:
+                      next: /api/v2/scorecard/outcomes?page%5Blimit%5D=100&page%5Boffset%5D=100
               schema:
                 $ref: "#/components/schemas/OutcomesResponse"
           description: OK
@@ -102263,18 +104456,15 @@ paths:
             - apm_service_catalog_read
       summary: List all rule outcomes
       tags:
-        - Service Scorecards
-      x-menu-order: 2
+        - Scorecards
+      x-menu-order: 4
       x-pagination:
         limitParam: page[size]
         pageOffsetParam: page[offset]
         resultsPath: data
-      x-unstable: |-
-        **Note**: This endpoint is in public beta.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     post:
       description: Updates multiple scorecard rule outcomes in a single batched request.
-      operationId: UpdateScorecardOutcomesAsync
+      operationId: UpdateScorecardOutcomes
       requestBody:
         content:
           application/json:
@@ -102298,16 +104488,14 @@ paths:
           appKeyAuth: []
         - AuthZ:
             - apm_service_catalog_write
-      summary: Update Scorecard outcomes asynchronously
+      summary: Update Scorecard outcomes
       tags:
-        - Service Scorecards
+        - Scorecards
       x-codegen-request-body-name: body
-      x-menu-order: 1
-      x-unstable: |-
-        **Note**: This endpoint is in public beta.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+      x-menu-order: 3
   /api/v2/scorecard/outcomes/batch:
     post:
+      deprecated: true
       description: Sets multiple service-rule outcomes in a single batched request.
       operationId: CreateScorecardOutcomesBatch
       requestBody:
@@ -102321,6 +104509,25 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          modified_at: "2026-03-11T07:37:20.758067Z"
+                          remarks: test remarks
+                          service_name: my-service
+                          state: pass
+                        id: nFs2_9E97Zo
+                        relationships:
+                          rule:
+                            data:
+                              id: rule-1
+                              type: rule
+                        type: outcome
+                    meta:
+                      total_received: 1
+                      total_staged: 1
               schema:
                 $ref: "#/components/schemas/OutcomesBatchResponse"
           description: OK
@@ -102337,11 +104544,12 @@ paths:
             - apm_service_catalog_write
       summary: Create outcomes batch
       tags:
-        - Service Scorecards
+        - Scorecards
       x-codegen-request-body-name: body
-      x-menu-order: 5
+      x-menu-order: 7
+      x-sunset: "2026-04-01"
       x-unstable: |-
-        **Note**: This endpoint is in public beta.
+        **Note**: This endpoint is in Preview.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/scorecard/rules:
     get:
@@ -102410,6 +104618,34 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          category: Test Scorecard
+                          created_at: "2026-01-06T12:51:32Z"
+                          custom: true
+                          enabled: true
+                          level: 3
+                          modified_at: "2026-01-06T12:51:32Z"
+                          name: Test Rule 1
+                          scorecard_name: Test Scorecard
+                        id: rule-1
+                        relationships:
+                          scorecard:
+                            data:
+                              id: scorecard-1
+                              type: scorecard
+                        type: rule
+                    included:
+                      - attributes:
+                          description: Scorecard Description
+                          name: Test Scorecard
+                        id: scorecard-1
+                        type: scorecard
+                    links:
+                      next: /api/v2/scorecard/rules?include=scorecard&page%5Blimit%5D=100&page%5Boffset%5D=100
               schema:
                 $ref: "#/components/schemas/ListRulesResponse"
           description: OK
@@ -102426,21 +104662,28 @@ paths:
             - apm_service_catalog_read
       summary: List all rules
       tags:
-        - Service Scorecards
-      x-menu-order: 6
+        - Scorecards
+      x-menu-order: 5
       x-pagination:
         limitParam: page[size]
         pageOffsetParam: page[offset]
         resultsPath: data
-      x-unstable: |-
-        **Note**: This endpoint is in public beta.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     post:
       description: Creates a new rule.
       operationId: CreateScorecardRule
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      enabled: true
+                      name: My Rule
+                      owner: Datadog
+                      scorecard_name: My Scorecard
+                    type: rule
             schema:
               $ref: "#/components/schemas/CreateRuleRequest"
         description: Rule attributes.
@@ -102449,6 +104692,26 @@ paths:
         "201":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        category: Test Scorecard
+                        created_at: "2026-01-06T12:51:32Z"
+                        custom: true
+                        enabled: true
+                        level: 3
+                        modified_at: "2026-01-06T12:51:32Z"
+                        name: Test Rule
+                        scorecard_name: Test Scorecard
+                      id: rule-1
+                      relationships:
+                        scorecard:
+                          data:
+                            id: scorecard-1
+                            type: scorecard
+                      type: rule
               schema:
                 $ref: "#/components/schemas/CreateRuleResponse"
           description: Created
@@ -102465,12 +104728,9 @@ paths:
             - apm_service_catalog_write
       summary: Create a new rule
       tags:
-        - Service Scorecards
+        - Scorecards
       x-codegen-request-body-name: body
-      x-menu-order: 7
-      x-unstable: |-
-        **Note**: This endpoint is in public beta.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+      x-menu-order: 1
   /api/v2/scorecard/rules/{rule_id}:
     delete:
       description: Deletes a single rule.
@@ -102495,11 +104755,8 @@ paths:
             - apm_service_catalog_write
       summary: Delete a rule
       tags:
-        - Service Scorecards
-      x-menu-order: 3
-      x-unstable: |-
-        **Note**: This endpoint is in public beta.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+        - Scorecards
+      x-menu-order: 6
     put:
       description: Updates an existing rule.
       operationId: UpdateScorecardRule
@@ -102508,6 +104765,18 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      description: Updated Description
+                      enabled: false
+                      name: Updated Rule
+                      owner: team:updated-team
+                      scope_query: kind:service
+                      scorecard_name: Updated Scorecard
+                    type: rule
             schema:
               $ref: "#/components/schemas/UpdateRuleRequest"
         description: Rule attributes.
@@ -102516,6 +104785,33 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        category: Updated Scorecard
+                        created_at: "2026-01-06T12:51:32Z"
+                        custom: true
+                        description: Updated Description
+                        enabled: false
+                        level: 1
+                        modified_at: "2026-01-06T13:00:00Z"
+                        name: Updated Rule
+                        owner: team:updated-team
+                        scope_query: kind:service
+                        scorecard_name: Updated Scorecard
+                      id: rule-1
+                      relationships:
+                        scope:
+                          data:
+                            id: ae07a16e-1319-5e61-bdba-b3026bc2bdcd
+                            type: entity-scope
+                        scorecard:
+                          data:
+                            id: scorecard-2
+                            type: scorecard
+                      type: rule
               schema:
                 $ref: "#/components/schemas/UpdateRuleResponse"
           description: Rule updated successfully
@@ -102530,14 +104826,90 @@ paths:
           appKeyAuth: []
         - AuthZ:
             - apm_service_catalog_write
-      summary: Update an existing rule
+      summary: Update an existing scorecard rule
       tags:
-        - Service Scorecards
+        - Scorecards
       x-codegen-request-body-name: body
-      x-menu-order: 4
-      x-unstable: |-
-        **Note**: This endpoint is in public beta.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+      x-menu-order: 2
+  /api/v2/scorecard/scorecards:
+    get:
+      description: Fetches all scorecards.
+      operationId: ListScorecards
+      parameters:
+        - description: Offset for pagination.
+          in: query
+          name: page[offset]
+          required: false
+          schema:
+            default: 0
+            example: 0
+            format: int64
+            type: integer
+        - description: Maximum number of scorecards to return.
+          in: query
+          name: page[size]
+          required: false
+          schema:
+            default: 100
+            example: 10
+            format: int64
+            type: integer
+        - description: Filter by scorecard ID.
+          in: query
+          name: filter[scorecard][id]
+          required: false
+          schema:
+            example: q8MQxk8TCqrHnWkx
+            type: string
+        - description: Filter by scorecard name (partial match).
+          in: query
+          name: filter[scorecard][name]
+          required: false
+          schema:
+            example: Observability
+            type: string
+        - description: Filter by scorecard description (partial match).
+          in: query
+          name: filter[scorecard][description]
+          required: false
+          schema:
+            example: Best Practices
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          created_at: "2026-01-01T00:00:00Z"
+                          description: Best practices for observability.
+                          modified_at: "2026-01-05T14:20:00Z"
+                          name: Observability Best Practices
+                        id: q8MQxk8TCqrHnWkx
+                        type: scorecard
+              schema:
+                $ref: "#/components/schemas/ListScorecardsResponse"
+          description: OK
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - apm_service_catalog_read
+      summary: List all scorecards
+      tags:
+        - Scorecards
+      x-menu-order: 13
   /api/v2/seats/users:
     delete:
       description: |-
@@ -106064,6 +108436,55 @@ paths:
         operator: OR
         permissions:
           - security_monitoring_signals_write
+  /api/v2/security_monitoring/signals/{signal_id}/investigation_queries:
+    get:
+      description: Get the list of investigation log queries available for a given security signal.
+      operationId: GetInvestigationLogQueriesMatchingSignal
+      parameters:
+        - $ref: "#/components/parameters/SignalID"
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                data:
+                  - attributes:
+                      name: Cloudtrail events for user ARN
+                      query_filter: 'source:cloudtrail @userIdentity.arn:"foo"'
+                      template_variables:
+                        "@userIdentity.arn":
+                          - foo
+                      url: /logs?query=source%3Acloudtrail+%40userIdentity.arn%3A%22foo%22
+                    id: w00-t10-992
+                    type: investigation_log_queries
+                  - attributes:
+                      title: Monitor Okta logs to track system access and unusual activity
+                      url: https://www.datadoghq.com/blog/monitor-activity-with-okta/
+                    id: bxy-o8v-i1a
+                    type: recommended_blog_posts
+              schema:
+                $ref: "#/components/schemas/SecurityMonitoringSignalSuggestedActionsResponse"
+          description: OK
+        "403":
+          $ref: "#/components/responses/NotAuthorizedResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - security_monitoring_rules_read
+            - security_monitoring_signals_read
+      summary: Get investigation queries for a signal
+      tags: ["Security Monitoring"]
+      x-menu-order: 87
+      x-permission:
+        operator: AND
+        permissions:
+          - security_monitoring_rules_read
+          - security_monitoring_signals_read
   /api/v2/security_monitoring/signals/{signal_id}/state:
     patch:
       description: |-
@@ -106105,6 +108526,55 @@ paths:
         operator: OR
         permissions:
           - security_monitoring_signals_write
+  /api/v2/security_monitoring/signals/{signal_id}/suggested_actions:
+    get:
+      description: Get the list of suggested actions for a given security signal.
+      operationId: GetSuggestedActionsMatchingSignal
+      parameters:
+        - $ref: "#/components/parameters/SignalID"
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                data:
+                  - attributes:
+                      name: Cloudtrail events for user ARN
+                      query_filter: 'source:cloudtrail @userIdentity.arn:"foo"'
+                      template_variables:
+                        "@userIdentity.arn":
+                          - foo
+                      url: /logs?query=source%3Acloudtrail+%40userIdentity.arn%3A%22foo%22
+                    id: w00-t10-992
+                    type: investigation_log_queries
+                  - attributes:
+                      title: Monitor Okta logs to track system access and unusual activity
+                      url: https://www.datadoghq.com/blog/monitor-activity-with-okta/
+                    id: bxy-o8v-i1a
+                    type: recommended_blog_posts
+              schema:
+                $ref: "#/components/schemas/SecurityMonitoringSignalSuggestedActionsResponse"
+          description: OK
+        "403":
+          $ref: "#/components/responses/NotAuthorizedResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - security_monitoring_rules_read
+            - security_monitoring_signals_read
+      summary: Get suggested actions for a signal
+      tags: ["Security Monitoring"]
+      x-menu-order: 88
+      x-permission:
+        operator: AND
+        permissions:
+          - security_monitoring_rules_read
+          - security_monitoring_signals_read
   /api/v2/sensitive-data-scanner/config:
     get:
       description: List all the Scanning groups in your organization.
@@ -108667,7 +111137,7 @@ paths:
         permissions:
           - status_pages_settings_read
     post:
-      description: Creates a new status page.
+      description: "Creates a new status page. **Note**: Publishing a status page on creation via the `enabled` property will be deprecated. Use the dedicated [publish](#publish-status-page) status page endpoint after creation instead."
       operationId: CreateStatusPage
       parameters:
         - description: "Comma-separated list of resources to include. Supported values: created_by_user, last_modified_by_user."
@@ -108755,7 +111225,7 @@ paths:
       summary: List degradations
       tags:
         - Status Pages
-      x-menu-order: 13
+      x-menu-order: 15
       x-permission:
         operator: AND
         permissions:
@@ -108813,7 +111283,7 @@ paths:
       summary: List maintenances
       tags:
         - Status Pages
-      x-menu-order: 18
+      x-menu-order: 20
       x-permission:
         operator: AND
         permissions:
@@ -108887,7 +111357,7 @@ paths:
         permissions:
           - status_pages_settings_read
     patch:
-      description: Updates an existing status page's attributes.
+      description: "Updates an existing status page's attributes. **Note**: Publishing and unpublishing via the `enabled` property will be deprecated on this endpoint. Use the dedicated [publish](#publish-status-page) and [unpublish](#unpublish-status-page) status page endpoints instead."
       operationId: UpdateStatusPage
       parameters:
         - description: Whether to delete existing subscribers when updating a status page's type.
@@ -108970,7 +111440,7 @@ paths:
       summary: List components
       tags:
         - Status Pages
-      x-menu-order: 8
+      x-menu-order: 10
       x-permission:
         operator: AND
         permissions:
@@ -109014,7 +111484,7 @@ paths:
       summary: Create component
       tags:
         - Status Pages
-      x-menu-order: 6
+      x-menu-order: 8
       x-permission:
         operator: AND
         permissions:
@@ -109052,7 +111522,7 @@ paths:
       summary: Delete component
       tags:
         - Status Pages
-      x-menu-order: 10
+      x-menu-order: 12
       x-permission:
         operator: AND
         permissions:
@@ -109098,7 +111568,7 @@ paths:
       summary: Get component
       tags:
         - Status Pages
-      x-menu-order: 9
+      x-menu-order: 11
       x-permission:
         operator: AND
         permissions:
@@ -109150,7 +111620,7 @@ paths:
       summary: Update component
       tags:
         - Status Pages
-      x-menu-order: 7
+      x-menu-order: 9
       x-permission:
         operator: AND
         permissions:
@@ -109201,7 +111671,7 @@ paths:
       summary: Create degradation
       tags:
         - Status Pages
-      x-menu-order: 11
+      x-menu-order: 13
       x-permission:
         operator: AND
         permissions:
@@ -109239,7 +111709,7 @@ paths:
       summary: Delete degradation
       tags:
         - Status Pages
-      x-menu-order: 15
+      x-menu-order: 17
       x-permission:
         operator: AND
         permissions:
@@ -109285,7 +111755,7 @@ paths:
       summary: Get degradation
       tags:
         - Status Pages
-      x-menu-order: 14
+      x-menu-order: 16
       x-permission:
         operator: AND
         permissions:
@@ -109343,7 +111813,7 @@ paths:
       summary: Update degradation
       tags:
         - Status Pages
-      x-menu-order: 12
+      x-menu-order: 14
       x-permission:
         operator: AND
         permissions:
@@ -109393,7 +111863,7 @@ paths:
       summary: Schedule maintenance
       tags:
         - Status Pages
-      x-menu-order: 16
+      x-menu-order: 18
       x-permission:
         operator: AND
         permissions:
@@ -109438,7 +111908,7 @@ paths:
       summary: Get maintenance
       tags:
         - Status Pages
-      x-menu-order: 19
+      x-menu-order: 21
       x-permission:
         operator: AND
         permissions:
@@ -109494,11 +111964,73 @@ paths:
       summary: Update maintenance
       tags:
         - Status Pages
-      x-menu-order: 17
+      x-menu-order: 19
       x-permission:
         operator: AND
         permissions:
           - status_pages_incident_write
+  /api/v2/statuspages/{page_id}/publish:
+    post:
+      description: Publishes a status page. For pages of type `public`, makes the status page available on the public internet and requires the `status_pages_public_page_publish` permission. For pages of type `internal`, makes the status page available under the `status-pages/$domain_prefix/view` route within the Datadog organization and requires the `status_pages_internal_page_publish` permission. The `status_pages_settings_write` permission is temporarily honored as we migrate publishing functionality from the update status page endpoint to the publish status page endpoint.
+      operationId: PublishStatusPage
+      parameters:
+        - description: The ID of the status page.
+          in: path
+          name: page_id
+          required: true
+          schema:
+            format: uuid
+            type: string
+      responses:
+        "204":
+          description: No Content
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ: []
+      summary: Publish status page
+      tags:
+        - Status Pages
+      x-menu-order: 6
+      x-permission:
+        operator: OR
+        permissions:
+          - status_pages_settings_write
+          - status_pages_public_page_publish
+          - status_pages_internal_page_publish
+  /api/v2/statuspages/{page_id}/unpublish:
+    post:
+      description: Unpublishes a status page. For pages of type `public`, removes the status page from the public internet and requires the `status_pages_public_page_publish` permission. For pages of type `internal`, removes the `status-pages/$domain_prefix/view` route from the Datadog organization and requires the `status_pages_internal_page_publish` permission. The `status_pages_settings_write` permission is temporarily honored as we migrate unpublishing functionality from the update status page endpoint to the unpublish status page endpoint.
+      operationId: UnpublishStatusPage
+      parameters:
+        - description: The ID of the status page.
+          in: path
+          name: page_id
+          required: true
+          schema:
+            format: uuid
+            type: string
+      responses:
+        "204":
+          description: No Content
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ: []
+      summary: Unpublish status page
+      tags:
+        - Status Pages
+      x-menu-order: 7
+      x-permission:
+        operator: OR
+        permissions:
+          - status_pages_settings_write
+          - status_pages_public_page_publish
+          - status_pages_internal_page_publish
   /api/v2/synthetics/api-multistep/subtests/{public_id}:
     get:
       description: |-
@@ -114679,7 +117211,7 @@ tags:
   - description: |-
       Data Access Controls in Datadog is a feature that allows administrators and access managers to regulate
       access to sensitive data. By defining Restricted Datasets, you can ensure that only specific teams or roles can
-      view certain types of telemetry (for example, logs, traces, custom metrics, and RUM data).
+      view certain types of telemetry (for example, logs, traces, metrics, and RUM data).
     name: Datasets
   - description: |-
       Manage Deployment Gates using this API to reduce the likelihood and impact of incidents caused by deployments. See the [Deployment Gates documentation](https://docs.datadoghq.com/deployment_gates/) for more information.
@@ -114970,6 +117502,9 @@ tags:
       Note: SCIM provisioning for Datadog teams is only available for select organizations at this point. Request access by contacting Datadog support, or see the [SCIM page](https://docs.datadoghq.com/account_management/scim/) for more information.
     name: SCIM
   - description: |-
+      API to create and update scorecard rules and outcomes. See [Scorecards](https://docs.datadoghq.com/service_catalog/scorecards) for more information.
+    name: Scorecards
+  - description: |-
       The seats API allows you to view, assign, and unassign seats for your organization.
     name: Seats
   - description: |-
@@ -114993,11 +117528,6 @@ tags:
       balance feature development with platform stability,
       and improve communication with internal and external users.
     name: Service Level Objectives
-  - description: |-
-      API to create and update scorecard rules and outcomes. See [Service Scorecards](https://docs.datadoghq.com/service_catalog/scorecards) for more information.
-
-      This feature is currently in BETA. If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
-    name: Service Scorecards
   - description: Manage your ServiceNow Integration. ServiceNow is a cloud-based platform that helps organizations manage digital workflows for enterprise operations.
     name: ServiceNow Integration
   - description: |-

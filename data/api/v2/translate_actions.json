@@ -1296,6 +1296,22 @@
     "request_description": "",
     "request_schema_description": "Request to update an environment."
   },
+  "PauseExposureSchedule": {
+    "description": "Pauses a progressive rollout while preserving rollout state.",
+    "summary": "Pause a progressive rollout"
+  },
+  "ResumeExposureSchedule": {
+    "description": "Resumes progression for a previously paused progressive rollout.",
+    "summary": "Resume a progressive rollout"
+  },
+  "StartExposureSchedule": {
+    "description": "Starts a progressive rollout and begins progression.",
+    "summary": "Start a progressive rollout"
+  },
+  "StopExposureSchedule": {
+    "description": "Stops a progressive rollout and marks it as aborted.",
+    "summary": "Stop a progressive rollout"
+  },
   "GetFeatureFlag": {
     "description": "Returns the details of a specific feature flag\nincluding variants and environment status.",
     "summary": "Get a feature flag"
@@ -1309,6 +1325,18 @@
   "ArchiveFeatureFlag": {
     "description": "Archives a feature flag. Archived flags are\nhidden from the main list but remain accessible and can be unarchived.",
     "summary": "Archive a feature flag"
+  },
+  "CreateAllocationsForFeatureFlagInEnvironment": {
+    "description": "Creates a new targeting rule (allocation) for a specific feature flag in a specific environment.",
+    "summary": "Create targeting rules for a flag env",
+    "request_description": "",
+    "request_schema_description": "Request to create targeting rules (allocations) for a feature flag in an environment."
+  },
+  "UpdateAllocationsForFeatureFlagInEnvironment": {
+    "description": "Updates targeting rules (allocations) for a specific feature flag in a specific environment.\nThis operation replaces the existing allocation set with the request payload.",
+    "summary": "Update targeting rules for a flag",
+    "request_description": "",
+    "request_schema_description": "Request to overwrite targeting rules (allocations) for a feature flag in an environment."
   },
   "DisableFeatureFlagEnvironment": {
     "description": "Disable a feature flag in a specific environment.",
@@ -3321,13 +3349,37 @@
     "request_description": "",
     "request_schema_description": "Definition of a user."
   },
+  "ListScorecardCampaigns": {
+    "description": "Fetches all scorecard campaigns.",
+    "summary": "List all campaigns"
+  },
+  "CreateScorecardCampaign": {
+    "description": "Creates a new scorecard campaign.",
+    "summary": "Create a new campaign",
+    "request_description": "Campaign data.",
+    "request_schema_description": "Request to create a new campaign."
+  },
+  "DeleteScorecardCampaign": {
+    "description": "Deletes a single campaign by ID or key.",
+    "summary": "Delete a campaign"
+  },
+  "GetScorecardCampaign": {
+    "description": "Fetches a single campaign by ID or key.",
+    "summary": "Get a campaign"
+  },
+  "UpdateScorecardCampaign": {
+    "description": "Updates an existing campaign.",
+    "summary": "Update a campaign",
+    "request_description": "Campaign data.",
+    "request_schema_description": "Request to update a campaign."
+  },
   "ListScorecardOutcomes": {
     "description": "Fetches all rule outcomes.",
     "summary": "List all rule outcomes"
   },
-  "UpdateScorecardOutcomesAsync": {
+  "UpdateScorecardOutcomes": {
     "description": "Updates multiple scorecard rule outcomes in a single batched request.",
-    "summary": "Update Scorecard outcomes asynchronously",
+    "summary": "Update Scorecard outcomes",
     "request_description": "Set of scorecard outcomes.",
     "request_schema_description": "Scorecard outcomes batch request."
   },
@@ -3353,9 +3405,13 @@
   },
   "UpdateScorecardRule": {
     "description": "Updates an existing rule.",
-    "summary": "Update an existing rule",
+    "summary": "Update an existing scorecard rule",
     "request_description": "Rule attributes.",
     "request_schema_description": "Request to update a scorecard rule."
+  },
+  "ListScorecards": {
+    "description": "Fetches all scorecards.",
+    "summary": "List all scorecards"
   },
   "UnassignSeatsUser": {
     "description": "Unassign seats from users for a product code.",
@@ -3721,11 +3777,19 @@
     "request_description": "Attributes describing the signal update.",
     "request_schema_description": "Request body for changing the related incidents of a given security monitoring signal."
   },
+  "GetInvestigationLogQueriesMatchingSignal": {
+    "description": "Get the list of investigation log queries available for a given security signal.",
+    "summary": "Get investigation queries for a signal"
+  },
   "EditSecurityMonitoringSignalState": {
     "description": "Change the triage state of a security signal.",
     "summary": "Change the triage state of a security signal",
     "request_description": "Attributes describing the signal update.",
     "request_schema_description": "Request body for changing the state of a given security monitoring signal."
+  },
+  "GetSuggestedActionsMatchingSignal": {
+    "description": "Get the list of suggested actions for a given security signal.",
+    "summary": "Get suggested actions for a signal"
   },
   "ListScanningGroups": {
     "description": "List all the Scanning groups in your organization.",
@@ -4016,7 +4080,7 @@
     "summary": "List status pages"
   },
   "CreateStatusPage": {
-    "description": "Creates a new status page.",
+    "description": "Creates a new status page. **Note**: Publishing a status page on creation via the `enabled` property will be deprecated. Use the dedicated [publish](#publish-status-page) status page endpoint after creation instead.",
     "summary": "Create status page",
     "request_description": "",
     "request_schema_description": "Request object for creating a status page."
@@ -4038,7 +4102,7 @@
     "summary": "Get status page"
   },
   "UpdateStatusPage": {
-    "description": "Updates an existing status page's attributes.",
+    "description": "Updates an existing status page's attributes. **Note**: Publishing and unpublishing via the `enabled` property will be deprecated on this endpoint. Use the dedicated [publish](#publish-status-page) and [unpublish](#unpublish-status-page) status page endpoints instead.",
     "summary": "Update status page",
     "request_description": "",
     "request_schema_description": "Request object for updating a status page."
@@ -4102,6 +4166,14 @@
     "summary": "Update maintenance",
     "request_description": "",
     "request_schema_description": "Request object for updating a maintenance."
+  },
+  "PublishStatusPage": {
+    "description": "Publishes a status page. For pages of type `public`, makes the status page available on the public internet and requires the `status_pages_public_page_publish` permission. For pages of type `internal`, makes the status page available under the `status-pages/$domain_prefix/view` route within the Datadog organization and requires the `status_pages_internal_page_publish` permission. The `status_pages_settings_write` permission is temporarily honored as we migrate publishing functionality from the update status page endpoint to the publish status page endpoint.",
+    "summary": "Publish status page"
+  },
+  "UnpublishStatusPage": {
+    "description": "Unpublishes a status page. For pages of type `public`, removes the status page from the public internet and requires the `status_pages_public_page_publish` permission. For pages of type `internal`, removes the `status-pages/$domain_prefix/view` route from the Datadog organization and requires the `status_pages_internal_page_publish` permission. The `status_pages_settings_write` permission is temporarily honored as we migrate unpublishing functionality from the update status page endpoint to the unpublish status page endpoint.",
+    "summary": "Unpublish status page"
   },
   "GetApiMultistepSubtests": {
     "description": "Get the list of API tests that can be added as subtests to a given API multistep test.\nThe current test is excluded from the list since a test cannot be a subtest of itself.",
