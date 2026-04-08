@@ -79,4 +79,5 @@ Learn how to enable App and API Protection on all the following supported platfo
 
 {{< appsec-integrations >}}
   {{< appsec-integration name="Azure App Service" avatar="azure-appserviceenvironment" link="./azure/app-service" >}}
+  {{< appsec-integration name="Azure Container Apps" avatar="azure-container-apps" link="./azure/container-apps" >}}
 {{< /appsec-integrations >}}
