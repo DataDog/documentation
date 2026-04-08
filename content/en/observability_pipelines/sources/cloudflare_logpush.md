@@ -36,7 +36,15 @@ The following are required to send Cloudflare Logpush logs to Observability Pipe
 1. Select your authorization strategy. If you selected **Plain**:
     - Enter the identifiers for the HTTP/S Server username and password. See [Set secrets][3] for the defaults used.
 1. In the **Decoding** dropdown menu, select **Bytes**.
-{{% observability_pipelines/tls_settings %}}
+1. Toggle the switch to **Enable TLS**.
+    - If you are using Secrets Management, enter the identifier for the HTTP/S Server key pass. See [Set secrets][3] for the defaults used.
+    - The following certificate and key files are required.
+      - `Server Certificate Path`: The path to the certificate file that has been signed by your Certificate Authority (CA) root file in DER, PEM, or CRT (X.509).
+      - `CA Certificate Path`: The path to the certificate file that is your Certificate Authority (CA) root file in DER, PEM, or CERT (X.509).
+      - `Private Key Path`: The path to the `.key` private key file that belongs to your Server Certificate Path in DER, PEM, or CERT (PKCS #8) format.
+      - **Notes**:
+        - The configuration data directory `/var/lib/observability-pipelines-worker/config/` is automatically appended to the file paths. See [Advanced Worker Configurations][7] for more information.
+        - The file must be readable by the `observability-pipelines-worker` group and user.
 1. Copy your certificates into the configuration directory:
     ```shell
     # Create the configuration directory
@@ -82,3 +90,4 @@ After your Logpush job has been successfully created, you can view your Cloudfla
 [4]: /observability_pipelines/configuration/install_the_worker/?tab=docker#pipeline-ui-setup
 [5]: https://developers.cloudflare.com/logs/logpush/logpush-job/enable-destinations/http/
 [6]: https://app.datadoghq.com/logs
+[7]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/

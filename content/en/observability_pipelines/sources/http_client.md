@@ -23,8 +23,7 @@ Set up this source when you [set up a pipeline][1]. You can set up a pipeline in
 
 To configure your HTTP/S Client source:
 
-
-<div class="alert alert-danger">Only enter the identifiers for the HTTP Client endpoint URL and, if applicable, your authorization strategy secrets. Do <b>not</b> enter the actual values.</div>
+<div class="alert alert-danger">Only enter the identifiers for the HTTP Client endpoint URL and, if applicable, your authorization strategy secrets and TLS key pass. Do <b>not</b> enter the actual values.</div>
 
 1. Enter the identifier for your HTTP Client endpoint URL. If you leave it blank, the [default](#set-secrets) is used.
 1. Select your authorization strategy. If you selected:

@@ -20,7 +20,7 @@ Use Observability Pipelines' HTTP Client destination to send logs to an HTTP cli
 
 Set up the HTTP Client destination and its environment variables when you [set up a pipeline][1]. The information below is configured in the pipelines UI.
 
-<div class="alert alert-danger">Only enter the identifiers for the HTTP Client URI and, if applicable, username and password for basic authorization. Do <b>not</b> enter the actual values.</div>
+<div class="alert alert-danger">Only enter the identifiers for the HTTP Client URI and, if applicable, username and password for basic authorization and the TLS key pass. Do <b>not</b> enter the actual values.</div>
 
 1. Enter the identifier for your HTTP Client URI. If you leave it blank, the [default](#set-secrets) is used.
 1. Select your authorization strategy (**None**, **Basic**, or **Bearer**). If you selected:

@@ -41,6 +41,8 @@ Set up the Amazon Security Lake destination and its environment variables when y
 
 ##### Enable TLS
 
+<div class="alert alert-danger">Only enter the identifier for the TLS key pass. Do <b>not</b> enter the actual value.</div>
+
 {{% observability_pipelines/tls_settings %}}
 
 ##### Buffering
