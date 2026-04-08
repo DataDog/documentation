@@ -58,7 +58,7 @@ The table columns correspond to the filters for the selected product, showing th
 
 ## Commitments inventory
 
-Commitments Inventory provides a detailed view of commitments active during the selected time frame, organized by commitment type. This includes commitments expiring soon (within 30 days) and commitments that have already expired within the selected period.
+Commitments Inventory provides a detailed view of commitments active during the selected time frame, organized by commitment type. This includes commitments expiring soon (within 30 days) and commitments that have already expired at the time of viewing.
 
 {{< img src="cloud_cost/planning/commitments-inventory-1.png" alt="Commitments Inventory section showing the Savings Plans tab with a utilization chart and a table of EC2 savings plan commitments." style="width:100%;" >}}
 
