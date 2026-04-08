@@ -83,6 +83,7 @@ Clicking on a host opens a side panel with details including:
 - **Telemetry** including metrics, logs, traces, processes, and so on
 - **Active monitor alerts** and enabled monitors status on the host
 - **Agent configuration** information
+- **Infra map** which displays a [Cloudcraft diagram][17]
 
 {{< img src="/infrastructure/resource_catalog/resource_catalog_host_side_panel.png" alt="Resource Catalog with the host side panel open" width="100%">}}
 
@@ -128,3 +129,4 @@ For more information, see [Resource Changes][16].
 [14]: https://app.datadoghq.com/integrations/azure
 [15]: https://docs.datadoghq.com/infrastructure/resource_catalog/schema/
 [16]: /infrastructure/resource_catalog/resource_changes/
+[17]: /datadog_cloudcraft/
