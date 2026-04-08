@@ -80,11 +80,22 @@ To access the relevant cloud console for any resource in your list, click on a r
 
 Clicking on a host opens a side panel with details including:
 
-- **Host information** such as the name, account, OS, instance type, tags, and metadata associated with the resource
-- **Telemetry** including metrics, logs, traces, processes, and so on
-- **Active monitor alerts** and enabled monitors status on the host
-- **Agent configuration** information
+- **Host information** such as the name, account, OS, instance type, tags, and metadata associated with the host
+**Host Summary** which displays active monitor alerts and enabled products 
+- **Metrics** including CPU usage, memory usage, [NTP offset][18], system uptime,and integrations installed on the resource
+- **Containers** which displays metrics for containers attached to the resource
+**Processes** which displays processes correlated with the resource; requires [Live Processes][19]
 - **Infra map** which displays a [Cloudcraft diagram][17]
+- **Relationships** which displays an interactive map of connections to other resources
+- **Logs** correlated with the host
+- **Traces** correlated with the host
+- **Profiles** correlated with the host (requires [Profiler][20])
+- **Network** information, which can be filtered by tags and displayed in customizable graphs
+- **Changes** showing a customizable history of changes to the host
+- **Security** which displays general misconfigurations, [IaC misconfigurations][21], signals, vulnerabilities, identity risks, and access insights
+- **Cost** which includes recommendations to reduce the host's costs
+- **Agent** which displays your Agent configuration in JSON format
+- **OTel Collector** which displays your OpenTelemetry Collector configuration (in Preview)
 
 {{< img src="/infrastructure/resource_catalog/resource_catalog_host_side_panel-2.png" alt="Resource Catalog with the host side panel open" width="100%">}}
 
@@ -131,3 +142,7 @@ For more information, see [Resource Changes][16].
 [15]: https://docs.datadoghq.com/infrastructure/resource_catalog/schema/
 [16]: /infrastructure/resource_catalog/resource_changes/
 [17]: /datadog_cloudcraft/
+[18]: /integrations/ntp/
+[19]: /infrastructure/process/?tab=linuxwindows#installation
+[20]: /profiler/enabling/
+[21]: /security/code_security/iac_security/
