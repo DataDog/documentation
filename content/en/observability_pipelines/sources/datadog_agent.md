@@ -16,11 +16,16 @@ further_reading:
 
 {{< product-availability >}}
 
+{{< callout url="https://www.datadoghq.com/product-preview/metrics-ingestion-and-cardinality-control-in-observability-pipelines/"
+ btn_hidden="false" header="Join the Preview!">}}
+Sending metrics to Observability Pipelines is in Preview. Fill out the form to request access.
+{{< /callout >}}
+
 ## Overview
 
 Use Observability Pipelines' Datadog Agent source to receive logs or metrics ({{< tooltip glossary="preview" case="title" >}}) from the Datadog Agent.
 
-**Note**: If you are using the Datadog Distribution of OpenTelemetry (DDOT) Collector for logs, you must [use the OpenTelemetry source to send logs to Observability Pipelines][4].
+**Note**: If you are using the Datadog Distribution of OpenTelemetry (DDOT) Collector to collect logs or metrics, you must [use the OpenTelemetry source to send that data to Observability Pipelines][4].
 
 ## Prerequisites
 
@@ -30,8 +35,6 @@ Use Observability Pipelines' Datadog Agent source to receive logs or metrics ({{
 
 Set up this source when you [set up a pipeline][1]. You can set up a pipeline in the [UI][6], using the [API][7], or with [Terraform][8]. The instructions in this section are for setting up the source in the UI.
 
-### Optional TLS settings
-
 Select and set up this source when you [set up a pipeline][1]. The information below is for the source settings in the pipeline UI.
 
 To configure your Datadog Agent source:
@@ -40,7 +43,7 @@ To configure your Datadog Agent source:
 
 Enter the identifier for your Datadog Agent address. If you leave it blank, the [default](#set-secrets) is used.
 
-### Optional settings
+### Optional TLS settings
 
 Toggle the switch to **Enable TLS**. The following certificate and key files are required.<br>**Note**: All file paths are made relative to the configuration data directory, which is `/var/lib/observability-pipelines-worker/config/` by default. See [Advanced Worker Configurations][5] for more information. The file must be owned by the `observability-pipelines-worker` user and group, or at least readable by the group or user.
 - Enter the identifier for your Datadog Agent key pass. If you leave it blank, the [default](#set-secrets) is used.
@@ -163,7 +166,7 @@ datadog:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /observability_pipelines/configuration/set_up_pipelines/
-[4]: /observability_pipelines/sources/opentelemetry/#send-logs-from-the-datadog-distribution-of-opentelemetry-collector-to-observability-pipelines
+[4]: /observability_pipelines/sources/opentelemetry/#send-data-from-the-datadog-distribution-of-opentelemetry-collector-to-observability-pipelines
 [5]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/
 [6]: https://app.datadoghq.com/observability-pipelines
 [7]: /api/latest/observability-pipelines/
