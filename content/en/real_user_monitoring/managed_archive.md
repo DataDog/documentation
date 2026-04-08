@@ -43,7 +43,7 @@ After you enable Managed Archive, all ingested sessions (excluding Synthetic Mon
 
 <div class="alert alert-info">It takes 24 hours for a newly ingested session to appear in the Managed Archive.</div>
 
-All stored sessions, including sessions retained by retention filters or already recovered are shown in the Managed Archive UI. A set of session tags and attributes are available to help you navigate and identify sessions to recover:
+All stored sessions, including sessions retained by retention filters or already recovered, are shown in the Managed Archive UI. A set of session tags and attributes are available to help you navigate and identify sessions to recover:
 
 | Attribute | Description |
 |---|---|
