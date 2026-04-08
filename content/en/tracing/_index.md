@@ -64,7 +64,7 @@ For an introduction to terminology used in Datadog APM, see [APM Terms and Conce
 
 ## Getting started
 
-If you already have the Datadog Agent running, [APM Basic][31] is automatically active on hosts where Single Step Instrumentation is not applicable. It collects RED metrics from network traffic without any code changes.
+For baseline service visibility without code changes, use [APM Basic][31]. It collects RED metrics from network traffic using only the Datadog Agent—no instrumentation required.
 
 To add distributed tracing to your services, use [Single Step Instrumentation][27]. This installs the Datadog Agent and instruments your application in one step, with no additional configuration required.
 
