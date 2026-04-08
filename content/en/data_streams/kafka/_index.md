@@ -10,6 +10,24 @@ With Data Streams Monitoring's Kafka Monitoring, a Datadog Agent check connects 
 - **Connect services to topics**: See which producers and consumers interact with each topic, with linked owners, repos, on-call rotations, traces, and error logs
 - **Inspect topic schemas and messages**: View schemas, compare versions, and access messages to debug poison payloads or explore the topic
 
+## Prerequisites
+
+If your Kafka cluster uses ACLs, the Datadog Agent user requires the following minimum permissions:
+
+| Resource Name | Resource Type | Operation        |
+|---------------|---------------|------------------|
+| `kafka-cluster` | `CLUSTER`   | `Describe`       |
+| `kafka-cluster` | `CLUSTER`   | `DescribeConfigs` |
+| `*`           | `TOPIC`       | `Describe`       |
+| `*`           | `TOPIC`       | `DescribeConfigs` |
+| `*`           | `GROUP`       | `Describe`       |
+
+To retrieve messages in the **Messages** section, the Agent user also requires:
+
+| Resource Name | Resource Type | Operation |
+|---------------|---------------|-----------|
+| `*`           | `TOPIC`       | `Read`    |
+
 ## Setup
 
 Go to the [Kafka Monitoring setup page][1] and click {{< ui >}}Get Started{{< / ui >}}. Then choose your environment and follow the instructions. To request assistance, choose {{< ui >}}Request a pairing session{{< /ui >}}.
