@@ -37,7 +37,7 @@ Common use cases include:
 
 ## How Managed Archive works
 
-Once enabled all ingested sessions (excluding Synthetic Monitoring sessions) are stored automatically for the configured storage period. These sessions are accessible in a dedicated **Managed Archive UI**, separate from the [RUM Explorer][2].
+After you enable Managed Archive, all ingested sessions (excluding Synthetic Monitoring sessions) are stored automatically for the configured storage period. These sessions are accessible in a dedicated **Managed Archive UI**, separate from the [RUM Explorer][2].
 
 {{< img src="real_user_monitoring/managed_archive/ma1.png" alt="The Managed Archive UI showing a table of stored sessions with light-indexed attributes" style="width:100%;" >}}
 
