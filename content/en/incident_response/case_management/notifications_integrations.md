@@ -144,7 +144,7 @@ In Project Settings, you can manage membership, configure the auto-closing of ca
 1. Save changes.
 
 **Notes**:
-- Only cases using the core statuses of "Open", "In Progress" and "Closed" can sync with Linear.
+- Only cases using the core statuses of "Open", "In Progress", and "Closed" can sync with Linear.
 - Two-way syncing requires [webhook support][6].
 {{% /collapse-content %}}
 
