@@ -5,7 +5,7 @@ description: Set a custom dashboard as your organization's landing page to contr
 
 ## Overview
 
-The Datadog organization landing page is the first page your users see when they log on to Datadog or navigate to the Datadog root page. Datadog determines which landing page to display based on the following priority:
+The Datadog organization landing page is the first page your users see when they log in to Datadog or navigate to the Datadog root page. Datadog determines which landing page to display based on the following priority:
 
 1. **Custom user home page**: A [personal home page][3] set by the individual user.
 2. **Custom organization home page**: A custom page chosen by an administrator for the entire organization.
