@@ -14,6 +14,10 @@ With Data Streams Monitoring's Kafka Monitoring, a Datadog Agent check connects 
 
 Go to the [Kafka Monitoring setup page][1] and click {{< ui >}}Get Started{{< / ui >}}. Then choose your environment and follow the instructions. To request assistance, choose {{< ui >}}Request a pairing session{{< /ui >}}.
 
+{{< img src="data_streams/kafka_setup-2.png" alt="The Kafka Monitoring setup dialog showing environment selection, security protocol, schema registry options, and Kubernetes configuration instructions" >}}
+
+The setup page provides environment-specific configuration instructions. You can copy the instructions directly to an AI agent with **Copy for AI**.
+
 ### Kafka ACL permissions
 
 If your Kafka cluster uses ACLs, the Datadog Agent user requires the following minimum permissions:
@@ -25,10 +29,6 @@ If your Kafka cluster uses ACLs, the Datadog Agent user requires the following m
 | `*`           | `TOPIC`       | `Describe`       |
 | `*`           | `TOPIC`       | `DescribeConfigs` |
 | `*`           | `GROUP`       | `Describe`       |
-
-{{< img src="data_streams/kafka_setup-2.png" alt="The Kafka Monitoring setup dialog showing environment selection, security protocol, schema registry options, and Kubernetes configuration instructions" >}}
-
-The setup page provides environment-specific configuration instructions. You can copy the instructions directly to an AI agent with **Copy for AI**.
 
 ## Workflows
 
