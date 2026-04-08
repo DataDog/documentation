@@ -16,7 +16,7 @@ Managed Archive is in Preview.
 
 ## Overview
 
-Datadog's [RUM without Limits][1] lets you get an accurate, long-term overview of application health and performance, even if only a fraction of session data is retained by retention filters. But any session can be useful to solve an unexpected support ticket, perform a compliance audit, or apply a retroactive investigation.
+Datadog's [RUM without Limits][1] provides an accurate, long-term overview of application health and performance, even if only a fraction of session data is retained by retention filters. But any session can be useful to solve an unexpected support ticket, perform a compliance audit, or conduct a retroactive investigation.
 
 RUM Managed Archive acts as a **safety net**: all ingested sessions are stored automatically so that no user interaction is ever permanently lost, and specific sessions can be recovered on demand for full investigation in RUM whenever they are needed.
 
