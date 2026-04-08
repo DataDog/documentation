@@ -30,6 +30,12 @@ If your Kafka cluster uses ACLs, the Datadog Agent user requires the following m
 | `*`           | `TOPIC`       | `DescribeConfigs` |
 | `*`           | `GROUP`       | `Describe`       |
 
+To [view messages][2], the Agent user also requires:
+
+| Resource Name | Resource Type | Operation |
+|---------------|---------------|-----------|
+| `*`           | `TOPIC`       | `Read`    |
+
 ## Workflows
 
 ### Monitor cluster health and performance
