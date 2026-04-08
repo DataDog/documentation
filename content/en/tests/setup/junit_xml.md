@@ -340,17 +340,18 @@ For mobile apps (Swift, Android):
 ## Adding code owners
 To add [codeowners][9] information to your JUnit XML tests, you can use the [GitHub integration][10] to read the `CODEOWNERS` file in your repository or provide some additional information manually.
 
-As a result, the JUnit XML tests have a `test.codeowners` tag with the owner of those tests.
+As a result, our backend will add the corresponding `test.codeowners` tag with the owner of those tests.
 
 ### Using the GitHub integration
 
 To automatically add the `test.codeowners` tag to your tests, you need to:
 1. Have a `CODEOWNERS` file [in one of the allowed locations][11] in your repository.
-2. Provide the tests source file in your JUnit XML report. The following plugins do this automatically and add the `file` attribute to the `<testcase>` or `<testsuite>` elements in the XML report:
+2. Provide the tests source file (relative to the root of your repositoriy) in your JUnit XML report. The following plugins do this automatically and add the `file` attribute to the `<testcase>` or `<testsuite>` elements in the XML report:
 
     * phpunit
     * Most Python plugins (pytest, unittest)
     * Most Ruby plugins (ruby minitest)
+    * most Node.js plugins (but some of them will use absolute path by default)
 
     If the XML does not have the `file` attribute, you need to [provide the source file manually](#manually-providing-the-testsourcefile-tag).
    Example of a valid report:
