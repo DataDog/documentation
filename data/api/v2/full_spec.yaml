@@ -43296,12 +43296,14 @@ components:
     ObservabilityPipelineAmazonS3Source:
       description: |-
         The `amazon_s3` source ingests logs from an Amazon S3 bucket.
-        It supports AWS authentication and TLS encryption.
+        It supports AWS authentication, TLS encryption, and configurable compression.
 
         **Supported pipeline types:** logs
       properties:
         auth:
           $ref: "#/components/schemas/ObservabilityPipelineAwsAuth"
+        compression:
+          $ref: "#/components/schemas/ObservabilityPipelineAmazonS3SourceCompression"
         id:
           description: The unique identifier for this component. Used in other parts of the pipeline to reference this component (for example, as the `input` to downstream components).
           example: aws-s3-source
@@ -43324,6 +43326,20 @@ components:
         - region
       type: object
       x-pipeline-types: [logs]
+    ObservabilityPipelineAmazonS3SourceCompression:
+      description: Compression format for objects retrieved from the S3 bucket. Use `auto` to detect compression from the object's Content-Encoding header or file extension.
+      enum:
+        - auto
+        - none
+        - gzip
+        - zstd
+      example: gzip
+      type: string
+      x-enum-varnames:
+        - AUTO
+        - NONE
+        - GZIP
+        - ZSTD
     ObservabilityPipelineAmazonS3SourceType:
       default: amazon_s3
       description: The source type. Always `amazon_s3`.

@@ -1334,6 +1334,11 @@
     },
     {
       "group": "observability_pipelines",
+      "suffix": "_99164570",
+      "description": "Validate an observability pipeline with amazon S3 source compression returns \"OK\" response"
+    },
+    {
+      "group": "observability_pipelines",
       "suffix": "_1330454428",
       "description": "Validate an observability pipeline with destination secret key returns \"OK\" response"
     },
