@@ -13,7 +13,7 @@ What this pack does:
 
 - Drops low-value types
 - Removes unused fields per event type (DNS, File, Process, Network, Registry, etc.)
-- Optional counter-field removal
+- Optionally, remove counter field
 
 ## Further Reading
 
