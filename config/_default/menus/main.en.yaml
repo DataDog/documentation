@@ -958,6 +958,11 @@ menu:
     #   parent: sdk
     #   identifier: sdk_data_collected
     #   weight: 3
+    # - name: Mobile Vitals
+    #   url: client_sdks/mobile_vitals/
+    #   parent: sdk
+    #   identifier: sdk_mobile_vitals
+    #   weight: 4
     - name: Extend Datadog
       url: extend/
       pre: dev-code
@@ -8478,7 +8483,7 @@ menu:
       identifier: rum_mobile_ios_data_collected
       weight: 106
     - name: Mobile Vitals
-      url: real_user_monitoring/application_monitoring/ios/mobile_vitals?tab=ios
+      url: real_user_monitoring/application_monitoring/ios/mobile_vitals
       parent: rum_mobile_ios
       identifier: rum_mobile_ios_mobile_vitals
       weight: 107
@@ -8533,7 +8538,7 @@ menu:
       identifier: rum_mobile_flutter_data_collected
       weight: 104
     - name: Mobile Vitals
-      url: real_user_monitoring/application_monitoring/flutter/mobile_vitals?tab=flutter
+      url: real_user_monitoring/application_monitoring/flutter/mobile_vitals
       parent: rum_mobile_flutter
       identifier: rum_mobile_flutter_mobile_vitals
       weight: 105
@@ -8623,7 +8628,7 @@ menu:
       identifier: rum_mobile_react_data_collected
       weight: 104
     - name: Mobile Vitals
-      url: real_user_monitoring/application_monitoring/react_native/mobile_vitals?tab=reactnative
+      url: real_user_monitoring/application_monitoring/react_native/mobile_vitals
       parent: rum_mobile_react_native
       identifier: rum_mobile_react_mobile_vitals
       weight: 105
@@ -8698,7 +8703,7 @@ menu:
       identifier: rum_mobile_unity_data_collected
       weight: 104
     - name: Mobile Vitals
-      url: real_user_monitoring/application_monitoring/unity/mobile_vitals?tab=unity
+      url: real_user_monitoring/application_monitoring/unity/mobile_vitals
       parent: rum_mobile_unity
       identifier: rum_mobile_unity_mobile_vitals
       weight: 105
