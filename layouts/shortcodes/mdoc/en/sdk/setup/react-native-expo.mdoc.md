@@ -46,47 +46,50 @@ import {
 } from 'expo-datadog';
 
 const config = new DatadogProviderConfiguration(
-    '<CLIENT_TOKEN>', 
+    '<CLIENT_TOKEN>',
     '<ENVIRONMENT_NAME>',
-    // Optional: Configure the Datadog Site to target. Default is 'US1'.
-    site: 'US1',
-    // Optional: Set the reported service name (by default, it uses the package name or bundleIdentifier of your Android or iOS app respectively)
-    service: 'com.example.reactnative',
-    // Optional: Let the SDK print internal logs above or equal to the provided level. Default is undefined (meaning no logs)
-    verbosity: SdkVerbosity.WARN,
-    // Enable RUM
-    rumConfiguration: {
-        // Required: RUM Application ID
-        applicationId: '<APPLICATION_ID>',
-        // Track user interactions (set to false if using Error Tracking only)
-        trackInteractions: true,
-        // Track XHR resources (set to false if using Error Tracking only)
-        trackResources: true,
-        // Track errors
-        trackErrors: true,
-        // Optional: Sample sessions, for example: 80% of sessions are sent to Datadog. Default is 100%.
-        sessionSampleRate: 80,
-        // Optional: Enable or disable native crash reports.
-        nativeCrashReportEnabled: true,
-        // Optional: Sample tracing integrations for network calls between your app and your backend 
-        // (in this example, 80% of calls to your instrumented backend are linked from the RUM view to
-        // the APM view. Default is 20%).
-        // You need to specify the hosts of your backends to enable tracing with these backends
-        resourceTraceSampleRate: 80,
-        firstPartyHosts: [
-            { 
-                match: 'example.com', 
-                propagatorTypes: [
-                    PropagatorType.DATADOG,
-                    PropagatorType.TRACECONTEXT
-                ]
-            }
-        ]
-    },
-    // Enable Logs with default configuration
-    logsConfiguration: {},
-    // Enable Trace with default configuration
-    traceConfiguration: {}
+    trackingConsent,
+    {
+        // Optional: Configure the Datadog Site to target. Default is 'US1'.
+        site: 'US1',
+        // Optional: Set the reported service name (by default, it uses the package name or bundleIdentifier of your Android or iOS app respectively)
+        service: 'com.example.reactnative',
+        // Optional: Let the SDK print internal logs above or equal to the provided level. Default is undefined (meaning no logs)
+        verbosity: SdkVerbosity.WARN,
+        // Enable RUM
+        rumConfiguration: {
+            // Required: RUM Application ID
+            applicationId: '<APPLICATION_ID>',
+            // Track user interactions (set to false if using Error Tracking only)
+            trackInteractions: true,
+            // Track XHR resources (set to false if using Error Tracking only)
+            trackResources: true,
+            // Track errors
+            trackErrors: true,
+            // Optional: Sample sessions, for example: 80% of sessions are sent to Datadog. Default is 100%.
+            sessionSampleRate: 80,
+            // Optional: Enable or disable native crash reports.
+            nativeCrashReportEnabled: true,
+            // Optional: Sample tracing integrations for network calls between your app and your backend
+            // (in this example, 80% of calls to your instrumented backend are linked from the RUM view to
+            // the APM view. Default is 20%).
+            // You need to specify the hosts of your backends to enable tracing with these backends
+            resourceTraceSampleRate: 80,
+            firstPartyHosts: [
+                {
+                    match: 'example.com',
+                    propagatorTypes: [
+                        PropagatorType.DATADOG,
+                        PropagatorType.TRACECONTEXT
+                    ]
+                }
+            ]
+        },
+        // Enable Logs with default configuration
+        logsConfiguration: {},
+        // Enable Trace with default configuration
+        traceConfiguration: {}
+    }
 );
 
 // Wrap the content of your App component in a DatadogProvider component, passing it your configuration:
