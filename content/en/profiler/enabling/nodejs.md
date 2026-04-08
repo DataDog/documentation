@@ -80,7 +80,7 @@ const tracer = require('dd-trace/init')
 
 5. Optional: Set up [Source Code Integration][4] to connect your profiling data with your Git repositories.
 
-6. Optional: [Upload Source Maps][10] (Preview). If you use source maps, the profiler reads them and produces mapped locations in profiles. Source maps in `.map` files and inline source maps are both supported. To reduce deployment sizes (for example, in serverless environments), you can choose not to deploy source maps and instead upload them to Datadog.
+6. Optional: [Upload Source Maps][10] (Preview). If you deploy source maps with your application, the profiler reads them and produces mapped locations in profiles. Source maps in `.map` files and inline source maps are both supported. To reduce deployment sizes (for example, in serverless environments), you can choose not to deploy source maps and instead upload them to Datadog.
 
    **Note**: Uploaded source maps require dd-trace version 5.93.0 or newer. Your deployed source files must also contain the `@sourceMappingURL` annotation so the profiler knows to use the uploaded maps.
 
