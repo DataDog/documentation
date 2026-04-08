@@ -12,7 +12,7 @@ SentinelOne Cloud Funnel streams EDR and Deep Visibility events as JSON to cloud
 What this pack does:
 
 - Drops low-value types
-- Removes unused fields per event type (DNS, File, Process, Network, Registry, etc.)
+- Removes unused fields per event type (DNS, File, Process, Network, Registry, and so on)
 - Optionally, remove counter field
 
 ## Further Reading
