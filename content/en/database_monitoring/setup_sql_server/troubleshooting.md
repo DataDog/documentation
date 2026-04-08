@@ -328,6 +328,19 @@ CREATE USER datadog FOR LOGIN datadog;
 GRANT SELECT to datadog;
 ```
 
+### Why am I not seeing Query Metrics or an Explain Plan for infrequently ran queries?
+
+If you're missing Query Metrics or Explain Plans for queries that run infrequently or take a long time to complete, increasing the `query_metrics.lookback_window` can increase the chances of capturing them.
+
+The agent needs two consecutive runs of a query to be able to calculate Query Metrics and the `query_metrics.lookback_window` parameter controls how far back the Agent looks for recently completed queries.
+
+It is important to note that increasing this may increase the load on your database and increase the number of normalized queries per collection cycle. As such, you should increase this value gradually and monitor the impact. 
+
+  ```yaml
+  query_metrics:
+    lookback_window: 600
+  ```
+
 ## Known limitations
 
 ### SQL Server 2012
