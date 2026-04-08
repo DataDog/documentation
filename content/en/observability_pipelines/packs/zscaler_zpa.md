@@ -11,7 +11,7 @@ Zscaler Private Access captures private app access, sessions, and connections.
 
 What this pack does:
 
-- Normalizes ZPA fields, drops null/empty fields, maps key fields
+- Normalizes ZPA fields, drops null and empty fields, maps key fields
 - Samples successful and Browser Access traffic
 - Tags failed or blocked connections
 
