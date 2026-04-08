@@ -937,6 +937,22 @@ menu:
       identifier: otel_otlp_metric_types
       parent: otel_reference
       weight: 1104
+    # - name: Client SDKs
+    #   url: client_sdks/
+    #   pre: building-block
+    #   identifier: sdk
+    #   parent: essentials_heading
+    #   weight: 60000
+    # - name: Setup
+    #   url: client_sdks/setup/
+    #   parent: sdk
+    #   identifier: sdk_setup
+    #   weight: 1
+    # - name: Advanced Configuration
+    #   url: client_sdks/advanced_configuration/
+    #   parent: sdk
+    #   identifier: sdk_advanced_configuration
+    #   weight: 2
     - name: Extend Datadog
       url: extend/
       pre: dev-code
@@ -6273,91 +6289,96 @@ menu:
       url: observability_pipelines/destinations/crowdstrike_ng_siem/
       parent: observability_pipelines_destinations
       weight: 405
+    - name: Datadog Archives
+      identifier: observability_pipelines_destinations_datadog_archives
+      url: observability_pipelines/destinations/datadog_archives/
+      parent: observability_pipelines_destinations
+      weight: 406
     - name: Datadog CloudPrem
       url: observability_pipelines/destinations/cloudprem/
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_datadog_cloudprem
-      weight: 406
+      weight: 407
     - name: Datadog Logs
       url: observability_pipelines/destinations/datadog_logs/
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_datadog_logs
-      weight: 407
+      weight: 408
     - name: Datadog Metrics
       url: observability_pipelines/destinations/datadog_metrics/
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_datadog_metrics
-      weight: 408
+      weight: 409
     - name: Elasticsearch
       url: observability_pipelines/destinations/elasticsearch/
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_elasticsearch
-      weight: 409
+      weight: 410
     - name: Google Cloud Storage
       identifier: observability_pipelines_google_cloud_storage
       url: /observability_pipelines/destinations/google_cloud_storage/
       parent: observability_pipelines_destinations
-      weight: 410
+      weight: 411
     - name: Google Pub/Sub
       identifier: observability_pipelines_google_pubsub
       url: /observability_pipelines/destinations/google_pubsub/
       parent: observability_pipelines_destinations
-      weight: 411
+      weight: 412
     - name: Google SecOps
       url: observability_pipelines/destinations/google_secops/
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_google_secops
-      weight: 412
+      weight: 413
     - name: HTTP Client
       url: observability_pipelines/destinations/http_client/
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_http_client
-      weight: 413
+      weight: 414
     - name: Kafka
       url: observability_pipelines/destinations/kafka/
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_kafka
-      weight: 414
+      weight: 415
     - name: Microsoft Sentinel
       identifier: observability_pipelines_microsoft_sentinel
       url: /observability_pipelines/destinations/microsoft_sentinel/
       parent: observability_pipelines_destinations
-      weight: 415
+      weight: 416
     - name: New Relic
       identifier: observability_pipelines_new_relic
       url: /observability_pipelines/destinations/new_relic/
       parent: observability_pipelines_destinations
-      weight: 416
+      weight: 417
     - name: OpenSearch
       url: observability_pipelines/destinations/opensearch
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_opensearch
-      weight: 417
+      weight: 418
     - name: SentinelOne
       url: observability_pipelines/destinations/sentinelone
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_sentinelone
-      weight: 418
+      weight: 419
     - name: Socket
       url: observability_pipelines/destinations/socket
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_socket
-      weight: 419
+      weight: 420
     - name: Splunk HEC
       url: observability_pipelines/destinations/splunk_hec
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_splunk_hec
-      weight: 420
+      weight: 421
     - name: Sumo Logic Hosted Collector
       url: observability_pipelines/destinations/sumo_logic_hosted_collector
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_sumo_logic_hosted_collector
-      weight: 421
+      weight: 422
     - name: Syslog
       url: observability_pipelines/destinations/syslog
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_syslog
-      weight: 422
+      weight: 423
     - name: Packs
       url: observability_pipelines/packs/
       parent: observability_pipelines
@@ -8296,51 +8317,56 @@ menu:
       parent: rum_browser
       identifier: rum_advanced
       weight: 102
+    - name: Build Plugins
+      url: real_user_monitoring/application_monitoring/browser/build_plugins/
+      parent: rum_browser
+      identifier: rum_browser_build_plugins
+      weight: 103
     - name: Data Collected
       url: real_user_monitoring/application_monitoring/browser/data_collected/
       parent: rum_browser
       identifier: rum_data_collected
-      weight: 103
+      weight: 104
     - name: Monitoring Page Performance
       url: real_user_monitoring/application_monitoring/browser/monitoring_page_performance/
       parent: rum_browser
       identifier: page_performance
-      weight: 104
+      weight: 105
     - name: Optimizing Performance
       url: real_user_monitoring/application_monitoring/browser/optimizing_performance/
       parent: rum_browser
       identifier: rum_optimizing_performance
-      weight: 105
+      weight: 106
     - name: Monitoring Resource Performance
       url: real_user_monitoring/application_monitoring/browser/monitoring_resource_performance/
       parent: rum_browser
       identifier: resource_performance
-      weight: 106
+      weight: 107
     - name: Collecting Browser Errors
       url: real_user_monitoring/application_monitoring/browser/collecting_browser_errors/
       parent: rum_browser
       identifier: collect_errors
-      weight: 107
+      weight: 108
     - name: Tracking User Actions
       url: real_user_monitoring/application_monitoring/browser/tracking_user_actions/
       parent: rum_browser
       identifier: track_actions
-      weight: 108
+      weight: 109
     - name: Frustration Signals
       url: real_user_monitoring/application_monitoring/browser/frustration_signals/
       parent: rum_browser
       identifier: rum_frustration_signals
-      weight: 109
+      weight: 110
     - name: Error Tracking
       url: real_user_monitoring/application_monitoring/browser/error_tracking/
       parent: rum_browser
       identifier: rum_browser_error_tracking
-      weight: 110
+      weight: 111
     - name: Troubleshooting
       url: real_user_monitoring/application_monitoring/browser/troubleshooting/
       parent: rum_browser
       identifier: troubleshooting
-      weight: 111
+      weight: 112
     - name: Android and Android TV
       url: real_user_monitoring/application_monitoring/android
       parent: application_monitoring
@@ -9080,9 +9106,9 @@ menu:
       parent: organization_settings
       identifier: login_methods
       weight: 202
-    - name: OAuth Apps
-      identifier: account_management_org_settings_oauth_apps
-      url: account_management/org_settings/oauth_apps
+    - name: Mobile and Third-Party Access
+      identifier: account_management_org_settings_mobile_third_party_access
+      url: account_management/org_settings/mobile_third_party_access
       parent: organization_settings
       weight: 203
     - name: Custom Organization Landing Page
@@ -9140,51 +9166,56 @@ menu:
       identifier: account_management_saml_configuration
       parent: account_management_saml
       weight: 401
+    - name: Renewing SAML Certificates
+      url: account_management/saml/renewing/
+      identifier: account_management_saml_renewing
+      parent: account_management_saml
+      weight: 402
     - name: User Group Mapping
       url: account_management/saml/mapping/
       identifier: account_management_saml_mapping
       parent: account_management_saml
-      weight: 402
+      weight: 403
     - name: Active Directory
       url: account_management/saml/activedirectory/
       identifier: account_management_saml_activedirectory
       parent: account_management_saml
-      weight: 403
+      weight: 404
     - name: Auth0
       url: account_management/saml/auth0/
       identifier: account_management_saml_auth0
       parent: account_management_saml
-      weight: 404
+      weight: 405
     - name: Entra ID
       url: account_management/saml/entra/
       identifier: account_management_saml_entra
       parent: account_management_saml
-      weight: 405
+      weight: 406
     - name: Google
       url: account_management/saml/google/
       identifier: account_management_saml_google
       parent: account_management_saml
-      weight: 406
+      weight: 407
     - name: LastPass
       url: account_management/saml/lastpass/
       identifier: account_management_saml_lastpass
       parent: account_management_saml
-      weight: 407
+      weight: 408
     - name: Okta
       url: account_management/saml/okta/
       identifier: account_management_saml_okta
       parent: account_management_saml
-      weight: 408
+      weight: 409
     - name: SafeNet
       url: account_management/saml/safenet/
       identifier: account_management_saml_safenet
       parent: account_management_saml
-      weight: 409
+      weight: 410
     - name: Troubleshooting
       url: account_management/saml/troubleshooting/
       identifier: account_management_samle_troubleshooting
       parent: account_management_saml
-      weight: 410
+      weight: 411
     - name: SCIM
       url: account_management/scim/
       parent: account_management

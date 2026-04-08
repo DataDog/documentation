@@ -21,9 +21,10 @@ These are the available destinations:
 {{% tab "Logs" %}}
 
 - [Amazon OpenSearch][1]
-- [Amazon S3][2]
+- [Amazon S3][22]
 - [Amazon Security Lake][3]
 - [Azure Storage][4]
+- [Datadog Archives][2]
 - [Datadog CloudPrem][5]
 - [CrowdStrike Next-Gen SIEM][6]
 - [Datadog Logs][7]
@@ -43,7 +44,7 @@ These are the available destinations:
 - [Syslog][21]
 
 [1]: /observability_pipelines/destinations/amazon_opensearch/
-[2]: /observability_pipelines/destinations/amazon_s3/
+[2]: /observability_pipelines/destinations/datadog_archives/
 [3]: /observability_pipelines/destinations/amazon_security_lake/
 [4]: /observability_pipelines/destinations/azure_storage/
 [5]: /observability_pipelines/destinations/cloudprem/
@@ -63,6 +64,7 @@ These are the available destinations:
 [19]: /observability_pipelines/destinations/splunk_hec/
 [20]: /observability_pipelines/destinations/sumo_logic_hosted_collector/
 [21]: /observability_pipelines/destinations/syslog/
+[22]: /observability_pipelines/destinations/amazon_s3/
 
 {{% /tab %}}
 
@@ -79,14 +81,14 @@ These are the available destinations:
 
 Logs are often stored in separate indexes based on log data, such as the service or environment the logs are coming from or another log attribute. In Observability Pipelines, you can use template syntax to route your logs to different indexes based on specific log fields.
 
-When the Observability Pipelines Worker cannot resolve the field with the template syntax, the Worker defaults to a specified behavior for that destination. For example, if you are using the template `{{application_id}}` for the Amazon S3 destination's **Prefix** field, but there isn't an `application_id` field in the log, the Worker creates a folder called `OP_UNRESOLVED_TEMPLATE_LOGS/` and publishes the logs there.
+When the Observability Pipelines Worker cannot resolve the field with the template syntax, the Worker defaults to a specified behavior for that destination. For example, if you are using the template `{{application_id}}` for the Datadog Archives destination's **Prefix** field, but there isn't an `application_id` field in the log, the Worker creates a folder called `OP_UNRESOLVED_TEMPLATE_LOGS/` and publishes the logs there.
 
 The following table lists the destinations and fields that support template syntax, and what happens when the Worker cannot resolve the field:
 
 | Destination       | Fields that support template syntax | Behavior when the field cannot be resolved                                                                                 |
 |-------------------|-------------------------------------|----------------------------------------------------------------------------------------------------------------------------|
 | Amazon Opensearch | Index                               | The Worker writes logs to the `datadog-op` index.                                                                          |
-| Amazon S3         | Prefix                              | The Worker creates a folder named `OP_UNRESOLVED_TEMPLATE_LOGS/` and writes the logs there.                                |
+| Datadog Archives  | Prefix                              | The Worker creates a folder named `OP_UNRESOLVED_TEMPLATE_LOGS/` and writes the logs there.                                |
 | Azure Blob        | Prefix                              | The Worker creates a folder named `OP_UNRESOLVED_TEMPLATE_LOGS/` and writes the logs there.                                |
 | Elasticsearch     | Index                               | The Worker writes logs to the `datadog-op` index.                                                                          |
 | Google Chronicle  | Log type                            | Defaults to `DATADOG` log type.                                                                                            |
@@ -96,9 +98,9 @@ The following table lists the destinations and fields that support template synt
 
 #### Example
 
-If you want to route logs based on the log's application ID field (for example, `application_id`) to the Amazon S3 destination, use the event fields syntax in the **Prefix to apply to all object keys** field.
+If you want to route logs based on the log's application ID field (for example, `application_id`) to the Datadog Archives destination, use the event fields syntax in the **Prefix to apply to all object keys** field.
 
-{{< img src="observability_pipelines/amazon_s3_prefix_20250709.png" alt="The Amazon S3 destination showing the prefix field using the event fields syntax /application_id={{ application_id }}/" style="width:40%;" >}}
+{{< img src="observability_pipelines/amazon_s3_prefix_20250709.png" alt="The Datadog Archives destination showing the prefix field using the event fields syntax /application_id={{ application_id }}/" style="width:40%;" >}}
 
 ### Syntax
 
