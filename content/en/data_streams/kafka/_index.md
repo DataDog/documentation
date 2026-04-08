@@ -1,10 +1,6 @@
 ---
 title: Kafka Monitoring
 description: Monitor Kafka cluster health, connect services to topics, and inspect schemas and messages with Data Streams Monitoring's Kafka Monitoring.
-aliases:
-  - data_streams/live_messages
-  - data_streams/messages
-  - data_streams/kafka/messages
 ---
 
 With Data Streams Monitoring's Kafka Monitoring, a Datadog Agent check connects to your Kafka cluster and starts collecting health and performance metrics. Kafka Monitoring allows you to:
@@ -80,6 +76,7 @@ The **Messages** section lets you retrieve messages by partition and offset to i
 
 {{< img src="data_streams/kafka_schema_messages.png" alt="Topic schema and messages view showing a Protobuf schema definition and a table of recent messages with date, partition, offset, and message value" >}}
 
-**Note**: Message viewing is not enabled by default and requires additional setup. Access is controlled by per-user permissions, so you can roll out Kafka Monitoring without exposing message content. Configure message viewing separately after completing the initial setup.
+**Note**: [Message viewing][2] is not enabled by default and requires additional setup. Access is controlled by per-user permissions, so you can roll out Kafka Monitoring without exposing message content. Configure message viewing separately after completing the initial setup.
 
 [1]: https://app.datadoghq.com/data-streams/kafka/setup
+[2]: /data_streams/kafka/messages
