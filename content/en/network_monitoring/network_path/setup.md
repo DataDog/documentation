@@ -358,6 +358,8 @@ Agent `v7.73+` is required.
         #     type: exclude
         #   - match_ip: 10.0.0.0/8
         #     type: exclude
+        #   - match_domain: 'api.datadoghq.com'
+        #     type: include
 
     ```
 
@@ -423,6 +425,8 @@ Agent `v7.73+` is required.
         #     type: exclude
         #   - match_ip: 10.0.0.0/8
         #     type: exclude
+        #   - match_domain: 'api.datadoghq.com'
+        #     type: include
     ```
 
 3. Restart the Agent after making these configuration changes to start seeing network paths.
@@ -479,6 +483,8 @@ datadog:
     #     type: exclude
     #   - match_ip: 10.0.0.0/8
     #     type: exclude
+    #   - match_domain: 'api.datadoghq.com'
+    #     type: include
 
 ```
 [1]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/README.md
@@ -548,9 +554,13 @@ network_path:
 
 ### Source public IP resolution
 
+<div class="alert alert-info">Source public IP resolution is available in Agent v7.75+.</div>
+
 Network Path resolves the source host's public IP address to provide accurate path visualization for internet-bound traffic. The Agent contacts external IP check services over HTTPS to determine the public IP of the host.
 
-If your network restricts outbound traffic, add the following URLs to your firewall allowlist:
+This feature is **not required** for Network Path to function. If these services are unreachable, Network Path continues to operate normally, but the source public IP is not resolved and path visualizations do not display source IP metadata.
+
+If your network restricts outbound traffic and you want source public IP resolution, add the following URLs to your firewall allowlist:
 
 | URL | Provider |
 |-----|----------|
@@ -560,7 +570,7 @@ If your network restricts outbound traffic, add the following URLs to your firew
 | `https://api.ipify.org` | ipify |
 | `https://whatismyip.akamai.com` | Akamai |
 
-The Agent tries each service in order and uses the first successful response. All requests are made over HTTPS (port 443). If none of the services are reachable, the source public IP is unavailable and the path visualization may lack source IP metadata.
+The Agent tries each service in order and uses the first successful response. All requests are made over HTTPS (port 443).
 
 ## Troubleshooting
 
