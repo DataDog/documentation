@@ -18,23 +18,6 @@ Go to the [Kafka Monitoring setup page][1] and click {{< ui >}}Get Started{{< / 
 
 The setup page provides environment-specific configuration instructions. You can copy the instructions directly to an AI agent with **Copy for AI**.
 
-### Kafka ACL permissions
-
-If your Kafka cluster uses ACLs, the Datadog Agent user requires the following minimum permissions:
-
-| Resource Name | Resource Type | Operation        |
-|---------------|---------------|------------------|
-| `kafka-cluster` | `CLUSTER`   | `Describe`       |
-| `kafka-cluster` | `CLUSTER`   | `DescribeConfigs` |
-| `*`           | `TOPIC`       | `Describe`       |
-| `*`           | `TOPIC`       | `DescribeConfigs` |
-| `*`           | `GROUP`       | `Describe`       |
-
-To view messages, the Agent user also requires:
-
-| Resource Name | Resource Type | Operation |
-|---------------|---------------|-----------|
-| `*`           | `TOPIC`       | `Read`    |
 
 ## Workflows
 
