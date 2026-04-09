@@ -35,7 +35,11 @@ You can create a pipeline with one of the following methods:
 - [API](#set-up-a-pipeline-with-the-api)
 - [Terraform](#set-up-a-pipeline-with-terraform)
 
+See [Export a Pipeline Configuration to JSON or Terraform][14] if you want to programmatically deploy a pipeline created in the UI.
+
 ## Set up a pipeline in the UI
+
+### Set up pipeline components
 
 {{< tabs >}}
 {{% tab "Logs" %}}
@@ -77,7 +81,8 @@ You can create a pipeline with one of the following methods:
 {{% /tab %}}
 {{% tab "Metrics" %}}
 
-### Set up pipeline components
+<div class="alert alert-info">
+Metric Tag Governance is in Preview. Fill out the <a href="https://www.datadoghq.com/product-preview/metrics-ingestion-and-cardinality-control-in-observability-pipelines/">form</a> to request access.</div>
 
 1. Navigate to [Observability Pipelines][1].
 1. Select the [Metric Tag Governance][2] template.
@@ -180,3 +185,4 @@ To delete a pipeline in the UI:
 [11]: /observability_pipelines/configuration/update_existing_pipelines/?
 [12]: /observability_pipelines/configuration/install_the_worker/
 [13]: /monitors/types/metric/
+[14]: /observability_pipelines/configuration/export_pipeline_configuration/

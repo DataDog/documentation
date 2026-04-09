@@ -3729,6 +3729,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@playwright/test@npm:^1.58.2":
+  version: 1.58.2
+  resolution: "@playwright/test@npm:1.58.2"
+  dependencies:
+    playwright: "npm:1.58.2"
+  bin:
+    playwright: cli.js
+  checksum: 10/58bf90139280a0235eeeb6049e9fb4db6425e98be1bf0cc17913b068eef616cf67be57bfb36dc4cb56bcf116f498ffd0225c4916e85db404b343ea6c5efdae13
+  languageName: node
+  linkType: hard
+
 "@popperjs/core@npm:^2.11.8":
   version: 2.11.8
   resolution: "@popperjs/core@npm:2.11.8"
@@ -6636,15 +6647,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cdocs-hugo-integration@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-hugo-integration-v2.10.1.tgz":
-  version: 2.10.1
-  resolution: "cdocs-hugo-integration@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-hugo-integration-v2.10.1.tgz"
+"cdocs-hugo-integration@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-hugo-integration-v2.15.0.tgz":
+  version: 2.15.0
+  resolution: "cdocs-hugo-integration@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-hugo-integration-v2.15.0.tgz"
   dependencies:
     "@prettier/sync": "npm:^0.5.2"
     "@types/markdown-it": "npm:^14.1.2"
     "@vitejs/plugin-react": "npm:^4.3.3"
     cdocs-data: "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-data-v1.3.2.tgz"
-    cdocs-markdoc: "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-markdoc-v1.2.0.tgz"
+    cdocs-markdoc: "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-markdoc-v1.2.1.tgz"
     chokidar: "npm:^4.0.3"
     chroma-highlight: "npm:^2.4.2"
     interweave: "npm:^13.1.0"
@@ -6663,13 +6674,13 @@ __metadata:
     vite: "npm:^5.4.10"
     vite-plugin-singlefile: "npm:^2.0.2"
     zod: "npm:^4.1.12"
-  checksum: 10/922207931bf31f80c75f8c95c6850c5b78178ea0dcbbdeb54a483b028dcb5a7083d31b1056bf91214b653c8a3b34feba28676729e4db9951ee8f03d296c54901
+  checksum: 10/81b9ee967e91ee79de1b278fad1eb6008c995611bd895507e8a71a0bcc79e790abd40ad349baf37aca099d1e5b6125261cb7b0d3ad772f0b3e58134dcdeaf0dd
   languageName: node
   linkType: hard
 
-"cdocs-markdoc@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-markdoc-v1.2.0.tgz":
-  version: 1.2.0
-  resolution: "cdocs-markdoc@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-markdoc-v1.2.0.tgz"
+"cdocs-markdoc@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-markdoc-v1.2.1.tgz":
+  version: 1.2.1
+  resolution: "cdocs-markdoc@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-markdoc-v1.2.1.tgz"
   dependencies:
     "@types/linkify-it": "npm:^3.0.1"
     "@types/markdown-it": "npm:12.2.3"
@@ -6678,7 +6689,7 @@ __metadata:
       optional: true
     "@types/markdown-it":
       optional: true
-  checksum: 10/587a2341310d78044aa0838729ef069284e77496d905c785af3225d16f35051e6bb1b1dd2e5556097827edc42edc0063960ef6b20f8c0fb6c0fcbcacc0a3d1a9
+  checksum: 10/cf7549edda85a7dafe4b16c88887c6c1af9c0cd2e188a7fbba69e5f3dca38fd5a4743419ee377798e5c2850d10f0ddc15c5ad54975a6ab0dfa69dab43a23d114
   languageName: node
   linkType: hard
 
@@ -7709,11 +7720,12 @@ __metadata:
     "@datadog/openfeature-browser": "npm:^0.3.1"
     "@openfeature/core": "npm:^1.9.1"
     "@openfeature/web-sdk": "npm:^1.7.2"
+    "@playwright/test": "npm:^1.58.2"
     "@popperjs/core": "npm:^2.11.8"
     acorn: "npm:^7.4.1"
     alpinejs: "npm:^3.13.7"
     bootstrap: "npm:^5.2"
-    cdocs-hugo-integration: "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-hugo-integration-v2.10.1.tgz"
+    cdocs-hugo-integration: "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-hugo-integration-v2.15.0.tgz"
     cross-env: "npm:^5.2.1"
     del: "npm:4.1.1"
     eslint: "npm:^6.8.0"
@@ -9357,6 +9369,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"fsevents@npm:2.3.2":
+  version: 2.3.2
+  resolution: "fsevents@npm:2.3.2"
+  dependencies:
+    node-gyp: "npm:latest"
+  checksum: 10/6b5b6f5692372446ff81cf9501c76e3e0459a4852b3b5f1fc72c103198c125a6b8c72f5f166bdd76ffb2fca261e7f6ee5565daf80dca6e571e55bcc589cc1256
+  conditions: os=darwin
+  languageName: node
+  linkType: hard
+
 "fsevents@npm:^2.1.2":
   version: 2.2.1
   resolution: "fsevents@npm:2.2.1"
@@ -9373,6 +9395,15 @@ __metadata:
   dependencies:
     node-gyp: "npm:latest"
   checksum: 10/4c1ade961ded57cdbfbb5cac5106ec17bc8bccd62e16343c569a0ceeca83b9dfef87550b4dc5cbb89642da412b20c5071f304c8c464b80415446e8e155a038c0
+  conditions: os=darwin
+  languageName: node
+  linkType: hard
+
+"fsevents@patch:fsevents@npm%3A2.3.2#optional!builtin<compat/fsevents>":
+  version: 2.3.2
+  resolution: "fsevents@patch:fsevents@npm%3A2.3.2#optional!builtin<compat/fsevents>::version=2.3.2&hash=df0bf1"
+  dependencies:
+    node-gyp: "npm:latest"
   conditions: os=darwin
   languageName: node
   linkType: hard
@@ -13813,6 +13844,30 @@ __metadata:
   dependencies:
     find-up: "npm:^4.0.0"
   checksum: 10/9863e3f35132bf99ae1636d31ff1e1e3501251d480336edb1c211133c8d58906bed80f154a1d723652df1fda91e01c7442c2eeaf9dc83157c7ae89087e43c8d6
+  languageName: node
+  linkType: hard
+
+"playwright-core@npm:1.58.2":
+  version: 1.58.2
+  resolution: "playwright-core@npm:1.58.2"
+  bin:
+    playwright-core: cli.js
+  checksum: 10/8a98fcf122167e8703d525db2252de0e3da4ab9110ab6ea9951247e52d846310eb25ea2c805e1b7ccb54b4010c44e5adc3a76aae6da02f34324ccc3e76683bb1
+  languageName: node
+  linkType: hard
+
+"playwright@npm:1.58.2":
+  version: 1.58.2
+  resolution: "playwright@npm:1.58.2"
+  dependencies:
+    fsevents: "npm:2.3.2"
+    playwright-core: "npm:1.58.2"
+  dependenciesMeta:
+    fsevents:
+      optional: true
+  bin:
+    playwright: cli.js
+  checksum: 10/d89d6c8a32388911b9aff9ee0f1a90076219f15c804f2b287db048b9e9cde182aea3131fac1959051d25189ed4218ec4272b137c83cd7f9cd24781cbc77edd86
   languageName: node
   linkType: hard
 

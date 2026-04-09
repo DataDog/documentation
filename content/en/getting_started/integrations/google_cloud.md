@@ -29,6 +29,9 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/collect-traces-logs-from-cloud-run-with-datadog/'
       text: 'Collect traces, logs, and custom metrics from your Google Cloud Run services with Datadog'
       tag: 'Blog'
+    - link: 'https://learn.datadoghq.com/courses/getting-started-gcp'
+      tag: 'Learning Center'
+      text: 'Getting Started with Observability in Google Cloud with Datadog'
 ---
 
 ## Overview
@@ -70,6 +73,8 @@ Use this guide to get started with monitoring your Google Cloud environment. Thi
 <div class="alert alert-info">You can confirm if these APIs are enabled by going to <a href="https://console.cloud.google.com/apis/dashboard">Enabled APIs & Services</a>.</div>
 
 ### Metric collection
+
+<div class="alert alert-info">If your Google Cloud organization uses <a href="https://cloud.google.com/vpc-service-controls/docs/overview">VPC Service Controls</a>, you must explicitly allow Datadog service accounts to access protected resources. If these service accounts are not permitted within your service perimeter, metric, resource, and metadata collection may fail. Contact <a href="/help/">Datadog Support</a> for the service account identifiers for your site or region.</div>
 
 {{< tabs >}}
 
@@ -218,7 +223,7 @@ To use the Quick Start method, your Datadog user role must be able to create API
    2. Choose whether to apply tags to the metrics associated with the created service account.
    3. Choose whether to disable metric collection for specific Google Cloud services to help control Google Cloud Monitoring costs.
    4. Choose whether to apply granular metric filters for any Google Cloud services enabled for metric collection.
-   5. Choose whether to filter metrics by tags for GCP resource types `Cloud Run Revision`, `VM Intance`, or `Cloud Function` to help control Datadog costs.
+   5. Choose whether to filter metrics by tags for GCP resource types `Cloud Run Revision`, `VM Instance`, or `Cloud Function` to help control Datadog costs.
 7. Configure **Resource Collection** (attributes and configuration information of the resources in your Google Cloud environment).
 8. Copy the provided **Terraform Code**.
 9. Paste the code into a `.tf` file, and run the **Initialize and apply the Terraform** command. If successful, the command:
@@ -253,7 +258,7 @@ To use the Quick Start method, your Datadog user role must be able to create API
    2. Choose whether to apply tags to the metrics associated with the created service account.
    3. Choose whether to disable metric collection for specific Google Cloud services to help control Google Cloud Monitoring costs.
    4. Choose whether to apply granular metric filters for any Google Cloud services enabled for metric collection.
-   5. Choose whether to filter metrics by tags for GCP resource types `Cloud Run Revision`, `VM Intance`, or `Cloud Function` to help control Datadog costs.
+   5. Choose whether to filter metrics by tags for GCP resource types `Cloud Run Revision`, `VM Instance`, or `Cloud Function` to help control Datadog costs.
 9. Configure **Resource Collection** (attributes and configuration information of the resources in your Google Cloud environment, optional).
 10. Click **Verify and Save Account**.
 
@@ -388,7 +393,7 @@ Use the [Datadog Dataflow template][14] to batch and compresses your log events 
 
 ## Leveraging the Datadog Agent
 
-After the Google Cloud integration is configured, Datadog automatically starts collecting Google Cloud metrics. However, you can leverage the Datadog Agent to gather deeper insights into your infrastructure.
+After the Google Cloud integration is configured, Datadog automatically starts collecting Google Cloud metrics. However, you can use the Datadog Agent to gather deeper insights into your infrastructure.
 
 The [Datadog Agent][31] provides the [most granular, low-latency metrics][32] from your infrastructure, delivering real-time insights into CPU, memory, disk usage, and more for your Google Cloud hosts.
 The Agent can be installed on any host, including [GKE][33].

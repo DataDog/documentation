@@ -52,7 +52,7 @@ Click **Route to Multiple Organizations** to set up routing to multiple Datadog 
 	- **Note**: Only enter the identifier for the API key. Do **not** enter the actual API key.
 1. Click **Save**.
 
-##### Buffering options
+##### Buffering
 
 {{% observability_pipelines/destination_buffer %}}
 
@@ -107,9 +107,9 @@ Alternatively, you can click on **Review Configured Organizations** in the Datad
 
 A batch of events is flushed when one of these parameters is met. See [event batching][2] for more information.
 
-| Max Events     | Max Bytes       | Timeout (seconds)   |
-|----------------|-----------------|---------------------|
-| 1,000          | 4,250,000       | 5                   |
+| Maximum Events | Maximum Size (MB) | Timeout (seconds)   |
+|----------------|-------------------|---------------------|
+| 1,000          | 4.25              | 5                   |
 
 {{< site-region region="us,ap1,ap2" >}}
 

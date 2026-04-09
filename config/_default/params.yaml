@@ -147,6 +147,7 @@ code_language_ids:
     logs: "Logs"
     topology: "Topology Map"
     geomap: "Geomap"
+    azure_apim: "Azure API Management"
 branch: ""
 
 signupclass: sign-up-trigger
@@ -167,36 +168,42 @@ allowedRegions:
     domain: datadoghq.com
     exact_domains:
       - "navy.oncall.datadoghq.com"
+      - "browser-intake-datadoghq.com"
   - name: US3
     value: us3
     weight: 13
     domain: us3.datadoghq.com
     exact_domains:
       - "teal.oncall.datadoghq.com"
+      - "browser-intake-us3-datadoghq.com"
   - name: US5
     value: us5
     weight: 15
     domain: us5.datadoghq.com
     exact_domains:
       - "coral.oncall.datadoghq.com"
+      - "browser-intake-us5-datadoghq.com"
   - name: EU
     value: eu
     weight: 20
     domain: datadoghq.eu
     exact_domains:
-       "beige.oncall.datadoghq.eu"
+      - "beige.oncall.datadoghq.eu"
+      - "browser-intake-datadoghq.eu"
   - name: AP1
     value: ap1
     weight: 25
     domain: ap1.datadoghq.com
     exact_domains:
       - "saffron.oncall.datadoghq.com"
+      - "browser-intake-ap1-datadoghq.com"
   - name: AP2
     value: ap2
     weight: 30
     domain: ap2.datadoghq.com
     exact_domains:
       - "lava.oncall.datadoghq.com"
+      - "browser-intake-ap2-datadoghq.com"
   - name: US1-FED
     value: gov
     weight: 35
@@ -271,9 +278,11 @@ unsupported_sites:
   actions: [gov]
   adaptive_sampling: [gov]
   agent_flare: [gov]
+  agentic_onboarding: [gov]
   agentless_scanning: [gov] # docs page
   agentless-scanning: [gov] # api page
-  amazon_event_bridge: [gov]
+  amazon-event-bridge: [gov]
+  apm_processing_pipelines: [gov]
   apm_recommendations: [gov]
   app_builder: [gov]
   application_security: [gov]
@@ -291,9 +300,11 @@ unsupported_sites:
   continuous_delivery: [gov]
   continuous_integration: [gov]
   correlation: [gov] #Event management correlation
+  coterm: [gov]
   cloudprem: [gov]
   csm_jira: [us,us3,us5,eu,ap1,ap2]
   data_jobs: [gov]
+  data_observability: [gov]
   data_streams: [gov]
   datadog_disaster_recovery: [gov]
   ddot_collector: [gov]
@@ -303,7 +314,7 @@ unsupported_sites:
   eng_reports: [gov]
   events_from_sns_emails: [gov]
   exception_replay: [gov]
-  experimentation: [gov]
+  experiments: [gov]
   feature_flags: [gov]
   forwarding_audit_events: [gov]
   getting_started_feature_flags: [gov]
@@ -317,6 +328,7 @@ unsupported_sites:
   high_availability_datadog_agent: [gov]
   iac_security: [gov]
   incident_ai: [gov]
+  jetbrains-ides: [gov]
   inferred_entity_remapping_rules: [gov]
   internal_developer_portal: [gov]
   jira_error_tracking: [gov]
@@ -328,6 +340,8 @@ unsupported_sites:
   network_config_management: [gov]
   observability_pipelines: [gov]
   on-call: [gov]
+  oracle-fusion: [gov]
+  oracle_fusion_integration_setup: [gov]
   overview_pages: [gov]
   pr_gates: [gov]
   resource_based_sampling: [gov]

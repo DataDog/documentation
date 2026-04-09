@@ -27,9 +27,8 @@ To maximize the value of this integration, document the services, dependencies, 
 
 ## Bits.md
 
-{{< callout url="https://datadoghq.com/product-preview/bits-ai-sre-pilot-features" >}}
-<b>Bits.md</b> is in Preview. Click <strong>Request Access</strong> to join the Preview program.
-{{< /callout >}}
+<div class="alert alert-info">
+Bits.md is in Preview for all customers.</div>
 
 You can proactively guide how Bits investigates your environment by creating a `bits.md` file at [**Bits AI SRE** > **Settings** > **Bits.md**][2].
 
@@ -104,7 +103,7 @@ Rule:
 
 At the end of an investigation, let Bits AI SRE know whether the conclusion it made was correct.
 
-{{< img src="bits_ai/help_bits_ai_learn_1.png" alt="An investigation conclusion with the helpful and unhelpful rating buttons highlighted" style="width:100%;" >}}
+{{< img src="bits_ai/help_bits_ai_learn_2.png" alt="Post-investigation root cause feedback flow" style="width:100%;" >}}
 
 If the conclusion was inaccurate, provide Bits AI SRE with the correct root cause, highlighting what it missed, and explaining what it should do differently next time. Your feedback should:
 - Identify the actual root cause (not just observed effects or symptoms)
@@ -113,7 +112,7 @@ If the conclusion was inaccurate, provide Bits AI SRE with the correct root caus
 
 **Example high-quality root cause feedback**: "High memory usage in auth-service pod due to memory leak in session cache, causing OOM kills every 2 hours starting at 2025-11-15 14:30 UTC. This is evidenced by `https://app.datadoghq.com/logs?<rest_of_link>`"
 
-Every piece of feedback you provide creates a **memory**. Bits AI SRE dynamically selects which memories to use in future investigations to improve its performance. It applies past corrections in similar contexts, reuses effective queries, and refines how it prioritizes investigative steps. Over time, this enables Bits AI SRE to adapt to your environment, becoming more accurate and efficient with each investigation.
+All positive feedback, as well as any negative feedback that includes details provided in the Bits' chat, creates a **memory**. Bits AI SRE dynamically selects which memories to use in future investigations to improve its performance. It applies past corrections in similar contexts, reuses effective queries, and refines how it prioritizes investigative steps. Over time, this enables Bits AI SRE to adapt to your environment, becoming more accurate and efficient with each investigation.
 
 To manage memories, including viewing and deleting them, go to the **Memories** column of the [Monitor Management][1] page.
 
