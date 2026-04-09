@@ -172,7 +172,7 @@ See [event batching][6] for more information.
 
 The quota processor is synchronized across all Workers in a Datadog organization. For the synchronization, there is a default rate limit of 50 Workers per organization. When there are more than 50 Workers for an organization:
 - The processor continues to run, but does not sync correctly with the other Workers, which can result in logs being sent after the quota limit has been reached.
-- The Worker prints `Failed to sync quota state errors`.
+- The Worker logs errors with the message `Failed to sync quota state`.
 - [Contact support][20] if you want to increase the default number of Workers per organization.
 
 [1]: /help/
