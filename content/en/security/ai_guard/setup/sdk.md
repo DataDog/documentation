@@ -15,6 +15,12 @@ further_reading:
 
 Use an SDK to call the AI Guard REST API and monitor AI Guard activity in real time in Datadog.
 
+## Set up the Datadog Agent
+
+Datadog SDKs use the [Datadog Agent][1] to send AI Guard data to Datadog. The Agent must be running and accessible to the SDK for you to see data in Datadog.
+
+If you don't use the Datadog Agent, the AI Guard evaluator API still works, but you can't see AI Guard traces in Datadog.
+
 {{< tabs >}}
 {{% tab "Python" %}}
 The Python SDK ([dd-trace-py v3.18.0][1] or later) provides a streamlined interface for invoking the REST API directly from Python code. The following examples demonstrate its usage:
@@ -259,3 +265,5 @@ result = Datadog::AIGuard.evaluate(
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /agent/?tab=Host-based

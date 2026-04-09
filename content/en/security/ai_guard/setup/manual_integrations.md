@@ -15,6 +15,12 @@ further_reading:
 
 Manual integrations require additional configuration to enable AI Guard protection. Follow the instructions for each framework to set up AI Guard evaluations.
 
+## Set up the Datadog Agent
+
+Datadog SDKs use the [Datadog Agent][2] to send AI Guard data to Datadog. The Agent must be running and accessible to the SDK for you to see data in Datadog.
+
+If you don't use the Datadog Agent, the AI Guard evaluator API still works, but you can't see AI Guard traces in Datadog.
+
 ## Supported frameworks and libraries
 
 {{< tabs >}}
@@ -73,3 +79,5 @@ The LiteLLM Proxy integration enables AI Guard evaluations for applications usin
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[2]: /agent/?tab=Host-based

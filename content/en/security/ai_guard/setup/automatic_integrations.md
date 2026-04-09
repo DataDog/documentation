@@ -15,6 +15,12 @@ further_reading:
 
 Automatic integrations provide out-of-the-box AI Guard protection for supported frameworks. When you run your application with the Datadog tracer, AI Guard evaluations are automatically performed on calls made through these frameworks, without requiring any code changes.
 
+## Set up the Datadog Agent
+
+Datadog SDKs use the [Datadog Agent][6] to send AI Guard data to Datadog. The Agent must be running and accessible to the SDK for you to see data in Datadog.
+
+If you don't use the Datadog Agent, the AI Guard evaluator API still works, but you can't see AI Guard traces in Datadog.
+
 ## Supported frameworks and libraries
 
 {{< tabs >}}
@@ -92,3 +98,5 @@ The [Vercel AI SDK][1] integration automatically applies AI Guard evaluations to
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[6]: /agent/?tab=Host-based
