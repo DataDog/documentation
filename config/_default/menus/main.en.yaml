@@ -3968,7 +3968,7 @@ menu:
       url: tracing/apm_basic/
       parent: tracing
       identifier: tracing_apm_basic
-      weight: 1.5
+      weight: 14.5
     - name: Application Instrumentation
       url: tracing/trace_collection/
       parent: tracing

@@ -64,11 +64,11 @@ For an introduction to terminology used in Datadog APM, see [APM Terms and Conce
 
 ## Getting started
 
-[APM Basic][31] is the entry-level APM tier for services that are not instrumented. It uses eBPF to collect service health metrics—request counts, error rates, and latency—from network traffic without requiring instrumentation. Use it for uninstrumented services or environments where full tracing is not needed.
-
-When you're ready for full distributed tracing, use [Single Step Instrumentation][27]. This installs the Datadog Agent and instruments your application in one step, with no additional configuration required.
+To get started with APM, use [Single Step Instrumentation][27]. This installs the Datadog Agent and instruments your application in one step, enabling full distributed tracing with no additional configuration required.
 
 For more control, Datadog supports custom instrumentation with Datadog tracing libraries and [Dynamic Instrumentation][30] in the Datadog UI. To learn more, read [Application Instrumentation][2].
+
+If you have services that are not instrumented—legacy systems, third-party services, or environments where instrumentation is not practical—[APM Basic][31] provides baseline service visibility by collecting RED metrics from network traffic without any instrumentation required.
 
 <div class="alert alert-info">If you're new to Datadog APM, read <a href="https://docs.datadoghq.com/getting_started/tracing/">Getting Started with APM</a> to learn how to send your first trace to Datadog.</div>
 

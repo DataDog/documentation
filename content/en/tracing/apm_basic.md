@@ -36,9 +36,11 @@ cascade:
 
 ## Overview
 
-APM Basic is the entry-level APM tier for services that are not instrumented. It automatically discovers services and collects request, error, and duration (RED) metrics from network traffic—without requiring code changes or instrumentation. It relies solely on a configured Datadog Agent and [Unified Service Tagging][6].
+APM Basic provides baseline service visibility for services that are not instrumented. It automatically discovers services and collects request, error, and duration (RED) metrics from network traffic—without requiring code changes or instrumentation. It relies solely on a configured Datadog Agent and [Unified Service Tagging][6].
 
-Services monitored by APM Basic appear in the [Software Catalog][2] and [Service Map][3] alongside your fully instrumented services, and work with [Deployment Tracking][7], Monitors, Dashboards, and SLOs. For full distributed tracing and request-level debugging, use APM with [Single Step Instrumentation][1].
+For full APM with distributed tracing and request-level debugging, use [Single Step Instrumentation][1]. APM Basic is the monitoring option for services where instrumentation is not used—not a replacement for it.
+
+Services monitored by APM Basic appear in the [Software Catalog][2] and [Service Map][3] alongside your fully instrumented services, and work with [Deployment Tracking][7], Monitors, Dashboards, and SLOs.
 
 <div class="alert alert-info">Hosts monitored with APM Basic are billed at the APM Basic host rate. After you add instrumentation to a service, that host automatically moves to the standard APM tier. For details, see <a href="/account_management/billing/apm_tracing_profiler/">APM Billing</a>.</div>
 
