@@ -82,13 +82,10 @@ Clicking on a host opens a side panel with details including:
 
 - **Host information** such as the name, account, OS, instance type, tags, and metadata associated with the host
 - **Host Summary** which displays active monitor alerts and enabled products
-- **Metrics** including CPU usage, memory usage, [NTP offset][18], system uptime, and integrations installed on the host
+- **Telemetry** including metrics, logs, traces, and processes
 - **Containers** which displays metrics for containers attached to the host
-- **Processes** which displays processes correlated with the host (requires [Live Processes][19])
 - **Infra map** which displays a [Cloudcraft diagram][17]
 - **Relationships** which displays an interactive map of connections to other resources
-- **Logs** correlated with the host
-- **Traces** correlated with the host
 - **Profiles** correlated with the host (requires [Profiler][20])
 - **Network** information, which can be filtered by tags and displayed in customizable graphs
 - **Changes** showing a customizable history of changes to the host
@@ -102,9 +99,8 @@ Clicking on a host opens a side panel with details including:
 Clicking on any resource opens a side panel with details including:
 
 - **Resource Info** including resource-specific tags and the resource's definition in JSON format
-- **Metrics** correlated with the resource
+- **Telemetry** including metrics and logs
 - **Relationships** which displays an interactive map of connections to other resources
-- **Logs** correlated with the resource
 - **Changes** showing a history of changes to the resource
 - **Security** which displays misconfigurations, signals, vulnerabilities, and identity risks
 
