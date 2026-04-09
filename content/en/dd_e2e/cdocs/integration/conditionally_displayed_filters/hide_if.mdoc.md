@@ -12,4 +12,4 @@ content_filters:
 
 ## Overview
 
-This page only shows a Database filter if `java` is **not** selected for `prog_lang`.
+This page only shows a Database filter if `java` is *not* selected for `prog_lang`.
