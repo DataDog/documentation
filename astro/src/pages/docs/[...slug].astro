@@ -1,0 +1,40 @@
+---
+import { getCollection, render } from 'astro:content';
+import type { GetStaticPaths } from 'astro';
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const docs = await getCollection('docs');
+  return docs.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+};
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{entry.data.title}</title>
+    <style>
+      body {
+        font-family: system-ui, -apple-system, sans-serif;
+        max-width: 48rem;
+        margin: 2rem auto;
+        padding: 0 1rem;
+        line-height: 1.6;
+        color: #333;
+      }
+      h1 { border-bottom: 2px solid #eee; padding-bottom: 0.5rem; }
+      h2 { margin-top: 2rem; }
+      a { color: #632ca6; }
+    </style>
+  </head>
+  <body>
+    <nav><a href="/">&larr; Home</a></nav>
+    <Content />
+  </body>
+</html>

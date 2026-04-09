@@ -1,0 +1,11 @@
+---
+import { Counter } from './Counter';
+
+interface Props {
+  initialCount?: number;
+}
+
+const { initialCount = 0 } = Astro.props;
+---
+
+<Counter client:load initialCount={initialCount} />
