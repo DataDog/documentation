@@ -158,6 +158,9 @@ phrase:
       dst: "content/{lang}/logs/log_collection/_index.md"
     - src: "content/en/agent/configuration/network.md"
       dst: "content/{lang}/agent/configuration/network.md"
+    # CDocs ast.json test - remove after testing
+    - src: "content/es/real_user_monitoring/application_monitoring/ios/setup.ast.json"
+      dst: "content/{lang}/real_user_monitoring/application_monitoring/ios/setup.ast.json"
     # Webhook migration test files - remove after testing
     - src: "content/en/phrase/test-1.md"
       dst: "content/{lang}/phrase/test-1.md"
