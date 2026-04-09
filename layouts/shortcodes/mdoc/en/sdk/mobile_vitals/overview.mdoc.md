@@ -3,7 +3,7 @@ Shared overview content for all mobile vitals pages.
 Included at the top of each platform shortcode.
 -->
 
-Real User Monitoring offers Mobile Vitals, which includes a set of datapoints inspired by frameworks such as [Android Vitals][1] and [Apple's MetricKit][2], which can help compute insights about your mobile application's responsiveness, stability, and resource consumption. Mobile Vitals range from poor, moderate, to good.
+Real User Monitoring offers Mobile Vitals, which includes a set of datapoints inspired by frameworks such as [Android Vitals][1] and [Apple's MetricKit][2], which can help compute insights about your mobile application's responsiveness, stability, and resource consumption. Mobile Vitals range from poor to moderate to good.
 
 You can view Mobile Vitals for your application by navigating to **Digital Experience > Performance Summary** and selecting your application.
 

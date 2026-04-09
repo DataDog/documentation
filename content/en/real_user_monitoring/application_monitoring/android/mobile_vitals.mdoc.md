@@ -4,6 +4,7 @@ description: "Monitor Android mobile vitals including startup times, resource us
 aliases:
   - /real_user_monitoring/android/mobile_vitals
   - /real_user_monitoring/mobile_and_tv_monitoring/android/mobile_vitals
+  - /real_user_monitoring/application_monitoring/mobile_vitals
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-android
   tag: "Source Code"
