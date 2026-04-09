@@ -3969,6 +3969,16 @@ menu:
       parent: tracing
       identifier: tracing_apm_basic
       weight: 14.5
+    - name: Setup
+      url: tracing/apm_basic/setup/
+      parent: tracing_apm_basic
+      identifier: tracing_apm_basic_setup
+      weight: 1
+    - name: Metrics
+      url: tracing/apm_basic/metrics/
+      parent: tracing_apm_basic
+      identifier: tracing_apm_basic_metrics_guide
+      weight: 2
     - name: Application Instrumentation
       url: tracing/trace_collection/
       parent: tracing
@@ -4204,12 +4214,7 @@ menu:
       parent: tracing_metrics
       identifier: tracing_runtime_metrics
       weight: 302
-    - name: APM Basic Metrics
-      url: tracing/metrics/apm_basic_metrics/
-      parent: tracing_metrics
-      identifier: tracing_apm_basic_metrics
-      weight: 303
-    - name: Trace Pipeline Configuration
+- name: Trace Pipeline Configuration
       url: tracing/trace_pipeline/
       parent: tracing
       identifier: tracing_trace_pipeline
