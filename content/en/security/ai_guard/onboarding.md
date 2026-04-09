@@ -29,22 +29,17 @@ To set up AI Guard, you need to create API keys, install a tracer library, confi
 
 For full setup instructions, see [Set Up AI Guard][15].
 
-## Evaluate conversations in AI Guard Playground {#playground}
-
-The [AI Guard Playground][19] lets you test AI Guard evaluations directly from the Datadog UI, without writing any code. Submit a conversation, including user input, assistant output, and tool calls, and see the evaluation result (action and reason) in real time.
-
-Use the Playground to:
-- Experiment with different prompt patterns and see how AI Guard responds.
-- Verify that AI Guard correctly detects prompt injection, jailbreaking, or unsafe tool calls.
-- Tweak the evaluation sensitivity threshold and see how it affects detection results. You can then adjust the threshold in AI Guard's [evaluation sensitivity][20] settings.
-- Test sensitive data scanning on your conversations.
-- Share evaluation results with your team during development.
-
 ## View AI Guard data in Datadog {#in-datadog}
 
 After completing the [setup steps][15] and using an [SDK][21] to instrument your code, you can view your data in Datadog on the [AI Guard page][6].
 
 <div class="alert alert-info">You can't see data in Datadog for evaluations performed directly using the REST API.</div>
+
+## Security signals {#security-signals}
+
+AI Guard generates security signals when it detects threats such as prompt injection, jailbreaking, or tool misuse. You can create custom detection rules, set thresholds for notifications, and investigate signals alongside other application security threats.
+
+For more information, see [AI Guard Security Signals][14].
 
 ## Set up Datadog Monitors for alerting {#set-up-datadog-monitors}
 
@@ -64,11 +59,16 @@ Follow the instructions to create a new [metric monitor][11].
 - To monitor evaluation traffic, use the metric `datadog.ai_guard.evaluations` with the tags `action:deny OR action:abort`.
 - To monitor blocked traffic, use the metric `datadog.ai_guard.evaluations` with the tag `blocking_enabled:true`.
 
-## Security signals {#security-signals}
+## Evaluate conversations in AI Guard Playground {#playground}
 
-AI Guard generates security signals when it detects threats such as prompt injection, jailbreaking, or tool misuse. You can create custom detection rules, set thresholds for notifications, and investigate signals alongside other application security threats.
+The [AI Guard Playground][19] lets you test AI Guard evaluations directly from the Datadog UI, without writing any code. Submit a conversation, including user input, assistant output, and tool calls, and see the evaluation result (action and reason) in real time.
 
-For more information, see [AI Guard Security Signals][14].
+Use the Playground to:
+- Experiment with different prompt patterns and see how AI Guard responds.
+- Verify that AI Guard correctly detects prompt injection, jailbreaking, or unsafe tool calls.
+- Tweak the evaluation sensitivity threshold and see how it affects detection results. You can then adjust the threshold in AI Guard's [evaluation sensitivity][20] settings.
+- Test sensitive data scanning on your conversations.
+- Share evaluation results with your team during development.
 
 ## Further reading
 

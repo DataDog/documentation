@@ -19,15 +19,6 @@ AI Guard provides a single JSON:API endpoint:
 
 <div class="alert alert-info">The endpoint URL varies by region. Ensure you're using the correct Datadog site for your organization.</div>
 
-Configure the following environment variables:
-
-| Variable              | Value                    |
-| :-------------------- | :----------------------- |
-| `DD_AI_GUARD_ENABLED` | `true`                   |
-| `DD_API_KEY`          | `<YOUR_API_KEY>`         |
-| `DD_APP_KEY`          | `<YOUR_APPLICATION_KEY>` |
-| `DD_TRACE_ENABLED`    | `true`                   |
-
 ## Examples {#api-examples}
 {{% collapse-content title="Generic API example" level="h3" expanded=false id="generic-api-example" %}}
 ### Request {#api-example-generic-request}
@@ -177,103 +168,6 @@ As a best practice, evaluate a tool call before running the tool. However, you c
 ```
 {{% /collapse-content %}}
 
-## Request message format {#request-message-format}
-
-The messages you pass to AI Guard must follow this format, which is a subset of the [OpenAI chat completion][1] API format.
-
-### System prompt format {#system-prompt-format}
-
-In the first message, you can set an optional system prompt. It has two mandatory fields:
-
-- `role`: Can be `system` or `developer`.
-- `content`: A string with the content of the system prompt.
-
-Example:
-
-```json
-{"role":"system","content":"You are a helpful AI assistant."}
-```
-
-### User prompt format {#user-prompt-format}
-
-A user prompt has two mandatory fields:
-
-- `role`: Must be `user`.
-- `content`: A string with the content of the user prompt, or an array of content parts.
-
-**String content example**:
-
-```json
-{"role": "user", "content": "Hello World!"}
-```
-
-**Content parts example**:
-
-For multi-modal inputs, the `content` field can be an array of content parts. Supported types are `text` and `image_url`.
-
-```json
-{
-    "role": "user",
-    "content": [
-        {
-            "type": "text",
-            "text": "What is in this image?"
-        },
-        {
-            "type": "image_url",
-            "image_url": {"url": "data:image/jpeg;base64,..."}
-        }
-    ]
-}
-```
-
-### Assistant response format {#assistant-response-format}
-
-An assistant response with no tool calls has two mandatory fields:
-
-- `role`: Must be `assistant`.
-- `content`: A string with the content of the assistant response, or an array of content parts.
-
-Example:
-
-```json
-{"role":"assistant","content":"How can I help you today?"}
-```
-
-### Assistant response with tool call format {#assistant-response-tool-call-format}
-
-When an LLM requests the execution of a tool call, it is set in the `tool_calls` field of an assistant message. Tool calls must have a unique ID, the tool name, and arguments set as a string (usually a JSON-serialized object).
-
-Example:
-
-```json
-{
-  "role":"assistant",
-  "content":"",
-  "tool_calls": [
-    {
-      "id": "call_123",
-      "function": {
-        "name": "shell",
-        "arguments": "{\"command\":\"ls\"}"
-      }
-    }
-  ]
-}
-```
-
-### Tool output format
-
-When the result of a tool call is passed back to the LLM, it must be formatted as a message with role `tool`, and its output in the `content` field. It must have a `tool_call_id` field that matches the content of the previous tool call request.
-Example:
-
-```json
-{
-  "role":"tool",
-  "content":". .. README.me",
-  "tool_call_id": "call_123"
-  }
-```
 
 ## Further reading
 
