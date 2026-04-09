@@ -17,6 +17,7 @@ Use Observability Pipelines' Splunk HTTP Event Collector (HEC) source to receive
 - Send logs from Observability Pipelines to Splunk HEC with the original token sent with the event.
 
 **Notes**:
+- The Worker forwards the stored HEC token that is received onto the next component.
 - Stored Splunk HEC tokens are not shown in [Live Capture][9].
 - Use the Splunk HEC source if you want to [send logs from the Splunk Distribution of the OpenTelemetry Collector to Observability Pipelines](#send-logs-from-the-splunk-distribution-of-the-opentelemetry-collector-to-observability-pipelines).
 
