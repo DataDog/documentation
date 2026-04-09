@@ -1599,9 +1599,9 @@ menu:
       url: dashboards/sharing/shared_dashboards
       parent: dashboards_sharing
       weight: 1002
-    - name: Widget Snapshots
-      identifier: dashboards_sharing_widget_snapshots
-      url: dashboards/sharing/widget_snapshots
+    - name: Widget Public URLs
+      identifier: dashboards_sharing_widget_public_urls
+      url: dashboards/sharing/widget_public_urls
       parent: dashboards_sharing
       weight: 1003
     - name: Share Graphs
