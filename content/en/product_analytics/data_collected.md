@@ -24,7 +24,6 @@ Every event includes the [default attributes](#default-attributes). Each event t
 
 To identify individual users across sessions, Product Analytics relies on the `usr.id` and `usr.email` attributes.
 
-
 <div class="alert alert-info">Product Analytics uses the same SDKs and configuration as Real User Monitoring (RUM) to collect data. Unlike RUM, Product Analytics does not collect Errors, Resources, Long Tasks, or Vitals events. For the full list of RUM event types and attributes, see the data collected pages for <a href="/real_user_monitoring/application_monitoring/browser/data_collected/">browser</a>, <a href="/real_user_monitoring/application_monitoring/ios/data_collected/">iOS</a>, and <a href="/real_user_monitoring/application_monitoring/android/data_collected/">Android</a>.</div>
 
 | Event Type | Retention | Description |
