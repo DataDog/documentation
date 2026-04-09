@@ -43,48 +43,14 @@ Datadog SDKs use the [Datadog Agent][4] to send AI Guard data to Datadog. The Ag
 
 If you don't use the Datadog Agent, the AI Guard evaluator API still works, but you can't see AI Guard traces in Datadog.
 
-## 4. Install the tracer library {#install-tracer}
-
-To use AI Guard with the SDK and see AI Guard activity in Datadog, install the appropriate tracer library for your language. The tracer library requires the Datadog Agent to send data to Datadog.
-
-{{< tabs >}}
-{{% tab "Python" %}}
-Install dd-trace-py v3.18.0 or later:
-
-```shell
-pip install ddtrace>=3.18.0
-```
-{{% /tab %}}
-{{% tab "JavaScript" %}}
-Install dd-trace-js v5.69.0 or later:
-
-```shell
-npm install dd-trace@^5.69.0
-```
-
-{{% /tab %}}
-{{% tab "Java" %}}
-Install dd-trace-java v1.54.0 or later. Follow the [Java installation instructions][1] to add the tracer to your application.
-
-[1]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/java/
-{{% /tab %}}
-{{% tab "Ruby" %}}
-Install dd-trace-rb v2.25.0 or later:
-
-```shell
-gem install ddtrace -v '>= 2.25.0'
-```
-{{% /tab %}}
-{{< /tabs >}}
-
-## 5. Create a custom retention filter {#retention-filter}
+## 4. Create a custom retention filter {#retention-filter}
 
 To view AI Guard evaluations in Datadog, create a custom [retention filter][5] for AI Guard-generated spans. Follow the linked instructions to create a retention filter with the following settings:
 - **Retention query**: `resource_name:ai_guard`
 - **Span rate**: 100%
 - **Trace rate**: 100%
 
-## 6. Configure AI Guard policies {#configure-policies}
+## 5. Configure AI Guard policies {#configure-policies}
 
 AI Guard provides settings to control how evaluations are enforced, how sensitive threat detection is, and whether sensitive data scanning is enabled.
 
@@ -112,7 +78,7 @@ AI Guard can detect personally identifiable information (PII) such as email addr
 
 When enabled, AI Guard scans the last message in each evaluation call, including user prompts, assistant responses, tool call arguments, and tool call results. Findings appear on APM traces for visibility. Sensitive data scanning is detection-only — findings do not independently trigger blocking.
 
-## 7. (Optional) Limit access to AI Guard spans {#limit-access}
+## 6. (Optional) Limit access to AI Guard spans {#limit-access}
 
 To restrict access to AI Guard spans for specific users, you can use [Data Access Control][9]. Follow the linked instructions to create a restricted dataset, scoped to **APM data**, with the `resource_name:ai_guard` filter applied. Then, you can grant access to the dataset to specific roles or teams.
 

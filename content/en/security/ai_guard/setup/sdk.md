@@ -21,6 +21,42 @@ Datadog SDKs use the [Datadog Agent][1] to send AI Guard data to Datadog. The Ag
 
 If you don't use the Datadog Agent, the AI Guard evaluator API still works, but you can't see AI Guard traces in Datadog.
 
+## Install the tracer library
+
+To use AI Guard with the SDK and see AI Guard activity in Datadog, install the appropriate tracer library for your language. The tracer library requires the Datadog Agent to send data to Datadog.
+
+{{< tabs >}}
+{{% tab "Python" %}}
+Install dd-trace-py v3.18.0 or later:
+
+```shell
+pip install ddtrace>=3.18.0
+```
+{{% /tab %}}
+{{% tab "JavaScript" %}}
+Install dd-trace-js v5.69.0 or later:
+
+```shell
+npm install dd-trace@^5.69.0
+```
+
+{{% /tab %}}
+{{% tab "Java" %}}
+Install dd-trace-java v1.54.0 or later. Follow the [Java installation instructions][2] to add the tracer to your application.
+
+[2]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/java/
+{{% /tab %}}
+{{% tab "Ruby" %}}
+Install dd-trace-rb v2.25.0 or later:
+
+```shell
+gem install ddtrace -v '>= 2.25.0'
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+## Use the SDK
+
 {{< tabs >}}
 {{% tab "Python" %}}
 The Python SDK ([dd-trace-py v3.18.0][1] or later) provides a streamlined interface for invoking the REST API directly from Python code. The following examples demonstrate its usage:
