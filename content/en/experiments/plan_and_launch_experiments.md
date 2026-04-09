@@ -36,76 +36,54 @@ You can also draft your experiment before creating a feature flag:
 
 After creating your experiment, complete the configuration on the experiment detail page.
 
-Under the **Decision metrics** section:
-- select the subject type for calculating metrics from the **Calculate metrics by** dropdown. The default is **User (@usr.id)**.
-- Add a primary metric to measure the main outcome of your experiment.
-- Optionally, add secondary metrics to monitor for unintended effects on other areas like performance, engagement, or revenue.
+#### Decision metrics
+1. Select the subject type for calculating metrics from the **Calculate metrics by** dropdown. The default is **User (@usr.id)**.
+1. Add a primary metric to measure the main outcome of your experiment.
+1. Optionally, add secondary metrics to monitor for unintended effects on other areas like performance, engagement, or revenue.
 
 See [Defining Metrics][2] to create metrics.
 
 {{< img src="/product_analytics/experiment/exp_plan_launch_decision_metric.png" alt="The metrics configuration panel with options for primary metric and guardrails." style="width:80%;" >}}
 
-Under the **Run a sample size calculation** section (optional):
-- Click **sample size calculator** to open the **Sample Size Calculator** side panel.
-- Select an **Entry point** event to specify when users are enrolled into the experiment.
-- Optionally, add a filter to narrow the entry point audience.
-- Set the **Number of variants** and **Traffic exposure** percentage.
-- Under **Additional inputs**, configure the statistical **Power** (default 80%) and an optional **Target experiment duration** in weeks.
-- Click **Run Calculation** to estimate the [Minimum Detectable Effects][3] for your metrics.
+#### Sample size calculation
+1. Click **sample size calculator** to open the side panel. 
+1. Expand **Calculation details**. Your primary and secondary metrics appear under **Metrics**. 
+1. Select an **Entry point** event to specify when users are enrolled into the experiment.
+1. Optionally, add a filter to narrow the entry point audience.
+1. Set the **Number of variants** and **Traffic exposure** percentage.
+1. Under **Additional inputs**, configure the statistical **Power** (default 80%) and an optional **Target experiment duration** in weeks.
+1. Click **Run Calculation** to estimate the [Minimum detectable effect (MDE)][3] for your metrics.
+1. Close the **Sample Size Calculator** side panel. 
 
 {{< img src="/product_analytics/experiment/exp_plan_launch_sample_size.png" alt="The Sample Size Calculator side panel showing calculation details with Add to Cart Conversion as the primary metric and Number of cart views as a guardrail, an entry point set to click on ADD TO CART, two variants at 100% traffic exposure, and additional inputs for power and target experiment duration." style="width:80%;" >}}
 
+#### Feature flag
+Click **Add a feature flag** to select the appropriate feature flag for your experiment. See [Getting Started with Feature Flags][4] to learn more about feature flags.
 
+#### Randomization
+1. Select the **Environment** for your experiment from the dropdown.
+1. Under **Targeting rules**, define conditions to filter which users are included in the experiment. Click **Add Condition** to add additional conditions and **Add Filter** to add additional filters.
+1. Under **Variants**, set how traffic is split between your control and treatment groups. Use the **Randomize users and split traffic** dropdown to choose an equal or custom split.
+1. Under **Traffic exposure**, set the percentage of targeted traffic to include in the experiment.
+1. Optionally, click **Add Rollout Steps** to schedule a [staged rollout](#staged-experiment-rollouts).
 
+{{% collapse-content title="Additional configuration settings (optional)" level="h4" expanded=false %}}
 
-
-{{% collapse-content title="Additional configuration settings" level="h4" expanded=false %}}
-
-These are **optional settings** you can apply to your experiment.
+##### Notifications
+Select recipients from the **Recipients** dropdown to receive updates on your experiment.
 
 ##### Statistical analysis plan
-
 Datadog's default sequential statistical analysis is suitable for most situations and promotes good statistical patterns. This framework gives statistically valid confidence intervals at any point throughout the experiment, so you can make decisions at any point during the experiment.
 
-To use a different statistical method, specify that in the analysis settings.
+To use a different statistical method:
+1. Expand the **Statistical analysis plan** section. 
+1. Select the **Confidence interval method** from the dropdown. The default is **Sequential**.
+1. Select the **Confidence level** from the dropdown. The default is **95%**.
+1. Toggle **CUPED calculation** to reduce variance and improve experiment sensitivity.
+1. Toggle **Multiple testing correction** to adjust for multiple comparisons across metrics.
 
-<!-- {{< img src="/product_analytics/experiment/TODO_statistical_analysis.png" alt="The statistical analysis plan configuration options." style="width:80%;" >}} -->
-
-##### Exploration dimensions
-
-To segment experiment results by subject (user) properties, add exploration dimensions in the analysis settings. You can also add analysis dimensions later.
-
-<!-- {{< img src="/product_analytics/experiment/TODO_exploration_dimensions.png" alt="The exploration dimensions configuration options." style="width:80%;" >}} -->
-
-##### Add a sample size calculation
-
-After selecting your experiment's metrics, use the optional sample size calculator to determine the smallest change your experiment can reliably detect with your current sample size.
-
-1. Select the **Entrypoint Event** of your experiment. This specifies when in the user journey they are enrolled into the test. For example, if you plan to run an experiment on users who visit the homepage, select the homepage view as your entry point.
-1. Click **Run calculation** to see the [Minimum Detectable Effects][3] (MDE) your experiment has on your metrics. The MDE is the smallest difference you can detect between your experiment's variants.
-
-<!-- {{< img src="/product_analytics/experiment/TODO_sample_size_calc.png" alt="The Sample Size Calculator with Entrypoint Event and MDE results." style="width:90%;" >}} -->
-
-##### Add notifications
-
-You can specify one or more notification channels to get updates on your experiment.
-
-<!-- {{< img src="/product_analytics/experiment/TODO_notifications.png" alt="The experiment notifications configuration." style="width:80%;" >}} -->
-
-{{% /collapse-content %}} 
-
-## Launch your experiment
-
-After you add at least one metric, you can launch your experiment.
-
-- If you created your experiment from the feature flag page, your feature flag is already pre-added.
-- If your experiment does not have an associated flag, link an existing flag or create a new one.
-
-To learn more about feature flags, see the [Getting Started with Feature Flags][4] page.
-
-{{< img src="/product_analytics/experiment/exp_feature_flag.png" alt="Set up an experiment on a Feature Flag." style="width:90%;" >}}
-
-You can either launch your experiment right away or schedule a staged rollout.
+##### Split-by exploration dimensions
+Expand the **Split-by exploration dimensions** section. Select properties from the **Properties to compute for dimensional analysis** dropdown to segment experiment results by user or context attributes.
 
 ### Staged experiment rollouts
 
@@ -117,16 +95,18 @@ To gradually ramp up experiment traffic, add a rollout schedule. Datadog automat
 
 Users not included in the first sample receive the baseline variant and do not appear in experiment analysis. Of users included in the experiment, the proportion in each variant remains constant. This approach avoids correlations between the user's received variant and their enrollment time. It prevents time-varying metrics from introducing bias into experiment results.
 
-### Monitoring experiment rollout
+{{% /collapse-content %}} 
 
-After your experiment is live, you can monitor early traffic on the **Flag & Exposures** page. The exposure balance check section verifies that the expected balance of users across variants is present. The exposure log gives a real-time list of traffic getting enrolled into your experiment.
 
-<!-- {{< img src="/product_analytics/experiment/TODO_flag_exposures.png" alt="The Flag and Exposures page showing exposure balance and exposure log." style="width:90%;" >}} -->
+## Launch your experiment
 
-## Next steps
+To launch your experiment: 
+1. Click **Start Experiment** to review the experiment setting.
+1. Click **Start Experiment & Enable Flag** and monitor early traffic on the **Flag & Exposures** page.
 
-- **[Read Experiment Results][5]**: Review and explore your experiment results.
-- **[Minimum Detectable Effects][3]**: Choose appropriately sized MDEs.
+
+See the **Exposure balance check** section to confirm the expected split of users across variants. Then, click **View Exposures Log** to see a real-time list of traffic getting enrolled into your experiment.
+
 
 ## Further reading
 
