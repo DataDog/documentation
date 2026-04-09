@@ -106,8 +106,9 @@ On the **Flag & Exposures** page, see the **Exposure balance check** section to 
 
 To gradually ramp up experiment traffic instead of launching to all users at once, add a rollout schedule:
 
-1. In the **Randomization** section, click **Add Rollout Steps**.
-1. Set the traffic percentage and date for each rollout step.
+1. In the **Randomization** section, click **Add Rollout Steps** and select a rollout configuration.
+1. Adjust the **Traffic exposure** percentage for each step as needed.
+1. Set the hold duration between steps using the **Scheduled rollout by holding between steps for** dropdown.
 
 Datadog automatically captures a representative sample of traffic for the control group at each stage. Users not included in the sample receive the baseline variant and do not appear in experiment analysis. The proportion of users in each variant remains constant across rollout steps, which prevents enrollment timing from biasing results.
 
