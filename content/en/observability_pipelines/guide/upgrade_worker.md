@@ -44,31 +44,31 @@ Worker version 2.14.0 gives you access to the following:
 
 #### New features
 
-- OCSF mapping for Palo Alto Networks Threat events have been added.
+- OCSF mappings for Palo Alto Networks Threat events have been added.
 - The Database source has been updated with timeout related changes.
 - The environment variable for the Datadog Agent source address is now configurable.
 
 #### Enhancements
 
-- Enrichment Table error reporting now uses Reference Tables metrics to reduce count of similar logs.
+- Enrichment Table error reporting now uses Reference Tables metrics to reduce the count of similar logs.
 - The Splunk HEC destination now supports extracting index fields from events.
 - The OCSF mapper now has an option to retain unmatched fields when selected.
 - For the Enrichment Table processor, the local cache retention time of entries not found in a Reference Table has been increased from 10 minutes to 30 minutes.
 - The Database Source SQL validation checks have been improved.
-- The Sensitive Data Scanner library has been updated with new and updated OOTB scanning rules for PII, credentials, and financial data, and minor bugs have been fixed.
+- The Sensitive Data Scanner library now has new and updated OOTB scanning rules for PII, credentials, and financial data, and minor bugs have been fixed.
 - The `observability-pipelines-worker top` command has new keybinds for scrolling, sorting and filtering.
-- The `component_latency_seconds` histogram and `component_latency_mean_seconds` gauge internal metrics have been added, exposing the time an event spends in a single processor including the processor buffer.
+- The `component_latency_seconds` histogram and `component_latency_mean_seconds` gauge internal metrics have been added. The metrics are based on the time an event spends in a single processor, including in the processor buffer.
 - The Datadog Logs destination has been updated to default to `zstd` compression instead of no compression.
 
 #### Fixes
 
 - Fixed a bug with sticky error state when Remote Configuration is successfully polled.
 - Fixed buffer utilization metrics to properly record actual utilization level.
-- Fixed a race condition during Worker shutdown between closing a memory buffer and in-progress send operations, which could potentially cause event loss.
-- Generate Metrics processor now handles aggregated histogram and aggregated summary metrics correctly.
+- Fixed a Worker shutdown race condition between closing the memory buffer and in-progress send operations that could potentially cause event loss.
+- The Generate Metrics processor now handles aggregated histogram and aggregated summary metrics correctly.
 - Live Capture now supports child events in the split array processor and bugs have been fixed.
 - Reference Tables buffer size and requests frequency have been reduced to avoid OOMs and rate limit errors.
-- The Reference Tables processor now rejects empty or blank lookup keys and to support integer keys.
+- The Reference Tables processor now rejects empty or blank lookup keys and supports integer keys.
 
 ---
 
@@ -85,7 +85,7 @@ Worker version 2.13.2 gives you access to the following:
 
 #### Fixes
 
-- Fix `exists` and `missing` queries to match with objects.
+- Fixed `exists` and `missing` queries to match with objects.
 
 ---
 
