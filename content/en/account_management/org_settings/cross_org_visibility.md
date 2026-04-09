@@ -50,6 +50,8 @@ To browse connections, navigate to the [cross-organization visibility page][6] i
 
 Creating a cross-organization connection allows you to query metrics from the source organization in the destination organization.
 
+<div class="alert alert-info">Datadog recommends using a <a href="/account_management/org_settings/service_accounts/">Service Account</a> to create and manage cross-organization connections. Connections are tied to their creator's account: if the creator's account is deactivated, the connection is deleted, which can interrupt data flow. Service Accounts are not tied to individual users and avoid this operational risk. Service Account application keys can also be used with the <a href="/account_management/org_settings/cross_org_visibility_api">Cross-Org Connections API</a> to create and manage connections programmatically.</div>
+
 1. Make sure you are signed in to the _source_ organization that contains the data you want to expose.
 1. On the [cross-organization visibility page][6], click **New Connection**. The **New Connection** dialog box appears.
 1. In the drop-down menu, select the _destination_ organization where you want to see the data.
@@ -161,7 +163,7 @@ Use [granular access controls][12] to limit the teams, roles, or users that can 
 - From the source organization: who can edit the connection.
 - From the destination organization: who can view the shared data, and who can edit the connection.
 
-Connections from the source org inherit the data access permissions of the connection's creator. If the creator is restricted from seeing any data by [Data Access Control][13] or [Log Restriction Queries][14], this data is not accessible from the destination org.
+Connections from the source org inherit the data access permissions of the connection's creator. If the creator is restricted from seeing any data by [Data Access Control][13] or [Log Restriction Queries][14], this data is not accessible from the destination org. If the creator's account is deactivated, the connection is deleted. This results in a data flow continuity issue, not a security risk—access restrictions are not lifted when a connection is deleted.
 
 **Note:** Connections created from HIPAA-enabled organizations may allow the sharing of protected health information (PHI) to destination organizations. Customers are responsible for any sensitive data transferred, including PHI.
 
@@ -198,3 +200,4 @@ To restore general access to a cross-organization connection with restricted acc
 [12]: /account_management/rbac/granular_access
 [13]: /account_management/rbac/data_access/
 [14]: /logs/guide/logs-rbac-permissions/?tab=ui#create-a-restriction-query
+[15]: /account_management/org_settings/service_accounts/
