@@ -14719,6 +14719,32 @@ menu:
         unstable:
           - v2
         order: 5
+    - name: Get Flaky Tests Management policies
+      url: '#get-flaky-tests-management-policies'
+      identifier: test-optimization-get-flaky-tests-management-policies
+      parent: test-optimization
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetFlakyTestsManagementPolicies
+        unstable:
+          - v2
+        order: 6
+    - name: Update Flaky Tests Management policies
+      url: '#update-flaky-tests-management-policies'
+      identifier: test-optimization-update-flaky-tests-management-policies
+      parent: test-optimization
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateFlakyTestsManagementPolicies
+        unstable:
+          - v2
+        order: 7
     - name: Widgets
       url: /api/latest/widgets/
       identifier: widgets

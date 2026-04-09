@@ -725,6 +725,18 @@
     "request_description": "",
     "request_schema_description": "The request for a pipelines search."
   },
+  "UpdateFlakyTestsManagementPolicies": {
+    "description": "Partially update Flaky Tests Management repository-level policies for the given repository.\nOnly provided policy blocks are updated; omitted blocks are left unchanged.",
+    "summary": "Update Flaky Tests Management policies",
+    "request_description": "",
+    "request_schema_description": "Request object for updating Flaky Tests Management policies."
+  },
+  "GetFlakyTestsManagementPolicies": {
+    "description": "Retrieve Flaky Tests Management repository-level policies for the given repository.",
+    "summary": "Get Flaky Tests Management policies",
+    "request_description": "",
+    "request_schema_description": "Request object for getting Flaky Tests Management policies."
+  },
   "DeleteTestOptimizationServiceSettings": {
     "description": "Delete Test Optimization settings for a specific service identified by repository, service name, and environment.",
     "summary": "Delete Test Optimization service settings",

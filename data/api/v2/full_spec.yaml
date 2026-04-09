@@ -70494,6 +70494,286 @@ components:
       type: string
       x-enum-varnames:
         - TEST_OPTIMIZATION_DELETE_SERVICE_SETTINGS_REQUEST
+    TestOptimizationFlakyTestsManagementPoliciesAttemptToFix:
+      description: Configuration for the attempt-to-fix Flaky Tests Management policy.
+      properties:
+        retries:
+          description: Number of retries when attempting to fix a flaky test. Must be greater than 0.
+          example: 3
+          format: int64
+          type: integer
+      type: object
+    TestOptimizationFlakyTestsManagementPoliciesAttributes:
+      description: Attributes of the Flaky Tests Management policies for a repository.
+      properties:
+        attempt_to_fix:
+          $ref: "#/components/schemas/TestOptimizationFlakyTestsManagementPoliciesAttemptToFix"
+        disabled:
+          $ref: "#/components/schemas/TestOptimizationFlakyTestsManagementPoliciesDisabled"
+        quarantined:
+          $ref: "#/components/schemas/TestOptimizationFlakyTestsManagementPoliciesQuarantined"
+        repository_id:
+          description: The repository identifier.
+          example: github.com/datadog/shopist
+          type: string
+      type: object
+    TestOptimizationFlakyTestsManagementPoliciesAutoDisableRule:
+      description: Automatic disable triggering rule based on a time window and test status.
+      properties:
+        enabled:
+          description: Whether this auto-disable rule is enabled.
+          example: false
+          type: boolean
+        status:
+          $ref: "#/components/schemas/TestOptimizationFlakyTestsManagementPoliciesDisabledStatus"
+        window_seconds:
+          description: Time window in seconds over which flakiness is evaluated. Must be greater than 0.
+          example: 3600
+          format: int64
+          type: integer
+      type: object
+    TestOptimizationFlakyTestsManagementPoliciesAutoQuarantineRule:
+      description: Automatic quarantine triggering rule based on a time window.
+      properties:
+        enabled:
+          description: Whether this auto-quarantine rule is enabled.
+          example: true
+          type: boolean
+        window_seconds:
+          description: Time window in seconds over which flakiness is evaluated. Must be greater than 0.
+          example: 3600
+          format: int64
+          type: integer
+      type: object
+    TestOptimizationFlakyTestsManagementPoliciesBranchRule:
+      description: Branch filtering rule for a Flaky Tests Management policy.
+      properties:
+        branches:
+          description: List of branches to which the policy applies.
+          example:
+            - main
+          items:
+            description: A branch name.
+            type: string
+          type: array
+        enabled:
+          description: Whether this branch rule is enabled.
+          example: true
+          type: boolean
+        excluded_branches:
+          description: List of branches excluded from the policy.
+          example: []
+          items:
+            description: A branch name.
+            type: string
+          type: array
+        excluded_test_services:
+          description: List of test services excluded from the policy.
+          example: []
+          items:
+            description: A test service name.
+            type: string
+          type: array
+      type: object
+    TestOptimizationFlakyTestsManagementPoliciesData:
+      description: Data object for Flaky Tests Management policies response.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/TestOptimizationFlakyTestsManagementPoliciesAttributes"
+        id:
+          description: The repository identifier used as the resource ID.
+          example: github.com/datadog/shopist
+          type: string
+        type:
+          $ref: "#/components/schemas/TestOptimizationFlakyTestsManagementPoliciesType"
+      type: object
+    TestOptimizationFlakyTestsManagementPoliciesDisabled:
+      description: Configuration for the disabled Flaky Tests Management policy.
+      properties:
+        auto_disable_rule:
+          $ref: "#/components/schemas/TestOptimizationFlakyTestsManagementPoliciesAutoDisableRule"
+        branch_rule:
+          $ref: "#/components/schemas/TestOptimizationFlakyTestsManagementPoliciesBranchRule"
+        enabled:
+          description: Whether the disabled policy is enabled.
+          example: false
+          type: boolean
+        failure_rate_rule:
+          $ref: "#/components/schemas/TestOptimizationFlakyTestsManagementPoliciesDisabledFailureRateRule"
+      type: object
+    TestOptimizationFlakyTestsManagementPoliciesDisabledFailureRateRule:
+      description: Failure-rate-based rule for the disabled policy.
+      properties:
+        branches:
+          description: List of branches to which this rule applies.
+          example: []
+          items:
+            description: A branch name.
+            type: string
+          type: array
+        enabled:
+          description: Whether this failure rate rule is enabled.
+          example: false
+          type: boolean
+        min_runs:
+          description: Minimum number of runs required before the rule is evaluated. Must be greater than or equal to 0.
+          example: 10
+          format: int64
+          type: integer
+        status:
+          $ref: "#/components/schemas/TestOptimizationFlakyTestsManagementPoliciesDisabledStatus"
+        threshold:
+          description: Failure rate threshold (0.0–1.0) above which the rule triggers.
+          example: 0.5
+          format: double
+          type: number
+      type: object
+    TestOptimizationFlakyTestsManagementPoliciesDisabledStatus:
+      description: |-
+        Test status that the disable policy applies to.
+        Must be either `active` or `quarantined`.
+      enum:
+        - active
+        - quarantined
+      example: active
+      type: string
+      x-enum-varnames:
+        - ACTIVE
+        - QUARANTINED
+    TestOptimizationFlakyTestsManagementPoliciesGetRequest:
+      description: Request object for getting Flaky Tests Management policies.
+      properties:
+        data:
+          $ref: "#/components/schemas/TestOptimizationFlakyTestsManagementPoliciesGetRequestData"
+      required:
+        - data
+      type: object
+    TestOptimizationFlakyTestsManagementPoliciesGetRequestAttributes:
+      description: Attributes for requesting Flaky Tests Management policies.
+      properties:
+        repository_id:
+          description: The repository identifier.
+          example: github.com/datadog/shopist
+          minLength: 1
+          type: string
+      required:
+        - repository_id
+      type: object
+    TestOptimizationFlakyTestsManagementPoliciesGetRequestData:
+      description: Data object for get Flaky Tests Management policies request.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/TestOptimizationFlakyTestsManagementPoliciesGetRequestAttributes"
+        type:
+          $ref: "#/components/schemas/TestOptimizationGetFlakyTestsManagementPoliciesRequestDataType"
+      required:
+        - type
+        - attributes
+      type: object
+    TestOptimizationFlakyTestsManagementPoliciesQuarantined:
+      description: Configuration for the quarantined Flaky Tests Management policy.
+      properties:
+        auto_quarantine_rule:
+          $ref: "#/components/schemas/TestOptimizationFlakyTestsManagementPoliciesAutoQuarantineRule"
+        branch_rule:
+          $ref: "#/components/schemas/TestOptimizationFlakyTestsManagementPoliciesBranchRule"
+        enabled:
+          description: Whether the quarantined policy is enabled.
+          example: true
+          type: boolean
+        failure_rate_rule:
+          $ref: "#/components/schemas/TestOptimizationFlakyTestsManagementPoliciesQuarantinedFailureRateRule"
+      type: object
+    TestOptimizationFlakyTestsManagementPoliciesQuarantinedFailureRateRule:
+      description: Failure-rate-based rule for the quarantined policy.
+      properties:
+        branches:
+          description: List of branches to which this rule applies.
+          example:
+            - main
+          items:
+            description: A branch name.
+            type: string
+          type: array
+        enabled:
+          description: Whether this failure rate rule is enabled.
+          example: true
+          type: boolean
+        min_runs:
+          description: Minimum number of runs required before the rule is evaluated. Must be greater than or equal to 0.
+          example: 10
+          format: int64
+          type: integer
+        threshold:
+          description: Failure rate threshold (0.0–1.0) above which the rule triggers.
+          example: 0.5
+          format: double
+          type: number
+      type: object
+    TestOptimizationFlakyTestsManagementPoliciesResponse:
+      description: Response object containing Flaky Tests Management policies for a repository.
+      properties:
+        data:
+          $ref: "#/components/schemas/TestOptimizationFlakyTestsManagementPoliciesData"
+      type: object
+    TestOptimizationFlakyTestsManagementPoliciesType:
+      description: |-
+        JSON:API type for Flaky Tests Management policies response.
+        The value must always be `test_optimization_flaky_tests_management_policies`.
+      enum:
+        - test_optimization_flaky_tests_management_policies
+      example: test_optimization_flaky_tests_management_policies
+      type: string
+      x-enum-varnames:
+        - TEST_OPTIMIZATION_FLAKY_TESTS_MANAGEMENT_POLICIES
+    TestOptimizationFlakyTestsManagementPoliciesUpdateRequest:
+      description: Request object for updating Flaky Tests Management policies.
+      properties:
+        data:
+          $ref: "#/components/schemas/TestOptimizationFlakyTestsManagementPoliciesUpdateRequestData"
+      required:
+        - data
+      type: object
+    TestOptimizationFlakyTestsManagementPoliciesUpdateRequestAttributes:
+      description: |-
+        Attributes for updating Flaky Tests Management policies.
+        Only provided policy blocks are updated; omitted blocks are left unchanged.
+      properties:
+        attempt_to_fix:
+          $ref: "#/components/schemas/TestOptimizationFlakyTestsManagementPoliciesAttemptToFix"
+        disabled:
+          $ref: "#/components/schemas/TestOptimizationFlakyTestsManagementPoliciesDisabled"
+        quarantined:
+          $ref: "#/components/schemas/TestOptimizationFlakyTestsManagementPoliciesQuarantined"
+        repository_id:
+          description: The repository identifier.
+          example: github.com/datadog/shopist
+          minLength: 1
+          type: string
+      required:
+        - repository_id
+      type: object
+    TestOptimizationFlakyTestsManagementPoliciesUpdateRequestData:
+      description: Data object for update Flaky Tests Management policies request.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/TestOptimizationFlakyTestsManagementPoliciesUpdateRequestAttributes"
+        type:
+          $ref: "#/components/schemas/TestOptimizationUpdateFlakyTestsManagementPoliciesRequestDataType"
+      required:
+        - type
+        - attributes
+      type: object
+    TestOptimizationGetFlakyTestsManagementPoliciesRequestDataType:
+      description: |-
+        JSON:API type for get Flaky Tests Management policies request.
+        The value must always be `test_optimization_get_flaky_tests_management_policies_request`.
+      enum:
+        - test_optimization_get_flaky_tests_management_policies_request
+      example: test_optimization_get_flaky_tests_management_policies_request
+      type: string
+      x-enum-varnames:
+        - TEST_OPTIMIZATION_GET_FLAKY_TESTS_MANAGEMENT_POLICIES_REQUEST
     TestOptimizationGetServiceSettingsRequest:
       description: Request object for getting Test Optimization service settings.
       properties:
@@ -70612,6 +70892,16 @@ components:
       type: string
       x-enum-varnames:
         - TEST_OPTIMIZATION_SERVICE_SETTINGS
+    TestOptimizationUpdateFlakyTestsManagementPoliciesRequestDataType:
+      description: |-
+        JSON:API type for update Flaky Tests Management policies request.
+        The value must always be `test_optimization_update_flaky_tests_management_policies_request`.
+      enum:
+        - test_optimization_update_flaky_tests_management_policies_request
+      example: test_optimization_update_flaky_tests_management_policies_request
+      type: string
+      x-enum-varnames:
+        - TEST_OPTIMIZATION_UPDATE_FLAKY_TESTS_MANAGEMENT_POLICIES_REQUEST
     TestOptimizationUpdateServiceSettingsRequest:
       description: Request object for updating Test Optimization service settings.
       properties:
@@ -81518,6 +81808,90 @@ paths:
         operator: OR
         permissions:
           - ci_visibility_read
+  /api/v2/ci/test-optimization/settings/policies:
+    patch:
+      description: |-
+        Partially update Flaky Tests Management repository-level policies for the given repository.
+        Only provided policy blocks are updated; omitted blocks are left unchanged.
+      operationId: UpdateFlakyTestsManagementPolicies
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TestOptimizationFlakyTestsManagementPoliciesUpdateRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TestOptimizationFlakyTestsManagementPoliciesResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/NotAuthorizedResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - test_optimization_settings_write
+      summary: Update Flaky Tests Management policies
+      tags: ["Test Optimization"]
+      x-codegen-request-body-name: body
+      x-menu-order: 7
+      x-permission:
+        operator: OR
+        permissions:
+          - test_optimization_settings_write
+      x-unstable: |-
+        **Note**: This endpoint is in preview and may be subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    post:
+      description: |-
+        Retrieve Flaky Tests Management repository-level policies for the given repository.
+      operationId: GetFlakyTestsManagementPolicies
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TestOptimizationFlakyTestsManagementPoliciesGetRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TestOptimizationFlakyTestsManagementPoliciesResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/NotAuthorizedResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - test_optimization_read
+      summary: Get Flaky Tests Management policies
+      tags: ["Test Optimization"]
+      x-codegen-request-body-name: body
+      x-menu-order: 6
+      x-permission:
+        operator: OR
+        permissions:
+          - test_optimization_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and may be subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/ci/test-optimization/settings/service:
     delete:
       description: |-
