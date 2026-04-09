@@ -7,9 +7,6 @@ aliases:
 
 <div class="alert alert-info">APM Basic uses the same Agent configuration as the former Universal Service Monitoring. Configuration keys such as <code>service_monitoring_config</code> and environment variables like <code>DD_SYSTEM_PROBE_SERVICE_MONITORING_ENABLED</code> are unchanged.</div>
 
-
-<div class="alert alert-info">APM Basic uses the same Agent configuration as the former Universal Service Monitoring. Configuration keys such as <code>service_monitoring_config</code> and environment variables like <code>DD_SYSTEM_PROBE_SERVICE_MONITORING_ENABLED</code> are unchanged.</div>
-
 ## Supported versions and compatibility
 
 Required Agent version
@@ -37,7 +34,7 @@ Additional protocols and traffic encryption methods are in <a href="#additional-
 
 - If on Linux:
     - Your service is running in a container.
-    - **In Preview:** For non-containerized services, see the [instructions here](#additional-configuration).
+    - **In Preview:** For non-containerized services, see [Additional configuration](#additional-configuration).
 - If on Windows:
     - Your service is running on a VM.
 - Datadog Agent is installed alongside your service. Installing a tracing library is _not_ required.

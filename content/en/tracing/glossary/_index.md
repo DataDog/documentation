@@ -153,4 +153,4 @@ To learn more, read supported [propagation formats][28] for your application's l
 [27]: /tracing/trace_collection/trace_context_propagation
 [28]: /tracing/trace_collection/trace_context_propagation/#supported-formats
 [29]: /tracing/apm_basic/
-[30]: /tracing/apm_basic/#setup
+[30]: /tracing/apm_basic/setup/

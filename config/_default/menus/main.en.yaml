@@ -4214,7 +4214,7 @@ menu:
       parent: tracing_metrics
       identifier: tracing_runtime_metrics
       weight: 302
-- name: Trace Pipeline Configuration
+    - name: Trace Pipeline Configuration
       url: tracing/trace_pipeline/
       parent: tracing
       identifier: tracing_trace_pipeline
