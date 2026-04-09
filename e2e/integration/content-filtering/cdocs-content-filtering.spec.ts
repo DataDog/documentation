@@ -1,20 +1,7 @@
-import { test, expect, type Page } from '@playwright/test';
-import { hideOverlays } from '../../helpers';
+import { test, expect } from '@playwright/test';
+import { clickPill, expectHidden, expectVisible, hideOverlays, pill } from '../../helpers';
 
 const PAGE_URL = '/dd_e2e/cdocs/integration/content_filtering/';
-
-// --- Selectors ---
-
-/** Returns a selector for a filter pill button. */
-function pill(filterId: string, optionId: string): string {
-    return `button.cdoc-pill[data-filter-id="${filterId}"][data-option-id="${optionId}"]`;
-}
-
-/** Returns a selector for a toggleable content block by its data-description. */
-function toggleable(description: string): string {
-    return `.cdoc__toggleable[data-description="${description}"]`;
-}
-
 const CONTENT_AREA = '#mainContent';
 
 // Content descriptions (from the compiled HTML data-description attributes)
@@ -39,27 +26,6 @@ const INCLUDES_DESCRIPTION =
     "The selected value for Programming Language is included in the given list: 'Go, Ruby, Python'";
 const NOT_DESCRIPTION = 'Programming Language is not JavaScript';
 
-// --- Helpers ---
-
-async function clickPill(page: Page, filterId: string, optionId: string) {
-    await page.click(pill(filterId, optionId));
-}
-
-async function expectVisible(page: Page, description: string) {
-    const el = page.locator(toggleable(description));
-    await expect(el).not.toHaveClass(/cdoc__hidden/);
-}
-
-async function expectHidden(page: Page, description: string) {
-    const el = page.locator(toggleable(description));
-    await expect(el).toHaveClass(/cdoc__hidden/);
-}
-
-async function resetToDefaults(page: Page) {
-    await clickPill(page, 'prog_lang', 'javascript');
-    await clickPill(page, 'database', 'postgres');
-}
-
 // --- Tests ---
 
 test.describe('Cdocs content filtering', () => {
@@ -67,7 +33,8 @@ test.describe('Cdocs content filtering', () => {
         await page.goto(PAGE_URL);
         await page.waitForSelector('#cdoc-content');
         // Click defaults to clear any persisted state from URL params
-        await resetToDefaults(page);
+        await clickPill(page, 'prog_lang', 'javascript');
+        await clickPill(page, 'database', 'postgres');
         await hideOverlays(page);
     });
 
