@@ -311,7 +311,7 @@ function loadInstantSearch(currentPageWasAsyncLoaded) {
 
     const aisSearchBoxInput = document.querySelector('.ais-SearchBox-input');
     const aisSearchBoxSubmit = document.querySelector('.ais-SearchBox-submit');
-    const searchPathname = `${basePathName}search`;
+    const searchPathname = `${basePathName}search/`;
 
     const handleGlobalKeydown = (e) => {
         if ((e.key === '/' ||(e.key === 'k' && (e.metaKey || e.ctrlKey))) && !['input', 'textarea'].includes(e.target.tagName.toLowerCase()) && !e.target.isContentEditable) {
