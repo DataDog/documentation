@@ -81,10 +81,10 @@ To access the relevant cloud console for any resource in your list, click on a r
 Clicking on a host opens a side panel with details including:
 
 - **Host information** such as the name, account, OS, instance type, tags, and metadata associated with the host
-**Host Summary** which displays active monitor alerts and enabled products 
-- **Metrics** including CPU usage, memory usage, [NTP offset][18], system uptime,and integrations installed on the resource
-- **Containers** which displays metrics for containers attached to the resource
-**Processes** which displays processes correlated with the resource; requires [Live Processes][19]
+- **Host Summary** which displays active monitor alerts and enabled products
+- **Metrics** including CPU usage, memory usage, [NTP offset][18], system uptime, and integrations installed on the host
+- **Containers** which displays metrics for containers attached to the host
+- **Processes** which displays processes correlated with the host (requires [Live Processes][19])
 - **Infra map** which displays a [Cloudcraft diagram][17]
 - **Relationships** which displays an interactive map of connections to other resources
 - **Logs** correlated with the host
@@ -101,12 +101,12 @@ Clicking on a host opens a side panel with details including:
 
 Clicking on any resource opens a side panel with details including:
 
-- **Resource Info** including resource-specific tags and the resource's definition in JSON format 
-- **Metrics**
-- **Relationships**
-- **Logs**
-- **Changes**
-- **Security** 
+- **Resource Info** including resource-specific tags and the resource's definition in JSON format
+- **Metrics** correlated with the resource
+- **Relationships** which displays an interactive map of connections to other resources
+- **Logs** correlated with the resource
+- **Changes** showing a history of changes to the resource
+- **Security** which displays misconfigurations, signals, vulnerabilities, and identity risks
 
 ## Resource Changes (in Preview)
 
