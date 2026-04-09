@@ -64,11 +64,11 @@ The following attributes are attached to all events by default.
 | `os.version` | string | The OS version as reported by the device. |
 | `os.version_major` | string | The major OS version as reported by the device. |
 
-### Geo-location
+### Geolocation
 
 The following attributes are derived from the IP address of the session.
 
-**Note:** To stop collecting geo-location attributes, change the setting in [Application Management][2].
+**Note:** To stop collecting geolocation attributes, change the setting in [Application Management][2].
 
 | Attribute | Type | Description |
 |-----------|------|-------------|
@@ -98,8 +98,8 @@ The following attributes are specific to each event type.
 | Attribute | Type | Description |
 |-----------|------|-------------|
 | `session.id` | string | Unique ID of the session. |
-| `session.type` | string | Type of the session (`user`). |
-| `session.is_active` | boolean | Indicates if the session is active. The session ends after 4 hours of activity or 15 minutes of inactivity. |
+| `session.type` | string | Type of the session. The value is `user` for Product Analytics. |
+| `session.is_active` | Boolean | Indicates whether the session is active. The session ends after 4 hours of activity or 15 minutes of inactivity. |
 | `session.time_spent` | number (nanoseconds) | Time spent on the session. |
 | `session.view.count` | number | Count of all views collected for this session. |
 | `session.action.count` | number | Count of all actions collected for this session. |
@@ -109,7 +109,7 @@ The following attributes are specific to each event type.
 | `session.last_view.name` | string | Name of the last view of the session. |
 | `session.ip` | string | IP address of the session. To stop collecting this attribute, change the setting in [Application Management][2]. |
 | `session.useragent` | string | Browser or device identifier used to determine device type and version. |
-| `session.has_replay` | boolean | Indicates if the session has a Session Replay recording attached. |
+| `session.has_replay` | Boolean | Indicates whether the session has a Session Replay recording attached. |
 
 ### View attributes
 
@@ -118,7 +118,7 @@ The following attributes are specific to each event type.
 | `view.id` | string | Unique ID of the view. |
 | `view.url` | string | URL of the page or canonical name of the screen corresponding to the event. |
 | `view.name` | string | Customizable name of the view. |
-| `view.is_active` | boolean | Indicates whether the view is active. |
+| `view.is_active` | Boolean | Indicates whether the view is active. |
 | `view.time_spent` | number (nanoseconds) | Time spent on this view. |
 | `view.action.count` | number | Count of all actions collected for this view. |
 | `view.loading_time` | number (nanoseconds) | Time until the view is ready and no network request or DOM mutation is occurring. |
