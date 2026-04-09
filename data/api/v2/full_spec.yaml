@@ -4331,6 +4331,10 @@ components:
         - ip_match
         - "!ip_match"
         - capture_data
+        - exists
+        - "!exists"
+        - equals
+        - "!equals"
       example: "match_regex"
       type: string
       x-enum-varnames:
@@ -4345,6 +4349,10 @@ components:
         - IP_MATCH
         - NOT_IP_MATCH
         - CAPTURE_DATA
+        - EXISTS
+        - NOT_EXISTS
+        - EQUALS
+        - NOT_EQUALS
     ApplicationSecurityWafCustomRuleConditionOptions:
       description: Options for the operator of this condition.
       properties:
@@ -4385,6 +4393,8 @@ components:
           description: "Regex to use with the condition. Only used with match_regex and !match_regex operator."
           example: "path.*"
           type: string
+        type:
+          $ref: "#/components/schemas/ApplicationSecurityWafCustomRuleConditionParametersType"
         value:
           description: |-
             Store the captured value in the specified tag name. Only used with the capture_data operator.
@@ -4393,6 +4403,22 @@ components:
       required:
         - inputs
       type: object
+    ApplicationSecurityWafCustomRuleConditionParametersType:
+      description: The type of the value to compare against. Only used with the equals and !equals operator.
+      enum:
+        - boolean
+        - signed
+        - unsigned
+        - float
+        - string
+      example: "string"
+      type: string
+      x-enum-varnames:
+        - BOOLEAN
+        - SIGNED
+        - UNSIGNED
+        - FLOAT
+        - STRING
     ApplicationSecurityWafCustomRuleCreateAttributes:
       description: "Create a new WAF custom rule."
       properties:
