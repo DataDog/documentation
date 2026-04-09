@@ -4,6 +4,9 @@ further_reading:
 - link: /security/ai_guard/onboarding/
   tag: Documentation
   text: Get Started with AI Guard
+- link: /security/ai_guard/signals/
+  tag: Documentation
+  text: AI Guard Security Signals
 - link: "https://www.datadoghq.com/blog/llm-guardrails-best-practices/"
   tag: "Blog"
   text: "LLM guardrails: Best practices for deploying LLM apps securely"

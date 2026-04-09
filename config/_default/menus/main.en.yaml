@@ -7757,6 +7757,11 @@ menu:
       identifier: ai_guard_onboarding
       parent: ai_guard
       weight: 1
+    - name: Security Signals
+      url: /security/ai_guard/signals/
+      identifier: ai_guard_signals
+      parent: ai_guard
+      weight: 2
     - name: Workload Protection
       url: security/workload_protection/
       pre: security-workload-security
