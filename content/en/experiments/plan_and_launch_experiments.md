@@ -7,9 +7,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-product-analytics"
   tag: "Blog"
   text: "Make data-driven design decisions with Product Analytics"
-- link: "/experiments/defining_metrics"
+- link: "/experiments/reading_results"
   tag: "Documentation"
-  text: "Create Experiment Metrics"
+  text: "Read Experiment Results"
 ---
 
 ## Overview
@@ -44,7 +44,7 @@ Define the metrics that measure the outcome of your experiment.
 
 See [Create Experiment Metrics][2] for details.
 
-{{< img src="/product_analytics/experiment/exp_plan_launch_decision_metric.png" alt="The metrics configuration panel with options for primary metric and guardrails." style="width:80%;" >}}
+{{< img src="/product_analytics/experiment/exp_plan_launch_decision_metric.png" alt="The experiment detail page showing the Decision metrics section with a Calculate metrics by dropdown set to User (@usr.id), a primary metric set to Add to Cart Conversion, and a Secondary metrics section." style="width:80%;" >}}
 
 ### Sample size calculation
 Optionally, estimate the smallest change your experiment can reliably detect.
@@ -70,14 +70,14 @@ Configure the environment, targeting rules, variant split, and traffic exposure 
 1. Under **Targeting rules**, define conditions to filter which users are included in the experiment. Click **Add Condition** to add additional conditions and **Add Filter** to add additional filters.
 1. Under **Variants**, set how traffic is split between your control and treatment groups. Use the **Randomize users and split traffic** dropdown to choose an equal or custom split.
 1. Under **Traffic exposure**, set the percentage of targeted traffic to include in the experiment.
-1. Optionally, click **Add Rollout Steps** to schedule a staged rollout.
+1. Optionally, schedule a [staged rollout](#staged-experiment-rollout).
 
-{{% collapse-content title="Additional configuration settings (optional)" level="h4" expanded=false %}}
+{{% collapse-content title="Additional configuration settings (optional)" level="h3" expanded=false %}}
 
-##### Notifications
+#### Notifications
 Select recipients from the **Recipients** dropdown to receive updates on your experiment.
 
-##### Statistical analysis plan
+#### Statistical analysis plan
 Datadog's default sequential statistical analysis is suitable for most situations and promotes good statistical patterns. This framework gives statistically valid confidence intervals throughout the experiment, so you can make decisions at any time.
 
 To use a different statistical method:
@@ -87,22 +87,14 @@ To use a different statistical method:
 1. Toggle **CUPED calculation** to reduce variance and improve experiment sensitivity.
 1. Toggle **Multiple testing correction** to adjust for multiple comparisons across metrics.
 
-##### Split-by exploration dimensions
+#### Split-by exploration dimensions
 Expand the **Split-by exploration dimensions** section. Select properties from the **Properties to compute for dimensional analysis** dropdown to segment experiment results by user or context attributes.
-
-##### Staged experiment rollouts
-
-To gradually ramp up experiment traffic, add a rollout schedule. Datadog automatically captures a representative sample of traffic to use for control.
-
-**Note**: Datadog randomizes eligible users in two steps:
-1. A sample of traffic to be tracked in the experiment.
-2. A random allocation of users into experimental variants.
-
-Users not included in the first sample receive the baseline variant and do not appear in experiment analysis. Of users included in the experiment, the proportion in each variant remains constant. This approach avoids correlations between the user's received variant and their enrollment time and prevents time-varying metrics from introducing bias into experiment results.
 
 {{% /collapse-content %}}
 
 ## Launch your experiment
+
+After configuring your experiment, launch it to all users or schedule a staged rollout.
 
 To launch your experiment:
 1. Click **Start Experiment** to open the **Confirm starting the experiment** dialog.
@@ -110,6 +102,18 @@ To launch your experiment:
 
 On the **Flag & Exposures** page, see the **Exposure balance check** section to confirm the expected split of users across variants. Then, click **View Exposures Log** to see a real-time list of traffic getting enrolled into your experiment.
 
+### Staged experiment rollout
+
+To gradually ramp up experiment traffic instead of launching to all users at once, add a rollout schedule:
+
+1. In the **Randomization** section, click **Add Rollout Steps**.
+1. Set the traffic percentage and date for each rollout step.
+
+Datadog automatically captures a representative sample of traffic for the control group at each stage. Users not included in the sample receive the baseline variant and do not appear in experiment analysis. The proportion of users in each variant remains constant across rollout steps, which prevents enrollment timing from biasing results.
+
+## Next step
+
+[Reading Experiment Results][5]: Review and explore your experiment results.
 
 ## Further reading
 
@@ -119,3 +123,4 @@ On the **Flag & Exposures** page, see the **Exposure balance check** section to 
 [2]: /experiments/defining_metrics
 [3]: /experiments/minimum_detectable_effect
 [4]: /getting_started/feature_flags/
+[5]: /experiments/reading_results
