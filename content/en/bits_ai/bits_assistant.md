@@ -66,7 +66,7 @@ Example prompts:
 
 **Network Device Monitoring**
 
-Query and troubleshoot network devices, interfaces, and traffic patterns. For more information, see [NDM Bits Assistant][3].
+Query and troubleshoot network devices, interfaces, and traffic patterns. For more information, see [NDM AI Tools][3].
 
 Example prompts:
 - `Show me all network devices in the us-east datacenter`
@@ -107,4 +107,4 @@ After setup is completed, you can send queries to `@Datadog` in natural language
 
 [1]: /integrations/slack/?tab=applicationforslack
 [2]: /mobile/?tab=ios#installing
-[3]: /network_monitoring/devices/bits_assistant/
+[3]: /network_monitoring/devices/ai_tools/

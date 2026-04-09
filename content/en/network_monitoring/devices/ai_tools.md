@@ -1,6 +1,6 @@
 ---
-title: Bits Assistant
-description: "Use Bits Assistant to query and troubleshoot network devices with natural language."
+title: AI Tools
+description: "Use Bits Assistant and the Datadog MCP Server to query and troubleshoot network devices with natural language."
 further_reading:
   - link: "/bits_ai/bits_assistant"
     tag: "Documentation"

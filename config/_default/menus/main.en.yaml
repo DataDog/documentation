@@ -3688,10 +3688,10 @@ menu:
       parent: ndm
       identifier: ndm_config_management
       weight: 304
-    - name: Bits Assistant
-      url: network_monitoring/devices/bits_assistant
+    - name: AI Tools
+      url: network_monitoring/devices/ai_tools
       parent: ndm
-      identifier: ndm_bits_assistant
+      identifier: ndm_ai_tools
       weight: 305
     - name: Maps
       url: network_monitoring/devices/topology
