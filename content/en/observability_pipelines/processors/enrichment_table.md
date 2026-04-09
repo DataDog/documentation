@@ -100,7 +100,7 @@ To set up the Enrichment Table processor:
   1. If you are using a secret as a source attribute, toggle **Use Secret as source attribute** to enable it. See [Use a secret as a source attribute example](#use-a-secret-as-a-source-attribute) for more information.
       1. Select the type of secret (**Datadog API Key**, **Splunk HEC token**, or **Custom**).
           - If you select **Custom**, enter the name of the secret that is in the event metadata. **Note**: Do **not** enter the actual secret values.
-  1. If you are not using a secret, enter the source attribute of the log. The source attribute's value is what you want Observability Pipelines to find in the file.
+  1. If you are not using a secret, enter the source attribute of the log. The source attribute's value is used as the key to match against the column name in your local file.
   1. Enter the target attribute. The target attribute's value stores the information found in the file as a JSON object.
   1. Click **Save**.
 
