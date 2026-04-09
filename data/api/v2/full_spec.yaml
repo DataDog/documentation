@@ -46430,7 +46430,7 @@ components:
             $ref: "#/components/schemas/ObservabilityPipelineParseGrokProcessorRuleMatchRule"
           type: array
         source:
-          description: The name of the field in the log event to apply the Grok rules to.
+          description: The value of the source field in log events to be processed by the Grok rules.
           example: "message"
           type: string
         support_rules:
