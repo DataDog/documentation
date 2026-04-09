@@ -20,9 +20,10 @@ Product Analytics collects user activity data as events. Each event has two type
 - **Telemetry**: Quantifiable values used to track and compare activity (for example, `view.time_spent`).
 - **Attributes**: Descriptive values used to filter and break down measurements in your analysis (for example, `device.type` or `geo.country`).
 
-Every event has all of the [default attributes](#default-attributes). To identify individual users across sessions, Product Analytics relies on the `usr.id` and `usr.email` attributes.
+Every event includes the [default attributes](#default-attributes). Each event type also has [specific telemetry and attributes](#event-specific-attributes).
 
-There are additional [telemetry and attributes specific to a given event type](#event-specific-attributes). For example, `action.name` is an attribute on action events.
+To identify individual users across sessions, Product Analytics relies on the `usr.id` and `usr.email` attributes.
+
 
 <div class="alert alert-info">Product Analytics uses the same SDKs and configuration as Real User Monitoring (RUM) to collect data. Unlike RUM, Product Analytics does not collect Errors, Resources, Long Tasks, or Vitals events. For the full list of RUM event types and attributes, see the data collected pages for <a href="/real_user_monitoring/application_monitoring/browser/data_collected/">browser</a>, <a href="/real_user_monitoring/application_monitoring/ios/data_collected/">iOS</a>, and <a href="/real_user_monitoring/application_monitoring/android/data_collected/">Android</a>.</div>
 
@@ -68,7 +69,7 @@ The following attributes are attached to all events by default.
 
 The following attributes are derived from the IP address of the session.
 
-**Note:** To stop collecting geo-location attributes, change the setting in your [application details][5].
+**Note:** To stop collecting geo-location attributes, change the setting in your [application details][2].
 
 | Attribute | Type | Description |
 |-----------|------|-------------|
@@ -81,7 +82,7 @@ The following attributes are derived from the IP address of the session.
 
 ### User attributes
 
-You can enable [tracking user info][6] globally to collect and apply user attributes to all events.
+You can enable [tracking user info][3] globally to collect and apply user attributes to all events.
 
 | Attribute | Type | Description |
 |-----------|------|-------------|
@@ -107,7 +108,7 @@ The following attributes are specific to each event type.
 | `session.initial_view.name` | string | Name of the initial view of the session. |
 | `session.last_view.url` | string | URL of the last view of the session. |
 | `session.last_view.name` | string | Name of the last view of the session. |
-| `session.ip` | string | IP address of the session. To stop collecting this attribute, change the setting in your [application details][5]. |
+| `session.ip` | string | IP address of the session. To stop collecting this attribute, change the setting in your [application details][2]. |
 | `session.useragent` | string | Browser or device identifier used to determine device type and version. |
 | `session.has_replay` | boolean | Indicates if the session has a Session Replay recording attached. |
 
@@ -170,5 +171,5 @@ The following attributes are specific to each event type.
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /product_analytics/guide/action_management/
-[5]: https://app.datadoghq.com/rum/list
-[6]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/#user-session
+[2]: https://app.datadoghq.com/rum/list
+[3]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/#user-session
