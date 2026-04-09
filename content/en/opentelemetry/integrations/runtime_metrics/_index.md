@@ -154,19 +154,19 @@ The following tables list the OpenTelemetry runtime metrics used in Datadog's ou
 <div class="alert alert-danger"> OpenTelemetry runtime metrics are mapped to Datadog by metric name. Do not rename host metrics for OpenTelemetry runtime metrics as this breaks the mapping.</div>
 
 {{< tabs >}}
-{{% tab "Java" %}}
+{{< tab "Java" >}}
 
 {{< mapping-table resource="jvm-deprecated.csv">}}
 
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Go" %}}
+{{< tab "Go" >}}
 
 {{< mapping-table resource="go-contrib-runtime.csv">}}
 
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab ".NET" %}}
+{{< tab ".NET" >}}
 
 {{< mapping-table resource="dotnet.csv">}}
 
@@ -174,34 +174,85 @@ The following tables list the OpenTelemetry runtime metrics used in Datadog's ou
 
 {{< mapping-table resource="dotnet-contrib-runtime.csv">}}
 
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "NodeJS" %}}
+{{< tab "NodeJS" >}}
 
 {{< mapping-table resource="node-contrib-host.csv">}}
 
 {{< mapping-table resource="node-contrib-runtime.csv">}}
 
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Python" %}}
+{{< tab "Python" >}}
 
-The following table lists the conceptual equivalences between OpenTelemetry and Datadog Python runtime metrics. There are no direct mappings due to mismatching metric types between the two systems.
+<p>The following table lists the conceptual equivalences between OpenTelemetry and Datadog Python runtime metrics. There are no direct mappings due to mismatching metric types between the two systems.</p>
 
-| Datadog metric | Description | OpenTelemetry metric |
-| --- | --- | --- |
-| `runtime.python.cpu.time.sys` | Number of seconds executing in the kernel. | `process.cpu.time` (`type: system`) |
-| `runtime.python.cpu.time.user` | Number of seconds executing outside the kernel. | `process.cpu.time` (`type: user`) |
-| `runtime.python.cpu.percent` | CPU utilization percentage. OTel divides by 100 × number of cores. | `process.cpu.utilization` |
-| `runtime.python.cpu.ctx_switch.voluntary` | Number of voluntary context switches. | `process.context_switches` (`type: voluntary`) |
-| `runtime.python.cpu.ctx_switch.involuntary` | Number of involuntary context switches. | `process.context_switches` (`type: involuntary`) |
-| `runtime.python.gc.count.gen0` | Number of generation 0 objects. | `process.runtime.{python_implementation}.gc_count` (`count: 0`) |
-| `runtime.python.gc.count.gen1` | Number of generation 1 objects. | `process.runtime.{python_implementation}.gc_count` (`count: 1`) |
-| `runtime.python.gc.count.gen2` | Number of generation 2 objects. | `process.runtime.{python_implementation}.gc_count` (`count: 2`) |
-| `runtime.python.mem.rss` | Resident set memory. | `process.memory.usage` |
-| `runtime.python.thread_count` | Number of threads. | `process.thread.count` |
+<div class="table-wrapper">
+    <table class="table-fixed">
+        <thead>
+            <tr>
+                <th>DATADOG</th>
+                <th>DESCRIPTION</th>
+                <th>OTEL</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>runtime.python.cpu.time.sys</code></td>
+                <td>Number of seconds executing in the kernel.</td>
+                <td><code>process.cpu.time</code> (<code>type: system</code>)</td>
+            </tr>
+            <tr>
+                <td><code>runtime.python.cpu.time.user</code></td>
+                <td>Number of seconds executing outside the kernel.</td>
+                <td><code>process.cpu.time</code> (<code>type: user</code>)</td>
+            </tr>
+            <tr>
+                <td><code>runtime.python.cpu.percent</code></td>
+                <td>CPU utilization percentage. OTel divides by 100 × number of cores.</td>
+                <td><code>process.cpu.utilization</code></td>
+            </tr>
+            <tr>
+                <td><code>runtime.python.cpu.ctx_switch.voluntary</code></td>
+                <td>Number of voluntary context switches.</td>
+                <td><code>process.context_switches</code> (<code>type: voluntary</code>)</td>
+            </tr>
+            <tr>
+                <td><code>runtime.python.cpu.ctx_switch.involuntary</code></td>
+                <td>Number of involuntary context switches.</td>
+                <td><code>process.context_switches</code> (<code>type: involuntary</code>)</td>
+            </tr>
+            <tr>
+                <td><code>runtime.python.gc.count.gen0</code></td>
+                <td>Number of generation 0 objects.</td>
+                <td><code>process.runtime.{python_implementation}.gc_count</code> (<code>count: 0</code>)</td>
+            </tr>
+            <tr>
+                <td><code>runtime.python.gc.count.gen1</code></td>
+                <td>Number of generation 1 objects.</td>
+                <td><code>process.runtime.{python_implementation}.gc_count</code> (<code>count: 1</code>)</td>
+            </tr>
+            <tr>
+                <td><code>runtime.python.gc.count.gen2</code></td>
+                <td>Number of generation 2 objects.</td>
+                <td><code>process.runtime.{python_implementation}.gc_count</code> (<code>count: 2</code>)</td>
+            </tr>
+            <tr>
+                <td><code>runtime.python.mem.rss</code></td>
+                <td>Resident set memory.</td>
+                <td><code>process.memory.usage</code></td>
+            </tr>
+            <tr>
+                <td><code>runtime.python.thread_count</code></td>
+                <td>Number of threads.</td>
+                <td><code>process.thread.count</code></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 
-{{% /tab %}}
+{{< /tab >}}
 
 {{< /tabs >}}
 
