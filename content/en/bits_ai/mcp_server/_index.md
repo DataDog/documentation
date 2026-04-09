@@ -234,7 +234,7 @@ Ask a Datadog widget expert a natural-language question. Returns a concise answe
 
 - What response_format should I use for a toplist widget?
 - How do I add conditional formatting to a query table?
-- What's the difference between timeseries and scalar response formats?
+- Help me debug why this widget is showing fractional values when it should be a count.
 
 ### `get_datadog_notebook`
 *Toolset: **core***\
