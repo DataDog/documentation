@@ -69,7 +69,7 @@ The Datadog MCP Server supports _toolsets_, which allow you to use only the tool
 
 - `core`: The default toolset for logs, metrics, traces, dashboards, monitors, incidents, hosts, services, events, and notebooks
 - `alerting`: Tools for validating monitors, searching monitor groups, and retrieving monitor templates
-- `apm`: Tools for in-depth [APM][28] trace analysis, span search, Watchdog insights, and performance investigation
+- `apm`: ([Preview][43]) Tools for in-depth [APM][28] trace analysis, span search, Watchdog insights, and performance investigation
 - `cases`: Tools for [Case Management][38], including creating, searching, and updating cases; managing projects; and linking Jira issues
 - `dbm`: Tools for interacting with [Database Monitoring][26]
 - `ddsql`: (Preview) Tools for querying Datadog data using [DDSQL][41], a SQL dialect with support for infrastructure resources, logs, metrics, RUM, spans, and other Datadog data sources
@@ -321,6 +321,8 @@ Searches monitor groups by name or criteria.
 - Show me all monitor groups in an alerting state.
 - Find monitor groups related to the checkout service.
 
+<div class="alert alert-info">The <code>apm</code> toolset is in Preview. <a href="https://www.datadoghq.com/product-preview/apm-mcp-toolset/">Sign up for access.</a></div>
+
 ### `apm_search_spans`
 *Toolset: **apm***\
 *Permissions Required: `APM Read`*\
@@ -511,7 +513,7 @@ Searches for Datadog users by email, name, or handle. Useful for finding the rig
 
 - Find the Datadog user account for jane.doe@example.com.
 
-### `search_datadog_dbm_plans`
+### `search_datadog_database_plans`
 *Toolset: **dbm***\
 *Permissions Required: `Database Monitoring Read`*\
 Searches [Database Monitoring][26] query execution plans, which show how the database engine executes queries, including index usage, join strategies, and cost estimates. Use this to analyze query performance and identify optimization opportunities.
@@ -520,7 +522,7 @@ Searches [Database Monitoring][26] query execution plans, which show how the dat
 - Find query plans with `@db.plan.type:explain_analyze` for the production database.
 - Get execution plans for queries by `@db.user:app_user` with duration greater than 1 second.
 
-### `search_datadog_dbm_samples`
+### `search_datadog_database_samples`
 *Toolset: **dbm***\
 *Permissions Required: `Database Monitoring Read`*\
 Searches [Database Monitoring][26] query samples, which represent individual query executions with performance metrics. Use this to analyze database activity patterns, identify slow queries, and investigate database performance issues.
@@ -960,3 +962,4 @@ The Datadog MCP Server is under significant development. Use [this feedback form
 [40]: /bits_ai/mcp_server/setup#local-binary-authentication
 [41]: /ddsql_editor/
 [42]: /ddsql_reference/ddsql_default/
+[43]: https://www.datadoghq.com/product-preview/apm-mcp-toolset/

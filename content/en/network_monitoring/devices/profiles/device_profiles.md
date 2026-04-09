@@ -25,7 +25,7 @@ For advanced profile configuration, see [Build an NDM Profile][3].
 
 ## Prerequisites
 
-- Agent version `7.75.2` or later.
+- Agent version `7.77.0` or later.
 - [Remote Configuration][14] enabled for your organization.
 - Permissions required:
   - [NDM Device Profiles View][20]: Provides read-only access to the profile page. (Included in the Datadog Standard Role).

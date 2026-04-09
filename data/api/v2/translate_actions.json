@@ -2105,6 +2105,42 @@
     "request_description": "",
     "request_schema_description": "Update the IP allowlist."
   },
+  "ListLLMObsAnnotationQueues": {
+    "description": "List annotation queues. Optionally filter by project ID or queue IDs. These parameters are mutually exclusive.\nIf neither is provided, all queues in the organization are returned.",
+    "summary": "List LLM Observability annotation queues"
+  },
+  "CreateLLMObsAnnotationQueue": {
+    "description": "Create a new annotation queue. Only `name`, `project_id`, and `description` are accepted.\nFields such as `created_by`, `owned_by`, `created_at`, `modified_by`, and `modified_at` are inferred by the backend.",
+    "summary": "Create an LLM Observability annotation queue",
+    "request_description": "Create annotation queue payload.",
+    "request_schema_description": "Request to create an LLM Observability annotation queue."
+  },
+  "DeleteLLMObsAnnotationQueue": {
+    "description": "Delete an annotation queue by its ID.",
+    "summary": "Delete an LLM Observability annotation queue"
+  },
+  "UpdateLLMObsAnnotationQueue": {
+    "description": "Partially update an annotation queue. Only `name` and `description` can be updated.",
+    "summary": "Update an LLM Observability annotation queue",
+    "request_description": "Update annotation queue payload.",
+    "request_schema_description": "Request to update an LLM Observability annotation queue."
+  },
+  "GetLLMObsAnnotatedInteractions": {
+    "description": "Retrieve all interactions and their annotations for a given annotation queue.",
+    "summary": "Get annotated queue interactions"
+  },
+  "CreateLLMObsAnnotationQueueInteractions": {
+    "description": "Add one or more interactions (traces) to an annotation queue.\nAt least one interaction must be provided.",
+    "summary": "Add annotation queue interactions",
+    "request_description": "Add interactions payload.",
+    "request_schema_description": "Request to add interactions to an LLM Observability annotation queue."
+  },
+  "DeleteLLMObsAnnotationQueueInteractions": {
+    "description": "Delete one or more interactions from an annotation queue.",
+    "summary": "Delete annotation queue interactions",
+    "request_description": "Delete interactions payload.",
+    "request_schema_description": "Request to delete interactions from an LLM Observability annotation queue."
+  },
   "ListLLMObsExperiments": {
     "description": "List all LLM Observability experiments sorted by creation date, newest first.",
     "summary": "List LLM Observability experiments"
@@ -3349,13 +3385,37 @@
     "request_description": "",
     "request_schema_description": "Definition of a user."
   },
+  "ListScorecardCampaigns": {
+    "description": "Fetches all scorecard campaigns.",
+    "summary": "List all campaigns"
+  },
+  "CreateScorecardCampaign": {
+    "description": "Creates a new scorecard campaign.",
+    "summary": "Create a new campaign",
+    "request_description": "Campaign data.",
+    "request_schema_description": "Request to create a new campaign."
+  },
+  "DeleteScorecardCampaign": {
+    "description": "Deletes a single campaign by ID or key.",
+    "summary": "Delete a campaign"
+  },
+  "GetScorecardCampaign": {
+    "description": "Fetches a single campaign by ID or key.",
+    "summary": "Get a campaign"
+  },
+  "UpdateScorecardCampaign": {
+    "description": "Updates an existing campaign.",
+    "summary": "Update a campaign",
+    "request_description": "Campaign data.",
+    "request_schema_description": "Request to update a campaign."
+  },
   "ListScorecardOutcomes": {
     "description": "Fetches all rule outcomes.",
     "summary": "List all rule outcomes"
   },
-  "UpdateScorecardOutcomesAsync": {
+  "UpdateScorecardOutcomes": {
     "description": "Updates multiple scorecard rule outcomes in a single batched request.",
-    "summary": "Update Scorecard outcomes asynchronously",
+    "summary": "Update Scorecard outcomes",
     "request_description": "Set of scorecard outcomes.",
     "request_schema_description": "Scorecard outcomes batch request."
   },
@@ -3381,9 +3441,13 @@
   },
   "UpdateScorecardRule": {
     "description": "Updates an existing rule.",
-    "summary": "Update an existing rule",
+    "summary": "Update an existing scorecard rule",
     "request_description": "Rule attributes.",
     "request_schema_description": "Request to update a scorecard rule."
+  },
+  "ListScorecards": {
+    "description": "Fetches all scorecards.",
+    "summary": "List all scorecards"
   },
   "UnassignSeatsUser": {
     "description": "Unassign seats from users for a product code.",
@@ -3749,11 +3813,19 @@
     "request_description": "Attributes describing the signal update.",
     "request_schema_description": "Request body for changing the related incidents of a given security monitoring signal."
   },
+  "GetInvestigationLogQueriesMatchingSignal": {
+    "description": "Get the list of investigation log queries available for a given security signal.",
+    "summary": "Get investigation queries for a signal"
+  },
   "EditSecurityMonitoringSignalState": {
     "description": "Change the triage state of a security signal.",
     "summary": "Change the triage state of a security signal",
     "request_description": "Attributes describing the signal update.",
     "request_schema_description": "Request body for changing the state of a given security monitoring signal."
+  },
+  "GetSuggestedActionsMatchingSignal": {
+    "description": "Get the list of suggested actions for a given security signal.",
+    "summary": "Get suggested actions for a signal"
   },
   "ListScanningGroups": {
     "description": "List all the Scanning groups in your organization.",
