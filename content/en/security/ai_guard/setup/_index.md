@@ -52,7 +52,7 @@ The [AI Guard SDK][12] provides language-specific libraries (Python, JavaScript,
 | Language   | Supported Frameworks |
 |------------|---------------------|
 | Python     | LangChain           |
-| Node.js    | Vercel AI SDK       |
+| Node.js    | AI SDK              |
 
 ### Manual integrations
 

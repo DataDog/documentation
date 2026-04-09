@@ -13,7 +13,7 @@ further_reading:
 {{< site-region region="gov" >}}<div class="alert alert-danger">AI Guard isn't available in the {{< region-param key="dd_site_name" >}} site.</div>
 {{< /site-region >}}
 
-Automatic integrations provide out-of-the-box AI Guard protection for supported frameworks. When you run your application with the Datadog tracer, AI Guard evaluations are automatically performed on calls made through these frameworks, without requiring any code changes.
+AI Guard can automatically evaluate LLM calls made through supported AI ecosystem packages, without requiring manual API calls. When your application uses one of the supported packages, the Datadog tracer instruments it to evaluate those calls through AI Guard automatically. No code changes are required.
 
 ## Set up the Datadog Agent
 
@@ -26,19 +26,35 @@ If you don't use the Datadog Agent, the AI Guard evaluator API still works, but 
 {{< tabs >}}
 {{% tab "Python" %}}
 <!-- TODO: confirm supported versions and tracer versions -->
-| Framework                    | Supported Versions | Tracer Version |
+| Package                      | Supported Versions | Tracer Version |
 |------------------------------|--------------------|----------------|
 | [LangChain](#langchain)      | >= 0.0.192         | >= 2.9.0       |
 
 {{% /tab %}}
 {{% tab "Node.js" %}}
-<!-- TODO: confirm supported versions and tracer versions -->
-| Framework                          | Supported Versions | Tracer Version |
-|------------------------------------|--------------------|----------------|
-| [Vercel AI SDK](#vercel-ai-sdk)    | >= 4.0.0           | >= 5.63.0      |
+| Package                          | Supported Versions | Tracer Version |
+|----------------------------------|--------------------|----------------|
+| [AI SDK](#vercel-ai-sdk)         | `v6`               | `>=5.95.0`     |
 
 {{% /tab %}}
 {{< /tabs >}}
+
+## Required environment variables {#automatic-integration-env-vars}
+
+Set the following environment variables in your application:
+
+| Variable              | Value                    |
+| :-------------------- | :----------------------- |
+| `DD_AI_GUARD_ENABLED` | `true`                   |
+| `DD_API_KEY`          | `<YOUR_API_KEY>`         |
+| `DD_APP_KEY`          | `<YOUR_APPLICATION_KEY>` |
+| `DD_TRACE_ENABLED`    | `true`                   |
+
+By default, automatic integrations run in monitoring mode: AI Guard evaluates calls and records results, but does not block requests. To enable blocking, set `DD_AI_GUARD_BLOCK` to `true` (equivalent to the `block` option in the [SDK][7] and [REST API][8]):
+
+| Variable            | Value  |
+| :------------------ | :----- |
+| `DD_AI_GUARD_BLOCK` | `true` |
 
 ## Integrations
 
@@ -70,11 +86,10 @@ AI Guard automatically evaluates the following LangChain operations:
 {{< /tabs >}}
 {{% /collapse-content %}}
 
-{{% collapse-content title="Vercel AI SDK" level="h3" expanded=false id="vercel-ai-sdk" %}}
+{{% collapse-content title="AI SDK" level="h3" expanded=false id="vercel-ai-sdk" %}}
 {{< tabs >}}
 {{% tab "Node.js" %}}
-<!-- TODO: confirm traced methods and add details specific to AI Guard -->
-The [Vercel AI SDK][1] integration automatically applies AI Guard evaluations to text and object generation, embeddings, and tool calls.
+The [AI SDK][1] integration automatically applies AI Guard evaluations to text and object generation, embeddings, and tool calls.
 
 ### Traced operations
 
@@ -100,3 +115,5 @@ The [Vercel AI SDK][1] integration automatically applies AI Guard evaluations to
 {{< partial name="whats-next/whats-next.html" >}}
 
 [6]: /agent/?tab=Host-based
+[7]: /security/ai_guard/setup/sdk/
+[8]: /security/ai_guard/setup/http_api/
