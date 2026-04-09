@@ -22,7 +22,7 @@ Before setting up the .NET Feature Flags SDK, ensure you have:
 
 - **Datadog Agent** version 7.55 or later with [Remote Configuration][2] enabled
 - **Datadog .NET tracer** `dd-trace-dotnet` version 3.36.0 or later
-- **.NET runtime** version 6.0 or later
+- **.NET runtime** version 4.6.2 or later
 
 Set the following environment variables:
 
