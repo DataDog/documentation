@@ -1,6 +1,6 @@
 ---
 title: Widget Public URLs
-description: Copy widgets as images and share them outside of Datadog.
+description: Copy widgets as snapshot images and share them outside of Datadog.
 further_reading:
 - link: "/dashboards/sharing/"
   tag: "Documentation"
@@ -20,9 +20,9 @@ Widget Public URLs let you copy a dashboard widget as a static image and share i
 
 This feature requires the **Widget Public URLs** setting to be enabled in your organization. To enable it, navigate to [**Organization Settings > Public Sharing > Settings**][3].
 
-When enabled, copying a widget generates a publicly accessible image link. Anyone with the link can view the snapshot, regardless of whether they have a Datadog account.
+When enabled, copying a widget generates a publicly accessible snapshot image link. Anyone with the link can view the snapshot, regardless of whether they have a Datadog account.
 
-## Copy a widget as an image
+## Copy a widget as an snapshot image
 
 1. On any dashboard, hover over the widget you want to share.
 2. Press <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>C</kbd>, or click the share icon and select **Copy**.
@@ -32,7 +32,7 @@ In tools that support link previews (such as Slack or Microsoft Teams), the past
 
 ## Disable Widget Public URLs
 
-To stop generating publicly accessible widget image links, disable the **Widget Public URLs** setting in [**Organization Settings > Public Sharing > Settings**][3]. After disabling, copying a widget no longer generates a public image link.
+To stop generating publicly accessible widget image links, disable the **Widget Public URLs** setting in [**Organization Settings > Public Sharing > Settings**][3]. After disabling, copying a widget no longer generates a public snapshot image link.
 
 ## Further reading
 
