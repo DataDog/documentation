@@ -159,8 +159,8 @@ phrase:
     - src: "content/en/agent/configuration/network.md"
       dst: "content/{lang}/agent/configuration/network.md"
     # CDocs ast.json test - remove after testing
-    - src: "content/es/real_user_monitoring/application_monitoring/ios/setup.ast.json"
-      dst: "content/{lang}/real_user_monitoring/application_monitoring/ios/setup.ast.json"
+    - src: "layouts/shortcodes/mdoc/es/tracing/custom_instrumentation/dd_api/java.ast.json"
+      dst: "layouts/shortcodes/mdoc/{lang}/tracing/custom_instrumentation/dd_api/java.ast.json"
     # Webhook migration test files - remove after testing
     - src: "content/en/phrase/test-1.md"
       dst: "content/{lang}/phrase/test-1.md"
