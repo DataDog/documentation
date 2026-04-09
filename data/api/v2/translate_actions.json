@@ -1030,7 +1030,7 @@
     "description": "Delete dashboards from an existing dashboard list.",
     "summary": "Delete items from a dashboard list",
     "request_description": "Dashboards to delete from the dashboard list.",
-    "request_schema_description": "Request containing a list of dashboards to delete."
+    "request_schema_description": "Request containing a list of dashboards to remove."
   },
   "GetDashboardListItems": {
     "description": "Fetch the dashboard list’s dashboard definitions.",
