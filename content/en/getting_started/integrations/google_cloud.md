@@ -29,6 +29,9 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/collect-traces-logs-from-cloud-run-with-datadog/'
       text: 'Collect traces, logs, and custom metrics from your Google Cloud Run services with Datadog'
       tag: 'Blog'
+    - link: 'https://learn.datadoghq.com/courses/getting-started-gcp'
+      tag: 'Learning Center'
+      text: 'Getting Started with Observability in Google Cloud with Datadog'
 ---
 
 ## Overview

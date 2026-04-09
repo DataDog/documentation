@@ -43296,12 +43296,14 @@ components:
     ObservabilityPipelineAmazonS3Source:
       description: |-
         The `amazon_s3` source ingests logs from an Amazon S3 bucket.
-        It supports AWS authentication and TLS encryption.
+        It supports AWS authentication, TLS encryption, and configurable compression.
 
         **Supported pipeline types:** logs
       properties:
         auth:
           $ref: "#/components/schemas/ObservabilityPipelineAwsAuth"
+        compression:
+          $ref: "#/components/schemas/ObservabilityPipelineAmazonS3SourceCompression"
         id:
           description: The unique identifier for this component. Used in other parts of the pipeline to reference this component (for example, as the `input` to downstream components).
           example: aws-s3-source
@@ -43324,6 +43326,20 @@ components:
         - region
       type: object
       x-pipeline-types: [logs]
+    ObservabilityPipelineAmazonS3SourceCompression:
+      description: Compression format for objects retrieved from the S3 bucket. Use `auto` to detect compression from the object's Content-Encoding header or file extension.
+      enum:
+        - auto
+        - none
+        - gzip
+        - zstd
+      example: gzip
+      type: string
+      x-enum-varnames:
+        - AUTO
+        - NONE
+        - GZIP
+        - ZSTD
     ObservabilityPipelineAmazonS3SourceType:
       default: amazon_s3
       description: The source type. Always `amazon_s3`.
@@ -59750,6 +59766,17 @@ components:
       required:
         - data
       type: object
+    SecurityMonitoringSignalInvestigationQueryTemplateVariables:
+      additionalProperties:
+        items:
+          description: A value for this template variable extracted from the signal.
+          type: string
+        type: array
+      description: Template variables applied to the investigation log query, mapping attribute paths to values extracted from the signal.
+      example:
+        "@userIdentity.arn":
+          - foo
+      type: object
     SecurityMonitoringSignalListRequest:
       description: The request for a security signal list.
       properties:
@@ -60132,6 +60159,82 @@ components:
       properties:
         data:
           $ref: "#/components/schemas/SecurityMonitoringSignalStateUpdateData"
+      required:
+        - data
+      type: object
+    SecurityMonitoringSignalSuggestedAction:
+      description: A suggested action for a security signal.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/SecurityMonitoringSignalSuggestedActionAttributes"
+        id:
+          description: The unique ID of the suggested action.
+          example: w00-t10-992
+          type: string
+        type:
+          $ref: "#/components/schemas/SecurityMonitoringSignalSuggestedActionType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    SecurityMonitoringSignalSuggestedActionAttributes:
+      description: Attributes of a suggested action for a security signal. The available fields depend on the action type.
+      properties:
+        name:
+          description: The name of the investigation log query.
+          example: Cloudtrail events for user ARN
+          type: string
+        query_filter:
+          description: The log query filter for the investigation.
+          example: 'source:cloudtrail @userIdentity.arn:"foo"'
+          type: string
+        template_variables:
+          $ref: "#/components/schemas/SecurityMonitoringSignalInvestigationQueryTemplateVariables"
+        title:
+          description: The title of the recommended blog post.
+          example: Monitor Okta logs to track system access and unusual activity
+          type: string
+        url:
+          description: The URL of the suggested action.
+          example: /logs?query=source%3Acloudtrail+%40userIdentity.arn%3A%22foo%22
+          type: string
+      type: object
+    SecurityMonitoringSignalSuggestedActionList:
+      description: List of suggested actions for a security signal.
+      example:
+        - attributes:
+            name: Cloudtrail events for user ARN
+            query_filter: 'source:cloudtrail @userIdentity.arn:"foo"'
+            template_variables:
+              "@userIdentity.arn":
+                - foo
+            url: /logs?query=source%3Acloudtrail+%40userIdentity.arn%3A%22foo%22
+          id: w00-t10-992
+          type: investigation_log_queries
+        - attributes:
+            title: Monitor Okta logs to track system access and unusual activity
+            url: https://www.datadoghq.com/blog/monitor-activity-with-okta/
+          id: bxy-o8v-i1a
+          type: recommended_blog_posts
+      items:
+        $ref: "#/components/schemas/SecurityMonitoringSignalSuggestedAction"
+      type: array
+    SecurityMonitoringSignalSuggestedActionType:
+      description: The type of the suggested action resource.
+      enum:
+        - investigation_log_queries
+        - recommended_blog_posts
+      example: investigation_log_queries
+      type: string
+      x-enum-varnames:
+        - INVESTIGATION_LOG_QUERIES
+        - RECOMMENDED_BLOG_POSTS
+    SecurityMonitoringSignalSuggestedActionsResponse:
+      description: Response with suggested actions for a security signal.
+      properties:
+        data:
+          $ref: "#/components/schemas/SecurityMonitoringSignalSuggestedActionList"
       required:
         - data
       type: object
@@ -108349,6 +108452,55 @@ paths:
         operator: OR
         permissions:
           - security_monitoring_signals_write
+  /api/v2/security_monitoring/signals/{signal_id}/investigation_queries:
+    get:
+      description: Get the list of investigation log queries available for a given security signal.
+      operationId: GetInvestigationLogQueriesMatchingSignal
+      parameters:
+        - $ref: "#/components/parameters/SignalID"
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                data:
+                  - attributes:
+                      name: Cloudtrail events for user ARN
+                      query_filter: 'source:cloudtrail @userIdentity.arn:"foo"'
+                      template_variables:
+                        "@userIdentity.arn":
+                          - foo
+                      url: /logs?query=source%3Acloudtrail+%40userIdentity.arn%3A%22foo%22
+                    id: w00-t10-992
+                    type: investigation_log_queries
+                  - attributes:
+                      title: Monitor Okta logs to track system access and unusual activity
+                      url: https://www.datadoghq.com/blog/monitor-activity-with-okta/
+                    id: bxy-o8v-i1a
+                    type: recommended_blog_posts
+              schema:
+                $ref: "#/components/schemas/SecurityMonitoringSignalSuggestedActionsResponse"
+          description: OK
+        "403":
+          $ref: "#/components/responses/NotAuthorizedResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - security_monitoring_rules_read
+            - security_monitoring_signals_read
+      summary: Get investigation queries for a signal
+      tags: ["Security Monitoring"]
+      x-menu-order: 87
+      x-permission:
+        operator: AND
+        permissions:
+          - security_monitoring_rules_read
+          - security_monitoring_signals_read
   /api/v2/security_monitoring/signals/{signal_id}/state:
     patch:
       description: |-
@@ -108390,6 +108542,55 @@ paths:
         operator: OR
         permissions:
           - security_monitoring_signals_write
+  /api/v2/security_monitoring/signals/{signal_id}/suggested_actions:
+    get:
+      description: Get the list of suggested actions for a given security signal.
+      operationId: GetSuggestedActionsMatchingSignal
+      parameters:
+        - $ref: "#/components/parameters/SignalID"
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                data:
+                  - attributes:
+                      name: Cloudtrail events for user ARN
+                      query_filter: 'source:cloudtrail @userIdentity.arn:"foo"'
+                      template_variables:
+                        "@userIdentity.arn":
+                          - foo
+                      url: /logs?query=source%3Acloudtrail+%40userIdentity.arn%3A%22foo%22
+                    id: w00-t10-992
+                    type: investigation_log_queries
+                  - attributes:
+                      title: Monitor Okta logs to track system access and unusual activity
+                      url: https://www.datadoghq.com/blog/monitor-activity-with-okta/
+                    id: bxy-o8v-i1a
+                    type: recommended_blog_posts
+              schema:
+                $ref: "#/components/schemas/SecurityMonitoringSignalSuggestedActionsResponse"
+          description: OK
+        "403":
+          $ref: "#/components/responses/NotAuthorizedResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - security_monitoring_rules_read
+            - security_monitoring_signals_read
+      summary: Get suggested actions for a signal
+      tags: ["Security Monitoring"]
+      x-menu-order: 88
+      x-permission:
+        operator: AND
+        permissions:
+          - security_monitoring_rules_read
+          - security_monitoring_signals_read
   /api/v2/sensitive-data-scanner/config:
     get:
       description: List all the Scanning groups in your organization.

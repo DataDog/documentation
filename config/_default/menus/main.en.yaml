@@ -953,6 +953,11 @@ menu:
     #   parent: sdk
     #   identifier: sdk_advanced_configuration
     #   weight: 2
+    # - name: Data Collected
+    #   url: client_sdks/data_collected/
+    #   parent: sdk
+    #   identifier: sdk_data_collected
+    #   weight: 3
     - name: Extend Datadog
       url: extend/
       pre: dev-code
@@ -5204,10 +5209,10 @@ menu:
       parent: llm_obs_monitoring
       identifier: llm_obs_correlate_apm
       weight: 302
-    - name: Cluster Map
-      url: llm_observability/monitoring/cluster_map/
+    - name: Patterns
+      url: llm_observability/monitoring/patterns/
       parent: llm_obs_monitoring
-      identifier: llm_obs_cluster_map
+      identifier: llm_obs_patterns
       weight: 303
     - name: Agent Monitoring
       url: llm_observability/monitoring/agent_monitoring
@@ -5866,6 +5871,11 @@ menu:
       parent: feature_flags_client
       identifier: feature_flags_client_react_native
       weight: 106
+    - name: Unity
+      url: feature_flags/client/unity
+      parent: feature_flags_client
+      identifier: feature_flags_client_unity
+      weight: 107
     - name: Server SDKs
       url: feature_flags/server
       parent: feature_flags

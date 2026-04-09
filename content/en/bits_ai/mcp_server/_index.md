@@ -513,7 +513,7 @@ Searches for Datadog users by email, name, or handle. Useful for finding the rig
 
 - Find the Datadog user account for jane.doe@example.com.
 
-### `search_datadog_dbm_plans`
+### `search_datadog_database_plans`
 *Toolset: **dbm***\
 *Permissions Required: `Database Monitoring Read`*\
 Searches [Database Monitoring][26] query execution plans, which show how the database engine executes queries, including index usage, join strategies, and cost estimates. Use this to analyze query performance and identify optimization opportunities.
@@ -522,7 +522,7 @@ Searches [Database Monitoring][26] query execution plans, which show how the dat
 - Find query plans with `@db.plan.type:explain_analyze` for the production database.
 - Get execution plans for queries by `@db.user:app_user` with duration greater than 1 second.
 
-### `search_datadog_dbm_samples`
+### `search_datadog_database_samples`
 *Toolset: **dbm***\
 *Permissions Required: `Database Monitoring Read`*\
 Searches [Database Monitoring][26] query samples, which represent individual query executions with performance metrics. Use this to analyze database activity patterns, identify slow queries, and investigate database performance issues.
