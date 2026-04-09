@@ -100,7 +100,7 @@ The context link:
 
 {{< img src="dashboards/guide/context_links/override-link.mp4" alt="Copy-paste links to bootstrap configuration" video="true" style="width:75%;" >}}
 
-For a complex context link that encodes a wide variety of parameters, it can be more convenient to copy-and-paste the entire URL in the **URL** field to bootstrap the configuration and rework the variables from there.
+For a complex context link that encodes a wide variety of parameters, it can be more convenient to copy-and-paste the entire URL in the {{< ui >}}URL{{</ ui >}} field to bootstrap the configuration and rework the variables from there.
 
 
 #### URL encoding
