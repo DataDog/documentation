@@ -183,6 +183,9 @@ CPU
 Wall Time
 : The elapsed time used by each function. Elapsed time includes time when code is running on CPU, waiting for I/O, and anything else that happens while the function is running.
 
+Heap Live Objects
+: The number of objects allocated by each function in heap memory that have not yet been garbage collected. This is useful for investigating the overall memory usage of your service and identifying potential memory leaks.
+
 Heap Live Size
 : The amount of heap memory allocated by each function that has not yet been garbage collected. This is useful for investigating the overall memory usage of your service and identifying potential memory leaks.
 : Deep stack traces in Heap Live Size profiles are truncated to 64 frames.
