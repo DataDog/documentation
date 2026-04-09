@@ -47,6 +47,16 @@ These are the library mappings available:
 | Okta                   | User session start                            | Authentication (3002)         | 1.1.0                  |
 | Microsoft 365 Defender | Incident                                      | Incident Finding (2005)        | 1.3.0<br>1.1.0 |
 | Palo Alto Networks     | Traffic                                       | Network Activity (4001)       | 1.1.0                  |
+| Palo Alto Networks     | Threat                                        | Network Activity (4001)       | 1.3.0                  |
+| AWS GuardDuty          | All finding types                             | Detection Finding (2004)      | 1.3.0                  |
+| AWS WAF                | WebACL                                        | HTTP Activity (4002)          | 1.3.0                  |
+| Infoblox               | DNS Query                                     | DNS Activity (4003)           | 1.3.0                  |
+| Infoblox               | DHCP                                          | DHCP Activity (4004)          | 1.3.0                  |
+| Infoblox               | Audit Authentication                          | Authentication (3002)         | 1.3.0                  |
+| Infoblox               | Audit API                                     | API Activity (6003)           | 1.3.0                  |
+| Infoblox               | Port                                          | Base Event (0)                | 1.3.0                  |
+| Zscaler ZPA            | User Activity                                 | Network Activity (4001)       | 1.3.0                  |
+| Zscaler ZPA            | User Status                                   | Authentication (3002)         | 1.3.0                  |
 
 {{% /collapse-content %}}
 

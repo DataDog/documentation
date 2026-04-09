@@ -1334,6 +1334,11 @@
     },
     {
       "group": "observability_pipelines",
+      "suffix": "_99164570",
+      "description": "Validate an observability pipeline with amazon S3 source compression returns \"OK\" response"
+    },
+    {
+      "group": "observability_pipelines",
       "suffix": "_1330454428",
       "description": "Validate an observability pipeline with destination secret key returns \"OK\" response"
     },
@@ -1587,6 +1592,34 @@
       "group": "rum_retention_filters",
       "suffix": "",
       "description": "Update a RUM retention filter returns \"Updated\" response"
+    }
+  ],
+  "CreateScorecardRule": [
+    {
+      "group": "scorecards",
+      "suffix": "",
+      "description": "Create a new rule returns \"Created\" response"
+    }
+  ],
+  "CreateScorecardOutcomesBatch": [
+    {
+      "group": "scorecards",
+      "suffix": "",
+      "description": "Create outcomes batch returns \"OK\" response"
+    }
+  ],
+  "UpdateScorecardOutcomes": [
+    {
+      "group": "scorecards",
+      "suffix": "_2262047257",
+      "description": "Update Scorecard outcomes asynchronously returns \"Accepted\" response"
+    }
+  ],
+  "UpdateScorecardRule": [
+    {
+      "group": "scorecards",
+      "suffix": "_1831541184",
+      "description": "Update an existing rule returns \"Rule updated successfully\" response"
     }
   ],
   "AttachJiraIssue": [
@@ -2027,34 +2060,6 @@
       "group": "service_level_objectives",
       "suffix": "",
       "description": "Create a new SLO report returns \"OK\" response"
-    }
-  ],
-  "CreateScorecardRule": [
-    {
-      "group": "service_scorecards",
-      "suffix": "",
-      "description": "Create a new rule returns \"Created\" response"
-    }
-  ],
-  "CreateScorecardOutcomesBatch": [
-    {
-      "group": "service_scorecards",
-      "suffix": "",
-      "description": "Create outcomes batch returns \"OK\" response"
-    }
-  ],
-  "UpdateScorecardOutcomesAsync": [
-    {
-      "group": "service_scorecards",
-      "suffix": "",
-      "description": "Update Scorecard outcomes asynchronously returns \"Accepted\" response"
-    }
-  ],
-  "UpdateScorecardRule": [
-    {
-      "group": "service_scorecards",
-      "suffix": "",
-      "description": "Update an existing rule returns \"Rule updated successfully\" response"
     }
   ],
   "UpsertCatalogEntity": [
