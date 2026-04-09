@@ -8968,6 +8968,11 @@ menu:
       parent: product_analytics
       identifier: pa_profiles
       weight: 4
+    - name: Data Collected
+      url: product_analytics/data_collected
+      parent: product_analytics
+      identifier: pa_data_collected
+      weight: 5
     - name: Experiments
       url: experiments/
       pre: experiment-wui
