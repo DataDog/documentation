@@ -5,8 +5,10 @@ content_filters:
     option_group_id: profiler_language_options
     label: "Language"
   - trait_id: runtime
-    option_group_id: <PROG_LANG>_profiler_runtime_options
+    option_group_id: java_profiler_runtime_options
     label: "Runtime"
+    show_if:
+      - prog_lang: ["java"]
 aliases:
   - /tracing/faq/profiling_migration/
   - /tracing/profiler/enabling/

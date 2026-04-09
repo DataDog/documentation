@@ -13,46 +13,9 @@ profiler_language_options:
   - id: cpp
   - id: rust
 
-# Dynamic runtime option groups — resolved via <PROG_LANG>_profiler_runtime_options
-# Java has two runtimes; all other languages use a single "standard" option.
+# Runtime option groups — only shown when Java is selected (via show_if)
 
 java_profiler_runtime_options:
   - id: jvm
     default: true
   - id: graalvm_native_image
-
-python_profiler_runtime_options:
-  - id: standard
-    default: true
-
-go_profiler_runtime_options:
-  - id: standard
-    default: true
-
-ruby_profiler_runtime_options:
-  - id: standard
-    default: true
-
-node_js_profiler_runtime_options:
-  - id: standard
-    default: true
-
-dot_net_profiler_runtime_options:
-  - id: standard
-    default: true
-
-php_profiler_runtime_options:
-  - id: standard
-    default: true
-
-c_profiler_runtime_options:
-  - id: standard
-    default: true
-
-cpp_profiler_runtime_options:
-  - id: standard
-    default: true
-
-rust_profiler_runtime_options:
-  - id: standard
-    default: true
