@@ -13,7 +13,7 @@ products:
 
 Logs can contain information like IP addresses, user IDs, or service names that often need additional context. With the Enrichment Table processor, you can add context to your logs, using lookup datasets stored in Datadog [Reference Tables][1], local files, or MaxMind GeoIP tables. The processor matches logs based on a specified key and appends information from your lookup file to the log. If you use Reference Tables, you can connect to and enrich logs with SaaS-based datasets directly stored in ServiceNow, Snowflake, S3, and more.
 
-You can also use the Enrichment Table processor with a lookup file to map to secrets, such as a Datadog API key, Splunk HEC tokens, or custom header in a HTTP request, for filtering and routing logs. See [Use a secret as a source attribute](#use-a-secret-as-a-source-attribute) for more information.
+You can also use the Enrichment Table processor with a lookup file to map to secrets, such as a Datadog API key, Splunk HEC tokens, or custom header in an HTTP request, for filtering and routing logs. See [Use a secret as a source attribute](#use-a-secret-as-a-source-attribute) for more information.
 
 ### When to use this processor
 
@@ -146,7 +146,7 @@ merchant_info {
 
 ### Use a secret as a source attribute
 
-For the file lookup option, you can enable **Use Secret as source attribute** to map to a secret, such as a Datadog API key, Splunk HEC token, or a custom header in a HTTP request, in your local CSV file.
+For the file lookup option, you can enable **Use Secret as source attribute** to map to a secret, such as a Datadog API key, Splunk HEC token, or a custom header in an HTTP request, in your local CSV file.
 
 **Note**: If you want to map to Splunk HEC tokens, you must use a [Splunk HEC source][9] and enable **Store HEC token** on the source.
 
