@@ -67,7 +67,7 @@ Click **Add a feature flag** to select the appropriate feature flag for your exp
 Configure the environment, targeting rules, variant split, and traffic exposure for your experiment.
 
 1. Select the **Environment** for your experiment from the dropdown.
-1. Under **Targeting rules**, define conditions to filter which users are included in the experiment. Click **Add Condition** to add additional conditions and **Add Filter** to add additional filters.
+1. Under **Targeting rules**, click **Add Filter** to define conditions and filter which users to include in the experiment. Click **Add Condition** to add additional conditions.
 1. Under **Variants**, set how traffic is split between your control and treatment groups. Use the **Randomize users and split traffic** dropdown to choose an equal or custom split.
 1. Under **Traffic exposure**, set the percentage of targeted traffic to include in the experiment.
 1. Optionally, schedule a [staged rollout](#staged-experiment-rollout).
@@ -88,7 +88,7 @@ To use a different statistical method:
 1. Toggle **Multiple testing correction** to adjust for multiple comparisons across metrics.
 
 #### Split-by exploration dimensions
-Expand the **Split-by exploration dimensions** section. Select properties from the **Properties to compute for dimensional analysis** dropdown to segment experiment results by user or context attributes.
+Expand the **Split-by exploration dimensions** section. Select properties from the **Properties to compute for dimensional analysis** dropdown to segment experiment results by context attributes.
 
 {{% /collapse-content %}}
 
