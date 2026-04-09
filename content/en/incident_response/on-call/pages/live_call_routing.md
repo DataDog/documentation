@@ -10,7 +10,7 @@ further_reading:
 ---
 
 <div class="alert alert-info">
-Live call routing is provisioned by Datadog. To enable it for your organization, contact your account manager or <a href="mailto:support@datadoghq.com">Datadog Support</a>. Include your use case and the country and country code where you need the number provisioned (for example, <code>+1</code>, United States).
+Live call routing is provisioned by Datadog. To enable it for your organization, contact <a href="mailto:support@datadoghq.com">Datadog Support</a>. Include your use case and the desired country code (for example, <code>+33</code> for France).
 </div>
 
 
