@@ -230,11 +230,11 @@ Validates a widget definition against the dashboard schema. Use this to check wi
 ### `ask_widget_expert`
 *Toolset: **dashboards***\
 *Permissions Required: `Dashboards Read` or `Dashboards Write` or `Notebooks Read`*\
-Ask a Datadog widget expert a natural-language question. Returns a concise answer about widget building: query syntax, response formats, pitfalls, or a validated widget JSON definition. More token-efficient than `get_widget_reference` for targeted questions.
+Ask a Datadog widget expert a natural-language question. Returns a concise answer about widget building: query syntax, response formats, and common pitfalls. More token-efficient than `get_widget_reference` for targeted questions.
 
 - What response_format should I use for a toplist widget?
 - How do I add conditional formatting to a query table?
-- Build a timeseries showing error rate for `service:mcp`.
+- What's the difference between timeseries and scalar response formats?
 
 ### `get_datadog_notebook`
 *Toolset: **core***\
