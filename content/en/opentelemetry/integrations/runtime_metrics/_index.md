@@ -156,30 +156,37 @@ The following tables list the OpenTelemetry runtime metrics used in Datadog's ou
 {{< tabs >}}
 {{< tab "Java" >}}
 
+<h3>JVM Deprecated</h3>
 {{< mapping-table resource="jvm-deprecated.csv">}}
 
 {{< /tab >}}
 
 {{< tab "Go" >}}
 
+<h3>Go Contrib Runtime</h3>
 {{< mapping-table resource="go-contrib-runtime.csv">}}
 
 {{< /tab >}}
 
 {{< tab ".NET" >}}
 
+<h3>.NET</h3>
 {{< mapping-table resource="dotnet.csv">}}
 
+<h3>.NET Contrib Process</h3>
 {{< mapping-table resource="dotnet-contrib-process.csv">}}
 
+<h3>.NET Contrib Runtime</h3>
 {{< mapping-table resource="dotnet-contrib-runtime.csv">}}
 
 {{< /tab >}}
 
 {{< tab "NodeJS" >}}
 
+<h3>Node Contrib Host</h3>
 {{< mapping-table resource="node-contrib-host.csv">}}
 
+<h3>Node Contrib Runtime</h3>
 {{< mapping-table resource="node-contrib-runtime.csv">}}
 
 {{< /tab >}}
