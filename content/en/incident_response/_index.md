@@ -15,7 +15,7 @@ cascade:
     {{< nextlink href="/incident_response/incident_management/" >}}<u>Incident Management</u> - Learn how to manage and resolve incidents efficiently.{{< /nextlink >}}
     {{< nextlink href="/incident_response/case_management/" >}}<u>Case Management</u> - Track and organize cases related to incidents.{{< /nextlink >}}
     {{< nextlink href="/incident_response/status_pages/" >}}<u>Status Pages</u> - Communicate real-time system status with internal or public pages.{{< /nextlink >}}
-    {{< nextlink href="/incident_response/on_call/" >}}<u>On Call</u> - Manage on-call schedules and responder rotations.{{< /nextlink >}}
+    {{< nextlink href="/incident_response/on-call/" >}}<u>On Call</u> - Manage on-call schedules and responder rotations.{{< /nextlink >}}
 {{< /whatsnext >}}
 
 
