@@ -937,6 +937,27 @@ menu:
       identifier: otel_otlp_metric_types
       parent: otel_reference
       weight: 1104
+    # - name: Client SDKs
+    #   url: client_sdks/
+    #   pre: building-block
+    #   identifier: sdk
+    #   parent: essentials_heading
+    #   weight: 60000
+    # - name: Setup
+    #   url: client_sdks/setup/
+    #   parent: sdk
+    #   identifier: sdk_setup
+    #   weight: 1
+    # - name: Advanced Configuration
+    #   url: client_sdks/advanced_configuration/
+    #   parent: sdk
+    #   identifier: sdk_advanced_configuration
+    #   weight: 2
+    # - name: Data Collected
+    #   url: client_sdks/data_collected/
+    #   parent: sdk
+    #   identifier: sdk_data_collected
+    #   weight: 3
     - name: Extend Datadog
       url: extend/
       pre: dev-code
@@ -5188,10 +5209,10 @@ menu:
       parent: llm_obs_monitoring
       identifier: llm_obs_correlate_apm
       weight: 302
-    - name: Cluster Map
-      url: llm_observability/monitoring/cluster_map/
+    - name: Patterns
+      url: llm_observability/monitoring/patterns/
       parent: llm_obs_monitoring
-      identifier: llm_obs_cluster_map
+      identifier: llm_obs_patterns
       weight: 303
     - name: Agent Monitoring
       url: llm_observability/monitoring/agent_monitoring
@@ -5850,6 +5871,11 @@ menu:
       parent: feature_flags_client
       identifier: feature_flags_client_react_native
       weight: 106
+    - name: Unity
+      url: feature_flags/client/unity
+      parent: feature_flags_client
+      identifier: feature_flags_client_unity
+      weight: 107
     - name: Server SDKs
       url: feature_flags/server
       parent: feature_flags
@@ -8301,51 +8327,56 @@ menu:
       parent: rum_browser
       identifier: rum_advanced
       weight: 102
+    - name: Build Plugins
+      url: real_user_monitoring/application_monitoring/browser/build_plugins/
+      parent: rum_browser
+      identifier: rum_browser_build_plugins
+      weight: 103
     - name: Data Collected
       url: real_user_monitoring/application_monitoring/browser/data_collected/
       parent: rum_browser
       identifier: rum_data_collected
-      weight: 103
+      weight: 104
     - name: Monitoring Page Performance
       url: real_user_monitoring/application_monitoring/browser/monitoring_page_performance/
       parent: rum_browser
       identifier: page_performance
-      weight: 104
+      weight: 105
     - name: Optimizing Performance
       url: real_user_monitoring/application_monitoring/browser/optimizing_performance/
       parent: rum_browser
       identifier: rum_optimizing_performance
-      weight: 105
+      weight: 106
     - name: Monitoring Resource Performance
       url: real_user_monitoring/application_monitoring/browser/monitoring_resource_performance/
       parent: rum_browser
       identifier: resource_performance
-      weight: 106
+      weight: 107
     - name: Collecting Browser Errors
       url: real_user_monitoring/application_monitoring/browser/collecting_browser_errors/
       parent: rum_browser
       identifier: collect_errors
-      weight: 107
+      weight: 108
     - name: Tracking User Actions
       url: real_user_monitoring/application_monitoring/browser/tracking_user_actions/
       parent: rum_browser
       identifier: track_actions
-      weight: 108
+      weight: 109
     - name: Frustration Signals
       url: real_user_monitoring/application_monitoring/browser/frustration_signals/
       parent: rum_browser
       identifier: rum_frustration_signals
-      weight: 109
+      weight: 110
     - name: Error Tracking
       url: real_user_monitoring/application_monitoring/browser/error_tracking/
       parent: rum_browser
       identifier: rum_browser_error_tracking
-      weight: 110
+      weight: 111
     - name: Troubleshooting
       url: real_user_monitoring/application_monitoring/browser/troubleshooting/
       parent: rum_browser
       identifier: troubleshooting
-      weight: 111
+      weight: 112
     - name: Android and Android TV
       url: real_user_monitoring/application_monitoring/android
       parent: application_monitoring

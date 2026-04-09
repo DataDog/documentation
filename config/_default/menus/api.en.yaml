@@ -2624,6 +2624,30 @@ menu:
         unstable:
           - v2
         order: 69
+    - name: Get suggested actions for a signal
+      url: '#get-suggested-actions-for-a-signal'
+      identifier: security-monitoring-get-suggested-actions-for-a-signal
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSuggestedActionsMatchingSignal
+        unstable: []
+        order: 88
+    - name: Get investigation queries for a signal
+      url: '#get-investigation-queries-for-a-signal'
+      identifier: security-monitoring-get-investigation-queries-for-a-signal
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetInvestigationLogQueriesMatchingSignal
+        unstable: []
+        order: 87
     - name: Change the related incidents of a security signal
       url: '#change-the-related-incidents-of-a-security-signal'
       identifier: security-monitoring-change-the-related-incidents-of-a-security-signal
@@ -10532,6 +10556,97 @@ menu:
         unstable:
           - v2
         order: 13
+    - name: Delete annotation queue interactions
+      url: '#delete-annotation-queue-interactions'
+      identifier: llm-observability-delete-annotation-queue-interactions
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteLLMObsAnnotationQueueInteractions
+        unstable:
+          - v2
+        order: 24
+    - name: Add annotation queue interactions
+      url: '#add-annotation-queue-interactions'
+      identifier: llm-observability-add-annotation-queue-interactions
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateLLMObsAnnotationQueueInteractions
+        unstable:
+          - v2
+        order: 20
+    - name: Get annotated queue interactions
+      url: '#get-annotated-queue-interactions'
+      identifier: llm-observability-get-annotated-queue-interactions
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetLLMObsAnnotatedInteractions
+        unstable:
+          - v2
+        order: 21
+    - name: Update an LLM Observability annotation queue
+      url: '#update-an-llm-observability-annotation-queue'
+      identifier: llm-observability-update-an-llm-observability-annotation-queue
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateLLMObsAnnotationQueue
+        unstable:
+          - v2
+        order: 22
+    - name: Delete an LLM Observability annotation queue
+      url: '#delete-an-llm-observability-annotation-queue'
+      identifier: llm-observability-delete-an-llm-observability-annotation-queue
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteLLMObsAnnotationQueue
+        unstable:
+          - v2
+        order: 23
+    - name: Create an LLM Observability annotation queue
+      url: '#create-an-llm-observability-annotation-queue'
+      identifier: llm-observability-create-an-llm-observability-annotation-queue
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateLLMObsAnnotationQueue
+        unstable:
+          - v2
+        order: 19
+    - name: List LLM Observability annotation queues
+      url: '#list-llm-observability-annotation-queues'
+      identifier: llm-observability-list-llm-observability-annotation-queues
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListLLMObsAnnotationQueues
+        unstable:
+          - v2
+        order: 18
     - name: Logs Archives
       url: /api/latest/logs-archives/
       identifier: logs-archives
@@ -13008,6 +13123,167 @@ menu:
           - ListSCIMGroups
         unstable: []
         order: 7
+    - name: Scorecards
+      url: /api/latest/scorecards/
+      identifier: scorecards
+      generated: true
+    - name: List all scorecards
+      url: '#list-all-scorecards'
+      identifier: scorecards-list-all-scorecards
+      parent: scorecards
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListScorecards
+        unstable: []
+        order: 13
+    - name: Update an existing scorecard rule
+      url: '#update-an-existing-scorecard-rule'
+      identifier: scorecards-update-an-existing-scorecard-rule
+      parent: scorecards
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateScorecardRule
+        unstable: []
+        order: 2
+    - name: Delete a rule
+      url: '#delete-a-rule'
+      identifier: scorecards-delete-a-rule
+      parent: scorecards
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteScorecardRule
+        unstable: []
+        order: 6
+    - name: Create a new rule
+      url: '#create-a-new-rule'
+      identifier: scorecards-create-a-new-rule
+      parent: scorecards
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateScorecardRule
+        unstable: []
+        order: 1
+    - name: List all rules
+      url: '#list-all-rules'
+      identifier: scorecards-list-all-rules
+      parent: scorecards
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListScorecardRules
+        unstable: []
+        order: 5
+    - name: Create outcomes batch
+      url: '#create-outcomes-batch'
+      identifier: scorecards-create-outcomes-batch
+      parent: scorecards
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateScorecardOutcomesBatch
+        unstable:
+          - v2
+        order: 7
+    - name: Update Scorecard outcomes
+      url: '#update-scorecard-outcomes'
+      identifier: scorecards-update-scorecard-outcomes
+      parent: scorecards
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateScorecardOutcomes
+        unstable: []
+        order: 3
+    - name: List all rule outcomes
+      url: '#list-all-rule-outcomes'
+      identifier: scorecards-list-all-rule-outcomes
+      parent: scorecards
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListScorecardOutcomes
+        unstable: []
+        order: 4
+    - name: Update a campaign
+      url: '#update-a-campaign'
+      identifier: scorecards-update-a-campaign
+      parent: scorecards
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateScorecardCampaign
+        unstable: []
+        order: 11
+    - name: Get a campaign
+      url: '#get-a-campaign'
+      identifier: scorecards-get-a-campaign
+      parent: scorecards
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetScorecardCampaign
+        unstable: []
+        order: 10
+    - name: Delete a campaign
+      url: '#delete-a-campaign'
+      identifier: scorecards-delete-a-campaign
+      parent: scorecards
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteScorecardCampaign
+        unstable: []
+        order: 12
+    - name: Create a new campaign
+      url: '#create-a-new-campaign'
+      identifier: scorecards-create-a-new-campaign
+      parent: scorecards
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateScorecardCampaign
+        unstable: []
+        order: 9
+    - name: List all campaigns
+      url: '#list-all-campaigns'
+      identifier: scorecards-list-all-campaigns
+      parent: scorecards
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListScorecardCampaigns
+        unstable: []
+        order: 8
     - name: Seats
       url: /api/latest/seats/
       identifier: seats
@@ -13288,101 +13564,6 @@ menu:
           - ListServiceDefinitions
         unstable: []
         order: 1
-    - name: Service Scorecards
-      url: /api/latest/service-scorecards/
-      identifier: service-scorecards
-      generated: true
-    - name: Update an existing rule
-      url: '#update-an-existing-rule'
-      identifier: service-scorecards-update-an-existing-rule
-      parent: service-scorecards
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - UpdateScorecardRule
-        unstable:
-          - v2
-        order: 4
-    - name: Delete a rule
-      url: '#delete-a-rule'
-      identifier: service-scorecards-delete-a-rule
-      parent: service-scorecards
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - DeleteScorecardRule
-        unstable:
-          - v2
-        order: 3
-    - name: Create a new rule
-      url: '#create-a-new-rule'
-      identifier: service-scorecards-create-a-new-rule
-      parent: service-scorecards
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - CreateScorecardRule
-        unstable:
-          - v2
-        order: 7
-    - name: List all rules
-      url: '#list-all-rules'
-      identifier: service-scorecards-list-all-rules
-      parent: service-scorecards
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - ListScorecardRules
-        unstable:
-          - v2
-        order: 6
-    - name: Create outcomes batch
-      url: '#create-outcomes-batch'
-      identifier: service-scorecards-create-outcomes-batch
-      parent: service-scorecards
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - CreateScorecardOutcomesBatch
-        unstable:
-          - v2
-        order: 5
-    - name: Update Scorecard outcomes asynchronously
-      url: '#update-scorecard-outcomes-asynchronously'
-      identifier: service-scorecards-update-scorecard-outcomes-asynchronously
-      parent: service-scorecards
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - UpdateScorecardOutcomesAsync
-        unstable:
-          - v2
-        order: 1
-    - name: List all rule outcomes
-      url: '#list-all-rule-outcomes'
-      identifier: service-scorecards-list-all-rule-outcomes
-      parent: service-scorecards
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - ListScorecardOutcomes
-        unstable:
-          - v2
-        order: 2
     - name: ServiceNow Integration
       url: /api/latest/servicenow-integration/
       identifier: servicenow-integration

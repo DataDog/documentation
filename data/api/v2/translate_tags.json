@@ -205,7 +205,7 @@
   },
   "llm-observability": {
     "name": "LLM Observability",
-    "description": "Manage LLM Observability projects, datasets, dataset records, and experiments via the Experiments API."
+    "description": "Manage LLM Observability projects, datasets, dataset records, experiments, and annotations."
   },
   "logs": {
     "name": "Logs",
@@ -335,6 +335,10 @@
     "name": "SCIM",
     "description": "Provision Datadog users and teams using SCIM APIs.\n\nNote: SCIM provisioning for Datadog teams is only available for select organizations at this point. Request access by contacting Datadog support, or see the [SCIM page](https://docs.datadoghq.com/account_management/scim/) for more information."
   },
+  "scorecards": {
+    "name": "Scorecards",
+    "description": "API to create and update scorecard rules and outcomes. See [Scorecards](https://docs.datadoghq.com/service_catalog/scorecards) for more information."
+  },
   "seats": {
     "name": "Seats",
     "description": "The seats API allows you to view, assign, and unassign seats for your organization."
@@ -358,10 +362,6 @@
   "service-level-objectives": {
     "name": "Service Level Objectives",
     "description": "[Service Level Objectives](https://docs.datadoghq.com/monitors/service_level_objectives/#configuration)\n(SLOs) are a key part of the site reliability engineering toolkit.\nSLOs provide a framework for defining clear targets around application performance,\nwhich ultimately help teams provide a consistent customer experience,\nbalance feature development with platform stability,\nand improve communication with internal and external users."
-  },
-  "service-scorecards": {
-    "name": "Service Scorecards",
-    "description": "API to create and update scorecard rules and outcomes. See [Service Scorecards](https://docs.datadoghq.com/service_catalog/scorecards) for more information.\n\nThis feature is currently in BETA. If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/)."
   },
   "servicenow-integration": {
     "name": "ServiceNow Integration",
