@@ -69,7 +69,7 @@ To add a processor, open your newly created pipeline and select **Add Processor*
    - Skip this step if logs are already sent to Datadog in JSON format.
 2. Normalize logs with Datadog Standard Attributes in mind.
    - Map incoming attributes to [Datadog Standard Attributes][9] so logs are consistent across the platform. For example, an attribute for a client IP value should be remapped to `network.client.ip`.
-   - For reserved attributes (`date`, `message`, `status`, `service`), use the dedicated processors: [Date Remapper][10], [Message Remapper][11], [Status Remapper][12], [Service Remapper][13].
+   - For reserved attributes (`date`, `message`, `status`), use the dedicated processors: [Date Remapper][10], [Message Remapper][11], [Status Remapper][12].
       - **Important**: Remappers must be explicitly added for these attributes, even if the incoming value matches Datadog defaults. Organization-level overrides can change default behavior.
    - At a minimum, add a Date Remapper to map the log timestamp to the reserved `date` attribute.
    - For non-reserved standard attributes, use the general [Remapper][14].
@@ -114,7 +114,7 @@ After you've identified the attributes that can benefit from facets, follow thes
 Prior to testing your pipeline, review the following requirements to avoid common mistakes.
 
 - **Log pipelines must not be empty**: Every pipeline must contain at least one processor. At a minimum, include a Date Remapper.
-- **Add dedicated remappers for `date`, `message`, `status`, and `service`**: Remappers must be explicitly added for these attributes, even if the incoming value matches Datadog defaults. Organization-level overrides can change default behavior.
+- **Add dedicated remappers for `date`, `message`, and `status`**: Remappers must be explicitly added for these attributes, even if the incoming value matches Datadog defaults. Organization-level overrides can change default behavior.
 - **Disable `Preserve source attribute` when using a general [Remapper][14]**: Enable this option only if the attribute is required for downstream processing, or if you are updating an existing pipeline and need to maintain backward compatibility.
 - **Do not duplicate existing Datadog facets**: To avoid confusion with existing out-of-the-box Datadog facets, do not create custom facets that overlap with [Datadog Standard Attributes][9].
 - **Use a custom prefix for custom facets**: Attributes that do not map to a [Datadog Standard Attribute][9] must include a unique prefix when being mapped to a custom facet. Use the general [Remapper][14] to add a prefix.
@@ -131,8 +131,8 @@ Test your pipeline to confirm that logs are being parsed, normalized, and enrich
    - If the pipeline is not triggered, ensure it is enabled with the toggle.
 2. Verify custom facets in the [Logs Explorer][19] by checking that they appear and filter results as expected.
 3. Inspect individual logs in the Log Details panel to ensure:
-   - `service`, `source`, and `message` attributes are set correctly.
-	- Tags are applied as expected.
+   - `source` and `message` attributes are set correctly.
+   - Tags are applied as expected.
 
 ### Export and add your pipeline to the integration submission
 
@@ -167,7 +167,6 @@ The final step is to export the pipeline and upload the files to the Developer P
 [10]: /logs/log_configuration/processors/?tab=ui#log-date-remapper
 [11]: /logs/log_configuration/processors/?tab=ui#log-message-remapper
 [12]: /logs/log_configuration/processors/?tab=ui#log-status-remapper
-[13]: /logs/log_configuration/processors/?tab=ui#service-remapper
 [14]: /logs/log_configuration/processors/?tab=ui#remapper
 [15]: /logs/log_configuration/processors/?tab=ui#geoip-parser
 [16]: /logs/log_configuration/processors/?tab=ui#category-processor

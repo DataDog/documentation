@@ -110,7 +110,7 @@ You can export cases directly from a case details page:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/cases
-[2]: /incident_response/case_management/create_notifications_and_third_party_tickets
+[2]: /incident_response/case_management/notifications_integrations
 [3]: /notebooks/
 [4]: /incident_response/incident_management/#describing-the-incident
 [5]: /incident_response/case_management/settings/#jira
