@@ -44240,6 +44240,40 @@ components:
       type: string
       x-enum-varnames:
         - ELASTICSEARCH
+    ObservabilityPipelineEnrichmentTableFieldEventLookup:
+      description: Looks up a value from a field path in the log event.
+      properties:
+        event:
+          description: The path to the field in the log event to use as the lookup key.
+          example: log.user.id
+          type: string
+      required:
+        - event
+      type: object
+    ObservabilityPipelineEnrichmentTableFieldSecretLookup:
+      description: Looks up a value stored as a pipeline secret.
+      properties:
+        secret:
+          description: The name of the secret containing the lookup key value.
+          example: MY_LOOKUP_SECRET
+          type: string
+      required:
+        - secret
+      type: object
+    ObservabilityPipelineEnrichmentTableFieldStringPath:
+      description: A plain field path in the log event, used as the lookup key.
+      example: log.user.id
+      type: string
+    ObservabilityPipelineEnrichmentTableFieldVrlLookup:
+      description: Evaluates a VRL expression to produce the lookup key.
+      properties:
+        vrl:
+          description: A VRL expression that returns the value to use as the lookup key.
+          example: .log.user.id
+          type: string
+      required:
+        - vrl
+      type: object
     ObservabilityPipelineEnrichmentTableFile:
       description: Defines a static enrichment table loaded from a CSV file.
       properties:
@@ -44290,6 +44324,16 @@ components:
       type: string
       x-enum-varnames:
         - CSV
+    ObservabilityPipelineEnrichmentTableFileKeyItemField:
+      description: |-
+        Specifies the source of the key value used for enrichment table lookups.
+        Can be a plain field path string or an object specifying `event`, `vrl`, or `secret`.
+      example: log.user.id
+      oneOf:
+        - $ref: "#/components/schemas/ObservabilityPipelineEnrichmentTableFieldStringPath"
+        - $ref: "#/components/schemas/ObservabilityPipelineEnrichmentTableFieldEventLookup"
+        - $ref: "#/components/schemas/ObservabilityPipelineEnrichmentTableFieldVrlLookup"
+        - $ref: "#/components/schemas/ObservabilityPipelineEnrichmentTableFieldSecretLookup"
     ObservabilityPipelineEnrichmentTableFileKeyItems:
       description: Defines how to map log fields to enrichment table columns during lookups.
       properties:
@@ -44300,9 +44344,7 @@ components:
         comparison:
           $ref: "#/components/schemas/ObservabilityPipelineEnrichmentTableFileKeyItemsComparison"
         field:
-          description: The `items` `field`.
-          example: log.user.id
-          type: string
+          $ref: "#/components/schemas/ObservabilityPipelineEnrichmentTableFileKeyItemField"
       required:
         - column
         - comparison
@@ -47323,6 +47365,8 @@ components:
           description: Name of the environment variable or secret that holds the Splunk HEC token.
           example: SPLUNK_HEC_TOKEN
           type: string
+        token_strategy:
+          $ref: "#/components/schemas/ObservabilityPipelineSplunkHecDestinationTokenStrategy"
         type:
           $ref: "#/components/schemas/ObservabilityPipelineSplunkHecDestinationType"
       required:
@@ -47341,6 +47385,16 @@ components:
       x-enum-varnames:
         - JSON
         - RAW_MESSAGE
+    ObservabilityPipelineSplunkHecDestinationTokenStrategy:
+      description: Controls how the Splunk HEC token is supplied. Use `custom` to provide a token with `token_key`, or `from_source` to forward the token received from an upstream Splunk HEC source.
+      enum:
+        - custom
+        - from_source
+      example: custom
+      type: string
+      x-enum-varnames:
+        - CUSTOM
+        - FROM_SOURCE
     ObservabilityPipelineSplunkHecDestinationType:
       default: splunk_hec
       description: The destination type. Always `splunk_hec`.
@@ -47364,6 +47418,12 @@ components:
           description: The unique identifier for this component. Used in other parts of the pipeline to reference this component (for example, as the `input` to downstream components).
           example: splunk-hec-source
           type: string
+        store_hec_token:
+          description: |-
+            When `true`, the Splunk HEC token from the incoming request is stored in the event metadata.
+            This allows downstream components to forward the token to other Splunk HEC destinations.
+          example: true
+          type: boolean
         tls:
           $ref: "#/components/schemas/ObservabilityPipelineTls"
         type:
