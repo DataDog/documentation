@@ -67,7 +67,7 @@ Worker version 2.14.0 gives you access to the following:
 - Fixed a Worker shutdown race condition between closing the memory buffer and in-progress send operations that could potentially cause event loss.
 - The Generate Metrics processor now handles aggregated histogram and aggregated summary metrics correctly.
 - Live Capture now supports child events in the split array processor. Bugs have also been fixed.
-- Reference Tables buffer size and request frequency have been reduced to avoid out-of-memory (OOM) and rate limit errors.
+- Reference Tables buffer size and requests frequency have been reduced to avoid OOMs and rate limit errors.
 - The Reference Tables processor now rejects empty or blank lookup keys and supports integer keys.
 
 ---
