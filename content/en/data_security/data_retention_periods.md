@@ -176,4 +176,3 @@ attributes:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /product_analytics/guide/rum_and_product_analytics/#how-do-i-set-up-product-analytics
