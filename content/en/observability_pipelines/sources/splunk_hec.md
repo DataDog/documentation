@@ -9,6 +9,8 @@ products:
 
 {{< product-availability >}}
 
+## Overview
+
 Use Observability Pipelines' Splunk HTTP Event Collector (HEC) source to receive logs from your Splunk HEC. You can choose to store the HEC token as event metadata and:
 
 - Use the Enrichment Table processor to append a log field from your lookup file based on the token in the metadata, and then process and route your logs based on the value of that field.

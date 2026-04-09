@@ -13,7 +13,7 @@ products:
 
 Logs can contain information like IP addresses, user IDs, or service names that often need additional context. With the Enrichment Table processor, you can add context to your logs, using lookup datasets stored in Datadog [Reference Tables][1], local files, or MaxMind GeoIP tables. The processor matches logs based on a specified key and appends information from your lookup file to the log. If you use Reference Tables, you can connect to and enrich logs with SaaS-based datasets directly stored in ServiceNow, Snowflake, S3, and more.
 
-You can also use the Enrichment Table processor with a lookup file to map to secrets, such as Datadog API keys, Splunk HEC tokens, or a custom header, for filtering and routing logs. See [Use a secret as a source attribute](#use-a-secret-as-a-source-attribute) for more information.
+You can also use the Enrichment Table processor with a lookup file to map to secrets, such as a Datadog API key, Splunk HEC tokens, or custom header in a HTTP request, for filtering and routing logs. See [Use a secret as a source attribute](#use-a-secret-as-a-source-attribute) for more information.
 
 ### When to use this processor
 
