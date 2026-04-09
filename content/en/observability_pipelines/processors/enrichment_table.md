@@ -146,7 +146,7 @@ merchant_info {
 
 ### Use a secret as a source attribute
 
-For the file lookup option, you can enable **Use Secret as source attribute** to map to a secret, such as a Datadog API key, Splunk HEC token, or a custom header in an HTTP request, in your local CSV file.
+For the file lookup option, you can enable **Use Secret as source attribute** to map to a secret, such as a Datadog API key, Splunk HEC token, or a custom header in an HTTP request, in your local CSV file. The secret is used as the key to match against the column name in your local file.
 
 **Note**: If you want to map to Splunk HEC tokens, you must use a [Splunk HEC source][9] and enable **Store HEC token** on the source.
 
@@ -155,7 +155,7 @@ For the file lookup option, you can enable **Use Secret as source attribute** to
 For example, if you want to filter and route logs based on Splunk HEC tokens:
 
 1. Enable **Store HEC token** on the Splunk HEC source to store the token in the event metadata.
-1. Use the Enrichment Table processor file lookup to map the HEC token to a value and add that value to the event so you can filter and route logs based on that value.
+1. Use the file lookup option in the Enrichment Table processor to use the HEC token stored in the event metadata as a lookup key. The Worker enriches the event so you can filter and route logs based on that value.
 
 Example of a local lookup CSV file with Splunk HEC tokens mapped to a value:
 
