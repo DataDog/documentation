@@ -758,6 +758,14 @@ components:
       schema:
         example: "my-job"
         type: string
+    LLMObsAnnotationQueueIDPathParameter:
+      description: The ID of the LLM Observability annotation queue.
+      example: "b5e7f3a1-9c2d-4f8b-a1e6-3d7e9f0a2b4c"
+      in: path
+      name: queue_id
+      required: true
+      schema:
+        type: string
     LLMObsDatasetIDPathParameter:
       description: The ID of the LLM Observability dataset.
       example: "9f64e5c7-dc5a-45c8-a17c-1b85f0bec97d"
@@ -36074,6 +36082,386 @@ components:
           format: int64
           type: integer
       type: object
+    LLMObsAnnotatedInteractionItem:
+      description: An interaction with its associated annotations.
+      properties:
+        annotations:
+          description: List of annotations for this interaction.
+          items:
+            $ref: "#/components/schemas/LLMObsAnnotationItem"
+          type: array
+        content_id:
+          description: Identifier of the content for this interaction.
+          example: "trace-abc-123"
+          type: string
+        id:
+          description: Unique identifier of the interaction.
+          example: "interaction-456"
+          type: string
+        type:
+          $ref: "#/components/schemas/LLMObsInteractionType"
+      required:
+        - id
+        - type
+        - content_id
+        - annotations
+      type: object
+    LLMObsAnnotatedInteractionsDataAttributesResponse:
+      description: Attributes containing the list of annotated interactions.
+      properties:
+        annotated_interactions:
+          description: List of interactions with their annotations.
+          items:
+            $ref: "#/components/schemas/LLMObsAnnotatedInteractionItem"
+          type: array
+      required:
+        - annotated_interactions
+      type: object
+    LLMObsAnnotatedInteractionsDataResponse:
+      description: Data object for annotated interactions.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/LLMObsAnnotatedInteractionsDataAttributesResponse"
+        id:
+          description: The queue ID.
+          example: "b5e7f3a1-9c2d-4f8b-a1e6-3d7e9f0a2b4c"
+          type: string
+        type:
+          $ref: "#/components/schemas/LLMObsAnnotatedInteractionsType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    LLMObsAnnotatedInteractionsResponse:
+      description: Response containing the annotated interactions for an annotation queue.
+      properties:
+        data:
+          $ref: "#/components/schemas/LLMObsAnnotatedInteractionsDataResponse"
+      required:
+        - data
+      type: object
+    LLMObsAnnotatedInteractionsType:
+      description: Resource type for annotated interactions.
+      enum:
+        - annotated_interactions
+      example: annotated_interactions
+      type: string
+      x-enum-varnames:
+        - ANNOTATED_INTERACTIONS
+    LLMObsAnnotationItem:
+      description: A single annotation on an interaction.
+      properties:
+        created_at:
+          description: Timestamp when the annotation was created.
+          example: "2024-01-15T10:30:00Z"
+          format: date-time
+          type: string
+        created_by:
+          description: Identifier of the user who created the annotation.
+          example: "00000000-0000-0000-0000-000000000002"
+          type: string
+        id:
+          description: Unique identifier of the annotation.
+          example: "annotation-789"
+          type: string
+        interaction_id:
+          description: Identifier of the interaction this annotation belongs to.
+          example: "interaction-456"
+          type: string
+        label_values:
+          additionalProperties: {}
+          description: The label values for this annotation.
+          example:
+            quality: "good"
+          type: object
+        modified_at:
+          description: Timestamp when the annotation was last modified.
+          example: "2024-01-15T10:30:00Z"
+          format: date-time
+          type: string
+        modified_by:
+          description: Identifier of the user who last modified the annotation.
+          example: "00000000-0000-0000-0000-000000000002"
+          type: string
+      required:
+        - id
+        - interaction_id
+        - label_values
+        - created_by
+        - created_at
+        - modified_by
+        - modified_at
+      type: object
+    LLMObsAnnotationQueueDataAttributesRequest:
+      description: Attributes for creating an LLM Observability annotation queue.
+      properties:
+        description:
+          description: Description of the annotation queue.
+          example: "Queue for annotating customer support traces"
+          type: string
+        name:
+          description: Name of the annotation queue.
+          example: "My annotation queue"
+          type: string
+        project_id:
+          description: Identifier of the project this queue belongs to.
+          example: "a33671aa-24fd-4dcd-9b33-a8ec7dde7751"
+          type: string
+      required:
+        - name
+        - project_id
+      type: object
+    LLMObsAnnotationQueueDataAttributesResponse:
+      description: Attributes of an LLM Observability annotation queue.
+      properties:
+        created_at:
+          description: Timestamp when the queue was created.
+          example: "2024-01-15T10:30:00Z"
+          format: date-time
+          type: string
+        created_by:
+          description: Identifier of the user who created the queue.
+          example: "00000000-0000-0000-0000-000000000002"
+          type: string
+        description:
+          description: Description of the annotation queue.
+          example: "Queue for annotating customer support traces"
+          type: string
+        modified_at:
+          description: Timestamp when the queue was last modified.
+          example: "2024-01-15T10:30:00Z"
+          format: date-time
+          type: string
+        modified_by:
+          description: Identifier of the user who last modified the queue.
+          example: "00000000-0000-0000-0000-000000000002"
+          type: string
+        name:
+          description: Name of the annotation queue.
+          example: "My annotation queue"
+          type: string
+        owned_by:
+          description: Identifier of the user who owns the queue.
+          example: "00000000-0000-0000-0000-000000000002"
+          type: string
+        project_id:
+          description: Identifier of the project this queue belongs to.
+          example: "a33671aa-24fd-4dcd-9b33-a8ec7dde7751"
+          type: string
+      required:
+        - name
+        - project_id
+        - description
+        - created_by
+        - created_at
+        - modified_by
+        - modified_at
+        - owned_by
+      type: object
+    LLMObsAnnotationQueueDataRequest:
+      description: Data object for creating an LLM Observability annotation queue.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/LLMObsAnnotationQueueDataAttributesRequest"
+        type:
+          $ref: "#/components/schemas/LLMObsAnnotationQueueType"
+      required:
+        - type
+        - attributes
+      type: object
+    LLMObsAnnotationQueueDataResponse:
+      description: Data object for an LLM Observability annotation queue.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/LLMObsAnnotationQueueDataAttributesResponse"
+        id:
+          description: Unique identifier of the annotation queue.
+          example: "b5e7f3a1-9c2d-4f8b-a1e6-3d7e9f0a2b4c"
+          type: string
+        type:
+          $ref: "#/components/schemas/LLMObsAnnotationQueueType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    LLMObsAnnotationQueueInteractionItem:
+      description: A single interaction to add to an annotation queue.
+      properties:
+        content_id:
+          description: Identifier of the content (such as trace ID) for this interaction.
+          example: "trace-abc-123"
+          type: string
+        type:
+          $ref: "#/components/schemas/LLMObsInteractionType"
+      required:
+        - type
+        - content_id
+      type: object
+    LLMObsAnnotationQueueInteractionResponseItem:
+      description: A single interaction result.
+      properties:
+        already_existed:
+          description: Whether this interaction already existed in the queue.
+          example: false
+          type: boolean
+        content_id:
+          description: Identifier of the content for this interaction.
+          example: "trace-abc-123"
+          type: string
+        id:
+          description: Unique identifier of the interaction.
+          example: "00000000-0000-0000-0000-000000000000"
+          type: string
+        type:
+          $ref: "#/components/schemas/LLMObsInteractionType"
+      required:
+        - id
+        - type
+        - content_id
+        - already_existed
+      type: object
+    LLMObsAnnotationQueueInteractionsDataAttributesRequest:
+      description: Attributes for adding interactions to an annotation queue.
+      properties:
+        interactions:
+          description: List of interactions to add to the queue. Must contain at least one item.
+          items:
+            $ref: "#/components/schemas/LLMObsAnnotationQueueInteractionItem"
+          minItems: 1
+          type: array
+      required:
+        - interactions
+      type: object
+    LLMObsAnnotationQueueInteractionsDataAttributesResponse:
+      description: Attributes of the interaction addition response.
+      properties:
+        interactions:
+          description: List of interactions that were processed.
+          items:
+            $ref: "#/components/schemas/LLMObsAnnotationQueueInteractionResponseItem"
+          type: array
+      required:
+        - interactions
+      type: object
+    LLMObsAnnotationQueueInteractionsDataRequest:
+      description: Data object for adding interactions to an annotation queue.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/LLMObsAnnotationQueueInteractionsDataAttributesRequest"
+        type:
+          $ref: "#/components/schemas/LLMObsAnnotationQueueInteractionsType"
+      required:
+        - type
+        - attributes
+      type: object
+    LLMObsAnnotationQueueInteractionsDataResponse:
+      description: Data object for the interaction addition response.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/LLMObsAnnotationQueueInteractionsDataAttributesResponse"
+        id:
+          description: The queue ID the interactions were added to.
+          example: "b5e7f3a1-9c2d-4f8b-a1e6-3d7e9f0a2b4c"
+          type: string
+        type:
+          $ref: "#/components/schemas/LLMObsAnnotationQueueInteractionsType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    LLMObsAnnotationQueueInteractionsRequest:
+      description: Request to add interactions to an LLM Observability annotation queue.
+      properties:
+        data:
+          $ref: "#/components/schemas/LLMObsAnnotationQueueInteractionsDataRequest"
+      required:
+        - data
+      type: object
+    LLMObsAnnotationQueueInteractionsResponse:
+      description: Response containing the result of adding interactions to an annotation queue.
+      properties:
+        data:
+          $ref: "#/components/schemas/LLMObsAnnotationQueueInteractionsDataResponse"
+      required:
+        - data
+      type: object
+    LLMObsAnnotationQueueInteractionsType:
+      description: Resource type for annotation queue interactions.
+      enum:
+        - interactions
+      example: interactions
+      type: string
+      x-enum-varnames:
+        - INTERACTIONS
+    LLMObsAnnotationQueueRequest:
+      description: Request to create an LLM Observability annotation queue.
+      properties:
+        data:
+          $ref: "#/components/schemas/LLMObsAnnotationQueueDataRequest"
+      required:
+        - data
+      type: object
+    LLMObsAnnotationQueueResponse:
+      description: Response containing a single LLM Observability annotation queue.
+      properties:
+        data:
+          $ref: "#/components/schemas/LLMObsAnnotationQueueDataResponse"
+      required:
+        - data
+      type: object
+    LLMObsAnnotationQueueType:
+      description: Resource type of an LLM Observability annotation queue.
+      enum:
+        - queues
+      example: queues
+      type: string
+      x-enum-varnames:
+        - QUEUES
+    LLMObsAnnotationQueueUpdateDataAttributesRequest:
+      description: Attributes for updating an LLM Observability annotation queue. All fields are optional.
+      properties:
+        description:
+          description: Updated description of the annotation queue.
+          example: "Updated description"
+          type: string
+        name:
+          description: Updated name of the annotation queue.
+          example: "Updated queue name"
+          type: string
+      type: object
+    LLMObsAnnotationQueueUpdateDataRequest:
+      description: Data object for updating an LLM Observability annotation queue.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/LLMObsAnnotationQueueUpdateDataAttributesRequest"
+        type:
+          $ref: "#/components/schemas/LLMObsAnnotationQueueType"
+      required:
+        - type
+        - attributes
+      type: object
+    LLMObsAnnotationQueueUpdateRequest:
+      description: Request to update an LLM Observability annotation queue.
+      properties:
+        data:
+          $ref: "#/components/schemas/LLMObsAnnotationQueueUpdateDataRequest"
+      required:
+        - data
+      type: object
+    LLMObsAnnotationQueuesResponse:
+      description: Response containing a list of LLM Observability annotation queues.
+      properties:
+        data:
+          description: List of annotation queues.
+          items:
+            $ref: "#/components/schemas/LLMObsAnnotationQueueDataResponse"
+          type: array
+      required:
+        - data
+      type: object
     LLMObsCursorMeta:
       description: Pagination cursor metadata.
       properties:
@@ -36402,6 +36790,41 @@ components:
           type: array
         meta:
           $ref: "#/components/schemas/LLMObsCursorMeta"
+      required:
+        - data
+      type: object
+    LLMObsDeleteAnnotationQueueInteractionsDataAttributesRequest:
+      description: Attributes for deleting interactions from an annotation queue.
+      properties:
+        interaction_ids:
+          description: List of interaction IDs to delete. Must contain at least one item.
+          example:
+            - "00000000-0000-0000-0000-000000000000"
+            - "00000000-0000-0000-0000-000000000001"
+          items:
+            description: An interaction ID to delete.
+            type: string
+          minItems: 1
+          type: array
+      required:
+        - interaction_ids
+      type: object
+    LLMObsDeleteAnnotationQueueInteractionsDataRequest:
+      description: Data object for deleting interactions from an annotation queue.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/LLMObsDeleteAnnotationQueueInteractionsDataAttributesRequest"
+        type:
+          $ref: "#/components/schemas/LLMObsAnnotationQueueInteractionsType"
+      required:
+        - type
+        - attributes
+      type: object
+    LLMObsDeleteAnnotationQueueInteractionsRequest:
+      description: Request to delete interactions from an LLM Observability annotation queue.
+      properties:
+        data:
+          $ref: "#/components/schemas/LLMObsDeleteAnnotationQueueInteractionsDataRequest"
       required:
         - data
       type: object
@@ -36914,6 +37337,16 @@ components:
       required:
         - data
       type: object
+    LLMObsInteractionType:
+      description: Type of interaction in an annotation queue.
+      enum:
+        - trace
+        - experiment_trace
+      example: trace
+      type: string
+      x-enum-varnames:
+        - TRACE
+        - EXPERIMENT_TRACE
     LLMObsMetricAssessment:
       description: Assessment result for an LLM Observability experiment metric.
       enum:
@@ -92879,6 +93312,365 @@ paths:
         operator: OR
         permissions:
           - org_management
+  /api/v2/llm-obs/v1/annotation-queues:
+    get:
+      description: |-
+        List annotation queues. Optionally filter by project ID or queue IDs. These parameters are mutually exclusive.
+        If neither is provided, all queues in the organization are returned.
+      operationId: ListLLMObsAnnotationQueues
+      parameters:
+        - description: Filter annotation queues by project ID. Cannot be used together with `queueIds`.
+          in: query
+          name: projectId
+          schema:
+            type: string
+        - description: Filter annotation queues by queue IDs (comma-separated). Cannot be used together with `projectId`.
+          in: query
+          name: queueIds
+          schema:
+            items:
+              type: string
+            type: array
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LLMObsAnnotationQueuesResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: List LLM Observability annotation queues
+      tags:
+        - LLM Observability
+      x-menu-order: 18
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    post:
+      description: |-
+        Create a new annotation queue. Only `name`, `project_id`, and `description` are accepted.
+        Fields such as `created_by`, `owned_by`, `created_at`, `modified_by`, and `modified_at` are inferred by the backend.
+      operationId: CreateLLMObsAnnotationQueue
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LLMObsAnnotationQueueRequest"
+        description: Create annotation queue payload.
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LLMObsAnnotationQueueResponse"
+          description: Created
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Create an LLM Observability annotation queue
+      tags:
+        - LLM Observability
+      x-menu-order: 19
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/llm-obs/v1/annotation-queues/{queue_id}:
+    delete:
+      description: Delete an annotation queue by its ID.
+      operationId: DeleteLLMObsAnnotationQueue
+      parameters:
+        - $ref: "#/components/parameters/LLMObsAnnotationQueueIDPathParameter"
+      responses:
+        "204":
+          description: No Content
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Delete an LLM Observability annotation queue
+      tags:
+        - LLM Observability
+      x-menu-order: 23
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    patch:
+      description: |-
+        Partially update an annotation queue. Only `name` and `description` can be updated.
+      operationId: UpdateLLMObsAnnotationQueue
+      parameters:
+        - $ref: "#/components/parameters/LLMObsAnnotationQueueIDPathParameter"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LLMObsAnnotationQueueUpdateRequest"
+        description: Update annotation queue payload.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LLMObsAnnotationQueueResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Update an LLM Observability annotation queue
+      tags:
+        - LLM Observability
+      x-menu-order: 22
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/llm-obs/v1/annotation-queues/{queue_id}/annotated-interactions:
+    get:
+      description: Retrieve all interactions and their annotations for a given annotation queue.
+      operationId: GetLLMObsAnnotatedInteractions
+      parameters:
+        - $ref: "#/components/parameters/LLMObsAnnotationQueueIDPathParameter"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LLMObsAnnotatedInteractionsResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Get annotated queue interactions
+      tags:
+        - LLM Observability
+      x-menu-order: 21
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/llm-obs/v1/annotation-queues/{queue_id}/interactions:
+    post:
+      description: |-
+        Add one or more interactions (traces) to an annotation queue.
+        At least one interaction must be provided.
+      operationId: CreateLLMObsAnnotationQueueInteractions
+      parameters:
+        - $ref: "#/components/parameters/LLMObsAnnotationQueueIDPathParameter"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LLMObsAnnotationQueueInteractionsRequest"
+        description: Add interactions payload.
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LLMObsAnnotationQueueInteractionsResponse"
+          description: Created
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Add annotation queue interactions
+      tags:
+        - LLM Observability
+      x-menu-order: 20
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/llm-obs/v1/annotation-queues/{queue_id}/interactions/delete:
+    post:
+      description: Delete one or more interactions from an annotation queue.
+      operationId: DeleteLLMObsAnnotationQueueInteractions
+      parameters:
+        - $ref: "#/components/parameters/LLMObsAnnotationQueueIDPathParameter"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LLMObsDeleteAnnotationQueueInteractionsRequest"
+        description: Delete interactions payload.
+        required: true
+      responses:
+        "204":
+          description: No Content
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Delete annotation queue interactions
+      tags:
+        - LLM Observability
+      x-menu-order: 24
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/llm-obs/v1/experiments:
     get:
       description: List all LLM Observability experiments sorted by creation date, newest first.
@@ -117323,7 +118115,7 @@ tags:
       description: Find out more at
       url: "https://docs.datadoghq.com/account_management/api-app-keys/"
     name: Key Management
-  - description: Manage LLM Observability projects, datasets, dataset records, and experiments via the Experiments API.
+  - description: Manage LLM Observability projects, datasets, dataset records, experiments, and annotations.
     name: LLM Observability
   - description: |-
       Search your logs and send them to your Datadog platform over HTTP. See the [Log Management page](https://docs.datadoghq.com/logs/) for more information.

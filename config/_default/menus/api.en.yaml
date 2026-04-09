@@ -10556,6 +10556,97 @@ menu:
         unstable:
           - v2
         order: 13
+    - name: Delete annotation queue interactions
+      url: '#delete-annotation-queue-interactions'
+      identifier: llm-observability-delete-annotation-queue-interactions
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteLLMObsAnnotationQueueInteractions
+        unstable:
+          - v2
+        order: 24
+    - name: Add annotation queue interactions
+      url: '#add-annotation-queue-interactions'
+      identifier: llm-observability-add-annotation-queue-interactions
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateLLMObsAnnotationQueueInteractions
+        unstable:
+          - v2
+        order: 20
+    - name: Get annotated queue interactions
+      url: '#get-annotated-queue-interactions'
+      identifier: llm-observability-get-annotated-queue-interactions
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetLLMObsAnnotatedInteractions
+        unstable:
+          - v2
+        order: 21
+    - name: Update an LLM Observability annotation queue
+      url: '#update-an-llm-observability-annotation-queue'
+      identifier: llm-observability-update-an-llm-observability-annotation-queue
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateLLMObsAnnotationQueue
+        unstable:
+          - v2
+        order: 22
+    - name: Delete an LLM Observability annotation queue
+      url: '#delete-an-llm-observability-annotation-queue'
+      identifier: llm-observability-delete-an-llm-observability-annotation-queue
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteLLMObsAnnotationQueue
+        unstable:
+          - v2
+        order: 23
+    - name: Create an LLM Observability annotation queue
+      url: '#create-an-llm-observability-annotation-queue'
+      identifier: llm-observability-create-an-llm-observability-annotation-queue
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateLLMObsAnnotationQueue
+        unstable:
+          - v2
+        order: 19
+    - name: List LLM Observability annotation queues
+      url: '#list-llm-observability-annotation-queues'
+      identifier: llm-observability-list-llm-observability-annotation-queues
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListLLMObsAnnotationQueues
+        unstable:
+          - v2
+        order: 18
     - name: Logs Archives
       url: /api/latest/logs-archives/
       identifier: logs-archives
