@@ -7762,6 +7762,26 @@ menu:
       identifier: ai_guard_setup
       parent: ai_guard
       weight: 2
+    - name: Automatic Integrations
+      url: /security/ai_guard/setup/automatic_integrations/
+      identifier: ai_guard_automatic_integrations
+      parent: ai_guard_setup
+      weight: 1
+    - name: Manual Integrations
+      url: /security/ai_guard/setup/manual_integrations/
+      identifier: ai_guard_manual_integrations
+      parent: ai_guard_setup
+      weight: 2
+    - name: SDK
+      url: /security/ai_guard/setup/sdk/
+      identifier: ai_guard_sdk
+      parent: ai_guard_setup
+      weight: 3
+    - name: HTTP API
+      url: /security/ai_guard/setup/http_api/
+      identifier: ai_guard_http_api
+      parent: ai_guard_setup
+      weight: 4
     - name: Security Signals
       url: /security/ai_guard/signals/
       identifier: ai_guard_signals
