@@ -37,11 +37,34 @@ To use AI Guard, you need at least one API key and one application key set in yo
 
 When adding [scopes][3] for the **application key**, add the `ai_guard_evaluate` scope.
 
-## 3. Set up the Datadog Agent {#agent-setup}
+## 3. Instrument your application {#instrumentation}
 
-Datadog SDKs use the [Datadog Agent][4] to send AI Guard data to Datadog. The Agent must be running and accessible to the SDK for you to see data in Datadog.
+Choose an instrumentation approach based on your framework and language:
 
-If you don't use the Datadog Agent, the AI Guard evaluator API still works, but you can't see AI Guard traces in Datadog.
+### SDK
+
+The [AI Guard SDK][12] provides language-specific libraries (Python, JavaScript, Java, Ruby) to call the AI Guard REST API and monitor activity in real time in Datadog.
+
+### Automatic integrations
+
+[Automatic integrations][10] provide out-of-the-box AI Guard protection for supported frameworks. When you run your application with the Datadog tracer, AI Guard evaluations are automatically performed without requiring any code changes.
+
+| Language   | Supported Frameworks |
+|------------|---------------------|
+| Python     | LangChain           |
+| Node.js    | Vercel AI SDK       |
+
+### Manual integrations
+
+[Manual integrations][11] require additional configuration to enable AI Guard protection for supported frameworks.
+
+| Language   | Supported Frameworks        |
+|------------|-----------------------------|
+| Python     | Amazon Strands, LiteLLM Proxy |
+
+### HTTP API
+
+The [AI Guard HTTP API][13] lets you call the AI Guard JSON:API endpoint directly with any HTTP client, for languages or environments not covered by the SDK.
 
 ## 4. Create a custom retention filter {#retention-filter}
 
@@ -95,3 +118,7 @@ To restrict access to AI Guard spans for specific users, you can use [Data Acces
 [7]: https://app.datadoghq.com/security/ai-guard/settings/evaluation-sensitivity
 [8]: https://app.datadoghq.com/security/ai-guard/settings/sensitive-data-scanning
 [9]: https://app.datadoghq.com/organization-settings/data-access-controls/
+[10]: /security/ai_guard/setup/automatic_integrations/
+[11]: /security/ai_guard/setup/manual_integrations/
+[12]: /security/ai_guard/setup/sdk/
+[13]: /security/ai_guard/setup/http_api/
