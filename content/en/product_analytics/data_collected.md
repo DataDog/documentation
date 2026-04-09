@@ -69,7 +69,7 @@ The following attributes are attached to all events by default.
 
 The following attributes are derived from the IP address of the session.
 
-**Note:** To stop collecting geo-location attributes, change the setting in your [application details][2].
+**Note:** To stop collecting geo-location attributes, change the setting in [Application Management][2].
 
 | Attribute | Type | Description |
 |-----------|------|-------------|
@@ -108,7 +108,7 @@ The following attributes are specific to each event type.
 | `session.initial_view.name` | string | Name of the initial view of the session. |
 | `session.last_view.url` | string | URL of the last view of the session. |
 | `session.last_view.name` | string | Name of the last view of the session. |
-| `session.ip` | string | IP address of the session. To stop collecting this attribute, change the setting in your [application details][2]. |
+| `session.ip` | string | IP address of the session. To stop collecting this attribute, change the setting in [Application Management][2]. |
 | `session.useragent` | string | Browser or device identifier used to determine device type and version. |
 | `session.has_replay` | boolean | Indicates if the session has a Session Replay recording attached. |
 
