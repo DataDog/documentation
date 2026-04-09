@@ -218,7 +218,7 @@ After you set up tracing and your application is sending data to Datadog, explor
 
 ### APM Basic
 
-Services that are not instrumented with tracing libraries can still receive baseline monitoring through [APM Basic][13]. APM Basic uses eBPF in the Datadog Agent to automatically collect RED metrics (requests, errors, duration) without requiring code changes. On hosts where Single Step Instrumentation is not applicable, APM Basic provides automatic service visibility.
+Services that are not instrumented with tracing libraries can still receive baseline monitoring through [APM Basic][13]. APM Basic uses eBPF in the Datadog Agent to collect RED metrics (requests, errors, duration) without requiring code changes. Use APM Basic for legacy systems, third-party services, or environments where instrumentation is not practical.
 
 ### Trace ingestion and retention
 

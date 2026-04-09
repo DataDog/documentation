@@ -22,7 +22,7 @@ further_reading:
 
 [APM Basic][1] discovers services using popular container tags (such as `app`, `short_image`, and `kube_deployment`) and generates entries in the [Software Catalog][2] for those services. 
 
-You can access request, error, and duration metrics in Datadog for both inbound and outbound traffic on all services discovered with APM Basic. These service health metrics are useful for creating alerts, [tracking deployments][3], and getting started with [service level objectives (SLOs)][4] so you can get broad visibility into all services running on your infrastructure. 
+You can access request, error, and duration metrics in Datadog for both inbound and outbound traffic on all services discovered with APM Basic. These metrics are useful for creating alerts, [tracking deployments][3], and creating [service level objectives (SLOs)][4] for all services running on your infrastructure.
 
 {{< img src="universal_service_monitoring/guide/usm_slo.png" alt="APM Basic SLOs for BITSBOUTIQUE" style="width:100%;" >}}
 
@@ -81,7 +81,7 @@ For more information, see the [APM Monitor documentation][12].
 
 ### Create an SLO
 
-You can create an [**SLO**][13] on a per-service basis to help ensure you are meeting objectives set by APM Basic metrics and improving availability over time. Datadog recommends [creating an SLO programmatically][14] to cover a lot of services. 
+You can create an [**SLO**][13] on a per-service basis to help ensure you are meeting objectives set by APM Basic metrics and improving availability over time. Datadog recommends [creating an SLO programmatically][14] to cover many services. 
 
 To create an SLO from the Software Catalog:
 
