@@ -1,1 +1,7 @@
 # For any questions about the build, please reach out to #websites.
+include:
+  - project: DataDog/documentation-ci
+    file: documentation-gitlab-config.yml
+    inputs:
+      ff_s3_path: $[[ inputs.ff_s3_path ]]
+      
