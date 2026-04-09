@@ -53,7 +53,7 @@ Worker version 2.14.0 gives you access to the following:
 - Enrichment Table error reporting now uses Reference Tables metrics to reduce the count of similar logs.
 - The Splunk HEC destination now supports extracting index fields from events.
 - The OCSF mapper now has an option to retain unmatched fields.
-- For the Enrichment Table processor, the local cache retention time of entries not found in a Reference Table has been increased from 10 minutes to 30 minutes.
+- For the Enrichment Table processor, the local cache retention time of entries not found in a Reference Table has been increased. The retention time is now 30 minutes, up from 10 minutes.
 - The Database Source SQL validation checks have been improved.
 - The Sensitive Data Scanner library now has new and updated out-of-the-box scanning rules for PII, credentials, and financial data. Minor bugs have also been fixed.
 - The `observability-pipelines-worker top` command has new keybinds for scrolling, sorting, and filtering.
