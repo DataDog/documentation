@@ -18,33 +18,36 @@ Create, configure, and launch experiments to measure how new features affect use
 
 ## Create your experiment
 
-If you have already created a feature flag for your experiment, you can create an experiment from the flag detail page.
+You can create an experiment from an existing [feature flag's][4] detail page, or draft one independently from the Experiments page.
 
 {{< img src="/product_analytics/experiment/exp_plan_launch_ff_new_experiment.png" alt="The feature flag detail page for a flag called new_product_photos, showing targeting rules and rollouts with a 50/50 split between control and treatment variants, and a Create New Experiment button highlighted at the bottom." style="width:80%;" >}}
 
-You can also draft your experiment before creating a feature flag:
+To create an experiment:
 
 1. Navigate to the [Experiments][1] page in Datadog Product Analytics.
-1. Click **Create Experiment**.
-1. Enter your experiment name and hypothesis.
-1. Click **Create Draft Experiment** to save your draft experiment and open the experiment's configuration page.
+1. Click **Create Experiment** at the top right corner.
+1. Enter your **Experiment name** and **Hypothesis**.
+1. Click **Create Draft Experiment** to open the experiment's configuration page.
 
 {{< img src="/product_analytics/experiment/exp_plan_launch_create_experiment.png" alt="The Create new draft experiment dialog with an experiment name of New Product Photos Experiment, a hypothesis about higher-resolution product photos increasing add-to-cart conversions, and a Create Draft Experiment button highlighted." style="width:80%;" >}}
 
 ## Configure your experiment
 
-After creating your experiment, configure it on the detail page.
+After creating your draft experiment, configure the metrics, feature flag, and randomization settings.
 
 ### Decision metrics
 Define the metrics that measure the outcome of your experiment.
 
-1. Select the subject type for calculating metrics from the **Calculate metrics by** dropdown. The default is **User (@usr.id)**.
-1. Add a primary metric to measure the main outcome of your experiment.
-1. Optionally, add secondary metrics to monitor for unintended effects on other areas like performance, engagement, or revenue.
+1. Use the **Calculate metrics by** dropdown to select the subject type. The default is **User (@usr.id)**. To define a custom grouping, click **+ Create subject type**.
+1. Click **+ Primary metric** to open the metric picker:
+   1. Select a primary metric to measure the main outcome (your hypothesis) of your experiment.
+   1. (Optional) Scope the list to **Certified** or **non-certified** metrics.
+   1. (Optional) Click **Create Metric** to define a new metric.
+1. Optionally, add secondary metrics to monitor unintended effects of the experiment on other areas like performance, engagement, or revenue.
 
 See [Create Experiment Metrics][2] for details.
 
-{{< img src="/product_analytics/experiment/exp_plan_launch_decision_metric.png" alt="The experiment detail page showing the Decision metrics section with a Calculate metrics by dropdown set to User (@usr.id), a primary metric set to Add to Cart Conversion, and a Secondary metrics section." style="width:80%;" >}}
+{{< img src="/product_analytics/experiment/exp_plan_launch_decision_metric.png" alt="The experiment configuration page showing the Decision metrics section with a Calculate metrics by dropdown set to User (@usr.id), a primary metric set to Add to Cart Conversion, and a Secondary metrics section." style="width:80%;" >}}
 
 ### Sample size calculation
 Optionally, estimate the smallest change your experiment can reliably detect.
@@ -61,7 +64,7 @@ Optionally, estimate the smallest change your experiment can reliably detect.
 {{< img src="/product_analytics/experiment/exp_plan_launch_sample_size.png" alt="The Sample Size Calculator side panel showing calculation details with Add to Cart Conversion as the primary metric and Number of cart views as a guardrail, an entry point set to click on ADD TO CART, two variants at 100% traffic exposure, and additional inputs for power and target experiment duration." style="width:80%;" >}}
 
 ### Feature flag
-Click **Add a feature flag** to select the appropriate feature flag for your experiment. See [Getting Started with Feature Flags][4] for setup details.
+Click **Add a feature flag** to select the appropriate feature flag for your experiment. If you haven't created a feature flag, see [Getting Started with Feature Flags][4].
 
 ### Randomization
 Configure the environment, targeting rules, variant split, and traffic exposure for your experiment.
@@ -78,7 +81,7 @@ Configure the environment, targeting rules, variant split, and traffic exposure 
 Select recipients from the **Recipients** dropdown to receive updates on your experiment.
 
 #### Statistical analysis plan
-Datadog's default sequential statistical analysis is suitable for most situations and promotes good statistical patterns. This framework gives statistically valid confidence intervals throughout the experiment, so you can make decisions at any time.
+Datadog uses sequential statistical analysis by default. This method provides statistically valid confidence intervals throughout the experiment, so you can make decisions at any time.
 
 To use a different statistical method:
 1. Expand the **Statistical analysis plan** section.
