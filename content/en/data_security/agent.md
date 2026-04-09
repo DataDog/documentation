@@ -197,6 +197,23 @@ agent diagnose show-metadata agent-telemetry
 | **APM**                                     |                                                                                                                        |
 | trace.enabled                               | Whether the trace-agent process is running.                                                                            |
 | trace.working                               | Whether the trace-agent process is receiving and sending traces.                                                       |
+| injector.import_directory_restoration_failures    | (Windows only) Number of failures when restoring the import directory.                                           |
+| injector.injection_attempts                       | (Windows only) Number of APM injection attempts.                                                                 |
+| injector.injection_attempt_failures               | (Windows only) Number of APM injection attempt failures.                                                         |
+| injector.injection_failures                       | (Windows only) Number of APM injection failures.                                                                 |
+| injector.injection_max_time_us                    | (Windows only) Maximum injection time in microseconds.                                                           |
+| injector.injection_successes                      | (Windows only) Number of successful APM injections.                                                              |
+| injector.pe_caching_failure                       | (Windows only) Number of APM caching failures.                                                                   |
+| injector.pe_injection_context_allocated           | (Windows only) Number of APM contexts allocated.                                                                 |
+| injector.pe_injection_context_cleanedup           | (Windows only) Number of APM contexts cleaned up.                                                                |
+| injector.pe_memory_allocation_failures            | (Windows only) Number of APM injection allocation failures.                                                      |
+| injector.processes_added_to_injection_tracker     | (Windows only) Number of processes tracked by APM.                                                               |
+| injector.processes_removed_from_injection_tracker | (Windows only) Number of processes no longer tracked by APM.                                                     |
+| injector.processes_skipped_container              | (Windows only) Number of container processes skipped.                                                            |
+| injector.processes_skipped_excluded               | (Windows only) Number of processes skipped due to exclusion.                                                     |
+| injector.processes_skipped_protected              | (Windows only) Number of protected processes skipped.                                                            |
+| injector.processes_skipped_subsystem              | (Windows only) Number of subsystem processes skipped.                                                            |
+| injector.processes_skipped_system                 | (Windows only) Number of system processes skipped.                                                               |
 | **Synthetic Monitoring**                              |                                                                                                                        |
 | synthetics_agent.checks_received            | Number of tests received                                                                                               |
 | synthetics_agent.checks_processed           | Number of tests executed                                                                                               |
