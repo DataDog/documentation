@@ -72,7 +72,7 @@ Configure the environment, targeting rules, variant split, and traffic exposure 
 1. Under **Traffic exposure**, set the percentage of targeted traffic to include in the experiment.
 1. Optionally, schedule a [staged rollout](#staged-experiment-rollout).
 
-{{% collapse-content title="Additional configuration settings (optional)" level="h3" expanded=false %}}
+{{% collapse-content title="Additional configuration settings (optional)" level="h4" expanded=false %}}
 
 #### Notifications
 Select recipients from the **Recipients** dropdown to receive updates on your experiment.
