@@ -217,7 +217,7 @@ Returns schemas and building instructions for dashboard widget types. Widget def
 
 - Get the schema for a timeseries widget.
 - Show me how to build a toplist and a query table widget.
-- What are the required fields for a heatmap widget?
+- What's the schema for the scatterplot widget?
 
 ### `validate_dashboard_widget`
 *Toolset: **dashboards***\
@@ -230,11 +230,12 @@ Validates a widget definition against the dashboard schema. Use this to check wi
 ### `ask_widget_expert`
 *Toolset: **dashboards***\
 *Permissions Required: `Dashboards Read` or `Dashboards Write` or `Notebooks Read`*\
-Ask a Datadog widget expert a natural-language question. Returns a concise answer about widget building: query syntax, response formats, and common pitfalls. More token-efficient than `get_widget_reference` for targeted questions.
+Ask a Datadog widget expert a question about widget configuration, schemas, query syntax, field usage, debugging, or pitfalls. Best for targeted questions: schema lookups, field clarifications, debugging an existing widget definition, or understanding how a specific widget type works.
 
-- What response_format should I use for a toplist widget?
-- How do I add conditional formatting to a query table?
+- What response_format should I use for a toplist?
+- What's the schema for the scatterplot widget?
 - Help me debug why this widget is showing fractional values when it should be a count.
+- How do I configure a timeseries to show both bars and lines?
 
 ### `get_datadog_notebook`
 *Toolset: **core***\
