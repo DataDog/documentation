@@ -138,7 +138,7 @@ The following settings allow fine-grained control over the profiler engines. The
 | `DD_PROFILING_DDPROF_CPU_ENABLED` | `-Ddd.profiling.ddprof.cpu.enabled` | Enable CPU profiling with the Datadog engine |
 | `DD_PROFILING_DDPROF_WALL_ENABLED` | `-Ddd.profiling.ddprof.wall.enabled` | Enable wallclock profiling (default: true since v1.7.0) |
 | `DD_PROFILING_DDPROF_ALLOC_ENABLED` | `-Ddd.profiling.ddprof.alloc.enabled` | Enable allocation profiling with the Datadog engine |
-| `DD_PROFILING_DDPROF_LIVEHEAP_ENABLED` | `-Ddd.profiling.ddprof.liveheap.enabled` | Override for the Datadog native engine live heap implementation only; does not affect the JFR fallback (default: enabled on supported JDK versions (11.0.23+, 17.0.11+, 21.0.3+, or 22+), requires DD_PROFILING_HEAP_ENABLED=true`) |
+| `DD_PROFILING_DDPROF_LIVEHEAP_ENABLED` | `-Ddd.profiling.ddprof.liveheap.enabled` | Override for the Datadog native engine live heap implementation only; does not affect the JFR fallback (default: enabled on supported JDK versions (11.0.23+, 17.0.11+, 21.0.3+, or 22+), requires `DD_PROFILING_HEAP_ENABLED=true`) |
 | `DD_PROFILING_ENABLED_EVENTS` | `-Ddd.profiling.enabled.events` | Enable specific JFR events (for example: `jdk.ObjectAllocationInNewTLAB,jdk.ObjectAllocationOutsideTLAB`) |
 
 ### JDK Mission Control (JMC) event reference
