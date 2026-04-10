@@ -31,7 +31,7 @@ Product Analytics collects data from client-side and server-side sources to give
 
 **Note**: Product Analytics uses the same SDKs and configuration as [Real User Monitoring (RUM)][18], and retains data for 15 months by default. See [Datadog's data retention periods][1] for more information.
 
-### Client-side tracking
+### Client-side tracking (SDK)
 
 Collect events from your users' devices and send them to Datadog.
 
@@ -44,8 +44,7 @@ If you do not have an application set up in Datadog yet, create one for your pla
 
 You can also use your [coding assistant][17].
 
-
-### Server-side tracking
+### Server-side tracking (API)
 
 Collect events that happen on your backend, such as `checkout.completed` or `payment.processed`, and send them to Datadog.
 
