@@ -25,18 +25,34 @@ Product Analytics helps you gain insight into user behavior and make data-driven
 - [Track key user behavior patterns](#track-key-user-behavior-patterns)
 - [Visualize user interactions](#visualize-user-interactions)
 
+## Instrument your application
 
-## Getting started
-To start using Product Analytics for an application, [instrument your application](#instrument-your-application) and then [enable the feature](#enable-product-analytics) for it in Datadog. 
+Product Analytics collects data from client-side and server-side sources to give you a complete view of the user journey. To get started, instrument your application with the [SDK](#client-side-tracking) or the [API](#server-side-tracking). For client-side tracking, [enable Product Analytics](#enable-product-analytics) in Datadog.
 
 **Note**: Product Analytics uses the same SDKs and configuration as [Real User Monitoring (RUM)][18], and retains data for 15 months by default. See [Datadog's data retention periods][1] for more information.
 
-### Instrument your application
+### Client-side tracking
+
+Collect events from your user devices and send them to Datadog.
+
 Add the Datadog SDK to your application to start collecting user activity data. If you have already configured RUM, you do not need to instrument your application again for Product Analytics.
 
-If you do not have an application set up in Datadog yet, create one for your platform ([browser][14], [iOS][15], or [Android][16]) or use your [coding assistant][17].
+If you do not have an application set up in Datadog yet, create one for your platform:
+- [Browser][14]
+- [iOS][15]
+- [Android][16]
 
-### Enable Product Analytics
+You can also use your [coding assistant][17].
+
+
+### Server-side tracking
+
+Collect events that happen on your backend, such as `checkout.completed` or `payment.processed`, and send them to Datadog.
+
+Use the [Product Analytics API][21] to send custom events from any server-side source. The API also supports computing [scalar][22] and [timeseries][23] analytics programmatically.
+
+## Enable Product Analytics
+
 For each application you want to monitor user behavior for, enable Product Analytics:
 
 1. In Datadog, go to **Digital Experience** > **Real User Monitoring** > [**Manage Applications**][9]. In the list of applications under **Active**, select the application you want to monitor.
@@ -149,3 +165,6 @@ Use the following features to inform your product change decisions, such as chan
 [18]: /real_user_monitoring/#what-is-real-user-monitoring
 [19]: /real_user_monitoring/guide/understanding-the-rum-event-hierarchy
 [20]: https://app.datadoghq.com/rum/sessions?query=%40type%3Aaction
+[21]: /api/latest/product-analytics/#send-server-side-events
+[22]: /api/latest/product-analytics/#compute-scalar-analytics
+[23]: /api/latest/product-analytics/#compute-timeseries-analytics
