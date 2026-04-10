@@ -53,7 +53,7 @@ On every push to `main`, the GitHub Action runs `upload.py`, which:
 
 Only changed rules trigger API calls—unchanged rules are skipped.
 
-To trigger a sync without pushing a commit, go to the **Actions** tab and click **Upload Custom Rules → Run workflow**.
+To run a sync manually, in to your GitHub repository, go to the **Actions** tab, select **Upload Custom Rules**, and click **Run workflow**.
 
 ### Rule file format
 
