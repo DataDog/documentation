@@ -67,6 +67,21 @@
   --color-table-row-alt-bg: #fafafa;
   --color-table-bg: var(--color-bg);
 
+  /* Colors — Semantic */
+  --color-blue: #1a73e8;
+  --color-blue-tint: rgba(26, 115, 232, 0.1);
+  --color-green: #2e7d32;
+  --color-green-tint: rgba(46, 125, 50, 0.1);
+  --color-orange: #e65100;
+  --color-orange-tint: rgba(230, 81, 0, 0.1);
+  --color-yellow: #f9a825;
+  --color-yellow-tint: rgba(249, 168, 37, 0.15);
+  --color-red: #c62828;
+  --color-red-tint: rgba(198, 40, 40, 0.1);
+
+  /* Colors — Surface variants */
+  --color-bg-hover: rgba(0, 0, 0, 0.02);
+
   /* Borders */
   --border-width: 1px;
   --border-width-thick: 2px;
@@ -137,6 +152,21 @@
   --color-table-header-text: #e0e0e0;
   --color-table-row-alt-bg: #222236;
   --color-table-bg: var(--color-bg);
+
+  /* Colors — Semantic */
+  --color-blue: #5b9cf5;
+  --color-blue-tint: rgba(91, 156, 245, 0.15);
+  --color-green: #66bb6a;
+  --color-green-tint: rgba(102, 187, 106, 0.15);
+  --color-orange: #ff8a50;
+  --color-orange-tint: rgba(255, 138, 80, 0.15);
+  --color-yellow: #fdd835;
+  --color-yellow-tint: rgba(253, 216, 53, 0.15);
+  --color-red: #ef5350;
+  --color-red-tint: rgba(239, 83, 80, 0.15);
+
+  /* Colors — Surface variants */
+  --color-bg-hover: rgba(255, 255, 255, 0.04);
 
   /* Shadows */
   --shadow-sm: 0 0 20px rgba(0, 0, 0, 0.3);

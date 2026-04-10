@@ -1,0 +1,19 @@
+---
+interface Props {
+  method: string;
+}
+
+const { method } = Astro.props;
+const normalized = method.toLowerCase();
+const label = method.toUpperCase();
+
+import styles from './HttpMethodBadge.module.css';
+---
+
+<span
+  class:list={[styles.badge, styles[`badge--${normalized}`]]}
+  data-method={normalized}
+  data-testid="http-method-badge"
+>
+  {label}
+</span>

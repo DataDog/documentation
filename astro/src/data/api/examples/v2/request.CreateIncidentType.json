@@ -1,0 +1,10 @@
+{
+  "data": {
+    "attributes": {
+      "description": "Any incidents that harm (or have the potential to) the confidentiality, integrity, or availability of our data.",
+      "is_default": false,
+      "name": "Security Incident"
+    },
+    "type": "incident_types"
+  }
+}

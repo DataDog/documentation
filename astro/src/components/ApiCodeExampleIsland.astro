@@ -1,0 +1,22 @@
+---
+import { ApiCodeExample } from './ApiCodeExample';
+import type { CodeExampleSet } from './ApiCodeExample';
+
+interface Props {
+  examples: string; // JSON string of CodeExampleSet[]
+}
+
+const { examples: examplesJson } = Astro.props;
+
+let parsedExamples: CodeExampleSet[] = [];
+try {
+  parsedExamples = JSON.parse(examplesJson);
+} catch {
+  // fallback
+}
+---
+
+<ApiCodeExample
+  client:load
+  examples={parsedExamples}
+/>

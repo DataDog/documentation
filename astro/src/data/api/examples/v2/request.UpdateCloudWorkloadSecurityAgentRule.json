@@ -1,0 +1,10 @@
+{
+  "data": {
+    "attributes": {
+      "description": "Updated Agent rule",
+      "expression": "exec.file.name == \"sh\""
+    },
+    "id": "3dd-0uc-h1s",
+    "type": "agent_rule"
+  }
+}

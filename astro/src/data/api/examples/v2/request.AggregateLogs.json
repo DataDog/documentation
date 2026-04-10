@@ -1,0 +1,10 @@
+{
+  "filter": {
+    "from": "now-15m",
+    "indexes": [
+      "main"
+    ],
+    "query": "*",
+    "to": "now"
+  }
+}

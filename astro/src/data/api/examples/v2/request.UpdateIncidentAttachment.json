@@ -1,0 +1,12 @@
+{
+  "data": {
+    "attributes": {
+      "attachment": {
+        "documentUrl": "https://app.datadoghq.com/notebook/124/Example-Incident",
+        "title": "Example-Incident"
+      }
+    },
+    "id": "00000000-abcd-0002-0000-000000000000",
+    "type": "incident_attachments"
+  }
+}

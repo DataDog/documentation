@@ -1,0 +1,14 @@
+{
+  "filter": {
+    "from": "now-15m",
+    "query": "@test.service:web-ui-tests AND @test.status:skip",
+    "to": "now"
+  },
+  "options": {
+    "timezone": "GMT"
+  },
+  "page": {
+    "limit": 25
+  },
+  "sort": "timestamp"
+}

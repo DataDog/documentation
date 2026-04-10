@@ -1,0 +1,33 @@
+---
+title: "SchemaTable Component"
+---
+
+# SchemaTable
+
+An interactive hierarchical table for displaying API parameters, request body fields, or response fields. Supports nested objects, union types, and expand/collapse.
+
+## Properties
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `fields` | `string` (JSON) | — | JSON string of `SchemaField[]` |
+| `title` | `string` | — | Optional heading above the table |
+| `showExpandAll` | `boolean` | `true` | Show the Expand All / Collapse All button |
+
+## Examples
+
+### Flat fields
+
+{% schemaTable fields="[{\"name\":\"dashboard_id\",\"type\":\"string\",\"required\":true,\"deprecated\":false,\"readOnly\":false,\"description\":\"The ID of the dashboard.\"},{\"name\":\"title\",\"type\":\"string\",\"required\":true,\"deprecated\":false,\"readOnly\":false,\"description\":\"Title of the dashboard.\"},{\"name\":\"is_read_only\",\"type\":\"boolean\",\"required\":false,\"deprecated\":false,\"readOnly\":true,\"description\":\"Whether the dashboard is read-only.\"}]" title="Path Parameters" /%}
+
+### Nested fields
+
+{% schemaTable fields="[{\"name\":\"data\",\"type\":\"object\",\"required\":true,\"deprecated\":false,\"readOnly\":false,\"description\":\"The main data wrapper.\",\"children\":[{\"name\":\"type\",\"type\":\"string\",\"required\":true,\"deprecated\":false,\"readOnly\":false,\"description\":\"The resource type.\",\"enumValues\":[\"dashboards\"]},{\"name\":\"attributes\",\"type\":\"object\",\"required\":true,\"deprecated\":false,\"readOnly\":false,\"description\":\"Dashboard attributes.\",\"children\":[{\"name\":\"title\",\"type\":\"string\",\"required\":true,\"deprecated\":false,\"readOnly\":false,\"description\":\"Title of the dashboard.\"},{\"name\":\"description\",\"type\":\"string\",\"required\":false,\"deprecated\":false,\"readOnly\":false,\"description\":\"Description of the dashboard.\"}]}]}]" /%}
+
+### Deprecated and required fields
+
+{% schemaTable fields="[{\"name\":\"old_field\",\"type\":\"string\",\"required\":false,\"deprecated\":true,\"readOnly\":false,\"description\":\"This field is no longer used.\"},{\"name\":\"api_key\",\"type\":\"string\",\"required\":true,\"deprecated\":false,\"readOnly\":false,\"description\":\"Your API key.\"}]" /%}
+
+### Enum values
+
+{% schemaTable fields="[{\"name\":\"sort\",\"type\":\"string\",\"required\":false,\"deprecated\":false,\"readOnly\":false,\"description\":\"Sort order for results.\",\"enumValues\":[\"asc\",\"desc\",\"name\",\"-name\",\"created\",\"-created\",\"modified\",\"-modified\"],\"defaultValue\":\"asc\"}]" /%}

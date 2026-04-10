@@ -1,0 +1,12 @@
+{
+  "description": "Test Example-Synthetic description",
+  "metadata": {
+    "restricted_roles": [
+      "string"
+    ]
+  },
+  "name": "Example-Synthetic",
+  "tags": [
+    "test:examplesynthetic"
+  ]
+}

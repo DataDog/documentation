@@ -1,0 +1,49 @@
+{
+  "config": {
+    "assertions": [
+      {
+        "operator": "is",
+        "target": 1,
+        "type": "grpcHealthcheckStatus"
+      },
+      {
+        "operator": "is",
+        "target": "proto target",
+        "type": "grpcProto"
+      },
+      {
+        "operator": "is",
+        "target": "123",
+        "property": "property",
+        "type": "grpcMetadata"
+      }
+    ],
+    "request": {
+      "host": "localhost",
+      "port": 50051,
+      "service": "Hello",
+      "method": "GET",
+      "message": "",
+      "metadata": {}
+    }
+  },
+  "locations": [
+    "aws:us-east-2"
+  ],
+  "message": "BDD test payload: synthetics_api_grpc_test_payload.json",
+  "name": "Example-Synthetic",
+  "options": {
+    "min_failure_duration": 0,
+    "min_location_failed": 1,
+    "monitor_options": {
+      "renotify_interval": 0
+    },
+    "monitor_name": "Example-Synthetic",
+    "tick_every": 60
+  },
+  "subtype": "grpc",
+  "tags": [
+    "testing:api"
+  ],
+  "type": "api"
+}

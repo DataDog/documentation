@@ -1,0 +1,145 @@
+{
+  "title": "Example-Dashboard",
+  "description": "",
+  "widgets": [
+    {
+      "definition": {
+        "title": "",
+        "title_size": "16",
+        "title_align": "left",
+        "type": "query_table",
+        "requests": [
+          {
+            "queries": [
+              {
+                "aggregator": "avg",
+                "data_source": "metrics",
+                "name": "query1",
+                "query": "avg:aws.stream.globalaccelerator.processed_bytes_in{*} by {aws_account,acceleratoripaddress}"
+              },
+              {
+                "aggregator": "avg",
+                "data_source": "metrics",
+                "name": "query2",
+                "query": "avg:aws.stream.globalaccelerator.processed_bytes_out{*} by {aws_account,acceleratoripaddress}"
+              }
+            ],
+            "response_format": "scalar",
+            "text_formats": [
+              [
+                {
+                  "match": {
+                    "type": "is",
+                    "value": "fruit"
+                  },
+                  "palette": "white_on_red",
+                  "replace": {
+                    "type": "all",
+                    "with": "vegetable"
+                  }
+                },
+                {
+                  "match": {
+                    "type": "is",
+                    "value": "animal"
+                  },
+                  "palette": "custom_bg",
+                  "custom_bg_color": "#632ca6"
+                },
+                {
+                  "match": {
+                    "type": "is",
+                    "value": "robot"
+                  },
+                  "palette": "red_on_white"
+                },
+                {
+                  "match": {
+                    "type": "is",
+                    "value": "ai"
+                  },
+                  "palette": "yellow_on_white"
+                }
+              ],
+              [
+                {
+                  "match": {
+                    "type": "is_not",
+                    "value": "xyz"
+                  },
+                  "palette": "white_on_yellow"
+                }
+              ],
+              [
+                {
+                  "match": {
+                    "type": "contains",
+                    "value": "test"
+                  },
+                  "palette": "white_on_green",
+                  "replace": {
+                    "type": "all",
+                    "with": "vegetable"
+                  }
+                }
+              ],
+              [
+                {
+                  "match": {
+                    "type": "does_not_contain",
+                    "value": "blah"
+                  },
+                  "palette": "black_on_light_red"
+                }
+              ],
+              [
+                {
+                  "match": {
+                    "type": "starts_with",
+                    "value": "abc"
+                  },
+                  "palette": "black_on_light_yellow"
+                }
+              ],
+              [
+                {
+                  "match": {
+                    "type": "ends_with",
+                    "value": "xyz"
+                  },
+                  "palette": "black_on_light_green"
+                },
+                {
+                  "match": {
+                    "type": "ends_with",
+                    "value": "zzz"
+                  },
+                  "palette": "green_on_white"
+                },
+                {
+                  "match": {
+                    "type": "is",
+                    "value": "animal"
+                  },
+                  "palette": "custom_text",
+                  "custom_fg_color": "#632ca6"
+                }
+              ]
+            ],
+            "formulas": []
+          }
+        ],
+        "has_search_bar": "never"
+      },
+      "layout": {
+        "x": 0,
+        "y": 0,
+        "width": 4,
+        "height": 4
+      }
+    }
+  ],
+  "template_variables": [],
+  "layout_type": "free",
+  "notify_list": []
+}

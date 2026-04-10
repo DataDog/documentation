@@ -1,0 +1,139 @@
+---
+import HttpMethodBadge from './HttpMethodBadge.astro';
+import ApiStatusAlert from './ApiStatusAlert.astro';
+import { SchemaTable } from './SchemaTable';
+import { ApiResponse } from './ApiResponse';
+import { ApiCodeExample } from './ApiCodeExample';
+import type { SchemaField } from './SchemaTable';
+import type { ResponseData } from './ApiResponse';
+import type { CodeExampleSet } from './ApiCodeExample';
+import styles from './ApiEndpoint.module.css';
+
+interface EndpointData {
+  operationId: string;
+  summary: string;
+  slug: string;
+  method: string;
+  path: string;
+  description: string;
+  version: 'v1' | 'v2';
+  deprecated: boolean;
+  unstable: boolean;
+  newerVersionUrl?: string;
+  permissions?: string[];
+  oauthScopes?: string[];
+  pathParams?: SchemaField[];
+  queryParams?: SchemaField[];
+  headerParams?: SchemaField[];
+  requestBody?: {
+    required: boolean;
+    description?: string;
+    schema: SchemaField[];
+    examples: Array<{ name: string; value: string }>;
+  };
+  responses: ResponseData[];
+  codeExamples: CodeExampleSet[];
+}
+
+interface Props {
+  data: string; // JSON string of EndpointData
+}
+
+const { data: dataJson } = Astro.props;
+
+let ep: EndpointData | null = null;
+try {
+  ep = JSON.parse(dataJson);
+} catch {
+  // invalid JSON
+}
+
+const hasParams = ep && (
+  (ep.pathParams && ep.pathParams.length > 0) ||
+  (ep.queryParams && ep.queryParams.length > 0) ||
+  (ep.headerParams && ep.headerParams.length > 0)
+);
+---
+
+{ep && (
+  <section class={styles.endpoint} data-testid="api-endpoint" data-operation-id={ep.operationId}>
+    {/* Status alerts */}
+    {ep.deprecated && (
+      <ApiStatusAlert type="deprecated" newerVersionUrl={ep.newerVersionUrl} />
+    )}
+    {ep.unstable && !ep.deprecated && (
+      <ApiStatusAlert type="unstable" />
+    )}
+
+    {/* Heading + method badge + path */}
+    <h2 id={ep.slug} class={styles.heading}>
+      {ep.summary}
+    </h2>
+    <div class={styles.urlLine}>
+      <HttpMethodBadge method={ep.method} />
+      <code class={styles.path}>{ep.path}</code>
+    </div>
+
+    {/* Description — rendered as slot content from Markdoc */}
+    <slot />
+
+    {/* Permissions */}
+    {ep.permissions && ep.permissions.length > 0 && (
+      <div class={styles.permissions}>
+        <strong>Permissions: </strong>
+        <code>{ep.permissions.join(', ')}</code>
+      </div>
+    )}
+
+    {/* Arguments */}
+    {hasParams && (
+      <div class={styles.section}>
+        <h3>Arguments</h3>
+        {ep.pathParams && ep.pathParams.length > 0 && (
+          <SchemaTable client:load fields={ep.pathParams} title="Path Parameters" />
+        )}
+        {ep.queryParams && ep.queryParams.length > 0 && (
+          <SchemaTable client:load fields={ep.queryParams} title="Query Parameters" />
+        )}
+        {ep.headerParams && ep.headerParams.length > 0 && (
+          <SchemaTable client:load fields={ep.headerParams} title="Header Parameters" />
+        )}
+      </div>
+    )}
+
+    {/* Request Body */}
+    {ep.requestBody && (
+      <div class={styles.section}>
+        <h3>Request Body {ep.requestBody.required ? '(required)' : '(optional)'}</h3>
+        {ep.requestBody.description && (
+          <p set:html={ep.requestBody.description} />
+        )}
+        {ep.requestBody.schema.length > 0 && (
+          <SchemaTable client:load fields={ep.requestBody.schema} />
+        )}
+        {ep.requestBody.examples.length > 0 && (
+          <div class={styles.requestExamples}>
+            {ep.requestBody.examples.map((ex) => (
+              <details>
+                <summary>{ex.name}</summary>
+                <pre class={styles.examplePre}><code>{ex.value}</code></pre>
+              </details>
+            ))}
+          </div>
+        )}
+      </div>
+    )}
+
+    {/* Response */}
+    {ep.responses.length > 0 && (
+      <ApiResponse client:load responses={ep.responses} />
+    )}
+
+    {/* Code Examples */}
+    {ep.codeExamples.length > 0 && (
+      <ApiCodeExample client:load examples={ep.codeExamples} />
+    )}
+
+    <hr class={styles.divider} />
+  </section>
+)}

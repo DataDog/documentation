@@ -1,0 +1,12 @@
+{
+  "data": {
+    "type": "retention_filters",
+    "attributes": {
+      "name": "Test creating retention filter",
+      "event_type": "session",
+      "query": "custom_query",
+      "sample_rate": 50,
+      "enabled": true
+    }
+  }
+}

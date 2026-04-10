@@ -1,0 +1,26 @@
+{
+  "data": {
+    "attributes": {
+      "formulas": [
+        {
+          "formula": "a",
+          "limit": {
+            "count": 10,
+            "order": "desc"
+          }
+        }
+      ],
+      "from": 1636625471000,
+      "queries": [
+        {
+          "aggregator": "avg",
+          "data_source": "metrics",
+          "query": "avg:system.cpu.user{*}",
+          "name": "a"
+        }
+      ],
+      "to": 1636629071000
+    },
+    "type": "scalar_request"
+  }
+}

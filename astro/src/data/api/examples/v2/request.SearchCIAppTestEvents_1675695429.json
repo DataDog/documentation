@@ -1,0 +1,11 @@
+{
+  "filter": {
+    "from": "now-15m",
+    "query": "@test.status:pass AND -@language:python",
+    "to": "now"
+  },
+  "page": {
+    "limit": 2
+  },
+  "sort": "timestamp"
+}

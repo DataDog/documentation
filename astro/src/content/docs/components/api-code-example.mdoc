@@ -1,0 +1,23 @@
+---
+title: "ApiCodeExample Component"
+---
+
+# ApiCodeExample
+
+Language-tabbed code example display. Shows code in multiple languages with an accordion for multiple examples per language.
+
+## Properties
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `examples` | `string` (JSON) | — | JSON string of `CodeExampleSet[]` |
+
+## Examples
+
+### Single example per language
+
+{% apiCodeExample examples="[{\"language\":\"curl\",\"label\":\"Curl\",\"entries\":[{\"description\":\"Get a dashboard\",\"code\":\"curl -X GET https://api.datadoghq.com/api/v1/dashboard/abc-123\",\"syntax\":\"bash\"}]},{\"language\":\"python\",\"label\":\"Python\",\"entries\":[{\"description\":\"Get a dashboard\",\"code\":\"response = api_instance.get_dashboard(dashboard_id=abc_123)\",\"syntax\":\"python\"}]}]" /%}
+
+### Multiple examples per language (accordion)
+
+{% apiCodeExample examples="[{\"language\":\"curl\",\"label\":\"Curl\",\"entries\":[{\"description\":\"Create a dashboard\",\"code\":\"curl -X POST https://api.datadoghq.com/api/v1/dashboard\",\"syntax\":\"bash\"},{\"description\":\"Create a dashboard with widgets\",\"code\":\"curl -X POST https://api.datadoghq.com/api/v1/dashboard -d body.json\",\"syntax\":\"bash\"}]}]" /%}

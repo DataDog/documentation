@@ -1,0 +1,19 @@
+{
+  "data": {
+    "attributes": {
+      "incident_id": "00000000-0000-0000-1234-000000000000",
+      "integration_type": 1,
+      "metadata": {
+        "channels": [
+          {
+            "channel_id": "C0123456789",
+            "channel_name": "#new-channel",
+            "team_id": "T01234567",
+            "redirect_url": "https://slack.com/app_redirect?channel=C0123456789&team=T01234567"
+          }
+        ]
+      }
+    },
+    "type": "incident_integrations"
+  }
+}

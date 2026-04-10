@@ -1,0 +1,24 @@
+---
+import { RegionSelector } from './RegionSelector';
+import type { Region } from './RegionSelector';
+
+interface Props {
+  regions: string;         // JSON string of Region[]
+  defaultRegion?: string;
+}
+
+const { regions: regionsJson, defaultRegion } = Astro.props;
+
+let parsedRegions: Region[] = [];
+try {
+  parsedRegions = JSON.parse(regionsJson);
+} catch {
+  // fallback
+}
+---
+
+<RegionSelector
+  client:load
+  regions={parsedRegions}
+  defaultRegion={defaultRegion}
+/>

@@ -1,0 +1,10 @@
+{
+  "data": {
+    "attributes": {
+      "api_key": "fakekey",
+      "email": "dev@datadoghq.com",
+      "name": "examplecloudflareintegration"
+    },
+    "type": "cloudflare-accounts"
+  }
+}

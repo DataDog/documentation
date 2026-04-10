@@ -1,0 +1,50 @@
+{
+  "title": "Example-Dashboard with formula style",
+  "widgets": [
+    {
+      "definition": {
+        "title": "styled timeseries",
+        "show_legend": true,
+        "legend_layout": "auto",
+        "legend_columns": [
+          "avg",
+          "min",
+          "max",
+          "value",
+          "sum"
+        ],
+        "time": {},
+        "type": "timeseries",
+        "requests": [
+          {
+            "formulas": [
+              {
+                "formula": "query1",
+                "style": {
+                  "palette_index": 4,
+                  "palette": "classic"
+                }
+              }
+            ],
+            "queries": [
+              {
+                "query": "avg:system.cpu.user{*}",
+                "data_source": "metrics",
+                "name": "query1"
+              }
+            ],
+            "response_format": "timeseries",
+            "style": {
+              "palette": "dog_classic",
+              "line_type": "solid",
+              "line_width": "normal"
+            },
+            "display_type": "line"
+          }
+        ]
+      }
+    }
+  ],
+  "layout_type": "ordered",
+  "reflow_type": "auto"
+}

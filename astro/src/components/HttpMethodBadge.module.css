@@ -1,0 +1,46 @@
+.badge {
+  display: inline-block;
+  padding: 0.125rem var(--space-sm);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  font-family: var(--font-family-mono);
+  line-height: 1.4;
+  border-radius: var(--border-radius);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.badge--get {
+  color: var(--color-blue);
+  background: var(--color-blue-tint);
+}
+
+.badge--post {
+  color: var(--color-green);
+  background: var(--color-green-tint);
+}
+
+.badge--put {
+  color: var(--color-orange);
+  background: var(--color-orange-tint);
+}
+
+.badge--patch {
+  color: var(--color-yellow);
+  background: var(--color-yellow-tint);
+}
+
+.badge--delete {
+  color: var(--color-red);
+  background: var(--color-red-tint);
+}
+
+.badge--head {
+  color: var(--color-text-muted);
+  background: var(--color-bg-hover);
+}
+
+.badge--options {
+  color: var(--color-text-muted);
+  background: var(--color-bg-hover);
+}

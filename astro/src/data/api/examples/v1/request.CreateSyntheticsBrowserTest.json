@@ -1,0 +1,67 @@
+{
+  "config": {
+    "assertions": [],
+    "variables": [
+      {
+        "type": "text",
+        "name": "TEST_VARIABLE",
+        "pattern": "secret",
+        "secure": true,
+        "example": "secret"
+      }
+    ],
+    "configVariables": [
+      {
+        "example": "content-type",
+        "name": "PROPERTY",
+        "pattern": "content-type",
+        "type": "text",
+        "secure": true
+      }
+    ],
+    "request": {
+      "method": "GET",
+      "url": "https://datadoghq.com"
+    },
+    "setCookie": "name:test"
+  },
+  "locations": [
+    "aws:us-east-2"
+  ],
+  "message": "Test message",
+  "name": "Example-Synthetic",
+  "options": {
+    "accept_self_signed": false,
+    "allow_insecure": true,
+    "device_ids": [
+      "chrome.laptop_large"
+    ],
+    "disableCors": true,
+    "follow_redirects": true,
+    "min_failure_duration": 10,
+    "min_location_failed": 1,
+    "noScreenshot": true,
+    "retry": {
+      "count": 2,
+      "interval": 10
+    },
+    "tick_every": 300,
+    "enableProfiling": true,
+    "enableSecurityTesting": true
+  },
+  "tags": [
+    "testing:browser"
+  ],
+  "type": "browser",
+  "steps": [
+    {
+      "allowFailure": false,
+      "alwaysExecute": true,
+      "exitIfSucceed": true,
+      "isCritical": true,
+      "name": "Refresh page",
+      "params": {},
+      "type": "refresh"
+    }
+  ]
+}

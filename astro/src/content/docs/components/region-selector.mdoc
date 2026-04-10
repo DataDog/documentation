@@ -1,0 +1,20 @@
+---
+title: "RegionSelector Component"
+---
+
+# RegionSelector
+
+A dropdown for selecting the API region. Persists selection in localStorage and dispatches a `regionchange` event on the document.
+
+## Properties
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `regions` | `string` (JSON) | — | JSON string of `Region[]` with `key`, `label`, and `site` |
+| `defaultRegion` | `string` | `us1` | Default selected region key |
+
+## Examples
+
+### Default
+
+{% regionSelector regions="[{\"key\":\"us1\",\"label\":\"US1\",\"site\":\"datadoghq.com\"},{\"key\":\"us3\",\"label\":\"US3\",\"site\":\"us3.datadoghq.com\"},{\"key\":\"us5\",\"label\":\"US5\",\"site\":\"us5.datadoghq.com\"},{\"key\":\"eu\",\"label\":\"EU\",\"site\":\"datadoghq.eu\"},{\"key\":\"ap1\",\"label\":\"AP1\",\"site\":\"ap1.datadoghq.com\"},{\"key\":\"gov\",\"label\":\"GOV\",\"site\":\"ddog-gov.com\"}]" /%}

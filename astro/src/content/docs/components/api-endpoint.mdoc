@@ -1,0 +1,31 @@
+---
+title: "ApiEndpoint Component"
+---
+
+# ApiEndpoint
+
+The main composition component for rendering a complete API endpoint section. Takes a JSON blob of all endpoint data and renders all sub-components (status alerts, method badge, URL, description, arguments, request body, response, code examples).
+
+## Properties
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `data` | `string` (JSON) | — | JSON string of the full `EndpointData` object |
+
+## Examples
+
+### Complete endpoint
+
+{% apiEndpoint data="{\"operationId\":\"GetDashboard\",\"summary\":\"Get a dashboard\",\"slug\":\"get-a-dashboard\",\"method\":\"get\",\"path\":\"/api/v1/dashboard/{dashboard_id}\",\"description\":\"Get a dashboard using the specified ID.\",\"version\":\"v1\",\"deprecated\":false,\"unstable\":false,\"pathParams\":[{\"name\":\"dashboard_id\",\"type\":\"string\",\"required\":true,\"deprecated\":false,\"readOnly\":false,\"description\":\"The ID of the dashboard.\"}],\"queryParams\":[],\"headerParams\":[],\"responses\":[{\"statusCode\":\"200\",\"description\":\"OK\",\"schema\":[{\"name\":\"id\",\"type\":\"string\",\"required\":false,\"deprecated\":false,\"readOnly\":true,\"description\":\"Dashboard ID.\"},{\"name\":\"title\",\"type\":\"string\",\"required\":true,\"deprecated\":false,\"readOnly\":false,\"description\":\"Title of the dashboard.\"}],\"examples\":[{\"name\":\"Example\",\"value\":\"{ }\"}]},{\"statusCode\":\"403\",\"description\":\"Forbidden\",\"examples\":[{\"name\":\"Error\",\"value\":\"{ }\"}]}],\"codeExamples\":[{\"language\":\"curl\",\"label\":\"Curl\",\"entries\":[{\"description\":\"Get a dashboard\",\"code\":\"curl -X GET https://api.datadoghq.com/api/v1/dashboard\",\"syntax\":\"bash\"}]}]}" %}
+
+Get a dashboard using the specified ID.
+
+{% /apiEndpoint %}
+
+### Deprecated endpoint
+
+{% apiEndpoint data="{\"operationId\":\"OldEndpoint\",\"summary\":\"Old endpoint (deprecated)\",\"slug\":\"old-endpoint\",\"method\":\"delete\",\"path\":\"/api/v1/old\",\"description\":\"\",\"version\":\"v1\",\"deprecated\":true,\"unstable\":false,\"newerVersionUrl\":\"/api/latest/dashboards/\",\"responses\":[],\"codeExamples\":[]}" %}
+
+This endpoint has been deprecated in favor of a newer version.
+
+{% /apiEndpoint %}

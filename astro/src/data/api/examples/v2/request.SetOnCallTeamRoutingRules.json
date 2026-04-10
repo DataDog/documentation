@@ -1,0 +1,42 @@
+{
+  "data": {
+    "attributes": {
+      "rules": [
+        {
+          "actions": [
+            {
+              "channel": "channel",
+              "type": "send_slack_message",
+              "workspace": "workspace"
+            }
+          ],
+          "query": "tags.service:test",
+          "time_restriction": {
+            "time_zone": "Europe/Paris",
+            "restrictions": [
+              {
+                "end_day": "monday",
+                "end_time": "17:00:00",
+                "start_day": "monday",
+                "start_time": "09:00:00"
+              },
+              {
+                "end_day": "tuesday",
+                "end_time": "17:00:00",
+                "start_day": "tuesday",
+                "start_time": "09:00:00"
+              }
+            ]
+          }
+        },
+        {
+          "policy_id": "ab000000-0000-0000-0000-000000000000",
+          "query": "",
+          "urgency": "low"
+        }
+      ]
+    },
+    "id": "aeadc05e-98a8-11ec-ac2c-da7ad0900001",
+    "type": "team_routing_rules"
+  }
+}

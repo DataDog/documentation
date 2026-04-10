@@ -1,0 +1,18 @@
+{
+  "type": "metric",
+  "name": "Custom Metric SLO",
+  "thresholds": [
+    {
+      "target": 97.0,
+      "timeframe": "7d",
+      "warning": 98.0
+    }
+  ],
+  "timeframe": "7d",
+  "target_threshold": 97.0,
+  "warning_threshold": 98,
+  "query": {
+    "numerator": "sum:httpservice.hits{code:2xx}.as_count()",
+    "denominator": "sum:httpservice.hits{!code:3xx}.as_count()"
+  }
+}

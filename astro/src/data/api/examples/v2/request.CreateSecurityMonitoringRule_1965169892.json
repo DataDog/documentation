@@ -1,0 +1,56 @@
+{
+  "type": "application_security",
+  "name": "Example-Security-Monitoring_appsec_rule",
+  "queries": [
+    {
+      "query": "@appsec.security_activity:business_logic.users.login.failure",
+      "aggregation": "count",
+      "groupByFields": [
+        "service",
+        "@http.client_ip"
+      ],
+      "distinctFields": []
+    }
+  ],
+  "filters": [],
+  "cases": [
+    {
+      "name": "",
+      "status": "info",
+      "notifications": [],
+      "condition": "a > 100000",
+      "actions": [
+        {
+          "type": "block_ip",
+          "options": {
+            "duration": 900
+          }
+        },
+        {
+          "type": "user_behavior",
+          "options": {
+            "userBehaviorName": "behavior"
+          }
+        },
+        {
+          "type": "flag_ip",
+          "options": {
+            "flaggedIPType": "FLAGGED"
+          }
+        }
+      ]
+    }
+  ],
+  "options": {
+    "keepAlive": 3600,
+    "maxSignalDuration": 86400,
+    "evaluationWindow": 900,
+    "detectionMethod": "threshold"
+  },
+  "isEnabled": true,
+  "message": "Test rule",
+  "tags": [],
+  "groupSignalsBy": [
+    "service"
+  ]
+}

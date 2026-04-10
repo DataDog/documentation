@@ -2,6 +2,8 @@
 import '../styles/global.css';
 import ApiHeader from '../components/ApiHeader.astro';
 import ApiSideNav from '../components/ApiSideNav.astro';
+import { RegionSelector } from '../components/RegionSelector';
+import { getDefaultRegions } from '../data/api/regions';
 import type { ApiCategory } from '../data/api/index';
 
 interface Props {
@@ -11,6 +13,7 @@ interface Props {
 }
 
 const { title, categories, currentSlug } = Astro.props;
+const regions = getDefaultRegions();
 ---
 
 <html lang="en">
@@ -32,6 +35,9 @@ const { title, categories, currentSlug } = Astro.props;
     <div class="api-shell">
       <ApiSideNav categories={categories} currentSlug={currentSlug} />
       <main class="api-main">
+        <div class="api-toolbar">
+          <RegionSelector client:load regions={regions} />
+        </div>
         <slot />
       </main>
     </div>
@@ -68,6 +74,12 @@ const { title, categories, currentSlug } = Astro.props;
         flex: 1;
         overflow-y: auto;
         padding: var(--space-xl);
+      }
+
+      .api-toolbar {
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: var(--space-md);
       }
 
       #theme-toggle {

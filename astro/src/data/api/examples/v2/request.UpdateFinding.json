@@ -1,0 +1,14 @@
+{
+  "data": {
+    "attributes": {
+      "mute": {
+        "description": "To be resolved later",
+        "expiration_date": 1778721573794,
+        "muted": true,
+        "reason": "ACCEPTED_RISK"
+      }
+    },
+    "id": "AQAAAYbb1i0gijTHEQAAAABBWWJiMWkwZ0FBQ2FuNzBJVGZXZ3B3QUE",
+    "type": "finding"
+  }
+}

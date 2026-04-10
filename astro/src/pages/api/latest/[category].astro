@@ -1,6 +1,8 @@
 ---
 import ApiLayout from '../../../layouts/ApiLayout.astro';
+import ApiEndpoint from '../../../components/ApiEndpoint.astro';
 import { getApiCategories, getCategoryBySlug } from '../../../data/api/index';
+import { getEndpointsForCategory } from '../../../data/api/endpoints';
 import type { GetStaticPaths } from 'astro';
 
 export const getStaticPaths: GetStaticPaths = () => {
@@ -13,13 +15,14 @@ export const getStaticPaths: GetStaticPaths = () => {
 const { category: slug } = Astro.params;
 const categories = getApiCategories();
 const current = getCategoryBySlug(slug as string)!;
+const endpoints = getEndpointsForCategory(slug as string);
 ---
 
 <ApiLayout title={`${current.name} - Datadog API`} categories={categories} currentSlug={slug as string}>
   <h1>{current.name}</h1>
-  {current.operations.map((op) => (
-    <section id={op.slug}>
-      <p>This will be the page for the <strong>{op.summary}</strong> endpoint.</p>
-    </section>
+  {endpoints.map((ep) => (
+    <ApiEndpoint data={JSON.stringify(ep)}>
+      <Fragment set:html={ep.description} />
+    </ApiEndpoint>
   ))}
 </ApiLayout>

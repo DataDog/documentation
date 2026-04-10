@@ -1,0 +1,12 @@
+{
+  "data": {
+    "attributes": {
+      "api_key": "fakekey",
+      "email": "dev@datadoghq.com",
+      "zones": [
+        "zone-id-3"
+      ]
+    },
+    "type": "cloudflare-accounts"
+  }
+}

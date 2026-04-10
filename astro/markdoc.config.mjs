@@ -46,5 +46,89 @@ export default defineMarkdocConfig({
         },
       },
     },
+    httpMethodBadge: {
+      render: component('./src/components/HttpMethodBadge.astro'),
+      selfClosing: true,
+      attributes: {
+        method: {
+          type: String,
+          required: true,
+        },
+      },
+    },
+    apiStatusAlert: {
+      render: component('./src/components/ApiStatusAlert.astro'),
+      attributes: {
+        type: {
+          type: String,
+          required: true,
+        },
+        newerVersionUrl: {
+          type: String,
+        },
+        message: {
+          type: String,
+        },
+      },
+    },
+    schemaTable: {
+      render: component('./src/components/SchemaTableIsland.astro'),
+      selfClosing: true,
+      attributes: {
+        fields: {
+          type: String,
+          required: true,
+        },
+        title: {
+          type: String,
+        },
+        showExpandAll: {
+          type: Boolean,
+          default: true,
+        },
+      },
+    },
+    regionSelector: {
+      render: component('./src/components/RegionSelectorIsland.astro'),
+      selfClosing: true,
+      attributes: {
+        regions: {
+          type: String,
+          required: true,
+        },
+        defaultRegion: {
+          type: String,
+        },
+      },
+    },
+    apiResponse: {
+      render: component('./src/components/ApiResponseIsland.astro'),
+      selfClosing: true,
+      attributes: {
+        responses: {
+          type: String,
+          required: true,
+        },
+      },
+    },
+    apiCodeExample: {
+      render: component('./src/components/ApiCodeExampleIsland.astro'),
+      selfClosing: true,
+      attributes: {
+        examples: {
+          type: String,
+          required: true,
+        },
+      },
+    },
+    apiEndpoint: {
+      render: component('./src/components/ApiEndpoint.astro'),
+      attributes: {
+        data: {
+          type: String,
+          required: true,
+        },
+      },
+    },
   },
 });

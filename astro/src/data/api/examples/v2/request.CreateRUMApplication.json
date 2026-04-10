@@ -1,0 +1,9 @@
+{
+  "data": {
+    "attributes": {
+      "name": "test-rum-5c67ebb32077e1d9",
+      "type": "ios"
+    },
+    "type": "rum_application_create"
+  }
+}

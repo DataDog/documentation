@@ -1,0 +1,17 @@
+{
+  "data": {
+    "attributes": {
+      "attribute_key": "exampleauthnmapping",
+      "attribute_value": "Example-AuthN-Mapping"
+    },
+    "relationships": {
+      "role": {
+        "data": {
+          "id": "string",
+          "type": "roles"
+        }
+      }
+    },
+    "type": "authn_mappings"
+  }
+}
