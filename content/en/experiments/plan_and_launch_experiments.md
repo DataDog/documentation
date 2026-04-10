@@ -80,8 +80,11 @@ Link a feature flag to control how traffic is split between variants.
 Click **Add a feature flag** to select the appropriate feature flag for your experiment. If you haven't created a feature flag, see [Getting Started with Feature Flags][4].
 
 #### Randomization
-Configure how users are assigned to variants. After you select a feature flag, the randomization settings are pre-populated based on the flag's configuration. These settings are independent from the linked feature flag until you launch the experiment.
+After you select a feature flag, the randomization settings are pre-populated based on the flag's configuration.
 
+<div class="alert alert-info">Experiment randomization settings do not affect the linked feature flag until you launch.<br><br>When you start your experiment, Datadog adds a targeting rule to the flag that assigns users to variants and activates randomization.<br><br>If multiple experiments share the same flag, traffic is evaluated based on the order of experiments in the flag's targeting waterfall. You can reorder experiments in the confirmation modal before launching.</div>
+
+To configure how users are assigned to variants: 
 1. Select the **Environment** for your experiment from the dropdown.
 1. Under **Targeting rules**:
    1. Click **Add Filter** to define conditions and filter which users to include in the experiment.
@@ -126,14 +129,10 @@ Expand the **Split-by exploration dimensions** section. Select properties from t
 
 ## Launch your experiment
 
-<div class="alert alert-info">Experiment randomization settings do not affect the linked feature flag until you launch. Setting up your experiment is safe to do while the flag is serving other traffic.</div>
-
-When you start your experiment, Datadog adds a targeting rule to the linked feature flag that assigns users to variants and activates randomization.
-
 To launch your experiment:
 
 1. Click **Start Experiment** to open the **Confirm starting the experiment** dialog.
-1. Review your experiment settings.
+1. Review your experiment settings. If multiple experiments share the same flag, use the arrow buttons to reorder the targeting rules in the waterfall.
 1. Click **Start Experiment & Enable Flag** to launch the experiment.
 
 Launching the experiment opens the **Flag & Exposures** page:
