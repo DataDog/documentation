@@ -30,7 +30,7 @@ To complete this guide, you need the following:
 This ensures all files are compatible:
 
 ```shell
-DD_AGENT_VERSION="7.78.0-rc.7"
+DD_AGENT_VERSION="7.78.0-rc.9"
 ```
 
 ## Download the Dockerfile
@@ -244,26 +244,33 @@ After the build completes, verify the custom `otel-agent` binary includes your a
    ```yaml
    installer:
      registry:
-       auth: <YOUR-REGISTRY-AUTH>
-       url: <YOUR-REGISTRY-HOST>/<YOUR-PATH>
+       extensions:
+         datadog-agent:
+           ddot:
+             auth: <YOUR-REGISTRY-AUTH>
+             url: <YOUR-REGISTRY-HOST>/<YOUR-PATH>
    ```
    <div class="alert alert-info"><strong>Bug bash</strong>: Use the following configuration:
 
    ```yaml
    installer:
      registry:
-       auth: gcr
-       url: us-central1-docker.pkg.dev/datadog-sandbox/ddot-byoc-linux
+       extensions:
+         datadog-agent:
+           ddot:
+             auth: gcr
+             url: us-central1-docker.pkg.dev/datadog-sandbox/ddot-byoc-linux
+       url: install.datad0g.com
    ```
    </div>
 4. Install the custom DDOT Collector package using the following command:
    ```shell
-   sudo DD_INSTALLER_REGISTRY_AUTH=<YOUR-REGISTRY-AUTH> DD_OTELCOLLECTOR_ENABLED=true datadog-installer install "oci://<YOUR-REGISTRY>/agent-package:<VERSION>"
+   DD_API_KEY=<DATADOG_API_KEY> DD_SITE="datadoghq.com" DD_OTELCOLLECTOR_ENABLED=true DD_AGENT_MAJOR_VERSION=7 DD_AGENT_MINOR_VERSION=78.0~rc.9-1 bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
    ```
    <div class="alert alert-info"><strong>Bug bash</strong>: Use the following command:
 
    ```shell
-   sudo DD_INSTALLER_REGISTRY_AUTH=gcr DD_OTELCOLLECTOR_ENABLED=true datadog-installer install "oci://us-central1-docker.pkg.dev/datadog-sandbox/ddot-byoc-linux/agent-package:7.78.0-rc.7-1"
+   DD_API_KEY=<DATADOG_API_KEY> DD_SITE="datad0g.com" DD_REPO_URL="datad0g.com" DD_AGENT_DIST_CHANNEL=beta DD_AGENT_MAJOR_VERSION=7 DD_AGENT_MINOR_VERSION=78.0~rc.9-1 DD_OTELCOLLECTOR_ENABLED=true ./install_script_agent7.sh
    ```
    </div>
 5. If the DDOT Collector (Agent) starts, then the build process was successful.
