@@ -51,6 +51,12 @@
   --font-size-base: 1rem;
   --font-size-lg: 1.25rem;
   --font-size-xs: 0.778rem;
+  --font-size-h1: 2.222rem;
+  --font-size-h2: 2rem;
+  --font-size-h3: 1.333rem;
+  --font-size-h4: 1rem;
+  --font-size-h5: 0.889rem;
+  --font-size-h6: 0.889rem;
   --line-height: 1.6;
   --line-height-code: 27px;
 

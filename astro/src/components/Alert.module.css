@@ -1,6 +1,6 @@
 .alert {
   position: relative;
-  padding: calc(var(--space-sm) + var(--space-lg)) 0.75rem var(--space-sm) var(--space-md);
+  padding: var(--space-sm) 0.75rem var(--space-sm) var(--space-md);
   margin-bottom: var(--space-md);
   border-left: var(--border-width-accent) solid;
   color: var(--color-alert-text);

@@ -110,6 +110,87 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 600;
 }
 
+h1 {
+  font-size: var(--font-size-h1);
+  line-height: 1.05;
+  padding-bottom: var(--space-sm);
+}
+
+h2 {
+  font-size: var(--font-size-h2);
+  font-weight: 200;
+  line-height: 1;
+  padding-bottom: 0.167rem;
+}
+
+h3 {
+  font-size: var(--font-size-h3);
+}
+
+h4 {
+  font-size: var(--font-size-h4);
+  margin-top: 0.778rem;
+}
+
+h5 {
+  font-size: var(--font-size-h5);
+  color: var(--color-brand);
+  margin-top: 0.778rem;
+}
+
+h6 {
+  font-size: var(--font-size-h6);
+}
+
+/* Lists */
+ul {
+  list-style: none;
+  padding-left: 1.222rem;
+}
+
+ul li {
+  position: relative;
+  padding-left: 0;
+}
+
+ul li::before {
+  content: '\2013';
+  position: absolute;
+  left: -1.111rem;
+}
+
+ul ul {
+  padding-left: 1.111rem;
+}
+
+ol ol {
+  list-style-type: lower-alpha;
+}
+
+ol ol ol {
+  list-style-type: lower-roman;
+}
+
+/* Blockquote */
+blockquote {
+  margin: 0 0 var(--space-md);
+  padding: var(--space-sm) var(--space-md);
+  border-left: var(--border-width-accent) solid var(--color-border-dark);
+  color: var(--color-text-muted);
+}
+
+blockquote p:last-child {
+  margin-bottom: 0;
+}
+
+/* Horizontal rule */
+hr {
+  border: 0;
+  border-top: var(--border-width) solid var(--color-border);
+  opacity: 0.25;
+  margin: var(--space-md) 0;
+}
+
 /* Tables */
 table {
   width: 100%;
