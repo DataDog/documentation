@@ -68,12 +68,15 @@ const regions = getDefaultRegions();
       .api-shell {
         display: flex;
         height: calc(100vh - 50px);
+        max-width: var(--content-max-width);
+        margin: 0 auto;
       }
 
       .api-main {
         flex: 1;
+        min-width: 0;
         overflow-y: auto;
-        padding: var(--space-xl);
+        padding: var(--space-xl) var(--space-xl) var(--space-xl) 29px;
       }
 
       .api-toolbar {
@@ -103,6 +106,10 @@ const regions = getDefaultRegions();
       @media (max-width: 768px) {
         .api-shell {
           flex-direction: column;
+        }
+
+        .api-main {
+          padding: var(--space-md);
         }
 
         .api-shell > :global(nav) {

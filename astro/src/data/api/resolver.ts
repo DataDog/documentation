@@ -6,6 +6,8 @@
  * YAML objects already loaded by `src/data/api/index.ts`.
  */
 
+import { renderMarkdownInline } from './markdown';
+
 /* ------------------------------------------------------------------ */
 /*  Types                                                              */
 /* ------------------------------------------------------------------ */
@@ -17,7 +19,7 @@ export interface SchemaField {
   required: boolean;
   deprecated: boolean;
   readOnly: boolean;
-  /** Raw markdown string from the spec (rendered by Markdoc later) */
+  /** HTML string rendered from the spec's Markdown description */
   description: string;
   enumValues?: string[];
   defaultValue?: string;
@@ -180,7 +182,7 @@ export function schemaToFields(
         required: false,
         deprecated: schema.deprecated === true,
         readOnly: schema.readOnly === true,
-        description: schema.description ?? '',
+        description: renderMarkdownInline(schema.description ?? ''),
         unionOptions,
       },
     ];
@@ -213,7 +215,7 @@ export function schemaToFields(
           required: false,
           deprecated: schema.deprecated === true,
           readOnly: schema.readOnly === true,
-          description: schema.description ?? '',
+          description: renderMarkdownInline(schema.description ?? ''),
         },
       ];
     }
@@ -228,7 +230,7 @@ export function schemaToFields(
         required: false,
         deprecated: schema.deprecated === true,
         readOnly: schema.readOnly === true,
-        description: schema.description ?? '',
+        description: renderMarkdownInline(schema.description ?? ''),
         ...(children.length > 0 ? { children } : {}),
       },
     ];
@@ -241,7 +243,7 @@ export function schemaToFields(
     required: false,
     deprecated: schema.deprecated === true,
     readOnly: schema.readOnly === true,
-    description: schema.description ?? '',
+    description: renderMarkdownInline(schema.description ?? ''),
   };
 
   if (schema.enum) {
@@ -323,7 +325,7 @@ function propertyToField(
       required,
       deprecated: resolved.deprecated === true,
       readOnly: resolved.readOnly === true,
-      description: resolved.description ?? '',
+      description: renderMarkdownInline(resolved.description ?? ''),
       unionOptions,
     };
   }
@@ -338,7 +340,7 @@ function propertyToField(
       required,
       deprecated: resolved.deprecated === true,
       readOnly: resolved.readOnly === true,
-      description: resolved.description ?? '',
+      description: renderMarkdownInline(resolved.description ?? ''),
       ...(children.length > 0 ? { children } : {}),
     };
   }
@@ -352,7 +354,7 @@ function propertyToField(
       required,
       deprecated: resolved.deprecated === true,
       readOnly: resolved.readOnly === true,
-      description: resolved.description ?? '',
+      description: renderMarkdownInline(resolved.description ?? ''),
       ...(children.length > 0 ? { children } : {}),
     };
   }
@@ -369,7 +371,7 @@ function propertyToField(
       required,
       deprecated: resolved.deprecated === true,
       readOnly: resolved.readOnly === true,
-      description: resolved.description ?? '',
+      description: renderMarkdownInline(resolved.description ?? ''),
       ...(children.length > 0 ? { children } : {}),
     };
   }
@@ -381,7 +383,7 @@ function propertyToField(
     required,
     deprecated: resolved.deprecated === true,
     readOnly: resolved.readOnly === true,
-    description: resolved.description ?? '',
+    description: renderMarkdownInline(resolved.description ?? ''),
   };
 
   if (resolved.enum) {
@@ -473,7 +475,7 @@ export function paramsToFields(spec: any, params: any[]): SchemaField[] {
 
     const name: string = resolved.name ?? '';
     const required: boolean = resolved.required === true;
-    const description: string = resolved.description ?? '';
+    const description: string = renderMarkdownInline(resolved.description ?? '');
     const deprecated: boolean = resolved.deprecated === true;
 
     // Resolve the parameter's inner schema

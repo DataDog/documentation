@@ -66,9 +66,8 @@ body {
   line-height: var(--line-height);
   color: var(--color-text);
   background-color: var(--color-bg);
-  max-width: var(--content-max-width);
-  margin: var(--space-xl) auto;
-  padding: 0 var(--space-md);
+  margin: 0;
+  padding: 0;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

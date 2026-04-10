@@ -19,6 +19,7 @@ import { generateCurl } from './curl';
 import type { CurlParam } from './curl';
 import { getCodeExamplesForOperation } from './examples';
 import type { CodeExampleSet } from './examples';
+import { renderMarkdown, renderMarkdownInline } from './markdown';
 
 /* ------------------------------------------------------------------ */
 /*  Types                                                              */
@@ -44,7 +45,7 @@ export interface EndpointData {
   slug: string;
   method: string;
   path: string;
-  /** Raw markdown description from the spec */
+  /** HTML description rendered from the spec's Markdown */
   description: string;
   version: 'v1' | 'v2';
   deprecated: boolean;
@@ -217,7 +218,7 @@ function extractRequestBody(spec: any, operation: any): RequestBodyData | undefi
 
   return {
     required: resolved.required === true,
-    description: resolved.description,
+    description: resolved.description ? renderMarkdownInline(resolved.description) : undefined,
     schema,
     examples,
   };
@@ -241,7 +242,7 @@ function extractResponses(spec: any, operation: any): ResponseData[] {
       ? resolveRef(spec, responseObj.$ref) ?? responseObj
       : responseObj;
 
-    const description: string = resolved?.description ?? '';
+    const description: string = renderMarkdownInline(resolved?.description ?? '');
 
     // Schema
     let schema: SchemaField[] | undefined;
@@ -455,7 +456,7 @@ export function getEndpointsForCategory(slug: string): EndpointData[] {
         // --- Core fields ---
         const operationId: string = operation.operationId ?? '';
         const summary: string = operation.summary ?? '';
-        const description: string = operation.description ?? '';
+        const description: string = renderMarkdown(operation.description ?? '');
         const deprecated: boolean = operation.deprecated === true;
         const unstable: boolean = !!operation['x-unstable'];
 

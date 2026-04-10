@@ -6,12 +6,14 @@
     "build": "astro build",
     "preview": "astro preview",
     "test": "vitest run",
-    "test:browser": "playwright test"
+    "test:browser": "playwright test",
+    "qa:compare": "npx tsx qa/compare.ts"
   },
   "dependencies": {
     "@astrojs/markdoc": "^0.14.0",
     "@astrojs/preact": "^4.0.0",
     "astro": "^5.7.0",
+    "marked": "^18.0.0",
     "preact": "^10.25.0",
     "shiki": "^4.0.2",
     "yaml": "^2.8.3"
