@@ -39,7 +39,7 @@ After setup, navigate to the [AI Agents Console][1] and click the **Claude Code*
 
 #### Option 2: OpenTelemetry (OTLP)
 
-The following procedure configures Claude Code to send telemetry directly to Datadog with the OpenTelemetry protocol (OTLP). To send telemetry through the Datadog Agent instead, see [Forward data through the Datadog Agent](#via-dd-agent).
+The following procedure configures Claude Code to send telemetry directly to Datadog with the OpenTelemetry protocol (OTLP).
 
 1. Ensure that your [Logs configuration][6] includes a catch-all [index][7], or an index that covers `service:claude-code`.
 2. Generate a [Datadog API key][8].
@@ -65,7 +65,10 @@ The following procedure configures Claude Code to send telemetry directly to Dat
    <div class="alert alert-info">To set up AI Agents Console for Claude Code across your organization, your IT team can use a Mobile Device Management (MDM) system to distribute the Claude Code settings file across all managed devices.</div>
 4. Restart Claude Code.
 
-{{% collapse-content title="Alternative setup: Forward data through the Datadog Agent" level="h4" expanded=false id="via-dd-agent" %}}
+After you restart Claude Code, navigate to the [AI Agents Console][1] in Datadog and click on the **Claude Code** tile. Metrics (usage, cost, latency, errors) should appear within a few minutes.
+
+#### Option 3: Forward data through the Datadog Agent
+
 1. Ensure that your [Logs configuration][6] includes a catch-all [index][7], or an index that covers `service:claude-code`.
 2. [Install the Datadog Agent][9].
 3. Configure your Datadog Agent to enable the OpenTelemetry Collector:
@@ -96,9 +99,6 @@ The following procedure configures Claude Code to send telemetry directly to Dat
 
    <div class="alert alert-info">To set up AI Agents Console for Claude Code across your organization, your IT team can use a Mobile Device Management (MDM) system to distribute the Claude Code settings file across all managed devices.</div>
 5. Restart Claude Code.
-{{% /collapse-content %}}
-
-After you restart Claude Code, navigate to the [AI Agents Console][1] in Datadog and click on the **Claude Code** tile. Metrics (usage, cost, latency, errors) should appear within a few minutes.
 
 ### Cursor
 
