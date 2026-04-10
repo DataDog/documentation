@@ -47,7 +47,7 @@ The RUM Browser SDK automatically tracks clicks to generate click actions. A one
 
 ## Manage information being collected
 
-When user interaction tracking is enabled, sensitive and private data contained in your pages may be included to identify elements that a user interacted with.
+When user interaction tracking is enabled, sensitive, and private data contained in your pages may be included to identify elements that a user interacted with.
 
 To control which information is sent to Datadog, you can [mask action names with privacy options][2], [manually set an action name](#declare-a-name-for-click-actions), or [implement a global scrubbing rule in the Datadog Browser SDK for RUM][3].
 
