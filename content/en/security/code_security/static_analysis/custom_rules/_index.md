@@ -27,7 +27,7 @@ ruleset names are `python-security`, `cobra-team-checks`, or `my-company-securit
 
 ## Manage rules with the template repository
 
-As an alternative to managing custom rules in Datadog, the [datadog-custom-rules-template][5] GitHub repository provides a Git-based workflow for managing custom rules as code. On every push to `main`, a GitHub Action automatically creates, updates, or deletes rulesets and rules to match what's on disk.
+As an alternative to managing custom rules in Datadog, the [datadog-custom-rules-template][5] GitHub repository provides a Git-based workflow for managing custom rules as code. On every push to `main`, a GitHub Action automatically creates, updates, or deletes rulesets and rules to match what's in the repository.
 
 ### Get started
 
