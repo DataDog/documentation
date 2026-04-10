@@ -131,7 +131,7 @@ The following settings allow fine-grained control over the profiler engines. The
 
 | Environment variable | System property | Description |
 |---------------------|-----------------|-------------|
-| `DD_PROFILING_HEAP_ENABLED` | `-Ddd.profiling.heap.enabled` | Master toggle for all live heap profiling, including both the Datadog native engine and the JFR `jdk.OldObjectSample` fallback (default: true on supported platforms since v1.61.0) |
+| `DD_PROFILING_HEAP_ENABLED` | `-Ddd.profiling.heap.enabled` | Main toggle for all live heap profiling, including both the Datadog native engine and the JFR `jdk.OldObjectSample` fallback (default: true on supported platforms since v1.61.0) |
 | `DD_PROFILING_DDPROF_ENABLED` | `-Ddd.profiling.ddprof.enabled` | Enable the Datadog profiler engine (Linux only, default: true since v1.7.0) |
 | `DD_PROFILING_DDPROF_CPU_ENABLED` | `-Ddd.profiling.ddprof.cpu.enabled` | Enable CPU profiling with the Datadog engine |
 | `DD_PROFILING_DDPROF_WALL_ENABLED` | `-Ddd.profiling.ddprof.wall.enabled` | Enable wallclock profiling (default: true since v1.7.0) |
