@@ -6484,6 +6484,49 @@ menu:
           - ListAuthNMappings
         unstable: []
         order: 4
+    - name: Bits AI
+      url: /api/latest/bits-ai/
+      identifier: bits-ai
+      generated: true
+    - name: Get a Bits AI investigation
+      url: '#get-a-bits-ai-investigation'
+      identifier: bits-ai-get-a-bits-ai-investigation
+      parent: bits-ai
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetInvestigation
+        unstable:
+          - v2
+        order: 3
+    - name: Trigger a Bits AI investigation
+      url: '#trigger-a-bits-ai-investigation'
+      identifier: bits-ai-trigger-a-bits-ai-investigation
+      parent: bits-ai
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - TriggerInvestigation
+        unstable:
+          - v2
+        order: 1
+    - name: List Bits AI investigations
+      url: '#list-bits-ai-investigations'
+      identifier: bits-ai-list-bits-ai-investigations
+      parent: bits-ai
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListInvestigations
+        unstable:
+          - v2
+        order: 2
     - name: CI Visibility Pipelines
       url: /api/latest/ci-visibility-pipelines/
       identifier: ci-visibility-pipelines
@@ -14810,32 +14853,6 @@ menu:
         unstable:
           - v2
         order: 5
-    - name: Get Flaky Tests Management policies
-      url: '#get-flaky-tests-management-policies'
-      identifier: test-optimization-get-flaky-tests-management-policies
-      parent: test-optimization
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - GetFlakyTestsManagementPolicies
-        unstable:
-          - v2
-        order: 6
-    - name: Update Flaky Tests Management policies
-      url: '#update-flaky-tests-management-policies'
-      identifier: test-optimization-update-flaky-tests-management-policies
-      parent: test-optimization
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - UpdateFlakyTestsManagementPolicies
-        unstable:
-          - v2
-        order: 7
     - name: Widgets
       url: /api/latest/widgets/
       identifier: widgets
