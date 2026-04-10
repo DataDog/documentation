@@ -14,28 +14,41 @@ further_reading:
 
 ## Overview
 
-Create, configure, and launch experiments to measure how new features affect user outcomes.
+Plan and launch experiments to measure how new features affect user outcomes.
 
-## Create your experiment
+## Prerequisites
 
-You can create an experiment from an existing [feature flag's][4] detail page, or draft one independently from the Experiments page.
+Before you begin, make sure you have:
 
-{{< img src="/product_analytics/experiment/exp_plan_launch_ff_new_experiment.png" alt="The feature flag detail page for a flag called new_product_photos, showing targeting rules and rollouts with a 50/50 split between control and treatment variants, and a Create New Experiment button highlighted at the bottom." style="width:80%;" >}}
+- A [feature flag][4] for the variants you want to test
+- At least one [experiment metric][2] defined
+- A [subject type][6] for grouping users (default is `@usr.id`)
 
-To create an experiment:
+## Plan your experiment
+Give your experiment a name and hypothesis, then define the settings.
 
-1. Navigate to the [Experiments][1] page in Datadog Product Analytics.
+### Draft your experiment
+
+To create a draft experiment:
+
+1. Navigate to [Experiments][1] in Datadog Product Analytics.
 1. Click **Create Experiment** at the top right corner.
 1. Enter your **Experiment name** and **Hypothesis**.
 1. Click **Create Draft Experiment** to open the experiment's configuration page.
 
 {{< img src="/product_analytics/experiment/exp_plan_launch_create_experiment.png" alt="The Create new draft experiment dialog with an experiment name of New Product Photos Experiment, a hypothesis about higher-resolution product photos increasing add-to-cart conversions, and a Create Draft Experiment button highlighted." style="width:80%;" >}}
 
-## Configure your experiment
+You can also create an experiment directly from a [feature flag's][4] detail page.
 
-After creating your draft experiment, configure the metrics, feature flag, and randomization settings.
+{{< img src="/product_analytics/experiment/exp_plan_launch_ff_new_experiment.png" alt="The feature flag detail page for a flag called new_product_photos, showing targeting rules and rollouts with a 50/50 split between control and treatment variants, and a Create New Experiment button highlighted at the bottom." style="width:80%;" >}}
 
-### Decision metrics
+### Set up your experiment
+
+After drafting your experiment, define the metrics, feature flag, and randomization settings.
+
+<div class="alert alert-warning">You can edit only the subject type after launching your experiment. Set up all other settings before you launch.</div>
+
+#### Decision metrics
 Define the metrics that measure the outcome of your experiment.
 
 1. Use the **Calculate metrics by** dropdown to select the subject type. The default is **User (@usr.id)**. To define a custom grouping, click **+ Create subject type**.
@@ -45,12 +58,10 @@ Define the metrics that measure the outcome of your experiment.
    1. (Optional) Click **Create Metric** to define a new metric.
 1. Optionally, add secondary metrics to monitor unintended effects of the experiment on other areas like performance, engagement, or revenue.
 
-See [Create Experiment Metrics][2] for details.
-
 {{< img src="/product_analytics/experiment/exp_plan_launch_decision_metric.png" alt="The experiment configuration page showing the Decision metrics section with a Calculate metrics by dropdown set to User (@usr.id), a primary metric set to Add to Cart Conversion, and a Secondary metrics section." style="width:80%;" >}}
 
-### Sample size calculation
-Optionally, estimate the smallest change your experiment can reliably detect.
+#### Sample size calculation (optional)
+Determine how sensitive your experiment can be to changes between variants.
 
 1. Click **sample size calculator** to open the side panel.
 1. Expand **Calculation details**. Your primary and secondary metrics appear under **Metrics**.
@@ -63,24 +74,40 @@ Optionally, estimate the smallest change your experiment can reliably detect.
 
 {{< img src="/product_analytics/experiment/exp_plan_launch_sample_size.png" alt="The Sample Size Calculator side panel showing calculation details with Add to Cart Conversion as the primary metric and Number of cart views as a guardrail, an entry point set to click on ADD TO CART, two variants at 100% traffic exposure, and additional inputs for power and target experiment duration." style="width:80%;" >}}
 
-### Feature flag
+#### Feature flag
+Link a feature flag to control how traffic is split between variants.
+
 Click **Add a feature flag** to select the appropriate feature flag for your experiment. If you haven't created a feature flag, see [Getting Started with Feature Flags][4].
 
-### Randomization
-Configure the environment, targeting rules, variant split, and traffic exposure for your experiment.
+#### Randomization
+After selecting a feature flag, the randomization settings are pre-populated based on the flag's configuration. Adjust these settings as needed.
 
 1. Select the **Environment** for your experiment from the dropdown.
-1. Under **Targeting rules**, click **Add Filter** to define conditions and filter which users to include in the experiment. Click **Add Condition** to add additional conditions.
+1. Under **Targeting rules**:
+   1. Click **Add Filter** to define conditions and filter which users to include in the experiment.
+   1. Click **Add Condition** to set additional conditions.
 1. Under **Variants**, set how traffic is split between your control and treatment groups. Use the **Randomize users and split traffic** dropdown to choose an equal or custom split.
 1. Under **Traffic exposure**, set the percentage of targeted traffic to include in the experiment.
-1. Optionally, schedule a [staged rollout](#staged-experiment-rollout).
+1. Optionally, [schedule a staged rollout](#schedule-a-staged-rollout-optional).
+
+{{< img src="/product_analytics/experiment/exp_plan_launch_ui_randomization.png" alt="The Randomization section showing the environment set to staging, a targeting rule with an IF condition, two variants with an equal 50/50 split between Control (False) and variant B (True), and traffic exposure set to 100% of targeted traffic with an Add Rollout Steps option." style="width:80%;" >}}
+
+#### Schedule a staged rollout (optional)
+
+To gradually ramp up experiment traffic instead of launching to all users at once:
+
+1. In the **Randomization** section, click **Add Rollout Steps** and select a rollout configuration.
+1. Adjust the **Traffic exposure** percentage for each step as needed.
+1. Set the hold duration between steps using the **Scheduled rollout by holding between steps for** dropdown.
+
+At each rollout stage, Datadog samples a percentage of eligible users to include in the experiment. Users outside the sample still see the default experience but are not included in experiment results.
 
 {{% collapse-content title="Additional configuration settings (optional)" level="h4" expanded=false %}}
 
-#### Notifications
+##### Notifications
 Select recipients from the **Recipients** dropdown to receive updates on your experiment.
 
-#### Statistical analysis plan
+##### Statistical analysis plan
 Datadog uses sequential statistical analysis by default. This method provides statistically valid confidence intervals throughout the experiment, so you can make decisions at any time.
 
 To use a different statistical method:
@@ -90,34 +117,24 @@ To use a different statistical method:
 1. Toggle **CUPED calculation** to reduce variance and improve experiment sensitivity.
 1. Toggle **Multiple testing correction** to adjust for multiple comparisons across metrics.
 
-#### Split-by exploration dimensions
-Expand the **Split-by exploration dimensions** section. Select properties from the **Properties to compute for dimensional analysis** dropdown to segment experiment results by context attributes.
+##### Split-by exploration dimensions
+Segment experiment results by context attributes.
+
+Expand the **Split-by exploration dimensions** section. Select properties from the **Properties to compute for dimensional analysis** dropdown.
 
 {{% /collapse-content %}}
 
 ## Launch your experiment
 
-After configuring your experiment, launch it to all users or schedule a staged rollout.
-
 To launch your experiment:
+
 1. Click **Start Experiment** to open the **Confirm starting the experiment** dialog.
-1. Review your experiment settings, then click **Start Experiment & Enable Flag** to launch the experiment and open the **Flag & Exposures** page.
+1. Review your experiment settings.
+1. Click **Start Experiment & Enable Flag** to launch the experiment.
 
-On the **Flag & Exposures** page, see the **Exposure balance check** section to confirm the expected split of users across variants. Then, click **View Exposures Log** to see a real-time list of traffic getting enrolled into your experiment.
-
-### Staged experiment rollout
-
-To gradually ramp up experiment traffic instead of launching to all users at once, add a rollout schedule:
-
-1. In the **Randomization** section, click **Add Rollout Steps** and select a rollout configuration.
-1. Adjust the **Traffic exposure** percentage for each step as needed.
-1. Set the hold duration between steps using the **Scheduled rollout by holding between steps for** dropdown.
-
-Datadog automatically captures a representative sample of traffic for the control group at each stage. Users not included in the sample receive the baseline variant and do not appear in experiment analysis. The proportion of users in each variant remains constant across rollout steps, which prevents enrollment timing from biasing results.
-
-## Next step
-
-[Reading Experiment Results][5]: Review and explore your experiment results.
+Launching the experiment opens the **Flag & Exposures** page:
+- Check the **Exposure balance check** to confirm users are split across variants as expected.
+- Click **View Exposures Log** to see a real-time list of traffic getting enrolled into your experiment.
 
 ## Further reading
 
@@ -128,3 +145,4 @@ Datadog automatically captures a representative sample of traffic for the contro
 [3]: /experiments/minimum_detectable_effect
 [4]: /getting_started/feature_flags/
 [5]: /experiments/reading_results
+[6]: https://app.datadoghq.com/product-analytics/experiments/settings/subject-types
