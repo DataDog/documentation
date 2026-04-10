@@ -644,6 +644,39 @@ result = Datadog::AIGuard.evaluate(
 {{% /tab %}}
 {{< /tabs >}}
 
+## Automatic integration with packages {#automatic-integration}
+
+AI Guard can automatically evaluate LLM calls made through supported AI ecosystem packages, without requiring manual API calls. When your application uses one of the supported packages, the Datadog tracer instruments it to evaluate those calls through AI Guard automatically. No code changes are required.
+
+{{< tabs >}}
+{{% tab "Node.js" %}}
+
+AI Guard supports automatic integration with the following packages:
+
+| Package | Supported versions | dd-trace-js version |
+| :------ | :----------------- | :--------------------------- |
+| [AI SDK][23] | `v6` | `>=5.95.0` |
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### Required environment variables {#automatic-integration-env-vars}
+
+Set the following environment variables in your application:
+
+| Variable              | Value                    |
+| :-------------------- | :----------------------- |
+| `DD_AI_GUARD_ENABLED` | `true`                   |
+| `DD_API_KEY`          | `<YOUR_API_KEY>`         |
+| `DD_APP_KEY`          | `<YOUR_APPLICATION_KEY>` |
+| `DD_TRACE_ENABLED`    | `true`                   |
+
+By default, automatic integrations run in monitoring mode: AI Guard evaluates calls and records results, but does not block requests. To enable blocking, set `DD_AI_GUARD_BLOCK` to `true` (equivalent to the `block` option in the [SDK](#sdks) and [REST API](#api)):
+
+| Variable            | Value  |
+| :------------------ | :----- |
+| `DD_AI_GUARD_BLOCK` | `true` |
+
 ## View AI Guard data in Datadog {#in-datadog}
 
 After completing the [setup steps](#setup) and using an [SDK](#sdks) to instrument your code, you can view your data in Datadog on the [AI Guard page][6].
@@ -775,3 +808,4 @@ The Security Signals explorers allow you to filter, prioritize, and investigate 
 [20]: https://app.datadoghq.com/security/ai-guard/settings/services
 [21]: https://app.datadoghq.com/security/ai-guard/settings/evaluation-sensitivity
 [22]: https://app.datadoghq.com/security/ai-guard/settings/sensitive-data-scanning
+[23]: https://www.npmjs.com/package/ai
