@@ -1,0 +1,25 @@
+---
+import { CodeBlock } from './CodeBlock';
+import { codeToHtml } from 'shiki';
+
+interface Props {
+  content: string;
+  language?: string;
+}
+
+const { content, language } = Astro.props;
+
+let highlightedCode = '';
+if (content) {
+  try {
+    highlightedCode = await codeToHtml(content, {
+      lang: language || 'text',
+      theme: 'github-light',
+    });
+  } catch {
+    // Unknown language — fall back to plain text display
+  }
+}
+---
+
+<CodeBlock client:load content={content} language={language} highlightedCode={highlightedCode} />

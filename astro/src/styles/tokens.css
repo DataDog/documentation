@@ -33,6 +33,12 @@
   --color-alert-success-border: #4caf50;
   --color-alert-success-text: #1b5e20;
 
+  /* Colors — Code */
+  --color-code-bg: #f6f8fa;
+  --color-code-text: #24292e;
+  --color-code-border: #e1e4e8;
+  --color-code-header-bg: #f1f3f5;
+
   /* Spacing */
   --space-xs: 0.25rem;
   --space-sm: 0.5rem;
@@ -42,6 +48,8 @@
 
   /* Typography */
   --font-family: system-ui, -apple-system, sans-serif;
+  --font-family-mono: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+  --font-size-sm: 0.875rem;
   --font-size-base: 1rem;
   --font-size-lg: 1.25rem;
   --line-height: 1.6;

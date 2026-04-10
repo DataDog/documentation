@@ -1,0 +1,45 @@
+---
+title: "CodeBlock Component"
+---
+
+# CodeBlock
+
+A styled code block for displaying source code with syntax highlighting, an optional language label, and a copy-to-clipboard button. Code is highlighted at build time with Shiki. The copy button uses Preact for client-side hydration.
+
+## Properties
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `content` | `string` | — | The code content to display (provided automatically by fenced code blocks) |
+| `language` | `string` | — | Language identifier shown as a label in the header |
+
+## Examples
+
+### Without language
+
+```
+This is a plain code block
+with no language specified.
+```
+
+### JavaScript
+
+```javascript
+const greeting = "Hello, world!";
+console.log(greeting);
+```
+
+### Python
+
+```python
+def greet(name: str) -> str:
+    return f"Hello, {name}!"
+```
+
+### Markdoc
+
+```markdoc
+{% alert type="info" %}
+This is an informational alert.
+{% /alert %}
+```

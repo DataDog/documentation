@@ -1,6 +1,16 @@
-import { defineMarkdocConfig, component } from '@astrojs/markdoc/config';
+import { defineMarkdocConfig, component, nodes } from '@astrojs/markdoc/config';
 
 export default defineMarkdocConfig({
+  nodes: {
+    fence: {
+      render: component('./src/components/CodeBlockIsland.astro'),
+      attributes: {
+        ...nodes.fence.attributes,
+        content: { type: String, render: true },
+        language: { type: String, render: true },
+      },
+    },
+  },
   tags: {
     alert: {
       render: component('./src/components/Alert.astro'),
