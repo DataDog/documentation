@@ -11,7 +11,7 @@ further_reading:
 
 ## Overview
 
-Use this guide to automate your Azure log forwarding setup with an Azure Resource Manager (ARM) template.
+Use this guide to set up and manage Azure automated log forwarding. You can configure log forwarding directly from Datadog or deploy it with an Azure Resource Manager (ARM) template.
 
 The ARM template deploys resources from a series of Azure services (storage accounts and function apps) into your subscriptions, which collect and forward logs to Datadog. These services automatically scale up or down to match log volume. Scaling is managed by a control plane, which is a set of function apps deployed to a subscription and region of your choice. Storage accounts and function apps are deployed in each of the subscriptions forwarding logs to Datadog.
 
@@ -31,7 +31,21 @@ Use the automated setup method if you want to:
 
 ## Setup
 
-Begin by opening the Azure Log Forwarding ARM template corresponding to your Azure environment, or by clicking **+ Add Log Collection** in the [Azure integration tile][14].
+### Configure Log Forwarding
+
+Use the **Configure Log Forwarding** flow to set up new or manage existing log forwarders directly from Datadog. You can use this flow to deploy automated log forwarding from scratch or update an existing setup, such as adding or removing subscriptions or modifying log filters.
+
+1. In Datadog, navigate to [**Integrations > Azure**][16].
+1. Click **Configure Log Forwarding**.
+1. Choose to deploy a new setup or update an existing one.
+1. Copy and paste the provided command in your Azure Cloud Shell.
+1. Select the subscriptions to forward logs from.
+1. Optionally, add or remove log filters.
+1. Click **Finish setup**.
+
+### ARM template
+
+Alternatively, you can deploy automated log forwarding with an Azure Resource Manager (ARM) template. Open the ARM template corresponding to your Azure environment, or click **+ Add Log Collection** in the [Azure integration tile][14]:
 
   - [Azure Public][1]
   - [Azure Government][6]
@@ -39,7 +53,7 @@ Begin by opening the Azure Log Forwarding ARM template corresponding to your Azu
 
 The sections below provide instructions for completing each page of the template.
 
-### Basics
+#### Basics
 
 1. Under **Project details**, select the management group. This is needed for the ARM template to grant permissions to the subscriptions you select for automated log forwarding.
 2. Under **Instance details**, select values for:
@@ -52,7 +66,7 @@ The sections below provide instructions for completing each page of the template
 
 3. Click **Next**.
 
-### Datadog configuration
+#### Datadog configuration
 
 1. Enter your [Datadog API key][2] value.
 2. Select your [Datadog Site][4].
@@ -61,15 +75,57 @@ The sections below provide instructions for completing each page of the template
 
 3. Click **Next**.
 
-### Deployment
+#### Deployment
 
 1. Click the checkbox to acknowledge the deployment warnings.
 2. Click **Review + create**.
 
-### Review + create
+#### Review + create
 
 1. Review the finalized deployment details.
 2. Click **Create**.
+
+## Log Analytics Workspaces
+
+You can forward logs from Azure Log Analytics Workspaces (LAWs) to Datadog through the automated log forwarder. Previously, only [diagnostic setting][13] logs from LAWs were supported, excluding logs that appear inside LAW Log Tables. With [Data Export Rules][17], logs from LAW Log Tables can also be forwarded to Datadog.
+
+### Restrictions
+
+- You can only set up forwarding for LAW resources within the same region as the log forwarder.
+- You can have a maximum of 10 Data Export Rules on a LAW. If the LAW has no remaining capacity for a Data Export Rule, delete an existing rule to make room.
+- Not all Log Tables can be exported. See Microsoft's list of [unsupported tables][18].
+
+### Forward logs from a Log Analytics Workspace
+
+1. If you haven't already created an automated log forwarder, follow the [Setup](#setup) instructions. If you already have a log forwarder, make sure it is updated to the latest version.
+1. In the [Azure Portal][19], navigate to the desired Log Analytics Workspace.
+1. Under **Settings**, click **Data export**.
+1. Click **New export rule**.
+1. Name the rule, check **Enable upon creation**, and click **Next**.
+1. Select the tables to export. You can modify this selection later by editing the Data Export Rule. Click **Next**.
+1. For **Destination type**, select **Storage Account**. Select the subscription containing your log forwarder, and choose a log forwarder Storage Account. These accounts typically have the prefix `ddlogstorage`. Click **Next**.
+1. Review the rule and click **Create**. Logs from the LAW start appearing in Datadog within a few minutes.
+
+### Troubleshooting
+
+#### Logs are not appearing in Datadog
+
+If you have created a Data Export Rule but do not see logs in Datadog:
+
+1. Verify the Data Export Rule is enabled.
+1. Verify the destination Storage Account is one created by the automated log forwarder (the name typically starts with `ddlogstorage`).
+1. In the Storage Account, inspect the containers. Containers with the `am-` prefix indicate LAW exports. If you only see containers with the `insights-` prefix, the Data Export Rule may be improperly configured.
+1. Verify the LAW has collected new logs within the past two hours.
+
+See Microsoft's [Data Export troubleshooting FAQ][20] for additional information.
+
+#### Selecting which logs are exported
+
+The Data Export Rule allows you to specify which Log Tables from your Log Analytics Workspace are exported. Edit the Data Export Rule to add or remove tables.
+
+#### Expected latency
+
+LAW logs typically appear in Datadog within 2-5 minutes but may take up to 20 minutes to first appear. LAW logs may have different properties from non-LAW logs.
 
 ## Architecture
 
@@ -156,3 +212,8 @@ The script first discovers any instances running in each subscription, then prom
 [13]: https://learn.microsoft.com/azure/azure-monitor/essentials/diagnostic-settings
 [14]: https://app.datadoghq.com/integrations/azure/add?config_azure-new-onboarding=true
 [15]: https://learn.microsoft.com/azure/azure-functions/
+[16]: https://app.datadoghq.com/integrations/azure
+[17]: https://learn.microsoft.com/azure/azure-monitor/logs/logs-data-export?tabs=portal
+[18]: https://learn.microsoft.com/azure/azure-monitor/logs/logs-data-export?tabs=portal#unsupported-tables
+[19]: https://portal.azure.com
+[20]: https://learn.microsoft.com/troubleshoot/azure/azure-monitor/log-analytics/workspaces/workspace-data-export-faq
