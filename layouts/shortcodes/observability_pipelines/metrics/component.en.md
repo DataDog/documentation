@@ -1,16 +1,16 @@
 Monitor the health of your destination with the following key metrics:
 
 `pipelines.component_sent_events_total`
-: Events successfully delivered.
+: Count of events successfully delivered in a time interval. Use the `cumsum` function to represent the cumulative total.
 
 `pipelines.component_discarded_events_total`
-: Events dropped.
+: Count of events dropped in a time interval. Use the `cumsum` function to represent the cumulative total.
 
 `pipelines.component_errors_total`
-: Errors in the destination component.
+: Count of errors in the destination component in a time interval. Use the `cumsum` function to represent the cumulative total.
 
 `pipelines.component_sent_events_bytes_total`
-: Total event bytes sent.
+: Count of event bytes sent in a time interval. Use the `cumsum` function to represent the cumulative total.
 
 `pipelines.utilization`
 : Worker resource usage.

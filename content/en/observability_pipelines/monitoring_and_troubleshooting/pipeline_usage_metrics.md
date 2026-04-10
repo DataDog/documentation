@@ -41,11 +41,11 @@ Uptime
 
 Bytes in
 : **Metric**: `pipelines.host.network_receive_bytes_total`
-: **Description:** The number of bytes received by the host on all interfaces. Use the `device` tag to filter per interface, for example `device:eth0`.
+: **Description:** The number of bytes received by the host on all interfaces in a time interval. Use the `device` tag to filter per interface, for example `device:eth0`. Use the `cumsum` function to represent the cumulative total.
 
 Bytes out
 : **Metric**: `pipelines.host.network_transmit_bytes_total`
-: **Description:** The number of bytes sent by the host on all interfaces. Use the `device` tag to filter per interface.
+: **Description:** The number of bytes sent by the host on all interfaces in a time interval. Use the `device` tag to filter per interface. Use the `cumsum` function to represent the cumulative total.
 
 ## Process metrics
 
@@ -55,7 +55,7 @@ Uptime
 
 CPU usage
 : **Metric**: `pipelines.cpu_usage_seconds_total`
-: **Description:** The amount of CPU time consumed by the Worker process in seconds (in the user and system space). The rate per second of that metric shows the proportion of the CPU used by the Worker.
+: **Description:** The amount of CPU time consumed by the Worker process in a time interval in seconds (in the user and system space). The rate per second of that metric shows the proportion of the CPU used by the Worker.
 
 Memory usage
 : **Metric**: `pipelines.resident_memory_used_bytes`
@@ -70,42 +70,42 @@ These metrics are available for sources, processors, and destinations.
 
 Events in
 : **Metric**: `pipelines.component_received_events_total`
-: **Description**: The number of events received by the component.
+: **Description**: The number of events received by the component in a time interval. Use the `cumsum` function to represent the cumulative total.
 : **Available for**: Sources, processors, and destinations.
 
 Events out
 : **Metric**: `pipelines.component_sent_events_total`
-: **Description**: The number of events the component sends downstream.
+: **Description**: The number of events the component sends downstream in a time interval. Use the `cumsum` function to represent the cumulative total.
 : **Available for**: Sources, processors, and destinations.
 
 Event bytes in
 : **Metric**: `pipelines.component_received_event_bytes_total`
-: **Description**: The byte size of events received by the component.
+: **Description**: The byte size of events received by the component in a time interval. Use the `cumsum` function to represent the cumulative total.
 : **Available for**: Sources, processors, and destinations.
 
 Event bytes out
 : **Metric**: `pipelines.component_sent_event_bytes_total`
-: **Description**: The byte size of events the component sends downstream.
+: **Description**: The byte size of events the component sends downstream in a time interval. Use the `cumsum` function to represent the cumulative total.
 : **Available for**: Sources, processors, and destinations.
 
 Errors
 : **Metric**: `pipelines.component_errors_total`
-: **Description**: The number of errors encountered by the component.
+: **Description**: The number of errors encountered by the component in a time interval. Use the `cumsum` function to represent the cumulative total.
 : **Available for**: Sources, processors, and destinations.
 
 Data dropped intentionally or unintentionally
 : **Metric**: `pipelines.component_discarded_events_total`
-: **Description**: The number of events dropped. **Note**: To break down this metric, use the `intentional:true` tag to filter for events that are intentionally dropped or the `intentional:false` tag for events that are not intentionally dropped.
+: **Description**: The number of events dropped in a time interval. Use the `cumsum` function to represent the cumulative total. **Note**: To break down this metric, use the `intentional:true` tag to filter for events that are intentionally dropped or the `intentional:false` tag for events that are not intentionally dropped.
 : **Available for**: Sources, processors, and destinations.
 
 Timed out events
 : **Metric**: `pipelines.component_timed_out_events_total`
-: **Description**: The number of events that waited more than 5 seconds to be sent to the first processor and resulted in a HTTP 503 error. This could happen when delivery of events are blocked.
+: **Description**: The number of events that waited more than 5 seconds to be sent to the first processor and resulted in a HTTP 503 error. This could happen when delivery of events are blocked. Use the `cumsum` function to represent the cumulative total.
 : **Available for**: HTTP-based sources that have a configured timeout, such as the Datadog Agent.
 
 Timed out requests
 : **Metric**: `pipelines.component_timed_out_requests_total`
-: **Description**: The number of requests that timed out for sources that send events to the Worker in batches using HTTP requests.
+: **Description**: The number of requests that timed out in a time interval for sources that send events to the Worker in batches using HTTP requests. Use the `cumsum` function to represent the cumulative total.
 : **Available for**: HTTP-based sources that have a configured timeout, such as the Datadog Agent.
 
 Utilization
