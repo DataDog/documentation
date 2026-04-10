@@ -7122,11 +7122,16 @@ menu:
       parent: security_platform
       identifier: security_research_feed
       weight: 12
+    - name: Security MCP Tools
+      url: security/mcp_server
+      parent: security_platform
+      identifier: security_mcp_server
+      weight: 13
     - name: Guides
       url: security/guide
       parent: security_platform
       identifier: security_guides
-      weight: 13
+      weight: 14
     - name: Cloud SIEM
       url: security/cloud_siem/
       pre: siem
