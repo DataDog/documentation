@@ -33,7 +33,7 @@ Allocated Memory
 _Requires: Java 11_
 
 Live Heap (v1.61.0+)
-: The objects and memory allocated by each method that have not yet been garbage collected. This is useful for investigating the overall memory usage of your service and identifying potential memory leaks. The profiler automatically uses the most accurate method available for your JVM version.<br />
+: The objects and memory allocated by each method that have not yet been garbage collected. This is useful for investigating the overall memory usage of your service and identifying potential memory leaks. The profiler automatically uses the most accurate engine available for your JVM version.<br />
 _Requires: Java 11+_
 
 Wall Time in Native Code
