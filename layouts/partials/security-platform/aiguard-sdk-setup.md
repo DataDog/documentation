@@ -9,7 +9,7 @@ If you don't use the Datadog Agent, the AI Guard evaluator API still works, but 
 
 Set the following environment variables in your application:
 
-{{- if eq $target "automatic" -}}
+{{ if eq $target "automatic" }}
 
 | Variable              | Value                    |
 |:----------------------|:-------------------------|
@@ -26,7 +26,7 @@ By default, automatic integrations follow the blocking configuration set in the 
 | :------------------ |:--------|
 | `DD_AI_GUARD_BLOCK` | `false` |
 
-{{- else -}}
+{{ else }}
 
 | Variable              | Value                    |
 |:----------------------|:-------------------------|
@@ -36,5 +36,5 @@ By default, automatic integrations follow the blocking configuration set in the 
 | `DD_ENV`              | `<YOUR_ENVIRONMENT>`     |
 | `DD_SERVICE`          | `<YOUR_SERVICE>`         |
 
-{{- end -}}
+{{ end }}
 
