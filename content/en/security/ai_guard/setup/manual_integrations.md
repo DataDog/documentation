@@ -15,24 +15,19 @@ further_reading:
 
 Manual integrations require additional configuration to enable AI Guard protection. Follow the instructions for each framework to set up AI Guard evaluations.
 
-## Set up the Datadog Agent
-
-Datadog SDKs use the [Datadog Agent][2] to send AI Guard data to Datadog. The Agent must be running and accessible to the SDK for you to see data in Datadog.
-
-If you don't use the Datadog Agent, the AI Guard evaluator API still works, but you can't see AI Guard traces in Datadog.
-
 ## Supported frameworks and libraries
 
 {{< tabs >}}
 {{% tab "Python" %}}
-<!-- TODO: confirm supported versions and tracer versions -->
-| Framework                                    | Supported Versions | Tracer Version |
-|----------------------------------------------|--------------------|----------------|
-| [Amazon Strands](#amazon-strands)            | <!-- TODO -->      | <!-- TODO -->  |
-| [LiteLLM Proxy](#litellm-proxy)             | <!-- TODO -->      | <!-- TODO -->  |
+| Framework                                     | Supported Versions | Tracer Version |
+|-----------------------------------------------|--------------------|----------------|
+| [Amazon Strands](#amazon-strands)             | >= 1.29.0          | >= 4.7.0       |
+| [LiteLLM Proxy](#litellm-proxy)               | >= 1.78.5          | >= 4.8.0       |
 
 {{% /tab %}}
 {{< /tabs >}}
+
+{{< partial name="security-platform/aiguard-sdk-setup.md" markdown="true" target="manual" >}}
 
 ## Integrations
 
@@ -65,7 +60,7 @@ The LiteLLM Proxy integration enables AI Guard evaluations for applications usin
 
 ### Setup
 
-<!-- TODO: add setup steps -->
+Install the
 
 ### Traced operations
 
@@ -79,5 +74,3 @@ The LiteLLM Proxy integration enables AI Guard evaluations for applications usin
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
-[2]: /agent/?tab=Host-based
