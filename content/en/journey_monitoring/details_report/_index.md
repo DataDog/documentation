@@ -31,7 +31,7 @@ Each created journey has a details report federating metrics and telemetry from 
 
 ## Journey and variant filters
 
-The left side of the report lists the journey and its [variants][5]. Each entry in the list is a filter. If the journey filter is selected, all data in the report will be based on the journey and all of its variants. If a variant is selected, the report will show data specfic to that variant. 
+The left side of the report lists the journey and its [variants][5]. Each entry in the list is a filter. If the journey filter is selected, all data in the report will be based on the journey and all of its variants. If a variant is selected, the report will show data specific to that variant. 
 
 <div class="alert alert-warning">By default, the journey is selected as the filter for the report.</div>
 
@@ -68,16 +68,16 @@ Click on an operation to open a side panel with details about its performance. D
 - The list of SLOs and monitors configured for the Operation
 - The volume of Operations, calculated using the `rum.measure.operation` metric
 - The Operation's success rate, calculated using the `rum.measure.operation` metric
-- The Operation's latency, calculated using the `rum.measure.operaiton.duration` metric
+- The Operation's latency, calculated using the `rum.measure.operation.duration` metric
 
 [INSERT IMAGE HERE]
 
-The side panel also includes a list of the backend services the Operation dependens on. Each entry includes metrics on the backend service's performance. Clicking onto a backend service will redirect you to the service's entry in the APM [Software Catalog][8]. 
+The side panel also includes a list of the backend services the Operation depends on. Each entry includes metrics on the backend service's performance. Clicking onto a backend service will redirect you to the service's entry in the APM [Software Catalog][8]. 
 
 
 ### Error Count
 
-The error count chart shows a timeseries of errors that ocurred while users were executing the journey. The data is imported from frontend issues in [Error Tracking][9]. You can click on the <strong>Investigate</strong> button to see the list of top issues. Clicking on any issue in the list will redirect you to the issue in Error Tracking.
+The error count chart shows a timeseries of errors that occurred while users were executing the journey. The data is imported from frontend issues in [Error Tracking][9]. You can click on the <strong>Investigate</strong> button to see the list of top issues. Clicking on any issue in the list will redirect you to the issue in Error Tracking.
 
 
 

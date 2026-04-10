@@ -1,7 +1,7 @@
 ---
 title: Journey Monitoring
 private: true
-description: "Monitor critial user flows through journeys and troubleshoot user experience and technical issues to improve journey performance."
+description: "Monitor critical user flows through journeys and troubleshoot user experience and technical issues to improve journey performance."
 further_reading:
 - link: '/journey_monitoring/map/'
   tag: 'Documentation'
@@ -40,7 +40,7 @@ A journey is defined as a start and an end. The start and end can either be acti
 
 Each journey can have one or more [variants][9], which are versions of the journey with a specific sequence of intermediate steps between the journey's start and end.
 
-[INSERT DIAGRAM HERRE]
+[INSERT DIAGRAM HERE]
 
 
 ## Metrics
@@ -48,7 +48,7 @@ Each journey can have one or more [variants][9], which are versions of the journ
 Each journey and its variants have three metrics measuring performance:
 - <strong>Traffic</strong>: Number of sessions that began the journey. It is based on the `rum.measure.feature` metric
 - <strong>Conversion</strong>: Percentage of sessions began and completed the journey. It is based on the `rum.measure.feature` metric
-- <strong>Time to convert</strong>: Aaverage time for a session to complete the journey. It is based on the `rum.measure.feature.duration` metric
+- <strong>Time to convert</strong>: Average time for a session to complete the journey. It is based on the `rum.measure.feature.duration` metric
 - <strong>Uptime</strong>: Based on the journey's [synthetic test suite][10] performance
 
 
@@ -67,7 +67,7 @@ Each journey and its variants have three metrics measuring performance:
 4. Select one or more end events
 5. Click <strong>Save Feature</strong>
 
-The right-hand funnel chart will automatically update based on the selected start and end events. The funnel contains data on the volume, conversion rate, and average to completeion for each step.
+The right-hand funnel chart will automatically update based on the selected start and end events. The funnel contains data on the volume, conversion rate, and average to completion for each step.
 
 <strong>Note</strong>: Mandatory fields will be pre-populated if you are starting from a suggested journey.
 
@@ -96,7 +96,7 @@ In the journey's details report, you can:
 [5]: /real_user_monitoring/rum_without_limits/
 [6]: /synthetics/browser_tests/
 [7]: /synthetics/mobile_app_testing/
-[8]: /prouct_analytics/
+[8]: /product_analytics/
 [9]:/journey_monitoring/details_report/variants/
 [10]:/journey_monitoring/uptime/
 [11]: /journey_monitoring/map/suggested_journeys/

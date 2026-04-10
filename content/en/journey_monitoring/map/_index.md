@@ -23,7 +23,7 @@ Journey Monitoring is in Preview.
 
 ## Overview
 
-The <strong>journey map</strong> displays all created and suggested journeys in a frontend application. Each  tile in the map displays metrics on a journey's volume and conversion rate. If the journey has at least one test Synthetic test defined, the tile will also display the journey's [Synthetic test suite][1] uptime metric.
+The <strong>journey map</strong> displays all created and suggested journeys in a frontend application. Each  tile in the map displays metrics on a journey's volume and conversion rate. If the journey has at least one Synthetic test defined, the tile will also display the journey's [Synthetic test suite][1] uptime metric.
 
 [INSERT IMAGE HERE]
 
