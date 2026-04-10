@@ -212,11 +212,13 @@ You can trigger a workflow from Slack manually with the `/datadog workflow` comm
 1. Click **Publish** to publish the workflow. A workflow must be published before you can trigger it from Slack. Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][11].
 1. In a Slack channel with the Datadog App, run `/datadog workflow` to select and run a workflow. You can also use the `/dd` alias to run /datadog commands.
 
-### Emoji reaction trigger
+### Emoji reaction Slack trigger
 
 You can configure a workflow to trigger automatically when a user adds a specific emoji reaction to a message in Slack.
 
-1. Add a Slack trigger to your workflow (or select an existing one).
+1. Add a Slack trigger to your workflow:
+   - If your workflow doesn't have any triggers, click **Add Trigger** > **Slack**.
+   - If your workflow already has one or more triggers and you're adding the Slack trigger as an additional trigger, click the **Add Trigger** (lightning bolt) icon and select **Slack**.
 1. In the **Configure** tab, select the Slack workspace where you want to listen for reactions.
 1. If the workspace requires the `emoji:read` permission, click **Enable Permission** to reinstall the Slack app with the necessary scope.
 1. Select one or more emoji reactions that trigger the workflow.
