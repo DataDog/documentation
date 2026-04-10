@@ -205,7 +205,7 @@
   },
   "llm-observability": {
     "name": "LLM Observability",
-    "description": "Manage LLM Observability projects, datasets, dataset records, and experiments via the Experiments API."
+    "description": "Manage LLM Observability projects, datasets, dataset records, experiments, and annotations."
   },
   "logs": {
     "name": "Logs",

@@ -311,7 +311,7 @@ function loadInstantSearch(currentPageWasAsyncLoaded) {
 
     const aisSearchBoxInput = document.querySelector('.ais-SearchBox-input');
     const aisSearchBoxSubmit = document.querySelector('.ais-SearchBox-submit');
-    const searchPathname = `${basePathName}search`;
+    const searchPathname = `${basePathName}search/`;
 
     const handleGlobalKeydown = (e) => {
         if ((e.key === '/' ||(e.key === 'k' && (e.metaKey || e.ctrlKey))) && !['input', 'textarea'].includes(e.target.tagName.toLowerCase()) && !e.target.isContentEditable) {
@@ -373,10 +373,11 @@ function loadInstantSearch(currentPageWasAsyncLoaded) {
 
             sendSearchRumAction(search.helper.state.query);
 
-            // Give query-url sync 500ms to update
-            setTimeout(() => {
-                window.location.pathname = searchPathname;
-            }, 500);
+            const query = search.helper.state.query?.trim();
+            const searchUrl = query
+                ? `${searchPathname}?s=${encodeURIComponent(query)}`
+                : searchPathname;
+            window.location.href = searchUrl;
         } else if (e.code === 'ArrowDown') {
             if (searchResultItems.length === 0) {
                 return;
@@ -410,7 +411,8 @@ function loadInstantSearch(currentPageWasAsyncLoaded) {
     const handleSearchbarSubmitClick = () => {
         if (aisSearchBoxInput.value) {
             sendSearchRumAction(search.helper.state.query);
-            window.location.pathname = searchPathname;
+            const query = aisSearchBoxInput.value.trim();
+            window.location.href = `${searchPathname}?s=${encodeURIComponent(query)}`;
         }
     };
     
