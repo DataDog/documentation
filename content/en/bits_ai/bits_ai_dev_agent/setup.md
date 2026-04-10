@@ -76,9 +76,9 @@ The default allowlist includes the following domains:
 | Language | Domains |
 |---|---|
 | Clojure/JVM | `repo.clojars.org` |
-| Go | `pkg.go.dev`, `proxy.golang.org`, `vuln.go.dev` |
+| Go | `pkg.go.dev`, `proxy.golang.org`, `sum.golang.org`, `vuln.go.dev` |
 | Java/JVM | `repo1.maven.org` |
-| JavaScript/TypeScript | `registry.npmjs.org` |
+| JavaScript/TypeScript | `registry.npmjs.org`, `registry.yarnpkg.com` |
 | .NET/C# | `api.nuget.org` |
 | PHP | `packagist.org`, `repo.packagist.org` |
 | Python | `files.pythonhosted.org`, `pypi.org`, `pypi.python.org`, `pythonhosted.org` |
