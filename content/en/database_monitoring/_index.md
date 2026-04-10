@@ -108,6 +108,10 @@ The [Query Samples view][3] helps you understand which queries are running at a 
 
 {{< img src="database_monitoring/dbm-explain-plan-3.png" alt="Database Monitoring" style="width:100%;">}}
 
+### Collect custom metrics
+
+Use [`custom_queries`][7] to collect metrics from your own database tables — application state, business counters, queue depths, or any data you want correlated with query performance.
+
 ### Visualize everything on enriched dashboards
 
 Quickly pinpoint problem areas by viewing database and system metrics together on enriched integration dashboards for both self-hosted and cloud-managed instances. Clone dashboards for customization and enhancement with your own custom metrics. Click the **Dashboards** link at the top of the Query Metrics and Query Samples pages to go to the Database Monitoring dashboards.
@@ -141,3 +145,4 @@ The [Recommendations page][6] highlights problems and optimization opportunities
 [4]: /database_monitoring/query_metrics/#explain-plans
 [5]: /database_monitoring/database_hosts/
 [6]: /database_monitoring/recommendations/
+[7]: /database_monitoring/custom_metrics/
