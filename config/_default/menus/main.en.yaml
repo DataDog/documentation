@@ -7865,7 +7865,7 @@ menu:
       weight: 3
     - name: Journey Monitoring
       url: journey_monitoring/
-      pre: journey-monitoring
+      pre: scorecards-wui
       identifier: journey_monitoring
       parent: digital_experience_heading
       weight: 25000
@@ -7878,7 +7878,7 @@ menu:
       url: /journey_monitoring/map/suggested_journeys
       parent: journey_monitoring_map
       identifier: journey_monitoring_map_suggested_journeys
-      weight: 1
+      weight: 101
     - name: Report
       url: /journey_monitoring/details_report
       parent: journey_monitoring
@@ -7888,13 +7888,12 @@ menu:
       url: /journey_monitoring/details_report/variants
       parent: journey_monitoring_details_report
       identifier: journey_monitoring_details_report_variants
-      weight: 1
+      weight: 201
     - name: Uptime
       url: /journey_monitoring/uptime
       parent: journey_monitoring
       identifier: journey_monitoring_uptime
       weight: 3
-      weight: 1
     - name: Synthetic Testing and Monitoring
       url: synthetics/
       pre: synthetics
