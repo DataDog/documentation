@@ -5,13 +5,12 @@ cascade:
     rank: 20
     subcategory: Guides du développeur
 disable_toc: true
-
 private: true
 title: Guides du développeur
 ---
 
-{{< whatsnext desc="Guides généraux :" >}}
-    {{< nextlink href="developers/guide/data-collection-resolution-retention">}}Collecte, résolution et rétention des données Datadog{{< /nextlink >}}
+{{< whatsnext desc="Général:" >}}
+    {{< nextlink href="developers/guide/data-collection-resolution">}}Collecte et résolution des données Datadog{{< /nextlink >}}
     {{< nextlink href="developers/guide/creating-a-jmx-integration">}}Créer une intégration JMX{{< /nextlink >}}
 {{< /whatsnext >}}
 

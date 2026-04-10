@@ -42,7 +42,7 @@ Datadog Database Monitoring provides deep visibility into databases across all o
 
 ## Getting started
 
-Datadog Database Monitoring supports self-hosted and managed cloud versions of **Postgres**, **MySQL**, **Oracle**, **SQL Server**, **MongoDB**, and **Amazon DocumentDB**. To get started with Datadog Database Monitoring, configure your database and install the Datadog Agent. For setup instructions, select your database technology:
+Datadog Database Monitoring supports self-hosted and managed cloud versions of **Postgres**, **MySQL**, **Oracle**, **SQL Server**, **MongoDB**, **Amazon DocumentDB**, and **ClickHouse**. To get started with Datadog Database Monitoring, configure your database and install the Datadog Agent. For setup instructions, select your database technology:
 
 ### Postgres
 
@@ -72,6 +72,11 @@ Datadog Database Monitoring supports self-hosted and managed cloud versions of *
 ### Amazon DocumentDB
 
 {{< partial name="dbm/dbm-setup-documentdb" >}}
+<p></p>
+
+### ClickHouse
+
+{{< partial name="dbm/dbm-setup-clickhouse" >}}
 <p></p>
 
 ## Explore Datadog Database Monitoring

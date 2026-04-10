@@ -10,20 +10,28 @@ further_reading:
 - link: /dashboards/widgets/pie_chart/
   tag: Documentation
   text: Widget Graphique circulaire
+- link: /dashboards/widgets/top_list/
+  tag: Documentation
+  text: Widget Top List
+- link: /dashboards/widgets/bar_chart/
+  tag: Documentation
+  text: Widget Bar Chart
 title: Widget Treemap
+widget_type: treemap
 ---
 
-Le widget Treemap vous permet de visualiser les proportions d'un ou de plusieurs ensembles de données. Il peut afficher un seul ensemble de données avec les proportions correspondantes, ou plusieurs avec des proportions imbriquées.
+Le widget Treemap vous permet d'afficher les proportions d'un ou plusieurs jeux de données. Ce widget peut afficher un seul jeu de données avec les proportions correspondantes, ou plusieurs jeux de données avec des proportions imbriquées.
 
-{{< img src="dashboards/widgets/treemap/treemap_overview.png" alt="Exemple de widget Treemap illustrant les nombres de pages vues uniques par pays et par navigateur selon les données Real User Monitoring (RUM). Chaque groupe extérieur est associé à une couleur qui représente le pays de l'utilisateur.">}}
+{{< img src="dashboards/widgets/treemap/treemap_overview.png" alt="Un widget Treemap affichant les pages vues uniques issues du jeu de données Real User Monitoring (RUM) au niveau du pays et du navigateur. Les groupes externes - distingués par couleur - indiquent le pays de l'utilisateur.">}}
 
 ## Configuration
 
-1. Sélectionnez une ou plusieurs sources de données à partir de métriques ou d'événements.
+1. Sélectionnez parmi les sources de données disponibles.
+2. Configurez la requête. Voir les ressources suivantes pour en savoir plus :
     * Métriques : consultez la documentation sur les [requêtes][1] pour configurer une requête de métrique.
     * Événements : consultez la documentation sur la [recherche de logs][2] pour configurer une requête d'événement de log.
-2. (Facultatif) Modifiez la requête avec une [formule][3].
-3. Personnalisez votre graphique.
+3. (Facultatif) Modifiez la requête avec une [formule][3].
+4. Personnalisez votre graphique.
 
 ## Personnalisation
 
@@ -43,25 +51,23 @@ Pour filtrer et mettre en évidence une catégorie spécifique, cliquez sur le r
 
 ### Accéder au menu contextuel
 
-Pour accéder au menu contextuel, passez d'abord votre curseur sur une catégorie spécifique : il peut s'agir d'une catégorie imbriquée ou d'un groupe (**Canada** ou **Canada > Chrome** dans l'exemple suivant). Un bouton représentant trois petits points verticaux s'affichent alors en haut à droite. Cliquez dessus pour afficher le menu contextuel.
+Pour accéder au menu contextuel, passez d'abord la souris sur une catégorie individuelle : il peut s'agir d'une catégorie imbriquée ou d'un groupe, tel que **Canada** ou **Canada > Edge** dans l'exemple suivant. Un bouton déroulant apparaît alors dans le coin supérieur droit. Lorsqu'il est cliqué, le menu contextuel s'affiche.
 
-{{< img src="dashboards/widgets/treemap/context_menu.png" alt="Les trois petits points verticaux apparaissent lorsque vous passez votre curseur sur une catégorie">}}
+{{< img src="dashboards/widgets/treemap/context_menu_dropdown.png" alt="Le bouton fléché déroulant s'affiche au survol d'une catégorie">}}
 
 ### Plein écran
 
-Lorsque vous visualisez le widget Treemap en mode plein écran, les [options standard d'affichage en plein écran][5] s'affichent.
-
-## API
-
-Ce widget peut être utilisé avec l'[API Dashboards][6].
-
-Le [schéma JSON][8] utilisé pour le widget Treemap est le suivant :
-
-{{< dashboards-widgets-api >}}
+L'affichage du widget Treemap en plein écran révèle l'ensemble standard des [options plein écran][5].
 
 ## Widget Graphique circulaire
 
-Comme pour le widget Treemap, il est possible d'utiliser le [widget Graphique circulaire][7] pour visualiser des proportions imbriquées. La principale différence entre les deux est que le widget Graphique circulaire affiche les proportions en tranches radiales, tandis que le widget Treemap affiche des rectangles imbriqués.
+Comme le widget Treemap, le [widget Pie Chart][8] peut également être utilisé pour afficher des proportions imbriquées. La principale différence entre les deux est que le widget Pie Chart affiche les proportions en secteurs radiaux, tandis que le widget Treemap affiche des rectangles imbriqués.
+
+## API
+
+Ce widget peut être utilisé avec l'**[API Dashboards][6]**. Le tableau ci-dessous définit le [schéma JSON du widget][7] :
+
+{{< dashboards-widgets-api >}}
 
 ## Pour aller plus loin
 
@@ -73,5 +79,5 @@ Comme pour le widget Treemap, il est possible d'utiliser le [widget Graphique ci
 [4]: /fr/dashboards/guide/context-links/
 [5]: /fr/dashboards/widgets/#full-screen
 [6]: /fr/api/latest/dashboards/
-[7]: /fr/dashboards/widgets/pie_chart/
-[8]: /fr/dashboards/graphing_json/widget_json/
+[7]: /fr/dashboards/graphing_json/widget_json/
+[8]: /fr/dashboards/widgets/pie_chart/

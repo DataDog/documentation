@@ -11,6 +11,8 @@ further_reading:
 - link: "/service_management/incident_management/integrations/slack/"
   tag: "Documentation"
   text: "Integrate Slack with Datadog Incident Management"
+algolia:
+  tags: ["follow ups", "follow-up", "follow up"]
 ---
 
 ## Overview

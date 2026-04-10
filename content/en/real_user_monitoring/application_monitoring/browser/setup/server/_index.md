@@ -1,6 +1,6 @@
 ---
 title: Auto-Instrumentation
-description: "Automatically inject RUM Browser SDK into HTML responses through web server or proxy configuration for seamless monitoring setup."
+description: "Automatically inject RUM Browser SDK into HTML responses through web server or proxy configuration."
 code_lang: server
 type: multi-code-lang
 code_lang_weight: 2
@@ -35,17 +35,8 @@ Select a platform to start collecting RUM data on your application:
 {{< partial name="rum/rum-browser-setup.html" >}}
 <br>
 
-## Limitations
-
-Consider the following limitations when using auto-instrumentation:
-
-- This instrumentation method **does not support [advanced RUM configurations][1]**.
-- If your web server is acting as a proxy and the upstream server uses **end-to-end encryption (TLS)** or **content compression** (gzip, zstd, Brotli), the RUM Browser SDK **cannot be injected**. To ensure proper instrumentation:
-  - **Disable content compression** on the upstream server.
-  - **Enable TLS origination** on the web server.
+{{% rum-browser-auto-instrumentation-limitations %}}
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
-[1]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/

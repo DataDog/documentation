@@ -190,6 +190,8 @@ If you haven't already, install the [Datadog-Azure integration][5] to collect me
    | `DD_SITE` | Your [Datadog site][2]. For example, {{< region-param key=dd_site code="true" >}}. |
    | `DD_AZURE_RESOURCE_GROUP` | Your Azure resource group. Only required for Azure Functions on the [Flex Consumption plan][8]. |
 
+   {{% svl-tracing-env %}}
+
 7. **Configure Unified Service Tagging**. You can collect metrics from your Azure Functions by installing the [Datadog Azure integration][5]. To correlate these metrics with your traces, first set the `env`, `service`, and `version` tags on your resource in Azure. Then, configure the following environment variables.
 
    | Name | Value |
@@ -202,6 +204,14 @@ If you haven't already, install the [Datadog-Azure integration][5] to collect me
 
 - You can view your Azure Functions traces in [Trace Explorer][3]. Search for the service name you set in the `DD_SERVICE` environment variable to see your traces.
 - You can use the [Serverless > Azure Functions][4] page to see your traces enriched with telemetry collected by the [Datadog Azure integration][5].
+
+## Profiling
+
+<div class="alert alert-info">
+Datadog's Continuous Profiler is available in preview for Python and Node.js on Azure Functions.
+</div>
+
+To enable the [Continuous Profiler][10], set the environment variable `DD_PROFILING_ENABLED=true`.
 
 ## Troubleshooting
 
@@ -228,3 +238,4 @@ You can collect [debug logs][6] for troubleshooting. To configure debug logs, us
 [7]: /getting_started/tagging/unified_service_tagging/
 [8]: https://learn.microsoft.com/en-us/azure/azure-functions/flex-consumption-plan
 [9]: /serverless/azure_app_service/windows_code/?tab=net
+[10]: /profiler/
