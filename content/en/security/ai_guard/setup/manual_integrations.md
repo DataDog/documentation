@@ -45,7 +45,7 @@ Install dd-trace-py v4.7.0 or later:
 pip install ddtrace>=4.7.0
 ```
 
-Define the entry point for the integration with a plugin or hook provider:
+Next, define the entry point for the integration with a plugin or hook provider:
 
 * Plugin (recommended):
 
@@ -109,7 +109,8 @@ guardrails:
       block: true
 ```
 
-The guardrail supports all three modes: `pre_call`, `post_call`, and `during_call`. Apply it to both inputs and outputs.
+The guardrail supports all three modes: `pre_call`, `post_call`, and `during_call`.
+
 By default, the guardrail follows the blocking configuration set in the AI Guard service settings. To disable blocking, set the `block` parameter to `false` (equivalent to the `block` option in the [SDK][2] and [REST API][3]).
 
 [1]: https://docs.litellm.ai/docs/simple_proxy
