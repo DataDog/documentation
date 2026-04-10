@@ -1,7 +1,8 @@
 ---
 import { CodeBlock } from './CodeBlock';
 import { codeToHtml } from 'shiki';
-import datadogTheme from '../styles/shiki-datadog';
+import datadogLight from '../styles/shiki-datadog';
+import datadogDark from '../styles/shiki-datadog-dark';
 
 interface Props {
   content: string;
@@ -26,7 +27,11 @@ if (content) {
   try {
     highlightedCode = await codeToHtml(content, {
       lang: language || 'text',
-      theme: datadogTheme,
+      themes: {
+        light: datadogLight,
+        dark: datadogDark,
+      },
+      defaultColor: 'light',
     });
   } catch {
     // Unknown language — fall back to plain text display

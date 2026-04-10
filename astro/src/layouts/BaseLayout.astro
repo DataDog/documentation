@@ -13,8 +13,57 @@ const { title } = Astro.props;
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
+    <script is:inline>
+      (function () {
+        const saved = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const theme = saved || (prefersDark ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', theme);
+      })();
+    </script>
   </head>
   <body>
+    <button
+      id="theme-toggle"
+      type="button"
+      aria-label="Toggle dark mode"
+    >
+    </button>
     <slot />
+    <script is:inline>
+      (function () {
+        const btn = document.getElementById('theme-toggle');
+        function update() {
+          const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+          btn.textContent = isDark ? '\u2600\uFE0F' : '\uD83C\uDF19';
+        }
+        update();
+        btn.addEventListener('click', function () {
+          const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+          const next = isDark ? 'light' : 'dark';
+          document.documentElement.setAttribute('data-theme', next);
+          localStorage.setItem('theme', next);
+          update();
+        });
+      })();
+    </script>
+    <style>
+      #theme-toggle {
+        position: fixed;
+        top: var(--space-sm);
+        right: var(--space-sm);
+        background: none;
+        border: var(--border-width) solid var(--color-border);
+        border-radius: var(--border-radius);
+        font-size: var(--font-size-lg);
+        cursor: pointer;
+        padding: var(--space-xs) var(--space-sm);
+        line-height: 1;
+        z-index: 1000;
+      }
+      #theme-toggle:hover {
+        border-color: var(--color-brand);
+      }
+    </style>
   </body>
 </html>
