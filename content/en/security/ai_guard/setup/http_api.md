@@ -19,6 +19,8 @@ AI Guard provides a single JSON:API endpoint:
 
 <div class="alert alert-info">The endpoint URL varies by region. Ensure you're using the correct Datadog site for your organization.</div>
 
+<div class="alert alert-warning">HTTP API requests do not send traces to Datadog. AI Guard evaluations performed through the HTTP API do not appear in the Datadog UI. To view AI Guard activity in Datadog, use the <a href="/security/ai_guard/setup/sdk/">SDK</a> instead.</div>
+
 ## Examples {#api-examples}
 {{% collapse-content title="Generic API example" level="h3" expanded=false id="generic-api-example" %}}
 ### Request {#api-example-generic-request}
