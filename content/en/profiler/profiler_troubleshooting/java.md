@@ -127,7 +127,9 @@ The [Trace to Profiling integration][3] identifies code hotspots in slow traces.
 
 The following settings allow fine-grained control over the profiler engines. These are typically not needed for standard use cases. For detailed information about each profiler type, see the corresponding sections above: [CPU profiling](#cpu-profiling), [Wallclock](#wallclock), [Allocation profiling](#allocation-profiling), and [Live heap profiling](#live-heap-profiling).
 
-**Note**: `DD_PROFILING_HEAP_ENABLED` / `-Ddd.profiling.heap.enabled` is the main toggle for all live heap profiling. When set to `false`, it disables both the Datadog native engine and the JFR `jdk.OldObjectSample` fallback. `DD_PROFILING_DDPROF_LIVEHEAP_ENABLED` is a Datadog-engine-specific override that only controls the native implementation; the JFR fallback is unaffected by it.
+**Note**:
+  - `DD_PROFILING_HEAP_ENABLED` controls all live heap profiling. Setting it to `false` disables both the Datadog native engine and the JFR `jdk.OldObjectSample` fallback.                                                        
+  - `DD_PROFILING_DDPROF_LIVEHEAP_ENABLED` only controls the Datadog native engine. The JFR fallback is unaffected by this setting.     
 
 | Environment variable | System property | Description |
 |---------------------|-----------------|-------------|
