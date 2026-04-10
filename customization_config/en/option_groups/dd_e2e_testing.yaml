@@ -1,0 +1,40 @@
+dd_e2e_mobile_prog_lang_options:
+  - id: swift
+    default: true
+  - id: kotlin
+  - id: java
+
+dd_e2e_backend_prog_lang_options:
+  - id: javascript
+    default: true
+  - id: python
+  - id: ruby
+  - id: go
+  - id: java
+
+dd_e2e_database_options:
+  - id: postgres
+    default: true
+  - id: mysql
+  - id: mongo_db
+
+dd_e2e_postgres_host_options:
+  - id: self_hosted
+    default: true
+  - id: rds
+  - id: docker
+  - id: kubernetes
+
+dd_e2e_mysql_host_options:
+  - id: self_hosted
+    default: true
+  - id: rds
+  - id: docker
+  - id: kubernetes
+
+dd_e2e_mongo_db_host_options:
+  - id: standalone
+    default: true
+  - id: replica_set
+  - id: sharded_cluster
+

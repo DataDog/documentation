@@ -7,7 +7,7 @@ aliases:
 private: false
 code_lang: ruby
 type: multi-code-lang
-code_lang_weight: 60
+code_lang_weight: 50
 further_reading:
     - link: 'agent'
       tag: 'Documentation'
@@ -16,24 +16,23 @@ further_reading:
 
 {{< partial name="dynamic_instrumentation/beta-callout.html" language="Ruby" limitations_anchor="unsupported-features" >}}
 
-Dynamic Instrumentation is a feature provided by the Datadog tracing library. If you are already using [APM to collect traces][1] for your application, ensure your Agent and tracing library are on the required version. Then, go directly to enabling Dynamic Instrumentation in step 4.
+Dynamic Instrumentation is a feature of the Datadog tracing library that lets you add instrumentation to your application at runtime without code changes or redeployments. Follow these instructions to set up Dynamic Instrumentation for Ruby.
 
-## Requirements
+## Prerequisites
 
-Dynamic Instrumentation for Ruby has the following requirements:
+Before you begin, review the [Dynamic Instrumentation prerequisites][12]. Ruby applications also require:
 
-- **Ruby version**: Ruby 2.6 or higher
+- **Tracing library**: [`ddtrace`][13] version 2.9.0 or higher. See the [installation instructions][2] for setup details.
+- **Ruby version**: Ruby 2.6 or higher.
 - **Ruby implementation**: Only MRI (CRuby) is supported. JRuby and other Ruby implementations are not supported.
 - **Web framework**: Only Rack-based applications are supported (including Rails, Sinatra, and other Rack-compatible frameworks). Background processes and jobs (including Sidekiq, Resque, etc.) are not supported.
 - **Environment**: `RAILS_ENV` or `RACK_ENV` must be set to `production`. Development environments are not supported.
 
 ## Installation
 
-1. Install or upgrade your Agent to version [7.49.0][7] or higher.
-2. If you don't already have APM enabled, in your Agent configuration, set the `DD_APM_ENABLED` environment variable to `true` and listening to the port `8126/TCP`.
-3. Install or upgrade the Ruby tracing library to version 2.9.0 or higher, by following the [relevant instructions][2].
-4. Run your service with Dynamic Instrumentation enabled by setting the `DD_DYNAMIC_INSTRUMENTATION_ENABLED` environment variable to `true`. Specify `DD_SERVICE`, `DD_ENV`, and `DD_VERSION` Unified Service Tags so you can filter and group your instrumentations and target active clients across these dimensions.
-5. After starting your service with Dynamic Instrumentation enabled, you can start using Dynamic Instrumentation on the [APM > Dynamic Instrumentation page][3].
+1. If you don't already have APM enabled, in your Agent configuration, set the `DD_APM_ENABLED` environment variable to `true` and listening to the port `8126/TCP`.
+2. Run your service with Dynamic Instrumentation enabled by setting the `DD_DYNAMIC_INSTRUMENTATION_ENABLED` environment variable to `true`. Specify `DD_SERVICE`, `DD_ENV`, and `DD_VERSION` Unified Service Tags so you can filter and group your instrumentations and target active clients across these dimensions.
+3. After starting your service with Dynamic Instrumentation enabled, you can start using Dynamic Instrumentation on the [APM > Dynamic Instrumentation page][3].
 
 **Note**: Dynamic Instrumentation initializes when the application processes its first HTTP request. Ensure your application receives at least one request after startup before creating probes.
 
@@ -117,13 +116,13 @@ The following features available in other languages are not supported for Ruby:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/trace_collection/
 [2]: /tracing/trace_collection/dd_libraries/ruby/
 [3]: https://app.datadoghq.com/dynamic-instrumentation
 [4]: /getting_started/tagging/unified_service_tagging
 [5]: /dynamic_instrumentation/
-[7]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
 [8]: /dynamic_instrumentation/#creating-log-probes
 [9]: /integrations/guide/source-code-integration/?tab=ruby
 [10]: /dynamic_instrumentation/sensitive-data-scrubbing/#custom-identifier-redaction
 [11]: /dynamic_instrumentation/expression-language/
+[12]: /dynamic_instrumentation/#prerequisites
+[13]: https://github.com/DataDog/dd-trace-rb

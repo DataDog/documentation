@@ -101,12 +101,9 @@ Set up the Google Pub/Sub destination and its environment variables when you [se
 
 ##### Enable TLS
 
-Toggle the switch to **Enable TLS** if your organization requires secure connections with custom certificates.
-- `Server Certificate Path`: The path to the certificate file that has been signed by your Certificate Authority (CA) Root File in DER or PEM (X.509).
-- `CA Certificate Path`: The path to the certificate file that is your Certificate Authority (CA) Root File in DER or PEM (X.509).
-- `Private Key Path`: The path to the `.key` private key file that belongs to your Server Certificate Path in DER or PEM (PKCS#8) format.
+{{% observability_pipelines/tls_settings %}}
 
-##### Buffering options
+##### Buffering
 
 {{% observability_pipelines/destination_buffer %}}
 
@@ -180,9 +177,9 @@ See the [Observability Pipelines Metrics][8] for a full list of available health
 
 A batch of events is flushed when one of these parameters is met. See [event batching][6] for more information.
 
-| Max Events     | Max Bytes       | Timeout (seconds)   |
-|----------------|-----------------|---------------------|
-| 1,000          | 10,000,000      | 1                   |
+| Maximum Events | Maximum Size (MB) | Timeout (seconds)   |
+|----------------|-------------------|---------------------|
+| 1,000          | 10                | 1                   |
 
 [1]: https://app.datadoghq.com/observability-pipelines
 [2]: https://cloud.google.com/docs/authentication#auth-flowchart

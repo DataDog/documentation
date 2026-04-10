@@ -1,4 +1,5 @@
 ---
+id: remote_configuration
 title: Remote Configuration
 short_definition: "Remote Configuration enables users to remotely configure and change the behavior of Datadog components deployed in their environment."
 synonyms:

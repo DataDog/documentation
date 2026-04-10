@@ -1,4 +1,5 @@
 ---
+id: top_list
 title: top list
 core_product:
   - dashboards

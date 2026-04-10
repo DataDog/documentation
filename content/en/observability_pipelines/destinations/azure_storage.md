@@ -37,7 +37,7 @@ Enter a prefix that you want to apply to all key objects.
 - See [template syntax][6] if you want to route logs to different object keys based on specific fields in your logs.
 	- **Note**: Datadog recommends that you start your prefixes with the directory name and without a lead slash (`/`). For example, `app-logs/` or `service-logs/`.
 
-#### Buffering options
+#### Buffering
 
 {{% observability_pipelines/destination_buffer %}}
 
@@ -67,9 +67,9 @@ Enter a prefix that you want to apply to all key objects.
 
 A batch of events is flushed when one of these parameters is met. See [event batching][5] for more information.
 
-| Max Events     | Max Bytes       | Timeout (seconds)   |
-|----------------| ----------------| --------------------|
-| None           | 100,000,000     | 900                 |
+| Maximum Events | Maximum Size (MB) | Timeout (seconds)   |
+|----------------|-------------------|---------------------|
+| None           | 100               | 900                 |
 
 [1]: /logs/log_configuration/archives/
 [2]: /logs/log_configuration/rehydrating/

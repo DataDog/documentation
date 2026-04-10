@@ -12,7 +12,7 @@ further_reading:
   tag: Documentation
   text: En savoir plus sur l'utilisation d'OAuth pour les intégrations basées sur
     l'API
-title: Références pour les ressources d'intégration
+title: Référence des actifs dʼintégration
 ---
 ## Présentation
 
@@ -101,7 +101,7 @@ Le fichier `service_check.json` décrit les checks de service effectués par l'i
 
 Vous trouverez ci-dessous la liste complète des attributs obligatoires pour le fichier `service_checks.json` : 
 
-| Attribut       | Rôle                                                                                                                |
+| Attribut       | Description                                                                                                                |
 | --------------- | -------------------------------------------------------------------------------------------------------------------------- |
 | `agent_version` | La version minimale prise en charge de l'Agent.                                                                                           |
 | `integration`   | Le nom de l'intégration qui envoie le check de service. Doit correspondre au `tile.title` non normalisé de `manifest.json`.   |
@@ -118,10 +118,10 @@ Le fichier `metadata.csv` décrit toutes les métriques pouvant être recueillie
 
 Vous trouverez ci-dessous la liste complète des attributs obligatoires et facultatifs pour le fichier `metadata.csv` : 
 
-| Nom de la colonne     | Obligatoire ou facultatif | Rôle                                                                                                                                                                                                                                                                                                                             |
+| Nom de la colonne     | Obligatoire ou facultatif | Description                                                                                                                                                                                                                                                                                                                             |
 | --------------- | ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `metric_name`   | Obligatoire          | Nom de la métrique.                                                                                                                                                                                                                                                                                                                     |
-| `metric_type`   | Obligatoire          | Type de la métrique. Pour une liste des types d'envoi de métriques disponibles, consultez la section [Types de métriques][6].                                                                                                                                                                                                                                                                                                                |
+| `metric_type`   | Obligatoire          | Le type de la métrique, qui détermine la façon dont Datadog traite et stocke les données. Pour obtenir la liste complète des types pris en charge, consultez les [types intégrés à Datadog][6].                                                                                                                                                                                                                                                                                                                |
 | `interval`      | Facultatif           | Intervalle de collecte de la métrique en secondes.                                                                                                                                                                                                                                                                                            |
 | `unit_name`     | Facultatif           | Unité de la métrique. Pour une liste complète des unités prises en charge, consultez la section [Unités de métriques][7].                                                                                                                                                                                                                                                                              |
 | `per_unit_name` | Facultatif           | S'il existe une sous-unité, comme `request per second`.                                                                                                                                                                                                                                                                               |
@@ -130,7 +130,7 @@ Vous trouverez ci-dessous la liste complète des attributs obligatoires et facul
 | `integration`   | Obligatoire          | Nom de l'intégration qui envoie la métrique. Doit correspondre à la version normalisée du `tile.title` dans le fichier `manifest.json`. Les caractères autres que les lettres, underscores, tirets et nombres sont convertis en underscores. Exemples : `Openstack Controller` -> `openstack_controller`, `ASP.NET` -> `asp_net` et `CRI-o` -> `cri-o`. |
 | `short_name`    | Obligatoire          | Version abrégée et lisible du nom de la métrique. Ne répétez pas le nom de l'intégration. Par exemple, `postgresql.index_blocks_hit` doit être abrégé en `idx blks hit`.                                                                                                                                                                                                                                                                                                     |
 | `curated_metric`| Facultatif           | Indique quelles métriques d'une intégration sont remarquables pour un type donné (`cpu` et `memory` sont acceptés). Ces métriques sont affichées dans l'interface utilisateur au-dessus des autres métriques de l'intégration. |
-| `sample_tags` | Facultatif           | Liste d'exemples de tags associés à la métrique, séparés par des virgules sans espaces. Par exemple : `host,region,deployment`. |
+| `sample_tags` | Facultatif           | Liste d'exemples de tags associés à la métrique, séparés par des virgules (sans espaces) et encadrés de guillemets. Par exemple, `"host,region,deployment"`. |
 
 ## Pour aller plus loin
 
@@ -141,7 +141,7 @@ Vous trouverez ci-dessous la liste complète des attributs obligatoires et facul
 [3]: http://yaml-online-parser.appspot.com/
 [4]: https://docs.datadoghq.com/fr/integrations/
 [5]: https://www.uuidgenerator.net
-[6]: https://docs.datadoghq.com/fr/metrics/types/#metric-types
+[6]: https://docs.datadoghq.com/fr/metrics/types/?tab=distribution#submission-types-and-datadog-in-app-types
 [7]: https://docs.datadoghq.com/fr/metrics/units/#unit-list
 [8]: https://docs.datadoghq.com/fr/getting_started/tagging/
 [9]: https://app.datadoghq.com/marketplace/

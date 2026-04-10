@@ -1,0 +1,173 @@
+<!--
+This partial contains advanced configuration instructions for the Unity SDK.
+It can be included directly in language-specific pages or wrapped in conditionals.
+-->
+
+If you have not set up the Datadog Unity SDK for RUM yet, follow the [in-app setup instructions][1] or see the [RUM Unity setup documentation][2]. Learn how to set up [OpenTelemetry with RUM Unity](#opentelemetry-setup).
+
+### Advanced initialization options
+
+`Custom Endpoint`
+: Optional  
+**Type**: String  
+**Default**: `undefined`  
+Send data to a custom endpoint instead of the default Datadog endpoint. This is useful for proxying data through a custom server.
+
+`SDK Verbosity`
+: Optional  
+**Type**: Enum  
+**Default**: `Warn`  
+The level of debugging information the Datadog SDK should output. Higher levels output more information. This option is helpful for getting debugging information from the SDK when something is not working as expected, or removing the SDK-related debugging entries from console logs.
+
+`Telemetry Sample Rate`
+: Optional  
+**Type**: Double  
+**Default**: `20`  
+The percentage rate at which Datadog sends internal telemetry data. A value of 100 means all telemetry data is sampled and sent to Datadog.
+
+### Automatic view tracking
+
+If you select `Enable Automatic Scene Tracking`, Datadog hooks into Unity's `SceneManager` to detect scenes loading and unloading, and start RUM Views appropriately. If you are using methods to move between scenes other than `SceneManager`, or would like to track changes in views that occur without `SceneManager`, you need to track views manually using `DdRum.StartView` and `DdRum.StopView`.
+
+### Track user actions
+
+You can track specific user actions such as taps, clicks, and scrolls using `DdRum.AddAction`.
+
+To manually register instantaneous RUM actions such as `RumActionType.Tap`, use `DdRum.AddAction()`. For continuous RUM actions such as `RumActionType.Scroll`, use `DdRum.StartAction()` or `DdRum.StopAction()`.
+
+For example:
+
+```csharp
+void DownloadResourceTapped(string resourceName) {
+    DatadogSdk.Instance.Rum.AddAction(
+        RumActionType.Tap,
+        resourceName,
+    );
+}
+```
+
+When using `DdRum.StartAction` and `DdRum.StopAction`, the `type` action must be the same for the Datadog Unity SDK to match an action's start with its completion.
+
+### Track resources
+
+Datadog provides `DatadogTrackedWebRequest` as a drop in replacement for `UnityWebRequest` to enable tracking of resources and HTTP calls from your RUM views.
+
+You can use it the same way as you would any other `UnityWebRequest`:
+
+```csharp
+var request = DatadogTrackedWebRequest.Get("https://httpbin.org/headers");
+yield return request.SendWebRequest();
+
+Debug.Log("Got result: " + request.downloadHandler.text);
+```
+
+### Track custom resources
+
+In addition to tracking resources automatically using `DatadogTrackedWebRequest`, you can track specific custom resources such as network requests or third-party provider APIs using the following methods:
+
+- `DdRum.StartResource`
+- `DdRum.StopResource`
+- `DdRum.StopResourceWithError`
+- `DdRum.StopResourceWithErrorInfo`
+
+For example:
+
+```csharp
+// in your network client:
+
+DatadogSdk.Instance.Rum.StartResource(
+    "resource-key",
+    RumHttpMethod.Get,
+    url,
+);
+
+// Later
+
+DatadogSdk.Instance.Rum.StopResource(
+    "resource-key",
+    200,
+    RumResourceType.Image
+);
+```
+
+The `string` used for `resourceKey` in both calls must be unique for the resource you are calling in order for the Unity Datadog SDK to match a resource's start with its completion.
+
+### Track custom errors
+
+To track specific errors, notify `DdRum` when an error occurs with the exception, the source, and any additional attributes.
+
+```csharp
+try
+{
+  // Error prone code
+}
+catch(Exception e)
+{
+  DatadogSdk.Instance.Rum.AddError(e, RumErrorSource.Source);
+}
+```
+
+## Track custom global attributes
+
+In addition to the [default RUM attributes][3] captured by the Datadog Unity SDK automatically, you can choose to add additional contextual information (such as custom attributes) to your RUM events to enrich your observability within Datadog.
+
+Custom attributes allow you to filter and group information about observed user behavior (such as the cart value, merchant tier, or ad campaign) with code-level information (such as backend services, session timeline, error logs, and network health).
+
+### Set a custom global attribute
+
+To set a custom global attribute, use `DdRum.AddAttribute`.
+
+* To add or update an attribute, use `DdRum.AddAttribute`.
+* To remove the key, use `DdRum.RemoveAttribute`.
+
+### Track user sessions
+
+Adding user information to your RUM sessions makes it possible to:
+
+* Follow the journey of a given user
+* Know which users are the most impacted by errors
+* Monitor performance for your most important users
+
+{% img src="real_user_monitoring/browser/advanced_configuration/user-api.png" alt="User API in the RUM UI" style="width:90%" /%}
+
+| Attribute   | Type   | Description                                                                     |
+| ----------- | ------ | ------------------------------------------------------------------------------- |
+| `usr.id`    | String | (Required) Unique user identifier.                                              |
+| `usr.name`  | String | (Optional) User friendly name, displayed by default in the RUM UI.              |
+| `usr.email` | String | (Optional) User email, displayed in the RUM UI if the user name is not present. |
+
+To identify user sessions, use `DatadogSdk.SetUserInfo`.
+
+For example:
+
+```csharp
+DatadogSdk.Instance.SetUserInfo("1234", "John Doe", "john@doe.com");
+```
+
+### Add custom user attributes
+
+You can add custom attributes to your user session. This additional information is automatically applied to logs, traces, and RUM events.
+
+To remove an existing attribute, set it to `null`.
+
+For example:
+
+```csharp
+DatadogSdk.Instance.AddUserExtraInfo(new ()
+{
+ { "attribute_1", "foo" },
+ { "attribute_2", null },
+});
+```
+
+## Clear all data
+
+Use `ClearAllData` to clear all data that has not been sent to Datadog.
+
+```csharp
+DatadogSdk.instance.ClearAllData();
+```
+
+[1]: https://app.datadoghq.com/rum/application/create
+[2]: /real_user_monitoring/application_monitoring/unity/setup/
+[3]: /real_user_monitoring/application_monitoring/unity/data_collected/

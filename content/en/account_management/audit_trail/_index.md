@@ -97,6 +97,12 @@ Audit Trail events have the same functionality as logs within the [Log Explorer]
 
 ### Natural language queries
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">
+This feature is not supported for your selected Datadog site ({{< region-param key="dd_site_name" >}}).
+</div>
+{{< /site-region >}}
+
 Use Natural Language Queries (NLQ) to describe what you're looking for in plain English. Datadog automatically translates your request into a structured audit trail query, making it easier to explore audit events without needing to write complex syntax.
 
 The system translates natural language input into Datadog queries and understands context such as users, actions, resources, and time ranges. It also detects relevant fields automatically, for example, "Who modified the payment dashboard last week" or "Show all role changes in the past 24 hours."

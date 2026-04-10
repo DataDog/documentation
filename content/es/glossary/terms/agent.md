@@ -1,4 +1,5 @@
 ---
+id: agent
 core_product:
 - Datadog Agent
 synonyms:

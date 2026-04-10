@@ -2,6 +2,9 @@
 title: Post Incident
 description: Manage postmortems and follow-up tasks after incident resolution
 further_reading:
+- link: "/incident_response/incident_management/post_incident/postmortems"
+  tag: "Documentation"
+  text: "Generate and manage postmortems"
 - link: "/incident_response/incident_management/setup_and_configuration/templates"
   tag: "Documentation"
   text: "Configure postmortem and message templates"
@@ -26,7 +29,7 @@ Use post-incident activities to:
 
 ## Postmortems
 
-Postmortems are essential for continuous improvement of your incident response process. After an incident is resolved, you can generate a postmortem that automatically populates with incident information using a Datadog Notebook or Confluence page.
+Postmortems are essential for continuous improvement of your incident response process. After an incident is resolved, you can generate a postmortem that automatically populates with incident information using a Datadog Notebook, Confluence page, or Google Drive document.
 
 An incident postmortem typically includes:
 
@@ -37,16 +40,7 @@ An incident postmortem typically includes:
 - **Action items**: Specific tasks to prevent recurrence
 - **Lessons learned**: Key takeaways for the organization
 
-After generating a postmortem, you can:
-
-1. Assign an owner to complete the postmortem documentation
-2. Track postmortem state (draft, in review, or published)
-3. Collaborate with team members using Notebook features
-4. Link related documents and resources
-
-To configure postmortem templates and customize the structure of your postmortems, navigate to [Incident Settings][1] and define templates that match your organization's needs.
-
-For more information, see [Postmortem Templates][2].
+For more information on generating postmortems and configuring templates, see [Incident Postmortems][2].
 
 ## Follow-ups
 
@@ -69,7 +63,7 @@ For more information on integrating status pages with your incident workflow, se
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/incidents/settings
-[2]: /incident_response/incident_management/setup_and_configuration/templates#postmortems
+[2]: /incident_response/incident_management/post_incident/postmortems
 [3]: /integrations/jira/
 [4]: /incident_response/case_management/
 [5]: /incident_response/incident_management/post_incident/follow-ups
