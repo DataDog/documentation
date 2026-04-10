@@ -17,9 +17,6 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/add-context-with-reference-tables/'
       tag: 'Blog'
       text: 'Add more context to your logs with Reference Tables'
-    - link: "https://www.datadoghq.com/blog/monitoring-load-balancer-logs"
-      tag: "Blog"
-      text: "Monitor your application and network load balancer logs"
 ---
 
 ## Overview

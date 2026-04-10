@@ -8,7 +8,6 @@ aliases:
   - /monitoring
 description: "Create monitors, configure notifications and automations, and manage your monitors using the alerting platform"
 further_reading:
-  
   - link: "/api/v1/monitors/"
     tag: "Documentation"
     text: "Datadog Monitors API"

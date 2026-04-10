@@ -14,9 +14,6 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/slack-incident-management/"
   tag: "Blog"
   text: "Manage incidents seamlessly with the Datadog integration for Slack"
-- link: "https://www.datadoghq.com/blog/servicenow-datadog-incident-response"
-  tag: "Blog"
-  text: "Integrate ServiceNow ITSM with Datadog to Accelerate Incident Response"
 ---
 
 ## Overview

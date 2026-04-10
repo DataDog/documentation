@@ -20,9 +20,6 @@ further_reading:
 - link: "/service_management/workflows/variables"
   tag: "Documentation"
   text: "Variables and Parameters"
-- link: "https://www.datadoghq.com/blog/bits-ai-sre-deeper-reasoning"
-  tag: "Blog"
-  text: "Meet the new Bits AI SRE: Deeper reasoning, twice as fast"
 ---
 
 You can create workflows or edit existing workflows from the [Workflow Automation][1] page. The page lists information about existing workflows, such as the workflow's owner, the trigger type, the dates that each workflow was last modified and executed, and whether the workflow is published or not.

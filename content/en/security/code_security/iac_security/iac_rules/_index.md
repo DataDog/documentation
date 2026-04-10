@@ -8,9 +8,6 @@ further_reading:
   - link: "/security/code_security/iac_security/exclusions"
     tag: "Documentation"
     text: "Configure IaC Security Exclusions"
-  - link: "https://www.datadoghq.com/blog/devsecops-2026-study-learnings"
-    tag: "Blog"
-    text: "Key learnings from the 2026 State of DevSecOps study"
 ---
 
 {{% site-region region="gov" %}}

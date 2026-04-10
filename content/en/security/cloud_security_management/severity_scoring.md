@@ -13,9 +13,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/cloudcraft-security/
   tag: Blog
   text: Visually identify and prioritize security risks using Cloudcraft
-- link: "https://www.datadoghq.com/blog/devsecops-2026-study-learnings"
-  tag: "Blog"
-  text: "Key learnings from the 2026 State of DevSecOps study"
 ---
 
 Accurate severity scores help security teams understand the risks that vulnerabilities pose to their environment. This guide explains how Cloud Security uses different measures of severity to calculate the scores.

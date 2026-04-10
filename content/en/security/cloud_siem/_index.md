@@ -6,9 +6,6 @@ aliases:
   - /security_platform/cloud_siem/
   - /security/cloud_siem/security_home/
 further_reading:
-- link: "https://www.datadoghq.com/blog/oracle-fusion-applications-integration"
-  tag: "Blog"
-  text: "Monitor Oracle Fusion Cloud Applications with Datadog"
 - link: "https://www.datadoghq.com/blog/cloud-siem-whats-new-rsa-2026"
   tag: "Blog"
   text: "What's new in Cloud SIEM: AI-powered investigations, enhanced threat intelligence, and scalable security operations"

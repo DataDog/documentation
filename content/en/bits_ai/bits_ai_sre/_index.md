@@ -8,9 +8,6 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/bits-ai-sre-deeper-reasoning"
     tag: "Blog"
     text: "Meet the new Bits AI SRE: Deeper reasoning, twice as fast"
-  - link: "https://www.datadoghq.com/blog/servicenow-datadog-incident-response"
-    tag: "Blog"
-    text: "Integrate ServiceNow ITSM with Datadog to Accelerate Incident Response"
 cascade:
     site_support_id: bits_ai_sre
 ---
