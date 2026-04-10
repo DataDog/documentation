@@ -49,7 +49,7 @@ As an alternative to managing custom rules in Datadog, the [datadog-custom-rules
 On every push to `main`, the GitHub Action runs `upload.py`, which:
 - **Creates** rulesets and rules that are new on disk
 - **Updates** rulesets and rules whose content has changed
-- **Deletes** rulesets and rules that have been removed from disk
+- **Deletes** rulesets and rules that have been removed the repository
 
 Only changed rules trigger API calls—unchanged rules are skipped.
 
