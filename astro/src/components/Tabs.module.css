@@ -1,63 +1,157 @@
 .tabs {
   margin-bottom: var(--space-md);
+  position: relative;
 }
 
 /* ── Tab navigation ── */
 
 .tabs__nav {
   display: flex;
-  gap: var(--space-xs);
-  border-bottom: var(--border-width-thick) solid var(--color-border);
+  gap: 0;
+  position: relative;
+  z-index: 2;
+  padding: 0;
+  margin: 0;
+  border-bottom: none;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-scrollbar) transparent;
+}
+
+/* Full-width bottom border behind tabs */
+.tabs__nav::after {
+  content: "";
+  display: block;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 0;
+  border-bottom: var(--border-width) solid var(--color-border);
+  z-index: 1;
+  pointer-events: none;
 }
 
 .tabs__button {
   padding: var(--space-sm) var(--space-md);
   font-family: var(--font-family);
-  font-size: var(--font-size-sm);
+  font-size: var(--font-size-base);
+  font-weight: 600;
   color: var(--color-text-muted);
-  background: none;
-  border: none;
-  border-bottom: var(--border-width-thick) solid transparent;
-  margin-bottom: calc(-1 * var(--border-width-thick));
+  background: transparent;
+  border: var(--border-width) solid transparent;
   cursor: pointer;
   white-space: nowrap;
+  position: relative;
+  display: inline-block;
+  z-index: 2;
 }
 
 .tabs__button:hover {
-  color: var(--color-text);
+  color: var(--color-brand);
+  background: var(--color-brand-tint);
+  border-color: transparent;
+  border-top-left-radius: var(--border-radius);
+  border-top-right-radius: var(--border-radius);
+  transition: color 0.2s ease, background-color 0.2s ease;
 }
 
+/* Active tab — card style with border merging into content panel */
 .tabs__button--active {
   color: var(--color-brand);
-  border-bottom-color: var(--color-brand);
+  background: var(--color-bg);
+  border-color: var(--color-border);
+  border-bottom-color: var(--color-bg);
+  border-top-left-radius: var(--border-radius);
+  border-top-right-radius: var(--border-radius);
+  margin-bottom: calc(-1 * var(--border-width));
+  padding-bottom: calc(var(--space-sm) + var(--border-width));
+  z-index: 3;
+  box-shadow: var(--shadow-brand);
+  transition: none;
+}
+
+/* Purple gradient line on top of active tab */
+.tabs__button--active::after {
+  content: '';
+  position: absolute;
+  top: calc(-1 * var(--border-width));
+  left: calc(-1 * var(--border-width));
+  width: calc(100% + 2 * var(--border-width));
+  height: var(--border-width-highlight);
+  background: linear-gradient(90deg, var(--color-brand), var(--color-brand-hover));
+  border-radius: var(--border-width-highlight) var(--border-width-highlight) 0 0;
+}
+
+.tabs__button--active:hover {
+  color: var(--color-brand);
+  background: var(--color-bg);
+}
+
+/* ── Panel (bordered content area) ── */
+
+.tabs__panel {
+  background: var(--color-bg);
+  border: var(--border-width) solid var(--color-border);
+  padding: var(--space-lg);
+  position: relative;
+  margin-top: calc(-1 * var(--border-width));
+  box-shadow: var(--shadow-sm);
+  border-radius: 0 0 var(--border-radius) var(--border-radius);
 }
 
 /* ── Pills variant (applied when tabs overflow) ── */
 
 .tabs--pills .tabs__nav {
   flex-wrap: wrap;
-  border-bottom: none;
-  gap: var(--space-xs);
+  gap: var(--space-sm);
+  margin-bottom: var(--space-md);
+  padding-top: var(--space-sm);
+  overflow-x: visible;
+}
+
+.tabs--pills .tabs__nav::after {
+  display: none;
 }
 
 .tabs--pills .tabs__button {
-  border: var(--border-width) solid var(--color-border);
-  border-radius: var(--border-radius-md);
+  border: var(--border-width) solid var(--color-border-dark);
+  border-radius: var(--border-radius);
   margin-bottom: 0;
+  font-weight: 400;
+  padding: 0 var(--space-sm);
+  height: var(--control-height-sm);
+  display: inline-flex;
+  align-items: center;
+  background: var(--color-bg);
+  color: var(--color-text);
 }
 
 .tabs--pills .tabs__button:hover {
-  border-color: var(--color-text-muted);
+  color: var(--color-brand);
+  background: var(--color-bg);
+  border-color: var(--color-border-dark);
+  border-radius: var(--border-radius);
 }
 
 .tabs--pills .tabs__button--active {
   background: var(--color-brand);
   color: var(--color-text-inverse);
   border-color: var(--color-brand);
+  box-shadow: none;
 }
 
-/* ── Panel ── */
+.tabs--pills .tabs__button--active::after {
+  display: none;
+}
 
-.tabs__panel {
-  padding: var(--space-md) 0;
+.tabs--pills .tabs__button--active:hover {
+  background: var(--color-brand);
+  color: var(--color-text-inverse);
+}
+
+.tabs--pills .tabs__panel {
+  border-radius: var(--border-radius);
+  margin-top: 0;
 }

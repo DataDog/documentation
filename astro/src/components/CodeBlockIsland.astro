@@ -1,20 +1,32 @@
 ---
 import { CodeBlock } from './CodeBlock';
 import { codeToHtml } from 'shiki';
+import datadogTheme from '../styles/shiki-datadog';
 
 interface Props {
   content: string;
   language?: string;
+  filename?: string;
+  wrap?: boolean;
+  collapsible?: boolean;
+  disable_copy?: boolean;
 }
 
-const { content, language } = Astro.props;
+const {
+  content,
+  language,
+  filename,
+  wrap = false,
+  collapsible = false,
+  disable_copy = false,
+} = Astro.props;
 
 let highlightedCode = '';
 if (content) {
   try {
     highlightedCode = await codeToHtml(content, {
       lang: language || 'text',
-      theme: 'github-light',
+      theme: datadogTheme,
     });
   } catch {
     // Unknown language — fall back to plain text display
@@ -22,4 +34,13 @@ if (content) {
 }
 ---
 
-<CodeBlock client:load content={content} language={language} highlightedCode={highlightedCode} />
+<CodeBlock
+  client:load
+  content={content}
+  language={language}
+  highlightedCode={highlightedCode}
+  filename={filename}
+  wrap={wrap}
+  collapsible={collapsible}
+  disableCopy={disable_copy}
+/>

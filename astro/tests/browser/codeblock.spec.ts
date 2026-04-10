@@ -5,10 +5,10 @@ test.describe('CodeBlock component', () => {
     await page.goto('/docs/components/codeblock');
   });
 
-  test('renders code blocks on the page', async ({ page }) => {
+  test('renders all code blocks on the page', async ({ page }) => {
     const codeBlocks = page.locator('[data-testid="code-block"]');
     await expect(codeBlocks.first()).toBeVisible();
-    expect(await codeBlocks.count()).toBeGreaterThanOrEqual(4);
+    expect(await codeBlocks.count()).toBeGreaterThanOrEqual(11);
   });
 
   test('renders code block without language label', async ({ page }) => {
@@ -24,23 +24,85 @@ test.describe('CodeBlock component', () => {
     await expect(jsBlock.locator('code')).toContainText('const greeting');
   });
 
-  test('each code block has a copy button', async ({ page }) => {
-    const codeBlocks = page.locator('[data-testid="code-block"]');
+  test('each code block without disable_copy has a copy button', async ({ page }) => {
+    const codeBlocks = page.locator('[data-testid="code-block"]:not([data-disable-copy])');
     const count = await codeBlocks.count();
 
     for (let i = 0; i < count; i++) {
+      // Copy button is hidden by default (opacity: 0); verify it exists in the DOM
       const copyBtn = codeBlocks.nth(i).locator('[data-testid="code-block-copy"]');
-      await expect(copyBtn).toBeVisible();
-      await expect(copyBtn).toHaveText('Copy');
+      await expect(copyBtn).toBeAttached();
+      await expect(copyBtn).toContainText('Copy');
     }
   });
 
-  test('copy button shows "Copied!" after click', async ({ page, context }) => {
+  test('copy button appears on hover and shows Copied! after click', async ({ page, context }) => {
     await context.grantPermissions(['clipboard-read', 'clipboard-write']);
     const firstBlock = page.locator('[data-testid="code-block"]').first();
+    const content = firstBlock.locator('[data-testid="code-block-content"]');
     const copyBtn = firstBlock.locator('[data-testid="code-block-copy"]');
 
+    // Hover over code content to reveal button
+    await content.hover();
+    await expect(copyBtn).toBeVisible();
+
     await copyBtn.click();
-    await expect(copyBtn).toHaveText('Copied!');
+    await expect(copyBtn).toContainText('Copied!');
+  });
+
+  // === Filename ===
+
+  test('renders filename in header', async ({ page }) => {
+    const filename = page.locator('[data-testid="code-block-filename"]').first();
+    await expect(filename).toBeVisible();
+    await expect(filename).toHaveText('app.py');
+  });
+
+  // === Collapsible ===
+
+  test('collapsible code block has toggle button', async ({ page }) => {
+    const collapsibleBlock = page.locator('[data-collapsible]').first();
+    const toggle = collapsibleBlock.locator('[data-testid="code-block-toggle"]');
+    await expect(toggle).toBeVisible();
+  });
+
+  test('toggle button collapses and expands code', async ({ page }) => {
+    const collapsibleBlock = page.locator('[data-collapsible]').first();
+    const toggle = collapsibleBlock.locator('[data-testid="code-block-toggle"]');
+    const content = collapsibleBlock.locator('[data-testid="code-block-content"]');
+
+    // Initially expanded
+    await expect(content).toBeVisible();
+    await expect(toggle).toHaveAttribute('aria-expanded', 'true');
+
+    // Click to collapse
+    await toggle.click();
+    await expect(content).toBeHidden();
+    await expect(toggle).toHaveAttribute('aria-expanded', 'false');
+
+    // Click to expand again
+    await toggle.click();
+    await expect(content).toBeVisible();
+    await expect(toggle).toHaveAttribute('aria-expanded', 'true');
+  });
+
+  // === Disable copy ===
+
+  test('disable_copy block has no copy button', async ({ page }) => {
+    const disabledBlock = page.locator('[data-disable-copy]').first();
+    await expect(disabledBlock).toBeVisible();
+    const copyBtn = disabledBlock.locator('[data-testid="code-block-copy"]');
+    expect(await copyBtn.count()).toBe(0);
+  });
+
+  // === Wrap ===
+
+  test('wrapped code block applies word-wrap styling', async ({ page }) => {
+    const wrapBlock = page.locator('[data-wrap]').first();
+    await expect(wrapBlock).toBeVisible();
+
+    const codeEl = wrapBlock.locator('code').first();
+    const whiteSpace = await codeEl.evaluate((el) => getComputedStyle(el).whiteSpace);
+    expect(whiteSpace).toBe('normal');
   });
 });

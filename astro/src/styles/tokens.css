@@ -2,6 +2,7 @@
   /* Colors — Brand */
   --color-brand: #632ca6;
   --color-brand-hover: #7b3fc4;
+  --color-brand-tint: rgba(99, 44, 166, 0.05);
 
   /* Colors — Text */
   --color-text: #333;
@@ -12,6 +13,8 @@
   --color-bg: #fff;
   --color-border: #ddd;
   --color-border-strong: #eee;
+  --color-border-dark: #c7c7c7;
+  --color-scrollbar: rgba(0, 0, 0, 0.2);
 
   /* Colors — Alert: info */
   --color-alert-info-bg: #e7f3fe;
@@ -34,10 +37,11 @@
   --color-alert-success-text: #1b5e20;
 
   /* Colors — Code */
-  --color-code-bg: #f6f8fa;
-  --color-code-text: #24292e;
-  --color-code-border: #e1e4e8;
-  --color-code-header-bg: #f1f3f5;
+  --color-code-bg: #fff;
+  --color-code-text: #000;
+  --color-code-border: #ddd;
+  --color-code-header-bg: rgba(119, 0, 255, 0.15);
+  --color-code-accent: rgba(119, 0, 255, 0.3);
 
   /* Spacing */
   --space-xs: 0.25rem;
@@ -53,13 +57,27 @@
   --font-size-base: 1rem;
   --font-size-lg: 1.25rem;
   --line-height: 1.6;
+  --line-height-code: 27px;
 
   /* Borders */
   --border-width: 1px;
   --border-width-thick: 2px;
+  --border-width-highlight: 3px;
   --border-width-accent: 4px;
   --border-radius: 4px;
   --border-radius-md: 6px;
+
+  /* Shadows */
+  --shadow-sm: 0 0 20px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 15px rgba(0, 0, 0, 0.25);
+  --shadow-md-hover: 0 4px 15px rgba(0, 0, 0, 0.45);
+  --shadow-brand: 0 -4px 12px rgba(99, 44, 166, 0.08);
+
+  /* Code */
+  --code-max-height: 350px;
+
+  /* Controls */
+  --control-height-sm: 2rem;
 
   /* Layout */
   --content-max-width: 48rem;

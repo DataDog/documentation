@@ -23,7 +23,7 @@ describe('CodeBlock component', () => {
     expect(html).not.toContain('data-language');
   });
 
-  it('renders a copy button', () => {
+  it('renders a copy button with text by default', () => {
     const html = render(h(CodeBlock, { content: 'test' }));
 
     expect(html).toContain('data-testid="code-block-copy"');
@@ -46,10 +46,89 @@ describe('CodeBlock component', () => {
     expect(html).toContain('plain text');
   });
 
-  it('always renders header with copy button even without language', () => {
+  it('always renders header even without language', () => {
     const html = render(h(CodeBlock, { content: 'test' }));
     const buttonCount = (html.match(/<button/g) || []).length;
 
     expect(buttonCount).toBe(1);
+  });
+
+  // === Filename ===
+
+  it('renders filename in header when provided', () => {
+    const html = render(h(CodeBlock, { content: 'code', filename: 'app.py' }));
+
+    expect(html).toContain('data-testid="code-block-filename"');
+    expect(html).toContain('app.py');
+  });
+
+  it('does not render filename element when not provided', () => {
+    const html = render(h(CodeBlock, { content: 'code', language: 'python' }));
+
+    expect(html).not.toContain('data-testid="code-block-filename"');
+  });
+
+  it('shows filename instead of language label when both are provided', () => {
+    const html = render(h(CodeBlock, { content: 'code', language: 'python', filename: 'app.py' }));
+
+    expect(html).toContain('app.py');
+    expect(html).toContain('data-language="python"');
+    expect(html).toContain('data-testid="code-block-filename"');
+  });
+
+  // === Disable copy ===
+
+  it('hides copy button when disableCopy is true', () => {
+    const html = render(h(CodeBlock, { content: 'code', disableCopy: true }));
+
+    expect(html).not.toContain('data-testid="code-block-copy"');
+  });
+
+  it('adds data-disable-copy attribute when disableCopy is true', () => {
+    const html = render(h(CodeBlock, { content: 'code', disableCopy: true }));
+
+    expect(html).toContain('data-disable-copy');
+  });
+
+  // === Collapsible ===
+
+  it('renders toggle button when collapsible is true', () => {
+    const html = render(h(CodeBlock, { content: 'code', collapsible: true }));
+
+    expect(html).toContain('data-testid="code-block-toggle"');
+    expect(html).toContain('aria-expanded="true"');
+  });
+
+  it('does not render toggle button by default', () => {
+    const html = render(h(CodeBlock, { content: 'code' }));
+
+    expect(html).not.toContain('data-testid="code-block-toggle"');
+  });
+
+  it('renders content visible by default when collapsible', () => {
+    const html = render(h(CodeBlock, { content: 'code', collapsible: true }));
+
+    expect(html).toContain('data-testid="code-block-content"');
+    expect(html).not.toContain('content--hidden');
+  });
+
+  it('adds data-collapsible attribute when collapsible', () => {
+    const html = render(h(CodeBlock, { content: 'code', collapsible: true }));
+
+    expect(html).toContain('data-collapsible');
+  });
+
+  // === Wrap ===
+
+  it('adds data-wrap attribute when wrap is true', () => {
+    const html = render(h(CodeBlock, { content: 'code', wrap: true }));
+
+    expect(html).toContain('data-wrap');
+  });
+
+  it('does not add data-wrap attribute by default', () => {
+    const html = render(h(CodeBlock, { content: 'code' }));
+
+    expect(html).not.toContain('data-wrap');
   });
 });
