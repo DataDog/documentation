@@ -16,25 +16,16 @@
   --color-border-dark: #c7c7c7;
   --color-scrollbar: rgba(0, 0, 0, 0.2);
 
-  /* Colors — Alert: info */
-  --color-alert-info-bg: #e7f3fe;
-  --color-alert-info-border: #2196f3;
-  --color-alert-info-text: #0d47a1;
-
-  /* Colors — Alert: warning */
-  --color-alert-warning-bg: #fff3e0;
-  --color-alert-warning-border: #ff9800;
-  --color-alert-warning-text: #e65100;
-
-  /* Colors — Alert: error */
-  --color-alert-error-bg: #ffebee;
-  --color-alert-error-border: #f44336;
-  --color-alert-error-text: #b71c1c;
-
-  /* Colors — Alert: success */
-  --color-alert-success-bg: #e8f5e9;
-  --color-alert-success-border: #4caf50;
-  --color-alert-success-text: #1b5e20;
+  /* Colors — Alert */
+  --color-alert-text: #4a4a4a;
+  --color-alert-info-bar: #006bc2;
+  --color-alert-info-label: #004a8c;
+  --color-alert-danger-bar: #facc00;
+  --color-alert-danger-label: #7f4205;
+  --color-alert-warning-bar: #eb364b;
+  --color-alert-warning-label: #9b3908;
+  --color-alert-tip-bar: #9364cd;
+  --color-alert-tip-label: #4a2c6a;
 
   /* Colors — Code */
   --color-code-bg: #fff;
@@ -42,6 +33,8 @@
   --color-code-border: #ddd;
   --color-code-header-bg: rgba(119, 0, 255, 0.15);
   --color-code-accent: rgba(119, 0, 255, 0.3);
+  --color-code-inline-bg: #f2f2f2;
+  --color-code-inline-text: #555;
 
   /* Spacing */
   --space-xs: 0.25rem;
@@ -51,13 +44,22 @@
   --space-xl: 2rem;
 
   /* Typography */
-  --font-family: system-ui, -apple-system, sans-serif;
-  --font-family-mono: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+  --font-family: 'NationalWeb', Helvetica, Arial, sans-serif;
+  --font-family-mono: 'RobotoMono-Regular', 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+  --font-size-root: 18px;
   --font-size-sm: 0.875rem;
   --font-size-base: 1rem;
   --font-size-lg: 1.25rem;
+  --font-size-xs: 0.778rem;
   --line-height: 1.6;
   --line-height-code: 27px;
+
+  /* Colors — Table */
+  --color-table-border: #d6d6d6;
+  --color-table-header-bg: #e8e8e8;
+  --color-table-header-text: #000;
+  --color-table-row-alt-bg: #fafafa;
+  --color-table-bg: var(--color-bg);
 
   /* Borders */
   --border-width: 1px;
@@ -102,25 +104,16 @@
   --color-border-dark: #444;
   --color-scrollbar: rgba(255, 255, 255, 0.2);
 
-  /* Colors — Alert: info */
-  --color-alert-info-bg: #1a2a3d;
-  --color-alert-info-border: #2196f3;
-  --color-alert-info-text: #64b5f6;
-
-  /* Colors — Alert: warning */
-  --color-alert-warning-bg: #2d2010;
-  --color-alert-warning-border: #ff9800;
-  --color-alert-warning-text: #ffb74d;
-
-  /* Colors — Alert: error */
-  --color-alert-error-bg: #2d1515;
-  --color-alert-error-border: #f44336;
-  --color-alert-error-text: #ef9a9a;
-
-  /* Colors — Alert: success */
-  --color-alert-success-bg: #152415;
-  --color-alert-success-border: #4caf50;
-  --color-alert-success-text: #81c784;
+  /* Colors — Alert */
+  --color-alert-text: #ccc;
+  --color-alert-info-bar: #4da6ff;
+  --color-alert-info-label: #7bbfff;
+  --color-alert-danger-bar: #ffe066;
+  --color-alert-danger-label: #ffe066;
+  --color-alert-warning-bar: #f06070;
+  --color-alert-warning-label: #f09090;
+  --color-alert-tip-bar: #b08ee6;
+  --color-alert-tip-label: #c9b0f0;
 
   /* Colors — Code */
   --color-code-bg: #0d1117;
@@ -128,6 +121,15 @@
   --color-code-border: #333;
   --color-code-header-bg: rgba(155, 109, 215, 0.15);
   --color-code-accent: rgba(155, 109, 215, 0.3);
+  --color-code-inline-bg: #2a2a3e;
+  --color-code-inline-text: #ccc;
+
+  /* Colors — Table */
+  --color-table-border: #444;
+  --color-table-header-bg: #2a2a3e;
+  --color-table-header-text: #e0e0e0;
+  --color-table-row-alt-bg: #222236;
+  --color-table-bg: var(--color-bg);
 
   /* Shadows */
   --shadow-sm: 0 0 20px rgba(0, 0, 0, 0.3);

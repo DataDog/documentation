@@ -6,7 +6,7 @@ test.describe('Alert component', () => {
   });
 
   test('renders all alert types', async ({ page }) => {
-    const types = ['info', 'warning', 'error', 'success'];
+    const types = ['info', 'danger', 'warning', 'tip'];
 
     for (const type of types) {
       const alert = page.locator(`[data-alert-type="${type}"]`).first();
@@ -15,9 +15,9 @@ test.describe('Alert component', () => {
   });
 
   test('each alert displays its label', async ({ page }) => {
-    await expect(page.getByText('Info:')).toBeVisible();
-    await expect(page.getByText('Warning:')).toBeVisible();
-    await expect(page.getByText('Error:')).toBeVisible();
-    await expect(page.getByText('Success:')).toBeVisible();
+    await expect(page.getByText('Note')).toBeVisible();
+    await expect(page.getByText('Caution')).toBeVisible();
+    await expect(page.getByText('Warning')).toBeVisible();
+    await expect(page.getByText('Tip')).toBeVisible();
   });
 });

@@ -2,14 +2,21 @@
 import styles from './Alert.module.css';
 
 interface Props {
-  type?: 'info' | 'warning' | 'error' | 'success';
+  type?: 'info' | 'danger' | 'warning' | 'tip';
 }
 
+const labels: Record<string, string> = {
+  info: 'Note',
+  danger: 'Caution',
+  warning: 'Warning',
+  tip: 'Tip',
+};
+
 const { type = 'info' } = Astro.props;
-const label = type.charAt(0).toUpperCase() + type.slice(1);
+const label = labels[type] ?? type;
 ---
 
 <div class:list={[styles.alert, styles[`alert--${type}`]]} data-alert-type={type}>
-  <strong class={styles['alert__label']}>{label}:</strong>
+  <strong class={styles['alert__label']}>{label}</strong>
   <slot />
 </div>

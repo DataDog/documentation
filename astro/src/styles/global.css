@@ -1,14 +1,82 @@
 @import './tokens.css';
 
+/* Font faces */
+@font-face {
+  font-family: 'NationalWeb';
+  src: url('/fonts/NationalWeb-Light.woff2') format('woff2'),
+       url('/fonts/NationalWeb-Light.woff') format('woff');
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'NationalWeb';
+  src: url('/fonts/NationalWeb-Book.woff2') format('woff2'),
+       url('/fonts/NationalWeb-Book.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'NationalWeb';
+  src: url('/fonts/NationalWeb-Medium.woff2') format('woff2'),
+       url('/fonts/NationalWeb-Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'NationalWeb';
+  src: url('/fonts/NationalWeb-Semibold.woff2') format('woff2'),
+       url('/fonts/NationalWeb-Semibold.woff') format('woff');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'NationalWeb';
+  src: url('/fonts/NationalWeb-Bold.woff2') format('woff2'),
+       url('/fonts/NationalWeb-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'RobotoMono-Regular';
+  src: url('/fonts/RobotoMono-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Base */
+html {
+  font-size: var(--font-size-root);
+}
+
 body {
   font-family: var(--font-family);
   font-size: var(--font-size-base);
+  font-weight: 200;
   line-height: var(--line-height);
   color: var(--color-text);
   background-color: var(--color-bg);
   max-width: var(--content-max-width);
   margin: var(--space-xl) auto;
   padding: 0 var(--space-md);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  word-wrap: break-word;
+}
+
+strong, b {
+  font-weight: 600;
 }
 
 a {
@@ -17,4 +85,76 @@ a {
 
 a:hover {
   color: var(--color-brand-hover);
+}
+
+/* Inline code */
+code {
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-xs);
+  color: var(--color-code-inline-text);
+  background-color: var(--color-code-inline-bg);
+  padding: 0 0.278rem;
+  border-radius: var(--border-radius);
+}
+
+pre code {
+  font-size: inherit;
+  color: inherit;
+  background-color: transparent;
+  padding: 0;
+  border-radius: 0;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+}
+
+/* Tables */
+table {
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: var(--space-lg);
+  border: var(--border-width) solid var(--color-table-border);
+  border-collapse: collapse;
+  font-size: var(--font-size-base);
+  background-color: var(--color-table-bg);
+}
+
+table th,
+table td {
+  padding: var(--space-sm) 0.65rem;
+  border-left: var(--border-width) solid var(--color-table-border);
+  vertical-align: top;
+}
+
+table thead th {
+  vertical-align: bottom;
+  background: var(--color-table-header-bg);
+  border: none;
+  border-left: var(--border-width) solid var(--color-table-border);
+  font-size: var(--font-size-xs);
+  text-transform: uppercase;
+  color: var(--color-table-header-text);
+}
+
+table tr:first-child td {
+  border-top: none;
+}
+
+table tbody tr:nth-child(2n) {
+  background: var(--color-table-row-alt-bg);
+}
+
+table a {
+  border-bottom: var(--border-width) solid var(--color-text-muted);
+}
+
+table a:hover {
+  border-bottom: var(--border-width) solid var(--color-brand);
+}
+
+tbody code {
+  word-wrap: normal;
+  word-break: break-word;
 }

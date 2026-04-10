@@ -10,12 +10,18 @@ describe('Alert component', () => {
     });
 
     expect(html).toContain('Test message');
-    expect(html).toContain('Info:');
+    expect(html).toContain('Note');
     expect(html).toContain('data-alert-type="info"');
   });
 
-  it('renders each alert type with correct attributes', async () => {
-    const types = ['info', 'warning', 'error', 'success'] as const;
+  it('renders each alert type with correct label and attributes', async () => {
+    const types = ['info', 'danger', 'warning', 'tip'] as const;
+    const labels: Record<string, string> = {
+      info: 'Note',
+      danger: 'Caution',
+      warning: 'Warning',
+      tip: 'Tip',
+    };
     const container = await AstroContainer.create();
 
     for (const type of types) {
@@ -24,8 +30,7 @@ describe('Alert component', () => {
         slots: { default: `${type} message` },
       });
 
-      const label = type.charAt(0).toUpperCase() + type.slice(1);
-      expect(html).toContain(`${label}:`);
+      expect(html).toContain(labels[type]);
       expect(html).toContain(`${type} message`);
       expect(html).toContain(`data-alert-type="${type}"`);
     }

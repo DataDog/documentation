@@ -10,7 +10,7 @@ A static alert banner for displaying contextual messages.
 
 | Property | Type | Default | Description |
 |----------|------|---------|-------------|
-| `type` | `'info' \| 'warning' \| 'error' \| 'success'` | `info` | Controls the color scheme and label |
+| `type` | `'info' \| 'danger' \| 'warning' \| 'tip'` | `info` | Controls the bar color and label |
 
 ## Examples
 
@@ -26,6 +26,18 @@ This is an informational alert. Use it to surface neutral context.
 {% /alert %}
 ```
 
+### Danger
+
+{% alert type="danger" %}
+This is a caution alert. Proceed carefully.
+{% /alert %}
+
+```markdoc
+{% alert type="danger" %}
+This is a caution alert. Proceed carefully.
+{% /alert %}
+```
+
 ### Warning
 
 {% alert type="warning" %}
@@ -38,26 +50,14 @@ This is a warning alert. Something needs your attention.
 {% /alert %}
 ```
 
-### Error
+### Tip
 
-{% alert type="error" %}
-This is an error alert. Something went wrong.
+{% alert type="tip" %}
+This is a tip alert. Here's a helpful suggestion.
 {% /alert %}
 
 ```markdoc
-{% alert type="error" %}
-This is an error alert. Something went wrong.
-{% /alert %}
-```
-
-### Success
-
-{% alert type="success" %}
-This is a success alert. The operation completed.
-{% /alert %}
-
-```markdoc
-{% alert type="success" %}
-This is a success alert. The operation completed.
+{% alert type="tip" %}
+This is a tip alert. Here's a helpful suggestion.
 {% /alert %}
 ```
