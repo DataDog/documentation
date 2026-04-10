@@ -34,17 +34,40 @@ Manual integrations require additional configuration to enable AI Guard protecti
 {{% collapse-content title="Amazon Strands" level="h3" expanded=false id="amazon-strands" %}}
 {{< tabs >}}
 {{% tab "Python" %}}
-<!-- TODO: add setup instructions, supported versions, and traced operations for Amazon Strands with AI Guard -->
 
 The Amazon Strands integration enables AI Guard evaluations for applications built with the [Amazon Strands Agents SDK][1].
 
 ### Setup
 
-<!-- TODO: add setup steps -->
+Install dd-trace-py v4.7.0 or later:
 
-### Traced operations
+```shell
+pip install ddtrace>=4.7.0
+```
 
-<!-- TODO: add traced operations -->
+Define the entry point for the integration with a plugin or hook provider:
+
+* Plugin (recommended):
+
+```python
+from ddtrace.appsec.ai_guard import AIGuardStrandsPlugin
+
+agent = Agent(
+    model=model,
+    plugins=[AIGuardStrandsPlugin()]
+)
+```
+
+* HookProvider (legacy):
+
+```python
+from ddtrace.appsec.ai_guard import AIGuardStrandsHookProvider
+
+agent = Agent(
+    model=model,
+    hooks=[AIGuardStrandsHookProvider()]
+)
+```
 
 [1]: https://github.com/strands-agents/sdk-python
 {{% /tab %}}
@@ -54,19 +77,44 @@ The Amazon Strands integration enables AI Guard evaluations for applications bui
 {{% collapse-content title="LiteLLM Proxy" level="h3" expanded=false id="litellm-proxy" %}}
 {{< tabs >}}
 {{% tab "Python" %}}
-<!-- TODO: add setup instructions, supported versions, and traced operations for LiteLLM Proxy with AI Guard -->
 
 The LiteLLM Proxy integration enables AI Guard evaluations for applications using the [LiteLLM Proxy][1].
 
 ### Setup
 
-Install the
+Install dd-trace-py v4.8.0 or later:
 
-### Traced operations
+```shell
+pip install ddtrace>=4.8.0
+```
 
-<!-- TODO: add traced operations -->
+Import Datadog's LiteLLM guardrail next to your configuration file (for example, `guardrails.py`):
+
+```python
+from ddtrace.appsec.ai_guard.integrations.litellm import DatadogAIGuardGuardrail
+
+__all__ = ["DatadogAIGuardGuardrail"]
+```
+
+Add the imported guardrail to your configuration file:
+
+```yaml
+guardrails:
+  - guardrail_name: datadog_ai_guard
+    litellm_params:
+      guardrail: guardrails.DatadogAIGuardGuardrail
+      mode: [pre_call, post_call]
+      on_input: true
+      on_output: true
+      block: true
+```
+
+The guardrail supports all three modes: `pre_call`, `post_call`, and `during_call`. Apply it to both inputs and outputs.
+By default, the guardrail follows the blocking configuration set in the AI Guard service settings. To disable blocking, set the `block` parameter to `false` (equivalent to the `block` option in the [SDK][2] and [REST API][3]).
 
 [1]: https://docs.litellm.ai/docs/simple_proxy
+[2]: /security/ai_guard/setup/sdk/
+[3]: /security/ai_guard/setup/http_api/
 {{% /tab %}}
 {{< /tabs >}}
 {{% /collapse-content %}}

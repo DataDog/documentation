@@ -1,7 +1,7 @@
 {{- $target := .Get "target" -}}
 ## Set up the Datadog Agent
 
-Datadog SDKs use the [Datadog Agent][1] to send AI Guard data to Datadog. The Agent must be running and accessible to the SDK for you to see data in Datadog.
+SDKs use the [Datadog Agent][1] to send AI Guard data to Datadog. The Agent must be running and accessible to the SDK for you to see data in Datadog.
 
 If you don't use the Datadog Agent, the AI Guard evaluator API still works, but you can't see AI Guard traces in Datadog.
 
@@ -19,7 +19,7 @@ Set the following environment variables in your application:
 {{- if eq $target "automatic" -}}
 | `DD_TRACE_ENABLED`    | `true`                   |
 
-By default, automatic integrations follow the blocking configuration set in the UI. To disable blocking for a specific service, set `DD_AI_GUARD_BLOCK` to false (equivalent to the block option in the [SDK][2] and [REST API][3]):
+By default, automatic integrations follow the blocking configuration set in the AI Guard service settings. To disable blocking for a specific service, set `DD_AI_GUARD_BLOCK` to `false` (equivalent to the `block` option in the [SDK][2] and [REST API][3]):
 
 | Variable            | Value   |
 | :------------------ |:--------|
