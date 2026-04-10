@@ -275,7 +275,6 @@ core_product:
 # Unsupported sites for each product
 unsupported_sites:
   advanced_analysis: [gov]
-  actions: [gov]
   adaptive_sampling: [gov]
   agent_flare: [gov]
   agentic_onboarding: [gov]
