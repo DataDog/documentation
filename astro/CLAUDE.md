@@ -21,6 +21,10 @@ We intend to eventually deprecate Hugo, having moved all of its content into thi
 - **Preact** — UI components (TSX)
 - **TypeScript** — Strict mode
 
+## SEO
+
+Render as much content at build time as possible. Light rehydration on the client is fine, but all of the content should be rendered at build time as well, even if it's not visible yet. For example, the content of all tabs should be rendered, not just the active tab.
+
 ## CSS architecture
 
 ### Tokenized design

@@ -30,5 +30,17 @@ export default defineMarkdocConfig({
         },
       },
     },
+    tabs: {
+      render: component('./src/components/TabsIsland.astro'),
+    },
+    tab: {
+      render: component('./src/components/Tab.astro'),
+      attributes: {
+        label: {
+          type: String,
+          required: true,
+        },
+      },
+    },
   },
 });
