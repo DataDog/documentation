@@ -33,7 +33,7 @@ Product Analytics collects data from client-side and server-side sources to give
 
 ### Client-side tracking
 
-Collect events from your user devices and send them to Datadog.
+Collect events from your users' devices and send them to Datadog.
 
 Add the Datadog SDK to your application to start collecting user activity data. If you have already configured RUM, you do not need to instrument your application again for Product Analytics.
 
