@@ -51,10 +51,10 @@ The following procedure configures Claude Code to send telemetry directly to Dat
        "CLAUDE_CODE_ENABLE_TELEMETRY": "1",
        "OTEL_LOGS_EXPORTER": "otlp",
        "OTEL_EXPORTER_OTLP_LOGS_PROTOCOL": "http/protobuf",
-       "OTEL_EXPORTER_OTLP_LOGS_ENDPOINT": "{{< region-param key="http_endpoint_full" >}}/v1/logs",
+       "OTEL_EXPORTER_OTLP_LOGS_ENDPOINT": "https://otlp.datadoghq.com/v1/logs",
        "OTEL_METRICS_EXPORTER": "otlp",
        "OTEL_EXPORTER_OTLP_METRICS_PROTOCOL": "http/protobuf",
-       "OTEL_EXPORTER_OTLP_METRICS_ENDPOINT": "{{< region-param key="otlp_metrics_endpoint" >}}",
+       "OTEL_EXPORTER_OTLP_METRICS_ENDPOINT": "https://otlp.datadoghq.com/v1/metrics",
        "OTEL_EXPORTER_OTLP_HEADERS": "dd-api-key=<DATADOG_API_KEY>"
      }
    }
@@ -62,7 +62,7 @@ The following procedure configures Claude Code to send telemetry directly to Dat
 
    Replace `<DATADOG_API_KEY>` with your Datadog API key.
 
-   <div class="alert alert-info">To set up AI Agents Console for Claude Code across your organization, your IT team can use a Mobile Device Management (MDM) system to distribute the Claude Code settings file across all managed devices.</div>
+   <div class="alert alert-info">To set up AI Agents Console for Claude Code across your organization, your IT team can use a Mobile Device Management (MDM) system or <a href="https://code.claude.com/docs/en/server-managed-settings">server-managed settings</a> to distribute the Claude Code settings file across all managed devices.</div>
 4. Restart Claude Code.
 
 After you restart Claude Code, navigate to the [AI Agents Console][1] in Datadog and click on the **Claude Code** tile. Metrics (usage, cost, latency, errors) should appear within a few minutes.
@@ -97,8 +97,10 @@ After you restart Claude Code, navigate to the [AI Agents Console][1] in Datadog
    }
    ```
 
-   <div class="alert alert-info">To set up AI Agents Console for Claude Code across your organization, your IT team can use a Mobile Device Management (MDM) system to distribute the Claude Code settings file across all managed devices.</div>
+   <div class="alert alert-info">To set up AI Agents Console for Claude Code across your organization, your IT team can use a Mobile Device Management (MDM) system or <a href="https://code.claude.com/docs/en/server-managed-settings">server-managed settings</a> to distribute the Claude Code settings file across all managed devices.</div>
 5. Restart Claude Code.
+
+After you restart Claude Code, navigate to the [AI Agents Console][1] in Datadog and click on the **Claude Code** tile. Metrics (usage, cost, latency, errors) should appear within a few minutes.
 
 ### Cursor
 
