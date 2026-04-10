@@ -1,6 +1,6 @@
 ---
-title: Metric Tag Policies
-description: "Use tag policies to configure metrics proactively, after ingestion, so you can mitigate high cardinality and enforce consistent tag management across your organization"
+title: Tag Indexing Rules
+description: "Use tag rules to configure metrics proactively, after ingestion, so you can mitigate high cardinality and enforce consistent tag management across your organization"
 further_reading:
 - link: "/account_management/billing/custom_metrics/?tab=countrate"
   tag: "Documentation"
@@ -18,40 +18,46 @@ private: true
 
 ## Overview
 
-Tag policies are centralized, sequentially evaluated rules that let you proactively configure metric tagging behavior before or at ingestion. They help you control which tags are retained or excluded, enabling you to mitigate high cardinality and enforce consistent tag management across your organization.
+Tag rules are centralized, sequentially evaluated directives that let you proactively configure metric tagging behavior before or at ingestion. They help you control which tags are retained or excluded, enabling you to mitigate high cardinality and enforce consistent tag management across your organization.
 
-Tag policies apply at the account level and operate on groups of metrics defined by metric names or prefixes. These rules determine which tags are kept, dropped, or automatically stripped when they contribute to excessive cardinality. Because they apply to both existing metrics and any future metrics that match the defined patterns, tag policies reduce the need for reactive cleanup or code-level changes while helping manage costs effectively.
+Tag rules apply at the account level and operate on groups of metrics defined by metric names or prefixes. These rules determine which tags are kept, dropped, or automatically stripped when they contribute to excessive cardinality. Because they apply to both existing metrics and any future metrics that match the defined patterns, tag rules reduce the need for reactive cleanup or code-level changes while helping manage costs effectively.
 
-## Create a tag policy
+## Create a tag rule
 
-After you create a policy, Datadog automatically applies it to all matching metrics.
+After you create a rule, Datadog automatically applies it to all matching metrics.
 
 1. Navigate to [**Metrics → Settings**][3].
-2. Click **+ Create Policy**.
-3. Select **Set Tag Policy**.
+2. Click **+ Create Rule**.
+3. Select **Configure Tag Indexing Rule**.
 
-### Step 1: Set policy details
+### Step 1: Set rule details
 
-1. Enter a policy name.
-   Use a descriptive name that clearly identifies the purpose of the policy.
+1. Enter a rule name.
+   Use a descriptive name that clearly identifies the purpose of the rule.
 
-### Step 2: Define policy scope
+### Step 2: Define rule scope
 
-Choose which metrics the policy applies to.
+Choose which metrics the rule applies to.
 
-Scope a policy using one or more of the following options:
+Scope a rule using one or more of the following options:
 
 Metric names or prefixes
-: Apply the policy to specific metric names or namespaces (for example, `http.*`, `db.query.*`)
+: Apply the rule to specific metric names or namespaces (for example, `http.*`, `db.query.*`)
 
 Prefix exceptions
-: Exclude specific prefixes from the policy scope (for example, apply to `http.*` except `http.debug.*`)
+: Exclude specific prefixes from the rule scope (for example, apply to `http.*` except `http.debug.*`)
 
-If multiple policies apply to the same metrics, Datadog evaluates them in order. Optionally, use **Replace** behavior to override previously evaluated policies for the selected metrics.
+If multiple rules apply to the same metrics, Datadog evaluates them in order. Optionally, use **Replace** behavior to override previously evaluated rules for the selected metrics.
 
 ### Step 3: Configure tag behavior
 
-Define how the policy handles tags for metrics in scope:
+Define how the rule handles tags for metrics in scope:
+
+Merge or replace existing configurations
+: * Merge—applies this rule on top of existing tag configurations. Metrics with no prior configuration are unaffected.
+  * Replace—ignores existing configurations and enforces this rule exclusively.
+
+  **Note**: Use **Replace** behavior on a narrower rule to prevent a broader rule's excluded tags from stacking. For example, if Rule 1 excludes `host` from `dd.*` (Merge) and Rule 2 excludes `app_name` from `dd.payments.*`, using **Merge** behavior on Rule 2 drops both `host` and `app_name` tags from `dd.payments.*` metrics. Using **Replace** behavior on Rule 2 drops only `app_name` (Rule 1's effect is overridden for that prefix).
 
 Select tags to include or exclude
 : * **Include tags** (use an allowlist of tags that remain queryable)
@@ -59,65 +65,57 @@ Select tags to include or exclude
 
   Add the tag keys you want to include or exclude.
 
-Merge or replace existing configurations
-: * Merge—applies this policy on top of existing tag configurations. Metrics with no prior configuration are unaffected.
-  * Replace—ignores existing configurations and enforces this policy exclusively.
-
-  **Note**: Use **Replace** behavior on a narrower policy to prevent a broader policy's excluded tags from stacking. For example, if Policy 1 excludes `host` from `dd.*` (Merge) and Policy 2 excludes `app_name` from `dd.payments.*`, using **Merge** behavior on Policy 2 drops both `host` and `app_name` tags from `dd.payments.*` metrics. Using **Replace** behavior on Policy 2 drops only `app_name` (Policy 1's effect is overridden for that prefix).
-
 ### Step 4: Preview affected metrics
 
 The preview shows:
 
 * A list of affected metrics (up to 100 in the UI)
 
-* Optional estimated impact on metric usage
-
-Download a full list of affected metrics as a CSV and preview how the policy applies to metrics not yet submitted.
+Download a full list of affected metrics as a CSV and preview how the rule applies to metrics not yet submitted.
 
 ### Limitations
 
 - Exclude rules take effect after Datadog observes a tag on a metric.
-- Datadog evaluates policies sequentially. Earlier policies establish
-the configuration, and each subsequent policy either builds on or replaces it. 
+- Datadog evaluates rules sequentially. Earlier rules establish
+the configuration, and each subsequent rule either builds on or replaces it. 
 
-## Modify a policy
+## Modify a rule
 
-Navigate to [**Metrics → Settings → Policies**][1] to modify existing policies.
+Navigate to [**Metrics → Settings → Rules**][1] to modify existing rules.
 
-Edit policy configuration
-: Change the policy's scope, tag selection, or other settings.
+Edit rule configuration
+: Change the rule's scope, tag selection, or other settings.
 
 Change merge or replace behavior
-: Switch between **Merge** and **Replace** behaviors to control how this policy interacts with existing configurations.
+: Switch between **Merge** and **Replace** behaviors to control how this rule interacts with existing configurations.
 
-Reorder policies
-: Change the execution order to adjust how policies interact when multiple policies apply to the same metrics.
+Reorder rules
+: Change the execution order to adjust how rules interact when multiple rules apply to the same metrics.
 
-Delete a policy
-: Remove policies that are no longer needed. When you delete a policy, Datadog recomputes the tag configuration for affected metrics based on the remaining policies.
+Delete a rule
+: Remove rules that are no longer needed. When you delete a rule, Datadog recomputes the tag configuration for affected metrics based on the remaining rules.
 
-Override policies for a specific metric                                                                                                                                 
-: From the metric's details side panel, set the metric to retain all tags. This bypasses all policies for that metric without modifying them. To reapply policies, restore the metric's default configuration from the same panel.
+Override rules for a specific metric                                                                                                                                 
+: From the metric's details side panel, set the metric to retain all tags. This bypasses all rules for that metric without modifying them. To reapply rules, restore the metric's default configuration from the same panel.
          
 After you make changes, Datadog automatically applies them to all matching metrics.
 
-## Policy precedence
+## Rule precedence
 
-When multiple policies apply to the same metrics, Datadog evaluates them sequentially. Policy order matters because:
+When multiple rules apply to the same metrics, Datadog evaluates them sequentially. Rule order matters because:
 
-* Later policies modify the results of earlier policies
+* Later rules modify the results of earlier rules
 * **Replace** behavior overwrites previous configurations for matching metrics
 * **Merge** behavior builds on existing configurations
-* When multiple policies use **Replace** behavior, the last applied policy determines whether the final configuration is in include or exclude mode
+* When multiple rules use **Replace** behavior, the last applied rule determines whether the final configuration is in include or exclude mode
 
-Reorder policies on the [Policies page][1] to change which policy takes precedence. See the examples below to understand how different orders produce different results.
+Reorder rules on the [Rules page][1] to change which rule takes precedence. See the examples below to understand how different orders produce different results.
 
 ## Precedence examples
 
 ### Example 1: **Merge** and **Replace** behavior
 
-Tag policies can either replace an existing configuration or merge with it. This determines whether a policy resets the tag configuration or builds on top of what already exists.
+Tag rules can either replace an existing configuration or merge with it. This determines whether a rule resets the tag configuration or builds on top of what already exists.
 
 Starting tags:  
 `host`, `env`, `service`, `team`
@@ -126,21 +124,21 @@ Starting tags:
 
 **Key insight**: The `env` tag is re-added only to the `infra.*` metrics.
 
-### Example 2: Policy order
+### Example 2: Rule order
 
-When multiple policies apply to the same metrics, they are evaluated in order.  
-Policies that run later can refine or override the effects of earlier policies.
+When multiple rules apply to the same metrics, they are evaluated in order.  
+Rules that run later can refine or override the effects of earlier rules.
 
 Starting tags:  
 `host`, `env`, `service`
 
-#### Order 1: Specific policy first
+#### Order 1: Specific rule first
 
 {{< img src="metrics/guide/metric_tag_policies/policy_order_1.png" alt="" style="width:100%;">}}
 
-**Key insight**: Policy 1 removes the `host` tag, then Policy 2 re-adds `host`.
+**Key insight**: Rule 1 removes the `host` tag, then Rule 2 re-adds `host`.
 
-#### Order 2: General policy first
+#### Order 2: General rule first
 
 {{< img src="metrics/guide/metric_tag_policies/policy_order_2.png" alt="" style="width:100%;">}}
 
@@ -148,7 +146,7 @@ Starting tags:
 
 ### Example 3: Exception to a broad rule
 
-Use a broad policy with **Replace** behavior to exclude a tag globally, then use a targeted policy with **Merge** behavior to restore the tag for specific metrics.
+Use a broad rule with **Replace** behavior to exclude a tag globally, then use a targeted rule with **Merge** behavior to restore the tag for specific metrics.
 
 Starting tags:
 `node`, `env`, `pod`
@@ -159,22 +157,22 @@ Starting tags:
 
 ### Example 4: Multiple exceptions to a broad rule
 
-Layer multiple policies with **Merge** behavior on top of a broad policy with **Replace** behavior to restore different tags for different metric prefixes. Metrics matching more specific prefixes accumulate more restorations.
+Layer multiple rules with **Merge** behavior on top of a broad rule with **Replace** behavior to restore different tags for different metric prefixes. Metrics matching more specific prefixes accumulate more restorations.
 
 Starting tags:
 `team`, `pod`, `env`
 
 {{< img src="metrics/guide/metric_tag_policies/multiple_exceptions.png" alt="" style="width:100%;">}}
 
-**Key insight**: Multiple inclusion policies with **Merge** behavior, applied after an exclusion policy with **Replace** behavior, are additive (a metric matching two exception prefixes gets both sets of tags restored).
+**Key insight**: Multiple inclusion rules with **Merge** behavior, applied after an exclusion rule with **Replace** behavior, are additive (a metric matching two exception prefixes gets both sets of tags restored).
 
 ## Metrics without Limits™ compatibility
 
-Tag policies do not automatically override existing [Metrics without Limits™][2] (MWL) per-metric configurations. Existing MWL configurations take precedence and are preserved when tag policies are created or modified.
+Tag rules do not automatically override existing [Metrics without Limits™][2] (MWL) per-metric configurations. Existing MWL configurations take precedence and are preserved when tag rules are created or modified.
 
-If a metric's MWL configuration is deleted, tag policies automatically apply to that metric based on the current policy order.
+If a metric's MWL configuration is deleted, tag rules automatically apply to that metric based on the current rule order.
 
-To exclude a specific metric from all tag policies without deleting them, use the metric's details side panel to retain all tags. To reapply policies, restore the metric's default configuration from the same panel.
+To exclude a specific metric from all tag rules without deleting them, use the metric's details side panel to retain all tags. To reapply rules, restore the metric's default configuration from the same panel.
 
 ## Further reading
 
