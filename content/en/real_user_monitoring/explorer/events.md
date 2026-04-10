@@ -27,6 +27,8 @@ Only sessions retained by [retention filters][5] appear in the navigation. Non-r
 
 To set `@usr.id`, see [Advanced Configuration][6].
 
+{{< img src="real_user_monitoring/explorer/events/rum-explorer-session-continuity.png" alt="RUM Explorer session side panel with Previous and Next navigation buttons highlighted, showing a tooltip with the session start screen and end reason" style="width:100%;" >}}
+
 ## Waterfall tab
 
 The **Waterfall** tab displays an interactive timeline of the events associated with this view. Overlays display key performance markers, including [Core Web Vitals][3] or mobile timings, with pass or fail indicators.
