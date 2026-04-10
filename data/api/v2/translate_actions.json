@@ -2105,6 +2105,42 @@
     "request_description": "",
     "request_schema_description": "Update the IP allowlist."
   },
+  "ListLLMObsAnnotationQueues": {
+    "description": "List annotation queues. Optionally filter by project ID or queue IDs. These parameters are mutually exclusive.\nIf neither is provided, all queues in the organization are returned.",
+    "summary": "List LLM Observability annotation queues"
+  },
+  "CreateLLMObsAnnotationQueue": {
+    "description": "Create a new annotation queue. Only `name`, `project_id`, and `description` are accepted.\nFields such as `created_by`, `owned_by`, `created_at`, `modified_by`, and `modified_at` are inferred by the backend.",
+    "summary": "Create an LLM Observability annotation queue",
+    "request_description": "Create annotation queue payload.",
+    "request_schema_description": "Request to create an LLM Observability annotation queue."
+  },
+  "DeleteLLMObsAnnotationQueue": {
+    "description": "Delete an annotation queue by its ID.",
+    "summary": "Delete an LLM Observability annotation queue"
+  },
+  "UpdateLLMObsAnnotationQueue": {
+    "description": "Partially update an annotation queue. Only `name` and `description` can be updated.",
+    "summary": "Update an LLM Observability annotation queue",
+    "request_description": "Update annotation queue payload.",
+    "request_schema_description": "Request to update an LLM Observability annotation queue."
+  },
+  "GetLLMObsAnnotatedInteractions": {
+    "description": "Retrieve all interactions and their annotations for a given annotation queue.",
+    "summary": "Get annotated queue interactions"
+  },
+  "CreateLLMObsAnnotationQueueInteractions": {
+    "description": "Add one or more interactions (traces) to an annotation queue.\nAt least one interaction must be provided.",
+    "summary": "Add annotation queue interactions",
+    "request_description": "Add interactions payload.",
+    "request_schema_description": "Request to add interactions to an LLM Observability annotation queue."
+  },
+  "DeleteLLMObsAnnotationQueueInteractions": {
+    "description": "Delete one or more interactions from an annotation queue.",
+    "summary": "Delete annotation queue interactions",
+    "request_description": "Delete interactions payload.",
+    "request_schema_description": "Request to delete interactions from an LLM Observability annotation queue."
+  },
   "ListLLMObsExperiments": {
     "description": "List all LLM Observability experiments sorted by creation date, newest first.",
     "summary": "List LLM Observability experiments"

@@ -62,13 +62,13 @@ You may create a maximum of 100 Restricted Datasets under the Enterprise plan, a
 - APM traces
 - Logs
 - RUM sessions
+- LLM Observability
 
 The following are available as a Preview upon request:
 - Cloud costs
 - Custom metrics
     - **Note:** Standard and OpenTelemetry (OTel) metrics are not supported
 - Error Tracking issues
-- LLM Observability
 - Software Delivery repository info (in CI Visibility pipelines, Test Optimization, and Code Coverage products)
 
 ## Usage constraints

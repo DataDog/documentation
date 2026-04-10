@@ -13,6 +13,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/monitor-ci-pipelines/"
     tag: "Blog"
     text: "Monitor all your CI pipelines with Datadog"
+  - link: "https://learn.datadoghq.com/courses/getting-started-test-optimization"
+    tag: "Learning Center"
+    text: "Getting Started with Test Optimization"
 ---
 
 <div class="alert alert-danger"> This feature was formerly known as Intelligent Test Runner, and some tags still contain "itr".</div>
