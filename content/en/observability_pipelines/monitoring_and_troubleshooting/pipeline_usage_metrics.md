@@ -41,7 +41,7 @@ Uptime
 
 Bytes in
 : **Metric**: `pipelines.host.network_receive_bytes_total`
-: **Description:** The number of bytes received by the host on all interfaces in a time interval. Use the `device` tag to filter per interface, for example `device:eth0`. Use the `cumsum` function to represent the cumulative total.
+: **Description:** The number of bytes received by the host on all interfaces in a time interval. Use the `device` tag to filter per interface, for example `device:eth0`. Use the [`cumsum`][7] function to represent the cumulative total.
 
 Bytes out
 : **Metric**: `pipelines.host.network_transmit_bytes_total`
@@ -143,3 +143,4 @@ Use these metrics to analyze buffer performance. All metrics are emitted on a on
 [4]: /getting_started/tagging/
 [5]: https://app.datadoghq.com/metric/summary
 [6]: https://docs.datadoghq.com/account_management/billing/usage_metrics/
+[7]: https://docs.datadoghq.com/dashboards/functions/arithmetic/#cumulative-sum
