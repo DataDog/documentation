@@ -1,17 +1,18 @@
 ---
 title: Suggested Journeys
+private: true
 description: Quickly create journeys based on Datadog's automatically generated suggestions.
 further_reading:
-- link: '/journey_monitoring/journey_monitoring/'
+- link: '/journey_monitoring/'
   tag: 'Documentation'
   text: 'Learn about journey monitoring'
 - link: '/journey_monitoring/map/'
   tag: 'Documentation'
   text: 'Learn about the journey map'
-- link: '/journey_monitoring/report/'
+- link: '/journey_monitoring/details_report/'
   tag: 'Documentation'
   text: 'Learn about journey reports'
-- link: '/journey_monitoring/variants/'
+- link: '/journey_monitoring/details_report/variants/'
   tag: 'Documentation'
   text: 'Learn about journey variants'
 ---

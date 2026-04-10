@@ -1,10 +1,11 @@
 ---
 title: Journey Uptime
+private: true
 description: "Measure the availability of your user journey using the accompanying Synthetics test suite."
 further_reading:
 - link: '/journey_monitoring/'
   tag: 'Documentation'
-  text: 'Learn about the journey map'
+  text: 'Learn about Journey Monitoring'
 - link: '/journey_monitoring/map/'
   tag: 'Documentation'
   text: 'Learn about the journey map'
@@ -48,4 +49,4 @@ You can add and remove tests from the test suite. Each added test will automatic
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /synthetics/test_suite/
-[2]: /journey_monitoring/variants/
+[2]: /journey_monitoring/details_report/variants/
