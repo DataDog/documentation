@@ -1,4 +1,5 @@
 ---
+id: trace_root_span
 title: trace root span
 core_product:
   - apm

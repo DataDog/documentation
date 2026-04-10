@@ -5,7 +5,7 @@ type: multi-code-lang
 further_reading:
 - link: "/tracing/trace_collection/"
   tag: "Documentation"
-  text: "Add the SDK to your application"
+  text: "Add the Datadog SDK to your application"
 aliases:
   - /tracing/compatibility
   - /tracing/compatibility_requirements

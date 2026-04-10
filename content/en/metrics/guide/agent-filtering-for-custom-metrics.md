@@ -20,10 +20,7 @@ further_reading:
   tag: "Blog"
   text: "Best practices for end-to-end custom metrics governance"
 ---
-
-{{< callout url="https://www.datadoghq.com/" btn_hidden="true" header="false" >}}
-Agent-side filtering for custom metrics is in Preview.
-{{< /callout >}} 
+{{< callout url="https://www.datadoghq.com/product-preview/agent-side-filtering-for-custom/" >}} Agent-Side Filtering for Custom Metrics is in Preview. If you're interested in this feature, complete this form. {{< /callout >}}
 
 ## Overview
 

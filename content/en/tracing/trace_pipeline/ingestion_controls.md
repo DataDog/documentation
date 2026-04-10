@@ -217,7 +217,7 @@ Click **Configure Datadog Agent Ingestion** to manage default head-based samplin
 
 {{< img src="tracing/trace_indexing_and_ingestion/agent_level_configurations_modal.png" style="width:70%;" alt="Agent Level Configuration Modal" >}}
 
-- **[Head-based Sampling][4]**: When no sampling rules are set for a service, the Datadog Agent automatically computes sampling rates to be applied for your services, targeting **10 traces per second per Agent**. Change this target number of traces in Datadog, or set `DD_APM_MAX_TPS` locally at the Agent level.
+- **[Head-based Sampling][4]**: When no sampling rules are set for a service, the Datadog Agent automatically computes sampling rates to be applied for your services, targeting **10 traces per second per Agent**. Change this target number of traces in Datadog, or set `DD_APM_TARGET_TPS` locally at the Agent level.
 - **[Error Spans Sampling][5]**: For traces not caught by head-based sampling, the Datadog Agent catches local error traces **up to 10 traces per second per Agent**. Change this target number of traces in Datadog, or set `DD_APM_ERROR_TPS` locally at the Agent level.
 - **[Rare Spans Sampling][6]**: For traces not caught by head-based sampling, the Datadog Agent catches local rare traces **up to 5 traces per second per Agent**. This setting is disabled by default. Enable the collection of rare traces in Datadog, or set `DD_APM_ENABLE_RARE_SAMPLER` locally at the Agent level.
 
@@ -236,7 +236,7 @@ If sampling rules are set in multiple locations, the following precedence rules 
 1. [Locally configured sampling rules][8] (`DD_TRACE_SAMPLING_RULES`)
 1. [Remotely configured global sampling rate][8]
 1. [Locally configured global sampling rate][8] (`DD_TRACE_SAMPLE_RATE`)
-1. [Rates from the trace agent controlled indirectly with Agent settings](#managing-datadog-agent-ingestion-configuration) remotely or locally (`DD_APM_MAX_TPS`)
+1. [Rates from the trace agent controlled indirectly with Agent settings](#managing-datadog-agent-ingestion-configuration) remotely or locally (`DD_APM_TARGET_TPS`)
 
 To phrase it another way, Datadog uses the following precedence rules:
 - Tracer settings > Agent settings

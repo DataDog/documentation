@@ -7,9 +7,15 @@ disable_toc: false
 
 Bits AI Dev Agent integrates with GitHub to open, update, and iterate on pull requests based on issues detected in Datadog.  
 
+## Prerequisites
+
+To set up Bits AI Dev Agent, you need the **Bits Dev Agent Write** (`bits_dev_write`) permission. This permission is included in managed Datadog roles such as the Datadog Standard Role.
+
+If your organization uses custom roles, an admin must add this permission manually. For details, see [Access Control][1].
+
 ## Setup
 
-1. Install the [GitHub integration][5]. For full installation and configuration steps, see the [GitHub integration guide][6].
+1. Install the [GitHub integration][2]. For full installation and configuration steps, see the [GitHub integration guide][3].
 
 1. In your GitHub account, navigate to **Settings** > **Apps** > **Datadog** to configure GitHub permissions.
 
@@ -40,14 +46,31 @@ These optional configurations help you get the most out of Bits AI Dev Agent.
 
 Bits AI Dev Agent uses the `service` and `version` telemetry tags to match detected issues (such as errors or vulnerabilities) to the version of code that was running at the time.  
 
-To configure telemetry tagging, see [Tag your APM telemetry with Git information][7]. 
+To configure telemetry tagging, see [Tag your APM telemetry with Git information][4]. 
 
-You can also configure service-to-repository mapping manually in the Bits AI Dev Agent settings under [**Repositories**][11] > **Service Repository Mapping**.
+You can also configure service-to-repository mapping manually in the Bits AI Dev Agent settings under [**Repositories**][5] > **Service Repository Mapping**.
 
 ### Enable auto-push
-To enable auto-push, so the Dev Agent can push commits directly to a branch, navigate to **Bits AI Dev** > [**Settings**][12], and set the toggle to **Enable**.
+To enable auto-push, so the Dev Agent can push commits directly to a branch, navigate to [**Bits AI Dev** > **Settings** > **General**][12] , and set the toggle to **Enable**.
 
 **Note**: If auto-push is disabled, you must review and approve code in Datadog before the Dev Agent can push it.
+
+### Configure internet access
+
+To configure which external domains agents can reach during agent execution, navigate to **Bits AI Dev** > [**Settings**][12] > **General**, and find the **Internet Access** section. Choose from the following access policies: **No Internet Access**, **Default Allowlist**, **Custom + Default Allowlist**, or **Custom Allowlist**.
+
+The default allowlist includes the following domains:
+
+| Language | Domains |
+|---|---|
+| Clojure/JVM | `repo.clojars.org` |
+| Go | `pkg.go.dev`, `proxy.golang.org`, `vuln.go.dev` |
+| Java/JVM | `repo1.maven.org` |
+| JavaScript/TypeScript | `registry.npmjs.org` |
+| .NET/C# | `api.nuget.org` |
+| PHP | `packagist.org`, `repo.packagist.org` |
+| Python | `files.pythonhosted.org`, `pypi.org`, `pypi.python.org`, `pythonhosted.org` |
+| Rust | `index.crates.io`, `static.crates.io` |
 
 ### Configure custom instructions
 
@@ -56,12 +79,12 @@ The Dev Agent ingests custom instruction files from your repository, including:
 - `.cursorrules`  
 - `.windsurfrules`  
 - `copilot-instructions.md`  
-- `claude.md`  
-- `agents.md`  
+- `CLAUDE.md`  
+- `AGENTS.md`  
 - `agent.md`  
 
 
-You can also define global custom instructions, which apply to all Dev Agent sessions, in **Bits AI** > **Dev Agent** > [**Settings**][12], in the **Agent Instructions** section. 
+You can also define global custom instructions, which apply to all Dev Agent sessions, in **Bits AI Dev** > [**Settings**][12] > **General**, in the **Global Agent Instructions** section. 
 
 ### Configure repository environment
 
@@ -69,7 +92,7 @@ Configure a custom environment for the Dev Agent to install dependencies, format
 
 To configure a repository environment:
 
-1. Go to **Bits AI Dev** > **Settings** > [**Repositories**][11], and find the **Environments** section.
+1. Go to **Bits AI Dev** > **Settings** > [**Repositories**][5], and find the **Environments** section.
 1. Click **Add Environment** to create a repository configuration:
    1. Select a repository from the dropdown.
    1. (Optional) Under **Pre-installed Languages**, click **Select Versions** to specify the language versions the sandbox should use.
@@ -78,7 +101,7 @@ To configure a repository environment:
 1. Run the setup command to ensure it runs successfully.
 1. Save the configuration.
 
-The Dev Agent runs the setup command at startup and can use any tools installed in your environment. The setup command runs with network access enabled to download dependencies. After setup is complete, network access is disabled during Agent execution. Because setup commands execute against code in your repository, enable them only if you trust the repository's code.
+The Dev Agent runs the setup command at startup and can use any tools installed in your environment. The setup command runs with network access enabled to download dependencies. After setup is complete, your [internet access](#configure-internet-access) policy controls outbound network access during agent execution. Because setup commands execute against code in your repository, enable them only if you trust the repository's code.
 
 **Note**: For best results, add a [custom instructions file](#configure-custom-instructions) (like `claude.md`) to your repository with instructions on how to build and test your code.
 
@@ -86,19 +109,13 @@ The Dev Agent runs the setup command at startup and can use any tools installed 
 
 ### Creation of PRs fails unexpectedly
 
-In some cases, especially in repositories with many branches, GitHub does not run the permission check when creating a branch for the session. If you use a custom GitHub App, you can work around this issue by adding the `workflows:write` permission to your app in [Source Code Integration][5].
+In some cases, especially in repositories with many branches, GitHub does not run the permission check when creating a branch for the session. If you use a custom GitHub App, you can work around this issue by adding the `workflows:write` permission to your app in [Source Code Integration][2].
 
 **Note**: This permission allows Bits AI to create workflows in your repository and has security implications.
 
-[1]: /error_tracking
-[2]: /security/code_security  
-[3]: /profiler/
-[4]: /tests/
-[5]: https://app.datadoghq.com/integrations/github
-[6]: /integrations/github/
-[7]: /integrations/guide/source-code-integration/?tab=go#tag-your-apm-telemetry-with-git-information
-[8]: https://app.datadoghq.com/metric/summary
-[9]: /integrations/github/#troubleshooting
-[10]: /help/
-[11]: https://app.datadoghq.com/code/settings?tab=repositories
-[12]: https://app.datadoghq.com/code/settings
+[1]: /account_management/rbac/permissions/#bits-ai
+[2]: https://app.datadoghq.com/integrations/github
+[3]: /integrations/github/
+[4]: /integrations/guide/source-code-integration/?tab=go#tag-your-apm-telemetry-with-git-information
+[5]: https://app.datadoghq.com/code/settings?tab=repositories
+[6]: https://app.datadoghq.com/code/settings

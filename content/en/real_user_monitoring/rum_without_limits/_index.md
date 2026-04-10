@@ -14,6 +14,9 @@ further_reading:
   - link: 'https://www.datadoghq.com/blog/rum-without-limits/'
     tag: Blog
     text: 'Introducing RUM without Limits™: Capture everything, keep what matters'
+  - link: 'https://learn.datadoghq.com/courses/rum-retention-filters'
+    tag: 'Learning Center'
+    text: 'Interactive Lab: RUM Retention Filters'
 ---
 
 <div class="alert alert-info">RUM without Limits is automatically enabled for customers with non-committed RUM plans. Reach out to your account team or <a href="/help/">Datadog support</a> to enable this feature.</div>

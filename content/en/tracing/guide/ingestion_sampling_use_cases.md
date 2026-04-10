@@ -61,7 +61,7 @@ You can also override the default Agent sampling rate by configuring the samplin
 
 Default sampling rates are calculated to target 10 complete traces per second, per Agent. This is a *target* number of traces and is the result of averaging traces over a period of time. It is *not* a hard limit, and traffic spikes can cause significantly more traces to be sent to Datadog for short periods of time.
 
-You can increase or decrease this target by configuring the Datadog Agent parameter `max_traces_per_second` or the environment variable `DD_APM_MAX_TPS`. Read more about [head-based sampling ingestion mechanisms][5].
+You can increase or decrease this target by configuring the Datadog Agent parameter `target_traces_per_second` or the environment variable `DD_APM_TARGET_TPS`. Read more about [head-based sampling ingestion mechanisms][5].
 
 **Note:** Changing an Agent configuration impacts the percentage sampling rates for *all services* reporting traces to this Datadog Agent.
 

@@ -34,15 +34,9 @@ To use the CrowdStrike NG-SIEM destination, you need to set up a CrowdStrike dat
 
 ##### Enable TLS
 
-Toggle the switch to **Enable TLS**. If you enable TLS, the following certificate and key files are required.
-**Note**: All file paths are made relative to the configuration data directory, which is `/var/lib/observability-pipelines-worker/config/` by default. See [Advanced Worker Configurations][4] for more information. The file must be owned by the `observability-pipelines-worker group` and `observability-pipelines-worker` user, or at least readable by the group or user.
+{{% observability_pipelines/tls_settings %}}
 
-- Enter the identifier for your CrowdStrike NG-SIEM key pass. If you leave it blank, the [default](#set-secrets) is used.
-- `Server Certificate Path`: The path to the certificate file that has been signed by your Certificate Authority (CA) root file in DER or PEM (X.509).
-- `CA Certificate Path`: The path to the certificate file that is your Certificate Authority (CA) root file in DER or PEM (X.509).
-- `Private Key Path`: The path to the `.key` private key file that belongs to your Server Certificate Path in DER or PEM (PKCS#8) format.
-
-##### Buffering options
+##### Buffering
 
 {{% observability_pipelines/destination_buffer %}}
 
@@ -76,11 +70,10 @@ Toggle the switch to **Enable TLS**. If you enable TLS, the following certificat
 
 A batch of events is flushed when one of these parameters is met. See [event batching][2] for more information.
 
-| Max Events     | Max Bytes       | Timeout (seconds)   |
-|----------------|-----------------|---------------------|
-| None           | 1,000,000       | 1                   |
+| Maximum Events | Maximum Size (MB) | Timeout (seconds)   |
+|----------------|-------------------|---------------------|
+| None           | 1                 | 1                   |
 
 [1]: https://app.datadoghq.com/observability-pipelines
 [2]: /observability_pipelines/destinations/#event-batching
 [3]: https://falcon.us-2.crowdstrike.com/documentation/page/bdded008/hec-http-event-connector-guide
-[4]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/

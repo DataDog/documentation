@@ -1,8 +1,9 @@
 ---
+id: alert_value
 core_product:
 - dashboards
 related_terms:
-- alerta
+- alert
 - dashboard
 title: valor de alerta
 ---

@@ -1,4 +1,5 @@
 ---
+id: space_aggregation
 title: space aggregation
 core_product:
   - metrics
