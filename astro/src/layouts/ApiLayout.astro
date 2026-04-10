@@ -1,0 +1,106 @@
+---
+import '../styles/global.css';
+import ApiHeader from '../components/ApiHeader.astro';
+import ApiSideNav from '../components/ApiSideNav.astro';
+import type { ApiCategory } from '../data/api/index';
+
+interface Props {
+  title: string;
+  categories: ApiCategory[];
+  currentSlug?: string;
+}
+
+const { title, categories, currentSlug } = Astro.props;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <script is:inline>
+      (function () {
+        const saved = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const theme = saved || (prefersDark ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', theme);
+      })();
+    </script>
+  </head>
+  <body>
+    <ApiHeader />
+    <div class="api-shell">
+      <ApiSideNav categories={categories} currentSlug={currentSlug} />
+      <main class="api-main">
+        <slot />
+      </main>
+    </div>
+    <button
+      id="theme-toggle"
+      type="button"
+      aria-label="Toggle dark mode"
+    >
+    </button>
+    <script is:inline>
+      (function () {
+        const btn = document.getElementById('theme-toggle');
+        function update() {
+          const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+          btn.textContent = isDark ? '\u2600\uFE0F' : '\uD83C\uDF19';
+        }
+        update();
+        btn.addEventListener('click', function () {
+          const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+          const next = isDark ? 'light' : 'dark';
+          document.documentElement.setAttribute('data-theme', next);
+          localStorage.setItem('theme', next);
+          update();
+        });
+      })();
+    </script>
+    <style>
+      .api-shell {
+        display: flex;
+        height: calc(100vh - 50px);
+      }
+
+      .api-main {
+        flex: 1;
+        overflow-y: auto;
+        padding: var(--space-xl);
+      }
+
+      #theme-toggle {
+        position: fixed;
+        top: var(--space-sm);
+        right: var(--space-sm);
+        background: none;
+        border: var(--border-width) solid var(--color-border);
+        border-radius: var(--border-radius);
+        font-size: var(--font-size-lg);
+        cursor: pointer;
+        padding: var(--space-xs) var(--space-sm);
+        line-height: 1;
+        z-index: 1000;
+      }
+
+      #theme-toggle:hover {
+        border-color: var(--color-brand);
+      }
+
+      @media (max-width: 768px) {
+        .api-shell {
+          flex-direction: column;
+        }
+
+        .api-shell > :global(nav) {
+          width: 100%;
+          height: auto;
+          max-height: 300px;
+          border-right: none;
+          border-bottom: var(--border-width) solid var(--color-border);
+        }
+      }
+    </style>
+  </body>
+</html>

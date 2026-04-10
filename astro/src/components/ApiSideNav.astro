@@ -1,0 +1,39 @@
+---
+import type { ApiCategory } from '../data/api/index';
+import styles from './ApiSideNav.module.css';
+
+interface Props {
+  categories: ApiCategory[];
+  currentSlug?: string;
+}
+
+const { categories, currentSlug } = Astro.props;
+---
+
+<nav class={styles.nav}>
+  <ul class={styles.list}>
+    {categories.map((cat) => {
+      const isActive = cat.slug === currentSlug;
+      const categoryHref = `/api/latest/${cat.slug}/`;
+      return (
+        <li>
+          <a
+            href={categoryHref}
+            class:list={[styles.category, { [styles['category--active']]: isActive }]}
+          >
+            {cat.name}
+          </a>
+          <ul class:list={[styles.operations, { [styles['operations--expanded']]: isActive }]}>
+            {cat.operations.map((op) => (
+              <li>
+                <a href={`${categoryHref}#${op.slug}`} class={styles.operation}>
+                  {op.summary}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </li>
+      );
+    })}
+  </ul>
+</nav>

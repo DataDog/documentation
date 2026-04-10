@@ -89,6 +89,7 @@
 
   /* Layout */
   --content-max-width: 48rem;
+  --sidebar-width: 280px;
 }
 
 /* Dark mode tokens */

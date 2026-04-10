@@ -1,18 +1,3 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
+return Astro.redirect('/api/latest/');
 ---
-
-<BaseLayout title="Astro Docs Prototype">
-  <h1>Astro Docs Prototype</h1>
-  <p>This is a prototype Astro site running alongside the Hugo documentation build.</p>
-  <ul>
-    <li><a href="/docs/typography">Typography</a></li>
-  </ul>
-  <h2>Component gallery</h2>
-  <ul>
-    <li><a href="/docs/components/alert">Alert</a></li>
-    <li><a href="/docs/components/counter">Counter</a></li>
-    <li><a href="/docs/components/codeblock">CodeBlock</a></li>
-    <li><a href="/docs/components/tabs">Tabs</a></li>
-  </ul>
-</BaseLayout>

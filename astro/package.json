@@ -13,7 +13,8 @@
     "@astrojs/preact": "^4.0.0",
     "astro": "^5.7.0",
     "preact": "^10.25.0",
-    "shiki": "^4.0.2"
+    "shiki": "^4.0.2",
+    "yaml": "^2.8.3"
   },
   "devDependencies": {
     "@playwright/test": "^1.59.1",
