@@ -1,5 +1,6 @@
 ---
 title: Journey Details Report
+private: true
 description: Inspect each journey's performance with detailed report combining Product Analytics, Real User Monitoring, Synthetic Testing, and Session Replay data.  
 further_reading:
 - link: "/journey_monitoring/"

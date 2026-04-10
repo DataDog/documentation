@@ -1,5 +1,6 @@
 ---
 title: Journey Monitoring
+private: true
 description: "Monitor critial user flows through journeys and troubleshoot user experience and technical issues to improve journey performance."
 further_reading:
 - link: '/journey_monitoring/map/'

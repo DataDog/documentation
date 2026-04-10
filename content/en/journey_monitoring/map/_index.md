@@ -1,5 +1,6 @@
 ---
 title: Map
+private: true
 description: Visualize and monitor the performance of your journeys in the Journey Map.
 further_reading:
 - link: "/journey_monitoring"
