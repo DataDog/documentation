@@ -432,6 +432,20 @@
     "request_description": "",
     "request_schema_description": "Request to update an AuthN Mapping."
   },
+  "ListInvestigations": {
+    "description": "List all Bits AI investigations for the organization.",
+    "summary": "List Bits AI investigations"
+  },
+  "TriggerInvestigation": {
+    "description": "Trigger a new Bits AI investigation based on a monitor alert.",
+    "summary": "Trigger a Bits AI investigation",
+    "request_description": "Trigger investigation request body.",
+    "request_schema_description": "Request to trigger a new investigation."
+  },
+  "GetInvestigation": {
+    "description": "Get a specific Bits AI investigation by ID.",
+    "summary": "Get a Bits AI investigation"
+  },
   "SearchCases": {
     "description": "Search cases.",
     "summary": "Search cases"
@@ -724,18 +738,6 @@
     "summary": "Search pipelines events",
     "request_description": "",
     "request_schema_description": "The request for a pipelines search."
-  },
-  "UpdateFlakyTestsManagementPolicies": {
-    "description": "Partially update Flaky Tests Management repository-level policies for the given repository.\nOnly provided policy blocks are updated; omitted blocks are left unchanged.",
-    "summary": "Update Flaky Tests Management policies",
-    "request_description": "",
-    "request_schema_description": "Request object for updating Flaky Tests Management policies."
-  },
-  "GetFlakyTestsManagementPolicies": {
-    "description": "Retrieve Flaky Tests Management repository-level policies for the given repository.",
-    "summary": "Get Flaky Tests Management policies",
-    "request_description": "",
-    "request_schema_description": "Request object for getting Flaky Tests Management policies."
   },
   "DeleteTestOptimizationServiceSettings": {
     "description": "Delete Test Optimization settings for a specific service identified by repository, service name, and environment.",
