@@ -13,9 +13,13 @@ further_reading:
   text: "Set Up the Datadog MCP Server"
 ---
 
-This section lists the tools available in the Datadog MCP Server and provides example prompts for using them.
+The following tools are available in the Datadog MCP Server. Each entry includes the required toolset, permissions, and example prompts. Tools are grouped by [toolset][1].
+
+[1]: /bits_ai/mcp_server/setup#toolsets
 
 <div class="alert alert-info">Datadog MCP Server tools are under significant development and are subject to change. Use <a href="https://docs.google.com/forms/d/e/1FAIpQLSeorvIrML3F4v74Zm5IIaQ_DyCMGqquIp7hXcycnCafx4htcg/viewform">this feedback form</a> to share any feedback, use cases, or issues encountered with your prompts and queries.</div>
+
+## Core tools
 
 ### `search_datadog_events`
 *Toolset: **core***\
@@ -202,6 +206,8 @@ Edits an existing Datadog notebook.
 - Add a section to notebook abc-123-def with the latest log analysis results.
 - Update the incident response notebook with today's findings.
 
+## Alerting
+
 ### `validate_datadog_monitor`
 *Toolset: **alerting***\
 *Permissions Required: `Monitors Read`*\
@@ -225,6 +231,8 @@ Searches monitor groups by name or criteria.
 
 - Show me all monitor groups in an alerting state.
 - Find monitor groups related to the checkout service.
+
+## APM
 
 <div class="alert alert-info">The <code>apm</code> toolset is in Preview. <a href="https://www.datadoghq.com/product-preview/apm-mcp-toolset/">Sign up for access.</a></div>
 
@@ -345,6 +353,8 @@ Provides guidance for investigating APM service issues like latency, errors, and
 - How should I investigate a latency increase in my API service?
 - Guide me through debugging an error spike in production.
 
+## Cases
+
 ### `search_datadog_cases`
 *Toolset: **cases***\
 *Permissions Required: `Cases Read`*\
@@ -418,6 +428,8 @@ Searches for Datadog users by email, name, or handle. Useful for finding the rig
 
 - Find the Datadog user account for jane.doe@example.com.
 
+## Database Monitoring
+
 ### `search_datadog_database_plans`
 *Toolset: **dbm***\
 *Permissions Required: `Database Monitoring Read`*\
@@ -435,6 +447,8 @@ Searches [Database Monitoring][26] query samples, which represent individual que
 - Show me query samples with `@duration:>1000000000` (duration greater than 1 second) from `db:mydb`.
 - Find slow queries on `host:db-prod-1` filtered by `@db.user:app_user`.
 - Get recent query samples for `@db.query_signature:abc123def` and analyze performance patterns.
+
+## DDSQL
 
 <div class="alert alert-info">The <code>ddsql</code> toolset is in Preview.</div>
 
@@ -484,6 +498,8 @@ Generates a Datadog UI link to the [DDSQL Editor][41] with a given query pre-pop
 - Generate a DDSQL Editor link for this query.
 - Create a shareable link to the DDSQL Editor with my infrastructure query.
 
+## Error Tracking
+
 ### `search_datadog_error_tracking_issues`
 *Toolset: **error-tracking***\
 *Permissions Required: `Error Tracking Read`*\
@@ -501,6 +517,8 @@ Retrieves detailed information about a specific Error Tracking Issue from Datado
 - Help me solve Error Tracking Issue `550e8400-e29b-41d4-a716-446655440000`.
 - What is the impact of Error Tracking Issue `a3c8f5d2-1b4e-4c9a-8f7d-2e6b9a1c3d5f`?
 - Create a test case to reproduce Error Tracking Issue `7b2d4f6e-9c1a-4e3b-8d5f-1a7c9e2b4d6f`.
+
+## Feature Flags
 
 ### `list_datadog_feature_flags`
 *Toolset: **feature-flags***\
@@ -563,6 +581,8 @@ Syncs feature flag allocations for a specific environment.
 
 - Sync the allocations for flag `new-checkout-flow` in production.
 
+## Networks
+
 ### `analyze_cloud_network_monitoring`
 *Toolset: **networks***\
 *Permissions Required: `Network Connections Read`*\
@@ -596,6 +616,8 @@ Retrieves all network interfaces for a specific device.
 
 - Show me all interfaces on device `device:abc123`.
 - List the interface statuses for my core router.
+
+## Onboarding
 
 ### `browser_onboarding`
 *Toolset: **onboarding***\
@@ -644,6 +666,8 @@ Guides you through uploading source maps for RUM error mapping.
 
 - Help me upload source maps so my RUM errors show original source code.
 
+## Security
+
 ### `datadog_secrets_scan`
 *Toolset: **security***\
 Scans code for hardcoded secrets and credentials, detecting AWS keys, API keys, passwords, tokens, private keys, and database credentials.
@@ -686,6 +710,8 @@ Fallback tool for retrieving full security finding details. Prefer `analyze_secu
 - Get full details for critical findings in my AWS environment.
 - Retrieve complete finding objects for a specific rule.
 - List all open identity risk findings with full metadata.
+
+## Software Delivery
 
 ### `search_datadog_ci_pipeline_events`
 *Toolset: **software-delivery***\
@@ -749,6 +775,8 @@ Fetches aggregated code coverage summary metrics for a repository commit, includ
 - Show me the code coverage for commit `abc123abc123abc123abc123abc123abc123abcd` in `github.com/my-org/my-repo`.
 - What's the patch coverage for the latest commit on my branch?
 
+## Synthetics
+
 ### `get_synthetics_tests`
 *Toolset: **synthetics***\
 *Permissions Required: `Synthetics Read`*\
@@ -775,6 +803,8 @@ Preview and create Datadog Synthetics HTTP API Tests.
 - Create Synthetics tests on every endpoint defined in this code file.
 - Create a Synthetics test on `/path/to/endpoint`.
 - Create a Synthetics test that checks if my domain `mycompany.com` stays up.
+
+## Workflows
 
 ### `list_datadog_workflows`
 *Toolset: **workflows***\
