@@ -17,10 +17,9 @@ test.describe('CodeBlock component', () => {
     await expect(plainBlock.locator('code')).toContainText('This is a plain code block');
   });
 
-  test('renders code block with language label', async ({ page }) => {
+  test('renders code block with language data attribute', async ({ page }) => {
     const jsBlock = page.locator('[data-language="javascript"]').first();
     await expect(jsBlock).toBeVisible();
-    await expect(jsBlock).toContainText('javascript');
     await expect(jsBlock.locator('code')).toContainText('const greeting');
   });
 

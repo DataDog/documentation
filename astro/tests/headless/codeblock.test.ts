@@ -10,11 +10,10 @@ describe('CodeBlock component', () => {
     expect(html).toContain('data-testid="code-block"');
   });
 
-  it('displays language label when provided', () => {
+  it('sets data-language attribute when language is provided', () => {
     const html = render(h(CodeBlock, { content: 'const x = 1;', language: 'javascript' }));
 
     expect(html).toContain('data-language="javascript"');
-    expect(html).toContain('javascript');
   });
 
   it('omits language label when no language specified', () => {
@@ -68,7 +67,7 @@ describe('CodeBlock component', () => {
     expect(html).not.toContain('data-testid="code-block-filename"');
   });
 
-  it('shows filename instead of language label when both are provided', () => {
+  it('shows filename when both language and filename are provided', () => {
     const html = render(h(CodeBlock, { content: 'code', language: 'python', filename: 'app.py' }));
 
     expect(html).toContain('app.py');

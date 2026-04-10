@@ -52,8 +52,6 @@ export function CodeBlock({
           <span class={styles['code-block__filename']} data-testid="code-block-filename">
             {filename}
           </span>
-        ) : language ? (
-          <span class={styles['code-block__language']}>{language}</span>
         ) : null}
         <div class={styles['code-block__header-actions']}>
           {collapsible && (
