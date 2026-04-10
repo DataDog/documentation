@@ -400,6 +400,50 @@ Example configuration file location:
 {{% /tab %}}
 {{< /tabs >}}
 
+## Toolsets
+
+
+The Datadog MCP Server supports _toolsets_, which allow you to use only the tools you need, saving valuable context window space. These toolsets are available:
+
+- `core`: The default toolset for logs, metrics, traces, dashboards, monitors, incidents, hosts, services, events, and notebooks
+- `alerting`: Tools for validating monitors, searching monitor groups, and retrieving monitor templates
+- `apm`: ([Preview][45]) Tools for in-depth [APM][34] trace analysis, span search, Watchdog insights, and performance investigation
+- `cases`: Tools for [Case Management][42], including creating, searching, and updating cases; managing projects; and linking Jira issues
+- `dbm`: Tools for interacting with [Database Monitoring][33]
+- `ddsql`: (Preview) Tools for querying Datadog data using [DDSQL][44], a SQL dialect with support for infrastructure resources, logs, metrics, RUM, spans, and other Datadog data sources
+- `error-tracking`: Tools for interacting with Datadog [Error Tracking][32]
+- `feature-flags`: Tools for managing [feature flags][35], including creating, listing, and updating flags and their environments
+- `llmobs`: Tools for searching and analyzing [LLM Observability][36] spans and experiments
+- `product-analytics`: Tools for interacting with [Product Analytics][41] queries
+- `networks`: Tools for [Cloud Network Monitoring][37] analysis and [Network Device Monitoring][38]
+- `onboarding`: Agentic onboarding tools for guided Datadog setup and configuration
+- `security`: Tools for code security scanning and searching [security signals][39] and [security findings][40]
+- `software-delivery`: Tools for interacting with Software Delivery ([CI Visibility][30] and [Test Optimization][31])
+- `synthetics`: Tools for interacting with Datadog [Synthetic tests][29]
+- `workflows`: Tools for [Workflow Automation][43], including listing, inspecting, executing, and configuring workflows for agent use
+
+To use a toolset, include the `toolsets` query parameter in the endpoint URL when connecting to the MCP Server ([remote authentication](#authentication) only). Use `toolsets=all` to enable all generally available toolsets at once.
+
+{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
+For example, based on your selected [Datadog site][17] ({{< region-param key="dd_site_name" >}}):
+
+- Retrieve only the core tools (this is the default if `toolsets` is not specified):
+  <pre><code>{{< region-param key="mcp_server_endpoint" >}}</code></pre>
+
+- Retrieve only Synthetic Testing-related tools:
+  <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=synthetics</code></pre>
+
+- Retrieve core, Synthetic Testing, and Software Delivery tools:
+  <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=core,synthetics,software-delivery</code></pre>
+
+- Retrieve all generally available tools:
+  <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=all</code></pre>
+
+<div class="alert alert-info">Enabling all toolsets increases the number of tool definitions sent to your AI client, which consumes context window space. <code>toolsets=all</code> works best with clients that support tool filtering, such as Claude Code.</div>
+
+[17]: /getting_started/site/#navigate-the-datadog-documentation-by-site
+{{< /site-region >}}
+
 ## Supported clients
 
 | Client | Developer | Notes |
@@ -502,10 +546,6 @@ Local authentication is recommended for Cline and when remote authentication is 
 4. Fully restart your AI client to apply the configuration and load the MCP Server.
 {{% /collapse-content %}}
 
-## Toolsets
-
-All toolsets for the MCP Server are documented [here][12]. By default, the base URL only includes the `core` toolset. 
-
 ## Test access to the MCP Server
 
 1. Install the [MCP inspector][2], a developer tool for testing and debugging MCP servers.
@@ -553,3 +593,20 @@ All toolsets for the MCP Server are documented [here][12]. By default, the base 
 [26]: https://app.datadoghq.com/organization-settings/roles
 [27]: https://app.datadoghq.com/organization-settings/preferences
 [28]: https://www.warp.dev/
+[29]: /synthetics/
+[30]: /continuous_integration/
+[31]: /tests/
+[32]: /error_tracking/
+[33]: /database_monitoring/
+[34]: /tracing/
+[35]: /feature_flags/
+[36]: /llm_observability/mcp_server/
+[37]: /network_monitoring/cloud_network_monitoring/
+[38]: /network_monitoring/devices/
+[39]: /security/threats/security_signals/
+[40]: /security/misconfigurations/findings/
+[41]: /product_analytics
+[42]: /service_management/case_management/
+[43]: /actions/workflows/
+[44]: /ddsql_editor/
+[45]: https://www.datadoghq.com/product-preview/apm-mcp-toolset/
