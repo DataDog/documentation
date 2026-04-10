@@ -47,7 +47,7 @@ DD_AGENT_VERSION="7.78.0-rc.7"
 
 The Dockerfile:
 
-- Uses Ubuntu 24.04 as the build environment.
+- Uses Ubuntu 24.04 as the build environment (controlled by the `UBUNTU_VERSION` build argument).
 - Installs Go and necessary dependencies.
 - Downloads and unpacks the DDOT Collector source code.
 - Builds the DDOT Collector (also known as OTel Agent).
@@ -283,6 +283,24 @@ This section discusses some common issues you might encounter while building you
 ```
 
 **Solution**: Remove `awscontainerinsightreceiver` from the `manifest.yaml` file. This receiver has incompatible libraries and cannot be included in the build.
+
+### glibc compatibility on Amazon Linux 2 and other older distributions
+
+**Problem**: The `otel-agent` binary fails to run on Amazon Linux 2 or other Linux distributions with glibc older than 2.34, with an error such as:
+```text
+/lib/x86_64-linux-gnu/libc.so.6: version 'GLIBC_2.34' not found
+```
+
+This happens when the Dockerfile builder image uses Ubuntu 22.04 or later, which causes the compiled binary to require glibc 2.34 at runtime.
+
+**Solution**: Use Ubuntu 20.04 (glibc 2.31) as the builder image:
+```shell
+docker build . \
+  ... \
+  --build-arg UBUNTU_VERSION=20.04
+```
+
+The resulting binary only depends on glibc symbols available since glibc 2.17, making it compatible with Amazon Linux 2 (glibc 2.26), CentOS 7, and similar older distributions.
 
 ### Insufficient disk space
 
