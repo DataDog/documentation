@@ -1,0 +1,23 @@
+---
+title: "Counter Component"
+---
+
+# Counter
+
+An interactive counter with increment and decrement buttons. Uses Preact for client-side hydration.
+
+## Properties
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `initialCount` | `number` | `0` | The starting value of the counter |
+
+## Examples
+
+### Default (starts at 0)
+
+{% counter /%}
+
+### Custom initial count (starts at 10)
+
+{% counter initialCount=10 /%}

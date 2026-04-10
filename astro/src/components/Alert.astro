@@ -1,0 +1,15 @@
+---
+import styles from './Alert.module.css';
+
+interface Props {
+  type?: 'info' | 'warning' | 'error' | 'success';
+}
+
+const { type = 'info' } = Astro.props;
+const label = type.charAt(0).toUpperCase() + type.slice(1);
+---
+
+<div class:list={[styles.alert, styles[`alert--${type}`]]} data-alert-type={type}>
+  <strong class={styles['alert__label']}>{label}:</strong>
+  <slot />
+</div>

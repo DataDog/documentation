@@ -4,15 +4,21 @@
   "scripts": {
     "dev": "astro dev --port 4321",
     "build": "astro build",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "test": "vitest run",
+    "test:browser": "playwright test"
   },
   "dependencies": {
-    "astro": "^5.7.0",
     "@astrojs/markdoc": "^0.14.0",
     "@astrojs/preact": "^4.0.0",
+    "astro": "^5.7.0",
     "preact": "^10.25.0"
   },
   "devDependencies": {
-    "typescript": "^5.7.0"
+    "@playwright/test": "^1.59.1",
+    "cheerio": "^1.2.0",
+    "preact-render-to-string": "^6.6.7",
+    "typescript": "^5.7.0",
+    "vitest": "^4.1.4"
   }
 }

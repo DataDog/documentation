@@ -2,6 +2,12 @@
 
 We intend to eventually deprecate Hugo, having moved all of its content into this Astro site. For now, to avoid breaking existing CI/CD while we build the site, we've left the repo intact and simply added an Astro folder.
 
+## Operating instructions
+
+- Never assume I know what I'm talking about. If you have a better idea, raise it. If there is a security concern or other concern with what I'm doing, raise it. If I left gaps in my instructions, ask questions.
+- When you update a component, be sure to update its tests and documentation page.
+- After you implement something, list any best practices you used that aren't well known, such as using `data-testid` as a flexible ID for Playwright tests.
+
 ## Commands
 
 - `npm run dev` — Start dev server on port 4321

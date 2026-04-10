@@ -1,0 +1,20 @@
+@import './tokens.css';
+
+body {
+  font-family: var(--font-family);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height);
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  max-width: var(--content-max-width);
+  margin: var(--space-xl) auto;
+  padding: 0 var(--space-md);
+}
+
+a {
+  color: var(--color-brand);
+}
+
+a:hover {
+  color: var(--color-brand-hover);
+}

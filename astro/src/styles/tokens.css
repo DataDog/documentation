@@ -1,0 +1,58 @@
+:root {
+  /* Colors — Brand */
+  --color-brand: #632ca6;
+  --color-brand-hover: #7b3fc4;
+
+  /* Colors — Text */
+  --color-text: #333;
+  --color-text-muted: #666;
+  --color-text-inverse: #fff;
+
+  /* Colors — Surface */
+  --color-bg: #fff;
+  --color-border: #ddd;
+  --color-border-strong: #eee;
+
+  /* Colors — Alert: info */
+  --color-alert-info-bg: #e7f3fe;
+  --color-alert-info-border: #2196f3;
+  --color-alert-info-text: #0d47a1;
+
+  /* Colors — Alert: warning */
+  --color-alert-warning-bg: #fff3e0;
+  --color-alert-warning-border: #ff9800;
+  --color-alert-warning-text: #e65100;
+
+  /* Colors — Alert: error */
+  --color-alert-error-bg: #ffebee;
+  --color-alert-error-border: #f44336;
+  --color-alert-error-text: #b71c1c;
+
+  /* Colors — Alert: success */
+  --color-alert-success-bg: #e8f5e9;
+  --color-alert-success-border: #4caf50;
+  --color-alert-success-text: #1b5e20;
+
+  /* Spacing */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+
+  /* Typography */
+  --font-family: system-ui, -apple-system, sans-serif;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.25rem;
+  --line-height: 1.6;
+
+  /* Borders */
+  --border-width: 1px;
+  --border-width-thick: 2px;
+  --border-width-accent: 4px;
+  --border-radius: 4px;
+  --border-radius-md: 6px;
+
+  /* Layout */
+  --content-max-width: 48rem;
+}

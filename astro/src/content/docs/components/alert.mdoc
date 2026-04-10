@@ -1,0 +1,39 @@
+---
+title: "Alert Component"
+---
+
+# Alert
+
+A static alert banner for displaying contextual messages.
+
+## Properties
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `type` | `'info' \| 'warning' \| 'error' \| 'success'` | `info` | Controls the color scheme and label |
+
+## Examples
+
+### Info (default)
+
+{% alert type="info" %}
+This is an informational alert. Use it to surface neutral context.
+{% /alert %}
+
+### Warning
+
+{% alert type="warning" %}
+This is a warning alert. Something needs your attention.
+{% /alert %}
+
+### Error
+
+{% alert type="error" %}
+This is an error alert. Something went wrong.
+{% /alert %}
+
+### Success
+
+{% alert type="success" %}
+This is a success alert. The operation completed.
+{% /alert %}
