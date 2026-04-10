@@ -80,7 +80,7 @@ Link a feature flag to control how traffic is split between variants.
 Click **Add a feature flag** to select the appropriate feature flag for your experiment. If you haven't created a feature flag, see [Getting Started with Feature Flags][4].
 
 #### Randomization
-After selecting a feature flag, the randomization settings are pre-populated based on the flag's configuration. Adjust these settings as needed.
+Configure how users are assigned to variants. After you select a feature flag, the randomization settings are pre-populated based on the flag's configuration. These settings are independent from the linked feature flag until you launch the experiment.
 
 1. Select the **Environment** for your experiment from the dropdown.
 1. Under **Targeting rules**:
@@ -125,6 +125,10 @@ Expand the **Split-by exploration dimensions** section. Select properties from t
 {{% /collapse-content %}}
 
 ## Launch your experiment
+
+<div class="alert alert-info">Experiment randomization settings do not affect the linked feature flag until you launch. Setting up your experiment is safe to do while the flag is serving other traffic.</div>
+
+When you start your experiment, Datadog adds a targeting rule to the linked feature flag that assigns users to variants and activates randomization.
 
 To launch your experiment:
 
