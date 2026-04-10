@@ -51,7 +51,7 @@ On every push to `main`, the GitHub Action runs `upload.py`, which:
 - **Updates** rulesets and rules whose content has changed
 - **Deletes** rulesets and rules that have been removed from disk
 
-Only changed rules trigger API calls — unchanged rules are skipped.
+Only changed rules trigger API calls—unchanged rules are skipped.
 
 To trigger a sync without pushing a commit, go to the **Actions** tab and click **Upload Custom Rules → Run workflow**.
 
@@ -76,9 +76,9 @@ description: Detailed description.
 category: BEST_PRACTICES     # SECURITY | BEST_PRACTICES | CODE_STYLE | ERROR_PRONE | PERFORMANCE
 severity: ERROR              # ERROR | WARNING | NOTICE | INFO
 language: JAVASCRIPT
-tree_sitter_query: ...       # See Anatomy of a custom rule
-code: |-                     # See Anatomy of a custom rule
-  function visit(node, filename, code) { ... }
+tree_sitter_query: <TREE_SITTER_QUERY>    # See Anatomy of a custom rule
+code: |-                                  # See Anatomy of a custom rule
+  function visit(node, filename, code) { <RULE_LOGIC> }
 tests: []
 is_published: false          # Set to true when the rule is ready for scans
 ```
