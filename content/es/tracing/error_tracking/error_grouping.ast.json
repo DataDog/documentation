@@ -1,0 +1,59 @@
+{
+  "$$mdtype": "Node",
+  "inline": false,
+  "attributes": {
+    "frontmatter": {
+      "title": {
+        "itemTranslationData": {
+          "bdf228564adb8da0e7bd44262632570c": {
+            "string": "Agrupación de errores"
+          }
+        }
+      },
+      "description": {
+        "itemTranslationData": {
+          "22801b6811cd4f56becf3e34251a7fff": {
+            "string": "Entiende cómo se agrupan los errores en incidentes."
+          }
+        }
+      }
+    }
+  },
+  "children": {
+    "listTranslationData": {
+      "1": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "children": {
+          "listTranslationData": {
+            "0": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": "Setup",
+                      "itemTranslationData": {
+                        "d906a44f416b2aae5ff49b9394e3d86f": {
+                          "string": "Instalación"
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 9-10"
+                  }
+                }
+              },
+              "type": "inline",
+              "location": "line 9-10"
+            }
+          }
+        },
+        "type": "heading",
+        "location": "line 9-10"
+      }}
+  },
+  "type": "document"}

@@ -177,7 +177,7 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
 
     By default, all subdomains of listed hosts are traced. For instance, if you add `example.com`, you also enable the tracing for `api.example.com` and `foo.example.com`.
 
-3.  _(Optional)_ Configure the `traceSampler` parameter to keep a defined percentage of the backend traces. If not set, 20% of the traces coming from application requests are sent to Datadog. To keep 100% of backend traces:
+3.  _(Optional)_ Configure the `traceSampler` parameter to keep a defined percentage of the backend traces. If not set, 100% of the traces coming from application requests are sent to Datadog. To keep 20% of backend traces:
 
     ```kotlin
     val tracedHosts = listOf("example.com")
@@ -185,7 +185,7 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
     val okHttpClient = OkHttpClient.Builder()
         .addInterceptor(
           DatadogInterceptor.Builder(tracedHosts)
-              .setTraceSampler(RateBasedSampler(100f))
+              .setTraceSampler(RateBasedSampler(20f))
               .build()
         )
         .build()
@@ -202,7 +202,7 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
 
 1. Set up [RUM iOS Monitoring][1].
 
-2. Enable `RUM` with the `urlSessionTracking` option and `firstPartyHostsTracing` parameter:
+2. Enable `RUM` and URLSession instrumentation with the `urlSessionTracking` configuration and `firstPartyHostsTracing` parameter:
     ```swift
     RUM.enable(
         with: RUM.Configuration(
@@ -218,32 +218,31 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
         )
     )
     ```
+    
+   By default, all subdomains of listed hosts are traced. For instance, if you add `example.com`, you also enable tracing for `api.example.com` and `foo.example.com`.
 
-3. Enable URLSession instrumentation for your `SessionDelegate` type, which conforms to `URLSessionDataDelegate` protocol:
+   Trace ID injection works when you are providing a `URLRequest` to the `URLSession`. Distributed tracing does not work when you are using a `URL` object.
+
+3. _(Optional)_ For detailed timing breakdown (DNS resolution, SSL handshake, time to first byte, connection time, and download duration), enable `URLSessionInstrumentation` for your `SessionDelegate` type:
     ```swift
-    URLSessionInstrumentation.enable(
+    URLSessionInstrumentation.enableDurationBreakdown(
         with: .init(
             delegateClass: <YourSessionDelegate>.self
         )
     )
-    ```
 
-4. Initialize URLSession as stated in [Setup][1]:
-    ```swift
-    let session =  URLSession(
+    let session = URLSession(
         configuration: ...,
         delegate: <YourSessionDelegate>(),
         delegateQueue: ...
     )
     ```
 
-   By default, all subdomains of listed hosts are traced. For instance, if you add `example.com`, you also enable tracing for `api.example.com` and `foo.example.com`.
+   **Note**: Distributed tracing works automatically, but trace timings are more accurate after enabling `URLSessionInstrumentation`.
 
-   Trace ID injection works when you are providing a `URLRequest` to the `URLSession`. Distributed tracing does not work when you are using a `URL` object.
+4. _(Optional)_ Set the `sampleRate` parameter to keep a defined percentage of the backend traces. If not set, 100% of the traces coming from application requests are sent to Datadog.
 
-5. _(Optional)_ Set the `sampleRate` parameter to keep a defined percentage of the backend traces. If not set, 20% of the traces coming from application requests are sent to Datadog.
-
-     To keep 100% of backend traces:
+     To keep 20% of backend traces:
     ```swift
     RUM.enable(
         with: RUM.Configuration(
@@ -254,7 +253,7 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
                         "example.com",
                         "api.yourdomain.com"
                     ],
-                    sampleRate: 100
+                    sampleRate: 20
                 )
             )
         )
@@ -278,14 +277,14 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
 
     By default, all subdomains of listed hosts are traced. For instance, if you add `example.com`, you also enable tracing for `api.example.com` and `foo.example.com`.
 
-3. _(Optional)_ Set the `resourceTracingSamplingRate` initialization parameter to keep a defined percentage of the backend traces. If not set, 20% of the traces coming from application requests are sent to Datadog.
+3. _(Optional)_ Set the `resourceTracingSamplingRate` initialization parameter to keep a defined percentage of the backend traces. If not set, 100% of the traces coming from application requests are sent to Datadog.
 
-     To keep 100% of backend traces:
+     To keep 20% of backend traces:
     ```javascript
     const config = new DatadogProviderConfiguration(
         // ...
     );
-    config.resourceTracingSamplingRate = 100;
+    config.resourceTracingSamplingRate = 20;
     ```
 
     **Note**: `resourceTracingSamplingRate` **does not** impact RUM sessions sampling. Only backend traces are sampled out.
@@ -660,7 +659,7 @@ Datadog uses the distributed tracing protocol and sets up the HTTP headers below
 : Generated from the Real User Monitoring SDK. Allows Datadog to generate the first span from the trace.
 
 `x-datadog-origin: rum`
-: To make sure the generated traces from Real User Monitoring don't affect your APM Index Spans counts.
+: Generated from the Real User Monitoring SDK. Allows Datadog to detect the source of the trace.
 
 `x-datadog-sampling-priority`
 : Set to `1` by the Real User Monitoring SDK if the trace was sampled, or `0` if it was not.

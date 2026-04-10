@@ -20,7 +20,7 @@ The default timeout for each step is 60 seconds. You can override this default t
 
 ## Automatically recorded steps
 
-Once you click **Start Recording**, the [Datadog browser test recorder extension][3], automatically detects and records steps on your website.
+After you click **Start Recording**, the [Datadog browser test recorder extension][3], automatically detects and records steps on your website.
 
 ### Click
 
@@ -56,6 +56,26 @@ To record an **Upload** step, either:
 Datadog records steps you perform on your application, such as uploading, and a recap appears as a step in the left corner. You can upload up to 10 files with a limit of 5MB each.
 
 {{< img src="synthetics/browser_tests/upload_file_step.png" alt="Create an upload file step" style="width:70%;" >}}
+
+### Drag and drop
+
+Datadog records drag and drop interactions you perform on your application as a step.
+
+Common use cases include:
+- Dragging a widget into a dashboard
+- Reordering filters
+- Moving a card into a group
+- Rearranging notebook elements
+
+{{< img src="synthetics/browser_tests/drag_and_drop.mp4" alt="Drag and drop step recorded in a browser test" video="true" width="90%" >}}
+
+To record a drag and drop step, start the recorder and perform the drag and drop action in your application. The recorder detects the drag source and drop target and creates a single **Drag and Drop** step.
+
+After recording, you can review and edit the drag source element, drop target element, interaction points, and timing settings.
+
+For complex applications or non-native drag and drop implementations, see [drag and drop](#drag-and-drop-1) in the manually added steps section.
+
+<!-- TODO: Confirm whether drag and drop is available in GovCloud before publishing -->
 
 ## Manually added steps
 
@@ -218,6 +238,37 @@ This step uses a dedicated click, not a hovering mechanism, to avoid generating 
 
 Select **Hover** and click on an element to add a step.
 
+#### Drag and drop
+
+Create this interaction step to simulate dragging an element from one location to another. This is useful when refining existing tests or when recording is not practical.
+
+1. Click **Add Step**.
+2. Select **Interaction**.
+3. Choose **Drag and Drop**.
+4. Select the element to drag.
+5. Select the element to drop onto.
+
+{{< img src="synthetics/browser_tests/drag_and_drop_manual_step.mp4" alt="Drag and drop manual interaction step configuration" video="true" width="90%" >}}
+
+**Step options**
+
+| Option | Description |
+|--------|-------------|
+| **User Specified Locator** (optional) | A custom CSS or XPath selector when the recorder picks the wrong element. See [When to use a custom locator](#when-to-use-a-custom-locator-optional) below. |
+| **Interaction Point** | Where on the element the action occurs: **Center** (default) or **Offset (Top-Left)**. |
+| **Delay before drag** | Pause between mouse press and start of drag (default 0ms). |
+| **Delay before drop** | Pause after reaching the drop target before release (default 0ms). Increase for animated or complex UIs. |
+
+#### When to use a custom locator (optional)
+
+Use **User Specified Locator** for the following scenarios:
+
+* **Ghost or overlay elements**: Your application shows a floating copy of the dragged item (for example, a drag preview). The recorder may target that copy instead of the real drop zone. Edit the drop target to the actual container or enter a custom selector.
+* **Deep or nested elements**: The draggable/droppable behavior is on a parent, but the recorder picked a child. Inspect the page and choose the parent element that has the right classes or attributes.
+* **Same element for drag and drop**: The recorder used one element as both drag source and drop target. Edit the drop target and select the real destination element.
+
+**Note**: If the draggable element only appears after hovering on another element, add a **Hover** step before the drag and drop step.
+
 #### Scroll
 
 Browser tests automatically scroll to the elements that need to be interacted with. In most cases, you do not need to add a scroll step manually. Use the scroll step when you need to trigger an additional interaction, such as an infinite scroll.
@@ -322,7 +373,7 @@ HTTP requests can decompress bodies with the following `content-encoding` header
 
 - If a test contains an assertion on the response body and the timeout limit is reached, an `Assertions on the body/response cannot be run beyond this limit` error appears.
 
-You can create up to 20 assertions per step by clicking **New Assertion** or by clicking directly on the response preview.
+You can create up to 25 assertions per step by clicking **New Assertion** or by clicking directly on the response preview.
 
 {{< img src="synthetics/browser_tests/assertions.png" alt="Define assertions for your browser test to succeed or fail on" style="width:80%;" >}}
 
@@ -464,6 +515,17 @@ Instead of manually reordering new steps by dragging and dropping individual ste
 
 {{< img src="synthetics/browser_tests/recording_cursor_step.mp4" alt="Set the cursor on a test step to add additional steps before this step" video="true" width="100%" >}}
 
+## Export a step to Terraform
+
+To copy a step's Terraform configuration to your clipboard:
+
+1. Hover over a step in the recorder.
+2. Click the **Copy Terraform step snippet** icon.
+
+{{< img src="synthetics/guide/export-tests-to-terraform/browser_test_recording_terraform_2.png" alt="The Copy Terraform step snippet icon in the browser test recorder" style="width:80%;" >}}
+
+Paste the configuration into your `.tf` file as part of a `datadog_synthetics_test` resource. For more information, see [Export Synthetic tests to Terraform][15].
+
 ## Use variables
 
 To see all available variables on manually added steps, type `{{` in the input field.
@@ -518,3 +580,4 @@ To edit a browser recording after it's saved:
 [12]: https://www.w3schools.com/xml/xpath_syntax.asp
 [13]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
 [14]: https://app.datadoghq.com/synthetics/tests
+[15]: /synthetics/guide/export-tests-to-terraform

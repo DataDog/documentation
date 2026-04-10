@@ -21,6 +21,8 @@ Search your metrics by metric name or tag using the **Metric** or **Tag** search
 
 {{< img src="metrics/summary/tag_advanced_filtering.png" alt="The metrics summary page with NOT team:* entered in the Tag search bar" style="width:75%;">}}
 
+**Note**: Tag values are retained in the **Tag** search field for 28 hours. Values not submitted in the past 28 hours do not appear as search options, even if they remain visible in the metric details side panel.
+
 You can also discover relevant metrics using enhanced fuzzy matching support in the Metrics search field:
 
 {{< img src="metrics/summary/metric_advanced_filtering_fuzzy.png" alt="The metrics summary page with fuzzy search searching shopist checkout" style="width:75%;">}}
@@ -123,19 +125,55 @@ The collection interval for the metric in seconds.
 
 #### Metric description
 
-The metric description helps you understand what a metric does. Descriptions are pre-populated for metrics coming from supported [integrations][9]. Use this field to update the descriptions for your [custom metrics][4].
+The metric description helps you understand what a metric represents, why it exists, and how it is typically used. Use this field to view and update descriptions for your [custom metrics][4]. Descriptions are pre-populated for metrics coming from supported [integrations][9].
 
-## Metric Context Explorer
+#### AI-generated description
 
-The Metric Context Explorer provides a centralized view of every Custom Metric and its underlying context. 
+For custom metrics with connected source code, Datadog can automatically create AI-generated descriptions to provide additional context. These descriptions are fully editable, and human edits always take precedence.
 
-{{< callout url="https://www.datadoghq.com/product-preview/metrics-source-code-attribution/" >}} Metric Context Explorer is in Preview. If you're interested in this feature, complete this form. {{< /callout >}}
+To enable auto-generated descriptions from source code, ensure that you've installed Datadog's [GitHub][36], [GitLab][37], or [Azure DevOps][38] integration and that all your [repositories][39] are connected.
 
-Use the Metric Context Explorer to identify a metric's source code, understand how it is generated, and determine ownership. It provides visibility into context and ownership, helping you troubleshoot and optimize faster by linking directly to the metric's source file, commit history, and blame data.
+{{< img src="metrics/summary/metric_ai_generated_descriptions_03062026.png" alt="AI generated descriptions in Metrics sidepanel" style="width:80%;">}}
 
-{{< img src="metrics/summary/metric_context_explorer_12112025.png" alt="Source Code Example in Metrics sidepanel" style="width:80%;">}}
 
-To ensure full coverage of your metric's source code, ensure that you've installed Datadog's [GitHub][36], [Gitlab][37], or [Azure DevOps][38] integration and that all your [repositories][39] are connected.
+## Source Code
+
+The Source Code section in the metric side panel provides a centralized view of every custom metric and its underlying context.
+
+Use the Source Code section in the metric side panel to identify a metric's source code, understand how it is generated, and determine ownership. It provides visibility into context and ownership, helping you troubleshoot and optimize faster by linking directly to the metric's source file, commit history, and blame data.
+
+{{< img src="metrics/summary/metric_source_code_03262026.png" alt="Source Code Example in Metrics sidepanel" style="width:80%;">}}
+
+### Troubleshooting missing metrics
+
+If a metric doesn't appear in Source Code, it may be due to how it's defined.
+
+Datadog detects metrics best when names are written as explicit strings. Metrics built using variables, constants, or custom helpers may not be detected.
+
+Common reasons for missing metrics:
+- Metric name is generated dynamically  
+- Metric is emitted through custom wrappers  
+- Repository is not fully indexed  
+
+Best practice:
+- Define metric names as explicit strings when possible  
+
+Example:
+
+Sending metric using a variable (not recommended)
+
+```java
+public static final String METRIC_NAME = "my.metric.name";
+statsEmitter.distribution(METRIC_NAME, value, tags);
+```
+
+Sending metric as explicit string (recommended):
+
+```java
+timer = meterRegistry.timer("my.metric.name");
+```
+
+To ensure full coverage of your metric's source code, ensure that you've installed Datadog's [GitHub][36], [GitLab][37], or [Azure DevOps][38] integration and that all your [repositories][39] are connected.
 
 ### Tags table
 
@@ -177,7 +215,7 @@ To determine why a particular metric name is emitting a large number of custom m
 ## Metrics without Limits™
 Metrics without Limits™ provides you control over the size of your custom metrics without requiring any agent or code-level changes. 
 
-**Note:** Metrics without Limits™ is only available for custom metrics.
+**Note**: Metrics without Limits™ is only available for custom metrics.
 
 You can [configure tags in bulk](#configuration-of-multiple-metrics) by going to **Configure Metrics -> Manage tags** in the [Metrics page][34], or by clicking the **Manage Tags** button in a metric's details side panel. 
 
@@ -268,3 +306,4 @@ This table shows the mapping between the metric origin as seen in the facet and 
 [37]: https://app.datadoghq.com/integrations/gitlab-source-code
 [38]: https://app.datadoghq.com/integrations/azure-devops-source-code?subPath=configuration
 [39]: https://app.datadoghq.com/source-code/repositories
+[40]: https://www.datadoghq.com/product-preview/metrics-source-code-attribution/

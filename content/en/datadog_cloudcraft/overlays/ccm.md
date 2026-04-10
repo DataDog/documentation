@@ -18,7 +18,9 @@ further_reading:
 
 ## Overview
 
-The Cloud Cost overlay helps you visualize resource-level costs and identify savings opportunities within your AWS architecture diagrams. This overlay provides two views: **[Cost](#cost-view)** and **[Recommendations](#recommendations-view)**.
+The Cloud Cost overlay helps you visualize resource-level costs and identify savings opportunities within your cloud architecture diagrams. This overlay provides two views: **[Cost](#cost-view)** and **[Recommendations](#recommendations-view)**.
+
+**Note**: The Cost view is not available for GCP accounts. The Recommendations view is supported for GCP.
 
 ## Cost view
 
@@ -40,7 +42,7 @@ Click a resource to open the side panel, which displays:
 
 **Note**: The time range defaults to the last 30 days and is not configurable.
 
-{{< img src="datadog_cloudcraft/overlays/cloudcraft_ccm_cost_view.png" alt="Cloud Cost Management overlay in Cloudcraft showing the Cost view with resource-level costs." style="width:100%;" >}} 
+{{< img src="datadog_cloudcraft/overlays/cloudcraft_ccm_cost_view_2.png" alt="Cloud Cost Management overlay in Cloudcraft showing the Cost view with resource-level costs." style="width:100%;" >}} 
 
 ## Recommendations view
 
@@ -62,7 +64,7 @@ Clicking a resource opens a detailed side panel with:
 
 This enables faster, in-context cost optimization without switching views.
 
-{{< img src="datadog_cloudcraft/overlays/cloudcraft_ccm_overlay_5.png" alt="Cloud Cost Management overlay in Cloudcraft showing the Recommendations view with savings opportunities highlighted." style="width:100%;" >}}
+{{< img src="datadog_cloudcraft/overlays/cloudcraft_ccm_overlay_6.png" alt="Cloud Cost Management overlay in Cloudcraft showing the Recommendations view with savings opportunities highlighted." style="width:100%;" >}}
 
 ## Further reading
 

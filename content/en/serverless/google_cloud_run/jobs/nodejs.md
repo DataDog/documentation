@@ -17,26 +17,19 @@ further_reading:
 <div class="alert alert-info">A sample application is <a href="https://github.com/DataDog/serverless-gcp-sample-apps/tree/main/cloud-run-jobs/node">available on GitHub</a>.</div>
 <div class="alert alert-info">
 For full visibility and access to all Datadog features in Cloud Run Jobs,
-ensure you’ve <a href="http://localhost:1313/integrations/google_cloud_platform/">installed the Google Cloud integration</a>
+ensure you’ve <a href="/integrations/google_cloud_platform/">installed the Google Cloud integration</a>
 and are using <a href="https://hub.docker.com/r/datadog/serverless-init">serverless-init version 1.9.0 or later</a>.
 </div>
 
 1. **Install the Datadog Node.js tracer**.
 
-   1. In your main application, add `dd-trace-js`.
+   1. In your main application, install the `dd-trace` package.
 
       {{< code-block lang="shell" disable_copy="false" >}}
-npm install dd-trace --save
+npm install dd-trace
 {{< /code-block >}}
 
-   2. Add the following to your application code to initialize the tracer:
-   {{< code-block lang="javascript" disable_copy="false" >}}
-const tracer = require('dd-trace').init({
- logInjection: true,
-});
-{{< /code-block >}}
-
-   3. Set the following environment variable to specify that the `dd-trace/init` module is required when the Node.js process starts:
+   2. Initialize the Node.js tracer with the `NODE_OPTIONS` environment variable:
    {{< code-block lang="dockerfile" disable_copy="false" >}}
 ENV NODE_OPTIONS="--require dd-trace/init"
 {{< /code-block >}}
@@ -57,9 +50,6 @@ ENV NODE_OPTIONS="--require dd-trace/init"
 
    If you want multiline logs to be preserved in a single log message, Datadog recommends writing your logs in JSON format. For example, you can use a third-party logging library such as `winston`:
    {{< code-block lang="javascript" disable_copy="false" >}}
-const tracer = require('dd-trace').init({
-  logInjection: true,
-});
 const { createLogger, format, transports } = require('winston');
 
 const logger = createLogger({
@@ -78,7 +68,7 @@ logger.info('Hello world!');
 
 4. **Configure your application**.
 
-{{% serverless-init-configure %}}
+{{% serverless-init-configure cloudrun_jobs="true" %}}
 
 5. {{% gcr-service-label %}}
 
@@ -88,7 +78,79 @@ logger.info('Hello world!');
 
    To send custom metrics, [view code examples][4]. In serverless, only the *distribution* metric type is supported.
 
+8. **Enable profiling (preview)**.
+
+   To enable the [Continuous Profiler][7], set the environment variable `DD_PROFILING_ENABLED=true`.
+
+   <div class="alert alert-info">Datadog's Continuous Profiler is available in preview for Google Cloud Run Jobs.</div>
+
 {{% serverless-init-env-vars-in-container language="nodejs" defaultSource="cloudrun" %}}
+
+{{% svl-tracing-env %}}
+
+## Distributed tracing with Pub/Sub
+
+To get end-to-end distributed traces between Pub/Sub producers and Cloud Run jobs, configure your push subscriptions with the `--push-no-wrapper` and `--push-no-wrapper-write-metadata` flags. This moves message attributes from the JSON body to HTTP headers, allowing Datadog to extract producer trace context and create proper span links.
+
+For more information, see [Producer-aware tracing for Google Cloud Pub/Sub and Cloud Run][5] and [Payload unwrapping][6] in the Google Cloud documentation.
+
+### Configure push subscriptions for full trace visibility
+
+**Create a new push subscription:**
+
+{{< code-block lang="shell" disable_copy="false" >}}
+gcloud pubsub subscriptions create order-processor-sub \
+  --topic=orders \
+  --push-endpoint=https://order-processor-xyz.run.app/pubsub \
+  --push-no-wrapper \
+  --push-no-wrapper-write-metadata
+{{< /code-block >}}
+
+**Update an existing push subscription:**
+
+{{< code-block lang="shell" disable_copy="false" >}}
+gcloud pubsub subscriptions update order-processor-sub \
+  --push-no-wrapper \
+  --push-no-wrapper-write-metadata
+{{< /code-block >}}
+
+### Configure Eventarc Pub/Sub triggers
+
+Eventarc Pub/Sub triggers use push subscriptions as the underlying delivery mechanism. When you create an Eventarc trigger, GCP automatically creates a managed push subscription. However, Eventarc does not expose `--push-no-wrapper-write-metadata` as a trigger creation parameter, so you must manually update the auto-created subscription.
+
+1. **Create the Eventarc trigger:**
+
+   {{< code-block lang="shell" disable_copy="false" >}}
+gcloud eventarc triggers create order-processor-trigger \
+  --destination-run-service=order-processor \
+  --destination-run-region=us-central1 \
+  --event-filters="type=google.cloud.pubsub.topic.v1.messagePublished" \
+  --event-filters="topic=projects/my-project/topics/orders" \
+  --location=us-central1
+{{< /code-block >}}
+
+2. **Find the auto-created subscription:**
+
+   {{< code-block lang="shell" disable_copy="false" >}}
+gcloud pubsub subscriptions list \
+  --filter="topic:projects/my-project/topics/orders" \
+  --format="table(name,pushConfig.pushEndpoint)"
+{{< /code-block >}}
+
+   Example output:
+   ```
+   NAME                                                          PUSH_ENDPOINT
+   eventarc-us-central1-order-processor-trigger-abc-sub-def      https://order-processor-xyz.run.app
+   ```
+
+3. **Update the subscription for trace propagation:**
+
+   {{< code-block lang="shell" disable_copy="false" >}}
+gcloud pubsub subscriptions update \
+  eventarc-us-central1-order-processor-trigger-abc-sub-def \
+  --push-no-wrapper \
+  --push-no-wrapper-write-metadata
+{{< /code-block >}}
 
 ## Troubleshooting
 
@@ -102,3 +164,6 @@ logger.info('Hello world!');
 [2]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/nodejs/
 [3]: /tracing/other_telemetry/connect_logs_and_traces/nodejs/
 [4]: /metrics/custom_metrics/dogstatsd_metrics_submission/?tab=nodejs#code-examples-5
+[5]: https://www.datadoghq.com/blog/pubsub-cloud-run-tracing/
+[6]: https://cloud.google.com/pubsub/docs/payload-unwrapping
+[7]: /profiler/

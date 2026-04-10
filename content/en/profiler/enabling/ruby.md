@@ -32,12 +32,8 @@ The following operating systems and architectures are supported:
 - Linux (GNU libc) x86-64, aarch64
 - Alpine Linux (musl libc) x86-64, aarch64
 
-You also need either the [`pkg-config`][16] or the [`pkgconf`][17] system utility installed.
-This utility is available on the software repositories of most Linux distributions. For example:
-
-- The `pkg-config` package is available for [Homebrew][18], and [Debian][19]- and [Ubuntu][20]-based Linux
-- The `pkgconf` package is available for [Arch][21]- and [Alpine][22]-based Linux
-- The `pkgconf-pkg-config` package is available for [Fedora][23]- and [Red-Hat][24]-based Linux
+Versions of the `datadog` gem older than 2.30 also need either the [`pkg-config`][16] or the [`pkgconf`][17] system utility installed.
+This is no longer needed on modern versions.
 
 Continuous Profiler is not supported on serverless platforms, such as AWS Lambda. Additionally, [Single Step APM Instrumentation][25] cannot be used to set up the Ruby Profiler.
 
@@ -50,11 +46,11 @@ To begin profiling applications:
 2. Add the `datadog` gem to your `Gemfile` or `gems.rb` file:
 
     ```ruby
-    gem 'datadog', '~> 2.18'
+    gem 'datadog', '~> 2.30'
     ```
 3. Install the gems with `bundle install`.
 
-4. Enable the profiler:
+4. Enable the profiler using **one** of the following approaches:
 
    {{< tabs >}}
 {{% tab "Environment variables" %}}
@@ -95,8 +91,6 @@ end
     bundle exec ddprofrb exec bin/rails s
     ```
 
-    If you're running a version of the gem older than 1.21.0, replace `ddprofrb exec` with `ddtracerb exec`.
-
     **Note**
 
     If starting the application with `ddprofrb exec` is not an option (for example, when using the Phusion Passenger web server), you can alternatively start the profiler by adding the following to your application entry point (such as `config.ru`, for a web application):
@@ -120,8 +114,8 @@ You can configure the profiler using the following environment variables:
 | `DD_PROFILING_ENABLED`                        | Boolean | If set to `true`, enables the profiler. Defaults to `false`.                                                                            |
 | `DD_PROFILING_ALLOCATION_ENABLED`             | Boolean | Set to `true` to enable allocation profiling. It requires the profiler to be enabled already. Defaults to `false`.                      |
 | `DD_PROFILING_MAX_FRAMES`                     | Integer | Maximum backtrace (stack) depth gathered by the profiler. Stacks deeper than this value get truncated. Defaults to `400`.               |
-| `DD_PROFILING_EXPERIMENTAL_HEAP_ENABLED`      | Boolean | Set to `true` to enable heap live objects profiling. It requires that allocation profiling is enabled as well. Defaults to `false`. Not yet compatible with Ruby 4. |
-| `DD_PROFILING_EXPERIMENTAL_HEAP_SIZE_ENABLED` | Boolean | Set to `true` to enable heap live size profiling. It requires that heap live objects profiling is enabled as well. Defaults to the same value as `DD_PROFILING_EXPERIMENTAL_HEAP_ENABLED`. Not yet compatible with Ruby 4. |
+| `DD_PROFILING_EXPERIMENTAL_HEAP_ENABLED`      | Boolean | Set to `true` to enable heap live objects profiling. It requires that allocation profiling is enabled as well. Defaults to `false`.     |
+| `DD_PROFILING_EXPERIMENTAL_HEAP_SIZE_ENABLED` | Boolean | Set to `true` to enable heap live size profiling. It requires that heap live objects profiling is enabled as well. Defaults to the same value as `DD_PROFILING_EXPERIMENTAL_HEAP_ENABLED`. |
 | `DD_PROFILING_NO_SIGNALS_WORKAROUND_ENABLED`  | Boolean | Automatically enabled when needed, can be used to force enable or disable this feature. See [Profiler Troubleshooting][15] for details. |
 | `DD_PROFILING_PREVIEW_OTEL_CONTEXT_ENABLED`   | String  | Set to `only` when using profiling directly with `opentelemetry-sdk`, or `true` for auto-detection of the correct context to read from. Defaults to `false`. |
 | `DD_ENV`                                      | String  | The [environment][10] name, for example: `production`.                                                                                  |
@@ -136,8 +130,8 @@ Alternatively, you can set profiler parameters in code with these functions, ins
 | `c.profiling.enabled`                                 | Boolean | If set to `true`, enables the profiler. Defaults to `false`.                                                                            |
 | `c.profiling.allocation_enabled`                      | Boolean | Set to `true` to enable allocation profiling. It requires the profiler to be enabled already. Defaults to `false`.                      |
 | `c.profiling.advanced.max_frames`                     | Integer | Maximum backtrace (stack) depth gathered by the profiler. Stacks deeper than this value get truncated. Defaults to `400`.               |
-| `c.profiling.advanced.experimental_heap_enabled`      | Boolean | Set to `true` to enable heap live objects profiling. It requires that allocation profiling is enabled as well. Defaults to `false`. Not yet compatible with Ruby 4. |
-| `c.profiling.advanced.experimental_heap_size_enabled` | Boolean | Set to `true` to enable heap live size profiling. It requires that heap live objects profiling is enabled as well. Defaults to the same value as `experimental_heap_size_enabled`. Not yet compatible with Ruby 4. |
+| `c.profiling.advanced.experimental_heap_enabled`      | Boolean | Set to `true` to enable heap live objects profiling. It requires that allocation profiling is enabled as well. Defaults to `false`.     |
+| `c.profiling.advanced.experimental_heap_size_enabled` | Boolean | Set to `true` to enable heap live size profiling. It requires that heap live objects profiling is enabled as well. Defaults to the same value as `experimental_heap_size_enabled`. |
 | `c.profiling.advanced.no_signals_workaround_enabled`  | Boolean | Automatically enabled when needed, can be used to force enable or disable this feature. See [Profiler Troubleshooting][15] for details. |
 | `c.profiling.advanced.preview_otel_context_enabled`   | String  | Set to `only` when using profiling directly with `opentelemetry-sdk`, or `true` for auto-detection of the correct context to read from. Defaults to `false`. |
 | `c.env`                                               | String  | The [environment][10] name, for example: `production`.                                                                                  |

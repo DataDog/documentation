@@ -4,6 +4,7 @@ aliases:
 - /ja/agent/cluster_agent/
 - /ja/containers/cluster_agent/event_collection
 - /ja/containers/cluster_agent/metadata_provider
+description: Datadog Cluster Agent によるクラスタ レベルのモニタリング データ収集を一元化するアプローチ
 further_reading:
 - link: https://www.datadoghq.com/blog/datadog-cluster-agent/
   tag: ブログ
@@ -11,6 +12,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/autoscale-kubernetes-datadog/
   tag: ブログ
   text: Datadog メトリクスを使用して Kubernetes のワークロードをオートスケーリングする
+- link: https://www.datadoghq.com/blog/datadog-csi-driver/
+  tag: ブログ
+  text: Datadog の CSI driver でセキュアな Kubernetes 環境に高性能な可観測性を提供
 title: Kubernetes 対応の Cluster Agent
 ---
 
@@ -28,24 +32,19 @@ Datadog Cluster Agent を使用すると、次のことができます。
 
 Helm chart v2.7.0 または Datadog Operator v1.0.0+ を使用して Datadog Agent をインストールした場合、**Datadog Cluster Agent はデフォルトで有効化されます**。
 
-Docker をお使いの場合、Datadog Cluster Agent は Docker Hub と GCR で利用できます。
+Datadog はコンテナ イメージを次のレジストリに公開しています:
 
-| Docker Hub                                       | GCR                                                       |
-|--------------------------------------------------|-----------------------------------------------------------|
-| [hub.docker.com/r/datadog/cluster-agent][2]      | [gcr.io/datadoghq/cluster-agent][3]                       |
+| Google Artifact Registry | Amazon ECR             | Azure ACR            | Docker Hub        |
+| ------------------------ | ---------------------- | -------------------- | ----------------- |
+| gcr.io/datadoghq         | public.ecr.aws/datadog | datadoghq.azurecr.io | docker.io/datadog |
 
-<div class="alert alert-danger">Docker Hub にはイメージのプルレート制限があります。Docker Hub をご利用でない場合は、Datadog Agent および Cluster Agent の構成を更新して、GCR または ECR からプルすることをお勧めします。手順については、<a href="/agent/guide/changing_container_registry">コンテナレジストリの変更</a>を参照してください。</div>
+既定では Cluster Agent イメージは Google Artifact Registry (`gcr.io/datadoghq`) から pull されます。お使いのデプロイメント リージョンから Artifact Registry にアクセスできない場合は、別のレジストリを使用してください。
+
+<div class="alert alert-danger">Docker Hub ではイメージの pull レートに制限があります。Docker Hub の有料ユーザーでない場合 Datadog は Datadog Agent と Cluster Agent の設定を更新し、GCR または ECR からイメージを pull することを推奨します。手順は <a href="/agent/guide/changing_container_registry">コンテナ レジストリの変更</a> を参照してください。</div>
 
 ### Agent と Cluster Agent の最小バージョン
 
-Kubernetes の後期バージョンに関連する一部の機能では、Datadog Agent の最低バージョンが必要です。
-
-| Kubernetes バージョン | Agent バージョン  | Cluster Agent バージョン | 理由                                |
-|--------------------|----------------|-----------------------|---------------------------------------|
-| 1.16.0+            | 7.19.0+        | 1.9.0+                | Kubelet メトリクスの非推奨化           |
-| 1.21.0+            | 7.36.0+        | 1.20.0+               | Kubernetes リソースの非推奨化       |
-| 1.22.0+            | 7.37.0+        | 7.37.0+               | 動的サービス アカウント トークンをサポート |
-| 1.25.0+            | 7.40.0+        | 7.40.0+               | `v1` API グループをサポート               |
+互換性を最適化するため Datadog は Cluster Agent と Datadog Agent のバージョンを揃えることを推奨します。Kubernetes のバージョンと Datadog のバージョンの対応表 (サポート マトリクス) の全体は [Kubernetes インストール ページ][2] を参照してください。
 
 {{< whatsnext desc="このセクションには、以下のトピックが記載されています。">}}
     {{< nextlink href="/agent/cluster_agent/setup" >}}<u>セットアップ</u>: Kubernetes クラスターで Datadog Cluster Agent をセットアップします。{{< /nextlink >}}
@@ -57,13 +56,12 @@ Kubernetes の後期バージョンに関連する一部の機能では、Datado
 {{< /whatsnext >}}
 
 ## Cluster Agent の監視
-Datadog Agent には Cluster Agent を自動的に監視するインテグレーションが含まれています。このインテグレーションは、Cluster Agent と同じノード上にある通常の Datadog Agent Pod で実行されます。Cluster Agent 内では実行されません。詳細は [Datadog Cluster Agent インテグレーション ドキュメント][4] を参照してください。
+Datadog Agent には Cluster Agent を自動的に監視するインテグレーションが含まれています。このインテグレーションは Cluster Agent と同じノード上にある通常の Datadog Agent pod 上で実行されます。Cluster Agent 自体では実行されません。詳細は [Datadog Cluster Agent インテグレーション ドキュメント][3] を参照してください。
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/containers/guide/cluster_agent_autoscaling_metrics
-[2]: https://hub.docker.com/r/datadog/cluster-agent
-[3]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/cluster-agent
-[4]: https://docs.datadoghq.com/ja/integrations/datadog_cluster_agent/
+[2]: /ja/containers/kubernetes/installation#minimum-kubernetes-and-datadog-agent-versions
+[3]: https://docs.datadoghq.com/ja/integrations/datadog_cluster_agent/

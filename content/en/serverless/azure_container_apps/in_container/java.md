@@ -86,6 +86,8 @@ logger.info("Hello World!");
 
 {{% serverless-init-env-vars-in-container language="java" defaultSource="containerapp" %}}
 
+{{% svl-tracing-env %}}
+
 ## Troubleshooting
 
 {{% serverless-init-troubleshooting productNames="Azure Container Apps" %}}
@@ -97,5 +99,5 @@ logger.info("Hello World!");
 [1]: https://github.com/DataDog/dd-trace-java/releases
 [2]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/java/
 [3]: /tracing/other_telemetry/connect_logs_and_traces/java/
-[4]: /developers/dogstatsd/?tab=java#install-the-dogstatsd-client
+[4]: /extend/dogstatsd/?tab=java#install-the-dogstatsd-client
 [5]: /metrics/custom_metrics/dogstatsd_metrics_submission/?tab=java#code-examples-5

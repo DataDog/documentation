@@ -13,4 +13,6 @@ disable_toc: true
 
     {{< nextlink href="/getting_started/test_impact_analysis" >}}Getting Started with Test Impact Analysis{{< /nextlink >}}
 
+    {{< nextlink href="/getting_started/software_delivery_mcp_tools" >}}Getting Started with Software Delivery MCP Tools{{< /nextlink >}}
+
 {{< /whatsnext >}}

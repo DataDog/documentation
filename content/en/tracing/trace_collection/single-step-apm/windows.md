@@ -23,11 +23,6 @@ You can enable APM on Windows in the following ways:
 * Instrument only .NET applications on IIS
 * Instrument all Java and .NET applications across your entire Windows host
 
-{{< callout url="https://www.datadoghq.com/product-preview/single-step-instrumentation-on-windows-vms/"
- btn_hidden="false" header="Join the Preview!">}}
-Host-wide instrumentation for Windows is in Preview.
-{{< /callout >}}
-
 {{< tabs >}}
 {{% tab "IIS" %}}
 
@@ -54,7 +49,8 @@ After installation, the Agent automatically loads the Datadog .NET SDK into supp
 {{% tab "Host-wide (Preview)" %}}
 
 <div class="alert alert-info">
-Host-wide instrumentation on Windows is limited to Preview participants. The installation and configuration options described in this tab appear in the Datadog UI only after you're enrolled.
+<strong>Join the Preview!</strong><br>
+Host-wide instrumentation for Windows is in Preview and limited to Preview participants. The installation and configuration options described in this tab appear in Datadog only after you are enrolled. <a href="https://www.datadoghq.com/product-preview/single-step-instrumentation-on-windows-vms/" class="alert-link">Request access</a> to join the Preview.
 </div>
 
 To instrument Java and .NET applications across your entire Windows host:
@@ -84,7 +80,9 @@ Unified Service Tags (USTs) apply consistent tags across traces, metrics, and lo
 
 ## Enable SDK-dependent products and features
 
-After SSI loads the Datadog SDK into your applications and enables distributed tracing, you can configure additional products that rely on the SDK. These include capabilities such as [Continuous Profiler][5], [Application Security Monitoring][6], and [trace ingestion controls][7].
+After SSI loads the Datadog SDK into your applications and enables distributed tracing, you can configure additional products that rely on the SDK:
+
+{{< ssi-products >}}
 
 To enable products, [set environment variables][3] in your application configuration.
 
@@ -108,6 +106,3 @@ If you encounter problems enabling APM with SSI, see the [SSI troubleshooting gu
 [2]: /integrations/windows-service/#tags
 [3]: /tracing/trace_collection/library_config/
 [4]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/troubleshooting
-[5]: /profiler/
-[6]: /security/application_security/
-[7]: /tracing/trace_pipeline/ingestion_controls/

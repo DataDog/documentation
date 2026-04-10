@@ -72,4 +72,4 @@ To see available out-of-the-box monitors:
 [2]: /incident_response/incident_management/
 [3]: /monitors/types/metric/
 [4]: /notebooks/
-[5]: /observability_pipelines/monitoring_and_troubleshooting/metrics/
+[5]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/

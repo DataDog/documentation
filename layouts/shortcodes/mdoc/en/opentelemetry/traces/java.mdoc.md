@@ -3,7 +3,7 @@ This partial contains Java traces content for the OTel API.
 It can be included directly in language-specific pages or wrapped in conditionals.
 -->
 
-## Setup
+## Setup {% #setup-otel-java %}
 
 {% alert level="info" %}
 OpenTelemetry is supported in Java after version 1.24.0.
@@ -17,9 +17,9 @@ To configure OpenTelemetry to use the Datadog trace provider:
 
 3. Set the `dd.trace.otel.enabled` system property or the `DD_TRACE_OTEL_ENABLED` environment variable to `true`.
 
-## Adding span tags
+## Adding span tags {% #adding-span-tags-otel-java %}
 
-### Add custom span tags
+### Add custom span tags {% #add-custom-span-tags-otel-java %}
 
 Add custom tags to your spans corresponding to any dynamic value within your application code such as `customer.id`.
 
@@ -32,7 +32,7 @@ public void doSomething() {
 }
 ```
 
-### Adding tags globally to all spans
+### Adding tags globally to all spans {% #adding-tags-globally-otel-java %}
 
 The `dd.tags` property allows you to set tags across all generated spans for an application. This is useful for grouping stats for your applications, data centers, or any other tags you would like to see in Datadog.
 
@@ -42,7 +42,7 @@ java -javaagent:<DD-JAVA-AGENT-PATH>.jar \
     -jar <YOUR_APPLICATION_PATH>.jar
 ```
 
-### Setting errors on span
+### Setting errors on span {% #setting-errors-on-span-otel-java %}
 
 To set an error on a span, use the `setStatus` method:
 
@@ -56,7 +56,7 @@ public void doSomething() {
 }
 ```
 
-### Setting tags and errors on a root span from a child span
+### Setting tags and errors on a root span from a child span {% #setting-tags-errors-root-span-otel-java %}
 
 When you want to set tags or errors on the root span from within a child span, you can use the OpenTelemetry Context API:
 
@@ -99,7 +99,7 @@ public class Example {
 }
 ```
 
-## Adding spans
+## Adding spans {% #adding-spans-otel-java %}
 
 If you aren't using a [supported framework instrumentation][101], or you would like additional depth in your application's [traces][102], you may want to add custom instrumentation to your code for complete flame graphs or to measure execution times for pieces of code.
 
@@ -107,7 +107,7 @@ If modifying application code is not possible, use the environment variable `dd.
 
 If you have existing `@Trace` or similar annotations, or prefer to use annotations to complete any incomplete traces within Datadog, use Trace Annotations.
 
-### Trace annotations
+### Trace annotations {% #trace-annotations-otel-java %}
 
 Add `@WithSpan` to methods to have them be traced when running OpenTelemetry and the `dd-java-agent.jar`. If the Agent is not attached, this annotation has no effect on your application.
 
@@ -125,7 +125,7 @@ public class SessionManager {
 }
 ```
 
-### Manually creating a new span
+### Manually creating a new span {% #manually-creating-a-new-span-otel-java %}
 
 To manually create new spans within the current trace context:
 
@@ -151,7 +151,7 @@ public class Example {
 }
 ```
 
-## Adding span events
+## Adding span events {% #adding-span-events-otel-java %}
 
 {% alert level="info" %}
 Adding span events requires SDK version 1.40.0 or higher.
@@ -178,7 +178,7 @@ span.addEvent("Event With Some Attributes", eventAttributes);
 
 Read the [OpenTelemetry specification for adding events][103] for more information.
 
-### Recording exceptions
+### Recording exceptions {% #recording-exceptions-otel-java %}
 
 To record exceptions, use the `recordException` API:
 
@@ -190,15 +190,15 @@ span.recordException(new Exception("Error Message"),
 
 Read the [OpenTelemetry specification for recording exceptions][104] for more information.
 
-## Trace client and Agent configuration
+## Trace client and Agent configuration {% #trace-client-agent-config-otel-java %}
 
 Both the tracing client and Datadog Agent offer additional configuration options for context propagation. You can also exclude specific resources from sending traces to Datadog if you don't want those traces to be included in calculated metrics, such as traces related to health checks.
 
-### Propagating context with headers extraction and injection
+### Propagating context with headers extraction and injection {% #propagating-context-otel-java %}
 
 You can configure the propagation of context for distributed traces by injecting and extracting headers. Read [Trace Context Propagation][105] for information.
 
-### Resource filtering
+### Resource filtering {% #resource-filtering-otel-java %}
 
 Traces can be excluded based on their resource name, to remove synthetic traffic such as health checks from reporting traces to Datadog. This and other security and fine-tuning configurations can be found on the [Security][106] page or in [Ignoring Unwanted Resources][107].
 

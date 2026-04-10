@@ -12,8 +12,8 @@ rsyslog または syslog-ng ソースで Observability Pipelines Worker を設�
 {{% observability_pipelines/use_case_images/log_volume_control %}}
 
 このドキュメントでは、以下について説明します。
-1. The [prerequisites](#prerequisites) needed to set up Observability Pipelines
-1. [Setting up Observability Pipelines](#set-up-observability-pipelines)
+1. Observability Pipelines の設定に必要な[前提条件](#prerequisites)
+1. [Observability Pipelines のセットアップ](#set-up-observability-pipelines)
 1. [Syslog 経由で Observability Pipelines Worker にログを送信する](#send-logs-to-the-observability-pipelines-worker-over-syslog)
 
 ## 前提条件
@@ -23,16 +23,16 @@ rsyslog または syslog-ng ソースで Observability Pipelines Worker を設�
 ## 観測可能性パイプラインを設定する
 
 1. [Observability Pipelines][1] に移動します。
-1. Select the **Log Volume Control** template to create a new pipeline.
+1. **Log Volume Control** テンプレートを選択して新しいパイプラインを作成します。
 1. ソースとして **rsyslog** または **syslog-ng** を選択します。
 
-### Set up the source
+### ソースの設定
 
 {{% observability_pipelines/source_settings/syslog %}}
 
-### Set up the destinations
+### 宛先の設定
 
-Enter the following information based on your selected logs destinations.
+選択したログの送信先に応じて、以下の情報を入力します。
 
 {{< tabs >}}
 {{% tab "Amazon OpenSearch" %}}
@@ -46,7 +46,7 @@ Enter the following information based on your selected logs destinations.
 
 {{% observability_pipelines/prerequisites/amazon_security_lake %}}
 
-##### Set up the destination
+##### 宛先の設定
 
 {{% observability_pipelines/destination_settings/amazon_security_lake %}}
 
@@ -138,7 +138,7 @@ Enter the following information based on your selected logs destinations.
 {{% /tab %}}
 {{< /tabs >}}
 
-#### Add additional destinations
+#### 送信先を追加する
 
 {{% observability_pipelines/multiple_destinations %}}
 
@@ -273,7 +273,7 @@ Enter the following information based on your selected logs destinations.
 {{% /tab %}}
 {{< /tabs >}}
 
-#### Add another set of processors and destinations
+#### 別のプロセッサーと送信先のセットを追加する
 
 {{% observability_pipelines/multiple_processors %}}
 
@@ -281,7 +281,7 @@ Enter the following information based on your selected logs destinations.
 1. **Choose your installation platform** ドロップダウンメニューで使用するプラットフォームを選択します。
 1. Syslog アドレスを入力します。これは Worker が公開する Syslog 互換エンドポイントで、アプリケーションはここにログを送信します。Observability Pipelines Worker はこのアドレスで受信ログを待ち受けます。
 
-1. Provide the environment variables for each of your selected destinations. See [Prerequisites](#prerequisites) for more information.
+1. 選択した各送信先の環境変数を指定します。詳しくは、[前提条件](#prerequisites) を参照してください。
 {{< tabs >}}
 {{% tab "Amazon OpenSearch" %}}
 
@@ -310,7 +310,7 @@ Enter the following information based on your selected logs destinations.
 {{% /tab %}}
 {{% tab "Datadog Archives" %}}
 
-For the Datadog Archives destination, follow the instructions for the cloud provider you are using to archive your logs.
+Datadog Archives の送信先については、ログをアーカイブする際に使用しているクラウド プロバイダーに応じて、手順に従ってください。
 
 {{% collapse-content title="Amazon S3" level="h5" %}}
 

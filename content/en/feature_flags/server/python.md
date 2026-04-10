@@ -10,10 +10,6 @@ further_reading:
   text: "Python Tracing"
 ---
 
-{{< callout url="http://datadoghq.com/product-preview/feature-flags/" >}}
-Feature Flags are in Preview. Complete the form to request access.
-{{< /callout >}}
-
 ## Overview
 
 This page describes how to instrument your Python application with the Datadog Feature Flags SDK. The Python SDK integrates with [OpenFeature][1], an open standard for feature flag management, and uses the Datadog tracer's Remote Configuration to receive flag updates in real time.
@@ -59,8 +55,12 @@ openfeature-sdk>=0.5.0
 Register the Datadog OpenFeature provider with the OpenFeature API. The provider connects to the Datadog tracer's Remote Configuration system to receive flag configurations.
 
 {{< code-block lang="python" >}}
+from ddtrace import tracer
 from openfeature import api
 from ddtrace.openfeature import DataDogProvider
+
+# Initialize the tracer (required for Remote Configuration)
+tracer.configure()
 
 # Create and register the Datadog provider
 provider = DataDogProvider()

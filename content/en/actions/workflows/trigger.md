@@ -115,11 +115,13 @@ Add the workflow to your incident notification rule:
 
 ## Security triggers
 
-You can trigger a workflow automatically for any Security Signal, or manually trigger a Workflow from a Cloud SIEM Security Signal panel. Before you can add a workflow to a Security Signal, the workflow must have a security trigger.
+You can trigger a workflow automatically for any Security Signal or Security Finding. You can also trigger a workflow manually from a Cloud SIEM Security Signal panel, Misconfiguration panel, or Identity Risk panel.
 
-### Security Signal Notification Rule triggers
+**Note**: Before adding a workflow to a Security Signal or Finding, the workflow must have a security trigger.
 
-You can set up a workflow to trigger every time a Security Signal Notification Rule fires.
+### Security Notification Rule triggers
+
+You can set up a workflow to trigger whenever a Security Notification Rule sends a notification for either a Security Signal or a Security Finding.
 
 To trigger a workflow from a notification rule, you must first add a security trigger to your workflow:
 1. Add a security trigger to your workflow:
@@ -141,15 +143,16 @@ Add the workflow to your notification rule:
 
 Each time the notification rule fires, it triggers a workflow run.
 
-### Cloud SIEM Security Signal triggers
+### Manual triggers
 
-You can manually start a workflow from a Cloud SIEM Security Signal panel.
+You can manually start a workflow from a Cloud SIEM Security Signal panel, a Misconfiguration panel, or an Identity Risk panel:
 
-1. Click **Run Workflow** at the top of the **Security Signal** panel.
+1. Click **Run Workflow** in the **Next Steps** box at the top of the side panel.
 1. In the search modal, enter the name of the workflow you want to run and select it. Only workflows with security triggers appear in the list.
-1. If your workflow requires input parameters, enter the values as required. You can copy the values from the Signal object JSON displayed next to the input parameters, and paste them into the parameter fields.
+1. If your workflow requires input parameters, enter the required values. You can copy values from the object JSON displayed next to the input parameters and paste them into the parameter fields.
 1. Click **Run**.
-1. You can see the workflow run status in the **Workflow** section of the Security Signal.
+
+You can see the workflow run status in the **Workflows** section of the side panel.
 
 For additional examples of security workflows you can automate, see [Automate Security Workflows with Workflow Automation][4].
 

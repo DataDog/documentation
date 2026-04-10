@@ -2,6 +2,7 @@
 title: Integrate Jira with Error Tracking
 is_beta: false
 private: false
+site_support_id: jira_error_tracking
 further_reading:
   - link: '/error_tracking/explorer/'
     tag: 'Documentation'
@@ -16,7 +17,7 @@ further_reading:
 
 ## Overview
 
-Integrate Jira with Error Tracking to create and link Jira tickets to Error Tracking issues. With Jira for Error tracking, you can:
+Integrate Jira with Error Tracking to create and link Jira tickets to Error Tracking issues. With Jira for Error Tracking, you can:
 
 - Create Jira tickets directly from the Error Tracking issue panel
 - Group multiple Error Tracking issues into a single ticket

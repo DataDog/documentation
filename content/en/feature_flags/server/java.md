@@ -10,10 +10,6 @@ further_reading:
   text: "Java APM and Distributed Tracing"
 ---
 
-{{< callout url="http://datadoghq.com/product-preview/feature-flags/" >}}
-Feature Flags are in Preview. Complete the form to request access.
-{{< /callout >}}
-
 <div class="alert alert-warning">Java Feature Flags support is experimental and requires enabling an experimental flag in the tracer. See the <a href="#configuration">Configuration section</a> for details.</div>
 
 ## Overview
@@ -30,7 +26,7 @@ The Datadog Feature Flags SDK for Java requires:
 - **Java 11 or higher**
 - **Datadog Java APM Tracer**: Version **1.57.0** or later
 - **OpenFeature SDK**: Version **1.18.2** or later
-- **Datadog Agent**: Version **7.x or later** with Remote Configuration enabled
+- **Datadog Agent**: Version **7.x or later** with [Remote Configuration][1] enabled
 - **Datadog API Key**: Required for Remote Configuration
 
 For a full list of Datadog's Java version and framework support, read [Compatibility Requirements](/tracing/trace_collection/compatibility/java/).
@@ -43,25 +39,17 @@ Before you begin, make sure you've already [installed and configured the Agent](
 
 Feature flagging is integrated into the Datadog Java APM tracer. You need the tracer JAR and the OpenFeature SDK dependencies.
 
-The `dd-java-agent-feature-flagging-bootstrap` JAR contains shared interfaces that enable the Datadog tracer (running in the bootstrap classloader) to communicate with the OpenFeature provider (running in the application classloader). This is a standard pattern for Java agents. Both JARs are required for feature flags to work.
-
 {{< tabs >}}
 {{% tab "Gradle (Groovy)" %}}
 Add the following dependencies to your `build.gradle`:
 
 {{< code-block lang="groovy" filename="build.gradle" >}}
 dependencies {
-    // Datadog Java tracer (includes feature flagging)
-    implementation 'com.datadoghq:dd-trace-api:X.X.X'
-
     // OpenFeature SDK for flag evaluation
     implementation 'dev.openfeature:sdk:1.18.2'
 
     // Datadog OpenFeature Provider
-    implementation 'com.datadoghq:dd-openfeature:X.X.X'
-
-    // Datadog Feature Flagging Bootstrap (required)
-    implementation 'com.datadoghq:dd-java-agent-feature-flagging-bootstrap:X.X.X'
+    implementation 'com.datadoghq:dd-openfeature:1.57.0'
 }
 {{< /code-block >}}
 {{% /tab %}}
@@ -71,17 +59,11 @@ Add the following dependencies to your `build.gradle.kts`:
 
 {{< code-block lang="kotlin" filename="build.gradle.kts" >}}
 dependencies {
-    // Datadog Java tracer (includes feature flagging)
-    implementation("com.datadoghq:dd-trace-api:X.X.X")
-
     // OpenFeature SDK for flag evaluation
     implementation("dev.openfeature:sdk:1.18.2")
 
     // Datadog OpenFeature Provider
-    implementation("com.datadoghq:dd-openfeature:X.X.X")
-
-    // Datadog Feature Flagging Bootstrap (required)
-    implementation("com.datadoghq:dd-java-agent-feature-flagging-bootstrap:X.X.X")
+    implementation("com.datadoghq:dd-openfeature:1.57.0")
 }
 {{< /code-block >}}
 {{% /tab %}}
@@ -91,13 +73,6 @@ Add the following dependencies to your `pom.xml`:
 
 {{< code-block lang="xml" filename="pom.xml" >}}
 <dependencies>
-    <!-- Datadog Java tracer (includes feature flagging) -->
-    <dependency>
-        <groupId>com.datadoghq</groupId>
-        <artifactId>dd-trace-api</artifactId>
-        <version>X.X.X</version>
-    </dependency>
-
     <!-- OpenFeature SDK for flag evaluation -->
     <dependency>
         <groupId>dev.openfeature</groupId>
@@ -109,14 +84,7 @@ Add the following dependencies to your `pom.xml`:
     <dependency>
         <groupId>com.datadoghq</groupId>
         <artifactId>dd-openfeature</artifactId>
-        <version>X.X.X</version>
-    </dependency>
-
-    <!-- Datadog Feature Flagging Bootstrap (required) -->
-    <dependency>
-        <groupId>com.datadoghq</groupId>
-        <artifactId>dd-java-agent-feature-flagging-bootstrap</artifactId>
-        <version>X.X.X</version>
+        <version>1.57.0</version>
     </dependency>
 </dependencies>
 {{< /code-block >}}
@@ -225,10 +193,13 @@ public class App {
             client = api.getClient("my-app");
             logger.info("OpenFeature provider initialized successfully");
         } catch (ProviderNotReadyError e) {
-            // Optional: Handle gracefully - app will use default flag values
-            logger.warn("Provider not ready (no tracer/configuration available), continuing with defaults", e);
+            // Handle gracefully - app will use default flag values
+            logger.warn("Provider not ready (no tracer/config available), continuing with defaults", e);
             client = api.getClient("my-app");
             logger.info("App will use default flag values until provider is ready");
+        } catch (Exception e) {
+            logger.error("Failed to initialize OpenFeature provider", e);
+            throw e;
         }
 
         // Your application code here
@@ -517,105 +488,96 @@ logger.info("Flag: {} | Value: {} | Variant: {} | Reason: {}",
 
 ## Troubleshooting
 
+### Start here: verify prerequisites
+
+Before investigating specific errors, confirm these prerequisites are in place:
+
+1. **The Datadog Agent is healthy and reachable**: See [APM Connection Errors][2] to verify Agent connectivity.
+2. **The experimental flagging provider is enabled on the tracer**: Set `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true`.
+3. **Required tracer environment variables are set**: `DD_API_KEY`, `DD_ENV`, and `DD_SITE`.
+4. **Your `DD_ENV` value appears in the Feature Flag environments list**: Confirm your environment is visible in the [Feature Flag Environments][5] settings.
+
+After confirming all prerequisites, continue with the following sections if feature flags still aren't working.
+
+### Debug flag evaluations
+
+If flags evaluate but return unexpected values, use `getBooleanDetails()` instead of `getBooleanValue()`. The `Details` variant of each evaluation method returns a `FlagEvaluationDetails` object that exposes the provider's internal state, including the reason, variant, and any error code.
+
+{{< code-block lang="java" >}}
+FlagEvaluationDetails<Boolean> details =
+    client.getBooleanDetails("your.flag.key", false, context);
+
+logger.info("Flag evaluation details: value={}, variant={}, reason={}, errorCode={}",
+    details.getValue(),
+    details.getVariant(),
+    details.getReason(),
+    details.getErrorCode());
+{{< /code-block >}}
+
+Review the logged output to understand why the provider returned a particular result.
+
+### Monitor provider state changes
+
+Add event listeners early in your application startup to observe provider life cycle transitions:
+
+{{< code-block lang="java" >}}
+import dev.openfeature.sdk.ProviderEvent;
+
+client.on(ProviderEvent.PROVIDER_READY, (event) -> {
+    logger.info("Feature flag provider is ready");
+});
+
+client.on(ProviderEvent.PROVIDER_ERROR, (event) -> {
+    logger.error("Feature flag provider error: {}", event.getMessage());
+});
+
+client.on(ProviderEvent.PROVIDER_STALE, (event) -> {
+    logger.warn("Feature flag provider configuration is stale");
+});
+
+client.on(ProviderEvent.PROVIDER_CONFIGURATION_CHANGED, (event) -> {
+    logger.info("Feature flag configuration updated");
+});
+{{< /code-block >}}
+
+A `PROVIDER_STALE` or `PROVIDER_ERROR` event after a period of normal operation indicates a loss of connectivity to the Agent or a Remote Configuration disruption.
+
 ### Provider not ready
 
 **Problem**: `PROVIDER_NOT_READY` errors when evaluating flags
 
-**Common Causes**:
-1. **Experimental flag not enabled**: Feature flagging is disabled by default
-2. **Agent not ready**: Application started before Agent was fully initialized
-3. **No flags configured**: No flags published to your service/environment combination
-4. **Agent Remote Configuration disabled**: Agent not configured for Remote Configuration
+`PROVIDER_NOT_READY` is returned when flag evaluation is attempted before the provider has received its first configuration from Remote Configuration. This state persists until the tracer receives its initial flag configuration payload from the Agent.
+
+**Common causes**:
+1. **Async initialization**: `setProvider()` was used instead of `setProviderAndWait()`. Evaluations that happen before the first Remote Configuration payload arrives return `PROVIDER_NOT_READY`.
+2. **Initialization timeout**: `setProviderAndWait()` timed out (default 30 seconds) and threw `ProviderNotReadyError`, which was caught. The application continues evaluating flags while still waiting for the first configuration.
 
 **Solutions**:
-1. **Enable experimental feature**:
-   ```bash
-   export DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
-   ```
-2. **Verify feature flagging system started** in application logs:
+1. **Enable debug logging** to see the feature flagging system startup sequence. These messages are emitted at DEBUG level—set `DD_TRACE_DEBUG=true` to see them:
    ```
    [dd.trace] Feature Flagging system starting
    [dd.trace] Feature Flagging system started
    ```
-3. **Ensure Agent is ready** before app starts (use health checks in Docker/Kubernetes)
-4. **Check EVP Proxy discovered** in logs:
-   ```
-   discovered ... evpProxyEndpoint=evp_proxy/v4/ configEndpoint=v0.7/config
-   ```
-5. **Wait for Remote Configuration sync** (can take 30-60 seconds after publishing flags)
-6. **Verify flags are published** in Datadog UI to the correct service and environment
-
-### ClassNotFoundException or NoClassDefFoundError
-
-**Problem**: Application fails to start with `ClassNotFoundException` for Datadog classes like `datadog.trace.api.featureflag.FeatureFlaggingGateway`
-
-**Cause**: Missing the bootstrap JAR dependency. The bootstrap module contains shared interfaces that allow the Datadog tracer (running in the bootstrap classloader) to communicate with the OpenFeature provider (running in the application classloader). Without it, the two components cannot interact.
-
-**Solutions**:
-1. **Add the bootstrap JAR** to your dependencies:
-   ```xml
-   <dependency>
-       <groupId>com.datadoghq</groupId>
-       <artifactId>dd-java-agent-feature-flagging-bootstrap</artifactId>
-       <version>X.X.X</version>
-   </dependency>
-   ```
-2. **Verify both dependencies are included** in your build:
-   - `dd-openfeature` (the OpenFeature provider)
-   - `dd-java-agent-feature-flagging-bootstrap` (the bootstrap module)
-3. **Check the classpath** includes both JARs in your runtime configuration
-
-### Feature flagging system not starting
-
-**Problem**: No "Feature Flagging system starting" messages in logs
-
-**Cause**: Experimental flag not enabled in tracer
-
-**Solution**:
-Add `-Ddd.experimental.flagging.provider.enabled=true` to your Java command or set `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true`
+2. **Wait for Remote Configuration sync** (can take 30-60 seconds after publishing flags)
+3. **Verify flags are published** in Datadog UI to the correct service and environment
+4. If none of these apply, verify the Datadog Agent is healthy and reachable. See [APM Connection Errors][2].
 
 ### EVP proxy not available error
 
-**Problem**: Logs show "EVP Proxy not available" or "agent does not support EVP proxy"
+**Problem**: Logs show `Cannot create backend API client since agentless mode is disabled, and agent does not support EVP proxy`.
 
-**Cause**: Application started before Agent was fully initialized
-
-**Solutions**:
-1. **Add Agent health check** in orchestration (Docker Compose, Kubernetes)
-2. **Add startup delay** to application
-3. **Retry logic**: Implement retry on provider initialization failure
-4. **Upgrade Agent**: Ensure using Agent 7.x or later with EVP Proxy support
-
-### Flags not updating
-
-**Problem**: Flag configuration changes aren't reflected in the application
-
-**Solutions**:
-1. Check Remote Configuration is enabled on both Agent and application
-2. Verify Agent can connect to Datadog backend
-3. Check application logs for "No configuration changes" or "Configuration received"
-4. Ensure flags are published (not saved as drafts) in the Datadog UI
-5. Verify service and environment tags match between app and flag targeting
-
-### Type mismatch errors
-
-**Problem**: `TYPE_MISMATCH` errors when evaluating flags
-
-**Solutions**:
-1. Verify the flag type in Datadog UI matches the evaluation method
-2. Use correct method: `getBooleanValue()`, `getStringValue()`, `getIntegerValue()`, `getDoubleValue()`
-3. Check flag configuration for correct value types
+Verify the Datadog Agent is healthy and reachable. See [APM Connection Errors][2].
 
 ### No exposures in Datadog
 
-**Problem**: Flag evaluations aren't appearing in Datadog UI
+**Problem**: Experiment exposures aren't appearing in Datadog
 
-**Solutions**:
-1. Verify the flag's allocation has `doLog=true` configured
-2. Check Datadog Agent is receiving exposure events
-3. Verify `DD_API_KEY` is correct
-4. Check Agent logs for exposure upload errors
+**Solution**: Verify the flag is associated with an experiment in the Datadog UI. Exposures are only recorded for flags that are part of an experiment—standard feature flags without an experiment association do not generate exposure events.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /remote_configuration/
+[2]: /tracing/troubleshooting/connection_errors/
+[5]: https://app.datadoghq.com/feature-flags/settings/environments

@@ -1,4 +1,5 @@
 ---
+id: count
 title: count
 core_product:
   - metrics

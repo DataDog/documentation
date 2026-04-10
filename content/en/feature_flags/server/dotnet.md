@@ -10,10 +10,6 @@ further_reading:
   text: ".NET Tracing"
 ---
 
-{{< callout url="http://datadoghq.com/product-preview/feature-flags/" >}}
-Feature Flags are in Preview. Complete the form to request access.
-{{< /callout >}}
-
 ## Overview
 
 This page describes how to instrument your .NET application with the Datadog Feature Flags SDK. The .NET SDK integrates with [OpenFeature][1], an open standard for feature flag management, and uses the Datadog tracer's Remote Configuration to receive flag updates in real time.
@@ -25,8 +21,9 @@ This guide explains how to install and enable the SDK, create an OpenFeature cli
 Before setting up the .NET Feature Flags SDK, ensure you have:
 
 - **Datadog Agent** version 7.55 or later with [Remote Configuration][2] enabled
-- **Datadog .NET tracer** `dd-trace-dotnet` version 3.36.0 or later
-- **.NET runtime** version 6.0 or later
+- **Datadog .NET tracer** (`dd-trace-dotnet`):
+  - Version 3.36.0 or later for .NET 6+
+  - Version 3.38.0 or later for .NET Framework 4.6.2+
 
 Set the following environment variables:
 

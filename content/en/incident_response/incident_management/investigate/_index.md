@@ -1,5 +1,5 @@
 ---
-title: Investigate Incidents
+title: Incident Investigation
 description: Manage the context and work for an incident
 aliases:
 - /monitors/incident_management/incident_details
@@ -9,7 +9,7 @@ further_reading:
 - link: "/incident_response/incident_management/declare"
   tag: "Documentation"
   text: "Declare an Incident"
-- link: "/incident_response/incident_management/describe"
+- link: "/incident_response/incident_management/investigate/describe"
   tag: "Documentation"
   text: "Describe an Incident"
 ---
@@ -56,7 +56,7 @@ In addition to housing your property fields, the Overview tab also provides the 
 |-------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Condensed Timeline | Displays the timestamps when incident status changes occurred, as well as when impact started and ended. This provides a high-level view of the incident's lifecycle. |
 | Latest Notifications| Displays the most recent notification sent for the incident, with quick access to the full list of notifications in the [Notification tab][7].|
-| Pending Tasks | Displays the most recent incomplete task, with quick access to the full list of tasks in the Remediation tab. |
+| Pending Tasks | Displays the most recent incomplete task, with quick access to the full list of tasks in the Post-Incident tab. |
 | Responders | Displays the current incident commander as well as avatars for the remaining responders assigned to the incident. |
 | Recent Timeline Entries | Displays the five most recent entries in the incident timeline, with quick access to see the entire Timeline tab. For more information, see the [Timeline][8] documentation. |
 
@@ -73,11 +73,11 @@ After declaring an incident, responders can use the Incident Details Page to app
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /incident_response/incident_management/describe/#incident-details
+[1]: /incident_response/incident_management/investigate/describe/#incident-details
 [2]: /incident_response/incident_management/#integrations
-[3]: /incident_response/incident_management/incident_settings#integrations
-[4]: /incident_response/incident_management/incident_settings/templates#postmortems
+[3]: /incident_response/incident_management/setup_and_configuration/integrations
+[4]: /incident_response/incident_management/setup_and_configuration/templates/#postmortems
 [5]: https://app.datadoghq.com/incidents/settings#Postmortems
-[6]: /incident_response/incident_management/incident_settings/property_fields
+[6]: /incident_response/incident_management/setup_and_configuration/property_fields
 [7]: /incident_response/incident_management/notification/
 [8]: /incident_response/incident_management/investigate/timeline

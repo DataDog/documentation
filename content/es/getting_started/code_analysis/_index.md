@@ -92,8 +92,6 @@ Debes [ejecutar un análisis de tu repositorio](#run-code-analysis-in-your-ci-pr
 
 Para cargar resultados en Datadog, asegúrate de que dispones de [una clave de API y una clave de aplicación Datadog][110].
 
-Especifica un nombre para el servicio o la librería en el campo `dd_service`, como por ejemplo, `shopist`.
-
 ### Acción de GitHub
 
 Puedes configurar una acción de GitHub para ejecutar un análisis de Static Analysis y Software Composition Analysis como parte de tus flujos de trabajo CI.
@@ -111,15 +109,13 @@ jobs:
     name: Datadog Static Analyzer
     steps:
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v6
     - name: Check code meets quality and security standards
       id: datadog-static-analysis
-      uses: DataDog/datadog-static-analyzer-github-action@v1
+      uses: DataDog/datadog-static-analyzer-github-action@v3
       with:
         dd_api_key: ${{ secrets.DD_API_KEY }}
         dd_app_key: ${{ secrets.DD_APP_KEY }}
-        dd_service: shopist
-        dd_env: ci
         dd_site: datadoghq.com
         cpu_count: 2
 ```
@@ -137,15 +133,13 @@ jobs:
     name: Datadog SBOM Generation and Upload
     steps:
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v6
     - name: Check imported libraries are secure and compliant
       id: datadog-software-composition-analysis
       uses: DataDog/datadog-sca-github-action@main
       with:
         dd_api_key: ${{ secrets.DD_API_KEY }}
         dd_app_key: ${{ secrets.DD_APP_KEY }}
-        dd_service: shopist
-        dd_env: ci
         dd_site: datadoghq.com
 ```
 
@@ -178,7 +172,7 @@ mv /tmp/datadog-static-analyzer /usr/local/datadog-static-analyzer
 /usr/local/datadog-static-analyzer -i . -o /tmp/report.sarif -f sarif
 
 # Upload results
-datadog-ci sarif upload /tmp/report.sarif --service "shopist" --env "ci"
+datadog-ci sarif upload /tmp/report.sarif
 ```
 
 #### Software Composition Analysis
@@ -208,7 +202,7 @@ chmod 755 /osv-scanner/osv-scanner
 /osv-scanner/osv-scanner --skip-git -r --experimental-only-packages --format=cyclonedx-1-5 --paths-relative-to-scan-dir  --output=/tmp/sbom.json /path/to/repository
 
 # Upload results
-datadog-ci sbom upload --service "shopist" --env "ci" /tmp/sbom.json
+datadog-ci sbom upload /tmp/sbom.json
 ```
 
 Una vez que hayas configurado estos scripts, ejecuta un análisis de tu repositorio en la rama por defecto. Los resultados empezarán a aparecer en la página **Repositorios**.

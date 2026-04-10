@@ -1,11 +1,15 @@
 ---
 title: Environment Variables
 disable_toc: false
+aliases:
+    - /observability_pipelines/environment_variables/
 ---
 
 ## Overview
 
 Some Observability Pipelines components require setting up environment variables. This document lists the environments variables for the different sources, processors, and destinations.
+
+**Note**: When you set up a pipeline and install the Worker, if you enter secret identifiers and then choose to use environment variables, the environment variable is the identifier entered and prepended with `DD_OP`. For example, if you entered `PASSWORD_1` for a password identifier, the environment variable for that password is `DD_OP_PASSWORD_1`.
 
 ## Component environment variables
 

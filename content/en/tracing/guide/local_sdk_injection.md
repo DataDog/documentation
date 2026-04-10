@@ -11,7 +11,7 @@ The Datadog Agent uses the Kubernetes Admission Controller to intercept pod crea
 
 Use this guide if:
 - You want to test library injection on a small number of services before rolling out SSI cluster-wide.
-- You're not using Helm or the Datadog Operator, or prefer a lighter-weight integration method.
+- You prefer a lighter-weight integration method.
 - You want to control instrumentation directly in your pod specs, rather than through centralized configuration files.
 
 ## Requirements
@@ -20,18 +20,20 @@ Use this guide if:
 - [Datadog Cluster Agent][3]:
   - v7.40+ for Java, Python, and Node.js
   - v7.44+ for .NET and Ruby
-- Datadog Admission Controller enabled (enabled by default in Helm chart v2.35.0+)
+- Datadog Admission Controller enabled (enabled by default in Helm chart v2.35.0+ and Operator v1.0.0+)
+
+**Note:** Starting in v7.73.0, the Admission Controller does not inject into pods in the `kube-system` namespace or the namespace where the Cluster Agent is deployed.
 
 ### Step 1: Enable pod mutation
 
-By default, Datadog Admission controller only mutates pods with the label `admission.datadoghq.com/enabled: "true"`:
+By default, the Datadog Admission controller only mutates pods with the label `admission.datadoghq.com/enabled: "true"`:
 
-```
+```yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    # ...
+    # (...)
 spec:
   template:
     metadata:
@@ -41,19 +43,42 @@ spec:
 
 Alternatively, to mutate all pods without requiring the label, do one of the following:
 
-- Configure the Cluster Agent with the following setting:
+{{< tabs >}}
+{{% tab "Datadog Operator" %}}
 
-   ```
-   clusterAgent.admissionController.mutateUnlabelled: true
-   ```
-   
-- Set the environment variable:
+Update your `datadog-agent.yaml` to set `features.admissionController.mutateUnlabelled` to `true`.
 
-  ```
-  export DD_ADMISSION_CONTROLLER_MUTATE_UNLABELLED=true
-  ``` 
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  #(...)
+  features:
+    admissionController:
+      mutateUnlabelled: true
+```
 
-For more details, see the [Datadog Admission Controller documentation][1].
+{{% k8s-operator-redeploy %}}
+
+{{% /tab %}}
+{{% tab "Helm" %}}
+
+Update your `datadog-values.yaml` to set `clusterAgent.admissionController.mutateUnlabelled` to `true`.
+
+```yaml
+clusterAgent:
+  admissionController:
+    mutateUnlabelled: true
+```    
+
+{{% k8s-helm-redeploy %}}
+
+{{% /tab %}}
+{{< /tabs >}}
+
+After setting the pod label or updating `mutateUnlabelled`, the Admission Controller mutates newly created pods to add APM connectivity configuration. For more details, see the [Datadog Admission Controller documentation][1].
 
 ### Step 2: Annotate pods for library injection
 
@@ -73,7 +98,7 @@ Replace `<CONTAINER IMAGE TAG>` with the appropriate value.
 
 For example:
 
-```
+```yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -103,21 +128,33 @@ To view available library versions, see the tracer repositories for each languag
 
 #### Add Unified Service Tags
 
-Use Unified Service Tags (USTs) to apply consistent tags across traces, metrics, and logs, making it easier to navigate and correlate your observability data. See the [UST documentation][10] to learn how to add USTs to your pods.
+Use Unified Service Tagging (UST) to apply consistent tags across traces, metrics, and logs, making it easier to navigate and correlate your observability data. The Admission Controller automatically adds the corresponding `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` environment variables to match your pod labels.
+
+```yaml
+    metadata:
+      labels:
+        admission.datadoghq.com/enabled: "true" 
+        tags.datadoghq.com/env: "<ENV>"
+        tags.datadoghq.com/service: "<SERVICE>"
+        tags.datadoghq.com/version: "<VERSION>" 
+      annotations:
+        admission.datadoghq.com/java-lib.version: "v1.12.0"
+```
+
+See [Unified Service Tagging][10] for more information.
 
 ### Step 3: Apply your changes and verify injection 
 
-After applying your updated pod spec, restart the deployment to trigger injection:
-
+After adding the required pod metadata to your manifest, apply the change in Kubernetes:
 ```
 kubectl apply -f my-deployment.yaml
 ```
 
-When injection is successful, the pod includes an init container named `datadog-lib-init`:
+As Kubernetes recreates your pods, they trigger the Admission Controller for injection. When injection is successful, the pod includes two `initContainers` named `datadog-init-apm-inject` and `datadog-lib-<LANGUAGE>-init` for your specified tracer language and version:
 
-{{< img src="tracing/trace_collection/datadog-lib-init.png" alt="Pod details in Datadog with `datadog-lib-init` listed" style="width:100%;" >}}
+{{< img src="tracing/trace_collection/k8s-local-sdk-injection.png" alt="Pod details in Datadog with `initContainers` listed" style="width:100%;" >}}
 
-Alternatively, check for `datadog-lib-init` on your pod using:
+Alternatively, confirm injection and the added environment variables on your pod using:
 
 ```
 kubectl describe pod <pod-name>

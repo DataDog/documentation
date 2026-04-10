@@ -21,8 +21,7 @@
                 ],
                 "compute": {
                   "aggregation": "count"
-                },
-                "group_by": []
+                }
               }
             ],
             "conditional_formats": [

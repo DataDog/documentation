@@ -248,6 +248,10 @@ See [the tracer source code][17] for the list of supported integrations.
 
 **Note**: If you choose to import specific integrations, you must manually update `orchestrion.tool.go` each time you want to add a new integration.
 
+### Building with Docker
+
+For more information on how to create a fitting Docker image, See [Creating a Dockerfile for APM for Go][18].
+
 ### Troubleshooting
 
 To troubleshoot builds that `orchestrion` manages, see [Troubleshooting Go Compile-Time Instrumentation][13].
@@ -264,7 +268,7 @@ To troubleshoot builds that `orchestrion` manages, see [Troubleshooting Go Compi
 [15]: /security/application_security/exploit-prevention/
 [16]: /tracing/trace_collection/library_config/go/#traces
 [17]: https://github.com/DataDog/dd-trace-go/blob/main/orchestrion/all/orchestrion.tool.go
-
+[18]: /tracing/guide/orchestrion_dockerfile/
 
 {{% /tab %}}
 

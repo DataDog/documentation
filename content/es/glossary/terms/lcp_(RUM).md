@@ -1,4 +1,5 @@
 ---
+id: lcp_rum
 core_product:
 - real user monitoring
 title: Largest Contentful Paint (LCP)
