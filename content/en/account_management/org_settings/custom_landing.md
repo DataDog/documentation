@@ -5,14 +5,16 @@ description: Set a custom dashboard as your organization's landing page to contr
 
 ## Overview
 
-The Datadog organization landing page is the first page your users see when they log in to Datadog or navigate to the Datadog root page. Datadog determines which landing page to display based on the following priority:
+The Datadog organization landing page is the first page your users see when they log in to Datadog or navigate to the Datadog root page. Organization administrators can set a custom default landing page. Individual users can override this by setting their own [personal home page][3].
 
-1. **Custom user home page**: A [personal home page][3] set by the individual user.
-2. **Custom organization home page**: A custom page chosen by an administrator for the entire organization.
-3. **APM-enabled organizations**: The APM Home page.
-4. **Default**: The Dashboard List.
+The landing page a user sees is determined by the following priority:
 
-**Note**: Trial organizations default to the Quick Start guide, and Studio organizations default to the Studio page. These take precedence over the priority list above.
+1. **Personal home page**: The user's [personal home page][3], if set.
+2. **Custom organization home page**: The custom default set by an administrator.
+3. **APM Home**: The default for APM-enabled organizations.
+4. **Dashboard List**: The fallback default.
+
+**Note**: Trial organizations default to the Quick Start guide. Studio organizations default to the Studio page unless an administrator sets a custom organization home page.
 
 ## Set a custom landing page for your organization
 
