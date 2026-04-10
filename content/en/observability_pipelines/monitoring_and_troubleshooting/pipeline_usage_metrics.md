@@ -55,7 +55,7 @@ Uptime
 
 CPU usage
 : **Metric**: `pipelines.cpu_usage_seconds_total`
-: **Description:** The amount of CPU time consumed by the Worker process in a time interval in seconds (in the user and system space). The rate per second of that metric shows the proportion of the CPU used by the Worker.
+: **Description:** The amount of CPU time, in seconds, consumed by the Worker process in a time interval (in the user and system space). The rate per second of that metric shows the proportion of the CPU used by the Worker.
 
 Memory usage
 : **Metric**: `pipelines.resident_memory_used_bytes`
