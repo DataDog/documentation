@@ -47,7 +47,7 @@ The attribute and feature flag filters at the top of the details report work in 
 
 ### Funnel
 
-Each details report has a [funnel][6] showing the journey's traffic, conversion rate, and average completion time for each step. The top conversion and drop-off drivers are located under the funnel. You can also click on <strong>Analyze in Product Analytics</strong> to analyze funnel drop-off patterns.
+Each details report has a [funnel][6] showing the journey's traffic, conversion rate, and average completion time for each step. The top conversion and drop-off drivers are located under the funnel. You can also click on **Analyze in Product Analytics** to analyze funnel drop-off patterns.
 
 ### User drop-offs
 
@@ -77,7 +77,7 @@ The side panel also includes a list of the backend services the Operation depend
 
 ### Error Count
 
-The error count chart shows a timeseries of errors that occurred while users were executing the journey. The data is imported from frontend issues in [Error Tracking][9]. You can click on the <strong>Investigate</strong> button to see the list of top issues. Clicking on any issue in the list will redirect you to the issue in Error Tracking.
+The error count chart shows a timeseries of errors that occurred while users were executing the journey. The data is imported from frontend issues in [Error Tracking][9]. You can click on the **Investigate** button to see the list of top issues. Clicking on any issue in the list will redirect you to the issue in Error Tracking.
 
 
 
@@ -91,7 +91,7 @@ The Synthetics tests table lists all synthetic tests in the journey's [test suit
 - The test's uptime
 - When the test most recently ran
 
-Click on <strong>Edit Test Suite</strong> to create a new test and add it to the journey's test suite. You can also click on "Edit Test Suite" to visit the journey's test suite and directly edit it. 
+Click on **Edit Test Suite** to create a new test and add it to the journey's test suite. You can also click on "Edit Test Suite" to visit the journey's test suite and directly edit it. 
 
 ### Add pre-existing tests 
 

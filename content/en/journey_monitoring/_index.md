@@ -24,17 +24,53 @@ Journey Monitoring is in Preview.
 
 ## Overview
 
-<strong>Journey monitoring</strong> combines data from [Real User Monitoring][1], [Synthetic Testing][2], [Product Analytics][3], and [Session Replay][4] to visualize and analyze the real-time performance of critical user flows in your applications.
+**Journey Monitoring** visualizes the performance of critical user flows in your applications. It brings together data from [Real User Monitoring][1], [Synthetic Testing][2], [Product Analytics][3], and [Session Replay][4] to show traffic, conversion rates, uptime, and errors for each user journey in one place.
 
 [INSERT IMAGE HERE]
 
-<strong>Note: </strong>Journey monitoring is only available for frontend applications instrumented with:
-- [RUM without Limits][5]
-- [Synthetic Browser Tests][6] or [Synthetic Mobile Tests][7]
-- [Product Analytics][8]
+## What you can do
 
+For each journey you can:
+- See how many users start and complete the journey, and how long it takes
+- Identify where users drop off and investigate individual sessions with [Session Replay][4]
+- Track the uptime of the journey using a [Synthetic test suite][10]
+- Measure the performance of critical journey steps with [RUM operations][13]
 
-## Structure
+## Setup
+
+Journey Monitoring requires the following products for frontend applications, each contributing different data to your journeys:
+
+- **[RUM without Limits][5]** and **[Product Analytics][8]**: Traffic, conversion rate, and time-to-convert metrics
+- **[Synthetic Browser Tests][6] or [Synthetic Mobile Tests][7]**: Uptime tracking through the journey's automatically created test suite
+- **[Session Replay][4]**: Session replay links for users who dropped off
+
+### Step 1 - Create a journey
+
+1. Navigate to **Digital Experience > Journey Monitoring**.
+2. Click **Create a Journey** or select a [suggested journey][11].
+
+### Step 2 - Specify journey details
+
+1. Select a frontend application.
+2. Add a journey name.
+3. Select one or more start events.
+4. Select one or more end events.
+5. Click **Save Feature**.
+
+The right-hand funnel chart updates automatically based on the selected start and end events. The funnel shows volume, conversion rate, and average completion time for each step.
+
+**Note**: Mandatory fields are pre-populated if you start from a suggested journey.
+
+You can optionally add a description, attribute filters, team ownership, tags, and variants. Clicking **Save Journey** creates the journey and redirects you to the journey's [details report][12]. The details report is automatically populated with metrics on the journey's volume, conversion rate, and average time to completion.
+
+### Step 3 - Add coverage from other products
+
+In the journey's details report, you can extend coverage based on the products you have:
+
+- Create [RUM operations][13] to measure and monitor the performance of critical steps in the journey in your real user environment.
+- Add Synthetic tests to the journey's [test suite][14] to start tracking uptime.
+
+## Journey structure
 
 A journey is defined as a start and an end. The start and end can either be action or view events.
 
@@ -42,48 +78,13 @@ Each journey can have one or more [variants][9], which are versions of the journ
 
 [INSERT DIAGRAM HERE]
 
-
 ## Metrics
 
-Each journey and its variants have three metrics measuring performance:
-- <strong>Traffic</strong>: Number of sessions that began the journey. It is based on the `rum.measure.feature` metric
-- <strong>Conversion</strong>: Percentage of sessions began and completed the journey. It is based on the `rum.measure.feature` metric
-- <strong>Time to convert</strong>: Average time for a session to complete the journey. It is based on the `rum.measure.feature.duration` metric
-- <strong>Uptime</strong>: Based on the journey's [synthetic test suite][10] performance
-
-
-## Start monitoring your Journeys
-
-### Step 1 - Create a journey
-
-1. Navigate to Digital Experience > Journey Monitoring
-2. Click <strong>Create a Journey</strong> or select a [suggested journey][11]
-
-### Step 2 - Specify journey details
-
-1. Select a frontend application
-2. Add a journey name
-3. Select one or more start events
-4. Select one or more end events
-5. Click <strong>Save Feature</strong>
-
-The right-hand funnel chart will automatically update based on the selected start and end events. The funnel contains data on the volume, conversion rate, and average to completion for each step.
-
-<strong>Note</strong>: Mandatory fields will be pre-populated if you are starting from a suggested journey.
-
-You may optionally add a description, attribute filters, team ownership, tags, and variants to your journey definition. Clicking <strong>Save Journey</strong> will create the journey and redirect you to the journey's [details report][12]. The details report will be automatically populated with metrics on the journey's volume, conversion rate, and average time to completion.
-
-### Step 3 - Integrate RUM and Synthetics
-
-In the journey's details report, you can:
-
-1. Create [RUM operations][13] to measure and monitor the performance of critical steps in the journey in your real user environment
-2. Add Synthetic tests to the journey's [test suite][14] to start calculating the journey's uptime
-
-## Next steps
-
-1. Explore the rest of the journey's data in the details report
-2. Navigate back to the [map][15] to review other created and suggested journeys
+Each journey and its variants have the following performance metrics:
+- **Traffic**: Number of sessions that began the journey. Based on the `rum.measure.feature` metric.
+- **Conversion**: Percentage of sessions that completed the journey. Based on the `rum.measure.feature` metric.
+- **Time to convert**: Average time for a session to complete the journey. Based on the `rum.measure.feature.duration` metric.
+- **Uptime**: Availability of the journey based on its [Synthetic test suite][10] performance.
 
 ## Further Reading
 
@@ -103,5 +104,3 @@ In the journey's details report, you can:
 [12]:/journey_monitoring/details_report/
 [13]:/real_user_monitoring/operations_monitoring/
 [14]:/journey_monitoring/map/
-
-

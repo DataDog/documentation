@@ -16,7 +16,7 @@ further_reading:
 
 ## Overview
 
-Each journey can contain one or more <strong>variants</strong>. A variant is a version of a journey containing a unique sequence of intermediate steps between the journey's start and end.
+Each journey can contain one or more **variants**. A variant is a version of a journey containing a unique sequence of intermediate steps between the journey's start and end.
 
 [INSERT DIAGRAM HERE]
 

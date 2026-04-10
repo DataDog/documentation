@@ -42,7 +42,7 @@ As long as the journey's test suite has at least one active test in it, each sui
 
 Datadog will automatically start calculating an uptime SLO on the test suite as long as the test suite has at least one active test in it. By default, the SLO will be evaluated at a 99.99% availability rate.
 
-You can add and remove tests from the test suite. Each added test will automatically be marked as <strong>critical</strong>, meaning the test suite 
+You can add and remove tests from the test suite. Each added test is automatically marked as **critical**, meaning the test suite 
 
 ## Further Reading
 
