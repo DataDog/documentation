@@ -136,11 +136,18 @@ const regions = getDefaultRegions();
 
       #theme-toggles {
         position: fixed;
-        top: var(--space-sm);
-        right: var(--space-sm);
+        top: 0;
+        right: 0;
         display: flex;
         gap: var(--space-xs);
         z-index: 1000;
+        padding: var(--space-sm);
+        opacity: 0;
+        transition: opacity 0.2s ease;
+      }
+
+      #theme-toggles:hover {
+        opacity: 1;
       }
 
       #theme-toggle,
