@@ -3,25 +3,25 @@
   padding: var(--space-sm) 0.75rem var(--space-sm) var(--space-md);
   margin-bottom: var(--space-md);
   border-left: var(--border-width-accent) solid;
-  color: var(--color-alert-text);
+  color: var(--color-status-text);
   font-size: var(--font-size-base);
   line-height: var(--line-height);
 }
 
 .alert--info {
-  border-color: var(--color-alert-info-bar);
+  border-color: var(--color-info);
 }
 
 .alert--danger {
-  border-color: var(--color-alert-danger-bar);
+  border-color: var(--color-caution);
 }
 
 .alert--warning {
-  border-color: var(--color-alert-warning-bar);
+  border-color: var(--color-warning);
 }
 
 .alert--tip {
-  border-color: var(--color-alert-tip-bar);
+  border-color: var(--color-accent);
 }
 
 .alert__label {
@@ -33,17 +33,17 @@
 }
 
 .alert--info .alert__label {
-  color: var(--color-alert-info-label);
+  color: var(--color-info-emphasis);
 }
 
 .alert--danger .alert__label {
-  color: var(--color-alert-danger-label);
+  color: var(--color-caution-emphasis);
 }
 
 .alert--warning .alert__label {
-  color: var(--color-alert-warning-label);
+  color: var(--color-warning-emphasis);
 }
 
 .alert--tip .alert__label {
-  color: var(--color-alert-tip-label);
+  color: var(--color-accent-emphasis);
 }

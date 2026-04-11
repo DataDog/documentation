@@ -97,8 +97,8 @@ a:hover {
 code {
   font-family: var(--font-family-mono);
   font-size: var(--font-size-xs);
-  color: var(--color-code-inline-text);
-  background-color: var(--color-code-inline-bg);
+  color: var(--color-highlight-text);
+  background-color: var(--color-highlight-bg);
   padding: 0 0.278rem;
   border-radius: var(--border-radius);
 }
@@ -202,27 +202,27 @@ table {
   width: 100%;
   max-width: 100%;
   margin-bottom: var(--space-lg);
-  border: var(--border-width) solid var(--color-table-border);
+  border: var(--border-width) solid var(--color-surface-border);
   border-collapse: collapse;
   font-size: var(--font-size-base);
-  background-color: var(--color-table-bg);
+  background-color: var(--color-surface-bg);
 }
 
 table th,
 table td {
   padding: var(--space-sm) 0.65rem;
-  border-left: var(--border-width) solid var(--color-table-border);
+  border-left: var(--border-width) solid var(--color-surface-border);
   vertical-align: top;
 }
 
 table thead th {
   vertical-align: bottom;
-  background: var(--color-table-header-bg);
+  background: var(--color-surface-header);
   border: none;
-  border-left: var(--border-width) solid var(--color-table-border);
+  border-left: var(--border-width) solid var(--color-surface-border);
   font-size: var(--font-size-xs);
   text-transform: uppercase;
-  color: var(--color-table-header-text);
+  color: var(--color-surface-header-text);
 }
 
 table tr:first-child td {
@@ -230,7 +230,7 @@ table tr:first-child td {
 }
 
 table tbody tr:nth-child(2n) {
-  background: var(--color-table-row-alt-bg);
+  background: var(--color-surface-alt);
 }
 
 table a {

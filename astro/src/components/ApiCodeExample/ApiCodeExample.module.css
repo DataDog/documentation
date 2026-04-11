@@ -11,9 +11,9 @@
 }
 
 .pre {
-  background: var(--color-code-bg);
-  border: var(--border-width) solid var(--color-code-border);
-  border-top: var(--border-width-highlight) solid var(--color-code-accent);
+  background: var(--color-panel-bg);
+  border: var(--border-width) solid var(--color-panel-border);
+  border-top: var(--border-width-highlight) solid var(--color-panel-accent);
   border-radius: var(--border-radius);
   padding: var(--space-sm);
   overflow-x: auto;
@@ -70,6 +70,6 @@
 
 .accordion .pre {
   border: none;
-  border-bottom: var(--border-width-highlight) solid var(--color-code-accent);
+  border-bottom: var(--border-width-highlight) solid var(--color-panel-accent);
   border-radius: 0;
 }

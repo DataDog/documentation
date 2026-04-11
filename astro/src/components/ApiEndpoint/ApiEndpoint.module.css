@@ -15,7 +15,7 @@
   padding: 0.1em 0.5em;
   margin-left: auto;
   border-radius: var(--border-radius);
-  background: var(--color-code-inline-bg);
+  background: var(--color-highlight-bg);
   color: var(--color-text-muted);
   vertical-align: middle;
   text-transform: uppercase;
@@ -31,7 +31,7 @@
 .path {
   font-family: var(--font-family-mono);
   font-size: var(--font-size-sm);
-  background: var(--color-code-inline-bg);
+  background: var(--color-highlight-bg);
   padding: 0.15rem var(--space-sm);
   border-radius: var(--border-radius);
   word-break: break-all;
@@ -44,7 +44,7 @@
 }
 
 .permissions code {
-  background: var(--color-code-inline-bg);
+  background: var(--color-highlight-bg);
   padding: 0 0.25em;
   border-radius: 2px;
 }
@@ -72,9 +72,9 @@
 }
 
 .examplePre {
-  background: var(--color-code-bg);
-  border: var(--border-width) solid var(--color-code-border);
-  border-top: var(--border-width-highlight) solid var(--color-code-accent);
+  background: var(--color-panel-bg);
+  border: var(--border-width) solid var(--color-panel-border);
+  border-top: var(--border-width-highlight) solid var(--color-panel-accent);
   border-radius: var(--border-radius);
   padding: var(--space-sm);
   overflow-x: auto;

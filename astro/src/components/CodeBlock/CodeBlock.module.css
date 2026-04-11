@@ -1,7 +1,7 @@
 .code-block {
   margin-bottom: var(--space-lg);
-  border: var(--border-width) solid var(--color-code-border);
-  border-top: var(--border-width-highlight) solid var(--color-code-accent);
+  border: var(--border-width) solid var(--color-panel-border);
+  border-top: var(--border-width-highlight) solid var(--color-panel-accent);
   border-radius: var(--border-radius);
   overflow: hidden;
   position: relative;
@@ -13,7 +13,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: var(--color-code-header-bg);
+  background-color: var(--color-panel-header);
   padding: var(--space-sm);
   min-height: var(--space-xs);
 }
@@ -21,7 +21,7 @@
 .code-block__language {
   font-family: var(--font-family-mono);
   font-size: var(--font-size-xs);
-  color: var(--color-code-text);
+  color: var(--color-panel-text);
 }
 
 /* ── Filename (shown in header when provided) ── */
@@ -29,7 +29,7 @@
 .code-block__filename {
   font-family: var(--font-family-mono);
   font-size: var(--font-size-xs);
-  color: var(--color-code-text);
+  color: var(--color-panel-text);
 }
 
 /* ── Header actions (right-aligned group: toggle + copy) ── */
@@ -133,7 +133,7 @@
 .code-block__pre {
   margin: 0;
   padding: var(--space-sm);
-  background-color: var(--color-code-bg);
+  background-color: var(--color-panel-bg);
   overflow-x: auto;
   max-height: var(--code-max-height);
 }
@@ -155,7 +155,7 @@
   padding: var(--space-sm);
   overflow-x: auto;
   max-height: var(--code-max-height);
-  background-color: var(--color-code-bg) !important;
+  background-color: var(--color-panel-bg) !important;
 }
 
 .code-block__highlighted :global(code) {

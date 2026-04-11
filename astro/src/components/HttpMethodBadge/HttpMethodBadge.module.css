@@ -11,28 +11,28 @@
 }
 
 .badge--get {
-  color: var(--color-method-get);
-  background: var(--color-method-get-bg);
+  color: var(--color-teal);
+  background: var(--color-teal-tint);
 }
 
 .badge--post {
-  color: var(--color-method-post);
-  background: var(--color-method-post-bg);
+  color: var(--color-forest);
+  background: var(--color-forest-tint);
 }
 
 .badge--put {
-  color: var(--color-method-put);
-  background: var(--color-method-put-bg);
+  color: var(--color-plum);
+  background: var(--color-plum-tint);
 }
 
 .badge--patch {
-  color: var(--color-method-patch);
-  background: var(--color-method-patch-bg);
+  color: var(--color-amber);
+  background: var(--color-amber-tint);
 }
 
 .badge--delete {
-  color: var(--color-method-delete);
-  background: var(--color-method-delete-bg);
+  color: var(--color-crimson);
+  background: var(--color-crimson-tint);
 }
 
 .badge--head {

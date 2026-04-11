@@ -16,27 +16,28 @@
   --color-border-dark: #c7c7c7;
   --color-scrollbar: rgba(0, 0, 0, 0.2);
 
-  /* Colors — Alert */
-  --color-alert-text: #4a4a4a;
-  --color-alert-info-bar: #006bc2;
-  --color-alert-info-label: #004a8c;
-  --color-alert-danger-bar: #facc00;
-  --color-alert-danger-label: #7f4205;
-  --color-alert-warning-bar: #eb364b;
-  --color-alert-warning-label: #9b3908;
-  --color-alert-tip-bar: #9364cd;
-  --color-alert-tip-label: #4a2c6a;
+  /* Colors — Status */
+  --color-status-text: #4a4a4a;
+  --color-info: #006bc2;
+  --color-info-emphasis: #004a8c;
+  --color-caution: #facc00;
+  --color-caution-emphasis: #7f4205;
+  --color-warning: #eb364b;
+  --color-warning-emphasis: #9b3908;
+  --color-accent: #9364cd;
+  --color-accent-emphasis: #4a2c6a;
 
-  /* Colors — Code */
-  --color-code-bg: #fff;
-  --color-code-text: #000;
-  --color-code-border: #ddd;
-  --color-code-header-bg: rgba(119, 0, 255, 0.15);
-  --color-code-accent: rgba(119, 0, 255, 0.3);
-  --color-code-inline-bg: #f2f2f2;
-  --color-code-inline-text: #555;
+  /* Colors — Panel */
+  --color-panel-bg: #fff;
+  --color-panel-text: #000;
+  --color-panel-border: #ddd;
+  --color-panel-header: rgba(119, 0, 255, 0.15);
+  --color-panel-accent: rgba(119, 0, 255, 0.3);
+  --color-highlight-bg: #f2f2f2;
+  --color-highlight-text: #555;
 
   /* Spacing */
+  --space-2xs: 0.125rem;
   --space-xs: 0.25rem;
   --space-sm: 0.5rem;
   --space-md: 1rem;
@@ -62,24 +63,24 @@
   --line-height: 1.6;
   --line-height-code: 27px;
 
-  /* Colors — Schema Table (purple-tinted, matching Hugo) */
-  --color-table-border: #ebebeb;
-  --color-table-header-bg: #f3edff;
-  --color-table-header-text: #000;
-  --color-table-row-alt-bg: #fdfcff;
-  --color-table-bg: #fdfcff;
+  /* Colors — Surface */
+  --color-surface-border: #ebebeb;
+  --color-surface-header: #f3edff;
+  --color-surface-header-text: #000;
+  --color-surface-alt: #fdfcff;
+  --color-surface-bg: #fdfcff;
 
-  /* Colors — HTTP Method Badges (matching Hugo) */
-  --color-method-get: #26759c;
-  --color-method-get-bg: #ebf5fa;
-  --color-method-post: #297a3f;
-  --color-method-post-bg: #d9f3e0;
-  --color-method-put: #5f3b83;
-  --color-method-put-bg: #d6c9e3;
-  --color-method-patch: #906623;
-  --color-method-patch-bg: #fff0d4;
-  --color-method-delete: #b72a3a;
-  --color-method-delete-bg: #fbd6db;
+  /* Colors — Named (badge/indicator pairs) */
+  --color-teal: #26759c;
+  --color-teal-tint: #ebf5fa;
+  --color-forest: #297a3f;
+  --color-forest-tint: #d9f3e0;
+  --color-plum: #5f3b83;
+  --color-plum-tint: #d6c9e3;
+  --color-amber: #906623;
+  --color-amber-tint: #fff0d4;
+  --color-crimson: #b72a3a;
+  --color-crimson-tint: #fbd6db;
 
   /* Colors — Semantic */
   --color-blue: #1a73e8;
@@ -101,6 +102,7 @@
   --border-width-thick: 2px;
   --border-width-highlight: 3px;
   --border-width-accent: 4px;
+  --border-radius-sm: 2px;
   --border-radius: 4px;
   --border-radius-md: 6px;
 
@@ -141,32 +143,44 @@
   --color-border-dark: #444;
   --color-scrollbar: rgba(255, 255, 255, 0.2);
 
-  /* Colors — Alert */
-  --color-alert-text: #ccc;
-  --color-alert-info-bar: #4da6ff;
-  --color-alert-info-label: #7bbfff;
-  --color-alert-danger-bar: #ffe066;
-  --color-alert-danger-label: #ffe066;
-  --color-alert-warning-bar: #f06070;
-  --color-alert-warning-label: #f09090;
-  --color-alert-tip-bar: #b08ee6;
-  --color-alert-tip-label: #c9b0f0;
+  /* Colors — Status */
+  --color-status-text: #ccc;
+  --color-info: #4da6ff;
+  --color-info-emphasis: #7bbfff;
+  --color-caution: #ffe066;
+  --color-caution-emphasis: #ffe066;
+  --color-warning: #f06070;
+  --color-warning-emphasis: #f09090;
+  --color-accent: #b08ee6;
+  --color-accent-emphasis: #c9b0f0;
 
-  /* Colors — Code */
-  --color-code-bg: #0d1117;
-  --color-code-text: #e0e0e0;
-  --color-code-border: #333;
-  --color-code-header-bg: rgba(155, 109, 215, 0.15);
-  --color-code-accent: rgba(155, 109, 215, 0.3);
-  --color-code-inline-bg: #2a2a3e;
-  --color-code-inline-text: #ccc;
+  /* Colors — Panel */
+  --color-panel-bg: #0d1117;
+  --color-panel-text: #e0e0e0;
+  --color-panel-border: #333;
+  --color-panel-header: rgba(155, 109, 215, 0.15);
+  --color-panel-accent: rgba(155, 109, 215, 0.3);
+  --color-highlight-bg: #2a2a3e;
+  --color-highlight-text: #ccc;
 
-  /* Colors — Schema Table */
-  --color-table-border: #444;
-  --color-table-header-bg: #2a2040;
-  --color-table-header-text: #e0e0e0;
-  --color-table-row-alt-bg: #1e1a30;
-  --color-table-bg: #1e1a30;
+  /* Colors — Surface */
+  --color-surface-border: #444;
+  --color-surface-header: #2a2040;
+  --color-surface-header-text: #e0e0e0;
+  --color-surface-alt: #1e1a30;
+  --color-surface-bg: #1e1a30;
+
+  /* Colors — Named (badge/indicator pairs) */
+  --color-teal: #5baed4;
+  --color-teal-tint: rgba(91, 174, 212, 0.15);
+  --color-forest: #5cc47a;
+  --color-forest-tint: rgba(92, 196, 122, 0.15);
+  --color-plum: #a07dd4;
+  --color-plum-tint: rgba(160, 125, 212, 0.15);
+  --color-amber: #d4a84f;
+  --color-amber-tint: rgba(212, 168, 79, 0.15);
+  --color-crimson: #e86070;
+  --color-crimson-tint: rgba(232, 96, 112, 0.15);
 
   /* Colors — Semantic */
   --color-blue: #5b9cf5;

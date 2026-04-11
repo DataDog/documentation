@@ -33,6 +33,24 @@ Render as much content at build time as possible. Light rehydration on the clien
 
 Use a tokenized design, where fonts, white space, colors, and so on are controlled by top-level design tokens that could be changed at runtime to support dark mode etc.
 
+Design tokens should not be tied to a particular element, with the exception of very high-level layout tokens. For example, colors should just be colors, not tokens for "breadcrumb color" or "footer background color." If the token is not reusable across a variety of components, it's probably not a good token.
+
+#### Token naming conventions
+
+Token names describe appearance or role, never a specific component:
+
+| Category | Prefix | Examples |
+|---|---|---|
+| Status indicators | `--color-{info,caution,warning,accent}[-emphasis]` | `--color-info`, `--color-warning-emphasis` |
+| Panels (bordered boxes) | `--color-panel-*` | `--color-panel-bg`, `--color-panel-accent` |
+| Surfaces (data layers) | `--color-surface-*` | `--color-surface-header`, `--color-surface-border` |
+| Inline highlights | `--color-highlight-*` | `--color-highlight-bg`, `--color-highlight-text` |
+| Named colors (badge pairs) | `--color-{name}[-tint]` | `--color-teal`, `--color-crimson-tint` |
+| Spacing | `--space-{size}` | `--space-2xs`, `--space-xs`, `--space-sm` |
+| Border radius | `--border-radius[-size]` | `--border-radius-sm`, `--border-radius-md` |
+
+Every token defined in `:root` must have a corresponding dark mode override in `[data-theme='dark']` if the value would look wrong on a dark background.
+
 ### Global styles
 
 Aside from design tokens, limit global styles as much as possible to allow components to be viewed and tested in isolation. Use global styles when avoiding them would result in significant bloat of the component CSS. For example, the default font for the site makes sense as a global style.

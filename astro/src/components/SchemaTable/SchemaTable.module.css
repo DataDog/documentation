@@ -1,10 +1,10 @@
 .table {
-  border: var(--border-width) solid var(--color-table-border);
+  border: var(--border-width) solid var(--color-surface-border);
   border-radius: var(--border-radius);
   margin-bottom: var(--space-lg);
   font-size: var(--font-size-sm);
   overflow: hidden;
-  background-color: var(--color-table-bg);
+  background-color: var(--color-surface-bg);
   box-sizing: border-box;
 }
 
@@ -37,11 +37,11 @@
 
 .columns {
   display: flex;
-  border-bottom: var(--border-width) solid var(--color-table-border);
-  background: var(--color-table-header-bg);
+  border-bottom: var(--border-width) solid var(--color-surface-border);
+  background: var(--color-surface-header);
   font-weight: 600;
   font-size: var(--font-size-xs);
-  color: var(--color-table-header-text);
+  color: var(--color-surface-header-text);
   text-transform: uppercase;
 }
 
@@ -62,7 +62,7 @@
 
 .row {
   display: flex;
-  border-bottom: var(--border-width) solid var(--color-table-border);
+  border-bottom: var(--border-width) solid var(--color-surface-border);
   line-height: 1.5;
 }
 
@@ -89,14 +89,14 @@
   align-items: baseline;
   gap: var(--space-xs);
   padding: 4px var(--space-md);
-  border-right: var(--border-width) solid var(--color-table-border);
+  border-right: var(--border-width) solid var(--color-surface-border);
   min-width: 0;
 }
 
 .cell__type {
   flex: 0 0 16.67%;
   padding: 4px var(--space-md);
-  border-right: var(--border-width) solid var(--color-table-border);
+  border-right: var(--border-width) solid var(--color-surface-border);
   color: var(--color-text-muted);
 }
 
@@ -163,7 +163,7 @@
 }
 
 .default code {
-  background: var(--color-code-inline-bg);
+  background: var(--color-highlight-bg);
   padding: 0 0.25em;
   border-radius: 2px;
 }
@@ -175,7 +175,7 @@
 }
 
 .enum code {
-  background: var(--color-code-inline-bg);
+  background: var(--color-highlight-bg);
   padding: 0 0.25em;
   border-radius: 2px;
   word-break: break-all;
@@ -199,6 +199,6 @@
   font-weight: 600;
   font-size: var(--font-size-xs);
   color: var(--color-text-muted);
-  border-bottom: var(--border-width) solid var(--color-table-border);
-  background: var(--color-table-header-bg);
+  border-bottom: var(--border-width) solid var(--color-surface-border);
+  background: var(--color-surface-header);
 }
