@@ -39,7 +39,7 @@ export function ApiCodeExample({ examples }: ApiCodeExampleProps): JSX.Element {
   const renderPanel = (ex: CodeExampleSet) => {
     if (ex.entries.length === 1) {
       return (
-        <div class={styles.codeBlock}>
+        <div class={`api-code-example__code-block ${styles.codeBlock}`}>
           <CodeBlock content={ex.entries[0].code} language={ex.entries[0].syntax} highlightedCode={ex.entries[0].highlightedCode} />
         </div>
       );
@@ -51,20 +51,20 @@ export function ApiCodeExample({ examples }: ApiCodeExampleProps): JSX.Element {
           const key = String(i);
           const isOpen = expandedEntries.has(key);
           return (
-            <div key={key} class={styles.accordion} data-testid="api-code-example-accordion">
+            <div key={key} class={`api-code-example__accordion ${styles.accordion}`} data-testid="api-code-example-accordion">
               <button
-                class={`${styles.accordionHeader} ${isOpen ? styles['accordionHeader--open'] : ''}`}
+                class={`api-code-example__accordion-header ${styles.accordionHeader} ${isOpen ? `api-code-example__accordion-header--open ${styles['accordionHeader--open']}` : ''}`}
                 onClick={() => toggleEntry(key)}
                 aria-expanded={isOpen}
                 data-testid="api-code-example-accordion-toggle"
               >
-                <svg class={styles.accordionIcon} width="10" height="10" viewBox="0 0 10 10">
+                <svg class={`api-code-example__accordion-icon ${styles.accordionIcon}`} width="10" height="10" viewBox="0 0 10 10">
                   <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5" />
                 </svg>
                 <span>{entry.description}</span>
               </button>
               {isOpen && (
-                <div class={styles.codeBlock}>
+                <div class={`api-code-example__code-block ${styles.codeBlock}`}>
                   <CodeBlock content={entry.code} language={entry.syntax} highlightedCode={entry.highlightedCode} />
                 </div>
               )}
@@ -76,8 +76,8 @@ export function ApiCodeExample({ examples }: ApiCodeExampleProps): JSX.Element {
   };
 
   return (
-    <div class={styles.codeExample} data-testid="api-code-example">
-      <h3 class={styles.heading}>Code Example</h3>
+    <div class={`api-code-example ${styles.codeExample}`} data-testid="api-code-example">
+      <h3 class={`api-code-example__heading ${styles.heading}`}>Code Example</h3>
 
       <Tabs
         labels={examples.map((ex) => ex.label)}

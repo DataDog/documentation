@@ -16,7 +16,7 @@ const { type = 'info' } = Astro.props;
 const label = labels[type] ?? type;
 ---
 
-<div class:list={[styles.alert, styles[`alert--${type}`]]} data-alert-type={type}>
-  <strong class={styles['alert__label']}>{label}</strong>
+<div class:list={['alert', `alert--${type}`, styles.alert, styles[`alert--${type}`]]} data-alert-type={type}>
+  <strong class={`alert__label ${styles['alert__label']}`}>{label}</strong>
   <slot />
 </div>

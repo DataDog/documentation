@@ -45,15 +45,15 @@ function FieldRow({
   return (
     <>
       <div
-        class={`${styles.row} ${field.readOnly ? styles['row--readonly'] : ''} ${field.deprecated ? styles['row--deprecated'] : ''}`}
+        class={`schema-table__row ${styles.row} ${field.readOnly ? `schema-table__row--readonly ${styles['row--readonly']}` : ''} ${field.deprecated ? `schema-table__row--deprecated ${styles['row--deprecated']}` : ''}`}
         data-testid="schema-table-row"
         data-field-name={field.name}
         data-depth={depth}
       >
-        <div class={styles.cell__name} style={indent > 0 ? { paddingLeft: `calc(var(--space-md) + ${indent}px)` } : undefined}>
+        <div class={`schema-table__cell-name ${styles.cell__name}`} style={indent > 0 ? { paddingLeft: `calc(var(--space-md) + ${indent}px)` } : undefined}>
           {hasChildren && (
             <button
-              class={`${styles.toggle} ${isExpanded ? styles['toggle--expanded'] : ''}`}
+              class={`schema-table__toggle ${styles.toggle} ${isExpanded ? `schema-table__toggle--expanded ${styles['toggle--expanded']}` : ''}`}
               onClick={() => togglePath(path)}
               aria-expanded={isExpanded}
               aria-label={`Toggle ${field.name}`}
@@ -64,21 +64,21 @@ function FieldRow({
               </svg>
             </button>
           )}
-          <code class={styles.name}>{field.name}</code>
+          <code class={`schema-table__name ${styles.name}`}>{field.name}</code>
           {field.required && (
-            <span class={styles.required} data-testid="schema-field-required">{' '}[required]</span>
+            <span class={`schema-table__required ${styles.required}`} data-testid="schema-field-required">{' '}[required]</span>
           )}
         </div>{' '}
-        <div class={styles.cell__type}>
-          <span class={styles.type}>{field.type}</span>
+        <div class={`schema-table__cell-type ${styles.cell__type}`}>
+          <span class={`schema-table__type ${styles.type}`}>{field.type}</span>
         </div>{' '}
-        <div class={styles.cell__description}>
+        <div class={`schema-table__cell-description ${styles.cell__description}`}>
           {field.deprecated && (
-            <><strong class={styles.deprecated__label}>DEPRECATED</strong>{' '}</>
+            <><strong class={`schema-table__deprecated-label ${styles.deprecated__label}`}>DEPRECATED</strong>{' '}</>
           )}
           <span dangerouslySetInnerHTML={{ __html: field.description }} />
           {field.defaultValue !== undefined && (
-            <span class={styles.default}> Default: <code>{field.defaultValue}</code></span>
+            <span class={`schema-table__default ${styles.default}`}> Default: <code>{field.defaultValue}</code></span>
           )}
           {field.enumValues && field.enumValues.length > 0 && (
             <EnumValues values={field.enumValues} />
@@ -89,7 +89,7 @@ function FieldRow({
       {/* Render children if expanded */}
       {hasChildren && (
         <div
-          class={styles.children}
+          class={`schema-table__children ${styles.children}`}
           style={{ display: isExpanded ? 'block' : 'none' }}
           data-testid="schema-table-children"
         >
@@ -105,7 +105,7 @@ function FieldRow({
           ))}
           {field.unionOptions?.map((option, i) => (
             <div key={`${path}__union_${i}`}>
-              <div class={styles.union__label} style={{ paddingLeft: `${(depth + 1) * 20 + 8}px` }}>
+              <div class={`schema-table__union-label ${styles.union__label}`} style={{ paddingLeft: `${(depth + 1) * 20 + 8}px` }}>
                 {option.label}
               </div>
               {option.fields.map((child) => (
@@ -129,7 +129,7 @@ function FieldRow({
 function EnumValues({ values }: { values: string[] }): JSX.Element {
   if (values.length <= ENUM_INLINE_LIMIT) {
     return (
-      <div class={styles.enum}>
+      <div class={`schema-table__enum ${styles.enum}`}>
         Allowed enum values: <code>{values.join(', ')}</code>
       </div>
     );
@@ -137,9 +137,9 @@ function EnumValues({ values }: { values: string[] }): JSX.Element {
   const visible = values.slice(0, ENUM_INLINE_LIMIT);
   const rest = values.slice(ENUM_INLINE_LIMIT);
   return (
-    <div class={styles.enum}>
+    <div class={`schema-table__enum ${styles.enum}`}>
       Allowed enum values: <code>{visible.join(', ')}</code>
-      <details class={styles.enum__details}>
+      <details class={`schema-table__enum-details ${styles.enum__details}`}>
         <summary>Show {rest.length} more</summary>
         <code>{rest.join(', ')}</code>
       </details>
@@ -191,11 +191,11 @@ export function SchemaTable({ fields, title, showExpandAll = true }: SchemaTable
   };
 
   return (
-    <div data-testid="schema-table">
+    <div class="schema-table" data-testid="schema-table">
       {showExpandAll && allPaths.length > 0 && (
-        <div class={styles.toolbar}>
+        <div class={`schema-table__toolbar ${styles.toolbar}`}>
           <button
-            class={styles.expandAll}
+            class={`schema-table__expand-all ${styles.expandAll}`}
             onClick={toggleAll}
             data-testid="schema-table-expand-all"
           >
@@ -203,11 +203,11 @@ export function SchemaTable({ fields, title, showExpandAll = true }: SchemaTable
           </button>
         </div>
       )}
-      <div class={styles.table}>
-      <div class={styles.columns}>
-        <div class={styles.columns__name}>Name</div>{' '}
-        <div class={styles.columns__type}>Type</div>{' '}
-        <div class={styles.columns__description}>Description</div>
+      <div class={`schema-table__table ${styles.table}`}>
+      <div class={`schema-table__columns ${styles.columns}`}>
+        <div class={`schema-table__columns-name ${styles.columns__name}`}>Name</div>{' '}
+        <div class={`schema-table__columns-type ${styles.columns__type}`}>Type</div>{' '}
+        <div class={`schema-table__columns-description ${styles.columns__description}`}>Description</div>
       </div>
       {fields.map((field) => (
         <FieldRow

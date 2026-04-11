@@ -24,8 +24,8 @@ export function ApiResponse({ responses }: ApiResponseProps): JSX.Element {
   const labels = responses.map((r) => r.statusCode);
 
   return (
-    <div class={styles.response} data-testid="api-response">
-      <h3 class={styles.heading}>Response</h3>
+    <div class={`api-response ${styles.response}`} data-testid="api-response">
+      <h3 class={`api-response__heading ${styles.heading}`}>Response</h3>
 
       <Tabs labels={labels} variant="pills">
         {(activeIndex) => {
@@ -39,7 +39,7 @@ export function ApiResponse({ responses }: ApiResponseProps): JSX.Element {
           return (
             <div data-testid={`api-response-panel-${r.statusCode}`}>
               {r.description && (
-                <p class={styles.description} dangerouslySetInnerHTML={{ __html: r.description }} />
+                <p class={`api-response__description ${styles.description}`} dangerouslySetInnerHTML={{ __html: r.description }} />
               )}
 
               {toggleLabels.length > 0 ? (
@@ -55,7 +55,7 @@ export function ApiResponse({ responses }: ApiResponseProps): JSX.Element {
                       return (
                         <>
                           {r.examples.map((ex) => (
-                            <div key={ex.name} class={styles.example}>
+                            <div key={ex.name} class={`api-response__example ${styles.example}`}>
                               <CodeBlock content={ex.value} language="json" highlightedCode={ex.highlightedValue} />
                             </div>
                           ))}

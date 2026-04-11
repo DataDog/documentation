@@ -34,11 +34,11 @@ export function RegionSelector({ regions, defaultRegion = 'us1' }: RegionSelecto
   };
 
   return (
-    <div class={styles.selector} data-testid="region-selector">
-      <label class={styles.label} for="region-select">Site:</label>
+    <div class={`region-selector ${styles.selector}`} data-testid="region-selector">
+      <label class={`region-selector__label ${styles.label}`} for="region-select">Site:</label>
       <select
         id="region-select"
-        class={styles.select}
+        class={`region-selector__select ${styles.select}`}
         value={selected}
         onChange={handleChange}
         data-testid="region-selector-select"

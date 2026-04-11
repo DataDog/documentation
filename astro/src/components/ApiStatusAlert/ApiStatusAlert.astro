@@ -29,16 +29,16 @@ import styles from './ApiStatusAlert.module.css';
 ---
 
 <div
-  class:list={[styles.alert, styles[`alert--${type}`]]}
+  class:list={['api-status-alert', `api-status-alert--${type}`, styles.alert, styles[`alert--${type}`]]}
   data-api-alert-type={type}
   data-testid="api-status-alert"
   role="alert"
 >
-  <span class={styles['alert__label']}>{config.label}</span>
-  <span class={styles['alert__message']}>
+  <span class={`api-status-alert__label ${styles['alert__label']}`}>{config.label}</span>
+  <span class={`api-status-alert__message ${styles['alert__message']}`}>
     <Fragment set:html={displayMessage} />
     {newerVersionUrl && type === 'deprecated' && (
-      <a href={newerVersionUrl} class={styles['alert__link']}>Use the newer version.</a>
+      <a href={newerVersionUrl} class={`api-status-alert__link ${styles['alert__link']}`}>Use the newer version.</a>
     )}
   </span>
 </div>

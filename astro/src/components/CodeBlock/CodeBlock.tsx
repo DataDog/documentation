@@ -31,12 +31,12 @@ export function CodeBlock({
   };
 
   const containerClass = wrap
-    ? `${styles['code-block']} ${styles['code-block--wrap']}`
-    : styles['code-block'];
+    ? `code-block code-block--wrap ${styles['code-block']} ${styles['code-block--wrap']}`
+    : `code-block ${styles['code-block']}`;
 
   const contentClass = collapsed
-    ? `${styles['code-block__content']} ${styles['code-block__content--hidden']}`
-    : styles['code-block__content'];
+    ? `code-block__content code-block__content--hidden ${styles['code-block__content']} ${styles['code-block__content--hidden']}`
+    : `code-block__content ${styles['code-block__content']}`;
 
   return (
     <div
@@ -48,26 +48,26 @@ export function CodeBlock({
       data-disable-copy={disableCopy || undefined}
     >
       {(filename || collapsible) && (
-        <div class={styles['code-block__header']}>
+        <div class={`code-block__header ${styles['code-block__header']}`}>
           {filename ? (
-            <span class={styles['code-block__filename']} data-testid="code-block-filename">
+            <span class={`code-block__filename ${styles['code-block__filename']}`} data-testid="code-block-filename">
               {filename}
             </span>
           ) : null}
-          <div class={styles['code-block__header-actions']}>
+          <div class={`code-block__header-actions ${styles['code-block__header-actions']}`}>
             {collapsible && (
               <button
-                class={styles['code-block__toggle']}
+                class={`code-block__toggle ${styles['code-block__toggle']}`}
                 onClick={() => setCollapsed((prev) => !prev)}
                 data-testid="code-block-toggle"
                 aria-expanded={!collapsed}
                 aria-label={collapsed ? 'Expand code' : 'Collapse code'}
               >
                 <span
-                  class={`${styles['code-block__chevron']} ${
+                  class={`code-block__chevron ${styles['code-block__chevron']} ${
                     collapsed
-                      ? styles['code-block__chevron--down']
-                      : styles['code-block__chevron--up']
+                      ? `code-block__chevron--down ${styles['code-block__chevron--down']}`
+                      : `code-block__chevron--up ${styles['code-block__chevron--up']}`
                   }`}
                 />
               </button>
@@ -78,7 +78,7 @@ export function CodeBlock({
       <div class={contentClass} data-testid="code-block-content">
         {!disableCopy && (
           <button
-            class={styles['code-block__copy']}
+            class={`code-block__copy ${styles['code-block__copy']}`}
             onClick={handleCopy}
             data-testid="code-block-copy"
             aria-label="Copy code"
@@ -88,12 +88,12 @@ export function CodeBlock({
         )}
         {highlightedCode ? (
           <div
-            class={styles['code-block__highlighted']}
+            class={`code-block__highlighted ${styles['code-block__highlighted']}`}
             dangerouslySetInnerHTML={{ __html: highlightedCode }}
           />
         ) : (
-          <pre class={styles['code-block__pre']}>
-            <code class={styles['code-block__code']}>{content}</code>
+          <pre class={`code-block__pre ${styles['code-block__pre']}`}>
+            <code class={`code-block__code ${styles['code-block__code']}`}>{content}</code>
           </pre>
         )}
       </div>

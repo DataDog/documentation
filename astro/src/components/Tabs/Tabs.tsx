@@ -77,17 +77,17 @@ export function Tabs({ labels, children, onTabChange, variant }: TabsProps) {
   };
 
   const containerClass = usePills
-    ? `${styles.tabs} ${styles['tabs--pills']}`
-    : styles.tabs;
+    ? `tabs tabs--pills ${styles.tabs} ${styles['tabs--pills']}`
+    : `tabs ${styles.tabs}`;
 
   return (
     <div ref={containerRef} class={containerClass} data-testid="tabs" data-layout={usePills ? 'pills' : 'tabs'}>
-      <div ref={navRef} class={styles.tabs__nav} role="tablist" data-testid="tabs-nav">
+      <div ref={navRef} class={`tabs__nav ${styles.tabs__nav}`} role="tablist" data-testid="tabs-nav">
         {tabLabels.map((label, i) => {
           const active = i === activeIndex;
           const btnClass = active
-            ? `${styles.tabs__button} ${styles['tabs__button--active']}`
-            : styles.tabs__button;
+            ? `tabs__button tabs__button--active ${styles.tabs__button} ${styles['tabs__button--active']}`
+            : `tabs__button ${styles.tabs__button}`;
 
           return (
             <button
@@ -103,7 +103,7 @@ export function Tabs({ labels, children, onTabChange, variant }: TabsProps) {
           );
         })}
       </div>
-      <div role="tabpanel" class={styles.tabs__panel} data-testid="tabs-panel">
+      <div role="tabpanel" class={`tabs__panel ${styles.tabs__panel}`} data-testid="tabs-panel">
         {children
           ? children(activeIndex)
           : <span dangerouslySetInnerHTML={{ __html: domTabs[activeIndex]?.content ?? '' }} />

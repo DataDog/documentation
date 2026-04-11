@@ -11,7 +11,7 @@ import styles from './HttpMethodBadge.module.css';
 ---
 
 <span
-  class:list={[styles.badge, styles[`badge--${normalized}`]]}
+  class:list={['http-method-badge', `http-method-badge--${normalized}`, styles.badge, styles[`badge--${normalized}`]]}
   data-method={normalized}
   data-testid="http-method-badge"
 >

@@ -59,7 +59,7 @@ const hasParams = ep && (
 ---
 
 {ep && (
-  <section class={styles.endpoint} data-testid="api-endpoint" data-operation-id={ep.operationId}>
+  <section class={`api-endpoint ${styles.endpoint}`} data-testid="api-endpoint" data-operation-id={ep.operationId}>
     {/* Status alerts */}
     {ep.deprecated && (
       <ApiStatusAlert type="deprecated" newerVersionUrl={ep.newerVersionUrl} />
@@ -69,13 +69,13 @@ const hasParams = ep && (
     )}
 
     {/* Heading + method badge + path */}
-    <h2 id={ep.slug} class={styles.heading}>
+    <h2 id={ep.slug} class={`api-endpoint__heading ${styles.heading}`}>
       {ep.summary}
-      {ep.version && <span class={styles.versionBadge}>{ep.version === 'v2' ? 'v2 (latest)' : ep.version}</span>}
+      {ep.version && <span class={`api-endpoint__version-badge ${styles.versionBadge}`}>{ep.version === 'v2' ? 'v2 (latest)' : ep.version}</span>}
     </h2>
-    <div class={styles.urlLine}>
+    <div class={`api-endpoint__url-line ${styles.urlLine}`}>
       <HttpMethodBadge method={ep.method} />
-      <code class={styles.path}>{ep.regionUrls?.['us1'] ?? ep.regionUrls?.[Object.keys(ep.regionUrls ?? {})[0]] ?? ep.path}</code>
+      <code class={`api-endpoint__path ${styles.path}`}>{ep.regionUrls?.['us1'] ?? ep.regionUrls?.[Object.keys(ep.regionUrls ?? {})[0]] ?? ep.path}</code>
     </div>
 
     {/* Description — rendered as slot content from Markdoc */}
@@ -84,7 +84,7 @@ const hasParams = ep && (
 
     {/* Permissions */}
     {ep.permissions && ep.permissions.length > 0 && (
-      <div class={styles.permissions}>
+      <div class={`api-endpoint__permissions ${styles.permissions}`}>
         <strong>Permissions: </strong>
         <code>{ep.permissions.join(', ')}</code>
       </div>
@@ -92,14 +92,14 @@ const hasParams = ep && (
 
     {/* OAuth scopes */}
     {ep.oauthScopes && ep.oauthScopes.length > 0 && (
-      <div class={styles.permissions}>
+      <div class={`api-endpoint__permissions ${styles.permissions}`}>
         <p>OAuth apps require the <code>{ep.oauthScopes.join(', ')}</code> authorization scope to access this endpoint.</p>
       </div>
     )}
 
     {/* Arguments */}
     {hasParams && (
-      <div class={styles.section}>
+      <div class={`api-endpoint__section ${styles.section}`}>
         <h3>Arguments</h3>
         {ep.pathParams && ep.pathParams.length > 0 && (
           <SchemaTable client:load fields={ep.pathParams} />
@@ -115,7 +115,7 @@ const hasParams = ep && (
 
     {/* Request Body */}
     {ep.requestBody && (
-      <div class={styles.section}>
+      <div class={`api-endpoint__section ${styles.section}`}>
         <h3>Request Body {ep.requestBody.required ? '(required)' : '(optional)'}</h3>
         {ep.requestBody.description && (
           <p set:html={ep.requestBody.description} />
@@ -138,6 +138,6 @@ const hasParams = ep && (
       <ApiCodeExample client:load examples={ep.codeExamples} />
     )}
 
-    <hr class={styles.divider} />
+    <hr class={`api-endpoint__divider ${styles.divider}`} />
   </section>
 )}

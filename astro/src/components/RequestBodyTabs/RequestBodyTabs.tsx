@@ -19,7 +19,7 @@ export function RequestBodyTabs({ schema, examples }: RequestBodyTabsProps) {
   }
   if (!hasSchema && hasExamples) {
     return (
-      <div class={styles.requestExamples}>
+      <div class={`request-body-tabs__examples ${styles.requestExamples}`}>
         {examples.map((ex) => (
           <CodeBlock key={ex.name} content={ex.value} language="json" highlightedCode={ex.highlightedValue} />
         ))}
@@ -34,7 +34,7 @@ export function RequestBodyTabs({ schema, examples }: RequestBodyTabsProps) {
         activeIndex === 0 ? (
           <SchemaTable fields={schema} />
         ) : (
-          <div class={styles.requestExamples}>
+          <div class={`request-body-tabs__examples ${styles.requestExamples}`}>
             {examples.map((ex) => (
               <div key={ex.name}>
                 {examples.length > 1 && <strong>{ex.name}</strong>}
