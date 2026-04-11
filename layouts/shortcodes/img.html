@@ -28,7 +28,7 @@
 {{- if .Get "img_param" | len -}}
   {{- .Get "img_param" | $.Scratch.Add "img_param" -}}
 {{- else -}}
-  {{- $.Scratch.Add "img_param" (printf "?ch=Width,DPR&fit=max") -}}
+  {{- $.Scratch.Add "img_param" (printf "?fit=max") -}}
 {{- end -}}
 {{- if .Get "pop_param" | len -}}
   {{- .Get "pop_param" | $.Scratch.Add "pop_param" -}}
