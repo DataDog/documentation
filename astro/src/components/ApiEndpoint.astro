@@ -71,7 +71,7 @@ const hasParams = ep && (
     {/* Heading + method badge + path */}
     <h2 id={ep.slug} class={styles.heading}>
       {ep.summary}
-      {ep.version && <span class={styles.versionBadge}>{ep.version}</span>}
+      {ep.version && <span class={styles.versionBadge}>{ep.version === 'v2' ? 'v2 (latest)' : ep.version}</span>}
     </h2>
     <div class={styles.urlLine}>
       <HttpMethodBadge method={ep.method} />

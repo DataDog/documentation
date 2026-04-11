@@ -4,6 +4,8 @@
 
 .heading {
   margin: 0 0 var(--space-sm);
+  display: flex;
+  align-items: center;
 }
 
 .versionBadge {
@@ -11,7 +13,7 @@
   font-size: var(--font-size-xs);
   font-weight: 600;
   padding: 0.1em 0.5em;
-  margin-left: var(--space-sm);
+  margin-left: auto;
   border-radius: var(--border-radius);
   background: var(--color-code-inline-bg);
   color: var(--color-text-muted);
