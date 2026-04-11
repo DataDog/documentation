@@ -1,0 +1,19 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+
+const docs = await getCollection('docs');
+const components = docs
+  .filter((entry) => entry.id.startsWith('components/'))
+  .sort((a, b) => a.data.title.localeCompare(b.data.title));
+---
+
+<BaseLayout title="Components">
+  <nav><a href="/">&larr; Home</a></nav>
+  <h1>Components</h1>
+  <ul>
+    {components.map((entry) => (
+      <li><a href={`/docs/${entry.id}/`}>{entry.data.title}</a></li>
+    ))}
+  </ul>
+</BaseLayout>

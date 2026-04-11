@@ -20,7 +20,7 @@ const endpoints = getEndpointsForCategory(slug as string);
 await highlightEndpoints(endpoints);
 ---
 
-<ApiLayout title={`${current.name} - Datadog API`} categories={categories} currentSlug={slug as string}>
+<ApiLayout title={`${current.name} - Datadog API`} categories={categories} currentSlug={slug as string} breadcrumbs={[{ label: 'Docs', href: '/' }, { label: 'API Reference', href: '/api/latest/' }, { label: current.name }]}>
   <h1>{current.name}</h1>
   {current.description && (
     <div set:html={current.description} />

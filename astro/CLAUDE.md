@@ -1,6 +1,8 @@
 # Astro Docs
 
-We intend to eventually deprecate Hugo, having moved all of its content into this Astro site. For now, to avoid breaking existing CI/CD while we build the site, we've left the repo intact and simply added an Astro folder.
+We intend to eventually deprecate Hugo, having moved all of its content into this Astro site. For now, to avoid breaking existing CI/CD while we build the site, we've left the repo intact and simply added an Astro folder. Prompts will often refer to the "Hugo docs", which is referring either to the general Hugo site setup or the API docs specifically, depending on the context of the request.
+
+The scope of this new Astro site is just the API docs. In Hugo, the HTML for the API docs can be found in [public/api](../public/api/). Those docs are generated from [the spec YAML in this folder](./../data/api). We've made a copy of that data to use for development of the Astro API docs.
 
 ## Operating instructions
 

@@ -1,0 +1,31 @@
+---
+import styles from './Breadcrumbs.module.css';
+
+export interface BreadcrumbItem {
+  label: string;
+  href?: string;
+}
+
+interface Props {
+  crumbs: BreadcrumbItem[];
+}
+
+const { crumbs } = Astro.props;
+---
+
+<nav aria-label="Breadcrumb" class={styles.breadcrumbs}>
+  <ol>
+    {crumbs.map((crumb, i) => {
+      const isLast = i === crumbs.length - 1;
+      return (
+        <li>
+          {crumb.href && !isLast ? (
+            <a href={crumb.href}>{crumb.label}</a>
+          ) : (
+            <span aria-current={isLast ? 'page' : undefined}>{crumb.label}</span>
+          )}
+        </li>
+      );
+    })}
+  </ol>
+</nav>

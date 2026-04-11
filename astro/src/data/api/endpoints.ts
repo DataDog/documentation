@@ -30,14 +30,14 @@ export interface ResponseData {
   statusCode: string;
   description: string;
   schema?: SchemaField[];
-  examples?: Array<{ name: string; value: string }>;
+  examples?: Array<{ name: string; value: string; highlightedValue?: string }>;
 }
 
 export interface RequestBodyData {
   required: boolean;
   description?: string;
   schema: SchemaField[];
-  examples: Array<{ name: string; value: string }>;
+  examples: Array<{ name: string; value: string; highlightedValue?: string }>;
 }
 
 export interface EndpointData {
@@ -313,22 +313,33 @@ function extractResponses(spec: any, operation: any): ResponseData[] {
 /*  Example generation from schema                                     */
 /* ------------------------------------------------------------------ */
 
-/** Maximum depth for example generation to prevent infinite recursion. */
-const EXAMPLE_MAX_DEPTH = 6;
+/** Maximum structural depth (objects/arrays) for example generation. */
+const EXAMPLE_MAX_DEPTH = 10;
 
 /**
  * Attempt to build a sample JSON value from a schema by using `example`
  * fields on properties. Returns `undefined` if no useful example can
  * be constructed.
+ *
+ * `depth` tracks structural nesting (object properties, array items).
+ * `$ref` resolution does not increment depth — circular refs are guarded
+ * by a `seen` set of ref paths instead.
  */
-function generateExampleFromSchema(spec: any, schema: any, depth = 0): any {
+function generateExampleFromSchema(
+  spec: any,
+  schema: any,
+  depth = 0,
+  seen: Set<string> = new Set(),
+): any {
   if (!schema || depth > EXAMPLE_MAX_DEPTH) return undefined;
 
-  // Resolve $ref
+  // Resolve $ref — does not count as structural depth
   if (schema.$ref) {
+    if (seen.has(schema.$ref)) return undefined; // circular ref guard
+    seen.add(schema.$ref);
     const resolved = resolveRef(spec, schema.$ref);
     if (!resolved) return undefined;
-    return generateExampleFromSchema(spec, resolved, depth + 1);
+    return generateExampleFromSchema(spec, resolved, depth, seen);
   }
 
   // Direct example on the schema
@@ -339,7 +350,7 @@ function generateExampleFromSchema(spec: any, schema: any, depth = 0): any {
     const merged: any = {};
     let hasValue = false;
     for (const sub of schema.allOf) {
-      const val = generateExampleFromSchema(spec, sub, depth + 1);
+      const val = generateExampleFromSchema(spec, sub, depth, seen);
       if (val !== undefined && typeof val === 'object' && !Array.isArray(val)) {
         Object.assign(merged, val);
         hasValue = true;
@@ -353,7 +364,7 @@ function generateExampleFromSchema(spec: any, schema: any, depth = 0): any {
   if (unionKey) {
     const variants = schema[unionKey];
     if (Array.isArray(variants) && variants.length > 0) {
-      return generateExampleFromSchema(spec, variants[0], depth + 1);
+      return generateExampleFromSchema(spec, variants[0], depth, seen);
     }
     return undefined;
   }
@@ -367,7 +378,7 @@ function generateExampleFromSchema(spec: any, schema: any, depth = 0): any {
     let hasValue = false;
 
     for (const [propName, propSchema] of Object.entries(properties) as [string, any][]) {
-      const val = generateExampleFromSchema(spec, propSchema, depth + 1);
+      const val = generateExampleFromSchema(spec, propSchema, depth + 1, seen);
       if (val !== undefined) {
         obj[propName] = val;
         hasValue = true;
@@ -379,7 +390,7 @@ function generateExampleFromSchema(spec: any, schema: any, depth = 0): any {
 
   // Array
   if (schema.type === 'array' && schema.items) {
-    const itemExample = generateExampleFromSchema(spec, schema.items, depth + 1);
+    const itemExample = generateExampleFromSchema(spec, schema.items, depth + 1, seen);
     if (itemExample !== undefined) return [itemExample];
     return undefined;
   }

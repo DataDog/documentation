@@ -46,6 +46,30 @@ export async function highlightEndpoints(endpoints: EndpointData[]): Promise<voi
         );
       }
     }
+
+    // Highlight response examples
+    for (const resp of ep.responses) {
+      if (resp.examples) {
+        for (const ex of resp.examples) {
+          jobs.push(
+            highlight(ex.value, 'json').then((html) => {
+              if (html) ex.highlightedValue = html;
+            })
+          );
+        }
+      }
+    }
+
+    // Highlight request body examples
+    if (ep.requestBody) {
+      for (const ex of ep.requestBody.examples) {
+        jobs.push(
+          highlight(ex.value, 'json').then((html) => {
+            if (html) ex.highlightedValue = html;
+          })
+        );
+      }
+    }
   }
 
   await Promise.all(jobs);

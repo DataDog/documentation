@@ -11,6 +11,9 @@ const { categories, currentSlug } = Astro.props;
 ---
 
 <nav class={styles.nav}>
+  <a href="/" class={styles.title}>
+    Datadog Docs&nbsp;&nbsp;<span class={styles['title__api']}>API</span>
+  </a>
   <ul class={styles.list}>
     {categories.map((cat) => {
       const isActive = cat.slug === currentSlug;

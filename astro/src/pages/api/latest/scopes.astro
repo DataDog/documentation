@@ -5,7 +5,7 @@ import { getApiCategories } from '../../../data/api/index';
 const categories = getApiCategories();
 ---
 
-<ApiLayout title="Authorization Scopes - Datadog API" categories={categories} currentSlug="scopes">
+<ApiLayout title="Authorization Scopes - Datadog API" categories={categories} currentSlug="scopes" breadcrumbs={[{ label: 'Docs', href: '/' }, { label: 'API Reference', href: '/api/latest/' }, { label: 'Authorization Scopes' }]}>
   <h1>Authorization Scopes</h1>
 
   <h2>Authorization scopes for OAuth clients</h2>

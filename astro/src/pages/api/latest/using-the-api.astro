@@ -5,7 +5,7 @@ import { getApiCategories } from '../../../data/api/index';
 const categories = getApiCategories();
 ---
 
-<ApiLayout title="Using the API - Datadog API" categories={categories} currentSlug="using-the-api">
+<ApiLayout title="Using the API - Datadog API" categories={categories} currentSlug="using-the-api" breadcrumbs={[{ label: 'Docs', href: '/' }, { label: 'API Reference', href: '/api/latest/' }, { label: 'Using the API' }]}>
   <h1>Using the API</h1>
 
   <h2>Using the API</h2>

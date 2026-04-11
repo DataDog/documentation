@@ -2,6 +2,8 @@
 import '../styles/global.css';
 import ApiHeader from '../components/ApiHeader.astro';
 import ApiSideNav from '../components/ApiSideNav.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import type { BreadcrumbItem } from '../components/Breadcrumbs.astro';
 import { RegionSelector } from '../components/RegionSelector';
 import { getDefaultRegions } from '../data/api/regions';
 import type { ApiCategory } from '../data/api/index';
@@ -10,9 +12,10 @@ interface Props {
   title: string;
   categories: ApiCategory[];
   currentSlug?: string;
+  breadcrumbs?: BreadcrumbItem[];
 }
 
-const { title, categories, currentSlug } = Astro.props;
+const { title, categories, currentSlug, breadcrumbs } = Astro.props;
 const regions = getDefaultRegions();
 ---
 
@@ -36,6 +39,7 @@ const regions = getDefaultRegions();
       <ApiSideNav categories={categories} currentSlug={currentSlug} />
       <main class="api-main">
         <div class="api-toolbar">
+          {breadcrumbs && <Breadcrumbs crumbs={breadcrumbs} />}
           <RegionSelector client:load regions={regions} />
         </div>
         <slot />
@@ -81,7 +85,8 @@ const regions = getDefaultRegions();
 
       .api-toolbar {
         display: flex;
-        justify-content: flex-end;
+        justify-content: space-between;
+        align-items: center;
         margin-bottom: var(--space-md);
       }
 

@@ -11,44 +11,6 @@
   font-size: var(--font-size-sm);
 }
 
-.toggle {
-  display: flex;
-  gap: var(--space-xs);
-  margin-bottom: var(--space-sm);
-}
-
-.toggleBtn {
-  background: var(--color-bg);
-  border: none;
-  border-radius: var(--border-radius);
-  color: #444;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  font-family: var(--font-family);
-  font-size: var(--font-size-sm);
-  font-weight: 600;
-  margin-bottom: 0;
-  padding: 6px var(--space-sm) 7px;
-  transition: all 0.2s ease;
-}
-
-.toggleBtn:hover {
-  color: var(--color-brand);
-  background: var(--color-bg);
-  box-shadow: var(--shadow-pill);
-}
-
-.toggleBtn--active {
-  background: var(--color-brand);
-  color: var(--color-text-inverse);
-  box-shadow: var(--shadow-pill);
-}
-
-.toggleBtn--active:hover {
-  background: var(--color-brand);
-  color: var(--color-text-inverse);
-}
 
 .example {
   margin-bottom: var(--space-sm);

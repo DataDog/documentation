@@ -106,7 +106,7 @@
 .tabs--pills .tabs__nav {
   flex-wrap: wrap;
   gap: var(--space-sm);
-  margin-bottom: var(--space-md);
+  margin-bottom: var(--space-sm);
   padding-top: 0;
   padding-bottom: 6px;
   overflow-x: visible;
@@ -126,8 +126,8 @@
   display: inline-flex;
   align-items: center;
   background: var(--color-bg);
-  color: #444;
-  transition: all 0.2s ease;
+  color: var(--color-text-muted);
+  transition: box-shadow 0.2s ease;
 }
 
 .tabs--pills .tabs__button:hover {

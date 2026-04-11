@@ -1,4 +1,3 @@
-import { useState } from 'preact/hooks';
 import type { JSX } from 'preact';
 import { Tabs } from './Tabs';
 import { SchemaTable } from './SchemaTable';
@@ -13,6 +12,7 @@ export interface ResponseData {
   examples?: Array<{
     name: string;
     value: string;
+    highlightedValue?: string;
   }>;
 }
 
@@ -21,13 +21,6 @@ interface ApiResponseProps {
 }
 
 export function ApiResponse({ responses }: ApiResponseProps): JSX.Element {
-  const [viewMode, setViewMode] = useState<Record<string, 'model' | 'example'>>({});
-
-  const getViewMode = (code: string) => viewMode[code] || 'model';
-  const setViewModeFor = (code: string, mode: 'model' | 'example') => {
-    setViewMode((prev) => ({ ...prev, [code]: mode }));
-  };
-
   const labels = responses.map((r) => r.statusCode);
 
   return (
@@ -39,51 +32,41 @@ export function ApiResponse({ responses }: ApiResponseProps): JSX.Element {
           const r = responses[activeIndex];
           if (!r) return null;
 
+          const toggleLabels: string[] = [];
+          if (r.schema) toggleLabels.push('Model');
+          if (r.examples && r.examples.length > 0) toggleLabels.push('Example');
+
           return (
             <div data-testid={`api-response-panel-${r.statusCode}`}>
               {r.description && (
                 <p class={styles.description} dangerouslySetInnerHTML={{ __html: r.description }} />
               )}
 
-              {/* Model / Example toggle */}
-              {(r.schema || r.examples) && (
-                <div class={styles.toggle} data-testid="api-response-model-example-toggle">
-                  {r.schema && (
-                    <button
-                      class={`${styles.toggleBtn} ${getViewMode(r.statusCode) === 'model' ? styles['toggleBtn--active'] : ''}`}
-                      onClick={() => setViewModeFor(r.statusCode, 'model')}
-                    >
-                      Model
-                    </button>
-                  )}
-                  {r.examples && r.examples.length > 0 && (
-                    <button
-                      class={`${styles.toggleBtn} ${getViewMode(r.statusCode) === 'example' ? styles['toggleBtn--active'] : ''}`}
-                      onClick={() => setViewModeFor(r.statusCode, 'example')}
-                    >
-                      Example
-                    </button>
-                  )}
-                </div>
-              )}
+              {toggleLabels.length > 0 ? (
+                <Tabs labels={toggleLabels} variant="pills">
+                  {(activeToggleIndex) => {
+                    const activeLabel = toggleLabels[activeToggleIndex];
 
-              {/* Model view */}
-              {r.schema && (
-                <div style={{ display: getViewMode(r.statusCode) === 'model' ? 'block' : 'none' }}>
-                  <SchemaTable fields={r.schema} />
-                </div>
-              )}
+                    if (activeLabel === 'Model' && r.schema) {
+                      return <SchemaTable fields={r.schema} />;
+                    }
 
-              {/* Example view */}
-              {r.examples && r.examples.length > 0 && (
-                <div style={{ display: getViewMode(r.statusCode) === 'example' ? 'block' : 'none' }}>
-                  {r.examples.map((ex) => (
-                    <div key={ex.name} class={styles.example}>
-                      <CodeBlock content={ex.value} language="json" />
-                    </div>
-                  ))}
-                </div>
-              )}
+                    if (activeLabel === 'Example' && r.examples && r.examples.length > 0) {
+                      return (
+                        <>
+                          {r.examples.map((ex) => (
+                            <div key={ex.name} class={styles.example}>
+                              <CodeBlock content={ex.value} language="json" highlightedCode={ex.highlightedValue} />
+                            </div>
+                          ))}
+                        </>
+                      );
+                    }
+
+                    return null;
+                  }}
+                </Tabs>
+              ) : null}
             </div>
           );
         }}

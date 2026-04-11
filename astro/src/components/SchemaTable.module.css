@@ -141,8 +141,7 @@
 
 .required {
   font-size: var(--font-size-xs);
-  color: var(--color-red);
-  font-style: italic;
+  color: var(--color-text);
 }
 
 .type {

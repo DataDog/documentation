@@ -6,7 +6,7 @@ import styles from './ApiEndpoint.module.css';
 
 interface RequestBodyTabsProps {
   schema: SchemaField[];
-  examples: Array<{ name: string; value: string }>;
+  examples: Array<{ name: string; value: string; highlightedValue?: string }>;
 }
 
 export function RequestBodyTabs({ schema, examples }: RequestBodyTabsProps) {
@@ -21,7 +21,7 @@ export function RequestBodyTabs({ schema, examples }: RequestBodyTabsProps) {
     return (
       <div class={styles.requestExamples}>
         {examples.map((ex) => (
-          <CodeBlock key={ex.name} content={ex.value} language="json" />
+          <CodeBlock key={ex.name} content={ex.value} language="json" highlightedCode={ex.highlightedValue} />
         ))}
       </div>
     );
@@ -38,7 +38,7 @@ export function RequestBodyTabs({ schema, examples }: RequestBodyTabsProps) {
             {examples.map((ex) => (
               <div key={ex.name}>
                 {examples.length > 1 && <strong>{ex.name}</strong>}
-                <CodeBlock content={ex.value} language="json" />
+                <CodeBlock content={ex.value} language="json" highlightedCode={ex.highlightedValue} />
               </div>
             ))}
           </div>

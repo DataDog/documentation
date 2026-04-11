@@ -5,7 +5,7 @@ import { getApiCategories } from '../../../data/api/index';
 const categories = getApiCategories();
 ---
 
-<ApiLayout title="Rate Limits - Datadog API" categories={categories} currentSlug="rate-limits">
+<ApiLayout title="Rate Limits - Datadog API" categories={categories} currentSlug="rate-limits" breadcrumbs={[{ label: 'Docs', href: '/' }, { label: 'API Reference', href: '/api/latest/' }, { label: 'Rate Limits' }]}>
   <h1>Rate Limits</h1>
 
   <h2>Rate Limits</h2>
