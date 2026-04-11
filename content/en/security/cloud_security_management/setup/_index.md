@@ -35,7 +35,7 @@ To get started with Cloud Security, review the following:
 - [Enable additional features](#enable-additional-features)
   - [Container Image Scanning in CI/CD](#container-image-scanning-in-cicd)
   - [AWS CloudTrail Logs](#aws-cloudtrail-logs)
-  - [Deploy via cloud integrations](#deploy-via-cloud-integrations)
+  - [Deploy using cloud integrations](#deploy-using-cloud-integrations)
 - [Disable Cloud Security](#disable-cloud-security)
 - [Further reading](#further-reading)
 
@@ -45,13 +45,13 @@ To get started with Cloud Security, review the following:
 <div class="alert alert-danger">Agentless Scanning is not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-The simplest way to get started with Cloud Security is by [enabling Agentless Scanning][1]. Agentless Scanning provides visibility into vulnerabilities that exist within your AWS hosts, running containers, Lambda functions, and running Amazon Machine Images (AMIs) without requiring you to install the Datadog Agent.
+The simplest way to get started with Cloud Security is by [enabling Agentless Scanning][1]. Agentless Scanning provides the broadest coverage across your AWS, Azure, and GCP cloud infrastructure: it scans all hosts, running containers, and other supported workloads without requiring you to install anything on individual resources.
 
 To learn more about Agentless Scanning, see [Cloud Security Agentless Scanning][2].
 
-## Deploy the Agent for additional coverage
+## Deploy the Agent for deeper context
 
-For broader coverage and additional functionalities, deploy the Datadog Agent to your hosts. The following table outlines the improvements offered by Agent-based deployments. For more information, see [Setting up Cloud Security on the Agent][3].
+Agentless Scanning covers your entire cloud infrastructure, but deploying the Datadog Agent on critical hosts adds deeper security context such as runtime vulnerability prioritization, real-time updates, and host benchmarks. The following table outlines the improvements offered by Agent-based deployments. For more information, see [Setting up Cloud Security on the Agent][3].
 
 <table>
   <thead>
@@ -116,9 +116,9 @@ Scan container images for vulnerabilities during your CI/CD pipelines, before de
 
 Maximize the benefits of [Cloud Security Identity Risks][6] with AWS CloudTrail Logs. Gain deeper insights into cloud resource usage, identifying users and roles with significant gaps between provisioned and utilized permissions. For more information, check out [Setting up AWS CloudTrail Logs for Cloud Security][4].
 
-### Deploy via cloud integrations
+### Deploy using cloud integrations
 
-Monitor your compliance security coverage and secure your cloud infrastructure against IAM-based attacks by enabling resource scanning for AWS, Azure, and GCP resources. For more information, see [Deploying Cloud Security via Cloud Integrations][7].
+Monitor your compliance security coverage and secure your cloud infrastructure against IAM-based attacks by enabling resource scanning for AWS, Azure, GCP, and OCI resources. For more information, see [Deploying Cloud Security using Cloud Integrations][7].
 
 ## Disable Cloud Security
 

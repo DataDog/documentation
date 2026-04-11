@@ -108,7 +108,7 @@ For a Docker Linux container:
      -e DD_DOGSTATSD_SOCKET=/opt/datadog/apm/inject/run/dsd.socket \
      -v /opt/datadog/apm:/opt/datadog/apm \
      -v /var/run/docker.sock:/var/run/docker.sock:ro \
-     gcr.io/datadoghq/agent:7
+     registry.datadoghq.com/agent:7
    ```
    Replace `<YOUR_DD_API_KEY>` with your [Datadog API][5].
    <div class="alert alert-info">
@@ -162,7 +162,7 @@ docker run -d --name dd-agent \
   -e DD_DOGSTATSD_SOCKET=/opt/datadog/apm/inject/run/dsd.socket \
   -v /opt/datadog/apm:/opt/datadog/apm \
   -v /var/run/docker.sock:/var/run/docker.sock:ro \
-  gcr.io/datadoghq/agent:7
+  registry.datadoghq.com/agent:7
 {{< /highlight >}}
 
 [5]: https://app.datadoghq.com/organization-settings/api-keys

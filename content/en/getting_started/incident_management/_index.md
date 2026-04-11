@@ -23,9 +23,9 @@ further_reading:
     - link: '/integrations/slack/?tab=slackapplicationus#using-datadog-incidents'
       tag: 'Documentation'
       text: 'Slack integration with incidents'
-    - link: 'https://www.datadoghq.com/blog/pair-programming-coscreen-datadog/'
+    - link: 'https://www.datadoghq.com/blog/mobile-incident-management-datadog/'
       tag: 'Blog'
-      text: 'More efficient pair programming with Datadog CoScreen'
+      text: 'Manage and resolve incidents on the go with the Datadog Mobile App'
     - link: 'https://www.datadoghq.com/blog/incident-postmortem-process-best-practices/'
       tag: 'Blog'
       text: 'Best practices for writing incident postmortems'
@@ -160,7 +160,7 @@ In the _Notifications_ section, you can send out a notification updating the sta
 8. For the timeline section, select **Marked as Important** so that only the _Important_ events are added to the postmortem.
 9. Click **Generate**.
 
-The postmortem is generated as a Datadog Notebook or Confluence page, and it includes the timeline events and resources referenced during the investigation and remediation. This makes it easier to review and further document what caused the issue and how to prevent it in the future.
+The postmortem includes the timeline events and resources referenced during the investigation and remediation. This makes it easier to review and further document what caused the issue and how to prevent it in the future. For more information, see [Incident Postmortems][17].
 
 If there are follow-up tasks that you and your team need to complete to ensure the issue doesn't happen again, add those and track them in the Post-Incident's _Incident Tasks_ section.
 
@@ -201,3 +201,4 @@ You can also declare and edit incidents and quickly communicate to your teams th
 [14]: https://play.google.com/store/apps/details?id=com.datadog.app
 [15]: https://app.datadoghq.com/dashboard/lists
 [16]: https://app.datadoghq.com/monitors/manage
+[17]: /incident_response/incident_management/post_incident/postmortems

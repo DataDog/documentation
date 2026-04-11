@@ -9,9 +9,9 @@ further_reading:
     - link: "/account_management/users/"
       tag: "Documentation"
       text: "User management"
-    - link: "/account_management/org_settings/oauth_apps"
+    - link: "/account_management/org_settings/mobile_third_party_access"
       tag: "Documentation"
-      text: "OAuth Apps"
+      text: "Mobile and Third-Party Access"
 ---
 
 ## Overview
@@ -75,5 +75,5 @@ Giving **admin access** to users without careful consideration increases potenti
 [2]: /account_management/api-app-keys/#application-keys
 [3]: /account_management/api-app-keys/#api-keys
 [4]: /account_management/api-app-keys/#what-to-do-if-an-api-or-application-key-was-exposed
-[5]: /account_management/org_settings/oauth_apps
+[5]: /account_management/org_settings/mobile_third_party_access
 [7]: /account_management/users/#add-new-members-and-manage-invites

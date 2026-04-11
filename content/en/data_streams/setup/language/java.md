@@ -22,7 +22,7 @@ aliases:
 
 | Technology     | Library                                                                                                                       | Minimal tracer version                                                          | Recommended tracer version                                                          |
 |----------------|-------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------|-------------------------------------------------------------------------------------|
-| Kafka          | [kafka-clients](https://mvnrepository.com/artifact/org.apache.kafka/kafka-clients) (Lag generation is not supported for v3.7) | {{< dsm-tracer-version lang="java" lib="kafka-clients" type="minimal" >}}       | {{< dsm-tracer-version lang="java" lib="kafka-clients" type="recommended" >}}       |
+| Kafka          | [kafka-clients](https://mvnrepository.com/artifact/org.apache.kafka/kafka-clients) (Lag generation is not supported for v3.7*) | {{< dsm-tracer-version lang="java" lib="kafka-clients" type="minimal" >}}       | {{< dsm-tracer-version lang="java" lib="kafka-clients" type="recommended" >}}       |
 | RabbitMQ       | [amqp-client](https://mvnrepository.com/artifact/com.rabbitmq/amqp-client)                                                    | {{< dsm-tracer-version lang="java" lib="amqp-client" type="minimal" >}}         | {{< dsm-tracer-version lang="java" lib="amqp-client" type="recommended" >}}         |
 | Amazon SQS     | [aws-java-sdk-sqs (v1)](https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk-sqs)                                    | {{< dsm-tracer-version lang="java" lib="aws-java-sdk-sqs-v1" type="minimal" >}} | {{< dsm-tracer-version lang="java" lib="aws-java-sdk-sqs-v1" type="recommended" >}} |
 | Amazon SQS     | [sqs (v2)](https://mvnrepository.com/artifact/software.amazon.awssdk/sqs)                                                     | {{< dsm-tracer-version lang="java" lib="sqs-v2" type="minimal" >}}              | {{< dsm-tracer-version lang="java" lib="sqs-v2" type="recommended" >}}              |
@@ -32,6 +32,8 @@ aliases:
 | Amazon SNS     | [SNS (v2)](https://mvnrepository.com/artifact/software.amazon.awssdk/sns)                                                     | {{< dsm-tracer-version lang="java" lib="sns-v2" type="minimal" >}}              | {{< dsm-tracer-version lang="java" lib="sns-v2" type="recommended" >}}              |
 | Google PubSub  | [Google Cloud Pub/Sub](https://mvnrepository.com/artifact/com.google.cloud/google-cloud-pubsub)                               | {{< dsm-tracer-version lang="java" lib="google-pubsub" type="minimal" >}}       | {{< dsm-tracer-version lang="java" lib="google-pubsub" type="recommended" >}}       |
 | IBM MQ         | [IBM MQ classes for Java and JMS](https://mvnrepository.com/artifact/com.ibm.mq/com.ibm.mq.jakarta.client)                    | {{< dsm-tracer-version lang="java" lib="ibmmqjmsclient" type="minimal" >}}      | {{< dsm-tracer-version lang="java" lib="ibmmqjmsclient" type="recommended" >}}      |
+
+*Spring Boot 3.3.x and spring-kafka 3.2.x use kafka-clients 3.7.x, which does not support lag generation. To resolve this, <a href="https://docs.spring.io/spring-kafka/reference/appendix/override-boot-dependencies.html">update your kafka-clients version</a> to 3.8.0 or newer.</span>
 
 ### Installation
 

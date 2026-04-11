@@ -42,6 +42,7 @@ Datadog's LLM Observability can automatically trace and annotate calls to suppor
 | [OpenAI](#openai), [Azure OpenAI](#openai)      | >= 0.26.5          | >= 2.9.0       |
 | [OpenAI Agents](#openai-agents)                 | >= 0.0.2           | >= 3.5.0       |
 | [Pydantic AI](#pydantic-ai)                     | >= 0.3.0           | >= 3.11.0      |
+| [Strands Agents](#strands-agents)               | >= 1.11.0          | Any            |
 | [Vertex AI](#vertex-ai)                         | >= 1.71.1          | >= 2.18.0      |
 
 
@@ -173,6 +174,8 @@ module.exports = {
 
 {{% /tab %}}
 {{< /tabs >}}
+
+<div class="alert alert-info">Datadog LLM Observability also supports any framework that natively emits <a href="https://opentelemetry.io/docs/specs/semconv/gen-ai/">OpenTelemetry GenAI semantic convention v1.37+</a>-compliant spans, without requiring the Datadog tracer. See <a href="/llm_observability/instrumentation/otel_instrumentation">OpenTelemetry Instrumentation</a> for details.</div>
 
 ## LLM integrations
 
@@ -679,6 +682,21 @@ The Pydantic AI integration instruments the following methods:
 
 [1]: https://ai.pydantic.dev/
 [2]: https://ai.pydantic.dev/agents/
+{{% /tab %}}
+{{< /tabs >}}
+{{% /collapse-content %}}
+
+{{% collapse-content title="Strands Agents" level="h3" expanded=false id="strands-agents" %}}
+{{< tabs >}}
+{{% tab "Python" %}}
+Starting from [v1.11.0][1], [Strands Agents][2] natively emits spans compliant with [OpenTelemetry GenAI semantic conventions v1.37][3], which Datadog LLM Observability automatically ingests without requiring the Datadog tracer.
+
+For setup instructions and a complete example, see [OpenTelemetry Instrumentation — Using Strands Agents][4].
+
+[1]: https://github.com/strands-agents/sdk-python/releases/tag/v1.11.0
+[2]: https://strandsagents.com
+[3]: https://opentelemetry.io/docs/specs/semconv/gen-ai/
+[4]: /llm_observability/instrumentation/otel_instrumentation#using-strands-agents
 {{% /tab %}}
 {{< /tabs >}}
 {{% /collapse-content %}}

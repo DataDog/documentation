@@ -53,7 +53,7 @@ multifiltersearch:
     - category: Performance
       recommendation_type: Repeated Sequential API calls
       scope: Backend services
-      recommendation_description: A backend application repeatedly retries failing API calls without sufficient backoff, increasing system load and masking underlying reliability issues.
+      recommendation_description: A backend application makes multiple calls to the same downstream API sequentially instead of executing them in parallel, unnecessarily increasing request latency and slowing overall service performance.
       recommendation_prerequisite: APM
     - category: Performance
       recommendation_type: Persistent Retries
@@ -80,6 +80,11 @@ multifiltersearch:
       scope: Backend services
       recommendation_description: A backend application is throwing a high number of exceptions as control-flow, adding CPU and memory overhead.
       recommendation_prerequisite: APM + Continuous Profiler
+    - category: Reliability
+      recommendation_type: Dependency Timeouts
+      scope: Backend services
+      recommendation_description: A backend application times out while calling a downstream dependency because the dependency responds too slowly, causing request failures that impact end users and increase the risk of cascading failures upstream.
+      recommendation_prerequisite: APM + RUM
 
 ---
 

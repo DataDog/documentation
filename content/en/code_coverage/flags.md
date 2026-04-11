@@ -95,7 +95,14 @@ When you select a flag, the coverage metrics update to show only the data from r
 
 You can configure [PR Gates][1] to enforce coverage thresholds for specific flags. This allows you to enforce different coverage requirements for different test types or runtime versions.
 
-### Create a flag-specific gate
+You can create flag-specific gates in one of two ways:
+
+- **Datadog UI**: Navigate to [PR Gates rule creation][2] and configure a rule with per-flag scope.
+- **YAML configuration file**: Define gates with the `flags` field in your [`code-coverage.datadog.yml`][5] file. This allows you to manage gates as code alongside your repository.
+
+Rules from both sources are evaluated when a pull request is opened or updated. See [Configuration][5] for YAML gate syntax and examples.
+
+### Create a flag-specific gate in the Datadog UI
 
 1. Navigate to [PR Gates rule creation][2].
 2. Configure the coverage threshold (total or patch coverage).
@@ -167,3 +174,4 @@ datadog-ci coverage upload --flags python-3.12 coverage-py312.xml
 [2]: https://app.datadoghq.com/ci/pr-gates/rule/create?dataSource=code_coverage
 [3]: /code_coverage/monorepo_support
 [4]: https://app.datadoghq.com/ci/code-coverage
+[5]: /code_coverage/configuration#pr-gates

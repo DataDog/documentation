@@ -38,6 +38,8 @@ further_reading:
 
 After you set up the tracing library with your code and configure the Agent to collect APM data, optionally configure the tracing library as desired, including setting up [Unified Service Tagging][4].
 
+{{% apm-config-visibility %}}
+
 {{< img src="tracing/dotnet/dotnet_core_configuration.png" alt=".NET Core Tracer configuration setting precedence" style="width:100%" >}}
 
 You can set configuration settings in the .NET Tracer with any of the following methods:
@@ -287,8 +289,14 @@ When set to `false`, the consumer span is created when a message is consumed and
 
 `DD_RUNTIME_METRICS_ENABLED`
 : Enables .NET runtime metrics. Valid values are `true` or `false`. <br>
-**Default**: `false`<br>
+**Default**: `true` for .NET 6+ starting v3.40.0+, otherwise `false`. <br>
 Added in version 1.23.0.
+
+`DD_RUNTIME_METRICS_DIAGNOSTICS_METRICS_API_ENABLED`
+: Available starting with .NET 6. 
+It controls whether the .NET tracer uses the new [`System.Diagnostics.Metrics`][24] API to collect the metrics instead of the  `EventListener`-based collector. <br>
+**Default**: `true` on .NET 8+ and on .NET 6/7 when `DD_RUNTIME_METRICS_ENABLED` is not explicitly set, otherwise `false`. <br>
+Added in version 3.40.0.
 
 #### Errors
 
@@ -364,3 +372,4 @@ The following configuration variables are for features that are available for us
 [21]: /tracing/trace_collection/trace_context_propagation/
 [22]: /tracing/trace_collection/library_config/#traces
 [23]: /profiler/
+[24]: https://learn.microsoft.com/dotnet/api/system.diagnostics.metrics

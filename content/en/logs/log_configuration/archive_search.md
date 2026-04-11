@@ -119,21 +119,51 @@ From the [**Archive Search list view**][5], you can:
 - **Cancel** a running search: preserves logs already retrieved.
 - **Duplicate** a search: opens the Archive Search creation form with the same parameters for efficient reruns.
 
-## Search performance and scan volume
+## Search performance and optimization
 
-Archive Search scans archived log files within the selected time range. **Scan volume** is the total size of those files read during the query. Large scan volumes can increase search time and cost.
+Archive Search scans archived log files within your selected time range. **Scan volume** refers to the total size of the files read during a query. Large scan volumes can increase both search time and cloud egress costs.
 
-To improve query performance and reduce scan volume:
-- Narrow the time range.
-- Administrators with **Logs Write Archives** permission can set maximum scan size per Archive.
+To optimize performance and reduce costs:
+* **Narrow the time range:** Limit your search to the smallest window possible.
+* **Set Scan Limits:** Admins with `Logs Write Archives` permissions can set a maximum scan size per Archive in the settings.
+* **Use Partition Attributes (Preview):** The most effective way to accelerate searches on low-cardinality data like `service`, `env`, or `status`. Datadog skips entire partitions that don't match your query.
+* **Use Lookup Attributes (Preview):** The most effective way to accelerate searches on high-cardinality data like `trace_id` or `user_id`.
+
+**Note**: Only logs archived after you configure Partition or Lookup attributes benefit from accelerated searches. Logs archived before this configuration are not affected.
+
+
+### Accelerate searches with Partition Attributes
+
+You can configure **Partition Attributes** on your archives to group logs by low-cardinality field values at write time. Use attributes like `service`, `source`, `env`, or `status`.
+
+Logs that share the same partition values are co-located in storage. When you search, Datadog evaluates your query against partition metadata and skips partitions that don't match, reducing the total data scanned.
+
+To set this up, see the [Log Archives][8] documentation.
+
+### Accelerate searches with Lookup Attributes
+
+You can configure **Lookup Attributes** on your archives to skip irrelevant data blocks in your storage bucket. For example, if you configure `trace_id` or `user_id` you significantly reduce the volume of data scanned and lower your cloud provider's egress fees.
+
+To set this up, see the [Log Archives][7] documentation.
+
+### Partition vs. Lookup attributes
+
+| | Partition | Lookup |
+|---|---|---|
+| Cardinality | Low (tens to hundreds) | High (millions of values) |
+| Typical attributes | `service`, `source`, `env`, `status` | `trace_id`, `container_id`, `user_id`, `transaction_id` |
+| How it helps | Prunes entire partitions from scan | Pinpoints individual log entries |
+| Best used for | Broad filtering by environment/service | Ad-hoc investigations on specific identifiers |
+
+For maximum search performance, combine both: partition attributes narrow the search scope to the relevant data segments, while lookup attributes let you find specific logs within those segments instantly.
 
 ### Default limit for Rehydration of Results
 
-Admins with the `Logs Write Archives` permission can configure default controls to ensure efficient use of Archive Search * across teams. Click **Settings** to configure:
+Admins with the `Logs Write Archives` permission can configure default controls to ensure efficient use of **Archive Search** across teams. Click **Settings** to configure:
 
-- **Default Rehydration volume limit**: Define the default number of logs (in millions) that can be rehydrated per Archive Search. If the limit is reached, the Archive Search automatically stops, but already rehydrated logs remain accessible. Admins can also allow this limit to be overridden during Archive Search creation.
+- **Default Rehydration volume limit**: Define the default number of logs (in millions) that can be rehydrated per Archive Search in **Search & Rehydration** mode. If the limit is reached, the Archive Search automatically stops, but already rehydrated logs remain accessible. Admins can also allow this limit to be overridden during Archive Search creation.
 
-- **Rehydration retention periods**: Choose which retention periods are available when creating Archive Search. Only the selected durations (for example, 3, 7, 15, 30, 45, 60, 90, or 180 days) appear in the dropdown menu when selecting how long logs should remain searchable in Datadog.
+- **Rehydration retention periods**: Choose which retention periods are available when rehydrating results. Only the selected durations (for example, 3, 7, 15, 30, 45, 60, 90, or 180 days) appear in the dropdown menu when selecting how long logs should remain searchable in Datadog.
 
 ## Cloud-specific permissions
 
@@ -198,9 +228,11 @@ In order to search log events from your archives, Datadog uses a service account
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/logs/log_configuration/archives/?tab=awss3&site=us
-[2]: https://docs.datadoghq.com/observability_pipelines/destinations/amazon_s3/?tab=docker
-[3]: https://docs.datadoghq.com/logs/log_configuration/archives/?tab=awss3&site=us
+[1]: /logs/log_configuration/archives/?tab=awss3
+[2]: /observability_pipelines/destinations/datadog_archives/?tab=docker
+[3]: /logs/log_configuration/archives/?tab=awss3
 [4]: https://app.datadoghq.com/logs/archive-search/new
 [5]: https://app.datadoghq.com/logs/archive-search/
 [6]: /logs/guide/logs-rbac/?tab=ui#restrict-access-to-logs
+[7]: /logs/log_configuration/archives/?tab=awss3#archive-search-lookup-attribute
+[8]: /logs/log_configuration/archives/?tab=awss3#archive-search-partition-attribute

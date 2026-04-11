@@ -14,11 +14,6 @@ further_reading:
   text: "Inferred Services"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/service-overrides-removal-from-the-ui/"
- btn_hidden="false" header="Join the Preview!">}}
-Integration override removal is in Preview. To sign up, click <b>Request Access</b> and complete the form.
-{{< /callout >}}
-
 This page explains how to remove integration overrides, which use integration-specific service names to represent calls to other services. For conceptual background, see [Base Service, Integration Overrides, and Service Overrides][10] and [Inferred Services][8].
 
 ## Prerequisites
@@ -46,13 +41,13 @@ To remove integration overrides in Datadog:
 
 1. Navigate to **Software Catalog** > **Manage** > [**Manage Remapping Rules**][12], and click **Manage Overrides**. 
 
-   {{< img src="tracing/guide/service_overrides/SO_removal_page.png" alt="Integration Overrides page showing migration progress and removal options" style="width:100%;" >}}
+   {{< img src="tracing/guide/base_service/SO_removal_page.png" alt="Integration Overrides page showing migration progress and removal options" style="width:100%;" >}}
 
 1. For each override you plan to remove, review the related monitors and dashboards.
 
    These assets reference the overridden service name and stop matching after removal. Update them to use the base service name (`service:<DD_SERVICE>`) to preserve functionality.
 
-   {{< img src="tracing/guide/service_overrides/SO_removal_page_sidepanel.png" alt="Service override side panel showing affected monitors and dashboards" style="width:100%;" >}}
+   {{< img src="tracing/guide/base_service/SO_removal_page_sidepanel.png" alt="Service override side panel showing affected monitors and dashboards" style="width:100%;" >}}
 
 1. Remove overrides individually or in bulk:
    - **Select specific overrides to remove**: Choose individual integration overrides to remove. A **Migration Progress** bar shows your progress as you remove overrides.

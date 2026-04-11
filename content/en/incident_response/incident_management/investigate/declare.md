@@ -52,6 +52,12 @@ For more information, see [Investigate Security Signals][4] for App and API Prot
 
 {{< img src="/service_management/incidents/declare/declare_asm.png" alt="Your image description" style="width:90%;" >}}
 
+## From a leaked secret
+
+Declare an incident from [Secret Scanning][15] by clicking **Declare incident** in the detection side panel. The incident is pre-filled with all detection metadata.
+
+{{< img src="/service_management/incidents/declare/declare-secrets.png" alt="Your image description" style="width:90%;" >}}
+
 ## From a case
 
 Declare an incident from [Case Management][5]. From the individual case detail page, click **Declare incident** to escalate a case to an incident.
@@ -88,6 +94,10 @@ If the user declaring the incident connected their Slack to their Datadog accoun
 
 After you declare an incident from Slack, it generates an incident channel.
 
+## From Google Chat
+
+If you have set up the [Datadog integration for Google Chat][14], you can declare an incident with the slash command `/dd_incident` from any Google Chat space.
+
 ## From Handoff Notifications
 
 The Handoff Notification displays callout cards when you are paged or added to active incidents. These cards allow you to:
@@ -99,7 +109,7 @@ The Handoff Notification displays callout cards when you are paged or added to a
 
 {{< img src="/service_management/incidents/declare/handoff_notification_card.png" alt="Handoff notification card showing incident details with options to view, acknowledge, and take actions" style="width:100%;" >}}
 
-Handoff Notificiation cards remain visible until dismissed or until the incident status changes. You can expand, collapse, or dismiss the entire handoff container rather than individual cards.
+Handoff Notification cards remain visible until dismissed or until the incident status changes. You can expand, collapse, or dismiss the entire handoff container rather than individual cards.
 
 You can declare an incident from individual Handoff Notification cards.
 
@@ -122,3 +132,5 @@ You can declare an incident from individual Handoff Notification cards.
 [11]: /incident_response/incident_management/setup_and_configuration/notification_rules
 [12]: /incident_response/on-call/
 [13]: https://app.datadoghq.com/on-call/pages
+[14]: /integrations/google-hangouts-chat/
+[15]: /security/code_security/secret_scanning/

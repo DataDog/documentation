@@ -16,7 +16,7 @@ Custom commands provide a way to trace individual commands in your CI pipelines,
 
 Custom commands work with the following CI providers:
 
-- GitHub.com (SaaS) with datadog-ci CLI >= 2.40. For sending custom commands in GitHub Actions, see [Known issue with Github Actions](#known-issue-with-github-actions).
+- GitHub.com (SaaS) with datadog-ci CLI >= 2.40.
 - GitLab (SaaS or self-hosted >= 14.1) with datadog-ci CLI >= 2.40.
 - Jenkins with the Datadog plugin >= v3.2.0
 - CircleCI
@@ -181,10 +181,15 @@ Additionally, configure the Datadog site to use the selected one ({{< region-par
 **Selected site**: {{< region-param key="dd_site" code="true" >}}
 {{< /site-region >}}
 
-## Known issue with GitHub Actions
+## Troubleshooting
 
+### Payload too large
+The size limit is approximately `4MB`. The most common cause for this error is extremely large tags.
+Use the `--dry-run` option to see the traced command's contents before sending it to Datadog.
 
-Starting with `datadog-ci` version `4.1.1`, no additional action is required, even when using custom names or matrix strategies.
+### GitHub Actions custom commands not appearing in Datadog
+
+Older versions of the datadog-ci CLI may require additional setup:
 
 <details>
 <summary><strong>For datadog-ci versions prior to 4.1.1</strong></summary>
@@ -216,12 +221,6 @@ If you are using `datadog-ci` version `2.29.0` to `4.1.0` and the job name does 
         - run: datadog-ci trace ...
     ```
 </details>
-
-## Troubleshooting
-
-### Payload too large
-The size limit is approximately `4MB`. The most common cause for this error is extremely large tags.
-Use the `--dry-run` option to see the traced command's contents before sending it to Datadog.
 
 ## Further reading
 
