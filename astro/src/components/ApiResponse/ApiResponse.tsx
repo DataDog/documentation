@@ -1,8 +1,8 @@
 import type { JSX } from 'preact';
-import { Tabs } from './Tabs';
-import { SchemaTable } from './SchemaTable';
-import { CodeBlock } from './CodeBlock';
-import type { SchemaField } from './SchemaTable';
+import { Tabs } from '../Tabs/Tabs';
+import { SchemaTable } from '../SchemaTable/SchemaTable';
+import { CodeBlock } from '../CodeBlock/CodeBlock';
+import type { SchemaField } from '../SchemaTable/SchemaTable';
 import styles from './ApiResponse.module.css';
 
 export interface ResponseData {

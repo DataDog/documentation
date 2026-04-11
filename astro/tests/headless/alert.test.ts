@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { experimental_AstroContainer as AstroContainer } from 'astro/container';
-import Alert from '../../src/components/Alert.astro';
+import Alert from '../../src/components/Alert/Alert.astro';
 
 describe('Alert component', () => {
   it('renders with default type (info)', async () => {

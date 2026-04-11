@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { experimental_AstroContainer as AstroContainer } from 'astro/container';
-import HttpMethodBadge from '../../src/components/HttpMethodBadge.astro';
+import HttpMethodBadge from '../../src/components/HttpMethodBadge/HttpMethodBadge.astro';
 
 describe('HttpMethodBadge component', () => {
   const methods = ['get', 'post', 'put', 'patch', 'delete', 'head', 'options'] as const;

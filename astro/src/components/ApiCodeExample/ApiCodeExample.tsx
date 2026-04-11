@@ -1,7 +1,7 @@
 import { useState } from 'preact/hooks';
 import type { JSX } from 'preact';
-import { Tabs } from './Tabs';
-import { CodeBlock } from './CodeBlock';
+import { Tabs } from '../Tabs/Tabs';
+import { CodeBlock } from '../CodeBlock/CodeBlock';
 import styles from './ApiCodeExample.module.css';
 
 export interface CodeExampleEntry {

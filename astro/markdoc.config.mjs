@@ -3,7 +3,7 @@ import { defineMarkdocConfig, component, nodes } from '@astrojs/markdoc/config';
 export default defineMarkdocConfig({
   nodes: {
     fence: {
-      render: component('./src/components/CodeBlockIsland.astro'),
+      render: component('./src/components/CodeBlock/CodeBlockIsland.astro'),
       attributes: {
         ...nodes.fence.attributes,
         content: { type: String, render: true },
@@ -17,7 +17,7 @@ export default defineMarkdocConfig({
   },
   tags: {
     alert: {
-      render: component('./src/components/Alert.astro'),
+      render: component('./src/components/Alert/Alert.astro'),
       attributes: {
         type: {
           type: String,
@@ -26,7 +26,7 @@ export default defineMarkdocConfig({
       },
     },
     counter: {
-      render: component('./src/components/CounterIsland.astro'),
+      render: component('./src/components/Counter/CounterIsland.astro'),
       attributes: {
         initialCount: {
           type: Number,
@@ -35,10 +35,10 @@ export default defineMarkdocConfig({
       },
     },
     tabs: {
-      render: component('./src/components/TabsIsland.astro'),
+      render: component('./src/components/Tabs/TabsIsland.astro'),
     },
     tab: {
-      render: component('./src/components/Tab.astro'),
+      render: component('./src/components/Tab/Tab.astro'),
       attributes: {
         label: {
           type: String,
@@ -47,7 +47,7 @@ export default defineMarkdocConfig({
       },
     },
     httpMethodBadge: {
-      render: component('./src/components/HttpMethodBadge.astro'),
+      render: component('./src/components/HttpMethodBadge/HttpMethodBadge.astro'),
       selfClosing: true,
       attributes: {
         method: {
@@ -57,7 +57,7 @@ export default defineMarkdocConfig({
       },
     },
     apiStatusAlert: {
-      render: component('./src/components/ApiStatusAlert.astro'),
+      render: component('./src/components/ApiStatusAlert/ApiStatusAlert.astro'),
       attributes: {
         type: {
           type: String,
@@ -72,7 +72,7 @@ export default defineMarkdocConfig({
       },
     },
     schemaTable: {
-      render: component('./src/components/SchemaTableIsland.astro'),
+      render: component('./src/components/SchemaTable/SchemaTableIsland.astro'),
       selfClosing: true,
       attributes: {
         fields: {
@@ -89,7 +89,7 @@ export default defineMarkdocConfig({
       },
     },
     regionSelector: {
-      render: component('./src/components/RegionSelectorIsland.astro'),
+      render: component('./src/components/RegionSelector/RegionSelectorIsland.astro'),
       selfClosing: true,
       attributes: {
         regions: {
@@ -102,7 +102,7 @@ export default defineMarkdocConfig({
       },
     },
     apiResponse: {
-      render: component('./src/components/ApiResponseIsland.astro'),
+      render: component('./src/components/ApiResponse/ApiResponseIsland.astro'),
       selfClosing: true,
       attributes: {
         responses: {
@@ -112,7 +112,7 @@ export default defineMarkdocConfig({
       },
     },
     apiCodeExample: {
-      render: component('./src/components/ApiCodeExampleIsland.astro'),
+      render: component('./src/components/ApiCodeExample/ApiCodeExampleIsland.astro'),
       selfClosing: true,
       attributes: {
         examples: {
@@ -122,7 +122,7 @@ export default defineMarkdocConfig({
       },
     },
     apiEndpoint: {
-      render: component('./src/components/ApiEndpoint.astro'),
+      render: component('./src/components/ApiEndpoint/ApiEndpoint.astro'),
       attributes: {
         data: {
           type: String,
