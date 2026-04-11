@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { render } from 'preact-render-to-string';
 import { h } from 'preact';
-import { CodeBlock } from '../../src/components/CodeBlock';
+import { CodeBlock } from './CodeBlock';
 
 describe('CodeBlock component', () => {
   it('renders with data-testid attribute', () => {

@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { render } from 'preact-render-to-string';
 import { h } from 'preact';
-import { Counter } from '../../src/components/Counter';
+import { Counter } from './Counter';
 
 describe('Counter component', () => {
   it('renders with default initial count of 0', () => {

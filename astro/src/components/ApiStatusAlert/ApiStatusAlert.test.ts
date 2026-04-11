@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { experimental_AstroContainer as AstroContainer } from 'astro/container';
-import ApiStatusAlert from '../../src/components/ApiStatusAlert/ApiStatusAlert.astro';
+import ApiStatusAlert from './ApiStatusAlert.astro';
 
 describe('ApiStatusAlert component', () => {
   it('renders deprecated type with correct label', async () => {

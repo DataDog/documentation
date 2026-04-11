@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { render } from 'preact-render-to-string';
 import { h } from 'preact';
-import { Tabs } from '../../src/components/Tabs';
+import { Tabs } from './Tabs';
 
 describe('Tabs component', () => {
   it('renders with data-testid attribute', () => {
