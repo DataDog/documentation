@@ -1,0 +1,83 @@
+---
+import ApiLayout from '../../../layouts/ApiLayout.astro';
+import { getApiCategories } from '../../../data/api/index';
+
+const categories = getApiCategories();
+---
+
+<ApiLayout title="Using the API - Datadog API" categories={categories} currentSlug="using-the-api">
+  <h1>Using the API</h1>
+
+  <h2>Using the API</h2>
+
+  <p>Use the Datadog HTTP API to access the Datadog platform programmatically. You can use the API to send data to Datadog, build data visualizations, and manage your account.</p>
+
+  <h2>Send data to Datadog</h2>
+
+  <p>Use the API to begin to send integrations data to Datadog. With some additional setup of the Agent, you can also use the API to send Synthetic test data, Logs, and Traces to Datadog.</p>
+
+  <p><strong>Integrations endpoints</strong></p>
+
+  <p>Available integrations endpoints:</p>
+
+  <ul>
+    <li><a href="/api/v1/aws-integration/">AWS Integration</a></li>
+    <li><a href="/api/v1/aws-logs-integration/">AWS Logs Integration</a></li>
+    <li><a href="/api/v1/azure-integration/">Azure Integration</a></li>
+    <li><a href="/api/latest/cloudflare-integration/">Cloudflare Integration</a></li>
+    <li><a href="/api/latest/fastly-integration/">Fastly Integration</a></li>
+    <li><a href="/api/v1/gcp-integration/">Google Cloud Integration</a></li>
+    <li><a href="/api/latest/jira-integration/">Jira Integration</a></li>
+    <li><a href="/api/latest/microsoft-teams-integration/">Microsoft Teams Integration</a></li>
+    <li><a href="/api/latest/okta-integration/">Okta Integration</a></li>
+    <li><a href="/api/latest/opsgenie-integration/">Opsgenie Integration</a></li>
+    <li><a href="/api/v1/pagerduty-integration/">PagerDuty Integration</a></li>
+    <li><a href="/api/v1/slack-integration/">Slack Integration</a></li>
+    <li><a href="/api/v1/webhooks-integration/">Webhooks Integration</a></li>
+  </ul>
+
+  <p><strong>Platform endpoints</strong></p>
+
+  <p>Use these endpoints to post and fetch data to and from other parts of the Datadog platform:</p>
+
+  <ul>
+    <li>The <a href="/api/v1/metrics/">metrics</a> endpoints allow you to post <a href="/metrics/introduction/">metrics</a> data so it can be graphed on Datadog's dashboards and query metrics from any time period.</li>
+    <li>The <a href="/api/v1/events/">events</a> endpoints allow you to post and fetch events to and from the <a href="/events/">Datadog event explorer</a>.</li>
+    <li>Use the <a href="/api/v1/synthetics/">Synthetic Monitoring</a> endpoints to create, start, stop, and see <a href="/synthetics/">Synthetic tests</a> results.</li>
+    <li>Use the <a href="/tracing/guide/send_traces_to_agent_by_api/">Tracing Agent API</a> to send traces to your Datadog Agent, which then forwards them to Datadog.</li>
+    <li>Use the <a href="/llm_observability/evaluations/export_api">LLM Observability Export API</a> to access your LLM Observability data for running external evaluations and exporting spans for offline storage.</li>
+  </ul>
+
+  <h2>Visualize your data</h2>
+
+  <p>After you are sending data to Datadog, you can use the API to build data visualizations programmatically:</p>
+
+  <ul>
+    <li>Build <a href="/api/v1/dashboards/">Dashboards</a> and view <a href="/api/v1/dashboard-lists/">Dashboard Lists</a></li>
+    <li>Manage <a href="/api/v1/hosts/">host tags</a></li>
+    <li>Create <a href="/api/v1/embeddable-graphs/">Embeddable Graphs</a></li>
+    <li>Take a <a href="/api/v1/snapshots/">graph snapshot</a></li>
+    <li><a href="/api/v1/service-dependencies/">Service Dependencies</a> - see a list of your APM services and their dependencies</li>
+    <li>Create <a href="/api/v1/monitors/">Monitors</a></li>
+    <li><a href="/api/v1/service-checks/">Service Checks</a> - post check statuses for use with monitors</li>
+    <li>Create and manage <a href="/api/v1/logs/">Logs</a>, <a href="/api/v1/logs-indexes/">Logs Indexes</a>, and <a href="/api/v1/logs-pipelines/">Logs Pipelines</a></li>
+    <li>Get <a href="/api/v1/hosts/">Host</a> information for your organization</li>
+    <li>Create and manage <a href="/api/v1/service-level-objectives/">Service Level Objectives</a></li>
+    <li>Generate <a href="/api/v2/security-monitoring/">Security Monitoring</a> signals</li>
+  </ul>
+
+  <h2>Manage your account</h2>
+
+  <p>You can also use the Datadog API to manage your account programmatically:</p>
+
+  <ul>
+    <li>Manage <a href="/api/v1/users/">Users</a></li>
+    <li>Manage <a href="/api/v1/roles/">Roles</a></li>
+    <li>Manage your <a href="/api/v1/organizations/">Organization</a></li>
+    <li>Verify API and app keys with the <a href="/api/v1/authentication/">Authentication</a> endpoint</li>
+    <li>Grant specific logs access with the <a href="/api/v2/logs-restriction-queries/">Logs Restriction Queries</a></li>
+    <li>Manage existing keys with <a href="/api/v1/key-management/">Key Management</a></li>
+    <li>Get hourly, daily, and monthly usage across multiple facets of Datadog with the <a href="/api/v1/usage-metering/">Usage Metering</a> endpoints</li>
+    <li>See the list of IP prefixes belonging to Datadog with <a href="/api/v1/ip-ranges/">IP Ranges</a></li>
+  </ul>
+</ApiLayout>

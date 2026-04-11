@@ -1,0 +1,26 @@
+---
+import ApiLayout from '../../../layouts/ApiLayout.astro';
+import { getApiCategories } from '../../../data/api/index';
+
+const categories = getApiCategories();
+---
+
+<ApiLayout title="Authorization Scopes - Datadog API" categories={categories} currentSlug="scopes">
+  <h1>Authorization Scopes</h1>
+
+  <h2>Authorization scopes for OAuth clients</h2>
+
+  <p>Scopes are an authorization mechanism that allow you to limit and define the specific access applications have to an organization's Datadog data. When authorized to access data on behalf of a user or service account, applications can only access the information explicitly permitted by their assigned scopes.</p>
+
+  <div class="alert alert-danger">
+    <p>This page lists only the authorization scopes that can be assigned to OAuth clients. To view the full list of assignable permissions for scoped application keys, see <a href="/account_management/rbac/permissions/#permissions-list">Datadog Role Permissions</a>.</p>
+    <ul>
+      <li><strong>OAuth clients</strong> — Can only be assigned authorization scopes (limited set).</li>
+      <li><strong>Scoped application keys</strong> — Can be assigned any Datadog permission.</li>
+    </ul>
+  </div>
+
+  <p>The best practice for scoping applications is to follow the principle of least privilege. Assign only the minimum scopes necessary for an application to function as intended. This enhances security and provides visibility into how applications interact with your organization's data. For example, a third-party application that only reads dashboards does not need permissions to delete or manage users.</p>
+
+  <p>You can use authorization scopes with OAuth2 clients for your <a href="/extend/authorization/oauth2_in_datadog">Datadog Apps</a>.</p>
+</ApiLayout>

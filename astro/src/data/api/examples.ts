@@ -21,6 +21,8 @@ export interface CodeExampleEntry {
   code: string;
   /** Syntax highlighting language identifier */
   syntax: string;
+  /** Pre-rendered highlighted HTML (populated at build time) */
+  highlightedCode?: string;
 }
 
 export interface CodeExampleSet {

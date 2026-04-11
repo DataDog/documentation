@@ -50,7 +50,7 @@ function FieldRow({
         data-field-name={field.name}
         data-depth={depth}
       >
-        <div class={styles.cell__name} style={{ paddingLeft: `${indent + 8}px` }}>
+        <div class={styles.cell__name} style={indent > 0 ? { paddingLeft: `calc(var(--space-md) + ${indent}px)` } : undefined}>
           {hasChildren && (
             <button
               class={`${styles.toggle} ${isExpanded ? styles['toggle--expanded'] : ''}`}
@@ -66,15 +66,15 @@ function FieldRow({
           )}
           <code class={styles.name}>{field.name}</code>
           {field.required && (
-            <span class={styles.required} data-testid="schema-field-required">[required]</span>
+            <span class={styles.required} data-testid="schema-field-required">{' '}[required]</span>
           )}
-        </div>
+        </div>{' '}
         <div class={styles.cell__type}>
           <span class={styles.type}>{field.type}</span>
-        </div>
+        </div>{' '}
         <div class={styles.cell__description}>
           {field.deprecated && (
-            <strong class={styles.deprecated__label}>DEPRECATED</strong>
+            <><strong class={styles.deprecated__label}>DEPRECATED</strong>{' '}</>
           )}
           <span dangerouslySetInnerHTML={{ __html: field.description }} />
           {field.defaultValue !== undefined && (
@@ -191,24 +191,22 @@ export function SchemaTable({ fields, title, showExpandAll = true }: SchemaTable
   };
 
   return (
-    <div class={styles.table} data-testid="schema-table">
-      {(title || (showExpandAll && allPaths.length > 0)) && (
-        <div class={styles.header}>
-          {title && <h4 class={styles.title}>{title}</h4>}
-          {showExpandAll && allPaths.length > 0 && (
-            <button
-              class={styles.expandAll}
-              onClick={toggleAll}
-              data-testid="schema-table-expand-all"
-            >
-              {allExpanded ? 'Collapse All' : 'Expand All'}
-            </button>
-          )}
+    <div data-testid="schema-table">
+      {showExpandAll && allPaths.length > 0 && (
+        <div class={styles.toolbar}>
+          <button
+            class={styles.expandAll}
+            onClick={toggleAll}
+            data-testid="schema-table-expand-all"
+          >
+            {allExpanded ? 'Collapse All' : 'Expand All'}
+          </button>
         </div>
       )}
+      <div class={styles.table}>
       <div class={styles.columns}>
-        <div class={styles.columns__name}>Name</div>
-        <div class={styles.columns__type}>Type</div>
+        <div class={styles.columns__name}>Name</div>{' '}
+        <div class={styles.columns__type}>Type</div>{' '}
         <div class={styles.columns__description}>Description</div>
       </div>
       {fields.map((field) => (
@@ -221,6 +219,7 @@ export function SchemaTable({ fields, title, showExpandAll = true }: SchemaTable
           parentPath=""
         />
       ))}
+      </div>
     </div>
   );
 }

@@ -1,11 +1,14 @@
 import { useState } from 'preact/hooks';
 import type { JSX } from 'preact';
+import { Tabs } from './Tabs';
+import { CodeBlock } from './CodeBlock';
 import styles from './ApiCodeExample.module.css';
 
 export interface CodeExampleEntry {
   description: string;
   code: string;
   syntax: string;
+  highlightedCode?: string;
 }
 
 export interface CodeExampleSet {
@@ -19,7 +22,6 @@ interface ApiCodeExampleProps {
 }
 
 export function ApiCodeExample({ examples }: ApiCodeExampleProps): JSX.Element {
-  const [activeLang, setActiveLang] = useState<string>(examples[0]?.language ?? '');
   const [expandedEntries, setExpandedEntries] = useState<Set<string>>(new Set(['0']));
 
   const toggleEntry = (key: string) => {
@@ -34,75 +36,59 @@ export function ApiCodeExample({ examples }: ApiCodeExampleProps): JSX.Element {
     });
   };
 
+  const renderPanel = (ex: CodeExampleSet) => {
+    if (ex.entries.length === 1) {
+      return (
+        <div class={styles.codeBlock}>
+          <CodeBlock content={ex.entries[0].code} language={ex.entries[0].syntax} highlightedCode={ex.entries[0].highlightedCode} />
+        </div>
+      );
+    }
+
+    return (
+      <>
+        {ex.entries.map((entry, i) => {
+          const key = String(i);
+          const isOpen = expandedEntries.has(key);
+          return (
+            <div key={key} class={styles.accordion} data-testid="api-code-example-accordion">
+              <button
+                class={`${styles.accordionHeader} ${isOpen ? styles['accordionHeader--open'] : ''}`}
+                onClick={() => toggleEntry(key)}
+                aria-expanded={isOpen}
+                data-testid="api-code-example-accordion-toggle"
+              >
+                <svg class={styles.accordionIcon} width="10" height="10" viewBox="0 0 10 10">
+                  <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5" />
+                </svg>
+                <span>{entry.description}</span>
+              </button>
+              {isOpen && (
+                <div class={styles.codeBlock}>
+                  <CodeBlock content={entry.code} language={entry.syntax} highlightedCode={entry.highlightedCode} />
+                </div>
+              )}
+            </div>
+          );
+        })}
+      </>
+    );
+  };
+
   return (
     <div class={styles.codeExample} data-testid="api-code-example">
       <h3 class={styles.heading}>Code Example</h3>
 
-      {/* Language tabs */}
-      <div class={styles.tabs} role="tablist" data-testid="api-code-example-tabs">
-        {examples.map((ex) => (
-          <button
-            key={ex.language}
-            class={`${styles.tab} ${ex.language === activeLang ? styles['tab--active'] : ''}`}
-            role="tab"
-            aria-selected={ex.language === activeLang}
-            onClick={() => {
-              setActiveLang(ex.language);
-              setExpandedEntries(new Set(['0']));
-            }}
-            data-testid={`api-code-example-tab-${ex.language}`}
-          >
-            {ex.label}
-          </button>
-        ))}
-      </div>
-
-      {/* Language panels — all rendered for SEO */}
-      {examples.map((ex) => (
-        <div
-          key={ex.language}
-          role="tabpanel"
-          style={{ display: ex.language === activeLang ? 'block' : 'none' }}
-          data-testid={`api-code-example-panel-${ex.language}`}
-        >
-          {ex.entries.length === 1 ? (
-            /* Single example — no accordion */
-            <div class={styles.codeBlock}>
-              <pre class={styles.pre}>
-                <code>{ex.entries[0].code}</code>
-              </pre>
-            </div>
-          ) : (
-            /* Multiple examples — accordion */
-            ex.entries.map((entry, i) => {
-              const key = String(i);
-              const isOpen = expandedEntries.has(key);
-              return (
-                <div key={key} class={styles.accordion} data-testid="api-code-example-accordion">
-                  <button
-                    class={`${styles.accordionHeader} ${isOpen ? styles['accordionHeader--open'] : ''}`}
-                    onClick={() => toggleEntry(key)}
-                    aria-expanded={isOpen}
-                    data-testid="api-code-example-accordion-toggle"
-                  >
-                    <svg class={styles.accordionIcon} width="10" height="10" viewBox="0 0 10 10">
-                      <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5" />
-                    </svg>
-                    <span>{entry.description}</span>
-                  </button>
-                  {isOpen && (
-                    <div class={styles.codeBlock}>
-                      <pre class={styles.pre}>
-                        <code>{entry.code}</code>
-                      </pre>
-                    </div>
-                  )}
-                </div>
-              );
-            })
-          )}
-        </div>
-      ))}
+      <Tabs
+        labels={examples.map((ex) => ex.label)}
+        variant="pills"
+        onTabChange={() => setExpandedEntries(new Set(['0']))}
+      >
+        {(activeIndex) => {
+          const ex = examples[activeIndex];
+          return ex ? renderPanel(ex) : null;
+        }}
+      </Tabs>
     </div>
   );
 }

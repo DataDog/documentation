@@ -54,6 +54,11 @@
   font-display: swap;
 }
 
+/* Disallow old-style numbers everywhere */
+*, *::before, *::after {
+  font-variant-numeric: lining-nums;
+}
+
 /* Base */
 html {
   font-size: var(--font-size-root);
@@ -71,6 +76,8 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: 'lnum' 1, 'frac' 0, 'liga' 1, 'clig' 1;
+  font-variant-numeric: lining-nums;
   word-wrap: break-word;
 }
 

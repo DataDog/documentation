@@ -36,7 +36,6 @@
 
 .category--active {
   color: var(--color-brand);
-  border-bottom: var(--border-width) solid var(--color-brand);
 }
 
 .operations {

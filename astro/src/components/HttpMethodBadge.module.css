@@ -1,6 +1,6 @@
 .badge {
   display: inline-block;
-  padding: 0.125rem var(--space-sm);
+  padding: 3px var(--space-sm);
   font-size: var(--font-size-xs);
   font-weight: 600;
   font-family: var(--font-family-mono);
@@ -11,28 +11,28 @@
 }
 
 .badge--get {
-  color: var(--color-blue);
-  background: var(--color-blue-tint);
+  color: var(--color-method-get);
+  background: var(--color-method-get-bg);
 }
 
 .badge--post {
-  color: var(--color-green);
-  background: var(--color-green-tint);
+  color: var(--color-method-post);
+  background: var(--color-method-post-bg);
 }
 
 .badge--put {
-  color: var(--color-orange);
-  background: var(--color-orange-tint);
+  color: var(--color-method-put);
+  background: var(--color-method-put-bg);
 }
 
 .badge--patch {
-  color: var(--color-yellow);
-  background: var(--color-yellow-tint);
+  color: var(--color-method-patch);
+  background: var(--color-method-patch-bg);
 }
 
 .badge--delete {
-  color: var(--color-red);
-  background: var(--color-red-tint);
+  color: var(--color-method-delete);
+  background: var(--color-method-delete-bg);
 }
 
 .badge--head {

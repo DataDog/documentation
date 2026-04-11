@@ -2,7 +2,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 50px;
+  height: 70px;
   padding: 0 var(--space-md);
   background: var(--color-bg);
   border-bottom: var(--border-width) solid var(--color-border);
@@ -10,6 +10,6 @@
 
 .logo {
   display: block;
-  height: 30px;
+  height: 45px;
   width: auto;
 }

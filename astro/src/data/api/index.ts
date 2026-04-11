@@ -1,5 +1,6 @@
 import { parse as parseYaml } from 'yaml';
 import { z } from 'astro/zod';
+import { renderMarkdown } from './markdown';
 
 // Import spec files as raw strings so Vite bundles them correctly
 // @ts-ignore — Vite raw import
@@ -60,6 +61,8 @@ export interface ApiOperation {
 export interface ApiCategory {
   name: string;
   slug: string;
+  /** HTML rendered from the OpenAPI tag description (Markdown). */
+  description: string;
   operations: ApiOperation[];
   deprecated: boolean;
 }
@@ -78,6 +81,15 @@ function toSlug(name: string): string {
 function operationSlug(summary: string): string {
   return toSlug(summary);
 }
+
+/**
+ * Override map: spec tag slug → Hugo-expected slug.
+ * Handles cases where Hugo uses a different URL slug than the spec tag name.
+ */
+const SLUG_OVERRIDES: Record<string, string> = {
+  'case-management': 'cases',
+  'scorecards': 'service-scorecards',
+};
 
 /* ------------------------------------------------------------------ */
 /*  Parse + merge                                                     */
@@ -99,14 +111,16 @@ export function getApiCategories(): ApiCategory[] {
   const v2 = loadSpec('v2');
 
   // Build a map of tag name → category metadata
-  const categoryMap = new Map<string, { name: string; slug: string; deprecated: boolean }>();
+  const categoryMap = new Map<string, { name: string; slug: string; description: string; deprecated: boolean }>();
 
   for (const tag of [...v1.tags, ...v2.tags]) {
-    const slug = toSlug(tag.name);
+    const rawSlug = toSlug(tag.name);
+    const slug = SLUG_OVERRIDES[rawSlug] ?? rawSlug;
     if (!categoryMap.has(slug)) {
       categoryMap.set(slug, {
         name: tag.name,
         slug,
+        description: tag.description ? renderMarkdown(tag.description) : '',
         deprecated: tag['x-deprecated'] === true,
       });
     }
@@ -119,12 +133,13 @@ export function getApiCategories(): ApiCategory[] {
     for (const operations of Object.values(spec.paths)) {
       for (const op of operations) {
         const tagName = op.tags[0];
-        const slug = toSlug(tagName);
+        const rawSlug = toSlug(tagName);
+        const slug = SLUG_OVERRIDES[rawSlug] ?? rawSlug;
         if (!opsMap.has(slug)) opsMap.set(slug, []);
 
         // Ensure the tag is in categoryMap even if it wasn't in the tags list
         if (!categoryMap.has(slug)) {
-          categoryMap.set(slug, { name: tagName, slug, deprecated: false });
+          categoryMap.set(slug, { name: tagName, slug, description: '', deprecated: false });
         }
 
         opsMap.get(slug)!.push({

@@ -1,0 +1,126 @@
+---
+import ApiLayout from '../../../layouts/ApiLayout.astro';
+import { getApiCategories } from '../../../data/api/index';
+
+const categories = getApiCategories();
+---
+
+<ApiLayout title="Rate Limits - Datadog API" categories={categories} currentSlug="rate-limits">
+  <h1>Rate Limits</h1>
+
+  <h2>Rate Limits</h2>
+
+  <p>Many API endpoints are rate limited. Once you exceed a certain number of requests in a specific period, Datadog returns an error.</p>
+
+  <p>If you are rate limited, you can see a 429 in the response code. You can either wait the designated time by the <code>X-RateLimit-Period</code> before making calls again, or switch to making calls at a frequency slightly longer than the <code>X-RateLimit-Limit</code> or <code>X-RateLimit-Period</code>.</p>
+
+  <p>Rate limits can be increased from the defaults by <a href="/help/">contacting the Datadog support team</a>.</p>
+
+  <p>Regarding the API rate limit policy:</p>
+
+  <ul>
+    <li>Datadog <strong>does not rate limit</strong> on data point/metric submission (see <a href="/api/v1/metrics/">metrics section</a> for more info on how the metric submission rate is handled). Limits encounter is dependent on the quantity of <a href="/metrics/custom_metrics/">custom metrics</a> based on your agreement.</li>
+    <li>The API for sending logs is not rate limited.</li>
+    <li>The rate limit for event submission is <code>250,000</code> events per minute per organization.</li>
+    <li>The rate limits for endpoints vary and are included in the headers detailed below. These can be extended on demand.</li>
+  </ul>
+
+  <div class="alert alert-danger">
+    The list above is not comprehensive of all rate limits on Datadog APIs. If you are experiencing rate limiting, reach out to <a href="https://www.datadoghq.com/support/">support</a> for more information about the APIs you're using and their limits.
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Rate Limit Headers</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td><code>X-RateLimit-Limit</code></td><td>number of requests allowed in a time period.</td></tr>
+      <tr><td><code>X-RateLimit-Period</code></td><td>length of time in seconds for resets (calendar aligned).</td></tr>
+      <tr><td><code>X-RateLimit-Remaining</code></td><td>number of allowed requests left in the current time period.</td></tr>
+      <tr><td><code>X-RateLimit-Reset</code></td><td>time in seconds until next reset.</td></tr>
+      <tr><td><code>X-RateLimit-Name</code></td><td>name of the rate limit for increase requests.</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Datadog API usage metrics</h3>
+
+  <p>All Datadog APIs have a usage limit for a given period of time. APIs can have unique, distinct rate limit buckets or be grouped together into a single bucket depending on the resource(s) being used. For example, the monitor status API has a rate limit that allows a human or automation script to query only so many times per minute. The endpoint rejects excess requests with a 429 response code and a hint to back off until a reset period has expired. API usage metrics allow Datadog users to self-service and audit API rate limit consumption for API endpoints (excluding metrics, logs, and event submission endpoints). These metrics provide a picture of allowed and blocked requests, and are provided with the following dimensions and available tags:</p>
+
+  <h4>Available metrics</h4>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Dimension</th>
+        <th>Usage metric</th>
+        <th>Description</th>
+        <th>Available Tags</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td rowspan="2"><strong>Org</strong></td>
+        <td><code>datadog.apis.usage.per_org</code></td>
+        <td>The organization-wide rate limit of the number of API requests made to a specific endpoint</td>
+        <td><code>app_key_id</code>, <code>child_org</code>, <code>limit_count</code>, <code>limit_name</code>, <code>limit_period</code>, <code>rate_limit_status</code>, <code>user_uuid</code></td>
+      </tr>
+      <tr>
+        <td><code>datadog.apis.usage.per_org_ratio</code></td>
+        <td>Ratio of API requests by available dimensions to total number of requests (<code>limit_count</code>) allowed.</td>
+        <td><code>app_key_id</code>, <code>child_org</code>, <code>limit_count</code>, <code>limit_name</code>, <code>limit_period</code>, <code>rate_limit_status</code>, <code>user_uuid</code></td>
+      </tr>
+      <tr>
+        <td rowspan="2"><strong>User (UUID)</strong></td>
+        <td><code>datadog.apis.usage.per_user</code></td>
+        <td>Number of API requests made for a specific API endpoint that is rate limited per unique user.</td>
+        <td><code>app_key_id</code>, <code>child_org</code>, <code>limit_count</code>, <code>limit_name</code>, <code>limit_period</code>, <code>rate_limit_status</code>, <code>user_uuid</code></td>
+      </tr>
+      <tr>
+        <td><code>datadog.apis.usage.per_user_ratio</code></td>
+        <td>Ratio of API requests by available dimensions to total number of requests (<code>limit_count</code>) allowed.</td>
+        <td><code>app_key_id</code>, <code>child_org</code>, <code>limit_count</code>, <code>limit_name</code>, <code>limit_period</code>, <code>rate_limit_status</code>, <code>user_uuid</code></td>
+      </tr>
+      <tr>
+        <td rowspan="2"><strong>API Key</strong></td>
+        <td><code>datadog.apis.usage.per_api_key</code></td>
+        <td>Number of API requests made for a specific API endpoint that is rate limited per unique API Key used</td>
+        <td><code>app_key_id</code>, <code>child_org</code>, <code>limit_count</code>, <code>limit_name</code>, <code>limit_period</code>, <code>rate_limit_status</code>, <code>user_uuid</code></td>
+      </tr>
+      <tr>
+        <td><code>datadog.apis.usage.per_api_key_ratio</code></td>
+        <td>Ratio of API requests by available dimensions to total number of requests (<code>limit_count</code>) allowed.</td>
+        <td><code>app_key_id</code>, <code>child_org</code>, <code>limit_count</code>, <code>limit_name</code>, <code>limit_period</code>, <code>rate_limit_status</code>, <code>user_uuid</code></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h4>Tag key</h4>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Tag name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td><code>app_key_id</code></td><td>Application Key ID used by API client. This can be <code>N/A</code> for web or mobile users and open endpoints.</td></tr>
+      <tr><td><code>child_org</code></td><td>Name of child org, if viewing from the parent org. Otherwise, set to <code>N/A</code>. This only applies within the same datacenter.</td></tr>
+      <tr><td><code>limit_count</code></td><td>Number of requests available to each rate limit name during a request period.</td></tr>
+      <tr><td><code>limit_name</code></td><td>Name of rate limit. Different endpoints can share the same name.</td></tr>
+      <tr><td><code>limit_period</code></td><td>Time in seconds for each rate limit name before the consumption count is reset.</td></tr>
+      <tr><td><code>rate_limit_status</code></td><td><code>passed</code>: Request was not blocked. <code>blocked</code>: Request was blocked due to rate limits breached.</td></tr>
+      <tr><td><code>user_uuid</code></td><td>UUID of user for API consumption.</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Increase your rate limit</h3>
+  <p>You can request increased rate limits by creating a Support ticket with the below details under <strong>Help</strong> &gt; <strong>New Support Ticket</strong>. Upon receiving a rate limit increase, the Support Engineering team reviews the request on a case-by-case basis and, if needed, works with internal engineering resources to confirm the viability of the rate limit increase request.</p>
+
+  <h3>Audit logs</h3>
+  <p>API limit and usage metrics provide insight into usage patterns and blocked requests. If you need additional details, Audit Trail offers more granular visibility into API activity.</p>
+  <p>For more detailed visibility into API activity, consider using <a href="/account_management/audit_trail/events/">Audit Trail</a>.</p>
+</ApiLayout>

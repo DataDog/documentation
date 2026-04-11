@@ -107,7 +107,8 @@
   flex-wrap: wrap;
   gap: var(--space-sm);
   margin-bottom: var(--space-md);
-  padding-top: var(--space-sm);
+  padding-top: 0;
+  padding-bottom: 6px;
   overflow-x: visible;
 }
 
@@ -116,30 +117,29 @@
 }
 
 .tabs--pills .tabs__button {
-  border: var(--border-width) solid var(--color-border-dark);
+  border: none;
   border-radius: var(--border-radius);
   margin-bottom: 0;
-  font-weight: 400;
-  padding: 0 var(--space-sm);
-  height: var(--control-height-sm);
+  font-weight: 600;
+  font-size: var(--font-size-sm);
+  padding: 6px var(--space-sm) 7px;
   display: inline-flex;
   align-items: center;
   background: var(--color-bg);
-  color: var(--color-text);
+  color: #444;
+  transition: all 0.2s ease;
 }
 
 .tabs--pills .tabs__button:hover {
   color: var(--color-brand);
   background: var(--color-bg);
-  border-color: var(--color-border-dark);
-  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-pill);
 }
 
 .tabs--pills .tabs__button--active {
   background: var(--color-brand);
   color: var(--color-text-inverse);
-  border-color: var(--color-brand);
-  box-shadow: none;
+  box-shadow: var(--shadow-pill);
 }
 
 .tabs--pills .tabs__button--active::after {
@@ -152,6 +152,9 @@
 }
 
 .tabs--pills .tabs__panel {
-  border-radius: var(--border-radius);
+  border: none;
+  box-shadow: none;
+  border-radius: 0;
   margin-top: 0;
+  padding: 0;
 }

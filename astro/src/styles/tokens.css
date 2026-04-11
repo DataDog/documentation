@@ -60,12 +60,24 @@
   --line-height: 1.6;
   --line-height-code: 27px;
 
-  /* Colors — Table */
-  --color-table-border: #d6d6d6;
-  --color-table-header-bg: #e8e8e8;
+  /* Colors — Schema Table (purple-tinted, matching Hugo) */
+  --color-table-border: #ebebeb;
+  --color-table-header-bg: #f3edff;
   --color-table-header-text: #000;
-  --color-table-row-alt-bg: #fafafa;
-  --color-table-bg: var(--color-bg);
+  --color-table-row-alt-bg: #fdfcff;
+  --color-table-bg: #fdfcff;
+
+  /* Colors — HTTP Method Badges (matching Hugo) */
+  --color-method-get: #26759c;
+  --color-method-get-bg: #ebf5fa;
+  --color-method-post: #297a3f;
+  --color-method-post-bg: #d9f3e0;
+  --color-method-put: #5f3b83;
+  --color-method-put-bg: #d6c9e3;
+  --color-method-patch: #906623;
+  --color-method-patch-bg: #fff0d4;
+  --color-method-delete: #b72a3a;
+  --color-method-delete-bg: #fbd6db;
 
   /* Colors — Semantic */
   --color-blue: #1a73e8;
@@ -92,6 +104,7 @@
 
   /* Shadows */
   --shadow-sm: 0 0 20px rgba(0, 0, 0, 0.05);
+  --shadow-pill: 2px 5px 12px rgba(0, 0, 0, 0.1);
   --shadow-md: 0 4px 15px rgba(0, 0, 0, 0.25);
   --shadow-md-hover: 0 4px 15px rgba(0, 0, 0, 0.45);
   --shadow-brand: 0 -4px 12px rgba(99, 44, 166, 0.08);
@@ -146,12 +159,12 @@
   --color-code-inline-bg: #2a2a3e;
   --color-code-inline-text: #ccc;
 
-  /* Colors — Table */
+  /* Colors — Schema Table */
   --color-table-border: #444;
-  --color-table-header-bg: #2a2a3e;
+  --color-table-header-bg: #2a2040;
   --color-table-header-text: #e0e0e0;
-  --color-table-row-alt-bg: #222236;
-  --color-table-bg: var(--color-bg);
+  --color-table-row-alt-bg: #1e1a30;
+  --color-table-bg: #1e1a30;
 
   /* Colors — Semantic */
   --color-blue: #5b9cf5;

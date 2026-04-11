@@ -1,0 +1,49 @@
+import { Tabs } from './Tabs';
+import { SchemaTable } from './SchemaTable';
+import { CodeBlock } from './CodeBlock';
+import type { SchemaField } from './SchemaTable';
+import styles from './ApiEndpoint.module.css';
+
+interface RequestBodyTabsProps {
+  schema: SchemaField[];
+  examples: Array<{ name: string; value: string }>;
+}
+
+export function RequestBodyTabs({ schema, examples }: RequestBodyTabsProps) {
+  const hasSchema = schema.length > 0;
+  const hasExamples = examples.length > 0;
+
+  // If only schema or only examples, render without tabs
+  if (hasSchema && !hasExamples) {
+    return <SchemaTable fields={schema} />;
+  }
+  if (!hasSchema && hasExamples) {
+    return (
+      <div class={styles.requestExamples}>
+        {examples.map((ex) => (
+          <CodeBlock key={ex.name} content={ex.value} language="json" />
+        ))}
+      </div>
+    );
+  }
+  if (!hasSchema && !hasExamples) return null;
+
+  return (
+    <Tabs labels={['Model', 'Example']} variant="pills">
+      {(activeIndex: number) =>
+        activeIndex === 0 ? (
+          <SchemaTable fields={schema} />
+        ) : (
+          <div class={styles.requestExamples}>
+            {examples.map((ex) => (
+              <div key={ex.name}>
+                {examples.length > 1 && <strong>{ex.name}</strong>}
+                <CodeBlock content={ex.value} language="json" />
+              </div>
+            ))}
+          </div>
+        )
+      }
+    </Tabs>
+  );
+}

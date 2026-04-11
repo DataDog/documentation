@@ -6,6 +6,19 @@
   margin: 0 0 var(--space-sm);
 }
 
+.versionBadge {
+  display: inline-block;
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  padding: 0.1em 0.5em;
+  margin-left: var(--space-sm);
+  border-radius: var(--border-radius);
+  background: var(--color-code-inline-bg);
+  color: var(--color-text-muted);
+  vertical-align: middle;
+  text-transform: uppercase;
+}
+
 .urlLine {
   display: flex;
   align-items: center;
@@ -35,7 +48,7 @@
 }
 
 .section {
-  margin-bottom: var(--space-lg);
+  margin-bottom: var(--space-xl);
 }
 
 .section h3 {
@@ -59,10 +72,12 @@
 .examplePre {
   background: var(--color-code-bg);
   border: var(--border-width) solid var(--color-code-border);
+  border-top: var(--border-width-highlight) solid var(--color-code-accent);
   border-radius: var(--border-radius);
-  padding: var(--space-md);
+  padding: var(--space-sm);
   overflow-x: auto;
   font-size: var(--font-size-xs);
+  line-height: var(--line-height-code);
   max-height: var(--code-max-height);
   margin: var(--space-sm) 0 0;
 }
@@ -76,5 +91,5 @@
 .divider {
   border: none;
   border-top: var(--border-width) solid var(--color-border);
-  margin: var(--space-xl) 0;
+  margin: 70px 0 var(--space-xl);
 }

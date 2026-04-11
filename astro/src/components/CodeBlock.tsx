@@ -47,32 +47,34 @@ export function CodeBlock({
       data-wrap={wrap || undefined}
       data-disable-copy={disableCopy || undefined}
     >
-      <div class={styles['code-block__header']}>
-        {filename ? (
-          <span class={styles['code-block__filename']} data-testid="code-block-filename">
-            {filename}
-          </span>
-        ) : null}
-        <div class={styles['code-block__header-actions']}>
-          {collapsible && (
-            <button
-              class={styles['code-block__toggle']}
-              onClick={() => setCollapsed((prev) => !prev)}
-              data-testid="code-block-toggle"
-              aria-expanded={!collapsed}
-              aria-label={collapsed ? 'Expand code' : 'Collapse code'}
-            >
-              <span
-                class={`${styles['code-block__chevron']} ${
-                  collapsed
-                    ? styles['code-block__chevron--down']
-                    : styles['code-block__chevron--up']
-                }`}
-              />
-            </button>
-          )}
+      {(filename || collapsible) && (
+        <div class={styles['code-block__header']}>
+          {filename ? (
+            <span class={styles['code-block__filename']} data-testid="code-block-filename">
+              {filename}
+            </span>
+          ) : null}
+          <div class={styles['code-block__header-actions']}>
+            {collapsible && (
+              <button
+                class={styles['code-block__toggle']}
+                onClick={() => setCollapsed((prev) => !prev)}
+                data-testid="code-block-toggle"
+                aria-expanded={!collapsed}
+                aria-label={collapsed ? 'Expand code' : 'Collapse code'}
+              >
+                <span
+                  class={`${styles['code-block__chevron']} ${
+                    collapsed
+                      ? styles['code-block__chevron--down']
+                      : styles['code-block__chevron--up']
+                  }`}
+                />
+              </button>
+            )}
+          </div>
         </div>
-      </div>
+      )}
       <div class={contentClass} data-testid="code-block-content">
         {!disableCopy && (
           <button

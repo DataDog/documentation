@@ -4,6 +4,7 @@ import ApiStatusAlert from './ApiStatusAlert.astro';
 import { SchemaTable } from './SchemaTable';
 import { ApiResponse } from './ApiResponse';
 import { ApiCodeExample } from './ApiCodeExample';
+import { RequestBodyTabs } from './RequestBodyTabs';
 import type { SchemaField } from './SchemaTable';
 import type { ResponseData } from './ApiResponse';
 import type { CodeExampleSet } from './ApiCodeExample';
@@ -19,9 +20,11 @@ interface EndpointData {
   version: 'v1' | 'v2';
   deprecated: boolean;
   unstable: boolean;
+  unstableMessage?: string;
   newerVersionUrl?: string;
   permissions?: string[];
   oauthScopes?: string[];
+  regionUrls?: Record<string, string>;
   pathParams?: SchemaField[];
   queryParams?: SchemaField[];
   headerParams?: SchemaField[];
@@ -62,19 +65,21 @@ const hasParams = ep && (
       <ApiStatusAlert type="deprecated" newerVersionUrl={ep.newerVersionUrl} />
     )}
     {ep.unstable && !ep.deprecated && (
-      <ApiStatusAlert type="unstable" />
+      <ApiStatusAlert type="unstable" message={ep.unstableMessage} />
     )}
 
     {/* Heading + method badge + path */}
     <h2 id={ep.slug} class={styles.heading}>
       {ep.summary}
+      {ep.version && <span class={styles.versionBadge}>{ep.version}</span>}
     </h2>
     <div class={styles.urlLine}>
       <HttpMethodBadge method={ep.method} />
-      <code class={styles.path}>{ep.path}</code>
+      <code class={styles.path}>{ep.regionUrls?.['us1'] ?? ep.regionUrls?.[Object.keys(ep.regionUrls ?? {})[0]] ?? ep.path}</code>
     </div>
 
     {/* Description — rendered as slot content from Markdoc */}
+    {ep.description && <h3>Overview</h3>}
     <slot />
 
     {/* Permissions */}
@@ -85,18 +90,25 @@ const hasParams = ep && (
       </div>
     )}
 
+    {/* OAuth scopes */}
+    {ep.oauthScopes && ep.oauthScopes.length > 0 && (
+      <div class={styles.permissions}>
+        <p>OAuth apps require the <code>{ep.oauthScopes.join(', ')}</code> authorization scope to access this endpoint.</p>
+      </div>
+    )}
+
     {/* Arguments */}
     {hasParams && (
       <div class={styles.section}>
         <h3>Arguments</h3>
         {ep.pathParams && ep.pathParams.length > 0 && (
-          <SchemaTable client:load fields={ep.pathParams} title="Path Parameters" />
+          <SchemaTable client:load fields={ep.pathParams} />
         )}
         {ep.queryParams && ep.queryParams.length > 0 && (
-          <SchemaTable client:load fields={ep.queryParams} title="Query Parameters" />
+          <SchemaTable client:load fields={ep.queryParams} />
         )}
         {ep.headerParams && ep.headerParams.length > 0 && (
-          <SchemaTable client:load fields={ep.headerParams} title="Header Parameters" />
+          <SchemaTable client:load fields={ep.headerParams} />
         )}
       </div>
     )}
@@ -108,19 +120,11 @@ const hasParams = ep && (
         {ep.requestBody.description && (
           <p set:html={ep.requestBody.description} />
         )}
-        {ep.requestBody.schema.length > 0 && (
-          <SchemaTable client:load fields={ep.requestBody.schema} />
-        )}
-        {ep.requestBody.examples.length > 0 && (
-          <div class={styles.requestExamples}>
-            {ep.requestBody.examples.map((ex) => (
-              <details>
-                <summary>{ex.name}</summary>
-                <pre class={styles.examplePre}><code>{ex.value}</code></pre>
-              </details>
-            ))}
-          </div>
-        )}
+        <RequestBodyTabs
+          client:load
+          schema={ep.requestBody.schema}
+          examples={ep.requestBody.examples}
+        />
       </div>
     )}
 

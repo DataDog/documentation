@@ -20,6 +20,7 @@ import type { CurlParam } from './curl';
 import { getCodeExamplesForOperation } from './examples';
 import type { CodeExampleSet } from './examples';
 import { renderMarkdown, renderMarkdownInline } from './markdown';
+import { getRegions, buildApiUrl } from './regions';
 
 /* ------------------------------------------------------------------ */
 /*  Types                                                              */
@@ -50,12 +51,16 @@ export interface EndpointData {
   version: 'v1' | 'v2';
   deprecated: boolean;
   unstable: boolean;
+  /** Raw x-unstable message from the spec, rendered as HTML */
+  unstableMessage?: string;
   /** URL to a newer version of this endpoint, if one exists */
   newerVersionUrl?: string;
   /** Required permissions from x-permission */
   permissions?: string[];
   /** OAuth scopes from the AuthZ security requirement */
   oauthScopes?: string[];
+  /** Per-region full URLs, e.g. { us1: 'https://api.datadoghq.com/api/v1/...' } */
+  regionUrls?: Record<string, string>;
   pathParams?: SchemaField[];
   queryParams?: SchemaField[];
   headerParams?: SchemaField[];
@@ -78,6 +83,15 @@ function toSlug(name: string): string {
 function operationSlug(summary: string): string {
   return toSlug(summary);
 }
+
+/**
+ * Override map: spec tag slug → Hugo-expected slug.
+ * Must match the same map in index.ts.
+ */
+const SLUG_OVERRIDES: Record<string, string> = {
+  'case-management': 'cases',
+  'scorecards': 'service-scorecards',
+};
 
 /* ------------------------------------------------------------------ */
 /*  Spec parsing                                                       */
@@ -275,6 +289,17 @@ function extractResponses(spec: any, operation: any): ResponseData[] {
       }];
     }
 
+    // If no explicit examples, try to generate one from the schema
+    if (!examples && jsonContent?.schema) {
+      const generated = generateExampleFromSchema(spec, jsonContent.schema);
+      if (generated !== undefined) {
+        examples = [{
+          name: 'Example',
+          value: JSON.stringify(generated, null, 2),
+        }];
+      }
+    }
+
     result.push({ statusCode, description, schema, examples });
   }
 
@@ -450,7 +475,8 @@ export function getEndpointsForCategory(slug: string): EndpointData[] {
         if (!tags || !Array.isArray(tags) || tags.length === 0) continue;
 
         const primaryTag = tags[0];
-        const categorySlug = toSlug(primaryTag);
+        const rawSlug = toSlug(primaryTag);
+        const categorySlug = SLUG_OVERRIDES[rawSlug] ?? rawSlug;
         if (categorySlug !== slug) continue;
 
         // --- Core fields ---
@@ -459,6 +485,10 @@ export function getEndpointsForCategory(slug: string): EndpointData[] {
         const description: string = renderMarkdown(operation.description ?? '');
         const deprecated: boolean = operation.deprecated === true;
         const unstable: boolean = !!operation['x-unstable'];
+        const unstableMessage: string | undefined =
+          typeof operation['x-unstable'] === 'string'
+            ? renderMarkdownInline(operation['x-unstable'])
+            : undefined;
 
         // --- Parameters ---
         // Merge path-level and operation-level parameters
@@ -481,6 +511,13 @@ export function getEndpointsForCategory(slug: string): EndpointData[] {
         // --- Permissions and OAuth ---
         const permissions = extractPermissions(operation);
         const oauthScopes = extractOauthScopes(operation.security);
+
+        // --- Region URLs ---
+        const regions = getRegions(spec);
+        const regionUrls: Record<string, string> = {};
+        for (const region of regions) {
+          regionUrls[region.key] = buildApiUrl(region.site, pathStr);
+        }
 
         // --- Code examples (SDK) ---
         const sdkExamples = getCodeExamplesForOperation(operationId, version, primaryTag);
@@ -515,8 +552,10 @@ export function getEndpointsForCategory(slug: string): EndpointData[] {
           version,
           deprecated,
           unstable,
+          unstableMessage,
           permissions,
           oauthScopes,
+          regionUrls,
           pathParams,
           queryParams,
           headerParams,
