@@ -27,12 +27,22 @@ const regions = getDefaultRegions();
     <link rel="preload" href="/fonts/NationalWeb-Light.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/NationalWeb-Semibold.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/RobotoMono-Regular.woff" as="font" type="font/woff" crossorigin />
+    <!-- SCROLL MODE — start (Google Fonts) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Pinyon+Script&display=swap" rel="stylesheet" />
+    <!-- SCROLL MODE — end -->
     <script is:inline>
       (function () {
         const saved = localStorage.getItem('theme');
         const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
         const theme = saved || (prefersDark ? 'dark' : 'light');
         document.documentElement.setAttribute('data-theme', theme);
+        // SCROLL MODE — start
+        if (localStorage.getItem('scroll-mode') === 'on') {
+          document.documentElement.setAttribute('data-scroll', 'on');
+        }
+        // SCROLL MODE — end
       })();
     </script>
   </head>
@@ -48,28 +58,59 @@ const regions = getDefaultRegions();
         <slot />
       </main>
     </div>
-    <button
-      id="theme-toggle"
-      type="button"
-      aria-label="Toggle dark mode"
-    >
-    </button>
+    <div id="theme-toggles">
+      <button
+        id="theme-toggle"
+        type="button"
+        aria-label="Toggle dark mode"
+      >
+      </button>
+      <!-- SCROLL MODE — start (toggle button) -->
+      <button
+        id="scroll-toggle"
+        type="button"
+        aria-label="Toggle scroll mode"
+      >
+      </button>
+      <!-- SCROLL MODE — end -->
+    </div>
     <script is:inline>
       (function () {
-        const btn = document.getElementById('theme-toggle');
+        var btn = document.getElementById('theme-toggle');
         function update() {
-          const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+          var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
           btn.textContent = isDark ? '\u2600\uFE0F' : '\uD83C\uDF19';
         }
         update();
         btn.addEventListener('click', function () {
-          const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-          const next = isDark ? 'light' : 'dark';
+          var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+          var next = isDark ? 'light' : 'dark';
           document.documentElement.setAttribute('data-theme', next);
           localStorage.setItem('theme', next);
           update();
         });
       })();
+      // SCROLL MODE — start (toggle script)
+      (function () {
+        var btn = document.getElementById('scroll-toggle');
+        function update() {
+          var isScroll = document.documentElement.getAttribute('data-scroll') === 'on';
+          btn.textContent = isScroll ? '\uD83D\uDCD6' : '\uD83D\uDCDC';
+        }
+        update();
+        btn.addEventListener('click', function () {
+          var isScroll = document.documentElement.getAttribute('data-scroll') === 'on';
+          var next = isScroll ? 'off' : 'on';
+          if (next === 'on') {
+            document.documentElement.setAttribute('data-scroll', 'on');
+          } else {
+            document.documentElement.removeAttribute('data-scroll');
+          }
+          localStorage.setItem('scroll-mode', next);
+          update();
+        });
+      })();
+      // SCROLL MODE — end
     </script>
     <style>
       .api-shell {
@@ -93,10 +134,17 @@ const regions = getDefaultRegions();
         margin-bottom: var(--space-md);
       }
 
-      #theme-toggle {
+      #theme-toggles {
         position: fixed;
         top: var(--space-sm);
         right: var(--space-sm);
+        display: flex;
+        gap: var(--space-xs);
+        z-index: 1000;
+      }
+
+      #theme-toggle,
+      #scroll-toggle {
         background: none;
         border: var(--border-width) solid var(--color-border);
         border-radius: var(--border-radius);
@@ -104,10 +152,10 @@ const regions = getDefaultRegions();
         cursor: pointer;
         padding: var(--space-xs) var(--space-sm);
         line-height: 1;
-        z-index: 1000;
       }
 
-      #theme-toggle:hover {
+      #theme-toggle:hover,
+      #scroll-toggle:hover {
         border-color: var(--color-brand);
       }
 

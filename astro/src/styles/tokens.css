@@ -204,6 +204,171 @@
   --shadow-brand: 0 -4px 12px rgba(155, 109, 215, 0.15);
 }
 
+/* SCROLL MODE — start */
+[data-scroll='on'] {
+  /* Typography */
+  --font-family: 'EB Garamond', 'Georgia', serif;
+  --line-height: 1.7;
+
+  /* Colors — Brand */
+  --color-brand: #8b4513;
+  --color-brand-hover: #a0522d;
+  --color-brand-tint: rgba(139, 69, 19, 0.08);
+
+  /* Colors — Text */
+  --color-text: #3c2415;
+  --color-text-muted: #6b4c3b;
+  --color-text-inverse: #f5e6c8;
+
+  /* Colors — Surface */
+  --color-bg: #f5e6c8;
+  --color-border: #c4a97d;
+  --color-border-strong: #d4b88a;
+  --color-border-dark: #a08060;
+  --color-scrollbar: rgba(60, 36, 21, 0.3);
+
+  /* Colors — Status */
+  --color-status-text: #5a3a28;
+  --color-info: #6b4c3b;
+  --color-info-emphasis: #4a3020;
+  --color-caution: #c4a030;
+  --color-caution-emphasis: #7f5a05;
+  --color-warning: #a03020;
+  --color-warning-emphasis: #7a2010;
+  --color-accent: #8b6914;
+  --color-accent-emphasis: #5a4010;
+
+  /* Colors — Panel */
+  --color-panel-bg: #efe0c4;
+  --color-panel-text: #3c2415;
+  --color-panel-border: #c4a97d;
+  --color-panel-header: rgba(139, 69, 19, 0.12);
+  --color-panel-accent: rgba(139, 69, 19, 0.2);
+  --color-highlight-bg: #e8d5b0;
+  --color-highlight-text: #5a3a28;
+
+  /* Colors — Surface */
+  --color-surface-border: #c4a97d;
+  --color-surface-header: #e8d5b0;
+  --color-surface-header-text: #3c2415;
+  --color-surface-alt: #f0dfc0;
+  --color-surface-bg: #f0dfc0;
+
+  /* Colors — Named (badge pairs) */
+  --color-teal: #5a7a6a;
+  --color-teal-tint: rgba(90, 122, 106, 0.15);
+  --color-forest: #4a6a3a;
+  --color-forest-tint: rgba(74, 106, 58, 0.15);
+  --color-plum: #7a5a4a;
+  --color-plum-tint: rgba(122, 90, 74, 0.15);
+  --color-amber: #8b6914;
+  --color-amber-tint: rgba(139, 105, 20, 0.15);
+  --color-crimson: #8b3020;
+  --color-crimson-tint: rgba(139, 48, 32, 0.15);
+
+  /* Colors — Semantic */
+  --color-blue: #4a6a8a;
+  --color-blue-tint: rgba(74, 106, 138, 0.12);
+  --color-green: #4a6a3a;
+  --color-green-tint: rgba(74, 106, 58, 0.12);
+  --color-orange: #a05a20;
+  --color-orange-tint: rgba(160, 90, 32, 0.12);
+  --color-yellow: #b08a10;
+  --color-yellow-tint: rgba(176, 138, 16, 0.15);
+  --color-red: #8b3020;
+  --color-red-tint: rgba(139, 48, 32, 0.12);
+
+  /* Colors — Surface variants */
+  --color-bg-hover: rgba(60, 36, 21, 0.05);
+
+  /* Shadows */
+  --shadow-sm: 0 0 20px rgba(60, 36, 21, 0.1);
+  --shadow-md: 0 4px 15px rgba(60, 36, 21, 0.2);
+  --shadow-md-hover: 0 4px 15px rgba(60, 36, 21, 0.3);
+  --shadow-brand: 0 -4px 12px rgba(139, 69, 19, 0.1);
+}
+
+/* Dark scroll — ancient scroll by candlelight */
+[data-theme='dark'][data-scroll='on'] {
+  /* Colors — Brand */
+  --color-brand: #c4943a;
+  --color-brand-hover: #d4a84f;
+  --color-brand-tint: rgba(196, 148, 58, 0.1);
+
+  /* Colors — Text */
+  --color-text: #d4c4a0;
+  --color-text-muted: #a08a6a;
+  --color-text-inverse: #2a1f14;
+
+  /* Colors — Surface */
+  --color-bg: #2a1f14;
+  --color-border: #5a4530;
+  --color-border-strong: #4a3a28;
+  --color-border-dark: #6a5540;
+  --color-scrollbar: rgba(212, 196, 160, 0.25);
+
+  /* Colors — Status */
+  --color-status-text: #baa880;
+  --color-info: #8aaa8a;
+  --color-info-emphasis: #a0c4a0;
+  --color-caution: #d4b060;
+  --color-caution-emphasis: #e0c478;
+  --color-warning: #c47050;
+  --color-warning-emphasis: #d48a70;
+  --color-accent: #c4a050;
+  --color-accent-emphasis: #d4b468;
+
+  /* Colors — Panel */
+  --color-panel-bg: #1e1610;
+  --color-panel-text: #d4c4a0;
+  --color-panel-border: #5a4530;
+  --color-panel-header: rgba(196, 148, 58, 0.15);
+  --color-panel-accent: rgba(196, 148, 58, 0.25);
+  --color-highlight-bg: #3a2a1e;
+  --color-highlight-text: #baa880;
+
+  /* Colors — Surface */
+  --color-surface-border: #5a4530;
+  --color-surface-header: #3a2a1e;
+  --color-surface-header-text: #d4c4a0;
+  --color-surface-alt: #241a10;
+  --color-surface-bg: #241a10;
+
+  /* Colors — Named (badge pairs) */
+  --color-teal: #6aaa8a;
+  --color-teal-tint: rgba(106, 170, 138, 0.15);
+  --color-forest: #7aaa6a;
+  --color-forest-tint: rgba(122, 170, 106, 0.15);
+  --color-plum: #b09070;
+  --color-plum-tint: rgba(176, 144, 112, 0.15);
+  --color-amber: #d4a84f;
+  --color-amber-tint: rgba(212, 168, 79, 0.15);
+  --color-crimson: #c47050;
+  --color-crimson-tint: rgba(196, 112, 80, 0.15);
+
+  /* Colors — Semantic */
+  --color-blue: #7a9aba;
+  --color-blue-tint: rgba(122, 154, 186, 0.15);
+  --color-green: #7aaa6a;
+  --color-green-tint: rgba(122, 170, 106, 0.15);
+  --color-orange: #c48a50;
+  --color-orange-tint: rgba(196, 138, 80, 0.15);
+  --color-yellow: #d4b060;
+  --color-yellow-tint: rgba(212, 176, 96, 0.15);
+  --color-red: #c47050;
+  --color-red-tint: rgba(196, 112, 80, 0.15);
+
+  /* Colors — Surface variants */
+  --color-bg-hover: rgba(212, 196, 160, 0.05);
+
+  /* Shadows */
+  --shadow-sm: 0 0 20px rgba(0, 0, 0, 0.35);
+  --shadow-md: 0 4px 15px rgba(0, 0, 0, 0.5);
+  --shadow-md-hover: 0 4px 15px rgba(0, 0, 0, 0.65);
+  --shadow-brand: 0 -4px 12px rgba(196, 148, 58, 0.12);
+}
+/* SCROLL MODE — end */
+
 /* Shiki dual-theme: activate dark token colors in dark mode */
 [data-theme='dark'] .shiki,
 [data-theme='dark'] .shiki span {
