@@ -33,6 +33,19 @@ To create a message template:
 
 **Note:** Template variables are supported in both the message's title and body.
 
+### AI variables for notifications
+
+Incident AI can dynamically populate key details in notifications with AI-generated content. Insert any of the following variables into your message body:
+
+| Field | Variable |
+|---|---|
+| AI Contributing Factors | `{{incident.ai_contributing_factors}}` |
+| AI Impact | `{{incident.ai_impact}}` |
+| AI Issue | `{{incident.ai_issue}}` |
+| AI Remediation | `{{incident.ai_remediation}}` |
+
+{{< img src="service_management/incidents/incident_ai/message_template_variables.png" alt="New message template with AI variables in it" style="width:80%;" >}}
+
 ## Postmortems
 
 Postmortem templates are dynamic, reusable templates used to create a postmortem that is automatically populated with incident information after an incident has been resolved. Postmortem templates use [template variables][4], such as `{{incident.severity}}`, to dynamically inject the corresponding value from the incident that the postmortem is being created for.
@@ -45,6 +58,21 @@ To create a postmortem template:
 4. Write the template's content (available template variables are listed to the right of the textbox).
 5. (Optional) Set the template as the default.
 6. Click **Save**.
+
+### AI variables for postmortems
+
+Postmortem templates support AI variables that use Bits AI to generate suggested content based on incident data. When you generate a postmortem that includes an AI variable, Datadog provides a suggested value to accept, edit, or reject.
+
+**Note**: AI variables must be preceded by a section header.
+
+| Variable | Description |
+|---|---|
+| `{{incident.ai_summary}}` | Executive summary |
+| `{{incident.ai_system_overview}}` | System context and dependencies |
+| `{{incident.ai_key_timeline}}` | Key event timeline |
+| `{{incident.ai_customer_impact}}` | Summary of customer impact |
+| `{{incident.ai_action_items}}` | Follow-up actions |
+| `{{incident.ai_lessons_learned}}` | Key takeaways for future prevention |
 
 For more information on generating postmortems using these templates, see [Incident Postmortems][5].
 

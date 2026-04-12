@@ -68,7 +68,8 @@ Use the **Save Location** dropdown in the template editor to select where the ge
 
 Templates support variables that populate with incident data when the postmortem is generated. Variables allow you to include relevant incident context automatically without copying it manually. For a full list of available variables, see the [Incident Variables][6] reference.
 
-**Standard variables** pull directly from incident fields:
+{{% collapse-content title="Standard variables" level="h4" %}}
+Standard variables pull directly from incident fields and also include any defined [custom property fields][5].
 
 | Variable | Description |
 |---|---|
@@ -77,12 +78,38 @@ Templates support variables that populate with incident data when the postmortem
 | `{{incident.severity}}` | The incident severity level |
 | `{{incident.commander}}` | The incident commander's name, or their email or handle if no name is set |
 
-Any [custom property fields][5] you have defined are also available as variables.
+{{% /collapse-content %}}
 
-**The incident card variable** (`{{incident.card}}`) embeds a summary card that reflects incident fields in real time. When incident fields change, the card in the postmortem updates automatically, reducing the need to switch between the two. 
+{{% collapse-content title="Incident card variable" level="h4" %}}
+The incident card variable (`{{incident.card}}`) embeds a summary card that reflects incident fields in real time. When incident fields change, the card in the postmortem updates automatically.
+
 **Note**: The incident card is only supported in Datadog Notebooks.
+{{% /collapse-content %}}
 
-**AI variables** use Bits AI to generate suggested content based on incident data. When you generate a postmortem that includes an AI variable, Datadog provides a suggested value that you can accept, edit, or reject before it is saved. The `{{incident.ai_summary}}` variable, for example, generates a suggested summary of what occurred during the incident.
+{{% collapse-content title="AI variables" level="h4" %}}
+AI variables use Bits AI to generate suggested content based on incident data. When you generate a postmortem that includes an AI variable, Datadog provides a suggested value that you can accept, edit, or reject before it is saved.
+
+| Variable | Description |
+|---|---|
+| `{{incident.ai_summary}}` | Executive summary |
+| `{{incident.ai_system_overview}}` | System context and dependencies |
+| `{{incident.ai_key_timeline}}` | Key event timeline |
+| `{{incident.ai_customer_impact}}` | Summary of customer impact |
+| `{{incident.ai_action_items}}` | Follow-up actions |
+| `{{incident.ai_lessons_learned}}` | Key takeaways for future prevention |
+
+To use these variables:
+1. Create or edit a postmortem template in [**Incident Management Settings > Post-Mortem Templates**][4].
+1. Add the variables to the template body.
+1. When generating a postmortem, select the **General incident with AI content** out-of-the-box template, or a custom template that includes AI variables.
+1. Allow up to one minute for AI-generated content to populate. Datadog recommends reviewing and refining AI-generated content before sharing the postmortem.
+
+**Note**:
+- AI variables must be preceded by a section header.
+- The incident timeline must contain at least 10 messages for AI variables to generate content.
+
+
+{{% /collapse-content %}}
 
 ## Attach an existing postmortem
 
