@@ -93,7 +93,7 @@ Each column in a custom query is assigned a type that controls how the metric is
 
 ## Viewing the source SQL
 
-Each graph has a **View SQL query** button (code icon) in the top-right corner. Clicking it shows the raw SQL statement that produces the metric, so you can understand and audit what is being measured.
+Each graph has a **View SQL query** button in the top-right corner. Clicking it shows the raw SQL statement that produces the metric, so you can understand and audit what is being measured.
 
 ## Collection interval
 
