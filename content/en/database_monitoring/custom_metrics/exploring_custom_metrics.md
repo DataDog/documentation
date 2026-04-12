@@ -18,7 +18,12 @@ If you have configured `custom_queries` in your Datadog Agent's database integra
 
 ## How it works
 
-1. Define custom queries in your Agent config. Each query specifies a SQL statement, one or more metric columns (with types like `gauge`, `count`, `rate`, and so on), optional tag columns, an optional metric prefix, and an optional collection interval.
+1. Define custom queries in your Agent config. Each query specifies:
+- A SQL statement
+- One or more metric columns (with types like `gauge`, `count`, or `rate`)
+- Optional tag columns
+- An optional metric prefix
+- An optional collection interval
 2. The Agent collects the metrics by running your SQL queries on the configured interval (default: every 15 seconds) and emitting the results as Datadog metrics.
 3. The Custom Metrics section displays a graph for each metric column from your custom queries, scoped to the current database instance. Metrics are named `<prefix>.<column_name>`, for example `postgresql.my_table_row_count`.
 
