@@ -14,7 +14,7 @@ The **Custom Metrics** section appears on the database instance detail page and 
 
 ## Overview
 
-If you have configured `custom_queries` in your Datadog Agent's database integration, this section automatically discovers those queries from the Agent's configuration and visualizes each metric column as a timeseries graph. This lets you monitor business-specific or environment-specific database metrics alongside the standard Database Monitoring metrics, all in one place.
+If you have configured `custom_queries` in your Datadog Agent's database integration, this section automatically discovers those queries and visualizes each metric column as a timeseries graph. This lets you monitor business-specific or environment-specific database metrics alongside the standard Database Monitoring metrics, all in one place.
 
 ## How it works
 
