@@ -127,7 +127,7 @@ For the full configuration reference, see [MySQL Custom Queries][3].
 
 {{% tab "SQL Server" %}}
 
-SQL Server supports two approaches for collecting custom metrics.
+SQL Server supports two approaches for collecting custom metrics: [custom queries](#custom-queries) or [performance counters](#performance-counters).
 
 ### Custom queries
 
