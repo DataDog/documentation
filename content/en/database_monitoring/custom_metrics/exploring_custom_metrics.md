@@ -25,7 +25,7 @@ If you have configured `custom_queries` in your Datadog Agent's database integra
 - An optional metric prefix
 - An optional collection interval
 2. The Agent collects the metrics by running your SQL queries on the configured interval (default: every 15 seconds) and emitting the results as Datadog metrics.
-3. The Custom Metrics section displays a graph for each metric column from your custom queries, scoped to the current database instance. Metrics are named `<prefix>.<column_name>`, for example `postgresql.my_table_row_count`.
+3. The Custom Metrics section displays a graph for each metric column from your custom queries, scoped to the current database instance. Metrics are named `<prefix>.<column_name>` (for example, `postgresql.my_table_row_count`).
 
 ## Example Agent configuration
 
