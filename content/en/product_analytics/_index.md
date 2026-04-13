@@ -35,11 +35,12 @@ To get started, [add the Datadog SDK](#track-client-side-events-sdk) to your app
 
 ### Track client-side events (SDK)
 
-Collect events from your users' devices, such as pageviews or button clicks, and send them to Datadog.
+Collect events, such as pageviews or button clicks, from your users' devices, and send them to Datadog.
 
 Add the Datadog SDK to your application to start collecting user activity data. If you have already configured RUM, you do not need to instrument your application again for Product Analytics.
 
-If you do not have an application set up in Datadog yet, select your platform:
+If you do not have an application set up in Datadog yet, follow the instructions for your platform:
+
 - [Browser][14]
 - [iOS][15]
 - [Android][16]
