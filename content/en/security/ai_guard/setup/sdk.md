@@ -290,13 +290,15 @@ The following sections provide practical usage examples:
 result = Datadog::AIGuard.evaluate(
   Datadog::AIGuard.message(role: :system, content: "You are an AI Assistant"),
   Datadog::AIGuard.message(role: :user, content: "What is the weather like today?"),
-  allow_raise: true
+  allow_raise: false
 )
 ```
 
 The evaluate method receives the following parameters:
 - `messages` (required): list of messages (prompts or tool calls) for AI Guard to evaluate.
-- `allow_raise` (optional): Boolean flag; if set to `true`, the SDK raises an `AIGuardAbortError` when the assessment is `DENY` or `ABORT` and the service is configured with blocking enabled.
+- `allow_raise` (optional): Boolean flag; if set to `false`, the method will not not raise an `AIGuardAbortError` when the assessment is `DENY` or `ABORT`.
+
+This SDK method raises an `AIGuardAbortError` when the assessment is `DENY` or `ABORT` and if the service is configured with blocking enabled.
 
 The method returns an Evaluation object containing:
 - `action`: `ALLOW`, `DENY`, or `ABORT`.
@@ -310,6 +312,19 @@ Like evaluating user prompts, the method can also be used to evaluate tool calls
 ```ruby
 result = Datadog::AIGuard.evaluate(
   Datadog::AIGuard.assistant(id: "call_1", tool_name: "shell", arguments: '{"command": "shutdown"}'),
+)
+```
+
+### Example: Evaluate a user prompt with content parts {#ruby-example-evaluate-user-prompt-content-parts}
+
+For multi-modal inputs, you can pass an array of content parts instead of a string. This is useful when including images or other media:
+
+```ruby
+Datadog::AIGuard.evaluate(
+  Datadog::AIGuard.message(role: :user) do |message|
+    message.text("What's in this image?")
+    message.image_url("data:image/jpeg;base64,...")
+  end
 )
 ```
 
