@@ -48,7 +48,7 @@ To set up your application with a coding assistant, see [Agentic onboarding][17]
 
 ### Track server-side events (API)
 
-Collect events that happen on your backend, such as completed checkouts or processed payments, and send them to Datadog.
+Collect events that happen on your server, such as completed checkouts or processed payments, and send them to Datadog.
 
 Use the [Product Analytics API][21] to send custom events from your server-side source.
 
