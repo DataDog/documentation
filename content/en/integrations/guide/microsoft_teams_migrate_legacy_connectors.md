@@ -16,8 +16,8 @@ Microsoft has retired Office 365 connectors for Microsoft Teams. All connectors 
 
 This guide covers two migration options:
 
-- **Tenant-based integration (recommended)**: Migrate to the Datadog app for Microsoft Teams, which connects your Microsoft tenant directly to Datadog.
-- **Microsoft Workflows Webhooks**: Migrate to webhook-based handles using Microsoft's Power Automate Workflows.
+- [**Tenant-based integration (recommended)**](#migrate-legacy-connectors-to-tenant-based-integration): Migrate to the Datadog app for Microsoft Teams, which connects your Microsoft tenant directly to Datadog.
+- [**Microsoft Workflows Webhooks**](#migrate-legacy-connectors-to-the-microsoft-workflows-webhooks-integration): Migrate to webhook-based handles using Microsoft's Power Automate Workflows.
 
 ## Migrate legacy connectors to tenant-based integration
 
@@ -35,7 +35,7 @@ To migrate all notification handles currently using the legacy Office 365 connec
 To migrate all notification handles currently using the legacy Office 365 connectors over to Datadog's Microsoft Workflows Webhooks integration:
 
 1. Follow the [setup steps][3] to create a workflow webhook handle for the desired Microsoft Teams channel.
-2. Under the Microsoft Workflows Webhooks section, give the new handle the same name as the connector handle it should replace. For example, if your legacy connector handle is named `channel-123`, name your new handle `channel-123` in the Microsoft Webhooks section. This new handle overrides the existing legacy connector handle.
+2. In the Datadog integration tiles, under the Microsoft Workflows Webhooks section, give the new handle the same name as the connector handle it should replace. For example, if your legacy connector handle is named `channel-123`, name your new handle `channel-123`. This new handle overrides the existing legacy connector handle.
 
 ## Further reading
 
