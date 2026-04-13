@@ -27,7 +27,7 @@ Product Analytics helps you gain insight into user behavior and make data-driven
 
 ## Instrument your application
 
-Product Analytics collects data from client-side and server-side sources to give you a complete view of the user journey.
+Product Analytics collects data from client-side and server-side sources to give you a complete view of the users' journeys.
 
 To get started, instrument your application with the [SDK](#track-client-side-events-sdk) or the [API](#track-server-side-events-api), then [enable Product Analytics](#enable-product-analytics) in Datadog.
 
@@ -74,7 +74,7 @@ Product Analytics collects client-side and server-side event data. For client-si
 : A view represents each page or screen a user visits within a session.
 
 **Actions**
-: An action is something a user does on a page, such as a click, tap, or scroll. Actions are automatically collected by the RUM SDK. When configuring features like [Funnels][4] and [Segments][6], you can select specific Actions as steps or filters. To see which Actions are available, open the [RUM Explorer][20] and filter by **Actions**. 
+: An action is something a user does on a page, such as a click, tap, or scroll. Actions are automatically collected by the RUM SDK. When configuring features like [Funnels][4] and [Segments][6], you can select specific Actions as steps or filters. To see which Actions are available, open the [RUM Explorer][20] and filter by **Actions**.
 
 **Server-side events**
 : A server-side event is a custom event sent through the [Product Analytics API][21], such as a completed checkout or processed payment. In the event picker, select **Server Events** to scope your analysis to server-side data.
@@ -96,7 +96,7 @@ By default, this page displays the `active users`, `page views`, and `average ti
 : Visualize the split between desktop and mobile usage, spot which versions are in use, and identify what can be deprecated.
 
 [Engagement](https://app.datadoghq.com/product-analytics/engagement-and-features)
-: Understand how users are engaging with your product, answering questions such as how long users are staying on pages, and what their top actions are. 
+: Understand how users are engaging with your product, answering questions such as how long users are staying on pages, and what their top actions are.
 
 [Traffic](https://app.datadoghq.com/product-analytics/traffic-and-acquisition)
 : See bounce rates, top traffic sources, and where your growth is really coming from.
