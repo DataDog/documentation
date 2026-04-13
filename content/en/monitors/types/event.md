@@ -5,7 +5,7 @@ aliases :
     - /monitors/monitor_types/event
     - /monitors/create/types/event/
 further_reading:
-- link: "/service_management/events/"
+- link: "/events/"
   tag: "Documentation"
   text: "Event Management Overview"
 - link: "/monitors/notify/"
@@ -104,7 +104,7 @@ Configure the alert grouping strategy:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/monitors/create/event
-[2]: /service_management/events/explorer/searching
+[2]: /events/explorer/searching
 [3]: /help/
 [4]: /monitors/configuration/#advanced-alert-conditions
 [5]: /monitors/notify/

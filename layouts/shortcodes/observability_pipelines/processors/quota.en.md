@@ -20,16 +20,16 @@ To set up the quota processor:
     - Logs that do not match the quota filter are sent to the next step of the pipeline.
 1. In the **Unit for quota** dropdown menu, select if you want to measure the quota by the number of `Events` or by the `Volume` in bytes.
 1. Set the daily quota limit and select the unit of magnitude for your desired quota.
-1. Optional, Click **Add Field** if you want to set a quota on a specific service or region field.  
-    a. Enter the field name you want to partition by. See the [Partition example](#partition-example) for more information.  
-        i. Select the **Ignore when missing** if you want the quota applied only to events that match the partition. See the [Ignore when missing example](#example-for-the-ignore-when-missing-option) for more information.  
-        ii. Optional: Click **Overrides** if you want to set different quotas for the partitioned field.  
-        - Click **Download as CSV** for an example of how to structure the CSV.  
-        - Drag and drop your overrides CSV to upload it. You can also click **Browse** to select the file to upload it. See the [Overrides example](#overrides-example) for more information.  
-    b. Click **Add Field** if you want to add another partition.
+1. Optional: Click **Add Field** if you want to set a quota on a specific service or region field.  
+   1. Enter the field name you want to partition by. See the [Partition example](#partition-example) for more information.  
+      1. Select the **Ignore when missing** if you want the quota applied only to events that match the partition. See the [Ignore when missing example](#example-for-the-ignore-when-missing-option) for more information.  
+      1. Optional: Click **Overrides** if you want to set different quotas for the partitioned field.  
+         - Click **Download as CSV** for an example of how to structure the CSV.  
+         - Drag and drop your overrides CSV to upload it. You can also click **Browse** to select the file to upload it. See the [Overrides example](#overrides-example) for more information.  
+   1. Click **Add Field** if you want to add another partition.
 1. In the **When quota is met** dropdown menu, select if you want to **drop events**, **keep events**, or **send events to overflow destination**, when the quota has been met.
-    1. If you select **send events to overflow destination**, an overflow destination is added with the following cloud storage options: **Amazon S3**, **Azure Blob**, and **Google Cloud**.
-    1. Select the cloud storage you want to send overflow logs to. See the setup instructions for your cloud storage: [Amazon S3][5002], [Azure Blob Storage][5003], or [Google Cloud Storage][5004].
+   1. If you select **send events to overflow destination**, an overflow destination is added with the following cloud storage options: **Amazon S3**, **Azure Blob**, and **Google Cloud**.
+   1. Select the cloud storage you want to send overflow logs to. See the setup instructions for your cloud storage: [Amazon S3][5002], [Azure Blob Storage][5003], or [Google Cloud Storage][5004].
 
 #### Examples
 

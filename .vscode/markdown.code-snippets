@@ -346,5 +346,11 @@
         "prefix": ";;aliases",
         "body": ["aliases:", "  - ${1:/your/url/here}"],
         "description": "YAML frontmatter for aliases with a single URL entry"
+    },
+    "UI element": {
+        "scope": "markdown",
+        "prefix": ";;ui",
+        "body": ["{{< ui >}}${1:UI element name}{{< /ui >}}"],
+        "description": "Wrap UI element names (buttons, menu items, field labels) in the ui shortcode"
     }
 }

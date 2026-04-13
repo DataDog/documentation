@@ -22,6 +22,9 @@ further_reading:
 - link: "/agent/kubernetes/tag/"
   tag: "Documentation"
   text: "Assign tags to all data emitted by a container"
+- link: "https://www.youtube.com/watch?v=nuxmVf9ByE0"
+  tag: "Video"
+  text: "Datadog Tips & Tricks: How to write annotations in Kubernetes with JSON for Datadog Autodiscovery"
 ---
 
 This page covers how to install and configure integrations for your Kubernetes infrastructure by using a Datadog feature known as _Autodiscovery_. This enables you to use [variables][16] like `%%host%%` to dynamically populate your configuration settings. For a detailed explanation of how Autodiscovery works, see [Getting Started with Containers: Autodiscovery][12]. For advanced Autodiscovery options, such as excluding certain containers from Autodiscovery or tolerating unready pods, see [Container Discovery Management][23].
@@ -371,6 +374,37 @@ The `ad_identifiers` parameter takes a list, so you can supply multiple containe
 `<LOGS_CONFIG>`
 : The configuration parameters listed under `logs` in your integration's `<INTEGRATION_NAME>.d/conf.yaml.example` file.
 
+### Advanced annotation parameters
+
+In addition to the core Autodiscovery annotations for checks, logs, and instances, you can use additional annotations to customize check behavior:
+
+#### Tag cardinality
+
+Set the tag cardinality level for a specific check using the `check_tag_cardinality` annotation. This overrides the global Agent tag cardinality setting for metrics collected by that check.
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: '<POD_NAME>'
+  annotations:
+    ad.datadoghq.com/<CONTAINER_NAME>.checks: |
+      {
+        "<INTEGRATION_NAME>": {
+          "init_config": <INIT_CONFIG>,
+          "instances": [<INSTANCES_CONFIG>]
+        }
+      }
+    ad.datadoghq.com/<CONTAINER_NAME>.check_tag_cardinality: "<low|orchestrator|high>"
+spec:
+  containers:
+    - name: '<CONTAINER_NAME>'
+```
+
+<div class="alert alert-info">The <code>check_tag_cardinality</code> annotation only affects metrics collected by integration checks. It does not affect metrics sent through DogStatsD. To configure DogStatsD tag cardinality, use the global <code>dogstatsd_tag_cardinality</code> configuration parameter or the <code>DD_DOGSTATSD_TAG_CARDINALITY</code> environment variable.</div>
+
+For more information about tag cardinality, see [Per-check tag configuration][27].
+
 ### Auto-configuration
 
 The Datadog Agent automatically recognizes and supplies basic configuration for some common technologies. For a complete list, see [Autodiscovery auto-configuration][20].
@@ -673,3 +707,4 @@ For more examples, including how to configure multiple checks for multiple sets 
 [24]: /containers/guide/autodiscovery-examples
 [25]: /integrations/istio/
 [26]: /integrations/postgres
+[27]: /getting_started/integrations/#per-check-tag-configuration

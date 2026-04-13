@@ -375,28 +375,17 @@ Use this [migration guide][1] to assess any breaking changes if you upgraded you
 
 If you don't see AAP threat information in the [Trace and Signals Explorer][2] for your Node.js application, follow these steps to troubleshoot the issue:
 
-1. Confirm the latest version of AAP is running by checking that `appsec_enabled` is `true` in the [startup logs][3]
-
-    a. If you don't see startup logs after a request has been sent, add the environment variable `DD_TRACE_STARTUP_LOGS=true` to enable startup logs. Check the startup logs for `appsec_enabled` is `true`.
-
-    b. If `appsec_enabled` is `false`, then AAP was not enabled correctly. See [installation instructions][4].
-
-    c. If `appsec_enabled` is not in the startup logs, the latest AAP version needs to be installed. See [installation instructions][4].
-
-2. Is the tracer working? Can you see relevant traces on the APM dashboard?
-
-    AAP relies on the tracer so if you don't see traces, then the tracer might not be working. See [APM Troubleshooting][5].
-
+1. Confirm the latest version of AAP is running by checking that `appsec_enabled` is `true` in the [startup logs][3].
+   1. If you don't see startup logs after a request has been sent, add the environment variable `DD_TRACE_STARTUP_LOGS=true` to enable startup logs. Check the startup logs for `appsec_enabled` is `true`.
+   1. If `appsec_enabled` is `false`, then AAP was not enabled correctly. See [installation instructions][4].
+   1. If `appsec_enabled` is not in the startup logs, the latest AAP version needs to be installed. See [installation instructions][4].
+2. Confirm that the tracer is working by looking for relevant traces on the APM dashboard.<br />
+    AAP relies on the tracer, so if you don't see traces, then the tracer might not be working. See [APM Troubleshooting][5].
 3. In your application directory, run the command `npm explore @datadog/native-appsec -- npm run install` and restart your app.
-
-    a. If `@datadog/native-appsec` is not found then the installation is incorrect.
-
-    b. If `@datadog/native-appsec` is found when starting your application, add the command to your runtime start script.
-
-    c. If the tracer still does not work, you might be running an unsupported runtime.
-
+   1. If `@datadog/native-appsec` is not found, then the installation is incorrect.
+   1. If `@datadog/native-appsec` is found when starting your application, add the command to your runtime start script.
+   1. If the tracer still does not work, you might be running an unsupported runtime.
 4. To enable logs, add the following environment variables:
-
     ```
     DD_TRACE_DEBUG=1
     DD_TRACE_LOG_LEVEL=info
@@ -405,6 +394,7 @@ If you don't see AAP threat information in the [Trace and Signals Explorer][2] f
 [1]: https://github.com/DataDog/dd-trace-js/blob/master/MIGRATING.md
 [2]: https://app.datadoghq.com/security/appsec/
 [3]: /tracing/troubleshooting/tracer_startup_logs/
+[4]: /security/application_security/setup/nodejs/
 [5]: /tracing/troubleshooting/
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}

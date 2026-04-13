@@ -38,7 +38,7 @@ Configure alerting based on the emails from your SNS topic with an [event monito
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /service_management/events/guides/email/
+[1]: /events/guides/email/
 [2]: https://app.datadoghq.com/event/explorer
 [3]: /monitors/types/event/
 [4]: /events/explorer/

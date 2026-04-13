@@ -23,8 +23,6 @@ algolia:
 
 ## Setup
 
-If your application is deployed as a container image, use the _Container Image_ method.
-
 {{< tabs >}}
 {{% tab "Datadog UI" %}}
 You can instrument your Python AWS Lambda application directly within Datadog. Navigate to the [Serverless > AWS Lambda][2] page and select [**Instrument Functions**][3].
@@ -412,6 +410,8 @@ To configure Datadog using SST v3, follow these steps:
 [9]: https://aws.github.io/chalice/topics/middleware.html
 {{% /tab %}}
 {{< /tabs >}}
+
+{{% svl-tracing-env %}}
 
 ## FIPS compliance
 

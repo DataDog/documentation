@@ -47,11 +47,16 @@ As you define the search query, the graph above the search fields updates.
     * **Monitor over measure**: If a [measure][6] is selected, the monitor alerts over the numerical value of the log facet (similar to a metric monitor) and aggregation needs to be selected (`min`, `avg`, `sum`, `median`, `pc75`, `pc90`, `pc95`, `pc98`, `pc99`, or `max`).
 3. Group logs by multiple dimensions (optional):
 
-   All logs matching the query are aggregated into groups based on the value of tags, attributes, and up to four facets. When there are multiple dimensions, the top values are determined according to the first dimension, then according to the second dimension within the top values of the first dimension, and so on up to the last dimension. Dimensions limit depends on the total number of dimension:
-   * **1 facet**: 1000 top values
-   * **2 facets**: 30 top values per facet (at most 900 groups)
-   * **3 facets**: 10 top values per facet (at most 1000 groups)
-   * **4 facets**: 5 top values per facet (at most 625 groups)
+   Datadog aggregates all logs matching the query into groups based on the values of tags, attributes, and up to four facets. When there are multiple dimensions, you can select the number of top or bottom values for each dimension.
+
+   The total limit, irrespective of the number of facets, is 1000 top values. If you increase this above 1000, Datadog adjusts the top values for the other dimensions to ensure the number of the resulting combinations is less than 1000. The default top values for every group-by is 10, with the exception of the fourth, which defaults to 5 top values.
+
+   As an example, a Log Monitor with four groupings on the search query could have:
+   * **First facet**: 10 top values
+   * **Second facet**: 10 top values
+   * **Third facet**: 5 top values
+   * **Fourth facet**: 2 top values
+
 4. Configure the alerting grouping strategy (optional):
     * **Simple-Alert**: Simple alerts aggregate over all reporting sources. You receive one alert when the aggregated value meets the set conditions. This works best to monitor a metric from a single host or the sum of a metric across many hosts. This strategy may be selected to reduce notification noise.
     * **Multi Alert**: Multi alerts apply the alert to each source according to your group parameters. An alerting event is generated for each group that meets the set conditions. For example, you could group `system.disk.in_use` by `device` to receive a separate alert for each device that is running out of space.

@@ -6,10 +6,10 @@ further_reading:
 - link: '/real_user_monitoring/correlate_with_other_telemetry/apm/'
   tag: 'Documentation'
   text: 'Learn how to connect RUM with APM traces'
-- link: '/real_user_monitoring/session_replay/browser/'
+- link: '/session_replay/browser/'
   tag: 'Documentation'
   text: 'Learn about Session Replay'
-- link: '/real_user_monitoring/session_replay/browser/developer_tools'
+- link: '/session_replay/browser/dev_tools'
   tag: 'Documentation'
   text: 'Learn about Browser Dev Tools'
 ---
@@ -70,7 +70,7 @@ The Frontend team may also be encouraged to implement an error message in the UI
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/session_replay/browser/
-[2]: /real_user_monitoring/session_replay/browser/developer_tools/
+[1]: /session_replay/browser/
+[2]: /session_replay/browser/dev_tools/
 [3]: /real_user_monitoring/connect_rum_and_traces
 [4]: https://app.datadoghq.com/rum/explorer

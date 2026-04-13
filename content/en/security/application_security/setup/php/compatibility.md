@@ -25,7 +25,7 @@ The minimum tracer version to get all supported App and API Protection capabilit
 | Docker      | {{< X >}}                |
 | Kubernetes  | {{< X >}}                |
 | Amazon ECS  | {{< X >}}                |
-| AWS Fargate |                          |
+| AWS Fargate | {{< X >}}                |
 | AWS Lambda  |                          |
 
 ## Language and framework compatibility

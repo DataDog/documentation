@@ -71,7 +71,7 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               title: "(Automated) Bump version",
-              body: "### Merge instructions\n- [x] Please merge after reviewing",
+              body: "### Merge instructions\n- **Please merge this PR after approving!**",
               head: "automatic-version-update/synthetics-worker",
               base: "master",
               maintainer_can_modify: true

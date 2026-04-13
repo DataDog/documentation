@@ -3,6 +3,9 @@ title: Fleet Automation
 description: "Centrally govern and remotely manage Datadog Agents and OpenTelemetry Collectors at scale with configuration views, upgrades, flare collection, and API key rotation."
 disable_toc: false
 further_reading:
+- link: https://www.datadoghq.com/blog/fleet-automation-central-configuration
+  tag: Blog
+  text: Centrally set up and scale monitoring of your infrastructure and apps with Datadog Fleet Automation
 - link: https://www.datadoghq.com/blog/manage-opentelemetry-collectors-with-datadog-fleet-automation
   tag: Blog
   text: Manage all your OpenTelemetry collectors with Datadog Fleet Automation
@@ -20,15 +23,11 @@ further_reading:
   text: "Centrally govern and remotely manage Datadog Agents at scale with Fleet Automation"
 ---
 
-<div class="alert alert-info">
-Fleet Automation for OpenTelemetry Collectors is currently in preview.
-</div>
-
 ## Overview
 
 Datadog Fleet Automation allows you to centrally govern and remotely manage Datadog Agents and OpenTelemetry (OTel) Collectors at scale to support your evolving observability needs.
 
-{{< img src="/agent/fleet_automation/fleet_automation2.png" alt="The fleet automation page" style="width:100%;" >}}
+{{< img src="/agent/fleet_automation/fleet-automation-main.png" alt="The fleet automation page" style="width:100%;" >}}
 
 ## Use cases
 
@@ -49,6 +48,11 @@ Fleet Automation enables you to centrally manage Datadog Agents across all your 
   - The Agent and Datadog Distribution of OTel Collector (DDOT) configuration view is enabled by default in Agent versions 7.47.0 or later. To enable Agent configuration manually, set `inventories_configuration_enabled` in your [Agent configuration file][2] to `true`. Alternatively, use the `DD_INVENTORIES_CONFIGURATION_ENABLED` environment variable.
   - The upstream OTel Collector configuration view is enabled by setting the [Datadog Extension][8] in your collector configuration file.
 - **View Agent integration configuration**: Agent integration configuration is enabled by default on Agent versions 7.49 or later. To enable Agent integration configuration manually, set `inventories_checks_configuration_enabled` in your [Agent configuration file][2] to `true`. Alternatively, use the environment variable `DD_INVENTORIES_CHECKS_CONFIGURATION_ENABLED`.
+
+### Fleet Automation API
+Fleet Automation provides a public API that allows you to programmatically view and manage Datadog Agents at scale. For full endpoint details and usage examples, see the [Fleet Automation API documentation][9]. 
+
+**Note**: The Fleet Automation API does not support all Datadog Agent configuration capabilities.
 
 <div class="alert alert-info">
 Remote management of Agents in containerized workloads is not supported.
@@ -71,16 +75,24 @@ For each OTel Collector, you can see:
 - The Collector version
 - The distribution of the Collector
 - The configuration YAML of the Collector
+- Pipeline visualization of the Collector
 
 ### Examine a Datadog Agent or OpenTelemetry Collector
-
 Selecting a Datadog Agent or OTel Collector gives you more information about it, including its configuration, connected integrations, audit events, and a support tab that you can use to send a remote flare.
 
 {{< img src="agent/fleet_automation/fleet-automation-view-config.png" alt="An Agent's integration information" style="width:100%;" >}}
 
+### Visualize an OTel Collector Pipeline
+The **Pipeline Visualization** toggle in the **Configurations** tab of an OTel Collector provides a pipeline view of the Collector. Use Pipeline Visualization to:
+- Validate telemetry routing between configured OTel Collector components.
+- Spot unexpected data drops along the OTel Collector pipeline.
+- Inspect specific component configuration YAML snippets by hovering over any component.
+
+{{< img src="/agent/fleet_automation/fleet-automation-pipeline-view.png" alt="OTel Collector pipeline view" style="width:100%;" >}}
+
 ### View Agent Audit Trail events
 
-The Audit Events tab displays Audit Trail events associated with the selected Agent.
+The **Audit Events** tab displays Audit Trail events associated with the selected Agent.
 Use this tab to:
 - Identify configuration changes, API key updates, installs, upgrades and support flares.
 - Determine when changes were made and from where
@@ -120,3 +132,4 @@ For information on setting up roles and permissions, see [Access Control][5].
 [6]: /agent/fleet_automation/remote_management/
 [7]: /agent/troubleshooting/send_a_flare/#send-a-flare-from-the-datadog-site
 [8]: https://docs.datadoghq.com/opentelemetry/integrations/datadog_extension/#setup
+[9]: https://docs.datadoghq.com/api/latest/fleet-automation/

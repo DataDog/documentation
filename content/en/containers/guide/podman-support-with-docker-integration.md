@@ -52,7 +52,7 @@ Agent versions 7.54.0 and greater can autodetect the Podman DB if the proper `co
         -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
         -e DD_API_KEY=<API_KEY> \
         -e DD_HOSTNAME=<DD_HOSTNAME> \
-        gcr.io/datadoghq/agent:latest
+        registry.datadoghq.com/agent:latest
       ```
 
     1. To deploy the Agent with log collection run the agent as follows:
@@ -67,7 +67,7 @@ Agent versions 7.54.0 and greater can autodetect the Podman DB if the proper `co
            -e DD_LOGS_ENABLED=true \
            -e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true \
            -e DD_LOGS_CONFIG_USE_PODMAN_LOGS=true \
-           gcr.io/datadoghq/agent:latest
+           registry.datadoghq.com/agent:latest
        ```
 
 **Note:** The Datadog Agent can only collect logs for Podman containers started with `--log-driver=k8s-file`.
@@ -98,7 +98,7 @@ Podman versions 4.8 or greater use SQLite as the default database backend, and B
        -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
        -e DD_API_KEY=<API_KEY> \
        -e DD_HOSTNAME=<DD_HOSTNAME> \
-       gcr.io/datadoghq/agent:latest
+       registry.datadoghq.com/agent:latest
     ```
 
 {{% /tab %}}
@@ -125,7 +125,7 @@ Podman versions below 4.8 use BoltDB as the default database backend.
        -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
        -e DD_API_KEY=<API_KEY> \
        -e DD_HOSTNAME=<DD_HOSTNAME> \
-       gcr.io/datadoghq/agent:latest
+       registry.datadoghq.com/agent:latest
     ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -155,7 +155,7 @@ sudo podman run -d --name dd-agent \
     -e DD_API_KEY=<API_KEY> \
     -e DD_HOSTNAME=<DD_HOSTNAME> \
     -e DOCKER_HOST=unix:///run/podman/podman.sock \
-    gcr.io/datadoghq/agent:latest
+    registry.datadoghq.com/agent:latest
 ```
 
 In both cases the Agent should detect all the containers managed by root and emit `container.*` metrics for all of them.

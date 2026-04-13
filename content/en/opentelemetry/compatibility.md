@@ -35,7 +35,7 @@ The following table shows feature compatibility across different setups:
 | [Runtime Metrics][23] | {{< X >}} | {{< X >}}<br>(Java, .NET, Go only) | {{< X >}}<br>(Java, .NET, Go only) | {{< X >}}<br>(Java, .NET, Go only) |
 | [Span Links][25] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
 | [Trace Metrics][26] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}}<br>({{< tooltip text="Sampled" tooltip="Calculated from spans that reach Datadog; reflects any OTel-side sampling you configure." >}}) |
-| [Database Monitoring][14] (DBM) | {{< X >}} | {{< X >}} | {{< X >}} |  |
+| [Database Monitoring][14] (DBM) | {{< X >}} | {{< X >}} |  |  |
 | [Infrastructure Host List][30] | {{< X >}} | {{< X >}} | {{< X >}} |  |
 | [Cloud Network Monitoring][21] (CNM) | {{< X >}} | {{< X >}} | | |
 | [Live Container Monitoring/Kubernetes Explorer][20] | {{< X >}} | {{< X >}} | | |
@@ -43,23 +43,23 @@ The following table shows feature compatibility across different setups:
 | [Universal Service Monitoring][17] (USM) | {{< X >}} | {{< X >}} | | |
 | [App and API Protection][11] (AAP) | {{< X >}} | | | |
 | [Continuous Profiler][12] | {{< X >}} | | | |
-| [Data Jobs Monitoring][13] (DJM) | {{< X >}} | | | |
+| [Data Observability: Jobs Monitoring][13] (DJM) | {{< X >}} | | | |
 | [Data Streams Monitoring][15] (DSM) | {{< X >}} | | {{< tooltip text="N/A" tooltip="OTel does not offer DSM functionality" >}} | {{< tooltip text="N/A" tooltip="OTel does not offer DSM functionality" >}} |
 | [Real User Monitoring][22] (RUM) | {{< X >}} | | | |
 | [Source code integration][24] | {{< X >}} | | | |
 
 ## API support
 
-Datadog provides support for the OpenTelemetry Traces, Metrics, and Logs APIs across various languages. Find your language in the table below for setup guides and support details.
+Datadog SDKs provide support for the OpenTelemetry Traces, Metrics, and Logs APIs across various languages. Find your language in the table below for setup guides and support details.
 
 | Language | Traces API | Metrics API | Logs API |
 | :--- | :---: | :---: | :---: |
 | [.NET][31] | {{< X >}} | {{< X >}} | {{< X >}} |
 | [Python][32] | {{< X >}} | {{< X >}} | {{< X >}} |
-| [Node.js][33] | {{< X >}} | *Not Yet Supported* | {{< X >}} |
+| [Node.js][33] | {{< X >}} | {{< X >}} | {{< X >}} |
 | [Java][34] | {{< X >}} | *Not Yet Supported* | *Not Yet Supported* |
 | [Go][35] | {{< X >}} | *Not Yet Supported* | *Not Yet Supported* |
-| [Ruby][36] | {{< X >}} | *Not Yet Supported* | *Not Yet Supported* |
+| [Ruby][36] | {{< X >}} | Alpha | *Not Yet Supported* |
 | [PHP][37] | {{< X >}} | *Not Yet Supported* | *Not Yet Supported* |
 
 ## More details
@@ -70,7 +70,8 @@ OpenTelemetry traces that have [generative AI attributes](https://opentelemetry.
 
 ### Runtime metrics
 
-Setups using the OpenTelemetry SDK follow the [OpenTelemetry Runtime Metrics][1] specification.
+- **Datadog SDK setups**: Emit [Runtime Metrics][23] using DogStatsD (UDP port 8125). Ensure DogStatsD is enabled in your Datadog Agent.
+- **OpenTelemetry SDK setups**: Follow the [OpenTelemetry Runtime Metrics][1] specification and are typically sent using OTLP (port 4317/4318).
 
 ### Real User Monitoring (RUM)
 
@@ -85,6 +86,16 @@ For more information, see [Cloud Network Monitoring Setup][3].
 ### Source Code Integration
 
 For unsupported languages in OpenTelemetry setups, [configure telemetry tagging][5] to link data to a specific commit.
+
+## Support levels
+
+Datadog provides different levels of support for OpenTelemetry components and configurations:
+
+- **Datadog Supported Components**: Datadog-owned components such as the [Datadog Connector][39], [Datadog Exporter][40], and [Infra Attribute Processor][41]. These components are maintained by Datadog, receive regular updates, and are prioritized for bug fixes and feature enhancements.
+
+- **Community Supported Components**: OpenTelemetry components [included with the DDOT Collector][42] by default. Datadog helps ensure these components are secure, stable, and compatible.
+
+- **Custom Components**: OpenTelemetry components or configurations not included by default, such as [custom Collector components][43] or [instrumentation of unsupported runtimes][44]. Datadog provides guidance and documentation as a starting point but does not directly support these components' functionality. For issues with custom components, engage with the [OpenTelemetry community][45] or the component maintainers.
 
 ## Platform and environment support
 
@@ -143,3 +154,10 @@ When using Datadog and OpenTelemetry together, Datadog recommends the following 
 [36]: /opentelemetry/instrument/api_support/ruby/
 [37]: /opentelemetry/instrument/api_support/php/
 [38]: /llm_observability/instrumentation/otel_instrumentation/
+[39]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/connector/datadogconnector/README.md
+[40]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/README.md
+[41]: https://github.com/DataDog/datadog-agent/tree/main/comp/otelcol/otlp/components/processor/infraattributesprocessor#readme
+[42]: /opentelemetry/setup/ddot_collector/#opentelemetry-collector-components
+[43]: /opentelemetry/setup/ddot_collector/custom_components
+[44]: /opentelemetry/guide/instrument_unsupported_runtimes
+[45]: https://opentelemetry.io/community/

@@ -6,6 +6,9 @@ aliases:
     - /monitors/create/types/anomaly/
 description: "Detects anomalous behavior for a metric based on historical data"
 further_reading:
+- link: "https://www.datadoghq.com/blog/velocloud-sdwan-integration"
+  tag: "Blog"
+  text: "Monitor Arista VeloCloud SD-WAN performance with Datadog"
 - link: "/monitors/notify/"
   tag: "Documentation"
   text: "Configure your monitor notifications"
@@ -177,7 +180,7 @@ avg(<query_window>):anomalies(<metric_query>, '<algorithm>', <deviations>, direc
 ```
 
 `query_window`
-: A timeframe like `last_4h` or `last_7d`. The time window displayed in graphs in notifications. Must be at least as large as the `alert_window` and is recommended to be around 5 times the `alert_window`.
+: A time frame like `last_4h` or `last_7d`. This parameter controls the time range of data shown in notification graphs. The `query_window` determines how much historical data appears in the visualization but does not affect alert evaluation. Datadog recommends the `query_window` to be around five times the `alert_window` to provide additional context. **Note**: The `query_window` must be at least as large as the `alert_window`. 
 
 `metric_query`
 : A standard Datadog metric query (for example, `sum:trace.flask.request.hits{service:web-app}.as_count()`).
@@ -211,6 +214,10 @@ Below is an example query for an anomaly detection monitor, which alerts when th
 ```text
 avg(last_1h):anomalies(avg:system.cpu.system{name:cassandra}, 'basic', 3, direction='above', alert_window='last_5m', interval=20, count_default_zero='true') >= 1
 ```
+
+This query uses `avg` in two places:
+- `avg(last_1h)` - Aggregates anomaly data points over the query window for notification graphs
+- `avg:system.cpu.system{name:cassandra}` - Aggregates the CPU metric across Cassandra nodes before anomaly detection
 
 ### `options`
 

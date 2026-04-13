@@ -1,107 +1,57 @@
 ---
 app_id: harbor
-app_uuid: a4aae6fb-1865-42d0-be03-78e98b7e4b22
-assets:
-  dashboards:
-    Harbor Overview: assets/dashboards/overview.json
-  integration:
-    auto_install: true
-    configuration:
-      spec: assets/configuration/spec.yaml
-    events:
-      creates_events: false
-    metrics:
-      check: harbor.projects.count
-      metadata_path: metadata.csv
-      prefix: harbor.
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 10063
-    source_type_name: Harbor
-author:
-  homepage: https://www.datadoghq.com
-  name: Datadog
-  sales_email: info@datadoghq.com
-  support_email: help@datadoghq.com
 categories:
-- ㅊ
+- 컨테이너
 - 로그 수집
-custom_kind: integration
-dependencies:
-- https://github.com/DataDog/integrations-core/blob/master/harbor/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: harbor
-integration_id: harbor
-integration_title: Harbor
-integration_version: 5.1.0
-is_public: true
-manifest_version: 2.0.0
-name: harbor
-public_title: Harbor
-short_description: Harbor 컨테이너 레지스트리 상태 모니터링
+custom_kind: 통합
+description: Harbor 컨테이너 레지스트리 상태 모니터링
+integration_version: 6.0.0
+media: []
 supported_os:
-- 리눅스
+- linux
 - macos
 - windows
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Containers
-  - Category::Log Collection
-  - 제공::통합
-  configuration: README.md#Setup
-  description: Harbor 컨테이너 레지스트리 상태 모니터링
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: Harbor
+title: Harbor
 ---
-
-<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
-
-
 ## 개요
 
-이 점검은 Datadog 에이전트를 통해 [Harbor][1]를 모니터링합니다.
+본 점검은 Datadog Agent를 통해 [Harbor](https://goharbor.io)를 모니터링합니다.
 
 ## 설정
 
 ### 설치
 
-Harbor 점검은 [Datadog 에이전트 ][2] 패키지에 포함되어 있습니다. 서버에 추가 설치가 필요하지 않습니다.
+Harbor 점검은 [Datadog Agent](https://app.datadoghq.com/account/settings/agent/latest) 패키지에 포함되어 있어 서버에 추가로 설치할 필요가 없습니다.
 
-### 구성
+### 설정
 
 {{< tabs >}}
+
 {{% tab "Host" %}}
 
 #### 호스트
 
-호스트에서 실행 중인 에이전트에 대해 이 점검을 구성하려면:
+호스트에서 실행 중인 에이전트에 이 점검을 구성하는 방법:
 
 ##### 메트릭 수집
 
-1. [에이전트의 설정 디렉토리][1]의 루트의 `conf.d/` 폴더에 있는 `harbor.d/conf.yaml` 파일을 편집하여 Harbor 성능 데이터 수집을 시작합니다. 사용 가능한 모든 설정 옵션은 [harbor.d/conf.yaml 샘플][2]을 참조하세요.
+1. Harbor 성능 데이터 수집을 시작하려면 [Agent 설정 디렉터리](https://docs.datadoghq.com/agent/guide/agent-configuration-files/)의 루트에 있는 `conf.d/` 폴더에서 `harbor.d/conf.yaml` 파일을 편집합니다. 모든 가용 설정 옵션을 보려면 [샘플 harbor.d/conf.yaml](https://github.com/DataDog/integrations-core/blob/master/harbor/datadog_checks/harbor/data/conf.yaml.example)을 참조하세요.
 
-    **참고**: 설정에서 모든 유형의 사용자를 지정할 수 있지만 디스크 메트릭을 가져오려면 관리자 권한이 있는 계정이 필요합니다. `harbor.projects.count`는 제공된 사용자가 액세스할 수 있는 프로젝트 수만 반영합니다.
+   **참고**: 설정에서 모든 유형의 사용자를 지정할 수 있지만 디스크 메트릭을 가져오려면 관리자 권한이 있는 계정이 필요합니다. `harbor.projects.count` 메트릭은 지정된 사용자가 액세스할 수 있는 프로젝트 수만 반영합니다.
 
-2. [에이전트를 재시작][3]하세요.
+1. [Agent를 다시 시작합니다](https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent).
 
 ##### 로그 수집
 
-_Agent 버전 6.0 이상에서 사용 가능_
+_에이전트 버전 > 6.0에서 사용 가능_
 
-1. Datadog Agent에서는 로그 수집이 기본적으로 비활성화되어 있습니다. `datadog.yaml` 파일에서 활성화해야 합니다.
+1. Datadog 에이전트에서는 로그 수집이 기본적으로 비활성화되어 있습니다. `datadog.yaml` 파일에서 활성화해야 합니다.
 
    ```yaml
    logs_enabled: true
    ```
 
-2. `harbor.d/conf.yaml` 파일에 이 설정 블록을 추가하여 Harbor 로그 수집을 시작하세요.
+1. `harbor.d/conf.yaml` 파일에 이 설정 블록을 추가하여 Harbor 로그 수집을 시작하세요.
 
    ```yaml
      logs:
@@ -111,17 +61,15 @@ _Agent 버전 6.0 이상에서 사용 가능_
          service: '<SERVICE_NAME>'
    ```
 
-3. [에이전트를 재시작][3]하세요.
+1. [Agent를 다시 시작합니다](https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent).
 
-[1]: https://docs.datadoghq.com/ko/agent/guide/agent-configuration-files/
-[2]: https://github.com/DataDog/integrations-core/blob/master/harbor/datadog_checks/harbor/data/conf.yaml.example
-[3]: https://docs.datadoghq.com/ko/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
+
 {{% tab "컨테이너화" %}}
 
-#### 컨테이너화
+#### 컨테이너화된 환경
 
-컨테이너화된 환경의 경우 [자동탐지 통합 템플릿][1]에 다음 파라미터를 적용하는 방법이 안내되어 있습니다.
+컨테이너화된 환경의 경우 [Autodiscovery 통합 템플릿](https://docs.datadoghq.com/agent/kubernetes/integrations/)에 아래 파라미터를 적용하는 방법이 안내되어 있습니다.
 
 ##### 메트릭 수집
 
@@ -133,44 +81,57 @@ _Agent 버전 6.0 이상에서 사용 가능_
 
 ##### 로그 수집
 
-_Agent 버전 6.0 이상에서 사용 가능_
+_에이전트 버전 > 6.0에서 사용 가능_
 
-Datadog Agent에서 로그 수집은 기본값으로 비활성화되어 있습니다. 이를 활성화하려면 [쿠버네티스(Kubernetes) 로그 수집][2]을 참조하세요.
+Datadog Agent에서는 로그 수집 기능이 기본적으로 비활성화되어 있습니다. 활성화하려면 [Kubernetes 로그 수집](https://docs.datadoghq.com/agent/kubernetes/log/)을 참고하세요.
 
 | 파라미터      | 값                                               |
 | -------------- | --------------------------------------------------- |
 | `<LOG_CONFIG>` | `{"source": "harbor", "service": "<SERVICE_NAME>"}` |
 
-[1]: https://docs.datadoghq.com/ko/agent/kubernetes/integrations/
-[2]: https://docs.datadoghq.com/ko/agent/kubernetes/log/
 {{% /tab %}}
+
 {{< /tabs >}}
 
 ### 검증
 
-[에이전트의 상태 하위 명령을 실행][3]하고 점검 섹션에서 `harbor`을 찾습니다.
+[Agent 상태 하위 명령](https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information)을 실행하고 Checks 섹션에서 `harbor`을 찾습니다.
 
 ## 수집한 데이터
 
-### 메트릭
-{{< get-metrics-from-git "harbor" >}}
+### Metrics
 
+| | |
+| --- | --- |
+| **harbor.disk.free** <br>(gauge) | 사용 가능한 스토리지 공간의 양.<br>_byte로 표시됨_ |
+| **harbor.disk.total** <br>(gauge) | 총 스토리지 공간의 양.<br>_byte로 표시됨_ |
+| **harbor.projects.count** <br>(gauge) | 총 프로젝트의 수.|
+| **harbor.registry.read_only** <br>(gauge) | 레지스트리의 '읽기 전용' 상태.|
 
 ### 이벤트
 
 Harbor 통합은 이벤트를 포함하지 않습니다.
 
 ### 서비스 점검
-{{< get-service-checks-from-git "harbor" >}}
 
+**harbor.can_connect**
+
+Harbor API에 연결할 수 있고 인증에 성공하면 `OK`를, 아니면`CRITICAL`을 반환합니다.
+
+_상태: ok, critical_
+
+**harbor.status**
+
+지정된 Harbor 컴포넌트가 정상이면 `OK`를 , 아니면 `CRITICAL`을 반환합니다. Harbor \< 1.5면 `UNKNOWN`을 반환합니다.
+
+_상태: ok, unknown, critical_
+
+**harbor.registry.status**
+
+서비스가 정상인 경우 `OK`를, 그렇지 않으면 `CRITICAL`을 반환합니다. Harbor가 복제에 사용하는 외부 레지스트리 상태를 모니터링합니다.
+
+_상태: ok, critical_
 
 ## 트러블슈팅
 
-도움이 필요하신가요? [Datadog 지원 팀][4]에 문의하세요.
-
-
-
-[1]: https://goharbor.io
-[2]: https://app.datadoghq.com/account/settings/agent/latest
-[3]: https://docs.datadoghq.com/ko/agent/guide/agent-commands/#agent-status-and-information
-[4]: https://docs.datadoghq.com/ko/help/
+도움이 필요하세요? [Datadog 지원 팀](https://docs.datadoghq.com/help/)에 문의하세요.

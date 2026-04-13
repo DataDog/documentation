@@ -4,6 +4,9 @@ description: "Use automated testing to ensure the most critical parts of your sy
 aliases:
   - /integrations/synthetics/
 further_reading:
+- link: "https://www.datadoghq.com/blog/rum-product-analytics-bridging-teams"
+  tag: "Blog"
+  text: "From performance to impact: Bridging frontend teams through shared context"
 - link: "https://app.datadoghq.com/release-notes?category=Synthetic%20Monitoring"
   tag: "Release Notes"
   text: "Check out the latest Datadog Synthetic Monitoring releases! (App login required)"
@@ -79,7 +82,7 @@ Create [Synthetic network path tests][25] from managed locations to perform TCP,
 {{< img src="synthetics/network_tests/syn_network_path.png" alt="Examples of a Synthetic TCP network test" style="width:100%;">}}
 ## Test suites
 
-Use [Synthetic Test Suites][25] to organize multiple tests into logical collections grouped by user journey, environment, location, service, or team for streamlined management and troubleshooting. 
+Use [Synthetic Test Suites][26] to organize multiple tests into logical collections grouped by user journey, environment, location, service, or team for streamlined management and troubleshooting. 
 
 {{< img src="synthetics/test_suites/test_suite_summary.png" alt="Synthetic Monitoring Test Suite summary page" style="width:100%;">}}
 
@@ -169,4 +172,4 @@ See [Getting Started with Synthetic Monitoring][18] for instructions on creating
 [23]: /synthetics/guide/version_history/
 [24]: /synthetics/notifications/
 [25]: /synthetics/network_path_tests/
-[25]: /synthetics/test_suites/
+[26]: /synthetics/test_suites/

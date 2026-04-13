@@ -2,13 +2,16 @@
 title: Set Up Your Mobile Device for Datadog On-Call
 description: "Configure your mobile device for reliable on-call notifications with critical alerts, Do Not Disturb bypass, and telephony contact setup."
 further_reading:
-- link: "https://docs.datadoghq.com/service_management/on-call/"
+- link: "https://docs.datadoghq.com/incident_response/on-call/"
   tag: "Documentation"
   text: "On-Call Documentation"
 - link: "https://docs.datadoghq.com/service_management/mobile/"
   tag: "Documentation"
   text: "Mobile App Documentation"
 ---
+<div class="alert alert-info">
+If you only need to access On-Call on mobile and want to restrict access to sensitive telemetry data on mobile devices, contact Datadog support.
+</div>
 
 Being on-call requires reliable and timely notifications to ensure you can respond to incidents effectively. This guide walks you through the steps to configure your mobile device for optimal performance with [Datadog On-Call][5].
 
@@ -94,12 +97,12 @@ You can override your device's system volume and Do Not Disturb mode for both pu
 
 4. In order to override system volume, tap the **Override system volume** and allow **Mode access** in System Settings to toggle on **Override system volume**.
 
-5. On web, set up notifciation preferences for **High Urgency Notifications** and/or **Low Urgency Notifications**.
+5. On web, set up notification preferences for **High Urgency Notifications** and/or **Low Urgency Notifications**.
 
 6. Test the setup of your critical push notification by tapping **Test push notifications**.
 
 <div class="alert alert-warning">
-On Android, the Datadog mobile app cannot bypass system volume or Do Not Disturb settings when used within a Work Profile. As a workaround, install the Datadog mobile app on your personal profile.
+On Android, the Datadog mobile app cannot bypass system volume or Do Not Disturb settings when used within a Work Profile. Datadog recommends installing the Datadog mobile app on your personal profile, subject to your organization's policies.
 </div>
 
 {{% /tab %}}
@@ -213,4 +216,4 @@ For help with troubleshooting, [contact Datadog support][2]. You can also send a
 [2]: /help/
 [3]: https://chat.datadoghq.com/
 [4]: https://datadoghq.slack.com/archives/C0114D5EHNG
-[5]: /service_management/on-call/
+[5]: /incident_response/on-call/

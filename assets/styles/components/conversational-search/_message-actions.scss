@@ -1,0 +1,114 @@
+// Message action buttons (thumbs up/down, copy) + inline feedback
+.conv-search-message-actions {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 8px;
+    margin-top: 28px;
+
+    @media (max-width: 640px) {
+        gap: 4px;
+        margin-top: 16px;
+    }
+}
+
+.conv-search-action-btn {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    padding: 10px;
+    border: 1px solid $conv-neutral-400;
+    border-radius: 20px;
+    background: transparent;
+    color: $conv-neutral-700;
+    cursor: pointer;
+    overflow: hidden;
+    transition: background 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
+
+    &:hover {
+        background: rgba(0, 0, 0, 0.03);
+        border-color: $conv-neutral-500;
+    }
+
+    &:active {
+        transform: scale(0.92);
+    }
+
+    &.active {
+        background: rgba($conv-search-purple, 0.08);
+        border-color: $conv-primary-300;
+
+        &:hover {
+            background: rgba($conv-search-purple, 0.12);
+        }
+
+        img,
+        svg {
+            filter: invert(20%) sepia(77%) saturate(1858%) hue-rotate(258deg) brightness(75%) contrast(96%);
+        }
+    }
+
+    svg,
+    img {
+        width: 16px;
+        height: 16px;
+    }
+}
+
+.conv-search-feedback-inline {
+    margin-left: 4px;
+    min-height: 18px;
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.3;
+    opacity: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    transition: opacity 0.15s ease, background 0.15s ease;
+
+    &.feedback-success,
+    &.feedback-error {
+        opacity: 1;
+        animation: conv-search-feedback-reveal 0.28s ease-out;
+    }
+
+    &.feedback-success {
+        color: #3d2a5a;
+        background: rgba($conv-search-purple, 0.1);
+    }
+
+    &.feedback-error {
+        color: #9f1f17;
+        background: rgba(#c0392b, 0.12);
+    }
+}
+
+@keyframes conv-search-feedback-reveal {
+    from {
+        opacity: 0;
+        clip-path: inset(0 100% 0 0);
+        transform: translateX(-4px);
+    }
+
+    to {
+        opacity: 1;
+        clip-path: inset(0 0 0 0);
+        transform: translateX(0);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .conv-search-feedback-inline {
+        transition: none;
+    }
+
+    .conv-search-feedback-inline.feedback-success,
+    .conv-search-feedback-inline.feedback-error {
+        animation: none;
+    }
+}

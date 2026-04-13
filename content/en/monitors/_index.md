@@ -26,6 +26,12 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/ecs-default-monitors/"
     tag: "Blog"
     text: "Catch and remediate ECS issues faster with default monitors and the ECS Explorer"
+  - link: "https://www.datadoghq.com/blog/zendesk-cost-optimization"
+    tag: "Blog"
+    text: "Optimizing Datadog at scale: Cost-efficient observability at Zendesk"
+  - link: "https://www.datadoghq.com/blog/human-name-detection"
+    tag: "Blog"
+    text: "Detect human names in logs with ML in Sensitive Data Scanner"
 cascade:
     algolia:
         rank: 70

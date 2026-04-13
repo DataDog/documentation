@@ -42,7 +42,7 @@ Use custom metrics from spans for:
 
 Datadog allows you to generate metrics from [Trace Queries][15].
 
-{{< callout url="https://help.datadoghq.com/hc/en-us/requests/new" header="Request access to the Preview!" >}}
+{{< callout url="https://www.datadoghq.com/product-preview/metrics-from-traces/" header="Request access to the Preview!" >}}
 Custom metrics from traces are in Preview. To request access, submit a ticket to the APM Support team and provide a short description of your use case.
 {{< /callout >}}
 

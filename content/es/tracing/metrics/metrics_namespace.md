@@ -9,6 +9,9 @@ description: Guía completa de las métricas de trazas de APM, incluido el espac
   nombres, los tipos (aciertos, errores, latencia, Apdex) y cómo se calculan a partir
   del tráfico de la aplicación.
 further_reading:
+- link: tracing/trace_pipeline/generate_metrics/
+  tag: Documentación
+  text: Crear métricas personalizadas a partir de tus tramos ingeridos
 - link: tracing/trace_collection/
   tag: Documentación
   text: Aprender a configurar el rastreo de APM con tu aplicación

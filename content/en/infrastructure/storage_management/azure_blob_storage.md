@@ -15,24 +15,22 @@ further_reading:
 
 ## Setup
 
+<div class="alert alert-info">Azure Marketplace integration is not supported with Storage Management. You must use an <a href="/integrations/azure">App Registration</a> to connect Azure to Datadog.</div>
+
 {{< tabs >}}
+
 {{% tab "Azure CLI" %}}
 
-Enable inventories for the selected storage accounts in each subscription by running the following script in your [Azure Cloud Shell][301]:
-
-```shell
-curl https://datadogstoragemonitoring.blob.core.windows.net/scripts/install.sh \
-  | bash -s -- <CLIENT_ID> <SUBSCRIPTION_ID> <COMMA_SEPARATED_STORAGE_ACCOUNT_NAMES>
-```
-
-Before running the script, set your [shell environment][302] to Bash and replace the various placeholder inputs with the correct values:
-- `<CLIENT_ID>`: The client ID of an App Registration already set up using the [Datadog Azure integration][302]
-- `<SUBSCRIPTION_ID>`: The subscription ID of the Azure subscription containing the storage accounts
-- `<COMMA_SEPARATED_STORAGE_ACCOUNT_NAMES>`: A comma-separated list of the storage accounts you want to monitor (for example, `storageaccount1,storageaccount2`)
+1. Go to **Storage Management** > **Azure Blob Storage** > [**Enable buckets**][304].
+2. Select the storage accounts you want to enable for Storage Management.
+3. Run the CLI commands in your [Azure Cloud Shell][301] generated at the bottom of the table. Before running the script, set your shell environment to Bash. 
+4. After running the script, click **Confirm** and wait 24-48 hours for Storage Management metrics to become available.
 
 [301]: https://shell.azure.com
 [302]: /integrations/azure/#setup
 [303]: https://learn.microsoft.com/en-us/azure/cloud-shell/get-started/classic?tabs=azurecli#select-your-shell-environment
+[304]: https://app.datadoghq.com/storage-management?mConfigure=true&mView=azure
+
 {{% /tab %}}
 
 {{% tab "Azure Portal" %}}
@@ -74,16 +72,13 @@ For Each Storage Account you wish to monitor, follow all of the steps here:
     - Members: Click **+ Select members** and search for your App Registration by its name and select it.
     - **Note**: This should be an App Registration set up in the Datadog Azure integration. Keep in mind the Client ID for later.
 7.  Click **Review + assign**.
+8.  Go to **Datadog** > **Storage Management** > **Azure Blob Storage** > [**Enable buckets**][401]. Select the storage accounts you enabled inventory on and click **Confirm**.
+
+[401]: https://app.datadoghq.com/storage-management?mConfigure=true&mView=azure
 
 {{% /tab %}}
 {{< /tabs >}}
 
-### Post-Installation
-
-After you finish with the above steps, fill out the [post-setup form][1].
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
-[1]: https://forms.gle/WXFbGyBwWfEo3gbM7

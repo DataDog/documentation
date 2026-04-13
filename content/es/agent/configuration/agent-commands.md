@@ -7,6 +7,8 @@ aliases:
 - /es/agent/faq/start-stop-restart-the-datadog-agent
 - /es/agent/faq/agent-commands
 - /es/agent/guide/agent-commands
+description: Referencia completa de los comandos del Datadog Agent para iniciar, detener,
+  solucionar problemas y gestionar el Agent.
 further_reading:
 - link: /agent/troubleshooting/
   tag: Documentación
@@ -15,7 +17,7 @@ title: Comandos del Agent
 ---
 
 <div class="alert alert-danger">
-En sistemas basados en Linux en los que no se encuentre disponible el comando del contenedor <code>service</code>, <a href="/agent/faq/agent-v6-changes/?tab=linux#service-lifecycle-commands">consulta la lista de alternativas</a>.
+Para sistemas basados en Linux en los que no esté disponible el comando del envoltorio de <code>servicios</code>, <a href="/agent/faq/agent-v6-changes/?tab=linux#service-lifecycle-commands">consulta la lista de alternativas</a>.
 </div>
 
 ## Iniciar, detener y reiniciar el Agent
@@ -57,8 +59,8 @@ Lista de comandos para reiniciar el Datadog Agent:
 | Linux      | Consulta la [documentación sobre el Agent][1] correspondiente a tu sistema operativo.                                    |
 | Docker     | Utiliza el [comando de instalación][2].                                               |
 | Kubernetes | `kubectl delete pod <AGENT POD NAME>`. Nota: El pod se reprograma automáticamente. |
-| macOS      | Detener y luego iniciar el Agent con <br>`launchctl stop com.datadoghq.agent`<br> `launchctl start com.datadoghq.agent`<br> o utilizar la aplicación systray |
-| Source     | *Plataforma no compatible*                                                           |
+| macOS      | Detener y luego iniciar el Agent con: <br>`launchctl stop com.datadoghq.agent`<br> `launchctl start com.datadoghq.agent`<br> o utilizar la aplicación systray |
+| Fuente     | *Plataforma no compatible*                                                           |
 | Windows    | Consulta la [documentación sobre el Windows Agent][3].                                        |
 
 

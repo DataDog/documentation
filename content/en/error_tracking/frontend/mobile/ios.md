@@ -394,7 +394,6 @@ github "DataDog/dd-sdk-ios"
 In Xcode, link the following frameworks:
 ```
 DatadogCrashReporting.xcframework
-CrashReporter.xcframework
 ```
 
 [1]: https://github.com/Carthage/Carthage
@@ -446,7 +445,7 @@ To enable app hang monitoring:
 
    See [Configure the app hang threshold](#configure-app-hang-threshold) for more guidance on setting this value.
 
-   Make sure you follow the steps below to get [deobfuscated stack traces](#step-6---get-deobfuscated-stack-traces), which transform cryptic memory addresses into readable function names and line numbers for effective debugging. 
+   Make sure you follow the steps below to get [deobfuscated stack traces](#step-6---get-deobfuscated-stack-traces), which transform cryptic memory addresses into readable function names and line numbers for effective debugging.
 
 {{% /collapse-content %}}
 

@@ -3,14 +3,14 @@ aliases:
 - /es/security/cloud_security_management/setup/csm_enterprise/cloud_accounts
 - /es/security/cloud_security_management/setup/csm_pro/cloud_accounts
 - /es/security/cloud_security_management/setup/cloud_accounts
-title: Despliegue Cloud Security con integraciones de la nube
+title: Despliega Cloud Security con integraciones de la nube
 ---
 
 Utiliza las siguientes instrucciones para activar Misconfigurations and Identity Risks (CIEM) en AWS, Azure y GCP.
 
 ## Activar la exploración de recursos
 
-Para activar la exploración de recursos para tus cuentas en la nube, primero debes configurar la integración y luego activar Cloud Security para cada cuenta de AWS, suscripción de Azure y proyecto de Google Cloud.
+Para activar el análisis de recursos para tus cuentas en la nube, primero debes configurar la integración y, a continuación, activar Cloud Security para cada cuenta de AWS, Azure y Google Cloud.
 
 {{< partial name="security-platform/CSW-billing-note.html" >}}
 
@@ -42,10 +42,9 @@ Para activar la exploración de recursos para tus cuentas en la nube, primero de
 {{< tabs >}}
 {{% tab "AWS" %}}
 
-1. En la page (página) [**Cloud Security Setup** (Configuración de Cloud Security)][1], haz clic en **Cloud Integrations** (Integraciones en la nube).
-1. Amplía la sección **AWS**.
-1. Para detener la recopilación de recursos para una cuenta, haz clic en el botón **Edit** (Editar) ({{< img src="security/csm/setup/edit-button.png" inline="true" style="width:24px;">}}) y cambia la alternancia **Enable Resource Scanning** (Activar Exploración de recursos) a la posición desactivada.
-1. Haz clic en **Done** (Listo).
+1. En la page (página) [**Cloud Security Setup**][1] (Configuración de Cloud Security), haz clic en **Cloud Integrations** > **AWS** (Integraciones en la nube > AWS).
+2. Si es necesario, utiliza filtros para buscar la cuenta para la que deseas detener el análisis de recursos. Haz clic en la cuenta para abrir el panel lateral que contiene sus parámetros.
+3. En la pestaña **Features** (Funciones), junto a **Posture Management** (Gestión de la postura), cambia el conmutador **Enable** (Activar) a la posición de desactivado.
 
 [1]: https://app.datadoghq.com/security/configuration/csm/setup
 [2]: https://app.datadoghq.com/integrations/amazon-web-services
@@ -53,9 +52,8 @@ Para activar la exploración de recursos para tus cuentas en la nube, primero de
 {{% /tab %}}
 {{% tab "Azure" %}}
 
-1. En la Page (página) [**Cloud Security Setup** (Configuración de Cloud Security)][1], haz clic en **Cloud Integrations** (integraciones en la nube).
-1. Amplía la sección **Azure**.
-1. Para detener la recopilación de recursos para una suscripción, cambia a alternancia **Resource Scanning** (Exploración de recursos) a la posición desactivada.
+1. En la page (página) [**Cloud Security Setup**][1] (Configuración de Cloud Security), haz clic en **Cloud Integrations** > **Azure** (Integraciones en la nube > Azure).
+1. Para detener el análisis de recursos para una cuenta, cambia el conmutador **Resource Scanning** (Análisis de recursos) a la posición de desactivado.
 1. Haz clic en **Done** (Listo).
 
 [1]: https://app.datadoghq.com/security/configuration/csm/setup
@@ -64,14 +62,14 @@ Para activar la exploración de recursos para tus cuentas en la nube, primero de
 {{% /tab %}}
 {{% tab "Google Cloud" %}}
 
-1. En la page (página) [**Cloud Security Setup** (Configuración de Cloud Security)][1], haz clic en **Cloud Integrations** (Integraciones en la nube).
-1. Amplía la sección **GCP**.
-1. Para detener la recopilación de recursos para un proyecto, cambie la alternancia **Resource Scanning** (Exploración de recursos) a la posición desactivada.
+1. En la page (página) [**Cloud Security Setup**][1] (Configuración de Cloud Security), haz clic en **Cloud Integrations** > **GCP** (Integraciones en la nube > GCP).
+1. Para detener el análisis de recursos para una cuenta, cambia el conmutador **Resource Scanning** (Análisis de recursos) a la posición de desactivado.
 1. Haz clic en **Done** (Listo).
 
 [1]: https://app.datadoghq.com/security/configuration/csm/setup
 [2]: https://app.datadoghq.com/integrations/google-cloud-platform
 
-{{% /tab %}}{{< /tabs >}}
+{{% /tab %}}
+{{< /tabs >}}
 
 [1]: https://app.datadoghq.com/security/configuration/csm/setup

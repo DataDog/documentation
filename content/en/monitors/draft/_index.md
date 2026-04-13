@@ -13,10 +13,6 @@ further_reading:
   text: "Manage monitors"
 ---
 
-{{< callout url="#" btn_hidden="true" >}}
-Draft Monitors is in Preview.
-{{< /callout >}}
-
 ## Overview
 
 Draft Monitors let you safely create, refine, and test alerts without triggering notifications. 

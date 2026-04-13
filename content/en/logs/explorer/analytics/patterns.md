@@ -2,6 +2,9 @@
 title: Grouping Logs Into Patterns
 description: 'Group queried logs into patterns.'
 further_reading:
+- link: "https://www.datadoghq.com/blog/zendesk-cost-optimization"
+  tag: "Blog"
+  text: "Optimizing Datadog at scale: Cost-efficient observability at Zendesk"
 - link: 'logs/explorer/'
   tag: 'Documentation'
   text: 'Learn about the Log Explorer'

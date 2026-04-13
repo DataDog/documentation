@@ -60,9 +60,10 @@ jobs:
               pull_number: number,
             });
 
-            // Track latest review state per user
+            // Track latest review state per user (ignore commented state)
             const latestReviews = new Map();
             reviews.forEach(review => {
+              if (review.state === 'COMMENTED') return; 
               const existing = latestReviews.get(review.user.login);
               if (!existing || review.submitted_at > existing.submitted_at) {
                 latestReviews.set(review.user.login, review);
@@ -171,23 +172,34 @@ jobs:
           github-token: ${{ env.GITHUB_TOKEN }}
           script: |
             const { owner, repo, number } = context.issue;
-            const approvalStatus = '${{ needs.check-documentation-team-approval.outputs.approval_status }}' === 'true';
-            const teamRequested = '${{ needs.check-documentation-team-approval.outputs.team_requested }}' === 'true';
-            
+            const rawApprovalStatus = '${{ needs.check-documentation-team-approval.outputs.approval_status }}';
+            const rawTeamRequested = '${{ needs.check-documentation-team-approval.outputs.team_requested }}';
+
             // Debug logging
             console.log('Raw outputs from first job:');
-            console.log('approval_status:', '${{ needs.check-documentation-team-approval.outputs.approval_status }}');
-            console.log('team_requested:', '${{ needs.check-documentation-team-approval.outputs.team_requested }}');
+            console.log('approval_status:', rawApprovalStatus);
+            console.log('team_requested:', rawTeamRequested);
+
+            // If the upstream job was cancelled or produced no outputs, skip the
+            // status update so we don't overwrite a previous valid result.
+            if (!rawApprovalStatus && !rawTeamRequested) {
+              console.log('Upstream job was cancelled or produced no outputs. Skipping status update.');
+              return;
+            }
+
+            const approvalStatus = rawApprovalStatus === 'true';
+            const teamRequested = rawTeamRequested === 'true';
+
             console.log('Parsed values:');
             console.log('approvalStatus:', approvalStatus);
             console.log('teamRequested:', teamRequested);
-            
+
             // Get pull request details for commit SHA
             const { data: pr } = await github.rest.pulls.get({ owner, repo, pull_number: number });
-            
+
             // Create/update a consistent status check that both trigger types will update
             const statusState = (teamRequested && !approvalStatus) ? 'failure' : 'success';
-            const statusDescription = teamRequested 
+            const statusDescription = teamRequested
               ? (approvalStatus ? 'Documentation team has approved' : 'Documentation team approval required')
               : 'Documentation team review not required';
 

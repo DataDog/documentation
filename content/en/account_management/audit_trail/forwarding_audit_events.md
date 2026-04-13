@@ -61,13 +61,9 @@ Audit Event Forwarding allows you to send audit events from Datadog to custom de
 
 6. Enter a name for the destination.
 7. In the **Configure Destination** section, enter the following details:
-
-   a. The endpoint to which you want to send the logs. The endpoint must start with `https://`. An example endpoint for Elasticsearch: `https://<your_account>.us-central1.gcp.cloud.es.io`.
-
-   b. The name of the destination index where you want to send the logs.
-   
-   c. Optionally, select the index rotation for how often you want to create a new index: `No Rotation`, `Every Hour`, `Every Day`, `Every Week`, or `Every Month`. The default is `No Rotation`.
-
+   1. The endpoint to which you want to send the logs. The endpoint must start with `https://`. An example endpoint for Elasticsearch: `https://<your_account>.us-central1.gcp.cloud.es.io`.
+   1. The name of the destination index where you want to send the logs.   
+   1. Optionally, select the index rotation for how often you want to create a new index: `No Rotation`, `Every Hour`, `Every Day`, `Every Week`, or `Every Month`. The default is `No Rotation`.
 8. In the **Configure Authentication** section, enter the username and password for your Elasticsearch account.
 9. Click **Save**.
 

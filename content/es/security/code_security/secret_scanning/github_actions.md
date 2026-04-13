@@ -22,10 +22,10 @@ jobs:
     name: Datadog Static Analyzer
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - name: Check code meets quality standards
         id: datadog-static-analysis
-        uses: DataDog/datadog-static-analyzer-github-action@v1
+        uses: DataDog/datadog-static-analyzer-github-action@v3
         with:
           dd_app_key: ${{ secrets.DD_APP_KEY }}
           dd_api_key: ${{ secrets.DD_API_KEY }}
@@ -52,7 +52,6 @@ Puedes configurar los siguientes parámetros.
 | `cpu_count`  | Establece el número de CPUs utilizadas por el analizador.                                                                                                         | No      | `2`             |
 | `enable_performance_statistics` | Obtén las estadísticas de tiempo de ejecución de los archivos analizados.                                                                                                   | No      | `false`         |
 | `debug`      | Permite al analizador imprimir logs adicionales útiles para la depuración. Para activarlo, establece `yes`.                                                                  | No      | `no`            |
-| `architecture` | La arquitectura de CPU a utilizar para el analizador. Los valores admitidos son `x86_64` y `aarch64`.                                                              | No      | `x86_64`        |
 
 
 

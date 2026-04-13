@@ -31,6 +31,8 @@ This page describes how to set up and configure [Application Performance Monitor
 
 You can send traces over Unix Domain Socket (UDS), TCP (`IP:Port`), or Kubernetes service. Datadog recommends that you use UDS, but it is possible to use all three at the same time, if necessary.
 
+**Note**: For automatic instrumentation without manual configuration, see [Single Step Instrumentation for Kubernetes][13].
+
 ## Setup
 1. If you haven't already, [install the Datadog Agent][1] in your Kubernetes environment.
 2. [Configure the Datadog Agent](#configure-the-datadog-agent-to-collect-traces) to collect traces.
@@ -323,3 +325,4 @@ List of environment variables available for configuring APM:
 [10]: /tracing
 [11]: /tracing/guide/ignoring_apm_resources/?tab=kubernetes
 [12]: /agent/configuration/dual-shipping/
+[13]: /tracing/trace_collection/single-step-apm/kubernetes/

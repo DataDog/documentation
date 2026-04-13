@@ -25,11 +25,6 @@ The [Metrics Explorer][1] is a basic interface for examining your metrics in Dat
 
 ## Natural language queries
 
-{{< callout url="https://www.datadoghq.com/product-preview/natural-language-querying-for-metrics/">}}
-Natural Language Querying (NLQ) on the Metrics Explorer is in Preview. If you're interested in this feature, click <strong>Request Access</strong> and complete the form.
-{{< /callout >}}
-
-
 Use Natural Language Queries (NLQ) to describe what you're looking for in plain English. Datadog automatically translates your request into a structured metric query, understanding context such as your services, attributes, and tags. This makes it easier to explore metrics without needing to write complex syntax.
 
 To access this feature, click **Ask** in the search field and type your query.
@@ -100,7 +95,7 @@ For more information, see the [Quick Graphs][7] documentation.
 [5]: /metrics/introduction/#space-aggregation
 [6]: /dashboards/querying/#advanced-graphing
 [7]: /dashboards/guide/quick-graphs/
-[8]: /service_management/incident_management/
+[8]: /incident_response/incident_management/
 [9]: /monitors/
 [10]: /dashboards/
 [11]: /account_management/rbac/permissions/#access-management

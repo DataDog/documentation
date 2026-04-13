@@ -5,7 +5,7 @@ further_reading:
 - link: /product_analytics/
   tag: Documentación
   text: Análisis de productos
-title: Visualización con gráficos
+title: Gráficos
 ---
 
 ## Información general
@@ -48,4 +48,4 @@ El [Analytics Explorer[1] contiene visualizaciones de agregación de datos para 
 [1]: /es/product_analytics/charts/analytics_explorer/
 [2]: /es/product_analytics/charts/funnel_analysis
 [3]: /es/product_analytics/charts/pathways
-[4]: /es/product_analytics/charts/user_retention
+[4]: /es/product_analytics/charts/retention_analysis

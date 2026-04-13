@@ -1,0 +1,21 @@
+{
+  "layout_type": "ordered",
+  "title": "Example-Dashboard with order_by tags",
+  "widgets": [
+    {
+      "definition": {
+        "type": "timeseries",
+        "requests": [
+          {
+            "q": "avg:system.cpu.user{*} by {host}",
+            "style": {
+              "palette": "dog_classic",
+              "order_by": "tags"
+            },
+            "display_type": "line"
+          }
+        ]
+      }
+    }
+  ]
+}

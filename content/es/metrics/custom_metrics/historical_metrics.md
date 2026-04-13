@@ -462,7 +462,7 @@ El siguiente ejemplo supone:
 - 720 horas en el mes (30 días)
 - Coste de métrica personalizada de 5 $ por cada 100 métricas
 
-$(1500/ 720) ⋅ (5 / 100) + $(1500/ 720) ⋅ (5 / 100) = \\$0.21$
+$(1500/ 720) ⋅ (5 / 100) + $(1500/ 720) ⋅ (5 / 100) = \\$0.21
 
 Realiza un seguimiento de tus métricas históricas indexadas en la sección Resumen de uso, de la página [Plan y uso][4].
 

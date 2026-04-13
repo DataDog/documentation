@@ -109,6 +109,8 @@ The [latest version of the .NET Tracer][4] can automatically instrument the foll
 | Amazon SNS                      | `AWSSDK.SNS`  3.0+                                                                                   | `AwsSns`             |
 | Amazon SQS                      | `AWSSDK.SQS`  3.0+                                                                                   | `AwsSqs`             |
 | Azure Cosmos DB                 | `Microsoft.Azure.Cosmos` 3.6.0+                                                                      | `CosmosDb`           |
+| Azure Event Hubs                | `Azure.Messaging.EventHubs` 5.9.2+                                                                   | `AzureEventHubs`     |
+| Azure Service Bus               | `Azure.Messaging.ServiceBus` 7.14+                                                                   | `AzureServiceBus`    |
 | Couchbase                       | `CouchbaseNetClient` 2.2.8+                                                                          | `Couchbase`          |
 | Elasticsearch                   | `Elasticsearch.Net` 5.3.0+                                                                           | `ElasticsearchNet`   |
 | GraphQL .NET                    | `GraphQL` 2.3.0+                                                                                     | `GraphQL`            |
@@ -129,6 +131,11 @@ The [latest version of the .NET Tracer][4] can automatically instrument the foll
 | SQLite                          | `System.Data.Sqlite` 2.0.0+ </br>`Microsoft.Data.Sqlite` 1.0.0+                                      | `Sqlite`             |
 | SQL Server                      | `System.Data` 4.0.0+</br>`System.Data.SqlClient` 4.0.0+</br>`Microsoft.Data.SqlClient` 1.0.0+        | `SqlClient`          |
 | WebClient / WebRequest          | `System.Net.Requests` 4.0+                                                                           | `WebRequest`         |
+
+**Note**: Redis 6.0+ supports inline authentication in commands such as `HELLO`, `MIGRATE`, and `ACL SETUSER`.
+
+  - **Datadog Trace Agent**: The minimum required and recommended version is `7.76.1` to ensure authentication parameters are automatically obfuscated in trace metadata.
+  - **Datadog Lambda Extension** (Serverless environments): The minimum required version is `v28.0.0`.
 
 Don't see the library you're looking for? First, check if the library produces observability data compatible with OpenTelemetry (see [Using OpenTelemetry Instrumentation Libraries][13] for more details). If not, Datadog is continually adding additional support. [Check with the Datadog team][5] for help.
 

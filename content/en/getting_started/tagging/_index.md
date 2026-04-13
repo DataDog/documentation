@@ -21,6 +21,9 @@ further_reading:
     - link: "https://dtdg.co/fe"
       tag: "Foundation Enablement"
       text: "Join an interactive session on effective tagging with Datadog"
+    - link: "https://www.datadoghq.com/blog/datadog-executive-dashboards"
+      tag: "Blog"
+      text: "Design effective executive dashboards with Datadog"
 algolia:
   tags: ["tagging"]
 ---
@@ -59,10 +62,15 @@ Below are Datadog's tagging requirements:
     - Underscores
     - Minuses
     - Colons
+    - Commas
     - Periods
     - Slashes
 
     Other special characters are converted to underscores.
+
+    **Notes**:
+    - A tag that starts with a digit may be accepted in some contexts, such as `env` tags set at the Agent level. However, tags that don't follow standard naming rules may not work consistently across all Datadog products and can increase tag cardinality. Start tags with a letter unless a specific product explicitly supports otherwise.
+    - The `DD_TAGS` environment variable uses whitespace as a separator between tags. Whitespace in `DD_TAGS` values is **not** converted to underscores. For example, `DD_TAGS="test:this is a test"` produces four separate tags: `test:this`, `is`, `a`, and `test`. To set a tag value that contains spaces, use a YAML configuration file or integration annotations, where whitespace is converted to underscores.
 
 2. Tags can be **up to 200 characters** long and support Unicode letters (which includes most character sets, including languages such as Japanese).
 3. Tags are converted to lowercase. Therefore, `CamelCase` tags are not recommended. Authentication (crawler) based integrations convert camel case tags to underscores, for example `TestTag` --> `test_tag`.
@@ -167,4 +175,4 @@ For more information, see [Using Tags][1].
 [22]: /getting_started/tagging/using_tags/#developers
 [23]: /account_management/billing/usage_attribution/
 [24]: /getting_started/tagging/using_tags/#ci-visibility
-[25]: /containers/kubernetes/log/?tab=datadogoperator#missing-host-level-tags-on-new-hosts-or-nodes
+[25]: /containers/troubleshooting/log-collection?tab=datadogoperator#missing-host-level-tags-on-new-hosts-or-nodes

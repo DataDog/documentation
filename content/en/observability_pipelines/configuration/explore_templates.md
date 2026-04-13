@@ -65,14 +65,14 @@ When you have logs from different services and applications, you might need to s
 {{% /tab %}}
 {{% tab "Metrics" %}}
 
-### Metrics Volume and Cardinality Control
+### Metric Tag Governance
 
 <div class="alert alert-info">
-Metrics Volume and Cardinality Control is in Preview. Fill out the <a href="https://www.datadoghq.com/product-preview/metrics-ingestion-and-cardinality-control-in-observability-pipelines/">form</a> to request access.</div>
+Metric Tag Governance is in Preview. Fill out the <a href="https://www.datadoghq.com/product-preview/metrics-ingestion-and-cardinality-control-in-observability-pipelines/">form</a> to request access.</div>
 
 Metrics capture signals about your environment and offer insight into your system health, business workflows, and security activities. These metrics are sent from your various applications, network devices, and nodes, but the value of individual metrics can vary significantly.
 
-To help you manage the quality and volume of your metrics, use the Metrics Volume and Cardinality Control template to process them in Observability Pipelines before sending them to your destinations. You can use processors to keep only the metrics you need, standardize metrics tagging, and remove unwanted tags to prevent high cardinality.
+To help you manage the quality and volume of your metrics, use the Metric Tag Governance template to process them in Observability Pipelines before sending them to your destinations. You can use processors to keep only the metrics you need, standardize metrics tagging, and remove unwanted tags to prevent high cardinality.
 
 {{% /tab %}}
 {{< /tabs >}}

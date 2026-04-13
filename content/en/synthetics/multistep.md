@@ -17,6 +17,9 @@ further_reading:
 - link: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_test"
   tag: "External Site"
   text: "Create and manage Synthetic Multistep API Tests with Terraform"
+- link: "/synthetics/guide/export-tests-to-terraform"
+  tag: "Guide"
+  text: "Export Synthetic API tests to Terraform"
 ---
 
 ## Overview
@@ -177,6 +180,8 @@ Multistep API tests can run:
 
 {{% synthetics-alerting-monitoring %}}
 
+{{% synthetics-downtimes %}}
+
 {{% synthetics-variables %}}
 
 ### Extract variables
@@ -232,7 +237,7 @@ A test is considered `FAILED` if a step does not satisfy one or several assertio
   For each request only the completed stages for the request are displayed in the network waterfall. For example, in the case of `Total response time` only being displayed, the timeout occurred during the DNS resolution.
   - `TIMEOUT: Overall test execution couldn't be completed in a reasonable time.` indicates that the request and assertions duration hit the maximum duration (30 minutes).
 
-For HTTP steps, see [common HTTP step failures][14]. For gRPC steps, see [common gRPC step failures][15].
+For a complete list of other API test error codes, see [API Testing Errors][19].
 
 ## Permissions
 
@@ -265,9 +270,9 @@ You can restrict access to a multistep API test based on the roles in your organ
 [11]: /monitors/notify/variables/?tab=is_alert#conditional-variables
 [12]: /monitors/types/synthetic_monitoring/
 [13]: /synthetics/settings/#global-variables
-[14]: /synthetics/api_tests/http_tests?tab=requestoptions#test-failure
+[14]: /synthetics/api_tests/errors/#ssl-errors
 [15]: /synthetics/api_tests/grpc_tests?tab=unarycall#test-failure
 [16]: /account_management/rbac/
 [17]: /account_management/rbac#custom-roles
 [18]: /account_management/rbac/#create-a-custom-role
-[19]: /synthetics/api_tests/grpc_tests
+[19]: /synthetics/api_tests/errors/

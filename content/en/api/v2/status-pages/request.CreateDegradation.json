@@ -1,0 +1,16 @@
+{
+  "data": {
+    "attributes": {
+      "components_affected": [
+        {
+          "id": "4e9d3726-bdd7-0079-613c-e9aaba89eb01",
+          "status": "major_outage"
+        }
+      ],
+      "description": "Our API is experiencing elevated latency. We are investigating the issue.",
+      "status": "investigating",
+      "title": "Elevated API Latency"
+    },
+    "type": "degradations"
+  }
+}

@@ -13,6 +13,9 @@ further_reading:
 - link: /database_monitoring/guide/sql_extended_events/
   tag: Documentación
   text: Configurar la finalización de consultas y la recopilación de errores de consulta
+- link: /database_monitoring/guide/parameterized_queries/
+  tag: Documentación
+  text: Captura de valores de parámetros de consulta SQL
 title: Configuración de Database Monitoring para Azure SQL Server
 ---
 
@@ -435,7 +438,7 @@ instances:
 
 ### Configuración con anotaciones de servicios de Kubernetes
 
-En lugar de montar un archivo, puedes declarar la configuración de la instancia como servicio Kubernetes. Para configurar este check para un Agent que se ejecuta en Kubernetes, crea un servicio con la siguiente sintaxis:
+En lugar de montar un archivo, puedes declarar la configuración de la instancia como un servicio de Kubernetes. Para configurar este check para un Agent que se ejecuta en Kubernetes, crea un servicio utilizando la siguiente sintaxis:
 
 ```yaml
 apiVersion: v1

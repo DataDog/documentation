@@ -1,4 +1,6 @@
 ---
+description: Crea grupos de widgets reutilizables para estandarizar los diseños de
+  los dashboards y ampliar la experiencia de monitorización en los equipos.
 disable_toc: false
 further_reading:
 - link: /dashboards/guide/powerpacks-best-practices/

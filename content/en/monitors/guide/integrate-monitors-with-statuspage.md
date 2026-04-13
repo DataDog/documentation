@@ -59,7 +59,7 @@ To create a [metric monitor][8] that triggers on Statuspage alerts:
 
 [1]: https://www.atlassian.com/software/statuspage
 [2]: /integrations/statuspage
-[3]: /service_management/events/explorer/
+[3]: /events/explorer/
 [4]: https://app.datadoghq.com/integrations
 [5]: https://app.datadoghq.com/event/explorer
 [6]: /dashboards/guide/custom_time_frames/

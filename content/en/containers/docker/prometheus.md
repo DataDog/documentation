@@ -48,7 +48,7 @@ docker run -d --cgroupns host \
     -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
     -e DD_API_KEY="<DATADOG_API_KEY>" \
     -e DD_SITE="<YOUR_DATADOG_SITE>" \
-    gcr.io/datadoghq/agent:latest
+    registry.datadoghq.com/agent:latest
 ```
 
 {{% /tab %}}
@@ -60,7 +60,7 @@ docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro \
     -v /cgroup/:/host/sys/fs/cgroup:ro \
     -e DD_API_KEY="<DATADOG_API_KEY>" \
     -e DD_SITE="<YOUR_DATADOG_SITE>" \
-    gcr.io/datadoghq/agent:latest
+    registry.datadoghq.com/agent:latest
 ```
 
 {{% /tab %}}
@@ -69,7 +69,7 @@ docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro \
 ```shell
 docker run -d -e DD_API_KEY="<DATADOG_API_KEY>" \
     -e DD_SITE="<YOUR_DATADOG_SITE>" \
-    gcr.io/datadoghq/agent:latest
+    registry.datadoghq.com/agent:latest
 ```
 
 {{% /tab %}}
@@ -208,14 +208,14 @@ docker run -d --cgroupns host \
     -v /proc/:/host/proc/:ro \
     -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
     -e DD_API_KEY="<DATADOG_API_KEY>" \
-    gcr.io/datadoghq/agent:latest
+    registry.datadoghq.com/agent:latest
 ```
     {{% /tab %}}
     {{% tab "Windows" %}}
 
 ```shell
 docker run -d -e DD_API_KEY="<DATADOG_API_KEY>" \
-    gcr.io/datadoghq/agent:latest \
+    registry.datadoghq.com/agent:latest \
     -v \\.\pipe\docker_engine:\\.\pipe\docker_engine
 ```
     {{% /tab %}}
@@ -266,7 +266,7 @@ Official integrations have their own dedicated directories. There's a default in
 [2]: /integrations/prometheus/
 [3]: https://github.com/DataDog/integrations-core/tree/master/openmetrics
 [4]: https://github.com/DataDog/integrations-core/tree/master/prometheus
-[5]: /developers/custom_checks/prometheus/
+[5]: /extend/custom_checks/prometheus/
 [6]: https://docs.datadoghq.com/agent/guide/template_variables/
 [7]: https://github.com/DataDog/integrations-core/blob/master/openmetrics/datadog_checks/openmetrics/data/conf.yaml.example
 [8]: https://app.datadoghq.com/metric/summary

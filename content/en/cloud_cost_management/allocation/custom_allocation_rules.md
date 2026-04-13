@@ -25,7 +25,9 @@ The following allocation methods are available:
  | Proportional by spend | Split costs based on each destination's share of total spend. | Scenarios where teams should pay in proportion to their actual spend. | Untagged support costs are allocated to teams `teamA`, `teamB`, and `teamC` based on their proportion of total spend on Amazon EC2.|
  | Dynamic by metric  | Split costs based on each destination's share of total usage. | Scenarios where teams should pay in proportion to their actual usage. | Shared PostgreSQL costs are allocated by total query execution time per team. |
 
-Custom allocation rules run after [Tag Pipelines][1], enabling cost allocations on the latest user-defined tags. Costs are allocated on a daily basis. Cost allocations can be applied to AWS, Google Cloud, and Azure costs.
+Custom allocation rules run after [Tag Pipelines][1], enabling cost allocations on the latest user-defined tags. Costs are allocated on a daily basis. Cost allocations can be applied to AWS, Google Cloud, and Azure costs, as well as any SaaS providers you have set up.
+
+You can manage custom allocation rules using the [API][4], [Terraform][5], or directly in Datadog by following the instructions below.
 
 ## Create a custom allocation rule
 
@@ -177,3 +179,5 @@ Changes to custom allocation rules may take up to 24 hours to be applied. After 
 [1]: /cloud_cost_management/allocation/tag_pipelines/
 [2]: https://app.datadoghq.com/cost/settings/custom-allocation-rules
 [3]: https://www.datadoghq.com/support/
+[4]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/custom_allocation_rule
+[5]: /api/latest/cloud-cost-management/#create-custom-allocation-rule

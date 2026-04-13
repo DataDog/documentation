@@ -6,6 +6,8 @@ aliases:
 - /es/agent/cluster_agent/setup
 - /es/agent/cluster_agent/event_collection
 - /es/containers/cluster_agent/event_collection
+description: Instalación y configuración del Datadog Cluster Agent para la monitorización
+  y escalado automático de clústeres de Kubernetes
 further_reading:
 - link: https://www.datadoghq.com/blog/datadog-cluster-agent/
   tag: Blog
@@ -297,7 +299,7 @@ clusterAgent:
           region_name: us-west-2
 {{< /code-block >}}
 
-## Para leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

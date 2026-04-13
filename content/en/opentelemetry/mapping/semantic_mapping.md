@@ -108,7 +108,7 @@ multifiltersearch:
     - opentelemetry_convention: '`app.kubernetes.io/version`'
       datadog_convention: '`kube_app_version`'
       type: Kubernetes labels
-    - opentelemetry_convention: '`app.kuberenetes.io/component`'
+    - opentelemetry_convention: '`app.kubernetes.io/component`'
       datadog_convention: '`kube_app_component`'
       type: Kubernetes labels
     - opentelemetry_convention: '`app.kubernetes.io/part-of`'
@@ -243,7 +243,12 @@ In the table above, if a span is a "client" kind and contains [`db.system` attri
 
 ## Metrics attribute mapping
 
-For metrics, by default, Datadog only maps the OpenTelemetry resource attributes listed in the previous sections to Datadog metric tags. To map all resource attributes to tags, enable the `metrics::resource_attributes_as_tags` setting:
+By default, Datadog maps only the OpenTelemetry resource attributes listed in the semantic conventions table above to Datadog metric tags.
+
+To attach all resource attributes from your OTLP metric payloads as tags, enable the `metrics::resource_attributes_as_tags` setting:
+When enabled, this setting adds all resource attribute `key:value` pairs as Datadog tags, in addition to the mapped semantic convention tags shown in the table above.
+
+**Note**: Enabling this option may significantly increase tag cardinality. To verify which tags are being added, inspect your metrics in the [Metrics Explorer][12].
 
 {{< tabs >}}
 {{% tab "Datadog exporter" %}}
@@ -289,3 +294,4 @@ Enabling this option adds both the OpenTelemetry resource attributes and the Dat
 [9]: https://opentelemetry.io/docs/specs/semconv/attributes-registry/db/#db-system
 [10]: #mapping-opentelemetry-database-system-type-to-datadog-span-type
 [11]: /opentelemetry/schema_semantics/hostname#cloud-provider-specific-conventions
+[12]: https://app.datadoghq.com/metric/explorer

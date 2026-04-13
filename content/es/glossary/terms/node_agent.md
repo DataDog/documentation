@@ -1,4 +1,5 @@
 ---
+id: node_agent
 core_product:
 - Datadog Agent
 title: Node Agent

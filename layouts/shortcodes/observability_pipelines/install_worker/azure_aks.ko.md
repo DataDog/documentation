@@ -28,4 +28,4 @@
 파이프라인 설정을 변경하려면 [기존 파이프라인 업데이트][702]를 참조하세요.
 
 [701]: /resources/yaml/observability_pipelines/v2/setup/azure_aks.yaml
-[702]: /ko/observability_pipelines/update_existing_pipelines
+[702]: /ko/observability_pipelines/configuration/update_existing_pipelines

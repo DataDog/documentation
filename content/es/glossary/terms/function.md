@@ -1,4 +1,5 @@
 ---
+id: function
 core_product:
 - monitorización serverless
 title: función

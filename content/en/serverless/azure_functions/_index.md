@@ -35,13 +35,12 @@ If you haven't already, install the [Datadog-Azure integration][5] to collect me
 
    Datadog recommends pinning the package versions and regularly upgrading to the latest versions of both `@datadog/serverless-compat` and `dd-trace` to ensure you have access to enhancements and bug fixes.
 
-2. **Start the Datadog Serverless Compatibility Layer and initialize the Datadog Node.js tracer**. Add the following lines to your main application entry point file (for example, `app.js`):
+2. **Start the Datadog Serverless Compatibility Layer and initialize the Datadog Node.js tracer**.
+   
+   Use the `--require` option to load and initialize the Serverless Compatibility Layer and the Datadog Node.js tracer in one step. Node options in Azure Functions can be configured with the environment variable `languageWorkers__node__arguments`.
 
-   ```js
-   require('@datadog/serverless-compat').start();
-
-   // This line must come before importing any instrumented module.
-   const tracer = require('dd-trace').init()
+   ```
+   languageWorkers__node__arguments='--require @datadog/serverless-compat/init --require dd-trace/init'
    ```
 
 3. **Configure the Datadog Node.js tracer**
@@ -115,7 +114,7 @@ If you haven't already, install the [Datadog-Azure integration][5] to collect me
    Datadog.Serverless.CompatibilityLayer.Start();
    ```
 
-   If your Azure Function app uses the In-Container model, add a NuGet package reference to `Microsoft.Azure.Functions.Extensions`:
+   If your Azure Function app uses the [legacy in-process model][3], add a NuGet package reference to `Microsoft.Azure.Functions.Extensions`:
    ```shell
    dotnet package add Microsoft.Azure.Functions.Extensions
    ```
@@ -175,8 +174,9 @@ If you haven't already, install the [Datadog-Azure integration][5] to collect me
    - [Configuring the .NET Core Tracing Library][1]
    - [Configuring the .NET Framework Tracing Library][2]
 
-[1]:/tracing/trace_collection/library_config/dotnet-core
-[2]:/tracing/trace_collection/library_config/dotnet-framework
+[1]: /tracing/trace_collection/library_config/dotnet-core
+[2]: /tracing/trace_collection/library_config/dotnet-framework
+[3]: https://learn.microsoft.com/en-us/azure/azure-functions/dotnet-isolated-in-process-differences
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
@@ -190,6 +190,8 @@ If you haven't already, install the [Datadog-Azure integration][5] to collect me
    | `DD_SITE` | Your [Datadog site][2]. For example, {{< region-param key=dd_site code="true" >}}. |
    | `DD_AZURE_RESOURCE_GROUP` | Your Azure resource group. Only required for Azure Functions on the [Flex Consumption plan][8]. |
 
+   {{% svl-tracing-env %}}
+
 7. **Configure Unified Service Tagging**. You can collect metrics from your Azure Functions by installing the [Datadog Azure integration][5]. To correlate these metrics with your traces, first set the `env`, `service`, and `version` tags on your resource in Azure. Then, configure the following environment variables.
 
    | Name | Value |
@@ -202,6 +204,14 @@ If you haven't already, install the [Datadog-Azure integration][5] to collect me
 
 - You can view your Azure Functions traces in [Trace Explorer][3]. Search for the service name you set in the `DD_SERVICE` environment variable to see your traces.
 - You can use the [Serverless > Azure Functions][4] page to see your traces enriched with telemetry collected by the [Datadog Azure integration][5].
+
+## Profiling
+
+<div class="alert alert-info">
+Datadog's Continuous Profiler is available in preview for Python and Node.js on Azure Functions.
+</div>
+
+To enable the [Continuous Profiler][10], set the environment variable `DD_PROFILING_ENABLED=true`.
 
 ## Troubleshooting
 
@@ -228,3 +238,4 @@ You can collect [debug logs][6] for troubleshooting. To configure debug logs, us
 [7]: /getting_started/tagging/unified_service_tagging/
 [8]: https://learn.microsoft.com/en-us/azure/azure-functions/flex-consumption-plan
 [9]: /serverless/azure_app_service/windows_code/?tab=net
+[10]: /profiler/

@@ -192,12 +192,6 @@ Maximum number of tests fetched from Datadog.
 **Default**: `none`<br>
 Proxy URL used by the private location to send requests to Datadog (for example, `--proxyDatadog=http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT>`).
 
-`--disableFipsCompliance`
-: **Type:** Boolean <br>
-**Default**: `false`<br>
-Disables the FIPS compliance for a private location using `ddog-gov.com`.
-By default, Private Locations reporting to `ddog-gov.com` communicate to Datadog using FIPS-compliant encryption. The communication complies on the use of FIPS 140-2 validated [Cryptographic Module - Certificate #4282][3]. This option is required if you are using a Windows private location that reports to `ddog-gov.com`.
-
 `--dumpConfig`
 : **Type**: Boolean <br>
 **Default**: `none`<br>
@@ -253,6 +247,11 @@ All variables imported this way are obfuscated.
 Overrides variables used in tests running on the Private Location with environment variables. It requires the environment variables to be imported in the containerized environment.
 With Docker, for example, `docker run --env VARIABLE gcr.io/datadoghq/synthetics-private-location-worker --environmentVariableOverride VARIABLE`.
 All variables imported this way are obfuscated.
+
+`--retryAPIErrors`
+: **Type**: Boolean <br>
+**Default**: `false`<br>
+Retry any error in API tests
 
 `--allowedIPRanges`
 : **Type**: Array of Strings <br>

@@ -1,0 +1,40 @@
+{
+  "config": {
+    "steps": [
+      {
+        "assertions": [
+          {
+            "operator": "is",
+            "type": "statusCode",
+            "target": 200
+          }
+        ],
+        "name": "request is sent",
+        "request": {
+          "url": "https://httpbin.org/status/200",
+          "method": "GET",
+          "basicAuth": {
+            "password": "password",
+            "username": "username"
+          }
+        },
+        "subtype": "http"
+      },
+      {
+        "subtype": "playSubTest",
+        "subtestPublicId": "123-abc-456",
+        "name": "subtest step"
+      }
+    ]
+  },
+  "locations": [
+    "aws:us-east-2"
+  ],
+  "message": "BDD test payload: synthetics_api_test_multi_step_with_subtest.json",
+  "name": "Example-Synthetic",
+  "options": {
+    "tick_every": 60
+  },
+  "subtype": "multi",
+  "type": "api"
+}

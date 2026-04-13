@@ -30,7 +30,7 @@ title: Observabilidad del punto final
 
 {{% site-region region="gov" %}}
 <div class="alert alert-danger">
- Observabilidad de endpoint no es compatible con el <a href="/getting_started/site">sitioDatadog </a> seleccionado ({{< region-param key="dd_site_name" >}}).
+ Endpoint Observability no es compatible con el <a href="/getting_started/site">sitio Datadog</a> seleccionado ({{< region-param key="dd_site_name" >}}).
 </div>
 {{% /site-region %}}
 

@@ -2489,7 +2489,7 @@ describe(`fieldColumn`, () => {
 
   const emptyResult = `
     <div class="col-4 column">
-      <p class="key"></p>
+      <p class="key table-cell"></p>
     </div>
   `.trim();
 
@@ -2507,7 +2507,7 @@ describe(`typeColumn`, () => {
   it('should show type value', () => {
     const obj = {description: ""};
     const actual = bp.typeColumn("type", "array", "");
-    const expected = `<div class="col-2 column"><p>array</p></div>`;
+    const expected = `<div class="col-2 column"><p class="table-cell">array</p></div>`;
     expect(actual).toEqual(expected);
   });
 
@@ -2538,7 +2538,7 @@ describe(`descColumn`, () => {
     const obj = "TODO";
     const key = "description";
     const actual = bp.descColumn(key, obj);
-    const expected = '<div class="col-6 column"><p>TODO</p></div>';
+    const expected = '<div class="col-6 column"><p class="table-cell">TODO</p></div>';
     expect(actual).toEqual(expected);
   });
 

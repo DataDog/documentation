@@ -43,6 +43,8 @@ The Datadog CloudFormation StackSet performs the following steps:
 1. **Access to the management account**: Your AWS user needs to be able to access the AWS management account.
 2. **An account administrator has enabled Trusted Access with AWS Organizations**: Refer to [Enable trusted access with AWS Organizations][3] to enable trusted access between StackSets and Organizations, to create and deploy stacks using service-managed permissions.
 
+**Note**: The AWS Organizations multi-account setup does not support deployment over existing individually configured AWS account integrations. If a StackSet targets an account that is already individually integrated with Datadog, the existing account integration is deleted.
+
 ## Setup
 
 To get started, go to the [AWS Integration configuration page][1] in Datadog and click on **Add AWS Account(s)** -> **Add Multiple AWS Accounts** -> **CloudFormation StackSet**.
@@ -60,8 +62,8 @@ Copy the Template URL from the Datadog AWS integration configuration page to use
     - Select your Datadog APP key on Datadog AWS integration configuration page and use it in the `DatadogAppKey` parameter in the StackSet.
 
     - *Optionally:*  
-        a. Enable [Cloud Security Misconfigurations][5] to scan your cloud environment, hosts, and containers for misconfigurations and security risks.  
-        b. Disable metric collection if you do not want to monitor your AWS infrastructure. This is recommended only for [Cloud Cost Management][6] (CCM) or [Cloud Security Misconfigurations][5] specific use cases.
+        1. Enable [Cloud Security Misconfigurations][5] to scan your cloud environment, hosts, and containers for misconfigurations and security risks.  
+        1. Disable metric collection if you do not want to monitor your AWS infrastructure. This is recommended only for [Cloud Cost Management][6] (CCM) or [Cloud Security Misconfigurations][5] specific use cases.
 
 3. **Configure StackSet options**  
 Keep the **Execution configuration** option as `Inactive` so the StackSet performs one operation at a time.

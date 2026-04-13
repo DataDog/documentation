@@ -72,4 +72,4 @@ Click a node for a list of analysis options, such as viewing a sample [Session R
 
 [1]: https://app.datadoghq.com/product-analytics/user-journey/pathways
 [2]: /real_user_monitoring/explorer/search_syntax/#wildcards
-[3]: /product_analytics/session_replay/
+[3]: /session_replay/

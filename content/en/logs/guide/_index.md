@@ -37,6 +37,7 @@ cascade:
     {{< nextlink href="/logs/guide/apigee" >}}Collect Apigee Logs{{< /nextlink >}}
     {{< nextlink href="/logs/guide/fluentbit" >}}Send Fluent Bit Logs{{< /nextlink >}}
     {{< nextlink href="/integrations/google_cloud_platform/#log-collection" >}}Collect Google Cloud logs with the Datadog Dataflow template{{< /nextlink >}}
+    {{< nextlink href="/logs/guide/google-cloud-logging-recommendations" >}}Google Cloud Log Forwarding Configuration Recommendations{{< /nextlink >}}
     {{< nextlink href="/logs/guide/collect-google-cloud-logs-with-push/" >}}Collect Google Cloud logs with a Pub/Sub Push subscription{{< /nextlink >}}
     {{< nextlink href="logs/guide/collect-heroku-logs" >}}Collect Heroku Logs{{< /nextlink >}}
     {{< nextlink href="logs/guide/log-collection-troubleshooting-guide" >}}Log Collection Troubleshooting Guide{{< /nextlink >}}
@@ -57,7 +58,8 @@ cascade:
     {{< nextlink href="/logs/guide/commonly-used-log-processing-rules" >}}Commonly Used Log Processing Rules{{< /nextlink >}}
     {{< nextlink href="/logs/guide/logs-not-showing-expected-timestamp" >}}Logs Not Showing the Expected Timestamp{{< /nextlink >}}
     {{< nextlink href="/logs/guide/remap-custom-severity-to-official-log-status" >}}Remap Custom Severity Values to the Official Log Status{{< /nextlink >}}
-    {{< nextlink href="logs/guide/logs-show-info-status-for-warnings-or-errors" >}}Logs Show Info Status for Warnings or Errors{{< /nextlink >}}
+    {{< nextlink href="/logs/guide/logs-show-info-status-for-warnings-or-errors" >}}Logs Show Info Status for Warnings or Errors{{< /nextlink >}}
+    {{< nextlink href="/logs/guide/regex_log_parsing" >}}Writing Effective Grok Parsing Rules with Regular Expressions{{< /nextlink >}}
 {{< /whatsnext >}}
 
 <br>

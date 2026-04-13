@@ -30,7 +30,7 @@ The minimum tracer version to get all supported AAP capabilities for PHP is 0.98
 | Docker      | {{< X >}}                |
 | Kubernetes  | {{< X >}}                |
 | Amazon ECS  | {{< X >}}                |
-| AWS Fargate |                          |
+| AWS Fargate | {{< X >}}                |
 | AWS Lambda  |                          |
 
 ## Language and framework compatibility

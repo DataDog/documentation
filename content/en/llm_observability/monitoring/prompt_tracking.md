@@ -28,8 +28,61 @@ To use Prompt Tracking, you can submit structured prompt metadata (ID, optional 
 #### LLM Observability Python SDK
 If you are using the LLM Observability Python SDK (`dd-trace` v3.16.0+), attach prompt metadata to the LLM span using the `prompt` argument or helper. See the [LLM Observability Python SDK documentation][3].
 
+#### LLM Observability Node.js SDK
+If you are using the LLM Observability Node.js SDK (`dd-trace` v5.83.0+), attach prompt metadata to the LLM span using the `prompt` option. See the [LLM Observability Node.js SDK documentation][6].
+
 #### LLM Observability API
 If you are using the LLM Observability API intake, submit prompt metadata to the Spans API endpoint. See the [LLM Observability HTTP API reference documentation][4].
+
+#### OpenTelemetry instrumentation
+If you are using [OpenTelemetry instrumentation][7], you can attach prompt metadata to your LLM spans by setting the `_dd.ml_obs.prompt_tracking` attribute with a JSON string containing your prompt information.
+
+Set the attribute on any LLM span:
+
+{{< tabs >}}
+{{% tab "Python" %}}
+```python
+import json
+
+span.set_attribute("_dd.ml_obs.prompt_tracking", json.dumps({
+    "name": "greeting-prompt",
+    "version": "v1",
+    "template": "Hello {{name}}, tell me about {{topic}}",
+    "variables": {"name": "Alice", "topic": "weather"}
+}))
+```
+{{% /tab %}}
+{{% tab "JavaScript" %}}
+```javascript
+span.setAttribute("_dd.ml_obs.prompt_tracking", JSON.stringify({
+    name: "greeting-prompt",
+    version: "v1",
+    template: "Hello {{name}}, tell me about {{topic}}",
+    variables: { name: "Alice", topic: "weather" }
+}));
+```
+{{% /tab %}}
+{{% tab "Go" %}}
+```go
+span.SetAttributes(attribute.String("_dd.ml_obs.prompt_tracking",
+    `{"name":"greeting-prompt","version":"v1","template":"Hello {{name}}, tell me about {{topic}}","variables":{"name":"Alice","topic":"weather"}}`,
+))
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+The following fields are supported in the prompt tracking JSON:
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `template` | string | Yes (or `chat_template`) | Template string for single-message prompts |
+| `chat_template` | array | Yes (or `template`) | List of `{"role": "...", "content": "..."}` message templates |
+| `id` | string | No | Unique identifier for the prompt. Defaults to `{ml_app}_unnamed-prompt` if omitted |
+| `name` | string | No | Prompt name. Used as a fallback for `id` if `id` is omitted |
+| `version` | string | No | User-supplied version tag |
+| `variables` | object | No | Template variable substitutions |
+| `rag_context_variables` | array of strings | No | Names of variables in `variables` that contain RAG context (ground truth). Used by RAG evaluators |
+| `rag_query_variables` | array of strings | No | Names of variables in `variables` that contain the user query. Used by RAG evaluators |
 
 <div class="alert alert-info">If you are using prompt templates, LLM Observability can automatically attach version information based on prompt content.</div>
 
@@ -62,3 +115,5 @@ You can use the LLM Observability Trace Explorer to locate requests by prompt us
 [3]: /llm_observability/instrumentation/sdk/?tab=python#prompt-tracking
 [4]: /llm_observability/instrumentation/api/?tab=model#prompt
 [5]: /llm_observability/instrumentation/auto_instrumentation?tab=python#langchain
+[6]: /llm_observability/instrumentation/sdk/?tab=nodejs#prompt-tracking
+[7]: /llm_observability/instrumentation/otel_instrumentation

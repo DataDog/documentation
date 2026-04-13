@@ -141,6 +141,7 @@ runtimes, a snapshot is only captured after the **second occurrence** for a give
 - Third-party package exclusions (use `DD_THIRD_PARTY_DETECTION_EXCLUDES` to include these)
 - Logs with `source:dd_debugger` missing due to [Log Index][6] retention settings or [Exclusion Filters][7] in preceding indexes
 - Exception Replay is not available in the FedRAMP region
+- Java: On JDK 18 and below, classes compiled with the `-parameters` flag may not be supported. Spring 6+, Spring Boot 3+, and Scala use this flag by default.
 
 Use the query `@error.debug_info_captured:true` in Error Tracking Explorer to find errors with Exception Replay
 snapshots.

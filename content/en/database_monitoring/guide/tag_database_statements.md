@@ -1,6 +1,7 @@
 ---
 title: Tagging SQL Statements
-
+aliases:
+- /database_monitoring/tag_database_statements
 ---
 
 This guide assumes that you have configured [Database Monitoring][1].

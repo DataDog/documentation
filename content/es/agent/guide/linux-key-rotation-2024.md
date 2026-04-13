@@ -1,4 +1,6 @@
 ---
+description: Información sobre la rotación de la clave GPG 2024 para los paquetes
+  RPM y DEB de Datadog y cómo actualizar tus sistemas.
 title: Rotación de claves Linux de 2024
 ---
 

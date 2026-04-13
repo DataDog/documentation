@@ -18,7 +18,7 @@ type: lenguaje de código múltiple
 
 ## Compatibilidad
 
-Test Impact Analysis sólo es compatible con las siguientes versiones y marcos de test:
+Test Impact Analysis sólo es compatible con las siguientes versiones y frameworks de test:
 
 * `pytest>=7.2.0`
   * De `ddtrace>=2.1.0`.

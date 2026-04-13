@@ -3,6 +3,8 @@ aliases:
 - /es/agent/autodiscovery/template_variables
 - /es/agent/faq/template_variables
 - /es/agent/guide/template_variables
+description: Guía de referencia para las variables de plantilla disponibles en la
+  configuración de la integración de Autodiscovery para entornos de contenedores dinámicos
 further_reading:
 - link: /contenedores/Kubernetes/integraciones/
   tag: Documentación
@@ -44,7 +46,7 @@ Puedes utilizar la siguiente dirección variables de plantilla para asignar din�
 
 Dependiendo de la plataforma que utilices, no todas las variables de plantilla son compatibles:
 
-| Plataforma    | Identificadores de detección automática  | Host | Puerto | Etiqueta | Pid | Entorno | Nombre de host | Espacio de nombres de Kube | Nombre del pod | UID del pod |
+| Plataforma    | Identificadores de detección automática  | Host | Puerto | Etiqueta (tag) | Pid | Entorno | Nombre de host | Espacio de nombres de Kube | Nombre del pod | UID del pod |
 | ----------- | ---                         | ---  | ---  | --- | --- | --- | ---      | ---            | ---      | ---     |
 | Docker      | ✅                          | ✅   | ✅   | ✅  | ✅  | ✅  | ✅      | ❌      | ❌      | ❌      |
 | ECS Fargate | ✅                          | ✅   | ❌   | ✅  | ❌  | ✅  | ❌      | ❌      | ❌      | ❌      |

@@ -53,7 +53,7 @@ The following operating systems are officially supported by `dd-trace`. Any oper
 
 | dd-trace Version    | Operating System      | Architectures         | Minimum Versions                         |
 | ------------------- | --------------------- | --------------------- | ---------------------------------------- |
-| 3.x                 | Linux (glibc)         | arm, arm64, x64       | CentOS 7, Debian 9, RHEL 7, Ubuntu 14.04 |
+| 3.x, 4.x            | Linux (glibc)         | arm, arm64, x64       | CentOS 7, Debian 9, RHEL 7, Ubuntu 14.04 |
 |                     | Linux (musl)          | arm, arm64, x64       | Alpine 3.13                              |
 |                     | macOS                 | arm64, x64            | Catalina (10.15)                         |
 |                     | Windows               | ia32, x64             | Windows 8.1, Windows Server 2012         |
@@ -68,22 +68,48 @@ APM provides out-of-the-box instrumentation for many popular frameworks and libr
 
 For details about how to how to toggle and configure plugins, check out the [API documentation][5].
 
+
+### Native module compatibility
+
+| Module              | Support Type        | Notes                                          |
+| ------------------- | ------------------- | ---------------------------------------------- |
+| [child_process][83] | Fully supported     |                                                |
+| [dns][22]           | Fully supported     |                                                |
+| [http][24]          | Fully supported     | This includes the built-in `fetch` function.   |
+| [https][25]         | Fully supported     |                                                |
+| [http2][26]         | Partially supported | Only HTTP2 clients are supported, not servers. |
+| [net][27]           | Fully supported     |                                                |
+
+
+### Protocol compatibility
+
+| Module                   | Versions  | Support Type    | Notes                                       |
+| ------------------------ | --------- | --------------- | ------------------------------------------- |
+| [@apollo/gateway][90]    | `>=2.3.0` | Fully supported |                                             |
+| [@apollo/server][89]     | `>=4`     | Fully supported |                                             |
+| [apollo-server-core][88] | `>=3`     | Fully supported | Used for Apollo Server v2 and v3.           |
+| [avsc][87]               | `>=5`     | Fully supported |                                             |
+| [gRPC][11]               | `>=1.13`  | Fully supported |                                             |
+| [graphql-yoga][65]       | `>=3.6.0` | Fully supported | Supports graphql-yoga v3 executor.          |
+| [graphql][10]            | `>=0.10`  | Fully supported | Supports Apollo Server and express-graphql. |
+| [ldapjs][86]             | `>=2`     | Fully supported |                                             |
+| [ws][84]                 | `>=8`     | Fully supported | More info at [WebSocket Observability][91]. |
+
+
 ### Web framework compatibility
 
 | Module                  | Versions | Support Type    | Notes                                      |
 | ----------------------- | -------- | --------------- | ------------------------------------------ |
-| [connect][6]           | `>=2`    | Fully supported |                                             |
-| [express][7]           | `>=4`    | Fully supported | Supports Sails, Loopback, and other frameworks built on top of Express     |
-| [fastify][9]           | `>=1`    | Fully supported |                                             |
-| [graphql][10]           | `>=0.10` | Fully supported | Supports Apollo Server and express-graphql |
-| [graphql-yoga][65]      | `>=3.6.0`| Fully supported | Supports graphql-yoga v3 executor          |
-| [gRPC][11]              | `>=1.13` | Fully supported |                                            |
-| [hapi][12]              | `>=2`    | Fully supported | Supports [@hapi/hapi] versions `>=17.9`    |
+| [connect][6]            | `>=2`    | Fully supported |                                            |
+| [express][7]            | `>=4`    | Fully supported | Supports Sails, Loopback, and other frameworks built on top of Express.    |
+| [fastify][9]            | `>=1`    | Fully supported |                                            |
+| [hapi][12]              | `>=2`    | Fully supported | Supports [@hapi/hapi] versions `>=17.9`.   |
+| [hono][71]              | `>=4`    | Fully supported |                                            |
 | [koa][13]               | `>=2`    | Fully supported |                                            |
 | [microgateway-core][14] | `>=2.1`  | Fully supported | Core library for Apigee Edge. Support for the [edgemicro][15] CLI requires static patching using [@datadog/cli][16]. |
 | [moleculer][17]         | `>=0.14` | Fully supported |                                            |
-| [next][18]              | `>=9.5`  | Fully supported | See note on [Complex framework usage](#complex-framework-usage).<br /><br />The tracer supports the following Next.js features: <ul><li>Standalone (`output: 'standalone'`)</li><li>App Router</li><li>Middleware: Not traced, use tracer versions `4.18.0` and `3.39.0` or higher for best experience.</li></ul><br /><br /><strong>Note</strong>: Next.js is under heavy active development, and it is not uncommon for patch releases to break compatibility with dd-trace. Test automations alert Datadog to these issues, but it can often take a few days to fix compatibility with the latest Next.js release. |
-| [paperplane][19]        | `>=2.3`  | Fully supported | Not supported in [serverless-mode][20]     |
+| [next][18]              | `>=10.2` | Fully supported | See note on [Complex framework usage](#complex-framework-usage).<br /><br />The tracer supports the following Next.js features: <ul><li>Standalone (`output: 'standalone'`)</li><li>App Router</li><li>Middleware: Not traced, use tracer versions `4.18.0` and `3.39.0` or higher for best experience.</li></ul><br /><br /><strong>Note</strong>: Next.js is under heavy active development, and it is not uncommon for patch releases to break compatibility with dd-trace. Test automations alert Datadog to these issues, but it can often take a few days to fix compatibility with the latest Next.js release. |
+| [paperplane][19]        | `>=2.3`  | Fully supported | Not supported in [serverless-mode][20].    |
 | [restify][21]           | `>=3`    | Fully supported |                                            |
 
 #### Complex framework usage
@@ -114,56 +140,61 @@ Or, modify the `package.json` file if you typically start an application with np
 **Note**: The previous examples use Next.js, but the same approach applies to other frameworks with custom entry points, such as Nest.js. Adapt the commands to fit your specific framework and setup. Either command should work, but using `NODE_OPTIONS`  also applies to any child Node.js processes.
 
 
-### Native module compatibility
-
-| Module      | Support Type        | Notes |
-| ----------- | ------------------- | ------------------------------------------ |
-| [dns][22]   | Fully supported     |       |
-| [http][24]  | Fully supported     |       |
-| [https][25] | Fully supported     |       |
-| [http2][26] | Partially supported | Only HTTP2 clients are currently supported and not servers. |
-| [net][27]   | Fully supported     |       |
-
 ### Data store compatibility
 
-| Module                 | Versions | Support Type    | Notes                                            |
-| ---------------------- | -------- | --------------- | ------------------------------------------------ |
-| [cassandra-driver][28] | `>=3`    | Fully supported |                                                  |
-| [couchbase][29]        | `^2.4.2` | Fully supported |                                                  |
-| [elasticsearch][30]    | `>=10`   | Fully supported | Supports `@elastic/elasticsearch` versions `>=5` |
-| [ioredis][31]          | `>=2`    | Fully supported |                                                  |
-| [knex][32]             | `>=0.8`  | Fully supported | This integration is only for context propagation |
-| [mariadb][63]          | `>=3`    | Fully supported |                                                  |
-| [memcached][33]        | `>=2.2`  | Fully supported |                                                  |
-| [mongodb-core][34]     | `>=2`    | Fully supported | Supports Mongoose                                |
-| [mysql][35]            | `>=2`    | Fully supported |                                                  |
-| [mysql2][36]           | `>=1`    | Fully supported |                                                  |
-| [oracledb][37]         | `>=5`    | Fully supported |                                                  |
-| [pg][38]               | `>=4`    | Fully supported | Supports `pg-native` when used with `pg`         |
-| [redis][39]            | `>=0.12` | Fully supported |                                                  |
-| [sharedb][40]          | `>=1`    | Fully supported |                                                  |
-| [tedious][41]          | `>=1`    | Fully supported | SQL Server driver for `mssql` and `sequelize`    |
+| Module                 | Versions   | Support Type        | Notes                                             |
+| ---------------------- | ---------- | ------------------- | ------------------------------------------------- |
+| [aerospike][72]        | `>=4`      | Fully supported     |                                                   |
+| [cassandra-driver][28] | `>=3`      | Fully supported     |                                                   |
+| [couchbase][29]        | `^2.6.12`  | Fully supported     |                                                   |
+| [elasticsearch][30]    | `>=10`     | Fully supported     | Supports `@elastic/elasticsearch` versions `>=5`. |
+| [ioredis][31]          | `>=2`      | Fully supported     |                                                   |
+| [iovalkey][73]         | `>=0.0.1`  | Fully supported     |                                                   |
+| [knex][32]             | `>=0.8`    | Fully supported     | This integration is only for context propagation. |
+| [mariadb][63]          | `>=2`      | Fully supported     |                                                   |
+| [memcached][33]        | `>=2.2`    | Fully supported     |                                                   |
+| [mongodb-core][34]     | `>=2`      | Fully supported     | Supports Mongoose.                                |
+| [mongoose][75]         | `>=4.6.4`  | Fully supported     |                                                   |
+| [mysql][35]            | `>=2`      | Fully supported     |                                                   |
+| [mysql2][36]           | `>=1`      | Fully supported     |                                                   |
+| [opensearch][69]       | `>=1`      | Fully supported     |                                                   |
+| [oracledb][37]         | `>=5`      | Fully supported     |                                                   |
+| [pg][38]               | `>=4`      | Fully supported     | Supports `pg-native` when used with `pg`.         |
+| [prisma][70]           | `>=6.1.0`  | Partially supported | Doesn't support DBM.                              |
+| [redis][39]            | `>=0.12`   | Fully supported     |                                                   |
+| [sequelize][74]        | `>=4`      | Fully supported     |                                                   |
+| [sharedb][40]          | `>=1`      | Fully supported     |                                                   |
+| [tedious][41]          | `>=1`      | Fully supported     | SQL Server driver for `mssql` and `sequelize`.    |
+
+
+**Note**: Redis 6.0+ supports inline authentication in commands such as `HELLO`, `MIGRATE`, and `ACL SETUSER`.
+
+  - **Datadog Trace Agent**: The minimum required and recommended version is `7.76.1` to ensure authentication parameters are automatically obfuscated in trace metadata.
+  - **Datadog Lambda Extension** (Serverless environments): The minimum required version is `v28.0.0`.
 
 ### Worker compatibility
 
-| Module                               | Versions  | Support Type    | Notes                                                  |
-| --------------------------           | --------  | --------------- | ------------------------------------------------------ |
-| [@azure/service-bus][68]             | `>=7.9.2` | Fully supported |                                                        |
-| [@confluentinc/kafka-javascript][67] | `>=1`     | Fully supported |                                                        |
-| [@google-cloud/pubsub][42]           | `>=1.2`   | Fully supported |                                                        |
-| [amqp10][43]                         | `>=3`     | Fully supported | Supports AMQP 1.0 brokers (such as ActiveMQ, or Apache Qpid) |
-| [amqplib][44]                        | `>=0.5`   | Fully supported | Supports AMQP 0.9 brokers (such as RabbitMQ, or Apache Qpid) |
-| [generic-pool][45]                   | `>=2`     | Fully supported |                                                        |
-| [kafkajs][46]                        | `>=1.4`   | Fully supported |                                                        |
-| [rhea][48]                           | `>=1`     | Fully supported |                                                        |
+| Module                               | Versions    | Support Type    | Notes                                                                     |
+| ------------------------------------ | ----------- | --------------- | ------------------------------------------------------------------------- |
+| [@azure/event-hubs][78]              | `>=6.0.0`   | Fully supported |                                                                           |
+| [@azure/functions][79]               | `>=4`       | Fully supported | Disabled by default. Enable with `DD_TRACE_AZURE_FUNCTIONS_ENABLED=true`. |
+| [@azure/service-bus][68]             | `>=7.9.2`   | Fully supported |                                                                           |
+| [@confluentinc/kafka-javascript][67] | `>=1`       | Fully supported |                                                                           |
+| [@google-cloud/pubsub][42]           | `>=1.2`     | Fully supported |                                                                           |
+| [amqp10][43]                         | `>=3`       | Fully supported | Supports AMQP 1.0 brokers (such as ActiveMQ, or Apache Qpid)              |
+| [amqplib][44]                        | `>=0.5`     | Fully supported | Supports AMQP 0.9 brokers (such as RabbitMQ, or Apache Qpid)              |
+| [bullmq][77]                         | `>=5.66.0`  | Fully supported |                                                                           |
+| [generic-pool][45]                   | `>=2`       | Fully supported |                                                                           |
+| [kafkajs][46]                        | `>=1.4`     | Fully supported |                                                                           |
+| [rhea][48]                           | `>=1`       | Fully supported |                                                                           |
+
 
 ### SDK compatibility
 
-| Module             | Versions   | Support Type    | Notes                                                  |
-| ------------------ | ---------- | --------------- | ------------------------------------------------------ |
-| [aws-sdk][49]      | `>=2.1.35` | Fully supported | CloudWatch, DynamoDB, Kinesis, Redshift, S3, SNS, SQS, and generic requests. |
-| [openai][64]       | `>=3.0.0`  | Fully supported |                                                        |
-| [langchain][66]      | `>=0.1.0`  | Partially supported | The following workflow invocations are supported: <br /><br /><ul><li>`chain.invoke` and `chain.batch`</li><li>`chat_model.invoke`</li><li>`llm.invoke`</li><li>`openaiEmbeddings.embedQuery` and `openaiEmbeddings.embedDocuments`</li></ul> |
+| Module                    | Versions   | Support Type        | Notes                                                                             |
+| ------------------------- | ---------- | ------------------- | --------------------------------------------------------------------------------- |
+| [aws-sdk][49]             | `>=2.1.35` | Fully supported     | CloudWatch, DynamoDB, Kinesis, Redshift, S3, SNS, SQS, and generic requests.      |
+
 
 ### Promise library compatibility
 
@@ -175,6 +206,7 @@ Or, modify the `package.json` file if you typically start an application with np
 | [q][53]          | `>=1`     | Fully supported |
 | [when][54]       | `>=3`     | Fully supported |
 
+
 ### Logger compatibility
 
 | Module           | Versions  | Support Type    |
@@ -184,13 +216,33 @@ Or, modify the `package.json` file if you typically start an application with np
 | [pino][57]       | `>=2`     | Fully supported |
 | [winston][58]    | `>=1`     | Fully supported |
 
+
+### AI/LLM compatibility
+
+The [Automatic Instrumentation for LLM Observability][64] page contains a list of instrumented LLM packages (including Amazon Bedrock, Anthropic, LangChain, OpenAI, Azure OpenAI, Vercel AI SDK, VertexAI, and Google GenAI).
+
+
+### Testing framework compatibility
+
+The [JavaScript and TypeScript Tests][66] page contains a list of instrumented testing framework packages (including Jest, Mocha, Cucumber, Cypress, Playwright, and Vitest).
+
+
+### Known transitive package compatibility
+
+While the Datadog tracer doesn't provide direct support for modules listed here, they are known to work, as they depend on modules that the tracer does instrument.
+
+| Module           | Notes                                        |
+| ---------------- | -------------------------------------------- |
+| [axios][85]      | Axios depends on the internal `http` module. |
+
+
 ## Unsupported libraries
 
 ### Fibers
 
 [`fibers`][59] is incompatible with `async_hooks`, a Node.js [module][60] that is used by `dd-trace-js` to track asynchronous contexts thereby ensuring accurate tracing. Interactions between `fibers` and `async_hooks` may lead to unpreventable crashes and undefined behavior. So, the use of `dd-trace-js` with applications that invoke `fibers` directly or indirectly through frameworks such as [Meteor][61] may result in instability (crashes) or incorrect tracing.
 
-For additional information or to discuss [leave a comment on this github issue][62] or [reach out to support][3] to discuss further.
+For additional information or to discuss [leave a comment on this GitHub issue][62] or [reach out to support][3] to discuss further.
 
 ## Further Reading
 
@@ -257,8 +309,27 @@ For additional information or to discuss [leave a comment on this github issue][
 [61]: https://www.meteor.com/
 [62]: https://github.com/DataDog/dd-trace-js/issues/1229
 [63]: https://github.com/mariadb-corporation/mariadb-connector-nodejs
-[64]: https://github.com/openai/openai-node
+[64]: /llm_observability/instrumentation/auto_instrumentation/?tab=nodejs#supported-frameworks-and-libraries
 [65]: https://github.com/dotansimha/graphql-yoga
-[66]: https://js.langchain.com/
+[66]: /tests/setup/javascript/?tab=ciproviderwithautoinstrumentationsupport#compatibility
 [67]: https://www.npmjs.com/package/@confluentinc/kafka-javascript
 [68]: https://www.npmjs.com/package/@azure/service-bus
+[69]: https://github.com/opensearch-project/opensearch-js
+[70]: https://www.prisma.io/
+[71]: https://hono.dev/
+[72]: https://github.com/aerospike/aerospike-client-nodejs
+[73]: https://www.npmjs.com/package/iovalkey
+[74]: https://sequelize.org/
+[75]: https://mongoosejs.com/
+[77]: https://github.com/taskforcesh/bullmq
+[78]: https://www.npmjs.com/package/@azure/event-hubs
+[79]: https://www.npmjs.com/package/@azure/functions
+[83]: https://nodejs.org/api/child_process.html
+[84]: https://www.npmjs.com/package/ws
+[85]: https://www.npmjs.com/package/axios
+[86]: https://www.npmjs.com/package/ldapjs
+[87]: https://www.npmjs.com/package/avsc
+[88]: https://www.npmjs.com/package/apollo-server-core
+[89]: https://www.npmjs.com/package/@apollo/server
+[90]: https://www.npmjs.com/package/@apollo/gateway
+[91]: https://docs.datadoghq.com/tracing/guide/websocket_observability/

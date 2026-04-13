@@ -26,8 +26,6 @@ If you are using the Datadog Lambda layers `dd-trace-java:4` (or older) and `Dat
 
 ## Setup
 
-If your application is deployed as a container image, use the _Container Image_ method.
-
 {{< tabs >}}
 {{% tab "Datadog UI" %}}
 You can instrument your Java AWS Lambda application directly within Datadog. Navigate to the [Serverless > AWS Lambda][2] page and select [**Instrument Functions**][3].
@@ -308,6 +306,8 @@ module "lambda-datadog" {
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{< /tabs >}}
+
+{{% svl-tracing-env %}}
 
 ## FIPS compliance
 

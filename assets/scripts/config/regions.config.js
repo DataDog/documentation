@@ -364,7 +364,8 @@ export default {
     us5: 'https://otlp.us5.datadoghq.com/v1/traces',
     eu: 'https://otlp.datadoghq.eu/v1/traces',
     ap1: 'https://otlp.ap1.datadoghq.com/v1/traces',
-    ap2: 'https://otlp.ap2.datadoghq.com/v1/traces'
+    ap2: 'https://otlp.ap2.datadoghq.com/v1/traces',
+    gov: 'https://otlp.ddog-gov.com/v1/traces'
   },
   otlp_metrics_endpoint: {
     us: 'https://otlp.datadoghq.com/v1/metrics',
@@ -372,7 +373,8 @@ export default {
     us5: 'https://otlp.us5.datadoghq.com/v1/metrics',
     eu: 'https://otlp.datadoghq.eu/v1/metrics',
     ap1: 'https://otlp.ap1.datadoghq.com/v1/metrics',
-    ap2: 'https://otlp.ap2.datadoghq.com/v1/metrics'
+    ap2: 'https://otlp.ap2.datadoghq.com/v1/metrics',
+    gov: 'https://otlp.ddog-gov.com/v1/metrics'
   },
   otlp_logs_endpoint: {
     us: 'https://otlp.datadoghq.com/v1/logs',
@@ -380,7 +382,8 @@ export default {
     us5: 'https://otlp.us5.datadoghq.com/v1/logs',
     eu: 'https://otlp.datadoghq.eu/v1/logs',
     ap1: 'https://otlp.ap1.datadoghq.com/v1/logs',
-    ap2: 'https://otlp.ap2.datadoghq.com/v1/logs'
+    ap2: 'https://otlp.ap2.datadoghq.com/v1/logs',
+    gov: 'https://otlp.ddog-gov.com/v1/logs'
   },
   custom_costs_endpoint: {
     us: 'api.datadoghq.com/api/v2/cost/custom_costs',
@@ -607,6 +610,24 @@ export default {
     ap2: '\n        .useSite(DatadogSite.AP2)\n        .trackCrashes(true)',
     gov: '\n        .useSite(DatadogSite.US1_FED)\n        .trackCrashes(true)'
   },
+  flutter_web_logs_cdn_path: {
+    us: 'us1/v5/datadog-logs.js',
+    us3: 'us3/v5/datadog-logs.js',
+    us5: 'us5/v5/datadog-logs.js',
+    eu: 'eu1/v5/datadog-logs.js',
+    ap1: 'ap1/v5/datadog-logs.js',
+    ap2: 'ap2/v5/datadog-logs.js',
+    gov: 'datadog-logs-v5.js'
+  },
+  flutter_web_rum_cdn_path: {
+    us: 'us1/v6/datadog-rum-slim.js',
+    us3: 'us3/v6/datadog-rum-slim.js',
+    us5: 'us5/v6/datadog-rum-slim.js',
+    eu: 'eu1/v6/datadog-rum-slim.js',
+    ap1: 'ap1/v6/datadog-rum-slim.js',
+    ap2: 'ap2/v6/datadog-rum-slim.js',
+    gov: 'datadog-rum-slim-v6.js'
+  },
   reactnative_sdk_init: {
     us: '',
     us3: '',
@@ -624,6 +645,24 @@ export default {
     ap1: 'ap1',
     ap2: 'ap2',
     gov: 'us1_fed'
+  },
+  synthetics_intake_endpoint: {
+    us: 'intake.synthetics.datadoghq.com',
+    us3: 'intake.synthetics.us3.datadoghq.com',
+    us5: 'intake.synthetics.us5.datadoghq.com',
+    eu: 'intake.synthetics.datadoghq.eu',
+    ap1: 'intake.synthetics.ap1.datadoghq.com',
+    ap2: 'intake.synthetics.ap2.datadoghq.com',
+    gov: 'intake.synthetics.ddog-gov.com'
+  },
+  mcp_server_endpoint: {
+    us: 'https://mcp.datadoghq.com/api/unstable/mcp-server/mcp',
+    us3: 'https://mcp.us3.datadoghq.com/api/unstable/mcp-server/mcp',
+    us5: 'https://mcp.us5.datadoghq.com/api/unstable/mcp-server/mcp',
+    eu: 'https://mcp.datadoghq.eu/api/unstable/mcp-server/mcp',
+    ap1: 'https://mcp.ap1.datadoghq.com/api/unstable/mcp-server/mcp',
+    ap2: 'https://mcp.ap2.datadoghq.com/api/unstable/mcp-server/mcp',
+    gov: 'The MCP Server endpoint for GOV is not supported.'
   },
   cursor_mcp_install_deeplink: {
     us: 'cursor://anysphere.cursor-deeplink/mcp/install?name=datadog-onboarding-us1&config=eyJ1cmwiOiJodHRwczovL21jcC5kYXRhZG9naHEuY29tL2FwaS91bnN0YWJsZS9tY3Atc2VydmVyL21jcD90b29sc2V0cz1vbmJvYXJkaW5nIiwidHlwZSI6Im9hdXRoIn0=',

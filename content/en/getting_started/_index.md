@@ -63,7 +63,7 @@ The table below lists a few examples of Datadog products:
         <td><p><strong>Troubleshooting</strong></p></td>
         <td>
             <ul>
-                <li>Manage <a href="/error_tracking/">errors</a> and <a href="/service_management/incident_management/">incidents</a>, summarizing issues and suggesting fixes.</li>
+                <li>Manage <a href="/error_tracking/">errors</a> and <a href="/incident_response/incident_management/">incidents</a>, summarizing issues and suggesting fixes.</li>
                 <li>Measure user churn and detect user frustration with <a href="/real_user_monitoring/">Real User Monitoring</a>.</li>
             </ul>
         </td>

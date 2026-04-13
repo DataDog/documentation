@@ -41,4 +41,4 @@ If you prefer not to use the one-line installation script, follow these step-by-
 
 See [Update Existing Pipelines][9001] if you want to make changes to your pipeline's configuration.
 
-[9001]: /observability_pipelines/update_existing_pipelines
+[9001]: /observability_pipelines/configuration/update_existing_pipelines

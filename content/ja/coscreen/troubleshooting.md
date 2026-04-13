@@ -1,15 +1,16 @@
 ---
+description: 音声品質、画面共有の最適化、ネットワーク接続、プラットフォーム固有の問題など、CoScreen の問題のトラブルシューティングを行います。
 is_beta: false
 title: CoScreen の最適化およびトラブルシューティング
 ---
 
-### Why does the audio quality degrade when using the microphone of my Bluetooth headset as input in CoScreen, Zoom, and other tools?
+### CoScreen、Zoom、またはその他のツールで Bluetooth ヘッドセットのマイクを入力として使用すると、音質が低下するのはなぜですか？
 
-If you're using a Bluetooth headset, the playback quality may degrade when your headset's microphone is selected as an audio input device. You may notice this if you play audio (for example, play a YouTube video) while you are in a CoScreen session. This can occur because your Bluetooth headset has switched to using a different Bluetooth profile.
+Bluetooth ヘッドセットを使用している場合、ヘッドセットのマイクがオーディオ入力のデバイスとして選択されていると、再生品質が低下することがあります。CoScreen セッション中にオーディオを再生 (例えば YouTube ビデオの再生) すると、この現象に気付くことがあります。これは、Bluetooth ヘッドセットが別の Bluetooth プロファイルの使用に切り替えたために起こる可能性があります。
 
-When only playing audio, Bluetooth headsets typically use the [A2DP profile][2], which is optimized for high audio quality but does not support using the microphone. If you choose your headset microphone as audio input (for example, during a CoScreen session or Zoom meeting) the headset switches to a different profile, usually [HFP][3] or [HSP][4], which supports microphone usage but has lower sound quality. Most Bluetooth headsets can use only one profile at a time.
+オーディオ再生のみの場合、Bluetooth ヘッドセットは通常 [A2DP プロファイル][2]を使用しており、高音質に最適化されていますが、マイクの使用には対応していません。たとえば CoScreen セッションや Zoom ミーティングなどでオーディオ入力としてヘッドセットマイクを選択すると、ヘッドセットは別のプロファイル、通常だと [HFP][3] または [HSP][4] に切り替わり、マイクの使用をサポートしますが、音質は低くなります。ほとんどの Bluetooth ヘッドセットは一度に 1 つのプロファイルしか使用できません。
 
-To avoid this issue, you can use a different audio input—such as a laptop's built-in microphone. You may need to restart your application to regain high  quality audio.
+この問題を回避するために、ノートパソコンの内蔵マイクなど別の音声入力を使うことができます。高音質を取り戻すためにアプリケーションを再起動する必要がある場合があります。
 
 ### 画面共有の品質やリモートコントロールのレイテンシーを最適化するにはどうすればよいですか？
 
