@@ -409,7 +409,7 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
 
     <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
 
-1. The first time you open a session with this extension activated, you'll be prompted to choose your Datadog account.
+1. The first time you open a session with this extension activated, you are prompted to choose your Datadog account.
 
 [1]: /bits_ai/mcp_server#toolsets
 [2]: https://goose-docs.ai/docs/getting-started/using-extensions/#mcp-servers
