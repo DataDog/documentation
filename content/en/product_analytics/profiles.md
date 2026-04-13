@@ -163,9 +163,9 @@ To import attibutes from a reference table or from an integration such as Salesf
 {{< img src="product_analytics/add_table_and_key3.png" alt="select the data to be merged with your profiles." style="width:80%;" >}}
 
 
-3. Select the **join keys** to merge the table with your profiles. Then, choose which **attributes from the reference table or integration** to add to your profiles.
+3. Select the **join key** and the **Product Analytics key** to merge the table with your profiles. Then, select which **attributes** from the list to add to your profiles.
 
-{{< img src="product_analytics/select_integration_attributes4.png" alt="Add new attributes using to enrich your profiles." style="width:80%;" >}}
+{{< img src="product_analytics/select_integration_attributes5.png" alt="The Configure import modal for Snowflake, showing the join key configuration and a list of selectable attributes with column names, types, and sample values." style="width:80%;" >}}
 
 
 <br>

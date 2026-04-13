@@ -190,7 +190,7 @@ If you set `service.type: LoadBalancer` in the Helm chart, Kubernetes provisions
 [3]: https://app.datadoghq.com/organization-settings/remote-config/setup
 [4]: /observability_pipelines/guide/environment_variables/
 [5]: https://github.com/DataDog/helm-charts/blob/main/charts/observability-pipelines-worker/values.yaml
-[6]: /observability_pipelines/scaling_and_performance/handling_load_and_backpressure/#destination-buffer-behavior
+[6]: /observability_pipelines/scaling_and_performance/buffering_and_backpressure/#destination-buffers
 [7]: https://github.com/DataDog/helm-charts/blob/main/charts/observability-pipelines-worker/values.yaml#L278
 [8]: /observability_pipelines/configuration/secrets_management/?tab=kubernetes#configure-the-worker-to-retrieve-secrets
 [9]: https://docs.aws.amazon.com/eks/latest/userguide/aws-load-balancer-controller.html
@@ -392,7 +392,7 @@ If you set `service.type: LoadBalancer` in the Helm chart, Kubernetes provisions
 [2]: /observability_pipelines/configuration/update_existing_pipelines/
 [3]: https://github.com/DataDog/helm-charts/blob/main/charts/observability-pipelines-worker/values.yaml
 [4]: https://app.datadoghq.com/organization-settings/remote-config/setup
-[5]: /observability_pipelines/scaling_and_performance/handling_load_and_backpressure/#destination-buffer-behavior
+[5]: /observability_pipelines/scaling_and_performance/buffering_and_backpressure/#destination-buffers
 [6]: https://github.com/DataDog/helm-charts/blob/23624b6e49eef98e84b21689672bb63a7a5df48b/charts/observability-pipelines-worker/values.yaml#L268
 [7]: /observability_pipelines/configuration/secrets_management/?tab=kubernetes#configure-the-worker-to-retrieve-secrets
 [8]: https://docs.aws.amazon.com/eks/latest/userguide/aws-load-balancer-controller.html

@@ -96,6 +96,7 @@ See the [Live Debugger documentation][4] for information about adding instrument
 - Log templates and condition expressions
 - PII redaction based on specific classes or types
 - Propagation of additional `DD_TAGS` set on the service to probe result tags
+- Environments where eBPF is unavailable, including many serverless platforms such as AWS Lambda and AWS Fargate
 
 ## Further reading
 

@@ -89,11 +89,11 @@ See the [GitLab Source Code][8] setup instructions to connect GitLab repositorie
 [8]: /integrations/gitlab-source-code/
 
 {{% /tab %}}
-{{% tab " DevOps" %}}
+{{% tab "DevOps" %}}
 
 See the [Azure source code setup instructions][9] to connect Azure DevOps repositories to Datadog.
 
-[8]: /integrations/azure-devops-source-code/#source-code-functionality
+[9]: /integrations/azure-devops-source-code/#source-code-functionality
 
 {{% /tab %}}
 {{< /tabs >}}

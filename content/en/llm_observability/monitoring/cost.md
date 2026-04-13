@@ -2,7 +2,7 @@
 title: Cost
 description: Monitor your LLM tokens and costs.
 ---
-{{< img src="llm_observability/cost_tracking_overview.png" alt="Cost view for an app in LLM Observability." style="width:100%;" >}}
+{{< img src="llm_observability/Cost_LLMO.png" alt="Cost view for an app in LLM Observability." style="width:100%;" >}}
 
 Datadog LLM Observability automatically calculates an estimated cost for each LLM request, using providers' public pricing models and token counts annotated on LLM/embedding spans.
 

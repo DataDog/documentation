@@ -22,7 +22,11 @@ further_reading:
 
 This page provides a list of UI components that you can use when creating apps in App Builder.
 
-Many component properties allow you to select from provided values. If you want to use an expression for a property's value, click **&lt;/&gt;** next to the property to use the code editor. For more information on using JavaScript in App Builder, see [JavaScript Expressions][7]. For more information about saving your components as a template, see [Reusable Modules][12].
+Many component properties allow you to select from provided values. If you want to use an expression for a property's value, click **&lt;/&gt;** next to the property to use the code editor. 
+
+Any component that can trigger an event has a list of available reactions in [events and reactions][13]. These components can also use [custom reactions][14].
+
+For more information on using JavaScript in App Builder, see [JavaScript Expressions][7]. For more information about saving your components as a template, see [Reusable Modules][12].
 <br><br> 
 
 {{% collapse-content title="Button" level="h3" %}}
@@ -66,13 +70,8 @@ Event
 : **Value**: click
 
 Reaction
-: **Values**: custom, set component state, trigger query, open modal, close modal, open url, download file, set state variable value
-
-State Function
-: fetch<br>
-**Example**: See [events][9].
-
-For more information on events, see [Events][1].
+: **Values**: examples include open modal, trigger action, and set component state<br>
+See [Events][1] for the full list of available reactions.
 
 ### Inspect data
 
@@ -182,13 +181,8 @@ Event
 : **Value**: change<br>
 
 Reaction
-: **Values**: custom, set component state, trigger query, open modal, close modal, download file, set state variable value
-
-State Function
-: fetch<br>
-**Example**: See [events][9].
-
-For more information on events, see [Events][1].
+: **Values**: examples include open modal, trigger action, and set component state<br>
+See [Events][1] for the full list of available reactions.
 
 ### Inspect data
 
@@ -283,13 +277,12 @@ Event
 : **Value**: change
 
 Reaction
-: **Values**: custom, close modal, download file, open modal, open side panel, close side panel, set component state, set state variable value, toast notification, trigger action
+: **Values**: examples include open modal, trigger action, and set component state<br>
+See [Events][1] for the full list of available reactions.
 
-State Functions
+State Function
 : setValue<br>
-**Example**: See [events][9].
-
-For more information on events, see [Events][1].
+**Example**: See [State functions][9].
 
 ### Inspect data
 
@@ -319,13 +312,8 @@ Event
 : **Value**: change
 
 Reaction
-: **Values**: custom, set component state, trigger query, open modal, close modal, download file
-
-State Function
-: fetch<br>
-**Example**: See [events][9].
-
-For more information on events, see [Events][1].
+: **Values**: examples include open modal, trigger action, and set component state<br>
+See [Events][1] for the full list of available reactions.
 
 ### Inspect data
 
@@ -374,13 +362,8 @@ Event
 : **Value**: change
 
 Reaction
-: **Values**: custom, set component state, trigger query, open modal, close modal, download file, set state variable value
-
-State Function
-: fetch<br>
-**Example**: See [events][9].
-
-For more information on events, see [Events][1].
+: **Values**: examples include open modal, trigger action, and set component state<br>
+See [Events][1] for the full list of available reactions.
 
 ### Inspect data
 
@@ -541,13 +524,13 @@ Event
 : **Value**: submit, change, validate
 
 Reaction
-: **Values**: custom, set component state, trigger query, open modal, close modal, download file, set state variable value
+: **Values**: examples include open modal, trigger action, and set component state<br>
+See [Events][1] for the full list of available reactions.
 
 State Function
 : setValue<br>
-**Example**: `form0.setValue({name: 'node-group-1'})` sets the value of the `form0` component to `{name: 'node-group-1'}`.
-
-For more information on events, see [Events][1].
+**Example**: `form0.setValue({name: 'node-group-1'})` sets the value of the `form0` component to `{name: 'node-group-1'}`.<br>
+See [State functions][9] for more information.
 
 ### Inspect data
 
@@ -583,13 +566,8 @@ Event
 : **Value**: change
 
 Reaction
-: **Values**: custom, set component state, trigger query, open modal, close modal, download file, set state variable value
-
-State Function
-: fetch<br>
-**Example**: See [events][9].
-
-For more information on events, see [Events][1].
+: **Values**: examples include open modal, trigger action, and set component state<br>
+See [Events][1] for the full list of available reactions.
 
 ### Inspect data
 
@@ -623,15 +601,13 @@ Event
 : **Values**: toggleOpen, close, open
 
 Reaction
-: **Values**: custom, set component state, trigger query, open modal, close modal, download file, set state variable value
+: **Values**: examples include open modal, trigger action, and set component state<br>
+See [Events][1] for the full list of available reactions.
 
-State Functions
-: fetch<br>
-**Example**: See [events][9].
+State Function
 : setIsOpen<br>
-**Example**: `modal0.setIsOpen(true)` sets the state of `modal0` to open.
-
-For more information on events, see [Events][1].
+**Example**: `modal0.setIsOpen(true)` sets the state of `modal0` to open.<br>
+See [State functions][9] for more information.
 
 ### Inspect data
 
@@ -685,15 +661,13 @@ Event
 : **Value**: change
 
 Reaction
-: **Values**: custom, set component state, trigger query, open modal, close modal, download file, set state variable value
+: **Values**: examples include open modal, trigger action, and set component state<br>
+See [Events][1] for the full list of available reactions.
 
-State Functions
-: fetch<br>
-**Example**: See [events][9].
+State Function
 : setValue<br>
-**Example**: `numberInput0.setValue(3)` sets the value of the `numberInput0` component to `3`.
-
-For more information on events, see [Events][1].
+**Example**: `numberInput0.setValue(3)` sets the value of the `numberInput0` component to `3`.<br>
+See [State functions][9] for more information.
 
 ### Inspect data
 
@@ -753,15 +727,13 @@ Event
 : **Value**: change
 
 Reaction
-: **Values**: custom, set component state, trigger query, open modal, close modal, download file, set state variable value
+: **Values**: examples include open modal, trigger action, and set component state<br>
+See [Events][1] for the full list of available reactions.
 
-State Functions
-: fetch<br>
-**Example**: See [events][9].
+State Function
 : setValue<br>
-**Example**: `radioButtons0.setValue("production")` sets the value of the `radioButtons0` component to `"production"`.
-
-For more information on events, see [Events][1].
+**Example**: `radioButtons0.setValue("production")` sets the value of the `radioButtons0` component to `"production"`.<br>
+See [State functions][9] for more information.
 
 ### Inspect data
 
@@ -798,9 +770,8 @@ Function Name
 : **Value**: <code>props.customFunctionName</code>
 
 Reaction
-: **Values**: close modal, custom, download file, open modal, open side panel, close side panel, set component state, set state variable value, toast notification, trigger action
-
-For more information on events, see [Events][1].
+: **Values**: examples include open modal, trigger action, and set component state<br>
+See [Events][1] for the full list of available reactions.
 
 ### Inspect data
 
@@ -851,13 +822,13 @@ Event
 : **Values**: change, submit
 
 Reaction
-: **Values**: custom, set component state, trigger query, open modal, close modal, download file, set state variable value
+: **Values**: examples include open modal, trigger action, and set component state<br>
+See [Events][1] for the full list of available reactions.
 
-State Functions
-: fetch<br>
-**Example**: See [events][9].
+State Function
 : setValue<br>
-**Example**: `search0.setValue("search query")` sets the value of the `search0` component to `"search query"`.
+**Example**: `search0.setValue("search query")` sets the value of the `search0` component to `"search query"`.<br>
+See [State functions][9] for more information.
 
 For more information on events, see [Events][1].
 
@@ -924,15 +895,13 @@ Event
 : **Value**: change
 
 Reaction
-: **Values**: custom, set component state, trigger query, open modal, close modal, download file, set state variable value
+: **Values**: examples include open modal, trigger action, and set component state<br>
+See [Events][1] for the full list of available reactions.
 
-State Functions
-: fetch<br>
-**Example**: See [events][9].
+State Function
 : setValue<br>
-**Example**: `select0.setValue("staging")` sets the value of the `select0` component to `"staging"`.
-
-For more information on events, see [Events][1].
+**Example**: `select0.setValue("staging")` sets the value of the `select0` component to `"staging"`.<br>
+See [State functions][9] for more information.
 
 ### Inspect data
 
@@ -969,13 +938,13 @@ Event
 : **Values**: toggle open, close, open
 
 Reaction
-: **Values**: custom, close modal, download file, open modal, open side panel, close side panel, set component state, set state variable value, toast notification, trigger action
+: **Values**: examples include open modal, trigger action, and set component state<br>
+See [Events][1] for the full list of available reactions.
 
-State Functions
+State Function
 : setIsOpen<br>
-**Example**: `sidePanel0.setIsOpen(true)` sets the state of `sidePanel0` to open.
-
-For more information on events, see [Events][1].
+**Example**: `sidePanel0.setIsOpen(true)` sets the state of `sidePanel0` to open.<br>
+See [State functions][9] for more information.
 
 ### Inspect data
 
@@ -1028,15 +997,13 @@ Event
 : **Value**: change
 
 Reaction
-: **Values**: custom, set component state, trigger query, open modal, close modal, download file, set state variable value
+: **Values**: examples include open modal, trigger action, and set component state<br>
+See [Events][1] for the full list of available reactions.
 
-State Functions
-: fetch<br>
-**Example**: See [events][9].
+State Function
 : setTabIndex<br>
-**Example**: `tab0.setTabIndex(0)` sets the value of the `tab0` component to the first tab.
-
-For more information on events, see [Events][1].
+**Example**: `tab0.setTabIndex(0)` sets the value of the `tab0` component to the first tab.<br>
+See [State functions][9] for more information.
 
 ### Inspect data
 
@@ -1145,10 +1112,6 @@ Reactions
 **Provided values**: download file, open modal, close modal, open side panel, close side panel, open URL, set component state, set state variable value, toast notification, trigger action, custom<br>
 Some reaction types have additional properties.
 
-State Function
-: fetch<br>
-**Example**: See [events][9].
-
 ### Appearance
 
 Scrollable
@@ -1193,17 +1156,15 @@ Event
 : **Values**: pageChange, tableRowClick
 
 Reaction
-: **Values**: download file, open modal, close modal, open side panel, close side panel, set component state, set state variable value, toast notification, trigger action, custom
+: **Values**: examples include open modal, trigger action, and set component state<br>
+See [Events][1] for the full list of available reactions.
 
-State Functions
-: fetch<br>
-**Example**: See [events][9].
+State Function
 : setSelectedRow<br>
 **Examples**: <ul><li>`table0.setSelectedRow(0)` sets the `selectedRow` property of `table0` to the first row.</li><li>`table0.setSelectedRow(null)` clears the `selectedRow` property.</li></ul>
 : setPageIndex<br>
-**Example**: `table0.setPageIndex(0)` sets the `pageIndex` property of `table0` to the first page.
-
-For more information on events, see [Events][1].
+**Example**: `table0.setPageIndex(0)` sets the `pageIndex` property of `table0` to the first page.<br>
+See [State functions][9] for more information.
 
 ### Inspect data
 
@@ -1291,15 +1252,13 @@ Event
 : **Values**: change, submit
 
 Reaction
-: **Values**: custom, set component state, trigger query, open modal, close modal, download file, set state variable value
+: **Values**: examples include open modal, trigger action, and set component state<br>
+See [Events][1] for the full list of available reactions.
 
-State Functions
-: fetch<br>
-**Example**: See [events][9].
+State Function
 : setValue<br>
-**Example**: `textArea0.setValue("text")` sets the value of the `textArea0` component to `"text"`.
-
-For more information on events, see [Events][1].
+**Example**: `textArea0.setValue("text")` sets the value of the `textArea0` component to `"text"`.<br>
+See [State functions][9] for more information.
 
 ### Inspect data
 
@@ -1338,15 +1297,13 @@ Event
 : **Values**: change, submit
 
 Reaction
-: **Values**: custom, set component state, trigger query, open modal, close modal, download file, set state variable value
+: **Values**: examples include open modal, trigger action, and set component state<br>
+See [Events][1] for the full list of available reactions.
 
-State Functions
-: fetch<br>
-**Example**: See [events][9].
+State Function
 : setValue<br>
 **Example**: `textInput0.setValue("text")` sets the value of the `textInput0` component to `"text"`.
-
-For more information on events, see [Events][1].
+See [State functions][9] for more information.
 
 ### Inspect data
 
@@ -1377,3 +1334,5 @@ To view this component in context, see the [Metrics Explorer & Monitors Builder]
 [10]: /service_management/app_builder/components/custom_charts/
 [11]: /actions/app_builder/components/react_renderer/
 [12]: /actions/app_builder/components/reusable_modules/
+[13]: /actions/app_builder/events/#events-and-reactions
+[14]: /actions/app_builder/events/#custom-reactions

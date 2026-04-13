@@ -822,6 +822,150 @@ Request request = OkHttpRequestExtKt
 * If you use multiple Interceptors, this one must be called first.
 * If you define custom tracing header types in the Datadog configuration and are using a tracer registered with `GlobalDatadogTracer`, make sure the same tracing header types are set for the tracer in use.
 
+### Cronet
+
+If you use Cronet instead of OkHttp, you can instrument your `CronetEngine` for distributed tracing.
+
+1. Add the Gradle dependencies in the module-level `build.gradle` file:
+   ```groovy
+   dependencies {
+     implementation "com.datadoghq:dd-sdk-android-cronet:x.x.x"
+   }
+   ```
+2. Instrument the `CronetEngine.Builder`:
+   {{< tabs >}}
+   {{% tab "Kotlin" %}}
+   ```kotlin
+   val cronetEngine = CronetEngine.Builder(context)
+     .configureDatadogInstrumentation(
+       apmInstrumentationConfiguration = ApmNetworkInstrumentationConfiguration(
+         tracedHosts = listOf("example.com", "example.eu")
+       )
+     )
+     .build()
+   ```
+   {{% /tab %}}
+   {{% tab "Java" %}}
+   ```java
+   CronetEngine.Builder builder = new CronetEngine.Builder(context);
+   CronetEngine cronetEngine = CronetIntegrationPluginKt
+     .configureDatadogInstrumentation(
+       builder,
+       null,
+       new ApmNetworkInstrumentationConfiguration(
+         Arrays.asList("example.com", "example.eu")
+       )
+     )
+     .build();
+   ```
+   {{% /tab %}}
+   {{< /tabs >}}
+
+This creates a span around each request processed by the `CronetEngine` that matches the provided hosts. All relevant information is automatically filled (URL, method, status code, error), and tracing information is propagated to your backend.
+
+#### Tracing redirects
+
+By default, tracing is applied at the application level. To trace redirected requests as well, set the trace scope to `ALL`:
+
+{{< tabs >}}
+{{% tab "Kotlin" %}}
+```kotlin
+val cronetEngine = CronetEngine.Builder(context)
+  .configureDatadogInstrumentation(
+    apmInstrumentationConfiguration = ApmNetworkInstrumentationConfiguration(
+      tracedHosts = listOf("example.com", "example.eu")
+    ).setTraceScope(ApmNetworkTracingScope.ALL)
+  )
+  .build()
+```
+{{% /tab %}}
+{{% tab "Java" %}}
+```java
+CronetEngine.Builder builder = new CronetEngine.Builder(context);
+CronetEngine cronetEngine = CronetIntegrationPluginKt
+  .configureDatadogInstrumentation(
+    builder,
+    null,
+    new ApmNetworkInstrumentationConfiguration(
+      Arrays.asList("example.com", "example.eu")
+    ).setTraceScope(ApmNetworkTracingScope.ALL)
+  )
+  .build();
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+#### Header propagation only
+
+To propagate tracing headers without creating local spans, use header-propagation-only mode.
+
+**Note**: This mode requires RUM to be enabled, as resource tracking is handled by the RUM instrumentation. You must provide a `RumNetworkInstrumentationConfiguration` in the `configureDatadogInstrumentation` call.
+
+{{< tabs >}}
+{{% tab "Kotlin" %}}
+```kotlin
+val cronetEngine = CronetEngine.Builder(context)
+  .configureDatadogInstrumentation(
+    rumInstrumentationConfiguration = RumNetworkInstrumentationConfiguration(),
+    apmInstrumentationConfiguration = ApmNetworkInstrumentationConfiguration(
+      tracedHosts = listOf("example.com", "example.eu")
+    ).setHeaderPropagationOnly()
+  )
+  .build()
+```
+{{% /tab %}}
+{{% tab "Java" %}}
+```java
+CronetEngine.Builder builder = new CronetEngine.Builder(context);
+CronetEngine cronetEngine = CronetIntegrationPluginKt
+  .configureDatadogInstrumentation(
+    builder,
+    new RumNetworkInstrumentationConfiguration(),
+    new ApmNetworkInstrumentationConfiguration(
+      Arrays.asList("example.com", "example.eu")
+    ).setHeaderPropagationOnly()
+  )
+  .build();
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+#### Sampling rate
+
+To configure the trace sampling rate:
+
+{{< tabs >}}
+{{% tab "Kotlin" %}}
+```kotlin
+val cronetEngine = CronetEngine.Builder(context)
+  .configureDatadogInstrumentation(
+    apmInstrumentationConfiguration = ApmNetworkInstrumentationConfiguration(
+      tracedHosts = listOf("example.com", "example.eu")
+    ).setTraceSampleRate(20f)
+  )
+  .build()
+```
+{{% /tab %}}
+{{% tab "Java" %}}
+```java
+CronetEngine.Builder builder = new CronetEngine.Builder(context);
+CronetEngine cronetEngine = CronetIntegrationPluginKt
+  .configureDatadogInstrumentation(
+    builder,
+    null,
+    new ApmNetworkInstrumentationConfiguration(
+      Arrays.asList("example.com", "example.eu")
+    ).setTraceSampleRate(20f)
+  )
+  .build();
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+**Known limitations**:
+* Tracing headers are not propagated for redirected requests due to Cronet API limitations.
+* Retries cannot be instrumented.
+
 ## Batch collection
 
 All the spans are first stored on the local device in batches. Each batch follows the intake specification. They are sent as soon as network is available, and the battery is high enough to ensure the Datadog SDK does not impact the end user's experience. If the network is not available while your application is in the foreground, or if an upload of data fails, the batch is kept until it can be sent successfully.

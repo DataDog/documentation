@@ -1,4 +1,5 @@
 ---
+id: npm
 core_product:
 - network performance monitoring
 title: Network Performance Monitoring (NPM)

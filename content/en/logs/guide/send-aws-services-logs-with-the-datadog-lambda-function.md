@@ -47,6 +47,7 @@ Any AWS service that generates logs into a S3 bucket or a CloudWatch Log Group i
 | [ECS][16]                          | `-`                                                                                                            | [Use the Docker Agent to gather your logs][17] or [automatic](#automatically-set-up-triggers) log collection.                                                                              |
 | [EKS][62]                          | [Enable Amazon EKS logs][63]                                                                                   | [Manual][63] and [automatic](#automatically-set-up-triggers) log collection.                                                 |
 | [Elastic Load Balancing (ELB)][18] | [Enable Amazon ELB logs][19]                                                                                   | [Manual][20] and [automatic](#automatically-set-up-triggers) log collection.                                                 |
+| [Glue][76]                         | [Enable AWS Glue logs][77]                                                                                     | [Manual][77] and [automatic](#automatically-set-up-triggers) log collection.                                                 |
 | [IoT Core][74]                     | [Enable Amazon IoT Core logs][75]                                                                              | [Automatic](#automatically-set-up-triggers) log collection.                                                                  |
 | [Lambda][21]                       | `-`                                                                                                            | [Manual][22] and [automatic](#automatically-set-up-triggers) log collection.                                                 |
 | [MWAA][55]                         | [Enable Amazon MWAA logs][56]                                                                                  | [Manual][56] and [automatic](#automatically-set-up-triggers) log collection.                                                 |
@@ -98,6 +99,7 @@ The following sources and locations are supported:
 | ECS Logs                    | CloudWatch     |
 | EKS Control Plane Logs      | CloudWatch     |
 | EKS Container Insights Logs | CloudWatch     |
+| Glue Jobs Logs              | CloudWatch     |
 | Lambda Logs                 | CloudWatch     |
 | Lambda@Edge Logs            | Cloudwatch     |
 | IoT Core Logs                    | CloudWatch     |
@@ -142,6 +144,10 @@ The following sources and locations are supported:
     "eks:ListClusters",
     "elasticloadbalancing:DescribeLoadBalancerAttributes",
     "elasticloadbalancing:DescribeLoadBalancers",
+    "glue:BatchGetJobs",
+    "glue:GetJobs",
+    "glue:GetJob",
+    "glue:ListJobs",
     "iot:GetV2LoggingOptions",
     "lambda:GetPolicy",
     "lambda:InvokeFunction",
@@ -194,6 +200,10 @@ The following sources and locations are supported:
     | `ecs:ListTaskDefinitionFamilies`                            | List all task definition families.                                           |
     | `elasticloadbalancing:`<br>`DescribeLoadBalancers`          | List all load balancers.                                                     |
     | `elasticloadbalancing:`<br>`DescribeLoadBalancerAttributes` | Get the name of the S3 bucket containing ELB access logs.                    |
+    | `glue:BatchGetJobs`                                             | Get information about multiple Glue jobs.                                    |
+    | `glue:GetJob`                                               | Get information about a Glue job.                                            |
+    | `glue:GetJobs`                                              | List all Glue jobs.                                                          |
+    | `glue:ListJobs`                                             | List all Glue job names.                                                     |
     | `eks:DescribeCluster`                                       | Describe an EKS cluster.                                                     |
     | `eks:ListClusters`                                          | List all EKS clusters.                                                       |
     | `iot:GetV2LoggingOptions`                                   | Get IoT V2 logging options.                                                  |
@@ -452,3 +462,5 @@ You can also exclude or send only those logs that match a specific pattern by us
 [75]: /integrations/amazon-iot/#enable-logging
 [74]: /integrations/amazon-bedrock/
 [75]: /integrations/amazon-pcs/
+[76]: /integrations/amazon_glue/
+[77]: /integrations/amazon_glue/#log-collection
