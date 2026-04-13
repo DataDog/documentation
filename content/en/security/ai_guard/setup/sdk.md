@@ -23,7 +23,7 @@ To use AI Guard with the SDK and see AI Guard activity in Datadog, install the a
 
 {{< tabs >}}
 {{% tab "Python" %}}
-Install dd-trace-py v3.18.0 or later:
+Install dd-trace-py v3.19.0 or later:
 
 ```shell
 pip install ddtrace>=3.18.0
