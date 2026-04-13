@@ -14,6 +14,7 @@ disable_sidebar: true
 | SQL Server 2017 | {{< X >}}   | {{< X >}} | {{< X >}}  | {{< X >}}        |      |
 | SQL Server 2019 | {{< X >}}   | {{< X >}} | {{< X >}}  | {{< X >}}        |      |
 | SQL Server 2022 | {{< X >}}   | {{< X >}} | {{< X >}}  | {{< X >}}        |      |
+| SQL Server 2025 | {{< X >}}   | {{< X >}} | {{< X >}}  | {{< X >}}        |      |
 
 For setup instructions, select your hosting type:
 
