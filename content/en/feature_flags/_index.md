@@ -17,6 +17,9 @@ further_reading:
 - link: "/feature_flags/guide/migrate_from_statsig"
   tag: "Guide"
   text: "Migrate Your Feature Flags from Statsig"
+- link: "/feature_flags/guide/headless_cms"
+  tag: "Guide"
+  text: "Integrate Feature Flags with a Headless CMS"
 ---
 
 ## Overview
