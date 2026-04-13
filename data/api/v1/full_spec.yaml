@@ -21313,12 +21313,68 @@ components:
           description: Shows the sum of all browser RUM units over all hours in the current date for all organizations (To be deprecated on October 1st, 2024).
           format: int64
           type: integer
+        ccm_anthropic_spend_last:
+          description: Shows the last value of Anthropic cloud spend monitored over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        ccm_aws_spend_last:
+          description: Shows the last value of AWS cloud spend monitored over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        ccm_azure_spend_last:
+          description: Shows the last value of Azure cloud spend monitored over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        ccm_confluent_spend_last:
+          description: Shows the last value of Confluent cloud spend monitored over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        ccm_databricks_spend_last:
+          description: Shows the last value of Databricks cloud spend monitored over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        ccm_elastic_spend_last:
+          description: Shows the last value of Elastic cloud spend monitored over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        ccm_fastly_spend_last:
+          description: Shows the last value of Fastly cloud spend monitored over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        ccm_gcp_spend_last:
+          description: Shows the last value of GCP cloud spend monitored over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        ccm_github_spend_last:
+          description: Shows the last value of GitHub cloud spend monitored over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        ccm_mongodb_spend_last:
+          description: Shows the last value of MongoDB cloud spend monitored over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        ccm_oci_spend_last:
+          description: Shows the last value of OCI cloud spend monitored over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        ccm_openai_spend_last:
+          description: Shows the last value of OpenAI cloud spend monitored over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        ccm_snowflake_spend_last:
+          description: Shows the last value of Snowflake cloud spend monitored over all hours in the current date for all organizations.
+          format: int64
+          type: integer
         ccm_spend_monitored_ent_last:
           description: Shows the last value of the amount of cloud spend monitored for Enterprise over all hours in the current date for all organizations.
           format: int64
           type: integer
         ccm_spend_monitored_pro_last:
           description: Shows the last value of the amount of cloud spend monitored for Pro over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        ccm_twilio_spend_last:
+          description: Shows the last value of Twilio cloud spend monitored over all hours in the current date for all organizations.
           format: int64
           type: integer
         ci_pipeline_indexed_spans_sum:
@@ -22202,12 +22258,68 @@ components:
           description: Shows the sum of all browser RUM units over all hours in the current date for the given org (To be deprecated on October 1st, 2024).
           format: int64
           type: integer
+        ccm_anthropic_spend_last:
+          description: Shows the last value of Anthropic cloud spend monitored over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        ccm_aws_spend_last:
+          description: Shows the last value of AWS cloud spend monitored over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        ccm_azure_spend_last:
+          description: Shows the last value of Azure cloud spend monitored over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        ccm_confluent_spend_last:
+          description: Shows the last value of Confluent cloud spend monitored over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        ccm_databricks_spend_last:
+          description: Shows the last value of Databricks cloud spend monitored over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        ccm_elastic_spend_last:
+          description: Shows the last value of Elastic cloud spend monitored over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        ccm_fastly_spend_last:
+          description: Shows the last value of Fastly cloud spend monitored over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        ccm_gcp_spend_last:
+          description: Shows the last value of GCP cloud spend monitored over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        ccm_github_spend_last:
+          description: Shows the last value of GitHub cloud spend monitored over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        ccm_mongodb_spend_last:
+          description: Shows the last value of MongoDB cloud spend monitored over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        ccm_oci_spend_last:
+          description: Shows the last value of OCI cloud spend monitored over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        ccm_openai_spend_last:
+          description: Shows the last value of OpenAI cloud spend monitored over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        ccm_snowflake_spend_last:
+          description: Shows the last value of Snowflake cloud spend monitored over all hours in the current date for the given org.
+          format: int64
+          type: integer
         ccm_spend_monitored_ent_last:
           description: Shows the last value of the amount of cloud spend monitored for Enterprise over all hours in the current date for the given org.
           format: int64
           type: integer
         ccm_spend_monitored_pro_last:
           description: Shows the last value of the amount of cloud spend monitored for Pro over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        ccm_twilio_spend_last:
+          description: Shows the last value of Twilio cloud spend monitored over all hours in the current date for the given org.
           format: int64
           type: integer
         ci_pipeline_indexed_spans_sum:
@@ -23101,12 +23213,68 @@ components:
           description: Shows the sum of all browser RUM units over all hours in the current month for all organizations (To be deprecated on October 1st, 2024).
           format: int64
           type: integer
+        ccm_anthropic_spend_last_sum:
+          description: Shows the sum of the last value of Anthropic cloud spend monitored in the current month for all organizations.
+          format: int64
+          type: integer
+        ccm_aws_spend_last_sum:
+          description: Shows the sum of the last value of AWS cloud spend monitored in the current month for all organizations.
+          format: int64
+          type: integer
+        ccm_azure_spend_last_sum:
+          description: Shows the sum of the last value of Azure cloud spend monitored in the current month for all organizations.
+          format: int64
+          type: integer
+        ccm_confluent_spend_last_sum:
+          description: Shows the sum of the last value of Confluent cloud spend monitored in the current month for all organizations.
+          format: int64
+          type: integer
+        ccm_databricks_spend_last_sum:
+          description: Shows the sum of the last value of Databricks cloud spend monitored in the current month for all organizations.
+          format: int64
+          type: integer
+        ccm_elastic_spend_last_sum:
+          description: Shows the sum of the last value of Elastic cloud spend monitored in the current month for all organizations.
+          format: int64
+          type: integer
+        ccm_fastly_spend_last_sum:
+          description: Shows the sum of the last value of Fastly cloud spend monitored in the current month for all organizations.
+          format: int64
+          type: integer
+        ccm_gcp_spend_last_sum:
+          description: Shows the sum of the last value of GCP cloud spend monitored in the current month for all organizations.
+          format: int64
+          type: integer
+        ccm_github_spend_last_sum:
+          description: Shows the sum of the last value of GitHub cloud spend monitored in the current month for all organizations.
+          format: int64
+          type: integer
+        ccm_mongodb_spend_last_sum:
+          description: Shows the sum of the last value of MongoDB cloud spend monitored in the current month for all organizations.
+          format: int64
+          type: integer
+        ccm_oci_spend_last_sum:
+          description: Shows the sum of the last value of OCI cloud spend monitored in the current month for all organizations.
+          format: int64
+          type: integer
+        ccm_openai_spend_last_sum:
+          description: Shows the sum of the last value of OpenAI cloud spend monitored in the current month for all organizations.
+          format: int64
+          type: integer
+        ccm_snowflake_spend_last_sum:
+          description: Shows the sum of the last value of Snowflake cloud spend monitored in the current month for all organizations.
+          format: int64
+          type: integer
         ccm_spend_monitored_ent_last_sum:
           description: Shows the sum of the last value of the amount of cloud spend monitored for Enterprise in the current month for all organizations.
           format: int64
           type: integer
         ccm_spend_monitored_pro_last_sum:
           description: Shows the sum of the last value of the amount of cloud spend monitored for Pro in the current month for all organizations.
+          format: int64
+          type: integer
+        ccm_twilio_spend_last_sum:
+          description: Shows the sum of the last value of Twilio cloud spend monitored in the current month for all organizations.
           format: int64
           type: integer
         ci_pipeline_indexed_spans_agg_sum:
