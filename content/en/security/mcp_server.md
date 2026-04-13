@@ -7,7 +7,7 @@ further_reading:
   text: "Set Up the Datadog MCP Server"
 - link: "bits_ai/mcp_server"
   tag: "Documentation"
-  text: "Datadog MCP Server"
+  text: "Datadog MCP Server Overview"
 - link: "security/threats/security_signals/"
   tag: "Documentation"
   text: "Security Signals"
@@ -26,27 +26,29 @@ The [Datadog MCP Server][1] lets AI agents query your security data through the 
 
 ## Quickstart
 
-The `security` toolset is not enabled by default. To activate it, add `security` to the `toolsets` parameter when connecting to the Datadog MCP Server for your [Datadog site][3]:
+The `security` toolset is not enabled by default. You can enable it by adding a parameter to your URL, which allows security tools to interact with your AI client.
 
-```text
-https://mcp.{{< region-param key="dd_site" >}}/api/unstable/mcp-server/mcp?toolsets=core,security
-```
+1. [Set up the Datadog MCP Server][4].
+2. When connecting to the Datadog MCP Server, add `security` to the `toolsets` parameter. For example, for your [Datadog site][3] ({{< region-param key="dd_site_name" >}}), use:
+   ```text
+   https://mcp.{{< region-param key="dd_site" >}}/api/unstable/mcp-server/mcp?toolsets=core,security
+   ```
 
 <div class="alert alert-warning">Without <code>?toolsets=security</code> in the URL, the security tools are not available to your AI client — even if the MCP Server is otherwise connected and working.</div>
 
-For client-specific setup instructions (Cursor, Claude Code, VS Code, and others), see [Set Up the Datadog MCP Server][4].
-
 ## Use cases
 
-The `security` toolset is useful for:
+You can use the `security` toolset to:
 
-- **Triaging security signals**: Ask your AI agent to surface recent high-severity Cloud SIEM signals, App & API Protection alerts, or Workload Protection threats, and get a summary of patterns and affected resources.
-- **Analyzing your security posture**: Query findings across Cloud Security with SQL to understand the distribution of misconfigurations, vulnerabilities, and identity risks across your environment.
-- **Investigating specific findings**: Retrieve full details for a set of findings to understand scope, affected resources, and remediation context.
-- **Correlating signals and findings**: Cross-reference active security signals with open findings to determine whether an alert is tied to a known posture issue.
-- **Remediating vulnerabilities with an AI agent**: Pull library vulnerability findings — which include code location and remediation guidance — and pass them to your AI agent to apply patches directly in your codebase.
+- **Triage security signals**: Ask your AI agent to surface recent high-severity Cloud SIEM signals, App & API Protection alerts, or Workload Protection threats, and get a summary of patterns and affected resources.
+- **Analyze your security posture**: Query findings across Cloud Security with SQL to understand the distribution of misconfigurations, vulnerabilities, and identity risks across your environment.
+- **Investigate specific findings**: Retrieve full details for a set of findings to understand scope, affected resources, and remediation context.
+- **Correlate signals and findings**: Cross-reference active security signals with open findings to determine whether an alert is tied to a known posture issue.
+- **Remediate vulnerabilities with an AI agent**: Pull library vulnerability findings, including code location and remediation guidance, and pass them to your AI agent to apply patches directly in your codebase.
 
 ## Available tools
+
+The `security` toolset exposes the following tools to your AI client. For general information on how to use MCP tools, see the [Datadog MCP Server Overview][1].
 
 `search_datadog_security_signals`
 : Searches and retrieves security signals from Datadog, including Cloud SIEM signals, App & API Protection signals, and Workload Protection signals. Use this to surface and investigate suspicious activity.
@@ -63,24 +65,6 @@ The `security` toolset is useful for:
 `search_security_findings`
 : Retrieves full security finding objects. Use this when you need complete finding details or when SQL-based analysis is not sufficient. Prefer `analyze_security_findings` for most analysis tasks.
 : *Permissions required: `Security Monitoring Findings Read`*
-
-## Example prompts
-
-After you connect, try prompts like:
-
-**Signals:**
-- Show me security signals from the last 24 hours.
-- Find high-severity signals related to my production environment.
-- List Cloud SIEM signals triggered by suspicious login attempts.
-
-**Findings:**
-- What fields are available for security findings?
-- Show me the top 10 rules with the most critical findings.
-- Count open findings grouped by severity and finding type.
-- Find library vulnerabilities with exploits available, grouped by resource.
-- Get full details for critical findings in my AWS environment.
-- List all open identity risk findings with full metadata.
-- Get open library vulnerability findings with code locations and remediation guidance so I can patch them.
 
 ## Required permissions
 
