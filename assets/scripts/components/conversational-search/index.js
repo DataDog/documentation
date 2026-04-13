@@ -315,6 +315,10 @@ class ConversationalSearch {
             this.hasLoggedFirstOpen = true;
         }
 
+        this.log('Conversational Search Open', {
+            conversational_search: { action: 'open', trigger, provider: this.provider }
+        });
+
         this.isOpen = true;
         this.sidebar.classList.add('open');
         this.overlay.classList.add('open');
