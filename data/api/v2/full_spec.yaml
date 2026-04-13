@@ -61250,7 +61250,7 @@ components:
         - TIMESTAMP_DESCENDING
     SecurityMonitoringStandardDataSource:
       default: logs
-      description: Source of events, either logs, audit trail, or Datadog events. `app_sec_spans` is deprecated in favor of `spans`.
+      description: Source of events, either logs, audit trail, security signals, or Datadog events. `app_sec_spans` is deprecated in favor of `spans`.
       enum:
         - logs
         - audit
@@ -61259,6 +61259,7 @@ components:
         - security_runtime
         - network
         - events
+        - security_signals
       example: logs
       type: string
       x-enum-varnames:
@@ -61269,6 +61270,7 @@ components:
         - SECURITY_RUNTIME
         - NETWORK
         - EVENTS
+        - SECURITY_SIGNALS
     SecurityMonitoringStandardRuleCreatePayload:
       description: Create a new rule.
       properties:
