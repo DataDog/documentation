@@ -11,8 +11,9 @@ Datadog supports Unity Monitoring for iOS and Android for Unity LTS 2022+.
 
 Datadog does not support Desktop (Windows, Mac, or Linux) or console deployments from Unity. If you have a game or application and want to use Datadog RUM to monitor its performance, create a ticket with [Datadog support][7].
 
-### Step 1 - Install the SDK
+{% stepper %}
 
+{% step title="Install the SDK" %}
 1. Install the [External Dependency Manager for Unity (EDM4U)][4]. This can be done using [Open UPM][5].
 
 2. Add the Datadog SDK Unity package from its Git URL at [https://github.com/DataDog/unity-package][6]. The package URL is `https://github.com/DataDog/unity-package.git`.
@@ -39,17 +40,18 @@ constraints {
 <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us1/v6/datadog-logs.js"></script>
 <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us1/v6/datadog-rum-slim.js"></script>
 ```
+{% /step %}
 
-### Step 2 - Specify application details in the UI
-
+{% step title="Specify application details in the UI" %}
 1. In Datadog, navigate to [**Digital Experience** > **Add an Application**][11].
 2. Choose **Unity** as the application type.
 3. Provide an application name to generate a unique Datadog application ID and client token.
 4. To disable automatic user data collection for either client IP or geolocation data, uncheck the boxes for those settings.
 
 To ensure the safety of your data, you must use a client token. For more information about setting up a client token, see the [Client Token documentation][12].
+{% /step %}
 
-### Step 3 - Configure Datadog settings in Unity
+{% step title="Configure Datadog settings in Unity" %}
 
 After installing the Datadog Unity SDK, you need to set Datadog's settings in the Unity UI. Navigate to your `Project Settings` and click on the `Datadog` section on the left hand side.
 
@@ -80,9 +82,12 @@ The following parameters are available:
 | Track Non-Fatal App Hangs | No | (iOS Only) Whether to track non-fatal app hangs. App hangs are detected when the app is unresponsive for a certain amount of time. The supplied "Threshold" is the amount of time in seconds that the app must be unresponsive before it is considered a non-fatal app hang. |
 | First Party Hosts | No | To enable distributed tracing, you must specify which hosts are considered "first party" and have trace information injected. |
 
-### Sample RUM sessions
+#### Sample RUM sessions
 
 You can control the data your application sends to Datadog RUM during instrumentation of the RUM Unity SDK. Specify the **Session Sample Rate** as a percentage between 0 and 100 in the Project Settings window in Unity.
+{% /step %}
+
+{% /stepper %}
 
 ## Using Datadog
 
