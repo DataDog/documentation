@@ -16,7 +16,7 @@ further_reading:
 
 ## Overview
 
-Use the OCSF processor to normalize your security logs according to the [Open Cybersecurity Schema Framework (OCSF)][11]. The OCSF processor allows you to create custom mappings that remap your log attributes to OCSF schema classes and their corresponding attributes, including enumerated (ENUM) attributes.
+Use the OCSF processor to normalize your security logs according to the [Open Cybersecurity Schema Framework (OCSF)][11]. The OCSF processor creates custom mappings that remap your log attributes to OCSF schema classes and their corresponding attributes, including enumerated (ENUM) attributes.
 
 The processor enables you to:
 

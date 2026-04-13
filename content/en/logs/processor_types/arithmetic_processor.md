@@ -10,7 +10,7 @@ further_reading:
 
 ## Overview
 
-Use the arithmetic processor to add a new attribute (without spaces or special characters in the new attribute name) to a log with the result of the provided formula. This remaps different time attributes with different units into a single attribute, or compute operations on attributes within the same log.
+Use the arithmetic processor to add a new attribute (without spaces or special characters in the new attribute name) to a log with the result of the provided formula. This remaps different time attributes with different units into a single attribute, or computes operations on attributes within the same log.
 
 An arithmetic processor formula can use parentheses and basic arithmetic operators: `-`, `+`, `*`, `/`.
 
@@ -26,7 +26,7 @@ By default, a calculation is skipped if an attribute is missing. Select *Replace
 
 ## Use cases
 
-The arithmetic processor is used to calculate values using log attributes. The most common use case is converting duration attributes to different timeframes such as with Azure logs where we automatically convert the duration from nanoseconds to milliseconds.
+The arithmetic processor is used to calculate values using log attributes. The most common use case is converting duration attributes to different timeframes such as with Azure logs where Datadog automatically converts the duration from nanoseconds to milliseconds.
 
 ## Before and after state of logs
 
@@ -44,7 +44,7 @@ The arithmetic processor is used to calculate values using log attributes. The m
 
 **Arithmetic Processor**
 
-We create an Arithmetic Processor to convert duration_ns into milliseconds.
+Create an Arithmetic Processor to convert `duration_ns` into milliseconds.
 
 
 **After processing:**
@@ -81,7 +81,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following arithmetic pro
 |----------------------|---------|----------|----------------------------------------------------------------------------------------------------------------------------------------------|
 | `type`               | String  | Yes      | Type of the processor.                                                                                                                       |
 | `name`               | String  | No       | Name of the processor.                                                                                                                       |
-| `is_enabled`         | Boolean | No       | If the processors is enabled or not. Default: `false`.                                                                                       |
+| `is_enabled`         | Boolean | No       | If the processor is enabled or not. Default: `false`.                                                                                        |
 | `expression`         | String  | Yes      | Arithmetic operation between one or more log attributes.                                                                                     |
 | `target`             | String  | Yes      | Name of the attribute that contains the result of the arithmetic operation.                                                                  |
 | `is_replace_missing` | Boolean | No       | If `true`, it replaces all missing attributes of `expression` by 0, `false` skip the operation if an attribute is missing. Default: `false`. |

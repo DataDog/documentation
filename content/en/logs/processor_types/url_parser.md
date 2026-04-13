@@ -10,17 +10,17 @@ further_reading:
 
 ## Overview
 
-The URL parser processor extracts query parameters and other important parameters from a URL. When setup, the following attributes are produced:
+The URL parser processor extracts query parameters and other important parameters from a URL. When set up, the following attributes are produced:
 
 {{< img src="logs/processing/processors/url_processor.png" alt="Url Processor" style="width:80%;" >}}
 
 ## Use cases
 
-The URL Parser is used to extract useful information from URL, for example, logs coming from nginx can contain URLs which we automatically parse to extract filters, queries, sources.
+The URL Parser is used to extract useful information from a URL, for example, logs coming from nginx can contain URLs that are automatically parsed to extract filters, queries, and sources.
 
 ## Before and after state of logs
 
-{{% collapse-content title="Example: Parsing an URL in custom application logs" level="h4" %}}
+{{% collapse-content title="Example: Parsing a URL in custom application logs" level="h4" %}}
 
 **Before:**
 
@@ -40,7 +40,7 @@ The URL Parser is used to extract useful information from URL, for example, logs
 
 **URL Parser**
 
-We create a URL Parser processor and configure it to parse the http.url attribute. The processor extracts the URL into multiple structured attributes (scheme, host, path, query parameters, etc.).
+Create a URL Parser processor and configure it to parse the `http.url` attribute. The processor extracts the URL into multiple structured attributes (scheme, host, path, or query parameters).
 
 **After processing:**
 
@@ -74,6 +74,8 @@ The URL Parser automatically adds a new nested attribute (http.url_details) cont
 
 ## API
 
+Use the [Datadog Log Pipeline API endpoint][1] with the following URL processor JSON payload:
+
 ```json
 {
   "type": "url-parser",
@@ -88,7 +90,7 @@ The URL Parser automatically adds a new nested attribute (http.url_details) cont
 |--------------|------------------|----------|----------------------------------------------------------------------------------------------------------------------|
 | `type`       | String           | Yes      | Type of the processor.                                                                                               |
 | `name`       | String           | No       | Name of the processor.                                                                                               |
-| `is_enabled` | Boolean          | No       | If the processors is enabled or not. Default: `false`.                                                                |
+| `is_enabled` | Boolean          | No       | If the processor is enabled or not. Default: `false`.                                                                  |
 | `sources`    | Array of strings | No       | Array of source attributes. Default: `http.url`.                                                                      |
 | `target`     | String           | Yes      | Name of the parent attribute that contains all the extracted details from the `sources`. Default: `http.url_details`. |
 
@@ -96,3 +98,4 @@ The URL Parser automatically adds a new nested attribute (http.url_details) cont
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+[1]: /api/v1/logs-pipelines/

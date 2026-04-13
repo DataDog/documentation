@@ -21,7 +21,7 @@ Create custom grok rules to parse the full message or a specific attribute of yo
 
 The grok parser is mainly used to parse attributes from the message of your log. For example, NGINX logs have a message containing multiple pieces of information you might want to extract.
 
-After creating a grok rule, we would be able to have the IP address, user, request timestamp, request method, url, version, status code and bytes written.
+After creating a grok rule, the parser can write the IP address, user, request timestamp, request method, URL, version, status code, and bytes.
 
 
 ## Setup

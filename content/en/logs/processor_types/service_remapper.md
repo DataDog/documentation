@@ -17,11 +17,8 @@ The service remapper processor assigns one or more attributes to your logs as th
 ## Use cases
 
 The Service Remapper is typically used to:
-- Select another attribute as the service to be used for the log event, if it doesn't match our default service attribute. For example, logs coming from Microsoft 365 use 'Workload' as the service attribute. You can use a Service Remapper to set that attribute as the service.
-- Select an attribute after a grok parser. For example, Bitdefender logs contains the service in the message attribute that first needs to be parsed.
-
-
-<!-- ## Before and after state of logs -->
+- Select another attribute as the service to be used for the log event, if it doesn't match the default service attribute. For example, logs coming from Microsoft 365 use `Workload` as the service attribute. You can use a Service Remapper to set that attribute as the service.
+- Select an attribute after a grok parser. For example, Bitdefender logs contain the service in the message attribute that first needs to be parsed.
 
 ## API
 
@@ -40,7 +37,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following log service re
 |--------------|------------------|----------|-------------------------------------------------------|
 | `type`       | String           | Yes      | Type of the processor.                                |
 | `name`       | String           | No       | Name of the processor.                                |
-| `is_enabled` | Boolean          | No       | If the processors is enabled or not. Default: `false`. |
+| `is_enabled` | Boolean          | No       | If the processor is enabled or not. Default: `false`.  |
 | `sources`    | Array of strings | Yes      | Array of source attributes.                           |
 
 [1]: /api/v1/logs-pipelines/

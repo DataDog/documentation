@@ -63,7 +63,7 @@ The lookup processor performs the following actions:
 
 **Lookup Processor**
 
-We create a Lookup Processor with source attribute user.id and a lookup table containing users:
+Create a Lookup Processor with source attribute `user.id` and a lookup table containing users:
 42 → alice.doe
 77 → bob.smith
 
@@ -73,7 +73,7 @@ We create a Lookup Processor with source attribute user.id and a lookup table co
 {
   "transaction": {
     "id": "tx_98765",
-    "status_code": 2,
+    "status_code": 2
   },
   "user": {
     "id": "42",

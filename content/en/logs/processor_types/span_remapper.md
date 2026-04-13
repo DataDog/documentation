@@ -33,7 +33,7 @@ Use the [Datadog Log Pipeline API endpoint][2] with the following span remapper 
 ```json
 {
   "type": "span-id-remapper",
-  "name": "Define dd.span_id as the official span id associate to this log",
+  "name": "Define dd.span_id as the official span id associated with this log",
   "is_enabled": true,
   "sources": ["dd.span_id"]
 }

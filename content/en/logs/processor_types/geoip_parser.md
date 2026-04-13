@@ -22,7 +22,7 @@ For example, the geoIP parser extracts location from the `network.client.ip` att
 
 ## Use cases
 
-The most common use case is detecting the location of a specific user. For example, we use the GeoIP Parser for iOS logs to provide the user location of the user identified in the logs.
+The most common use case is detecting the location of a specific user. For example, the GeoIP Parser is used for iOS logs to provide the location of the user identified in the logs.
 
 ## Before and after state of logs
 {{% collapse-content title="Example: Enriching logs with GeoIP information" level="h4" %}}
@@ -46,7 +46,7 @@ The most common use case is detecting the location of a specific user. For examp
 
 **GeoIP Parser**
 
-We create a GeoIP Processor with source attribute network.client.ip and a target root attribute: network.client.geoip.
+Create a GeoIP Parser with source attribute `network.client.ip` and a target root attribute: `network.client.geoip`.
 
 **After processing:**
 
@@ -98,7 +98,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following geoIP parser J
 |--------------|------------------|----------|---------------------------------------------------------------------------------------------------------------------------|
 | `type`       | String           | Yes      | Type of the processor.                                                                                                    |
 | `name`       | String           | No       | Name of the processor.                                                                                                    |
-| `is_enabled` | Boolean          | No       | If the processors is enabled or not. Default: `false`.                                                                     |
+| `is_enabled` | Boolean          | No       | If the processor is enabled or not. Default: `false`.                                                                      |
 | `sources`    | Array of strings | No       | Array of source attributes. Default: `network.client.ip`.                                                                  |
 | `target`     | String           | Yes      | Name of the parent attribute that contains all the extracted details from the `sources`. Default: `network.client.geoip`.  |
 

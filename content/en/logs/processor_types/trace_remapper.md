@@ -30,7 +30,7 @@ Use the [Datadog Log Pipeline API endpoint][2] with the following trace remapper
 ```json
 {
   "type": "trace-id-remapper",
-  "name": "Define dd.trace_id as the official trace id associate to this log",
+  "name": "Define dd.trace_id as the official trace id associated with this log",
   "is_enabled": true,
   "sources": ["dd.trace_id"]
 }
@@ -40,7 +40,7 @@ Use the [Datadog Log Pipeline API endpoint][2] with the following trace remapper
 |--------------|------------------|----------|--------------------------------------------------------|
 | `type`       | String           | Yes      | Type of the processor.                                 |
 | `name`       | String           | No       | Name of the processor.                                 |
-| `is_enabled` | Boolean          | No       | If the processors is enabled or not. Default: `false`. |
+| `is_enabled` | Boolean          | No       | If the processor is enabled or not. Default: `false`.  |
 | `sources`    | Array of strings | No       | Array of source attributes. Default: `dd.trace_id`.    |
 
 
