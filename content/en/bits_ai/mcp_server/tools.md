@@ -430,7 +430,7 @@ Searches for Datadog users by email, name, or handle. Useful for finding the rig
 
 ## Dashboards
 
-## `get_datadog_dashboard`
+### `get_datadog_dashboard`
 *Toolset: **dashboards***\
 *Permissions Required: `Dashboards Read` and `User Access Read`*\
 Retrieves a Datadog [dashboard][44] by ID, returning its title, description, tags, and widgets. Use `search_datadog_dashboards` first to find dashboard IDs.
@@ -917,4 +917,4 @@ Adds an agent trigger to a workflow and publishes it, enabling the workflow to b
 [39]: /actions/workflows/
 [41]: /ddsql_editor/
 [42]: /ddsql_reference/ddsql_default/
-[46]: /dashboards/
+[44]: /dashboards/
