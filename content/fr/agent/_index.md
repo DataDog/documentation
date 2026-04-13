@@ -185,7 +185,7 @@ Les résultats ci-dessous proviennent d'une collecte de *110 Ko de journaux par 
   {{< nextlink href="/getting_started/observability_pipelines">}}<u>Configurer les Pipelines d'Observabilité et Datadog</u> : Déployez le Worker des Pipelines d'Observabilité en tant qu'agrégateur pour collecter, transformer et acheminer tous vos journaux et métriques vers n'importe quelle destination.{{< /nextlink >}}
 {{< /whatsnext >}}
 
-##Lectures complémentaires
+## Lectures complémentaires
 
 {{< partial name="whats-next/whats-next.html" >}}
 

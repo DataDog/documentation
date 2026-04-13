@@ -86,7 +86,7 @@ Une fois le traitement terminé, le log structuré suivant est généré :
 
 ### Matcher et filtre
 
-Les fonctionnalités de parsing Grok disponibles au moment de <em>la requête</em> (dans le <a href="/logs/explorer/calculated_fields/">Log Explorer</a>) prennent en charge un sous-ensemble limité de matchers (<strong>données</strong>, <strong>entier</strong>, <strong>notSpace</strong>, <strong>nombre</strong> et <strong>mot</strong>) et de filtres (<strong>nombre</strong> et <strong>entier</strong>).<br><br>
+<div class="alert alert-danger">Les fonctionnalités de parsing Grok disponibles au moment de <em>la requête</em> (dans le <a href="/logs/explorer/calculated_fields/">Log Explorer</a>) prennent en charge un sous-ensemble limité de matchers (<strong>données</strong>, <strong>entier</strong>, <strong>notSpace</strong>, <strong>nombre</strong> et <strong>mot</strong>) et de filtres (<strong>nombre</strong> et <strong>entier</strong>).<br><br>
 L'ensemble complet suivant de matchers et de filtres est spécifique à <em>l'ingestion</em> <a href="/logs/log_configuration/processors/?tab=ui#grok-parser">des fonctionnalités du Grok Parser</a>.</div>
 
 Voici la liste de tous les matchers et de tous les filtres implémentés en natif par Datadog :
@@ -350,12 +350,12 @@ Autres exemples :
 | key=valueStr                 | `%{data::keyvalue}`                                   | {"key": "valueStr"}                   |
 | key=\<valueStr>              | `%{data::keyvalue}`                                   | {"key": "valueStr"}                   |
 | "key"="valueStr"             | `%{data::keyvalue}`                                   | {"key": "valueStr"}                   |
-| clé:valeurStr                 | `%{data::keyvalue(":")}`                              | {"clé": "valeurStr"}                   |
-| clé:"/valeurStr"              | `%{data::keyvalue(":", "/")}`                         | {"clé": "/valeurStr"}                  |
-| /clé:/valeurStr               | `%{data::keyvalue(":", "/")}`                         | {"/clé": "/valeurStr"}                 |
-| clé:={valeurStr}              | `%{data::keyvalue(":=", "", "{}")}`                   | {"clé": "valeurStr"}                   |
-| clé1=valeur1\|clé2=valeur2     | <code>%{data::keyvalue(&quot;=&quot;, &quot;&quot;, &quot;&quot;, &quot;&#124;&quot;)}</code> | {"clé1": "valeur1", "clé2": "valeur2"}  |
-| clé1="valeur1"\|clé2="valeur2" | <code>%{data::keyvalue(&quot;=&quot;, &quot;&quot;, &quot;&quot;, &quot;&#124;&quot;)}</code> | {"clé1": "valeur1", "clé2": "valeur2"}  |
+| key:valueStr                 | `%{data::keyvalue(":")}`                              | {"key": "valueStr"}                   |
+| key:"/valueStr"              | `%{data::keyvalue(":", "/")}`                         | {"key": "/valueStr"}                  |
+| /key:/valueStr               | `%{data::keyvalue(":", "/")}`                         | {"/key": "/valueStr"}                 |
+| key:={valueStr}              | `%{data::keyvalue(":=", "", "{}")}`                   | {"key": "valueStr"}                   |
+| key1=value1\|key2=value2     | <code>%{data::keyvalue(&quot;=&quot;, &quot;&quot;, &quot;&quot;, &quot;&#124;&quot;)}</code> | {"key1": "value1", "key2": "value2"}  |
+| key1="value1"\|key2="value2" | <code>%{data::keyvalue(&quot;=&quot;, &quot;&quot;, &quot;&quot;, &quot;&#124;&quot;)}</code> | {"key1": "value1", "key2": "value2"}  |
 
 **Exemple de chaîne de citation multiple**: Lorsque plusieurs chaînes de citation sont définies, le comportement par défaut est remplacé par un caractère de citation défini.
 La clé-valeur correspond toujours aux entrées sans aucun caractère de citation, peu importe ce qui est spécifié dans `quotingStr`. Lorsque des caractères de citation sont utilisés, le `characterAllowList` est ignoré car tout ce qui se trouve entre les caractères de citation est extrait.
@@ -598,7 +598,7 @@ myParsingRule Users %{data:users:array("{}","-")} have been added to the databas
 myParsingRule Users %{data:users:array("{}","-", uppercase)} have been added to the database
 ```
 
-###Format Glog
+### Format Glog
 
 Les composants Kubernetes enregistrent parfois au format `glog` ; cet exemple provient de l'élément Kube Scheduler dans la bibliothèque Pipeline.
 
@@ -629,7 +629,7 @@ JSON extrait :
 }
 ```
 
-###Analyse XML
+### Analyse XML
 
 Le parser de XML permet de transformer des messages au format XML en JSON.
 
@@ -670,7 +670,7 @@ rule %{data::xml}
 * Si le XML contient des balises ayant à la fois un attribut et une valeur de chaîne entre les deux balises, un attribut `value` est généré. Par exemple : `<title lang="en">Harry Potter</title>` est converti en `{"title": {"lang": "en", "value": "Harry Potter" } }`
 * Les balises répétées sont automatiquement converties en tableaux. Par exemple : `<bookstore><book>Harry Potter</book><book>Everyday Italian</book></bookstore>` est converti en `{ "bookstore": { "book": [ "Harry Potter", "Everyday Italian" ] } }`
 
-###Analyse CSV
+### Analyse CSV
 
 Utilisez le filtre **CSV** pour mapper plus facilement les chaînes aux attributs lorsqu'elles sont séparées par un caractère donné (`,` par défaut).
 

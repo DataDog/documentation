@@ -107,7 +107,7 @@ Chacune des options de configuration suivantes peut être ajoutée en tant que p
 Définissez l'option `/log <FILENAME>` msiexec pour configurer un fichier journal d'installation. Si cette option n'est pas définie, msiexec écrit le journal par défaut dans `%TEMP%\MSI*.LOG`.
 
 
-## Créez un fichier `conf.yaml` dans le dossier `logstash.d/` précédemment créé.
+## Configuration
 
 Le fichier de configuration principal de l'Agent est situé à
 `C:\ProgramData\Datadog\datadog.yaml`. Ce fichier est utilisé pour les paramètres globaux tels que la clé API, le site Datadog sélectionné, les paramètres du proxy, les balises d'hôte et le niveau de journalisation.
@@ -139,19 +139,19 @@ L'exécution de l'Agent est contrôlée par le gestionnaire de contrôle des ser
 
 | Commande         | Description                                                                      |
 |-----------------|----------------------------------------------------------------------------------|
-| vérifier         | Exécute la vérification spécifiée.                                                        |
-| diagnostiquer     | Exécute un diagnostic de connectivité sur votre système.                             |
-| flare            | Collecte un flare et l'envoie à Datadog.                                         |
-| aide            | Obtient de l'aide sur n'importe quelle commande.                                                     |
-| nom d'hôte      | Affiche le nom d'hôte utilisé par l'Agent.                                           |
-| importer        | Importe et convertit les fichiers de configuration des versions précédentes de l'Agent.    |
-| lancer-gui      | Démarre le gestionnaire d'Agent Datadog.                                                |
-| redémarrer-service | Redémarre l'Agent dans le gestionnaire de contrôle des services.                           |
-| exécuter         | Démarre l'Agent.                                                                |
-| démarrer         | Démarre l'Agent. (En cours de dépréciation, mais accepté. Utilisez `run` comme alternative.) |
-| démarrer-service | Démarre l'Agent dans le gestionnaire de contrôle des services.                             |
-| statut          | Affiche le statut actuel.                                                        |
-| arrêter-service  | Arrête l'Agent dans le gestionnaire de contrôle des services.                              |
+| check           | Exécute la vérification spécifiée.                                                        |
+| diagnose        | Exécute un diagnostic de connectivité sur votre système.                             |
+| flare           | Collecte un flare et l'envoie à Datadog.                                         |
+| help            | Obtient de l'aide sur n'importe quelle commande.                                                     |
+| hostname        | Affiche le nom d'hôte utilisé par l'Agent.                                           |
+| import          | Importe et convertit les fichiers de configuration des versions précédentes de l'Agent.    |
+| launch-gui      | Démarre le gestionnaire d'Agent Datadog.                                                |
+| restart-service | Redémarre l'Agent dans le gestionnaire de contrôle des services.                           |
+| run             | Démarre l'Agent.                                                                |
+| start           | Démarre l'Agent. (En cours de dépréciation, mais accepté. Utilisez `run` comme alternative.) |
+| start-service   | Démarre l'Agent dans le gestionnaire de contrôle des services.                             |
+| status          | Affiche le statut actuel.                                                        |
+| stopservice     | Arrête l'Agent dans le gestionnaire de contrôle des services.                              |
 | version         | Affiche les informations de version.                                                         |
 
 **Exemples** :

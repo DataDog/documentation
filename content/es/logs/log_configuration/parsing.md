@@ -212,16 +212,16 @@ Aquí hay una lista de todos los coincidencias y filtros implementados nativamen
 : Analiza XML correctamente formateado. Consulta los [ejemplos de filtro XML](#parsing-xml).
 
 `csv(headers[, separator[, quotingcharacter]])`
-Analiza líneas de CSV o TSV correctamente formateadas. Consulta los [ejemplos de filtro CSV](#parsing-csv).
+: Analiza líneas de CSV o TSV correctamente formateadas. Consulta los [ejemplos de filtro CSV](#parsing-csv).
 
 `scale(factor)`
-Multiplica el valor numérico esperado por el factor proporcionado.
+: Multiplica el valor numérico esperado por el factor proporcionado.
 
 `array([[openCloseStr, ] separator][, subRuleOrFilter)`
-Analiza una secuencia de cadenas de tokens y la devuelve como un arreglo. Consulta el [ejemplo de lista a arreglo](#list-to-array).
+: Analiza una secuencia de cadenas de tokens y la devuelve como un arreglo. Consulta el [ejemplo de lista a arreglo](#list-to-array).
 
 `url`
-Analiza una URL y devuelve todos los miembros tokenizados (dominio, parámetros de consulta, puerto, etc.) en un objeto JSON. [Más información sobre cómo analizar URLs][2].
+: Analiza una URL y devuelve todos los miembros tokenizados (dominio, parámetros de consulta, puerto, etc.) en un objeto JSON. [Más información sobre cómo analizar URLs][2].
 
 [1]: /es/logs/log_configuration/processors/#user-agent-parser
 [2]: /es/logs/log_configuration/processors/#url-parser
@@ -598,7 +598,7 @@ myParsingRule Users %{data:users:array("{}","-")} have been added to the databas
 myParsingRule Users %{data:users:array("{}","-", uppercase)} have been added to the database
 ```
 
-###Formato Glog
+### Formato Glog
 
 Los componentes de Kubernetes a veces registran en el formato `glog`; este ejemplo es del elemento Kube Scheduler en la Biblioteca de Pipeline.
 

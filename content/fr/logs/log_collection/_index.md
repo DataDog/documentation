@@ -157,7 +157,7 @@ Utilisez le menu déroulant situé à droite de la page pour sélectionner votre
 | {{< region-param key=dd_datacenter >}} | HTTPS | <code>{{< region-param key=http_endpoint >}}</code> | 443 | Utilisé par le forwarder personnalisé pour envoyer des journaux au format JSON ou texte brut via HTTPS. Consultez la [documentation de l'API HTTP des journaux][16]. |
 | {{< region-param key=dd_datacenter >}} | HTTPS | <code>{{< region-param key=agent_http_endpoint >}}</code> | 443 | Utilisé par l'Agent pour envoyer des journaux au format JSON via HTTPS. Consultez la [documentation de collecte des journaux de l'Agent Hôte][17]. |
 | {{< region-param key=dd_datacenter >}} | HTTPS | <code>{{< region-param key=lambda_http_endpoint >}}</code> | 443 | Utilisé par les fonctions Lambda pour envoyer des journaux au format brut, Syslog ou JSON via HTTPS. |
-| {{< region-param key=dd_datacenter >}} | HTTPS | <code>journaux.{{< region-param key=browser_sdk_endpoint_domain >}}</code> | 443 | Utilisé par le SDK du Navigateur pour envoyer des journaux au format JSON via HTTPS. |
+| {{< region-param key=dd_datacenter >}} | HTTPS | <code>logs.{{< region-param key=browser_sdk_endpoint_domain >}}</code> | 443 | Utilisé par le SDK du Navigateur pour envoyer des journaux au format JSON via HTTPS. |
 
 ### Transfert de journaux personnalisé
 

@@ -157,7 +157,7 @@ Utilice el menú desplegable de selector [sitio][13] en el lado derecho de la p�
 | {{< region-param key=dd_datacenter >}} | HTTPS | <code>{{< region-param key=http_endpoint >}}</code> | 443 | Utilizado por el reenvío personalizado para enviar registros en formato JSON o texto plano a través de HTTPS. Consulte la [documentación de la API HTTP de Registros][16]. |
 | {{< region-param key=dd_datacenter >}} | HTTPS | <code>{{< region-param key=agent_http_endpoint >}}</code> | 443 | Utilizado por el Agente para enviar registros en formato JSON a través de HTTPS. Consulte la [documentación de colección de Registros del Agente Host][17]. |
 | {{< region-param key=dd_datacenter >}} | HTTPS | <code>{{< region-param key=lambda_http_endpoint >}}</code> | 443 | Utilizado por funciones Lambda para enviar registros en formato crudo, Syslog o JSON a través de HTTPS. |
-| {{< region-param key=dd_datacenter >}} | HTTPS | <code>registros.{{< region-param key=browser_sdk_endpoint_domain >}}</code> | 443 | Utilizado por el SDK del navegador para enviar registros en formato JSON a través de HTTPS. |
+| {{< region-param key=dd_datacenter >}} | HTTPS | <code>logs.{{< region-param key=browser_sdk_endpoint_domain >}}</code> | 443 | Utilizado por el SDK del navegador para enviar registros en formato JSON a través de HTTPS. |
 
 ### Reenvío de registros personalizado
 

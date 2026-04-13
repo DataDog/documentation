@@ -50,7 +50,7 @@ Para instalar el Agente de Datadog en tus hosts de Windows, sigue el [flujo guia
 
 ### Instalar con la GUI del Administrador de Agentes
 
-<div class="alert alert-info">La ubicación de instalación predeterminada para el Agente es <code>%ProgramFiles%\Datadog\Agente de Datadog</code>. Si eliges usar una ubicación de instalación personalizada, asegúrate de especificar un subdirectorio de <code>Datadog</code> para los archivos de Datadog.</div>
+<div class="alert alert-info">La ubicación de instalación predeterminada para el Agente es <code>%ProgramFiles%\Datadog\Datadog Agent</code>. Si eliges usar una ubicación de instalación personalizada, asegúrate de especificar un subdirectorio de <code>Datadog</code> para los archivos de Datadog.</div>
 
 1. Descarga el [instalador del Agente de Datadog][400] para instalar la última versión del Agente.
 2. Ejecuta el instalador abriendo `datadog-agent-7-latest.amd64.msi`. Cuando se te solicite, ingresa tus credenciales de Administrador.
@@ -139,20 +139,20 @@ La ejecución del Agente es controlada por el Administrador de Control de Servic
 
 | Comando         | Descripción                                                                      |
 |-----------------|----------------------------------------------------------------------------------|
-| verificar        | Ejecuta la verificación especificada.                                                        |
-| diagnosticar     | Ejecuta un diagnóstico de conectividad en su sistema.                             |
+| check           | Ejecuta la verificación especificada.                                                        |
+| diagnose        | Ejecuta un diagnóstico de conectividad en su sistema.                             |
 | flare           | Recoge un flare y lo envía a Datadog.                                         |
-| ayuda           | Obtiene ayuda sobre cualquier comando.                                                     |
-| nombre de host   | Imprime el nombre de host utilizado por el Agente.                                           |
-| importar          | Importa y convierte archivos de configuración de versiones anteriores del Agente.    |
-| lanzar-gui      | Inicia el Administrador del Agente de Datadog.                                                |
-| reiniciar-servicio | Reinicia el Agente dentro del administrador de control de servicios.                           |
-| ejecutar             | Inicia el Agente.                                                                |
-| iniciar           | Inicia el Agente. (Está siendo desaprobado, pero aceptado. Utiliza `run` como alternativa.) |
-| iniciar-servicio   | Inicia el Agente dentro del administrador de control de servicios.                             |
-| estado          | Imprime el estado actual.                                                        |
-| detener-servicio     | Detiene el Agente dentro del administrador de control de servicios.                              |
-| versión         | Imprime la información de la versión.                                                         |
+| help            | Obtiene ayuda sobre cualquier comando.                                                     |
+| hostname        | Imprime el nombre de host utilizado por el Agente.                                           |
+| import          | Importa y convierte archivos de configuración de versiones anteriores del Agente.    |
+| launch-gui      | Inicia el Administrador del Agente de Datadog.                                                |
+| restart-service | Reinicia el Agente dentro del administrador de control de servicios.                           |
+| run             | Inicia el Agente.                                                                |
+| start           | Inicia el Agente. (Está siendo desaprobado, pero aceptado. Utiliza `run` como alternativa.) |
+| start-service   | Inicia el Agente dentro del administrador de control de servicios.                             |
+| status          | Imprime el estado actual.                                                        |
+| stopservice     | Detiene el Agente dentro del administrador de control de servicios.                              |
+| version         | Imprime la información de la versión.                                                         |
 
 **Ejemplos**:
   - PowerShell (`powershell.exe`)
