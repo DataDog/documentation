@@ -20,9 +20,9 @@ Plan and launch experiments to measure how new features affect user outcomes.
 
 Before you begin, make sure you have:
 
-- A [feature flag][4] for deploying and managing the experiment groups you want to test
-- At least one [experiment metric][2] for measuring the outcome of your experiment
-- A [subject type][6] for grouping users (default is `@usr.id`)
+- A [feature flag][4] for deploying and managing the experiment groups you want to test.
+- At least one [experiment metric][2] for measuring the outcome of your experiment.
+- A [subject type][6] for grouping users (default is `@usr.id`).
 
 ## Plan your experiment
 Give your experiment a name and hypothesis, then define the settings.
@@ -40,9 +40,8 @@ To create a draft experiment:
 
 You can also create an experiment directly from a feature flag's detail page:
 1. Navigate to the **[Feature Flags][7]** page.
-1. Select the appropriate feature flag to open its detail page. 
+1. Select the appropriate feature flag to open its detail page.
 1. In the **Targeting rules & rollouts** section, click **Create New Experiment**, then **Create Experiment**.
-
 
 {{< img src="/product_analytics/experiment/exp_plan_launch_ff_new_experiment.png" alt="The feature flag detail page for a flag called new_product_photos, showing targeting rules and rollouts with a 50/50 split between control and treatment variants, and a Create New Experiment button highlighted at the bottom." style="width:80%;" >}}
 
@@ -81,16 +80,16 @@ Determine how sensitive your experiment can be to changes between the variants.
 #### Feature flag
 Link a feature flag to control how traffic is split between the experiment variants.
 
-1. Click the **Add a feature flag** button to open the picker
+1. Click the **Add a feature flag** button to open the picker.
 1. Select the appropriate feature flag for your experiment.
-1. If you have not created a feature flag, click **Create New feature Flag**.
+1. If you have not created a feature flag, click **Create New Feature Flag**.
 
 #### Randomization
 After you select a feature flag, the randomization settings are pre-populated based on the flag's configuration.
 
 <div class="alert alert-info">Experiment randomization settings do not affect the linked feature flag until you launch.<br><br>When you launch your experiment, Datadog adds a targeting rule to the flag that assigns users to variants and activates randomization.<br><br>If multiple experiments share the same flag, Datadog evaluates traffic based on the order of experiments in the flag's targeting waterfall. You can reorder experiments in the confirmation modal before launching.</div>
 
-To configure how users are assigned to variants: 
+To configure how users are assigned to variants:
 1. Select the **Environment** for your experiment from the dropdown.
 1. Under **Targeting rules**:
    1. Click **Add Filter** to define conditions and filter which users to include in the experiment.
@@ -117,7 +116,7 @@ At each rollout stage, Datadog samples a percentage of eligible users to include
 Select the recipients from the **Recipients** dropdown that receive updates on your experiment.
 
 ##### Statistical analysis plan
-Choose the **Confidence interval method** for your statistical analysis. Datadog uses the **Sequential** method by default. This  provides statistically valid confidence intervals throughout the experiment, so you can make decisions at any time.
+Choose the **Confidence interval method** for your statistical analysis. Datadog uses the **Sequential** method by default. This provides statistically valid confidence intervals throughout the experiment, so you can make decisions at any time.
 
 To use a different statistical method:
 1. Expand the **Statistical analysis plan** section.
@@ -144,6 +143,8 @@ To launch your experiment:
 Launching the experiment opens the **Flag & Exposures** page:
 - Check the **Exposure balance check** to confirm users are split across variants as expected.
 - Click **View Exposures Log** to see a real-time list of traffic getting enrolled into your experiment.
+
+After your experiment is running, see [Read Experiment Results][5] to review your data.
 
 ## Further reading
 
