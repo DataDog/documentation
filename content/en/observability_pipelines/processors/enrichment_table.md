@@ -175,18 +175,30 @@ To see buffer metrics for your Enrichment Table processor, add these tags to buf
 - `component_type=enrichment_table`
 - `component_id=<processor_id>`
 - `buffer_id=enrichment_table_buffer`
-- 
-pipelines.buffer_events : Description: Number of events in the processor's buffer. : Metric type: gauge
 
-pipelines.buffer_size_bytes : Description: Number of bytes in the processor's buffer. : Metric type: gauge
+`pipelines.buffer_events`
+: **Description**: Number of events in the processor's buffer.
+: **Metric type**: gauge
 
-pipelines.buffer_received_events_total : Description: Events received by the processor's buffer. Metric type: counter
+`pipelines.buffer_size_bytes`
+: **Description**: Number of bytes in the processor's buffer.
+: **Metric type**: gauge
 
-pipelines.buffer_received_bytes_total : Description: Bytes received by the processor's buffer. Metric type: counter
+`pipelines.buffer_received_events_total`
+: **Description**: Events received by the processor's buffer.
+: **Metric type**: counter
 
-pipelines.buffer_sent_events_total : Description: Events sent downstream by the processor's buffer. Metric type: counter
+`pipelines.buffer_received_bytes_total`
+: **Description**: Bytes received by the processor's buffer.
+: **Metric type**: counter
 
-pipelines.buffer_sent_bytes_total : Description: Bytes sent downstream by the processor's buffer. Metric type: counter
+`pipelines.buffer_sent_events_total`
+: **Description**: Events sent downstream by the processor's buffer.
+: **Metric type**: counter
+
+`pipelines.buffer_sent_bytes_total`
+: **Description**: Bytes sent downstream by the processor's buffer.
+: **Metric type**: counter
 
 #### Reference Table metrics
 
