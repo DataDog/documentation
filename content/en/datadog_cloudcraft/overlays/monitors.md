@@ -8,24 +8,24 @@ further_reading:
   text: "Bits AI SRE"
 ---
 
-{{< callout btn_hidden="true" header="Join the Preview!" >}}
+{{< callout btn_hidden="true" header="" >}}
 The Monitors overlay is in Preview.
 {{< /callout >}}
 
 ## Overview
 
-The Monitors overlay shows monitors associated with your AWS and Azure resources and services, along with their current state (Alert, Warn, or OK). Use this overlay to identify and investigate production issues directly in your infrastructure diagram.
+The Monitors overlay shows monitors associated with your AWS and Azure resources and services, along with their current state (`Alert`, `Warn`, or `OK`). Use this overlay to identify and investigate production issues directly in your infrastructure diagram.
 
 ## View monitor status
 
 Each resource or service with associated monitors displays an icon showing:
 
-- The count of monitors in the highest state (Alert takes priority over Warn, which takes priority over OK)
+- The count of monitors in the highest state (`Alert` takes priority over `Warn`, which takes priority over `OK`)
 - The title of the highest-priority monitor
 
 When only one monitor is in the highest state, the diagram displays the monitor icon instead of a count.
 
-{{< img src="datadog_cloudcraft/overlays/cloudcraft_monitors_overlay_diagram.png" alt="Cloudcraft diagram with the Monitors overlay showing monitor icons and counts on resources." style="width:100%;" >}}
+{{< img src="datadog_cloudcraft/overlays/cloudcraft_monitors_overlay_diagram.png" alt="Cloudcraft diagram with the Monitors overlay showing monitor icons and counts on resources" style="width:100%;" >}}
 
 ## Filter monitors
 
