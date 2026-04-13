@@ -275,6 +275,10 @@
     "name": "Org Connections",
     "description": "Manage connections between organizations. Org connections allow for controlled sharing of data between different Datadog organizations. See the [Cross-Organization Visibiltiy](https://docs.datadoghq.com/account_management/org_settings/cross_org_visibility/) page for more information."
   },
+  "org-groups": {
+    "name": "Org Groups",
+    "description": "Manage organization groups, memberships, policies, policy overrides, and policy configurations."
+  },
   "organizations": {
     "name": "Organizations",
     "description": "Create, edit, and manage your organizations. Read more about [multi-org accounts](https://docs.datadoghq.com/account_management/multi_organization)."
