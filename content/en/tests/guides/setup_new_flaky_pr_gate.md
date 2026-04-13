@@ -139,4 +139,4 @@ For more information, see the GitHub documentation for [status checks][11].
 [9]: /tests/flaky_management
 [10]: /tests/setup/junit_xml/
 [11]: https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/collaborating-on-repositories-with-code-quality-features/about-status-checks
-[12]: /tests/flaky_management/#change-a-flaky-tests-status
+[12]: /tests/flaky_management/#change-a-flaky-tests-state

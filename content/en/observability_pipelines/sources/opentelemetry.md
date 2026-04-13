@@ -16,6 +16,11 @@ products:
 
 {{< product-availability >}}
 
+{{< callout url="https://www.datadoghq.com/product-preview/metrics-ingestion-and-cardinality-control-in-observability-pipelines/"
+ btn_hidden="false" header="Join the Preview!">}}
+Sending metrics to Observability Pipelines is in Preview. Fill out the form to request access.
+{{< /callout >}}
+
 ## Overview
 
 Use Observability Pipelines' OpenTelemetry (OTel) source to collect logs or metrics ({{< tooltip glossary="preview" case="title" >}}) from your OTel Collector through HTTP or gRPC. Select and set up this source when you set up a pipeline.
@@ -47,11 +52,7 @@ Set up this source when you [set up a pipeline][6]. You can set up a pipeline in
 
 ### Optional TLS settings
 
-Toggle the switch to enable TLS. The following certificate and key files are required for TLS.<br>**Note**: All file paths are made relative to the configuration data directory, which is `/var/lib/observability-pipelines-worker/config/` by default. See [Advanced Worker Configurations][3] for more information. The file must be owned by the `observability-pipelines-worker group` and `observability-pipelines-worker` user, or at least readable by the group or user.
-- Enter the identifier for your OTel TLS key pass. If you leave it blank, the [default](#set-secrets) is used.
-- `Server Certificate Path`: The path to the certificate file that has been signed by your Certificate Authority (CA) root file in DER or PEM (X.509).
-- `CA Certificate Path`: The path to the certificate file that is your Certificate Authority (CA) root file in DER or PEM (X.509).
-- `Private Key Path`: The path to the `.key` private key file that belongs to your Server Certificate Path in DER or PEM (PKCS #8) format.
+{{% observability_pipelines/tls_settings %}}
 
 {{< img src="observability_pipelines/sources/otel_settings.png" alt="The OpenTelemetry source settings" style="width:35%;" >}}
 

@@ -13,8 +13,8 @@
 
 <div class="shortcode-wrapper shortcode-integration-api-key-picker">
 {{- if eq $type "api-key" -}}
-  <p>Copy your Datadog API key from the <strong>Configure</strong> tab on the <a href="{{ $tile_url }}">{{ $integration_title }} integration tile</a>.</p>
+  Copy your Datadog API key from the <strong>Configure</strong> tab on the <a href="{{ $tile_url }}">{{ $integration_title }} integration tile</a>.
 {{- else -}}
-  <p>Copy the generated webhook URL from the <strong>Configure</strong> tab on the <a href="{{ $tile_url }}">{{ $integration_title }} integration tile</a>.</p>
+  Copy the generated webhook URL from the <strong>Configure</strong> tab on the <a href="{{ $tile_url }}">{{ $integration_title }} integration tile</a>.
 {{- end -}}
 </div>

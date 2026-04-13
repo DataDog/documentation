@@ -151,6 +151,42 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
 [1]: /getting_started/site/
 {{% /tab %}}
 
+{{% tab "Warp" %}}
+
+[Warp][1] is an agentic terminal with built-in MCP support. Point the Warp agent to the MCP Server endpoint for your regional [Datadog site][2]. For the correct instructions, use the **Datadog Site** selector on the right side of this documentation page to select your site.
+
+{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
+Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-param key="mcp_server_endpoint" >}}</code>.
+
+1. In the Warp app, go to **Settings** > **MCP Servers** and click **+ Add**.
+
+1. Paste the following configuration:
+
+    <pre><code>{
+      "Datadog": {
+        "url": "{{< region-param key="mcp_server_endpoint" >}}"
+      }
+    }</code></pre>
+
+    To enable [product-specific tools][3], include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and LLM Observability tools (use `toolsets=all` to enable all generally available toolsets, best for clients that support tool filtering):
+
+    <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
+
+1. Click **Start** on the Datadog server. Warp opens your browser to complete the OAuth login flow. Credentials are stored securely on your device and reused for future sessions.
+
+1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
+
+[3]: /bits_ai/mcp_server#toolsets
+{{< /site-region >}}
+
+{{< site-region region="gov" >}}
+<div class="alert alert-danger">Datadog MCP Server is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
+[1]: https://www.warp.dev/
+[2]: /getting_started/site/
+{{% /tab %}}
+
 {{% tab "VS Code" %}}
 
 Datadog's [Cursor and VS Code extension][1] includes built-in access to the managed Datadog MCP Server.
@@ -372,6 +408,7 @@ Example configuration file location:
 | [Claude Code][4] | Anthropic | |
 | [Claude][19] | Anthropic | Use [custom connector setup](?tab=claude#installation). Includes Claude Cowork. |
 | [Codex CLI][6] | OpenAI | |
+| [Warp][28] | Warp | |
 | [VS Code][7] | Microsoft | Datadog [Cursor & VS Code extension][16] recommended. |
 | [JetBrains IDEs][18] | JetBrains | [Datadog plugin][18] recommended. |
 | [Kiro][9], [Kiro CLI][10] | Amazon Web Services | |
@@ -515,3 +552,4 @@ All toolsets for the MCP Server are documented [here][12]. By default, the base 
 [25]: /account_management/rbac/permissions/
 [26]: https://app.datadoghq.com/organization-settings/roles
 [27]: https://app.datadoghq.com/organization-settings/preferences
+[28]: https://www.warp.dev/
