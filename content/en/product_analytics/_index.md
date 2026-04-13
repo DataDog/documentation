@@ -52,8 +52,6 @@ Collect events that happen on your backend, such as completed checkouts or proce
 
 Use the [Product Analytics API][21] to send custom events from any server-side source.
 
-Each event requires at least one of `usr`, `account`, or `session` with a valid ID. The `application.id` must reference a Product Analytics-enabled application.
-
 <div class="alert alert-warning">Sending server-side events is billed separately. See the <a href="https://www.datadoghq.com/pricing/?product=product-analytics#products">pricing page</a> for details, and contact your Customer Success Manager with additional questions.</div>
 
 ## Enable Product Analytics
