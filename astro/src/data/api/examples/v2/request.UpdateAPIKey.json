@@ -1,9 +1,0 @@
-{
-  "data": {
-    "type": "api_keys",
-    "id": "string",
-    "attributes": {
-      "name": "Example-Key-Management"
-    }
-  }
-}

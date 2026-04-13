@@ -1,8 +1,0 @@
-{
-  "data": {
-    "attributes": {
-      "suppression_query": "env:staging status:low"
-    },
-    "type": "suppressions"
-  }
-}
