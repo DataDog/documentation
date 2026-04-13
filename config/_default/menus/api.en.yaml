@@ -8382,6 +8382,62 @@ menu:
           - CreateDORADeployment
         unstable: []
         order: 1
+    - name: Dashboard Secure Embed
+      url: /api/latest/dashboard-secure-embed/
+      identifier: dashboard-secure-embed
+      generated: true
+    - name: Update a secure embed for a dashboard
+      url: '#update-a-secure-embed-for-a-dashboard'
+      identifier: dashboard-secure-embed-update-a-secure-embed-for-a-dashboard
+      parent: dashboard-secure-embed
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateDashboardSecureEmbed
+        unstable:
+          - v2
+        order: 3
+    - name: Get a secure embed for a dashboard
+      url: '#get-a-secure-embed-for-a-dashboard'
+      identifier: dashboard-secure-embed-get-a-secure-embed-for-a-dashboard
+      parent: dashboard-secure-embed
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetDashboardSecureEmbed
+        unstable:
+          - v2
+        order: 2
+    - name: Delete a secure embed for a dashboard
+      url: '#delete-a-secure-embed-for-a-dashboard'
+      identifier: dashboard-secure-embed-delete-a-secure-embed-for-a-dashboard
+      parent: dashboard-secure-embed
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteDashboardSecureEmbed
+        unstable:
+          - v2
+        order: 4
+    - name: Create a secure embed for a dashboard
+      url: '#create-a-secure-embed-for-a-dashboard'
+      identifier: dashboard-secure-embed-create-a-secure-embed-for-a-dashboard
+      parent: dashboard-secure-embed
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateDashboardSecureEmbed
+        unstable:
+          - v2
+        order: 1
     - name: Datasets
       url: /api/latest/datasets/
       identifier: datasets
