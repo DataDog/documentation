@@ -3,11 +3,11 @@ environment: default
 repo_name: "documentation"
 integrations_img_url: "https://static.datadoghq.com/static/images/logos/"
 img:
-  header_jpg: "?fit=max&fm=jpg&auto=format&lossless=true"
-  header_png: "?fit=max&fm=png&auto=format&lossless=1"
+  header_jpg: "?fit=max&fm=jpg&auto=format"
+  header_png: "?fit=max&fm=png&auto=format"
   header_gif: "?fm=gif"
-  jpg: "?fm=jpg&auto=format&lossless=true"
-  png: "?fm=png&auto=format&lossless=1"
+  jpg: "?fm=jpg&auto=format"
+  png: "?fm=png&auto=format"
   gif: ""
 code_languages:
   'py':
