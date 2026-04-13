@@ -758,6 +758,14 @@ components:
       schema:
         example: "my-job"
         type: string
+    LLMObsAnnotationQueueIDPathParameter:
+      description: The ID of the LLM Observability annotation queue.
+      example: "b5e7f3a1-9c2d-4f8b-a1e6-3d7e9f0a2b4c"
+      in: path
+      name: queue_id
+      required: true
+      schema:
+        type: string
     LLMObsDatasetIDPathParameter:
       description: The ID of the LLM Observability dataset.
       example: "9f64e5c7-dc5a-45c8-a17c-1b85f0bec97d"
@@ -2081,6 +2089,13 @@ components:
       properties:
         data:
           $ref: "#/components/schemas/AWSCloudAuthPersonaMappingsData"
+          example:
+            - attributes:
+                account_identifier: "test@test.com"
+                account_uuid: "12bbdc5c-5966-47e0-8733-285f9e44bcf4"
+                arn_pattern: "arn:aws:iam::123456789012:user/testuser"
+              id: "c5c758c6-18c2-4484-ae3f-46b84128404a"
+              type: aws_cloud_auth_config
       required:
         - data
       type: object
@@ -25814,6 +25829,7 @@ components:
           description: Tags associated with the feature flag.
           example: []
           items:
+            description: A tag associated with the feature flag.
             type: string
           type: array
         updated_at:
@@ -25867,6 +25883,7 @@ components:
             - "test-feature-flag"
             - "env-search-term"
           items:
+            description: A query string targeting the environment.
             type: string
           type: array
         is_production:
@@ -29041,6 +29058,64 @@ components:
             $ref: "#/components/schemas/GetInterfacesData"
           type: array
       type: object
+    GetInvestigationResponse:
+      description: Response for a single Bits AI investigation.
+      properties:
+        data:
+          $ref: "#/components/schemas/GetInvestigationResponseData"
+        links:
+          $ref: "#/components/schemas/GetInvestigationResponseLinks"
+      required:
+        - data
+        - links
+      type: object
+    GetInvestigationResponseData:
+      description: Data for the get investigation response.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/GetInvestigationResponseDataAttributes"
+        id:
+          description: The unique identifier of the investigation.
+          example: "a1b2c3d4-5e6f-7a8b-9c0d-1e2f3a4b5c6d"
+          type: string
+        type:
+          $ref: "#/components/schemas/InvestigationType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    GetInvestigationResponseDataAttributes:
+      description: Attributes of the investigation.
+      properties:
+        conclusions:
+          description: The conclusions drawn from the investigation.
+          items:
+            $ref: "#/components/schemas/InvestigationConclusion"
+          type: array
+        status:
+          description: The current status of the investigation.
+          example: "conclusive"
+          type: string
+        title:
+          description: The title of the investigation.
+          example: "Monitor alert investigation for web-server-01"
+          type: string
+      required:
+        - title
+        - status
+        - conclusions
+      type: object
+    GetInvestigationResponseLinks:
+      description: Links related to the investigation.
+      properties:
+        self:
+          description: The URL to the investigation in the Datadog app.
+          example: "https://app.datadoghq.com/bits-ai/investigations/a1b2c3d4-5e6f-7a8b-9c0d-1e2f3a4b5c6d"
+          type: string
+      required:
+        - self
+      type: object
     GetIssueIncludeQueryParameterItem:
       description: Relationship object that should be included in the response.
       enum:
@@ -31077,6 +31152,11 @@ components:
       properties:
         data:
           $ref: "#/components/schemas/IncidentHandlesResponseData"
+          example:
+            - attributes:
+                name: "@incident-sev-1"
+              id: "12ceee6d-a7c0-4407-bc54-30e54140d7f0"
+              type: incident_handles
         included:
           $ref: "#/components/schemas/IncidentHandleIncludedResponse"
       required:
@@ -34499,6 +34579,34 @@ components:
         - DOWN
         - WARNING
         - "OFF"
+    InvestigationConclusion:
+      description: A full explanation of the finding, including root cause analysis and supporting evidence.
+      properties:
+        description:
+          description: A full explanation of the finding, including root cause analysis and supporting evidence.
+          example: "The investigation found that a memory leak in payments-service caused CPU usage to spike above 95% starting at 14:32 UTC."
+          type: string
+        summary:
+          description: A summary of the finding, including affected components and timeframe.
+          example: "CPU usage exceeded 95% for over 10 minutes on web-server-01."
+          type: string
+        title:
+          description: The title of the conclusion.
+          example: "High CPU usage detected on web-server-01"
+          type: string
+      required:
+        - title
+        - summary
+        - description
+      type: object
+    InvestigationType:
+      description: The resource type for investigations.
+      enum:
+        - investigation
+      example: investigation
+      type: string
+      x-enum-varnames:
+        - INVESTIGATION
     Issue:
       description: The issue matching the request.
       properties:
@@ -35469,6 +35577,12 @@ components:
       properties:
         data:
           $ref: "#/components/schemas/JiraAccountsData"
+          example:
+            - attributes:
+                consumer_key: "consumer-key-1"
+                instance_url: "https://example.atlassian.net"
+              id: "account-1"
+              type: jira-account
         meta:
           $ref: "#/components/schemas/JiraAccountsMeta"
       required:
@@ -35790,6 +35904,17 @@ components:
       properties:
         data:
           $ref: "#/components/schemas/JiraIssueTemplatesData"
+          example:
+            - attributes:
+                fields:
+                  description:
+                    payload: "Test Description"
+                    type: "json"
+                issue_type_id: "10001"
+                name: "Bug Report Template"
+                project_id: "PROJECT-1"
+              id: "65b3341b-0680-47f9-a6d4-134db45c603e"
+              type: jira-issue-template
         included:
           $ref: "#/components/schemas/JiraAccountsData"
       required:
@@ -36042,6 +36167,386 @@ components:
           description: Total kinds count.
           format: int64
           type: integer
+      type: object
+    LLMObsAnnotatedInteractionItem:
+      description: An interaction with its associated annotations.
+      properties:
+        annotations:
+          description: List of annotations for this interaction.
+          items:
+            $ref: "#/components/schemas/LLMObsAnnotationItem"
+          type: array
+        content_id:
+          description: Identifier of the content for this interaction.
+          example: "trace-abc-123"
+          type: string
+        id:
+          description: Unique identifier of the interaction.
+          example: "interaction-456"
+          type: string
+        type:
+          $ref: "#/components/schemas/LLMObsInteractionType"
+      required:
+        - id
+        - type
+        - content_id
+        - annotations
+      type: object
+    LLMObsAnnotatedInteractionsDataAttributesResponse:
+      description: Attributes containing the list of annotated interactions.
+      properties:
+        annotated_interactions:
+          description: List of interactions with their annotations.
+          items:
+            $ref: "#/components/schemas/LLMObsAnnotatedInteractionItem"
+          type: array
+      required:
+        - annotated_interactions
+      type: object
+    LLMObsAnnotatedInteractionsDataResponse:
+      description: Data object for annotated interactions.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/LLMObsAnnotatedInteractionsDataAttributesResponse"
+        id:
+          description: The queue ID.
+          example: "b5e7f3a1-9c2d-4f8b-a1e6-3d7e9f0a2b4c"
+          type: string
+        type:
+          $ref: "#/components/schemas/LLMObsAnnotatedInteractionsType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    LLMObsAnnotatedInteractionsResponse:
+      description: Response containing the annotated interactions for an annotation queue.
+      properties:
+        data:
+          $ref: "#/components/schemas/LLMObsAnnotatedInteractionsDataResponse"
+      required:
+        - data
+      type: object
+    LLMObsAnnotatedInteractionsType:
+      description: Resource type for annotated interactions.
+      enum:
+        - annotated_interactions
+      example: annotated_interactions
+      type: string
+      x-enum-varnames:
+        - ANNOTATED_INTERACTIONS
+    LLMObsAnnotationItem:
+      description: A single annotation on an interaction.
+      properties:
+        created_at:
+          description: Timestamp when the annotation was created.
+          example: "2024-01-15T10:30:00Z"
+          format: date-time
+          type: string
+        created_by:
+          description: Identifier of the user who created the annotation.
+          example: "00000000-0000-0000-0000-000000000002"
+          type: string
+        id:
+          description: Unique identifier of the annotation.
+          example: "annotation-789"
+          type: string
+        interaction_id:
+          description: Identifier of the interaction this annotation belongs to.
+          example: "interaction-456"
+          type: string
+        label_values:
+          additionalProperties: {}
+          description: The label values for this annotation.
+          example:
+            quality: "good"
+          type: object
+        modified_at:
+          description: Timestamp when the annotation was last modified.
+          example: "2024-01-15T10:30:00Z"
+          format: date-time
+          type: string
+        modified_by:
+          description: Identifier of the user who last modified the annotation.
+          example: "00000000-0000-0000-0000-000000000002"
+          type: string
+      required:
+        - id
+        - interaction_id
+        - label_values
+        - created_by
+        - created_at
+        - modified_by
+        - modified_at
+      type: object
+    LLMObsAnnotationQueueDataAttributesRequest:
+      description: Attributes for creating an LLM Observability annotation queue.
+      properties:
+        description:
+          description: Description of the annotation queue.
+          example: "Queue for annotating customer support traces"
+          type: string
+        name:
+          description: Name of the annotation queue.
+          example: "My annotation queue"
+          type: string
+        project_id:
+          description: Identifier of the project this queue belongs to.
+          example: "a33671aa-24fd-4dcd-9b33-a8ec7dde7751"
+          type: string
+      required:
+        - name
+        - project_id
+      type: object
+    LLMObsAnnotationQueueDataAttributesResponse:
+      description: Attributes of an LLM Observability annotation queue.
+      properties:
+        created_at:
+          description: Timestamp when the queue was created.
+          example: "2024-01-15T10:30:00Z"
+          format: date-time
+          type: string
+        created_by:
+          description: Identifier of the user who created the queue.
+          example: "00000000-0000-0000-0000-000000000002"
+          type: string
+        description:
+          description: Description of the annotation queue.
+          example: "Queue for annotating customer support traces"
+          type: string
+        modified_at:
+          description: Timestamp when the queue was last modified.
+          example: "2024-01-15T10:30:00Z"
+          format: date-time
+          type: string
+        modified_by:
+          description: Identifier of the user who last modified the queue.
+          example: "00000000-0000-0000-0000-000000000002"
+          type: string
+        name:
+          description: Name of the annotation queue.
+          example: "My annotation queue"
+          type: string
+        owned_by:
+          description: Identifier of the user who owns the queue.
+          example: "00000000-0000-0000-0000-000000000002"
+          type: string
+        project_id:
+          description: Identifier of the project this queue belongs to.
+          example: "a33671aa-24fd-4dcd-9b33-a8ec7dde7751"
+          type: string
+      required:
+        - name
+        - project_id
+        - description
+        - created_by
+        - created_at
+        - modified_by
+        - modified_at
+        - owned_by
+      type: object
+    LLMObsAnnotationQueueDataRequest:
+      description: Data object for creating an LLM Observability annotation queue.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/LLMObsAnnotationQueueDataAttributesRequest"
+        type:
+          $ref: "#/components/schemas/LLMObsAnnotationQueueType"
+      required:
+        - type
+        - attributes
+      type: object
+    LLMObsAnnotationQueueDataResponse:
+      description: Data object for an LLM Observability annotation queue.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/LLMObsAnnotationQueueDataAttributesResponse"
+        id:
+          description: Unique identifier of the annotation queue.
+          example: "b5e7f3a1-9c2d-4f8b-a1e6-3d7e9f0a2b4c"
+          type: string
+        type:
+          $ref: "#/components/schemas/LLMObsAnnotationQueueType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    LLMObsAnnotationQueueInteractionItem:
+      description: A single interaction to add to an annotation queue.
+      properties:
+        content_id:
+          description: Identifier of the content (such as trace ID) for this interaction.
+          example: "trace-abc-123"
+          type: string
+        type:
+          $ref: "#/components/schemas/LLMObsInteractionType"
+      required:
+        - type
+        - content_id
+      type: object
+    LLMObsAnnotationQueueInteractionResponseItem:
+      description: A single interaction result.
+      properties:
+        already_existed:
+          description: Whether this interaction already existed in the queue.
+          example: false
+          type: boolean
+        content_id:
+          description: Identifier of the content for this interaction.
+          example: "trace-abc-123"
+          type: string
+        id:
+          description: Unique identifier of the interaction.
+          example: "00000000-0000-0000-0000-000000000000"
+          type: string
+        type:
+          $ref: "#/components/schemas/LLMObsInteractionType"
+      required:
+        - id
+        - type
+        - content_id
+        - already_existed
+      type: object
+    LLMObsAnnotationQueueInteractionsDataAttributesRequest:
+      description: Attributes for adding interactions to an annotation queue.
+      properties:
+        interactions:
+          description: List of interactions to add to the queue. Must contain at least one item.
+          items:
+            $ref: "#/components/schemas/LLMObsAnnotationQueueInteractionItem"
+          minItems: 1
+          type: array
+      required:
+        - interactions
+      type: object
+    LLMObsAnnotationQueueInteractionsDataAttributesResponse:
+      description: Attributes of the interaction addition response.
+      properties:
+        interactions:
+          description: List of interactions that were processed.
+          items:
+            $ref: "#/components/schemas/LLMObsAnnotationQueueInteractionResponseItem"
+          type: array
+      required:
+        - interactions
+      type: object
+    LLMObsAnnotationQueueInteractionsDataRequest:
+      description: Data object for adding interactions to an annotation queue.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/LLMObsAnnotationQueueInteractionsDataAttributesRequest"
+        type:
+          $ref: "#/components/schemas/LLMObsAnnotationQueueInteractionsType"
+      required:
+        - type
+        - attributes
+      type: object
+    LLMObsAnnotationQueueInteractionsDataResponse:
+      description: Data object for the interaction addition response.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/LLMObsAnnotationQueueInteractionsDataAttributesResponse"
+        id:
+          description: The queue ID the interactions were added to.
+          example: "b5e7f3a1-9c2d-4f8b-a1e6-3d7e9f0a2b4c"
+          type: string
+        type:
+          $ref: "#/components/schemas/LLMObsAnnotationQueueInteractionsType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    LLMObsAnnotationQueueInteractionsRequest:
+      description: Request to add interactions to an LLM Observability annotation queue.
+      properties:
+        data:
+          $ref: "#/components/schemas/LLMObsAnnotationQueueInteractionsDataRequest"
+      required:
+        - data
+      type: object
+    LLMObsAnnotationQueueInteractionsResponse:
+      description: Response containing the result of adding interactions to an annotation queue.
+      properties:
+        data:
+          $ref: "#/components/schemas/LLMObsAnnotationQueueInteractionsDataResponse"
+      required:
+        - data
+      type: object
+    LLMObsAnnotationQueueInteractionsType:
+      description: Resource type for annotation queue interactions.
+      enum:
+        - interactions
+      example: interactions
+      type: string
+      x-enum-varnames:
+        - INTERACTIONS
+    LLMObsAnnotationQueueRequest:
+      description: Request to create an LLM Observability annotation queue.
+      properties:
+        data:
+          $ref: "#/components/schemas/LLMObsAnnotationQueueDataRequest"
+      required:
+        - data
+      type: object
+    LLMObsAnnotationQueueResponse:
+      description: Response containing a single LLM Observability annotation queue.
+      properties:
+        data:
+          $ref: "#/components/schemas/LLMObsAnnotationQueueDataResponse"
+      required:
+        - data
+      type: object
+    LLMObsAnnotationQueueType:
+      description: Resource type of an LLM Observability annotation queue.
+      enum:
+        - queues
+      example: queues
+      type: string
+      x-enum-varnames:
+        - QUEUES
+    LLMObsAnnotationQueueUpdateDataAttributesRequest:
+      description: Attributes for updating an LLM Observability annotation queue. All fields are optional.
+      properties:
+        description:
+          description: Updated description of the annotation queue.
+          example: "Updated description"
+          type: string
+        name:
+          description: Updated name of the annotation queue.
+          example: "Updated queue name"
+          type: string
+      type: object
+    LLMObsAnnotationQueueUpdateDataRequest:
+      description: Data object for updating an LLM Observability annotation queue.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/LLMObsAnnotationQueueUpdateDataAttributesRequest"
+        type:
+          $ref: "#/components/schemas/LLMObsAnnotationQueueType"
+      required:
+        - type
+        - attributes
+      type: object
+    LLMObsAnnotationQueueUpdateRequest:
+      description: Request to update an LLM Observability annotation queue.
+      properties:
+        data:
+          $ref: "#/components/schemas/LLMObsAnnotationQueueUpdateDataRequest"
+      required:
+        - data
+      type: object
+    LLMObsAnnotationQueuesResponse:
+      description: Response containing a list of LLM Observability annotation queues.
+      properties:
+        data:
+          description: List of annotation queues.
+          items:
+            $ref: "#/components/schemas/LLMObsAnnotationQueueDataResponse"
+          type: array
+      required:
+        - data
       type: object
     LLMObsCursorMeta:
       description: Pagination cursor metadata.
@@ -36371,6 +36876,41 @@ components:
           type: array
         meta:
           $ref: "#/components/schemas/LLMObsCursorMeta"
+      required:
+        - data
+      type: object
+    LLMObsDeleteAnnotationQueueInteractionsDataAttributesRequest:
+      description: Attributes for deleting interactions from an annotation queue.
+      properties:
+        interaction_ids:
+          description: List of interaction IDs to delete. Must contain at least one item.
+          example:
+            - "00000000-0000-0000-0000-000000000000"
+            - "00000000-0000-0000-0000-000000000001"
+          items:
+            description: An interaction ID to delete.
+            type: string
+          minItems: 1
+          type: array
+      required:
+        - interaction_ids
+      type: object
+    LLMObsDeleteAnnotationQueueInteractionsDataRequest:
+      description: Data object for deleting interactions from an annotation queue.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/LLMObsDeleteAnnotationQueueInteractionsDataAttributesRequest"
+        type:
+          $ref: "#/components/schemas/LLMObsAnnotationQueueInteractionsType"
+      required:
+        - type
+        - attributes
+      type: object
+    LLMObsDeleteAnnotationQueueInteractionsRequest:
+      description: Request to delete interactions from an LLM Observability annotation queue.
+      properties:
+        data:
+          $ref: "#/components/schemas/LLMObsDeleteAnnotationQueueInteractionsDataRequest"
       required:
         - data
       type: object
@@ -36883,6 +37423,16 @@ components:
       required:
         - data
       type: object
+    LLMObsInteractionType:
+      description: Type of interaction in an annotation queue.
+      enum:
+        - trace
+        - experiment_trace
+      example: trace
+      type: string
+      x-enum-varnames:
+        - TRACE
+        - EXPERIMENT_TRACE
     LLMObsMetricAssessment:
       description: Assessment result for an LLM Observability experiment metric.
       enum:
@@ -38099,6 +38649,14 @@ components:
       properties:
         data:
           $ref: "#/components/schemas/ListFindingsData"
+          example:
+            - attributes:
+                evaluation: fail
+                resource: "arn:aws:s3:::my-bucket"
+                resource_type: aws_s3_bucket
+                status: open
+              id: "abc-123-xyz"
+              type: finding
         meta:
           $ref: "#/components/schemas/ListFindingsMeta"
       required:
@@ -38134,6 +38692,113 @@ components:
         type:
           description: The type of the resource. The value should always be tags.
           type: string
+      type: object
+    ListInvestigationsResponse:
+      description: Response for listing investigations.
+      properties:
+        data:
+          description: List of investigations.
+          items:
+            $ref: "#/components/schemas/ListInvestigationsResponseData"
+          type: array
+        links:
+          $ref: "#/components/schemas/ListInvestigationsResponseLinks"
+        meta:
+          $ref: "#/components/schemas/ListInvestigationsResponseMeta"
+      required:
+        - data
+        - meta
+        - links
+      type: object
+    ListInvestigationsResponseData:
+      description: Data for an investigation list item.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/ListInvestigationsResponseDataAttributes"
+        id:
+          description: The unique identifier of the investigation.
+          example: "a1b2c3d4-5e6f-7a8b-9c0d-1e2f3a4b5c6d"
+          type: string
+        type:
+          $ref: "#/components/schemas/InvestigationType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    ListInvestigationsResponseDataAttributes:
+      description: Attributes of an investigation list item.
+      properties:
+        status:
+          description: The current status of the investigation.
+          example: "conclusive"
+          type: string
+        title:
+          description: The title of the investigation.
+          example: "Monitor alert investigation for web-server-01"
+          type: string
+      required:
+        - status
+        - title
+      type: object
+    ListInvestigationsResponseLinks:
+      description: Pagination links for the list investigations response.
+      properties:
+        first:
+          description: Link to the first page.
+          example: "https://api.datadoghq.com/api/v2/bits-ai/investigations?page[offset]=0&page[limit]=10"
+          type: string
+        last:
+          description: Link to the last page.
+          nullable: true
+          type: string
+        next:
+          description: Link to the next page.
+          example: "https://api.datadoghq.com/api/v2/bits-ai/investigations?page[offset]=10&page[limit]=10"
+          type: string
+        prev:
+          description: Link to the previous page.
+          nullable: true
+          type: string
+        self:
+          description: Link to the current page.
+          example: "https://api.datadoghq.com/api/v2/bits-ai/investigations?page[offset]=0&page[limit]=10"
+          type: string
+      required:
+        - first
+        - next
+        - self
+      type: object
+    ListInvestigationsResponseMeta:
+      description: Metadata for the list investigations response.
+      properties:
+        page:
+          $ref: "#/components/schemas/ListInvestigationsResponseMetaPage"
+      required:
+        - page
+      type: object
+    ListInvestigationsResponseMetaPage:
+      description: Pagination metadata.
+      properties:
+        limit:
+          description: Maximum number of results per page.
+          example: 10
+          format: int64
+          type: integer
+        offset:
+          description: Offset of the current page.
+          example: 0
+          format: int64
+          type: integer
+        total:
+          description: Total number of investigations.
+          example: 50
+          format: int64
+          type: integer
+      required:
+        - total
+        - limit
+        - offset
       type: object
     ListKindCatalogResponse:
       description: List kind response.
@@ -41506,6 +42171,28 @@ components:
           maxLength: 255
           type: string
       type: object
+    MonitorAlertTriggerAttributes:
+      description: Attributes for a monitor alert trigger.
+      properties:
+        event_id:
+          description: The event ID associated with the monitor alert.
+          example: "1234567890123456789"
+          type: string
+        event_ts:
+          description: The timestamp of the event in Unix milliseconds.
+          example: 1700000000000
+          format: int64
+          type: integer
+        monitor_id:
+          description: The monitor ID that triggered the alert.
+          example: 12345678
+          format: int64
+          type: integer
+      required:
+        - monitor_id
+        - event_id
+        - event_ts
+      type: object
     MonitorConfigPolicyAttributeCreateRequest:
       description: Policy and policy type for a monitor configuration policy.
       properties:
@@ -43257,12 +43944,14 @@ components:
     ObservabilityPipelineAmazonS3Source:
       description: |-
         The `amazon_s3` source ingests logs from an Amazon S3 bucket.
-        It supports AWS authentication and TLS encryption.
+        It supports AWS authentication, TLS encryption, and configurable compression.
 
         **Supported pipeline types:** logs
       properties:
         auth:
           $ref: "#/components/schemas/ObservabilityPipelineAwsAuth"
+        compression:
+          $ref: "#/components/schemas/ObservabilityPipelineAmazonS3SourceCompression"
         id:
           description: The unique identifier for this component. Used in other parts of the pipeline to reference this component (for example, as the `input` to downstream components).
           example: aws-s3-source
@@ -43285,6 +43974,20 @@ components:
         - region
       type: object
       x-pipeline-types: [logs]
+    ObservabilityPipelineAmazonS3SourceCompression:
+      description: Compression format for objects retrieved from the S3 bucket. Use `auto` to detect compression from the object's Content-Encoding header or file extension.
+      enum:
+        - auto
+        - none
+        - gzip
+        - zstd
+      example: gzip
+      type: string
+      x-enum-varnames:
+        - AUTO
+        - NONE
+        - GZIP
+        - ZSTD
     ObservabilityPipelineAmazonS3SourceType:
       default: amazon_s3
       description: The source type. Always `amazon_s3`.
@@ -43485,6 +44188,7 @@ components:
     ObservabilityPipelineConfigDestinationItem:
       description: "A destination for the pipeline."
       oneOf:
+        - $ref: "#/components/schemas/ObservabilityPipelineElasticsearchDestination"
         - $ref: "#/components/schemas/ObservabilityPipelineHttpClientDestination"
         - $ref: "#/components/schemas/ObservabilityPipelineAmazonOpenSearchDestination"
         - $ref: "#/components/schemas/ObservabilityPipelineAmazonS3Destination"
@@ -43494,7 +44198,6 @@ components:
         - $ref: "#/components/schemas/ObservabilityPipelineCloudPremDestination"
         - $ref: "#/components/schemas/ObservabilityPipelineCrowdStrikeNextGenSiemDestination"
         - $ref: "#/components/schemas/ObservabilityPipelineDatadogLogsDestination"
-        - $ref: "#/components/schemas/ObservabilityPipelineElasticsearchDestination"
         - $ref: "#/components/schemas/ObservabilityPipelineGoogleChronicleDestination"
         - $ref: "#/components/schemas/ObservabilityPipelineGoogleCloudStorageDestination"
         - $ref: "#/components/schemas/ObservabilityPipelineGooglePubSubDestination"
@@ -44096,9 +44799,9 @@ components:
       type: object
     ObservabilityPipelineElasticsearchDestination:
       description: |-
-        The `elasticsearch` destination writes logs to an Elasticsearch cluster.
+        The `elasticsearch` destination writes logs or metrics to an Elasticsearch cluster.
 
-        **Supported pipeline types:** logs
+        **Supported pipeline types:** logs, metrics
       properties:
         api_version:
           $ref: "#/components/schemas/ObservabilityPipelineElasticsearchDestinationApiVersion"
@@ -44107,9 +44810,11 @@ components:
         buffer:
           $ref: "#/components/schemas/ObservabilityPipelineBufferOptions"
         bulk_index:
-          description: The index to write logs to in Elasticsearch.
+          description: The name of the index to write events to in Elasticsearch.
           example: logs-index
           type: string
+        compression:
+          $ref: "#/components/schemas/ObservabilityPipelineElasticsearchDestinationCompression"
         data_stream:
           $ref: "#/components/schemas/ObservabilityPipelineElasticsearchDestinationDataStream"
         endpoint_url_key:
@@ -44120,6 +44825,10 @@ components:
           description: The unique identifier for this component.
           example: "elasticsearch-destination"
           type: string
+        id_key:
+          description: The name of the field used as the document ID in Elasticsearch.
+          example: id
+          type: string
         inputs:
           description: A list of component IDs whose output is used as the `input` for this component.
           example: ["filter-processor"]
@@ -44127,6 +44836,15 @@ components:
             description: The ID of a component whose output is used as input for this destination.
             type: string
           type: array
+        pipeline:
+          description: The name of an Elasticsearch ingest pipeline to apply to events before indexing.
+          example: my-pipeline
+          type: string
+        request_retry_partial:
+          description: When `true`, retries failed partial bulk requests when some events in a batch fail while others succeed.
+          type: boolean
+        tls:
+          $ref: "#/components/schemas/ObservabilityPipelineTls"
         type:
           $ref: "#/components/schemas/ObservabilityPipelineElasticsearchDestinationType"
       required:
@@ -44134,7 +44852,7 @@ components:
         - type
         - inputs
       type: object
-      x-pipeline-types: [logs]
+      x-pipeline-types: [logs, metrics]
     ObservabilityPipelineElasticsearchDestinationApiVersion:
       description: The Elasticsearch API version to use. Set to `auto` to auto-detect.
       enum: [auto, v6, v7, v8]
@@ -44163,18 +44881,48 @@ components:
       required:
         - strategy
       type: object
+    ObservabilityPipelineElasticsearchDestinationCompression:
+      description: Compression configuration for the Elasticsearch destination.
+      properties:
+        algorithm:
+          $ref: "#/components/schemas/ObservabilityPipelineElasticsearchDestinationCompressionAlgorithm"
+        level:
+          description: The compression level. Only applicable for `gzip`, `zlib`, and `zstd` algorithms.
+          example: 6
+          format: int64
+          type: integer
+      required:
+        - algorithm
+      type: object
+    ObservabilityPipelineElasticsearchDestinationCompressionAlgorithm:
+      description: The compression algorithm applied when sending data to Elasticsearch.
+      enum: [none, gzip, zlib, zstd, snappy]
+      example: gzip
+      type: string
+      x-enum-varnames:
+        - NONE
+        - GZIP
+        - ZLIB
+        - ZSTD
+        - SNAPPY
     ObservabilityPipelineElasticsearchDestinationDataStream:
       description: Configuration options for writing to Elasticsearch Data Streams instead of a fixed index.
       properties:
+        auto_routing:
+          description: When `true`, automatically routes events to the appropriate data stream based on the event content.
+          type: boolean
         dataset:
-          description: The data stream dataset for your logs. This groups logs by their source or application.
+          description: The data stream dataset. This groups events by their source or application.
           type: string
         dtype:
-          description: The data stream type for your logs. This determines how logs are categorized within the data stream.
+          description: The data stream type. This determines how events are categorized within the data stream.
           type: string
         namespace:
-          description: The data stream namespace for your logs. This separates logs into different environments or domains.
+          description: The data stream namespace. This separates events into different environments or domains.
           type: string
+        sync_fields:
+          description: When `true`, synchronizes data stream fields with the Elasticsearch index mapping.
+          type: boolean
       type: object
     ObservabilityPipelineElasticsearchDestinationType:
       default: elasticsearch
@@ -44185,6 +44933,40 @@ components:
       type: string
       x-enum-varnames:
         - ELASTICSEARCH
+    ObservabilityPipelineEnrichmentTableFieldEventLookup:
+      description: Looks up a value from a field path in the log event.
+      properties:
+        event:
+          description: The path to the field in the log event to use as the lookup key.
+          example: log.user.id
+          type: string
+      required:
+        - event
+      type: object
+    ObservabilityPipelineEnrichmentTableFieldSecretLookup:
+      description: Looks up a value stored as a pipeline secret.
+      properties:
+        secret:
+          description: The name of the secret containing the lookup key value.
+          example: MY_LOOKUP_SECRET
+          type: string
+      required:
+        - secret
+      type: object
+    ObservabilityPipelineEnrichmentTableFieldStringPath:
+      description: A plain field path in the log event, used as the lookup key.
+      example: log.user.id
+      type: string
+    ObservabilityPipelineEnrichmentTableFieldVrlLookup:
+      description: Evaluates a VRL expression to produce the lookup key.
+      properties:
+        vrl:
+          description: A VRL expression that returns the value to use as the lookup key.
+          example: .log.user.id
+          type: string
+      required:
+        - vrl
+      type: object
     ObservabilityPipelineEnrichmentTableFile:
       description: Defines a static enrichment table loaded from a CSV file.
       properties:
@@ -44235,6 +45017,16 @@ components:
       type: string
       x-enum-varnames:
         - CSV
+    ObservabilityPipelineEnrichmentTableFileKeyItemField:
+      description: |-
+        Specifies the source of the key value used for enrichment table lookups.
+        Can be a plain field path string or an object specifying `event`, `vrl`, or `secret`.
+      example: log.user.id
+      oneOf:
+        - $ref: "#/components/schemas/ObservabilityPipelineEnrichmentTableFieldStringPath"
+        - $ref: "#/components/schemas/ObservabilityPipelineEnrichmentTableFieldEventLookup"
+        - $ref: "#/components/schemas/ObservabilityPipelineEnrichmentTableFieldVrlLookup"
+        - $ref: "#/components/schemas/ObservabilityPipelineEnrichmentTableFieldSecretLookup"
     ObservabilityPipelineEnrichmentTableFileKeyItems:
       description: Defines how to map log fields to enrichment table columns during lookups.
       properties:
@@ -44245,9 +45037,7 @@ components:
         comparison:
           $ref: "#/components/schemas/ObservabilityPipelineEnrichmentTableFileKeyItemsComparison"
         field:
-          description: The `items` `field`.
-          example: log.user.id
-          type: string
+          $ref: "#/components/schemas/ObservabilityPipelineEnrichmentTableFileKeyItemField"
       required:
         - column
         - comparison
@@ -45897,7 +46687,7 @@ components:
             $ref: "#/components/schemas/ObservabilityPipelineParseGrokProcessorRuleMatchRule"
           type: array
         source:
-          description: The name of the field in the log event to apply the Grok rules to.
+          description: The value of the source field in log events to be processed by the Grok rules.
           example: "message"
           type: string
         support_rules:
@@ -47268,6 +48058,8 @@ components:
           description: Name of the environment variable or secret that holds the Splunk HEC token.
           example: SPLUNK_HEC_TOKEN
           type: string
+        token_strategy:
+          $ref: "#/components/schemas/ObservabilityPipelineSplunkHecDestinationTokenStrategy"
         type:
           $ref: "#/components/schemas/ObservabilityPipelineSplunkHecDestinationType"
       required:
@@ -47286,6 +48078,16 @@ components:
       x-enum-varnames:
         - JSON
         - RAW_MESSAGE
+    ObservabilityPipelineSplunkHecDestinationTokenStrategy:
+      description: Controls how the Splunk HEC token is supplied. Use `custom` to provide a token with `token_key`, or `from_source` to forward the token received from an upstream Splunk HEC source.
+      enum:
+        - custom
+        - from_source
+      example: custom
+      type: string
+      x-enum-varnames:
+        - CUSTOM
+        - FROM_SOURCE
     ObservabilityPipelineSplunkHecDestinationType:
       default: splunk_hec
       description: The destination type. Always `splunk_hec`.
@@ -47309,6 +48111,12 @@ components:
           description: The unique identifier for this component. Used in other parts of the pipeline to reference this component (for example, as the `input` to downstream components).
           example: splunk-hec-source
           type: string
+        store_hec_token:
+          description: |-
+            When `true`, the Splunk HEC token from the incoming request is stored in the event metadata.
+            This allows downstream components to forward the token to other Splunk HEC destinations.
+          example: true
+          type: boolean
         tls:
           $ref: "#/components/schemas/ObservabilityPipelineTls"
         type:
@@ -48736,6 +49544,12 @@ components:
       properties:
         data:
           $ref: "#/components/schemas/OutcomesBatchResponseData"
+          example:
+            - attributes:
+                service_name: my-service
+                state: pass
+              id: "outcome-abc123"
+              type: rule-outcome
         meta:
           $ref: "#/components/schemas/OutcomesBatchResponseMeta"
       required:
@@ -59705,6 +60519,17 @@ components:
       required:
         - data
       type: object
+    SecurityMonitoringSignalInvestigationQueryTemplateVariables:
+      additionalProperties:
+        items:
+          description: A value for this template variable extracted from the signal.
+          type: string
+        type: array
+      description: Template variables applied to the investigation log query, mapping attribute paths to values extracted from the signal.
+      example:
+        "@userIdentity.arn":
+          - foo
+      type: object
     SecurityMonitoringSignalListRequest:
       description: The request for a security signal list.
       properties:
@@ -60087,6 +60912,82 @@ components:
       properties:
         data:
           $ref: "#/components/schemas/SecurityMonitoringSignalStateUpdateData"
+      required:
+        - data
+      type: object
+    SecurityMonitoringSignalSuggestedAction:
+      description: A suggested action for a security signal.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/SecurityMonitoringSignalSuggestedActionAttributes"
+        id:
+          description: The unique ID of the suggested action.
+          example: w00-t10-992
+          type: string
+        type:
+          $ref: "#/components/schemas/SecurityMonitoringSignalSuggestedActionType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    SecurityMonitoringSignalSuggestedActionAttributes:
+      description: Attributes of a suggested action for a security signal. The available fields depend on the action type.
+      properties:
+        name:
+          description: The name of the investigation log query.
+          example: Cloudtrail events for user ARN
+          type: string
+        query_filter:
+          description: The log query filter for the investigation.
+          example: 'source:cloudtrail @userIdentity.arn:"foo"'
+          type: string
+        template_variables:
+          $ref: "#/components/schemas/SecurityMonitoringSignalInvestigationQueryTemplateVariables"
+        title:
+          description: The title of the recommended blog post.
+          example: Monitor Okta logs to track system access and unusual activity
+          type: string
+        url:
+          description: The URL of the suggested action.
+          example: /logs?query=source%3Acloudtrail+%40userIdentity.arn%3A%22foo%22
+          type: string
+      type: object
+    SecurityMonitoringSignalSuggestedActionList:
+      description: List of suggested actions for a security signal.
+      example:
+        - attributes:
+            name: Cloudtrail events for user ARN
+            query_filter: 'source:cloudtrail @userIdentity.arn:"foo"'
+            template_variables:
+              "@userIdentity.arn":
+                - foo
+            url: /logs?query=source%3Acloudtrail+%40userIdentity.arn%3A%22foo%22
+          id: w00-t10-992
+          type: investigation_log_queries
+        - attributes:
+            title: Monitor Okta logs to track system access and unusual activity
+            url: https://www.datadoghq.com/blog/monitor-activity-with-okta/
+          id: bxy-o8v-i1a
+          type: recommended_blog_posts
+      items:
+        $ref: "#/components/schemas/SecurityMonitoringSignalSuggestedAction"
+      type: array
+    SecurityMonitoringSignalSuggestedActionType:
+      description: The type of the suggested action resource.
+      enum:
+        - investigation_log_queries
+        - recommended_blog_posts
+      example: investigation_log_queries
+      type: string
+      x-enum-varnames:
+        - INVESTIGATION_LOG_QUERIES
+        - RECOMMENDED_BLOG_POSTS
+    SecurityMonitoringSignalSuggestedActionsResponse:
+      description: Response with suggested actions for a security signal.
+      properties:
+        data:
+          $ref: "#/components/schemas/SecurityMonitoringSignalSuggestedActionList"
       required:
         - data
       type: object
@@ -63050,6 +63951,13 @@ components:
       properties:
         data:
           $ref: "#/components/schemas/ServiceNowAssignmentGroupsData"
+          example:
+            - attributes:
+                group_name: "IT Operations"
+                group_sys_id: "abc123def456"
+                instance_id: "65b3341b-0680-47f9-a6d4-134db45c603e"
+              id: "65b3341b-0680-47f9-a6d4-134db45c603e"
+              type: assignment_groups
       required:
         - data
       type: object
@@ -63157,6 +64065,13 @@ components:
       properties:
         data:
           $ref: "#/components/schemas/ServiceNowBusinessServicesData"
+          example:
+            - attributes:
+                instance_id: "65b3341b-0680-47f9-a6d4-134db45c603e"
+                service_name: "IT Support"
+                service_sys_id: "abc123def456"
+              id: "65b3341b-0680-47f9-a6d4-134db45c603e"
+              type: business_services
       required:
         - data
       type: object
@@ -63213,6 +64128,11 @@ components:
       properties:
         data:
           $ref: "#/components/schemas/ServiceNowInstancesData"
+          example:
+            - attributes:
+                instance_name: "my-servicenow-instance"
+              id: "65b3341b-0680-47f9-a6d4-134db45c603e"
+              type: instance
       required:
         - data
       type: object
@@ -63458,6 +64378,13 @@ components:
       properties:
         data:
           $ref: "#/components/schemas/ServiceNowTemplatesData"
+          example:
+            - attributes:
+                handle_name: "incident-template"
+                instance_id: "65b3341b-0680-47f9-a6d4-134db45c603e"
+                servicenow_tablename: "incident"
+              id: "65b3341b-0680-47f9-a6d4-134db45c603e"
+              type: servicenow_templates
       required:
         - data
       type: object
@@ -63584,6 +64511,14 @@ components:
       properties:
         data:
           $ref: "#/components/schemas/ServiceNowUsersData"
+          example:
+            - attributes:
+                email: "john.doe@example.com"
+                instance_id: "65b3341b-0680-47f9-a6d4-134db45c603e"
+                user_name: "john.doe"
+                user_sys_id: "abc123def456"
+              id: "65b3341b-0680-47f9-a6d4-134db45c603e"
+              type: users
       required:
         - data
       type: object
@@ -70314,6 +71249,286 @@ components:
       type: string
       x-enum-varnames:
         - TEST_OPTIMIZATION_DELETE_SERVICE_SETTINGS_REQUEST
+    TestOptimizationFlakyTestsManagementPoliciesAttemptToFix:
+      description: Configuration for the attempt-to-fix Flaky Tests Management policy.
+      properties:
+        retries:
+          description: Number of retries when attempting to fix a flaky test. Must be greater than 0.
+          example: 3
+          format: int64
+          type: integer
+      type: object
+    TestOptimizationFlakyTestsManagementPoliciesAttributes:
+      description: Attributes of the Flaky Tests Management policies for a repository.
+      properties:
+        attempt_to_fix:
+          $ref: "#/components/schemas/TestOptimizationFlakyTestsManagementPoliciesAttemptToFix"
+        disabled:
+          $ref: "#/components/schemas/TestOptimizationFlakyTestsManagementPoliciesDisabled"
+        quarantined:
+          $ref: "#/components/schemas/TestOptimizationFlakyTestsManagementPoliciesQuarantined"
+        repository_id:
+          description: The repository identifier.
+          example: github.com/datadog/shopist
+          type: string
+      type: object
+    TestOptimizationFlakyTestsManagementPoliciesAutoDisableRule:
+      description: Automatic disable triggering rule based on a time window and test status.
+      properties:
+        enabled:
+          description: Whether this auto-disable rule is enabled.
+          example: false
+          type: boolean
+        status:
+          $ref: "#/components/schemas/TestOptimizationFlakyTestsManagementPoliciesDisabledStatus"
+        window_seconds:
+          description: Time window in seconds over which flakiness is evaluated. Must be greater than 0.
+          example: 3600
+          format: int64
+          type: integer
+      type: object
+    TestOptimizationFlakyTestsManagementPoliciesAutoQuarantineRule:
+      description: Automatic quarantine triggering rule based on a time window.
+      properties:
+        enabled:
+          description: Whether this auto-quarantine rule is enabled.
+          example: true
+          type: boolean
+        window_seconds:
+          description: Time window in seconds over which flakiness is evaluated. Must be greater than 0.
+          example: 3600
+          format: int64
+          type: integer
+      type: object
+    TestOptimizationFlakyTestsManagementPoliciesBranchRule:
+      description: Branch filtering rule for a Flaky Tests Management policy.
+      properties:
+        branches:
+          description: List of branches to which the policy applies.
+          example:
+            - main
+          items:
+            description: A branch name.
+            type: string
+          type: array
+        enabled:
+          description: Whether this branch rule is enabled.
+          example: true
+          type: boolean
+        excluded_branches:
+          description: List of branches excluded from the policy.
+          example: []
+          items:
+            description: A branch name.
+            type: string
+          type: array
+        excluded_test_services:
+          description: List of test services excluded from the policy.
+          example: []
+          items:
+            description: A test service name.
+            type: string
+          type: array
+      type: object
+    TestOptimizationFlakyTestsManagementPoliciesData:
+      description: Data object for Flaky Tests Management policies response.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/TestOptimizationFlakyTestsManagementPoliciesAttributes"
+        id:
+          description: The repository identifier used as the resource ID.
+          example: github.com/datadog/shopist
+          type: string
+        type:
+          $ref: "#/components/schemas/TestOptimizationFlakyTestsManagementPoliciesType"
+      type: object
+    TestOptimizationFlakyTestsManagementPoliciesDisabled:
+      description: Configuration for the disabled Flaky Tests Management policy.
+      properties:
+        auto_disable_rule:
+          $ref: "#/components/schemas/TestOptimizationFlakyTestsManagementPoliciesAutoDisableRule"
+        branch_rule:
+          $ref: "#/components/schemas/TestOptimizationFlakyTestsManagementPoliciesBranchRule"
+        enabled:
+          description: Whether the disabled policy is enabled.
+          example: false
+          type: boolean
+        failure_rate_rule:
+          $ref: "#/components/schemas/TestOptimizationFlakyTestsManagementPoliciesDisabledFailureRateRule"
+      type: object
+    TestOptimizationFlakyTestsManagementPoliciesDisabledFailureRateRule:
+      description: Failure-rate-based rule for the disabled policy.
+      properties:
+        branches:
+          description: List of branches to which this rule applies.
+          example: []
+          items:
+            description: A branch name.
+            type: string
+          type: array
+        enabled:
+          description: Whether this failure rate rule is enabled.
+          example: false
+          type: boolean
+        min_runs:
+          description: Minimum number of runs required before the rule is evaluated. Must be greater than or equal to 0.
+          example: 10
+          format: int64
+          type: integer
+        status:
+          $ref: "#/components/schemas/TestOptimizationFlakyTestsManagementPoliciesDisabledStatus"
+        threshold:
+          description: Failure rate threshold (0.0–1.0) above which the rule triggers.
+          example: 0.5
+          format: double
+          type: number
+      type: object
+    TestOptimizationFlakyTestsManagementPoliciesDisabledStatus:
+      description: |-
+        Test status that the disable policy applies to.
+        Must be either `active` or `quarantined`.
+      enum:
+        - active
+        - quarantined
+      example: active
+      type: string
+      x-enum-varnames:
+        - ACTIVE
+        - QUARANTINED
+    TestOptimizationFlakyTestsManagementPoliciesGetRequest:
+      description: Request object for getting Flaky Tests Management policies.
+      properties:
+        data:
+          $ref: "#/components/schemas/TestOptimizationFlakyTestsManagementPoliciesGetRequestData"
+      required:
+        - data
+      type: object
+    TestOptimizationFlakyTestsManagementPoliciesGetRequestAttributes:
+      description: Attributes for requesting Flaky Tests Management policies.
+      properties:
+        repository_id:
+          description: The repository identifier.
+          example: github.com/datadog/shopist
+          minLength: 1
+          type: string
+      required:
+        - repository_id
+      type: object
+    TestOptimizationFlakyTestsManagementPoliciesGetRequestData:
+      description: Data object for get Flaky Tests Management policies request.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/TestOptimizationFlakyTestsManagementPoliciesGetRequestAttributes"
+        type:
+          $ref: "#/components/schemas/TestOptimizationGetFlakyTestsManagementPoliciesRequestDataType"
+      required:
+        - type
+        - attributes
+      type: object
+    TestOptimizationFlakyTestsManagementPoliciesQuarantined:
+      description: Configuration for the quarantined Flaky Tests Management policy.
+      properties:
+        auto_quarantine_rule:
+          $ref: "#/components/schemas/TestOptimizationFlakyTestsManagementPoliciesAutoQuarantineRule"
+        branch_rule:
+          $ref: "#/components/schemas/TestOptimizationFlakyTestsManagementPoliciesBranchRule"
+        enabled:
+          description: Whether the quarantined policy is enabled.
+          example: true
+          type: boolean
+        failure_rate_rule:
+          $ref: "#/components/schemas/TestOptimizationFlakyTestsManagementPoliciesQuarantinedFailureRateRule"
+      type: object
+    TestOptimizationFlakyTestsManagementPoliciesQuarantinedFailureRateRule:
+      description: Failure-rate-based rule for the quarantined policy.
+      properties:
+        branches:
+          description: List of branches to which this rule applies.
+          example:
+            - main
+          items:
+            description: A branch name.
+            type: string
+          type: array
+        enabled:
+          description: Whether this failure rate rule is enabled.
+          example: true
+          type: boolean
+        min_runs:
+          description: Minimum number of runs required before the rule is evaluated. Must be greater than or equal to 0.
+          example: 10
+          format: int64
+          type: integer
+        threshold:
+          description: Failure rate threshold (0.0–1.0) above which the rule triggers.
+          example: 0.5
+          format: double
+          type: number
+      type: object
+    TestOptimizationFlakyTestsManagementPoliciesResponse:
+      description: Response object containing Flaky Tests Management policies for a repository.
+      properties:
+        data:
+          $ref: "#/components/schemas/TestOptimizationFlakyTestsManagementPoliciesData"
+      type: object
+    TestOptimizationFlakyTestsManagementPoliciesType:
+      description: |-
+        JSON:API type for Flaky Tests Management policies response.
+        The value must always be `test_optimization_flaky_tests_management_policies`.
+      enum:
+        - test_optimization_flaky_tests_management_policies
+      example: test_optimization_flaky_tests_management_policies
+      type: string
+      x-enum-varnames:
+        - TEST_OPTIMIZATION_FLAKY_TESTS_MANAGEMENT_POLICIES
+    TestOptimizationFlakyTestsManagementPoliciesUpdateRequest:
+      description: Request object for updating Flaky Tests Management policies.
+      properties:
+        data:
+          $ref: "#/components/schemas/TestOptimizationFlakyTestsManagementPoliciesUpdateRequestData"
+      required:
+        - data
+      type: object
+    TestOptimizationFlakyTestsManagementPoliciesUpdateRequestAttributes:
+      description: |-
+        Attributes for updating Flaky Tests Management policies.
+        Only provided policy blocks are updated; omitted blocks are left unchanged.
+      properties:
+        attempt_to_fix:
+          $ref: "#/components/schemas/TestOptimizationFlakyTestsManagementPoliciesAttemptToFix"
+        disabled:
+          $ref: "#/components/schemas/TestOptimizationFlakyTestsManagementPoliciesDisabled"
+        quarantined:
+          $ref: "#/components/schemas/TestOptimizationFlakyTestsManagementPoliciesQuarantined"
+        repository_id:
+          description: The repository identifier.
+          example: github.com/datadog/shopist
+          minLength: 1
+          type: string
+      required:
+        - repository_id
+      type: object
+    TestOptimizationFlakyTestsManagementPoliciesUpdateRequestData:
+      description: Data object for update Flaky Tests Management policies request.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/TestOptimizationFlakyTestsManagementPoliciesUpdateRequestAttributes"
+        type:
+          $ref: "#/components/schemas/TestOptimizationUpdateFlakyTestsManagementPoliciesRequestDataType"
+      required:
+        - type
+        - attributes
+      type: object
+    TestOptimizationGetFlakyTestsManagementPoliciesRequestDataType:
+      description: |-
+        JSON:API type for get Flaky Tests Management policies request.
+        The value must always be `test_optimization_get_flaky_tests_management_policies_request`.
+      enum:
+        - test_optimization_get_flaky_tests_management_policies_request
+      example: test_optimization_get_flaky_tests_management_policies_request
+      type: string
+      x-enum-varnames:
+        - TEST_OPTIMIZATION_GET_FLAKY_TESTS_MANAGEMENT_POLICIES_REQUEST
     TestOptimizationGetServiceSettingsRequest:
       description: Request object for getting Test Optimization service settings.
       properties:
@@ -70432,6 +71647,16 @@ components:
       type: string
       x-enum-varnames:
         - TEST_OPTIMIZATION_SERVICE_SETTINGS
+    TestOptimizationUpdateFlakyTestsManagementPoliciesRequestDataType:
+      description: |-
+        JSON:API type for update Flaky Tests Management policies request.
+        The value must always be `test_optimization_update_flaky_tests_management_policies_request`.
+      enum:
+        - test_optimization_update_flaky_tests_management_policies_request
+      example: test_optimization_update_flaky_tests_management_policies_request
+      type: string
+      x-enum-varnames:
+        - TEST_OPTIMIZATION_UPDATE_FLAKY_TESTS_MANAGEMENT_POLICIES_REQUEST
     TestOptimizationUpdateServiceSettingsRequest:
       description: Request object for updating Test Optimization service settings.
       properties:
@@ -70979,6 +72204,94 @@ components:
         - $ref: "#/components/schemas/SlackTriggerWrapper"
         - $ref: "#/components/schemas/SoftwareCatalogTriggerWrapper"
         - $ref: "#/components/schemas/WorkflowTriggerWrapper"
+    TriggerAttributes:
+      description: The trigger definition for starting an investigation.
+      properties:
+        monitor_alert_trigger:
+          $ref: "#/components/schemas/MonitorAlertTriggerAttributes"
+        type:
+          $ref: "#/components/schemas/TriggerType"
+      required:
+        - type
+        - monitor_alert_trigger
+      type: object
+    TriggerInvestigationRequest:
+      description: Request to trigger a new investigation.
+      properties:
+        data:
+          $ref: "#/components/schemas/TriggerInvestigationRequestData"
+      required:
+        - data
+      type: object
+    TriggerInvestigationRequestData:
+      description: Data for the trigger investigation request.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/TriggerInvestigationRequestDataAttributes"
+        type:
+          $ref: "#/components/schemas/TriggerInvestigationRequestType"
+      required:
+        - type
+        - attributes
+      type: object
+    TriggerInvestigationRequestDataAttributes:
+      description: Attributes for the trigger investigation request.
+      properties:
+        trigger:
+          $ref: "#/components/schemas/TriggerAttributes"
+      required:
+        - trigger
+      type: object
+    TriggerInvestigationRequestType:
+      description: The resource type for trigger investigation requests.
+      enum:
+        - trigger_investigation_request
+      example: trigger_investigation_request
+      type: string
+      x-enum-varnames:
+        - TRIGGER_INVESTIGATION_REQUEST
+    TriggerInvestigationResponse:
+      description: Response after triggering an investigation.
+      properties:
+        data:
+          $ref: "#/components/schemas/TriggerInvestigationResponseData"
+      required:
+        - data
+      type: object
+    TriggerInvestigationResponseData:
+      description: Data for the trigger investigation response.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/TriggerInvestigationResponseDataAttributes"
+        id:
+          description: Unique identifier for the trigger response.
+          example: "f5e6a7b8-c9d0-1e2f-3a4b-5c6d7e8f9a0b"
+          type: string
+        type:
+          $ref: "#/components/schemas/TriggerInvestigationResponseType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    TriggerInvestigationResponseDataAttributes:
+      description: Attributes for the trigger investigation response.
+      properties:
+        investigation_id:
+          description: The ID of the investigation that was created.
+          example: "a1b2c3d4-5e6f-7a8b-9c0d-1e2f3a4b5c6d"
+          type: string
+      required:
+        - investigation_id
+      type: object
+    TriggerInvestigationResponseType:
+      description: The resource type for trigger investigation responses.
+      enum:
+        - trigger_investigation_response
+      example: trigger_investigation_response
+      type: string
+      x-enum-varnames:
+        - TRIGGER_INVESTIGATION_RESPONSE
     TriggerRateLimit:
       description: Defines a rate limit for a trigger.
       properties:
@@ -71002,6 +72315,14 @@ components:
       x-enum-varnames:
         - SECURITY_FINDINGS
         - SECURITY_SIGNALS
+    TriggerType:
+      description: The type of trigger for the investigation.
+      enum:
+        - monitor_alert_trigger
+      example: monitor_alert_trigger
+      type: string
+      x-enum-varnames:
+        - MONITOR_ALERT_TRIGGER
     UCConfigPair:
       description: The definition of `UCConfigPair` object.
       example:
@@ -74879,6 +76200,8 @@ components:
             apm_service_catalog_write: Add, modify, and delete service catalog definitions when those definitions are maintained by Datadog.
             appsec_vm_read: View infrastructure, application code, and library vulnerability findings.
             billing_read: View your organization's billing information.
+            bits_investigations_read: View Bits AI investigations.
+            bits_investigations_write: Create and manage Bits AI investigations.
             cases_read: View Cases.
             cases_write: Create and update cases.
             ci_visibility_pipelines_write: Create CI Visibility pipeline spans using the API.
@@ -79060,6 +80383,216 @@ paths:
         operator: OR
         permissions:
           - user_access_manage
+  /api/v2/bits-ai/investigations:
+    get:
+      description: List all Bits AI investigations for the organization.
+      operationId: ListInvestigations
+      parameters:
+        - description: Offset for pagination.
+          example: 0
+          in: query
+          name: page[offset]
+          required: false
+          schema:
+            format: int64
+            type: integer
+        - description: Maximum number of investigations to return.
+          example: 25
+          in: query
+          name: page[limit]
+          required: false
+          schema:
+            default: 25
+            format: int64
+            maximum: 100
+            type: integer
+        - description: Filter investigations by monitor ID.
+          example: 12345678
+          in: query
+          name: filter[monitor_id]
+          required: false
+          schema:
+            format: int64
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          status: "conclusive"
+                          title: "Monitor alert investigation for web-server-01"
+                        id: "a1b2c3d4-5e6f-7a8b-9c0d-1e2f3a4b5c6d"
+                        type: investigation
+                    links:
+                      first: "https://api.datadoghq.com/api/v2/bits-ai/investigations?page[offset]=0&page[limit]=10"
+                      next: "https://api.datadoghq.com/api/v2/bits-ai/investigations?page[offset]=10&page[limit]=10"
+                      self: "https://api.datadoghq.com/api/v2/bits-ai/investigations?page[offset]=0&page[limit]=10"
+                    meta:
+                      page:
+                        limit: 10
+                        offset: 0
+                        total: 50
+              schema:
+                $ref: "#/components/schemas/ListInvestigationsResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - bits_investigations_read
+      summary: List Bits AI investigations
+      tags:
+        - Bits AI
+      x-menu-order: 2
+      x-pagination:
+        limitParam: page[limit]
+        pageOffsetParam: page[offset]
+        resultsPath: data
+      "x-permission":
+        operator: OR
+        permissions:
+          - bits_investigations_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    post:
+      description: Trigger a new Bits AI investigation based on a monitor alert.
+      operationId: TriggerInvestigation
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      trigger:
+                        monitor_alert_trigger:
+                          event_id: "1234567890123456789"
+                          event_ts: 1700000000000
+                          monitor_id: 12345678
+                        type: monitor_alert_trigger
+                    type: trigger_investigation_request
+            schema:
+              $ref: "#/components/schemas/TriggerInvestigationRequest"
+        description: Trigger investigation request body.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        investigation_id: "a1b2c3d4-5e6f-7a8b-9c0d-1e2f3a4b5c6d"
+                      id: "f5e6a7b8-c9d0-1e2f-3a4b-5c6d7e8f9a0b"
+                      type: trigger_investigation_response
+              schema:
+                $ref: "#/components/schemas/TriggerInvestigationResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - bits_investigations_write
+      summary: Trigger a Bits AI investigation
+      tags:
+        - Bits AI
+      x-codegen-request-body-name: body
+      x-menu-order: 1
+      "x-permission":
+        operator: OR
+        permissions:
+          - bits_investigations_write
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/bits-ai/investigations/{id}:
+    get:
+      description: Get a specific Bits AI investigation by ID.
+      operationId: GetInvestigation
+      parameters:
+        - description: The ID of the investigation.
+          example: "a1b2c3d4-5e6f-7a8b-9c0d-1e2f3a4b5c6d"
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        conclusions:
+                          - description: "The investigation found that a memory leak in payments-service caused CPU usage to spike above 95% starting at 14:32 UTC."
+                            summary: "CPU usage exceeded 95% for over 10 minutes on web-server-01."
+                            title: "High CPU usage detected on web-server-01"
+                        status: "conclusive"
+                        title: "Monitor alert investigation for web-server-01"
+                      id: "a1b2c3d4-5e6f-7a8b-9c0d-1e2f3a4b5c6d"
+                      type: investigation
+                    links:
+                      self: "https://app.datadoghq.com/bits-ai/investigations/a1b2c3d4-5e6f-7a8b-9c0d-1e2f3a4b5c6d"
+              schema:
+                $ref: "#/components/schemas/GetInvestigationResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - bits_investigations_read
+      summary: Get a Bits AI investigation
+      tags:
+        - Bits AI
+      x-menu-order: 3
+      "x-permission":
+        operator: OR
+        permissions:
+          - bits_investigations_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/cases:
     get:
       description: >-
@@ -81338,6 +82871,90 @@ paths:
         operator: OR
         permissions:
           - ci_visibility_read
+  /api/v2/ci/test-optimization/settings/policies:
+    patch:
+      description: |-
+        Partially update Flaky Tests Management repository-level policies for the given repository.
+        Only provided policy blocks are updated; omitted blocks are left unchanged.
+      operationId: UpdateFlakyTestsManagementPolicies
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TestOptimizationFlakyTestsManagementPoliciesUpdateRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TestOptimizationFlakyTestsManagementPoliciesResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/NotAuthorizedResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - test_optimization_settings_write
+      summary: Update Flaky Tests Management policies
+      tags: ["Test Optimization"]
+      x-codegen-request-body-name: body
+      x-menu-order: 7
+      x-permission:
+        operator: OR
+        permissions:
+          - test_optimization_settings_write
+      x-unstable: |-
+        **Note**: This endpoint is in preview and may be subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    post:
+      description: |-
+        Retrieve Flaky Tests Management repository-level policies for the given repository.
+      operationId: GetFlakyTestsManagementPolicies
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TestOptimizationFlakyTestsManagementPoliciesGetRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TestOptimizationFlakyTestsManagementPoliciesResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/NotAuthorizedResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - test_optimization_read
+      summary: Get Flaky Tests Management policies
+      tags: ["Test Optimization"]
+      x-codegen-request-body-name: body
+      x-menu-order: 6
+      x-permission:
+        operator: OR
+        permissions:
+          - test_optimization_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and may be subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/ci/test-optimization/settings/service:
     delete:
       description: |-
@@ -92699,6 +94316,365 @@ paths:
         operator: OR
         permissions:
           - org_management
+  /api/v2/llm-obs/v1/annotation-queues:
+    get:
+      description: |-
+        List annotation queues. Optionally filter by project ID or queue IDs. These parameters are mutually exclusive.
+        If neither is provided, all queues in the organization are returned.
+      operationId: ListLLMObsAnnotationQueues
+      parameters:
+        - description: Filter annotation queues by project ID. Cannot be used together with `queueIds`.
+          in: query
+          name: projectId
+          schema:
+            type: string
+        - description: Filter annotation queues by queue IDs (comma-separated). Cannot be used together with `projectId`.
+          in: query
+          name: queueIds
+          schema:
+            items:
+              type: string
+            type: array
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LLMObsAnnotationQueuesResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: List LLM Observability annotation queues
+      tags:
+        - LLM Observability
+      x-menu-order: 18
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    post:
+      description: |-
+        Create a new annotation queue. Only `name`, `project_id`, and `description` are accepted.
+        Fields such as `created_by`, `owned_by`, `created_at`, `modified_by`, and `modified_at` are inferred by the backend.
+      operationId: CreateLLMObsAnnotationQueue
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LLMObsAnnotationQueueRequest"
+        description: Create annotation queue payload.
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LLMObsAnnotationQueueResponse"
+          description: Created
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Create an LLM Observability annotation queue
+      tags:
+        - LLM Observability
+      x-menu-order: 19
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/llm-obs/v1/annotation-queues/{queue_id}:
+    delete:
+      description: Delete an annotation queue by its ID.
+      operationId: DeleteLLMObsAnnotationQueue
+      parameters:
+        - $ref: "#/components/parameters/LLMObsAnnotationQueueIDPathParameter"
+      responses:
+        "204":
+          description: No Content
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Delete an LLM Observability annotation queue
+      tags:
+        - LLM Observability
+      x-menu-order: 23
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    patch:
+      description: |-
+        Partially update an annotation queue. Only `name` and `description` can be updated.
+      operationId: UpdateLLMObsAnnotationQueue
+      parameters:
+        - $ref: "#/components/parameters/LLMObsAnnotationQueueIDPathParameter"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LLMObsAnnotationQueueUpdateRequest"
+        description: Update annotation queue payload.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LLMObsAnnotationQueueResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Update an LLM Observability annotation queue
+      tags:
+        - LLM Observability
+      x-menu-order: 22
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/llm-obs/v1/annotation-queues/{queue_id}/annotated-interactions:
+    get:
+      description: Retrieve all interactions and their annotations for a given annotation queue.
+      operationId: GetLLMObsAnnotatedInteractions
+      parameters:
+        - $ref: "#/components/parameters/LLMObsAnnotationQueueIDPathParameter"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LLMObsAnnotatedInteractionsResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Get annotated queue interactions
+      tags:
+        - LLM Observability
+      x-menu-order: 21
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/llm-obs/v1/annotation-queues/{queue_id}/interactions:
+    post:
+      description: |-
+        Add one or more interactions (traces) to an annotation queue.
+        At least one interaction must be provided.
+      operationId: CreateLLMObsAnnotationQueueInteractions
+      parameters:
+        - $ref: "#/components/parameters/LLMObsAnnotationQueueIDPathParameter"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LLMObsAnnotationQueueInteractionsRequest"
+        description: Add interactions payload.
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LLMObsAnnotationQueueInteractionsResponse"
+          description: Created
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Add annotation queue interactions
+      tags:
+        - LLM Observability
+      x-menu-order: 20
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/llm-obs/v1/annotation-queues/{queue_id}/interactions/delete:
+    post:
+      description: Delete one or more interactions from an annotation queue.
+      operationId: DeleteLLMObsAnnotationQueueInteractions
+      parameters:
+        - $ref: "#/components/parameters/LLMObsAnnotationQueueIDPathParameter"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LLMObsDeleteAnnotationQueueInteractionsRequest"
+        description: Delete interactions payload.
+        required: true
+      responses:
+        "204":
+          description: No Content
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Delete annotation queue interactions
+      tags:
+        - LLM Observability
+      x-menu-order: 24
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/llm-obs/v1/experiments:
     get:
       description: List all LLM Observability experiments sorted by creation date, newest first.
@@ -108272,6 +110248,55 @@ paths:
         operator: OR
         permissions:
           - security_monitoring_signals_write
+  /api/v2/security_monitoring/signals/{signal_id}/investigation_queries:
+    get:
+      description: Get the list of investigation log queries available for a given security signal.
+      operationId: GetInvestigationLogQueriesMatchingSignal
+      parameters:
+        - $ref: "#/components/parameters/SignalID"
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                data:
+                  - attributes:
+                      name: Cloudtrail events for user ARN
+                      query_filter: 'source:cloudtrail @userIdentity.arn:"foo"'
+                      template_variables:
+                        "@userIdentity.arn":
+                          - foo
+                      url: /logs?query=source%3Acloudtrail+%40userIdentity.arn%3A%22foo%22
+                    id: w00-t10-992
+                    type: investigation_log_queries
+                  - attributes:
+                      title: Monitor Okta logs to track system access and unusual activity
+                      url: https://www.datadoghq.com/blog/monitor-activity-with-okta/
+                    id: bxy-o8v-i1a
+                    type: recommended_blog_posts
+              schema:
+                $ref: "#/components/schemas/SecurityMonitoringSignalSuggestedActionsResponse"
+          description: OK
+        "403":
+          $ref: "#/components/responses/NotAuthorizedResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - security_monitoring_rules_read
+            - security_monitoring_signals_read
+      summary: Get investigation queries for a signal
+      tags: ["Security Monitoring"]
+      x-menu-order: 87
+      x-permission:
+        operator: AND
+        permissions:
+          - security_monitoring_rules_read
+          - security_monitoring_signals_read
   /api/v2/security_monitoring/signals/{signal_id}/state:
     patch:
       description: |-
@@ -108313,6 +110338,55 @@ paths:
         operator: OR
         permissions:
           - security_monitoring_signals_write
+  /api/v2/security_monitoring/signals/{signal_id}/suggested_actions:
+    get:
+      description: Get the list of suggested actions for a given security signal.
+      operationId: GetSuggestedActionsMatchingSignal
+      parameters:
+        - $ref: "#/components/parameters/SignalID"
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                data:
+                  - attributes:
+                      name: Cloudtrail events for user ARN
+                      query_filter: 'source:cloudtrail @userIdentity.arn:"foo"'
+                      template_variables:
+                        "@userIdentity.arn":
+                          - foo
+                      url: /logs?query=source%3Acloudtrail+%40userIdentity.arn%3A%22foo%22
+                    id: w00-t10-992
+                    type: investigation_log_queries
+                  - attributes:
+                      title: Monitor Okta logs to track system access and unusual activity
+                      url: https://www.datadoghq.com/blog/monitor-activity-with-okta/
+                    id: bxy-o8v-i1a
+                    type: recommended_blog_posts
+              schema:
+                $ref: "#/components/schemas/SecurityMonitoringSignalSuggestedActionsResponse"
+          description: OK
+        "403":
+          $ref: "#/components/responses/NotAuthorizedResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - security_monitoring_rules_read
+            - security_monitoring_signals_read
+      summary: Get suggested actions for a signal
+      tags: ["Security Monitoring"]
+      x-menu-order: 88
+      x-permission:
+        operator: AND
+        permissions:
+          - security_monitoring_rules_read
+          - security_monitoring_signals_read
   /api/v2/sensitive-data-scanner/config:
     get:
       description: List all the Scanning groups in your organization.
@@ -116879,6 +118953,9 @@ tags:
       sent from Identity Providers. Use these endpoints to manage your AuthN Mappings.
     name: AuthN Mappings
   - description: |-
+      Use the Bits AI endpoints to retrieve AI-powered investigations.
+    name: Bits AI
+  - description: |-
       Search or aggregate your CI Visibility pipeline events and send them to your Datadog site over HTTP. See the [CI Pipeline Visibility in Datadog page](https://docs.datadoghq.com/continuous_integration/pipelines/) for more information.
     name: CI Visibility Pipelines
   - description: |-
@@ -117045,7 +119122,7 @@ tags:
       description: Find out more at
       url: "https://docs.datadoghq.com/account_management/api-app-keys/"
     name: Key Management
-  - description: Manage LLM Observability projects, datasets, dataset records, and experiments via the Experiments API.
+  - description: Manage LLM Observability projects, datasets, dataset records, experiments, and annotations.
     name: LLM Observability
   - description: |-
       Search your logs and send them to your Datadog platform over HTTP. See the [Log Management page](https://docs.datadoghq.com/logs/) for more information.

@@ -2624,6 +2624,30 @@ menu:
         unstable:
           - v2
         order: 69
+    - name: Get suggested actions for a signal
+      url: '#get-suggested-actions-for-a-signal'
+      identifier: security-monitoring-get-suggested-actions-for-a-signal
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSuggestedActionsMatchingSignal
+        unstable: []
+        order: 88
+    - name: Get investigation queries for a signal
+      url: '#get-investigation-queries-for-a-signal'
+      identifier: security-monitoring-get-investigation-queries-for-a-signal
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetInvestigationLogQueriesMatchingSignal
+        unstable: []
+        order: 87
     - name: Change the related incidents of a security signal
       url: '#change-the-related-incidents-of-a-security-signal'
       identifier: security-monitoring-change-the-related-incidents-of-a-security-signal
@@ -6460,6 +6484,49 @@ menu:
           - ListAuthNMappings
         unstable: []
         order: 4
+    - name: Bits AI
+      url: /api/latest/bits-ai/
+      identifier: bits-ai
+      generated: true
+    - name: Get a Bits AI investigation
+      url: '#get-a-bits-ai-investigation'
+      identifier: bits-ai-get-a-bits-ai-investigation
+      parent: bits-ai
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetInvestigation
+        unstable:
+          - v2
+        order: 3
+    - name: Trigger a Bits AI investigation
+      url: '#trigger-a-bits-ai-investigation'
+      identifier: bits-ai-trigger-a-bits-ai-investigation
+      parent: bits-ai
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - TriggerInvestigation
+        unstable:
+          - v2
+        order: 1
+    - name: List Bits AI investigations
+      url: '#list-bits-ai-investigations'
+      identifier: bits-ai-list-bits-ai-investigations
+      parent: bits-ai
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListInvestigations
+        unstable:
+          - v2
+        order: 2
     - name: CI Visibility Pipelines
       url: /api/latest/ci-visibility-pipelines/
       identifier: ci-visibility-pipelines
@@ -10532,6 +10599,97 @@ menu:
         unstable:
           - v2
         order: 13
+    - name: Delete annotation queue interactions
+      url: '#delete-annotation-queue-interactions'
+      identifier: llm-observability-delete-annotation-queue-interactions
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteLLMObsAnnotationQueueInteractions
+        unstable:
+          - v2
+        order: 24
+    - name: Add annotation queue interactions
+      url: '#add-annotation-queue-interactions'
+      identifier: llm-observability-add-annotation-queue-interactions
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateLLMObsAnnotationQueueInteractions
+        unstable:
+          - v2
+        order: 20
+    - name: Get annotated queue interactions
+      url: '#get-annotated-queue-interactions'
+      identifier: llm-observability-get-annotated-queue-interactions
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetLLMObsAnnotatedInteractions
+        unstable:
+          - v2
+        order: 21
+    - name: Update an LLM Observability annotation queue
+      url: '#update-an-llm-observability-annotation-queue'
+      identifier: llm-observability-update-an-llm-observability-annotation-queue
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateLLMObsAnnotationQueue
+        unstable:
+          - v2
+        order: 22
+    - name: Delete an LLM Observability annotation queue
+      url: '#delete-an-llm-observability-annotation-queue'
+      identifier: llm-observability-delete-an-llm-observability-annotation-queue
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteLLMObsAnnotationQueue
+        unstable:
+          - v2
+        order: 23
+    - name: Create an LLM Observability annotation queue
+      url: '#create-an-llm-observability-annotation-queue'
+      identifier: llm-observability-create-an-llm-observability-annotation-queue
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateLLMObsAnnotationQueue
+        unstable:
+          - v2
+        order: 19
+    - name: List LLM Observability annotation queues
+      url: '#list-llm-observability-annotation-queues'
+      identifier: llm-observability-list-llm-observability-annotation-queues
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListLLMObsAnnotationQueues
+        unstable:
+          - v2
+        order: 18
     - name: Logs Archives
       url: /api/latest/logs-archives/
       identifier: logs-archives
@@ -14695,6 +14853,32 @@ menu:
         unstable:
           - v2
         order: 5
+    - name: Get Flaky Tests Management policies
+      url: '#get-flaky-tests-management-policies'
+      identifier: test-optimization-get-flaky-tests-management-policies
+      parent: test-optimization
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetFlakyTestsManagementPolicies
+        unstable:
+          - v2
+        order: 6
+    - name: Update Flaky Tests Management policies
+      url: '#update-flaky-tests-management-policies'
+      identifier: test-optimization-update-flaky-tests-management-policies
+      parent: test-optimization
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateFlakyTestsManagementPolicies
+        unstable:
+          - v2
+        order: 7
     - name: Widgets
       url: /api/latest/widgets/
       identifier: widgets

@@ -44,11 +44,11 @@ Why is `HTTP 3xx` excluded? - These are typically redirects and should not count
 
 Metric-based SLIs allow you to focus on the most important attributes of your SLIs. You can add groups to your metric-based SLIs in the editor by using tags like `datacenter`, `env`, `availability-zone`, `resource`, or any other relevant group:
 
-{{< img src="service_management/service_level_objectives/metric_slo_creation_updated.png" alt="grouped metric-based SLO editor" >}}
+{{< img src="service_management/service_level_objectives/good_bad_events_creation.png" alt="grouped metric-based SLO editor" >}}
 
 By grouping these SLIs you can visualize each individual group's status, good request counts, and remaining error budget on the detail panel:
 
-{{< img src="service_management/service_level_objectives/metric_slo_history_groups.png" alt="metric-based SLO group results" >}}
+{{< img src="service_management/service_level_objectives/good_bad_events_status.png" alt="metric-based SLO group results" >}}
 
 By default, the bar graph shows the overall counts of good and bad requests for the entire SLO. You can scope the bar graph down to an individual group's good and bad requests counts by clicking on its corresponding row in the table. In addition, you can also choose to show or hide good request counts or bad request counts by selecting the appropriate option in the legend directly below the bar graph.
 

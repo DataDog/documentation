@@ -47,6 +47,10 @@
     "name": "AuthN Mappings",
     "description": "[The AuthN Mappings API](https://docs.datadoghq.com/account_management/authn_mapping/?tab=example)\nis used to automatically map groups of users to roles in Datadog using attributes\nsent from Identity Providers. Use these endpoints to manage your AuthN Mappings."
   },
+  "bits-ai": {
+    "name": "Bits AI",
+    "description": "Use the Bits AI endpoints to retrieve AI-powered investigations."
+  },
   "ci-visibility-pipelines": {
     "name": "CI Visibility Pipelines",
     "description": "Search or aggregate your CI Visibility pipeline events and send them to your Datadog site over HTTP. See the [CI Pipeline Visibility in Datadog page](https://docs.datadoghq.com/continuous_integration/pipelines/) for more information."
@@ -205,7 +209,7 @@
   },
   "llm-observability": {
     "name": "LLM Observability",
-    "description": "Manage LLM Observability projects, datasets, dataset records, and experiments via the Experiments API."
+    "description": "Manage LLM Observability projects, datasets, dataset records, experiments, and annotations."
   },
   "logs": {
     "name": "Logs",
