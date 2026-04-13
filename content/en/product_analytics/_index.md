@@ -52,7 +52,7 @@ Collect events that happen on your backend, such as completed checkouts or proce
 
 Use the [Product Analytics API][21] to send custom events from any server-side source.
 
-Each event requires at least one of `usr`, `account`, or `session` with a valid ID, and the `application.id` must reference a Product Analytics-enabled application.
+Each event requires at least one of `usr`, `account`, or `session` with a valid ID. The `application.id` must reference a Product Analytics-enabled application.
 
 <div class="alert alert-warning">Sending server-side events is billed separately. See the <a href="https://www.datadoghq.com/pricing/?product=product-analytics#products">pricing page</a> for details, and contact your Customer Success Manager with additional questions.</div>
 
@@ -156,7 +156,6 @@ Use the following features to inform your product change decisions, such as chan
 [4]: /product_analytics/charts/funnel_analysis
 [5]: /product_analytics/charts/pathways
 [6]: /product_analytics/segmentation/
-[8]: https://app.datadoghq.com/rum/
 [9]: https://app.datadoghq.com/rum/list
 [10]: /session_replay/heatmaps
 [11]: /session_replay/
