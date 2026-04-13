@@ -27,28 +27,34 @@ Product Analytics helps you gain insight into user behavior and make data-driven
 
 ## Instrument your application
 
-Product Analytics collects data from client-side and server-side sources to give you a complete view of the user journey. To get started, instrument your application with the [SDK](#client-side-tracking) or the [API](#server-side-tracking). For client-side tracking, [enable Product Analytics](#enable-product-analytics) in Datadog.
+Product Analytics collects data from client-side and server-side sources to give you a complete view of the user journey.
 
-**Note**: Product Analytics uses the same SDKs and configuration as [Real User Monitoring (RUM)][18], and retains data for 15 months by default. See [Datadog's data retention periods][1] for more information.
+To get started, instrument your application with the [SDK](#client-side-tracking-sdk) or the [API](#server-side-tracking-api). For client-side tracking, [enable Product Analytics](#enable-product-analytics) in Datadog.
+
+<div class="alert alert-info">Product Analytics uses the same SDKs and configuration as <a href="/real_user_monitoring/#what-is-real-user-monitoring">Real User Monitoring (RUM)</a>, and retains data for 15 months by default. See <a href="/data_security/data_retention_periods/">Datadog's data retention periods</a> for more information.</div>
 
 ### Client-side tracking (SDK)
 
-Collect events from your users' devices and send them to Datadog.
+Collect events from your users' devices, such as page views or button clicks, and send them to Datadog.
 
 Add the Datadog SDK to your application to start collecting user activity data. If you have already configured RUM, you do not need to instrument your application again for Product Analytics.
 
-If you do not have an application set up in Datadog yet, create one for your platform:
+If you don't have an application set up in Datadog yet, select your platform:
 - [Browser][14]
 - [iOS][15]
 - [Android][16]
 
-You can also use your [coding assistant][17].
+To set up your application with a coding assistant, see [Agentic onboarding][17].
 
 ### Server-side tracking (API)
 
-Collect events that happen on your backend, such as `checkout.completed` or `payment.processed`, and send them to Datadog.
+Collect events that happen on your backend, such as completed checkouts or processed payments, and send them to Datadog.
 
-Use the [Product Analytics API][21] to send custom events from any server-side source. The API also supports computing [scalar][22] and [timeseries][23] analytics programmatically.
+Use the [Product Analytics API][21] to send custom events from any server-side source.
+
+Each event requires at least one of `usr`, `account`, or `session` with a valid ID, and the `application.id` must reference a Product Analytics-enabled application.
+
+<div class="alert alert-warning">Sending server-side events is billed separately. See the <a href="https://www.datadoghq.com/pricing/?product=product-analytics#products">pricing page</a> for details, and contact your Customer Success Manager with additional questions.</div>
 
 ## Enable Product Analytics
 
@@ -145,7 +151,6 @@ Use the following features to inform your product change decisions, such as chan
 ## Further reading
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /data_security/data_retention_periods/
 [2]: /product_analytics/charts/retention_analysis
 [3]: https://app.datadoghq.com/product-analytics
 [4]: /product_analytics/charts/funnel_analysis
@@ -161,9 +166,6 @@ Use the following features to inform your product change decisions, such as chan
 [15]: /real_user_monitoring/application_monitoring/ios
 [16]: /real_user_monitoring/application_monitoring/android
 [17]: /product_analytics/agentic_onboarding
-[18]: /real_user_monitoring/#what-is-real-user-monitoring
 [19]: /real_user_monitoring/guide/understanding-the-rum-event-hierarchy
 [20]: https://app.datadoghq.com/rum/sessions?query=%40type%3Aaction
 [21]: /api/latest/product-analytics/#send-server-side-events
-[22]: /api/latest/product-analytics/#compute-scalar-analytics
-[23]: /api/latest/product-analytics/#compute-timeseries-analytics
