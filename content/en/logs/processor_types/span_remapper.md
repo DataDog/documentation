@@ -44,7 +44,7 @@ Use the [Datadog Log Pipeline API endpoint][2] with the following span remapper 
 | `type`       | String           | Yes      | Type of the processor.                                 |
 | `name`       | String           | No       | Name of the processor.                                 |
 | `is_enabled` | Boolean          | No       | Indicates whether the processor is enabled. Default: `false`. |
-| `sources`    | Array of strings | No       | Array of source attributes. Default: `dd.trace_id`.    |
+| `sources`    | Array of strings | No       | Array of source attributes. Default: `dd.span_id`.     |
 
 
 **Note**: Trace IDs and span IDs are not displayed in your logs or log attributes in the UI.

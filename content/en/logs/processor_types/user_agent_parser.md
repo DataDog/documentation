@@ -17,10 +17,10 @@ The user-agent parser processor takes a `useragent` attribute and extracts OS, b
 **Note**: If your logs contain encoded user-agents (for example, IIS logs), configure this Processor to **decode the URL** before parsing it.
 
 ## Use Cases
-The User Agent Parser allows to extract useful information such as, for example, browser, divide, OS from apache logs.
+The User Agent Parser allows to extract useful information such as, for example, browser, device, OS from apache logs.
 
 
-##Before and After state of the logs for the Processors
+## Before and after state of logs
 
 {{% collapse-content title="Example: Parsing the User Agent in custom application logs" level="h4" %}}
 

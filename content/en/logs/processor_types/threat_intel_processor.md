@@ -13,7 +13,7 @@ further_reading:
 
 ## Overview
 
-Add the Threat Intel Process to evaluate logs against the table using a specific Indicator of Compromise (IoC) key, such as an IP address. If a match is found, the log is enriched with relevant Threat Intelligence (TI) attributes from the table, which enhances detection, investigation, and response.
+Add the Threat Intel Processor to evaluate logs against the table using a specific Indicator of Compromise (IoC) key, such as an IP address. If a match is found, the log is enriched with relevant Threat Intelligence (TI) attributes from the table, which enhances detection, investigation, and response.
 
 For more information, see [Threat Intelligence][9].
 
