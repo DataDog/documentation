@@ -96,7 +96,7 @@ By default, this page displays the `active users`, `page views`, and `average ti
 : Visualize the split between desktop and mobile usage, spot which versions are in use, and identify what can be deprecated.
 
 [Engagement](https://app.datadoghq.com/product-analytics/engagement-and-features)
-: Understand how users are engaging with your product, answering questions such as how long users are staying on pages, and what their top actions are.
+: Understand how users are engaging with your product, answering questions such as how long users are staying on pages, and what their top actions are. 
 
 [Traffic](https://app.datadoghq.com/product-analytics/traffic-and-acquisition)
 : See bounce rates, top traffic sources, and where your growth is really coming from.
