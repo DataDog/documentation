@@ -49,14 +49,20 @@ To install the Datadog tracing library (version 4.x of `dd-trace`) for end-of-li
 For more information on Datadog's distribution tags and Node.js runtime version support, see the [Compatibility Requirements][1] page.
 If you are upgrading from a previous major version of the library (0.x, 1.x, 2.x, 3.x or 4.x) to another major version, read the [Migration Guide][5] to assess any breaking changes.
 
-**Note**: In Serverless environments or when using Single-Step Instrumentation, the library is already pre-installed and shouldn't be added as a dependency. Instead it should be added as a dev dependency to get tracing locally.
-  ```shell
-  npm install dd-trace -D # instead of `npm install dd-trace`
-  ```
+<div class="alert alert-info">In Serverless environments or when using Single-Step Instrumentation, the library is already pre-installed, so you don't need to add it as a dependency. Instead, add it as a dev dependency to get tracing locally:
+  <div class="highlight code-snippet js-appended-copy-btn">
+    <pre tabindex="0" class="chroma">
+      <code class="language-shell" data-lang="shell"><span class="line"><span class="cl">npm install dd-trace -D <span class="c1"># instead of `npm install dd-trace`</span></span></span></code>
+    </pre>
+    <div class="code-button-wrapper position-absolute">
+      <button class="btn text-primary js-copy-button">Copy</button>
+    </div>
+  </div>
+</div>
 
 ### Install the Datadog public API (optional)
 
-This step is only required when doing custom instrumentation in Serverless or with Single-Step Instrumentation. For other custom instrumentation use cases it's optional, but even in those cases there are still benefits as described in [Custom Instrumentation using the Datadog API][14].
+This step is only required when doing custom instrumentation in Serverless or with Single-Step Instrumentation. For other custom instrumentation use cases, it's optional. For information on when to use the Datadog public API, see [Custom Instrumentation using the Datadog API][14].
 
   ```shell
   npm install dd-trace-api
@@ -82,7 +88,7 @@ Use the `--require` option to Node.js to load and initialize the tracer in one s
 node --require dd-trace/init app.js
 ```
 
-This approach requires using environment variables for all configuration of the tracer. If programmatic configuration is needed, then initialize dd-trace in a dedicated file and require that instead.
+This approach requires using environment variables for all configuration of the tracer. If you need to use a programmatic configuration, initialize `dd-trace` in a dedicated file and require that instead:
 
 ```sh
 node --require ./dd-trace app.js
@@ -95,11 +101,14 @@ require('dd-trace').init({
 })
 ```
 
-For cases where it's not possible to control the CLI arguments, an environment variable can be used instead: `NODE_OPTIONS='--require dd-trace/init'`.
+For cases where it's not possible to control the CLI arguments, you can use an environment variable instead:
 
-**Note**: `DD_TRACE_ENABLED` is `true` by default, which means some instrumentation occurs at import time, before initialization. To fully disable instrumentation, you can do one of the following:
-- import the module conditionally
-- set `DD_TRACE_ENABLED=false` (if, for example, static or top-level ESM imports prevent conditional loading)
+<div class="alert alert-info"><code>DD_TRACE_ENABLED</code> is <code>true</code> by default, which means some instrumentation occurs at import time, before initialization. To fully disable instrumentation, you can do one of the following:
+  <ul>
+    <li>Import the module conditionally</li>
+    <li>Set <code>DD_TRACE_ENABLED=false</code> (if, for example, static or top-level ESM imports prevent conditional loading)</li>
+  <ul>
+</div>
 
 #### ESM applications only: Import the loader
 
@@ -260,4 +269,4 @@ Read [tracer settings][3] for a list of initialization options.
 [6]: /tracing/trace_collection/compatibility/nodejs/#complex-framework-usage
 [11]: /tracing/trace_collection/library_injection_local/
 [13]: /tracing/trace_collection/automatic_instrumentation/?tab=datadoglibraries#install-and-configure-the-agent
-[14]: /tracing/trace_collection/custom_instrumentation/nodejs/dd-api/
+[14]: /tracing/trace_collection/custom_instrumentation/server-side/?api_type=dd_api&prog_lang=node_js
