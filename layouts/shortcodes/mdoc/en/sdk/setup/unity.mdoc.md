@@ -82,7 +82,7 @@ The following parameters are available:
 | Track Non-Fatal App Hangs | No | (iOS Only) Whether to track non-fatal app hangs. App hangs are detected when the app is unresponsive for a certain amount of time. The supplied "Threshold" is the amount of time in seconds that the app must be unresponsive before it is considered a non-fatal app hang. |
 | First Party Hosts | No | To enable distributed tracing, you must specify which hosts are considered "first party" and have trace information injected. |
 
-#### Sample RUM sessions
+### Sample RUM sessions
 
 You can control the data your application sends to Datadog RUM during instrumentation of the RUM Unity SDK. Specify the **Session Sample Rate** as a percentage between 0 and 100 in the Project Settings window in Unity.
 {% /step %}
