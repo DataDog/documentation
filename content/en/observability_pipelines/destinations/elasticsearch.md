@@ -12,6 +12,13 @@ products:
 
 {{< product-availability >}}
 
+{{< callout url="https://www.datadoghq.com/product-preview/metrics-ingestion-and-cardinality-control-in-observability-pipelines/"
+ btn_hidden="false" header="Join the Preview!">}}
+Sending metrics to Observability Pipelines is in Preview. Fill out the form to request access.
+{{< /callout >}}
+
+## Overview
+
 Use Observability Pipelines' Elasticsearch destination to send logs or metrics ({{< tooltip glossary="preview" case="title" >}}) to Elasticsearch.
 
 ## Setup
