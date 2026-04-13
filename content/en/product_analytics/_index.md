@@ -29,7 +29,7 @@ Product Analytics helps you gain insight into user behavior and make data-driven
 
 Product Analytics collects data from client-side and server-side sources to give you a complete view of the user journey.
 
-To get started, instrument your application with the [SDK](#client-side-tracking-sdk) or the [API](#server-side-tracking-api). For client-side tracking, [enable Product Analytics](#enable-product-analytics) in Datadog.
+To get started, [enable Product Analytics](#enable-product-analytics) in Datadog, then instrument your application with the [SDK](#client-side-tracking-sdk) or the [API](#server-side-tracking-api).
 
 <div class="alert alert-info">Product Analytics uses the same SDKs and configuration as <a href="/real_user_monitoring/#what-is-real-user-monitoring">Real User Monitoring (RUM)</a>, and retains data for 15 months by default. See <a href="/data_security/data_retention_periods/">Datadog's data retention periods</a> for more information.</div>
 
@@ -50,7 +50,7 @@ To set up your application with a coding assistant, see [Agentic onboarding][17]
 
 Collect events that happen on your backend, such as completed checkouts or processed payments, and send them to Datadog.
 
-Use the [Product Analytics API][21] to send custom events from any server-side source.
+Use the [Product Analytics API][21] to send custom events from your server-side source.
 
 <div class="alert alert-warning">Sending server-side events is billed separately. See the <a href="https://www.datadoghq.com/pricing/?product=product-analytics#products">pricing page</a> for details, and contact your Customer Success Manager with additional questions.</div>
 
@@ -65,7 +65,7 @@ For each application you want to monitor user behavior for, enable Product Analy
 {{< img src="product_analytics/enable-product-analytics.png" alt="Enable Product Analytics from the Application Management page.">}}
 
 ## Understand your data
-Product Analytics is built on three levels of user data RUM collects: Sessions, Views, and Actions. For a full breakdown of RUM event types, see [Understanding the RUM Event Hierarchy][19].
+Product Analytics collects client-side and server-side event data. Client-side data is built on three levels of user data that RUM collects: Sessions, Views, and Actions. For a full breakdown of RUM event types, see [Understanding the RUM Event Hierarchy][19].
 
 **Sessions**
 : A session is a single user's complete journey through your application, from the moment they open it to when they leave.
@@ -75,6 +75,9 @@ Product Analytics is built on three levels of user data RUM collects: Sessions, 
 
 **Actions**
 : An action is something a user does on a page, such as a click, tap, or scroll. Actions are automatically collected by the RUM SDK. When configuring features like [Funnels][4] and [Segments][6], you can select specific Actions as steps or filters. To see which Actions are available, open the [RUM Explorer][20] and filter by **Actions**. 
+
+**Server-side events**
+: A server-side event is a custom event sent through the [Product Analytics API][21], such as a completed checkout or processed payment. In the event picker, select **Server Events** to scope your analysis to server-side data.
 
 ## Navigate the Product Analytics UI
 Each Product Analytics feature provides context about your users' journeys.
