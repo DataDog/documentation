@@ -17954,6 +17954,16 @@ components:
             Must have HTTPS scheme and forwarding back to Datadog is not allowed.
           example: https://example.com
           type: string
+        sourcetype:
+          description: |-
+            The Splunk sourcetype for the events sent to this Splunk destination.
+
+            If absent, the default sourcetype `_json` is used. If set to null, the `sourcetype`
+            field is omitted from the Splunk HEC payload entirely. Otherwise, the provided string
+            value is used as the sourcetype.
+          example: my-source
+          nullable: true
+          type: string
         type:
           $ref: "#/components/schemas/CustomDestinationForwardDestinationSplunkType"
       required:
@@ -18228,6 +18238,16 @@ components:
             The destination for which logs will be forwarded to.
             Must have HTTPS scheme and forwarding back to Datadog is not allowed.
           example: https://example.com
+          type: string
+        sourcetype:
+          description: |-
+            The Splunk sourcetype for the events sent to this Splunk destination.
+
+            If absent, the default sourcetype `_json` is used. If set to null, the `sourcetype`
+            field is omitted from the Splunk HEC payload entirely. Otherwise, the provided string
+            value is used as the sourcetype.
+          example: my-source
+          nullable: true
           type: string
         type:
           $ref: "#/components/schemas/CustomDestinationResponseForwardDestinationSplunkType"
