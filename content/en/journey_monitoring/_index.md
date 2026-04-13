@@ -26,7 +26,7 @@ Journey Monitoring is in Preview.
 
 **Journey Monitoring** visualizes the performance of critical user flows in your applications. It brings together data from [Real User Monitoring][1], [Synthetic Testing][2], [Product Analytics][3], and [Session Replay][4] to show traffic, conversion rates, uptime, and errors for each user journey in one place.
 
-[INSERT IMAGE HERE]
+{{< img src="journey_monitoring/journey-monitoring-temp.png" alt="The Journey Monitoring map showing a catalog of journeys on the left with traffic and conversion metrics, and a visual flow map on the right displaying user paths between application views and actions." style="width:100%;" >}}
 
 ## What you can do
 
