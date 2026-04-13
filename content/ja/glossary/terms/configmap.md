@@ -1,4 +1,5 @@
 ---
+id: configmap
 core_product:
 - infrastructure monitoring
 title: ConfigMap

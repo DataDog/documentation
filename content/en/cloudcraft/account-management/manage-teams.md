@@ -8,9 +8,9 @@ Adding people to a team in Cloudcraft is easy, and allows everyone to collaborat
 
 The account owner and team members with the admin role can invite and remove users, as well as change member's roles.
 
-<section class="alert alert-info">
-  <p>Team features are available with Cloudcraft Pro and Enterprise plans.</p>
-</section>
+<div class="alert alert-info">
+Team features are available with Cloudcraft Pro and Enterprise plans.
+</div>
 
 ## User management
 
@@ -30,9 +30,9 @@ Selecting the correct role is a critical step in this process, as different role
 
 Lastly, click the **Send invite** button to invite the user to your team. The user you invited will receive an email that includes a link to join your team and set up their account if they have not already.
 
-<section class="alert alert-info">
-  <p>The user will inherit their cross-organizational role if they are a member of a cross-organizational team.</p>
-</section>
+<div class="alert alert-info">
+The user will inherit their cross-organizational role if they are a member of a cross-organizational team.
+</div>
 
 ### Remove existing users
 
@@ -44,10 +44,10 @@ Next, select the user you want to have removed and click the gray trash can icon
 
 A confirmation dialog will appear on your screen. Click the red **Remove** button and the user will be removed from your team.
 
-<section class="alert alert-info">
+<div class="alert alert-info">
   <p>Diagrams that were created by the removed user and that were shared with the team, will continue to be available to the team. If you need help migrating all of the user's data prior to removing them, please <a href="https://app.cloudcraft.co/app/support" title="Contact our support team">contact our support team from inside the application</a>.</p>
   <p>Team access to data of removed users can also be restored if requested within our 30-day data retention period.</p>
-</section>
+</div>
 
 ### Change an existing user's role
 
@@ -61,9 +61,9 @@ On the next prompt, select a new role for the user and click the blue **Save** b
 
 ## Team management
 
-<section class="alert alert-info">
-  <p>The multi-team management feature is only available for the Enterprise plan</p>
-</section>
+<div class="alert alert-info">
+The multi-team management feature is only available for the Enterprise plan.
+</div>
 
 ### Create a new team
 

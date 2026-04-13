@@ -8,6 +8,9 @@ further_reading:
   - link: '/integrations/amazon-web-services/'
     tag: 'Documentation'
     text: 'AWS Integration'
+  - link: '/monitors/types/data_observability/'
+    tag: 'Documentation'
+    text: 'Data Observability Monitors'
 ---
 
 ## Overview
@@ -206,7 +209,7 @@ aws lakeformation grant-permissions \
 
 After you complete the setup, Datadog begins syncing your Glue Iceberg table metadata in the background. Initial syncs can take up to an hour depending on the number of tables in your catalog.
 
-After the sync completes, your tables appear in the [Data Catalog][3].
+After the sync completes, your tables appear in the [Data Catalog][3]. You can also create a [Data Observability monitor][7] to start alerting on freshness and row count.
 
 ## Further reading
 
@@ -218,3 +221,4 @@ After the sync completes, your tables appear in the [Data Catalog][3].
 [4]: https://docs.aws.amazon.com/glue/latest/dg/security_iam_id-based-policy-examples.html
 [5]: https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-format-iceberg.html
 [6]: /integrations/amazon-glue/
+[7]: /monitors/types/data_observability/

@@ -57,7 +57,7 @@ The following operating systems are officially supported by `dd-trace`. Any oper
 |------------------|---------------|------------------------------------------|
 | Linux (glibc)    | arm64, x64    | CentOS 7, Debian 9, RHEL 7, Ubuntu 14.04 |
 | Linux (musl)     | arm64, x64    | Alpine 3.13                              |
-| macOS            | arm64, x64    | Catalina (10.15)                         |
+| macOS            | arm64, x64    | Sonoma (14.0)                         |
 | Windows          | x64           | Windows 8.1, Windows Server 2012         |
 
 ### Web framework compatibility

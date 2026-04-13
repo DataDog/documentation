@@ -29,7 +29,7 @@ Or to sample based on HTTP URL tags:
 DD_TRACE_SAMPLING_RULES='[{"tags": {"http.url": "http://.*/healthcheck$"}, "sample_rate": 0.0}]'
 ```
 
-<div class="alert alert-info">Sampling decisions are determined using the first span in a trace. If the span containing the tag you want to filter on is not a {{< tooltip glossary="trace root span" case="sentence" >}}, this rule is not applied.</div>
+<div class="alert alert-info">Sampling decisions are determined using the first span in a trace. If the span containing the tag you want to filter on is not a {{< tooltip glossary="trace_root_span" case="sentence" >}}, this rule is not applied.</div>
 
 ## Filtering in the Datadog Agent
 
@@ -319,7 +319,7 @@ docker run -d --name datadog-agent \
               -e DD_APM_IGNORE_RESOURCES="Api::HealthchecksController#index$" \
               -e DD_APM_ENABLED=true \
               -e DD_APM_NON_LOCAL_TRAFFIC=true \
-              gcr.io/datadoghq/agent:latest
+              registry.datadoghq.com/agent:latest
 {{< /code-block >}}
 
 For multiple values:
@@ -335,7 +335,7 @@ In the dedicated trace-agent container, add the environment variable `DD_APM_IGN
 
 {{< code-block lang="yaml" >}}
     - name: trace-agent
-        image: "gcr.io/datadoghq/agent:latest"
+        image: "registry.datadoghq.com/agent:latest"
         imagePullPolicy: IfNotPresent
         command: ["trace-agent", "-config=/etc/datadog-agent/datadog.yaml"]
         resources: {}

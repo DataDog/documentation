@@ -183,6 +183,8 @@ You can customize alert conditions to define how often you want to send an alert
 For more information on how Synthetic Monitoring notifications evaluate test results and trigger alerts, see <a href="/synthetics/guide/how-synthetics-monitors-trigger-alerts/">Understanding Synthetic Monitor Alerting</a>.
 </div>
 
+{{% synthetics-downtimes %}}
+
 ### Configure the test monitor
 
 A notification is sent according to the set of alerting conditions. Use this section to define how and what to message your teams.

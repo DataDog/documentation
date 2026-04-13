@@ -145,6 +145,11 @@ To request support for additional CLI libraries, contact our awesome [support te
 | Predis                                                                  | 1.1                        | Fully Supported |
 | SQLSRV                                                                  | *(Any Supported PHP)*      | Fully Supported |
 
+**Note**: Redis 6.0+ supports inline authentication in commands such as `HELLO`, `MIGRATE`, and `ACL SETUSER`.
+
+  - **Datadog Trace Agent**: The minimum required and recommended version is `7.76.1` to ensure authentication parameters are automatically obfuscated in trace metadata.
+  - **Datadog Lambda Extension** (Serverless environments): The minimum required version is `v28.0.0`.
+
 To request support for additional datastores, contact our awesome [support team][3].
 
 #### Library compatibility

@@ -104,9 +104,17 @@ a {
     color: #000;
 }
 
-button:focus,
-a:focus {
+// Hide focus outlines for mouse/touch interactions only
+button:focus:not(:focus-visible),
+a:focus:not(:focus-visible) {
     outline: none !important;
+}
+
+// Show focus outlines for keyboard navigation (accessibility)
+button:focus-visible,
+a:focus-visible {
+    outline: 2px solid $ddpurple;
+    outline-offset: 2px;
 }
 
 .custom-select {

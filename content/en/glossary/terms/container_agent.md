@@ -1,4 +1,5 @@
 ---
+id: container_agent
 title: Container Agent
 core_product:
   - datadog agent

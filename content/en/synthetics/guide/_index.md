@@ -19,6 +19,7 @@ cascade:
     {{< nextlink href="synthetics/guide/version_history" >}}Version History for Synthetic Monitoring{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/kerberos-authentication/" >}}Kerberos authentication for Synthetic Monitoring{{< /nextlink >}}
      {{< nextlink href="synthetics/guide/step-duration/" >}}How step duration is determined in Browser Tests{{< /nextlink >}}
+    {{< nextlink href="synthetics/guide/export-tests-to-terraform" >}}Export Synthetic tests to Terraform{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Alerting:" >}}
@@ -37,6 +38,7 @@ cascade:
     {{< nextlink href="synthetics/guide/synthetic-tests-caching" >}}Avoid cache issues in Synthetic tests{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/monitor-https-redirection" >}}Monitor your HTTP requests are redirected into HTTPS{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/reusing-browser-test-journeys/" >}}Reuse browser tests journeys across your test suite{{< /nextlink >}}
+    {{< nextlink href="synthetics/guide/conditional-logic-subtests/" >}}Implement conditional logic in Synthetic tests{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/custom-javascript-assertion/" >}}Use custom JavaScript assertions in browser tests{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/email-validation/" >}}Use email validation in browser tests{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/testing-file-upload-and-download/" >}}Upload and download test files{{< /nextlink >}}

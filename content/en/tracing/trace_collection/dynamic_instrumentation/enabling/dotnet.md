@@ -14,19 +14,19 @@ further_reading:
       text: 'Getting Started with Datadog Agent'
 ---
 
-Dynamic Instrumentation is a feature provided by the Datadog tracing library. If you are already using [APM to collect traces][1] for your application, ensure your Agent and tracing library are on the required version. Then, go directly to enabling Dynamic Instrumentation in step 4.
+Dynamic Instrumentation is a feature of the Datadog tracing library that lets you add instrumentation to your application at runtime without code changes or redeployments. Follow these instructions to set up Dynamic Instrumentation for .NET.
 
 ## Prerequisites
 
-For a better experience, Datadog recommends enabling [autocomplete and search (in Preview)][8].
+Before you begin, review the [Dynamic Instrumentation prerequisites][9]. .NET applications also require:
+
+- .NET tracing library version 2.54.0 or higher. See the installation instructions for [.NET Framework][2] or [.NET Core][3].
 
 ## Installation
 
-1. Install or upgrade your Agent to version [7.49.0][7] or higher.
-2. If you don't already have APM enabled, in your Agent configuration, set the `DD_APM_ENABLED` environment variable to `true` and listening to the port `8126/TCP`.
-3. Install or upgrade the .NET tracing library to version 2.54.0, by following the relevant instructions for [.NET Framework][2] or [.NET Core][3].
-4. Run your service with Dynamic Instrumentation enabled by setting the `DD_DYNAMIC_INSTRUMENTATION_ENABLED` environment variable to `true`. Specify `DD_SERVICE`, `DD_ENV`, and `DD_VERSION` Unified Service Tags so you can filter and group your instrumentations and target active clients across these dimensions.
-5. After starting your service with Dynamic Instrumentation enabled, you can start using Dynamic Instrumentation on the [APM > Dynamic Instrumentation page][4].
+1. If you don't already have APM enabled, in your Agent configuration, set the `DD_APM_ENABLED` environment variable to `true` and listening to the port `8126/TCP`.
+2. Run your service with Dynamic Instrumentation enabled by setting the `DD_DYNAMIC_INSTRUMENTATION_ENABLED` environment variable to `true`. Specify `DD_SERVICE`, `DD_ENV`, and `DD_VERSION` Unified Service Tags so you can filter and group your instrumentations and target active clients across these dimensions.
+3. After starting your service with Dynamic Instrumentation enabled, you can start using Dynamic Instrumentation on the [APM > Dynamic Instrumentation page][4].
 
 ## Configuration
 
@@ -48,11 +48,9 @@ See [Dynamic Instrumentation][6] for information about adding instrumentations a
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/trace_collection/
 [2]: /tracing/trace_collection/dd_libraries/dotnet-framework/
 [3]: /tracing/trace_collection/dd_libraries/dotnet-core/
 [4]: https://app.datadoghq.com/dynamic-instrumentation
 [5]: /getting_started/tagging/unified_service_tagging
 [6]: /dynamic_instrumentation/
-[7]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
-[8]: /dynamic_instrumentation/symdb/
+[9]: /dynamic_instrumentation/#prerequisites

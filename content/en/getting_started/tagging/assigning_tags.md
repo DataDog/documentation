@@ -161,6 +161,8 @@ For containerized environments, it is recommended to follow the [unified service
 
 After installing the containerized Datadog Agent, you can set your host tags using the environment variable `DD_TAGS` in your Agent's main configuration file. If you specify multiple tags, separate each one with a space.
 
+**Note**: The `DD_TAGS` environment variable uses whitespace to separate tags. For example, `DD_TAGS="key1:val1 key2:val2"` sets two tags. A value like `DD_TAGS="test:this is a test"` produces four separate tags (`test:this`, `is`, `a`, `test`) because each space-separated token is treated as its own tag. To include spaces in tag values, set tags through YAML configuration or integration annotations instead. Those methods convert whitespace to underscores (for example, `test:this is a test` becomes `test:this_is_a_test`).
+
 Datadog automatically collects common tags from [Docker, Kubernetes, ECS, Swarm, Mesos, Nomad, and Rancher][6]. To extract even more tags, use the following options:
 
 | Environment Variable               | Description                                                                                             |
@@ -217,7 +219,7 @@ services:
       - DD_API_KEY= "<DATADOG_API_KEY>"
       - DD_CONTAINER_LABELS_AS_TAGS={"my.custom.label.project":"projecttag","my.custom.label.version":"versiontag"}
       - DD_TAGS="key1:value1 key2:value2 key3:value3"
-    image: 'gcr.io/datadoghq/agent:latest'
+    image: 'registry.datadoghq.com/agent:latest'
     deploy:
       restart_policy:
         condition: on-failure
@@ -421,6 +423,6 @@ Special consideration is necessary when assigning the `host` tag to DogStatsD me
 [7]: /agent/kubernetes/tag/?tab=containerizedagent#out-of-the-box-tags
 [8]: /agent/docker/tag/?tab=containerizedagent#out-of-the-box-tagging
 [9]: /tracing/setup/
-[10]: /developers/dogstatsd/
-[11]: /developers/community/libraries/
+[10]: /extend/dogstatsd/
+[11]: /extend/community/libraries/
 [12]: /metrics/dogstatsd_metrics_submission/#host-tag

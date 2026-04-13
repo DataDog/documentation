@@ -80,9 +80,9 @@ The Agent can attach Kubernetes environment information as "host tags".
   |---------------------|-------------|--------------------------------------------------------|----------------------------------------------------------------|
   | `kube_cluster_name` | Low         | `DD_CLUSTER_NAME` envvar or cloud provider integration | `DD_CLUSTER_NAME` envvar or cloud provider integration enabled |
   | `kube_node_role`    | Low         | Node label `node-role.kubernetes.io/<role>`            | Node label must exist                                          |
-  | `kube_node`         | Low         | `NodeName` field in a pod's specifications               |                                                                |
-  | `orch_cluster_id`         | Low         | Orchestrator cluster metadata               |  Orchestrator environment                            |                                                              |
-
+  | `kube_node`         | Low         | `NodeName` field in a pod's specifications             |                                                              |
+  | `orch_cluster_id`   | Low         | Orchestrator cluster metadata                          |  Orchestrator environment                                    |
+  | `kube_distribution` | Low         | Node labels and NodeSystemInfo                         |  |
 </div>
 
 ## Tag Autodiscovery
@@ -109,6 +109,14 @@ Starting with Agent v7.17+, the Agent can Autodiscover tags from Docker labels. 
 
 ```yaml
 com.datadoghq.ad.tags: '["<TAG_KEY>:TAG_VALUE", "<TAG_KEY_1>:<TAG_VALUE_1>"]'
+```
+
+Starting with Agent v7.77+, tag annotations support [Autodiscovery template variables][5] for dynamic tagging based on runtime metadata. With the exception of `%%env_<VAR>%%`, all template variables are supported.
+
+```yaml
+annotations:
+  ad.datadoghq.com/tags: '{"pod_ip":"%%host%%","pod_name":"%%kube_pod_name%%","namespace":"%%kube_namespace%%"}'
+  ad.datadoghq.com/nginx.tags: '{"container_port":"%%port_80%%"}'
 ```
 
 ## Tag extraction
@@ -951,3 +959,4 @@ DD_CONTAINER_LABELS_AS_TAGS='{"app":"kube_app"}'
 [2]: /getting_started/tagging/unified_service_tagging
 [3]: /account_management/billing/custom_metrics
 [4]: /getting_started/tagging/assigning_tags/?tab=containerizedenvironments#tags-cardinality
+[5]: /containers/guide/template_variables/

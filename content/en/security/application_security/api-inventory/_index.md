@@ -58,7 +58,7 @@ For Amazon Web Services (AWS) API Gateway integration, you must set up the follo
 - [Amazon Web Services][9]
 - [Amazon API Gateway Integration][10]
 
-API Endpoints are discovered from the Datadog Software Catalog and specifically from API definitions [uploaded to Datadog][13].
+API Endpoints are discovered from the Datadog Software Catalog and specifically from API definitions [uploaded to Datadog][13]. For instructions on uploading API definitions, see [Create Entities][17].
 
 For information on what library versions are compatible with API Security Inventory, see [Enabling App and API Protection][11]. [Remote Configuration][1] is required.
 
@@ -112,6 +112,47 @@ What actions you take depend on each of the attack surfaces:
 - **Processing sensitive data:** Confirm data handling complies with policy, sanitize or encrypt PII, and limit access to necessary services.
 - **Unauthenticated endpoint:** If the endpoint is not intentionally public, enforce authentication and update service configurations.
 
+#### Static Endpoint Discovery
+
+<div class="alert alert-info">Static Endpoint Discovery is in Preview.</div>
+
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Static Endpoint Discovery is not available for the {{< region-param key="dd_site_name" >}} site.</div>
+{{< /site-region >}}
+
+The **Source Code** data source shows API endpoints discovered directly from your source code. This complements runtime-based discovery by surfacing endpoints earlier in the development life cycle, including endpoints that may not receive live traffic.
+
+To use this data source, configure the [Source Code Integration][16] with GitHub, GitLab, or Azure DevOps. The following languages and frameworks are supported:
+
+| Language | Framework |
+|----------|-----------|
+| Python   | FastAPI, Flask, Tornado |
+| Java     | Spring    |
+| Go       | Beego, Chi, Echo, Fiber, Gin, Gorilla Mux, fasthttp, go-zero |
+| C#       | ASP.NET Core MVC |
+| Node.js  | Express, Fastify |
+
+To filter for source code endpoints, use **Source Code** in the **Data Source** facet or the query `datasource:source_code`. Scans run when code is pushed to the default branch and on an 8-hour recurring schedule. Discovered endpoints are removed after 12 hours if they are not re-discovered by a subsequent scan.
+
+##### Map source code endpoints to services
+
+Static Endpoint Discovery uses heuristics to infer which service an endpoint belongs to. For more accurate mapping, explicitly define service-to-code relationships using the `codeLocations` field in your [Software Catalog service definition (v3 schema)][18]:
+
+```yaml
+apiVersion: v3
+kind: service
+metadata:
+  name: my-service
+  owner: my-team
+datadog:
+  codeLocations:
+    - repositoryURL: https://github.com/org/myrepo.git
+      paths:
+        - path/to/service/code/**
+```
+
+Without explicit `codeLocations`, endpoints may not merge correctly with data from other sources.
+
 ### Processing sensitive data
 
 [App and API Protection][2] matches known patterns for sensitive data in API requests and responses. If it finds a match, the endpoint is tagged with the category and type of sensitive data processed.
@@ -122,15 +163,15 @@ The matching occurs within your application, and none of the sensitive data is s
 
 To see the supported data types (for example, `payment:card`), use the **Schema Sensitive Data** facet. You can also see the data type used in the **Sensitive Data** column.
 
-#### Create custom scanners
+#### Create API data scanners
 
-By default, Datadog App and API Protection scans for PII, credentials, and payment types. Sensitive Data Detection provides custom scanners to define scanner data patterns beyond the defaults and improve visibilty into the sensitive data of your API traffic. 
+By default, Datadog App and API Protection scans for PII, credentials, and payment types. Sensitive Data Detection provides API data scanners to define custom scanner data patterns beyond the defaults and improve visibilty into the sensitive data of your API traffic. 
 
-In a custom scanner, you define a scanner category and type to classify API endpoints processing sensitive data (for example, `health_info:patient_id`). Next, you define the JSON key or value conditions that trigger the scanner.
+In an API data scanner, you define a scanner category and type to classify API endpoints processing sensitive data (for example, `health_info:patient_id`). Next, you define the JSON key or value conditions that trigger the scanner.
 
 When the scanner detects sensitive data, it tags the API endpoint with the category and type and displays it in [API Endpoints][7].
 
-To create a customer scanner and view its results, do the following:
+To create an API data scanner and view its results, do the following:
 
 1. In App and API Protection **Policies**, go to [Sensitive Data Detection][14].
 2. Click **New Scanner**.
@@ -165,6 +206,8 @@ Authentication is determined by:
 - The presence of `Authorization`, `Token` or `X-Api-Key` headers.
 - The presence of a user ID within the trace (for example, the `@usr.id` APM attribute).
 - The request has responded with a 401 or 403 status code.
+- Custom [Endpoint Tagging][15] rules that you configured
+
 
 When the type of authentication is available, Datadog reports it in a header through the **Authentication Method** facet.
 
@@ -177,6 +220,19 @@ When the type of authentication is available, Datadog reports it in a header thr
 | Basic Authentication                              | `basic_auth`     |
 | Digest access authentication                      | `digest_auth`    |
 
+#### Custom Authentication support
+
+Custom authentication detection is possible by configuring [Endpoint Tagging Rules][15]. These rules require the following minimum tracer versions:
+
+|Technology| Minimum tracer version |
+|----------|------------------------|
+|Java      | v1.55.0                |
+|.NET      | Coming Soon            |
+|Node.js   | v5.76.0                |
+|Python    | v3.17.0                |
+|Ruby      | v2.23.0                |
+|PHP       | v1.15.0                |
+|Golang    | v2.4.0                 |
 
 ## Services
 
@@ -254,3 +310,7 @@ Click a finding to view its details and perform a workflow such as Validate > In
 [12]: /security/application_security/policies/custom_rules/
 [13]: /internal_developer_portal/software_catalog/entity_model/native_entities/?tab=api#native-entity-types
 [14]: https://app.datadoghq.com/security/appsec/policies/scanners
+[15]: https://app.datadoghq.com/security/configuration/asm/trace-tagging
+[16]: /integrations/guide/source-code-integration/
+[17]: /internal_developer_portal/software_catalog/set_up/create_entities/#through-the-datadog-ui
+[18]: /internal_developer_portal/software_catalog/entity_model/

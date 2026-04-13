@@ -260,7 +260,8 @@
                         "group_by": "distinct_base_url",
                         "group_limit": 1,
                         "stopwords": "stopwords",
-                        "group_max_candidates": 1000
+                        "group_max_candidates": 1000,
+                        "exclude_fields": "embedding"
                     }
                 },
                 {
@@ -271,7 +272,21 @@
                         "group_by": "distinct_base_url",
                         "group_limit": 1,
                         "stopwords": "stopwords",
-                        "group_max_candidates": 1000
+                        "group_max_candidates": 1000,
+                        "exclude_fields": "embedding"
+                    }
+                },
+                {
+                    "name": "docs_ai_search_preset",
+                    "search_parameters": {
+                        "collection": "docs_alias",
+                        "query_by": "embedding,title,section_header,content",
+                        "vector_query": "embedding:([], alpha: 0.7)",
+                        "per_page": 20,
+                        "filter_by": "language:en",
+                        "rerank_hybrid_matches": true,
+                        "prefix": false,
+                        "exclude_fields": "embedding, id, objectID, distinct_base_url, relpermalink, language, order, rank, tags, type"
                     }
                 }
             ]

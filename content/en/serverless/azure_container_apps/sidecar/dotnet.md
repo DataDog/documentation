@@ -98,6 +98,8 @@ logger.LogInformation("Hello World!");
 
 {{% serverless-init-env-vars-sidecar language="csharp" defaultSource="containerapp" %}}
 
+{{% svl-tracing-env %}}
+
 ## Troubleshooting
 
 {{% serverless-init-troubleshooting productNames="Azure Container Apps" %}}
@@ -109,5 +111,5 @@ logger.LogInformation("Hello World!");
 [1]: https://github.com/DataDog/dd-trace-dotnet/releases/
 [2]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-core/?tab=linux
 [3]: /tracing/other_telemetry/connect_logs_and_traces/dotnet/
-[4]: /developers/dogstatsd/?tab=dotnet#install-the-dogstatsd-client
+[4]: /extend/dogstatsd/?tab=dotnet#install-the-dogstatsd-client
 [5]: /metrics/custom_metrics/dogstatsd_metrics_submission/?tab=dotnet#code-examples-5

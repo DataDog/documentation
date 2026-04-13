@@ -1,4 +1,5 @@
 ---
+id: remote_configuration
 core_product:
 - apm
 - appsec

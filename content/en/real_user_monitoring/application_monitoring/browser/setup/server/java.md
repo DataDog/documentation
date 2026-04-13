@@ -15,6 +15,10 @@ further_reading:
   text: 'Single Step APM Instrumentation'
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-danger">RUM Auto-Instrumentation is not available for the selected site ({{< region-param key="dd_site_name" >}}). Use <a href="/real_user_monitoring/application_monitoring/browser/setup/client">Client-Side instrumentation</a> instead.</div>
+{{< /site-region >}}
+
 ## Overview
 
 RUM Auto-Instrumentation automatically adds RUM monitoring to your web application server, so you can start collecting RUM data by editing a configuration file instead of having to modify your frontend code directly. However, if you want to track specific user actions (custom actions) or add custom event details (event attributes), you still need to add some code to your application.

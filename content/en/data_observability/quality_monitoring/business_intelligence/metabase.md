@@ -67,7 +67,7 @@ When your Metabase account is successfully connected, Datadog syncs and automati
 
 Initial syncs may take up to several hours depending on the size of your Metabase deployment.
 
-After syncing, you can explore your Metabase assets and their upstream dependencies in the [Data Observability Explorer][3].
+After syncing, you can explore your Metabase assets and their upstream dependencies in the [Data Observability Catalog][3].
 
 ## Further reading
 
@@ -75,4 +75,4 @@ After syncing, you can explore your Metabase assets and their upstream dependenc
 
 [1]: https://www.metabase.com/docs/latest/people-and-groups/api-keys#create-an-api-key
 [2]: https://app.datadoghq.com/integrations/metabase
-[3]: https://app.datadoghq.com/datasets/catalog
+[3]: https://app.datadoghq.com/data-obs/catalog

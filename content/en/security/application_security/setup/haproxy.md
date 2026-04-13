@@ -17,8 +17,8 @@ further_reading:
       text: "Troubleshooting App and API Protection"
 ---
 
-{{< callout url="#" btn_hidden="true" header="App and API Protection for HAProxy is in Preview" >}}
-To try the preview of App and API Protection for HAProxy, use the following setup instructions.
+{{< callout url="https://www.datadoghq.com/product-preview/haproxy-integration/">}}
+App and API Protection for HAProxy is in Preview. To sign up, click <strong>Request Access</strong> and complete the form.
 {{< /callout >}}
 
 You can enable App and API Protection for your HAProxy instances. The Datadog HAProxy integration leverages HAProxy's Stream Processing Offload Engine (SPOE) to inspect and protect traffic for threat detection at the edge of your infrastructure.
@@ -112,7 +112,7 @@ It is important that no custom modifications are made to this file.
 The Datadog HAProxy SPOA container supports the following configuration settings:
 
 | Environment variable                | Default value | Description                                                                                                   |
-|-------------------------------------|---------------|---------------------------------------------------------------------------------------------------------------|
+| ----------------------------------- | ------------- | ------------------------------------------------------------------------------------------------------------- |
 | `DD_HAPROXY_SPOA_HOST`              | `0.0.0.0`     | Host on which the SPOA and HTTP health server listen.                                                         |
 | `DD_HAPROXY_SPOA_PORT`              | `3000`        | Port used by the SPOA that accepts communication with HAProxy.                                                |
 | `DD_HAPROXY_SPOA_HEALTHCHECK_PORT`  | `3080`        | Port used for the HTTP server for health checks.                                                              |
@@ -121,10 +121,10 @@ The Datadog HAProxy SPOA container supports the following configuration settings
 
 Configure the SPOA to send traces to your Datadog Agent using the following environment variables:
 
-| Environment variable      | Default value | Description                              |
-|---------------------------|---------------|------------------------------------------|
-| `DD_AGENT_HOST`           | `localhost`   | Host of a running Datadog Agent.         |
-| `DD_TRACE_AGENT_PORT`     | `8126`        | Port of a running Datadog Agent.         |
+| Environment variable  | Default value | Description                      |
+| --------------------- | ------------- | -------------------------------- |
+| `DD_AGENT_HOST`       | `localhost`   | Host of a running Datadog Agent. |
+| `DD_TRACE_AGENT_PORT` | `8126`        | Port of a running Datadog Agent. |
 
 ### Datadog Go Tracer and HAProxy integration
 
