@@ -46,7 +46,7 @@ Worker version 2.14.0 gives you access to the following:
 
 - OCSF mappings for Palo Alto Networks Threat events have been added.
 - The Database source has been updated with timeout-related changes.
-- The environment variable for the Datadog Agent source address is now configurable.
+- The `component_latency_seconds` histogram and `component_latency_mean_seconds` gauge internal metrics have been added. The metrics are based on the time an event spends in a single processor, including in the processor buffer.
 
 #### Enhancements
 
@@ -57,8 +57,8 @@ Worker version 2.14.0 gives you access to the following:
 - The Database Source SQL validation checks have been improved.
 - The Sensitive Data Scanner library now has new and updated out-of-the-box scanning rules for PII, credentials, and financial data. Minor bugs have also been fixed.
 - The `observability-pipelines-worker top` command has new keybinds for scrolling, sorting, and filtering.
-- The `component_latency_seconds` histogram and `component_latency_mean_seconds` gauge internal metrics have been added. The metrics are based on the time an event spends in a single processor, including in the processor buffer.
 - The Datadog Logs destination has been updated to default to `zstd` compression instead of no compression.
+- The environment variable for the Datadog Agent source address is now configurable.
 
 #### Fixes
 
