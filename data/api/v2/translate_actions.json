@@ -1074,6 +1074,26 @@
     "request_description": "New dashboards of the dashboard list.",
     "request_schema_description": "Request containing the list of dashboards to update to."
   },
+  "CreateDashboardSecureEmbed": {
+    "description": "Create a secure embed share for a dashboard. The response includes a one-time `credential` used for HMAC-SHA256 signing. Store it securely — it cannot be retrieved again.",
+    "summary": "Create a secure embed for a dashboard",
+    "request_description": "Secure embed creation request body.",
+    "request_schema_description": "Request to create a secure embed shared dashboard."
+  },
+  "DeleteDashboardSecureEmbed": {
+    "description": "Delete a secure embed share for a dashboard.",
+    "summary": "Delete a secure embed for a dashboard"
+  },
+  "GetDashboardSecureEmbed": {
+    "description": "Retrieve an existing secure embed configuration for a dashboard.",
+    "summary": "Get a secure embed for a dashboard"
+  },
+  "UpdateDashboardSecureEmbed": {
+    "description": "Partially update a secure embed configuration. All fields are optional (PATCH semantics).",
+    "summary": "Update a secure embed for a dashboard",
+    "request_description": "Secure embed update request body.",
+    "request_schema_description": "Request to update a secure embed shared dashboard."
+  },
   "GetAllDatasets": {
     "description": "Get all datasets that have been configured for an organization.",
     "summary": "Get all datasets"
