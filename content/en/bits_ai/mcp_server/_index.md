@@ -65,7 +65,6 @@ Datadog also emits two standard metrics that you can use to monitor MCP Server a
 
 Both metrics are tagged with `user_id`, `user_email`, and `client` (the MCP client name, such as `claude` or `cursor`).
 
-
 ## Available tools
 
 See [Datadog MCP Server Tools][2] for a complete reference of available tools organized by toolset, with example prompts.

@@ -432,6 +432,20 @@
     "request_description": "",
     "request_schema_description": "Request to update an AuthN Mapping."
   },
+  "ListInvestigations": {
+    "description": "List all Bits AI investigations for the organization.",
+    "summary": "List Bits AI investigations"
+  },
+  "TriggerInvestigation": {
+    "description": "Trigger a new Bits AI investigation based on a monitor alert.",
+    "summary": "Trigger a Bits AI investigation",
+    "request_description": "Trigger investigation request body.",
+    "request_schema_description": "Request to trigger a new investigation."
+  },
+  "GetInvestigation": {
+    "description": "Get a specific Bits AI investigation by ID.",
+    "summary": "Get a Bits AI investigation"
+  },
   "SearchCases": {
     "description": "Search cases.",
     "summary": "Search cases"
