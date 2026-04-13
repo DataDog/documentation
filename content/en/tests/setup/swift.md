@@ -115,7 +115,7 @@ end
 
 ### Swift Testing framework
 
-Starting from version 2.7.0, the Datadog SDK supports the Swift Testing framework for test observation. Starting from version 2.7.1, all advanced Swift Testing features are supported.
+The Datadog SDK supports the Swift Testing framework starting in version 2.7.0 (observation only) and fully supports all advanced features in version 2.7.1 and later.
 
 #### Setting up Swift Testing observation
 
