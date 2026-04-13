@@ -432,6 +432,20 @@
     "request_description": "",
     "request_schema_description": "Request to update an AuthN Mapping."
   },
+  "ListInvestigations": {
+    "description": "List all Bits AI investigations for the organization.",
+    "summary": "List Bits AI investigations"
+  },
+  "TriggerInvestigation": {
+    "description": "Trigger a new Bits AI investigation based on a monitor alert.",
+    "summary": "Trigger a Bits AI investigation",
+    "request_description": "Trigger investigation request body.",
+    "request_schema_description": "Request to trigger a new investigation."
+  },
+  "GetInvestigation": {
+    "description": "Get a specific Bits AI investigation by ID.",
+    "summary": "Get a Bits AI investigation"
+  },
   "SearchCases": {
     "description": "Search cases.",
     "summary": "Search cases"
@@ -724,6 +738,18 @@
     "summary": "Search pipelines events",
     "request_description": "",
     "request_schema_description": "The request for a pipelines search."
+  },
+  "UpdateFlakyTestsManagementPolicies": {
+    "description": "Partially update Flaky Tests Management repository-level policies for the given repository.\nOnly provided policy blocks are updated; omitted blocks are left unchanged.",
+    "summary": "Update Flaky Tests Management policies",
+    "request_description": "",
+    "request_schema_description": "Request object for updating Flaky Tests Management policies."
+  },
+  "GetFlakyTestsManagementPolicies": {
+    "description": "Retrieve Flaky Tests Management repository-level policies for the given repository.",
+    "summary": "Get Flaky Tests Management policies",
+    "request_description": "",
+    "request_schema_description": "Request object for getting Flaky Tests Management policies."
   },
   "DeleteTestOptimizationServiceSettings": {
     "description": "Delete Test Optimization settings for a specific service identified by repository, service name, and environment.",
@@ -2778,6 +2804,94 @@
     "summary": "Update Org Connection",
     "request_description": "",
     "request_schema_description": "Request to update an org connection."
+  },
+  "ListOrgGroupMemberships": {
+    "description": "List organization group memberships. Filter by org group ID or org UUID. At least one of `filter[org_group_id]` or `filter[org_uuid]` must be provided. When filtering by org UUID, returns a single-item list with the membership for that org.",
+    "summary": "List org group memberships"
+  },
+  "BulkUpdateOrgGroupMemberships": {
+    "description": "Move a batch of organizations from one org group to another. This is an atomic operation. Maximum 100 orgs per request.",
+    "summary": "Bulk update org group memberships",
+    "request_description": "",
+    "request_schema_description": "Request to bulk update org group memberships."
+  },
+  "GetOrgGroupMembership": {
+    "description": "Get a specific organization group membership by its ID.",
+    "summary": "Get an org group membership"
+  },
+  "UpdateOrgGroupMembership": {
+    "description": "Move an organization to a different org group by updating its membership.",
+    "summary": "Update an org group membership",
+    "request_description": "",
+    "request_schema_description": "Request to update an org group membership."
+  },
+  "ListOrgGroupPolicies": {
+    "description": "List policies for an organization group. Requires a filter on org group ID.",
+    "summary": "List org group policies"
+  },
+  "CreateOrgGroupPolicy": {
+    "description": "Create a new policy for an organization group.",
+    "summary": "Create an org group policy",
+    "request_description": "",
+    "request_schema_description": "Request to create an org group policy."
+  },
+  "DeleteOrgGroupPolicy": {
+    "description": "Delete an organization group policy by its ID.",
+    "summary": "Delete an org group policy"
+  },
+  "UpdateOrgGroupPolicy": {
+    "description": "Update the content of an existing organization group policy.",
+    "summary": "Update an org group policy",
+    "request_description": "",
+    "request_schema_description": "Request to update an org group policy."
+  },
+  "ListOrgGroupPolicyConfigs": {
+    "description": "List all org configs that are eligible to be used as organization group policies.",
+    "summary": "List org group policy configs"
+  },
+  "ListOrgGroupPolicyOverrides": {
+    "description": "List policy overrides for an organization group. Requires a filter on org group ID. Optionally filter by policy ID.",
+    "summary": "List org group policy overrides"
+  },
+  "CreateOrgGroupPolicyOverride": {
+    "description": "Create a new policy override for an organization within an org group.",
+    "summary": "Create an org group policy override",
+    "request_description": "",
+    "request_schema_description": "Request to create an org group policy override."
+  },
+  "DeleteOrgGroupPolicyOverride": {
+    "description": "Delete an organization group policy override by its ID.",
+    "summary": "Delete an org group policy override"
+  },
+  "UpdateOrgGroupPolicyOverride": {
+    "description": "Update an existing organization group policy override.",
+    "summary": "Update an org group policy override",
+    "request_description": "",
+    "request_schema_description": "Request to update an org group policy override."
+  },
+  "ListOrgGroups": {
+    "description": "List all organization groups that the requesting organization has access to.",
+    "summary": "List org groups"
+  },
+  "CreateOrgGroup": {
+    "description": "Create a new organization group.",
+    "summary": "Create an org group",
+    "request_description": "",
+    "request_schema_description": "Request to create an org group."
+  },
+  "DeleteOrgGroup": {
+    "description": "Delete an organization group by its ID.",
+    "summary": "Delete an org group"
+  },
+  "GetOrgGroup": {
+    "description": "Get a specific organization group by its ID.",
+    "summary": "Get an org group"
+  },
+  "UpdateOrgGroup": {
+    "description": "Update the name of an existing organization group.",
+    "summary": "Update an org group",
+    "request_description": "",
+    "request_schema_description": "Request to update an org group."
   },
   "ListPermissions": {
     "description": "Returns a list of all permissions, including name, description, and ID.",

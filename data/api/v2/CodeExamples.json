@@ -1334,6 +1334,16 @@
     },
     {
       "group": "observability_pipelines",
+      "suffix": "_1267410221",
+      "description": "Validate an observability pipeline with Splunk HEC destination token_strategy returns \"OK\" response"
+    },
+    {
+      "group": "observability_pipelines",
+      "suffix": "_2960728933",
+      "description": "Validate an observability pipeline with Splunk HEC source store_hec_token returns \"OK\" response"
+    },
+    {
+      "group": "observability_pipelines",
       "suffix": "_99164570",
       "description": "Validate an observability pipeline with amazon S3 source compression returns \"OK\" response"
     },
@@ -1341,6 +1351,11 @@
       "group": "observability_pipelines",
       "suffix": "_1330454428",
       "description": "Validate an observability pipeline with destination secret key returns \"OK\" response"
+    },
+    {
+      "group": "observability_pipelines",
+      "suffix": "_815080644",
+      "description": "Validate an observability pipeline with enrichment table secret field lookup returns \"OK\" response"
     },
     {
       "group": "observability_pipelines",

@@ -47,6 +47,10 @@
     "name": "AuthN Mappings",
     "description": "[The AuthN Mappings API](https://docs.datadoghq.com/account_management/authn_mapping/?tab=example)\nis used to automatically map groups of users to roles in Datadog using attributes\nsent from Identity Providers. Use these endpoints to manage your AuthN Mappings."
   },
+  "bits-ai": {
+    "name": "Bits AI",
+    "description": "Use the Bits AI endpoints to retrieve AI-powered investigations."
+  },
   "ci-visibility-pipelines": {
     "name": "CI Visibility Pipelines",
     "description": "Search or aggregate your CI Visibility pipeline events and send them to your Datadog site over HTTP. See the [CI Pipeline Visibility in Datadog page](https://docs.datadoghq.com/continuous_integration/pipelines/) for more information."
@@ -270,6 +274,10 @@
   "org-connections": {
     "name": "Org Connections",
     "description": "Manage connections between organizations. Org connections allow for controlled sharing of data between different Datadog organizations. See the [Cross-Organization Visibiltiy](https://docs.datadoghq.com/account_management/org_settings/cross_org_visibility/) page for more information."
+  },
+  "org-groups": {
+    "name": "Org Groups",
+    "description": "Manage organization groups, memberships, policies, policy overrides, and policy configurations."
   },
   "organizations": {
     "name": "Organizations",
