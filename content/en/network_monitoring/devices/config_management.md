@@ -144,6 +144,46 @@ When you compare two configuration versions, the AI summary automatically:
 - Describes changes in human-readable terms
 - Highlights changes that may be relevant for incident investigation or risk analysis
 
+## Supported device profiles
+
+NCM uses device profiles to collect configurations from network devices through SSH. Each profile defines how to connect to a specific device operating system, what configurations to collect, and how to parse the output. Profiles are included in the Datadog Agent and matched automatically based on your device's operating system.
+
+For the profile source files, see the [NCM default profiles directory][8] in the `datadog-agent` repository.
+
+### Available profiles
+
+The following table lists the NCM device profiles and the minimum Datadog Agent version required for each:
+
+| Profile | Min. Agent Version | OS | Vendor | Running Config | Startup Config |
+|---|---|---|---|---|---|
+| `cisco-ios` | 7.73.0 | IOS | Cisco | {{< X >}} | {{< X >}} |
+| `junos` | 7.74.0 | JunOS | Juniper | {{< X >}} | |
+| `pan-os` | 7.75.0 | PAN-OS | Palo Alto | {{< X >}} | |
+| `aosw` | 7.75.0 | AOS-W | Aruba | {{< X >}} | |
+| `aoscx` | 7.76.0 | AOS-CX | Aruba | {{< X >}} | {{< X >}} |
+| `nxos` | 7.76.0 | NX-OS | Cisco | {{< X >}} | {{< X >}} |
+| `tmos` | 7.76.0 | TMOS | F5 | {{< X >}} | |
+| `fortios` | 7.77.0 | FortiOS | FortiGate | {{< X >}} | |
+| `eos` | 7.77.0 | EOS | Arista | {{< X >}} | {{< X >}} |
+| `dellos10` | 7.77.0 | DellOS10 | Dell | {{< X >}} | {{< X >}} |
+
+### Device profile support matrix
+
+The following matrix provides more detail on the devices, configuration types, and metadata each profile supports:
+
+| Vendor | Profile | Example Devices | Running | Startup | Metadata |
+|---|---|---|---|---|---|
+| Cisco | `cisco-ios` | Catalyst switches, ISR/ASR routers | {{< X >}} | {{< X >}} | Timestamp, config size |
+| Cisco | `nxos` | Nexus data center switches | {{< X >}} | {{< X >}} | Timestamp |
+| Juniper | `junos` | EX/QFX/MX/SRX devices | {{< X >}} | | Timestamp, author |
+| Palo Alto | `pan-os` | Palo Alto firewalls | {{< X >}} | | |
+| Aruba | `aosw` | Aruba switches and controllers | {{< X >}} | | |
+| Aruba | `aoscx` | Aruba CX switches | {{< X >}} | {{< X >}} | |
+| F5 | `tmos` | BIG-IP load balancers | {{< X >}} | | |
+| FortiGate | `fortios` | FortiGate firewalls | {{< X >}} | | |
+| Arista | `eos` | Arista switches | {{< X >}} | {{< X >}} | Timestamp, author |
+| Dell | `dellos10` | Dell EMC data center switches | {{< X >}} | {{< X >}} | |
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -155,3 +195,4 @@ When you compare two configuration versions, the AI summary automatically:
 [5]: /network_monitoring/devices/topology
 [6]: /network_monitoring/devices/supported_devices#vendor-profiles
 [7]: https://github.com/DataDog/datadog-agent/tree/main/cmd/agent/dist/conf.d/network_config_management.d/
+[8]: https://github.com/DataDog/datadog-agent/tree/main/pkg/networkconfigmanagement/profile/default_profiles
