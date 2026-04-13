@@ -27,7 +27,7 @@ Worker version 2.14.1 gives you access to the following:
 
 #### Fixes
 
-- Fixed how an empty path in a processor field is handled.
+- Fixed how an empty path in a processor field is handled. For example, how the Parse JSON processor handles the `Field to parse JSON on` with the value `.`.
 
 ---
 
@@ -66,7 +66,7 @@ Worker version 2.14.0 gives you access to the following:
 - Fixed buffer utilization metrics to properly record actual utilization level.
 - Fixed a Worker shutdown race condition between closing the memory buffer and in-progress send operations that could potentially cause event loss.
 - The Generate Metrics processor now handles aggregated histogram and aggregated summary metrics correctly.
-- Live Capture now supports child events in the split array processor. Bugs have also been fixed.
+- Live Capture now supports child events in the split array processor.
 - Reference Tables buffer size and requests frequency have been reduced to avoid OOMs and rate limit errors.
 - The Reference Tables processor now rejects empty or blank lookup keys and supports integer keys.
 
