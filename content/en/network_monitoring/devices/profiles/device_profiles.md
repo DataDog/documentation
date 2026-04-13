@@ -192,6 +192,20 @@ To download profiles as YAML files, click **Download Profiles** in the top right
 2. Restart the Datadog Agent.
 3. Confirm that NDM is receiving metrics from the matched devices.
 
+### Upload custom profiles
+
+To upload existing SNMP profiles to the Profile Manager:
+
+1. Navigate to [**Infrastructure > Network Devices > Settings**][1] and click **SNMP Profile Manager** in the left sidebar.
+2. Click **Upload Profiles** in the top right corner of the page.
+3. In the upload modal, drag and drop a `.zip` file or click **browse files** to select one. The `.zip` file must contain one or more SNMP profiles in `.yaml` format.
+
+   {{< img src="/network_device_monitoring/profile_onboarding/upload_custom_profile_2.png" alt="The Upload custom SNMP profile modal with a drag-and-drop area for uploading a .zip file containing SNMP profiles in .yaml format" style="width:60%;">}}
+
+4. Click **Upload profiles**.
+
+After the upload completes, the profiles are available in the profile editor. You can then manage metrics, device coverage, and advanced options for the uploaded profiles the same way as any other custom profile.
+
 ## Profile inheritance
 
 Profile inheritance happens automatically in the background. When you edit a profile, Datadog creates a custom extension of the matching profile. You do not need to configure inheritance manually. Datadog automatically includes base inherited profiles (`_base.yaml`, `_generic-if.yaml`, `_generic-ip.yaml`, `_generic-ospf.yaml`, `_generic-tcp.yaml`, and `_generic-udp.yaml`).
