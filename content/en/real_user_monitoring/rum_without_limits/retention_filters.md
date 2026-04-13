@@ -14,7 +14,15 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/rum-apm-retention-filters"
     tag: "Blog"
     text: "Unify and correlate frontend and backend data with retention filters"
+  - link: 'https://learn.datadoghq.com/courses/rum-retention-filters'
+    tag: 'Learning Center'
+    text: 'Interactive Lab: RUM Retention Filters'
 ---
+
+{{< learning-center-callout header="Try RUM Retention Filters in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/rum-retention-filters" hide_image="false" >}}
+  Learn how to use RUM retention filters to control which session data is stored and optimize your observability budget.
+{{< /learning-center-callout >}}
+
 ## Overview
 
 Retention filters are a set of queries, similar to those used in the RUM Session Explorer, that are executed against the RUM events (sessions, views, actions, resources, and so on) as they are ingested. These filters determine whether a session is stored for the standard 30-day RUM retention period or discarded.
@@ -130,7 +138,7 @@ Cross-product retention filters allow you to optimize the correlation between di
 
 The **APM traces filter** indexes APM traces for the specified percentage of sessions retained by the parent RUM retention filter that have available traces.
 
-**Note**: The availability of APM traces depends on your **trace sampling SDK configuration** (learn how to <a href="/real_user_monitoring/correlate_with_other_telemetry/apm?tab=browserrum">Correlate RUM with APM Traces</a>
+**Note**: The availability of APM traces depends on your **trace sampling SDK configuration** (learn how to <a href="/real_user_monitoring/correlate_with_other_telemetry/apm?tab=browserrum">Correlate RUM with APM Traces</a>)
 
   <div class="alert alert-info">The APM traces filter is only compatible with the following versions of the SDKs: <br> - Browser 6.5.0+ <br> - Android 3.0.0+ <br> - iOS 3.3.0+ <br> - React Native 3.0.0+ <br></div>
 

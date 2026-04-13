@@ -332,6 +332,152 @@ spec:
           -Djava.rmi.server.hostname=$(POD_IP)   
 ```          
 
+## Secure the JMX port
+
+The configuration examples above disable JMX authentication and SSL (`-Dcom.sun.management.jmxremote.authenticate=false` and `-Dcom.sun.management.jmxremote.ssl=false`). Without additional safeguards, any pod in the cluster can connect to the JMX port and issue remote method invocations. To reduce this risk, use one or both of the following approaches.
+
+### Restrict network access with a Kubernetes NetworkPolicy
+
+Apply a [NetworkPolicy][7] that allows ingress on the JMX port only from the Datadog Agent pods. Apply this approach without changing your JMX or Agent configuration. It is compatible with any CNI plugin that supports NetworkPolicy (for example, Calico or Cilium).
+
+The Datadog Agent DaemonSet applies the label `app.kubernetes.io/component: agent` to its pods. Use this label as the ingress source selector:
+
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: restrict-jmx-to-datadog-agent
+  namespace: <APP_NAMESPACE>
+spec:
+  podSelector:
+    matchLabels:
+      app: <JAVA_APP_LABEL>
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              app.kubernetes.io/component: agent
+      ports:
+        - protocol: TCP
+          port: <JMX_PORT>
+```
+
+Replace `<APP_NAMESPACE>` with the namespace of your Java application, `<JAVA_APP_LABEL>` with the label that identifies your Java pods, and `<JMX_PORT>` with the JMX port you configured.
+
+If the Datadog Agent runs in a different namespace from your application, add a `namespaceSelector` to the ingress rule:
+
+```yaml
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: <AGENT_NAMESPACE>
+          podSelector:
+            matchLabels:
+              app.kubernetes.io/component: agent
+      ports:
+        - protocol: TCP
+          port: <JMX_PORT>
+```
+
+Replace `<AGENT_NAMESPACE>` with the namespace where the Datadog Agent is deployed.
+
+### Enable JMX password authentication
+
+To require credentials for JMX connections (an additional layer of defense), you can enable JMX authentication. The Datadog Agent JMX check supports `user` and `password` parameters.
+
+#### Step 1 - Create a Kubernetes Secret with JMX credentials
+
+Create a JMX password file and access file, then store them in a Kubernetes Secret:
+
+```bash
+# Create the password file (format: <ROLE> <PASSWORD>)
+echo 'monitorRole <YOUR_JMX_PASSWORD>' > jmxremote.password
+chmod 400 jmxremote.password
+
+# Create the access file (format: <ROLE> readonly|readwrite)
+echo 'monitorRole readonly' > jmxremote.access
+chmod 400 jmxremote.access
+
+# Create the Kubernetes Secret
+kubectl create secret generic jmx-credentials \
+  --from-file=jmxremote.password \
+  --from-file=jmxremote.access \
+  -n <APP_NAMESPACE>
+```
+
+#### Step 2 - Configure the Java application
+
+Mount the Secret and update the JVM flags to enable authentication:
+
+```yaml
+spec:
+  containers:
+    - name: '<CONTAINER_NAME>'
+      env:
+        - name: POD_IP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.podIP
+        - name: JAVA_OPTS
+          value: >-
+            -Dcom.sun.management.jmxremote
+            -Dcom.sun.management.jmxremote.authenticate=true
+            -Dcom.sun.management.jmxremote.password.file=/etc/jmx/jmxremote.password
+            -Dcom.sun.management.jmxremote.access.file=/etc/jmx/jmxremote.access
+            -Dcom.sun.management.jmxremote.ssl=false
+            -Dcom.sun.management.jmxremote.local.only=false
+            -Dcom.sun.management.jmxremote.port=<JMX_PORT>
+            -Dcom.sun.management.jmxremote.rmi.port=<JMX_PORT>
+            -Djava.rmi.server.hostname=$(POD_IP)
+      volumeMounts:
+        - name: jmx-credentials
+          mountPath: /etc/jmx
+          readOnly: true
+  volumes:
+    - name: jmx-credentials
+      secret:
+        secretName: jmx-credentials
+        defaultMode: 0400
+```
+
+#### Step 3 - Pass credentials in the Autodiscovery annotation
+
+Add `user` and `password` to the JMX check instance. Use the [`%%env_<ENV_VAR>%%` template variable][3] to reference the password from an environment variable in the Agent container rather than hardcoding it in the annotation:
+
+```yaml
+ad.datadoghq.com/<CONTAINER_NAME>.checks: |
+  {
+    "<INTEGRATION_NAME>": {
+      "init_config": {
+        "is_jmx": true,
+        "collect_default_metrics": true
+      },
+      "instances": [{
+        "host": "%%host%%",
+        "port": "<JMX_PORT>",
+        "user": "monitorRole",
+        "password": "%%env_JMX_PASSWORD%%"
+      }]
+    }
+  }
+```
+
+Make `JMX_PASSWORD` available in the Agent container by injecting it from the same Kubernetes Secret:
+
+```yaml
+# In your Datadog Agent DaemonSet or Helm values
+env:
+  - name: JMX_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        name: jmx-credentials
+        key: jmxremote.password
+```
+
+For the full list of security-related parameters, including SSL and client certificate options (`trust_store_path`, `key_store_path`, `rmi_registry_ssl`), see the [JMX integration][6] configuration reference.
+
 ## Available JMX integrations
 The Datadog Agent comes with several JMX integrations pre-configured.
 
@@ -367,6 +513,7 @@ Alternatively use `jmx` as your `<INTEGRATION_NAME>` to set up a basic JMX integ
 [4]: /containers/guide/ad_identifiers/?tab=kubernetes#custom-autodiscovery-container-identifiers
 [5]: https://kubernetes.io/docs/concepts/workloads/pods/downward-api/
 [6]: /integrations/java/
+[7]: https://kubernetes.io/docs/concepts/services-networking/network-policies/
 [41]: /integrations/activemq/
 [42]: https://github.com/DataDog/integrations-core/blob/master/activemq/datadog_checks/activemq/data/metrics.yaml
 [43]: https://github.com/DataDog/integrations-core/blob/master/activemq/datadog_checks/activemq/data/conf.yaml.example

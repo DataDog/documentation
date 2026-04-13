@@ -74,3 +74,36 @@ export async function streamConversation({
         streamConfig: { onChunk, onError }
     });
 }
+
+export async function fetchConversation({
+    typesenseConfig,
+    query,
+    modelId,
+    conversationId,
+    signal
+}) {
+    const tsClient = getTypesenseClient(typesenseConfig);
+
+    const searchBody = {
+        searches: [
+            {
+                collection: typesenseConfig.docsIndex,
+                preset: 'docs_ai_search_preset'
+            }
+        ]
+    };
+
+    const commonSearchParams = {
+        conversation: true,
+        conversation_model_id: modelId,
+        q: sanitizeQuery(query)
+    };
+
+    if (conversationId) {
+        commonSearchParams.conversation_id = conversationId;
+    }
+
+    return tsClient.apiCall.post('/multi_search', searchBody, commonSearchParams, {}, {
+        abortSignal: signal
+    });
+}

@@ -1,8 +1,9 @@
 ---
+id: slo_summary
 core_product:
 - dashboards
 related_terms:
-- objetivo de nivel de servicio (SLO)
+- slo
 - dashboard
 title: widget de slo
 ---

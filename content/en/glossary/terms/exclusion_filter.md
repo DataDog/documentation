@@ -1,4 +1,5 @@
 ---
+id: exclusion_filter
 title: exclusion filter
 core_product:
   - log management

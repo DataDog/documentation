@@ -1,4 +1,5 @@
 ---
+id: alert_value
 title: alert value
 core_product:
   - dashboards
