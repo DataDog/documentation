@@ -28,7 +28,7 @@ The Category Processor allows you to categorize your log events based on their c
 - Categorizing success and failure logs, for example as we do with Auth0 logs.
 - Categorizing status of logs based on the log content, for example as we do for IIS logs
 
-## Before and after state of logsb
+## Before and after state of logs
 
 {{% collapse-content title="Example: Categorizing logs with the Category Processor" level="h4" %}}
 

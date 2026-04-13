@@ -21,7 +21,7 @@ There are two ways to define correlation between application traces and logs:
 
 ## Use cases
 
-The Status Remapper is typically used to select the Trace Id that is within a log message that needs first to be parsed with a Grok Parser.
+The Trace Remapper is typically used to select the Trace ID that is within a log message that needs first to be parsed with a Grok Parser.
 
 ## API
 

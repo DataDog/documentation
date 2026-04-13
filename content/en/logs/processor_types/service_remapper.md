@@ -16,7 +16,7 @@ The service remapper processor assigns one or more attributes to your logs as th
 
 ## Use cases
 
-The Status Remapper is typically used to:
+The Service Remapper is typically used to:
 - Select another attribute as the service to be used for the log event, if it doesn't match our default service attribute. For example, logs coming from Microsoft 365 use 'Workload' as the service attribute. You can use a Service Remapper to set that attribute as the service.
 - Select an attribute after a grok parser. For example, Bitdefender logs contains the service in the message attribute that first needs to be parsed.
 

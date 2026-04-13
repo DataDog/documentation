@@ -17,9 +17,21 @@ The remapper processor remaps any source attribute(s) or tags to another target 
 
 Constraints on the tag/attribute name are explained in the [attributes and tags documentation][1]. Some additional constraints, applied as `:` or `,`, are not allowed in the target tag/attribute name.
 
-If the target of the remapper is an attribute, the remapper can also try to cast the value to a new type (`String`, `Integer` or `Double`). If the cast is not possible, the original type is kept.
+If the target of the remapper is an attribute, the remapper can also try to cast the value to a new type (`String`, `Integer` or `Double`). If the cast fails, the original value and type are preserved.
 
 **Note**: The decimal separator for `Double` need to be `.`.
+
+### Reserved attributes
+
+The Remapper processor **cannot be used to remap Datadog reserved attributes**.
+- The `host` attribute cannot be remapped.
+- The following attributes require dedicated remapper processors and cannot be remapped with the generic Remapper. To remap any of the attributes, use the corresponding specialized remapper or processor instead.
+   - `message`: Log message remapper
+   - `service`: Service remapper
+   - `status`: Log status remapper
+   - `date`: Log date remapper
+   - `trace_id`: Trace remapper
+   - `span_id`: Span remapper
 
 ## Use cases
 
