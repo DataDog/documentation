@@ -21,6 +21,8 @@ The following tools are available in the Datadog MCP Server. Each entry includes
 
 ## Core tools
 
+The default toolset for logs, metrics, traces, dashboards, monitors, incidents, hosts, services, events, and notebooks.
+
 ### `search_datadog_events`
 *Toolset: **core***\
 *Permissions Required: `Events` and `Timeseries`*\
@@ -208,6 +210,8 @@ Edits an existing Datadog notebook.
 
 ## Alerting
 
+Tools for validating monitors, searching monitor groups, and retrieving monitor templates.
+
 ### `validate_datadog_monitor`
 *Toolset: **alerting***\
 *Permissions Required: `Monitors Read`*\
@@ -233,6 +237,8 @@ Searches monitor groups by name or criteria.
 - Find monitor groups related to the checkout service.
 
 ## APM
+
+([Preview][56]) Tools for in-depth [APM][50] trace analysis, span search, Watchdog insights, and performance investigation.
 
 <div class="alert alert-info">The <code>apm</code> toolset is in Preview. <a href="https://www.datadoghq.com/product-preview/apm-mcp-toolset/">Sign up for access.</a></div>
 
@@ -355,6 +361,8 @@ Provides guidance for investigating APM service issues like latency, errors, and
 
 ## Cases
 
+Tools for [Case Management][38], including creating, searching, and updating cases; managing projects; and linking Jira issues.
+
 ### `search_datadog_cases`
 *Toolset: **cases***\
 *Permissions Required: `Cases Read`*\
@@ -430,10 +438,12 @@ Searches for Datadog users by email, name, or handle. Useful for finding the rig
 
 ## Dashboards
 
+Tools for retrieving, creating, updating, and deleting [dashboards][46], plus widget schema reference and validation.
+
 ### `get_datadog_dashboard`
 *Toolset: **dashboards***\
 *Permissions Required: `Dashboards Read` and `User Access Read`*\
-Retrieves a Datadog [dashboard][44] by ID, returning its title, description, tags, and widgets. Use `search_datadog_dashboards` first to find dashboard IDs.
+Retrieves a Datadog [dashboard][46] by ID, returning its title, description, tags, and widgets. Use `search_datadog_dashboards` first to find dashboard IDs.
 
 - Get the full details of dashboard `ps7-mn3-kwf`.
 - Show me the widgets and layout of the infrastructure overview dashboard.
@@ -442,7 +452,7 @@ Retrieves a Datadog [dashboard][44] by ID, returning its title, description, tag
 ### `upsert_datadog_dashboard`
 *Toolset: **dashboards***\
 *Permissions Required: `Dashboards Read` and `Dashboards Write`*\
-Creates or updates a Datadog [dashboard][44]. To update an existing dashboard, provide the dashboard ID; omit it to create a new one. Call `get_widget_reference` for widget schemas before building widgets.
+Creates or updates a Datadog [dashboard][46]. To update an existing dashboard, provide the dashboard ID; omit it to create a new one. Call `get_widget_reference` for widget schemas before building widgets.
 
 - Create a dashboard showing CPU and memory usage across all hosts.
 - Add a timeseries widget for error rate to dashboard `abc-123-def`.
@@ -451,7 +461,7 @@ Creates or updates a Datadog [dashboard][44]. To update an existing dashboard, p
 ### `delete_datadog_dashboard`
 *Toolset: **dashboards***\
 *Permissions Required: `Dashboards Read` and `Dashboards Write`*\
-Permanently deletes a Datadog [dashboard][44] by ID. This action cannot be undone. Use `search_datadog_dashboards` first to find dashboard IDs.
+Permanently deletes a Datadog [dashboard][46] by ID. This action cannot be undone. Use `search_datadog_dashboards` first to find dashboard IDs.
 
 - Delete dashboard `ps7-mn3-kwf`.
 - Remove the old staging environment dashboard.
@@ -485,6 +495,8 @@ Ask a Datadog widget expert a question about widget configuration, schemas, quer
 
 ## Database Monitoring
 
+Tools for interacting with [Database Monitoring][26].
+
 ### `search_datadog_database_plans`
 *Toolset: **dbm***\
 *Permissions Required: `Database Monitoring Read`*\
@@ -504,6 +516,8 @@ Searches [Database Monitoring][26] query samples, which represent individual que
 - Get recent query samples for `@db.query_signature:abc123def` and analyze performance patterns.
 
 ## DDSQL
+
+(Preview) Tools for querying Datadog data using [DDSQL][41], a SQL dialect with support for infrastructure resources, logs, metrics, RUM, spans, and other Datadog data sources.
 
 <div class="alert alert-info">The <code>ddsql</code> toolset is in Preview.</div>
 
@@ -555,6 +569,8 @@ Generates a Datadog UI link to the [DDSQL Editor][41] with a given query pre-pop
 
 ## Error Tracking
 
+Tools for interacting with Datadog [Error Tracking][49].
+
 ### `search_datadog_error_tracking_issues`
 *Toolset: **error-tracking***\
 *Permissions Required: `Error Tracking Read`*\
@@ -574,6 +590,8 @@ Retrieves detailed information about a specific Error Tracking Issue from Datado
 - Create a test case to reproduce Error Tracking Issue `7b2d4f6e-9c1a-4e3b-8d5f-1a7c9e2b4d6f`.
 
 ## Feature Flags
+
+Tools for managing [feature flags][51], including creating, listing, and updating flags and their environments.
 
 ### `list_datadog_feature_flags`
 *Toolset: **feature-flags***\
@@ -638,6 +656,8 @@ Syncs feature flag allocations for a specific environment.
 
 ## Networks
 
+Tools for [Cloud Network Monitoring][31] analysis and [Network Device Monitoring][32].
+
 ### `analyze_cloud_network_monitoring`
 *Toolset: **networks***\
 *Permissions Required: `Network Connections Read`*\
@@ -673,6 +693,8 @@ Retrieves all network interfaces for a specific device.
 - List the interface statuses for my core router.
 
 ## Onboarding
+
+Agentic onboarding tools for guided Datadog setup and configuration.
 
 ### `browser_onboarding`
 *Toolset: **onboarding***\
@@ -723,6 +745,8 @@ Guides you through uploading source maps for RUM error mapping.
 
 ## Security
 
+Tools for code security scanning and searching [security signals][53] and [security findings][54].
+
 ### `datadog_secrets_scan`
 *Toolset: **security***\
 Scans code for hardcoded secrets and credentials, detecting AWS keys, API keys, passwords, tokens, private keys, and database credentials.
@@ -767,6 +791,8 @@ Fallback tool for retrieving full security finding details. Prefer `analyze_secu
 - List all open identity risk findings with full metadata.
 
 ## Software Delivery
+
+Tools for interacting with Software Delivery ([CI Visibility][48] and [Test Optimization][24]).
 
 ### `search_datadog_ci_pipeline_events`
 *Toolset: **software-delivery***\
@@ -832,6 +858,8 @@ Fetches aggregated code coverage summary metrics for a repository commit, includ
 
 ## Synthetics
 
+Tools for interacting with Datadog [Synthetic tests][47].
+
 ### `get_synthetics_tests`
 *Toolset: **synthetics***\
 *Permissions Required: `Synthetics Read`*\
@@ -860,6 +888,8 @@ Preview and create Datadog Synthetics HTTP API Tests.
 - Create a Synthetics test that checks if my domain `mycompany.com` stays up.
 
 ## Workflows
+
+Tools for [Workflow Automation][39], including listing, inspecting, executing, and configuring workflows for agent use.
 
 ### `list_datadog_workflows`
 *Toolset: **workflows***\
@@ -917,4 +947,12 @@ Adds an agent trigger to a workflow and publishes it, enabling the workflow to b
 [39]: /actions/workflows/
 [41]: /ddsql_editor/
 [42]: /ddsql_reference/ddsql_default/
-[44]: /dashboards/
+[46]: /dashboards/
+[47]: /synthetics/
+[48]: /continuous_integration/
+[49]: /error_tracking/
+[50]: /tracing/
+[51]: /feature_flags/
+[53]: /security/threats/security_signals/
+[54]: /security/misconfigurations/findings/
+[56]: https://www.datadoghq.com/product-preview/apm-mcp-toolset/
