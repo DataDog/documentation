@@ -22,7 +22,7 @@ Test Impact Analysis is only supported on [`dd-sdk-swift-testing`][1] in version
 
 ### Swift Testing
 
-Test Impact Analysis supports the Swift Testing framework only in serial mode. Parallelization must be fully disabled:
+Test Impact Analysis supports the Swift Testing framework only in serial mode. Parallelization must be disabled:
 
 - In Xcode, disable parallel execution in your test plan or scheme settings.
 - When running with the Swift Package Manager, pass the `--no-parallel` flag:
