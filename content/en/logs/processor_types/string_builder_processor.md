@@ -22,8 +22,8 @@ The template is defined by both raw text and blocks with the syntax `%{attribute
 * Results of a template cannot exceed 256 characters.
 
 ## Use cases
-Use cases for the String Builder Processor are pretty diverse. An example is displaying a message including the user and action, such as GSuite logs where we use a String Builder to construct an attribute containing 'Actor %{usr.email} performed an event %{evt.name}'.
-Another example is reconstructing an url, making it easier to navigate to an external application.
+- Display a message that includes the user and action, such as GSuite logs where the String Builder constructs an attribute containing `Actor %{usr.email} performed an event %{evt.name}`.
+- Reconstruct a URL, making it easier to navigate to an external application.
 
 
 ## Setup
@@ -92,7 +92,7 @@ Request GET https://app.datadoghq.com/users was answered with response 200
 
 **String Builder Processor**
 
-We create a String Builder Processor to generate a more readable summary message.
+Create a String Builder Processor to generate a more readable summary message.
 
 
 **After processing:**

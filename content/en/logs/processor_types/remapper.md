@@ -19,7 +19,7 @@ Constraints on the tag/attribute name are explained in the [attributes and tags 
 
 If the target of the remapper is an attribute, the remapper can also try to cast the value to a new type (`String`, `Integer` or `Double`). If the cast fails, the original value and type are preserved.
 
-**Note**: The decimal separator for `Double` need to be `.`.
+**Note**: The decimal separator for `Double` needs to be `.`.
 
 ### Reserved attributes
 
@@ -67,7 +67,7 @@ The Remapper is typically used to remap an attribute from your logs to a Standar
 
 **Remapper**
 
-We create a Remapper to remap the user.firstname attribute to a new user_name attribute, and choose to keep the source attribute.
+Create a Remapper to remap the `user.firstname` attribute to a new `user_name` attribute, and choose to keep the source attribute.
 
 **After processing:**
 
@@ -121,7 +121,7 @@ Use the [Datadog Log Pipeline API endpoint][2] with the following Remapper JSON 
 |------------------------|------------------|----------|--------------------------------------------------------------------------------|
 | `type`                 | String           | Yes      | Type of the processor.                                                         |
 | `name`                 | String           | No      | Name of the processor.                                                         |
-| `is_enabled`           | Boolean          | No      | If the processors is enabled or not. Default: `false`.                          |
+| `is_enabled`           | Boolean          | No      | If the processor is enabled or not. Default: `false`.                           |
 | `source_type`          | String           | No      | Defines if the sources are from log `attribute` or `tag`. Default: `attribute`. |
 | `sources`              | Array of strings | Yes      | Array of source attributes or tags                                             |
 | `target`               | String           | Yes      | Final attribute or tag name to remap the sources to.                           |

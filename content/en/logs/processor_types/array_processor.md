@@ -66,7 +66,7 @@ Extract a specific value from an object inside an array when it matches a condit
 {{% /tab %}}
 {{% tab "API" %}}
 
-Use the [Datadog Log Pipeline API endpoint][1] with the following array processor JSON payload:
+Use the [Datadog Log Pipeline API endpoint][100] with the following array processor JSON payload:
 
 ```json
 {
@@ -94,7 +94,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following array processo
 | `operation.filter`  | String    | Yes      | Expression to match an array element. The first matching element is selected. |
 | `operation.value_to_extract`  | String | Yes | Attribute to read in the selected element.                  |
 
-[1]: /api/v1/logs-pipelines/
+[100]: /api/v1/logs-pipelines/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -131,7 +131,7 @@ Compute the number of elements in an array.
 {{% /tab %}}
 {{% tab "API" %}}
 
-Use the [Datadog Log Pipeline API endpoint][1] with the following array processor JSON payload:
+Use the [Datadog Log Pipeline API endpoint][100] with the following array processor JSON payload:
 
 ```json
 {
@@ -155,7 +155,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following array processo
 | `operation.source`  | String    | Yes      | Path of the array to extract the length of.                   |
 | `operation.target`  | String    | Yes      | Target attribute.                                             |
 
-[1]: /api/v1/logs-pipelines/
+[100]: /api/v1/logs-pipelines/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -204,7 +204,7 @@ Add an attribute value to the end of a target array attribute in the log.
 {{% /tab %}}
 {{% tab "API" %}}
 
-Use the [Datadog Log Pipeline API endpoint][1] with the following array processor JSON payload:
+Use the [Datadog Log Pipeline API endpoint][100] with the following array processor JSON payload:
 
 ```json
 {
@@ -229,7 +229,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following array processo
 | `operation.target`           | String     | Yes      | Array attribute to append to.                                      |
 | `operation.preserve_source`  | Boolean    | No      | Whether to preserve the original source after remapping. Default: `false`.   |
 
-[1]: /api/v1/logs-pipelines/
+[100]: /api/v1/logs-pipelines/
 {{% /tab %}}
 {{< /tabs >}}
 

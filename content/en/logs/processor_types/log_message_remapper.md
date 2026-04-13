@@ -21,20 +21,10 @@ To define message attributes, first use the [string builder processor](#string-b
 
 **Note**: If multiple log message remapper processors are applied to a given log within the pipeline, only the first one (according to the pipeline order) is taken into account.
 
-## UI
-
-Define the log message remapper processor on the [**Pipelines** page][1]:
-
-{{< img src="logs/log_configuration/processor/message_processor.png" alt="Message processor" style="width:80%;">}}
-
-[1]: https://app.datadoghq.com/logs/pipelines
-
 ## Use cases
 
-The Message Remapper is used to change the official message of the log event. For example, for Okta logs, we use a message remapper to map 'displayMessage' as the official message of the log.
+The Message Remapper is used to change the official message of the log event. For example, for Okta logs, use a message remapper to map `displayMessage` as the official message of the log.
 
-
-<!-- ## Before and after state of logs -->
 
 ## API
 
@@ -53,7 +43,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following log message re
 |--------------|------------------|----------|-------------------------------------------------------|
 | `type`       | String           | Yes      | Type of the processor.                                |
 | `name`       | String           | No       | Name of the processor.                                |
-| `is_enabled` | Boolean          | No       | If the processors is enabled or not. Default: `false`. |
+| `is_enabled` | Boolean          | No       | If the processor is enabled or not. Default: `false`.  |
 | `sources`    | Array of strings | Yes      | Array of source attributes. Default: `msg`.            |
 
 [1]: /api/v1/logs-pipelines/

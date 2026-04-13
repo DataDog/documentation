@@ -24,9 +24,9 @@ Use the category processor to add a new attribute (without spaces or special cha
 
 ## Use cases
 
-The Category Processor allows you to categorize your log events based on their content. Common use cases are:
-- Categorizing success and failure logs, for example as we do with Auth0 logs.
-- Categorizing status of logs based on the log content, for example as we do for IIS logs
+Use the Category Processor to categorize your log events based on their content. Common use cases are:
+- Categorizing success and failure logs, for example, Auth0 logs.
+- Categorizing status of logs based on the log content, for example, IIS logs.
 
 ## Before and after state of logs
 
@@ -48,7 +48,7 @@ The Category Processor allows you to categorize your log events based on their c
 
 **Category Processor**
 
-We create a Category Processor to set a log status category based on the http.status_code. That will allow us later to use a status remapper to that attribute.
+Create a Category Processor to set a log status category based on `http.status_code`, then use a Log Status Remapper to apply it as the official log status.
 
 **After processing:**
 
@@ -71,7 +71,7 @@ The Category Processor added a new attribute called log_status with the status o
 
 ## API
 
-Use the [Datadog Log Pipeline API endpoint][3] with the following category processor JSON payload:
+Use the [Datadog Log Pipeline API endpoint][100] with the following category processor JSON payload:
 
 ```json
 {
@@ -90,17 +90,15 @@ Use the [Datadog Log Pipeline API endpoint][3] with the following category proce
 |--------------|-----------------|----------|------------------------------------------------------------------------------------------------------------|
 | `type`       | String          | Yes      | Type of the processor.                                                                                     |
 | `name`       | String          | No       | Name of the processor.                                                                                     |
-| `is_enabled` | Boolean         | No       | If the processors is enabled or not. Default: `false`                                                      |
+| `is_enabled` | Boolean         | No       | If the processor is enabled or not. Default: `false`.                                                      |
 | `categories` | Array of Object | Yes      | Array of filters to match or not a log and their corresponding `name` to assign a custom value to the log. |
 | `target`     | String          | Yes      | Name of the target attribute which value is defined by the matching category.                              |
 
-[2]: /api/v1/logs-pipelines/
+[100]: /api/v1/logs-pipelines/
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/search_syntax/
-[2]: https://app.datadoghq.com/logs/pipelines
-[3]: /api/v1/logs-pipelines/
+[1]: https://app.datadoghq.com/logs/pipelines
 [4]: /logs/processor_types/log_status_remapper

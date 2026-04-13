@@ -42,19 +42,17 @@ To see how a custom date and time format can be parsed in Datadog, see [Parsing 
 ## Use cases
 
 The Log Date Remapper is typically used to:
-- Select another attribute as the date to be used for the log event, if it doesn't match our default date attributes. For example, logs coming from Akamai Stream use 'reqTimeMillis' as the timestamp. We use a Log Date Remapper to set that attribute as the log timestamp.
+- Select another attribute as the date to be used for the log event, if it doesn't match our default date attributes. For example, logs coming from Akamai Stream use `reqTimeMillis` as the timestamp. Use a Log Date Remapper to set that attribute as the log timestamp.
 - Select an attribute after a grok parser. For example, logs coming from Ruby contain the log timestamp in the message attribute which is only accessible after parsing it.
 
 
 ## Before and after state of logs
 
-The images below illustrate the difference between the timestamp originally present in the log message and the timestamp Datadog uses for the log event.
-
-In the "Before" image, you can see that Datadog references its own ingestion time as the log timestamp, which may not match the actual event time found in the log message.
+Before logs are parsed, Datadog references its own ingestion time as the log timestamp, which may not match the actual event time found in the log message.
 
 {{< img src="/logs/processing/processors/Date-Remapper-Before.png" alt="Logs before applying Date Remapper" style="width:100%;" >}}
 
-After applying the Log Date Remapper, as shown in the "After" image, Datadog uses the custom timestamp from the specified attribute, aligning the log's timestamp in Datadog with the true event time recorded in the log message. This ensures historical accuracy when analyzing or searching your logs.
+After applying the Log Date Remapper, Datadog uses the custom timestamp from the specified attribute, aligning the log's timestamp in Datadog with the true event time recorded in the log message. This ensures historical accuracy when analyzing or searching your logs.
 
 {{< img src="/logs/processing/processors/Date-Remapper-After.png" alt="Logs after applying Date Remapper" style="width:100%;" >}}
 
@@ -74,8 +72,8 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following log date remap
 | Parameter    | Type             | Required | Description                                           |
 |--------------|------------------|----------|-------------------------------------------------------|
 | `type`       | String           | Yes      | Type of the processor.                                |
-| `name`       | String           | no       | Name of the processor.                                |
-| `is_enabled` | Boolean          | no       | If the processors is enabled or not. Default: `false`. |
+| `name`       | String           | No       | Name of the processor.                                |
+| `is_enabled` | Boolean          | No       | If the processor is enabled or not. Default: `false`.  |
 | `sources`    | Array of strings | Yes      | Array of source attributes.                           |
 
 [1]: /api/v1/logs-pipelines/

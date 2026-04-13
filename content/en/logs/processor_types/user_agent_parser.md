@@ -16,8 +16,8 @@ The user-agent parser processor takes a `useragent` attribute and extracts OS, b
 
 **Note**: If your logs contain encoded user-agents (for example, IIS logs), configure this Processor to **decode the URL** before parsing it.
 
-## Use Cases
-The User Agent Parser allows to extract useful information such as, for example, browser, device, OS from apache logs.
+## Use cases
+The User Agent Parser allows you to extract useful information, for example, browser, device, OS from apache logs.
 
 
 ## Before and after state of logs
@@ -43,7 +43,7 @@ The User Agent Parser allows to extract useful information such as, for example,
 
 **User-Agent Parser**
 
-We create a User-Agent Parser processor and configure it to parse the user_agent attribute.
+Create a User-Agent Parser processor and configure it to parse the `user_agent` attribute.
 
 **After processing:**
 
@@ -106,7 +106,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following user-agent par
 |--------------|------------------|----------|-----------------------------------------------------------------------------------------------------------------------------|
 | `type`       | String           | Yes      | Type of the processor.                                                                                                      |
 | `name`       | String           | No       | Name of the processor.                                                                                                      |
-| `is_enabled` | Boolean          | No       | If the processors is enabled or not. Default: `false`.                                                                      |
+| `is_enabled` | Boolean          | No       | If the processor is enabled or not. Default: `false`.                                                                       |
 | `sources`    | Array of strings | No       | Array of source attributes. Default: `http.useragent`.                                                                      |
 | `target`     | String           | Yes      | Name of the parent attribute that contains all the extracted details from the `sources`. Default: `http.useragent_details`. |
 | `is_encoded` | Boolean          | No       | Define if the source attribute is url encoded or not. Default: `false`.                                                     |
