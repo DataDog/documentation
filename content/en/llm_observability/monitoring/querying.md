@@ -70,28 +70,15 @@ The LLM Observability Trace Explorer shares the same query syntax as Datadog's [
 
 ### Evaluation queries
 
-Use the `@evaluations` attribute to find spans or traces by [evaluation][3] result.
+Use the `@evaluation` attribute to find spans or traces by [evaluation][3] result.
 
-#### Custom evaluations
-You can search spans by the results of [custom evaluations][4]. For example, if you have a custom evaluation called `user_mood` with categorical values `happy`, `sad`, and `tired`, you could use the query: `@evaluations.custom.user_mood:happy`.
+#### Evaluations
+You can search spans by the results of [evaluations][4]. For example, if you have an evaluation called `user_mood` with categorical values `happy`, `sad`, and `tired`, you could use the query: `@evaluation.user_mood.value:happy`.
 
 | Query | Match |
 | ----- | ----- |
-| `@evaluations.custom.user_satisfaction:>5` | Spans or traces that scored higher than 5 according to a custom evaluation called `user_satisfaction` |
-| `@evaluations.custom.user_mood:happy` | Spans or traces that were evaluated as `happy` according to a custom evaluation called `user_mood` that has the categorical values `happy`, `sad`, and `tired` |
-
-#### Out-of-the-box evaluations
-| Query | Match |
-| ----- | ----- |
-| `@evaluations.failure_to_answer:"failed to answer"` | Spans or traces where the LLM failed to deliver an appropriate response |
-| `@evaluations.hallucination:"hallucination found"` | Spans or traces where a hallucination is detected |
-| `@evaluations.input_sentiment:negative` | Spans or traces with negative input sentiment |
-| `@evaluations.input_toxicity:toxic` | Spans or traces where harmful or inappropriate content is detected in the input |
-| `@evaluations.language_mismatch:mismatched` | Spans or traces where the user's prompt and the LLM's response are in different languages |
-| `@evaluations.output_sentiment:negative` | Spans or traces with negative output sentiment |
-| `@evaluations.output_toxicity:toxic` | Spans or traces where harmful or inappropriate content is detected in the output |
-| `@evaluations.prompt_injection:found` | Spans or traces where prompt injection is detected |
-| `@evaluations.topic_relevancy:irrelevant` | Spans or traces where the prompt input diverges from the LLM application's intended topic |
+| `@evaluation.user_satisfaction.value:>5` | Spans or traces that scored higher than 5 according to an evaluation called `user_satisfaction` |
+| `@evaluation.user_mood.value:happy` | Spans or traces that were evaluated as `happy` according to an evaluation called `user_mood` that has the categorical values `happy`, `sad`, and `tired` |
 
 ### Metadata queries
 
@@ -118,8 +105,8 @@ To search traces based on attributes of its nested spans, use the `@child` attri
 
 | Query | Match |
 | ----- | ----- |
-| `@child.@evaluations.hallucination:"hallucination found"` | Traces with a hallucinating sub-span |
-| `@child.@meta.span.name:retrieval AND @meta.span. kind:workflow`| Workflow traces that contain a retrieval span |
+| `@child.@evaluation.hallucination.value:"hallucination found"` | Traces with a hallucinating sub-span |
+| `@child.@meta.span.kind:retrieval AND @meta.span.kind:workflow`| Workflow traces that contain a retrieval span |
 
 Use the `@trace` attribute to access trace-level information, such as estimated total cost, number of LLM calls, or number of tools.
 

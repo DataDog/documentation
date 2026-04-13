@@ -160,7 +160,7 @@ A warning appears when deobfuscation fails for a stack trace. If the stack trace
 [9]: /real_user_monitoring/guide/sampling-browser-plans/
 [10]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/?tab=npm#global-context
 [11]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/?tab=npm#user-session
-[12]: /real_user_monitoring/guide/setup-feature-flag-data-collection/?tab=browser
+[12]: /real_user_monitoring/feature_flag_tracking/setup/?tab=browser
 [13]: /real_user_monitoring/application_monitoring/browser/setup/#initialization-parameters
 [14]: https://app.datadoghq.com/source-code/setup/rum
 [15]: /real_user_monitoring/guide/debug-symbols

@@ -1,4 +1,5 @@
 ---
+id: trace_metric
 title: trace metric
 core_product:
   - apm

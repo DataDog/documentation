@@ -90,6 +90,8 @@ logrus.WithContext(ctx).Info("Hello World!")
 
 {{% serverless-init-env-vars-sidecar language="go" function="true" defaultSource="cloudrun" %}}
 
+{{% svl-tracing-env %}}
+
 ## Troubleshooting
 
 {{% serverless-init-troubleshooting productNames="Cloud Run services" %}}

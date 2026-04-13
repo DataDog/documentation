@@ -10,13 +10,13 @@ title: Guías de logs
 ---
 
 {{< whatsnext desc="Logging Without LimitsTM" >}}
-    {{< nextlink href="log/guide/access-your-loguear-data-programmatically" >}}Acceso programático a los datos de logs mediante la API de búsqueda de logs {{< /nextlink >}}
-    {{< nextlink href="log/guide/getting-started-lwl" >}}Guía Logging Without LimitsTM{{< /nextlink >}}
+    {{< nextlink href="logs/guide/access-your-log-data-programmatically" >}}Acceso programático a los datos de logs mediante la API de búsqueda de logs {{< /nextlink >}}
+    {{< nextlink href="logs/guide/getting-started-lwl" >}}Guía Logging Without LimitsTM{{< /nextlink >}}
     {{< nextlink href="tracing/other_telemetry/connect_logs_and_traces" >}}Correlacionar logs con trazas (traces){{< /nextlink >}}
-    {{< nextlink href="log/guide/correlate-log-with-metrics" >}}Correlación de logs con métricas{{< /nextlink >}}
-    {{< nextlink href="log/guide/best-practices-for-loguear-management" >}}Prácticas recomendadas para la gestión de logs{{< /nextlink >}}
-    {{< nextlink href="log/guide/manage_logs_and_metrics_with_terraform" >}}Gestionar logs y métricas con Terraform{{< /nextlink >}}
-    {{< nextlink href="log/guide/flex_compute" >}}Monitor de uso de Flex Compute{{< /nextlink >}}
+    {{< nextlink href="logs/guide/correlate-logs-with-metrics" >}}Correlación de logs con métricas{{< /nextlink >}}
+    {{< nextlink href="logs/guide/best-practices-for-log-management" >}}Prácticas recomendadas para la gestión de logs{{< /nextlink >}}
+    {{< nextlink href="logs/guide/manage_logs_and_metrics_with_terraform" >}}Gestionar logs y métricas con Terraform{{< /nextlink >}}
+    {{< nextlink href="logs/guide/flex_compute" >}}Monitor de uso de Flex Compute{{< /nextlink >}}
 {{< /whatsnext >}}
 
 <br>
