@@ -117,7 +117,7 @@ At each rollout stage, Datadog samples a percentage of eligible users to include
 Select the recipients from the **Recipients** dropdown that receive updates on your experiment.
 
 ##### Statistical analysis plan
-Datadog uses **Sequential** statistical analysis by default. This **Confidence interval method** provides statistically valid confidence intervals throughout the experiment, so you can make decisions at any time.
+Choose the **Confidence interval method** for your statistical analysis. Datadog uses the **Sequential** method by default. This  provides statistically valid confidence intervals throughout the experiment, so you can make decisions at any time.
 
 To use a different statistical method:
 1. Expand the **Statistical analysis plan** section.
