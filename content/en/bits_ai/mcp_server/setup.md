@@ -403,6 +403,7 @@ The Datadog MCP Server supports _toolsets_, which allow you to use only the tool
 - `alerting`: Tools for validating monitors, searching monitor groups, and retrieving monitor templates
 - `apm`: ([Preview][45]) Tools for in-depth [APM][34] trace analysis, span search, Watchdog insights, and performance investigation
 - `cases`: Tools for [Case Management][42], including creating, searching, and updating cases; managing projects; and linking Jira issues
+- `dashboards`: Tools for retrieving, creating, updating, and deleting [dashboards][46], plus widget schema reference and validation
 - `dbm`: Tools for interacting with [Database Monitoring][33]
 - `ddsql`: (Preview) Tools for querying Datadog data using [DDSQL][44], a SQL dialect with support for infrastructure resources, logs, metrics, RUM, spans, and other Datadog data sources
 - `error-tracking`: Tools for interacting with Datadog [Error Tracking][32]
@@ -604,3 +605,4 @@ Local authentication is recommended for Cline and when remote authentication is 
 [43]: /actions/workflows/
 [44]: /ddsql_editor/
 [45]: https://www.datadoghq.com/product-preview/apm-mcp-toolset/
+[46]: /dashboards/
