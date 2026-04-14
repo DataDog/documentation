@@ -79,17 +79,15 @@ The following frameworks and libraries have been tested with Datadog LLM Observa
 {{% tab "Python" %}}
 | Framework | Instrumentation | Supported Versions |
 |-----------|----------------|--------------------|
-| [OpenAI][20] | [`opentelemetry-instrumentation-openai-v2`][21] | >= 1.0.0 |
-| [Anthropic][22] | [`opentelemetry-instrumentation-anthropic`][23] | >= 0.28.0 |
-| [Google GenAI][24] | [`opentelemetry-instrumentation-google-genai`][25] | >= 0.5.0 |
+| [OpenAI][20] | [`opentelemetry-instrumentation-openai-v2`][21] | >= 1.26.0 |
+| [Anthropic][22] | [`opentelemetry-instrumentation-anthropic`][23] | >= 0.51.0 |
+| [Google GenAI][24] | [`opentelemetry-instrumentation-google-genai`][25] | >= 1.32.0 |
 | [Google Vertex AI][26] | [`opentelemetry-instrumentation-vertexai`][27] | >= 1.64 |
 | [AWS Bedrock][28] | [`opentelemetry-instrumentation-botocore`][29] | >= 1.31.57 |
-| [LangChain][30] | [`opentelemetry-instrumentation-langchain`][31] | >= 0.0.192 |
-| [LlamaIndex][32] | [`opentelemetry-instrumentation-llamaindex`][33] | >= 0.10.0 |
-| [Semantic Kernel][34] | Native | >= 1.0.0 |
-| [AutoGen / AG2][35] | Native | >= 0.4.0 |
+| [LangChain][30] | [`opentelemetry-instrumentation-langchain`][31] | >= 0.3.21 |
+| [LlamaIndex][32] | [`opentelemetry-instrumentation-llamaindex`][33] | >= 0.14.12 |
 | [Strands Agents][5] | Native | >= 1.11.0 |
-| [OpenLLMetry][36] | [`traceloop-sdk`][37] | >= 0.47.0 |
+| [OpenLLMetry][34] | [`traceloop-sdk`][35] | >= 0.47.0 |
 
 [20]: https://platform.openai.com/docs/api-reference/introduction
 [21]: https://pypi.org/project/opentelemetry-instrumentation-openai-v2/
@@ -105,35 +103,29 @@ The following frameworks and libraries have been tested with Datadog LLM Observa
 [31]: https://pypi.org/project/opentelemetry-instrumentation-langchain/
 [32]: https://docs.llamaindex.ai/
 [33]: https://pypi.org/project/opentelemetry-instrumentation-llamaindex/
-[34]: https://learn.microsoft.com/en-us/semantic-kernel/
-[35]: https://microsoft.github.io/autogen/
-[36]: https://www.traceloop.com/openllmetry
-[37]: https://pypi.org/project/traceloop-sdk/
+[34]: https://www.traceloop.com/openllmetry
+[35]: https://pypi.org/project/traceloop-sdk/
 {{% /tab %}}
 {{% tab "Node.js" %}}
 | Framework | Instrumentation | Supported Versions |
 |-----------|----------------|--------------------|
-| [OpenAI][40] | [`@opentelemetry/instrumentation-openai`][41] | >= 4.0.0 |
-| [Mastra][42] | Native | >= 0.1.0 |
+| [OpenAI][40] | [`@opentelemetry/instrumentation-openai`][41] | >= 4.19.0 |
 
 [40]: https://platform.openai.com/docs/api-reference/introduction
 [41]: https://www.npmjs.com/package/@opentelemetry/instrumentation-openai
-[42]: https://mastra.ai/
 {{% /tab %}}
 {{% tab "Java" %}}
 | Framework | Instrumentation | Supported Versions |
 |-----------|----------------|--------------------|
 | [Spring AI][50] | Native (via [Micrometer][51]) | >= 1.0.0 |
-| [LangChain4j][52] | Native (OpenTelemetry module) | >= 0.36.0 |
-| [Quarkus LangChain4j][53] | Native | >= 3.15 |
-| [AWS Bedrock][54] | [OTel Java Agent][55] | AWS SDK >= 2.20 |
+| [LangChain4j][52] | Native (OpenTelemetry module) | >= 0.31.0 |
+| [AWS Bedrock][53] | [OTel Java Agent][54] | AWS SDK >= 2.2 |
 
 [50]: https://docs.spring.io/spring-ai/reference/
 [51]: https://micrometer.io/
 [52]: https://docs.langchain4j.dev/
-[53]: https://docs.quarkiverse.io/quarkus-langchain4j/dev/index.html
-[54]: https://docs.aws.amazon.com/bedrock/latest/userguide/
-[55]: https://opentelemetry.io/docs/zero-code/java/agent/
+[53]: https://docs.aws.amazon.com/bedrock/latest/userguide/
+[54]: https://opentelemetry.io/docs/zero-code/java/agent/
 {{% /tab %}}
 {{< /tabs >}}
 
