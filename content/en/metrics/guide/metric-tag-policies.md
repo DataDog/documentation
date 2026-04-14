@@ -18,9 +18,9 @@ private: true
 
 ## Overview
 
-Tag rules are centralized, sequentially evaluated directives that let you proactively configure metric tagging behavior before or at ingestion. They help you control which tags are retained or excluded, enabling you to mitigate high cardinality and enforce consistent tag management across your organization.
+Tag indexing rules are centralized, sequentially evaluated directives that define how metric tags are handled at ingestion. They let you proactively control which tags are retained or excluded, helping reduce high cardinality by removing unnecessary tags and maintaining consistent tagging across your organization.
 
-Tag rules apply at the account level and operate on groups of metrics defined by metric names or prefixes. These rules determine which tags are kept, dropped, or automatically stripped when they contribute to excessive cardinality. Because they apply to both existing metrics and any future metrics that match the defined patterns, tag rules reduce the need for reactive cleanup or code-level changes while helping manage costs effectively.
+Tag rules operate on groups of metrics identified by name or prefix. They can apply to both existing and future metrics that match the defined patterns, minimizing the need for reactive cleanup or code changes while supporting more predictable cost management.
 
 ## Create a tag rule
 
@@ -45,19 +45,22 @@ Metric names or prefixes
 : Apply the rule to specific metric names or namespaces (for example, `http.*`, `db.query.*`)
 
 Prefix exceptions
-: Exclude specific prefixes from the rule scope (for example, apply to `http.*` except `http.debug.*`)
+: Exclude specific prefixes from the rule scope (for example, apply to `http.*` except `http.client.*`)
 
-If multiple rules apply to the same metrics, Datadog evaluates them in order. Optionally, use **Replace** behavior to override previously evaluated rules for the selected metrics.
+If multiple rules apply to the same metrics, Datadog evaluates them in order. Optionally, use **Override** behavior to override previously evaluated rules for the selected metrics.
 
 ### Step 3: Configure tag behavior
 
 Define how the rule handles tags for metrics in scope:
 
-Merge or replace existing configurations
-: * Merge—applies this rule on top of existing tag configurations. Metrics with no prior configuration are unaffected.
-  * Replace—ignores existing configurations and enforces this rule exclusively.
+Merge or override existing configurations
+: * Merge (default)—applies this rule on top of existing tag configurations. Metrics with no prior configuration are unaffected.
+  * Override—ignores all other rules that apply to the same prefixes and enforces this rule exclusively. This behavior is enabled by selecting the **Override all other rules that apply to these prefixes** option.
 
-  **Note**: Use **Replace** behavior on a narrower rule to prevent a broader rule's excluded tags from stacking. For example, if Rule 1 excludes `host` from `dd.*` (Merge) and Rule 2 excludes `app_name` from `dd.payments.*`, using **Merge** behavior on Rule 2 drops both `host` and `app_name` tags from `dd.payments.*` metrics. Using **Replace** behavior on Rule 2 drops only `app_name` (Rule 1's effect is overridden for that prefix).
+  **Note**: Use **Override** behavior on a narrower rule to prevent a broader rule's excluded tags from stacking. For example, if Rule 1 excludes `host` from `dd.*` (Merge) and Rule 2 excludes `app_name` from `dd.payments.*`, using **Merge** behavior on Rule 2 drops both `host` and `app_name` tags from `dd.payments.*` metrics. Using **Override** behavior on Rule 2 drops only `app_name` (Rule 1's effect is overridden for that prefix).
+
+Apply to new metrics only
+: Applies this rule only to metrics submitted after the rule is created. Existing metrics that match the rule are not affected.
 
 Select tags to include or exclude
 : * **Include tags** (use an allowlist of tags that remain queryable)
@@ -70,8 +73,6 @@ Select tags to include or exclude
 The preview shows:
 
 * A list of affected metrics (up to 100 in the UI)
-
-Download a full list of affected metrics as a CSV and preview how the rule applies to metrics not yet submitted.
 
 ### Limitations
 
@@ -87,7 +88,7 @@ Edit rule configuration
 : Change the rule's scope, tag selection, or other settings.
 
 Change merge or replace behavior
-: Switch between **Merge** and **Replace** behaviors to control how this rule interacts with existing configurations.
+: Switch between **Merge** and **Override** behaviors to control how this rule interacts with existing configurations.
 
 Reorder rules
 : Change the execution order to adjust how rules interact when multiple rules apply to the same metrics.
@@ -95,8 +96,10 @@ Reorder rules
 Delete a rule
 : Remove rules that are no longer needed. When you delete a rule, Datadog recomputes the tag configuration for affected metrics based on the remaining rules.
 
-Override rules for a specific metric                                                                                                                                 
-: From the metric's details side panel, set the metric to retain all tags. This bypasses all rules for that metric without modifying them. To reapply rules, restore the metric's default configuration from the same panel.
+Override rules for a specific metric
+: To exempt a metric from tag rules, open the metric's details side panel in Metrics Summary, select **Manage Tags**, and set the metric to retain all tags. This bypasses all tag rules for that metric without modifying the rules themselves.
+
+  To reapply rules, restore the metric's default configuration from the same panel.
          
 After you make changes, Datadog automatically applies them to all matching metrics.
 
@@ -105,17 +108,17 @@ After you make changes, Datadog automatically applies them to all matching metri
 When multiple rules apply to the same metrics, Datadog evaluates them sequentially. Rule order matters because:
 
 * Later rules modify the results of earlier rules
-* **Replace** behavior overwrites previous configurations for matching metrics
+* **Override** behavior overwrites previous configurations for matching metrics
 * **Merge** behavior builds on existing configurations
-* When multiple rules use **Replace** behavior, the last applied rule determines whether the final configuration is in include or exclude mode
+* When multiple rules use **Override** behavior, the last applied rule determines whether the final configuration is in include or exclude mode
 
 Reorder rules on the [Rules page][1] to change which rule takes precedence. See the examples below to understand how different orders produce different results.
 
 ## Precedence examples
 
-### Example 1: **Merge** and **Replace** behavior
+### Example 1: **Merge** and **Override** behavior
 
-Tag rules can either replace an existing configuration or merge with it. This determines whether a rule resets the tag configuration or builds on top of what already exists.
+Tag rules can either override an existing configuration or merge with it. This determines whether a rule resets the tag configuration or builds on top of what already exists.
 
 Starting tags:  
 `host`, `env`, `service`, `team`
@@ -146,7 +149,7 @@ Starting tags:
 
 ### Example 3: Exception to a broad rule
 
-Use a broad rule with **Replace** behavior to exclude a tag globally, then use a targeted rule with **Merge** behavior to restore the tag for specific metrics.
+Use a broad rule with **Override** behavior to exclude a tag globally, then use a targeted rule with **Merge** behavior to restore the tag for specific metrics.
 
 Starting tags:
 `node`, `env`, `pod`
@@ -157,14 +160,14 @@ Starting tags:
 
 ### Example 4: Multiple exceptions to a broad rule
 
-Layer multiple rules with **Merge** behavior on top of a broad rule with **Replace** behavior to restore different tags for different metric prefixes. Metrics matching more specific prefixes accumulate more restorations.
+Layer multiple rules with **Merge** behavior on top of a broad rule with **Override** behavior to restore different tags for different metric prefixes. Metrics matching more specific prefixes accumulate more restorations.
 
 Starting tags:
 `team`, `pod`, `env`
 
 {{< img src="metrics/guide/metric_tag_policies/multiple_exceptions.png" alt="" style="width:100%;">}}
 
-**Key insight**: Multiple inclusion rules with **Merge** behavior, applied after an exclusion rule with **Replace** behavior, are additive (a metric matching two exception prefixes gets both sets of tags restored).
+**Key insight**: Multiple inclusion rules with **Merge** behavior, applied after an exclusion rule with **Override** behavior, are additive (a metric matching two exception prefixes gets both sets of tags restored).
 
 ## Metrics without Limits™ compatibility
 
