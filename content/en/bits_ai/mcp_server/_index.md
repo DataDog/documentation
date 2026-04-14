@@ -826,7 +826,7 @@ Guides you through uploading source maps for RUM error mapping.
 Lists and searches [Reference Tables][45] in the organization, with optional filtering by name and sorting.
 
 - List all reference tables in my organization.
-- Find reference tables with "customer" in the name.
+- Find reference tables with `customer` in the name.
 - Show me the reference tables sorted by last update time.
 
 ### `get_reference_table_rows`
@@ -840,7 +840,7 @@ Retrieves specific rows from a reference table by their primary key values. Use 
 *Toolset: **reference-tables***\
 Appends new rows to an existing reference table. This operation only adds rows and does not modify or delete existing data. Each row must include all required fields from the table's schema, including the primary key field.
 
-- Add a new row for user `user003` with name "Carol" and age 28 to the users table.
+- Add a new row for user `user003` with name `Carol` and age `28` to the users table.
 - Append these five new account entries to the accounts reference table.
 
 ### `create_reference_table`
