@@ -11,15 +11,9 @@ products:
 
 ## Overview
 
-Use Observability Pipelines' Splunk HTTP Event Collector (HEC) source to receive logs from your Splunk HEC. You can choose to store the HEC token as event metadata and:
+Use Observability Pipelines' Splunk HTTP Event Collector (HEC) source to receive logs from your Splunk HEC.
 
-- Send logs from Observability Pipelines to Splunk HEC with the original token sent with the event.
-- Use the Enrichment Table processor to append a log field from your lookup file based on the token in the metadata, and then process and route your logs based on the value of that field.
-
-**Notes**:
-- The Worker forwards the stored HEC token that is received onto the next component.
-- Stored Splunk HEC tokens are not shown in [Live Capture][9].
-- Use the Splunk HEC source if you want to [send logs from the Splunk Distribution of the OpenTelemetry Collector to Observability Pipelines](#send-logs-from-the-splunk-distribution-of-the-opentelemetry-collector-to-observability-pipelines).
+**Note**: Use the Splunk HEC source if you want to [send logs from the Splunk Distribution of the OpenTelemetry Collector to Observability Pipelines](#send-logs-from-the-splunk-distribution-of-the-opentelemetry-collector-to-observability-pipelines).
 
 ## Prerequisites
 
@@ -31,10 +25,7 @@ Set up this source when you [set up a pipeline][1]. You can set up a pipeline in
 
 <div class="alert alert-danger">Only enter the identifiers for the Splunk HEC address and, if applicable, the TLS key pass. Do <b>not</b> enter the actual values.</div>
 
-1. Enter the identifier for your Splunk HEC address. If you leave it blank, the [default](#set-secrets) is used.
-1. Only enable **Store HEC token** if you want to do one of the following:
-    - Use a Splunk HEC destination with the **From Source** token strategy.
-    - Use an Enrichment Table processor to map Splunk HEC tokens from a local file.
+- Enter the identifier for your Splunk HEC address. If you leave it blank, the [default](#set-secrets) is used.
 
 ### Optional TLS settings
 
@@ -95,4 +86,3 @@ To send logs from the Splunk Distribution of the OpenTelemetry Collector:
 [6]: https://app.datadoghq.com/observability-pipelines
 [7]: /api/latest/observability-pipelines/
 [8]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline
-[9]: /observability_pipelines/configuration/live_capture/
