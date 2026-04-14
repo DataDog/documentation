@@ -236,7 +236,7 @@ When viewing a dataset's records, you can customize the table to quickly scan an
 
 #### Column picker
 
-Use the column picker to toggle columns on or off and drag to reorder them. By default, raw JSON blob columns are hidden to keep the table scannable. You can toggle them back on at any time.
+Use the column picker to toggle columns on or off and drag to reorder them.
 
 #### Custom columns
 
