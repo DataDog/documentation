@@ -54,19 +54,19 @@ Define the metrics that measure the outcome of your experiment.
    1. Select a primary metric to measure the main outcome of your experiment.
    1. (Optional) Scope the list to **Certified** or **Non-certified** metrics.
    1. (Optional) Click **Create Metric** to define a new metric.
-1. Optionally, add secondary metrics to monitor unintended effects of the experiment on other areas like performance, engagement, or revenue.
+1. (Optional) Add secondary metrics to monitor unintended effects of the experiment on other areas like performance, engagement, or revenue.
 
 {{< img src="/product_analytics/experiment/exp_plan_launch_decision_metric.png" alt="The experiment configuration page showing the Decision metrics section with a Calculate metrics by dropdown set to User (@usr.id), a primary metric set to Add to Cart Conversion, and a Secondary metrics section." style="width:80%;" >}}
 
-#### Sample size calculation (optional)
+#### Run a sample size calculation (optional)
 Estimate the sample size needed to detect meaningful differences between variants.
 
-1. Under **Run a sample size calculation (optional)**, click **sample size calculator** to open the side panel.
+1. Click the **sample size calculator** link to open the side panel.
 1. Expand **Calculation details**. Your primary and secondary metrics appear under **Metrics**.
 1. Use the **Entry point** dropdown to select the event that assigns users to the experiment. Datadog uses this to estimate expected traffic.
-1. Optionally, add a **Filter** to narrow the entry point's audience.
+1. Add a **Filter** to narrow the entry point's audience.
 1. Set the **Number of variants** and **Traffic exposure** percentage. The defaults are two variants and 100% exposure.
-1. (Optional) Under **Additional inputs**, configure the statistical **Power** (default 80%) and **Target experiment duration** in weeks.
+1. Under **Additional inputs**, configure the statistical **Power** (default 80%) and **Target experiment duration** in weeks.
 1. Click **Run Calculation** to see an estimate of the **[Minimum detectable effect (MDE)][3] over time** for your metrics.
 1. Close the **Sample Size Calculator** side panel.
 
@@ -91,7 +91,7 @@ To configure how users are assigned to variants:
    1. Click **Add Condition** to set additional conditions.
 1. Under **Variants**, set how traffic is split between your **Control** and treatment groups. Use the **Randomize users and split traffic** dropdown to choose an equal or custom split.
 1. Under **Traffic exposure**, set the percentage of targeted traffic to include in the experiment.
-1. Optionally, [schedule a staged rollout](#schedule-a-staged-rollout-optional).
+1. (Optional) [Schedule a staged rollout](#schedule-a-staged-rollout-optional).
 
 {{< img src="/product_analytics/experiment/exp_plan_launch_ui_randomization.png" alt="The Randomization section showing the environment set to staging, a targeting rule with an IF condition, two variants with an equal 50/50 split between Control (False) and variant B (True), and traffic exposure set to 100% of targeted traffic with an Add Rollout Steps option." style="width:80%;" >}}
 
