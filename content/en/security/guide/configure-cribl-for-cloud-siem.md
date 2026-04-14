@@ -1,6 +1,5 @@
 ---
 title: Troubleshooting integrations in Cloud SIEM
-kind: guide
 description: Investigate why out-of-the-box Cloud SIEM content are not working when sending data with Cribl, and explore options on how to fix your configuration so that dashboards and detection rules work as expected.
 further_reading:
 - link: "/security/cloud_siem/"
