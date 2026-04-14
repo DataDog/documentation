@@ -236,6 +236,33 @@ Searches monitor groups by name or criteria.
 - Show me all monitor groups in an alerting state.
 - Find monitor groups related to the checkout service.
 
+### `search_datadog_slos`
+*Toolset: **alerting***\
+*Permissions Required: `SLOs Read`*\
+Searches Datadog SLOs by name, tags, or type. Supports query syntax for filtering by service, team, or other attributes.
+
+- Search for SLOs related to `service:checkout`.
+- List all SLOs tagged with `team:backend`.
+- List SLOs for the payments service.
+
+### `create_datadog_monitor`
+*Toolset: **alerting***\
+*Permissions Required: `Monitors Write`*\
+Creates a Datadog monitor in draft mode. Monitors created with this tool do not send notifications and are set to priority 5 (low). Use `validate_datadog_monitor` to check the definition before creating and `get_datadog_monitor_templates` for query syntax examples. After creation, publish the monitor in the Datadog UI.
+
+- Create a metric alert monitor for high CPU usage on the web service.
+- Set up a log alert monitor for error spikes in the payments service.
+- Create a monitor to track p95 latency for the checkout endpoint.
+
+### `get_monitor_coverage`
+*Toolset: **alerting***\
+*Permissions Required: `Monitors Read`*\
+Finds monitoring gaps and coverage for services or hosts. Returns which signals (such as error rate, latency, and request rate) are covered by existing monitors and which are missing. Use with `create_datadog_monitor` to fill gaps.
+
+- Get monitoring coverage for `service:checkout`.
+- What monitoring gaps exist for `host:web-01`?
+- Find services that are missing error rate monitors.
+
 ## APM
 
 ([Preview][56]) Tools for in-depth [APM][50] trace analysis, span search, Watchdog insights, and performance investigation.
