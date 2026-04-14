@@ -604,15 +604,37 @@ sudo yum install --only-upgrade observability-pipelines-worker
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-1. Pin to a specific version and upgrade in your `values.yaml` file.
-2. Use the chart's default image tag (upgrade by chart version).
-    - If you explicitly set `image.tag` in your `values.yaml` file, your deployment continues using that image tag until you update it.
-    - If you do not set `image.tag`, the deployment uses the chart's default image tag. To get the latest chart defaults, update the repo and upgrade the release along with any overrides you might have been using prior:
+To upgrade the Worker, if you are:
+
+- Setting `image.tag`  in your `values.yaml` file with the Worker version:
+    - Update the `image.tag` in your `values.yaml` file. Replace `<WORKER_VERSION>` with the Worker version you want to use, such as `2.15.0`.
+        ```yaml
+        image:
+            # image.name -- Specify the image name to use (relative to `image.repository`).
+            name: observability-pipelines-worker
+            # image.tag -- Specify the image tag to use.
+            tag: <WORKER_VERSION>
         ```
+    - **Notes**:
+        - Your deployment continues using that image tag until you set `image.tag` in your `values.yaml` file to another version.
+- Using the chart's default image tag:
+    - Run these commands to update the repo and upgrade the release, along with any overrides you were using, to get the latest chart's default image. Replace <YOUR_VALUE_FILE> with the name of your `values.yaml` file.
+        ```yaml
         helm repo update
-        helm upgrade --install opw datadog/observability-pipelines-worker -f <your-values-file>.yaml
+        helm upgrade --install opw datadog/observability-pipelines-worker -f <YOUR_VALUES_FILE>.yaml
         ```
-**Note**: To simplify upgrades, keep all of your custom settings in your own values file and override only the values you need. This makes it easier to re-run `helm upgrade` without having to reapply multiple manual overrides.
+    - **Note**: To simplify upgrades, keep all of your custom settings in your own values file and override only the values you need. This makes it easier to re-run `helm upgrade` without having to reapply multiple manual overrides.
+
+After the `values.yaml` file has been updated to the new Worker version, new Worker pods are created with the updated image version and old pods are terminated only after the replacements are `Ready`. The update is a rolling update by default, so one pod is upgraded at a time. See the `updateStrategy` options in the `value.yaml` file if you want to change the default values.
+
+```yaml
+updateStrategy: {}
+#   type: RollingUpdate
+#   rollingUpdate:
+#     maxUnavailable: 1
+
+# terminationGracePeriodSeconds -- Override terminationGracePeriodSeconds.
+```
 
 {{% /tab %}}
 {{< /tabs >}}
