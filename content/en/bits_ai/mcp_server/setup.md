@@ -399,7 +399,7 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
 
 1. One-click install (recommended): Use this deeplink to add the Datadog MCP Server to Goose:
 
-   <pre><code>goose://extension?url={{< region-param key="mcp_server_endpoint" >}}&type=streamable_http&id=datadog&name=Datadog&description=Datadog%20MCP%20Server</code></pre>
+   [Install Datadog MCP Server in Goose](goose://extension?url={{< region-param key="mcp_server_endpoint" >}}&type=streamable_http&id=datadog&name=Datadog&description=Datadog%20MCP%20Server)
 
    To tune extension response wait time, include the optional `timeout` query parameter (seconds).
 
