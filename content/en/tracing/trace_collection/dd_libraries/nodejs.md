@@ -88,11 +88,13 @@ Use the `--require` option to Node.js to load and initialize the tracer in one s
 node --require dd-trace/init app.js
 ```
 
-This approach requires using environment variables for all configuration of the tracer. If you need to use a programmatic configuration, initialize `dd-trace` in a dedicated file and require that instead:
+The above approach requires using environment variables for all configuration of the tracer. If you need to use a programmatic configuration, initialize `dd-trace` in a dedicated file and require that instead:
 
 ```sh
-node --require ./dd-trace app.js
+node --require ./dd-trace.js app.js
 ```
+
+The file should contain this:
 
 ```js
 // ./dd-trace.js
