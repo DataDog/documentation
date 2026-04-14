@@ -174,7 +174,7 @@ Instrument all processes by default. Add block rules to exclude services that wo
 
 Block all instrumentation by default. Add allow rules to opt specific processes into APM. This approach gives you precise control and works well for gradual rollouts.
 
-For example, to instrument only a checkout service and customer portal, create allow rules using <strong>Working Directory</strong>, then set the default behavior to <strong>Block Instrumentation</strong>.
+For example, to instrument only a checkout service and a customer portal, create allow rules using <strong>Working Directory</strong>, then set the default behavior to <strong>Block Instrumentation</strong>.
 
 {{< img src="tracing/trace_collection/instrumentation-rules-linux-example-2.png" alt="Two allow instrumentation rules targeting services in specific working directories, with a default of block instrumentation" style="width:100%;" >}}
 
