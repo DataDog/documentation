@@ -174,7 +174,7 @@ Instrument all processes by default. Add block rules to exclude services that wo
 
 Block all instrumentation by default. Add allow rules to opt specific processes into APM. This approach gives you precise control and works well for gradual rollouts.
 
-For example, to instrument only a checkout service, create an allow rule with **Working Directory** set to `/srv/checkout`, then set the default behavior to **Block Instrumentation**.
+For example, to instrument only a checkout service, create an allow rule with <strong>Working Directory</strong> set to <code>/srv/checkout</code>, then set the default behavior to <strong>Block Instrumentation</strong>.
 
 {{< /collapse-content >}}
 

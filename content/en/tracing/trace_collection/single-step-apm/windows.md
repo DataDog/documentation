@@ -148,7 +148,7 @@ Instrument all processes by default. Add block rules to exclude services that wo
 
 {{< collapse-content title="Example 2: Instrument only specific IIS applications" level="h5" >}}
 
-Block all instrumentation by default. Add allow rules to opt specific IIS applications into APM. Because all IIS workers share the `w3wp.exe` executable, use IIS Application Pool to identify target applications. This approach is useful for gradual rollouts.
+Block all instrumentation by default. Add allow rules to opt specific IIS applications into APM. Because all IIS workers share the <code>w3wp.exe</code> executable, use IIS Application Pool to identify target applications. This approach is useful for gradual rollouts.
 
 {{< img src="tracing/trace_collection/instrumentation-rules-example-2.png" alt="Two allow instrumentation rules targeting specific IIS application pools by name, with a default of block instrumentation" style="width:100%;" >}}
 
