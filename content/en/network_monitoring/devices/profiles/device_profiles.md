@@ -60,6 +60,8 @@ For advanced profile configuration, see [Build an NDM Profile][3].
 
   **Note**: EXOS 33.1.1 devices may crash when device scan is enabled due to a firmware bug. As a workaround, disable device scan globally (`network_devices.default_scan.enabled: false`) or upgrade the device firmware. If you are affected by this issue, contact [Datadog Support][21] for assistance.
 
+3. If you have custom profiles on the Agent, upload them to the UI by following the [Upload custom profiles](#upload-custom-profiles) instructions.
+
 ## Configure metrics
 
 The recommended entry point for the SNMP Profile Manager is from a single device in NDM. Every device matches to a profile, either a custom profile or a generic Datadog-provided one. Editing a profile from a device automatically creates a custom version of that profile on your behalf, so you never need to create a profile from scratch.
