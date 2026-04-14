@@ -9,5 +9,5 @@ It can be included directly in platform-specific pages or wrapped in conditional
 
 Kotlin Multiplatform applications collect mobile vitals through the native Android and iOS SDKs. See [Android Mobile Vitals][1] and [iOS Mobile Vitals][2] for metric descriptions and benchmark ranges.
 
-[1]: /real_user_monitoring/application_monitoring/android/mobile_vitals/
-[2]: /real_user_monitoring/application_monitoring/ios/mobile_vitals/
+[1]: /client_sdks/mobile_vitals/?platform=android
+[2]: /client_sdks/mobile_vitals/?platform=ios

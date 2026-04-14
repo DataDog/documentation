@@ -24,6 +24,6 @@ The following telemetry provide insight into your mobile application's performan
 [2]: https://reactnative.dev/docs/performance#what-you-need-to-know-about-frames
 [3]: https://firebase.google.com/docs/perf-mon/screen-traces?platform=ios#frozen-frames
 [4]: https://docs.microsoft.com/en-us/appcenter/sdk/crashes/react-native
-[5]: /real_user_monitoring/ios/crash_reporting/
+[5]: /real_user_monitoring/error_tracking/mobile/reactnative
 [6]: https://developer.apple.com/documentation/xcode/analyzing-your-app-s-battery-use/
 [7]: https://docs.sentry.io/platforms/apple/guides/ios/configuration/out-of-memory/
