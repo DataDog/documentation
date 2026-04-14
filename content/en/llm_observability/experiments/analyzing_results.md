@@ -46,17 +46,26 @@ To add a custom column, type a field path in the **Add Column** input at the top
 | Metadata        | `@meta.metadata.<key>`        | `@meta.metadata.scenario_type`  |
 | Tag             | `<tag_key>`                    | `env`                            |
 
-You can add multiple custom columns and reorder them with drag-and-drop. Column configuration persists per project.
+You can add multiple custom columns and reorder them with drag-and-drop. Column configuration is saved to your browser's local storage per project.
 
 #### Quick actions from the span detail
 
-When viewing the root span in the span detail side panel, you can act on any field in **Input**, **Output**, **Expected Output**, **Metadata**, or **Tags** directly from the context menu:
+When viewing the root span in the span detail side panel, you can act on fields directly from the context menu instead of manually typing paths.
+
+**On JSON fields** (Input, Output, Expected Output, Metadata):
 
 - **Copy key path**: Copies the field's full path (for example, `@meta.input.user_query`) so you can paste it into the custom column input, search bar, or a dashboard widget query.
-- **Add column**: Adds the field as a custom column in the results table in one click — no typing or copy-pasting required.
+- **Add column**: Adds the field as a custom column in the results table in one click.
 - **Filter by / Exclude**: Adds the field's key-value pair to the search query to narrow down or exclude matching records. Available on leaf values (strings, numbers, booleans) only.
 
-<div class="alert alert-info">These actions are only available on the root span of a trace. Array indices are automatically stripped from paths so queries and columns resolve correctly.</div>
+**On tags**:
+
+- **Copy key**: Copies the tag key (for example, `env`).
+- **Copy to clipboard**: Copies the full tag including its value (for example, `env:prod`).
+- **Add column**: Adds the tag key as a custom column in the results table.
+- **Filter by / Exclude**: Adds the tag's key-value pair to the search query.
+
+<div class="alert alert-info">These actions are available on the root span of a trace.</div>
 
 ### Searching for specific records
 

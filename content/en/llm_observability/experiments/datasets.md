@@ -240,16 +240,7 @@ Use the column picker to toggle columns on or off and drag to reorder them. By d
 
 #### Custom columns
 
-Extract specific fields from your dataset records and display them as dedicated table columns. To add a custom column, type a field path in the **Add Column** input at the top of the table:
-
-| Source          | Path format                    | Example                          |
-| --------------- | ------------------------------ | -------------------------------- |
-| Input           | `@meta.input.<key>`           | `@meta.input.user_query`        |
-| Expected output | `@meta.expected_output.<key>` | `@meta.expected_output.answer`  |
-| Metadata        | `@meta.metadata.<key>`        | `@meta.metadata.scenario_type`  |
-| Tag             | `<tag_key>`                    | `env`                            |
-
-You can add multiple custom columns and reorder them with drag-and-drop. Column configuration persists per dataset.
+Extract specific fields from your dataset records and display them as dedicated table columns. To add a custom column, type a field path in the **Add Column** input at the top of the table. You can add multiple custom columns and reorder them with drag-and-drop. Column configuration is saved to your browser's local storage per project.
 
 [1]: https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html
 
