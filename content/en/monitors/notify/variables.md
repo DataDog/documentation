@@ -477,7 +477,7 @@ For instance, assume your composite monitor has a sub-monitor `a`, which is a Lo
 
 Variable content is HTML-encoded by default. To output raw, unencoded content, use triple curly braces instead of double curly braces.
 
-For example, when a variable's value contains a URL with query parameters, the `&` is treated differently between the double and triple brace:
+For example, when a variable's value contains a URL with query parameters, the `&` is treated differently depending on whether double or triple braces are used:
 
 | Syntax | Example output |
 --------|----------------|
