@@ -1,7 +1,7 @@
 {{ $posterImg := "" }}
 
 {{- if .Get "poster" -}}
-  {{ $posterImg = (print (.Site.Params.img_url) (.Get "poster")  "?ch=Width,DPR,Save-Data&auto=format,compress&fit=clip&w=1200") | safeURL }}
+  {{ $posterImg = (print (.Site.Params.img_url) (.Get "poster")  "?auto=format,compress&fit=clip&w=1200") | safeURL }}
 {{ else }}
   {{ $posterImg = "/images/poster/tracing.png" }}
 {{ end }}

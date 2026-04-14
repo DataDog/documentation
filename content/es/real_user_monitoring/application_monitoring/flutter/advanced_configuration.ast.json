@@ -1,0 +1,77 @@
+{
+  "$$mdtype": "Node",
+  "inline": false,
+  "attributes": {
+    "frontmatter": {
+      "title": {
+        "itemTranslationData": {
+          "6fd67c50fcd3f4c737b4143d9bb71bc6": {
+            "string": "Configuración avanzada de Flutter"
+          }
+        }
+      },
+      "description": {
+        "itemTranslationData": {
+          "bb81aeb5a963bb52ee7ce10c7b01dca7": {
+            "string": "Aprende a configurar la monitorización de Flutter."
+          }
+        }
+      },
+      "further_reading": {
+        "listTranslationData": {
+          "0": {
+            "link": "https://github.com/DataDog/dd-sdk-flutter",
+            "text": {
+              "itemTranslationData": {
+                "b4795d85808472ae5ab2a4ec75695d2d": {
+                  "string": "Código source (fuente) de dd-sdk-flutter"
+                }
+              }
+            },
+            "tag": {
+              "itemTranslationData": {
+                "51a8f7e6bf4837b35d750e426156c24b": {
+                  "string": "Código source (fuente)"
+                }
+              }
+            }
+          },
+          "1": {
+            "link": "/real_user_monitoring/explorer/",
+            "text": {
+              "itemTranslationData": {
+                "0635cf624daa33cc9cd201de54357e39": {
+                  "string": "Aprender a explorar tus datos de RUM"
+                }
+              }
+            },
+            "tag": {
+              "itemTranslationData": {
+                "70aa5288b9ea1e893c1176b970cb43c2": {
+                  "string": "Documentation"
+                }
+              }
+            }
+          },
+          "2": {
+            "link": "https://www.datadoghq.com/blog/monitor-flutter-application-performance-with-mobile-rum/",
+            "text": {
+              "itemTranslationData": {
+                "868c7e05c5f05eb6fe87f6c3a7787d8d": {
+                  "string": "Monitorizar el rendimiento de la aplicación Flutter con Datadog Mobile RUM"
+                }
+              }
+            },
+            "tag": {
+              "itemTranslationData": {
+                "c98097d196a4a27f5be107ac64d78e4c": {
+                  "string": "Blog"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "type": "document"}

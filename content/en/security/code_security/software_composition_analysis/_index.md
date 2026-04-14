@@ -48,6 +48,12 @@ Datadog SCA draws from multiple public and private sources to build a curated pr
 
 Datadog uses these sources to identify known vulnerabilities, malicious packages, and emerging supply chain threats across supported ecosystems. There is a maximum of 1 hour between when a new vulnerability is published and when it appears in Datadog, with emerging vulnerabilities typically appearing in Datadog within minutes.
 
+## Public exploit sources
+
+Datadog identifies whether a vulnerability has a known public exploit by aggregating data from multiple public sources, including CISA (Known Exploited Vulnerabilities Catalog), Exploit-DB, NIST (National Vulnerability Database), and GitHub (public exploit references).
+
+When Datadog identifies a public exploit for a vulnerability from any of these sources, it flags the finding to help you prioritize remediation.
+
 ## Key capabilities
 
 ### Review and prioritize vulnerabilities

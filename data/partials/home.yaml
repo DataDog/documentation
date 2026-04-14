@@ -274,6 +274,12 @@ nav_sections:
         link: data_security/
         icon: security-lock
         desc: Learn how Datadog protects your data
+      - title: Client SDKs
+        link: client_sdks/
+        icon: building-block
+        desc: Install and configure the Datadog SDK for your platform
+      - title: Developers
+        link: developers/
       - title: Extend Datadog
         link: extend/
         icon: dev-code

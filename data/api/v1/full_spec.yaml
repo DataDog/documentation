@@ -2889,6 +2889,7 @@ components:
         peer_tags:
           description: Tags to query for a specific downstream entity (peer.service, peer.db_instance, peer.s3, peer.s3.bucket, etc.).
           items:
+            description: "A tag identifying a specific downstream entity (for example: peer.service, peer.db_instance)."
             example: "peer.service:my-service"
             type: string
           type: array
@@ -6754,6 +6755,7 @@ components:
         sources:
           additionalProperties:
             items:
+              description: A fallback source attribute name.
               type: string
             type: array
           description: Fallback sources used to populate value of field.
@@ -6802,6 +6804,7 @@ components:
           description: Optional list of profiles to modify the schema.
           example: ["security_control", "host"]
           items:
+            description: A profile name that modifies the schema behavior.
             type: string
           type: array
         schema_type:
@@ -7915,6 +7918,7 @@ components:
           description: Columns to group results by.
           example: ["col1", "col2"]
           items:
+            description: A column name to group results by.
             type: string
           type: array
         model_type_override:
@@ -7934,6 +7938,7 @@ components:
           description: Optional grouping fields for aggregation.
           example: ["entity_id"]
           items:
+            description: A field name to group results by.
             type: string
           type: array
         measure:
@@ -11268,8 +11273,10 @@ components:
       description: Product Analytics audience account subquery.
       properties:
         name:
+          description: The name of the account subquery.
           type: string
         query:
+          description: The query string for the account subquery.
           type: string
       type: object
     ProductAnalyticsAudienceFilters:
@@ -11280,6 +11287,7 @@ components:
             $ref: "#/components/schemas/ProductAnalyticsAudienceAccountSubquery"
           type: array
         filter_condition:
+          description: An optional filter condition applied to the audience subquery.
           type: string
         segments:
           items:
@@ -11291,26 +11299,33 @@ components:
           type: array
       type: object
     ProductAnalyticsAudienceOccurrenceFilter:
+      description: Filter applied to occurrence counts when building a Product Analytics audience.
       properties:
         operator:
+          description: "The comparison operator used for the occurrence filter (for example: `gt`, `lt`, `eq`)."
           type: string
         value:
+          description: The threshold value to compare occurrence counts against.
           type: string
       type: object
     ProductAnalyticsAudienceSegmentSubquery:
       description: Product Analytics audience segment subquery.
       properties:
         name:
+          description: The name of the segment subquery.
           type: string
         segment_id:
+          description: The unique identifier of the segment.
           type: string
       type: object
     ProductAnalyticsAudienceUserSubquery:
       description: Product Analytics audience user subquery.
       properties:
         name:
+          description: The name of the user subquery.
           type: string
         query:
+          description: The query string for the user subquery.
           type: string
       type: object
     QuerySortOrder:
@@ -11879,6 +11894,7 @@ components:
         - $ref: "#/components/schemas/SLOCountDefinitionWithBadEventsFormula"
     SLOCountDefinitionWithBadEventsFormula:
       additionalProperties: false
+      description: SLO count definition using a bad events formula alongside a good events formula.
       properties:
         bad_events_formula:
           $ref: "#/components/schemas/SLOFormula"
@@ -11905,6 +11921,7 @@ components:
       type: object
     SLOCountDefinitionWithTotalEventsFormula:
       additionalProperties: false
+      description: SLO count definition using a total events formula alongside a good events formula.
       properties:
         good_events_formula:
           $ref: "#/components/schemas/SLOFormula"
@@ -13111,6 +13128,7 @@ components:
           description: Fields to group by.
           example: ["source", "destination"]
           items:
+            description: A field name to group by.
             type: string
           type: array
         limit:
@@ -13733,6 +13751,7 @@ components:
             Always included in service level objective responses (but may be empty).
           example: ["env:prod", "app:core"]
           items:
+            description: A tag associated with the service level objective.
             type: string
           type: array
         created_at:
@@ -13756,6 +13775,7 @@ components:
         env_tags:
           description: Tags with the `env` tag key.
           items:
+            description: A tag with the `env` tag key.
             type: string
           type: array
         groups:
@@ -13800,6 +13820,7 @@ components:
         service_tags:
           description: Tags with the `service` tag key.
           items:
+            description: A tag with the `service` tag key.
             type: string
           type: array
         slo_type:
@@ -13809,6 +13830,7 @@ components:
         team_tags:
           description: Tags with the `team` tag key.
           items:
+            description: A tag with the `team` tag key.
             type: string
           type: array
         thresholds:
@@ -14920,6 +14942,7 @@ components:
           description: The tag values.
           example: ["env"]
           items:
+            description: A tag value string.
             minLength: 1
             type: string
           type: array
@@ -18197,6 +18220,7 @@ components:
         blockedRequestPatterns:
           description: Array of URL patterns to block.
           items:
+            description: A URL pattern to block during the Synthetic test.
             type: string
           type: array
         checkCertificateRevocation:
@@ -21289,12 +21313,68 @@ components:
           description: Shows the sum of all browser RUM units over all hours in the current date for all organizations (To be deprecated on October 1st, 2024).
           format: int64
           type: integer
+        ccm_anthropic_spend_last:
+          description: Shows the last value of Anthropic cloud spend monitored over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        ccm_aws_spend_last:
+          description: Shows the last value of AWS cloud spend monitored over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        ccm_azure_spend_last:
+          description: Shows the last value of Azure cloud spend monitored over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        ccm_confluent_spend_last:
+          description: Shows the last value of Confluent cloud spend monitored over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        ccm_databricks_spend_last:
+          description: Shows the last value of Databricks cloud spend monitored over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        ccm_elastic_spend_last:
+          description: Shows the last value of Elastic cloud spend monitored over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        ccm_fastly_spend_last:
+          description: Shows the last value of Fastly cloud spend monitored over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        ccm_gcp_spend_last:
+          description: Shows the last value of GCP cloud spend monitored over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        ccm_github_spend_last:
+          description: Shows the last value of GitHub cloud spend monitored over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        ccm_mongodb_spend_last:
+          description: Shows the last value of MongoDB cloud spend monitored over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        ccm_oci_spend_last:
+          description: Shows the last value of OCI cloud spend monitored over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        ccm_openai_spend_last:
+          description: Shows the last value of OpenAI cloud spend monitored over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        ccm_snowflake_spend_last:
+          description: Shows the last value of Snowflake cloud spend monitored over all hours in the current date for all organizations.
+          format: int64
+          type: integer
         ccm_spend_monitored_ent_last:
           description: Shows the last value of the amount of cloud spend monitored for Enterprise over all hours in the current date for all organizations.
           format: int64
           type: integer
         ccm_spend_monitored_pro_last:
           description: Shows the last value of the amount of cloud spend monitored for Pro over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        ccm_twilio_spend_last:
+          description: Shows the last value of Twilio cloud spend monitored over all hours in the current date for all organizations.
           format: int64
           type: integer
         ci_pipeline_indexed_spans_sum:
@@ -22178,12 +22258,68 @@ components:
           description: Shows the sum of all browser RUM units over all hours in the current date for the given org (To be deprecated on October 1st, 2024).
           format: int64
           type: integer
+        ccm_anthropic_spend_last:
+          description: Shows the last value of Anthropic cloud spend monitored over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        ccm_aws_spend_last:
+          description: Shows the last value of AWS cloud spend monitored over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        ccm_azure_spend_last:
+          description: Shows the last value of Azure cloud spend monitored over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        ccm_confluent_spend_last:
+          description: Shows the last value of Confluent cloud spend monitored over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        ccm_databricks_spend_last:
+          description: Shows the last value of Databricks cloud spend monitored over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        ccm_elastic_spend_last:
+          description: Shows the last value of Elastic cloud spend monitored over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        ccm_fastly_spend_last:
+          description: Shows the last value of Fastly cloud spend monitored over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        ccm_gcp_spend_last:
+          description: Shows the last value of GCP cloud spend monitored over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        ccm_github_spend_last:
+          description: Shows the last value of GitHub cloud spend monitored over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        ccm_mongodb_spend_last:
+          description: Shows the last value of MongoDB cloud spend monitored over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        ccm_oci_spend_last:
+          description: Shows the last value of OCI cloud spend monitored over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        ccm_openai_spend_last:
+          description: Shows the last value of OpenAI cloud spend monitored over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        ccm_snowflake_spend_last:
+          description: Shows the last value of Snowflake cloud spend monitored over all hours in the current date for the given org.
+          format: int64
+          type: integer
         ccm_spend_monitored_ent_last:
           description: Shows the last value of the amount of cloud spend monitored for Enterprise over all hours in the current date for the given org.
           format: int64
           type: integer
         ccm_spend_monitored_pro_last:
           description: Shows the last value of the amount of cloud spend monitored for Pro over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        ccm_twilio_spend_last:
+          description: Shows the last value of Twilio cloud spend monitored over all hours in the current date for the given org.
           format: int64
           type: integer
         ci_pipeline_indexed_spans_sum:
@@ -23077,12 +23213,68 @@ components:
           description: Shows the sum of all browser RUM units over all hours in the current month for all organizations (To be deprecated on October 1st, 2024).
           format: int64
           type: integer
+        ccm_anthropic_spend_last_sum:
+          description: Shows the sum of the last value of Anthropic cloud spend monitored in the current month for all organizations.
+          format: int64
+          type: integer
+        ccm_aws_spend_last_sum:
+          description: Shows the sum of the last value of AWS cloud spend monitored in the current month for all organizations.
+          format: int64
+          type: integer
+        ccm_azure_spend_last_sum:
+          description: Shows the sum of the last value of Azure cloud spend monitored in the current month for all organizations.
+          format: int64
+          type: integer
+        ccm_confluent_spend_last_sum:
+          description: Shows the sum of the last value of Confluent cloud spend monitored in the current month for all organizations.
+          format: int64
+          type: integer
+        ccm_databricks_spend_last_sum:
+          description: Shows the sum of the last value of Databricks cloud spend monitored in the current month for all organizations.
+          format: int64
+          type: integer
+        ccm_elastic_spend_last_sum:
+          description: Shows the sum of the last value of Elastic cloud spend monitored in the current month for all organizations.
+          format: int64
+          type: integer
+        ccm_fastly_spend_last_sum:
+          description: Shows the sum of the last value of Fastly cloud spend monitored in the current month for all organizations.
+          format: int64
+          type: integer
+        ccm_gcp_spend_last_sum:
+          description: Shows the sum of the last value of GCP cloud spend monitored in the current month for all organizations.
+          format: int64
+          type: integer
+        ccm_github_spend_last_sum:
+          description: Shows the sum of the last value of GitHub cloud spend monitored in the current month for all organizations.
+          format: int64
+          type: integer
+        ccm_mongodb_spend_last_sum:
+          description: Shows the sum of the last value of MongoDB cloud spend monitored in the current month for all organizations.
+          format: int64
+          type: integer
+        ccm_oci_spend_last_sum:
+          description: Shows the sum of the last value of OCI cloud spend monitored in the current month for all organizations.
+          format: int64
+          type: integer
+        ccm_openai_spend_last_sum:
+          description: Shows the sum of the last value of OpenAI cloud spend monitored in the current month for all organizations.
+          format: int64
+          type: integer
+        ccm_snowflake_spend_last_sum:
+          description: Shows the sum of the last value of Snowflake cloud spend monitored in the current month for all organizations.
+          format: int64
+          type: integer
         ccm_spend_monitored_ent_last_sum:
           description: Shows the sum of the last value of the amount of cloud spend monitored for Enterprise in the current month for all organizations.
           format: int64
           type: integer
         ccm_spend_monitored_pro_last_sum:
           description: Shows the sum of the last value of the amount of cloud spend monitored for Pro in the current month for all organizations.
+          format: int64
+          type: integer
+        ccm_twilio_spend_last_sum:
+          description: Shows the sum of the last value of Twilio cloud spend monitored in the current month for all organizations.
           format: int64
           type: integer
         ci_pipeline_indexed_spans_agg_sum:
