@@ -155,6 +155,46 @@ To populate all logs by ARN:
 
 **Note**: A single Kinesis payload must not be more than 65,000 log messages. Log messages after that limit are dropped.
 
+## How source, service, and tags are set
+
+When logs arrive through Amazon Data Firehose, Datadog automatically determines the `source`, `service`, and tags for each log based on AWS metadata:
+
+1. **Source**: Detected from the CloudWatch Log Group name. For example, `/aws/lambda/my-function` sets `source:lambda`, `/aws/rds/...` sets `source:rds`. If the log group does not match a known AWS service pattern, the log group name itself is used as the source.
+2. **Service**: Defaults to the same value as the detected source. For Lambda logs, the service is set to the function name.
+3. **Tags**: AWS metadata such as `region`, `aws_account`, and `sourcecategory:aws` are added automatically.
+
+### Overriding source, service, and tags
+
+There are two ways to override these auto-detected values:
+
+#### Firehose Common Attributes
+
+You can set `source`, `service`, and arbitrary tags through the **Parameters** section (Common Attributes) of your Amazon Data Firehose delivery stream configuration. These values apply to all logs flowing through that delivery stream and take priority over the auto-detected values.
+
+For example, setting `source: nodejs` and `env: production` in the Common Attributes adds those as the log source and as a tag, respectively.
+
+#### Reserved attributes in the log body
+
+If your application writes structured JSON logs that include `ddsource`, `service`, or `ddtags` at the top level of the JSON body, Datadog can use those values instead of the auto-detected ones. For example:
+
+```json
+{
+  "message": "request completed",
+  "ddsource": "nodejs",
+  "service": "my-app",
+  "ddtags": "env:production,version:1.2.3"
+}
+```
+
+When enabled, these fields take the highest priority, overriding both the auto-detected values and the Common Attributes:
+- `ddsource` overrides the log source.
+- `service` overrides the log service.
+- `ddtags` values are merged into the log's tags (for example, `env` and `version` become searchable tags).
+
+These fields are consumed during intake and do not appear as log attributes.
+
+<div class="alert alert-info">This behavior is not enabled by default. To enable it for your organization, <a href="/help/">contact Datadog Support</a>.</div>
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
