@@ -1073,11 +1073,56 @@
     },
     {
       "group": "logs_custom_destinations",
+      "suffix": "_2534546779",
+      "description": "Create a Splunk custom destination with a null sourcetype returns \"OK\" response"
+    },
+    {
+      "group": "logs_custom_destinations",
+      "suffix": "_140188544",
+      "description": "Create a Splunk custom destination with a sourcetype returns \"OK\" response"
+    },
+    {
+      "group": "logs_custom_destinations",
+      "suffix": "_3120242932",
+      "description": "Create a Splunk custom destination with an empty string sourcetype returns \"OK\" response"
+    },
+    {
+      "group": "logs_custom_destinations",
+      "suffix": "_1718754520",
+      "description": "Create a Splunk custom destination without a sourcetype returns \"OK\" response"
+    },
+    {
+      "group": "logs_custom_destinations",
       "suffix": "_141236188",
       "description": "Create an Elasticsearch custom destination returns \"OK\" response"
     }
   ],
   "UpdateLogsCustomDestination": [
+    {
+      "group": "logs_custom_destinations",
+      "suffix": "_2612469098",
+      "description": "Update a Splunk custom destination with a null sourcetype returns \"OK\" response"
+    },
+    {
+      "group": "logs_custom_destinations",
+      "suffix": "_213195663",
+      "description": "Update a Splunk custom destination with a sourcetype returns \"OK\" response"
+    },
+    {
+      "group": "logs_custom_destinations",
+      "suffix": "_2701272624",
+      "description": "Update a Splunk custom destination's attributes preserves the absent sourcetype returns \"OK\" response"
+    },
+    {
+      "group": "logs_custom_destinations",
+      "suffix": "_2034509257",
+      "description": "Update a Splunk custom destination's destination preserves the null sourcetype returns \"OK\" response"
+    },
+    {
+      "group": "logs_custom_destinations",
+      "suffix": "_3227001838",
+      "description": "Update a Splunk custom destination's destination preserves the sourcetype returns \"OK\" response"
+    },
     {
       "group": "logs_custom_destinations",
       "suffix": "",
@@ -1334,6 +1379,16 @@
     },
     {
       "group": "observability_pipelines",
+      "suffix": "_1267410221",
+      "description": "Validate an observability pipeline with Splunk HEC destination token_strategy returns \"OK\" response"
+    },
+    {
+      "group": "observability_pipelines",
+      "suffix": "_2960728933",
+      "description": "Validate an observability pipeline with Splunk HEC source store_hec_token returns \"OK\" response"
+    },
+    {
+      "group": "observability_pipelines",
       "suffix": "_99164570",
       "description": "Validate an observability pipeline with amazon S3 source compression returns \"OK\" response"
     },
@@ -1341,6 +1396,11 @@
       "group": "observability_pipelines",
       "suffix": "_1330454428",
       "description": "Validate an observability pipeline with destination secret key returns \"OK\" response"
+    },
+    {
+      "group": "observability_pipelines",
+      "suffix": "_815080644",
+      "description": "Validate an observability pipeline with enrichment table secret field lookup returns \"OK\" response"
     },
     {
       "group": "observability_pipelines",
