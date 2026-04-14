@@ -160,4 +160,4 @@ The script first discovers any instances running in each subscription, then prom
 [13]: https://learn.microsoft.com/azure/azure-monitor/essentials/diagnostic-settings
 [14]: https://app.datadoghq.com/integrations/azure/add?config_azure-new-onboarding=true
 [15]: https://learn.microsoft.com/azure/azure-functions/
-[16]: /getting_started/integrations/azure/#resource-tag-filtering-1
+[16]: /getting_started/integrations/azure/#resource-tag-filtering-for-logs

@@ -236,9 +236,9 @@ You can find your Azure metrics in the metrics summary page in the Datadog platf
 
 {{< img src="/getting_started/integrations/azure/GSwAzure_metricExplorer.png" alt="Metric summary image" style="width:100%;" >}}
 
-### Resource tag filtering
+### Resource tag filtering for metrics
 
-Use tag filters to control which Azure resources have their metrics collected by Datadog. A tag filter is a comma-separated list of tags in the form `key:value`. Only resources that match at least one tag in the filter have their metrics collected.
+Use tag filters to control which Azure resources have their metrics collected by Datadog. Configure tag filters in the **Configuration** tab of the [Azure integration tile][20]. A tag filter is a comma-separated list of tags in the form `key:value`. Only resources that match at least one tag in the filter have their metrics collected.
 
 You can use wildcards in your tag filters:
 - `?` matches a single character.
@@ -249,6 +249,8 @@ To exclude resources with a given tag, prefix the tag with `!`. Exclusion takes 
 For example: `datadog:monitored,env:production,!plan_tier:basic,instance-type:c1.*`
 
 This filter collects metrics from resources tagged with `datadog:monitored` or `env:production`, excludes resources tagged with `plan_tier:basic`, and includes resources with an `instance-type` tag matching `c1.*`.
+
+If no tag filter is set, Datadog collects metrics from all Azure resources.
 
 ## Enable log collection
 
@@ -303,9 +305,9 @@ See [Azure Automated Log Forwarding Architecture][34] for more details.
 
 {{% azure-log-archiving %}}
 
-### Resource tag filtering
+### Resource tag filtering for logs
 
-Use tag filters to control which Azure resources have their logs forwarded to Datadog. A tag filter is a comma-separated list of tags in the form `key:value`. Only resources that match at least one tag in the filter have their logs forwarded.
+Use tag filters to control which Azure resources have their logs forwarded to Datadog. Configure tag filters in the **Configuration** tab of the [Azure integration tile][20]. A tag filter is a comma-separated list of tags in the form `key:value`. Only resources that match at least one tag in the filter have their logs forwarded.
 
 You can use wildcards in your tag filters:
 - `?` matches a single character.
@@ -316,6 +318,8 @@ To exclude resources with a given tag, prefix the tag with `!`. Exclusion takes 
 For example: `datadog:monitored,env:production,!plan_tier:basic,instance-type:c1.*`
 
 This filter forwards logs from resources tagged with `datadog:monitored` or `env:production`, excludes resources tagged with `plan_tier:basic`, and includes resources with an `instance-type` tag matching `c1.*`.
+
+If no tag filter is set, Datadog forwards logs from all Azure resources.
 
 ## Get more from the Datadog Platform
 
