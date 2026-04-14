@@ -475,7 +475,14 @@ For instance, assume your composite monitor has a sub-monitor `a`, which is a Lo
 
 ### Character escape
 
-Variable content is HTML-encoded by default. For example, special characters like `&` and `'` are converted to `&amp;` and `&#x27;` in the rendered output. To output raw, unencoded content, use triple curly braces instead of double curly braces:
+Variable content is HTML-encoded by default. To output raw, unencoded content, use triple curly braces instead of double curly braces.
+
+For example, when a variable's value contains a URL with query parameters, the `&` is treated differently between the double and triple brace:
+
+| Syntax | Example output |
+--------|----------------|
+| `{{template_variable}}` (double braces) | `https://status.example.com/check?service=web&amp;region=us-east` |
+| `{{{template_variable}}}` (triple braces) | `https://status.example.com/check?service=web&region=us-east` |
 
 | Syntax | Output |
 |--------|--------|
