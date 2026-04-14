@@ -156,6 +156,12 @@ The following tables list the OpenTelemetry runtime metrics used in Datadog's ou
 {{< tabs >}}
 {{< tab "Java" >}}
 
+<h3>JVM Instrumentation</h3>
+{{< mapping-table resource="jvm-instrumentation.csv">}}
+
+<h3>JVM Contrib</h3>
+{{< mapping-table resource="jvm-contrib.csv">}}
+
 <h3>JVM Deprecated</h3>
 {{< mapping-table resource="jvm-deprecated.csv">}}
 
