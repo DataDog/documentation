@@ -13432,6 +13432,88 @@ components:
       type: string
       x-enum-varnames:
         - SCATTERPLOT
+    ScatterplotDataProjectionDimension:
+      description: A single dimension mapping for a scatterplot data projection.
+      properties:
+        alias:
+          description: Display alias for the dimension.
+          type: string
+        column:
+          description: The column name from the data source.
+          example: duration
+          type: string
+        dimension:
+          $ref: "#/components/schemas/ScatterplotDimension"
+        number_format:
+          $ref: "#/components/schemas/WidgetNumberFormat"
+      required:
+        - column
+        - dimension
+      type: object
+    ScatterplotDataProjectionProjection:
+      description: The projection configuration for a scatterplot data projection request.
+      properties:
+        dimensions:
+          description: Dimension mappings for the scatterplot axes.
+          items:
+            $ref: "#/components/schemas/ScatterplotDataProjectionDimension"
+          type: array
+        type:
+          $ref: "#/components/schemas/ScatterplotDataProjectionProjectionType"
+      required:
+        - type
+        - dimensions
+      type: object
+    ScatterplotDataProjectionProjectionType:
+      description: The type of the scatterplot data projection.
+      enum:
+        - scatterplot
+      example: scatterplot
+      type: string
+      x-enum-varnames:
+        - SCATTERPLOT
+    ScatterplotDataProjectionQuery:
+      description: The query for a scatterplot data projection request.
+      properties:
+        data_source:
+          $ref: "#/components/schemas/FormulaAndFunctionEventsDataSource"
+        indexes:
+          description: Indexes to search.
+          items:
+            type: string
+          type: array
+        query_string:
+          description: The search query string.
+          example: "@service:web-store"
+          type: string
+        storage:
+          $ref: "#/components/schemas/ScatterplotDataProjectionQueryStorage"
+      required:
+        - query_string
+        - data_source
+      type: object
+    ScatterplotDataProjectionQueryStorage:
+      description: Storage tier to query.
+      enum:
+        - live
+        - hot
+        - habanero
+        - online_archives
+        - driveline
+        - flex_tier
+        - case_insensitive
+        - cloud_prem
+      example: hot
+      type: string
+      x-enum-varnames:
+        - LIVE
+        - HOT
+        - HABANERO
+        - ONLINE_ARCHIVES
+        - DRIVELINE
+        - FLEX_TIER
+        - CASE_INSENSITIVE
+        - CLOUD_PREM
     ScatterplotDimension:
       description: Dimension of the Scatterplot.
       enum:
@@ -13447,21 +13529,47 @@ components:
         - RADIUS
         - COLOR
     ScatterplotTableRequest:
-      description: Scatterplot request containing formulas and functions.
+      description: |-
+        Scatterplot table request. Supports two modes:
+        - **Formulas and functions** (default): `request_type` is absent or `"table"`. Uses `queries` and `formulas`.
+        - **Data projection**: `request_type` is `"data_projection"`. Uses `query`, `projection`, and optionally `limit`.
       properties:
         formulas:
           description: List of Scatterplot formulas that operate on queries.
           items:
             $ref: "#/components/schemas/ScatterplotWidgetFormula"
           type: array
+        limit:
+          description: Maximum number of rows to return. Used when `request_type` is `"data_projection"`.
+          format: int64
+          type: integer
+        projection:
+          $ref: "#/components/schemas/ScatterplotDataProjectionProjection"
+          description: Projection configuration for data projection mode. Used when `request_type` is `"data_projection"`.
         queries:
           description: List of queries that can be returned directly or used in formulas.
           items:
             $ref: "#/components/schemas/FormulaAndFunctionQueryDefinition"
           type: array
+        query:
+          $ref: "#/components/schemas/ScatterplotDataProjectionQuery"
+          description: Query for data projection mode. Used when `request_type` is `"data_projection"`.
+        request_type:
+          $ref: "#/components/schemas/ScatterplotTableRequestType"
+          description: The type of the scatterplot table request. Use `"data_projection"` for unaggregated raw data.
         response_format:
           $ref: "#/components/schemas/FormulaAndFunctionResponseFormat"
       type: object
+    ScatterplotTableRequestType:
+      description: The type of the scatterplot table request.
+      enum:
+        - table
+        - data_projection
+      example: data_projection
+      type: string
+      x-enum-varnames:
+        - TABLE
+        - DATA_PROJECTION
     ScatterplotWidgetAggregator:
       description: Aggregator used for the request.
       enum:
