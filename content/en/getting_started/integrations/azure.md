@@ -240,7 +240,7 @@ You can find your Azure metrics in the metrics summary page in the Datadog platf
 
 You can use the automated log forwarding feature to setup and configure the services and diagnostic settings needed to forward logs to Datadog. If an automated log forwarding control plane already exists in the tenant, this flow modifies it and extends its scope to include the selected subscriptions or management groups. For more detail, see [Azure Automated Log Forwarding Setup][19].
 
-Datadog recommends using the Agent or DaemonSet to send logs from Azure. If direct streaming isn't possible, use the **Configure Log Forwarding** flow in the [Azure integration][20] to set up and manage automated log forwarding directly from Datadog. You can also deploy log forwarding with an [Azure Resource Manager (ARM) template][19]. Both methods automatically manage and scale log forwarding services.
+Datadog recommends using the Agent or DaemonSet to send logs from Azure. If direct streaming isn't possible, use the **Configure Log Forwarding** flow in the [Azure integration][20] to set up and manage automated log forwarding directly in Datadog. You can also deploy log forwarding with an [Azure Resource Manager (ARM) template][19]. Both methods automatically manage and scale log forwarding services.
 
 {{% collapse-content title="Automated (recommended)" level="h4" expanded=false id="automated-log-forwarding-setup" %}}
 
@@ -254,7 +254,7 @@ Datadog recommends using the Agent or DaemonSet to send logs from Azure. If dire
 
 #### Configure Log Forwarding (recommended)
 
-Use the **Configure Log Forwarding** flow to set up new or manage existing log forwarders directly from Datadog:
+Use the **Configure Log Forwarding** flow to set up new or manage existing log forwarders directly in Datadog:
 
 1. In Datadog, navigate to [**Integrations > Azure**][20].
 1. Click **Configure Log Forwarding**.
