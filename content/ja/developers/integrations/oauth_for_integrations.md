@@ -2,27 +2,36 @@
 aliases:
 - /ja/developers/integrations/oauth_for_data_integrations/
 description: OAuth を使用してインテグレーションを認証する
+further_reading:
+- link: /developers/authorization/oauth2_in_datadog/
+  tag: ドキュメント
+  text: Datadog における OAuth2
+- link: /developers/integrations/
+  tag: ドキュメント
+  text: インテグレーションの構築
+- link: https://www.datadoghq.com/blog/oauth/
+  tag: ブログ
+  text: OAuth で Datadog のインテグレーションを認可する
 title: インテグレーションのための OAuth
 ---
-{{< callout btn_hidden="true" >}}
-  Datadog Developer Platform はベータ版です。アクセス権をお持ちでない場合は、apps@datadoghq.com までご連絡ください。
-{{< /callout >}} 
 
 ## 概要
 
-OAuth enables Datadog customers to securely authorize third-party access to their Datadog organization. This authorization allows integrations to push data into Datadog or pull data out from Datadog without the need for customers to input API or app keys anywhere. For example, a user can consent to provide an on-call notification tool with read access to their Datadog organization's monitors.
+OAuth を使用すると、Datadog の顧客は、自社の Datadog 組織に対するサードパーティのアクセスを安全に認可できます。この認可により、顧客がどこにも API キーやアプリケーションキーを入力する必要なく、インテグレーションが Datadog へデータを送信したり、Datadog からデータを取得したりできるようになります。たとえば、ユーザーはオンコール通知ツールに対し、自社の Datadog 組織のモニターへの読み取りアクセスの付与に同意できます。
 
 Datadog における OAuth の実装の詳細については、[Datadog OAuth2 のドキュメント][1]をご覧ください。
 
-## When to use OAuth in an integration
+OAuth クライアントを公開しても、インテグレーションは公開されません。インテグレーションが [Integrations ページ][16]に表示されるのは、別途、公開プロセスを完了した後になります。インテグレーションの作成と公開については、[インテグレーションの構築][18]を参照してください。
 
-OAuth support is required for all partner-built SaaS integrations that directly submit data to, or query data from, Datadog's public [API endpoints][12]. OAuth does not apply to software deployed on-premises, or to Datadog Agent checks. 
+## インテグレーションで OAuth の使用が必要なケース
+
+パートナーが構築した SaaS インテグレーションが Datadog の公開 [API エンドポイント][12]に直接データを送信したり、データを照会したりする場合、OAuth への対応は必須です。OAuth は、オンプレミスにデプロイされたソフトウェアや、Datadog Agent のチェックには適用されません。
 
 ## OAuth を使ったインテグレーションの構築
 
-When building an integration with OAuth, you should only select the scopes to which your application needs access. After a customer consents to authorize your integration, all listed scopes become available to your application through a token.
+OAuth 対応のインテグレーションを構築する場合、アプリケーションに必要なスコープだけを選択してください。顧客がインテグレーションの認可に同意すると、記載されたすべてのスコープがトークンを介してアプリケーションで利用可能になります。
 
-You can include OAuth in a new integration (or add it to an existing integration) on the [Marketplace][2] or [Integrations][3] page by following the steps below. For existing integrations, note that there's no need to change your `app_uuid` in the `manifest.json`. 
+以下の手順に従うことで、[Marketplace][2] または [Integrations][3] ページで、新しいインテグレーションに OAuth を含める (または既存のインテグレーションに追加する) ことができます。既存のインテグレーションの場合、`manifest.json` の `app_uuid` を変更する必要はありません。
 
 ### テンプレートからアプリを作成する
 
@@ -40,9 +49,11 @@ You can include OAuth in a new integration (or add it to an existing integration
 
 OAuth クライアントはアプリケーションのコンポーネントで、ユーザーがアプリケーションに対し、自身の Datadog データへのアクセスを許可することが可能になります。クライアントがアクセス権を取得するには、適切なアクセストークンが必要です。
 
-1. Navigate to the **OAuth & Permissions** tab under **Features** and click **New Confidential OAuth Client**.
+1. **Features** の **OAuth & Permissions** タブに移動し、**New Confidential OAuth Client** をクリックします。
 
-   インテグレーション用に作成する OAuth クライアントは、クライアント ID とクライアントシークレットを提供する**機密クライアント**です。この段階で作成するクライアントはクライアントの非公開バージョンで、その資格情報を使ってテストを行うことができます。このクライアントの公開バージョンが作成された際には、新しい資格情報が付与されます。**この資格情報は、クライアント作成後は二度と表示されないため、必ず安全な場所に保管してください。**
+   インテグレーション用に作成する OAuth クライアントは**機密クライアント**で、クライアント ID とクライアントシークレットが提供されます。この段階で作成するクライアントはクライアントの非公開バージョンで、その資格情報を使ってテストを行うことができます。このクライアントは、組織内部での認可のみを許可します。このクライアントの公開バージョンが作成された際には、任意の Datadog 組織での認可を可能にする新しい資格情報が付与されます。
+
+   <div class="alert alert-info">これらの資格情報は、クライアント作成後は二度と表示されないため、必ず安全な場所に保管してください。</div>
 
 2. 名前、説明、リダイレクト先の URI、オンボーディング用 URL などのクライアント情報を入力します。 
 3. スコープを検索して、**Requested** 欄のチェックボックスを選択することで、OAuth クライアントのスコープの構成を行います。
@@ -67,6 +78,7 @@ OAuth プロトコルを実装したら、OAuth クライアントをテスト�
 OAuth クライアントをテストするには、以下の手順を実行します。
 
 #### 認可が正しく機能していることをテストする
+
 基本的な認可フローを通過する際にエラーが発生しないことを確認します。
 
    1. Developer Platform に移動し、アプリの Edit アイコンをクリックし、**OAuth and Permissions** タブを開きます。
@@ -75,19 +87,34 @@ OAuth クライアントをテストするには、以下の手順を実行し�
    4. OAuth フローを進み、インテグレーションを認可します。
 
 #### API キーの作成
-OAuth クライアントが `api_keys_write` スコープをリクエストした場合、リクエストのヘッダーにトークンを含めて `marketplace_create_api` エンドポイントに正常にリクエストできることを確認します。
+
+OAuth クライアントが `api_keys_write` スコープをリクエストする場合は、リクエストヘッダーにトークンを含めて `marketplace` エンドポイントに正常にリクエストできることを確認してください。詳細は [OAuth2 認可エンドポイントリファレンス][20] を参照してください。
 
 このリクエストに成功すると、[API Keys Management ページ][10] にある API キーが返されます。このキーは、ユーザーに代わって Datadog にデータを送信する際に使用するため、安全に保存する必要があります。**最初のリクエストのレスポンス後、この API キーの値に再度アクセスすることはできません**。
 
 #### 複数の Datadog サイトをテストする
-EU の Datadog サンドボックス組織から認可を要求して、OAuth クライアントが複数の [Datadog サイト][8]で機能することをテストします。
+
+テスト用クライアントでは他組織をテストできませんが、クライアントを EU サンドボックスにコピーして認可フローを開始することで、OAuth クライアントが複数の [Datadog サイト][8]で機能することを確認できます。
    1. 別のサイトのサンドボックスアカウントへのアクセス権がない場合は、`ecosystems@datadog.com` までご連絡ください。
    2. Developer Platform で作成したアプリに移動して **Documentation** の右にある歯車アイコンをクリックし、**Export App Manifest** をクリックして、*オリジナル*の US1 Datadog サイトの組織からアプリのマニフェストをエクスポートします。
    3. EU のサンドボックス組織で Developer Platform に移動して、手順 2 でエクスポートしたアプリのマニフェストをインポートします。
    4. マニフェストのインポートが完了したら、**OAuth & Permissions** タブに移動して、OAuth クライアントとそのクライアント ID およびクライアントシークレットを確認します。これらの資格情報を使用するように OAuth 実装を更新します。
    5. **Test Authorization** ボタンに移動し、それをクリックし、OAuth フローを進みます。
 
+OAuth クライアントが公開された後は、他の組織から自由にテストを行うことができます。
+
+##### クロスリージョン対応
+
+すべての Datadog リージョンのユーザーに対して OAuth が機能するようにするには、ユーザーのリージョンに応じた正しい API 呼び出しになっていることを確認する必要があります。ユーザーが Datadog タイルから認可フローを開始すると、オンボーディング URL からのリダイレクト時に site パラメータが送信されます。この site パラメータを、認可エンドポイントおよびトークンエンドポイントへの呼び出しで使用します。
+
+ユーザーが自社のプラットフォームから直接認可フローを開始する場合、この site パラメータは送信されず、代わりに Datadog の認可ページでサイトの選択を求められます。
+
+必ず、ユーザーのリージョンに一致する Datadog API への呼び出しをテストしてください。たとえば、米国は `https://trace.browser-intake-datadoghq.com` 、EU は `https://public-trace-http-intake.logs.datadoghq.eu` を使用します。
+
+Datadog サイトに応じた呼び出し先のリストを確認するには、[Network traffic][19] ページに移動し、右側の **DATADOG SITE** セレクタを使ってリージョンを切り替えます。
+
 ### すべてのスコープのデータフローを確認する
+
 リクエストしたスコープごとに、データの送信、データの引き出し、データの編集ができることを確認します。
 
 ### OAuth クライアントを公開する
@@ -98,23 +125,27 @@ OAuth クライアントを公開するには、まず [`integrations-extras`][5
 プルリクエストの一部として、以下の手順を実行します。
 
 1. README ファイルを更新します。`## Setup` 内に `## Uninstallation` セクションとして次の指示を記入します (カスタムの指示を追加した場合は併せて記入)。
-       - このインテグレーションがアンインストールされると、以前の認可はすべて取り消されます。 
-       - さらに、[API Keys ページ][10]でインテグレーション名を検索して、このインテグレーションに関連するすべての API キーが無効になっていることを確認します。
+
+   - このインテグレーションをアンインストールすると、それ以前に与えられた認可は全て取り消されます。
+   - また、[API Keys ページ][10]でインテグレーション名を検索して、このインテグレーションに紐付けられた全ての API キーが無効になったことを確認してください。
+
 2. `manifest.json` ファイルを更新して、この新しい `## Uninstallation` セクションを参照します。この参照は、サポートフィールドの直下に表示されるはずです。
-       - ```
-           "support": "README.md#Support",
-           "uninstallation": "README.md#Uninstallation",
-         ```
+
+   ```
+   "support": "README.md#Support",
+   "uninstallation": "README.md#Uninstallation",
+   ```
 
 #### Developer Platform で公開プロセスを開始する
 
 [Developer Platform][4] で公開プロセスを開始する方法
 
-1. Navigate to the **Publishing** tab under **General**. At the top of this tab, you receive your published client ID and secret. Your OAuth implementation needs to be updated to include these client credentials. **Note:** Save your client ID and client secret in a secure location. This information is not shown again.
+1. **General** 配下の **Publishing** タブに移動し、**Next: Send App Details to Datadog** をクリックします。このタブの一番上で、公開されたクライアント ID とシークレットを取得します。OAuth の実装を更新して、これらのクライアント資格情報を含める必要があります。**注:** クライアント ID とクライアントシークレットは安全な場所に保存してください。この情報は二度と表示されません。
 
-2. Under the Integration Publishing section, follow the steps to add your OAuth information to use below within your pull request. 
+2. Integration Publishing セクションで、OAuth クライアント情報をプルリクエストに追加する手順に従います。これには、`manifest.json` ファイルの更新と、`assets` ディレクトリへのファイルの追加が含まれます。
 
-3. When opening a pull request for a **new integration** in `integrations-extras` or `Marketplace`, copy the `app_uuid` value under the Integration Publishing section and paste this within your manifest.json file under the `app_uuid` field. 
+3. 適切なフィールドに GitHub ディレクトリまたはプルリクエストへのリンクを追加します。
+4. **Finish & Send** をクリックします。
 
 OAuth クライアントが公開のために送信されると、チームに通知されます。プルリクエストがすべての関係者によって承認され、マージできる状態になると、その時点で OAuth クライアントも公開されます。その後インテグレーションタイルは、(すべての顧客に対してではなく) サンドボックスアカウントに公開され、OAuth クライアントは、(サンドボックス組織だけではなく) Datadog のどの組織でも認可できるようになります。
 
@@ -126,22 +157,112 @@ OAuth クライアントが公開のために送信されると、チームに�
 
 インテグレーションタイルの公開とプルリクエストの作成の詳細については、[Marketplace と Integrations のドキュメント][7]を参照してください。
 
-## その他の参考資料
+## トラブルシューティング
 
-お役に立つドキュメント、リンクや記事:
+### API スコープのリストには、メトリクス、イベント、ログの送信は含まれていません。
 
-- [Datadog の OAuth 2.0][1]
-- [OAuth で Datadog のインテグレーションを認可する][11]
+Datadog にデータを送信するには、ユーザーに代わって API キーを生成する際に `api_keys_write` スコープを使用します。詳細については、[API キーの作成](#create-an-api-key)を参照してください。
 
-[1]: https://docs.datadoghq.com/ja/developers/authorization/oauth2_in_datadog/
+
+### 無効なクライアント ID
+
+Error
+: `invalid_request - Invalid client_id parameter value`
+
+OAuth クライアントが公開されるまでは、その作成元アカウント (パートナーのサンドボックスアカウント) からしかクライアントを認可できません。クライアントの公開前に、そのアカウント以外で認可しようとするとこのエラーが発生します。
+
+OAuth クライアントをすでに公開している場合は、申請時に付与されたクライアント ID とクライアントシークレットを必ず使用してください。クライアントシークレットは一度しか表示されないので、紛失した場合は [ecosystems@datadog.com][11] に連絡してください。
+
+### アクセス拒否エラー
+
+Error
+: `{"errors":["Forbidden"]}`
+
+このエラーは、アプリケーションキーまたは API 認証情報の問題に関連している可能性があります。
+
+#### アプリケーションキーの使用
+
+OAuth クライアントは認証に `access_token` を使用します。`access_token` はリクエストの Authorization ヘッダーに含めて送信し、Datadog の API エンドポイントを呼び出します。
+
+```python
+headers = {"Authorization": "Bearer {}".format(access_token)}
+```
+
+詳細については、[OAuth プロトコルの実装][17]を参照してください。
+
+### API リクエスト
+
+特定のエンドポイントに API 呼び出しを行った際に Forbidden エラーが発生し、そのエンドポイントに必要なスコープを有効化している場合は、API キー、セッション、または OAuth トークンが無効であるか、有効期限切れの可能性があります。
+
+#### API キーとトークンの有効期限
+
+リフレッシュトークンは、ユーザーが認可を取り消すか、パートナーがトークンを取り消した場合を除き、失効しません。パートナーがトークンを取り消した場合、ユーザーはインテグレーションを再度認可して、新しいリフレッシュトークンとアクセストークンを生成する必要があります。詳細は [OAuth2 認可エンドポイントリファレンス][13] を参照してください。
+
+#### パートナーのサンドボックスアカウントで API キーを取得する
+
+[api_keys/marketplace][14] エンドポイントでキーを作成すると、キーはレスポンスで返されます。キーは再生成も再表示もできません。継続運用のため、キーは安全に保管してください。API キーを紛失した場合は、以下の手順に従って取り消しと再作成を行ってください。
+
+1. [Datadog API Keys Management ページ][15]に移動します。
+1. `OAuth Client API Key` という名前の API キーを探し、それを選択します。
+1. **Revoke** をクリックして API キーを無効にします。
+1. [API キーの作成](#create-an-api-key)の手順に従って、新しいキーを作成します。
+1. インテグレーションを再インストールし、OAuth フローを再実行します。
+
+
+### ホスト名/IP が証明書の Subject Alternative Name (SAN) と一致しない
+
+Error
+: `Hostname/IP does not match certificate's altnames`
+
+Datadog API に接続する際は、API 呼び出しにサブドメインを含めないでください。たとえば、`bigcorp.datadoghq.eu` ではなく `datadoghq.eu` を使用します。
+
+### リダイレクト URI の不一致
+
+Error
+: `invalid_request - Mismatching redirect URI`
+
+このエラーは通常、テスト用クライアントと公開クライアントで構成が異なるために発生します。次のことを確認してください。
+- 認可時に正しい `client_id` を使用していることを確認してください。たとえば、公開クライアントの `client_id` ではなく、テスト用クライアントの `client_id` を使用している可能性があります。
+- 正しいリダイレクト URI を使用していることを確認してください。たとえば、クライアントが公開されている場合、リダイレクト URI はテストに使用した URI ではなく、本番用に設定した URI と一致している必要があります。
+- 正しいクライアントを使用していることを確認してください。インテグレーションがサンドボックスアカウントに公開されるまで、テスト用クライアントを使用してください。
+
+### サブドメインを持つアプリケーション
+
+Datadog は、顧客が個々のサブドメインで認可を行うマルチテナント型アプリケーションをサポートしていません。認可は単一ドメイン経由のみサポートされます。
+
+### PKCE を用いた OAuth
+
+Error
+: `Invalid code or code verifier`
+
+PKCE を用いた OAuth フローで問題が発生している場合は、`Content-Type` ヘッダーが `application/json` または `application/x-www-form-urlencoded` に正しく設定されていることを確認してください。
+
+### クライアントシークレットの再生成とシークレットのローテーション
+
+シークレットが漏洩してローテーションが必要な場合は [ecosystems@datadog.com][11] までご連絡ください。同時に有効化できるシークレットは 1 つだけです。シークレットを再生成すると、既存のシークレットは削除されます。インテグレーションを再認可する必要はありません。
+
+## 参考資料
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+
+[1]: /ja/developers/authorization/oauth2_in_datadog/
 [2]: https://app.datadoghq.com/marketplace
 [3]: https://app.datadoghq.com/integrations
 [4]: https://app.datadoghq.com/apps
 [5]: https://github.com/DataDog/integrations-extras/
 [6]: http://github.com/DataDog/marketplace
-[7]: https://docs.datadoghq.com/ja/developers/integrations/marketplace_offering/#list-an-offering
-[8]: https://docs.datadoghq.com/ja/getting_started/site/
+[7]: /ja/developers/integrations/marketplace_offering/#list-an-offering
+[8]: /ja/getting_started/site/
 [9]: https://app.datadoghq.com/organization-settings/oauth-applications
 [10]: https://app.datadoghq.com/organization-settings/api-keys
-[11]: https://www.datadoghq.com/blog/oauth/
-[12]: https://docs.datadoghq.com/ja/api/latest/using-the-api/
+[11]: mailto:ecosystems@datadog.com
+[12]: /ja/api/latest/using-the-api/
+[13]: /ja/developers/authorization/oauth2_endpoints/#exchange-authorization-code-for-access-token
+[14]: /ja/developers/authorization/oauth2_endpoints/#post-apiv2api_keysmarketplace
+[15]: https://app.datadoghq.com/organization-settings/api-keys
+[16]: https://app.datadoghq.com/integrations
+[17]: /ja/developers/authorization/oauth2_in_datadog/#implement-the-oauth-protocol
+[18]: /ja/developers/integrations/
+[19]: /ja/agent/configuration/network/
+[20]: /ja/developers/authorization/oauth2_endpoints/?tab=apikeycreationendpoints

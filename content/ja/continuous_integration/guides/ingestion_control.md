@@ -3,16 +3,12 @@ description: CI Visibility で処理しないために特定のイベントを�
 further_reading:
 - link: https://www.datadoghq.com/blog/streamline-ci-testing-with-datadog-intelligent-test-runner/
   tag: ブログ
-  text: Datadog Intelligent Test Runner による CI テストの効率化
+  text: Datadog Test Impact Analysis で CI テストを効率化
 - link: /continuous_integration/pipelines
   tag: ドキュメント
   text: Pipeline Visibility について
 title: CI Visibility の取り込み制御の設定
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">選択したサイト ({{< region-param key="dd_site_name" >}}) では現在 CI Visibility は利用できません。</div>
-{{< /site-region >}}
 
 ## 概要
 

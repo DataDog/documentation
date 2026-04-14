@@ -49,7 +49,7 @@ You can create multiple metrics using the same query by selecting the **Create A
 
 **Note**: Data points for process-based metrics are generated at ten second intervals. There may be up to a 3-minute delay from the moment the metric is created or updated, to the moment the first data point is reported.
 
-<div class="alert alert-warning">Process-based metrics are considered <a href="/metrics/custom_metrics/">custom metrics</a> and billed accordingly. Avoid grouping by unbounded or extremely high cardinality tags like <code>command</code> and <code>user</code> to avoid impacting your billing.</div>
+<div class="alert alert-danger">Process-based metrics are considered <a href="/metrics/custom_metrics/">custom metrics</a> and billed accordingly. Avoid grouping by unbounded or extremely high cardinality tags like <code>command</code> and <code>user</code> to avoid impacting your billing.</div>
 
 ### Update a process-based metric
 

@@ -39,7 +39,7 @@ DogStatsD는 Docker Hub 및 GCR에서 사용할 수 있습니다:
 |--------------------------------------------------|-----------------------------------------------------------|
 | [hub.docker.com/r/datadog/dogstatsd][3]          | [gcr.io/datadoghq/dogstatsd][4]                           |
 
-<div class="alert alert-warning">Docker Hub에는 이미지 풀링 속도 제한이 있습니다. Docker Hub 고객이 아닌 경우, Datadog에서는 Datadog 에이전트와 클러스터 에이전트 구성을 업데이트하여 GCR이나 ECR에서 풀링하도록 구성할 것을 권고합니다. 예를 들어, <a href="/agent/guide/changing_container_registry">컨테이너 레지스트리 변경</a>을 참고하세요.
+<div class="alert alert-danger">Docker Hub에는 이미지 풀링 속도 제한이 있습니다. Docker Hub 고객이 아닌 경우, Datadog에서는 Datadog 에이전트와 클러스터 에이전트 구성을 업데이트하여 GCR이나 ECR에서 풀링하도록 구성할 것을 권고합니다. 예를 들어, <a href="/agent/guide/changing_container_registry">컨테이너 레지스트리 변경</a>을 참고하세요.
 
 ## 작동 방식
 
@@ -343,7 +343,7 @@ options = {
 initialize(**options)
 ```
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 기본값으로 파이썬(Python) DogStatsD 클라이언트 인스턴스(<code>statsd</code> 글로벌 인스턴스 포함)는 프로세스 간에 공유할 수 없지만 스레드-세이프입니다. 따라서 상위 프로세스와 각 하위 프로세스는 클라이언트의 고유한 인스턴스를 생성하거나 <code>disable_buffering</code>을 <code>True</code>로 설정하여 버퍼링을 명시적으로 해제해야 합니다. 자세한 내용은 <a href="https://datadogpy.readthedocs.io/en/latest/#datadog-dogstatsd">datadog.dogstatsd</a>의 설명서를 참조하세요.
 </div>
 

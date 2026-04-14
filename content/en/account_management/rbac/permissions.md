@@ -1,5 +1,6 @@
 ---
 title: Datadog Role Permissions
+description: Complete reference of Datadog permissions, including managed roles, custom roles, sensitive permissions, and the permissions list.
 aliases:
   - /account_management/faq/managing-global-role-permissions
 disable_toc: true
@@ -47,19 +48,29 @@ Preview mode gives your organization's administrators the ability to opt into ce
 
 By default, existing users are associated with one of the three managed roles:
 
-- Datadog Admin
-- Datadog Standard
-- Datadog Read Only
+- Datadog Admin Role
+- Datadog Standard Role
+- Datadog Read Only Role
 
-All users with one of these roles can read all data types, except for [individually read-restricted][1] resources. Admin and Standard users have write permissions on assets. Admin users have additional read and write permissions for sensitive assets relating to user management, org management, billing, and usage.
+All users with one of these roles can read data, except for [individually read-restricted][1] resources. Admin and Standard users have write permissions on assets. Admin users have additional read and write permissions for sensitive assets relating to user management, org management, billing, and usage.
 
 Managed roles are created and maintained by Datadog. Their permissions may be automatically updated by Datadog as new features are added or permissions change. Users cannot modify managed roles directly, but they can clone them to create [custom roles](#custom-roles) with specific permissions. If necessary, users can delete managed roles from their account.
 
 ### Custom roles
 
-Create a custom role to combine permissions into new roles. A custom role gives you the ability to define a persona, for example, a billing administrator, and then assign the appropriate permissions for that role. After creating a role, assign or remove permissions to this role directly by [updating the role in Datadog][2], or through the [Datadog Permission API][3].
+Create a custom role to combine permissions into new roles. A custom role gives you the ability to define a persona, for example, a billing administrator, and then assign the appropriate permissions for that role. After creating a role, assign or remove permissions to this role directly by [updating the role in Datadog][2], or through the [Datadog Permission API][3]. You can also add a permission to multiple custom roles at once by selecting those roles from the Roles page and hitting **Add Permission**.
 
-**Note**: When adding a new custom role to a user, make sure to remove the managed Datadog role associated with that user to enforce the new role permissions.
+Unlike Managed Roles, custom roles do not receive new permissions when Datadog releases new products and features, unless configured to receive Automatic Updates. If Automatic Updates are off, custom roles only receive new permissions to maintain compatibility when Datadog releases a new permission gating existing functionality.
+
+To configure Automatic Updates for custom roles:
+
+1. Go to the Organization Settings page and click the **Roles** tab.
+2. Click the role you want to update and click **Edit Role**.
+3. Under **Automatically Receives Permissions**, choose an option from the dropdown: None, Datadog Read Only Role, Datadog Standard Role, or Datadog Admin Role.
+
+If the custom role is configured to receive automatic updates, your custom role receives any new permissions whenever they are released to the selected role template. No already-released permissions are added. You can add or remove any permissions from this role and continue to receive automatic updates.
+
+**Note**: When adding a new custom role to a user, make sure to remove the managed Datadog role associated with that user to strictly enforce the new role permissions.
 
 ## Permissions list
 

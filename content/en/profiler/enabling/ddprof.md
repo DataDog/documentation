@@ -15,8 +15,8 @@ further_reading:
       text: 'Fix problems you encounter while using the profiler'
 ---
 
-<div class="alert alert-warning">
-<code>ddprof</code> is in beta. Datadog recommends evaluating the profiler in a non-sensitive environment before deploying in production.
+<div class="alert alert-danger">
+<code>ddprof</code> is in Preview. Datadog recommends evaluating the profiler in a non-sensitive environment before deploying in production.
 </div>
 
 The native profiler for compiled languages (`ddprof`) uses OS level APIs to collect profiling data. It is ideally suited for applications written in compiled languages, such as C, C++, or Rust.
@@ -59,7 +59,7 @@ The profiler can be used either as a standalone executable or as a library. Skip
 
    Use `arm64` instead of `amd64` for `aarch64` platform.
 
-3. Modify your service invocation to include the profiler. Your usual command is passed as the last arguments to the `ddprof` executable.
+2. Modify your service invocation to include the profiler. Your usual command is passed as the last arguments to the `ddprof` executable.
    {{< tabs >}}
 {{% tab "Environment variables" %}}
 
@@ -107,7 +107,7 @@ exec ./ddprof --environment prod --service my-web-app --service_version 1.0.3 my
 {{< /tabs >}}
 
 
-5. A few minutes after starting your application, your profiles appear on the [Datadog APM > Profiler page][3].
+3. A couple of minutes after you start your application, your profiles appear on the [Datadog APM > Profiler page][3]. If they do not, refer to the [Troubleshooting][8] guide.
 
 ### Library
 
@@ -224,3 +224,4 @@ The [Getting Started with Profiler][6] guide takes a sample service with a perfo
 [5]: https://github.com/DataDog/ddprof/blob/main/docs/Commands.md
 [6]: /getting_started/profiler/
 [7]: /profiler/enabling/supported_versions/
+[8]: /profiler/profiler_troubleshooting/ddprof/

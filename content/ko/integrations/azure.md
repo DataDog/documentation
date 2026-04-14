@@ -113,7 +113,7 @@ Datadog의 Azure 통합 기능으로 Azure 환경에서 메트릭 및 로그를 
 - Datadog 생성 메트릭으로 Azure 환경에 대한 고유한 통찰을 제공합니다.
 - 로그, 메트릭, 애플리케이션 성능 모니터링(APM) 트레이싱, 사용자 활동, Datadog 조직 내 기타 데이터 등, Azure 애플리케이션의 데이터를 상호 연결합니다.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Datadog의 Azure 통합은 <a href="https://docs.microsoft.com/en-us/azure/azure-monitor/platform/metrics-supported">Azure 모니터링의 메트릭을 모두 수집하도록</a> 제작되었습니다. Datadog은 하위 통합을 모두 포괄하기 위해 문서를 지속적으로 업데이트하려고 노력하나, 클라우드 서비스는 신규 메트릭 및 서비스를 빠르게 출시하므로 통합 목록의 업데이트가 종종 늦어질 수도 있습니다.<br> <code>azure.*.status</code> 및 <code>azure.*.count</code> 메트릭은  Datadog Azure Resource Health가 생성합니다. 자세한 내용을 확인하려면 <a href="https://docs.datadoghq.com/integrations/guide/azure-status-metric">Azure 상태 및 카운트 메트릭</a>을 참조하세요.
 </div>
 

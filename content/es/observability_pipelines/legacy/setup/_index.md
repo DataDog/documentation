@@ -20,10 +20,6 @@ title: (LEGACY) Configurar el worker de pipelines de observabilidad
 type: multi-code-lang
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Los pipelines de observabilidad no se encuentran disponible en el sitio US1-FED de Datadog.</div>
-{{< /site-region >}}
-
 {{% observability_pipelines/legacy_warning %}}
 
 ## Información general

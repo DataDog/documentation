@@ -5,13 +5,16 @@ aliases:
 - /ja/monitors/create/types/composite/
 description: 複数のモニターを組み合わせた式に対してアラートする
 further_reading:
+- link: /monitors/guide/composite_use_cases
+  tag: ドキュメント
+  text: Composite Monitor Use Cases
 - link: /monitors/notify/
   tag: ドキュメント
   text: モニター通知の設定
 - link: /monitors/downtimes/
   tag: ドキュメント
   text: モニターをミュートするダウンタイムのスケジュール
-- link: /monitors/manage/status/
+- link: /monitors/status/
   tag: ドキュメント
   text: モニターステータスを確認
 title: 複合条件モニター
@@ -81,7 +84,7 @@ a || b && !c
 
 ### 通知
 
-For instructions on using template variables from a composite monitor's constituent monitors in your notifications, see [composite monitor variables][4]. For detailed instructions on the **Configure notifications and automations** section, see the [Notifications][3] page.
+コンポジット モニターを構成する各モニターのテンプレート変数を通知で使用する方法については、[コンポジット モニター変数][4] を参照してください。**Configure notifications and automations** セクションの詳細な手順については、[通知][3] ページを参照してください。
 
 ### API
 
@@ -199,7 +202,7 @@ API を使用している場合、複合条件モニターのクエリはモニ�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/monitors#create/composite
+[1]: https://app.datadoghq.com/monitors/create/composite
 [2]: /ja/monitors/configuration/#advanced-alert-conditions
 [3]: /ja/monitors/notify/
 [4]: /ja/monitors/notify/variables/?tab=is_alert#composite-monitor-variables

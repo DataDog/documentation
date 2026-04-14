@@ -73,10 +73,13 @@ MyParsingRule %{word:user} connected on %{date("MM/dd/yyyy"):date}
 * 동일한 Grok Parser 내에 고유한 규칙 이름이 있어야 합니다.
 * 규칙 이름은 영숫자, `_`, `.`만 포함해야 하며, 반드시 영숫자로 시작해야 합니다.
 * 값이 0이거나 비어 있는 속성은 표시되지 않습니다.
-* 정규식 일치기는 암묵적으로 `^`과 `$`를 적용하여 문자열의 시작과 끝이 매칭되도록 합니다.
+* 각 규칙은 로그의 시작부터 끝까지 적용되므로 전체 로그 항목과 일치하도록 파싱 규칙을 정의해야 합니다.
 * 특정 로그에는 큰 가격의 공백을 생성할 수 있습니다. `\n` 및 `\s+`을 사용하여 줄 바꿈과 공백을 고려하세요.
 
 ### 일치기 및 필터
+
+<div class="alert alert-danger"><em>query-time</em>에 사용 가능한 Grok 파싱 기능(<a href="/logs/workspaces/#transformation-cell">Log Workspaces</a> 및 <a href="/logs/explorer/calculated_fields/">Log Explorer</a>에서)은 매처(<strong>data</strong>, <strong>integer</strong>, <strong>notSpace</strong>, <strong>number</strong>, <strong>word</strong>)와 필터(<strong>number</strong> 및 <strong>integer1</strong>)의 제한된 하위 세트를 지원합니다.<br><br>
+다음 매처 및 필터의 전체 세트는 <em>ingest-time</em> <a href="/logs/log_configuration/processors/?tab=ui#grok-parser">Grok Parser</a> 기능에만 적용됩니다.</div>
 
 다음은 Datadog에서 기본적으로 구현된 모든 일치기와 필터 목록을 보여줍니다.
 
@@ -207,7 +210,7 @@ MyParsingRule %{word:user} connected on %{date("MM/dd/yyyy"):date}
 : 예상 수치에 제공된 계수를 곱합니다.
 
 `array([[openCloseStr, ] separator][, subRuleOrFilter)`
-: 토큰의 문자열 시퀀스를 파싱하여 배열로 반환합니다. 목록 to array](#목록-to-array) 예제를 참조하세요.
+: 토큰의 문자열 시퀀스를 파싱하여 배열로 반환합니다. [배열할 목록](#list-to-array) 예제를 참조하세요.
 
 `url`
 : URL을 파싱하여 토큰화된 모든 멤버(도메인, 쿼리 매개변수, 포트 등)를 JSON 객체로 반환합니다. [URL 파싱 방법에 대한 자세한 정보][2]를 참조하세요.
@@ -233,7 +236,7 @@ Grok 프로세서 타일의 하단에는 **고급 설정** 섹션이 있습니�
 
 ### 도우미 규칙을 사용하여 여러 파싱 규칙을 인수 분해하기
 
-**도우미 규칙** 필드를 사용하여 파싱 규칙에 대한 토큰을 정의하세요. 도우미 규칙 도움말을 사용하면 파싱 규칙에서 Grok 패턴을 인수 분해할 수 있습니다. 이 기능은 동일한 Grok Parser에 동일한 토큰을 사용하는 여러 개의 규칙이 있을 때 유용합니다.
+**지원 규칙** 필드를 사용하여 파싱 규칙에 대한 토큰을 정의하세요. 지원 규칙을 사용하면 파싱 규칙에서 Grok 패턴을 인수 분해할 수 있습니다. 이 기능은 동일한 Grok Parser에 동일한 토큰을 사용하는 여러 개의 규칙이 있을 때 유용합니다.
 
 구조화되지 않은 전형적인 로그 예시:
 
@@ -247,7 +250,7 @@ john id:12345 connected on 11/08/2017 on server XYZ in production
 MyParsingRule %{user} %{connection} %{server}
 ```
 
-다음과 같은 도우미를 사용합니다.
+다음과 같은 지원을 사용합니다.
 
 ```text
 user %{word:user.name} id:%{integer:user.id}
@@ -259,11 +262,11 @@ server on server %{notSpace:server.name} in %{notSpace:server.env}
 
 ## 예시
 
-파싱기 사용 방법을 보여주는 몇 가지 예제입니다:
+Parser 사용 방법을 보여주는 몇 가지 예시입니다.
 
 * [키 값 또는 로그](#key-value-or-logfmt)
 * [파싱 날짜](#parsing-dates)
-* [교대 패턴](#alternating-pattern)
+* [대체 패턴](#alternating-pattern)
 * [선택 속성](#optional-attribute)
 * [중첩된 JSON](#nested-json)
 * [정규식](#regex)
@@ -281,7 +284,7 @@ server on server %{notSpace:server.name} in %{notSpace:server.env}
 * `quotingStr`는 따옴표를 정의하여 기본 따옴표 감지를 대체합니다: `<>`, `""`, `''`.
 * `delimiter`는 서로 다른 키 값 쌍 사이의 구분 기호를 정의합니다(예: `|`는 `key1=value1|key2=value2`의 구분 기호입니다). 기본값은 ` ` (normal space), `,` and `;` 입니다.
 
-**keyvalue** 등 필터를 사용하면 문자열을 키값 또는 로그값 형식의 속성에 더 쉽게 매핑할 수 있습니다:
+**keyvalue** 등 필터를 사용하면 문자열을 keyvalue 또는 logfmt 형식의 속성에 더 쉽게 매핑할 수 있습니다:
 
 **로그:**
 
@@ -420,7 +423,7 @@ john connected on 11/08/2017
 'id'는 문자열이 아닌 정수라는 점에 유의하세요.
 
 ```text
-내 파싱 규칙 (%{정수:사용자.id}|%{단어:사용자.이름}) %{date("MM/dd/yyyy"):connect_date}에 연결됨
+MyParsingRule (%{integer:user.id}|%{word:user.firstname}) connected on %{date("MM/dd/yyyy"):connect_date}
 ```
 
 **결과**:
@@ -442,7 +445,7 @@ john 1234 connected on 11/08/2017
 **규칙**:
 
 ```text
-내 파싱 규칙 %{워드:사용자.이름} (%{정수:사용자.id} )?연결된 %{날짜("MM/dd/yyyy"):연결_날짜}
+MyParsingRule %{word:user.firstname} (%{integer:user.id} )?connected on %{date("MM/dd/yyyy"):connect_date}
 ```
 
 **참고**: 선택 섹션의 첫 단어 뒤에 공백을 포함하면 규칙이 매칭되지 않습니다.
@@ -453,7 +456,7 @@ john 1234 connected on 11/08/2017
 
 ### 중첩된 JSON
 
-`json` 필터를 사용하여 원시 텍스트 접두사 뒤에 중첩된 JSON 객체를 파싱합니다:
+`json` 필터를 사용하여 원시 텍스트 접두사 뒤에 중첩된 JSON 객체를 파싱합니다.
 
 **로그**:
 
@@ -595,7 +598,7 @@ rule %{data::xml}
 
 ### CSV 파싱
 
-**CSV** 필터를 사용하면 문자열을 지정된 문자로 구분할 때 속성에 더 쉽게 매핑할 수 있습니다(기본값은`,` ).
+**CSV** 필터를 사용하면 문자열을 지정된 문자로 구분할 때 속성에 더 쉽게 매핑할 수 있습니다(기본값은 `,`).
 
 CSV 필터는 `csv(headers[, separator[, quotingcharacter]])`로 정의됩니다.
 
@@ -608,7 +611,7 @@ CSV 필터는 `csv(headers[, separator[, quotingcharacter]])`로 정의됩니다
 * 구분 문자가 포함된 값은 따옴표로 묶어야 합니다.
 * 따옴표 문자가 포함된 값은 따옴표 문자를 사용하여 이스케이프 처리해야 합니다. 예를 들어 따옴표로 묶인 값 내의 `""`은 `"`을 나타냅니다.
 * 로그에 헤더의 키 수와 동일한 수의 값이 포함되어 있지 않으면 CSV 파서는 첫 번째 항목과 일치합니다.
-* 정수와 복수는 가능하면 자동으로 캐스팅됩니다.
+* 정수를 표현하는 Integar와 부동 소숫점을 표시하기 위한 Double은 가능하면 자동으로 캐스팅됩니다.
 
 **로그**:
 
@@ -662,7 +665,7 @@ Usage: 24.3%
 **규칙**:
 
 ```
-내 파싱 규칙 사용\:\s+%{번호:사용}%{데이터:무시}
+MyParsingRule Usage\:\s+%{number:usage}%{data:ignore}
 ```
 
 **결과**:

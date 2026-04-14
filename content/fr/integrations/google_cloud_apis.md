@@ -47,7 +47,7 @@ Une fois cette opération effectuée, exportez vos logs Google Cloud API depui
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "google_cloud_apis" >}}
+{{< get-metrics-from-git "google-cloud-apis" >}}
 
 
 ### Événements

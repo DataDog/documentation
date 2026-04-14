@@ -83,7 +83,7 @@ AWS PrivateLink は、VPC、AWS サービス、およびお客様のオンプレ
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "amazon_privatelink" >}}
+{{< get-metrics-from-git "amazon-privatelink" >}}
 
 
 ### イベント

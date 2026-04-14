@@ -1,5 +1,6 @@
 ---
 title: Getting Started with the Datadog Operator
+description: Deploy the Datadog Agent in Kubernetes using the Datadog Operator. Install with Helm, configure Agent settings, and enable metrics, logs, and APM collection.
 further_reading:
   - link: '/containers/datadog_operator'
     tag: 'documentation'
@@ -66,7 +67,7 @@ The [Datadog Operator][1] is an open source [Kubernetes Operator][2] that enable
 
 ### Running Agents in a single container
 
-<div class="alert alert-warning">Available in Operator v1.4.0 or later</div>
+<div class="alert alert-danger">Available in Operator v1.4.0 or later</div>
 
 By default, the Datadog Operator creates an Agent DaemonSet with pods running multiple Agent containers. Datadog Operator v1.4.0 introduces a configuration which allows users to run Agents in a single container. In order to avoid elevating privileges for all Agents in the single container, this feature is only applicable when `system-probe` or `security-agent` is not required. For more details, see [Running as an unprivileged user][7] on the Agent Data Security page.
 

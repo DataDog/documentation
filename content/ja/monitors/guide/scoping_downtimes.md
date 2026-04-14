@@ -39,7 +39,7 @@ title: ダウンタイムのスコープ
 
 ダウンタイムは、モニタータグに基づいてモニターにスケジュールすることができ、さらにモニタークエリでグループ化されたタグによってスコープダウンすることができます。`By Monitor Tags` を選択し、対象とするモニタータグを入力します。
 
-**Note**: Tags are additive, meaning that an input of `env:dev team:automations` will target monitors that are tagged with **both**, `env:dev` AND `team:automations`.
+**注**: タグは付加的です。つまり、`env:dev team:automations` という入力は、`env:dev` と `team:automations` の**両方**のタグが付けられたモニターを対象とします。
 
 ### すべてのモニターを対象にする
 
@@ -59,8 +59,6 @@ title: ダウンタイムのスコープ
 {{< img src="monitors/downtimes/downtime_example_byname.png" alt="'By Monitor Name' のダウンタイム例 (影響を受けるモニターのプレビュー付き)" style="width:90%;">}}
 
 スケジュールされたダウンタイムが始まると、このモニターではグループ `service:web-store` のアラートのみがミュートされます。
-
-{{< img src="monitors/downtimes/downtime_examplebyname1_monitor.png" alt="グループ service:web-store のダウンタイムを示す評価グラフ" style="width:90%;">}}
 
 これは、`service:web-store` タグを含むアラートをミュートします。例:
 
@@ -122,11 +120,7 @@ title: ダウンタイムのスコープ
 
 6. *モニター A* は、ダウンタイムが開始されたことを示していますが、スコープ内のグループのみです: `service:web-store`
 
-{{< img src="monitors/downtimes/downtime_examplebytag1_monitor.png" alt="グループ service:web-store のダウンタイムを示す評価グラフ" style="width:80%;">}}
-
 7. *モニター B* は、`service:web-store` のダウンタイムが開始されたことを示しています。すべてのモニターのグループ (`host` ごと) は `service:web-store` に属しているため、このモニターのダウンタイム中にすべてのホストがミュートされます。
-
-{{< img src="monitors/downtimes/downtime_examplebytag1_monitor2.png" alt="グループ service:web-store と影響を受ける両ホストのダウンタイムを示す評価グラフ" style="width:80%;">}}
 
 ## 参考資料
 

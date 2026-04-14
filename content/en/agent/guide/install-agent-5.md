@@ -1,9 +1,9 @@
 ---
 title: Install Datadog Agent 5
 further_reading:
-- link: "/agent/basic_agent_usage/"
+- link: "agent/"
   tag: "Documentation"
-  text: "Basic Agent Usage"
+  text: "The Datadog Agent"
 private: true  
 ---
 
@@ -731,7 +731,7 @@ docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v
 If the one-step install command does not work, it's possible that your system mounts the `cgroup` directory in an unexpected place or does not use CGroups for memory management. CGroups are required for the Docker check to succeed. To enable CGroups, see the documentation in the [docker-dd-agent][1] repo. If the check is failing because of an unexpected `cgroup` directory location:
 
 1. Run `mount | grep "cgroup type tmpfs"` to retrieve the location of the `cgroup` directory.
-1. Replace the first occurence of `/sys/fs/cgroup` in the one-step install command with the location of the `cgroup` directory.
+1. Replace the first occurrence of `/sys/fs/cgroup` in the one-step install command with the location of the `cgroup` directory.
 
 ### Send custom metrics
 

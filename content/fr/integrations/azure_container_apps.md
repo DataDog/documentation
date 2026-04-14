@@ -1,53 +1,85 @@
 ---
-aliases: []
+app_id: azure-container-apps
+app_uuid: 4cfaeef2-96d5-4497-be6a-8d06169e8ddb
+assets:
+  dashboards:
+    azure_container_apps: assets/dashboards/azure_container_apps.json
+  integration:
+    auto_install: true
+    events:
+      creates_events: false
+    metrics:
+      check: azure.app_containerapps.requests
+      metadata_path: metadata.csv
+      prefix: azure.app_containerapps
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 800
+    source_type_name: Azure Container Apps
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - azure
 - cloud
-- containers
+- incident-teams
+custom_kind: integration
 dependencies: []
-description: Recueillez des métriques d'Azure Container Apps.
-doc_link: https://docs.datadoghq.com/integrations/azure_container_apps/
+display_on_public_website: true
 draft: false
 git_integration_title: azure_container_apps
-has_logo: true
 integration_id: azure-container-apps
-integration_title: Microsoft Azure Container Apps
+integration_title: Azure Container Apps
 integration_version: ''
 is_public: true
-custom_kind: integration
-manifest_version: '1.0'
+manifest_version: 2.0.0
 name: azure_container_apps
-public_title: Intégration Datadog/Microsoft Azure Container Apps
-short_description: Recueillez des métriques d'Azure Container Apps.
-version: '1.0'
+public_title: Azure Container Apps
+short_description: Suivez les indicateurs clés d'Azure Container Apps.
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Azure
+  - Category::Cloud
+  - Category::Containers
+  - Offering::Integration
+  configuration: README.md#Setup
+  description: Suivez les indicateurs clés d'Azure Container Apps.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Azure Container Apps
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-## Présentation
+<!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
+## Section Overview
 
 Azure Container Apps vous permet de créer et déployer des applications modernes et des microservices à l'aide de conteneurs sans serveur. Pour en savoir plus, consultez la [documentation de Microsoft][1] dédiée à Azure Container Apps.
 
-## Formule et utilisation
+## Configuration
 
-### Liste des infrastructures
+### Installation
 
 Si vous ne l'avez pas déjà fait, configurez l'[intégration Microsoft Azure][2].
 
-## Real User Monitoring
+## Données collectées
 
-### Analyse d'entonnoirs
-{{< get-metrics-from-git "azure_container_apps" >}}
+### Métriques
+{{< get-metrics-from-git "azure-container-apps" >}}
 
 
-### Aide
+### Événements
 
 L'intégration Azure Container Apps n'inclut aucun événement.
 
-### Aide
+### Checks de service
 
 L'intégration Azure Container Apps n'inclut aucun check de service.
 
-## Aide
+## Dépannage
 
 Besoin d'aide ? Contactez [l'assistance Datadog][4].
 

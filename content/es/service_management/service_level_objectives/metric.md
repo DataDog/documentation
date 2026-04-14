@@ -10,6 +10,9 @@ further_reading:
 - link: /service_management/service_level_objectives/
   tag: Documentación
   text: Visión general de SLO, configuración y cálculo
+- link: https://www.datadoghq.com/blog/define-and-manage-slos/
+  tag: Blog
+  text: Mejores prácticas para gestionar tus SLOs con Datadog
 title: SLOs basados en la métrica
 ---
 
@@ -17,11 +20,11 @@ title: SLOs basados en la métrica
 
 Los SLOs basados en la métrica son útiles para un flujo (stream) basado en el recuento de datos en el que se diferencian los buenos y los malos eventos. Una consulta métrica utiliza la suma de los eventos buenos dividida por la suma del total de eventos a lo largo del tiempo para calcular un Indicador de nivel de servicio (o SLI). Puedes utilizar cualquier métrica para crear SLOs, incluyendo métricas personalizadas generadas a partir de [APM spans (tramos de APM)][1], [RUM events (eventos de RUM)][2] y [logs][3]. Para obtener una visión general sobre cómo se configuran y calculan los SLOs, consulta la página [Service Level Objective (Objetivo de nivel de servicio][4].
 
-{{< img src="service_management/service_level_objectives/metric-based-slo-example.png" alt="ejemplo de SLO basado en la métrica" >}}
+{{< img src="service_management/service_level_objectives/metric_slo_side_panel.png" alt="Ejemplo de SLO basado en métricas" >}}
 
 ## Configuración
 
-En la [SLO status page (página de estado de SLO)][5], selecciona **New SLO +** (Nuevo SLO +). A continuación, selecciona [**Metric** (métrica)][6].
+En la [página de estado de SLOs][5], haz clic en **+ New SLO** (+ Nuevo SLO). A continuación, selecciona [**By Count** (Por recuento)][6].
 
 ### Definir consultas
 
@@ -37,17 +40,15 @@ En la [SLO status page (página de estado de SLO)][5], selecciona **New SLO +** 
 
 #### Multigrupo para SLI basados en métrica
 
-Los SLI basados en métricas te permiten centrarte en los atributos más importantes de tus SLI. Puedes añadir grupos a tus SLI basados en métricas en el editor utilizando etiquetas como `centro de datos`, `partición`, `zona de disponibilidad`, `recurso`, o cualquier otro grupo relevante:
+Los SLI basados en métricas te permiten centrarte en los atributos más importantes de tus SLI. Puedes añadir grupos a tus SLI basados en métricas en el editor, utilizando etiquetas como `datacenter`, `env`, `availability-zone`, `resource` o cualquier otro grupo relevante:
 
-{{< img src="service_management/service_level_objectives/metric_editor.png" alt="editor de SLO basado en métricas agrupado" >}}
+{{< img src="service_management/service_level_objectives/metric_slo_creation.png" alt="Editor de SLOs basados en métricas agrupados" >}}
 
 Al agrupar estos SLI, puedes visualizar el estado de cada grupo individual, la solicitud buena Counts, y el presupuesto de errores restante en el panel de detalles:
 
-{{< img src="service_management/service_level_objectives/metric_results.png" alt="resultados de grupo de SLO basado en métricas" >}}
+{{< img src="service_management/service_level_objectives/metric_slo_history_groups.png" alt="Resultados de grupos de SLOs basados en métricas" >}}
 
 Por defecto, el gráfico de barras muestra el total de Counts de solicitudes buenas y malas para todo el SLO. Puedes consultar el gráfico de barras en contexto para ver las solicitudes Counts buenas y malas de cada grupo individual haciendo clic en la fila correspondiente de la tabla. Además, también puedes optar por mostrar u ocultar las solicitudes Counts buenas o malas seleccionando la opción correspondiente en la leyenda situada justo debajo del gráfico de barras. 
-
-**Nota**: Si utilizas SLI basados en monitor, también puedes [view monitor groups (ver grupos de monitor)][8].
 
 ### Establece tus objetivos SLO
 
@@ -59,7 +60,7 @@ Mientras el SLO se mantenga por encima del porcentaje objetivo, el estado del SL
 
 **Nota:** Se permiten hasta tres decimales para los objetivos SLO basados en métricas. La precisión mostrada en la interfaz de usuario de detalles del SLO será de hasta `num_target_decimal_places + 1 = 4 decimales`. La precisión exacta mostrada dependerá de la magnitud de los valores en tu consulta de denominador. Cuanto mayor sea la magnitud del denominador, mayor será la precisión que podrá mostrarse hasta el límite de cuatro decimales.
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

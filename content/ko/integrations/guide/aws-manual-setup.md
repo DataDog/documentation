@@ -50,7 +50,7 @@ title: AWS 매뉴얼 설정 가이드
 AWS 통합을 수동으로 설정하려면 AWS 계정에서 IAM 정책 및 IAM 역할을 생성하고 Datadog 계정에 생성된 AWS 외부 ID로 역할을 설정합니다. 이를 통해 Datadog의 AWS 계정이 사용자 대신 AWS API를 쿼리하고 데이터를 Datadog 계정으로 가져올 수 있습니다. 아래 섹션에서는 이러한 각 구성 요소를 생성한 후 Datadog 계정에서 설정을 완료하는 단계까지 자세히 설명합니다.
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <em>Role Delegation을 사용한 S3 Log Archives 설정은 현재 제한적으로 제공됩니다. 정부용 Datadog 계정에서 이 기능을 요청하려면 <a href="https://docs.datadoghq.com/help/">Datadog 지원팀</a>에 문의하세요</em>.
 </div>
 {{< /site-region >}}

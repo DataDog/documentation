@@ -1,48 +1,38 @@
 ---
+app_id: webhook
 categories:
 - developer tools
 - notifications
-custom_kind: インテグレーション
-dependencies: []
-description: 「Datadog のアラートやイベントで任意の Webhook を通知チャンネルとして使用します。」
-doc_link: https://docs.datadoghq.com/integrations/webhooks/
-draft: false
+custom_kind: integration
+description: Webhooks を使って自社サービスと連携しましょう！
 further_reading:
 - link: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/webhook
-  tag: Terraform
-  text: 「Terraform で Webhook を作成・管理します」
-git_integration_title: Webhooks
-has_logo: true
-integration_id: ''
-integration_title: Webhooks
-integration_version: ''
-is_public: true
-manifest_version: '1.0'
-name: Webhooks
-public_title: 「Datadog-Webhooks インテグレーション」
-short_description: 「Datadog のアラートやイベントで任意の Webhook を通知チャンネルとして使用します。」
-version: '1.0'
+  tag: terraform
+  text: Webhooks (Terraform)
+media: []
+title: Webhook
 ---
-
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Webhook を使用して、以下のことができます。
 
--   ご使用のサービスに接続できます。
--   メトリクスアラートがトリガーされたときにサービスにアラートを送信できます。
+- ご使用のサービスに接続できます。
+- メトリクスアラートがトリガーされたときにサービスにアラートを送信できます。
 
 ## セットアップ
 
-[Webhooks インテグレーションタイル][1]に移動して、使用する Webhook の URL と名前を入力します。
+[Webhooks インテグレーション タイル](https://app.datadoghq.com/integrations/webhooks) に移動し、使用する webhook の URL と名前を入力してください。
 
-## 使用方法
+## Usage
 
-Webhook を使用するには、Webhook をトリガーするメトリクスアラートのテキストに `@webhook-<WEBHOOK_NAME>` を追加します。これにより、以下の内容を JSON 形式で含む POST リクエストが、設定した URL に向けてトリガーされます。各リクエストのタイムアウトは 15 秒です。Datadog は、内部エラー (不正な形式の通知メッセージなど) が発生した場合、または Webhook エンドポイントから 5XX 応答を受け取った場合にのみ、再試行を発行します。失敗した接続は 5 回再試行されます。
+webhook を利用するには、webhook をトリガーしたいメトリクス アラートの本文に `@webhook-<WEBHOOK_NAME>` を追加します。これにより、設定した URL に対して、次の内容を含む JSON 形式の POST リクエストが送信されます。
 
-**注**: カスタムヘッダーは JSON フォーマットである必要があります。
+Datadog は、内部エラー (不正な形式の通知メッセージなど) が発生した場合、または Webhook エンドポイントから 5XX 応答を受け取った場合にのみ再試行を行います。各リクエストのタイムアウトは 15 秒で、接続失敗時には最大 5 回まで再試行されます。
 
-ペイロードフィールドに独自のペイロードを指定して、リクエストに独自のカスタムフィールドを追加することもできます。ペイロードを URL エンコードする場合は、**Encode as form** をオンにし、JSON 形式でペイロードを指定します。以下のセクションの変数を使用できます。
+**注**:
+
+- カスタム ヘッダーは JSON 形式で指定する必要があります。リクエストに独自のカスタム フィールドを追加したい場合は、Payload フィールドで独自のペイロードを指定することもできます。ペイロードを URL エンコードしたい場合は、 **Encode as form** チェック ボックスをオンにし、ペイロードを JSON 形式で指定してください。次のセクションの変数を使用します。
+- HIPAA の制約により、Datadog は Webhooks 経由でセキュリティ通知を送信しません。Datadog の通知で、 **Finding** に含まれるセキュリティ上の弱点、または **Signals** 内の Security 製品を参照する場合、 **Notify the following recipients** 設定で `@webhook...` を使用できません。HIPAA を有効化したアカウントでは、セキュリティ アラートは webhook に送信されません。これらのアラートを webhook に送信したい場合は、例外の適用について Datadog のアカウント チームまでお問い合わせください。
 
 ### 変数
 
@@ -90,8 +80,12 @@ $ALERT_TYPE
 **例**: `error`、`warning`、`success`、`info`
 
 $DATE
-: イベントが発生した日付 _(epoch)_。<br />
+: イベントが発生した日時を、エポック (ミリ秒) で表した値です。<br />
 **例**: `1406662672000`
+
+$DATE_POSIX
+: イベントが発生した日時を、POSIX エポック (秒) で表した値です。<br />
+**例**: `1406662672`
 
 $EMAIL
 : Webhook をトリガーしたイベントをポストしたユーザーの電子メール。
@@ -116,8 +110,8 @@ $ID
 **例**: `1234567`
 
 $INCIDENT_ATTACHMENTS
-: インシデントの添付 (事後分析やドキュメントなど) のある JSON オブジェクトのリスト。<br />
-**例**: `[{"attachment_type": "postmortem", "attachment": {"documentUrl": "https://app.datadoghq.com/notebook/123","title": "Postmortem IR-1"}}]` 
+: ポストモーテムやドキュメントなど、インシデントに添付されたファイルを表す JSON オブジェクトのリストです。<br />
+**例**: `[{"attachment_type": "postmortem", "attachment": {"documentUrl": "https://app.datadoghq.com/notebook/123","title": "Postmortem IR-1"}}]`
 
 $INCIDENT_COMMANDER
 : JSON オブジェクトとインシデントコマンダーのハンドル、uuid、名前、メール、およびアイコン
@@ -163,16 +157,22 @@ $INCIDENT_UUID
 **例**: `01c03111-172a-50c7-8df3-d61e64b0e74b`
 
 $LAST_UPDATED
-: イベントが最後に更新された日付。
+: イベントが最後に更新された日時を、エポック (ミリ秒) で表した値です。<br />
+**例**: `1406662672000`
+
+$LAST_UPDATED_POSIX
+: イベントが最後に更新された日時を、POSIX エポック (秒) で表した値です。<br />
+**例**: `1406662672`
 
 $LINK
 : イベントの URL。<br />
 **例**: `https://app.datadoghq.com/event/jump_to?event_id=123456`
 
 $LOGS_SAMPLE
-: ログモニターアラートからのログサンプルを含む JSON オブジェクト。サンプルメッセージの最大長は 500 文字です。<br />
+: ログ モニターのアラートに含まれるログ サンプルを格納した JSON オブジェクトです。サンプル メッセージの最大長は 500 文字です。<br />
 **例**:<br />
-: {{< code-block lang="json">}}
+
+```json
 {
   "columns": [
     "Time",
@@ -196,7 +196,7 @@ $LOGS_SAMPLE
     }
   ]
 }
-{{< /code-block >}}
+```
 
 $METRIC_NAMESPACE
 : メトリクスがアラートの場合は、メトリクスのネームスペース
@@ -257,13 +257,14 @@ $SNAPSHOT
 $SYNTHETICS_TEST_NAME
 : Synthetics テストの名前。
 
-$SYNTHETICS_FIRST_FAILING_STEP_NAME 
-: Synthetics テストの最初の失敗したステップの名前。
+$SYNTHETICS_FIRST_FAILING_STEP_NAME
+: Synthetics テストで最初に失敗したステップ名です。
 
 $SYNTHETICS_SUMMARY
-: Summary of Synthetic test details.<br />
-**Example**:
-: {{< code-block lang="json">}}
+: Synthetic テストの詳細の概要<br />
+**例**:
+
+```json
 {
   "result_id": "1871796423670117676",
   "test_type": "browser",
@@ -283,15 +284,15 @@ $SYNTHETICS_SUMMARY
     }
   ]
 }
-{{< /code-block >}}
+```
 
 $TAGS
 : イベントタグのカンマ区切りリスト。<br />
 **例**: `monitor, name:myService, role:computing-node`
 
-$TAGS[key]
-: `key` タグの値。もし `key` タグがない場合、あるいは `key` タグに値がない場合、この式は空の文字列に評価されます。
-**例**: もし `$TAGS` が `role:computing-node` を含むなら、`$TAGS[role]` は `computing-node` と評価されます。
+$TAGS\[key\]
+: `key` タグの値です。`key` タグが存在しない、または `key` タグに値が設定されていない場合、この式は空文字列として評価されます。
+**例**: `$TAGS` に `role:computing-node` が含まれる場合、`$TAGS[role]` は `computing-node` に評価されます
 
 $TEXT_ONLY_MSG
 : マークダウン書式設定なしのイベントのテキスト。
@@ -323,11 +324,11 @@ OAuth 2.0 認証を必要とするサービスに Webhook をポストしたい�
 
 認証方式を追加するには、Auth Methods タブ をクリックし、New Auth Method ボタンをクリックします。認証方式にに分かりやすい名前を付け、以下の情報を入力します。
 
-* アクセストークン URL
-* Client ID
-* Client Secret
-* スコープ (オプション)
-* オーディエンス (オプション)
+- アクセストークン URL
+- Client ID
+- Client Secret
+- スコープ (オプション)
+- オーディエンス (オプション)
 
 Save をクリックして認証方式を作成します。この認証方式を Webhook に適用するには、Configuration タブに戻り、既存の Webhook 構成を選択して Edit ボタンをクリックします。作成した認証方式が認証方式選択リストに表示されます。
 
@@ -386,14 +387,14 @@ URL として使用する:
 | ---------  | ------------------- |
 | `ci_pipelines_alert` | CI パイプライン |
 | `ci_tests_alert` | CI テスト |
-| `composite_monitor` | コンポジット |
+| `composite_monitor` | Composite |
 | `error_tracking_alert` | Error Tracking |
 | `event_alert` | V1 エンドポイントを使用したイベント |
 | `event_v2_alert` | V2 エンドポイントを持つイベント |
-| `log_alert` | Logs |
+| `log_alert` | ログ |
 | `monitor_slo_alert` | モニターベース SLO |
 | `metric_slo_alert` | メトリクスベース SLO |
-| `outlier_monitor` | 外れ値 |
+| `outlier_monitor` | Outlier |
 | `process_alert` | プロセス |
 | `query_alert_monitor` | メトリクス、異常値、予測 |
 | `rum_alert` | RUM |
@@ -401,8 +402,6 @@ URL として使用する:
 | `synthetics_alert` | Synthetics |
 | `trace_analytics_alert` | トレース分析 |
 
-## 参考資料
+## サポート
 
-{{< partial name="whats-next/whats-next.html" >}}
-
-[1]: https://app.datadoghq.com/integrations/webhooks
+ヘルプが必要ですか？[Datadog サポート](https://docs.datadoghq.com/help/)にお問い合わせください

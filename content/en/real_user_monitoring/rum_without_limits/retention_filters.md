@@ -11,7 +11,18 @@ further_reading:
   - link: '/real_user_monitoring/rum_without_limits/metrics'
     tag: Documentation
     text: Analyze Performance with Metrics
+  - link: "https://www.datadoghq.com/blog/rum-apm-retention-filters"
+    tag: "Blog"
+    text: "Unify and correlate frontend and backend data with retention filters"
+  - link: 'https://learn.datadoghq.com/courses/rum-retention-filters'
+    tag: 'Learning Center'
+    text: 'Interactive Lab: RUM Retention Filters'
 ---
+
+{{< learning-center-callout header="Try RUM Retention Filters in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/rum-retention-filters" hide_image="false" >}}
+  Learn how to use RUM retention filters to control which session data is stored and optimize your observability budget.
+{{< /learning-center-callout >}}
+
 ## Overview
 
 Retention filters are a set of queries, similar to those used in the RUM Session Explorer, that are executed against the RUM events (sessions, views, actions, resources, and so on) as they are ingested. These filters determine whether a session is stored for the standard 30-day RUM retention period or discarded.
@@ -20,38 +31,52 @@ The **retention rate** specifies the percentage of matching sessions you want to
 
 ## How it works
 
-A session is stored when at least one retention filter matches one of its constituting events and retains the underlying session based on the configured retention rate.
+A session is stored as soon as a retention filter matches one of its constituting events based on the predefined query, and samples it in based on the configured retention rate.
 
-{{< img src="real_user_monitoring/rum_without_limits/rum-without-limits-how-retention-filters-work.png" alt="Diagram showing the logical flow of retention filters and how they impact the number of sessions ultimately retained." style="width:90%" >}}
+{{< img src="real_user_monitoring/rum_without_limits/rum-without-limits-how-retention-filters-work-2.png" alt="Diagram showing the logical flow of retention filters and how they impact the number of sessions ultimately retained." style="width:80%" >}}
 
 The logical flow of retention filters is the following:
 
-- All RUM events are evaluated against each filter in sequence, starting with the first.
-- If an event matches a filter, a decision is made to retain or discard the session containing the event, and subsequent filters are not executed.
-- Retained sessions are saved and accessible in the Session Explorer and other RUM pages. New events coming from this session are automatically kept to ensure complete visibility.
-- If an event does not match any filters, or if it matches a filter but the decision is made not to retain the session based on the configured retention rate, future events from the same session will continue to be processed. As a result, the session may eventually be retained.
+- All RUM events are evaluated against each filter in sequence, starting with the first one received.
+- When an event `A` matches a filter, a decision is made based on the retention rate to either sample the entire session in, or wait for future events to be evaluated. In both cases, event `A` is not evaluated further against subsequent retention filters. This is why the **order of retention filters matters**.
+- Retained sessions are saved and accessible in the Session Explorer and other RUM pages. New events coming from this session do not go through the list of retention filters, but are automatically kept to ensure complete visibility.
 
-**Note**: Be cautious when defining filters on event attributes that update over time. For example, a filter retaining sessions with fewer than two errors might mistakenly retain sessions, as error counts update in real-time. Use "greater than or equal to" (≥) conditions for fields that update, such as `@session.error.count >= 2`.
+**Notes**:
+
+- If an event does not match any filters, or if it matches a filter but the decision is made not to retain the session based on the configured retention rate, future events from the same session will continue to be evaluated. As a result, the session may eventually be retained.
+- Be cautious when defining filters on event attributes that update over time. For example, a filter retaining sessions with fewer than two errors might mistakenly retain sessions, as error counts update in real-time, and all sessions start at zero. Either use "greater than or equal to" (≥) conditions for fields that update, such as `@session.error.count >= 2`, or ensure the Session and View objects that are mutable are complete before evaluating them against the retention filters, by adding `@session.is_active: false` or `@view.is_active: false`.
+- Our SDKs batch and compress events before sending them to Datadog, and failed uploads go back at the end of the queue on the device. Therefore, it could happen that event `B` is evaluated before event `A`, but all events are eventually evaluated against the list of retention filters to prevent gaps.
 
 ## How retention filters work with replays
 
 You can manage session sampling with replays using retention filters. Whenever a session with replays is billed, both the session events and the video recording are kept and billed. This means that if you collect 100% of sessions and 100% of replays from SDKs, whenever a retention filter keeps a session, Datadog keeps and charges for both the session and the replay.
 
-Replays collected through the [force collection][1] mechanism are kept by the default retention filter, positioned first in the list (see below).
+**Note**: Though Datadog's mobile SDKs also provide APIs to conditionally start and stop the recording (instead of relying on a flat sample rate), only the replays that are force-recorded by the Browser SDK are retained by default.
 
-{{< img src="real_user_monitoring/rum_without_limits/retention-session-filter.png" alt="When force collection is enabled, it is positioned first in the list of retention filters." style="width:90%" >}}
+## Permanent retention filters
 
+Permanent retention filters are predefined retention filters that cannot be modified, disabled, or deleted. They are positioned at the top of your retention filters list.
+
+{{< img src="real_user_monitoring/rum_without_limits/permanent-retention-filters.png" alt="The three permanent retention filters shown at the top of the retention filter list." style="width:100%" >}}
+
+There are three permanent retention filters:
+
+- **RUM-APM Flat Sampling**: Retains 1% of sessions with ingested distributed traces (and index their traces on APM). These sessions (and their traces) are **not subject to RUM billing (or APM billing)**.
+- **Synthetics Sessions**: Retains all sessions generated by [Synthetic Monitoring][1]. These sessions are billed under Synthetic Monitoring and are **not subject to RUM billing**.
+- **Sessions with forced replays**: Retains all sessions for which a replay was force-collected through the [force collection][2] mechanism.
+
+<div class="alert alert-info">The RUM-APM Flat Sampling permanent retention filter only applies with the following SDKs: <br> - Browser 6.5.0+ <br> - Android 3.0.0+ <br> - iOS 3.3.0+ <br> - React Native 3.0.0+ <br></div>
 
 ## Creating a retention filter
 
 To create a retention filter:
 
-1. Navigate to [**Digital Experience** > **Manage Applications**][2].
+1. Navigate to [**Digital Experience** > **Manage Applications**][3].
 1. Create a RUM application or click an existing application.
 1. Under Product Settings, go to the **Retention Filters** page.
 1. Click the **+ Add Retention Filter** button.
 1. Give the retention filter a descriptive name.
-1. Select an event type from the dropdown and enter a query. Any query that can be written in the [RUM Explorer][3] works with retention filters.
+1. Select an event type from the dropdown and enter a query. Any query that can be written in the [RUM Explorer][4] works with retention filters.
 1. Optionally, set a retention rate against sessions that match the retention query. You can click **Generate Estimate** to help guide you in setting this rate.
 
 The new filter gets added to the bottom of the Retention Filters list. It takes seconds for Datadog to propagate a new filter and start making sampling decisions.
@@ -91,26 +116,79 @@ Use the toggle to the right of the filter to disable or enable it.
 
 Drag and drop filters to reorder filters to their new position.
 
+## Excluding sessions using retention filters
+
+RUM without Limits uses retention filters to specify which sessions to keep, rather than which to exclude. You cannot set a retention percentage to 0% (the default is 1%). Additionally, setting low retention percentages is not an effective exclusion strategy because sessions may still be retained by other filters in your configuration.
+
+To ensure sessions from a particular environment, application version, device type, or other criteria are not retained, explicitly add exclusions **inside the query of ALL OF YOUR FILTERS**. For example:
+
+- Adding `-version:(1* OR 2*)` to all retention filters ensures you never keep events from older versions 1 and 2 of your application.
+- Adding `-@device.type:Bot` to all retention filters excludes search engine crawlers and other self-declared bots.
+- Adding `-@geo.country:"South Korea"` to all retention filters excludes all sessions from South Korea.
+
+For example, to exclude sessions from South Korea while retaining all other sessions, create a filter with the query `-@geo.country:"South Korea"` and set the retention rate to 100%.
+
+**Note**: There is no way to prevent a specific event from being retained. You can use negative queries (for instance, adding `-@error.message:"Script error."` to a retention filter targeting RUM Errors) to minimize the volume of undesired events, but other retention filters may still make a positive retention decision about a session that contains the event you tried to filter out.
+
+## Cross-product retention filters
+
+Cross-product retention filters allow you to optimize the correlation between different products to retain richer telemetry. When configuring a RUM retention filter, you can enable a cross-product retention filter for APM traces.
+
+{{< img src="real_user_monitoring/rum_without_limits/cross-product-retention-filters-overview.png" alt="RUM retention filters with cross-product retention filters enabled for APM traces." style="width:100%" >}}
+
+The **APM traces filter** indexes APM traces for the specified percentage of sessions retained by the parent RUM retention filter that have available traces.
+
+**Note**: The availability of APM traces depends on your **trace sampling SDK configuration** (learn how to <a href="/real_user_monitoring/correlate_with_other_telemetry/apm?tab=browserrum">Correlate RUM with APM Traces</a>)
+
+  <div class="alert alert-info">The APM traces filter is only compatible with the following versions of the SDKs: <br> - Browser 6.5.0+ <br> - Android 3.0.0+ <br> - iOS 3.3.0+ <br> - React Native 3.0.0+ <br></div>
+
+<div class="alert alert-danger">Configuring cross-product retention filters may increase APM-indexed volumes.</div>
+
+To **find sessions with indexed APM traces** in the RUM Explorer, query `@session.has_indexed_apm_traces:true`.
+
+### Example
+
+Consider a configuration where you set up a unique RUM retention filter configured as follows:
+
+{{< img src="real_user_monitoring/rum_without_limits/cross-product-retention-filters-apm-only.png" alt="A RUM retention filter targeting errors at 60% retention, with a cross-product filter set to 25% for APM Traces." style="width:60%" >}}
+
+If you have configured the SDK to sample 40% of traces, then the outcome is the following:
+
+- 40% of ingested RUM sessions have their traces ingested on APM.
+- 60% of ingested RUM sessions with at least one error are retained.
+- 25% x 40% = 10% of these retained sessions have their APM traces indexed.
+
+<div class="alert alert-info">Cross-product retention filters only apply to sessions retained by the corresponding RUM retention filter. This means filters order matters for both RUM retention and cross-product filters.<br><br>
+
+For more information, see <a href="/real_user_monitoring/rum_without_limits/retention_filters/#how-it-works">How it works</a>.</div>
+
+### Cross-product retention filters on permanent filters
+
+Cross-product retention filters are also available on the <a href="/real_user_monitoring/rum_without_limits/retention_filters/#permanent-retention-filters">Permanent Retention Filters</a>. The APM traces filter is **only editable on Synthetic Monitoring Sessions and Sessions with forced replays filters**.
+
+<div class="alert alert-danger">APM traces indexed through a cross-product retention filter on the Synthetics or Forced Replay permanent filters are subject to APM billing.</div>
+
 ## Best practices
 
-See [Retention Filter Best Practices][4].
+See [Retention Filter Best Practices][5].
 
 ## API
 
-Retention filters can be managed through [APIs][5] or Datadog's dedicated [Terraform modules][6].
+Retention filters can be managed through [APIs][6] or Datadog's dedicated [Terraform modules][7].
 
 ## Next steps
 
-Analyze performance with [metrics][7].
+Analyze performance with [metrics][8].
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/session_replay/browser/#force-session-replay
-[2]: https://app.datadoghq.com/rum/list
-[3]: /real_user_monitoring/explorer/
-[4]: /real_user_monitoring/guide/retention_filter_best_practices
-[5]: /api/latest/rum-retention-filters/
-[6]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/data-sources/rum_retention_filters
-[7]: /real_user_monitoring/rum_without_limits/metrics
+[1]: /synthetics/
+[2]: /session_replay/browser/#force-session-replay
+[3]: https://app.datadoghq.com/rum/list
+[4]: /real_user_monitoring/explorer/
+[5]: /real_user_monitoring/guide/retention_filter_best_practices
+[6]: /api/latest/rum-retention-filters/
+[7]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/data-sources/rum_retention_filters
+[8]: /real_user_monitoring/rum_without_limits/metrics

@@ -1,29 +1,58 @@
 ---
-aliases:
-- /fr/integrations/azure_networkinterface
+app_id: azure-networkinterface
+app_uuid: b027e3ae-abcf-4beb-bab4-5dec50c611b2
+assets:
+  integration:
+    auto_install: true
+    events:
+      creates_events: false
+    metrics:
+      check: azure.network_networkinterfaces.bytes_received_rate
+      metadata_path: metadata.csv
+      prefix: azure.network_networkinterfaces
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 297
+    source_type_name: Azure Network Interface
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - azure
 - cloud
 - network
 custom_kind: integration
 dependencies: []
-description: Surveillez des métriques clés d'Azure Network Interface.
-doc_link: https://docs.datadoghq.com/integrations/azure_network_interface/
+display_on_public_website: true
 draft: false
 git_integration_title: azure_network_interface
-has_logo: true
 integration_id: azure-networkinterface
-integration_title: Microsoft Azure Network Interface
+integration_title: Azure Network Interface
 integration_version: ''
 is_public: true
-manifest_version: '1.0'
+manifest_version: 2.0.0
 name: azure_network_interface
-public_title: Intégration Datadog/Microsoft Azure Network Interface
+public_title: Azure Network Interface
 short_description: Surveillez des métriques clés d'Azure Network Interface.
-version: '1.0'
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Azure
+  - Category::Cloud
+  - Category::Network
+  - Offering::Integration
+  configuration: README.md#Setup
+  description: Surveillez des métriques clés d'Azure Network Interface.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Azure Network Interface
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
+<!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
 ## Section Overview
 
 Azure Network Interface permet à une machine virtuelle Azure de communiquer avec Internet, Azure et des ressources sur site.
@@ -39,7 +68,7 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Microsoft�
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "azure_network_interface" >}}
+{{ get-metrics-from-git "azure-networkinterface" }}
 
 
 ### Événements

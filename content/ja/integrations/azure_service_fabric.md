@@ -1,8 +1,8 @@
 ---
 categories:
-- cloud
+- クラウド
 - azure
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 description: Azure Service Fabric からメトリクスを追跡する
 doc_link: https://docs.datadoghq.com/integrations/azure_service_fabric/

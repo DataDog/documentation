@@ -16,7 +16,7 @@ assets:
     service_checks:
       metadata_path: assets/service_checks.json
     source_type_id: 10134
-    source_type_name: NVIDIA Jetson
+    source_type_name: Nvidia Jetson
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -24,20 +24,20 @@ author:
   support_email: help@datadoghq.com
 categories:
 - iot
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/nvidia_jetson/README.md
 display_on_public_website: true
 draft: false
 git_integration_title: nvidia_jetson
 integration_id: nvidia-jetson
-integration_title: NVIDIA Jetson
+integration_title: Nvidia Jetson
 integration_version: ''
 is_public: true
 manifest_version: 2.0.0
 name: nvidia_jetson
-public_title: NVIDIA Jetson
-short_description: NVIDIA Jetson ボードに関するメトリクスを収集します
+public_title: Nvidia Jetson
+short_description: Nvidia Jetson ボードに関するメトリクスを収集します
 supported_os:
 - linux
 tile:
@@ -47,11 +47,11 @@ tile:
   - Category::IoT
   - Offering::Integration
   configuration: README.md#Setup
-  description: NVIDIA Jetson ボードに関するメトリクスを収集します
+  description: Nvidia Jetson ボードに関するメトリクスを収集します
   media: []
   overview: README.md#Overview
   support: README.md#Support
-  title: NVIDIA Jetson
+  title: Nvidia Jetson
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->

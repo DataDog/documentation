@@ -24,7 +24,7 @@ Para instalar el SDK del navegador Datadog para que sea compatible con aplicacio
 
 1. Configura e instala la [monitorización del Navegador RUM][2] dentro de **cada proceso de renderizado**, siguiendo los pasos para CDN sínc, CDN asínc, o NPM.
 
-2. Configura el parámetro `allowFallbackToLocalStorage` como `true` en la configuración de inicialización de RUM de cada proceso de renderizado, como se muestra a continuación. 
+2. Configura el parámetro `sessionPersistence` como `"local-storage"` en la configuración de la inicialización de RUM de cada proceso de renderizado, como se muestra a continuación.
 
    **Nota**: Esta configuración permite a Datadog recopilar datos RUM sin depender de las cookies del navegador.
 
@@ -37,7 +37,7 @@ Para instalar el SDK del navegador Datadog para que sea compatible con aplicacio
      clientToken: '<DATADOG_CLIENT_TOKEN>',
      site: '<DATADOG_SITE>',
      ...
-     allowFallbackToLocalStorage: true
+     sessionPersistence: "local-storage"
      });
    ```
 
@@ -48,7 +48,8 @@ Para instalar el SDK del navegador Datadog para que sea compatible con aplicacio
 ### Soporte para aplicaciones Electron híbridas
 La política del mismo origen impide el seguimiento de una aplicación en una misma sesión en la que las páginas se cargan tanto de forma local (`file://`) como remota (`http(s)://`).
 
-Esto significa que una aplicación que utiliza Electron para integrar una página de inicio y que luego redirige al usuario a un sitio web alojado en Internet da lugar a la creación de dos sesiones para ese usuario: una para la parte del inicio de archivos locales incorporados (`file://`) de la aplicación y otra para la parte remota (`https://` archivos disponibles en Internet).
+Esto significa que una aplicación que utiliza Electron para integrar una página de inicio y más tarde redirige al usuario a un sitio web alojado en Internet resulta en la creación de dos sesiones para ese usuario: una para la parte de inicio de los archivos locales incrustados (`file://`) de la aplicación y otra para la parte remota (archivos `https://` disponibles en Internet).
+   **Nota**: Las trazas (traces) de stack tecnológico sin minificar no están disponibles cuando se monitorizan aplicaciones Electron que cargan archivos locales incrustados donde las trazas de stack tecnológico comienzan con `file://`. Para obtener trazas de stack tecnológico sin minificar en este escenario, debes sobrescribirlas manualmente utilizando la [callback `beforeSend()`][5]. Para obtener más ayuda, ponte en contacto con el [equipo de asistencia de Datadog][6].
 
 ### Sesiones de corta duración para instancias con varias ventanas activas a la vez
 Un problema con la latencia de replicación del almacenamiento local entre ventanas puede provocar la creación de una sesión de corta duración (menos de 1 segundo). Para solucionar este problema, asegúrate de que se crean e inicializan varias ventanas con un intervalo de más de 10 ms.
@@ -57,6 +58,8 @@ Un problema con la latencia de replicación del almacenamiento local entre venta
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://www.electronjs.org/
-[2]: /es/real_user_monitoring/browser/setup
+[2]: /es/real_user_monitoring/browser/setup/
 [3]: https://www.electronjs.org/docs/latest/tutorial/process-model#the-renderer-process
 [4]: /es/real_user_monitoring/explorer/
+[5]: /es/real_user_monitoring/browser/advanced_configuration/?tab=npm#enrich-and-control-rum-data
+[6]: https://docs.datadoghq.com/es/help/

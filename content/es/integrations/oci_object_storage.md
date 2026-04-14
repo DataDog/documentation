@@ -84,7 +84,7 @@ Una vez configurada la integración de [Oracle Cloud Infrastructure][2], asegúr
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "oci_object_storage" >}}
+{{< get-metrics-from-git "oci-object-storage" >}}
 
 
 ### Checks de servicios

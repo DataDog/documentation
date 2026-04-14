@@ -3,7 +3,7 @@ dependencies:
 - https://github.com/DataDog/dd-trace-rb/blob/release/docs/legacy/GettingStarted-v1.md
 title: (Heredado) Rastreo de aplicaciones Ruby
 ---
-<div class="alert alert-warning">Esta documentación corresponde a la gema <code>ddtrace</code> v1.x. Si estás utilizando la gema <code>Datadog</code> v2.0 o posterior, consulta la documentación más reciente sobre el <a href="https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/dd_libraries/ruby/">rastreo de aplicaciones Ruby</a>.</div>
+<div class="alert alert-danger">Esta documentación corresponde a la gema <code>ddtrace</code> v1.x. Si estás utilizando la gema <code>Datadog</code> v2.0 o posterior, consulta la documentación más reciente sobre el <a href="https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/dd_libraries/ruby/">rastreo de aplicaciones Ruby</a>.</div>
 
 `ddtrace` es el cliente de rastreo de Datadog para Ruby. Se utiliza para rastrear solicitudes a medida que circulan a través de servidores web,
 bases de datos y microservicios, para que los desarrolladores tengan una amplia visibilidad de los cuellos de botella y las solicitudes problemáticas.
@@ -16,7 +16,7 @@ Para ver la documentación general de APM, consulta nuestra [documentación de c
 
 Para obtener más información sobre el aspecto de APM una vez que la aplicación envía información a Datadog, consulta [Términos y conceptos][visualization docs].
 
-Para ver la documentación de la API de biblioteca, consulta nuestra [documentación de YARD][yard docs].
+Para ver la documentación de la API de librería, consulta nuestra [documentación de YARD][yard docs].
 
 Para contribuir, consulta las [directrices para contribuciones][contribution docs] y la [guía de desarrollo][development docs].
 
@@ -29,7 +29,7 @@ Para contribuir, consulta las [directrices para contribuciones][contribution doc
 
 ## Requisitos de compatibilidad
 
-Para ver una lista completa de la compatibilidad de Datadog con la biblioteca de Ruby, consulta los [requisitos de compatibilidad][1].
+Para ver una lista completa de la compatibilidad de Datadog con la librería de Ruby, consulta los [requisitos de compatibilidad][1].
 
 ## Instalación
 
@@ -110,7 +110,7 @@ O
       - [Añadir parámetros de configuración adicionales](#additional-configuration)
       - [Activar o reconfigurar la instrumentación](#integration-instrumentation)
 
-#### Otras aplicaciones Ruby 
+#### Otras aplicaciones Ruby
 
 Si tu aplicación no utiliza las gemas compatibles (Rails o Hanami) anteriores, puedes configurarla de la siguiente manera:
 
@@ -338,7 +338,7 @@ Para ver la lista de las opciones de configuración para las integraciones dispo
 
 #### CI Visibility
 
-Para Datadog CI Visibility, la instrumentación de bibliotecas puede activarse y configurarse a través de la siguiente API `Datadog.configure`:
+Para Datadog CI Visibility, la instrumentación de librerías puede activarse y configurarse a través de la siguiente API `Datadog.configure`:
 
 ```ruby
 Datadog.configure do |c|
@@ -1436,7 +1436,7 @@ Las `options` son los siguientes argumentos de palabra clave:
 
 La integración de Rack proporciona un middleware que rastrea todas las solicitudes antes de que lleguen al marco o la aplicación subyacente. Responde a la interfaz mínima de Rack, proporcionando valores razonables que pueden recuperarse a nivel de Rack.
 
-Este integración se activa automáticamente con marcos web como Rails. Si utilizas una aplicación Rack sencilla, habilita la integración con tu `config.ru`:
+Este integración se activa automáticamente con web frameworks como Rails. Si utilizas una aplicación Rack sencilla, habilita la integración con tu `config.ru`:
 
 ```ruby
 # Ejemplo de config.ru
@@ -2111,7 +2111,7 @@ Por ejemplo, si `tracing.sampling.default_rate` está configurado mediante [conf
 |                                                         | `DD_TRACE_AGENT_URL`                                    | `nil`                        | Configura el endpoint de la URL donde se envían las trazas. Tiene prioridad sobre `agent.host` y `agent.port`. Si la [configuración del Agent](#configuring-trace-data-ingestion) configura `receiver_port` o `DD_APM_RECEIVER_PORT` con un valor distinto del valor predeterminado `8126`, entonces `DD_TRACE_AGENT_PORT` o `DD_TRACE_AGENT_URL` deben coincidir con él.                                                                                                                                                                                                                                                               |
 | `diagnostics.debug`                                     | `DD_TRACE_DEBUG`                                        | `false`                      | Habilita o deshabilita el modo de depuración. Imprime logs con información detallada. **NO recomendado para entornos de producción u otros entornos confidenciales.** Para obtener más detalles, consulta [Depuración y diagnóstico](#debugging-and-diagnostics).                                                                                                                                                                                                                                                                                                                                                                                   |
 | `diagnostics.startup_logs.enabled`                      | `DD_TRACE_STARTUP_LOGS`                                 | `nil`                        | Imprime la configuración de inicio y los diagnósticos para registrar. Para evaluar el estado del rastreo al inicio de la aplicación y obtener más detalles, consulta [Depuración y diagnóstico](#debugging-and-diagnostics).                                                                                                                                                                                                                                                                                                                                                                                                |
-| `env`                                                   | `DD_ENV`                                                | `nil`                        | Tu entorno de aplicación. (Por ejemplo, `production`, `staging`, etc.) Este valor se drfine como una etiqueta en todas las trazas.                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| `env`                                                   | `DD_ENV`                                                | `nil`                        | Tu entorno de aplicación. (Por ejemplo, `production`, `staging`, etc.) Este valor se define como una etiqueta en todas las trazas.                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 | `service`                                               | `DD_SERVICE`                                            | *Nombre de archivo de Ruby*              | El nombre de servicio por defecto de tu aplicación. (Por ejemplo, `billing-api`). Este valor se establece como una etiqueta en todas las trazas.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
 | `tags`                                                  | `DD_TAGS`                                               | `nil`                        | Etiquetas personalizadas en pares de valores separados por `,` (por ejemplo, `layer:api,team:intake`). Estas etiquetas se configuran en todas las trazas. Para más detalles, consulta [Entorno y etiquetas](#environment-and-tags).                                                                                                                                                                                                                                                                                                                                                                                                         |
 | `time_now_provider`                                     |                                                         | `->{ Time.now }`             | Cambia cómo se recupera la hora. Para obtener más detalles, consulta [Configuración del proveedor de tiempo](#setting-the-time-provider).                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
@@ -2125,7 +2125,7 @@ Por ejemplo, si `tracing.sampling.default_rate` está configurado mediante [conf
 | `tracing.distributed_tracing.propagation_inject_style`  | `DD_TRACE_PROPAGATION_STYLE_INJECT`                     | `['Datadog','tracecontext']` | Formatos de propagación de rastreo distribuido para inyectar. Anula `DD_TRACE_PROPAGATION_STYLE`. Para obtener más detalles, consulta [Rastreo distribuido](#distributed-tracing).                                                                                                                                                                                                                                                                                                                                                                                                                             |
 | `tracing.distributed_tracing.propagation_style`         | `DD_TRACE_PROPAGATION_STYLE`                            | `nil`                        | Formatos de propagación de rastreo distribuido para extraer e inyectar. Para obtener más detalles, consulta [Rastreo distribuido](#distributed-tracing).                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 | `tracing.enabled`                                       | `DD_TRACE_ENABLED`                                      | `true`                       | Habilita o deshabilita el rastreo. Si se configura como `false`, la instrumentación seguirá ejecutándose, pero no se enviará ninguna traza al Trace Agent.                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-| `tracing.header_tags`                                   | `DD_TRACE_HEADER_TAGS`                                  | `nil`                        | Registra las cabeceras HTTP como etiquetas de tramo. Para obtener más información, consulta [Aplicar etiquetas de cabeceras en tramos raíz][header tags].                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| `tracing.header_tags`                                   | `DD_TRACE_HEADER_TAGS`                                  | `nil`                        | Registra las cabeceras HTTP como span tags. Para obtener más información, consulta [Aplicar etiquetas de cabeceras en tramos raíz][header tags].                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
 | `tracing.instrument(<integration-name>, <options...>)`  |                                                         |                              | Activa la instrumentación para una biblioteca específica. Para obtener más detalles, consulta [Instrumentación de la integración](#integration-instrumentation).                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 | `tracing.log_injection`                                 | `DD_LOGS_INJECTION`                                     | `true`                       | Inyecta información de [correlación de trazas](#trace-correlation) en logs de Rails, si está presente. Admite el generador de logs por defecto (`ActiveSupport::TaggedLogging`), `lograge` y `semantic_logger`.                                                                                                                                                                                                                                                                                                                                                                                                  |
 | `tracing.partial_flush.enabled`                         |                                                         | `false`                      | Habilita o deshabilita la descarga parcial. La descarga parcial envía las partes completadas de una traza al Agent. Se utiliza cuando se rastrean instrumentos de tareas de duración prolongada (por ejemplo, tareas) con muchos tramos.                                                                                                                                                                                                                                                                                                                                                                                                 |
@@ -2190,7 +2190,7 @@ Se sugieren dos medios diferentes de generación de diagnósticos para el rastre
 
 ##### Habilitación del modo de depuración
 
-Si se cambia la biblioteca al modo de depuración, se obtendrán logs detallados y completos sobre la actividad de rastreo, incluidos los errores eliminados. Este resultado puede ser útil para identificar errores o confirmar el envío de trazas al Agent.
+Si se cambia la librería al modo de depuración, se obtendrán logs detallados y completos sobre la actividad de rastreo, incluidos los errores eliminados. Este resultado puede ser útil para identificar errores o confirmar el envío de trazas al Agent.
 
 Puede habilitarlo a través de `diagnostics.debug = true` o `DD_TRACE_DEBUG`.
 
@@ -2560,7 +2560,7 @@ Para las aplicaciones de Rails que utilizan el gestor de logs por defecto (`Acti
 
 Puede deshabilitarse configurando la variable de entorno `DD_LOGS_INJECTION=false`.
 
-#### Para la gestión de logs en aplicaciones Ruby 
+#### Para la gestión de logs en aplicaciones Ruby
 
 Para añadir ID de correlación a tu gestor de logs, añade un formateador de logs que recupere los ID de correlación con `Datadog::Tracing.correlation`, y luego añádelos al mensaje.
 
@@ -2713,7 +2713,7 @@ Configuración de tu aplicación para la recopilación de métricas:
 
 #### Para el tiempo de ejecución de la aplicación
 
-Si se configuran métricas de tiempo de ejecución, la biblioteca de rastreo recopila y envía automáticamente métricas sobre el estado de tu aplicación.
+Si se configuran métricas de tiempo de ejecución, la librería de rastreo recopila y envía automáticamente métricas sobre el estado de tu aplicación.
 
 Para configurar métricas de tiempo de ejecución, añade la siguiente configuración:
 
@@ -2830,7 +2830,7 @@ Como la implementación de `alias_method` existe dentro de esas bibliotecas, Dat
 
 * `rack-mini-profiler`: [Errores de nivel de stack tecnológico Net::HTTP demasiado profundo](https://github.com/MiniProfiler/rack-mini-profiler#nethttp-stack-level-too-deep-errors).
 
-Para bibliotecas sin una solución alternativa conocida, considera eliminar la biblioteca utilizando `alias` o `Module#alias_method`, o separando las bibliotecas en diferentes entornos para realizar tests.
+Para bibliotecas sin una solución alternativa conocida, considera eliminar la librería utilizando `alias` o `Module#alias_method`, o separando las bibliotecas en diferentes entornos para realizar tests.
 
 Si tienes alguna pregunta o quieres informar un problema de este tipo, [ponte en contacto con el servicio de asistencia de Datadog](https://docs.datadoghq.com/help).
 

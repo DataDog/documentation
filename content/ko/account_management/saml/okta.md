@@ -10,7 +10,7 @@ title: Okta SAML 신원 공급자 설정
 ---
 
 {{% site-region region="gov" %}}
-<div class="alert alert-warning">
+<div class="alert alert-danger">
     {{< region-param key="dd_site_name" >}} 사이트에서 <a href="/account_management/faq/okta/">레거시 인스트럭션</a>에 따라 Okta에서 Datadog 애플리케이션을 수동 설정해야 합니다. 애플리케이션 카달로그의 사전 설정 Datadog 애플리케이션에 대한 본 페이지의 지침은 무시하시기 바랍니다.
 </div>
 {{% /site-region %}}

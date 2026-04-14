@@ -74,7 +74,7 @@ S3 バケットまたは CloudWatch のいずれかにログを送信するよ�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "amazon_codedeploy" >}}
+{{< get-metrics-from-git "amazon-codedeploy" >}}
 
 
 AWS から取得される各メトリクスには、ホスト名やセキュリティ グループなど、AWS コンソールに表示されるのと同じタグが割り当てられます。

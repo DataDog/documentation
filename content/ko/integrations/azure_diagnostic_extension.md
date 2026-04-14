@@ -21,7 +21,7 @@ version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-<div class="alert alert-warning">이 통합은 더 이상 사용되지 않습니다. 개선된 상세도와 지연 시간을 사용하여 Azure VM에 대한 유사한 게스트 수준 및 프로세스 수준 인사이트를 얻으려면 Datadog  Agent를 설치하세요.
+<div class="alert alert-danger">이 통합은 더 이상 사용되지 않습니다. 개선된 상세도와 지연 시간을 사용하여 Azure VM에 대한 유사한 게스트 수준 및 프로세스 수준 인사이트를 얻으려면 Datadog  Agent를 설치하세요.
 
 이 페이지에 나열된 메트릭은 새로 생성된 Datadog 조직에 대해 더 이상 채워지지 않습니다. 기존 사용자의 경우 2023년 6월 1일에 사용 중지되었습니다.
 

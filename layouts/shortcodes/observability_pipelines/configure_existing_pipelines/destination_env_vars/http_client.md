@@ -1,0 +1,10 @@
+- HTTP/S client URI endpoint:
+	- The default environment variable is `DD_OP_DESTINATION_HTTP_CLIENT_URI`.
+- HTTP/S Client TLS passphrase (when enabled):
+	- The default environment variable is `DD_OP_DESTINATION_HTTP_CLIENT_KEY_PASS`.
+- If you are using basic authentication:
+	- HTTP/S endpoint authentication username and password.
+	- The default environment variable is `DD_OP_DESTINATION_HTTP_CLIENT_USERNAME` and `DD_OP_DESTINATION_HTTP_CLIENT_PASSWORD`.
+- If you are using bearer authentication:
+	- HTTP/S endpoint bearer token.
+	- The default environment variable is `DD_OP_DESTINATION_HTTP_CLIENT_BEARER_TOKEN`.

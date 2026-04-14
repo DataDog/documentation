@@ -15,7 +15,7 @@ type: multi-code-lang
 
 ## Compatibilidad
 
-La biblioteca de rastreo de C++ Datadog es de código abierto; consulta el [repositorio GitHub][1] para más información.
+La librería de rastreo de C++ Datadog es de código abierto; consulta el [repositorio GitHub][1] para más información.
 
 Esta biblioteca requiere el compilador C++17 para crear.
 

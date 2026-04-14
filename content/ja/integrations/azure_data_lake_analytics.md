@@ -39,7 +39,7 @@ Datadog Azure インテグレーションを使用して、Data Lake Analytics �
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "azure_data_lake_analytics" >}}
+{{ get-metrics-from-git "azure-datalakeanalytics" }}
 
 
 ### イベント

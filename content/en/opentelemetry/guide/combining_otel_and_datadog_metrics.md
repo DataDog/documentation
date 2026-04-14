@@ -15,6 +15,8 @@ The <code>equiv_otel()</code> function is in Preview. If you have feedback relat
 
 Datadog and OpenTelemetry (OTel) use different naming conventions for integration metrics. This guide explains how to combine metrics from both systems in a single query using Datadog's `equiv_otel` function.
 
+<div class="alert alert-info">To query across Datadog and OpenTelemetry metrics in the Datadog UI, read the <a href="/metrics/open_telemetry/query_metrics">Query OpenTelemetry Metrics</a> documentation.</div>
+
 ## Challenges when combining metrics
 
 When working with both Datadog and OTel metrics, two main challenges arise. Let's examine these using NGINX connection monitoring as an example:

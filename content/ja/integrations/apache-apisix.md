@@ -30,8 +30,8 @@ author:
   support_email: dev@apisix.apache.org
 categories:
 - クラウド
-- メトリクス
-custom_kind: integration
+- モニター
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/apache-apisix/README.md
 display_on_public_website: true
@@ -165,7 +165,7 @@ Apache APISIX チェックにはイベントは含まれません。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][8]までお問い合わせください。
 
 ## その他の参考資料
 

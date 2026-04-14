@@ -6,7 +6,7 @@ further_reading:
 - link: /security/cloud_siem/investigate_security_signals
   tag: Documentación
   text: Más información sobre Security Signals Explorer
-- link: /security/cloud_siem/log_detection_rules/
+- link: /security/cloud_siem/detection_rules/
   tag: Documentación
   text: Crear nuevas reglas de detección
 title: Guía de configuración de Azure para Cloud SIEM
@@ -25,12 +25,12 @@ Con esta guía, seguirás la configuración de Microsoft Azure para enviar logs 
 
 Haz clic en el botón de abajo y rellena el formulario en el portal de Azure. Después de completar el formulario, se desplegan para ti los recursos de Azure necesarios para enviar los logs de actividad en tu cuenta de Datadog.
 
-[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FDataDog%2Fdatadog-serverless-functions%2Fmaster%2Fazure%2Fdeploy-to-azure%2Fparent_template.json)
+[![Desplegar en Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FDataDog%2Fdatadog-serverless-functions%2Frefs%2Fheads%2Fmaster%2Fazure%2Feventhub_log_forwarder%2Fparent_template.json)
 
 1. Selecciona un grupo de recursos existente o crea uno nuevo.
 1. Selecciona una región.
 1. Selecciona **true** para **Send Activity Logs** (Enviar logs de actividad).
-1. Introduce tu clave de API en Datadog.
+1. Introduce tu clave de API Datadog.
 1. Introduce nombres para tus recursos. Consulta [Parámetros opcionales][1] para obtener más información.
 1. Haz clic en **Create + review** (Crear + revisar).
 1. Una vez superada la validación, haz clic en **Create** (Crear).

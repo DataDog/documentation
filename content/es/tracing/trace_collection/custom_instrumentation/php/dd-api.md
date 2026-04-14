@@ -7,7 +7,7 @@ aliases:
 - /es/tracing/trace_collection/custom_instrumentation/php
 - /es/tracing/trace_collection/custom_instrumentation/dd_libraries/php
 code_lang: dd-api
-code_lang_weight: 1
+code_lang_weight: 2
 description: Instrumenta manualmente tu aplicación PHP para enviar trazas (traces)
   personalizadas a Datadog.
 further_reading:
@@ -21,12 +21,12 @@ further_reading:
 - link: tracing/glossary/
   tag: Documentación
   text: Explora tus servicios, recursos y trazas
-title: Instrumentación personalizada de PHP utilizando la API de Datadog
+title: Instrumentación personalizada de PHP utilizando la API Datadog
 type: multi-code-lang
 ---
 
 <div class="alert alert-info">
-Si aún no has leído las instrucciones de autoinstrumentación y configuración, comienza por las <a href="/tracing/setup/php/">Instrucciones de configuración de PHP </a>. Aunque Datadog no admita oficialmente tu marco web, es posible que no necesites realizar ninguna instrumentación manual. Consulta <a href="/tracing/setup/php/#automatic-instrumentation"> Instrumentación automática</a> para obtener más detalles.
+Si aún no has leído las instrucciones de autoinstrumentación y configuración, comienza por las <a href="/tracing/setup/php/">Instrucciones de configuración de PHP </a>. Aunque Datadog no admita oficialmente tu framework web, es posible que no necesites realizar ninguna instrumentación manual. Consulta <a href="/tracing/setup/php/#automatic-instrumentation"> Instrumentación automática</a> para obtener más detalles.
 </div>
 
 ## Anotaciones
@@ -36,10 +36,10 @@ Si utilizas PHP 8, a partir de la v0.84 del rastreador, puedes añadir atributos
 ```php
 <?php
 class Server {
-    #[DDTrace\Trace(name: "spanName", resource: "resourceName", type: "Custom", service: "myService", tags: ["aTag" => "aValue"])]
+    #[\DDTrace\Trace(name: "spanName", resource: "resourceName", type: "Custom", service: "myService", tags: ["aTag" => "aValue"])]
     static function process($arg) {}
 
-    #[DDTrace\Trace]
+    #[\DDTrace\Trace]
     function get() {
       Foo::simple(1);
     }
@@ -56,8 +56,8 @@ Puedes proporcionar los siguientes argumentos:
 - `$recurse`: si se rastrearán las llamadas recursivas.
 - `$run_if_limited`: si la función debe ser rastreada en el modo limitado. (Por ejemplo, cuando se supera el límite del tramo).
 
-<div class="alert alert-warning">
-Si el espacio de nombres está presente, <strong>debes</strong> utilizar el nombre completo del atributo <code>#[\DDTrace\Trace]</code>. Alternativamente, puedes importar el espacio de nombres con <code>use DDTrace\Trace;</code> y usar </code>#[Trace]</code>.
+<div class="alert alert-danger">
+Si existe un espacio de nombres, <strong>debes</strong> utilizar el nombre completo del atributo <code>#[\DDTrace\Trace]</code>. Alternativamente, puedes importar el espacio de nombres con <code>use DDTrace\Trace;</code> y use <code>#[Trace]</code>.
 </div>
 
 ## Redacción de la instrumentación personalizada
@@ -197,7 +197,7 @@ if (!extension_loaded('ddtrace')) {
 );
    {{< /code-block >}}
 
-   <div class="alert alert-warning">
+   <div class="alert alert-danger">
    When you set tags, to avoid overwriting existing tags automatically added by the Datadog core instrumentation, <strong>do write <code>$span->meta['mytag'] = 'value'</code></strong>. Do not write <code>$span->meta = ['mytag' => 'value']</code>.
    </div>
 
@@ -346,8 +346,8 @@ if ($span) {
 
 ## Adding tags
 
-<div class="alert alert-warning">
-Cuando configures etiquetas, para evitar sobrescribir etiquetas existentes añadidas automáticamente por la instrumentación central de Datadog, <strong>escribe <code>$span->meta['mytag'] = 'value'</code></strong>. No escribas <code>$span->meta = ['mytag' => 'value']</code>.
+<div class="alert alert-danger">
+Cuando establezcas etiquetas, para evitar sobrescribir etiquetas existentes añadidas automáticamente por la instrumentación del núcleo de Datadog, <strong>escribe <code>$span->meta['mytag'] = 'value'</code></strong>. No escribas <code>$span->meta = ['mytag' => 'value']</code>.
 </div>
 
 {{< tabs >}}
@@ -399,7 +399,7 @@ function doRiskyThing() {
 );
 ```
 
-Set the `error.msg` tag to manually flag a span as erroneous.
+Set the `error.message` tag to manually flag a span as erroneous.
 
 ```php
 <?php
@@ -412,7 +412,7 @@ function doRiskyThing() {
     'doRiskyThing',
     function(\DDTrace\SpanData $span, $args, $retval) {
         if ($retval === SOME_ERROR_CODE) {
-            $span->meta['error.msg'] = 'Foo error';
+            $span->meta['error.message'] = 'Foo error';
             // Optional:
             $span->meta['error.type'] = 'CustomError';
             $span->meta['error.stack'] = (new \Exception)->getTraceAsString();
@@ -424,9 +424,7 @@ function doRiskyThing() {
 {{% /tab %}}
 {{< /tabs >}}
 
-## Adding span links (Beta)
-
-<div class="alert alert-info">Support for span links is in beta and requires the <a href="https://github.com/DataDog/dd-trace-php/releases/tag/0.87.2">PHP tracer v0.87.2+</a>.</div>
+## Adding span links
 
 Span links associate one or more spans together that don't have a typical parent-child relationship. They may associate spans within the same trace or spans across different traces.
 
@@ -764,7 +762,7 @@ resources.ddtrace = true
 
 ### Optimización del código de PHP
 
-Antes de PHP 7, algunos marcos proporcionaban formas de compilar clases PHP (por ejemplo, a través del comando `php artisan optimize` de Laravel).
+Antes de PHP 7, algunos frameworks proporcionaban formas de compilar clases PHP (por ejemplo, a través del comando `php artisan optimize` de Laravel).
 
 Aunque esto [ha quedado obsoleto][7] si utilizas PHP 7.x, todavía puedes utilizar este mecanismo de almacenamiento en caché en tu aplicación anterior a la versión 7.x. En este caso, Datadog sugiere que utilices la API de [OpenTracing][8] en lugar de añadir `datadog/dd-trace` a tu archivo Composer.
 
@@ -780,5 +778,5 @@ Aunque esto [ha quedado obsoleto][7] si utilizas PHP 7.x, todavía puedes utiliz
 [6]: https://github.com/DataDog/dd-trace-php/releases/latest
 [7]: https://laravel-news.com/laravel-5-6-removes-artisan-optimize
 [8]: /es/tracing/trace_collection/opentracing/php#opentracing
-[9]: /es/tracing/trace_collection/trace_context_propagation/php
+[9]: /es/tracing/trace_collection/trace_context_propagation/
 [10]: /es/tracing/trace_explorer/trace_view?tab=spanlinksbeta#more-information

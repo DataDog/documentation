@@ -227,13 +227,13 @@ ServiceNow CMDB의 데이터로 채워진 Datadog에서 네트워크 장치에 �
 
 {{% site-region region="gov,ap1" %}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 사례 관리 통합은 {{< region-param key=dd_datacenter code="true" >}} 사이트에서 지원되지 않습니다.
 </div>
 {{% /site-region %}}
 
 {{% site-region region="gov" %}}
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 인시던트 관리 통합은 {{< region-param key=dd_datacenter code="true" >}} 사이트에서 지원되지 않습니다.
 </div>
 {{% /site-region %}}
@@ -241,7 +241,7 @@ ServiceNow CMDB의 데이터로 채워진 Datadog에서 네트워크 장치에 �
 {{% site-region region="gov" %}}
 
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 서식화된 모니터 알림은 {{< region-param key=dd_datacenter code="true" >}} 사이트에서 지원되지 않습니다.
 </div>
 {{% /site-region %}}

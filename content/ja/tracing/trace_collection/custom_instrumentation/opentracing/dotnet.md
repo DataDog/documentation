@@ -13,11 +13,16 @@ title: .NET OpenTracing インスツルメンテーション
 type: multi-code-lang
 ---
 
-<div class="alert alert-info">OpenTracing のサポートは、非推奨の仕様に基づくものです。オープンな仕様でコードをインスツルメンテーションしたい場合は、代わりに OpenTelemetry を使用してください。<a href="/tracing/trace_collection/otel_instrumentation/dotnet/">Datadog トレーシングライブラリの OpenTelemetry インスツルメンテーションからのデータを処理する</a>ためのベータサポートをお試しください。</div>
+<div class="alert alert-info">OpenTracing のサポートは、非推奨の仕様に基づくものです。オープンな仕様でコードをインスツルメンテーションしたい場合は、代わりに OpenTelemetry を使用してください。<a href="/tracing/trace_collection/otel_instrumentation/dotnet/">Datadog トレーシングライブラリの OpenTelemetry インスツルメンテーションからのデータ処理</a>をお試しください。</div>
 
 詳細や情報については、[OpenTracing API][1] をご覧ください。
 
 ## セットアップ
+
+<div class="alert alert-danger">
+  <strong>注:</strong> v3.0.0 以降、OpenTracing のサポートには自動インスツルメンテーションも併用する必要があります。自動およびカスタム インスツルメンテーションのパッケージ バージョン (例: MSI と NuGet) は同期させ、メジャー バージョンを混在させないようにしてください。
+</div>
+
 OpenTracing のサポートには、[`Datadog.Trace.OpenTracing`][2] NuGet パッケージをアプリケーションに追加します。アプリケーションの起動時に、OpenTracing SDK を初期化します。
 
 ```csharp

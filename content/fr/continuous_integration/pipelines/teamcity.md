@@ -11,10 +11,6 @@ further_reading:
 title: Configurer le tracing sur un pipeline TeamCity
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">La solution CI Visibility n'est pas encore disponible pour le site que vous avez sélectionné ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 ## Présentation
 
 [TeamCity][1] est une intégration en continu et un serveur de livraison qui optimise et automatise les processus de développements de logiciels.
@@ -76,7 +72,7 @@ Par exemple, si le style de nom dʼutilisateur **UserId** est utilisé et si le 
 le plugin génère `john.doe@Teamcity` comme e-mail de lʼauteur Git. Le style du nom dʼutilisateur est défini pour les [roots VCS][11],
 et il peut être modifié dans les réglages de la racine VCS.
 
-<div class="alert alert-danger"><strong>Remarque :</strong> lʼe-mail de lʼauteur Git est utilisé à
+<div class="alert alert-warning"><strong>Remarque :</strong> lʼe-mail de lʼauteur Git est utilisé à
 des fins de <a href="https://www.datadoghq.com/pricing/?product=ci-visibility#ci-visibility" target="_blank">facturation</a>.
 Ainsi, si des styles de nom dʼutilisateur ne fournissant pas dʼe-mail
 (<strong>UserId</strong> ou <strong>Author Name</strong>) sont utilisés, cela peut avoir un impact au niveau des coûts. <a href="https://docs.datadoghq.com/help/" target="_blank">Contactez lʼéquipe dʼassistance Datadog</a> si vous avez des questions sur votre cas dʼutilisation.

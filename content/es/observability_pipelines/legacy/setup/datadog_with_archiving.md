@@ -13,10 +13,6 @@ title: (LEGACY) Configurar Observability Pipelines para enviar logs en un format
   rehidratable por Datadog a Amazon S3 y Datadog
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Observability Pipelines no está disponible en el sitio US1-FED Datadog.</div>
-{{< /site-region >}}
-
 {{% observability_pipelines/legacy_warning %}}
 
 ## Información general

@@ -31,7 +31,7 @@ categories:
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/stormforge/README.md
 display_on_public_website: true
-draft: false
+draft: true
 git_integration_title: stormforge
 integration_id: stormforge
 integration_title: StormForge

@@ -1,11 +1,18 @@
 ---
 title: Sankey Widget
+description: Visualize user flow paths and transitions between different states or pages using Sankey diagram representations.
 widget_type: "sankey"
 further_reading:
 - link: "/product_analytics/journeys/sankey/"
   tag: "Documentation"
   text: "Build Sankey Diagrams in Product Analytics"
 ---
+
+{{% site-region region="gov" %}}
+<div class="alert alert-danger">
+The Sankey widget is not available in the selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).
+</div>
+{{% /site-region %}}
 
 {{< img src="dashboards/widgets/sankey/sankey_widget.png" alt="Sankey widget configuration showing an example graph" style="width:100%;" >}}
 

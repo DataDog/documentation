@@ -1,0 +1,5 @@
+- Socket address:
+    - The address to which the Observability Pipelines Worker sends processed logs.
+	- The default environment variable is `DD_OP_DESTINATION_SOCKET_ADDRESS`.
+- TLS passphrase:
+	- The default environment variable is `DD_OP_DESTINATION_SOCKET_KEY_PASS`.

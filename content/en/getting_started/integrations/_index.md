@@ -1,5 +1,6 @@
 ---
 title: Introduction to Integrations
+description: Unify metrics and logs from infrastructure using Agent-based, authentication-based, and library integrations.
 further_reading:
   - link: 'https://learn.datadoghq.com/courses/intro-to-integrations'
     tag: 'Learning Center'
@@ -7,6 +8,9 @@ further_reading:
   - link: '/integrations/'
     tag: 'Documentation'
     text: 'See a list of Datadog integrations'
+  - link: 'https://www.datadoghq.com/blog/1k-integrations-milestone/'
+    tag: 'Blog'
+    text: 'Scaling Datadog observability: 1,000 integrations and counting'
 ---
 
 ## Overview
@@ -104,11 +108,11 @@ To better unify your environment, it is also recommended to configure the `env` 
 You can customize tag behavior for individual checks, overriding the global Agent-level settings:
 
 1. **Disable Autodiscovery tags**
-    
+
     By default, the metrics reported by integrations include tags automatically detected from the environment. For example, the metrics reported by a Redis check that runs inside a container include tags associated with the container, such as `image_name`. You can turn this behavior off by setting the `ignore_autodiscovery_tags` parameter to `true`.
 
 1. **Set tag cardinality per integration check**
-    
+
     You can define the level of tag cardinality (low, orchestrator, or high) on a per-check basis using the `check_tag_cardinality` parameter. This overrides the global tag cardinality setting defined in the Agent configuration.
 
 ```yaml
@@ -121,6 +125,8 @@ check_tag_cardinality: low
 
 # Rest of the config here
 ```
+
+For containerized environments, you can also set these parameters through [Kubernetes Autodiscovery annotations][47].
 
 ### Validation
 
@@ -226,7 +232,7 @@ tagging
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /developers/integrations/agent_integration/
+[1]: /extend/integrations/agent_integration/
 [2]: https://app.datadoghq.com/account/settings
 [3]: /integrations/slack/
 [4]: /integrations/amazon_web_services/
@@ -235,7 +241,7 @@ tagging
 [7]: /api/
 [8]: /integrations/node/
 [9]: /integrations/python/
-[10]: /developers/custom_checks/write_agent_check/
+[10]: /extend/custom_checks/write_agent_check/
 [11]: https://github.com/DataDog/integrations-core
 [12]: https://github.com/DataDog/integrations-extras
 [14]: /agent/guide/integration-management/
@@ -246,9 +252,9 @@ tagging
 [19]: https://app.datadoghq.com/account/settings/agent/latest?platform=docker
 [20]: https://app.datadoghq.com/account/settings/agent/latest?platform=kubernetes
 [21]: /agent/guide/agent-commands/#restart-the-agent
-[22]: /developers/integrations/check_references/#param-specification
+[22]: /extend/integrations/check_references/#param-specification
 [23]: https://github.com/DataDog/integrations-core/blob/master/apache/datadog_checks/apache/data/conf.yaml.example
-[24]: /developers/custom_checks/write_agent_check/#updating-the-collection-interval
+[24]: /extend/custom_checks/write_agent_check/#updating-the-collection-interval
 [25]: /getting_started/tagging/
 [26]: /getting_started/agent/#setup
 [27]: /getting_started/tagging/unified_service_tagging/
@@ -271,3 +277,4 @@ tagging
 [44]: /monitors/guide/visualize-your-service-check-in-the-datadog-ui/
 [45]: /account_management/rbac/permissions/#integrations
 [46]: /integrations/
+[47]: /containers/kubernetes/integrations/#tag-cardinality

@@ -21,7 +21,7 @@ title: Case Management
 ---
 
 {{% site-region region="gov,ap1" %}}
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 La gestión de casos no está disponible en el sitio {{< region-param key=dd_datacenter code="true" >}}.
 </div>
 {{% /site-region %}}

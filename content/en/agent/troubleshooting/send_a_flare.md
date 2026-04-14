@@ -13,10 +13,6 @@ algolia:
   tags: ['agent flare']
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Sending an Agent Flare is not supported for this site.</div>
-{{< /site-region >}}
-
 A flare allows you to send necessary troubleshooting information to the Datadog support team.
 
 This page covers:
@@ -32,13 +28,21 @@ When contacting Datadog Support with Remote Configuration enabled for an Agent, 
 
 ## Send a flare from the Datadog site
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Sending an Agent Flare from Fleet Automation is not supported for your selected Datadog site (US1-FED). Use <a href="#manual-submission">manual flare submission</a> instead.</div>
+{{< /site-region >}}
+
 To send a flare from the Datadog site, make sure you've enabled [Fleet Automation][2] and [Remote configuration][3] on the Agent.
 
 {{% remote-flare %}}
 
-{{< img src="agent/fleet_automation/fleet-automation-flares2.png" alt="The Send Ticket button launches a form to send a flare for an existing or new support ticket" style="width:70%;" >}}
+{{< img src="agent/fleet_automation/fleet_automation_remote_flare.png" alt="The Send Ticket button launches a form to send a flare for an existing or new support ticket" style="width:70%;" >}}
 
 ## Send a flare using the `flare` command
+
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Sending an Agent Flare using the <code>flare</code> subcommand is not supported for your selected Datadog site (US1-FED). Use <a href="#manual-submission">manual flare submission</a> instead.</div>
+{{< /site-region >}}
 
 Use the `flare` subcommand to send a flare. In the commands below, replace `<CASE_ID>` with your Datadog support case ID if you have one, then enter the email address associated with it.
 
@@ -61,7 +65,7 @@ If you don't have a case ID, enter your email address used to log in to Datadog 
 | Redhat     | `sudo datadog-agent flare <CASE_ID>`                    |
 | Suse       | `sudo datadog-agent flare <CASE_ID>`                    |
 | Source     | `sudo datadog-agent flare <CASE_ID>`                    |
-| Windows    | Consult the dedicated [Windows documentation][2]        |
+| Windows    | `& "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" flare <CASE_ID>`       |
 | Heroku     | Consult the dedicated [Heroku documentation][3]         |
 | PCF     | `sudo /var/vcap/jobs/dd-agent/packages/dd-agent/bin/agent/agent flare <CASE_ID>`             |
 
@@ -156,5 +160,5 @@ kubectl cp datadog-<pod-name>:tmp/datadog-agent-<date-of-the-flare>.zip flare.zi
 
 [1]: https://github.com/DataDog/datadog-agent/tree/main/pkg/flare
 [2]: /agent/fleet_automation/
-[3]: /agent/remote_config#enabling-remote-configuration
+[3]: /agent/guide/setup_remote_config
 [4]: /tracing/troubleshooting/tracer_debug_logs/?code-lang=dotnet#data-collected

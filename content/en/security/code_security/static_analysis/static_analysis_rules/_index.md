@@ -9,6 +9,22 @@ aliases:
 is_beta: false
 type: static-analysis
 rulesets:
+  apex-code-style:
+    title: "Rules to enforce Apex code style and best practices."
+    description: |
+      Code Security rules to write Apex rules that follows established coding standards.
+  apex-security:
+    title: "Security rules for Apex"
+    description: |
+      Rules focused on finding security issues in your Apex code.
+  bash-code-quality:
+    title: "Code quality rules for Bash scripts."
+    description: |
+      Rules to enforce code quality for Bash scripts.
+  bash-security:
+    title: "Security rules for Bash scripts"
+    description: |
+      Rules to enforce security best practices for Bash scripts.
   csharp-best-practices:
     title: "Best Practices for C#"
     description: |
@@ -181,6 +197,14 @@ rulesets:
     title: "Security rules for Ruby"
     description: |
       Rules focused on finding security issues in your Ruby code.
+  swift-code-style:
+    title: "Rules to enforce Swift code style and best practices."
+    description: |
+      Code Security rules to write Swift rules that follows established coding standards.
+  swift-security:
+    title: "Security rules for Swift"
+    description: |
+      Rules focused on finding security issues in your Swift code.
   terraform-aws:
     title: "Terraform AWS"
     description: |
@@ -258,7 +282,7 @@ further_reading:
 ---
 
 {{% site-region region="gov" %}}
-<div class="alert alert-danger">
+<div class="alert alert-warning">
     Code Security is not available for the {{< region-param key="dd_site_name" >}} site.
 </div>
 {{% /site-region %}}

@@ -1,5 +1,6 @@
 ---
 title: Table Widget
+description: Display tabular data with columns, rows, and sorting capabilities for detailed metric and event analysis.
 widget_type: "query_table"
 aliases:
 - /graphing/widgets/table/
@@ -26,12 +27,12 @@ The table visualization displays columns of aggregated data grouped by tag key. 
     * Metric: See the [Main graphing documentation][1] to configure a metric query.
     * Non-metric data sources: See the [Log search documentation][2] to configure an event query.
 
-2. Add additional columns to the table by using the **+ Add Query** and **+ Add Formula** buttons.
+2. Add additional columns to the table by using the {{< ui >}}+ Add Query{{< /ui >}} and {{< ui >}}+ Add Formula{{< /ui >}} buttons.
 
 ### Options
 
-* Rename column headers by setting aliases, click the **as...** button.
-* Configure whether or not the search bar displays. **Auto** is the default and shows the search bar depending on the size of the widget, this means if your screen gets too small, it prioritizes displaying the data on the widget and hides the search bar, but is still available in full-screen mode.
+* Rename column headers by setting aliases, click the {{< ui >}}as...{{< /ui >}} button.
+* Configure whether or not the search bar displays. {{< ui >}}Auto{{< /ui >}} is the default and shows the search bar depending on the size of the widget, this means if your screen gets too small, it prioritizes displaying the data on the widget and hides the search bar, but is still available in full-screen mode.
 
 #### Column formatting
 
@@ -39,7 +40,7 @@ Customize the visualization of cell values for each column with Column Formattin
 * Threshold formatting: highlight cells with colors when specific value ranges are met.
 * Range formatting: color code cells with a range of values.
 * Text formatting: replace cells with alias text values to improve readability.
-* Trending information: vizualize metrics and events queries.
+* Trending information: visualize metrics and events queries.
 
 {{< img src="/dashboards/widgets/table/conditional_formatting_trends.png" alt="Table widget showing conditional formatting with trend indicators" style="width:100%;" >}}
 

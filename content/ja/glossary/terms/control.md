@@ -1,7 +1,8 @@
 ---
+id: control
 core_product:
 - security
-- csm
+- cloud security
 title: コントロール
 ---
 

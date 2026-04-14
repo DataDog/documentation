@@ -1,5 +1,6 @@
 ---
 title: Monitor Arithmetic and Sparse Metrics
+description: "Handle arithmetic operations and sparse metrics in monitors using fill() functions and evaluation adjustments to prevent skipped evaluations."
 ---
 
 ## Overview

@@ -1,5 +1,6 @@
 ---
 title: Tutorial - Enabling Tracing for a Python Application in a Container and an Agent on a Host
+description: Step-by-step tutorial to enable distributed tracing for a containerized Python application with the Datadog Agent on the host.
 
 further_reading:
 - link: /tracing/trace_collection/library_config/python/

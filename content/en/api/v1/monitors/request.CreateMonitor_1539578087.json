@@ -25,5 +25,6 @@
       }
     }
   },
-  "type": "query alert"
+  "type": "query alert",
+  "draft_status": "published"
 }

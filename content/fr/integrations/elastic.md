@@ -520,7 +520,7 @@ Par défaut, les métriques suivantes ne sont pas toutes envoyées par l'Agent. 
 - `slm_stats` envoie les métriques **elasticsearch.slm.\***.
 
 ### Métriques
-{{< get-metrics-from-git "elastic" >}}
+{{< get-metrics-from-git "elasticsearch" >}}
 
 
 ### Événements
@@ -528,7 +528,7 @@ Par défaut, les métriques suivantes ne sont pas toutes envoyées par l'Agent. 
 Le check Elasticsearch envoie un événement à Datadog à chaque changement de statut global de votre cluster Elasticsearch : rouge, jaune ou vert.
 
 ### Checks de service
-{{< get-service-checks-from-git "elastic" >}}
+{{< get-service-checks-from-git "elasticsearch" >}}
 
 
 ## Dépannage

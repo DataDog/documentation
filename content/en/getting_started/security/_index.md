@@ -1,5 +1,6 @@
 ---
 title: Getting Started with Security
+description: Explore security solutions including App and API Protection, Cloud Security, Cloud SIEM, Code Security, and Workload Protection.
 ---
 
 {{< whatsnext desc=" " >}}

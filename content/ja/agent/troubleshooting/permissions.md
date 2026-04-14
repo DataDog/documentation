@@ -104,6 +104,10 @@ Agent を `root` 権限で実行するには
 * https://github.com/DataDog/dd-agent/issues/853
 * https://github.com/DataDog/dd-agent/issues/2033
 
+## MacOS 上で Agent をシステム デーモンとして実行する際の権限の問題
+
+`DD_SYSTEMDAEMON_INSTALL` および `DD_SYSTEMDAEMON_USER_GROUP` オプションを使用して、システム全体の Launch Daemon として Agent をインストールした場合は、`DD_SYSTEMDAEMON_USER_GROUP` に指定したユーザーおよびグループが有効で、適切な権限を持っていることを確認してください。
+
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}

@@ -1,5 +1,6 @@
 ---
 title: Setting up APM with Kubernetes Service
+description: Learn how to set up APM and distributed tracing in Kubernetes environments with proper service configuration and networking.
 
 further_reading:
 - link: "/containers/kubernetes/apm/"

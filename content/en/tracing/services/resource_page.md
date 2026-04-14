@@ -1,5 +1,6 @@
 ---
 title: Resource Page
+description: Analyze resource performance with health metrics, dependency maps, span summaries, and frontend impact data.
 aliases:
 - /tracing/visualization/resource/
 further_reading:
@@ -54,7 +55,7 @@ Use the top right percentile selectors to zoom into a given percentile, or hover
 
 Use the Dependency Map to view a flow graph of all of a resource's upstream and downstream service dependencies. The map is scoped to the requests flowing through the selected service and resource (endpoint, database query, etc.) you're focused on.
 
-{{< site-region region="ap1,us3,us5,eu,us" >}}
+{{< site-region region="ap1,us3,us5,eu,us,ap2" >}}
 [Inferred service dependencies][10] like databases, queues or third-party services are represented with a purple background node.
 
 [10]: /tracing/services/inferred_services/
@@ -68,7 +69,7 @@ The dependency map is only available for service-entry span resources.
 
 {{< img src="tracing/visualization/resource/dependency_map.png" alt="Resource page dependency map" style="width:100%;" >}}
 
-{{< site-region region="ap1,us3,us5,eu,us" >}}
+{{< site-region region="ap1,us3,us5,eu,us,ap2" >}}
 **Note**: [Service overrides][9] are represented as part of the edge of the dependency map to keep visibility over the actual remote service, database or queue the service is interacting with.
 
 [9]: /tracing/guide/service_overrides/

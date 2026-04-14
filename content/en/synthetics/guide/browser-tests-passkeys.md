@@ -27,7 +27,7 @@ Passkeys in Synthetic Monitoring are handled by Virtual Authenticator global var
 {{< img src="synthetics/guide/browser-tests-passkeys/new-variable-virtual-authenticator.png" alt="Create a Virtual Authenticator global variable" style="width:70%;" >}}
 
 ## Use passkeys in your Synthetic browser tests
-<div class="alert alert-warning">Synthetic Monitoring supports passkeys in browser tests for Chrome and Edge.</div>
+<div class="alert alert-danger">Synthetic Monitoring supports passkeys in browser tests for Chrome and Edge.</div>
 
 ### Add passkeys to a browser test
 

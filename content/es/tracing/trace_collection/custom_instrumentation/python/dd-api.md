@@ -17,7 +17,7 @@ further_reading:
 - link: tracing/glossary/
   tag: Documentación
   text: Explora tus servicios, recursos y trazas
-title: Instrumentación personalizada de Python utilizando la API de Datadog
+title: Instrumentación personalizada de Python mediante la API de Datadog
 type: multi-code-lang
 ---
 
@@ -29,7 +29,7 @@ También es posible que desees ampliar la funcionalidad de la biblioteca `ddtrac
 
 ## Creación de tramos
 
-La biblioteca `ddtrace` crea [tramos][2] automáticamente con `ddtrace-run` para [muchas bibliotecas y marcos][1]. Sin embargo, es posible que desees obtener visibilidad de tu propio código y esto se logra utilizando tramos.
+La biblioteca `ddtrace` crea tramos automáticamente con `ddtrace-run` para [muchas bibliotecas y marcos][1]. Sin embargo, es posible que desees obtener visibilidad de tu propio código y esto se logra utilizando tramos.
 
 Dentro de tu solicitud web (por ejemplo, `make_sandwich_request`), puedes realizar varias operaciones, como `get_ingredients()` y `assemble_sandwich()`, que son útiles para hacer mediciones.
 
@@ -55,7 +55,7 @@ def make_sandwich_request(request):
       # maybe go to the store
       return
 
-  # Puedes brindar más información para personalizar el tramo
+  # You can provide more information to customize the span
   @tracer.wrap("assemble_sandwich", service="my-sandwich-making-svc", resource="resource_name")
   def assemble_sandwich(ingredients):
       return
@@ -74,13 +74,13 @@ Para rastrear un bloque arbitrario de código, utiliza el gestor de contexto `dd
 from ddtrace import tracer
 
 def make_sandwich_request(request):
-    # Captura ambas operaciones en un tramo
+    # Capture both operations in a span
     with tracer.trace("sandwich.make"):
         ingredients = get_ingredients()
         sandwich = assemble_sandwich(ingredients)
 
 def make_sandwich_request(request):
-    # Captura ambas operaciones en un tramo
+    # Capture both operations in a span
     with tracer.trace("sandwich.create", resource="resource_name") as outer_span:
 
         with tracer.trace("get_ingredients", resource="resource_name") as span:
@@ -127,7 +127,7 @@ La instrumentación incorporada y tu propia instrumentación personalizada crean
 from ddtrace import tracer
 
 def make_sandwich_request(request):
-    # Captura ambas operaciones en un tramo
+    # Capture both operations in a span
     with tracer.trace("sandwich.make") as my_span:
         ingredients = get_ingredients()
         sandwich = assemble_sandwich(ingredients)
@@ -138,9 +138,9 @@ def make_sandwich_request(request):
 
 ```python
 def get_ingredients():
-    # Obtener el tramo activo
+    # Get the active span
     span = tracer.current_span()
-    # este es el tramo my_span from make_sandwich_request anterior
+    # this span is my_span from make_sandwich_request above
 ```
 
 {{% /tab %}}
@@ -150,9 +150,9 @@ def get_ingredients():
 ```python
 def assemble_sandwich(ingredients):
     with tracer.trace("another.operation") as another_span:
-        # Obtener el tramo raíz activo
+        # Get the active root span
         span = tracer.current_root_span()
-        # este tramo es my_span from make_sandwich_request anterior
+        # this span is my_span from make_sandwich_request above
 ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -182,7 +182,7 @@ Pueden establecerse etiquetas globalmente en el rastreador. Estas etiquetas se a
 from ddtrace import tracer
 from myapp import __version__
 
-# Esto se aplicará a cada tramo
+# This will be applied to every span
 tracer.set_tags({"version": __version__, "<TAG_KEY_2>": "<TAG_VALUE_2>"})
 ```
 {{% /tab %}}
@@ -196,8 +196,8 @@ from ddtrace import tracer
 with tracer.trace("throws.an.error") as span:
     raise Exception("Oops!")
 
-# `span` se marcará como un error y tendrá
-# la stack trace y el mensaje de excepción adjuntos como etiquetas
+# `span` will be flagged as erroneous and have
+# the stack trace and exception message attached as tags
 ```
 
 También se puede marcar manualmente una traza como errónea:
@@ -221,7 +221,7 @@ try:
 except TypeError as e:
     root_span = tracer.current_root_span()
     (exc_type, exc_val, exc_tb) = sys.exc_info()
-    # esto establece el tipo de error, marca el tramo como un error y añade el rastreo
+    # this sets the error type, marks the span as an error, and adds the traceback
     root_span.set_exc_info(exc_type, exc_val, exc_tb)
 ```
 {{% /tab %}}
@@ -232,16 +232,90 @@ except TypeError as e:
 
 Puedes configurar la propagación de contexto para trazas distribuidas al inyectar y extraer encabezados. Consulta [Propagación de contexto de traza][2] para obtener información.
 
-## Filtrado de recursos
+### Baggage
 
-Las trazas se pueden excluir en función de su nombre de recurso, para eliminar el tráfico Synthetic, como los checks de estado, de la notificación de trazas a Datadog. Esta y otras configuraciones de seguridad y ajuste se pueden encontrar en la página de [Seguridad][4] o en [Ignorar recursos no deseados][5].
+Manipulación de [Baggage][3] en un span (tramo):
 
-## Leer más
+```python
+from ddtrace import tracer
+
+# Start a new span and set baggage
+with tracer.trace("example") as span:
+    # set_baggage_item
+    span.context.set_baggage_item("key1", "value1")
+    span.context.set_baggage_item("key2", "value2")
+
+    # get_all_baggage_items
+    all_baggage = span.context.get_all_baggage_items()
+    print(all_baggage) # {'key1': 'value1', 'key2': 'value2'}
+
+    # remove_baggage_item
+    span.context.remove_baggage_item("key1")
+    print(span.context.get_all_baggage_items()) # {'key2': 'value2'}
+
+    # get_baggage_item
+    print(span.context.get_baggage_item("key1")) # None
+    print(span.context.get_baggage_item("key2")) # value2
+
+    # remove_all_baggage_items
+    span.context.remove_all_baggage_items()
+    print(span.context.get_all_baggage_items()) # {}
+```
+
+Para ver un ejemplo en acción, consulta [flask-baggage en trace-examples][7].
+
+## ddtrace-api
+
+{{< callout btn_hidden="true" header="ddtrace-api está en vista previa">}}
+El paquete <code>ddtrace-api</code> de Python está en vista previa y puede que no incluya todas las llamadas a la API que necesitas. Si necesitas una funcionalidad más completa, utiliza la API como se describe en las secciones anteriores.
+<br><br>Los siguientes pasos sólo son necesarios si deseas experimentar con el paquete <code>ddtrace-api</code> en vista previa .{{< /callout >}}
+
+El paquete [ddtrace-api][8] proporciona una API pública estable para la instrumentación personalizada de Python de Datadog APM. Este paquete implementa sólo la interfaz de la API, no la funcionalidad subyacente que crea y envía tramos a Datadog.
+
+Esta separación entre interfaz (`ddtrace-api`) e implementación (`ddtrace`) ofrece varias ventajas:
+
+- Puedes confiar en una API que cambia con menos frecuencia y de forma más predecible para tu instrumentación personalizada
+- Si sólo utilizas la instrumentación automática, puedes ignorar por completo los cambios de la API
+- Si implementas tanto el paso único como la instrumentación personalizada, evitarás depender de múltiples copias del paquete `ddtrace`
+
+Para utilizar `ddtrace-api`:
+
+1. Instala las bibliotecas `ddtrace` y `ddtrace-api`:
+   ```python
+   pip install 'ddtrace>=3.1' ddtrace-api
+   ```
+
+2. Instrumenta tu aplicación de Python mediante el uso de `ddtrace-run` anteponiendo tu comando de punto de entrada de Python:
+   ```shell
+   ddtrace-run python app.py
+   ```
+
+3. Una vez configurado esto, puedes escribir instrumentación personalizada exactamente igual que en los ejemplos de las secciones anteriores, pero importando desde `ddtrace_api` en lugar de `ddtrace`.
+
+   Por ejemplo:
+   ```python
+   from ddtrace_api import tracer
+
+   @tracer.wrap(service="my-sandwich-making-svc", resource="resource_name")
+   def get_ingredients():
+       # go to the pantry
+       # go to the fridge
+       # maybe go to the store
+       return
+   ```
+
+Consulte la [definición de la API][9] del paquete para conocer la lista completa de las llamadas a la API compatibles.
+
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /es/tracing/compatibility_requirements/python
-[2]: /es/tracing/trace_collection/trace_context_propagation/python/
+[2]: /es/tracing/trace_collection/trace_context_propagation/
+[3]: /es/tracing/trace_collection/trace_context_propagation/#baggage
 [4]: /es/tracing/security
 [5]: /es/tracing/guide/ignoring_apm_resources/
 [6]: /es/tracing/setup/python/
+[7]: https://github.com/DataDog/trace-examples/tree/master/python/flask-baggage
+[8]: https://pypi.org/project/ddtrace-api/
+[9]: https://datadoghq.dev/dd-trace-api-py/pdocs/ddtrace_api.html

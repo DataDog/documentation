@@ -5,27 +5,36 @@ title: Puppet
 ---
 Este módulo instala el Datadog Agent y envía informes de Puppet a Datadog.
 
-### Requisitos
+## Requisitos previos
 
-El módulo Puppet de Datadog es compatible con Linux y Windows, así como con Puppet 4.6.x o Puppet Enterprise 2016.4 (y versiones posteriores). Para obtener información detallada sobre la compatibilidad, consulta la [página dedicada a este módulo en Puppet Forge][1].
+El módulo Puppet Datadog admite Linux y Windows, y es compatible con las versiones >= 7.34.x de Puppet o con
+las versiones >= 2021.7.x de Puppet Enterprise. Para obtener información detallada sobre la compatibilidad, consulta la [página del módulo en Puppet Forge][1].
 
-### Instalación
+## Instalación
 
-Instala el módulo Puppet de [datadog_agent][1] en la ruta del módulo de tu nodo maestro Puppet:
+Sigue la [guia de instalacion en la aplicación en Fleet Automation][9] para seleccionar las funciones requeridas, copiar el fragmento de manifiesto generado, agregarlo a tu manifiesto de Puppet y aplicar tu despliegue estandar de Puppet para implementar el Agent. Consulta el [módulo del Datadog Agent][1] o la [sección de configuraciones avanzadas](#advanced-configurations) para consultar configuraciones adicionales, incluyendo la gestión de actualizaciones del Agent, la habilitación de integraciones del Agent y la configuración de informes de ejecución de Puppet.
 
-```shell
-puppet module install datadog-datadog_agent
-```
+### Actualización del Agent
 
-#### Actualización
+> [!IMPORTANTE]
+> La v4.x del módulo Puppet Datadog deja de ser compatible con la v6 o anterior de Puppet y con la v5 del Datadog Agent. Para actualizar o instalar la v5 del Datadog Agent
+en la v6 o anterior de Puppet utiliza la v3.x del módulo.
 
-- El Datadog Agent v7.x está instalado por defecto. Para utilizar una versión anterior del Agent, modifica el parámetro `agent_major_version`.
-- `agent5_enable` ya no se utiliza, pues ha sido sustituido por `agent_major_version`.
-- `agent6_extra_options` se ha renombrado como `agent_extra_options`, ya que se aplica tanto al Agent v6 como al v7.
-- `agent6_log_file` se ha renombrado como `agent_log_file`, ya que se aplica tanto al Agent v6 como al v7.
-- `agent5_repo_uri` y `agent6_repo_uri` se convierten en `agent_repo_uri` en todas las versiones del Agent.
-- `conf_dir` y `conf6_dir` se convierten en `conf_dir` en todas las versiones del Agent.
-- El archivo de repositorio creado en Linux se llama `datadog` en todas las versiones del Agent en vez de `datadog5`/`datadog6`.
+- Por defecto, está instalada la v7.x del Datadog Agent. Para utilizar la v6 del Agent, cambia la configuración `agent_major_version`.
+- Se han eliminado las opciones legacy específicas de la v5 del Agent. Consulta CHANGELOG.md para ver más detalles y comentarios de la clase datadog_agent de todas las opciones disponibles.
+
+> IMPORTANTE
+> Se han realizado actualizaciones y cambios de última hora en las siguientes integraciones del Agent:
+
+  - ActiveMQ_XML
+    - La configuración `suppress_errors` debe utilizarse ahora, en lugar de `supress_errors` (retrocompatible)
+  - ElasticSearch **[CAMBIOS DE ÚLTIMA HORA]**
+    - `ssl_verify` sólo acepta valores booleanos
+    - Se han añadido opciones `tls_verify`
+  - Check de disco **[CAMBIOS DE ÚLTIMA HORA]**
+    - `use_mount`, `all_partitions` y `tag_by_filesystem` sólo aceptan valores booleanos
+  - TCP Check
+    -  La opción `skip_event` ha sido eliminada a partir de la v6.4 y posteriores del Datadog Agent
 
 ### Configuración
 
@@ -58,7 +67,7 @@ Una vez que el módulo `datadog_agent` esté instalado en tu `puppetserver`/`pup
     }
     ```
 
-    Consulta la sección [Variables de configuración]( #configuration-variables) para ver la lista de argumentos que puedes utilizar aquí.
+    Consulta la sección [Variables de configuración](#configuration-variables) para ver la lista de argumentos que puedes utilizar aquí.
 
 4. (Opcional) Incluye cualquier integración que quieras utilizar con el Agent. En el siguiente ejemplo, instalamos la integración de Mongo:
 
@@ -87,6 +96,9 @@ Una vez que el módulo `datadog_agent` esté instalado en tu `puppetserver`/`pup
     ```
 
 5. (Opcional) Para recopilar métricas y eventos sobre Puppet, consulta la sección [Informes](#reporting).
+
+
+## Configuraciones avanzadas
 
 ### Actualización de las integraciones
 
@@ -186,14 +198,14 @@ Con el [módulo `ini_setting`](https://forge.puppet.com/modules/puppetlabs/inifi
 
 4. (Opcional) Habilita el etiquetado de informes con hechos:
 
-    Puedes añadir etiquetas en los informes que se envían a Datadog como eventos. Estas etiquetas se pueden extraer de los hechos de Puppet en el nodo en el que se basa el informe. Estos deben ser individuales y no involucrar hechos estructurados (hashes, matrices, etc.) para garantizar su legibilidad. Para habilitar el etiquetado regular de hechos, ajusta el parámetro `datadog_agent::reports::report_fact_tags` al valor de la matriz de los hechos; por ejemplo, `["virtual","operatingsystem"]`. Para activar el etiquetado de hechos fiables, ajusta el parámetro `datadog_agent::reports::report_trusted_fact_tags` al valor de la matriz de los hechos; por ejemplo,`["certname","extensions.pp_role","hostname"]`.
+    Puedes añadir etiquetas (tags) en los informes que se envían a Datadog como eventos. Estas etiquetas se pueden extraer de los hechos de Puppet en el nodo en el que se basa el informe. Estos deben ser individuales y no involucrar hechos estructurados (hashes, matrices, etc.) para garantizar su legibilidad. Para habilitar el etiquetado regular de hechos, ajusta el parámetro `datadog_agent::reports::report_fact_tags` al valor de la matriz de los hechos; por ejemplo, `["virtual","operatingsystem"]`. Para activar el etiquetado de hechos fiables, ajusta el parámetro `datadog_agent::reports::report_trusted_fact_tags` al valor de la matriz de los hechos; por ejemplo,`["certname","extensions.pp_role","hostname"]`.
 
     NOTA: Para modificar estos parámetros, hay que reiniciar pe-puppetserver (o puppetserver) para releer el procesador de informes. Asegúrate de que se hayan desplegado los cambios antes de reiniciar el servicio.
 
     Consejos:
     - Utiliza dot index para especificar un hecho de destino; de lo contrario, todo el conjunto de datos del hecho se convierte en un valor en forma de cadena (y esto no es muy útil).
     - No dupliques los datos comunes de la monitorización, como el nombre de host, el tiempo de actividad, la memoria, etc.
-    - Coordina datos básicos como el rol, el propietario, la plantilla, el centro de datos, etc., que te ayudarán a crear correlaciones significativas con las mismas etiquetas (tags) de las métricas.
+    - Coordina datos básicos como el rol, el propietario, la plantilla, el centro de datos, etc., que te ayudarán a crear correlaciones significativas con las mismas etiquetas de las métricas.
 
 5. Busca `sources:puppet` en la herramienta [Event Stream][5] para verificar que tus datos de Puppet están en Datadog.
 
@@ -274,7 +286,7 @@ datadog_agent::tags:
 - 'keyname:value'
 - 'anotherkey:%{factname}'
 ```
-Para generar etiquetas (tags) a partir de hechos personalizados, clasifica tus nodos con hechos de Puppet como si se tratase de una matriz en el parámetro ```facts_to_tags```, ya sea a través de la consola Puppet Enterprise o de Hiera. He aquí un ejemplo:
+Para generar etiquetas a partir de hechos personalizados, clasifica tus nodos con hechos de Puppet como si se tratase de una matriz en el parámetro ```facts_to_tags```, ya sea a través de la consola Puppet Enterprise o de Hiera. He aquí un ejemplo:
 
 ```conf
 class { "datadog_agent":
@@ -294,15 +306,15 @@ Estas variables pueden establecerse en la clase `datadog_agent` para controlar l
 
 | nombre de la variable                           | descripción                                                                                                                                                                                      |
 |-----------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `agent_major_version`                   | La versión del Agent que se va a instalar: ya sea la 5, la 6 o la 7 (por defecto, es la 7).                                                                                                                              |
+| `agent_major_version`                   | Versión del Agent a instalar: v6 o v7 (por defecto: v7).                                                                                                                                 |
 | `agent_version`                         | Te permite anclar una versión anterior específica del Agent que ser va a instalar. Ejemplo: `1:7.16.0-1`. Déjalo vacío para instalar la versión más reciente.                                                             |
 | `collect_ec2_tags`                      | Recopila las etiquetas EC2 personalizadas de una instancia como etiquetas del Agent mediante el parámetro `true`.                                                                                                                             |
 | `collect_instance_metadata`             | Recopila los metadatos EC2 de una instancia como etiquetas del Agent mediante el parámetro `true`.                                                                                                                                |
-| `datadog_site`                          | El sitio de Datadog al que se envía la información (solo para el Agent v6 y v7). Por defecto, es `datadoghq.com`. Ejemplo: `datadoghq.eu` o`us3.datadoghq.com`.                                                          |
+| `datadog_site`                          | El sitio Datadog al que informar. Por defecto `datadoghq.com`, por ejemplo: `datadoghq.eu` o `us3.datadoghq.com`.                                                                                           |
 | `dd_url`                                | La URL del servidor de ingesta de Datadog. Es poco probable que necesites anular esto. Anula el parámetro `datadog_site`.                                                                                                 |
 | `host`                                  | Anula el nombre de host del nodo.                                                                                                                                                                  |
 | `local_tags`                            | Una matriz de cadenas `<KEY:VALUE>` que se establecen como etiquetas del nodo.                                                                                                                             |
-| `non_local_traffic`                     | Permite que otros nodos retransmitan su tráfico a través de este nodo.                                                                                                                                      |
+| `non_local_traffic`                     | Permite que otros nodos retransmitan su tráfico DogStatsD a través de este nodo.                                                                                                                            |
 | `apm_enabled`                           | Un booleano que habilita el APM Agent (se establece por defecto como false).                                                                                                                                           |
 | `process_enabled`                       | Un booleano que habilita el Agent de proceso (se establece por defecto como false).                                                                                                                                       |
 | `scrub_args`                            | Un booleano que habilita la limpieza de líneas de comandos de proceso (se establece por defecto como true).                                                                                                                            |
@@ -337,3 +349,4 @@ class { "datadog_agent":
 [6]: https://github.com/DataDog/puppet-datadog-agent/blob/master/manifests/integrations/mongo.pp
 [7]: https://github.com/DataDog/puppet-datadog-agent/tree/master/manifests/integrations
 [8]: https://github.com/DataDog/puppet-datadog-agent/blob/master/manifests/init.pp
+[9]: https://app.datadoghq.com/fleet/install-agent/latest?platform=puppet

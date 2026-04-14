@@ -9,12 +9,30 @@ further_reading:
 - link: /metrics/distributions/
   tag: Documentación
   text: Distribuciones de métricas
+- link: /dashboards/guide/quick-graphs/
+  tag: Documentación
+  text: Quick Graphs
 title: Explorador de métricas
 ---
 
 ## Información general
 
 El [Explorador de métricas][1] es una interfaz básica para examinar tus métricas en Datadog. Para opciones más avanzadas, crea un [notebook][2] o dashboard [screenboard][3], o un [timeboard][4]).
+
+## Consultas en lenguaje natural
+
+{{< callout url="https://www.datadoghq.com/product-preview/natural-language-querying-for-metrics/">}}
+La consulta en lenguaje natural (NLQ) en el Metrics Explorer está en fase de vista previa. Si estás interesado en esta función, haz clic en <strong>Solicitar acceso</strong> y rellena el formulario.
+{{< /callout >}}
+
+
+Utiliza consultas en lenguaje natural (NLQ) para describir lo que buscas en inglés sencillo. Datadog traduce automáticamente tu solicitud en una consulta estructurada de métricas, comprendiendo el contexto, como tus servicios, atributos y etiquetas. Esto facilita la exploración de métricas sin necesidad de escribir una sintaxis compleja.
+
+Para acceder a esta función, haz clic en **Ask** (Preguntar) en el campo de búsqueda y escribe tu consulta.
+
+{{< img src="/metrics/explorer/metrics_nlq_example_10152025.mp4" alt="Consulta de lenguaje natural en el Metrics Explorer que muestra cómo buscar métricas usando frases en inglés sencillo" video=true >}}
+
+Para desactivar NLQ para tu organización, debes tener [permisos org_management][11]. Ve a **Organization Settings > Preferences** (Configuración de la organización > Preferencias) y desactiva la función de consultas en lenguaje natural.
 
 ## Creación de gráficos
 
@@ -47,11 +65,27 @@ Las opciones posibles son:
 
 También puedes añadir funciones a tu consulta utilizando el botón de función. No todas las funciones están disponibles para todos los tipos de métricas. Para obtener más información, consulta la documentación sobre [consultas][6]. 
 
+### Gráfica dividida
+
+Utiliza el botón **Split Graph** (Gráfico dividido) para ver los datos divididos en gráficos individuales por valores de etiquetas como región, servicio o entorno.
+
 ### Exportar
 
-Exporta tu gráfico a un dashboard o notebook con los botones de la parte superior derecha. También puedes utilizar **Split Graph in Notebook** (Dividir gráfico en notebook) para ver los datos divididos en gráficos individuales por elementos como región, servicio, o entorno.
+Utiliza el botón **Export** (Exportar) (<i class="icon-export"></i>) para exportar tu gráfico:
 
-## Lectura adicional
+- Copia un enlace al gráfico para compartirlo
+- Añádelo a un [incidente][8]
+- Crea un [monitor][9]
+- Guárdalo en un [dashboard][10]
+- Guárdalo en un [notebook][2] 
+
+### Quick Graphs
+
+Con Quick Graphs, tienes más opciones para visualizar tus datos, sin necesidad de crear un [dashboard][4] o [notebook][2]. Estos gráficos son útiles para entender y solucionar problemas cuestiones sin crear dashboards permanentes o configuraciones de visualización complejas.
+
+Para más información, consulta la documentación de [Quick Graphs][7].
+
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -60,4 +94,9 @@ Exporta tu gráfico a un dashboard o notebook con los botones de la parte superi
 [3]: /es/dashboards/#screenboards
 [4]: /es/dashboards/#get-started
 [5]: /es/metrics/introduction/#space-aggregation
-[6]: https://docs.datadoghq.com/es/dashboards/querying/#advanced-graphing
+[6]: /es/dashboards/querying/#advanced-graphing
+[7]: /es/dashboards/guide/quick-graphs/
+[8]: /es/service_management/incident_management/
+[9]: /es/monitors/
+[10]: /es/dashboards/
+[11]: /es/account_management/rbac/permissions/#access-management

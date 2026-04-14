@@ -1,5 +1,6 @@
 ---
 title: Getting Started with Test Optimization
+description: Understand test performance and identify flaky tests, performance regressions, and failures across CI environments.
 aliases:
 - /getting_started/test_visibility
 further_reading:
@@ -15,6 +16,9 @@ further_reading:
 - link: '/tests/developer_workflows'
   tag: 'Documentation'
   text: 'Learn about enhancing developer workflows in Datadog'
+- link: 'https://learn.datadoghq.com/courses/getting-started-test-optimization'
+  tag: 'Learning Center'
+  text: 'Getting Started with Test Optimization'
 algolia:
   tags: ["test visibility", "ci test", "ci tests", "flaky test", "flaky tests", "test run", "test runs", "test span", "test spans"]
 ---

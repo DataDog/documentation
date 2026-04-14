@@ -10,15 +10,14 @@ algolia:
 aliases:
 - /es/agent/faq/agent-configuration-files
 - /es/agent/guide/agent-configuration-files
+description: Guía sobre las ubicaciones de archivos de configuración del Datadog Agent,
+  la estructura y la manera de configurar checks e integraciones.
 title: Archivos de configuración del Agent
 ---
 
-## Archivo de configuración principal del Agent
+## Archivo de configuración principal
 
-El archivo de configuración del Agent v6 utiliza **YAML** para adaptarse mejor a configuraciones complejas y garantizar la coherencia en el proceso de configuración, ya que los checks también utilizan archivos de configuración YAML. Por este motivo, `datadog.yaml` (v6) pasa a sustituir a `datadog.conf` (v5).
-
-{{< tabs >}}
-{{% tab "Agent v6 y v7" %}}
+La localización del archivo de configuración del Agent varía según el sistema operativo.
 
 | Plataforma                             | Comando                              |
 |:-------------------------------------|:-------------------------------------|
@@ -27,27 +26,11 @@ El archivo de configuración del Agent v6 utiliza **YAML** para adaptarse mejor
 | macOS                                | `~/.datadog-agent/datadog.yaml`      |
 | Windows                              | `%ProgramData%\Datadog\datadog.yaml` |
 
-{{% /tab %}}
-{{% tab "Agent v5" %}}
-
-| Plataforma                             | Comando                                                                    |
-|:-------------------------------------|:---------------------------------------------------------------------------|
-| Linux                                | `/etc/dd-agent/datadog.conf`                                               |
-| macOS                                | `~/.datadog-agent/datadog.conf`                                            |                                       |
-| Windows Server 2008, Vista y versiones más recientes | `%ProgramData%\Datadog\datadog.conf`                                       |
-| Windows Server 2003, XP o versiones anteriores     | `\\Documents and Settings\All Users\Application Data\Datadog\datadog.conf` |
-
-{{% /tab %}}
-{{< /tabs >}}
-
-Consulta el [archivo `config_template.yaml` de ejemplo][2] para ver todas las opciones de configuración disponibles.
+Consulta el [archivo `config_template.yaml` de ejemplo][1] para ver todas las opciones disponibles de configuración.
 
 ## Directorio de configuración del Agent
 
-En versiones anteriores, el Datadog Agent almacenaba los archivos de configuración en `/dd-agent/conf.d/`. Con la versión 6.0, estos archivos pasan a guardarse en `/etc/datadog-agent/conf.d/<CHECK_NAME>.d/`.
-
-{{< tabs >}}
-{{% tab "Agent v6 y v7" %}}
+Los archivos de configuración de los checks y las integraciones del Agent se almacenan en el directorio `conf.d`. La localización del directorio varía en función del sistema operativo.
 
 | Plataforma                             | Comando                        |
 |:-------------------------------------|:-------------------------------|
@@ -58,14 +41,16 @@ En versiones anteriores, el Datadog Agent almacenaba los archivos de configuraci
 | Fedora                               | `/etc/datadog-agent/conf.d/`   |
 | macOS                                | `~/.datadog-agent/conf.d/`     |
 | RedHat                               | `/etc/datadog-agent/conf.d/`   |
-| Origen                               | `/etc/datadog-agent/conf.d/`   |
-| SUSE                                 | `/etc/datadog-agent/conf.d/`   |
+| Fuente                               | `/etc/datadog-agent/conf.d/`   |
+| Suse                                 | `/etc/datadog-agent/conf.d/`   |
 | Ubuntu                               | `/etc/datadog-agent/conf.d/`   |
 | Windows                              | `%ProgramData%\Datadog\conf.d` |
 
-### Archivos de configuración de checks para el Agent 6
+**Nota**: El Agent ignora los archivos con cero longitud de este directorio. Esto permite sistemas de suministro que no admiten plantillas vacías como resultado.
 
-En el archivo `conf.yaml.example`, en la carpeta `<CHECK_NAME>.d/` correspondiente, encontrarás un ejemplo de todos los archivos de configuración de checks del Agent. Cambia el nombre a `conf.yaml` para habilitar el check relacionado. **Nota**: El Agent carga los archivos YAML válidos incluidos en la carpeta: `/etc/datadog-agent/conf.d/<CHECK_NAME>.d/`. Con este paso, las configuraciones complejas se dividen en varios archivos. Por ejemplo, una configuración para `http_check` tendría este aspecto:
+### Archivos de configuración de checks
+
+En el archivo `conf.yaml.example`, en la carpeta `<CHECK_NAME>.d/` correspondiente, encontrarás un ejemplo de todos los archivos de configuración de checks del Agent. Cambia el nombre a `conf.yaml` para habilitar el check asociado. **Nota**: El Agent carga los archivos YAML válidos incluidos en la carpeta `/etc/datadog-agent/conf.d/<CHECK_NAME>.d/`. Con este paso, las configuraciones complejas se dividen en varios archivos. Este sería un ejemplo de configuración de `http_check`:
 
 ```text
 /etc/datadog-agent/conf.d/http_check.d/
@@ -73,9 +58,9 @@ En el archivo `conf.yaml.example`, en la carpeta `<CHECK_NAME>.d/` correspondien
 └── frontend.yaml
 ```
 
-Los archivos YAML con el sufijo `.default` son un caso especial. El Agent los carga de forma predeterminada, y sirven para ayudar a determinar el conjunto principal de checks que se habilitan siempre (CPU, memoria, tiempo de actividad…). Es seguro omitirlos porque, de hecho, se omiten si se encuentra otra configuración para un check determinado. Si quieres deshabilitar alguno de los checks predeterminados, basta con eliminar el archivo correspondiente. Para configurar estos checks, se debería utilizar `conf.yaml.example` como base.
+Un caso especial son los archivos YAML con el sufijo `.default`. El Agent carga estos archivos por defecto y ayuda a definir el conjunto básico de checks que siempre están activados (CPU, memoria, tiempo de actividad...). Se ignoran si se encuentra cualquier otra configuración para ese check, por lo tanto puedes ignorarlos sin problemas. Si deseas desactivar uno de los checks por defecto, elimina ese archivo. Para configurar estos checks, `conf.yaml.example` se debe utilizar como base.
 
-Los archivos de plantilla de Autodiscovery se almacenan en la carpeta de configuración con el archivo `auto_conf.yaml`. Por ejemplo, en el caso del check de Redis, esta es la configuración en `redisdb.d/`:
+Los archivos de plantilla de Autodiscovery se almacenan en la carpeta de configuración con el archivo `auto_conf.yaml`. Por ejemplo, en el caso del check de Redis, esta es la configuración de `redisdb.d/`:
 
 ```text
 /etc/datadog-agent/conf.d/redisdb.d/
@@ -83,33 +68,11 @@ Los archivos de plantilla de Autodiscovery se almacenan en la carpeta de configu
 └── conf.yaml.example
 ```
 
-Para la recopilación de logs, si hay varios archivos YAML que se dirigen a una misma fuente de logs, el Agent no los acepta para evitar que se envíen duplicados a Datadog. Si se da este caso, el Agent ordena los archivos de manera alfabética y utiliza el primero de la lista.
-
-Para preservar la compatibilidad con versiones anteriores, el Agent sigue aceptando los archivos de configuración en formato `/etc/dd-agent/conf.d/<CHECK_NAME>.yaml`. Sin embargo, recomendamos encarecidamente utilizar el formato nuevo.
-
-{{% /tab %}}
-{{% tab "Agent v5" %}}
-
-| Plataforma                             | Comando                                                              |
-|:-------------------------------------|:---------------------------------------------------------------------|
-| Linux                                | `/etc/dd-agent/conf.d/`                                              |
-| CentOS                               | `/etc/dd-agent/conf.d/`                                              |
-| Debian                               | `/etc/dd-agent/conf.d/`                                              |
-| Fedora                               | `/etc/dd-agent/conf.d/`                                              |
-| macOS                                | `~/.datadog-agent/conf.d/`                                           |
-| RedHat                               | `/etc/dd-agent/conf.d/`                                              |
-| Origen                               | `/etc/dd-agent/conf.d/`                                              |
-| SUSE                                 | `/etc/dd-agent/conf.d/`                                              |
-| Ubuntu                               | `/etc/dd-agent/conf.d/`                                              |
-| Windows Server 2008, Vista y versiones más recientes | `%ProgramData%\Datadog\conf.d`                                       |
-| Windows Server 2003, XP o versiones anteriores     | `\\Documents and Settings\All Users\Application Data\Datadog\conf.d` |
-
-{{% /tab %}}
-{{< /tabs >}}
+Para la recopilación de logs, si hay varios archivos YAML que apuntan a una misma fuente de logs, el Agent no los acepta para evitar que se envíen duplicados a Datadog. Si se da este caso, el Agent ordena los archivos de manera alfabética y utiliza el primero de la lista.
 
 ## Archivo de configuración de JMX
 
-Los checks de JMX del Agent incluyen un archivo `metrics.yaml` adicional en la carpeta de configuración. Se trata de una lista de beans que el Datadog Agent recopila de forma predeterminada. Así, no tendrás que detallarlos de forma manual cuando configures un check a través de las [etiquetas de Docker o las anotaciones de k8s][1].
+Los checks del JMX Agent tienen un archivo `metrics.yaml` adicional en su carpeta de configuración. Se trata de una lista de todos los beans que el Datadog Agent recopila por defecto. De esta forma, no es necesario hacer una lista de todos los beans manualmente cuando se configura un check a través de [etiquetas de Docker o anotaciones k8s][2].
 
-[1]: /es/agent/kubernetes/integrations/#configuration
-[2]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
+[1]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
+[2]: /es/agent/kubernetes/integrations/#configuration

@@ -78,7 +78,7 @@ Le check gnatsd_streaming est compatible avec toutes les principales plateformes
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "gnatsd_streaming" >}}
+{{< get-metrics-from-git "gnatsd-streaming" >}}
 
 
 Des tags basés sur des noms comme « nss-cluster_id » sont appliqués aux métriques de Nats Streaming Server.
@@ -88,7 +88,7 @@ Des tags basés sur des noms comme « nss-cluster_id » sont appliqués aux m�
 Si vous exécutez Nats Streaming Server dans un groupe de tolérance aux pannes, un événement de failover Nats Streaming est transmis lorsque le statut du serveur passe de `FT_STANDBY` à `FT_ACTIVE`.
 
 ### Checks de service
-{{< get-service-checks-from-git "gnatsd_streaming" >}}
+{{< get-service-checks-from-git "gnatsd-streaming" >}}
 
 
 ## Dépannage

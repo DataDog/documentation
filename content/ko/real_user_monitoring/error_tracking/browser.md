@@ -2,7 +2,7 @@
 aliases:
 - /ko/real_user_monitoring/error_tracking/browser_errors
 further_reading:
-- link: https://github.com/DataDog/datadog-ci/tree/master/src/commands/sourcemaps
+- link: https://github.com/DataDog/datadog-ci/tree/master/packages/datadog-ci/src/commands/sourcemaps
   tag: GitHub
   text: datadog-ci Source code
 - link: /real_user_monitoring/guide/upload-javascript-source-maps
@@ -36,7 +36,7 @@ Browser SDK를 아직 설정하지 않은 경우 [인앱 설정 지침][4]을 �
 
 {{< img src="real_user_monitoring/error_tracking/link_to_git_js_example.mp4" alt="스택 프레임에서 소스 코드에 링크하기" video=true >}}
 
-<div class="alert alert-info">스택 프레임에서 소스 코드로의 연결은 <a href="https://github.com/DataDog/datadog-ci/tree/master/src/commands/sourcemaps#sourcemaps-command">Datadog CLI</a> 버전 <code>0.12.0</code> 이상에서 지원됩니다.</div>
+<div class="alert alert-info">스택 프레임에서 소스 코드로의 연결은 <a href="https://github.com/DataDog/datadog-ci/tree/master/packages/datadog-ci/src/commands/sourcemaps#sourcemaps-command">Datadog CLI</a> 버전 <code>0.12.0</code> 이상에서 지원됩니다.</div>
 
 자세한 내용은 [Datadog 소스 코드 통합][13]을 참조하세요.
 
@@ -52,7 +52,7 @@ Browser SDK를 아직 설정하지 않은 경우 [인앱 설정 지침][4]을 �
 [6]: https://www.npmjs.com/package/@datadog/browser-rum
 [7]: /ko/real_user_monitoring/browser/#initialization-parameters
 [8]: /ko/real_user_monitoring/guide/upload-javascript-source-maps
-[9]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/sourcemaps#sourcemaps-command
+[9]: https://github.com/DataDog/datadog-ci/tree/master/packages/datadog-ci/src/commands/sourcemaps#sourcemaps-command
 [10]: https://github.com
 [11]: https://about.gitlab.com
 [12]: https://bitbucket.org/product

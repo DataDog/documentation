@@ -4,10 +4,6 @@ aliases:
 title: (LEGACY) Planificación y ampliación de la capacidad
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Observability Pipelines no está disponible en el sitio US1-FED de Datadog.</div>
-{{< /site-region >}}
-
 <div class="alert alert-info">
 Esta guía es para despliegues a nivel de producción a gran escala.
 </div>

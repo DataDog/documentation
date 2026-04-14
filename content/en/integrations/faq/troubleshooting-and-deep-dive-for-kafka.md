@@ -34,7 +34,7 @@ The [Kafka_Consumer Integration][6] collects metrics like our standard Python ba
 
 ### Older Agent versions
 
-This issue only applies if you are running version *<5.20* of the [Datadog Agent][7]. In older versions of Kafka, consumer offsets were stored in Zookeper exclusively. The initial Kafka_consumer Agent Check was written when this limitation was in place. Due to this, you cannot get the `kafka.consumer_lag` metric if your offsets are stored in Kafka and you are using an older version of the Agent. [Upgrade the Agent to the latest version][8] to see these metrics.
+This issue only applies if you are running version *<5.20* of the [Datadog Agent][7]. In older versions of Kafka, consumer offsets were stored in Zookeeper exclusively. The initial Kafka_consumer Agent Check was written when this limitation was in place. Due to this, you cannot get the `kafka.consumer_lag` metric if your offsets are stored in Kafka and you are using an older version of the Agent. [Upgrade the Agent to the latest version][8] to see these metrics.
 
 ### Cannot connect to instance
 
@@ -95,5 +95,5 @@ The number of partition contexts collection is limited to 500. If you require mo
 [7]: /agent/
 [8]: /agent/versions/upgrade_to_agent_v6/
 [9]: https://github.com/DataDog/integrations-core/blob/master/kafka/datadog_checks/kafka/data/conf.yaml.example
-[10]: /developers/dogstatsd/
+[10]: /extend/dogstatsd/
 [11]: /help/

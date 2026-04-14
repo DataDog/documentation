@@ -1,4 +1,5 @@
 ---
+id: helm
 core_product:
 - infrastructure monitoring
 title: Helm

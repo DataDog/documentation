@@ -1,5 +1,6 @@
 ---
 title: Understand the Difference Between the Agent Host and the Tracer Host
+description: Learn the difference between the Agent host and Tracer host in APM, and how hostname configuration affects infrastructure correlation.
 
 ---
 

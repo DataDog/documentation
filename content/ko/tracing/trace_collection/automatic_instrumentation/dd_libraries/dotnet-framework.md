@@ -63,7 +63,7 @@ Datadog의 .NET 프레임워크 라이브러리 및 프로세서 아키텍처 �
   Datadog 애플리케이션 성능 모니터링(APM)을 설정하려면 AWS Lambda에서 <strong><a href="/tracing/serverless_functions/">서버리스 기능/함수 추적</a></strong>을, Azure 앱 서비스에서 <strong><a href="/serverless/azure_app_services/">Azure 앱 서비스 추적</a></strong>을 참조하세요.
 </div>
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>참고:</strong> Datadog의 자동 계측은 .NET CLR 프로파일링 API를 사용합니다. 이 API는 하나의 구독자(예: Datadog APM)만 허용합니다. 가시성을 극대화하려면 애플리케이션 환경에서 하나의 APM 솔루션만 실행하세요.
 </div>
 
@@ -98,7 +98,7 @@ PowerShell에서 다음을 실행하여 MSI 설정을 스크립팅할 수도 있
 
 {{% tab "NuGet" %}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>참고:</strong> 이 설치는 IIS에서 실행 중인 애플리케이션을 계측하지 않습니다. IIS에서 실행 중인 애플리케이션의 경우 윈도우즈(Windows) 시스템 전체 설치 프로세스를 따르세요.
 </div>
 
@@ -134,7 +134,7 @@ PowerShell에서 다음을 실행하여 MSI 설정을 스크립팅할 수도 있
    # Also, start any other services that were stopped when WAS was shut down.
    ```
 
-   <div class="alert alert-warning">
+   <div class="alert alert-danger">
      <strong>Note:</strong> Always use the commands above to completely stop and restart IIS to enable the tracer. Avoid using the IIS Manager GUI application or <code>iisreset.exe</code>.
    </div>
 
@@ -188,7 +188,7 @@ PowerShell에서 다음을 실행하여 MSI 설정을 스크립팅할 수도 있
 
 {{% tab "Windows" %}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>참고:</strong> 자동 계측과 커스텀 계측을 모두 사용하는 경우 패키지 버전(예: MSI 및 NuGet)을 동기화 상태로 유지해야 합니다.
 </div>
 

@@ -60,7 +60,7 @@ Datadog에서 모든 CloudSearch 메트릭을 보려면 이 통합을 활성화�
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "amazon_cloudsearch" >}}
+{{< get-metrics-from-git "amazon-cloudsearch" >}}
 
 
 AWS에서 검색된 각 메트릭에는 호스트 이름, 보안 그룹 등을 포함하되 이에 국한되지 않고 AWS 콘솔에 표시되는 동일한 태그가 할당됩니다.

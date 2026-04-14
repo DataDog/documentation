@@ -53,5 +53,5 @@ To setup a browser test with this assertion:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /synthetics/browser_tests/actions/#upload-file
-[2]: /synthetics/browser_tests/actions/#assertion
+[1]: /synthetics/browser_tests/test_steps/#upload-file
+[2]: /synthetics/browser_tests/test_steps/#assertion

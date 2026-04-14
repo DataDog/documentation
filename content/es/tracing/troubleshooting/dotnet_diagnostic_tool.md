@@ -1,4 +1,6 @@
 ---
+description: Utiliza la herramienta de diagnóstico dd-dotnet para solucionar problemas
+  de configuración del rastreo .NET y de conectividad del Agent.
 title: Uso de la herramienta de diagnóstico de .NET para solucionar problemas
 ---
 

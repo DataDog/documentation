@@ -109,7 +109,7 @@ Datadog는 이 기본 설정을 유지하고 다음 커스텀 파싱 규칙을 �
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "amazon_cloudfront" >}}
+{{< get-metrics-from-git "amazon-cloudfront" >}}
 
 
 AWS에서 검색된 각 메트릭은 `aws_account`, `region` 및 `distributionid`을 포함하되 이에 국한되지 않으며 AWS 콘솔에 표시되는 동일한 태그에 할당됩니다.

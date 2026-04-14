@@ -1,5 +1,6 @@
 ---
 title: Top List Widget
+description: Display ranked lists of metrics and dimensions showing top or bottom values for easy comparison and analysis.
 widget_type: "toplist"
 aliases:
     - /graphing/widgets/top_list/
@@ -13,6 +14,15 @@ further_reading:
 - link: "/dashboards/guide/context-links/#overview/"
   tag: "Documentation"
   text: "Context Links"
+- link: "/dashboards/widgets/pie_chart/"
+  tag: "Documentation"
+  text: "Pie Chart Widget"
+- link: "/dashboards/widgets/bar_chart/"
+  tag: "Documentation"
+  text: "Bar Chart Widget"
+- link: "/dashboards/widgets/treemap/"
+  tag: "Documentation"
+  text: "Treemap Widget"
 ---
 
 The top list visualization enables you to display a list of tag values with the most or least of any metric or event value, such as highest consumers of CPU, hosts with the least disk space, or cloud products with the highest costs.
@@ -35,10 +45,10 @@ The top list visualization enables you to display a list of tag values with the 
 
 Configure the optional Display Mode features to add context to your top list visualization.
 
-* Display multiple stacked groups to show a break down of each dimension in your query. **Stacked** is enabled by default. You can switch to **Flat**.
-* Select **Relative** display mode to show values as a percent of the total or **Absolute** display mode to show the raw count of data you are querying.</br>
+* Display multiple stacked groups to show a break down of each dimension in your query. {{< ui >}}Stacked{{< /ui >}} is enabled by default. You can switch to {{< ui >}}Flat{{< /ui >}}.
+* Select {{< ui >}}Relative{{< /ui >}} display mode to show values as a percent of the total or {{< ui >}}Absolute{{< /ui >}} display mode to show the raw count of data you are querying.</br>
    **Note**: Relative display is only available for count data, such as count metrics or log events.
-* Configure conditional formatting in **Visual Formatting Rules** depending on your entries' values. 
+* Configure conditional formatting in {{< ui >}}Visual Formatting Rules{{< /ui >}} depending on your entries' values. 
 
 #### Context links
 

@@ -19,6 +19,7 @@ cascade:
 {{< whatsnext desc="Querying Metrics" >}}
     {{< nextlink href="metrics/guide/different-aggregators-look-same/" >}}Switching between the sum/min/max/avg aggregators doesn't change the value{{< /nextlink >}}
     {{< nextlink href="metrics/guide/calculating-the-system-mem-used-metric/" >}}Calculating the system.mem.used metric{{< /nextlink >}}
+    {{< nextlink href="metrics/guide/windows-memory-metrics-in-datadog/" >}}Windows memory metrics in Datadog{{< /nextlink >}}
     {{< nextlink href="metrics/guide/interpolation-the-fill-modifier-explained/" >}}Interpolation and the fill modifier{{< /nextlink >}}
     {{< nextlink href="metrics/guide/why-does-zooming-out-a-timeframe-also-smooth-out-my-graphs/" >}}Why does zooming out a timeframe also smooth out my graphs?{{< /nextlink >}}
     {{< nextlink href="metrics/guide/what-is-the-granularity-of-my-graphs-am-i-seeing-raw-data-or-aggregates-on-my-graph/" >}}What is the granularity of my graphs? Am I seeing raw data or aggregates on my graph?{{< /nextlink >}}
@@ -29,4 +30,5 @@ cascade:
     {{< nextlink href="metrics/metrics-without-limits/" >}}Metrics Without Limits™ - Learn how to control custom metrics volumes and costs with Metrics without Limits™ {{< /nextlink >}}
     {{< nextlink href="metrics/guide/custom_metrics_governance" >}}Best Practices for Custom Metrics Governance - Understand what your usage is and take action to reduce the largest cost drivers{{< /nextlink >}}
     {{< nextlink href="metrics/guide/dynamic_quotas" >}}Dynamic Quotas for Metrics{{< /nextlink >}}
+    {{< nextlink href="metrics/guide/agent-filtering-for-custom-metrics/" >}}Agent-Side Filtering for Custom Metrics{{< /nextlink >}}
 {{< /whatsnext >}}

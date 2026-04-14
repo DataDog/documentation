@@ -4,9 +4,9 @@
     }
     strong {
         white-space: nowrap;
+        margin-right: 4px;
     }
     p {
-        margin-left: 4px;
         .product-wrapper {
             white-space: nowrap;
             .product {
@@ -17,6 +17,9 @@
                     position: relative;
                     top: 1.5px;
                 }
+            }
+            .separator {
+                margin-right: 4px;
             }
         }
     }

@@ -8,7 +8,7 @@ further_reading:
 title: Session Replay sur mobile
 ---
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Mobile Session Replay est en version bêta publique pour les applications mobiles natives. Cette fonctionnalité n'est pas facturée.
 </div>
 

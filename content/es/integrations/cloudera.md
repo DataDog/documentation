@@ -1,111 +1,60 @@
 ---
 app_id: cloudera
-app_uuid: 526ca1e8-f474-49cd-9a79-6cfe75de15fe
-assets:
-  dashboards:
-    Cloudera Data Platform Overview: assets/dashboards/cloudera_overview.json
-  integration:
-    auto_install: true
-    configuration:
-      spec: assets/configuration/spec.yaml
-    events:
-      creates_events: false
-    metrics:
-      check: cloudera.cluster.cpu_percent_across_hosts
-      metadata_path: metadata.csv
-      prefix: cloudera.
-    process_signatures:
-    - cdp
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 10318
-    source_type_name: Cloudera
-  monitors:
-    Cloudera CPU usage is high: assets/monitors/cloudera_high_cpu.json
-author:
-  homepage: https://www.datadoghq.com
-  name: Datadog
-  sales_email: info@datadoghq.com
-  support_email: help@datadoghq.com
 categories:
 - nube
 - almacenes de datos
 custom_kind: integración
-dependencies:
-- https://github.com/DataDog/integrations-core/blob/master/cloudera/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: cloudera
-integration_id: cloudera
-integration_title: Cloudera
+description: Cloudera
+further_reading:
+- link: https://www.datadoghq.com/blog/cloudera-integration-announcement/
+  tag: blog
+  text: Obtener una mayor visibilidad de tus clústeres Cloudera con Datadog
 integration_version: 3.2.0
-is_public: true
-manifest_version: 2.0.0
-name: cloudera
-public_title: Cloudera
-short_description: Cloudera
+media: []
 supported_os:
 - linux
 - windows
 - macos
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::Cloud
-  - Supported OS::Linux
-  - Supported OS::Windows
-  - Supported OS::macOS
-  - Category::Data Stores
-  - Submitted Data Type::Metrics
-  - Offering::Integration
-  configuration: README.md#Setup
-  description: Cloudera
-  media: []
-  overview: README.md#Overview
-  resources:
-  - resource_type: Blog
-    url: https://www.datadoghq.com/blog/cloudera-integration-announcement/
-  support: README.md#Support
-  title: Cloudera
+title: Cloudera
 ---
-
-<!--  EXTRAÍDO DE https://github.com/DataDog/integrations-core -->
-
-
 ## Información general
 
-Esta integración monitoriza tu [plataforma de Cloudera Data][1] a través del Datadog Agent, permitiéndote enviar métricas y checks de servicio sobre el estado de tus clústeres, hosts y roles de Cloudera Data Hub.
+Esta integración monitoriza tu [Cloudera Data Platform](https://www.cloudera.com/products/cloudera-data-platform.html) a través del Datadog Agent, permitiéndote enviar métricas y checks de servicio del estado de tus clústeres, hosts y roles de Cloudera Data Hub.
 
 ## Configuración
 
-Sigue las instrucciones a continuación para instalar y configurar este check para un Agent que se ejecuta en un host. Para entornos en contenedores, consulta las [plantillas de integración de Autodiscovery][2] para obtener orientación sobre la aplicación de estas instrucciones.
+Sigue las siguientes instrucciones para instalar y configurar este check para un Agent que se ejecute en un host. Para entornos en contenedores, consulta las [plantillas de integración de Autodiscovery](https://docs.datadoghq.com/agent/kubernetes/integrations/) para obtener orientación sobre la aplicación de estas instrucciones.
 
 ### Instalación
 
-El check de Cloudera está incluido en el paquete del [Datadog Agent][3].
+El check de Cloudera está incluido en el paquete del [Datadog Agent](https://app.datadoghq.com/account/settings/agent/latest).
 No es necesaria ninguna instalación adicional en tu servidor.
 
 ### Configuración
 
 #### Requisitos
+
 El check de Cloudera requiere la versión 7 de Cloudera Manager.
 
 #### Preparar Cloudera Manager
+
 1. En la plataforma de Cloudera Data, ve a la consola de gestión y haz clic en la pestaña **User Management** (Gestión de usuarios).
-![Gestión de usuarios][4]
+   ![Gestión de usuarios](https://raw.githubusercontent.com/DataDog/integrations-core/master/cloudera/images/user_management.png)
 
-2. Haz clic en **Actions** (Acciones), luego en **Create Machine User** (Crear usuario de máquina) para crear el usuario de máquina que consulta el Cloudera Manager a través del Datadog Agent.
-![Crear usuario de máquina][5]
+1. Haz clic en **Actions** (Acciones), luego en **Create Machine User** (Crear usuario de máquina) para crear el usuario de máquina que consulta el Cloudera Manager a través del Datadog Agent.
+   ![Crear usuario de máquina](https://raw.githubusercontent.com/DataDog/integrations-core/master/cloudera/images/create_machine_user.png)
 
-3. Si no se ha establecido la contraseña de la carga de trabajo, haz clic en **Set Workload Password** (Establecer la contraseña de la carga de trabajo) después de crear el usuario.
-![Establecer la contraseña de la carga de trabajo][6]
+1. Si no se ha establecido la contraseña de la carga de trabajo, haz clic en **Set Workload Password** (Establecer la contraseña de la carga de trabajo) después de crear el usuario.
+   ![Definir contraseña de carga de trabajo](https://raw.githubusercontent.com/DataDog/integrations-core/master/cloudera/images/set_workload_password.png)
 
 {{< tabs >}}
+
 {{% tab "Host" %}}
 
-#### Host
-1. Edita el archivo `cloudera.d/conf.yaml`, en la carpeta `conf.d/` en la raíz de tu directorio de configuración del Agent para comenzar a recopilar tus datos de clúster y host de Cloudera. Ve el [cloudera.d/conf.yaml de ejemplo][1] para conocer todas las opciones disponibles de configuración.  
-**Nota**: La `api_url` debe contener la versión de la API al final.
+#### host
+
+1. Edita el archivo `cloudera.d/conf.yaml`, en la carpeta `conf.d/` en la raíz de tu directorio de configuración del Agent para empezar a recopilar tus datos de clústeres y hosts Cloudera. Consulta el [ejemplo cloudera.d/conf.yaml](https://github.com/DataDog/integrations-core/blob/master/cloudera/datadog_checks/cloudera/data/conf.yaml.example) para conocer todas las opciones de configuración disponibles.
+   **Nota**: La `api_url` debe contener la versión de la API al final.
 
    ```yaml
    init_config:
@@ -138,16 +87,15 @@ El check de Cloudera requiere la versión 7 de Cloudera Manager.
       - api_url: <API_URL>
    ```
 
-2. [Reinicia el Agent][2] para empezar a recopilar y enviar datos del clúster de Cloudera Data Hub a Datadog.
+1. [Reinicia el Agent](https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent) para comenzar a recopilar y enviar los datos de clústeres Cloudera Data Hub a Datadog.
 
-[1]: https://github.com/DataDog/integrations-core/blob/master/cloudera/datadog_checks/cloudera/data/conf.yaml.example
-[2]: https://docs.datadoghq.com/es/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
-{{% tab "Contenedorizado" %}}
 
-#### Contenedores
+{{% tab "En contenedores" %}}
 
-Para entornos en contenedores, consulta las [plantillas de integración de Autodiscovery][1] para obtener orientación sobre la aplicación de los parámetros que se indican a continuación.
+#### En contenedores
+
+Para entornos en contenedores, consulta las [plantillas de integración de Autodiscovery](https://docs.datadoghq.com/agent/kubernetes/integrations/) para obtener orientación sobre la aplicación de los parámetros que se indican a continuación.
 
 | Parámetro            | Valor                                                                                                            |
 | -------------------- | ---------------------------------------------------------------------------------------------------------------- |
@@ -155,8 +103,8 @@ Para entornos en contenedores, consulta las [plantillas de integración de Autod
 | `<INIT_CONFIG>`      | `{"workload_username": "<WORKLOAD_USERNAME>", 'workload_password": "<WORKLOAD_PASSWORD>"}`                       |
 | `<INSTANCE_CONFIG>`  | `{"api_url": <API_URL>"}`                                                                                        |
 
-[1]: https://docs.datadoghq.com/es/agent/kubernetes/integrations/
 {{% /tab %}}
+
 {{< /tabs >}}
 
 #### Detección de clústeres
@@ -164,20 +112,20 @@ Para entornos en contenedores, consulta las [plantillas de integración de Autod
 Puedes configurar cómo se detectan tus clústeres con la opción de configuración `clusters` con los siguientes parámetros:
 
 - `limit`
-: número máximo de elementos para Autodiscovery.
-**Valor por defecto**: `None` (se procesarán todos los clústeres)
+  : Número máximo de elementos a detectar automáticamente.\
+  **Valor por defecto**: `None` (se procesarán todos los clústeres)
 
 - `include`
-: asignación de claves de expresiones regulares y valores de configuración de componentes para Autodiscovery.
-**Valor por defecto**: asignación vacía
+  : Asignación de claves de expresiones regulares y valores de configuración de componentes a detectar automáticamente.\
+  **Valor por defecto**: asignación vacía
 
 - `exclude`
-: lista de expresiones regulares con los patrones de los componentes a excluir de Autodiscovery. 
-**Valor por defecto**: lista vacía
+  : Lista de expresiones regulares con los patrones de componentes a excluir de la detección automática.\
+  **Valor por defecto**: lista vacía
 
 - `interval`
-: tiempo de validez en segundos de la última lista de clústeres obtenida a través del endpoint.
-**Valor por defecto**: `None` (no se utiliza caché)
+  : Tiempo de validez en segundos de la última lista de clústeres obtenida a través del endpoint.\
+  **Valor por defecto**: `None` (no se utiliza caché)
 
 **Ejemplos**:
 
@@ -203,7 +151,7 @@ clusters:
 
 #### Consultas personalizadas
 
-Puedes configurar la integración de Cloudera para recopilar métricas personalizadas que no se recopilan por defecto ejecutando consultas de series temporales personalizadas. Estas consultas utilizan [el lenguaje tsquery][7] para recuperar datos de Cloudera Manager. 
+Puedes configurar la integración de Cloudera para recopilar métricas personalizadas que no se recopilan por defecto ejecutando consultas de series temporales personalizadas. Estas consultas utilizan el [lenguaje tsquery](https://docs.cloudera.com/cloudera-manager/7.9.0/monitoring-and-diagnostics/topics/cm-tsquery-syntax.html) para obtener datos de Cloudera Manager.
 
 **Ejemplo**:
 
@@ -219,13 +167,59 @@ Nota: Estas consultas pueden aprovechar las expresiones de métrica, dando lugar
 
 ### Validación
 
-[Ejecuta el subcomando de estado del Agent][8] y busca `cloudera` en la sección Checks.
+[Ejecuta el subcomando de estado del Agent(https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information) y busca `cloudera` en la sección Checks.
 
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "cloudera" >}}
 
+| | |
+| --- | --- |
+| **cloudera.cluster.cpu_percent_across_hosts** <br>(gauge) | Porcentaje de la métrica de uso de CPU del host, calculado en todas las entidades de host descendientes de esta entidad<br>_Se muestra como porcentaje_ |
+| **cloudera.cluster.total_bytes_receive_rate_across_network_interfaces** <br>(gauge) | Suma de la métrica de bytes recibidos, calculada en todas las entidades de interfaz de red descendientes de esta entidad<br>_Se muestra en bytes_ |
+| **cloudera.cluster.total_bytes_transmit_rate_across_network_interfaces** <br>(gauge) | Suma de la métrica de bytes transmitidos, calculada en todas las entidades de interfaz de red descendientes de esta entidad<br>_Se muestra en bytes_ |
+| **cloudera.cluster.total_read_bytes_rate_across_disks** <br>(gauge) | Suma de la métrica de bytes de disco leídos, calculada en todas las entidades de de disco descendientes de esta entidad<br>_Se muestra en bytes_ |
+| **cloudera.cluster.total_write_bytes_rate_across_disks** <br>(gauge) | Suma de la métrica de bytes de disco escritos, calculada en todas las entidades de de disco descendientes de esta entidad<br>_Se muestra en bytes_ |
+| **cloudera.disk.await_read_time** <br>(gauge) | Tiempo medio de espera de lectura en disco de la entidad<br>_Se muestra en milisegundos_ |
+| **cloudera.disk.await_time** <br>(gauge) | Tiempo medio de espera en disco de la entidad<br>_Se muestra en milisegundos_ |
+| **cloudera.disk.await_write_time** <br>(gauge) | Tiempo medio de espera de escritura en disco de la entidad<br>_Se muestra en milisegundos_ |
+| **cloudera.disk.service_time** <br>(gauge) | Tiempo medio de servicio en disco de la entidad<br>_Se muestra en milisegundos_ |
+| **cloudera.host.alerts_rate** <br>(gauge) | Número de alertas por segundo<br>_Se muestra como evento_ |
+| **cloudera.host.cpu_iowait_rate** <br>(gauge) | Tiempo total de espera de E/S de CPU|
+| **cloudera.host.cpu_irq_rate** <br>(gauge) | Tiempo total de IRQ de CPU|
+| **cloudera.host.cpu_nice_rate** <br>(gauge) | Tiempo total de CPU agradable|
+| **cloudera.host.cpu_soft_irq_rate** <br>(gauge) | Tiempo total de IRQ suave de CPU|
+| **cloudera.host.cpu_steal_rate** <br>(gauge) | Tiempo robado, que es el tiempo transcurrido en otros sistemas operativos cuando se ejecuta en un entorno virtualizado|
+| **cloudera.host.cpu_system_rate** <br>(gauge) | CPU total del sistema|
+| **cloudera.host.cpu_user_rate** <br>(gauge) | Tiempo total de uso de CPU|
+| **cloudera.host.events_critical_rate** <br>(gauge) | Número de acontecimientos críticos|
+| **cloudera.host.events_important_rate** <br>(gauge) | Número de acontecimientos importantes|
+| **cloudera.host.health_bad_rate** <br>(gauge) | Porcentaje de tiempo con mala salud|
+| **cloudera.host.health_concerning_rate** <br>(gauge) | Porcentaje de tiempo con salud preocupante|
+| **cloudera.host.health_disabled_rate** <br>(gauge) | Porcentaje de tiempo con salud deshabilitada|
+| **cloudera.host.health_good_rate** <br>(gauge) | Porcentaje de tiempo con buena salud|
+| **cloudera.host.health_unknown_rate** <br>(gauge) | Porcentaje de tiempo con salud desconocida|
+| **cloudera.host.load_1** <br>(gauge) | Carga media en 1 minuto|
+| **cloudera.host.load_15** <br>(gauge) | Carga media en 15 minutos|
+| **cloudera.host.load_5** <br>(gauge) | Carga media en 5 minutos|
+| **cloudera.host.num_cores** <br>(gauge) | Número total de núcleos|
+| **cloudera.host.num_physical_cores** <br>(gauge) | Número total de núcleos físicos|
+| **cloudera.host.physical_memory_buffers** <br>(gauge) | Cantidad de memoria física dedicada al almacenamiento temporal de bloques de disco sin procesar<br>_Se muestra en bytes_ |
+| **cloudera.host.physical_memory_cached** <br>(gauge) | Cantidad de memoria física utilizada para los archivos leídos del disco. Esto se conoce comúnmente como la caché de páginas<br>_Se muestra en bytes_ |
+| **cloudera.host.physical_memory_total** <br>(gauge) | Memoria física total disponible<br>_Se muestra en bytes_ |
+| **cloudera.host.physical_memory_used** <br>(gauge) | Cantidad total de memoria que se está utilizando, excluyendo buffers y caché<br>_Se muestra en bytes_ |
+| **cloudera.host.swap_out_rate** <br>(gauge) | Memoria intercambiada al disco<br>_Se muestra como página_ |
+| **cloudera.host.swap_used** <br>(gauge) | Intercambio utilizado<br>_Se muestra en bytes_ |
+| **cloudera.host.total_bytes_receive_rate_across_network_interfaces** <br>(gauge) | Suma de la métrica de bytes recibidos, calculada en todas las entidades de interfaz de red descendientes de esta entidad<br>_Se muestra en bytes_ |
+| **cloudera.host.total_bytes_transmit_rate_across_network_interfaces** <br>(gauge) | Suma de la métrica de bytes transmitidos, calculada en todas las entidades de interfaz de red descendientes de esta entidad<br>_Se muestra en bytes_ |
+| **cloudera.host.total_phys_mem_bytes** <br>(gauge) | Memoria física total en bytes<br>_Se muestra en bytes_ |
+| **cloudera.host.total_read_bytes_rate_across_disks** <br>(gauge) | Suma de la métrica de bytes de disco leídos, calculada en todas las entidades de de disco descendientes de esta entidad<br>_Se muestra en bytes_ |
+| **cloudera.host.total_read_ios_rate_across_disks** <br>(gauge) | Suma de la métrica de lecturas de disco, calculada en todas las entidades de disco descendientes de esta entidad<br>_Se muestra como operación_ |
+| **cloudera.host.total_write_bytes_rate_across_disks** <br>(gauge) | Suma de la métrica de bytes de disco escritos, calculada en todas las entidades de de disco descendientes de esta entidad<br>_Se muestra en bytes_ |
+| **cloudera.host.total_write_ios_rate_across_disks** <br>(gauge) | Suma de la métrica de escrituras en disco, calculada en todas las entidades de disco descendientes de esta entidad<br>_Se muestra como operación_ |
+| **cloudera.role.cpu_system_rate** <br>(gauge) | CPU total del sistema|
+| **cloudera.role.cpu_user_rate** <br>(gauge) | Tiempo total de uso de CPU|
+| **cloudera.role.mem_rss** <br>(gauge) | Memoria residente utilizada<br>_Se muestra en bytes_ |
 
 ### Eventos
 
@@ -239,26 +233,45 @@ La integración de Cloudera recopila eventos que se emiten desde el endpoint `/e
 | `CRITICAL`                | `error`                        |
 
 ### Checks de servicio
-{{< get-service-checks-from-git "cloudera" >}}
 
+**cloudera.can_connect**
+
+Devuelve `OK` si el check puede conectarse a la API de Cloudera Manager y recopilar métricas, si no devuelve `CRITICAL`.
+
+_Estados: ok, crítical_
+
+**cloudera.cluster.health**
+
+Devuelve `OK` si el clúster muestra buena salud o se está iniciando, `WARNING` si el clúster se está deteniendo o su salud es preocupante, `CRITICAL` si el clúster está inactivo o muestra mala salud, y `UNKNOWN` en caso contrario.
+
+_Estados: ok, critical, warning, unknown_
+
+**cloudera.host.health**
+
+Devuelve `OK` si el host muestra buena salud o se está iniciando, `WARNING` si el host se está deteniendo o su salud es preocupante, `CRITICAL` si el host está inactivo o muestra mala salud, y `UNKNOWN` en caso contrario.
+
+_Estados: ok, critical, warning, unknown_
 
 ## Solucionar problemas
 
 ### Recopilación de métricas de integraciones de Datadog en hosts de Cloudera
+
 Para instalar el Datadog Agent en un host de Cloudera, asegúrate de que el grupo de seguridad asociado al host permite el acceso SSH. 
-A continuación, deberás utilizar el [usuario raíz `cloudbreak`][9] cuando accedas al host con la clave SSH generada durante la creación del entorno:
+A continuación, deberás utilizar el [usuario raíz `cloudbreak`](https://docs.cloudera.com/data-hub/cloud/access-clusters/topics/mc-accessing-cluster-via-ssh.html) cuando accedas al host con la clave SSH generada durante la creación del entorno:
 
 ```
 sudo ssh -i "/path/to/key.pem" cloudbreak@<HOST_IP_ADDRESS>
 ```
 
-El nombre de usuario y la contraseña de la carga de trabajo pueden utilizarse para acceder a hosts de Cloudera a través de SSH, aunque sólo el usuario `cloudbreak` puede instalar el Datadog Agent. 
+El nombre de usuario y la contraseña de la carga de trabajo pueden utilizarse para acceder a hosts de Cloudera a través de SSH, aunque solo el usuario `cloudbreak` puede instalar el Datadog Agent. 
 Intentar utilizar cualquier usuario que no sea `cloudbreak` puede dar lugar al siguiente error:
+
 ```
 <NON_CLOUDBREAK_USER> is not allowed to run sudo on <CLOUDERA_HOSTNAME>.  This incident will be reported.
 ```
 
 ### Errores de configuración al recopilar métricas de Datadog
+
 Si ves algo similar a lo siguiente en el estado del Agent al recopilar métricas de tu host de Cloudera:
 
 ```
@@ -275,24 +288,10 @@ Debes cambiar la propiedad de `conf.yaml` a `dd-agent`:
 [cloudbreak@<CLOUDERA_HOSTNAME> ~]$ sudo chown -R dd-agent:dd-agent /etc/datadog-agent/conf.d/zk.d/conf.yaml
 ```
 
-
-¿Necesitas ayuda? Ponte en contacto con el [equipo de asistencia de Datadog][10].
+¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog](https://docs.datadoghq.com/help/).
 
 ## Referencias adicionales
 
-Más enlaces, artículos y documentación útiles:
+Documentación útil adicional, enlaces y artículos:
 
-- [Obtén visibilidad de tus clústeres de Cloudera con Datadog][11]
-
-
-[1]: https://www.cloudera.com/products/cloudera-data-platform.html
-[2]: https://docs.datadoghq.com/es/agent/kubernetes/integrations/
-[3]: https://app.datadoghq.com/account/settings/agent/latest
-[4]: https://raw.githubusercontent.com/DataDog/integrations-core/master/cloudera/images/user_management.png
-[5]: https://raw.githubusercontent.com/DataDog/integrations-core/master/cloudera/images/create_machine_user.png
-[6]: https://raw.githubusercontent.com/DataDog/integrations-core/master/cloudera/images/set_workload_password.png
-[7]: https://docs.cloudera.com/cloudera-manager/7.9.0/monitoring-and-diagnostics/topics/cm-tsquery-syntax.html
-[8]: https://docs.datadoghq.com/es/agent/guide/agent-commands/#agent-status-and-information
-[9]: https://docs.cloudera.com/data-hub/cloud/access-clusters/topics/mc-accessing-cluster-via-ssh.html
-[10]: https://docs.datadoghq.com/es/help/
-[11]: https://www.datadoghq.com/blog/cloudera-integration-announcement/
+- [Obtener una mayor visibilidad de tus clústeres Cloudera con Datadog](https://www.datadoghq.com/blog/cloudera-integration-announcement/)

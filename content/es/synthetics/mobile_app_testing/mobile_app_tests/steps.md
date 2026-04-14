@@ -14,11 +14,6 @@ further_reading:
 title: Pasos de tests de aplicaciones móviles
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Este sitio no admite los tests de aplicaciones móviles.</div>
-{{< /site-region >}}
-
-
 ## Información general
 
 Los pasos representan las interacciones o aserciones grabadas individualmente que quieres ejecutar en tu test. Para definir un paso, haz clic en **Start Recording** (Iniciar grabación) e interactúa con el dispositivo como lo harías normalmente o crea un paso manualmente haciendo clic en **Assertions** (Aserciones) o **Special Actions** (Acciones especiales). 

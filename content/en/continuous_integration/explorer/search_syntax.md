@@ -2,6 +2,9 @@
 title: CI Visibility Explorer Search Syntax
 description: Learn how to search for all of your pipeline executions in the CI Visibility Explorer.
 further_reading:
+- link: "/getting_started/search/"
+  tag: "Documentation"
+  text: "Getting Started with Search in Datadog"
 - link: "/continuous_integration/search"
   tag: "Documentation"
   text: "Filter and group pipelines"

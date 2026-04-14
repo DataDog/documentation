@@ -49,7 +49,7 @@ Google Cloud Memorystore for Redis のログは Google Cloud Logging で収集�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "google_cloud_redis" >}}
+{{< get-metrics-from-git "google-cloud-redis" >}}
 
 
 ### イベント

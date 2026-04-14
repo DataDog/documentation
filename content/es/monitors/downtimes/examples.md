@@ -14,31 +14,31 @@ title: Ejemplos
 ## Información general
 
 Utiliza los tiempos de inactividad para eliminar las alertas innecesarias durante el mantenimiento programado, las pruebas o el escalado automático de eventos.
-Utiliza la [API de tiempo de inactividad][1] para gestionar el formato avanzado de los programas de mantenimiento o para silenciar monitores dinámicamente, por ejemplo cuando se redimensionan las instancias en la nube.
+Utiliza la [API de tiempo de inactividad][1] para gestionar el formato de los cronogramas de mantenimiento avanzado o para silenciar monitores dinámicamente, por ejemplo cuando se redimensionan las instancias en la nube.
 
 Esta guía describe cómo configurar tiempos de inactividad para los siguientes casos de uso:
 
 * [Tiempo de inactividad durante el fin de semana](#downtime-over-the-weekend)
 * [Tiempo de inactividad fuera del horario laboral](#downtime-outside-of-business-hours)
-* [Tiempo de inactividad en el enésimo día del mes](#recurring-downtime-on-the-nth-weekday-of-the-month)
+* [Tiempo de inactividad durante el enésimo día laborable del mes](#recurring-downtime-on-the-nth-weekday-of-the-month)
 
 
 ## Requisitos previos
 
-Dado que esta guía describe el uso de la API, necesitarás una clave de API y una clave de aplicación con privilegios de administrador. Estas claves están disponibles en tu [página de claves de API para cuentas de Datadog][2].
+Dado que esta guía describe el uso de la API, necesitarás una clave de API y una clave de aplicación con privilegios de administrador. Estas claves están disponibles en la [página de claves de API de tu cuenta Datadog][2].
 Sustituye todas las apariciones de `<DATADOG_API_KEY>` y `<DATADOG_APP_KEY>` por tu clave de API de Datadog y tu clave de aplicación de Datadog, respectivamente.
 
-Esta guía también asume que tienes un terminal con `CURL` y que has revisado la [página de documentación de los tiempos de inactividad][3] principal.
+Esta guía también asume que tienes un terminal con `CURL` y que has revisado la [página de la documentación de los tiempos de inactividad][3] principal.
 
 ## Casos de uso
 
 ### Tiempo de inactividad durante el fin de semana
 
 Si monitorizas servicios que sólo se utilizan durante la semana, como el ERP de tu empresa o el software de contabilidad, es posible que sólo quieras recibir alertas durante la semana.
-Con la siguiente llamada a la API, puedes silenciar las alertas de todos los monitores con la etiqueta (tag) `env:prod` durante el fin de semana.
+Con la siguiente llamada a la API, durante el fin de semana puedes silenciar las alertas de todos los monitores con la etiqueta (tag) `env:prod`.
 
 {{< tabs >}}
-{{% tab "API " %}}
+{{% tab "API" %}}
 
 ```shell
 curl -X POST "https://api.<DATADOG_SITE>/api/v2/downtime" \
@@ -50,7 +50,7 @@ curl -X POST "https://api.<DATADOG_SITE>/api/v2/downtime" \
 
 También puedes añadir un `message` a tu tiempo de inactividad para que los demás conozcan la razón y el propósito del tiempo de inactividad que estás creando. Por ejemplo, `Muting all monitors in production environment over the weekend`.
 
-Sustituye el valor del parámetro `<Datadog_SITE>` por el del sitio de tu cuenta Datadog. Para ello, consulta la documentación de los [sitios Datadog][1]. Sustituye los parámetros `start` y `end` para que coincidan con el cronograma deseado. Por ejemplo
+Sustituye el valor del parámetro `<DATADOG_SITE>` por el del sitio de tu cuenta Datadog. Para ello, consulta la documentación de los [sitios Datadog][1]. Sustituye los parámetros `start` y `end` para que coincidan con el cronograma deseado. Por ejemplo
 
 * `start=$(date +%s)`
 * `end=$(date -v+24H +%s)`
@@ -100,11 +100,11 @@ Y luego, en el comando cURL, utiliza: `"start": '"${start}"'`.
 
 [1]: https://docs.datadoghq.com/es/getting_started/site
 {{% /tab %}}
-{{% tab "IU" %}}
+{{% tab "UI" %}}
 
 Abre la página [Gestionar tiempos de inactividad][1] y programa un nuevo tiempo de inactividad. Selecciona `recurring`:
 
-{{< img src="monitors/guide/downtimes_weekend.png" alt="Configuración de tiempos de inactividad utilizando un cronograma recurrente para silenciar alertas durante el fin de semana" style="width:100%;" >}}
+{{< img src="monitors/guide/downtimes_weekend.png" alt="Configuración de tiempos de inactividad utilizando un cronograma recurrente para silenciar las alertas durante el fin de semana" style="width:100%;" >}}
 
 [1]: https://app.datadoghq.com/monitors#downtime
 {{% /tab %}}
@@ -112,7 +112,7 @@ Abre la página [Gestionar tiempos de inactividad][1] y programa un nuevo tiempo
 
 ### Tiempo de inactividad fuera del horario laboral
 
-Utilizando el mismo ejemplo, es posible que también quieras silenciar este servicio durante los días laborables, fuera del horario comercial.
+Utilizando el mismo ejemplo, es posible que también quieras silenciar este servicio durante los días laborables, fuera del horario laboral.
 
 {{< tabs >}}
 {{% tab "API" %}}
@@ -124,10 +124,10 @@ curl -X POST "https://api.<DATADOG_SITE>/api/v1/downtime" \
 -H "Content-type: application/json" \
 -H "DD-API-KEY: ${api_key}" \
 -H "DD-APPLICATION-KEY: ${app_key}" \
--d '{"data":{"type":"downtime","attributes":{"monitor_identifier":{"monitor_tags":["*"]},"scope":"env:prod","display_timezone":"Europe/Berlin","message":"","mute_first_recovery_notification":false,"notify_end_types":["expired","canceled"],"notify_end_states":["alert","warn","no data"],"schedule":{"timezone":"Europe/Berlin","recurrences":[{"start":"2023-07-10T18:00","duration":"12h","rrule":"FREQ=DAILY;INTERVAL=1"}]}}},"_authentication_token":"b6c9ec89cdff687d29c0ee54923c52f57c9e102a"}'
+-d '{"data":{"type":"downtime","attributes":{"monitor_identifier":{"monitor_tags":["*"]},"scope":"env:prod","display_timezone":"Europe/Berlin","message":"","mute_first_recovery_notification":false,"notify_end_types":["expired","canceled"],"notify_end_states":["alert","warn","no data"],"schedule":{"timezone":"Europe/Berlin","recurrences":[{"start":"2023-07-10T18:00","duration":"12h","rrule":"FREQ=DAILY;INTERVAL=1"}]}}}}'
 ```
 
-También puedes añadir un `message` a tu tiempo de inactividad para que los demás conozcan la razón y el propósito del tiempo de inactividad que estás creando. Sustituye el parámetro `<Datadog_SITE>` por el del sitio de tu cuenta Datadog. Para ello, consulta la documentación de los [sitios Datadog][1]. Sustituye los parámetros `start` y `end` para que coincidan con el cronograma deseado.
+También puedes añadir un `message` a tu tiempo de inactividad para que los demás conozcan la razón y el propósito del tiempo de inactividad que estás creando. Sustituye el parámetro `<DATADOG_SITE>` por el del sitio de tu cuenta Datadog. Para ello, consulta la documentación de los [sitios Datadog][1]. Sustituye los parámetros `start` y `end` para que coincidan con el cronograma deseado.
 
 **Respuesta:**
 
@@ -171,19 +171,19 @@ También puedes añadir un `message` a tu tiempo de inactividad para que los dem
 
 [1]: https://docs.datadoghq.com/es/getting_started/site
 {{% /tab %}}
-{{% tab "IU" %}}
+{{% tab "UI" %}}
 
 Abre la página [Gestionar tiempos de inactividad][1] y programa un nuevo tiempo de inactividad. Selecciona `recurring`:
 
-{{< img src="monitors/guide/downtime_businesshour.png" alt="Configuración de tiempos de inactividad utilizando un cronograma recurrente para silenciar alertas fuera del horario laboral" style="width:100%;" >}}
+{{< img src="monitors/guide/downtime_businesshour.png" alt="Configuración de tiempos de inactividad utilizando un cronograma recurrente para silenciar las alertas fuera del horario laboral" style="width:100%;" >}}
 
 [1]: https://app.datadoghq.com/monitors#downtime
 {{% /tab %}}
 {{< /tabs >}}
 
-### Tiempo de inactividad combinado para aplicar fuera del horario comercial y durante fin de semana
+### Tiempo de inactividad combinado para aplicar fuera del horario laboral y durante fin de semana
 
-Para los casos de uso en los que sólo quieras monitorizar notificaciones durante el horario laboral, silencia los monitores, tanto durante la semana como durante el fin de semana. Esto puede combinarse en un único tiempo de inactividad. Continuando con el ejemplo anterior de [tiempo de inactividad fuera del horario laboral](#downtime-outside-of-business-hours):
+Para los casos de uso en los que sólo quieras monitorizar notificaciones durante el horario laboral, silencia los monitores durante la semana y también durante el fin de semana. Ambas opciones pueden combinarse en un único tiempo de inactividad. Continuando con el ejemplo anterior de [Tiempo de inactividad fuera del horario laboral](#downtime-outside-of-business-hours):
 
 {{< tabs >}}
 {{% tab "API" %}}
@@ -246,30 +246,30 @@ También puedes añadir un `message` a tu tiempo de inactividad para que los dem
 
 [1]: https://docs.datadoghq.com/es/getting_started/site
 {{% /tab %}}
-{{% tab "IU" %}}
+{{% tab "UI" %}}
 
 Abre la página [Gestionar tiempos de inactividad][1] y añade un nuevo tiempo de inactividad. Selecciona `recurring`:
 
-{{< img src="monitors/guide/downtime_business_hour_weekend.png" alt="Configuración de tiempos de inactividad utilizando un cronograma recurrente para silenciar alertas fuera del horario laboral y durante el fin de semana" style="width:100%;" >}}
+{{< img src="monitors/guide/downtime_business_hour_weekend.png" alt="Configuración de tiempos de inactividad utilizando un cronograma recurrente para silenciar las alertas fuera del horario laboral y durante el fin de semana" style="width:100%;" >}}
 
 [1]: https://app.datadoghq.com/monitors#downtime
 {{% /tab %}}
 {{< /tabs >}}
 
-### Tiempo de inactividad en el enésimo día laborable del mes
+### Tiempo de inactividad durante el enésimo día laborable del mes
 
-Para planificar programas de mantenimiento más avanzados, puedes utilizar reglas RRULE.
+Para programar cronogramas de mantenimiento más avanzados, puedes utilizar reglas RRULE.
 
-Una RRULE (o regla de recurrencia) es un nombre de propiedad de la [RFC de iCalendar][4], que es el estándar para definir recurrencias de eventos.
+Una regla RRULE (o regla de recurrencia) es un nombre de propiedad de la [RFC de iCalendar][4], que es el estándar para la definición de recurrencias de eventos.
 
-No son compatibles los atributos que especifican la duración de la `RRULE` (por ejemplo, `DTSTART`, `DTEND`, `DURATION`). Consulta la [RFC][4] para conocer los posibles atributos. Puedes utilizar [esta herramienta][5] para generar las RRULE y pegarlas en tu llamada a la API.
+No son compatibles los atributos que especifican la duración de la `RRULE` (por ejemplo, `DTSTART`, `DTEND`, `DURATION`). Consulta la [RFC][4] para conocer los posibles atributos. Puedes utilizar [esta herramienta][5] para generar reglas RRULE y pegarlas en tu llamada a la API.
 
-**Ejemplo**: la aplicación ERP se actualiza todos los segundos martes de cada mes para aplicar parches y correcciones entre las 8.00 y las 10.00. Para ello, los monitores tienen un alcance `app:erp`, por lo que se utiliza en el contexto de los tiempos de inactividad.
+**Ejemplo**: la aplicación ERP se actualiza todos los segundos martes de cada mes para aplicar parches y correcciones entre las 8.00 y las 10.00. Para ello, los monitores tienen un contexto `app:erp`, por lo que esto se utiliza en el contexto del tiempo de inactividad.
 
 {{< tabs >}}
 {{% tab "API" %}}
 
-Los parámetros `start` y `end` deben coincidir con el inicio y el fin previstos para el primer día de la regla recurrente. Por lo que, suponiendo que el primer 2.º martes de nuestra regla sea el martes 11 de julio, la fecha de inicio tiene que ser 11 de julio a las 08:00 y es necesario establecer una duración de dos horas.
+Los parámetros `start` y `end` deben coincidir con el inicio y el fin previstos para el primer día de la regla recurrente. Por lo que, suponiendo que el primer segundo martes de nuestra regla sea el martes 11 de julio, la fecha de inicio tiene que ser 11 de julio a las 8:00 y es necesario establecer una duración de dos horas.
 
 **Llamada a la API:**
 
@@ -325,17 +325,17 @@ Sustituye el valor del parámetro `<DATADOG_SITE>` por el del sitio de tu cuenta
 
 [1]: https://docs.datadoghq.com/es/getting_started/site
 {{% /tab %}}
-{{% tab "IU" %}}
+{{% tab "UI" %}}
 
-Abre la página [Gestionar tiempos de inactividad][1] y añade un nuevo tiempo de inactividad. Selecciona `recurring` y luego `Use RRULE`.
+Abre la página [Gestionar tiempos de inactividad][1] y añade un nuevo tiempo de inactividad. Selecciona `recurring` y luego selecciona `Use RRULE`.
 
-{{< img src="monitors/downtimes/downtime_guide_rrule.png" alt="Configuración de tiempos de inactividad utilizando un cronograma recurrente con RRULE para silenciar alertas el 2.° martes de cada mes" style="width:100%;">}}
+{{< img src="monitors/downtimes/downtime_guide_rrule.png" alt="Configuración de tiempos de inactividad utilizando un cronograma recurrente con reglas RRULE para silenciar las alertas el segundo martes de cada mes" style="width:100%;">}}
 
 [1]: https://app.datadoghq.com/monitors#downtime
 {{% /tab %}}
 {{< /tabs >}}
 
-## Leer más
+## Para leer más
 
 {{< partial name="whats-next/whats-next.html" >}}
 

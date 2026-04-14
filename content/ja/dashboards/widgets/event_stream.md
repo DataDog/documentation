@@ -6,4 +6,4 @@ private: true
 title: イベントストリームウィジェット
 ---
 
-<div class="alert alert-warning">Event Stream ウィジェットは、<a href="https://docs.datadoghq.com/dashboards/widgets/list/">List ウィジェット</a>を通じてサポートされます。</div>
+<div class="alert alert-danger">Event Stream ウィジェットは、<a href="https://docs.datadoghq.com/dashboards/widgets/list/">List ウィジェット</a>を通じてサポートされます。</div>

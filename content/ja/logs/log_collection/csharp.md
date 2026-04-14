@@ -322,7 +322,7 @@ APM が有効になっているアプリケーションの場合は、[APM .NET 
 
 アプリケーションのコードを修正したり、アプリケーションに依存するものを追加でインストールする必要はありません。
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>注:</strong> log4net または NLog を使用する場合、エージェントレスロギングを有効にするには、アペンダー (log4net) またはロガー (NLog) が構成されている必要があります。これらの場合、これらの追加の依存関係を追加するか、代わりに <a href="/logs/log_collection/csharp/?tab=log4net#agentless-logging-with-serilog-sink">Serilog シンクを使用してエージェントレスロギング</a>を使用することができます。
 </div>
 
@@ -357,7 +357,7 @@ Tracer バージョン 2.7.0 からエージェントレスロギングを使用
 : エージェントレスロギングを有効にします。`Serilog`、`NLog`、`Log4Net`、または `ILogger` (`Microsoft.Extensions.Logging` の場合) に設定することで、使用しているロギングフレームワークで有効にすることができます。複数のロギングフレームワークを使用している場合は、セミコロンで区切った変数のリストを使用します。<br>
 **例**: `Serilog;Log4Net;NLog`
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>注:</strong> <code>Microsoft.Extensions.Logging</code> と共にロギングフレームワークを使用している場合、一般的にフレームワーク名を使用する必要があります。例えば、<a href="https://github.com/serilog/serilog-extensions-logging">Serilog.Extensions.Logging</a> を使用している場合、<code>DD_LOGS_DIRECT_SUBMISSION_INTEGRATIONS=Serilog</code> に設定する必要があります。
 </div>
 

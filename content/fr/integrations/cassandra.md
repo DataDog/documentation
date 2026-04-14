@@ -224,7 +224,7 @@ Pour les environnements conteneurisés, utilisez l'[exportateur Prometheus][19] 
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "cassandra_nodetool" >}}
+{{< get-metrics-from-git "cassandra-nodetool" >}}
 
 
 ### Événements
@@ -232,7 +232,7 @@ Pour les environnements conteneurisés, utilisez l'[exportateur Prometheus][19] 
 Le check Cassandra_nodetool n'inclut aucun événement.
 
 ### Checks de service
-{{< get-service-checks-from-git "cassandra_nodetool" >}}
+{{< get-service-checks-from-git "cassandra-nodetool" >}}
 
 
 ## Dépannage

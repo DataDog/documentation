@@ -1,10 +1,10 @@
 ---
 categories:
-- collaboration
+- コラボレーション
 - notifications
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
-description: Datadog のアラートとグラフをチームの Chatwork ルームに送信。
+description: Datadog のアラートとグラフをチームの Chatwork ルームに送信
 doc_link: https://docs.datadoghq.com/integrations/chatwork/
 draft: false
 git_integration_title: chatwork
@@ -16,7 +16,7 @@ is_public: true
 manifest_version: '1.0'
 name: chatwork
 public_title: Datadog-Chatwork インテグレーション
-short_description: Datadog のアラートとグラフをチームの Chatwork ルームに送信。
+short_description: Datadog のアラートとグラフをチームの Chatwork ルームに送信
 version: '1.0'
 ---
 
@@ -55,7 +55,7 @@ Chatwork インテグレーションには、メトリクスは含まれませ�
 
 Chatwork インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 
 Chatwork インテグレーションには、サービスのチェック機能は含まれません。
 

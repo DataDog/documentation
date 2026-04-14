@@ -10,7 +10,7 @@ further_reading:
 - link: /monitors/downtimes/
   tag: 설명서
   text: 모니터 음소거를 위한 다운타임을 예약하세요.
-- link: /monitors/manage/status/
+- link: /모니터/상태/
   tag: 설명서
   text: 모니터 상태 점검
 title: 네트워크 모니터
@@ -45,7 +45,7 @@ Datadog에서 [네트워크 모니터][3]를 생성하려면 기본 탐색인 *M
 {{< tabs >}}
 {{% tab "Check Alert" %}}
 
-검사 알림은 검사 그룹별로 제출된 연속 상태를 추적하고 이를 임계값과 비교합니다.
+검사 알림은 검사 그룹별로 제출된 연속 상태를 추적하고 이를 임계값과 비교합니다.
 
 검사 알림 설정
 
@@ -53,7 +53,7 @@ Datadog에서 [네트워크 모니터][3]를 생성하려면 기본 탐색인 *M
 
    검사 그룹화는 알려진 그룹화 목록에서 또는 사용자가 지정합니다. 네트워크 모니터의 경우 검사별 그룹화가 명시되어 있습니다. 예를 들어, HTTP 검사에는 `host`, `instance`, `url` 태그가 지정됩니다.
 
-2. 선택한 장애가 연속적으로 발생하면 경고를 트리거합니다:`<NUMBER>`
+2. 연속 실패 횟수를 선택하여 알림을 트리거합니다:`<NUMBER>`
 
    각 검사 실행은 `OK`, `WARN` 또는 `CRITICAL` 중 하나의 상태를 제출합니다. 알림을 트리거하는 `CRITICAL` 상태의 연속 실행 횟수를 선택합니다. 예를 들어, HTTP 검사에 연결이 실패한 단일 오류가 있을 수 있습니다. 이 값을 `> 1`로 설정하면 오류가 무시되지만 두 번 이상 연속 실패한 문제에 대해서는 알림을 트리거합니다.
 
@@ -75,13 +75,13 @@ Datadog에서 [네트워크 모니터][3]를 생성하려면 기본 탐색인 *M
 {{% /tab %}}
 {{< /tabs >}}
 
-#### 고급 경고 조건
+#### 고급 알림 조건
 
 [데이터 없음][5], [자동 해결][6] 및 [새 그룹 지연][7] 옵션에 대한 자세한 내용은 [모니터 설정][4] 설명서를 참조하세요.
 
 #### 알림
 
-**Say what's happening** 및 **Notify your team** 섹션에 대한 자세한 지침은 [알림][8] 페이지를 참조하세요.
+**Configure notifications and automations** 섹션에 관한 자세한 정보는 [Notifications][8] 페이지를 참고하세요.
 
 ### 네트워크 메트릭
 
@@ -93,7 +93,7 @@ Datadog에서 [네트워크 모니터][3]를 생성하려면 기본 탐색인 *M
 
 [1]: /ko/integrations/http_check/
 [2]: /ko/integrations/tcp_check/
-[3]: https://app.datadoghq.com/monitors#create/network
+[3]: https://app.datadoghq.com/monitors/create/network
 [4]: /ko/monitors/configuration/#advanced-alert-conditions
 [5]: /ko/monitors/configuration/#no-data
 [6]: /ko/monitors/configuration/#auto-resolve

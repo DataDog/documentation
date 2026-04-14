@@ -15,7 +15,7 @@ further_reading:
 title: Variables d'environnement de l'Agent
 ---
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Si vous utilisez l'Agent v5, référez-vous au <a href="https://github.com/DataDog/docker-dd-agent#environment-variables">référentiel GitHub de l'Agent Docker</a>.
 </div>
 
@@ -55,7 +55,10 @@ Dans la plupart des cas, les règles suivantes doivent être respectées :
       # DD_CONTAINER_ENV_AS_TAGS='{"ENVVAR_NAME": "tag_name"}'
    ```
 
-**Remarque** : lorsque vous spécifiez une option imbriquée avec une variable d'environnement, _toutes_ les options imbriquées spécifiées sous l'option de configuration sont ignorées. L'option de configuration `proxy` fait toutefois exception à cette règle. Consultez la [documentation relative au proxy de l'Agent][3] pour en savoir plus.
+### Priorité de définition des propriétés
+
+- Si une propriété est définie à la fois dans le fichier de configuration global (`datadog.yaml`) et en tant que variable d'environnement, c'est la variable d'environnement qui prévaut.
+- Lorsque vous spécifiez une option imbriquée avec une variable d'environnement, _toutes_ les options imbriquées spécifiées sous l'option de configuration sont ignorées. L'option de configuration `proxy` fait toutefois exception à cette règle. Consultez la [documentation relative au proxy de l'Agent][3] pour en savoir plus.
 
 ### Exceptions
 
@@ -102,7 +105,7 @@ Dans les systèmes d'exploitation qui utilisent systemd pour gérer des services
   ```
   GODEBUG=x509ignoreCN=0,x509sha1=1
   DD_HOSTNAME=myhost.local
-  DD_TAGS=env:dev service:foo
+  DD_TAGS=env:dev,service:foo
   ```
 3. Redémarrez l'Agent pour que les modifications soient appliquées.
 

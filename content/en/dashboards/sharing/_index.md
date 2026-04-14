@@ -1,5 +1,6 @@
 ---
 title: Sharing
+description: Share dashboards and graphs outside Datadog using public links, embedded code, and scheduled email reports.
 aliases:
     - /graphing/faq/is-there-a-way-to-share-graphs
     - /graphing/faq/is-there-a-way-to-share-or-revoke-previously-shared-graphs
@@ -23,12 +24,13 @@ Shared visualizations allow you to display metric, trace, and log visualizations
 {{< whatsnext desc="How to share visualizations:" >}}
    {{< nextlink href="dashboards/sharing/shared_dashboards" >}}<strong>Shared dashboards</strong>: Generate a public link for users to access{{< /nextlink >}}
    {{< nextlink href="dashboards/sharing/graphs" >}}<strong>Share graphs</strong>: Generate an embed code{{< /nextlink >}}
+   {{< nextlink href="dashboards/sharing/widget_public_urls" >}}<strong>Widget Public URLs</strong>: Copy widgets as images to share outside of Datadog{{< /nextlink >}}
    {{< nextlink href="dashboards/sharing/scheduled_reports" >}}<strong>Scheduled reports</strong>: Set a schedule to send email reports{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## View all public dashboards and graphs
 
-To see the complete list of publicly shared dashboards, navigate to [**Organization Settings > Public Sharing > Shared Dashboards**][1]. Click the **Shared Graphs** tab to view publicly shared graphs from your organization. To revoke access, see the [dashboard][2] and [graph][3] documentation.
+To see the complete list of publicly shared dashboards, navigate to [{{< ui >}}Organization Settings{{< /ui >}} > {{< ui >}}Public Sharing{{< /ui >}} > {{< ui >}}Shared Dashboards{{< /ui >}}][1]. Click the {{< ui >}}Shared Graphs{{< /ui >}} tab to view publicly shared graphs from your organization. To revoke access, see the [dashboard][2] and [graph][3] documentation.
 
 ## Further reading
 

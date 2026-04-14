@@ -70,4 +70,4 @@ jobs:
         with:
           app-name: 'serverless-slot-tests-linux'
           slot-name: 'staging'
-          startup-command: 'curl -s https://raw.githubusercontent.com/DataDog/datadog-aas-linux/v1.4.0/datadog_wrapper | bash'
+          startup-command: 'curl -s https://raw.githubusercontent.com/DataDog/datadog-aas-linux/v1.14.0/datadog_wrapper | bash'

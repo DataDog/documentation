@@ -11,6 +11,9 @@ products:
 - icon: cloud-security-management
   name: CSM Threats
   url: /security/threats/
+- icon: app-sec
+  name: App and API Protection
+  url: /security/application_security/
 title: Suppressions
 ---
 
@@ -52,7 +55,7 @@ La [liste des suppressions][3] permet de gérer les suppressions de façon centr
 1. Sélectionnez les règles de détection auxquelles vous souhaitez appliquer cette suppression. Vous pouvez sélectionner plusieurs règles de détection.
 1. Dans la section **Add Suppression Query** (Ajouter une requête de suppression), vous avez la possibilité de saisir des requêtes de suppression afin qu'un signal ne soit pas généré en fonction des valeurs. Par exemple, si un utilisateur `john.doe` déclenche un signal, mais que ses actions sont bénignes et que vous ne souhaitez plus que des signaux soient déclenchés par cet utilisateur, saisissez la requête de log : `@user.username:john.doe`.
 {{< img src="security/security_monitoring/suppressions/suppression_query.png" alt="La requête d'ajout de suppression avec la requête @user.username:john.doe" style="width:65%;" >}}
-  Les requêtes de règles de suppression sont basées sur les **attributs de signal**. 
+  Les requêtes de règles de suppression sont basées sur les **attributs de signal**.
 1. En outre, vous pouvez ajouter une requête d'exclusion de log pour exclure des logs de l'analyse. Ces requêtes sont basées sur les **attributs de logs**. **Remarque** : l'ancienne suppression était basée sur les requêtes d'exclusion de logs, mais elle est maintenant incluse dans l'étape **Ajouter une requête de suppression** de la règle de suppression.
 
 ## Pour aller plus loin

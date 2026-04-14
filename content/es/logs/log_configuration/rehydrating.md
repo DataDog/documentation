@@ -91,7 +91,7 @@ Los logs ya indexados seguirán siendo consultables hasta el final del periodo d
 
 Las vistas históricas permanecen en Datadog hasta que hayan superado el periodo de conservación seleccionado. También puedes eliminarlas antes, si ya no necesitas la vista. Puedes marcar una vista histórica para eliminarla seleccionando y confirmando el icono de eliminación situado en el extremo derecho de la vista histórica.
 
-La vista histórica se elimina definitivamente una hora después. Antes de que esto suceda, el equipo puede cancelar la eliminación.
+La vista histórica se elimina definitivamente una día después. Antes de que esto suceda, el equipo puede cancelar la eliminación.
 
 {{< img src="logs/archives/log_archives_rehydrate_delete.mp4" alt="Eliminación de vistas históricas" video="true" width="75%" >}}
 
@@ -103,7 +103,7 @@ Visualiza vistas históricas eliminadas durante hasta 1 año en el pasado, utili
 
 ## Configuración de la recuperación de archivos
 
-### Definir un archivo de Datadog 
+### Definir un archivo de Datadog
 
 Es necesario configurar un archivo externo para poder recuperar datos a partir de él. [Consulta la guía][8] para archivar tus logs en los destinos disponibles.
 

@@ -19,10 +19,6 @@ title: Ruby テスト
 type: multi-code-lang
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">現在、選択されたサイト ({{< region-param key="dd_site_name" >}}) では、CI Visibility はご利用いただけません。</div>
-{{< /site-region >}}
-
 ## 互換性
 
 サポートされている言語:
@@ -157,7 +153,7 @@ end
 DD_ENV=ci bundle exec rake test
 ```
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 <strong>注:</strong> `minitest/autorun` を使用する場合、`datadog/ci` が `minitest/autorun` より先に実行されるようにしてください。
 </div>
 

@@ -19,7 +19,7 @@ further_reading:
 title: ライブプロセスモニター
 ---
 
-<div class="alert alert-warning">
+<div class="alert alert-info">
 Live Processes および Live Process Monitoring は Enterprise プランに含まれています。他のプランをご利用の場合、この機能をリクエストするにはアカウント担当者または <a href="mailto:success@datadoghq.com">success@datadoghq.com</a> へご連絡ください。
 </div>
 

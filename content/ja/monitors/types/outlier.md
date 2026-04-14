@@ -5,18 +5,18 @@ aliases:
 - /ja/monitors/create/types/outlier/
 description: グループ内の他のメンバーと挙動が異なるメンバーについてアラートする
 further_reading:
+- link: https://www.datadoghq.com/blog/outlier-detection-algorithms-at-datadog
+  tag: ブログ
+  text: 'Datadog における外れ値検出: アルゴリズムの解説'
 - link: /monitors/notify/
   tag: ドキュメント
   text: モニター通知の設定
-- link: /monitors/downtimes/
-  tag: ドキュメント
-  text: モニターをミュートするダウンタイムのスケジュール
-- link: /monitors/manage/status/
+- link: /monitors/status/
   tag: ドキュメント
   text: モニターステータスの参照
 - link: /watchdog/insights/
   tag: ドキュメント
-  text: Outlier detection in Watchdog Insights
+  text: Watchdog Insights における外れ値検出
 title: 外れ値モニター
 ---
 
@@ -24,11 +24,9 @@ title: 外れ値モニター
 
 外れ値検出は、特定のグループがピアと比較して異なる動作をしていることを検出できるアルゴリズム機能です。たとえば、プール内の 1 つのウェブサーバーが異常な数のリクエストを処理していることや、1 つの AWS アベイラビリティーゾーンで他よりはるかに多くの 500 エラーが発生していることを検出できます。
 
-{{< img src="monitors/monitor_types/outliers/outliers-metric-alert.png" alt="外れ値メトリクスアラート" style="width:80%;">}}
-
 ## モニターの作成
 
-Datadog で[外れ値モニター][1]を作成するには、メインナビゲーションを使用して次のように移動します: *Monitors --> New Monitor --> Outlier*。
+Datadog で外れ値モニターを作成するには、[**Monitors** > **New Monitor** > **Outlier**][1] に移動します。
 
 ### メトリクスを定義する
 
@@ -39,7 +37,7 @@ Datadog で[外れ値モニター][1]を作成するには、メインナビゲ�
 ### アラートの条件を設定する
 
 * 各外れ値 `<GROUP>` に対して個別のアラートをトリガーします
-* 過去 `5 minutes`、`15 minutes`、`1 hour` など、または `custom` に 1 分～24 時間の値を設定します。
+* 過去 `5 minutes`、`15 minutes`、`1 hour` などを選択するか、`custom` を使用して 1 分〜1 年の値を設定できます。
 * アルゴリズム `MAD`、`DBSCAN`、`scaledMAD`、または `scaledDBSCAN` を使用する
 * 許容値: `0.33`、`1.0`、`3.0` など
 * %: `10`、`20`、`30` など（`MAD` アルゴリズムのみ）
@@ -76,9 +74,9 @@ Datadog では、時系列上の外れ値を検出するために、簡略化し
 **パラメーター**<br>
 外れ値モニターで MAD を使用するには、パラメーター `tolerance` と `%` を構成します。
 
-Tolerance specifies the number of deviations a point (independently of the groups) needs to be away from the median for it to be considered an outlier. This parameter should be tuned depending on the expected variability of the data. For example, if the data is generally within a small range of values, then this should be small. Otherwise, if points can vary greatly, then set a higher scale so the variabilities do not trigger false positives.
+Tolerance は、グループに依存せず各データポイントが外れ値と見なされるために、中央値からどれだけ離れている必要があるかを偏差の数で指定します。このパラメーターは、想定されるデータのばらつきに応じて調整してください。たとえば、値の範囲が狭いデータなら小さめに、変動が大きい場合は誤検知を避けるため大きめに設定します。
 
-Percent refers to the percentage of points in the group considered as outliers. If this percentage is exceeded, the whole group is marked as an outlier.
+Percent は、グループ内で外れ値と判定されるデータポイントの割合を指します。この割合を超えると、そのグループ全体が外れ値としてマークされます。
 
 [1]: https://en.wikipedia.org/wiki/Median_absolute_deviation
 {{% /tab %}}
@@ -103,7 +101,7 @@ DBSCAN と MAD には、スケール調整バージョンがあります（scale
 
 ### 通知
 
-For detailed instructions on the **Configure notifications and automations** section, see the [Notifications][4] page.
+**Configure notifications and automations** (通知と自動化の構成) セクションの詳細な手順については、[通知][4] ページを参照してください。
 
 ## API
 
@@ -119,9 +117,9 @@ For detailed instructions on the **Configure notifications and automations** sec
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/monitors#create/outlier
+[1]: https://app.datadoghq.com/monitors/create/outlier
 [2]: /ja/monitors/types/metric/#define-the-metric
 [3]: /ja/monitors/configuration/#advanced-alert-conditions
 [4]: /ja/monitors/notify/
 [5]: /ja/api/v1/monitors/#create-a-monitor
-[6]: /ja/monitors/manage/status/#settings
+[6]: /ja/monitors/status/#settings

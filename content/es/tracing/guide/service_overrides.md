@@ -82,7 +82,7 @@ DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED=true
 
 Esto garantiza que el atributo `service` utilice siempre el nombre del servicio base en lugar de añadir el nombre de la integración (por ejemplo,`*-postgres`, `*-http-client`).
 
-<div class="alert alert-danger">La eliminación de las sobreescrituras de servicios es un <b>cambio de último momento</b>. Las consultas de métricas, monitores o dashboards basadas en el nombre del servicio sobreescrito dejarán de coincidir.</div>
+<div class="alert alert-warning">La eliminación de las sobreescrituras de servicios es un <b>cambio de último momento</b>. Las consultas de métricas, monitores o dashboards basadas en el nombre del servicio sobreescrito dejarán de coincidir.</div>
 
 Se recomienda eliminar la sobreescritura de servicios progresivamente, procediendo servicio por servicio, para asegurar que ningún recurso crítico (como dashboards, monitores, filtros de conservación, etc.) se vea afectado por el cambio. Para garantizar una transición fluida al nuevo modelo, consulta las [instrucciones detalladas](#remove-service-overrides-progressively).
 

@@ -443,7 +443,7 @@ Agent コンテナで必要な環境変数
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "redisdb" >}}
+{{< get-metrics-from-git "redis" >}}
 
 
 ### イベント
@@ -451,7 +451,7 @@ Agent コンテナで必要な環境変数
 Redis チェックには、イベントは含まれません。
 
 ### サービスチェック
-{{< get-service-checks-from-git "redisdb" >}}
+{{< get-service-checks-from-git "redis" >}}
 
 
 ## トラブルシューティング

@@ -7,7 +7,7 @@ further_reading:
 title: Shadow DOM 구성요소로 세션 재생 강화
 ---
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Datadog는 Shadow DOM만 지원합니다.
 </div>
 

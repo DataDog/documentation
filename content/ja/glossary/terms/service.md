@@ -1,8 +1,9 @@
 ---
+id: service
 core_product:
 - apm
 - serverless monitoring
-- service catalog
+- software catalog
 title: サービス
 ---
 1. APM では、サービスとは、アプリケーションの作業の一部を実行する、関連するエンドポイント、クエリー、またはジョブのグループです。マイクロサービスベースのアーキテクチャは、複数のサービスから構築され、それぞれがアプリケーションの操作の一部を実行します。

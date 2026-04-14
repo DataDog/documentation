@@ -1,6 +1,8 @@
 ---
 aliases:
 - /es/agent/kubernetes/apm
+description: Activar la recopilación de traces (trazas) de APM para aplicaciones en
+  contenedores que se ejecutan en entornos de Kubernetes
 further_reading:
 - link: /agent/kubernetes/log/
   tag: Documentación
@@ -30,7 +32,7 @@ Esta página describe cómo ajustar y configurar [Application Performance Monito
 
 Puedes enviar trazas a través de Unix Domain Socket (UDS), TCP (`IP:Port`), o el servicio de Kubernetes. Datadog recomienda que utilices UDS, pero es posible utilizar los tres al mismo tiempo, si es necesario.
 
-## Ajustes
+## Configuración
 1. Si aún no lo has hecho, [instala el Datadog Agent][1] en tu entorno de Kubernetes.
 2. [Configura el Datadog Agent](#configure-the-datadog-agent-to-collect-traces) para recopilar trazas.
 3. [Configura pods de aplicación](#configure-your-application-pods-to-submit-traces-to-datadog-agent) para enviar trazas al Datadog Agent.
@@ -305,7 +307,7 @@ Lista de variables de entorno disponibles para configurar APM:
 | `DD_PROXY_HTTPS`     | Configura la URL para que lo pueda usar el proxy. |
 
 
-## Para leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

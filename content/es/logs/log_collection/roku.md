@@ -10,15 +10,11 @@ further_reading:
 title: Recopilación de logs de Roku
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">La recopilación de logs de Roku no está disponible en el sitio de Datadog US1-FED.</div>
-{{< /site-region >}}
-
 {{< site-region region="us,us3,us5,eu,ap1" >}}
 <div class="alert alert-info">La recopilación de logs de Roku está en fase beta.</div>
 {{< /site-region >}}
 
-Envía logs a Datadog desde tu canal de Roku con [la biblioteca de registro `dd-sdk-roku` de Datadog][1] y aprovecha las siguientes funciones:
+Envía logs a Datadog desde tu canal de Roku con [la librería de registro `dd-sdk-roku` de Datadog][1] y aprovecha las siguientes funciones:
 
 * Loguear en Datadog en formato JSON de forma nativa.
 * Añadir `context` y atributos personalizados adicionales a cada log enviado.
@@ -33,7 +29,7 @@ Envía logs a Datadog desde tu canal de Roku con [la biblioteca de registro `dd-
     ropm install datadog-roku
     ```
 
-2. Inicializa la biblioteca con tu [token de cliente de Datadog][2] y el ID de aplicación generado al crear una nueva aplicación RUM en la interfaz de usuario de Datadog (consulta [Empezando con la recopilación de Roku RUM][6] para obtener más información). Por razones de seguridad, debes usar un token de cliente: no puedes usar [claves de API de Datadog][3] para configurar la biblioteca `dd-sdk-roku`, ya que estarían expuestas del lado del cliente en el paquete del canal de Roku.
+2. Inicializa la librería con tu [token de cliente de Datadog][2] y el ID de aplicación generado al crear una nueva aplicación RUM en la interfaz de usuario de Datadog (consulta [Empezando con la recopilación de Roku RUM][6] para obtener más información). Por razones de seguridad, debes usar un token de cliente: no puedes usar [claves de API de Datadog][3] para configurar la librería `dd-sdk-roku`, ya que estarían expuestas del lado del cliente en el paquete del canal de Roku.
 
    Para obtener más información sobre cómo configurar un token de cliente, consulta la [documentación sobre el token de cliente][2].
 
@@ -143,11 +139,11 @@ Envía logs a Datadog desde tu canal de Roku con [la biblioteca de registro `dd-
    {{< /site-region >}}
 
 
-3. (Opcional) Cuando escribas tu aplicación, puedes habilitar el desarrollo de logs estableciendo el atributo `datadogVerbosity` en el nodo global. Todos los mensajes internos en la biblioteca con una prioridad igual o superior al nivel proporcionado se registran en la salida telnet de tu dispositivo de Roku:
+3. (Opcional) Cuando escribas tu aplicación, puedes habilitar el desarrollo de logs estableciendo el atributo `datadogVerbosity` en el nodo global. Todos los mensajes internos en la librería con una prioridad igual o superior al nivel proporcionado se registran en la salida telnet de tu dispositivo de Roku:
 
    ```brightscript
    ' 0 = none; 1 = error; 2 = warning; 3 = info; 4 = verbose;
-   m.globalNode.addFields({ datadogVerbosity: 2 }) 
+   m.globalNode.addFields({ datadogVerbosity: 2 })
    ```
 
 4. Envía una entrada personalizada de log directamente a Datadog con una de las siguientes funciones:
@@ -170,8 +166,8 @@ Envía logs a Datadog desde tu canal de Roku con [la biblioteca de registro `dd-
 
    ```brightscript
     m.global.datadogLogsAgent.callfunc(
-        "logInfo", 
-        "Video started", 
+        "logInfo",
+        "Video started",
         { video_id: 42, video_type: "advert"}
     )
    ```

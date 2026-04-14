@@ -9,7 +9,7 @@ title: Dépannage du profileur natif pour les langages compilés
 type: multi-code-lang
 ---
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 <code>ddprof</code> est disponible en version bêta. Datadog vous conseille de tester le profileur dans un environnement auxiliaire avant de le déployer en production.
 </div>
 

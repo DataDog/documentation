@@ -1,6 +1,9 @@
 ---
 aliases:
 - /fr/account_management/billing/usage_details/
+description: Surveillez votre utilisation de Datadog dans tous les produits avec des
+  résumés depuis le début du mois, des tendances d'utilisation, les principales métriques
+  custom et l'utilisation des logs par index.
 title: Utilisation détaillée
 ---
 
@@ -29,31 +32,31 @@ Chaque onglet spécifique à un produit affiche votre utilisation mensuelle des 
 
 {{< img src="account_management/billing/usage-details-v2-02.png" alt="Résumé de l'utilisation - Network" >}}
 
-Les données d'utilisation ci-dessus correspondent à l'onglet All. Elles contiennent des informations sur des éléments non facturables, comme les évaluations de produit. La plupart des comptes peuvent également consulter les données d'utilisation facturables. La vue Billable affiche uniquement les éléments qui sont facturés. Elle détaille également l'utilisation à la demande dépassant vos engagements et vos allocations.
+L'utilisation depuis le début du mois affichée ci-dessus correspond à l'utilisation « All », qui inclut l'utilisation non facturable comme les périodes d'essai des produits. La plupart des comptes peuvent consulter l'utilisation « Billable », qui n'affiche que l'utilisation contribuant à votre facture finale. La vue « Billable » détaille votre utilisation par engagements, allocations et utilisation à la demande.
 
-{{< img src="account_management/billing/usage-details-v2-07.png" alt="Résumé de l'utilisation - Billable" >}}
-Pour accéder à ces données depuis une API, sachez que des endpoints sont disponibles pour les onglets [All][2] et [Billable][3].
+{{< img src="account_management/billing/UsageTilesWithAllPills.png" alt="Résumé de l'utilisation - Billable" >}}
+Pour les utilisateurs de l'API, des endpoints sont disponibles pour accéder à l'utilisation [All][2] et à l'utilisation [Billable][3].
 
 L'utilisation de chaque produit pour le mois en cours est calculée comme suit :
 
-| Produit                   | Description                                                                                                                |
+| Produit                   | Rôle                                                                                                                |
 |--------------------------|-----------------------------------------------------------------------------------------------------------------------------|
 | Infra. Hosts             | Affiche le 99e centile de tous les hosts d'infrastructure distincts pour toutes les heures du mois actuel.                         |
 | Conteneurs               | Affiche la limite supérieure de tous les conteneurs distincts pour toutes les heures du mois actuel.                                    |
-| Hosts d'APM                | Affiche le nombre total de hosts d'APM distincts au 99e centile pour toutes les heures du mois actuel.                                    |
+| Hosts APM                | Affiche le nombre total de hosts d'APM distincts au 99e centile pour toutes les heures du mois actuel.                                    |
 | Profiled Hosts           | Affiche le 99e centile de tous les hosts profilés distincts pour toutes les heures du mois actuel.                               |
 | Profiled Containers      | Affiche la moyenne de tous les conteneurs profilés distincts pour toutes les heures du mois actuel.                                  |
-| Custom Metrics           | Affiche le nombre moyen de [métriques custom][4] distinctes pour toutes les heures du mois actuel.                               |
+| Métriques custom           | Affiche le nombre moyen de [métriques custom][4] distinctes pour toutes les heures du mois actuel.                               |
 | Métriques custom ingérées  | Affiche le nombre moyen de métriques custom INGÉRÉES distinctes pour toutes les heures du mois actuel.                           |
 | Logs ingérés            | Affiche la somme de tous les octets de logs ingérés pour toutes les heures du mois actuel.                                                |
 | Indexed Logs             | Affiche la somme de tous les événements de log indexés pour toutes les heures du mois actuel.                                                |
 | Scanned Logs             | Affiche la somme de tous les octets des logs analysés par le scanner de données sensibles pour toutes les heures du mois actuel.                       |
-| Ingested Spans           | Afficher la somme de toutes les spans ingérées pour toutes les heures du mois actuel.                                                    |
-| Indexed Spans            | Affiche la somme de toutes les spans indexées pour toutes les heures du mois actuel.                                             |
+| Spans ingestées           | Afficher la somme de toutes les spans ingérées pour toutes les heures du mois actuel.                                                    |
+| Spans indexées            | Affiche la somme de toutes les spans indexées pour toutes les heures du mois actuel.                                             |
 | Analyzed Logs (Security) | Affiche la somme de tous les octets de logs analysés ingérés pour toutes les heures du mois actuel.                                       |
 | Serverless Functions     | Affiche le nombre moyen de fonctions qui sont exécutées au moins une fois par heure au cours du mois actuel.              |
 | Serverless Invocations   | Affiche la somme de tous les appels pour toutes les heures du mois actuel.                                                       |
-| Fargate Tasks            | Affiche la somme de toutes les tâches Fargate pour toutes les heures du mois actuel.                                                     |
+| Tâches Fargate            | Affiche la somme de toutes les tâches Fargate pour toutes les heures du mois actuel.                                                     |
 | Network Hosts            | Affiche le 99e centile de tous les hosts réseau distincts pour toutes les heures du mois actuel.                                |
 | Network Flows            | Affiche la somme de tous les flux réseau indexés pour toutes les heures du mois actuel.                                             |
 | Network Devices          | Affiche le 99e centile de tous les périphériques réseau distincts pour toutes les heures du mois actuel.                              |
@@ -86,10 +89,17 @@ Des options sont disponibles pour la sélection horaire, permettant de visualise
 
 {{< img src="account_management/billing/TimeGranularity.png" alt="Intervalles des graphiques sur lʼutilisation" style="width:100%; align:left" >}}
 
-La ligne en pointillé `Committed` affiche les engagements par produit, sans aucun élément alloué (comme les métriques custom et les conteneurs). 
+## Capsules à la demande et lignes engagées facturables
 
-{{< img src="account_management/billing/CommittedLine.png" alt="Ligne relative à lʼengagement sur lʼutilisation dans le graphique Hosts APM, avec comme valeur 10" style="width:100%; align:left" >}}
+<div class="alert alert-danger">Cette fonctionnalité est en version bêta. Pour demander l'accès et confirmer que votre organisation répond aux critères de la fonctionnalité, contactez votre représentant de compte ou le <a href="https://docs.datadoghq.com/help/">support client</a>.</div>
 
+Les capsules à la demande violettes mettent en évidence la partie de l'utilisation facturable correspondant à l'utilisation à la demande. Les capsules bleues engagées et allouées mettent en évidence la partie de votre utilisation couverte par les engagements et les <a href="https://www.datadoghq.com/pricing/allotments/">allocations</a> des produits parents. La ligne en pointillés `Committed` indique les engagements par produit, sans aucune allocation (comme pour les métriques custom ou les conteneurs).
+
+Pour afficher les capsules engagées et allouées sur une carte, assurez-vous que le bouton **See included usage** est activé :
+1. Sur la carte d'utilisation totale où vous souhaitez voir les données d'utilisation engagée et allouée, cliquez sur l'icône en forme d'œil (**See included usage**).
+1. L'icône se transforme en œil barré. Les capsules engagées et allouées s'affichent sur la carte.
+
+{{< img src="account_management/billing/UsageTilesWithPillsUsageTrendsWithCommittedLine.png" alt="Capsules à la demande facturables et lignes d'utilisation engagée sur les graphiques de tendances." style="width:100%; align:left" >}}
 
 
 ## Top Custom Metrics
@@ -97,7 +107,7 @@ La ligne en pointillé `Committed` affiche les engagements par produit, sans auc
 Dans l'onglet Custom Metrics, le tableau Top Custom Metrics contient deux vues illustrant votre utilisation pour le mois en cours et votre utilisation quotidienne la plus récente (comme l'utilisation à la date de la dernière mise à jour).
 
 La vue Top 5000 comporte les informations suivantes à propos des 5 000 principales métriques custom :
-* Metric name
+* Nom de la métrique
 * Nombre moyen de métriques custom par heure
 * Nom maximum de métriques custom par heure
 * Part de la métrique dans l'utilisation globale des métriques custom
@@ -105,20 +115,20 @@ La vue Top 5000 comporte les informations suivantes à propos des 5 000 princi
 * Ces données peuvent être téléchargées sous forme de fichier CSV.
 
 La vue All comporte les informations suivantes à propos de toutes vos métriques custom :
-* Metric name
+* Nom de la métrique
 * Nombre moyen de métriques custom par heure
 * Nom maximum de métriques custom par heure
 * Possibilité de rechercher une métrique parmi toutes vos métriques custom
-* Ces données peuvent être téléchargées sous forme de fichier CSV, avec une limite de 300 000 métriques custom. Pour dépasser cette limite, téléchargez vos données à l'aide de notre [endpoint d'API][5].
+* Ces données peuvent être téléchargées sous forme de fichier CSV, avec une limite de 300 000 métriques custom. Pour dépasser cette limite, téléchargez vos données à l'aide de notre [endpoint d'API][6].
 
 
-Pour en savoir plus sur une métrique, passez votre curseur sur sa ligne et cliquez sur l'icône de jauge qui s'affiche sur la droite pour accéder à la page [Metrics Summary][6].
+Pour en savoir plus sur une métrique, passez votre curseur sur sa ligne et cliquez sur l'icône de jauge qui s'affiche sur la droite pour accéder à la page [Metrics Summary][7].
 
 {{< img src="account_management/billing/usage-metrics-05.png" alt="Vue d'ensemble du tableau Top Custom Metrics" >}}
 
 ## Logs Usage By Index
 
-Dans l'onglet Log Management, ce tableau affiche votre utilisation horaire, quotidienne, mensuelle et annuelle des logs indexés par nom d'index et période de rétention. Il indique également la répartition entre les logs actuels et les [logs réintégrés][7]. Voici les informations qui sont présentées :
+Dans l'onglet Log Management, ce tableau affiche votre utilisation horaire, quotidienne, mensuelle et annuelle des logs indexés par nom d'index et période de rétention. Il indique également la répartition entre les logs actuels et les [logs réintégrés][8]. Voici les informations qui sont présentées :
 
 * Le nom de l'index
 * Période de rétention en jours
@@ -129,9 +139,25 @@ Ces données peuvent être téléchargées sous forme de fichier CSV.
 
 {{< img src="account_management/billing/usage-details-v3-03.png" alt="Utilisation des logs par index" >}}
 
+## Notifications d'utilisation pour la première fois
+
+<div class="alert alert-danger">Cette fonctionnalité est en version bêta. Pour demander l'accès et confirmer que votre organisation répond aux critères de la fonctionnalité, contactez votre représentant de compte ou le <a href="https://docs.datadoghq.com/help/">support client</a>.</div>
+
+La fonctionnalité de notifications d'utilisation pour la première fois envoie des emails lorsqu'une utilisation facturable apparaît pour la première fois pour un nouveau produit non inclus dans votre contrat actuel. Les emails sont envoyés environ 48 heures après la première utilisation au cours d'un mois donné.
+
+Après l'activation de la fonctionnalité, un nouvel onglet **Usage Notifications** est ajouté à la page **Plan and Usage** de l'organisation parente. Cet onglet affiche la liste de tous les produits couverts par la fonctionnalité. Si vous décochez une case, cela entraîne l'arrêt des notifications pour ce produit pour tous les utilisateurs du compte. Si une première utilisation en dehors de votre contrat actif le plus récent est détectée, les utilisateurs ne reçoivent pas de notification pour les produits dont la case est décochée.
+
+{{< img src="account_management/plan_and_usage/usage-notifications.png" alt="Page de notifications d'utilisation pour la première fois avec une liste de produits comprenant des éléments cochés et décochés" style="width:100%; align:left" >}}
+
+Tout utilisateur disposant des autorisations _Usage Notifications Read_ ou _Write_ reçoit des emails. Pour la plupart des organisations, cela concerne tous les administrateurs.
+
+Si votre compte Datadog est multi-organisation, les utilisateurs de l'organisation parente disposant des autorisations reçoivent des emails de notification d'utilisation pour les organisations enfants. Ces emails indiquent quelle organisation enfant a généré l'utilisation et pour quel produit. Les utilisateurs de l'organisation enfant disposant de cette autorisation reçoivent des emails uniquement pour leur organisation.
+
+{{< img src="account_management/plan_and_usage/usage-notifications-email.png" alt="Email de notification d'utilisation pour la première fois avec détails sur un exemple d'utilisation initiale" style="width:100%; align:left" >}}
+
 ## Dépannage
 
-Pour toute question technique, contactez [l'assistance Datadog][2].
+Pour toute question technique, contactez [l'assistance Datadog][9].
 
 Pour toute question concernant la facturation, contactez votre [chargé de compte][10].
 

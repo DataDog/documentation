@@ -102,7 +102,7 @@ Il n'est pas nécessaire d'ajouter la bibliothèque de tracing : en effet, cell
 1. Depuis le sous-dossier `k8s`, utilisez la commande suivante pour installer l'Agent de cluster Datadog, en prenant soin de spécifier le fichier de configuration `values-with-lib-inj.yaml` et votre [clé d'API Datadog](/account_management/api-app-keys/) :
    {{< code-block lang="shell" >}}
 helm install datadog-agent -f values-with-lib-inj.yaml --set datadog.site='datadoghq.com' --set datadog.apiKey=$DD_API_KEY datadog/datadog{{< /code-block >}}
-    <div class="alert alert-warning">Pour obtenir plus de détails sur cette étape, consultez l'onglet Helm de la section <a href="/containers/kubernetes/installation/?tab=helm" target="_blank">Installer l'Agent Datadog sur Kubernetes</a>.</div>
+    <div class="alert alert-danger">Pour obtenir plus de détails sur cette étape, consultez l'onglet Helm de la section <a href="/containers/kubernetes/installation/?tab=helm" target="_blank">Installer l'Agent Datadog sur Kubernetes</a>.</div>
 
 2. Pour vérifier si l'Agent de cluster Datadog est en cours d'exécution, utilisez la commande suivante :
    {{< code-block lang="shell" >}}

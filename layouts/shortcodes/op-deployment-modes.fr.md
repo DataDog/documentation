@@ -1,4 +1,4 @@
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   La configuration à distance pour les pipelines d'observabilité est disponible en version bêta privée. Contactez l'<a href="https://docs.datadoghq.com/help/">assistance Datadog</a> ou votre chargé de compte pour demander à y accéder.
 </div>
 

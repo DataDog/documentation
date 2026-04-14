@@ -30,7 +30,7 @@ title: 프로젝트
 
 ## 프로젝트 삭제하기
 
-<div class="alert alert-warning">삭제된 케이스는 복구할 수 없습니다.</div>
+<div class="alert alert-danger">삭제된 케이스는 복구할 수 없습니다.</div>
 
 프로젝트의 Settings 페이지에서 프로젝트를 삭제할 수 있습니다.
 

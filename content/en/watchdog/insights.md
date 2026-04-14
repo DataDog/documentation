@@ -33,7 +33,6 @@ The Watchdog Insights carousel sits near the top of the following product pages:
 
 - [Log explorer][1]
 - APM:
-    - [Trace Explorer][2]
     - [Service Page][3]
     - [Resource Page][4]
     - [Database Explorer][5]
@@ -109,10 +108,19 @@ In the full side panel view, you can see:
 {{% /tab %}}
 {{% tab "APM" %}}
 
-APM outliers are available on all APM pages where the Watchdog Insights carousel is available:
+APM outliers are available on the following pages:
  - [Trace Explorer](/tracing/trace_explorer/?tab=listview)
  - [Service Page](/tracing/services/service_page/)
  - [Resource Page](/tracing/services/resource_page/)
+
+In the Trace Explorer, APM outliers are integrated directly through Tag Analysis, enhancing your investigation workflow:
+
+- **Highlighting relevant action**: The "Analyze" button in RED metrics is highlighted when Watchdog detects significant outliers
+- **Providing search suggestions**: Outlier tags appear as suggestions in the search bar with indicators for error or latency correlation
+- **Prioritizing facets**: Outlier tags are promoted to an "OUTLIERS" section at the top of the facets sidebar
+
+
+{{< img src="tracing/trace_explorer/visualize/trace_explorer_outliers.mp4" alt="Analyzing anomalies with integrated insights" video="true" >}}
 
 ### Error outliers
 
@@ -163,7 +171,7 @@ In the banner card view, you can see:
   * The name of the impacted service
   * The number of threads impacted
   * The potential CPU savings (and estimated cost savings)
-    
+
 {{< img src="watchdog/small_card_profiling_lock_pressure.png" alt="Profiling insight on Lock Contention" style="width:50%;">}}
 
 In the full side panel, you can see instructions on how to resolve the lock contention:
@@ -212,7 +220,7 @@ Find the databases impacted by one or multiple outliers by using the Insight car
 
 {{< img src="watchdog/side_panel_dbm_insights.png" alt="Carousel to filter the Databases with Insights" style="width:100%;">}}
 
-An overlay is then set on the databases, with pink pills highlighting the different Insights and giving more information about what happened. 
+An overlay is then set on the databases, with pink pills highlighting the different Insights and giving more information about what happened.
 
 {{< img src="watchdog/overlay_database_insight.png" alt="Watchdog insight overlay on the database to highlight what is happening" style="width:100%;">}}
 
@@ -249,8 +257,8 @@ In the full side panel, you can see a timeseries graph about the performance met
 {{< img src="real_user_monitoring/explorer/watchdog_insights/latency_outlier_side_panel-1.png" alt="Latency Outlier full side panel view" style="width:100%;" >}}
 
 [1]: /real_user_monitoring/explorer/search/#facets
-[2]: /real_user_monitoring/browser/monitoring_page_performance/#event-timings-and-core-web-vitals
-[3]: /real_user_monitoring/browser/monitoring_page_performance/#monitoring-single-page-applications-spa
+[2]: /real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#event-timings-and-core-web-vitals
+[3]: /real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#monitoring-single-page-applications-spa
 {{% /tab %}}
 {{% tab "Synthetic Monitoring" %}}
 
@@ -293,7 +301,7 @@ An overlay is then set on the function, with pink pills highlighting the differe
 {{% /tab %}}
 {{% tab "Processes" %}}
 
-For Process Explorer, the Watchdog Insight carousel reflects [all Process anomalies][1] for the current context of the Process Explorer. 
+For Process Explorer, the Watchdog Insight carousel reflects [all Process anomalies][1] for the current context of the Process Explorer.
 
 [1]: https://app.datadoghq.com/process
 {{% /tab %}}
@@ -315,7 +323,7 @@ For Kubernetes Explorer, the Watchdog Insight carousel reflects [all the Kuberne
 [3]: /tracing/services/service_page/
 [4]: /tracing/services/resource_page/
 [5]: https://app.datadoghq.com/databases/list
-[6]: https://app.datadoghq.com/profiling/search
+[6]: https://app.datadoghq.com/profiling/explorer
 [7]: https://app.datadoghq.com/process
 [8]: https://app.datadoghq.com/functions
 [9]: https://app.datadoghq.com/orchestration/overview/pod

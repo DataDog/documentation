@@ -21,7 +21,7 @@ assets:
     source_type_id: 6643655
     source_type_name: RapDev SnapLogic
   monitors:
-    Connection to SnapLogic API is Failing: assets/monitors/snaplogic_can_connect.json
+    Can't Connect to SnapLogic: assets/monitors/snaplogic_can_connect.json
 author:
   homepage: https://www.rapdev.io
   name: RapDev
@@ -31,7 +31,7 @@ author:
 categories:
 - マーケットプレイス
 - 開発ツール
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -114,4 +114,4 @@ SnapLogic は、クラウドデータソース、SaaS アプリケーション�
 [7]: mailto:support@rapdev.io
 [8]: https://docs-snaplogic.atlassian.net/wiki/spaces/SD/pages/1437953/The+SnapLogic+Snaplex
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/rapdev-snaplogic" target="_blank">こちらをクリック</a>してください。
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。利用するには、<a href="https://app.datadoghq.com/marketplace/app/rapdev-snaplogic" target="_blank">Marketplace でこのアプリケーションを購入してください</a>。

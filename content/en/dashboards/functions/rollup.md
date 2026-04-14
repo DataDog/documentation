@@ -1,5 +1,6 @@
 ---
 title: Rollup
+description: Control time aggregation and datapoint intervals using custom rollup functions and moving rollups for metrics.
 aliases:
     - /graphing/functions/rollup/
 further_reading:
@@ -11,9 +12,9 @@ further_reading:
 Every metric query is inherently aggregated. However, appending the `.rollup()` function at the end of a query allows you to perform custom [time aggregation][1] that overrides the defaults. This function enables you to define:
 
 * The rollup `<interval>`: the interval of time your data is aggregated over ([if larger than the query-enforced rollup interval](#rollup-interval-enforced-vs-custom)).
-* The rollup `<aggregator>`: How your data points are aggregated within a given rollup time interval.
+* The rollup `<aggregator>`: How your datapoints are aggregated within a given rollup time interval.
 
-To apply a rollup, navigate to the **Add function** (Σ) button of the graphing editor: 
+To apply a rollup, navigate to the {{< ui >}}Add function{{< /ui >}} (Σ) button of the graphing editor: 
 
 {{< img src="dashboards/functions/rollup/rollup_option_1.mp4" alt="Select the Rollup average option from the Add function button" video=true >}}
 
@@ -23,8 +24,8 @@ The function takes two parameters, `<AGGREGATOR>` and optionally `<INTERVAL>`: `
 
 | Parameter  | Description                                                                                                     |
 |------------|-----------------------------------------------------------------------------------------------------------------|
-| `<AGGREGATOR>` | Can be `avg`, `sum`, `min`, `max`, or `count`, and defines how data points are aggregated within a given time interval. [Enforced default](#rollup-interval-enforced-vs-custom): `avg`. |
-| `<INTERVAL>`   | Time (in seconds) of the interval between two data points displayed. Optional.                                            |
+| `<AGGREGATOR>` | Can be `avg`, `sum`, `min`, `max`, or `count`, and defines how datapoints are aggregated within a given time interval. [Enforced default](#rollup-interval-enforced-vs-custom): `avg`. |
+| `<INTERVAL>`   | Time (in seconds) of the interval between two datapoints displayed. Optional.                                            |
 
 You can use them individually or together, for instance `.rollup(sum,120)`. The following bar graph displays a week's worth of CPU usage for a host **without** using the `.rollup()` function:
 
@@ -42,13 +43,13 @@ The following bar graph displays the same metric, graphed using a day-long rollu
 | `moving_rollup` | Rollup to combine the points in the last X seconds. | `moving_rollup(<METRIC_NAME>, <INTERVAL> , <AGGREGATOR>)` |
 
 
-Applying the `moving_rollup()` function to a query allows you to combine points from the most recent specified time range—that is, the last X seconds. Like with `.rollup()`, `<AGGREGATOR>` can be `sum`/`min`/`max`/`count`/`avg` and defines how data points are aggregated within the given time interval.
+Applying the `moving_rollup()` function to a query allows you to combine points from the most recent specified time range—that is, the last X seconds. Like with `.rollup()`, `<AGGREGATOR>` can be `sum`/`min`/`max`/`count`/`avg` and defines how datapoints are aggregated within the given time interval.
 
 ## Rollup interval: enforced vs custom
 
 When graphing, Datadog sets a limit on the number of points per timeseries. To retain visual clarity, a series can have up to 1500 points. To respect this limit, Datadog rolls up datapoints automatically, defaulting to the `avg` method, effectively displaying the average of all datapoints within a time interval for a given metric. The default rollup time interval varies depending on how the data is visualized. See the following chart to reference these default time intervals:
 
-| Timeframe           | Rollup Interval, Line Graph | Rollup Interval, Bar Graph | Rollup Interval, API |
+| Time frame          | Rollup Interval, Line Graph | Rollup Interval, Bar Graph | Rollup Interval, API |
 |---------------------|-----------------------------|----------------------------|----------------------|
 | The past hour       | 20s                         | 1m                         | 20s                  |
 | The past four hours    | 1m                          | 2m                         | 1m                   |
@@ -57,7 +58,7 @@ When graphing, Datadog sets a limit on the number of points per timeseries. To r
 | The past week       | 1hr                         | 2hr                        | 1hr                  |
 | The past month      | 4hr                         | 12hr                       | 4hr                  |
 
-A custom `.rollup()` function can be used to enforce the type of time aggregation applied (`avg`, `min`, `max`, `count`, or `sum`) and optionally the time interval to rollup. Using this function, you can set the rollup time interval to a different value than the defaults, up to a limit of 1500 points. This supports up to one point per minute over a day.
+A custom `.rollup()` function can be used to specify the type of time aggregation applied (`avg`, `min`, `max`, `count`, or `sum`) and optionally the time interval to rollup. Using this function, you can set the rollup time interval to a different value than the defaults, up to a limit of 1500 points. This supports up to one point per minute over a day.
 
 **Note**: Queries for `COUNT` and `RATE` type metrics have the `.as_count()` modifier appended automatically in the UI, which sets the rollup method used to `sum` and disables interpolation. This `.as_count()` is explicitly visible at the end of the query:
 
@@ -77,12 +78,17 @@ You can customize how your metrics data is bucketed over time when using the `.r
 
 ## Rollups in monitors
 
-Rollups should usually be avoided in [monitor][5] queries, because of the possibility of misalignment between the rollup interval and the evaluation window of the monitor. The start and end of rollup intervals are aligned to UNIX time, not to the start and end of monitor queries. Therefore, a monitor may evaluate (and trigger on) an incomplete rollup interval containing only a small sample of data. To avoid this issue, delay the evaluation of your monitor by (at least) the length of the setup rollup interval.
+Rollups should usually be avoided in monitor queries, because of the possibility of misalignment between the rollup interval and the evaluation window of the monitor. The start and end of rollup intervals are aligned to UNIX time, not to the start and end of monitor queries. Therefore, a monitor may evaluate (and trigger on) an incomplete rollup interval containing only a small sample of data. To avoid this issue, delay the evaluation of your monitor by (at least) the length of the setup rollup interval.
 
-If your monitors are unexpectedly evaluating in a "No Data" status, consider reviewing your settings for rollups and evaluation windows. For instance, if a monitor has a 4-minute rollup and a 20-minute evaluation window, it produces one data point every 4 minutes, leading to a maximum of 5 data points within the window. If the "Require Full Window" option is enabled, the evaluation may result in "No Data" because the window is not fully populated.
+If your monitor queries are unexpectedly showing {{< ui >}}No Data{{< /ui >}}, consider reviewing your settings for rollups and evaluation windows. For more information, see [Troubleshooting No Data in Monitors][6].
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /dashboards/functions/#add-a-function
 [2]: /metrics/faq/rollup-for-distributions-with-percentiles/
 [3]: https://www.datadoghq.com/blog/visualize-statsd-metrics-counts-graphing
 [4]: /metrics/custom_metrics/type_modifiers/
 [5]: /monitors/types/metric/
+[6]: /monitors/guide/troubleshooting-no-data/

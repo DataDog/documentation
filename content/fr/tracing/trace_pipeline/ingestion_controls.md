@@ -53,7 +53,7 @@ Il est possible de configurer l'échantillonnage de trois mécanismes d'ingestio
 
 ### Configuration à distance des paramètres d'ingestion de l'Agent
 
-<div class="alert alert-warning">La fonctionnalité Remote Configuration pour les paramètres d'ingestion est disponible en version bêta. Contactez l'<a href="/help/">assistance Datadog</a> pour y accéder.</div>
+<div class="alert alert-danger">La fonctionnalité Remote Configuration pour les paramètres d'ingestion est disponible en version bêta. Contactez l'<a href="/help/">assistance Datadog</a> pour y accéder.</div>
 
 Il est possible de configurer ces paramètres à distance à partir de la version [7.42.0][13] de l'Agent. Consultez la section [Fonctionnement de Remote Configuration][14] pour découvrir comment activer cette fonctionnalité dans vos Agents.
 

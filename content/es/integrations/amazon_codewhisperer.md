@@ -83,7 +83,7 @@ Si aún no lo has hecho, configura primero la [integración de Amazon Web Servic
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "amazon_codewhisperer" >}}
+{{< get-metrics-from-git "amazon-codewhisperer" >}}
 
 
 ### Eventos

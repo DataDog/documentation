@@ -16,29 +16,29 @@ title: カスタムインスツルメンテーション
 
 ## 概要
 
-Custom instrumentation allows for precise monitoring of specific components in your application. It allows you to capture observability data from in-house code or complex functions that aren't captured by automatic instrumentation. Automatic instrumentation includes [Single Step Instrumentation][5] or using [Datadog tracing libraries][6].
+カスタムインスツルメンテーションを使用すると、アプリケーション内の特定コンポーネントを精密にモニタリングできます。自動インスツルメンテーションでは取得されない自社コードや複雑な関数から可観測性データを取得できるようになります。自動インスツルメンテーションには、[Single Step Instrumentation][5] や [Datadog のトレーシングライブラリ][6]が含まれます。
 
-Custom instrumentation involves embedding tracing code directly into your application code. This allows for the programmatic creation, modification, or deletion of traces to send to Datadog.
+カスタムインスツルメンテーションでは、トレーシングコードをアプリケーションコードに直接埋め込みます。これにより、Datadog に送信するトレースをプログラム的に作成、修正、または削除できるようになります。
 
 ## ユースケース
 
-Some situations when you might use custom instrumentation include:
+カスタムインスツルメンテーションを使用するケースの例は次のとおりです。
 
-- Collecting observability data from custom code with unique or complex business logic.
-- Providing deeper visibility and context into spans, including adding [span tags][1].
-- Precisely monitoring specific sequences of operations or user interactions that require fine-grained control.
-- Removing unwanted spans from traces.
+- 独自または複雑なビジネスロジックを含むカスタムコードから可観測性データを収集する。
+- スパンに[スパンタグ][1]を追加するなど、スパンに深い可視性やコンテキストを付与する。
+- 細かい制御が必要な特定の一連の操作やユーザー操作を正確にモニタリングする。
+- 不要なスパンをトレースから除外する。
 
 ## はじめに
 
-Before you begin, make sure you've already [installed and configured the Agent][7].
+はじめる前に、[Agent をインストールして設定済み][7]であることを確認してください。
 
-Follow the relevant documentation for your custom instrumentation approach to learn more:
+カスタムインスツルメンテーションのアプローチに応じたドキュメントを参照し、詳細を確認してください。
 
 {{< tabs >}}
 {{% tab "Datadog API" %}}
 
-Use the Datadog API to add custom instrumentation that allows you to programmatically create, modify, or delete traces to send to Datadog. This is useful for tracing in-house code not captured by automatic instrumentation, removing unwanted spans from traces, and for providing deeper visibility and context into spans, including adding span tags.
+Datadog API を使用してカスタムインスツルメンテーションを追加すると、Datadog に送信するトレースをプログラム的に作成、修正、削除できるようになります。これは、自動インスツルメンテーションでは取得されない自社コードのトレース、トレースからの不要なスパンの除外、そしてスパンタグの追加など、スパンに深い可視性やコンテキストを与える際に役立ちます。
 
 {{< partial name="apm/apm-manual-instrumentation-custom.html" >}}
 
@@ -48,7 +48,7 @@ Use the Datadog API to add custom instrumentation that allows you to programmati
 
 {{% tab "OpenTelemetry API" %}}
 
-Datadog tracing libraries provide an implementation of the OpenTelemetry API for instrumenting your code. This means you can maintain vendor-neutral instrumentation of all your services, while still taking advantage of Datadog's native implementation, features, and products. You can configure it to generate Datadog-style spans and traces to be processed by the Datadog tracing library for your language, and send those to Datadog.
+Datadog のトレーシングライブラリは、OpenTelemetry API を実装してコードをインスツルメントします。これにより、すべてのサービスをベンダーに依存しない形でインスツルメントしつつ、Datadog が提供するネイティブ実装や機能、製品を活用できます。Datadog スタイルのスパンとトレースを生成するように設定し、それらを使用言語向けの Datadog トレーシングライブラリで処理し、Datadog に送信することが可能です。
 
 {{< partial name="apm/apm-otel-instrumentation-custom.html" >}}
 

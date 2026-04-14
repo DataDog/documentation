@@ -7,8 +7,8 @@ aliases:
 - /es/tracing/trace_collection/custom_instrumentation/java
 - /es/tracing/trace_collection/custom_instrumentation/dd_libraries/java
 code_lang: dd-api
-code_lang_weight: 1
-description: Instrumenta tu código con el rastreador de Datadog Java APM.
+code_lang_weight: 2
+description: Instrumentar tu código con la API de Datadog.
 further_reading:
 - link: tracing/other_telemetry/connect_logs_and_traces
   tag: Documentación
@@ -16,19 +16,26 @@ further_reading:
 - link: tracing/glossary/
   tag: Documentación
   text: Explora tus servicios, recursos y trazas
-title: Instrumentación personalizada de Java utilizando la API de Datadog
+title: Instrumentación personalizada de Java con la API de Datadog
 type: multi-code-lang
 ---
 
-En esta página, se detallan casos de uso comunes para añadir y personalizar la observabilidad con Datadog APM. Si no has leído las instrucciones de configuración para la instrumentación automática, comienza por las [Instrucciones de configuración de Java][11].
+En esta página se detallan casos de uso comunes para añadir y personalizar la observabilidad con Datadog APM.
 
-<div class="alert alert-info">El rastreador de Datadog Java se basa en OpenTracing. Aunque OpenTracing está obsoleto en OpenTelemetry, los siguientes ejemplos importan correctamente la biblioteca de <code>opentracing</code>.</div>
+<div class="alert alert-info">
+El rastreador de Java de Datadog interopera con la biblioteca <code>opentracing-api</code> para instrumentación personalizada. Si prefieres utilizar la API de OpenTelemetry para tu instrumentación personalizada, consulta, en su lugar, <a href="/tracing/trace_collection/custom_instrumentation/java/OpenTelemetry/">Instrumentación personalizada de Java con OpenTelemetry</a>.
+</div>
 
-## Añadir etiquetas
+## Requisitos previos
 
-Añade [etiquetas (tags) de tramo (span)][1] personalizadas a tus [tramos][2] para personalizar tu capacidad de observación dentro de Datadog. Las etiquetas de tramo se aplican a tus trazas entrantes, lo que te permite correlacionar el comportamiento observado con información a nivel de código, como el nivel de comerciante, el importe del pago o el ID de usuario.
+- Si no has leído las instrucciones de configuración para la instrumentación automática, empieza por las [Instrucciones de configuración de Java][11].
+- Para compilar los ejemplos en esta page (página), añade la dependencia [opentracing-api][12] a tu project (proyecto).
 
-### Añadir etiquetas de tramo personalizadas
+## Añadir etiquetas (tags)
+
+Añade [etiquetas (de tramo (span)][1] personalizadas a tus [tramos][2] para personalizar tu observabilidad dentro de Datadog. Las etiquetas de tramo se aplican a tus trazas (traces) entrantes, lo que te permite correlacionar el comportamiento observado con información a nivel de código, como el nivel de comerciante, el importe del pago o el ID de usuario.
+
+### Añadir etiquetas de tramos personalizadas
 
 Añade etiquetas personalizadas a tus tramos correspondientes a cualquier valor dinámico dentro de tu código de aplicación como `customer.id`.
 
@@ -69,7 +76,7 @@ java -javaagent:<DD-JAVA-AGENT-PATH>.jar \
      -jar <YOUR_APPLICATION_PATH>.jar
 ```
 
-### Configuración de errores en un tramo
+### Definir errores en un tramo
 
 Para personalizar un error asociado a uno de tus tramos, establece la etiqueta de error en el tramo y utiliza `Span.log()` para establecer un "evento de error". El evento de error es un `Map<String,Object>` que contiene una entrada `Fields.ERROR_OBJECT->Throwable`, una `Fields.MESSAGE->String`, o ambas.
 
@@ -172,7 +179,7 @@ if (span != null && (span instanceof MutableSpan)) {
 
 ## Añadir tramos
 
-Si no estás usando una [instrumentación de marco compatible][5], o te gustaría conocer más sobre las [trazas][3] de tu aplicación, puede que quieras añadir instrumentación personalizada a tu código para obtener gráficas de llamas completas o para medir los tiempos de ejecución de fragmentos de código.
+Si no estás usando una [instrumentación de framework compatible][5], o te gustaría conocer más sobre las [trazas][3] de tu aplicación, puede que quieras añadir instrumentación personalizada a tu código para obtener gráficas de llamas completas o para medir los tiempos de ejecución de fragmentos de código.
 
 Si no es posible modificar el código de la aplicación, utiliza la variable de entorno `dd.trace.methods` para detallar estos métodos.
 
@@ -181,7 +188,7 @@ Si ya dispones de `@Trace` o anotaciones similares, o prefieres utilizar anotaci
 
 ### Métodos de traza de Datadog
 
-Con la propiedad del sistema `dd.trace.methods`, puedes obtener visibilidad de los marcos no compatibles sin cambiar el código de la aplicación.
+Con la propiedad del sistema `dd.trace.methods`, puedes obtener visibilidad de los frameworks no compatibles sin cambiar el código de la aplicación.
 
 ```text
 java -javaagent:/path/to/dd-java-agent.jar -Ddd.env=prod -Ddd.service.name=db-app -Ddd.trace.methods=store.db.SessionManager[saveSession] -jar path/to/application.jar
@@ -220,7 +227,7 @@ public class SessionManager {
 ```
 **Nota**: A través de la propiedad del sistema `dd.trace.annotations`, otras anotaciones de métodos de rastreo pueden ser reconocidas por Datadog como `@Trace`. Puedes encontrar una lista en [TraceAnnotationsInstrumentation.java][7] si has añadido elementos previamente a tu código.
 
-### Creación manual de un nuevo tramo
+### Crear manualmente un nuevo tramo
 
 Además de la instrumentación automática, la anotación `@Trace` y configuraciones `dd.trace.methods`, puedes personalizar la observabilidad al crear tramos en cualquier bloque de código mediante programación. Los tramos creados de esta manera se integran automáticamente con otros mecanismos de rastreo. En otras palabras, si una traza ya se ha iniciado, el tramo manual tendrá a su llamador como tramo principal. Del mismo modo, cualquier método rastreado llamado desde el bloque de código envuelto tendrá al tramo manual como tramo principal.
 
@@ -336,7 +343,7 @@ datadog.trace.api.GlobalTracer.get().addTraceInterceptor(new PricingInterceptor(
 
 Existen configuraciones adicionales posibles tanto para el cliente de rastreo como para el Datadog Agent para la propagación del contexto, así como para excluir recursos específicos del envío de trazas a Datadog en el caso que no desees que estas trazas cuenten en métricas calculadas, como checks de estado.
 
-### Propagación de contexto con extracción e inyección de encabezados
+### Propagación del contexto con extracción e inserción de cabeceras
 
 Puedes configurar la propagación de contexto para trazas distribuidas al inyectar y extraer encabezados. Consulta [Propagación de contexto de traza][8] para obtener información.
 
@@ -344,7 +351,7 @@ Puedes configurar la propagación de contexto para trazas distribuidas al inyect
 
 Las trazas se pueden excluir en función de su nombre de recurso, para eliminar el tráfico Synthetic, como los checks de estado, de la notificación de trazas a Datadog. Esta y otras configuraciones de seguridad y ajuste se pueden encontrar en la página de [Seguridad][9] o en [Ignorar recursos no deseados][10].
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -355,7 +362,8 @@ Las trazas se pueden excluir en función de su nombre de recurso, para eliminar 
 [5]: /es/tracing/setup/java/#compatibility
 [6]: https://mvnrepository.com/artifact/com.datadoghq/dd-trace-api
 [7]: https://github.com/DataDog/dd-trace-java/blob/master/dd-java-agent/instrumentation/trace-annotation/src/main/java/datadog/trace/instrumentation/trace_annotation/TraceAnnotationsInstrumentation.java#L37
-[8]: /es/tracing/trace_collection/trace_context_propagation/java/
+[8]: /es/tracing/trace_collection/trace_context_propagation/
 [9]: /es/tracing/security
 [10]: /es/tracing/guide/ignoring_apm_resources/
 [11]: /es/tracing/setup/java/
+[12]: https://mvnrepository.com/artifact/io.opentracing/opentracing-api

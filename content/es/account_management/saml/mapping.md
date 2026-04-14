@@ -38,7 +38,7 @@ Es importante entender lo que se envía en una aserción antes de activar las as
 
 Cuando un usuario que tiene el atributo de proveedor de identidad especificado inicia sesión, se le asigna automáticamente el rol de Datadog. Del mismo modo, si a alguien se le elimina ese atributo de proveedor de identidad, pierde el acceso al rol (a menos que otra asignación se lo añada).
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
  <strong>Importante:</strong> Si un usuario <i>no</i> coincide con ninguna asignación, pierde cualquier rol que haya tenido anteriormente y no podrá iniciar sesión en la organización con SAML. Vuelve a verificar tus definiciones de asignación e inspecciona tus propias aserciones antes de habilitar asignaciones, para prevenir cualquier escenario en que tus usuarios no puedan iniciar sesión.
 </div>
 

@@ -6,7 +6,7 @@ further_reading:
 - link: /real_user_monitoring/error_tracking/explorer
   tag: Documentation
   text: エクスプローラーでエラー追跡データを視覚化する
-- link: https://github.com/DataDog/datadog-ci/tree/457d25821e838db9067dbe376d0f34fb1a197869/src/commands/sourcemaps
+- link: https://github.com/DataDog/datadog-ci/tree/master/packages/datadog-ci/src/commands/sourcemaps
   tag: ソースコード
   text: ソースマップのコマンドリファレンス
 title: JavaScript ソースマップのアップロード
@@ -22,7 +22,7 @@ title: JavaScript ソースマップのアップロード
 
 ソースコードを縮小するときに、`sourcesContent` 属性に関連するソースコードを直接含むソースマップを生成するように JavaScript バンドラーを構成します。
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 {{< site-region region="us,us3,us5,eu" >}}
 関連する縮小ファイルのサイズを加えた各ソースマップのサイズが、**300** MB の制限を超えないようにしてください。
 {{< /site-region >}}
@@ -86,7 +86,7 @@ Parcel は、ビルドコマンドを実行すると、デフォルトでソー�
         javascript.464388.js.map
 ```
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 {{< site-region region="us,us3,us5,eu" >}}
 <code>javascript.364758.min.js</code> と <code>javascript.364758.js.map</code> のファイルサイズの合計が <b>**300** MB</b> の制限を超える場合は、ソースコードを複数の小さなチャンクに分割するようにバントラーを構成することでファイルサイズを減らしてください。詳細については、<a href="https://webpack.js.org/guides/code-splitting/">WebpackJS でのコード分割</a>を参照してください。
 {{< /site-region >}}
@@ -167,7 +167,7 @@ Datadog は、縮小化を解除されたスタックフレームにソースコ
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/sourcemaps
+[1]: https://github.com/DataDog/datadog-ci/tree/master/packages/datadog-ci/src/commands/sourcemaps
 [2]: https://docs.datadoghq.com/ja/real_user_monitoring/browser/setup/#initialization-parameters
 [3]: https://docs.datadoghq.com/ja/logs/log_collection/javascript/#initialization-parameters
 [4]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/sourcemaps#link-errors-with-your-source-code

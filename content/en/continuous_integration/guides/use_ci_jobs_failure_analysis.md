@@ -36,6 +36,18 @@ Each log line is pre-scanned to redact any potentially sensitive information bef
 The LLM model can classify errors with similar messages into distinct yet related subdomains. For example, if the error message is <code>Cannot connect to docker daemon</code>, it is usually categorized under <code>domain:platform</code> and <code>subdomain:network</code>. However, the LLM model may sometimes classify it under <code>subdomain:infrastructure</code> instead.
 </div>
 
+#### Logs requirements for jobs failure analysis
+
+Jobs failure analysis requires the following logs to be indexed:
+* All logs from the **failing job** being analyzed.
+* All logs from at **least one successful job** with the same job name, pipeline name, and repository. This is needed to identify which logs are relevant in the failing job.
+
+The following [exclusion filter][9] is compatible with jobs failure analysis:
+* Query: `datadog.product:cipipeline @ci.is_failure:false`
+* Sampling rule: exclude 90% of `@ci.job.id`
+
+This setup reduces log volume while still supporting jobs failure analysis, as long as your CI pipeline runs enough successful jobs to ensure logs are indexed for at least one of them.
+
 #### Domains and Subdomains
 
 Errors are categorized with a domain and subdomain:
@@ -94,6 +106,7 @@ CI jobs failure analysis is available for the following CI providers:
 
 * [GitHub Actions][1]
 * [GitLab][2]
+* [Azure Pipeline][8]
 
 **Note:** You must enable CI job logs collection, and the logs need to be indexed. To set up CI job logs collection, select your CI provider on [Pipeline Visibility][6] and follow the instructions to collect job logs.
 
@@ -128,6 +141,14 @@ You can import the **CI Visibility - CI Jobs Failure Analysis** dashboard templa
 
 {{< img src="continuous_integration/ci_jobs_failure_analysis_dashboard.png" alt="CI jobs failure analysis dashboard" width="90%">}}
 
+### Using PR comments
+
+You can add jobs failure analysis in your PR comments.
+
+For PR Comments to be posted, your repositories need to be integrated with Datadog. To learn more about integrating repositories with Datadog, review how to [Connect your Git repositories to Datadog][7] documentation.
+
+{{< img src="continuous_integration/pr_comment.png" alt="PR comment with included jobs failure analysis" width="90%">}}
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -138,3 +159,6 @@ You can import the **CI Visibility - CI Jobs Failure Analysis** dashboard templa
 [4]:/resources/json/civisibility-ci-jobs-failure-analysis-dashboard.json
 [5]:/dashboards/
 [6]:/continuous_integration/pipelines/#setup
+[7]:/integrations/guide/source-code-integration/#connect-your-git-repositories-to-datadog
+[8]:/continuous_integration/pipelines/azure/
+[9]:/logs/log_configuration/indexes#exclusion-filters

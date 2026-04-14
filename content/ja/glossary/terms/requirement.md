@@ -1,7 +1,8 @@
 ---
+id: requirement
 core_product:
 - security
-- csm
+- cloud security
 title: 要件
 ---
 

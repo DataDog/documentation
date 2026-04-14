@@ -20,7 +20,7 @@ title: オートディスカバリーによるエンドポイントチェック
 
 クラスターチェック機能は、Kubernetes サービスなど、負荷分散型のクラスターサービスを[自動検出][1]してチェックを実行する機能を提供します。_エンドポイントチェック_はこのメカニズムを拡張し、Kubernetes サービスによって管理される各エンドポイントを監視します。
 
-The [Cluster Agent][2] discovers endpoint check configurations based on [Autodiscovery][1] annotations on the Kubernetes services. The Cluster Agent then dispatches these configurations to node-based Agents to individually run. Endpoint checks are dispatched to Agents that run on the same node as the Pod(s) that back the endpoint(s) of the monitored Kubernetes service. This dispatching logic allows the Agent to add the Pod and container tags it has already collected for each respective Pod.
+[Cluster Agent][2] は、Kubernetes サービス上の[オートディスカバリー][1]アノテーションに基づいてエンドポイントチェック構成を検出します。その後、Cluster Agent はこれらの構成をノードベースの Agent にディスパッチし、個別に実行させます。エンドポイントチェックは、監視対象の Kubernetes サービスのエンドポイントの背後にあるポッドと同じノード上で実行される Agent にディスパッチされます。このディスパッチロジックにより、Agent は、それぞれのポッドに対して既に収集したポッドおよびコンテナタグを追加することができます。
 
 ノートベースの Agent は 10 秒ごとに Cluster Agent に接続し、実行するチェックの構成を取得します。エンドポイントチェックで取得したメトリクスは、サービスタグ、[Kubernetes タグ][3]、ホストタグ、そして評価対象の IP アドレスに応じた `kube_endpoint_ip` タグを付けて送信されます。
 
@@ -177,7 +177,7 @@ Kubernetes サービスのエンドポイントに対して [HTTP チェック][
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
 
-Use the `spec.override.clusterAgent.extraConfd.configDataMap` section to define your check configuration:
+チェック設定を定義するには、`spec.override.clusterAgent.extraConfd.configDataMap` セクションを使用します:
 
 ```yaml
 spec:

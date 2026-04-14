@@ -52,7 +52,7 @@ Ajoutez la liste de flux à surveiller :
 
 Vous pouvez configurer plusieurs comptes (ou hosts), mais chaque flux doit être associé à un compte.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Seuls les flux présentant le type « Aggregated metrics » sont pris en charge.
 </div>
 
@@ -91,7 +91,7 @@ Akamai DataStream 1.0 et 2.0 prennent en charge l'envoi de logs à Datadog via 
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "akamai_datastream" >}}
+{{ get-metrics-from-git "akamai-datastream-2" }}
 
 
 ### Événements

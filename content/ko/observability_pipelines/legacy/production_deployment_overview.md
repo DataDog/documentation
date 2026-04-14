@@ -4,10 +4,6 @@ aliases:
 title: (레거시) 배포 설계 및 원칙
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Observability Pipeline은 US1-FED Datadog 사이트에서 사용할 수 없습니다.</div>
-{{< /site-region >}}
-
 {{% observability_pipelines/legacy_warning %}}
 
 ## 개요

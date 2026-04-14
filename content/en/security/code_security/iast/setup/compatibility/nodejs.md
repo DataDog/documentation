@@ -159,7 +159,7 @@ The following operating systems are officially supported by `dd-trace`. Any oper
 | passport-http   | 0.3.0                     |
 
 [1]: /tracing/trace_collection/compatibility/nodejs/
-[2]: /agent/remote_config/#enabling-remote-configuration
+[2]: /tracing/guide/remote_config/
 [4]: https://github.com/nodejs/release#release-schedule
 [5]: https://github.com/mariadb-corporation/mariadb-connector-nodejs
 [28]: https://github.com/datastax/nodejs-driver

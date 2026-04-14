@@ -31,10 +31,13 @@ This page identifies key components of Metrics without Limits™ that can help y
 2. Click **Manage Tags**, then **Include tags** to configure the tags you'd like to remain as queryable in dashboards, notebooks, monitors, and other Datadog products.
 3. Define your allowlist of tags. 
 By default, the tag configuration modal pre-populates with a Datadog recommended allowlist of tags that have been actively queried on dashboards, notebooks, monitors, or through the API in the past 30 days. Recommended tags are distinguished with a line graph icon. 
+   a.Additionally, include tags that are used on assets (dashboards, monitors, notebooks, and SLOs). These tags are used on assets but not actively queried and are marked with a target icon. Adding these ensures you don't lose visibility on your critical assets. 
 4. Review the *Estimated New Volume* of indexed custom metrics that results from this potential tag configuration.
 5. Click **Save**.
 
 {{< img src="metrics/mwl_example_include_tags-compressed_03182025.mp4" alt="Configuration of Tags with Allowlist" video=true style="width:100%" >}}
+
+{{< img src="metrics/tags_used_assets.png" alt="Showing customers they can add tags used on assets on their MWL configuration" style="width:100%" >}}
 
 You can [create][2], [edit][3], [delete][4], and [estimate the impact][5] of your tag configuration through the Metrics APIs.
 

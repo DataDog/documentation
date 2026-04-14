@@ -42,7 +42,7 @@ The System check is included in the [Datadog Agent][4] package. No additional in
 
 ### Metrics
 
-{{< get-metrics-from-git "system" "system.cpu system.fs system.io system.load system.mem system.proc. system.swap system.uptime" >}}
+{{< get-metrics-from-git "system" "system.cpu system.fs system.io system.load system.mem system.proc. system.swap system.uptime system.paging" >}}
 
 ### Events
 
@@ -78,9 +78,9 @@ The system core check is included in the [Datadog Agent][4] package. No addition
     ```yaml
     init_config:
     instances:
-        - foo: bar
+      - foo: bar
         tags:
-            - key:value
+          - key:value
     ```
 
 2. [Restart the Agent][7].

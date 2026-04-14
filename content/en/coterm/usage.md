@@ -1,5 +1,6 @@
 ---
 title: Using Datadog CoTerm
+description: "Learn how to record terminal sessions, create shims for automatic recording, and configure CoTerm to protect against dangerous commands."
 further_reading:
 - link: "/coterm"
   tag: "documentation"
@@ -129,10 +130,10 @@ COTERM_BREAK_GLASS=true kubectl delete foo
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /sensitive_data_scanner/
-[2]: /service_management/events/
-[3]: /service_management/case_management/
+[2]: /events/
+[3]: /incident_response/case_management/
 [4]: /coterm/rules
-[5]: /service_management/incident_management/
+[5]: /incident_response/incident_management/
 [6]: /coterm/install
 [7]: https://app.datadoghq.com/terminal-streams
-[8]: /service_management/case_management/automation_rules/
+[8]: /incident_response/case_management/automation_rules/

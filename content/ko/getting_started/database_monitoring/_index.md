@@ -1,8 +1,9 @@
 ---
+description: 모니터 데이터베이스 상태 및 성능을 확인하고, 느린 쿼리 문제를 해결하고, 쿼리 분석, 최적화를 위한 대시보드를 만들 수 있습니다.
 further_reading:
 - link: /database_monitoring/
   tag: 설명서
-  text: 데이터베이스 모니터링
+  text: Database Monitoring
 - link: /database_monitoring/troubleshooting/
   tag: 설명서
   text: 트러블슈팅
@@ -10,14 +11,10 @@ further_reading:
   tag: 블로그
   text: Datadog의 데이터베이스 성능 모니터링
 - link: https://dtdg.co/fe
-  tag: 기반 활성화
-  text: 대화형 세선에 참여해 데이터 베이스 모니터링을 한 단계 업그레이드 하세요.
+  tag: 기초 구축
+  text: 대화형 세선에 참여해 데이터베이스 모니터링을 한 단계 업그레이드하세요.
 title: 데이터베이스 모니터링 시작하기
 ---
-
-{{% site-region region="gov" %}}
-<div class="alert alert-warning">선택한 Datadog 사이트 ({{< region-param key="dd_site_name" >}})에서 Database Monitoring을 사용할 수 없습니다.</div>
-{{< /site-region >}}
 
 ## 개요
 
@@ -33,7 +30,7 @@ Datadog 데이터베이스 모니터링은 데이터베이스의 상태와 성�
 
 ## 설정
 
-### 전제 조건
+### 사전 필수 조건
 
 시작하기 전에 [Datadog 계정][1]이 있어야 합니다.
 

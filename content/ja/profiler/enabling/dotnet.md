@@ -46,7 +46,7 @@ Serverless
 .NET 7<br/>
 .NET 8
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>注:</strong> コンテナの場合、<strong>少なくとも 1 つのコア</strong>が必要です。詳しくは<a href="/profiler/profiler_troubleshooting/dotnet#linux-containers">トラブルシューティングのドキュメント</a>をお読みください。
 </div>
 
@@ -73,7 +73,7 @@ Ensure Datadog Agent v6+ is installed and running. Datadog recommends using [Dat
 
 そうでない場合は、お使いの OS に応じて、以下の手順でプロファイラーをインストールしてください。
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 <strong>**注**:</strong> Datadog 自動インスツルメンテーションは、.NET CLR Profiling API に依存します。この API に許可されるサブスクライバーは 1 つのみなので、アプリケーション環境で 1 つの APM ソリューションのみを実行してください。
 </div>
 
@@ -118,7 +118,7 @@ Datadog .NET Profiler は、マシン上のすべてのサービスがインス�
 
 {{% tab "NuGet" %}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>注:</strong> このインストールは、IIS で動作するアプリケーションをインスツルメントするものではありません。IIS で実行されるアプリケーションについては、Windows マシン全体のインストールプロセスに従ってください。
 </div>
 
@@ -131,7 +131,7 @@ Datadog .NET Profiler は、マシン上のすべてのサービスがインス�
 
 {{% tab "Azure App Service" %}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>Note:</strong> Only Web Apps are supported. Functions are not supported.
 </div>
 
@@ -234,7 +234,7 @@ Datadog .NET Profiler は、マシン上のすべてのサービスがインス�
    net start w3svc
    ```
 
-   <div class="alert alert-warning">
+   <div class="alert alert-danger">
      <strong>Note:</strong> Use <code>stop</code> and <code>start</code> commands. A reset or restart does not always work.
    </div>
 
@@ -416,7 +416,7 @@ Datadog .NET Profiler は、マシン上のすべてのサービスがインス�
 | `DD_PROFILING_HEAP_ENABLED` | Boolean        | `true` に設定すると、Live Heap プロファイリングが有効になります (ベータ版)。デフォルトは `false` です。  |
 | `DD_PROFILING_GC_ENABLED` | Boolean        | `false` に設定すると、Timeline のユーザーインターフェイスで使用される Garbage Collection のプロファイリングを無効にします。デフォルトは `true` です。  |
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 <strong>注</strong>: IIS アプリケーションでは、<a href="?tab=windowsservices#installation">上記の Windows Service タブ</a>のように、レジストリ(<code>HKLM\System\CurrentControlSet\Services\WAS</code> および <code>HKLM\System\CurrentControlSet\Services\W3SVC</code> ノード) で環境変数の設定を行う必要があります。この環境変数は、<em>すべての</em> IIS アプリケーションに適用されます。
 IIS 10 以降では、<a href="https://docs.microsoft.com/en-us/iis/get-started/planning-your-iis-architecture/introduction-to-applicationhostconfig"><code>C:\Windows\System32\inetsrv\config\applicationhost.config</code> ファイル</a>で、IIS アプリケーションごとの環境変数を設定できます。詳細は、<a href="https://docs.microsoft.com/en-us/iis/configuration/system.applicationhost/applicationpools/add/environmentvariables/">Microsoft のドキュメント</a>を参照してください。
 </div>

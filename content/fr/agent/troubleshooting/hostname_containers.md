@@ -53,18 +53,7 @@ Dans ces cas de figure, l'Agent n'est pas en mesure de se connecter à l'API Ku
 Vous pouvez la désactiver en utilisant des paramètres dédiés ou en définissant la variable `DD_KUBELET_TLS_VERIFY` pour **tous les conteneurs** dans le manifeste de l'Agent :
 
 {{< tabs >}}
-{{% tab "Helm" %}}
-
-`values.yaml` personnalisé :
-
-```yaml
-datadog:
-  kubelet:
-    tlsVerify: false
-```
-
-{{% /tab %}}
-{{% tab "Operator" %}}
+{{% tab "Operator Datadog" %}}
 
 Ressource Kubernetes `DatadogAgent` :
 
@@ -79,9 +68,21 @@ spec:
 ```
 
 {{% /tab %}}
-{{% tab "Manifeste" %}}
+{{% tab "Helm" %}}
 
-Manifeste `DaemonSet` :
+`datadog-values.yaml` personnalisé :
+
+```yaml
+datadog:
+  kubelet:
+    tlsVerify: false
+```
+
+{{% /tab %}}
+
+{{% tab "Configuration manuelle (DaemonSet)" %}}
+
+Manifeste DaemonSet :
 
 ```yaml
 apiVersion: apps/v1
@@ -116,21 +117,7 @@ Utilisez cette solution uniquement dans l'éventualité peu probable où vous ne
 Auquel cas, vous pouvez utiliser l'API Downward pour définir `DD_HOSTNAME` :
 
 {{< tabs >}}
-{{% tab "Helm" %}}
-
-`values.yaml` personnalisé :
-
-```yaml
-datadog:
-  env:
-    - name: DD_HOSTNAME
-      valueFrom:
-        fieldRef:
-          fieldPath: spec.nodeName
-```
-
-{{% /tab %}}
-{{% tab "Operator" %}}
+{{% tab "Operator Datadog" %}}
 
 Ressource Kubernetes `DatadogAgent` :
 
@@ -149,9 +136,24 @@ spec:
 ```
 
 {{% /tab %}}
-{{% tab "Manifeste" %}}
+{{% tab "Helm" %}}
 
-Manifeste `DaemonSet`
+`datadog-values.yaml` personnalisé :
+
+```yaml
+datadog:
+  env:
+    - name: DD_HOSTNAME
+      valueFrom:
+        fieldRef:
+          fieldPath: spec.nodeName
+```
+
+{{% /tab %}}
+
+{{% tab "Configuration manuelle (DaemonSet)" %}}
+
+Manifeste DaemonSet :
 
 ```yaml
 apiVersion: apps/v1
@@ -172,7 +174,7 @@ spec:
 {{% /tab %}}
 {{< /tabs >}}
 
-## Erreurs de hostname avec AWS ECS et VM Docker
+## Erreurs de hostname avec Amazon ECS et VM Docker
 
 Lorsque l'Agent est exécuté dans Docker sur un fournisseur de cloud, une erreur de hostname signifie généralement que l'Agent n'est pas en mesure d'accéder à l'un des éléments suivants :
 * L'API du runtime de conteneur
@@ -183,7 +185,7 @@ Lorsque l'Agent est exécuté dans Docker sur un fournisseur de cloud, une erreu
 Autorisez l'Agent à se connecter au socket Docker :
 
 {{< tabs >}}
-{{% tab "AWS ECS sur EC2" %}}
+{{% tab "Amazon ECS on EC2" %}}
 
 Assurez-vous que le socket Docker est monté dans la [définition de votre tâche][1].
 

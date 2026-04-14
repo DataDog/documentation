@@ -19,12 +19,12 @@ author:
 categories:
 - aws
 - nube
-- contenedores
-- kubernetes
+- rastreo
+- Kubernetes
 - recopilación de logs
 - orquestación
-- suministración
-custom_kind: integration
+- suministro
+custom_kind: integración
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/eks_anywhere/README.md
 display_on_public_website: true
@@ -40,9 +40,9 @@ public_title: Amazon EKS Anywhere
 short_description: Una opción de despliegue de EKS para operar clústeres de Kubernetes
   on-premises
 supported_os:
-- linux
-- windows
-- macos
+- Linux
+- Windows
+- macOS
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
@@ -52,31 +52,31 @@ tile:
   - Categoría::Kubernetes
   - Categoría::Recopilación de logs
   - Categoría::Orquestación
-  - Categoría::Suministración
-  - SO compatible::Linux
-  - SO compatible::Windows
-  - SO compatible::macOS
+  - Categoría::Suministro
+  - Sistema operativo compatible::Linux
+  - Sistema operativo compatible::Windows
+  - Sistema operativo compatible::macOS
   - Oferta::Integración
-  configuration: README.md#Setup
+  configuration: README.md#Configuración
   description: Una opción de despliegue de EKS para operar clústeres de Kubernetes
     on-premises
   media: []
-  overview: README.md#Overview
+  overview: README.md#Información general
   resources:
   - resource_type: Blog
     url: https://www.datadoghq.com/blog/announcing-eks
   - resource_type: Blog
     url: https://www.datadoghq.com/blog/eks-cluster-metrics
-  - resource_type: documentación
+  - resource_type: Documentación
     url: https://docs.datadoghq.com/integrations/eks_fargate/
-  support: README.md#Support
+  support: README.md#Soporte
   title: Amazon EKS Anywhere
 ---
 
 <!--  FUENTE https://github.com/DataDog/integrations-core -->
 
 
-![Dashboard de EKS][1]
+![Dashboard] de EKS[1]
 
 ## Información general
 
@@ -86,7 +86,7 @@ Amazon Elastic Kubernetes Service (EKS) es un servicio de Kubernetes gestionado 
 
 ## Configuración
 
-Dado que Datadog ya se integra con Kubernetes y AWS, está listo para monitorizar EKS. Si ejecutas el Agent en un clúster de Kubernetes y planeas migrar a EKS, puedes continuar monitorizando tu clúster con Datadog. 
+Dado que Datadog ya se integra con Kubernetes y AWS, está preparado para monitorizar EKS. Si estás ejecutando el Agent en un clúster Kubernetes y quieres migrar a EKS, puedes seguir monitorizando tus clústeres con Datadog. 
 
 Además, se admiten [grupos de nodos gestionados de Amazon EKS][3] y [Amazon EKS en AWS Outposts][4].
 
@@ -120,7 +120,7 @@ Con el fin de monitorizar EKS es necesario configurar una de las siguientes inte
 
 ### Recopilación de logs
 
-_Disponible para las versiones del Agent posteriores a la 6.0_
+_Disponible para la versión 6.0 o posteriores del Agent_
 
 La configuración es exactamente la misma que para Kubernetes.
 Para empezar a recopilar logs de todos tus contenedores, usa las [variables de entorno][10] de tu Datadog Agent.

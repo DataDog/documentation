@@ -134,7 +134,7 @@ Datadog の Integrations ページで、組織用の [Oracle インテグレー�
 
 Database Monitoring は、Oracle データベースのカスタムクエリをサポートしています。使用可能な構成オプションの詳細については、[conf.yaml.example][9] を参照してください。
 
-<div class="alert alert-warning">カスタムクエリを実行すると、Oracle によって追加コストまたは手数料が課される場合があります。</div>
+<div class="alert alert-danger">カスタムクエリを実行すると、Oracle によって追加コストまたは手数料が課される場合があります。</div>
 
 [1]: /ja/database_monitoring/agent_integration_overhead/?tab=oracle
 [2]: /ja/agent/configuration/agent-commands/#start-stop-and-restart-the-agent

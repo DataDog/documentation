@@ -1,5 +1,6 @@
 ---
-title: 2024 리눅스(Linux) 키 로테이션
+description: Datadog RPM 및 DEB 패키지의 2024 GPG 키 로테이션에 관한 정보 및 시스템 업데이트 방법입니다.
+title: 2024 Linux 키 로테이션
 ---
 
 일반적인 모범 사례로 Datadog는 Datadog 에이전트 패키지에 서명하는데 사용되는 키와 인증서를 주기적으로 로테이션합니다. Datadog 패키지에는 다음이 포함됩니다.

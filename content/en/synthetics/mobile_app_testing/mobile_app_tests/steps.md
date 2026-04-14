@@ -12,12 +12,7 @@ further_reading:
   tag: "Documentation"
   text: "Learn about advanced options in mobile tests"
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Mobile Application Testing is not supported on this site.</div>
-{{< /site-region >}}
  
-
 ## Overview
 
 Steps represent individually recorded interactions or assertions that you want to execute in your test. To define a step, click **Start Recording** and interact with the device as you would normally, or create a step manually by clicking **Assertion** or **Interaction**. 

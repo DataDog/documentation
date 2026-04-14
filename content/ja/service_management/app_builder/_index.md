@@ -1,4 +1,8 @@
 ---
+aliases:
+- /ja/developers/datadog_apps/
+- /ja/developers/ui_extensions/
+- /ja/developers/faq/ui_extensions
 disable_toc: false
 further_reading:
 - link: /actions/actions_catalog/

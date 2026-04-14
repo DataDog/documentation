@@ -1,28 +1,56 @@
 ---
-aliases:
-- /ja/integrations/azure_streamanalytics
+app_id: azure-streamanalytics
+app_uuid: 190f11bb-ba6e-42ed-bdf8-b86c747d64be
+assets:
+  integration:
+    auto_install: true
+    events:
+      creates_events: false
+    metrics:
+      check: azure.streamanalytics_streamingjobs.input_events
+      metadata_path: metadata.csv
+      prefix: azure.streamanalytics_streamingjobs
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 302
+    source_type_name: Azure Stream Analytics
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - クラウド
 - azure
 custom_kind: インテグレーション
 dependencies: []
-description: Azure Stream Analytics のキーメトリクスを追跡
-doc_link: https://docs.datadoghq.com/integrations/azure_stream_analytics/
+display_on_public_website: true
 draft: false
 git_integration_title: azure_stream_analytics
-has_logo: true
 integration_id: azure-streamanalytics
-integration_title: Microsoft Azure Stream Analytics
+integration_title: Azure Stream Analytics
 integration_version: ''
 is_public: true
-manifest_version: '1.0'
+manifest_version: 2.0.0
 name: azure_stream_analytics
-public_title: Datadog-Microsoft Azure Stream Analytics インテグレーション
+public_title: Azure Stream Analytics
 short_description: Azure Stream Analytics のキーメトリクスを追跡
-version: '1.0'
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Cloud
+  - Category::Azure
+  - Offering::Integration
+  configuration: README.md#Setup
+  description: Azure Stream Analytics のキーメトリクスを追跡
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Azure Stream Analytics
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
+<!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
 ## 概要
 
 Azure Stream Analytics は、デバイスからの大量のデータストリーミングを調べることができるイベント処理エンジンです。
@@ -38,7 +66,7 @@ Datadog Azure インテグレーションを使用して、Azure Stream Analytic
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "azure_stream_analytics" >}}
+{{ get-metrics-from-git "azure-streamanalytics" }}
 
 
 ### イベント

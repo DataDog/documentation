@@ -11,27 +11,27 @@
             <div class="col-12">
               <div class="row table-header">
                 <div class="col-4 column">
-                  <p class="font-semibold">{{ i18n "name" }}</p>
+                  <p class="table-cell font-semibold">{{ i18n "name" }}</p>
                 </div>
                 <div class="col-2 column">
-                  <p class="font-semibold">{{ i18n "type" }}</p>
+                  <p class="table-cell font-semibold">{{ i18n "type" }}</p>
                 </div>
                 <div class="col-6 column">
-                  <p class="font-semibold">{{ i18n "description" }}</p>
+                  <p class="table-cell font-semibold">{{ i18n "description" }}</p>
                 </div>
               </div>
               {{ range . }}
                     <div class="row ">
                         <div class="col-12 first-column">
-                        <div class="row first-row ">
+                        <div class="row table-row first-row ">
                             <div class="col-4 column">
-                                <p>{{- .name -}}{{- with .required -}}{{- cond (eq . false) "" "&nbsp;[<em>required</em>]" | safeHTML -}}{{- end -}}</p>
+                                <p class="table-cell">{{- .name -}}{{- with .required -}}{{- cond (eq . false) "" "&nbsp;[<em>required</em>]" | safeHTML -}}{{- end -}}</p>
                             </div>
                             <div class="col-2 column">
-                                <p>{{ .schema.type }}</p>
+                                <p class="table-cell">{{ .schema.type }}</p>
                             </div>
                             <div class="col-6 column">
-                                <p>{{ .description | markdownify }}</p>
+                                <p class="table-cell">{{ .description | markdownify }}</p>
                             </div>
                         </div>
                         </div>
@@ -47,29 +47,29 @@
             <div class="col-12">
               <div class="row table-header">
                 <div class="col-4 column">
-                  <p class="font-semibold">{{ i18n "name" }}</p>
+                  <p class="table-cell font-semibold">{{ i18n "name" }}</p>
                 </div>
                 <div class="col-2 column">
-                  <p class="font-semibold">{{ i18n "type" }}</p>
+                  <p class="table-cell font-semibold">{{ i18n "type" }}</p>
                 </div>
                 <div class="col-6 column">
-                  <p class="font-semibold">{{ i18n "description" }}</p>
+                  <p class="table-cell font-semibold">{{ i18n "description" }}</p>
                 </div>
               </div>
               {{ range . }}
                     <div class="row ">
                         <div class="col-12 first-column">
-                        <div class="row first-row ">
+                        <div class="row table-row first-row ">
                             <div class="col-4 column">
-                                <p>{{- .name -}}{{- with .required -}}{{- cond (eq . false) "" "&nbsp;[<em>required</em>]" | safeHTML -}}{{- end -}}</p>
+                                <p class="table-cell">{{- .name -}}{{- with .required -}}{{- cond (eq . false) "" "&nbsp;[<em>required</em>]" | safeHTML -}}{{- end -}}</p>
                             </div>
                             <div class="col-2 column">
-                                <p>{{ with .schema }}{{ with .enum }}enum{{ else }}{{ .type }}{{ end }}{{ end }}</p>
+                                <p class="table-cell">{{ with .schema }}{{ with .enum }}enum{{ else }}{{ .type }}{{ end }}{{ end }}</p>
                             </div>
                             <div class="col-6 column">
-                                <p>
+                                <p class="table-cell">
                                   {{ .description | markdownify }}
-                                  {{ with .schema }}{{ with .enum }}<br/>Allowed enum values: <code>{{ delimit . ", " }}</code>{{ end }}{{ end }}
+                                  {{ with .schema }}{{ with .enum }}{{ if gt (len .) 10 }}<br/>Allowed enum values: <code>{{ delimit (first 10 .) ", " }}</code><details class="enum-details"><summary class="enum-summary">Show {{ sub (len .) 10 }} more</summary><code>, {{ delimit (after 10 .) ", " }}</code></details>{{ else }}<br/>Allowed enum values: <code>{{ delimit . ", " }}</code>{{ end }}{{ end }}{{ end }}
                                 </p>
                             </div>
                         </div>
@@ -86,27 +86,27 @@
             <div class="col-12">
               <div class="row table-header">
                 <div class="col-4 column">
-                  <p class="font-semibold">{{ i18n "name" }}</p>
+                  <p class="table-cell font-semibold">{{ i18n "name" }}</p>
                 </div>
                 <div class="col-2 column">
-                  <p class="font-semibold">{{ i18n "type" }}</p>
+                  <p class="table-cell font-semibold">{{ i18n "type" }}</p>
                 </div>
                 <div class="col-6 column">
-                  <p class="font-semibold">{{ i18n "description" }}</p>
+                  <p class="table-cell font-semibold">{{ i18n "description" }}</p>
                 </div>
               </div>
               {{ range . }}
                     <div class="row ">
                         <div class="col-12 first-column">
-                        <div class="row first-row ">
+                        <div class="row table-row first-row ">
                             <div class="col-4 column">
-                                <p>{{- .name -}}{{- with .required -}}{{- cond (eq . false) "" "&nbsp;[<em>required</em>]" | safeHTML -}}{{- end -}}</p>
+                                <p class="table-cell">{{- .name -}}{{- with .required -}}{{- cond (eq . false) "" "&nbsp;[<em>required</em>]" | safeHTML -}}{{- end -}}</p>
                             </div>
                             <div class="col-2 column">
-                                <p>{{ .schema.type }}</p>
+                                <p class="table-cell">{{ .schema.type }}</p>
                             </div>
                             <div class="col-6 column">
-                                <p>{{ .description | markdownify }}</p>
+                                <p class="table-cell">{{ .description | markdownify }}</p>
                             </div>
                         </div>
                         </div>

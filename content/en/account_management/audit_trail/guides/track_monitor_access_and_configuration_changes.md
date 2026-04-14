@@ -1,5 +1,6 @@
 ---
 title: Track Monitor Access and Configuration Changes
+description: Use Audit Trail to monitor usage patterns, configuration changes, and access history for specific monitors with API tracking and diff views.
 disable_toc: false
 further_reading:
 - link: "account_management/audit_trail/"

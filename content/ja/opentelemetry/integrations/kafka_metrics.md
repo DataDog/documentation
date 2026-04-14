@@ -6,7 +6,7 @@ further_reading:
 title: Kafka メトリクス
 ---
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 OTel Kafka Metrics Remapping は公開アルファ版です。コレクターのバージョン >= 0.93.0 で利用可能です。これに関連するフィードバックがある場合は、アカウントチームに連絡して意見を提供してください。
 </div>
 

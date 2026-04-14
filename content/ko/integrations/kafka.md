@@ -319,7 +319,7 @@ Kafka 소비자를 실행하는 호스트에서 실행되는 에이전트 점검
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "kafka_consumer" >}}
+{{< get-metrics-from-git "kafka-consumer" >}}
 
 
 ### 이벤트

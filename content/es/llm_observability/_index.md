@@ -16,10 +16,6 @@ further_reading:
 title: Observabilidad de LLM
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">LLM Observability no está disponible en el sitio seleccionado ({{< region-param key="dd_site_name" >}}) en este momento.</div>
-{{< /site-region >}}
-
 ## Resumen
 
 Con LLM Observability, puedes monitorizar, solucionar problemas y evaluar tus aplicaciones impulsadas por LLM, como los chatbots. Puedes investigar la causa raíz de los problemas, monitorizar el rendimiento operativo y evaluar la calidad, privacidad y seguridad de tus aplicaciones de LLM. 

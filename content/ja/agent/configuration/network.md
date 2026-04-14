@@ -30,7 +30,7 @@ title: ネットワークトラフィック
 
 ## 概要
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 トラフィックは、常に Agent から Datadog の方向に開始されます。Datadog から Agent の方向にセッションが開始されることはありません。
 </div>
 
@@ -228,7 +228,7 @@ Agent < v7.18.0 または 6.18.0: `app.`{{< region-param key="dd_site" code="tru
 
 ## ポートを開く
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 すべてのアウトバウンドトラフィックは、TCP または UDP を介して SSL で送信されます。
 <br><br>
 ファイアウォールルールまたは同様のネットワーク制限を使用して、Agent がお客様のアプリケーションまたは信頼できるネットワークソースからのみアクセス可能であることを確認してください。信頼できないアクセスにより、悪意のある行為者は Datadog アカウントにトレースやメトリクスを書き込んだり、構成やサービスに関する情報を取得したりすることを含むがこれに限定されない、いくつかの侵入的なアクションを実行できるようになります。
@@ -356,7 +356,7 @@ APM レシーバーと DogStatsD ポートは、それぞれ `datadog.yaml` コ�
 # receiver_port: 8126
 {{< /code-block >}}
 
-<div class="alert alert-warning">ここで DogStatsD ポートや APM レシーバーポートの値を変更した場合、対応するポートの APM トレーシングライブラリの構成も変更する必要があります。ポートの構成に関する情報は<a href="/tracing/trace_collection/library_config/">お使いの言語のライブラリ構成のドキュメント</a>をご覧ください。</div>
+<div class="alert alert-danger">ここで DogStatsD ポートや APM レシーバーポートの値を変更した場合、対応するポートの APM トレーシングライブラリの構成も変更する必要があります。ポートの構成に関する情報は<a href="/tracing/trace_collection/library_config/">お使いの言語のライブラリ構成のドキュメント</a>をご覧ください。</div>
 
 ## プロキシの使用
 

@@ -50,7 +50,7 @@ Google Cloud Firestore 로그는 Google 클라우드 로깅으로 수집되어 �
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "google_cloud_firestore" >}}
+{{< get-metrics-from-git "google-cloud-firestore" >}}
 
 
 ### 이벤트

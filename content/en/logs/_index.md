@@ -43,6 +43,12 @@ further_reading:
   - link: "https://www.datadoghq.com/architecture/a-guide-to-log-management-indexing-strategies-with-datadog/"
     tag: "Architecture Center"
     text: "A guide to Log Management Indexing Strategies with Datadog"
+  - link: "https://www.datadoghq.com/blog/archive-search/"
+    tag: "Blog"
+    text: "Search your historical logs more efficiently with Datadog Archive Search"
+  - link: "https://www.datadoghq.com/blog/human-name-detection"
+    tag: "Blog"
+    text: "Detect human names in logs with ML in Sensitive Data Scanner"
 cascade:
     algolia:
         rank: 70
@@ -61,8 +67,6 @@ Logging the important parts of your system's operations is crucial for maintaini
 Datadog Log Management, also referred to as Datadog logs or logging, removes these limitations by decoupling log ingestion from indexing. This enables you to cost-effectively collect, process, archive, explore, and monitor all of your logs without limitations, also known as Logging without Limits\*.
 
 Logging without Limits\* enables a streamlined troubleshooting experience in the [Log Explorer][1], which empowers you and your teams to quickly assess and fix your infrastructure issues. It provides intuitive archiving to support your security and IT teams during audits and assessments. Logging without Limits* also powers [Datadog Cloud SIEM][2], which detects security threats in your environment, without requiring you to index logs.
-
-**Note**: See [PCI DSS Compliance][3] for information on setting up a PCI-compliant Datadog organization.
 
 {{< vimeo url="https://player.vimeo.com/progressive_redirect/playback/293195142/rendition/1080p/file.mp4?loc=external&signature=8a45230b500688315ef9c8991ce462f20ed1660f3edff3d2904832e681bd6000" poster="/images/poster/logs.png" >}}
 
@@ -114,7 +118,6 @@ Start exploring your ingested logs in the [Log Explorer][1].
 
 [1]: /logs/explorer/
 [2]: /security/cloud_siem/
-[3]: /data_security/pci_compliance/
 [4]: /logs/log_collection/
 [5]: /logs/log_configuration/
 [6]: /tracing/other_telemetry/connect_logs_and_traces/

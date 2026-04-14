@@ -87,7 +87,7 @@ Avec le [chart Helm Datadog][3], `system-probe` doit être activé en définissa
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "tcp_queue_length" >}}
+{{< get-metrics-from-git "tcp-queue-length" >}}
 
 
 ### Checks de service

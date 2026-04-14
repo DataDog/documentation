@@ -1,0 +1,3 @@
+- HTTP/S server address:
+    - The Observability Pipelines Worker listens to this socket address, such as `0.0.0.0:9997`, for your HTTP client logs.
+    - 環境変数 `DD_OP_SOURCE_HTTP_SERVER_ADDRESS` に格納されています。

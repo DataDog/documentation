@@ -1,31 +1,16 @@
 ---
+app_id: azure_deployment_manager
 categories:
 - nube
 - azure
 custom_kind: integración
-dependencies: []
-description: Utiliza Datadog para monitorizar implementaciones de Canary en Azure
-  Deployment Manager.
-doc_link: https://docs.datadoghq.com/integrations/azure_deployment_manager/
-draft: false
+description: Monitoriza implementaciones de Canary en Azure Deployment Manager.
 further_reading:
 - link: https://www.datadoghq.com/blog/canary-deployments-with-azure-and-datadog/
   tag: Blog
   text: Lanzamientos de Canary con Azure Deployment Manager y Datadog
-git_integration_title: azure_deployment_manager
-has_logo: true
-integration_id: ''
-integration_title: Microsoft Azure Deployment Manager
-integration_version: ''
-is_public: true
-manifest_version: '1.0'
-name: azure_deployment_manager
-public_title: Datadog-Microsoft Azure Deployment Manager
-short_description: Monitoriza implementaciones de Canary en Azure Deployment Manager.
-version: '1.0'
+title: Microsoft Azure Deployment Manager
 ---
-
-<!--  FUENTE https://github.com/DataDog/dogweb -->
 ## Información general
 
 Azure Deployment Manager (ADM) permite gestionar un despliegue por etapas para implementar aplicaciones complejas de forma segura.
@@ -41,10 +26,10 @@ y una instancia activa de Azure Deployment Manager.
 
 ### Configuración
 
-1. Empieza por configurar monitores en Datadog para tu implementación. Comienza con un monitor para cada región. En función de la complejidad de tu aplicación, es posible que desees tener monitores para diferentes partes de la implementación en cada región. Completar el [Tutorial: Usar Azure Deployment Manager con plantillas de Resource Manager][1] te puede ayudar a decidir dónde monitorizar. Para monitorizar ideas, desmarca [el blog][2].
-2. Si al final tienes varios monitores para cada región, crea un [monitor compuesto][3] para cada paso o región de despliegue. Cada monitor compuesto es una combinación lógica de otros monitores que juntos indican el estado general de un paso de implementación.
-3. A continuación, configura Datadog como check de estado en la topología de Azure Deployment Manager [como parte del despliegue][4]. Establece estos pasos de check de estado como dependencias entre los pasos de implementación. Utiliza la [plantilla](#full-configuration-example) y sustituye `<API_KEY>` y `<APP_KEY>` por tus claves de la API y la aplicación Datadog. Crea una sección en `resources` para cada monitor (o monitor compuesto) que acabas de crear y sustituye `<MONITOR_ID>` por los ID de monitor. Es posible añadir varios checks dentro de un [paso de check de estado](#example-health-check-step), pero Datadog recomienda crear un [check](#example-health-check) por cada paso de check de estado y luego, crear pasos de check de estado adicionales para cada monitor compuesto. Si estás configurando el check con algo más que un monitor compuesto, asegúrate de actualizar la `regex` en consecuencia.
-4. Sigue la [documentación de Microsoft][5] para iniciar la implementación.
+1. Empieza por configurar monitores en Datadog para tu despliegue. Comienza con un monitor para cada región. Según la complejidad de tu aplicación, es posible que desees tener monitores para diferentes partes del despliegue en cada región. Puedes hacer el [tutorial: Use Azure Deployment Manager with Resource Manager templates](https://docs.microsoft.com/en-us/azure/azure-resource-manager/deployment-manager-tutorial) para ayudarte a decidir dónde monitorizar. Para ideas de monitor, echa un vistazo al [blog](https://www.datadoghq.com/blog/canary-deployments-with-azure-and-datadog/).
+1. Si acabas teniendo varios monitores para cada región, crea un [monitor compuesto](https://docs.datadoghq.com/monitors/monitor_types/composite/) para cada paso de despliegue o región. Cada monitor compuesto es una combinación lógica de otros monitores que juntos indican el estado general de un paso de despliegue.
+1. A continuación, configura Datadog como check de estado en la topología de Azure Deployment Manager [como parte del despliegue](https://docs.microsoft.com/en-us/azure/azure-resource-manager/deployment-manager-overview#rollout-template). Configura estos pasos de check de estado como dependencias entre los pasos de despliegue. Utiliza la [plantilla](#full-configuration-example) y sustituye `<API_KEY>` y `<APP_KEY>` por tus claves de API y de aplicación de Datadog. Crea una sección en `resources` para cada monitor (o monitor compuesto) que acabas de crear y sustituye `<MONITOR_ID>` por los ID de monitor. Es posible añadir múltiples checks dentro de un [paso de check de estado](#example-health-check-step), pero Datadog recomienda que crees un [check](#example-health-check) por cada paso de check de estado y luego crea pasos adicionales de check de estado para cada monitor compuesto. Si estás configurando el check con algo más que un monitor compuesto, asegúrate de actualizar el `regex` en consecuencia.
+1. Sigue la [documentación de Microsoft](https://docs.microsoft.com/en-us/azure/azure-resource-manager/deployment-manager-overview) para iniciar el despliegue.
 
 #### Ejemplo de check de estado
 
@@ -205,11 +190,4 @@ Azure Deployment Manager no incluye ningún check de servicios.
 
 ## Solucionar problemas
 
-¿Necesitas ayuda? Ponte en contacto con el [soporte de Datadog][6].
-
-[1]: https://docs.microsoft.com/en-us/azure/azure-resource-manager/deployment-manager-tutorial
-[2]: https://www.datadoghq.com/blog/canary-deployments-with-azure-and-datadog/
-[3]: https://docs.datadoghq.com/es/monitors/monitor_types/composite/
-[4]: https://docs.microsoft.com/en-us/azure/azure-resource-manager/deployment-manager-overview#rollout-template
-[5]: https://docs.microsoft.com/en-us/azure/azure-resource-manager/deployment-manager-overview
-[6]: https://docs.datadoghq.com/es/help/
+¿Necesitas ayuda? Ponte en contacto con el [soporte de Datadog](https://docs.datadoghq.com/help/).

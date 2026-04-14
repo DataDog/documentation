@@ -45,7 +45,7 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Microsoft�
 
 ## Real User Monitoring
 ### Analyse d'entonnoirs
-{{< get-metrics-from-git "azure_virtual_networks" >}}
+{{< get-metrics-from-git "azure-virtual-network" >}}
 
 
 ### Aide

@@ -1,5 +1,6 @@
 ---
 title: Agent Log Files
+description: "Understand where the Datadog Agent stores its log files and how to configure log rotation settings."
 aliases:
   - /agent/faq/agent-log-files
   - /agent/guide/agent-log-files

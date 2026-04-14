@@ -86,10 +86,6 @@ Establece el parámetro de configuración `rac_cluster` con el nombre de tu clú
 
 En la página de integraciones de Datadog, instala la [integración de Oracle][10] para tu organización. Se instala un [dashboard de Oracle][11] en tu cuenta que puedes utilizar para monitorizar el rendimiento de tus bases de datos Oracle.
 
-#### Instalaciones existentes
-
-{{% dbm-existing-oracle-integration-setup %}}
-
 ### Validar la configuración
 
 [Ejecuta el subcomando de estado del Agent][1] y busca `oracle` en la sección **Checks**. Visita la página [Dashboard][11] y [Bases de datos][2] de Datadog para empezar.
@@ -98,7 +94,7 @@ En la página de integraciones de Datadog, instala la [integración de Oracle][1
 
 La Monitorización de base de datos admite consultas personalizadas para bases de datos Oracle. Para obtener más información sobre las opciones de configuración disponibles, consulta [conf.yaml.example][5].
 
-<div class="alert alert-warning">La ejecución de consultas personalizadas puede dar lugar a costes o tasas adicionales evaluados por Oracle.</div>
+<div class="alert alert-danger">La ejecución de consultas personalizadas puede dar lugar a costes o tasas adicionales evaluados por Oracle.</div>
 
 [1]: /es/agent/configuration/agent-commands/#agent-status-and-information
 [2]: https://app.datadoghq.com/databases

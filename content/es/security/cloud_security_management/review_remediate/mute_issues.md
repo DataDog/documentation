@@ -7,62 +7,65 @@ further_reading:
   text: Explorar las reglas de detección de seguridad predefinidas
 products:
 - icon: cloud-security-management
-  name: CSM Misconfigurations
+  name: Errores de configuración en Cloud Security
   url: /security/cloud_security_management/misconfigurations/
 - icon: cloud-security-management
-  name: Riesgos de identidad de CSM
+  name: Riesgos de identidad en Cloud Security
   url: /security/cloud_security_management/identity_risks/
-title: Silenciar problemas en Cloud Security Management
+title: Silenciar incidentes en Cloud Security
 ---
 
 {{< product-availability >}}
 
-Puede haber ocasiones en las que una configuración errónea, un problema o un riesgo de identidad no coincidan con el caso de uso de tu empresa, o que decidas aceptarlo como un riesgo conocido. Para ignorarlos, puedes silenciar la configuración errónea, el problema o el riesgo de identidad subyacentes para los recursos afectados.
+Puede haber ocasiones en las que un error de configuración, un incidente o un riesgo de identidad no coincidan con el caso de uso de tu empresa, o que decidas aceptarlo como un riesgo conocido. Para ignorarlo, puedes silenciar el error de configuración, el incidente o el riesgo de identidad subyacentes para los recursos afectados.
 
-Por ejemplo, la regla de CSM Misconfigurations ['Block Public Access' feature is enabled for S3 bucket][1] evalúa si un bucket de S3 es de acceso público. Si tienes un bucket de S3 con activos estáticos destinados a ser compartidos públicamente, puedes silenciar la configuración errónea para el bucket de S3.
+Por ejemplo, la regla Errores de configuración en Cloud Security [los buckets deberían tener activada la opción 'Block Public Access' (Bloquear el acceso público)][1] evalúa si un bucket S3 es de acceso público. Si tienes un bucket S3 con recursos estáticos que están destinados a ser compartidos públicamente, puedes silenciar el error de configuración para el bucket S3.
 
 **Nota**: Silenciar una configuración errónea la elimina del cálculo de tu puntuación de posición.
 
-{{< img src="security/csm/mute_issue.png" alt="El cuadro de diálogo Silenciar problema contiene campos para especificar la razón y duración de la silenciamiento" style="width:100%;">}}
+{{< img src="security/csm/mute_issue-3.png" alt="El cuadro Mute Issue (Silenciar incidente) contiene campos para especificar el motivo y la duración del silencio" style="width:70%;">}}
 
-1. En el panel lateral de configuración errónea, problema o riesgo de identidad, selecciona uno o más recursos.
-2. Selecciona **Actions** > **Mute for...** (Acciones > Silenciar para...).
-3. Selecciona un motivo para el silenciamiento, por ejemplo, está pendiente una solución, es un falso positivo o es un riesgo aceptado.
+1. Busca el desplegable de estado de clasificación del recurso.
+   - En los exploradores de errores de configuración, de riesgos de identidad o de vulnerabilidades, el desplegable se encuentra en la columna **Triage** (Clasificación) de cada recurso. Como alternativa, puedes seleccionar uno o más recursos y hacer clic en el desplegable **Set State** (Definir estado) que aparece, para poder silenciar toda la selección a la vez.
+   - Cuando visualizas un recurso en un panel lateral, en **Next Steps** (Siguientes pasos), el desplegable está en **Triage** (Clasificación).
+2. Abre el desplegable con el estado de clasificación actual y haz clic en **Muted** (Silenciado). Se abre la ventana **Mute issue** (Silenciar incidente).
+3. Selecciona un motivo para el silencio, por ejemplo si es un falso positivo, si es un riesgo aceptado o si está pendiente de corrección.
 4. Introduce una **Descripción** opcional.
 5. Selecciona la duración del silenciamiento.
-6. Haz clic en **Mute** (Silenciar).
+6. Haz clic en **Mute** (Silenciar). Se cierra la ventana **Mute issue** (Silenciar incidente).
 
-### Anular el silenciamiento de un problema
+Para silenciar automáticamente los incidentes que cumplen determinados criterios, consulta [Reglas de silenciado][2].
 
-Los problemas silenciados se anulan automáticamente una vez transcurrido el tiempo especificado. También puedes anular el silenciamiento de un problema manualmente.
+## Anular el silencio de un incidente
 
-1. En el panel lateral de error de configuración, problema o riesgo de identidad, selecciona los recursos con el problema silenciado.
-2. Selecciona **Actions** > **Unmute** (Acciones > Desactivar silenciamiento).
-3. Selecciona un motivo para la anulación del silenciamiento, por ejemplo, no hay ninguna corrección pendiente, fue un error humano o ya no es un riesgo aceptado.
-4. Introduce una **Descripción** opcional.
-5. Haz clic en **Unmute** (Desactivar silenciamiento).
+Los incidentes silenciados se anulan automáticamente una vez transcurrido el tiempo especificado. También puedes anular el silencio de un incidente manualmente.
 
-### Auditar tus problemas silenciados
+1. Busca el desplegable de estado de clasificación del recurso.
+   - En los exploradores de errores de configuración, de riesgos de identidad o de vulnerabilidades, el desplegable se encuentra en la columna **Triage** (Clasificación) de cada recurso. Como alternativa, puedes seleccionar uno o más recursos y hacer clic en el desplegable **Set State** (Definir estado) que aparece, para poder anular el silencio de toda la selección a la vez.
+   - Cuando visualizas un recurso en un panel lateral, en **Next Steps** (Siguientes pasos), el desplegable está en **Triage** (Clasificación).
+2. Haz clic en **Muted** (Silenciado) para abrir el desplegable y luego selecciona un nuevo estado de clasificación. El estado de clasificación se actualiza inmediatamente para los recursos seleccionados.
 
-Para ver los problemas silenciados de tu organización:
+## Auditar tus incidentes silenciados
 
-- Ordenar por la columna **Silenciado** en el explorador de incidencias de Security Inbox y Misconfigurations.
-- Filtra el explorador de incidencias de Security Inbox, Misconfigurations e Identity Risks utilizando la faceta **Muted** (Silenciado).
+Para ver los incidentes silenciados de tu organización:
+
+1. Por defecto, todos los exploradores de incidentes ocultan los incidentes silenciados. Para ver los incidentes silenciados en los exploradores de incidentes de errores de configuración y riesgos de identidad, elimina el filtro `@workflow.triage.status:(open OR in-progress)` de la barra de búsqueda.
+1. Dependiendo del explorador de incidentes que estés utilizando, ordena o filtra los incidentes:
+   - En el explorador de incidentes de errores de configuración, ordena por la columna **Muted** (Silenciado).
+   - En los exploradores de incidentes de errores de configuración o riesgos de identidad, filtra los incidentes utilizando la faceta **Muted** (Silenciado).
+   - En el explorador de incidentes de vulnerabilidades, haz clic en la pestaña **Muted** (Silenciado).
 
 Para auditar el historial de silenciamiento de una configuración errónea:
 
 1. Abre el panel lateral de errores de configuración.
 2. Selecciona el recurso con la configuración errónea silenciada.
-3. En la pestaña **Overview** (Vista general), utiliza la **Resource evaluation over time** (Evaluación de recursos a lo largo del tiempo) para ver cuándo se silenció o desbloqueó la configuración errónea durante un periodo determinado (hasta seis meses).
+3. Haz clic en la pestaña **Timeline** (Línea temporal) para ver un historial cronológico de la configuración errónea. Pasa el ratón por encima de una acción de silenciar o anular el silencio para ver detalles adicionales, como el motivo del silencio, cuánto tiempo está previsto que dure el silencio y quién lo ha silenciado.
 
-{{< img src="security/csm/muted_finding_evaluation_over_time.png" alt="La evaluación del recurso a lo largo del tiempo muestra el historial de la configuración errónea incluidos periodos en los que estuvo silenciada" style="width:90%;">}}
-
-4. Haz clic en la pestaña **Timeline** (Línea temporal) para ver un historial cronológico de la configuración errónea. Pasa el ratón por encima de una acción de silenciar o anular el silenciamiento para ver detalles adicionales, como el motivo del silenciamiento, cuánto tiempo está previsto que dure el silenciamiento y quién lo ha silenciado.
-
-{{< img src="security/csm/muted_finding_timeline.png" alt="La pestaña Línea temporal muestra un historial cronológico del error de configuración, incluidos los detalles de cuándo se silenció una configuración errónea" style="width:90%;">}}
+{{< img src="security/csm/muted_finding_timeline-2.png" alt="La pestaña Timeline (Cronología) muestra un historial cronológico del error de configuración, incluyendo detalles de cuándo fue silenciada una notificación" style="width:90%;">}}
 
 ## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /es/security/default_rules/cis-aws-1.5.0-2.1.5/
+[1]: /es/security/default_rules/hkp-p6b-f7w/
+[2]: /es/security/automation_pipelines/mute

@@ -10,7 +10,7 @@ title: Google Cloud Private Service Connect 経由で Datadog に接続
 ---
 
 {{% site-region region="us,us3,gov,ap1" %}}
-<div class="alert alert-warning">この機能は、選択した Datadog サイトではサポートされていません。</div>
+<div class="alert alert-danger">この機能は、選択した Datadog サイトではサポートされていません。</div>
 {{% /site-region %}}
 
 {{% site-region region="us5" %}}

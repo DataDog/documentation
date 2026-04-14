@@ -68,19 +68,17 @@ Pour créer une application à observer dans Datadog :
 
 ## Configurer l'APM Datadog
 
-Pour configurer la solution APM de Datadog sans avoir à modifier le code de votre application ni le processus de déploiement, utilisez lʼinstrumentation APM en une étape :
+Pour configurer la solution APM de Datadog sans avoir à modifier le code de votre application ni le processus de déploiement, utilisez lʼinstrumentation APM en une étape. Vous pouvez aussi configurer la solution APM à l'aide des bibliothèques de [traçage de Datadog][8].
 
-<div class="alert alert-info"><strong>Note</strong> : <a href="https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/single-step-apm/">lʼinstrumentation APM en une étape</a> est en version bêta. Vous pouvez également configurer lʼAPM en utilisant <a href="https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/dd_libraries/">les bibliothèques de tracing de Datadog</a>.</div>
 
 1. Exécutez la commande d'installation :
 
    ```shell
-    DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="<YOUR_DD_SITE>" DD_APM_INSTRUMENTATION_ENABLED=host DD_ENV=<AGENT_ENV> bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
+    DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="<YOUR_DD_SITE>" DD_APM_INSTRUMENTATION_ENABLED=host DD_APM_INSTRUMENTATION_LIBRARIES=python:3 DD_ENV=<AGENT_ENV> bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
     ```
 
     Remplacez `<YOUR_DD_API_KEY>` par votre [clé dʼAPI Datadog][2], `<YOUR_DD_SITE>` par votre [site Datadog][7] et `<AGENT_ENV>` par lʼenvironnement sur lequel votre Agent est installé (par exemple, `development`).
 
-1. Démarrez une nouvelle session shell.
 1. Redémarrez les services sur votre host ou VM.
 1. Vérifiez que lʼAgent est exécuté :
 
@@ -142,7 +140,7 @@ Chaque fois que vous exécutez la commande `curl`, une nouvelle trace est envoy�
 
 1. Dans Datadog, accédez à [**APM** > **Services**][3]. Vous devriez voir un service Python nommé `hello` :
 
-   {{< img src="/getting_started/apm/service-catalog.png" alt="Le catalogue des services affiche le nouveau service Python." style="width:100%;" >}}
+   {{< img src="/getting_started/apm/service-catalog.png" alt="Le Software Catalog affiche le nouveau service Python." style="width:100%;" >}}
 
 1. Sélectionnez le service pour afficher ses métriques de performances, telles que la latence, le débit et les taux d'erreur.
 1. Accédez à [**APM** > **Traces**][4]. Vous devriez voir une trace pour le service `hello` :
@@ -221,3 +219,4 @@ Pour ajouter des instrumentations personnalisées :
 [5]: /fr/tracing/glossary/#instrumentation
 [6]: /fr/tracing/trace_collection/custom_instrumentation/
 [7]: /fr/getting_started/site/
+[8]: /fr/tracing/trace_collection/automatic_instrumentation/dd_libraries/

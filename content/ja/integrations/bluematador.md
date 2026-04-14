@@ -21,9 +21,9 @@ author:
   sales_email: support@bluematador.com
   support_email: support@bluematador.com
 categories:
-- アラート設定
+- アラート
 - 自動化
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/bluematador/README.md
 display_on_public_website: true

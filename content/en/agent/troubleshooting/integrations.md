@@ -1,5 +1,6 @@
 ---
 title: Getting Integrations Working
+description: "Troubleshoot Datadog integration configuration issues and resolve problems with YAML files, check status, and missing metrics."
 aliases:
     - /integrations/faq/issues-getting-integrations-working
 further_reading:

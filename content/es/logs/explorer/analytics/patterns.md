@@ -18,11 +18,13 @@ title: Agrupación de logs en patrones
 
 ## Información general
 
-Al agregar logs indexados por **Patrones**, los logs que tienen un `message` con estructuras similares se agrupan juntos. Opcionalmente, selecciona de uno a tres campos con facetas para agregar previamente tus logs en grupos antes de que se detecten patrones dentro de estas agrupaciones.
+En forma predeterminada, **Patrones de Logs** agrupa logs con valores similares para el campo `message` y agrupa los resultados por `Status` y `Service`. 
+
+Puedes seleccionar diferentes atributos de logs para agrupar los resultados.
 
 La vista **Patrones** es útil para detectar y filtrar patrones de error ruidosos que podrían hacerte pasar por alto otros problemas. La detección de patrones se basa en 10.000 muestras de log. Ajusta tu búsqueda para ver patrones limitados a un subconjunto específico de logs.
 
-{{< img src="logs/explorer/aggregations_patterns.png" alt="El Log Explorer que muestra logs agrupados por patrones" style="width:90%;" >}}
+{{< img src="Logs/explorer/pattern_cluster.png" alt="El Explorer de logs que muestra logs agrupados por patrones" style="width:90%;" >}}
 
 Los patrones admiten la visualización de [Lista][1]. Al hacer clic en un patrón en la lista se abre el panel lateral de patrones desde el que puede:
 
@@ -46,7 +48,7 @@ Por ejemplo, si estás investigando un problema, podrías ver cuántos hosts est
 
 {{< img src="logs/explorer/group/pattern_inspector_panel_1.png" alt="El panel de patrones que muestra la pestaña Inspector de patrones" style="width:90%;" >}}
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

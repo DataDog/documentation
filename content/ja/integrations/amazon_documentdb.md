@@ -3,8 +3,8 @@ categories:
 - クラウド
 - data stores
 - aws
-- ログの収集
-custom_kind: インテグレーション
+- log collection
+custom_kind: integration
 dependencies: []
 description: Amazon DocumentDB のメトリクスとログを監視
 doc_link: https://docs.datadoghq.com/integrations/amazon_documentdb/
@@ -58,7 +58,7 @@ Amazon DocumentDB から S3 バケットまたは CloudWatch のいずれかに�
     - [S3 バケットに手動トリガーを追加][5]
     - [CloudWatch ロググループに手動トリガーを追加][6]
 
-## 収集データ
+## 収集されるデータ
 
 ### メトリクス
 {{< get-metrics-from-git "amazon_documentdb" >}}
@@ -70,7 +70,7 @@ AWS から取得される各メトリクスには、dbinstanceidentifier、dbclu
 
 Amazon DocumentDB インテグレーションには、イベントは含まれません。
 
-### サービスチェック
+### サービス チェック
 
 Amazon DocumentDB インテグレーションには、サービスのチェック機能は含まれません。
 

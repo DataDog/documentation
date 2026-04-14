@@ -1,6 +1,8 @@
 ---
 aliases:
 - /es/tracing/guide/inferred-service-opt-in
+description: Descubre automáticamente dependencias de servicios como bases de datos
+  y colas mediante el análisis de solicitudes salientes.
 further_reading:
 - link: /tracing/services/service_page/
   tag: Documentación
@@ -14,19 +16,21 @@ Datadog detecta automáticamente las dependencias de un servicio instrumentado, 
 
 {{< img src="tracing/visualization/service/dependencies_section.png" alt="Mapa de dependencias de la página de servicios" style="width:90%;">}}
 
-{{< site-region region="ap1,us3,us5,eu,us" >}}
+{{< site-region region="ap1,us3,us5,eu,us,ap2" >}}
 
 Explora los servicios inferidos en el [Catálogo de software][1], filtrando las entradas por tipo de entidad, como bases de datos, colas o API de terceros. Cada [página de servicios][2] se ajusta al tipo de servicio que estás investigando. Por ejemplo, las páginas de servicios de bases de datos muestran información específica de las bases de datos y, si estás utilizando [Database Monitoring][3], incluyen datos de monitorización de estas bases de datos.
 
 ## Configurar servicios inferidos
-
-Para ver los servicios inferidos, debes habilitar algunas configuraciones. 
-A partir de la versión [7.60.0][1] del Datadog Agent, estas configuraciones están activadas por defecto. 
-
 {{< tabs >}}
-{{% tab "Agent v7.55.1 o posterior" %}}
+{{% tab "Agent v7.60.0+" %}}
+A partir de la versión [7.60.0][1] del Datadog Agent, no se necesita ninguna configuración manual para ver servicios inferidos. Las configuraciones necesarias —`apm_config.compute_stats_by_span_kind` y `apm_config.peer_tags_aggregation`— están activadas por defecto.
 
-Para las versiones [7.55.1][2] o posteriores del Datadog Agent, añade lo siguiente a tu archivo de configuración `datadog.yaml`:
+[1]: https://github.com/DataDog/datadog-agent/releases/tag/7.60.0
+
+{{% /tab %}}
+{{% tab "Agent v7.55.1 - v7.59.1" %}}
+
+Para las versiones [7.55.1][1] a [7.59.1][2] del Datadog Agent, añade lo siguiente a tu archivo de configuración `datadog.yaml`:
 
 {{< code-block lang="yaml" filename="datadog.yaml" collapsible="true" >}}
 
@@ -47,8 +51,8 @@ DD_APM_PEER_TAGS_AGGREGATION=true
 
 Si utilizas Helm, incluye estas variables de entorno en tu [archivo][3] `values.yaml`.
 
-[1]: https://github.com/DataDog/datadog-agent/releases/tag/7.60.0
-[2]: https://github.com/DataDog/datadog-agent/releases/tag/7.55.1
+[1]: https://github.com/DataDog/datadog-agent/releases/tag/7.55.1
+[2]: https://github.com/DataDog/datadog-agent/releases/tag/7.59.1
 [3]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/values.yaml
 {{% /tab %}}
 {{% tab "Agent v7.50.3 - v7.54.1" %}}
@@ -111,13 +115,13 @@ exporters:
 **Ejemplo**: [collector.yaml][2].
 
 [1]: https://github.com/open-telemetry/opentelemetry-collector-contrib/releases/tag/v0.95.0
-[2]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/collector.yaml#L335-L357
+[2]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/collector.yaml#L375-L395
 {{% /tab %}}
 {{< /tabs >}}
 
 ## Nombrar entidades inferidas
 
-Para determinar los nombres y los tipos de las dependencias de servicios inferidos, Datadog utiliza atributos de tramo (span) estándar y los asigna a atributos `peer.*`. Por ejemplo, las API externas inferidas utilizan el esquema de nomenclatura por defecto `net.peer.name` como `api.stripe.com`, `api.twilio.com` y `us6.api.mailchimp.com`. Las bases de datos inferidas utilizan el esquema de nomenclatura por defecto `db.instance`.
+Para determinar los nombres y tipos de las dependencias de servicio inferidas, Datadog utiliza atributos estándar de tramo y los asigna a atributos de `peer.*`. Por ejemplo, las API externas inferidas utilizan el esquema de nomenclatura predeterminado `net.peer.name` como `api.stripe.com`, `api.twilio.com` y `us6.api.mailchimp.com`. Las bases de datos inferidas utilizan el esquema de nomenclatura predeterminado `db.instance`. Puedes renombrar entidades inferidas creando [reglas de renombrado][5].
 
 ### Etiquetas (tags) pares
 
@@ -161,7 +165,7 @@ Con los servicios inferidos, las dependencias de servicios se detectan automáti
 
 Habilita `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED` para asegurarte de que ninguna integración Datadog defina nombres de servicios diferentes del nombre global del servicio por defecto. Esto también mejora la forma en que las conexiones servicio-a-servicio y los servicios inferidos son representados en las visualizaciones de Datadog, a través de todos los lenguajes de bibliotecas de rastreo e integraciones compatibles.
 
-<div class="alert alert-warning">La activación de esta opción puede afectar a métricas de APM, métricas de tramos personalizadas, análisis de trazas (traces), filtros de retención, análisis de datos confidenciales, monitores, dashboards o notebooks existentes que hacen referencia a los antiguos nombres de servicios. Actualiza estos recursos para utilizar la etiqueta global de servicio por defecto (<code>servicio:&lt;DD_SERVICE&gt;)</code>.</div>
+<div class="alert alert-danger">La activación de esta opción puede afectar a las métricas existentes de APM, las métricas personalizadas de tramo, los análisis de traza, los filtros de retención, los escaneos de datos confidenciales, los monitores, los dashboards o los notebooks que hacen referencia a los antiguos nombres de servicio. Actualiza estos activos para utilizar la etiqueta de servicio global predeterminada<code>(service:&lt;DD_SERVICE&gt;)</code>.</div>
 
 Para obtener instrucciones sobre cómo eliminar servicios anulados y migrar a servicios inferidos, consulta la guía [Anulación de servicios][4].
 
@@ -169,6 +173,8 @@ Para obtener instrucciones sobre cómo eliminar servicios anulados y migrar a se
 [2]: /es/tracing/services/service_page
 [3]: /es/database_monitoring/
 [4]: /es/tracing/guide/service_overrides
+[5]: /es/tracing/services/renaming_rules/
+
 {{< /site-region >}}
 {{< site-region region="gov" >}}
 <div class="alert alert-info">La función de servicios inferidos no está disponible por defecto en tu centro de datos. Rellena este <a href="https://docs.google.com/forms/d/1imGm-4SfOPjwAr6fwgMgQe88mp4Y-n_zV0K3DcNW4UA" target="_blank">formulario</a> para solicitar acceso.</div>

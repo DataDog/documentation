@@ -1,5 +1,6 @@
 ---
 title: Installing the trace Agent from source
+description: Learn how to install and compile the Datadog Trace Agent from source code using Go for development and testing purposes.
 
 aliases:
   - /tracing/faq/trace-agent-from-source/

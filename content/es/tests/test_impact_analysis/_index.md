@@ -16,7 +16,7 @@ further_reading:
 title: Test Impact Analysis
 ---
 
-<div class="alert alert-warning"> Esta función se conocía anteriormente como Intelligent Test Runner, y algunas etiquetas (tags) todavía contienen "itr".</div>
+<div class="alert alert-danger"> Esta función se conocía anteriormente como Intelligent Test Runner, y algunas etiquetas (tags) todavía contienen "itr".</div>
 
 ## Información general
 
@@ -32,7 +32,7 @@ Al minimizar el número de tests que se ejecutan por confirmación, Test Impact 
 
 Con la configuración predeterminada, hay situaciones conocidas que pueden hacer que Test Impact Analysis omita tests que deberían haberse ejecutado. En concreto, Test Impact Analysis no es capaz de detectar automáticamente cambios en:
 
-- Dependencias de biblioteca
+- Dependencias de librería
 - Opciones del compilador
 - Servicios externos
 - Cambios en los archivos de datos en los tests basados en datos

@@ -3,7 +3,7 @@ title: Use Custom JavaScript Assertions In Browser Tests
 
 description: Learn how to use custom JavaScript assertions in your Synthetic browser tests.
 further_reading:
-- link: '/synthetics/browser_tests/actions/'
+- link: '/synthetics/browser_tests/test_steps/'
   tag: 'Documentation'
   text: 'Learn about browser test steps'
 - link: '/synthetics/browser_tests/advanced_options/'
@@ -12,11 +12,16 @@ further_reading:
 - link: '/synthetics/guide/popup/#moving-popups'
   tag: 'Documentation'
   text: 'Learn how to handle pop-ups triggered at unknown times'
+- link: "https://www.datadoghq.com/blog/ambassador-browser-tests/"
+  tag: "Blog"
+  text: "How I helped my client scale their browser tests with Datadog"
 ---
 
 ## Overview
 
 This guide describes how you can test a user interface (UI) using custom JavaScript in a [browser test][1]. JavaScript assertions support synchronous and asynchronous code.
+
+<div class="alert alert-info">JavaScript assertions are not supported in Windows private locations.</div>
 
 To create an assertion using custom JavaScript:
 
@@ -103,4 +108,4 @@ return await loadingTask.promise.then(function(pdf) {
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /synthetics/browser_tests/
-[2]: /synthetics/browser_tests/actions/?tab=testanelementontheactivepage#assertion
+[2]: /synthetics/browser_tests/test_steps/?tab=testanelementontheactivepage#assertion

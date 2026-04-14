@@ -59,8 +59,8 @@ instances:
 
 ### 설정
 
-<div class="alert alert-warning">
-설정 파일과 검사 파일의 이름이 일치해야 합니다. 만약 검사 파일의 이름이 <code>mycheck.py </code>인 경우, 설정 파일의 이름은 <em>반드시</em> <code>mycheck.svl</code>이어야 합니다.
+<div class="alert alert-danger">
+구성 파일과 검사 파일의 이름이 일치해야 합니다. 검사의 이름이 <code>mycheck.py</code>인 경우 구성 파일의 이름은 </code>mycheck.yaml<code>이어야 <em>합니다</em>.
 </div>
 
 Openmetrics 검사에 대한 설정은 일반 [에이전트 검사][5]와 거의 같습니다. 주요 차이점은 변수 `openmetrics_endpoint`을 `check.yaml` 파일에 포함하는 것입니다. 이것은 `conf.d/kong.yaml`로 나뉩니다:
@@ -275,6 +275,6 @@ Prometheus 및 OpenMetrics 기본 통합에 대한 자세한 내용은 통합 [�
 [6]: https://github.com/DataDog/integrations-core/tree/master/datadog_checks_base/datadog_checks/base/checks/openmetrics/v2/base.py
 [7]: https://github.com/DataDog/integrations-core/blob/459e8c12a9c828a0b3faff59df69c2e1f083309c/openmetrics/datadog_checks/openmetrics/data/conf.yaml.example#L65-L104
 [8]: https://github.com/DataDog/integrations-core/blob/459e8c12a9c828a0b3faff59df69c2e1f083309c/datadog_checks_base/datadog_checks/base/checks/openmetrics/v2/base.py#L86-L87
-[9]: /ko/agent/guide/agent-commands/?tab=agentv6v7#agent-status-and-information
+[9]: /ko/agent/configuration/agent-commands/?tab=agentv6v7#agent-status-and-information
 [10]: https://datadoghq.dev/integrations-core/base/openmetrics/
 [11]: https://github.com/DataDog/integrations-core/blob/master/openmetrics/datadog_checks/openmetrics/data/conf.yaml.example

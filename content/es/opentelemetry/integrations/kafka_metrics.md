@@ -6,7 +6,7 @@ further_reading:
 title: Métricas de Kafka
 ---
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 La reasignación de métricas de OTel Kafka está en fase alfa pública. Está disponible en las versiones >= 0.93.0 de Collector. Si tienes algún comentario al respecto, ponte en contacto con el equipo de tu cuenta.
 </div>
 

@@ -92,7 +92,7 @@ Datadog와의 통합 3요소가 있습니다. 각각의 목표는 다릅니다.
 - **Datadog 클러스터 에이전트 BOSH 릴리스** - 단일 Datadog 클러스터 에이전트 작업을 배포합니다. 작업은 CAPI 및 BBS API를 쿼리해 클러스터 수준 및 애플리케이션 수준의 메타데이터를 수집하여 애플리케이션과 컨테이너에서 향상된 태깅 기능을 제공합니다.
 - **Datadog Firehose Nozzle** - 하나 이상의 Datadog Firehose Nozzle 작업을 배포합니다. 작업은 배포 환경의 Loggregator Firehose를 작동시켜 모든 컨테이너 외 메트릭을 Datadog에 전송합니다.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 이러한 통합은 최종 사용자가 아니라 Cloud Foundry 배포 관리자를 대상으로 합니다.
 </div>
 

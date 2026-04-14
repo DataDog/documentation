@@ -1,0 +1,1 @@
+Activa la sección **Enable Optional Group By** (Habilitar la agrupación opcional) si deseas agrupar eventos aunque falten valores. Si falta un valor, se genera un valor de muestra para que el log no quede excluido.

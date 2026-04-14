@@ -43,9 +43,9 @@ Para empezar:
     }
   }
   ```
-   Especifica `ApiURL` si utilizas una cuenta que no es de EE. UU. (por defecto es `https://api.datadoghq.com`). Por ejemplo, utiliza `https://api.datadoghq.eu` para una cuenta de la UE.
+   Especifica la `ApiURL`, si utilizas una cuenta en una región distinta de US1. Por ejemplo, utiliza `https://api.datadoghq.eu` para una cuenta en la región UE, o `https://api.us5.datadoghq.com/`, para una cuenta en la región US5.
 
-7. Una vez configurado el recurso, [crea tu stack de AWS ][3] que incluya cualquiera de los recursos de Datadog activados.
+7. Una vez configurado el recurso, [crea tu stack tecnológico AWS][3] que incluya cualquiera de los recursos de Datadog activados.
 
 Para más información sobre los comandos y flujos de trabajo disponibles, consulta la [documentación de AWS][4] oficial.
 

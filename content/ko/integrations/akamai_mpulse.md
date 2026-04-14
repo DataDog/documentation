@@ -50,7 +50,7 @@ Akamai mPulse 통합에는 `apiKey`와 `apiToken`이 필요합니다.
 
 `apiKey`는 자동 생성 값으로, 내 mPulse 포털에서 파악한 사이트의 데이터(비콘)를 식별하는 데 사용됩니다.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 "Apps" 메뉴 옵션과 `apiKey` 속성은 앱 관리자에게만 보입니다.
 </div>
 

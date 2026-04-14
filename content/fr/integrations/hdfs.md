@@ -103,7 +103,7 @@ Consultez la [documentation relative aux modèles d'intégration Autodiscovery][
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "hdfs_datanode" >}}
+{{< get-metrics-from-git "hdfs-datanode" >}}
 
 
 ### Événements
@@ -111,7 +111,7 @@ Consultez la [documentation relative aux modèles d'intégration Autodiscovery][
 Le check HDFS DataNode n'inclut aucun événement.
 
 ### Checks de service
-{{< get-service-checks-from-git "hdfs_datanode" >}}
+{{< get-service-checks-from-git "hdfs-datanode" >}}
 
 
 ## Dépannage
@@ -224,7 +224,7 @@ Consultez la [documentation relative aux modèles d'intégration Autodiscovery][
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "hdfs_namenode" >}}
+{{< get-metrics-from-git "hdfs-namenode" >}}
 
 
 ### Événements
@@ -232,7 +232,7 @@ Consultez la [documentation relative aux modèles d'intégration Autodiscovery][
 Le check HDFS NameNode n'inclut aucun événement.
 
 ### Checks de service
-{{< get-service-checks-from-git "hdfs_namenode" >}}
+{{< get-service-checks-from-git "hdfs-namenode" >}}
 
 
 ## Dépannage

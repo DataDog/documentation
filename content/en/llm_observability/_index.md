@@ -3,6 +3,18 @@ title: LLM Observability
 aliases:
     - /tracing/llm_observability/
 further_reading:
+- link: "https://www.datadoghq.com/blog/llm-observability-at-datadog-dashboards"
+  tag: "Blog"
+  text: "Building reliable dashboard agents with Datadog LLM Observability"
+- link: https://www.datadoghq.com/blog/manage-ai-cost-and-performance-with-datadog/
+  tag: Blog
+  text: "Driving AI ROI: How Datadog connects cost, performance, and infrastructure so you can scale responsibly"
+- link: https://www.datadoghq.com/blog/llm-otel-semantic-convention
+  tag: Blog
+  text: Datadog LLM Observability natively supports OpenTelemetry GenAI Semantic Conventions
+- link: https://www.datadoghq.com/blog/llm-aws-strands
+  tag: Blog
+  text: Gain visibility into Strands Agents workflows with Datadog LLM Observability
 - link: "https://www.datadoghq.com/blog/anthropic-integration-datadog-llm-observability/"
   tag: "Blog"
   text: "Monitor your Anthropic applications with Datadog LLM Observability"
@@ -12,20 +24,35 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/vllm-integration/"
   tag: "Blog"
   text: "Optimize LLM application performance with Datadog's vLLM integration"
+- link: "https://www.datadoghq.com/blog/datadog-gpu-monitoring/"
+  tag: "Blog"
+  text: "Optimize and troubleshoot AI infrastructure with Datadog GPU Monitoring"
+- link: "https://www.datadoghq.com/blog/llm-observability-bedrock-agents/"
+  tag: "Blog"
+  text: "Monitor agents built on Amazon Bedrock with Datadog LLM Observability"
+- link: "https://www.datadoghq.com/blog/monitor-mcp-servers/"
+  tag: "Blog"
+  text: "Identify common security risks in MCP servers"
+- link: "https://www.datadoghq.com/blog/detect-abuse-ai-infrastructure/"
+  tag: "Blog"
+  text: "Abusing AI infrastructure: How mismanaged credentials and resources expose LLM applications"
+- link: "https://www.datadoghq.com/blog/llm-observability-at-datadog-nlq"
+  tag: "Blog"
+  text: "How we cut our NLQ agent debugging time from hours to minutes with LLM Observability"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">LLM Observability is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
+{{< learning-center-callout header="Try Getting Started with LLM Observability in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/llm-obs-getting-started">}}
+  Learn how to monitor your LLM application's performance, costs, traces, token usage, and errors to identify and resolve issues.
+{{< /learning-center-callout >}}
 
 ## Overview
 
-With LLM Observability, you can monitor, troubleshoot, and evaluate your LLM-powered applications, such as chatbots. You can investigate the root cause of issues, monitor operational performance, and evaluate the quality, privacy, and safety of your LLM applications. 
+With LLM Observability, you can monitor, troubleshoot, and evaluate your LLM-powered applications, such as chatbots. You can investigate the root cause of issues, monitor operational performance, and evaluate the quality, privacy, and safety of your LLM applications.
 
 Each request fulfilled by your application is represented as a trace on the [**LLM Observability** page][1] in Datadog.
 
 {{< img src="llm_observability/traces.png" alt="A list of prompt-response pair traces on the LLM Observability page" style="width:100%;" >}}
- 
+
 A trace can represent:
 
 - An individual LLM inference, including tokens, error information, and latency
@@ -48,15 +75,28 @@ Monitor the cost, latency, performance, and usage trends for all your LLM applic
 
 ## Evaluate the quality and effectiveness of your LLM applications
 
-Identify problematic clusters and monitor the quality of responses over time with topical clustering and checks like sentiment, failure to answer, and so on.
+Understand what users are asking your LLM application, identify coverage gaps, and monitor the quality of responses over time with [Patterns][10] — automated hierarchical topic clustering of your production traffic.
 
-{{< img src="llm_observability/cluster_map/box.png" alt="The box packing layout displays clusters of traces represented by colored circles, and includes a panel listing clusters with topics, trace counts, and failure rates." style="width:100%;" >}}
+{{< img src="llm_observability/topic-detail.png" alt="Topic detail view showing scatter plot of interaction embeddings alongside a table of interactions with topic labels and confidence score" style="width:100%;" >}}
 
 ## Safeguard sensitive data and identify malicious users
 
 Automatically scan and redact any sensitive data in your AI applications and identify prompt injections, among other evaluations.
 
 {{< img src="llm_observability/prompt_injection.png" alt="An example of a prompt-injection attempt detected by LLM Observability" style="width:100%;" >}}
+
+## See anomalies highlighted as insights
+
+LLM Observability Insights provides a monitoring experience that helps users identify anomalies in their operational metrics—such as duration and error rate—and their [out-of-the-box (OOTB) evaluations][9].
+
+Outlier detection is performed across key dimensions:
+- Span name
+- Workflow type
+- [Patterns input/output topics][10]
+
+These outliers are analyzed over the past week and automatically surfaced in the corresponding time window selected by the user. This enables teams to proactively detect regressions, performance drifts, or unexpected behavior in their LLM applications.
+
+{{< img src="llm_observability/Overview_LLMO.png" alt="An 'Insights' banner across the top of the LLM Observability Monitor page. The banner displays 8 insights and has a View Insights button that leads to a side panel with further details." style="width:100%;" >}}
 
 ## Use integrations with LLM Observability
 
@@ -82,3 +122,5 @@ See the [Setup documentation][5] for instructions on instrumenting your LLM appl
 [6]: /llm_observability/quickstart
 [7]: https://app.datadoghq.com/dash/integration/llm_operational_insights
 [8]: /llm_observability/setup/auto_instrumentation
+[9]: /llm_observability/evaluations/managed_evaluations
+[10]: /llm_observability/monitoring/patterns

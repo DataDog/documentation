@@ -33,7 +33,7 @@ categories:
 - data stores
 - マーケットプレイス
 - メトリクス
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -120,4 +120,4 @@ tile:
 [4]: mailto:support@rapdev.io
 
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/rapdev-influxdb" target="_blank">こちらをクリック</a>してください。
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。利用するには、<a href="https://app.datadoghq.com/marketplace/app/rapdev-influxdb" target="_blank">Marketplace でこのアプリケーションを購入してください</a>。

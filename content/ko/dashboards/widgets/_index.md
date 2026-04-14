@@ -154,7 +154,7 @@ title: 위젯
 
 ## 위젯 복사 및 붙여넣기
 
-<div class="alert alert-warning">이 기능을 사용하려면 Organization Settings에서 <a href="https://app.datadoghq.com/organization-settings/public-sharing/settings"><strong>Static Public Data Sharing</strong></a>을 활성화해야 합니다.</div>
+<div class="alert alert-danger">이 기능을 사용하려면 Organization Settings에서 <a href="https://app.datadoghq.com/organization-settings/public-sharing/settings"><strong>Static Public Data Sharing</strong></a>을 활성화해야 합니다.</div>
 
 [대시보드][4], [노트북][5], [APM 서비스][6], [APM 리소스][7] 페이지에서 `Ctrl + C`(Mac의 경우 `Cmd + C`)를 사용하거나 공유 아이콘을 선택하여 위젯을 복사할 수 있습니다. 
 

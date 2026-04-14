@@ -172,7 +172,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "ibm_was" >}}
+{{< get-metrics-from-git "ibm-was" >}}
 
 
 ### イベント
@@ -180,7 +180,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 IBM WAS には、イベントは含まれません。
 
 ### サービスチェック
-{{< get-service-checks-from-git "ibm_was" >}}
+{{< get-service-checks-from-git "ibm-was" >}}
 
 
 ## トラブルシューティング

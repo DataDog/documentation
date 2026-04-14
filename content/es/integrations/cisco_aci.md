@@ -18,8 +18,11 @@ assets:
       metadata_path: assets/service_checks.json
     source_type_id: 210
     source_type_name: Cisco ACI
+  logs:
+    source: cisco-aci
   monitors:
     CPU usage is high for Cisco ACI device: assets/monitors/cpu_high.json
+    Cisco ACI critical severity fault: assets/monitors/critical_fault.json
     Health score of device is critical: assets/monitors/critical_health_score.json
     Interface for a Cisco ACI device is down: assets/monitors/interface_down.json
 author:
@@ -28,6 +31,7 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
+- log collection
 - network
 custom_kind: integración
 dependencies:
@@ -37,7 +41,7 @@ draft: falso
 git_integration_title: cisco_aci
 integration_id: cisco-aci
 integration_title: CiscoACI
-integration_version: 4.1.0
+integration_version: 4.7.0
 is_public: verdadero
 manifest_version: 2.0.0
 name: cisco_aci
@@ -53,13 +57,14 @@ tile:
   - Supported OS::Linux
   - Supported OS::macOS
   - Supported OS::Windows
-  - Category::Red
+  - Category::Recopilación de logs
+  - Category::Network
   - Offering::Integration
-  configuration: README.md#Configuración
+  configuration: README.md#Setup
   description: Rastrea el rendimiento y el uso de Cisco ACI.
   media: []
-  overview: README.md#Información general
-  support: README.md#Soporte
+  overview: README.md#Overview
+  support: README.md#Support
   title: CiscoACI
 ---
 
@@ -88,7 +93,7 @@ El check de Cisco ACI está incluido con el Agent, así que simplemente [instala
 
 #### Host
 
-A fin de configurar este check para un Agent que se ejecuta en un host:
+Para configurar este check para un Agent que se ejecuta en un host:
 
 1. Edita el archivo `cisco_aci.d/conf.yaml`, que se encuentra en la carpeta `conf.d/` en la raíz del [directorio de configuración del Agent][1]. Consulta el [cisco_aci.d/conf.yaml de ejemplo][2] para conocer todas las opciones de configuración disponibles:
 
@@ -121,9 +126,20 @@ A fin de configurar este check para un Agent que se ejecuta en un host:
         #   - <TENANT_2>
 
         ## @param send_ndm_metadata - boolean - optional - default: false
-        ## Set to `true` to enable Network Device Monitoring metadata (for devices and interfaces) to be sent.
+        ## Set to `true` to enable Network Device Monitoring metadata (for devices, interfaces, topology) to be sent
+        ## and to allow Cisco ACI fault collection to be enabled.
         #
         # send_ndm_metadata: false
+
+        ## @param send_faultinst_faults - boolean - optional - default: false
+        ## Set to `true` to enable collection of Cisco ACI faultInst faults as logs.
+        #
+        # send_faultinst_faults: false
+
+        ## @param send_faultdelegate_faults - boolean - optional - default: false
+        ## Set to `true` to enable collection of Cisco ACI faultDelegate faults as logs.
+        #
+        # send_faultdelegate_faults: false
    ```
 
    *NOTA*: Asegúrate de especificar todos los inquilinos para la integración para recopilar métricas sobre aplicaciones, EPG, etc.
@@ -136,7 +152,7 @@ A fin de configurar este check para un Agent que se ejecuta en un host:
 {{% /tab %}}
 {{% tab "Contenedores" %}}
 
-#### En contenedores
+#### Contenedores
 
 En el caso de los entornos en contenedores, consulta las [plantillas de integración de Autodiscovery][1] para obtener orientación sobre la aplicación de los parámetros que se indican a continuación.
 
@@ -172,7 +188,7 @@ El check de Cisco ACI envía fallas de inquilino como eventos.
 {{< get-service-checks-from-git "cisco_aci" >}}
 
 
-## Resolución de problemas
+## Solucionar problemas
 
 ### Métricas `cisco_aci.tenant.*` faltantes
 Si faltan las métricas `cisco_aci.tenant.*`, puedes ejecutar el script `test/cisco_aci_query.py` para consultar manualmente el endpoint del inquilino.

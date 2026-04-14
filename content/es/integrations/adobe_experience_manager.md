@@ -13,7 +13,7 @@ doc_link: /integrations/adobe_experience_manager/
 further_reading:
 - link: logs/
   tag: Documentación
-  text: Gestión de logs
+  text: Gestión de Logs
 has_logo: true
 integration_id: Adobe
 integration_title: Adobe Experience Manager
@@ -23,21 +23,17 @@ public_title: Datadog y Adobe Experience Manager
 short_description: Recopila logs para realizar un seguimiento de errores, de tiempo
   de respuesta de solicitudes, etc.
 supported_os:
-- Linux
+- linux
 - mac_os
-- Windows
+- windows
 title: Adobe Experience Manager
 ---
-
-{{< site-region region="us3,ap1" >}}
-<div class="alert alert-warning">La integración de Adobe Experience Manager no está disponible en el <a href="/getting_started/site">sitio Datadog</a> seleccionado ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
 
 ## Información general
 
 Recopila logs de Adobe Experience Manager para realizar un seguimiento de errores, de tiempo de respuesta de solicitudes y de páginas web con un rendimiento deficiente.
 
-## Configuración
+## Instalación
 
 ### Instalación
 
@@ -69,11 +65,7 @@ _Disponible para la versión 6.0 o posterior del Agent_
 
 ## Solucionar problemas
 
-¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][4].
-
-## Leer más
-
-{{< partial name="whats-next/whats-next.html" >}}
+¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia técnica de Datadog][4].
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: /es/agent/guide/agent-configuration-files/#agent-configuration-directory

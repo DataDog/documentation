@@ -2,10 +2,10 @@
 further_reading:
 - link: /tracing/trace_collection/library_config/go/
   tag: Documentación
-  text: Opciones adicionales de configuración de la biblioteca de rastreo
+  text: Opciones adicionales de configuración de la librería de rastreo
 - link: /tracing/trace_collection/dd_libraries/go/
   tag: Documentación
-  text: Instrucciones de configuración detalladas de la biblioteca de rastreo
+  text: Instrucciones de configuración detalladas de la librería de rastreo
 - link: /tracing/trace_collection/compatibility/go/
   tag: Documentación
   text: Marcos de Go compatibles para la instrumentación automática
@@ -17,7 +17,7 @@ further_reading:
   text: Mecanismos de ingesta
 - link: https://github.com/DataDog/dd-trace-Go
   tag: Código fuente
-  text: Repositorio de código fuente abierto de la biblioteca de rastreo
+  text: Repositorio de código fuente abierto de la librería de rastreo
 title: 'Tutorial: Activación del rastreo para una aplicación Go en Amazon ECS con
   EC2'
 ---
@@ -105,7 +105,7 @@ Tu aplicación (sin el rastreo activado) está en un contenedor y está disponib
 
 ### Despliegue de la aplicación
 
-Inicia la aplicación y envía algunas solicitudes sin rastreo. Después de haber visto cómo funciona la aplicación, la instrumentarás utilizando la biblioteca de rastreo y el Datadog Agent.
+Inicia la aplicación y envía algunas solicitudes sin rastreo. Después de haber visto cómo funciona la aplicación, la instrumentarás utilizando la librería de rastreo y el Datadog Agent.
 
 Para comenzar, utiliza un script de Terraform para realizar el despliegue en Amazon ECS:
 
@@ -434,11 +434,11 @@ El rastreo de una única aplicación es un buen comienzo, pero el verdadero valo
 {{< img src="tracing/guide/tutorials/tutorial-go-host-distributed.png" alt="Una gráfica de llamas para una traza distribuida." style="width:100%;" >}}
 
 Esta gráfica de llamas combina interacciones de múltiples aplicaciones:
-- El primer tramo es una solicitud POST enviada por el usuario y gestionada por el enrutador `chi` a través de la biblioteca `go-chi` compatible.
+- El primer tramo es una solicitud POST enviada por el usuario y gestionada por el enrutador `chi` a través de la librería `go-chi` compatible.
 - El segundo tramo es una función `createNote` que fue rastreada manualmente por la función `makeSpanMiddleware`. La función creó un tramo a partir del contexto de la solicitud HTTP.
-- El siguiente tramo es la solicitud enviada por la aplicación de notas utilizando la biblioteca `http` compatible y el cliente inicializado en el archivo `main.go`. Esta solicitud GET se envía a la aplicación de calendario. Los tramos de la aplicación de calendario aparecen en azul porque son servicios independientes.
+- El siguiente tramo es la solicitud enviada por la aplicación de notas utilizando la librería `http` compatible y el cliente inicializado en el archivo `main.go`. Esta solicitud GET se envía a la aplicación de calendario. Los tramos de la aplicación de calendario aparecen en azul porque son servicios independientes.
 - Dentro de la aplicación de calendario, un enrutador `go-chi` gestiona la solicitud GET y la función `GetDate` se rastrea manualmente con su propio tramo bajo la solicitud GET.
-- Por último, la llamada `db` púrpura es su propio servicio de la biblioteca `sql` compatible. Aparece en el mismo nivel que la solicitud `GET /Calendar` porque ambas son llamadas por el tramo primario `CreateNote`.
+- Por último, la llamada `db` púrpura es su propio servicio de la librería `sql` compatible. Aparece en el mismo nivel que la solicitud `GET /Calendar` porque ambas son llamadas por el tramo primario `CreateNote`.
 
 Cuando hayas terminado de explorar, limpia todos los recursos y elimina los despliegues:
 

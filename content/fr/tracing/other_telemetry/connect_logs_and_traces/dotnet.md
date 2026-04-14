@@ -37,7 +37,7 @@ Le traceur .NET prend en charge les bibliothèques de logging suivantes :
 
 Vérifiez que la collecte de logs est activée dans l'Agent Datadog et que la [configuration de l'Agent de log][15] pour le suivi des fichiers spécifiés est définie sur `source: csharp`, afin que les pipelines de log puissent parser les fichiers de log. Pour en savoir plus, consultez la section [Collecte de logs avec C#][7]. Si la `source` est définie sur une valeur autre que `csharp`, vous devrez peut-être ajouter un [remappeur de traces][8] vers le pipeline de traitement de logs approprié pour que la mise en corrélation fonctionne correctement.
 
-<div class="alert alert-warning"><strong>Remarque :</strong> la collecte automatique de logs fonctionne uniquement pour les logs au format JSON. Pour les autres formats, utilisez des règles de parsing personnalisées.</div>
+<div class="alert alert-danger"><strong>Remarque :</strong> la collecte automatique de logs fonctionne uniquement pour les logs au format JSON. Pour les autres formats, utilisez des règles de parsing personnalisées.</div>
 
 ## Configurer l'injection dans les logs
 
@@ -51,7 +51,7 @@ Pour injecter des identificateurs de corrélation dans vos messages de log, suiv
 {{< tabs >}}
 {{% tab "Serilog" %}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>Remarque : </strong>depuis la version 2.0.1 du traceur .NET, l'injection automatique pour la bibliothèque de journalisation Serilog requiert l'instrumentation automatique de l'application.
 </div>
 
@@ -68,7 +68,7 @@ Pour injecter automatiquement des identificateurs de corrélation dans vos messa
 {{% /tab %}}
 {{% tab "log4net" %}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>Remarque : </strong>depuis la version 1.29.0 du traceur .NET, l'injection automatique pour la bibliothèque de journalisation log4net requiert l'instrumentation automatique de l'application.
 </div>
 
@@ -113,7 +113,7 @@ Pour obtenir d'autres exemples, consultez le [projet d'injection automatique des
 {{% /tab %}}
 {{% tab "NLog" %}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>Remarque : </strong>depuis la version 2.0.1 du traceur .NET, l'injection automatique pour la bibliothèque de journalisation NLog requiert l'instrumentation automatique de l'application.
 </div>
 

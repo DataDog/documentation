@@ -28,7 +28,7 @@ version: '1.0'
 
 ## Présentation
 
-<div class="alert alert-danger">L'intégration Express est obsolète et est remplacée par l'APM Datadog. L'APM Datadog génère les mêmes <a href="https://docs.datadoghq.com/tracing/runtime_metrics/nodejs/">métriques</a> que l'intégration Express et offre de nombreuses autres fonctionnalités et intégrations. Datadog vous conseille vivement de passer à l'<a href="https://docs.datadoghq.com/tracing/connect_logs_and_traces/nodejs/">APM</a>, étant donné que l'intégration Express ne recevra plus aucune mise à jour.</div>
+<div class="alert alert-warning">L'intégration Express est obsolète et est remplacée par l'APM Datadog. L'APM Datadog génère les mêmes <a href="https://docs.datadoghq.com/tracing/runtime_metrics/nodejs/">métriques</a> que l'intégration Express et offre de nombreuses autres fonctionnalités et intégrations. Datadog vous conseille vivement de passer à l'<a href="https://docs.datadoghq.com/tracing/connect_logs_and_traces/nodejs/">APM</a>, étant donné que l'intégration Express ne recevra plus aucune mise à jour.</div>
 
 Ajoutez le [middleware connect-datadog][1] de Datadog à votre application pour :
 

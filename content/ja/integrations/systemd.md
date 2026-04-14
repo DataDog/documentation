@@ -24,7 +24,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - OS & システム
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/systemd/README.md
 display_on_public_website: true
@@ -102,6 +102,37 @@ docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
               -e DD_API_KEY=<YOUR_API_KEY> \
               datadog/agent:latest
 ```
+
+#### Helm
+
+Helm 構成では、Datadog Agent をセットアップして、`kubelet.service` や `ssh.service` などの systemd ユニットを監視できます。これは、コンテナー内で systemd 関連のファイルやディレクトリにアクセスするための volumeMount と volume を定義することで実現します。例:
+
+```bash
+datadog:
+  #(...)
+  confd:      
+    # SystemD 用のカスタム構成ファイル
+    # 例: https://github.com/DataDog/datadog-agent/blob/main/cmd/agent/dist/conf.d/systemd.d/conf.yaml.example
+
+    systemd.yaml: |-
+      init_config:
+      instances:
+        - unit_names:
+            - kubelet.service
+            - ssh.service
+
+agents:
+  # SystemD ソケット (/run/systemd/private) 用のカスタム マウント
+  volumeMounts:
+    - name: systemd
+      mountPath: /host/run/systemd/ # ボリュームがコンテナ内でマウントされるパス
+
+  volumes:
+    - name: systemd
+      hostPath:
+        path: /run/systemd/ # ホスト マシン上でコンテナにマウントされるパス
+```
+
 
 {{% /tab %}}
 {{< /tabs >}}

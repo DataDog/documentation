@@ -12,10 +12,10 @@ products:
   name: 클라우드 SIEM
   url: /security/cloud_siem/
 - icon: cloud-security-management
-  name: 클라우드 보안 관리
+  name: 클라우드 보안
   url: /security/cloud_security_management/
 - icon: app-sec
-  name: 애플리케이션 보안 관리
+  name: 앱 및 API 보호
   url: /security/application_security/
 title: Datadog 보안 이벤트 감사
 ---
@@ -30,7 +30,7 @@ Datadog 보안에서 수행한 작업으로 생성된 감사 로그를 보려면
 
 {{% audit-trail-security-platform %}}
 
-## 애플리케이션 보안 관리
+## 앱 및 API 보호
 
 {{% audit-trail-asm %}}
 

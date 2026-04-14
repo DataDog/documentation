@@ -89,7 +89,7 @@ Metric Emitter (Datadog):
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "concourse_ci" >}}
+{{< get-metrics-from-git "concourse-ci" >}}
 
 
 ### 이벤트

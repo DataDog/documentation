@@ -100,7 +100,7 @@ Les paramètres sont définis comme suit :
 
 ### Durée
 
-<div class="alert alert-warning">Datadog recommande <a href="/tracing/guide/ddsketch_trace_metrics/">de tracer les métriques de distribution avec DDSketch</a>.</div>
+<div class="alert alert-danger">Datadog recommande <a href="/tracing/guide/ddsketch_trace_metrics/">de tracer les métriques de distribution avec DDSketch</a>.</div>
 
 `trace.<SPAN_NAME>.duration`
 : **Prérequis :** cette métrique est disponible pour tous les services APM.<br>
@@ -112,7 +112,7 @@ Cette métrique ne prend pas en charge les agrégations par centile. Lisez la se
 
 ### Duration by
 
-<div class="alert alert-warning">Datadog recommande <a href="/tracing/guide/ddsketch_trace_metrics/">de tracer les métriques de distribution avec DDSketch</a>.</div>
+<div class="alert alert-danger">Datadog recommande <a href="/tracing/guide/ddsketch_trace_metrics/">de tracer les métriques de distribution avec DDSketch</a>.</div>
 
 `trace.<NOM_SPAN>.duration.by_http_status`
 : **Prérequis :** cette métrique est disponible pour les services APM HTTP/WEB tant que des métadonnées HTTP sont fournies.<br>

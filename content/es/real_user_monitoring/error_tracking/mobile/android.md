@@ -33,7 +33,7 @@ Si aún no has configurado el SDK para Android en Datadog, sigue las [instruccio
 
 1. Añade la última versión del [SDK de Android][4] a tus dependencias de Gradle.
 2. Configura `env` y `variant` de su aplicación al [inicializar el SDK][5].
-3. Ejecuta las tareas Gradle para cargar tu archivo de asignación Proguard/R8 y los archivos de símbolos NDK a Datadog para acceder a trazas (traces) de stack tecnológico desofuscadas. 
+3. Ejecuta las tareas Gradle para cargar tu archivo de asignación Proguard/R8 y los archivos de símbolos NDK a Datadog para acceder a trazas (traces) de stack tecnológico desofuscadas.
 
 Para cualquier error, puedes acceder a la ruta del archivo, al número de línea y a un fragmento de código para cada marco de la traza de stack tecnológico.
 
@@ -41,11 +41,11 @@ Para cualquier error, puedes acceder a la ruta del archivo, al número de línea
 
 Tu aplicación Android puede estar ejecutando código nativo (C/C++) por razones de rendimiento o reutilización de código. Para habilitar la notificación de errores NDK, utiliza el complemento NDK Datadog.
 
-1. Añade la dependencia de Gradle declarando la biblioteca como dependencia en tu archivo `build.gradle`:
+1. Añade la dependencia de Gradle declarando la librería como dependencia en tu archivo `build.gradle`:
 
    ```groovy
     dependencies {
-        implementation "com.datadoghq:dd-sdk-android-ndk:x.x.x" 
+        implementation "com.datadoghq:dd-sdk-android-ndk:x.x.x"
         //(...)
     }
    ```
@@ -86,8 +86,8 @@ Los archivos de asignación se utilizan para desofuscar trazas de stack tecnoló
 
 Dependiendo de la versión del [complemento Gradle de Android][1], la coincidencia de trazas de stack tecnológico y archivos de asignación se basa en diferentes campos:
 
-- La versión 1.13.0 utiliza el campo `build_id` 
-- Las versiones más antiguas utilizan una combinación de los campos `service`, `version` y `variant` 
+- La versión 1.13.0 utiliza el campo `build_id`
+- Las versiones más antiguas utilizan una combinación de los campos `service`, `version` y `variant`
 
 ### Carga de tu archivo de asignación
 

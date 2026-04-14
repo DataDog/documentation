@@ -55,7 +55,7 @@ draft: false
 git_integration_title: istio
 integration_id: istio
 integration_title: Istio
-integration_version: 8.0.0
+integration_version: 8.1.0
 is_public: true
 manifest_version: 2.0.0
 name: istio
@@ -101,7 +101,7 @@ tile:
 Datadog は、Istio 環境のあらゆる側面を監視するため、以下を実現できます。
 - [ログ](#log-collection)を使用して、Envoy および Istio の Control Plane の健全性を評価。
 - [リクエスト、帯域幅、リソース消費のメトリクス](#metrics)でサービスメッシュのパフォーマンスを詳しく確認。
-- [ネットワークパフォーマンスモニタリング][1]で、コンテナ、ポッド、サービス間のネットワークコミュニケーションをメッシュ状にマッピング。
+- [Cloud Network Monitoring][1] で、コンテナ、ポッド、サービス間のネットワークコミュニケーションをメッシュ状にマッピング。
 - [APM[[2] でメッシュを実行してアプリケーションの分散型トレースの詳細を確認。
 
 Istio 環境での Datadog の使用について、詳細は[モニターのブログ記事をご参照ください][3]。
@@ -174,6 +174,7 @@ ad.datadoghq.com/discovery.checks: |
     }
   }
 ```
+**注**: Autodiscovery Annotations v2 の構文は Agent v7.36 以降でサポートされています。
 
 このアノテーションは、このポッド内にある Istio コンテナのデフォルトコンテナ名に一致するコンテナ `discovery` を指定します。もし異なる場合は、このアノテーション `ad.datadoghq.com/<CONTAINER_NAME>.checks` を、お使いの Istio コンテナの名前 (`.spec.containers[i].name`) に置き換えてください。
 
@@ -321,8 +322,8 @@ instances:
     metrics:
     - '.*'
     exclude_metrics:
-      - istio_*
-      - envoy_*
+      - istio_.*
+      - envoy_.*
 
 ```
 

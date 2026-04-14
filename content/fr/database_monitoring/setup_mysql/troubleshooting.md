@@ -2,9 +2,6 @@
 description: Dépannage de la solution Database Monitoring
 title: Dépannage de la solution Database Monitoring pour MySQL
 ---
-{{< site-region region="us5,gov" >}}
-<div class="alert alert-warning">La solution Database Monitoring n'est pas prise en charge pour ce site.</div>
-{{< /site-region >}}
 
 Cette page décrit les problèmes courants liés à la configuration et à l'utilisation de la solution Database Monitoring avec MySQL et explique comment les résoudre. Datadog recommande de rester sur la dernière version stable de l'Agent et de suivre les dernières [instructions de configuration][1], car elles peuvent changer en fonction des versions de l'Agent.
 
@@ -87,6 +84,18 @@ DD_LOG_LEVEL=debug DBM_THREADED_JOB_RUN_SYNC=true agent check sqlserver -t 2
 
 Une partie ou l'intégralité des requêtes ne présentent pas de plans. Ce problème peut être causé par des commandes de requête non prises en charge, des requêtes effectuées par des applications client non prises en charge, un Agent obsolète ou une configuration de base de données incomplète. Vous trouverez ci-dessous les causes possibles de l'absence de plans d'exécution.
 
+#### Consumer d'instructions d'événements manquant {#events-statements-consumer-missing}
+Pour capturer les plans d'exécution, vous devez activer un consumer d'instructions d'événements. Pour ce faire, ajoutez l'option suivante à vos fichiers de configuration (par exemple, `mysql.conf`) :
+```
+performance-schema-consumer-events-statements-current=ON
+```
+
+Datadog recommande également d'activer les éléments suivants :
+```
+performance-schema-consumer-events-statements-history-long=ON
+```
+Cette option active le suivi d'un plus grand nombre de requêtes récentes sur tous les threads. L'activer augmente la probabilité de capturer les détails d'exécution des requêtes peu fréquentes.
+
 #### La procédure des plans d'exécution est manquante {#procedure-plans-execution-manquante}
 L'Agent nécessite que la procédure `datadog.explain_statement(...)` soit présente dans le schéma `datadog`. Lisez les [instructions de configuration][1] pour en savoir plus sur la création du schéma `datadog`.
 
@@ -143,11 +152,23 @@ La requête n'a peut-être pas été sélectionnée pour être ajoutée dans l'�
 
 Avant de suivre ces étapes pour diagnostiquer un problème de métriques de requête manquantes, assurez-vous que l'Agent s'exécute correctement et que vous avez suivi [les étapes pour diagnostiquer une absence de données de l'Agent](#aucune-donnee-ne-s-affiche-apres-la-configuration-de-database-monitoring). Vous trouverez ci-dessous les causes possibles de l'absence de métriques de requête.
 
+### Métriques d'index manquantes
+
+Si l'Agent affiche cette erreur :
+```
+Error querying mysql.innodb_index_stats: (1142, "SELECT command denied to user 'datadog'@'172.20.0.5' for table 'innodb_index_stats'")
+```
+Résolvez l'erreur en accordant à l'utilisateur `datadog` le privilège SELECT pour collecter les métriques d'index :
+
+```sql
+GRANT SELECT ON mysql.innodb_index_stats TO datadog@'%';
+```
+
 #### L'option `performance_schema` n'est pas activée {#performance-schema-non-active}
 L'Agent nécessite que l'option `performance_schema` soit activée. Elle est activée par défaut par MySQL, mais peut être désactivée dans la configuration ou par votre fournisseur de solutions cloud. Suivez les [instructions de configuration][1] pour activer cette option.
 
 #### Limitation de Google Cloud SQL
-Le host est géré par Google Cloud SQL et ne prend pas en charge l'option `performance_schema`. En raison de limites liées à Google Cloud SQL, la solution Database Monitoring de Datadog [n'est pas prise en charge sur les instances avec moins de 26 Go de RAM][2].
+Le host est géré par Google Cloud SQL et ne prend pas en charge l'option `performance_schema`. En raison de limites liées à Google Cloud SQL, la solution Database Monitoring de Datadog [n'est pas prise en charge sur les instances avec moins de 16 Go de RAM][6].
 
 ### Certaines requêtes sont manquantes
 
@@ -162,7 +183,7 @@ Si vous recevez des données pour certaines requêtes mais que d'autres sont man
 
 ### Les échantillons de requête sont tronqués
 
-Il est possible que seule une partie du texte SQL ne s'affiche pour les requêtes longues en raison de la configuration de la base de données. Des ajustements sont nécessaires pour s'adapter à votre charge de travail.
+Il est possible que seule une partie du texte SQL ne s'affiche pour les requêtes longues en raison de la configuration de la base de données. Des ajustements sont nécessaires pour l'adapter à votre workload.
 
 La longueur de texte SQL MySQL visible par l'Agent Datadog est déterminée par les [variables système][8] suivantes :
 
@@ -173,6 +194,8 @@ performance_schema_max_sql_text_length=4096
 ```
 
 ### Les activités de requête sont manquantes
+
+<div class="alert alert-danger">La collecte d'activité de requêtes et d'événements d'attente n'est pas prise en charge pour Flexible Server, car ces fonctionnalités nécessitent des paramètres MySQL qui ne sont pas disponibles sur un host Flexible Server.</div>
 
 Avant de suivre ces étapes pour diagnostiquer un problème d'activités de requête manquantes, assurez-vous que l'Agent s'exécute correctement et que vous avez suivi [les étapes pour diagnostiquer une absence de données de l'Agent](#aucune-donnee-ne-s-affiche-apres-la-configuration-de-database-monitoring). Vous trouverez ci-dessous les causes possibles de l'absence d'activités de requête.
 
@@ -203,10 +226,42 @@ Le tag `schema` (également désigné « database ») est uniquement présent 
 
 Si aucune base de données par défaut n'est configurée pour une connexion, alors les requêtes effectuées par cette connexion ne présentent pas le tag `schema`.
 
+## Limitations connues de MariaDB
+
+### Métriques InnoDB incompatibles
+
+Les métriques InnoDB suivantes ne sont pas disponibles pour certaines versions de MariaDB :
+
+| Nom de la métrique                             | Versions MariaDB        |
+| --------------------------------------- | ----------------------- |
+| `mysql.innodb.hash_index_cells_total`   | 10.5, 10.6, 10.11, 11.1 |
+| `mysql.innodb.hash_index_cells_used`    | 10.5, 10.6, 10.11, 11.1 |
+| `mysql.innodb.os_log_fsyncs`            | 10.11, 11.1             |
+| `mysql.innodb.os_log_pending_fsyncs`    | 10.11, 11.1             |
+| `mysql.innodb.os_log_pending_writes`    | 10.11, 11.1             |
+| `mysql.innodb.pending_log_flushes`      | 10.11, 11.1             |
+| `mysql.innodb.pending_log_writes`       | 10.5, 10.6, 10.11, 11.1 |
+| `mysql.innodb.pending_normal_aio_reads` | 10.5, 10.6, 10.11, 11.1 |
+| `mysql.innodb.pending_normal_aio_writes`| 10.5, 10.6, 10.11, 11.1 |
+| `mysql.innodb.rows_deleted`             | 10.11, 11.1             |
+| `mysql.innodb.rows_inserted`            | 10.11, 11.1             |
+| `mysql.innodb.rows_updated`             | 10.11, 11.1             |
+| `mysql.innodb.rows_read`                | 10.11, 11.1             |
+| `mysql.innodb.s_lock_os_waits`          | 10.6, 10.11, 11.1       |
+| `mysql.innodb.s_lock_spin_rounds`       | 10.6, 10.11, 11.1       |
+| `mysql.innodb.s_lock_spin_waits`        | 10.6, 10.11, 11.1       |
+| `mysql.innodb.x_lock_os_waits`          | 10.6, 10.11, 11.1       |
+| `mysql.innodb.x_lock_spin_rounds`       | 10.6, 10.11, 11.1       |
+| `mysql.innodb.x_lock_spin_waits`        | 10.6, 10.11, 11.1       |
+
+### Plans d'exécution MariaDB
+
+MariaDB ne produit pas le même format JSON que MySQL pour les plans d'exécution. Certains champs des plans d'exécution peuvent être absents des plans d'exécution MariaDB, notamment `cost_info`, `rows_examined_per_scan`, `rows_produced_per_join` et `used_columns`.
+
 [1]: /fr/database_monitoring/setup_mysql/
 [2]: /fr/agent/troubleshooting/
-[3]: /fr/agent/guide/agent-commands/?tab=agentv6v7#agent-status-and-information
-[4]: /fr/agent/guide/agent-log-files
+[3]: /fr/agent/configuration/agent-commands/?tab=agentv6v7#agent-status-and-information
+[4]: /fr/agent/configuration/agent-log-files
 [5]: /fr/database_monitoring/setup_mysql/advanced_configuration/
 [6]: https://cloud.google.com/sql/docs/mysql/flags#tips-performance-schema
 [7]: /fr/database_monitoring/data_collected/#which-queries-are-tracked

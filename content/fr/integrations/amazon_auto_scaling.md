@@ -76,7 +76,7 @@ Configurez AWS Auto Scaling de façon à ce que les logs soient envoyés vers 
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "amazon_auto_scaling" >}}
+{{< get-metrics-from-git "amazon-auto-scaling" >}}
 
 
 Chacune des métriques récupérées à partir d'AWS se voit assigner les mêmes tags que ceux qui apparaissent dans la console AWS, y compris, mais sans s'y limiter, le hostname et les groupes de sécurité.

@@ -56,7 +56,7 @@ title: 분포
 
   _"지난 주 동안 애플리케이션에 대한 99.9백분위수의 요청 기간이 얼마입니까?"_
 
-{< img src="metrics/distributions/percentile_qvw.jpg" alt="단일 메트릭의 99.99 백분위수 집계에 대한 단일 값(7.33s)을 표시하는 쿼리 값 위젯" style="width:80%;">}}
+{{< img src="metrics/distributions/percentile_qvw.jpg" alt="단일 메트릭의 99.99 백분위수 집계에 대한 단일 값(7.33s)을 표시하는 쿼리 값 위젯" style="width:80%;">}}
 
 * **메트릭 모니터링의 백분위수 임계값**
   _"최근 5분 동안 애플리케이션 요청 지연 시간의 p95가 200ms를 초과할 경우 알림."_

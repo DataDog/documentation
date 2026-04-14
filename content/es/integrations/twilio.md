@@ -99,7 +99,7 @@ Datadog [Cloud SIEM][5] analiza y correlaciona logs de eventos de Twilio para de
 
 1. [Genera una clave de la API y un secreto de la API][6] a través de la interfaz de usuario de Twilio.
 2. Busca el SID de tu cuenta en el dashboard de la consola de Twilio, en Información de la cuenta.
-3. Introduce tu clave de la API, tu secreto de la API y el SID de la cuenta en el [ícono de la integración de Twilio][7].
+3. En el [cuadro de integración de Twilio][7], introduce el SID de tu clave de API de Twilio, el secreto de la API y el SID de la cuenta de Twilio desde la que deseas ingerir los datos.
 4. Si utilizas Cloud Cost Management y activas la recopilación de datos de costos, estos serán visibles en [Cloud Cost Management][8] en 24 horas. ([datos recopilados][9])
 
 ### Validación

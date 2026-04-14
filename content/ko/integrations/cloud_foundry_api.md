@@ -30,7 +30,7 @@ draft: false
 git_integration_title: cloud_foundry_api
 integration_id: cloud-foundry-api
 integration_title: Cloud Foundry API
-integration_version: 5.0.0
+integration_version: 5.2.0
 is_public: true
 manifest_version: 2.0.0
 name: cloud_foundry_api

@@ -183,7 +183,7 @@ performance_schema_max_sql_text_length=4096
 
 ### クエリアクティビティがない
 
-<div class="alert alert-warning">クエリアクティビティと待機イベントコレクションは、Flexible Server ホストでは利用できない MySQL 設定が必要なため、Flexible Server ではサポートされていません。</div>
+<div class="alert alert-danger">クエリアクティビティと待機イベントコレクションは、Flexible Server ホストでは利用できない MySQL 設定が必要なため、Flexible Server ではサポートされていません。</div>
 
 クエリアクティビティの欠落を診断する手順を実行する前に、Agent が正常に動作しており、[Agent データの欠落を診断する手順](#no-data-is-show-after-configuring-database-monitoring)を実行していることを確認してください。クエリアクティビティが見つからない場合、以下のような原因が考えられます。
 

@@ -1,11 +1,12 @@
 ---
 title: Monitor aggregators
+description: "Learn how monitor aggregation methods (average, maximum, minimum, sum) affect alert behavior with examples and visual comparisons."
 disable_toc: false
 further_reading:
 - link: "https://docs.datadoghq.com/monitors/configuration/"
   tag: "Documentation"
   text: "Configure Monitors"
-  
+
 ---
 {{< jqmath-vanilla >}}
 

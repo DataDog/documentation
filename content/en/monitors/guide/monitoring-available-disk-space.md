@@ -1,5 +1,6 @@
 ---
 title: Monitoring Available Disk Space
+description: "Step-by-step guide to create monitors for available disk space that alert when free disk space falls below a specified percentage threshold."
 ---
 
 

@@ -17,7 +17,7 @@ title: Trace Explorer
 
 El [Trace Explorer][1] te ofrece la posibilidad de buscar todos los tramos (spans) ingeridos o indexados mediante cualquier etiqueta en cualquier tramo. Los tramos encontrados por tu consulta cambian según si estás buscando tramos en Live (todos los tramos ingeridos en los últimos 15 minutos, de forma continua) o tramos indexados (tramos retenidos durante 15 días por tus filtros personalizados).
 
-Las aplicaciones instrumentadas envían el 100% de tus trazas (traces) a Datadog para la [ingesta][2], haciendo que las trazas estén disponibles como trazas en Live durante un intervalo fijo de 15 minutos.
+Las aplicaciones instrumentadas envían trazas a Datadog en función de los [controles de ingesta][2] configurados. Las trazas ingestadas están disponibles como trazas en directo durante un periodo de 15 minutos.
 
 El Trace Explorer muestra un indicador **Live Search - All ingested data** (Live Search: todos los datos ingeridos) siempre que se encuentre en el modo Live:
 
@@ -66,7 +66,7 @@ Con la **Vista de lista**, puedes:
 - Comprueba si un proceso se ha iniciado correctamente al escribir `process_id` y autocompletar el nuevo ID de proceso como una etiquetar en los tramos secundarios.
 - Monitoriza la prueba de carga y el impacto en el rendimiento de tus endpoints al filtrar por la duración de un recurso secundario.
 - Ejecuta consultas de búsqueda con un solo clic en cualquier tramo o etiqueta directamente desde la vista del panel de traza.
-- Añade, elimina y ordena columnas de etiquetas de tramo para obtener una vista personalizada.
+- Añade, elimina y ordena columnas de span tags para obtener una vista personalizada.
 
 El número de tramos recibidos por segundo se muestra en la parte superior de la tabla de trazas. Dado que un flujo (stream) de miles de tramos por segundo no es legible para las personas, los flujos de tramos de alto rendimiento muestran algunos tramos para mayor claridad visual. Puedes buscar todos los tramos disponibles en la consulta de búsqueda. Utiliza las funciones de filtrado de la barra de consulta de Live Search para filtrar el flujo de tramos y el botón **Pause/Play** (Pausa/Reproducción) situado en la parte superior derecha de la pantalla para pausar o reanudar el flujo.
 
@@ -128,7 +128,7 @@ Todos los tramos indexados por filtros de retención personalizados *y* el filtr
 
 Todos los tramos indexados por filtros de retención personalizados o el filtro de retención inteligente están disponibles para su búsqueda cuando se utiliza el análisis de trazas.
 
-Desde la vista de series temporales, exporta tu consulta a un [dashboard][1], [monitor][2], o [notebook][3] para investigar más en detalle o para alertar automáticamente cuando un número agregado de tramos cruce un umbral específico. 
+Desde la vista de series temporales, exporta tu consulta a un [dashboard][1], [monitor][2], o [notebook][3] para investigar más en detalle o para alertar automáticamente cuando un número agregado de tramos cruce un umbral específico.
 
 **Nota**: Los tramos indexados por el filtro de retención inteligente se excluyen de las evaluaciones del monitor de análisis de trazas de APM. Para obtener más información, consulta [Retención de trazas][4].
 
@@ -144,7 +144,7 @@ Desde la vista de series temporales, exporta tu consulta a un [dashboard][1], [m
 
 Puedes personalizar qué tramos se retienen y con qué frecuencia de retención. Por defecto, se aplica [el filtro de retención inteligente de Datadog ][4], que retiene automáticamente trazas con diversidad de errores y latencia, así como recursos de bajo rendimiento. Para obtener más información sobre el filtro de retención inteligente predeterminado y sobre cómo crear tus propios filtros adicionales, consulta la [documentación sobre filtros de retención][3]. Ve a la página [Filtros de retención][12] dentro de la aplicación de Datadog para crear o modificar tus propios filtros.
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

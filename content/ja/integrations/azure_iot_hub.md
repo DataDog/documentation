@@ -43,7 +43,7 @@ Azure Provisioning Service は、IoT Hub 向けのヘルパーサービスです
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "azure_iot_hub" >}}
+{{< get-metrics-from-git "azure-iot-hub" >}}
 
 
 ### イベント

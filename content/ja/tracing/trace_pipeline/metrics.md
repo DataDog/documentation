@@ -42,11 +42,19 @@ Datadog APM のプランには、インデックス化されたスパンと取�
  - `datadog.estimated_usage.apm.ingested_spans`
  - `datadog.estimated_usage.apm.ingested_traces`
 
-使用量は `datadog.estimated_usage.apm.ingested_bytes` で制御します。取り込みはスパンやトレース数ではなく、量として計測されます。このメトリクスは `env` と `service` によってタグ付けされているので、どの環境とサービスが取り込み量に寄与しているかを特定することができます。
+使用量を制御するには `datadog.estimated_usage.apm.ingested_bytes` を使用します。取り込みはスパンやトレースの数ではなく、ボリュームで計測されます。このメトリクスには `env`、`service`、`sampling_service` タグが付与され、どの環境やサービスが取り込み量に寄与しているかを特定できます。`sampling_service` 次元の詳細は [サンプリング サービスとは？](#what-is-the-sampling-service) をご覧ください。
 
 このメトリクスはまた、`ingestion_reason` によってタグ付けされ、Datadog にスパンを送信する責任がある[取り込みメカニズム][5]を反映させることができます。これらのメカニズムは、Datadog Agent のトレーシングライブラリの中にネストされています。このディメンションの詳細については、[取り込み理由ダッシュボード][6]を参照してください。
 
 `datadog.estimated_usage.apm.ingested_traces` メトリクスは、1 秒間にサンプリングされるリクエスト数を計測し、[ヘッドベースサンプリング][7]によってサンプリングされたトレースのみをカウントします。このメトリクスは `env` と `service` によってタグ付けされているので、どのサービスが最も多くのトレースを開始しているのかを特定することもできます。
+
+#### サンプリング サービスとは？
+
+`datadog.estimated_usage.apm.ingested_bytes` の `sampling_service` 次元は、スパンを発行したサービスではなく、**サンプリング決定を行ったサービス** に取り込まれたバイト数を割り当てます。
+
+`sampling_service` でメトリクスをグループ化すると、総取り込み量に最も寄与しているサービスを特定できます。たとえば、サービス `A` がトレースを開始し、サービス `B` と `C` を呼び出す前に head ベース サンプリングを行った場合、サービス `A`、`B`、`C` のすべてのバイトは `sampling_service:A` に帰属します。
+
+{{< img src="tracing/trace_indexing_and_ingestion/usage_metrics/sampling_service.png" style="width:80%;" alt="インジェスト バイト サンプリング サービスの説明" >}}
 
 ### Indexed Span
 

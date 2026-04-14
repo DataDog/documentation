@@ -72,7 +72,7 @@ Azure SQL 관리 인스턴스는 엔터프라이즈 SQL 서버 데이터 엔진�
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "azure_sql_managed_instance" >}}
+{{< get-metrics-from-git "azure-sql-managed-instance" >}}
 
 
 ### 서비스 점검

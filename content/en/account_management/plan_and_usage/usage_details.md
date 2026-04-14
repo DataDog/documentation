@@ -1,8 +1,13 @@
 ---
 title: Usage Details
+description: Monitor your Datadog usage across all products with month-to-date summaries, usage trends, top custom metrics, and logs usage by index.
 aliases:
   - /account_management/billing/usage_details/
 ---
+
+{{< callout url="" btn_hidden="true" header="New: Bill Overview" >}}
+A new Bill Overview experience is now in Limited Availability and will start rolling out automatically to all organizations starting March 2026. [Learn more](/account_management/plan_and_usage/bill_overview/).
+{{< /callout >}}
 
 ## Overview
 
@@ -88,7 +93,7 @@ Time selection contains options to view usage graphs at daily, weekly, monthly o
 
 ## Billable on-demand pills and committed lines
 
-<div class="alert alert-warning">This feature is in beta. To request access and confirm your organization meets the feature criteria, contact your account representative or <a href="https://docs.datadoghq.com/help/">Customer Support</a>.</div>
+<div class="alert alert-danger">This feature is in beta. To request access and confirm your organization meets the feature criteria, contact your account representative or <a href="https://docs.datadoghq.com/help/">Customer Support</a>.</div>
 
 Purple on-demand pills highlight the portion of billable usage that is on-demand usage. Blue committed and allotted pills highlight the portion of your usage that is covered by commitments and <a href="https://www.datadoghq.com/pricing/allotments/">allotments</a> from parent products. The dashed `Committed` line shows commitments per product, without any allotments (such as Custom Metrics or Containers).
 
@@ -138,7 +143,7 @@ This data can be downloaded as a CSV file.
 
 ## First-time usage notifications
 
-<div class="alert alert-warning">This feature is in beta. To request access and confirm your organization meets the feature criteria, contact your account representative or <a href="https://docs.datadoghq.com/help/">Customer Support</a>.</div>
+<div class="alert alert-danger">This feature is in beta. To request access and confirm your organization meets the feature criteria, contact your account representative or <a href="https://docs.datadoghq.com/help/">Customer Support</a>.</div>
 
 The first-time usage notifications feature sends email notifications when there is first-time billable usage for a new product not included in your current contract. Emails are sent approximately 48 hours after the usage first occurs during a given month.
 
@@ -169,3 +174,4 @@ For billing questions, contact your [Customer Success][10] Manager.
 [8]: https://docs.datadoghq.com/logs/archives/rehydrating/?tab=awss3#overview
 [9]: /help/
 [10]: mailto:success@datadoghq.com
+[11]: /account_management/plan_and_usage/bill_overview/

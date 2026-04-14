@@ -1,7 +1,8 @@
 ---
+id: framework
 core_product:
 - security
-- csm
+- cloud security
 synonyms:
 - コンプライアンスフレームワーク
 - コンプライアンス規格

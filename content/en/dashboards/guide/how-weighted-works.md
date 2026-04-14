@@ -1,5 +1,6 @@
 ---
 title: How does weighted() work?
+description: Understand how the weighted() function prevents artificial spikes when summing gauge metrics with transient tags.
 disable_toc: false
 further_reading:
 - link: "/dashboards/functions/smoothing"

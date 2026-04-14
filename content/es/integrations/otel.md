@@ -71,7 +71,7 @@ tile:
 ## OpenTelemetry Collector
 ## Información general
 
-<div class="alert alert-danger">
+<div class="alert alert-warning">
   <strong>Importante:</strong> OpenTelemetry Collector Contrib v0.95.0 introduce un cambio que desactiva el cálculo de métricas de trazas (traces) en el Datadog Exporter. Sigue la <a href="https://docs.datadoghq.com/opentelemetry/guide/migration/">guía de migración</a> al actualizarlo.
 </div>
 

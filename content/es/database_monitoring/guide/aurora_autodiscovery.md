@@ -55,9 +55,11 @@ También puedes adjuntar la política [`AmazonRDSReadOnlyAccess`][3].
 
 ### Configurar etiquetas de Aurora
 
-Por defecto, el receptor descubre todos los clústeres de Aurora de la cuenta y la región en la que se ejecuta el Agent que tengan aplicado la etiqueta `datadoghq.com/scrape:true`. También puedes configurar el Agent para descubrir clústeres con etiquetas específicas.
+El listener detecta todos los clústeres de Aurora en la cuenta y región donde se está ejecutando el Agent que tienen la etiqueta `datadoghq.com/scrape:true` aplicada. También puedes configurar el Agent para detectar clústeres con etiquetas específicas.
 
 Debes aplicar estas etiquetas al clúster de base de datos (Rol: `Regional cluster`). Para obtener más información sobre etiquetado de recursos de RDS, consulta la [documentación de AWS][7].
+
+Si configuras `tags` como una matriz vacía, Autodiscovery detectará todos los clústeres de la cuenta y la región.
 
 ### Configurar el Datadog Agent
 
@@ -72,7 +74,7 @@ database_monitoring:
 
 **Nota**: Agent solo descubre instancias de Aurora que se ejecutan en la misma región que el Agent. Para determinar la región de la instancia, el Agent utiliza [IMDS (Instance Metadata Service)][8]. Si tu instancia EC2 requiere `IMDSv2`, debes configurar el Agent para utilizar `IMDSv2` estableciendo `ec2_prefer_imdsv2: true` en `datadog.yaml`, como se muestra a continuación:
 
-```yaml
+``` yaml {hl_lines=[1]}
 ec2_prefer_imdsv2: true
 database_monitoring:
   autodiscovery:
@@ -80,11 +82,11 @@ database_monitoring:
       enabled: true
 ```
 
-Por defecto, el receptor solo descubre clústeres de Aurora en la cuenta y la región donde se ejecuta el Agent, y solo aquellos con la etiqueta `datadoghq.com/scrape:true`. También puedes configurar el receptor para descubrir clústeres con etiquetas específicas.
+By default, the listener only discovers Aurora clusters in the account and region where the Agent is running, and only those with the `datadoghq.com/scrape:true` tag. You can also configure the listener to discover clusters with specific tags.
 
-Para especificar etiquetas personalizadas para el descubrimiento de clústeres de Aurora en el archivo `datadog.yaml`:
+To specify custom tags for Aurora cluster discovery in the `datadog.yaml` file:
 
-```yaml
+``` yaml {hl_lines=["5-6"]}
 database_monitoring:
   autodiscovery:
     aurora:
@@ -93,9 +95,19 @@ database_monitoring:
         - "my-cluster-tag-key:value"
 ```
 
-El receptor consulta la API de AWS para la lista de hosts en un bucle. La frecuencia con la que el receptor consulta la API de AWS, en segundos, es configurable en el archivo `datadog.yaml`:
+Para monitorizar todos los clústeres de la cuenta y la región:
 
-```yaml
+``` yaml {hl_lines=["5"]}
+database_monitoring:
+  autodiscovery:
+    aurora:
+      enabled: true
+      tags: []
+```
+
+The listener queries the AWS API for the list of hosts in a loop. The frequency with which the listener queries the AWS API, in seconds, is configurable in the `datadog.yaml` file:
+
+``` yaml {hl_lines=["5"]}
 database_monitoring:
   autodiscovery:
     aurora:
@@ -103,14 +115,27 @@ database_monitoring:
       discovery_interval: 300
 ```
 
-### Crear una plantilla de configuración
+El listener proporciona una variable `%%extra_dbm%%` que puede utilizarse para activar o desactivar DBM para la instancia. Este valor es por defecto `true` si la etiqueta `datadoghq.com/dbm:true` está presente. Para especificar una etiqueta personalizada para este valor, utiliza `dbm_tag`:
 
-Datadog Agent admite plantillas de configuración para integraciones de Postgres y MySQL. Define una plantilla de configuración para los clústeres de Aurora que desees monitorizar.
+``` yaml {hl_lines=["5-6"]}
+database_monitoring:
+  autodiscovery:
+    aurora:
+      enabled: true
+      dbm_tag:
+        - "use_dbm:true"
+```
+
+The `%%extra_dbm%%` value is true if the tag is present, and false otherwise. It does not set its value to the value of the tag.
+
+### Create a configuration template
+
+The Datadog Agent supports configuration templates for the Postgres and MySQL integrations. Define a configuration template for the Aurora clusters you wish to monitor.
 
 {{< tabs >}}
 {{% tab "Postgres" %}}
 
-En primer lugar, añade un `ad_identifier` para Postgres gestionado por Aurora a tu archivo de plantilla de configuración (`postgres.d/conf_aws_aurora.yaml`):
+First, add an `ad_identifier` for Aurora-managed Postgres to your configuration template (`postgres.d/conf_aws_aurora.yaml`) file:
 
 ```yaml
 ad_identifiers:
@@ -118,8 +143,6 @@ ad_identifiers:
 ```
 
 A continuación, define el resto de la plantilla. Utiliza [variables de plantilla](#supported-template-variables) para los parámetros que pueden cambiar, como `host` y `port`.
-
-El siguiente ejemplo de plantilla de configuración se aplica a cada instancia descubierta en el clúster de Aurora:
 
 ```yaml
 ad_identifiers:
@@ -129,7 +152,7 @@ instances:
   - host: "%%host%%"
     port: "%%port%%"
     username: datadog
-    dbm: true
+    dbm: "%%extra_dbm%%"
     aws:
       instance_endpoint: "%%host%%"
       region: "%%extra_region%%"
@@ -138,11 +161,43 @@ instances:
     - "region:%%extra_region%%"
 ```
 
-En este ejemplo, las variables de plantilla `%%host%%`, `%%port%%`, `%%extra_dbclusteridentifier%%` y `%%extra_region%%` se rellenan dinámicamente con información del clúster de Aurora.
+En este ejemplo, las variables de plantilla `%%host%%`, `%%port%%`, `%%extra_dbclusteridentifier%%`, `%%extra_dbm%%` y `%%extra_region%%` se rellenan dinámicamente con información del clúster de Aurora.
+
+#### Autenticación
+
+Si utilizas una contraseña para la autenticación, ten en cuenta que la contraseña proporcionada en este archivo de plantilla se utilizará en todas las bases de datos que se detecten.
+
+{{% collapse-content title="Guardar tu contraseña de forma segura" level="h5" id="securely-store-your-password" %}}
+##### Guarda tu contraseña de forma segura
+{{% dbm-secret %}}
+
+El siguiente ejemplo de plantilla de configuración se aplica a cada instancia descubierta en el clúster de Aurora:
+
+``` yaml {hl_lines=[8]}
+ad_identifiers:
+  - _dbm_postgres_aurora
+init_config:
+instances:
+  - host: "%%host%%"
+    port: "%%port%%"
+    username: datadog
+    password: "ENC[datadog_user_database_password]"
+    dbm: "%%extra_dbm%%"
+    aws:
+      instance_endpoint: "%%host%%"
+      region: "%%extra_region%%"
+    tags:
+    - "dbclusteridentifier:%%extra_dbclusteridentifier%%"
+    - "region:%%extra_region%%"
+```
+{{% /collapse-content %}} 
+
+{{% collapse-content title="Autenticación de IAM" level="h5" id="iam-authentication" %}}
+##### Autenticación de IAM
 
 Para utilizar la [autenticación de IAM][2] para conectarte a tu clúster de Aurora, utiliza la siguiente plantilla:
 
-```yaml
+``` yaml {hl_lines=["12-13"]}
 ad_identifiers:
   - _dbm_postgres_aurora
 init_config:
@@ -163,10 +218,12 @@ instances:
 
 La variable de plantilla `%%extra_managed_authentication_enabled%%` se resuelve en `true` si la instancia utiliza autenticación de IAM.
 
+[2]: /es/database_monitoring/guide/managed_authentication/?tab=aurora#configure-iam-authentication
+{{% /collapse-content %}} 
 {{% /tab %}}
-{{% tab "MySQL" %}}
 
-En primer lugar, añade un `ad_identifier` para MySQL gestionado por Aurora a tu archivo de plantilla de configuración (`mysql.d/conf_aws_aurora.yaml`):
+{{% tab "MySQL" %}}
+En primer lugar, añade un `ad_identifier` para MySQL administrado por Aurora a tu archivo de plantilla de configuración (`MySQL.d/conf_aws_aurora.yaml`):
 
 ```yaml
 ad_identifiers:
@@ -175,9 +232,60 @@ ad_identifiers:
 
 A continuación, define el resto de la plantilla. Utiliza [variables de plantilla](#supported-template-variables) para los parámetros que pueden cambiar, como `host` y `port`.
 
+```yaml
+ad_identifiers:
+  - _dbm_mysql_aurora
+init_config:
+instances:
+  - host: "%%host%%"
+    port: "%%port%%"
+    username: datadog
+    dbm: "%%extra_dbm%%"
+    aws:
+      instance_endpoint: "%%host%%"
+      region: "%%extra_region%%"
+    tags:
+    - "dbclusteridentifier:%%extra_dbclusteridentifier%%"
+    - "region:%%extra_region%%"
+```
+
+En este ejemplo, las variables de plantilla `%%host%%`, `%%port%%`, `%%extra_dbclusteridentifier%%`, `%%extra_dbm%%` y `%%extra_region%%` se rellenan dinámicamente con información del clúster de Aurora.
+
+#### Autenticación
+
+Si utilizas una contraseña para la autenticación, ten en cuenta que la contraseña proporcionada en este archivo de plantilla se utilizará en todas las bases de datos que se detectan. 
+
+{{% collapse-content title="Guardar tu contraseña de forma segura" level="h5" id="securely-store-your-password" %}}
+##### Guarda tu contraseña de forma segura
+{{% dbm-secret %}}
+
 El siguiente ejemplo de plantilla de configuración se aplica a cada instancia descubierta en el clúster de Aurora:
 
-```yaml
+``` yaml {hl_lines=[8]}
+ad_identifiers:
+  - _dbm_mysql_aurora
+init_config:
+instances:
+  - host: "%%host%%"
+    port: "%%port%%"
+    username: datadog
+    password: "ENC[datadog_user_database_password]"
+    dbm: "%%extra_dbm%%"
+    aws:
+      instance_endpoint: "%%host%%"
+      region: "%%extra_region%%"
+    tags:
+    - "dbclusteridentifier:%%extra_dbclusteridentifier%%"
+    - "region:%%extra_region%%"
+```
+{{% /collapse-content %}} 
+
+{{% collapse-content title="Autenticación de IAM (7.67.0+)" level="h5" id="iam-authentication" %}}
+##### Autenticación de IAM
+
+Para utilizar la [autenticación de IAM][2] para conectarte a tu instancia RDS, asegúrate de que estás utilizando el Agent versión 7.67.0 o posterior y utiliza la siguiente plantilla:
+
+``` yaml {hl_lines=["12-13"]}
 ad_identifiers:
   - _dbm_mysql_aurora
 init_config:
@@ -188,13 +296,18 @@ instances:
     dbm: true
     aws:
       instance_endpoint: "%%host%%"
+      region: "%%extra_region%%"
+      managed_authentication:
+        enabled: "%%extra_managed_authentication_enabled%%"
     tags:
-    - "dbclusteridentifier:%%extra_dbclusteridentifier%%"
-    - "region:%%extra_region%%"
+      - "dbclusteridentifier:%%extra_dbclusteridentifier%%"
+      - "region:%%extra_region%%"
 ```
 
-En este ejemplo, las variables de plantilla `%%host%%`, `%%port%%`, `%%extra_dbclusteridentifier%%` y `%%extra_region%%` se rellenan dinámicamente con información del clúster de Aurora.
+La variable de plantilla `%%extra_managed_authentication_enabled%%` se resuelve en `true` si la instancia utiliza autenticación de IAM.
 
+[2]: /es/database_monitoring/guide/managed_authentication/?tab=aurora#configure-iam-authentication
+{{% /collapse-content %}} 
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -208,10 +321,10 @@ Para obtener más información sobre la configuración de Autodiscovery con inte
 | %%puerto%%                                 | El puerto de la instancia de Aurora                                                                                                               |
 | %%extra_region%%                         | La región de AWS en la que se encuentra la instancia                                                                                                  |
 | %%extra_dbclusteridentifier%%            | El identificador de clúster del clúster de Aurora descubierto                                                                                       |
-| %%extra_managed_authentication_enabled%% | Si la autenticación de IAM está habilitada en clúster. <br/>Se utiliza para determinar si se debe utilizar la autenticación gestionada para Postgres. |
+| %%extra_dbm%% | Si DBM está habilitado en el clúster. Determinado por la presencia de `dbm_tag`, que por defecto es `datadoghq.com/dbm:true`.                                              |
+| %%extra_managed_authentication_enabled%% | Si la autenticación de IAM está habilitada en el clúster. <br/>Se utiliza para determinar si se debe utilizar la autenticación gestionada para la conexión. |
 
 [1]: /es/database_monitoring/setup_postgres/aurora/?tab=postgres10
-[2]: /es/database_monitoring/guide/managed_authentication/#configure-iam-authentication
 [3]: https://docs.aws.amazon.com/aws-managed-policy/latest/reference/AmazonRDSReadOnlyAccess.html
 [4]: /es/getting_started/containers/autodiscovery/?tab=adannotationsv2agent736
 [5]: /es/containers/docker/integrations/?tab=dockeradv2

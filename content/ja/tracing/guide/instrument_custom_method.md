@@ -19,7 +19,7 @@ _8 分で読了_
 
 {{< img src="tracing/guide/custom_span/custom_span_1_cropped.png" alt="分析ビュー" style="width:90%;">}}
 
-<div class="alert alert-warning"><strong>注</strong>: このページでは、カスタムインスツルメンテーションアプリケーションへの OpenTracing の使用について説明します。OpenTracing は非推奨になりました。ここで説明するコンセプトはまだ有効ですが、代わりに <a href="/tracing/trace_collection/otel_instrumentation/">OpenTelemetry を使ったカスタムインスツルメンテーション</a>の説明と例に従ってください。 </div>
+<div class="alert alert-danger"><strong>注</strong>: このページでは、カスタムインスツルメンテーションアプリケーションへの OpenTracing の使用について説明します。OpenTracing は非推奨になりました。ここで説明するコンセプトはまだ有効ですが、代わりに <a href="/tracing/trace_collection/otel_instrumentation/">OpenTelemetry を使ったカスタムインスツルメンテーション</a>の説明と例に従ってください。 </div>
 
 ビジネスロジックを詳細に可視化するために、Datadog APM では、ニーズと実装に基づいてトレースを構成するスパンをカスタマイズできます。これにより、コードベース内のあらゆるメソッド、さらにはメソッド内の特定のコンポーネントをトレースすることができます。これを使用すれば、アプリケーションの重要な領域を最適な粒度で最適化、監視できます。
 

@@ -1,5 +1,6 @@
 ---
 title: Agent Status Page
+description: "Learn how to read and interpret the Datadog Agent status page to troubleshoot issues and monitor Agent health."
 aliases:
 - /agent/guide/agent-status-page
 further_reading:

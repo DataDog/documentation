@@ -19,6 +19,7 @@ La convención de nomenclatura es un arte y posiblemente una de las decisiones m
 * Mantén la coherencia en todos los equipos, aplicaciones y servicios.
 * Evita las palabras clave reservadas que puedan provocar conflictos con el resto de las etiquetas o métricas.
 * En el caso de métricas, coloca un prefijo con un espacio de nombres que represente la aplicación o servicio que genera los datos.
+* Evita el uso de datos personales y confidenciales de cualquier tipo. 
 
 ## Reglas y prácticas recomendadas para nombrar métricas
 
@@ -48,5 +49,6 @@ Ejemplos de claves de etiqueta de métrica comunes son `instance`, `name` y `rol
 ## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 
 [1]: /es/getting_started/tagging/unified_service_tagging

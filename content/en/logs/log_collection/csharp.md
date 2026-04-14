@@ -323,7 +323,7 @@ Agentless logging (also known as "direct log submission") supports the following
 
 It does not require modifying your application code, or installing additional dependencies into your application.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>Note:</strong> If you use log4net or NLog, an appender (log4net) or a logger (NLog) must be configured for Agentless logging to be enabled. In those cases, you can either add these extra dependencies, or use <a href="/logs/log_collection/csharp/?tab=log4net#agentless-logging-with-serilog-sink">agentless logging with the Serilog sink</a> instead.
 </div>
 
@@ -352,13 +352,13 @@ To enable Agentless logging, set the following environment variables:
 `DD_LOGS_INJECTION`
 : Enables [connecting logs and traces][9]:<br>
 **Default**: `true` <br>
-Enabled by default when using Agentless logging from Tracer version 2.7.0.
+Enabled by default from Tracer version 3.24.0.
 
 `DD_LOGS_DIRECT_SUBMISSION_INTEGRATIONS`
 : Enables Agentless logging. Enable for your logging framework by setting to `Serilog`, `NLog`, `Log4Net`, or `ILogger` (for `Microsoft.Extensions.Logging`). If you are using multiple logging frameworks, use a semicolon separated list of variables.<br>
 **Example**: `Serilog;Log4Net;NLog`
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>Note:</strong> If you are using a logging framework in conjunction with <code>Microsoft.Extensions.Logging</code>, you will generally need to use the framework name. For example, if you are using <a href="https://github.com/serilog/serilog-extensions-logging">Serilog.Extensions.Logging</a>, you should set <code>DD_LOGS_DIRECT_SUBMISSION_INTEGRATIONS=Serilog</code>.
 </div>
 
@@ -383,53 +383,9 @@ Note that the delimiter is a comma and a whitespace: `, `.
 
 The following configuration values should generally not be modified, but may be set if required.
 
-{{< site-region region="us" >}}
-
 `DD_LOGS_DIRECT_SUBMISSION_URL`
 : Sets the URL where logs should be submitted. Uses the domain provided in `DD_SITE` by default.<br>
-**Default**: `https://http-intake.logs.datadoghq.com:443` (based on `DD_SITE`)
-
-{{< /site-region >}}
-
-{{< site-region region="us3" >}}
-
-`DD_LOGS_DIRECT_SUBMISSION_URL`
-: Sets the URL where logs should be submitted. Uses the domain provided in `DD_SITE` by default.<br>
-**Default**: `https://http-intake.logs.us3.datadoghq.com:443` (based on `DD_SITE`)
-
-{{< /site-region >}}
-
-{{< site-region region="us5" >}}
-
-`DD_LOGS_DIRECT_SUBMISSION_URL`
-: Sets the URL where logs should be submitted. Uses the domain provided in `DD_SITE` by default.<br>
-**Default**: `https://http-intake.logs.us5.datadoghq.com:443` (based on `DD_SITE`)
-
-{{< /site-region >}}
-
-{{< site-region region="ap1" >}}
-
-`DD_LOGS_DIRECT_SUBMISSION_URL`
-: Sets the URL where logs should be submitted. Uses the domain provided in `DD_SITE` by default.<br>
-**Default**: `https://http-intake.logs.ap1.datadoghq.com:443` (based on `DD_SITE`)
-
-{{< /site-region >}}
-
-{{< site-region region="eu" >}}
-
-`DD_LOGS_DIRECT_SUBMISSION_URL`
-: Sets the URL where logs should be submitted. Uses the domain provided in `DD_SITE` by default.<br>
-**Default**: `https://http-intake.logs.datadoghq.eu:443` (based on `DD_SITE`)
-
-{{< /site-region >}}
-
-{{< site-region region="gov" >}}
-
-`DD_LOGS_DIRECT_SUBMISSION_URL`
-: Sets the URL where logs should be submitted. Uses the domain provided in `DD_SITE` by default.<br>
-**Default**: `https://http-intake.logs.ddog-gov.com:443` (based on `DD_SITE`)
-
-{{< /site-region >}}
+**Default**: `{{< region-param key=http_endpoint_full >}}:443` (based on `DD_SITE`)
 
 `DD_LOGS_DIRECT_SUBMISSION_SOURCE`
 : Sets the parsing rule for submitted logs. Should always be set to `csharp`, unless you have a [custom pipeline][17].<br>
@@ -485,58 +441,6 @@ using (var log = new LoggerConfiguration()
     // Some code
 }
 ```
-
-{{< site-region region="us" >}}
-
-You can also override the default behavior and forward logs in TCP by manually specifying the following required properties: `url`, `port`, `useSSL`, and `useTCP`. Optionally, [specify the `source`, `service`, `host`, and custom tags.][1]
-
-For instance to forward logs to the Datadog US region in TCP you would use the following sink configuration:
-
-```csharp
-var config = new DatadogConfiguration(url: "intake.logs.datadoghq.com", port: 10516, useSSL: true, useTCP: true);
-using (var log = new LoggerConfiguration()
-    .WriteTo.DatadogLogs(
-        "<API_KEY>",
-        source: "<SOURCE_NAME>",
-        service: "<SERVICE_NAME>",
-        host: "<HOST_NAME>",
-        tags: new string[] {"<TAG_1>:<VALUE_1>", "<TAG_2>:<VALUE_2>"},
-        configuration: config
-    )
-    .CreateLogger())
-{
-    // Some code
-}
-```
-
-[1]: /logs/log_configuration/attributes_naming_convention/#reserved-attributes
-
-{{< /site-region >}}
-{{< site-region region="eu" >}}
-
-You can also override the default behavior and forward logs in TCP by manually specifying the following required properties: `url`, `port`, `useSSL`, and `useTCP`. Optionally, [specify the `source`, `service`, `host`, and custom tags.][1]
-
-For instance to forward logs to the Datadog EU region in TCP you would use the following sink configuration:
-
-```csharp
-var config = new DatadogConfiguration(url: "tcp-intake.logs.datadoghq.eu", port: 443, useSSL: true, useTCP: true);
-using (var log = new LoggerConfiguration()
-    .WriteTo.DatadogLogs(
-        "<API_KEY>",
-        source: "<SOURCE_NAME>",
-        service: "<SERVICE_NAME>",
-        host: "<HOST_NAME>",
-        tags: new string[] {"<TAG_1>:<VALUE_1>", "<TAG_2>:<VALUE_2>"},
-        configuration: config
-    )
-    .CreateLogger())
-{
-    // Some code
-}
-```
-[1]: /logs/log_configuration/attributes_naming_convention/#reserved-attributes
-
-{{< /site-region >}}
 
 New logs are now directly sent to Datadog.
 

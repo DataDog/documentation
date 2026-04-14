@@ -1,4 +1,7 @@
 ---
+description: Utiliza la llamada de retorno beforeSend para enriquecer, modificar o
+  filtrar eventos RUM antes de enviarlos a Datadog para mejorar el control de los
+  datos.
 further_reading:
 - link: /real_user_monitoring/explorer
   tag: Documentación
@@ -10,9 +13,9 @@ title: Enriquecer y controlar datos RUM de navegador con beforeSend
 
 El SDK del Navegador RUM captura eventos RUM y rellena sus atributos principales. La función de devolución de llamada `beforeSend` te da acceso a cada evento recopilado por el SDK RUM antes de enviarlo a Datadog.
 
-Interceptar eventos RUM te permite:
+Interceptar los eventos del RUM te permite:
 
-* Enriquecer tus eventos RUM con atributos de contexto adicionales
+* Enriquecer los eventos del RUM con atributos de contexto adicionales
 * Modificar tus eventos RUM para cambiar su contenido u ocultar secuencias confidenciales (consulta la [lista de propiedades editables][1])
 * Descartar eventos RUM seleccionados
 
@@ -204,9 +207,9 @@ import { datadogRum } from '@datadog/browser-rum';
 datadogRum.init({
     ...,
     beforeSend: (event, context) => {
-        // descartar un error de RUM si su mensaje incluye 'el perfil no está definido'
-        si (event.type === 'error' && event.error.message.includes('profile is not defined')) {
-            devuelve un falso
+        // discard a RUM error if its message includes 'profile is not defined'
+        if (event.type === 'error' && event.error.message.includes('profile is not defined')) {
+            return false
         }
     },
     ...

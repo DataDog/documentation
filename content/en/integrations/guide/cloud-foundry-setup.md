@@ -92,7 +92,7 @@ There are three points of integration with Datadog, each of which achieves a dif
 - **Datadog Cluster Agent BOSH release** - Deploy one Datadog Cluster Agent job. The job queries the CAPI and BBS API to collect cluster-level and application-level metadata to provide improved tagging capabilities in your applications and containers.
 - **Datadog Firehose Nozzle** - Deploy one or more Datadog Firehose Nozzle jobs. The jobs tap into your deployment's Loggregator Firehose and send all non-container metrics to Datadog.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 These integrations are meant for Cloud Foundry deployment administrators, not end users.
 </div>
 
@@ -102,7 +102,12 @@ You must have a working Cloud Foundry deployment and access to the BOSH Director
 
 ### Install the Datadog Agent BOSH release
 
-Datadog provides tarballs of the Datadog Agent packaged as a BOSH release. Upload the latest release to your BOSH Director and then install it on every node in your deployment as an [addon][17] (the same way a Director deploys the BOSH Agent to all nodes).
+Datadog provides tarballs of the Datadog Agent packaged as a BOSH release. 
+
+Follow the [in-app installation guide in Fleet Automation][36] to generate site-aware BOSH commands and a prefilled `runtime.yml` that installs the Datadog Agent as a BOSH add-on across all Cloud Foundry VMs.
+
+{{< img src="/agent/basic_agent_usage/agent_install_foundry.png" alt="In-app installation steps for the Datadog Agent on Cloud Foundry." style="width:90%;">}}
+
 
 #### Upload Datadog's release to your BOSH Director
 
@@ -496,7 +501,6 @@ You can enable or disable the application metadata prefix in the Firehose Nozzle
 [8]: https://github.com/cf-platform-eng/meta-buildpack
 [15]: https://bosh.io/docs/bosh-cli.html
 [16]: https://bosh.io/docs/cli-v2.html#install
-[17]: https://bosh.io/docs/runtime-config.html#addons
 [18]: https://github.com/DataDog/datadog-agent-boshrelease
 [19]: https://github.com/DataDog/datadog-agent-boshrelease/blob/master/jobs/dd-agent/spec
 [20]: https://app.datadoghq.com/infrastructure/map
@@ -514,3 +518,4 @@ You can enable or disable the application metadata prefix in the Firehose Nozzle
 [33]: https://github.com/DataDog/datadog-cluster-agent-boshrelease/blob/master/jobs/datadog-cluster-agent/spec
 [34]: /containers/cluster_agent/setup/?tab=daemonset#secure-cluster-agent-to-agent-communication
 [35]: /containers/cluster_agent/clusterchecks/
+[36]: https://app.datadoghq.com/fleet/install-agent/latest?platform=cloud_foundry

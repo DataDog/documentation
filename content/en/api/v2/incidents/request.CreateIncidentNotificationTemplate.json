@@ -1,0 +1,19 @@
+{
+  "data": {
+    "attributes": {
+      "category": "alert",
+      "content": "An incident has been declared.\n\nTitle: Sample Incident Title\nSeverity: SEV-2\nAffected Services: web-service, database-service\nStatus: active\n\nPlease join the incident channel for updates.",
+      "name": "Example-Incident",
+      "subject": "SEV-2 Incident: Sample Incident Title"
+    },
+    "relationships": {
+      "incident_type": {
+        "data": {
+          "id": "00000000-0000-0000-0000-000000000000",
+          "type": "incident_types"
+        }
+      }
+    },
+    "type": "notification_templates"
+  }
+}

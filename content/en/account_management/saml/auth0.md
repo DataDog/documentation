@@ -1,5 +1,6 @@
 ---
 title: Auth0 SAML IdP
+description: Configure Auth0 as a SAML identity provider for Datadog with user metadata and profile attribute management for secure authentication.
 aliases:
   - /account_management/faq/how-do-i-setup-microsoft-active-directory-federation-services-as-a-saml-idp/
 further_reading:

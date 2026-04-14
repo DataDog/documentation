@@ -11,7 +11,7 @@ title: Azure Cloud Adoption Framework con Datadog
 
 ## Información general
 
-El uso de Cloud Adoption Framework de Azure con Datadog puede ayudarte a garantizar migraciones seguras y rápidas a un nuevo entorno de nube, ya sea desde instalaciones on-premise u otros entornos de nube.
+El uso del marco de adopción de la nube de Azure con Datadog puede ayudarte a garantizar migraciones seguras y rápidas a un nuevo entorno de nube, ya sea desde entornos on-premises u otros entornos de nube.
 
 Puedes hacer lo siguiente:
 
@@ -45,11 +45,11 @@ Datadog ofrece muchas integraciones para mejorar la comunicación con tus equipo
 
 Agrega todas las integraciones de comunicación que usa tu organización. Para obtener la lista completa de integraciones e instrucciones de configuración, consulta [Integraciones][5].
 
-### Etiquetas
+### Etiquetas (tags)
 
 El etiquetado es fundamental para monitorizar de forma eficaz tus aplicaciones y entornos. Antes de comenzar a migrar a tu zona de aterrizaje de Azure, debes implementar una estrategia de etiquetado.
 
-Si bien puede parecer intimidante, esto no requiere mucho tiempo ni complejidad. Los buenos candidatos para etiquetas (tags) incluyen cualquier dato que sea útil para categorizar tu infraestructura o servicios.
+Si bien puede parecer intimidante, esto no requiere mucho tiempo ni complejidad. Los buenos candidatos para etiquetas incluyen cualquier dato que sea útil para categorizar tu infraestructura o servicios.
 
 Añade las siguientes etiquetas a tus recursos siempre que corresponda:
 
@@ -106,7 +106,7 @@ Una vez que hayas instalado el Datadog Agent, añade los siguientes métodos de 
   1. [Añade integraciones para recopilar datos][12] específicos de las tecnologías que emplean tus servicios.
   2. [Habilita Application Performance Monitoring (APM)][13] para medir los recuentos de solicitudes, la latencia y las tasas de error de tus servicios.
   3. [Captura los logs generados por tu entorno][14] para obtener un contexto más profundo sobre cuándo las métricas y trazas (traces) se comportan de manera inesperada. Si tienes muchos logs, [almacena solo los más críticos][15].
-  4. [Habilita Network Performance Monitoring (NPM)][16] para garantizar una comunicación eficiente entre tus servicios. NPM es fundamental en el proceso de migración porque el entorno original puede necesitar comunicarse con el nuevo entorno de nube.
+  4. [Habilita Cloud Network Monitoring (CNM)][16] para garantizar una comunicación eficiente entre tus servicios. CNM es esencial en los procesos de migración, ya que tu entorno original podría necesitar comunicarse con tu nuevo entorno en la nube.
 
 Antes de migrar tu nueva carga de trabajo, instala el Agent, configura la recopilación de datos completa en tu entorno heredado y diseña tus nuevas cargas de trabajo para incluir el Datadog Agent con la misma recopilación de datos completa.
 
@@ -170,7 +170,7 @@ Para obtener más información sobre cómo configurar los SLOs y exponerlos a la
 [13]: https://app.datadoghq.com/apm/getting-started
 [14]: https://app.datadoghq.com/logs/onboarding
 [15]: /es/logs/guide/getting-started-lwl/
-[16]: /es/network_monitoring/performance/
+[16]: /es/network_monitoring/cloud_network_monitoring/
 [17]: https://app.datadoghq.com/infrastructure/map
 [18]: https://app.datadoghq.com/infrastructure/map?node_type=container
 [19]: https://app.datadoghq.com/apm/map

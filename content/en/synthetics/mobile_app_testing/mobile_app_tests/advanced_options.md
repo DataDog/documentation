@@ -19,10 +19,6 @@ further_reading:
   text: "Learn about Synthetic Monitoring Data Security"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Mobile Application Testing is not supported on this site.</div>
-{{< /site-region >}}
-
 ## Overview
 
 This page describes advanced options for Synthetic mobile app tests. 

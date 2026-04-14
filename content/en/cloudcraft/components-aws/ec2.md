@@ -135,7 +135,7 @@ Each option is represented differently in the `billingOptions` object.
 ```
 
 - **type: ri**: The billing option value for a reserved instance is always `ri`.
-- **leaseContractLenght: number**: The length of time the instance is reserved. Accepted values are 12 or 36.
+- **leaseContractLength: number**: The length of time the instance is reserved. Accepted values are 12 or 36.
 - **purchaseOption: string**: The purchase option for the instance. Accepted values are `No Upfront`, `Partial Upfront`, and `All Upfront`.
 - **offeringClass: string**: The offering class for the instance. Accepted values are `standard` and `convertible`.
 

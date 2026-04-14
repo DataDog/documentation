@@ -8,10 +8,6 @@ further_reading:
   text: "Learn about Test Impact Analysis"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Test Impact Analysis is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
-
 ## Overview
 
 This page provides information to help you troubleshot issues with Test Impact Analysis. If you need additional help, contact [Datadog Support][1].
@@ -51,6 +47,12 @@ Test Impact Analysis performs test impact analysis based on code coverage to det
 - Changes to data files in data-driven tests.
 
 If you are authoring a commit that includes any of those cases, you can force-disable test skipping in Test Impact Analysis by adding `ITR:NoSkip` (case insensitive) anywhere in your Git commit message.
+
+### Packages incorrectly detected as third-party
+
+In Python, some packages, such as `sumy` and `sendgrid`, install modules under the `test.*` or `tests.*` package namespace. In `dd-trace-py` versions prior to 3.16.1, this can cause tests to be detected as third-party packages if they are located in a folder with the same name. If you use one of those packages, coverage data for tests may be incomplete, which may cause a test to be skipped when it should have been run. Datadog recommends upgrading `dd-trace-py` to version 3.16.1 or later.
+
+To avoid this issue in older versions of `dd-trace-py`, you can set the `DD_THIRD_PARTY_DETECTION_EXCLUDES` environment variable to a list of such third-party packages (for example, `DD_THIRD_PARTY_DETECTION_EXCLUDES=sumy,sendgrid`).
 
 ## Further reading
 

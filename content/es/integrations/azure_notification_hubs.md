@@ -1,29 +1,58 @@
 ---
-aliases:
-- /es/integrations/azure_notificationhubs
+app_id: azure-notificationhubs
+app_uuid: bc192458-afe0-4254-b137-3746261c732a
+assets:
+  integration:
+    auto_install: true
+    events:
+      creates_events: false
+    metrics:
+      check: azure.notificationhubs_namespaces_notificationhubs.incoming
+      metadata_path: metadata.csv
+      prefix: azure.notificationhubs_namespaces
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 298
+    source_type_name: Azure Notification Hubs
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - azure
 - nube
 - notificaciones
 custom_kind: integración
 dependencies: []
-description: Rastrea las métricas principales de Azure Notification Hubs.
-doc_link: https://docs.datadoghq.com/integrations/azure_notification_hubs/
+display_on_public_website: true
 draft: false
 git_integration_title: azure_notification_hubs
-has_logo: true
 integration_id: azure-notificationhubs
-integration_title: Microsoft Azure Notification Hubs
+integration_title: Azure Notification Hubs
 integration_version: ''
 is_public: true
-manifest_version: '1.0'
+manifest_version: 2.0.0
 name: azure_notification_hubs
-public_title: Integración de Datadog y Microsoft Azure Notification Hubs
+public_title: Azure Notification Hubs
 short_description: Rastrea las métricas principales de Azure Notification Hubs.
-version: '1.0'
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Categoría::Azure
+  - Category::Cloud
+  - Categoría::Notificaciones
+  - Offering::Integration
+  configuration: README.md#Setup
+  description: Rastrea las métricas principales de Azure Notification Hubs.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Azure Notification Hubs
 ---
 
-<!--  FUENTE https://github.com/DataDog/dogweb -->
+<!--  EXTRAÍDO DE https://github.com/DataDog/integrations-internal-core -->
 ## Información general
 
 Azure Notification Hubs proporciona un motor de inserción escalable y fácil de usar que te permite enviar notificaciones a cualquier plataforma (iOS, Android, Windows, Kindle, Baidu, etc.) desde cualquier backend (en la nube o en las instalaciones).
@@ -34,7 +63,7 @@ Utiliza la integración de Azure con Datadog para recopilar métricas de Azure N
 
 ### Instalación
 
-Si aún no lo has hecho, configura primero [Microsoft Azure integración][1]. No hay otros pasos de instalación.
+Si aún no lo has hecho, primero configura la [integración Microsoft Azure][1]. No es necesario realizar ningún otro paso de instalación.
 
 ## Datos recopilados
 
@@ -52,7 +81,7 @@ La integración Azure Notification Hubs no incluye ningún check de servicio.
 
 ## Solucionar problemas
 
-¿Necesitas ayuda? Ponte en contacto con el [soporte de Datadog][3].
+¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][3].
 
 [1]: https://docs.datadoghq.com/es/integrations/azure/
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_notification_hubs/azure_notification_hubs_metadata.csv

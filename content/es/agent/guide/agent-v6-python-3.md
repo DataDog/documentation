@@ -1,8 +1,10 @@
 ---
+description: Configura el Datadog Agent v6 para utilizar el tiempo de ejecución de
+  Python 3 en checks e integraciones del Agent en lugar del Python 2 predeterminado.
 further_reading:
 - link: /agent/versions/upgrade_to_agent_v7/
   tag: Documentación
-  text: Actualizar el Agent a la versión 7
+  text: Actualizar al Agent v7
 title: Gestión de las versiones de Python
 ---
 
@@ -54,7 +56,7 @@ Para pasar de Python 2 a Python 3, actualiza la etiqueta de imagen utilizada p
 {{% tab "Helm" %}}
 De forma predeterminada, el [Helm chart de Datadog][1] utiliza la imagen del Agent 7 que integra el tiempo de ejecución de Python 3.
 
-Si quieres mantener actualizado el Datadog Agent, edita tu `values.yaml` para eliminar cualquier información que aparezca en las secciones `agent.image` y `clusterChecksRunner.image`.
+Para mantener actualizado el Datadog Agent , edita tu `datadog-values.yaml` para eliminar cualquier información de las secciones `agent.image` y `clusterChecksRunner.image`.
 
 Si quieres utilizar un registro de contenedor concreto, configúralo con `agent.image.repository` y `clusterChecksRunner.image.repository`. Comprueba que las etiquetas `agents.image.tag` y `clusterChecksRunner.image.tag` no estén definidas.
 
@@ -191,7 +193,7 @@ spec:
 
 [1]: https://github.com/DataDog/datadog-operator
 {{% /tab %}}
-{{% tab "DaemonSet" %}}
+{{% tab "Manual (DaemonSet)" %}}
 
 En el manifiesto de tu DaemoSet, actualiza la etiqueta de imagen de cada definición de contenedor:
 
@@ -272,10 +274,10 @@ datadog_config:
 {{% /tab %}}
 {{< /tabs >}}
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /es/agent/versions/upgrade_to_agent_v7/?tab=linux
-[2]: /es/agent/guide/agent-configuration-files/#agent-main-configuration-file
-[3]: /es/agent/guide/agent-commands/#restart-the-agent
+[2]: /es/agent/configuration/agent-configuration-files/#agent-main-configuration-file
+[3]: /es/agent/configuration/agent-commands/#restart-the-agent

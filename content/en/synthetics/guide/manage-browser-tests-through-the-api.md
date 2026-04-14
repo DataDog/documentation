@@ -22,7 +22,7 @@ Monitoring your application end-to-end is crucial to understanding your users' e
 Datadog recommends creating your browser tests in the Datadog UI first and retrieving your tests configurations with the API.
 
 1. [Create a browser test][2] and [save a recording][3].
-2. Use the [Get the list of all tests endpoint][4] to retrieve the list of all Synthetics tests.
+2. Use the [Get the list of all tests endpoint][4] to retrieve the list of all Synthetic Monitoring tests.
 3. Filter on `type: browser` and retrieve the `public_ids` of the browser tests you want to manage with the API. 
 4. Use the [Get a browser test endpoint][5] to retrieve the configuration files of every browser test.
 

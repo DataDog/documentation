@@ -1,4 +1,6 @@
 ---
+description: 단계별 가이드에서 Datadog를 사용하여 Heroku 기반 Ruby on Rails 애플리케이션을 배포하고 계측하여 메트릭,
+  로그, 트레이스 및 통합 데이터를 수집하는 방법을 확인하세요.
 further_reading:
 - link: /agent/basic_agent_usage/heroku/
   tag: 설명서
@@ -538,7 +540,7 @@ source 'https://rubygems.org'
 gem 'ddtrace', require: 'ddtrace/auto_instrument'
 ```
 
-`bundle install`로 gem을 설치합니다.
+`bundle install`을 사용해 gem을 설치합니다.
 
 ```shell
 bundle install
@@ -615,10 +617,10 @@ APM Agent
 
 {{< img src="agent/guide/heroku_ruby/traces.png" alt="Ruby application traces in Datadog" >}}
 
-[서비스 카탈로그][20]로 이동하여 모든 애플리케이션 서비스 및 애플리케이션 서비스 보기를 확인합니다.
+[Software Catalog][20]로 이동해서 모든 애플리케이션 서비스와 애플리케이션 서비스 보기를 확인합니다.
 
-{{< img src="agent/guide/heroku_ruby/ruby_service.png" alt="Datadog 서비스 카탈로그" >}}
-{{< img src="agent/guide/heroku_ruby/service_page.png" alt="Datadog의 루비 애플리케이션 서비스 상세 정보 페이지" >}}
+{{< img src="agent/guide/heroku_ruby/ruby_service.png" alt="Datadog의 Software Catalog" >}}
+{{< img src="agent/guide/heroku_ruby/service_page.png" alt="Datadog의 Ruby 애플리케이션 서비스 세부 정보 페이지" >}}
 
 ## 로그
 

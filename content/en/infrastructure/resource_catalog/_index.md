@@ -6,6 +6,9 @@ aliases:
   - /security/cspm/resource_catalog
   - /security/misconfigurations/resource_catalog
 further_reading:
+- link: "https://www.datadoghq.com/blog/cambia-health-cost-optimization"
+  tag: "Blog"
+  text: "How Cambia Health Solutions saved $30,000 monthly with Cloud Cost Management and the Datadog Resource Catalog"
 - link: "/security/cloud_security_management/misconfigurations/"
   tag: "Documentation"
   text: "Cloud Security Misconfigurations"
@@ -19,10 +22,6 @@ further_reading:
   tag: "Blog"
   text: "Troubleshoot infrastructure issues faster with Recent Changes"
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Resource Catalog is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
 
 ## Overview
 
@@ -54,9 +53,12 @@ Resource Catalog leverages Datadog cloud integrations and the Datadog Agent to g
 
 By default, when you navigate to the Resource Catalog, you are able to see Datadog Agent monitored hosts, as well as cloud resources crawled for other Datadog products such as CNM (Cloud Network Monitoring), and DBM (Database Monitoring). To view additional cloud resources in the Resource Catalog, toggle on **extend resource collection** from the [Resource Catalog][5] setup page. 
 
-{{< img src="/infrastructure/resource_catalog/resource-catalog-doc-img-2.png" alt="The Resource Catalog configuration page for extending resource collection" width="100%">}}
+{{< img src="/infrastructure/resource_catalog/resource_catalog_settings.png" alt="The Resource Catalog configuration page for extending resource collection" width="100%">}}
 
-**Note**: Extending resource collection does _not_ incur additional costs. The Resource Catalog is a free product for Infrastructure Monitoring customers.
+<div class="alert alert-warning">Enabling resource collection can impact your AWS CloudWatch costs. To avoid these charges, disable <strong>Usage</strong> metrics in the <strong>Metric Collection</strong> tab of the <a href="https://app.datadoghq.com/integrations/amazon-web-services">Datadog AWS Integration</a>.
+</div>
+
+{{< img src="/infrastructure/resource_catalog/aws_usage_toggle.png" alt="AWS Usage toggle in account settings" style="width:100%;" >}}
 
 ## Browse the Resource Catalog
 
@@ -78,50 +80,42 @@ To access the relevant cloud console for any resource in your list, click on a r
 
 Clicking on a host opens a side panel with details including:
 
-- **Host information** such as the name, account, OS, instance type, tags, and metadata associated with the resource
-- **Telemetry** including metrics, logs, traces, processes, and so on
-- **Active monitor alerts** and enabled monitors status on the host
-- **Agent configuration** information
+- **Host information** such as the name, account, OS, instance type, tags, and metadata associated with the host
+- **Host Summary** which displays active monitor alerts and enabled products
+- **Telemetry** including metrics, logs, traces, and processes
+- **Containers** which displays metrics for containers attached to the host
+- **Infra map** which displays a [Cloudcraft diagram][17]
+- **Relationships** which displays an interactive map of connections to other resources
+- **Profiles** correlated with the host (requires [Profiler][20])
+- **Network** information, which can be filtered by tags and displayed in customizable graphs
+- **Changes** showing a customizable history of changes to the host
+- **Security** which displays general misconfigurations, [IaC misconfigurations][21], signals, vulnerabilities, identity risks, and access insights
+- **Cost** which includes recommendations to reduce the host's costs
+- **Agent** which displays your Agent configuration in JSON format
+- **OTel Collector** which displays your OpenTelemetry Collector configuration (in Preview)
 
-{{< img src="/infrastructure/resource_catalog/resource_catalog_host_side_panel.png" alt="Resource Catalog with the host side panel open" width="100%">}}
+{{< img src="/infrastructure/resource_catalog/resource_catalog_host_side_panel-2.png" alt="Resource Catalog with the host side panel open" width="100%">}}
 
 Clicking on any resource opens a side panel with details including:
 
-- **Resource information** such as the resource type, name, account, and tags associated with the resource.
-- **Resource definition** in JSON showing the full configuration of the asset.
-- **Recent Changes** showing a 7-day history of changes to the resource
-- **Relationship** view showing interdependencies between resources
-- **Service and team ownership** of the resource
-- **Security risks** that the resource is exposed to, including misconfigurations, signals, identity risks, and vulnerabilities
+- **Resource Info** including resource-specific tags and the resource's definition in JSON format
+- **Telemetry** including metrics and logs
+- **Relationships** which displays an interactive map of connections to other resources
+- **Changes** showing a history of changes to the resource
+- **Security** which displays misconfigurations, signals, vulnerabilities, and identity risks
 
-## Recent changes
+## Resource Changes (in Preview)
 
 {{< callout url="https://www.datadoghq.com/product-preview/recent-changes-tab/" >}}
-  <strong>Recent Changes</strong> is in Preview, but you can easily request access! Use this form to submit your request today.
+Resource Changes is in Preview. Click <strong>Request Access</strong> and complete the form to request access.
 {{< /callout >}} 
 
-**Recent Changes** displays a 7-day history of all configuration changes to [supported resources][15] across your environments. To forward change events from your cloud environments, either enable Snapshot Changes through Resource Collection or follow the links for your cloud providers in the sections below.
+Resource Changes provides visibility and control over configuration changes to your cloud infrastructure. It helps you monitor modifications to resources, aiding in troubleshooting incidents and understanding the evolution of your environment.
 
-**Prerequisites**: 
-   - You have selected to `Enable Resource Collection` under the **Resource Collection** tab on the [cloud provider integration tile][7]. 
-   - You have [access to the Preview][9].
-   - Optionally, you can configure change event forwarding through one of the following cloud providers.
+For more information, see [Resource Changes][16].
 
-#### Snapshot Changes
+{{< img src="/infrastructure/resource_catalog/resource-changes.png" alt="Datadog Resource Changes interface showing a list of infrastructure configuration changes. The screen displays a VM instance named \"vm-new-jmcintyre-kafka\" with a StorageProfile update, including a side-by-side diff view highlighting changes in JSON format. The table shows multiple resources with timestamps, change types (mostly \"UPDATE\"), and details of the modifications. Filters are available at the top for cloud, region, environment, and other attributes." width="100%">}}
 
-Snapshot Changes is a generated Event Stream captured every 5 - 15 minutes through resource collection and requires no additional setup. For more frequent change updates, follow the links for your cloud providers in the following sections.
-
-#### AWS
-
-See the [AWS Config integration page][6] to launch a CloudFormation template that sets up change event forwarding through AWS Config. AWS Config captures configuration changes in real time, or to the extent allowed by your configuration.
-
-#### Azure
-
-To collect resource configuration changes, enable **Resource Collection** for your Azure subscriptions in the [Azure integration tile][14]. Azure Resource Graph captures configuration changes every 10 minutes.
-
-#### Google Cloud Platform
-
-See the [Resource changes collection][8] section of the Google Cloud Platform integration page for instructions on forwarding change events through a Pub/Sub topic and subscription. Google Cloud Asset Inventory captures configuration changes every 10 minutes.
 
 ## Further reading
 
@@ -142,3 +136,9 @@ See the [Resource changes collection][8] section of the Google Cloud Platform in
 [13]: https://docs.datadoghq.com/security/cloud_security_management/vulnerabilities/
 [14]: https://app.datadoghq.com/integrations/azure
 [15]: https://docs.datadoghq.com/infrastructure/resource_catalog/schema/
+[16]: /infrastructure/resource_catalog/resource_changes/
+[17]: /datadog_cloudcraft/
+[18]: /integrations/ntp/
+[19]: /infrastructure/process/?tab=linuxwindows#installation
+[20]: /profiler/enabling/
+[21]: /security/code_security/iac_security/

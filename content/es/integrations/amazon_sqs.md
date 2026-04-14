@@ -109,7 +109,7 @@ Una vez añadido el desencadenante, utiliza el [Datadog Log Explorer][12] para v
 ## Recopilación de datos
 
 ### Métricas
-{{< get-metrics-from-git "amazon_sqs" >}}
+{{< get-metrics-from-git "amazon-sqs" >}}
 
 
 A cada una de las métricas recuperadas de AWS se le asignan las mismas etiquetas que aparecen en la consola de AWS, donde se incluyen, entre otros, el nombre del host, los grupos de seguridad y más.

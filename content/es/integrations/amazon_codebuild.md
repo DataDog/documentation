@@ -1,6 +1,26 @@
 ---
 aliases:
 - /es/integrations/awscodebuild/
+app_id: amazon-codebuild
+app_uuid: 688eb96c-df87-4c10-9253-a2cc3c113e9b
+assets:
+  integration:
+    auto_install: false
+    events:
+      creates_events: false
+    metrics:
+      check: aws.codebuild.builds
+      metadata_path: assets/metrics/metric-spec.yaml
+      prefix: aws.codebuild
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 212
+    source_type_name: Amazon CodeBuild
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - aws
 - nube
@@ -10,23 +30,40 @@ custom_kind: integración
 dependencies: []
 description: Ve los despliegues a medida que se producen y controla el tiempo que
   tardan.
+display_on_public_website: true
 doc_link: https://docs.datadoghq.com/integrations/amazon_codebuild/
 draft: false
 git_integration_title: amazon_codebuild
 has_logo: true
-integration_id: ''
+integration_id: amazon-codebuild
 integration_title: AWS CodeBuild
 integration_version: ''
 is_public: true
-manifest_version: '1.0'
+manifest_version: 2.0.0
 name: amazon_codebuild
-public_title: Integración de Datadog y AWS CodeBuild
-short_description: Ve los despliegues a medida que se producen y controla el tiempo
-  que tardan.
+public_title: AWS CodeBuild
+short_description: AWS CodeBuild compila código fuente, ejecuta tests y prepara paquetes
+  de software para despliegues.
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Categoría::AWS
+  - Categoría::Nube
+  - Categoría::Configuración y despliegue
+  - Category::Log Collection
+  - Offering::Integration
+  configuration: README.md#Configuración
+  description: AWS CodeBuild compila código fuente, ejecuta tests y prepara paquetes
+    de software para despliegues.
+  media: []
+  overview: README.md#Información general
+  support: README.md#Soporte
+  title: AWS CodeBuild
 version: '1.0'
 ---
 
-<!--  EXTRAÍDO DE https://github.com/DataDog/dogweb -->
+<!--  EXTRAÍDO DE https://github.com/DataDog/integrations-internal-core -->
 ## Información general
 
 AWS CodeBuild es un servicio de compilación que compila el código fuente, ejecuta tests y genera paquetes de software listos para su despliegue.
@@ -49,7 +86,7 @@ Si aún no lo has hecho, configura primero la [integración de Amazon Web Servic
 
 2. Instala la [integración de Datadog y AWS CodeBuild][3].
 
-### APM
+### Recopilación de logs
 
 #### Activar logging
 
@@ -79,7 +116,7 @@ La integración de AWS CodeBuild no incluye ningún evento.
 
 La integración de AWS CodeBuild no incluye ningún check de servicio.
 
-## Resolución de problemas
+## Solucionar problemas
 
 ¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][8].
 
@@ -89,5 +126,5 @@ La integración de AWS CodeBuild no incluye ningún check de servicio.
 [4]: https://docs.datadoghq.com/es/logs/guide/forwarder/
 [5]: https://docs.datadoghq.com/es/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-s3-buckets
 [6]: https://docs.datadoghq.com/es/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
-[7]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_codebuild/amazon_codebuild_metadata.csv
+[7]: https://github.com/DataDog/integrations-internal-core/blob/main/amazon_codebuild/assets/metrics/metric-spec.yaml
 [8]: https://docs.datadoghq.com/es/help/

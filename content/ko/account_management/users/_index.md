@@ -18,7 +18,7 @@ further_reading:
 title: 사용자 관리
 ---
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">정부 사이트용 Datadog는 SAML 로그인만을 지원합니다.</div>
+<div class="alert alert-danger">정부 사이트용 Datadog는 SAML 로그인만을 지원합니다.</div>
 {{< /site-region >}}
 
 Datadog **Organization Settings**의 **User** 탭에서 사용자와 사용자에게 할당된 역할을 관리하세요. 오른쪽에서 **List View** 또는 **Grid View**를 눌러 목록 보기와 그리드 보기 화면을 전환할 수 있습니다.

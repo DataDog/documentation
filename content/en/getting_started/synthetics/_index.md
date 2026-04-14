@@ -1,9 +1,10 @@
 ---
 title: Getting Started with Synthetic Monitoring
+description: Monitor system performance with simulated requests for API, browser, and mobile tests across global locations.
 further_reading:
-- link: 'https://learn.datadoghq.com/courses/intro-to-synthetic-tests'
+- link: 'https://learn.datadoghq.com/courses/getting-started-with-synthetic-browser-testing'
   tag: 'Learning Center'
-  text: 'Introduction to Synthetic Tests'
+  text: 'Getting Started with Synthetic Browser Testing'
 - link: '/synthetics/api_tests'
   tag: 'Documentation'
   text: 'Learn more about API tests'
@@ -55,6 +56,28 @@ To set up your first Synthetic test with Datadog, choose from the following opti
 - [Create a mobile test][6] to start testing key business workflows on your Android and iOS applications.
 - [Create a private location][5] to start monitoring internal applications using all Synthetic test types.
 
+## Synthetic Monitoring notifications
+
+Use and enrich Synthetic monitors to send notifications when a Synthetic Monitoring test is failing. The following use cases are available:
+
+Pre-filled monitor messages
+: Pre-filled monitor messages provide a structured starting point for Synthetic test alerts. Each message includes a standardized title, summary, and footer containing test metadata, making it easier to understand the alert at a glance.
+
+Template variables
+: Template variables let you inject test-specific data into monitor notifications dynamically. These variables pull from the `synthetics.attributes` object.
+
+Advanced usage
+: Advanced usage includes techniques for surfacing deeper test insights or structuring complex messages using handlebars templating.
+
+Conditional alerting
+: Conditional alerting allows you to change the content of a monitor notification based on specific test results or failure conditions.
+
+For more information, see [Synthetic Monitoring notifications][9].
+
+## Version History
+
+Use [Version History in Synthetic Monitoring][8] to run a previous version of a test, restore your test to any saved version, or clone a version to create a new Synthetic Monitoring test.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -66,3 +89,5 @@ To set up your first Synthetic test with Datadog, choose from the following opti
 [5]: /getting_started/synthetics/private_location/
 [6]: /getting_started/synthetics/mobile_app_testing/
 [7]: /getting_started/continuous_testing/
+[8]: /synthetics/guide/version_history/
+[9]: /synthetics/notifications/

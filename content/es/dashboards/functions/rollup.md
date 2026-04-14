@@ -1,6 +1,12 @@
 ---
 aliases:
 - /es/graphing/functions/rollup/
+description: Controla la agregación temporal y los intervalos de puntos de datos mediante
+  funciones de rollup personalizadas y rollups móviles para métricas.
+further_reading:
+- link: /dashboards/guide/rollup-cardinality-visualizations
+  tag: Documentación
+  text: Comprensión de la función y la cardinalidad de rollup en las visualizaciones
 title: Rollup
 ---
 
@@ -46,7 +52,7 @@ Al crear gráficas, Datadog establece un límite en la cantidad de puntos por se
 
 | Período de tiempo           | Intervalo de rollup, gráfica de líneas | Intervalo de rollup, gráfica de barras | Intervalo de rollup, API |
 |---------------------|-----------------------------|----------------------------|----------------------|
-| La última hora       | 20 s                         | 1 m                         | 20 s                  |
+| La última hora       | 20s                         | 1 m                         | 20s                  |
 | Las últimas cuatro horas    | 1 m                          | 2 m                         | 1 m                   |
 | El último día        | 5 m                          | 20 m                        | 5 m                   |
 | Los últimos dos días     | 10 m                         | 30 m                        | 10 m                  |
@@ -65,7 +71,7 @@ Para obtener más detalles sobre cómo utilizar `.as_count()` y `.as_rate()`, co
 
 {{< img src="dashboards/functions/rollup/calendar_aligned_queries.png" alt="calendar_aligned_queries" style="width:100%;" >}}
 
-Puedes personalizar cómo se agrupan los datos de tus métricas a lo largo del tiempo cuando se utiliza la función `.rollup()` con consultas alineadas con el calendario. Esta característica te ofrece la flexibilidad de definir:
+Puedes personalizar cómo se agrupan los datos de tus métricas a lo largo del tiempo cuando utilizas la función `.rollup()` con consultas alineadas con el calendario. Esta función te ofrece la flexibilidad para definir:
 
 * Consultas mensuales alineadas con el calendario con fecha de inicio y zonas horarias ajustables. Por ejemplo, puedes comparar los errores mensuales de tus clientes de febrero y diciembre del año pasado.
 * Rollups semanales con fecha de inicio y zonas horarias ajustables. Por ejemplo, conoce cuántas transacciones semanales se encuentran abiertas (si tu semana comienza los lunes).
@@ -75,20 +81,11 @@ Puedes personalizar cómo se agrupan los datos de tus métricas a lo largo del t
 
 Por lo general, se deben evitar los rollups en las consultas de [monitor][5], debido a la posibilidad de desalineación entre el intervalo de rollup y el período de evaluación del monitor. El inicio y el final de los intervalos de rollup se encuentran alineados con la hora UNIX, no con el inicio y el final de las consultas del monitor. Por lo tanto, un monitor puede evaluar (y activar) un intervalo de rollup incompleto que contenga solo una pequeña muestra de datos. Para evitar este problema, retrasa la evaluación del monitor (al menos) durante el intervalo de rollup de la configuración.
 
-## Otras funciones
+Si tus monitores se evalúan de forma inesperada con un estado "No Data" (Sin datos), considera revisar los ajustes de los periodos de rollup y de evaluación. Por ejemplo, si un monitor tiene un intervalo de rollup de 4 minutos y un periodo de evaluación de 20 minutos, se produce un punto de datos cada 4 minutos, lo que lleva a un máximo de 5 puntos de datos en el periodo. Si la opción "Require Full Window" (Requerir intervalo completo) está activada, la evaluación puede dar como resultado "No Data" (Sin datos), ya que el periodo no está completamente rellenado.
 
-{{< whatsnext desc="Consulta las demás funciones disponibles:" >}}
-    {{< nextlink href="/dashboards/functions/algorithms" >}}Algorítmica: implementa la detección de anomalías o outliers en la métrica.{{< /nextlink >}}
-    {{< nextlink href="/dashboards/functions/arithmetic" >}}Aritmética: realiza operaciones aritméticas en la métrica.  {{< /nextlink >}}
-    {{< nextlink href="/dashboards/functions/count" >}}Conteo: cuenta el valor distinto de cero o no nulo de la métrica. {{< /nextlink >}}
-    {{< nextlink href="/dashboards/functions/exclusion" >}}Exclusión: excluye ciertos valores de la métrica.{{< /nextlink >}}
-    {{< nextlink href="/dashboards/functions/interpolation" >}}Interpolación: rellena o establece valores predeterminados para la métrica.{{< /nextlink >}}
-    {{< nextlink href="/dashboards/functions/rank" >}}Clasificación: solo selecciona un subconjunto de métricas. {{< /nextlink >}}
-    {{< nextlink href="/dashboards/functions/rate" >}}Tasa: calcula una derivada personalizada sobre la métrica.{{< /nextlink >}}
-    {{< nextlink href="/dashboards/functions/regression" >}}Regresión: aplica una función de machine learning a la métrica.{{< /nextlink >}}
-    {{< nextlink href="/dashboards/functions/smoothing" >}}Suavizado: suaviza las variaciones métricas.{{< /nextlink >}}
-    {{< nextlink href="/dashboards/functions/timeshift" >}}Cambio de tiempo: cambia el punto de datos de la métrica a lo largo de la línea de tiempo. {{< /nextlink >}}
-{{< /whatsnext >}}
+## Referencias adicionales
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /es/dashboards/functions/#add-a-function
 [2]: /es/metrics/faq/rollup-for-distributions-with-percentiles/

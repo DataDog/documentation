@@ -12,9 +12,9 @@ Antes de configurar Runtime Code Analysis (IAST), asegúrate de que se cumplen l
 
 1. **Instalación del Datadog Agent:** El Datadog Agent se instala y configura para el sistema operativo de tu aplicación o contenedor, nube o entorno virtual.
 2. **Configuración de Datadog APM:** Datadog APM está configurado para tu aplicación o servicio, y las trazas (traces) web (`type:web`) son recibidas por Datadog.
-3. **Biblioteca de rastreo compatible:** La biblioteca de rastreo de Datadog utilizada por tu aplicación o servicio admite funcionalidades de Runtime Code Analysis (IAST) para el lenguaje de tu aplicación o servicio. Para ver más detalles, consulta la sección **Requisitos de compatibilidad** más abajo.
+3. **Biblioteca de rastreo compatible:** La librería de rastreo de Datadog utilizada por tu aplicación o servicio admite funcionalidades de Runtime Code Analysis (IAST) para el lenguaje de tu aplicación o servicio. Para ver más detalles, consulta la sección **Requisitos de compatibilidad** más abajo.
 
-## Uso de bibliotecas de rastreo de Datadog
+## Uso de librerías de rastreo de Datadog
 
 Selecciona el lenguaje de tu aplicación para obtener información detallada sobre cómo activar Runtime Code Analysis (IAST) para tu lenguaje y tus tipos de infraestructura.
 
@@ -95,7 +95,7 @@ Actualiza tu archivo JSON de definición de tarea de ECS añadiendo esto en la s
 [6]: /es/agent/versions/upgrade_between_agent_minor_versions/
 
 
-{{% /collapse-content %}} 
+{{% /collapse-content %}}
 
 {{% collapse-content title=".NET" level="h4" %}}
 
@@ -119,7 +119,7 @@ O uno de los siguientes métodos, dependiendo de dónde se ejecuta tu aplicació
 En una consola Windows:
 
 ```sh
-rem Configura variables de entorno 
+rem Configura variables de entorno
 SET DD_IAST_ENABLED=true
 
 rem Iniciar aplicación
@@ -175,7 +175,7 @@ spec:
           env:
             - name: DD_IAST_ENABLED
               value: "true"
-``` 
+```
 
 #### AWS ECS
 
@@ -211,7 +211,7 @@ Si necesitas ayuda adicional, ponte en contacto con el [equipo de asistencia de 
 [4]: /es/security/code_security/iast/setup/
 [5]: /es/help
 
-{{% /collapse-content %}} 
+{{% /collapse-content %}}
 
 {{% collapse-content title="Node.js" level="h4" %}}
 
@@ -223,7 +223,7 @@ Sigue estos pasos para activar Runtime Code Analysis (IAST) en tu servicio:
 2. Actualiza tu biblioteca de rastreo de Datadog al menos a la versión mínima necesaria para activar Runtime Code Analysis (IAST). Para obtener más información, consulta **Requisitos de compatibilidad** más abajo.
 3. Añade la variable de entorno `DD_IAST_ENABLED=true` a la configuración de tu aplicación.
 
-   Si inicializas la biblioteca de APM en la línea de comandos utilizando la opción `--require` para Node.js:
+   Si inicializas la librería de APM en la línea de comandos utilizando la opción `--require` para Node.js:
 
    ```shell
    node --require dd-trace/init app.js
@@ -287,7 +287,7 @@ Actualiza tu archivo JSON de definición de tarea de ECS añadiendo esto en la s
 [5]: https://app.datadoghq.com/security/appsec/vm/code
 [6]: /es/help
 
-{{% /collapse-content %}} 
+{{% /collapse-content %}}
 
 {{% collapse-content title="Python" level="h4" %}}
 
@@ -357,7 +357,7 @@ Actualiza tu archivo JSON de definición de tarea de ECS añadiendo esto en la s
 ]
 ```
 
-#### Nota sobre la compatibilidad de bibliotecas de terceros
+#### Nota sobre la compatibilidad de librerías de terceros
 
 Runtime Code Analysis (IAST) modifica el código Python en tiempo de ejecución. Esto podría causar conflictos con otras bibliotecas de terceros Python que realizan transformaciones de código similares, en particular los siguientes, aunque sin limitarse a ellos:
 
@@ -380,7 +380,7 @@ utilizando la API CPython, o en sistemas de lenguaje intermedio como Cython, los
 [5]: /es/help
 [6]: /es/agent/versions/upgrade_between_agent_minor_versions/
 
-{{% /collapse-content %}} 
+{{% /collapse-content %}}
 
 ### Configuración de acabado
 
@@ -397,7 +397,7 @@ Si necesitas ayuda adicional, ponte en contacto con el [equipo de asistencia de 
 
 ## Requisitos de compatibilidad
 
-Se admiten las siguientes funcionalidades de ASM, en relación con la biblioteca de rastreo de cada lenguaje:
+Se admiten las siguientes funcionalidades de ASM, en relación con la librería de rastreo de cada lenguaje:
 
 | Función de seguridad de las aplicaciones               | Java    | .NET     | Node.js        | Python        | Go              | Ruby          | PHP           |
 |-----------------------------------------------|---------|----------|----------------|---------------|-----------------|---------------|---------------|
@@ -409,7 +409,7 @@ Selecciona el lenguaje de tu aplicación para obtener más información sobre la
 
 ### Funciones de seguridad de las aplicaciones
 
-Las siguientes funciones de seguridad de las aplicaciones son compatibles con la biblioteca Java para la versión de rastreador especificada:
+Las siguientes funciones de seguridad de las aplicaciones son compatibles con la librería Java para la versión de rastreador especificada:
 
 | Función de seguridad de las aplicaciones  | Versión mínima de rastreador Java  |
 | -------------------------------- | ----------------------------|
@@ -439,7 +439,7 @@ La versión mínima de rastreador para contar con todas las funciones de segurid
 
 ### Compatibilidad con lenguajes y marcos
 
-#### Versiones compatibles de Java 
+#### Versiones compatibles de Java
 El rastreador Java es compatible con la instrumentación automática para los tiempos de ejecución Oracle JDK y OpenJDK de máquinas virtuales Java.
 
 | Versiones de máquinas virtuales Java | Sistemas operativos                                                               | Nivel de compatibilidad                       | Versión del rastreador |
@@ -449,7 +449,7 @@ El rastreador Java es compatible con la instrumentación automática para los ti
 
 Datadog no admite oficialmente ninguna versión de acceso anticipado de Java.
 
-#### Compatibilidad con marcos web
+#### Compatibilidad con web frameworks
 
 - Detalles de una solicitud HTTP originada por un atacante
 - Etiquetas (tags) para la solicitud HTTP (código de estado, método, etc.)
@@ -558,13 +558,13 @@ Las integraciones a los marcos de autenticación de usuarios proporcionan:
 [2]: /es/agent/remote_config/?tab=configurationyamlfile#enabling-remote-configuration
 [3]: /es/security/application_security/vulnerability_management/#manage-code-level-vulnerabilities
 
-{{% /collapse-content %}} 
+{{% /collapse-content %}}
 
 {{% collapse-content title=".NET" level="h4" %}}
 
 ### Funciones de seguridad de las aplicaciones
 
-Las siguientes funciones de seguridad de las aplicaciones son compatibles con la biblioteca .NET para la versión de rastreador especificada:
+Las siguientes funciones de seguridad de las aplicaciones son compatibles con la librería .NET para la versión de rastreador especificada:
 
 | Función de seguridad de las aplicaciones  | Versión mínima de rastreador .NET |
 | -------------------------------- | ----------------------------|
@@ -613,7 +613,7 @@ Son compatibles con las siguientes arquitecturas:
 
 
 
-#### Compatibilidad con marcos web
+#### Compatibilidad con web frameworks
 
 - Detalles de una solicitud HTTP originada por un atacante
 - Etiquetas (tags) para la solicitud HTTP (código de estado, método, etc.)
@@ -668,13 +668,13 @@ Son compatibles con las siguientes arquitecturas:
 [3]: /es/agent/remote_config/#enabling-remote-configuration
 
 
-{{% /collapse-content %}} 
+{{% /collapse-content %}}
 
 {{% collapse-content title="Node.js" level="h4" %}}
 
 ### Funciones de seguridad de las aplicaciones
 
-Las siguientes funciones de seguridad de las aplicaciones son compatibles con la biblioteca Node.js, para la versión de rastreador especificada:
+Las siguientes funciones de seguridad de las aplicaciones son compatibles con la librería Node.js, para la versión de rastreador especificada:
 
 | Función de seguridad de las aplicaciones        | Versión mínima del rastreador Node.js                     |
 |----------------------------------------|----------------------------------------------------|
@@ -706,7 +706,7 @@ La versión mínima del rastreador para obtener todas las funciones de seguridad
 #### Compatibilidad con versiones de Node.js
 
 Cuando el proyecto Node.js deja de ser compatible con una versión principal de LTS (cuando llega al fin de su ciclo de vida), también deja de ser compatible con la siguiente versión principal de `dd-trace`.
-La última versión principal de la biblioteca `dd-trace` es compatible con esa versión EOL de Node.js durante al menos otro año en modo de mantenimiento.
+La última versión principal de la librería `dd-trace` es compatible con esa versión EOL de Node.js durante al menos otro año en modo de mantenimiento.
 
 Algunos problemas no pueden solucionarse en `dd-trace` y deben solucionarse en Node.js. Cuando esto ocurre y la versión de Node.js en cuestión es EOL, no es posible solucionar el problema sin pasar a otra versión que no sea EOL.
 Datadog no ofrece nuevas versiones de `dd-trace` para ofrecer una compatibilidad específica para las líneas de versiones principales de Node.js que no son LTS (versiones impares).
@@ -733,7 +733,7 @@ Los siguientes sistemas operativos son oficialmente compatibles con `dd-trace`. 
 
 
 
-#### Compatibilidad con marcos web
+#### Compatibilidad con web frameworks
 
 - Detalles de una solicitud HTTP originada por un atacante
 - Etiquetas (tags) para la solicitud HTTP (código de estado, método, etc.)
@@ -845,13 +845,13 @@ Las integraciones a los marcos de autenticación de usuarios proporcionan:
 [44]: https://www.npmjs.com/package/apollo-server-core
 
 
-{{% /collapse-content %}} 
+{{% /collapse-content %}}
 
 {{% collapse-content title="Python" level="h4" %}}
 
 ### Funciones de seguridad de las aplicaciones
 
-Las siguientes funciones de seguridad de las aplicaciones son compatibles con la biblioteca Python para la versión de rastreador especificada:
+Las siguientes funciones de seguridad de las aplicaciones son compatibles con la librería Python para la versión de rastreador especificada:
 
 | Función de seguridad de las aplicaciones  | Versión mínima de rastreador Python |
 | -------------------------------- | ----------------------------|
@@ -877,9 +877,9 @@ Las siguientes funciones de seguridad de las aplicaciones son compatibles con la
 
 ### Compatibilidad con lenguajes y marcos
 
-#### Versiones compatibles de Python 
+#### Versiones compatibles de Python
 
-La biblioteca cliente de APM de Python sigue una [política de control de versiones][3] en la cual se especifica el nivel de compatibilidad para las diferentes versiones de la biblioteca y el tiempo de ejecución de Python.
+La librería cliente de APM de Python sigue una [política de control de versiones][3] en la cual se especifica el nivel de compatibilidad para las diferentes versiones de la librería y el tiempo de ejecución de Python.
 
 Se admiten dos ramificaciones de versiones:
 
@@ -888,7 +888,7 @@ Se admiten dos ramificaciones de versiones:
 | `<1`       | Mantenimiento           |
 | `>=1.0,<2` | Disponibilidad general |
 
-Y la biblioteca es compatible con los siguientes tiempos de ejecución:
+Y la librería es compatible con los siguientes tiempos de ejecución:
 
 | Sistema operativo      | CPU                   | Tiempo de ejecución | Versión de tiempo de ejecución | Versiones de ddtrace compatibles |
 |---------|-----------------------|---------|-----------------|--------------------------|
@@ -897,7 +897,7 @@ Y la biblioteca es compatible con los siguientes tiempos de ejecución:
 | Windows | 64 bits, 32 bits          | CPython | 2.7, 3.5-3.11   | `<2`                     |
 
 
-#### Compatibilidad con marcos web
+#### Compatibilidad con web frameworks
 
 - Detalles de una solicitud HTTP originada por un atacante
 - Etiquetas (tags) para la solicitud HTTP (código de estado, método, etc.)
@@ -931,7 +931,7 @@ El rastreo de almacenes de datos proporciona:
 
 - **El Análisis de la composición del software** es compatible con todos los marcos.
 - La **Protección frente a amenazas** también funciona en la capa de solicitud HTTP (entrada), por lo que funciona para todas las bases de datos por defecto, incluso aquellas que no aparecen en la siguiente tabla.
-La biblioteca Python es compatible con las [especificaciones de API de bases de datos][4] y admite todas las bases de datos SQL genéricas. Esto incluye bases de datos como SQLite, Mysql, Postgres y MariaDB.
+La librería Python es compatible con las [especificaciones de API de bases de datos][4] y admite todas las bases de datos SQL genéricas. Esto incluye bases de datos como SQLite, Mysql, Postgres y MariaDB.
 
 #### Compatibilidad con marcos de autenticación de usuarios
 

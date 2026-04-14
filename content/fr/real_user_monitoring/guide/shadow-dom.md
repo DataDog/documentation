@@ -8,7 +8,7 @@ further_reading:
 title: Enrichissez les rediffusions de vos sessions avec les composants du Shadow DOM
 ---
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Datadog ne prend en charge que le Shadow DOM en mode open.
 </div>
 

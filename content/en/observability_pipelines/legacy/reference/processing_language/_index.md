@@ -4,10 +4,6 @@ aliases:
   - /observability_pipelines/reference/processing_language/
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Observability Pipelines is not available on the US1-FED Datadog site.</div>
-{{< /site-region >}}
-
 Datadog Processing Language (DPL), or Vector Remap Language (VRL), is an expression-oriented, domain specific language designed for transforming logs. It features a simple syntax and [built-in functions][1] tailored to observability use cases.
 
 Datadog Processing Language is supported in the `remap` transform.

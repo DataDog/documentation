@@ -41,18 +41,18 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Category::Compliance
+  - Categoría::Cumplimiento
   - Category::Log Collection
   - Category::Security
   - Offering::Integration
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
-  configuration: README.md#Setup
+  configuration: README.md#Configuración
   description: Ingesta de información de conformidad de Datadog en Drata
   media: []
-  overview: README.md#Overview
-  support: README.md#Support
+  overview: README.md#Información general
+  support: README.md#Soporte
   title: Drata
 ---
 
@@ -81,7 +81,7 @@ Para configurar esta integración, debes tener una [cuenta de Drata][2] activa. 
 8. Drata empezará a sincronizar los datos de usuario y de configuración desde la API de Datadog y te notificará si algún monitor de conformidad falla.
 
 
-## Ayuda
+## Soporte
 
 ¿Necesitas ayuda? Ponte en contacto con el [soporte de Datadog][6] o [support@drata.com][7].
 

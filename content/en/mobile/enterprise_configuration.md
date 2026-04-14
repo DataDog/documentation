@@ -1,5 +1,6 @@
 ---
 title: Enterprise Configuration
+description: "Configure the Datadog Mobile App for enterprise deployment with MDM providers using AppConfig for organization-specific settings."
 aliases:
 - /service_management/enterprise-configuration
 further_reading:
@@ -19,12 +20,25 @@ The Datadog Mobile App is fully compatible with [AppConfig][1] and the Mobile De
 
 The mobile app supports all default MDM capabilities for [iOS][2] and [Android][3], as well as the following dedicated features:
 
-| Key | Description |Type|Default Value| 
-|---------|---------|-----|-----|
-|`datadogDefaultLoginOrganizationUUID`|Define the organization UUID `dd_oid` passed as a parameter during login.|String|null|
-|`datadogDefaultLoginOrganizationPublicID`|Define the organization `public_id` (available through the [API endpoint for listing your managed organizations][4]) passed as a parameter during login. If `datadogDefaultLoginOrganizationUUID` has been set, it takes precedence over the `public_id`.|String|null|
-|`disableSharing`|Disable content sharing from the app.|Boolean|false|
-|`disableHomeScreenWidgets`|Disable access to homescreen widgets (and instead display "disabled by your organization").|Boolean|false|
+`datadogDefaultLoginOrganizationUUID`<br>
+: **Type**: String <br>
+**Default Value**: Null <br>
+**Description**: Define the organization UUID `dd_oid` passed as a parameter during login.
+
+`datadogDefaultLoginOrganizationPublicID`<br>
+: **Type**: String <br>
+**Default Value**: Null <br>
+**Description**: Define the organization `public_id` (available through the [API endpoint for listing your managed organizations][4]) passed as a parameter during login. If `datadogDefaultLoginOrganizationUUID` has been set, it takes precedence over the `public_id`.
+
+`disableSharing`<br>
+: **Type**: Boolean <br>
+**Default Value**: False <br>
+**Description**: Disable content sharing from the app.
+
+`disableHomeScreenWidgets`<br>
+: **Type**: Boolean <br>
+**Default Value**: False <br>
+**Description**: Disable access to homescreen widgets (and instead display "disabled by your organization").
 
 To learn more about default capabilities, see your Mobile Device Management provider's documentation.
 

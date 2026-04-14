@@ -1,5 +1,6 @@
 ---
 title: Timeshift
+description: Compare current metric values with historical data using timeshift, calendar shift, and time-based comparison functions.
 aliases:
     - /graphing/functions/timeshift/
 further_reading:
@@ -29,7 +30,7 @@ timeshift(avg:system.load.1{*}, -1209600)
 |:-------------------|:----------------------------------------------------------------------------------------------|:-----------------------------------|
 | `calendar_shift()` | Graph values from the previous day, week, or month from the current timestamp for the metric. | `calendar_shift(<METRIC_NAME>{*}, "<TIME_SHIFT_STRING>", "<TIME_ZONE_CODE>")` |
 
-To access the `calendar_shift()` function click the **Add function** button, select **Timeshift > Month before**. The calendar shift allows you to compare the same metric across equivalent time frames. Below is an example of cloud cost metric `aws.cost.net.amortized` with the calendar_shift() value from two weeks ago compared to the current value.
+To access the `calendar_shift()` function click the {{< ui >}}Add function{{< /ui >}} button, select {{< ui >}}Timeshift{{< /ui >}} > {{< ui >}}Month before{{< /ui >}}. The calendar shift allows you to compare the same metric across equivalent time frames. Below is an example of cloud cost metric `aws.cost.net.amortized` with the calendar_shift() value from two weeks ago compared to the current value.
 
 {{< img src="dashboards/functions/timeshift/calendar_shift_two_weeks.png" alt="Example of a calendar_shift() function used to compare the `aws.cost.net.amortized ` metric value from two weeks ago and the present" style="width:80%;" >}}
 
@@ -51,7 +52,7 @@ Here is an example of `system.load.1` with the `hour_before()` value shown as a 
 
 ## Day before
 
-<div class="alert alert-danger">The day before feature is being deprecated. Use calendar shift with a value of "-1d" instead.</div>
+<div class="alert alert-warning">The day before feature is being deprecated. Use calendar shift with a value of "-1d" instead.</div>
 
 | Function       | Description                                                          | Example                        |
 |:---------------|:---------------------------------------------------------------------|:-------------------------------|
@@ -63,7 +64,7 @@ Here is an example of `nginx.net.connections` with the `day_before()` value show
 
 ## Week before
 
-<div class="alert alert-danger">The week before feature is being deprecated. Use calendar shift with a value of "-7d" instead.</div>
+<div class="alert alert-warning">The week before feature is being deprecated. Use calendar shift with a value of "-7d" instead.</div>
 
 | Function        | Description                                                                    | Example                         |
 |:----------------|:-------------------------------------------------------------------------------|:--------------------------------|
@@ -75,7 +76,7 @@ Here is an example of `cassandra.db.read_count` with the `week_before()` value s
 
 ## Month before
 
-<div class="alert alert-danger">The month before feature is being deprecated. Use calendar shift with a value of "-1mo", "-30d" or "-4w" instead, depending on your use case.</div>
+<div class="alert alert-warning">The month before feature is being deprecated. Use calendar shift with a value of "-1mo", "-30d" or "-4w" instead, depending on your use case.</div>
 
 | Function         | Description                                                                                | Example                          |
 |:-----------------|:-------------------------------------------------------------------------------------------|:---------------------------------|

@@ -1,0 +1,26 @@
+{
+  "data": {
+    "attributes": {
+      "enabled": true,
+      "rules": [
+        {
+          "enabled": true,
+          "mapping": null,
+          "name": "Add Cost Center Tag",
+          "query": {
+            "addition": {
+              "key": "cost_center",
+              "value": "engineering"
+            },
+            "case_insensitivity": false,
+            "if_not_exists": true,
+            "query": "account_id:\"123456789\" AND service:\"web-api\""
+          },
+          "reference_table": null
+        }
+      ]
+    },
+    "id": "New Ruleset",
+    "type": "create_ruleset"
+  }
+}

@@ -1,17 +1,25 @@
 ---
+algolia:
+  tags:
+  - grok
+  - parser grok
+  - parsing des logs
+  - Extraction des attributs
+  - Remappage des attributs
+  - parsing
 aliases:
 - /fr/logs/faq/how-to-send-logs-to-datadog-via-external-log-shippers
 - /fr/logs/languages
 - /fr/integrations/windows_event_log/
-description: Configurez votre environnement pour rassembler les logs de votre host,
-  de vos conteneurs et de vos services.
+description: Configurez votre environnement afin de collecter les logs depuis votre
+  host, vos conteneurs et vos services.
 further_reading:
 - link: https://www.datadoghq.com/blog/log-file-control-with-logrotate/
   tag: Blog
-  text: Comment gérer des fichiers de log avec Logrotate
+  text: Comment gérer les fichiers de logs avec Logrotate
 - link: /agent/logs/advanced_log_collection
   tag: Documentation
-  text: Configurations avancées pour la collecte de logs
+  text: Configurations avancées de collecte de logs
 - link: /logs/log_configuration/processors
   tag: Documentation
   text: Découvrir comment traiter vos logs
@@ -20,7 +28,7 @@ further_reading:
   text: En savoir plus sur le parsing
 - link: /logs/live_tail/
   tag: Documentation
-  text: Fonctionnalité Live Tail de Datadog
+  text: Fonctionnalité Live Tail de Datadog
 - link: /logs/explorer/
   tag: Documentation
   text: Découvrir comment explorer vos logs
@@ -30,7 +38,7 @@ further_reading:
 title: Collecte de logs et intégrations
 ---
 
-## Présentation
+## Section Overview
 
 Choisissez une option de configuration ci-dessous pour commencer à ingérer vos logs. Si vous utilisez déjà un daemon log shipper, consultez la documentation dédiée pour [Rsyslog][1], [Syslog-ng][2], [NXlog][3], [FluentD][4] ou [Logstash][5].
 
@@ -38,7 +46,7 @@ Consultez la [liste des endpoints de collecte de logs Datadog](#endpoints-de-jou
 
 **Remarque** : lorsque vous envoyez des logs au format JSON à Datadog, certains attributs sont réservés et possèdent une signification particulière dans Datadog. Consultez la [section sur les attributs réservés](#attributs-et-tags) pour en savoir plus.
 
-## Implémentation
+## Configuration
 
 {{< tabs >}}
 {{% tab "Host" %}}
@@ -57,7 +65,7 @@ Consultez la [liste des endpoints de collecte de logs Datadog](#endpoints-de-jou
 {{% tab "Application" %}}
 
 1. Installez l'[Agent Datadog][1].
-2. Pour activer la collecte de logs, remplacez `logs_enabled: false` par `logs_enabled: true` dans le fichier de configuration principal de votre Agent (`datadog.yaml`). Consultez la section [Collecte de logs de l'Agent de host][2] pour obtenir plus de détails et d'exemples.
+2. Pour activer la collecte de logs, remplacez `logs_enabled: false` par `logs_enabled: true` dans le principal fichier de configuration de votre Agent (`datadog.yaml`). Consultez la section [Collecte de logs de l'Agent de host][2] pour obtenir plus de détails et d'exemples.
 3. Suivez les instructions d'installation correspondant au langage de votre application pour configurer un logger et commencer à générer des logs :
 
 {{< partial name="logs/logs-languages.html" >}}
@@ -106,12 +114,23 @@ Les intégrations Datadog et la collecte de logs sont liées. Vous pouvez utilis
 1. Sélectionnez une intégration depuis la [page Integrations][6] et suivez les instructions de configuration.
 2. Suivez les instructions de l'intégration concernant la collecte de logs. Cette section décrit comment supprimer la mise en commentaire de la section logs du fichier `conf.yaml` de l'intégration en question et comment la configurer pour votre environnement.
 
+## Réduire les frais de transfert de données
+
+Utilisez le [Cloud Network Monitoring][7] de Datadog pour identifier les applications à plus fort débit de votre organisation. Établissez une connexion privée à Datadog et acheminez vos données via un réseau dédié afin d'éviter les réseaux public et de réduire vos frais de transfert. Une fois vos liens privés configurés, utilisez la solution [Cloud Cost Management][8] pour mesurer l'impact sur vos coûts liés au cloud et suivre leur diminution.
+
+Pour plus d'informations, consultez [Comment envoyer des logs à Datadog tout en réduisant les frais de transfert de données][9] (en anglais).
+
 [1]: /fr/logs/log_configuration/processors
 [2]: /fr/logs/log_configuration/parsing
 [3]: /fr/logs/explorer/facets/
 [4]: /fr/agent/kubernetes/log/#autodiscovery
 [5]: /fr/agent/docker/log/#log-integrations
 [6]: /fr/integrations/#cat-log-collection
+[7]: /fr/network_monitoring/cloud_network_monitoring/
+[8]: /fr/cloud_cost_management/
+[9]: /fr/logs/guide/reduce_data_transfer_fees/
+
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -127,10 +146,9 @@ Utilisez le menu déroulant situé à droite de la page pour sélectionner votre
 
 {{< site-region region="us" >}}
 
-| Site | Type        | Endpoint                                                                  | Port         | Description                                                                                                                                                                 |
+| Site | Type        | Endpoint                                                                  | Port         | Rôle                                                                                                                                                                 |
 |------|-------------|---------------------------------------------------------------------------|--------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | US   | HTTPS       | `http-intake.logs.datadoghq.com`                                          | 443   | Utilisé par les redirecteurs personnalisés pour envoyer des logs au format JSON ou texte brut via HTTPS. Consultez la [documentation relative à l'API Logs HTTP][1].                                                    |
-| US   | HTTPS       | `agent-http-intake-pci.logs.datadoghq.com`                                | 443   | Utilisé par l'Agent pour envoyer des logs via HTTPS à une organisation pour laquelle la conformité PCI DSS est activée. Consultez la section [Conformité PCI DSS pour Log Management][3] pour en savoir plus.                 |
 | US   | HTTPS       | `agent-http-intake.logs.datadoghq.com`                                    | 443   | Utilisé par l'Agent pour envoyer des logs au format JSON via HTTPS. Consultez la [section Collecte de logs de l'Agent de host][2].                                                             |
 | US   | HTTPS       | `lambda-http-intake.logs.datadoghq.com`                                   | 443   | Utilisé par les fonctions Lambda pour envoyer des logs au format brut, Syslog ou JSON via HTTPS.                                                                                            |
 | US   | HTTPS       | `logs.`{{< region-param key="browser_sdk_endpoint_domain" code="true" >}} | 443   | Utilisé par le SDK Browser pour envoyer des logs au format JSON via HTTPS.                                                                                                             |
@@ -142,12 +160,11 @@ Utilisez le menu déroulant situé à droite de la page pour sélectionner votre
 
 [1]: /fr/api/latest/logs/#send-logs
 [2]: /fr/agent/logs/#send-logs-over-https
-[3]: /fr/data_security/logs/#pci-dss-compliance-for-log-management
 {{< /site-region >}}
 
 {{< site-region region="eu" >}}
 
-| Site | Type        | Endpoint                                                                  | Port | Description                                                                                                                                                                 |
+| Site | Type        | Endpoint                                                                  | Port | Rôle                                                                                                                                                                 |
 |------|-------------|---------------------------------------------------------------------------|------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Union européenne   | HTTPS       | `http-intake.logs.datadoghq.eu`                                           | 443  | Utilisé par les redirecteurs personnalisés pour envoyer des logs au format JSON ou texte brut via HTTPS. Consultez la [documentation relative à l'API Logs HTTP][1].                                                    |
 | Union européenne   | HTTPS       | `agent-http-intake.logs.datadoghq.eu`                                     | 443  | Utilisé par l'Agent pour envoyer des logs au format JSON via HTTPS. Consultez la [section Collecte de logs de l'Agent de host][2].                                                             |
@@ -163,7 +180,7 @@ Utilisez le menu déroulant situé à droite de la page pour sélectionner votre
 
 {{< site-region region="us3" >}}
 
-| Site | Type  | Endpoint                                                                  | Port | Description                                                                                                              |
+| Site | Type  | Endpoint                                                                  | Port | Rôle                                                                                                              |
 |------|-------|---------------------------------------------                              |------|--------------------------------------------------------------------------------------------------------------------------|
 | US3  | HTTPS | `http-intake.logs.us3.datadoghq.com`                                      | 443  | Utilisé par les redirecteurs personnalisés pour envoyer des logs au format JSON ou texte brut via HTTPS. Consultez la [documentation relative à l'API Logs HTTP][1]. |
 | US3  | HTTPS | `lambda-http-intake.logs.us3.datadoghq.com`                               | 443  | Utilisé par les fonctions Lambda pour envoyer des logs au format brut, Syslog ou JSON via HTTPS.                                         |
@@ -177,7 +194,7 @@ Utilisez le menu déroulant situé à droite de la page pour sélectionner votre
 
 {{< site-region region="us5" >}}
 
-| Site | Type  | Endpoint                                                                  | Port | Description                                                                                                              |
+| Site | Type  | Endpoint                                                                  | Port | Rôle                                                                                                              |
 |------|-------|---------------------------------------------------------------------------|------|--------------------------------------------------------------------------------------------------------------------------|
 | US5  | HTTPS | `http-intake.logs.us5.datadoghq.com`                                      | 443  | Utilisé par les redirecteurs personnalisés pour envoyer des logs au format JSON ou texte brut via HTTPS. Consultez la [documentation relative à l'API Logs HTTP][1]. |
 | US5  | HTTPS | `lambda-http-intake.logs.us5.datadoghq.com`                               | 443  | Utilisé par les fonctions Lambda pour envoyer des logs au format brut, Syslog ou JSON via HTTPS.                                         |
@@ -191,7 +208,7 @@ Utilisez le menu déroulant situé à droite de la page pour sélectionner votre
 
 {{< site-region region="ap1" >}}
 
-| Site | Type  | Endpoint                                                                  | Port | Description                                                                                                              |
+| Site | Type  | Endpoint                                                                  | Port | Rôle                                                                                                              |
 |------|-------|---------------------------------------------------------------------------|------|--------------------------------------------------------------------------------------------------------------------------|
 | AP1  | HTTPS | `http-intake.logs.ap1.datadoghq.com`                                      | 443  | Utilisé par les redirecteurs personnalisés pour envoyer des logs au format JSON ou texte brut via HTTPS. Consultez la [documentation relative à l'API Logs HTTP][1]. |
 | AP1  | HTTPS | `lambda-http-intake.logs.ap1.datadoghq.com`                               | 443  | Utilisé par les fonctions Lambda pour envoyer des logs au format brut, Syslog ou JSON via HTTPS.                                         |
@@ -203,13 +220,27 @@ Utilisez le menu déroulant situé à droite de la page pour sélectionner votre
 
 {{< /site-region >}}
 
+{{< site-region region="ap2" >}}
+
+| Site | Type  | Endpoint                                                                  | Port | Rôle                                                                                                              |
+|------|-------|---------------------------------------------------------------------------|------|--------------------------------------------------------------------------------------------------------------------------|
+| AP2  | HTTPS | `http-intake.logs.ap2.datadoghq.com`                                      | 443  | Utilisé par les redirecteurs personnalisés pour envoyer des logs au format JSON ou texte brut via HTTPS. Consultez la [documentation relative à l'API Logs HTTP][1]. |
+| AP2  | HTTPS | `lambda-http-intake.logs.ap2.datadoghq.com`                               | 443  | Utilisé par les fonctions Lambda pour envoyer des logs au format brut, Syslog ou JSON via HTTPS.                                         |
+| AP2  | HTTPS | `agent-http-intake.logs.ap2.datadoghq.com`                                | 443  | Utilisé par l'Agent pour envoyer des logs au format JSON via HTTPS. Consultez la [section Collecte de logs de l'Agent de host][2].          |
+| AP2  | HTTPS | {{< region-param key="browser_sdk_endpoint_domain" code="true" >}}        | 443  | Utilisé par le SDK Browser pour envoyer des logs au format JSON via HTTPS.                                                          |
+
+[1]: /fr/api/latest/logs/#send-logs
+[2]: /fr/agent/logs/#send-logs-over-https
+
+{{< /site-region >}}
+
 {{< site-region region="gov" >}}
 
-| Site    | Type  | Endpoint                                                                  | Port | Description                                                                                                              |
+| Site    | Type  | Endpoint                                                                  | Port | Rôle                                                                                                              |
 |---------|-------|---------------------------------------------------------------------------|------|--------------------------------------------------------------------------------------------------------------------------|
 | US1-FED | HTTPS | `http-intake.logs.ddog-gov.com`                                          | 443  | Utilisé par les redirecteurs personnalisés pour envoyer des logs au format JSON ou texte brut via HTTPS. Consultez la [documentation relative à l'API Logs HTTP][1]. |
-| US1-FED | HTTPS | `lambda-http-intake.logs.ddog-gov.datadoghq.com`                          | 443  | Utilisé par les fonctions Lambda pour envoyer des logs au format brut, Syslog ou JSON via HTTPS.                                         |
-| US1-FED | HTTPS | `agent-http-intake.logs.ddog-gov.datadoghq.com`                           | 443  | Utilisé par l'Agent pour envoyer des logs au format JSON via HTTPS. Consultez la [section Collecte de logs de l'Agent de host][2].          |
+| US1-FED | HTTPS | `lambda-http-intake.logs.ddog-gov.com`                                   | 443  | Utilisé par les fonctions Lambda pour envoyer des logs au format brut, Syslog ou JSON via HTTPS.                                         |
+| US1-FED | HTTPS | `agent-http-intake.logs.ddog-gov.com`                                    | 443  | Utilisé par l'Agent pour envoyer des logs au format JSON via HTTPS. Consultez la [section Collecte de logs de l'Agent de host][2].          |
 | US1-FED | HTTPS | `logs.`{{< region-param key="browser_sdk_endpoint_domain" code="true" >}} | 443  | Utilisé par le SDK Browser pour envoyer des logs au format JSON via HTTPS.                                                          |
 
 [1]: /fr/api/latest/logs/#send-logs
@@ -254,6 +285,7 @@ Votre charge utile, `Log sent directly using TLS` dans cet exemple, peut être a
 
 ```text
 <CLÉ_API_DATADOG> {"message":"json formatted log", "ddtags":"env:my-env,user:my-user", "ddsource":"my-integration", "hostname":"my-hostname", "service":"my-service"}
+```
 
 [1]: /fr/account_management/api-app-keys/#api-keys
 
@@ -295,7 +327,7 @@ Il n'est pas recommandé d'utiliser l'endpoint TCP pour ce site. Contactez l'[as
 [1]: /fr/help
 {{< /site-region >}}
 
-{{< site-region region="gov,us5,ap1" >}}
+{{< site-region region="gov,us5,ap1,ap2" >}}
 
 L'endpoint TCP n'est pas pris en charge par ce site.
 
@@ -312,10 +344,16 @@ L'endpoint TCP n'est pas pris en charge par ce site.
 
 * L'API HTTPS prend en charge les logs d'une taille maximale de 1 Mo. Toutefois, pour obtenir des performances optimales, il est recommandé que chaque log ne dépasse pas 25 Ko. Si vous utilisez l'Agent Datadog pour générer des logs, il est configuré pour créer un nouveau log dès que le précédent atteint 256 Ko (256 000 octets).
 * Un événement de log ne doit pas comporter plus de 100 tags, et chaque tag ne doit pas dépasser 256 caractères pour un maximum de 10 millions de tags uniques par jour.
-* Les événements de log convertis au format JSON doivent contenir moins de 256 attributs. Les clés de chacun de ces attributs doivent être inférieures à 50 caractères, être imbriquées dans moins de 10 niveaux successifs, et leur valeur respective doit être inférieure à 1 024 caractères si elle est présentée en tant que facette.
+* Les événements de log convertis au format JSON doivent contenir moins de 256 attributs. La clé de chacun de ces attributs doit être inférieure à 50 caractères et être imbriquée dans moins de 20 niveaux successifs. Leur valeur respective doit être inférieure à 1 024 caractères si elle est présentée en tant que facette.
 * Les événements de log peuvent être envoyés avec un [timestamp][14] jusqu'à 18 h dans le passé.
 
+<div class="alert alert-info">
+<b>Aperçu disponible</b> : vous pouvez soumettre des logs des 7 derniers jours, au lieu de la limite actuelle de 18 heures. <a href="https://www.datadoghq.com/product-preview/ingest-logs-up-to-7-days-old/">Inscrivez-vous pour l'aperçu</a>. 
+</div>
+
 Les événements de log qui ne respectent pas ces limitations sont susceptibles d'être modifiés ou tronqués par le système. Ils peuvent aussi ne pas être indexés s'ils sont envoyés en dehors de l'intervalle de temps spécifié. Toutefois, Datadog s'efforce de préserver autant de données utilisateur que possible.
+
+Il existe une troncature supplémentaire pour les champs indexés : la valeur est tronquée à 75 KiB pour le champ de message et à 25 KiB pour les autres champs. Datadog stocke toujours le texte intégral, qui reste visible dans les requêtes classiques de la liste dans Logs Explorer. Cependant, la version tronquée s'affichera lors d’une requête groupée, par exemple lors du regroupement des logs par ce champ tronqué ou pour des opérations similaires qui affichent ce champ spécifique.
 
 ### Attributs et tags
 
@@ -329,7 +367,7 @@ Lorsque vous enregistrez des traces de pile, des attributs spécifiques disposen
 
 Pour activer ces fonctionnalités, utilisez les noms d'attribut suivants :
 
-| Attribut            | Description                                                             |
+| Attribut            | Rôle                                                             |
 |----------------------|-------------------------------------------------------------------------|
 | `logger.name`        | Le nom du logger                                                      |
 | `logger.thread_name` | Le nom du thread actuel                                              |

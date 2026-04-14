@@ -8,13 +8,13 @@ title: 감사 이벤트를 커스텀 대상으로 전송
 ---
 
 {{% site-region region="gov" %}}
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 US1-FED 사이트에서는 감사 이벤트 전송을 이용할 수 없습니다.
 </div>
 {{% /site-region %}}
 
 {{% site-region region="US,US3,US5,EU,AP1" %}}
-<div class="alert alert-warning">Audit Event Forwarding은 베타 서비스 중입니다. </div>
+<div class="alert alert-danger">Audit Event Forwarding은 베타 서비스 중입니다. </div>
 {{% /site-region %}}
 
 ## 개요

@@ -11,12 +11,11 @@ further_reading:
 - link: /product_analytics/analytics_explorer/
   tag: Documentación
   text: Analytics Explorer
+- link: https://www.datadoghq.com/blog/datadog-product-analytics/
+  tag: Blog
+  text: Tomar decisiones de diseño basadas en datos con el Análisis de productos
 title: Análisis de productos
 ---
-
-{{< callout url="http://datadoghq.com/private-beta/product-analytics" header="false" >}}
-Análisis de productos tiene disponibilidad limitada. Para solicitar acceso, rellena el formulario.
-{{< /callout >}}
 
 ## Información general
 
@@ -24,12 +23,12 @@ Análisis de productos tiene disponibilidad limitada. Para solicitar acceso, rel
 
 Análisis de productos te ayuda a conocer mejor el comportamiento de los usuarios y a tomar decisiones basadas en datos. Puede ayudar a resolver los siguientes tipos de casos de uso en tu aplicación:
 
-- Entendimiento de la adopción del producto
-- Seguimiento de las tasas de conversión y su evolución en el tiempo
-- Seguimiento de los principales patrones de comportamiento de los usuarios
-- Visualización de los botones con los que más y menos se interactúa en una página determinada
+- [Comprender la adopción de productos](#understand-product-adoption)
+- [Seguimiento de las tasas de conversión y su evolución en el tiempo](#track-conversion-rates-and-their-evolution-over-time)
+- [Seguimiento de patrones clave de comportamiento de los usuarios](#track-key-user-behavior-patterns)
+- [Visualizar los botones con los que más y con los que menos se has interactuado en una página](#visualize-the-most-and-least-interacted-with-buttons-on-a-given-page)
 
-## Para empezar
+## Empezando
 
 Para empezar a utilizar el Análisis de productos, actívalo para cada aplicación en la que desees monitorizar el comportamiento de los usuarios:
 
@@ -39,43 +38,75 @@ Para empezar a utilizar el Análisis de productos, actívalo para cada aplicaci�
 
 {{< img src="product_analytics/enable-product-analytics.png" alt="Habilitar el Análisis de productos desde la página de Gestión de aplicaciones.">}}
 
-Por defecto, los datos de Análisis de productos se conservan durante 15 meses. Más información sobre [Privacidad en Datadog][1].
+Por defecto, los datos de Product Analytics se conservan durante 15 meses. Más información sobre [periodos de retención de datos de Datadog][1].
 
-## Medir la retención de usuarios
+## Navegación por la interfaz de usuario de Product Analytics 
+Cada una de las funciones de Product Analytics proporciona información contextual sobre el recorrido de los usuarios. En esta sección, se describe el contexto que cada función puede proporcionar para tu caso de uso individual.
 
-La retención de usuarios es una métrica para medir el porcentaje de usuarios activos que siguen utilizando tu producto, aplicación o servicio durante un periodo determinado. Utiliza el [Análisis de retención][2] para medir cómo un grupo de usuarios se involucra con características específicas a lo largo del tiempo y comprender dónde se producen los abandonos.
+### Entendimiento de la adopción del producto
+La página de [Inicio][3] te ofrece una vista detallada de la actividad de tus usuarios y el estado de la adopción de tu producto. Este es el lugar más habitual de acceso a Product Analytics.
 
-{{< img src="real_user_monitoring/retention_analysis/differing-events-retention-graph.png" alt="Gráfico de retención para diferentes eventos" style="width:90%;" >}}
+{{< img src="/product_analytics/pana_home_page.png" alt="Comprender las conversiones de extremo a extremo con Funnel Analysis.">}}
 
-## Trazar el recorrido del usuario
+Por defecto, esta página muestra los gráficos `active users`, `Page ( página) views` y `average time spent by user`, pero tienes la posibilidad de añadir gráficos adicionales o un dashboard. Puedes navegar a cualquier parte de Product Analytics desde la página de inicio.
 
-[Los recorridos del usuario][3] te permiten medir e informar sobre el impacto de cada cambio de función, desde los cuellos de botella del backend hasta las frustraciones de los usuarios, para que puedan optimizarse adecuadamente. Identifica la ruta ideal para la adopción de funciones y la conversión de usuarios.
+### Seguimiento de las tasas de conversión y su evolución en el tiempo
+Los gráficos de Product Analytics te ayudan a visualizar el recorrido de los usuarios a medida que utilizan tu producto.
 
-{{< img src="/product_analytics/journeys/pa-funnel-1.png" alt="Comprende las conversiones de extremo a extremo con el Análisis de embudo.">}}
+{{< img src="/product_analytics/pana_charts_video.mp4" alt="Visualiza el recorrido de los usuarios con gráficos." video="true">}}
 
-Ve diferentes visualizaciones de la experiencia del usuario al interactuar con tu aplicación:
+Cada tipo de gráfico ofrece una visión diferente del recorrido del usuario:
 
-- **[Embudo][4]**: mide la **tasa de conversión** y el **tiempo para convertir** de extremo a extremo de un flujo de trabajo determinado. 
-- **[Pathways][5]**: explora flujos de trabajo agregados en una única visualización para ayudar a responder preguntas sobre los recorridos de los usuarios. Además, realiza un seguimiento de las tasas de conversión a lo largo del tiempo y compáralas con atributos específicos que podrían haber afectado a las tasas de conversión, como el tipo de navegador o la geografía.
+[Rutas
+: puedes visualizar todos los recorridos de los usuarios en tu aplicación para analizar la ruta crítica.
 
-## Crear segmentos de usuarios
+[Embudo][4]
+: seguimiento de las tasas de conversión en los flujos de trabajo clave para identificar y abordar los cuellos de botella en los recorridos integrales de los usuarios. <br> Por ejemplo, puedes ver si los clientes abandonan en un punto determinado debido a un rendimiento deficiente del sitio web o medir cómo afecta a la tasa de abandono añadir nuevos pasos al proceso.
 
-Los segmentos son usuarios agrupados por características o comportamientos específicos. La [segmentación][6] en Datadog te permite analizar y comprender grupos o segmentos específicos de tu base de usuarios.
+[Retención][2]
+: mide la frecuencia con la que los usuarios vuelven a la página o acción para obtener información sobre la satisfacción general del usuario.
 
-## Visualizar las interacciones de los usuarios con mapas de calor
+[Análisis][13]
+: contiene vistas de agregación de datos para comprender cómo se utiliza tu producto.
 
-Los [mapas de calor][7] visualizan los elementos con los que más se ha interactuado en una página para ver dónde se encuentran los puntos calientes de actividad, junto con el análisis de la profundidad de desplazamiento para ver hasta dónde se han desplazado los usuarios por una página determinada. Puedes ver cada deslizamiento, desplazamiento y clic con una reproducción perfecta de lo que hicieron exactamente los usuarios tanto en el navegador como en las aplicaciones móviles para identificar el contenido de alto o bajo rendimiento.
+<br>
 
-{{< img src="real_user_monitoring/heatmaps/heatmap_v2.png" alt="Información general de la funcionalidad del mapa de calor." style="width:100%;">}}
+### Seguimiento de los principales patrones de comportamiento de los usuarios
+Es posible que desees comprender mejor a un grupo específico de usuarios. Esto podría ser con el fin de mejorar tu experiencia de usuario, o empujarlos a comprar el contenido en su carrito. Independientemente del propósito, puedes utilizar la sección [Usuarios y segmentos][6] para agrupar a tus usuarios en función de una característica deseada.
+
+{{< img src="/product_analytics/segmentation/userprofiles_pana-ga.png" alt="Consulta los perfiles individuales de los usuarios y crea un segmento de estos perfiles.">}}
+
+Puedes ver los perfiles individuales de los usuarios y crear un segmento, o una agrupación específica, a partir de estos perfiles para que se ajusten al comportamiento que deseas observar. Por ejemplo, puedes crear un segmento de usuarios que tienen artículos en sus carritos pero que aún no han realizado la compra para enviarles un correo electrónico animándoles a realizar una compra.
+
+
+### Visualización de los botones con los que más y menos se interactúa en una página determinada
+Supongamos que quieres hacer cambios en la interfaz de tu aplicación, pero primero quieres entender cómo navegan los usuarios en la página. ¿Hay algún camino específico que sigan más que otros? ¿Puedes hacer que las acciones y los flujos de los usuarios sean más fluidos? Las siguientes funciones pueden ayudarte a capturar y reproducir la experiencia de navegación de tus usuarios para fundamentar tus decisiones de cambio de producto. 
+
+{{< img src="/product_analytics/pana_session_replay_page.png" alt="Capturar y reproducir tu experiencia de navegación de usuarios para informar tus decisiones de diseño del producto.">}}
+
+[Session replay][11] 
+: amplía la supervisión de la experiencia del usuario permitiéndote capturar y reproducir visualmente la navegación web o la experiencia de la aplicación móvil de tus usuarios. <br><br>Esto es beneficioso para la _identificación de errores_, la _reproducción_ y la _resolución_, y proporciona información sobre los patrones de uso de la aplicación y los errores de diseño.
+
+[Heatmaps][10]
+: se trata de una visualización de las interacciones de los usuarios superpuesta a los datos de Session Replay. Product Analytics dispone de tres tipos diferentes de heatmaps: mapas de clics, elementos principales, mapas de desplazamiento. <br><br> Utiliza los heatmaps para revisar datos complejos de un vistazo y obtener información para optimizar la experiencia del usuario.
+
+[Lista de reproducción][12]
+: puedes crear una lista de reproducción de Session Replays para organizarlos según los patrones que observes. Más información sobre [Listas de reproducción de Session Replay][12].
+<br>
+
 
 ## Referencias adicionales
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://www.datadoghq.com/privacy/
-[2]: /es/product_analytics/user_retention
-[3]: /es/product_analytics/journeys
-[4]: /es/product_analytics/journeys/funnel_analysis
-[5]: /es/product_analytics/journeys/pathways
+[1]: /es/data_security/data_retention_periods/
+[2]: /es/product_analytics/charts/user_retention
+[3]: https://app.datadoghq.com/product-analytics
+[4]: /es/product_analytics/charts/funnel_analysis
+[5]: /es/product_analytics/charts/pathways
 [6]: /es/product_analytics/segmentation/
-[7]: /es/product_analytics/heatmaps
 [8]: https://app.datadoghq.com/rum/
+[9]: https://app.datadoghq.com/rum/list
+[10]: /es/product_analytics/session_replay/heatmaps
+[11]: /es/product_analytics/session_replay/
+[12]: /es/product_analytics/session_replay/playlists
+[13]: /es/product_analytics/charts/analytics_explorer

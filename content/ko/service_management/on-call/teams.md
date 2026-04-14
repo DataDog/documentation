@@ -1,14 +1,10 @@
 ---
 further_reading:
 - link: /service_management/on-call/
-  tag: 문서
+  tag: 설명서
   text: Datadog On-Call
 title: 팀 온보딩
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">On-Call은 선택한 <a href="/getting_started/site">Datadog 사이트</a> ({{< region-param key="dd_site_name" >}})에서 지원되지 않습니다.</div>
-{{< /site-region >}}
 
 팀은 [Datadog On-Call][2]의 중앙 조직 단위입니다. 페이지는 팀으로 전송되고 팀의 스케줄이나 에스컬레이션 정책은 페이지를 적절한 팀원에게 라우팅합니다.
 
@@ -17,7 +13,7 @@ On-Call Teams는 [Datadog Teams][1]의 확장입니다. On-Call Teams는 [Teams]
 ### 새로운 팀이나 기존 팀 온보딩
 
 1. [**On-Call** > **Teams**][4]에서 **Set Up Team**을 선택합니다.
-1. 새로운 팀을 만들거나, 기존 Datadog 팀을 선택하거나, PagerDuty 또는 Opsgenie에서 팀 구성을 가져옵니다.
+1. 새로운 팀을 만들거나, 기존 Datadog 팀을 선택하거나, PagerDuty에서 팀 구성을 가져옵니다.
   {{< tabs >}}
   {{% tab "새로운 팀" %}}
   - **Team Name**: 팀 이름을 입력합니다. 조직에서 이미 널리 사용되는 경우가 아니라면 약어를 사용하지 않는 것이 좋습니다.

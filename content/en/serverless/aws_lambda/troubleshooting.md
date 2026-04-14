@@ -69,7 +69,7 @@ If you have followed all the troubleshooting steps above and want help from [Dat
 2. Download the latest version of the [Datadog CLI](https://github.com/DataDog/datadog-ci/#how-to-install-the-cli).
 
     ```sh
-    npm install -g @datadog/datadog-ci
+    npm install -g @datadog/datadog-ci @datadog/datadog-ci-plugin-lambda
     ```
 
 3. Use the Serverless Flare command from the root of your project directory to automatically collect and submit data about your Lambda function to Datadog Support.

@@ -25,7 +25,7 @@ assets:
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
-  sales_email: info@datadoghq.com
+  sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
 - data stores
@@ -37,12 +37,12 @@ draft: false
 git_integration_title: riakcs
 integration_id: riak-cs
 integration_title: Riak CS
-integration_version: 4.3.0
+integration_version: 4.6.0
 is_public: true
 manifest_version: 2.0.0
 name: riakcs
 public_title: Riak CS
-short_description: GET、PUT、DELETE などの速度と平均レイテンシーを追跡。
+short_description: GET、PUT、DELETE などのリクエスト レートと平均レイテンシーを追跡します。
 supported_os:
 - linux
 - macos
@@ -56,7 +56,7 @@ tile:
   - Category::Data Stores
   - Offering::Integration
   configuration: README.md#Setup
-  description: GET、PUT、DELETE などの速度と平均レイテンシーを追跡。
+  description: GET、PUT、DELETE などのリクエスト レートと平均レイテンシーを追跡します。
   media: []
   overview: README.md#Overview
   resources:

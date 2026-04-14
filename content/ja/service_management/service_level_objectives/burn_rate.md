@@ -2,6 +2,10 @@
 aliases:
 - /ja/monitors/service_level_objectives/burn_rate/
 description: モニターを使用して SLO のバーンレートを警告する
+further_reading:
+- link: https://www.datadoghq.com/blog/burn-rate-is-better-error-rate/
+  tag: ブログ
+  text: バーンレートは、エラー率のより良い指標です
 title: バーンレートアラート
 ---
 {{< jqmath-vanilla >}}
@@ -10,13 +14,13 @@ title: バーンレートアラート
 
 SLO バーンレートアラートは、SLO エラーバジェットの消費率が指定した閾値を超え、それが特定の期間継続した場合に通知されます。たとえば、SLO の 30 日間目標に対して、過去 5 分間で過去 1 時間に 14.4 以上のバーンレートが測定された場合にアラートを設定できます。また、アラートが必要な閾値より少し低い閾値、例えば 7.2 以上のバーンレートが観測された場合にオプションで警告を出すように設定することができます。
 
-**Note:** Burn rate alerts are available for the following SLO types:
+バーンレートアラートは、以下の SLO タイプで利用可能です。
 
-- [Metric-based SLOs][1],
-- [Monitor-based SLOs][2] that are only composed of Metric Monitor types (Metric, Integration, APM Metric, Anomaly, Forecast, or Outlier Monitors), and
-- [Time Slice SLOs][7]
+- [メトリクスベースの SLO][1]、
+- [メトリクスモニタータイプ (メトリクス、インテグレーション、 APM メトリクス、異常、予測、外れ値モニター) のみで構成されるモニターベースの SLO][2]、および
+- [タイムスライス SLO][7]
 
-{{< img src="service_management/service_level_objectives/slo-burn-rate-alert-v2.png" alt="Burn rate alert configuration">}}
+{{< img src="service_management/service_level_objectives/slo-burn-rate-alert-v2.png" alt="バーンレートアラートの構成">}}
 
 ## バーンレートアラートの仕組み
 
@@ -95,8 +99,12 @@ $$\text"バーンレート" = {7 \text"日" * 24 \text"時間" * 10% \text"消�
    * Datadog は、長いウィンドウの最大値として 48 時間をサポートしています。長いウィンドウは、`1 hour <= long window <= 48 hours` の範囲である必要があります。
    * 短いウィンドウは、UI 上で `short window = 1/12 * long window` として自動的に計算されます。
    * [API または Terraform](#api-and-terraform) を使用して別の短いウィンドウ値を指定できますが、常に長いウィンドウより小さい値である必要があります。
-5. Add [Notification information][4] into the **Configure notifications and automations** section.
+5. **Configure notifications and automations** セクションに [通知情報][4] を追加します。
 6. SLO コンフィギュレーションページで **Save and Exit** ボタンをクリックします。
+
+### グループ付き SLO に関するアラート
+
+グループを含む Time Slice SLO の場合、SLO グループまたは SLO 全体を対象にバーンレートアラートを設定できます。グループを対象にアラートを設定する場合、[アラートの集約][8]を構成して、シンプルアラートまたはマルチアラートを使用することができます。メトリクスベースおよびモニターベースの SLO では、SLO 全体に対してのみバーンレートアラートを設定できます。
 
 ### 例
 
@@ -168,3 +176,4 @@ resource "datadog_monitor" "metric-based-slo" {
 [5]: /ja/api/v1/monitors/#create-a-monitor
 [6]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/monitor
 [7]: /ja/service_management/service_level_objectives/time_slice
+[8]: /ja/monitors/configuration/#set-alert-aggregation

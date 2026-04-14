@@ -1,5 +1,6 @@
 ---
 title: Datadog for Intune
+description: "Deploy and configure the Datadog for Intune mobile app within your organization using Microsoft Intune admin center and Azure settings."
 further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-mobile-widgets/"
   tag: "Blog"
@@ -55,7 +56,7 @@ Admin consent is required before users can register successfully. Follow these s
 
 For additional support with application management settings, see the [Microsoft documentation][8].
 
-**Note:** If your organization has multiple "Datadog" applications configured, the one managing web and mobile app access has the Application ID **f21cb7e8-00ab-4b0e-aa94-b1e2f674606d**.
+**Note:** If your organization has multiple "Datadog" applications configured, the one managing web and mobile app access has the Application ID **0e6423ac-38ea-4d77-8389-69ec289b5090**.
 
 #### Datadog for Intune required permissions
 Permissions are automatically added when configuring the application:
@@ -67,7 +68,7 @@ Permissions are automatically added when configuring the application:
 
 **Notes:**
 - The mobile app only uses these two permissions. When granting consent you may see more permissions, because the mobile app shares the same Microsoft Entra application as the web app and the [Microsoft Teams Integration](https://docs.datadoghq.com/integrations/microsoft_teams). If you're not using it, you can revoke those permissions from the **Permissions** tab on the page in [step 3](#step-3-grant-admin-consent-for-your-organization).
-- While `DeviceManagementManagedApps.Read` exists, it is an MS Graph API permission, and the mobile app requires a MAM permission. `DeviceManagementManagedApps.ReadWrite` is the only MAM permission available, but the mobile app only reads and doesn't write anything.
+- While `DeviceManagementManagedApps.Read` exists, it is an MS Graph API permission, and the mobile app requires a MAM permission. `DeviceManagementManagedApps.ReadWrite` is the only MAM permission available, but the mobile app only reads and doesn't write anything. For more information on how to grant `DeviceManagementManagedApps.ReadWrite` permission, follow these [steps][15].
 
 ## Deploying Datadog Intune to mobile devices
 When deploying to Android devices, users need to install the following:
@@ -112,3 +113,4 @@ If registration issues persist, contact us at [support@datadoghq.com][14] with t
 [12]: https://apps.apple.com/app/intune-company-portal/id719171358
 [13]: https://docs.datadoghq.com/mobile/enterprise_configuration/
 [14]: mailto:support@datadoghq.com
+[15]: https://learn.microsoft.com/en-us/entra/msal/dotnet/how-to/create-config-for-mam-conditional-access#setup-client-apps:~:text=Grant%20Admin%20consent.-,Setup%20Client%20Apps,-In%20Microsoft%20Entra

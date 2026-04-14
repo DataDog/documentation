@@ -57,7 +57,7 @@ RUM の[グローバルコンテキスト][6]を使えば、ユーザーごと�
 
 {{< img src="real_user_monitoring/guide/alerting-with-rum/revenue-dips-example-alerting-conditions.png" alt="RUM モニターの売上高の減少に関するアラート条件" style="width:100%;" >}}
 
-### エラー率
+### エラーレート
 
 リクエストに対するエラーの割合から、リクエストの何パーセントがエラーになっているかを計算することができます。
 
@@ -75,7 +75,7 @@ Real User Monitoring では、アプリケーションのパフォーマンス�
 
 このモニター例では、LCP のロードに 2 秒かかると警告し、2.5 秒以上かかるとアラートを表示します。
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -84,6 +84,6 @@ Real User Monitoring では、アプリケーションのパフォーマンス�
 [3]: /ja/real_user_monitoring/guide/send-rum-custom-actions/#create-facets-and-measures-on-attributes
 [4]: /ja/real_user_monitoring/explorer/export/
 [5]: /ja/monitors/notify/
-[6]: /ja/real_user_monitoring/browser/advanced_configuration/?tab=npm#global-context
-[7]: /ja/real_user_monitoring/browser/monitoring_page_performance/#all-performance-metrics
+[6]: /ja/real_user_monitoring/application_monitoring/browser/advanced_configuration/?tab=npm#global-context
+[7]: /ja/real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#all-performance-metrics
 [8]: /ja/real_user_monitoring/android/mobile_vitals/

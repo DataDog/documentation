@@ -142,7 +142,7 @@ Los dashboards compartidos admiten un número limitado de opciones de períodos 
 
 ## Editar dashboards compartidos
 
-<div class="alert alert-warning">Cualquier cambio en el contenido o el diseño de un dashboard se refleja instantáneamente en la versión compartida Ten cuidado al editar para evitar compartir involuntariamente datos privados.</div>
+<div class="alert alert-danger">Cualquier cambio en el contenido o el diseño de un dashboard se refleja instantáneamente en la versión compartida Ten cuidado al editar para evitar compartir involuntariamente datos privados.</div>
 
 Para realizar un cambio en el tipo de uso compartido, en la configuración o en los destinatarios de un dashboard compartido:
 

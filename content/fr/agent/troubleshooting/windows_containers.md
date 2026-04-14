@@ -7,7 +7,7 @@ further_reading:
   tag: Documentation
   text: Agent Kubernetes
 - link: /agent/troubleshooting/
-  tag: Dépannage de l'Agent
+  tag: Documentation
   text: Dépannage de l'Agent
 title: Problèmes avec les conteneurs Windows
 ---
@@ -20,10 +20,10 @@ La surveillance d'applications Windows conteneurisées nécessite l'Agent Datado
 
 Voici la liste des versions des systèmes d'exploitation prises en charge :
 - Windows Server 2019 (LTSC/1809)
-- Windows Server 2019 1909 (jusqu'à la version 7.39 de l'Agent ; les dernières versions ne sont plus prises en charge par Microsoft)
-- Windows Server 2019 2004 ou 20H1 (jusqu'à la version 7.39 de l'Agent ; les dernières versions ne sont plus prises en charge par Microsoft)
-- Windows Server 2019 20H2 (de la version 7.33 à 7.39 de l'Agent ; les dernières versions ne sont plus prises en charge par Microsoft)
-- Windows Server 2022 LTSC (Agent 7.34+)
+- Windows Server 2019 1909 (jusqu'à la version 7.39 de l'Agent ; n'est plus pris en charge par Microsoft)
+- Windows Server 2019 2004 ou 20H1 (jusqu'à la version 7.39 de l'Agent ; n'est plus pris en charge par Microsoft)
+- Windows Server 2019 20H2 (pour les versions 7.33 à 7.39 de l'Agent ; n'est plus pris en charge par Microsoft)
+- Windows Server 2022 LTSC (version 7.34 et versions ultérieures de l'Agent)
 
 Le mode d'isolation Hyper-V n'est pas pris en charge.
 
@@ -43,23 +43,25 @@ Pour déployer l'Agent Datadog sur un cluster mixte, il est conseillé d'effectu
 
 L'Agent Datadog utilise un `nodeSelector` pour sélectionner automatiquement les nœuds Linux ou Windows en fonction du `targetSystem`.
 
-Ce n'est toutefois pas le cas pour Kube State Metrics (qui est installé par défaut), ce qui peut empêcher la planification de Kube State Metrics sur les nœuds Windows.
+Ce n'est toutefois pas le cas pour Kube State Metrics (qui est installé par défaut), ce qui peut empêcher la planification de Kube State Metrics sur les nœuds Windows.
 
 Trois solutions sont possibles pour éviter ce problème :
 
 * Utilisez la fonctionnalité taint sur vos nœuds Windows. Sous Windows, l'Agent autorise toujours le taint `node.kubernetes.io/os=windows:NoSchedule`.
 * Définissez le sélecteur de nœud Kube State Metrics via le chart Helm Datadog `values.yaml` :
 
-```
-kube-state-metrics:
-  nodeSelector:
-    beta.kubernetes.io/os: linux // Kubernetes < 1.14
-    kubernetes.io/os: linux // Kubernetes >= 1.14
-```
+   ```
+   kube-state-metrics:
+     nodeSelector:
+       beta.kubernetes.io/os: linux // Kubernetes < 1.14
+       kubernetes.io/os: linux // Kubernetes >= 1.14
+   ```
 
 * Déployez Kube State Metrics vous-même séparément en définissant `datadog.kubeStateMetricsEnabled` sur `false`.
 
 **Remarque** : lorsque vous utilisez deux installations de Datadog (une avec `targetSystem: linux` et une autre avec `targetSystem: windows`), assurez-vous que le paramètre `datadog.kubeStateMetricsEnabled` est défini sur `false` pour la deuxième installation afin d'empêcher le déploiement de deux instances de Kube State Metrics.
+
+Certaines mesures ne sont pas disponibles pour les déploiements sur Windows. Voir [métriques disponibles](#metriques-limitees-pour-les-deploiements-windows).
 
 #### Clusters mixtes avec l'Agent de cluster Datadog
 
@@ -119,16 +121,16 @@ Si votre configuration ne répond pas à ces exigences, l'APM et DogStatsD fonct
 ### Check Kubelet
 
 Selon votre version de Kubernetes, il est possible que certaines métriques Kubelet ne soient pas disponibles (ou que le délai d'attente du check Kubelet expire).
-Pour une expérience optimale, utilisez l'une des versions suivantes :
+Pour une expérience optimale, utilisez l'une des versions suivantes avec l'Agent Datadog v7.19.2 ou ultérieur :
 
-* Kubelet >= 1.16.13 (1.16.11 sous GKE)
-* Kubelet >= 1.17.9 (1.17.6 sous GKE)
-* Kubelet >= 1.18.6
-* Kubelet >= 1.19
+* Kubelet v1.16.13+ (v1.16.11+ avec GKE)
+* Kubelet v1.17.9+ (v1.17.6+ avec GKE)
+* Kubelet v1.18.6+
+* Kubelet v1.19+
 
-Avec l'Agent version >= 7.19.2
+### Métriques limitées pour les déploiements Windows
 
-Notez que toutes les métriques `kubernetes.*` ne sont pas disponibles sous Windows. Les métriques disponibles sont énumérées ci-dessous :
+Les métriques `kubernetes.*` suivantes sont disponibles pour les conteneurs Windows :
 
 * `kubernetes.cpu.usage.total`
 * `kubernetes.containers.restarts`

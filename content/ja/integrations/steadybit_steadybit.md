@@ -14,7 +14,7 @@ categories:
 - マーケットプレイス
 - logs-restriction-queries-update-a-restriction-query
 - テスト
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -100,7 +100,7 @@ tile:
 
 お役に立つドキュメント、リンクや記事:
 
-- [Monitor your chaos engineering experiments with Steadybit's offering in the Datadog Marketplace][8]
+- [Datadog Marketplace の Steadybit のオファリングでカオスエンジニアリング実験を監視する][8]
 
 [1]: https://steadybit.com/?utm_campaign=datadogmarketplace&utm_source=datadog&utm_medium=marketplace-readme
 [2]: https://hub.steadybit.com/extension/com.steadybit.extension_datadog?utm_campaign=datadogmarketplace&utm_source=datadog&utm_medium=marketplace-readme
@@ -111,4 +111,4 @@ tile:
 [7]: mailto:support@steadybit.com
 [8]: https://www.datadoghq.com/blog/steadybit-datadog-marketplace/
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/steadybit-steadybit" target="_blank">こちらをクリック</a>してください。
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。利用するには、<a href="https://app.datadoghq.com/marketplace/app/steadybit-steadybit" target="_blank">Marketplace でこのアプリケーションを購入してください</a>。

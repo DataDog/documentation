@@ -12,31 +12,38 @@ further_reading:
   tag: Documentación
   text: Ampliar la visibilidad de los pipelines mediante la adición de etiquetas (tags)
     y medidas personalizadas
-title: Configurar el rastreo en un pipeline de Buildkite
+title: Configuración de Buildkite para CI Visibility
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">CI Visibility no está disponible en el sitio seleccionado ({{< region-param key="dd_site_name" >}}) en este momento.</div>
-{{< /site-region >}}
 
 ## Información general
 
 [Buildkite][1] es una plataforma de integración y despliegue continuos que te permite ejecutar compilaciones en tu propia infraestructura, lo que te da la habilidad de tener un control total sobre la seguridad y personalizar tu entorno de compilación mientras gestionas la orquestación en la nube.
 
-Configura el rastreo en Buildkite para optimizar el uso de tus recursos, reducir la sobrecarga y mejorar la velocidad y la calidad del ciclo de vida del desarrollo de software.
+Configura CI Visibility para que Buildkite optimice el uso de tus recursos, reduzca los gastos generales y mejore la velocidad y la calidad de tu ciclo de vida de desarrollo de software.
 
 ### Compatibilidad
 
 | Pipeline Visibility | Plataforma | Definición |
 |---|---|---|
-| [Reintentos parciales][9] | Pipelines parciales | Ve las ejecuciones de los pipelines parcialmente recuperadas. |
-| Correlación de las métricas de la infraestructura | Correlación de las métricas de la infraestructura | Correlaciona los trabajos con las [métricas del host de la infraestructura][6] para los agentes de Buildkite. |
-| [Pasos manuales][12] | Pasos manuales | Ve los pipelines activados manualmente. |
-| [Tiempo de cola][13] | Tiempo de cola | Ve el tiempo que los trabajos de los pipelines permanecen en la cola antes de procesarse. |
+| [Reintentos parciales][9] | Pipelines parciales | Observa los reintentos parciales de ejecuciones de pipelines. |
+| Correlación de métricas de infraestructura  | Correlación de métricas de infraestructura  | Correlaciona los trabajos con las [métricas del host de la infraestructura][6] para los agentes de Buildkite. |
+| [Pasos manuales][12] | Pasos manuales | Visualiza los pipelines activados manualmente. |
+| [Tiempo de cola][13] | Tiempo de cola | Observa la cantidad de tiempo que los trabajos de pipelines permanecen en la cola antes de ser procesados. |
 | [Etiquetas][10] [y medidas personalizadas en tiempo de ejecución][11] | Etiquetas y medidas personalizadas en tiempo de ejecución | Configura [etiquetas y medidas personalizadas][6] en tiempo de ejecución. |
 | [Tramos (spans) personalizados][14] | Tramos personalizados | Configura tramos personalizados para tus pipelines. |
+| [Filtrar trabajos de CI en la ruta crítica][17] | Filtrar trabajos de CI en la ruta crítica | Filtra por trabajos en la ruta crítica. |
+| [Tiempo de ejecución][18] | Tiempo de ejecución  | Ver la cantidad de tiempo que los pipelines han estado ejecutando trabajos. |
 
-## Configurar la integración de Datadog
+### Terminología
+
+Esta tabla muestra la correspondencia de conceptos entre Datadog CI Visibility y Buildkite:
+
+| Datadog                    | Buildkite                       |
+|----------------------------|---------------------------------|
+| Tuberías                   | Compilación (ejecución de un pipeline) |
+| Trabajo                        | Trabajo (ejecución de un paso)       |
+
+## Configurar la integración Datadog
 
 Para configurar la integración de Datadog para [Buildkite][1]:
 
@@ -51,7 +58,7 @@ Para configurar la integración de Datadog para [Buildkite][1]:
 
 ## Configuración avanzada
 
-### Personalizar etiquetas
+### Establecer etiquetas personalizadas
 
 Se pueden añadir etiquetas personalizadas a las trazas (traces) de Buildkite con el comando `buildkite-agent meta-data set`.
 Cualquier etiqueta de metadato con una clave que empiece con `dd_tags.` se añade a los tramos del trabajo y el pipeline. Estas
@@ -78,10 +85,10 @@ El pipeline resultante tiene el siguiente aspecto:
 
 {{< img src="ci/buildkite-custom-tags.png" alt="La traza de un pipeline de Buildkite con etiquetas personalizadas." style="width:100%;">}}
 
-Cualquier metadato con una clave que empiece con `dd-measures.` y contenga un valor numérico se establecerá como
-la etiqueta de una métrica que puede utilizarse para crear medidas numéricas. 
+Cualquier metadato con una clave que empiece por `dd-measures.` y contenga un valor numérico se definirá como
+una etiqueta de métrica que puede utilizarse para crear medidas numéricas.
 
-Puedes utilizar el comando `buildkite-agent meta-data set` para crear estas etiquetas. 
+Puedes utilizar el comando `buildkite-agent meta-data set` para crear estas etiquetas.
 
 Por ejemplo, puedes medir el tamaño binario en un pipeline con este comando:
 
@@ -99,7 +106,7 @@ El pipeline resultante tendrá las etiquetas que se muestran abajo en el tramo d
 
 En este ejemplo, puedes utilizar el valor de `binary_size` para graficar el cambio en el tamaño binario a lo largo del tiempo.
 
-### Correlacionar las métricas de la infraestructura con los trabajos
+### Correlacionar métricas de infraestructura con trabajos
 
 Si utilizas agentes de Buildkite, puedes correlacionar los trabajos con la infraestructura que los ejecuta.
 Para que esta característica funcione, instala el [Datadog Agent][7] en los hosts que ejecutan los agentes de Buildkite.
@@ -146,3 +153,5 @@ En la página **CI Pipeline List** (Lista de pipelines de CI), se muestran datos
 [14]: /es/glossary/#custom-span
 [15]: /es/continuous_integration/explorer
 [16]: /es/continuous_integration/search/#search-for-pipelines
+[17]: /es/continuous_integration/guides/identify_highest_impact_jobs_with_critical_path/
+[18]: /es/glossary/#pipeline-execution-time

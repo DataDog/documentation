@@ -23,11 +23,11 @@ type: multi-code-lang
 
 ## Inyección automática
 
-A partir de la versión `0.89.0`, el rastreador PHP inyecta automáticamente identificadores de correlación de traza en los logs de aplicación. Para activar la inyección automática, establece la variable de entorno `DD_logs_INJECTION` (configuración INI `datadog.logs_injection`) en `true`.
+A partir de la versión `0.89.0`, el rastreador PHP inyecta automáticamente identificadores de correlación de traza en los logs de aplicación. Para activar la inyección automática, establece la variable de entorno `DD_LOGS_INJECTION` (configuración INI `datadog.logs_injection`) en `true`.
 
 El rastreador PHP admite registradores compatibles con PSR-3, como [Monolog][4] o [Laminas Log][5].
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
  <strong>Nota</strong>: Configura tu biblioteca de registro para que produzca logs en formato JSON de forma que:
   <ul>
     <li>No necesites <a href="/logs/log_configuration/parsing">reglas personalizadas de parseo</a>.</li>
@@ -37,17 +37,17 @@ El rastreador PHP admite registradores compatibles con PSR-3, como [Monolog][4] 
 
 ### Configuración de la inyección en logs
 
-Si aún no lo has hecho, configura el rastreador de PHP con `DD_ENV`, `DD_SERVICE` y `DD_VERSION`. Esto proporcionará la mejor experiencia para añadir `env`, `service` y `version` a tus logs (ve [etiquetado de servicios unificado][1] para obtener más detalles).
+Si aún no lo has hecho, configura el rastreador de PHP con `DD_ENV`, `DD_SERVICE` y `DD_VERSION`. Esto proporcionará la mejor experiencia para añadir `env`, `service` y `version` a tus logs (ve [etiquetado de servicios unificado][6] para obtener más detalles).
 
 El rastreador PHP proporciona varias formas de configurar la inyección de identificadores de correlación de traza en tus logs:
-- [Añadir los identificadores de correlación de traza al contexto de log](##add-the-trace-correlation-identifiers-to-the-log-context)
+- [Añadir todos los identificadores de correlación de trazas al contexto del log](#add-all-trace-correlation-identifiers-to-the-log-context)
 - [Usar parámetros en tu mensaje](#use-placeholders-in-your-message)
 
-#### Añadir los identificadores de correlación de traza al contexto de log {#add-the-trace-correlation-identifiers-to-the-log-context}
+#### Opción 1: Añadir todos los identificadores de correlación de trazas al contexto del log [#add-all-trace-correlation-identifiers-to-the-log-context]
 
-El comportamiento predeterminado del rastreador PHP es añadir los identificadores de correlación de traza al contexto del log.
+El comportamiento predeterminado del rastreador PHP es añadir todos los identificadores de correlación de trazas al contexto del log.
 
-Por ejemplo, si estás utilizando la biblioteca de [Monolog][4] en una aplicación Laravel de la siguiente manera:
+Por ejemplo, si estás utilizando la librería de [Monolog][4] en una aplicación Laravel de la siguiente manera:
 
 ```php
 use Illuminate\Support\Facades\Log;
@@ -55,7 +55,7 @@ use Illuminate\Support\Facades\Log;
 Log::debug('Hello, World!');
 ```
 
-El rastreador PHP añade los identificadores de correlación de traza disponibles al contexto del log. El mensaje registrado anteriormente podría transformarse en:
+El rastreador PHP añade los identificadores de correlación de trazas disponibles al contexto del log en formato JSON. El mensaje registrado anterior podría transformarse en:
 
 ```
 [2022-12-09 16:02:42] production.DEBUG: Hello, World! {"dd.trace_id":"1234567890abcdef","dd.span_id":"1234567890abcdef","dd.service":"laravel","dd.version":"8.0.0","dd.env":"production","status":"debug"}
@@ -63,18 +63,18 @@ El rastreador PHP añade los identificadores de correlación de traza disponible
 
 **Nota**: Si hay un parámetro en tu mensaje o si un ID de traza ya está presente en el mensaje, el rastreador PHP **no** añade los identificadores de correlación de traza al contexto del log.
 
-#### Usar parámetros en tu mensaje {#use-placeholders-in-your-message}
+#### Opción 2: Utilizar marcadores de posición en el mensaje {#use-placeholders-in-your-message}
 
-Puedes utilizar parámetros en tu mensaje para inyectar automáticamente identificadores de correlación de traza en tus logs. El rastreador PHP admite los siguientes parámetros:
+Puedes utilizar marcadores de posición en tu mensaje para seleccionar qué identificadores de correlación de trazas se inyectan automáticamente en tus logs. El rastreador PHP admite los siguientes marcadores de posición:
 - `%dd.trace_id%`: el ID de traza
 - `%dd.span_id%`: el ID de tramo (span)
-- `%dd.service%`: el nombre de servicio 
-- `%dd.version%`: la versión de servicio 
+- `%dd.service%`: el nombre de servicio
+- `%dd.version%`: la versión de servicio
 - `%dd.env%`: el entorno de servicio
 
 Los parámetros distinguen entre mayúsculas y minúsculas y deben ir encerrados entre `%`.
 
-Por ejemplo, si estás utilizando la biblioteca de [Monolog][4] en una aplicación Laravel, puedes configurar la inyección en un mensaje de log de la siguiente manera:
+Por ejemplo, si estás utilizando la librería de [Monolog][4] en una aplicación Laravel, puedes configurar la inyección en un mensaje de log de la siguiente manera:
 
 ```php
 use Illuminate\Support\Facades\Log;
@@ -82,7 +82,7 @@ use Illuminate\Support\Facades\Log;
 Log::info('Hello, World! [%dd.trace_id% %dd.span_id% %status%]');
 ```
 
-El rastreador PHP sustituye los parámetros por los valores correspondientes. Por ejemplo, el mensaje registrado anteriormente podría transformarse en:
+El rastreador PHP sustituye los marcadores de posición por los valores correspondientes. Por ejemplo, el mensaje registrado anterior se transforma en:
 
 ```
 [2022-12-09 16:02:42] production.INFO: Hello, World! [dd.trace_id="1234567890abcdef" dd.span_id="1234567890abcdef" status="info"]
@@ -93,7 +93,7 @@ El rastreador PHP sustituye los parámetros por los valores correspondientes. Po
 
 ## Inyección manual
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 <strong>Nota:</strong> La función <code>\DDTrace\current_context()</code> ha sido introducida en la versión <a href="https://github.com/DataDog/dd-trace-php/releases/tag/0.61.0">0.61.0</a> y devuelve identificadores de traza decimales.
 </div>
 
@@ -174,7 +174,7 @@ Para monolog v3, añade la siguiente configuración:
 
 Si ingieres tus logs como JSON, ve a [Preprocessing for JSON logs][8] (Preprocesamiento para logs de JSON) y añade `extra.dd.trace_id` al campo **Trace Id Attributes** (Atributos de ID de traza).
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

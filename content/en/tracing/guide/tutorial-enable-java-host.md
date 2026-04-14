@@ -161,7 +161,7 @@ If your operating system does not support curl, you can go directly to `'https:/
 
 To start generating and collecting traces, restart the sample application with additional flags that cause tracing data to be sent to Datadog.
 
-<div class="alert alert-warning"><strong>Note</strong>: The flags on these sample commands, particularly the sample rate, are not necessarily appropriate for environments outside this tutorial. For information about what to use in your real environment, read <a href="#tracing-configuration">Tracing configuration</a>.</div>
+<div class="alert alert-warning">The flags on these sample commands, particularly the sample rate, are not necessarily appropriate for environments outside this tutorial. For information about what to use in your real environment, read <a href="#tracing-configuration">Tracing configuration</a>.</div>
 
 
 {{< tabs >}}
@@ -312,46 +312,32 @@ The following steps walk you through adding annotations to the code to trace som
 
 5. Update your build script configuration, and build the application:
 {{< tabs >}}
-
 {{% tab "Maven" %}}
+   1. Open `notes/pom.xml` and uncomment the lines configuring dependencies for manual tracing. The `dd-trace-api` library is used for the `@Trace` annotations, and `opentracing-util` and `opentracing-api` are used for manual span creation.
+   1. Run:
+      ```sh
+      ./mvnw clean package
 
-a. Open `notes/pom.xml` and uncomment the lines configuring dependencies for manual tracing. The `dd-trace-api` library is used for the `@Trace` annotations, and `opentracing-util` and `opentracing-api` are used for manual span creation.
-
-b. Run:
-
-   ```sh
-   ./mvnw clean package
-
-   java -javaagent:../dd-java-agent.jar -Ddd.trace.sample.rate=1 -Ddd.service=notes -Ddd.env=dev -jar -Ddd.version=0.0.1 target/notes-0.0.1-SNAPSHOT.jar
-   ```
-
-   Or use the script:
-
-   ```sh
-   sh ./scripts/mvn_instrumented_run.sh
-   ```
-
+      java -javaagent:../dd-java-agent.jar -Ddd.trace.sample.rate=1 -Ddd.service=notes -Ddd.env=dev -jar -Ddd.version=0.0.1 target/notes-0.0.1-SNAPSHOT.jar
+      ```
+      Or use the script:
+      ```sh
+      sh ./scripts/mvn_instrumented_run.sh
+      ```
 {{% /tab %}}
-
 {{% tab "Gradle" %}}
+  1. Open `notes/build.gradle` and uncomment the lines configuring dependencies for manual tracing. The `dd-trace-api` library is used for the `@Trace` annotations, and `opentracing-util` and `opentracing-api` are used for manual span creation.
+  1. Run:
+      ```sh
+      ./gradlew clean bootJar
 
-a. Open `notes/build.gradle` and uncomment the lines configuring dependencies for manual tracing. The `dd-trace-api` library is used for the `@Trace` annotations, and `opentracing-util` and `opentracing-api` are used for manual span creation.
-
-b. Run:
-   ```sh
-   ./gradlew clean bootJar
-
-   java -javaagent:../dd-java-agent.jar -Ddd.trace.sample.rate=1 -Ddd.service=notes -Ddd.env=dev -jar -Ddd.version=0.0.1 build/libs/notes-0.0.1-SNAPSHOT.jar
-   ```
-
-   Or use the script:
-
-   ```sh
-   sh ./scripts/gradle_instrumented_run.sh
-   ```
-
+      java -javaagent:../dd-java-agent.jar -Ddd.trace.sample.rate=1 -Ddd.service=notes -Ddd.env=dev -jar -Ddd.version=0.0.1 build/libs/notes-0.0.1-SNAPSHOT.jar
+      ```
+      Or use the script:
+      ```sh
+      sh ./scripts/gradle_instrumented_run.sh
+      ```
 {{% /tab %}}
-
 {{< /tabs >}}
 
 6. Resend some HTTP requests, specifically some `GET` requests.

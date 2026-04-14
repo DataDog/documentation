@@ -35,7 +35,7 @@ type: multi-code-lang
 
 ログパイプラインがログファイルをパースできるように、Datadog Agent でログ収集が構成され、追跡する指定ファイルの [Logs Agent の構成][15]が `source: csharp` に設定されていることを確認します。詳細は、[C# ログ収集][7]を参照してください。`source` が `csharp` 以外の値に設定されている場合、相関を正しく動作させるために、適切なログ処理パイプラインに[トレースリマッパー][8]を追加する必要があるかもしれません。
 
-<div class="alert alert-warning"><strong>注:</strong> 自動ログ挿入は、JSON でフォーマット化されたログのみに機能します。また、カスタムパースルールを使用することもできます。</div>
+<div class="alert alert-danger"><strong>注:</strong> 自動ログ挿入は、JSON でフォーマット化されたログのみに機能します。また、カスタムパースルールを使用することもできます。</div>
 
 ## ログへの挿入の構成
 
@@ -49,7 +49,7 @@ type: multi-code-lang
 {{< tabs >}}
 {{% tab "Serilog" %}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>注: </strong>NET トレーサーバージョン 2.0.1 以降、Serilog ロギングライブラリの自動挿入には、アプリケーションが自動インスツルメンテーションされているれていることが必要になります。
 </div>
 
@@ -66,7 +66,7 @@ type: multi-code-lang
 {{% /tab %}}
 {{% tab "log4net" %}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>注: </strong>NET トレーサーバージョン 1.29.0 以降、log4net ロギングライブラリの自動挿入には、アプリケーションが自動インスツルメンテーションされているれていることが必要になります。
 </div>
 
@@ -111,7 +111,7 @@ type: multi-code-lang
 {{% /tab %}}
 {{% tab "NLog" %}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>注: </strong>NET トレーサーバージョン 2.0.1 以降、NLog ロギングライブラリの自動挿入には、アプリケーションが自動インスツルメンテーションされているれていることが必要になります。
 </div>
 

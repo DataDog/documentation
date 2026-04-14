@@ -5,7 +5,7 @@ aliases:
 title: API Timeboard
 ---
 
-<div class="alert alert-danger">
+<div class="alert alert-warning">
 Cet endpoint est obsolète. Utilisez plutôt le <a href="https://docs.datadoghq.com/api/v1/dashboards/">nouvel endpoint Dashboards</a>.
 </div>
 

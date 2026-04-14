@@ -1,4 +1,5 @@
 ---
+id: slo_list
 core_product:
 - dashboards
 related_terms:

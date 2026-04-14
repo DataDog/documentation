@@ -1,5 +1,6 @@
 ---
 title: Installing the Agent on a server with limited internet connectivity
+description: "Install the Datadog Agent on servers with restricted internet access using alternative methods including proxy configuration and offline packages."
 aliases:
   - /agent/faq/how-do-i-install-the-agent-on-a-server-with-limited-internet-connectivity/
 further_reading:

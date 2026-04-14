@@ -41,7 +41,7 @@ Azure SQL Elastic Pool からメトリクスを取得すると、以下のこと
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "azure_sql_elastic_pool" >}}
+{{< get-metrics-from-git "azure-sql-elastic-pool" >}}
 
 
 ### イベント

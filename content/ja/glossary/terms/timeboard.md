@@ -1,0 +1,11 @@
+---
+id: timeboard
+core_product:
+- ダッシュボード
+related_terms:
+- dashboard
+- screenboard
+title: タイムボード
+---
+
+タイムボードは自動レイアウトを備え、ダッシュボード全体を固定時点またはリアルタイムの単一時点で表示します。通常、トラブルシューティング、相関の確認、一般的なデータ探索に使用されます。詳細については、<a href="/dashboards/#get-started">ドキュメントを参照してください</a>。

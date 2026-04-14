@@ -126,11 +126,11 @@ If you need to change the values that you originally set for your configuration,
 ## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/browser#setup
+[1]: /real_user_monitoring/application_monitoring/browser#setup
 [2]: https://launchdarkly.com/
 [3]: https://docs.launchdarkly.com/home/getting-started/setting-up
 [4]: https://docs.launchdarkly.com/sdk/client-side
-[5]: /real_user_monitoring/browser#setup
+[5]: /real_user_monitoring/application_monitoring/browser#setup
 [6]: https://docs.launchdarkly.com/sdk/features/evaluating
 [7]: #setting-up-your-flag-in-launchdarkly
 [8]: https://docs.launchdarkly.com/sdk/client-side/javascript#initializing-the-client

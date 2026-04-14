@@ -6,6 +6,7 @@ categories:
 - 프로비저닝
 - 설정 및 배포
 - 로그 수집
+custom_kind: 통합
 dependencies:
 - https://github.com/DataDog/documentation/blob/master/content/en/integrations/vmware_tanzu_application_service.md
 description: VMware Tanzu Application Service(이전 Pivotal Cloud Foundry) VM 상태 및 실행하는
@@ -14,17 +15,16 @@ doc_link: /integrations/vmware_tanzu_application_service/
 further_reading:
 - link: https://www.datadoghq.com/blog/pcf-monitoring-with-datadog/
   tag: 블로그
-  text: Datadog를 통한 Pivotal 플랫폼 모니터링
+  text: Datadog를 통한 핵심 플랫폼 모니터링
 - link: /integrations/guide/application-monitoring-vmware-tanzu/
-  tag: documentation
-  text: VMware Tanzu용 Datadog 애플리케이션 모니터링
+  tag: 설명서
+  text: VMware Tanzu용 Datadog 애플리케이션 모니터
 - link: /integrations/guide/cluster-monitoring-vmware-tanzu/
-  tag: documentation
-  text: VMware Tanzu용 Datadog 클러스터 모니터링
+  tag: 설명서
+  text: VMware Tanzu용 Datadog 클러스터 모니터
 integration_id: pivotal-platform
 integration_title: VMware Tanzu Application Service
 is_public: true
-custom_kind: 통합
 name: vmware_tanzu_application_service
 newhlevel: true
 public_title: Datadog-VMware Tanzu Application Service (Pivotal Cloud Foundry) 통합
@@ -44,7 +44,7 @@ Datadog와 VMware Tanzu Application Service 통합에는 세 개의 주요 구�
 
  [VMware Tanzu 설치 및 설정][4] 가이드를 사용해 Tanzu Ops Manager를 통한 통합을 설치합니다. 수동 설정 단계의 경우 수동 설정 가이드의 [애플리케이션 모니터링][5] 섹션을 읽으세요.
 
-### 구성
+### 설정
 
 #### 메트릭 수집
 
@@ -61,7 +61,7 @@ cf restage <YOUR_APP>
 
 Datadog 애플리케이션 성능 모니터링(APM)은 기본적으로 활성화됩니다.  [APM 설정][6] 및 [프로파일링 설정][7]에서 사용자 언어를 위한 자세한 설정 정보를 알아보세요.
 
-#### 오류
+#### 로그 수집
 
 {{% site-region region="us3" %}}
 
@@ -133,7 +133,7 @@ cf restage <YOUR_APP>
 
 {{% /site-region %}}
 
-### 수집한 데이터
+### DogStatsD
 
 [DogStatsD][10]를 사용해 커스텀 애플리케이션 메트릭을 Datadog로 전송할 수 있습니다. 자세한 정보는 [메트릭 제출: DogStatsD][11]을 참조하세요. 다양한 애플리케이션과 호환되는 [DogStatsD 라이브러리][12] 목록이 있습니다.
 
@@ -141,9 +141,9 @@ cf restage <YOUR_APP>
 
 [VMware Tanzu 설치 및 설정][13] 가이드를 사용해 Tanzu Ops Manager를 통한 통합을 설치하세요. 수동 설정 단계는 수동 설정 가이드의 [VMware Tanzu Application Service 클러스터 모니터링][14] 섹션을 읽으세요.
 
-## 수집된 데이터
+## 수집한 데이터
 
-### 메트릭
+### Metrics
 
 다음 메트릭은 Datadog Firehose Nozzle에서 전송되었으며 접두어로 `cloudfoundry.nozzle`이 사용되었습니다. Datadog 에이전트는 기본적으로 Director 런타임 설정, [시스템][15], [네트워크][16], [디스크][17] 및 [NTP][18] 메트릭에서 설정한 모든 에이전트 검사에서 메트릭을 전송합니다.
 
@@ -151,11 +151,7 @@ Datadog Firehose Nozzle은 CounterEvents(이벤트가 아닌 메트릭으로만)
 
 PCF 버전과 배포 환경에 따라 구체적인 메트릭 목록은 달라질 수 있습니다 Datadog는 [Loggregator v2 API][19]에서 전송된 개수 및 게이지 메트릭을 수집합니다. 기본적으로 전송되는 메트릭 목록은 [Cloud Foundry 구성 요소 메트릭][20]을 참조하세요.
 
-{{< get-metrics-from-git "cloud_foundry">}}
-
-## 참고 자료
-
-{{< partial name="whats-next/whats-next.html" >}}
+{{< get-metrics-from-git "cloud-foundry">}}
 
 [1]: https://tanzu.vmware.com/pivotal#:~:text=Pivotal%20Cloud%20Foundry%20%28PCF%29%20is%20now%20VMware%20Tanzu%20Application%20Service
 [2]: /ko/integrations/guide/pivotal-cloud-foundry-manual-setup

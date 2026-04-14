@@ -1,0 +1,6 @@
+- Elasticsearch 認証ユーザー名:
+   - 環境変数 `DD_OP_DESTINATION_ELASTICSEARCH_USERNAME` に格納されています。
+- Elasticsearch 認証パスワード:
+   - 環境変数 `DD_OP_DESTINATION_ELASTICSEARCH_PASSWORD` に格納されています。
+- Elasticsearch エンドポイント URL:
+   - 環境変数 `DD_OP_DESTINATION_ELASTICSEARCH_ENDPOINT_URL` に格納されています。

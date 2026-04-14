@@ -1,5 +1,6 @@
 ---
 title: How to set up RBAC for Monitors
+description: "Configure Role-Based Access Control (RBAC) for monitors to restrict editing permissions to specific roles and prevent unauthorized changes."
 further_reading:
 - link: "/account_management/rbac/permissions/#monitors"
   tag: "Documentation"

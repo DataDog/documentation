@@ -49,7 +49,7 @@ Esta página proporciona una visión general paso a paso sobre cómo implementar
 
    Si el contexto `API_KEYS_WRITE` no ha sido añadido a tu cliente, este paso falla. Este endpoint genera una clave de API que solo se muestra una vez, y no puede volver a generarse a menos que el usuario la elimine dentro de su cuenta de Datadog. **Almacena este valor en una base de datos o localización segura**.
 
-Para más información sobre la creación, prueba y publicación de clientes OAuth, consulta [OAuth para integraciones de Datadog][5].
+Para obtener más información sobre la creación, prueba y publicación de clientes OAuth, consulta [Crear una integración basada en API][5].
 
 ### Iniciar la autorización de una localización de terceros
 
@@ -93,7 +93,7 @@ El [protocolo PKCE][11] se integra con el flujo de concesión del código de aut
 
 - La aplicación envía una solicitud de token a Datadog con el código de autorización y `code_verifier` para obtener un token de acceso. El endpoint de token verifica el código de autorización transformando el `code_verifier` mediante el `code_challenge_method` y comparándolo con el valor original de `code_challenge`.
 
-## Leer más
+## Para leer más
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -101,7 +101,7 @@ El [protocolo PKCE][11] se integra con el flujo de concesión del código de aut
 [2]: /es/api/latest/scopes/
 [3]: /es/developers/datadog_apps/#oauth-api-access
 [4]: https://datatracker.ietf.org/doc/html/rfc6749#section-3.2.1
-[5]: /es/developers/integrations/oauth_for_integrations
+[5]: /es/developers/integrations/api_integration
 [6]: /es/developers/authorization/oauth2_endpoints/?tab=authorizationendpoints#request-authorization-from-a-user
 [7]: /es/developers/authorization/oauth2_endpoints/?tab=apikeycreationendpoints#create-an-api-key-on-behalf-of-a-user
 [8]: https://tools.ietf.org/html/rfc6749#section-4.1

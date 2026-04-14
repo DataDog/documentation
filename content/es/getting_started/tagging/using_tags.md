@@ -1,14 +1,14 @@
 ---
 aliases:
 - /es/tagging/using_tags/
-description: Descubre cómo utilizar etiquetas (tags) en los productos de Datadog.
+description: Descubre cómo utilizar etiquetas en los productos de Datadog.
 further_reading:
 - link: https://www.datadoghq.com/blog/tagging-best-practices/
   tag: Blog
   text: Prácticas recomendadas para el etiquetado de tu infraestructura y tus aplicaciones
 - link: /getting_started/tagging/
   tag: Documentación
-  text: Empezando con las etiquetas (tags)
+  text: Empezando con las etiquetas
 - link: /getting_started/tagging/assigning_tags/
   tag: Documentación
   text: Aprender a asignar etiquetas
@@ -26,9 +26,9 @@ Cuándo incluir o excluir varias etiquetas:
 
 ## Eventos
 
-El [explorador de eventos][2] muestra los eventos de tu entorno que tienen lugar durante un determinado periodo de tiempo. Utiliza etiquetas para filtrar la lista de eventos y centrarte en un subconjunto de eventos. Introduce `tags:` seguido de una etiqueta para ver todos los eventos procedentes de un host, una [integración][3] o un servicio que tengan esa misma etiqueta. Por ejemplo, puedes utilizar `tags:service:coffee-house` para buscar la etiqueta `service:coffee-house`.
+El [Explorador de eventos][2] muestra los eventos de tu entorno que tienen lugar durante un determinado periodo de tiempo. Utiliza etiquetas para filtrar la lista de eventos y centrarte en un subconjunto de eventos. Introduce `tags:` seguido de una etiqueta para ver todos los eventos procedentes de un host, una [integración][3] o un servicio que tengan esa misma etiqueta. Por ejemplo, puedes utilizar `tags:(service:coffee-house)` para buscar la etiqueta `service:coffee-house`.
 
-Para buscar varias etiquetas de forma inclusiva, haz uso de los paréntesis y separa las etiquetas entre sí con OR: `tags:(service:coffee-house OR host:coffeehouseprod)`. Para buscar varias etiquetas de forma exclusiva, sepáralas entre sí con AND: `tags:(service:coffee-house AND host:coffeehouseprod)`.
+Para buscar varias etiquetas de forma inclusiva, separa las etiquetas entre sí con OR: `tags:(service:coffee-house OR host:coffeehouseprod)`. Para buscar varias etiquetas de forma exclusiva, sepáralas entre sí con AND: `tags:(service:coffee-house AND host:coffeehouseprod)`.
 
 ## Dashboards
 
@@ -59,7 +59,7 @@ Para crear un grupo conjunto utilizando etiquetas, introduce la parte clave de l
 
 {{< img src="tagging/using_tags/dashboard_group_by_tags.png" alt="Etiquetas en cuadros de texto avg by de dashboards" style="width:80%;">}}
 
-Las etiquetas también pueden utilizarse para superponer eventos en el dashboard. Esto funciona de la misma manera que en el [explorador de eventos][2].
+Las etiquetas también pueden utilizarse para superponer eventos en el dashboard. Esto funciona de la misma manera que en el [Explorador de eventos][2].
 Las coincidencias de eventos se superponen como barras verticales en el gráfico. En el ejemplo siguiente se utiliza `service:web-store`.
 
 {{< img src="tagging/using_tags/dashboard_event_overlays.png" alt="Utiliza etiquetas para añadir superposiciones de eventos en dashboards" style="width:80%;">}}
@@ -86,7 +86,7 @@ Por último, se utiliza el segundo campo vacío (el campo de texto **avg by**) p
 
 {{< img src="tagging/using_tags/dashboard_timeseries_graph_editor_sumby_tag.png" alt="Editor de gráficos de series temporales filtrado por 'region:us-east-1' y agrupado por 'host'" style="width:75%;">}}
 
-Si es necesario, añade más etiquetas para acotar aún más el contexto; por ejemplo, hosts en `region:eastus` y `env:production`. Las etiquetas pueden utilizarse en toda la plataforma de Datadog y aplicarse a todos los elementos principales (métricas, trazas y logs).
+Si es necesario, añade más etiquetas para acotar aún más el contexto; por ejemplo, hosts en `region:eastus` y `env:production`. Las etiquetas pueden utilizarse en toda la plataforma de Datadog y aplicarse a todos los elementos principales (métricas, trazas (traces) y logs).
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -144,7 +144,7 @@ Al crear un nuevo monitor, utiliza *etiquetas de métricas* en:
 
 ## Métricas
 
-Utiliza etiquetas en el [explorador de métricas][8] para filtrar métricas por etiquetas o para mostrar múltiples gráficos por clave de etiqueta. En el siguiente ejemplo se representa un gráfico de métrica sobre `service:web-store`.
+Utiliza etiquetas en el [Explorador de métricas][8] para filtrar métricas por etiquetas o para mostrar múltiples gráficos por clave de etiqueta. En el siguiente ejemplo se representa un gráfico de métrica sobre `service:web-store`.
 
 {{< img src="tagging/using_tags/metrics_explorer.png" alt="Gráfico de métricas centrado en una etiqueta individual" style="width:80%;">}}
 
@@ -197,7 +197,7 @@ El [cuadro de integración de Google Cloud][1] tiene el filtro de etiqueta `to h
 
 Este campo acepta una lista de etiquetas (labels) de GCP separadas por comas (en formato `<KEY>:<VALUE>`) que defina un filtro, el cual se utiliza para recopilar métricas de las máquinas virtuales de GCP. También puedes utilizar comodines, como `?` (para caracteres únicos) y `*` (para varios caracteres). Solo se importarán a Datadog los hosts que coincidan con una de las etiquetas definidas y se ignorarán los demás.
 
-Puedes excluir los hosts que coincidan con una etiqueta (label) determinada, siempre que añadas `!` antes de la etiqueta (tag). Ejemplo:
+Puedes excluir los hosts que coincidan con una etiqueta (label) determinada, siempre que añadas `!` antes de la etiqueta. Ejemplo:
 
 ```text
 datadog:monitored,env:production,!env:staging,instance-type:c1.*
@@ -215,9 +215,9 @@ Obtén más información sobre [cómo crear y gestionar etiquetas (labels)][2] e
 {{< tabs >}}
 {{% tab "Trace Explorer" %}}
 
-En [Trace Explorer][1], puedes filtrar las trazas con etiquetas utilizando la barra de búsqueda o las casillas de verificación de facetas. El formato de la barra de búsqueda es `<KEY>:<VALUE>`; por ejemplo, `service:coffee-house`. Para realizar una búsqueda avanzada, consulta la sección [Sintaxis de las consultas][2].
+En [Explorador de trazas][1], puedes filtrar las trazas con etiquetas utilizando la barra de búsqueda o las casillas de verificación de facetas. El formato de la barra de búsqueda es `<KEY>:<VALUE>`; por ejemplo, `service:coffee-house`. Para realizar una búsqueda avanzada, consulta la sección [Sintaxis de las consultas][2].
 
-{{< img src="tagging/using_tags/trace_explorer.png" alt="Etiquetas del Trace Explorer" style="width:80%;">}}
+{{< img src="tagging/using_tags/trace_explorer.png" alt="Etiquetas del Explorador de trazas" style="width:80%;">}}
 
 [1]: /es/tracing/trace_explorer/search/
 [2]: /es/tracing/trace_explorer/query_syntax/
@@ -249,38 +249,13 @@ Si quieres excluir etiquetas, edita el texto con `</>` y, a continuación, añad
 
 ## Logs
 
-Para la [búsqueda (Search)][10], el [análisis (Analytics)][11], los [patrones (Patterns)][12] y [Live Tail][13] de los logs, filtra las trazas con etiquetas utilizando la barra de búsqueda o las casillas de verificación de facetas. El formato de la barra de búsqueda es `<KEY>:<VALUE>`; por ejemplo, `service:coffee-house`. Para realizar una búsqueda avanzada, consulta la página [Buscar logs][10].
+Para la [Búsqueda][10], el [Análisis][11], los [Patrones][12] y [Live Tail][13] de logs, filtra las trazas con etiquetas utilizando la barra de búsqueda o las casillas de verificación de facetas. El formato de la barra de búsqueda es `<KEY>:<VALUE>`; por ejemplo, `service:coffee-house`. Para realizar una búsqueda avanzada, consulta la página [Buscar logs][10].
 
-{{< tabs >}}
-{{% tab "Búsqueda" %}}
-
-{{< img src="tagging/using_tags/logsearchtags.png" alt="Etiquetas de búsqueda de logs" style="width:80%;">}}
-
-{{% /tab %}}
-{{% tab "Análisis" %}}
-
-{{< img src="tagging/using_tags/loganalyticstags.png" alt="Etiquetas de análisis de logs" style="width:80%;">}}
-
-{{% /tab %}}
-{{% tab "Patrones" %}}
-
-{{< img src="tagging/using_tags/logpatternstags.png" alt="Etiquetas de patrones de logs" style="width:80%;">}}
-
-{{% /tab %}}
-{{% tab "Live Tail" %}}
-
-{{< img src="tagging/using_tags/livetailtags.mp4" alt="Etiquetas de Live Tail" video="true" width="80%">}}
-
-{{% /tab %}}
-{{< /tabs >}}
-
-Las etiquetas también se pueden utilizar para filtrar un [pipeline][14] de logs. En el ejemplo de abajo, el pipeline filtra los logs en función de la etiqueta `service:coffee-house`.
-
-{{< img src="tagging/using_tags/logpipelinetags.png" alt="Etiquetas de pipeline" style="width:80%;">}}
+Además, las etiquetas se utilizan para filtrar el [pipeline][14] de un log. Por ejemplo, si sólo quieres que los logs del servicio de cafetería pasen por el pipeline, añade la etiqueta `service:coffee-house` al campo de filtro.
 
 ## RUM y Session Replay
 
-El [navegador RUM][15] muestra los eventos de tu entorno que tienen lugar durante un determinado periodo de tiempo.
+El [Explorador RUM][15] muestra los eventos de tu entorno que tienen lugar durante un determinado periodo de tiempo.
 
 Para filtrar los datos de los eventos de RUM por etiquetas, utiliza la barra de búsqueda o las casillas de verificación de facetas. El formato de la barra de búsqueda es `<KEY>:<VALUE>`; por ejemplo, `service:shopist`. Para realizar una búsqueda avanzada, consulta la sección [Buscar eventos de RUM][16].
 
@@ -289,11 +264,11 @@ Para filtrar los datos de los eventos de RUM por etiquetas, utiliza la barra de 
 ## Synthetics
 
 {{< tabs >}}
-{{% tab "Pruebas de Synthetic" %}}
+{{% tab "Synthetic Tests" %}}
 
-Puedes ver tus pruebas de Synthetic en la página [Pruebas de Synthetic][1].
+Puedes ver tus tests Synthetic en la página [Tests Synthetic][1].
 
-Para filtrar las pruebas por etiquetas, utiliza la barra de búsqueda o las casillas de verificación de facetas. El formato de la barra de búsqueda es `<KEY>:<VALUE>`; por ejemplo, `tag:mini-website`. Para realizar una búsqueda avanzada, consulta la sección [Buscar y gestionar pruebas de Synthetic][2].
+Para filtrar los tests por etiquetas, utiliza la barra de búsqueda o las casillas de verificación de facetas. El formato de la barra de búsqueda es `<KEY>:<VALUE>`; por ejemplo, `tag:mini-website`. Para realizar una búsqueda avanzada, consulta la sección [Buscar y gestionar tests Synthetic][2].
 
 {{< img src="tagging/using_tags/syntheticstags.png" alt="Etiquetas de Synthetics" style="width:80%;">}}
 
@@ -303,9 +278,9 @@ Para filtrar las pruebas por etiquetas, utiliza la barra de búsqueda o las casi
 {{% /tab %}}
 {{% tab "Explorador" %}}
 
-El [explorador de monitorización y prueba continua de Synthetic][1] muestra tus ejecuciones y lotes de ejecuciones de pruebas en un [pipeline CI][2].
+El [Explorador de monitorización y resultados de tests Synthetic][1] muestra tus ejecuciones de tests y lotes de ejecuciones en un [pipeline CI][2].
 
-Para filtrar las pruebas por etiquetas, utiliza la barra de búsqueda o las casillas de verificación de facetas. El formato de la barra de búsqueda es `<KEY>:<VALUE>`; por ejemplo: `@ci.provider.name:github`. Para realizar una búsqueda avanzada, consulta [Buscar lotes de pruebas][3].
+Para filtrar las tests por etiquetas, utiliza la barra de búsqueda o las casillas de verificación de facetas. El formato de la barra de búsqueda es `<KEY>:<VALUE>`; por ejemplo: `@ci.provider.name:github`. Para realizar una búsqueda avanzada, consulta [Buscar lotes de tests][3].
 
 {{< img src="tagging/using_tags/syntheticscitags.png" alt="Etiquetas de Synthetics y CI" style="width:80%;">}}
 
@@ -353,31 +328,37 @@ Al crear un [SLO basado en monitores][1] con un solo [monitor agrupado][2], util
 ## CI Visibility
 
 {{< tabs >}}
-{{% tab "Ejecuciones de pruebas" %}}
+{{% tab "Test Runs" %}}
 
-El [explorador de visibilidad CI][101] muestra tus pruebas ejecutadas en un pipeline CI.
+El [Explorador de CI Visibility][101] muestra tus pruebas ejecutadas en un pipeline CI.
 
-Para filtrar las pruebas por etiquetas, utiliza la barra de búsqueda o las casillas de verificación de facetas. El formato de la barra de búsqueda es `<KEY>:<VALUE>`; por ejemplo: `@test.status:failed`. Para realizar una búsqueda avanzada, consulta [Buscar y gestionar pruebas de CI][102].
+Para filtrar las ejecuciones de tests por etiquetas, utiliza la barra de búsqueda o las casillas de verificación de las facetas. El formato de la barra de búsqueda es `<KEY>:<VALUE>`. Por ejemplo: `@test.status:failed`. Para búsquedas avanzadas, consulta la [sintaxis de búsqueda del Explorador de optimización de Test Optimization][102].
 
-{{< img src="/continuous_integration/test_runs.png" alt="Ejecuta pruebas en el explorador de visibilidad CI" style="width:80%;">}}
+{{< img src="/continuous_integration/test_runs.png" alt="Ejecuta tests en el Explorador de CI Visibility" style="width:80%;">}}
 
 [101]: https://app.datadoghq.com/ci/test-runs
-[102]: /es/tests/search/
+[102]: /es/tests/explorer/search_syntax
 
 {{% /tab %}}
 {{% tab "Ejecuciones de pipelines" %}}
 
-El [explorador de visibilidad CI][101] muestra las ejecuciones de tu pipeline CI.
+El [Explorador de CI Visibility][101] muestra las ejecuciones de tu pipeline CI.
 
 Para filtrar las ejecuciones de pipeline por etiquetas, utiliza la barra de búsqueda o las casillas de verificación de facetas. El formato de la barra de búsqueda es `<KEY>:<VALUE>`; por ejemplo: `@ci.provider.name:gitlab`. Para realizar una búsqueda avanzada, consulta [Buscar y gestionar pipelines CI][102].
 
-{{< img src="/continuous_integration/pipeline_executions.png" alt="Ejecuciones de pipelines en el explorador de visibilidad CI" style="width:80%;">}}
+{{< img src="/continuous_integration/pipeline_executions.png" alt="Ejecuciones de pipelines en el Explorador de CI Visibility" style="width:80%;">}}
 
 [101]: https://app.datadoghq.com/ci/pipeline-executions
 [102]: /es/continuous_testing/explorer/search/
 
 {{% /tab %}}
 {{< /tabs >}}
+
+## DORA Metrics
+
+El [Explorador de DORA Metrics][33] muestra tus agregaciones de DORA Metrics. Para filtrar las métricas y agregaciones mostradas por etiquetas, utiliza el botón `+ Filter` para añadir facetas a las etiquetas existentes. Para realizar consultas con etiquetas en gráficos y dashboards, consulta [DORA Metrics Crear dashboards personalizados][34].
+
+{{< img src="/dora_metrics/dora_ui_3.png" alt="Información general de cálculos de DORA Metrics filtrada por la etiqueta personalizada Lenguaje" style="width:80%;">}}
 
 ## Desarrolladores
 
@@ -386,7 +367,7 @@ Las etiquetas pueden utilizarse de diferentes formas con la [API][17].
 Consulta esta lista para encontrar los enlaces a cada una de las siguientes secciones:
 
 * [Programar el tiempo de inactividad de un monitor][18]
-* [Realizar consultas en el navegador de eventos][19]
+* [Realizar consultas en el Explorador de eventos][19]
 * [Buscar hosts][20]
 * Integraciones para [AWS][21] y [Google Cloud][22]
 * [Realizar consultas en puntos de las series temporales][23]
@@ -400,7 +381,7 @@ Consulta esta lista para encontrar los enlaces a cada una de las siguientes secc
 * [Obtener los detalles de un SLO][28]
 * [Actualizar un SLO][29]
 
-## Lectura adicional
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -436,3 +417,5 @@ Consulta esta lista para encontrar los enlaces a cada una de las siguientes secc
 [30]: /es/monitors/manage/#monitor-tags
 [31]: /es/monitors/downtimes/
 [32]: /es/getting_started/tagging/assigning_tags?tab=monitors
+[33]: https://app.datadoghq.com/ci/dora
+[34]: /es/dora_metrics/#create-custom-dashboards

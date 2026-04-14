@@ -1,6 +1,9 @@
 ---
 aliases:
 - /es/real_user_monitoring/frustration_signals
+description: Identifica los puntos de fricción del usuario con las señales de frustración
+  de RUM (incluidos los clics repetidos, los clics sin resultados y los clics de error)
+  para mejorar la experiencia del usuario y reducir el abandono.
 further_reading:
 - link: https://www.datadoghq.com/blog/analyze-user-experience-frustration-signals-with-rum/
   tag: Blog
@@ -13,7 +16,7 @@ further_reading:
   text: Información sobre el navegador RUM
 - link: /real_user_monitoring/session_replay
   tag: Documentación
-  text: Más información sobre la repetición de sesiones
+  text: Más información sobre Session Replay
 title: Señales de frustración
 ---
 
@@ -23,10 +26,10 @@ Las señales de frustración te permiten identificar los puntos de mayor fricci�
 
 RUM recopila tres tipos de señales de frustración:
 
-Clics de Furia
+Clics de rabia
 : Un usuario hace clic en un elemento más de tres veces en una ventana deslizante de un segundo.
 
-Clics Muertos
+Clics muertos
 : Un usuario hace clic en un elemento estático que no produce ninguna acción en la página.
 
 Clics de error
@@ -63,13 +66,13 @@ window.DD_RUM.init({
 Las señales de frustración requieren acciones. Activar `trackFrustrations` activa automáticamente `trackUserInteractions`.
 </details>
 
-## Uso
+## Utilización
 
-Las señales de frustración aparecen como puntos de datos muy claros que representan las fuentes de frustración de los usuarios en la [página **Aplicaciones RUM**][1]. Para mostrar una lista de counts de frustraciones en el [RUM Explorer][2], haz clic en el botón **Opciones** y añade una columna para `@session.frustration.count`.
+Las señales de frustración aparecen como puntos de datos claros que representan las fuentes de frustración del usuario en la [página **Aplicaciones RUM**][1]. Para mostrar una lista de recuentos de casos de frustración en el [Explorador RUM][2], haz clic en el botón **Options** (Opciones) y añade una columna para `@session.frustration.count`.
 
 ### Lista de aplicaciones
 
-Colócate sobre lista de las sesiones del navegador y haz clic en una sesión para observar el comportamiento de clics frustrados de un usuario. O bien haz clic en **Sesiones frustradas** para acceder a las sesiones con una señal de frustración.
+Colócate sobre lista de las sesiones del navegador y haz clic en una sesión para observar el comportamiento de clics frustrados de un usuario. O bien haz clic en **Frustrated Sessions** (Sesiones frustradas) para acceder a las sesiones con una señal de frustración.
 
 ### Explora el dashboard de señales de frustración
 
@@ -117,15 +120,15 @@ Haz clic en un error en la pestaña **Errores** para abrir un panel lateral con 
 
 {{< img src="real_user_monitoring/frustration_signals/errors_tab.png" alt="Pestaña de Errores en el panel lateral de Acciones" style="width:90%;" >}}
 
-## Mira las señales de frustración en la repetición de sesiones
+## Ver las señales de frustración en Session Replay
 
-En [Repetición de sesiones][7], puedes observar una réplica en vídeo de la actividad real de un usuario. Las réplicas proporcionan pruebas en vídeo de las acciones que realizan los usuarios cuando muestran signos de frustración.
+En [Session Replay][7], puedes observar una réplica en vídeo de la actividad real de un usuario. Las repeticiones proporcionan pruebas en vídeo de las acciones que realizan los usuarios cuando muestran señales de frustración.
 
 El recorrido del usuario de una repetición de sesiones detalla los eventos que se producen en orden cronológico. Colócate sobre un evento para desplazarte a ese momento de la repetición: por ejemplo, cuando se produce un clic muerto.
 
 {{< img src="real_user_monitoring/frustration_signals/session_replay_frustration_signals.png" alt="Las señales de frustración se producen en la grabación del navegador" style="width:90%;" >}}
 
-Para más información, consulta la [Documentación sobre la repetición de sesiones][8].
+ Para obtener más información, consulta la [documentación de Session Replay][8].
 
 ## Crear alertas de señales de frustración
 
@@ -147,8 +150,8 @@ Las señales de frustración se generan a partir de los clics del ratón, no al 
 
 Si una sesión está en vivo, está obteniendo información y puede hacer que los banners reflejen un número diferente a los de la línea de tiempo.
 
-<div class="alert alert-warning">
-Para hacernos llegar tus comentarios o solicitar una función, ponte en contacto con el <a href="/ayuda/">Servicio de asistencia de Datadog </a>.
+<div class="alert alert-danger">
+Para hacernos llegar tus comentarios o solicitar una función, ponte en contacto con <a href="/help/">el servicio de asistencia de Datadog</a>.
 </div>
 
 ## Referencias adicionales

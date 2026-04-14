@@ -40,13 +40,12 @@ Sensitive data, such as credit card numbers, bank routing numbers, and API keys,
     - **Note:** If you select hashing, the UTF-8 bytes of the match is hashed with the 64-bit fingerprint of farmhash.
 1. In the **Pattern** section:  
     - To create a custom scanning rule:  
-        a. Select **Custom** in the **type** dropdown menu.  
-        b. In the **Define regex** field, enter the regex pattern to check against the data. See [Using regex for custom rules](#using-regex-for-custom-rules) for more information.  
+      1. Select **Custom** in the **type** dropdown menu.  
+      1. In the **Define regex** field, enter the regex pattern to check against the data. See [Using regex for custom rules](#using-regex-for-custom-rules) for more information.  
     - To use an out-of-the-box scanning rule:  
-        a. Select **Library** in the **type** dropdown menu.  
-        b. Select the scanning rule you want to use in the **Name** dropdown menu.
-1. In the **Scan entire event or portion of it** section:  
-    a. Select if you want to scan the **Entire Event** or **Specific Attributes** in the **Target** dropdown menu.
+      1. Select **Library** in the **type** dropdown menu.  
+      1. Select the scanning rule you want to use in the **Name** dropdown menu.
+1. In the **Scan entire event or portion of it** section, select if you want to scan the **Entire Event** or **Specific Attributes** in the **Target** dropdown menu.
     - If you are scanning the entire event, you can optionally exclude specific attributes from getting scanned.
     - If you are scanning specific attributes, specify which attributes you want to scan.
 1. Optionally, add one or more tags to associate with the matched events.

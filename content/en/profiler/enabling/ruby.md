@@ -26,20 +26,16 @@ The profiler is shipped within Datadog tracing libraries. If you are already usi
 
 For a summary of the minimum and recommended runtime and tracer versions across all languages, read [Supported Language and Tracer Versions][14].
 
-The Datadog Profiler requires Ruby 2.5+ (Ruby 3.1+ or later is recommended). JRuby and TruffleRuby are not supported.
+The Datadog Profiler requires Ruby 2.5+ (Ruby 3.2.3+ or later is recommended). JRuby and TruffleRuby are not supported.
 
 The following operating systems and architectures are supported:
 - Linux (GNU libc) x86-64, aarch64
 - Alpine Linux (musl libc) x86-64, aarch64
 
-You also need either the [`pkg-config`][16] or the [`pkgconf`][17] system utility installed.
-This utility is available on the software repositories of most Linux distributions. For example:
+Versions of the `datadog` gem older than 2.30 also need either the [`pkg-config`][16] or the [`pkgconf`][17] system utility installed.
+This is no longer needed on modern versions.
 
-- The `pkg-config` package is available for [Homebrew][18], and [Debian][19]- and [Ubuntu][20]-based Linux
-- The `pkgconf` package is available for [Arch][21]- and [Alpine][22]-based Linux
-- The `pkgconf-pkg-config` package is available for [Fedora][23]- and [Red-Hat][24]-based Linux
-
-Continuous Profiler is not supported on serverless platforms, such as AWS Lambda.
+Continuous Profiler is not supported on serverless platforms, such as AWS Lambda. Additionally, [Single Step APM Instrumentation][25] cannot be used to set up the Ruby Profiler.
 
 ## Installation
 
@@ -50,11 +46,11 @@ To begin profiling applications:
 2. Add the `datadog` gem to your `Gemfile` or `gems.rb` file:
 
     ```ruby
-    gem 'datadog', '~> 2.7'
+    gem 'datadog', '~> 2.30'
     ```
 3. Install the gems with `bundle install`.
 
-4. Enable the profiler:
+4. Enable the profiler using **one** of the following approaches:
 
    {{< tabs >}}
 {{% tab "Environment variables" %}}
@@ -95,8 +91,6 @@ end
     bundle exec ddprofrb exec bin/rails s
     ```
 
-    If you're running a version of the gem older than 1.21.0, replace `ddprofrb exec` with `ddtracerb exec`.
-
     **Note**
 
     If starting the application with `ddprofrb exec` is not an option (for example, when using the Phusion Passenger web server), you can alternatively start the profiler by adding the following to your application entry point (such as `config.ru`, for a web application):
@@ -107,7 +101,7 @@ end
 
 6. Optional: Set up [Source Code Integration][4] to connect your profiling data with your Git repositories.
 
-7. A minute or two after starting your Ruby application, your profiles will show up on the [Datadog APM > Profiler page][5].
+7. A couple of minutes after you start your application, your profiles appear on the [Datadog APM > Profiler page][5]. If they do not, refer to the [Troubleshooting][26] guide.
 
 ## Configuration
 
@@ -119,8 +113,9 @@ You can configure the profiler using the following environment variables:
 | --------------------------------------------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------- |
 | `DD_PROFILING_ENABLED`                        | Boolean | If set to `true`, enables the profiler. Defaults to `false`.                                                                            |
 | `DD_PROFILING_ALLOCATION_ENABLED`             | Boolean | Set to `true` to enable allocation profiling. It requires the profiler to be enabled already. Defaults to `false`.                      |
+| `DD_PROFILING_MAX_FRAMES`                     | Integer | Maximum backtrace (stack) depth gathered by the profiler. Stacks deeper than this value get truncated. Defaults to `400`.               |
 | `DD_PROFILING_EXPERIMENTAL_HEAP_ENABLED`      | Boolean | Set to `true` to enable heap live objects profiling. It requires that allocation profiling is enabled as well. Defaults to `false`.     |
-| `DD_PROFILING_EXPERIMENTAL_HEAP_SIZE_ENABLED` | Boolean | Set to `true` to enable heap live size profiling. It requires that heap live objects profiling is enabled as well. Defaults to `false`. |
+| `DD_PROFILING_EXPERIMENTAL_HEAP_SIZE_ENABLED` | Boolean | Set to `true` to enable heap live size profiling. It requires that heap live objects profiling is enabled as well. Defaults to the same value as `DD_PROFILING_EXPERIMENTAL_HEAP_ENABLED`. |
 | `DD_PROFILING_NO_SIGNALS_WORKAROUND_ENABLED`  | Boolean | Automatically enabled when needed, can be used to force enable or disable this feature. See [Profiler Troubleshooting][15] for details. |
 | `DD_PROFILING_PREVIEW_OTEL_CONTEXT_ENABLED`   | String  | Set to `only` when using profiling directly with `opentelemetry-sdk`, or `true` for auto-detection of the correct context to read from. Defaults to `false`. |
 | `DD_ENV`                                      | String  | The [environment][10] name, for example: `production`.                                                                                  |
@@ -128,14 +123,15 @@ You can configure the profiler using the following environment variables:
 | `DD_VERSION`                                  | String  | The [version][10] of your service.                                                                                                      |
 | `DD_TAGS`                                     | String  | Tags to apply to an uploaded profile. Must be a list of `<key>:<value>` separated by commas such as: `layer:api, team:intake`.          |
 
-Alternatively, you can set profiler parameters in code with these functions, inside a `Datadog.configure` block:
+Alternatively, you can set profiler parameters in code with these functions, inside a `Datadog.configure` block. Note that parameters provided in code take precedence over those provided as environment variables.
 
 | Environment variable                                  | Type    | Description                                                                                                                             |
 | ----------------------------------------------------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------- |
 | `c.profiling.enabled`                                 | Boolean | If set to `true`, enables the profiler. Defaults to `false`.                                                                            |
 | `c.profiling.allocation_enabled`                      | Boolean | Set to `true` to enable allocation profiling. It requires the profiler to be enabled already. Defaults to `false`.                      |
+| `c.profiling.advanced.max_frames`                     | Integer | Maximum backtrace (stack) depth gathered by the profiler. Stacks deeper than this value get truncated. Defaults to `400`.               |
 | `c.profiling.advanced.experimental_heap_enabled`      | Boolean | Set to `true` to enable heap live objects profiling. It requires that allocation profiling is enabled as well. Defaults to `false`.     |
-| `c.profiling.advanced.experimental_heap_size_enabled` | Boolean | Set to `true` to enable heap live size profiling. It requires that heap live objects profiling is enabled as well. Defaults to `false`. |
+| `c.profiling.advanced.experimental_heap_size_enabled` | Boolean | Set to `true` to enable heap live size profiling. It requires that heap live objects profiling is enabled as well. Defaults to the same value as `experimental_heap_size_enabled`. |
 | `c.profiling.advanced.no_signals_workaround_enabled`  | Boolean | Automatically enabled when needed, can be used to force enable or disable this feature. See [Profiler Troubleshooting][15] for details. |
 | `c.profiling.advanced.preview_otel_context_enabled`   | String  | Set to `only` when using profiling directly with `opentelemetry-sdk`, or `true` for auto-detection of the correct context to read from. Defaults to `false`. |
 | `c.env`                                               | String  | The [environment][10] name, for example: `production`.                                                                                  |
@@ -171,3 +167,5 @@ The [Getting Started with Profiler][6] guide takes a sample service with a perfo
 [22]: https://pkgs.alpinelinux.org/packages?name=pkgconf
 [23]: https://packages.fedoraproject.org/pkgs/pkgconf/pkgconf-pkg-config
 [24]: https://rpmfind.net/linux/rpm2html/search.php?query=pkgconf-pkg-config
+[25]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/
+[26]: /profiler/profiler_troubleshooting/ruby/

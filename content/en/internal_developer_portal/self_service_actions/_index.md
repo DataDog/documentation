@@ -28,7 +28,7 @@ further_reading:
 - manage deployments across environments
 - actively monitor and optimize running services
 
-Each tile represents an app, which provides a structured interface for executing predefined actions. Apps are created through [App Builder][2], powered by [Actions Catalog][7] and [Workflow Automation][1], and surfaced in Software Catalog to streamline developer workflows.
+Each tile represents an app, which provides a structured interface for executing predefined actions. Apps are created through [App Builder][2], powered by [Action Catalog][7] and [Workflow Automation][1], and surfaced in Software Catalog to streamline developer workflows.
 
 ## Automate developer workflows
 
@@ -63,7 +63,7 @@ If you prefer to build an app from the ground up:
     1. Enter a name and description, and use the drag-and-drop editor to create a form that collects the required parameters.
        - You can use the `Form` component or build a custom UI.
     1. Select **New Query**, and use the **Trigger workflow** action to call your workflow and pass in parameters. 
-       - Explore [Actions Catalog][7] for built-in integrations, or use the `HTTP` action to interact with any integrations not available.
+       - Explore [Action Catalog][7] for built-in integrations, or use the `HTTP` action to interact with any integrations not available.
     1. Create a **Button** that submits the form and triggers your workflow.
     1. Save and publish the app.
 

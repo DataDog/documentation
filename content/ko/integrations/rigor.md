@@ -21,8 +21,8 @@ author:
   sales_email: support@rigor.com
   support_email: support@rigor.com
 categories:
-- 테스팅
-custom_kind: integration
+- 테스트
+custom_kind: 통합
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/rigor/README.md
 display_on_public_website: true
@@ -37,8 +37,8 @@ name: rigor
 public_title: Rigor
 short_description: Rigor는 개발 라이프 사이클 동안 신서틱(Synthetic) 모니터링 및 최적화를 제공합니다.
 supported_os:
-- 리눅스
-- windows
+- linux
+- 윈도우즈(Windows)
 - macos
 tile:
   changelog: CHANGELOG.md
@@ -47,7 +47,7 @@ tile:
   - Supported OS::Windows
   - Category::Testing
   - Supported OS::macOS
-  - 제공::통합
+  - Offering::Integration
   configuration: README.md#Setup
   description: Rigor는 개발 라이프 사이클 동안 신서틱(Synthetic) 모니터링 및 최적화를 제공합니다.
   media: []
@@ -69,7 +69,7 @@ Rigor를 사용하면 신서틱, 프런트엔드 성능 메트릭을 수집하�
 
 Rigor는 Datadog를 통해 두 개의 서로 다른 통합을 제공합니다. 메트릭 통합과 이벤트 통합입니다.
 
-### 구성
+### 설정
 #### 메트릭 수집
 
 관리자로 화면 오른쪽 상단에서 "관리 도구" 메뉴를 클릭한 다음 "통합"을 선택합니다.

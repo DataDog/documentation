@@ -1,5 +1,6 @@
 ---
 title: Set Primary Tags to Scope
+description: Learn how to set primary tags to scope and filter APM data across different environments, services, and versions for better organization.
 aliases:
   - /tracing/advanced/setting_primary_tags_to_scope/
 further_reading:
@@ -79,6 +80,7 @@ Go to the [APM Settings][6] page to define, change, or remove your primary tags.
 * Changes may take up to two hours to be reflected in the UI.
 * The tracer always adds `resource`, `name`, and `service` tags to spans. Datadog recommends never adding these as host level tags to avoid confusion.
 * The additional primary tags support up to 100 unique values per tag. See [APM data volume guidelines][9] for details.
+* Additional primary tags can be host or container tags. Span-level tags added by the tracer cannot be used as primary tags.
 
 If you change a previously set primary tag, be aware of the following:
 

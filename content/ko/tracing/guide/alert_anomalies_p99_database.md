@@ -58,7 +58,7 @@ Datadog에서는 계속해서 직접 모니터링을 할 필요 없이 APM으로
 
    여기에서는 내 모니터의 현재 상태를 확인하고 음소거하거나 경보 트리거 세부 사항을 탐색할 수 있습니다.
 
-8. **[Service Catalog][8]**로 돌아가서 방금 전 모니터를 설정한 서비스를 찾은 후 **Service Page를 클릭해 들어갑니다**. 여기에서 헤더 아래에 있는 **Monitor 바를 클릭**합니다.
+8. **[Software Catalog][8]로 돌아갑니다.** 그런 다음 해당 위치에서 방금 모니터를 설정한 서비스를 찾고 **Service Page를 클릭합니다." 헤더 아래에서 **Monitor 막대를 클릭합니다.**
 
    여기에서 서비스에 설정된 다른 모니터와 설정 추천하는 모니터와 함께 **새 모니터를 볼 수 있습니다**.
 
@@ -75,8 +75,8 @@ Datadog에서는 계속해서 직접 모니터링을 할 필요 없이 APM으로
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ko/monitors/types/anomaly/
-[2]: https://app.datadoghq.com/monitors#/create
-[3]: https://app.datadoghq.com/monitors#create/apm
+[2]: https://app.datadoghq.com/monitors/create
+[3]: https://app.datadoghq.com/monitors/create/apm
 [4]: /ko/tracing/glossary/#resources
 [5]: /ko/tracing/glossary/#services
 [6]: /ko/monitors/types/anomaly/#faq

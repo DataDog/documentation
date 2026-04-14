@@ -15,7 +15,7 @@ type: multi-code-lang
 
 ## Versiones
 
-La biblioteca cliente de APM de Python sigue una [política de control de versiones][1] en la cual se especifica el nivel de soporte técnico para las diferentes versiones de la biblioteca y el tiempo de ejecución de Python.
+La librería cliente de APM de Python sigue una [política de control de versiones][1] en la cual se especifica el nivel de soporte técnico para las diferentes versiones de la librería y el tiempo de ejecución de Python.
 
 Se admiten dos ramificaciones de versiones:
 
@@ -24,7 +24,7 @@ Se admiten dos ramificaciones de versiones:
 | `>=1.0,<2` | Mantenimiento          |
 | `>=2.0,<3` | Disponibilidad general |
 
-Y la biblioteca soporta los siguientes tiempos de ejecución:
+Y la librería soporta los siguientes tiempos de ejecución:
 
 | SO      | CPU                   | Tiempo de ejecución | Versión de tiempo de ejecución | Versiones de ddtrace compatibles  |
 |---------|-----------------------|---------|-----------------|---------------------------|
@@ -39,11 +39,11 @@ Y la biblioteca soporta los siguientes tiempos de ejecución:
 
 Para solicitar soporte técnico para bibliotecas adicionales, ponte en contacto con nuestro magnífico [equipo de asistencia][2].
 
-### Compatibilidad con marcos web
+### Compatibilidad con web frameworks
 
-La biblioteca de `ddtrace` incluye soporte técnico para varios marcos web, entre ellos:
+La librería de `ddtrace` incluye soporte técnico para varios web frameworks, entre ellos:
 
-| Marco                 | Versión compatible | Automática | Documentación de biblioteca                                              |
+| Marco                 | Versión compatible | Automática | Documentación de librería                                              |
 | ------------------------- | ----------------- | --------- |------------------------------------------------------------------ |
 | [asgi][3]                 | >= 2.0            | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#asgi    |
 | [aiohttp][4] (cliente)     | >= 2.0            | sí | https://ddtrace.readthedocs.io/en/stable/integrations.html#aiohttp |
@@ -67,9 +67,9 @@ La biblioteca de `ddtrace` incluye soporte técnico para varios marcos web, entr
 
 ### Compatibilidad con almacenes de datos
 
-La biblioteca de `ddtrace` incluye soporte para los siguientes almacenes de datos:
+La librería de `ddtrace` incluye soporte para los siguientes almacenes de datos:
 
-| Almacén de datos                          | Versión compatible | Automática |  Documentación de biblioteca                                                                         |
+| Almacén de datos                          | Versión compatible | Automática |  Documentación de librería                                                                         |
 | ---------------------------------- | ----------------- | --------- | --------------------------------------------------------------------------------------------- |
 | [algoliasearch][18]                | >= 1.20.0         | Sí | https://ddtrace.readthedocs.io/en/stable/integrations.html#algoliasearch                       |
 | [asyncpg][19]                      | >= 0.18.0         | sí | https://ddtrace.readthedocs.io/en/stable/integrations.html#asyncpg                             |
@@ -97,11 +97,11 @@ La biblioteca de `ddtrace` incluye soporte para los siguientes almacenes de dato
 | [SQLite3][43]                      | Totalmente compatible   | sí | https://ddtrace.readthedocs.io/en/stable/integrations.html#sqlite                              |
 | [Vertica][44]                      | >= 0.6            | sí | https://ddtrace.readthedocs.io/en/stable/integrations.html#vertica                             |
 
-### Compatibilidad de la biblioteca
+### Compatibilidad de la librería
 
-La biblioteca de `ddtrace` incluye soporte técnico para las siguientes bibliotecas:
+La librería de `ddtrace` incluye soporte técnico para las siguientes bibliotecas:
 
-| Biblioteca           | Versión compatible |  Automática       | Documentación de la biblioteca                                                    |
+| Biblioteca           | Versión compatible |  Automática       | Documentación de la librería                                                    |
 | ----------------- | ----------------- | ---------------- | ------------------------------------------------------------------------ |
 | [aiobotocore][45] | >= 0.2.3          | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#aiobotocore |
 | [asyncio][46]     | Totalmente compatible   | > Python 3.7 sí | https://ddtrace.readthedocs.io/en/stable/integrations.html#asyncio     |
@@ -119,7 +119,7 @@ La biblioteca de `ddtrace` incluye soporte técnico para las siguientes bibliote
 | [Kombu][56]       | >= 4.0            | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#kombu       |
 | [Mako][57]        | >= 0.1.0          | sí | https://ddtrace.readthedocs.io/en/stable/integrations.html#mako        |
 | [Solicitudes] [58]    | >= 2.08           | sí | https://ddtrace.readthedocs.io/en/stable/integrations.html#requests    |
-| [structlog][64]   | >= 20.2.0         | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#structlog   | 
+| [structlog][64]   | >= 20.2.0         | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#structlog   |
 | [urllib3][59]     | >= 1.22           | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#urllib3     |
 | [graphql-core][60]| >= 2.0            | sí | https://ddtrace.readthedocs.io/en/stable/integrations.html#graphql |
 | [pytest][14]              | >= 3.0            | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#pytest  |

@@ -1,6 +1,6 @@
 {
   "integration_count": {
-    "other": "850"
+    "other": "1,000"
   },
   "beta_sentence": {
     "other": "　ベータ - 問題についてのお問い合わせまたは報告は"
@@ -291,5 +291,17 @@
   },
   "available_for": {
     "other": "次で利用可能"
+  },
+  "alert_note": {
+    "other": "注"
+  },
+  "alert_warning": {
+    "other": "警告"
+  },
+  "alert_caution": {
+    "other": "注"
+  },
+  "alert_tip": {
+    "other": "ヒント"
   }
 }

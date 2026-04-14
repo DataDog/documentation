@@ -22,6 +22,9 @@ further_reading:
     - link: https://www.datadoghq.com/blog/send-amazon-vpc-flow-logs-to-data-firehose-and-datadog/
       tag: "Blog"
       text: "Send Amazon VPC flow logs to Amazon Kinesis Data Firehose and Datadog"  
+    - link: https://www.datadoghq.com/blog/ai-powered-log-parsing
+      tag: Blog
+      text: Accelerate investigations with AI-powered log parsing
 ---
 
 ## Overview

@@ -1,5 +1,5 @@
 ---
-title: Set up Tracing on a CircleCI Workflow
+title: CircleCI Setup for CI Visibility
 aliases:
   - /continuous_integration/setup_pipelines/circleci
 further_reading:
@@ -17,15 +17,11 @@ further_reading:
       text: "Extend Pipeline Visibility by adding custom tags and measures"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
-
 ## Overview
 
 [CircleCI][1] is a continuous integration and delivery platform that enables teams to build, test, and deploy software at scale.
 
-Set up tracing on CircleCI to optimize the performance of your pipelines, improve collaboration across teams, and ensure consistent, compliant build processes.
+Set up CI Visibility for CircleCI to optimize the performance of your pipelines, improve collaboration across teams, and ensure consistent, compliant build processes.
 
 ### Compatibility
 
@@ -38,6 +34,16 @@ Set up tracing on CircleCI to optimize the performance of your pipelines, improv
 | [Custom tags][14] [and measures at runtime][15] | Custom tags and measures at runtime | Configure [custom tags and measures][7] at runtime. |
 | [Filter CI Jobs on the critical path][18] | Filter CI Jobs on the critical path | Filter by jobs on the critical path. |
 | [Execution time][19] | Execution time  | View the amount of time pipelines have been running jobs. |
+
+### Terminology
+
+This table shows the mapping of concepts between Datadog CI Visibility and CircleCI:
+
+| Datadog                    | CircleCI  |
+|----------------------------|-----------|
+| Pipeline                   | Workflow  |
+| Job                        | Job       |
+| _Not available in Datadog_ | Step      |
 
 ## Configure the Datadog integration
 

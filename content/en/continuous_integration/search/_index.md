@@ -15,10 +15,6 @@ further_reading:
   text: "Use CI jobs failure analysis to identify root causes in failed jobs"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
-
 ## Overview
 
 The [Pipelines page][1] is useful for developers who want to keep an eye on the build pipeline for their service.
@@ -103,7 +99,7 @@ Use [CI jobs failure analysis][12] to identify the most common root causes of fa
 [6]: /account_management/teams/
 [7]: /continuous_integration/pipelines/custom_tags_and_measures/?tab=linux
 [8]: /continuous_integration/pipelines/awscodepipeline/#collect-job-logs
-[9]: /continuous_integration/pipelines/azure/#enable-job-log-collection
+[9]: /continuous_integration/pipelines/azure/#collect-job-logs
 [10]: /continuous_integration/pipelines/circleci/#enable-log-collection
 [11]: /continuous_integration/guides/identify_highest_impact_jobs_with_critical_path
 [12]: /continuous_integration/guides/use_ci_jobs_failure_analysis/

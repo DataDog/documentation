@@ -14,10 +14,6 @@ further_reading:
 title: Enviar pipelines personalizados a Datadog
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">CI Visibility no está disponible en el sitio seleccionado ({{< region-param key="dd_site_name" >}}) en este momento.</div>
-{{< /site-region >}}
-
 ## Información general
 
 Puedes enviar pipelines personalizados a través de HTTP utilizando el [endpoint de la API pública][1]. Para obtener más información sobre cómo se modelan las ejecuciones de pipelines, consulta [Modelo de datos y tipos de ejecución de pipelines][2].

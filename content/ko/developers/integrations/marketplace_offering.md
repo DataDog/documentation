@@ -9,13 +9,13 @@ further_reading:
 - link: https://www.datadoghq.com/blog/datadog-marketplace/
   tag: 블로그
   text: Datadog 마켓플레이스를 통해 모니터링 도달 범위 확대
-- link: /developers/integrations/create_a_tile
+- link: /developers/integrations/
   tag: 설명서
-  text: 타일 생성
+  text: 통합 생성하기
 - link: /developers/integrations/agent_integration
   tag: 설명서
   text: 에이전트 기반 통합 생성
-title: 마켓플레이스 제품/서비스 빌드
+title: 마켓플레이스 제공 내역 빌드
 type: 설명서
 ---
 ## 개요
@@ -80,7 +80,7 @@ Datadog 마켓플레이스에 제품/서비스를 등록하기 전 먼저, [Data
 
 ## 시작하기
 
-API 기반 통합, 소프트웨어 라이선스 또는 전문 서비스를 시작하려면, [타일 생성][13]을 확인하세요. Datadog 마켓플레이스에서 에이전트 기반 통합을 빌드하고 판매하는 데 관심이 있다면 [에이전트 기반 통합 생성][19]을 참조하세요.
+통합 생성 작업을 시작하려면 [Datadog으로 통합 구축][13]을 참고하세요.
 
 ## 참고 자료
 
@@ -97,7 +97,7 @@ API 기반 통합, 소프트웨어 라이선스 또는 전문 서비스를 시�
 [10]: https://chat.datadoghq.com/
 [11]: https://docs.datadoghq.com/ko/developers/authorization/
 [12]: https://github.com/DataDog/marketplace/pull/107
-[13]: https://docs.datadoghq.com/ko/developers/integrations/create_a_tile
+[13]: /ko/developers/integrations/build_integration/
 [15]: https://docs.datadoghq.com/ko/developers/integrations/api_integration
 [19]: https://docs.datadoghq.com/ko/developers/integrations/agent_integration
 [20]: https://www.dashcon.io/

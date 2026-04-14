@@ -21,7 +21,7 @@ author:
   sales_email: rd-pd-1@sios.com
   support_email: rd-pd-1@sios.com
 categories:
-- AWS
+- aws
 - nube
 - notificaciones
 custom_kind: integración
@@ -58,7 +58,7 @@ tile:
   title: AppKeeper
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
+<!--  EXTRAÍDO DE https://github.com/DataDog/integrations-extras -->
 
 
 ## Información general

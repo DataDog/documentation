@@ -42,6 +42,7 @@ title: 'エラー: Datadog に sts:AssumeRole を実行する権限がない'
 [2]: https://app.datadoghq.com/integrations/amazon-web-services
 [3]: https://github.com/DataDog/cloudformation-template/blob/master/aws/datadog_integration_role.yaml
 {{< /site-region >}}
+
 {{< site-region region="ap1" >}}
 1. IAM ロールを作成した場合、[Datadog AWS インテグレーションページ][2]で正しい IAM ロール名を使用していることを確認してください。AWS または Datadog に余分なスペースや文字があると、ロールの委任が失敗します。CloudFormation を使用してロールをデプロイした場合、デフォルトの IAM ロール名は [DatadogIntegrationRole][3] に設定されています。
 
@@ -70,6 +71,37 @@ title: 'エラー: Datadog に sts:AssumeRole を実行する権限がない'
 {{< /code-block >}}
 
 [2]: https://ap1.datadoghq.com/integrations/amazon-web-services
+[3]: https://github.com/DataDog/cloudformation-template/blob/master/aws/datadog_integration_role.yaml
+{{< /site-region >}}
+
+{{< site-region region="ap2" >}}
+1. IAM ロールを作成した場合、[Datadog AWS インテグレーションページ][2]で正しい IAM ロール名を使用していることを確認してください。AWS または Datadog に余分なスペースや文字があると、ロールの委任が失敗します。CloudFormation を使用してロールをデプロイした場合、デフォルトの IAM ロール名は [DatadogIntegrationRole][3] に設定されています。
+
+2. AWS の Datadog インテグレーションロールのページで、**Trust relationships** タブの下に、**Principal** が以下のように構成されていることを確認します。
+
+{{< code-block lang="json" filename="" disable_copy="true" collapsible="false" >}}
+
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": "arn:aws:iam::412381753143:root"
+            },
+            "Action": "sts:AssumeRole",
+            "Condition": {
+                "StringEquals": {
+                    "sts:ExternalId": "<YOUR_AWS_EXTERNAL_ID>"
+                }
+            }
+        }
+    ]
+}
+
+{{< /code-block >}}
+
+[2]: https://ap2.datadoghq.com/integrations/amazon-web-services
 [3]: https://github.com/DataDog/cloudformation-template/blob/master/aws/datadog_integration_role.yaml
 {{< /site-region >}}
 

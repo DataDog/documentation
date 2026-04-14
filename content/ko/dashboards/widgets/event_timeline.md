@@ -6,4 +6,4 @@ private: true
 title: 이벤트 타임라인 위젯
 ---
 
-<div class="alert alert-warning">이벤트 타임라인 위젯은 <a href="https://docs.datadoghq.com/dashboards/widgets/timeseries/">시계열 위젯</a>을 통해 지원됩니다.</div>
+<div class="alert alert-danger">이벤트 타임라인 위젯은 <a href="https://docs.datadoghq.com/dashboards/widgets/timeseries/">시계열 위젯</a>을 통해 지원됩니다.</div>

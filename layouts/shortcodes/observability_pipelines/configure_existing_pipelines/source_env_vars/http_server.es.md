@@ -1,0 +1,3 @@
+- Dirección del servidor HTTP/S:
+    - El Worker de Observability Pipelines escucha esta dirección de socket, como por ejemplo `0.0.0.0:9997`, para ver logs de tu cliente HTTP.
+    - Almacenado en la variable de entorno: `DD_OP_SOURCE_HTTP_SERVER_ADDRESS`.

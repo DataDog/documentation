@@ -78,7 +78,7 @@ S3 버킷 또는 클라우드와치 중 하나로 로그를 전송하려면 AWS 
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "amazon_auto_scaling" >}}
+{{< get-metrics-from-git "amazon-auto-scaling" >}}
 
 
 AWS에서 검색된 각 메트릭에는 AWS 콘솔에 나타나는 것과 동일한 태그가 할당됩니다, 호스트 이름, 보안 그룹 등을 포함하되 이에 국한되지 않습니다.

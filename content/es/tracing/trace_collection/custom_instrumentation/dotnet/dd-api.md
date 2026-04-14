@@ -82,7 +82,7 @@ namespace Store.Managers
  <strong>Nota</strong>: Esta función requiere añadir el paquete NuGet de <a href="https://www.nuget.org/packages/Datadog.rastrear"><code>Datadog.Trace</code> </a> a tu aplicación. Proporciona una API para acceder directamente al rastreador y al tramo activo.
 </div>
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
  <strong>Nota</strong>: Cuando utilices el paquete NuGet de <code>Datadog.Trace</code> y la instrumentación automática, es importante que mantengas las versiones sincronizadas.
 </div>
 
@@ -108,7 +108,7 @@ Tracer.Configure(settings);
 
 Al llamar a `Tracer.Configure()` se sustituye la configuración de todas las trazas (traces) siguientes, para la instrumentación personalizada y para la instrumentación automática.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   Debes hacer la sustitución de la configuración <strong>una vez, lo antes posible</strong> en tu aplicación.
 </div>
 
@@ -118,7 +118,7 @@ Además de la instrumentación automática, el atributo `[Trace]` y las configur
 
 Para crear y activar un tramo personalizado, utiliza `Tracer.Instance.StartActive()`. Si ya hay una traza activa (cuando se crea mediante la instrumentación automática, por ejemplo), el tramo forma parte de la traza actual. Si no hay ninguna traza actual, se inicia una nueva.
 
-<div class="alert alert-warning"><strong>Advertencia</strong>: Asegúrate de desechar el ámbito devuelto desde <code>StartActive</code>. Al desechar el ámbito, se cierra el tramo y se asegura de que la traza se descargue en Datadog una vez que se hayan cerrado todos sus tramos.
+<div class="alert alert-danger"><strong>Advertencia</strong>: Asegúrate de desechar el ámbito devuelto desde <code>StartActive</code>. Al desechar el ámbito, se cierra el tramo y se asegura de que la traza se descargue en Datadog una vez que se hayan cerrado todos sus tramos.
 </div>
 
 ```csharp
@@ -131,7 +131,7 @@ a través del (ámbito de variable = Tracer.Instance.StartActive("custom-operati
 }
 ```
 
-Añade [etiquetas de tramos][5] personalizadas a tus [tramos][6] para personalizar tu capacidad de observación en Datadog. Las etiquetas de tramos se aplican a tus trazas entrantes, lo que te permite correlacionar el comportamiento observado con información al nivel del código como el nivel del comercio, el importe del pago o el ID de usuario.
+Añade [span tagss][5] personalizadas a tus [tramos][6] para personalizar tu capacidad de observación en Datadog. Las span tagss se aplican a tus trazas entrantes, lo que te permite correlacionar el comportamiento observado con información al nivel del código como el nivel del comercio, el importe del pago o el ID de usuario.
 
 ### Crear manualmente un nuevo tramo
 
@@ -152,7 +152,7 @@ a través de (var parentScope =
 }
 ```
 
-### Añadir etiquetas de tramos personalizadas
+### Añadir span tagss personalizadas
 
 Añade etiquetas personalizadas a tus tramos correspondientes a cualquier valor dinámico dentro de tu código de aplicación como `customer.id`.
 

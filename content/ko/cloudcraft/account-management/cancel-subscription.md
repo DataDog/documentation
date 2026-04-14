@@ -26,7 +26,7 @@ Cloudcraft 구독 취소는 Cloudcraft 애플리케이션 내에서 할 수 있�
 - Datadog 영업팀을 통해 구독을 구매한 경우, 자동 갱신되지 않으며 빌링 주기가 끝날 때 만료됩니다.
 - AWS 마켓플레이스를 통해 구독을 구매한 경우 취소 프로세스는 AWS 계정을 통해 수행해야 합니다. 자세한 내용은 AWS 마켓플레이스 설명서 페이지의 [제품 구독 취소][2]를 참조하세요.
 
-<div class="alert alert-danger">구독을 취소해도 Cloudcraft 서버에서 데이터가 삭제되지는 않습니다. 대신 계정이 무료 요금제로 변경됩니다. Cloudcraft 서버에서 계정과 모든 데이터를 삭제하려면 Cloudcraft <a href="https://app.cloudcraft.co/support" rel="도움/도움말" title="Cloudcraft support">지원팀에 문의하세요</a>.
+<div class="alert alert-warning">구독을 취소해도 Cloudcraft 서버에서 데이터가 삭제되지는 않습니다. 대신 계정이 무료 요금제로 변경됩니다. Cloudcraft 서버에서 계정과 모든 데이터를 삭제하려면 Cloudcraft <a href="https://app.cloudcraft.co/support" rel="도움/도움말" title="Cloudcraft support">지원팀에 문의하세요</a>.
 </div>
 
 [1]: /ko/cloudcraft/getting-started/using-bits-menu/

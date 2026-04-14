@@ -1,5 +1,6 @@
 ---
 title: Amazon ECS Log Collection
+description: Configure log collection from containerized applications running on Amazon ECS using the Datadog Agent
 aliases:
   - /agent/amazon_ecs/logs
 further_reading:

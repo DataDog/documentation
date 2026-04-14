@@ -1,31 +1,40 @@
 ---
 dependencies:
-- "https://github.com/DataDog/puppet-datadog-agent/blob/main/README.md"
+- https://github.com/DataDog/puppet-datadog-agent/blob/main/README.md
 title: Puppet
 ---
 Ce module installe l'Agent Datadog et envoie les rapports Puppet à Datadog.
 
-### Prérequis
+## Prérequis
 
-Le module Puppet Datadog est pris en charge sur Linux et Windows et est compatible avec la version 4.6 ou une version ultérieure de Puppet, ou avec la version 2016.4 ou une version ultérieure de Puppet Enterprise. Pour obtenir des informations détaillées sur la compatibilité, consultez la [page du module sur Puppet Forge][1] (en anglais).
+Le module Puppet Datadog prend en charge Linux et Windows et est compatible avec Puppet >= 7.34.x ou Puppet Enterprise 
+version >= 2021.7.x. Pour des informations détaillées sur la compatibilité, consultez la [page du module sur Puppet Forge][1].
 
-### Installation
+## Installation
 
-Installez le module Puppet [agent_datadog][1] dans le chemin du module de votre master Puppet :
+Suivez le [guide d'installation dans l'application dans Fleet Automation][9] pour sélectionner vos fonctionnalités requises, copiez l'extrait de manifeste généré, ajoutez-le à votre manifeste Puppet et appliquez votre déploiement Puppet standard pour déployer l'Agent. Consultez le [module de l'Agent Datadog][1] ou la section [Configurations avancées](#configurations-avancees) pour des configurations supplémentaires, notamment la gestion des mises à niveau de l'Agent, l'activation des intégrations de l'Agent et la configuration du reporting des exécutions Puppet.
 
-```shell
-puppet module install datadog-datadog_agent
-```
+### Mise à niveau de l'Agent
 
-#### Mise à niveau
+> [!IMPORTANT]
+> Le module Puppet Datadog v4.x abandonne la prise en charge de Puppet <= 6 et de l'Agent Datadog v5. Pour mettre à niveau ou installer 
+> l'Agent Datadog v5+ sur Puppet <= 6, utilisez le module v3.x.
 
-- Par défaut, la version 7.x de l'Agent Datadog est installée. Pour utiliser une version antérieure de l'Agent, modifiez le paramètre `agent_major_version`.
-- Le paramètre `agent5_enable` n'est plus utilisé. Il a été remplacé par `agent_major_version`.
-- Le paramètre `agent6_extra_options` a été remplacé par `agent_extra_options`, car il concerne les versions 6 et 7 de l'Agent.
-- Le paramètre `agent6_log_file` a été remplacé par `agent_log_file`, car il concerne les versions 6 et 7 de l'Agent.
-- Les paramètres `agent5_repo_uri` et `agent6_repo_uri` ont été remplacés par le paramètre `agent_repo_uri` pour toutes les versions de l'Agent.
-- Les paramètres `conf_dir` et `conf6_dir` ont été remplacés par le paramètre `conf_dir` pour toutes les versions de l'Agent.
-- Le nom du fichier de répertoire créé sur Linux, qui était auparavant `datadog5` ou `datadog6`, est désormais `datadog`.
+- Par défaut, l'Agent Datadog v7.x est installé. Pour utiliser la version 6 de l'Agent, modifiez le paramètre `agent_major_version`.
+- Les options héritées spécifiques à l'Agent v5 ont été supprimées. Consultez le fichier CHANGELOG.md pour plus de détails et les commentaires de la classe datadog_agent pour toutes les options disponibles.
+
+> [!IMPORTANT]
+> Des mises à jour et des modifications incompatibles ont été apportées dans les intégrations de l'Agent ci-dessous :
+
+  - ActiveMQ_XML
+    - Le paramètre `suppress_errors` doit maintenant être utilisé au lieu de `supress_errors` (rétrocompatible)
+  - ElasticSearch **[MODIFICATIONS INCOMPATIBLES]**
+    - `ssl_verify` accepte uniquement des valeurs booléennes
+    - Les options `tls_verify` ont été ajoutées
+  - Check Disk **[MODIFICATIONS INCOMPATIBLES]**
+    - `use_mount`, `all_partitions` et `tag_by_filesystem` acceptent uniquement des valeurs booléennes
+  - Check TCP
+    -  L'option `skip_event` a été supprimée depuis Datadog Agent v6.4+
 
 ### Configuration
 
@@ -88,6 +97,9 @@ Une fois le module `datadog_agent` installé sur votre `puppetserver` ou `puppet
 
 5. (Facultatif) Pour recueillir des métriques et des événements liés au service Puppet, consultez la section [Rapports](#rapports).
 
+
+## Configurations avancées
+
 ### Mettre à jour une intégration
 
 Pour installer et imposer une version spécifique d'une intégration, utilisez `datadog_agent::install_integration`. La commande `datadog-agent integration` est alors appelée pour s'assurer qu'une intégration spécifique est installée ou désinstallée. Exemple :
@@ -114,19 +126,7 @@ Notez qu'il est possible d'installer une version plus ancienne d'une intégratio
 
 Pour activer l'envoi de rapports sur les exécutions Puppet vers votre flux Datadog, activez le processeur de rapports sur votre master Puppet et l'envoi de rapports pour vos clients. Les clients renvoient au master un rapport d'exécution après chaque vérification.
 
-1. Installez le gem [dogapi][3] sur votre système. Redémarrez puppetserver une fois le gem installé.
-
-Pour configurer dogapi au sein de votre code, utilisez notify :
-
-```puppet
-package { 'dogapi':
-  ensure   => 'present',
-  provider => 'puppetserver_gem',
-  notify   => Service['puppetserver']
-}
-```
-
-2. Définissez l'option `puppet_run_reports` sur true dans le manifeste de configuration des nœuds pour votre master :
+1. Définissez l'option `puppet_run_reports` sur true dans le manifeste de configuration des nœuds pour votre master :
 
     ```ruby
     class { 'datadog-agent':
@@ -136,7 +136,9 @@ package { 'dogapi':
     }
     ```
 
-3. Ajoutez ces options de configuration à la configuration du master Puppet (ex. : `/etc/puppetlabs/puppet/puppet.conf`) :
+    Le gem dogapi est automatiquement installé. Définissez `manage_dogapi_gem` sur false pour personnaliser l'installation.
+
+2. Ajoutez ces options de configuration à la configuration du master Puppet (ex. : `/etc/puppetlabs/puppet/puppet.conf`) :
 
     ```ini
     [main]
@@ -171,7 +173,7 @@ Avec le [module `ini_setting`](https://forge.puppet.com/modules/puppetlabs/inifi
   }
 ```
 
-4. Sur tous vos nœuds client Puppet, ajoutez ce qui suit au même emplacement :
+3. Sur tous vos nœuds client Puppet, ajoutez ce qui suit au même emplacement :
 
     ```ini
     [agent]
@@ -194,7 +196,7 @@ Avec le [module `ini_setting`](https://forge.puppet.com/modules/puppetlabs/inifi
   }
 ```
 
-5. (Facultatif) Activez le tagging des rapports avec des faits :
+4. (Facultatif) Activez le tagging des rapports avec des faits :
 
     Vous pouvez ajouter des tags aux rapports qui sont envoyés à Datadog sous la forme d'événements. Ces tags peuvent provenir de faits Puppet propres au nœud sur lequel porte le rapport. Ils doivent être individuels et ne pas comprendre de faits structurés (hashs, tableaux, etc.) pour garantir la lisibilité. Pour activer le tagging des faits standard, définissez le paramètre `datadog_agent::reports::report_fact_tags` sur la valeur de tableau des faits, par exemple `["virtual","operatingsystem"]`. Pour activer le tagging des faits de confiance, définissez le paramètre `datadog_agent::reports::report_trusted_fact_tags` sur la valeur de tableau des faits, par exemple `["certname","extensions.pp_role","hostname"]`.
 
@@ -205,7 +207,31 @@ Avec le [module `ini_setting`](https://forge.puppet.com/modules/puppetlabs/inifi
     - Ne dupliquez pas les données de surveillance courantes comme le nom de l'host, l'uptime, la mémoire, etc.
     - Coordonnez les faits essentiels comme le rôle, le propriétaire, le modèle, le centre de données, etc. pour établir des corrélations pertinentes avec les mêmes tags à partir de métriques
 
-6. Vérifiez que vos données Puppet se trouvent dans Datadog en recherchant `sources:puppet` dans le [flux d'événements][5].
+5. Vérifiez que vos données Puppet se trouvent dans Datadog en recherchant `sources:puppet` dans le [flux d'événements][5].
+
+### Configuration via NPM
+
+Pour activer les fonctionnalités Network Performance Monitoring (NPM) de l'Agent Datadog, suivez ces étapes :
+
+1. (Windows uniquement) Si l'Agent est déjà installé, désinstallez-le en passant `win_ensure => absent` à la classe principale et en supprimant les définitions des autres classes.
+2. (Windows uniquement) Passez l'option `windows_npm_install` avec la valeur `true` à la classe `datadog::datadog_agent`. Supprimez `win_ensure` s'il a été ajouté à l'étape précédente.
+3. Utilisez la classe `datadog_agent::system_probe` pour créer correctement le fichier de configuration :
+
+```conf
+class { 'datadog_agent::system_probe':
+    network_enabled => true,
+}
+```
+
+### Configuration USM
+
+Pour activer Universal Service Monitoring (USM) de l'Agent Datadog, utilisez la classe `datadog_agent::system_probe` pour créer correctement le fichier de configuration :
+
+```conf
+class { 'datadog_agent::system_probe':
+    service_monitoring_enabled => true,
+}
+```
 
 ### Dépannage
 
@@ -264,8 +290,8 @@ Pour générer des tags à partir de faits personnalisés, classez vos nœuds en
 
 ```conf
 class { "datadog_agent":
-  api_key            => "<VOTRE_CLÉ_API_DD>",
-  facts_to_tags      => ["osfamily","networking.domain","my_custom_fact"],
+  api_key            => "<YOUR_DD_API_KEY>",
+  facts_to_tags      => ["os.family","networking.domain","my_custom_fact"],
 }
 ```
 
@@ -280,20 +306,22 @@ Ces variables peuvent être définies dans la classe `datadog_agent` afin de con
 
 | nom de la variable                           | description                                                                                                                                                                                      |
 |-----------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `agent_major_version`                   | La version de l'Agent à installer : 5, 6 ou 7 (valeur par défaut : 7).                                                                                                                              |
+| `agent_major_version`                   | La version de l'Agent à installer : 6 ou 7 (par défaut : 7).                                                                                                                                 |
 | `agent_version`                         | Cette variable vous permet d'imposer l'installation d'une version mineure spécifique de l'Agent, par exemple :`1:7.16.0-1`. Pour installer la dernière version, n'indiquez aucune valeur.                                                             |
 | `collect_ec2_tags`                      | Définissez cette variable sur `true` pour recueillir les tags EC2 personnalisés d'une instance en tant que tags de l'Agent.                                                                                                                             |
 | `collect_instance_metadata`             | Définissez cette variable sur `true` pour recueillir les métadonnées EC2 personnalisées d'une instance en tant que tags de l'Agent.                                                                                                                                |
-| `datadog_site`                          | Le site Datadog auquel envoyer les données (Agents v6 et v7 uniquement). Valeur par défaut : `datadoghq.com`. Exemples : `datadoghq.eu` ou `us3.datadoghq.com`.                                                          |
+| `datadog_site`                          | Le site Datadog auquel envoyer les données. La valeur par défaut est `datadoghq.com`, par exemple : `datadoghq.eu` ou `us3.datadoghq.com`.                                                                                           |
 | `dd_url`                                | L'URL du serveur entrant de Datadog. Il est peu probable que vous deviez la modifier. Cette variable remplace `datadog_site`.                                                                                                 |
 | `host`                                  | Remplace le hostname du nœud.                                                                                                                                                                  |
 | `local_tags`                            | Un tableau de chaînes `<KEY:VALUE>` définies en tant que tags pour le nœud.                                                                                                                             |
-| `non_local_traffic`                     | Autorise les autres nœuds à relayer leur trafic par ce nœud.                                                                                                                                      |
+| `non_local_traffic`                     | Autoriser d'autres nœuds à relayer leur trafic DogstatsD via ce nœud.                                                                                                                            |
 | `apm_enabled`                           | Une valeur booléenne permettant d'activer l'Agent APM (valeur par défaut : false).                                                                                                                                           |
 | `process_enabled`                       | Une valeur booléenne permettant d'activer l'Agent de processus (valeur par défaut : false).                                                                                                                                       |
 | `scrub_args`                            | Une valeur booléenne permettant d'activer le nettoyage de lignes de commande de processus (valeur par défaut : true).                                                                                                                            |
 | `custom_sensitive_words`                | Un tableau permettant d'ajouter des mots supplémentaires pour le nettoyage, en plus des mots par défaut (valeur par défaut : `[]`).                                                                                             |
 | `logs_enabled`                          | Une valeur booléenne permettant d'activer l'Agent de logs (valeur par défaut : false).                                                                                                                                          |
+| `windows_npm_install`                   | Un booléen pour activer l'installation du pilote NPM Windows (par défaut false).                                                                                                                     |
+| `win_ensure`                            | Une énumération (present/absent) pour garantir la présence/absence de l'Agent Datadog sur Windows (par défaut present)                                                                                    |
 | `container_collect_all`                 | Une valeur booléenne permettant d'activer la collecte de logs pour tous les conteneurs.                                                                                                                                          |
 | `agent_extra_options`<sup>1</sup>       | Un hash permettant de fournir des options de configuration supplémentaires (Agent v6 et v7 uniquement).                                                                                                                       |
 | `hostname_extraction_regex`<sup>2</sup> | Une expression régulière utilisée pour extraire le groupe de capture associé au hostname, afin de transmettre les résultats de l'exécution dans Datadog, plutôt que de transmettre le nom du nœud Puppet. Exemple :<br>`'^(?<hostname>.*\.datadoghq\.com)(\.i-\w{8}\..*)?$'` |
@@ -321,3 +349,4 @@ class { "datadog_agent":
 [6]: https://github.com/DataDog/puppet-datadog-agent/blob/master/manifests/integrations/mongo.pp
 [7]: https://github.com/DataDog/puppet-datadog-agent/tree/master/manifests/integrations
 [8]: https://github.com/DataDog/puppet-datadog-agent/blob/master/manifests/init.pp
+[9]: https://app.datadoghq.com/fleet/install-agent/latest?platform=puppet

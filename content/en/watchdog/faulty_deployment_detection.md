@@ -1,5 +1,6 @@
 ---
 title: Automatic Faulty Deployment Detection
+description: "Detect faulty code deployments within minutes using Watchdog's automatic analysis of new deployment performance compared to previous versions."
 ---
 
 ## Overview
@@ -39,5 +40,5 @@ Watchdog attempts to determine if the new deployment is a plausible cause of the
 - The error rate in the new version was not significantly higher than in preceding versions.
 - This error pattern is common during deployments of the service, even when the new code version is not faulty.
 
-[2]: /service_management/events/explorer
+[2]: /events/explorer
 [3]: https://app.datadoghq.com/monitors/create

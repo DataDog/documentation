@@ -1,6 +1,8 @@
 ---
+id: instrumentation
 core_product:
 - apm
+short_definition: インスツルメンテーションとは、トレース、メトリクス、ログなどの可観測性データをキャプチャして Datadog にレポートするために、アプリケーションにコードを追加するプロセスです。
 title: インスツルメンテーション
 ---
 

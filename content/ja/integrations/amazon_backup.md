@@ -42,7 +42,7 @@ AWS Backup は、AWS サービスやハイブリッドワークロードのデ�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "amazon_backup" >}}
+{{< get-metrics-from-git "amazon-backup" >}}
 
 
 ### イベント

@@ -189,7 +189,7 @@ _Agent バージョン 6.0 以降で利用可能_
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "mcache" >}}
+{{< get-metrics-from-git "memcached" >}}
 
 
 `mcache.d/conf.yaml` で `options.slabs: true` と設定している場合、チェックは `memcache.slabs.*` メトリクスのみを収集します。同様に、`options.items: true` と設定している場合、チェックは `memcache.items.*` メトリクスのみを収集します。
@@ -199,7 +199,7 @@ _Agent バージョン 6.0 以降で利用可能_
 Mcache チェックには、イベントは含まれません。
 
 ### サービスチェック
-{{< get-service-checks-from-git "mcache" >}}
+{{< get-service-checks-from-git "memcached" >}}
 
 
 ## トラブルシューティング

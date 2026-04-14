@@ -1,4 +1,8 @@
 ---
+algolia:
+  tags:
+  - integración
+  - configuración de la integración
 aliases:
 - /es/integrations/verisign_openhybrid/
 - /es/integrations/snyk/
@@ -9,12 +13,11 @@ aliases:
 - /es/integrations/shoreline/
 - /es/integrations/shoreline_license/
 - /es/integrations/shoreline_software_license/
+- /es/integrations/pingdom_v3/
+- /es/integrations/perimeterx/
+- /es/integrations/open-policy-agent/
+- /es/integrations/open_policy_agent/
 cascade:
-- _target:
-    lang: en
-    path: /integrations/akamai_datastream_2
-  aliases:
-  - /integrations/akamai_datastream
 - _target:
     lang: en
     path: /integrations/azure
@@ -62,92 +65,24 @@ cascade:
     rank: 60
     subcategory: Integraciones
     tags:
-    - eks logging
+    - generación de logs eks
 - _target:
     lang: en
-    path: /integrations/win32_event_log
+    path: /integrations/event-viewer
   algolia:
     category: Documentación
     rank: 60
     subcategory: Integraciones
     tags:
-    - event viewer
-  aliases:
-  - /integrations/eventviewer/
-- _target:
-    lang: en
-    path: /integrations/lambdatest_license
-  aliases:
-  - /integrations/lambdatest_software_license/
-- _target:
-    lang: en
-    path: /integrations/mongo
-  aliases:
-  - /integrations/mongodb/
-- _target:
-    lang: en
-    path: /integrations/rapdev_validator
-  aliases:
-  - /integrations/rapdev_dashboard_widget_pack/
-- _target:
-    lang: en
-    path: /integrations/wmi_check
-  aliases:
-  - /integrations/wmi/
-- _target:
-    lang: en
-    path: /integrations/jfrog_platform_self_hosted
-  aliases:
-  - /integrations/jfrog_platform/
-- _target:
-    lang: en
-    path: /integrations/komodor_license
-  aliases:
-  - /integrations/komodor_komodor/
-- _target:
-    lang: en
-    path: /integrations/stormforge_license
-  aliases:
-  - /integrations/stormforge_stormforge_license/
-- _target:
-    lang: en
-    path: /integrations/feed
-  aliases:
-  - /integrations/rss/
-- _target:
-    lang: en
-    path: /integrations/java
-  aliases:
-  - /agent/faq/jmx_integrations/
-  - /agent/faq/docker-jmx/
-- _target:
-    lang: en
-    path: /integrations/amazon_elb
-  aliases:
-  - /integrations/awselb
-- _target:
-    lang: en
-    path: /integrations/elastic
-  aliases:
-  - /integrations/awses
-- _target:
-    lang: en
-    path: /integrations/amazon_s3
-  aliases:
-  - /integrations/awss3
-- _target:
-    lang: en
-    path: /integrations/snowflake_web
-  aliases:
-  - /integrations/snowflake/
+    - visor de eventos
 description: Reúne datos de todos tus sistemas, aplicaciones y servicios
 disable_sidebar: true
 title: Integraciones
 ---
 
-Más de {{< translate key="integration_count" >}} integraciones incorporadas. Ve todos tus sistemas, aplicaciones y servicios.
+Más de {{< translate key="integration_count" >}} integraciones incorporadas. Visualiza todos tus sistemas, aplicaciones y servicios.
 
-¿Qué es una integración? Consulta [Introducción a integraciones][1].
+¿Qué es una integración? Consulta [Introducción a las integraciones][1].
 
 {{< integrations >}}
 

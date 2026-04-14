@@ -23,10 +23,6 @@ is_beta: true
 title: Event Management
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">이벤트 관리는 이 사이트에서 지원되지 않습니다.</div>
-{{< /site-region >}}
-
 {{< img src="service_management/events/correlation/event_management.png" alt="이벤트 관리란?" style="width:100%;" >}}
 
 ## 개요

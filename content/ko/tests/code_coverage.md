@@ -53,7 +53,7 @@ npm install --save-dev nyc
 }
 ```
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>참고</strong>: 제스트(Jest)에는 기본적으로 이스탄불(Istanbul)이 포함되어 있으므로 <code>nyc</code>를 설치하지 않아도 됩니다. <code>--coverage</code>를 전달하기만 하면 됩니다.
 </div>
 

@@ -335,7 +335,7 @@ Sigue estos pasos para añadir contexto variable en tus logs utilizando un proce
               arguments:  [ @session ]
               tags:
                   - { name: monolog.processor, method: processRecord }
-    ``` 
+    ```
 
 3. [Envía en un flujo](#configure-the-datadog-agent) el archivo JSON generado a Datadog.
 
@@ -356,7 +356,7 @@ Para integrar Monolog con tu marco, añade lo siguiente:
 
 ```php
  <?php
-  // Comprueba si la biblioteca de Monolog está bien cargada
+  // Comprueba si la librería de Monolog está bien cargada
   //use Monolog\Logger;
   //use Monolog\Handler\StreamHandler;
   //use Monolog\Formatter\JsonFormatter;
@@ -434,7 +434,7 @@ monolog:
 {{% /tab %}}
 {{% tab "Laravel" %}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 La función <code>\DDTrace\current_context()</code> se presentó en la versión <a href="https://github.com/DataDog/dd-trace-php/releases/tag/0.61.0">0.61.0</a>.
 </div>
 
@@ -505,7 +505,7 @@ class AppServiceProvider extends ServiceProvider
 {{% /tab %}}
 {{% tab "Silex" %}}
 
-Añade lo siguiente: 
+Añade lo siguiente:
 
 ```php
 <?php

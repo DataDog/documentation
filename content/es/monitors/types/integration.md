@@ -10,7 +10,7 @@ further_reading:
 - link: /monitors/downtimes/
   tag: Documentación
   text: Programar una caída del sistema para silenciar un monitor
-- link: /monitors/manage/status/
+- link: /monitors/status/
   tag: Documentación
   text: Comprobar el estado del monitor
 title: Monitor de integración
@@ -39,12 +39,12 @@ Si solo hay un check para la integración, no es necesaria ninguna selección. E
 
 #### Elige el contexto del monitor
 
-Selecciona el contexto para monitorizar eligiendo nombres de host, etiquetas (tags), o elija `All Monitored Hosts`. Si necesitas excluir determinados hosts, utiliza el segundo campo para hacer una lista de nombres o etiquetas.
+Selecciona los contextos para monitorizar eligiendo nombres de host, etiquetas (tags), o elige `All Monitored Hosts`. Si necesitas excluir determinados hosts, utiliza el segundo campo para hacer una lista de nombres o etiquetas.
 
 * El campo include (incluir) utiliza la lógica `AND`. Todos los nombres de host y etiquetas de la lista deben estar presentes en un host para que se incluya.
 * El campo exclude (excluir) utiliza la lógica `OR`. Se excluye cualquier host con un nombre de host o etiqueta de la lista.
 
-#### Definir tus condiciones de alerta
+#### Definir condiciones de alerta
 
 En esta sección, elige entre una **Alerta de check** o una **Alerta de clúster**:
 
@@ -59,7 +59,7 @@ Configura la alerta de check:
 
    La agrupación de checks se especifica a partir de una lista de agrupaciones conocidas o por tu mismo. Para los monitores de integración, la agrupación por check se conoce explícitamente. Por ejemplo, la integración de Postgres está etiquetada con `db`, `host` y `port`.
 
-2. Activar la alerta después de un número de fallos consecutivos: `<NUMBER>` 
+2. Activa la alerta después de un número de fallos consecutivos: `<NUMBER>`
 
     Cada ejecución de check presenta un único estado de `OK`, `WARN`, `CRITICAL` o `UNKNOWN`. Elige cuántas ejecuciones consecutivas con el estado `CRITICAL` desencadenan una notificación. Por ejemplo, tu base de datos podría tener un único blip en el que falla la conexión. Si estableces este valor en `> 1`, el blip se ignora, pero un problema con más de un fallo consecutivo desencadena una notificación.
 
@@ -72,11 +72,11 @@ Configura la alerta de check:
     Configura cuántas veces tiene que darse el estado `OK` de forma consecutiva para que se resuelva la alerta.
 
 
-[1]: /es/monitors/manage/status
+[1]: /es/monitors/status
 {{% /tab %}}
 {{% tab "Cluster Alert" %}}
 
-Una alerta de clúster calcula el porcentaje de checks con un estado determinado y lo compara con tus umbrales.
+Una alerta de clúster calcula el porcentaje de checks en un estado determinado y lo compara con tus umbrales.
 
 Configura una alerta de clúster:
 
@@ -86,7 +86,7 @@ Configura una alerta de clúster:
 
 Cada check etiquetado con una combinación distinta de etiquetas se considera un check distinto en el clúster. Solo el estado del último check de cada combinación de etiquetas se tiene en cuenta en el cálculo del porcentaje del clúster.
 
-{{< img src="monitors/monitor_types/process_check/cluster_check_thresholds.png" alt="Umbrales de check de clúster" style="width:90%;">}}
+{{< img src="monitors/monitor_types/process_check/cluster_check_thresholds.png" alt="Umbrales de check del clúster" style="width:90%;">}}
 
 Por ejemplo, un monitor de check de clúster agrupado por entornos puede enviar alertas si más del 70% de los checks en cualquiera de los entornos presentan un estado `CRITICAL` y avisa si más del 50% de los checks en cualquiera de los entornos presentan un estado `WARN`.
 {{% /tab %}}
@@ -100,12 +100,12 @@ Consulta la documentación [Configuración de monitores][5] para obtener informa
 
 Para obtener instrucciones detalladas sobre la sección **Configure notifications and automations** (Configurar notificaciones y automatizaciones), consulta la página [Notificaciones][9].
 
-## Leer más
+## Para leer más
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /es/integrations/
-[2]: https://app.datadoghq.com/monitors#create/integration
+[2]: https://app.datadoghq.com/monitors/create/integration
 [3]: /es/monitors/types/metric/
 [4]: https://app.datadoghq.com/monitors/manage
 [5]: /es/monitors/configuration/#advanced-alert-conditions

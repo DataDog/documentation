@@ -3,10 +3,10 @@ title: Reliability Overview
 aliases:
 - /software_catalog/eng_reports/reliability_overview/
 further_reading:
-- link: "/service_management/service_level_objectives/"
+- link: "/service_level_objectives/"
   tag: "Documentation"
   text: "Service Level Objectives"
-- link: "service_management/incident_management/"
+- link: "/incident_response/incident_management/"
   tag: "Documentation"
   text: "Incident Management"
 - link: "dashboards/"
@@ -14,23 +14,16 @@ further_reading:
   text: "Datadog Dashboards"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/engineering-reports/" d_target="#signupModal" btn_hidden="false" header="Opt in to the Preview for Engineering Reports!" >}}
-{{< /callout >}}
-
 ## Overview
 
-The Reliability Overview report supports aggregated views of SLOs and Incidents to help executive leadership understand your organization's reliability at a glance. 
-
-With this report, you can:
+The Reliability Overview report supports aggregated views of SLOs and Incidents to help executive leadership understand your organization's reliability at a glance. With this report, you can:
 - Customize your SLO or Incident groupings to be based on service, team, or other tags or properties that have been added to your SLOs or Incidents.
 - Use a summary score, based on the remaining error budget of the underlying SLOs, to understand SLO performance across different groups and identify areas of improvement.
 - Explore daily, weekly, and monthly historical reliability trends over the last 12 months to understand performance over time.
 
-Access the Reliability Overview report by clicking on the "Overview" tab in Internal Developer Portal (IDP) and selecting "Reliability Overview" in the left-hand menu. 
+Access the Reliability Overview report by searching for "Engineering Reports" (or clicking on the**Overview** tab in IDP) and selecting **Reliability Overview** in the left-hand menu. 
 
 {{< img src="tracing/eng_reports/reliability-overview-landing2.png" alt="Default view of the Reliability Overview report, which shows SLO Performance data" style="width:100%;" >}} 
-
-**Note:** If you have not opted into the Datadog IDP Preview, you can access the Reliability Overview report by clicking on the "Reports" tab at the top of the Software Catalog page.
 
 ## Interact with your Reliability Overview report
 
@@ -49,13 +42,13 @@ You can update your Reliability Overview report view in the following ways:
 
 ### Schedule reports
 
-Set up scheduled reports for your stakeholders that are delivered as PDFs through email or Slack on a recurring basis.
+Set up scheduled reports for your stakeholders that are delivered as PDFs through email, Slack, or Microsoft Teams on a recurring basis.
 
 To schedule reports, click on **Schedule Report** in the top right corner (or **Manage Reports** if you've already set up reports). Refer to the [Scheduled Reports documentation][1] for more information.
 
-### Customize your report 
+### Customize your report
 
-On the upper right corner of the report, click the kebab menu and select **Clone as a Dashboard** to create a dashboard with content from the Reliability Overview report. 
+On the upper right corner of the report, click the three-dot menu and select **Clone as a Dashboard** to create a dashboard with content from the Reliability Overview report. 
 
 To customize the dashboard, you can:
 - Update the SLO Summary table to group by any tag you have added to your SLOs (for example, you can create a view grouped by "user journey")

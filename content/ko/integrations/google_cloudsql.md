@@ -71,7 +71,7 @@ Google Cloud SQL 로그는 Google Cloud Logging으로 수집하여 클라우드 
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "google_cloudsql" >}}
+{{< get-metrics-from-git "google-cloudsql" >}}
 
 
 ### 이벤트

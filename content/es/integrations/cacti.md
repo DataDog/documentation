@@ -1,65 +1,17 @@
 ---
 app_id: cacti
-app_uuid: b18f92f2-2aa5-435e-b04e-84ce3538fa2d
-assets:
-  integration:
-    auto_install: true
-    configuration:
-      spec: assets/configuration/spec.yaml
-    events:
-      creates_events: false
-    metrics:
-      check: cacti.rrd.count
-      metadata_path: metadata.csv
-      prefix: cacti.
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 25
-    source_type_name: Cacti
-author:
-  homepage: https://www.datadoghq.com
-  name: Datadog
-  sales_email: info@datadoghq.com
-  support_email: help@datadoghq.com
 categories:
-- developer tools
-- log collection
+- herramientas de desarrollo
+- recopilación de logs
 custom_kind: integración
-dependencies:
-- https://github.com/DataDog/integrations-core/blob/master/cacti/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: cacti
-integration_id: cacti
-integration_title: Cacti
+description: Reenvía tus RRD de Cacti a Datadog para obtener alertas más completas
+  y gráficos más atractivos.
 integration_version: 4.0.0
-is_public: true
-manifest_version: 2.0.0
-name: cacti
-public_title: Cacti
-short_description: Reenvía tus RRD de Cacti a Datadog para obtener alertas más completas
-  y gráficas atractivas.
+media: []
 supported_os:
-- linux
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::Herramientas para desarrolladores
-  - Category::Recopilación de logs
-  - Supported OS::Linux
-  - Offering::integración
-  configuration: README.md#Instalación
-  description: Reenvía tus RRD de Cacti a Datadog para obtener alertas más completas
-    y gráficas atractivas.
-  media: []
-  overview: README.md#Descripción general
-  support: README.md#Soporte
-  title: Cacti
+- Linux
+title: Cacti
 ---
-
-<!--  EXTRAÍDO DE https://github.com/DataDog/integrations-core -->
-
-
 ## Información general
 
 Obtén métricas de Cacti en tiempo real para:
@@ -71,10 +23,10 @@ Obtén métricas de Cacti en tiempo real para:
 
 ### Instalación
 
-El check de Cacti está incluido en el paquete del [Datadog Agent][1]. Para comenzar a recopilar métricas, primero debes:
+El check de Cacti está incluido en el paquete del [Datadog Agent](https://app.datadoghq.com/account/settings/agent/latest). Para empezar a recopilar métricas, primero debes:
 
 1. Instalar los encabezados `librrd` y las bibliotecas.
-2. Instalar los enlaces a `rrdtool` de Python.
+1. Instalar los enlaces a `rrdtool` de Python.
 
 #### Encabezados y bibliotecas
 
@@ -109,7 +61,7 @@ sudo -u dd-agent /opt/datadog-agent/embedded/bin/pip install rrdtool
    sudo mysql -e "grant select on cacti.* to 'datadog'@'localhost';"
    ```
 
-2. Verifica el usuario y los derechos:
+1. Verifica el usuario y los derechos:
 
    ```shell
    mysql -u datadog --password=<MYSQL_PASSWORD> -e "show status" | \
@@ -121,7 +73,7 @@ sudo -u dd-agent /opt/datadog-agent/embedded/bin/pip install rrdtool
    echo -e "\033[0;31mMissing SELECT grant\033[0m"
    ```
 
-3. Otorga al usuario `datadog-agent` acceso a los archivos RRD:
+1. Otorga al usuario `datadog-agent` acceso a los archivos RRD:
 
    ```shell
    sudo gpasswd -a dd-agent www-data
@@ -134,7 +86,7 @@ sudo -u dd-agent /opt/datadog-agent/embedded/bin/pip install rrdtool
 
 #### Configuración del Agent
 
-1. Configura el Agent para que se conecte a MySQL y edita tu archivo `cacti.d/conf.yaml`. Consulta el [cacti.d/conf.yaml de ejemplo][2] para ver todas las opciones de configuración disponibles:
+1. Configurar el Agent para conectarse a MySQL, editar tu archivo `cacti.d/conf.yaml`. Consulta el [ejemplo de cacti.d/conf.yaml](https://github.com/DataDog/integrations-core/blob/master/cacti/datadog_checks/cacti/data/conf.yaml.example) para ver todas las opciones de configuración disponibles:
 
    ```yaml
    init_config:
@@ -171,38 +123,69 @@ sudo -u dd-agent /opt/datadog-agent/embedded/bin/pip install rrdtool
        rrd_path: "<CACTI_RRA_PATH>"
    ```
 
-2. [Reinicia el Agent][3].
+1. [Reinicia el Agent](https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent).
 
 ### Validación
 
-[Ejecuta el subcomando de estado del Agent][4] y busca `cacti` en la sección Checks.
+[Ejecuta el subcomando de estado del Agent(https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information) y busca `cacti` en la sección Checks.
 
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "cacti" >}}
 
+| | |
+| --- | --- |
+| **cacti.hosts.count** <br>(gauge) | Número de hosts monitorizados por Cacti<br>_Se muestra como host_ |
+| **cacti.metrics.count** <br>(gauge) | Número de métricas recopiladas de Cacti|
+| **cacti.rrd.count** <br>(gauge) | Número de archivos RRD de Cacti<br>_Se muestra como archivo_ |
+| **system.disk.free.last** <br>(gauge) | Cantidad de espacio libre en disco, último valor de sondeo<br>_Se muestra en bytes_ |
+| **system.disk.free.max** <br>(gauge) | Cantidad de espacio libre en disco, máximo valor de sondeo<br>_Se muestra en bytes_ |
+| **system.disk.free.min** <br>(gauge) | Cantidad de espacio libre en disco, mínimo valor de sondeo<br>_Se muestra en bytes_ |
+| **system.disk.used.last** <br>(gauge) | Cantidad de espacio utilizado en disco, último valor de sondeo<br>_Se muestra en bytes_ |
+| **system.disk.used.max** <br>(gauge) | Cantidad de espacio utilizado en disco, máximo valor de sondeo<br>_Se muestra en bytes_ |
+| **system.disk.used.min** <br>(gauge) | Cantidad de espacio utilizado en disco, mínimo valor de sondeo<br>_Se muestra en bytes_ |
+| **system.load.1.last** <br>(gauge) | Carga media del sistema durante un minuto, último valor de sondeo|
+| **system.load.1.max** <br>(gauge) | Carga media del sistema durante un minuto, máximo valor de sondeo|
+| **system.load.1.min** <br>(gauge) | Carga media del sistema durante un minuto, mínimo valor de sondeo|
+| **system.load.15.last** <br>(gauge) | Carga media del sistema durante 15 minutos, último valor de sondeo|
+| **system.load.15.max** <br>(gauge) | Carga media del sistema durante 15 minutos, máximo valor de sondeo|
+| **system.load.15.min** <br>(gauge) | Carga media del sistema durante 15 minutos, mínimo valor de sondeo|
+| **system.load.5.last** <br>(gauge) | Carga media del sistema durante 5 minutos, último valor de sondeo|
+| **system.load.5.max** <br>(gauge) | Carga media del sistema durante 5 minutos, máximo valor de sondeo|
+| **system.load.5.min** <br>(gauge) | Carga media del sistema durante 5 minutos, mínimo valor de sondeo|
+| **system.mem.buffered.last** <br>(gauge) | Cantidad de RAM física utilizada para buffers de archivos, último valor de sondeo<br>_Se muestra en bytes_ |
+| **system.mem.buffered.max** <br>(gauge) | Cantidad de RAM física utilizada para buffers de archivos, máximo valor de sondeo<br>_Se muestra en bytes_ |
+| **system.mem.buffered.min** <br>(gauge) | Cantidad de RAM física utilizada para buffers de archivos, mínimo valor de sondeo<br>_Se muestra en bytes_ |
+| **system.ping.latency** <br>(gauge) | Latencia de ping del sistema, valor medio de sondeo<br>_Se muestra en milisegundos_ |
+| **system.ping.latency.max** <br>(gauge) | Latencia de ping del sistema, valor máximo de sondeo<br>_Se muestra en milisegundos_ |
+| **system.proc.running.last** <br>(gauge) | Número de procesos en ejecución, último valor de sondeo<br>_Se muestra como proceso_ |
+| **system.proc.running.max** <br>(gauge) | Número de procesos en ejecución, máximo valor de sondeo<br>_Se muestra como proceso_ |
+| **system.proc.running.min** <br>(gauge) | Número de procesos en ejecución, mínimo valor de sondeo<br>_Se muestra como proceso_ |
+| **system.swap.free.max** <br>(gauge) | Cantidad de espacio de intercambio libre, valor máximo de sondeo<br>_Se muestra en bytes_ |
+| **system.users.current.last** <br>(gauge) | Número de usuarios conectados, último valor de sondeo|
+| **system.users.current.max** <br>(gauge) | Número de usuarios conectados, máximo valor de sondeo|
+| **system.users.current.min** <br>(gauge) | Número de usuarios conectados, mínimo valor de sondeo|
 
 ### Recopilación de logs
 
-1. La recopilación de logs está deshabilitada por defecto en el Datadog Agent; habilítala en tu archivo `datadog.yaml`:
+1. La recopilación de logs está desactivada en forma predeterminada en el Datadog Agent, actívala en tu archivo `datadog.yaml`:
 
-    ```yaml
-    logs_enabled: true
-    ```
+   ```yaml
+   logs_enabled: true
+   ```
 
-2. Añade este bloque de configuración a tu archivo `cacti.d/conf.yaml` para empezar a recopilar logs de Cacti:
+1. Añade este bloque de configuración a tu archivo `cacti.d/conf.yaml` para empezar a recopilar logs de Cacti:
 
-    ```yaml
-    logs:
-      - type: file
-        path: /opt/cacti/log/cacti.log
-        source: cacti
-    ```
+   ```yaml
+   logs:
+     - type: file
+       path: /opt/cacti/log/cacti.log
+       source: cacti
+   ```
 
-   Cambia el valor del parámetro `path` en función de tu entorno. Para ver todas las opciones de configuración disponibles, consulta el [cacti.d/conf.yaml de ejemplo][2].
+   Cambia el valor del parámetro `path` en función de tu entorno. Consulta el [ejemplo cacti.d/conf.yaml](https://github.com/DataDog/integrations-core/blob/master/cacti/datadog_checks/cacti/data/conf.yaml.example) para ver todas las opciones de configuración disponibles.
 
-3. [Reinicia el Agent][3].
+1. [Reinicia el Agent](https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent).
 
 ### Eventos
 
@@ -216,17 +199,8 @@ El check de Cacti no incluye checks de servicio.
 
 ### Problemas conocidos
 
-La biblioteca Python que utiliza esta integración pierde memoria en determinadas circunstancias. Si esto te sucede, una solución alternativa es instalar el paquete [python-rrdtool][6] en lugar de rrdtool. Este paquete antiguo no recibe mantenimiento y esta integración no lo admite oficialmente, pero ha ayudado a otros a resolver los problemas de memoria.
+La biblioteca Python que utiliza esta integración presenta fugas de memoria en determinadas circunstancias. Si esto te sucede, una solución alternativa es instalar el paquete [python-rrdtool](https://github.com/pbanaszkiewicz/python-rrdtool) en lugar de rrdtool. Este paquete más antiguo no recibe mantenimiento y esta integración no lo admite oficialmente, pero ha ayudado a otras personas a resolver problemas de memoria.
 
-Se ha abierto un [problema de Github][7] para rastrear esta pérdida de memoria.
+Se ha abierto un [incidente en Github](https://github.com/commx/python-rrdtool/issues/25) para rastrear esta fuga de memoria.
 
-¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][8].
-
-[1]: https://app.datadoghq.com/account/settings/agent/latest
-[2]: https://github.com/DataDog/integrations-core/blob/master/cacti/datadog_checks/cacti/data/conf.yaml.example
-[3]: https://docs.datadoghq.com/es/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[4]: https://docs.datadoghq.com/es/agent/guide/agent-commands/#agent-status-and-information
-[5]: https://github.com/DataDog/integrations-core/blob/master/cacti/metadata.csv
-[6]: https://github.com/pbanaszkiewicz/python-rrdtool
-[7]: https://github.com/commx/python-rrdtool/issues/25
-[8]: https://docs.datadoghq.com/es/help/
+¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog](https://docs.datadoghq.com/help/).

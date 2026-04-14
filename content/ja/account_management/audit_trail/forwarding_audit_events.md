@@ -8,13 +8,13 @@ title: Forwarding Audit Events to Custom Destinations
 ---
 
 {{% site-region region="gov" %}}
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Audit Event Forwarding is not available in the US1-FED site.
 </div>
 {{% /site-region %}}
 
 {{% site-region region="US,US3,US5,EU,AP1" %}}
-<div class="alert alert-warning">Audit Event Forwarding is in beta. </div>
+<div class="alert alert-danger">Audit Event Forwarding is in beta. </div>
 {{% /site-region %}}
 
 ## 概要

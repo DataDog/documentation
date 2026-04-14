@@ -11,6 +11,9 @@ products:
 - icon: cloud-security-management
   name: Amenazas CSM
   url: /security/threats/
+- icon: app-sec
+  name: App and API Protection
+  url: /security/application_security/
 title: Supresiones
 ---
 
@@ -52,7 +55,7 @@ La [lista de supresiones][3] proporciona una forma centralizada y organizada de 
 1. Selecciona las reglas de detección a las que quieres aplicar esta supresión. Puedes seleccionar varias reglas de detección.
 1. En la sección **Añadir consulta de supresión**, tienes la opción de introducir consultas de supresión para que no se genere una señal cuando se cumplen los valores. Por ejemplo, si el usuario `john.doe` está activando una señal, pero sus acciones son benignas y ya no quieres señales activadas por este usuario, introduce la consulta de logs: `@user.username:john.doe`.
 {{< img src="security/security_monitoring/suppressions/suppression_query.png" alt="Añadir consulta de supresión con la consulta @user.username:john.doe" style="width:65%;" >}}
-  Las consultas de reglas de supresión se basan en **atributos de señales**. 
+  Las consultas de reglas de supresión se basan en **atributos de señales**.
 1. Además, puedes añadir una consulta de exclusión de logs para excluir logs del análisis. Estas consultas se basan en **atributos de logs**. **Nota**: La supresión heredada se basaba en consultas de exclusión de logs, pero ahora se incluye en el paso **Añadir consulta de supresión** de la regla de supresión.
 
 ## Referencias adicionales

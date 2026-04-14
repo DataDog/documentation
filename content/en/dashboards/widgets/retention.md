@@ -1,14 +1,21 @@
 ---
 title: Retention Widget
+description: Analyze user retention and engagement patterns over time using cohort analysis visualization.
 widget_type: cohort
 further_reading:
-- link: "product_analytics/user_retention/"
+- link: "product_analytics/charts/retention_analysis/"
   tag: "Documentation"
-  text: "Product Analytics User Retention"
+  text: "Retention Analysis"
 - link: "https://www.datadoghq.com/blog/user-engagement-retention-analysis/"
   tag: "Blog"
   text: "Measure long-term user engagement with Datadog Retention Analysis"
 ---
+
+{{% site-region region="gov" %}}
+<div class="alert alert-danger">
+The Retention widget is not available in the <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).
+</div>
+{{% /site-region %}}
 
 {{< callout url="https://www.datadoghq.com/product-preview/product-analytics/" header="false" >}}
 The Retention widget is available in Preview for Product Analytics customers. To request access, complete the form.
@@ -25,12 +32,12 @@ Retention Analysis allows you to measure how often users are successfully return
 
 ## Setup
 
-To populate User Retention data, you must set the `usr.id` attribute in your SDK. [See the instructions for sending unique user attributes][1].
+To populate user retention data, you must set the `usr.id` attribute in your SDK. [See the instructions for sending unique user attributes][1].
 
 ### Configuration
 
-1. Define the initial event by selecting **View** or **Action** and choose a query from the dropdown menu.
-1. (Optional) Click **+ Add different return step** to configure a different return event from the original event. 
+1. Define the initial event by selecting {{< ui >}}View{{< /ui >}} or {{< ui >}}Action{{< /ui >}} and choose a query from the dropdown menu.
+1. (Optional) Click {{< ui >}}+ Add different return step{{< /ui >}} to configure a different return event from the original event. 
 1. Define users by selecting from users or segments in the dropdown.
 1. Customize the chart to display either as a percentage or total number, and to measure by days, weeks, or months. 
 
@@ -45,5 +52,4 @@ On screenboards and notebooks, choose whether your widget has a custom timeframe
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
-[1]: /real_user_monitoring/browser/advanced_configuration#user-session
+[1]: /real_user_monitoring/application_monitoring/browser/advanced_configuration#user-session

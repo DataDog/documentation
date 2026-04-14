@@ -4,8 +4,8 @@ title: Instrumentación de aplicaciones serverless de Node.js mediante el Datado
 
 ## Información general
 
-<div class="alert alert-warning">
-Si recién empiezas a utilizar Datadog Serverless, sigue las <a href="/serverless/installation/nodejs">instrucciones para instrumentar tus funciones de Lambda mediante la Datadog Lambda Extension</a>. Si configuraste Datadog Serverless con el Datadog Forwarder antes de que Lambda ofreciera la funcionalidad lista para usar, utiliza esta guía para mantener tu instancia.
+<div class="alert alert-danger">
+Si eres un usuario nuevo de Datadog Serverless, sigue las <a href="/serverless/installation/nodejs">instrucciones para instrumentar tus funciones de Lambda utilizando la extensión de Datadog Lambda</a>. Si has configurado Datadog Serverless con el Datadog Forwarder antes de que Lambda ofreciera una funcionalidad predefinida, utiliza esta guía para mantener tu instancia.
 </div>
 
 ## Requisitos previos
@@ -253,7 +253,7 @@ La versión secundaria del paquete `datadog-lambda-js` siempre coincide con la v
 [Configura las capas][8] de tu función de Lambda con el ARN en el siguiente formato.
 
 ```
-# For us,us3,us5,eu, and ap1 regions
+# For us,us3,us5,eu, ap1, and ap2 regions
 arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:<VERSION>
 
 # For us-gov regions

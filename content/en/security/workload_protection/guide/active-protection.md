@@ -1,5 +1,6 @@
 ---
 title: Proactively block crypto mining threats with Active Protection
+site_support_id: workload_security_active_protection
 aliases:
   - /security/cloud_security_management/guide/active-protection
 further_reading:
@@ -8,7 +9,7 @@ further_reading:
   text: "Workload Protection Detection Rules"
 ---
 
-<div class="alert alert-warning">Please contact <a href="https://docs.datadoghq.com/help/">Datadog Support</a> to enable Active Protection.</div>
+<div class="alert alert-danger">Please contact <a href="https://docs.datadoghq.com/help/">Datadog Support</a> to enable Active Protection.</div>
 
 <div class="alert alert-info">Workload Protection Active Protection is in Preview.</div>
 

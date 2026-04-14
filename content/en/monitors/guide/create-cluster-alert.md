@@ -1,5 +1,6 @@
 ---
 title: Create cluster alerts to notify when a percentage of groups are in critical state
+description: "Learn to create cluster alerts that notify when a percentage of groups meet conditions, like alerting when 40% of hosts have high CPU usage."
 further_reading:
 - link: "/monitors/"
   tag: "Documentation"

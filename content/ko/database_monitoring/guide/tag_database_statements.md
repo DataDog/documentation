@@ -1,10 +1,6 @@
 ---
-
 title: SQL 구문 태깅
 ---
-{{< site-region region="gov" >}}
-해당 지역에서는 데이터베이스 모니터링이 지원되지 않습니다
-{{< /site-region >}}
 
 이 가이드에서는 [데이터베이스 모니터링][1] 설정을 완료하였다고 가정합니다.
 
@@ -13,9 +9,9 @@ title: SQL 구문 태깅
 ## 시작 전 참고 사항
 
 지원되는 데이터베이스
-: postgres, mysql, sqlserver
+: Postgres, MySQL, SQL Server
 
-지원되는 에이전트 버전
+지원되는 Agent 버전
 : 7.36.1+
 
 지원되는 태깅 형식
@@ -27,6 +23,11 @@ SQL 구문 실행을 지원하는 데이터베이스 API를 사용해 봅니다.
 
 ```sql
 /*key='val'*/ SELECT * from FOO
+```
+
+태그 여러 개를 쉼표로 구분합니다.
+```sql
+/*key1='val1',key2='val2'*/ SELECT * from FOO
 ```
 
 전체 예시:
@@ -52,7 +53,7 @@ func main() {
 
 ## DBM에서 태그 탐색
 
-[**DBM > 샘플**][4] 페이지에서 커스텀 태그로 **실행 계획** 및 **쿼리 샘플** 보기를 필터링합니다.
+[샘플 페이지][4]에서 커스텀 태그로 **Explain Plans** 및 **Query Samples** 보기를 필터링합니다.
 
 {{< img src="database_monitoring/dbm_filter_explain_plans_by_custom_tag.png" alt="Filter explain plans by custom tag.">}}
 
@@ -67,4 +68,4 @@ func main() {
 [1]: /ko/database_monitoring/#getting-started
 [2]: https://google.github.io/sqlcommenter
 [3]: https://github.com/basecamp/marginalia
-[4]: /ko/database_monitoring/query_samples/
+[4]: https://app.datadoghq.com/databases/samples

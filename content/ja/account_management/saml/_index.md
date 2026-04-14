@@ -11,7 +11,7 @@ further_reading:
 title: SAML を使用したシングルサインオン
 ---
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">政府機関向け Datadog サイトでは、SAML ログインのみがサポートされています。</div>
+<div class="alert alert-danger">政府機関向け Datadog サイトでは、SAML ログインのみがサポートされています。</div>
 {{< /site-region >}}
 
 ## 概要

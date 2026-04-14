@@ -1,8 +1,13 @@
 ---
+description: Conecta widgets de dashboards con páginas de Datadog y aplicaciones de
+  terceros utilizando enlaces contextuales personalizables con variables.
 further_reading:
 - link: /dashboards/widgets
   tag: Documentación
   text: Lista de widget de dashboards
+- link: /metrics/units
+  tag: Documentación
+  text: Unidades de métricas
 title: Enlaces contextuales
 ---
 
@@ -248,7 +253,7 @@ service:backend (env:{{$env.value}})
 
 El paréntesis traduce `(env:{{$env.value}})` a `(env:*)`, lo que te permite introducir múltiples variables en tu consulta de enlaces contextuales.
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

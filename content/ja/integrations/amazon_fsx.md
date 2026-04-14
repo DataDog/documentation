@@ -1,10 +1,10 @@
 ---
 categories:
-- AWS
+- aws
 - クラウド
 - data stores
 - ログの収集
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 description: Amazon FSx のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/amazon_fsx/
@@ -48,7 +48,7 @@ Amazon FSx は、NetApp ONTAP、OpenZFS、Windows File Server、Lustre ファイ
 2. [Datadog - Amazon FSx インテグレーション][4]をインストールします。
 
 
-### 収集データ
+### ログ収集
 
 #### FSx for Windows ファイルサーバーのイベントログを監査する
 個々のファイル、フォルダー、およびファイル共有へのすべてのユーザーアクセスを追跡するには、FSx for Windows ファイルサーバーからの監査イベントログを統合します。
@@ -66,7 +66,7 @@ Amazon FSx は、NetApp ONTAP、OpenZFS、Windows File Server、Lustre ファイ
 
 #### FSx API アクティビティ
 
-Amazon FSx は、ユーザー、ロール、または AWS サービスにより実行されたすべての FSx 操作を追跡する AWS CloudTrail と統合します。
+Amazon FSx は、ユーザー、ロール、または AWS サービスにより実行されたすべての FSx 操作を追跡する AWS CloudTrail と統合します。 
 Datadogの [CloudTrail インテグレーション][9]を有効にすると、AWS アカウントのすべての FSx API 呼び出しを追跡できます。
 
 ### メトリクス

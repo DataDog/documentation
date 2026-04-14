@@ -29,7 +29,7 @@ Datadog APM을 이용하면 내 사업에 필요한 우선순위와 중요도가
 * 수동으로 생성_(4. & 5. 단계)_
 * Analytics 쿼리 내보내기_(7. 단계)_
 
-1. **[Service Catalog][1]를 열고** `web-store`를 선택하세요.
+1. **[Software Catalog][1]를 열고** `web-store` 서비스를 선택하세요.
 
 2. **Total Requests Graph를 찾고** 우측 상단에 있는 `export` 버튼을 클릭한 후 `Export to Dashboard`를 선택하세요. **`New Timeboard`를 클릭**하세요.
 

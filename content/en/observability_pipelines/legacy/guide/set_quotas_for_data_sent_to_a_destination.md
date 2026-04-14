@@ -48,15 +48,14 @@ This guide walks you through how to:
 1. Click the **Quota** tile.
 1. Enter a name for the component.
 1. Select one or more input for the transform.
-1. In the **Limits** section:  
-    a. Select the unit type. The unit of the quota limit can be the number of events or volume of data.  
-    b. Enter the limit in the **Max** field.
-1. Enter the timeframe in the **Window** field.  
-    For example, to configure the transform to send up to 2GB of logs per day to the destination, set:
-    - **Bytes** as the unit type  
-    - `2000000000`in the **Max** field  
-    - `24h` in the **Window** field  
-
+1. In the **Limits** section:
+   1. Select the unit type. The unit of the quota limit can be the number of events or volume of data.  
+   1. Enter the limit in the **Max** field.
+1. Enter the timeframe in the **Window** field.<br />
+   For example, to configure the transform to send up to 2GB of logs per day to the destination, set:
+   - **Bytes** as the unit type  
+   - `2000000000`in the **Max** field  
+   - `24h` in the **Window** field
 1. Click **Save**.
 1. For each destination or transform that ingests logs from the `quota` transform, click the component's tile and add `<transform_name>.dropped` for the input ID for the data sent after the limit is met. 
 
@@ -136,19 +135,19 @@ To set up a monitor to alert when the quota is reached:
 1. Navigate to the [New Monitor][5] page.
 1. Select **Metric**.
 1. Leave the detection method as **Threshold Alert**.
-1. In the **Define the metric** field:  
-    a. Enter `vector.component_sent_event_bytes_total` for the metric.  
-    b. In the **from** field, add `component_id:<transform_name>,output:dropped` where `<transform_name>` is the name of your `quota` transform.  
-    c. Enter `host` in the **sum by** field.  
-    d. Leave the setting to evaluate the `sum` of the query over the `last 5 minutes`.
+1. In the **Define the metric** field:
+   1. Enter `vector.component_sent_event_bytes_total` for the metric.  
+   1. In the **from** field, add `component_id:<transform_name>,output:dropped` where `<transform_name>` is the name of your `quota` transform.  
+   1. Enter `host` in the **sum by** field.  
+   1. Leave the setting to evaluate the `sum` of the query over the `last 5 minutes`.
 1. In the **Set alert conditions** section:  
-    a. Leave the setting to trigger when the evaluated value is `above` the threshold for any `host`.  
-    b. Enter `1` for the **Alert threshold**. This means that if the metric query is greater than 1, then the monitor alerts.
-See [Metric Monitors][6] for more information.
-1. In the **Configure notifications and automations** section:  
-    a. Enter a name for your monitor.  
-    b. Enter a notification message. See [Notifications][7] and [Variables][8] for more information on customizing your message.  
-    c. Select who and which services the notifications are sent to.
+   1. Leave the setting to trigger when the evaluated value is `above` the threshold for any `host`.
+   1. Enter `1` for the **Alert threshold**. This means that if the metric query is greater than 1, then the monitor alerts.<br />
+      See [Metric Monitors][6] for more information.
+1. In the **Configure notifications and automations** section:
+   1. Enter a name for your monitor.  
+   1. Enter a notification message. See [Notifications][7] and [Variables][8] for more information on customizing your message.  
+   1. Select who and which services the notifications are sent to.
 1. Optionally, you can set [renotifications][9], tags, teams, and a [priority][10] for your monitor. 
 1. In the **Define permissions and audit notifications** section, you can define [permissions][11] and audit notifications.
 1. Click **Create**.

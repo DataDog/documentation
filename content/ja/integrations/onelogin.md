@@ -20,7 +20,7 @@ author:
 categories:
 - ログの収集
 - セキュリティ
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 description: OneLogin
 display_on_public_website: true
@@ -62,7 +62,7 @@ version: '1.0'
 <!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
 ## 概要
 
-Connect Datadog with OneLogin to see logs published by OneLogin. The OneLogin integration collects logs to track any [event][1] in OneLogin, including logins, file access, and updates to admin privileges. You can use this integration for compliance and security in conjunction with the [OOTB SIEM rules][2] for OneLogin.
+OneLogin を Datadog と連携して、OneLogin で発行されるログを確認できます。OneLogin インテグレーションは、ログイン、ファイル アクセス、管理者権限の更新を含む OneLogin のあらゆる [イベント][1] を追跡するためにログを収集します。このインテグレーションは、OneLogin 用の [OOTB SIEM ルール][2] と組み合わせて、コンプライアンスおよびセキュリティに利用できます。
 
 ## セットアップ
 
@@ -77,7 +77,7 @@ Connect Datadog with OneLogin to see logs published by OneLogin. The OneLogin in
 
 #### インストールと構成
 
-1. Open the Datadog [OneLogin integration tile][3].
+1. Datadog の [OneLogin インテグレーション タイル][3] を開きます。
 2. クライアント ID、クライアントシークレットを対応するフィールドに入力します。
 3. オプションで、ログに関連付けるタグをカンマ区切りで追加することができます。
 

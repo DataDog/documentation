@@ -72,7 +72,7 @@ Une fois cette opération effectuée, exportez vos logs Google Cloud SQL depui
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "google_cloudsql" >}}
+{{< get-metrics-from-git "google-cloudsql" >}}
 
 
 ### Événements

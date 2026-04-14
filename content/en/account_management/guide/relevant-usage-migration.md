@@ -1,5 +1,6 @@
 ---
 title: Migrate Indexed Logs and RUM in the Hourly Usage and Summary Usage APIs
+description: Migration guide for the October 1, 2024 changes to hourly and summary usage APIs, covering new RUM keys and deprecated indexed logs groupings.
 ---
 
 ## Overview

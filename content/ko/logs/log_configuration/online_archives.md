@@ -17,7 +17,7 @@ private: true
 title: Online Archives
 ---
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Online Archives는 사용이 제한되어 있습니다. 액세스를 요청하려면 <a href="/help/">Datadog 지원팀</a>에 문의하세요.
 </div>
 

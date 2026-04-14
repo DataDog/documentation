@@ -9,10 +9,6 @@ further_reading:
       text: "AWS Lambda Integration"
 ---
 
-{{< callout url="#" btn_hidden="true" header="Join the Preview!" >}}
-Lambda Web Adapter is in Preview.
-{{< /callout >}}
-
 ## Overview
 
 The AWS [Lambda Web Adapter][1] is a framework that allows developers to run web applications on AWS Lambda. 
@@ -120,7 +116,7 @@ Since the Lambda Web Adapter sends readiness check requests once it is loaded, t
 
 The configuration differs depending on the runtime. Assuming the readiness endpoint is the default (`GET` at `/`):
 
-**NodeJs**
+**Node.js**
 
 ```js
 const tracer = require('dd-trace').init();

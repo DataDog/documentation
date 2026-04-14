@@ -1,5 +1,6 @@
 ---
 title: Watchdog Alerts
+description: "View and interpret Watchdog Alerts that proactively detect anomalies on your systems and applications using AI-powered monitoring."
 ---
 
 ## Overview
@@ -169,7 +170,7 @@ Watchdog starts finding anomalies after the minimum required history is availabl
 [13]: /containers/docker/?tab=standard
 [14]: /containers/kubernetes/installation/?tab=operator
 [15]: /integrations/mysql/
-[16]: /integrations/mysql/
+[16]: /integrations/sqlserver/
 [17]: /integrations/cassandra/
 [18]: /integrations/oracle/
 {{% /tab %}}

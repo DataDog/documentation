@@ -39,7 +39,7 @@ Datadog Google Cloud Platform 통합을 사용하여 Anthos용 Google Cloud Run�
 
 #### 설치
 
-아직 설치하지 않은 경우 먼저 [Google Cloud Platform 통합][3]을 설정하세요. 
+아직 설치하지 않은 경우 먼저 [Google Cloud Platform 통합][3]을 설정하세요.
 
 이미 Workload Identity를 사용하여 Anthos용 Cloud Run 서비스를 인증한 경우 추가 단계가 필요하지 않습니다.
 
@@ -69,12 +69,12 @@ Google Cloud Run 로그는 Google Cloud Logging으로 수집하여 클라우드 
 - `admission.datadoghq.com/enabled: "true"` 레이블을 포드에 추가합니다.
 - `mutateUnlabelled: true`를 설정하여 클러스터 에이전트 어드미션 컨트롤러를 설정합니다.
 
-포드가 환경 변수를 수신하지 않도록 하려면 `admission.datadoghq.com/enabled: "false"` 레이블을 추가합니다. 본 기능은 `mutateUnlabelled: true`을 설정한 경우에도 동작합니다. 자세한 내용을 확인하려면 [Datadog 어드미션 컨트롤러][8] 문서를 참조하세요. 
+포드가 환경 변수를 수신하지 않도록 하려면 `admission.datadoghq.com/enabled: "false"` 레이블을 추가합니다. 본 기능은 `mutateUnlabelled: true`을 설정한 경우에도 동작합니다. 자세한 내용을 확인하려면 [Datadog 어드미션 컨트롤러][8] 문서를 참조하세요.
 
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "google_cloud_run_for_anthos" >}}
+{{< get-metrics-from-git "google-cloud-run-for-anthos" >}}
 
 
 ### 이벤트

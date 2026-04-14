@@ -47,7 +47,7 @@ Kubernetes에 Datadog Agent를 설치하는 데는 다음과 같은 옵션이 �
 {{< tabs >}}
 {{% tab "Operator" %}}
 
-<div class="alert alert-warning">Datadog 오퍼레이터는 일반적으로 1.0.0 버전과 함께 사용할 수 있으며, DatadogAgent 커스텀 리소스의 <code>v2alpha1</code>버전을 조정합니다.</div>
+<div class="alert alert-danger">Datadog 오퍼레이터는 일반적으로 1.0.0 버전과 함께 사용할 수 있으며, DatadogAgent 커스텀 리소스의 <code>v2alpha1</code>버전을 조정합니다.</div>
 
 [Datadog Operator][1]는 Kubernetes 및 OpenShift에 Datadog Agent를 배포하는 방법입니다. 커스텀 리소스 상태에서 배포 상태, 기본 상태 및 오류를 보고하고 더 높은 레벨의 설정 옵션을 통해 잘못된 설정의 위험을 방지합니다.
 
@@ -261,7 +261,7 @@ datadog:
 {{% /tab %}}
 {{% tab "Helm" %}}
 
-<div class="alert alert-warning">Docker Hub는 이미지 가져오기 속도 제한에 영향을 받습니다. Docker Hub의 고객이 아닌 경우 GCR 또는 ECR에서 가져오도록 Datadog Agent 및 Cluster Agent 설정을 업데이트할 것을 권장합니다. 자세한 지침은 <a href="/agent/guide/changing_container_registry">컨테이너 레지스트리 변경</a>을 참고하세요.</div>
+<div class="alert alert-danger">Docker Hub는 이미지 가져오기 속도 제한에 영향을 받습니다. Docker Hub의 고객이 아닌 경우 GCR 또는 ECR에서 가져오도록 Datadog Agent 및 Cluster Agent 설정을 업데이트할 것을 권장합니다. 자세한 지침은 <a href="/agent/guide/changing_container_registry">컨테이너 레지스트리 변경</a>을 참고하세요.</div>
 
 배포 지역에서 Google 컨테이너 레지스트리 ([gcr.io/datadoghq][8])에 액세스할 수 없는 경우, `values.yaml` 파일에서 다음 설정이 포함된 다른 레지스트리를 사용합니다:
 

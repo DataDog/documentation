@@ -1,0 +1,9 @@
+{
+  "data": {
+    "attributes": {
+      "name": "A Status Page in US1"
+    },
+    "id": "string",
+    "type": "status_pages"
+  }
+}

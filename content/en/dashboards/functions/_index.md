@@ -1,5 +1,6 @@
 ---
 title: Functions
+description: Apply mathematical and statistical functions to modify metric query results in Datadog dashboards and visualizations.
 aliases:
   - /examples/
   - /examples/aws-metrics/

@@ -1,5 +1,6 @@
 ---
 title: Analyze Error Logs Using Sheets
+description: "Extract error details from log messages using calculated columns and pivot tables to identify patterns in retail application return errors."
 further_reading:
 - link: "/sheets/"
   tag: "Documentation"
@@ -18,10 +19,11 @@ This guide walks through creating a table of error logs, adding calculated colum
 ## Creating a table in Sheets
 
 1. Start from a supported product page, such as the Log Explorer.
-2. Build the query of data that you want to analyze. For instance, to filter your logs to show only those with `status:error` that contain the word “returns” in the log message:
+2. Build the query of data that you want to analyze. For instance, to filter your logs to show only those with `status:error` that contain the word "returns" in the log message:
    ```
    status:error service:shopist-returns-prod returns
    ```
+   {{< img src="/sheets/guide/logs_analysis/log_explorer_open_in_sheets.png" alt="Log Explorer showing a query for Error logs from an example retail application that contain 'returns' in the log message" style="width:100%;" >}}
 3. Click **Open in Sheets**. 
 4. Choose to create a **New Spreadsheet** or add the table to an **Existing Spreadsheet**.
 5. Click **Save and Open**.
@@ -33,7 +35,7 @@ To gain more insight into your return errors, you might want to extract specific
 1. From the header of the far-right column of your table, click the **Plus** icon to add a calculated column.
 2. Use the `REGEXEXTRACT` function to pull out the actual issue with the return. For example, to extract the next word after "Failed" or "Failed to":
    ```plaintext
-   =REGEXEXTRACT(#'Message', "Failed (?:to )?(\w+)")
+   =REGEXEXTRACT(#Message, "Failed (?:to )?(\w+)")
    ```
    This function helps you identify whether the error is in *getting*, *calculating*, or *handling* returns.
 

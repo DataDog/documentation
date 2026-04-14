@@ -1,5 +1,6 @@
 ---
 title: Scheduled Reports
+description: Send recurring dashboard PDFs to email addresses, Slack channels, and Microsoft Teams channels with customizable schedules and time frames.
 disable_toc: false
 aliases:
     - /dashboards/reporting/
@@ -19,7 +20,7 @@ Scheduled reports enable Datadog users to share dashboards as high-density PDFs 
 
 {{< img src="dashboards/scheduled_reports/report_pdf.png" alt="Example report PDF attachment" style="width:90%;" >}}
 
-The report PDF can be sent to Slack channels or email addresses.
+The report PDF can be sent to email addresses, Slack channels, or Microsoft Teams channels.
 
 {{< img src="dashboards/scheduled_reports/report_slack.png" alt="Example report slack with PDF report linked" style="width:90%;" >}}
 
@@ -31,7 +32,7 @@ For emails, the report PDF is included as an email attachment or as a link, depe
 
 Create a report from any [dashboard or timeboard][1] that has at least one [supported widget](#unsupported-widget-types).
 
-Click the **Share** button at the top of your dashboard and select **Schedule report**.
+Click the {{< ui >}}Share{{< /ui >}} button at the top of your dashboard and select {{< ui >}}Schedule report{{< /ui >}}.
 
 ### 1. Set a schedule
 
@@ -43,11 +44,11 @@ In the configuration modal that opens, set a schedule for the report to determin
 
 Define the report title and set a time frame to determine the range of time displayed in the resulting report. The report time frame can be different from the time frame displayed on the dashboard.
 
-**Note:** Modifying the report time frame updates the **Schedule Preview** dropdown table above.
+**Note:** Modifying the report time frame updates the {{< ui >}}Schedule Preview{{< /ui >}} dropdown table above.
 
 **{{< img src="dashboards/scheduled_reports/configure_report.png" alt="Section for defining a report schedule" style="width:90%;" >}}**
 
-Click **Edit Variables** to modify the filters applied when the report is sent. These values do not affect the dashboard's default template variable values.
+Click {{< ui >}}Edit Variables{{< /ui >}} to modify the filters applied when the report is sent. These values do not affect the dashboard's default template variable values.
 
 **{{< img src="dashboards/scheduled_reports/edit_variables.png" alt="The configuration modal section for customizing the report title, timeframe and variables." style="width:90%;" >}}**
 
@@ -61,24 +62,27 @@ To add email recipients to your report, enter their email addresses. The email a
 
 **{{< img src="dashboards/scheduled_reports/add_email_recipients.png" alt="The configuration modal for editing scheduled report variables." style="width:90%;" >}}**
 
-To see the report before saving the schedule, click **Send Test Email**. You can pause a report schedule at any time.
+To see the report before saving the schedule, click {{< ui >}}Send Test Email{{< /ui >}}. You can pause a report schedule at any time.
 
 #### Slack recipients
 
-{{< site-region region="gov" >}}
-
-<div class="alert alert-warning">Slack recipients are not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
-To add Slack recipients, select the Slack workspace and channel from the available dropdowns. If you do not see any Slack workspaces available, ensure you have the Datadog [Slack Integration][8] installed. All public channels within the Slack workspace should be listed automatically. To select a private Slack channel, make sure to invite the Datadog Slack bot to the channel in Slack. To send a test message to Slack, add a channel recipient and click **Send Test Message**.
+To add Slack recipients, select the Slack workspace and channel from the available dropdowns. If you do not see any Slack workspaces available, ensure you have the Datadog [Slack Integration][8] installed. All public channels within the Slack workspace should be listed automatically. To select a private Slack channel, make sure to invite the Datadog Slack bot to the channel in Slack. To send a test message to Slack, add a channel recipient and click {{< ui >}}Send Test Message{{< /ui >}}.
 
 **{{< img src="dashboards/scheduled_reports/add_slack_recipients.png" alt="The configuration modal for editing scheduled report email recipients." style="width:90%;" >}}**
 
+#### Microsoft Teams recipients
+
+Before adding Microsoft Teams recipients, ensure:
+- The [Microsoft Teams integration][9] is installed in your Datadog organization.
+- The Datadog app is added to the target Team in Microsoft Teams.
+
+To add Microsoft Teams recipients, select the **Microsoft Teams** tab, then choose a **Tenant**, **Team**, and **Channel** from the available dropdowns. To send a test message, add a channel recipient and click **Send Test Message**.
+
 ## Managing reports
 
-A single dashboard can have multiple scheduled reports with different settings, which allows you to inform different groups of stakeholders interested in the same dashboard. To see the reports on an existing dashboard, click the **Share** button and select **Configure Reports**.
+A single dashboard can have multiple scheduled reports with different settings, which allows you to inform different groups of stakeholders interested in the same dashboard. To see the reports on an existing dashboard, click the {{< ui >}}Share{{< /ui >}} button and select {{< ui >}}Configure Reports{{< /ui >}}.
 
-From the configuration modal that opens, you can pause an existing report or create a new report. To see and edit the details of an existing report, or delete the report, click **Edit**.
+From the configuration modal that opens, you can pause an existing report or create a new report. To see and edit the details of an existing report, or delete the report, click {{< ui >}}Edit{{< /ui >}}.
 
 {{< img src="dashboards/scheduled_reports/manage_reports-2.png" alt="The configuration modal for scheduled reports, with two reports displayed, each showing their titles, tags, recipients, frequency, an option to toggle the report on or off, and a button to edit the report. At the bottom is a button to add a new report and a cancel button" style="width:90%;" >}}
 
@@ -89,13 +93,15 @@ This permission can be granted by another user with the **User Access Manage** p
 
 {{< img src="dashboards/scheduled_reports/dashboard_permissions-2.png" alt="A screenshot of an individual user's permissions from within the organization settings page. The dashboards report write permission is highlighted under the dashboards section" style="width:90%;" >}}
 
-Users with the **Org Management** permission can enable or disable the scheduled reports feature for their organization from the **Settings** tab under [Public Sharing][3] in **Organization Settings**.
+Users with the **Org Management** permission can enable or disable the scheduled reports feature for their organization from the {{< ui >}}Settings{{< /ui >}} tab under [Public Sharing][3] in {{< ui >}}Organization Settings{{< /ui >}}.
 
 {{< img src="dashboards/scheduled_reports/report_management_org_preference.png" alt="The Report Management setting in the Settings tab in Public Sharing within Organization Settings in Datadog with the setting Enabled" style="width:90%;" >}}
 
-Additionally, users with the **Org Management** permission can enable or disable Slack recipients for their organization from the **Settings** tab under [Public Sharing][3] in **Organization Settings**.
+Additionally, users with the **Org Management** permission can enable or disable Slack recipients for their organization from the {{< ui >}}Settings{{< /ui >}} tab under [Public Sharing][3] in {{< ui >}}Organization Settings{{< /ui >}}.
 
 {{< img src="dashboards/scheduled_reports/report_send_to_slack_org_preference.png" alt="The Send to Slack setting under Report Management setting in the Settings tab in Public Sharing within Organization Settings in Datadog with the setting Enabled" style="width:90%;" >}}
+
+Similarly, users with the **Org Management** permission can enable or disable Microsoft Teams recipients for their organization from the **Settings** tab under [Public Sharing][3] in **Organization Settings**.
 
 ## Unsupported widget types
 
@@ -118,3 +124,4 @@ The following widget types are **not** supported and will be shown as empty in t
 [6]: /dashboards/widgets/hostmap/
 [7]: /dashboards/widgets/run_workflow/
 [8]: /integrations/slack/?tab=datadogforslack
+[9]: /integrations/microsoft_teams/

@@ -1,7 +1,7 @@
 {{- /* Outputs the contents of api/latest pages as a JSON object. */ -}}
 {{ $hugo_context := .context }}
-{{ $api_v1_data := index $hugo_context.Site.Data.api.v1 "full_spec_deref" }}
-{{ $api_v2_data := index $hugo_context.Site.Data.api.v2 "full_spec_deref" }}
+{{ $api_v1_data := partial "api/load-specs.html" (dict "version" "v1") }}
+{{ $api_v2_data := partial "api/load-specs.html" (dict "version" "v2") }}
 
 {{ range (where $hugo_context.Site.AllPages "Type" "=" "api") }}
     {{ if and (in .RelPermalink "latest/") }}

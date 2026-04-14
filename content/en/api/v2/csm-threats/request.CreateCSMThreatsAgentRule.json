@@ -4,6 +4,7 @@
       "description": "My Agent rule",
       "enabled": true,
       "expression": "exec.file.name == \"sh\"",
+      "agent_version": "> 7.60",
       "filters": [],
       "name": "examplecsmthreat",
       "policy_id": "6517fcc1-cec7-4394-a655-8d6e9d085255",

@@ -1,5 +1,6 @@
 ---
 title: Network Time Protocol (NTP) issues
+description: "Diagnose and resolve NTP offset problems that can cause incorrect alert triggers, metric delays, and gaps in graphs."
 aliases:
     - /agent/faq/network-time-protocol-ntp-offset-issues
 ---

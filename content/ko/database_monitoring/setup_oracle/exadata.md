@@ -8,7 +8,7 @@ title: Oracle Exadata에 대한 데이터베이스 모니터링 설정
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">이 사이트에서는 데이터베이스 모니터링이 지원되지 않습니다.</div>
+<div class="alert alert-danger">이 사이트에서는 데이터베이스 모니터링이 지원되지 않습니다.</div>
 {{< /site-region >}}
 
 <div class="alert alert-info">

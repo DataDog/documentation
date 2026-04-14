@@ -1,5 +1,6 @@
 ---
 title: Querying Tags in DDSQL (Preview)
+private: true
 aliases:
 - /dashboards/ddsql_editor/reference/tags/
 - /ddsql_editor/reference/tags/
@@ -10,7 +11,7 @@ aliases:
 The DDSQL Editor is in Preview.
 {{< /callout >}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   There are two different <strong>variants</strong> of DDSQL. The examples in this guide use DDSQL (Preview) Syntax. See the syntax documented in <a href="/ddsql_reference/">DDSQL Reference</a>.
 </div>
 

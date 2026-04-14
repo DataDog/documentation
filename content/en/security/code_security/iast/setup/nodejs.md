@@ -102,6 +102,68 @@ Update your ECS task definition JSON file, by adding this in the environment sec
 
 If you need additional assistance, contact [Datadog support][6].
 
+## Bundling with esbuild
+
+`dd-trace` provides an esbuild plugin. Starting in `dd-trace@5.69.0`, the plugin also supports IAST for CommonJS bundled applications. Starting in `dd-trace@5.78.0`, support is extended to applications using ESM.
+
+Here's an example of how one might use dd-trace with esbuild:
+
+```javascript
+// esbuild/esbuilder.js
+
+const ddPlugin = require('dd-trace/esbuild')
+const esbuild = require('esbuild')
+
+esbuild.build({
+  entryPoints: ['app.js'],
+  bundle: true,
+  outfile: 'out.js',
+  sourcemap: true, // required for correct vulnearability location
+  plugins: [ddPlugin],
+  platform: 'node', // allows built-in modules to be required
+  target: ['node18'],
+  external: [
+    '@datadog/native-iast-taint-tracking' // required for Datadog IAST features
+  ]
+}).catch((err) => {
+  console.error(err)
+  process.exit(1)
+})
+```
+
+To enable IAST during bundling, set the `DD_IAST_ENABLED` environment variable:
+
+```sh
+DD_IAST_ENABLED=true node esbuild/esbuilder.js
+```
+
+Because the tracer uses native modules, you must list them in `external` and ship a `node_modules` directory alongside the bundled app. Native modules used by `dd-trace` are published under the `@datadog/*` scope.
+
+To generate a minimal `node_modules` directory that contains only the required native modules and their dependencies:
+
+1. Determine the required package versions.
+2. Install them into a temporary directory.
+3. Copy the resulting `node_modules` directory to the application's output directory.
+
+```sh
+cd path/to/project
+npm ls @datadog/native-iast-taint-tracking
+# dd-trace@5.69.0
+# └── @datadog/native-iast-taint-tracking@4.0.0
+mkdir temp && cd temp
+npm init -y
+npm install @datadog/native-iast-taint-tracking@4.0.0
+cp -R ./node_modules path/to/bundle
+```
+
+### Unsupported IAST features
+
+IAST support for bundled applications has the following limitations:
+
+- Detection of hardcoded passwords and hardcoded secrets is not supported.
+- Security Controls is not supported.
+
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

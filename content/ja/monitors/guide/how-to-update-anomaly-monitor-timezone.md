@@ -25,34 +25,29 @@ Agile または Robust 異常検知アルゴリズムを Weekly または Daily 
 
 ## UI
 
-UI でローカルタイムゾーンを考慮して異常検知モニターを更新するには、UI の [Create a new monitor][1] &gt; [Anomaly monitor][2] セクションに移動します。セクション 3 の Set Alert Conditions で、Advanced パネルを開き、モニターの評価中にサマータイムを考慮するスイッチをオンに切り替えます。次に、タイムゾーンドロップダウンを追跡したいタイムゾーンに合わせます。
+UI でローカル タイムゾーンを考慮して異常検知モニターを更新するには、**[New monitor > Anomaly monitor][1]** に移動します。*Set Alert Conditions* セクションで Advanced パネルを開き、モニターの評価時にサマータイムを考慮するスイッチをオンにします。次に、タイムゾーン ドロップダウンで追跡したいタイムゾーンを選択します。
 
-{{< img src="monitors/guide/anomaly_monitor_timezone_ui.png" alt="UI の DST 追跡" >}}
+{{< img src="monitors/guide/how_to_update_anomaly_monitor_timezone/daylight_savings_toggle.png" alt="UI 上 の DST トグル オプション" >}}
 
 ## API
 
 1. モニター API で更新リクエストを行うには、次の情報が必要です。
-  - 認証に使用する [Datadog API キーとアプリケーションキー][3]
-  - 異常検知モニターからのモニター ID とクエリ
-    {{< img src="monitors/guide/anomaly_monitor_timezone.png" alt="モニター ID とクエリ" >}}
-  - `America/New_York` や `Europe/Paris` など、メトリクスに関連するタイムゾーンの TZ 識別文字列。[tz データベースタイムゾーン一覧][4]の TZ 列で、希望するタイムゾーンを探します (正規の形式を推奨)。<br><br>
-2. anomalies() 関数の呼び出しに `timezone` 引数を追加して、更新版のモニタークエリを作成します。
-  - 例えば、上に示したクエリをニューヨークの現地時間を使うように変更したい場合、クエリは次のように更新されます。
-
+    - 認証用の [Datadog API キーとアプリケーション キー][3]
+    - 異常検知モニターの Monitor ID とクエリ (アプリで該当モニターに移動し、URL に含まれる Monitor ID を確認します)
+    - `America/New_York` や `Europe/Paris` など、メトリクスに関連するタイムゾーンの TZ 識別文字列。[tz データベースタイムゾーン一覧][4]の TZ 列で、希望するタイムゾーンを探します (正規の形式を推奨)。<br><br>
+2. anomalies() 関数呼び出しに `timezone` 引数を追加して、モニター クエリを更新版として作成します。たとえば、上記のクエリをニューヨークのローカル時間で評価するよう変更する場合、クエリは次のようになります。
     ```
     avg(last_4h):anomalies(avg:system.cpu.user{role:trace-cassandra} by {host}, 'basic', 2, direction='both', alert_window='last_15m', interval=60, count_default_zero='true', timezone='America/New_York') >= 1
     ```
-
 3. モニターの定義を更新するには、[Edit a Monitor][5] API を使用します。
-  - Python、Ruby、cURL の例があります。
-  - 既存の設定をオーバーライドしないように、ID とクエリのみをリクエストに含めます。名前、メッセージ、オプション、タグは必須ではありません。
+    - Python、Ruby、cURL の例があります。
+    - 既存の設定をオーバーライドしないように、ID とクエリのみをリクエストに含めます。名前、メッセージ、オプション、タグは必須ではありません。
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/monitors#/create
-[2]: https://app.datadoghq.com/monitors#create/anomaly
+[1]: https://app.datadoghq.com/monitors/create/anomaly
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 [4]: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-[5]: /ja/api/v1/monitors/#edit-a-monitor
+[5]: /ja/api/latest/monitors/#edit-a-monitor

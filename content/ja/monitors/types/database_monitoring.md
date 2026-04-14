@@ -5,7 +5,7 @@ title: データベースモニタリングモニター
 
 ## 概要
 
-With the [Database Monitoring (DBM)][1] monitor type, you can create monitors and alert on the data surfaced in DBM. These monitors can be configured to alert you when a DBM event type deviates from a predefined threshold over a given period of time.
+[Database Monitoring (DBM)][1] 監視タイプを使用すると、DBM で可視化されたデータに対してモニターを作成し、アラートを発行できます。これらのモニターは、指定した期間内に DBM のイベントタイプが事前定義されたしきい値から逸脱したときに通知するよう設定できます。
 
 一般的なモニタリングシナリオは以下の通りです。
 - [待機クエリ数](#number-of-waiting-queries)
@@ -68,7 +68,7 @@ Datadog で新しい DBM モニターを作成するには、UI で [**Monitors*
 評価遅延などの高度なアラートオプションについて、詳しくは[モニターの構成][3]をご覧ください。
 
 ### 通知
-For more information about the **Configure notifications and automations** section, see [Notifications][4].
+**Configure notifications and automations** セクションの詳細については、[Notifications][4] を参照してください。
 
 ## モニター例
 
@@ -91,7 +91,7 @@ For more information about the **Configure notifications and automations** secti
 
 #### 通知の構成
 
-1. Under **Configure notifications and automations**, write the notification message. For detailed instructions, see [Notifications][4]. You can use this text for the message body:
+1. **Configure notifications and automations** で通知メッセージを記述します。詳しい手順は[通知][4]を参照してください。次のテキストをメッセージ本文として使用できます。
 {{< code-block lang="text" >}}
 {{#is_alert}}
 {{host.name}} で待機クエリが {{value}} の値で 
@@ -129,7 +129,7 @@ For more information about the **Configure notifications and automations** secti
 
 #### 通知の構成
 
-1. Under **Configure notifications and automations**, write the notification message. For detailed instructions, see [Notifications][4]. You can use this text for the message body:
+1. **Configure notifications and automations** で通知メッセージを記述します。詳しい手順は[通知][4]を参照してください。次のテキストをメッセージ本文として使用できます。
 {{< code-block lang="text" >}}
 {{#is_alert}}
 {{host.name}} で継続時間が 30 秒を超えるクエリの数が 
@@ -173,7 +173,7 @@ For more information about the **Configure notifications and automations** secti
 
 1. **Add Query** をクリックして、クエリ **a** のコピーであるクエリ **b** を作成します。
 1. **a + b** を **a - b** に変更します。2 つのクエリは一時的に同一であるため、この値はチャート上では 0 として表示されます。
-1. In the **b** query, click the **∑** button and choose **Timeshift > Week before**. This configures the monitor to detect significant changes between last week and the present.
+1. **b** クエリで **∑** ボタンをクリックし、**Timeshift > Week before** を選択します。これにより、先週と現在の間の大きな変化をモニターが検知できるようになります。
 
 #### アラートしきい値の設定
 
@@ -183,7 +183,7 @@ For more information about the **Configure notifications and automations** secti
 
 #### 通知の構成
 
-1. Under **Configure notifications and automations**, write the notification message. For detailed instructions, see [Notifications][4]. You can use this text for the message body:
+1. **Configure notifications and automations** で通知メッセージを記述します。詳しい手順は[通知][4]を参照してください。次のテキストをメッセージ本文として使用できます。
 {{< code-block lang="text" >}}
 {{#is_alert}}
 {{host.name}} の 1 日あたりの平均実行計画コストは、1 週間前と比べて少なくとも {{threshold}} 増加しており、

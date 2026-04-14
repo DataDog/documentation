@@ -58,7 +58,7 @@ Ten en cuenta que el tipo de acción debe ser uno de los siguientes: "personaliz
 {{< tabs >}}
 {{% tab "Kotlin" %}}
    ```kotlin
-       fun onUserInteraction() { 
+       fun onUserInteraction() {
             GlobalRumMonitor.get().addAction(actionType, name, actionAttributes)
        }
    ```
@@ -122,7 +122,7 @@ public class CustomRumResourceAttributesProvider implements RumResourceAttribute
 
 Además de [rastrear recursos automáticamente][6], también puedes rastrear recursos personalizados específicos (como solicitudes de red y APIs de proveedores de terceros) con métodos (como `GET` y `POST`) mientras cargas el recurso con `RumMonitor#startResource`. Deja de rastrear con `RumMonitor#stopResource` cuando esté completamente cargado, o `RumMonitor#stopResourceWithError` si se produce un error al cargarlo.
 
-{{< tabs >}} 
+{{< tabs >}}
 {{% tab "Kotlin" %}}
    ```kotlin
        fun loadResource() {
@@ -132,7 +132,7 @@ Además de [rastrear recursos automáticamente][6], también puedes rastrear rec
               GlobalRumMonitor.get().stopResource(resourceKey, resourceKind, additionalAttributes)
             } catch (e: Exception) {
               GlobalRumMonitor.get().stopResourceWithError(resourceKey, message, origin, e)
-            } 
+            }
        }
    ```
 {{% /tab %}}
@@ -153,7 +153,7 @@ Además de [rastrear recursos automáticamente][6], también puedes rastrear rec
 
 ### Errores personalizados
 
-Para realizar un rastreo de errores específicos, notifica al monitor cuando se produzca un error con el mensaje, el origen, la excepción y atributos adicionales. Consulta la [documentación sobre atributos de error][5].
+Para realizar un rastreo de errores específicos, notifica al monitor cuando se produzca un error con el mensaje, el origen, la excepción y atributos adicionales. Consulta la [documentación sobre atributos de error][7].
 
 ```kotlin
    GlobalRumMonitor.get().addError(message, source, throwable, attributes)
@@ -235,13 +235,11 @@ Al añadir información de usuario a tus sesiones de RUM, simplificas lo siguien
 
 {{< img src="real_user_monitoring/browser/advanced_configuration/user-api.png" alt="API de usuario en la interfaz de usuario de RUM" >}}
 
-Los siguientes atributos son **opcionales**. Debes indicar **al menos uno**:
-
-| Atributo  | Tipo | Descripción                                                                                              |
-|------------|------|----------------------------------------------------------------------------------------------------|
-| usr.id    | Cadena | Identificador de usuario único.                                                                                  |
-| usr.name  | Cadena | Nombre descriptivo, que se muestra por defecto en la interfaz de usuario de RUM.                                                  |
-| usr.email | Cadena | Correo electrónico del usuario, que se muestra en la interfaz de usuario de RUM si el nombre de usuario no está presente. También se usa para obtener Gravatars. |
+| Atributo   | Tipo   | Descripción                                                                     |
+| ----------- | ------ | ------------------------------------------------------------------------------- |
+| `usr.id`    | Cadena | (Obligatorio) Identificador único de usuario.                                              |
+| `usr.name`  | Cadena | (Opcional) Nombre de usuario sencillo, mostrado por defecto en la interfaz de usuario RUM.              |
+| `usr.email` | Cadena | (Opcional) Correo electrónico del usuario, mostrado en la interfaz de usuario RUM, si el nombre de usuario no está presente. |
 
 Para identificar las sesiones de usuario, utiliza, por ejemplo, la API `setUserInfo`:
 
@@ -266,24 +264,24 @@ Los widgets no se rastrean automáticamente con el SDK. Para enviar interaccione
 
 ## Parámetros de inicialización
 
-Puedes usar los siguientes métodos en `Configuration.Builder` a la hora de crear la configuración de Datadog para inicializar la biblioteca:
+Puedes usar los siguientes métodos en `Configuration.Builder` a la hora de crear la configuración de Datadog para inicializar la librería:
 
-`setFirstPartyHosts()` 
+`setFirstPartyHosts()`
 : define hosts que tienen el rastreo habilitado y tienen recursos de RUM categorizados como `first-party`. **Nota**: Si defines tipos de encabezado de rastreo personalizados en la configuración de Datadog y estás utilizando un rastreador registrado con `GlobalTracer`, asegúrate de que se establecen los mismos tipos de encabezado de rastreo para el rastreador en uso.
 
-`useSite(DatadogSite)` 
+`useSite(DatadogSite)`
 : cambia los datos de destino a los sitios EU1, US1, US3, US5, US1_FED y AP1.
 
 `setFirstPartyHostsWithHeaderType`
 : establece la lista de los hosts principales y especifica el tipo de encabezados HTTP utilizados para el rastreo distribuido.
 
-`setBatchSize([SMALL|MEDIUM|LARGE])` 
+`setBatchSize([SMALL|MEDIUM|LARGE])`
 : define el tamaño de lote individual para las solicitudes enviadas a Datadog.
 
-`setUploadFrequency([FREQUENT|AVERAGE|RARE])` 
+`setUploadFrequency([FREQUENT|AVERAGE|RARE])`
 : define la frecuencia de las solicitudes realizadas a los endpoints de Datadog (si las solicitudes están disponibles).
 
-`setBatchProcessingLevel(LOW|MEDIUM|HIGH)` 
+`setBatchProcessingLevel(LOW|MEDIUM|HIGH)`
 : define el número de lotes enviados en cada ciclo de carga.
 
 `setAdditionalConfiguration`
@@ -292,7 +290,7 @@ Puedes usar los siguientes métodos en `Configuration.Builder` a la hora de crea
 `setProxy`
 : habilita un proxy personalizado para cargar datos rastreados en la admisión de Datadog.
 
-`setEncryption(Encryption)` 
+`setEncryption(Encryption)`
 : establece una función de cifrado aplicada a los datos almacenados localmente en el dispositivo.
 
 `setPersistenceStrategyFactory`
@@ -301,33 +299,33 @@ Puedes usar los siguientes métodos en `Configuration.Builder` a la hora de crea
 `setCrashReportsEnabled(Boolean)`
 : permite controlar si las caídas de la JVM se rastrean o no. El valor por defecto es `true`.
 
-`setBackpressureStrategy(BackPressureStrategy)` 
+`setBackpressureStrategy(BackPressureStrategy)`
 : define la estrategia que utiliza el SDK cuando maneja grandes volúmenes de datos y las colas internas están llenas.
 
 Puedes utilizar los siguientes métodos en `RumConfiguration.Builder` al crear la configuración de RUM para activar las características de RUM:
 
-`trackUserInteractions(Array<ViewAttributesProvider>)` 
+`trackUserInteractions(Array<ViewAttributesProvider>)`
 : permite realizar un rastreo de las interacciones del usuario (como tocar, desplazarse o deslizar). El parámetro también permite añadir atributos personalizados a los eventos de acción de RUM en función del widget con el que interactuó el usuario.
 
 `disableUserInteractionTracking`
 : desactiva el rastreador automático de interacción con el usuario.
 
-`useViewTrackingStrategy(strategy)` 
+`useViewTrackingStrategy(strategy)`
 : define la estrategia utilizada para realizar el rastreo de las visitas. Consulta [Rastreo automático de visitas](#automatically-track-views) para obtener más información.
 
-`trackLongTasks(durationThreshold)` 
+`trackLongTasks(durationThreshold)`
 : activa el rastreo de tareas que tardan más de `durationThreshold` en el subproceso principal como tareas largas en Datadog. Consulta [Rastreo automático de tareas largas](#automatically-track-long-tasks) para obtener más información.
 
-`trackNonFatalAnrs(Boolean)` 
+`trackNonFatalAnrs(Boolean)`
 : activa el rastreo de ANR no fatales. Esta opción está activada por defecto en Android API 29 y versiones inferiores, y desactivada por defecto en Android API 30 y versiones superiores.
 
-`setVitalsUpdateFrequency([FREQUENT|AVERAGE|RARE|NEVER])` 
+`setVitalsUpdateFrequency([FREQUENT|AVERAGE|RARE|NEVER])`
 : establece la frecuencia preferida para recopilar indicadores vitales de móviles.
 
-`setSessionSampleRate(<sampleRate>)` 
+`setSessionSampleRate(<sampleRate>)`
 : establece la frecuencia de muestreo de las sesiones de RUM. (Un valor de 0 significa que no se envía ningún evento de RUM. Un valor de 100 significa que se mantienen todas las sesiones).
 
-`setSessionListener(RumSessionListener)` 
+`setSessionListener(RumSessionListener)`
 : establece un oyente para ser notificado cuando se inicia una nueva sesión de RUM.
 
 `setTelemetrySampleRate`
@@ -363,6 +361,9 @@ Puedes utilizar los siguientes métodos en `RumConfiguration.Builder` al crear l
 `useCustomEndpoint`
 : utiliza RUM para apuntar a un servidor personalizado.
 
+`trackAnonymousUser`
+: Cuando se habilita, el SDK genera un ID de usuario anónimo, único y no personal que se conserva durante el lanzamiento de la aplicación. Este ID se adjuntará a cada sesión RUM, lo que te permitirá vincular sesiones originadas por el mismo usuario/dispositivo sin recopilar datos personales. Por defecto, se configura como `true`.
+
 ### Rastrear vistas automáticamente
 
 Para rastrear tus vistas automáticamente (como actividades y fragmentos), indica una estrategia de rastreo en la inicialización. Según la arquitectura de tu aplicación, puedes elegir una de las siguientes estrategias:
@@ -373,11 +374,11 @@ Para rastrear tus vistas automáticamente (como actividades y fragmentos), indic
 `FragmentViewTrackingStrategy`
 : cada fragmento de tu aplicación se considera una vista distinta.
 
-`MixedViewTrackingStrategy` 
+`MixedViewTrackingStrategy`
 : cada actividad o fragmento de tu aplicación se considera una vista distinta.
 
 `NavigationViewTrackingStrategy`
-: recomendado para usuarios de la biblioteca de navegación de Android Jetpack. Cada destino de navegación se considera una vista distinta.
+: recomendado para usuarios de la librería de navegación de Android Jetpack. Cada destino de navegación se considera una vista distinta.
 
 
 Por ejemplo, para configurar cada fragmento como una vista distinta, utiliza lo siguiente en tu [configuración][1]:
@@ -417,7 +418,7 @@ Para `ActivityViewTrackingStrategy`, `FragmentViewTrackingStrategy`, o `MixedVie
                 override fun getViewName(component: Activity): String? = null
             })
         )
-        .build()  
+        .build()
    ```
 {{% /tab %}}
 {{% tab "Java" %}}
@@ -443,14 +444,14 @@ Para `ActivityViewTrackingStrategy`, `FragmentViewTrackingStrategy`, o `MixedVie
 {{< /tabs >}}
 
 
-**Nota**: De manera predeterminada, la biblioteca utiliza una `ActivityViewTrackingStrategy`. Si decides no proporcionar una estrategia de rastreo de vistas, debes enviar manualmente las vistas llamando a los métodos `startView` y `stopView`.
+**Nota**: De manera predeterminada, la librería utiliza una `ActivityViewTrackingStrategy`. Si decides no proporcionar una estrategia de rastreo de vistas, debes enviar manualmente las vistas llamando a los métodos `startView` y `stopView`.
 
 
 ### Rastrear solicitudes de red automáticamente
 
 Para obtener información de tiempo en recursos (como proveedores de terceros, solicitudes de red) como el tiempo hasta el primer byte o la resolución DNS, personaliza el `OkHttpClient` para añadir la fábrica [EventListener][12]:
 
-1. Añade la dependencia de Gradle a la biblioteca `dd-sdk-android-okhttp` en el archivo `build.gradle` a nivel de módulo:
+1. Añade la dependencia de Gradle a la librería `dd-sdk-android-okhttp` en el archivo `build.gradle` a nivel de módulo:
 
     ```groovy
     dependencies {
@@ -556,32 +557,32 @@ Para modificar algunos atributos en tus eventos de RUM, o para descartar algunos
 
   Al implementar la interfaz `EventMapper<T>`, solo se pueden modificar algunos atributos para cada tipo de evento:
 
-   | Tipo de evento    | Clave de atributo      | Descripción                                     |
-   |---------------|--------------------|-------------------------------------------------|
+   | Tipo de evento    | Clave de atributo        | Descripción                                      |
+   | ------------- | -------------------- | ------------------------------------------------ |
    | ViewEvent     | `view.referrer`      | URL vinculada con la vista inicial de la página. |
    |               | `view.url`           | URL de la vista.                                 |
-   |               | `view.name`           | Nombre de la vista.                                |
-   | ActionEvent   |                    |                                                 |
+   |               | `view.name`          | Nombre de la vista.                                |
+   | ActionEvent   |                      |                                                  |
    |               | `action.target.name` | Nombre de destino.                                     |
    |               | `view.referrer`      | URL vinculada con la vista inicial de la página. |
    |               | `view.url`           | URL de la vista.                                 |
-   |               | `view.name`           | Nombre de la vista.                               |
-   | ErrorEvent    |                      |                                                 |
+   |               | `view.name`          | Nombre de la vista.                                |
+   | ErrorEvent    |                      |                                                  |
    |               | `error.message`      | Mensaje de error.                                   |
    |               | `error.stack`        | Stack trace del error.                         |
    |               | `error.resource.url` | URL del recurso.                             |
    |               | `view.referrer`      | URL vinculada con la vista inicial de la página. |
    |               | `view.url`           | URL de la vista.                                 |
-   |               | `view.name`           | Nombre de la vista.                                |
-   | ResourceEvent |                    |                                                 |
+   |               | `view.name`          | Nombre de la vista.                                |
+   | ResourceEvent |                      |                                                  |
    |               | `resource.url`       | URL del recurso.                             |
    |               | `view.referrer`      | URL vinculada con la vista inicial de la página. |
    |               | `view.url`           | URL de la vista.                                 |
-   |               | `view.name`           | Nombre de la vista.                                |
-   | LongTaskEvent |                    |                                                 |
-   |               | `view.referrer`       | URL vinculada con la vista inicial de la página. |
-   |               | `view.url`            | URL de la vista.                                 |
-   |               | `view.name`           | Nombre de la vista.                                |
+   |               | `view.name`          | Nombre de la vista.                                |
+   | LongTaskEvent |                      |                                                  |
+   |               | `view.referrer`      | URL vinculada con la vista inicial de la página. |
+   |               | `view.url`           | URL de la vista.                                 |
+   |               | `view.name`          | Nombre de la vista.                                |
 
    **Nota**: Al devolver el parámetro `null` desde la implementación de `EventMapper<T>`, se descarta el evento.
 

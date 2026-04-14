@@ -1,5 +1,6 @@
 ---
 title: Anomaly Monitors
+description: "Frequently asked questions about anomaly detection monitors including algorithms, historical data, and troubleshooting common issues."
 aliases:
 - /monitors/faq/anomaly-monitor.md
 ---

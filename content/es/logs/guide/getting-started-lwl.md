@@ -15,6 +15,9 @@ further_reading:
 - link: /logs/logs_to_metrics/
   tag: Documentación
   text: Aprender a generar métricas a partir de logs consumidos
+- link: https://www.datadoghq.com/blog/optimize-high-volume-logs/
+  tag: Blog
+  text: Cómo optimizar un gran volumen de datos de logs sin comprometer la visibilidad
 title: Guía de Logging Without LimitsTM
 ---
 
@@ -118,7 +121,7 @@ En esta guía has aprendido a utilizar Logging without LimitsTM para:
 
 Para obtener más información sobre Logging Without LimitsTM y cómo utilizar mejor algunas funciones como el Explorador de logs, Live Tail y los patrones de log, consulta los siguientes enlaces.
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

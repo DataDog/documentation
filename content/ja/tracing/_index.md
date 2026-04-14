@@ -21,6 +21,9 @@ further_reading:
 - link: https://app.datadoghq.com/release-notes?category=APM
   tag: リリースノート
   text: Datadog APM の最新リリースをご覧ください！ (アプリへのログインが必要です)
+- link: https://www.datadoghq.com/blog/monitor-rust-otel/
+  tag: ブログ
+  text: OpenTelemetry を使用して Rust アプリケーションを監視する方法
 - link: https://www.datadoghq.com/blog/span-based-metrics/
   tag: ブログ
   text: スパンベースのメトリクスを生成し、アプリケーションパフォーマンスの過去の傾向を追跡
@@ -33,6 +36,13 @@ further_reading:
 - link: https://www.datadoghq.com/blog/monitor-apis-datadog-api-catalog/
   tag: ブログ
   text: Datadog API カタログで API のパフォーマンス、セキュリティ、所有権を管理する
+- link: https://www.datadoghq.com/blog/software-catalog/
+  tag: ブログ
+  text: Software Catalog でデベロッパー エクスペリエンスとコラボレーションを向上させる
+- link: https://www.datadoghq.com/blog/datadog-csi-driver/
+  tag: ブログ
+  text: Bring high-performance observability to secure Kubernetes environments with
+    Datadog's CSI driver
 - link: https://dtdg.co/fe
   tag: Foundation Enablement
   text: APM の理解を深めるためのインタラクティブセッションに参加しましょう
@@ -120,7 +130,7 @@ Datadog APM は、トレースデータの量と保持を管理するための�
 [7]: /ja/tracing/trace_pipeline/trace_retention/#retention-filters
 [8]: /ja/tracing/trace_pipeline/generate_metrics/
 [9]: /ja/tracing/other_telemetry/connect_logs_and_traces/
-[10]: /ja/real_user_monitoring/platform/connect_rum_and_traces
+[10]: /ja/real_user_monitoring/correlate_with_other_telemetry/apm
 [11]: /ja/synthetics/apm/
 [12]: /ja/tracing/trace_explorer/#live-search-for-15-minutes
 [13]: /ja/tracing/services/services_map/

@@ -21,10 +21,10 @@ author:
   sales_email: help@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- インシデント
+- logs-restriction-queries-update-a-restriction-query
 - ログの収集
-- セキュリティ
-custom_kind: integration
+- security
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/auth0/README.md
 display_on_public_website: true

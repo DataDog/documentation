@@ -7,6 +7,7 @@ aliases:
   - /security_platform/notifications/rules/
   - /security/notification_profiles/
   - /security/notification_rules/
+  - /security/upcoming_changes_notification_rules/
 further_reading:
 - link: "/security/detection_rules/"
   tag: "Documentation"
@@ -29,7 +30,7 @@ products:
 
 Notification rules are predefined sets of conditions that automate the process of informing your team about security issues. By using notification rules, you no longer need to manually set up notifications for each individual detection rule. Notification rules can be configured to cover a wide range of scenarios by specifying parameters such as severities, rule types, rule tags, signal attributes, and signal tags.
 
-{{< img src="security/notification-rules-overview.png" alt="Notification Rules overview page" style="width:100%;" >}}
+{{< img src="security/notification-rules-overview-1.png" alt="Notification Rules overview page" style="width:100%;" >}}
 
 ## Create notification rules
 
@@ -40,15 +41,20 @@ To create a notification rule, specify the conditions under which the rule shoul
 1. On the [**Notification Rules**][1] page, click **New Notification Rule**.
 1. Enter a **Name** for the notification rule.
 1. Select the source type for the notification rule:
-    - **Vulnerability**: A potential security flaw in your infrastructure.
+    - **Finding**: A potential security flaw in your infrastructure.
     - **Signal**: Suspicious activity that poses an active threat against your infrastructure.
 1. Select one or more severity levels.
 1. Specify the tags and attributes that must be present in order for the notification rule to be triggered.
-1. Click **Add Recipient**.
-1. Specify the recipients you want to notify when the notification rule is triggered. You can notify individuals, teams, create Jira issues, and more. See [Notification channels][2] for more information.
+1. If you selected **Finding** in step 3, select the frequency of the notifications:
+   - **Aggregate results over**: Select this option, followed by a time frame from the list, to only get one notification for detections that occurred over that time frame.
+   - **Trigger immediately for each individual issue meeting the criteria**: Select this option to get one notification for each detection.<br />**Note**: Selecting this option can result in a large number of notifications.
+1. Under **Destination**, select a routing mode:
+    - **Manual routing**: Click **Add Recipient** and specify the recipients you want to notify. You can notify individuals or teams, create Jira issues, and more. See [Notification channels][2] for more information.
+    - **Dynamic routing** (Preview): Automatically route notifications to the responsible team based on the `team` tag on findings. Specify a **Fallback Channel** for findings that cannot be dynamically routed. See [Dynamic routing](#dynamic-routing) for requirements.<br />**Note**: Dynamic routing is only available when **Trigger immediately for each individual issue meeting the criteria** is selected in step 6.
+1. To send test notifications for this rule, click **Test Notifications**.
+  1. In the modal, select the security products you want to test.
+  1. Click **Run Test**.
 1. Click **Save**.
-
-{{< img src="security/notification-rules-setup.png" alt="Setup page for creating a notification rule" style="width:100%;" >}}
 
 ## Manage notification rules
 
@@ -68,9 +74,41 @@ To clone a notification rule, click the vertical three-dot menu on the notificat
 
 To delete a notification rule, click the vertical three-dot menu on the notification rule card and select **Delete**.
 
+## Dynamic routing
+
+{{< beta-callout url="#" btn_hidden="true" >}}
+Dynamic routing for notification rules is in Preview and is only available for non-aggregated finding notifications.
+{{< /beta-callout >}}
+
+Dynamic routing automatically delivers finding notifications to the team responsible for remediation, based on the `team` tag attached to the finding. This removes the need to manually configure recipients for each rule and helps avoid catch-all notification channels.
+
+Dynamic routing is only available when **Trigger immediately for each individual issue meeting the criteria** is selected as the notification frequency, and is not available for signal notifications.
+
+### How routing works
+
+When a finding triggers a notification, the system checks all of the following conditions. If all conditions are met, the notification is delivered to the team's configured notification channel. If any condition is not met, the notification is sent to the fallback channel you configured.
+
+| Condition                             | Description                                                                       |
+| ------------------------------------- | --------------------------------------------------------------------------------- |
+| **Team configured**                   | The team referenced by the finding's `team` tag must exist in [Datadog Teams][3]. |
+| **Team notification channel defined** | A [notification channel][4] must be configured for the team in Datadog Teams.     |
+| **Team tag on finding**               | The security finding must have exactly one `team` tag attached.                   |
+
+### Fallback channel
+
+When you enable dynamic routing, you must specify a fallback channel. The fallback channel receives notifications in any of the following cases:
+
+- The finding has no `team` tag or more than one `team` tag.
+- The team does not exist in Datadog Teams.
+- The team has no notification channel configured.
+
+The fallback channel is also used for test notifications.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/security/configuration/notification-rules
 [2]: /security/notifications/#notification-channels
+[3]: /account_management/teams/
+[4]: /account_management/teams/#send-notifications-to-a-specific-communication-channel

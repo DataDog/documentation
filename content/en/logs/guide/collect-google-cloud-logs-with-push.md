@@ -15,7 +15,7 @@ further_reading:
   text: "How to send logs to Datadog while reducing data transfer fees"
 ---
 
-<div class="alert alert-danger">
+<div class="alert alert-warning">
 
 This page describes deprecated features with configuration information relevant to legacy Pub/Sub Push subscriptions, useful for troubleshooting or modifying legacy setups. Pub/Sub Push subscription is being deprecated for the following reasons:
 - For Google Cloud VPC, new Push subscriptions cannot be configured with external endpoints (see Google Cloud's [Supported products and limitations][12] page for more information)

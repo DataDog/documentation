@@ -1,6 +1,8 @@
 ---
+id: apm
 core_product:
 - apm
+short_definition: Application Performance Monitoring (APM) は、アプリケーションのリクエスト、エラー、レイテンシを監視します。
 synonyms:
 - トレーシング
 - 分散型トレーシング

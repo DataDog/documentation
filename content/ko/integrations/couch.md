@@ -34,6 +34,7 @@ categories:
 - caching
 - data stores
 - log collection
+custom_kind: 통합
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/couch/README.md
 display_on_public_website: true
@@ -41,9 +42,8 @@ draft: false
 git_integration_title: couch
 integration_id: couchdb
 integration_title: CouchDB
-integration_version: 6.2.1
+integration_version: 8.3.0
 is_public: true
-custom_kind: 통합
 manifest_version: 2.0.0
 name: couch
 public_title: CouchDB
@@ -61,10 +61,14 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: CouchDB 활동과 성능 메트릭을 추적하고 그래프화하세요.
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: 블로그
+    url: https://www.datadoghq.com/blog/monitoring-couchdb-with-datadog
   support: README.md#Support
   title: CouchDB
 ---
@@ -89,14 +93,14 @@ Datadog의 CouchDB 데이터를 캡처하여 다음 이점을 누릴 수 있습�
 
 CouchDB 점검은 [Datadog 에이전트][2] 패키지에 포함되어 있습니다. 그러므로 CouchDB 서버에 아무 것도 설치할 필요가 없습니다.
 
-### 설정
+### 구성
 
 {{< tabs >}}
 {{% tab "Host" %}}
 
 #### 호스트
 
-호스트에서 실행 중인 Agent에 대해 이 검사를 설정하려면:
+호스트에서 실행 중인 에이전트에 대해 이 점검을 구성하려면:
 
 ##### 메트릭 수집
 
@@ -114,7 +118,7 @@ CouchDB 점검은 [Datadog 에이전트][2] 패키지에 포함되어 있습니�
 
    **참고**: `db_include` 및 `db_exclude`를 제공하여 에이전트가 메트릭을 수집해야 하는 소스와 그렇지 않은 소스를 통제하세요.
 
-2. [에이전트를 재시작합니다][3].
+2. [에이전트를 재시작][3]하세요.
 
 ##### 로그 수집
 
@@ -138,7 +142,7 @@ _Agent 버전 6.0 이상에서 사용 가능_
 
    `path` 및 `service` 파라미터 값을 변경하고 환경에 맞게 설정하세요. 사용 가능한 모든 설정 옵션은 [sample couch.d/conf.yaml][2]을 참조하세요.
 
-3. [에이전트를 재시작합니다][3].
+3. [에이전트를 재시작][3]하세요.
 
 [1]: https://docs.datadoghq.com/ko/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/couch/datadog_checks/couch/data/conf.yaml.example
@@ -162,7 +166,7 @@ _Agent 버전 6.0 이상에서 사용 가능_
 
 _Agent 버전 6.0 이상에서 사용 가능_
 
-Datadog 에이전트에서 로그 수집은 기본값으로 비활성화되어 있습니다. 이를 활성화하려면 [쿠버네티스(Kubernetes) 로그 수집][2]을 참조하세요.
+Datadog Agent에서 로그 수집은 기본값으로 비활성화되어 있습니다. 이를 활성화하려면 [쿠버네티스(Kubernetes) 로그 수집][2]을 참조하세요.
 
 | 파라미터      | 값                                                |
 | -------------- | ---------------------------------------------------- |
@@ -180,7 +184,7 @@ Datadog 에이전트에서 로그 수집은 기본값으로 비활성화되어 �
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "couch" >}}
+{{< get-metrics-from-git "couchdb" >}}
 
 
 ### 이벤트
@@ -188,7 +192,7 @@ Datadog 에이전트에서 로그 수집은 기본값으로 비활성화되어 �
 Couch 점검은 이벤트를 포함하지 않습니다.
 
 ### 서비스 점검
-{{< get-service-checks-from-git "couch" >}}
+{{< get-service-checks-from-git "couchdb" >}}
 
 
 ## 트러블슈팅

@@ -1,12 +1,12 @@
 ---
 algolia:
-  subcategory: Integraciones de Marketplace
+  subcategory: Integraciones del Marketplace
 app_id: agentil-software-sap-businessobjects
 app_uuid: cac9d777-3bd1-40a1-aef3-28a8141804f1
 assets:
   dashboards:
-    SAP BusinessObjects overview: assets/dashboards/agentil_software_sap_businessobjects_global_overview.json
-    SAP BusinessObjects system dashboard: assets/dashboards/agentil_software_sap_businessobjects_system.json
+    SAP BusinessObjects dashboard: assets/dashboards/agentil_software_sap_businessobjects_system.json
+    SAP BusinessObjects global overview: assets/dashboards/agentil_software_sap_businessobjects_global_overview.json
   integration:
     auto_install: false
     configuration: {}
@@ -29,7 +29,7 @@ author:
 categories:
 - marketplace
 - sap
-custom_kind: integration
+custom_kind: integración
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -43,7 +43,7 @@ legal_terms:
 manifest_version: 2.0.0
 name: agentil_software_sap_businessobjects
 pricing:
-- billing_type: tag_count
+- billing_type: recuento_etiquetas
   includes_assets: true
   metric: datadog.marketplace.agentil_software.sap_businessobjects.system
   product_id: sap-businessobjects
@@ -54,17 +54,17 @@ pricing:
 public_title: SAP BusinessObjects
 short_description: Monitorizar sistemas de objetos empresariales SAP
 supported_os:
-- linux
+- Linux
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Category::Marketplace
-  - Category::SAP
-  - Offering::Integration
-  - Supported OS::Linux
-  - Submitted Data Type::Metrics
-  - Submitted Data Type::Events
-  configuration: README.md#Setup
+  - Categoría::Marketplace
+  - Categoría::SAP
+  - Oferta::Integración
+  - Sistema operativo compatible::Linux
+  - Tipo de datos enviados::Métricas
+  - Tipo de datos enviados::Eventos
+  configuration: README.md#Configuración
   description: Monitorizar sistemas de objetos empresariales SAP
   media:
   - caption: Información global de SAP BusinessObjects
@@ -73,10 +73,10 @@ tile:
   - caption: Información general del sistema SAP BusinessObjects
     image_url: images/sap_businessobjects_system_dashboard.png
     media_type: imagen
-  overview: README.md#Overview
-  support: README.md#Support
+  overview: README.md#Información general
+  support: README.md#Soporte
   title: SAP BusinessObjects
-  uninstallation: README.md#Uninstallation
+  uninstallation: README.md#Desinstalación
 ---
 
 <!--  EXTRAÍDO DE https://github.com/DataDog/marketplace -->
@@ -100,14 +100,14 @@ Esta integración recopila y analiza datos de los sistemas en tiempo real, y pro
 - Cronogramas e informes
 - CMC y advertencias de auditoría
 
-## Agent
+## Ayuda
 Para solicitar asistencia o funciones, ponte en contacto con AGENTIL Software en support@agentil-software.com
 
 *Si buscas un socio de confianza para integraciones específicas con SAP u otras plataformas, estás en el lugar adecuado: ponte en contacto con nosotros.*
 
 ---
-Este producto se diseña y desarrolla en Ginebra (Suiza). 
+Este producto se diseñó y desarrolló en Ginebra (Suiza). 
 
 
 ---
-Esta aplicación está disponible a través de Marketplace y cuenta con el apoyo de un socio tecnológico de Datadog. <a href="https://app.datadoghq.com/marketplace/app/agentil-software-sap-businessobjects" target="_blank">Haz clic aquí</a> para comprar esta aplicación.
+Esta aplicación está disponible a través del Marketplace de Datadog y cuenta con el respaldo de un socio tecnológico de Datadog. Para utilizarla, <a href="https://app.datadoghq.com/marketplace/app/agentil-software-sap-businessobjects" target="_blank">adquiere esta aplicación en el Marketplace</a>.

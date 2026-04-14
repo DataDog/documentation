@@ -15,7 +15,7 @@ further_reading:
     text: "Learn more about rehydrating log archives"
 ---
 
-<div class="alert alert-warning">The Observability Pipelines Datadog Archives destination is in beta.</div>
+<div class="alert alert-danger">The Observability Pipelines Datadog Archives destination is in beta.</div>
 
 ## Overview
 
@@ -194,7 +194,7 @@ See the [Log Archives documentation][6] for additional information.
 
 You can configure the `datadog_archives` destination using the [configuration file](#configuration-file) or the [pipeline builder UI](#configuration-file).
 
-<div class="alert alert-warning">If the Worker is ingesting logs that are not coming from the Datadog Agent and are routed to the Datadog Archives destination, those logs are not tagged with <a href="https://docs.datadoghq.com/logs/log_configuration/attributes_naming_convention/#reserved-attributes">reserved attributes</a>. This means that you lose Datadog telemetry and the benefits of <a href="https://docs.datadoghq.com/getting_started/tagging/unified_service_tagging/?tab=kubernetes">unified service tagging</a>. For example, say your syslogs are sent to <code>datadog_archives</code> and those logs have the status tagged as <code>severity</code> instead of the reserved attribute of <code>status</code> and the host tagged as <code>hostname</code> instead of the reserved attribute <code>host</code>. When these logs are rehydrated in Datadog, the <code>status</code> for the logs are all set to <code>info</code> and none of the logs will have a hostname tag.</div>
+<div class="alert alert-danger">If the Worker is ingesting logs that are not coming from the Datadog Agent and are routed to the Datadog Archives destination, those logs are not tagged with <a href="https://docs.datadoghq.com/logs/log_configuration/attributes_naming_convention/#reserved-attributes">reserved attributes</a>. This means that you lose Datadog telemetry and the benefits of <a href="https://docs.datadoghq.com/getting_started/tagging/unified_service_tagging/?tab=kubernetes">unified service tagging</a>. For example, say your syslogs are sent to <code>datadog_archives</code> and those logs have the status tagged as <code>severity</code> instead of the reserved attribute of <code>status</code> and the host tagged as <code>hostname</code> instead of the reserved attribute <code>host</code>. When these logs are rehydrated in Datadog, the <code>status</code> for the logs are all set to <code>info</code> and none of the logs will have a hostname tag.</div>
 
 ### Configuration file
 
@@ -232,13 +232,13 @@ Replace `${DD_ARCHIVES_BUCKET}` and $`{DD_ARCHIVES_REGION}` parameters based on 
 
 1. Navigate to your [Pipeline][8].
 1. (Optional) Add a remap transform to tag all logs going to `datadog_archives`.   
-  a. Click **Edit** and then **Add More** in the **Add Transforms.  
-  b. Click the **Remap** tile.  
-  c. Enter a descriptive name for the component.  
-  d. In the **Inputs** field, select the source to connect this destination to.  
-  e. Add `.sender = "observability_pipelines_worker"` in the **Source** section.  
-  f. Click **Save**.  
-  g. Navigate back to your pipeline. 
+   1. Click **Edit** and then **Add More** in the **Add Transforms.  
+   1. Click the **Remap** tile.  
+   1. Enter a descriptive name for the component.  
+   1. In the **Inputs** field, select the source to connect this destination to.  
+   1. Add `.sender = "observability_pipelines_worker"` in the **Source** section.  
+   1. Click **Save**.  
+   1. Navigate back to your pipeline. 
 1. Click **Edit**.
 1. Click **Add More** in the **Add Destination** tile.
 1. Click the **Datadog Archives** tile.
@@ -248,31 +248,31 @@ Replace `${DD_ARCHIVES_BUCKET}` and $`{DD_ARCHIVES_REGION}` parameters based on 
 {{< tabs >}}
 {{% tab "AWS S3" %}}
 
-7. In the **Bucket** field, enter the name of the S3 bucket you created earlier.
-8. Enter `aws_s3` in the **Service** field.
-9. Toggle **AWS S3** to enable those specific configuration options.
-10. In the **Storage Class** field, select the storage class in the dropdown menu.
-11. Set the other configuration options based on your use case.
-12. Click **Save**.
+8. In the **Bucket** field, enter the name of the S3 bucket you created earlier.
+9. Enter `aws_s3` in the **Service** field.
+10. Toggle **AWS S3** to enable those specific configuration options.
+11. In the **Storage Class** field, select the storage class in the dropdown menu.
+12. Set the other configuration options based on your use case.
+13. Click **Save**.
 
 {{% /tab %}}
 {{% tab "Azure Blob" %}}
 
-7. In the **Bucket** field, enter the name of the S3 bucket you created earlier.
-8. Enter `azure_blob` in the **Service** field.
-9. Toggle **Azure Blob** to enable those specific configuration options.
-10. Enter the Azure Blob Storage Account connection string.
-11. Set the other configuration options based on your use case.
-12. Click **Save**.
+8. In the **Bucket** field, enter the name of the S3 bucket you created earlier.
+9. Enter `azure_blob` in the **Service** field.
+10. Toggle **Azure Blob** to enable those specific configuration options.
+11. Enter the Azure Blob Storage Account connection string.
+12. Set the other configuration options based on your use case.
+13. Click **Save**.
 
 {{% /tab %}}
 {{% tab "GCP Cloud Storage" %}}
 
-7. In the **Bucket** field, enter the name of the S3 bucket you created earlier.
-8. Enter `gcp_cloud_storage` in the **Service** field.
-9. Toggle **GCP Cloud Storage** to enable those specific configuration options.
-10. Set the configuration options based on your use case.
-11. Click **Save**.
+8. In the **Bucket** field, enter the name of the S3 bucket you created earlier.
+9. Enter `gcp_cloud_storage` in the **Service** field.
+10. Toggle **GCP Cloud Storage** to enable those specific configuration options.
+11. Set the configuration options based on your use case.
+12. Click **Save**.
 
 {{% /tab %}}
 {{< /tabs >}}

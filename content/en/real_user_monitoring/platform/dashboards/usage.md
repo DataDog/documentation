@@ -1,5 +1,6 @@
 ---
 title: RUM Usage Dashboard
+description: "Track user engagement and behavior with dashboards showing user sessions, frustration signals, and application usage patterns."
 aliases:
   - '/real_user_monitoring/dashboards/frustration_signals_dashboard'
   - '/real_user_monitoring/dashboards/user_sessions_dashboard'
@@ -81,9 +82,9 @@ For more information about the data displayed, see [Real User Monitoring Data Se
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/browser/data_collected/
-[2]: /real_user_monitoring/mobile_and_tv_monitoring/ios/data_collected/
-[3]: /real_user_monitoring/mobile_and_tv_monitoring/android/data_collected/
-[4]: /real_user_monitoring/mobile_and_tv_monitoring/react_native/data_collected/
-[5]: /real_user_monitoring/mobile_and_tv_monitoring/flutter/data_collected/
+[1]: /real_user_monitoring/application_monitoring/browser/data_collected/
+[2]: /real_user_monitoring/application_monitoring/ios/data_collected/
+[3]: /real_user_monitoring/application_monitoring/android/data_collected/
+[4]: /real_user_monitoring/application_monitoring/react_native/data_collected/
+[5]: /real_user_monitoring/application_monitoring/flutter/data_collected/
 [6]: /data_security/real_user_monitoring/

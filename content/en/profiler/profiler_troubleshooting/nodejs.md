@@ -51,6 +51,40 @@ This issue typically occurs on Linux systems using an unsupported version of the
 
 If you believe your musl version should be supported, contact [Datadog support][5].
 
+## High event loop usage observed after enabling Nodejs profiler
+
+When the Datadog profiler is enabled, it periodically sends a small signal to collect profiling data. If the application is idle (waiting for I/O or timers), this signal briefly wakes the event loop to take a sample, even though there's no real work to do. As a result, ELU appears higher because the loop wakes up more often, but CPU usage stays low, and no latency or extra workload is introduced.
+In a busy application, these same signals occur while the loop is already active, so the effect on ELU is negligible.
+
+## Disable advanced profiling features
+
+Advanced profiling capabilities in Datadog provide rich context—such as endpoint-level visibility, timeline correlations, and code hotspot linking—that significantly improve analysis quality.
+Under normal circumstances, these should remain enabled. However, when diagnosing performance issues or overhead, temporarily disabling specific components can help isolate the source of additional load.
+You can do so to narrow down which feature contributes to CPU, memory, or latency changes during profiling.
+ 
+- **Disable code hotspots**
+
+  Disable trace-to-profile linking in the Datadog UI:
+  ```
+  DD_PROFILING_CODEHOTSPOTS_ENABLED=false
+  ```
+
+- **Disable timeline view**
+
+  Disable timeline view in the Datadog UI:
+  ```
+  DD_PROFILING_TIMELINE_ENABLED=false
+  ```
+
+- **Disable endpoint collection**
+
+  Disable per-endpoint aggregation of profiling data, which groups samples by HTTP endpoints or routes:
+  ```
+  DD_PROFILING_ENDPOINT_COLLECTION_ENABLED=false
+  ```
+
+After you identify that disabling a specific profiling feature reduces overhead, report your findings so Datadog can investigate further. You can do so by contacting [Datadog support][5].
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

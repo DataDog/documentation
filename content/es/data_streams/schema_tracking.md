@@ -3,7 +3,7 @@ title: Seguimiento de esquemas
 ---
 
 {{% site-region region="gov,ap1" %}}
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Data Streams Monitoring no está disponible para el sitio {{< region-param key="dd_site_name" >}}.
 </div>
 {{% /site-region %}}

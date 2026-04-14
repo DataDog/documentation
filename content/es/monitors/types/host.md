@@ -13,7 +13,7 @@ further_reading:
 - link: /monitors/downtimes/
   tag: Documentación
   text: Programar una caída del sistema para silenciar un monitor
-- link: /monitors/manage/status/
+- link: /monitors/status/
   tag: Documentación
   text: Consultar el estado de tu monitor
 title: Monitor de host
@@ -24,6 +24,8 @@ title: Monitor de host
 La monitorización de infraestructura proporciona visibilidad de todo tu entorno de TI, incluidos los servidores alojados en la nube y on-premise, a través de muchas integraciones. Utiliza el monitor de host para mantenerte informado sobre qué hosts están o no enviando datos para garantizar una visibilidad continua.
 
 Cada Datadog Agent informa de un check de servicio llamado `datadog.agent.up` con el estado `OK`. Puedez monitorizar este check a través de uno o más hosts utilizando un monitor de host.
+
+<div class="alert alert-danger">Los AIX Agents no informan del check de servicio <code>datadog.agent.up</code>. Puedes utilizar la métrica <code>datadog.agent.running</code> para monitorizar el tiempo de actividad de un AIX Agent. La métrica emite un valor de <code>1</code> si el Agent está informando a Datadog.</div>
 
 ## Creación de un monitor
 
@@ -43,7 +45,7 @@ Selecciona los hosts para monitorizar eligiendo los nombres de host, etiquetas, 
 | Incluye todos los hosts con la etiqueta `env:prod`              | `env:prod`            | leave empty |
 | Incluye todos los hosts excepto los hosts con la etiqueta `env:test` | `All Monitored Hosts` | `env:test`  |
 
-### Definir tus condiciones de alerta
+### Definir condiciones de alerta
 
 En esta sección, elige entre una **Alerta de check** o una **Alerta de clúster**:
 
@@ -80,10 +82,10 @@ Para obtener instrucciones detalladas sobre las opciones avanzadas de alerta (re
 
 Para obtener instrucciones detalladas sobre la sección **Configurar notificaciones y automatizaciones**, consulta la página [Notificaciones][3].
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/monitors#create/host
+[1]: https://app.datadoghq.com/monitors/create/host
 [2]: /es/monitors/configuration/#advanced-alert-conditions
 [3]: /es/monitors/notify/

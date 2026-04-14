@@ -1,5 +1,6 @@
 ---
 title: Troubleshooting Custom Metrics Server and HPA
+description: Troubleshoot Custom Metrics Server issues with Datadog Cluster Agent and Horizontal Pod Autoscaler (HPA)
 further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-cluster-agent/"
   tag: "Blog"

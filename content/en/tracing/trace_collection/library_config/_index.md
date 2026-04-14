@@ -1,9 +1,12 @@
 ---
 title: Configure the Datadog Tracing Library
+description: Configure Datadog tracing libraries with environment variables, runtime settings, and language-specific options for optimal APM performance.
 type: multi-code-lang
 ---
 
 This page describes configuration options that behave consistently across all languages. To view these common configuration options, see [Common configuration options](#common-configuration-options).
+
+{{% apm-config-visibility %}}
 
 For configuration options specific to your programming language, choose your language from the options below:
 
@@ -88,10 +91,10 @@ The following configuration options behave consistently across the latest versio
 **Description**: Enables or disables sending traces from the application.
 
 `DD_LOGS_INJECTION`
-: **Default**: `false` <br>
+: **Default**: `true` <br>
 **Supported Input**: Boolean (`true`/`false`) <br>
-**Caveats**: Not supported in C++ or Go. The default value in Ruby is `true`.<br>
-**Description**: Enables or disables the automatic injection of trace context (trace ID, span ID) into application logs. This allows for correlation between traces and logs.
+**Caveats**: Not supported in C++ or Go.<br>
+**Description**: Enables or disables the automatic injection of trace context (trace ID, span ID) into JSON/structured application logs. This allows for correlation between traces and logs.
 
 `DD_TRACE_RATE_LIMIT`
 : **Default**: `100` <br>
@@ -176,7 +179,7 @@ The following configuration options behave consistently across the latest versio
 `DD_TRACE_EXPERIMENTAL_FEATURES_ENABLED`
 : **Default**: `null` <br>
 **Supported Input**: A comma-separated list of configuration options that support experimental features.<br>
-**Supported Values**: `all`, `DD_TAGS` (Java, .NET), `DD_LOGS_INJECTION` (Java) <br>
+**Supported Values**: `all`, `DD_TAGS` (Java, .NET)<br>
 **Caveats**: Only supported in Java and .NET <br>
 **Description**: Enables experimental features for specific configuration options. When enabled, these features may provide additional functionality but are not yet considered stable and may change or be removed in future releases. You can enable all experimental features using the keyword `all`, or list individual features explicitly.
 
@@ -221,8 +224,28 @@ The following configuration options behave consistently across the latest versio
   - `cf-connecting-ip`
   - `cf-connecting-ipv6`
 
+### Context propagation
+`DD_TRACE_BAGGAGE_MAX_ITEMS`
+: **Default**: `64` <br>
+**Supported Input**:  A positive integer <br>
+**Description**: The maximum number of key-value pairs in the baggage header.
 
-[1]: /developers/community/libraries/#apm-tracing-client-libraries
+`DD_TRACE_BAGGAGE_MAX_BYTES`
+: **Default**: `8192` <br>
+**Supported Input**:  A positive integer <br>
+**Description**: The maximum number of bytes in the baggage header value. Values less than 3 bytes prevent propagation, because this is the minimum size for a valid key-value pair (for example, `k=v`).
+
+`DD_TRACE_BAGGAGE_TAG_KEYS`
+: **Default**: `user.id,session.id,account.id` <br>
+**Supported Input**:  A comma-separated string representing a list of case-sensitive baggage keys <br>
+**Caveats**: Not supported in C++ <br>
+**Description**: A comma-separated list of baggage keys that are automatically applied as span tags to the local root span. For example, a baggage key `user.id` is tagged as `baggage.user.id` <br>
+This feature only applies to baggage extracted from incoming HTTP headers. Baggage set with the baggage API is not included.
+  - To tag all baggage items, set the value to `*`. Use this with caution to avoid exposing sensitive data in tags.
+  - To disable this feature, set the value to an empty string.
+
+
+[1]: /extend/community/libraries/#apm-tracing-client-libraries
 [2]: /tracing/trace_collection/compatibility/java/#framework-integrations-disabled-by-default
 [3]: /tracing/services/inferred_services/
 [4]: /tracing/trace_pipeline/ingestion_mechanisms/

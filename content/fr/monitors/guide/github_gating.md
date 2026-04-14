@@ -20,13 +20,11 @@ further_reading:
 
 title: Contrôler la progression de vos déploiements GitHub Actions grâce aux monitors
   Datadog
+
+site_support_id: ci_visibility
 ---
 
 ## Présentation
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">La solution CI Visibility n'est pas encore disponible pour le site que vous avez sélectionné ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
 
 Datadog possède le statut de partenaire d'intégration en ce qui concerne les [règles de protection de déploiement de GitHub Actions][10]. Nous vous aidons ainsi à fournir des applications de qualité optimale à vos clients finaux. Vous pouvez appliquer des murs de qualité à vos workflows de déploiement GitHub Actions à l'aide des monitors Datadog.
 

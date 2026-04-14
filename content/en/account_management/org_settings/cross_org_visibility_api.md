@@ -1,5 +1,6 @@
 ---
 title: Cross-Organization Connections API
+description: Configure cross-organization data sharing connections using the API to enable insights across multiple organizations in your account.
 ---
 
 {{< callout url="#" btn_hidden="true">}}
@@ -62,6 +63,39 @@ curl -X POST "https://{datadog_site}/api/v2/org_connections" \
 
 - The connection already exists
 - The connection refers to a destination organization ID outside of the account
+
+## Update a connection
+
+Updates the connection type of an existing connection. You must perform this operation from the source organization. Updating connections requires the _Org Connections Write_ permission.
+
+<span style="padding:3px" class="font-semibold text-api-delete bg-bg-api-delete">PATCH</span> https://{datadog_site}/api/v2/org_connections/{connection_id}
+
+**Note:** The payload of this call requires the connection UUID. Get the connection UUID from the "List your managed organizations" [endpoint][3].
+
+### Example
+{{< code-block lang="json" collapsible="true" >}}
+curl -X PATCH "https://{datadog_site}/api/v2/org_connections" \
+  -H "Content-Type: application/json" \
+  -H "DD-API-KEY: <YOUR_DATADOG_API_KEY>" \
+  -H "DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>" \
+   -d '{
+        "data": {
+          "type": "org_connection",
+          "id": "{{the connection UUID}}",
+          "attributes": {
+              "connection_types": [
+                  "logs",
+                  "metrics"
+              ]
+        }
+      },
+  }'
+{{< /code-block >}}
+
+### Failure scenarios
+
+- The organization does not participate as a source to the connection
+- The connection does not exist
 
 ## Delete a connection
 

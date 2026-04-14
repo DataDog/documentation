@@ -12,13 +12,7 @@ further_reading:
     text: "Troubleshooting Test Optimization"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">
-The selected Datadog site ({{< region-param key="dd_site_name" >}}) is not supported.
-</div>
-{{< /site-region >}}
-
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Tracers always initiate traffic to Datadog. Sessions are never initiated from Datadog back to the tracers.
 </div>
 

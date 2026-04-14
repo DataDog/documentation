@@ -110,17 +110,17 @@ services:
 
 Sustituye `<YOUR_API_KEY>` por tu clave de API.
 
-Los principales cambios en el ejemplo anterior son la configuración de la variable de entorno `DD_AGENT_HOST`, que debe ser la misma para tu contenedor `web` y tu contenedor del Agent para recopilar trazas. `DD_APM_ENABLED` habilita APM y `DD_APM_NON_LOCAL_TRAFFIC` permite al Agent recibir trazas de otros contenedores. 
+Los principales cambios en el ejemplo anterior son la configuración de la variable de entorno `DD_AGENT_HOST`, que debe ser la misma para tu contenedor `web` y tu contenedor del Agent para recopilar trazas. `DD_APM_ENABLED` habilita APM y `DD_APM_NON_LOCAL_TRAFFIC` permite al Agent recibir trazas de otros contenedores.
 
-Este ejemplo también añade la biblioteca `ddtrace` al `requirements.txt` para la aplicación web de Python de modo que puedas inicializarla con `ddtrace-run` para habilitar APM. (La biblioteca `datadog` mencionada en la siguiente lista se utiliza para recopilar métricas de DogStatsD personalizadas).
+Este ejemplo también añade la librería `ddtrace` al `requirements.txt` para la aplicación web de Python de modo que puedas inicializarla con `ddtrace-run` para habilitar APM. (La librería `datadog` mencionada en la siguiente lista se utiliza para recopilar métricas de DogStatsD personalizadas).
 ```
 flask
 redis
 datadog
 ddtrace <--
-``` 
+```
 
-Por último, establece las etiquetas `service`, `env` y `version` para tu aplicación modificando el `Dockerfile` de la aplicación web como se indica a continuación: 
+Por último, establece las etiquetas `service`, `env` y `version` para tu aplicación modificando el `Dockerfile` de la aplicación web como se indica a continuación:
 
 ```dockerfile
 FROM python:2.7

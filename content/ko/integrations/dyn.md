@@ -55,7 +55,7 @@ tile:
 
 ## 개요
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Oracle Cloud Infrastructure는 2016년에 Dyn을 인수하고 Dyn의 제품과 서비스를 Oracle Cloud Infrastructure 플랫폼에 통합했습니다. 서비스 마이그레이션에 대한 자세한 내용은 <a href="https://www.oracle.com/corporate/acquisitions/dyn/technologies/migrate-your-services/" target="_blank">Dyn 서비스를 Oracle Cloud Infrastructure로 마이그레이션</a>을 참조하세요.
 </div>
 

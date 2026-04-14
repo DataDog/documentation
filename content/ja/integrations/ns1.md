@@ -25,7 +25,7 @@ author:
   support_email: zjohnson@ns1.com
 categories:
 - ネットワーク
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/ns1/README.md
 display_on_public_website: true

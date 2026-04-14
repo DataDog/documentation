@@ -42,7 +42,7 @@ Si la suma del tamaño del paquete de despliegue y las capas no supera el límit
 
 La capa de Lambda de Datadog empaqueta las bibliotecas de instrumentación y las pone a disposición para su uso en el entorno de ejecución de Lambda, por lo que _no_ es necesario especificar `datadog-lambda-js` y `dd-trace` como dependencias en el archivo `package.json`. Si necesitas las bibliotecas de Datadog para la compilación local o los tests, especifícalas como `devDependencies` para que queden excluidas del paquete de despliegue. Del mismo modo, `serverless-plugin-datadog` solo se necesita para el desarrollo y debe especificarse en `devDependencies`.
 
-Inspecciona también otras dependencias (la carpeta `node_modules` ) incluidas en el paquete de despliegue y conserva solo las que necesites en `dependencies` (dependencias).
+Inspecciona también otras dependencias (la carpeta `node_modules`) incluidas en el paquete de despliegue y conserva solo las que necesites en `dependencies` (dependencias).
 
 ## Empaquetadores
 
@@ -72,4 +72,4 @@ Si necesitas que el equipo de asistencia de Datadog te ayude con la investigaci�
 [6]: https://webpack.js.org
 [7]: https://esbuild.github.io/
 [8]: /es/serverless/guide/serverless_tracing_and_bundlers/
-[9]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/lambda#readme
+[9]: https://github.com/DataDog/datadog-ci/tree/master/packages/plugin-lambda#readme

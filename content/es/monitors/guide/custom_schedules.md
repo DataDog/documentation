@@ -25,7 +25,7 @@ Las programaciones personalizadas de monitor son compatibles con eventos, logs y
 
 Haz clic en **Add Custom Schedule** (Añadir programación personalizada) para configurar tu frecuencia de evaluación.
 
-<div class="alert alert-warning">Una vez que se ha activado una programación personalizada en un monitor, la programación no se puede desactivar. Las programaciones personalizadas solo pueden añadirse o eliminarse durante la creación del monitor.
+<div class="alert alert-danger">Una vez que se ha activado una programación personalizada en un monitor, la programación no se puede desactivar. Las programaciones personalizadas solo pueden añadirse o eliminarse durante la creación del monitor.
 </div>
 
 {{< tabs >}}

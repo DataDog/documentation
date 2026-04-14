@@ -10,11 +10,7 @@ title: Configuración del perfil
 Para utilizar Datadog On-Call en tu dispositivo móvil, instala la <a href="/mobile#installing">aplicación móvil de Datadog</a>.
 </div>
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">On-Call no es compatible con el <a href="/getting_started/site">sitio Datadog </a> seleccionado ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
-Debes [configurar tu configuración del perfil][1] antes de poder recibir páginas de On-Call. Tu perfil incluye la configuración de los métodos de contacto, la comprobación de esos métodos y las preferencias de notificaciones. Esto garantiza que recibas las páginas a tiempo y de forma eficaz.
+Debes [configurar tu configuración del perfil][1] antes de poder recibir localizadores de On-Call. Tu perfil incluye la configuración de los métodos de contacto, la comprobación de esos métodos y las preferencias de notificaciones. Esto garantiza que recibas los localizador a tiempo y de forma eficaz.
 
 ## Configura tu perfil de On-Call
 
@@ -35,26 +31,26 @@ Ve a [Mi perfil de On-Call][1] para configurar tus parámetros.
 Para configurar tu dispositivo móvil, incluida la manera de **eludir el modo No molestar**, consulta [Configura Datadog On-Call en tu dispositivo móvil][4].
 
 ### Preferencias de notificaciones
-Las preferencias de notificaciones te permiten adaptar cómo y cuándo se le avisa a **ti** de las páginas On-Call en función de la urgencia de la situación. Al configurar las preferencias de baja urgencia y alta urgencia, puedes asegurarte de que las notificaciones sean eficaces y discretas, según la urgencia de la página. La urgencia de una página se determina en [Procesar reglas][5].
+Las preferencias de notificaciones te permiten decidir cómo y cuándo **recibes alertas** de localizadores de On-Call en función de la urgencia de la situación. Al configurar las preferencias de poca urgencia y mucha urgencia, puedes asegurarte de que las notificaciones serán eficaces y discretas, según la urgencia del localizador. La urgencia de un localizador se determina en tus [reglas de enrutamiento][5].
 
-El sistema realiza un ciclo por las preferencias de notificaciones configuradas hasta que acuses recibo de la página o la página se transfiera a la siguiente persona de guardia, tal y como se define en [Política de elevación][6].
+El sistema realiza un ciclo por las preferencias de notificaciones configuradas hasta que confirmes la recepción del localizador o este se transfiera a la siguiente persona de guardia, tal y como se define en la [política de escalado][6].
 
-#### Notificaciones de alta urgencia
-{{< img src="service_management/oncall/high_urgency_notification_preferences.png" alt="Configurar preferencias de notificaciones de alta urgencia en la configuración del perfil de On-Call: Configura en 'Cuando se active una página de alta urgencia' para notificar a un número de teléfono de inmediato a fin de que responda rápidamente a páginas críticas" style="width:100%;" >}}
+#### Notificaciones de mucha urgencia
+{{< img src="service_management/oncall/high_urgency_notification_preferences.png" alt="Definir preferencias de notificaciones de mucha urgencia en la configuración del perfil de On-Call: 'Cuando se active un localizador de mucha urgencia' configura el sistema para notificar a un número de teléfono de inmediato a fin de que se responda rápidamente a localizadores críticos" style="width:100%;" >}}
 
-Configura tus páginas de alta urgencia (alertas de monitor P1, amenazas a la seguridad SEV-1, incidencias SEV-1, etc.), para exigir atención y elevación inmediatas.
+Configura tus localizadores de mucha urgencia (alertas de monitor P1, amenazas a la seguridad SEV-1, incidencias SEV-1, etc.), para exigir atención y elevación inmediatas.
 
 Por ejemplo, puedes configurar On-Call para iniciar con una notificación push, llamar después de un minuto y enviar una notificación push de seguimiento si no se acusa recibo después de dos minutos.
 
-##### Mejores prácticas para la alta urgencia
-- Utiliza las notificaciones push inmediatas y las llamadas telefónicas como método principal de notificación para las páginas críticas.
+##### Prácticas recomendadas para la urgencia elevada
+- Utiliza las notificaciones push inmediatas y las llamadas telefónicas como método principal de notificación para localizadores críticos.
 - Mantén intervalos de seguimiento cortos para garantizar un acuse de recibo rápido.
 - Planifica cuidadosamente las políticas de elevación para evitar que se pierdan respuestas durante las emergencias.
 
-#### Notificaciones de baja urgencia
-{{< img src="service_management/oncall/low_urgency_notification_preferences.png" alt="Configurar preferencias de notificaciones de baja urgencia en la configuración del perfil de On-Call: Configura 'Cuando se active una página de baja urgencia' para notificar por correo electrónico de inmediato pero no elevarla más" style="width:100%;" >}}
+#### Notificaciones de poca urgencia
+{{< img src="service_management/oncall/low_urgency_notification_preferences.png" alt="Definir preferencias de notificaciones de poca urgencia en la configuración del perfil de On-Call: 'Cuando se active un localizador de poca urgencia' configura el sistema para notificar por correo electrónico de inmediato pero no escalarlo más" style="width:100%;" >}}
 
-Configura tus páginas de baja urgencia (cuestiones no bloqueantes, señales informativas, etc.), para minimizar las interrupciones y asegurarte al mismo tiempo de que te mantengas informado. Por ejemplo, puedes optar por sólo a ti mismo por correo electrónico.
+Configura tus localizadores de poca urgencia (cuestiones no bloqueantes, señales informativas, etc.), para minimizar las interrupciones y asegurarte al mismo tiempo de mantenerte informado. Por ejemplo, puedes decidir notificarte sólo a ti mismo por correo electrónico.
 
 ### Otras notificaciones
 {{< img src="service_management/oncall/settings_shift_reminder.png" alt="Configurar un recordatorio de turno en la configuración del perfil de On-Call. Se configura un recordatorio de turno para notificar a un número de teléfono 10 minutos antes de que comience el turno" style="width:100%;" >}}
@@ -69,5 +65,5 @@ En **Otras notificaciones**, puedes optar por recibir un **Recordatorio de turno
 [2]: /es/service_management/mobile/?tab=ios
 [3]: /es/mobile
 [4]: /es/service_management/on-call/guides/configure-mobile-device-for-on-call
-[5]: /es/service_management/on-call/processing_rules
+[5]: /es/service_management/on-call/routing_rules
 [6]: /es/service_management/on-call/escalation_policies

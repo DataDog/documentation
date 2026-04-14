@@ -12,7 +12,7 @@ further_reading:
 
 {{< img src="/opentelemetry/collector_exporter/docker_metrics.png" alt="OpenTelemetry Docker metrics in a Containers dashboard" style="width:100%;" >}}
 
-To collect container metrics, configure the [Docker stats receiver][1] in your Datadog Exporter.
+To collect container metrics, configure the [Docker stats receiver][1] in your OpenTelemetry Collector and send the data using the Datadog Exporter.
 
 For more information, see the OpenTelemetry project documentation for [the Docker stats receiver][1].
 

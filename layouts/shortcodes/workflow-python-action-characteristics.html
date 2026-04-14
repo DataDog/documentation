@@ -1,0 +1,41 @@
+{{- $python_libs := site.Data.python_action_libs -}}
+{{- if not $python_libs -}}
+  {{- $err_msg := "Could not load Python action libraries data" -}}
+  {{- if eq hugo.Environment "development" -}}
+    {{- warnf $err_msg -}}
+  {{- else -}}
+    {{- errorf $err_msg -}}
+  {{- end -}}
+{{- end -}}
+{{- if $python_libs -}}
+<ul>
+  <li>Network access: Restricted</li>
+  <li>Python version: <strong>{{ $python_libs.python_version }}</strong></li>
+  <li>
+    Available libraries: In addition to the Python standard library, the following packages are available:
+
+    <div class="table-responsive-container">
+      <div class="table-scroll">
+        <table class="table table-responsive">
+          <thead>
+            <tr>
+              <th>Package</th>
+              <th>Version</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{- range $python_libs.libraries -}}
+            <tr>
+              <td><a href="{{ .pypi_url }}" target="_blank" rel="noopener">{{ .name }}</a></td>
+              <td><code>{{ .version }}</code></td>
+              <td>{{ .description }}</td>
+            </tr>
+            {{- end -}}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </li>
+</ul>
+{{- end -}}

@@ -58,7 +58,7 @@ It can take up to 15 minutes to complete the installation. In certain cases, Mic
 
 ### Verify that the Agent is sending events to Workload Protection
 
-When you enable Workload Protection on Windows, the Agent sends a log to Datadog to confirm that the Windows default ruleset has been successfully deployed. To view the log, navigate to the [**Logs**][7] page in Datadog and search for `@agent.rule_id:ruleset_loaded`.
+When you enable Workload Protection on Windows, the Agent sends a log to Datadog to confirm that the Windows default ruleset has been successfully deployed. To view the log, go to the [Agent Events Explorer][12] in Datadog and search for `@agent.rule_id:ruleset_loaded`.
 
 Another method to verify that the Agent is sending events to Workload Protection is to manually trigger a Windows security signal.
 
@@ -93,7 +93,8 @@ To get alerts whenever a Windows signal is created, create a [Notification Rule]
 [5]: https://app.datadoghq.com/organization-settings/api-keys
 [6]: /agent/configuration/agent-commands/?tab=agentv6v7#restart-the-agent
 [7]: https://app.datadoghq.com/logs
-[8]: https://app.datadoghq.com/security?product=cws&_gl=1*yokoae*_gcl_au*MTY0NDMyMDU4Mi4xNjk5Mjg1NDky*_ga*MTA2MDI5Mjg5My4xNzAwNTg2NjI0*_ga_KN80RDFSQK*MTcwMDU4NjYyNC42LjEuMTcwMDU4NzY3MC4wLjAuMA..*_fplc*Z3E3OTgzSExKaFZUcnBtQ0NXbFh2ZmYyQkZjclJjNXpacGZ3TnJiUDhyeG0ySHdwZDVUb0l1RXF2ZU4lMkZiQTV1Q0M3ZUxlN0pjQ3RRZ1V3b1hwd0taTDFPZlk5VDFzbzMyNDB3MUxzUEUyNiUyQlh2Q0FaQ1V5UGVRTmtXVG0lMkJRJTNEJTNE
+[8]: https://app.datadoghq.com/security/workload-protection/signals?_gl=1*yokoae*_gcl_au*MTY0NDMyMDU4Mi4xNjk5Mjg1NDky*_ga*MTA2MDI5Mjg5My4xNzAwNTg2NjI0*_ga_KN80RDFSQK*MTcwMDU4NjYyNC42LjEuMTcwMDU4NzY3MC4wLjAuMA..*_fplc*Z3E3OTgzSExKaFZUcnBtQ0NXbFh2ZmYyQkZjclJjNXpacGZ3TnJiUDhyeG0ySHdwZDVUb0l1RXF2ZU4lMkZiQTV1Q0M3ZUxlN0pjQ3RRZ1V3b1hwd0taTDFPZlk5VDFzbzMyNDB3MUxzUEUyNiUyQlh2Q0FaQ1V5UGVRTmtXVG0lMkJRJTNEJTNE
 [9]: /security/notifications/rules/
 [10]: /security/cloud_security_management/setup
 [11]: /security/threats
+[12]: https://app.datadoghq.com/security/workload-protection/agent-events

@@ -3,7 +3,7 @@ aliases:
 - /es/mobile_testing/settings
 - /es/mobile_app_testing/settings
 further_reading:
-- link: /synthetics/mobile_app_testing/mobile_app_tests
+- link: /synthetics/mobile_app_testing/
   tag: Documentación
   text: Aprender a crear un test móvil
 - link: /continuous_testing/cicd_integrations
@@ -13,10 +13,6 @@ is_beta: true
 title: Parámetros de los tests de aplicaciones móviles
 ---
 {{< jqmath-vanilla >}}
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Este sitio no admite tests de aplicaciones móviles.</div>
-{{< /site-region >}}
 
 ## Información general
 
@@ -33,7 +29,7 @@ Para añadir una aplicación móvil, ve a la [pestaña **Lista de aplicaciones m
 
 1. Selecciona **Android** como sistema operativo para tu aplicación móvil.
 2. Ponle un nombre a tu aplicación móvil.
-3. Añade etiquetas (tags) `env` y etiquetas adicionales a tu aplicación móvil. Puedes utilizar estas etiquetas para filtrar rápidamente los tests de tu aplicación móvil en la [página Monitorización Synthetic y tests continuos][101]. 
+3. Añade etiquetas `env` y etiquetas adicionales a tu aplicación móvil. Puedes utilizar estas etiquetas para filtrar rápidamente los tests de tu aplicación móvil en la [página Monitorización Synthetic y tests continuos][101]. 
 4. También puedes introducir una descripción de tu aplicación móvil.
 5. Carga un [archivo `.apk`][102].
 6. Introduce un nombre para la versión de tu aplicación móvil. También puedes seleccionar **Mark this version as latest** (Marcar esta versión como la más reciente).

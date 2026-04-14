@@ -1,4 +1,7 @@
 ---
+algolia:
+  tags:
+  - saml
 aliases:
 - /fr/guides/saml
 further_reading:
@@ -8,71 +11,94 @@ further_reading:
 title: Authentification unique avec SAML
 ---
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Le site gouvernemental Datadog prend uniquement en charge la connexion via le protocole SAML.</div>
+<div class='alert alert-warning'>Le site Datadog for Government ne prend en charge que la connexion SAML.</div>
 {{< /site-region >}}
 
 ## Présentation
 
-En configurant [SAML (Security Assertion Markup Language)][1] pour votre compte Datadog, vos collègues et vous-même pourrez vous connecter à Datadog à l'aide des identifiants stockés dans Active Directory, LDAP ou tout autre magasin d'identités de votre organisation configuré avec un fournisseur d'identité SAML.
+Configurer [SAML (Security Assertion Markup Language)][1] pour votre compte Datadog vous permet, à vous et à votre équipe, de vous connecter à Datadog à l'aide des identifiants stockés dans l'Active Directory de votre organisation, un annuaire LDAP ou tout autre service d'identité configuré avec un fournisseur d'identité SAML.
 
 **Remarques** : 
 
-- Si SAML n'est pas activé sur votre compte Datadog, contactez l'[assistance][2] pour l'activer.
-- Cette documentation part du principe que vous disposez déjà d'un fournisseur d'identité SAML (IdP). Si vous n'avez pas d'IdP SAML, sachez que plusieurs offrent des intégrations avec Datadog, tels que [Active Directory][3], [Auth0][4], [Azure][3], [Google][5], [LastPass][6], [Okta][7] et [SafeNet][8].
-- La configuration de SAML nécessite les autorisations [Admin Datadog][9].
+{{% site-region region="us,us3,us5,eu,ap1,ap2" %}}
+- Si vous n'avez pas activé SAML sur votre compte Datadog, contactez l'[assistance][2] pour l'activer.
+- Cette documentation suppose que vous disposez déjà d'un fournisseur d'identité SAML (IdP). Si ce n'est pas le cas, plusieurs fournisseurs proposent des intégrations avec Datadog, notamment [Active Directory][3], [Auth0][4], [Google][5], [LastPass][6], [Microsoft Entra ID][3], [Okta][7] et [SafeNet][8].
+- La configuration de SAML requiert un accès [Administrateur Datadog][9].
+{{% /site-region %}}
 
-## Configurer SAML
+{{% site-region region="gov" %}}
+- Cette documentation suppose que vous disposez déjà d'un fournisseur d'identité SAML (IdP). Si ce n'est pas le cas, plusieurs fournisseurs proposent des intégrations avec Datadog, notamment [Active Directory][3], [Auth0][4], [Google][5], [LastPass][6], [Microsoft Entra ID][3], [Okta][7] et [SafeNet][8].
+- La configuration de SAML requiert un accès [Administrateur Datadog][9].
+{{% /site-region %}}
 
-1. Pour commencer la configuration, référez-vous à la documentation de votre IdP :
+## Configuration de SAML
+
+1. Pour commencer la configuration, consultez la documentation de votre IdP :
 
     * [Active Directory][10]
     * [Auth0][11]
-    * [Azure][12]
     * [Google][13]
+    * [Microsoft Entra ID][12]
     * [NoPassword][14]
     * [Okta][15]
     * [SafeNet][16]
 
-2. Dans l'application Datadog, passez votre curseur sur votre nom d'utilisateur en bas à gauche et sélectionnez Organization Settings. Sélectionnez [Login Methods][17] et cliquez sur **Configure** sous SAML.
+2. Dans l'application Datadog, survolez votre nom d'utilisateur dans le coin inférieur gauche et sélectionnez « Organization Settings ». Sélectionnez [Login Methods][17], puis cliquez sur **Configure** sous SAML.
 
-3. Importez les métadonnées IdP depuis votre fournisseur d'identité SAML en cliquant sur le bouton **Choose File**. Une fois le fichier choisi, cliquez sur **Upload File**.
+3. Téléversez les métadonnées de votre fournisseur d'identité SAML en cliquant sur le bouton **Choose File**. Une fois le fichier sélectionné, cliquez sur **Upload File**.
 
-**Remarque :** les métadonnées IdP ne doivent contenir que des caractères ASCII.
+**Remarque :** les métadonnées IdP doivent contenir uniquement des caractères ASCII.
 
-4. Téléchargez les [métadonnées de fournisseur de service][18] de Datadog pour configurer votre fournisseur d'identité de façon à ce qu'il identifie Datadog comme fournisseur de service.
+4. Téléchargez les [métadonnées du fournisseur de services Datadog][18] pour configurer votre IdP afin qu'il reconnaisse Datadog en tant que fournisseur de services.
 
-5. Après avoir importé les métadonnées IdP et configuré votre fournisseur d'identité, cliquez sur le bouton **Upload and Enable** pour activer SAML dans Datadog.
-    {{< img src="account_management/saml/saml_enable.png" alt="Activation de SAML" >}}
+5. Une fois les métadonnées IdP téléversées et votre IdP configuré, activez SAML dans Datadog en cliquant sur le bouton **Téléverser et activer**. 
+    {{< img src="account_management/saml/saml_enable_cropped.png" alt="Configurer SAML en téléversant les métadonnées IdP" >}}
 
-6. Après avoir importé les métadonnées IdP, retournez sur la page **Login Methods** et activez SAML par défaut.
+6. Après avoir téléversé les métadonnées IdP, retournez à la page **Login methods** et activez SAML `on` par défaut.
 
-7. Une fois SAML configuré dans Datadog et votre fournisseur d'identité prêt à accepter des requêtes de la part de Datadog, les utilisateurs peuvent se connecter :
+**Remarque :** pour configurer SAML dans une organisation multi-comptes, consultez la section [Gestion des comptes multi-organisations][21].
 
-   - **Si vous utilisez la connexion initiée par le fournisseur de service** (ou la connexion initiée par Datadog) : via la **Single Sign-on URL** (URL de connexion unique) affichée sous le statut en haut de la [page SAML Configuration][19]. La **Single Sign-on URL** est également affichée sur la [page Team][20]. L'accès à cette URL initie une authentification SAML via votre fournisseur d'identité. **Remarque** : si le SAML n'est pas activé sur votre compte ou que vous n'utilisez pas la connexion initiée par le fournisseur de service, aucune URL n'est affichée.
-    {{< img src="account_management/saml/saml_enabled.png" alt="SAML activé" >}}
+## Utilisation de SAML
 
-   - **Si vous utilisez la connexion initiée par le fournisseur d'identité** (IdP, ou la connexion initiée depuis votre portail d'applications) : en cliquant sur l'icône de l'application dans votre portail, par exemple dans le menu des applications Google ou le portail Okta. Il est possible que les utilisateurs qui se connectent avec l'URL de connexion initiée par le fournisseur de service puissent également utiliser la connexion initiée par le fournisseur d'identité, mais cela dépend de la configuration et de la compatibilité de votre fournisseur d'identité.
+Une fois SAML configuré dans Datadog et votre IdP prêt à accepter les requêtes de Datadog, les utilisateurs peuvent se connecter.
 
-**Remarque** : si vous souhaitez configurer SAML pour un compte multi-org, consultez la section [Gestion des comptes multi-organisations][21].
+### Connexion initiée par le fournisseur de services (SP)
+
+Une connexion initiée par le SP signifie que l'utilisateur commence la connexion depuis Datadog. Il se connecte via l'**URL de connexion SSO** affichée dans l'encadré d'état en haut de la [page de configuration SAML][19]. L'**URL de connexion SSO** est également affichée sur la [page Équipe][20]. Le chargement de cette URL lance une authentification SAML auprès de votre IdP. **Remarque :** cette URL n'apparaît que si SAML est activé sur votre compte et que vous utilisez la connexion initiée par le SP.
+
+{{< img src="account_management/saml/saml_enabled_cropped.png" alt="Confirmation que SAML est activé" >}}
+
+Lorsqu'un utilisateur se connecte via SAML initié par le SP et que l'organisation n'a pas de sous-domaine personnalisé, Datadog exige une sécurité supplémentaire. Un code de vérification unique est envoyé par e-mail et doit être saisi pour finaliser la connexion.
+
+### Connexion initiée par l'IdP
+
+Une connexion initiée par l'IdP signifie que l'utilisateur commence la connexion depuis le portail applicatif de son IdP. Il se connecte en cliquant sur l'icône de l'application dans son portail, par exemple dans le lanceur d'applications Google ou le portail Okta. Les utilisateurs ayant accès à la connexion initiée par le SP peuvent également utiliser la connexion initiée par l'IdP, selon la configuration de votre fournisseur d'identité.
 
 ## Assertions et attributs
 
-Lorsqu'une connexion se produit, une assertion SAML contenant l'autorisation de l'utilisateur est envoyée à Datadog par le fournisseur d'identité.
+Lorsqu'un utilisateur se connecte, une assertion SAML contenant ses informations d'autorisation est envoyée du fournisseur d'identité à Datadog.
 
-Points à prendre en compte concernant les assertions :
+### Fonctionnalités
 
-* Datadog prend en charge la liaison **HTTP-POST** pour **SAML2** :
+* Datadog prend en charge la liaison **HTTP-POST** pour **SAML2** : 
 `urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST`.
-* Datadog indique `urn:oasis:names:tc:SAML:1.1:idnom-format:adresseEmail` pour le format de **NameIDPolicy** dans les requêtes d'assertion.
+* Datadog spécifie le format suivant pour la **NameIDPolicy** dans les requêtes d'assertion : `urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress`.
+
+### Exigences
+
 * Les assertions doivent être signées.
-* Les assertions peuvent être chiffrées. Les assertions non chiffrées sont néanmoins acceptées.
-* Consultez les [métadonnées du fournisseur de service de Datadog][18] pour en savoir plus. Vous devez vous connecter à Datadog pour accéder au fichier.
+* Les assertions peuvent être chiffrées, mais les assertions non chiffrées sont également acceptées.
+* Consultez les [métadonnées du fournisseur de services Datadog][18] pour plus d'informations. Vous devez être connecté à Datadog pour accéder à ce fichier.
 
-Des attributs peuvent être inclus dans l'assertion SAML. Datadog recherche trois attributs dans `AttributeStatement` :
+### Attributs pris en charge
 
-  1. **eduPersonPrincipalName** : lorsqu'il est spécifié, doit correspondre au nom d'utilisateur Datadog de l'utilisateur. Le nom d'utilisateur désigne généralement l'adresse e-mail de l'utilisateur.
-  2. **sn** : attribut facultatif correspondant au nom de famille de l'utilisateur.
-  3. **givenName** : attribut facultatif correspondant au prénom de l'utilisateur.
+Certains attributs peuvent être inclus dans une assertion SAML. Datadog attend trois attributs dans un `AttributeStatement` :
+
+  1. **eduPersonPrincipalName** : s'il est spécifié, cet attribut doit correspondre au nom d'utilisateur Datadog. Il s'agit en général de l'adresse e-mail de l'utilisateur.
+  2. **sn** : attribut optionnel correspondant au nom de famille de l'utilisateur.
+  3. **givenName**: attribut optionnel correspondant au prénom de l'utilisateur ou son nom attribué.
+
+<div class='alert alert-info'>Pour le fournisseur Microsoft Entra ID, utilisez l'attribut `surname` à la place de `sn` dans l'assertion.</div>
 
 Datadog s'attend à ce que les attributs respectent le format URI NameFormat `urn:oasis:names:tc:SAML:2.0:nomattr-format:uri` ou le format Basic NameFormat `urn:oasis:names:tc:SAML:2.0:nomattr-format:basic`. Le nom utilisé pour chaque attribut dépend du NameFormat utilisé par votre fournisseur d'identité.
 
@@ -108,6 +134,10 @@ Certaines organisations ne souhaitent pas inviter l'ensemble de leurs utilisateu
 
 Les administrateurs peuvent définir le rôle par défaut des nouveaux utilisateurs juste à temps. Le rôle **Standard** est attribué par défaut, mais vous pouvez choisir d'ajouter de nouveaux utilisateurs juste à temps avec le rôle **Read-Only**, **Administrator** ou n'importe quel rôle personnalisé.
 
+<div class='alert alert-warning'>
+  <strong>Important :</strong> si le mappage des rôles est activé, il prend le pas sur les rôles définis lors du provisioning JIT. Sans déclarations d'attributs de groupe appropriées, les utilisateurs risquent de ne se voir attribuer aucun rôle et de perdre l'accès à Datadog. Pour éviter qu'un utilisateur soit bloqué après le provisioning JIT, veillez à revoir vos définitions de mappage et à vérifier vos assertions avant d'activer à la fois les mappages et le provisioning JIT.
+</div>
+
 {{< img src="account_management/saml/saml_jit_default.png" alt="SAML défaut juste à temps" style="width:50%;" >}}
 
 ### Connexion initiée par le fournisseur d'identité
@@ -134,16 +164,16 @@ Certains fournisseurs d'identité (comme Microsoft ADFS) peuvent être configur�
 
 [1]: http://en.wikipedia.org/wiki/Security_Assertion_Markup_Language
 [2]: /fr/help/
-[3]: https://docs.microsoft.com/en-us/azure/active-directory/fundamentals/auth-saml
+[3]: https://learn.microsoft.com/en-us/entra/architecture/auth-saml
 [4]: https://auth0.com/docs/protocols/saml-protocol
 [5]: https://cloud.google.com/architecture/identity/single-sign-on
 [6]: https://support.logmeininc.com/lastpass/help/lastpass-admin-toolkit-using-single-sign-on-sso
 [7]: https://developer.okta.com/docs/concepts/saml/
-[8]: https://help.safenetid.com/operator/Content/STA/Apps/Apps_SAML.htm
+[8]: https://thalesdocs.com/sta/operator/applications/apps_saml/index.html
 [9]: /fr/account_management/users/default_roles/
 [10]: /fr/account_management/saml/activedirectory/
 [11]: /fr/account_management/saml/auth0/
-[12]: /fr/account_management/saml/azure/
+[12]: /fr/account_management/saml/entra/
 [13]: /fr/account_management/saml/google/
 [14]: /fr/account_management/saml/nopassword/
 [15]: /fr/account_management/saml/okta/

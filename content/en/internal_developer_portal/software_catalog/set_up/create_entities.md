@@ -24,7 +24,7 @@ further_reading:
   - link: "/api/latest/service-definition/"
     tag: "API"
     text: "Learn about the Service Definition API"
-  - link: "/api/latest/software_catalog/"
+  - link: "/api/latest/software-catalog/"
     tag: "API"
     text: "Learn about the Software Catalog API"
 ---
@@ -37,18 +37,21 @@ To add [entity definitions][13] to Software Catalog, you can:
 
 ## Through the Datadog UI
 
-To create entity definitions in the Datadog UI:
+Software Catalog provides a guided workflow for creating entity definitions. After you select an entity type from the **Kind** dropdown (Service, API, System, and others), the form presents metadata fields and options specific to that type. For example, selecting **API** surfaces fields for uploading an OpenAPI or gRPC specification, while selecting **Service** surfaces fields for defining the service type and lifecycle.
+
+To create an entity definition:
 
 1. Navigate to the [Software Catalog Setup & Config][3] page.
 1. Click **Create a New Entry**.
-1. Specify your service details, including metadata such as ownership and documentation links.
-1. (Optional) Switch to **YAML** or **JSON** to see the generated code and cURL command. In the code editors, Datadog automatically flags invalid data. 
+1. Select the entity type from the **Kind** dropdown.
+1. Fill in the metadata fields, such as ownership and reference links.
+1. (Optional) Switch to **YAML** or **JSON** to see the generated code and cURL command. In the code editors, Datadog automatically flags invalid data.
 
-   {{< img src="tracing/software_catalog/software_catalog_definition_yaml.png" alt="Service metadata editor showing sample service definition." >}}
+   {{< img src="tracing/software_catalog/software_catalog_definition_editor.png" alt="Service metadata editor showing sample service definition." >}}
 
 1. Submit the metadata by clicking **Save Entry** or by running the provided cURL command.
 
-   **Note**: You must have [Software Catalog Write permission][2] to save the entry. 
+   **Note**: You must have [Software Catalog Write permission][2] to save the entry.
 
 
 ## Through automation
@@ -101,7 +104,6 @@ Import the definition in one of the following ways:
 1. **Datadog APIs**: Import your definition using the [Service Definition API][7] (for schema v2.x) or the [Software Catalog API][8] (for schema v3+), which are both open-sourced GitHub Action solutions.
 1. **GitHub**: Configure the [Datadog GitHub integration](#github-integration) to manage and import your definitions.
 
-
 #### GitHub integration
 
 Configure the [GitHub integration][9] to directly link from where you view the service's definition in the Software Catalog to where it's stored and editable in GitHub. Datadog scans for the `service.datadog.yaml` and `entity.datadog.yaml` files throughout each repository with read permissions.
@@ -136,6 +138,6 @@ To validate your service definitions ingested by Datadog's GitHub integration, y
 [8]: /api/latest/software-catalog/
 [9]: /integrations/github/
 [10]: https://app.datadoghq.com/integrations/github
-[11]: /software_catalog/entity_model
+[11]: /api/latest/software-catalog/#create-or-update-entities
 [12]: https://app.datadoghq.com/event/explorer
-[13]: internal_developer_portal/software_catalog/entity_model
+[13]: /internal_developer_portal/software_catalog/entity_model

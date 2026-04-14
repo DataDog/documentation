@@ -92,7 +92,7 @@ Set the `rac_cluster` configuration parameter to the name of your RAC cluster or
 
 Database Monitoring supports custom queries for Oracle databases. See the [conf.yaml.example][5] to learn more about the configuration options available.
 
-<div class="alert alert-warning">Running custom queries may result in additional costs or fees assessed by Oracle.</div>
+<div class="alert alert-danger">Running custom queries may result in additional costs or fees assessed by Oracle.</div>
 
 [1]: /agent/configuration/agent-commands/#agent-status-and-information
 [2]: https://app.datadoghq.com/databases

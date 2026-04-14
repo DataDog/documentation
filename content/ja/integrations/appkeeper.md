@@ -21,8 +21,8 @@ author:
   sales_email: rd-pd-1@sios.com
   support_email: rd-pd-1@sios.com
 categories:
-- AWS
-- cloud
+- aws
+- クラウド
 - notifications
 custom_kind: インテグレーション
 dependencies:

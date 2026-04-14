@@ -10,6 +10,9 @@ further_reading:
 - link: /service_management/service_level_objectives/
   tag: Documentation
   text: SLO の概要、構成、計算
+- link: https://www.datadoghq.com/blog/define-and-manage-slos/
+  tag: ブログ
+  text: Datadog で SLO を管理するためのベストプラクティス
 title: メトリクスベース SLO
 ---
 
@@ -17,33 +20,33 @@ title: メトリクスベース SLO
 
 メトリクスベースの SLO は、計数ベースのデータストリームでイベントの良し悪しを判断する場合に有用です。メトリクスクエリは良質なイベントの合計を同様の時間軸におけるイベント総数で割り、サービスレベル指標 (SLI) を算出します。SLO の作成には、[APM スパン][1]、[RUM イベント][2]、[ログ][3]から生成されるカスタムメトリクスを含め、あらゆるメトリクスを使用することができます。SLO の構成と計算方法については、[サービスレベル目標][4]のページを参照してください。
 
-{{< img src="service_management/service_level_objectives/metric_slo_side_panel.png" alt="example metric-based SLO" >}}
+{{< img src="service_management/service_level_objectives/metric_slo_side_panel.png" alt="メトリクス ベース SLO の例" >}}
 
 ## セットアップ
 
-On the [SLO status page][5], click **+ New SLO**. Then select, [**By Count**][6].
+[SLO ステータス ページ][5] で **+ New SLO** をクリックします。次に [**By Count**][6] を選択します。
 
 ### クエリの定義
 
-1. 定義するクエリは 2 つあります。分子クエリは良好なイベントの合計を定義し、分母クエリは総イベントの合計を定義します。SLO 計算が正しく動作するように、クエリでは COUNT、RATE、またはパーセンタイル対応の DISTRIBUTION メトリクスを使用する必要があります。詳しくは[クエリ][9]のドキュメントをご覧ください。
+1. 定義するクエリは 2 つあります。分子クエリは正常イベントの合計を定義し、分母クエリは総イベントの合計を定義します。SLO 計算を正しく行うため、クエリでは COUNT、RATE、またはパーセンタイル対応 DISTRIBUTION メトリクスを使用する必要があります。詳細は [クエリ方法][9] ドキュメントを参照してください。
 1. タグを使用して特定のグループを含めるか除外するには、`FROM` フィールドを使用します。
 1. パーセンタイル対応の DISTRIBUTION メトリクスでは、`count values...` アグリゲーターを使用して、メトリクスがカウントする数値のしきい値を指定する必要があります。この機能はしきい値クエリと呼ばれ、数値のしきい値に一致する生の値の数をカウントして、分子と分母のカウントを生成することができます。詳しくは、[しきい値クエリ][7]を参照してください。
 1. オプションとして、パーセンタイル対応の DISTRIBUTION メトリクススでは、`count values...` アグリゲーターのすぐ右にあるドロップダウンを使用して、SLI を特定のグループごとに分割することができます。
 1. オプションとして、COUNT または RATE のメトリクスでは、`sum by` アグリゲーターを使用して、SLI を特定のグループごとに分割することができます。
 
-**例:** HTTP のリターンコードを追跡しており、メトリクスに `code:2xx OR code:3xx OR code:4xx` などのタグが含まれている場合の例。良好なイベントの合計は `sum:httpservice.hits{code:2xx} + sum:httpservice.hits{code:4xx}` です。イベント自体の合計を表す `total` は `sum:httpservice.hits{!code:3xx}` となります。
+**例:** HTTP 返却コードをトラッキングしていて、メトリクスに `code:2xx OR code:3xx OR code:4xx` のようなタグが含まれている場合、正常イベントの合計は `sum:httpservice.hits{code:2xx} + sum:httpservice.hits{code:4xx}`、`total` イベントは `sum:httpservice.hits{!code:3xx}` となります。
 
 `HTTP 3xx` を省いた理由は、これらは一般的にリダイレクトされるもので、SLI として、または SLl に対してカウントされるべきではないためです。一方、3xx ベースでないエラーコードは合計に含める必要があります。`total` には `HTTP 3xx` を除いたすべてのタイプのデータを、また `numerator` には `OK` タイプのステータスコードのみを充当します。
 
 #### メトリクスベース SLI のマルチグループ
 
-Metric-based SLIs allow you to focus on the most important attributes of your SLIs. You can add groups to your metric-based SLIs in the editor by using tags like `datacenter`, `env`, `availability-zone`, `resource`, or any other relevant group:
+メトリクス ベース SLI を使用すると、SLI の最も重要な属性にフォーカスできます。エディタで `datacenter`、`env`、`availability-zone`、`resource` などのタグを使って、メトリクス ベース SLI にグループを追加できます:
 
-{{< img src="service_management/service_level_objectives/metric_slo_creation.png" alt="grouped metric-based SLO editor" >}}
+{{< img src="service_management/service_level_objectives/metric_slo_creation.png" alt="グループ化された メトリクス ベース SLO エディタ" >}}
 
 これらの SLI をグループ化すると、個々のグループのステータス、適切なリクエスト数、残りのエラーバジェットを詳細パネルで視覚化できます。
 
-{{< img src="service_management/service_level_objectives/metric_slo_history_groups.png" alt="metric-based SLO group results" >}}
+{{< img src="service_management/service_level_objectives/metric_slo_history_groups.png" alt="メトリクス ベース SLO グループ結果" >}}
 
 デフォルトで、棒グラフは SLO 全体の正しい/正しくない要求すべての全体数を表示します。テーブルの該当する行をクリックすると、個別のグループの正しい/正しくない要求の棒グラフを詳しく確認できます。さらに、棒グラフの下にある凡例でオプションを選択し、正しいまたは正しくない要求の数を表示/非表示にすることも可能です。
 
@@ -53,7 +56,7 @@ SLO ターゲットは、ターゲットパーセンテージとタイムウィ�
 
 例: `リクエストの 99% は、過去 7 日間でエラーが生じていないこと`。
 
-SLO がターゲットパーセンテージを上回っている間、SLO のステータスは緑色のフォントで表示されます。ターゲットパーセンテージに違反すると、SLO のステータスは赤色のフォントで表示されます。オプションで、ターゲットパーセンテージより大きい警告パーセンテージを含めて、SLO 違反に近づいていることを示すこともできます。警告パーセンテージに違反している場合 (ただし、ターゲットパーセンテージには違反していない場合)、SLO ステータスは黄色のフォントで表示されます。
+SLO が目標パーセンテージ以上のあいだは、SLO ステータスが緑色フォントで表示されます。目標パーセンテージを下回ると、SLO ステータスは赤色フォントで表示されます。また、SLO 違反が近いことを示すために、目標パーセンテージより低い警告パーセンテージをオプションで設定できます。警告パーセンテージを下回り、目標パーセンテージを下回っていない場合、SLO ステータスは黄色フォントで表示されます。
 
 **注:** メトリクスベースの SLO ターゲットには小数第 3 位まで使用できます。SLO の詳細 UI に表示される精度は `num_target_decimal_places + 1 = 小数第 4 位` までです。正確な精度は、分母クエリ内の値の大きさにより異なります。分母が大きいほど、小数第 4 位の上限まで精度を表示できます。
 

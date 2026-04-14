@@ -90,7 +90,7 @@ Utiliza los [Exploradores][7] para revisar y corregir las detecciones de segurid
 ## Investigar los recursos
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">El catálogo de recursos no es compatible con el <a href="/getting_started/site">sitio de Datadog</a> seleccionado ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-danger">El catálogo de recursos no es compatible con el <a href="/getting_started/site">sitio de Datadog</a> seleccionado ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 <div class="alert alert-info">El catálogo de recursos está en fase beta.</div>

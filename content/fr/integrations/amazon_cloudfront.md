@@ -107,7 +107,7 @@ Vous pouvez également configurer un consommateur, tel qu'Amazon Kinesis Data Fi
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "amazon_cloudfront" >}}
+{{< get-metrics-from-git "amazon-cloudfront" >}}
 
 
 Chacune des métriques récupérées à partir d'AWS se voit assigner les mêmes tags que ceux qui apparaissent dans la console AWS, y compris, mais sans s'y limiter `aws_account`, `region` et `distributionid`.

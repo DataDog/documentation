@@ -67,7 +67,7 @@ La referencia al artefacto `com.datadoghq:dd-sdk-android` debería ser eliminada
 
 **Nota**: Las coordenadas Maven de todos los demás artefactos siguen siendo las mismas.
 
-<div class="alert alert-warning">v2 no es compatible con Android API 19 (KitKat). El SDK mínimo compatible es ahora API 21 (Lollipop). Se requiere Kotlin 1.7. El propio SDK se compila con Kotlin 1.8, por lo que un compilador de Kotlin 1.6 e inferior no puede leer los metadatos de las clases del SDK.</div>
+<div class="alert alert-danger">v2 no es compatible con Android API 19 (KitKat). El SDK mínimo compatible es ahora API 21 (Lollipop). Se requiere Kotlin 1.7. El propio SDK se compila con Kotlin 1.8, por lo que un compilador de Kotlin 1.6 e inferior no puede leer los metadatos de las clases del SDK.</div>
 
 Si te encuentras con un error como el siguiente:
 

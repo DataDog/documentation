@@ -57,7 +57,7 @@ Azure App Service で実行するアプリケーションに対して Datadog AP
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "azure_app_services" >}}
+{{< get-metrics-from-git "azure-app-services" >}}
 
 
 ### イベント

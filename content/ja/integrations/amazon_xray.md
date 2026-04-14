@@ -25,7 +25,7 @@ version: '1.0'
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Datadog AWS Lambda X-Ray インテグレーションは、商用 AWS アカウントでのみサポートされます。商用 Lambda アカウントがない場合、Datadog AWS Lambda X-Ray インテグレーションは Datadog for Government サイトではサポートされません。</div>
+<div class="alert alert-danger">Datadog AWS Lambda X-Ray インテグレーションは、商用 AWS アカウントでのみサポートされます。商用 Lambda アカウントがない場合、Datadog AWS Lambda X-Ray インテグレーションは Datadog for Government サイトではサポートされません。</div>
 
 {{< /site-region >}}
 ## 概要

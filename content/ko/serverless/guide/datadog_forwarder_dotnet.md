@@ -3,7 +3,7 @@ title: Datadog 포워더를 사용하여 .NET 서버리스 애플리케이션 �
 ---
 ## 개요
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Datadog 서버리스를 처음 사용하신다면 <a href="/serverless/installation/dotnet">Datadog Lambda 확장을 사용해 Lambda 함수를 계측하는 것에 관한 지침</a>을 따르세요. Lambda가 즉시 사용 가능한 기능을 제공하기 전에 Datadog 포워더를 사용하여 Datadog 서버리스를 설정한 경우, 이 가이드를 사용하여 인스턴스를 유지 관리하세요.
 </div>
 

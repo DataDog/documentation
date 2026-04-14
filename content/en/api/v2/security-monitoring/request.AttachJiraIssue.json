@@ -1,0 +1,28 @@
+{
+  "data": {
+    "attributes": {
+      "jira_issue_url": "https://datadoghq-sandbox-538.atlassian.net/browse/CSMSEC-105476"
+    },
+    "relationships": {
+      "findings": {
+        "data": [
+          {
+            "id": "OTQ3NjJkMmYwMTIzMzMxNTc1Y2Q4MTA5NWU0NTBmMDl-ZjE3NjMxZWVkYzBjZGI1NDY2NWY2OGQxZDk4MDY4MmI=",
+            "type": "findings"
+          },
+          {
+            "id": "MTNjN2ZmYWMzMDIxYmU1ZDFiZDRjNWUwN2I1NzVmY2F-YTA3MzllMTUzNWM3NmEyZjdiNzEzOWM5YmViZTMzOGM=",
+            "type": "findings"
+          }
+        ]
+      },
+      "project": {
+        "data": {
+          "id": "959a6f71-bac8-4027-b1d3-2264f569296f",
+          "type": "projects"
+        }
+      }
+    },
+    "type": "jira_issues"
+  }
+}

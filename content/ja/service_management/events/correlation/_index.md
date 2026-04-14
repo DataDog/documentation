@@ -15,7 +15,7 @@ further_reading:
 title: 相関
 ---
 {{% site-region region="gov" %}}
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Event Correlation は現在、{{< region-param key=dd_datacenter code="true" >}} サイトでは利用できません。
 </div>
 {{% /site-region %}}

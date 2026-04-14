@@ -4,7 +4,7 @@ aliases:
 - /ja/tracing/setup_overview/compatibility_requirements/dotnet-framework
 code_lang: dotnet-framework
 code_lang_weight: 80
-description: Compatibility Requirements for the .NET Tracer
+description: .NET Tracer の互換性要件
 further_reading:
 - link: tracing/trace_collection/dd_libraries/dotnet-framework
   tag: ドキュメント
@@ -17,13 +17,13 @@ type: multi-code-lang
 ---
 
 
-The Datadog .NET Tracer supports all .NET-based languages (for example, C#, F#, Visual Basic).
+Datadog .NET Tracer は、すべての .NET ベースの言語 (例: C#、F#、Visual Basic) をサポートします。
 
 .NET トレーサーはオープンソースです。詳細については、[.NET トレーサーリポジトリ][1]を参照してください。
 
 ## サポートされている .NET フレームワークのランタイム
 
-The .NET Tracer supports automatic and custom instrumentation on the following .NET Framework versions. It also supports [.NET Core and .NET 5+][2]. The .NET Tracer does not support code running in partial trust environments.
+.NET Tracer は、以下の .NET Framework バージョンで自動およびカスタム インスツルメンテーションをサポートします。さらに、[.NET Core および .NET 5+][2] もサポートします。.NET Tracer は、部分信頼環境で実行されるコードをサポートしません。
 
 | .NET Framework バージョン  | マイクロソフトサポート終了 | サポートレベル                       | パッケージバージョン            | Datadog サポート終了 |
 | ----------------------- | --------------------- | ----------------------------------- | -------------------------- | ------------------- |
@@ -38,7 +38,7 @@ The .NET Tracer supports automatic and custom instrumentation on the following .
 | 4.5.1                   | 01/12/2016            | [EOL](#support-eol)                 | < 2.0.0 (例: [1.31.2][3]) | 04/26/2022          |
 | 4.5                     | 01/12/2016            | [EOL](#support-eol)                 | < 2.0.0 (例: [1.31.2][3]) | 04/26/2022          |
 
-Additional information can be found in [Microsoft's .NET Framework Lifecycle Policy][4] and in [.NET runtime support policy](#net-runtime-support-policy).
+詳細は、[Microsoft の .NET Framework ライフサイクル ポリシー][4] および [.NET ランタイム サポート ポリシー](#net-runtime-support-policy) を参照してください。
 
 <div class="alert alert-info">
   <div class="alert-info"><b>注:</b> 自動インスツルメンテーションに使用するトレーサーのバージョンを決定する場合、アプリケーションサーバーにインストールされている .NET Framework のバージョンを使用します。たとえば、.NET Framework 4.5.1 をターゲットとしてアプリケーションをコンパイルしたが、アプリケーションは .NET Framework 4.8 がインストールされているサーバー上で実行されている場合、トレーサーの最新バージョンを使用します。マシンにインストールされている .NET Framework のバージョンを確認するには、<a href="https://docs.microsoft.com/en-us/dotnet/framework/migration-guide/how-to-determine-which-versions-are-installed">Microsoft が提供するガイダンス</a>に従います。
@@ -49,10 +49,12 @@ Additional information can be found in [Microsoft's .NET Framework Lifecycle Pol
 
 .NET トレーサーは、次のアーキテクチャーの自動インスツルメンテーションをサポートします:
 
-| プロセッサアーキテクチャー                                                 | サポートレベル         | パッケージバージョン                        |
-| ------------------------------------------------------------------------|-----------------------|----------------------------------------|
-| Windows x86 (`win-x86`)                                                 | [GA](#support-ga)     | 最新                                 |
-| Windows x64 (`win-x64`)                                                 | [GA](#support-ga)     | 最新                                 |
+| プロセッサアーキテクチャー | サポートレベル       | パッケージバージョン       |
+| ----------------------- | ------------------- | --------------------- |
+| Windows x64 (`win-x64`) | [GA](#support-ga)   | 最新                |
+| Windows x86 (`win-x86`) | [EOL](#support-eol) | 3.0.0 未満 (例: 2.56.0) |
+
+なお、Windows x64 上で x86 アプリケーションを実行することはサポートされています。
 
 ## インテグレーション
 
@@ -93,7 +95,7 @@ Additional information can be found in [Microsoft's .NET Framework Lifecycle Pol
 | WCF (サーバー)                    | 組み込み                                                                                  | `Wcf`                |
 | WebClient / WebRequest          | 組み込み                                                                                  | `WebRequest`         |
 
-Don't see the library you're looking for? First, check if the library produces observability data compatible with OpenTelemetry (see [Using OpenTelemetry Instrumentation Libraries][11] for more details). If not, Datadog is continually adding additional support. [Check with the Datadog team][6] for help.
+お探しのライブラリが見つかりませんか？まず、そのライブラリが OpenTelemetry と互換の可観測性データを生成するかどうかを確認してください (詳細は [OpenTelemetry インスツルメンテーション ライブラリの使用][11] を参照)。該当しない場合でも、Datadog は継続的に追加のサポートを提供しています。[Datadog チームに問い合わせてください][6]。
 
 ## サポートされている Datadog Agent バージョン
 
@@ -103,16 +105,16 @@ Don't see the library you're looking for? First, check if the library produces o
 | [6.x][7]                    | 最新              |
 | [5.x][8]                    | 最新              |
 
-## .NET runtime support policy
+## .NET ランタイム サポート ポリシー
 
-The .NET Tracer depends on the host operating system, .NET Framework runtime, certain .NET Framework libraries, and the Datadog Agent/API. These third party software systems support specific versions of .NET Framework. When the external software no longer supports a version of .NET Framework, the .NET Tracer also limits its support for that version.
+.NET Tracer は、ホスト オペレーティング システム、.NET Framework ランタイム、特定の .NET Framework ライブラリ、そして Datadog Agent/API に依存します。これらのサード パーティ ソフトウェア システムは、特定の .NET Framework バージョンをサポートしています。これらのサード パーティ ソフトウェアが特定の .NET Framework バージョンのサポートを終了した場合、.NET Tracer もそのバージョンのサポートを制限します。
 
 ### サポートレベル
 
 | **レベル**                                              | **サポート内容**                                                                                                                                                          |
 |--------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | <span id="support-unsupported">非対応</span>      |  実装していません。[特別なご要望はカスタマーサポートにお問い合わせください][9]。                                                             |
-| <span id="support-beta">ベータ版</span>                    |  初期実装です。まだすべての機能が含まれていない可能性があります。新機能のサポート、バグやセキュリティの修正は、ベストエフォートで提供されます。                                    |
+| <span id="support-beta">Preview</span>                 |  初期実装です。まだすべての機能が含まれていない可能性があります。新機能のサポート、バグやセキュリティの修正は、ベストエフォートで提供されます。                                    |
 | <span id="support-ga">一般提供 (GA)</span> |  全機能の完全実装。新機能、バグ、セキュリティフィックスを完全サポート。                                                                                    |
 | <span id="support-maintenance">メンテナンス</span>      |  既存機能の完全実装。新機能は受けません。バグフィックス、セキュリティフィックスのみの対応となります。                                                              |
 | <span id="support-eol">サポート終了 (EOL)</span>        |  サポートはありません。                                                                                                                                                                  |
@@ -122,7 +124,7 @@ The .NET Tracer depends on the host operating system, .NET Framework runtime, ce
 Datadog APM for .NET Framework は、[セマンティックバージョニング][10]を実践しています。
 バージョンの更新は、ランタイムサポートの以下の変更を意味します。
 
-  - **メジャーバージョンアップ** (例えば `1.0.0` から `2.0.0`) により、ランタイムのサポートが[ベータ版](#support-beta)/[GA](#support-ga)から[メンテナンス](#support-maintenance)/[EOL](#support-eol) に変更される場合があります。
+  - **メジャー バージョン アップデート** (例: `1.0.0` から `2.0.0`) によって、いずれかのランタイムのサポート ステータスが [プレビュー](#support-beta)/[GA](#support-ga) から [メンテナンス](#support-maintenance)/[EOL](#support-eol) に変更される場合があります。
   - **マイナーバージョンアップ** (例えば `1.0.0` から `1.1.0`) は、あるランタイムのサポートレベルを下げることはありませんが、あるランタイムのサポートは追加されるかもしれません。
   - **パッチバージョンアップ** (例えば `1.0.0` から `1.0.1`) によって、ランタイムのサポートが変更されることはありません。
 

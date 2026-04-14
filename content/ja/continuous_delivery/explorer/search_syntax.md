@@ -1,15 +1,14 @@
 ---
 description: デプロイメント実行をすべて検索します。
 further_reading:
+- link: /getting_started/search/
+  tag: ドキュメント
+  text: Datadog で検索を始める
 - link: /continuous_delivery/explorer/facets
   tag: ドキュメント
   text: ファセットについて
 title: CD Visibility Explorer の検索構文
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">選択したサイト ({{< region-param key="dd_site_name" >}}) では現在 CD Visibility は利用できません。</div>
-{{< /site-region >}}
 
 {{< callout url="https://docs.google.com/forms/d/e/1FAIpQLScNhFEUOndGHwBennvUp6-XoA9luTc27XBwtSgXhycBVFM9yA/viewform?usp=sf_link" btn_hidden="false" header="プレビューに参加しませんか？" >}}
 CD Visibility はプレビュー段階です。この機能に興味がある場合は、フォームにご記入いただき、アクセスをリクエストしてください。
@@ -33,6 +32,6 @@ CD Visibility はプレビュー段階です。この機能に興味がある場
 | `OR`         | **和**: いずれかの条件を含むイベントが選択されます。                                             | authentication OR password   |
 | `-`          | **除外**: 以下の用語はイベントに含まれません (個々の生テキスト検索に適用されます)。       | authentication AND -password |
 
-## 参考資料
+## 関連情報
 
 {{< partial name="whats-next/whats-next.html" >}}

@@ -50,10 +50,6 @@ further_reading:
 title: 애플리케이션 보안 관리
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">애플리케이션 보안 관리는 선택한 <a href="/getting_started/site">Datadog 사이트</a>에서 지원되지 않습니다({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 {{< img src="/security/application_security/app-sec-landing-page.png" alt="공격 흐름과 화염 그래프를 표시하는 Datadog 보안 신호 패널" width="75%">}}
 
 Datadog 애플리케이션 보안 관리(ASM)는 서버 측 요청 위조(SSRF), SQL 삽입, Log4Shell 및 반사형 크로스 사이트 스크립팅(XSS)과 같은 코드 수준 취약성을 이용하려는 애플리케이션 수준 공격에 대한 보호 기능을 제공합니다. 서버, Docker, Kubernetes, Amazon ECS 및 (지원되는 언어의) AWS Fargate에서 직접 호스팅되는 앱을 모니터링하고 보호할 수 있습니다.

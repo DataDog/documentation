@@ -72,7 +72,7 @@ Par exemple :
 ```html
 <a class="btn btn-default" href="#" role="button" data-dd-action-name="Login button">Essayer</a>
 
-<div class="alert alert-danger" role="alert" data-dd-action-name="Ignorer l'alerte">
+<div class="alert alert-warning" role="alert" data-dd-action-name="Ignorer l'alerte">
     <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
     <span class="visually-hidden">Error:</span>
     Saisissez une adresse e-mail valide

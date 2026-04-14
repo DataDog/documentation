@@ -63,7 +63,7 @@ Une fois cette opération effectuée, exportez vos logs Google Cloud Run depui
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "google_cloud_run_for_anthos" >}}
+{{< get-metrics-from-git "google-cloud-run-for-anthos" >}}
 
 
 ### Événements

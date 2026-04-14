@@ -1,5 +1,6 @@
 ---
 title: APM Connection Errors
+description: Diagnose and resolve connection errors between tracing libraries and the Datadog Agent in various deployment environments.
 aliases:
   - /tracing/faq/why-am-i-getting-errno-111-connection-refused-errors-in-my-application-logs/
 ---

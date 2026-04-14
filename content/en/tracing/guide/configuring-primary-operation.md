@@ -1,5 +1,6 @@
 ---
 title: Primary Operations in Services
+description: Understand how primary operations work in services and how to configure them to properly organize traces and resources in APM.
 
 aliases:
 - /tracing/faq/resource-trace-doesn-t-show-up-under-correct-service/

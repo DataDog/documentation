@@ -6,6 +6,9 @@ further_reading:
   - link: "/security/automation_pipelines"
     tag: "Documentation"
     text: "Automation Pipelines"
+  - link: "https://www.datadoghq.com/blog/datadog-iac-security/"
+    tag: "Blog"
+    text: "Prevent cloud misconfigurations from reaching production with Datadog IaC Security"
 ---
 
 Configure mute rules to streamline security alerts by automatically filtering out non-urgent findings. This approach helps reduce noise from known false positives and accepted risks, allowing you to focus on addressing the most critical threats.
@@ -16,15 +19,17 @@ Configure mute rules to streamline security alerts by automatically filtering ou
 1. Enter a descriptive name for the rule, for example, **Compensating control in place for account payment-prod**.
 1. Use the following boxes to configure the rule criteria:
     - **Any of these types**: The types of findings that the rule should check for. Available types include:
+      - **Runtime Code Vulnerability**
+      - **Static Code Vulnerability**
+      - **Library Vulnerability**
+      - **Secret**
+      - **Infrastructure as Code**
+      - **Container Image Vulnerability**
+      - **Host Vulnerability**
       - **Misconfiguration**
       - **Attack Path**
       - **Identity Risk**
-      - **API Security Finding**
-      - **Application Code Vulnerability**
-      - **Application Library Vulnerability**
-      - **Container Image Vulnerability**
-      - **API Security Finding**
-      - **Host Vulnerability**
+      - **API Security**
     - **Any of these tags or attributes**: The resource tags or attributes that must match for the rule to apply.
 1. To add severity criteria to the rule, click **Add Severity**.
 1. Specify the mute reason and duration:
@@ -47,4 +52,4 @@ When Datadog identifies a finding, it evaluates the finding against your sequenc
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[2]: https://app.datadoghq.com/security/configuration/pipeline-vulnerability
+[2]: https://app.datadoghq.com/security/configuration/findings-automation?opened-sections=mute

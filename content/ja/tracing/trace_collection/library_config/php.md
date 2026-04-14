@@ -57,7 +57,7 @@ php_value datadog.service my-app
 
 ## NGINX と PHP-FPM
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 <strong>注:</strong> PHP-FPM は <code>env[...]</code> ディレクティブの値として <code>false</code> をサポートしていません。<code>true</code> のかわりに <code>1</code> を、<code>false</code> のかわりに <code>0</code> を使用します。
 </div>
 
@@ -603,7 +603,7 @@ Datadog Agent がデフォルト以外の StatsD ホスト名またはポート�
 
 ## リソース名を正規化された URI にマッピング
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 次のいずれかを設定すると、新しいリソース正規化アプローチにオプトインし、<code>DD_TRACE_RESOURCE_URI_MAPPING</code> の値は無視されます: <code>DD_TRACE_RESOURCE_URI_FRAGMENT_REGEX</code>、<code>DD_TRACE_RESOURCE_URI_MAPPING_INCOMING</code>、および <code>DD_TRACE_RESOURCE_URI_MAPPING_OUTGOING</code>。
 </div>
 

@@ -73,7 +73,7 @@ Para obtener más información sobre las etiquetas de contenedor, consulta la do
 
 ### Protocolo de DogStatsD v1.3
 
-Los Agents v6.40.0 y v7.40.0 y posteriores admiten un campo de marca de tiempo Unix opcional.
+Los Agents `v6.40.0+` y `v7.40.0+` admiten un campo de marca temporal Unix opcional.
 
 Cuando se proporciona este campo, el Datadog Agent no procesa ninguna métrica (sin agregación) y sólo se limita a enriquecer los métricas con etiquetas. Esto puede ser útil si ya estabas agregando tus métricas en tu aplicación y quieres enviarlas a Datadog sin ningún procesamiento adicional.
 
@@ -87,11 +87,68 @@ El valor es una marca de tiempo Unix (UTC) y debe llevar el prefijo `T`, por eje
 
 - `page.views:15|c|#env:dev|T1656581400`: una métrica COUNT que indica que 15 vistas de páginas ocurrieron el 30 de junio de 2022 a las 9:30 UTC
 
+### DogStatsD protocolo v1.4
+
+A partir del Agent `>=v7.51.0`, se admite un nuevo valor de inode para el campo ID del contenedor.
+El campo ID del contenedor ahora puede contener dos valores para enriquecer métricas de DogStatsD con etiquetas de contenedor adicionales:
+- El ID del contenedor, si está disponible.
+- El inode de nodo cgroup, si el ID del contenedor no está disponible.
+
+El campo ID del contenedor sigue llevando el prefijo `c:`, y el valor puede ser uno de los siguientes:
+
+- `c:ci-<CONTAINER_ID>`
+- `c:in-<CGROUP_INODE>`
+
+Por compatibilidad con versiones anteriores, seguimos admitiendo el siguiente formato, aunque se considera obsoleto:
+- `c:<CONTAINER_ID>`
+
+### DogStatsD protocolo v1.5
+
+A partir del Agent `>=v7.57.0`, se admite un nuevo campo de datos externos.
+El Datadog Agent utiliza el valor de datos externos para enriquecer métricas de DogStatsD con etiquetas de contenedor adicionales, cuando el ID del contenedor no está disponible.
+
+El ID del contenedor lleva el prefijo `e:`, por ejemplo:
+
+`<METRIC_NAME>:<VALUE>|<TYPE>|#<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>|e:<EXTERNAL_DATA>`
+
+Estos datos son proporcionados por el [controlador de admisión del Datadog Agent][106] y contendrán:
+- Un booleano que representa si el contenedor es un contenedor init o no.
+- El nombre del contenedor.
+- El UID del pod.
+
+El formato es el siguiente:
+
+`it-INIT_CONTAINER,cn-CONTAINER_NAME,pu-POD_UID`
+
+Se vería así:
+
+`it-false,cn-nginx-webserver,pu-75a2b6d5-3949-4afb-ad0d-92ff0674e759`
+
+### DogStatsD protocolo v1.6
+
+A partir del Agent `>=v7.64.0`, se admite un nuevo campo de cardinalidad.
+El Datadog Agent utiliza el valor de cardinalidad para enriquecer métricas de DogStatsD con etiquetas de contenedor adicionales que corresponden a su cardinalidad.
+
+El campo de cardinalidad lleva el prefijo `card:`, por ejemplo:
+
+`<METRIC_NAME>:<VALUE>|<TYPE>|#<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>|card:<CARDINALITY>`
+
+La cardinalidad afectará al enriquecimiento de etiquetas de:
+- [Etiquetas de Docker][105]
+- [Etiquetas de Kubernetes][104]
+
+Los valores disponibles para la cardinalidad son:
+- `none`
+- `low`
+- `orchestrator`
+- `high`
+
 [101]: /es/metrics/#metric-name
 [102]: /es/metrics/types/
 [103]: /es/getting_started/tagging/
 [104]: /es/containers/kubernetes/tag/?tab=containerizedagent#out-of-the-box-tags
 [105]: /es/containers/docker/tag/?tab=containerizedagent#out-of-the-box-tagging
+[106]: /es/containers/cluster_agent/admission_controller
 {{% /tab %}}
 {{% tab "Eventos" %}}
 
@@ -114,12 +171,12 @@ El valor es una marca de tiempo Unix (UTC) y debe llevar el prefijo `T`, por eje
 
 Los siguientes son algunos ejemplos de datagramas:
 
-``text
-## Enviar una excepción
-_e{21,36}:Se ha producido una excepción. No se puede analizar el archivo CSV de 10.0.0.17|t:warning|#err_type:bad_file
+```text
+## Send an exception
+_e{21,36}:An exception occurred|Cannot parse CSV file from 10.0.0.17|t:warning|#err_type:bad_file
 
-## Enviar un evento con una nueva línea en el texto
-Se ha producido una excepción. No se puede analizar la solicitud:\\n{"foo: "bar"}|p:low|#err_type:bad_request
+## Send an event with a newline in the text
+_e{21,42}:An exception occurred|Cannot parse JSON request:\\n{"foo: "bar"}|p:low|#err_type:bad_request
 ```
 
 {{% /tab %}}
@@ -140,8 +197,8 @@ Se ha producido una excepción. No se puede analizar la solicitud:\\n{"foo: "bar
 El siguiente es un ejemplo de datagrama:
 
 ```text
-# Enviar un estado CRITICAL para una conexión remota
-_sc|Redis connection|2|#env:dev|m:La conexión a Redis ha expirado después de 10s
+# Send a CRITICAL status for a remote connection
+_sc|Redis connection|2|#env:dev|m:Redis connection timed out after 10s
 ```
 
 {{% /tab %}}
@@ -158,7 +215,7 @@ DogStatsD crea un mensaje que contiene información sobre tu métrica, evento o 
 
 El formato para enviar métricas es:
 
-``text
+```text
 <METRIC_NAME>:<VALUE>|<TYPE>|@<SAMPLE_RATE>|#<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>
 ```
 
@@ -186,7 +243,7 @@ PS C:\> .\send-statsd.ps1 "custom_metric:123|g|#shell"
 
 En cualquier plataforma con Python (en Windows, se puede utilizar el intérprete Python integrado del Agent, que se encuentra en `%ProgramFiles%\Datadog\Datadog Agent\embedded\python.exe`, para el Agent versión 6.11 y anteriores, y en `%ProgramFiles%\Datadog\Datadog Agent\embedded<PYTHON_MAJOR_VERSION>\python.exe`, para el Agent versión 6.12 y posteriores):
 
-### Python 2
+### Python 2
 
 ```python
 import socket
@@ -194,7 +251,7 @@ sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) # UDP
 sock.sendto("custom_metric:60|g|#shell", ("localhost", 8125))
 ```
 
-### Python 3
+### Python 3
 
 ```python
 import socket
@@ -257,7 +314,7 @@ PS C:\> .\send-statsd.ps1 "_sc|Redis connection|2|#env:dev|m:Redis connection ti
 
 Para enviar métricas, eventos o checks de servicios en entornos contenedorizados, consulta [DogStatsD en Kubernetes][3], junto con la [configuración de APM en Kubernetes][4], dependiendo de tu instalación. La documentación de [APM Docker][5] también puede ser útil.
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

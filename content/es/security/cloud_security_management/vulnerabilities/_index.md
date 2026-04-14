@@ -5,7 +5,7 @@ aliases:
 further_reading:
 - link: /infrastructure/containers/container_images/#enable-sbom-collection
   tag: Documentación
-  text: Activar la recopilación de SBOM en CSM Vulnerabilities
+  text: Activar la recopilación de SBOM en Cloud Security Vulnerabilities
 - link: /security/cloud_security_management/setup/csm_enterprise/?tab=aws#hosts
   tag: Documentación
   text: Configuración de vulnerabilidades de host
@@ -14,29 +14,19 @@ further_reading:
   text: Visualización de las imágenes de contenedor
 - link: /security/cloud_security_management/troubleshooting/vulnerabilities
   tag: Documentación
-  text: Solucionar problemas de CSM Vulnerabilities
-- link: https://www.datadoghq.com/blog/csm-vulnerability-management/
-  tag: Blog
-  text: Mitigar las vulnerabilidades de infraestructura con Datadog Cloud Security
-    Management
+  text: Solucionar problemas de Cloud Security Vulnerabilities
 - link: https://www.datadoghq.com/blog/datadog-container-image-view/
   tag: Blog
   text: Mejorar el flujo de trabajo de solución de problemas con imágenes de contenedor
     en Datadog Container Monitoring
-title: Cloud Security Management Vulnerabilities
+title: Cloud Security Vulnerabilities
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Cloud Security Management Vulnerabilities está en Vista previa para el <a href="/getting_started/site">sitio Datadog </a> seleccionado ({{< region-param key="dd_site_name" >}}).
-Solicita acceso <a href="https://www.datadoghq.com/product-preview/csm-vulnerability-management-govcloud/">rellenando este formulario</a>.
-</div>
-{{< /site-region >}}
 
 ## Información general
 
-Cloud Security Management Vulnerabilities (CSM Vulnerabilities) te ayuda a mejorar tu postura de seguridad y lograr el cumplimiento mediante el análisis continuo de imágenes de contenedor, hosts, imágenes de host y funciones serverless en busca de vulnerabilidades, desde los pipelines CI/CD hasta la producción en directo. Aprovechando la capacidad de observación en tiempo de ejecución, te ayuda a priorizar y corregir vulnerabilidades explotables en tus flujos de trabajo diarios, todo en una única vista y sin dependencias de otros productos de Datadog.
+Cloud Security Vulnerabilities te ayuda a mejorar tu postura de seguridad y lograr el cumplimiento mediante el análisis continuo de imágenes de contenedor, hosts, imágenes de host y funciones serverless en busca de vulnerabilidades, desde los pipelines CI/CD hasta la producción en directo. Aprovechando la capacidad de observación en tiempo de ejecución, te ayuda a priorizar y corregir vulnerabilidades explotables en tus flujos de trabajo diarios, todo en una única vista y sin dependencias de otros productos de Datadog.
 
-Con CSM Vulnerabilities, puedes gestionar tu estrategia de gestión de la seguridad en la nube, todo en un solo lugar:
+Con Cloud Security Vulnerabilities, puedes gestionar tu estrategia de gestión de la seguridad en la nube, todo en un solo lugar:
 
 - Crea un programa de gestión de vulnerabilidades, desde los pipelines CI/CD hasta los recursos de producción.
 - Aprobar auditorías de cumplimiento (como SOC2, PCI, HIPAA, CIS y FedRamp)
@@ -52,8 +42,8 @@ Desplegar utilizando Agentless o el Datadog Agent unificado
 Inventariar recursos en la nube, en tiempo real
 : Realiza un inventario en tiempo real de imágenes de contenedor, hosts, funciones serverless y todos los paquetes desplegados en tu infraestructura y exporta tu SBOM.
 
-Detectar vulnerabilidades de forma continua 
-: Analiza actualizaciones recientes y CVE recientemente publicados, en imágenes de contenedor en ejecución, hosts, imágenes de host y funciones serverless, e identifica las capas vulnerables de las imágenes de contenedor.
+Detectar vulnerabilidades continuamente
+: escanea actualizaciones recientes y CVEs recientemente publicados, a través de imágenes de contenedor en ejecución desde hosts y registros, host, imágenes de host y serverless, e identifica capas de imágenes de contenedor vulnerables.
 
 Priorizar vulnerabilidades explotables, utilizando la capacidad de observación en tiempo de ejecución
 : Aprovecha la puntuación de la seguridad de Datadog, basada en CVSS, incorporando información de CISA KEV, EPSS y la disponibilidad pública de exploits. Con la capacidad de observación en tiempo de ejecución, puedes monitorizar la producción, la exposición a ataques, el procesamiento de datos confidenciales y el acceso privilegiado.
@@ -69,13 +59,13 @@ Explorar informes
 
 ## Métodos de despliegue
 
-Empieza con CSM Vulnerabilities y cubre tu infraestructura en minutos, utilizando:
+Empieza con Cloud Security Vulnerabilities y cubre tu infraestructura en minutos, utilizando:
 - [Análisis Agentless][11]
 - [Datadog Agent unificado][12]
 
 También puedes utilizar ambos métodos de despliegue: el Datadog Agent unificado, donde ya lo tienes desplegado, y Agentless, en otros lugares.
 
-Luego de la activación, Datadog comienza a analizar tus recursos de forma continua y comienza a informar de las vulnerabilidades priorizadas en tu [Explorador de CSM Vulnerabilities][1] en una hora. 
+Luego de la activación, Datadog comienza a analizar tus recursos de forma continua y comienza a informar de las vulnerabilidades priorizadas en tu [página de Redsultados de Cloud Security Vulnerabilities][1] en una hora. 
 
 Utiliza estas tablas para decidir con qué solución empezar: 
 | Característica                              | Agentless                                    | Datadog Agent unificado         |
@@ -90,22 +80,26 @@ Utiliza estas tablas para decidir con qué solución empezar:
 | Imagen de contenedor                           | Paquetes de sistema operativo y de aplicaciones, asignados a la imagen | Paquetes de sistema operativo                    |
 | Proveedor de la nube                            | AWS, [Azure (Vista previa)][15]                    | AWS, Azure, GCP, on-prem, etc. |
 | Sistema operativo                          | Linux                                         | Linux, Windows                 |
-| Serverless                                | AWS Lambda                                    | No aplicable                 |
-| Registros de contenedores                      | [Amazon ECR (Vista previa)][16]                    | No aplicable                 |
+| Serverless                                | AWS Lambda, AWS ECS Fargate                   | No aplicable                 |
+| Registros de contenedores                      | Amazon ECR                                    | No aplicable                 |
 
-Para obtener más información sobre compatibilidad, consulta [Compatibilidad de hosts y contenedores de CSM Vulnerabilities][13]. Si necesitas ayuda, consulte la [guía para solucionar problemas][14] o ponte en contacto con support@datadoghq.com.
+Para obtener más información sobre compatibilidad, consulta [Hosts y compatibilidad de contenedores de Cloud Security Vulnerabilities][13]. Si necesitas ayuda, consulta la [guía para solucionar problemas][14], o ponte en contacto con support@datadoghq.com.
 
 ## Detectar, priorizar y corregir continuamente vulnerabilidades explotables
-El [Explorador de CSM Vulnerabilities][1] te ayuda a investigar las vulnerabilidades detectadas en tus imágenes de contenedor y host, hosts en ejecución y funciones serverless utilizando funciones de filtrado y agrupación.
+La [página de Resultados de Cloud Security Vulnerabilities][1] te ayuda a investigar las vulnerabilidades detectadas en tus imágenes de contenedor y host, hosts en ejecución y funciones serverless utilizando funciones de filtrado y agrupación.
 
 Céntrate primero en las vulnerabilidades explotables, utilizando la puntuación de gravedad de Datadog que combina la puntuación CVSS base con varios factores de riesgo, como datos confidenciales, sensibilidad del entorno, exposición a ataques, disponibilidad de exploits o fuentes de información sobre amenazas.
 
-Para vulnerabilidades con correcciones disponibles, el Explorador proporciona pasos de corrección guiados para ayudar a los equipos de desarrollo y operaciones a resolver los problemas de forma más rápida y eficaz. También puedes clasificar, silenciar, comentar y asignar vulnerabilidades para gestionar su ciclo de vida.
+Para vulnerabilidades con correcciones disponibles, la página de Resultados proporciona pasos de corrección guiados para ayudar a los equipos de desarrollo y operaciones a resolver los problemas de forma más rápida y eficaz. También puedes clasificar, silenciar, comentar y asignar vulnerabilidades para gestionar su ciclo de vida.
 
-{{< img src="security/vulnerabilities/csm-vm-explorer-actionability.png" alt="Explorador de CSM Vulnerabilities que muestra una vulnerabilidad y las acciones que puede realizar el usuario para corregirla" width="100%">}}
+{{< img src="security/vulnerabilities/csm-vm-explorer-actionability-2.png" alt="La página de Resultados de Cloud Security Vulnerabilities que muestra una vulnerabilidad y las acciones que puede tomar un usuario para corregirla" width="100%">}}
+
+En las [imágenes de contenedor][7], puedes rastrear vulnerabilidades encontradas en una imagen a capas específicas, para que puedas localizar y remediar tus riesgos de seguridad más rápidamente.
+
+{{< img src="infrastructure/containerimages/image_layer_vulnerabilities.png" alt="Una lista de vulnerabilidades asociadas con cada capa de una imagen" width="100%">}}
 
 ## Automatización e integración Jira
-Permite que CSM Vulnerabilities forme parte de tu flujo de trabajo diario, configurando [reglas de notificación de seguridad][17] y [pipelines de automatización (en Vista previa)][20]:
+Permite que Cloud Security Vulnerabilities forme parte de tu flujo de trabajo diario, configurando [reglas de notificación de seguridad][17] y [pipelines de automatización (en Vista previa)][20]:
 - Recibir alertas cuando se detectan vulnerabilidades explotables en tu contexto
 - Crear tickets de Jira automáticamente
 - Configurar SLA para corregir vulnerabilidades
@@ -113,9 +107,9 @@ Permite que CSM Vulnerabilities forme parte de tu flujo de trabajo diario, confi
 {{< img src="security/vulnerabilities/csm-notifications.png" alt="Pantalla de configuración de una regla de notificación" width="100%">}}
 
 ## Seguimiento e informes
-Utiliza el [dashboard de CSM Vulnerabilities][18] predefinido para realizar un seguimiento e informar de los progresos a las partes interesadas. Clónalo y modifícalo según tus necesidades.
+Utiliza el [dashboard de Cloud Security Vulnerabilities][18] predefinido para realizar un seguimiento e informar de los progresos a las partes interesadas. Clónalo y modifícalo según tus necesidades.
 
-{{< img src="security/vulnerabilities/csm-vm-reporting.png" alt="Dashboard de CSM Vulnerabilities" width="100%">}}
+{{< img src="security/vulnerabilities/csm-vm-reporting.png" alt="El dashboard de Cloud Security Vulnerabilities" width="100%">}}
 
 ## Explorar paquetes de infraestructura
 
@@ -123,13 +117,7 @@ El [Catálogo de paquetes de infraestructura][19] proporciona un inventario en t
 
 Evalúa rápidamente el impacto de una vulnerabilidad crítica emergente buscando las versiones de paquetes afectadas e identificando todos los recursos que la utilizan.
 
-{{< img src="security/vulnerabilities/csm_package_explorer.png" alt="Inventario de paquetes desplegados en la infraestructura con un contexto de vulnerabilidades y la vista de los recursos que los utilizan" width="100%">}}
-
-## Tutorial en vídeo
-
-En el siguiente vídeo, se ofrece una descripción general de cómo activar y utilizar CSM Vulnerabilities:
-
-{{< img src="security/csm/how-to-use-csm-vulnerabilities.mp4" alt="Vídeo que brinda una descripción general de cómo instalar y usar CSM Vulnerabilities" video=true >}}
+{{< img src="security/vulnerabilities/csm_package_explorer_3.png" alt="Inventario de paquetes desplegados en la infraestructura con un contexto de vulnerabilidades y la vista de los recursos que los utilizan" width="100%">}}
 
 [1]: https://app.datadoghq.com/security/csm/vm
 [2]: https://app.datadoghq.com/containers/images
@@ -137,6 +125,7 @@ En el siguiente vídeo, se ofrece una descripción general de cómo activar y ut
 [4]: https://app.datadoghq.com/security/infra-vulnerability?query=asset_type%3AHost&group=none
 [5]: /es/security/code_security/software_composition_analysis/
 [6]: https://www.datadoghq.com/product/infrastructure-monitoring/
+[7]: https://app.datadoghq.com/container-images
 [9]: https://www.cisa.gov/known-exploited-vulnerabilities-catalog
 [10]: /es/security/code_security/iast/
 [11]: /es/security/cloud_security_management/setup/agentless_scanning/

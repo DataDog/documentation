@@ -7,30 +7,27 @@ further_reading:
   tag: Documentación
   text: Creación de dashboards con JSON
 title: Widget de imagen
-widget_type: image
+widget_type: imagen
 ---
 
-La widget de imagen te permite integrar una imagen en tu dashboard. Una imagen puede ser un PNG, JPG o GIF animado, alojada en un lugar accesible para la URL.
+El widget de imagen te permite integrar una imagen en tu dashboard. Una imagen puede subirse a Datadog o alojarse donde pueda accederse a ella por URL. Se admiten los formatos de archivo PNG, JPG y GIF.
 
 {{< img src="dashboards/widgets/image/image.mp4" alt="Imagen" video="true" style="width:80%;" >}}
 
 ## Configuración
 
-{{< img src="dashboards/widgets/image/image_setup.png" alt="Configuración de imagen" style="width:80%;">}}
+{{< img src="dashboards/widgets/image/image_setup2.png" alt="Configuración de imagen" style="width:80%;">}}
 
-1. Introduce la URL de tu imagen.
-2. Elige una apariencia:
-    * Ampliar la imagen para cubrir todo el título
-    * Ajustar imagen en el cuadro
-    * Centrar imagen en el cuadro
+1. Sube tu imagen o introduce la URL de tu imagen.
+2. Selecciona una plantilla predefinida o personaliza las opciones de visualización.
 
 ## API
 
-Este widget puede utilizarse con la **[API de dashboards][1]**. Consulta la siguiente tabla para la [definición del esquema de widget JSON][2]:
+Este widget se puede utilizar con la **[API de dashboards][1]**. Consulta la siguiente tabla para obtener la [definición del esquema JSON del widget)][2]:
 
 {{< dashboards-widgets-api >}}
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

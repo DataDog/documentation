@@ -1,12 +1,13 @@
 ---
 title: Manually install and configure the Datadog Agent on Kubernetes with DaemonSet
+description: Manual installation and configuration of the Datadog Agent on Kubernetes using DaemonSet deployment
 further_reading:
 - link: "/containers/kubernetes/installation"
   tag: "Documentation"
   text: "Install the Datadog Agent on Kubernetes"
 ---
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   Datadog discourages using DaemonSets to deploy the Datadog Agent because the manual process is prone to errors. Datadog recommends that you <a href="/containers/kubernetes/installation">use Datadog Operator or Helm</a> to install the Agent on Kubernetes.
 </div>
 
@@ -374,7 +375,7 @@ Additional examples are available on the [Container Discover Management][27] pag
 [21]: /agent/docker/?tab=standard#ignore-containers
 [22]: /containers/kubernetes/log
 [23]: /agent/configuration/proxy/#agent-v6
-[24]: /developers/dogstatsd/
-[25]: /developers/dogstatsd/unix_socket/
+[24]: /extend/dogstatsd/
+[25]: /extend/dogstatsd/unix_socket/
 [26]: /containers/kubernetes/tag/
 [27]: /agent/guide/autodiscovery-management/

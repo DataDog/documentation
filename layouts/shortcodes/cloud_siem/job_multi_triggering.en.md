@@ -1,0 +1,5 @@
+In the **Job multi-triggering behavior** section, configure how often to keep updating the same signal when new values are detected within a specified time frame. For example, the same signal updates when any new value is detected within 1 hour, for a maximum duration of 24 hours.
+- An `evaluation window` defines a sliding period in which at least one case evaluates as true and assesses cases in real time.
+- After a signal is generated, the signal remains "open" if a case is matched at least once within the `keep alive` window. Each time a new event matches any of the cases, the *last updated* timestamp is updated for the signal.
+- A signal closes after the time exceeds the `maximum signal duration`, regardless of the query being matched. This time is calculated from the first seen timestamp.
+- **Note**: The `evaluation window` must be less than or equal to the `keep alive` and `maximum signal duration`.

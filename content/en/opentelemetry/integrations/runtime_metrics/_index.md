@@ -69,7 +69,7 @@ OpenTelemetry Go applications are [instrumented manually][3]. To enable runtime 
 
 {{% tab ".NET" %}}
 
-<div class="alert alert-warning">The minimum supported version of the .NET OpenTelemetry SDK is <a href="https://github.com/open-telemetry/opentelemetry-dotnet/releases/tag/core-1.5.0">1.5.0</a></div>
+<div class="alert alert-danger">The minimum supported version of the .NET OpenTelemetry SDK is <a href="https://github.com/open-telemetry/opentelemetry-dotnet/releases/tag/core-1.5.0">1.5.0</a></div>
 
 #### Automatic instrumentation
 
@@ -120,7 +120,7 @@ The OpenTelemetry runtime metrics have the following prefixes based on their sou
 
 The following tables list the Datadog runtime metrics that are supported through OpenTelemetry mapping. "N/A" indicates that there is no OpenTelemetry equivalent metric available.
 
-<div class="alert alert-warning"> OpenTelemetry runtime metrics are mapped to Datadog by metric name. Do not rename host metrics for OpenTelemetry runtime metrics as this breaks the mapping.</div>
+<div class="alert alert-danger"> OpenTelemetry runtime metrics are mapped to Datadog by metric name. Do not rename host metrics for OpenTelemetry runtime metrics as this breaks the mapping.</div>
 
 [100]: /opentelemetry/setup/collector_exporter/
 [101]: /opentelemetry/setup/otlp_ingest_in_the_agent

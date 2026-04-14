@@ -1,5 +1,6 @@
 ---
 title: Datadog Agent Manager for Windows
+description: "Use the browser-based Datadog Agent Manager GUI to configure and manage the Windows Agent with supported browsers and authentication."
 further_reading:
 - link: "/agent/basic_agent_usage/windows/"
   tag: "Documentation"

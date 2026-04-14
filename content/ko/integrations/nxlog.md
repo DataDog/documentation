@@ -31,7 +31,7 @@ title: NXLog
 ### TCP를 통한 로그 수집
 
 {{< site-region region="us3,us5,ap1,gov" >}}
-  <div class="alert alert-warning">TCP 엔드포인트는 선택한 <a href="/getting_started/site">Datadog 사이트</a> ({{< region-param key="dd_site_name" >}})에서 지원되지 않습니다. 로깅 엔드포인트 목록은 <a href="/logs/log_collection/?tab=tcp#additional-configuration-options">로그 수집 및 통합</a>을 참고하세요.</div>
+  <div class="alert alert-danger">TCP 엔드포인트는 선택한 <a href="/getting_started/site">Datadog 사이트</a> ({{< region-param key="dd_site_name" >}})에서 지원되지 않습니다. 로깅 엔드포인트 목록은 <a href="/logs/log_collection/?tab=tcp#additional-configuration-options">로그 수집 및 통합</a>을 참고하세요.</div>
 {{< /site-region >}}
 
 

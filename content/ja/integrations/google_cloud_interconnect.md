@@ -49,7 +49,7 @@ Google Cloud Interconnect のログは Google Cloud Logging で収集され、Cl
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "google_cloud_interconnect" >}}
+{{< get-metrics-from-git "google-cloud-interconnect" >}}
 
 
 ### イベント

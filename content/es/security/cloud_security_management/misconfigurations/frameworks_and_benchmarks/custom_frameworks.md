@@ -27,7 +27,7 @@ Con los marcos personalizados, puedes definir y medir el cumplimiento con respec
 
 A continuación, añade requisitos al marco:
 
-<div class="alert alert-warning">Debes añadir al menos un requisito, un control y una regla antes de guardar el marco personalizado.</div>
+<div class="alert alert-danger">Debes añadir al menos un requisito, un control y una regla antes de guardar el marco personalizado.</div>
 
 1. Haz clic en **Add Requirement** (Añadir requisito).
 1. Introduce los siguientes datos:

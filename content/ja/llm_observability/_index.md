@@ -14,10 +14,6 @@ further_reading:
 title: LLM Observability
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">選択されたサイト ({{< region-param key="dd_site_name" >}}) では、現時点で LLM Observability は利用できません。</div>
-{{< /site-region >}}
-
 ## 概要
 
 LLM Observability を使用すると、チャットボットなどの LLM 対応アプリケーションを監視、トラブルシューティング、および評価できます。これにより、問題の根本原因を特定し、運用パフォーマンスを監視し、LLM アプリケーションの品質・プライバシー・安全性を評価することが可能です。

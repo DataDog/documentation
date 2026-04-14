@@ -1,5 +1,6 @@
 ---
 title: Interpolation
+description: Fill missing metric values using linear, last value, zero, or null interpolation methods in timeseries data.
 aliases:
     - /graphing/functions/interpolation/
 further_reading:
@@ -20,10 +21,10 @@ further_reading:
 The `fill()` function has two parameters:
 
 * **`METHOD`**: The function to use as an interpolation method; choose from:
-    * **linear**: Gives you a linear interpolation between the beginning and the end of the gap.
-    * **last**: Fills the gap with the last value of the gap.
-    * **zero**: Fills the gap with a zero value.
-    * **null**: Deactivates the interpolation.
+    * `linear`: Gives you a linear interpolation between the beginning and the end of the gap.
+    * `last`: Fills the gap with the last value of the gap.
+    * `zero`: Fills the gap with a zero value.
+    * `null`: Deactivates the interpolation.
 
 * `LIMIT` [*optional*, *default*=**300**, *maximum*=**600**]: The interpolation limit (in seconds) that represents the maximum size of a gap you want to interpolate.
 

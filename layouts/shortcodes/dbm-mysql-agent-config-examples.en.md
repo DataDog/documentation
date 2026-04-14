@@ -1,6 +1,7 @@
 ### One agent connecting to multiple hosts
 It is common to configure a single Agent host to connect to multiple remote database instances (see [Agent installation architectures](/database_monitoring/architecture/) for DBM). To connect to multiple hosts, create an entry for each host in the MySQL integration config.
-In these cases, Datadog recommends limiting the number of instances per Agent to a maximum of 10 database instances to guarantee reliable performance.
+
+<div class="alert alert-info">Datadog recommends using one Agent to monitor no more than 30 database instances.<br /><br />Benchmarks show that one Agent running on a t4g.medium EC2 instance (2 CPUs and 4GB of RAM) can successfully monitor 30 RDS db.t3.medium instances (2 CPUs and 4GB of RAM).</div>
 
 ```yaml
 init_config:
@@ -66,7 +67,22 @@ instances:
 
 ### Collecting schemas
 
-Starting from Agent v7.65, the Datadog Agent can collect schema information from MySQL databases. To enable this feature, use the `schemas_collection` option.
+<div class="alert alert-danger">Datadog Agent v7.65+ is required for MySQL schema collection.</div>
+
+To enable this feature, use the `collect_schemas` option. See the sample [mysql.d/conf.yaml](https://github.com/DataDog/integrations-core/blob/master/mysql/datadog_checks/mysql/data/conf.yaml.example) for more details.
+
+```yaml
+init_config:
+instances:
+  - dbm: true
+    host: localhost
+    port: 3306
+    username: datadog
+    password: 'ENC[datadog_user_database_password]'
+    collect_schemas:
+      enabled: true
+```
+**Note**: For Agent v7.68 and below, use `schemas_collection` instead of `collect_schemas`.
 
 **Note**: To collect schemas for a table, MySQL requires that the Datadog Agent has SELECT access for it. This is a [MySQL-enforced restriction](https://dev.mysql.com/doc/refman/8.4/en/information-schema-introduction.html#information-schema-privileges). Without SELECT access, the table will not appear in metadata queries.
 

@@ -47,7 +47,7 @@ Une fois cette opération effectuée, exportez vos logs Google Cloud TPU depui
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "google_cloud_tpu" >}}
+{{< get-metrics-from-git "google-cloud-tpu" >}}
 
 
 ### Événements

@@ -13,7 +13,7 @@ assets:
     metrics:
       check:
       - aws.elb.request_count
-      metadata_path: metadata.csv
+      metadata_path: assets/metrics/metric-spec.yaml
       prefix: aws.
     service_checks:
       metadata_path: assets/service_checks.json
@@ -87,7 +87,7 @@ ELB 또는 ALB에서 로깅을 먼저 활성화하고 로그를 수집합니다.
 
 ![Amazon ELB 로그 활성화][6]
 
-간격을 5분으로 설정하고 S3 버킷과 접두사를 정의합니다. [S3 이벤트 알림 구성을 명확하지 않게 정의][7]하는 것을 예방하려면 다른 로드 밸런서의 로그 위치와 중복되지 않는 **고유한 위치**를 사용하세요. 여러 로드 밸런서가 한 버킷에서 로깅을 할 경우에는 `my-bucket-for-elb-logs/my-elb-name`과 같이 **고유한 접두사**를 사용하여 다른 위치에 로그가 저장되도록 합니다.
+간격을 5분으로 설정하고 S3 버킷과 접두사를 정의하세요. [모호하게 정의된 S3 이벤트 알림 구성][7]을 방지하려면 다른 로드 밸런서의 로그 위치와 겹치지 않는 **고유 위치**를 사용해야 합니다. 여러 로드 밸런서가 동일한 버킷에 로깅하는 경우, 로그가 별도의 위치에 저장되도록 `my-bucket-for-elb-logs/my-elb-name`과 같은 **고유 접두사**를 사용해야 합니다.
 
 ![Amazon ELB 로그 구성][8]
 
@@ -102,7 +102,7 @@ AWS 서비스 로그 수집에 대한 자세한 정보는 [Datadog Lambda 함수
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "amazon_elb" >}}
+{{< get-metrics-from-git "amazon-elb" >}}
 
 
 ### 이벤트
@@ -130,5 +130,5 @@ Amazon Elastic Load Balancing 통합은 서비스 점검을 포함하지 않습�
 [11]: https://docs.datadoghq.com/ko/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-s3-buckets
 [12]: https://app.datadoghq.com/logs
 [13]: https://docs.datadoghq.com/ko/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/
-[14]: https://github.com/DataDog/integrations-internal-core/blob/main/amazon_elb/metadata.csv
+[14]: https://github.com/DataDog/integrations-internal-core/blob/main/amazon_elb/assets/metrics/metric-spec.yaml
 [15]: https://docs.datadoghq.com/ko/help/

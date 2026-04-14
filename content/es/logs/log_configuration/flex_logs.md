@@ -58,7 +58,7 @@ Utiliza el espectro de tipos de logs que se muestra en la siguiente imagen para 
 
 El cálculo es la capacidad de consulta para ejecutar consultas para Flex Logs. Se utiliza cuando se consultan logs en el nivel Flex Logs. No se utiliza para la ingesta ni cuando sólo se realizan búsquedas en logs de Standard Indexing. Los niveles de cálculo disponibles son:
 
-<div class="alert alert-warning">Los tamaños de cálculos disponibles para US3, US5, AP1, US1-FED son Starter, XS y S.</div>
+<div class="alert alert-danger">Los tamaños de cálculos disponibles para US3, US5, AP1, US1-FED son Starter, XS y S.</div>
 
 - Starter
 - Extra pequeño (XS)

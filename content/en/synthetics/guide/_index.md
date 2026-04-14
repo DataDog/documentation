@@ -16,12 +16,17 @@ cascade:
     {{< nextlink href="synthetics/guide/identify_synthetics_bots/" >}}Identify Synthetic bots{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/clone-test" >}}Clone your Synthetic tests{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/otp-email-synthetics-test" >}}Extract a one-time passcode from an email body using Synthetic Browser Tests{{< /nextlink >}}
+    {{< nextlink href="synthetics/guide/version_history" >}}Version History for Synthetic Monitoring{{< /nextlink >}}
+    {{< nextlink href="synthetics/guide/kerberos-authentication/" >}}Kerberos authentication for Synthetic Monitoring{{< /nextlink >}}
+     {{< nextlink href="synthetics/guide/step-duration/" >}}How step duration is determined in Browser Tests{{< /nextlink >}}
+    {{< nextlink href="synthetics/guide/export-tests-to-terraform" >}}Export Synthetic tests to Terraform{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Alerting:" >}}
-    {{< nextlink href="synthetics/guide/synthetic-test-monitors/" >}}Use monitors in Synthetic tests{{< /nextlink >}}
+    {{< nextlink href="monitors/types/synthetic_monitoring/" >}}Use Synthetic Test Monitors{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/synthetic-test-retries-monitor-status/" >}}Understand how Synthetic test retries determine monitor status{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/uptime-percentage-widget" >}}Monitor website uptime with SLOs{{< /nextlink >}}
+    {{< nextlink href="synthetics/guide/how-synthetics-monitors-trigger-alerts" >}}Understand how Synthetic monitors trigger an alert{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="API:" >}}
@@ -33,6 +38,7 @@ cascade:
     {{< nextlink href="synthetics/guide/synthetic-tests-caching" >}}Avoid cache issues in Synthetic tests{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/monitor-https-redirection" >}}Monitor your HTTP requests are redirected into HTTPS{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/reusing-browser-test-journeys/" >}}Reuse browser tests journeys across your test suite{{< /nextlink >}}
+    {{< nextlink href="synthetics/guide/conditional-logic-subtests/" >}}Implement conditional logic in Synthetic tests{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/custom-javascript-assertion/" >}}Use custom JavaScript assertions in browser tests{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/email-validation/" >}}Use email validation in browser tests{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/testing-file-upload-and-download/" >}}Upload and download test files{{< /nextlink >}}
@@ -41,13 +47,13 @@ cascade:
     {{< nextlink href="synthetics/guide/manually-adding-chrome-extension/" >}}Manually add the Chrome extension for your browser tests{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/browser-tests-using-shadow-dom/" >}}Run tests on applications using a shadow DOM{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/http-tests-with-hmac/" >}}Create HTTP tests with hash-based message authentication code (HMAC) authentication{{< /nextlink >}}
+    {{< nextlink href="synthetics/guide/canvas-content-javascript/" >}}Asserting canvas content with JavaScript{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Datadog Integrations:" >}}
     {{< nextlink href="logs/guide/ease-troubleshooting-with-cross-product-correlation" >}}Ease troubleshooting with cross-product correlation{{< /nextlink >}}
-    {{< nextlink href="synthetics/guide/explore-rum-through-synthetics/" >}}Explore a preview of RUM features in Synthetics{{< /nextlink >}}
+    {{< nextlink href="synthetics/guide/explore-rum-through-synthetics/" >}}Explore a preview of RUM features in Synthetic Monitoring{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/rum-to-synthetics" >}}Generate Synthetic browser tests from RUM Session Replays{{< /nextlink >}}
-
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Metrics:" >}}

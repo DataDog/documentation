@@ -1,10 +1,13 @@
 ---
 title: Product Analytics
-description: Product Analytics help you understand your application usage at a glance.
+description: Product Analytics helps you understand your application usage at a glance.
 aliases:
 - /real_user_monitoring/product_analytics
 - /real_user_monitoring/guide/rum-for-product-analytics
 further_reading:
+- link: "https://www.datadoghq.com/blog/rum-product-analytics-bridging-teams"
+  tag: "Blog"
+  text: "From performance to impact: Bridging frontend teams through shared context"
 - link: "https://www.datadoghq.com/blog/datadog-product-analytics/"
   tag: "Blog"
   text: "Make data-driven design decisions with Product Analytics"
@@ -15,63 +18,153 @@ further_reading:
 
 ## Overview
 
-{{< img src="product_analytics/overview-1.png" alt="Landing page of Product Analytics.">}}
+Product Analytics helps you gain insight into user behavior and make data-driven decisions. It supports the following use cases in your application:
 
-Product Analytics helps you gain insight into user behavior and make data-driven decisions. It can help solve the following types of use cases in your application:
+- [Understand product adoption](#understand-product-adoption)
+- [Track conversion rates and their evolution over time](#track-conversion-rates-and-their-evolution-over-time)
+- [Track key user behavior patterns](#track-key-user-behavior-patterns)
+- [Visualize user interactions](#visualize-user-interactions)
 
-- Understand product adoption
-- Track conversion rates and their evolution over time
-- Track key user behavior patterns
-- Visualize the most and least interacted with buttons on a given page
+## Instrument your application
 
-## Getting started
+Product Analytics collects client-side user activity data through the Datadog SDK. You can also send server-side events through the API to supplement your client-side data.
 
-To start using Product Analytics, enable it for each application where you want to monitor user behavior:
+To get started, [add the Datadog SDK](#track-client-side-events-sdk) to your application and [enable Product Analytics](#enable-product-analytics) in Datadog. You can also [send server-side events through the API](#track-server-side-events-api).
 
-1. Select the application you want to monitor from the [Application Management][9] list.
+<div class="alert alert-info">Product Analytics uses the same SDKs and configuration as <a href="/real_user_monitoring/#what-is-real-user-monitoring">Real User Monitoring (RUM)</a>, and retains data for 15 months by default. See <a href="/data_security/data_retention_periods/">Datadog's data retention periods</a> for more information.</div>
+
+### Track client-side events (SDK)
+
+Collect events, such as pageviews or button clicks, from your users' devices, and send them to Datadog.
+
+Add the Datadog SDK to your application to start collecting user activity data. If you have already configured RUM, you do not need to instrument your application again for Product Analytics.
+
+If you do not have an application set up in Datadog yet, follow the instructions for your platform:
+
+- [Browser][14]
+- [iOS][15]
+- [Android][16]
+
+To set up your application with a coding assistant, see [Agentic onboarding][17].
+
+### Track server-side events (API)
+
+After you set up client-side collection, you can use the [Product Analytics API][21] to send custom events from your server, such as completed checkouts or processed payments.
+
+<div class="alert alert-warning">Datadog bills server-side events separately. See the <a href="https://www.datadoghq.com/pricing/?product=product-analytics#products">pricing page</a> for details, and contact your Customer Success Manager with additional questions.</div>
+
+## Enable Product Analytics
+
+For each application you want to monitor user behavior for, enable Product Analytics:
+
+1. In Datadog, go to **Digital Experience** > **Real User Monitoring** > [**Manage Applications**][9]. In the list of applications under **Active**, select the application you want to monitor.
 2. Under PRODUCT SETTINGS, click **Product Analytics**.
 3. Click the **Enable** button.
 
 {{< img src="product_analytics/enable-product-analytics.png" alt="Enable Product Analytics from the Application Management page.">}}
 
-By default, Product Analytics data is retained for 15 months. Learn more about [Privacy at Datadog][1].
+## Understand your data
+The Datadog SDK automatically collects three levels of client-side user data: Sessions, Views, and Actions. For a full breakdown of RUM event types, see [Understanding the RUM Event Hierarchy][19]. After you set up the SDK, you can also send server-side events through the [Product Analytics API][21].
 
-## Measure user retention
+**Sessions**
+: A session is a single user's complete journey through your application, from the moment they open it to when they leave.
 
-User retention is a metric for measuring the percentage of active users who continue to use your product, app, or service over a set period of time. Use [Retention Analysis][2] to measure how a group of users engage with specific features over time to understand where drop-offs occur.
+**Views**
+: A view represents each page or screen a user visits within a session.
 
-{{< img src="real_user_monitoring/retention_analysis/differing-events-retention-graph.png" alt="Retention graph for differing events" style="width:90%;" >}}
+**Actions**
+: An action is something a user does on a page, such as a click, tap, or scroll. Actions are automatically collected by the RUM SDK. When configuring features like [Funnels][4] and [Segments][6], you can select specific Actions as steps or filters. To see which Actions are available, open the [RUM Explorer][20] and filter by **Actions**.
 
-## Map user journeys
+**Server-side events**
+: A server-side event is a custom event sent through the [Product Analytics API][21], such as a completed checkout or processed payment. In the event picker, select **Server Events** to scope your analysis to server-side data.
 
-[User journeys][3] allow you to measure and report on the impact of every feature change - from backend bottlenecks to user frustrations - so that they can be appropriately optimized. Identify the ideal path for feature adoption and user conversion.
+## Navigate the Product Analytics UI
+Each Product Analytics feature provides context about your users' journeys.
 
-{{< img src="/product_analytics/journeys/pa-funnel-1.png" alt="Understand end-to-end conversions with Funnel Analysis.">}}
+### Understand product adoption
+The [Home][3] page gives you a bird's-eye view of your users' activity and your product's adoption. This is where you most often land when accessing Product Analytics.
 
-See different visualizations of the user experience when interacting with your application:
+{{< img src="/product_analytics/pana_home_page.png" alt="Understand end-to-end conversions with Funnel Analysis.">}}
 
-- **[Funnel][4]**: Measure the **conversion rate** and **time to convert** from end-to-end of a given workflow. 
-- **[Pathways][5]**: Explore aggregated workflows in a single visualization to aid in answering questions about user journeys. In addition, track conversion rates over time and compare them against specific attributes that might have affected conversion rates, such as browser type or geography.
+By default, this page displays the `active users`, `page views`, and `average time spent by user` charts, but you can add additional charts or a dashboard. The Home page also includes the following out-of-the-box sub-sections that provide additional context about your product's users and usage:
 
-## Create user segments
+[Users](https://app.datadoghq.com/product-analytics/user-trends)
+: At a glance, see who is using your product.
 
-Segments are users grouped by specific characteristics or behaviors. [Segmentation][6] in Datadog allows you to analyze and understand specific groups or segments of your user base.
+[App & Devices](https://app.datadoghq.com/product-analytics/app-and-devices)
+: Visualize the split between desktop and mobile usage, spot which versions are in use, and identify what can be deprecated.
 
-## Visualize user interactions with heatmaps
+[Engagement](https://app.datadoghq.com/product-analytics/engagement-and-features)
+: Understand how users are engaging with your product, answering questions such as how long users are staying on pages, and what their top actions are. 
 
-[Heatmaps][7] visualize the most interacted with elements on a page to see where hot spots of activity are, along with analyzing scroll depth to see how far users scrolled down a given page. You can view every swipe, scroll, and click with a pixel-perfect reproduction of exactly what users went through on both browser and mobile applications to identify high- or low-performing content.
+[Traffic](https://app.datadoghq.com/product-analytics/traffic-and-acquisition)
+: See bounce rates, top traffic sources, and where your growth is really coming from.
 
-{{< img src="real_user_monitoring/heatmaps/heatmap_v2.png" alt="An overview of the heatmap functionality." style="width:100%;">}}
+[Performance](https://app.datadoghq.com/product-analytics/performance)
+: View the most common errors and frustrations, and see exactly which views they impact.
+
+<br>
+
+
+### Track conversion rates and their evolution over time
+The Product Analytics charts help you visualize your users' journeys as they use your product.
+
+{{< img src="/product_analytics/pana_charts_video.mp4" alt="visualize your users' journey with charts." video="true">}}
+
+Each chart type provides a different view into the user's journey:
+
+[Pathways][5]
+: Visualize all user journeys across your application to analyze the critical path.
+
+[Funnel][4]
+: Track conversion rates across key workflows to identify and address any bottlenecks in end-to-end user journeys. <br> For example, you can see if customers drop off at a certain point due to poor website performance, or measure how adding new steps to a workflow impacts drop-off rate.
+
+[Retention][2]
+: Measure how often users are successfully returning to a page or action to gain insights into overall user satisfaction.
+
+[Analytics][13]
+: Aggregates usage data to show how users engage with your product.
+
+<br>
+
+### Track key user behavior patterns
+Use [Users & Segments][6] to group your users based on shared characteristics. For example, if you notice users are adding items to their cart but not checking out, create a segment for those users and send them a nudge email to complete their purchase.
+
+{{< img src="/product_analytics/segmentation/userprofiles_pana-ga.png" alt="See individual profiles of users and create a segment from these profiles.">}}
+
+### Visualize user interactions
+Use the following features to inform your product change decisions, such as changes to your application UI, by seeing how users navigate your pages, whether there is a path they take more than others, or where actions and flows could be smoother.
+
+{{< img src="/product_analytics/pana_session_replay_page.png" alt="Capture and replay your users' browsing experience to inform your product design decisions.">}}
+
+[Session replay][11] 
+: Capture and replay your users' web browsing or mobile app experience.<br><br>This is beneficial for error identification, reproduction, and resolution, and provides insights into your application's usage patterns and design pitfalls.
+
+[Heatmaps][10]
+: Visualize your users' interactions overlaid on Session Replay data. Product Analytics has three types of heatmaps: Click maps, Top elements, and Scroll maps. <br><br> Use heatmaps to review complex data at a glance, gaining insights into optimizing your user experience.
+
+[Playlist][12]
+: Create a playlist of Session Replays to organize them by any patterns you notice. Learn more about [Session Replay Playlists][12].
+<br>
+
 
 ## Further reading
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://www.datadoghq.com/privacy/
-[2]: /product_analytics/user_retention
-[3]: /product_analytics/journeys
-[4]: /product_analytics/journeys/funnel_analysis
-[5]: /product_analytics/journeys/pathways
+[2]: /product_analytics/charts/retention_analysis
+[3]: https://app.datadoghq.com/product-analytics
+[4]: /product_analytics/charts/funnel_analysis
+[5]: /product_analytics/charts/pathways
 [6]: /product_analytics/segmentation/
-[7]: /product_analytics/heatmaps
-[8]: https://app.datadoghq.com/rum/
 [9]: https://app.datadoghq.com/rum/list
+[10]: /session_replay/heatmaps
+[11]: /session_replay/
+[12]: /session_replay/playlists
+[13]: /product_analytics/charts/analytics_explorer
+[14]: /real_user_monitoring/application_monitoring/browser
+[15]: /real_user_monitoring/application_monitoring/ios
+[16]: /real_user_monitoring/application_monitoring/android
+[17]: /product_analytics/agentic_onboarding
+[19]: /real_user_monitoring/guide/understanding-the-rum-event-hierarchy
+[20]: https://app.datadoghq.com/rum/sessions?query=%40type%3Aaction
+[21]: /api/latest/product-analytics/#send-server-side-events

@@ -3,10 +3,10 @@ further_reading:
 - link: /security/default_rules/#cat-cloud-siem-log-detection
   tag: Documentación
   text: Explorar las reglas de detección por defecto de Cloud SIEM
-- link: /security/cloud_siem/investigate_security_signals
+- link: /security/cloud_siem/triage_and_investigate/investigate_security_signals
   tag: Documentación
   text: Más información sobre Security Signals Explorer
-- link: /security/cloud_siem/log_detection_rules/
+- link: /security/cloud_siem/detect_and_monitor/custom_detection_rules/
   tag: Documentación
   text: Crear nuevas reglas de detección
 - link: /integrations/google_cloud_platform/#log-collection
@@ -32,7 +32,7 @@ Utilice [Google Cloud Dataflow][2] y la [plantilla de Datadog][3] para reenviar 
 1. [Crear y ejecutar el trabajo de Dataflow](#create-and-run-the-dataflow-job)
 1. [Usar Cloud SIEM para clasificar señales de seguridad](#use-cloud-siem-to-triage-security-signals)
 
-<div class="alert alert-danger">
+<div class="alert alert-warning">
 
 <a href="https://docs.datadoghq.com/logs/guide/collect-google-cloud-logs-with-push/" target="_blank">La recopilación de logs de Google Cloud con una suscripción Push Pub/Sub</a> está en proceso de ser obsoleta por las siguientes razones:
 
@@ -111,7 +111,7 @@ El comportamiento predeterminado para los trabajadores de pipeline de Dataflow e
     | [Publicador de Pub/Sub][16] | `roles/pubsub.publisher` | Permitir que esta cuenta de servicio publique mensajes fallidos en una suscripción separada, lo que permite analizar o reenviar logs
     | [Secret Manager Secret Accessor][17] | `roles/secretmanager.secretAccessor` | Permitir que esta cuenta de servicio acceda a la clave de API de Datadog en Secret Manager.
     | [Storage Object Admin][18] | `roles/storage.objectAdmin` | Permitir que esta cuenta de servicio lea y escriba en el bucket de Cloud Storage especificado para los archivos de preparación |
-7. **Continue** (Continuar).
+7. Haz clic en **Continue** (Continuar).
 8. Haz clic en **Done** (Listo).
 
 ##  Crear un sink de log para publicar logs a Pub/Sub
@@ -140,19 +140,19 @@ El comportamiento predeterminado para los trabajadores de pipeline de Dataflow e
 1. Selecciona un endpoint regional.
 1. En el menú desplegable **Dataflow template** (Plantilla de Dataflow), selecciona **Pub/Sub to Datadog** (Pub/Sub a Datadog).
 1. En la sección **Required Parameters** (Parámetros requeridos):
-      a. En el menú desplegable **Pub/Sub input subscription** (Suscripción de entrada Pub/Sub), selecciona la suscripción predeterminada que se creó anteriormente al crear un nuevo [sistema Pub/Sub](#create-a-google-cloud-publishsubscription-pubsub-system).  
-      b. Introduce lo siguiente en el campo **Datadog Logs API URL** (URL de la API de logs de Datadog):
+   1. En el menú desplegable **Pub/Sub input subscription** (Suscripción de entrada Pub/Sub), selecciona la suscripción predeterminada que se creó anteriormente al crear un nuevo [sistema Pub/Sub](#create-a-google-cloud-publishsubscription-pubsub-system).
+   1. Introduce lo siguiente en el campo **Datadog Logs API URL** (URL de la API de logs de Datadog):
       ```
       https://{{< region-param key="http_endpoint" code="true" >}}
       ```
       **Nota**: Asegúrate de que el selector de sitio de Datadog situado a la derecha de esta página de documentación está configurado en tu sitio de Datadog antes de copiar la URL anterior.  
-      c. En el campo **Output deadletter Pub/Sub topic**, selecciona el [tema adicional](#create-an-additional-topic-and-subscription-for-outputdeadlettertopic) que creaste anteriormente para recibir mensajes rechazados por la API de Datadog.
-      d. Especifica una ruta para los archivos temporales en tu bucket de almacenamiento en el campo **Temporary location** (Localización temporal).
-1. Si anteriormente [creaste un secreto en Secret Manager](#create-a-secret-in-secret-manager) para tu valor de clave de API de Datadog: 
-    a. Haz clic en **Optional Parameters** (Parámetros opcionales) para ver los campos adicionales.  
-    b. Introduce el nombre del recurso del secreto en el campo **Google Cloud Secret Manager ID**.
-        Para obtener el nombre del recurso, ve a tu secreto en [Secret Manager][8]. Haz clic en tu secreto. Haz clic en los tres puntos bajo **Action** (Acción) y selecciona **Copy resource name**(Copiar nombre de recurso).
-    c. Introduce `SECRET_MANAGER` en el campo **Source of the API key passed** (Fuente de la clave de API pasada).
+   1. En el campo **Output deadletter Pub/Sub topic**, selecciona el [tema adicional](#create-an-additional-topic-and-subscription-for-outputdeadlettertopic) que creaste anteriormente para recibir mensajes rechazados por la API de Datadog.
+   1. Especifica una ruta para los archivos temporales en tu bucket de almacenamiento en el campo **Temporary location** (Ubicación temporal).
+1. Si anteriormente [creaste un secreto en Secret Manager](#create-a-secret-in-secret-manager) para tu valor de clave de API de Datadog:
+   1. Haz clic en **Optional Parameters** (Parámetros opcionales) para ver los campos adicionales.  
+   1. Introduce el nombre del recurso del secreto en el campo **Google Cloud Secret Manager ID**.<br />
+      Para obtener el nombre del recurso, ve a tu secreto en [Secret Manager][8]. Haz clic en tu secreto. Haz clic en los tres puntos bajo **Action** (Acción) y selecciona **Copy resource name**(Copiar nombre de recurso).
+   1. Introduce `SECRET_MANAGER` en el campo **Source of the API key passed** (Fuente de la clave de API pasada).
 1. Si no utilizas un secreto para el valor de tu clave de API de Datadog:
     - **Recomendado**:
         - Configura `Source of API key passed` en `KMS`.
@@ -169,7 +169,7 @@ Consulta nuevos eventos de registro entregados al tema Pub/Sub en la nube en el 
 
 Cloud SIEM aplica reglas de detección predefinidas a todos los logs procesados, incluidos los logs de auditoría de Google Cloud que acabas de configurar. Cuando se detecta una amenaza con una regla de detección, se genera una señal de seguridad que se puede ver en el Security Signals Explorer.
 
-- Ve al Cloud SIEM Signals Explorer para ver y clasificar las amenazas. Consulta Security Signals Explorer para obtener más información.
+- Ve al [Cloud SIEM Signals Explorer][23] para ver y clasificar las amenazas. Consulta Security Signals Explorer para obtener más información.
 - También puedes utilizar el [dashboard de log de auditoría de Google Cloud][24] para investigar actividades anómalas.
 - Consulta las [reglas de detección predefinidas][25] que se aplican a tus logs.
 - Crea [nuevas reglas][26] para detectar amenazas que coincidan con tu caso de uso específico.
@@ -185,7 +185,7 @@ Cloud SIEM aplica reglas de detección predefinidas a todos los logs procesados,
 [4]: https://console.cloud.google.com/iam-admin/audit
 [5]: https://console.cloud.google.com/cloudpubsub/topic
 [6]: https://cloud.google.com/pubsub/quotas#quotas
-[7]: /es/integrations/google_cloud_platform/#monitor-the-cloud-pubsub-log-forwarding
+[7]: /es/logs/guide/google-cloud-log-forwarding/#monitor-the-cloud-pubsub-log-forwarding
 [8]: https://console.cloud.google.com/security/secret-manager
 [9]: https://app.datadoghq.com/organization-settings/api-keys
 [10]: https://cloud.google.com/compute/docs/access/service-accounts#default_service_account
@@ -201,7 +201,7 @@ Cloud SIEM aplica reglas de detección predefinidas a todos los logs procesados,
 [20]: https://console.cloud.google.com/dataflow/
 [21]: https://cloud.google.com/dataflow/docs/guides/templates/provided/pubsub-to-datadog#template-parameters
 [22]: https://app.datadoghq.com/logs/
-[23]: https://app.datadoghq.com/security?query=%40workflow.rule.type%3A%28%22Log%20Detection%22%29%20&column=time&order=desc&product=siem
+[23]: https://app.datadoghq.com/security/siem/signals?query=%40workflow.rule.type%3A%28%22Log%20Detection%22%29%20&column=time&order=desc
 [24]: https://app.datadoghq.com/dash/integration/30509/google-cloud-audit-log
 [25]: /es/security/default_rules/#cat-cloud-siem
 [26]: /es/security/detection_rules/

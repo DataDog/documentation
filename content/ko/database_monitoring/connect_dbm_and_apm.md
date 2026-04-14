@@ -74,7 +74,7 @@ title: 데이터베이스 모니터링과 트레이스 상호 연결
 
 \*\* 자바/.NET에 대한 전체 모드 SQL Server:
 
-<div class="alert alert-warning">해당 애플리케이션이 계측을 위해 <code>context_info</code>를 사용하면 APM 트레이서가 이를 덮어씁니다.</div>
+<div class="alert alert-danger">해당 애플리케이션이 계측을 위해 <code>context_info</code>를 사용하면 APM 트레이서가 이를 덮어씁니다.</div>
 
   - 클라이언트가 쿼리를 발행하면 계측에서 `SET context_info` 명령을 실행하며, 데이터베이스를 추가 왕복합니다.
   - 요구 사항:
@@ -320,7 +320,7 @@ cursor.executemany("select %s", (("foo",), ("bar",)))
 
 {{% tab ".NET" %}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 이 기능이 .NET 서비스에 대해 활성화되려면 자동 계측이 필요합니다.
 </div>
 
@@ -340,7 +340,7 @@ cursor.executemany("select %s", (("foo",), ("bar",)))
 
 {{% tab "PHP" %}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 이 기능을 사용하려면 PHP 서비스에서 트레이서 기능이 활성화되어 있어야 합니다.
 </div>
 

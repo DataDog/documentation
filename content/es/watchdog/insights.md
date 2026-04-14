@@ -203,7 +203,7 @@ Encuentra las bases de datos afectadas por uno o varios outliers utilizando el c
 
 {{< img src="watchdog/side_panel_dbm_insights.png" alt="Carrusel para filtrar bases de datos con información" style="width:100%;">}}
 
-A continuación, se establece un recubrimiento de las bases de datos, con píldoras rosas que resaltan las distintas informaciones y ofrecen más información sobre lo ocurrido. 
+A continuación, se establece un recubrimiento de las bases de datos, con píldoras rosas que resaltan las distintas informaciones y ofrecen más información sobre lo ocurrido.
 
 {{< img src="watchdog/overlay_database_insight.png" alt="Recubrimiento de información de Watchdog en bases de datos para resaltar lo que ocurre" style="width:100%;">}}
 
@@ -289,7 +289,7 @@ Para el explorador de Kubernetes, el carrusel de Watchdog Insights refleja [toda
 [3]: /es/tracing/services/service_page/
 [4]: /es/tracing/services/resource_page/
 [5]: https://app.datadoghq.com/databases/list
-[6]: https://app.datadoghq.com/profiling/search
+[6]: https://app.datadoghq.com/profiling/explorer
 [7]: https://app.datadoghq.com/process
 [8]: https://app.datadoghq.com/functions
 [9]: https://app.datadoghq.com/orchestration/overview/pod

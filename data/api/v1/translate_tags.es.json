@@ -25,7 +25,7 @@
   },
   "downtimes": {
     "name": "Tiempos de inactividad",
-    "description": "El [tiempo de inactividad](https://docs.datadoghq.com/monitors/notify/downtimes) te proporciona\nun mayor control sobre las notificaciones de monitores, ya que te permite excluir globalmente\ncontextos de alerta. La configuración de tiempos de inactividad, que pueden programarse con horas de inicio y \nhoras de fin, evita todas las alertas relacionadas con etiquetas (tags) de Datadog."
+    "description": "Los [tiempos de inactividad](https://docs.datadoghq.com/monitors/notify/downtimes) te ofrecen\nun mayor control sobre las notificaciones de monitor, ya que te permiten excluir globalmente\ncontextos de alerta. Los ajustes de tiempos de inactividad, que pueden programarse con horas de inicio y\nhoras de finalización, evitan todas las alertas relacionadas con etiquetas (tags) de Datadog especificadas.\n\n**Nota:** Los comandos `curl` requieren [codificación url](https://curl.se/docs/url-syntax.html)."
   },
   "embeddable-graphs": {
     "name": "Gráficos integrables",
@@ -33,7 +33,7 @@
   },
   "events": {
     "name": "Eventos",
-    "description": "La API de gestión de eventos permite publicar mediante programación eventos en el Events Explorer y recuperar eventos desde el Events Explorer. Consulta la página de [Gestión de eventos](https://docs.datadoghq.com/service_management/events/) para obtener más información.\n\n**Actualización de la `aggregation_key` de los eventos de monitor de Datadog a partir del 1 de marzo de 2025:** La `aggregation_key` de los eventos de monitor de Datadog es única para cada ID de monitor. A partir del 1 de marzo, esta clave también incluirá el Grupo de monitores, por lo que será única por *ID de monitor y Grupo de monitor*. Si utilizas la `aggregation_key` de eventos de monitor en las consultas de dashboard o en la API de eventos, deberás migrar para utilizar `@monitor.id`. Ponte en contacto con el [soporte](https://www.datadoghq.com/support/) si tienes alguna pregunta."
+    "description": "La API de Event Management permite publicar mediante programación eventos en el Events Explorer y recuperar eventos desde el Events Explorer. Consulta la página de [Event Management](https://docs.datadoghq.com/service_management/events/) para obtener más información.\n\n**Actualización de la `aggregation_key` de los eventos de monitor de Datadog a partir del 1 de marzo de 2025:** La `aggregation_key` de los eventos de monitor de Datadog es única para cada ID de monitor. A partir del 1 de marzo, esta clave también incluirá el Grupo de monitores, por lo que será única por *ID de monitor y Grupo de monitor*. Si utilizas la `aggregation_key` de eventos de monitor en las consultas de dashboard o en la API de eventos, deberás migrar para utilizar `@monitor.id`. Ponte en contacto con el [soporte](https://www.datadoghq.com/support/) si tienes alguna pregunta."
   },
   "gcp-integration": {
     "name": "Integración GCP",
@@ -48,12 +48,12 @@
     "description": "Obtén una lista de prefijos de IP pertenecientes a Datadog."
   },
   "key-management": {
-    "name": "Elimina una clave de aplicación que pertenece al usuario actual.",
-    "description": "Gestiona tus claves de API y de aplicación de Datadog. Se necesita una clave de API y\nuna clave de aplicación para que un usuario con los permisos necesarios interactúe\ncon estos endpoints. Puedes consultar la lista completa de claves de API y de aplicación\nen la [página de tu API Datadog](https://app.datadoghq.com/account/settings#api)."
+    "name": "Key Management",
+    "description": "Gestiona tus API y tus claves de aplicación Datadog. Necesitas una clave de API y una clave de aplicación para que un usuario con los permisos necesarios interactúe con estos endpoints.\n\nConsulta las siguientes páginas para ver y gestionar tus claves:\n\n- [Claves de API](https://app.datadoghq.com/organization-settings/api-keys)\n- [Claves de aplicación](https://app.datadoghq.com/personal-settings/application-keys)"
   },
   "logs": {
     "name": "Logs",
-    "description": "Busca tus logs y envíalos a tu plataforma Datadog a través de HTTP. Para obtener más información, consulta la [página Gestión de logs](https://docs.datadoghq.com/logs/)."
+    "description": "Busca tus logs y envíalos a tu plataforma Datadog a través de HTTP. Para obtener más información, consulta la [página de Log Management](https://docs.datadoghq.com/logs/)."
   },
   "logs-indexes": {
     "name": "Índices de logs",
@@ -69,7 +69,7 @@
   },
   "monitors": {
     "name": "Monitores",
-    "description": "Los [monitores](https://docs.datadoghq.com/monitors) te permiten observar una métrica o un check que te interese y\nnotificar a tu equipo cuando se supera un umbral definido.\n\nPara obtener más información, consulta la [creación de monitores](https://docs.datadoghq.com/monitors/create/types/)."
+    "description": "Los [monitores](https://docs.datadoghq.com/monitors) te permiten vigilar una métrica o un check que te interese y\nnotificar a tu equipo cuando se supera un umbral definido.\n\nPara obtener más información, consulta [Creación de monitores](https://docs.datadoghq.com/monitors/create/types/).\n\n**Nota:** Los comandos `curl` requieren [codificación url](https://curl.se/docs/url-syntax.html)."
   },
   "notebooks": {
     "name": "Notebooks",
@@ -85,10 +85,10 @@
   },
   "screenboards": {
     "name": "Screenboards",
-    "description": "Este endpoint está obsoleto. Utiliza el [nuevo endpoint del dashboard](https://docs.datadoghq.com/api/#dashboards)."
+    "description": "Este endpoint está obsoleto. Utiliza el [nuevo endpoint de dashboard](https://docs.datadoghq.com/api/latest/dashboards/) en su lugar."
   },
   "security-monitoring": {
-    "name": "Ver una lista de señales de seguridad",
+    "name": "Security Monitoring",
     "description": "Crea y gestiona tus reglas de seguridad, señales, filtros y mucho más. Para obtener más información, consulta la [página Seguridad de Datadog](https://docs.datadoghq.com/security/)."
   },
   "service-checks": {
@@ -117,7 +117,7 @@
   },
   "synthetics": {
     "name": "Synthetics",
-    "description": "La monitorización Synthetic Datadog utiliza solicitudes de usuario simuladas y la renderización del navegador para ayudarte a garantizar el tiempo de actividad,\nidentificar problemas regionales y realizar un seguimiento del rendimiento de tu aplicación. Los tests Synthetics vienen\nen dos formatos diferentes, [tests de API]((https://docs.datadoghq.com/synthetics/api_tests/?tab=httptest)\ny [tests de navegador](https://docs.datadoghq.com/synthetics/browser_tests). Puedes utilizar la API Datadog para\ngestionar ambos tipos de tests mediante programación.\n\nPara obtener más información, consulta la [documentación de la monitorización Synthetic](https://docs.datadoghq.com/synthetics/)."
+    "description": "Datadog Synthetic Monitoring utiliza solicitudes de usuario simuladas y la representación del navegador para ayudarte a garantizar el tiempo de actividad,\nidentificar problemas regionales y realizar un seguimiento del rendimiento de tu aplicación. Los tests Synthetics vienen\nen dos formatos diferentes, [tests de API]((https://docs.datadoghq.com/synthetics/api_tests/?tab=httptest)\ny [tests de navegador](https://docs.datadoghq.com/synthetics/browser_tests). Puedes utilizar la API Datadog para\ngestionar ambos tipos de tests mediante programación.\n\nPara obtener más información, consulta la [documentación de Synthetic Monitoring](https://docs.datadoghq.com/synthetics/)."
   },
   "tags": {
     "name": "Etiquetas",
@@ -125,7 +125,7 @@
   },
   "timeboards": {
     "name": "Timeboards",
-    "description": "Este endpoint está obsoleto. Utiliza el [nuevo endpoint del dashboard](https://docs.datadoghq.com/api/#dashboards)."
+    "description": "Este endpoint está obsoleto. Utiliza el [nuevo endpoint de dashboard](https://docs.datadoghq.com/api/latest/dashboards/) en su lugar."
   },
   "usage-metering": {
     "name": "Medición del uso",

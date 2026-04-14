@@ -1,4 +1,26 @@
 ---
+app_id: azure-vm-scale-set
+app_uuid: f3caa324-4c3d-4734-b902-9df396b28144
+assets:
+  dashboards:
+    azure_vm_scale_set: assets/dashboards/azure_vm_scale_set.json
+  integration:
+    auto_install: verdadero
+    events:
+      creates_events: false
+    metrics:
+      check: azure.compute_virtualmachinescalesets.network_in
+      metadata_path: metadata.csv
+      prefix: azure.compute_virtualmachinescalesets
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 180
+    source_type_name: Azure VM Scale Set
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - azure
 - cloud
@@ -6,26 +28,40 @@ categories:
 - log collection
 custom_kind: integración
 dependencies: []
-description: 'Rastrea métricas por conjunto: bytes de entrada/salida, operaciones
-  de disco, uso de CPU y más.'
-doc_link: https://docs.datadoghq.com/integrations/azure_vm_scale_set/
-draft: false
+display_on_public_website: verdadero
+draft: falso
 git_integration_title: azure_vm_scale_set
-has_logo: true
 integration_id: azure-vm-scale-set
-integration_title: Microsoft Azure VM Scale Set
+integration_title: Azure VM Scale Set
 integration_version: ''
-is_public: true
-manifest_version: '1.0'
+is_public: verdadero
+manifest_version: 2.0.0
 name: azure_vm_scale_set
-public_title: Integración de Datadog y Microsoft Azure VM Scale Set
-short_description: Rastrea por conjunto bytes de entrada/salida, operaciones de disco,
-  uso de CPU y más.
-version: '1.0'
+public_title: Azure VM Scale Set
+short_description: Los conjuntos de escala de máquinas virtuales son un recurso de
+  Azure para desplegar, gestionar y escalar automáticamente un grupo de máquinas virtuales
+  idénticas.
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Azure
+  - Category::Cloud
+  - Category::Configuración y despliegue
+  - Category::Recopilación de logs
+  - Offering::Integration
+  configuration: README.md#Setup
+  description: Los conjuntos de escala de máquinas virtuales son un recurso de Azure
+    para desplegar, gestionar y escalar automáticamente un grupo de máquinas virtuales
+    idénticas.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Azure VM Scale Set
 ---
 
-<!--  EXTRAÍDO DE https://github.com/DataDog/dogweb -->
-{{< img src="integrations/azure_vm_scale_set/azure_vm_scale_set_dashboard.png" alt="azure vm scale set dashboard" popup="true">}}
+<!--  EXTRAÍDO DE https://github.com/DataDog/integrations-internal-core -->
+{{< img src="integrations/azure_vm_scale_set/azure_vm_scale_set_dashboard.png" alt="dashboard de azure vm scale set" popup="true">}}
 
 ## Información general
 
@@ -71,17 +107,17 @@ Para obtener detalles adicionales, consulta la información sobre la integració
 {{< get-metrics-from-git "azure_vm_scale_set" >}}
 
 
-### Events (Eventos)
+### Eventos
 
 La integración Azure Virtual Machine Scale Set no incluye eventos.
 
-### Service Checks (Checks de servicio)
+### Checks de servicio
 
 La integración Azure Virtual Machine Scale Set no incluye checks de servicios.
 
 ## Solucionar problemas
 
-¿Necesitas ayuda? Ponte en contacto con el [soporte de Datadog][7].
+¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][7].
 
 [1]: https://docs.datadoghq.com/es/integrations/azure/
 [2]: https://docs.datadoghq.com/es/integrations/guide/azure-native-manual-setup/#deploy-the-datadog-agent

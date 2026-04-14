@@ -4,10 +4,6 @@ aliases:
 title: (レガシー) データ損失の防止
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Observability Pipelines は、US1-FED Datadog サイトでは利用できません。</div>
-{{< /site-region >}}
-
 <div class="alert alert-info">
 このガイドは、大規模な本番環境レベルのデプロイメント向けです。
 </div>

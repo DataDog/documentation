@@ -38,5 +38,5 @@ Datadog-Azure インテグレーションタイルを使用して、Datadog に�
 [2]: /ja/getting_started/tagging/using_tags/#integrations
 [3]: /ja/infrastructure/
 [4]: /ja/account_management/billing/custom_metrics/?tab=countrate
-[5]: /ja/integrations/azure#configuration
+[5]: /ja/integrations/azure#data-collected
 [6]: https://learn.microsoft.com/en-us/azure/azure-monitor/essentials/metrics-supported

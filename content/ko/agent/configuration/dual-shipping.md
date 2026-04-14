@@ -8,7 +8,7 @@ further_reading:
 title: 이중 전달
 ---
 
-<div class="alert alert-danger">
+<div class="alert alert-warning">
 데이터를 Datadog 조직 여러 곳에 보내는 경우 이중 전달 때문에 요금에 영향을 미칠 수 있습니다. 이 설정이 어떤 영향을 미치는 지에 대한 자세한 내용은 <a href="/help/">Datadog 지원팀</a>에 문의하세요.
 </div>
 

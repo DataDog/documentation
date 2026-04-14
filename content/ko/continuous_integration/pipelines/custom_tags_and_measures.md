@@ -12,10 +12,6 @@ further_reading:
 title: 파이프라인 트레이스에 커스텀 태그 및 측정값 추가
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">선택한 사이트 ({{< region-param key="dd_site_name" >}})에서 CI Visibility를 사용할 수 없습니다.</div>
-{{< /site-region >}}
-
 ## 개요
 
 커스텀 태그 및 측정 명령을 사용하여 [CI Pipeline Visibility][11]의 파이프라인 트레이스에 사용자 정의 텍스트 및 숫자 태그를 추가합니다. [`datadog-ci` NPM 패키지][1]를 사용하여 파이프라인 트레이스 또는 작업 스팬에 측정값을 추가하는 것 외에도 커스텀 태그를 추가할 수 있습니다. 이러한 커스텀 태그 및 측정값에서 패싯(문자열 값 태그) 또는 측정값(숫자 값 태그)을 생성할 수 있습니다.
@@ -64,7 +60,7 @@ curl -L --fail "https://github.com/DataDog/datadog-ci/releases/latest/download/d
 Windows에 독립형 바이너리를 설치하려면 다음을 실행하세요.
 
 ```shell
-Invoke-WebRequest -Uri "https://github.com/DataDog/datadog-ci/releases/latest/download/datadog-ci_win-x64.exe" -OutFile "datadog-ci.exe"
+Invoke-WebRequest -Uri "https://github.com/DataDog/datadog-ci/releases/latest/download/datadog-ci_win-x64" -OutFile "datadog-ci.exe"
 ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -149,6 +145,12 @@ GitHub 작업에 태그 및 측정값을 추가하려면 `datadog-ci CLI` 버전
         steps:
         - run: datadog-ci tag ...
     ```
+
+## 한계
+
+- 파이프라인이나 작업에 추가할 수 있는 태그의 최대 개수는 100개입니다.
+- 파이프라인이나 작업에 추가할 수 있는 측정값의 최대 개수는 100개입니다.
+- 태그 또는 측정값의 최대 길이는 300자(키 + 값)입니다.
 
 ## 참고 자료
 

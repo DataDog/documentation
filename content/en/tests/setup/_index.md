@@ -5,12 +5,6 @@ aliases:
 - /continuous_integration/tests/setup/
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">
-The selected Datadog site ({{< region-param key="dd_site_name" >}}) is not supported.
-</div>
-{{< /site-region >}}
-
 For information about configuration options for [Test Optimization][1], choose your language:
 
 {{< partial name="continuous_integration/ci-tests-setup.html" >}}

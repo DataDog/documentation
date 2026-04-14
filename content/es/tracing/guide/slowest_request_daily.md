@@ -22,7 +22,7 @@ _3 minutos para completarse_
 
 Con Datadog APM , puedes investigar el rendimiento de tus endpoints, identificar solicitudes lentas e investigar la causa raíz de los problemas de latencia. Este ejemplo muestra la [traza][1] más lenta del día para un endpoint de pago de comercio electrónico y cómo se ralentiza debido al alto uso de la CPU.
 
-1. **Abra el [Catálogo de servicios][2]**.
+1. **Abre el [Software Catalog][2]**.
 
    Esta página contiene una lista de todos los servicios que envían datos a Datadog. Ten en cuenta que puedes buscar palabras clave, filtrar por `env-tag` y establecer el marco temporal.
 

@@ -1,4 +1,6 @@
 ---
+description: V1 시간별 사용량 엔드포인트에서 제품군, JSON:API 형식, 페이지 매김 및 다중 조직 지원을 통해 통합된 V2 API로
+  마이그레이션하는 방법에 대해 알아보세요.
 further_reading:
 - link: /account_management/plan_and_usage/
   tag: 설명서
@@ -6,9 +8,11 @@ further_reading:
 title: V1 월간 사용량 API에서 V2로 마이그레이션
 ---
 
-## 소개
-v1 API 사용자는 미세하게 다른 형식으로 표시되는
-v2 시간별 사용량 API의 친숙한 개념을 인식해야 합니다.
+## 요약
+2025년 2월 1일에 제품 엔드포인트별 개별 시간당 사용량은 v2 [제품군별 시간당 사용량 API][1]로 대체되어 더 이상 사용되지 않습니다.
+
+v1 API 사용자는 통합된 v2 시간별 사용량 API를 사용할 수 있습니다. 비슷한 방식이나
+약간 다른 형식으로 표현되어 있습니다.
 
 v1 API와 v2 API의 가장 눈에 띄는 차이점은 v2 API가 다음의 성질을 지닌다는 점입니다.
 * 모든 제품을 하나의 엔드포인트로 통합
@@ -19,164 +23,11 @@ v1 API와 v2 API의 가장 눈에 띄는 차이점은 v2 API가 다음의 성질
 각 차이점은 다음 섹션에서 자세히 설명합니다.
 
 ## 통합 제품군
-v2 API는 제품군 및 사용량 유형의 개념을 도입합니다. 제품군은
-하나 이상의 사용량 유형을 그룹화합니다. 사용량 유형은 지정된 조직과 기간의 사용량 측정치에 해당합니다.
-제품군의 초기 집합은 대부분 v1 API와 일치합니다.
-전체 매핑은 아래에서 설명합니다. 다른 모든 제품군의 사용량을
-검색하는 특별한 `all` 제품군도 있습니다.
+v2 API에는 제품군 및 사용 유형 개념이 도입되었습니다. 제품군은
+하나 이상의 사용 유형으로 이루어진 그룹을 뜻합니다. 사용 유형은 특정 조직 및
+기간에 대한 사용량 측정값입니다. `all`을 선택하면 모든 제품군의 사용량을 검색할 수 있으며, 특정 제품군별로 필터링도 가능합니다.
 
-제품군 및 사용량 유형:
-- **all**
-    * _Contains all other product families_
-- **analyzed_logs**
-    * `analyzed_logs`
-- **application_security**
-    * `app_sec_host_count`
-- **audit_trail**
-    * `enabled`
-- **serverless**
-    * `func_count`
-    * `invocations_sum`
-- **ci_app**
-    * `ci_pipeline_indexed_spans`
-    * `ci_test_indexed_spans`
-    * `ci_visibility_pipeline_committers`
-    * `ci_visibility_test_committers`
-- **cloud_cost_management**
-    * `host_count`
-- **csm_container_enterprise**
-    * `cws_count`
-    * `compliance_count`
-    * `total_count`
-- **csm_host_enterprise**
-    * `total_host_count`
-    * `compliance_hosts`
-    * `cws_hosts`
-    * `aas_host_count`
-    * `azure_host_count`
-    * `aws_host_count`
-    * `gcp_host_count`
-- **cspm**
-    * `aas_host_count`
-    * `azure_host_count`
-    * `compliance_host_count`
-    * `container_count`
-    * `host_count`
-- **cws**
-    * `cws_container_count`
-    * `cws_host_count`
-- **dbm**
-    * `dbm_host_count`
-    * `dbm_queries_count`
-- **fargate**
-    * `avg_profiled_fargate_tasks`
-    * `tasks_count`
-- **infra_hosts**
-    * `agent_host_count`
-    * `alibaba_host_count`
-    * `apm_azure_app_service_host_count`
-    * `apm_host_count`
-    * `aws_host_count`
-    * `azure_host_count`
-    * `container_count`
-    * `gcp_host_count`
-    * `heroku_host_count`
-    * `host_count`
-    * `infra_azure_app_service`
-    * `opentelemetry_host_count`
-    * `vsphere_host_count`
-- **incident_management**
-    * `monthly_active_users`
-- **indexed_logs**
-    * `logs_indexed_events_3_day_count`
-    * `logs_live_indexed_events_3_day_count`
-    * `logs_rehydrated_indexed_events_3_day_count`
-    * `logs_indexed_events_7_day_count`
-    * `logs_live_indexed_events_7_day_count`
-    * `logs_rehydrated_indexed_events_7_day_count`
-    * `logs_indexed_events_15_day_count`
-    * `logs_live_indexed_events_15_day_count`
-    * `logs_rehydrated_indexed_events_15_day_count`
-    * `logs_indexed_events_30_day_count`
-    * `logs_live_indexed_events_30_day_count`
-    * `logs_rehydrated_indexed_events_30_day_count`
-    * `logs_indexed_events_45_day_count`
-    * `logs_live_indexed_events_45_day_count`
-    * `logs_rehydrated_indexed_events_45_day_count`
-    * `logs_indexed_events_60_day_count`
-    * `logs_live_indexed_events_60_day_count`
-    * `logs_rehydrated_indexed_events_60_day_count`
-    * `logs_indexed_events_90_day_count`
-    * `logs_live_indexed_events_90_day_count`
-    * `logs_rehydrated_indexed_events_90_day_count`
-    * `logs_indexed_events_180_day_count`
-    * `logs_live_indexed_events_180_day_count`
-    * `logs_rehydrated_indexed_events_180_day_count`
-    * `logs_indexed_events_360_day_count`
-    * `logs_live_indexed_events_360_day_count`
-    * `logs_rehydrated_indexed_events_360_day_count`
-    * `logs_indexed_events_custom_day_count`
-    * `logs_live_indexed_events_custom_day_count`
-    * `logs_rehydrated_indexed_events_custom_day_count`
-- **indexed_spans**
-    * `indexed_events_count`
-    * `ingested_spans`
-    * `ingested_events_bytes`
-- **iot**
-    * `iot_device_count`
-- **lambda_traced_invocations**
-    * `lambda_traced_invocations_count`
-- **logs**
-    * `billable_ingested_bytes`
-    * `indexed_events_count`
-    * `ingested_events_bytes`
-    * `logs_forwarding_events_bytes`
-    * `logs_live_indexed_count`
-    * `logs_live_ingested_bytes`
-    * `logs_rehydrated_indexed_count`
-    * `logs_rehydrated_ingested_bytes`
-- **network_flows**
-    * `indexed_events_count`
-- **network_hosts**
-    * `host_count`
-- **observability_pipelines**
-    * `observability_pipelines_bytes_processed`
-- **online_archive**
-    * `online_archive_events_count`
-- **profiling**
-    * `avg_container_agent_count`
-    * `host_count`
-- **rum**
-    * `browser_rum_units`
-    * `mobile_rum_units`
-    * `rum_units`
-- **rum_browser_sessions**
-    * `replay_session_count`
-    * `session_count`
-- **rum_mobile_sessions**
-    * `session_count`
-    * `session_count_android`
-    * `session_count_ios`
-    * `session_count_reactnative`
-    * `session_count_flutter`
-- **sds**
-    * `logs_scanned_bytes`
-    * `total_scanned_bytes`
-- **snmp**
-    * `snmp_devices`
-- **synthetics_api**
-    * `check_calls_count`
-- **synthetics_browser**
-    * `browser_check_calls_count`
-- **synthetics_mobile**
-    * `test_runs`
-- **timeseries**
-    * `num_custom_input_timeseries`
-    * `num_custom_output_timeseries`
-    * `num_custom_timeseries`
-
-
-이 목록은 위의 제품군 및 사용량 유형이 v1 시간별 사용량 엔드포인트가 어떻게 매핑되는지 보여줍니다. 사용량 유형과 데이터 포인트는 달리 명시적으로 언급된 경우를 제외하고는 동일합니다.
+아래 목록은 제품군 및 사용 유형이 v1 시간별 사용량 엔드포인트에 어떻게 매핑되는지 보여줍니다. 사용 유형과 데이터 포인트는 명시적으로 언급된 경우를 제외하고는 동일합니다.
 
 엔드포인트 | 제품군
 `<base_url>/api/v1/usage/hosts` | infra_hosts
@@ -228,15 +79,8 @@ v2 API는 제품군 및 사용량 유형의 개념을 도입합니다. 제품군
 : `func_count`
 : `invocations_sum`
 
-`<base_url>/api/v1/usage/rum_sessions?type=browser` | rum_browser_sessions
-: `replay_session_count`
-: `session_count`
-
-`<base_url>/api/v1/usage/rum_sessions?type=mobile` | rum_mobile_sessions
-: `session_count`
-: `session_count_android`
-: `session_count_ios`
-: `session_count_reactnative`
+`<base_url>/api/v1/usage/rum_sessions` | rum
+: 전체 매핑 지침은 [RUM 마이그레이션 가이드][2]를 참조하세요.
 
 `<base_url>/api/v1/usage/network_hosts` | network_hosts
 : `host_count`
@@ -276,9 +120,6 @@ v2 API는 제품군 및 사용량 유형의 개념을 도입합니다. 제품군
 : `container_count`
 : `host_count`
 
-`<base_url>/api/v1/usage/audit_logs` | audit_logs
-: `lines_indexed`
-
 `<base_url>/api/v1/usage/cws` | cws
 : `cws_container_count`
 : `cws_host_count`
@@ -290,11 +131,6 @@ v2 API는 제품군 및 사용량 유형의 개념을 도입합니다. 제품군
 `<base_url>/api/v1/usage/sds` | sds
 : `logs_scanned_bytes`
 : `total_scanned_bytes`
-
-`<base_url>/api/v1/usage/rum` | rum
-: `browser_rum_units`
-: `mobile_rum_units`
-: `rum_units`
 
 `<base_url>/api/v1/usage/ci-app` | ci_app
 : `ci_pipeline_indexed_spans`
@@ -316,11 +152,11 @@ v2 API는 제품군 및 사용량 유형의 개념을 도입합니다. 제품군
 
 ## JSON:API 준수 형식
 
-응답 본문 및 파라미터 이름은 [JSON:API 사양][1]을 준수합니다. v1 API에서 사용할 수 있는 모든 데이터는
-계속 사용할 수 있습니다. v1 호스트 API에서 
-v2 시간별 사용량 API로의 매핑에 대한 예시는 아래를 참조하세요.
+응답 본문과 파라미터 이름은 [JSON:API 사양][3]을 준수합니다. v1에서 사용할 수 있는 모든 데이터
+를 계속 사용할 수 있습니다. 아래에서 v1 호스트에서 v2 시간당 사용량 API로의
+매핑 예시를 참조하세요.
 
-### V1 API: [호스트 및 컨테이너의 시간당 사용량 가져오기][2]
+### V1 API: 호스트와 컨테이너의 시간당 사용량을 확인하세요.
 
 #### 요청
 
@@ -457,7 +293,7 @@ v2 시간별 사용량 API로의 매핑에 대한 예시는 아래를 참조하�
 * 사용량 측정 오브젝트에는 `usage_type` 및 `value` 필드가 있습니다.
 * `hour`, `org_name` 및 `public_id`도 `attributes` 오브젝트의 필드입니다.
 
-## 페이지 지정
+## 페이지 매기기
 
 v2 시간별 사용량 API에는 페이지가 지정됩니다. 응답은 500페이지로 제한되며 한 페이지에는 한
 제품군, 한시간, 한 조적의 사용량 데이터가 포함되어 있습니다. 페이지 지정을 통해 API는 요청당 여러 제품, 요청당 여러 조직 및 무제한 시간 범위 등 다양한
@@ -487,5 +323,6 @@ v2 API는 한 번의 요청으로 모든 리전에 속하는 모든 하위 조�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://jsonapi.org/format/
-[2]: /ko/api/latest/usage-metering/#get-hourly-usage-for-hosts-and-containers
+[1]: /ko/api/latest/usage-metering/#get-hourly-usage-by-product-family
+[2]: /ko/account_management/guide/relevant-usage-migration/#rum
+[3]: https://jsonapi.org/format/

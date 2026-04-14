@@ -1,8 +1,9 @@
 ---
+description: Agent 검사 및 통합에 기본 Python 2 대신 Python 3 런타임을 사용하도록 Datadog Agent v6을 구성합니다.
 further_reading:
 - link: /agent/versions/upgrade_to_agent_v7/
   tag: 설명서
-  text: 에이전트 v7로 업그레이드
+  text: Agent v7로 업그레이드
 title: Python 버전 관리
 ---
 

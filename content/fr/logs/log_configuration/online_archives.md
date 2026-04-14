@@ -16,7 +16,7 @@ private: true
 title: Online Archives
 ---
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 L'accès à la solution Online Archives est actuellement limité. Pour utiliser cette fonctionnalité, contactez l'<a href="/help/">assistance Datadog</a>.
 </div>
 

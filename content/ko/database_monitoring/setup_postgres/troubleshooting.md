@@ -2,9 +2,6 @@
 description: Postgres에서 데이터베이스 모니터링 설정 트러블슈팅
 title: Postgres에서 DMB 설정 트러블슈팅
 ---
-{{< site-region region="gov" >}}
-해당 지역에서는 데이터베이스 모니터링이 지원되지 않습니다
-{{< /site-region >}}
 
 이 페이지에서는 Postgres에서 데이터베이스 모니터링을 설정하고 사용할 때 발생하는 일반적인 문제와 이를 해결하는 방법을 설명합니다. 에이전트 버전에 따라 문제 해결 방법이 다를 수 있기 때문에 Datadog에서는 안정적인 최신 에이전트 버전을 사용하고 최신 [설정 설명서][1]를 참고하기를 권장합니다.
 
@@ -108,23 +105,24 @@ psql -h localhost -U datadog -d postgres -c "select nspname from pg_extension, p
 psql -h localhost -U datadog -d <your_database> -c "show search_path;"
 ```
 
-`datadog` 사용자의 `search_path`에 `pg_stat_statements` 스키마가 보이지 않는다면 `datadog` 사용자에 추가해야 합니다. 다음 예를 참고하세요.
+`datadog` 사용자의 `search_path`에 `pg_stat_statements` 스키마가 보이지 않으면 `datadog` 사용자에 추가해야 합니다. 예를 들어 `<schema_with_pg_stat_statements>`를 `pg_stat_statements`가 있는 스키마로 대체합니다.
 
 ```sql
-ALTER ROLE datadog SET search_path = "$user",public,schema_with_pg_stat_statements;
+ALTER ROLE datadog SET search_path = "$user",public,<schema_with_pg_stat_statements>;
 ```
 
 ### 특정 쿼리가 누락됨
 
-데이터베이스 모니터링에 일부 쿼리 데이터는 보이는데 특정 쿼리나 쿼리 그룹이 보이지 않는다면 다음 가이드를 따르세요.
-| 잠재적 원인                         | 해결 방법                                  |
+일부 쿼리의 데이터가 있지만 Database 모니터링에 예상한 특정 쿼리 또는 쿼리 집합이 표시되지 않는 경우 이 가이드를 따르세요.
+| 가능한 원인 | 해결 방법
 |----------------------------------------|-------------------------------------------|
-| Postgres 9.6에서 Datadog 사용자가 실행한 쿼리만 보인다면 설정에서 인스턴스 설정 일부가 누락된 것입니다. | Postgres 9.6에서 인스턴스를 모니터링하려면 Datadog 에이전트 인스턴스 구성에서 초기 설정 가이드에서 생성한 함수에 기반해 `pg_stat_statements_view: datadog.pg_stat_statements()`와 `pg_stat_activity_view: datadog.pg_stat_activity()` 설정을 사용해야 합니다. 이 함수는 모든 데이터베이스에 생성되어야 합니다. |
-| 쿼리가 "상위 쿼리"가 아닙니다. 즉, 총 실행 시간의 합이 선택된 시간대 내 어디에서도 표준화된 상위 200개 쿼리에 들지 않는다는 뜻입니다.  | 쿼리가 "Other Queries" 행에 그룹화되어 있을 수 있습니다. 어떤 쿼리를 추적하는지에 관한 자세한 정보는 [수집된 데이터][5]를 참고하세요. 추적된 상위 쿼리 수는 Datadog 고객 지원팀에 문의하여 알 수 있습니다. |
-| 쿼리가 SELECT, INSERT, UPDATE, DELETE 쿼리가 아닙니다. | 기본적으로 비효용 함수는 추적되지 않습니다. 이를 수집하려면 Postgres 파라미터 `pg_stat_statements.track_utility`를 `on`으로 설정하세요. 더 자세한 정보는 [Postgres 설명서][6]를 참고하세요. |
-| 함수나 저장된 절차에서 쿼리가 실행되었습니다. | 함수나 절차에서 실행된 쿼리를 추적하려면 설정 파라미터`pg_stat_statements.track`을 `on`으로 설정합니다. 더 자세한 정보는 [Postgres 설명서][6]를 참고하세요. |
-| `pg_stat_statements.max` Postgres 설정 파라미터가 워크로드에 비해 너무 낮습니다. | 표준화된 쿼리가 짧은 시간 내에 대량으로 실행될 경우(10초 내에 표준화된 고유 쿼리가 수천 개 실행되는 경우), `pg_stat_statements`에 있는 버퍼가 표준화된 쿼리 모두를 처리하지 못할 수 있습니다. 이 값을 올리면 표준화된 쿼리를 추적하는 범위를 증가시킬 수 있고 생성된 SQL에서 변동률이 높을 경우 그 영향을 줄일 수 있습니다. **참고**: 열 이름에 밑줄이 있는 쿼리나 길이가 다양한 배열을 가진 쿼리는 표준화된 쿼리 변동률을 급격하게 높입니다. 예를 들어 `SELECT ARRAY[1,2]`와 `SELECT ARRAY[1,2,3]`는 `pg_stat_statements`에서 별도 쿼리로 추적됩니다. 이 설정에 관한 더 자세한 정보는 [고급 설정][7]을 참고하세요. |
-| 최근 에이전트 재시작 후 쿼리가 한 번만 실행되었습니다. | 마지막 에이전트 재시작 후 10초 간격이 두 번 있을 동안 쿼리가 최소 한 번 실행되어야 쿼리 메트릭이 전송됩니다. |
+| Postgres 9.6의 경우, Datadog 사용자가 실행한 쿼리만 표시되는 경우 인스턴스 구성에 일부 설정이 누락되었을 가능성이 있습니다. | Postgres 9.6의 인스턴스 모니터링의 경우, Datadog Agent 인스턴스 구성은 초기 설정 가이드에서 생성된 함수를 기반으로 `pg_stat_statements_view: datadog.pg_stat_statements()` 및 `pg_stat_activity_view: datadog.pg_stat_activity()` 설정을 사용해야 합니다. 이러한 함수는 모든 데이터베이스에서 생성되어야 합니다. |
+| Datadog 사용자는 다른 사용자의 쿼리를 볼 수 있는 충분한 액세스 권한이 없습니다. | Datadog 사용자는 [`pg_monitor` 역할][25]이 있어야 `pg_stat_activity`와 같은 테이블에 액세스할 수 있습니다. Datadog 사용자에게 이 역할이 있는지 확인합니다. `GRANT pg_monitor TO datadog`. |
+| 쿼리가 '상위 쿼리'가 아니므로 선택한 시간 프레임의 어느 시점에서든 총 실행 시간의 합이 정규화된 상위 200개 쿼리에 속하지 않습니다. | 쿼리는 '기타 쿼리' 행으로 그룹화될 수 있습니다. 추적되는 쿼리에 대한 자세한 내용은 [수집된 데이터][5]를 참조하세요. 추적된 상위 쿼리의 수는 Datadog 지원팀에 문의하여 늘릴 수 있습니다. |
+| 쿼리가 SELECT, INSERT, UPDATE 또는 DELETE 쿼리가 아닙니다. | 비유틸리티 함수는 기본적으로 추적되지 않습니다. 이를 수집하려면 Postgres 파라미터 `pg_stat_statements.track_utility`를 `all`로 설정하세요. 자세한 내용은 [Postgres 설명서][6]를 참고하세요. |
+| 쿼리가 함수 또는 저장 프로시저에서 실행됩니다. | 함수 또는 프로시저에서 실행된 쿼리를 추적하려면 구성 매개변수 `pg_stat_statements.track`을 `on`으로 설정하세요. 자세한 내용은 [Postgres 설명서][6]를 참고하세요. |
+| `pg_stat_statements.max` Postgres 구성 파라미터가 워크로드에 비해 너무 낮을 수 있습니다. | 단시간에 많은 수의 정규화된 쿼리가 실행되는 경우(10초 동안 수천 개의 고유 정규화된 쿼리) `pg_stat_statements` 버퍼가 모든 정규화된 쿼리를 수용하지 못할 수 있습니다. 이 값을 늘리면 추적된 정규화된 쿼리의 적용 범위를 개선하고 생성된 SQL에서 발생하는 높은 이탈의 영향을 줄일 수 있습니다. **참고**: 열 이름이 정렬되지 않은 쿼리 또는 가변 길이의 배열을 사용하는 쿼리는 정규화된 쿼리 이탈률을 크게 증가시킬 수 있습니다. 예를 들어 `SELECT ARRAY[1,2]`와 `SELECT ARRAY[1,2,3]`는 `pg_stat_statements`에서 별도의 쿼리로 추적됩니다. 이 설정 조정에 대한 자세한 내용은 [고급 구성][7]을 참조하세요. |
+| Agent가 마지막으로 재시작한 이후 쿼리가 한 번만 실행되었습니다. | 쿼리 메트릭은 Agent를 다시 시작한 이후 10초 간격으로 두 번 이상 실행된 후에만 릴리스됩니다. |
 
 ### 쿼리 샘플이 잘림
 
@@ -190,25 +188,25 @@ SECURITY DEFINER;
 
 클라이언트가 Postgres [확장 쿼리 프로토콜][9]이나 준비된 문을 사용하는 경우 구문 분석한 쿼리와 원시 바인딩 파라미터가 분리되어 Datadog 에이전트가 실행 계획을 수집하지 못할 수 있습니다. 다음은 이 같은 문제를 해결할 수 있는 몇 가지 옵션입니다.
 
-Postgres 버전 12 이상을 사용하는 경우 [Postgres 통합 설정][19]에서 다음 베타 기능을 활성화하세요.
+Postgres 버전 12 이상의 경우 다음 파라미터가 [Postgres 통합 구성][19]에서 기본적으로 활성화됩니다. Agent에서 설명 계획을 수집할 수 있습니다.
 ```
 query_samples:
   explain_parameterized_queries: true
   ...
 ```
 
-Postgres 12 이전 버전은 이 기능을 지원하지 않습니다. 그러나 클라이언트가 단순 쿼리 프로토콜을 사용하도록 강제하는 옵션이 있을 경우 Datadog에서 실행 계획을 수집하는 것을 활성화할 수 있습니다.
+Postgres 12 이전 버전의 경우, 이 파라미터는 지원되지 **않습니다**. 그러나 클라이언트에서 단순 쿼리 프로토콜을 강제로 사용하는 옵션을 제공하는 경우 Datadog Agent를 사용하여 실행 계획을 수집할 수 있습니다.
 
 | 언어 | 클라이언트 | 단순 쿼리 프로토콜 설정|
 |----------|--------|----------------------------------------|
-| Go       | [pgx][10] | 설정에서 `PreferSimpleProtocol`을 단순 쿼리 프로토콜([ConnConfig 설명서][11] 참고)로 바꿉니다. 또는 `Query`나 `Exec` 호출에서 [QuerySimpleProtocol][24] 플래그를 첫 인수로 사용해 쿼리나 호출별로 적용할 수 있습니다.
-| Java     | [Postgres JDBC 클라이언트][12] | 설정에서 `preferQueryMode = simple`을 단순 쿼리 프로토콜로 바꾸세요([PreferQueryMode 설명서][13] 참고). |
-| Python   | [asyncpg][14]              | 확장된 쿼리 프로토콜을 사용하며, 이를 비활성화할 수 없습니다. 준비된 문을 비활성화해도 문제가 해결되지 않습니다. 실행 계획 수집을 활성화하려면 [psycopg sql][15](또는 SQL 값을 이스케이프하는 기타 유사 SQL 포맷터)을 사용해 SQL Queries를 포맷한 후 DB 클라이언트로 전달합니다.                                                  |
-| Python   | [psycopg][16]             | `psycopg2`는 확장된 쿼리 프로토콜을 사용하지 않기 때문에 실행 계획을 수집하는 데 문제가 없습니다. <br/> `psycopg3`는 기본적으로 확장된 쿼리 프로토콜을 사용하며 비활성화할 수 없습니다. 준비된 문을 비활성화해도 문제가 해결되지 않습니다. 실행 계획 수집을 활성화하려면 [psycopg sql[15]을 사용해 SQL Queries를 포맷한 후 DB 클라이언트에 전달하세요. |
+| 고(Go)       | [pgx][10] | 설정에서 `PreferSimpleProtocol`을 단순 쿼리 프로토콜([ConnConfig 설명서][11] 참고)로 바꿉니다. 또는 `Query`나 `Exec` 호출에서 [QuerySimpleProtocol][24] 플래그를 첫 인수로 사용해 쿼리나 호출별로 적용할 수 있습니다.
+| 자바(Java)     | [Postgres JDBC 클라이언트][12] | 설정에서 `preferQueryMode = simple`을 단순 쿼리 프로토콜로 바꾸세요([PreferQueryMode 설명서][13] 참고). |
+| 파이썬(Python)   | [asyncpg][14]              | 확장된 쿼리 프로토콜을 사용하며, 이를 비활성화할 수 없습니다. 준비된 문을 비활성화해도 문제가 해결되지 않습니다. 실행 계획 수집을 활성화하려면 [psycopg sql][15](또는 SQL 값을 이스케이프하는 기타 유사 SQL 포맷터)을 사용해 SQL Queries를 포맷한 후 DB 클라이언트로 전달합니다.                                                  |
+| 파이썬(Python)   | [psycopg][16]             | `psycopg2`는 확장된 쿼리 프로토콜을 사용하지 않기 때문에 실행 계획을 수집하는 데 문제가 없습니다. <br/> `psycopg3`는 기본적으로 확장된 쿼리 프로토콜을 사용하며 비활성화할 수 없습니다. 준비된 문을 비활성화해도 문제가 해결되지 않습니다. 실행 계획 수집을 활성화하려면 [psycopg sql[15]을 사용해 SQL Queries를 포맷한 후 DB 클라이언트에 전달하세요. |
 | Node     | [node-postgres][17]       | 확장된 쿼리 프로토콜을 사용하며 비활성화할 수 없습니다. Datadog 에이전트가 실행 계획을 수집할 수 있도록 하려면 [pg-format][18]을 사용해 SQL Queries를 포맷한 후 [node-postgres][17]로 전송합니다.|
 
 #### 데이터베이스에 있는 쿼리가 에이전트 인스턴스 설정으로 인해 무시됨
-데이터베이스에 있는 쿼리가 에이전트 인스턴스 설정 `ignore_databases`로 인해 무시됩니다. `ignore_databases` 설정에서는 `rdsadmin`과 `azure_maintenance`과 같은 기본 데이터베이스가 무시됩니다. 이와 같은 데이터베이스에는 샘플이나 실행 계획이 없습니다. 인스턴스 설정에 있는 설정 값과 [설정 파일 예시][19]에 있는 기본값을 확인하세요.
+Agent 인스턴스 설정 파일 `ignore_databases`에 의해 무시되는 데이터베이스에 쿼리가 있습니다. `rdsadmin` 및 `azure_maintenance` 데이터베이스와 같은 기본 데이터베이스는 `ignore_databases` 설정에서 무시됩니다. 이러한 데이터베이스의 쿼리에는 샘플이나 설명 계획이 없습니다. 인스턴스 구성에서 이 설정의 값과 [예제 구성 파일][19]의 기본값을 확인하세요.
 
 **참고:** 에이전트 버전 <7.41.0에서는 `postgres` 데이터베이스가 기본적으로 무시됩니다.
 
@@ -252,8 +250,8 @@ sudo apt-get install postgresql-contrib-10
 
 [1]: /ko/database_monitoring/setup_postgres/
 [2]: /ko/agent/troubleshooting/
-[3]: /ko/agent/guide/agent-commands/?tab=agentv6v7#agent-status-and-information
-[4]: /ko/agent/guide/agent-log-files
+[3]: /ko/agent/configuration/agent-commands/?tab=agentv6v7#agent-status-and-information
+[4]: /ko/agent/configuration/agent-log-files
 [5]: /ko/database_monitoring/data_collected/#which-queries-are-tracked
 [6]: https://www.postgresql.org/docs/current/pgstatstatements.html#id-1.11.7.38.8
 [7]: /ko/database_monitoring/setup_postgres/advanced_configuration
@@ -274,3 +272,4 @@ sudo apt-get install postgresql-contrib-10
 [22]: https://www.postgresql.org/docs/12/contrib.html
 [23]: https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example#L281
 [24]: https://pkg.go.dev/github.com/jackc/pgx/v4#QuerySimpleProtocol
+[25]: https://www.postgresql.org/docs/current/predefined-roles.html#:~:text=a%20long%20time.-,pg_monitor,-Read/execute%20various

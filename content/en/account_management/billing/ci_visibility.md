@@ -11,10 +11,6 @@ further_reading:
     text: "Learn about Ingestion Controls for CI Visibility"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
-
 ## Overview
 
 This guide provides a non-exhaustive list of billing considerations for [CI Visibility][1].
@@ -23,9 +19,9 @@ This guide provides a non-exhaustive list of billing considerations for [CI Visi
 
 A committer is an active Git contributor, identified by their Git author email address. For billing purposes, a committer is included if they make at least three commits in a given month.
 
-## Charges for commits made by bots or actions performed in the GitHub UI
+## Billing for commits made by bots or actions performed in the GitHub UI
 
-Datadog does not charge for bot or commits resulting from actions made in the GitHub UI. These types of commits are excluded from billing calculations.
+Commits made by verified bots or through actions performed directly in the GitHub UI are not billed by Datadog. These are automatically excluded from billing calculations. Only verified bots are excluded from billing.
 
 ## Excluding commits from specific people
 

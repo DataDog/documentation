@@ -55,7 +55,7 @@ Azure Event Hub からメトリクスを取得すると、以下のことがで�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "azure_event_hub" >}}
+{{< get-metrics-from-git "azure-event-hub" >}}
 
 
 ### イベント

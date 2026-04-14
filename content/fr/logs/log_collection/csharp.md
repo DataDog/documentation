@@ -316,7 +316,7 @@ Le logging sans Agent (ou « transmission directe des logs ») est compatible 
 
 Aucune modification du code de votre application n'est requise, et vous n'aurez pas non plus à installer des dépendances supplémentaires pour votre application.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>Remarque :</strong> si vous utilisez log4net ou NLog, un appender (log4net) ou un logger (NLog) doit être configuré pour tirer parti du logging sans Agent. Dans ce cas, vous devrez ajouter ces dépendances supplémentaires ou utiliser le <a href="/logs/log_collection/csharp/?tab=log4net#agentless-logging-with-serilog-sink">logging sans Agent avec le récepteur Serilog</a> à la place.
 </div>
 
@@ -351,7 +351,7 @@ Cette variable est activée par défaut lorsque vous utilisez le logging sans Ag
 : Permet d'activer le logging sans Agent. Activez cette fonctionnalité pour votre framework de logging en définissant cette variable sur `Serilog`, `NLog`, `Log4Net` ou `ILogger` (pour `Microsoft.Extensions.Logging`). Si vous utilisez plusieurs frameworks de logging, saisissez une une liste de valeurs séparées par des points-virgules.<br>
 **Exemple** : `Serilog;Log4Net;NLog`
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>Remarque :</strong> si vous utilisez un framework de logging avec <code>Microsoft.Extensions.Logging</code>, vous devrez probablement utiliser le nom du framework. Par exemple, pour <a href="https://github.com/serilog/serilog-extensions-logging">Serilog.Extensions.Logging</a>, définissez <code>DD_LOGS_DIRECT_SUBMISSION_INTEGRATIONS=Serilog</code>.
 </div>
 

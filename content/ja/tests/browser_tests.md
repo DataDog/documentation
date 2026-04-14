@@ -14,10 +14,6 @@ further_reading:
 title: RUM を使用したブラウザテストのインスツルメント
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">選択したサイト ({{< region-param key="dd_site_name" >}}) では現在 CI Visibility は利用できません。</div>
-{{< /site-region >}}
-
 ## 概要
 
 Test Visibility は Datadog [Real User Monitoring (RUM)][2] と統合し、ブラウザテストを深く分析するためのツールを提供します。

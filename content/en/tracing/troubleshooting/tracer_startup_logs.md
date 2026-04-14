@@ -1,5 +1,6 @@
 ---
 title: Tracer Startup Logs
+description: Configure and analyze tracer startup logs to troubleshoot configuration issues and Agent connectivity.
 further_reading:
 - link: "/tracing/troubleshooting/connection_errors/"
   tag: "Documentation"
@@ -48,7 +49,7 @@ Log files are saved in the following directories by default. Use the `DD_TRACE_L
 
 **Note:** On Linux, you must create the logs directory before you enable debug mode.
 
-Since version `2.19.0`, you can use the `DD_TRACE_LOGFILE_RETENTION_DAYS` setting to configure the tracer to delete log files from the current logging directory on startup. The tracer deletes log files the same age and older than the given number of days, with a default value of `31`.
+Since version `2.19.0`, you can use the `DD_TRACE_LOGFILE_RETENTION_DAYS` setting to configure the tracer to delete log files from the current logging directory on startup. The tracer deletes log files the same age and older than the given number of days, with a default value of `32`.
 
 - `dotnet-tracer-managed-{processName}-{timestamp}.log` contains the configuration logs.
 

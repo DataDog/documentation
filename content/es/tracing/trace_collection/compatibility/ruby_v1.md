@@ -3,13 +3,13 @@ dependencies:
 - https://github.com/DataDog/dd-trace-rb/blob/release/docs/legacy/Compatibility-v1.md
 title: Requisitos de compatibilidad de Ruby (heredado)
 ---
-<div class="alert alert-warning">Esta documentación es para <code>ddtrace</code> gem v1.x. Si estás utilizando <code>Datadog</code> gem v2.0 o posterior, consulta la documentación más reciente sobre los <a href="https://docs.datadoghq.com/tracing/trace_collection/compatibility/ruby/">Requisitos de compatibilidad de Ruby</a>.</div>
+<div class="alert alert-danger">Esta documentación es para <code>ddtrace</code> gem v1.x. Si estás utilizando <code>Datadog</code> gem v2.0 o posterior, consulta la documentación más reciente sobre los <a href="https://docs.datadoghq.com/tracing/trace_collection/compatibility/ruby/">Requisitos de compatibilidad de Ruby</a>.</div>
 
 ## Compatibilidad
 
-La biblioteca de Datadog Trace de Ruby es de código abierto. Consulta el repositorio GitHub de [dd-trace-rb][1] para obtener más información.
+La librería de Datadog Trace de Ruby es de código abierto. Consulta el repositorio GitHub de [dd-trace-rb][1] para obtener más información.
 
-### Intérpretes compatibles de Ruby 
+### Intérpretes compatibles de Ruby
 
 | Tipo  | Documentación              | Versión | Tipo de soporte técnico                         | Compatibilidad con versiones de Gem |
 | ----- | -------------------------- | -----   | ------------------------------------ | ------------------- |
@@ -56,7 +56,7 @@ La compatibilidad *total* indica que todas las funciones del rastreador están d
 
 El uso de `ddtrace` en macOS es compatible con el desarrollo, pero no con las implementaciones de producción.
 
-### Soporte de Microsoft Windows 
+### Soporte de Microsoft Windows
 
 El uso de `ddtrace` en Microsoft Windows no tiene soporte técnico en la actualidad. Seguiremos aceptando contribuciones y problemas de la comunidad,
 pero los consideraremos de baja prioridad.
@@ -76,7 +76,7 @@ Para consultar una lista de integraciones disponibles y sus opciones de configur
 | Active Record              | `active_record`            | `>= 3.2`                 | `>= 3.2`                  | [Enlace][8]                           | [Enlace](https://github.com/rails/rails/tree/master/activerecord)              |
 | Active Support             | `active_support`           | `>= 3.2`                 | `>= 3.2`                  | [Enlace][9]                           | [Enlace](https://github.com/rails/rails/tree/master/activesupport)             |
 | AWS                        | `aws`                      | `>= 2.0`                 | `>= 2.0`                  | [Enlace][10]                          | [Enlace](https://github.com/AWS/AWS-sdk-Ruby)                                  |
-| Concurrent Ruby            | `concurrent_ruby`          | `>= 0.9`                 | `>= 0.9`                  | [Enlace][11]                          | [Enlace](https://github.com/Ruby-moneda/actualidad-Ruby)                  |
+| Concurrent Ruby            | `concurrent_ruby`          | `>= 0.9`                 | `>= 0.9`                  | [Enlace][11]                          | [Enlace](https://github.com/ruby-concurrency/concurrent-ruby)                  |
 | Dalli                      | `dalli`                    | `>= 2.0`                 | `>= 2.0`                  | [Enlace][12]                          | [Enlace](https://github.com/petergoldstein/dalli)                              |
 | DelayedJob                 | `delayed_job`              | `>= 4.1`                 | `>= 4.1`                  | [Enlace][13]                          | [Enlace](https://github.com/collectiveidea/delayed_job)                        |
 | Elasticsearch              | `elasticsearch`            | `>= 1.0`                 | `>= 1.0`                  | [Enlace][14]                          | [Enlace](https://github.com/elastic/elasticsearch-Ruby)                        |

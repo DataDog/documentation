@@ -96,7 +96,7 @@ Redis Sentinel 점검은 [Datadog 에이전트][1] 패키지에 포함되어 있
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "redis_sentinel" >}}
+{{< get-metrics-from-git "redis-sentinel" >}}
 
 
 ### 이벤트
@@ -104,7 +104,7 @@ Redis Sentinel 점검은 [Datadog 에이전트][1] 패키지에 포함되어 있
 Redis Sentinel 점검에는 이벤트가 포함되지 않습니다.
 
 ### 서비스 점검
-{{< get-service-checks-from-git "redis_sentinel" >}}
+{{< get-service-checks-from-git "redis-sentinel" >}}
 
 
 ## 트러블슈팅

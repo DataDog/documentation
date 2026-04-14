@@ -1,4 +1,4 @@
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   관측 파이프라인용 원격 구성이 프라이빗 베타 서비스 중입니다. 서비스에 액세스하려면 <a href="https://docs.datadoghq.com/help/">Datadog 지원팀</a> 이나 고객 성공 매니저에게 문의하세요.
 </div>
 

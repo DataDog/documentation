@@ -1,5 +1,6 @@
 ---
 title: Getting Started with Database Monitoring
+description: Monitor database health and performance, troubleshoot slow queries, and create dashboards for query analysis and optimization.
 further_reading:
     - link: '/database_monitoring/'
       tag: 'Documentation'

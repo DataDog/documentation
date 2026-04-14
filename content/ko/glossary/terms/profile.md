@@ -1,4 +1,5 @@
 ---
+id: profile
 core_product:
 - 연속 프로파일러
 title: 프로필

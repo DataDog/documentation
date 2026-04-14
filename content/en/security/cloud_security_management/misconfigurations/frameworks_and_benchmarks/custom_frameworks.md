@@ -29,14 +29,14 @@ With custom frameworks, you can define and measure compliance against your own c
 
 Next, add requirements to the framework:
 
-<div class="alert alert-warning">You must add at least one requirement, control, and rule before saving the custom framework.</div>
+<div class="alert alert-danger">You must add at least one requirement, control, and rule before saving the custom framework.</div>
 
 1. Click **Add Requirement**.
 1. Enter the following details:
     - **Requirement**: A requirement acts as a control family, enabling you to add controls and associate rules with each control. Can include lowercase letters, numbers, dashes, underscores, and periods.
     - **Control**: A control represents the criteria that the requirement must meet and includes the rules associated with these criteria. Multiple rules can be included in a control. Can include lowercase letters, numbers, dashes, underscores, and periods.
 1. Click **Add Rules**.
-1. Select the cloud or infrastructure rules you want to assign to the control, then click **Add to Control**.
+1. Select the cloud or infrastructure configuration rules you want to assign to the control, then click **Add to Control**.
 1. To add additional items:
     - For additional rules, click **Add Rules**.
     - For another control, click **Add Control**.

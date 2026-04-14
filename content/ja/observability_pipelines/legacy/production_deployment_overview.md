@@ -4,10 +4,6 @@ aliases:
 title: (LEGACY) デプロイの設計と原理
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Observability Pipelines is not available on the US1-FED Datadog site.</div>
-{{< /site-region >}}
-
 {{% observability_pipelines/legacy_warning %}}
 
 ## 概要

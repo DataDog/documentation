@@ -216,7 +216,7 @@ Datadog Agent에서 로그 수집은 기본값으로 비활성화되어 있습�
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "powerdns_recursor" >}}
+{{< get-metrics-from-git "powerdns" >}}
 
 
 ### 이벤트
@@ -224,7 +224,7 @@ Datadog Agent에서 로그 수집은 기본값으로 비활성화되어 있습�
 PowerDNS Recursor 점검은 이벤트를 포함하지 않습니다.
 
 ### 서비스 점검
-{{< get-service-checks-from-git "powerdns_recursor" >}}
+{{< get-service-checks-from-git "powerdns" >}}
 
 
 ## 트러블슈팅

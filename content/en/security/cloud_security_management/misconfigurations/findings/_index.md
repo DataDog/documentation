@@ -30,17 +30,16 @@ A misconfiguration is the primary primitive for a rule evaluation against a reso
 
 ## Explore your cloud misconfigurations
 
-Misconfigurations are displayed on the [Misconfigurations Findings page][1]. Aggregate misconfigurations by rule using the **Group by** filters and query search bar. For example, filtering by `evaluation:fail` narrows the list to all compliance rules that have issues that need to be addressed. Misconfigurations can also be aggregated by resource to rank resources that have the most failed misconfigurations so you can prioritize remediation.
+Misconfigurations are displayed on the [Misconfigurations Findings page][1].
+- Aggregate misconfigurations by rule using the **Group by** filters and query search bar. For example, filtering by `evaluation:fail` narrows the list to all compliance rules that have issues that need to be addressed.
+  - Group misconfigurations by any facet, custom property, or tag (or **None** to view misconfigurations individually), so you can find patterns of failed misconfigurations and prioritize your remediation efforts accordingly.
+- Hover over **Views**, then select an existing view to apply, or click **Save as new view** to use your explorer settings again in the future.
 
-{{< img src="security/csm/findings_page.png" alt="Cloud Security Misconfigurations Findings page" style="width:100%;">}}
+{{< img src="security/csm/findings_page_2.png" alt="Cloud Security Misconfigurations Findings page" style="width:100%;">}}
 
-Select a misconfiguration to view the resources that have been evaluated by the rule, the rule description, its framework or industry benchmark mappings, and suggested remediation steps.
+You can click **View All** to view a complete list of resources affected by a misconfiguration, or click a resource to view additional information about the misconfiguration and suggested remediation steps.
 
-{{< img src="security/cspm/findings/finding-side-panel3.png" alt="A list of impacted resources in the side panel" style="width:65%;">}}
-
-Group findings by **Resources** and select a resource to see the full list of compliance rules that were evaluated against the resource, along with their statuses.
-
-{{< img src="security/cspm/findings/resource-rules-evaluated2.png" alt="Group and aggregate by resource in search" style="width:65%;">}}
+{{< img src="security/cspm/misconfigurations_explorer_4.png" alt="Cloud Security Misconfigurations Findings page" width="100%">}}
 
 ## Further reading
 

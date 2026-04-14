@@ -18,7 +18,7 @@ further_reading:
   text: "Manage your users with the USER API"
 ---
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">The Datadog for Government site only supports SAML login.</div>
+<div class="alert alert-danger">The Datadog for Government site only supports SAML login.</div>
 {{< /site-region >}}
 
 Datadog's **User** tab in **Organization Settings** allows you to manage your users and their associated roles. Switch between list and grid views by clicking **List View** or **Grid View** on the right.

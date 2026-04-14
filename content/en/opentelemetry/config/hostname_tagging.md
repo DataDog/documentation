@@ -74,9 +74,9 @@ Add the following in the Collector configuration:
 ```yaml
 processors:
   k8sattributes:
-        passthrough: false
-        auth_type: "serviceAccount"
-   pod_association:
+    passthrough: false
+    auth_type: "serviceAccount"
+    pod_association:
       - sources:
           - from: resource_attribute
             name: k8s.pod.ip
@@ -149,8 +149,8 @@ DaemonSet:
 ```yaml
 processors:
   k8sattributes:
-        passthrough: true
-        auth_type: "serviceAccount"
+    passthrough: true
+    auth_type: "serviceAccount"
   resourcedetection:
     detectors: [env, <eks/ec2>, <aks/azure>, <gke/gce>, system]
     timeout: 2s
@@ -162,10 +162,10 @@ Gateway:
 
 ```yaml
 processors:
- k8sattributes:
-        passthrough: false
-        auth_type: "serviceAccount"
-   pod_association:
+  k8sattributes:
+    passthrough: false
+    auth_type: "serviceAccount"
+    pod_association:
       - sources:
           - from: resource_attribute
             name: k8s.pod.ip
@@ -232,9 +232,9 @@ Add the following in the Collector configuration:
 ```yaml
 processors:
   k8sattributes:
-        passthrough: false
-        auth_type: "serviceAccount"
-   pod_association:
+    passthrough: false
+    auth_type: "serviceAccount"
+    pod_association:
       - sources:
           - from: resource_attribute
             name: k8s.pod.ip
@@ -463,6 +463,21 @@ processors:
 ```
 **Note:** This is only supported if you have opted-in as described [here][7].
 
+### Host aliases
+You can set host aliases with the resource attribute `datadog.host.aliases`. 
+
+Set this attribute in a processor: 
+```
+processors:
+  transform:
+    trace_statements: &statements
+      - context: resource
+        statements:
+          - set(attributes["datadog.host.aliases"], ["alias1", "alias2", "alias3"])
+```
+
+**Note:** This is only supported if you have opted-in as described [here][7].
+
 ### Custom container tags
 
 Same as for custom host tags, custom containers tags can be set by prefixing resource attributes by `datadog.container.tag` in your OTEL instrumentation.
@@ -483,5 +498,5 @@ processors:
 [3]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/k8sattributesprocessor/README.md
 [4]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/k8s-chart/k8s-values.yaml
 [5]: https://opentelemetry.io/docs/languages/js/resources/
-[6]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/collector.yaml 
+[6]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/collector.yaml
 [7]: https://docs.datadoghq.com/opentelemetry/schema_semantics/host_metadata/  

@@ -22,10 +22,6 @@ further_reading:
 title: Rechercher et gérer des tests et pipelines CI
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">La solution CI Visibility n'est pas encore disponible pour le site que vous avez sélectionné ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 ## Présentation
 
 {{< tabs >}}

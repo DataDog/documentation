@@ -82,7 +82,7 @@ Para configurar la integración Datadog para tu proyecto TiDB Cloud, consulta [P
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "tidb_cloud" >}}
+{{< get-metrics-from-git "tidb-cloud" >}}
 
 
 ### Checks de servicio

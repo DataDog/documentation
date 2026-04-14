@@ -1,6 +1,24 @@
-{{ $size := "inherit" }}
-{{ $vertical_align := "" }}
-{{ $color := "" }}
+{{/*  
+Renders an icon from our iconfont provided by websites-modules (assets/styles/base/_iconfont.scss). 
+More on adding icons here https://datadoghq.atlassian.net/wiki/spaces/WEB/pages/2371092588/Iconfont
+
+:param name: string of the icon name. Icon names can be found here: https://www.datadoghq.com/style/resources/#icons
+:param size: string of the icon size. CSS font-size value
+:param color: string of the icon color. CSS color value
+:param vertical_align: string of the icon vertical alignment. CSS vertical-align value
+:param title: string of the icon title. HTML title attribute value. Bootstrap Tooltip is enabled if this value is provided.
+:param style: string of the icon style. HTML style attribute key and value.
+
+
+Usage Example: 
+- {{ partial "icon" (dict "name" "cloud-thicc" "style" "style='margin: 0;'") }}
+- {{ partial "icon" (dict "name" "close-light_x" "title" "delete" "size" "14px") }}
+
+*/}}
+
+{{ $size := "font-size:inherit" }}
+{{ $vertical_align := "vertical-align:inherit" }}
+{{ $color := "color:black" }}
 {{ $title := "" }}
 {{ $style := "" }}
 
@@ -21,8 +39,12 @@
 {{ $title = (printf "title=%q data-bs-toggle='tooltip' data-bs-placement='top'" . ) }}
 {{ end }}
 
+{{ with .style }}
+{{ $style = . }}
+{{ end }}
+
 {{/* Combine contextual params into inline style */}}
-{{ if or .size .color }}
+{{ if or .size .color .vertical_align }}
 {{ $style = (printf "style='%s; %s; %s'" $size $color $vertical_align) }}
 {{ end }}
 

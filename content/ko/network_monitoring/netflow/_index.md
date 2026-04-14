@@ -207,7 +207,7 @@ NetFlow의 샘플링 속도는 기본적으로 바이트 및 패킷 계산 시 �
 
 NetFlow 데이터는 기본적으로 30일 동안 보존되며 15일, 30일, 60일, 90일 보존 옵션이 있습니다.
 
-<div class="alert alert-danger">NetFlow 데이터를 장기간 보관하려면 계정 담당자에게 문의하세요.</div>
+<div class="alert alert-warning">NetFlow 데이터를 장기간 보관하려면 계정 담당자에게 문의하세요.</div>
 
 ## 트러블슈팅
 

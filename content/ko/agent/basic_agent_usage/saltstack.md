@@ -214,7 +214,7 @@ Salt 공식은 사전에 작성된 Salt State입니다. Datadog 공식에서 사
 
 **참조**: `datadog.config`를 사용해 다양한 점검 인스턴스를 서로 달느 머신에서 설정하는 경우, Salt 마스터 설정 또는 (마스터 없는 환경에서 실행 중이라면) Salt minion 설정에서 [pillar_merge_lists][5]를 `True`로 설정해야 합니다.
 
-[1]: http://docs.saltstack.com/en/latest/topics/development/conventions/formulas.html
+[1]: https://docs.saltproject.io/en/latest/topics/development/conventions/formulas.html
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://docs.datadoghq.com/ko/integrations/directory/
 [4]: https://github.com/DataDog/datadog-formula/blob/master/pillar.example

@@ -41,7 +41,7 @@ legal_terms:
 manifest_version: 2.0.0
 name: reporter
 pricing:
-- billing_type: tarifa_plana
+- billing_type: flat_fee
   includes_assets: true
   product_id: reporter
   short_description: Tarifa plana de esta integración
@@ -50,16 +50,16 @@ public_title: Reporter
 short_description: Generar informes por correo electrónico para cualquier dashboard
   de Datadog
 supported_os:
-- Linux
-- Windows
+- linux
+- windows
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Sistema operativo compatible::Linux
-  - Sistema operativo compatible::Windows
+  - Supported OS::Linux
+  - Supported OS::Windows
   - Category::Marketplace
-  - Oferta::Integración
-  configuration: README.md#Configuración
+  - Offering::Integration
+  configuration: README.md#Setup
   description: Generar informes por correo electrónico para cualquier dashboard de
     Datadog
   media:
@@ -73,13 +73,13 @@ tile:
   - caption: Página de configuración del Reporter
     image_url: images/1.png
     media_type: imagen
-  overview: README.md#Información general
-  support: README.md#Soporte
+  overview: README.md#Overview
+  support: README.md#Support
   title: Reporter
-  uninstallation: README.md#Desinstalación
+  uninstallation: README.md#Uninstallation
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/marketplace -->
+<!--  EXTRAÍDO DE https://github.com/DataDog/marketplace -->
 
 
 ## Información general
@@ -90,7 +90,7 @@ El Reporter de Datadog te permite programar informes y enviarlos por correo elec
 
 Esta integración configurará un nuevo dashboard en tu instancia Datadog llamado **Datadog Reporter**. Se puede acceder directamente a la aplicación yendo al dashboard y creando un nuevo usuario desde ese iFrame.  *Tu cuenta de Datadog NO funcionará en la aplicación DD Reporter. Debes registrar una cuenta separada*.
 
-## Agent
+## Ayuda
 
 Para obtener asistencia o realizar solicitudes de funciones, ponte en contacto con RapDev.io a través de los siguientes canales: 
 

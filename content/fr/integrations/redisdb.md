@@ -198,7 +198,7 @@ Pour configurer ce check lorsque l'Agent est exécuté sur Kubernetes :
 
 ##### Collecte de métriques
 
-Définissez les [modèles d'intégration Autodiscovery][1] en tant qu'annotations de pod sur votre conteneur d'application. En outre, les modèles peuvent également être configurés via [un fichier,  une configmap, ou un stockage clé/valeur][2]. 
+Définissez les [modèles d'intégration Autodiscovery][1] en tant qu'annotations de pod sur votre conteneur d'application. En outre, les modèles peuvent également être configurés via [un fichier,  une configmap, ou un stockage clé/valeur][2].
 
 ```yaml
 apiVersion: v1
@@ -234,7 +234,7 @@ _Disponible à partir des versions > 6.0 de l'Agent_
 
 La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Kubernetes][5].
 
-Ensuite, définissez des [intégrations de logs][6] en tant qu'annotations de pod. Cette configuration peut également être réalisée avec [un fichier, une configmap ou un stockage key/value][7]. 
+Ensuite, définissez des [intégrations de logs][6] en tant qu'annotations de pod. Cette configuration peut également être réalisée avec [un fichier, une configmap ou un stockage key/value][7].
 
 ```yaml
 apiVersion: v1
@@ -360,7 +360,7 @@ Ensuite, [instrumentez votre conteneur d'application qui envoie des requêtes à
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "redisdb" >}}
+{{< get-metrics-from-git "redis" >}}
 
 
 ### Événements

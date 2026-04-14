@@ -1,6 +1,57 @@
+<!--
+  Astrojs component that renders a table with search and optional filtering capabilities. 
+  Input data (multifiltersearch) can be sourced from a "resource" argument or Page frontmatter.
+
+  @param multifiltersearch: object.<{header, data}> - holds the header and details for the searchable table
+  @param multifiltersearch.header: array.<{id:string, name:string, filter_by:boolean}> - header/field info.
+    - id: must be unique in the array. must match a key in "data" object
+    - name: field/header display name
+    - filter_by: (optional) if true, creates a filter dropdown and enables filtering for that field.
+  @param multifiltersearch.data: array.<object> - table details. each key in the object must match a unique id in the "header" object.     
+-->
 
 {{ $navigation := newScratch }}
 {{ $table := newScratch }}
+
+{{ $headers := slice }}
+{{ $data := slice }}
+
+{{ $resource_path := .Get "resource" }}
+
+{{/*  Fail early if no data source provided  */}}
+{{ if and (not (isset $.Page.Params "multifiltersearch")) (not $resource_path) }}
+{{ errorf "No data source provided for multifilter-search component on %s" $.Page.RelPermalink }}
+{{ end }}
+
+{{/*  Determine multifiltersearch data source, if any  */}}
+{{ if isset $.Page.Params "multifiltersearch" }}
+  {{/*  Get Frontmatter dataset  */}}
+  {{ $headers = $.Page.Params.multifiltersearch.headers}}
+  {{ $data = $.Page.Params.multifiltersearch.data}}
+{{ else if $resource_path}}
+  {{/*  Get JSON dataset */}}
+  {{ $resource_asset := resources.Get $resource_path }}
+  {{ $resource_data := index .Site.Data $resource_path }}
+  {{ if $resource_asset }}
+    {{/*  Get JSON dataset from assets directory */}}
+    {{ $resource := unmarshal $resource_asset}}
+    {{ $headers = (index $resource "multifiltersearch" "headers")}}
+    {{ $data = (index $resource "multifiltersearch" "data")}}
+  {{ else if $resource_data }}
+    {{/*  Get JSON dataset from data directory */}}
+    {{ $headers = (index $resource_data "multifiltersearch" "headers")}}
+    {{ $data = (index $resource_data "multifiltersearch" "data")}}
+  {{ else }}
+    {{/*  Data source input given, but not valid  */}}
+    {{ if eq hugo.Environment "development" -}}
+      {{ warnf "No valid data source provided for multifilter-search component on %s" $.Page.RelPermalink }}
+    {{ else }}
+      {{ errorf "No valid data source provided for multifilter-search component on %s" $.Page.RelPermalink }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+  
+
 
 <div 
 class="multifilter-search-component w-100 min-vh-100 d-flex flex-column"
@@ -66,7 +117,7 @@ x-data="{
       
       // setup empty filterTypes object
       this.filterTypes = {
-          {{ range $k, $h := (where $.Page.Params.multifiltersearch.headers `filter_by` true)}}
+          {{ range $k, $h := (where $headers `filter_by` true)}}
           '{{ $h.id }}': [],
           {{ end }}
       }
@@ -108,7 +159,7 @@ x-data="{
           url.searchParams.set('search', this.searchValue)
           if(!this.searchValue) {
               url.searchParams.delete('search')
-          }
+          } 
       }
 
       window.history.pushState(null,'', newURL || url.toString())
@@ -126,7 +177,7 @@ x-data="{
 
 }"
 x-init="initFilterSearchValues()">
-  {{/* DATA TABLE  */}}
+  {{/* DATA TABLE */}}
   <div class="col-12 order-1">
     <div class="table-wrapper pb-3">
       <table>
@@ -134,37 +185,42 @@ x-init="initFilterSearchValues()">
         {{ $table.Set "search_keys" slice }}
         {{/*  TABLE HEADER  */}}  
         <thead class="table-header">
-          {{ range $.Page.Params.multifiltersearch.headers }}
-            <th>{{.name}}</th>
-            {{ if .filter_by }}
-            {{ $table.Add "filter_keys" (slice .id)}}
-            {{ else }}
-            {{ $table.Add "search_keys" (slice .id)}}
+          <tr>
+            {{ range $headers }}
+              <th>{{.name}}</th>
+              {{ if .filter_by }}
+              {{ $table.Add "filter_keys" (slice .id)}}
+              {{ else }}
+              {{ $table.Add "search_keys" (slice .id)}}
+              {{ end }}
             {{ end }}
-          {{ end }}
+          </tr>
         </thead>
         <tbody>
-        {{ range $idx, $row := $.Page.Params.multifiltersearch.data }}
+        {{ range $idx, $row := $data }}
           {{/*  
               build a string with lookup info for filtering and searching against. must maintain filter_info order to align with filterTypes property.
           */}}
           {{ $table.Set "filter_info" "" }}
           {{ $table.Set "search_info" "" }}
           {{ range $k, $v := ($table.Get "filter_keys") }}
-            {{ $table.Add "filter_info" (printf (cond (not $k) "%s" ",%s") (index $row $v)) }}
+            {{/*  Removes markdown link syntax if it exists  */}}
+            {{ $clean_value := replaceRE `\[(.*)\]\(.*\)` "$1" (index $row $v) }}
+            {{ $table.Add "filter_info" (printf (cond (not $k) "%s" ",%s") $clean_value) }}
           {{ end }}
           
           {{ range $table.Get "search_keys" }}
-              {{ $table.Add "search_info" (printf ";%s" (index $row (.|lower))) }}
+            {{/*  Removes markdown link syntax if it exists  */}}
+            {{ $clean_value := replaceRE `\[(.*)\]\(.*\)` "$1" (index $row (.|lower)) }}
+            {{ $table.Add "search_info" (printf ";%s" $clean_value) }}
           {{ end }}
 
           {{ $all_info := print ($table.Get "filter_info") ($table.Get "search_info") }}
-
           <tr 
           data-id='{{print "record-" $idx}}'
           data-info="{{ $all_info }}"
           x-cloak x-show.important="shouldShowRecord($el)">
-            {{ range $.Page.Params.multifiltersearch.headers }}
+            {{ range $headers }}
               <td>{{ (index $row .id) | markdownify }}</td>
             {{ end }}
           </tr>
@@ -177,7 +233,7 @@ x-init="initFilterSearchValues()">
                   Resource Type: []
               }
           */}}
-          {{ range where $.Page.Params.multifiltersearch.headers "filter_by" true}}
+          {{ range where $headers "filter_by" true}}
               {{ $navigation.SetInMap "dropdown" .name (union (index ($navigation.Get "dropdown") .name) (slice (index $row .id))) }}
           {{ end }}
 
@@ -199,7 +255,7 @@ x-init="initFilterSearchValues()">
   {{/*  NAV - Keep here. scratch pad for filters need to form first */}}
   <nav id="multifilter-search-nav" class="container px-0">
     <div class="filters__multifilter row">
-        {{ range $k, $h := (where $.Page.Params.multifiltersearch.headers "filter_by" true)}}
+        {{ range $k, $h := (where $headers "filter_by" true)}}
         {{ $filter_type := $h.id }}
         <div class='filter-type flex-column col-12 col-md-{{cond (not $k) "12" "6" }}' data-id="{{$filter_type}}" >
             <p class="filter-type-name fw-semibold">{{ $h.name }}</p>
@@ -255,19 +311,21 @@ x-init="initFilterSearchValues()">
                     </div>
 
                     {{ range (index ($navigation.Get "dropdown") $h.name) | sort  }}
-                      {{ $id := (printf "%s-%s" . $filter_type) | anchorize }}
+                      {{/*  Removes markdown link syntax if it exists  */}}
+                      {{ $clean_value := replaceRE `\[(.*)\]\(.*\)` "$1" . }}
+                      {{ $id := (printf "%s-%s" $clean_value $filter_type) | anchorize }}
                       <div class="filter-selection-container">
                           <input 
                           id='{{ $id }}' 
                           type="checkbox" 
-                          value='{{ . }}' 
+                          value='{{ $clean_value }}' 
                           x-model="filterTypes['{{$filter_type}}']"
                           @change="resetFilteredSet"
-                          @change.debounce="pushState('{{ $filter_type }}', '{{ . }}')"
+                          @change.debounce="pushState('{{ $filter_type }}', '{{ $clean_value }}')"
                           >  
                           
                           <label for="{{ $id }}" class="d-flex align-items-center">
-                              {{.}}
+                              {{$clean_value}}
                           </label>
                       </div>
                     {{ end }}

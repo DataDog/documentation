@@ -1,6 +1,6 @@
 ---
 title: Alerting With Conversion Rates
-
+private: true
 description: Guide for creating alerts on conversion rates.
 further_reading:
 - link: '/monitors/create/types/real_user_monitoring/'
@@ -10,7 +10,7 @@ further_reading:
 
 ## Overview
 
-Conversion rates are crucial in monitoring the success of a user workflow. This guide describes how to generate conversion rates in the [RUM funnel][1] visualization and create alerts that notify you when conversion rates dip below a given threshold.
+Conversion rates are crucial in monitoring the success of a user workflow. This guide describes how to generate conversion rates in the [Product Analytics funnel][1] visualization and create alerts that notify you when conversion rates dip below a given threshold.
 
 ## Create a funnel in the RUM Explorer
 

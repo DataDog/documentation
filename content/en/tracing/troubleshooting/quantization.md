@@ -1,5 +1,6 @@
 ---
 title: Quantization of APM Data
+description: Understand how Datadog normalizes span and resource names by replacing GUIDs, numeric IDs, and query parameters.
 further_reading:
   - link: /tracing/trace_collection/custom_instrumentation/
     tag: Documentation

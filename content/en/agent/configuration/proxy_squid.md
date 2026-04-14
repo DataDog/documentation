@@ -1,5 +1,6 @@
 ---
 title: Using a Squid proxy
+description: "Set up Squid as a forward proxy to route Datadog Agent traffic through an HTTP/HTTPS proxy server when direct internet access is limited."
 further_reading:
 - link: "/agent/configuration/proxy/"
   tag: "Documentation"

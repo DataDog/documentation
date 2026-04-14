@@ -38,10 +38,6 @@ further_reading:
 title: Configurer Cloud Security Management
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Cloud Security Management n'est pas disponible pour le site Datadog que vous avez sélectionné <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 <div class="alert alert-info">Cloud Security Management est désormais disponible sous trois formules différentes : CSM Enterprise, CSM Pro et CSM Workload Security. Pour en savoir plus, consultez la section <a href="https://www.datadoghq.com/blog/cloud-security-management-changes/">Évolution de Datadog Cloud Security Management</a>.</div>
 
 La solution Cloud Security Management (CSM) détecte les menaces en temps réel et effectue des audits de configuration en continu sur toute votre infrastructure cloud. Les résultats sont ensuite affichés dans une vue unifiée pour faciliter la collaboration et accélérer les mesures de remédiation.

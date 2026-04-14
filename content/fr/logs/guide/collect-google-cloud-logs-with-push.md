@@ -12,7 +12,7 @@ further_reading:
 title: Collecte de logs Google Cloud avec un abonnement Pub/Sub Push
 ---
 
-<div class="alert alert-danger">
+<div class="alert alert-warning">
 Cette page décrit les fonctionnalités obsolètes et les informations de configuration relatives aux abonnements Pub/Sub Push antérieurs, utiles pour dépannage ou pour modifier les configurations antérieures. Utilisez un abonnement <strong>Pull</strong> avec le modèle de Datadog Dataflow pour transférer vos logs Google Cloud à Datadog à la place. Référez-vous à la section <a href="https://docs.datadoghq.com/integrations/google_cloud_platform/#log-collection" target="_blank">Collecte de logs</a> sur la page de lʼintégration Google Cloud intégration pour connaître la marche à suivre.
 </div>
 

@@ -214,7 +214,7 @@ Las fórmulas Salt son estados Salt previamente redactados. En la fórmula de Da
 
 **NOTA**: Al utilizar `datadog.config` para configurar diferentes instancias de check en diferentes máquinas, [pillar_merge_lists][5] debe definirse como `True` en la configuración de Salt Master o en la de Salt Minion, si se ejecuta sin Master.
 
-[1]: http://docs.saltstack.com/en/latest/topics/development/conventions/formulas.html
+[1]: https://docs.saltproject.io/en/latest/topics/development/conventions/formulas.html
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://docs.datadoghq.com/es/integrations/directory/
 [4]: https://github.com/DataDog/datadog-formula/blob/master/pillar.example

@@ -1,6 +1,10 @@
 ---
 title: Search Monitors
 description: "Filter the monitor list by using the faceted search"
+further_reading:
+- link: "/getting_started/search/"
+  tag: "Documentation"
+  text: "Getting Started with Search in Datadog"
 ---
 
 To search your monitors, construct a query using the facet panel on the left and/or the search bar at the top. When you select attributes, the search bar updates with the equivalent query. Likewise, when you modify the search bar query (or write a new one), the attribute checkboxes update to reflect the change. In any case, query results update in real-time as you edit the query. **Note**: There is no *search* button to click.
@@ -91,6 +95,10 @@ From the default view entry in the Views panel:
 * **Reload** your default view by clicking on the entry.
 * **Update** your default view with the current parameters.
 * **Reset** your default view to Datadog's defaults for a fresh restart.
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /monitors/status/#properties
 [2]: https://www.elastic.co/guide/en/elasticsearch/reference/2.4/query-dsl-query-string-query.html#query-string-syntax

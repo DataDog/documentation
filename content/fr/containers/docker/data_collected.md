@@ -1,6 +1,8 @@
 ---
 aliases:
 - /fr/agent/docker/data_collected
+description: Guide de référence pour les métriques et les événements collectés par
+  l'Agent Datadog à partir des conteneurs de Docker
 title: Données Docker recueillies
 ---
 
@@ -10,7 +12,7 @@ title: Données Docker recueillies
 
 Métriques recueillies par l'Agent lorsqu'il est déployé dans un conteneur Docker :
 
-{{< get-metrics-from-git "docker_daemon" >}}
+{{< get-metrics-from-git "docker" >}}
 
 ### Événements
 
@@ -26,6 +28,8 @@ L'Agent Docker génère les événements suivants :
 - Restart container
 - Restart Daemon
 - Mettre à jour
+
+Pour collecter d'autres événements de Docker, adressez-vous à [l'assistance Datadog][2].
 
 ### Checks de service
 
@@ -53,3 +57,4 @@ Le check Containerd peut recueillir des événements. Utilisez `filters` pour s�
 {{< get-service-checks-from-git "containerd" >}}
 
 [1]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/dist/conf.d/containerd.d/conf.yaml.default
+[2]: https://www.datadoghq.com/support/

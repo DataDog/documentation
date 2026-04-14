@@ -1,19 +1,58 @@
 ---
 title: Amazon S3 Destination
+description: Learn how to configure the Amazon S3 destination.
 disable_toc: false
+products:
+- name: Logs
+  icon: logs
+  url: /observability_pipelines/configuration/?tab=logs#pipeline-types
 ---
 
-Use the Amazon S3 destination to send logs to Amazon S3. To send logs in Datadog-rehydratable format to Amazon S3 for [archiving][1] and [rehydration][2], [configure Log Archives](#configure-log-archives) and then set up the Amazon S3 destination in your pipeline.
+{{< product-availability >}}
+
+{{< callout url="#" btn_hidden="true" header="false">}}
+The Amazon S3 destination is in Preview. Contact your account manager for access.
+{{< /callout >}}
+
+## Overview
+
+Use the Amazon S3 destination to send logs in JSON or Parquet format to Amazon S3. See [Automatically generated Parquet schema](#automatically-generated-parquet-schema).
 
 You can also [route logs to Snowflake using the Amazon S3 destination](#route-logs-to-snowflake-using-the-amazon-s3-destination).
 
-## Configure Log Archives
+**Note**: If you want to send logs to an S3 bucket, and later be able to [rehydrate][1] them for analysis and investigation in Datadog, use the [Datadog Archives][2] destination.
 
-If you want to send logs to Amazon S3 in Datadog-rehydratable format for [archiving][1] and [rehydration][2], you need to set up a Datadog Log Archive. If you already have a Datadog Log Archive configured for Observability Pipelines, skip to [Set up the destination for your pipeline](#set-up-the-destination-for-your-pipeline).
-
-You need to have Datadog's [AWS integration][3] installed to set up Datadog Log Archives.
+## Set up an Amazon S3 bucket
 
 {{% observability_pipelines/configure_log_archive/amazon_s3/instructions %}}
+
+
+### Set up an IAM policy that allows Workers to write to the S3 bucket
+
+1. Navigate to the [IAM console][3].
+1. Select **Policies** in the left side menu.
+1. Click **Create policy**.
+1. Click **JSON** in the **Specify permissions** section.
+1. Copy the below policy and paste it into the **Policy editor**. Replace `<MY_BUCKET_NAME_1>/<MY_OPTIONAL_BUCKET_PATH_1>` with the information for the S3 bucket you created in the previous section.
+    ```json
+    {
+        "Version": "2012-10-17",
+        "Statement": [
+            {
+                "Sid": "DatadogOPUpload",
+                "Effect": "Allow",
+                "Action": [
+                    "s3:PutObject"
+                ],
+                "Resource": "arn:aws:s3:::<MY_BUCKET_NAME_1>/<MY_OPTIONAL_BUCKET_PATH_1>/*"
+            }
+        ]
+    }
+    ```
+1. Click **Next**.
+1. Enter a descriptive policy name.
+1. Optionally, add tags.
+1. Click **Create policy**.
 
 {{< tabs >}}
 {{% tab "Docker" %}}
@@ -38,24 +77,66 @@ You need to have Datadog's [AWS integration][3] installed to set up Datadog Log 
 {{% /tab %}}
 {{< /tabs >}}
 
-{{% observability_pipelines/configure_log_archive/amazon_s3/connect_s3_to_datadog_log_archives %}}
-
 ## Set up the destination for your pipeline
 
-Set up the Amazon S3 destination and its environment variables when you [set up an Archive Logs pipeline][4]. The information below is configured in the pipelines UI.
+Set up the Amazon S3 destination and its environment variables when you create a pipeline. The information below is configured in the pipelines UI.
 
-{{% observability_pipelines/destination_settings/datadog_archives_amazon_s3 %}}
+1. Enter your S3 bucket name. If you configured Log Archives, it's the name of the bucket you created earlier.
+1. Enter the AWS region the S3 bucket is in.
+1. (Optional) Enter the key prefix.
+    - Prefixes are useful for partitioning objects. For example, you can use a prefix as an object key to store objects under a particular directory. If using a prefix for this purpose, it must end in `/` to act as a directory path; a trailing `/` is not automatically added.
+      - See [template syntax][4] if you want to route logs to different object keys based on specific fields in your logs.
+    - **Notes**:
+        - Datadog recommends that you start your prefixes with the directory name and without a lead slash (`/`). For example, `app-logs/` or `service-logs/`.
+        - Do **not** use the same S3 prefix as a [Datadog Archives][2] destination. The Amazon S3 destination writes files in a different format and having both file types in the same prefix can result in rehydration issues.
+1. Select the storage class for your S3 bucket in the **Storage Class** dropdown menu.
+1. Select the encoding you want to use in the **Encoding** dropdown menu (**JSON** or **Parquet**).
+    - **Note**: For **Parquet**, the schema is generated per batch and can vary. See [Automatically generated Parquet schema](#automatically-generated-parquet-schema).
+1. Select a compression algorithm in the **Compression - Algorithm** dropdown menu. If you selected:
+    - **Parquet**: Datadog recommends `snappy` or a low-compression level if you choose `zstd`.
+    - **JSON**: Datadog recommends `gzip`.
 
-### Set the environment variables
+### Optional settings
+
+#### Batching
+
+1. Enter a maximum batching size and select the unit (**MB** or **GB**) in the dropdown menu. If not configured, the default is `100` MB.
+1. Enter a batching timeout in seconds. If not configured, the default is `900` seconds.
+
+#### AWS authentication
+
+Select an AWS authentication option. If you are only using the [user or role you created earlier](#set-up-an-iam-policy-that-allows-workers-to-write-to-the-s3-bucket) for authentication, do not select **Assume role**. Select **Assume role** only if the user or role you created earlier needs to assume a different role to access the AWS resource. The assumed role's permissions must be explicitly defined.<br>If you select **Assume role**:
+1. Enter the ARN of the IAM role you want to assume.
+    - **Note:** The [user or role you created earlier](#set-up-an-iam-policy-that-allows-workers-to-write-to-the-s3-bucket) must have permission to assume this role so that the Worker can authenticate with AWS.
+1. (Optional) Enter the assumed role session name and external ID.
+
+#### Buffering
+
+{{% observability_pipelines/destination_buffer %}}
+
+### Set secrets
+
+{{% observability_pipelines/set_secrets_intro %}}
+
+{{< tabs >}}
+{{% tab "Secrets Management" %}}
+
+There are no secret identifiers to configure.
+
+{{% /tab %}}
+
+{{% tab "Environment Variables" %}}
 
 {{% observability_pipelines/destination_env_vars/datadog_archives_amazon_s3 %}}
 
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Route logs to Snowflake using the Amazon S3 destination
 
-You can route logs from Observability Pipelines to Snowflake using the Amazon S3 destination by configuring Snowpipe in Snowflake to automatically ingest those logs. To set this up:
-1. Configure [Log Archives](#configure-log-archives) if you want to [archive][1] and [rehydrate][2] your logs. If you only want to send logs to Amazon S3, skip to step 2.
-1. [Set up a pipeline][5] to use Amazon S3 as the log destination. When logs are collected by Observability Pipelines, they are written to an S3 bucket using the same configuration detailed in [Set up the destination for your pipeline](#set-up-the-destination-for-your-pipeline), which includes AWS authentication, region settings, and permissions.
-1. Set up Snowpipe in Snowflake. See [Automating Snowpipe for Amazon S3][6] for instructions. Snowpipe continuously monitors your S3 bucket for new files and automatically ingests them into your Snowflake tables, ensuring near real-time data availability for analytics or further processing.
+You can route logs from Observability Pipelines to Snowflake using the Amazon S3 destination by configuring Snowpipe in Snowflake to automatically ingest those logs. Snowpipe continuously monitors your S3 bucket for new files and automatically ingests them into your Snowflake tables, ensuring near real-time data availability for analytics or further processing. When logs are collected by Observability Pipelines, they are written to an S3 bucket. To set this up:
+1. [Set up a pipeline][5] to use Amazon S3 as the log destination. Use the configuration detailed in [Set up the destination for your pipeline](#set-up-the-destination-for-your-pipeline).
+1. Set up Snowpipe in Snowflake. See [Automating Snowpipe for Amazon S3][6] for instructions.
 
 ## How the destination works
 
@@ -65,7 +146,13 @@ You can route logs from Observability Pipelines to Snowflake using the Amazon S3
 
 #### Permissions
 
-{{% observability_pipelines/aws_authentication/amazon_security_lake/permissions %}}
+The Observability Pipelines Worker requires these policy permissions to send logs to Amazon S3:
+
+- `s3:PutObject`
+
+### Automatically generated Parquet schema
+
+The Observability Pipelines Worker collects a batch of events, generates a schema for those events, and then flushes the batch to S3. The schema can vary between batches because the schema is based on the current batch of events only.
 
 ### Event batching
 
@@ -75,10 +162,10 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 |----------------| ----------------| --------------------|
 | None           | 100,000,000     | 900                 |
 
-[1]: /logs/log_configuration/archives/
-[2]: /logs/log_configuration/rehydrating/
-[3]: /integrations/amazon_web_services/#setup
-[4]: /observability_pipelines/archive_logs/
-[5]: /observability_pipelines/set_up_pipelines/
+[1]: /logs/log_configuration/rehydrating/
+[2]: /observability_pipelines/destinations/datadog_archives/
+[3]: https://console.aws.amazon.com/iam/
+[4]: /observability_pipelines/destinations/#template-syntax
+[5]: /observability_pipelines/configuration/set_up_pipelines/
 [6]: https://docs.snowflake.com/en/user-guide/data-load-snowpipe-auto-s3
 [7]: /observability_pipelines/destinations/#event-batching

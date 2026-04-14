@@ -1,14 +1,11 @@
 ---
 title: Getting Started with Notebooks Analysis Features
+description: "Step-by-step walkthrough of multi-step data analysis in Notebooks including data import, parsing, joins, transformations, and visualizations."
 further_reading:
 - link: "/notebooks/advanced_analysis"
   tag: "Documentation"
   text: "Analysis Features"
 ---
-
-{{< callout btn_hidden="true" header="Join the Preview!">}} 
-  Advanced Analysis is in Preview. To enable, reach out to your Customer Success Manager.
-{{< /callout >}}
 
 ## Overview
 

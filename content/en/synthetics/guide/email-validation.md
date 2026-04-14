@@ -2,17 +2,14 @@
 title: Use Email Validation In Browser Tests
 description: Verify an email and its content with browser test steps.
 further_reading:
-- link: "/synthetics/browser_tests/actions"
+- link: "/synthetics/browser_tests/test_steps"
   tag: "Documentation"
   text: "Learn about steps for browser tests"
 - link: "/synthetics/browser_tests/advanced_options/"
   tag: "Documentation"
   text: "Configure advanced options for steps"
+site_support_id: synthetics_email_validation
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Email Validation In Browser Tests is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
 
 ## Overview
 

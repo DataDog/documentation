@@ -67,7 +67,7 @@ short_description: Zoom 계정 모니터링 및 라이선스 최적화
 supported_os:
 - linux
 - macos
-- windows
+- 윈도우즈(Windows)
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
@@ -125,9 +125,9 @@ Zoom 통합은 미팅, 룸, 사용자, 네트워크 통계 및 지리적 위치 
 6. RapDev Zoom Phones 개요
 
 ## 지원
-지원 또는 기능 요청은 다음 채널을 통해 RapDev.io에 문의하세요.
+지원 또는 기능 요청은 다음 채널을 통해 RapDev.io에 문의해 주세요.
 
-- 지원: support@rapdev.io
+- 지원 팀: support@rapdev.io
 - 영업 팀: sales@rapdev.io
 - 채팅: [rapdev.io](https://www.rapdev.io/#Get-in-touch)
 - 전화: 855-857-0222

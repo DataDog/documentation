@@ -2,9 +2,9 @@
 aliases:
 - /es/security/vulnerabilities/troubleshooting/
 further_reading:
-- link: /security/cloud_security_management/setup/csm_pro/?tab=aws#configure-the-agent-for-containers
+- link: /infrastructure/containers/container_images/#enable-sbom-collection
   tag: Documentación
-  text: Configuración de las vulnerabilidades de imágenes de contenedor
+  text: Activar la recopilación de SBOM en Vulnerabilidades de Cloud Security
 - link: /security/cloud_security_management/setup/csm_enterprise/?tab=aws#hosts
   tag: Documentación
   text: Configuración de vulnerabilidades de host
@@ -12,12 +12,12 @@ further_reading:
   tag: Blog
   text: Mejorar el flujo de trabajo de solución de problemas con imágenes de contenedor
     en Datadog Container Monitoring
-title: Solución de problemas de Cloud Security Management Vulnerabilities
+title: Solucionar problemas de Vulnerabilidades de Cloud Security
 ---
 
 ## Información general
 
-Si tienes problemas con Cloud Security Management (CSM) Vulnerabilities, utiliza las siguientes directrices de solucionar problemas. Si necesitas más ayuda, ponte en contacto con [el equipo de soporte de Datadog][1].
+Si tienes problemas con vulnerabilidades de Cloud Security, utiliza las siguientes directrices para solucionar problemas. Si necesitas más ayuda, ponte en contacto con [Asistencia técnica de Datadog][1].
 
 ## Mensajes de error
 
@@ -45,7 +45,46 @@ El error resultante aparece como:
 ERROR | (pkg/workloadmeta/collectors/internal/containerd/image_sbom_trivy.go:80 in func2) | Failed to generate SBOM for containerd image: unable to marshal report to sbom format, err: analyze error: failed to analyze layer:  : unable to get uncompressed layer
 ```
 
-La solución para este problema es establecer la opción de configuración `discard_unpacked_layers=false` en el archivo de configuración de contenedor.
+La solución a este problema es configurar la opción configuración:
+- Para containerd: configura `discard_unpacked_layers=false` en el archivo de configuración de containerd.
+- Para Helm: configura `datadog.sbom.containerImage.uncompressedLayersSupport: true` en tu archivo `values.yaml`.
+- Para el operador Datadog: configura `features.sbom.containerImage.uncompressedLayersSupport` en `true` en tu Datadog Agent CRD.
+
+### Transmisión de imágenes GKE
+
+Datadog no admite la transmisión de imágenes con Google Kubernetes Engine (GKE). Si tienes activada esa opción en GKE, tu Agent no podrá generar SBOM de contenedor.
+
+El error resultante aparece como:
+
+```sh
+unable to mount containerd image, err: unable to scan image named: {image-name}, image is not unpacked
+```
+
+La solución para este problema es desactivar la transmisión de imágenes en GKE. Para obtener más información, consulta la sección [Desactivar la transmisión de imágenes][5] de la documentación de GKE.
+
+## Desactivar las vulnerabilidades de Cloud Security
+
+En el archivo `datadog-values.yaml` del Agent, configura los siguientes parámetros de configuración en `false`:
+
+```
+# datadog-values.yaml file
+datadog:
+  sbom:
+    containerImage:
+      enabled: false
+
+      # Uncomment the following line if you are using Google Kubernetes Engine (GKE) or Amazon Elastic Kubernetes (EKS)
+      # uncompressedLayersSupport: true
+
+    # Enables Host Vulnerability Management
+    host:
+      enabled: false
+
+    # Enables Container Vulnerability Management
+    # Image collection is enabled by default with Datadog Helm version `>= 3.46.0`
+      containerImageCollection:
+        enabled: false
+```
 
 ## Referencias adicionales
 
@@ -55,3 +94,4 @@ La solución para este problema es establecer la opción de configuración `disc
 [2]: /es/security/cloud_security_management/setup/csm_enterprise?tab=aws#configure-the-agent-for-vulnerabilities
 [3]: https://app.datadoghq.com/security/configuration/csm/setup
 [4]: https://app.datadoghq.com/metric/summary
+[5]: https://cloud.google.com/kubernetes-engine/docs/how-to/image-streaming#disable

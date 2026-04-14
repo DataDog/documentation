@@ -1,5 +1,5 @@
 ---
-app_id: php-apcu
+app_id: PHP-apcu
 app_uuid: ec09379e-851f-4ecc-be78-de5297087994
 assets:
   integration:
@@ -61,7 +61,7 @@ tile:
   title: PHP APCu
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
+<!--  EXTRAÍDO DE https://github.com/DataDog/integrations-extras -->
 
 
 ## Información general
@@ -126,7 +126,7 @@ Ejecuta el [subcomando de estado del Agent][7] y busca `php_apcu` en la sección
 
 La integración PHP APCu no incluye eventos.
 
-### Checks de servicio
+### Checks de servicios
 {{< get-service-checks-from-git "php_apcu" >}}
 
 

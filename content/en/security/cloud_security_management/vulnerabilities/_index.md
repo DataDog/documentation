@@ -21,12 +21,6 @@ further_reading:
   text: "Enhance your troubleshooting workflow with Container Images in Datadog Container Monitoring"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Cloud Security Vulnerabilities is in Preview for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).
-Request access by <a href="https://www.datadoghq.com/product-preview/csm-vulnerability-management-govcloud/">filling this form</a>.
-</div>
-{{< /site-region >}}
-
 ## Overview
 
 Cloud Security Vulnerabilities helps you improve your security posture and achieve compliance, by continuously scanning container images, hosts, host images, and serverless functions for vulnerabilities, from CI/CD pipelines to live production. Leveraging runtime observability, it helps you prioritize and remediate exploitable vulnerabilities in your daily workflows, all in a single view, and without any dependencies on other Datadog products.
@@ -41,11 +35,15 @@ With Cloud Security Vulnerabilities, you can manage your cloud security manageme
 
 ## Key capabilities
 
+{{< site-region region="gov" >}}
+<div class="alert alert-danger">Agentless Scanning is not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
 Deploy using Agentless or unified Datadog Agent
 : Quickly scan your entire infrastructure for vulnerabilities, either using Agentless, or by using the unified Datadog Agent you already have deployed.
 
 Inventory cloud resources, in real-time
-: Inventory container images, hosts, serverless functions, and all packages deployed in your infrastructure, in real time, and export your SBOM.
+: Inventory container images, hosts, serverless functions, and all packages deployed in your infrastructure, in real time, and export your SBOM (software bill of materials).
 
 Detect vulnerabilities continuously
 : Scan recent updates and newly published CVEs, across running container images from hosts and registries, host, host images, and serverless, and identify vulnerable container image layers.
@@ -67,26 +65,27 @@ Explore reports
 Get started with Cloud Security Vulnerabilities and cover your infrastructure in minutes, using:
 - [Agentless Scanning][11]
 - [Unified Datadog Agent][12]
+- [CI/CD Container Image Scanning][21]
 
-You can also use both deployment methods to use the unified Datadog Agent where you already have it deployed, and Agentless elsewhere.
+You can also use multiple deployment methods together: use the unified Datadog Agent where you already have it deployed, Agentless elsewhere, and CI/CD scanning to catch vulnerabilities before production.
 
-After you've enabled it, Datadog starts scanning your resources continuously, and starts reporting prioritized vulnerabilities in your [Cloud Security Vulnerabilities Findings page][1] within an hour. 
+After you've enabled it, Datadog starts scanning your resources continuously, and starts reporting prioritized vulnerabilities in your [Cloud Security Vulnerabilities Findings page][1] within an hour.
 
-Use these tables to decide which solution to start with: 
+Use these tables to decide which solution to start with:
 | Feature                                   | Agentless                                     | Unified Datadog Agent          |
 |-------------------------------------------|-----------------------------------------------|--------------------------------|
 | Time to deploy across your infrastructure | Minutes                                       | Hours to weeks                 |
 | Vulnerability prioritization              | Yes                                           | Yes, with runtime context      |
 | Vulnerability scanning frequency          | 12 hours                                      | Real-time                      |
 
-| Vulnerability detection scope             | Agentless                                     | Unified Datadog Agent          |
-|-------------------------------------------|-----------------------------------------------|--------------------------------|
-| Host and host image                       | OS packages and app packages, mapped to image | OS packages                    |
-| Container image                           | OS packages and app packages, mapped to image | OS packages                    |
-| Cloud provider                            | AWS, [Azure (Preview)][15]                    | AWS, Azure, GCP, on-prem, etc. |
-| Operating system                          | Linux                                         | Linux, Windows                 |
-| Serverless                                | AWS Lambda, AWS ECS Fargate                   | Not applicable                 |
-| Container registries                      | Amazon ECR                                    | Not applicable                 |
+| Vulnerability detection scope | Agentless                                                                         | Unified Datadog Agent          |
+|-------------------------------|-----------------------------------------------------------------------------------|--------------------------------|
+| Host and host image           | OS packages and app packages, mapped to image                                     | OS packages                    |
+| Container image               | OS packages and app packages, mapped to image                                     | OS packages                    |
+| Cloud provider                | AWS, Azure, GCP                                                                   | AWS, Azure, GCP, on-prem, etc. |
+| Operating system              | Linux, Windows                                                                    | Linux, Windows                 |
+| Serverless                    | AWS Lambda, Amazon ECS Fargate, Azure Container Apps, Azure Container Instances, GCP Cloud Run (container deployment only) | Not applicable                 |
+| Container registries          | Amazon ECR (running + at-rest), Google Artifact Registry (running workloads only), Azure Container Registry (running container images only) | Not applicable                 |
 
 For more information on compatibility, see [Cloud Security Vulnerabilities Hosts and Containers Compatibility][13]. If you need any assistance, see the [troubleshooting guide][14], or reach out to support@datadoghq.com.
 
@@ -98,6 +97,10 @@ Focus on exploitable vulnerabilities first, using the Datadog Severity Score, co
 For vulnerabilities with available fixes, the Findings page provides guided remediation steps to assist Dev and Ops teams in resolving issues more quickly and effectively. You can also triage, mute, comment, and assign vulnerabilities to manage their lifecycle.
 
 {{< img src="security/vulnerabilities/csm-vm-explorer-actionability-2.png" alt="The Cloud Security Vulnerabilities Findings page displaying a vulnerability and the actions a user can take to remediate it" width="100%">}}
+
+In [Container Images][7], you can trace vulnerabilities found in an image to specific layers, so you can pinpoint and remediate your security risks faster.
+
+{{< img src="infrastructure/containerimages/image_layer_vulnerabilities.png" alt="A list of vulnerabilities associated with each layer of an image" width="100%">}}
 
 ## Automation and Jira integration
 Make Cloud Security Vulnerabilities part of your daily workflow by setting up [security notification rules][17] and [automation pipelines (in Preview)][20]:
@@ -118,7 +121,7 @@ The [Infrastructure Packages Catalog][19] provides a real-time inventory of all 
 
 Quickly assess the impact of a critical emerging vulnerability by searching for affected package versions and identifying all of the resources that use it.
 
-{{< img src="security/vulnerabilities/csm_package_explorer_2.png" alt="The inventory of packages deployed in the infrastructure with vulnerability context and pivot to resources using them" width="100%">}}
+{{< img src="security/vulnerabilities/csm_package_explorer_3.png" alt="The inventory of packages deployed in the infrastructure with vulnerability context and pivot to resources using them" width="100%">}}
 
 [1]: https://app.datadoghq.com/security/csm/vm
 [2]: https://app.datadoghq.com/containers/images
@@ -126,18 +129,19 @@ Quickly assess the impact of a critical emerging vulnerability by searching for 
 [4]: https://app.datadoghq.com/security/infra-vulnerability?query=asset_type%3AHost&group=none
 [5]: /security/code_security/software_composition_analysis/
 [6]: https://www.datadoghq.com/product/infrastructure-monitoring/
+[7]: https://app.datadoghq.com/container-images
 [9]: https://www.cisa.gov/known-exploited-vulnerabilities-catalog
 [10]: /security/code_security/iast/
 [11]: /security/cloud_security_management/setup/agentless_scanning/
 [12]: /security/cloud_security_management/setup/agent
 [13]: /security/cloud_security_management/vulnerabilities/hosts_containers_compatibility
 [14]: /security/cloud_security_management/troubleshooting/vulnerabilities/
-[15]: https://www.datadoghq.com/product-preview/agentless-vulnerability-scanning-for-azure/
 [16]: https://www.datadoghq.com/product-preview/ecr-vulnerability-scanning/
 [17]: https://app.datadoghq.com/security/configuration/notification-rules
 [18]: https://app.datadoghq.com/dash/integration/csm_vulnerabilities?fromUser=true&refresh_mode=sliding&from_ts=1733323465252&to_ts=1733928265252&live=true
 [19]: https://app.datadoghq.com/security/catalog/libraries
 [20]: https://www.datadoghq.com/product-preview/security-automation-pipelines/
+[21]: /security/cloud_security_management/setup/ci_cd
 
 ## Further reading
 

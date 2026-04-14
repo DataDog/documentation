@@ -6,7 +6,7 @@ aliases:
 title: 애플리케이션 분석
 ---
 
-<div class="alert alert-danger">
+<div class="alert alert-warning">
 이 페이지는 사용 중단된 기능과 레거시 애플리케이션 분석과 관련된 설정 정보를 설명합니다. 기존 설정을 수정하거나 트러블슈팅에 유용할 수 있습니다. 트레이스를 완벽히 제어하려면 대신 <a href="/tracing/trace_pipeline">수집 제어 및 보존 필터</a>를 사용하세요.
 </div>
 
@@ -35,7 +35,7 @@ title: 애플리케이션 분석
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
 
-애플리케이션 분석은 파이썬(Python) 트레이싱 클라이언트 버전 0.19.0부터 사용할 수 있습니다. 트레이싱 클라이언트에 있는 단일 설정 파라미터를 사용해 모든 **웹** 통합에 대해 애플리케이션 분석을 글로벌 활성화할 수 있습니다.
+App Analytics는 Python Tracing Client 버전 0.19.0부터 사용할 수 있으며, 이 구성은 ddtrace 버전 3.x 이하에서만 사용할 수 있습니다. Tracing Client에서 하나의 구성 파라미터를 사용하여 모든 **웹** 통합에 App Analytics를 전역적으로 활성화하세요.
 
 * 트레이서 설정: `ddtrace.config.analytics_enabled = True`
 * 환경 변수: `DD_TRACE_ANALYTICS_ENABLED=true`
@@ -57,9 +57,9 @@ Datadog.configure { |c| c.tracing.analytics.enabled = true }
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
-애플리케이션 분석은 고(Go) 트레이싱 클라이언트 1.11.0 버전부터 사용할 수 있으며 다음을 사용해 모든 **웹** 통합을 글로벌 활성화할 수 있습니다.
+애플리케이션 분석은 고(Go) 트레이싱 클라이언트 1.11.0 버전부터 사용할 수 있으며 다음을 사용해 모든 **웹** 통합을 글로벌 활성화할 수 있습니다.
 
-* [`WithAnalytics`][1] 트레이서 시작 옵션 예:
+* [`WithAnalytics`][2] ([v1 문서][1]) 트레이서 시작 옵션, 예:
 
   ```go
   tracer.Start(tracer.WithAnalytics(true))
@@ -68,6 +68,7 @@ Datadog.configure { |c| c.tracing.analytics.enabled = true }
 * `DD_TRACE_ANALYTICS_ENABLED=true` 환경 변수를 사용하는 1.26.0 버전부터
 
 [1]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#WithAnalytics
+[2]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/ddtrace/tracer#WithAnalytics
 {{< /programming-lang >}}
 {{< programming-lang lang="nodejs" >}}
 
@@ -151,7 +152,7 @@ Nginx용 애플리케이션 분석을 활성화:
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
 
-전 세계 설정과 더불어, 다음 설정을 사용해 개별 통합에 대한 애플리케이션 분석을 활성화하거나 비활성화할 수 있습니다.
+글로벌 설정과 더불어, 다음 설정을 사용해 개별 통합에 대한 애플리케이션 분석을 활성화하거나 비활성화할 수 있습니다.
 
 * 트레이서 설정: `ddtrace.config.<INTEGRATION>.analytics_enabled = True`
 * 환경 변수: `DD_<INTEGRATION>_ANALYTICS_ENABLED=true`
@@ -185,14 +186,16 @@ Datadog.configure { |c| c.tracing.instrument :integration, analytics_enabled: tr
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
+{{% tracing-go-v2 %}}
+
 글로벌 설정과 더불어 각 통합에 대해 애플리케이션 분석을 각각 활성화하거나 비활성화할 수 있습니다. 예를 들어, 표준 라이브러리의 `net/http` 패키지를 설정하는 경우 다음을 수행할 수 있습니다.
 
 ```go
 package main
 
 import (
-    httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http"
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+    httptrace "github.com/DataDog/dd-trace-go/contrib/net/http/v2"
+    "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
 )
 
 func main() {
@@ -249,7 +252,7 @@ Tracer.Instance.Settings.Integrations["AspNetMvc"].AnalyticsEnabled = true;
 {{< /programming-lang >}}
 {{< programming-lang lang="php" >}}
 
-전 세계 설정과 더불어, 다음 설정을 사용해 개별 통합에 대한 애플리케이션 분석을 활성화하거나 비활성화할 수 있습니다.
+글로벌 설정과 더불어, 다음 설정을 사용해 개별 통합에 대한 애플리케이션 분석을 활성화하거나 비활성화할 수 있습니다.
 
 * 환경 변수: `DD_<INTEGRATION>_ANALYTICS_ENABLED=true`
 
@@ -476,7 +479,7 @@ span->SetTag(datadog::tags::analytics_event, 0.5);
 
 ### Datadog 에이전트
 
-<div class="alert alert-danger">
+<div class="alert alert-warning">
 이 섹션은 레거시 애플리케이션 분석과 관련된 설정 정보와 사용 중단된 기능을 설명합니다.
 </div>
 

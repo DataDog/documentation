@@ -23,7 +23,7 @@ title: C++ 애플리케이션 추적하기
 type: multi-code-lang
 ---
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>참고:</strong> C++는 자동 계측을 위한 통합을 제공하지 않습니다. 하지만 <a href="/tracing/setup/envoy/">Envoy</a> 및 <a href="/tracing/setup/nginx/">Nginx</a> 등 프록시 추적에서 사용됩니다.
 </div>
 

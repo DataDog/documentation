@@ -1,5 +1,6 @@
 ---
 title: Tracing Guides
+description: Step-by-step guides for getting started with APM, enabling tracing tutorials, configuration guides, and advanced tracing techniques.
 
 private: true
 disable_toc: true
@@ -64,6 +65,11 @@ These tutorials walk you through setting up a sample multi-service application w
 {{< /whatsnext >}}
 <br>
 
+{{< whatsnext desc="Configuration guides" >}}
+    {{< nextlink href="/tracing/guide/remote_config" >}}Setting up Remote Configuration for Tracing{{< /nextlink >}}
+{{< /whatsnext >}}
+<br>
+
 {{< whatsnext desc="Tracing Guides" >}}
     {{< nextlink href="/opentelemetry/guide/otel_api_tracing_interoperability/" >}}Interoperability of OpenTelemetry API and Datadog instrumented traces{{< /nextlink >}}
     {{< nextlink href="tracing/guide/configure_an_apdex_for_your_traces_with_datadog_apm" >}}Configure Apdex Score by Service{{< /nextlink >}}
@@ -73,7 +79,7 @@ These tutorials walk you through setting up a sample multi-service application w
     {{< nextlink href="/tracing/guide/send_traces_to_agent_by_api/" >}}Send Traces to the Agent by the Tracing API{{< /nextlink >}}
     {{< nextlink href="tracing/guide/span_and_trace_id_format" >}}Valid formats of span and trace IDs{{< /nextlink >}}
     {{< nextlink href="tracing/guide/trace-agent-from-source" >}}Installing the trace Agent from source{{< /nextlink >}}
-    {{< nextlink href="/developers/community/libraries/#apm-distributed-tracing-client-libraries" >}}Tracing Client Libraries{{< /nextlink >}}
+    {{< nextlink href="/extend/community/libraries/#apm-distributed-tracing-client-libraries" >}}Tracing Client Libraries{{< /nextlink >}}
     {{< nextlink href="tracing/guide/setting_primary_tags_to_scope/" >}}Setting Primary Tags To Scope{{< /nextlink >}}
     {{< nextlink href="tracing/guide/serverless_enable_aws_xray/" >}}Decide When to Use Datadog APM and AWS X-Ray {{< /nextlink >}}
     {{< nextlink href="/tracing/guide/setting_up_apm_with_cpp/" >}}Setting Up APM with C++{{< /nextlink >}}
@@ -81,7 +87,8 @@ These tutorials walk you through setting up a sample multi-service application w
     {{< nextlink href="/tracing/guide/agent_tracer_hostnames" >}}Understand the Difference Between the Agent Host and the Tracer Host{{< /nextlink >}}
     {{< nextlink href="/tracing/guide/setting_up_apm_with_kubernetes_service/" >}}Setting up APM with Kubernetes Service{{< /nextlink >}}
     {{< nextlink href="/tracing/guide/aws_payload_tagging/" >}}Capture requests and responses from AWS services automatically{{< /nextlink >}}
+    {{< nextlink href="/tracing/guide/websocket_observability/" >}}WebSocket Observability{{< /nextlink >}}
     {{< nextlink href="/tracing/guide/service_overrides/" >}}Service Overrides{{< /nextlink >}}
     {{< nextlink href="/tracing/guide/injectors/" >}}Understanding injector behavior with Single Step Instrumentation{{< /nextlink >}}
-    {{< nextlink href="/tracing/code_origins/" >}}Code Origins for Spans{{< /nextlink >}}
+    {{< nextlink href="/tracing/code_origin/" >}}Code Origin for Spans{{< /nextlink >}}
 {{< /whatsnext >}}

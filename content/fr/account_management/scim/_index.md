@@ -14,42 +14,47 @@ further_reading:
 title: Provisionnement d'utilisateurs SCIM
 ---
 
+<div class="alert alert-info">
+SCIM est disponible avec les offres Infrastructure Pro et Infrastructure Enterprise.
+</div>
+
 ## Présentation
 
-SCIM (System for Cross-domain Identity Management) est un standard ouvert visant à automatiser le provisionnement d'utilisateurs. Grâce à SCIM, vous pouvez provisionner et déprovisionner automatiquement des utilisateurs dans votre organisation Datadog tout en synchronisant les données avec le fournisseur d'identité de votre organisation.
+Le protocole SCIM (System for Cross-domain Identity Management) est un standard ouvert qui permet d'automatiser le provisionnement des utilisateurs. Grâce à SCIM, vous pouvez provisionner et déprovisionner automatiquement les utilisateurs de votre organisation Datadog en synchronisation avec le fournisseur d'identité (IdP) de votre organisation.
 
 ### Fonctionnalités prises en charge
 
-- Création d'utilisateurs dans Datadog (la vérification de l'adresse e-mail est requise lors de la première connexion, consultez la rubrique [Vérification de l'adresse e-mail][1])
-- Suppression d'utilisateurs dans Datadog lorsqu'ils n'ont plus besoin d'un accès
-- Synchronisation des attributs utilisateur entre le fournisseur d'identité et Datadog
-- SSO pour Datadog (conseillé)
+- Créer des utilisateurs dans Datadog (la vérification de l'adresse e-mail est requise lors de la première connexion, consultez la section relative à la [vérification de l'adresse électronique][1])
+- Supprimer des utilisateurs dans Datadog lorsqu'ils n'ont plus besoin d'un accès
+- Assurer la synchronisation des attributs utilisateur entre le fournisseur d'identité et Datadog
+- Connexion SSO à Datadog (recommandé)
+- Équipes gérées : créer des équipes Datadog à partir des groupes du fournisseur d'identité et maintenir la synchronisation des membres des équipes Datadog avec les groupes du fournisseur d'identité.
 
-Datadog prend en charge l'utilisation de SCIM avec les fournisseurs d'identité Azure Active Directory (Azure AD) et Okta. Pour configurer SCIM, consultez la documentation de votre fournisseur d'identité :
-- [Azure AD][2]
+Datadog prend en charge l'utilisation de SCIM avec les fournisseurs d'identité Microsoft Entra ID et Okta. Pour configurer SCIM, consultez la documentation de votre fournisseur d'identité :
+- [Microsoft Entra ID][2]
 - [Okta][3]
 
 ### Prérequis
 
-Pour utiliser SCIM avec Datadog, vous devez disposer d'un compte Enterprise.
+SCIM dans Datadog est une fonctionnalité avancée incluse dans les offres Infrastructure Pro et Infrastructure Enterprise.
 
-Cette documentation part du principe que votre organisation gère les identités de ses utilisateurs à l'aide d'un fournisseur d'identité.
+Cette documentation part du principe que votre organisation gère les identités utilisateur à l'aide d'un fournisseur d'identité.
 
-Datadog vous conseille fortement d'utiliser une clé d'application de compte de service lors de la configuration de SCIM, afin d'éviter toute perte d'accès. Pour en savoir plus, consultez la rubrique [Utiliser un compte de service avec SCIM][4].
+Datadog recommande fortement d'utiliser une clé d'application de compte de service lors de la configuration de SCIM afin d'éviter toute interruption d'accès. Pour plus de détails, consultez la section [Utiliser un compte de service avec SCIM][4].
 
-Si vous utilisez à la fois SAML et SCIM, Datadog vous conseille fortement de désactiver le provisionnement juste à temps pour éviter toute disparité au niveau de l'accès. Gérez uniquement le provisionnement des utilisateurs via SCIM.
+Lorsque SAML et SCIM sont utilisés conjointement, Datadog recommande fortement de désactiver le provisionnement SAML juste-à-temps (JIT) afin d'éviter les incohérences d'accès. Gérez le provisionnement des utilisateurs uniquement via SCIM.
 
 ## Utiliser un compte de service avec SCIM
 
-Pour activer SCIM, vous devez utiliser une [clé d'application][5] afin de sécuriser la connexion entre votre fournisseur d'identité et votre compte Datadog. Chaque clé d'application est contrôlée par un utilisateur ou compte de service spécifique.
+Pour activer SCIM, vous devez utiliser une [clé d'application][5] afin de sécuriser la connexion entre votre fournisseur d'identité et votre compte Datadog. Chaque clé d'application est contrôlée par un utilisateur ou un compte de service spécifique.
 
-Si vous activez SCIM en utilisant une clé d'application associée à un utilisateur et que ce dernier quitte votre organisation, son compte Datadog sera déprovisionné. La clé d'application propre à cet utilisateur sera alors révoquée et votre intégration SCIM ne sera plus valide, ce qui empêchera les utilisateurs de votre organisation d'accéder à Datadog.
+Si vous utilisez une clé d'application liée à un utilisateur pour activer SCIM et que cet utilisateur quitte votre organisation, son compte Datadog est déprovisionné. La clé d'application liée à cet utilisateur est alors révoquée, ce qui rompt définitivement votre intégration SCIM et empêche les utilisateurs de votre organisation d'accéder à Datadog.
 
-Pour éviter de perdre l'accès à vos données, Datadog vous conseille fortement de créer un [compte de service][6] dédié à SCIM et de créer dans ce dernier une clé d'application pour l'intégration SCIM.
+Pour éviter toute perte d'accès à vos données, Datadog recommande fortement de créer un [compte de service][6] dédié à SCIM. Depuis ce compte de service, créez une clé d'application à utiliser pour l'intégration SCIM.
 
-## Vérification de l'adresse e-mail
+## Vérifier l'adresse électronique
 
-Lorsque vous créez un utilisateur avec SCIM, un e-mail est envoyé à cet utilisateur. Pour son premier accès, ce dernier doit se connecter via le lien d'invitation envoyé par e-mail. Ce lien est actif pendant 30 jours. S'il expire, accédez à la [pages des paramètres utilisateur][7] et sélectionnez un utilisateur pour lui renvoyer un lien d'invitation.
+La création d'un nouvel utilisateur via SCIM déclenche l'envoi d'un e-mail à cet utilisateur. Pour un premier accès, il est nécessaire de se connecter en utilisant le lien d'invitation reçu par e-mail. Ce lien est actif pendant 2 jours. S'il expire, accédez à la [page des paramètres utilisateur][7] et sélectionnez un utilisateur pour renvoyer un lien d'invitation.
 
 ## Pour aller plus loin
 
@@ -62,3 +67,4 @@ Lorsque vous créez un utilisateur avec SCIM, un e-mail est envoyé à cet utili
 [5]: /fr/account_management/api-app-keys
 [6]: /fr/account_management/org_settings/service_accounts
 [7]: https://app.datadoghq.com/organization-settings/users
+[8]: /fr/help/

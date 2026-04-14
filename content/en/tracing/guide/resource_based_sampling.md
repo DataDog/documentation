@@ -1,6 +1,8 @@
 ---
 title: Resource-based sampling
+description: Learn how to configure resource-based sampling to control trace ingestion based on specific resources and endpoints for cost optimization.
 disable_toc: false
+site_support_id: resource_based_sampling
 further_reading:
 - link: "/tracing/trace_pipeline/ingestion_mechanisms"
   tag: "Documentation"
@@ -18,7 +20,7 @@ Remote configuration allows you to dynamically set ingestion [sampling rates by 
 ## Requirements
 
 - Datadog Agent [7.41.1][2] or higher.
-- [Remote Configuration][3]  enabled for your Agent.
+- [Remote Configuration][3] enabled for your Agent.
 - `APM Remote Configuration Write` [permissions][4]. If you don’t have these permissions, ask your Datadog admin to update your permissions from your organization settings.
 
 ### Tracing library version
@@ -68,7 +70,7 @@ From the **Service Ingestion Summary**, resources for which the sampling rate ar
 
 [1]: /tracing/trace_pipeline/ingestion_controls#service-ingestion-summary
 [2]: https://github.com/DataDog/datadog-agent/releases/tag/7.41.1
-[3]: /agent/remote_config
+[3]: /tracing/guide/remote_config/
 [4]: /account_management/rbac/permissions/
 [5]: https://github.com/DataDog/dd-trace-java/releases/tag/v1.34.0
 [6]: https://github.com/DataDog/dd-trace-go/releases/tag/v1.63.1

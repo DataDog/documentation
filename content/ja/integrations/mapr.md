@@ -151,7 +151,7 @@ MapR はログに fluentD を使用します。[fluentD Datadog プラグイン]
 MapR チェックには、イベントは含まれません。
 
 ### サービスチェック
-{{< get-service-checks-from-git "mapr" >}}
+{{< get-service-checks-from-git "mapr_cluster" >}}
 
 
 ## トラブルシューティング

@@ -17,7 +17,7 @@ Use the toolbar to configure and customize the component. The following options 
 - **Operations (M/month)**: Enter the number of monthly operations in millions. Not available for service tier Premium.
 - **Brokered connections**: Enter the number of brokered connections for your topic. Only available on service tier Standard.
 - **Hybrid connections**: Enter the number of hybrid connections for your topic. Only available on service tier Standard.
-- **Data transfer (GB)**: Enter the total volume of data transfered monthly in gigabytes. Only available on service tier Standard.
+- **Data transfer (GB)**: Enter the total volume of data transferred monthly in gigabytes. Only available on service tier Standard.
 - **Relay hours**: Enter the number of relay hours for your topic. Only available on service tier Standard.
 - **Relay messages (K/mo)**: Enter the number of monthly relayed messages in thousands. Only available on service tier Standard.
 
@@ -62,7 +62,7 @@ Use [the Cloudcraft API][1] to programmatically access and render your architect
 - **operationsPerMonth: number**: The number of operations per month in millions. Defaults to `0`.
 - **brokeredConnections: number**: The number of brokered connections for the topic. Defaults to `0`.
 - **hybridConnections: number**: The number of hybrid connections for the topic. Defaults to `0`.
-- **dataTransferGb: number**: The total volume of data transfered monthly in gigabytes. Defaults to `0`.
+- **dataTransferGb: number**: The total volume of data transferred monthly in gigabytes. Defaults to `0`.
 - **relayHours: number**: The number of relayed hours for the topic. Defaults to `0`.
 - **relayMessages: number**: The number of relayed messages per month in thousands. Defaults to `0`.
 - **color: object**: The fill color for the component body.

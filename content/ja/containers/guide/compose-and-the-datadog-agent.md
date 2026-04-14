@@ -67,6 +67,72 @@ FROM gcr.io/datadoghq/agent:latest
 ADD conf.d/redisdb.yaml /etc/datadog-agent/conf.d/redisdb.yaml
 ```
 
+### APM トレース収集
+
+上記の Redis 例を基に、Compose を使用して Datadog Agent を構成し、アプリケーション トレースを収集することもできます。この `docker-compose.yml` は、GitHub の [Docker Compose 例][4]から取得したものです。
+
+```yaml
+version: "4"
+services:
+  web:
+    build: web
+    command: ddtrace-run python app.py
+    ports:
+     - "5000:5000"
+    volumes:
+     - ./web:/code # 新しい app パスに対応するように変更
+    links:
+     - redis
+    environment:
+     - DATADOG_HOST=datadog # web アプリが Datadog ライブラリを初期化する際に使用
+     - DD_AGENT_HOST=dd-agent # トレース送信先として dd-agent を指す
+  redis:
+    image: redis
+  # Agent セクション
+  datadog:
+    container_name: dd-agent
+    build: datadog
+    links:
+     - redis # redis がコンテナで解決可能なホスト名になるように保証
+     - web # web アプリがメトリクスを送信できるように保証
+    environment:
+     - DD_API_KEY=<YOUR_API_KEY>
+     - DD_DOGSTATSD_NON_LOCAL_TRAFFIC=true # 他コンテナからのカスタム メトリクスを Agent が受信できるようにする
+     - DD_APM_ENABLED=true # トレースを有効化
+     - DD_APM_NON_LOCAL_TRAFFIC=true # 他コンテナからのトレースを Agent が受信できるようにする
+     - DD_AGENT_HOST=dd-agent # web コンテナがトレースを Agent に転送できるようにする
+     - DD_SITE=datadoghq.com # データ送信先の Datadog インスタンスを指定 (例: EU1 なら datadoghq.eu に変更)
+    volumes:
+     - /var/run/docker.sock:/var/run/docker.sock
+     - /proc/:/host/proc/:ro
+     - /sys/fs/cgroup:/host/sys/fs/cgroup:ro
+```
+
+`<YOUR_API_KEY>` をあなたの API キーに置き換えてください。
+
+前述の例での主な変更点は、`DD_AGENT_HOST` 環境変数の設定です。トレースを収集するためには、`web` コンテナと Agent コンテナの両方で同じ値にする必要があります。`DD_APM_ENABLED` は APM を有効にし、`DD_APM_NON_LOCAL_TRAFFIC` は Agent が他コンテナからのトレースを受信できるようにします。
+
+この例では、Python Web アプリの `requirements.txt` に `ddtrace` ライブラリも追加しており、`ddtrace-run` で初期化して APM を有効化します。(以下のリストにある `datadog` ライブラリは、カスタム DogStatsD メトリクスを収集するために使用されます。)
+```
+flask
+redis
+datadog
+ddtrace <--
+``` 
+
+最後に、Web アプリの `Dockerfile` を次のように変更して、`service`、`env`、`version` タグを設定します:
+
+```dockerfile
+FROM python:2.7
+ADD . /code
+WORKDIR /code
+RUN pip install -r requirements.txt
+
+# ここで DD タグを設定する
+ENV DD_SERVICE web        <-- Datadog での "service" 名を設定
+ENV DD_ENV sandbox        <-- Datadog での "env" 名を設定
+ENV DD_VERSION 1.0        <-- Datadog での "version" 番号を設定
+```
 
 ### ログ収集
 
@@ -93,7 +159,7 @@ services:
      - /var/lib/docker/containers:/var/lib/docker/containers:ro
 ```
 
-**注**: 上記の構成では、`Redis` コンテナからログを収集するのみです。同様の `com.datadoghq.ad.logs` ラベルを追加することで、Datadog Agent からログを収集することができます。また、環境変数 `DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL` を `true` に設定することにより、全てのコンテナに対して明示的にログ収集を有効にすることができます。詳細は [Docker ログ収集ドキュメント][4]を参照してください。
+**注**: この構成では `Redis` コンテナのログのみを収集します。Datadog Agent のログを収集したい場合は、同様の `com.datadoghq.ad.logs` ラベルを追加してください。すべてのコンテナからログを収集するには、環境変数 `DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL` を `true` に設定します。詳細は [Docker ログ収集][5]を参照してください。
 
 
 ## その他の参考資料
@@ -103,4 +169,5 @@ services:
 [1]: https://docs.docker.com/compose/overview
 [2]: /ja/agent/docker/
 [3]: https://github.com/DataDog/integrations-core/blob/master/redisdb/datadog_checks/redisdb/data/conf.yaml.example
-[4]: /ja/agent/logs/
+[4]: https://github.com/DataDog/docker-compose-example
+[5]: /ja/agent/logs/

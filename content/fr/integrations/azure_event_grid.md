@@ -38,7 +38,7 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Microsoft�
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "azure_event_grid" >}}
+{{ get-metrics-from-git "azure-eventgrid" }}
 
 
 ### Événements

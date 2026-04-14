@@ -15,9 +15,7 @@ If you stop reporting data to Datadog, after a certain period of time metrics, t
 |--------------------------------------           |----------|
 | Hosts                                           | 2 hours  |
 | Metrics                                         | 24 hours |
-| Tags in template variable dropdown panels       | 48 hours |
-| Attributes in template variable dropdown panels | 15 minutes |
-| Tags in other dropdown panels                   | 12 hours |
+| Tags in non-template variable dropdown panels                   | 12 hours |
 | APM `env` tags                                  | 60 days  |
 
 Even though the data is not listed, you can still query the data with the [JSON editor][1]. A simple solution is to query for the host name or tags.
@@ -25,6 +23,16 @@ Even though the data is not listed, you can still query the data with the [JSON 
 If you're planning to frequently churn hosts, add a tag to the [Agent][2] in `datadog.yaml` or use the [Infrastructure list][3] (user tags).
 
 Additionally, you can still manually apply tags or attributes by entering them in the value input field within template variable dropdown panels.
+
+### Template variables
+Template variable dropdown panels have values that are populated from different sources based on the sources used by the dashboard.
+The age-out period for template variable values that are queried depends on the data source:
+| Source            | Age Out  |
+|------------------ |----------|
+| Metrics           | 48 hours |
+| Cloud cost        | 48 hours |
+| All other sources | [Standard retention period for source](https://docs.datadoghq.com/data_security/data_retention_periods/) |
+
 
 ## Deleting
 

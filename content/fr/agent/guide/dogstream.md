@@ -5,10 +5,9 @@ private: true
 title: Dogstream
 ---
 
-<div class="alert alert-danger">
-Dogstream est une fonctionnalité de l'Agent 5 dorénavant obsolète. Elle ne fait plus l'objet d'aucune mise à jour.
+<div class="alert alert-warning">
+Il s'agit d'une fonctionnalité obsolète de l'Agent 5. Les nouvelles versions de cette fonctionnalité ne sont plus publiées.
 <br>
-L'Agent v6 est disponible ! <a href="https://github.com/DataDog/datadog-agent/blob/master/docs/agent/upgrade.md">Passez à la nouvelle version</a> pour bénéficier des nouvelles fonctionnalités.
 </div>
 
 Les fichiers de log contiennent une multitude de données précieuses sur vos applications et vos opérations.
@@ -60,8 +59,8 @@ Si votre parser de logs personnalisé ne fonctionne pas, vérifiez tout d'abord 
 
 * Si tout fonctionne comme prévu, vous devriez voir `dogstream: parsing {nom du fichier} with {nom de la fonction} (requested {texte option de configuration})`.
 
-<div class="alert alert-warning">
-Pour vérifier que les dogstreams fonctionnent, ajoutez une ligne (ne modifiez pas une ligne existante) à n'importe quel fichier de log surveillé par l'Agent. L'Agent effectue uniquement un <a href="/glossary/#tail">suivi</a> de la fin de chaque fichier de log et ne remarque donc pas les modifications effectuées ailleurs dans le fichier.
+<div class="alert alert-danger">
+Pour vérifier que les dogstreams fonctionnent, ajoutez une ligne (sans modifier une ligne existante) à tout fichier de log que vous avez configuré l'Agent pour surveiller. L'Agent ne <a href="/glossary/#suivre-un-fichier">suit</a> que la fin de chaque fichier de log, il ne détecte donc pas les modifications effectuées ailleurs dans le fichier.
 </div>
 
 ### Rédaction de fonctions de parsing
@@ -125,14 +124,14 @@ Les champs d'événement sont les suivants (en gras si obligatoires) :
 
 | Champ           | Type        | Valeur                                                                                                                                                                                                                             |
 |-----------------|-------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **msg_title**   | Chaîne      | Titre de l'événement, indexé par la recherche de texte intégral.                                                                                                                                                                         |
-| **timestamp**   | Nombre entier     | Timestamp selon l'epoch Unix. En cas d'omission, la valeur par défaut est l'heure à laquelle l'Agent a parsé l'événement.                                                                                                                                        |
-| **msg_text**    | Chaîne      | Corps de l'événement, indexé par la recherche de texte intégral.                                                                                                                                                                           |
+| **msg_title**   | chaîne      | Titre de l'événement, indexé par la recherche de texte intégral.                                                                                                                                                                         |
+| **timestamp**   | nombre entier     | Timestamp selon l'epoch Unix. En cas d'omission, la valeur par défaut est l'heure à laquelle l'Agent a parsé l'événement.                                                                                                                                        |
+| **msg_text**    | chaîne      | Corps de l'événement, indexé par la recherche de texte intégral.                                                                                                                                                                           |
 | alert_type      | Énumération de chaînes | Indique la gravité de l'événement. Valeurs possibles : `error`, `warning`, `success` ou `info`. En cas d'omission, la valeur par défaut est `info`. Peut être recherché avec `alert_type:value`.                                                                  |
-| event_type      | Chaîne      | Décrit le type d'événement dont il s'agit. Utilisé pour générer la clé d'agrégation.                                                                                                                                                         |
-| aggregation_key | Chaîne      | Décrit les éléments affectés par cet événement, le cas échéant. Utilisé pour générer la clé d'agrégation.                                                                                                                                              |
-| host            | Chaîne      | Nom du host à l'origine de l'événement. L'événement reçoit automatiquement les tags que vous avez attribués au host en utilisant la page de [tagging][1] ou l'[API de tagging][2]. La valeur du host est utilisée pour générer la clé d'agrégation. |
-| **priority**    | Chaîne      | Détermine si l'événement est visible ou masqué par défaut dans le flux. Valeurs possibles : `low` ou `normal`.                                                                                                                      |
+| event_type      | chaîne      | Décrit le type d'événement dont il s'agit. Utilisé pour générer la clé d'agrégation.                                                                                                                                                         |
+| aggregation_key | chaîne      | Décrit les éléments affectés par cet événement, le cas échéant. Utilisé pour générer la clé d'agrégation.                                                                                                                                              |
+| host            | chaîne      | Nom du host à l'origine de l'événement. L'événement reçoit automatiquement les tags que vous avez attribués au host en utilisant la page de [tagging][1] ou l'[API de tagging][2]. La valeur du host est utilisée pour générer la clé d'agrégation. |
+| **priority**    | chaîne      | Détermine si l'événement est visible ou masqué par défaut dans le flux. Valeurs possibles : `low` ou `normal`.                                                                                                                      |
 
 Les événements ayant la même clé d'agrégation sur une période de 24 heures sont regroupés sur le flux.
 La clé d'agrégation est une combinaison des champs suivants :

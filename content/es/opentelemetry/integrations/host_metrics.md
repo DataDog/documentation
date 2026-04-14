@@ -91,7 +91,21 @@ receivers:
 
 ## Datos recopilados
 
-Consulta [asignación de métricas de OpenTelemetry][2] para obtener información sobre las métricas de host recopiladas.
+Las métricas de hosts son recopiladas por el [receptor de métricas de host][4]. Para obtener información sobre la configuración del receptor, consulta [Exportador de Datadog recopilador de OpenTelemetry][5].
+
+La métricas, asignadas a métricas de Datadog, se utilizan en las siguientes vistas:
+- [Mapa de hosts de infraestructura][6]
+- [Lista de infraestructuras][7]
+- [Dashboards de hosts por defecto][8]
+- [Información de hosts de visualización de trazas de APM][9]
+
+**Nota**: Para correlacionar métricas de trazas y hosts, configura [atributos universales de monitorización de servicios][10] para cada servicio y define el atributo de recurso `host.name` en el host subyacente correspondiente para instancias del servicio y del recopilador.
+
+La siguiente tabla muestra qué nombres de métrica de host de Datadog están asociados a los correspondientes nombres de métrica de host de OpenTelemetry y, si procede, qué matemática se aplica a la métrica de host de OTel para transformarla en unidades de Datadog durante la asignación.
+
+{{< mapping-table resource="host.csv">}}
+
+Para obtener más información, consulta [Asignación de métricas de OpenTelemetry][2].
 
 
 ## Ejemplo completo de configuración
@@ -148,3 +162,10 @@ Value: 1153183744
 [1]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/receiver/hostmetricsreceiver/README.md
 [2]: /es/opentelemetry/guide/metrics_mapping/#host-metrics
 [3]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/host-metrics.yaml
+[4]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/hostmetricsreceiver
+[5]: /es/opentelemetry/otel_collector_datadog_exporter/
+[6]: https://app.datadoghq.com/infrastructure/map?fillby=avg%3Acpuutilization&groupby=availability-zone
+[7]: https://app.datadoghq.com/infrastructure
+[8]: /es/opentelemetry/collector_exporter/#out-of-the-box-dashboards
+[9]: /es/tracing/trace_explorer/trace_view/?tab=hostinfo
+[10]: /es/universal_service_monitoring/setup/

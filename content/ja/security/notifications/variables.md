@@ -93,7 +93,7 @@ Epoch テンプレート変数は、通知内で人間が読みやすい文字�
 
 ## 属性変数
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 HIPAA 対応 Datadog 組織がセキュリティ通知に関してアクセスできるのは<a href="#template-variables">テンプレート変数</a>のみです。属性変数はサポートされていません。
 </div>
 

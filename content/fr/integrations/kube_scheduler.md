@@ -76,7 +76,7 @@ La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'a
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "kube_scheduler" >}}
+{{< get-metrics-from-git "kube-scheduler" >}}
 
 
 ### Checks de service

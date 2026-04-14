@@ -1,5 +1,6 @@
 ---
 title: Getting Started with Terraform
+description: Use the Datadog Terraform provider to programmatically create and manage Datadog resources. Configure cloud integrations, monitors, dashboards, and other resources with Terraform.
 further_reading:
     - link: 'https://www.datadoghq.com/blog/managing-datadog-with-terraform/'
       tag: 'Blog'

@@ -4,7 +4,8 @@ app_uuid: a48ccc77-3e72-4e3b-b439-3ebe7e2688b7
 assets:
   integration:
     auto_install: true
-    configuration: {}
+    configuration:
+      spec: assets/configuration/spec.yaml
     events:
       creates_events: false
     metrics:
@@ -22,7 +23,7 @@ author:
   support_email: emeric.planet@gmail.com
 categories:
 - コラボレーション
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/nextcloud/README.md
 display_on_public_website: true
@@ -30,7 +31,7 @@ draft: false
 git_integration_title: nextcloud
 integration_id: nextcloud
 integration_title: Nextcloud
-integration_version: 1.0.0
+integration_version: 2.0.0
 is_public: true
 manifest_version: 2.0.0
 name: nextcloud
@@ -79,7 +80,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Nextcloud チ�
 
 2. コアの[インテグレーション][4]と同様にインテグレーションを構成します。
 
-### 構成
+### 設定
 
 1. Nextcloud の[メトリクス](#メトリクス) を収集するには、[Agent のコンフィギュレーションディレクトリ][5]のルートにある `conf.d/` フォルダーの `nextcloud.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル nextcloud.d/conf.yaml][6] を参照してください。
 
@@ -95,6 +96,12 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Nextcloud チ�
 {{< get-metrics-from-git "nextcloud" >}}
 
 
+#### Optional metrics
+
+The `nextcloud.system.apps.*` metrics are optional and enabled with the `apps_stats` configuration key. Beginning with Nextcloud 28, the monitoring endpoint no longer provides information about available app updates, as gathering the data always involves at least one external request to apps.nextcloud.com.
+
+It is still possible to ask the monitoring endpoint to [show new app updates][10] by using the URL parameter `skipApps=false`. However, Nextcloud recommends to not check this endpoint too often.
+
 ### イベント
 
 Nextcloud には、イベントは含まれません。
@@ -105,7 +112,7 @@ Nextcloud には、イベントは含まれません。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][11]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][12]までお問合せください。
 
 
 [1]: https://nextcloud.com
@@ -117,5 +124,6 @@ Nextcloud には、イベントは含まれません。
 [7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [8]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#service-status
 [9]: https://github.com/DataDog/integrations-extras/blob/master/nextcloud/metadata.csv
-[10]: https://github.com/DataDog/integrations-extras/blob/master/nextcloud/assets/service_checks.json
-[11]: https://docs.datadoghq.com/ja/help/
+[10]: https://github.com/nextcloud/serverinfo#api
+[11]: https://github.com/DataDog/integrations-extras/blob/master/nextcloud/assets/service_checks.json
+[12]: https://docs.datadoghq.com/ja/help/

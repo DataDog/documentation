@@ -11,6 +11,10 @@ further_reading:
     text: "Automation Pipelines"
 ---
 
+{{< callout url="https://www.datadoghq.com/product-preview/customize-your-security-inbox/" header="Join the Preview!">}}
+  Add to Security Inbox Rules is in Preview.
+{{< /callout >}}
+
 Configure inbox rules to manage your Security Inbox effectively, ensuring only the most relevant security issues are highlighted. By customizing conditions, you can focus on critical concerns, prioritize key risks, support compliance, and bring attention to issues that might otherwise be overlooked.
 
 ## Create an inbox rule
@@ -22,11 +26,9 @@ Configure inbox rules to manage your Security Inbox effectively, ensuring only t
       - **Misconfiguration**
       - **Attack Path**
       - **Identity Risk**
-      - **API Security Finding**
-      - **Application Code Vulnerability**
-      - **Application Library Vulnerability**
+      - **Runtime Code Vulnerability**
+      - **Library Vulnerability**
       - **Container Image Vulnerability**
-      - **API Security Finding**
       - **Host Vulnerability**
     - **Any of these tags or attributes**: The resource tags or attributes that must match for the rule to apply.
 1. To add severity criteria to the rule, click **Add Severity**.
@@ -40,4 +42,4 @@ When Datadog identifies a finding, it evaluates the finding against your sequenc
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[2]: https://app.datadoghq.com/security/configuration/pipeline-vulnerability
+[2]: https://app.datadoghq.com/security/configuration/findings-automation?opened-sections=add_to_inbox

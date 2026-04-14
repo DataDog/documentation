@@ -3,6 +3,8 @@ aliases:
 - /es/monitors/monitor_types/ci_pipelines/
 - /es/monitors/create/types/ci_pipelines/
 - /es/monitors/create/types/ci/
+description: Monitoriza pipelines de CI, tests y despliegues de CD con alertas sobre
+  fallos, regresiones de rendimiento y métricas de cobertura de código.
 further_reading:
 - link: /monitors/notify/
   tag: Documentación
@@ -10,32 +12,35 @@ further_reading:
 - link: /monitors/downtimes/
   tag: Documentación
   text: Programar un tiempo de inactividad para silenciar un monitor
-- link: /monitors/manage/status/
+- link: /monitors/status/
   tag: Documentación
   text: Comprobar el estado de tu monitor
 - link: https://www.datadoghq.com/blog/configure-pipeline-alerts-with-ci-monitors/
   tag: Blog
   text: Configurar alertas de pipelines con monitores CI de Datadog
-title: Monitor CI
+site_support_id: ci_visibility
+title: Monitor de CI/CD y Tests
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">CI Visibility no está disponible en el sitio seleccionado ({{< region-param key="dd_site_name" >}}) en este momento.</div>
-{{< /site-region >}}
+## Información general
 
-## Resumen
+Para crear un monitor para pipelines de CI, tests de CI o despliegues de CD, activa primero el producto relacionado para tu organización:
 
-Una vez que [CI Visibility esté habilitado][1] para tu organización, podrás crear un pipeline CI o un monitor de tests CI.
+| Tipo de monitor     | Producto requerido         |
+|------------------|--------------------------|
+| CI Pipeline      | [CI Visibility][1]       |
+| CI Test          | [Test Optimization][2]   |
+| CD Deployments   | [CD Visibility][3]       |
 
-Los monitores CI te permiten visualizar los datos de CI y configurar alertas sobre ellos. Por ejemplo, crea un monitor de pipelines CI para recibir alertas sobre un pipeline o una tarea que haya fallado. Crea un un monitor de tests CI para recibir alertas sobre tests fallidos o lentos.
+Continuous Integration Continuous Delivery (CI/CD) y Test te permiten visualizar los datos de CI/CD y configurar alertas al respecto. Por ejemplo, crea un monitor de pipeline de CI para recibir alertas sobre un pipeline fallido o un trabajo. Crea un monitor de test de CI para recibir alertas sobre tests fallidos o lentos.
 
 ## Creación de un monitor
 
-Para crear un [monitor CI][2] en Datadog, utiliza la navegación principal: *Monitors -> New Monitor --> CI* (Monitores --> Nuevo monitor --> CI).
+Para crear un nuevo monitor, navega hasta **Monitors > New Monitor > CI/CD & Tests** (Monitores > Nuevo monitor > CI/CD y Tests).
 
-<div class="alert alert-info"><strong>Nota</strong>: Hay un límite por defecto de 1000 monitores CI por cuenta. <a href="/help/">Ponte en contacto con el servicio de asistencia</a> para aumentar este límite en tu cuenta.</div>
+<div class="alert alert-info">Hay un límite por defecto de 1000 monitores CI/CD y de test por cuenta. <a href="/help/">Ponte en contacto con el servicio de asistencia</a> para aumentar este límite en tu cuenta.</div>
 
-Elige entre un monitor de **Pipelines** o **Tests**:
+Elige uno de los tipos de monitor:
 
 {{< tabs >}}
 {{% tab "Pipelines" %}}
@@ -67,11 +72,12 @@ Se pueden crear monitores de pipelines CI utilizando fórmulas y funciones. Esto
 El siguiente ejemplo es un monitor de tasa de error de pipeline que utiliza una fórmula que calcula la proporción del "número de eventos de pipeline fallidos" (`ci.status=error`) sobre el "número de eventos de pipelines totales" (sin filtro), agrupados por `ci.pipeline.name` (para ser alertados una vez por cada pipeline). Para obtener más información, consulta [Información general en la sección Funciones][2].
 {{< img src="monitors/monitor_types/ci_pipelines/define-the-Buscar-query-fnf.png" alt="Monitor definido a través de las etapas a, b, c, donde las etapas a, b son consultas y la etapa c calcula la tasa a partir de las dos etapas anteriores." style="width:1000%;" >}}
 
-<div class="alert alert-info"><strong>Nota</strong>: Sólo se pueden utilizar hasta 2 consultas por monitor para crear la fórmula de evaluación.</div>
+<div class="alert alert-info">Solo se pueden utilizar hasta 2 consultas para crear la fórmula de evaluación por monitor.</div>
 
 [1]: /es/continuous_integration/pipelines/custom_commands/
 [2]: /es/dashboards/functions/#overview
 {{% /tab %}}
+
 {{% tab "Tests" %}}
 
 ### Definir la consulta de búsqueda
@@ -126,7 +132,37 @@ En la sección `Notification message` de tu monitor, añade un texto similar al 
 [1]: /es/dashboards/functions/#overview
 [2]: /es/monitors/notify/variables/?tab=is_match#conditional-variables
 {{% /tab %}}
+
+{{% tab "Deployments" %}}
+
+### Definir la consulta de búsqueda
+
+1. Construye una consulta de búsqueda utilizando la misma lógica que una búsqueda en el explorador de CD Deployments.
+3. Elige monitorizar un recuento, faceta o medida de eventos de CD Deployment:
+    * **Recuento de eventos de CD Deployment**: utiliza la barra de búsqueda (opcional) y **no** selecciones una faceta o medida. Datadog evalúa el número de eventos de CD Deployment durante un periodo seleccionado y, a continuación, lo compara con las condiciones de umbral.
+    * **Dimensión** (Dimensión): selecciona la dimensión (faceta cualitativa) para emitir alertas sobre el `Unique value count` de la faceta.
+    * **Medida**: selecciona la medida (faceta cuantitativa) para alertar sobre el valor numérico de la medida de CD Deployment (similar a un monitor de métrica). Selecciona la agregación (`min`, `avg`, `sum`, `median`, `pc75`, `pc90`, `pc95`, `pc98`, `pc99` o `max`).
+4. Agrupa los eventos de CD Deployment por múltiples dimensiones (opcional):
+    * Todos los eventos de CD Deployment que coincidan con la consulta se agregan en grupos basados en el valor de hasta cuatro facetas.
+5. Configura la estrategia de agrupación de alertas (opcional):
+   * Si la consulta tiene un `group by`, las multialertas aplican la alerta a cada fuente según tus parámetros de grupo. Se genera un evento de alerta para cada grupo que cumpla las condiciones establecidas. Por ejemplo, podrías agrupar una consulta por `@deployment.name` para recibir una alerta separada para cada nombre de CD Deployment cuando el número de errores sea elevado.
+
+{{< img src="monitors/monitor_types/cd_deployments/define-the-search-query.png" alt="Una consulta de Deployment Status:Error configurado para agrupar por Nombre de despliegue" style="width:100%;" >}}
+
+#### Mediante fórmulas y funciones
+
+Puedes crear monitores de CD Deployment utilizando fórmulas y funciones. Esto puede utilizarse, por ejemplo, para crear monitores de la **tasa** de ocurrencia de un evento, como la tasa de fallo de un despliegue (tasa de error).
+
+El siguiente ejemplo muestra un monitor de tasa de errores de despliegue. Utiliza una fórmula para calcular la proporción de "eventos de despliegue fallidos" (`deployment.status:error`) sobre el "total de eventos de despliegue" (sin filtros), agrupados por `deployment.name`, para activar alertas para cada despliegue individualmente. Para obtener más información, consulta la [Descripción general de las funciones][1].
+
+{{< img src="monitors/monitor_types/cd_deployments/define-the-search-query-fnf.png" alt="Monitor definido con los pasos a, b y c, en el que los pasos a y b son consultas y el paso c calcula la tasa de ellas." style="width:100%;" >}}
+
+<div class="alert alert-info">Solo se pueden utilizar hasta 2 consultas para crear la fórmula de evaluación por monitor.</div>
+
+[1]: /es/dashboards/functions/#overview
+{{% /tab %}}
 {{< /tabs >}}
+
 ### Definir condiciones de alerta
 
 * Se activa cuando la métrica es `above`, `above or equal to`, `below`, o `below or equal to`
@@ -136,15 +172,15 @@ En la sección `Notification message` de tu monitor, añade un texto similar al 
 
 #### Condiciones de alerta avanzadas
 
-Para obtener instrucciones detalladas sobre las opciones avanzadas de alerta (como el tiempo de espera para la evaluación), consulta la página [Configurar monitores][3].
+Para obtener instrucciones detalladas sobre las opciones avanzadas de alerta (como el retardo de evaluación), consulta la página [Configuración del monitor][4].
 
 ### Notificaciones
 
-Para obtener instrucciones detalladas sobre la sección **Configure notifications and automations** (Configurar notificaciones y automatizaciones), consulta la página [Notificaciones][4].
+Para obtener instrucciones detalladas sobre la sección **Configure notifications and automations** (Configurar notificaciones y automatizaciones), consulta la página [Notificaciones][5].
 
 #### Ejemplos y lista de los principales valores de incumplimiento
 
-Cuando se activa una test CI o un monitor de pipelines, pueden añadirse ejemplos o valores al mensaje de notificación.
+Cuando se activa un monitor de pipeline de CI, test de CI, o CD Deployments, se pueden añadir muestras o valores al mensaje de notificación.
 
 | Configuración del monitor                    | Puede añadirse al mensaje de notificación |
 |----------------------------------|--------------------------------------|
@@ -153,7 +189,7 @@ Cuando se activa una test CI o un monitor de pipelines, pueden añadirse ejemplo
 | Recuento de alertas múltiples agrupadas        | Hasta 10 ejemplos.                    |
 | Medida de alertas simples no agrupadas   | Hasta 10 ejemplos.                    |
 | Medida de alertas simples agrupadas     | Hasta 10 valores de facetas o medidas.    |
-| Medida de alertas múltiples agrupadas        | Hasta 10 valores de facetas o medidas.    |
+| Medida de alertas múltiples agrupadas      | Hasta 10 valores de facetas o medidas.    |
 
 Están disponibles para notificaciones enviadas a Slack, Jira, webhooks, Microsoft Teams, Pagerduty y direcciones de correo electrónico. **Nota**: Los ejemplos no se muestran para notificaciones de recuperación.
 
@@ -195,20 +231,21 @@ Una ejecución de test se marca como `new flaky` si ese test en particular no se
 Para obtener más información, consulta [Buscar y administrar tests CI][6].
 
 ### Mantener el porcentaje de cobertura del código
-Las [métricas personalizadas][5], como el porcentaje de cobertura del código, pueden crearse y utilizarse en monitores. El siguiente monitor envía alertas cuando la cobertura del código cae por debajo de un determinado porcentaje, lo que puede ayudar con el mantenimiento del rendimiento de los tests a lo largo del tiempo.
+[Métricas personalizadas][7], como el porcentaje de cobertura de código, pueden ser creadas y utilizadas dentro de los monitores. El siguiente monitor envía alertas cuando la cobertura del código cae por debajo de un determinado porcentaje, lo que puede ayudar a mantener el rendimiento del test a lo largo del tiempo.
 
 {{< img src="ci/codecoveragepct_monitor_light.png" alt="Monitor de tests CI defectuosos" style="width:100%;">}}
 
-Para obtener más información, consulta [Cobertura del código][7].
+Para más información, consulta [Cobertura del código][8].
 
-## Para leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /es/continuous_integration/
-[2]: https://app.datadoghq.com/monitors/create/ci-pipelines
-[3]: /es/monitors/configuration/#advanced-alert-conditions
-[4]: /es/monitors/notify/
-[5]: /es/continuous_integration/pipelines/custom_tags_and_metrics/?tab=linux
+[2]: /es/tests/
+[3]: /es/continuous_delivery/
+[4]: /es/monitors/configuration/#advanced-alert-conditions
+[5]: /es/monitors/notify/
 [6]: /es/continuous_integration/search/#new-flaky-tests
-[7]: /es/continuous_integration/tests/code_coverage
+[7]: /es/continuous_integration/pipelines/custom_tags_and_metrics/?tab=linux
+[8]: /es/continuous_integration/tests/code_coverage

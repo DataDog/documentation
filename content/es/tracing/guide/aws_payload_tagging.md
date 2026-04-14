@@ -169,7 +169,7 @@ Añade servicios a la lista separada por comas. Por ejemplo, para añadir la com
 DD_TRACE_CLOUD_PAYLOAD_TAGGING_SERVICES=s3,sns,sqs,kinesis,eventbridge,amplify
 ```
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Los servicios añadidos no incluyen el ocultamiento por defecto. Prueba tu aplicación en staging para identificar y configurar ocultamientos necesarios.
 </div>
 
@@ -189,7 +189,7 @@ Controla el número máximo de etiquetas extraídas con:
 DD_TRACE_CLOUD_PAYLOAD_TAGGING_MAX_TAGS=758
 ```
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 El valor por defecto (758) es el máximo que puede aceptar el Datadog Agent. No se recomienda aumentar este valor.
 </div>
 
@@ -218,7 +218,7 @@ Para activar la extracción de etiquetas de servicios adicionales utiliza esta v
 DD_TRACE_CLOUD_PAYLOAD_TAGGING_SERVICES=ApiGateway,ApiGatewayV2,EventBridge,Sqs,Sns,S3,Kinesis
 ```
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Los servicios añadidos no incluyen el ocultamiento por defecto. Prueba tu aplicación en staging para identificar y configurar ocultamientos necesarios.
 </div>
 
@@ -243,7 +243,7 @@ Controla el número máximo de etiquetas extraídas con:
 DD_TRACE_CLOUD_PAYLOAD_TAGGING_MAX_TAGS=758
 ```
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 El valor por defecto (758) es el máximo que puede aceptar el Datadog Agent. No se recomienda aumentar este valor.
 </div>
 

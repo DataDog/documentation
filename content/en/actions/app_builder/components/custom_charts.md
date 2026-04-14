@@ -1,5 +1,6 @@
 ---
 title: Custom Charts
+description: Create custom charts in apps using Vega-Lite specifications to visualize data from queries with various chart types and styles.
 disable_toc: false
 aliases:
 - /service_management/app_builder/custom_charts/
@@ -13,10 +14,6 @@ further_reading:
   text: "Build Apps"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">App Builder is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 This page provides an example of how to use the custom chart component in your App Builder apps.
 
 The basic workflow for creating a custom chart is as follows:
@@ -24,6 +21,10 @@ The basic workflow for creating a custom chart is as follows:
 1. Create or choose a query that contains the data you want to graph.
 1. Add the custom chart component and choose a chart style from the App Builder UI or the [Vega-Lite example gallery][1].
 1. Replace the values in the example with your query data.
+
+Alternatively, you can use Bits AI to get started with a custom chart:
+   1. Click the **Build with AI** icon (**<i class="icon-bits-ai"></i>**).
+   1. Enter a custom prompt, or try the prompt `Can you help me create a custom chart?`.
 
 ## Example setup flow
 
@@ -99,5 +100,5 @@ A histogram chart with your Datadog Logs data displays.
 
 <br>Do you have questions or feedback? Join the **#app-builder** channel on the [Datadog Community Slack][0].
 
-[0]: https://datadoghq.slack.com/
+[0]: https://chat.datadoghq.com/
 [1]: https://vega.github.io/vega-lite/examples/

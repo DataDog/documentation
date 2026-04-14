@@ -1,9 +1,15 @@
 ---
+aliases:
+- /ko/tracing/trace_search_and_analytics/request_flow_map
+- /ko/tracing/trace_explorer/request_flow_map/
 description: 스팬을 목록에서 보거나 시계열, 상위 목록 등으로 집계할 수 있습니다.
 further_reading:
 - link: tracing/trace_explorer/
   tag: 설명서
   text: 트레이스 탐색기
+- link: https://www.datadoghq.com/blog/apm-request-flow-map-datadog
+  tag: 블로그
+  text: 요청 흐름 맵에 대해 알아보기
 title: 스팬(span) 시각화
 ---
 
@@ -89,6 +95,31 @@ title: 스팬(span) 시각화
 
 {{< img src="tracing/trace_explorer/visualize/table_view.png" alt="표 보기" style="width:100%;">}}
 
+## 요청 흐름 맵
+
+[요청 흐름 맵][6]은 APM의 [서비스 맵][7]과 [실시간 탐색][8] 기능을 결합하여 스택 전반의 요청 경로를 보여줍니다. 트레이스 범위를 다양한 태그 조합으로 지정하고 모든 서비스 간의 요청 흐름을 나타내는 동적 맵을 생성합니다.
+
+{{< img src="tracing/live_search_and_analytics/request_flow_map/Overview.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="서비스 간 요청 흐름, 요청 시간 및 오류율을 보여주는 요청 흐름 맵" >}}
+
+예를 들어, 요청 흐름 맵을 사용하여 트래픽이 많은 서비스를 식별하거나 특정 엔드포인트에 대한 요청으로 생성된 데이터베이스 호출 수를 추적할 수 있습니다. [섀도 배포][9]를 사용하거나 사용자 지정 스팬 태그로 설정된 기능 플래그를 사용하면 요청 흐름 맵을 사용하여 요청 간 요청 지연 시간을 비교하고 코드 변경이 성능에 미치는 영향을 예측할 수 있습니다.
+
+### 요청 흐름 맵 탐색
+
+- 두 서비스를 연결하는 에지 위에 마우스를 올려놓으면 해당 서비스 간의 요청, 오류, 지연 시간에 관한 메트릭을 확인할 수 있습니다. **참고**: 강조 표시된 에지는 처리량이 가장 높은 연결 또는 가장 일반적인 경로를 나타냅니다.
+
+- **Export**를 클릭하여 현재 요청 흐름 맵의 PNG 이미지를 저장합니다. 이 기능을 사용하여 실시간 아키텍처 다이어그램이나 특정 사용자 흐름에 맞는 아키텍처 다이어그램을 생성할 수 있습니다.
+
+- 맵에서 서비스를 클릭하면 해당 서비스의 상태, 성능, 인프라 및 런타임 메트릭을 볼 수 있습니다.
+
+{{< img src="tracing/live_search_and_analytics/request_flow_map/ServicePanel.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="선택한 서비스의 메트릭 및 메타데이터가 포함된 요청 흐름 맵 사이드 패널" >}}
+
+- 맵은 현재 서비스 수에 따라 적절한 레이아웃을 자동으로 선택합니다. **Cluster** 또는 **Flow**를 클릭하여 레이아웃을 전환하세요.
+
+- [RUM과 Traces를 연결한 경우][10] RUM 애플리케이션은 요청 흐름 맵에 표시됩니다.
+
+{{< img src="tracing/live_search_and_analytics/request_flow_map/RUMService.mp4" alt="요청 흐름 맵에서 RUM 애플리케이션 서비스 세부 정보를 어떻게 탐색하는지 보여주는 동영상" video=true style="width:100%;">}}
+
+
 ## 참고 자료
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -98,3 +129,8 @@ title: 스팬(span) 시각화
 [3]: /ko/tracing/trace_explorer/facets/#quantitative-facets-measures
 [4]: /ko/tracing/trace_explorer/?tab=timeseriesview#live-search-for-15-minutes
 [5]: /ko/tracing/error_tracking/
+[6]: https://app.datadoghq.com/apm/flow-map
+[7]: /ko/tracing/services/services_map/
+[8]: /ko/tracing/trace_explorer/
+[9]: /ko/tracing/services/deployment_tracking/#shadow-deploys
+[10]: /ko/real_user_monitoring/correlate_with_other_telemetry/apm?tab=browserrum

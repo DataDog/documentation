@@ -21,62 +21,66 @@ La biblioteca de Datadog Trace de Ruby es de código abierto. Consulta el reposi
 
 ### Intérpretes compatibles de Ruby 
 
-| Tipo  | Documentación              | Versión   | Tipo de soporte técnico              | Compatibilidad con versiones de Gem |
+<!-- Asegúrate de que todos los comentarios de "# TODO: Ruby 3.5 - " estén abordados antes de incluir 3.5 en nuestros documentos públicos de soporte -->
+| Tipo  | Documentación              | Versión   | Tipo de soporte              | Soporte de la versión del Gem |
 |-------|----------------------------|-----------|---------------------------|---------------------|
-| MRI   | https://www.ruby-lang.org/ | 3.3       | [última](#support-latest) | Última              |
-|       |                            | 3.2       | [última](#support-latest) | Última              |
-|       |                            | 3.1       | [última](#support-latest) | Última              |
-|       |                            | 3.0       | [última](#support-latest) | Última              |
-|       |                            | 2.7       | [última](#support-latest) | Última              |
-|       |                            | 2.6       | [última](#support-latest) | Última              |
-|       |                            | 2.5       | [última](#support-latest) | Última              |
+| MRI   | https://www.ruby-lang.org/ | 3.4       | [Más reciente](#support-latest) | Más reciente              |
+|       |                            | 3.3       | [Más reciente](#support-latest) | Más reciente              |
+|       |                            | 3.2       | [Más reciente](#support-latest) | Más reciente              |
+|       |                            | 3.1       | [Más reciente](#support-latest) | Más reciente              |
+|       |                            | 3.0       | [Más reciente](#support-latest) | Más reciente              |
+|       |                            | 2.7       | [Más reciente](#support-latest) | Más reciente              |
+|       |                            | 2.6       | [Más reciente](#support-latest) | Más reciente              |
+|       |                            | 2.5       | [Más reciente](#support-latest) | Más reciente              |
 |       |                            | 2.4       | [EOL](#support-eol)       | < 2.0.0             |
 |       |                            | 2.3       | [EOL](#support-eol)       | < 2.0.0             |
 |       |                            | 2.2       | [EOL](#support-eol)       | < 2.0.0             |
 |       |                            | 2.1       | [EOL](#support-eol)       | < 2.0.0             |
 |       |                            | 2.0       | [EOL](#support-eol)       | < 0.50.0            |
 |       |                            | 1.9       | [EOL](#support-eol)       | < 0.27.0            |
-| JRuby | https://www.jruby.org      | 9.3       | [última](#support-latest) | Última              |
-|       |                            | 9.2.21.0+ | [última](#support-latest) | Última              |
+| JRuby | https://www.jruby.org      | 9.4       | [Más reciente](#support-latest) | Más reciente              |
+|       |                            | 9.3       | [Más reciente](#support-latest) | Más reciente              |
+|       |                            | 9.2.21.0+ | [Más reciente](#support-latest) | Más reciente              |
 
 ### Servidores web compatibles
 
-| Tipo      | Documentación                     | Versión      | Tipo de soporte técnico              |
+| Tipo      | Documentación                     | Versión      | Tipo de compatibilidad              |
 |-----------|-----------------------------------|--------------|---------------------------|
 | Puma      | http://puma.io/                   | 2.16+ / 3.6+ | [última](#support-latest) |
 | Unicorn   | https://bogomips.org/unicorn/     | 4.8+ / 5.1+  | [última](#support-latest) |
-| Passenger | https://www.phusionpassenger.com/ | 5.0+         | [última](#support-latest) |
+| Passenger | https://www.phusionpassenger.com/ | v5.0 o posterior         | [última](#support-latest) |
 
-### Marcos de rastreo compatibles
+### Frameworks de rastreo compatibles
 
-| Tipo        | Documentación                                   | Versión | Tipo de soporte técnico        | Compatibilidad con versiones de gem |
+| Tipo        | Documentación                                   | Versión | Tipo de compatibilidad        | Compatibilidad con versiones de gem |
 |-------------|-------------------------------------------------|---------|---------------------|---------------------|
+| OpenTelemetry | https://github.com/open-telemetry/opentelemetry-ruby | >= 1.1.0 | [última](#support-latest) | 1.9.0 o posterior |
 | OpenTracing | https://github.com/opentracing/opentracing-ruby | 0.4.1+  | [EOL](#support-eol) | < 2.0.0             |
 
 ### Sistemas operativos compatibles
 
-| SO            | Tipo de soporte técnico                            | Paquete versión |
+| Sistema operativo            | Tipo de compatibilidad                            | Versión del paquete |
 |---------------|-----------------------------------------|-----------------|
-| Linux x86_64  | [última](#support-latest)               | Última          |
-| Linux aarch64 | [última](#support-latest)               | Última          |
-| macOS         | Solo entornos de desarrolladores                    | Última          |
-| MS Windows    | [No implementada](#support-unimplemented) | Última          |
+| Linux x86_64  | [última](#support-latest)               | Último          |
+| Linux aarch64 | [última](#support-latest)               | Último          |
+| macOS         | Solo entornos de desarrolladores                    | Último          |
+| MS Windows    | [No implementada](#support-unimplemented) | Último          |
 
 ¿Necesitas soporte de linux para una arquitectura de CPU que no aparece en la lista? [Ponte en contacto con nuestro equipo de atención al cliente para solicitudes especiales][49].
 
 ### Versiones compatibles de Datadog Agent 
 
-| Versión de Datadog Agent | Tipo de soporte técnico              | Paquete versión |
+| Versión de Datadog Agent | Tipo de compatibilidad              | Versión del paquete |
 |-----------------------|---------------------------|-----------------|
-| [7.x][53]             | [última](#support-latest) | Última          |
-| [6.x][53]             | [Última](#support-latest) | Última          |
-| [5.x][54]             | [Última](#support-latest) | Última          |
+| [7.x][53]             | [última](#support-latest) | Último          |
+| [6.x][53]             | [Última](#support-latest) | Último          |
+| [5.x][54]             | [Última](#support-latest) | Último          |
 
 ## Integraciones
 
-Para consultar la lista de integraciones disponibles y sus opciones de configuración, consulta lo siguiente:
+Para consultar una lista de integraciones disponibles y sus opciones de configuración, consulta lo siguiente:
 
-| Nombre                       | Clave                        | Versiones compatibles: MRI                     | Versiones compatibles: JRuby                   | Cómo configurar | Gem Source                                                                   |
+| Nombre                       | Clave                        | Versiones compatibles: MRI                     | Versiones compatibles: JRuby                   | Cómo configurar | Gem source                                                                   |
 |----------------------------|----------------------------|---------------------------------------------|---------------------------------------------|------------------|------------------------------------------------------------------------------|
 | Action Cable               | `action_cable`             | `>= 5.0`                                    | `>= 5.0`                                    | [Enlace][2]        | [Enlace](https://github.com/rails/rails/tree/master/actioncable)               |
 | Action Mailer              | `action_mailer`            | `>= 5.0`                                    | `>= 5.0`                                    | [Enlace][3]        | [Enlace](https://github.com/rails/rails/tree/master/actionmailer)              |
@@ -95,25 +99,26 @@ Para consultar la lista de integraciones disponibles y sus opciones de configura
 | Excon                      | `excon`                    | `>= 0.50`                                   | `>= 0.50`                                   | [Enlace][16]       | [Enlace](https://github.com/excon/excon)                                       |
 | Faraday                    | `faraday`                  | `>= 0.14`                                   | `>= 0.14`                                   | [Enlace][17]       | [Enlace](https://github.com/lostisland/faraday)                                |
 | Grape                      | `grape`                    | `>= 1.0`                                    | `>= 1.0`                                    | [Enlace][18]       | [Enlace](https://github.com/ruby-grape/grape)                                  |
-| GraphQL                    | `graphql`                  | `>= 2.2.6`, `2.1.11+`,`2.0.28+`, `1.13.21+` | `>= 2.2.6`, `2.1.11+`,`2.0.28+`, `1.13.21+` | [Enlace][19]       | [Enlace](https://github.com/rmosolgo/graphql-ruby)                             |
+| GraphQL                    | `graphql`                  | `>= 2.2.6`, `2.1.11+`,`2.0.28+`, `1.13.21+` | `>= 2.2.6`, `2.1.11+`,`2.0.28+`, `1.13.21+` | [Enlace][19]       | [Enlace](https://github.com/rmosolgo/graphql-Ruby)                             |
 | gRPC                       | `grpc`                     | `>= 1.7`                                    | *gem no disponible*                         | [Enlace][20]       | [Enlace](https://github.com/grpc/grpc/tree/master/src/rubyc)                   |
 | hanami                     | `hanami`                   | `>= 1`, `< 2`                               | `>= 1`, `< 2`                               | [Enlace][21]       | [Enlace](https://github.com/hanami/hanami)                                     |
 | http.rb                    | `httprb`                   | `>= 2.0`                                    | `>= 2.0`                                    | [Enlace][22]       | [Enlace](https://github.com/httprb/http)                                       |
 | httpclient                 | `httpclient`               | `>= 2.2`                                    | `>= 2.2`                                    | [Enlace][23]       | [Enlace](https://github.com/nahi/httpclient)                                   |
 | httpx                      | `httpx`                    | `>= 0.11`                                   | `>= 0.11`                                   | [Enlace][24]       | [Enlace](https://gitlab.com/honeyryderchuck/httpx)                             |
-| Kafka                      | `ruby-kafka`               | `>= 0.7.10`                                 | `>= 0.7.10`                                 | [Enlace][25]       | [Enlace](https://github.com/zendesk/ruby-kafka)                                |
+| Kafka                      | `ruby-kafka`               | `>= 0.7.10`                                 | `>= 0.7.10`                                 | [Enlace][25]       | [Enlace](https://github.com/zendesk/Ruby-kafka)                                |
+| Karafka                    | `karafka`                  | `>= 2.3.0`                                  | `>= 2.3.0`                                  | [Enlace][55]       | [Enlace](https://karafka.io/) |
 | Makara (a través de Active Record) | `makara`                   | `>= 0.3.5`                                  | `>= 0.3.5`                                  | [Enlace][8]        | [Enlace](https://github.com/instacart/makara)                                  |
-| MongoDB                    | `mongo`                    | `>= 2.1`                                    | `>= 2.1`                                    | [Enlace][26]       | [Enlace](https://github.com/mongodb/mongo-ruby-driver)                         |
+| MongoDB                    | `mongo`                    | `>= 2.1`                                    | `>= 2.1`                                    | [Enlace][26]       | [Enlace](https://github.com/mongodb/mongo-Ruby-driver)                         |
 | MySQL2                     | `mysql2`                   | `>= 0.3.21`                                 | *gem no disponible*                         | [Enlace][27]       | [Enlace](https://github.com/brianmario/mysql2)                                 |
-| Net/HTTP                   | `http`                     | *(Cualquier Ruby compatible)*                      | *(Cualquier Ruby compatible)*                      | [Enlace][28]       | [Enlace](https://ruby-doc.org/stdlib-2.4.0/libdoc/net/http/rdoc/Net/HTTP.html) |
-| OpenSearch                 | `opensearch-ruby`          | `>= 1.0.0`                                  | `>= 1.0.0`                                  | [Enlace][29]       | [Enlace](https://github.com/opensearch-project/opensearch-ruby)                |
-| Postgres                   | `pg`                       | `>= 0.18.4`                                 | *gem no disponible*                         | [Enlace][30]       | [Enlace](https://github.com/ged/ruby-pg)                                       |
-| Presto                     | `presto`                   | `>= 0.5.14`                                 | `>= 0.5.14`                                 | [Enlace][31]       | [Enlace](https://github.com/treasure-data/presto-client-ruby)                  |
-| Que                        | `que`                      | `>= 1.0.0.beta2`                            | `>= 1.0.0.beta2`                            | [Enlace][33]       | [Enlace](https://github.com/que-rb/que)                                        |
+| Net/HTTP                   | `http`                     | *(Cualquier Ruby compatible)*                      | *(Cualquier Ruby compatible)*                      | [Enlace][28]       | [Enlace](https://Ruby-doc.org/stdlib-2.4.0/libdoc/net/http/rdoc/Net/HTTP.html) |
+| OpenSearch                 | `opensearch-ruby`          | `>= 1.0.0`                                  | `>= 1.0.0`                                  | [Enlace][29]       | [Enlace](https://github.com/opensearch-project/opensearch-Ruby)                |
+| Postgres                   | `pg`                       | `>= 0.18.4`                                 | *gem no disponible*                         | [Enlace][30]       | [Enlace](https://github.com/ged/Ruby-pg)                                       |
+| Presto                     | `presto`                   | `>= 0.5.14`                                 | `>= 0.5.14`                                 | [Enlace][31]       | [Enlace](https://github.com/treasure-data/presto-client-Ruby)                  |
+| Que                        | `que`                      | `>= 1.0.0.beta2`                            | `>= 1.0.0.beta2`                            | [Enlace] [33]       | [Enlace](https://github.com/que-rb/que)                                        |
 | Racecar                    | `racecar`                  | `>= 0.3.5`                                  | `>= 1.3.5`                                  | [Enlace][34]       | [Enlace](https://github.com/zendesk/racecar)                                   |
 | Rack                       | `rack`                     | `>= 1.1`                                    | `>= 1.1`                                    | [Enlace][35]       | [Enlace](https://github.com/rack/rack)                                         |
 | Rails                      | `rails`                    | `>= 4.0`                                    | `>= 4.0`                                    | [Enlace][36]       | [Enlace](https://github.com/rails/rails)                                       |
-| Rake                       | `rake`                     | `>= 12.0`                                   | `>= 12.0`                                   | [Enlace][37]       | [Enlace](https://github.com/ruby/rake)                                         |
+| Rake                       | `rake`                     | `>= 12.0`                                   | `>= 12.0`                                   | [Enlace][37]       | [Enlace](https://github.com/Ruby/rake)                                         |
 | Redis                      | `redis`                    | `>= 3.2`                                    | `>= 3.2`                                    | [Enlace][38]       | [Enlace](https://github.com/redis/redis-rb)                                    |
 | Resque                     | `resque`                   | `>= 1.0`                                    | `>= 1.0`                                    | [Enlace][39]       | [Enlace](https://github.com/resque/resque)                                     |
 | Rest Client                | `rest-client`              | `>= 1.8`                                    | `>= 1.8`                                    | [Enlace][40]       | [Enlace](https://github.com/rest-client/rest-client)                           |
@@ -123,8 +128,9 @@ Para consultar la lista de integraciones disponibles y sus opciones de configura
 | Sidekiq                    | `sidekiq`                  | `>= 3.5.4`                                  | `>= 3.5.4`                                  | [Enlace][44]       | [Enlace](https://github.com/mperham/sidekiq)                                   |
 | Sinatra                    | `sinatra`                  | `>= 1.4`                                    | `>= 1.4`                                    | [Enlace][45]       | [Enlace](https://github.com/sinatra/sinatra)                                   |
 | Sneakers                   | `sneakers`                 | `>= 2.12.0`                                 | `>= 2.12.0`                                 | [Enlace][46]       | [Enlace](https://github.com/jondot/sneakers)                                   |
-| Stripe                     | `stripe`                   | `>= 5.15.0`                                 | `>= 5.15.0`                                 | [Enlace][47]       | [Enlace](https://github.com/stripe/stripe-ruby)                                |
+| Stripe                     | `stripe`                   | `>= 5.15.0`                                 | `>= 5.15.0`                                 | [Enlace][47]       | [Enlace](https://github.com/stripe/stripe-Ruby)                                |
 | Sucker Punch               | `sucker_punch`             | `>= 2.0`                                    | `>= 2.0`                                    | [Enlace][48]       | [Enlace](https://github.com/brandonhilkert/sucker_punch)                       |
+| WaterDrop                  | `waterdrop`                | `>= 2.8.8.rc1`                              | `>= 2.8.8.rc1`                              | [Enlace][55]       | [Enlace](https://github.com/karafka/waterdrop) |
 
 ### Política de soporte técnico
 
@@ -135,7 +141,7 @@ ciertas bibliotecas de Ruby y el Datadog Agent/API. Cuando estas versiones dejan
 
 | **Nivel**                                             | **Asistencia prestada**                                                                                                                      |
 |-------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------|
-| <span id="support-unsupported">Sin soporte técnico</span>     | Posiblemente funcional, pero no probado ni compatible. [Ponte en contacto con nuestro equipo de atención al cliente para solicitudes especiales][49].                           |
+| <span id="support-unsupported">Sin soporte</span>     | Posiblemente funcional, pero no probado ni compatible. [Ponte en contacto con nuestro equipo de atención al cliente para solicitudes especiales][49].                           |
 | <span id="support-unimplemented">No implementado</span> | Sin implementación. [Ponte en contacto con nuestro equipo de atención al cliente para solicitudes especiales][49].                                                          |
 | <span id="support-prerelease">Prelanzamiento</span>      | Implementación inicial. Puede que aún no contenga todas las funciones. La asistencia para nuevas funciones y la corrección de errores y de seguridad se ofrecen en la medida de lo posible. |
 | <span id="support-latest">Última</span>               | Implementación completa de todas las funciones. Soporte completo para nuevas funciones, correcciones de errores y de seguridad.                                                 |
@@ -162,7 +168,7 @@ de la biblioteca. Este soporte se proporcionará a través de la última versió
 Por ejemplo, si 1.21.0 es la última versión de la biblioteca con soporte de mantenimiento, las correcciones de errores se proporcionarán a través de una
 nueva versión 1.21.0 (o 1.20.1). Estas correcciones no se trasladarán como parches a versiones secundarias anteriores de 1.x.
 
-| Versión principal de Gem | Tipo de soporte técnico                        |
+| Versión principal de Gem | Tipo de compatibilidad                        |
 |-------------------|-------------------------------------|
 | 2.x               | [Última](#support-latest)           |
 | 1.x               | [Mantenimiento](#support-maintenance) |
@@ -279,3 +285,5 @@ nueva versión 1.21.0 (o 1.20.1). Estas correcciones no se trasladarán como par
 [53]: https://docs.datadoghq.com/es/agent/basic_agent_usage/?tab=agentv6v7
 
 [54]: https://docs.datadoghq.com/es/agent/basic_agent_usage/?tab=agentv5
+
+[55]: https://docs.datadoghq.com/es/tracing/trace_collection/automatic_instrumentation/dd_libraries/ruby/#karafka

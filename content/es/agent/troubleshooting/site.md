@@ -1,4 +1,6 @@
 ---
+description: Configura el Datadog Agent para enviar datos al sitio de Datadog correcto
+  estableciendo el parámetro de sitio o la variable de entorno DD_SITE.
 title: Problemas con el sitio del Agent
 ---
 

@@ -8,6 +8,9 @@ further_reading:
   tag: Habilitación de los fundamentos
   text: Participar en una sesión interactiva para descubrir todo el potencial de las
     métricas
+- link: /metrics/units
+  tag: Documentación
+  text: Unidades de métricas
 title: Página de información general sobre métricas
 ---
 
@@ -120,7 +123,6 @@ Utiliza la barra de búsqueda de esta sección para ver los datos y las opciones
 ## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 [1]: /es/metrics/custom_metrics/
 [2]: /es/metrics/summary/
