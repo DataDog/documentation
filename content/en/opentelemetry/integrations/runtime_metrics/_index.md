@@ -157,43 +157,50 @@ The following tables list the OpenTelemetry runtime metrics used in Datadog's ou
 {{< tab "Java" >}}
 
 <h3>JVM Instrumentation</h3>
+<p>These metrics are collected when using the latest version of the OpenTelemetry Java SDK.</p>
 {{< mapping-table resource="jvm-instrumentation.csv">}}
 
 <h3>JVM Contrib</h3>
+<p>These metrics are collected when using the OpenTelemetry JMX Metrics Gatherer.</p>
 {{< mapping-table resource="jvm-contrib.csv">}}
 
 <h3>JVM Deprecated</h3>
+<p>These metrics are collected when using OpenTelemetry Java SDK versions 1.32.0 and earlier.</p>
 {{< mapping-table resource="jvm-deprecated.csv">}}
 
 {{< /tab >}}
 
 {{< tab "Go" >}}
 
-<h3>Go Contrib Runtime</h3>
 {{< mapping-table resource="go-contrib-runtime.csv">}}
 
 {{< /tab >}}
 
 {{< tab ".NET" >}}
 
-<h3>.NET</h3>
+<h3>.NET System.Runtime</h3>
+<p>These metrics are emitted by the .NET runtime's built-in <code>System.Runtime</code> meter on .NET 9.0 and later. The OpenTelemetry SDK collects and exports them automatically.</p>
 {{< mapping-table resource="dotnet.csv">}}
 
-<h3>.NET Contrib Process</h3>
-{{< mapping-table resource="dotnet-contrib-process.csv">}}
-
 <h3>.NET Contrib Runtime</h3>
+<p>These metrics are collected by the <a href="https://github.com/open-telemetry/opentelemetry-dotnet-contrib/tree/main/src/OpenTelemetry.Instrumentation.Runtime">OpenTelemetry.Instrumentation.Runtime</a> package. On .NET 9.0 and later, these overlap with the System.Runtime metrics above.</p>
 {{< mapping-table resource="dotnet-contrib-runtime.csv">}}
+
+<h3>.NET Contrib Process</h3>
+<p>These metrics are collected by the <a href="https://github.com/open-telemetry/opentelemetry-dotnet-contrib/tree/main/src/OpenTelemetry.Instrumentation.Process">OpenTelemetry.Instrumentation.Process</a> package.</p>
+{{< mapping-table resource="dotnet-contrib-process.csv">}}
 
 {{< /tab >}}
 
 {{< tab "NodeJS" >}}
 
-<h3>Node Contrib Host</h3>
-{{< mapping-table resource="node-contrib-host.csv">}}
-
 <h3>Node Contrib Runtime</h3>
+<p>These metrics are emitted from auto-instrumentation with the latest version of the OpenTelemetry Node.js SDK.</p>
 {{< mapping-table resource="node-contrib-runtime.csv">}}
+
+<h3>Node Contrib Host</h3>
+<p>These metrics are collected by the <a href="https://github.com/open-telemetry/opentelemetry-js-contrib/tree/main/packages/host-metrics">@opentelemetry/host-metrics</a> package. This package is not included in OpenTelemetry automatic instrumentation and must be installed and configured manually.</p>
+{{< mapping-table resource="node-contrib-host.csv">}}
 
 {{< /tab >}}
 
