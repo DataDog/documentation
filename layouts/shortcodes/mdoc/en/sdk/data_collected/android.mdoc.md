@@ -85,11 +85,11 @@ The following OS-related attributes are attached automatically to all events col
 | `os.version`  | string | The OS version as reported by the device (System User-Agent).  |
 | `os.version_major`   | string | The OS version major as reported by the device (System User-Agent).   |
 
-### Geo-location
+### Geolocation
 
-The following attributes are related to the geo-location of IP addresses.
+The following attributes are related to the geolocation of IP addresses.
 
-**Note:** If you want to stop collecting geo-location attributes, change the setting in your [application details][9].
+**Note:** If you want to stop collecting geolocation attributes, change the setting in your [application details][9].
 
 | Attribute name                              | Type   | Description                                                                                                                          |
 |:--------------------------------------------|:-------|:-------------------------------------------------------------------------------------------------------------------------------------|

@@ -6484,6 +6484,49 @@ menu:
           - ListAuthNMappings
         unstable: []
         order: 4
+    - name: Bits AI
+      url: /api/latest/bits-ai/
+      identifier: bits-ai
+      generated: true
+    - name: Get a Bits AI investigation
+      url: '#get-a-bits-ai-investigation'
+      identifier: bits-ai-get-a-bits-ai-investigation
+      parent: bits-ai
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetInvestigation
+        unstable:
+          - v2
+        order: 3
+    - name: Trigger a Bits AI investigation
+      url: '#trigger-a-bits-ai-investigation'
+      identifier: bits-ai-trigger-a-bits-ai-investigation
+      parent: bits-ai
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - TriggerInvestigation
+        unstable:
+          - v2
+        order: 1
+    - name: List Bits AI investigations
+      url: '#list-bits-ai-investigations'
+      identifier: bits-ai-list-bits-ai-investigations
+      parent: bits-ai
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListInvestigations
+        unstable:
+          - v2
+        order: 2
     - name: CI Visibility Pipelines
       url: /api/latest/ci-visibility-pipelines/
       identifier: ci-visibility-pipelines
@@ -8338,6 +8381,62 @@ menu:
         operationids:
           - CreateDORADeployment
         unstable: []
+        order: 1
+    - name: Dashboard Secure Embed
+      url: /api/latest/dashboard-secure-embed/
+      identifier: dashboard-secure-embed
+      generated: true
+    - name: Update a secure embed for a dashboard
+      url: '#update-a-secure-embed-for-a-dashboard'
+      identifier: dashboard-secure-embed-update-a-secure-embed-for-a-dashboard
+      parent: dashboard-secure-embed
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateDashboardSecureEmbed
+        unstable:
+          - v2
+        order: 3
+    - name: Get a secure embed for a dashboard
+      url: '#get-a-secure-embed-for-a-dashboard'
+      identifier: dashboard-secure-embed-get-a-secure-embed-for-a-dashboard
+      parent: dashboard-secure-embed
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetDashboardSecureEmbed
+        unstable:
+          - v2
+        order: 2
+    - name: Delete a secure embed for a dashboard
+      url: '#delete-a-secure-embed-for-a-dashboard'
+      identifier: dashboard-secure-embed-delete-a-secure-embed-for-a-dashboard
+      parent: dashboard-secure-embed
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteDashboardSecureEmbed
+        unstable:
+          - v2
+        order: 4
+    - name: Create a secure embed for a dashboard
+      url: '#create-a-secure-embed-for-a-dashboard'
+      identifier: dashboard-secure-embed-create-a-secure-embed-for-a-dashboard
+      parent: dashboard-secure-embed
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateDashboardSecureEmbed
+        unstable:
+          - v2
         order: 1
     - name: Datasets
       url: /api/latest/datasets/
@@ -11912,6 +12011,244 @@ menu:
           - ListOrgConnections
         unstable: []
         order: 100
+    - name: Org Groups
+      url: /api/latest/org-groups/
+      identifier: org-groups
+      generated: true
+    - name: Update an org group
+      url: '#update-an-org-group'
+      identifier: org-groups-update-an-org-group
+      parent: org-groups
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateOrgGroup
+        unstable:
+          - v2
+        order: 4
+    - name: Get an org group
+      url: '#get-an-org-group'
+      identifier: org-groups-get-an-org-group
+      parent: org-groups
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetOrgGroup
+        unstable:
+          - v2
+        order: 2
+    - name: Delete an org group
+      url: '#delete-an-org-group'
+      identifier: org-groups-delete-an-org-group
+      parent: org-groups
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteOrgGroup
+        unstable:
+          - v2
+        order: 5
+    - name: Create an org group
+      url: '#create-an-org-group'
+      identifier: org-groups-create-an-org-group
+      parent: org-groups
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateOrgGroup
+        unstable:
+          - v2
+        order: 3
+    - name: List org groups
+      url: '#list-org-groups'
+      identifier: org-groups-list-org-groups
+      parent: org-groups
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListOrgGroups
+        unstable:
+          - v2
+        order: 1
+    - name: Update an org group policy override
+      url: '#update-an-org-group-policy-override'
+      identifier: org-groups-update-an-org-group-policy-override
+      parent: org-groups
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateOrgGroupPolicyOverride
+        unstable:
+          - v2
+        order: 16
+    - name: Delete an org group policy override
+      url: '#delete-an-org-group-policy-override'
+      identifier: org-groups-delete-an-org-group-policy-override
+      parent: org-groups
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteOrgGroupPolicyOverride
+        unstable:
+          - v2
+        order: 17
+    - name: Create an org group policy override
+      url: '#create-an-org-group-policy-override'
+      identifier: org-groups-create-an-org-group-policy-override
+      parent: org-groups
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateOrgGroupPolicyOverride
+        unstable:
+          - v2
+        order: 15
+    - name: List org group policy overrides
+      url: '#list-org-group-policy-overrides'
+      identifier: org-groups-list-org-group-policy-overrides
+      parent: org-groups
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListOrgGroupPolicyOverrides
+        unstable:
+          - v2
+        order: 14
+    - name: List org group policy configs
+      url: '#list-org-group-policy-configs'
+      identifier: org-groups-list-org-group-policy-configs
+      parent: org-groups
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListOrgGroupPolicyConfigs
+        unstable:
+          - v2
+        order: 18
+    - name: Update an org group policy
+      url: '#update-an-org-group-policy'
+      identifier: org-groups-update-an-org-group-policy
+      parent: org-groups
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateOrgGroupPolicy
+        unstable:
+          - v2
+        order: 12
+    - name: Delete an org group policy
+      url: '#delete-an-org-group-policy'
+      identifier: org-groups-delete-an-org-group-policy
+      parent: org-groups
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteOrgGroupPolicy
+        unstable:
+          - v2
+        order: 13
+    - name: Create an org group policy
+      url: '#create-an-org-group-policy'
+      identifier: org-groups-create-an-org-group-policy
+      parent: org-groups
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateOrgGroupPolicy
+        unstable:
+          - v2
+        order: 11
+    - name: List org group policies
+      url: '#list-org-group-policies'
+      identifier: org-groups-list-org-group-policies
+      parent: org-groups
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListOrgGroupPolicies
+        unstable:
+          - v2
+        order: 10
+    - name: Update an org group membership
+      url: '#update-an-org-group-membership'
+      identifier: org-groups-update-an-org-group-membership
+      parent: org-groups
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateOrgGroupMembership
+        unstable:
+          - v2
+        order: 8
+    - name: Get an org group membership
+      url: '#get-an-org-group-membership'
+      identifier: org-groups-get-an-org-group-membership
+      parent: org-groups
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetOrgGroupMembership
+        unstable:
+          - v2
+        order: 7
+    - name: Bulk update org group memberships
+      url: '#bulk-update-org-group-memberships'
+      identifier: org-groups-bulk-update-org-group-memberships
+      parent: org-groups
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - BulkUpdateOrgGroupMemberships
+        unstable:
+          - v2
+        order: 9
+    - name: List org group memberships
+      url: '#list-org-group-memberships'
+      identifier: org-groups-list-org-group-memberships
+      parent: org-groups
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListOrgGroupMemberships
+        unstable:
+          - v2
+        order: 6
     - name: Powerpack
       url: /api/latest/powerpack/
       identifier: powerpack
@@ -14810,6 +15147,32 @@ menu:
         unstable:
           - v2
         order: 5
+    - name: Get Flaky Tests Management policies
+      url: '#get-flaky-tests-management-policies'
+      identifier: test-optimization-get-flaky-tests-management-policies
+      parent: test-optimization
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetFlakyTestsManagementPolicies
+        unstable:
+          - v2
+        order: 6
+    - name: Update Flaky Tests Management policies
+      url: '#update-flaky-tests-management-policies'
+      identifier: test-optimization-update-flaky-tests-management-policies
+      parent: test-optimization
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateFlakyTestsManagementPolicies
+        unstable:
+          - v2
+        order: 7
     - name: Widgets
       url: /api/latest/widgets/
       identifier: widgets
