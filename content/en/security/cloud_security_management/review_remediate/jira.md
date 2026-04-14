@@ -1,5 +1,6 @@
 ---
 title: Create Jira Issues for Cloud Security Issues
+site_support_id: csm_jira
 further_reading:
   - link: "/security/cloud_security_management/guide"
     tag: "Documentation"

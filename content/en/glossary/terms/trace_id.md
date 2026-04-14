@@ -1,4 +1,5 @@
 ---
+id: trace_id
 title: trace ID
 core_product:
   - apm

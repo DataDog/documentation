@@ -115,7 +115,7 @@ Starting with [version 4.13.0][16], you can also optionally define the associate
 <!-- version exclusive examples below-->
 
 <!-- before 4.13 -->
-{% if or(equals($rum_browser_sdk_version, "lt_2_13_0"), equals($rum_browser_sdk_version, "gte_2_13_0"), equals($rum_browser_sdk_version, "gte_2_17_0")) %}
+{% if includes($rum_browser_sdk_version, ["lt_2_13_0", "gte_2_13_0", "gte_2_17_0"]) %}
 
 ## Manually track pageviews
 
@@ -147,7 +147,7 @@ window.DD_RUM && window.DD_RUM.startView('checkout')
 <!-- ends before 4.13 -->
 
 <!-- Between 4.13 and 5.28 -->
-{% if or(equals($rum_browser_sdk_version, "gte_4_13_0"), equals($rum_browser_sdk_version, "gte_4_49_0"), equals($rum_browser_sdk_version, "gte_5_22_0")) %}
+{% if includes($rum_browser_sdk_version, ["gte_4_13_0", "gte_4_49_0", "gte_5_22_0"]) %}
 
 The following example manually tracks the pageviews on the `checkout` page in a RUM application. It uses `checkout` for the view name and associates the `purchase` service with version `1.2.3`.
 
@@ -1546,13 +1546,150 @@ window.DD_RUM && window.DD_RUM.getInternalContext() // { session_id: "xxxx", app
 ```
 {% /if %}
 
-<!-- Version must meet 5.22 -->
-{% if semverIsAtLeast($rum_browser_sdk_version, "5.22") %}
+
 ## Micro frontend
 
-Starting with version 5.22, the RUM Browser SDK supports micro frontend architectures. The mechanism is based on stacktrace. To use it, you must be able to extract service and version properties from your application's file paths and filenames.
+The RUM Browser SDK supports micro frontend architectures by attributing events to specific micro frontends using `service` and `version` attributes. A single RUM SDK instance runs at the shell level. Events are segmented by `service` and `version` so teams can filter dashboards, set alerts, and track performance per micro frontend.
 
-### How to use it
+Datadog provides two approaches for attributing RUM events to micro frontends:
+
+1. **Automatic attribution**: Uses a build plugin that injects source code context, eliminating manual stack trace parsing
+2. **Manual attribution**: Uses the `beforeSend` callback to parse stack traces and extract service information
+
+
+### Automatic service and version attribution
+
+This approach uses a build plugin to inject source code context into your bundles, which the RUM SDK automatically reads to enrich events with the correct `service` and `version`.
+
+#### Prerequisites and supported setups
+
+-   **Separated bundles**: Each micro frontend has its own bundle with distinct file paths, for example, using [module federation][21].
+-   **Supported bundler**: Use a bundler [supported by the Datadog build plugins][22].
+-   **Browser SDK**: Browser SDK version v6.30.1 or higher.
+
+#### Setup guide
+
+**Step 1 - Configure the [build plugin][23] for each micro frontend**
+
+In each micro frontend's build configuration, enable source code context injection:
+
+{% tabs %}
+{% tab label="Webpack" %}
+```javascript
+const { datadogWebpackPlugin } = require('@datadog/webpack-plugin');
+
+module.exports = {
+    plugins: [
+        new datadogWebpackPlugin({
+            rum: {
+                enable: true,
+                sourceCodeContext: {
+                    service: 'foo-microfrontend',
+                    version: process.env.APP_VERSION || '1.0.0'
+                }
+            }
+        })
+    ]
+};
+```
+{% /tab %}
+
+{% tab label="Vite" %}
+```javascript
+import { datadogVitePlugin } from '@datadog/vite-plugin';
+
+export default {
+    plugins: [
+        datadogVitePlugin({
+            rum: {
+                enable: true,
+                sourceCodeContext: {
+                    service: 'foo-microfrontend',
+                    version: process.env.APP_VERSION || '1.0.0'
+                }
+            }
+        })
+    ]
+};
+```
+{% /tab %}
+
+{% tab label="esbuild" %}
+```javascript
+const { datadogEsbuildPlugin } = require('@datadog/esbuild-plugin');
+
+require('esbuild').build({
+    plugins: [
+        datadogEsbuildPlugin({
+            rum: {
+                enable: true,
+                sourceCodeContext: {
+                    service: 'foo-microfrontend',
+                    version: process.env.APP_VERSION || '1.0.0'
+                }
+            }
+        })
+    ]
+});
+```
+{% /tab %}
+
+{% tab label="Rollup" %}
+```javascript
+import { datadogRollupPlugin } from '@datadog/rollup-plugin';
+
+export default {
+    plugins: [
+        datadogRollupPlugin({
+            rum: {
+                enable: true,
+                sourceCodeContext: {
+                    service: 'foo-microfrontend',
+                    version: process.env.APP_VERSION || '1.0.0'
+                }
+            }
+        })
+    ]
+};
+```
+{% /tab %}
+
+{% tab label="Rspack" %}
+```javascript
+const { datadogRspackPlugin } = require('@datadog/rspack-plugin');
+
+module.exports = {
+    plugins: [
+        new datadogRspackPlugin({
+            rum: {
+                enable: true,
+                sourceCodeContext: {
+                    service: 'foo-microfrontend',
+                    version: process.env.APP_VERSION || '1.0.0'
+                }
+            }
+        })
+    ]
+};
+```
+{% /tab %}
+{% /tabs %}
+
+**Step 2 - Set up the Browser SDK at the shell level**
+
+[Set up Browser Monitoring][4] in your shell application (main entry point). The Browser SDK automatically enriches RUM events (errors, custom actions, XHR/Fetch resources, long tasks, vitals) with `service` and `version` from the context map.
+
+{% alert level="warning" %}
+Events that don't match any micro frontend fall back to the shell-level service and version.
+{% /alert %}
+
+**Step 3 - [Explore micro frontend data in Datadog](#explore-micro-frontend-data-in-datadog)**
+
+
+<!-- Version must meet 5.22 -->
+{% if semverIsAtLeast($rum_browser_sdk_version, "5.22") %}
+
+### Manual service and version attribution
 
 In the `beforeSend` property, you can override the service and version properties. To help you identify where the event originated, use the `context.handlingStack` property.
 <!-- NPM -->
@@ -1625,18 +1762,27 @@ window.DD_RUM && window.DD_RUM.init({
 ```
 {% /if %}
 
-Any query done in the RUM Explorer can use the service attribute to filter events.
+The regular expression must match your application's file path structure. Adjust the pattern to extract service and version from your bundle URLs. Any query in the RUM Explorer can use the service attribute to filter events.
+<!-- ends  5.22 -->
+
+{% /if %}
 
 ### Limitations
 
-Some events cannot be attributed to an origin, therefore they do not have an associated handling stack. This includes:
+Some events cannot be attributed to an origin because they do not have an associated handling stack:
 
-- Action events collected automatically
-- Resource events other than XHR and Fetch.
-- View events (but you can [override default RUM view names][20] instead)
-- CORS and CSP violations
-{% /if %}
-<!-- ends  5.22 -->
+-   Action events collected automatically
+-   Resource events other than XHR and Fetch
+-   View events collected automatically
+-   CORS and CSP violations
+
+### Explore micro frontend data in Datadog
+
+After setup, the `service` and `version` on RUM events identify which micro frontend generated each event. Use these attributes in several places in Datadog:
+
+-   **Side panels**: The `service` and `version` attributes appear in the session, view, error, resource, action, and long task side panels in the RUM Explorer.
+-   **RUM Summary dashboard**: Use the `service` and `version` to filter in the RUM Summary dashboard to scope performance metrics to a specific micro frontend.
+-   **Custom dashboards**: Create dashboards using the `service` and `version` to monitor each micro frontend independently.
 
 [1]: /real_user_monitoring/application_monitoring/browser/data_collected/
 [2]: /real_user_monitoring/application_monitoring/browser/monitoring_page_performance/
@@ -1658,3 +1804,6 @@ Some events cannot be attributed to an origin, therefore they do not have an ass
 [18]: https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
 [19]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v5280
 [20]: /real_user_monitoring/application_monitoring/browser/advanced_configuration#override-default-rum-view-names
+[21]: https://module-federation.io/
+[22]: https://github.com/DataDog/build-plugins?tab=readme-ov-file#usage
+[23]: https://github.com/DataDog/build-plugins

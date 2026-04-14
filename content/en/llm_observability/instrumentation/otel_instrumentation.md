@@ -12,7 +12,9 @@ LLM Observability supports ingesting OpenTelemetry traces that follow the [OpenT
 - A [Datadog API key][2]
 - An application instrumented with OpenTelemetry that emits traces following the [OpenTelemetry 1.37+ semantic conventions for generative AI][1]
 
-To send <a href="/llm_observability/evaluations/external_evaluations#submitting-external-evaluations-with-the-api">external evaluations directly to the API</a> for OpenTelemetry spans, you must include the <code>source:otel</code> tag in the evaluation.
+To send <a href="/llm_observability/evaluations/external_evaluations#submitting-external-evaluations-with-the-api">external evaluations directly to the API</a> for OpenTelemetry spans, you must include the <code>source:otel</code> tag in the evaluation. When referencing spans, provide <code>span_id</code> and <code>trace_id</code> as decimal strings. OpenTelemetry uses hexadecimal IDs natively, so convert them to decimal before submitting evaluations. For example, use Python's <code>int(hex_span_id, 16)</code> to convert a hex span ID to its decimal equivalent.
+
+For information on using Prompt Tracking with OpenTelemetry spans, see <a href="/llm_observability/monitoring/prompt_tracking#opentelemetry-instrumentation">Prompt Tracking - OpenTelemetry Instrumentation</a>.
 
 ## Setup
 
@@ -38,7 +40,9 @@ OTEL_SEMCONV_STABILITY_OPT_IN=gen_ai_latest_experimental
 
 This environment variable enables version 1.37+-compliant OpenTelemetry traces for frameworks that now support the version 1.37+ semantic conventions, but previously supported older versions (such as [strands-agents][5]).
 
-**Note**: If you are using an OpenTelemetry library other than the default OpenTelemetry SDK, you may need to configure the endpoint, protocol, and headers differently depending on the library's API. Refer to your library's documentation for the appropriate configuration method.
+**Note**:
+* If you are using an OpenTelemetry library other than the default OpenTelemetry SDK, you may need to configure the endpoint, protocol, and headers differently depending on the library's API. See your library's documentation for the appropriate configuration method.
+* When using OpenTelemetry instrumentation, some data sent to LLM Observability may also be written to the corresponding APM traces. If you are protecting sensitive data, consider also configuring a Restricted Dataset on APM to match your LLM Observability access controls. See [Data Access Control][8] for more information.
 
 #### Using strands-agents
 
@@ -140,14 +144,14 @@ with tracer.start_as_current_span(
     max_tokens = 1024
     temperature = 0.7
     messages = [{"role": "user", "content": "Explain OpenTelemetry in one sentence."}]
-    
+
     # Set request attributes
     span.set_attribute("gen_ai.provider.name", "openai")
     span.set_attribute("gen_ai.request.model", model)
     span.set_attribute("gen_ai.operation.name", "chat")
     span.set_attribute("gen_ai.request.max_tokens", max_tokens)
     span.set_attribute("gen_ai.request.temperature", temperature)
-    
+
     # Add input messages as event
     input_messages_parts = []
     for msg in messages:
@@ -155,14 +159,14 @@ with tracer.start_as_current_span(
             "role": msg["role"],
             "parts": [{"type": "text", "content": msg["content"]}]
         })
-    
+
     span.add_event(
         "gen_ai.client.inference.operation.details",
         {
             "gen_ai.input.messages": json.dumps(input_messages_parts)
         }
     )
-    
+
     # Make actual LLM call
     client = OpenAI(api_key="<YOUR_OPENAI_API_KEY>")
     response = client.chat.completions.create(
@@ -171,14 +175,14 @@ with tracer.start_as_current_span(
         temperature=temperature,
         messages=messages
     )
-    
+
     # Set response attributes from actual data
     span.set_attribute("gen_ai.response.id", response.id)
     span.set_attribute("gen_ai.response.model", response.model)
     span.set_attribute("gen_ai.response.finish_reasons", [response.choices[0].finish_reason])
     span.set_attribute("gen_ai.usage.input_tokens", response.usage.prompt_tokens)
     span.set_attribute("gen_ai.usage.output_tokens", response.usage.completion_tokens)
-    
+
     # Add output messages as event
     output_text = response.choices[0].message.content
     span.add_event(
@@ -191,7 +195,7 @@ with tracer.start_as_current_span(
             }])
         }
     )
-    
+
     print(f"Response: {output_text}")
 
 # Flush spans before exit
@@ -501,4 +505,5 @@ with tracer.start_as_current_span("my-span") as span:
 [5]: https://pypi.org/project/strands-agents/
 [6]: /llm_observability/evaluations/external_evaluations
 [7]: https://strandsagents.com/latest/
+[8]: /account_management/rbac/data_access/
 

@@ -14,11 +14,6 @@ further_reading:
   text: "Inferred Services"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/service-overrides-removal-from-the-ui/"
- btn_hidden="false" header="Join the Preview!">}}
-Integration override removal is in Preview. To sign up, click <b>Request Access</b> and complete the form.
-{{< /callout >}}
-
 This page explains how to remove integration overrides, which use integration-specific service names to represent calls to other services. For conceptual background, see [Base Service, Integration Overrides, and Service Overrides][10] and [Inferred Services][8].
 
 ## Prerequisites

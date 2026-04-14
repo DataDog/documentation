@@ -1,8 +1,9 @@
 ---
+id: service_summary
 core_product:
 - dashboards
 related_terms:
-- Servicio
+- service
 - dashboard
 title: resumen de servicio
 ---

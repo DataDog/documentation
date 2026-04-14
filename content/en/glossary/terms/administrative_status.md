@@ -1,4 +1,5 @@
 ---
+id: administrative_status
 title: administrative status
 synonyms:
   - admin status

@@ -12,7 +12,7 @@ further_reading:
 algolia:
   tags: ['data retention']
 filter_all: All
-content: "The following table lists default data retention periods by data type and product. Optionally, search by keyword or description text to find the data type or product you're interested in. For collection interval and minimum resolution information, see [Datadog Data Collection and Resolution](/developers/guide/data-collection-resolution). Still need help? Contact [Datadog support](/help)."
+content: "The following table lists default data retention periods by data type and product. Optionally, search by keyword or description text to find the data type or product you're interested in. For collection interval and minimum resolution information, see [Datadog Data Collection and Resolution](/extend/guide/data-collection-resolution). Still need help? Contact [Datadog support](/help)."
 attributes:
   - product: APM
     data_type: |
@@ -91,6 +91,9 @@ attributes:
   - product: Datadog App
     data_type: |
        - **Dashboards, Notebooks, Monitors**: Retained for the duration of the account
+  - product: DORA Metrics
+    data_type: |
+       - **Deployments**: 2 years
   - product: Error Tracking
     data_type: |
        - **Error samples**: 30 days
@@ -134,7 +137,7 @@ attributes:
   - product: Product Analytics
     data_type: |
        - **Events**: 15 months
-       - **User Profiles**: 30 days
+       - **User Profiles**: 15 months, or 30 days if <a href="/product_analytics/guide/rum_and_product_analytics/#how-do-i-set-up-product-analytics">Product Analytics is not enabled</a>
   - product: PR Gates
     data_type: |
        - **Gate evaluations**: 30 days
@@ -172,3 +175,4 @@ attributes:
 ### Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+

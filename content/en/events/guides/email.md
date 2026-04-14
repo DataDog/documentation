@@ -20,7 +20,7 @@ Before you can send events with email, you need a dedicated email address from D
 1. Log in to your [Datadog account][3].
 2. From the **Account** menu at the bottom left, select **Organization Settings**.
 3. Click the **Events API emails** tab.
-4. Choose the format for your messages from the **Format** dropdown (`Plain text` or `JSON`).
+4. Choose the format for your messages from the **Format** dropdown (`Plain text` or `JSON v2`).
 5. Optionally, define any of the other attributes listed in this page's [attribute definitions section](#attribute-definitions).
 6. Click the **Create Email** button.
 
@@ -33,35 +33,35 @@ The **Events API emails** section displays all the emails available for your app
 | Description | A description of the email's purpose. | "Used for MyService notifications" |
 | Tags | List of tags to be appended to each event received through the email. If other tags are present in the JSON message, they are all added.<br>There is a limit of **20** tags per email. | `tag1:val1`, `tag2:val2` |
 | Recipients | List of handles to be added to the beginning of the message for all events created through the email, without `@` prefix. For more information, see [Notification recipients][7].<br>There is a limit of **10** recipients per email. | `my@email.com`, `slack-acc-ch` |
-| Alert Type | The alert type for events created from the event email. When present, the `alertType` field in a JSON email takes precedence over any other `alertType` values. | `Info` |
+| Alert Type | For **Plain text** and **JSON** format addresses, sets the alert type for events. When present, the `alert_type` field in a JSON email takes precedence over this setting. **Not supported for JSON v2**—set category and related fields in the email JSON body instead. | `Info` |
 
 ## Submission
 
-There are two different ways to send events with email:
+There are three ways to send events with email, described in the tabs below (**JSON**, **Plain text**, and **JSON v2**). The `JSON` format is deprecated for new event email addresses—you cannot create new addresses with that format, but existing `JSON` addresses keep working. For new applications that send JSON-formatted emails, use `JSON v2`.
 
 {{< tabs >}}
 {{% tab "JSON" %}}
 
-If you have complete control over the email sent by an application, then you can use configure a JSON-formatted message. This format allows you to set everything in the event that appears in Datadog.
+If you have complete control over the email sent by an application, then you can send a JSON-formatted message. The email body must follow the JSON shape for [**Events API v1**][1] (`POST /api/v1/events`). Select the **v1** API version to see the request body fields. The JSON in the email body sets the event fields that show in Datadog.
 
 ### Source email {#source-email-1}
 
-With a JSON-formatted email, the following fields are controllable:
+With a `JSON` format email, the following fields are controllable:
 
 * The sender's email address
-* All arguments from the [Datadog Events API][1]
+* All fields supported by [**Events API v1**][1] (for example `title`, `text`, `tags`, and `alert_type`)
 
 **Note**: If your JSON is not properly formatted, or the email is sent without a subject, the event doesn't show in your event stream.
 
 ### Datadog event {#datadog-event-1}
 
-In a JSON-formatted email, the subject of the email doesn't appear in the event. The value of the title attribute is used for the event title. All data that appears in the event should be defined in JSON in the body of the email. Furthermore, the body must be pure, well-formed JSON—if not, the message is ignored. Example event sent with JSON:
+In a `JSON` format email, the subject of the email doesn't appear in the event. The value of the title attribute is used for the event title. All data that appears in the event should be defined in JSON in the body of the email. Furthermore, the body must be pure, well-formed JSON—if not, the message is ignored. Example event sent with JSON:
 
-{{< img src="developers/events/json-event.png" alt="json event" >}}
+{{< img src="extend/events/json-event.png" alt="json event" >}}
 
 **Note**: If you are testing the email with a standard email client, the body may be converted to HTML. This causes the body to no longer be pure JSON, resulting in an ignored email.
 
-[1]: /api/v1/events/
+[1]: /api/latest/events/#post-an-event
 {{% /tab %}}
 {{% tab "Plain text" %}}
 
@@ -97,8 +97,53 @@ The email body goes through several cleanup steps to enhance readability and sec
 
 The subject of the email becomes the title of the event and the body of the email becomes the event message. The sender of the email appears at the bottom of the event. Tags can be added by using `#` in message body. Example event sent with plain text:
 
-{{< img src="developers/events/plain-event.png" alt="plain event" >}}
+{{< img src="extend/events/plain-event.png" alt="plain event" >}}
 
+{{% /tab %}}
+{{% tab "JSON v2" %}}
+
+If you have complete control over the email sent by an application, then you can send a JSON-formatted message. The email body must follow the JSON shape for [**Events API v2**][1] (`POST /api/v2/events`). The JSON in the email body sets the event fields that show in Datadog.
+
+### Source email {#source-email-json-v2}
+
+With a `JSON v2` format email, the following fields are controllable:
+
+* The sender's email address
+* All fields supported by [**Events API v2**][1] (for example `data.attributes.title`, `data.attributes.message`, `data.attributes.tags`, `data.attributes.category`)
+
+Example email body for an alert event. Change and info events use different fields under `data.attributes.attributes`; see the API reference for those categories.
+
+```json
+{
+  "data": {
+    "attributes": {
+      "category": "alert",
+      "title": "CPU threshold exceeded",
+      "message": "Host prod-web-01 averaged 92% CPU for five minutes.",
+      "tags": [
+        "env:production",
+        "region:us-east"
+      ],
+      "integration_id": "custom-events",
+      "attributes": {
+        "status": "error",
+        "priority": "3"
+      }
+    },
+    "type": "event"
+  }
+}
+```
+
+**Note**: If your JSON is not properly formatted, or the email is sent without a subject, the event doesn't show in your event stream.
+
+### Datadog event {#datadog-event-json-v2}
+
+In a `JSON v2` format email, the subject of the email doesn't appear in the event. The value of the title field in the JSON body is used for the event title. All data that appears in the event should be defined in JSON in the body of the email. Furthermore, the body must be pure, well-formed JSON—if not, the message is ignored.
+
+**Note**: If you are testing the email with a standard email client, the body may be converted to HTML. This causes the body to no longer be pure JSON, resulting in an ignored email.
+
+[1]: /api/latest/events/#post-an-event
 {{% /tab %}}
 {{< /tabs >}}
 

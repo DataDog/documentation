@@ -41,7 +41,7 @@ A user needs an **Incident Management seat** if they perform any of the followin
 - Modify an incident (for example, update severity)
 - Delete an incident
 - Add a comment, graph, or link to an incident timeline
-- Assign a task to a user within an incident (the assignee must have a seat)
+- Assign a task to a user within an incident (the assignee does not need a seat)
 - Assign a responder to a user-defined role within an incident (the assignee must have a seat) 
 
 In Incident Management, a user does not need a seat to create incidents, view incidents, or join incident channels. Commenting in Slack, including posting messages that sync to the incident timeline, also does not require a seat. Only actions taken through the Datadog app in Slack, such as using action buttons or interacting with @Datadog, trigger a seat requirement.
@@ -76,6 +76,10 @@ On-Call admins can also use the [Notification Preferences settings page][9] to v
 Removing a user's notification preferences does not unassign their seat. If a user should no longer occupy a seat, you must explicitly unassign the user from the Seat Management Page. 
 
 ### Assign seats
+
+{{< site-region region="gov" >}}
+<div class="alert alert-danger">Seat assignment is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
 
 Billing admins, or users with the `billing_edit` permission, can manually assign seats so team members have access before they need it.
 

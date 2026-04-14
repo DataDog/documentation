@@ -6,10 +6,10 @@ aliases:
  - /developers/metrics/type_modifiers/
  - /metrics/type_modifiers
 further_reading:
-- link: "/developers/dogstatsd/"
+- link: "/extend/dogstatsd/"
   tag: "Documentation"
   text: "Learn more about DogStatsD"
-- link: "/developers/community/libraries/"
+- link: "/extend/community/libraries/"
   tag: "Documentation"
   text: "Official and Community created API and DogStatsD client libraries"
 ---

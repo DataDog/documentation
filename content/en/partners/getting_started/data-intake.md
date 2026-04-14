@@ -181,10 +181,10 @@ Now that you have data flowing into Datadog, it's time to focus on [delivering v
 [10]: /api/latest/metrics
 [11]: /api/latest/events
 [12]: /api/latest/tracing/
-[13]: /developers/custom_checks/
+[13]: /extend/custom_checks/
 [14]: /events/guides/dogstatsd/
 [15]: /metrics/custom_metrics/
-[16]: /developers/community/libraries/#api-and-dogstatsd-client-libraries
+[16]: /extend/community/libraries/#api-and-dogstatsd-client-libraries
 [17]: /api/latest/
 [18]: /getting_started/tagging/
 [19]: https://www.datadoghq.com/blog/tagging-best-practices/

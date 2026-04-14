@@ -12,8 +12,8 @@ further_reading:
       text: 'Getting Started with Continuous Profiler'
     - link: 'profiler/profile_visualizations'
       tag: 'Documentation'
-      text: 'Learn more about available profile visualizations'
-    - link: '/developers/guide/data-collection-resolution/'
+      text: 'Learn more about available profile types'
+    - link: '/extend/guide/data-collection-resolution/'
       tag: 'Documentation'
       text: 'Data collection and resolution'
     - link: 'https://www.datadoghq.com/blog/source-code-preview/'
@@ -82,7 +82,7 @@ The [Getting Started with Profiler][1] guide takes a sample service with a perfo
 
 After you configure your application to send profiles to Datadog, start getting insights into your code performance.
 
-By default, profiles are retained for seven days, and metrics generated from profile data are retained for one month.
+By default, profiles are retained for eight days, and metrics generated from profile data are retained for one month.
 
 {{< learning-center-callout header="Try Diagnose Code Performance Issues in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/continuous-profiler-course">}}
   The Datadog Learning Center is full of hands-on courses to help you learn about this topic. Enroll at no cost to investigate and improve application code performance in production with Datadog Continuous Profiler.

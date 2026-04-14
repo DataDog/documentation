@@ -16,20 +16,13 @@ further_reading:
 
 1. **Install the Datadog Node.js tracer**.
 
-   1. In your main application, add `dd-trace-js`.
+   1. In your main application, install the `dd-trace` package.
 
       {{< code-block lang="shell" disable_copy="false" >}}
-npm install dd-trace --save
+npm install dd-trace
 {{< /code-block >}}
 
-   2. Add the following to your application code to initialize the tracer:
-   {{< code-block lang="javascript" disable_copy="false" >}}
-const tracer = require('dd-trace').init({
- logInjection: true,
-});
-{{< /code-block >}}
-
-   3. Set the following environment variable to specify that the `dd-trace/init` module is required when the Node.js process starts:
+   2. Initialize the Node.js tracer with the `NODE_OPTIONS` environment variable:
    {{< code-block lang="dockerfile" disable_copy="false" >}}
 ENV NODE_OPTIONS="--require dd-trace/init"
 {{< /code-block >}}
@@ -48,9 +41,6 @@ ENV NODE_OPTIONS="--require dd-trace/init"
 
    If you want multiline logs to be preserved in a single log message, Datadog recommends writing your logs in JSON format. For example, you can use a third-party logging library such as `winston`:
    {{< code-block lang="javascript" disable_copy="false" >}}
-const tracer = require('dd-trace').init({
-  logInjection: true,
-});
 const { createLogger, format, transports } = require('winston');
 
 const logger = createLogger({
@@ -75,7 +65,15 @@ logger.info('Hello world!');
 
    To send custom metrics, [view code examples][3]. In serverless, only the *distribution* metric type is supported.
 
+6. **Enable profiling (preview)**.
+
+   To enable the [Continuous Profiler][4], set the environment variable `DD_PROFILING_ENABLED=true`.
+
+   <div class="alert alert-info">Datadog's Continuous Profiler is available in preview for Azure Container Apps.</div>
+
 {{% serverless-init-env-vars-in-container language="nodejs" defaultSource="containerapp" %}}
+
+{{% svl-tracing-env %}}
 
 ## Troubleshooting
 
@@ -88,3 +86,4 @@ logger.info('Hello world!');
 [1]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/nodejs/
 [2]: /tracing/other_telemetry/connect_logs_and_traces/nodejs/
 [3]: /metrics/custom_metrics/dogstatsd_metrics_submission/?tab=nodejs#code-examples-5
+[4]: /profiler/
