@@ -41,32 +41,37 @@ You can create service remapping rules only for services instrumented with suppo
    Alternatively, navigate to **APM** > [**Software Catalog**][14] and click on a service to open the service side panel. From there, click **Service Page** > **Service Remapping**.
    {{< img src="tracing/services/renaming_rules/service-side-panel.png" alt="The side panel for a service, showing the Service Page dropdown menu with a Service Remapping option" style="width:100%;" >}}
 1. Choose a remapping action to perform for your new remapping rule.
-   - You can select to split a single entity, rename an entity, merge multiple entities together, or rename several entities.
-   - You can also choose to identify a service based on infrastructure tags.
-1. Use the search bar to select the entities you want to rename.
-   - You can select one or more entities, but all must be of the same type (service, datastore, or queue).
+   - Select **Remap services** to split a single entity, rename an entity, merge multiple entities together, or rename several entities.
+   - Select **Correlate telemetry** to identify a service based on an infrastructure tag.
+1. Use the search bar to select the entities you want to remap.
+   - You can select one or more entities, but all must be of the same type (service, inferred service, datastore, or queue). Select services based on their `service` or `peer.service` tag, not by their Display Name metadata.
    - As you select entities, a span query is built in the background. To edit the query, select **Build Advanced Query**.
-   - If you're correlating a service with infrastructure tags, you can only select _one_ service.
+       - Select **Service Rule** to remap services. Select **Inferred Service Rule** to remap inferred services, datastores, or queues.
+       - Select **Add Condition** to add an `AND` condition to your query.
+       - Adding multiple values in the **Value** section creates an `OR` condition.
+   - If you're correlating a service with infrastructure tags, you can only select _one_ service. Choose infra tag(s) to correlate telemetry on. All telemetry with the same infra tag(s) as the service chosen will be remapped to a single unified service name.
 
 ### Step 2: Specify new entity name
 
-In the text box, enter a unique name for the selected entity (or entities). Alternatively, use tag values with the `{{tagName}}` syntax to rename based on an entity's tags.
+In the text box, enter a unique name for the selected entity (or entities). Alternatively, use tag values with the `{{tagName}}` syntax to remap based on an entity's tags.
    1. If tag values follow a pattern, apply a regular expression to extract only the portion you want in the name.
-   1. If you're correlating a service with infrastructure tags, choose one of the suggested infrastructure tags for the selected service. 
+   1. View a preview of the new service name(s). Note: The preview is not an exhaustive list. If you are remapping a service based on a tag with several values, only the values with the most spans will appear in the preview. 
 
 ### Step 3: Name your rule and review
 
 1. Optionally, enter a descriptive name for the remapping rule so you can identify it later.
-1. Review and save your remapping rule.
+1. Review and save your remapping rule. Note: It may take a minute for the remapping rule to take effect.
 
 ## Remapping rules behavior
 
-Services with remapping rules appear with consistent names across [APM][9], [Software Catalog][10], [Logs][11], and [Metrics][12]. 
+Remapping rules work by overriding the `service` tag for remapping services, or the `peer.service` tag for remapping inferred services, datastores, and queues. Services are remapped at intake, and any preexisting configuration specifying a service name does not change when a remapping rule is created. Service remapping rules take precedence over all other service name configurations.
+
+Remapping rules are applied across APM, Logs, Metrics, USM, DSM, DJM, DBM, Profiling, NPM, Live Processes, Live Containers, Kubernetes, and Events.
 
 - **Historical data:** Changes made by remapping rules affect only telemetry ingested while a rule is active, and past data is not updated retroactively. Deleting or modifying a rule stops it from applying to new data, but does not revert names on previously ingested data.
 - **Logs service remapper:** Service remapping rules occur before logs pipelines. If the logs service remapper and remapping rules are both applied to a service, the remapping rules take precedence. 
 - **Dashboards and monitors:** Existing queries that reference old service names are not automatically updated. Review and update these manually.
-- **Service overrides:** Remapping rules apply to base services; service overrides are not renamed.
+- **Integration overrides:** Remapping rules apply to base services; integration overrides are not remapped. [Remove integration overrides][15] for the best APM experience.
 
 [1]: /account_management/rbac/permissions
 [2]: https://github.com/DataDog/dd-trace-java/releases/tag/v1.20.0
@@ -82,3 +87,4 @@ Services with remapping rules appear with consistent names across [APM][9], [Sof
 [12]: /metrics/explorer/
 [13]: https://app.datadoghq.com/software/settings/service-rename
 [14]: https://app.datadoghq.com/software
+[15]: /tracing/services/service_override_removal
