@@ -8,12 +8,36 @@
 <h1>{{ $translate_tag.name | default $tag.name }}</h1>
 <div class="row">
     <div class="col-12 col-lg-9">
-        {{ $markdown := $translate_tag.description | default $tag.description | markdownify }}
+        {{ $description := $translate_tag.description | default $tag.description }}
+        {{/* Extract integrations from any "Supported Integrations:" bullet list in the description */}}
+        {{ $integrations := slice }}
+        {{ if strings.Contains $description "Supported Integrations:" }}
+            {{ $supportedSection := index (split $description "Supported Integrations:") 1 }}
+            {{ range $match := findRE `\[[^\]]+\]\([^)]+\)` $supportedSection }}
+                {{ $name := $match | replaceRE `\[([^\]]+)\]\([^)]+\)` "$1" }}
+                {{ $url  := $match | replaceRE `\[[^\]]+\]\(([^)]+)\)` "$1" }}
+                {{ $value := $name | lower }}
+                {{ $integrations = $integrations | append (dict "name" $name "value" $value "docs_url" $url) }}
+            {{ end }}
+            {{/* Strip the "Supported Integrations:" section so the dropdown replaces it */}}
+            {{ $description = $description | replaceRE `(?s)\n\nSupported Integrations:.*` "" }}
+        {{ end }}
+        {{ $markdown := $description | markdownify }}
         <!-- need this because hugo sometimes duplicates <p> when using markdownify -->
         {{ if not ( strings.Contains $markdown "<p>" ) }}
             <p>{{ $markdown }}</p>
         {{ else }}
             {{ $markdown }}
+        {{ end }}
+        {{ with $integrations }}
+        <div class="integration-name-select-container mb-3">
+            <label for="integration-name-select" class="form-label fw-semibold">Select integration:</label>
+            <select id="integration-name-select" class="form-select js-integration-name-select" style="max-width: 300px;">
+                {{ range . }}
+                <option value="{{ .value }}">{{ .name }}</option>
+                {{ end }}
+            </select>
+        </div>
         {{ end }}
     </div>
 </div>

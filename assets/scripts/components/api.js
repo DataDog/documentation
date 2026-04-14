@@ -171,6 +171,27 @@ if (dataVersionToggles.length) {
     });
 }
 
+// Replace {integration_name} in URL patterns when an integration is selected
+const integrationNameSelect = document.querySelector('.js-integration-name-select');
+
+function updateIntegrationNameInUrls(integrationName) {
+    document.querySelectorAll('.api-url-pattern').forEach((span) => {
+        if (!span.dataset.urlTemplate && span.textContent.includes('{integration_name}')) {
+            span.dataset.urlTemplate = span.textContent;
+        }
+        if (span.dataset.urlTemplate) {
+            span.textContent = span.dataset.urlTemplate.replace(/{integration_name}/g, integrationName);
+        }
+    });
+}
+
+if (integrationNameSelect) {
+    updateIntegrationNameInUrls(integrationNameSelect.value);
+    integrationNameSelect.addEventListener('change', (event) => {
+        updateIntegrationNameInUrls(event.target.value);
+    });
+}
+
 // Scroll the active top level nav item into view below Docs search input
 if (bodyClassContains('api')) {
     setSidenavMaxHeight();
