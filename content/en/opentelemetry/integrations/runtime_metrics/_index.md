@@ -164,6 +164,11 @@ The following tables list the OpenTelemetry runtime metrics used in Datadog's ou
 <p>These metrics are collected when using the OpenTelemetry JMX Metrics Gatherer.</p>
 {{< mapping-table resource="jvm-contrib.csv">}}
 
+<p>The following JVM Contrib metrics require the <a href="https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/deltatorateprocessor">Delta-to-Rate Processor</a> in the OpenTelemetry Collector:</p>
+
+- `jvm.gc.collections.count`
+- `jvm.gc.collections.elapsed`
+
 <h3>JVM Deprecated</h3>
 <p>These metrics are collected when using OpenTelemetry Java SDK versions 1.32.0 and earlier.</p>
 {{< mapping-table resource="jvm-deprecated.csv">}}
@@ -181,6 +186,10 @@ The following tables list the OpenTelemetry runtime metrics used in Datadog's ou
 <h3>.NET System.Runtime</h3>
 <p>These metrics are emitted by the .NET runtime's built-in <code>System.Runtime</code> meter on .NET 9.0 and later. The OpenTelemetry SDK collects and exports them automatically.</p>
 {{< mapping-table resource="dotnet.csv">}}
+
+<p>The following .NET System.Runtime metrics require the <a href="https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/deltatorateprocessor">Delta-to-Rate Processor</a> in the OpenTelemetry Collector:</p>
+
+- `dotnet.process.cpu.time`
 
 <h3>.NET Contrib Runtime</h3>
 <p>These metrics are collected by the <a href="https://github.com/open-telemetry/opentelemetry-dotnet-contrib/tree/main/src/OpenTelemetry.Instrumentation.Runtime">OpenTelemetry.Instrumentation.Runtime</a> package. On .NET 9.0 and later, these overlap with the System.Runtime metrics above.</p>
