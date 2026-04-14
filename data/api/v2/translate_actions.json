@@ -4448,14 +4448,17 @@
     "summary": "Get a fast test result"
   },
   "CreateSyntheticsNetworkTest": {
+    "description": "Create a Network Path test.\n\n**Note**: This endpoint is not available for the Government (US1-FED) site.",
     "summary": "Create a Network Path test",
     "request_description": "",
     "request_schema_description": "Network Path test request."
   },
   "GetSyntheticsNetworkTest": {
+    "description": "Get a Network Path test.\n\n**Note**: This endpoint is not available for the Government (US1-FED) site.",
     "summary": "Get a Network Path test"
   },
   "UpdateSyntheticsNetworkTest": {
+    "description": "Edit a Network Path test.\n\n**Note**: This endpoint is not available for the Government (US1-FED) site.",
     "summary": "Edit a Network Path test",
     "request_description": "New Network Path test details to be saved.",
     "request_schema_description": "Network Path test request."
