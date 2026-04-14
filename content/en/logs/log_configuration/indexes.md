@@ -184,10 +184,10 @@ See [Monitor log usage][20] on how to monitor and alert on your usage.
 [11]: https://app.datadoghq.com/logs/pipelines/indexes
 [12]: /logs/search_syntax/
 [13]: /api/v1/logs-indexes/#update-an-index
-[14]: /logs/log_configuration/processors/#user-agent-parser
-[15]: /logs/log_configuration/processors/#geoip-parser
+[14]: /logs/log_configuration/processors/user_agent_parser/
+[15]: /logs/log_configuration/processors/geoip_parser/
 [16]: /tracing/other_telemetry/connect_logs_and_traces/
-[17]: /logs/log_configuration/processors/#trace-remapper
+[17]: /logs/log_configuration/processors/trace_remapper/
 [18]: /logs/live_tail/#overview
 [19]: https://www.timeanddate.com/worldclock/converter.html
 [20]: /logs/guide/best-practices-for-log-management/#monitor-log-usage

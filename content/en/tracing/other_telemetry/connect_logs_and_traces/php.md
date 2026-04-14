@@ -179,7 +179,7 @@ If you are ingesting your logs as JSON, go to [Preprocessing for JSON logs][8] a
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /logs/log_collection/php/
-[2]: /logs/log_configuration/processors/#trace-remapper
+[2]: /logs/log_configuration/processors/trace_remapper/
 [3]: /tracing/troubleshooting/correlated-logs-not-showing-up-in-the-trace-id-panel/?tab=custom
 [4]: https://github.com/Seldaek/monolog
 [5]: https://github.com/laminas/laminas-log

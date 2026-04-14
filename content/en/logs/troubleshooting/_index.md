@@ -115,8 +115,8 @@ If the above troubleshooting steps do not resolve your issues with missing logs 
 [4]: /logs/guide/logs-rbac-permissions/?tab=ui#check-restriction-queries
 [5]: /logs/log_configuration/indexes/#set-daily-quota
 [6]: /logs/log_configuration/pipelines/?tab=date#date-attribute
-[7]: /logs/log_configuration/processors/?tab=ui#arithmetic-processor
-[8]: /logs/log_configuration/processors/?tab=ui#log-date-remapper
+[7]: /logs/log_configuration/processors/arithmetic_processor/
+[8]: /logs/log_configuration/processors/log_date_remapper/
 [9]: https://app.datadoghq.com/logs/pipelines
 [10]: /logs/guide/logs-rbac-permissions/?tab=ui#legacy-permissions
 [11]: /logs/log_configuration/parsing/?tab=matchers#parsing-dates
@@ -127,5 +127,5 @@ If the above troubleshooting steps do not resolve your issues with missing logs 
 [16]: /api/latest/logs-indexes/#get-an-index
 [17]: /api/latest/logs-indexes/#get-an-index
 [18]: /agent/troubleshooting/send_a_flare/?tab=agent
-[19]: /logs/log_configuration/processors/?tab=ui#grok-parser
+[19]: /logs/log_configuration/processors/grok_parser/
 [20]: https://app.datadoghq.com/dashboard/lists/preset/3?q=Log%20Management%20estimated%20usage&p=1

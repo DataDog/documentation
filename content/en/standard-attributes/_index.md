@@ -239,7 +239,7 @@ attributes:
     type: string
     domain: Database
   - name: duration
-    description: "A duration of any kind in **nanoseconds**: HTTP response time, database query time, latency, and so on. [Remap](/logs/log_configuration/processors/#remapper) any durations within logs to this attribute because Datadog displays and uses it as a default measure for trace search."
+    description: "A duration of any kind in **nanoseconds**: HTTP response time, database query time, latency, and so on. [Remap](/logs/log_configuration/processors/remapper/) any durations within logs to this attribute because Datadog displays and uses it as a default measure for trace search."
     product_source: 
       - icon-log
     type: number

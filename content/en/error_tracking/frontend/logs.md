@@ -137,4 +137,4 @@ If you have not setup the Datadog Kotlin Multiplatform Logs SDK yet, follow the 
 [3]: https://app.datadoghq.com/logs/onboarding/client
 [4]: /logs/log_collection/javascript/#setup
 [5]: /logs/log_collection/javascript/#choose-the-right-installation-method
-[6]: /logs/log_configuration/processors/?tab=ui#remapper
+[6]: /logs/log_configuration/processors/remapper/

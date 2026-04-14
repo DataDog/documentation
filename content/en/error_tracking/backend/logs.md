@@ -347,7 +347,7 @@ end
 [5]: /logs/log_collection/nodejs/?tab=winston30
 [6]: /logs/log_collection/python/?tab=jsonlogformatter
 [7]: /logs/log_collection/ruby/
-[8]: /logs/log_configuration/processors/?tab=ui#remapper
+[8]: /logs/log_configuration/processors/remapper/
 [9]: https://app.datadoghq.com/source-code/setup/apm
 [10]: /logs/log_collection/
 [11]: /logs/log_configuration/attributes_naming_convention/#source-code
