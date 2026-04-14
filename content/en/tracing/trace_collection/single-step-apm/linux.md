@@ -117,11 +117,6 @@ To update the SDK versions:
 
 ### Define instrumentation rules
 
-{{< callout url="https://www.datadoghq.com/product-preview/single-step-instrumentation-targeting-rules-on-linux/"
- btn_hidden="false" header="Join the Preview!">}}
-Instrumentation rules are in Preview.
-{{< /callout >}}
-
 Instrumentation rules (available for Agent v7.73+) let you control which processes are automatically instrumented by SSI on Linux hosts.
 
 To configure instrumentation rules:
@@ -153,14 +148,23 @@ Each rule consists of one or more conditions. A condition includes the following
 - **Value**: The text or pattern to match, such as a process name or command-line flag.
 
 Supported attributes include:
-| Attribute    | Description | Example |
-| ----------- | ----------- | --------- |
+| Attribute | Description | Example |
+| --------- | ----------- | ------- |
 | Operating System | OS of the host. | `linux` |
 | Executable | Executable name of the process. | `python3.11` |
-| Executable File Path | Full path of the executable. | `/usr/bin/python3.11` |
+| Executable Full Path | Full path of the executable. | `/usr/bin/python3.11` |
 | Arguments | Command-line arguments used to start the process. | `--env=production` |
 | Working Directory | Working directory of the process. | `/app` |
 | Language | Programming language detected for the process. | `python` |
+| Entry Point File | The specific file used to launch the application. More granular than Language, and useful when multiple apps of the same language run on the same host. | `app.py`, `server.js` |
+
+#### Example use cases
+
+**Instrument everything except specific services**
+
+Instrument all processes by default, but block analytics cron jobs (matched by working directory) and a Java batch processor (matched by entry point file) that would add noise without value.
+
+{{< img src="tracing/trace_collection/instrumentation-rules-example-1.png" alt="The instrumentation rules UI showing two block rules: one targeting a working directory containing 'analytics.service' and one targeting an entry point file containing 'batch-processor.jar', with a default of allow instrumentation" style="width:100%;" >}}
 
 ## Remove Single Step APM instrumentation from your Agent
 
