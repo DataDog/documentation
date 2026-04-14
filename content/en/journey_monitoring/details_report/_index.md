@@ -75,13 +75,13 @@ Click on an operation to open a side panel with details about its performance. D
 The side panel also includes a list of the backend services the Operation depends on. Each entry includes metrics on the backend service's performance. Clicking onto a backend service will redirect you to the service's entry in the APM [Software Catalog][8]. 
 
 
-### Error Count
+### Error count
 
 The error count chart shows a timeseries of errors that occurred while users were executing the journey. The data is imported from frontend issues in [Error Tracking][9]. You can click on the **Investigate** button to see the list of top issues. Clicking on any issue in the list will redirect you to the issue in Error Tracking.
 
 
 
-## Synthetic Testing
+## Synthetic testing
 
 ### Tests table
 
@@ -95,7 +95,7 @@ Click on **Edit Test Suite** to create a new test and add it to the journey's te
 
 ### Add pre-existing tests 
 
-The final table lists already created tests that cover the journey but are not part of its test suite. Each row represents a single test and contains the same data as the table above. You can add each test in this table to the journey's test suite, which will automatically start contributing to the journey's uptime through the test suite SLO.
+Datadog automatically identifies Synthetic tests that cover the journey and surfaces them in this table. These are tests that exist in your account but are not part of the journey's test suite. Each row represents a single test and contains the same data as the table above. You can add each test in this table to the journey's test suite, which will automatically start contributing to the journey's uptime through the test suite SLO.
 
 
 ## Further reading

@@ -23,7 +23,7 @@ Journey Monitoring is in Preview.
 
 ## Overview
 
-Every 24 hours, Datadog reviews the past 30 days of product analytics data and automatically generates a set of suggested journeys. Each suggested journey includes:
+Every 24 hours, Datadog analyzes the past 30 days of data and automatically generates suggested journeys. Suggestions are based on overlap detected across your existing Product Analytics funnels, RUM operations, and Synthetic tests. For example, a checkout funnel in Product Analytics that aligns with a RUM operation and an existing Synthetic test is grouped into a single suggested journey. Each suggested journey includes:
 - A start event
 - An end event
 - A journey description
@@ -38,8 +38,7 @@ Suggested journeys are starting points to create new journeys. Clicking on a sug
 
 Click the three-dot menu in the catalog to dismiss a suggested journey. A dismissed journey suggestion will not be re-generated in the future.
 
-
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 

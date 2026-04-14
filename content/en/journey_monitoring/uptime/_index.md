@@ -37,14 +37,14 @@ By default, each journey's test suite will have the same name as the journey.
 
 ## Journey uptime
 
-As long as the journey's test suite has at least one active test in it, each suite will automatically have:
+As long as the journey's test suite has at least one active test in it, each suite automatically has:
 - A monitor 
 
-Datadog will automatically start calculating an uptime SLO on the test suite as long as the test suite has at least one active test in it. By default, the SLO will be evaluated at a 99.99% availability rate.
+Datadog automatically starts calculating an uptime SLO on the test suite as long as the test suite has at least one active test in it. By default, the SLO is evaluated at a 99.99% availability rate.
 
 You can add and remove tests from the test suite. Each added test is automatically marked as **critical**, meaning the test suite 
 
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 

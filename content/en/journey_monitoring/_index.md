@@ -24,7 +24,12 @@ Journey Monitoring is in Preview.
 
 ## Overview
 
-**Journey Monitoring** visualizes the performance of critical user flows in your applications. It brings together data from [Real User Monitoring][1], [Synthetic Testing][2], [Product Analytics][3], and [Session Replay][4] to show traffic, conversion rates, uptime, and errors for each user journey in one place.
+Teams monitoring critical user flows — such as login, checkout, or media streaming — often need to switch between multiple tools to answer basic questions:
+- Is this experience available to my users?
+- How quickly and reliably does it perform?
+- Where is the issue coming from — frontend, network, or backend?
+
+**Journey Monitoring** addresses this by visualizing the performance of critical user flows in your applications. It brings together data from [Real User Monitoring][1], [Synthetic Testing][2], [Product Analytics][3], and [Session Replay][4] to show traffic, conversion rates, uptime, and errors for each user journey in one place. This gives engineering, product, and operations teams a shared view of journey health.
 
 {{< img src="journey_monitoring/journey-monitoring-temp.png" alt="The Journey Monitoring map showing a catalog of journeys on the left with traffic and conversion metrics, and a visual flow map on the right displaying user paths between application views and actions." style="width:100%;" >}}
 
@@ -35,6 +40,7 @@ For each journey you can:
 - Identify where users drop off and investigate individual sessions with [Session Replay][4]
 - Track the uptime of the journey using a [Synthetic test suite][10]
 - Measure the performance of critical journey steps with [RUM operations][13]
+- Share a unified view of journey health across engineering, product, and operations teams
 
 ## Setup
 
@@ -74,7 +80,7 @@ In the journey's details report, you can extend coverage based on the products y
 
 A journey is defined as a start and an end. The start and end can either be action or view events.
 
-Each journey can have one or more [variants][9], which are versions of the journey with a specific sequence of intermediate steps between the journey's start and end.
+Each journey can have one or more [variants][9]. A variant is a specific sequence of intermediate steps a user takes between the journey's start and end. Different users naturally take different paths — for example, some may skip optional steps while others take detours before completing the journey.
 
 [INSERT DIAGRAM HERE]
 
@@ -86,7 +92,7 @@ Each journey and its variants have the following performance metrics:
 - **Time to convert**: Average time for a session to complete the journey. Based on the `rum.measure.feature.duration` metric.
 - **Uptime**: Availability of the journey based on its [Synthetic test suite][10] performance.
 
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -98,9 +104,9 @@ Each journey and its variants have the following performance metrics:
 [6]: /synthetics/browser_tests/
 [7]: /synthetics/mobile_app_testing/
 [8]: /product_analytics/
-[9]:/journey_monitoring/details_report/variants/
+[9]: /journey_monitoring/details_report/variants/
 [10]:/journey_monitoring/uptime/
 [11]: /journey_monitoring/map/suggested_journeys/
-[12]:/journey_monitoring/details_report/
-[13]:/real_user_monitoring/operations_monitoring/
-[14]:/journey_monitoring/map/
+[12]: /journey_monitoring/details_report/
+[13]: /real_user_monitoring/operations_monitoring/
+[14]: /journey_monitoring/map/
