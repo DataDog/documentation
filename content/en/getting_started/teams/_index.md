@@ -142,7 +142,7 @@ Using API endpoints or Terraform to manage teams lets you provide a custom sourc
 Use the API or Terraform if your organization has the following characteristics:
 - You have internal tools that model teams
 - You need custom logic (for example, merging, aliasing, or special naming)
-- You want to centrally control team structure and membership and feed different systems, including Datadog included
+- You want to centrally control team structure and membership and feed different systems, including Datadog
 
 #### Limitations
 When manually provisioning teams through the API or Terraform, you must define and maintain your own desired state to avoid drift.
@@ -249,7 +249,7 @@ Select 5-10 teams and validate the following:
 - Measure drift: identify where teams differ between IdP and GitHub and investigate the cause.
 - Establish change control (Terraform or API) for fields that must remain stable.
 
-### 3 Plan for future sources
+### Plan for future sources
 
 Build your Teams foundation so additional sources can be added later as enrichment, without requiring a full rebuild.
 
