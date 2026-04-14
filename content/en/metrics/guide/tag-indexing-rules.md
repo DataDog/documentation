@@ -123,7 +123,7 @@ Tag rules can either override an existing configuration or merge with it. This d
 Starting tags:  
 `host`, `env`, `service`, `team`
 
-{{< img src="metrics/guide/metric_tag_policies/merge_vs_replace.png" alt="" style="width:100%;">}}
+{{< img src="metrics/guide/tag_indexing_rules/merge_vs_override.png" alt="" style="width:100%;">}}
 
 **Key insight**: The `env` tag is re-added only to the `infra.*` metrics.
 
@@ -137,13 +137,13 @@ Starting tags:
 
 #### Order 1: Specific rule first
 
-{{< img src="metrics/guide/metric_tag_policies/policy_order_1.png" alt="" style="width:100%;">}}
+{{< img src="metrics/guide/tag_indexing_rules/rule_order_1.png" alt="" style="width:100%;">}}
 
 **Key insight**: Rule 1 removes the `host` tag, then Rule 2 re-adds `host`.
 
 #### Order 2: General rule first
 
-{{< img src="metrics/guide/metric_tag_policies/policy_order_2.png" alt="" style="width:100%;">}}
+{{< img src="metrics/guide/tag_indexing_rules/rule_order_2.png" alt="" style="width:100%;">}}
 
 **Key insight**: The `host` tag is removed last, and stays removed.
 
@@ -154,7 +154,7 @@ Use a broad rule with **Override** behavior to exclude a tag globally, then use 
 Starting tags:
 `node`, `env`, `pod`
 
-{{< img src="metrics/guide/metric_tag_policies/broad_exclude_narrow_exception.png" alt="" style="width:100%;">}}
+{{< img src="metrics/guide/tag_indexing_rules/broad_exclude_narrow_exception.png" alt="" style="width:100%;">}}
 
 **Key insight**: When a broad exclude and a narrow include cancel each other out for a metric, no tag restrictions are applied and all original tags are preserved.
 
@@ -165,7 +165,7 @@ Layer multiple rules with **Merge** behavior on top of a broad rule with **Overr
 Starting tags:
 `team`, `pod`, `env`
 
-{{< img src="metrics/guide/metric_tag_policies/multiple_exceptions.png" alt="" style="width:100%;">}}
+{{< img src="metrics/guide/tag_indexing_rules/multiple_exceptions.png" alt="" style="width:100%;">}}
 
 **Key insight**: Multiple inclusion rules with **Merge** behavior, applied after an exclusion rule with **Override** behavior, are additive (a metric matching two exception prefixes gets both sets of tags restored).
 
