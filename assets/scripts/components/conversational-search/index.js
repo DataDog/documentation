@@ -53,6 +53,9 @@ initializeFeatureFlags().then(async (client) => {
 
     if (IS_CONVERSATIONAL_SEARCH_ENABLED) {
         document.body.classList.add('conv-search-enabled');
+        logAction('Conversational Search Impression', {
+            conversational_search: { action: 'impression', page: window.location.pathname }
+        });
         initConversationalSearch();
     }
 });
@@ -322,6 +325,14 @@ class ConversationalSearch {
     }
 
     close() {
+        const messageCount = this.chatHistory.filter(m => m.role === 'user').length;
+        if (messageCount > 0) {
+            this.logInteraction('conversation_close', {
+                messages_sent: messageCount,
+                responses_received: this.chatHistory.filter(m => m.role === 'assistant').length
+            });
+        }
+
         this.isOpen = false;
         this.sidebar.classList.remove('open');
         this.overlay.classList.remove('open');
