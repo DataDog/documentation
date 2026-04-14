@@ -432,6 +432,20 @@
     "request_description": "",
     "request_schema_description": "Request to update an AuthN Mapping."
   },
+  "ListInvestigations": {
+    "description": "List all Bits AI investigations for the organization.",
+    "summary": "List Bits AI investigations"
+  },
+  "TriggerInvestigation": {
+    "description": "Trigger a new Bits AI investigation based on a monitor alert.",
+    "summary": "Trigger a Bits AI investigation",
+    "request_description": "Trigger investigation request body.",
+    "request_schema_description": "Request to trigger a new investigation."
+  },
+  "GetInvestigation": {
+    "description": "Get a specific Bits AI investigation by ID.",
+    "summary": "Get a Bits AI investigation"
+  },
   "SearchCases": {
     "description": "Search cases.",
     "summary": "Search cases"
@@ -724,6 +738,18 @@
     "summary": "Search pipelines events",
     "request_description": "",
     "request_schema_description": "The request for a pipelines search."
+  },
+  "UpdateFlakyTestsManagementPolicies": {
+    "description": "Partially update Flaky Tests Management repository-level policies for the given repository.\nOnly provided policy blocks are updated; omitted blocks are left unchanged.",
+    "summary": "Update Flaky Tests Management policies",
+    "request_description": "",
+    "request_schema_description": "Request object for updating Flaky Tests Management policies."
+  },
+  "GetFlakyTestsManagementPolicies": {
+    "description": "Retrieve Flaky Tests Management repository-level policies for the given repository.",
+    "summary": "Get Flaky Tests Management policies",
+    "request_description": "",
+    "request_schema_description": "Request object for getting Flaky Tests Management policies."
   },
   "DeleteTestOptimizationServiceSettings": {
     "description": "Delete Test Optimization settings for a specific service identified by repository, service name, and environment.",
@@ -1048,6 +1074,26 @@
     "request_description": "New dashboards of the dashboard list.",
     "request_schema_description": "Request containing the list of dashboards to update to."
   },
+  "CreateDashboardSecureEmbed": {
+    "description": "Create a secure embed share for a dashboard. The response includes a one-time `credential` used for HMAC-SHA256 signing. Store it securely — it cannot be retrieved again.",
+    "summary": "Create a secure embed for a dashboard",
+    "request_description": "Secure embed creation request body.",
+    "request_schema_description": "Request to create a secure embed shared dashboard."
+  },
+  "DeleteDashboardSecureEmbed": {
+    "description": "Delete a secure embed share for a dashboard.",
+    "summary": "Delete a secure embed for a dashboard"
+  },
+  "GetDashboardSecureEmbed": {
+    "description": "Retrieve an existing secure embed configuration for a dashboard.",
+    "summary": "Get a secure embed for a dashboard"
+  },
+  "UpdateDashboardSecureEmbed": {
+    "description": "Partially update a secure embed configuration. All fields are optional (PATCH semantics).",
+    "summary": "Update a secure embed for a dashboard",
+    "request_description": "Secure embed update request body.",
+    "request_schema_description": "Request to update a secure embed shared dashboard."
+  },
   "GetAllDatasets": {
     "description": "Get all datasets that have been configured for an organization.",
     "summary": "Get all datasets"
@@ -1296,6 +1342,22 @@
     "request_description": "",
     "request_schema_description": "Request to update an environment."
   },
+  "PauseExposureSchedule": {
+    "description": "Pauses a progressive rollout while preserving rollout state.",
+    "summary": "Pause a progressive rollout"
+  },
+  "ResumeExposureSchedule": {
+    "description": "Resumes progression for a previously paused progressive rollout.",
+    "summary": "Resume a progressive rollout"
+  },
+  "StartExposureSchedule": {
+    "description": "Starts a progressive rollout and begins progression.",
+    "summary": "Start a progressive rollout"
+  },
+  "StopExposureSchedule": {
+    "description": "Stops a progressive rollout and marks it as aborted.",
+    "summary": "Stop a progressive rollout"
+  },
   "GetFeatureFlag": {
     "description": "Returns the details of a specific feature flag\nincluding variants and environment status.",
     "summary": "Get a feature flag"
@@ -1309,6 +1371,18 @@
   "ArchiveFeatureFlag": {
     "description": "Archives a feature flag. Archived flags are\nhidden from the main list but remain accessible and can be unarchived.",
     "summary": "Archive a feature flag"
+  },
+  "CreateAllocationsForFeatureFlagInEnvironment": {
+    "description": "Creates a new targeting rule (allocation) for a specific feature flag in a specific environment.",
+    "summary": "Create targeting rules for a flag env",
+    "request_description": "",
+    "request_schema_description": "Request to create targeting rules (allocations) for a feature flag in an environment."
+  },
+  "UpdateAllocationsForFeatureFlagInEnvironment": {
+    "description": "Updates targeting rules (allocations) for a specific feature flag in a specific environment.\nThis operation replaces the existing allocation set with the request payload.",
+    "summary": "Update targeting rules for a flag",
+    "request_description": "",
+    "request_schema_description": "Request to overwrite targeting rules (allocations) for a feature flag in an environment."
   },
   "DisableFeatureFlagEnvironment": {
     "description": "Disable a feature flag in a specific environment.",
@@ -2077,6 +2151,42 @@
     "request_description": "",
     "request_schema_description": "Update the IP allowlist."
   },
+  "ListLLMObsAnnotationQueues": {
+    "description": "List annotation queues. Optionally filter by project ID or queue IDs. These parameters are mutually exclusive.\nIf neither is provided, all queues in the organization are returned.",
+    "summary": "List LLM Observability annotation queues"
+  },
+  "CreateLLMObsAnnotationQueue": {
+    "description": "Create a new annotation queue. Only `name`, `project_id`, and `description` are accepted.\nFields such as `created_by`, `owned_by`, `created_at`, `modified_by`, and `modified_at` are inferred by the backend.",
+    "summary": "Create an LLM Observability annotation queue",
+    "request_description": "Create annotation queue payload.",
+    "request_schema_description": "Request to create an LLM Observability annotation queue."
+  },
+  "DeleteLLMObsAnnotationQueue": {
+    "description": "Delete an annotation queue by its ID.",
+    "summary": "Delete an LLM Observability annotation queue"
+  },
+  "UpdateLLMObsAnnotationQueue": {
+    "description": "Partially update an annotation queue. Only `name` and `description` can be updated.",
+    "summary": "Update an LLM Observability annotation queue",
+    "request_description": "Update annotation queue payload.",
+    "request_schema_description": "Request to update an LLM Observability annotation queue."
+  },
+  "GetLLMObsAnnotatedInteractions": {
+    "description": "Retrieve all interactions and their annotations for a given annotation queue.",
+    "summary": "Get annotated queue interactions"
+  },
+  "CreateLLMObsAnnotationQueueInteractions": {
+    "description": "Add one or more interactions (traces) to an annotation queue.\nAt least one interaction must be provided.",
+    "summary": "Add annotation queue interactions",
+    "request_description": "Add interactions payload.",
+    "request_schema_description": "Request to add interactions to an LLM Observability annotation queue."
+  },
+  "DeleteLLMObsAnnotationQueueInteractions": {
+    "description": "Delete one or more interactions from an annotation queue.",
+    "summary": "Delete annotation queue interactions",
+    "request_description": "Delete interactions payload.",
+    "request_schema_description": "Request to delete interactions from an LLM Observability annotation queue."
+  },
   "ListLLMObsExperiments": {
     "description": "List all LLM Observability experiments sorted by creation date, newest first.",
     "summary": "List LLM Observability experiments"
@@ -2715,6 +2825,94 @@
     "request_description": "",
     "request_schema_description": "Request to update an org connection."
   },
+  "ListOrgGroupMemberships": {
+    "description": "List organization group memberships. Filter by org group ID or org UUID. At least one of `filter[org_group_id]` or `filter[org_uuid]` must be provided. When filtering by org UUID, returns a single-item list with the membership for that org.",
+    "summary": "List org group memberships"
+  },
+  "BulkUpdateOrgGroupMemberships": {
+    "description": "Move a batch of organizations from one org group to another. This is an atomic operation. Maximum 100 orgs per request.",
+    "summary": "Bulk update org group memberships",
+    "request_description": "",
+    "request_schema_description": "Request to bulk update org group memberships."
+  },
+  "GetOrgGroupMembership": {
+    "description": "Get a specific organization group membership by its ID.",
+    "summary": "Get an org group membership"
+  },
+  "UpdateOrgGroupMembership": {
+    "description": "Move an organization to a different org group by updating its membership.",
+    "summary": "Update an org group membership",
+    "request_description": "",
+    "request_schema_description": "Request to update an org group membership."
+  },
+  "ListOrgGroupPolicies": {
+    "description": "List policies for an organization group. Requires a filter on org group ID.",
+    "summary": "List org group policies"
+  },
+  "CreateOrgGroupPolicy": {
+    "description": "Create a new policy for an organization group.",
+    "summary": "Create an org group policy",
+    "request_description": "",
+    "request_schema_description": "Request to create an org group policy."
+  },
+  "DeleteOrgGroupPolicy": {
+    "description": "Delete an organization group policy by its ID.",
+    "summary": "Delete an org group policy"
+  },
+  "UpdateOrgGroupPolicy": {
+    "description": "Update the content of an existing organization group policy.",
+    "summary": "Update an org group policy",
+    "request_description": "",
+    "request_schema_description": "Request to update an org group policy."
+  },
+  "ListOrgGroupPolicyConfigs": {
+    "description": "List all org configs that are eligible to be used as organization group policies.",
+    "summary": "List org group policy configs"
+  },
+  "ListOrgGroupPolicyOverrides": {
+    "description": "List policy overrides for an organization group. Requires a filter on org group ID. Optionally filter by policy ID.",
+    "summary": "List org group policy overrides"
+  },
+  "CreateOrgGroupPolicyOverride": {
+    "description": "Create a new policy override for an organization within an org group.",
+    "summary": "Create an org group policy override",
+    "request_description": "",
+    "request_schema_description": "Request to create an org group policy override."
+  },
+  "DeleteOrgGroupPolicyOverride": {
+    "description": "Delete an organization group policy override by its ID.",
+    "summary": "Delete an org group policy override"
+  },
+  "UpdateOrgGroupPolicyOverride": {
+    "description": "Update an existing organization group policy override.",
+    "summary": "Update an org group policy override",
+    "request_description": "",
+    "request_schema_description": "Request to update an org group policy override."
+  },
+  "ListOrgGroups": {
+    "description": "List all organization groups that the requesting organization has access to.",
+    "summary": "List org groups"
+  },
+  "CreateOrgGroup": {
+    "description": "Create a new organization group.",
+    "summary": "Create an org group",
+    "request_description": "",
+    "request_schema_description": "Request to create an org group."
+  },
+  "DeleteOrgGroup": {
+    "description": "Delete an organization group by its ID.",
+    "summary": "Delete an org group"
+  },
+  "GetOrgGroup": {
+    "description": "Get a specific organization group by its ID.",
+    "summary": "Get an org group"
+  },
+  "UpdateOrgGroup": {
+    "description": "Update the name of an existing organization group.",
+    "summary": "Update an org group",
+    "request_description": "",
+    "request_schema_description": "Request to update an org group."
+  },
   "ListPermissions": {
     "description": "Returns a list of all permissions, including name, description, and ID.",
     "summary": "List permissions"
@@ -3321,13 +3519,37 @@
     "request_description": "",
     "request_schema_description": "Definition of a user."
   },
+  "ListScorecardCampaigns": {
+    "description": "Fetches all scorecard campaigns.",
+    "summary": "List all campaigns"
+  },
+  "CreateScorecardCampaign": {
+    "description": "Creates a new scorecard campaign.",
+    "summary": "Create a new campaign",
+    "request_description": "Campaign data.",
+    "request_schema_description": "Request to create a new campaign."
+  },
+  "DeleteScorecardCampaign": {
+    "description": "Deletes a single campaign by ID or key.",
+    "summary": "Delete a campaign"
+  },
+  "GetScorecardCampaign": {
+    "description": "Fetches a single campaign by ID or key.",
+    "summary": "Get a campaign"
+  },
+  "UpdateScorecardCampaign": {
+    "description": "Updates an existing campaign.",
+    "summary": "Update a campaign",
+    "request_description": "Campaign data.",
+    "request_schema_description": "Request to update a campaign."
+  },
   "ListScorecardOutcomes": {
     "description": "Fetches all rule outcomes.",
     "summary": "List all rule outcomes"
   },
-  "UpdateScorecardOutcomesAsync": {
+  "UpdateScorecardOutcomes": {
     "description": "Updates multiple scorecard rule outcomes in a single batched request.",
-    "summary": "Update Scorecard outcomes asynchronously",
+    "summary": "Update Scorecard outcomes",
     "request_description": "Set of scorecard outcomes.",
     "request_schema_description": "Scorecard outcomes batch request."
   },
@@ -3353,9 +3575,13 @@
   },
   "UpdateScorecardRule": {
     "description": "Updates an existing rule.",
-    "summary": "Update an existing rule",
+    "summary": "Update an existing scorecard rule",
     "request_description": "Rule attributes.",
     "request_schema_description": "Request to update a scorecard rule."
+  },
+  "ListScorecards": {
+    "description": "Fetches all scorecards.",
+    "summary": "List all scorecards"
   },
   "UnassignSeatsUser": {
     "description": "Unassign seats from users for a product code.",
@@ -3721,11 +3947,19 @@
     "request_description": "Attributes describing the signal update.",
     "request_schema_description": "Request body for changing the related incidents of a given security monitoring signal."
   },
+  "GetInvestigationLogQueriesMatchingSignal": {
+    "description": "Get the list of investigation log queries available for a given security signal.",
+    "summary": "Get investigation queries for a signal"
+  },
   "EditSecurityMonitoringSignalState": {
     "description": "Change the triage state of a security signal.",
     "summary": "Change the triage state of a security signal",
     "request_description": "Attributes describing the signal update.",
     "request_schema_description": "Request body for changing the state of a given security monitoring signal."
+  },
+  "GetSuggestedActionsMatchingSignal": {
+    "description": "Get the list of suggested actions for a given security signal.",
+    "summary": "Get suggested actions for a signal"
   },
   "ListScanningGroups": {
     "description": "List all the Scanning groups in your organization.",

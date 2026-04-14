@@ -68,9 +68,10 @@ Both metrics are tagged with `user_id`, `user_email`, and `client` (the MCP clie
 The Datadog MCP Server supports _toolsets_, which allow you to use only the tools you need, saving valuable context window space. These toolsets are available:
 
 - `core`: The default toolset for logs, metrics, traces, dashboards, monitors, incidents, hosts, services, events, and notebooks
-- `alerting`: Tools for validating monitors, searching monitor groups, and retrieving monitor templates
-- `apm`: Tools for in-depth [APM][28] trace analysis, span search, Watchdog insights, and performance investigation
+- `alerting`: Tools for validating and creating monitors, searching monitor groups, retrieving monitor templates, analyzing monitor coverage, and searching SLOs
+- `apm`: ([Preview][43]) Tools for in-depth [APM][28] trace analysis, span search, Watchdog insights, and performance investigation
 - `cases`: Tools for [Case Management][38], including creating, searching, and updating cases; managing projects; and linking Jira issues
+- `dashboards`: Tools for retrieving, creating, updating, and deleting [dashboards][44], plus widget schema reference and validation
 - `dbm`: Tools for interacting with [Database Monitoring][26]
 - `ddsql`: (Preview) Tools for querying Datadog data using [DDSQL][41], a SQL dialect with support for infrastructure resources, logs, metrics, RUM, spans, and other Datadog data sources
 - `error-tracking`: Tools for interacting with Datadog [Error Tracking][25]
@@ -181,7 +182,60 @@ Lists available Datadog dashboards and key details.
 - List dashboards related to infrastructure monitoring.
 - Find shared dashboards for the engineering team.
 
-**Note**: This tool lists relevant dashboards but provides limited detail about their contents.
+**Note**: This tool lists relevant dashboards but provides limited detail about their contents. Use `get_datadog_dashboard` to retrieve full widget definitions.
+
+### `get_datadog_dashboard`
+*Toolset: **dashboards***\
+*Permissions Required: `Dashboards Read` and `User Access Read`*\
+Retrieves a Datadog [dashboard][44] by ID, returning its title, description, tags, and widgets. Use `search_datadog_dashboards` first to find dashboard IDs.
+
+- Get the full details of dashboard `ps7-mn3-kwf`.
+- Show me the widgets and layout of the infrastructure overview dashboard.
+- Retrieve the template variables configured on this dashboard.
+
+### `upsert_datadog_dashboard`
+*Toolset: **dashboards***\
+*Permissions Required: `Dashboards Read` and `Dashboards Write`*\
+Creates or updates a Datadog [dashboard][44]. To update an existing dashboard, provide the dashboard ID; omit it to create a new one. Call `get_widget_reference` for widget schemas before building widgets.
+
+- Create a dashboard showing CPU and memory usage across all hosts.
+- Add a timeseries widget for error rate to dashboard `abc-123-def`.
+- Update the title and description of my service overview dashboard.
+
+### `delete_datadog_dashboard`
+*Toolset: **dashboards***\
+*Permissions Required: `Dashboards Read` and `Dashboards Write`*\
+Permanently deletes a Datadog [dashboard][44] by ID. This action cannot be undone. Use `search_datadog_dashboards` first to find dashboard IDs.
+
+- Delete dashboard `ps7-mn3-kwf`.
+- Remove the old staging environment dashboard.
+
+### `get_widget_reference`
+*Toolset: **dashboards***\
+*Permissions Required: `Dashboards Read` or `Dashboards Write` or `Notebooks Read`*\
+Returns schemas and building instructions for dashboard widget types. Widget definitions are JSON objects; this tool returns TypeScript type definitions representing their schemas along with building instructions covering query patterns, formula syntax, and common pitfalls. Call this before generating widgets with `upsert_datadog_dashboard`.
+
+- Get the schema for a timeseries widget.
+- Show me how to build a toplist and a query table widget.
+- What's the schema for the scatterplot widget?
+
+### `validate_dashboard_widget`
+*Toolset: **dashboards***\
+*Permissions Required: `Dashboards Read` or `Dashboards Write` or `Notebooks Read`*\
+Validates a widget definition against the dashboard schema. Use this to check widget JSON before passing it to `upsert_datadog_dashboard`.
+
+- Validate my timeseries widget definition before creating the dashboard.
+- Check if this query table widget JSON is correct.
+
+### `ask_widget_expert`
+*Toolset: **dashboards***\
+*Permissions Required: `Dashboards Read` or `Dashboards Write` or `Notebooks Read`*\
+Ask a Datadog widget expert a question about widget configuration, schemas, query syntax, field usage, debugging, or pitfalls. Best for targeted questions: schema lookups, field clarifications, debugging an existing widget definition, or understanding how a specific widget type works.
+
+- What response_format should I use for a toplist?
+- What's the schema for the scatterplot widget?
+- Help me debug why this widget is showing fractional values when it should be a count.
+- How do I configure a timeseries to show both bars and lines?
 
 ### `get_datadog_notebook`
 *Toolset: **core***\
@@ -320,6 +374,35 @@ Searches monitor groups by name or criteria.
 
 - Show me all monitor groups in an alerting state.
 - Find monitor groups related to the checkout service.
+
+### `search_datadog_slos`
+*Toolset: **alerting***\
+*Permissions Required: `SLOs Read`*\
+Searches Datadog SLOs by name, tags, or type. Supports query syntax for filtering by service, team, or other attributes.
+
+- Search for SLOs related to `service:checkout`.
+- List all SLOs tagged with `team:backend`.
+- List SLOs for the payments service.
+
+### `create_datadog_monitor`
+*Toolset: **alerting***\
+*Permissions Required: `Monitors Write`*\
+Creates a Datadog monitor in draft mode. Monitors created with this tool do not send notifications and are set to priority 5 (low). Use `validate_datadog_monitor` to check the definition before creating and `get_datadog_monitor_templates` for query syntax examples. After creation, publish the monitor in the Datadog UI.
+
+- Create a metric alert monitor for high CPU usage on the web service.
+- Set up a log alert monitor for error spikes in the payments service.
+- Create a monitor to track p95 latency for the checkout endpoint.
+
+### `get_monitor_coverage`
+*Toolset: **alerting***\
+*Permissions Required: `Monitors Read`*\
+Finds monitoring gaps and coverage for services or hosts. Returns which signals (such as error rate, latency, and request rate) are covered by existing monitors and which are missing. Use with `create_datadog_monitor` to fill gaps.
+
+- Get monitoring coverage for `service:checkout`.
+- What monitoring gaps exist for `host:web-01`?
+- Find services that are missing error rate monitors.
+
+<div class="alert alert-info">The <code>apm</code> toolset is in Preview. <a href="https://www.datadoghq.com/product-preview/apm-mcp-toolset/">Sign up for access.</a></div>
 
 ### `apm_search_spans`
 *Toolset: **apm***\
@@ -511,7 +594,7 @@ Searches for Datadog users by email, name, or handle. Useful for finding the rig
 
 - Find the Datadog user account for jane.doe@example.com.
 
-### `search_datadog_dbm_plans`
+### `search_datadog_database_plans`
 *Toolset: **dbm***\
 *Permissions Required: `Database Monitoring Read`*\
 Searches [Database Monitoring][26] query execution plans, which show how the database engine executes queries, including index usage, join strategies, and cost estimates. Use this to analyze query performance and identify optimization opportunities.
@@ -520,7 +603,7 @@ Searches [Database Monitoring][26] query execution plans, which show how the dat
 - Find query plans with `@db.plan.type:explain_analyze` for the production database.
 - Get execution plans for queries by `@db.user:app_user` with duration greater than 1 second.
 
-### `search_datadog_dbm_samples`
+### `search_datadog_database_samples`
 *Toolset: **dbm***\
 *Permissions Required: `Database Monitoring Read`*\
 Searches [Database Monitoring][26] query samples, which represent individual query executions with performance metrics. Use this to analyze database activity patterns, identify slow queries, and investigate database performance issues.
@@ -960,3 +1043,5 @@ The Datadog MCP Server is under significant development. Use [this feedback form
 [40]: /bits_ai/mcp_server/setup#local-binary-authentication
 [41]: /ddsql_editor/
 [42]: /ddsql_reference/ddsql_default/
+[43]: https://www.datadoghq.com/product-preview/apm-mcp-toolset/
+[44]: /dashboards/
