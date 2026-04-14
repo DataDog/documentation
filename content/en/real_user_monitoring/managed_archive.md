@@ -24,8 +24,6 @@ RUM Managed Archive acts as a **safety net**, enabling teams to:
 - **Recover on demand**: Bring back specific sessions for full investigation
 - **Investigate in depth**: Explore recovered sessions like regularly retained sessions
 
-{{< img src="real_user_monitoring/managed_archive/managed_archive_lifecycle.png" alt="Diagram showing the RUM without Limits lifecycle: ingest, retain with filters, store in Managed Archive, and recover on demand" style="width:100%;" >}}
-
 Common use cases include:
 
 - Recovering a session not captured by retention filters to resolve a customer support ticket
