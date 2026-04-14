@@ -101,4 +101,4 @@ Use the [Datadog Log Pipeline API endpoint][100] with the following category pro
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/logs/pipelines
-[4]: /logs/processor_types/log_status_remapper
+[4]: /logs/log_configuration/processors/log_status_remapper/
