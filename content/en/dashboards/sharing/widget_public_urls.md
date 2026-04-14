@@ -32,7 +32,7 @@ In tools that support link previews (such as Slack or Microsoft Teams), the past
 
 ## Disable Widget Public URLs
 
-To stop generating publicly accessible widget image links, disable the **Widget Public URLs** setting in [**Organization Settings > Public Sharing > Settings**][3]. After disabling, copying a widget no longer generates a public snapshot image link.
+To stop generating publicly accessible widget image links, disable the **Widget Public URLs** setting in [**Organization Settings > Public Sharing > Settings**][3]. After disabling, copying a widget no longer generates a public snapshot image link. Previously generated links are no longer accessible.
 
 ## Further reading
 
