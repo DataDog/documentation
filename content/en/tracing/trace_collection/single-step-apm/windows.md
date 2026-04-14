@@ -86,7 +86,9 @@ After SSI loads the Datadog SDK into your applications and enables distributed t
 
 To enable products, [set environment variables][3] in your application configuration.
 
-## Define instrumentation rules
+## Advanced options
+
+### Define instrumentation rules
 
 <div class="alert alert-info">Instrumentation rules (available for Agent v7.73+) apply only to host-wide instrumentation. They are not supported for IIS-only installation.</div>
 
@@ -113,7 +115,7 @@ To configure instrumentation rules:
 
 If Remote Configuration is enabled, rules are deployed to every host and applied on those with SSI enabled within 50 seconds. Alternatively, click **Export** to export the configuration file and apply it manually to your hosts.
 
-### Define rule conditions
+#### Define rule conditions
 
 Each rule consists of one or more conditions. A condition includes the following elements:
 - **Attribute**: The process property that the rule evaluates.
@@ -129,22 +131,28 @@ Supported attributes include:
 | Arguments | Command-line arguments used to start the process. | `--env=production` |
 | Working Directory | Working directory of the process. | `C:\inetpub\wwwroot` |
 | Language | Programming language detected for the process. | `dotnet` |
-| Entry Point File | The specific file used to launch the application. More granular than Language, and useful when multiple apps of the same language run on the same host. | `MyService.dll`, `app.py` |
-| IIS Application Pool | The IIS application pool hosting the worker process. Because all IIS workers share the same `w3wp.exe` executable, this is the only way to target a specific .NET app on IIS. | `DefaultAppPool`, `MyWebApp` |
+| Entry Point File | The specific file used to launch the application. | `MyService.dll`, `app.py` |
+| IIS Application Pool | The IIS application pool hosting the worker process. Because all IIS workers share the `w3wp.exe` executable, this is the most reliable way to target a specific .NET app on IIS. | `DefaultAppPool`, `MyWebApp` |
 
-### Example use cases
+#### Example use cases
 
-**Instrument everything except specific services**
+Review the following examples demonstrating how to apply instrumentation rules:
 
-Instrument all processes by default, but block analytics cron jobs (matched by working directory) and a Java batch processor (matched by entry point file) that would add noise without value.
+{{< collapse-content title="Example 1: Instrument all processes except specific ones" level="h5" >}}
 
-{{< img src="tracing/trace_collection/instrumentation-rules-example-1.png" alt="The instrumentation rules UI showing two block rules: one targeting a working directory containing 'analytics.service' and one targeting an entry point file containing 'batch-processor.jar', with a default of allow instrumentation" style="width:100%;" >}}
+Instrument all processes by default. Add block rules to exclude services that would add noise without value, such as analytics cron jobs and Java batch processors.
 
-**Instrument only specific IIS apps**
+{{< img src="tracing/trace_collection/instrumentation-rules-example-1.png" alt="Two block instrumentation rules targeting Working Directory and Entry Point File conditions, with a default of allow instrumentation." style="width:100%;" >}}
 
-Block instrumentation by default, and allow only specific IIS application pools. This is useful when rolling out APM incrementally to a subset of .NET services.
+{{< /collapse-content >}}
 
-{{< img src="tracing/trace_collection/instrumentation-rules-example-2.png" alt="The instrumentation rules UI showing two allow rules targeting specific IIS application pools (CheckoutPool and CustomerPortalPool), with a default of block instrumentation" style="width:100%;" >}}
+{{< collapse-content title="Example 2: Instrument only specific IIS applications" level="h5" >}}
+
+Block all instrumentation by default. Add allow rules to opt specific IIS applications into APM. Because all IIS workers share the `w3wp.exe` executable, use IIS Application Pool to identify target applications. This approach is useful for gradual rollouts.
+
+{{< img src="tracing/trace_collection/instrumentation-rules-example-2.png" alt="Two allow instrumentation rules targeting specific IIS application pools by name, with a default of block instrumentation." style="width:100%;" >}}
+
+{{< /collapse-content >}}
 
 ## Remove Single Step APM instrumentation from your Agent
 

@@ -156,15 +156,27 @@ Supported attributes include:
 | Arguments | Command-line arguments used to start the process. | `--env=production` |
 | Working Directory | Working directory of the process. | `/app` |
 | Language | Programming language detected for the process. | `python` |
-| Entry Point File | The specific file used to launch the application. More granular than Language, and useful when multiple apps of the same language run on the same host. | `app.py`, `server.js` |
+| Entry Point File | The specific file used to launch the application. | `app.py`, `server.js` |
 
 #### Example use cases
 
-**Instrument everything except specific services**
+Review the following examples demonstrating how to apply instrumentation rules:
 
-Instrument all processes by default, but block analytics cron jobs (matched by working directory) and a Java batch processor (matched by entry point file) that would add noise without value.
+{{< collapse-content title="Example 1: Instrument all processes except specific ones" level="h5" >}}
 
-{{< img src="tracing/trace_collection/instrumentation-rules-example-1.png" alt="The instrumentation rules UI showing two block rules: one targeting a working directory containing 'analytics.service' and one targeting an entry point file containing 'batch-processor.jar', with a default of allow instrumentation" style="width:100%;" >}}
+Instrument all processes by default. Add block rules to exclude services that would add noise without value, such as analytics cron jobs and Java batch processors.
+
+{{< img src="tracing/trace_collection/instrumentation-rules-example-1.png" alt="Two block instrumentation rules targeting Working Directory and Entry Point File conditions, with a default of allow instrumentation." style="width:100%;" >}}
+
+{{< /collapse-content >}}
+
+{{< collapse-content title="Example 2: Instrument only specific processes" level="h5" >}}
+
+Block all instrumentation by default. Add allow rules to opt specific processes into APM. This approach gives you precise control and works well for gradual rollouts.
+
+For example, to instrument only a checkout service, create an allow rule with **Working Directory** set to `/srv/checkout`, then set the default behavior to **Block Instrumentation**.
+
+{{< /collapse-content >}}
 
 ## Remove Single Step APM instrumentation from your Agent
 
