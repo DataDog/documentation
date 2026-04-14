@@ -68,7 +68,7 @@ The same FOCUS tag is populated from different source fields depending on the pr
 
 #### SaaS Provider FOCUS Mappings
 
-Each SaaS provider maps its native fields to FOCUS tags (from `tier3TagAliases.csv`):
+Each SaaS provider maps its native fields to FOCUS tags:
 
 | Provider | `servicename` | `billingaccountid` | `billingaccountname` | `subaccountid` | `subaccountname` |
 |----------|--------------|-------------------|---------------------|---------------|-----------------|
