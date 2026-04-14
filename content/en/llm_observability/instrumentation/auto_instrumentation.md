@@ -171,7 +171,6 @@ module.exports = {
 | Framework                                  | Supported Versions | Tracer Version |
 |--------------------------------------------|--------------------|----------------|
 | [OpenAI](#openai), [Azure OpenAI](#openai) | >= 3.0.0           | >= 1.59.0      |
-| [Spring AI](#spring-ai)                    | >= 1.0.0           | >= 1.59.0      |
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -683,33 +682,6 @@ The Pydantic AI integration instruments the following methods:
 
 [1]: https://ai.pydantic.dev/
 [2]: https://ai.pydantic.dev/agents/
-{{% /tab %}}
-{{< /tabs >}}
-{{% /collapse-content %}}
-
-{{% collapse-content title="Spring AI" level="h3" expanded=false id="spring-ai" %}}
-{{< tabs >}}
-{{% tab "Java" %}}
-The Spring AI integration provides automatic tracing for LLM calls made through the [Spring AI][1] framework. Spring AI uses [Micrometer's][2] Observation API to emit `gen_ai.*` span attributes following the [OpenTelemetry semantic conventions for generative AI][3], which the Datadog Java tracer captures automatically.
-
-### Supported operations
-
-The Spring AI integration traces the following operations:
-
-- [Chat model calls][4] (including streamed calls)
-- [Embedding model calls][5]
-- [Image model calls][6]
-
-### Token usage
-
-Spring AI reports token usage metrics through Micrometer's `KeyValues` abstraction. Datadog LLM Observability automatically parses these values, so token counts and cost estimates appear correctly.
-
-[1]: https://docs.spring.io/spring-ai/reference/
-[2]: https://micrometer.io/
-[3]: https://opentelemetry.io/docs/specs/semconv/gen-ai/
-[4]: https://docs.spring.io/spring-ai/reference/api/chatmodel.html
-[5]: https://docs.spring.io/spring-ai/reference/api/embeddings.html
-[6]: https://docs.spring.io/spring-ai/reference/api/imageclient.html
 {{% /tab %}}
 {{< /tabs >}}
 {{% /collapse-content %}}
