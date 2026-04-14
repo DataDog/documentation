@@ -142,7 +142,7 @@ Review the following examples demonstrating how to apply instrumentation rules:
 
 Instrument all processes by default. Add block rules to exclude services that would add noise without value, such as analytics cron jobs and Java batch processors.
 
-{{< img src="tracing/trace_collection/instrumentation-rules-example-1.png" alt="Two block instrumentation rules targeting Working Directory and Entry Point File conditions, with a default of allow instrumentation." style="width:100%;" >}}
+{{< img src="tracing/trace_collection/instrumentation-rules-example-1.png" alt="Two block instrumentation rules targeting Working Directory and Entry Point File conditions, with a default of allow instrumentation" style="width:100%;" >}}
 
 {{< /collapse-content >}}
 
@@ -150,7 +150,7 @@ Instrument all processes by default. Add block rules to exclude services that wo
 
 Block all instrumentation by default. Add allow rules to opt specific IIS applications into APM. Because all IIS workers share the `w3wp.exe` executable, use IIS Application Pool to identify target applications. This approach is useful for gradual rollouts.
 
-{{< img src="tracing/trace_collection/instrumentation-rules-example-2.png" alt="Two allow instrumentation rules targeting specific IIS application pools by name, with a default of block instrumentation." style="width:100%;" >}}
+{{< img src="tracing/trace_collection/instrumentation-rules-example-2.png" alt="Two allow instrumentation rules targeting specific IIS application pools by name, with a default of block instrumentation" style="width:100%;" >}}
 
 {{< /collapse-content >}}
 
