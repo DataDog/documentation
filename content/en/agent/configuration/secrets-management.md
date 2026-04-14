@@ -204,6 +204,8 @@ clusterChecksRunner:
 
 ```
 
+**Alternatively**, with Helm chart v3.171.0+ and Agent v7.70+, you can use native `secretBackend.type` and `secretBackend.config` fields instead of environment variables. For example: `datadog.secretBackend.type: "aws.secrets"` and `datadog.secretBackend.config.aws_session.aws_region: "<AWS_REGION>"`.
+
 {{% /tab %}}
 
 {{% tab "Operator" %}}
@@ -314,6 +316,8 @@ spec:
                 password: "ENC[secretId;secretKey]"
 
 ```
+
+**Alternatively**, with Datadog Operator v1.25.0+ and Agent v7.70+, you can use native `secretBackend.type` and `secretBackend.config` fields instead of environment variables. For example: `spec.global.secretBackend.type: "aws.secrets"` and `spec.global.secretBackend.config` with `aws_session.aws_region: "<AWS_REGION>"`.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -673,7 +677,7 @@ datadog:
 
 **Note:** A placeholder `apiKey` is required for Helm chart validation when using secret backend to resolve the API key. The `DD_API_KEY` environment variable overrides it. You must manually create RBAC (Role + RoleBinding) for each namespace containing secrets. For more information, see the [RBAC setup](#rbac-setup) section.
 
-<div class="alert alert-info"> Helm does not have native <code>secretBackend.type</code> configuration. Use environment variables. </div>
+**Alternatively**, with Helm chart v3.171.0+ and Agent v7.70+, you can use the native `datadog.secretBackend.type` field instead of environment variables.
 
 {{% /tab %}}
 
@@ -702,7 +706,7 @@ spec:
 
 **Note:** A placeholder API key satisfies Operator validation when using secret backend to resolve the API key. The `DD_API_KEY` environment variable overrides it. You must manually create RBAC (Role + RoleBinding) for each namespace containing secrets. For more information, see the [RBAC setup](#rbac-setup) section.
 
-<div class="alert alert-info"> The Operator does not have native <code>secretBackend.type</code> configuration. Use environment variables in <code>override.nodeAgent.env</code>. </div>
+**Alternatively**, with Datadog Operator v1.25.0+ and Agent v7.70+, you can use the native `spec.global.secretBackend.type` field instead of environment variables.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -729,6 +733,9 @@ datadog:
   - name: DD_SECRET_BACKEND_CONFIG
     value: '{"token_path":"/custom/path/to/token","ca_path":"/custom/path/to/ca.crt"}'
 ```
+
+**Alternatively**, with Helm chart v3.171.0+, you can use: `datadog.secretBackend.type: "k8s.secrets"` and `datadog.secretBackend.config` with `token_path` and `ca_path` keys.
+
 {{% /tab %}}
 
 {{% tab "Operator" %}}
@@ -741,6 +748,9 @@ override:
     - name: DD_SECRET_BACKEND_CONFIG
       value: '{"token_path":"/custom/path/to/token","ca_path":"/custom/path/to/ca.crt"}'
 ```
+
+**Alternatively**, with Datadog Operator v1.25.0+, you can use: `spec.global.secretBackend.type: "k8s.secrets"` and `spec.global.secretBackend.config` with `token_path` and `ca_path` keys.
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -766,6 +776,9 @@ datadog:
   - name: DD_SECRET_BACKEND_CONFIG
     value: '{"api_server":"https://{KUBERNETES_SERVICE_HOST}:{KUBERNETES_SERVICE_PORT}"}'
 ```
+
+**Alternatively**, with Helm chart v3.171.0+, you can use: `datadog.secretBackend.type: "k8s.secrets"` and `datadog.secretBackend.config` with the `api_server` key.
+
 {{% /tab %}}
 
 {{% tab "Operator" %}}
@@ -778,6 +791,9 @@ override:
     - name: DD_SECRET_BACKEND_CONFIG
       value: '{"api_server":"https://{KUBERNETES_SERVICE_HOST}:{KUBERNETES_SERVICE_PORT}"}'
 ```
+
+**Alternatively**, with Datadog Operator v1.25.0+, you can use: `spec.global.secretBackend.type: "k8s.secrets"` and `spec.global.secretBackend.config` with the `api_server` key.
+
 {{% /tab %}}
 {{< /tabs >}}
 
