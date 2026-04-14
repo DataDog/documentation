@@ -1,8 +1,6 @@
 ---
 title: "Jobs Monitoring for AWS Glue"
 description: "Enable Data Observability: Jobs Monitoring for AWS Glue jobs with Datadog."
-is_beta: true
-private: true
 further_reading:
   - link: '/data_jobs'
     tag: 'Documentation'
@@ -11,10 +9,6 @@ further_reading:
     tag: 'Documentation'
     text: 'AWS Integration'
 ---
-
-{{< callout url="#" btn_hidden="true" header="Join the Preview!" >}}
-Data Observability: Jobs Monitoring for AWS Glue is in Preview. To join the Preview, follow the steps on this page.
-{{< /callout >}}
 
 ## Overview
 

@@ -1,4 +1,5 @@
 ---
+id: session_rum
 core_product:
 - real user monitoring
 title: セッション

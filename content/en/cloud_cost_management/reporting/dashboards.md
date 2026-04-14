@@ -120,7 +120,7 @@ This comprehensive view helps stakeholders understand spending patterns, identif
 After creating cost dashboards:
 
 - **Share dashboard links** with stakeholders to provide transparent cost visibility
-- **Set up scheduled dashboard reports** to automatically send cost updates through email or Slack
+- **Set up scheduled dashboard reports** to automatically send cost updates through email, Slack, or Microsoft Teams
 - **Control access** using dashboard permissions to limit visibility to specific teams or roles
 - **Create dashboard templates** for consistent cost reporting across teams
 

@@ -1,4 +1,5 @@
 ---
+id: attribute
 core_product:
 - log management
 title: 属性

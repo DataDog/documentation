@@ -35,6 +35,10 @@ With Cloud Security Vulnerabilities, you can manage your cloud security manageme
 
 ## Key capabilities
 
+{{< site-region region="gov" >}}
+<div class="alert alert-danger">Agentless Scanning is not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
 Deploy using Agentless or unified Datadog Agent
 : Quickly scan your entire infrastructure for vulnerabilities, either using Agentless, or by using the unified Datadog Agent you already have deployed.
 
@@ -80,8 +84,8 @@ Use these tables to decide which solution to start with:
 | Container image               | OS packages and app packages, mapped to image                                     | OS packages                    |
 | Cloud provider                | AWS, Azure, GCP                                                                   | AWS, Azure, GCP, on-prem, etc. |
 | Operating system              | Linux, Windows                                                                    | Linux, Windows                 |
-| Serverless                    | AWS Lambda, Amazon ECS Fargate, GCP Cloud Run (container deployment only)         | Not applicable                 |
-| Container registries          | Amazon ECR (running + at-rest), Google Artifact Registry (running workloads only) | Not applicable                 |
+| Serverless                    | AWS Lambda, Amazon ECS Fargate, Azure Container Apps, Azure Container Instances, GCP Cloud Run (container deployment only) | Not applicable                 |
+| Container registries          | Amazon ECR (running + at-rest), Google Artifact Registry (running workloads only), Azure Container Registry (running container images only) | Not applicable                 |
 
 For more information on compatibility, see [Cloud Security Vulnerabilities Hosts and Containers Compatibility][13]. If you need any assistance, see the [troubleshooting guide][14], or reach out to support@datadoghq.com.
 

@@ -1,4 +1,5 @@
 ---
+id: investigator
 title: Investigator
 core_product:
   - cloud siem

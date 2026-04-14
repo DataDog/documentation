@@ -12,9 +12,12 @@ products:
   url: /notebooks/
   icon: notebook
 further_reading:
+- link: "bits_ai/mcp_server"
+  tag: "Documentation"
+  text: "Datadog MCP Server"
 - link: "/ddsql_editor/"
   tag: "Documentation"
-  text: "Learn more about DDSQL Editor"
+  text: "DDSQL Editor"
 ---
 
 {{< product-availability >}}
@@ -22,6 +25,8 @@ further_reading:
 ## Overview
 
 DDSQL is SQL for Datadog data. It implements several standard SQL operations, such as `SELECT`, and allows queries against unstructured data. You can perform actions like getting exactly the data you want by writing your own `SELECT` statement, or querying tags as if they are standard table columns.
+
+You can run DDSQL queries from AI agents using the [Datadog MCP Server][10] `ddsql` toolset (Preview).
 
 This documentation covers the SQL support available and includes:
 - [Syntax compatible with PostgreSQL](#syntax)
@@ -873,7 +878,7 @@ dd.logs(
     to_timestamp ? => timestamp
 ) AS (column_name type [, ...])</pre>
       </td>
-      <td>Returns log data as a table. The columns parameter specifies which log fields to extract. Nested fields are accessed using dot notation, and non-core fields need to be prepended by <code>@</code>. The AS clause defines the schema of the returned table. Optional: filtering by index or time range. When time is not specified, DDSQL defaults to the past 1 hour of data. Optional: specifying the storage to use (for example, <code>hot</code>, <code>flex_tier</code>). When not specified, the default is hot storage.</td>
+      <td>Returns log data as a table. The columns parameter specifies which log fields to extract. Nested fields are accessed using dot notation, and non-core fields need to be prepended by <code>@</code>. The AS clause defines the schema of the returned table. Optional: filtering by index or time range. When time is not specified, DDSQL defaults to the global time setting, which in DDSQL Editor is set to the past 1 hour. Optional: specifying the storage to use (for example, <code>hot</code>, <code>flex_tier</code>). When not specified, the default is hot storage.</td>
       <td>
         {{< code-block lang="sql" >}}
 SELECT timestamp, host, service, message, asset_id
@@ -957,7 +962,7 @@ SELECT *
 FROM dd.logs(
     columns => ARRAY['timestamp','host','service','message'],
     from_timestamp => now() - INTERVAL '7 days',
-    to_timestamp =>  now()
+    to_timestamp => now()
 ) AS (
     timestamp TIMESTAMP,
     host      VARCHAR,
@@ -1060,3 +1065,4 @@ FROM aws.ec2_instance
 [7]: https://unicode-org.github.io/icu/userguide/strings/regexp.html#set-expressions-character-classes
 [8]: https://unicode-org.github.io/icu/userguide/strings/regexp.html#flag-options
 [9]: https://unicode-org.github.io/icu/userguide/strings/regexp.html#find-and-replace
+[10]: /bits_ai/mcp_server/

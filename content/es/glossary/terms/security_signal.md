@@ -1,4 +1,5 @@
 ---
+id: security_signal
 core_product:
 - seguridad
 - cloud siem

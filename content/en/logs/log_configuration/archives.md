@@ -231,17 +231,38 @@ Use this optional configuration step to define the maximum volume of log data (i
 
 For Archives with a maximum scan size defined, all users need to estimate the scan size before they are allowed to start a Rehydration. If the estimated scan size is greater than what is permitted for that Archive, users must reduce the time range over which they are requesting the Rehydration. Reducing the time range will reduce the scan size and allow the user to start a Rehydration.
 
-#### Archive Search Indexed Attribute (Preview) {#archive-search-indexed-attribute}
+#### Archive Partition Attribute (Preview) {#archive-search-partition-attribute}
 
 {{< callout url="https://www.datadoghq.com/product-preview/flex-frozen-archive-search/" btn_hidden="false" header="Join the Preview!" >}}
 Archive Search is in Preview. Request access to search archived logs in real time. No rehydrating, no delays. Instantly access years of data when you need it.
 {{< /callout >}}
 
-To accelerate searches and investigations in your archives (with [Archive Search][16]), define specific attributes to be indexed directly in your storage bucket.
+To optimize how your archived logs are physically organized in storage (and accelerate [Archive Search][16]), configure partition attributes in your Datadog Archive.
 
-* **Indexed Attributes**: Add high-cardinality attributes such as `trace_id`, `container_id`, or `customer_id`.
+* **Partition Attributes**: Add low-cardinality attributes such as `service`, `source`, `env`, or `status` that you frequently use as search filters.
+* **Benefit**: Logs sharing the same partition attribute values are co-located in storage. When searching, Datadog can skip entire partitions that don't match your query, drastically reducing the volume of data scanned.
+
+#### Archive Lookup Attribute (Preview) {#archive-search-lookup-attribute}
+
+{{< callout url="https://www.datadoghq.com/product-preview/flex-frozen-archive-search/" btn_hidden="false" header="Join the Preview!" >}}
+Archive Search is in Preview. Request access to search archived logs in real time. No rehydrating, no delays. Instantly access years of data when you need it.
+{{< /callout >}}
+
+To accelerate searches and investigations in your archives (with [Archive Search][16]), configure lookup attributes in your Datadog Archive.
+
+* **Lookup Attributes**: Add high-cardinality attributes such as `trace_id`, `container_id`, or `customer_id`.
 * **Benefit**: This allows you to pinpoint specific logs within your long-term storage much faster, reducing the time and data scanned during ad-hoc investigations.
 
+**Partition vs. Lookup attributes**
+
+| | Partition | Lookup |
+|---|---|---|
+| **Cardinality** | Low (tens to hundreds of values) | High (millions of values) |
+| **Typical attributes** | `service`, `source`, `env`, `status` | `trace_id`, `container_id`, `user_id`, `transaction_id` |
+| **How it helps** | Prunes entire partitions from scan | Pinpoints individual log entries within your archive |
+| **Best used for** | Broad filtering by environment or service | Ad-hoc investigations on specific identifiers |
+
+For maximum search performance, combine both: partition attributes narrow the search scope to the relevant data segments, while lookup attributes let you find specific logs within those segments instantly.
 
 {{< site-region region="us3" >}}
 

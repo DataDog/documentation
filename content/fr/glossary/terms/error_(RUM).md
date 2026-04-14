@@ -1,4 +1,5 @@
 ---
+id: error_rum
 core_product:
 - real user monitoring
 - suivi des erreurs
