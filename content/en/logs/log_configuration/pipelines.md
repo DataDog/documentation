@@ -125,7 +125,7 @@ The recognized date formats are: <a href="https://www.iso.org/iso-8601-date-and-
 </div>
 
 
-[1]: /logs/log_configuration/processors/#log-date-remapper
+[1]: /logs/log_configuration/processors/log_date_remapper/
 {{% /tab %}}
 {{% tab "Message" %}}
 
@@ -142,7 +142,7 @@ Specify alternate attributes to use as the source of a log's message by setting 
 
 [1]: /logs/explorer/
 [2]: /logs/explorer/#filters-logs
-[3]: /logs/log_configuration/processors/#log-message-remapper
+[3]: /logs/log_configuration/processors/log_message_remapper/
 {{% /tab %}}
 {{% tab "Status" %}}
 
@@ -157,7 +157,7 @@ Each log entry may specify a status level which is made available for faceted se
 
 Specify alternate attributes to use as the source of a log's status by setting a [log status remapper processor][1].
 
-[1]: /logs/log_configuration/processors/#log-status-remapper
+[1]: /logs/log_configuration/processors/log_status_remapper/
 {{% /tab %}}
 {{% tab "Service" %}}
 
@@ -172,7 +172,7 @@ Using the Datadog Agent or the RFC5424 format automatically sets the service val
 Specify alternate attributes to use as the source of a log's service by setting a [log service remapper processor][1].
 
 
-[1]: /logs/log_configuration/processors/#service-remapper
+[1]: /logs/log_configuration/processors/service_remapper/
 {{% /tab %}}
 {{% tab "Trace ID" %}}
 
@@ -189,7 +189,7 @@ Specify alternate attributes to use as the source of a log's trace ID by setting
 
 
 [1]: /tracing/other_telemetry/connect_logs_and_traces/
-[2]: /logs/log_configuration/processors/#trace-remapper
+[2]: /logs/log_configuration/processors/trace_remapper/
 {{% /tab %}}
 
 {{% tab "Span ID" %}}
@@ -310,7 +310,7 @@ Estimated usage metrics are displayed for each pipeline. This shows the volume a
 [3]: /logs/log_configuration/processors/
 [4]: /logs/explorer/facets/
 [5]: https://app.datadoghq.com/logs/pipelines
-[6]: /logs/log_configuration/processors/?tab=ui#grok-parser
+[6]: /logs/log_configuration/processors/grok_parser/
 [7]: /account_management/rbac/granular_access/
 [8]: https://app.datadoghq.com/logs/pipelines
 [9]: https://app.datadoghq.com/logs/pipelines/remapping

@@ -366,7 +366,7 @@ To turn off Sensitive Data Scanner entirely, set the toggle to **off** for each 
 [7]: /security/sensitive_data_scanner/guide/investigate_sensitive_data_findings/
 [8]: https://app.datadoghq.com/sensitive-data-scanner/telemetry
 [9]: /logs/guide/logs-rbac/
-[10]: /logs/log_configuration/processors/?tab=ui#remapper
+[10]: /logs/log_configuration/processors/remapper/
 [11]: https://app.datadoghq.com/logs/pipelines
 [12]: /observability_pipelines/
 [13]: /observability_pipelines/processors/sensitive_data_scanner/

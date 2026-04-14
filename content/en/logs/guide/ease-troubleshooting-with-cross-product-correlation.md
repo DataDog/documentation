@@ -199,8 +199,8 @@ For more information, see [Connect Synthetic Tests and Traces][19].
 [3]: /tracing/other_telemetry/connect_logs_and_traces
 [4]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel
 [5]: /tracing/trace_collection/proxy_setup/?tab=nginx
-[6]: /logs/log_configuration/processors/#grok-parser
-[7]: /logs/log_configuration/processors/#trace-remapper
+[6]: /logs/log_configuration/processors/grok_parser/
+[7]: /logs/log_configuration/processors/trace_remapper/
 [8]: /integrations/postgres/?tab=host#log-collection
 [9]: https://www.postgresql.org/docs/13/auto-explain.html
 [10]: https://www.postgresql.org/docs/13/sql-syntax-lexical.html#SQL-SYNTAX-COMMENTS

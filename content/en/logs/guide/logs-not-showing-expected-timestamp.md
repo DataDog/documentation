@@ -123,7 +123,7 @@ If the date format is not supported by the remapper by default, you can parse th
 [2]: https://app.datadoghq.com/logs/pipelines/
 [3]: /logs/log_configuration/parsing
 [4]: /logs/log_configuration/parsing/#parsing-dates
-[5]: /logs/log_configuration/processors/?tabs=ui#log-date-remapper
+[5]: /logs/log_configuration/processors/log_date_remapper/
 [6]: /logs/log_configuration/pipelines/?tab=date#preprocessing
 [7]: https://www.iso.org/iso-8601-date-and-time-format.html
 [8]: https://en.wikipedia.org/wiki/Unix_time

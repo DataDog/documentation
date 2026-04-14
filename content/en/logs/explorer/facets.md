@@ -249,13 +249,13 @@ To delete a facet, follow these steps:
 [14]: /logs/indexes/#indexes-filters
 [15]: /logs/indexes/#exclusion-filters
 [16]: /integrations/nginx/
-[17]: /logs/log_configuration/processors/#geoip-parser
+[17]: /logs/log_configuration/processors/geoip_parser/
 [18]: /integrations/kong/
 [19]: /getting_started/tagging/assigning_tags/
 [20]: /integrations/varnish/
 [21]: /integrations/ansible/
 [22]: /integrations/python/
-[23]: /logs/log_configuration/processors/#arithmetic-processor
+[23]: /logs/log_configuration/processors/arithmetic_processor/
 [24]: /logs/explorer/saved_views/
 [25]: /logs/log_configuration/attributes_naming_convention/#reserved-attributes
 [26]: /logs/log_configuration/attributes_naming_convention
