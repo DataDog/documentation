@@ -1620,6 +1620,9 @@ menu:
       url: dashboards/sharing/shared_dashboards
       parent: dashboards_sharing
       weight: 1002
+    - name: Widget Public URLs
+      identifier: dashboards_sharing_widget_public_urls
+      url: dashboards/sharing/widget_public_urls
     - name: Secure Embedded Dashboards
       identifier: dashboards_sharing_secure_embedded_dashboards
       url: dashboards/sharing/secure_embedded_dashboards

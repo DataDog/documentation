@@ -329,6 +329,7 @@ unsupported_sites:
   iac_security: [gov]
   incident_ai: [gov]
   jetbrains-ides: [gov]
+  jira-service-management-ops: [gov]
   inferred_entity_remapping_rules: [gov]
   internal_developer_portal: [gov]
   jira_error_tracking: [gov]
