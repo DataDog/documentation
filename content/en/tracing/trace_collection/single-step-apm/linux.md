@@ -98,7 +98,7 @@ Use one of the following setup methods:
 
 - **[Configure in `application_monitoring.yaml`][18]**:
 
-  Enable products across all services on a host without modifying application command lines.
+  Configure products and features across all services on a host without modifying application command lines.
 
 - **[Set environment variables][17]**:
 
@@ -190,7 +190,7 @@ If you encounter problems enabling APM with SSI, see the [SSI troubleshooting gu
 [15]: https://app.datadoghq.com/fleet/install-agent/latest?platform=linux
 [16]: /getting_started/tagging/unified_service_tagging/?tab=kubernetes#non-containerized-environment
 [17]: /tracing/trace_collection/library_config/
-[18]: /tracing/trace_collection/automatic_instrumentation/configure_apm_features_linux/
+[18]: /tracing/trace_collection/library_config/application_monitoring_yaml/
 [19]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/troubleshooting
 [20]: https://app.datadoghq.com/apm/service-setup/workload-selection
 

@@ -2624,6 +2624,30 @@ menu:
         unstable:
           - v2
         order: 69
+    - name: Get suggested actions for a signal
+      url: '#get-suggested-actions-for-a-signal'
+      identifier: security-monitoring-get-suggested-actions-for-a-signal
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSuggestedActionsMatchingSignal
+        unstable: []
+        order: 88
+    - name: Get investigation queries for a signal
+      url: '#get-investigation-queries-for-a-signal'
+      identifier: security-monitoring-get-investigation-queries-for-a-signal
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetInvestigationLogQueriesMatchingSignal
+        unstable: []
+        order: 87
     - name: Change the related incidents of a security signal
       url: '#change-the-related-incidents-of-a-security-signal'
       identifier: security-monitoring-change-the-related-incidents-of-a-security-signal
@@ -2660,6 +2684,30 @@ menu:
           - SearchSecurityMonitoringSignals
         unstable: []
         order: 72
+    - name: Bulk update triage state of security signals
+      url: '#bulk-update-triage-state-of-security-signals'
+      identifier: security-monitoring-bulk-update-triage-state-of-security-signals
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - BulkEditSecurityMonitoringSignalsState
+        unstable: []
+        order: 85
+    - name: Bulk update triage assignee of security signals
+      url: '#bulk-update-triage-assignee-of-security-signals'
+      identifier: security-monitoring-bulk-update-triage-assignee-of-security-signals
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - BulkEditSecurityMonitoringSignalsAssignee
+        unstable: []
+        order: 86
     - name: Get a quick list of security signals
       url: '#get-a-quick-list-of-security-signals'
       identifier: security-monitoring-get-a-quick-list-of-security-signals
@@ -3942,6 +3990,90 @@ menu:
           - PatchGlobalVariable
         unstable: []
         order: 51
+    - name: Get a specific version of a test
+      url: '#get-a-specific-version-of-a-test'
+      identifier: synthetics-get-a-specific-version-of-a-test
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSyntheticsTestVersion
+        unstable: []
+        order: 53
+    - name: Get version history of a test
+      url: '#get-version-history-of-a-test'
+      identifier: synthetics-get-version-history-of-a-test
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListSyntheticsTestVersions
+        unstable: []
+        order: 57
+    - name: Get parent suites for a test
+      url: '#get-parent-suites-for-a-test'
+      identifier: synthetics-get-parent-suites-for-a-test
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetTestParentSuites
+        unstable: []
+        order: 56
+    - name: Complete a multipart upload of a test file
+      url: '#complete-a-multipart-upload-of-a-test-file'
+      identifier: synthetics-complete-a-multipart-upload-of-a-test-file
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CompleteTestFileMultipartUpload
+        unstable: []
+        order: 61
+    - name: Abort a multipart upload of a test file
+      url: '#abort-a-multipart-upload-of-a-test-file'
+      identifier: synthetics-abort-a-multipart-upload-of-a-test-file
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - AbortTestFileMultipartUpload
+        unstable: []
+        order: 62
+    - name: Get presigned URLs for uploading a test file
+      url: '#get-presigned-urls-for-uploading-a-test-file'
+      identifier: synthetics-get-presigned-urls-for-uploading-a-test-file
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetTestFileMultipartPresignedUrls
+        unstable: []
+        order: 60
+    - name: Get a presigned URL for downloading a test file
+      url: '#get-a-presigned-url-for-downloading-a-test-file'
+      identifier: synthetics-get-a-presigned-url-for-downloading-a-test-file
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetTestFileDownloadUrl
+        unstable: []
+        order: 59
     - name: Edit a Network Path test
       url: '#edit-a-network-path-test'
       identifier: synthetics-edit-a-network-path-test
@@ -4002,6 +4134,18 @@ menu:
           - DeleteSyntheticsTests
         unstable: []
         order: 50
+    - name: Patch a test suite
+      url: '#patch-a-test-suite'
+      identifier: synthetics-patch-a-test-suite
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - PatchTestSuite
+        unstable: []
+        order: 58
     - name: Edit a test suite
       url: '#edit-a-test-suite'
       identifier: synthetics-edit-a-test-suite
@@ -4086,6 +4230,30 @@ menu:
           - GetOnDemandConcurrencyCap
         unstable: []
         order: 41
+    - name: Get parent tests for a subtest
+      url: '#get-parent-tests-for-a-subtest'
+      identifier: synthetics-get-parent-tests-for-a-subtest
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetApiMultistepSubtestParents
+        unstable: []
+        order: 55
+    - name: Get available subtests for a multistep test
+      url: '#get-available-subtests-for-a-multistep-test'
+      identifier: synthetics-get-available-subtests-for-a-multistep-test
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetApiMultistepSubtests
+        unstable: []
+        order: 54
     - name: Edit a global variable
       url: '#edit-a-global-variable'
       identifier: synthetics-edit-a-global-variable
@@ -6316,6 +6484,49 @@ menu:
           - ListAuthNMappings
         unstable: []
         order: 4
+    - name: Bits AI
+      url: /api/latest/bits-ai/
+      identifier: bits-ai
+      generated: true
+    - name: Get a Bits AI investigation
+      url: '#get-a-bits-ai-investigation'
+      identifier: bits-ai-get-a-bits-ai-investigation
+      parent: bits-ai
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetInvestigation
+        unstable:
+          - v2
+        order: 3
+    - name: Trigger a Bits AI investigation
+      url: '#trigger-a-bits-ai-investigation'
+      identifier: bits-ai-trigger-a-bits-ai-investigation
+      parent: bits-ai
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - TriggerInvestigation
+        unstable:
+          - v2
+        order: 1
+    - name: List Bits AI investigations
+      url: '#list-bits-ai-investigations'
+      identifier: bits-ai-list-bits-ai-investigations
+      parent: bits-ai
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListInvestigations
+        unstable:
+          - v2
+        order: 2
     - name: CI Visibility Pipelines
       url: /api/latest/ci-visibility-pipelines/
       identifier: ci-visibility-pipelines
@@ -8171,6 +8382,62 @@ menu:
           - CreateDORADeployment
         unstable: []
         order: 1
+    - name: Dashboard Secure Embed
+      url: /api/latest/dashboard-secure-embed/
+      identifier: dashboard-secure-embed
+      generated: true
+    - name: Update a secure embed for a dashboard
+      url: '#update-a-secure-embed-for-a-dashboard'
+      identifier: dashboard-secure-embed-update-a-secure-embed-for-a-dashboard
+      parent: dashboard-secure-embed
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateDashboardSecureEmbed
+        unstable:
+          - v2
+        order: 3
+    - name: Get a secure embed for a dashboard
+      url: '#get-a-secure-embed-for-a-dashboard'
+      identifier: dashboard-secure-embed-get-a-secure-embed-for-a-dashboard
+      parent: dashboard-secure-embed
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetDashboardSecureEmbed
+        unstable:
+          - v2
+        order: 2
+    - name: Delete a secure embed for a dashboard
+      url: '#delete-a-secure-embed-for-a-dashboard'
+      identifier: dashboard-secure-embed-delete-a-secure-embed-for-a-dashboard
+      parent: dashboard-secure-embed
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteDashboardSecureEmbed
+        unstable:
+          - v2
+        order: 4
+    - name: Create a secure embed for a dashboard
+      url: '#create-a-secure-embed-for-a-dashboard'
+      identifier: dashboard-secure-embed-create-a-secure-embed-for-a-dashboard
+      parent: dashboard-secure-embed
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateDashboardSecureEmbed
+        unstable:
+          - v2
+        order: 1
     - name: Datasets
       url: /api/latest/datasets/
       identifier: datasets
@@ -8648,7 +8915,7 @@ menu:
         operationids:
           - UnarchiveFeatureFlag
         unstable: []
-        order: 8
+        order: 14
     - name: Enable a feature flag in an environment
       url: '#enable-a-feature-flag-in-an-environment'
       identifier: feature-flags-enable-a-feature-flag-in-an-environment
@@ -8660,7 +8927,7 @@ menu:
         operationids:
           - EnableFeatureFlagEnvironment
         unstable: []
-        order: 7
+        order: 13
     - name: Disable a feature flag in an environment
       url: '#disable-a-feature-flag-in-an-environment'
       identifier: feature-flags-disable-a-feature-flag-in-an-environment
@@ -8672,7 +8939,31 @@ menu:
         operationids:
           - DisableFeatureFlagEnvironment
         unstable: []
-        order: 6
+        order: 12
+    - name: Update targeting rules for a flag
+      url: '#update-targeting-rules-for-a-flag'
+      identifier: feature-flags-update-targeting-rules-for-a-flag
+      parent: feature-flags
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateAllocationsForFeatureFlagInEnvironment
+        unstable: []
+        order: 10
+    - name: Create targeting rules for a flag env
+      url: '#create-targeting-rules-for-a-flag-env'
+      identifier: feature-flags-create-targeting-rules-for-a-flag-env
+      parent: feature-flags
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateAllocationsForFeatureFlagInEnvironment
+        unstable: []
+        order: 11
     - name: Archive a feature flag
       url: '#archive-a-feature-flag'
       identifier: feature-flags-archive-a-feature-flag
@@ -8684,7 +8975,7 @@ menu:
         operationids:
           - ArchiveFeatureFlag
         unstable: []
-        order: 9
+        order: 15
     - name: Update a feature flag
       url: '#update-a-feature-flag'
       identifier: feature-flags-update-a-feature-flag
@@ -8696,7 +8987,7 @@ menu:
         operationids:
           - UpdateFeatureFlag
         unstable: []
-        order: 10
+        order: 16
     - name: Get a feature flag
       url: '#get-a-feature-flag'
       identifier: feature-flags-get-a-feature-flag
@@ -8708,7 +8999,55 @@ menu:
         operationids:
           - GetFeatureFlag
         unstable: []
-        order: 11
+        order: 17
+    - name: Stop a progressive rollout
+      url: '#stop-a-progressive-rollout'
+      identifier: feature-flags-stop-a-progressive-rollout
+      parent: feature-flags
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - StopExposureSchedule
+        unstable: []
+        order: 6
+    - name: Start a progressive rollout
+      url: '#start-a-progressive-rollout'
+      identifier: feature-flags-start-a-progressive-rollout
+      parent: feature-flags
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - StartExposureSchedule
+        unstable: []
+        order: 9
+    - name: Resume a progressive rollout
+      url: '#resume-a-progressive-rollout'
+      identifier: feature-flags-resume-a-progressive-rollout
+      parent: feature-flags
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ResumeExposureSchedule
+        unstable: []
+        order: 7
+    - name: Pause a progressive rollout
+      url: '#pause-a-progressive-rollout'
+      identifier: feature-flags-pause-a-progressive-rollout
+      parent: feature-flags
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - PauseExposureSchedule
+        unstable: []
+        order: 8
     - name: Update an environment
       url: '#update-an-environment'
       identifier: feature-flags-update-an-environment
@@ -8780,7 +9119,7 @@ menu:
         operationids:
           - CreateFeatureFlag
         unstable: []
-        order: 12
+        order: 18
     - name: List feature flags
       url: '#list-feature-flags'
       identifier: feature-flags-list-feature-flags
@@ -8792,7 +9131,7 @@ menu:
         operationids:
           - ListFeatureFlags
         unstable: []
-        order: 13
+        order: 19
     - name: Fleet Automation
       url: /api/latest/fleet-automation/
       identifier: fleet-automation
@@ -9551,6 +9890,71 @@ menu:
         unstable:
           - v2
         order: 49
+    - name: Update an incident user-defined field
+      url: '#update-an-incident-user-defined-field'
+      identifier: incidents-update-an-incident-user-defined-field
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateIncidentUserDefinedField
+        unstable:
+          - v2
+        order: 55
+    - name: Get an incident user-defined field
+      url: '#get-an-incident-user-defined-field'
+      identifier: incidents-get-an-incident-user-defined-field
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetIncidentUserDefinedField
+        unstable:
+          - v2
+        order: 54
+    - name: Delete an incident user-defined field
+      url: '#delete-an-incident-user-defined-field'
+      identifier: incidents-delete-an-incident-user-defined-field
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteIncidentUserDefinedField
+        unstable:
+          - v2
+        order: 56
+    - name: Create an incident user-defined field
+      url: '#create-an-incident-user-defined-field'
+      identifier: incidents-create-an-incident-user-defined-field
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateIncidentUserDefinedField
+        unstable:
+          - v2
+        order: 53
+    - name: Get a list of incident user-defined fields
+      url: '#get-a-list-of-incident-user-defined-fields'
+      identifier: incidents-get-a-list-of-incident-user-defined-fields
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListIncidentUserDefinedFields
+        unstable:
+          - v2
+        order: 52
     - name: Update an incident type
       url: '#update-an-incident-type'
       identifier: incidents-update-an-incident-type
@@ -10251,6 +10655,97 @@ menu:
         unstable:
           - v2
         order: 13
+    - name: Delete annotation queue interactions
+      url: '#delete-annotation-queue-interactions'
+      identifier: llm-observability-delete-annotation-queue-interactions
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteLLMObsAnnotationQueueInteractions
+        unstable:
+          - v2
+        order: 24
+    - name: Add annotation queue interactions
+      url: '#add-annotation-queue-interactions'
+      identifier: llm-observability-add-annotation-queue-interactions
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateLLMObsAnnotationQueueInteractions
+        unstable:
+          - v2
+        order: 20
+    - name: Get annotated queue interactions
+      url: '#get-annotated-queue-interactions'
+      identifier: llm-observability-get-annotated-queue-interactions
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetLLMObsAnnotatedInteractions
+        unstable:
+          - v2
+        order: 21
+    - name: Update an LLM Observability annotation queue
+      url: '#update-an-llm-observability-annotation-queue'
+      identifier: llm-observability-update-an-llm-observability-annotation-queue
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateLLMObsAnnotationQueue
+        unstable:
+          - v2
+        order: 22
+    - name: Delete an LLM Observability annotation queue
+      url: '#delete-an-llm-observability-annotation-queue'
+      identifier: llm-observability-delete-an-llm-observability-annotation-queue
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteLLMObsAnnotationQueue
+        unstable:
+          - v2
+        order: 23
+    - name: Create an LLM Observability annotation queue
+      url: '#create-an-llm-observability-annotation-queue'
+      identifier: llm-observability-create-an-llm-observability-annotation-queue
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateLLMObsAnnotationQueue
+        unstable:
+          - v2
+        order: 19
+    - name: List LLM Observability annotation queues
+      url: '#list-llm-observability-annotation-queues'
+      identifier: llm-observability-list-llm-observability-annotation-queues
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListLLMObsAnnotationQueues
+        unstable:
+          - v2
+        order: 18
     - name: Logs Archives
       url: /api/latest/logs-archives/
       identifier: logs-archives
@@ -11516,6 +12011,244 @@ menu:
           - ListOrgConnections
         unstable: []
         order: 100
+    - name: Org Groups
+      url: /api/latest/org-groups/
+      identifier: org-groups
+      generated: true
+    - name: Update an org group
+      url: '#update-an-org-group'
+      identifier: org-groups-update-an-org-group
+      parent: org-groups
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateOrgGroup
+        unstable:
+          - v2
+        order: 4
+    - name: Get an org group
+      url: '#get-an-org-group'
+      identifier: org-groups-get-an-org-group
+      parent: org-groups
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetOrgGroup
+        unstable:
+          - v2
+        order: 2
+    - name: Delete an org group
+      url: '#delete-an-org-group'
+      identifier: org-groups-delete-an-org-group
+      parent: org-groups
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteOrgGroup
+        unstable:
+          - v2
+        order: 5
+    - name: Create an org group
+      url: '#create-an-org-group'
+      identifier: org-groups-create-an-org-group
+      parent: org-groups
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateOrgGroup
+        unstable:
+          - v2
+        order: 3
+    - name: List org groups
+      url: '#list-org-groups'
+      identifier: org-groups-list-org-groups
+      parent: org-groups
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListOrgGroups
+        unstable:
+          - v2
+        order: 1
+    - name: Update an org group policy override
+      url: '#update-an-org-group-policy-override'
+      identifier: org-groups-update-an-org-group-policy-override
+      parent: org-groups
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateOrgGroupPolicyOverride
+        unstable:
+          - v2
+        order: 16
+    - name: Delete an org group policy override
+      url: '#delete-an-org-group-policy-override'
+      identifier: org-groups-delete-an-org-group-policy-override
+      parent: org-groups
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteOrgGroupPolicyOverride
+        unstable:
+          - v2
+        order: 17
+    - name: Create an org group policy override
+      url: '#create-an-org-group-policy-override'
+      identifier: org-groups-create-an-org-group-policy-override
+      parent: org-groups
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateOrgGroupPolicyOverride
+        unstable:
+          - v2
+        order: 15
+    - name: List org group policy overrides
+      url: '#list-org-group-policy-overrides'
+      identifier: org-groups-list-org-group-policy-overrides
+      parent: org-groups
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListOrgGroupPolicyOverrides
+        unstable:
+          - v2
+        order: 14
+    - name: List org group policy configs
+      url: '#list-org-group-policy-configs'
+      identifier: org-groups-list-org-group-policy-configs
+      parent: org-groups
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListOrgGroupPolicyConfigs
+        unstable:
+          - v2
+        order: 18
+    - name: Update an org group policy
+      url: '#update-an-org-group-policy'
+      identifier: org-groups-update-an-org-group-policy
+      parent: org-groups
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateOrgGroupPolicy
+        unstable:
+          - v2
+        order: 12
+    - name: Delete an org group policy
+      url: '#delete-an-org-group-policy'
+      identifier: org-groups-delete-an-org-group-policy
+      parent: org-groups
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteOrgGroupPolicy
+        unstable:
+          - v2
+        order: 13
+    - name: Create an org group policy
+      url: '#create-an-org-group-policy'
+      identifier: org-groups-create-an-org-group-policy
+      parent: org-groups
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateOrgGroupPolicy
+        unstable:
+          - v2
+        order: 11
+    - name: List org group policies
+      url: '#list-org-group-policies'
+      identifier: org-groups-list-org-group-policies
+      parent: org-groups
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListOrgGroupPolicies
+        unstable:
+          - v2
+        order: 10
+    - name: Update an org group membership
+      url: '#update-an-org-group-membership'
+      identifier: org-groups-update-an-org-group-membership
+      parent: org-groups
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateOrgGroupMembership
+        unstable:
+          - v2
+        order: 8
+    - name: Get an org group membership
+      url: '#get-an-org-group-membership'
+      identifier: org-groups-get-an-org-group-membership
+      parent: org-groups
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetOrgGroupMembership
+        unstable:
+          - v2
+        order: 7
+    - name: Bulk update org group memberships
+      url: '#bulk-update-org-group-memberships'
+      identifier: org-groups-bulk-update-org-group-memberships
+      parent: org-groups
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - BulkUpdateOrgGroupMemberships
+        unstable:
+          - v2
+        order: 9
+    - name: List org group memberships
+      url: '#list-org-group-memberships'
+      identifier: org-groups-list-org-group-memberships
+      parent: org-groups
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListOrgGroupMemberships
+        unstable:
+          - v2
+        order: 6
     - name: Powerpack
       url: /api/latest/powerpack/
       identifier: powerpack
@@ -12727,6 +13460,167 @@ menu:
           - ListSCIMGroups
         unstable: []
         order: 7
+    - name: Scorecards
+      url: /api/latest/scorecards/
+      identifier: scorecards
+      generated: true
+    - name: List all scorecards
+      url: '#list-all-scorecards'
+      identifier: scorecards-list-all-scorecards
+      parent: scorecards
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListScorecards
+        unstable: []
+        order: 13
+    - name: Update an existing scorecard rule
+      url: '#update-an-existing-scorecard-rule'
+      identifier: scorecards-update-an-existing-scorecard-rule
+      parent: scorecards
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateScorecardRule
+        unstable: []
+        order: 2
+    - name: Delete a rule
+      url: '#delete-a-rule'
+      identifier: scorecards-delete-a-rule
+      parent: scorecards
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteScorecardRule
+        unstable: []
+        order: 6
+    - name: Create a new rule
+      url: '#create-a-new-rule'
+      identifier: scorecards-create-a-new-rule
+      parent: scorecards
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateScorecardRule
+        unstable: []
+        order: 1
+    - name: List all rules
+      url: '#list-all-rules'
+      identifier: scorecards-list-all-rules
+      parent: scorecards
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListScorecardRules
+        unstable: []
+        order: 5
+    - name: Create outcomes batch
+      url: '#create-outcomes-batch'
+      identifier: scorecards-create-outcomes-batch
+      parent: scorecards
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateScorecardOutcomesBatch
+        unstable:
+          - v2
+        order: 7
+    - name: Update Scorecard outcomes
+      url: '#update-scorecard-outcomes'
+      identifier: scorecards-update-scorecard-outcomes
+      parent: scorecards
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateScorecardOutcomes
+        unstable: []
+        order: 3
+    - name: List all rule outcomes
+      url: '#list-all-rule-outcomes'
+      identifier: scorecards-list-all-rule-outcomes
+      parent: scorecards
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListScorecardOutcomes
+        unstable: []
+        order: 4
+    - name: Update a campaign
+      url: '#update-a-campaign'
+      identifier: scorecards-update-a-campaign
+      parent: scorecards
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateScorecardCampaign
+        unstable: []
+        order: 11
+    - name: Get a campaign
+      url: '#get-a-campaign'
+      identifier: scorecards-get-a-campaign
+      parent: scorecards
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetScorecardCampaign
+        unstable: []
+        order: 10
+    - name: Delete a campaign
+      url: '#delete-a-campaign'
+      identifier: scorecards-delete-a-campaign
+      parent: scorecards
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteScorecardCampaign
+        unstable: []
+        order: 12
+    - name: Create a new campaign
+      url: '#create-a-new-campaign'
+      identifier: scorecards-create-a-new-campaign
+      parent: scorecards
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateScorecardCampaign
+        unstable: []
+        order: 9
+    - name: List all campaigns
+      url: '#list-all-campaigns'
+      identifier: scorecards-list-all-campaigns
+      parent: scorecards
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListScorecardCampaigns
+        unstable: []
+        order: 8
     - name: Seats
       url: /api/latest/seats/
       identifier: seats
@@ -13007,101 +13901,6 @@ menu:
           - ListServiceDefinitions
         unstable: []
         order: 1
-    - name: Service Scorecards
-      url: /api/latest/service-scorecards/
-      identifier: service-scorecards
-      generated: true
-    - name: Update an existing rule
-      url: '#update-an-existing-rule'
-      identifier: service-scorecards-update-an-existing-rule
-      parent: service-scorecards
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - UpdateScorecardRule
-        unstable:
-          - v2
-        order: 4
-    - name: Delete a rule
-      url: '#delete-a-rule'
-      identifier: service-scorecards-delete-a-rule
-      parent: service-scorecards
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - DeleteScorecardRule
-        unstable:
-          - v2
-        order: 3
-    - name: Create a new rule
-      url: '#create-a-new-rule'
-      identifier: service-scorecards-create-a-new-rule
-      parent: service-scorecards
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - CreateScorecardRule
-        unstable:
-          - v2
-        order: 7
-    - name: List all rules
-      url: '#list-all-rules'
-      identifier: service-scorecards-list-all-rules
-      parent: service-scorecards
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - ListScorecardRules
-        unstable:
-          - v2
-        order: 6
-    - name: Create outcomes batch
-      url: '#create-outcomes-batch'
-      identifier: service-scorecards-create-outcomes-batch
-      parent: service-scorecards
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - CreateScorecardOutcomesBatch
-        unstable:
-          - v2
-        order: 5
-    - name: Update Scorecard outcomes asynchronously
-      url: '#update-scorecard-outcomes-asynchronously'
-      identifier: service-scorecards-update-scorecard-outcomes-asynchronously
-      parent: service-scorecards
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - UpdateScorecardOutcomesAsync
-        unstable:
-          - v2
-        order: 1
-    - name: List all rule outcomes
-      url: '#list-all-rule-outcomes'
-      identifier: service-scorecards-list-all-rule-outcomes
-      parent: service-scorecards
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - ListScorecardOutcomes
-        unstable:
-          - v2
-        order: 2
     - name: ServiceNow Integration
       url: /api/latest/servicenow-integration/
       identifier: servicenow-integration
@@ -13612,6 +14411,30 @@ menu:
       url: /api/latest/status-pages/
       identifier: status-pages
       generated: true
+    - name: Unpublish status page
+      url: '#unpublish-status-page'
+      identifier: status-pages-unpublish-status-page
+      parent: status-pages
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UnpublishStatusPage
+        unstable: []
+        order: 7
+    - name: Publish status page
+      url: '#publish-status-page'
+      identifier: status-pages-publish-status-page
+      parent: status-pages
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - PublishStatusPage
+        unstable: []
+        order: 6
     - name: Update maintenance
       url: '#update-maintenance'
       identifier: status-pages-update-maintenance
@@ -13623,7 +14446,7 @@ menu:
         operationids:
           - UpdateMaintenance
         unstable: []
-        order: 17
+        order: 19
     - name: Get maintenance
       url: '#get-maintenance'
       identifier: status-pages-get-maintenance
@@ -13635,7 +14458,7 @@ menu:
         operationids:
           - GetMaintenance
         unstable: []
-        order: 19
+        order: 21
     - name: Schedule maintenance
       url: '#schedule-maintenance'
       identifier: status-pages-schedule-maintenance
@@ -13647,7 +14470,7 @@ menu:
         operationids:
           - CreateMaintenance
         unstable: []
-        order: 16
+        order: 18
     - name: Update degradation
       url: '#update-degradation'
       identifier: status-pages-update-degradation
@@ -13659,7 +14482,7 @@ menu:
         operationids:
           - UpdateDegradation
         unstable: []
-        order: 12
+        order: 14
     - name: Get degradation
       url: '#get-degradation'
       identifier: status-pages-get-degradation
@@ -13671,7 +14494,7 @@ menu:
         operationids:
           - GetDegradation
         unstable: []
-        order: 14
+        order: 16
     - name: Delete degradation
       url: '#delete-degradation'
       identifier: status-pages-delete-degradation
@@ -13683,7 +14506,7 @@ menu:
         operationids:
           - DeleteDegradation
         unstable: []
-        order: 15
+        order: 17
     - name: Create degradation
       url: '#create-degradation'
       identifier: status-pages-create-degradation
@@ -13695,7 +14518,7 @@ menu:
         operationids:
           - CreateDegradation
         unstable: []
-        order: 11
+        order: 13
     - name: Update component
       url: '#update-component'
       identifier: status-pages-update-component
@@ -13707,7 +14530,7 @@ menu:
         operationids:
           - UpdateComponent
         unstable: []
-        order: 7
+        order: 9
     - name: Get component
       url: '#get-component'
       identifier: status-pages-get-component
@@ -13719,7 +14542,7 @@ menu:
         operationids:
           - GetComponent
         unstable: []
-        order: 9
+        order: 11
     - name: Delete component
       url: '#delete-component'
       identifier: status-pages-delete-component
@@ -13731,7 +14554,7 @@ menu:
         operationids:
           - DeleteComponent
         unstable: []
-        order: 10
+        order: 12
     - name: Create component
       url: '#create-component'
       identifier: status-pages-create-component
@@ -13743,7 +14566,7 @@ menu:
         operationids:
           - CreateComponent
         unstable: []
-        order: 6
+        order: 8
     - name: List components
       url: '#list-components'
       identifier: status-pages-list-components
@@ -13755,7 +14578,7 @@ menu:
         operationids:
           - ListComponents
         unstable: []
-        order: 8
+        order: 10
     - name: Update status page
       url: '#update-status-page'
       identifier: status-pages-update-status-page
@@ -13803,7 +14626,7 @@ menu:
         operationids:
           - ListMaintenances
         unstable: []
-        order: 18
+        order: 20
     - name: List degradations
       url: '#list-degradations'
       identifier: status-pages-list-degradations
@@ -13815,7 +14638,7 @@ menu:
         operationids:
           - ListDegradations
         unstable: []
-        order: 13
+        order: 15
     - name: Create status page
       url: '#create-status-page'
       identifier: status-pages-create-status-page
@@ -14323,6 +15146,96 @@ menu:
           - DeleteTestOptimizationServiceSettings
         unstable:
           - v2
+        order: 5
+    - name: Get Flaky Tests Management policies
+      url: '#get-flaky-tests-management-policies'
+      identifier: test-optimization-get-flaky-tests-management-policies
+      parent: test-optimization
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetFlakyTestsManagementPolicies
+        unstable:
+          - v2
+        order: 6
+    - name: Update Flaky Tests Management policies
+      url: '#update-flaky-tests-management-policies'
+      identifier: test-optimization-update-flaky-tests-management-policies
+      parent: test-optimization
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateFlakyTestsManagementPolicies
+        unstable:
+          - v2
+        order: 7
+    - name: Widgets
+      url: /api/latest/widgets/
+      identifier: widgets
+      generated: true
+    - name: Update a widget
+      url: '#update-a-widget'
+      identifier: widgets-update-a-widget
+      parent: widgets
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateWidget
+        unstable: []
+        order: 3
+    - name: Get a widget
+      url: '#get-a-widget'
+      identifier: widgets-get-a-widget
+      parent: widgets
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetWidget
+        unstable: []
+        order: 2
+    - name: Delete a widget
+      url: '#delete-a-widget'
+      identifier: widgets-delete-a-widget
+      parent: widgets
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteWidget
+        unstable: []
+        order: 4
+    - name: Create a widget
+      url: '#create-a-widget'
+      identifier: widgets-create-a-widget
+      parent: widgets
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateWidget
+        unstable: []
+        order: 1
+    - name: Search widgets
+      url: '#search-widgets'
+      identifier: widgets-search-widgets
+      parent: widgets
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - SearchWidgets
+        unstable: []
         order: 5
     - name: Workflow Automation
       url: /api/latest/workflow-automation/

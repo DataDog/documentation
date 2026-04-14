@@ -2889,6 +2889,7 @@ components:
         peer_tags:
           description: Tags to query for a specific downstream entity (peer.service, peer.db_instance, peer.s3, peer.s3.bucket, etc.).
           items:
+            description: "A tag identifying a specific downstream entity (for example: peer.service, peer.db_instance)."
             example: "peer.service:my-service"
             type: string
           type: array
@@ -3475,8 +3476,10 @@ components:
       x-enum-varnames:
         - FORMULA
     FreeTextWidgetDefinition:
-      description: Free text is a widget that allows you to add headings to your screenboard. Commonly used to state the overall purpose of the dashboard. Only available on FREE layout dashboards.
+      description: Free text is a widget that allows you to add headings to your dashboard. Commonly used to state the overall purpose of the dashboard.
       properties:
+        background_color:
+          $ref: "#/components/schemas/WidgetBackgroundColor"
         color:
           description: Color of the text.
           type: string
@@ -3917,11 +3920,10 @@ components:
       x-enum-varnames:
         - GROUP
     GroupWidgetDefinition:
-      description: The groups widget allows you to keep similar graphs together on your timeboard. Each group has a custom header, can hold one to many graphs, and is collapsible.
+      description: The group widget allows you to keep similar graphs together on your dashboard. Each group has a custom header, can hold one to many graphs, and is collapsible.
       properties:
         background_color:
-          description: Background color of the group title.
-          type: string
+          $ref: "#/components/schemas/WidgetBackgroundColor"
         banner_img:
           description: URL of image to display as a banner for the group.
           type: string
@@ -4685,6 +4687,7 @@ components:
         - sca_fargate_usage
         - sds_scanned_bytes_usage
         - serverless_apps_usage
+        - serverless_apps_apm_usage
         - siem_analyzed_logs_add_on_usage
         - siem_ingested_bytes_usage
         - snmp_usage
@@ -4772,6 +4775,7 @@ components:
         - SCA_FARGATE_USAGE
         - SDS_SCANNED_BYTES_USAGE
         - SERVERLESS_APPS_USAGE
+        - SERVERLESS_APPS_APM_USAGE
         - SIEM_ANALYZED_LOGS_ADD_ON_USAGE
         - SIEM_INGESTED_BYTES_USAGE
         - SNMP_USAGE
@@ -4779,7 +4783,7 @@ components:
         - VULN_MANAGEMENT_HOSTS_USAGE
         - WORKFLOW_EXECUTIONS_USAGE
     IFrameWidgetDefinition:
-      description: The iframe widget allows you to embed a portion of any other web page on your dashboard. Only available on FREE layout dashboards.
+      description: The iframe widget allows you to embed a portion of any other web page on your dashboard.
       properties:
         type:
           $ref: "#/components/schemas/IFrameWidgetDefinitionType"
@@ -5051,7 +5055,7 @@ components:
         - message
       type: object
     ImageWidgetDefinition:
-      description: The image widget allows you to embed an image on your dashboard. An image can be a PNG, JPG, or animated GIF. Only available on FREE layout dashboards.
+      description: The image widget allows you to embed an image on your dashboard. An image can be a PNG, JPG, or animated GIF.
       properties:
         has_background:
           default: true
@@ -5452,7 +5456,7 @@ components:
         - query
       type: object
     LogStreamWidgetDefinition:
-      description: The Log Stream displays a log flow matching the defined query. Only available on FREE layout dashboards.
+      description: The Log Stream displays a log flow matching the defined query.
       properties:
         columns:
           description: Which columns to display on the widget.
@@ -6037,6 +6041,12 @@ components:
             Default query is `*`, meaning all logs flowing in the index would be excluded.
             Scope down exclusion filter to only a subset of logs with a log query.
           example: "*"
+          type: string
+        sample_attribute:
+          description: |-
+            Sample attribute to use for the sampling of logs going through this exclusion filter.
+            When set, only the logs with the specified attribute are sampled.
+          example: "@ci.job_id"
           type: string
         sample_rate:
           description: |-
@@ -6745,6 +6755,7 @@ components:
         sources:
           additionalProperties:
             items:
+              description: A fallback source attribute name.
               type: string
             type: array
           description: Fallback sources used to populate value of field.
@@ -6793,6 +6804,7 @@ components:
           description: Optional list of profiles to modify the schema.
           example: ["security_control", "host"]
           items:
+            description: A profile name that modifies the schema behavior.
             type: string
           type: array
         schema_type:
@@ -7906,6 +7918,7 @@ components:
           description: Columns to group results by.
           example: ["col1", "col2"]
           items:
+            description: A column name to group results by.
             type: string
           type: array
         model_type_override:
@@ -7925,6 +7938,7 @@ components:
           description: Optional grouping fields for aggregation.
           example: ["entity_id"]
           items:
+            description: A field name to group results by.
             type: string
           type: array
         measure:
@@ -8867,7 +8881,7 @@ components:
           $ref: "#/components/schemas/MonitorOverallStates"
       type: object
     MonitorSummaryWidgetDefinition:
-      description: The monitor summary widget displays a summary view of all your Datadog monitors, or a subset based on a query. Only available on FREE layout dashboards.
+      description: The monitor summary widget displays a summary view of all your Datadog monitors, or a subset based on a query.
       properties:
         color_preference:
           $ref: "#/components/schemas/WidgetColorPreference"
@@ -9256,6 +9270,8 @@ components:
         - published_app_percentage
         - serverless_apps_usage
         - serverless_apps_percentage
+        - serverless_apps_apm_usage
+        - serverless_apps_apm_percentage
         - snmp_usage
         - snmp_percentage
         - universal_service_monitoring_usage
@@ -9421,6 +9437,8 @@ components:
         - PUBLISHED_APP_PERCENTAGE
         - SERVERLESS_APPS_USAGE
         - SERVERLESS_APPS_PERCENTAGE
+        - SERVERLESS_APPS_APM_USAGE
+        - SERVERLESS_APPS_APM_PERCENTAGE
         - SNMP_USAGE
         - SNMP_PERCENTAGE
         - UNIVERSAL_SERVICE_MONITORING_USAGE
@@ -10076,6 +10094,14 @@ components:
           type: number
         sds_scanned_bytes_usage:
           description: The total Sensitive Data Scanner usage by tag(s).
+          format: double
+          type: number
+        serverless_apps_apm_percentage:
+          description: The percentage of Serverless Apps APM usage by tag(s).
+          format: double
+          type: number
+        serverless_apps_apm_usage:
+          description: The total Serverless Apps APM usage by tag(s).
           format: double
           type: number
         serverless_apps_percentage:
@@ -11247,8 +11273,10 @@ components:
       description: Product Analytics audience account subquery.
       properties:
         name:
+          description: The name of the account subquery.
           type: string
         query:
+          description: The query string for the account subquery.
           type: string
       type: object
     ProductAnalyticsAudienceFilters:
@@ -11259,6 +11287,7 @@ components:
             $ref: "#/components/schemas/ProductAnalyticsAudienceAccountSubquery"
           type: array
         filter_condition:
+          description: An optional filter condition applied to the audience subquery.
           type: string
         segments:
           items:
@@ -11270,26 +11299,33 @@ components:
           type: array
       type: object
     ProductAnalyticsAudienceOccurrenceFilter:
+      description: Filter applied to occurrence counts when building a Product Analytics audience.
       properties:
         operator:
+          description: "The comparison operator used for the occurrence filter (for example: `gt`, `lt`, `eq`)."
           type: string
         value:
+          description: The threshold value to compare occurrence counts against.
           type: string
       type: object
     ProductAnalyticsAudienceSegmentSubquery:
       description: Product Analytics audience segment subquery.
       properties:
         name:
+          description: The name of the segment subquery.
           type: string
         segment_id:
+          description: The unique identifier of the segment.
           type: string
       type: object
     ProductAnalyticsAudienceUserSubquery:
       description: Product Analytics audience user subquery.
       properties:
         name:
+          description: The name of the user subquery.
           type: string
         query:
+          description: The query string for the user subquery.
           type: string
       type: object
     QuerySortOrder:
@@ -11858,6 +11894,7 @@ components:
         - $ref: "#/components/schemas/SLOCountDefinitionWithBadEventsFormula"
     SLOCountDefinitionWithBadEventsFormula:
       additionalProperties: false
+      description: SLO count definition using a bad events formula alongside a good events formula.
       properties:
         bad_events_formula:
           $ref: "#/components/schemas/SLOFormula"
@@ -11884,6 +11921,7 @@ components:
       type: object
     SLOCountDefinitionWithTotalEventsFormula:
       additionalProperties: false
+      description: SLO count definition using a total events formula alongside a good events formula.
       properties:
         good_events_formula:
           $ref: "#/components/schemas/SLOFormula"
@@ -12998,7 +13036,7 @@ components:
         - METRIC
         - TIME_SLICE
     SLOWidgetDefinition:
-      description: Use the SLO and uptime widget to track your SLOs (Service Level Objectives) and uptime on screenboards and timeboards.
+      description: Use the SLO and uptime widget to track your SLOs (Service Level Objectives) and uptime on dashboards.
       properties:
         additional_query_filters:
           description: Additional filters applied to the SLO query.
@@ -13090,6 +13128,7 @@ components:
           description: Fields to group by.
           example: ["source", "destination"]
           items:
+            description: A field name to group by.
             type: string
           type: array
         limit:
@@ -13712,6 +13751,7 @@ components:
             Always included in service level objective responses (but may be empty).
           example: ["env:prod", "app:core"]
           items:
+            description: A tag associated with the service level objective.
             type: string
           type: array
         created_at:
@@ -13735,6 +13775,7 @@ components:
         env_tags:
           description: Tags with the `env` tag key.
           items:
+            description: A tag with the `env` tag key.
             type: string
           type: array
         groups:
@@ -13779,6 +13820,7 @@ components:
         service_tags:
           description: Tags with the `service` tag key.
           items:
+            description: A tag with the `service` tag key.
             type: string
           type: array
         slo_type:
@@ -13788,6 +13830,7 @@ components:
         team_tags:
           description: Tags with the `team` tag key.
           items:
+            description: A tag with the `team` tag key.
             type: string
           type: array
         thresholds:
@@ -14229,7 +14272,7 @@ components:
       x-enum-varnames:
         - SERVICEMAP
     ServiceSummaryWidgetDefinition:
-      description: The service summary displays the graphs of a chosen service in your screenboard. Only available on FREE layout dashboards.
+      description: The service summary displays the graphs of a chosen service in your dashboard.
       properties:
         description:
           description: The description of the widget.
@@ -14899,6 +14942,7 @@ components:
           description: The tag values.
           example: ["env"]
           items:
+            description: A tag value string.
             minLength: 1
             type: string
           type: array
@@ -17899,6 +17943,8 @@ components:
         - assertPageLacks
         - assertRequests
         - click
+        - drag
+        - drop
         - extractFromJavascript
         - extractFromEmailBody
         - extractVariable
@@ -17929,6 +17975,8 @@ components:
         - ASSERT_PAGE_LACKS
         - ASSERT_REQUESTS
         - CLICK
+        - DRAG
+        - DROP
         - EXTRACT_FROM_JAVASCRIPT
         - EXTRACT_FROM_EMAIL_BODY
         - EXTRACT_VARIABLE
@@ -18172,6 +18220,7 @@ components:
         blockedRequestPatterns:
           description: Array of URL patterns to block.
           items:
+            description: A URL pattern to block during the Synthetic test.
             type: string
           type: array
         checkCertificateRevocation:
@@ -18859,7 +18908,7 @@ components:
         - BAR
         - TREND
     TableWidgetDefinition:
-      description: The table visualization is available on timeboards and screenboards. It displays columns of metrics grouped by tag key.
+      description: The table visualization is available on dashboards. It displays columns of metrics grouped by tag key.
       properties:
         custom_links:
           description: List of custom links.
@@ -21264,12 +21313,68 @@ components:
           description: Shows the sum of all browser RUM units over all hours in the current date for all organizations (To be deprecated on October 1st, 2024).
           format: int64
           type: integer
+        ccm_anthropic_spend_last:
+          description: Shows the last value of Anthropic cloud spend monitored over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        ccm_aws_spend_last:
+          description: Shows the last value of AWS cloud spend monitored over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        ccm_azure_spend_last:
+          description: Shows the last value of Azure cloud spend monitored over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        ccm_confluent_spend_last:
+          description: Shows the last value of Confluent cloud spend monitored over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        ccm_databricks_spend_last:
+          description: Shows the last value of Databricks cloud spend monitored over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        ccm_elastic_spend_last:
+          description: Shows the last value of Elastic cloud spend monitored over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        ccm_fastly_spend_last:
+          description: Shows the last value of Fastly cloud spend monitored over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        ccm_gcp_spend_last:
+          description: Shows the last value of GCP cloud spend monitored over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        ccm_github_spend_last:
+          description: Shows the last value of GitHub cloud spend monitored over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        ccm_mongodb_spend_last:
+          description: Shows the last value of MongoDB cloud spend monitored over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        ccm_oci_spend_last:
+          description: Shows the last value of OCI cloud spend monitored over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        ccm_openai_spend_last:
+          description: Shows the last value of OpenAI cloud spend monitored over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        ccm_snowflake_spend_last:
+          description: Shows the last value of Snowflake cloud spend monitored over all hours in the current date for all organizations.
+          format: int64
+          type: integer
         ccm_spend_monitored_ent_last:
           description: Shows the last value of the amount of cloud spend monitored for Enterprise over all hours in the current date for all organizations.
           format: int64
           type: integer
         ccm_spend_monitored_pro_last:
           description: Shows the last value of the amount of cloud spend monitored for Pro over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        ccm_twilio_spend_last:
+          description: Shows the last value of Twilio cloud spend monitored over all hours in the current date for all organizations.
           format: int64
           type: integer
         ci_pipeline_indexed_spans_sum:
@@ -22153,12 +22258,68 @@ components:
           description: Shows the sum of all browser RUM units over all hours in the current date for the given org (To be deprecated on October 1st, 2024).
           format: int64
           type: integer
+        ccm_anthropic_spend_last:
+          description: Shows the last value of Anthropic cloud spend monitored over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        ccm_aws_spend_last:
+          description: Shows the last value of AWS cloud spend monitored over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        ccm_azure_spend_last:
+          description: Shows the last value of Azure cloud spend monitored over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        ccm_confluent_spend_last:
+          description: Shows the last value of Confluent cloud spend monitored over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        ccm_databricks_spend_last:
+          description: Shows the last value of Databricks cloud spend monitored over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        ccm_elastic_spend_last:
+          description: Shows the last value of Elastic cloud spend monitored over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        ccm_fastly_spend_last:
+          description: Shows the last value of Fastly cloud spend monitored over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        ccm_gcp_spend_last:
+          description: Shows the last value of GCP cloud spend monitored over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        ccm_github_spend_last:
+          description: Shows the last value of GitHub cloud spend monitored over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        ccm_mongodb_spend_last:
+          description: Shows the last value of MongoDB cloud spend monitored over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        ccm_oci_spend_last:
+          description: Shows the last value of OCI cloud spend monitored over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        ccm_openai_spend_last:
+          description: Shows the last value of OpenAI cloud spend monitored over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        ccm_snowflake_spend_last:
+          description: Shows the last value of Snowflake cloud spend monitored over all hours in the current date for the given org.
+          format: int64
+          type: integer
         ccm_spend_monitored_ent_last:
           description: Shows the last value of the amount of cloud spend monitored for Enterprise over all hours in the current date for the given org.
           format: int64
           type: integer
         ccm_spend_monitored_pro_last:
           description: Shows the last value of the amount of cloud spend monitored for Pro over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        ccm_twilio_spend_last:
+          description: Shows the last value of Twilio cloud spend monitored over all hours in the current date for the given org.
           format: int64
           type: integer
         ci_pipeline_indexed_spans_sum:
@@ -23052,12 +23213,68 @@ components:
           description: Shows the sum of all browser RUM units over all hours in the current month for all organizations (To be deprecated on October 1st, 2024).
           format: int64
           type: integer
+        ccm_anthropic_spend_last_sum:
+          description: Shows the sum of the last value of Anthropic cloud spend monitored in the current month for all organizations.
+          format: int64
+          type: integer
+        ccm_aws_spend_last_sum:
+          description: Shows the sum of the last value of AWS cloud spend monitored in the current month for all organizations.
+          format: int64
+          type: integer
+        ccm_azure_spend_last_sum:
+          description: Shows the sum of the last value of Azure cloud spend monitored in the current month for all organizations.
+          format: int64
+          type: integer
+        ccm_confluent_spend_last_sum:
+          description: Shows the sum of the last value of Confluent cloud spend monitored in the current month for all organizations.
+          format: int64
+          type: integer
+        ccm_databricks_spend_last_sum:
+          description: Shows the sum of the last value of Databricks cloud spend monitored in the current month for all organizations.
+          format: int64
+          type: integer
+        ccm_elastic_spend_last_sum:
+          description: Shows the sum of the last value of Elastic cloud spend monitored in the current month for all organizations.
+          format: int64
+          type: integer
+        ccm_fastly_spend_last_sum:
+          description: Shows the sum of the last value of Fastly cloud spend monitored in the current month for all organizations.
+          format: int64
+          type: integer
+        ccm_gcp_spend_last_sum:
+          description: Shows the sum of the last value of GCP cloud spend monitored in the current month for all organizations.
+          format: int64
+          type: integer
+        ccm_github_spend_last_sum:
+          description: Shows the sum of the last value of GitHub cloud spend monitored in the current month for all organizations.
+          format: int64
+          type: integer
+        ccm_mongodb_spend_last_sum:
+          description: Shows the sum of the last value of MongoDB cloud spend monitored in the current month for all organizations.
+          format: int64
+          type: integer
+        ccm_oci_spend_last_sum:
+          description: Shows the sum of the last value of OCI cloud spend monitored in the current month for all organizations.
+          format: int64
+          type: integer
+        ccm_openai_spend_last_sum:
+          description: Shows the sum of the last value of OpenAI cloud spend monitored in the current month for all organizations.
+          format: int64
+          type: integer
+        ccm_snowflake_spend_last_sum:
+          description: Shows the sum of the last value of Snowflake cloud spend monitored in the current month for all organizations.
+          format: int64
+          type: integer
         ccm_spend_monitored_ent_last_sum:
           description: Shows the sum of the last value of the amount of cloud spend monitored for Enterprise in the current month for all organizations.
           format: int64
           type: integer
         ccm_spend_monitored_pro_last_sum:
           description: Shows the sum of the last value of the amount of cloud spend monitored for Pro in the current month for all organizations.
+          format: int64
+          type: integer
+        ccm_twilio_spend_last_sum:
+          description: Shows the sum of the last value of Twilio cloud spend monitored in the current month for all organizations.
           format: int64
           type: integer
         ci_pipeline_indexed_spans_agg_sum:
@@ -24341,6 +24558,9 @@ components:
           description: Specifies the scale type. Possible values are `linear`, `log`, `sqrt`, and `pow##` (for example `pow2` or `pow0.5`).
           type: string
       type: object
+    WidgetBackgroundColor:
+      description: "Background color of the widget. Supported values are `white`, `blue`, `purple`, `pink`, `orange`, `yellow`, `green`, `gray`, `vivid_blue`, `vivid_purple`, `vivid_pink`, `vivid_orange`, `vivid_yellow`, `vivid_green`, and `transparent`."
+      type: string
     WidgetChangeType:
       description: Show the absolute or the relative change.
       enum:
@@ -30532,7 +30752,7 @@ paths:
         Update an index as identified by its name.
         Returns the Index object passed in the request body when the request is successful.
 
-        Using the `PUT` method updates your index’s configuration by **replacing**
+        Using the `PUT` method updates your index's configuration by **replacing**
         your current configuration with the new one sent to your Datadog organization.
       operationId: UpdateLogsIndex
       parameters:

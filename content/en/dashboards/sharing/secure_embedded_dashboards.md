@@ -1,7 +1,6 @@
 ---
 title: Secure Embedded Dashboards
 description: Embed Datadog dashboards in authenticated websites using backend-generated tokens without exposing credentials to the browser.
-private: true
 further_reading:
 - link: "/dashboards/sharing/shared_dashboards/"
   tag: "Documentation"
@@ -37,9 +36,9 @@ Use secure embedded dashboards when you need to:
 5. Configure name, default time frame, and theme options.
 6. Click **Share Dashboard**.
 
-After creating the secure embed, Datadog displays your **share token** and **credential**. Copy and store the credential securely on your backend; it is only shown once. Treat the credential like an API key: anyone with access to it can generate valid embed URLs for this dashboard.
+After creating the secure embed, Datadog displays your **base URL** and **credential**. Copy and store the credential securely on your backend; it is only shown once. Treat the credential like an API key: anyone with access to it can generate valid embed URLs for this dashboard.
 
-The share token is visible in the sharing modal at any time, but the credential is masked after initial creation.
+The base URL is visible in the sharing modal at any time, but the credential is masked after initial creation.
 
 <div class="alert alert-info">You cannot change the share type of an existing shared dashboard to or from Secure Embed. To switch share types, delete the current shared dashboard and create a new one.</div>
 
@@ -52,13 +51,12 @@ Each time a browser user loads a page that includes the embedded dashboard, your
 ### URL format
 
 ```
-https://<DOMAIN>/sb/secure-embed/<SHARE_TOKEN>?token=<LOGIN_TOKEN>&nonce=<NONCE>&ts=<TIMESTAMP>
+<BASE_URL>?token=<LOGIN_TOKEN>&nonce=<NONCE>&ts=<TIMESTAMP>
 ```
 
 | Parameter     | Description                                                                   |
 |---------------|-------------------------------------------------------------------------------|
-| `DOMAIN`      | Your Datadog site (for example, `app.datadoghq.com` or `app.datadoghq.eu`).   |
-| `SHARE_TOKEN` | The share token from your secure embed configuration.                         |
+| `BASE_URL`    | The base URL from your secure embed configuration.                            |
 | `LOGIN_TOKEN` | An HMAC-SHA256 hex digest of `NONCE\|TIMESTAMP`, signed with your credential. |
 | `NONCE`       | A unique, randomly generated value for each request.                          |
 | `TIMESTAMP`   | The current UNIX timestamp in seconds.                                        |
@@ -67,7 +65,7 @@ Datadog validates the login token on each request. A token is valid for 30 minut
 
 ### Backend code examples
 
-The following examples show how to generate a secure embed URL on your backend server. Provide the credential from your secure credential store, your share token, and your Datadog site domain.
+The following examples show how to generate a secure embed URL on your backend server. Provide the credential from your secure credential store and the base URL from your secure embed configuration.
 
 {{< programming-lang-wrapper langs="python,javascript,ruby,go" >}}
 
@@ -81,8 +79,7 @@ from urllib.parse import urlencode
 
 def generate_secure_embed_url(
     credential: str,
-    share_token: str,
-    domain: str,
+    base_url: str,
 ) -> str:
     nonce = secrets.token_hex(16)
     timestamp = int(time.time())
@@ -102,7 +99,7 @@ def generate_secure_embed_url(
         "ts": str(timestamp),
     })
 
-    return f"https://{domain}/sb/secure-embed/{share_token}?{query}"
+    return f"{base_url}?{query}"
 ```
 {{< /programming-lang >}}
 
@@ -111,7 +108,7 @@ def generate_secure_embed_url(
 const crypto = require('crypto');
 const querystring = require('querystring');
 
-function generateSecureEmbedUrl(credential, shareToken, domain) {
+function generateSecureEmbedUrl(credential, baseUrl) {
   const nonce = crypto.randomBytes(16).toString('hex');
   const timestamp = Math.floor(Date.now() / 1000);
   const msg = `${nonce}|${timestamp}`;
@@ -124,7 +121,7 @@ function generateSecureEmbedUrl(credential, shareToken, domain) {
     nonce: nonce,
     ts: String(timestamp),
   });
-  return `https://${domain}/sb/secure-embed/${shareToken}?${query}`;
+  return `${baseUrl}?${query}`;
 }
 ```
 {{< /programming-lang >}}
@@ -135,13 +132,13 @@ require 'openssl'
 require 'securerandom'
 require 'uri'
 
-def generate_secure_embed_url(credential, share_token, domain)
+def generate_secure_embed_url(credential, base_url)
   nonce = SecureRandom.hex(16)
   timestamp = Time.now.to_i
   msg = "#{nonce}|#{timestamp}"
   login_token = OpenSSL::HMAC.hexdigest('SHA256', credential, msg)
   query = URI.encode_www_form(token: login_token, nonce: nonce, ts: timestamp.to_s)
-  "https://#{domain}/sb/secure-embed/#{share_token}?#{query}"
+  "#{base_url}?#{query}"
 end
 ```
 {{< /programming-lang >}}
@@ -161,7 +158,7 @@ import (
     "time"
 )
 
-func generateSecureEmbedURL(credential, shareToken, domain string) string {
+func generateSecureEmbedURL(credential, baseURL string) string {
     nonceBytes := make([]byte, 16)
     rand.Read(nonceBytes)
     nonce := hex.EncodeToString(nonceBytes)
@@ -177,7 +174,7 @@ func generateSecureEmbedURL(credential, shareToken, domain string) string {
     params.Set("nonce", nonce)
     params.Set("ts", strconv.FormatInt(timestamp, 10))
 
-    return fmt.Sprintf("https://%s/sb/secure-embed/%s?%s", domain, shareToken, params.Encode())
+    return fmt.Sprintf("%s?%s", baseURL, params.Encode())
 }
 ```
 {{< /programming-lang >}}
@@ -197,7 +194,7 @@ Backend API endpoint (Python/Flask example):
 @cross_origin(origins="*", methods=["GET", "OPTIONS"], allow_headers=["Content-Type"])
 def embed_url():
     credential = get_credential_from_secure_store()
-    iframe_url = generate_secure_embed_url(credential, SHARE_TOKEN, DOMAIN)
+    iframe_url = generate_secure_embed_url(credential, BASE_URL)
     return jsonify({"iframeUrl": iframe_url})
 ```
 
@@ -240,7 +237,7 @@ Backend (Python/Flask example):
 @app.get("/dashboard")
 def dashboard():
     credential = get_credential_from_secure_store()
-    iframe_url = generate_secure_embed_url(credential, SHARE_TOKEN, DOMAIN)
+    iframe_url = generate_secure_embed_url(credential, BASE_URL)
     return render_template("dashboard.html", iframe_url=iframe_url)
 ```
 

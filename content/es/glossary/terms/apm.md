@@ -1,4 +1,5 @@
 ---
+id: apm
 core_product:
 - apm
 short_definition: Application Performance Monitoring (APM) monitoriza las solicitudes,

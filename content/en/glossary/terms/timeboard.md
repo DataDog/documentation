@@ -1,4 +1,5 @@
 ---
+id: timeboard
 title: timeboard
 core_product:
   - dashboards

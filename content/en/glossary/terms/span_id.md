@@ -1,4 +1,5 @@
 ---
+id: span_id
 title: span ID
 core_product:
   - apm
