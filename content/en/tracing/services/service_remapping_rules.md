@@ -60,7 +60,7 @@ In the text box, enter a unique name for the selected entity (or entities). Alte
 ### Step 3: Name your rule and review
 
 1. Optionally, enter a descriptive name for the remapping rule so you can identify it later.
-1. Review and save your remapping rule. Note: It may take a minute for the remapping rule to take effect.
+1. Review and save your remapping rule. After you save your rule, it may take a minute for it to take effect.
 
 ## Remapping rules behavior
 
