@@ -45,7 +45,7 @@ Use the **Configure Log Forwarding** flow to set up new or manage existing log f
 
 ### ARM template
 
-Alternatively, you can deploy automated log forwarding with an Azure Resource Manager (ARM) template. Open the ARM template corresponding to your Azure environment, or click **+ Add Log Collection** in the [Azure integration tile][14]:
+Alternatively, you can deploy automated log forwarding with an Azure Resource Manager (ARM) template. Open the ARM template corresponding to your Azure environment:
 
   - [Azure Public][1]
   - [Azure Government][6]
@@ -98,13 +98,13 @@ You can forward logs from Azure Log Analytics Workspaces (LAWs) to Datadog throu
 ### Forward logs from a Log Analytics Workspace
 
 1. If you haven't already created an automated log forwarder, follow the [Setup](#setup) instructions. If you already have a log forwarder, make sure it is updated to the latest version.
-1. In the [Azure Portal][19], navigate to the desired Log Analytics Workspace.
-1. Under **Settings**, click **Data export**.
-1. Click **New export rule**.
-1. Name the rule, check **Enable upon creation**, and click **Next**.
-1. Select the tables to export. You can modify this selection later by editing the data export rule. Click **Next**.
-1. For **Destination type**, select **Storage Account**. Select the subscription containing your log forwarder, and choose a log forwarder storage account. These accounts typically have the prefix `ddlogstorage`. Click **Next**.
-1. Review the rule and click **Create**. Logs from the LAW start appearing in Datadog within a few minutes.
+2. In the [Azure Portal][19], navigate to the desired Log Analytics Workspace.
+3. Under **Settings**, click **Data export**.
+4. Click **New export rule**.
+5. Name the rule, check **Enable upon creation**, and click **Next**.
+6. Select the tables to export. You can modify this selection later by editing the data export rule. Click **Next**.
+7. For **Destination type**, select **Storage Account**. Select the subscription containing your log forwarder, and choose a log forwarder storage account. These accounts typically have the prefix `ddlogstorage`. Click **Next**.
+8. Review the rule and click **Create**. Logs from the LAW start appearing in Datadog within a few minutes.
 
 ### Troubleshooting
 
