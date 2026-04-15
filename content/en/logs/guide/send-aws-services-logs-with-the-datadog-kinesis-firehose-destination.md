@@ -155,7 +155,7 @@ To populate all logs by ARN:
 
 **Note**: A single Kinesis payload must not be more than 65,000 log messages. Log messages after that limit are dropped.
 
-## How source, service, and tags are set
+## Set the source, service, and tags
 
 When logs arrive through Amazon Data Firehose, Datadog automatically determines the `source`, `service`, and tags for each log based on AWS metadata:
 
