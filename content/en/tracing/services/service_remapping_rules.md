@@ -48,7 +48,7 @@ You can create service remapping rules only for services instrumented with suppo
    - As you select entities, a span query is built in the background. To edit the query, select **Build Advanced Query**.
        - Select **Service Rule** to remap services. Select **Inferred Service Rule** to remap inferred services, datastores, or queues.
        - Select **Add Condition** to add an `AND` condition to your query.
-       - Adding multiple values in the **Value** section creates an `OR` condition.
+       - Add multiple values in the **Value** section to create an `OR` condition.
    - If you're correlating a service with infrastructure tags, you can only select _one_ service. Choose infra tag(s) to correlate telemetry on. All telemetry with the same infra tag(s) as the service chosen will be remapped to a single unified service name.
 
 ### Step 2: Specify new entity name
