@@ -24,7 +24,7 @@ Datadog supports OpenTelemetry runtime metrics for the following languages:
 - Java
 - .NET
 - Go
-- NodeJS
+- Node.js
 - Python
 
 For details about host and container metrics mapping, see [OpenTelemetry Metrics Mapping][1].
@@ -55,7 +55,7 @@ If you use [OpenTelemetry manual instrumentation][4], follow the guides for your
 
 #### Collector configuration
 
-The `jvm.gc.collections.count` and `jvm.gc.collections.elapsed` metrics require the [Delta-to-Rate Processor][8] in the OpenTelemetry Collector. Additionally, ensure that `OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE=delta` is set as well.
+The `jvm.gc.collections.count` and `jvm.gc.collections.elapsed` metrics require the [Delta-to-Rate Processor][8] in the OpenTelemetry Collector. Also set `OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE=delta`.
 
 ```yaml
 processors:
@@ -79,7 +79,7 @@ OpenTelemetry Go applications are [instrumented manually][3]. To enable runtime 
 
 #### Collector configuration
 
-Some Go runtime metrics are reported as monotonic sums, but Datadog expects them as gauges. The [Transform Processor][8] converts these sums to gauges, and the [Cumulative-to-Delta Processor][9] excludes them from delta conversion. Additionally, ensure that `OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE=delta` is set to handle other metrics as well.
+Some Go runtime metrics are reported as monotonic sums, but Datadog expects them as gauges. The [Transform Processor][8] converts these sums to gauges, and the [Cumulative-to-Delta Processor][9] excludes them from delta conversion. Additionally, ensure that `OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE` is *not* set to delta, as excluded metrics from `cumulativetodelta` would then be ignored.
 
 ```yaml
 processors:
@@ -129,13 +129,14 @@ OTEL_METRIC_EXPORT_INTERVAL=10000
 
 #### Collector configuration
 
-The `dotnet.process.cpu.time` metric requires the [Delta-to-Rate Processor][8] in the OpenTelemetry Collector. Additionally, ensure that `OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE=delta` is set as well.
+The `dotnet.process.cpu.time` metric requires the [Delta-to-Rate Processor][8] in the OpenTelemetry Collector. Also set `OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE=delta`.
 
 ```yaml
 processors:
   deltatorate:
     metrics:
       - dotnet.process.cpu.time
+      - process.cpu.time
 ```
 
 [3]: https://opentelemetry.io/docs/instrumentation/net/automatic/
@@ -146,7 +147,7 @@ processors:
 
 {{% /tab %}}
 
-{{% tab "NodeJS" %}}
+{{% tab "Node.js" %}}
 
 #### Automatic instrumentation
 
@@ -180,7 +181,7 @@ from opentelemetry.instrumentation.system_metrics import SystemMetricsInstrument
 SystemMetricsInstrumentor().instrument()
 ```
 
-[3]: https://opentelemetry.io/docs/languages/python/automatic/
+[3]: https://opentelemetry.io/docs/zero-code/python/
 [4]: https://opentelemetry.io/docs/languages/python/instrumentation/
 [5]: https://github.com/open-telemetry/opentelemetry-python-contrib/tree/main/instrumentation/opentelemetry-instrumentation-system-metrics
 
@@ -242,7 +243,7 @@ The following tables list the OpenTelemetry runtime metrics used in Datadog's ou
 
 {{< /tab >}}
 
-{{< tab "NodeJS" >}}
+{{< tab "Node.js" >}}
 
 <h3>Node Contrib Runtime</h3>
 <p>These metrics are emitted from auto-instrumentation with the latest version of the OpenTelemetry Node.js SDK.</p>
@@ -256,13 +257,13 @@ The following tables list the OpenTelemetry runtime metrics used in Datadog's ou
 
 {{% tab "Python" %}}
 
-The following table lists the conceptual equivalences between OpenTelemetry and Datadog Python runtime metrics. There are no direct mappings due to mismatching metric types between the two systems.
+The following table lists the conceptual equivalences between OpenTelemetry and Datadog Python runtime metrics. There are no direct mappings due to mismatched metric types between the two systems.
 
 | Datadog metric | Description | OpenTelemetry metric |
 | --- | --- | --- |
 | `runtime.python.cpu.time.sys` | Number of seconds executing in the kernel. | `process.cpu.time` (`type: system`) |
 | `runtime.python.cpu.time.user` | Number of seconds executing outside the kernel. | `process.cpu.time` (`type: user`) |
-| `runtime.python.cpu.percent` | CPU utilization percentage. OTel divides by 100 × number of cores. | `process.cpu.utilization` |
+| `runtime.python.cpu.percent` | CPU utilization percentage; OTel divides the raw value by 100 × the number of CPU cores. | `process.cpu.utilization` |
 | `runtime.python.cpu.ctx_switch.voluntary` | Number of voluntary context switches. | `process.context_switches` (`type: voluntary`) |
 | `runtime.python.cpu.ctx_switch.involuntary` | Number of involuntary context switches. | `process.context_switches` (`type: involuntary`) |
 | `runtime.python.gc.count.gen0` | Number of generation 0 objects. | `process.runtime.{python_implementation}.gc_count` (`count: 0`) |
