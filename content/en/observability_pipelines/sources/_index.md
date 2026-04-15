@@ -38,17 +38,18 @@ These are the available sources:
 - [HTTP Client][10]
 - [HTTP Server][11]
 - [Kafka][12]
-- [Lambda Extension][13]
-- [Lambda Forwarder][14]
-- [Logstash][15]
-- [MySQL][16]
-- [Okta][17]
-- [OpenTelemetry][18]
-- [Socket][19]
-- [Splunk HTTP Event Collector (HEC)][20]
-- [Splunk Heavy or Universal Forwarders (TCP)][21]
-- [Sumo Logic Hosted Collector][22]
-- [Syslog][23]
+- [Kubernetes Logs][13]
+- [Lambda Extension][14]
+- [Lambda Forwarder][15]
+- [Logstash][16]
+- [MySQL][17]
+- [Okta][18]
+- [OpenTelemetry][19]
+- [Socket][20]
+- [Splunk HTTP Event Collector (HEC)][21]
+- [Splunk Heavy or Universal Forwarders (TCP)][22]
+- [Sumo Logic Hosted Collector][23]
+- [Syslog][24]
 
 [1]: /observability_pipelines/sources/akamai_datastream/
 [2]: /observability_pipelines/sources/amazon_data_firehose/
@@ -62,17 +63,18 @@ These are the available sources:
 [10]: /observability_pipelines/sources/http_client/
 [11]: /observability_pipelines/sources/http_server/
 [12]: /observability_pipelines/sources/kafka/
-[13]: /observability_pipelines/sources/lambda_extension/
-[14]: /observability_pipelines/sources/lambda_forwarder/
-[15]: /observability_pipelines/sources/logstash/
-[16]: /observability_pipelines/sources/mysql/
-[17]: /observability_pipelines/sources/okta/
-[18]: /observability_pipelines/sources/opentelemetry/
-[19]: /observability_pipelines/sources/socket/
-[20]: /observability_pipelines/sources/splunk_hec/
-[21]: /observability_pipelines/sources/splunk_tcp/
-[22]: /observability_pipelines/sources/sumo_logic/
-[23]: /observability_pipelines/sources/syslog/
+[13]: /observability_pipelines/sources/kubernetes_logs/
+[14]: /observability_pipelines/sources/lambda_extension/
+[15]: /observability_pipelines/sources/lambda_forwarder/
+[16]: /observability_pipelines/sources/logstash/
+[17]: /observability_pipelines/sources/mysql/
+[18]: /observability_pipelines/sources/okta/
+[19]: /observability_pipelines/sources/opentelemetry/
+[20]: /observability_pipelines/sources/socket/
+[21]: /observability_pipelines/sources/splunk_hec/
+[22]: /observability_pipelines/sources/splunk_tcp/
+[23]: /observability_pipelines/sources/sumo_logic/
+[24]: /observability_pipelines/sources/syslog/
 
 {{% /tab %}}
 {{% tab "Metrics" %}}
