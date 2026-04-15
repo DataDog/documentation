@@ -146,43 +146,22 @@ When you compare two configuration versions, the AI summary automatically:
 
 ## Supported device profiles
 
-NCM uses device profiles to collect configurations from network devices through SSH. Each profile defines how to connect to a specific device operating system, what configurations to collect, and how to parse the output. Profiles are included in the Datadog Agent and matched automatically based on your device's operating system.
+NCM uses device profiles to collect configurations from network devices over SSH. Profiles are bundled with the Datadog Agent and matched automatically based on your device's operating system.
 
 For the profile source files, see the [NCM default profiles directory][8] in the `datadog-agent` repository.
 
-### Available profiles
-
-The following table lists the NCM device profiles and the minimum Datadog Agent version required for each:
-
-| Profile | Min. Agent Version | OS | Vendor | Running Config | Startup Config |
+| Vendor | Profile | Example Devices | Minimal Agent version | Running | Startup |
 |---|---|---|---|---|---|
-| `cisco-ios` | 7.73.0 | IOS | Cisco | {{< X >}} | {{< X >}} |
-| `junos` | 7.74.0 | JunOS | Juniper | {{< X >}} | |
-| `pan-os` | 7.75.0 | PAN-OS | Palo Alto | {{< X >}} | |
-| `aosw` | 7.75.0 | AOS-W | Aruba | {{< X >}} | |
-| `aoscx` | 7.76.0 | AOS-CX | Aruba | {{< X >}} | {{< X >}} |
-| `nxos` | 7.76.0 | NX-OS | Cisco | {{< X >}} | {{< X >}} |
-| `tmos` | 7.76.0 | TMOS | F5 | {{< X >}} | |
-| `fortios` | 7.77.0 | FortiOS | FortiGate | {{< X >}} | |
-| `eos` | 7.77.0 | EOS | Arista | {{< X >}} | {{< X >}} |
-| `dellos10` | 7.77.0 | DellOS10 | Dell | {{< X >}} | {{< X >}} |
-
-### Device profile support matrix
-
-The following matrix provides more detail on the devices, configuration types, and metadata each profile supports:
-
-| Vendor | Profile | Example Devices | Running | Startup | Metadata |
-|---|---|---|---|---|---|
-| Cisco | `cisco-ios` | Catalyst switches, ISR/ASR routers | {{< X >}} | {{< X >}} | Timestamp, config size |
-| Cisco | `nxos` | Nexus data center switches | {{< X >}} | {{< X >}} | Timestamp |
-| Juniper | `junos` | EX/QFX/MX/SRX devices | {{< X >}} | | Timestamp, author |
-| Palo Alto | `pan-os` | Palo Alto firewalls | {{< X >}} | | |
-| Aruba | `aosw` | Aruba switches and controllers | {{< X >}} | | |
-| Aruba | `aoscx` | Aruba CX switches | {{< X >}} | {{< X >}} | |
-| F5 | `tmos` | BIG-IP load balancers | {{< X >}} | | |
-| FortiGate | `fortios` | FortiGate firewalls | {{< X >}} | | |
-| Arista | `eos` | Arista switches | {{< X >}} | {{< X >}} | Timestamp, author |
-| Dell | `dellos10` | Dell EMC data center switches | {{< X >}} | {{< X >}} | |
+| Arista | `eos` | Arista switches | 7.77.0 | {{< X >}} | {{< X >}} |
+| Aruba | `aoscx` | Aruba CX switches | 7.76.0 | {{< X >}} | {{< X >}} |
+| Aruba | `aosw` | Aruba switches and controllers | 7.75.0 | {{< X >}} | |
+| Cisco | `cisco-ios` | Catalyst switches, ISR/ASR routers | 7.73.0 | {{< X >}} | {{< X >}} |
+| Cisco | `nxos` | Nexus data center switches | 7.76.0 | {{< X >}} | {{< X >}} |
+| Dell | `dellos10` | Dell EMC data center switches | 7.77.0 | {{< X >}} | {{< X >}} |
+| F5 | `tmos` | BIG-IP load balancers | 7.76.0 | {{< X >}} | |
+| FortiGate | `fortios` | FortiGate firewalls | 7.77.0 | {{< X >}} | |
+| Juniper | `junos` | EX/QFX/MX/SRX devices | 7.74.0 | {{< X >}} | |
+| Palo Alto | `pan-os` | Palo Alto firewalls | 7.75.0 | {{< X >}} | |
 
 ## Further Reading
 
