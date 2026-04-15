@@ -22,7 +22,7 @@ This page explains how to track different kinds of workflow activity and workflo
 
 ## Out-of-the-box dashboard
 
-The Workflows Overview dashboard provides a high-level overview of your Datadog workflows and executions. To find the dashboard, go to your [Dashboard list][2] and search for **Workflows Overview**.
+The Workflows Overview dashboard provides a high-level overview of your Datadog workflows and executions. To find the dashboard, go to your [Dashboard list][2] and search for {{< ui >}}Workflows Overview{{< /ui >}}.
 
 {{< img src="service_management/workflows/workflows-dashboard.png" alt="The Workflows Overview dashboard" style="width:80%;" >}}
 
@@ -33,9 +33,9 @@ You can view workflow edits and runs using Audit Trail.
 
 For example, to see who edited a workflow:
 
-1. From your workflow, click the <i class="icon-cog-2"></i> **(gear)** in the upper right corner and click **View audit events**.<br>An Audit Trail search filtered to your workflow opens.
-1. In the left, under the **Core** filters, expand **Action**.
-1. Hover over **Modified** and click **Only** to filter the results to show only workflow edits.<br>The **User ID** column displays the username of the person who performed each edit.
+1. From your workflow, click the <i class="icon-cog-2"></i> **(gear)** in the upper right corner and click {{< ui >}}View audit events{{< /ui >}}.<br>An Audit Trail search filtered to your workflow opens.
+1. In the left, under the {{< ui >}}Core{{< /ui >}} filters, expand {{< ui >}}Action{{< /ui >}}.
+1. Hover over {{< ui >}}Modified{{< /ui >}} and click {{< ui >}}Only{{< /ui >}} to filter the results to show only workflow edits.<br>The {{< ui >}}User ID{{< /ui >}} column displays the username of the person who performed each edit.
 
 
 ## Notify about runs
@@ -59,14 +59,14 @@ The list of available metrics is:
 
 To create a monitor that tracks whether daily workflow executions exceed a certain threshold, perform the following steps:
 
-1. Go to [New Monitor][4] and select the **Metric** monitor type.
-1. Under **Define the metric**, for **a**, fill in `datadog.workflows.executions.started`.
-1. _Optionally_, to restrict the monitor to a specific workflow, for **from**, fill in `workflow_id:[WORKFLOW-ID]`, replacing `[WORKFLOW-ID]` with the ID for your workflow.
-1. For **Evaluation Details**, use the following values:
-    - **Evaluate the**: `sum`
-    - **Of the query over the**: `last 1 day`.
-1. For **Set alert conditions**, choose **above**, then fill in an alert and warning threshold. For example, you could fill in an **Alert threshold** of `200` and a **Warning threshold** of `150`.
-1. Under **Configure notifications & automations**, name your workflow, then fill in message text. For example, you could use message text like the following:
+1. Go to [New Monitor][4] and select the {{< ui >}}Metric{{< /ui >}} monitor type.
+1. Under {{< ui >}}Define the metric{{< /ui >}}, for {{< ui >}}a{{< /ui >}}, fill in `datadog.workflows.executions.started`.
+1. _Optionally_, to restrict the monitor to a specific workflow, for {{< ui >}}from{{< /ui >}}, fill in `workflow_id:[WORKFLOW-ID]`, replacing `[WORKFLOW-ID]` with the ID for your workflow.
+1. For {{< ui >}}Evaluation Details{{< /ui >}}, use the following values:
+    - {{< ui >}}Evaluate the{{< /ui >}}: `sum`
+    - {{< ui >}}Of the query over the{{< /ui >}}: `last 1 day`.
+1. For {{< ui >}}Set alert conditions{{< /ui >}}, choose {{< ui >}}above{{< /ui >}}, then fill in an alert and warning threshold. For example, you could fill in an {{< ui >}}Alert threshold{{< /ui >}} of `200` and a {{< ui >}}Warning threshold{{< /ui >}} of `150`.
+1. Under {{< ui >}}Configure notifications & automations{{< /ui >}}, name your workflow, then fill in message text. For example, you could use message text like the following:
 
     {{< code-block lang="none" >}}@slack-alert-channel
 
@@ -77,16 +77,16 @@ Workflow has executed {{warn_threshold}} times in the last day; manual action mi
 Workflow has executed {{threshold}} times in the last day, which is our budget threshold for workflows. We should unpublish the workflow to avoid any more automatic executions for the day.
 {{/is_alert}}
 {{< /code-block >}}
-1. Click **Create**.
+1. Click {{< ui >}}Create{{< /ui >}}.
 
 
 ## View workflow events in Event Manager
 
 You can use [Event Manager][5] to view workflow start and completion events by filtering on `source:workflow_automation`.
 
-To see events for a specific workflow, in the **Search facets** box, search for `workflow.workflow_id`. You can select a specific set of IDs to view only events for those workflows.
+To see events for a specific workflow, in the {{< ui >}}Search facets{{< /ui >}} box, search for `workflow.workflow_id`. You can select a specific set of IDs to view only events for those workflows.
 
-You can also filter the output by **Status** to see only `info`, `warn`, or `error` messages.
+You can also filter the output by {{< ui >}}Status{{< /ui >}} to see only `info`, `warn`, or `error` messages.
 
 
 ## Track workflow billing in Usage Attribution
@@ -98,8 +98,8 @@ Usage Attribution is an advanced feature included in the Enterprise plan. For al
 To track billing for your workflow executions, perform the following steps:
 
 1. Navigate to the [Usage Attribution][6] page.
-1. Under **Products** on the left, search for **Workflow Executions**.
-1. Hover over **Workflow Executions** and click **Only** to view usage attribution for only workflows.
+1. Under {{< ui >}}Products{{< /ui >}} on the left, search for {{< ui >}}Workflow Executions{{< /ui >}}.
+1. Hover over {{< ui >}}Workflow Executions{{< /ui >}} and click {{< ui >}}Only{{< /ui >}} to view usage attribution for only workflows.
 
 
 ## Further reading
