@@ -41,7 +41,7 @@ If your Databricks workspace restricts network access by IP, add the Datadog web
 First, grant access to system schemas for lineage:
 ```sql
 GRANT USE CATALOG ON CATALOG system TO `<application_id>`;
-GRANT USE SCHEMA ON CATALOG system TO `<application_id>`;
+GRANT USE SCHEMA ON SCHEMA system.information_schema TO `<application_id>`;
 GRANT SELECT ON CATALOG system TO `<application_id>`;
 ```
 
@@ -50,8 +50,7 @@ Then, grant read-only access to the scope of data you want to monitor:
 {{< tabs >}}
 {{% tab "Full catalog access" %}}
 
-Use the full catalog access option for simpler setup. It automatically includes future tables without needing to update permissions.
-
+Use the full catalog access option for simpler setup. It automatically includes all current and future tables and schemas without needing to update permissions.
 
 ```sql
 GRANT USE_CATALOG ON CATALOG <catalog_name> TO `<application_id>`;
