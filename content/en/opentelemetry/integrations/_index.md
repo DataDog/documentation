@@ -65,6 +65,7 @@ Monitor web servers and proxy technologies:
 Monitor database and messaging systems:
 
 - [MySQL Metrics][11] - Track MySQL database performance
+- [PostgreSQL Metrics][19] - Track PostgreSQL database performance
 - [Kafka Metrics][12] - Monitor Apache Kafka messaging platform
 
 ### Big data and processing
@@ -95,4 +96,5 @@ Monitor big data processing frameworks:
 [16]: /opentelemetry/integrations/podman_metrics/
 [17]: /opentelemetry/integrations/datadog_extension/
 [18]: /opentelemetry/integrations/kubernetes_metrics/
+[19]: /opentelemetry/integrations/postgres_metrics/
 
