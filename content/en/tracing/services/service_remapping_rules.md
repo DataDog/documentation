@@ -53,7 +53,7 @@ You can create service remapping rules only for services instrumented with suppo
 
 ### Step 2: Specify new entity name
 
-In the text box, enter a unique name for the selected entity (or entities). Alternatively, use tag values with the `{{tagName}}` syntax to remap based on an entity's tags.
+In the text box, enter a unique name for the selected entity (or entities). Alternatively, use tag values with the `{{tagName}}` syntax to remap based on an entity's tags. As you type, a preview of the new service name(s) appears.
    1. If tag values follow a pattern, apply a regular expression to extract only the portion you want in the name.
 **Note**: The preview is not an exhaustive list. If you are remapping a service based on a tag with several values, only the values with the most spans appear in the preview. 
 
