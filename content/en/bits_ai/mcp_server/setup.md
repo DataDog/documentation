@@ -396,27 +396,7 @@ Example configuration file location:
 
 ## Toolsets
 
-The Datadog MCP Server supports _toolsets_, which allow you to use only the tools you need, saving valuable context window space. These toolsets are available:
-
-- `core`: The default toolset for logs, metrics, traces, dashboards, monitors, incidents, hosts, services, events, and notebooks
-- `alerting`: Tools for validating and creating monitors, searching monitor groups, retrieving monitor templates, analyzing monitor coverage, and searching SLOs
-- `apm`: ([Preview][45]) Tools for in-depth [APM][34] trace analysis, span search, Watchdog insights, and performance investigation
-- `cases`: Tools for [Case Management][42], including creating, searching, and updating cases; managing projects; and linking Jira issues
-- `dashboards`: Tools for retrieving, creating, updating, and deleting [dashboards][46], plus widget schema reference and validation
-- `dbm`: Tools for interacting with [Database Monitoring][33]
-- `ddsql`: (Preview) Tools for querying Datadog data using [DDSQL][44], a SQL dialect with support for infrastructure resources, logs, metrics, RUM, spans, and other Datadog data sources
-- `error-tracking`: Tools for interacting with Datadog [Error Tracking][32]
-- `feature-flags`: Tools for managing [feature flags][35], including creating, listing, and updating flags and their environments
-- `llmobs`: Tools for searching and analyzing [LLM Observability][36] spans and experiments
-- `product-analytics`: Tools for interacting with [Product Analytics][41] queries
-- `networks`: Tools for [Cloud Network Monitoring][37] analysis and [Network Device Monitoring][38]
-- `onboarding`: Agentic onboarding tools for guided Datadog setup and configuration
-- `security`: Tools for code security scanning and searching [security signals][39] and [security findings][40]
-- `software-delivery`: Tools for interacting with Software Delivery ([CI Visibility][30] and [Test Optimization][31])
-- `synthetics`: Tools for interacting with Datadog [Synthetic tests][29]
-- `workflows`: Tools for [Workflow Automation][43], including listing, inspecting, executing, and configuring workflows for agent use
-
-To use a toolset, include the `toolsets` query parameter in the endpoint URL when connecting to the MCP Server ([remote authentication](#authentication) only). Use `toolsets=all` to enable all generally available toolsets at once.
+The Datadog MCP Server supports _toolsets_, which allow you to use only the tools you need, saving valuable context window space. To use a toolset, include the `toolsets` query parameter in the endpoint URL when connecting to the MCP Server ([remote authentication](#authentication) only). Use `toolsets=all` to enable all generally available toolsets at once.
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
 For example, based on your selected [Datadog site][17] ({{< region-param key="dd_site_name" >}}):
@@ -437,6 +417,26 @@ For example, based on your selected [Datadog site][17] ({{< region-param key="dd
 
 [17]: /getting_started/site/#navigate-the-datadog-documentation-by-site
 {{< /site-region >}}
+
+These toolsets are available:
+
+- `core`: The default toolset for logs, metrics, traces, dashboards, monitors, incidents, hosts, services, events, and notebooks
+- `alerting`: Tools for validating and creating monitors, searching monitor groups, retrieving monitor templates, analyzing monitor coverage, and searching SLOs
+- `apm`: ([Preview][45]) Tools for in-depth [APM][34] trace analysis, span search, Watchdog insights, and performance investigation
+- `cases`: Tools for [Case Management][42], including creating, searching, and updating cases; managing projects; and linking Jira issues
+- `dashboards`: Tools for retrieving, creating, updating, and deleting [dashboards][46], plus widget schema reference and validation
+- `dbm`: Tools for interacting with [Database Monitoring][33]
+- `ddsql`: (Preview) Tools for querying Datadog data using [DDSQL][44], a SQL dialect with support for infrastructure resources, logs, metrics, RUM, spans, and other Datadog data sources
+- `error-tracking`: Tools for interacting with Datadog [Error Tracking][32]
+- `feature-flags`: Tools for managing [feature flags][35], including creating, listing, and updating flags and their environments
+- `llmobs`: Tools for searching and analyzing [LLM Observability][36] spans and experiments
+- `product-analytics`: Tools for interacting with [Product Analytics][41] queries
+- `networks`: Tools for [Cloud Network Monitoring][37] analysis and [Network Device Monitoring][38]
+- `onboarding`: Agentic onboarding tools for guided Datadog setup and configuration
+- `security`: Tools for code security scanning and searching [security signals][39] and [security findings][40]
+- `software-delivery`: Tools for interacting with Software Delivery ([CI Visibility][30] and [Test Optimization][31])
+- `synthetics`: Tools for interacting with Datadog [Synthetic tests][29]
+- `workflows`: Tools for [Workflow Automation][43], including listing, inspecting, executing, and configuring workflows for agent use
 
 ## Supported clients
 
