@@ -167,7 +167,7 @@ When logs arrive through Amazon Data Firehose, Datadog automatically determines 
 
 There are two ways to override these auto-detected values:
 
-#### Firehose Common Attributes
+#### Firehose common attributes
 
 You can set `source`, `service`, and arbitrary tags through the **Parameters** section (Common Attributes) of your Amazon Data Firehose delivery stream configuration. These values apply to all logs flowing through that delivery stream and take priority over the auto-detected values.
 
