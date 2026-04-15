@@ -71,7 +71,7 @@ The Datadog MCP Server supports _toolsets_, which allow you to use only the tool
 - `alerting`: Tools for validating and creating monitors, searching monitor groups, retrieving monitor templates, analyzing monitor coverage, and searching SLOs
 - `apm`: ([Preview][43]) Tools for in-depth [APM][28] trace analysis, span search, Watchdog insights, and performance investigation
 - `cases`: Tools for [Case Management][38], including creating, searching, and updating cases; managing projects; and linking Jira issues
-- `dashboards`: Tools for retrieving, creating, updating, and deleting [dashboards][44], plus widget schema reference and validation
+- `dashboards`: Tools for retrieving, creating, updating, and deleting [dashboards][44]
 - `dbm`: Tools for interacting with [Database Monitoring][26]
 - `ddsql`: (Preview) Tools for querying Datadog data using [DDSQL][41], a SQL dialect with support for infrastructure resources, logs, metrics, RUM, spans, and other Datadog data sources
 - `error-tracking`: Tools for interacting with Datadog [Error Tracking][25]
@@ -83,6 +83,7 @@ The Datadog MCP Server supports _toolsets_, which allow you to use only the tool
 - `security`: Tools for code security scanning and searching [security signals][33] and [security findings][34]
 - `software-delivery`: Tools for interacting with Software Delivery ([CI Visibility][21] and [Test Optimization][24])
 - `synthetics`: Tools for interacting with Datadog [Synthetic tests][20]
+- `widgets`: Tools for widget schema reference, validation, and expert guidance when building dashboard or notebook widgets
 - `workflows`: Tools for [Workflow Automation][39], including listing, inspecting, executing, and configuring workflows for agent use
 
 To use a toolset, include the `toolsets` query parameter in the endpoint URL when connecting to the MCP Server ([remote authentication][27] only). Use `toolsets=all` to enable all generally available toolsets at once.
@@ -211,7 +212,7 @@ Permanently deletes a Datadog [dashboard][44] by ID. This action cannot be undon
 - Remove the old staging environment dashboard.
 
 ### `get_widget_reference`
-*Toolset: **dashboards***\
+*Toolset: **widgets***\
 *Permissions Required: `Dashboards Read` or `Dashboards Write` or `Notebooks Read`*\
 Returns schemas and building instructions for dashboard widget types. Widget definitions are JSON objects; this tool returns TypeScript type definitions representing their schemas along with building instructions covering query patterns, formula syntax, and common pitfalls. Call this before generating widgets with `upsert_datadog_dashboard`.
 
@@ -220,7 +221,7 @@ Returns schemas and building instructions for dashboard widget types. Widget def
 - What's the schema for the scatterplot widget?
 
 ### `validate_dashboard_widget`
-*Toolset: **dashboards***\
+*Toolset: **widgets***\
 *Permissions Required: `Dashboards Read` or `Dashboards Write` or `Notebooks Read`*\
 Validates a widget definition against the dashboard schema. Use this to check widget JSON before passing it to `upsert_datadog_dashboard`.
 
@@ -228,7 +229,7 @@ Validates a widget definition against the dashboard schema. Use this to check wi
 - Check if this query table widget JSON is correct.
 
 ### `ask_widget_expert`
-*Toolset: **dashboards***\
+*Toolset: **widgets***\
 *Permissions Required: `Dashboards Read` or `Dashboards Write` or `Notebooks Read`*\
 Ask a Datadog widget expert a question about widget configuration, schemas, query syntax, field usage, debugging, or pitfalls. Best for targeted questions: schema lookups, field clarifications, debugging an existing widget definition, or understanding how a specific widget type works.
 
