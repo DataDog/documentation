@@ -855,7 +855,7 @@ This table provides an overview of the supported window functions. For comprehen
 | json_array_elements_text(text json)           | rows of text | Expands a JSON array into a set of rows. This form is only allowed in a FROM clause.                                                                                                                                                                                                                           |
 
 ## Table functions
-Table functions are used to query logs, metrics, and other unstructured data sources.
+Table functions are used to query logs, metrics, cloud costs, and other unstructured data sources.
 
 <table style="width: 100%; table-layout: fixed;">
   <thead>
@@ -928,6 +928,50 @@ dd.metrics_timeseries(
 SELECT *
 FROM dd.metrics_timeseries(
     'avg:system.cpu.user{*} by {service}',
+    TIMESTAMP '2025-07-10 00:00:00.000-04:00',
+    TIMESTAMP '2025-07-17 00:00:00.000-04:00'
+)
+ORDER BY timestamp, service;{{< /code-block >}}
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <pre>
+dd.cloud_cost_scalar(
+    query varchar,
+    reducer varchar
+    [, from_timestamp timestamp,
+    to_timestamp timestamp]
+)</pre>
+      </td>
+      <td>Returns <a href="/cloud_cost_management/">Cloud Cost Management</a> data as a scalar value. The function accepts a cloud cost query (with optional grouping), a reducer to determine how values are aggregated (<code>avg</code>, <code>max</code>, <code>sum</code>, and so on), and optional timestamp parameters to define the time range.</td>
+      <td>
+        {{< code-block lang="sql" >}}
+SELECT *
+FROM dd.cloud_cost_scalar(
+    'sum:aws.cost.amortized{*} by {service}',
+    'sum',
+    TIMESTAMP '2025-07-10 00:00:00.000-04:00',
+    TIMESTAMP '2025-07-17 00:00:00.000-04:00'
+)
+ORDER BY value DESC;{{< /code-block >}}
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <pre>
+dd.cloud_cost_timeseries(
+    query varchar
+    [, from_timestamp timestamp,
+    to_timestamp timestamp]
+)</pre>
+      </td>
+      <td>Returns <a href="/cloud_cost_management/">Cloud Cost Management</a> data as a timeseries. The function accepts a cloud cost query (with optional grouping) and optional timestamp parameters to define the time range. Returns cost data points over time rather than a single aggregated value.</td>
+      <td>
+        {{< code-block lang="sql" >}}
+SELECT *
+FROM dd.cloud_cost_timeseries(
+    'sum:aws.cost.amortized{*} by {service}',
     TIMESTAMP '2025-07-10 00:00:00.000-04:00',
     TIMESTAMP '2025-07-17 00:00:00.000-04:00'
 )
