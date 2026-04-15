@@ -32,13 +32,13 @@ further_reading:
 platform: Windows
 title: Windows
 ---
-## Aperçu
+## Aperçu {#overview}
 
 Cette page décrit les fonctionnalités de base de l'Agent Datadog pour Windows. Si vous n'avez pas encore installé l'Agent, consultez les instructions d'installation ci-dessous ou [suivez les instructions dans l'application][1].
 
 Voir [Plateformes prises en charge][15] pour la liste complète des versions de Windows prises en charge.
 
-## Installation
+## Installation {#installation}
 
 Pour installer l'Agent Datadog sur vos hôtes Windows, suivez le [flux guidé dans l'application au sein de Fleet Automation][16], puis copiez et exécutez la commande d'installation. Les Agents Datadog s'exécutent sous le `ddagentuser`. Consultez la documentation [Utilisateur de l'Agent Datadog pour Windows][17] pour plus d'informations.
 
@@ -46,9 +46,9 @@ Pour installer l'Agent Datadog sur vos hôtes Windows, suivez le [flux guidé da
 {{< img src="/agent/basic_agent_usage/windows_img2_july_25.png" alt="Étapes d'installation dans l'application pour l'Agent Datadog sur un hôte Windows." style="width:90%;">}}
 
 
-## Méthodes d'installation alternatives
+## Méthodes d'installation alternatives {#alternative-installation-methods}
 
-### Installer avec l'interface graphique de l'Agent Manager
+### Installer avec l'interface graphique de l'Agent Manager {#install-with-the-agent-manager-gui}
 
 <div class="alert alert-info"> L'emplacement d'installation par défaut pour l'Agent est <code>%ProgramFiles%\Datadog\Datadog Agent</code>. Si vous choisissez d'utiliser un emplacement d'installation personnalisé, assurez-vous de spécifier un sous-répertoire <code>Datadog</code> pour les fichiers Datadog.</div>
 
@@ -59,7 +59,7 @@ Pour installer l'Agent Datadog sur vos hôtes Windows, suivez le [flux guidé da
 Une fois l'installation terminée, vous avez la possibilité de lancer Datadog Agent Manager.
 
 
-#### Options de configuration à l'installation
+#### Options de configuration à l'installation {#installation-configuration-options}
 
 Chacune des options de configuration suivantes peut être ajoutée en tant que propriété dans la ligne de commande lors de l'installation de l'Agent sur Windows. Pour des options de configuration supplémentaires de l'Agent, voir [plus d'options de configuration de l'Agent](#more-agent-configuration-options).
 
@@ -82,7 +82,7 @@ Chacune des options de configuration suivantes peut être ajoutée en tant que p
 - Certains composants de l'Agent nécessitent un pilote de noyau pour collecter des données. Pour savoir si un pilote de noyau est requis pour votre composant, consultez sa page de documentation ou recherchez `kernel driver` dans les fichiers de configuration de l'Agent associés.
 - Si un `datadog.yaml` valide est trouvé, ce fichier prend le pas sur toutes les options de ligne de commande spécifiées.
 
-#### Autres options de configuration de l'Agent
+#### Autres options de configuration de l'Agent {#more-agent-configuration-options}
 
 Chacune des options de configuration suivantes peut être ajoutée en tant que propriété dans la ligne de commande lors de l'installation de l'Agent sur Windows.
 
@@ -102,12 +102,12 @@ Chacune des options de configuration suivantes peut être ajoutée en tant que p
 | `PROXY_PASSWORD`                            | Chaîne | (Si vous utilisez un proxy) définit votre mot de passe proxy. Pour l'Agent de processus/conteneur, cette variable est requise pour passer un mot de passe d'authentification et ne peut pas être renommée. [En savoir plus sur l'utilisation d'un proxy avec l'Agent Datadog][4]. |
 | `EC2_USE_WINDOWS_PREFIX_DETECTION`          | Booléen | Utilisez l'identifiant d'instance EC2 pour les hôtes Windows sur EC2. _(v7.28.0+)_                                            |
 
-#### Fichiers journaux d'installation
+#### Fichiers journaux d'installation {#installation-log-files}
 
 Définissez l'option `/log <FILENAME>` msiexec pour configurer un fichier journal d'installation. Si cette option n'est pas définie, msiexec écrit le journal par défaut dans `%TEMP%\MSI*.LOG`.
 
 
-## Configuration
+## Configuration {#configuration}
 
 Le fichier de configuration principal de l'Agent est situé à
 `C:\ProgramData\Datadog\datadog.yaml`. Ce fichier est utilisé pour les paramètres globaux tels que la clé API, le site Datadog sélectionné, les paramètres du proxy, les balises d'hôte et le niveau de journalisation.
@@ -128,7 +128,7 @@ L'[interface graphique du gestionnaire d'Agent Datadog][6] peut être utilisée 
 
 **Remarque** : `ProgramData` est un dossier caché.
 
-## Commandes de l'Agent
+## Commandes de l'Agent {#agent-commands}
 
 L'exécution de l'Agent est contrôlée par le gestionnaire de contrôle des services Windows.
 
@@ -171,17 +171,17 @@ L'exécution de l'Agent est contrôlée par le gestionnaire de contrôle des ser
     "%ProgramFiles%\Datadog\Datadog Agent\bin\agent.exe" flare
     ```
 
-## Désinstaller l'Agent
+## Désinstaller l'Agent {#uninstall-the-agent}
 
 Il existe deux méthodes différentes pour désinstaller l'Agent sur Windows. Les deux méthodes suppriment l'Agent, mais ne suppriment pas le dossier de configuration `C:\ProgramData\Datadog` sur l'hôte.
 
-### Ajouter ou supprimer des programmes
+### Ajouter ou supprimer des programmes {#add-or-remove-programs}
 
 1. Appuyez sur **CTRL** et **Esc** ou utilisez la touche Windows pour exécuter la recherche Windows.
 1. Recherchez `add` et cliquez sur **Ajouter ou supprimer des programmes**.
 1. Recherchez `Datadog Agent` et cliquez sur **Désinstaller**.
 
-### PowerShell
+### PowerShell {#powershell}
 
 **Remarque :** Activez WinRM pour utiliser les commandes ci-dessous.
 
@@ -192,12 +192,12 @@ $productCode = (@(Get-ChildItem -Path "HKLM:SOFTWARE\Microsoft\Windows\CurrentVe
 start-process msiexec -Wait -ArgumentList ('/log', 'C:\uninst.log', '/q', '/x', "$productCode", 'REBOOT=ReallySuppress')
 {{< /code-block >}}
 
-## Dépannage
+## Dépannage {#troubleshooting}
 
 Pour les étapes de dépannage, consultez la [documentation de dépannage de l'Agent][18].
 
 
-### Statut et informations de l'Agent
+### Statut et informations de l'Agent {#agent-status-and-information}
 
 Pour vérifier que l'Agent fonctionne, vérifiez si le service `DatadogAgent` dans le panneau des Services est répertorié comme *Démarré*. Un processus appelé *Agent de métriques Datadog* (`agent.exe`) devrait également exister dans le Gestionnaire des tâches.
 
@@ -223,15 +223,15 @@ ou cmd.exe :
 "%ProgramFiles%\Datadog\Datadog Agent\bin\agent.exe" status
 ```
 
-### Emplacement des journaux
+### Emplacement des journaux {#logs-location}
 
 Les journaux de l'Agent se trouvent dans `C:\ProgramData\Datadog\logs\agent.log`.
 
 **Remarque** : `ProgramData` est un dossier caché.
 
-## Cas d'utilisation
+## Cas d'utilisation {#use-cases}
 
-### Surveillance d'un service Windows
+### Surveillance d'un service Windows {#monitoring-a-windows-service}
 
 Sur votre hôte cible, lancez le Gestionnaire d'Agent Datadog et sélectionnez l'intégration "Service Windows" dans la liste. Il existe un exemple prêt à l'emploi ; cependant, cet exemple utilise DHCP.
 
@@ -247,13 +247,13 @@ De plus, chaque fois que vous modifiez une intégration, le service Datadog doit
 
 Pour les Services, Datadog ne suit pas les métriques—seulement leur disponibilité. (Pour les métriques, utilisez l'intégration [Processus](#monitoring-windows-processes) ou [WMI][7]). Pour configurer un Moniteur, sélectionnez le [type de moniteur d'intégration][8] puis recherchez **Service Windows**. Depuis *Statut d'intégration -> Choisir la portée de surveillance*, choisissez le service que vous souhaitez surveiller.
 
-### Surveiller la charge système sous Windows
+### Surveiller la charge système sous Windows {#monitoring-system-load-for-windows}
 
 L'Agent Datadog collecte par défaut un grand nombre de métriques système. Les métriques système les plus couramment utilisées sont `system.load.*` mais ces métriques sont **spécifiques à Unix**.
 
 Bien que Windows n'offre pas les `system.load.*` métriques, une option équivalente disponible par défaut est `system.proc.queue.length`. Cette métrique montre le nombre de threads observés comme retardés dans la file d'attente prête du processeur qui attendent d'être exécutés.
 
-### Surveiller des processus Windows
+### Surveiller des processus Windows {#monitoring-windows-processes}
 
 Vous pouvez surveiller les processus Windows avec [Surveillance des processus en direct][9]. Pour activer cela sur Windows, modifiez le [fichier de configuration principal de l'Agent][10] en définissant le paramètre suivant sur vrai :
 
@@ -266,7 +266,7 @@ process_config:
 
 Une fois la configuration effectuée, [redémarrez l'Agent][11].
 
-## Pour aller plus loin
+## Pour aller plus loin {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

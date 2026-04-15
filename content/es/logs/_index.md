@@ -66,7 +66,7 @@ title: Gestión de Registros
   Únete a una sesión de habilitación introductoria o intermedia para aprender cómo la Gestión de Registros de Datadog unifica registros, métricas y trazas en una sola vista, brindándote un contexto rico para analizar datos de registros.
 {{< /learning-center-callout >}}
 
-## Resumen
+## Resumen {#overview}
 
 Registrar las partes importantes de las operaciones de tu sistema es crucial para mantener la salud de la infraestructura. La infraestructura moderna tiene la capacidad de generar miles de eventos de registro por minuto. En esta situación, necesitas elegir qué registros enviar a una solución de gestión de registros y cuáles archivar. Filtrar tus registros antes de enviarlos, sin embargo, puede llevar a brechas en la cobertura o a la eliminación accidental de datos valiosos.
 
@@ -78,17 +78,17 @@ Logging sin Límites\* permite una experiencia de solución de problemas simplif
 
 </br>
 
-## Recopilar
+## Recopilar {#collect}
 
 Comienza [a ingerir registros][4] desde tus hosts, contenedores, proveedores de nube y otras fuentes para comenzar con la Gestión de Registros de Datadog.
 
-## Configurar
+## Configurar {#configure}
 
 {{< img src="logs/lwl_marketecture_20231030.png" alt="Configura tus registros todo en un solo lugar" >}}
 
 Una vez que tus registros son ingeridos, procesa y enriquece todos tus registros con pipelines y procesadores, proporciona control de tu presupuesto de gestión de registros con índices, genera métricas a partir de registros ingeridos, o gestiona tus registros dentro de archivos optimizados para almacenamiento con [Opciones de Configuración de Registros][5].
 
-## Conectar
+## Conectar {#connect}
 
 {{< img src="/logs/connect.png" alt="Correlaciona registros con métricas o trazas" style="width:80%;">}}
 
@@ -97,7 +97,7 @@ Aprovecha los pilares de la observabilidad conectando tus registros a métricas 
 - [Conecta tus registros y trazas][6] para obtener visibilidad en tus aplicaciones.
 - [Correlaciona tus registros y métricas][7] para obtener contexto de un problema y mapearlo a lo largo de tu servicio.
 
-## Explorar
+## Explorar {#explore}
 
 Comienza a explorar tus registros ingeridos en el [Explorador de Registros][1].
 
@@ -116,7 +116,7 @@ Comienza a explorar tus registros ingeridos en el [Explorador de Registros][1].
   Aprende sin costo sobre capacidad de computación en la nube real y una cuenta de prueba de Datadog. Inscríbete hoy para aprender más sobre recolección de registros, consultas, analítica, métricas, monitoreo, procesamiento, almacenamiento y control de acceso.
 {{< /learning-center-callout >}}
 
-## Lectura Adicional
+## Lectura Adicional {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 <br>

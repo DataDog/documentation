@@ -37,7 +37,7 @@ title: Parsing
   Apprenez à construire et à modifier des pipelines de journaux, à les gérer avec le Scanner de pipelines, et à standardiser les noms d'attributs dans les journaux traités pour garantir la cohérence.
 {{< /learning-center-callout >}}
 
-## Aperçu
+## Aperçu {#overview}
 
 Datadog analyse automatiquement les journaux au format JSON. Pour d'autres formats, Datadog vous permet d'enrichir vos journaux avec l'aide du Parseur Grok.
 La syntaxe Grok offre un moyen plus simple d'analyser les journaux que les expressions régulières pures. Le Parseur Grok vous permet d'extraire des attributs de messages texte semi-structurés.
@@ -84,7 +84,7 @@ Une fois le traitement terminé, le log structuré suivant est généré :
 * Vous devez définir votre règle de parsing de manière à ce qu'elle corresponde à l'entrée de log dans son intégralité, car chaque règle s'applique du début à la fin du log.
 * Certains journaux peuvent produire de grands espaces vides. Utilisez `\n` et `\s+` pour tenir compte des sauts de ligne et des espaces.
 
-### Matcher et filtre
+### Matcher et filtre {#matcher-and-filter}
 
 <div class="alert alert-danger">Les fonctionnalités de parsing Grok disponibles au moment de <em>la requête</em> (dans le <a href="/logs/explorer/calculated_fields/">Log Explorer</a>) prennent en charge un sous-ensemble limité de matchers (<strong>données</strong>, <strong>entier</strong>, <strong>notSpace</strong>, <strong>nombre</strong> et <strong>mot</strong>) et de filtres (<strong>nombre</strong> et <strong>entier</strong>).<br><br>
 L'ensemble complet suivant de matchers et de filtres est spécifique à <em>l'ingestion</em> <a href="/logs/log_configuration/processors/?tab=ui#grok-parser">des fonctionnalités du Grok Parser</a>.</div>
@@ -228,11 +228,11 @@ Voici la liste de tous les matchers et de tous les filtres implémentés en nati
 {{% /tab %}}
 {{< /tabs >}}
 
-## Paramètres avancés
+## Paramètres avancés {#advanced-settings}
 
 Utilisez la section **Paramètres avancés** en bas de votre processeur Grok pour analyser un attribut spécifique au lieu de l'attribut par défaut `message`, ou pour définir des règles d'aide qui réutilisent des motifs communs à travers plusieurs règles d'analyse.
 
-### Parsing d'un attribut spécifique
+### Parsing d'un attribut spécifique {#parsing-a-specific-text-attribute}
 
 Utilisez le champ **Extraire de** pour appliquer votre processeur Grok sur un attribut de texte donné au lieu de l'attribut par défaut `message`.
 
@@ -240,7 +240,7 @@ Par exemple, considérez un journal contenant un attribut `command.line` qui doi
 
 {{< img src="/logs/processing/parsing/grok_advanced_settings_extract.png" alt="Paramètres avancés avec exemple d'extraction de l'attribut command.line" style="width:80%;">}}
 
-### Utilisation de règles d'aide pour réutiliser des modèles communs
+### Utilisation de règles d'aide pour réutiliser des modèles communs {#using-helper-rules-to-reuse-common-patterns}
 
 Utilisez le champ **Règles d'aide** pour définir des jetons pour vos règles d'analyse. Les règles d'aide vous permettent de réutiliser des modèles Grok communs dans vos règles d'analyse. Ceci est utile lorsque vous avez plusieurs règles dans le même analyseur Grok qui utilisent les mêmes jetons.
 
@@ -264,7 +264,7 @@ connection connected on %{date("MM/dd/yyyy"):connect_date}
 server on server %{notSpace:server.name} in %{notSpace:server.env}
 ```
 
-## Exemples
+## Exemples {#examples}
 
 Voici des exemples d'utilisation des parsers :
 
@@ -279,7 +279,7 @@ Voici des exemples d'utilisation des parsers :
 * [XML](#parsing-xml)
 * [CSV](#parsing-csv)
 
-### Clé valeur ou logfmt
+### Clé valeur ou logfmt {#key-value-or-logfmt}
 
 Ceci est le filtre de base clé-valeur : `keyvalue([separatorStr[, characterAllowList[, quotingStr[, delimiter]]]])` où :
 
@@ -384,7 +384,7 @@ La clé-valeur correspond toujours aux entrées sans aucun caractère de citatio
 * Si vous définissez un filtre *clévaleur* sur un `data` objet, et que ce filtre n'est pas respecté, alors un JSON vide `{}` est retourné (par exemple, entrée : `key:=valueStr`, règle d'analyse : `rule_test %{data::keyvalue("=")}`, sortie : `{}`).
 * Définir `""` comme `quotingStr` conserve la configuration par défaut pour la citation.
 
-### Parsing de dates
+### Parsing de dates {#parsing-dates}
 
 Le correspondance de date transforme votre horodatage au format EPOCH (unité de mesure **milliseconde**).
 
@@ -414,7 +414,7 @@ Le format pris en charge pour les fuseaux horaires est :
 
 **Remarque** : L'analyse d'une date **ne** définit pas sa valeur comme la date officielle du journal. Pour cela, utilisez le [Remappeur de date de journal][3] dans un processeur ultérieur.
 
-### Modèle avec alternative
+### Modèle avec alternative {#alternating-pattern}
 
 Si vous avez des journaux avec deux formats possibles qui diffèrent par un seul attribut, définissez une règle unique en alternant avec `(<REGEX_1>|<REGEX_2>)`. Cette règle est équivalente à un OU booléen.
 
@@ -454,7 +454,7 @@ MyParsingRule (%{integer:user.id}|%{word:user.firstname}) connected on %{date("M
 }
 ```
 
-### Attribut optionnel
+### Attribut optionnel {#optional-attribute}
 
 Certains journaux contiennent des valeurs qui n'apparaissent qu'une partie du temps. Dans ce cas, rendez l'extraction d'attributs optionnelle avec `()?`.
 
@@ -497,7 +497,7 @@ MyParsingRule %{word:user.firstname} (%{integer:user.id} )?connected on %{date("
 }
 ```
 
-### JSON imbriqué
+### JSON imbriqué {#nested-json}
 
 Utilisez le filtre `json` pour analyser un objet JSON imbriqué après un préfixe de texte brut :
 
@@ -526,7 +526,7 @@ parsing_rule %{date("MMM dd HH:mm:ss"):timestamp} %{word:vm} %{word:app}\[%{numb
 }
 ```
 
-### Regex
+### Regex {#regex}
 
 **Journal** :
 
@@ -551,7 +551,7 @@ MyParsingRule %{regex("[a-z]*"):user.firstname}_%{regex("[a-zA-Z0-9]*"):user.id}
 }
 ```
 
-### Liste en tableau
+### Liste en tableau {#list-to-array}
 
 Utilisez le filtre `array([[openCloseStr, ] separator][, subRuleOrFilter)` pour extraire une liste dans un tableau dans un seul attribut. Le `subRuleOrFilter` est optionnel et accepte ces [filtres][4].
 
@@ -598,7 +598,7 @@ myParsingRule Users %{data:users:array("{}","-")} have been added to the databas
 myParsingRule Users %{data:users:array("{}","-", uppercase)} have been added to the database
 ```
 
-### Format Glog
+### Format Glog {#glog-format}
 
 Les composants Kubernetes enregistrent parfois au format `glog` ; cet exemple provient de l'élément Kube Scheduler dans la bibliothèque Pipeline.
 
@@ -629,7 +629,7 @@ JSON extrait :
 }
 ```
 
-### Analyse XML
+### Analyse XML {#parsing-xml}
 
 Le parser de XML permet de transformer des messages au format XML en JSON.
 
@@ -670,7 +670,7 @@ rule %{data::xml}
 * Si le XML contient des balises ayant à la fois un attribut et une valeur de chaîne entre les deux balises, un attribut `value` est généré. Par exemple : `<title lang="en">Harry Potter</title>` est converti en `{"title": {"lang": "en", "value": "Harry Potter" } }`
 * Les balises répétées sont automatiquement converties en tableaux. Par exemple : `<bookstore><book>Harry Potter</book><book>Everyday Italian</book></bookstore>` est converti en `{ "bookstore": { "book": [ "Harry Potter", "Everyday Italian" ] } }`
 
-### Analyse CSV
+### Analyse CSV {#parsing-csv}
 
 Utilisez le filtre **CSV** pour mapper plus facilement les chaînes aux attributs lorsqu'elles sont séparées par un caractère donné (`,` par défaut).
 
@@ -726,7 +726,7 @@ Autres exemples :
 | `value1,,value3`             | `%{data::csv("key1,key2,key3")}`                                         | {"cle1": "valeur1", "cle3":"valeur3"}             |
 | <code>Valeur1&nbsp;&nbsp;&nbsp;&nbsp;Valeur2&nbsp;&nbsp;&nbsp;&nbsp;Valeur3</code> (TSV)      | `%{data::csv("key1,key2,key3","tab")}` | {"cle1": "valeur1", "cle2": "valeur2", "cle3":"valeur3"} |
 
-### Utilisez le filtre de données pour éliminer le texte inutile
+### Utilisez le filtre de données pour éliminer le texte inutile {#use-data-matcher-to-discard-unneeded-text}
 
 Si vous avez un journal où, après avoir analysé ce qui est nécessaire et que vous savez que le texte après ce point peut être éliminé, vous pouvez utiliser le filtre de données pour le faire. Pour l'exemple de journal suivant, vous pouvez utiliser le `data` filtre pour éliminer le `%` à la fin.
 
@@ -751,11 +751,11 @@ MyParsingRule Usage\:\s+%{number:usage}%{data:ignore}
 }
 ```
 
-### Caractères de contrôle ASCII
+### Caractères de contrôle ASCII {#ascii-control-characters}
 
 Si vos journaux contiennent des caractères de contrôle ASCII, ils sont sérialisés lors de l'ingestion. Ceci peut être géré en échappant explicitement la valeur sérialisée dans votre analyseur grok.
 
-## Pour aller plus loin
+## Pour aller plus loin {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

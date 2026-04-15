@@ -42,17 +42,17 @@ further_reading:
 platform: Linux
 title: Linux
 ---
-## Resumen
+## Resumen {#overview}
 
 Esta página describe las características básicas del Agente de Datadog para entornos de Linux. Consulta la documentación de [Plataformas Soportadas][5] para la lista completa de distribuciones y versiones de Linux soportadas.
 
-## Instala el Agente
+## Instala el Agente {#install-the-agent}
 Para instalar el Agente en Linux, sigue las [instrucciones en la aplicación en Fleet Automation][6], y ejecuta el script generado en tus hosts.
 
 {{< img src="/agent/basic_agent_usage/linux_img_july_25.png" alt="Pasos de instalación en la aplicación para el Agente de Datadog en un host de Linux." style="width:90%;">}}
 
 
-## Configura el Agente
+## Configura el Agente {#configure-the-agent}
 El archivo de configuración del Agente de Datadog se encuentra en `/etc/datadog-agent/datadog.yaml`. Este archivo YAML contiene los detalles de conexión a nivel de host utilizados para enviar datos a Datadog, incluyendo:
 - `api_key`: La [clave API de Datadog][7] de tu organización
 - `site`: Región de Datadog objetivo (por ejemplo `datadoghq.com`, `datadoghq.eu`, `ddog-gov.com`)
@@ -61,13 +61,13 @@ El archivo de configuración del Agente de Datadog se encuentra en `/etc/datadog
 
 Un archivo de referencia completamente comentado, ubicado en `/etc/datadog-agent/datadog.yaml.example`, lista todas las opciones disponibles para comparación o para copiar y pegar. Alternativamente, consulte el archivo de muestra `config_template.yaml` para todas las opciones de configuración disponibles.
 
-### Archivos de integración
+### Archivos de integración {#integration-files}
 Los archivos de configuración para integraciones se encuentran en `/etc/datadog-agent/conf.d/`. Cada integración tiene su propio subdirectorio, `<INTEGRATION>.d/`, que contiene:
 - `conf.yaml`: La configuración activa que controla cómo la integración recopila métricas y registros
 - `conf.yaml.example`: Un ejemplo que ilustra las claves y valores predeterminados soportados
 
 
-## Comandos
+## Comandos {#commands}
 
 | Descripción   | Comando               |
 |---------------|-----------------------|
@@ -83,24 +83,24 @@ Los archivos de configuración para integraciones se encuentran en `/etc/datadog
 **Nota**: Para sistemas basados en upstart, como `CentOS/RHEL 6` o `SUSE 11`, intercambie `systemctl <action>` con `<action>`. Por ejemplo, al iniciar un Agente como servicio en un `SUSE 11` sistema, usa `sudo start datadog-agent`.
 
 
-## Desinstalar el Agente
+## Desinstalar el Agente {#uninstall-the-agent}
 
 Para desinstalar el Agente, ejecuta el comando para el entorno de Linux correspondiente:
 
 
-### Para CentOS, Rocky, AlmaLinux, Amazon Linux, Oracle Linux y Red Hat
+### Para CentOS, Rocky, AlmaLinux, Amazon Linux, Oracle Linux y Red Hat {#for-centos-rocky-almalinux-amazon-linux-oracle-linux-and-red-hat}
 
 ```shell
 sudo yum remove datadog-agent
 ```
 
-### Para Debian, Ubuntu
+### Para Debian, Ubuntu {#for-debian-ubuntu}
 
 ```shell
 sudo apt-get remove datadog-agent -y
 ```
 
-### Para SUSE
+### Para SUSE {#for-suse}
 
 ```shell
 sudo zypper remove datadog-agent
@@ -133,22 +133,22 @@ sudo apt-get remove --purge datadog-agent -y
 </div>
 
 
-### Desinstalar Instrumentación APM de Un Solo Paso
+### Desinstalar Instrumentación APM de Un Solo Paso {#uninstall-single-step-apm-instrumentation}
 Si instalaste el Agente con Instrumentación APM de Un Solo Paso y deseas desinstalarlo, necesitas [ejecutar comandos adicionales][9] para eliminar la Instrumentación APM. Sigue los pasos para tu [entorno específico][10].
 
 
-## Solución de problemas
+## Solución de problemas {#troubleshooting}
 
 Para pasos detallados, consulta [Solución de Problemas del Agente][2].
 
-## Trabajando con el Agente embebido
+## Trabajando con el Agente embebido {#working-with-the-embedded-agent}
 
 El Agente contiene un entorno de Python embebido en `/opt/datadog-agent/embedded/`. Binarios comunes como `python` y `pip` están contenidos dentro de `/opt/datadog-agent/embedded/bin/`.
 
 Consulte las instrucciones sobre cómo [agregar paquetes al Agente embebido][3] para más información.
 
 
-## Lectura adicional
+## Lectura adicional {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

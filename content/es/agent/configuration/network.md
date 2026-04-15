@@ -27,7 +27,7 @@ further_reading:
   text: Recopila tus trazas
 title: Tráfico de red
 ---
-## Resumen
+## Resumen {#overview}
 
 <div class="alert alert-danger">
 El tráfico siempre es iniciado por el Agente hacia Datadog. Nunca se inician sesiones desde Datadog de regreso al Agente.
@@ -35,7 +35,7 @@ El tráfico siempre es iniciado por el Agente hacia Datadog. Nunca se inician se
 
 Todo el tráfico del Agente se envía a través de SSL. El destino depende del servicio y sitio de Datadog. Para ver destinos basados en tu [sitio de Datadog][11], haz clic en el selector `DATADOG SITE` a la derecha.
 
-## Instalación
+## Instalación {#installation}
 
 Agrega los siguientes dominios a tu lista de inclusión para permitir la instalación del Agente:
 
@@ -45,7 +45,7 @@ Agrega los siguientes dominios a tu lista de inclusión para permitir la instala
 - `apt.datadoghq.com`
 - `windows-agent.datadoghq.com`
 
-## Destinos
+## Destinos {#destinations}
 <div class="alert alert-warning">
 A partir de la versión 7.67.0, el Agente convierte los sitios de Datadog en nombres de dominio completamente calificados (agregando un punto al final del dominio) para reducir el número de consultas DNS.
 Por ejemplo, envía cargas útiles de APM a <code>trace.agent.datadoghq.com.</code>.<br>
@@ -127,7 +127,7 @@ Agente < v7.18.0 o 6.18.0: `app.`{{< region-param key="dd_site" code="true" >}}
 : `<VERSION>-flare.agent.`{{< region-param key="dd_site" code="true" >}}<br>
 Por ejemplo, el Agente v7.31.0 envía datos de flare a `7-31-0-flare.agent.`{{< region-param key="dd_site" code="true" >}}. Debes agregar `*.agent.`{{< region-param key="dd_site" code="true" >}} a tu lista de inclusión en tu(s) firewall(s).<br>
 
-### Direcciones IP estáticas
+### Direcciones IP estáticas {#static-ip-addresses}
 
 Todos estos dominios son registros **CNAME** que apuntan a un conjunto de direcciones IP estáticas. Estas direcciones se pueden encontrar en `https://ip-ranges.`{{< region-param key="dd_site" code="true" >}}.
 
@@ -163,11 +163,11 @@ Cada sección tiene un endpoint dedicado, por ejemplo:
 - `https://ip-ranges.{{< region-param key="dd_site" >}}/logs.json` para las IPs utilizadas para recibir datos de logs a través de TCP.
 - `https://ip-ranges.{{< region-param key="dd_site" >}}/apm.json` para las IPs utilizadas para recibir datos de APM.
 
-### Inclusión
+### Inclusión {#inclusion}
 
 Agrega todos los `ip-ranges` a tu lista de inclusión. Aunque solo un subconjunto está activo en un momento dado, hay variaciones a lo largo del tiempo dentro de todo el conjunto debido a la operación y mantenimiento regular de la red.
 
-## Puertos abiertos
+## Puertos abiertos {#open-ports}
 
 <div class="alert alert-danger">
 Todo el tráfico saliente se envía a través de SSL por TCP o UDP.
@@ -177,7 +177,7 @@ Asegúrate de que el Agente sea accesible solo por tus aplicaciones o fuentes de
 
 Abre los siguientes puertos para beneficiarte de todas las funcionalidades del **Agente**:
 
-#### Saliente
+#### Saliente {#outbound}
 
 {{% site-region region="us,eu" %}}
 
@@ -207,7 +207,7 @@ Abre los siguientes puertos para beneficiarte de todas las funcionalidades del *
 
 {{% /site-region %}}
 
-#### Entrante
+#### Entrante {#inbound}
 
 Utilizado para servicios de Agente que se comunican entre sí localmente dentro del host solamente.
 
@@ -222,63 +222,63 @@ Utilizado para servicios de Agente que se comunican entre sí localmente dentro 
 | Depurador del Agente de Proceso          | 6062 | TCP      | Puntos finales de depuración para el Agente de Proceso.                                                                                         |
 | Tiempo de ejecución del Agente de Proceso        | 6162 | TCP      | Configuraciones de tiempo de ejecución para el Agente de Proceso.                                                                          |
 
-## Configurar puertos
+## Configurar puertos {#configure-ports}
 
 Si necesita cambiar un puerto de entrada porque el puerto predeterminado ya está en uso por un servicio existente en su red, edite el archivo de configuración `datadog.yaml`. Puede encontrar la mayoría de los puertos en la sección **Configuración Avanzada** del archivo:
 
 {{< code-block lang="yaml" filename="datadog.yaml" disable_copy="true" collapsible="true" >}}
-## @param expvar_port - integer - optional - default: 5000
-## @env DD_EXPVAR_PORT - integer - optional - default: 5000
-## The port for the go_expvar server.
+## @param expvar_port - integer - optional - default: 5000 {#param-expvar-port-integer-optional-default-5000}
+## @env DD_EXPVAR_PORT - integer - optional - default: 5000 {#env-dd-expvar-port-integer-optional-default-5000}
+## The port for the go_expvar server. {#the-port-for-the-go-expvar-server}
 #
-# expvar_port: 5000
+# expvar_port: 5000 {#expvar-port-5000}
 
-## @param cmd_port - integer - optional - default: 5001
-## @env DD_CMD_PORT - integer - optional - default: 5001
-## The port on which the IPC api listens.
+## @param cmd_port - integer - optional - default: 5001 {#param-cmd-port-integer-optional-default-5001}
+## @env DD_CMD_PORT - integer - optional - default: 5001 {#env-dd-cmd-port-integer-optional-default-5001}
+## The port on which the IPC api listens. {#the-port-on-which-the-ipc-api-listens}
 #
-# cmd_port: 5001
+# cmd_port: 5001 {#cmd-port-5001}
 
-## @param GUI_port - integer - optional
-## @env DD_GUI_PORT - integer - optional
-## The port for the browser GUI to be served.
-## Setting 'GUI_port: -1' turns off the GUI completely
-## Default is:
-##  * Windows & macOS : `5002`
-##  * Linux: `-1`
+## @param GUI_port - integer - optional {#param-gui-port-integer-optional}
+## @env DD_GUI_PORT - integer - optional {#env-dd-gui-port-integer-optional}
+## The port for the browser GUI to be served. {#the-port-for-the-browser-gui-to-be-served}
+## Setting 'GUI_port: -1' turns off the GUI completely {#setting-gui-port-1-turns-off-the-gui-completely}
+## Default is: {#default-is}
+##  * Windows & macOS : `5002` {#windows-macos-5002}
+##  * Linux: `-1` {#linux-1}
 ##
 #
-# GUI_port: <GUI_PORT>
+# GUI_port: <GUI_PORT> {#gui-port}
 
 {{< /code-block >}}
 
 El receptor APM y los puertos de DogStatsD se encuentran en las secciones **Configuración de Recolección de Trazas** y **Configuración de DogStatsD** del archivo de configuración `datadog.yaml`, respectivamente:
 
 {{< code-block lang="yaml" filename="datadog.yaml" disable_copy="true" collapsible="true" >}}
-## @param dogstatsd_port - integer - optional - default: 8125
-## @env DD_DOGSTATSD_PORT - integer - optional - default: 8125
-## Override the Agent DogStatsD port.
-## Note: Make sure your client is sending to the same UDP port.
+## @param dogstatsd_port - integer - optional - default: 8125 {#param-dogstatsd-port-integer-optional-default-8125}
+## @env DD_DOGSTATSD_PORT - integer - optional - default: 8125 {#env-dd-dogstatsd-port-integer-optional-default-8125}
+## Override the Agent DogStatsD port. {#override-the-agent-dogstatsd-port}
+## Note: Make sure your client is sending to the same UDP port. {#note-make-sure-your-client-is-sending-to-the-same-udp-port}
 #
-# dogstatsd_port: 8125
+# dogstatsd_port: 8125 {#dogstatsd-port-8125}
 
 [...]
 
-## @param receiver_port - integer - optional - default: 8126
-## @env DD_APM_RECEIVER_PORT - integer - optional - default: 8126
-## The port that the trace receiver should listen on.
-## Set to 0 to disable the HTTP receiver.
+## @param receiver_port - integer - optional - default: 8126 {#param-receiver-port-integer-optional-default-8126}
+## @env DD_APM_RECEIVER_PORT - integer - optional - default: 8126 {#env-dd-apm-receiver-port-integer-optional-default-8126}
+## The port that the trace receiver should listen on. {#the-port-that-the-trace-receiver-should-listen-on}
+## Set to 0 to disable the HTTP receiver. {#set-to-0-to-disable-the-http-receiver}
 #
-# receiver_port: 8126
+# receiver_port: 8126 {#receiver-port-8126}
 {{< /code-block >}}
 
 <div class="alert alert-danger">Si cambia el valor del puerto de DogStatsD o del puerto del receptor APM aquí, también debe cambiar la configuración de la biblioteca de trazado APM para el puerto correspondiente. Consulte la información sobre la configuración de puertos en la <a href="/tracing/trace_collection/library_config/">documentación de Configuración de la Biblioteca para su lenguaje</a>.</div>
 
-## Usando proxies
+## Usando proxies {#using-proxies}
 
 Para una guía de configuración detallada sobre la configuración de proxies, consulte [Configuración del Proxy del Agente][9].
 
-## Almacenamiento en búfer de datos
+## Almacenamiento en búfer de datos {#data-buffering}
 
 Si la red se vuelve inaccesible, el Agente almacena las métricas en memoria.
 El uso máximo de memoria para almacenar las métricas está definido por la configuración `forwarder_retry_queue_payloads_max_size`. Cuando se alcanza este límite, se descartan las métricas.
@@ -289,7 +289,7 @@ Las métricas se almacenan en la carpeta definida por la configuración `forward
 
 Para evitar quedarse sin espacio de almacenamiento, el Agente almacena las métricas en disco solo si el espacio total de almacenamiento utilizado es inferior al 80 por ciento. Este límite está definido por la configuración `forwarder_storage_max_disk_ratio`.
 
-## Instalando el Operador de Datadog
+## Instalando el Operador de Datadog {#installing-the-datadog-operator}
 
 Si está instalando el Operador de Datadog en un entorno de Kubernetes con conectividad limitada, necesita permitir los siguientes puntos finales para el puerto TCP 443, según su registro:
 
@@ -303,7 +303,7 @@ Si está instalando el Operador de Datadog en un entorno de Kubernetes con conec
 - `docker.io/datadog` (DockerHub)
 
 
-## Lectura Adicional
+## Lectura Adicional {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

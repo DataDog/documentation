@@ -37,7 +37,7 @@ further_reading:
   text: Registro Sin Límites*
 title: Recopilación de Registros e Integraciones
 ---
-## Resumen
+## Resumen {#overview}
 
 Elige una opción de configuración a continuación para comenzar a ingerir tus registros. Si ya estás utilizando un demonio de envío de registros, consulta la documentación dedicada para [Rsyslog][1], [Syslog-ng][2], [NXlog][3], [FluentD][4] o [Logstash][5].
 
@@ -45,7 +45,7 @@ Consulta la [lista de puntos finales de recopilación de registros de Datadog di
 
 **Nota**: Al enviar registros en formato JSON a Datadog, hay un conjunto de atributos reservados que tienen un significado específico dentro de Datadog. Consulta la sección de [Atributos Reservados](#attributes-and-tags) para aprender más.
 
-## Configuración
+## Configuración {#setup}
 
 {{< tabs >}}
 {{% tab "Host" %}}
@@ -113,7 +113,7 @@ Las integraciones de Datadog y la recolección de registros están vinculadas. P
 1. Selecciona una integración de la [página de Integraciones][6] y sigue las instrucciones de configuración.
 2. Sigue las instrucciones de recolección de registros de la integración. Esta sección cubre cómo descomentar la sección de registros en el archivo `conf.yaml` de esa integración y configurarlo para tu entorno.
 
-## Reduce las tarifas de transferencia de datos
+## Reduce las tarifas de transferencia de datos {#reduce-data-transfer-fees}
 
 Utiliza [Cloud Network Monitoring][7] de Datadog para identificar las aplicaciones de mayor rendimiento de tu organización. Conéctate a Datadog a través de conexiones privadas soportadas y envía datos a través de una red privada para evitar el internet público y reducir tus tarifas de transferencia de datos. Después de cambiar a enlaces privados, utiliza las herramientas de [Cloud Cost Management][8] de Datadog para verificar el impacto y monitorear la reducción en tus costos en la nube.
 
@@ -142,13 +142,13 @@ Para aprender cómo enviar registros desde su verificación de Agente personaliz
 {{% /tab %}}
 {{< /tabs >}}
 
-## Opciones de configuración adicionales
+## Opciones de configuración adicionales {#additional-configuration-options}
 
-### Puntos finales de registro
+### Puntos finales de registro {#logging-endpoints}
 
 Datadog proporciona puntos finales de registro tanto para conexiones cifradas por SSL como para conexiones no cifradas. Utilice el punto final cifrado cuando sea posible. El Agente de Datadog utiliza el punto final cifrado para enviar registros a Datadog. Más información está disponible en la [documentación de seguridad de Datadog][6].
 
-#### Puntos finales soportados
+#### Puntos finales soportados {#supported-endpoints}
 
 Utilice el menú desplegable de selector [sitio][13] en el lado derecho de la página para ver los puntos finales soportados por el sitio de Datadog.
 
@@ -159,7 +159,7 @@ Utilice el menú desplegable de selector [sitio][13] en el lado derecho de la p�
 | {{< region-param key=dd_datacenter >}} | HTTPS | <code>{{< region-param key=lambda_http_endpoint >}}</code> | 443 | Utilizado por funciones Lambda para enviar registros en formato crudo, Syslog o JSON a través de HTTPS. |
 | {{< region-param key=dd_datacenter >}} | HTTPS | <code>logs.{{< region-param key=browser_sdk_endpoint_domain >}}</code> | 443 | Utilizado por el SDK del navegador para enviar registros en formato JSON a través de HTTPS. |
 
-### Reenvío de registros personalizado
+### Reenvío de registros personalizado {#custom-log-forwarding}
 
 Cualquier proceso personalizado o biblioteca de registro capaz de reenviar registros a través de **HTTP** puede ser utilizado junto con Datadog Logs.
 
@@ -198,11 +198,11 @@ Hay una truncación adicional en los campos que se aplica solo a los registros i
 
 {{% /collapse-content %}}
 
-### Atributos y etiquetas
+### Atributos y etiquetas {#attributes-and-tags}
 
 Los atributos prescriben [facetas de registros][9], que se utilizan para filtrar y buscar en el Explorador de Registros. Consulte la documentación dedicada de [atributos y alias][10] para obtener una lista de atributos reservados y estándar, y para aprender cómo soportar una convención de nombres con atributos de registros y alias.
 
-#### Atributos para trazas de pila
+#### Atributos para trazas de pila {#attributes-for-stack-traces}
 
 Al registrar trazas de pila, hay atributos específicos que tienen una visualización de interfaz de usuario dedicada dentro de su aplicación de Datadog, como el nombre del registrador, el hilo actual, el tipo de error y la traza de pila en sí.
 
@@ -222,13 +222,13 @@ Para habilitar estas funcionalidades, utilice los siguientes nombres de atributo
 
 Para más información, consulte la documentación completa de [atributos de código fuente][11].
 
-## Próximos pasos
+## Próximos pasos {#next-steps}
 
 Una vez que los registros son recolectados e ingeridos, están disponibles en **Explorador de Registros**. El Explorador de Registros es donde puede buscar, enriquecer y ver alertas sobre sus registros. Consulte la documentación de [Explorador de Registros][12] para comenzar a analizar sus datos de registro, o vea la documentación adicional de gestión de registros a continuación.
 
 {{< img src="logs/explore.png" alt="Registros que aparecen en el Explorador de Registros" style="width:100%" >}}
 
-## Lectura Adicional
+## Lectura Adicional {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 <br>

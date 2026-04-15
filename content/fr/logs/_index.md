@@ -67,7 +67,7 @@ title: Log Management
   Participez à une session de formation d'introduction ou intermédiaire pour apprendre comment la gestion des journaux Datadog unifie les journaux, les métriques et les traces dans une vue unique, vous offrant un contexte riche pour analyser les données des journaux.
 {{< /learning-center-callout >}}
 
-## Aperçu
+## Aperçu {#overview}
 
 Enregistrer les parties importantes des opérations de votre système est crucial pour maintenir la santé de l'infrastructure. L'infrastructure moderne a la capacité de générer des milliers d'événements de journal par minute. Dans cette situation, vous devez choisir quels journaux envoyer à une solution de gestion des journaux et quels journaux archiver. Cependant, filtrer vos journaux avant de les envoyer peut entraîner des lacunes dans la couverture ou la suppression accidentelle de données précieuses.
 
@@ -79,17 +79,17 @@ La journalisation sans limites\* permet une expérience de dépannage simplifié
 
 </br>
 
-## Collecter
+## Collecter {#collect}
 
 Pour commencer à utiliser Log Management, vous devez d'abord [ingérer des logs][4] depuis vos hosts, conteneurs, fournisseurs cloud et autres sources.
 
-## Configuration
+## Configuration {#configure}
 
 {{< img src="logs/lwl_marketecture_20231030.png" alt="Configurez vos journaux en un seul endroit" >}}
 
 Une fois vos logs ingérés, vous pouvez les traiter et les enrichir avec des pipelines et des processeurs, contrôler précisément votre budget de gestion des logs avec des index, générer des métriques à partir des logs générés, ou encore gérer vos logs dans des archives optimisées pour le stockage grâce aux [paramètres de configuration des logs][5].
 
-## Connect
+## Connect {#connect}
 
 {{< img src="/logs/connect.png" alt="Corrélez les journaux avec des métriques ou des traces" style="width:80%;">}}
 
@@ -98,7 +98,7 @@ Tirez profit des trois piliers de l'observabilité en associant vos logs à vos 
 - [Connectez vos journaux et traces][6] pour obtenir une visibilité sur vos applications.
 - [Corrélez vos logs à vos métriques][7] pour contextualiser un problème et le mapper dans l'ensemble de votre service.
 
-## Utilisation
+## Utilisation {#explore}
 
 Commencez à explorer vos logs ingérés dans le [Log Explorer][1].
 
@@ -117,7 +117,7 @@ Commencez à explorer vos logs ingérés dans le [Log Explorer][1].
   Apprenez sans frais sur une véritable capacité de calcul cloud et un compte d'essai Datadog. Inscrivez-vous aujourd'hui pour en savoir plus sur la collecte de journaux, les requêtes, l'analyse, les métriques, la surveillance, le traitement, le stockage et le contrôle d'accès.
 {{< /learning-center-callout >}}
 
-## Lectures complémentaires
+## Lectures complémentaires {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 <br>

@@ -44,7 +44,7 @@ title: Agente
 El Agente v7 está disponible. <a href="/agent/versions/upgrade_to_agent_v7">Actualiza a la versión más reciente</a> para beneficiarte de toda la nueva funcionalidad.
 </div>
 
-## Resumen
+## Resumen {#overview}
 
 El Agente de Datadog es un software que se ejecuta en tus hosts. Recopila eventos y métricas de los hosts y los envía a Datadog, donde puedes analizar tus datos de monitoreo y rendimiento. El Agente de Datadog es de código abierto y su código fuente está disponible en GitHub en [DataDog/datadog-agent][1].
 
@@ -59,9 +59,9 @@ Actualizar a una versión principal del Agente de Datadog y mantenerlo actualiza
 <p> <em>Se recomienda instalar completamente el Agente.</em> Sin embargo, un paquete independiente de DogStatsD está disponible para Amazon Linux, CentOS, Debian, Fedora, Red Hat, SUSE y Ubuntu. Este paquete se utiliza en entornos contenedorizados donde DogStatsD se ejecuta como un sidecar o en entornos que ejecutan un servidor DogStatsD sin la funcionalidad completa del Agente.</p>
 </div>
 
-## Gestión del Agente
+## Gestión del Agente {#managing-the-agent}
 
-### Gestión del Agente con Automatización de Flota (recomendado)
+### Gestión del Agente con Automatización de Flota (recomendado) {#managing-the-agent-with-fleet-automation-recommended}
 [Automatización de Flota][15] es el flujo de trabajo principal dentro de la aplicación para instalar, actualizar, configurar y solucionar problemas del Agente de Datadog a gran escala.
 
 {{< img src="/agent/basic_agent_usage/basic_agent_2_july_25.png" alt="La vista de Automatización de Flota que permite gestionar centralmente sus Agentes de Datadog en un solo lugar." style="width:100%;">}}
@@ -73,7 +73,7 @@ Actualizar a una versión principal del Agente de Datadog y mantenerlo actualiza
 - **Auditar el uso de la clave API**: Identificar qué Agentes están utilizando una clave API específica y rotar claves de manera segura.
 
 
-### Interfaz Gráfica del Administrador del Agente de Datadog
+### Interfaz Gráfica del Administrador del Agente de Datadog {#datadog-agent-manager-gui}
 
 <div class="alert alert-info">La interfaz gráfica del Agente no es compatible con plataformas Windows de 32 bits.</div>
 
@@ -94,23 +94,23 @@ Requisitos de la interfaz gráfica:
 - Para iniciar la interfaz gráfica, el usuario debe tener los permisos requeridos. Si puedes abrir `datadog.yaml`, puedes usar la interfaz gráfica.
 - Por razones de seguridad, la interfaz gráfica solo puede ser accedida desde la interfaz de red local (`localhost`/`127.0.0.1`), por lo tanto, debes estar en el host donde se está ejecutando el Agente. No puedes ejecutar el Agente en una máquina virtual o un contenedor y acceder a él desde la máquina host.
 
-### Interfaz de línea de comandos
+### Interfaz de línea de comandos {#command-line-interface}
 
 Desde el Agente 6 en adelante, la interfaz de línea de comandos del Agente se basa en subcomandos. Para una lista completa de subcomandos del Agente, consulta [Comandos del Agente][2].
 
-## Avanzando más con el Agente de Datadog
+## Avanzando más con el Agente de Datadog {#getting-further-with-the-datadog-agent}
 
-### Actualizar el Agente
+### Actualizar el Agente {#update-the-agent}
 
 Para actualizar manualmente el núcleo del Agente de Datadog entre dos versiones menores en un host determinado, ejecute el [comando de instalación correspondiente para su plataforma][7].
 
 **Nota**: Si desea actualizar manualmente una integración específica del Agente, consulte la [guía de Gestión de Integraciones][8].
 
-### Archivos de configuración
+### Archivos de configuración {#configuration-files}
 
 Consulte la [documentación de archivos de configuración del Agente][9].
 
-### Sitio de Datadog
+### Sitio de Datadog {#datadog-site}
 
 Edite el [archivo de configuración principal del Agente][10], `datadog.yaml`, para establecer el parámetro `site` (por defecto es `datadoghq.com`).
 
@@ -120,11 +120,11 @@ site: {{< region-param key="dd_site" >}}
 
 **Nota**: Consulte la [documentación de Introducción a los Sitios de Datadog][11] para más detalles sobre el parámetro `site`.
 
-### Ubicación de los registros
+### Ubicación de los registros {#log-location}
 
 Consulte la [documentación de archivos de registro del Agente][12].
 
-## Sobrecarga del Agente
+## Sobrecarga del Agente {#agent-overhead}
 
 Un ejemplo del consumo de recursos del Agente de Datadog se muestra a continuación. Se realizaron pruebas en una instancia de máquina Amazon EC2 `c5.xlarge` (4 VCPU/ 8GB RAM) y se observó un rendimiento comparable en instancias basadas en ARM64 con recursos similares. El `datadog-agent` estándar se estaba ejecutando con un chequeo de proceso para monitorear el Agente en sí. Habilitar más integraciones puede aumentar el consumo de recursos del Agente.
 Habilitar las verificaciones de JMX obliga al Agente a usar más memoria dependiendo del número de beans expuestos por las JVMs monitoreadas. Habilitar los Agentes de traza y proceso también aumenta el consumo de recursos.
@@ -169,7 +169,7 @@ Los resultados a continuación se obtienen de una colección de *110KB de regist
 {{< /tabs >}}
 
 
-## Recursos adicionales
+## Recursos adicionales {#additional-resources}
 {{< whatsnext desc="Esta sección incluye los siguientes temas:">}}
   {{< nextlink href="/agent/kubernetes">}}<u>Kubernetes</u>: Instalar y configurar el Agente de Datadog en Kubernetes.{{< /nextlink >}}
   {{< nextlink href="/agent/cluster_agent">}}<u>Agente de Clúster</u>: Instalar y configurar el Agente de Clúster para Kubernetes, una versión del Agente de Datadog diseñada para recopilar datos de monitoreo de manera eficiente desde un clúster orquestado.{{< /nextlink >}}
@@ -185,7 +185,7 @@ Los resultados a continuación se obtienen de una colección de *110KB de regist
   {{< nextlink href="/getting_started/observability_pipelines">}}<u>Configurar Pipelines de Observabilidad y Datadog</u>: Desplegar el Trabajador de Pipelines de Observabilidad como un agregador para recopilar, transformar y enrutar todos sus registros y métricas a cualquier destino.{{< /nextlink >}}
 {{< /whatsnext >}}
 
-## Lectura Adicional
+## Lectura Adicional {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

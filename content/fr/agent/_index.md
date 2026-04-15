@@ -44,7 +44,7 @@ title: Agent
 L'Agent v7 est disponible. <a href="/agent/versions/upgrade_to_agent_v7">Mettez à niveau vers la version la plus récente</a> pour bénéficier de toutes les nouvelles fonctionnalités.
 </div>
 
-## Aperçu
+## Aperçu {#overview}
 
 L'Agent Datadog est un logiciel qui s'exécute sur vos hôtes. Il collecte des événements et des métriques à partir des hôtes et les envoie à Datadog, où vous pouvez analyser vos données de surveillance et de performance. L'Agent Datadog est open source et son code source est disponible sur GitHub à [DataDog/datadog-agent][1].
 
@@ -59,9 +59,9 @@ La mise à niveau vers une version majeure de l'Agent Datadog et le maintien de 
 <p> <em>Il est recommandé d'installer complètement l'Agent.</em> Cependant, un package DogStatsD autonome est disponible pour Amazon Linux, CentOS, Debian, Fedora, Red Hat, SUSE et Ubuntu. Ce package est utilisé dans des environnements conteneurisés où DogStatsD fonctionne comme un sidecar ou dans des environnements exécutant un serveur DogStatsD sans la fonctionnalité complète de l'Agent.</p>
 </div>
 
-## Gestion de l'Agent
+## Gestion de l'Agent {#managing-the-agent}
 
-### Gestion de l'Agent avec l'Automatisation de Flotte (recommandé)
+### Gestion de l'Agent avec l'Automatisation de Flotte (recommandé) {#managing-the-agent-with-fleet-automation-recommended}
 [L'Automatisation de Flotte][15] est le flux de travail principal dans l'application pour installer, mettre à niveau, configurer et dépanner l'Agent Datadog à grande échelle.
 
 {{< img src="/agent/basic_agent_usage/basic_agent_2_july_25.png" alt="La vue d'Automatisation de Flotte qui vous permet de gérer vos Agents Datadog de manière centralisée en un seul endroit." style="width:100%;">}}
@@ -73,7 +73,7 @@ La mise à niveau vers une version majeure de l'Agent Datadog et le maintien de 
 - **Auditer l'utilisation de la clé API** : Identifier quels Agents utilisent une clé API spécifique et faire pivoter les clés en toute sécurité.
 
 
-### Interface graphique Datadog Agent Manager
+### Interface graphique Datadog Agent Manager {#datadog-agent-manager-gui}
 
 <div class="alert alert-info">L'interface graphique de l'Agent n'est pas prise en charge sur les plateformes Windows 32 bits.</div>
 
@@ -94,23 +94,23 @@ Prérequis de l'interface graphique :
 - Pour démarrer l'interface graphique, l'utilisateur doit avoir les autorisations requises. Si vous pouvez ouvrir `datadog.yaml`, vous pouvez utiliser l'interface graphique.
 - Pour des raisons de sécurité, l'interface graphique ne peut **être** accessible que depuis l'interface réseau locale (`localhost`/`127.0.0.1`), vous devez donc être sur l'hôte où l'Agent est en cours d'exécution. Vous ne pouvez pas exécuter l'Agent sur une VM ou un conteneur et y accéder depuis la machine hôte.
 
-### Interface de ligne de commande
+### Interface de ligne de commande {#command-line-interface}
 
 À partir de l'Agent 6 et plus tard, l'interface de ligne de commande de l'Agent est basée sur des sous-commandes. Pour une liste complète des sous-commandes de l'Agent, voir [Commandes de l'Agent][2].
 
-## En apprendre plus avec l'Agent Datadog
+## En apprendre plus avec l'Agent Datadog {#getting-further-with-the-datadog-agent}
 
-### Mettre à jour l'Agent
+### Mettre à jour l'Agent {#update-the-agent}
 
 Pour mettre à jour manuellement les composants principaux de l'Agent Datadog depuis et vers une version mineure sur un host donné, exécutez la [commande d'installation correspondant à votre plateforme][7].
 
 **Remarque** : Si vous souhaitez mettre à jour manuellement une intégration spécifique de l'Agent, consultez le [guide de gestion des intégrations][8].
 
-### Fichiers de configuration
+### Fichiers de configuration {#configuration-files}
 
 Consultez la [documentation relative aux fichiers de configuration de l'Agent][9].
 
-### Site de Datadog
+### Site de Datadog {#datadog-site}
 
 Modifiez le [fichier de configuration principal de l'Agent][10], `datadog.yaml`, pour définir le paramètre `site` (par défaut `datadoghq.com`).
 
@@ -120,11 +120,11 @@ site: {{< region-param key="dd_site" >}}
 
 **Remarque** : Consultez la [documentation de démarrage avec les sites Datadog][11] pour plus de détails sur le paramètre `site`.
 
-### Emplacement des logs
+### Emplacement des logs {#log-location}
 
 Consultez la section [Fichiers de log de l'Agent][12].
 
-## Traitement de l'Agent
+## Traitement de l'Agent {#agent-overhead}
 
 Un exemple de la consommation de ressources de l'Agent Datadog est ci-dessous. Des tests ont été effectués sur une instance de machine Amazon EC2 `c5.xlarge` (4 VCPU/ 8 Go de RAM) et des performances comparables ont été observées pour les instances basées sur ARM64 avec des ressources similaires. Le `datadog-agent` standard fonctionnait avec un contrôle de processus pour surveiller l'Agent lui-même. L'activation de plus d'intégrations peut augmenter la consommation de ressources de l'Agent.
 L'activation des vérifications JMX oblige l'Agent à utiliser plus de mémoire en fonction du nombre de beans exposés par les JVM surveillées. L'activation des Agents de trace et de processus augmente également la consommation de ressources.
@@ -169,7 +169,7 @@ Les résultats ci-dessous proviennent d'une collecte de *110 Ko de journaux par 
 {{< /tabs >}}
 
 
-## Ressources supplémentaires
+## Ressources supplémentaires {#additional-resources}
 {{< whatsnext desc="Cette section comprend les sujets suivants :">}}
   {{< nextlink href="/agent/kubernetes">}}<u>Kubernetes</u> : Installer et configurer l'agent Datadog sur Kubernetes.{{< /nextlink >}}
   {{< nextlink href="/agent/cluster_agent">}}<u>Agent de cluster</u> : Installer et configurer l'agent de cluster pour Kubernetes, une version de l'agent Datadog conçue pour collecter efficacement des données de surveillance à partir d'un cluster orchestré.{{< /nextlink >}}
@@ -185,7 +185,7 @@ Les résultats ci-dessous proviennent d'une collecte de *110 Ko de journaux par 
   {{< nextlink href="/getting_started/observability_pipelines">}}<u>Configurer les Pipelines d'Observabilité et Datadog</u> : Déployez le Worker des Pipelines d'Observabilité en tant qu'agrégateur pour collecter, transformer et acheminer tous vos journaux et métriques vers n'importe quelle destination.{{< /nextlink >}}
 {{< /whatsnext >}}
 
-## Lectures complémentaires
+## Lectures complémentaires {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

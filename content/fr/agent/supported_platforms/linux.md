@@ -42,17 +42,17 @@ further_reading:
 platform: Linux
 title: Linux
 ---
-## Aperçu
+## Aperçu {#overview}
 
 Cette page décrit les fonctionnalités de base de l'Agent Datadog pour les environnements Linux. Consultez la documentation [Plateformes prises en charge][5] pour la liste complète des distributions et versions Linux prises en charge.
 
-## Installation de l'Agent
+## Installation de l'Agent {#install-the-agent}
 Pour installer l'Agent sur Linux, suivez les [instructions dans l'application dans Fleet Automation][6], et exécutez le script généré sur vos hôtes.
 
 {{< img src="/agent/basic_agent_usage/linux_img_july_25.png" alt="Étapes d'installation dans l'application pour l'Agent Datadog sur un hôte Linux." style="width:90%;">}}
 
 
-## Configurez l'Agent
+## Configurez l'Agent {#configure-the-agent}
 Le fichier de configuration de l'Agent Datadog se trouve dans `/etc/datadog-agent/datadog.yaml`. Ce fichier YAML contient les détails de connexion à l'échelle de l'hôte utilisés pour envoyer des données à Datadog, y compris :
 - `api_key` : La [clé API Datadog][7] de votre organisation
 - `site` : Région cible de Datadog (par exemple `datadoghq.com`, `datadoghq.eu`, `ddog-gov.com`)
@@ -61,13 +61,13 @@ Le fichier de configuration de l'Agent Datadog se trouve dans `/etc/datadog-agen
 
 Un fichier de référence entièrement commenté, situé dans `/etc/datadog-agent/datadog.yaml.example`, répertorie chaque option disponible pour comparaison ou pour copier et coller. Alternativement, consultez le fichier d'exemple `config_template.yaml` pour toutes les options de configuration disponibles.
 
-### Fichiers d'intégration
+### Fichiers d'intégration {#integration-files}
 Les fichiers de configuration pour les intégrations se trouvent dans `/etc/datadog-agent/conf.d/`. Chaque intégration a son propre sous-répertoire, `<INTEGRATION>.d/`, qui contient :
 - `conf.yaml` : La configuration active contrôlant la manière dont l'intégration collecte les métriques et les journaux
 - `conf.yaml.example` : Un exemple illustrant les clés et valeurs par défaut prises en charge
 
 
-## Commandes
+## Commandes {#commands}
 
 | Description   | Commande               |
 |---------------|-----------------------|
@@ -83,24 +83,24 @@ Les fichiers de configuration pour les intégrations se trouvent dans `/etc/data
 **Note** : Pour les systèmes basés sur upstart, tels que `CentOS/RHEL 6` ou `SUSE 11`, remplacez `systemctl <action>` par `<action>`. Par exemple, lors du démarrage d'un Agent en tant que service sur un système `SUSE 11`, utilisez `sudo start datadog-agent`.
 
 
-## Désinstaller l'Agent
+## Désinstaller l'Agent {#uninstall-the-agent}
 
 Pour désinstaller l'Agent, exécutez la commande pour l'environnement Linux approprié :
 
 
-### Pour CentOS, Rocky, AlmaLinux, Amazon Linux, Oracle Linux et Red Hat
+### Pour CentOS, Rocky, AlmaLinux, Amazon Linux, Oracle Linux et Red Hat {#for-centos-rocky-almalinux-amazon-linux-oracle-linux-and-red-hat}
 
 ```shell
 sudo yum remove datadog-agent
 ```
 
-### Pour Debian, Ubuntu
+### Pour Debian, Ubuntu {#for-debian-ubuntu}
 
 ```shell
 sudo apt-get remove datadog-agent -y
 ```
 
-### Pour SUSE
+### Pour SUSE {#for-suse}
 
 ```shell
 sudo zypper remove datadog-agent
@@ -133,22 +133,22 @@ sudo apt-get remove --purge datadog-agent -y
 </div>
 
 
-### Désinstaller l'instrumentation APM en une seule étape
+### Désinstaller l'instrumentation APM en une seule étape {#uninstall-single-step-apm-instrumentation}
 Si vous avez installé l'Agent avec l'instrumentation APM en une seule étape et que vous souhaitez le désinstaller, vous devez [exécuter des commandes supplémentaires][9] pour supprimer l'instrumentation APM. Suivez les étapes pour votre [environnement spécifique][10].
 
 
-## Dépannage
+## Dépannage {#troubleshooting}
 
 Pour des étapes détaillées, consultez [Dépannage de l'Agent][2].
 
-## Utilisation de l'Agent intégré
+## Utilisation de l'Agent intégré {#working-with-the-embedded-agent}
 
 L'Agent contient un environnement Python intégré à `/opt/datadog-agent/embedded/`. Des binaires courants tels que `python` et `pip` sont contenus dans `/opt/datadog-agent/embedded/bin/`.
 
 Pour en savoir plus, consultez les instructions relatives à l'[ajout de paquets à l'Agent intégré][3].
 
 
-## Pour aller plus loin
+## Pour aller plus loin {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

@@ -17,32 +17,32 @@ further_reading:
 title: Mapa de Topología de Dispositivos
 type: multi-code-lang
 ---
-## Resumen
+## Resumen {#overview}
 
 El [Mapa de Topología de Dispositivos de Red][2] utiliza diagramas de [Cloudcraft][7] para proporcionar una representación visual interactiva de las conexiones físicas de tu red. El mapa descubre automáticamente y muestra los dispositivos, sus interfaces y las relaciones entre ellos. Esta visualización te ayuda a identificar problemas en tus dispositivos de red, entender sus impactos ascendentes y descendentes, solucionar problemas de conectividad y obtener información sobre cómo fluye el tráfico a través de tu infraestructura.
 
 {{< img src="/network_device_monitoring/network_topology_map/network_topology_map_new_4.mp4" alt="Un usuario agrega etiquetas de equipo, servicio y proveedor al mapa de topología de dispositivos de red, luego selecciona un dispositivo para abrir la vista del dispositivo NDM." video="true" >}}
 
-## Configuración
+## Configuración {#setup}
 
 La versión 7.52 o posterior del Agente de Datadog recopila automáticamente datos de topología. No se requiere instalación adicional.
 
-### Requisitos previos
+### Requisitos previos {#prerequisites}
 
 1. Los dispositivos tienen habilitado LLDP (Protocolo de Descubrimiento de Capa de Enlace) y/o CDP (Protocolo de Descubrimiento de Cisco) con SNMP. Utiliza el mismo protocolo en los dispositivos conectados para que puedan descubrirse entre sí. LLDP es generalmente preferido ya que es una opción más común.
 2. La versión 7.52 o posterior del Agente de Datadog está instalada.
 
-## Opciones de navegación
+## Opciones de navegación {#navigation-options}
 
 En el Mapa de Topología de Red, están disponibles las siguientes opciones de navegación:
 
-### Agrupar por
+### Agrupar por {#group-by}
 
 Bajo Agrupar Por, utiliza **etiquetas** como `location` y `vendor` para seleccionar cómo deseas visualizar tus dispositivos:
 
 {{< img src="/network_device_monitoring/network_topology_map/device-topology-group_by_2.png" alt="Un control de Agrupar por que muestra etiquetas para ubicación y proveedor." style="width:90%;" >}}
 
-### Filtrar dispositivos
+### Filtrar dispositivos {#filter-devices}
 
 Selecciona el desplegable **+ Filtrar** para refinar qué dispositivos se muestran en el Mapa de Topología de Dispositivos.
 
@@ -50,7 +50,7 @@ Selecciona el desplegable **+ Filtrar** para refinar qué dispositivos se muestr
 
 **Nota:** La configuración de **Filtrar Dispositivos** determina qué dispositivos aparecen en el Mapa de Topología de Dispositivos para todas las consultas, incluyendo aquellas que filtran por un aspecto de dispositivo en la barra de búsqueda.
 
-### Recursos
+### Recursos {#resources}
 
 Utiliza el desplegable **Recurso** para filtrar el diagrama por tipos específicos de dispositivos, como Cortafuegos, Puntos de Acceso y Routers.
 
@@ -58,7 +58,7 @@ Utiliza el desplegable **Recurso** para filtrar el diagrama por tipos específic
 
 Por defecto, la opción **Dispositivo No Monitoreado** está desmarcada, lo que oculta dispositivos que no son monitoreados directamente por el Monitoreo de Dispositivos de Red, pero que son descubiertos a través de LLDP/CDP de dispositivos monitoreados adyacentes. Marca esta opción para mostrar estos dispositivos no monitoreados en el diagrama.
 
-## Investigando dispositivos
+## Investigando dispositivos {#investigating-devices}
 
 Además de mostrar una visión general de las conexiones físicas de tu red, el Mapa de Topología de Dispositivos te permite investigar dispositivos individuales para entender sus conexiones, flujos y estado general. Pasa el cursor sobre un dispositivo para ver su estado y métricas clave, o haz clic en un dispositivo para abrir la vista del dispositivo NDM con detalles como su dirección IP, etiquetas, rendimiento, CPU y memoria.
 
@@ -66,7 +66,7 @@ Mientras investigas un dispositivo, haz clic en el desplegable **Abrir Página d
 
 {{< img src="/network_device_monitoring/network_topology_map/network_topology_map_device_inspect_view_7.png" alt="El Mapa de Topología de Dispositivos de Red con un dispositivo seleccionado, mostrando información en la vista del dispositivo NDM." style="width:100%;" >}}
 
-### Dependencias
+### Dependencias {#dependencies}
 
 La sección de **Dependencias** en la vista del dispositivo NDM muestra el número de dispositivos físicamente conectados y túneles VPN de un vistazo, junto con un gráfico visual de dispositivos vecinos.
 
@@ -76,43 +76,43 @@ Haz clic en **Ver dependencias** para abrir la página completa del dispositivo.
 
 {{< img src="/network_device_monitoring/network_topology_map/ndm_summary_dependencies.png" alt="La pestaña de Dependencias en la página del dispositivo NDM con el filtro Físico seleccionado, mostrando un gráfico de topología y una tabla de dispositivos conectados con estado, dirección IP y detalles de la interfaz." style="width:100%;" >}}
 
-### Métricas
+### Métricas {#metrics}
 
 Haz clic en la pestaña **Métricas** en la vista del dispositivo NDM para ver métricas clave del dispositivo, incluyendo uso de CPU, uso de memoria y rendimiento. Las estadísticas resumidas se muestran en la parte superior, y cada métrica se presenta como un gráfico a lo largo del tiempo. Haz clic en **Ver todas las métricas** para explorar la lista completa de métricas recopiladas.
 
 {{< img src="/network_device_monitoring/network_topology_map/metrics_3.png" alt="La vista del dispositivo NDM con la pestaña Métricas abierta, mostrando gráficos de CPU, memoria y rendimiento." style="width:100%;" >}}
 
-### Tráfico
+### Tráfico {#traffic}
 
 Haz clic en la pestaña **Tráfico** para ver el rendimiento total, entrante y saliente del dispositivo. Un gráfico de tráfico muestra la actividad a lo largo del tiempo, y la tabla **Principales Conversaciones** lista los flujos de origen a destino de mayor volumen con tasa de bits, tasa de paquetes y total de bytes. Haz clic en **Ver tráfico** para investigar más en la página de resumen del dispositivo, y en [Monitoreo de NetFlow][1].
 
 {{< img src="/network_device_monitoring/network_topology_map/traffic_2.png" alt="La vista del dispositivo NDM con la pestaña Tráfico abierta, mostrando estadísticas de rendimiento, un gráfico de tráfico y una tabla de Principales Conversaciones." style="width:100%;" >}}
 
-### Eventos
+### Eventos {#events}
 
 Haz clic en la pestaña **Eventos** para ver mensajes de Syslog y trampas SNMP en una vista combinada. Utiliza filtros para reducir los resultados por tipo de evento. Los picos en el volumen de eventos se destacan visualmente, ayudándote a identificar e investigar errores.
 
 {{< img src="/network_device_monitoring/network_topology_map/events.png" alt="La vista del dispositivo NDM con la pestaña de Eventos abierta, mostrando mensajes de Syslog y trampas SNMP." style="width:100%;" >}}
 
-### Ver detalles del flujo
+### Ver detalles del flujo {#view-flow-details}
 
 Para explorar las fuentes, destinos y volumen del tráfico de un dispositivo, haz clic en el desplegable **Abrir Página del Dispositivo** y selecciona **Monitoreo de NetFlow**. Los datos se filtran automáticamente por el `@device.ip` del dispositivo. Para más información, consulta [Monitoreo de NetFlow][1].
 
 {{< img src="/network_device_monitoring/network_topology_map/netflow_tab_4.png" alt="La vista del dispositivo NDM con el desplegable Abrir Página del Dispositivo mostrando la opción de Monitoreo de NetFlow." style="width:100%;" >}}
 
-### Configuración del dispositivo
+### Configuración del dispositivo {#device-settings}
 
 Haz clic en el ícono **Configuración del Dispositivo** en la vista del dispositivo NDM para abrir el panel de Configuración del Dispositivo. La pestaña **Información** muestra detalles generales (nombre, espacio de nombres y descripción), detalles de red (dirección IP, subred y geolocalización) y detalles de hardware (modelo, proveedor, sistema operativo y versión). La pestaña **Etiquetas** te permite ver y gestionar las etiquetas asociadas con el dispositivo.
 
 {{< img src="/network_device_monitoring/network_topology_map/device_settings.png" alt="El panel de Configuración del Dispositivo para un dispositivo NDM, mostrando la pestaña de Información con detalles generales, de red y de hardware." style="width:90%;" >}}
 
-### Detalles del enlace
+### Detalles del enlace {#link-details}
 
 Haz clic en un enlace entre dispositivos para explorar detalles de conexión, incluyendo volumen de tráfico, utilización de ancho de banda, errores y descartes, con opciones para ver los datos en [Resumen del Dispositivo][10] o [Monitoreo de NetFlow][11].
 
 {{< img src="/network_device_monitoring/network_topology_map/link_details.mp4" alt="Un usuario haciendo clic en un enlace entre dispositivos para ver detalles adicionales del enlace." video="true" >}}
 
-### Leyenda de íconos
+### Leyenda de íconos {#icon-legend}
 
 Los dispositivos SNMP se emparejan con un ícono representativo basado en su tipo de dispositivo en cada nodo de dispositivo, según lo definido en sus [perfiles de dispositivo][4].
 
@@ -151,24 +151,24 @@ Los dispositivos SNMP se emparejan con un ícono representativo basado en su tip
   </tr>
 </table>
 
-## Solución de problemas
+## Solución de problemas {#troubleshooting}
 
 Si experimenta problemas al usar el Mapa de Topología de Red, utilice las siguientes pautas de solución de problemas. Si necesita más ayuda, comuníquese con [soporte de Datadog][5].
 
-### Mensaje de mapa vacío
+### Mensaje de mapa vacío {#empty-map-message}
 
 {{< img src="/network_device_monitoring/network_topology_map/no_devices_found.png" alt="El mensaje de no se encontraron dispositivos que se muestra cuando NDM no está configurado o debido a filtrado." style="width:80%;" >}}
 
 No hay dispositivos porque NDM no está configurado.
 
-### No se encontraron conexiones / No hay dispositivos conectados para mostrar.
+### No se encontraron conexiones / No hay dispositivos conectados para mostrar. {#no-connections-found-no-connected-devices-to-show}
 
 {{< img src="/network_device_monitoring/network_topology_map/no_connections_found.png" alt="El mensaje de no se encontraron dispositivos que se muestra cuando NDM no está configurado o debido a filtrado." style="width:80%;" >}}
 
 - Activa la selección de **Dispositivo No Monitoreado** para mostrar los dispositivos no monitoreados.
 - Utiliza la etiqueta de categorización para ayudar a entender tu vista del mapa con la jerarquía de información.
 
-### Dispositivos/conexiones faltantes.
+### Dispositivos/conexiones faltantes. {#missing-devicesconnections}
 
 Los datos del Mapa de Topología de Dispositivos se basan en la información de LLDP (Protocolo de Descubrimiento de Capa de Enlace) y CDP (Protocolo de Descubrimiento de Cisco) recopilada con SNMP. Si tu mapa carece de dispositivos y/o conexiones, verifica lo siguiente:
 
@@ -187,34 +187,34 @@ Para datos de CDP:
 sudo -u dd-agent datadog-agent snmp walk <DEVICE_IP> 1.3.6.1.4.1.9.9.23
 ```
 
-### Conexiones o enlaces faltantes.
+### Conexiones o enlaces faltantes. {#missing-connections-or-links}
 
 Si tu dispositivo está exponiendo datos de topología con LLDP o CDP pero algunas de las conexiones faltan, verifica que la selección de **Dispositivo No Monitoreado** esté desactivada.
 
-### Dispositivos no monitoreados que se muestran en el mapa.
+### Dispositivos no monitoreados que se muestran en el mapa. {#unmonitored-devices-showing-on-map}
 
 El Mapa de Topología de Dispositivos muestra todos los dispositivos descubiertos con LLDP o CDP. Estos pueden ser nuevos dispositivos que no están ya monitoreados con SNMP o dispositivos existentes que no fueron [resueltos](#device-resolution) al dispositivo monitoreado equivalente.
 Puedes usar la selección de **Dispositivo No Monitoreado** para ocultar estos nodos.
 
-### Dispositivo duplicado en el mapa
+### Dispositivo duplicado en el mapa {#device-duplicated-on-map}
 
 El Mapa de Topología de Dispositivos muestra todos los dispositivos descubiertos con LLDP y/o CDP. En algunos casos, estos dispositivos ya están siendo monitoreados con SNMP pero no pueden ser [resueltos](#device-resolution) al dispositivo monitoreado equivalente. En este caso, el dispositivo se muestra dos veces: un nodo representando el dispositivo monitoreado y un nodo representando el dispositivo descubierto por LLDP/CDP.
 Utilice la selección de **Dispositivo No Monitoreado** para ocultar los nodos no monitoreados.
 
-### Nodos sin borde o negros en el mapa
+### Nodos sin borde o negros en el mapa {#borderless-or-black-nodes-on-the-map}
 
 Los nodos sin borde o negros en el Mapa de Topología de Dispositivos pueden representar dispositivos descubiertos con LLDP o CDP que no están configurados para ser monitoreados con NDM, o dispositivos descubiertos con LLDP o CDP que no pueden ser resueltos al [dispositivo monitoreado](#device-resolution) equivalente.
 
-## Resolución de dispositivos
+## Resolución de dispositivos {#device-resolution}
 
 El Mapa de Topología de Dispositivos proporciona una visión general de los dispositivos monitoreados con NDM y sus conexiones físicas. Los enlaces de topología se basan en la información de LLDP (Protocolo de Descubrimiento de Capa de Enlace) o CDP (Protocolo de Descubrimiento de Cisco) recopilada con SNMP.
 Las conexiones descubiertas con LLDP o CDP pueden corresponder a dispositivos ya monitoreados con SNMP. La resolución de dispositivos consiste en emparejar el dispositivo descubierto con el dispositivo monitoreado.
 
-### Fallos en la resolución de dispositivos
+### Fallos en la resolución de dispositivos {#device-resolution-failures}
 
 La resolución de dispositivos puede fallar si el dispositivo no está monitoreado con NDM, o si los datos de LLDP o CDP son insuficientes para emparejar el dispositivo descubierto con el dispositivo monitoreado.
 
-## Próximos pasos
+## Próximos pasos {#next-steps}
 
 NDM proporciona múltiples herramientas de visualización para monitorear su infraestructura:
 
@@ -222,7 +222,7 @@ NDM proporciona múltiples herramientas de visualización para monitorear su inf
 - **[Resumen de Dispositivos][10]**: Acceda a métricas detalladas y datos de rendimiento para dispositivos individuales.
 - **[Monitoreo de NetFlow][1]**: Analice los flujos de tráfico y la utilización del ancho de banda en su red.
 
-## Lectura Adicional
+## Lectura Adicional {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

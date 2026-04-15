@@ -37,7 +37,7 @@ further_reading:
   text: Logging Without Limits*
 title: Collecte de logs et intégrations
 ---
-## Aperçu
+## Aperçu {#overview}
 
 Choisissez une option de configuration ci-dessous pour commencer à ingérer vos journaux. Si vous utilisez déjà un démon de transfert de journaux, consultez la documentation dédiée pour [Rsyslog][1], [Syslog-ng][2], [NXlog][3], [FluentD][4] ou [Logstash][5].
 
@@ -45,7 +45,7 @@ Consultez la [liste des points de collecte de journaux disponibles de Datadog](#
 
 **Remarque** : Lors de l'envoi de journaux au format JSON à Datadog, il existe un ensemble d'attributs réservés qui ont une signification spécifique au sein de Datadog. Consultez la [section des Attributs Réservés](#attributes-and-tags) pour en savoir plus.
 
-## Implémentation
+## Implémentation {#setup}
 
 {{< tabs >}}
 {{% tab "Host" %}}
@@ -113,7 +113,7 @@ Les intégrations Datadog et la collecte de journaux sont liées. Vous pouvez ut
 1. Sélectionnez une intégration depuis la [page des intégrations][6] et suivez les instructions de configuration.
 2. Suivez les instructions de collecte des journaux de l'intégration. Cette section explique comment décommenter la section des journaux dans le fichier `conf.yaml` de cette intégration et le configurer pour votre environnement.
 
-## Réduire les frais de transfert de données
+## Réduire les frais de transfert de données {#reduce-data-transfer-fees}
 
 Utilisez le [Monitoring Réseau Cloud][7] de Datadog pour identifier les applications à plus haut débit de votre organisation. Connectez-vous à Datadog via des connexions privées prises en charge et envoyez des données sur un réseau privé pour éviter Internet public et réduire vos frais de transfert de données. Après avoir basculé vers des liens privés, utilisez les outils de [Gestion des Coûts Cloud][8] de Datadog pour vérifier l'impact et surveiller la réduction de vos coûts cloud.
 
@@ -142,13 +142,13 @@ Pour apprendre comment soumettre des journaux depuis votre vérification d'Agent
 {{% /tab %}}
 {{< /tabs >}}
 
-## Options de configuration supplémentaires
+## Options de configuration supplémentaires {#additional-configuration-options}
 
-### Points de terminaison de journalisation
+### Points de terminaison de journalisation {#logging-endpoints}
 
 Datadog fournit des points de terminaison de journalisation pour les connexions SSL chiffrées et non chiffrées. Utilisez le point de terminaison chiffré lorsque cela est possible. L'Agent Datadog utilise le point de terminaison chiffré pour envoyer des journaux à Datadog. Plus d'informations sont disponibles dans la [documentation de sécurité de Datadog][6].
 
-#### Endpoints pris en charge
+#### Endpoints pris en charge {#supported-endpoints}
 
 Utilisez le menu déroulant situé à droite de la page pour sélectionner votre [site][13] Datadog et afficher les endpoints qu'il prend en charge.
 
@@ -159,7 +159,7 @@ Utilisez le menu déroulant situé à droite de la page pour sélectionner votre
 | {{< region-param key=dd_datacenter >}} | HTTPS | <code>{{< region-param key=lambda_http_endpoint >}}</code> | 443 | Utilisé par les fonctions Lambda pour envoyer des journaux au format brut, Syslog ou JSON via HTTPS. |
 | {{< region-param key=dd_datacenter >}} | HTTPS | <code>logs.{{< region-param key=browser_sdk_endpoint_domain >}}</code> | 443 | Utilisé par le SDK du Navigateur pour envoyer des journaux au format JSON via HTTPS. |
 
-### Transfert de journaux personnalisé
+### Transfert de journaux personnalisé {#custom-log-forwarding}
 
 Tout processus ou bibliothèque de journalisation personnalisée capable de transférer des journaux via **HTTP** peut être utilisé en conjonction avec Datadog Logs.
 
@@ -198,11 +198,11 @@ Il existe une troncature supplémentaire dans les champs qui s'applique uniqueme
 
 {{% /collapse-content %}}
 
-### Attributs et étiquettes
+### Attributs et étiquettes {#attributes-and-tags}
 
 Les attributs prescrivent [les facettes des journaux][9], qui sont utilisés pour le filtrage et la recherche dans l'Explorateur de journaux. Consultez la documentation dédiée [aux attributs et à l'aliasing][10] pour une liste des attributs réservés et standard et pour apprendre à soutenir une convention de nommage avec les attributs de journaux et l'aliasing.
 
-#### Attributs pour les stack traces
+#### Attributs pour les stack traces {#attributes-for-stack-traces}
 
 Lorsque vous enregistrez des traces de pile, des attributs spécifiques disposent d'un affichage de l'interface utilisateur dédié au sein de votre application Datadog, comme le nom du logger, le thread actuel, le type d'erreur et la trace de pile.
 
@@ -222,13 +222,13 @@ Pour activer ces fonctionnalités, utilisez les noms d'attribut suivants :
 
 Pour en savoir plus, consultez la [documentation relative aux attributs de code source][11].
 
-## Étapes suivantes
+## Étapes suivantes {#next-steps}
 
 Une fois les journaux collectés et ingérés, ils sont disponibles dans **Log Explorer**. Log Explorer est l'endroit où vous pouvez rechercher, enrichir et visualiser des alertes sur vos journaux. Consultez la documentation de [Log Explorer][12] pour commencer à analyser vos données de journal, ou consultez la documentation supplémentaire sur la gestion des journaux ci-dessous.
 
 {{< img src="logs/explore.png" alt="Journaux apparaissant dans le Log Explorer" style="width:100%" >}}
 
-## Lectures supplémentaires
+## Lectures supplémentaires {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 <br>
