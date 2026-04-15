@@ -83,6 +83,7 @@ The Datadog MCP Server supports _toolsets_, which allow you to use only the tool
 - `security`: Tools for code security scanning and searching [security signals][33] and [security findings][34]
 - `software-delivery`: Tools for interacting with Software Delivery ([CI Visibility][21] and [Test Optimization][24])
 - `synthetics`: Tools for interacting with Datadog [Synthetic tests][20]
+- `widgets`: Tools for dashboard and notebook widget visualization, validation, and type conversion
 - `workflows`: Tools for [Workflow Automation][39], including listing, inspecting, executing, and configuring workflows for agent use
 
 To use a toolset, include the `toolsets` query parameter in the endpoint URL when connecting to the MCP Server ([remote authentication][27] only). Use `toolsets=all` to enable all generally available toolsets at once.
@@ -997,6 +998,31 @@ Adds an agent trigger to a workflow and publishes it, enabling the workflow to b
 
 - Add an agent trigger to the deployment rollback workflow so I can run it from here.
 - Configure the incident response workflow to be triggerable by an agent.
+
+### `get_widget`
+*Toolset: **widgets***\
+*Permissions Required: `Dashboards Read` or `Timeseries Query` or `Monitors Read` or `APM Read` or `RUM Apps Read` (OR logic — any one permission grants access)*\
+Retrieves and visualizes Datadog metrics, traces, logs, and other data as interactive charts. Supports three modes: dashboard lookup (provide a dashboard ID and widget ID), direct definition (provide a widget definition object), or URL (provide a Datadog share link or dashboard link with a focused widget). Returns formatted data with a sandbox URL for viewing the widget in Datadog.
+
+- Show the CPU usage timeseries for `service:api` over the last hour.
+- Fetch the widget data for widget `2228368921512806` on dashboard `abc-123-def`.
+- Visualize the data from this Datadog share link: `https://app.datadoghq.com/s/yB5yjZ/h7d-srf-vm4`.
+
+### `swap_widget_type`
+*Toolset: **widgets***\
+*Permissions Required: `Dashboards Read` or `Dashboards Write` or `Notebooks Read` or `Notebooks Write`*\
+Converts a widget definition from one visualization type to another while preserving queries. Supports formula-request-based widget types: timeseries, query_value, toplist, query_table, treemap, sunburst, distribution, heatmap, geomap, and list_stream.
+
+- Convert this timeseries widget to a toplist.
+- Change the query table widget to a treemap visualization.
+
+### `validate_notebook_cell`
+*Toolset: **widgets***\
+*Permissions Required: `Timeseries Query`*\
+Validates one or more notebook cell widget definitions, including SQL correctness for analysis_sql cells. When validating an analysis_sql cell, include its upstream data-source widgets so the endpoint can check SQL expressions against their schemas.
+
+- Validate these notebook cell definitions before saving.
+- Check if the analysis SQL cell references valid columns from the upstream widget.
 
 ## Context efficiency
 
