@@ -418,15 +418,15 @@ For example, based on your selected [Datadog site][17] ({{< region-param key="dd
 [17]: /getting_started/site/#navigate-the-datadog-documentation-by-site
 {{< /site-region >}}
 
-These toolsets are available:
+### Available toolsets
+
+These toolsets are generally available:
 
 - `core`: The default toolset for logs, metrics, traces, dashboards, monitors, incidents, hosts, services, events, and notebooks
 - `alerting`: Tools for validating and creating monitors, searching monitor groups, retrieving monitor templates, analyzing monitor coverage, and searching SLOs
-- `apm`: ([Preview][45]) Tools for in-depth [APM][34] trace analysis, span search, Watchdog insights, and performance investigation
 - `cases`: Tools for [Case Management][42], including creating, searching, and updating cases; managing projects; and linking Jira issues
 - `dashboards`: Tools for retrieving, creating, updating, and deleting [dashboards][46], plus widget schema reference and validation
 - `dbm`: Tools for interacting with [Database Monitoring][33]
-- `ddsql`: (Preview) Tools for querying Datadog data using [DDSQL][44], a SQL dialect with support for infrastructure resources, logs, metrics, RUM, spans, and other Datadog data sources
 - `error-tracking`: Tools for interacting with Datadog [Error Tracking][32]
 - `feature-flags`: Tools for managing [feature flags][35], including creating, listing, and updating flags and their environments
 - `llmobs`: Tools for searching and analyzing [LLM Observability][36] spans and experiments
@@ -437,6 +437,12 @@ These toolsets are available:
 - `software-delivery`: Tools for interacting with Software Delivery ([CI Visibility][30] and [Test Optimization][31])
 - `synthetics`: Tools for interacting with Datadog [Synthetic tests][29]
 - `workflows`: Tools for [Workflow Automation][43], including listing, inspecting, executing, and configuring workflows for agent use
+
+### Preview toolsets
+
+These toolsets are in Preview. Sign up by completing the Product Preview form or contact [Datadog support][47] to request access.
+- `apm`: ([Sign up][45]) Tools for in-depth [APM][34] trace analysis, span search, Watchdog insights, and performance investigation
+- `ddsql`: ([Request access][47]) Tools for querying Datadog data using [DDSQL][44], a SQL dialect with support for infrastructure resources, logs, metrics, RUM, spans, and other Datadog data sources
 
 ## Supported clients
 
@@ -605,3 +611,4 @@ Local authentication is recommended for Cline and when remote authentication is 
 [44]: /ddsql_editor/
 [45]: https://www.datadoghq.com/product-preview/apm-mcp-toolset/
 [46]: /dashboards/
+[47]: /help/
