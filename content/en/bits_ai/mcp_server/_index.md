@@ -67,7 +67,7 @@ Both metrics are tagged with `user_id`, `user_email`, and `client` (the MCP clie
 
 ## Available tools
 
-See [Datadog MCP Server Tools][2] for a complete reference of available tools organized by toolset, with example prompts.
+See [Datadog MCP Server Tools][2] for a complete reference of available tools organized by toolset, with example prompts. To enable specific toolsets, see [Set Up the Datadog MCP Server][28] for instructions.
 
 ## Context efficiency
 
@@ -93,4 +93,5 @@ The Datadog MCP Server is under significant development. Use [this feedback form
 [16]: /account_management/audit_trail/
 [19]: https://docs.google.com/forms/d/e/1FAIpQLSeorvIrML3F4v74Zm5IIaQ_DyCMGqquIp7hXcycnCafx4htcg/viewform
 [27]: /bits_ai/mcp_server/setup
+[28]: /bits_ai/mcp_server/setup#toolsets
 [37]: https://help.datadoghq.com/hc/en-us/requests/new
