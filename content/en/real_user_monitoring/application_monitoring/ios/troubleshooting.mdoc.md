@@ -1,5 +1,5 @@
 ---
-title: Troubleshooting iOS SDK issues
+title: Troubleshooting iOS SDK Issues
 description: Learn how to troubleshoot issues with iOS Monitoring.
 aliases:
   - /real_user_monitoring/mobile_and_tv_monitoring/troubleshooting/ios/

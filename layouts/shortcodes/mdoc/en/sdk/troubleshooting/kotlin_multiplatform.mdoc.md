@@ -3,8 +3,6 @@ This partial contains troubleshooting content for the Kotlin Multiplatform SDK.
 It can be included in the Kotlin Multiplatform SDK troubleshooting page or in the unified client_sdks view.
 -->
 
-## Overview
-
 If you experience unexpected behavior with the Datadog Kotlin Multiplatform SDK, use this guide to resolve issues. If you continue to have trouble, contact [Datadog Support][1] for further assistance.
 
 ## Check if Datadog RUM is initialized

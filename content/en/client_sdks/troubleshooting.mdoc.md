@@ -40,9 +40,10 @@ Use the resources below to resolve common issues with the Datadog SDK for your p
 {% partial file="sdk/troubleshooting/kotlin_multiplatform.mdoc.md" /%}
 {% /if %}
 
-<!-- Roku: excluded for now — no troubleshooting content yet.
-     Uses existing client_sdk_platform_options group (no new option group needed).
-     Roku users will see only the Overview paragraph until content is added. -->
+<!-- Roku -->
+{% if equals($platform, "roku") %}
+{% partial file="sdk/troubleshooting/roku.mdoc.md" /%}
+{% /if %}
 
 <!-- Unity -->
 {% if equals($platform, "unity") %}

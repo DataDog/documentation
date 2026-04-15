@@ -1,5 +1,5 @@
 ---
-title: Troubleshooting Android SDK issues
+title: Troubleshooting Android SDK Issues
 description: Learn how to troubleshoot issues with Android Monitoring.
 aliases:
 - /real_user_monitoring/mobile_and_tv_monitoring/troubleshooting/android
