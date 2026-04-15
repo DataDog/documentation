@@ -964,6 +964,13 @@
       "description": "Update incident notification template returns \"OK\" response"
     }
   ],
+  "CreatePersonalAccessToken": [
+    {
+      "group": "key_management",
+      "suffix": "",
+      "description": "Create a personal access token returns \"Created\" response"
+    }
+  ],
   "CreateAPIKey": [
     {
       "group": "key_management",
@@ -1002,6 +1009,13 @@
       "group": "key_management",
       "suffix": "",
       "description": "Edit an application key returns \"OK\" response"
+    }
+  ],
+  "UpdatePersonalAccessToken": [
+    {
+      "group": "key_management",
+      "suffix": "",
+      "description": "Update a personal access token returns \"OK\" response"
     }
   ],
   "AggregateLogs": [
@@ -2079,6 +2093,13 @@
       "description": "Create a service account returns \"OK\" response"
     }
   ],
+  "CreateServiceAccountAccessToken": [
+    {
+      "group": "service_accounts",
+      "suffix": "",
+      "description": "Create an access token for a service account returns \"Created\" response"
+    }
+  ],
   "CreateServiceAccountApplicationKey": [
     {
       "group": "service_accounts",
@@ -2096,6 +2117,13 @@
       "group": "service_accounts",
       "suffix": "",
       "description": "Edit an application key for this service account returns \"OK\" response"
+    }
+  ],
+  "UpdateServiceAccountAccessToken": [
+    {
+      "group": "service_accounts",
+      "suffix": "",
+      "description": "Update an access token for a service account returns \"OK\" response"
     }
   ],
   "CreateOrUpdateServiceDefinitions": [
