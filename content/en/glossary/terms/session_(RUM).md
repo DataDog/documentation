@@ -1,4 +1,5 @@
 ---
+id: session_rum
 title: session
 core_product:
   - real user monitoring
