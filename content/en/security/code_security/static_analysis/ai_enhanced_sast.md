@@ -136,29 +136,12 @@ Both methods operate as complementary components. The static analyzer continues 
 
 ### False positive filtering
 
-For a subset of SAST vulnerabilities, [Bits AI][9] reviews the context of the finding and assesses whether it is more likely to be a true or false positive, along with a short explanation of the reasoning.
+[Bits AI][9] reviews the context of each SAST finding and assesses whether it is more likely to be a true or false positive, along with a short explanation of the reasoning.
 
 To narrow down your initial list for triage, in [Vulnerabilities][6], select **Filter out false positives**. This option uses the `-bitsAssessment:"False Positive"` query.
 
 Each finding includes a section with an explanation of the assessment. You can provide Bits AI with feedback on its assessment using a thumbs up &#128077; or thumbs down &#128078;.
 {{< img src="/code_security/static_analysis/false_positive_filtering_sast_side_panel_higher_res_png.png" alt="Visual indicator of a false positive assessment in SAST side panel" style="width:100%;">}}
-
-{{% collapse-content title="Supported CWEs" level="h4" expanded=true id="id-for-anchoring" %}}
-False positive filtering is supported for the following CWEs:
-
-- [CWE-89: SQL Injection](https://cwe.mitre.org/data/definitions/89.html)
-- [CWE-78: OS Command Injection](https://cwe.mitre.org/data/definitions/78.html)
-- [CWE-90: LDAP Injection](https://cwe.mitre.org/data/definitions/90.html)
-- [CWE-22: Path Traversal](https://cwe.mitre.org/data/definitions/22.html)
-- [CWE-501: Trust Boundary Violation](https://cwe.mitre.org/data/definitions/501.html)
-- [CWE-79: Cross-site Scripting](https://cwe.mitre.org/data/definitions/79.html)
-- [CWE-614: Insecure Cookie](https://cwe.mitre.org/data/definitions/614.html)
-- [CWE-327: Broken or Risky Cryptographic Algorithm](https://cwe.mitre.org/data/definitions/327.html)
-- [CWE-643: XPath Injection](https://cwe.mitre.org/data/definitions/643.html)
-- [CWE-94: Code Injection](https://cwe.mitre.org/data/definitions/94.html)
-- [CWE-284: Improper Access Control](https://cwe.mitre.org/data/definitions/284.html)
-- [CWE-502: Deserialization of Untrusted Data](https://cwe.mitre.org/data/definitions/502.html)
-  {{% /collapse-content %}}
 
 ## Remediation
 

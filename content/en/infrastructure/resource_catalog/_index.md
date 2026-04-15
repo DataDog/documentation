@@ -58,9 +58,10 @@ By default, when you navigate to the Resource Catalog, you are able to see Datad
 
 {{< img src="/infrastructure/resource_catalog/resource_catalog_settings.png" alt="The Resource Catalog configuration page for extending resource collection" width="100%">}}
 
-<div class="alert alert-warning">Enabling resource collection can impact your AWS CloudWatch costs. To avoid these charges, disable <strong>Usage</strong> metrics in the <strong>Metric Collection</strong> tab of the <a href="https://app.datadoghq.com/integrations/amazon-web-services">Datadog AWS Integration</a>.<br/>
+<div class="alert alert-warning">Enabling resource collection can impact your AWS CloudWatch costs. To avoid these charges, disable <strong>Usage</strong> metrics in the <strong>Metric Collection</strong> tab of the <a href="https://app.datadoghq.com/integrations/amazon-web-services">Datadog AWS Integration</a>.
+</div>
 
-{{< img src="/infrastructure/resource_catalog/aws_usage_toggle.png" alt="AWS Usage toggle in account settings" style="width:100%;" >}}</div>
+{{< img src="/infrastructure/resource_catalog/aws_usage_toggle.png" alt="AWS Usage toggle in account settings" style="width:100%;" >}}
 
 ## Browse the Resource Catalog
 
@@ -82,21 +83,29 @@ To access the relevant cloud console for any resource in your list, click on a r
 
 Clicking on a host opens a side panel with details including:
 
-- **Host information** such as the name, account, OS, instance type, tags, and metadata associated with the resource
-- **Telemetry** including metrics, logs, traces, processes, and so on
-- **Active monitor alerts** and enabled monitors status on the host
-- **Agent configuration** information
+- **Host information** such as the name, account, OS, instance type, tags, and metadata associated with the host
+- **Host Summary** which displays active monitor alerts and enabled products
+- **Telemetry** including metrics, logs, traces, and processes
+- **Containers** which displays metrics for containers attached to the host
+- **Infra map** which displays a [Cloudcraft diagram][17]
+- **Relationships** which displays an interactive map of connections to other resources
+- **Profiles** correlated with the host (requires [Profiler][20])
+- **Network** information, which can be filtered by tags and displayed in customizable graphs
+- **Changes** showing a customizable history of changes to the host
+- **Security** which displays general misconfigurations, [IaC misconfigurations][21], signals, vulnerabilities, identity risks, and access insights
+- **Cost** which includes recommendations to reduce the host's costs
+- **Agent** which displays your Agent configuration in JSON format
+- **OTel Collector** which displays your OpenTelemetry Collector configuration (in Preview)
 
-{{< img src="/infrastructure/resource_catalog/resource_catalog_host_side_panel.png" alt="Resource Catalog with the host side panel open" width="100%">}}
+{{< img src="/infrastructure/resource_catalog/resource_catalog_host_side_panel-2.png" alt="Resource Catalog with the host side panel open" width="100%">}}
 
 Clicking on any resource opens a side panel with details including:
 
-- **Resource information** such as the resource type, name, account, and tags associated with the resource.
-- **Resource definition** in JSON showing the full configuration of the asset.
-- **Recent Changes** showing a 7-day history of changes to the resource
-- **Relationship** view showing interdependencies between resources
-- **Service and team ownership** of the resource
-- **Security risks** that the resource is exposed to, including misconfigurations, signals, identity risks, and vulnerabilities
+- **Resource Info** including resource-specific tags and the resource's definition in JSON format
+- **Telemetry** including metrics and logs
+- **Relationships** which displays an interactive map of connections to other resources
+- **Changes** showing a history of changes to the resource
+- **Security** which displays misconfigurations, signals, vulnerabilities, and identity risks
 
 ## Resource Changes (in Preview)
 
@@ -131,3 +140,8 @@ For more information, see [Resource Changes][16].
 [14]: https://app.datadoghq.com/integrations/azure
 [15]: https://docs.datadoghq.com/infrastructure/resource_catalog/schema/
 [16]: /infrastructure/resource_catalog/resource_changes/
+[17]: /datadog_cloudcraft/
+[18]: /integrations/ntp/
+[19]: /infrastructure/process/?tab=linuxwindows#installation
+[20]: /profiler/enabling/
+[21]: /security/code_security/iac_security/

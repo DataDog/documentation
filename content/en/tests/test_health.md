@@ -17,6 +17,9 @@ further_reading:
 - link: "pr_gates"
   tag: "Documentation"
   text: "Learn about PR Gates"
+- link: "https://learn.datadoghq.com/courses/getting-started-test-optimization"
+  tag: "Learning Center"
+  text: "Getting Started with Test Optimization"
 ---
 
 ## Overview

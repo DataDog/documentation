@@ -22,6 +22,7 @@ Datadog provides the below out-of-the-box metrics for a comprehensive overview o
 - The **Default** cardinality set in the table below includes the following dimensions: environment, app name, app ID, app version, service, OS name, OS version, browser name, and country.
 - All queries for the below metrics include `@session.type:user`.
 - If you need performance metrics beyond the ones listed below, you can create [custom metrics][2] from your RUM events. Both OOTB and custom metrics are computed based on 100% of the traffic ingested.
+- Some metrics are captured when a session or view is first detected. Others are captured when it becomes inactive. Comparing these metrics over short time windows can produce unexpected ratios. See [When metrics are computed](#when-metrics-are-computed).
 
 | Metric Name | Description | Dimensions | Platform |
 |-------------|-------------|------------|----------|
@@ -55,6 +56,19 @@ Datadog provides the below out-of-the-box metrics for a comprehensive overview o
 | `rum.measure.view.refresh_rate` | Average of user's refresh rate (FPS) | Default, Percentiles breakdown | Mobile only |
 | `rum.measure.view.slow_rendered` | Count of slow rendered views | Default | Mobile only |
 | `rum.measure.view.time_spent` | Time spent on the current view | Default | Mobile & Browser |
+
+## When metrics are computed
+
+Metrics are captured at different points in a session or view life cycle:
+
+- **On detection**: `rum.measure.session` and `rum.measure.view` are captured when a session or view is first detected.
+- **On inactivity**: Metrics such as `rum.measure.session.inactive`, `rum.measure.session.crash_free`, `rum.measure.view.inactive`, and `rum.measure.view.crash_free` are captured when a session or view becomes inactive (that is, when the session or view ends).
+
+Because a session or view that starts in one time window can end in a different time window, comparing on-detection metrics with on-inactivity metrics over short time windows can produce unexpected results, including ratio values above 100%.
+
+For example, if many sessions from the previous day are still active and end during the current day, the number of inactive sessions counted today can exceed the number of sessions that started today. This means a ratio like crash-free session rate (`rum.measure.session.crash_free` / `rum.measure.session`) can legitimately return a value above 100%—this is expected behavior.
+
+**Recommendation**: When computing ratios that combine on-detection and on-inactivity metrics, use a time window large enough to capture both the start and end of most sessions (for example, one week or more).
 
 ## API
 

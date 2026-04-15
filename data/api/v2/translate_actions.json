@@ -432,6 +432,20 @@
     "request_description": "",
     "request_schema_description": "Request to update an AuthN Mapping."
   },
+  "ListInvestigations": {
+    "description": "List all Bits AI investigations for the organization.",
+    "summary": "List Bits AI investigations"
+  },
+  "TriggerInvestigation": {
+    "description": "Trigger a new Bits AI investigation based on a monitor alert.",
+    "summary": "Trigger a Bits AI investigation",
+    "request_description": "Trigger investigation request body.",
+    "request_schema_description": "Request to trigger a new investigation."
+  },
+  "GetInvestigation": {
+    "description": "Get a specific Bits AI investigation by ID.",
+    "summary": "Get a Bits AI investigation"
+  },
   "SearchCases": {
     "description": "Search cases.",
     "summary": "Search cases"
@@ -724,6 +738,18 @@
     "summary": "Search pipelines events",
     "request_description": "",
     "request_schema_description": "The request for a pipelines search."
+  },
+  "UpdateFlakyTestsManagementPolicies": {
+    "description": "Partially update Flaky Tests Management repository-level policies for the given repository.\nOnly provided policy blocks are updated; omitted blocks are left unchanged.",
+    "summary": "Update Flaky Tests Management policies",
+    "request_description": "",
+    "request_schema_description": "Request object for updating Flaky Tests Management policies."
+  },
+  "GetFlakyTestsManagementPolicies": {
+    "description": "Retrieve Flaky Tests Management repository-level policies for the given repository.",
+    "summary": "Get Flaky Tests Management policies",
+    "request_description": "",
+    "request_schema_description": "Request object for getting Flaky Tests Management policies."
   },
   "DeleteTestOptimizationServiceSettings": {
     "description": "Delete Test Optimization settings for a specific service identified by repository, service name, and environment.",
@@ -1047,6 +1073,26 @@
     "summary": "Update items of a dashboard list",
     "request_description": "New dashboards of the dashboard list.",
     "request_schema_description": "Request containing the list of dashboards to update to."
+  },
+  "CreateDashboardSecureEmbed": {
+    "description": "Create a secure embed share for a dashboard. The response includes a one-time `credential` used for HMAC-SHA256 signing. Store it securely — it cannot be retrieved again.",
+    "summary": "Create a secure embed for a dashboard",
+    "request_description": "Secure embed creation request body.",
+    "request_schema_description": "Request to create a secure embed shared dashboard."
+  },
+  "DeleteDashboardSecureEmbed": {
+    "description": "Delete a secure embed share for a dashboard.",
+    "summary": "Delete a secure embed for a dashboard"
+  },
+  "GetDashboardSecureEmbed": {
+    "description": "Retrieve an existing secure embed configuration for a dashboard.",
+    "summary": "Get a secure embed for a dashboard"
+  },
+  "UpdateDashboardSecureEmbed": {
+    "description": "Partially update a secure embed configuration. All fields are optional (PATCH semantics).",
+    "summary": "Update a secure embed for a dashboard",
+    "request_description": "Secure embed update request body.",
+    "request_schema_description": "Request to update a secure embed shared dashboard."
   },
   "GetAllDatasets": {
     "description": "Get all datasets that have been configured for an organization.",
@@ -2105,6 +2151,42 @@
     "request_description": "",
     "request_schema_description": "Update the IP allowlist."
   },
+  "ListLLMObsAnnotationQueues": {
+    "description": "List annotation queues. Optionally filter by project ID or queue IDs. These parameters are mutually exclusive.\nIf neither is provided, all queues in the organization are returned.",
+    "summary": "List LLM Observability annotation queues"
+  },
+  "CreateLLMObsAnnotationQueue": {
+    "description": "Create a new annotation queue. Only `name`, `project_id`, and `description` are accepted.\nFields such as `created_by`, `owned_by`, `created_at`, `modified_by`, and `modified_at` are inferred by the backend.",
+    "summary": "Create an LLM Observability annotation queue",
+    "request_description": "Create annotation queue payload.",
+    "request_schema_description": "Request to create an LLM Observability annotation queue."
+  },
+  "DeleteLLMObsAnnotationQueue": {
+    "description": "Delete an annotation queue by its ID.",
+    "summary": "Delete an LLM Observability annotation queue"
+  },
+  "UpdateLLMObsAnnotationQueue": {
+    "description": "Partially update an annotation queue. Only `name` and `description` can be updated.",
+    "summary": "Update an LLM Observability annotation queue",
+    "request_description": "Update annotation queue payload.",
+    "request_schema_description": "Request to update an LLM Observability annotation queue."
+  },
+  "GetLLMObsAnnotatedInteractions": {
+    "description": "Retrieve all interactions and their annotations for a given annotation queue.",
+    "summary": "Get annotated queue interactions"
+  },
+  "CreateLLMObsAnnotationQueueInteractions": {
+    "description": "Add one or more interactions (traces) to an annotation queue.\nAt least one interaction must be provided.",
+    "summary": "Add annotation queue interactions",
+    "request_description": "Add interactions payload.",
+    "request_schema_description": "Request to add interactions to an LLM Observability annotation queue."
+  },
+  "DeleteLLMObsAnnotationQueueInteractions": {
+    "description": "Delete one or more interactions from an annotation queue.",
+    "summary": "Delete annotation queue interactions",
+    "request_description": "Delete interactions payload.",
+    "request_schema_description": "Request to delete interactions from an LLM Observability annotation queue."
+  },
   "ListLLMObsExperiments": {
     "description": "List all LLM Observability experiments sorted by creation date, newest first.",
     "summary": "List LLM Observability experiments"
@@ -2743,9 +2825,121 @@
     "request_description": "",
     "request_schema_description": "Request to update an org connection."
   },
+  "ListOrgGroupMemberships": {
+    "description": "List organization group memberships. Filter by org group ID or org UUID. At least one of `filter[org_group_id]` or `filter[org_uuid]` must be provided. When filtering by org UUID, returns a single-item list with the membership for that org.",
+    "summary": "List org group memberships"
+  },
+  "BulkUpdateOrgGroupMemberships": {
+    "description": "Move a batch of organizations from one org group to another. This is an atomic operation. Maximum 100 orgs per request.",
+    "summary": "Bulk update org group memberships",
+    "request_description": "",
+    "request_schema_description": "Request to bulk update org group memberships."
+  },
+  "GetOrgGroupMembership": {
+    "description": "Get a specific organization group membership by its ID.",
+    "summary": "Get an org group membership"
+  },
+  "UpdateOrgGroupMembership": {
+    "description": "Move an organization to a different org group by updating its membership.",
+    "summary": "Update an org group membership",
+    "request_description": "",
+    "request_schema_description": "Request to update an org group membership."
+  },
+  "ListOrgGroupPolicies": {
+    "description": "List policies for an organization group. Requires a filter on org group ID.",
+    "summary": "List org group policies"
+  },
+  "CreateOrgGroupPolicy": {
+    "description": "Create a new policy for an organization group.",
+    "summary": "Create an org group policy",
+    "request_description": "",
+    "request_schema_description": "Request to create an org group policy."
+  },
+  "DeleteOrgGroupPolicy": {
+    "description": "Delete an organization group policy by its ID.",
+    "summary": "Delete an org group policy"
+  },
+  "UpdateOrgGroupPolicy": {
+    "description": "Update the content of an existing organization group policy.",
+    "summary": "Update an org group policy",
+    "request_description": "",
+    "request_schema_description": "Request to update an org group policy."
+  },
+  "ListOrgGroupPolicyConfigs": {
+    "description": "List all org configs that are eligible to be used as organization group policies.",
+    "summary": "List org group policy configs"
+  },
+  "ListOrgGroupPolicyOverrides": {
+    "description": "List policy overrides for an organization group. Requires a filter on org group ID. Optionally filter by policy ID.",
+    "summary": "List org group policy overrides"
+  },
+  "CreateOrgGroupPolicyOverride": {
+    "description": "Create a new policy override for an organization within an org group.",
+    "summary": "Create an org group policy override",
+    "request_description": "",
+    "request_schema_description": "Request to create an org group policy override."
+  },
+  "DeleteOrgGroupPolicyOverride": {
+    "description": "Delete an organization group policy override by its ID.",
+    "summary": "Delete an org group policy override"
+  },
+  "UpdateOrgGroupPolicyOverride": {
+    "description": "Update an existing organization group policy override.",
+    "summary": "Update an org group policy override",
+    "request_description": "",
+    "request_schema_description": "Request to update an org group policy override."
+  },
+  "ListOrgGroups": {
+    "description": "List all organization groups that the requesting organization has access to.",
+    "summary": "List org groups"
+  },
+  "CreateOrgGroup": {
+    "description": "Create a new organization group.",
+    "summary": "Create an org group",
+    "request_description": "",
+    "request_schema_description": "Request to create an org group."
+  },
+  "DeleteOrgGroup": {
+    "description": "Delete an organization group by its ID.",
+    "summary": "Delete an org group"
+  },
+  "GetOrgGroup": {
+    "description": "Get a specific organization group by its ID.",
+    "summary": "Get an org group"
+  },
+  "UpdateOrgGroup": {
+    "description": "Update the name of an existing organization group.",
+    "summary": "Update an org group",
+    "request_description": "",
+    "request_schema_description": "Request to update an org group."
+  },
   "ListPermissions": {
     "description": "Returns a list of all permissions, including name, description, and ID.",
     "summary": "List permissions"
+  },
+  "ListPersonalAccessTokens": {
+    "description": "List all personal access tokens for the organization.",
+    "summary": "Get all personal access tokens"
+  },
+  "CreatePersonalAccessToken": {
+    "description": "Create a personal access token for the current user.",
+    "summary": "Create a personal access token",
+    "request_description": "",
+    "request_schema_description": "Request used to create a personal access token."
+  },
+  "RevokePersonalAccessToken": {
+    "description": "Revoke a specific personal access token.",
+    "summary": "Revoke a personal access token"
+  },
+  "GetPersonalAccessToken": {
+    "description": "Get a specific personal access token by its UUID.",
+    "summary": "Get a personal access token"
+  },
+  "UpdatePersonalAccessToken": {
+    "description": "Update a specific personal access token.",
+    "summary": "Update a personal access token",
+    "request_description": "",
+    "request_schema_description": "Request used to update a personal access token."
   },
   "ListFindings": {
     "description": "Get a list of findings. These include both misconfigurations and identity risks.\n\n**Note**: To filter and return only identity risks, add the following query parameter: `?filter[tags]=dd_rule_type:ciem`\n\n### Filtering\n\nFilters can be applied by appending query parameters to the URL.\n\n  - Using a single filter: `?filter[attribute_key]=attribute_value`\n  - Chaining filters: `?filter[attribute_key]=attribute_value&filter[attribute_key]=attribute_value...`\n  - Filtering on tags: `?filter[tags]=tag_key:tag_value&filter[tags]=tag_key_2:tag_value_2`\n\nHere, `attribute_key` can be any of the filter keys described further below.\n\nQuery parameters of type `integer` support comparison operators (`>`, `>=`, `<`, `<=`). This is particularly useful when filtering by `evaluation_changed_at` or `resource_discovery_timestamp`. For example: `?filter[evaluation_changed_at]=>20123123121`.\n\nYou can also use the negation operator on strings. For example, use `filter[resource_type]=-aws*` to filter for any non-AWS resources.\n\nThe operator must come after the equal sign. For example, to filter with the `>=` operator, add the operator after the equal sign: `filter[evaluation_changed_at]=>=1678809373257`.\n\nQuery parameters must be only among the documented ones and with values of correct types. Duplicated query parameters (e.g. `filter[status]=low&filter[status]=info`) are not allowed.\n\n### Additional extension fields\n\nAdditional extension fields are available for some findings.\n\nThe data is available when you include the query parameter `?detailed_findings=true` in the request.\n\nThe following fields are available for findings:\n- `external_id`: The resource external ID related to the finding.\n- `description`: The description and remediation steps for the finding.\n- `datadog_link`: The Datadog relative link for the finding.\n- `ip_addresses`: The list of private IP addresses for the resource related to the finding.\n\n### Response\n\nThe response includes an array of finding objects, pagination metadata, and a count of items that match the query.\n\nEach finding object contains the following:\n\n- The finding ID that can be used in a `GetFinding` request to retrieve the full finding details.\n- Core attributes, including status, evaluation, high-level resource details, muted state, and rule details.\n- `evaluation_changed_at` and `resource_discovery_date` time stamps.\n- An array of associated tags.",
@@ -3349,13 +3543,37 @@
     "request_description": "",
     "request_schema_description": "Definition of a user."
   },
+  "ListScorecardCampaigns": {
+    "description": "Fetches all scorecard campaigns.",
+    "summary": "List all campaigns"
+  },
+  "CreateScorecardCampaign": {
+    "description": "Creates a new scorecard campaign.",
+    "summary": "Create a new campaign",
+    "request_description": "Campaign data.",
+    "request_schema_description": "Request to create a new campaign."
+  },
+  "DeleteScorecardCampaign": {
+    "description": "Deletes a single campaign by ID or key.",
+    "summary": "Delete a campaign"
+  },
+  "GetScorecardCampaign": {
+    "description": "Fetches a single campaign by ID or key.",
+    "summary": "Get a campaign"
+  },
+  "UpdateScorecardCampaign": {
+    "description": "Updates an existing campaign.",
+    "summary": "Update a campaign",
+    "request_description": "Campaign data.",
+    "request_schema_description": "Request to update a campaign."
+  },
   "ListScorecardOutcomes": {
     "description": "Fetches all rule outcomes.",
     "summary": "List all rule outcomes"
   },
-  "UpdateScorecardOutcomesAsync": {
+  "UpdateScorecardOutcomes": {
     "description": "Updates multiple scorecard rule outcomes in a single batched request.",
-    "summary": "Update Scorecard outcomes asynchronously",
+    "summary": "Update Scorecard outcomes",
     "request_description": "Set of scorecard outcomes.",
     "request_schema_description": "Scorecard outcomes batch request."
   },
@@ -3381,9 +3599,13 @@
   },
   "UpdateScorecardRule": {
     "description": "Updates an existing rule.",
-    "summary": "Update an existing rule",
+    "summary": "Update an existing scorecard rule",
     "request_description": "Rule attributes.",
     "request_schema_description": "Request to update a scorecard rule."
+  },
+  "ListScorecards": {
+    "description": "Fetches all scorecards.",
+    "summary": "List all scorecards"
   },
   "UnassignSeatsUser": {
     "description": "Unassign seats from users for a product code.",
@@ -3749,11 +3971,19 @@
     "request_description": "Attributes describing the signal update.",
     "request_schema_description": "Request body for changing the related incidents of a given security monitoring signal."
   },
+  "GetInvestigationLogQueriesMatchingSignal": {
+    "description": "Get the list of investigation log queries available for a given security signal.",
+    "summary": "Get investigation queries for a signal"
+  },
   "EditSecurityMonitoringSignalState": {
     "description": "Change the triage state of a security signal.",
     "summary": "Change the triage state of a security signal",
     "request_description": "Attributes describing the signal update.",
     "request_schema_description": "Request body for changing the state of a given security monitoring signal."
+  },
+  "GetSuggestedActionsMatchingSignal": {
+    "description": "Get the list of suggested actions for a given security signal.",
+    "summary": "Get suggested actions for a signal"
   },
   "ListScanningGroups": {
     "description": "List all the Scanning groups in your organization.",
@@ -3816,6 +4046,30 @@
     "summary": "Create a service account",
     "request_description": "",
     "request_schema_description": "Create a service account."
+  },
+  "ListServiceAccountAccessTokens": {
+    "description": "List all access tokens for a specific service account.",
+    "summary": "List access tokens for a service account"
+  },
+  "CreateServiceAccountAccessToken": {
+    "description": "Create an access token for a service account.",
+    "summary": "Create an access token for a service account",
+    "request_description": "",
+    "request_schema_description": "Request used to create a service account access token."
+  },
+  "RevokeServiceAccountAccessToken": {
+    "description": "Revoke a specific access token for a service account.",
+    "summary": "Revoke an access token for a service account"
+  },
+  "GetServiceAccountAccessToken": {
+    "description": "Get a specific access token for a service account by its UUID.",
+    "summary": "Get an access token for a service account"
+  },
+  "UpdateServiceAccountAccessToken": {
+    "description": "Update a specific access token for a service account.",
+    "summary": "Update an access token for a service account",
+    "request_description": "",
+    "request_schema_description": "Request used to update a personal access token."
   },
   "ListServiceAccountApplicationKeys": {
     "description": "List all application keys available for this service account.",

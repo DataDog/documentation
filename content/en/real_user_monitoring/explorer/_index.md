@@ -24,7 +24,7 @@ The [Real User Monitoring (RUM) Explorer][1] allows you to examine data collecte
 
 You can:
 
-- Navigate through user sessions
+- Navigate through user sessions, including between sessions from the same user with [session continuity][5]
 - Investigate performance issues affecting views, resources, or actions
 - Troubleshoot application errors and long tasks
 
@@ -63,3 +63,4 @@ To start visualizing RUM data in the RUM Explorer, see [Create RUM Visualization
 [2]: /real_user_monitoring/explorer/group
 [3]: /real_user_monitoring/explorer/search_syntax
 [4]: /real_user_monitoring/explorer/visualize
+[5]: /real_user_monitoring/explorer/events/#navigate-between-user-sessions
