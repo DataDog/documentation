@@ -37,7 +37,7 @@ To create a draft experiment:
 
 You can also create an experiment directly from a feature flag's detail page:
 1. Navigate to the **[Feature Flags][7]** page and select the **Overview** tab.
-1. Select the appropriate feature flag to open its detail page.
+1. Select the feature flag you want to use for your experiment to open its detail page.
 1. In the **Targeting rules & rollouts** section, click **Create New Experiment**, then **Create Experiment**.
 
 {{< img src="/product_analytics/experiment/exp_plan_launch_ff_new_experiment.png" alt="The feature flag detail page for a flag called new_product_photos, showing targeting rules and rollouts with a 50/50 split between control and treatment variants, and a Create New Experiment button highlighted at the bottom." style="width:80%;" >}}
@@ -64,7 +64,7 @@ Estimate the sample size needed to detect meaningful differences between variant
 1. Click the **sample size calculator** link to open the side panel.
 1. Expand **Calculation details**. Your primary and secondary metrics appear under **Metrics**.
 1. Use the **Entry point** dropdown to select the event that assigns users to the experiment. Datadog uses this to estimate expected traffic.
-1. Add a **Filter** to narrow the entry point's audience. If you do not see the property you need, type the property name in the **Custom property** field and click **Add**.
+1. (Optional) Add a **Filter** to narrow the entry point's audience. If you do not see the property you need, type the property name in the **Custom property** field and click **Add**.
 1. Set the **Number of variants** and **Traffic exposure** percentage. The defaults are two variants and 100% traffic exposure.
 1. Under **Additional inputs**, configure the statistical **Power** (default 80%) and **Target experiment duration** in weeks.
 1. Click **Run Calculation** to see an estimate of the **[Minimum detectable effect (MDE)][3] over time** for your metrics.
@@ -77,21 +77,22 @@ Link a feature flag to control how traffic is split between the experiment varia
 
 1. Click the **Add a feature flag** button to open the picker.
 1. Select the appropriate feature flag for your experiment.
-1. If you have not created a feature flag, click **Create New Feature Flag**.
+1. If you have not created a feature flag, click **Create New Feature Flag**. For setup instructions, see [Create your first feature flag][4].
 
 #### Randomization
 After you select a feature flag, Datadog pre-populates the randomization settings based on the flag's configuration.
 
-<div class="alert alert-info">Experiment randomization settings do not affect the linked feature flag until you launch.<br><br>When you launch your experiment, Datadog adds a targeting rule to the selected feature flag that randomly assigns users to variants. Each user consistently sees the same variant throughout the experiment.<br><br>If multiple experiments share the same flag, Datadog evaluates traffic based on the order of experiments in the flag's targeting waterfall. You can reorder targeting rules in the confirmation modal before launching.</div>
+<div class="alert alert-info">The randomization settings you configure here do not modify the linked feature flag yet. The following changes take effect when you launch:<br><br><ul><li>Datadog adds a targeting rule to the selected feature flag that randomly assigns users to variants. Each user consistently sees the same variant throughout the experiment.</li><li>If multiple experiments share the same flag, Datadog evaluates traffic based on the order of the flag's targeting rules. You can reorder targeting rules in the confirmation modal before launching.</li></ul></div>
 
 To configure how users are assigned to variants:
-1. Select the **Environment** for your experiment from the dropdown.
+1. Select the **Environment** for your experiment from the dropdown (for example, `production` for live user traffic or `staging` for testing).
 1. Under **Targeting rules**:
-   1. Click **Add Filter** to define conditions and filter which users to include in the experiment.
+   1. Click **Add Filter** to define conditions based on user attributes (such as geography, device type, or custom attributes) and filter which users to include in the experiment.
    1. Click **Add Condition** to set additional conditions.
 1. Under **Variants**, set how traffic is split between your experiment groups. Use the **Randomize users and split traffic** dropdown to choose **Equally** or **Custom**.
 1. Under **Traffic exposure**, set the percentage of targeted traffic to include in the experiment.
 1. (Optional) [Schedule a staged rollout](#schedule-a-staged-rollout-optional).
+1. After configuring your experiment, proceed to [Launch your experiment](#launch-your-experiment).
 
 {{< img src="/product_analytics/experiment/exp_plan_launch_ui_randomization.png" alt="The Randomization section showing the environment set to staging, a targeting rule with an IF condition, two variants with an equal 50/50 split between Control (False) and variant B (True), and traffic exposure set to 100% of targeted traffic with an Add Rollout Steps option." style="width:80%;" >}}
 
@@ -134,14 +135,14 @@ Expand the **Split-by exploration dimensions** section. Select properties from t
 To launch your experiment:
 
 1. Click **Start Experiment** to open the **Confirm starting the experiment** dialog.
-1. Review your experiment settings. If multiple experiments share the same flag, use the arrow buttons to reorder the targeting rules in the waterfall.
+1. Review your experiment settings. If multiple experiments share the same flag, use the arrow buttons to reorder the targeting rules.
 1. Click **Start Experiment & Enable Flag** to launch the experiment.
 
 Launching the experiment opens the **Flag & Exposures** page. Verify that the experiment is running correctly:
 - Check the **Exposure balance check** to confirm users are split across variants as expected.
 - Click **View Exposures Log** to see a real-time list of users enrolling in your experiment.
 
-After launching your experiment, see [Read Experiment Results][5] to review your data.
+After launching your experiment, see [Reading Experiment Results][5] to review your data.
 
 ## Further reading
 
