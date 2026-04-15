@@ -944,12 +944,12 @@ dd.cloud_cost_scalar(
     to_timestamp timestamp]
 )</pre>
       </td>
-      <td>Returns <a href="/cloud_cost_management/">Cloud Cost Management</a> data as a scalar value. The function accepts a cloud cost query (with optional grouping), a reducer to determine how values are aggregated (<code>avg</code>, <code>max</code>, <code>sum</code>, and so on), and optional timestamp parameters to define the time range.</td>
+      <td>Returns <a href="/cloud_cost_management/">Cloud Cost Management</a> data as a scalar value. The function accepts a cloud cost query (with optional grouping), a reducer, and optional timestamp parameters to define the time range.</td>
       <td>
         {{< code-block lang="sql" >}}
 SELECT *
 FROM dd.cloud_cost_scalar(
-    'sum:aws.cost.amortized{*} by {service}',
+    'sum:all.cost{*} by {service}',
     'sum',
     TIMESTAMP '2025-07-10 00:00:00.000-04:00',
     TIMESTAMP '2025-07-17 00:00:00.000-04:00'
@@ -971,7 +971,7 @@ dd.cloud_cost_timeseries(
         {{< code-block lang="sql" >}}
 SELECT *
 FROM dd.cloud_cost_timeseries(
-    'sum:aws.cost.amortized{*} by {service}',
+    'sum:all.cost{*} by {service}',
     TIMESTAMP '2025-07-10 00:00:00.000-04:00',
     TIMESTAMP '2025-07-17 00:00:00.000-04:00'
 )
