@@ -13,9 +13,17 @@ further_reading:
   text: "Set Up the Datadog MCP Server"
 ---
 
-The following tools are available in the Datadog MCP Server. Each entry includes the required toolset, permissions, and example prompts. Tools are grouped by [toolset][1].
+The following tools are available in the Datadog MCP Server. Each entry includes the required toolset, permissions, and example prompts. Tools are grouped by [toolsets][1], which allow you to use only the tools you need, saving valuable context window space.
 
-[1]: /bits_ai/mcp_server/setup#toolsets
+{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
+To enable product-specific tools, include the `toolsets` query parameter at the end of the endpoint URL you use to connect to the Datadog MCP Server. For example, based on your selected [Datadog site][2] ({{< region-param key="dd_site_name" >}}), this URL enables _only_ APM and LLM Observability tools:
+
+   <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
+
+[2]: /getting_started/site/
+{{< /site-region >}}
+
+See [Set Up the Datadog MCP Server][1] for more information on connecting to the MCP Server and enabling toolsets.
 
 <div class="alert alert-info">Datadog MCP Server tools are under significant development and are subject to change. Use <a href="https://docs.google.com/forms/d/e/1FAIpQLSeorvIrML3F4v74Zm5IIaQ_DyCMGqquIp7hXcycnCafx4htcg/viewform">this feedback form</a> to share any feedback, use cases, or issues encountered with your prompts and queries.</div>
 
@@ -964,7 +972,7 @@ Adds an agent trigger to a workflow and publishes it, enabling the workflow to b
 - Add an agent trigger to the deployment rollback workflow so I can run it from here.
 - Configure the incident response workflow to be triggerable by an agent.
 
-
+[1]: /bits_ai/mcp_server/setup#toolsets
 [15]: /api/latest/events/
 [24]: /tests/
 [26]: /database_monitoring/
