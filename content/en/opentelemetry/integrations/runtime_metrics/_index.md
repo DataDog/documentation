@@ -53,10 +53,23 @@ If you use [OpenTelemetry manual instrumentation][4], follow the guides for your
 - [Java 8][5]
 - [Java 17][6]
 
+#### Collector configuration
+
+The `jvm.gc.collections.count` and `jvm.gc.collections.elapsed` metrics require the [Delta-to-Rate Processor][8] in the OpenTelemetry Collector. Additionally, ensure that `OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE=delta` is set as well.
+
+```yaml
+processors:
+  deltatorate:
+    metrics:
+      - jvm.gc.collections.count
+      - jvm.gc.collections.elapsed
+```
+
 [3]: https://opentelemetry.io/docs/instrumentation/java/automatic/
 [4]: https://opentelemetry.io/docs/instrumentation/java/manual/
 [5]: https://github.com/open-telemetry/opentelemetry-java-instrumentation/tree/main/instrumentation/runtime-telemetry/runtime-telemetry-java8/library
 [6]: https://github.com/open-telemetry/opentelemetry-java-instrumentation/tree/main/instrumentation/runtime-telemetry/runtime-telemetry-java17/library
+[8]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/deltatorateprocessor
 
 {{% /tab %}}
 
@@ -64,8 +77,27 @@ If you use [OpenTelemetry manual instrumentation][4], follow the guides for your
 
 OpenTelemetry Go applications are [instrumented manually][3]. To enable runtime metrics, see the documentation for the [runtime package][4].
 
+#### Collector configuration
+
+The `process.runtime.go.gc.pause_total_ns` and `process.runtime.go.gc.count` metrics require the [Delta-to-Cumulative Processor][9] and the [Transform Processor][8] in the OpenTelemetry Collector. The Delta-to-Cumulative Processor converts delta sums to cumulative sums, and the Transform Processor converts cumulative sums to gauges. Additionally, ensure that `OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE=delta` is set to handle other metrics as well.
+
+```yaml
+processors:
+  deltatocumulative:
+    metrics:
+      - process.runtime.go.gc.pause_total_ns
+      - process.runtime.go.gc.count
+  transform:
+    metric_statements:
+      - context: metric
+        statements:
+          - convert_sum_to_gauge() where name == "process.runtime.go.gc.pause_total_ns" or name == "process.runtime.go.gc.count"
+```
+
 [3]: https://opentelemetry.io/docs/instrumentation/go/manual/
 [4]: https://pkg.go.dev/go.opentelemetry.io/contrib/instrumentation/runtime
+[8]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/transformprocessor
+[9]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/deltatocumulativeprocessor
 
 {{% /tab %}}
 
@@ -89,10 +121,22 @@ The default metric export interval for the .NET OTel SDK differs from the defaul
 OTEL_METRIC_EXPORT_INTERVAL=10000
 ```
 
+#### Collector configuration
+
+The `dotnet.process.cpu.time` metric requires the [Delta-to-Rate Processor][8] in the OpenTelemetry Collector. Additionally, ensure that `OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE=delta` is set as well.
+
+```yaml
+processors:
+  deltatorate:
+    metrics:
+      - dotnet.process.cpu.time
+```
+
 [3]: https://opentelemetry.io/docs/instrumentation/net/automatic/
 [4]: https://opentelemetry.io/docs/instrumentation/net/manual/
 [5]: https://github.com/open-telemetry/opentelemetry-dotnet-contrib/tree/main/src/OpenTelemetry.Instrumentation.Runtime
 [7]: https://opentelemetry.io/docs/specs/otel/configuration/sdk-environment-variables/#periodic-exporting-metricreader
+[8]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/deltatorateprocessor
 
 {{% /tab %}}
 
@@ -164,13 +208,6 @@ The following tables list the OpenTelemetry runtime metrics used in Datadog's ou
 <p>These metrics are collected when using the OpenTelemetry JMX Metrics Gatherer.</p>
 {{< mapping-table resource="jvm-contrib.csv">}}
 
-<p>The following JVM Contrib metrics require the <a href="https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/deltatorateprocessor">Delta-to-Rate Processor</a> in the OpenTelemetry Collector:</p>
-
-<ul>
-<li>jvm.gc.collections.count</li>
-<li>jvm.gc.collections.elapsed</li>
-</ul>
-
 <h3>JVM Deprecated</h3>
 <p>These metrics are collected when using OpenTelemetry Java SDK versions 1.32.0 and earlier.</p>
 {{< mapping-table resource="jvm-deprecated.csv">}}
@@ -188,12 +225,6 @@ The following tables list the OpenTelemetry runtime metrics used in Datadog's ou
 <h3>.NET System.Runtime</h3>
 <p>These metrics are emitted by the .NET runtime's built-in <code>System.Runtime</code> meter on .NET 9.0 and later. The OpenTelemetry SDK collects and exports them automatically.</p>
 {{< mapping-table resource="dotnet.csv">}}
-
-<p>The following .NET System.Runtime metrics require the <a href="https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/deltatorateprocessor">Delta-to-Rate Processor</a> in the OpenTelemetry Collector:</p>
-
-<ul>
-<li>dotnet.process.cpu.time</li>
-</ul>
 
 <h3>.NET Contrib Runtime</h3>
 <p>These metrics are collected by the <a href="https://github.com/open-telemetry/opentelemetry-dotnet-contrib/tree/main/src/OpenTelemetry.Instrumentation.Runtime">OpenTelemetry.Instrumentation.Runtime</a> package. On .NET 9.0 and later, these overlap with the System.Runtime metrics above.</p>
