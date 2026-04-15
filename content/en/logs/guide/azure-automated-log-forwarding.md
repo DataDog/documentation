@@ -38,7 +38,7 @@ Use the **Configure Log Forwarding** flow to set up new or manage existing log f
 1. In Datadog, navigate to [**Integrations > Azure**][16].
 1. Click **Configure Log Forwarding**.
 1. Choose to deploy a new setup or update an existing one.
-1. Copy and paste the provided command in your Azure Cloud Shell.
+1. Copy the provided command and paste it in your Azure Cloud Shell.
 1. Select the subscriptions to forward logs from.
 1. Optionally, add or remove log filters.
 1. Click **Finish setup**.
@@ -87,7 +87,7 @@ The sections below provide instructions for completing each page of the template
 
 ## Log Analytics Workspaces
 
-You can forward logs from Azure Log Analytics Workspaces (LAWs) to Datadog through the automated log forwarder. Previously, only [diagnostic setting][13] logs from LAWs were supported, excluding logs that appear inside LAW Log Tables. With [data export rules][17], logs from LAW Log Tables can also be forwarded to Datadog.
+You can forward logs from Azure Log Analytics Workspaces (LAWs) to Datadog through the automated log forwarder. Previously, Datadog only supported [diagnostic setting][13] logs from LAWs. With [data export rules][17], you can also forward logs from LAW Log Tables to Datadog.
 
 ### Restrictions
 
