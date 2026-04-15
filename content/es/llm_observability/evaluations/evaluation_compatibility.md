@@ -13,7 +13,6 @@ Las evaluaciones gestionadas son compatibles con las siguientes configuraciones.
 
 | Evaluación                      | Versión de DD-trace  |  Proveedor de LLM                 | Tramo aplicable |
 | --------------------------------| ----------------- | ------------------------------| ----------------|
-| [Alucinación][4]              | v2.18+            | OpenAI                        | Solo LLM        |
 | [Desajuste lingüístico][10]         | Totalmente compatible   | Autoalojado                   | Todos los tipos de tramo  |
 
 ### Evaluaciones personalizadas de LLM como evaluador
@@ -34,19 +33,20 @@ Las plantillas existentes para las evaluaciones personalizadas de LLM como evalu
 | Evaluación              | Versión de DD-trace | Proveedor de LLM                  | Tramo aplicable |
 | ----------------------- | ---------------- | ----------------------------- | --------------- |
 | [Falta de respuesta][5]  | Totalmente compatible  | Todos los proveedores externos de LLM | Todos los tipos de tramo  |
+| [Alucinación][4]      | Totalmente compatible  | Todos los proveedores externos de LLM | Solo LLM        |
 | [Sentimiento][6]          | Totalmente compatible  | Todos los proveedores externos de LLM | Todos los tipos de tramo  |
 | [Toxicidad][7]           | Totalmente compatible  | Todos los proveedores externos de LLM | Todos los tipos de tramo  |
 | [Inyección de prompts][8]   | Totalmente compatible  | Todos los proveedores externos de LLM | Todos los tipos de tramo  |
 | [Relevancia del tema][9]    | Totalmente compatible  | Todos los proveedores externos de LLM | Todos los tipos de tramo  |
-| [Selección de herramientas][1]             | v3.12+            | Todos los proveedores externos de LLM          | Solo LLM        |
-| [Adecuación del argumento de la herramienta][2]  | v3.12+            | Todos los proveedores externos de LLM          | Solo LLM        |
-| [Cumplimiento de objetivos][3]          | Totalmente compatible   | Todos los proveedores externos de LLM          | Solo LLM        |
+| [Selección de herramientas][1]             | Totalmente compatible | Todos los proveedores externos de LLM | Solo LLM |
+| [Adecuación del argumento de la herramienta][2]  | Totalmente compatible | Todos los proveedores externos de LLM | Solo LLM |
+| [Cumplimiento de objetivos][3]          | Totalmente compatible | Todos los proveedores externos de LLM | Solo LLM |
 
 
 [1]: /es/llm_observability/evaluations/custom_llm_as_a_judge_evaluations/template_evaluations#tool-selection
 [2]: /es/llm_observability/evaluations/custom_llm_as_a_judge_evaluations/template_evaluations#tool-argument-correctness
 [3]: /es/llm_observability/evaluations/custom_llm_as_a_judge_evaluations/template_evaluations#goal-completeness
-[4]: /es/llm_observability/evaluations/managed_evaluations#hallucination
+[4]: /es/llm_observability/evaluations/custom_llm_as_a_judge_evaluations/template_evaluations#hallucination
 [5]: /es/llm_observability/evaluations/custom_llm_as_a_judge_evaluations/template_evaluations#failure-to-answer
 [6]: /es/llm_observability/evaluations/custom_llm_as_a_judge_evaluations/template_evaluations#sentiment
 [7]: /es/llm_observability/evaluations/custom_llm_as_a_judge_evaluations/template_evaluations#toxicity

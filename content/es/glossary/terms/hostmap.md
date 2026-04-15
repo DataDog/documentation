@@ -1,4 +1,5 @@
 ---
+id: hostmap
 core_product:
 - dashboards
 related_terms:

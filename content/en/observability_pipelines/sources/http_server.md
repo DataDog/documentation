@@ -9,7 +9,9 @@ products:
 
 {{< product-availability >}}
 
-Use Observability Pipelines' HTTP/S Server source to collect HTTP client logs. Select and set up this source when you [set up a pipeline][1].
+## Overview
+
+Use Observability Pipelines' HTTP/S Server source to collect HTTP client logs.
 
 You can also [send AWS vended logs with Datadog Lambda Forwarder to Observability Pipelines](#send-aws-vended-logs-with-the-datadog-lambda-forwarder-to-observability-pipelines).
 
@@ -17,9 +19,9 @@ You can also [send AWS vended logs with Datadog Lambda Forwarder to Observabilit
 
 {{% observability_pipelines/prerequisites/http_server %}}
 
-## Set up the source in the pipeline UI
+## Setup
 
-Select and set up this source when you [set up a pipeline][1]. The information below is for the source settings in the pipeline UI.
+Set up this source when you [set up a pipeline][3]. You can set up a pipeline in the [UI][1], using the [API][4], or with [Terraform][5]. The instructions in this section are for setting up the source in the UI.
 
 To configure your HTTP/S Server source, enter the following:
 
@@ -31,13 +33,9 @@ To configure your HTTP/S Server source, enter the following:
     - Enter the identifiers for your HTTP Server username and password. If you leave it blank, the [default](#set-secrets) is used.
 1. Select the decoder you want to use on the HTTP messages. Your HTTP client logs must be in this format. **Note**: If you select `bytes` decoding, the raw log is stored in the `message` field.
 
-### Optional settings
+### Optional TLS settings
 
-Toggle the switch to **Enable TLS**. If you enable TLS, the following certificate and key files are required.<br>**Note**: All file paths are made relative to the configuration data directory, which is `/var/lib/observability-pipelines-worker/config/` by default. See [Advanced Worker Configurations][2] for more information. The file must be owned by the `observability-pipelines-worker group` and `observability-pipelines-worker` user, or at least readable by the group or user.
-- Enter the identifier for your HTTP Server key pass. If you leave it blank, the [default](#set-secrets) is used.
-- `Server Certificate Path`: The path to the certificate file that has been signed by your Certificate Authority (CA) root file in DER or PEM (X.509).
-- `CA Certificate Path`: The path to the certificate file that is your Certificate Authority (CA) root file in DER or PEM (X.509).
-- `Private Key Path`: The path to the `.key` private key file that belongs to your Server Certificate Path in DER or PEM (PKCS #8) format.
+{{% observability_pipelines/tls_settings %}}
 
 ## Set secrets
 
@@ -84,4 +82,6 @@ To send AWS vended logs to Observability Pipelines with the HTTP/S Server source
 {{% observability_pipelines/lambda_forwarder/deploy_forwarder %}}
 
 [1]: https://app.datadoghq.com/observability-pipelines
-[2]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/
+[3]: /observability_pipelines/configuration/set_up_pipelines/
+[4]: /api/latest/observability-pipelines/
+[5]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline

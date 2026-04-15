@@ -25,18 +25,25 @@ Supported languages:
 
 | Language    | Version |
 | ----------- | ------- |
-| Swift       | >= 5.9  |
+| Swift       | >= 6.2  |
 | Objective-C | >= 2.0  |
-| Xcode       | >= 16.0 |
+| Xcode       | >= 26.0 |
 
 Supported platforms:
 
 | Platform     | Version  |
 | ------------ | -------- |
-| iOS / iPadOS | >= 12.0  |
-| macOS        | >= 10.13 |
-| tvOS         | >= 12.0  |
+| iOS / iPadOS | >= 15.0  |
+| macOS        | >= 11.0  |
+| tvOS         | >= 15.0  |
 | macCatalyst  | >= 13.0  |
+
+Supported test frameworks:
+
+| Framework     | SDK version  | Support level                                     |
+| ------------- | ------------ | ------------------------------------------------- |
+| XCTest        | All versions | Full support                                      |
+| Swift Testing | >= 2.7.0     | Full support from 2.7.1; observation only in 2.7.0 |
 
 ## Installing the Swift testing SDK
 
@@ -105,6 +112,37 @@ end
 <div class="alert alert-danger">This framework is useful only for testing and should only be linked with the application when running tests. Do not distribute the framework to your users. </div>
 
 ## Instrumenting your tests
+
+### Swift Testing framework
+
+The Datadog SDK supports the Swift Testing framework starting in version 2.7.0 (observation only) and fully supports all advanced features in version 2.7.1 and later.
+
+#### Setting up Swift Testing observation
+
+To enable observation for your Swift Testing tests:
+
+1. Import `DatadogSDKTesting` in your test source files:
+
+{{< code-block lang="swift" >}}
+import DatadogSDKTesting
+import Testing
+{{< /code-block >}}
+
+2. Add the `.datadogTesting` trait to your test suites or standalone test functions:
+
+{{< code-block lang="swift" >}}
+@Suite(.datadogTesting)
+struct MyTestSuite {
+    @Test func myTest() {
+        // ...
+    }
+}
+
+// For standalone test functions:
+@Test(.datadogTesting) func myStandaloneTest() {
+    // ...
+}
+{{< /code-block >}}
 
 ### Configuring SDK
 

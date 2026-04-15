@@ -79,6 +79,7 @@ To set up this pattern:
 ## Always run specific steps
 
 Use this pattern when certain steps must always run regardless of earlier results, such as logging out, releasing resources, or capturing error state.
+**Note**: Applies only to Browser and Mobile App tests.
 
 To set up this pattern:
 

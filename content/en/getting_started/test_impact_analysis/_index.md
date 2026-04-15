@@ -13,6 +13,9 @@ further_reading:
 - link: '/tests/code_coverage/'
   tag: 'Documentation'
   text: 'Learn about Code Coverage'
+- link: 'https://learn.datadoghq.com/courses/getting-started-test-optimization'
+  tag: 'Learning Center'
+  text: 'Getting Started with Test Optimization'
 algolia:
   tags: ["test impact analysis", "intelligent test runner", "ci test", "ci tests", "flaky test", "flaky tests"]
 ---

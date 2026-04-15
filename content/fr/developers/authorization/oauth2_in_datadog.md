@@ -7,19 +7,19 @@ further_reading:
 title: OAuth2 dans Datadog
 ---
 
-{{< callout btn_hidden="true" >}}
-  La plateforme de développement Datadog est en version bêta. Si vous n'y avez pas accès, envoyez un e-mail à l'adresse apps@datadoghq.com.
-{{< /callout >}} 
-
 ## Présentation
 
 Cette page explique de façon détaillée comment implémenter le protocole OAuth de bout en bout dans votre application après la création de votre client **confidentiel**. 
 
-### Implémenter le protocole OAuth
+{{< img src="developers/authorization/oauth_process.png" alt="Diagramme expliquant le fonctionnement du processus d'authentification OAuth après qu'un utilisateur a cliqué sur le bouton Connect Account dans un carré d'intégration." style="width:100%;">}}
 
-1. Créez et configurez votre client OAuth sur la [plateforme de développement][16]. 
+## Implémenter le protocole OAuth
+
+1. Dans votre compte sandbox partenaire Datadog, créez et configurez votre client OAuth dans la [plateforme de développement][16].
 
 2. Après avoir installé votre intégration, les utilisateurs peuvent cliquer sur le bouton **Connect Accounts** pour connecter leur compte dans l'onglet **Configure** du carré d'intégration. 
+
+   {{< img src="developers/authorization/connect-accounts.png" alt="Cliquer sur le bouton Connect Accounts" style="width:100%;" >}}
 
    Lorsqu'un utilisateur clique sur ce bouton, il est redirigé vers la page spécifiée via le paramètre `onboarding_url` que vous avez défini dans le cadre du processus de création du client OAuth. Cette page doit correspondre à la page de connexion de votre plateforme.
 
@@ -27,39 +27,41 @@ Cette page explique de façon détaillée comment implémenter le protocole OAut
 
    Pour savoir comment obtenir le paramètre `code_challenge`, consultez la rubrique [PKCE](#flux-d-octroi-de-code-d-autorisation-avec-pkce). Votre application doit enregistrer la valeur `code_verifier` pour la requête de token à l'étape 5.
 
-   - Pour créer l'URL de cette requête POST, utilisez le paramètre de requête `site` fourni dans la redirection vers votre page `onboarding_url`. 
+   - Pour construire l'URL de cette requête GET, utilisez le paramètre de requête `site` fourni lors de la redirection vers votre `onboarding_url`.
    - Ce paramètre n'est fourni que si l'utilisateur initie l'autorisation depuis le carré d'intégration Datadog. Consultez la rubrique [Initier l'autorisation depuis un emplacement tiers](#initier-l-autorisation-depuis-un-emplacement-tiers) pour connaître les autres options disponibles si l'utilisateur choisit d'initier l'autorisation depuis un emplacement externe.  
-   - Par exemple, `site` peut correspondre à `https://app.datadoghq.com`, `https://app.datadoghq.eu`, `https://us5.datadoghq.com`, ou il peut s'agir d'un sous-domaine personnalisé qui doit être pris en compte, comme `https://<sous-domaine_personnalisé>.datadoghq.com`. 
-   - Pour gérer plusieurs sites Datadog de façon dynamique, vous pouvez ajouter le chemin `authorize` Datadog à l'URL ainsi créée.
+   - Le paramètre de requête `site` fournit le [site Datadog][17] dans lequel se trouve l'utilisateur autorisateur, ainsi que tout sous-domaine qu'il utilise éventuellement. Il est nécessaire pour construire l'URL de cette requête GET vers l'endpoint d'autorisation : `<site>/oauth2/v1/authorize?...`.
 
 4. Lorsqu'un utilisateur clique sur **Authorize**, Datadog envoie une requête POST à l'endpoint d'autorisation. L'utilisateur est alors redirigé vers la ressource spécifiée via le paramètre `redirect_uri` que vous avez défini lors de la configuration du client OAuth, avec le paramètre `code` d'autorisation dans le composant de requête.
 
 5. Depuis la ressource spécifiée via le paramètre `redirect_uri`, envoyez à l'[endpoint de token Datadog][10] une requête POST comprenant le code d'autorisation de l'étape 4, la valeur `code_verifier` de l'étape 3, l'identifiant de votre client OAuth, ainsi que le secret du client.
 
-   - Pour créer l'URL de cette requête POST, utilisez le paramètre de requête `site` fourni dans la redirection vers votre ressource `redirect_uri`. 
-   - Par exemple, `site` peut correspondre à `https://app.datadoghq.com`, `https://app.datadoghq.eu`, `https://us5.datadoghq.com`, ou il peut s'agir d'un sous-domaine personnalisé qui doit être pris en compte, comme `https://<sous-domaine_personnalisé>.datadoghq.com`. 
-   - Pour gérer plusieurs sites Datadog de façon dynamique, vous pouvez ajouter le chemin `token` Datadog à l'URL ainsi créée.
+   - Pour construire l'URL de cette requête POST, utilisez le paramètre de requête `domain` fourni lors de la redirection vers votre `redirect_uri`.
+   - Il est nécessaire pour construire l'URL de cette requête POST vers l'endpoint de token : `https://api.<domain>/oauth2/v1/token`.
 
 6. Une fois l'opération réussie, vous recevez vos tokens `access_token` et `refresh_token` dans le corps de la réponse. Votre application devrait afficher une page de confirmation avec le message suivant : `You may now close this tab`.
 
 7. Utilisez le token `access_token` pour appeler les endpoints d'API Datadog en l'envoyant dans l'en-tête d'autorisation de votre requête : ```headers = {"Authorization": "Bearer {}".format(access_token)}```.
-    - Lors des appels vers les endpoints d'API, assurez-vous que le site Datadog de l'utilisateur est pris en compte. Par exemple, si un utilisateur se trouve dans un pays de l'UE, l'endpoint d'événements est `https://api.datadoghq.eu/api/v1/events`, tandis que pour les utilisateurs situés dans la région US1, l'endpoint d'événements est `https://api.datadoghq.com/api/v1/events`. Certains endpoints peuvent également nécessiter une clé d'API, qui est créée à l'étape 8 ci-dessous. 
+    - **Remarque*** : les endpoints d'API diffèrent selon le site Datadog. Par exemple, si un utilisateur se trouve dans la région EU, l'endpoint Events est `https://api.datadoghq.eu/api/v1/events`, tandis que pour les utilisateurs en US1, l'endpoint Events est `https://api.datadoghq.com/api/v1/events`.
+    - Utilisez le paramètre de requête `domain` directement dans ces appels d'API pour vous assurer que le bon endpoint est contacté. Par exemple, pour effectuer un appel vers l'endpoint Events, construisez l'URL de votre requête comme suit : `https://api.<domain>/api/v1/events`.
+    - Certains endpoints peuvent également nécessiter une clé d'API, créée à l'étape 8.
 
 8. Appelez l'[endpoint de création de clé d'API][7] pour générer une clé d'API vous permettant d'envoyer des données pour le compte des utilisateurs Datadog.
 
-   Cette étape échouera si le contexte `API_KEYS_WRITE` n'a pas été ajouté à votre client. Cet endpoint génère une clé d'API qui n'est affichée qu'une seule fois. **Conservez cette valeur dans une base de données ou un emplacement sécurisé**. 
+   Si le périmètre `API_KEYS_WRITE` n'a pas été ajouté à votre client, cette étape échoue. Cet endpoint génère une clé d'API qui n'est affichée qu'une seule fois et ne peut pas être régénérée sauf si l'utilisateur la supprime dans son compte Datadog. **Stockez cette valeur dans une base de données ou un emplacement sécurisé**.
 
-Pour en savoir plus sur la création et la publication de clients, consultez la section [OAuth pour les intégrations Datadog][5].
+Pour en savoir plus sur la création, le test et la publication de clients OAuth, consultez la section [Créer une intégration basée sur une API][5]. 
 
 ### Initier l'autorisation depuis un emplacement tiers 
 
-Vous pouvez lancer le processus d'autorisation dans Datadog en cliquant sur **Connect Accounts** dans le carré d'intégration, ou depuis le site Web externe de l'intégration. Par exemple, si une page de configuration de l'intégration que les utilisateurs Datadog doivent utiliser est disponible sur votre site Web, vous pouvez permettre aux utilisateurs de lancer le processus d'autorisation depuis cette page.
+Les utilisateurs peuvent démarrer le processus d'autorisation dans Datadog en cliquant sur **Connect Accounts** dans le carré d'intégration. Lorsqu'un utilisateur clique sur Connect Accounts dans Datadog, des informations concernant son [site Datadog][17] sont envoyées lors de la redirection vers l'`onboarding_url` et lors de la redirection vers le `redirect_uri`. Le site Datadog de l'utilisateur est nécessaire pour effectuer des appels d'API en son nom et recevoir un code d'autorisation. Si un utilisateur initie l'autorisation depuis le _site web externe de l'intégration_, les informations sur le site de l'utilisateur ne sont pas fournies.
 
-Lorsque le processus d'autorisation est lancé depuis un emplacement tiers, c'est-à-dire depuis tout emplacement autre que le carré d'intégration Datadog, vous devez prendre en compte le [site Datadog][17] (exemple : EU, US1, US3 ou US5) lors de la redirection des utilisateurs dans le cadre du flux d'autorisation et pour la création des URL des endpoints `authorization` et `token`. 
+De plus, lorsque les utilisateurs initient l'autorisation depuis le carré d'intégration Datadog, ils doivent disposer des autorisations correspondantes pour tous les périmètres demandés. Si l'autorisation est initiée depuis un autre emplacement que le carré d'intégration, les utilisateurs ne disposant pas de toutes les autorisations requises peuvent terminer l'autorisation (mais sont invités à réautoriser avec les autorisations appropriées lorsqu'ils retournent au carré d'intégration Datadog).
 
-Pour garantir l'authentification des utilisateurs auprès du site approprié, redirigez-les toujours vers le site Datadog US1 (`app.datadoghq.com`), où ils pourront sélectionner leur région. Une fois le flux d'autorisation terminé, assurez-vous que tous les appels d'API suivants utilisent le site approprié renvoyé sous forme de paramètre de requête avec le `redirect_uri` (voir l'étape 5 de la rubrique [Implémenter le protocole OAuth](#Implementer-le-protocole-OAuth)).
+Datadog recommande aux partenaires d'inviter les utilisateurs à initier l'autorisation depuis Datadog plutôt que depuis leur propre plateforme.
 
-Lorsque les utilisateurs initient l'autorisation depuis le carré d'intégration Datadog, ils doivent disposer des autorisations appropriées pour tous les contextes demandés. Si l'autorisation est initiée depuis un emplacement autre que le carré d'intégration, les utilisateurs ne disposant pas de toutes les autorisations requises pourront s'authentifier (mais devront à nouveau s'authentifier avec les autorisations appropriées lors de leur retour au carré d'intégration). Pour éviter cela, les utilisateurs doivent être redirigés depuis les plateformes tierces vers le carré d'intégration Datadog pour lancer le processus d'autorisation. 
+Bien que Datadog ne recommande pas de prendre en charge l'initiation de l'autorisation depuis un emplacement tiers en dehors du carré d'intégration Datadog, si vous choisissez cette voie, vous devez vous assurer de pouvoir prendre en charge les utilisateurs sur tous les sites Datadog, et être prêt à continuer à prendre en charge les nouveaux sites Datadog au fur et à mesure de leur création. Cela implique généralement de mettre en place un moyen pour l'utilisateur de saisir manuellement son site sur votre plateforme lors de l'autorisation.
+
+Gardez à l'esprit que les organisations peuvent également avoir des sous-domaines (par exemple, https://subdomain.datadoghq.com). Les sous-domaines ne doivent pas être inclus dans les appels d'API, c'est pourquoi l'utilisation du paramètre de requête `domain` renvoyé lors de la redirection vers le `redirect_uri` est recommandée lors de la construction de l'URL pour tout appel d'API. Pour vous assurer que les utilisateurs s'autorisent sur le bon site, redirigez-les toujours vers le site Datadog US1 (`app.datadoghq.com`) ; depuis là, ils peuvent sélectionner leur région.
 
 ## Flux d'octroi de code d'autorisation avec PKCE
 
@@ -80,7 +82,7 @@ Pour limiter ces risques, l'extension PKCE inclut les paramètres suivants pour 
 | Paramètre             | Définition                                                                                                                           |
 |-----------------------|--------------------------------------------------------------------------------------------------------------------------------------|
 | Code Verifier         | Une chaîne aléatoire de chiffrement générée de façon dynamique.                                                                                 |
-| Code Challenge        | Une transformation de la valeur Code Verifier.                                                                                               |
+| Code Challenge        | Une transformation du code verifier. Le `code_challenge` doit utiliser un encodage `base64url`.                                           |
 | Code Challenge Method | La méthode utilisée pour dériver le `code_challenge` à partir de la valeur `code_verifier`. Vous devez utiliser le hachage [SHA-256][16] pour calculer le `code_challenge`. |
 
 Le [protocole PKCE][11] s'intègre au flux d'octroi de code d'autorisation en effectuant les actions suivantes :
@@ -91,7 +93,7 @@ Le [protocole PKCE][11] s'intègre au flux d'octroi de code d'autorisation en ef
 
 - L'application envoie à Datadog une requête de token contenant le code d'autorisation et la chaîne `code_verifier` pour obtenir un token d'accès. L'endpoint de token vérifie le code d'autorisation en transformant la chaîne `code_verifier` à l'aide de la méthode définie via le paramètre `code_challenge_method` et compare la valeur obtenue à la valeur `code_challenge` d'origine.
 
-
+## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -99,7 +101,7 @@ Le [protocole PKCE][11] s'intègre au flux d'octroi de code d'autorisation en ef
 [2]: /fr/api/latest/scopes/
 [3]: /fr/developers/datadog_apps/#oauth-api-access
 [4]: https://datatracker.ietf.org/doc/html/rfc6749#section-3.2.1
-[5]: /fr/developers/integrations/oauth_for_data_integrations
+[5]: /fr/developers/integrations/api_integration
 [6]: /fr/developers/authorization/oauth2_endpoints/?tab=authorizationendpoints#request-authorization-from-a-user
 [7]: /fr/developers/authorization/oauth2_endpoints/?tab=apikeycreationendpoints#create-an-api-key-on-behalf-of-a-user
 [8]: https://tools.ietf.org/html/rfc6749#section-4.1

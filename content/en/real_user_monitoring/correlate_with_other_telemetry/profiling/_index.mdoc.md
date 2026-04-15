@@ -251,6 +251,8 @@ The [ProfilingManager API][7] also supports disabling rate limiting during debug
 
 ## Explore profiling data
 
+Profiling data is captured on vitals and rolls up to views and sessions. Use `@profiling.has_profile` in the Sessions Explorer to filter to profiled events and investigate which code ran and how it affected the user's experience. This is available for sessions, views, and vitals.
+
 ### During the time to initial display
 
 Android application launch profiling data is attached to the [time to initial display][8] vital event in a RUM session. You can access the time to initial display from the session side panel, view side panel, or directly from the time to initial display vital side panel.
@@ -320,6 +322,8 @@ If no value is specified, the default `applicationLaunchSampleRate` is 5 percent
 ```
 
 ## Explore profiling data
+
+Profiling data is captured on vitals and rolls up to views and sessions. Use `@profiling.has_profile` in the Sessions Explorer to filter to profiled events and investigate which code ran and how it affected the user's experience. This is available for sessions, views, and vitals.
 
 ### During the time to initial display
 

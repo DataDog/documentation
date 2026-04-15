@@ -1,4 +1,5 @@
 ---
+id: gauge
 title: gauge
 core_product:
   - metrics

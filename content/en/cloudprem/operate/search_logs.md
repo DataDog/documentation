@@ -19,18 +19,22 @@ further_reading:
 
 ## Explore CloudPrem logs in the Logs Explorer
 
-1. Go to the Datadog Log Explorer.
-2. On the left facet panel, select the checkbox for your index under CLOUDPREM INDEXES.
+1. Go to the [Datadog Log Explorer][1].
+2. On the left facet panel, under **CLOUDPREM INDEXES**, select one or more indexes to search.
 
-A CloudPrem index name is built with the following rule:
+You can select a specific index to narrow your search, or select all indexes in a cluster to search across them.
+
+CloudPrem index names follow this format:
 
 ```
-index:cloudprem-<CLUSTER_NAME>
+cloudprem--<CLUSTER_NAME>--<INDEX_NAME>
 ```
 
 ## Search limitations
 
-You cannot query CloudPrem clusters alongside other Datadog log indexes. Additionally, Flex Logs are not supported with CloudPrem.
+You cannot query CloudPrem indexes alongside other Datadog log indexes. Additionally, Flex Logs are not supported with CloudPrem.
+
+[1]: https://app.datadoghq.com/logs
 
 ## Further reading
 

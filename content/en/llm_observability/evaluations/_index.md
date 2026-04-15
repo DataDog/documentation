@@ -34,7 +34,7 @@ For developers building custom evaluators, see the [Evaluation Developer Guide][
 
 ### Evaluation integrations
 
-Datadog also supports integrations with some 3rd party evaluation frameworks, such as [Ragas][4] and [NeMo][5].
+Datadog also supports integrations with some 3rd party evaluation frameworks, such as [NeMo][5].
 
 ### Annotation Queues
 
@@ -65,7 +65,6 @@ LLM Observability offers an [Export API][9] that you can use to retrieve spans f
 [1]: /llm_observability/evaluations/custom_llm_as_a_judge_evaluations
 [2]: /llm_observability/evaluations/managed_evaluations
 [3]: /llm_observability/evaluations/external_evaluations
-[4]: /llm_observability/evaluations/ragas_evaluations
 [5]: /llm_observability/evaluations/submit_nemo_evaluations
 [6]: /security/sensitive_data_scanner/
 [7]: /account_management/rbac/permissions/#llm-observability
