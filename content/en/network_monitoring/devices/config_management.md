@@ -150,18 +150,18 @@ NCM uses device profiles to collect configurations from network devices over SSH
 
 For the profile source files, see the [NCM default profiles directory][8] in the `datadog-agent` repository.
 
-| Vendor | Profile | Example Devices | Minimal Agent version | Running | Startup |
+| Vendor | OS | Profile | Minimal Agent version | Running | Startup |
 |---|---|---|---|---|---|
-| Arista | `eos` | Arista switches | 7.77.0 | {{< X >}} | {{< X >}} |
-| Aruba | `aoscx` | Aruba CX switches | 7.76.0 | {{< X >}} | {{< X >}} |
-| Aruba | `aosw` | Aruba switches and controllers | 7.75.0 | {{< X >}} | |
-| Cisco | `cisco-ios` | Catalyst switches, ISR/ASR routers | 7.73.0 | {{< X >}} | {{< X >}} |
-| Cisco | `nxos` | Nexus data center switches | 7.76.0 | {{< X >}} | {{< X >}} |
-| Dell | `dellos10` | Dell EMC data center switches | 7.77.0 | {{< X >}} | {{< X >}} |
-| F5 | `tmos` | BIG-IP load balancers | 7.76.0 | {{< X >}} | |
-| FortiGate | `fortios` | FortiGate firewalls | 7.77.0 | {{< X >}} | |
-| Juniper | `junos` | EX/QFX/MX/SRX devices | 7.74.0 | {{< X >}} | |
-| Palo Alto | `pan-os` | Palo Alto firewalls | 7.75.0 | {{< X >}} | |
+| Arista | EOS | `eos` | 7.77.0 | {{< X >}} | {{< X >}} |
+| Aruba | AOS-CX | `aoscx` | 7.76.0 | {{< X >}} | {{< X >}} |
+| Aruba | AOS-W | `aosw` | 7.75.0 | {{< X >}} | |
+| Cisco | IOS | `cisco-ios` | 7.73.0 | {{< X >}} | {{< X >}} |
+| Cisco | NX-OS | `nxos` | 7.76.0 | {{< X >}} | {{< X >}} |
+| Dell | DellOS10 | `dellos10` | 7.77.0 | {{< X >}} | {{< X >}} |
+| F5 | TMOS | `tmos` | 7.76.0 | {{< X >}} | |
+| FortiGate | FortiOS | `fortios` | 7.77.0 | {{< X >}} | |
+| Juniper | JunOS | `junos` | 7.74.0 | {{< X >}} | |
+| Palo Alto | PAN-OS | `pan-os` | 7.75.0 | {{< X >}} | |
 
 ## Further Reading
 
