@@ -16,7 +16,7 @@ Bits AI Dev Agent is in Preview. To sign up, click <strong>Request Access</stron
 
 Bits AI Dev Agent is a generative AI coding assistant that uses observability data from Datadog to automatically diagnose and fix issues in your code. It integrates with GitHub to create production-ready pull requests, iterates on fixes using CI logs and developer feedback, and draws on multiple Datadog products to generate contextual fixes.
 
-Each time the Dev Agent investigates an issue or generates a fix, it creates a [**code session**][7], which captures the agent's analysis, actions, and any resulting code changes across supported Datadog products.
+Each time the Dev Agent investigates an issue or generates a fix, it creates a [**code session**][7], which captures the agent's analysis, actions, and any resulting code changes across supported Datadog products. Learn how to start and manage code sessions on [Code Sessions][16].
 
 ## Supported Datadog products
 
@@ -47,7 +47,7 @@ Bits AI Dev Agent integrates with GitHub to create pull requests, respond to com
   
   **Note**: Comment `@Datadog` to prompt Bits for updates to the PR. Bits Dev never auto-merges PRs.
 
-Go to **Bits AI** > **Dev Agent** > **[Code sessions][7]** to see all Dev Agent code sessions and generated PRs. You can search sessions and filter by service, product source, and status.
+See all PRs the Dev Agent is working on in **Bits AI** > **Dev Agent** > **[Code Sessions][7]**.
 
 ### Auto-push
 
@@ -128,3 +128,4 @@ To enable Bits AI Dev Agent, see [Setup][6].
 [13]: /containers/bits_ai_kubernetes_remediation
 [14]: https://app.datadoghq.com/code/settings
 [15]: /security/code_security/static_analysis/ai_enhanced_sast/
+[16]: /bits_ai/bits_ai_dev_agent/code_sessions/

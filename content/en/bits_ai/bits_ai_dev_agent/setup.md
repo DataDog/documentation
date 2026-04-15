@@ -5,7 +5,7 @@ disable_toc: false
 
 ## Overview
 
-Bits AI Dev Agent integrates with GitHub to open, update, and iterate on pull requests based on issues detected in Datadog.  
+Bits AI Dev Agent integrates with GitHub to open, update, and iterate on pull requests based on issues detected in Datadog. After completing setup, you can start working in a [code session][7].
 
 ## Prerequisites
 
@@ -123,3 +123,4 @@ In some cases, especially in repositories with many branches, GitHub does not ru
 [4]: /integrations/guide/source-code-integration/?tab=go#tag-your-apm-telemetry-with-git-information
 [5]: https://app.datadoghq.com/code/settings?tab=repositories
 [6]: https://app.datadoghq.com/code/settings
+[7]: /bits_ai/bits_ai_dev_agent/code_sessions/
