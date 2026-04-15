@@ -35,7 +35,7 @@ Worker version 2.15.0 gives you access to the following:
     - AWS WAF Web ACL logs. Transforms WAF log events into OCSF HTTP Activity (class 4002) with `cloud` and `security_control` profiles.
     - Zscaler ZPA User Status logs to OCSF schema version 1.3.0 (Authentication, class 3002) with `datetime` and `host` profiles.
 - The OpenTelemetry source now supports metrics pipelines.
-- The Enrichment Table file option now supports a unified field option that accepts an event field path or a metadata secret as the lookup key source.
+- The Enrichment Table file option now supports a unified `field` option that accepts an event field path or a metadata secret as the lookup key source.
     - A plain string (backwards-compatible) accepts Observability Pipelines simplified syntax or Vector Remap Language (VRL) syntax with a leading `.`: `field: "message"` / `field: ".message"`
     - An explicit event path using Observability Pipelines simplified syntax: `field: {event: "message"}`
     - An explicit event path using VRL syntax: `field: {vrl: ".message"}`
