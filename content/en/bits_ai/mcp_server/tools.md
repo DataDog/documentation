@@ -273,7 +273,7 @@ Finds monitoring gaps and coverage for services or hosts. Returns which signals 
 
 ## APM
 
-([Preview][56]) Tools for in-depth [APM][50] trace analysis, span search, Watchdog insights, and performance investigation.
+Tools for in-depth [APM][50] trace analysis, span search, Watchdog insights, and performance investigation.
 
 <div class="alert alert-info">The <code>apm</code> toolset is in Preview. <a href="https://www.datadoghq.com/product-preview/apm-mcp-toolset/">Sign up for access.</a></div>
 
@@ -552,7 +552,7 @@ Searches [Database Monitoring][26] query samples, which represent individual que
 
 ## DDSQL
 
-(Preview) Tools for querying Datadog data using [DDSQL][41], a SQL dialect with support for infrastructure resources, logs, metrics, RUM, spans, and other Datadog data sources.
+Tools for querying Datadog data using [DDSQL][41], a SQL dialect with support for infrastructure resources, logs, metrics, RUM, spans, and other Datadog data sources.
 
 <div class="alert alert-info">The <code>ddsql</code> toolset is in Preview.</div>
 
@@ -752,7 +752,7 @@ Guides you through onboarding Kubernetes clusters to Datadog.
 
 - Help me set up Datadog monitoring for my Kubernetes cluster.
 
-### `llm_observability_onboarding `
+### `llm_observability_onboarding`
 *Toolset: **onboarding***\
 Guides you through onboarding LLM Observability in Datadog.
 
@@ -772,7 +772,7 @@ Guides you through onboarding serverless applications to Datadog.
 
 - Help me monitor my AWS Lambda functions with Datadog.
 
-### `source_map_uploads `
+### `source_map_uploads`
 *Toolset: **onboarding***\
 Guides you through uploading source maps for RUM error mapping.
 
@@ -1024,4 +1024,3 @@ Adds an agent trigger to a workflow and publishes it, enabling the workflow to b
 [51]: /feature_flags/
 [53]: /security/threats/security_signals/
 [54]: /security/misconfigurations/findings/
-[56]: https://www.datadoghq.com/product-preview/apm-mcp-toolset/
