@@ -151,7 +151,7 @@ If you configured the host metrics receiver, add it to a separate metrics pipeli
 ```yaml
     metrics/host:
       receivers: [hostmetrics]
-      processors: [cumulativetodelta, deltatorate]
+      processors: [cumulativetodelta]
       exporters: [datadog/exporter]
 ```
 
