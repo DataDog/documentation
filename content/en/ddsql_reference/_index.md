@@ -922,7 +922,7 @@ dd.metrics_timeseries(
     query varchar [, from_timestamp timestamp, to_timestamp timestamp]
 )</pre>
       </td>
-      <td>Returns metric data as a timeseries. The function accepts a metrics query (with optional grouping) and optional timestamp parameters (default 1 hour) to define the time range. Returns data points over time rather than a single aggregated value.</td>
+      <td>Returns metric data as a timeseries. The function accepts a metrics query (with optional grouping) and optional timestamp parameters (default 1 hour) to define the time range. Returns datapoints over time rather than a single aggregated value.</td>
       <td>
         {{< code-block lang="sql" >}}
 SELECT *
@@ -966,7 +966,7 @@ dd.cloud_cost_timeseries(
     to_timestamp timestamp]
 )</pre>
       </td>
-      <td>Returns <a href="/cloud_cost_management/">Cloud Cost Management</a> data as a timeseries. The function accepts a cloud cost query (with optional grouping) and optional timestamp parameters to define the time range. Returns cost data points over time rather than a single aggregated value.</td>
+      <td>Returns <a href="/cloud_cost_management/">Cloud Cost Management</a> data as a timeseries. The function accepts a cloud cost query (with optional grouping) and optional timestamp parameters to define the time range. Returns cost datapoints over time rather than a single aggregated value.</td>
       <td>
         {{< code-block lang="sql" >}}
 SELECT *
