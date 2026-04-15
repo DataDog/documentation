@@ -277,6 +277,8 @@ Before using this code, implement the following helper functions for your enviro
 - `save_tenant_credentials(tenant_id, token, base_url, credential)`: stores the tenant's share token, base URL, and credential in your secret store
 - `get_secure_embed_token_for_tenant(tenant_id)`: retrieves the share token for a tenant from your secret store
 - `get_base_url_for_tenant(tenant_id)`: retrieves the base URL for a tenant from your secret store
+- `get_credential_for_tenant(tenant_id)`: retrieves the credential for a tenant from your secret store
+- `get_tenant_id_for_user(user_id)`: maps an authenticated user to their tenant ID
 - `delete_tenant_credentials(tenant_id)`: removes the tenant's credentials from your secret store
 
 ```python
@@ -387,8 +389,9 @@ The iFrame URL generation follows the same pattern as single-tenant setups. The 
 @cross_origin(origins="*", methods=["GET", "OPTIONS"], allow_headers=["Content-Type"])
 def embed_url():
     user_id = get_authenticated_user_id()
-    credential = get_credential_from_secure_store_for_user_id(user_id)
-    base_url = get_base_url_for_user_id(user_id)
+    tenant_id = get_tenant_id_for_user(user_id)
+    credential = get_credential_for_tenant(tenant_id)
+    base_url = get_base_url_for_tenant(tenant_id)
     iframe_url = generate_secure_embed_url(credential, base_url)
     return jsonify({"iframeUrl": iframe_url})
 ```
