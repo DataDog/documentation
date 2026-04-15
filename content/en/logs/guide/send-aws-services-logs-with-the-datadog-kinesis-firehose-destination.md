@@ -159,7 +159,7 @@ To populate all logs by ARN:
 
 When logs arrive through Amazon Data Firehose, Datadog automatically determines the `source`, `service`, and tags for each log based on AWS metadata:
 
-1. **Source**: Detected from the CloudWatch Log Group name. For example, `/aws/lambda/my-function` sets `source:lambda`, `/aws/rds/...` sets `source:rds`. If the log group does not match a known AWS service pattern, the log group name itself is used as the source.
+1. **Source**: Detected from the CloudWatch log group name. For example, `/aws/lambda/my-function` sets `source:lambda`, and `/aws/rds/...` sets `source:rds`. If the log group does not match a known AWS service pattern, the log group name itself is used as the source.
 2. **Service**: Defaults to the same value as the detected source. For Lambda logs, the service is set to the function name.
 3. **Tags**: AWS metadata such as `region`, `aws_account`, and `sourcecategory:aws` are added automatically.
 
