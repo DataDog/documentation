@@ -68,6 +68,9 @@ Designating tests as unskippable ensures that Test Impact Analysis runs them reg
 
 ### Marking tests as unskippable
 
+{{< tabs >}}
+{{% tab "XCTest" %}}
+
 ```swift
 import XCTest
 import DatadogSDKTesting
@@ -80,13 +83,37 @@ extension SomeTestCase: ExtendableTaggedType {
   static func extendableTypeTags() -> ExtendableTypeTags {
     withTagger { tagger in
       // Mark all class unskippable
-      tagger.set(type: .itrSkippable, to: false)
+      tagger.set(type: .tiaSkippable, to: false)
       // Set only one method unskippable
-      tagger.set(instance: .itrSkippable, to: false, method: #selector(testMethod))
+      tagger.set(instance: .tiaSkippable, to: false, method: #selector(testMethod))
     }
   }
 }
 ```
+
+{{% /tab %}}
+{{% tab "Swift Testing" %}}
+
+```swift
+import Testing
+import DatadogSDKTesting
+
+// Mark an entire suite as unskippable
+@Suite(.tags(.dd.tia.unskippable))
+struct SomeSuite {
+  @Test func testMethod() {}
+}
+
+// Mark only a specific test as unskippable
+@Suite
+struct SomeSuite {
+  @Test(.tags(.dd.tia.unskippable))
+  func testMethod() {}
+}
+```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Temporarily disabling Test Impact Analysis
 
