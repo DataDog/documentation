@@ -175,6 +175,8 @@ For example, setting `source: nodejs` and `env: production` in the Common Attrib
 
 #### Reserved attributes in the log body
 
+<div class="alert alert-info">Parsing reserved attributes (<code>ddsource</code>, <code>service</code>, <code>ddtags</code>) from the log body is not enabled by default. To enable it for your organization, <a href="/help/">contact Datadog Support</a>.</div>
+
 If your application writes structured JSON logs that include `ddsource`, `service`, or `ddtags` at the top level of the JSON body, Datadog can use those values instead of the auto-detected ones. For example:
 
 ```json
@@ -192,8 +194,6 @@ When enabled, these fields take the highest priority, overriding both the auto-d
 - `ddtags` values are merged into the log's tags (for example, `env` and `version` become searchable tags).
 
 These fields are consumed during intake and do not appear as log attributes.
-
-<div class="alert alert-info">This behavior is not enabled by default. To enable it for your organization, <a href="/help/">contact Datadog Support</a>.</div>
 
 ## Further Reading
 
