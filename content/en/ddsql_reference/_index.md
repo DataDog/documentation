@@ -855,7 +855,7 @@ This table provides an overview of the supported window functions. For comprehen
 | json_array_elements_text(text json)           | rows of text | Expands a JSON array into a set of rows. This form is only allowed in a FROM clause.                                                                                                                                                                                                                           |
 
 ## Table functions
-Table functions are used to query logs, metrics, cloud costs, and other unstructured data sources.
+Table functions are used to query logs, metrics, cloud costs, and other data sources.
 
 <table style="width: 100%; table-layout: fixed;">
   <thead>
