@@ -42,7 +42,7 @@ As an alternative to managing custom rules in Datadog, the [datadog-custom-rules
 2. Add three secrets:
    - `DD_API_KEY` — your Datadog API key
    - `DD_APP_KEY` — your Datadog Application key
-   - `DD_SITE` — your Datadog site hostname (for example, `datadoghq.com`, `datadoghq.eu`, or `us3.datadoghq.com`)
+   - `DD_SITE` — your [Datadog site][6] hostname (for example, `datadoghq.com`, `datadoghq.eu`, or `us3.datadoghq.com`)
 
 ### How sync works
 
@@ -144,3 +144,4 @@ All Datadog default rules are available in [Code Security][4]. You can easily an
 [3]: https://tree-sitter.github.io/tree-sitter/using-parsers/queries/index.html
 [4]: https://app.datadoghq.com/ci/code-analysis/static-analysis/default-rulesets
 [5]: https://github.com/DataDog/datadog-custom-rules-template
+[6]: /getting_started/site/
