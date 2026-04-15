@@ -1,18 +1,9 @@
----
-title: Troubleshooting
-description: "Troubleshoot common issues with RUM Browser SDK including missing data, ad blockers, network restrictions, and configuration problems."
-aliases:
-  - /real_user_monitoring/browser/troubleshooting/
-further_reading:
-- link: 'https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/'
-  tag: 'Blog'
-  text: 'Real User Monitoring'
-- link: '/integrations/content_security_policy_logs/'
-  tag: 'Documentation'
-  text: 'Content Security Policy'
----
+<!--
+This partial contains troubleshooting content for the Browser SDK.
+It can be included in the browser SDK troubleshooting page or in the unified client_sdks view.
+-->
 
-If you experience unexpected behavior with Datadog Browser RUM, use this guide to resolve issues quickly. If you continue to have trouble, contact [Datadog Support][1] for further assistance. Regularly update to the latest version of the [RUM Browser SDK][2], as each release contains improvements and fixes.
+If you experience unexpected behavior with Datadog Browser RUM, use this guide to resolve issues. If you continue to have trouble, contact [Datadog Support][1] for further assistance. Regularly update to the latest version of the [RUM Browser SDK][2], as each release contains improvements and fixes.
 
 ## Missing data
 
@@ -23,30 +14,29 @@ If you can't see any RUM data or if data is missing for some users:
 | Ad blockers prevent the RUM Browser SDK from being downloaded or sending data to Datadog.     | Some ad blockers extend their restrictions to performance and marketing tracking tools. See the [Install the RUM Browser SDK with npm][3] and [forward the collected data through a proxy][4] docs. |
 | Network rules, VPNs, or antivirus software can prevent the RUM Browser SDK from being downloaded or sending data to Datadog. | Grant access to the endpoints required to download the RUM Browser SDK or to send data. The list of endpoints is available in the [Content Security Policy documentation][5].                                        |
 | Scripts, packages, and clients initialized before the RUM Browser SDK can lead to missed logs, resources, and user actions. For example, initializing ApolloClient before the RUM Browser SDK may result in `graphql` requests not being logged as XHR resources in the RUM Explorer. | Check where the RUM Browser SDK is initialized and consider moving this step earlier in the execution of your application code.                                             |
-| If you've set `trackViewsManually: true` and notice that no sessions are present, the application may have suddenly stopped sending RUM information even though there are no network errors. | Be sure to start an initial view once you've initialized RUM to prevent any data loss. See [Advanced Configuration][6] for more information.|
+| If you've set `trackViewsManually: true` and notice that no sessions are present, the application may have suddenly stopped sending RUM information even though there are no network errors. | Be sure to start an initial view after you've initialized RUM to prevent any data loss. See [Advanced Configuration][6] for more information.|
 
-Read the [Content Security Policy guidelines][5] and ensure your website grants access to the RUM Browser SDK CDN and the intake endpoint.
+Read the [Content Security Policy guidelines][5] and make sure your website grants access to the RUM Browser SDK CDN and the intake endpoint.
 
 ## Issues running multiple RUM tools in the same application
 
-Datadog supports only one SDK per application. To ensure optimal data collection and full functionality of all Datadog RUM SDK features, use only the Datadog RUM SDK.
+Datadog supports only one SDK per application. For optimal data collection and full functionality of all Datadog RUM SDK features, use only the Datadog RUM SDK.
 
 ### The RUM Browser SDK is initialized
 
 Check if the RUM Browser SDK is initialized by running `window.DD_RUM.getInternalContext()` in your browser console and verify an `application_id`, `session_id`, and view object are returned:
 
-{{< img src="real_user_monitoring/browser/troubleshooting/success_rum_internal_context.png" alt="Successful get internal context command">}}
+{% img src="real_user_monitoring/browser/troubleshooting/success_rum_internal_context.png" alt="Successful get internal context command" /%}
 
 If the RUM Browser SDK is not installed, or if it is not successfully initialized, you may see the `ReferenceError: DD_RUM is not defined` error like the one below:
 
-{{< img src="real_user_monitoring/browser/troubleshooting/error_rum_internal_context.png" alt="Error get internal context command">}}
+{% img src="real_user_monitoring/browser/troubleshooting/error_rum_internal_context.png" alt="Error get internal context command" /%}
 
 You can also check your browser developer tools console or network tab if you notice any errors related to the loading of the RUM Browser SDK.
 
-**Note**: To ensure accurate results, set `sessionSampleRate` to 100. For more information, see [Configure Your Setup For Browser RUM and Browser RUM & Session Replay Sampling][9].
+**Note**: For accurate results, set `sessionSampleRate` to 100. For more information, see [Configure Your Setup For Browser RUM and Browser RUM & Session Replay Sampling][9].
 
 ### Data to the Datadog intake
-
 
 The RUM SDK sends batches of event data to Datadog's intake every time one of these conditions have been met:
 
@@ -57,7 +47,7 @@ The RUM SDK sends batches of event data to Datadog's intake every time one of th
 
 If data is being sent, you should see network requests targeting `api/v2/rum` (the URL origin part may differ due to RUM configuration) in the Network section of your browser developer tools:
 
-{{< img src="real_user_monitoring/browser/troubleshooting/network_intake-1.png" alt="RUM requests to Datadog intake">}}
+{% img src="real_user_monitoring/browser/troubleshooting/network_intake-1.png" alt="RUM requests to Datadog intake" /%}
 
 ## RUM cookies
 
@@ -74,17 +64,6 @@ The RUM Browser SDK relies on cookies to store session information and follow a 
 ## Session IDs, cookies and RUM applications
 
 There is a one-to-one relation between a RUM session and the RUM application it belongs to. Therefore, the domain set for the `_dd_s` cookie is fully dedicated to the RUM application it is monitoring and cannot monitor any additional applications.
-
-## "No cookie support detected" error with EUA authentication
-
-If your application uses Enterprise User Administration (EUA) with a redirect to CMS IDM for authentication, the login flow fails when it occurs inside an iframe. During the redirect, the CSRF token is dropped, which is expected security behavior. Because CSRF protection cannot function correctly when the authentication sequence begins within an iframe, the application returns a `No cookie support detected` error.
-
-To record the browser test successfully:
-
-1. **Record using the popup window mode**: When starting the browser test recording, select **Open in Popup** instead of recording inside the iframe. This allows the authentication flow to complete without losing the CSRF token.
-2. **Log out before recording**: Make sure there is no active session or saved cookies. Start the recording with a completely clean session.
-3. **Use incognito/private browsing mode**: This prevents cached credentials or cookies from interfering with the authentication flow.
-4. **Record once using the popup window**: After the test is recorded through the popup, it runs correctly from the private location.
 
 ## Technical limitations
 
@@ -133,7 +112,7 @@ To minimize the user bandwidth impact, the RUM browser SDK throttles the data se
 
 For the best user experience, Datadog recommends keeping the size of the global context, user information, and feature flags below 3KiB. If the data exceeds this limit, a warning is displayed: `The data exceeds the recommended 3KiB threshold.`
 
-Since v5.3.0, the RUM Browser SDK supports data compression via the `compressIntakeRequest` [initialization parameter][13]. When enabled, this recommended limit is extended from 3KiB to 16KiB.
+Since v5.3.0, the RUM Browser SDK supports data compression through the `compressIntakeRequest` [initialization parameter][13]. When enabled, this recommended limit is extended from 3KiB to 16KiB.
 
 ## Cross origin read blocking warning
 
@@ -144,10 +123,6 @@ The warning is shown because the intake returns a non-empty JSON object. This be
 ## "Deobfuscation failed" warning
 
 A warning appears when deobfuscation fails for a stack trace. If the stack trace is not obfuscated to begin with, you can ignore this warning. Otherwise, use the [RUM Debug Symbols page][14] to view all your uploaded source maps. See [Investigate Obfuscated Stack Traces with RUM Debug Symbols][15].
-
-## Further Reading
-
-{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /help
 [2]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md
