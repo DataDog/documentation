@@ -35,15 +35,18 @@ Worker version 2.15.0 gives you access to the following:
     - AWS WAF Web ACL logs. Transforms WAF log events into OCSF HTTP Activity (class 4002) with `cloud` and `security_control` profiles.
     - Zscaler ZPA User Status logs to OCSF schema version 1.3.0 (Authentication, class 3002) with `datetime` and `host` profiles.
 - The OpenTelemetry source now supports metrics pipelines.
-- The Enrichment Table file option now supports a unified `field` option that accepts an event field path or a metadata secret as the lookup key source.
-    - A plain string (backwards-compatible) accepts Observability Pipelines simplified syntax or Vector Remap Language (VRL) syntax with a leading `.`: `field: "message"` / `field: ".message"`
-    - An explicit event path using Observability Pipelines simplified syntax: `field: {event: "message"}`
-    - An explicit event path using VRL syntax: `field: {vrl: ".message"}`
-    - A metadata secret reference: `field: {secret: "splunk_hec_token"}`
+- The Enrichment Table file option now supports a unified `field` option that accepts an event field path or a metadata secret as the lookup key source. Plain text is supported for backwards compatibility.
+    - Explicit event path examples:
+        - Observability Pipelines simplified syntax: `field: {event: "message"}`
+        - VRL syntax: `field: {vrl: ".message"}`
+    - Metadata secret reference example: `field: {secret: "splunk_hec_token"}`
+    - Plain string (for backwards compatibility):
+        - Observability Pipelines simplified syntax: `field: "message"`
+        - VRL syntax: `field: ".message"`
 
 #### Enhancements
 
-- The AWS S3 source now accepts compressed data.
+- The Amazon S3 source now accepts compressed data.
 - The Elasticsearch destination has been updated with new options: `auto_routing`, `compression`, `id_key`, `pipeline`, `request_retry_partial`, `sync_fields`, and `tls`.
 - Mapping array-of-object source fields into OCSF array-of-object destinations is now supported.
 - The Datadog Metrics destination now defaults to the Datadog series v2 endpoint (`/api/v2/series`).
