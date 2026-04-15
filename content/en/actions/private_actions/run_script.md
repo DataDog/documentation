@@ -264,7 +264,8 @@ services:
     build: . # if you are using a local Dockerfile
     # image: <your_custom_published_image> # if you published your image to a registry
     volumes:
-      - "./config:/etc/dd-action-runner/config"
+      - "./config:/etc/dd-action-runner/config" # contains credentials for actions
+      - "./scripts:/etc/dd-action-runner-script/scripts" # contains dependencies for script actions
 ```
 
 ```yaml
