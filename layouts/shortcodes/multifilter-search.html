@@ -100,6 +100,7 @@ x-data="{
     
     this.filterTypes[filterType] = this.filterTypes[filterType].filter(s => s !== filterOption)
     this.pushState(filterType, filterOption)
+    this.resetFilteredSet()
   },
   deleteAllSelections (filterType) {
     // delete all selections of a filter type from filter toggler and url params
@@ -110,6 +111,7 @@ x-data="{
 
     url.searchParams.delete(filterType)
     window.history.pushState(null,'', url.toString())
+    this.resetFilteredSet()
   },
   initFilterSearchValues () {
       // Initializes and Updates x-data filter and search properties with url param values, if any
@@ -133,35 +135,29 @@ x-data="{
   },
   pushState (filterType=undefined, filterOption=undefined) {
       // Updates url with new query params for filter type and search without refreshing the page
-
       const url = new URL(window.location.href)
-      let newURL = ''
-      if(filterType){
-          if(!url.searchParams.getAll(filterType).includes(filterOption)){
+      if (filterType) {
+          const current = url.searchParams.getAll(filterType)
+          if (!current.includes(filterOption)) {
               // add one key:value param
               url.searchParams.append(filterType, filterOption)
-            }else{
-              // remove one key:value param
-
-              function encode (match) {
-                // callback function to encode some special characters. 
-                // accounting for how the toString url method encodes characters
-                return match === ' ' ? '\\+': '%'+ match.charCodeAt(0).toString(16).toUpperCase()
-              }
-              const regex = new RegExp(`([\\&\\?])${filterType}=${filterOption.replace(/[\s()!*\[\]%,]/g, encode)}(?=\&|$)`, 'g');
-              newURL = url.toString().replaceAll(regex, '').replace('/&', '/?')
+          } else {
+              const i = current.indexOf(filterOption)
+              if (i !== -1) current.splice(i, 1)
+              url.searchParams.delete(filterType)
+              current.forEach((v) => url.searchParams.append(filterType, v))
           }
-          if(!this.filterTypes[filterType].length) {
-             url.searchParams.delete(filterType)
+          if (!this.filterTypes[filterType]?.length) {
+              url.searchParams.delete(filterType)
           }
-      }else {
+      } else {
           url.searchParams.set('search', this.searchValue)
-          if(!this.searchValue) {
+          if (!this.searchValue) {
               url.searchParams.delete('search')
-          } 
+          }
       }
 
-      window.history.pushState(null,'', newURL || url.toString())
+      window.history.pushState(null, '', url.toString())
   },
   emptyResultsMsg () {
       // Determine and return the appropriate empty results message
@@ -281,7 +277,7 @@ x-init="initFilterSearchValues()">
                             {{/*  Delete one selection (x) */}}
                             <div 
                             :data-id="filter.toLowerCase().replaceAll(' ', '-')" 
-                            class="close-light-wrapper" @click.stop="resetFilteredSet; deleteOneSelection('{{ $filter_type }}', filter )">
+                            class="close-light-wrapper" @click.stop="deleteOneSelection('{{ $filter_type }}', filter )">
                                 {{ partial "icon" (dict "name" "close-light_x" "title" "delete" "size" "14px") }}
                             </div>
                         </div>
@@ -291,7 +287,7 @@ x-init="initFilterSearchValues()">
                 {{/*  Delete all selections for a filter type  */}}
                 <div class="overflow-gradient h-100 position-absolute top-0 end-0 rounded-end">
                     <template x-if="filterTypes['{{$filter_type}}'].length">
-                        <span class="cancel-circle-wrapper" @click.stop="resetFilteredSet; deleteAllSelections('{{ $filter_type }}')">
+                        <span class="cancel-circle-wrapper" @click.stop="deleteAllSelections('{{ $filter_type }}')">
                             {{ partial "icon" (dict "name" "x-circle-solid" "title" "delete all" ) }}
                         </span>
                     </template>
@@ -311,10 +307,11 @@ x-init="initFilterSearchValues()">
                     <span>All</span>
                 </div>
 
-                {{ range (index ($navigation.Get "dropdown") $h.name) | sort  }}
+                {{ $sorted_filter_options := sort (index ($navigation.Get "dropdown") $h.name) }}
+                {{ range $idx, $item := $sorted_filter_options }}
                   {{/*  Removes markdown link syntax if it exists  */}}
-                  {{ $clean_value := replaceRE `\[(.*)\]\(.*\)` "$1" . }}
-                  {{ $id := (printf "%s-%s" $clean_value $filter_type) | anchorize }}
+                  {{ $clean_value := replaceRE `\[(.*)\]\(.*\)` "$1" $item }}
+                  {{ $id := printf "%s-%d" $filter_type $idx }}
                   <div class="filter-selection-container">
                       <input 
                       id='{{ $id }}' 
