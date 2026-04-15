@@ -87,7 +87,7 @@ After you select a feature flag, Datadog pre-populates the randomization setting
 To configure how users are assigned to variants:
 1. Select the **Environment** for your experiment from the dropdown (for example, `production` for live user traffic or `staging` for testing).
 1. Under **Targeting rules**:
-   1. Click **Add Filter** to define conditions based on user attributes (such as geography, device type, or custom attributes) and filter which users to include in the experiment.
+   1. Click **Add Filter** to define conditions based on custom attributes set in your SDK's evaluation context and filter which users to include in the experiment.
    1. Click **Add Condition** to set additional conditions.
 1. Under **Variants**, set how traffic is split between your experiment groups. Use the **Randomize users and split traffic** dropdown to choose **Equally** or **Custom**.
 1. Under **Traffic exposure**, set the percentage of targeted traffic to include in the experiment.
