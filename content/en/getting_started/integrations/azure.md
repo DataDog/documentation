@@ -261,7 +261,7 @@ Use the **Configure Log Forwarding** flow to set up new or manage existing log f
 1. Copy the provided command and paste it in your Azure Cloud Shell.
 1. Select the subscriptions to forward logs from.
 1. Optionally, add or remove log filters.
-1. Click **Finish setup**.
+1. Click **Confirm**.
 
 For more details, see [Azure Automated Log Forwarding Setup][19].
 
