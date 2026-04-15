@@ -1,5 +1,6 @@
 ---
 title: iOS and tvOS Libraries for RUM
+private: true
 description: "Integrate popular iOS libraries like URLSession, Alamofire, Apollo GraphQL and image loaders with RUM for automatic monitoring and tracking."
 aliases:
 - /real_user_monitoring/ios/integrated_libraries/
