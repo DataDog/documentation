@@ -490,7 +490,7 @@ logger.info("Flag: {} | Value: {} | Variant: {} | Reason: {}",
 
 This guide follows the flag data path from the **Flagging Platform** (where flags are configured) through **Remote Configuration** and the **Datadog Agent** to the **Java SDK**, and back to the **Flagging Platform** (where evaluations and exposures appear). Work through each step in sequence to isolate where a problem originates.
 
-### 1. Flagging platform: verify flag configuration
+### 1. Flagging platform: Verify flag configuration
 
 Before checking infrastructure, confirm the flag itself is set up correctly:
 
@@ -498,17 +498,17 @@ Before checking infrastructure, confirm the flag itself is set up correctly:
 2. The flag targets the **correct service** (`DD_SERVICE`) and **environment** (`DD_ENV`).
 3. Your `DD_ENV` value appears in [Feature Flag Environments][5]. If it is absent, the environment has not received any flag traffic yet.
 
-### 2. Remote Configuration: verify the RC path
+### 2. Remote Configuration: Verify the path
 
 Remote Configuration delivers flag configurations from the Datadog backend to the Agent.
 
 1. **RC is enabled on the Agent**: Set `remote_configuration.enabled: true` in `datadog.yaml` or `DD_REMOTE_CONFIG_ENABLED=true`. See [Remote Configuration][1].
 2. **`DD_API_KEY` is valid** and belongs to the target organization.
-3. **`DD_SITE` is set correctly** on the Agent (`site` in `datadog.yaml` or `DD_SITE` env var). See [Check Agent Site][3].
-4. **Fleet Automation**: Open [Fleet Automation][4] (`https://app.datadoghq.com/fleet`), select the Agent your application connects to, and confirm Remote Configuration is active.
+3. **`DD_SITE` is set correctly** on the Agent (`site` in `datadog.yaml` or `DD_SITE` env var). See [Agent Site Issues][3].
+4. **Fleet Automation**: Open [Fleet Automation][4], select the Agent your application connects to, and confirm Remote Configuration is active.
 5. **Agent CLI**: Run `datadog-agent status` and review the Remote Configuration section of the output. See [Agent Commands][6].
 
-### 3. Agent: verify Agent health and connectivity
+### 3. Agent: Verify Agent health and connectivity
 
 1. **Agent is running and reachable**: See [APM Connection Errors][2] for steps to verify Agent connectivity from the tracer.
 2. **Agent version**: Feature flagging requires Agent 7.x or later with EVP Proxy support.
@@ -517,17 +517,14 @@ Remote Configuration delivers flag configurations from the Datadog backend to th
    curl http://localhost:8126/info
    ```
 
-If the Agent logs show:
+   If the Agent logs show the following error, the Agent either started after the tracer connected or does not support EVP Proxy. In this case, check the Agent version and restart order.
+   ```
+   Cannot create backend API client since Agentless mode is disabled, and agent does not support EVP proxy
+   ```
 
-```
-Cannot create backend API client since agentless mode is disabled, and agent does not support EVP proxy
-```
+### 4. SDK: Verify Java SDK state
 
-the Agent either started after the tracer connected or does not support EVP Proxy. Check the Agent version and restart order.
-
-### 4. SDK: verify Java SDK state
-
-**Enable debug logging**
+#### Enable debug logging
 
 All feature flagging startup messages are emitted at DEBUG level. Set `DD_TRACE_DEBUG=true` and look for the startup sequence:
 
@@ -544,7 +541,7 @@ discovered ... evpProxyEndpoint=evp_proxy/v4/ configEndpoint=v0.7/config
 
 If these messages are absent, verify `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true` is set and the tracer started correctly.
 
-**Monitor provider state changes**
+#### Monitor provider state changes
 
 Add event listeners early in application startup to observe provider life cycle transitions. These are the fastest way to detect connectivity changes after initialization:
 
@@ -568,9 +565,9 @@ client.on(ProviderEvent.PROVIDER_CONFIGURATION_CHANGED, (event) -> {
 });
 {{< /code-block >}}
 
-A `PROVIDER_STALE` or `PROVIDER_ERROR` event after a period of normal operation indicates a loss of connectivity to the Agent or a Remote Configuration disruption.
+A `PROVIDER_ERROR` or `PROVIDER_STALE` event after a period of normal operation indicates a loss of connectivity to the Agent or a Remote Configuration disruption.
 
-**Provider not ready**
+#### Provider not ready
 
 `PROVIDER_NOT_READY` is returned when flag evaluation is attempted before the provider has received its first configuration from Remote Configuration. This state persists until the tracer receives its initial flag configuration payload from the Agent.
 
@@ -580,7 +577,7 @@ Common causes:
 
 Remote Configuration sync can take 30-60 seconds after publishing flags. If `PROVIDER_NOT_READY` persists beyond that, re-check steps 2 and 3.
 
-**Debug flag evaluations**
+#### Debug flag evaluations
 
 If flags return unexpected values, use `getBooleanDetails()` instead of `getBooleanValue()`. The `Details` variant returns a `FlagEvaluationDetails` object exposing the provider's internal state:
 
@@ -597,17 +594,17 @@ logger.info("Flag evaluation details: value={}, variant={}, reason={}, errorCode
 
 Review `reason` and `errorCode` to understand why the provider returned a given result.
 
-**Type mismatch errors**
+#### Type mismatch errors
 
 `TYPE_MISMATCH` is returned when the evaluation method does not match the flag's configured type. Use the correct method for each flag type: `getBooleanValue()`, `getStringValue()`, `getIntegerValue()`, `getDoubleValue()`.
 
 ### 5. Flagging platform: verify data appears in Datadog
 
-**Flag evaluation metrics**
+#### Flag evaluation metrics
 
 Flag evaluation counts appear in Datadog when `DD_METRICS_OTEL_ENABLED=true` is set on the tracer. Each evaluation emits a `feature_flag.evaluations` counter metric tagged with the flag key, result variant, and evaluation reason. If this metric does not appear, verify the setting is enabled and the tracer version supports it.
 
-**Experiment exposures**
+#### Experiment exposures
 
 Exposures appear in Datadog only for flags associated with an experiment. Standard feature flags without an experiment association do not generate exposure events. If exposures are missing:
 
@@ -621,6 +618,6 @@ Exposures appear in Datadog only for flags associated with an experiment. Standa
 [1]: /remote_configuration/
 [2]: /tracing/troubleshooting/connection_errors/
 [3]: /agent/troubleshooting/site/
-[4]: /agent/fleet_automation/
+[4]: https://app.datadoghq.com/fleet
 [5]: https://app.datadoghq.com/feature-flags/settings/environments
 [6]: /agent/configuration/agent-commands/
