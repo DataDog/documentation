@@ -103,7 +103,7 @@ To configure instrumentation rules:
    1. Name your rule.
    1. Add one or more conditions. See [Define rule conditions](#define-rule-conditions) to learn more.
 
-   {{< img src="tracing/trace_collection/define_instrumentation_rule.png" alt="The instrumentation rules UI, showing configuration options for defining a rule" style="width:100%;" >}}
+     {{< img src="tracing/trace_collection/define_instrumentation_rule.png" alt="The instrumentation rules UI, showing configuration options for defining a rule" style="width:100%;" >}}
 
 1. (Optional) Drag and drop rules to reorder them.
 
