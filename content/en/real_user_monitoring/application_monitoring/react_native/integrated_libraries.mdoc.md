@@ -1,7 +1,7 @@
 ---
 title: React Native Libraries for RUM
-private: true
 description: "Integrate React Native libraries with RUM SDK for automatic monitoring of navigation, network requests, and other app functionality."
+private: true
 aliases:
 - /real_user_monitoring/reactnative/integrated_libraries/
 - /real_user_monitoring/mobile_and_tv_monitoring/integrated_libraries/reactnative
