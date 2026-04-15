@@ -52,7 +52,7 @@ You can add multiple custom columns and reorder them with drag-and-drop. Column 
 
 When viewing the root span in the span detail side panel, you can act on fields directly from the context menu instead of manually typing paths.
 
-**On JSON fields** (Input, Output, Expected Output, Metadata):
+The following options are available on JSON fields (Input, Output, Expected Output, Metadata):
 
 - **Copy key path**: Copies the field's full path (for example, `@meta.input.user_query`) so you can paste it into the custom column input, search bar, or a dashboard widget query.
 - **Add column**: Adds the field as a custom column in the results table in one click.
