@@ -1,6 +1,7 @@
 ---
 title: Android Mobile Vitals
 description: "Monitor Android mobile vitals including startup times, resource usage, and performance metrics to optimize app performance and user experience."
+private: true
 aliases:
   - /real_user_monitoring/android/mobile_vitals
   - /real_user_monitoring/mobile_and_tv_monitoring/android/mobile_vitals
