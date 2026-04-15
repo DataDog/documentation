@@ -37,10 +37,10 @@ With PATs, you can:
 ## Create a Personal Access Token
 
 1. Navigate to [**Personal Settings** > **Access Tokens**][1].
-2. Click **+ New Access Token**.
-3. Enter a **Name** for the token.
-4. Select an **Expiration Date**. The minimum expiration is 24 hours and the maximum is one year from creation.
-5. Click **Select Scopes** to choose the scopes that define what this token can access. At least one scope is required. Grant only the permissions your workflow requires, then click **Save**.
+2. Click {{< ui >}}+ New Access Token{{< /ui >}}.
+3. Enter a {{< ui >}}Name{{< /ui >}} for the token.
+4. Select an {{< ui >}}Expiration Date{{< /ui >}}. The minimum expiration is 24 hours and the maximum is one year from creation.
+5. Click {{< ui >}}Select Scopes{{< /ui >}} to choose the scopes that define what this token can access. At least one scope is required. Grant only the permissions your workflow requires, then click {{< ui >}}Save{{< /ui >}}.
 
 <div class="alert alert-warning">Datadog displays the token secret only once at creation time. Copy and store it securely. You cannot retrieve it later.</div>
 
@@ -88,7 +88,7 @@ Organization administrators with the `org_app_keys_read` and `org_app_keys_write
 ### Revoke a token
 
 1. Navigate to [**Personal Settings** > **Access Tokens**][1], or [**Organization Settings** > **Access Tokens**][2] for administrators.
-2. Mouse over the token you want to revoke and click the **Revoke Token** icon.
+2. Mouse over the token you want to revoke and click the {{< ui >}}Revoke Token{{< /ui >}} icon.
 
 Revoked tokens can no longer authenticate API calls. Revocation takes effect within seconds.
 

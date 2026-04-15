@@ -51,28 +51,28 @@ To browse connections, navigate to the [cross-organization visibility page][6] i
 Creating a cross-organization connection allows you to query metrics from the source organization in the destination organization.
 
 1. Make sure you are signed in to the _source_ organization that contains the data you want to expose.
-1. On the [cross-organization visibility page][6], click **New Connection**. The **New Connection** dialog box appears.
+1. On the [cross-organization visibility page][6], click {{< ui >}}New Connection{{< /ui >}}. The {{< ui >}}New Connection{{< /ui >}} dialog box appears.
 1. In the drop-down menu, select the _destination_ organization where you want to see the data.
-1. Click **Connect**.
+1. Click {{< ui >}}Connect{{< /ui >}}.
 
 ### Update a connection
 
 Updating an existing cross-organization connection allows you to change the data types that are shared from the source organization in the destination organization.
 
 1. Make sure you are signed in to the _source_ organization of the existing connection.
-1. Hover over the connection you wish to update. A pencil (**Edit**) icon appears on the right.
-1. Click the pencil (**Edit**) icon on the connection you wish to update. The **Edit Connection** dialog box appears.
+1. Hover over the connection you wish to update. A pencil ({{< ui >}}Edit{{< /ui >}}) icon appears on the right.
+1. Click the pencil ({{< ui >}}Edit{{< /ui >}}) icon on the connection you wish to update. The {{< ui >}}Edit Connection{{< /ui >}} dialog box appears.
 1. Select the checkboxes for the data types you wish to include.
-1. Click **Save**.
+1. Click {{< ui >}}Save{{< /ui >}}.
 
 ### Delete a connection
 
 Deleting a connection disables cross-organization querying from the destination organization of the source organization's metrics.
 
 1. Navigate to the [cross-organization visibility page][6] in Organization Settings.
-1. Hover over the connection you wish to delete. A trash can (**Delete**) icon appears on the right.
-1. Click the trash can (**Delete**) icon on the connection you wish to delete. The **Are you sure?** prompt appears.
-1. Click **Delete**.
+1. Hover over the connection you wish to delete. A trash can ({{< ui >}}Delete{{< /ui >}}) icon appears on the right.
+1. Click the trash can ({{< ui >}}Delete{{< /ui >}}) icon on the connection you wish to delete. The {{< ui >}}Are you sure?{{< /ui >}} prompt appears.
+1. Click {{< ui >}}Delete{{< /ui >}}.
 
 ### In the API
 
@@ -166,23 +166,23 @@ Connections from the source org inherit the data access permissions of the conne
 **Note:** Connections created from HIPAA-enabled organizations may allow the sharing of protected health information (PHI) to destination organizations. Customers are responsible for any sensitive data transferred, including PHI.
 
 1. Navigate to the [cross-organization visibility page][6] in Organization Settings.
-1. Hover over the cross-organization connection on which you would like to set granular permissions. **Permissions** and **Delete** icons appear on the right.
-1. Click on the padlock (**Permissions**) icon.
-1. Select **Restrict Access**.
-1. The dialog box updates to show that members of your organization have **Viewer** access by default.
+1. Hover over the cross-organization connection on which you would like to set granular permissions. {{< ui >}}Permissions{{< /ui >}} and {{< ui >}}Delete{{< /ui >}} icons appear on the right.
+1. Click on the padlock ({{< ui >}}Permissions{{< /ui >}}) icon.
+1. Select {{< ui >}}Restrict Access{{< /ui >}}.
+1. The dialog box updates to show that members of your organization have {{< ui >}}Viewer{{< /ui >}} access by default.
 1. Use the dropdown to select one or more teams, roles, or users that may edit the cross-organization connection.
-1. Click **Add**.
-1. The dialog box updates to show that the role you selected has the **Editor** permission.
-1. Click **Save**.
+1. Click {{< ui >}}Add{{< /ui >}}.
+1. The dialog box updates to show that the role you selected has the {{< ui >}}Editor{{< /ui >}} permission.
+1. Click {{< ui >}}Save{{< /ui >}}.
 
 **Note**: To maintain your edit access to the cross-organization connection, the system requires you to include at least one role or team that you are a member of before saving.
 
 To restore general access to a cross-organization connection with restricted access, follow the steps below:
 
-1. In the cross-organization visibility page, hover over the cross-organization connection you would like to restore general access to. **Permissions** and **Delete** icons appear on the right.
-1. Click on the padlock (**Permissions**) icon.
-1. Click **Restore Full Access**.
-1. Click **Save**.
+1. In the cross-organization visibility page, hover over the cross-organization connection you would like to restore general access to. {{< ui >}}Permissions{{< /ui >}} and {{< ui >}}Delete{{< /ui >}} icons appear on the right.
+1. Click on the padlock ({{< ui >}}Permissions{{< /ui >}}) icon.
+1. Click {{< ui >}}Restore Full Access{{< /ui >}}.
+1. Click {{< ui >}}Save{{< /ui >}}.
 
 [1]: /account_management/multi_organization/
 [2]: /dashboards/widgets
