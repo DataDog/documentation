@@ -991,6 +991,48 @@ components:
         scaling:
           $ref: "#/components/schemas/BarChartWidgetScaling"
       type: object
+    CalendarInterval:
+      additionalProperties: false
+      description: Calendar interval definition.
+      properties:
+        alignment:
+          description: Alignment of the interval. Valid values depend on the interval type. For `day`, use hours (for example, `1am`, `2pm`, or `14`). For `week`, use day names (for example, `monday`). For `month`, use day-of-month ordinals (for example, `1st`, `15th`). For `year` or `quarter`, use month names (for example, `january`).
+          example: "monday"
+          type: string
+        quantity:
+          description: Quantity of the interval.
+          example: 1
+          format: int64
+          type: integer
+        timezone:
+          description: Timezone for the interval.
+          example: "UTC"
+          type: string
+        type:
+          $ref: "#/components/schemas/CalendarIntervalType"
+      required:
+        - type
+      type: object
+    CalendarIntervalType:
+      description: Type of calendar interval.
+      enum:
+        - day
+        - week
+        - month
+        - year
+        - quarter
+        - minute
+        - hour
+      example: week
+      type: string
+      x-enum-varnames:
+        - DAY
+        - WEEK
+        - MONTH
+        - YEAR
+        - QUARTER
+        - MINUTE
+        - HOUR
     CancelDowntimesByScopeRequest:
       description: Cancel downtimes according to scope.
       properties:
@@ -1235,6 +1277,69 @@ components:
       type: string
       x-enum-varnames:
         - CHECK_STATUS
+    CohortWidgetDefinition:
+      additionalProperties: false
+      description: The cohort widget visualizes user retention over time.
+      properties:
+        description:
+          description: The description of the widget.
+          type: string
+        requests:
+          description: List of Cohort widget requests.
+          example:
+            - query:
+                compute:
+                  aggregation: count
+                  metric: __dd.retention_rate
+                data_source: product_analytics_retention
+                search:
+                  cohort_criteria:
+                    base_query:
+                      data_source: product_analytics
+                      search:
+                        query: "@type:view @view.name:/home"
+                    time_interval:
+                      type: calendar
+                      value:
+                        type: week
+                  retention_entity: "@usr.id"
+                  return_condition: conversion_on_or_after
+                  return_criteria:
+                    base_query:
+                      data_source: product_analytics
+                      search:
+                        query: "@type:view @view.name:/checkout"
+              request_type: retention_grid
+          items:
+            $ref: "#/components/schemas/RetentionGridRequest"
+            description: A cohort widget request.
+          minItems: 1
+          type: array
+        time:
+          $ref: "#/components/schemas/WidgetTime"
+        title:
+          description: Title of your widget.
+          type: string
+        title_align:
+          $ref: "#/components/schemas/WidgetTextAlign"
+        title_size:
+          description: Size of the title.
+          type: string
+        type:
+          $ref: "#/components/schemas/CohortWidgetDefinitionType"
+      required:
+        - type
+        - requests
+      type: object
+    CohortWidgetDefinitionType:
+      default: cohort
+      description: Type of the Cohort widget.
+      enum:
+        - cohort
+      example: cohort
+      type: string
+      x-enum-varnames:
+        - COHORT
     ContentEncoding:
       description: HTTP header used to compress the media-type.
       enum:
@@ -2889,6 +2994,7 @@ components:
         peer_tags:
           description: Tags to query for a specific downstream entity (peer.service, peer.db_instance, peer.s3, peer.s3.bucket, etc.).
           items:
+            description: "A tag identifying a specific downstream entity (for example: peer.service, peer.db_instance)."
             example: "peer.service:my-service"
             type: string
           type: array
@@ -3354,6 +3460,54 @@ components:
         - metric
         - name
       type: object
+    FormulaAndFunctionProductAnalyticsExtendedDataSource:
+      description: Data source for Product Analytics Extended queries.
+      enum:
+        - product_analytics_extended
+      example: product_analytics_extended
+      type: string
+      x-enum-varnames:
+        - PRODUCT_ANALYTICS_EXTENDED
+    FormulaAndFunctionProductAnalyticsExtendedQueryDefinition:
+      description: A formula and functions Product Analytics Extended query for advanced analytics features.
+      properties:
+        audience_filters:
+          $ref: "#/components/schemas/ProductAnalyticsAudienceFilters"
+        compute:
+          $ref: "#/components/schemas/ProductAnalyticsExtendedCompute"
+        data_source:
+          $ref: "#/components/schemas/FormulaAndFunctionProductAnalyticsExtendedDataSource"
+        group_by:
+          description: Group by configuration.
+          items:
+            $ref: "#/components/schemas/ProductAnalyticsExtendedGroupBy"
+            description: A Product Analytics Extended group by configuration.
+          type: array
+        indexes:
+          description: Event indexes to query.
+          example: ["*"]
+          items:
+            $ref: "#/components/schemas/FormulaAndFunctionProductAnalyticsExtendedQueryDefinitionIndexesItems"
+          type: array
+        name:
+          description: Name of the query for use in formulas.
+          example: "query1"
+          type: string
+        query:
+          $ref: "#/components/schemas/ProductAnalyticsBaseQuery"
+      required:
+        - data_source
+        - name
+        - query
+        - compute
+      type: object
+    FormulaAndFunctionProductAnalyticsExtendedQueryDefinitionIndexesItems:
+      description: Use `"*"` to query all indexes.
+      enum:
+        - "*"
+      type: string
+      x-enum-varnames:
+        - ALL
     FormulaAndFunctionQueryDefinition:
       description: A formula and function query.
       oneOf:
@@ -3365,6 +3519,9 @@ components:
         - $ref: "#/components/schemas/FormulaAndFunctionApmMetricsQueryDefinition"
         - $ref: "#/components/schemas/FormulaAndFunctionSLOQueryDefinition"
         - $ref: "#/components/schemas/FormulaAndFunctionCloudCostQueryDefinition"
+        - $ref: "#/components/schemas/FormulaAndFunctionProductAnalyticsExtendedQueryDefinition"
+        - $ref: "#/components/schemas/FormulaAndFunctionUserJourneyQueryDefinition"
+        - $ref: "#/components/schemas/FormulaAndFunctionRetentionQueryDefinition"
     FormulaAndFunctionResponseFormat:
       description: Timeseries, scalar, or event list response. Event list response formats are supported by Geomap widgets.
       enum:
@@ -3377,6 +3534,31 @@ components:
         - TIMESERIES
         - SCALAR
         - EVENT_LIST
+    FormulaAndFunctionRetentionQueryDefinition:
+      description: A formula and functions Retention query for defining timeseries and scalar visualizations.
+      properties:
+        compute:
+          $ref: "#/components/schemas/RetentionCompute"
+        data_source:
+          $ref: "#/components/schemas/RetentionDataSource"
+        group_by:
+          description: Group by configuration.
+          items:
+            $ref: "#/components/schemas/RetentionGroupBy"
+            description: A Retention group by configuration.
+          type: array
+        name:
+          description: Name of the query for use in formulas.
+          example: "query1"
+          type: string
+        search:
+          $ref: "#/components/schemas/RetentionSearch"
+      required:
+        - data_source
+        - name
+        - search
+        - compute
+      type: object
     FormulaAndFunctionSLODataSource:
       description: Data source for SLO measures queries.
       enum:
@@ -3467,6 +3649,31 @@ components:
         - METRIC
         - MONITOR
         - TIME_SLICE
+    FormulaAndFunctionUserJourneyQueryDefinition:
+      description: A formula and functions User Journey query for defining funnel, timeseries, and scalar visualizations over journey data.
+      properties:
+        compute:
+          $ref: "#/components/schemas/UserJourneyFormulaCompute"
+        data_source:
+          $ref: "#/components/schemas/ProductAnalyticsFunnelDataSource"
+        group_by:
+          description: Group by configuration.
+          items:
+            $ref: "#/components/schemas/UserJourneyFormulaGroupBy"
+            description: A User Journey group by configuration.
+          type: array
+        name:
+          description: Name of the query for use in formulas.
+          example: "query1"
+          type: string
+        search:
+          $ref: "#/components/schemas/UserJourneySearch"
+      required:
+        - data_source
+        - name
+        - search
+        - compute
+      type: object
     FormulaType:
       description: Set the sort type to formula.
       enum: ["formula"]
@@ -3506,6 +3713,61 @@ components:
       type: string
       x-enum-varnames:
         - FREE_TEXT
+    FunnelComparisonCustomTimeframe:
+      additionalProperties: false
+      description: Custom timeframe for funnel comparison.
+      properties:
+        from:
+          description: Start of the custom timeframe.
+          example: 0.0
+          format: double
+          type: number
+        to:
+          description: End of the custom timeframe.
+          example: 0.0
+          format: double
+          type: number
+      required:
+        - from
+        - to
+      type: object
+    FunnelComparisonDuration:
+      additionalProperties: false
+      description: Comparison time configuration for funnel widgets.
+      properties:
+        custom_timeframe:
+          $ref: "#/components/schemas/FunnelComparisonCustomTimeframe"
+        type:
+          $ref: "#/components/schemas/FunnelComparisonDurationType"
+      required:
+        - type
+      type: object
+    FunnelComparisonDurationType:
+      description: Type of comparison duration.
+      enum:
+        - previous_timeframe
+        - custom_timeframe
+        - previous_day
+        - previous_week
+        - previous_month
+      example: previous_timeframe
+      type: string
+      x-enum-varnames:
+        - PREVIOUS_TIMEFRAME
+        - CUSTOM_TIMEFRAME
+        - PREVIOUS_DAY
+        - PREVIOUS_WEEK
+        - PREVIOUS_MONTH
+    FunnelGroupedDisplay:
+      description: Display mode for grouped funnel results.
+      enum:
+        - stacked
+        - side_by_side
+      example: stacked
+      type: string
+      x-enum-varnames:
+        - STACKED
+        - SIDE_BY_SIDE
     FunnelQuery:
       description: Updated funnel widget.
       properties:
@@ -3564,12 +3826,13 @@ components:
         description:
           description: The description of the widget.
           type: string
+        grouped_display:
+          $ref: "#/components/schemas/FunnelGroupedDisplay"
         requests:
           description: Request payload used to query items.
           example: [{"query": {"data_source": "rum", "query_string": "@browser.name:Chrome", "steps": [{"facet": "@view.name", "value": "/logs"}, {"facet": "@view.name", "value": "/apm/home"}]}, "request_type": "funnel"}]
           items:
             $ref: "#/components/schemas/FunnelWidgetRequest"
-          maxItems: 1
           minItems: 1
           type: array
         time:
@@ -6754,6 +7017,7 @@ components:
         sources:
           additionalProperties:
             items:
+              description: A fallback source attribute name.
               type: string
             type: array
           description: Fallback sources used to populate value of field.
@@ -6802,6 +7066,7 @@ components:
           description: Optional list of profiles to modify the schema.
           example: ["security_control", "host"]
           items:
+            description: A profile name that modifies the schema behavior.
             type: string
           type: array
         schema_type:
@@ -7915,6 +8180,7 @@ components:
           description: Columns to group results by.
           example: ["col1", "col2"]
           items:
+            description: A column name to group results by.
             type: string
           type: array
         model_type_override:
@@ -7934,6 +8200,7 @@ components:
           description: Optional grouping fields for aggregation.
           example: ["entity_id"]
           items:
+            description: A field name to group results by.
             type: string
           type: array
         measure:
@@ -11268,8 +11535,10 @@ components:
       description: Product Analytics audience account subquery.
       properties:
         name:
+          description: The name of the account subquery.
           type: string
         query:
+          description: The query string for the account subquery.
           type: string
       type: object
     ProductAnalyticsAudienceFilters:
@@ -11280,6 +11549,7 @@ components:
             $ref: "#/components/schemas/ProductAnalyticsAudienceAccountSubquery"
           type: array
         filter_condition:
+          description: An optional filter condition applied to the audience subquery.
           type: string
         segments:
           items:
@@ -11291,27 +11561,297 @@ components:
           type: array
       type: object
     ProductAnalyticsAudienceOccurrenceFilter:
+      description: Filter applied to occurrence counts when building a Product Analytics audience.
       properties:
         operator:
+          description: "The comparison operator used for the occurrence filter (for example: `gt`, `lt`, `eq`)."
           type: string
         value:
+          description: The threshold value to compare occurrence counts against.
           type: string
       type: object
     ProductAnalyticsAudienceSegmentSubquery:
       description: Product Analytics audience segment subquery.
       properties:
         name:
+          description: The name of the segment subquery.
           type: string
         segment_id:
+          description: The unique identifier of the segment.
           type: string
       type: object
     ProductAnalyticsAudienceUserSubquery:
       description: Product Analytics audience user subquery.
       properties:
         name:
+          description: The name of the user subquery.
           type: string
         query:
+          description: The query string for the user subquery.
           type: string
+      type: object
+    ProductAnalyticsBaseQuery:
+      $ref: "#/components/schemas/ProductAnalyticsEventQuery"
+      description: Base query for Product Analytics.
+    ProductAnalyticsEventDataSource:
+      description: Data source for Product Analytics event queries.
+      enum:
+        - product_analytics
+      example: product_analytics
+      type: string
+      x-enum-varnames:
+        - PRODUCT_ANALYTICS
+    ProductAnalyticsEventQuery:
+      additionalProperties: false
+      description: Product Analytics event query.
+      properties:
+        data_source:
+          $ref: "#/components/schemas/ProductAnalyticsEventDataSource"
+        search:
+          $ref: "#/components/schemas/ProductAnalyticsEventQuerySearch"
+      required:
+        - data_source
+        - search
+      type: object
+    ProductAnalyticsEventQuerySearch:
+      additionalProperties: false
+      description: Search configuration for Product Analytics event query.
+      properties:
+        query:
+          description: RUM event search query used to filter views or actions.
+          example: "@type:view @view.name:/home"
+          type: string
+      required:
+        - query
+      type: object
+    ProductAnalyticsExtendedCompute:
+      additionalProperties: false
+      description: Compute configuration for Product Analytics Extended queries.
+      properties:
+        aggregation:
+          $ref: "#/components/schemas/FormulaAndFunctionEventAggregation"
+        interval:
+          description: Fixed-width time bucket interval in milliseconds for time series queries. Mutually exclusive with `rollup`.
+          example: 60000
+          format: double
+          type: number
+        metric:
+          description: Measurable attribute to compute.
+          example: "@usr.id"
+          type: string
+        name:
+          description: Name of the compute for use in formulas.
+          example: "query1"
+          type: string
+        rollup:
+          $ref: "#/components/schemas/CalendarInterval"
+          description: Calendar-aligned time bucket for time series queries (for example, day, week, or month boundaries). Mutually exclusive with `interval`.
+      required:
+        - aggregation
+      type: object
+    ProductAnalyticsExtendedGroupBy:
+      description: Group by configuration for Product Analytics Extended queries.
+      properties:
+        facet:
+          description: Facet name to group by.
+          example: "@geo.country"
+          type: string
+        limit:
+          description: Maximum number of groups to return.
+          example: 10
+          format: int32
+          maximum: 10000
+          type: integer
+        should_exclude_missing:
+          description: Whether to exclude events missing the group-by facet.
+          type: boolean
+        sort:
+          $ref: "#/components/schemas/FormulaAndFunctionEventQueryGroupBySort"
+      required:
+        - facet
+      type: object
+    ProductAnalyticsFunnelCompute:
+      additionalProperties: false
+      description: Compute configuration for user journey funnel.
+      properties:
+        aggregation:
+          $ref: "#/components/schemas/ProductAnalyticsFunnelComputeAggregation"
+        metric:
+          $ref: "#/components/schemas/ProductAnalyticsFunnelComputeMetric"
+      required:
+        - aggregation
+        - metric
+      type: object
+    ProductAnalyticsFunnelComputeAggregation:
+      description: Aggregation type for user journey funnel compute.
+      enum:
+        - cardinality
+        - count
+      example: count
+      type: string
+      x-enum-varnames:
+        - CARDINALITY
+        - COUNT
+    ProductAnalyticsFunnelComputeMetric:
+      description: Metric for user journey funnel compute. `__dd.conversion` and `__dd.conversion_rate` accept `count` (unique users/sessions) and `cardinality` (total users/sessions) as aggregations.
+      enum:
+        - __dd.conversion
+        - __dd.conversion_rate
+      example: __dd.conversion_rate
+      type: string
+      x-enum-varnames:
+        - CONVERSION
+        - CONVERSION_RATE
+    ProductAnalyticsFunnelDataSource:
+      description: Data source for user journey funnel queries.
+      enum:
+        - product_analytics_journey
+      example: product_analytics_journey
+      type: string
+      x-enum-varnames:
+        - PRODUCT_ANALYTICS_JOURNEY
+    ProductAnalyticsFunnelGroupBy:
+      description: Group by configuration for user journey funnel.
+      properties:
+        facet:
+          description: Facet to group by.
+          example: "@usr.email"
+          type: string
+        limit:
+          description: Maximum number of groups.
+          format: int64
+          type: integer
+        should_exclude_missing:
+          description: Whether to exclude missing values.
+          type: boolean
+        sort:
+          $ref: "#/components/schemas/ProductAnalyticsFunnelGroupBySort"
+        target:
+          $ref: "#/components/schemas/UserJourneySearchTarget"
+      required:
+        - facet
+      type: object
+    ProductAnalyticsFunnelGroupBySort:
+      additionalProperties: false
+      description: Sort configuration for user journey funnel group by.
+      properties:
+        aggregation:
+          description: Aggregation type.
+          example: "count"
+          type: string
+        metric:
+          description: Metric to sort by.
+          example: "@session.id"
+          type: string
+        order:
+          $ref: "#/components/schemas/WidgetSort"
+      required:
+        - aggregation
+      type: object
+    ProductAnalyticsFunnelQuery:
+      additionalProperties: false
+      description: User journey funnel query definition.
+      properties:
+        compute:
+          $ref: "#/components/schemas/ProductAnalyticsFunnelCompute"
+        data_source:
+          $ref: "#/components/schemas/ProductAnalyticsFunnelDataSource"
+        group_by:
+          description: Group by configuration.
+          items:
+            $ref: "#/components/schemas/ProductAnalyticsFunnelGroupBy"
+            description: A user journey funnel group by configuration.
+          type: array
+        search:
+          $ref: "#/components/schemas/UserJourneySearch"
+        subquery_id:
+          description: Subquery ID.
+          type: string
+      required:
+        - data_source
+        - search
+      type: object
+    ProductAnalyticsFunnelRequest:
+      additionalProperties: false
+      description: User journey funnel widget request.
+      properties:
+        comparison_segments:
+          description: Comparison segments.
+          items:
+            description: Segment identifier.
+            minLength: 1
+            type: string
+          minItems: 1
+          type: array
+        comparison_time:
+          $ref: "#/components/schemas/FunnelComparisonDuration"
+        query:
+          $ref: "#/components/schemas/ProductAnalyticsFunnelQuery"
+        request_type:
+          $ref: "#/components/schemas/ProductAnalyticsFunnelRequestType"
+      required:
+        - query
+        - request_type
+      type: object
+    ProductAnalyticsFunnelRequestType:
+      description: Request type for user journey funnel widget.
+      enum:
+        - user_journey_funnel
+      example: user_journey_funnel
+      type: string
+      x-enum-varnames:
+        - USER_JOURNEY_FUNNEL
+    ProductAnalyticsFunnelWidgetDefinition:
+      additionalProperties: false
+      description: The user journey funnel visualization displays conversion funnels based on user journey data from Product Analytics.
+      properties:
+        description:
+          description: The description of the widget.
+          type: string
+        grouped_display:
+          $ref: "#/components/schemas/FunnelGroupedDisplay"
+        requests:
+          description: Request payload used to query items.
+          example:
+            - query:
+                compute:
+                  aggregation: cardinality
+                  metric: __dd.conversion
+                data_source: product_analytics_journey
+                search:
+                  expression: "step1 -> step2"
+                  filters:
+                    string_filter: "@application.id:xxx @geo.country:France"
+                  node_objects:
+                    step1:
+                      data_source: product_analytics
+                      search:
+                        query: "@type:view @view.name:/home"
+                    step2:
+                      data_source: product_analytics
+                      search:
+                        query: '@type:action @action.name:"add to cart"'
+              request_type: user_journey_funnel
+          items:
+            $ref: "#/components/schemas/ProductAnalyticsFunnelRequest"
+            description: A user journey funnel widget request.
+          minItems: 1
+          type: array
+        time:
+          $ref: "#/components/schemas/WidgetTime"
+        title:
+          description: The title of the widget.
+          type: string
+        title_align:
+          $ref: "#/components/schemas/WidgetTextAlign"
+        title_size:
+          description: The size of the title.
+          type: string
+        type:
+          $ref: "#/components/schemas/FunnelWidgetDefinitionType"
+      required:
+        - type
+        - requests
       type: object
     QuerySortOrder:
       default: desc
@@ -11500,6 +12040,354 @@ components:
       properties:
         page:
           $ref: "#/components/schemas/Pagination"
+      type: object
+    RetentionCohortCriteria:
+      additionalProperties: false
+      description: Cohort criteria for retention queries.
+      properties:
+        base_query:
+          $ref: "#/components/schemas/ProductAnalyticsBaseQuery"
+        time_interval:
+          $ref: "#/components/schemas/RetentionCohortCriteriaTimeInterval"
+      required:
+        - base_query
+        - time_interval
+      type: object
+    RetentionCohortCriteriaTimeInterval:
+      additionalProperties: false
+      description: Time interval for cohort criteria.
+      properties:
+        type:
+          $ref: "#/components/schemas/RetentionCohortCriteriaTimeIntervalType"
+        value:
+          $ref: "#/components/schemas/CalendarInterval"
+      required:
+        - type
+        - value
+      type: object
+    RetentionCohortCriteriaTimeIntervalType:
+      description: Type of time interval for cohort criteria.
+      enum:
+        - calendar
+      example: calendar
+      type: string
+      x-enum-varnames:
+        - CALENDAR
+    RetentionCompute:
+      additionalProperties: false
+      description: Compute configuration for retention queries.
+      properties:
+        aggregation:
+          $ref: "#/components/schemas/EventsAggregation"
+        metric:
+          $ref: "#/components/schemas/RetentionComputeMetric"
+      required:
+        - aggregation
+        - metric
+      type: object
+    RetentionComputeMetric:
+      description: Metric for retention compute.
+      enum:
+        - __dd.retention
+        - __dd.retention_rate
+      example: __dd.retention_rate
+      type: string
+      x-enum-varnames:
+        - RETENTION
+        - RETENTION_RATE
+    RetentionCurveRequestType:
+      description: Request type for retention curve widget.
+      enum:
+        - retention_curve
+      example: retention_curve
+      type: string
+      x-enum-varnames:
+        - RETENTION_CURVE
+    RetentionCurveStyle:
+      additionalProperties: false
+      description: Style configuration for retention curve.
+      properties:
+        palette:
+          description: Color palette for the retention curve.
+          example: "dog_classic"
+          type: string
+      type: object
+    RetentionCurveWidgetDefinition:
+      additionalProperties: false
+      description: The retention curve widget visualizes user retention rates over time.
+      properties:
+        description:
+          description: The description of the widget.
+          type: string
+        requests:
+          description: List of Retention Curve widget requests.
+          example:
+            - query:
+                compute:
+                  aggregation: count
+                  metric: __dd.retention_rate
+                data_source: product_analytics_retention
+                search:
+                  cohort_criteria:
+                    base_query:
+                      data_source: product_analytics
+                      search:
+                        query: "@type:view @view.name:/home"
+                    time_interval:
+                      type: calendar
+                      value:
+                        type: week
+                  retention_entity: "@usr.id"
+                  return_condition: conversion_on_or_after
+                  return_criteria:
+                    base_query:
+                      data_source: product_analytics
+                      search:
+                        query: "@type:view @view.name:/checkout"
+              request_type: retention_curve
+          items:
+            $ref: "#/components/schemas/RetentionCurveWidgetRequest"
+            description: A retention curve widget request.
+          minItems: 1
+          type: array
+        time:
+          $ref: "#/components/schemas/WidgetTime"
+        title:
+          description: Title of your widget.
+          type: string
+        title_align:
+          $ref: "#/components/schemas/WidgetTextAlign"
+        title_size:
+          description: Size of the title.
+          type: string
+        type:
+          $ref: "#/components/schemas/RetentionCurveWidgetDefinitionType"
+      required:
+        - type
+        - requests
+      type: object
+    RetentionCurveWidgetDefinitionType:
+      default: retention_curve
+      description: Type of the Retention Curve widget.
+      enum:
+        - retention_curve
+      example: retention_curve
+      type: string
+      x-enum-varnames:
+        - RETENTION_CURVE
+    RetentionCurveWidgetRequest:
+      additionalProperties: false
+      description: Retention curve widget request.
+      properties:
+        query:
+          $ref: "#/components/schemas/RetentionQuery"
+        request_type:
+          $ref: "#/components/schemas/RetentionCurveRequestType"
+        style:
+          $ref: "#/components/schemas/RetentionCurveStyle"
+      required:
+        - request_type
+        - query
+      type: object
+    RetentionDataSource:
+      description: Data source for retention queries.
+      enum:
+        - product_analytics_retention
+      example: product_analytics_retention
+      type: string
+      x-enum-varnames:
+        - PRODUCT_ANALYTICS_RETENTION
+    RetentionEntity:
+      description: Entity to track for retention.
+      enum:
+        - "@usr.id"
+        - "@account.id"
+      example: "@usr.id"
+      type: string
+      x-enum-varnames:
+        - USER_ID
+        - ACCOUNT_ID
+    RetentionFilters:
+      additionalProperties: false
+      description: Filters for retention queries.
+      properties:
+        audience_filters:
+          $ref: "#/components/schemas/ProductAnalyticsAudienceFilters"
+        string_filter:
+          description: String filter.
+          example: "@session.type:user"
+          type: string
+      type: object
+    RetentionGridRequest:
+      additionalProperties: false
+      description: Retention grid widget request.
+      properties:
+        query:
+          $ref: "#/components/schemas/RetentionQuery"
+        request_type:
+          $ref: "#/components/schemas/RetentionGridRequestType"
+      required:
+        - request_type
+        - query
+      type: object
+    RetentionGridRequestType:
+      description: Request type for retention grid widget.
+      enum:
+        - retention_grid
+      example: retention_grid
+      type: string
+      x-enum-varnames:
+        - RETENTION_GRID
+    RetentionGroupBy:
+      additionalProperties: false
+      description: Group by configuration for retention queries.
+      properties:
+        facet:
+          description: Facet to group by.
+          example: "@geo.country"
+          type: string
+        limit:
+          description: Maximum number of groups.
+          example: 10
+          format: int64
+          type: integer
+        should_exclude_missing:
+          description: Whether to exclude missing values.
+          example: false
+          type: boolean
+        sort:
+          $ref: "#/components/schemas/RetentionGroupBySort"
+        source:
+          description: Source field.
+          example: "@geo.country"
+          type: string
+        target:
+          $ref: "#/components/schemas/RetentionGroupByTarget"
+      required:
+        - target
+        - facet
+      type: object
+    RetentionGroupBySort:
+      additionalProperties: false
+      description: Sort configuration for retention group by.
+      properties:
+        order:
+          $ref: "#/components/schemas/WidgetSort"
+      type: object
+    RetentionGroupByTarget:
+      description: Target for retention group by.
+      enum:
+        - cohort
+        - return_period
+      example: cohort
+      type: string
+      x-enum-varnames:
+        - COHORT
+        - RETURN_PERIOD
+    RetentionQuery:
+      additionalProperties: false
+      description: Retention query definition.
+      properties:
+        compute:
+          $ref: "#/components/schemas/RetentionCompute"
+        data_source:
+          $ref: "#/components/schemas/RetentionDataSource"
+        filters:
+          $ref: "#/components/schemas/RetentionFilters"
+        group_by:
+          description: Group by configuration.
+          items:
+            $ref: "#/components/schemas/RetentionGroupBy"
+            description: A retention group by configuration.
+          type: array
+        name:
+          description: Name of the query.
+          example: "retention_query"
+          type: string
+        search:
+          $ref: "#/components/schemas/RetentionSearch"
+      required:
+        - data_source
+        - search
+        - compute
+      type: object
+    RetentionReturnCondition:
+      description: Condition for counting user return.
+      enum:
+        - conversion_on
+        - conversion_on_or_after
+      example: conversion_on_or_after
+      type: string
+      x-enum-varnames:
+        - CONVERSION_ON
+        - CONVERSION_ON_OR_AFTER
+    RetentionReturnCriteria:
+      additionalProperties: false
+      description: Return criteria for retention queries.
+      properties:
+        base_query:
+          $ref: "#/components/schemas/ProductAnalyticsBaseQuery"
+        time_interval:
+          $ref: "#/components/schemas/RetentionReturnCriteriaTimeInterval"
+      required:
+        - base_query
+      type: object
+    RetentionReturnCriteriaTimeInterval:
+      additionalProperties: false
+      description: Time interval for return criteria.
+      properties:
+        type:
+          $ref: "#/components/schemas/RetentionReturnCriteriaTimeIntervalType"
+        unit:
+          $ref: "#/components/schemas/RetentionReturnCriteriaTimeIntervalUnit"
+        value:
+          description: Value of the time interval.
+          example: 0.0
+          format: double
+          type: number
+      required:
+        - type
+        - value
+        - unit
+      type: object
+    RetentionReturnCriteriaTimeIntervalType:
+      description: Type of time interval for return criteria.
+      enum:
+        - fixed
+      example: fixed
+      type: string
+      x-enum-varnames:
+        - FIXED
+    RetentionReturnCriteriaTimeIntervalUnit:
+      description: Unit of time for retention return criteria interval.
+      enum:
+        - day
+        - week
+        - month
+      example: day
+      type: string
+      x-enum-varnames:
+        - DAY
+        - WEEK
+        - MONTH
+    RetentionSearch:
+      additionalProperties: false
+      description: Search configuration for retention queries.
+      properties:
+        cohort_criteria:
+          $ref: "#/components/schemas/RetentionCohortCriteria"
+        filters:
+          $ref: "#/components/schemas/RetentionFilters"
+        retention_entity:
+          $ref: "#/components/schemas/RetentionEntity"
+        return_condition:
+          $ref: "#/components/schemas/RetentionReturnCondition"
+        return_criteria:
+          $ref: "#/components/schemas/RetentionReturnCriteria"
+      required:
+        - cohort_criteria
+        - retention_entity
+        - return_condition
       type: object
     RunWorkflowWidgetDefinition:
       description: Run workflow is widget that allows you to run a workflow from a dashboard.
@@ -11879,6 +12767,7 @@ components:
         - $ref: "#/components/schemas/SLOCountDefinitionWithBadEventsFormula"
     SLOCountDefinitionWithBadEventsFormula:
       additionalProperties: false
+      description: SLO count definition using a bad events formula alongside a good events formula.
       properties:
         bad_events_formula:
           $ref: "#/components/schemas/SLOFormula"
@@ -11905,6 +12794,7 @@ components:
       type: object
     SLOCountDefinitionWithTotalEventsFormula:
       additionalProperties: false
+      description: SLO count definition using a total events formula alongside a good events formula.
       properties:
         good_events_formula:
           $ref: "#/components/schemas/SLOFormula"
@@ -13111,6 +14001,7 @@ components:
           description: Fields to group by.
           example: ["source", "destination"]
           items:
+            description: A field name to group by.
             type: string
           type: array
         limit:
@@ -13222,7 +14113,7 @@ components:
         occurrences:
           $ref: "#/components/schemas/ProductAnalyticsAudienceOccurrenceFilter"
         query_string:
-          description: Query string.
+          description: RUM event search query used to filter views or actions.
           example: "@type:view"
           type: string
         source:
@@ -13733,6 +14624,7 @@ components:
             Always included in service level objective responses (but may be empty).
           example: ["env:prod", "app:core"]
           items:
+            description: A tag associated with the service level objective.
             type: string
           type: array
         created_at:
@@ -13756,6 +14648,7 @@ components:
         env_tags:
           description: Tags with the `env` tag key.
           items:
+            description: A tag with the `env` tag key.
             type: string
           type: array
         groups:
@@ -13800,6 +14693,7 @@ components:
         service_tags:
           description: Tags with the `service` tag key.
           items:
+            description: A tag with the `service` tag key.
             type: string
           type: array
         slo_type:
@@ -13809,6 +14703,7 @@ components:
         team_tags:
           description: Tags with the `team` tag key.
           items:
+            description: A tag with the `team` tag key.
             type: string
           type: array
         thresholds:
@@ -14920,6 +15815,7 @@ components:
           description: The tag values.
           example: ["env"]
           items:
+            description: A tag value string.
             minLength: 1
             type: string
           type: array
@@ -18197,6 +19093,7 @@ components:
         blockedRequestPatterns:
           description: Array of URL patterns to block.
           items:
+            description: A URL pattern to block during the Synthetic test.
             type: string
           type: array
         checkCertificateRevocation:
@@ -21289,12 +22186,68 @@ components:
           description: Shows the sum of all browser RUM units over all hours in the current date for all organizations (To be deprecated on October 1st, 2024).
           format: int64
           type: integer
+        ccm_anthropic_spend_last:
+          description: Shows the last value of Anthropic cloud spend monitored over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        ccm_aws_spend_last:
+          description: Shows the last value of AWS cloud spend monitored over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        ccm_azure_spend_last:
+          description: Shows the last value of Azure cloud spend monitored over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        ccm_confluent_spend_last:
+          description: Shows the last value of Confluent cloud spend monitored over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        ccm_databricks_spend_last:
+          description: Shows the last value of Databricks cloud spend monitored over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        ccm_elastic_spend_last:
+          description: Shows the last value of Elastic cloud spend monitored over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        ccm_fastly_spend_last:
+          description: Shows the last value of Fastly cloud spend monitored over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        ccm_gcp_spend_last:
+          description: Shows the last value of GCP cloud spend monitored over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        ccm_github_spend_last:
+          description: Shows the last value of GitHub cloud spend monitored over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        ccm_mongodb_spend_last:
+          description: Shows the last value of MongoDB cloud spend monitored over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        ccm_oci_spend_last:
+          description: Shows the last value of OCI cloud spend monitored over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        ccm_openai_spend_last:
+          description: Shows the last value of OpenAI cloud spend monitored over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        ccm_snowflake_spend_last:
+          description: Shows the last value of Snowflake cloud spend monitored over all hours in the current date for all organizations.
+          format: int64
+          type: integer
         ccm_spend_monitored_ent_last:
           description: Shows the last value of the amount of cloud spend monitored for Enterprise over all hours in the current date for all organizations.
           format: int64
           type: integer
         ccm_spend_monitored_pro_last:
           description: Shows the last value of the amount of cloud spend monitored for Pro over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        ccm_twilio_spend_last:
+          description: Shows the last value of Twilio cloud spend monitored over all hours in the current date for all organizations.
           format: int64
           type: integer
         ci_pipeline_indexed_spans_sum:
@@ -22178,12 +23131,68 @@ components:
           description: Shows the sum of all browser RUM units over all hours in the current date for the given org (To be deprecated on October 1st, 2024).
           format: int64
           type: integer
+        ccm_anthropic_spend_last:
+          description: Shows the last value of Anthropic cloud spend monitored over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        ccm_aws_spend_last:
+          description: Shows the last value of AWS cloud spend monitored over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        ccm_azure_spend_last:
+          description: Shows the last value of Azure cloud spend monitored over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        ccm_confluent_spend_last:
+          description: Shows the last value of Confluent cloud spend monitored over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        ccm_databricks_spend_last:
+          description: Shows the last value of Databricks cloud spend monitored over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        ccm_elastic_spend_last:
+          description: Shows the last value of Elastic cloud spend monitored over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        ccm_fastly_spend_last:
+          description: Shows the last value of Fastly cloud spend monitored over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        ccm_gcp_spend_last:
+          description: Shows the last value of GCP cloud spend monitored over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        ccm_github_spend_last:
+          description: Shows the last value of GitHub cloud spend monitored over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        ccm_mongodb_spend_last:
+          description: Shows the last value of MongoDB cloud spend monitored over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        ccm_oci_spend_last:
+          description: Shows the last value of OCI cloud spend monitored over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        ccm_openai_spend_last:
+          description: Shows the last value of OpenAI cloud spend monitored over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        ccm_snowflake_spend_last:
+          description: Shows the last value of Snowflake cloud spend monitored over all hours in the current date for the given org.
+          format: int64
+          type: integer
         ccm_spend_monitored_ent_last:
           description: Shows the last value of the amount of cloud spend monitored for Enterprise over all hours in the current date for the given org.
           format: int64
           type: integer
         ccm_spend_monitored_pro_last:
           description: Shows the last value of the amount of cloud spend monitored for Pro over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        ccm_twilio_spend_last:
+          description: Shows the last value of Twilio cloud spend monitored over all hours in the current date for the given org.
           format: int64
           type: integer
         ci_pipeline_indexed_spans_sum:
@@ -23077,12 +24086,68 @@ components:
           description: Shows the sum of all browser RUM units over all hours in the current month for all organizations (To be deprecated on October 1st, 2024).
           format: int64
           type: integer
+        ccm_anthropic_spend_last_sum:
+          description: Shows the sum of the last value of Anthropic cloud spend monitored in the current month for all organizations.
+          format: int64
+          type: integer
+        ccm_aws_spend_last_sum:
+          description: Shows the sum of the last value of AWS cloud spend monitored in the current month for all organizations.
+          format: int64
+          type: integer
+        ccm_azure_spend_last_sum:
+          description: Shows the sum of the last value of Azure cloud spend monitored in the current month for all organizations.
+          format: int64
+          type: integer
+        ccm_confluent_spend_last_sum:
+          description: Shows the sum of the last value of Confluent cloud spend monitored in the current month for all organizations.
+          format: int64
+          type: integer
+        ccm_databricks_spend_last_sum:
+          description: Shows the sum of the last value of Databricks cloud spend monitored in the current month for all organizations.
+          format: int64
+          type: integer
+        ccm_elastic_spend_last_sum:
+          description: Shows the sum of the last value of Elastic cloud spend monitored in the current month for all organizations.
+          format: int64
+          type: integer
+        ccm_fastly_spend_last_sum:
+          description: Shows the sum of the last value of Fastly cloud spend monitored in the current month for all organizations.
+          format: int64
+          type: integer
+        ccm_gcp_spend_last_sum:
+          description: Shows the sum of the last value of GCP cloud spend monitored in the current month for all organizations.
+          format: int64
+          type: integer
+        ccm_github_spend_last_sum:
+          description: Shows the sum of the last value of GitHub cloud spend monitored in the current month for all organizations.
+          format: int64
+          type: integer
+        ccm_mongodb_spend_last_sum:
+          description: Shows the sum of the last value of MongoDB cloud spend monitored in the current month for all organizations.
+          format: int64
+          type: integer
+        ccm_oci_spend_last_sum:
+          description: Shows the sum of the last value of OCI cloud spend monitored in the current month for all organizations.
+          format: int64
+          type: integer
+        ccm_openai_spend_last_sum:
+          description: Shows the sum of the last value of OpenAI cloud spend monitored in the current month for all organizations.
+          format: int64
+          type: integer
+        ccm_snowflake_spend_last_sum:
+          description: Shows the sum of the last value of Snowflake cloud spend monitored in the current month for all organizations.
+          format: int64
+          type: integer
         ccm_spend_monitored_ent_last_sum:
           description: Shows the sum of the last value of the amount of cloud spend monitored for Enterprise in the current month for all organizations.
           format: int64
           type: integer
         ccm_spend_monitored_pro_last_sum:
           description: Shows the sum of the last value of the amount of cloud spend monitored for Pro in the current month for all organizations.
+          format: int64
+          type: integer
+        ccm_twilio_spend_last_sum:
+          description: Shows the sum of the last value of Twilio cloud spend monitored in the current month for all organizations.
           format: int64
           type: integer
         ci_pipeline_indexed_spans_agg_sum:
@@ -24127,6 +25192,158 @@ components:
           description: Information pertaining to a user disabled for a given organization.
           type: string
       type: object
+    UserJourneyFormulaCompute:
+      additionalProperties: false
+      description: Compute configuration for User Journey formula queries.
+      properties:
+        aggregation:
+          $ref: "#/components/schemas/FormulaAndFunctionEventAggregation"
+        interval:
+          description: Time bucket interval in milliseconds for time series queries.
+          example: 60000
+          format: double
+          type: number
+        metric:
+          $ref: "#/components/schemas/UserJourneyFormulaComputeMetric"
+        target:
+          $ref: "#/components/schemas/UserJourneySearchTarget"
+      required:
+        - aggregation
+      type: object
+    UserJourneyFormulaComputeMetric:
+      description: Metric for User Journey formula compute. `__dd.conversion` and `__dd.conversion_rate` accept `count` and `cardinality` as aggregations. `__dd.time_to_convert` accepts `avg`, `median`, `pc75`, `pc95`, `pc98`, `pc99`, `min`, and `max`.
+      enum:
+        - __dd.conversion
+        - __dd.conversion_rate
+        - __dd.time_to_convert
+      example: __dd.conversion_rate
+      type: string
+      x-enum-varnames:
+        - CONVERSION
+        - CONVERSION_RATE
+        - TIME_TO_CONVERT
+    UserJourneyFormulaGroupBy:
+      description: Group by configuration for User Journey formula queries.
+      properties:
+        facet:
+          description: Facet name to group by.
+          example: "@usr.email"
+          type: string
+        limit:
+          description: Maximum number of groups to return.
+          example: 10
+          format: int32
+          maximum: 10000
+          type: integer
+        should_exclude_missing:
+          description: Whether to exclude events missing the group-by facet.
+          type: boolean
+        sort:
+          $ref: "#/components/schemas/FormulaAndFunctionEventQueryGroupBySort"
+        target:
+          $ref: "#/components/schemas/UserJourneySearchTarget"
+      required:
+        - facet
+      type: object
+    UserJourneyJoinKeys:
+      description: Join keys for user journey queries.
+      properties:
+        primary:
+          description: Primary join key.
+          example: "@session.id"
+          type: string
+        secondary:
+          description: Secondary join keys.
+          items:
+            description: A secondary join key.
+            type: string
+          type: array
+      required:
+        - primary
+      type: object
+    UserJourneySearch:
+      additionalProperties: false
+      description: User journey search configuration.
+      properties:
+        expression:
+          description: Expression string.
+          example: "node_0 -> node_1"
+          type: string
+        filters:
+          $ref: "#/components/schemas/UserJourneySearchFilters"
+        join_keys:
+          $ref: "#/components/schemas/UserJourneyJoinKeys"
+        node_objects:
+          additionalProperties:
+            $ref: "#/components/schemas/ProductAnalyticsBaseQuery"
+          description: Node objects mapping.
+          type: object
+        step_aliases:
+          additionalProperties:
+            type: string
+          description: Step aliases mapping.
+          type: object
+      required:
+        - node_objects
+        - expression
+      type: object
+    UserJourneySearchFilters:
+      description: Filters for user journey search.
+      properties:
+        audience_filters:
+          $ref: "#/components/schemas/ProductAnalyticsAudienceFilters"
+        graph_filters:
+          description: Graph filters.
+          items:
+            $ref: "#/components/schemas/UserJourneySearchGraphFilter"
+            description: A graph filter for user journey search.
+          type: array
+        string_filter:
+          description: String filter.
+          example: "@session.type:user"
+          type: string
+      type: object
+    UserJourneySearchGraphFilter:
+      description: Graph filter for user journey search.
+      properties:
+        name:
+          description: Filter name.
+          example: "count"
+          type: string
+        operator:
+          description: Filter operator.
+          example: "gt"
+          type: string
+        target:
+          $ref: "#/components/schemas/UserJourneySearchTarget"
+        value:
+          description: Filter value.
+          example: 1
+          format: int64
+          type: integer
+      type: object
+    UserJourneySearchTarget:
+      description: Target for user journey search.
+      properties:
+        end:
+          description: End value.
+          example: "node_1"
+          type: string
+        start:
+          description: Start value.
+          example: "node_0"
+          type: string
+        type:
+          description: Target type.
+          example: "step"
+          type: string
+        value:
+          description: Target value.
+          example: "node_0"
+          type: string
+      required:
+        - type
+      type: object
     UserListResponse:
       description: Array of Datadog users for a given organization.
       properties:
@@ -24479,11 +25696,13 @@ components:
         - $ref: "#/components/schemas/BarChartWidgetDefinition"
         - $ref: "#/components/schemas/ChangeWidgetDefinition"
         - $ref: "#/components/schemas/CheckStatusWidgetDefinition"
+        - $ref: "#/components/schemas/CohortWidgetDefinition"
         - $ref: "#/components/schemas/DistributionWidgetDefinition"
         - $ref: "#/components/schemas/EventStreamWidgetDefinition"
         - $ref: "#/components/schemas/EventTimelineWidgetDefinition"
         - $ref: "#/components/schemas/FreeTextWidgetDefinition"
         - $ref: "#/components/schemas/FunnelWidgetDefinition"
+        - $ref: "#/components/schemas/ProductAnalyticsFunnelWidgetDefinition"
         - $ref: "#/components/schemas/GeomapWidgetDefinition"
         - $ref: "#/components/schemas/GroupWidgetDefinition"
         - $ref: "#/components/schemas/HeatMapWidgetDefinition"
@@ -24496,6 +25715,7 @@ components:
         - $ref: "#/components/schemas/NoteWidgetDefinition"
         - $ref: "#/components/schemas/PowerpackWidgetDefinition"
         - $ref: "#/components/schemas/QueryValueWidgetDefinition"
+        - $ref: "#/components/schemas/RetentionCurveWidgetDefinition"
         - $ref: "#/components/schemas/RunWorkflowWidgetDefinition"
         - $ref: "#/components/schemas/SLOListWidgetDefinition"
         - $ref: "#/components/schemas/SLOWidgetDefinition"

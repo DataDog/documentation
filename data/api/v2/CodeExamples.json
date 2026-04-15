@@ -964,6 +964,13 @@
       "description": "Update incident notification template returns \"OK\" response"
     }
   ],
+  "CreatePersonalAccessToken": [
+    {
+      "group": "key_management",
+      "suffix": "",
+      "description": "Create a personal access token returns \"Created\" response"
+    }
+  ],
   "CreateAPIKey": [
     {
       "group": "key_management",
@@ -1002,6 +1009,13 @@
       "group": "key_management",
       "suffix": "",
       "description": "Edit an application key returns \"OK\" response"
+    }
+  ],
+  "UpdatePersonalAccessToken": [
+    {
+      "group": "key_management",
+      "suffix": "",
+      "description": "Update a personal access token returns \"OK\" response"
     }
   ],
   "AggregateLogs": [
@@ -1073,11 +1087,56 @@
     },
     {
       "group": "logs_custom_destinations",
+      "suffix": "_2534546779",
+      "description": "Create a Splunk custom destination with a null sourcetype returns \"OK\" response"
+    },
+    {
+      "group": "logs_custom_destinations",
+      "suffix": "_140188544",
+      "description": "Create a Splunk custom destination with a sourcetype returns \"OK\" response"
+    },
+    {
+      "group": "logs_custom_destinations",
+      "suffix": "_3120242932",
+      "description": "Create a Splunk custom destination with an empty string sourcetype returns \"OK\" response"
+    },
+    {
+      "group": "logs_custom_destinations",
+      "suffix": "_1718754520",
+      "description": "Create a Splunk custom destination without a sourcetype returns \"OK\" response"
+    },
+    {
+      "group": "logs_custom_destinations",
       "suffix": "_141236188",
       "description": "Create an Elasticsearch custom destination returns \"OK\" response"
     }
   ],
   "UpdateLogsCustomDestination": [
+    {
+      "group": "logs_custom_destinations",
+      "suffix": "_2612469098",
+      "description": "Update a Splunk custom destination with a null sourcetype returns \"OK\" response"
+    },
+    {
+      "group": "logs_custom_destinations",
+      "suffix": "_213195663",
+      "description": "Update a Splunk custom destination with a sourcetype returns \"OK\" response"
+    },
+    {
+      "group": "logs_custom_destinations",
+      "suffix": "_2701272624",
+      "description": "Update a Splunk custom destination's attributes preserves the absent sourcetype returns \"OK\" response"
+    },
+    {
+      "group": "logs_custom_destinations",
+      "suffix": "_2034509257",
+      "description": "Update a Splunk custom destination's destination preserves the null sourcetype returns \"OK\" response"
+    },
+    {
+      "group": "logs_custom_destinations",
+      "suffix": "_3227001838",
+      "description": "Update a Splunk custom destination's destination preserves the sourcetype returns \"OK\" response"
+    },
     {
       "group": "logs_custom_destinations",
       "suffix": "",
@@ -1334,8 +1393,28 @@
     },
     {
       "group": "observability_pipelines",
+      "suffix": "_1267410221",
+      "description": "Validate an observability pipeline with Splunk HEC destination token_strategy returns \"OK\" response"
+    },
+    {
+      "group": "observability_pipelines",
+      "suffix": "_2960728933",
+      "description": "Validate an observability pipeline with Splunk HEC source store_hec_token returns \"OK\" response"
+    },
+    {
+      "group": "observability_pipelines",
+      "suffix": "_99164570",
+      "description": "Validate an observability pipeline with amazon S3 source compression returns \"OK\" response"
+    },
+    {
+      "group": "observability_pipelines",
       "suffix": "_1330454428",
       "description": "Validate an observability pipeline with destination secret key returns \"OK\" response"
+    },
+    {
+      "group": "observability_pipelines",
+      "suffix": "_815080644",
+      "description": "Validate an observability pipeline with enrichment table secret field lookup returns \"OK\" response"
     },
     {
       "group": "observability_pipelines",
@@ -1587,6 +1666,34 @@
       "group": "rum_retention_filters",
       "suffix": "",
       "description": "Update a RUM retention filter returns \"Updated\" response"
+    }
+  ],
+  "CreateScorecardRule": [
+    {
+      "group": "scorecards",
+      "suffix": "",
+      "description": "Create a new rule returns \"Created\" response"
+    }
+  ],
+  "CreateScorecardOutcomesBatch": [
+    {
+      "group": "scorecards",
+      "suffix": "",
+      "description": "Create outcomes batch returns \"OK\" response"
+    }
+  ],
+  "UpdateScorecardOutcomes": [
+    {
+      "group": "scorecards",
+      "suffix": "_2262047257",
+      "description": "Update Scorecard outcomes asynchronously returns \"Accepted\" response"
+    }
+  ],
+  "UpdateScorecardRule": [
+    {
+      "group": "scorecards",
+      "suffix": "_1831541184",
+      "description": "Update an existing rule returns \"Rule updated successfully\" response"
     }
   ],
   "AttachJiraIssue": [
@@ -1986,6 +2093,13 @@
       "description": "Create a service account returns \"OK\" response"
     }
   ],
+  "CreateServiceAccountAccessToken": [
+    {
+      "group": "service_accounts",
+      "suffix": "",
+      "description": "Create an access token for a service account returns \"Created\" response"
+    }
+  ],
   "CreateServiceAccountApplicationKey": [
     {
       "group": "service_accounts",
@@ -2003,6 +2117,13 @@
       "group": "service_accounts",
       "suffix": "",
       "description": "Edit an application key for this service account returns \"OK\" response"
+    }
+  ],
+  "UpdateServiceAccountAccessToken": [
+    {
+      "group": "service_accounts",
+      "suffix": "",
+      "description": "Update an access token for a service account returns \"OK\" response"
     }
   ],
   "CreateOrUpdateServiceDefinitions": [
@@ -2027,34 +2148,6 @@
       "group": "service_level_objectives",
       "suffix": "",
       "description": "Create a new SLO report returns \"OK\" response"
-    }
-  ],
-  "CreateScorecardRule": [
-    {
-      "group": "service_scorecards",
-      "suffix": "",
-      "description": "Create a new rule returns \"Created\" response"
-    }
-  ],
-  "CreateScorecardOutcomesBatch": [
-    {
-      "group": "service_scorecards",
-      "suffix": "",
-      "description": "Create outcomes batch returns \"OK\" response"
-    }
-  ],
-  "UpdateScorecardOutcomesAsync": [
-    {
-      "group": "service_scorecards",
-      "suffix": "",
-      "description": "Update Scorecard outcomes asynchronously returns \"Accepted\" response"
-    }
-  ],
-  "UpdateScorecardRule": [
-    {
-      "group": "service_scorecards",
-      "suffix": "",
-      "description": "Update an existing rule returns \"Rule updated successfully\" response"
     }
   ],
   "UpsertCatalogEntity": [
