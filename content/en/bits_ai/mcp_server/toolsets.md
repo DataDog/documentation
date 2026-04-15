@@ -413,6 +413,61 @@ Searches for Datadog users by email, name, or handle. Useful for finding the rig
 
 - Find the Datadog user account for jane.doe@example.com.
 
+### `get_datadog_dashboard`
+*Toolset: **dashboards***\
+*Required permissions: `DashboardsRead`, `UserAccessRead`*\
+Retrieves a dashboard by ID, returning its title, description, tags, template variables, and full widget definitions.
+
+- Get the full definition of dashboard `abc-def-ghi`.
+- Show the widgets and template variables on the SRE overview dashboard.
+- Retrieve dashboard details including all widget configurations for ID `xyz-123`.
+
+### `upsert_datadog_dashboard`
+*Toolset: **dashboards***\
+*Required permissions: `DashboardsRead`, `DashboardsWrite`*\
+Creates a new dashboard or updates an existing one. Supports all widget types, template variables, and layout configuration. Auto-tags dashboards with `ai:created_with_ai` or `ai:modified_with_ai`.
+
+- Create a dashboard with timeseries widgets showing CPU and memory for `service:api`.
+- Add a log stream widget to an existing dashboard `abc-def-ghi`.
+- Build a dashboard with a top list of the top 10 services by error rate.
+
+### `delete_datadog_dashboard`
+*Toolset: **dashboards***\
+*Required permissions: `DashboardsRead`, `DashboardsWrite`*\
+Permanently deletes a dashboard by ID. This action is destructive and irreversible.
+
+- Delete dashboard `abc-def-ghi`.
+- Remove the test dashboard that was created earlier.
+
+### `validate_dashboard_widget`
+*Toolset: **dashboards***\
+*Required permissions: `DashboardsRead` or `DashboardsWrite` or `NotebooksRead`*\
+Validates a widget definition against the dashboard schema. Call this when generating widget JSON to check for errors before creating or updating a dashboard.
+
+- Validate this timeseries widget definition before adding it to a dashboard.
+- Check if this query table widget JSON is correct.
+- Verify the widget configuration built for a heatmap.
+
+### `get_widget_reference`
+*Toolset: **dashboards***\
+*Required permissions: `DashboardsRead` or `DashboardsWrite` or `NotebooksRead`*\
+Retrieves schemas and building instructions for widget types. Returns TypeScript type definitions and step-by-step guidance. Call this before generating widgets to get the correct structure.
+
+- How to build a timeseries widget?
+- Show the schema for a top list widget.
+- What fields are required for a query value widget?
+
+### `ask_widget_expert`
+*Toolset: **dashboards***\
+*Required permissions: `DashboardsRead` or `DashboardsWrite` or `NotebooksRead`*\
+Asks a Datadog widget expert a natural-language question. More token-efficient than `get_widget_reference` for targeted questions about widget configuration.
+
+- How to add conditional formatting to a query table widget?
+- What's the difference between a timeseries and a change widget?
+- How to use template variables in widget queries?
+
+**Note**: This tool is not available if your organization has disabled Anthropic integrations.
+
 ### `search_datadog_dbm_plans`
 *Toolset: **dbm***\
 *Required permissions: `DbmRead`*\
