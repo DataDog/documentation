@@ -778,6 +778,39 @@ Guides you through uploading source maps for RUM error mapping.
 
 - Help me upload source maps so my RUM errors show original source code.
 
+## Reference Tables
+
+Tools for managing [Reference Tables][45], including listing tables, reading rows, appending rows, and creating tables from cloud storage.
+
+### `list_reference_tables`
+*Toolset: **reference-tables***\
+Lists and searches [Reference Tables][45] in the organization, with optional filtering by name and sorting.
+
+- List all reference tables in my organization.
+- Find reference tables with `customer` in the name.
+- Show me the reference tables sorted by last update time.
+
+### `get_reference_table_rows`
+*Toolset: **reference-tables***\
+Retrieves specific rows from a reference table by their primary key values. Use `list_reference_tables` first to find the table ID and schema.
+
+- Get the rows with primary keys `user001` and `user002` from the users reference table.
+- Look up the entry for account ID `acct-123` in the accounts table.
+
+### `append_reference_table_rows`
+*Toolset: **reference-tables***\
+Appends new rows to an existing reference table. This operation only adds rows and does not modify or delete existing data. Each row must include all required fields from the table's schema, including the primary key field.
+
+- Add a new row for user `user003` with name `Carol` and age `28` to the users table.
+- Append these five new account entries to the accounts reference table.
+
+### `create_reference_table`
+*Toolset: **reference-tables***\
+Creates a new reference table backed by a CSV file in Amazon S3, Google Cloud Storage, or Azure Blob Storage. Only `INT32` and `STRING` field types are supported.
+
+- Create a reference table called `ip_allowlist` from the file `allowlist.csv` in my S3 bucket `my-data-bucket`.
+- Set up a new GCS-backed reference table called `customer_tiers` with automatic sync enabled.
+
 ## Security
 
 Tools for code security scanning and searching [security signals][53] and [security findings][54].
@@ -982,6 +1015,7 @@ Adds an agent trigger to a workflow and publishes it, enabling the workflow to b
 [39]: /actions/workflows/
 [41]: /ddsql_editor/
 [42]: /ddsql_reference/ddsql_default/
+[45]: /reference_tables/
 [46]: /dashboards/
 [47]: /synthetics/
 [48]: /continuous_integration/

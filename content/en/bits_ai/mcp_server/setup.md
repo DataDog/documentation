@@ -431,6 +431,7 @@ These toolsets are generally available:
 - `feature-flags`: Tools for managing [feature flags][35], including creating, listing, and updating flags and their environments
 - `llmobs`: Tools for searching and analyzing [LLM Observability][36] spans and experiments
 - `product-analytics`: Tools for interacting with [Product Analytics][41] queries
+- `reference-tables`: Tools for managing [Reference Tables][48], including listing tables, reading rows, appending rows, and creating tables from cloud storage
 - `networks`: Tools for [Cloud Network Monitoring][37] analysis and [Network Device Monitoring][38]
 - `onboarding`: Agentic onboarding tools for guided Datadog setup and configuration
 - `security`: Tools for code security scanning and searching [security signals][39] and [security findings][40]
@@ -612,3 +613,4 @@ Local authentication is recommended for Cline and when remote authentication is 
 [45]: https://www.datadoghq.com/product-preview/apm-mcp-toolset/
 [46]: /dashboards/
 [47]: /help/
+[48]: /reference_tables/
