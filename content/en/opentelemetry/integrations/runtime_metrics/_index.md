@@ -79,25 +79,31 @@ OpenTelemetry Go applications are [instrumented manually][3]. To enable runtime 
 
 #### Collector configuration
 
-The `process.runtime.go.gc.pause_total_ns` and `process.runtime.go.gc.count` metrics require the [Delta-to-Cumulative Processor][9] and the [Transform Processor][8] in the OpenTelemetry Collector. The Delta-to-Cumulative Processor converts delta sums to cumulative sums, and the Transform Processor converts cumulative sums to gauges. Additionally, ensure that `OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE=delta` is set to handle other metrics as well.
+Some Go runtime metrics are reported as monotonic sums, but Datadog expects them as gauges. The [Transform Processor][8] converts these sums to gauges, and the [Cumulative-to-Delta Processor][9] excludes them from delta conversion. Additionally, ensure that `OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE=delta` is set to handle other metrics as well.
 
 ```yaml
 processors:
-  deltatocumulative:
-    metrics:
-      - process.runtime.go.gc.pause_total_ns
-      - process.runtime.go.gc.count
-  transform:
+  transform/go-runtime:
+    error_mode: ignore
     metric_statements:
       - context: metric
         statements:
-          - convert_sum_to_gauge() where name == "process.runtime.go.gc.pause_total_ns" or name == "process.runtime.go.gc.count"
+          - convert_sum_to_gauge() where name == "process.runtime.go.gc.pause_total_ns" or name == "process.runtime.go.gc.count" or name == "go.memory.allocated" or name == "go.memory.allocations"
+
+  cumulativetodelta:
+    exclude:
+      metrics:
+        - process.runtime.go.gc.pause_total_ns
+        - process.runtime.go.gc.count
+        - go.memory.allocated
+        - go.memory.allocations
+      match_type: strict
 ```
 
 [3]: https://opentelemetry.io/docs/instrumentation/go/manual/
 [4]: https://pkg.go.dev/go.opentelemetry.io/contrib/instrumentation/runtime
 [8]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/transformprocessor
-[9]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/deltatocumulativeprocessor
+[9]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/cumulativetodeltaprocessor
 
 {{% /tab %}}
 
