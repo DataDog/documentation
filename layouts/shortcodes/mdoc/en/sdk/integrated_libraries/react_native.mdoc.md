@@ -1,15 +1,7 @@
----
-title: React Native Libraries for RUM
-description: "Integrate React Native libraries with RUM SDK for automatic monitoring of navigation, network requests, and other app functionality."
-aliases:
-- /real_user_monitoring/reactnative/integrated_libraries/
-- /real_user_monitoring/mobile_and_tv_monitoring/integrated_libraries/reactnative
-- /real_user_monitoring/mobile_and_tv_monitoring/react_native/integrated_libraries
-further_reading:
-- link: https://github.com/DataDog/dd-sdk-reactnative
-  tag: "Source Code"
-  text: Source code for dd-sdk-reactnative
----
+<!--
+This partial contains integrated libraries content for the React Native SDK.
+It can be included in the React Native SDK integrated libraries page or in the unified client_sdks view.
+-->
 
 This page lists integrated libraries you can use for React Native applications.
 
@@ -17,9 +9,9 @@ This page lists integrated libraries you can use for React Native applications.
 
 ### Setup
 
-**Note**: This package is an integration for [`react-navigation`][1] library, please make sure you first install and setup the core `mobile-react-native` SDK.
+**Note**: This package is an integration for [`react-navigation`][1] library. Make sure you first install and setup the core `mobile-react-native` SDK.
 
-To install with NPM, run:
+To install with npm, run:
 
 ```sh
 npm install @datadog/mobile-react-navigation
@@ -63,11 +55,11 @@ function App() {
 
 ## React Native Navigation
 
-**Note**: This package is an integration for `react-native-navigation` library. Please make sure you first install and setup the core `mobile-react-native` SDK.
+**Note**: This package is an integration for `react-native-navigation` library. Make sure you first install and setup the core `mobile-react-native` SDK.
 
 ### Setup
 
-To install with NPM, run:
+To install with npm, run:
 
 ```sh
 npm install @datadog/mobile-react-native-navigation
@@ -98,11 +90,11 @@ DdRumReactNativeNavigationTracking.startTracking(viewNamePredicate);
 
 ## Apollo Client
 
-**Note**: This package is an integration for the `@apollo/client` library. Please make sure you first install and set up the core `mobile-react-native` SDK.
+**Note**: This package is an integration for the `@apollo/client` library. Make sure you first install and set up the core `mobile-react-native` SDK.
 
 ### Setup
 
-To install with NPM, run:
+To install with npm, run:
 
 ```sh
 npm install @datadog/mobile-react-native-apollo-client
@@ -179,10 +171,6 @@ const datadogConfiguration = new DatadogProviderConfiguration(
     }
 );
 ```
-
-## Further Reading
-
-{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://reactnavigation.org/
 [2]: https://wix.github.io/react-native-navigation/api/events/#componentdidappear

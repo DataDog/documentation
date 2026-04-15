@@ -1,15 +1,7 @@
----
-title: iOS and tvOS Libraries for RUM
-description: "Integrate popular iOS libraries like URLSession, Alamofire, Apollo GraphQL and image loaders with RUM for automatic monitoring and tracking."
-aliases:
-- /real_user_monitoring/ios/integrated_libraries/
-- /real_user_monitoring/mobile_and_tv_monitoring/integrated_libraries/ios/
-- /real_user_monitoring/mobile_and_tv_monitoring/ios/integrated_libraries/
-further_reading:
-- link: https://github.com/DataDog/dd-sdk-ios
-  tag: "Source Code"
-  text: Source code for dd-sdk-ios
----
+<!--
+This partial contains integrated libraries content for the iOS SDK.
+It can be included in the iOS SDK integrated libraries page or in the unified client_sdks view.
+-->
 
 This page lists integrated libraries you can use for iOS and tvOS applications.
 
@@ -26,7 +18,7 @@ import DatadogRUM
 
 URLSessionInstrumentation.enableDurationBreakdown(with: .init(delegateClass: Alamofire.SessionDelegate.self))
 ```
-For additional information on sampling rate, distributed tracing, and adding custom attributes to tracked RUM resources, refer to [Advanced Configuration > Automatically track network requests][4].
+For additional information on sampling rate, distributed tracing, and adding custom attributes to tracked RUM resources, see [Advanced Configuration > Automatically track network requests][4].
 
 ## Apollo GraphQL
 

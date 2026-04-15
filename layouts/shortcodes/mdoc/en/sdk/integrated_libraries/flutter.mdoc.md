@@ -1,15 +1,7 @@
----
-title: Flutter Libraries for RUM
-description: "Integrate popular Flutter libraries with RUM SDK for automatic monitoring of HTTP requests, navigation, and other app functionality."
-aliases:
-- /real_user_monitoring/flutter/integrated_libraries/
-- /real_user_monitoring/mobile_and_tv_monitoring/integrated_libraries/flutter
-- /real_user_monitoring/mobile_and_tv_monitoring/flutter/integrated_libraries
-further_reading:
-- link: https://github.com/DataDog/dd-sdk-flutter
-  tag: "Source Code"
-  text: Source code for dd-sdk-flutter
----
+<!--
+This partial contains integrated libraries content for the Flutter SDK.
+It can be included in the Flutter SDK integrated libraries page or in the unified client_sdks view.
+-->
 
 This page lists integrated libraries you can use for Flutter applications.
 
@@ -59,7 +51,7 @@ MaterialApp.router(
 );
 ```
 
-Additionally, if you are using `GoRoute`'s `pageBuilder` parameter over its `builder` parameter, ensure that you are passing on the `state.pageKey` value and the `name` value to your `MaterialPage`.
+Additionally, if you are using `GoRoute`'s `pageBuilder` parameter over its `builder` parameter, make sure you are passing on the `state.pageKey` value and the `name` value to your `MaterialPage`.
 
 ```dart
 GoRoute(
@@ -135,7 +127,7 @@ final routerDelegate = BeamerDelegate(
 
 Real User Monitoring allows you to monitor web views and eliminate blind spots in your hybrid mobile applications.
 
-The Datadog Flutter SDK has packages for working with both [`webview_flutter`][8] and [`flutter_inappwebview`][9]. For more information, refer to the [Web View Tracking documentation page][10].
+The Datadog Flutter SDK has packages for working with both [`webview_flutter`][8] and [`flutter_inappwebview`][9]. For more information, see the [Web View Tracking documentation page][10].
 
 ## gRPC
 
@@ -222,7 +214,7 @@ final datadogConfig = DatadogConfiguration(
 For most Dio setups, use Datadog Tracking Http Client instead of the specialized Dio interceptor. Only use the Dio interceptor if you're using a non-standard Dio <code>HttpClientAdapter</code> that cannot be tracked by Datadog Tracking Http Client.
 </div>
 
-Datadog provides [`datadog_dio`][6] for use with the [Dio Flutter package][7]. The Dio interceptor automatically tracks requests from a given Dio client as RUM Resources and enables distributed tracing with APM.
+Datadog provides [`datadog_dio`][11] for use with the [Dio Flutter package][7]. The Dio interceptor automatically tracks requests from a given Dio client as RUM Resources and enables distributed tracing with APM.
 
 ### Setup
 
@@ -252,17 +244,13 @@ final dio = Dio()
   ..addDatadogInterceptor(DatadogSdk.instance);
 ```
 
-Calling `addDatadogInterceptor` adds the Datadog interceptor as the first interceptor in your list. This ensures all network requests from Dio are sent to Datadog, since other interceptors may not forward information down the chain. Call `addDatadogInterceptor` after completing all other Dio configuration.
+Calling `addDatadogInterceptor` adds the Datadog interceptor as the first interceptor in your list, so all network requests from Dio are sent to Datadog, since other interceptors may not forward information down the chain. Call `addDatadogInterceptor` after completing all other Dio configuration.
 
-### Use with other Datadog Network Tracking
+### Use with other Datadog network tracking
 
 To track all network requests, including those made by `dart:io` and widgets like `NetworkImage`, use `datadog_tracking_http_client` to capture these requests. However, depending on your setup, the global override method used in `enableHttpTracking` may cause resources to be double reported (once by the global override and once by the Dio interceptor)
 
 To avoid this, use the `ignoreUrlPatterns` parameter when calling `enableHttpTracking` to ignore requests made by your Dio client.
-
-## Further Reading
-
-{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://pub.dev/packages/datadog_gql_link
 [2]: https://pub.dev/packages?q=go_router
