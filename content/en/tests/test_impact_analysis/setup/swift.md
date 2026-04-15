@@ -117,9 +117,9 @@ struct SomeSuite {
 
 ### Temporarily disabling Test Impact Analysis
 
-Test Impact Analysis can be disabled locally by setting the `DD_CIVISIBILITY_ITR_ENABLED` environment variable to `false` or `0`.
+Test Impact Analysis can be disabled locally by setting the `DD_TEST_IMPACT_ANALYSIS_ENABLED` environment variable to `false` or `0`.
 
-`DD_CIVISIBILITY_ITR_ENABLED` (Optional)
+`DD_TEST_IMPACT_ANALYSIS_ENABLED` (Optional)
 : Enable the Test Impact Analysis coverage and test skipping features<br />
 **Default**: `(true)`
 
