@@ -1,6 +1,6 @@
 ---
 title: Upgrade the Worker Guide
-description: Learn about new features, enhancements, and fixes for Worker versions 2.7 to 2.14.
+description: Learn about new features, enhancements, and fixes for Worker versions 2.7 to 2.15.
 disable_toc: false
 aliases:
     - /observability_pipelines/guide/upgrade_worker_2_7/
@@ -13,6 +13,51 @@ Datadog recommends updating the Observability Pipelines Worker (OPW) with every 
 </div>
 
 This guide goes over how to upgrade to a specific Worker version and the updates for that version.
+
+## Worker version 2.15.0
+
+To upgrade to Worker version 2.15.0:
+
+- Docker: Run the `docker pull` command for the [2.15.0 image][40].
+- Kubernetes: See the [Helm chart][2].
+- APT: Run the command `apt-get install observability-pipelines-worker=2.15.0`.
+- RPM: Run the command `sudo yum install observability-pipelines-worker-2.15.0`.
+
+Worker version 2.15.0 gives you access to the following:
+
+#### New features
+
+- New OCSF mappings have been added for the following log types:
+    - AWS GuardDuty for all finding types (EKS Audit, EC2, Lambda, IAM, DNS, and so on) in a single mapping named "AWS GuardDuty".
+    - Infoblox NIOS: DNS Activity, DHCP Activity, audit (Authentication and API Activity), and port and syslog Base Event (Infoblox DNS Query, Infoblox DHCP, Infoblox Audit Authentication, Infoblox Audit API, Infoblox Port).
+    - Zscaler ZPA App Connector Status logs to OCSF schema version 1.3.0 (Authentication, class 3002) with datetime and host profiles.
+    - Zscaler ZPA User Activity logs to OCSF schema version 1.3.0 (Network Activity, class 4001) with datetime, host, network_proxy, and security_control profiles.
+    - AWS WAF Web ACL logs. Transforms WAF log events into OCSF HTTP Activity (class 4002) with cloud and security_control profiles.
+    - Zscaler ZPA User Status logs to OCSF schema version 1.3.0 (Authentication, class 3002) with datetime and host profiles.
+- The OpenTelemetry source now supports metrics pipelines.
+- The Enrichment Table file option now supports a unified field option that accepts an event field path or a metadata secret as the lookup key source.
+    - A plain string (backwards-compatible, accepts Observability Pipelines simplified syntax or Vector Remap Language (VRL) syntax with a leading `.`): `field: "message"` / `field: ".message"`
+    - An explicit event path using Observability Pipelines simplified syntax: `field: {event: "message"}`
+    - An explicit event path using VRL syntax: `field: {vrl: ".message"}`
+    - A metadata secret reference: `field: {secret: "splunk_hec_token"}`
+
+#### Enhancements
+
+- The AWS S3 source now accepts compressed data.
+- The Elasticsearch destination has been updated with new options: `compression`, `id_key`, `pipeline`, `request_retry_partial`, `tls`, `auto_routing`, and `sync_fields`.
+- Mapping array-of-object source fields into OCSF array-of-object destinations is now supported.
+- The Datadog Metrics destination now defaults to the Datadog series v2 endpoint (`/api/v2/series`).
+- The Enrichment Table processor's GeoIP option now includes a network field containing the CIDR network associated with the lookup result. It's available for all database types (City, ISP/ASN, Connection-Type, Anonymous-IP).
+- The Custom Processor now has an `encode_csv` function that encodes an array of values into a CSV-formatted string. This is the inverse of the `parse_csv` function and supports an optional single-byte delimiter (defaults to `,`).
+
+#### Fixes
+
+- Field names now support `.`, such as `foo."bar.baz"`.
+- The accuracy of the buffer utilization metric tracking has been updated.
+- The `parse_yaml` function is now available for the Custom Processor. This function parses YAML according to the [YAML 1.1 spec][41].
+- Fixed incorrect parameter types for `md5`, `seahash`, `floor`, `precision`, and `parse_key_value` in the Custom Processor.
+
+---
 
 ## Worker version 2.14.1
 
@@ -407,3 +452,5 @@ Worker version 2.7.0 gives you access to the following:
 [37]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.14.1
 [38]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.14.0
 [39]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.13.2
+[40]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.15.0
+[41]: https://yaml.org/spec/1.1/
