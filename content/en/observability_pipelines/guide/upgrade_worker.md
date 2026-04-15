@@ -36,7 +36,7 @@ Worker version 2.15.0 gives you access to the following:
     - Zscaler ZPA User Status logs to OCSF schema version 1.3.0 (Authentication, class 3002) with `datetime` and `host` profiles.
 - The OpenTelemetry source now supports metrics pipelines.
 - The Enrichment Table file option now supports a unified field option that accepts an event field path or a metadata secret as the lookup key source.
-    - A plain string (backwards-compatible, accepts Observability Pipelines simplified syntax or Vector Remap Language (VRL) syntax with a leading `.`): `field: "message"` / `field: ".message"`
+    - A plain string (backwards-compatible) accepts Observability Pipelines simplified syntax or Vector Remap Language (VRL) syntax with a leading `.`: `field: "message"` / `field: ".message"`
     - An explicit event path using Observability Pipelines simplified syntax: `field: {event: "message"}`
     - An explicit event path using VRL syntax: `field: {vrl: ".message"}`
     - A metadata secret reference: `field: {secret: "splunk_hec_token"}`
@@ -44,7 +44,7 @@ Worker version 2.15.0 gives you access to the following:
 #### Enhancements
 
 - The AWS S3 source now accepts compressed data.
-- The Elasticsearch destination has been updated with new options: `compression`, `id_key`, `pipeline`, `request_retry_partial`, `tls`, `auto_routing`, and `sync_fields`.
+- The Elasticsearch destination has been updated with new options: `auto_routing`, `compression`, `id_key`, `pipeline`, `request_retry_partial`, `sync_fields`, and `tls`.
 - Mapping array-of-object source fields into OCSF array-of-object destinations is now supported.
 - The Datadog Metrics destination now defaults to the Datadog series v2 endpoint (`/api/v2/series`).
 - The Enrichment Table processor's GeoIP option now includes a network field containing the CIDR network associated with the lookup result. It's available for all database types (City, ISP/ASN, Connection-Type, Anonymous-IP).
@@ -55,7 +55,7 @@ Worker version 2.15.0 gives you access to the following:
 - Field names now support `.`, such as `foo."bar.baz"`.
 - The accuracy of the buffer utilization metric tracking has been updated.
 - The `parse_yaml` function is now available for the Custom Processor. This function parses YAML according to the [YAML 1.1 spec][41].
-- Fixed incorrect parameter types for `md5`, `seahash`, `floor`, `precision`, and `parse_key_value` in the Custom Processor.
+- For the Custom Processor, incorrect parameter types for `floor`, `md5`, `parse_key_value`, `precision`, and `seahash` has been fixed.
 
 ---
 
