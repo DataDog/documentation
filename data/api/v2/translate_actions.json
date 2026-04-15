@@ -11,6 +11,18 @@
     "description": "Retrieve detailed information about a specific Datadog Agent.\nThis endpoint returns comprehensive information about an agent including:\n- Agent details and metadata\n- Configured integrations organized by status (working, warning, error, missing)\n- Detected integrations\n- Configuration files and layers",
     "summary": "Get detailed information about an agent"
   },
+  "ListFleetAgentTracers": {
+    "description": "Retrieve a paginated list of tracers for a specific agent.\n\nThis endpoint returns tracers associated with a given agent key, identified by the\nagent's hostname. Use this to discover telemetry-derived service names for a particular host.",
+    "summary": "List tracers for a specific agent"
+  },
+  "ListFleetClusters": {
+    "description": "Retrieve a paginated list of Kubernetes clusters in the fleet.\n\nThis endpoint returns clusters with metadata including node counts, agent versions,\nenabled products, and associated services. Use the `page_number` and `page_size`\nquery parameters to paginate through results.",
+    "summary": "List all fleet clusters"
+  },
+  "ListFleetInstrumentedPods": {
+    "description": "Retrieve the list of pods targeted for Single Step Instrumentation (SSI) injection\nin a specific Kubernetes cluster.\n\nThis endpoint returns pod groups organized by owner reference (deployment, statefulset, etc.)\nwith their injection annotations and applied targets. Use the clusters list endpoint\nto discover available cluster names.",
+    "summary": "List instrumented pods for a cluster"
+  },
   "ListFleetDeployments": {
     "description": "Retrieve a list of all deployments for fleet automation.\nUse the `page_size` and `page_offset` parameters to paginate results.",
     "summary": "List all deployments"
@@ -62,6 +74,10 @@
   "TriggerFleetSchedule": {
     "description": "Manually trigger a schedule to immediately create and start a deployment.\n\nThis endpoint allows you to manually initiate a deployment using the schedule's\nconfiguration, without waiting for the next scheduled maintenance window. This is\nuseful for:\n- Testing a schedule before it runs automatically\n- Performing an emergency update outside the regular maintenance window\n- Creating an ad-hoc deployment with the same settings as a schedule\n\nThe deployment is created immediately with:\n- The same filter query as the schedule\n- The package version determined by the schedule's version strategy\n- All matching hosts as targets\n\nThe manually triggered deployment is independent of the schedule and does not\naffect the schedule's normal recurrence pattern.",
     "summary": "Trigger a schedule deployment"
+  },
+  "ListFleetTracers": {
+    "description": "Retrieve a paginated list of all fleet tracers.\n\nThis endpoint returns telemetry-derived service names from the SDK telemetry pipeline.\nThese names may differ from span-derived names in APM and are useful for querying\nservice library configurations.\nUse the `page_number` and `page_size` query parameters to paginate through results.",
+    "summary": "List all fleet tracers"
   },
   "ListDatastores": {
     "description": "Lists all datastores for the organization.",
@@ -1073,6 +1089,26 @@
     "summary": "Update items of a dashboard list",
     "request_description": "New dashboards of the dashboard list.",
     "request_schema_description": "Request containing the list of dashboards to update to."
+  },
+  "CreateDashboardSecureEmbed": {
+    "description": "Create a secure embed share for a dashboard. The response includes a one-time `credential` used for HMAC-SHA256 signing. Store it securely — it cannot be retrieved again.",
+    "summary": "Create a secure embed for a dashboard",
+    "request_description": "Secure embed creation request body.",
+    "request_schema_description": "Request to create a secure embed shared dashboard."
+  },
+  "DeleteDashboardSecureEmbed": {
+    "description": "Delete a secure embed share for a dashboard.",
+    "summary": "Delete a secure embed for a dashboard"
+  },
+  "GetDashboardSecureEmbed": {
+    "description": "Retrieve an existing secure embed configuration for a dashboard.",
+    "summary": "Get a secure embed for a dashboard"
+  },
+  "UpdateDashboardSecureEmbed": {
+    "description": "Partially update a secure embed configuration. All fields are optional (PATCH semantics).",
+    "summary": "Update a secure embed for a dashboard",
+    "request_description": "Secure embed update request body.",
+    "request_schema_description": "Request to update a secure embed shared dashboard."
   },
   "GetAllDatasets": {
     "description": "Get all datasets that have been configured for an organization.",
@@ -2805,9 +2841,121 @@
     "request_description": "",
     "request_schema_description": "Request to update an org connection."
   },
+  "ListOrgGroupMemberships": {
+    "description": "List organization group memberships. Filter by org group ID or org UUID. At least one of `filter[org_group_id]` or `filter[org_uuid]` must be provided. When filtering by org UUID, returns a single-item list with the membership for that org.",
+    "summary": "List org group memberships"
+  },
+  "BulkUpdateOrgGroupMemberships": {
+    "description": "Move a batch of organizations from one org group to another. This is an atomic operation. Maximum 100 orgs per request.",
+    "summary": "Bulk update org group memberships",
+    "request_description": "",
+    "request_schema_description": "Request to bulk update org group memberships."
+  },
+  "GetOrgGroupMembership": {
+    "description": "Get a specific organization group membership by its ID.",
+    "summary": "Get an org group membership"
+  },
+  "UpdateOrgGroupMembership": {
+    "description": "Move an organization to a different org group by updating its membership.",
+    "summary": "Update an org group membership",
+    "request_description": "",
+    "request_schema_description": "Request to update an org group membership."
+  },
+  "ListOrgGroupPolicies": {
+    "description": "List policies for an organization group. Requires a filter on org group ID.",
+    "summary": "List org group policies"
+  },
+  "CreateOrgGroupPolicy": {
+    "description": "Create a new policy for an organization group.",
+    "summary": "Create an org group policy",
+    "request_description": "",
+    "request_schema_description": "Request to create an org group policy."
+  },
+  "DeleteOrgGroupPolicy": {
+    "description": "Delete an organization group policy by its ID.",
+    "summary": "Delete an org group policy"
+  },
+  "UpdateOrgGroupPolicy": {
+    "description": "Update the content of an existing organization group policy.",
+    "summary": "Update an org group policy",
+    "request_description": "",
+    "request_schema_description": "Request to update an org group policy."
+  },
+  "ListOrgGroupPolicyConfigs": {
+    "description": "List all org configs that are eligible to be used as organization group policies.",
+    "summary": "List org group policy configs"
+  },
+  "ListOrgGroupPolicyOverrides": {
+    "description": "List policy overrides for an organization group. Requires a filter on org group ID. Optionally filter by policy ID.",
+    "summary": "List org group policy overrides"
+  },
+  "CreateOrgGroupPolicyOverride": {
+    "description": "Create a new policy override for an organization within an org group.",
+    "summary": "Create an org group policy override",
+    "request_description": "",
+    "request_schema_description": "Request to create an org group policy override."
+  },
+  "DeleteOrgGroupPolicyOverride": {
+    "description": "Delete an organization group policy override by its ID.",
+    "summary": "Delete an org group policy override"
+  },
+  "UpdateOrgGroupPolicyOverride": {
+    "description": "Update an existing organization group policy override.",
+    "summary": "Update an org group policy override",
+    "request_description": "",
+    "request_schema_description": "Request to update an org group policy override."
+  },
+  "ListOrgGroups": {
+    "description": "List all organization groups that the requesting organization has access to.",
+    "summary": "List org groups"
+  },
+  "CreateOrgGroup": {
+    "description": "Create a new organization group.",
+    "summary": "Create an org group",
+    "request_description": "",
+    "request_schema_description": "Request to create an org group."
+  },
+  "DeleteOrgGroup": {
+    "description": "Delete an organization group by its ID.",
+    "summary": "Delete an org group"
+  },
+  "GetOrgGroup": {
+    "description": "Get a specific organization group by its ID.",
+    "summary": "Get an org group"
+  },
+  "UpdateOrgGroup": {
+    "description": "Update the name of an existing organization group.",
+    "summary": "Update an org group",
+    "request_description": "",
+    "request_schema_description": "Request to update an org group."
+  },
   "ListPermissions": {
     "description": "Returns a list of all permissions, including name, description, and ID.",
     "summary": "List permissions"
+  },
+  "ListPersonalAccessTokens": {
+    "description": "List all personal access tokens for the organization.",
+    "summary": "Get all personal access tokens"
+  },
+  "CreatePersonalAccessToken": {
+    "description": "Create a personal access token for the current user.",
+    "summary": "Create a personal access token",
+    "request_description": "",
+    "request_schema_description": "Request used to create a personal access token."
+  },
+  "RevokePersonalAccessToken": {
+    "description": "Revoke a specific personal access token.",
+    "summary": "Revoke a personal access token"
+  },
+  "GetPersonalAccessToken": {
+    "description": "Get a specific personal access token by its UUID.",
+    "summary": "Get a personal access token"
+  },
+  "UpdatePersonalAccessToken": {
+    "description": "Update a specific personal access token.",
+    "summary": "Update a personal access token",
+    "request_description": "",
+    "request_schema_description": "Request used to update a personal access token."
   },
   "ListFindings": {
     "description": "Get a list of findings. These include both misconfigurations and identity risks.\n\n**Note**: To filter and return only identity risks, add the following query parameter: `?filter[tags]=dd_rule_type:ciem`\n\n### Filtering\n\nFilters can be applied by appending query parameters to the URL.\n\n  - Using a single filter: `?filter[attribute_key]=attribute_value`\n  - Chaining filters: `?filter[attribute_key]=attribute_value&filter[attribute_key]=attribute_value...`\n  - Filtering on tags: `?filter[tags]=tag_key:tag_value&filter[tags]=tag_key_2:tag_value_2`\n\nHere, `attribute_key` can be any of the filter keys described further below.\n\nQuery parameters of type `integer` support comparison operators (`>`, `>=`, `<`, `<=`). This is particularly useful when filtering by `evaluation_changed_at` or `resource_discovery_timestamp`. For example: `?filter[evaluation_changed_at]=>20123123121`.\n\nYou can also use the negation operator on strings. For example, use `filter[resource_type]=-aws*` to filter for any non-AWS resources.\n\nThe operator must come after the equal sign. For example, to filter with the `>=` operator, add the operator after the equal sign: `filter[evaluation_changed_at]=>=1678809373257`.\n\nQuery parameters must be only among the documented ones and with values of correct types. Duplicated query parameters (e.g. `filter[status]=low&filter[status]=info`) are not allowed.\n\n### Additional extension fields\n\nAdditional extension fields are available for some findings.\n\nThe data is available when you include the query parameter `?detailed_findings=true` in the request.\n\nThe following fields are available for findings:\n- `external_id`: The resource external ID related to the finding.\n- `description`: The description and remediation steps for the finding.\n- `datadog_link`: The Datadog relative link for the finding.\n- `ip_addresses`: The list of private IP addresses for the resource related to the finding.\n\n### Response\n\nThe response includes an array of finding objects, pagination metadata, and a count of items that match the query.\n\nEach finding object contains the following:\n\n- The finding ID that can be used in a `GetFinding` request to retrieve the full finding details.\n- Core attributes, including status, evaluation, high-level resource details, muted state, and rule details.\n- `evaluation_changed_at` and `resource_discovery_date` time stamps.\n- An array of associated tags.",
@@ -3914,6 +4062,30 @@
     "summary": "Create a service account",
     "request_description": "",
     "request_schema_description": "Create a service account."
+  },
+  "ListServiceAccountAccessTokens": {
+    "description": "List all access tokens for a specific service account.",
+    "summary": "List access tokens for a service account"
+  },
+  "CreateServiceAccountAccessToken": {
+    "description": "Create an access token for a service account.",
+    "summary": "Create an access token for a service account",
+    "request_description": "",
+    "request_schema_description": "Request used to create a service account access token."
+  },
+  "RevokeServiceAccountAccessToken": {
+    "description": "Revoke a specific access token for a service account.",
+    "summary": "Revoke an access token for a service account"
+  },
+  "GetServiceAccountAccessToken": {
+    "description": "Get a specific access token for a service account by its UUID.",
+    "summary": "Get an access token for a service account"
+  },
+  "UpdateServiceAccountAccessToken": {
+    "description": "Update a specific access token for a service account.",
+    "summary": "Update an access token for a service account",
+    "request_description": "",
+    "request_schema_description": "Request used to update a personal access token."
   },
   "ListServiceAccountApplicationKeys": {
     "description": "List all application keys available for this service account.",

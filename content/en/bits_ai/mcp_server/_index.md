@@ -68,7 +68,7 @@ Both metrics are tagged with `user_id`, `user_email`, and `client` (the MCP clie
 The Datadog MCP Server supports _toolsets_, which allow you to use only the tools you need, saving valuable context window space. These toolsets are available:
 
 - `core`: The default toolset for logs, metrics, traces, dashboards, monitors, incidents, hosts, services, events, and notebooks
-- `alerting`: Tools for validating monitors, searching monitor groups, and retrieving monitor templates
+- `alerting`: Tools for validating and creating monitors, searching monitor groups, retrieving monitor templates, analyzing monitor coverage, and searching SLOs
 - `apm`: ([Preview][43]) Tools for in-depth [APM][28] trace analysis, span search, Watchdog insights, and performance investigation
 - `cases`: Tools for [Case Management][38], including creating, searching, and updating cases; managing projects; and linking Jira issues
 - `dashboards`: Tools for retrieving, creating, updating, and deleting [dashboards][44], plus widget schema reference and validation
@@ -78,6 +78,7 @@ The Datadog MCP Server supports _toolsets_, which allow you to use only the tool
 - `feature-flags`: Tools for managing [feature flags][29], including creating, listing, and updating flags and their environments
 - `llmobs`: Tools for searching and analyzing [LLM Observability][30] spans and experiments
 - `product-analytics`: Tools for interacting with [Product Analytics][35] queries
+- `reference-tables`: Tools for managing [Reference Tables][45], including listing tables, reading rows, appending rows, and creating tables from cloud storage
 - `networks`: Tools for [Cloud Network Monitoring][31] analysis and [Network Device Monitoring][32]
 - `onboarding`: Agentic onboarding tools for guided Datadog setup and configuration
 - `security`: Tools for code security scanning and searching [security signals][33] and [security findings][34]
@@ -374,6 +375,33 @@ Searches monitor groups by name or criteria.
 
 - Show me all monitor groups in an alerting state.
 - Find monitor groups related to the checkout service.
+
+### `search_datadog_slos`
+*Toolset: **alerting***\
+*Permissions Required: `SLOs Read`*\
+Searches Datadog SLOs by name, tags, or type. Supports query syntax for filtering by service, team, or other attributes.
+
+- Search for SLOs related to `service:checkout`.
+- List all SLOs tagged with `team:backend`.
+- List SLOs for the payments service.
+
+### `create_datadog_monitor`
+*Toolset: **alerting***\
+*Permissions Required: `Monitors Write`*\
+Creates a Datadog monitor in draft mode. Monitors created with this tool do not send notifications and are set to priority 5 (low). Use `validate_datadog_monitor` to check the definition before creating and `get_datadog_monitor_templates` for query syntax examples. After creation, publish the monitor in the Datadog UI.
+
+- Create a metric alert monitor for high CPU usage on the web service.
+- Set up a log alert monitor for error spikes in the payments service.
+- Create a monitor to track p95 latency for the checkout endpoint.
+
+### `get_monitor_coverage`
+*Toolset: **alerting***\
+*Permissions Required: `Monitors Read`*\
+Finds monitoring gaps and coverage for services or hosts. Returns which signals (such as error rate, latency, and request rate) are covered by existing monitors and which are missing. Use with `create_datadog_monitor` to fill gaps.
+
+- Get monitoring coverage for `service:checkout`.
+- What monitoring gaps exist for `host:web-01`?
+- Find services that are missing error rate monitors.
 
 <div class="alert alert-info">The <code>apm</code> toolset is in Preview. <a href="https://www.datadoghq.com/product-preview/apm-mcp-toolset/">Sign up for access.</a></div>
 
@@ -793,6 +821,51 @@ Guides you through uploading source maps for RUM error mapping.
 
 - Help me upload source maps so my RUM errors show original source code.
 
+### `list_reference_tables`
+*Toolset: **reference-tables***\
+Lists and searches [Reference Tables][45] in the organization, with optional filtering by name and sorting.
+
+- List all reference tables in my organization.
+- Find reference tables with `customer` in the name.
+- Show me the reference tables sorted by last update time.
+
+### `get_reference_table_rows`
+*Toolset: **reference-tables***\
+Retrieves specific rows from a reference table by their primary key values. Use `list_reference_tables` first to find the table ID and schema.
+
+- Get the rows with primary keys `user001` and `user002` from the users reference table.
+- Look up the entry for account ID `acct-123` in the accounts table.
+
+### `append_reference_table_rows`
+*Toolset: **reference-tables***\
+Appends new rows to an existing reference table. This operation only adds rows and does not modify or delete existing data. Each row must include all required fields from the table's schema, including the primary key field.
+
+- Add a new row for user `user003` with name `Carol` and age `28` to the users table.
+- Append these five new account entries to the accounts reference table.
+
+### `create_reference_table`
+*Toolset: **reference-tables***\
+Creates a new reference table backed by a CSV file in Amazon S3, Google Cloud Storage, or Azure Blob Storage. Only `INT32` and `STRING` field types are supported.
+
+- Create a reference table called `ip_allowlist` from the file `allowlist.csv` in my S3 bucket `my-data-bucket`.
+- Set up a new GCS-backed reference table called `customer_tiers` with automatic sync enabled.
+
+### `datadog_code_security_scan`
+*Toolset: **security***\
+Runs a comprehensive security scan that detects both vulnerabilities (SQL injection, XSS, path traversal, and others) and secrets (API keys, passwords, credentials, and others) in parallel.
+
+- Scan my code for security vulnerabilities and hardcoded secrets.
+- Run a full security scan on this pull request.
+- Check this file for any security issues.
+
+### `datadog_sast_scan`
+*Toolset: **security***\
+Scans code for security vulnerabilities using static analysis (SAST), detecting SQL injection, XSS, path traversal, command injection, insecure cryptography, and other security weaknesses.
+
+- Scan this file for security vulnerabilities.
+- Check my code for SQL injection and XSS vulnerabilities.
+
+
 ### `datadog_secrets_scan`
 *Toolset: **security***\
 Scans code for hardcoded secrets and credentials, detecting AWS keys, API keys, passwords, tokens, private keys, and database credentials.
@@ -1018,3 +1091,4 @@ The Datadog MCP Server is under significant development. Use [this feedback form
 [42]: /ddsql_reference/ddsql_default/
 [43]: https://www.datadoghq.com/product-preview/apm-mcp-toolset/
 [44]: /dashboards/
+[45]: /reference_tables/

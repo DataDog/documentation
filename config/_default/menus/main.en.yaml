@@ -958,6 +958,11 @@ menu:
     #   parent: sdk
     #   identifier: sdk_data_collected
     #   weight: 3
+    # - name: Mobile Vitals
+    #   url: client_sdks/mobile_vitals/
+    #   parent: sdk
+    #   identifier: sdk_mobile_vitals
+    #   weight: 4
     - name: Extend Datadog
       url: extend/
       pre: dev-code
@@ -1620,6 +1625,9 @@ menu:
       url: dashboards/sharing/shared_dashboards
       parent: dashboards_sharing
       weight: 1002
+    - name: Widget Public URLs
+      identifier: dashboards_sharing_widget_public_urls
+      url: dashboards/sharing/widget_public_urls
     - name: Secure Embedded Dashboards
       identifier: dashboards_sharing_secure_embedded_dashboards
       url: dashboards/sharing/secure_embedded_dashboards
@@ -2975,6 +2983,11 @@ menu:
       parent: datadog_cloudcraft_overlays
       identifier: datadog_cloudcraft_overlays_ccm
       weight: 104
+    - name: Monitors
+      url: datadog_cloudcraft/overlays/monitors/
+      parent: datadog_cloudcraft_overlays
+      identifier: datadog_cloudcraft_overlays_monitors
+      weight: 105
     - name: Resource Catalog
       url: infrastructure/resource_catalog/
       pre: resource-catalog
@@ -4933,41 +4946,51 @@ menu:
       parent: dbm
       identifier: dbm_data_collected
       weight: 10
+    - name: Collecting Custom Metrics
+      url: database_monitoring/custom_metrics/
+      parent: dbm
+      identifier: dbm_custom_metrics
+      weight: 11
+    - name: Exploring Custom Metrics
+      url: database_monitoring/custom_metrics/exploring_custom_metrics
+      parent: dbm_custom_metrics
+      identifier: dbm_custom_metrics_exploring
+      weight: 1
     - name: Exploring Database Hosts
       url: database_monitoring/database_hosts/
       parent: dbm
       identifier: dbm_database_hosts
-      weight: 11
+      weight: 12
     - name: Exploring Query Metrics
       url: database_monitoring/query_metrics/
       parent: dbm
       identifier: dbm_query_metrics
-      weight: 12
+      weight: 13
     - name: Exploring Query Samples
       url: database_monitoring/query_samples/
       parent: dbm
       identifier: dbm_query_samples
-      weight: 13
+      weight: 14
     - name: Exploring Database Schemas
       url: database_monitoring/schema_explorer
       parent: dbm
       identifier: dbm_schema_explorer
-      weight: 14
+      weight: 15
     - name: Exploring Recommendations
       url: database_monitoring/recommendations/
       parent: dbm
       identifier: dbm_recommendations
-      weight: 15
+      weight: 16
     - name: Troubleshooting
       url: database_monitoring/troubleshooting/
       parent: dbm
       identifier: dbm_troubleshooting
-      weight: 16
+      weight: 17
     - name: Guides
       url: database_monitoring/guide/
       parent: dbm
       identifier: dbm_guides
-      weight: 17
+      weight: 18
     - name: Data Streams Monitoring
       url: data_streams/
       pre: datastreams-monitoring
@@ -8478,7 +8501,7 @@ menu:
       identifier: rum_mobile_ios_data_collected
       weight: 106
     - name: Mobile Vitals
-      url: real_user_monitoring/application_monitoring/ios/mobile_vitals?tab=ios
+      url: real_user_monitoring/application_monitoring/ios/mobile_vitals
       parent: rum_mobile_ios
       identifier: rum_mobile_ios_mobile_vitals
       weight: 107
@@ -8533,7 +8556,7 @@ menu:
       identifier: rum_mobile_flutter_data_collected
       weight: 104
     - name: Mobile Vitals
-      url: real_user_monitoring/application_monitoring/flutter/mobile_vitals?tab=flutter
+      url: real_user_monitoring/application_monitoring/flutter/mobile_vitals
       parent: rum_mobile_flutter
       identifier: rum_mobile_flutter_mobile_vitals
       weight: 105
@@ -8623,7 +8646,7 @@ menu:
       identifier: rum_mobile_react_data_collected
       weight: 104
     - name: Mobile Vitals
-      url: real_user_monitoring/application_monitoring/react_native/mobile_vitals?tab=reactnative
+      url: real_user_monitoring/application_monitoring/react_native/mobile_vitals
       parent: rum_mobile_react_native
       identifier: rum_mobile_react_mobile_vitals
       weight: 105
@@ -8698,7 +8721,7 @@ menu:
       identifier: rum_mobile_unity_data_collected
       weight: 104
     - name: Mobile Vitals
-      url: real_user_monitoring/application_monitoring/unity/mobile_vitals?tab=unity
+      url: real_user_monitoring/application_monitoring/unity/mobile_vitals
       parent: rum_mobile_unity
       identifier: rum_mobile_unity_mobile_vitals
       weight: 105
@@ -8902,21 +8925,26 @@ menu:
       parent: rum
       identifier: rum_operations_monitoring
       weight: 10
+    - name: Managed Archive
+      url: real_user_monitoring/managed_archive/
+      parent: rum
+      identifier: rum_managed_archive
+      weight: 11
     - name: Ownership of Views
       url: real_user_monitoring/ownership_of_views/
       parent: rum
       identifier: rum_ownership_of_views
-      weight: 11
+      weight: 12
     - name: Guides
       url: real_user_monitoring/guide/
       parent: rum
       identifier: rum_guides
-      weight: 12
+      weight: 13
     - name: Data Security
       identifier: real_user_monitoring_data_security
       url: data_security/real_user_monitoring/
       parent: rum
-      weight: 13
+      weight: 14
     - name: Product Analytics
       url: product_analytics/
       pre: product-analytics
