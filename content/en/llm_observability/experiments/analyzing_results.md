@@ -58,7 +58,7 @@ The following options are available on JSON fields (Input, Output, Expected Outp
 - **Add column**: Adds the field as a custom column in the results table in one click.
 - **Filter by / Exclude**: Adds the field's key-value pair to the search query to narrow down or exclude matching records. Available on leaf values (strings, numbers, booleans) only.
 
-**On tags**:
+The following options are available on tags:
 
 - **Copy key**: Copies the tag key (for example, `env`).
 - **Copy to clipboard**: Copies the full tag including its value (for example, `env:prod`).
