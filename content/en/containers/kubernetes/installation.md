@@ -51,7 +51,7 @@ Use the [Installing on Kubernetes][16] page in Datadog to guide you through the 
    - [Helm][11]
    - Manual installation. See [Manually install and configure the Datadog Agent with a DaemonSet][12]
   
-<div class="alert alert-info">Note: If you plan to implement APM via <a href="https://docs.datadoghq.com/containers/kubernetes/apm">Single Step Instrumentation</a> in your Kubernetes environment, make sure to install the Datadog Agent in its own namespace. SSI will _not_ instrument pods in the same namespace as the Datadog Agent.  </div>
+<div class="alert alert-info">If you plan to implement APM with <a href="/containers/kubernetes/apm">Single Step Instrumentation (SSI)</a> in your Kubernetes environment, install the Datadog Agent in its own namespace. SSI does not instrument pods in the same namespace as the Datadog Agent.</div>
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
