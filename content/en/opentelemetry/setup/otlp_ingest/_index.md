@@ -21,7 +21,7 @@ You might prefer this option if you're looking for a straightforward setup and w
 
 - [OTLP logs intake endpoint][3]
 - [OTLP metrics intake endpoint][4]
-- OTLP traces intake endpoint (in Preview): To request access, contact [Datadog support][5].
+- OTLP traces intake endpoint (in Preview): To request access, contact your Customer Success Manager.
 
 ## Further reading
 
@@ -31,4 +31,3 @@ You might prefer this option if you're looking for a straightforward setup and w
 [2]: /opentelemetry/setup/collector_exporter/
 [3]: /opentelemetry/setup/intake_endpoint/otlp_logs
 [4]: /opentelemetry/setup/intake_endpoint/otlp_metrics
-[5]: /help/

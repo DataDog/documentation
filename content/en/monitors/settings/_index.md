@@ -91,6 +91,9 @@ To create and manage monitor notification rules, see [Monitor notification rules
 
 
 ## Deleted monitors
+
+<div class="alert alert-warning">Deleted Synthetic monitors are not recoverable and cannot be restored.</div>
+
 Monitors are retained for 7 days before being permanently deleted. To restore recently deleted Datadog monitors:
 1. Navigate to the [**Monitors** > **Settings**][1] page.
 1. Open the **Deleted Monitors** tab.

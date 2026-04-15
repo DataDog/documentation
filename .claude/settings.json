@@ -1,0 +1,14 @@
+{
+  "extraKnownMarketplaces": {
+    "datadog-claude-plugins": {
+      "source": {
+        "source": "github",
+        "repo": "DataDog/claude-marketplace"
+      }
+    }
+  },
+  "enabledPlugins": {
+    "marketplace-auto-update@datadog-claude-plugins": true,
+    "documentation@datadog-claude-plugins": true
+  }
+}

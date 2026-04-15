@@ -13,7 +13,7 @@ further_reading:
 {{< site-region region="gov" >}}<div class="alert alert-danger">AI Guard isn't available in the {{< region-param key="dd_site_name" >}} site.</div>
 {{< /site-region >}}
 
-AI Guard helps secure your AI apps and agents in real time against prompt injection, jailbreaking, tool misuse, and sensitive data exfiltration attacks. This page describes how to set it up so you can keep your data secure against these AI-based threats.
+AI Guard helps secure your AI apps and agents in real time against prompt injection, jailbreaking, tool misuse, and sensitive data exfiltration attacks. AI Guard can also detect sensitive data such as PII and secrets in LLM conversations. This page describes how to set it up so you can keep your data secure against these AI-based threats.
 
 For an overview on AI Guard, see [AI Guard][13].
 
@@ -90,9 +90,48 @@ To view AI Guard evaluations in Datadog, create a custom [retention filter][5] f
 - **Span rate**: 100%
 - **Trace rate**: 100%
 
-### 6. (Optional) Limit access to AI Guard spans {#limit-access}
+### 6. Configure AI Guard policies {#configure-policies}
+
+AI Guard provides settings to control how evaluations are enforced, how sensitive threat detection is, and whether sensitive data scanning is enabled.
+
+#### Blocking policy {#blocking-policy}
+
+By default, AI Guard evaluates conversations and returns an action (`ALLOW`, `DENY`, or `ABORT`) but does not block requests. To enable blocking so that `DENY` and `ABORT` actions actively prevent unsafe interactions from proceeding, configure the [blocking policy][20] for your services.
+
+You can configure blocking at different levels of granularity, with more specific settings taking priority:
+1. **Organization-wide**: Apply a default blocking policy to all services and environments.
+2. **Per environment**: Override the organization default for a specific environment.
+3. **Per service**: Override the organization default for a specific service.
+4. **Per service and environment**: Override all of the above for a specific service in a specific environment (for example, enable blocking in production but not in staging).
+
+#### Evaluation sensitivity {#evaluation-sensitivity}
+
+AI Guard assigns a confidence score to each threat category it detects (for example, prompt injection or jailbreaking). You can control the minimum confidence score required for AI Guard to flag a threat by going to **AI Guard** > **Settings** [**Evaluation Sensitivity**][21].
+
+Evaluation sensitivity is a value between 0.0 and 1.0, with a default of 0.5.
+- A **lower** value **increases** sensitivity: AI Guard flags threats even when the confidence is low, surfacing more potential attacks but also more false positives.
+- A **higher** value **decreases** sensitivity: AI Guard only flags threats when the confidence is high, reducing noise but potentially missing some attacks.
+
+#### Sensitive data scanning {#sensitive-data-scanning}
+
+AI Guard can detect personally identifiable information (PII) such as email addresses, phone numbers, and SSNs, as well as secrets such as API keys and tokens, in LLM conversations. To enable sensitive data scanning, go to **AI Guard** > **Settings** > [**Sensitive Data Scanning**][22] for your services.
+
+When enabled, AI Guard scans the last message in each evaluation call, including user prompts, assistant responses, tool call arguments, and tool call results. Findings appear on APM traces for visibility. Sensitive data scanning is detection-only — findings do not independently trigger blocking.
+
+### 7. (Optional) Limit access to AI Guard spans {#limit-access}
 
 To restrict access to AI Guard spans for specific users, you can use [Data Access Control][7]. Follow the linked instructions to create a restricted dataset, scoped to **APM data**, with the `resource_name:ai_guard` filter applied. Then, you can grant access to the dataset to specific roles or teams.
+
+## Evaluate conversations in AI Guard Playground {#playground}
+
+The [AI Guard Playground][19] lets you test AI Guard evaluations directly from the Datadog UI, without writing any code. Submit a conversation, including user input, assistant output, and tool calls, and see the evaluation result (action and reason) in real time.
+
+Use the Playground to:
+- Experiment with different prompt patterns and see how AI Guard responds.
+- Verify that AI Guard correctly detects prompt injection, jailbreaking, or unsafe tool calls.
+- Tweak the evaluation sensitivity threshold and see how it affects detection results. You can then adjust the threshold in AI Guard's [evaluation sensitivity](#evaluation-sensitivity) settings.
+- Test sensitive data scanning on your conversations.
+- Share evaluation results with your team during development.
 
 ## Use the AI Guard API {#api}
 
@@ -146,6 +185,7 @@ curl -s -XPOST \
                  }
               }
             ]
+          }
         ]
       }
     }
@@ -386,7 +426,7 @@ result = client.evaluate(
         Message(role="system", content="You are an AI Assistant"),
         Message(role="user", content="What is the weather like today?"),
     ],
-    options=Options(block=False)
+    options=Options(block=True)
 )
 ```
 
@@ -459,7 +499,7 @@ const result = await tracer.aiguard.evaluate([
     { role: 'system', content: 'You are an AI Assistant' },
     { role: 'user', content: 'What is the weather like today?' }
   ],
-  { block: false }
+  { block: true }
 )
 ```
 
@@ -513,7 +553,7 @@ final AIGuard.Evaluation evaluation = AIGuard.evaluate(
       AIGuard.Message.message("system", "You are an AI Assistant"),
       AIGuard.Message.message("user", "What is the weather like today?")
     ),
-    new AIGuard.Options().block(false)
+    new AIGuard.Options().block(true)
 );
 ```
 
@@ -577,7 +617,7 @@ The following sections provide practical usage examples:
 result = Datadog::AIGuard.evaluate(
   Datadog::AIGuard.message(role: :system, content: "You are an AI Assistant"),
   Datadog::AIGuard.message(role: :user, content: "What is the weather like today?"),
-  allow_raise: false
+  allow_raise: true
 )
 ```
 
@@ -703,8 +743,8 @@ For more comprehensive detection rule capabilities, see [detection rules][15].
 
 To view and investigate AI Guard security signals, and correlate them with other security events, you can view signals in two places:
 - [Application and API Protection Security Signals explorer][18]
-- [Cloud SIEM Security Signals explorer][16] 
-  
+- [Cloud SIEM Security Signals explorer][16]
+
   In the Cloud SIEM Security Signals explorer, beside the search bar, click the **Filter** icon and select the **App & API Protection** checkbox to view AI Guard signals.
 
 The Security Signals explorers allow you to filter, prioritize, and investigate AI Guard signals alongside other application security threats, providing a unified view of your security posture.
@@ -731,3 +771,7 @@ The Security Signals explorers allow you to filter, prioritize, and investigate 
 [16]: https://app.datadoghq.com/security/siem/signals
 [17]: https://app.datadoghq.com/security/ai-guard/settings/detection-rules
 [18]: https://app.datadoghq.com/security/ai-guard/signals
+[19]: https://app.datadoghq.com/security/ai-guard/playground
+[20]: https://app.datadoghq.com/security/ai-guard/settings/services
+[21]: https://app.datadoghq.com/security/ai-guard/settings/evaluation-sensitivity
+[22]: https://app.datadoghq.com/security/ai-guard/settings/sensitive-data-scanning

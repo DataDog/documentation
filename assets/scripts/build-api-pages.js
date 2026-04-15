@@ -2,17 +2,40 @@
 const lodash = require('lodash');
 const yaml = require('js-yaml');
 const fs = require('fs');
-const marked = require('marked');
 const slugify = require('slugify');
 const $RefParser = require('@apidevtools/json-schema-ref-parser');
 const safeJsonStringify = require('safe-json-stringify');
 const oneOfLimit = 50;
+const ENUM_DISPLAY_LIMIT = 10;
+
+// Support both marked v1 (require('marked')) and v12+ (marked.umd.js or default export)
+let marked;
+try {
+  const markedModule = require('marked/lib/marked.umd.js');
+  marked = markedModule.marked || markedModule.default || markedModule;
+} catch (_) {
+  const markedModule = require('marked');
+  marked = { parse: markedModule.parse };
+}
+if (!marked || typeof marked.parse !== 'function') {
+  throw new Error('marked.parse not found. Check marked package version.');
+}
 
 const supportedLangs = ['en'];
 
-// Create a renderer once so we don't recreate it on every call set paragraph tag to table-cell
-const renderer = new marked.Renderer();
-renderer.paragraph = (text) => `<p class="table-cell">${text}</p>`;
+/** Parse markdown, add table-cell class to paragraph tags, and add id to headings (for API description tables). */
+function parseDescWithTableCell(desc) {
+  const html = marked.parse(desc || '', typeof marked.use === 'function' ? {} : undefined);
+  let out = (html || '').trim()
+    .replace(/<p>/g, '<p class="table-cell">')
+    .replace(/<\/p>\s*<p class="table-cell">/g, '</p><p class="table-cell">');
+  // Add id to h1–h6 from heading text (matches previous custom renderer behavior)
+  out = out.replace(/<h([1-6])>([\s\S]*?)<\/h\1>/g, (_, level, inner) => {
+    const id = slugify((inner || '').replace(/<[^>]+>/g, '').trim(), { lower: true }) || 'heading';
+    return `<h${level} id="${id}">${inner}</h${level}>`;
+  });
+  return out;
+}
 
 /**
  * Update the menu yaml file with api
@@ -721,7 +744,15 @@ const descColumn = (key, value) => {
   let desc = '';
   if(value.description) {
     if (value.enum){
-      desc = `${value.description  } \nAllowed enum values: <code>${value.enum}</code>`;
+      const enumArray = Array.isArray(value.enum) ? value.enum : value.enum.split(',');
+      if (enumArray.length > ENUM_DISPLAY_LIMIT) {
+        const visibleEnums = enumArray.slice(0, ENUM_DISPLAY_LIMIT).join(',');
+        const hiddenEnums = enumArray.slice(ENUM_DISPLAY_LIMIT).join(',');
+        const remainingCount = enumArray.length - ENUM_DISPLAY_LIMIT;
+        desc = `${value.description  } \nAllowed enum values: <code>${visibleEnums}</code><details class="enum-details"><summary class="enum-summary">Show ${remainingCount} more</summary><code>,${hiddenEnums}</code></details>`;
+      } else {
+        desc = `${value.description  } \nAllowed enum values: <code>${value.enum}</code>`;
+      }
     } else if(typeof(value.description) !== "object") {
       desc = value.description || '';
     }
@@ -731,7 +762,7 @@ const descColumn = (key, value) => {
   if(value.deprecated) {
     desc = `**DEPRECATED**: ${desc}`;
   }
-  const descHtml = desc ? marked.parse(desc, { renderer }).trim() : "";
+  const descHtml = desc ? parseDescWithTableCell(desc) : "";
   const def = (value.default) ? `<p>default: <code>${value.default}</code></p>` : '';
   return `<div class="col-6 column">${descHtml}${def}</div>`.trim();
 };

@@ -47,7 +47,7 @@ Regional GCR registries are also available:
 
 [1]: /agent/docker/
 [2]: https://console.cloud.google.com/artifacts/docker/datadoghq/us/gcr.io/agent
-[3]: /developers/dogstatsd/
+[3]: /extend/dogstatsd/
 [4]: https://console.cloud.google.com/artifacts/docker/datadoghq/us/gcr.io/dogstatsd
 [5]: /agent/cluster_agent/
 [6]: https://console.cloud.google.com/artifacts/docker/datadoghq/us/gcr.io/cluster-agent
@@ -68,7 +68,7 @@ Regional GCR registries are also available:
 [1]: /agent/docker/
 [2]: https://gallery.ecr.aws/datadog/agent
 [3]: https://gallery.ecr.aws/datadog/docker-dd-agent
-[4]: /developers/dogstatsd/
+[4]: /extend/dogstatsd/
 [5]: https://gallery.ecr.aws/datadog/dogstatsd
 [6]: /agent/cluster_agent/
 [7]: https://gallery.ecr.aws/datadog/cluster-agent

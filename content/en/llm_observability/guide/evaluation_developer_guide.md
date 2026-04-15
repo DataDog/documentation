@@ -49,7 +49,7 @@ The typical flow:
 
 ## Building evaluators
 
-There are two ways to define an evaluator: class-based and function-based.
+There are two ways to define an evaluator using LLM Observability: class-based and function-based. In addition to these evaluators, LLM Observability has integrations with open source evaluation frameworks, such as [DeepEval][6], that can be used in LLM Observability Experiments.
 
 | | Class-based | Function-based |
 |---|---|---|
@@ -118,6 +118,206 @@ class AverageScoreEvaluator(BaseSummaryEvaluator):
 
 - Call `super().__init__(name="evaluator_name")` to set the evaluator's label.
 - Access per-evaluator results through `context.evaluation_results`, which maps evaluator names to lists of results.
+
+### LLMJudge
+
+The `LLMJudge` class enables automated evaluation of LLM outputs using another LLM as the judge. It supports OpenAI, Azure OpenAI, Anthropic, Amazon Bedrock, and custom LLM clients with structured output formats.
+
+#### Parameters
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `user_prompt` | `str` | Yes | Prompt template with `{{field.path}}` syntax for span context injection. |
+| `system_prompt` | `str` | No | System prompt to set the judge's behavior or persona. |
+| `structured_output` | `StructuredOutput` | No | Output format specification. See [structured output types](#structured-output-types). |
+| `provider` | `str` | Conditional | LLM provider: `"openai"`, `"azure_openai"`, `"anthropic"`, or `"bedrock"`. Required if `client` is not provided. |
+| `model` | `str` | No | Model identifier (for example, `"gpt-4o"`, `"claude-sonnet-4-20250514"`). |
+| `model_params` | `dict` | No | Additional parameters passed to the LLM API (for example, `temperature`). |
+| `client` | callable | Conditional | Custom LLM client function. Required if `provider` is not provided. |
+| `name` | `str` | No | Evaluator name for identification in results. |
+| `client_options` | `dict` | No | Provider-specific configuration (for example, API keys). |
+
+#### Template variables
+
+The `user_prompt` supports `{{field.path}}` syntax to inject context from the evaluated span. Nested paths are supported.
+
+- `{{input_data}}` — The span's input data.
+- `{{output_data}}` — The span's output data.
+- `{{expected_output}}` — Expected output for comparison (if available).
+- `{{metadata.key}}` — Nested metadata fields (for example, `{{metadata.topic}}`).
+
+#### Structured output types
+
+| Output type | Description |
+|-------------|-------------|
+| `BooleanStructuredOutput` | Returns `True`/`False` with optional pass/fail assessment. |
+| `ScoreStructuredOutput` | Returns a numeric score within a defined range, with optional thresholds. |
+| `CategoricalStructuredOutput` | Returns one of a predefined set of categories, with optional pass values. |
+| `Dict[str, JSONType]` | Custom JSON schema for arbitrary structured output. |
+
+All structured output types accept `reasoning=True` to include an explanation in results, and `reasoning_description` to customize the reasoning field's description.
+
+#### Example: Boolean evaluation
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs import LLMJudge, BooleanStructuredOutput
+
+judge = LLMJudge(
+    provider="openai",
+    model="gpt-4o",
+    user_prompt="Is this response factually accurate? Response: {{output_data}}",
+    structured_output=BooleanStructuredOutput(
+        description="Whether the response is factually accurate",
+        reasoning=True,
+        pass_when=True,
+    ),
+)
+{{< /code-block >}}
+
+#### Example: Score-based evaluation with thresholds
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs import LLMJudge, ScoreStructuredOutput
+
+judge = LLMJudge(
+    provider="anthropic",
+    model="claude-sonnet-4-20250514",
+    user_prompt="Rate the helpfulness of this response (1-10): {{output_data}}",
+    structured_output=ScoreStructuredOutput(
+        description="Helpfulness score",
+        min_score=1,
+        max_score=10,
+        reasoning=True,
+        min_threshold=7,  # Scores >= 7 pass
+    ),
+)
+{{< /code-block >}}
+
+#### Example: Categorical evaluation
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs import LLMJudge, CategoricalStructuredOutput
+
+judge = LLMJudge(
+    provider="openai",
+    model="gpt-4o",
+    user_prompt="Classify the sentiment: {{output_data}}",
+    structured_output=CategoricalStructuredOutput(
+        categories={
+            "positive": "The response has a positive sentiment.",
+            "neutral": "The response has a neutral sentiment.",
+            "negative": "The response has a negative sentiment.",
+        },
+        reasoning=True,
+        pass_values=["positive", "neutral"],
+    ),
+)
+{{< /code-block >}}
+
+#### Example: Azure OpenAI
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs import LLMJudge, BooleanStructuredOutput
+
+judge = LLMJudge(
+    provider="azure_openai",
+    model="gpt-4o",
+    user_prompt="Is this response factually accurate? Response: {{output_data}}",
+    structured_output=BooleanStructuredOutput(
+        description="Whether the response is factually accurate",
+        reasoning=True,
+        pass_when=True,
+    ),
+    client_options={
+        "azure_endpoint": "https://your-resource.openai.azure.com",
+        "api_version": "2024-10-21",
+        "azure_deployment": "gpt-4o",
+    },
+)
+{{< /code-block >}}
+
+The `azure_openai` provider accepts the following `client_options`:
+
+| Option | Environment variable | Description |
+|--------|---------------------|-------------|
+| `api_key` | `AZURE_OPENAI_API_KEY` | Azure OpenAI API key. |
+| `azure_endpoint` | `AZURE_OPENAI_ENDPOINT` | Azure OpenAI endpoint URL. |
+| `api_version` | `AZURE_OPENAI_API_VERSION` | API version. Defaults to `"2024-10-21"`. |
+| `azure_deployment` | `AZURE_OPENAI_DEPLOYMENT` | Deployment name. Falls back to the `model` parameter. |
+
+#### Example: Custom LLM client
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs import LLMJudge, BooleanStructuredOutput
+
+def my_llm_client(provider, messages, json_schema, model, model_params):
+    response = call_my_llm(messages, model)
+    return response
+
+judge = LLMJudge(
+    client=my_llm_client,
+    model="my-custom-model",
+    user_prompt="Is this response accurate? {{output_data}}",
+    structured_output=BooleanStructuredOutput(
+        description="Accuracy check",
+        reasoning=True,
+        pass_when=True,
+    ),
+)
+{{< /code-block >}}
+
+#### Key points
+
+- Requires either a `provider` (`"openai"`, `"azure_openai"`, `"anthropic"`, or `"bedrock"`) or a custom `client`.
+- Set API keys using `client_options={"api_key": "..."}` or environment variables (`OPENAI_API_KEY`, `ANTHROPIC_API_KEY`). For Azure OpenAI, set `AZURE_OPENAI_API_KEY` and `AZURE_OPENAI_ENDPOINT`. For Bedrock, configure AWS credentials through environment variables or `client_options`.
+- Use `reasoning=True` in structured outputs to include an explanation in results.
+- Define pass/fail criteria with `pass_when` (boolean), `pass_values` (categorical), or `min_threshold`/`max_threshold` (score).
+
+#### Publishing an LLMJudge as a Datadog managed evaluation
+
+Use `LLMObs.publish_evaluator()` to push a locally-defined `LLMJudge` configuration to Datadog as a custom LLM-as-a-judge draft. This lets you define and validate an evaluator in experiments, then promote it to production without manually recreating the configuration in the UI.
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `evaluator` | `LLMJudge` | Yes | The `LLMJudge` instance to publish. |
+| `ml_app` | `str` | Yes | The LLM application name. |
+| `eval_name` | `str` | No | The name to use for the evaluator in Datadog. If omitted, defaults to the `name` set on the `LLMJudge` instance. |
+| `variable_mapping` | `dict[str, str]` | No | Remaps variable names in `user_prompt` to Datadog span field paths in the published evaluator. |
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs import LLMObs
+from ddtrace.llmobs._evaluators import BooleanStructuredOutput, LLMJudge
+
+LLMObs.enable(
+    ml_app="my-ml-app",
+    api_key="<DD_API_KEY>",
+    app_key="<DD_APP_KEY>",
+)
+
+judge = LLMJudge(
+    provider="openai",
+    model="gpt-4o",
+    system_prompt="You are a helpful evaluator.",
+    user_prompt=(
+        "Does the output correctly answer the question?\n"
+        "Input: {{input_data}}\n"
+        "Output: {{output_data}}"
+    ),
+    structured_output=BooleanStructuredOutput("correctness", pass_when=True),
+    name="my-correctness-judge",
+)
+
+result = LLMObs.publish_evaluator(
+    judge,
+    ml_app="my-ml-app",
+    variable_mapping={"input_data": "span_input", "output_data": "span_output"},
+)
+print(result["ui_url"])
+{{< /code-block >}}
+
+`LLMObs.publish_evaluator()` returns `{"ui_url": "..."}`, which links to the evaluator in Datadog.
+
+<div class="alert alert-info">Each call to <code>LLMObs.publish_evaluator()</code> creates or updates the evaluator draft. Activate it from the Datadog UI to run it in production.</div>
 
 ### Built-in evaluators
 
@@ -308,9 +508,75 @@ experiment = LLMObs.experiment(
 experiment.run()
 {{< /code-block >}}
 
+### Using managed evaluators
+
+`RemoteEvaluator` lets you reference a [custom LLM-as-a-judge evaluation][5] configured in the Datadog UI by name, and run it as part of a local experiment. This allows you to reuse your production evaluators in offline experiments without reimplementing the evaluation logic in Python.
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `eval_name` | `str` | The name of the LLM-as-a-judge evaluator as configured in Datadog. |
+| `transform_fn` | `Optional[Callable]` | A function that maps an `EvaluatorContext` to a dict of template variable values. |
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs import LLMObs, RemoteEvaluator
+
+evaluator = RemoteEvaluator(eval_name="quality-assessment")
+
+experiment = LLMObs.experiment(
+    name="my-experiment",
+    task=my_task,
+    dataset=dataset,
+    evaluators=[evaluator],
+)
+experiment.run()
+{{< /code-block >}}
+
+#### Mapping dataset data to prompt variables with `transform_fn`
+
+When you configure an LLM-as-a-judge in the Datadog UI, the [prompt template uses variables][7] such as `{{span_input}}` and `{{span_output}}`. By default, `RemoteEvaluator` maps the following:
+- `input_data` → `span_input`
+- `output_data` → `span_output`
+- `expected_output` → `meta.expected_output`
+
+If your dataset records have a different structure—for example, `input_data` is a dict with multiple keys—provide a `transform_fn` to control exactly which values are sent for each template variable:
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs import RemoteEvaluator, EvaluatorContext
+
+def my_transform(context: EvaluatorContext) -> dict:
+    # input_data is a dict: {"user_query": str, "retrieved_docs": list[str]}
+    return {
+        "span_input": context.input_data.get("user_query"),   # → {{span_input}} in the prompt
+        "span_output": context.output_data,                   # → {{span_output}} in the prompt
+        "meta": {
+            "retrieved_docs": context.input_data.get("retrieved_docs"),  # → {{meta.retrieved_docs}}
+        },
+    }
+
+evaluator = RemoteEvaluator(
+    eval_name="quality-assessment",
+    transform_fn=my_transform,
+)
+{{< /code-block >}}
+
+If the backend evaluator encounters an error, a `RemoteEvaluatorError` is raised. Inspect `backend_error` for details:
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs import RemoteEvaluator, RemoteEvaluatorError, EvaluatorContext
+
+evaluator = RemoteEvaluator(eval_name="quality-assessment")
+context = EvaluatorContext(input_data={"query": "What is the capital of France?"}, output_data="Paris")
+
+try:
+    result = evaluator.evaluate(context)
+except RemoteEvaluatorError as e:
+    print(e.backend_error)
+    # {"type": "...", "message": "...", "recommended_resolution": "..."}
+{{< /code-block >}}
+
 ## Using evaluators in production
 
-<div class="alert alert-info">To evaluate production traces without code changes, see <a href="/llm_observability/evaluations/custom_llm_as_a_judge_evaluations">Custom LLM-as-a-Judge Evaluations</a> instead.</div>
+<div class="alert alert-info">This section covers evaluations you run and submit manually from your application code. To have Datadog run evaluations automatically on production traces, see <a href="/llm_observability/evaluations/custom_llm_as_a_judge_evaluations">Custom LLM-as-a-Judge Evaluations</a> instead.</div>
 
 To submit evaluations from your application code, construct the `EvaluatorContext` yourself, call the evaluator, and submit the result with `LLMObs.submit_evaluation()`. You can also submit evaluations through the HTTP API.
 
@@ -409,8 +675,8 @@ The metric type is set when submitting an evaluation (through `submit_evaluation
 Evaluation labels must follow these conventions:
 
 - Must start with a letter
-- Must only contain ASCII alphanumerics or underscores
-- Other characters, including spaces, are converted to underscores
+- Must only contain ASCII alphanumerics, underscores, or hyphens
+- Spaces and other unsupported characters are converted to underscores
 - Unicode is not supported
 - Must not exceed 200 characters (fewer than 100 is preferred)
 - Must be unique for a given LLM application (`ml_app`) and organization
@@ -434,3 +700,5 @@ When submitting evaluations for [OpenTelemetry-instrumented spans][3], include t
 [3]: /llm_observability/instrumentation/otel_instrumentation
 [4]: /llm_observability/experiments
 [5]: /llm_observability/evaluations/custom_llm_as_a_judge_evaluations
+[6]: /llm_observability/evaluations/deepeval_evaluations/
+[7]: /llm_observability/evaluations/custom_llm_as_a_judge_evaluations#configure-the-prompt

@@ -382,7 +382,7 @@ Create a detailed roll-out methodology in the [build][41] phase by focusing on t
 [66]: /integrations/okta/
 [68]: /universal_service_monitoring/
 [69]: /integrations/process/
-[70]: /developers/custom_checks/#should-you-write-a-custom-agent-check-or-an-integration
+[70]: /extend/custom_checks/#should-you-write-a-custom-agent-check-or-an-integration
 [71]: /synthetics/api_tests/ssl_tests/
 [72]: /software_catalog/service_definitions/
 [73]: https://learn.datadoghq.com/courses/dd-101-sre

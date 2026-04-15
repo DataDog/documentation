@@ -255,6 +255,34 @@ extensions:
 
 {{% /tab %}}
 
+{{% tab "Azure DevOps" %}}
+
+<div class="alert alert-danger">
+If the integration was installed before March 10, 2026, run the <a href="https://github.com/DataDog/azdevops-sci-hooks">webhook installation setup script</a> again to help ensure all DORA metrics are calculated correctly. If you encounter errors, rerun the script before contacting support.
+</div>
+
+If the [Azure DevOps Source Code integration][1] is not already installed, install it on the [Azure DevOps Source Code integration tile][2].
+
+To set up the integration:
+
+1. Open the [Azure DevOps Source Code integration tile][2] in Datadog.
+
+2. Select the **Configuration** tab and click **Connect Microsoft Entra App**.
+
+3. Follow the setup instructions.
+
+4. Click **Add Organizations**.
+
+5. Follow the repository installation steps and [**run the setup script**][3]. If the script is not run, commits made before a pull request is created will not be associated with that pull request.
+
+6. After the script completes, verify the integration status on the tile. The connected repositories and projects appear in the list.
+
+[1]: https://docs.datadoghq.com/integrations/azure-devops-source-code/#connect-microsoft-entra-app
+[2]: https://app.datadoghq.com/integrations?search=azure%20devops&integrationId=azure-devops-source-code&subPath=configuration
+[3]: https://github.com/DataDog/azdevops-sci-hooks
+
+{{% /tab %}}
+
 {{% tab "Other Git Providers" %}}
 
 You can upload your Git repository metadata with the [`datadog-ci git-metadata upload`][1] command.
@@ -304,6 +332,15 @@ links:
     type: repo
     provider: gitlab
     url: https://gitlab.com/organization/example-repository/-/tree/main/src/apps/shopist?ref_type=heads
+```
+{{% /tab %}}
+{{% tab "Azure DevOps" %}}
+```yaml
+links:
+  - name: shopist
+    type: repo
+    provider: azure
+    url: https://dev.azure.com/organization/project/_git/example-repository?path=/src/apps/shopist
 ```
 {{% /tab %}}
 {{< /tabs >}}

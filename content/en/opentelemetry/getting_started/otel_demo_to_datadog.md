@@ -137,14 +137,16 @@ Complete the following steps to configure these components.
       extensions: [datadog/extension]
       pipelines:
         traces:
-          processors: [memory_limiter, resource, resourcedetection, transform]
-          exporters: [otlp, debug, spanmetrics, datadog, datadog/connector]
+          receivers: [otlp]
+          processors: [resourcedetection, memory_limiter, resource, transform/sanitize_spans]
+          exporters: [otlp_grpc/jaeger, debug, spanmetrics, datadog, datadog/connector]
         metrics:
           receivers: [datadog/connector, docker_stats, httpcheck/frontend-proxy, hostmetrics, nginx, otlp, postgresql, redis, spanmetrics]
-          processors: [memory_limiter, resource, resourcedetection, transform]
-          exporters: [otlphttp/prometheus, debug, datadog]
+          processors: [resourcedetection, memory_limiter, resource]
+          exporters: [otlp_http/prometheus, debug, datadog]
         logs:
-          processors: [memory_limiter, resource, resourcedetection, transform]
+          receivers: [otlp]
+          processors: [resourcedetection, memory_limiter, resource]
           exporters: [opensearch, debug, datadog]
     ```
 

@@ -19,6 +19,7 @@ Use these integrations to:
 - **Plan schema or transformation changes** with insight into which dashboards will be affected
 
 {{< whatsnext desc="Connect to these business intelligence tools:" >}}
+   {{< nextlink href="data_observability/quality_monitoring/business_intelligence/looker" >}}Looker{{< /nextlink >}}
    {{< nextlink href="data_observability/quality_monitoring/business_intelligence/tableau" >}}Tableau{{< /nextlink >}}
    {{< nextlink href="data_observability/quality_monitoring/business_intelligence/sigma" >}}Sigma{{< /nextlink >}}
    {{< nextlink href="data_observability/quality_monitoring/business_intelligence/metabase" >}}Metabase{{< /nextlink >}}

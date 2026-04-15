@@ -317,8 +317,8 @@ If you installed the Datadog Docker Agent with Single Step APM Instrumentation, 
 [12]: /containers/docker/log/
 [13]: /infrastructure/process/
 [14]: /infrastructure/livecontainers/
-[15]: /developers/dogstatsd/
-[16]: /developers/dogstatsd/unix_socket/
+[15]: /extend/dogstatsd/
+[16]: /extend/dogstatsd/unix_socket/
 [17]: /getting_started/tagging/unified_service_tagging/?tab=docker
 [18]: /containers/docker/tag
 [19]: /agent/configuration/secrets-management/?tab=linux

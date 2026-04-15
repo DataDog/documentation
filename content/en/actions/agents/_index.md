@@ -1,5 +1,5 @@
 ---
-title: Agents
+title: Agent Builder
 description: Build custom AI agents that can access the Action Catalog. 
 disable_toc: false
 further_reading:
@@ -12,7 +12,7 @@ further_reading:
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/agent-builder/" btn_hidden="false" header="Join the Preview!" >}}
-Agents are in Preview. Click <b>Request Access</b> and fill in the Datadog Product Preview Program form.
+Agent Builder is in Preview. Click <b>Request Access</b> and fill in the Datadog Product Preview Program form.
 {{< /callout >}}
 
 ## Overview
@@ -59,7 +59,13 @@ To build an agent from scratch:
 
 ## Customize your agent
 
-When configuring your agent, you have the following options for customization. 
+When configuring your agent, you have the following options for customization.
+
+### Automation
+
+Set up your agent to run automatically with a [schedule][13], or trigger it from a Datadog [monitor][14], [incident][15], or [security signal][16]. These automations use [Workflow Automation][9].
+
+**Note**: If a [monitor][14] triggers the workflow, update the monitor's configuration to trigger the workflow upon alert, warning, or recovery.
 
 ### Instructions
 
@@ -89,9 +95,9 @@ Focus on clear communication, structured processes, and continuous improvement o
 
 ### Model
 
-By default, new custom agents run on the latest GPT model. 
+By default, new custom agents run on Claude Sonnet.
 
-To change your agent's model, click **Auto** in the chatbox to open a dropdown menu and choose another model. You can compare these models using [OpenAI's comparison tool][6] and [Anthropic's models comparison][5].
+To change your agent's model, click the model name in the chatbox to open a dropdown menu and choose another model. You can compare these models using [OpenAI's comparison tool][6] and [Anthropic's models comparison][5].
 
 ### Self Improve
 
@@ -105,7 +111,9 @@ Click the plus **<i class="icon-plus-circled-wui"></i>** icon to add actions fro
 
 ### MCP Server
 
-Click the toggle button to enable the [Datadog MCP Server][8]. MCP servers use the Model Context Protocol to provide additional tools and capabilities that the agent can use to interact with external systems.
+In the **MCP Servers** section, the [Datadog MCP Server][8] is enabled by default. You can also connect third-party MCP servers. MCP servers use the Model Context Protocol to provide additional tools and capabilities that the agent can use to interact with external systems.
+
+Third-party MCP servers use OAuth for authentication, allowing your agent to integrate with popular tools such as Atlassian, Notion, GitHub, PagerDuty, Asana, and Linear.
 
 ## Add an agent action
 
@@ -152,3 +160,7 @@ To invoke an agent in an app:
 [10]: https://app.datadoghq.com/app-builder/apps/list
 [11]: /actions/workflows/build/#wait-until-condition
 [12]: /actions/workflows/build/#retries
+[13]: /actions/workflows/trigger/#scheduled-triggers
+[14]: /actions/workflows/trigger/#monitor-triggers
+[15]: /actions/workflows/trigger/#incident-triggers
+[16]: /actions/workflows/trigger/#security-triggers

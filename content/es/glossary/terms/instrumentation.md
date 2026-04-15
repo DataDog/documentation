@@ -1,4 +1,5 @@
 ---
+id: instrumentation
 core_product:
 - apm
 short_definition: La instrumentación es el proceso de añadir código a tu aplicación

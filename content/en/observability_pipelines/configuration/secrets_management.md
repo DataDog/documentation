@@ -22,6 +22,10 @@ The Observability Pipelines Worker helps you securely manage your secrets by int
 - JSON File
 - YAML File
 
+**Notes**:
+- If you want to use Kubernetes Secrets, follow the instructions in [Configure all key-value pairs in a Secret as container environment variables][6] and set up the secret as an environment variable for the Observability Pipelines Worker.
+- When you set up a pipeline and install the Worker, if you enter secret identifiers and then choose to use environment variables, the environment variable is the identifier entered and prepended with `DD_OP`. For example, if you entered `PASSWORD_1` for a password identifier, the environment variable for that password is `DD_OP_PASSWORD_1`.
+
 ## Configure the Worker to retrieve secrets
 
 {{% collapse-content title="AWS Secrets Manager" level="h4" expanded=false id="aws-secrets-manager" %}}
@@ -365,3 +369,4 @@ bootstrap:
 [3]: /observability_pipelines/configuration/install_the_worker/?tab=docker#install-the-worker
 [4]: https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html
 [5]: https://developer.hashicorp.com/
+[6]: https://kubernetes.io/docs/tasks/inject-data-application/distribute-credentials-secure/#configure-all-key-value-pairs-in-a-secret-as-container-environment-variables
