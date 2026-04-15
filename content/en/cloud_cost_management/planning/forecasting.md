@@ -47,8 +47,8 @@ You can generate forecasts for various time horizons and rollup intervals to mat
 
 To generate accurate forecasts, CCM requires:
 
-- **At least 31 *consecutive* days of cost data**: This helps ensure the model has sufficient information to identify meaningful patterns. If fewer days are available, the model pads the remaining days with zeros to generate a forecast.
-- **Recent data**: The model uses up to the last 100 days of your cost history to generate predictions.
+- **At least 64 consecutive days of cost data**: This helps ensure the model has sufficient information to identify meaningful patterns. If fewer days are available, the model pads the remaining days with zeros to generate a forecast.
+- **Recent data**: The model uses up to the last 64 days of your cost history to generate predictions.
 
 ## View forecasts in reports
 

@@ -25,18 +25,36 @@ Product Analytics helps you gain insight into user behavior and make data-driven
 - [Track key user behavior patterns](#track-key-user-behavior-patterns)
 - [Visualize user interactions](#visualize-user-interactions)
 
+## Instrument your application
 
-## Getting started
-To start using Product Analytics for an application, [instrument your application](#instrument-your-application) and then [enable the feature](#enable-product-analytics) for it in Datadog. 
+Product Analytics collects client-side user activity data through the Datadog SDK. You can also send server-side events through the API to supplement your client-side data.
 
-**Note**: Product Analytics uses the same SDKs and configuration as [Real User Monitoring (RUM)][18], and retains data for 15 months by default. See [Datadog's data retention periods][1] for more information.
+To get started, [add the Datadog SDK](#track-client-side-events-sdk) to your application and [enable Product Analytics](#enable-product-analytics) in Datadog. You can also [send server-side events through the API](#track-server-side-events-api).
 
-### Instrument your application
+<div class="alert alert-info">Product Analytics uses the same SDKs and configuration as <a href="/real_user_monitoring/#what-is-real-user-monitoring">Real User Monitoring (RUM)</a>, and retains data for 15 months by default. See <a href="/data_security/data_retention_periods/">Datadog's data retention periods</a> for more information.</div>
+
+### Track client-side events (SDK)
+
+Collect events, such as pageviews or button clicks, from your users' devices, and send them to Datadog.
+
 Add the Datadog SDK to your application to start collecting user activity data. If you have already configured RUM, you do not need to instrument your application again for Product Analytics.
 
-If you do not have an application set up in Datadog yet, create one for your platform ([browser][14], [iOS][15], or [Android][16]) or use your [coding assistant][17].
+If you do not have an application set up in Datadog yet, follow the instructions for your platform:
 
-### Enable Product Analytics
+- [Browser][14]
+- [iOS][15]
+- [Android][16]
+
+To set up your application with a coding assistant, see [Agentic onboarding][17].
+
+### Track server-side events (API)
+
+After you set up client-side collection, you can use the [Product Analytics API][21] to send custom events from your server, such as completed checkouts or processed payments.
+
+<div class="alert alert-warning">Datadog bills server-side events separately. See the <a href="https://www.datadoghq.com/pricing/?product=product-analytics#products">pricing page</a> for details, and contact your Customer Success Manager with additional questions.</div>
+
+## Enable Product Analytics
+
 For each application you want to monitor user behavior for, enable Product Analytics:
 
 1. In Datadog, go to **Digital Experience** > **Real User Monitoring** > [**Manage Applications**][9]. In the list of applications under **Active**, select the application you want to monitor.
@@ -46,7 +64,7 @@ For each application you want to monitor user behavior for, enable Product Analy
 {{< img src="product_analytics/enable-product-analytics.png" alt="Enable Product Analytics from the Application Management page.">}}
 
 ## Understand your data
-Product Analytics is built on three levels of user data RUM collects: Sessions, Views, and Actions. For a full breakdown of RUM event types, see [Understanding the RUM Event Hierarchy][19].
+The Datadog SDK automatically collects three levels of client-side user data: Sessions, Views, and Actions. For a full breakdown of RUM event types, see [Understanding the RUM Event Hierarchy][19]. After you set up the SDK, you can also send server-side events through the [Product Analytics API][21].
 
 **Sessions**
 : A session is a single user's complete journey through your application, from the moment they open it to when they leave.
@@ -55,7 +73,10 @@ Product Analytics is built on three levels of user data RUM collects: Sessions, 
 : A view represents each page or screen a user visits within a session.
 
 **Actions**
-: An action is something a user does on a page, such as a click, tap, or scroll. Actions are automatically collected by the RUM SDK. When configuring features like [Funnels][4] and [Segments][6], you can select specific Actions as steps or filters. To see which Actions are available, open the [RUM Explorer][20] and filter by **Actions**. 
+: An action is something a user does on a page, such as a click, tap, or scroll. Actions are automatically collected by the RUM SDK. When configuring features like [Funnels][4] and [Segments][6], you can select specific Actions as steps or filters. To see which Actions are available, open the [RUM Explorer][20] and filter by **Actions**.
+
+**Server-side events**
+: A server-side event is a custom event sent through the [Product Analytics API][21], such as a completed checkout or processed payment. In the event picker, select **Server Events** to scope your analysis to server-side data.
 
 ## Navigate the Product Analytics UI
 Each Product Analytics feature provides context about your users' journeys.
@@ -130,13 +151,11 @@ Use the following features to inform your product change decisions, such as chan
 ## Further reading
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /data_security/data_retention_periods/
 [2]: /product_analytics/charts/retention_analysis
 [3]: https://app.datadoghq.com/product-analytics
 [4]: /product_analytics/charts/funnel_analysis
 [5]: /product_analytics/charts/pathways
 [6]: /product_analytics/segmentation/
-[8]: https://app.datadoghq.com/rum/
 [9]: https://app.datadoghq.com/rum/list
 [10]: /session_replay/heatmaps
 [11]: /session_replay/
@@ -146,6 +165,6 @@ Use the following features to inform your product change decisions, such as chan
 [15]: /real_user_monitoring/application_monitoring/ios
 [16]: /real_user_monitoring/application_monitoring/android
 [17]: /product_analytics/agentic_onboarding
-[18]: /real_user_monitoring/#what-is-real-user-monitoring
 [19]: /real_user_monitoring/guide/understanding-the-rum-event-hierarchy
 [20]: https://app.datadoghq.com/rum/sessions?query=%40type%3Aaction
+[21]: /api/latest/product-analytics/#send-server-side-events
