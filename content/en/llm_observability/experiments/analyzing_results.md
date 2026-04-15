@@ -34,7 +34,7 @@ The table includes a **Record ID** column that shows which dataset record each e
 
 #### Custom columns
 
-Extract specific fields from your top-level experiment span — such as an input key, output key, or metadata key — and display them as dedicated table columns. This lets you compare key properties across records at a glance.
+Extract specific fields from your top-level experiment span, such as an input key, output key, or metadata key, and display them as dedicated table columns. This lets you compare key properties across records at a glance.
 
 To add a custom column, type a field path in the **Add Column** input at the top of the table:
 
