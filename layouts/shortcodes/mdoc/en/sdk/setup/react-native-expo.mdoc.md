@@ -42,13 +42,14 @@ import {
     SdkVerbosity,
     DatadogProvider,
     DatadogProviderConfiguration,
-    PropagatorType
+    PropagatorType,
+    TrackingConsent
 } from 'expo-datadog';
 
 const config = new DatadogProviderConfiguration(
     '<CLIENT_TOKEN>',
     '<ENVIRONMENT_NAME>',
-    trackingConsent,
+    TrackingConsent.GRANTED,
     {
         // Optional: Configure the Datadog Site to target. Default is 'US1'.
         site: 'US1',
