@@ -9,9 +9,6 @@ further_reading:
 - link: "https://www.datadoghq.com/knowledge-center/aiops/ai-agents/"
   tag: "Knowledge Center"
   text: "What are AI agents and how do they work?"
-- link: "https://www.datadoghq.com/blog/bits-ai-sre-deeper-reasoning"
-  tag: "Blog"
-  text: "Meet the new Bits AI SRE: Deeper reasoning, twice as fast"
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/agent-builder/" btn_hidden="false" header="Join the Preview!" >}}
