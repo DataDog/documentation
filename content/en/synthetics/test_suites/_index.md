@@ -70,7 +70,9 @@ To create a new Test Suite:
 
 ## View and manage
 
-After creating your suite, it appears in the **Suites** tab on the [Synthetic Monitoring tests][1] page, or you can access test suites from **Digital Experience > Test Suites**. 
+After creating your suite, it appears in the **Suites** tab on the [Synthetic Monitoring tests][1] page, or you can access test suites from **Digital Experience > Test Suites**.
+
+To apply a [Scheduled downtime][3] to one or more test suites, select them using the checkboxes and click **Add to Downtime** in the bulk actions bar.
 
 When viewing a test suite, three tabs are available:
 
@@ -114,3 +116,4 @@ If execution results look incomplete:
 
 [1]: https://app.datadoghq.com/synthetics/tests
 [2]: /synthetics/notifications/
+[3]: /synthetics/platform/downtime/

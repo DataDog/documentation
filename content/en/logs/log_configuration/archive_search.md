@@ -134,10 +134,6 @@ To optimize performance and reduce costs:
 
 ### Accelerate searches with Partition Attributes
 
-{{< callout url="https://www.datadoghq.com/product-preview/flex-frozen-archive-search/" btn_hidden="false" >}}
-Archive Partition Attributes are in Preview. Sign up to try early access.
-{{< /callout >}}
-
 You can configure **Partition Attributes** on your archives to group logs by low-cardinality field values at write time. Use attributes like `service`, `source`, `env`, or `status`.
 
 Logs that share the same partition values are co-located in storage. When you search, Datadog evaluates your query against partition metadata and skips partitions that don't match, reducing the total data scanned.
@@ -233,7 +229,7 @@ In order to search log events from your archives, Datadog uses a service account
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /logs/log_configuration/archives/?tab=awss3
-[2]: /observability_pipelines/destinations/amazon_s3/?tab=docker
+[2]: /observability_pipelines/destinations/datadog_archives/?tab=docker
 [3]: /logs/log_configuration/archives/?tab=awss3
 [4]: https://app.datadoghq.com/logs/archive-search/new
 [5]: https://app.datadoghq.com/logs/archive-search/

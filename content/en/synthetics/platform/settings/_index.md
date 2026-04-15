@@ -3,9 +3,6 @@ title: Synthetic Testing and Monitoring Settings
 aliases:
 - /synthetics/settings
 further_reading:
-- link: "https://www.datadoghq.com/blog/introducing-synthetic-monitoring/"
-  tag: "Blog"
-  text: "Introducing Datadog Synthetic Monitoring"
 - link: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_global_variable"
   tag: "External Site"
   text: "Create and manage Synthetic Global Variables with Terraform"
@@ -27,9 +24,6 @@ further_reading:
 - link: "/synthetics/guide/explore-rum-through-synthetics/"
   tag: "Documentation"
   text: "Explore RUM & Session Replay in Synthetics"
-- link: "/synthetics/guide/browser-tests-totp"
-  tag: "Documentation"
-  text: "TOTPs For Multi-Factor Authentication (MFA) in Browser Test"
 ---
 
 ## Overview
@@ -37,6 +31,7 @@ further_reading:
 On the [Synthetic Monitoring & Continuous Testing Settings page][1], you can access and control the following topics:
 
 * [Default Settings](#default-settings)
+* [Downtimes][25]
 * [Private Locations](#private-locations)
 * [Global Variables](#global-variables)
 * [Integration Settings](#integration-settings)
@@ -120,6 +115,10 @@ When you are done entering the default mobile devices, click **Save Default Devi
 By default, only users with the [Datadog Admin and Datadog Standard roles][11] can access the Synthetic Monitoring **Default Settings** page. To get access to the **Default Settings** page, upgrade your user to one of those two [default roles][11].
 
 If you are using the [custom role feature][12], add your user to any custom role that includes `synthetics_default_settings_read` and `synthetics_default_settings_write` permissions.
+
+## Downtimes
+
+For more information, see [Scheduled Downtime][25].
 
 ## Private locations
 
@@ -334,3 +333,4 @@ To allow Datadog to collect RUM data from your mobile application test runs, con
 [22]: /account_management/rbac/granular_access
 [23]: https://docs.datadoghq.com/real_user_monitoring/application_monitoring/ios/setup?tab=swiftpackagemanagerspm
 [24]: https://docs.datadoghq.com/real_user_monitoring/application_monitoring/android/setup?tab=rum
+[25]: /synthetics/platform/downtime/

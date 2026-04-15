@@ -10,9 +10,13 @@ cascade:
 ---
 
 {{< whatsnext desc="Connect warehouse data to Datadog Experiments:" >}}
-    {{< nextlink href="experiments/guide/connecting_snowflake" >}}Connect Snowflake Data Warehouse
+    {{< nextlink href="experiments/guide/connecting_bigquery" >}}Connect BigQuery Data Warehouse
+{{< /nextlink >}}
+    {{< nextlink href="experiments/guide/connecting_databricks" >}}Connect Databricks Data Warehouse
 {{< /nextlink >}}
     {{< nextlink href="experiments/guide/connecting_redshift" >}}Connect Redshift Data Warehouse
+{{< /nextlink >}}
+    {{< nextlink href="experiments/guide/connecting_snowflake" >}}Connect Snowflake Data Warehouse
 {{< /nextlink >}}
 
 {{< /whatsnext >}}
