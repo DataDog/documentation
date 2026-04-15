@@ -265,6 +265,7 @@ export OTEL_EXPORTER_OTLP_ENDPOINT="http://localhost:4317"
 export OTEL_EXPORTER_OTLP_PROTOCOL="grpc"
 {{< /code-block >}}
 
+**Note**: You can run this script in Git Bash, which is included with Git for Windows.
 ### Correlate observability data
 
 [Unified service tagging][10] ties observability data together in Datadog so you can navigate across metrics, traces, and logs with consistent tags.
