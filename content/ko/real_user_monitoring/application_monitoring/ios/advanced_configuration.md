@@ -1087,7 +1087,7 @@ RUM iOS SDK 초기화후 추적 동의 값을 변경하려면 `Datadog.set(track
  값을 `.granted`로 변경하면 RUM iOS SDK는 현재 및 향후 모든 데이터를 Datadog으로 전송합니다.
  값을 `.notGranted`로 변경하면 RUM iOS SDK는 현재 데이터를 모두 삭제하고 향후 데이터를 수집하지 않습니다.
 
-##사용자 속성 추가
+## 사용자 속성 추가
 
 `Datadog.addUserExtraInfo(_:)` API로 이전에 설정한 속성에 추가 사용자 속성을 추가할 수 있습니다.
 

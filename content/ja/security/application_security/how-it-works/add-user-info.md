@@ -25,7 +25,7 @@ title: ユーザーのモニターと保護
 | `users.password_reset` | `{ "usr.id": "12345", "usr.login": "user@email.com", "exists": true }` | [パスワードリセットのブルートフォース試行][9]                                                                                                         |
 | `payment.failure`      | なし                                                 | [IP からの支払いエラーが頻発している][10]                                                                                                        |
 
-##認証済みユーザー情報のトレース追加とユーザーブロック機能の有効化
+## 認証済みユーザー情報のトレース追加とユーザーブロック機能の有効化
 
 <div class="alert alert-info">
 <strong>ユーザーアクティビティの自動検出:</strong> Datadog トレースライブラリは、ユーザーアクティビティイベントを自動的に検出し報告しようとします。詳細については、<a href="/security/application_security/how-it-works/add-user-info/?tab=set_user#disabling-automatic-user-activity-event-tracking">自動ユーザーアクティビティイベントトラッキングの無効化</a>を参照してください。
@@ -615,7 +615,7 @@ Datadog::Kit::AppSec::Events.track(event_name, trace, span, metadata)
 ```
 {{% /collapse-content %}}
 
-####新しいログイン成功および失敗メソッドへの移行
+#### 新しいログイン成功および失敗メソッドへの移行
 
 `Datadog::Kit::AppSec::Events::V2` に追加された新しいメソッドは、パラメーターの順序がより直感的で、関心の分離もより明確になっています。主な変更点は以下の通りです。
 
@@ -722,7 +722,7 @@ $metadata = ['usr.id' => $id]; // you can add arbitrary fields to metadata
 ```
 {{% /collapse-content %}}
 
-####新しいログイン成功および失敗メソッドへの移行
+#### 新しいログイン成功および失敗メソッドへの移行
 
 `\datadog\appsec\v2\` ネームスペースの新しいメソッドは、パラメーターの順序がより直感的で、関心の分離もより明確になっています。主な変更点は以下の通りです。
 

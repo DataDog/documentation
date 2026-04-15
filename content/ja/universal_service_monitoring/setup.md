@@ -10,7 +10,7 @@ further_reading:
   text: Universal Service Monitoring で数秒のうちにゴールデンシグナル
 title: Universal Service Monitoring の設定
 ---
-##対応バージョンと互換性
+## 対応バージョンと互換性
 
 必要な Agent バージョン
 : Universal Service Monitoring には、コンテナ化されたサービスとともにインストールされた Datadog Agent が少なくともバージョン 6.40 または 7.40 である必要があります。以下に記載されているように、プレビューの一部機能にはそれ以降のバージョンが必要です。
@@ -43,7 +43,7 @@ Windows の場合:
 Datadog Agent がサービスと一緒にインストールされていること。トレーシングライブラリのインストールは _不要_ です。
 [Unified Service Tagging][1] のための `env` タグがデプロイメントに適用されていること。`service` と `version` タグはオプションです。
 
-##USM がサービス名を検出する方法
+## USM がサービス名を検出する方法
 
 <div class="alert alert-warning">
 Universal Service Monitoring は、プロセスが開始されるときに存在する環境変数からサービス名を検出します。USM はこれらの値をオペレーティングシステムから読み取ります: Linux の場合は <code>/proc/PID/environ</code> から、Windows の場合はシステム API を通じて読み取ります。
@@ -55,7 +55,7 @@ USM は以下の環境変数を認識します。
  `DD_VERSION`: バージョンタグを設定
  `DD_TAGS`: 追加のタグ。`service:name` タグを含むことが可能
 
-###主な制約事項: USM と、APM 用にプログラムで設定された環境変数について
+### 主な制約事項: USM と、APM 用にプログラムで設定された環境変数について
 
 環境変数をプログラムによって**アプリケーションコード内で**設定する際 (たとえば、Java の場合は `System.setProperty("dd.service", "myservice")`、.NET の場合は `Environment.SetEnvironmentVariable("DD_SERVICE", "myservice")` など)、これらの環境変数は USM では **検出されません**が、これらの値は APM のトレーシングインスツルメンテーションには機能します。
 
@@ -92,7 +92,7 @@ java -jar myapp.jar
 {{% /tab %}}
 {{< /tabs >}}
 
-##Universal Service Monitoring を有効にする
+## Universal Service Monitoring を有効にする
 
 サービスのデプロイ方法と Agent の構成に応じて、以下のいずれかの方法を使用して、Agent で Universal Service Monitoring を有効にします。
 
@@ -817,7 +817,7 @@ service_monitoring_config:
 
 {{< /tabs >}}
 
-##追加の構成
+## 追加の構成
 
 以下のシステムまたはサービスには追加の構成が必要です。
 
@@ -1083,7 +1083,7 @@ agents:
 {{< /collapse-content >}}
 
 
-##パスの除外と置換
+## パスの除外と置換
 
 `http_replace_rules` または `DD_SYSTEM_PROBE_NETWORK_HTTP_REPLACE_RULES` を使用して、正規表現に一致する HTTP エンドポイントを削除したり、一致するエンドポイントを異なる形式に変換したりするように Agent を構成します。
 
@@ -1147,7 +1147,7 @@ agents:
 <div class="alert alert-info"><strong>追加のプロトコルと暗号化方式のサポート</strong><p>USM は、クラウドサービスの発見と追加のプロトコルおよびトラフィック暗号化方式のデコードに向けてプレビュー中です。詳細情報やプレビューへのアクセスをリクエストするには、「<a href="/universal_service_monitoring/additional_protocols/">クラウドサービスの発見と追加のプロトコル</a>」をお読みください。</p></div>
 
 
-##参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
