@@ -61,6 +61,12 @@ For line graphs, different metrics can be assigned specific palettes by separati
 
 Order the graph by {{< ui >}}Tags{{< /ui >}} or by {{< ui >}}Values{{< /ui >}} to sort timeseries legends and stacked graphs. This only sorts the graph visualization, and does not impact the query. Toggle the {{< ui >}}Reverse{{< /ui >}} option to sort by reverse alphabetical order or by descending values. 
 
+### Dual y-axis
+
+To display two y-axes at the same time, add a second graph. Use the **Y-axis** dropdown to select whether each y-axis is displayed on the left or right.
+
+{{< img src="dashboards/widgets/timeseries/metric_alias.png" alt="Selecting the sides for two separate y-axes" style="width:100%;" >}}
+
 ### Metric aliasing
 
 Each query or formula, along with any [filtering tags][7], can be aliased. The alias overrides the display on the graph and legend, which is useful for long metric names or long lists of filters. At the end of your query or formula, click on {{< ui >}}as...{{< /ui >}} and enter your metric alias:
