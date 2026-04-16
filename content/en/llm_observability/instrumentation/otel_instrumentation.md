@@ -71,9 +71,9 @@ After your application starts sending data, the traces automatically appear in t
 </ul>
 </div>
 
-### Tested frameworks and libraries
+## Tested frameworks and libraries
 
-The following frameworks and libraries have been tested with Datadog LLM Observability through OpenTelemetry. Any framework that emits [OpenTelemetry 1.37+ GenAI semantic convention][1]-compliant spans is supported, even if it is not listed here.
+The following frameworks and libraries emit [OpenTelemetry 1.37+ GenAI semantic convention][1]-compliant spans and have been tested with Datadog LLM Observability. Any framework that emits compliant spans is supported.
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -89,6 +89,7 @@ The following frameworks and libraries have been tested with Datadog LLM Observa
 | [Strands Agents][5] | Native | >= 1.11.0 |
 | [OpenLLMetry][34] | [`traceloop-sdk`][35] | >= 0.47.0 |
 
+[5]: https://pypi.org/project/strands-agents/
 [20]: https://platform.openai.com/docs/api-reference/introduction
 [21]: https://pypi.org/project/opentelemetry-instrumentation-openai-v2/
 [22]: https://docs.anthropic.com/en/api/
@@ -117,7 +118,7 @@ The following frameworks and libraries have been tested with Datadog LLM Observa
 {{% tab "Java" %}}
 | Framework | Instrumentation | Supported Versions |
 |-----------|----------------|--------------------|
-| [Spring AI][50] | Native (via [Micrometer][51]) | >= 1.0.0 |
+| [Spring AI][50] | Native (through [Micrometer][51]) | >= 1.0.0 |
 | [LangChain4j][52] | Native (OpenTelemetry module) | >= 0.31.0 |
 | [AWS Bedrock][53] | [OTel Java Agent][54] | AWS SDK >= 2.2 |
 
