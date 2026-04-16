@@ -28,20 +28,15 @@ Worker version 2.15.0 gives you access to the following:
 #### New features
 
 - New OCSF mappings have been added for the following log types:
-    - AWS GuardDuty for all finding types (EKS Audit, EC2, Lambda, IAM, DNS, and so on) in a single mapping named `AWS GuardDuty`.
+    - AWS GuardDuty for all finding types (for example, EKS Audit, EC2, Lambda, IAM, DNS) in a single mapping named `AWS GuardDuty`.
     - Infoblox NIOS: DNS Activity, DHCP Activity, audit (Authentication and API Activity), and port and syslog Base Event (Infoblox DNS Query, Infoblox DHCP, Infoblox Audit Authentication, Infoblox Audit API, Infoblox Port).
     - Zscaler ZPA App Connector Status logs to OCSF schema version 1.3.0 (Authentication, class 3002) with `datetime` and `host` profiles.
     - Zscaler ZPA User Activity logs to OCSF schema version 1.3.0 (Network Activity, class 4001) with `datetime`, `host`, `network_proxy`, and `security_control` profiles.
     - AWS WAF Web ACL logs. Transforms WAF log events into OCSF HTTP Activity (class 4002) with `cloud` and `security_control` profiles.
     - Zscaler ZPA User Status logs to OCSF schema version 1.3.0 (Authentication, class 3002) with `datetime` and `host` profiles.
 - The OpenTelemetry source now supports metrics pipelines.
-- The Enrichment Table file option now supports a unified `field` option that accepts an event field path. Plain text is supported for backwards compatibility.
-    - Explicit event path examples:
-        - Observability Pipelines simplified syntax: `field: {event: "message"}`
-        - VRL syntax: `field: {vrl: ".message"}`
-    - Plain string (for backwards compatibility):
-        - Observability Pipelines simplified syntax: `field: "message"`
-        - VRL syntax: `field: ".message"`
+- The Elasticsearch destination is now availabe for metrics pipelines.
+- The `parse_yaml` function is now available for the Custom Processor. This function parses YAML according to the [YAML 1.1 spec][41].
 
 #### Enhancements
 
@@ -56,7 +51,6 @@ Worker version 2.15.0 gives you access to the following:
 
 - Field names now support `.`, such as `foo."bar.baz"`.
 - The accuracy of the buffer utilization metric tracking has been updated.
-- The `parse_yaml` function is now available for the Custom Processor. This function parses YAML according to the [YAML 1.1 spec][41].
 - For the Custom Processor, incorrect parameter types for `floor`, `md5`, `parse_key_value`, `precision`, and `seahash` has been fixed.
 
 ---
