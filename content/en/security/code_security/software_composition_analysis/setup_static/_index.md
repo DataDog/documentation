@@ -53,8 +53,7 @@ You can run Datadog Static SCA scans directly on Datadog infrastructure. Support
 To get started, navigate to the [**Code Security** page][2].
 
 <div class="alert alert-info">
-Datadog-hosted SCA scanning is not supported for repositories that contain file names longer than 255 characters. <br>
-For these cases, scan using CI pipelines.
+Datadog-hosted SCA scanning is not supported for repositories that contain file names longer than 255 characters. For these cases, scan using CI pipelines.
 </div>
 
 ### Scan in CI pipelines

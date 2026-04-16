@@ -28,7 +28,7 @@ Services exposed to application attacks are highlighted directly in the security
 
 Datadog Threat Monitoring and Detection identifies bad actors by collecting client IP addresses, login account info (for example, user account/ID), and manually-added user tags on all requests.
 
-<div class="alert alert-info"><strong>1-Click Enablement</strong><br>
+<div class="alert alert-info"><strong>1-Click Enablement:</strong> <br>
 If your service is running with <a href="/agent/remote_config/#enabling-remote-configuration">an Agent with Remote Configuration enabled and a tracing library version that supports it</a>, you can <a href="https://app.datadoghq.com/security/configuration/asm/setup">enable App and API Protection</a> from the Datadog UI without additional configuration of the Agent or tracing libraries.</div>
 
 ## Compatibility

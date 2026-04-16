@@ -14,8 +14,7 @@ disable_sidebar: true
 Learn how to enable App and API Protection on all the following supported platforms and environments.
 
 <div class="alert alert-info">
-  <p class="fs-bold m-0">Are you missing your environment?</p>
-  <span>Send us a request for your missing environment <a href="https://forms.gle/nMGq2Hhe7Z4sCKdy6">here</a>.</span>
+<strong>Are you missing your environment?</strong> Send us a request for your missing environment <a href="https://forms.gle/nMGq2Hhe7Z4sCKdy6">here</a>.
 </div>
 
 ## Languages
