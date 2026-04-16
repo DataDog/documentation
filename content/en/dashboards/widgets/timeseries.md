@@ -99,9 +99,9 @@ To add markers for additional datasets, click {{< ui >}}Add Marker{{< /ui >}} in
 
 ### Dual y-axis
 
-To display two y-axes at the same time, click **Add Graph**. Use the **Y-axis** dropdown to select whether each y-axis is displayed on the left or right.
+To display two y-axes on the same graph, click **Add Graph**. Use the **Y-axis** dropdown to select whether each y-axis is displayed on the left or right.
 
-{{< img src="dashboards/widgets/timeseries/dual_y_axis.png" alt="Selecting the sides for two separate y-axes" style="width:100%;" >}}
+{{< img src="dashboards/widgets/timeseries/dual_y_axis.png" alt="The Timeseries widget shows two metric queries: system.uptime in purple on the left y-axis and system.disk.used in orange on the right y-axis." style="width:100%;" >}}
 
 ### Y-axis controls
 
