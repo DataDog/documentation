@@ -57,7 +57,7 @@ After this is completed, data collection begins automatically. The app registrat
 
 The diagram below provides a reference architecture for forwarding logs from Azure to Datadog using [automated log forwarding][29]. A control plane deployed in your chosen subscription discovers resources and configures their diagnostic settings. Log forwarders, consisting of an Azure Container Apps job and a storage account, are deployed in each region where your resources generate logs, and they scale up or down to match log volume.
 
-{{<img src="/logs/guide/azure_automated_logs_architecture/high_level_architecture_06-13-2025.png" alt="Architecture diagram showing three main components of Azure automated log forwarding: Control Plane and Log Forwarder (deployed by Datadog to customer environments) connecting to Azure Resources" style="width:100%">}}
+{{<img src="/logs/guide/azure_automated_logs_architecture/detailed_architecture.png" alt="Workflow diagram showing Azure automated log forwarding: the Control Plane discovers resources, scales log forwarders across regions, configures diagnostic settings to send logs to storage accounts, and then Container Apps check for and forward new logs to Datadog Log Management." style="width:100%">}}
 
 For setup instructions, see the [Azure Automated Log Forwarding Setup guide][29].
 
