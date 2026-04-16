@@ -89,7 +89,7 @@ APM Basic provides baseline service monitoring. For distributed tracing and deep
 **Use APM Basic when:**
 - You need visibility into services that are not instrumented.
 - You cannot instrument a service (legacy systems, third-party services, short-lived jobs).
-- You want baseline health coverage for lower-priority environments.
+- You want baseline health coverage for lower-priority or non-production environments, such as staging.
 
 **Use full APM when:**
 - You need distributed tracing and request-level debugging.

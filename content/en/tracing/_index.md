@@ -68,7 +68,7 @@ To get started with APM, use [Single Step Instrumentation][27]. This installs th
 
 For more control, Datadog supports custom instrumentation with Datadog tracing libraries and [Dynamic Instrumentation][30] in the Datadog UI. To learn more, read [Application Instrumentation][2].
 
-If you have services that are not instrumented—legacy systems, third-party services, or environments where instrumentation is not practical—[APM Basic][31] provides baseline service visibility by collecting RED metrics from network traffic without any instrumentation required.
+If you have services that are not instrumented—legacy systems, third-party services, or environments where instrumentation is not practical—[APM Basic][31] provides baseline service visibility by collecting RED metrics from network traffic without any instrumentation required. APM Basic is also a good fit for staging or other non-business-critical environments where full instrumentation is not needed.
 
 <div class="alert alert-info">If you're new to Datadog APM, read <a href="https://docs.datadoghq.com/getting_started/tracing/">Getting Started with APM</a> to learn how to send your first trace to Datadog.</div>
 
