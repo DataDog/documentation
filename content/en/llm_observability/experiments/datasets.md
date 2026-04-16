@@ -212,7 +212,7 @@ for record in dataset:
 The Dataset class provides methods to manage records: `append()`, `update()`, `delete()`. You need to `push()` changes to save the changes in Datadog.
 
 ```python
-# Add a new record (id is optional; if omitted, the SDK generates one automatically)
+# Add a new record
 dataset.append({
     "id": "switzerland-capital",
     "input_data": {"question": "What is the capital of Switzerland?"},
