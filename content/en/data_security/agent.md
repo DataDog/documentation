@@ -215,6 +215,7 @@ agent diagnose show-metadata agent-telemetry
 | autodiscovery.watched_resources             | Number of Autodiscovery watched resources                                                                              |
 | cluster_checks.configs_dispatched           | Number of cluster check configurations dispatched                                                                      |
 | cluster_checks.configs_dangling             | Number of dangling cluster check configurations                                                                        |
+| cluster_checks.configs_info                 | Names of dispatched cluster checks                                                                             |
 | cluster_checks.unscheduled_check            | Number of unscheduled cluster checks                                                                                   |
 | language_detection_patcher.patches          | Number of language detection patcher patches                                                                           |
 | tagger.stored_entities                      | Number of entities stored in the Tagger                                                                                |
