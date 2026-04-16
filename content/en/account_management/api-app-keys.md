@@ -60,7 +60,7 @@ In order to use application keys with these APIs, you must enable Actions API ac
 
 {{< img src="account_management/click-enable-actions-api-access.png" alt="Click Enable for Actions API Access" style="width:80%;" >}}
 
-**Note**: The **Last used** section only shows if [Audit Trail is enabled][22] in the account and you have [`Audit Trail Read`][23] permission.
+**Note**: The {{< ui >}}Last used{{< /ui >}} section only shows if [Audit Trail is enabled][22] in the account and you have [`Audit Trail Read`][23] permission.
 
 ## Client tokens
 
@@ -70,7 +70,7 @@ For security reasons, API keys cannot be used to send data from a browser, mobil
 - The log collectors for [web browser][8], [Android][9], [iOS][10], [React Native][11], [Flutter][12], and [Roku][13] submit logs.
 - [Real User Monitoring][14] applications submit events and logs.
 
-Client tokens are unique to your organization. To manage your client tokens, go to **Organization Settings**, then click the **Client Tokens** tab.
+Client tokens are unique to your organization. To manage your client tokens, go to {{< ui >}}Organization Settings{{< /ui >}}, then click the {{< ui >}}Client Tokens{{< /ui >}} tab.
 
 **Note**: When a user who created a client token is deactivated, the client token remains active.
 
@@ -79,9 +79,9 @@ Client tokens are unique to your organization. To manage your client tokens, go 
 To add a Datadog API key or client token:
 
 1. Navigate to Organization settings, then click the [**API keys**][1] or [**Client Tokens**][15] tab.
-2. Click the **New Key** or **New Client Token** button, depending on which you're creating.
+2. Click the {{< ui >}}New Key{{< /ui >}} or {{< ui >}}New Client Token{{< /ui >}} button, depending on which you're creating.
 3. Enter a name for your key or token.
-4. Click **Create API key** or **Create Client Token**.
+4. Click {{< ui >}}Create API key{{< /ui >}} or {{< ui >}}Create Client Token{{< /ui >}}.
 
 {{< img src="account_management/api-key.png" alt="Navigate to the API Keys page for your organization in Datadog" style="width:80%;" >}}
 
@@ -92,11 +92,11 @@ To add a Datadog API key or client token:
 
 ## Remove API keys or client tokens
 
-To remove a Datadog API key or client token, navigate to the list of keys or tokens, and click the **Delete** {{< img src="icons/delete.png" inline="true" style="width:14px;">}} icon next to the key or token you want to remove.
+To remove a Datadog API key or client token, navigate to the list of keys or tokens, and click the {{< ui >}}Delete{{< /ui >}} {{< img src="icons/delete.png" inline="true" style="width:14px;">}} icon next to the key or token you want to remove.
 
 ## Add application keys
 
-To add a Datadog application key, navigate to [**Organization Settings** > **Application Keys**][2]. If you have the [permission][3] to create application keys, click **New Key**.
+To add a Datadog application key, navigate to [**Organization Settings** > **Application Keys**][2]. If you have the [permission][3] to create application keys, click {{< ui >}}New Key{{< /ui >}}.
 
 {{< img src="account_management/app-key.png" alt="Navigate to the Application Keys page for your organization in Datadog" style="width:80%;" >}}
 
@@ -112,7 +112,7 @@ To add a Datadog application key, navigate to [**Organization Settings** > **App
 
 ## Remove application keys
 
-To remove a Datadog application key, navigate to [**Organization Settings** > **Application Keys**][2]. If you have the [permission][3] to create and manage application keys, you can see your own keys and click **Revoke** next to the key you want to revoke. If you have the permission to manage all org application keys, you can search for the key you want to revoke and click **Revoke** next to it.
+To remove a Datadog application key, navigate to [**Organization Settings** > **Application Keys**][2]. If you have the [permission][3] to create and manage application keys, you can see your own keys and click {{< ui >}}Revoke{{< /ui >}} next to the key you want to revoke. If you have the permission to manage all org application keys, you can search for the key you want to revoke and click {{< ui >}}Revoke{{< /ui >}} next to it.
 
 ## Key propagation delay and eventual consistency
 

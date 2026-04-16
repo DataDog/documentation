@@ -11,6 +11,18 @@
     "description": "Retrieve detailed information about a specific Datadog Agent.\nThis endpoint returns comprehensive information about an agent including:\n- Agent details and metadata\n- Configured integrations organized by status (working, warning, error, missing)\n- Detected integrations\n- Configuration files and layers",
     "summary": "Get detailed information about an agent"
   },
+  "ListFleetAgentTracers": {
+    "description": "Retrieve a paginated list of tracers for a specific agent.\n\nThis endpoint returns tracers associated with a given agent key, identified by the\nagent's hostname. Use this to discover telemetry-derived service names for a particular host.",
+    "summary": "List tracers for a specific agent"
+  },
+  "ListFleetClusters": {
+    "description": "Retrieve a paginated list of Kubernetes clusters in the fleet.\n\nThis endpoint returns clusters with metadata including node counts, agent versions,\nenabled products, and associated services. Use the `page_number` and `page_size`\nquery parameters to paginate through results.",
+    "summary": "List all fleet clusters"
+  },
+  "ListFleetInstrumentedPods": {
+    "description": "Retrieve the list of pods targeted for Single Step Instrumentation (SSI) injection\nin a specific Kubernetes cluster.\n\nThis endpoint returns pod groups organized by owner reference (deployment, statefulset, etc.)\nwith their injection annotations and applied targets. Use the clusters list endpoint\nto discover available cluster names.",
+    "summary": "List instrumented pods for a cluster"
+  },
   "ListFleetDeployments": {
     "description": "Retrieve a list of all deployments for fleet automation.\nUse the `page_size` and `page_offset` parameters to paginate results.",
     "summary": "List all deployments"
@@ -62,6 +74,10 @@
   "TriggerFleetSchedule": {
     "description": "Manually trigger a schedule to immediately create and start a deployment.\n\nThis endpoint allows you to manually initiate a deployment using the schedule's\nconfiguration, without waiting for the next scheduled maintenance window. This is\nuseful for:\n- Testing a schedule before it runs automatically\n- Performing an emergency update outside the regular maintenance window\n- Creating an ad-hoc deployment with the same settings as a schedule\n\nThe deployment is created immediately with:\n- The same filter query as the schedule\n- The package version determined by the schedule's version strategy\n- All matching hosts as targets\n\nThe manually triggered deployment is independent of the schedule and does not\naffect the schedule's normal recurrence pattern.",
     "summary": "Trigger a schedule deployment"
+  },
+  "ListFleetTracers": {
+    "description": "Retrieve a paginated list of all fleet tracers.\n\nThis endpoint returns telemetry-derived service names from the SDK telemetry pipeline.\nThese names may differ from span-derived names in APM and are useful for querying\nservice library configurations.\nUse the `page_number` and `page_size` query parameters to paginate through results.",
+    "summary": "List all fleet tracers"
   },
   "ListDatastores": {
     "description": "Lists all datastores for the organization.",

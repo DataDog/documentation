@@ -9196,6 +9196,19 @@ menu:
       url: /api/latest/fleet-automation/
       identifier: fleet-automation
       generated: true
+    - name: List all fleet tracers
+      url: '#list-all-fleet-tracers'
+      identifier: fleet-automation-list-all-fleet-tracers
+      parent: fleet-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListFleetTracers
+        unstable:
+          - v2
+        order: 15
     - name: Trigger a schedule deployment
       url: '#trigger-a-schedule-deployment'
       identifier: fleet-automation-trigger-a-schedule-deployment
@@ -9339,6 +9352,45 @@ menu:
         unstable:
           - v2
         order: 4
+    - name: List instrumented pods for a cluster
+      url: '#list-instrumented-pods-for-a-cluster'
+      identifier: fleet-automation-list-instrumented-pods-for-a-cluster
+      parent: fleet-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListFleetInstrumentedPods
+        unstable:
+          - v2
+        order: 18
+    - name: List all fleet clusters
+      url: '#list-all-fleet-clusters'
+      identifier: fleet-automation-list-all-fleet-clusters
+      parent: fleet-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListFleetClusters
+        unstable:
+          - v2
+        order: 17
+    - name: List tracers for a specific agent
+      url: '#list-tracers-for-a-specific-agent'
+      identifier: fleet-automation-list-tracers-for-a-specific-agent
+      parent: fleet-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListFleetAgentTracers
+        unstable:
+          - v2
+        order: 16
     - name: Get detailed information about an agent
       url: '#get-detailed-information-about-an-agent'
       identifier: fleet-automation-get-detailed-information-about-an-agent
