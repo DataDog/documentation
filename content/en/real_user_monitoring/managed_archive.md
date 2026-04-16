@@ -11,7 +11,7 @@ further_reading:
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/rum-managed-archive/" btn_hidden="false" header="Join the Preview!">}}
-RUM Managed Archive is in Preview. Fill out the form to request access.
+Managed Archive is in Preview.
 {{< /callout >}}
 
 ## Overview
