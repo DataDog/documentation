@@ -46,10 +46,10 @@ Worker version 2.15.0 gives you access to the following:
 - The Datadog Metrics destination now defaults to the Datadog series v2 endpoint (`/api/v2/series`).
 - The Enrichment Table processor's GeoIP option now includes a network field containing the CIDR network associated with the lookup result. It's available for all database types (City, ISP/ASN, Connection-Type, Anonymous-IP).
 - The Custom Processor now has an `encode_csv` function that encodes an array of values into a CSV-formatted string. This is the inverse of the `parse_csv` function and supports an optional single-byte delimiter (defaults to `,`).
+- Field names now support `.`, such as `foo."bar.baz"`.
 
 #### Fixes
 
-- Field names now support `.`, such as `foo."bar.baz"`.
 - The accuracy of the buffer utilization metric tracking has been updated.
 - For the Custom Processor, incorrect parameter types for `floor`, `md5`, `parse_key_value`, `precision`, and `seahash` has been fixed.
 
