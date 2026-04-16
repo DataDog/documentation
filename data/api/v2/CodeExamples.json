@@ -1848,6 +1848,11 @@
       "group": "security_monitoring",
       "suffix": "",
       "description": "Create a new vulnerability-based notification rule returns \"Successfully created the notification rule.\" response"
+    },
+    {
+      "group": "security_monitoring",
+      "suffix": "_2417112739",
+      "description": "Create a new vulnerability-based notification rule with sast and secret rule types returns \"Successfully created the notification rule.\" response"
     }
   ],
   "CreateSecurityFilter": [
