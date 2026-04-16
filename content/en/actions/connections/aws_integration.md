@@ -58,23 +58,23 @@ Before getting started, make sure these conditions have been met:
 
 ### 1. Configure AWS Integration permissions
   
-To configure the **Executor** permission for the Datadog AWS Integration:
+To configure the {{< ui >}}Executor{{< /ui >}} permission for the Datadog AWS Integration:
 1. In Datadog, navigate to [**Integrations**][4].
-1. Click the **Amazon Web Services** integration.
+1. Click the {{< ui >}}Amazon Web Services{{< /ui >}} integration.
 1. In the left pane, select the AWS Account you want to run actions with. 
-1. Click **Set Permissions**.
-    - If you see a **Request Edit Access** button instead of a **Set Permissions** button, ask your Datadog organization's admin to add you as an Editor for the AWS account. 
-1. Select a user, term, or organization and click **Add**. 
-1. Under **People with access**, select the **Executor** permission.
-1. Click **Save**.
+1. Click {{< ui >}}Set Permissions{{< /ui >}}.
+    - If you see a {{< ui >}}Request Edit Access{{< /ui >}} button instead of a {{< ui >}}Set Permissions{{< /ui >}} button, ask your Datadog organization's admin to add you as an Editor for the AWS account. 
+1. Select a user, term, or organization and click {{< ui >}}Add{{< /ui >}}. 
+1. Under {{< ui >}}People with access{{< /ui >}}, select the {{< ui >}}Executor{{< /ui >}} permission.
+1. Click {{< ui >}}Save{{< /ui >}}.
 
 ### 2. Add the integration to an action
 
 1. In [Workflow Automation][5], click the workflow you want to edit.
-1. Add an AWS action, such as **List ECS Clusters**.
-1. In the configuration pane, click the **Connection** dropdown and scroll to **Existing AWS Integrations**. 
+1. Add an AWS action, such as {{< ui >}}List ECS Clusters{{< /ui >}}.
+1. In the configuration pane, click the {{< ui >}}Connection{{< /ui >}} dropdown and scroll to {{< ui >}}Existing AWS Integrations{{< /ui >}}. 
 1. Select the AWS Account you configured in step one.
-1. Click **Save**.
+1. Click {{< ui >}}Save{{< /ui >}}.
 
 [1]: https://docs.aws.amazon.com/aws-managed-policy/latest/reference/ViewOnlyAccess.html 
 [2]: /actions/connections/?tab=workflowautomation#work-with-connections
