@@ -169,7 +169,7 @@ This approach stabilizes team membership before layering in ownership data.
 Use this path if CODEOWNERS is already how your organization routes issues and ownership.
 
 1. Link Datadog Teams to GitHub teams (usually by matching handle to name).
-2. Use CODEOWNERS to enrich ownership signals in Datadog.
+2. Use `CODEOWNERS` to enrich ownership signals in Datadog.
 3. Add IdP-driven membership later if you need life cycle correctness.
 
 This approach delivers immediate value for ownership routing, independent of IdP group readiness.
