@@ -9,6 +9,7 @@ Each record in a dataset contains:
 - **input** (required): Represents all the information that the agent can access in a task.
 - **expected output** (optional): Also called _ground truth_, represents the ideal answer that the agent should output. You can use _expected output_ to store the actual output of the app, as well as any intermediary results you want to assesss. 
 - **metadata** (optional): Contains any useful information to categorize the record and use for further analysis. For example: topics, tags, descriptions, notes.
+- **id** (optional): A user-defined identifier for the record. Must be 128 characters or fewer and contain only letters, numbers, `_`, `-`, or `.`. If not provided, the SDK generates one automatically.
 
 Datasets enable systematic testing and regression detection by providing consistent evaluation scenarios across experiments.
 
@@ -32,20 +33,21 @@ dataset = LLMObs.create_dataset_from_csv(
     input_data_columns=["question", "category"],  # Columns to use as input
     expected_output_columns=["answer"],           # Optional: Columns to use as expected output
     metadata_columns=["difficulty"],              # Optional: Additional columns as metadata
+    id_column="record_id",                        # Optional: Column to use as record IDs
     csv_delimiter=","                             # Optional: Defaults to comma
 )
 
 # Example "questions.csv":
-# question,category,answer,difficulty
-# What is the capital of Japan?,geography,Tokyo,medium
-# What is the capital of Brazil?,geography,Brasília,medium
+# record_id,question,category,answer,difficulty
+# japan-capital,What is the capital of Japan?,geography,Tokyo,medium
+# brazil-capital,What is the capital of Brazil?,geography,Brasília,medium
 
 ```
 
 **Notes**:
 - CSV files must have a header row
 - Maximum field size is 10MB
-- All columns not specified in `input_data_columns` or `expected_output_columns` are automatically treated as metadata
+- All columns not specified in `input_data_columns`, `expected_output_columns`, or `id_column` are automatically treated as metadata
 - The dataset is automatically pushed to Datadog after creation
 
 {{% /tab %}}
@@ -63,6 +65,7 @@ dataset = LLMObs.create_dataset(
     description="Questions about world capitals",
     records=[
         {
+            "id": "china-capital",                                             # optional, user-defined record ID
             "input_data": {"question": "What is the capital of China?"},       # required, JSON or string
             "expected_output": "Beijing",                                      # optional, JSON or string
             "metadata": {"difficulty": "easy"}                                 # optional, JSON
@@ -174,10 +177,10 @@ Dataset versions start at `0`, and each new version increments the version by 1.
 
 A new dataset version is created when:
 - Adding records
-- Updating records (changes to `input` or `expected_output` fields)
+- Updating records (changes to `input`, `expected_output`, or `metadata` fields)
 - Deleting records
 
-Dataset versions are **NOT** created for changes to `metadata` fields, or when updating the dataset name or description.
+Dataset versions are **NOT** created when updating the dataset name or description.
 
 #### Version retention
 
@@ -211,6 +214,7 @@ The Dataset class provides methods to manage records: `append()`, `update()`, `d
 ```python
 # Add a new record
 dataset.append({
+    "id": "switzerland-capital",
     "input_data": {"question": "What is the capital of Switzerland?"},
     "expected_output": "Bern",
     "metadata": {"difficulty": "easy"}

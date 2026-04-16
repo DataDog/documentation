@@ -21,7 +21,7 @@ further_reading:
 {{% tab "Kubernetes" %}}
 ### Requirements
 
-* [Apache Airflow 2.7][1] or later
+* [Apache Airflow 2.7][1] or later, including Airflow 3
 * [apache-airflow-providers-openlineage][2]
 
 ### Setup
@@ -144,7 +144,7 @@ Set `OPENLINEAGE_CLIENT_LOGGING` to `DEBUG` along with the other environment var
 {{% tab "Amazon MWAA" %}}
 ### Requirements
 
-* [Apache Airflow 2.7.0][1] or later
+* [Apache Airflow 2.7.0][1] or later, including Airflow 3
 * [apache-airflow-providers-openlineage][2]
 
 ### Setup

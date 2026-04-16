@@ -35,13 +35,13 @@ The pie chart widget can display a single dataset with corresponding proportions
 
 ### Total amount display
 
-Toggle whether to show a total count in the center of the chart. By default, the **Automatic** option shows the total count once the graph reaches a certain size.
+Toggle whether to show a total count in the center of the chart. By default, the {{< ui >}}Automatic{{< /ui >}} option shows the total count once the graph reaches a certain size.
 
 ### Legend configuration
 
-The legend can be turned off, displayed directly over chart segments with the **Aside** option, or as a **Table** listing each value, its color, and proportion.
+The legend can be turned off, displayed directly over chart segments with the {{< ui >}}Aside{{< /ui >}} option, or as a {{< ui >}}Table{{< /ui >}} listing each value, its color, and proportion.
 
-By default, the **Automatic** option shows a labeled Aside legend within a dashboard, and displays both the **Aside** and **Table** legends when opened in full-screen.
+By default, the {{< ui >}}Automatic{{< /ui >}} option shows a labeled Aside legend within a dashboard, and displays both the {{< ui >}}Aside{{< /ui >}} and {{< ui >}}Table{{< /ui >}} legends when opened in full-screen.
 
 {{< img src="dashboards/widgets/pie_chart/legend_automatic.png" alt="Pie chart Legend and Labeling options: Automatic, Table, Aside, and None" style="width:80%;">}}
 

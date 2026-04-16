@@ -11,6 +11,12 @@ further_reading:
 - link: /integrations/mysql/
   tag: Documentation
   text: Intégration MySQL
+- link: /integrations/sqlserver/
+  tag: Documentation
+  text: Intégration SQL Server
+- link: /integrations/oracle/
+  tag: Documentation
+  text: Intégration Oracle
 - link: /database_monitoring/data_collected/
   tag: Documentation
   text: Données collectées
@@ -22,21 +28,21 @@ title: Explorer les métriques de requête
 
 La vue Query Metrics affiche l'historique des performances de vos requêtes normalisées. Visualisez les profils de performance pour une infrastructure ou des tags personnalisés spécifiques, tels que la zone de disponibilité du centre de données, et recevez une alerte en cas d'anomalie.
 
-Pour accéder à la vue Query Metrics depuis l'interface Database Monitoring, cliquez sur **[APM > Databases][1]**.
+Accédez à [la page Query Metrics][1] dans Datadog.
 
 La vue affiche les 200_principales_ requêtes, à savoir les 200 requêtes avec les temps d'exécution les plus élevés au cours de l'intervalle sélectionné. Consultez la documentation sur les [requêtes suivies][2] pour en savoir plus. La vue Query Metrics n'affiche pas l'agrégation des métriques pour les requêtes rapides qui ont été exécutées un faible nombre de fois. Les snapshots correspondants sont néanmoins indiqués dans les [échantillons de requêtes][3], tant que ces requêtes ont été exécutées au cours des 15 derniers jours.
 
 ## Filtrer et regrouper les requêtes
 
-Sélectionnez votre source de base de données (Postgres ou MySQL) dans la liste déroulante **source** située en haut de la page, spécifiez les tags de recherche à utiliser pour filtrer la liste de requêtes, puis regrouper les requêtes en fonction de tags pour organiser la liste.
+Sélectionnez votre source de base de données (par exemple, Postgres) dans le sélecteur **source** en haut de la page. Spécifiez des tags de recherche pour filtrer la liste des requêtes (ou la liste des [procédures stockées][7], le cas échéant) et regroupez par tags pour organiser la liste.
 
 Par exemple, il est généralement utile de regrouper les requêtes par host ou cluster afin de visualiser rapidement l'infrastructure sur laquelle elles s'exécutent.
 
-{{< img src="database_monitoring/dbm_qm_group_by.png" alt="Regrouper par tag env" style="width:100%;">}}
+{{< img src="database_monitoring/dbm-qm-group-by-2.png" alt="Regrouper par tag env" style="width:100%;">}}
 
 Lorsque vous regroupez des requêtes, vous pouvez appliquer jusqu'à trois tags (par exemple, host, env et datacenter) afin d'obtenir des ensembles de résultats filtrés.
 
-{{< img src="database_monitoring/dbm_qm_group_by_three.png" alt="Regrouper les requêtes en fonction de trois tags" style="width:100%;">}}
+{{< img src="database_monitoring/dbm-qm-group-by-three-2.png" alt="Regroupement par trois tags" style="width:100%;">}}
 
 Développez le groupe pour afficher la liste des requêtes, puis cliquez sur **View all queries in this group** pour copiez les critères de regroupement dans le champ de recherche de la barre de filtre. La page affiche alors uniquement les résultats de la recherche.
 
@@ -46,7 +52,7 @@ Les facettes permettant de filtrer la liste des requêtes sont indiquées sur la
 
 - **Core** : services, hosts et environnements.
 - **Database** : Postgres propose les facettes `database` et `user`, tandis que MySQL propose les facettes `schema`.
-- **Infrastructure** : tags d'infrastructure Datadog standard recueillis par l'Agent.
+- **Infrastructure** : tags d'infrastructure Datadog standard collectés par l'Agent.
 
 Sélectionnez ou supprimez des facettes afin d'afficher les requêtes qui vous intéressent.
 
@@ -68,11 +74,12 @@ Pour voir la liste complète des métriques recueillies, consultez la documentat
 Les vues Database Monitoring affichent principalement les métriques suivantes :
 - **MySQL** : `mysql.queries.*`
 - **Postgres** : `postgresql.queries.*`
-
+- **SQL Server** : `sqlserver.queries.*`
+- **Oracle** : `oracle.queries.*`
 
 ## Page Query Details
 
-Lorsque vous cliquez sur une requête dans la liste Query Metrics, la page Query Details associée à cette requête s'ouvre. L'intégralité du texte de la [requête normalisée][4] et la liste de tous les tags associés à la requête sont affichés en haut de la page. La liste de tags rassemble tous les tags provenant de chaque host sur lequel la requête s'exécute. Parcourez la liste pour découvrir différentes informations, comme le serveur sur lequel la requête s'exécute :
+Lorsque vous cliquez sur une requête dans la liste Query Metrics, la page Query Details correspondante s'ouvre. Le haut de la page affiche le texte intégral de la [requête normalisée][4], ainsi qu'une liste de tous les tags associés à la requête. La liste des tags est l'union de tous les tags de chaque host sur lequel la requête s'exécute. Parcourez la liste pour consulter des informations telles que le serveur sur lequel la requête s'exécute :
 
 {{< img src="database_monitoring/dbm_qd_tags.png" alt="Liste de tags pour une requête" style="width:100%;">}}
 
@@ -94,9 +101,9 @@ Cliquez sur l'onglet **Metrics** pour afficher d'autres graphiques de métriques
 
 ### Plans d'exécution
 
-Datadog recueille régulièrement des plans d'exécution. Une requête donnée peut donc avoir plusieurs plans. Ces plans sont normalisés et affichés séparément. Vous pouvez ainsi vérifier si les plans d'une requête enregistrent de meilleures performances ou des coûts plus élevés que ceux d'autres requêtes. Dans l'exemple ci-dessous, deux plans d'exécution d'une requête sont représentés ; l'un d'entre eux possède une latence moyenne bien plus faible que l'autre :
+Datadog collecte les plans d'exécution en continu ; une requête donnée peut donc avoir plusieurs plans. Ces plans sont normalisés et affichés séparément afin que vous puissiez déterminer si une requête possède des plans plus performants ou dont le coût relatif est plus élevé que d'autres. Par exemple, le plan d'exécution suivant contient des informations pour une requête :
 
-{{< img src="database_monitoring/dbm_qd_explain_plans.png" alt="Informations sur les plans d'exécution d'une requête" style="width:100%;">}}
+{{< img src="database_monitoring/dbm-qd-explain-plans-2.png" alt="Informations sur les plans d'exécution d'une requête" style="width:100%;">}}
 
 Sélectionnez un plan pour afficher des métriques sur les coûts ou le JSON associé. Cliquez sur **View All Samples for This Plan** pour accéder à la vue Query Samples afin de découvrir [les échantillons associés à la requête][5].
 
@@ -110,15 +117,16 @@ L'onglet **Hosts Running This Query** répertorie les hosts qui exécutent la re
 
 ## Dashboards Database Monitoring
 
-Pour accéder rapidement à des dashboards contenant des visualisations sur les métriques d'infrastructure et de requête liées à une base de données, cliquez sur le lien **Dashboards** en haut de la page. Vous pouvez utiliser les dashboards prêts à l'emploi ou les dupliquer et les personnaliser comme bon vous semble.
+Pour accéder rapidement aux dashboards présentant des visualisations de métriques d'infrastructure et de requêtes liées aux bases de données, cliquez sur le lien **Dashboards** en haut de la page. Utilisez les dashboards prêts à l'emploi, ou clonez-les et personnalisez-les selon vos besoins.
 
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/databases
+[1]: https://app.datadoghq.com/databases/queries
 [2]: /fr/database_monitoring/data_collected/#which-queries-are-tracked
 [3]: /fr/database_monitoring/query_samples/
 [4]: /fr/database_monitoring/data_collected/#normalized-queries
 [5]: /fr/database_monitoring/query_samples/#sample-details
 [6]: /fr/database_monitoring/troubleshooting/#queries-are-missing-explain-plans
+[7]: /fr/database_monitoring/database_hosts/#stored-procedures

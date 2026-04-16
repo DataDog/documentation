@@ -4,6 +4,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/bits-ai-dev-agent/"
     tag: "Blog"
     text: "Automatically identify issues and generate fixes with the Bits AI Dev Agent"
+  - link: "https://www.datadoghq.com/blog/bitsai-dev-agent-code-security"
+    tag: "Blog"
+    text: "Introducing Bits AI Dev Agent for Code Security"
 ---
 
 {{< callout url="http://datadoghq.com/product-preview/bits-ai-dev-agent" >}}

@@ -1,4 +1,5 @@
 ---
+id: custom_span
 core_product:
 - ci-cd
 title: カスタムスパン

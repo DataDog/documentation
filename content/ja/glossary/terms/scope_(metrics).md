@@ -1,4 +1,5 @@
 ---
+id: scope_metrics
 core_product:
 - モニター
 - alerts

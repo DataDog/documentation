@@ -1,0 +1,54 @@
+{
+  "name": "Example-Monitor",
+  "type": "query alert",
+  "query": "formula(\"query1\").rollup(\"sum\").last(\"5m\") > 124",
+  "message": "test message",
+  "options": {
+    "thresholds": {
+      "critical": 124
+    },
+    "variables": [
+      {
+        "data_source": "aggregate_augmented_query",
+        "name": "query1",
+        "group_by": [
+          {
+            "facet": "org_id"
+          },
+          {
+            "facet": "name"
+          }
+        ],
+        "compute": [
+          {
+            "name": "compute_result",
+            "aggregation": "max"
+          }
+        ],
+        "augment_query": {
+          "name": "filter_query",
+          "data_source": "reference_table",
+          "table_name": "test_table",
+          "columns": [
+            {
+              "name": "org_id"
+            },
+            {
+              "name": "name"
+            }
+          ]
+        },
+        "base_query": {
+          "data_source": "metrics",
+          "name": "query1",
+          "query": "avg:dd{*} by {org_id}.as_count()"
+        },
+        "join_condition": {
+          "augment_attribute": "org_id",
+          "base_attribute": "org_id",
+          "join_type": "inner"
+        }
+      }
+    ]
+  }
+}

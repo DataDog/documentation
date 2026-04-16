@@ -52,3 +52,8 @@ rum_browser_sdk_version_for_advanced_config_options:
 - id: gte_5_28_0
 - id: gte_6_4_0
   default: true 
+
+rum_react_native_framework_options:
+- id: react_native
+  default: true
+- id: expo
