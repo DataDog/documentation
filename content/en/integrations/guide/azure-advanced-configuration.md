@@ -61,7 +61,7 @@ The diagram below provides a reference architecture for forwarding logs from Azu
 
 For setup instructions, see the [Azure Automated Log Forwarding Setup guide][29].
 
-{{% collapse-content title="Event Hub log forwarding (legacy)" level="h3" expanded=false id="legacy-event-hub-log-forwarding" %}}
+{{% collapse-content title="Event Hub log forwarding (legacy)" level="h4" expanded=false id="legacy-event-hub-log-forwarding" %}}
 
 The following reference architecture applies to existing Event Hub log forwarding setups. For new deployments, use [automated log forwarding][29] instead.
 
