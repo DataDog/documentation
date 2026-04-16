@@ -58,10 +58,12 @@ In Datadog, SQL queries are compatible with data stored in [datasets][2]. You ca
 
 {{< img src="security/security_monitoring/detection_rules/sql-query-example.png" alt="Example of a SQL dataset and query" style="width:100%" >}}
 
-1. Under **Define Datasets**, choose one or more datasets to use in your query. In the dropdown, you can select an existing published dataset to either use or clone, or click the **New** icon to create a database from scratch.
+1. Under **Define Datasets**, choose one or more datasets to use in your query. In the dropdown, you can select an existing published dataset to either use or clone, or click the **New** icon to create a dataset from scratch.
    - If you chose an existing dataset and made changes, click **Update** to apply those changes to that dataset, or **Clone With Changes** to create a dataset with your changes applied.
    - If you created a dataset, click **Create** so you can use it in your rule.
 2. Under **Write Queries**, enter one or more SQL queries. For more information, see [DDSQL Reference][1]. Click **Preview** to see a list of matching results.
+
+Rule conditions are applied to the results returned by your SQL queries. Each query result is evaluated against the conditions you define in the **Set Conditions** section, such as a count threshold or group-by attribute. A signal is generated when the query results meet those conditions.
 
 [1]: /ddsql_reference/
 [2]: https://app.datadoghq.com/security/configuration/datasets
