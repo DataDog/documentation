@@ -91,7 +91,7 @@ Use the same query format as for the [Event Explorer][8], for example:
 
 ### Markers
 
-To add markers for additional data sets, click {{< ui >}}Add Marker{{< /ui >}} in the {{< ui >}}Markers{{< /ui >}} section.
+To add markers for additional datasets, click {{< ui >}}Add Marker{{< /ui >}} in the {{< ui >}}Markers{{< /ui >}} section.
 
 1. Select a Line or Range and input a value or a range or values.
 2. In the {{< ui >}}Show as{{< /ui >}} field, select an alerting status/color and choose from a solid, bold, or dashed horizontal line.
