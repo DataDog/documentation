@@ -139,15 +139,15 @@ tracer.profiling.runWithLabels({ customer_name: <value> }, () => {
 })
 ```
 
-All wall time and CPU time samples taken during the function's execution, including across async continuations, carry the custom labels. Nested `runWithLabels` calls merge labels, with inner values taking precedence for duplicate keys.
+All wall time and CPU time samples taken during the function's execution, including across async continuations, carry the custom labels. Nested `runWithLabels` calls merge labels. Inner values taking precedence for duplicate keys.
 
-To specify which label keys you want to use for filtering, call `setCustomLabelKeys()` as a one-time setup before calling `runWithLabels()`:
+To specify which label keys you want to use for filtering, call `setCustomLabelKeys()` once before calling `runWithLabels()`:
 
 ```javascript
 tracer.profiling.setCustomLabelKeys(['customer_name'])
 ```
 
-Then, open wall time profiles for your service and select the `customer_name` value you're interested in under the `CPU time by` dropdown.
+Then, open wall time or CPU time profiles for your service and select the `customer_name` value you're interested in under the `CPU time by` dropdown.
 
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
