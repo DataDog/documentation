@@ -2,7 +2,6 @@
 title: Setting up ClickHouse
 description: Setting up Database Monitoring on a ClickHouse database
 disable_sidebar: true
-private: true
 aliases:
   - /database_monitoring/guide/clickhouse/
 ---
@@ -15,8 +14,6 @@ This feature is in preview and requires Datadog Agent v7.78 or later. Customers 
 
 |                              | Self-hosted | ClickHouse Cloud |
 | ---------------------------- | ----------- | ---------------- |
-| ClickHouse 21.x (min. 21.1) | {{< X >}}   |                  |
-| ClickHouse 22.x              | {{< X >}}   |                  |
 | ClickHouse 23.x              | {{< X >}}   | {{< X >}}        |
 | ClickHouse 24.x              | {{< X >}}   | {{< X >}}        |
 | ClickHouse 25.x              | {{< X >}}   | {{< X >}}        |

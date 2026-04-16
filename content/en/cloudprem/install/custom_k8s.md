@@ -200,22 +200,18 @@ metastore:
 # stored in MinIO.
 #
 # The indexer is horizontally scalable - you can increase `replicaCount` to handle higher indexing throughput.
-# Resource requests and limits should be tuned based on your indexing workload.
-#
-# The default values are suitable for moderate indexing loads of up to 20 MB/s per indexer pod.
+# The `podSize` parameter sets vCPU, memory, and component-specific settings automatically.
+# See the sizing guide for available tiers and their configurations.
 indexer:
   replicaCount: 2
+  podSize: xlarge
+  persistentVolume:
+    enabled: true
+    storage: 250Gi
+    storageClass: <storage class>
   extraEnvFrom:
     - secretRef:
         name: cloudprem-minio-credentials
-
-  resources:
-    requests:
-      cpu: "4"
-      memory: "8Gi"
-    limits:
-      cpu: "4"
-      memory: "8Gi"
 
 # Searcher configuration
 # The searcher is responsible for executing search queries against the indexed data stored in MinIO.
@@ -232,17 +228,10 @@ indexer:
 # Memory is particularly important for searchers as they cache frequently accessed index data in memory.
 searcher:
   replicaCount: 2
+  podSize: xlarge
   extraEnvFrom:
     - secretRef:
         name: cloudprem-minio-credentials
-
-  resources:
-    requests:
-      cpu: "4"
-      memory: "16Gi"
-    limits:
-      cpu: "4"
-      memory: "16Gi"
 
 # Control plane configuration
 controlPlane:

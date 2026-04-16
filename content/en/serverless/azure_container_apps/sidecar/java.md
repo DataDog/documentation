@@ -107,6 +107,8 @@ logger.info("Hello World!");
 
 {{% serverless-init-env-vars-sidecar language="java" defaultSource="containerapp" %}}
 
+{{% svl-tracing-env %}}
+
 ## Troubleshooting
 
 {{% serverless-init-troubleshooting productNames="Azure Container Apps" %}}

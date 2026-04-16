@@ -1,4 +1,5 @@
 ---
+id: pipeline
 title: pipeline
 core_product:
   - log management

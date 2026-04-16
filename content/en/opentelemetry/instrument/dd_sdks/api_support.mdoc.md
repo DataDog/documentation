@@ -12,6 +12,8 @@ aliases:
   - /opentelemetry/instrument/api_support/go/metrics
   - /opentelemetry/instrument/api_support/go/traces
   - /opentelemetry/instrument/api_support/java
+  - /opentelemetry/instrument/api_support/java/metrics
+  - /opentelemetry/instrument/api_support/java/traces
   - /opentelemetry/instrument/api_support/nodejs/
   - /opentelemetry/instrument/api_support/nodejs/logs
   - /opentelemetry/instrument/api_support/nodejs/metrics
@@ -55,13 +57,8 @@ further_reading:
 <!-- SIGNAL AVAILABILITY NOTICES -->
 <!-- ============================================== -->
 
-<!-- Languages with only traces: Java -->
+<!-- Java has traces and metrics only -->
 {% if equals($prog_lang, "java") %}
-{% if equals($platform, "metrics") %}
-{% alert level="danger" %}
-OpenTelemetry API support for metrics is not available for this language. Use [DogStatsD][200] to send custom metrics instead.
-{% /alert %}
-{% /if %}
 {% if equals($platform, "logs") %}
 {% alert level="danger" %}
 OpenTelemetry API support for logs is not available for this language. Use [Datadog Log Collection][210] instead.
@@ -139,14 +136,14 @@ Use OpenTelemetry tracing APIs with Datadog SDKs to create custom spans, add tag
 {% if equals($platform, "metrics") %}
 
 <!-- Show content only for languages that support metrics -->
-{% if or(equals($prog_lang, "dot_net"), equals($prog_lang, "node_js"), equals($prog_lang, "python"), equals($prog_lang, "ruby"), equals($prog_lang, "go"), equals($prog_lang, "php"), equals($prog_lang, "rust")) %}
+{% if includes($prog_lang, ["dot_net", "node_js", "python", "ruby", "go", "php", "rust", "java"]) %}
 
 ## Overview
 
 Use the OpenTelemetry Metrics API with Datadog SDKs to send custom application metrics. This is an alternative to [DogStatsD][200].
 
-<!-- Native implementation (.NET, Node.js, Go, Rust) -->
-{% if or(equals($prog_lang, "dot_net"), equals($prog_lang, "node_js"), equals($prog_lang, "go"), equals($prog_lang, "rust")) %}
+<!-- Native implementation (.NET, Node.js, Go, Rust, Java) -->
+{% if includes($prog_lang, ["dot_net", "node_js", "go", "rust", "java"]) %}
 
 The Datadog SDK provides a native implementation of the OpenTelemetry API. This means you can write code against the standard OTel interfaces without needing the official OpenTelemetry SDK.
 
@@ -156,7 +153,7 @@ You should not install the official OpenTelemetry SDK or any OTLP Exporter packa
 {% /if %}
 
 <!-- Exporter-based implementation (Python, Ruby, PHP) -->
-{% if or(equals($prog_lang, "python"), equals($prog_lang, "ruby"), equals($prog_lang, "php")) %}
+{% if includes($prog_lang, ["python", "ruby", "php"]) %}
 
 This approach works with the existing OpenTelemetry SDK. When you enable this feature, the Datadog SDK detects the OTel SDK and configures its OTLP exporter to send metrics to the Datadog Agent.
 {% /if %}
@@ -192,8 +189,11 @@ The OpenTelemetry Metrics SDK for Ruby is currently in [alpha implementation](ht
 - **Datadog SDK**: `datadog-opentelemetry` crate version 0.3.0 or later.
 - **Rust**: MSRV 1.84 or later.
 {% /if %}
+{% if equals($prog_lang, "java") %}
+- **Datadog SDK**: dd-trace-java version 1.61.0 or later.
+{% /if %}
 - **An OTLP-compatible destination**: You must have a destination (Agent or Collector) listening on ports 4317 (gRPC) or 4318 (HTTP) to receive OTel metrics.
-{% if or(equals($prog_lang, "dot_net"), equals($prog_lang, "node_js"), equals($prog_lang, "python"), equals($prog_lang, "ruby"), equals($prog_lang, "go")) %}
+{% if includes($prog_lang, ["dot_net", "node_js", "python", "ruby", "go", "java"]) %}
 - **DogStatsD (Runtime Metrics)**: If you also use Datadog [Runtime Metrics][201], ensure the Datadog Agent is listening for DogStatsD traffic on port 8125 (UDP). OTel configuration does not route Runtime Metrics through OTLP.
 {% /if %}
 
@@ -364,6 +364,15 @@ Follow these steps to enable OTel Metrics API support in your application.
    ```
 {% /if %}
 
+{% if equals($prog_lang, "java") %}
+1. Add the Datadog SDK (`dd-trace-java`) to your project and [enable its instrumentation][207].
+2. Make sure you only depend on the OpenTelemetry API (and not the OpenTelemetry SDK).
+3. Enable OTel metrics by setting the following environment variable:
+   ```sh
+   export DD_METRICS_OTEL_ENABLED=true
+   ```
+{% /if %}
+
 ## Examples
 
 You can use the standard OpenTelemetry API packages to create custom metrics.
@@ -487,6 +496,27 @@ use opentelemetry::KeyValue;
 let meter = global::meter("my-service");
 let counter: Counter<u64> = meter.u64_counter("requests").build();
 counter.add(1, &[KeyValue::new("method", "GET")]);
+```
+{% /if %}
+
+{% if equals($prog_lang, "java") %}
+```java
+import io.opentelemetry.api.GlobalOpenTelemetry;
+import io.opentelemetry.api.common.Attributes;
+import io.opentelemetry.api.metrics.LongCounter;
+import io.opentelemetry.api.metrics.Meter;
+
+// Define a meter
+Meter meter = GlobalOpenTelemetry.get().getMeter("MyService");
+
+// Create a counter instrument
+LongCounter counter = meter.counterBuilder("http.requests_total").build();
+
+// Perform work
+// ...
+
+// Record measurements
+counter.add(1, Attributes.builder().put("method", "GET").put("status_code", "200").build());
 ```
 {% /if %}
 
@@ -655,6 +685,27 @@ histogram.record(duration, &[
 ```
 {% /if %}
 
+{% if equals($prog_lang, "java") %}
+```java
+import io.opentelemetry.api.GlobalOpenTelemetry;
+import io.opentelemetry.api.common.Attributes;
+import io.opentelemetry.api.metrics.DoubleHistogram;
+import io.opentelemetry.api.metrics.Meter;
+
+// Define a meter
+Meter meter = GlobalOpenTelemetry.get().getMeter("MyService");
+
+// Create a histogram instrument
+DoubleHistogram histogram = meter.histogramBuilder("http.response.time").build();
+
+// Perform work
+// ...
+
+// Record measurements
+histogram.record(duration, Attributes.builder().put("method", "GET").put("status_code", "200").build());
+```
+{% /if %}
+
 ## Supported configuration
 
 To enable this feature, you must set `DD_METRICS_OTEL_ENABLED=true`.
@@ -736,6 +787,16 @@ Runtime and trace metrics continue to be submitted using StatsD. Only custom met
 {% /alert %}
 {% /if %}
 
+{% if equals($prog_lang, "java") %}
+1. Add the Datadog SDK (`dd-trace-java`) to your project and [enable its instrumentation][207].
+2. Make sure you only depend on the OpenTelemetry API (and not the OpenTelemetry SDK).
+3. Set the `DD_METRICS_OTEL_ENABLED=true` environment variable.
+
+{% alert level="warning" %}
+Runtime and trace metrics continue to be submitted using StatsD. Only custom metrics created through the OpenTelemetry Metrics API are sent using OTLP.
+{% /alert %}
+{% /if %}
+
 ### Existing DogStatsD setup
 
 If you are currently using the Datadog DogStatsD client and want to migrate to the OpenTelemetry Metrics API, you need to update your instrumentation code. The main difference is that OTel metrics are configured using environment variables rather than code, and you create `Instrument` objects first.
@@ -776,6 +837,9 @@ If you are currently using the Datadog DogStatsD client and want to migrate to t
 - Check protocol configuration. Only `grpc` and `http/protobuf` protocols are supported. HTTP/JSON is not supported.
 - Verify `DD_METRICS_OTEL_ENABLED=true` is set before initializing the meter provider.
 {% /if %}
+{% if equals($prog_lang, "java") %}
+- Verify Datadog automatic instrumentation is active. This feature relies on Datadog's automatic instrumentation to function.
+{% /if %}
 
 {% if equals($prog_lang, "dot_net") %}
 ### .NET version and instrument support
@@ -811,14 +875,14 @@ Here is the minimum version required for each instrument type:
 {% if equals($platform, "logs") %}
 
 <!-- Show content only for languages that support logs -->
-{% if or(equals($prog_lang, "dot_net"), equals($prog_lang, "node_js"), equals($prog_lang, "python"), equals($prog_lang, "go"), equals($prog_lang, "rust")) %}
+{% if includes($prog_lang, ["dot_net", "node_js", "python", "go", "rust"]) %}
 
 ## Overview
 
 Use the OpenTelemetry Logs API with Datadog SDKs to send custom application logs. This is an alternative to Datadog's traditional log injection.
 
 <!-- Native implementation (.NET, Node.js, Go, Rust) -->
-{% if or(equals($prog_lang, "dot_net"), equals($prog_lang, "node_js"), equals($prog_lang, "go"), equals($prog_lang, "rust")) %}
+{% if includes($prog_lang, ["dot_net", "node_js", "go", "rust"]) %}
 
 The Datadog SDK provides a native implementation of the OpenTelemetry API. This means you can write code against the standard OTel interfaces without needing the official OpenTelemetry SDK.
 
@@ -1431,6 +1495,7 @@ If you are using Datadog's traditional log injection (where `DD_LOGS_INJECTION=t
 [204]: /opentelemetry/config/environment_variable_support
 [205]: /opentelemetry/setup/otlp_ingest_in_the_agent/?tab=host#enabling-otlp-ingestion-on-the-datadog-agent
 [206]: https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.metrics
+[207]: /tracing/trace_collection/dd_libraries/java/
 [210]: /logs/log_collection/
 
 <!-- .NET logs -->
