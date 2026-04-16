@@ -29,7 +29,7 @@ This guide explains how to use Datadog Feature Flags to run Experiments with a h
 **The core pattern:**
 
 1. Content authors create multiple content entries (variants) in the CMS.
-2. Engineers create a Datadog feature flag whose variants are strings (for example, a Contentful Entry ID) or JSON objects (for example, `{ "entryId": "abc123", "label": "spring-promotion" }`).
+2. Engineers create a Datadog feature flag whose variants are strings (such as a Contentful Entry ID) or JSON objects (for example, `{ "entryId": "abc123", "label": "spring-promotion" }`).
 3. On page load, the flag is evaluated for the current user and the returned value is used to fetch the matching CMS content.
 4. User interactions are tracked as RUM custom actions and surfaced in Datadog Product Analytics Experiments.
 
@@ -97,11 +97,11 @@ const provider = new DatadogProvider({
   applicationId: '<YOUR_APPLICATION_ID>',
   clientToken: '<YOUR_CLIENT_TOKEN>',
   site: 'datadoghq.com',        // or datadoghq.eu, us3.datadoghq.com, etc.
-  env: '<YOUR_ENVIRONMENT>',    // e.g., 'production', 'staging'
+  env: '<YOUR_ENVIRONMENT>',    // For example: 'production', 'staging'
 });
 
 const evaluationContext = {
-  targetingKey: 'user-123', // used for randomization when bucketing
+  targetingKey: 'user-123', // Used for randomization when bucketing
   user_id: '123',
   email: 'user@example.com',
   tier: 'premium',
@@ -130,9 +130,10 @@ export default function App() {
 1. Navigate to **Feature Flags** in the Datadog UI and click **\+ Create Feature Flag**.
 2. Configure the flag:
    * **Name**: for example, `cms_homepage_hero_variant`
-   * **Key**: `cms_homepage_hero_variant` *(cannot be changed after creation)*
+   * **Key**: `cms_homepage_hero_variant`
    * **Variant type**: `string` (for simple entry ID mapping) or `JSON` (for multi-attribute mapping)
    * **Distribution channels**: `Client-side`
+   <div class="alert alert-info">The flag key cannot be changed after creation.</div>
 3. Add variants:
 
 **String flag example:**
@@ -149,7 +150,7 @@ export default function App() {
 | `control` | `{ "entryId": "1a2b3c4d5e6f", "label": "spring-hero-control" }` |
 | `treatment` | `{ "entryId": "7g8h9i0j1k2l", "label": "spring-hero-discount" }` |
 
-4. Set up targeting rules, for example, roll out to 50% of users, or target by `tier: premium`.
+4. Set up targeting rules (for example, roll out to 50% of users, or target by `tier: premium`).
 5. Save and activate the flag in your target environment.
 
 ## Step 4: Evaluate the flag and fetch CMS content
@@ -245,7 +246,7 @@ export function HeroBanner() {
 
 ## Step 5: Track conversion events with Datadog RUM
 
-To measure experiment results in Product Analytics, fire RUM custom actions at key moments in the user journey. These become the metrics used in your experiment.
+To measure experiment results in Product Analytics, trigger RUM custom actions at key moments in the user journey. These become the metrics used in your experiment.
 
 {{< code-block lang="typescript" filename="lib/tracking.ts" >}}
 import { datadogRum } from '@datadog/browser-rum';
@@ -271,7 +272,7 @@ export function trackConversion(entryId: string, variantLabel: string, conversio
   datadogRum.addAction('form_conversion', {
     cms_entry_id: entryId,
     variant_label: variantLabel,
-    conversion_type: conversionType,  // e.g., 'newsletter_signup', 'add_to_cart'
+    conversion_type: conversionType,  // For example: 'newsletter_signup', 'add_to_cart'
   });
 }
 {{< /code-block >}}
@@ -282,12 +283,12 @@ After your RUM actions are flowing, define the metrics your experiment measures.
 
 1. In Datadog, navigate to **Digital Experience \> Product Analytics \> Metrics**.
 2. Click **\+ Create Metric**.
-3. Select the relevant RUM action as the event, for example, `cms_cta_click`.
+3. Select the relevant RUM action as the event (for example, `cms_cta_click`).
 4. Choose an aggregation method:
-   * **Unique subjects** (users who clicked at least once): best for conversion rate
-   * **Total events** (total clicks): best for engagement volume
-5. Optionally add filters, for example, `@context.component: HeroBanner`.
-6. Name the metric, for example, `hero_cta_click_rate`.
+   * **Unique subjects**: Users who clicked at least once; best for conversion rate
+   * **Total events**: Total clicks; best for engagement volume
+5. Optionally add filters (for example, `@context.component: HeroBanner`).
+6. Name the metric (for example, `hero_cta_click_rate`).
 7. Repeat for each metric in your experiment (for example, `hero_conversion_rate`, `page_engagement_time`).
 
 <div class="alert alert-tip">Metrics are normalized by the number of enrolled subjects automatically. You can also set an outlier truncation threshold (for example, 99th percentile) and configure whether an increase or decrease is the desired outcome.</div>
@@ -307,31 +308,23 @@ After your RUM actions are flowing, define the metrics your experiment measures.
 
 ## Step 8: Monitor and read results
 
-### Real-time flag health
+Use the following tools in Datadog to monitor and analyze your experiment results:
 
-From the **Feature Flag details page**, monitor:
+- **Real-time flag health**: From the **Feature Flag details page**, monitor:
+  * Exposure counts per variant
+  * Error rates per variant
+  * Page load time per variant
 
-* Exposure counts per variant
-* Error rates per variant
-* Page load time per variant
+- **Experiment results**: Navigate to **Experiments \> \[your experiment\]** to see:
+  * Statistical significance of results
+  * Per-variant metric breakdowns
+  * Guardrail metric status
 
-### Experiment results
+- **RUM Explorer analysis**: Use the RUM Explorer to filter by flag variant:<br /><br />
 
-Navigate to **Experiments \> \[your experiment\]** to see:
+  {{< code-block lang="text" >}}@feature_flags.cms_homepage_hero_variant:treatment{{< /code-block >}}
 
-* Statistical significance of results
-* Per-variant metric breakdowns
-* Guardrail metric status
-
-### RUM Explorer deep-dives
-
-Use the RUM Explorer to filter by flag variant:
-
-{{< code-block lang="text" >}}
-@feature_flags.cms_homepage_hero_variant:treatment
-{{< /code-block >}}
-
-Group by `@feature_flags.cms_homepage_hero_variant` to compare conversion rates, session duration, or error counts across control and treatment.
+  Group by `@feature_flags.cms_homepage_hero_variant` to compare conversion rates, session duration, or error counts across control and treatment.
 
 ## Summary
 
@@ -339,12 +332,12 @@ Group by `@feature_flags.cms_homepage_hero_variant` to compare conversion rates,
 | :---- | :---- | :---- |
 | 1 | Author content variants | Contentful / Builder.io / Strapi |
 | 2 | Install Datadog Feature Flags SDK | Your frontend codebase |
-| 3 | Create string or JSON flag with CMS entry IDs as variant values | Datadog Feature Flags UI |
+| 3 | Create string or JSON flag with CMS entry IDs as variant values | Datadog Feature Flags |
 | 4 | Evaluate flag and fetch CMS content by resolved ID | Your frontend codebase |
-| 5 | Fire RUM custom actions on impressions and conversions | Your frontend codebase |
+| 5 | Trigger RUM custom actions on impressions and conversions | Your frontend codebase |
 | 6 | Define experiment metrics from RUM actions | Datadog Product Analytics |
 | 7 | Launch experiment linked to your feature flag | Datadog Experiments |
-| 8 | Monitor results and roll out winning variant | Datadog Feature Flags \+ Experiments UI |
+| 8 | Monitor results and roll out winning variant | Datadog Feature Flags \+ Experiments |
 
 ## Further reading
 
