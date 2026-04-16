@@ -90,8 +90,8 @@ The following sections describe the tradeoffs between the available strategies.
 ### IdP-driven sync
 You can sync teams from Okta or Entra IdPs. Use IdP-driven sync if your organization has the following characteristics:
 - You prioritize automatically capturing the accurate membership life cycle, including joiners and leavers.
-- You want IT or the platform team to control team membership
-- You can map groups to real teams without making your team list unmanageably large
+- You want IT or the platform team to control team membership.
+- You can map groups to real teams without making your team list unmanageably large.
 
 When you sync Datadog Teams to your IdP, those teams are managed external to Datadog. You don't use Datadog to manually edit team membership.
 
