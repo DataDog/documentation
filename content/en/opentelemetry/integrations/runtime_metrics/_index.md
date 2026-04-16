@@ -164,8 +164,21 @@ If you use [OpenTelemetry manual instrumentation][4], see the documentation for 
 Host-level metrics such as system CPU and memory usage are not included in OpenTelemetry automatic instrumentation. To collect these metrics:
 
 1. Install and configure the [`@opentelemetry/host-metrics`][6] package:
-
    
+   ```shell
+   npm install @opentelemetry/host-metrics
+   ```
+
+2. Initialize the package with your existing `MeterProvider`:
+
+   ```javascript
+   const { HostMetrics } = require('@opentelemetry/host-metrics');
+   const { metrics } = require('@opentelemetry/api');
+   const hostMetrics = new HostMetrics({
+     meterProvider: metrics.getMeterProvider(),
+   });
+   hostMetrics.start();
+   ```
 
 For the list of metrics collected by this package, see the [Node Contrib Host table](#node-contrib-host).
 
