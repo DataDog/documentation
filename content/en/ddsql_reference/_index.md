@@ -944,7 +944,7 @@ dd.cloud_cost_scalar(
     to_timestamp timestamp]
 )</pre>
       </td>
-      <td>Returns <a href="/cloud_cost_management/">Cloud Cost Management</a> data as a scalar value. The function accepts a cloud cost query (with optional grouping), an aggregation reducer (use <code>sum</code> for cost data; other reducers such as <code>avg</code>, <code>min</code>, and <code>max</code> are accepted but rarely applicable to cost queries), and optional timestamp parameters (default 1 hour) to define the time range. <strong>Note</strong>: Cloud cost data is typically delayed by 24–48 hours, so recent timestamps may return no results.</td>
+      <td>Returns <a href="/cloud_cost_management/">Cloud Cost Management</a> data as a scalar value. The function accepts a cloud cost query (with optional grouping), an aggregation reducer (use <code>sum</code> for cost data; other reducers such as <code>avg</code>, <code>min</code>, and <code>max</code> are accepted but rarely applicable to cost queries), and optional timestamp parameters (default 1 hour) to define the time range. <strong>Note</strong>: Cloud cost data is typically delayed by 24-48 hours, so recent timestamps may return no results.</td>
       <td>
         {{< code-block lang="sql" >}}
 SELECT *
@@ -966,7 +966,7 @@ dd.cloud_cost_timeseries(
     to_timestamp timestamp]
 )</pre>
       </td>
-      <td>Returns <a href="/cloud_cost_management/">Cloud Cost Management</a> data as a timeseries. The function accepts a cloud cost query (with optional grouping) and optional timestamp parameters (default 1 hour) to define the time range. Returns cost datapoints over time rather than a single aggregated value. <strong>Note</strong>: Cloud cost data is typically delayed by 24–48 hours, so recent timestamps may return no results.</td>
+      <td>Returns <a href="/cloud_cost_management/">Cloud Cost Management</a> data as a timeseries. The function accepts a cloud cost query (with optional grouping) and optional timestamp parameters (default 1 hour) to define the time range. Returns cost datapoints over time rather than a single aggregated value. <strong>Note</strong>: Cloud cost data is typically delayed by 24-48 hours, so recent timestamps may return no results.</td>
       <td>
         {{< code-block lang="sql" >}}
 SELECT *
