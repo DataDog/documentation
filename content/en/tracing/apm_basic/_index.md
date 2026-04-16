@@ -62,7 +62,7 @@ These metrics are reported under two operation names:
 
 An operation name of `universal.http.server` or `universal.http.client` on a service page indicates that the service telemetry comes from APM Basic.
 
-<div class="alert alert-info">APM Basic reports metrics under the <code>universal.http.*</code> namespace, not <code>trace.*</code>. The <code>universal.http.*</code> prefix indicates these metrics are collected without instrumentation. These names are unchanged from the former Universal Service Monitoring feature.</div>
+<div class="alert alert-info">APM Basic reports metrics under the <code>universal.http.*</code> namespace, not <code>trace.*</code>. The <code>universal.http.*</code> prefix indicates these metrics are collected without instrumentation.</div>
 
 ### Supported protocols
 

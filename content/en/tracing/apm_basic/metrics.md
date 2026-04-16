@@ -31,7 +31,7 @@ This guide describes how to search for APM Basic metrics such as `universal.http
 
 ## APM Basic metrics and APM metrics
 
-APM Basic reports metrics under the `universal.http.*` namespace. These metric names are unchanged from the former Universal Service Monitoring feature.
+APM Basic reports metrics under the `universal.http.*` namespace. 
 
 | Metric Name                 | Units   | Type         | Description                                       |
 |-----------------------------|---------|--------------|---------------------------------------------------|
