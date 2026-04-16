@@ -19,7 +19,25 @@ Bits AI Dev Agent is in Preview. To sign up, click <strong>Request Access</stron
 
 Bits AI Dev Agent is a generative AI coding assistant that uses observability data from Datadog to automatically diagnose and fix issues in your code. It integrates with GitHub to create production-ready pull requests, iterates on fixes using CI logs and developer feedback, and draws on multiple Datadog products to generate contextual fixes.
 
-Each time the Dev Agent investigates an issue or generates a fix, it creates a [**code session**][7], which captures the agent's analysis, actions, and any resulting code changes across supported Datadog products.
+Each time the Dev Agent investigates an issue or generates a fix, it creates a [**code session**][18], which captures the agent's analysis, actions, and any resulting code changes across supported Datadog products.
+
+## Code sessions
+A code session captures a segment of work with the Bits AI Dev Agent, including its analysis and code changes. Create, view, and manage your sessions on **Bits AI** > **Dev Agent** > [**Code Sessions**][7].
+
+{{< img src="bits_ai/dev_agent/code_sessions_overview.png" alt="A tab titled 'Code Sessions' shows a text field with suggestions underneath" style="width:100%;" >}}
+
+### Create a code session
+You can start a code session:
+- By entering a freeform prompt on [**Code Sessions**][7]
+  - Enter a custom prompt or generate one by clicking a **Suggestions** card. (If the Dev Agent has created proactive fixes for any of your repositories, a **Proactive Fixes** section appears instead.)
+- By invoking Bits AI Dev Agent in a [supported Datadog product][9]
+
+A code session can also be created when another Bits AI agent (like [Bits Assistant][16] or [Bits AI SRE][17]) hands off a coding task to the Dev Agent.
+
+### View and manage code sessions
+On [Code Sessions][7], view your past sessions in the **My Sessions** panel. A session appears here if you initiated it or interacted with it in some way, like participating in the conversation or creating an associated PR.
+
+Click a session to view its details and continue working with the Dev Agent. To remove a session from your **My Sessions** list, click {{< img src="bits_ai/dev_agent/archive_icon.png" inline="true" style="width:24px">}} (**Archive for everyone**) or {{< img src="bits_ai/dev_agent/unwatch_icon.png" inline="true" style="width:24px">}} (**Unwatch session**).
 
 ## Supported Datadog products
 
@@ -50,7 +68,7 @@ Bits AI Dev Agent integrates with GitHub to create pull requests, respond to com
   
   **Note**: Comment `@Datadog` to prompt Bits for updates to the PR. Bits Dev never auto-merges PRs.
 
-Go to **Bits AI** > **Dev Agent** > **[Code sessions][7]** to see all Dev Agent code sessions and generated PRs. You can search sessions and filter by service, product source, and status.
+See all PRs the Dev Agent is working on in **Bits AI** > **Dev Agent** > **[Code Sessions][7]**.
 
 ### Auto-push
 
@@ -125,9 +143,13 @@ To enable Bits AI Dev Agent, see [Setup][6].
 [6]: /bits_ai/bits_ai_dev_agent/setup/
 [7]: https://app.datadoghq.com/code
 [8]: /bits_ai/bits_ai_sre/
+[9]: #supported-datadog-products
 [10]: /profiler/automated_analysis/
 [11]: /tracing/trace_explorer/
 [12]: /containers/
 [13]: /containers/bits_ai_kubernetes_remediation
 [14]: https://app.datadoghq.com/code/settings
 [15]: /security/code_security/static_analysis/ai_enhanced_sast/
+[16]: /bits_ai/bits_assistant/
+[17]: /bits_ai/bits_ai_sre/
+[18]: #create-a-code-session
