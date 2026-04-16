@@ -51,6 +51,18 @@ To index 1 TB of logs per day (~11.6 MB/s), follow these steps:
 3. **Add headroom:** Start with one indexer pod configured with **3 vCPUs, 12 GB RAM, and a 200 GB disk**. Adjust these values based on observed performance and redundancy needs.
 {{% /collapse-content %}}
 
+{{% collapse-content title="Sizing by event count" level="h4" expanded=false %}}
+If you know your daily event count but not your byte volume, use this formula to estimate:
+
+**Daily volume (TB) = (events per day × average event size in bytes) / 1,000,000,000,000**
+
+For example, with 1 billion events/day at 1 KB average size:
+
+`1,000,000,000 × 1,000 / 1,000,000,000,000 = 1 TB/day`
+
+Typical log event sizes range from 500 bytes (short syslog) to 2-3 KB (JSON with Kubernetes tags). Measure a representative sample of your logs to get an accurate average.
+{{% /collapse-content %}}
+
 ## Searchers
 
 Searchers handle search queries from the Datadog UI, reading metadata from the Metastore and fetching data from object storage.
@@ -59,6 +71,15 @@ A general starting point is to provision roughly double the total number of vCPU
 
 - **Performance:** Search performance depends heavily on the workload (query complexity, concurrency, amount of data scanned). For instance, term queries (`status:error AND message:exception`) are usually computationally less expensive than aggregations.
 - **Memory:** 4 GB of RAM per searcher vCPU. Provision more RAM if you expect many concurrent aggregation requests.
+
+{{% collapse-content title="Impact of query patterns on searcher sizing" level="h4" expanded=false %}}
+The number of searcher vCPUs you need varies significantly based on how you use CloudPrem:
+
+- **Incident response** (searching for specific errors, grep-style queries): Relatively low searcher resources are needed, even with large datasets.
+- **Dashboards with aggregations** (timeseries, top lists, percentiles over multi-day ranges): Significantly more searcher resources are required. Aggregation queries scan more data and consume more CPU and memory.
+
+If your primary use case involves dashboards, plan for 2-3x more searcher vCPUs than the baseline recommendation.
+{{% /collapse-content %}}
 
 ## Other services
 
@@ -69,6 +90,30 @@ Allocate the following resources for these lightweight components:
 | **Control Plane** | 2 | 4 GB | 1 |
 | **Metastore** | 2 | 4 GB | 2 |
 | **Janitor** | 2 | 4 GB | 1 |
+
+## Object storage estimation
+
+CloudPrem compresses and indexes log data before storing it in object storage. The compression ratio depends on the log format, structure, and redundancy in your data.
+
+| Metric | Typical range |
+|--------|---------------|
+| **Compression ratio** | 3x to 5x (raw input to stored size) |
+| **Storage per TB/day ingested** | 200–350 GB/day on object storage |
+
+To estimate your object storage requirements:
+
+**Stored data per day = Daily volume / compression ratio**
+
+**Total storage = Stored data per day × retention period (days)**
+
+{{% collapse-content title="Example: Storage for 10 TB/day with 30-day retention" level="h4" expanded=false %}}
+Assuming a 4x compression ratio:
+
+1. **Stored per day:** `10 TB / 4 = 2.5 TB/day`
+2. **Total for 30 days:** `2.5 TB × 30 = 75 TB`
+
+Use standard-tier object storage (for example, S3 Standard, GCS Standard) for active data. Lower-cost tiers such as S3 Infrequent Access or GCS Nearline are not validated for use with CloudPrem.
+{{% /collapse-content %}}
 
 ## PostgreSQL database
 
@@ -137,6 +182,22 @@ The following values are automatically applied to searcher configuration when yo
 | 8xlarge | 32GiB | 16GiB | 2GiB | 64 | 16GiB |
 
 {{% /collapse-content %}}
+
+## Sizing examples
+
+The following table provides starting-point configurations for common daily log volumes. These are baseline recommendations — adjust based on your observed performance.
+
+| Daily volume | Indexer pods | Indexer podSize | Searcher pods | Searcher podSize | Object storage (30-day retention, ~4x compression) |
+|-------------|-------------|-----------------|---------------|-------------------|-----------------------------------------------------|
+| **1 TB/day** | 2 | xlarge | 2 | xlarge | ~7.5 TB |
+| **5 TB/day** | 3 | xlarge | 3 | 2xlarge | ~37.5 TB |
+| **10 TB/day** | 6 | xlarge | 6 | 2xlarge | ~75 TB |
+| **50 TB/day** | 15 | xlarge | 15 | 4xlarge | ~375 TB |
+| **100 TB/day** | 30 | xlarge | 20 | 6xlarge | ~750 TB |
+
+<div class="alert alert-info">
+Searcher vCPUs in this table assume a mixed workload (searches and some dashboards). For dashboard-heavy use cases, increase searcher vCPUs by 2-3x. For search-only use cases (incident response, grep), you may be able to reduce them.
+</div>
 
 ## Further reading
 
