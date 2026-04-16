@@ -53,7 +53,7 @@ Define the metrics that measure the outcome of your experiment.
 1. Click the **Primary metric** button to open the metric picker:
    1. Select a primary metric to measure the main outcome of your experiment.
    1. (Optional) Scope the list to **Certified** or **Non-certified** metrics.
-   1. (Optional) Click **Create Metric** to define a new metric.
+   1. (Optional) Click **Create Metric** to define a new metric. For setup instructions, see [Create Experiment Metrics][2]
 1. (Optional) Add **Secondary metrics** to monitor unintended effects of the experiment on other areas like performance, engagement, or revenue.
 
 {{< img src="/product_analytics/experiment/exp_plan_launch_decision_metric.png" alt="The experiment configuration page showing the Decision metrics section with a Calculate metrics by dropdown set to User (@usr.id), a primary metric set to Add to Cart Conversion, and a Secondary metrics section." style="width:80%;" >}}
@@ -65,10 +65,10 @@ Estimate the sample size needed to detect meaningful differences between variant
 1. Expand **Calculation details**. Your primary and secondary metrics appear under **Metrics**.
 1. Use the **Entry point** dropdown to select the event that assigns users to the experiment. Datadog uses this to estimate expected traffic.
 1. (Optional) Add a **Filter** to narrow the entry point's audience. If you do not see the property you need, type the property name in the **Custom property** field and click **Add**.
-1. Set the **Number of variants** and **Traffic exposure** percentage. The defaults are two variants and 100% traffic exposure.
+1. Set the **Number of variants** (default 2) and **Traffic exposure** percentage (default 100%).
 1. Under **Additional inputs**, configure the statistical **Power** (default 80%) and **Target experiment duration** in weeks.
 1. Click **Run Calculation** to see an estimate of the **[Minimum detectable effect (MDE)][3] over time** for your metrics.
-1. Close the **Sample Size Calculator** side panel.
+1. Close the **Sample Size Calculator** side panel and continue to [add your feature flag](#feature-flag).
 
 {{< img src="/product_analytics/experiment/exp_plan_launch_sample_size.png" alt="The Sample Size Calculator side panel showing calculation details with Add to Cart Conversion as the primary metric and Number of cart views as a guardrail, an entry point set to click on ADD TO CART, two variants at 100% traffic exposure, and additional inputs for power and target experiment duration." style="width:80%;" >}}
 
@@ -80,18 +80,21 @@ Link a feature flag to control how traffic is split between the experiment varia
 1. If you have not created a feature flag, click **Create New Feature Flag**. For setup instructions, see [Create your first feature flag][4].
 
 #### Randomization
+Randomize your users and split traffic across your experiment variants. 
+
 After you select a feature flag, Datadog pre-populates the randomization settings based on the flag's configuration.
 
-<div class="alert alert-info">The randomization settings you configure here do not modify the linked feature flag yet. The following changes take effect when you launch:<br><br><ul><li>Datadog adds a targeting rule to the selected feature flag that randomly assigns users to variants. Each user consistently sees the same variant throughout the experiment.</li><li>If multiple experiments share the same flag, Datadog evaluates traffic based on the order of the flag's targeting rules. You can reorder targeting rules in the confirmation modal before launching.</li></ul></div>
+<div class="alert alert-info">The randomization settings you configure here have the following effect when you launch your experiment:<br><br><ul><li>Datadog adds a targeting rule to the selected feature flag that randomly assigns users to variants.</li><li>If multiple experiments share the same flag, Datadog evaluates traffic based on the order of the flag's targeting rules. You can reorder targeting rules in the confirmation modal before launching.</li></ul></div>
 
 To configure how users are assigned to variants:
 1. Select the **Environment** for your experiment from the dropdown (for example, `production` for live user traffic or `staging` for testing).
 1. Under **Targeting rules**:
    1. Click **Add Filter** to define conditions based on custom attributes set in your SDK's evaluation context and filter which users to include in the experiment.
    1. Click **Add Condition** to set additional conditions.
-1. Under **Variants**, set how traffic is split between your experiment groups. Use the **Randomize users and split traffic** dropdown to choose **Equally** or **Custom**.
+1. Under **Variants**, set how traffic is split between your experiment groups. Use the **Randomize users and split traffic** dropdown to choose **Equally** or **Custom**. Each user consistently sees the same variant throughout the experiment.
 1. Under **Traffic exposure**, set the percentage of targeted traffic to include in the experiment.
 1. (Optional) [Schedule a staged rollout](#schedule-a-staged-rollout-optional).
+1. (Optional) Add [notifications recipients](#notifications), a [statistical analysis plan](#statistical-analysis-plan), and [exploration dimensions](#split-by-exploration-dimensions) to your experiment.
 1. After configuring your experiment, proceed to [Launch your experiment](#launch-your-experiment).
 
 {{< img src="/product_analytics/experiment/exp_plan_launch_ui_randomization.png" alt="The Randomization section showing the environment set to staging, a targeting rule with an IF condition, two variants with an equal 50/50 split between Control (False) and variant B (True), and traffic exposure set to 100% of targeted traffic with an Add Rollout Steps option." style="width:80%;" >}}
