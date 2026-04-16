@@ -93,7 +93,7 @@ You can sync teams from Okta or Entra IdPs. Use IdP-driven sync if your organiza
 - You want IT or the platform team to control team membership.
 - You can map groups to real teams without making your team list unmanageably large.
 
-When you sync Datadog Teams to your IdP, those teams are managed external to Datadog. You don't use Datadog to manually edit team membership.
+When you sync Datadog Teams to your IdP, those teams are managed externally. You don't use Datadog to manually edit team membership.
 
 #### Limitations
 - Team provisioning through SCIM is unavailable in Entra due to a Microsoft freeze on third-party app updates.
