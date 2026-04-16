@@ -74,8 +74,7 @@ To install the Datadog Onboarding Model Context Protocol (MCP) server, follow th
 {{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
 The Datadog AI Setup CLI configures your project without a coding assistant.
 
-1. Run the following command, replacing `<PRODUCT>` with the identifier for the product you want to set up:
-
+<!--
    | Product | Identifier |
    |---------|------------|
    | App and API Protection | `app_and_api_protection` |
@@ -88,6 +87,17 @@ The Datadog AI Setup CLI configures your project without a coding assistant.
    | Serverless Monitoring | `serverless` |
    | Studio | `studio` |
    | Test Optimization | `test-optimization` |
+-->
+
+1. Run the following command, replacing `<PRODUCT>` with the identifier for the product you want to set up:
+
+   | Product | Identifier |
+   |---------|------------|
+   | Error Tracking | `error-tracking` |
+   | Infrastructure Monitoring | `infra-monitoring` |
+   | Product Analytics | `product-analytics` |
+   | Real User Monitoring | `rum` |
+   | Studio | `studio` |
 
    ```shell
    npx @datadog/ai-setup-cli --product <PRODUCT>
