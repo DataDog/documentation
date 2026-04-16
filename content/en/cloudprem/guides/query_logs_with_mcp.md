@@ -49,7 +49,7 @@ The following table describes the key parameters used when querying logs with th
 | Parameter | Description | Example |
 |-----------|-------------|---------|
 | `query` | Log search query using Datadog query syntax | `"*"` (all logs), `"service:web"`, `"status:error"` |
-| `indexes` | Array of CloudPrem index names to search | `["cloudprem-dev"]` |
+| `indexes` | Array of CloudPrem index names to search | `["cloudprem--dev--main"]` |
 | `storage_tier` | Storage tier to query (must be `"cloudprem"` for CloudPrem logs) | `"cloudprem"` |
 | `from` | Start time for the query | `"now-1h"`, `"now-24h"`, `"2024-01-15T00:00:00Z"` |
 | `to` | End time for the query | `"now"`, `"2024-01-15T23:59:59Z"` |
@@ -63,9 +63,9 @@ To find your CloudPrem index name:
 
 1. Navigate to the [Datadog Log Explorer][2].
 2. Look for the **CLOUDPREM INDEXES** section in the left facet panel.
-3. Your CloudPrem indexes are listed there, typically in the format `cloudprem-<cluster_id>`.
+3. Your CloudPrem indexes are listed there, in the format `cloudprem--<cluster_name>--<index_name>`.
 
-You can also find your index name in the [CloudPrem console][3], where your cluster ID is displayed.
+You can also find your index names in the [CloudPrem console][3] by selecting a cluster and clicking **View Indexes**.
 
 ## Advanced query examples
 
@@ -73,13 +73,13 @@ When using AI-powered tools with the Datadog MCP server, you can ask questions i
 
 ### Error logs from a specific service
 **Prompt**:
-"Show me error logs from the nginx service in the cloudprem-dev index in the last hour."
+"Show me error logs from the nginx service in the cloudprem--dev--main index in the last hour."
 
 **Translates to**:
 ```json
 {
   "query": "service:nginx status:error",
-  "indexes": ["cloudprem-dev"],
+  "indexes": ["cloudprem--dev--main"],
   "storage_tier": "cloudprem",
   "from": "now-1h",
   "to": "now"
@@ -88,13 +88,13 @@ When using AI-powered tools with the Datadog MCP server, you can ask questions i
 
 ### Search for specific log content
 **Prompt**:
-"Find logs containing 'connection timeout' from the API service in cloudprem-prod from the last 24 hours."
+"Find logs containing 'connection timeout' from the API service in cloudprem--prod--main from the last 24 hours."
 
 **Translates to**:
 ```json
 {
   "query": "service:api \"connection timeout\"",
-  "indexes": ["cloudprem-prod"],
+  "indexes": ["cloudprem--prod--main"],
   "storage_tier": "cloudprem",
   "from": "now-24h",
   "to": "now"
@@ -103,13 +103,13 @@ When using AI-powered tools with the Datadog MCP server, you can ask questions i
 
 ### Filter by HTTP status code
 **Prompt**:
-"Get all 500 status code logs from the cloudprem-prod index in the last day."
+"Get all 500 status code logs from the cloudprem--prod--main index in the last day."
 
 **Translates to**:
 ```json
 {
   "query": "status:500",
-  "indexes": ["cloudprem-prod"],
+  "indexes": ["cloudprem--prod--main"],
   "storage_tier": "cloudprem",
   "from": "now-1d",
   "to": "now"
@@ -120,7 +120,7 @@ When using AI-powered tools with the Datadog MCP server, you can ask questions i
 
 - **Both `storage_tier` and `indexes` are required** when querying CloudPrem logs. Without these parameters, queries will search standard Datadog indexes instead.
 - `storage_tier` must always be set to `"cloudprem"`.
-- The `indexes` parameter must contain valid CloudPrem index names (typically in the format `cloudprem-<cluster_id>`).
+- The `indexes` parameter must contain valid CloudPrem index names (in the format `cloudprem--<cluster_name>--<index_name>`).
 - When using natural language queries, explicitly mention your CloudPrem index name in your prompt.
 - CloudPrem logs are queryable in real-time as soon as they are indexed.
 - Query syntax follows standard [Datadog log search syntax][4].

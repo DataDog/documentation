@@ -1,4 +1,5 @@
 ---
+id: alert_graph
 title: alert graph
 core_product:
   - dashboards

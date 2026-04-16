@@ -889,7 +889,7 @@ Available since dd-trace-py v3.7, `track_user_sdk` provides 5 functions:
 
 Available since dd-trace-py v3.17, `track_user_sdk` provides this additional function:
 
-- `tracker_user_id`
+- `track_user_id`
 
 
 ```python

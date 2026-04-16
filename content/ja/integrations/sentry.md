@@ -19,7 +19,7 @@ categories:
 - collaboration
 - issue tracking
 - event management
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -52,51 +52,92 @@ tile:
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
-{{< img src="integrations/sentry/sentry.png" alt="sentry イベント" popup="true">}}
-
 ## 概要
 
-Sentry は、セルフホスト型およびクラウド型のアプリケーションパフォーマンスモニタリングとエラー追跡を提供し、ソフトウェアチームがより明確な情報を把握し、迅速に解決し、継続的に学習できるようにします。
+Sentry は従来の Webhook 統合を非推奨とし、現在は Webhook を使用して外部システムにイベントを転送する方法として **Sentry Internal Integrations** の利用を推奨しています。
 
-Datadog Sentry インテグレーションは、Sentry イベントを自動的に Datadog イベントストリームに転送し、エラーやバグ修正の検索やコメント、Sentry エラーと他のシステムのメトリクスやデータとの相関付けを可能にします。
+Datadog にイベントを転送するには、Sentry で Webhook 統合を直接設定する必要があります。この設定により、Sentry は組織でサポートされている任意の公開エンドポイントにイベントを送信できるようになります。
+
+より詳しい情報とセットアップ方法については、[Sentry の公式ドキュメント][1]を参照してください。
+
+Datadog intake URL (ログまたはイベント用) は、[Datadog API ドキュメント][2]または Datadog のアカウント設定で確認できます。
+
+## 従来の Webhook
+
+以前に Sentry の従来の Webhook 統合を設定していた場合、当面は引き続き機能する可能性があります。ただし、今後のすべての新しい Webhook 設定では **Sentry Internal Integrations** を使用する必要があります。
 
 ## セットアップ
 
-### インストール
+### 設定
 
-次の手順で Sentry インテグレーションをセットアップします。
+## ステップ 1: Webhook Forwarder をデプロイする
 
-1. Sentry にログインします。
-2. **Settings > Projects** に移動し、適切なプロジェクトを選択します。
-3. 左側で、**Legacy Integrations** を選択します。
-4. **Webhooks integration** までスクロールダウンし、スライダートグルをクリックしてインテグレーションを有効化し、次に **Configure Plugin** をクリックします。
-5. **Callback URLs’** の下に、インテグレーションタイルからコピーしたコールバック URL を入力します。
-6. **Save changes** をクリックします。
-7. 必要に応じて、**Enable Plugin** をクリックしてインテグレーションを有効にします。
+Sentry の Webhook には、カスタムヘッダーを含めることができません。インフラストラクチャー上に、以下の機能を持つ簡易的なサービスをデプロイする必要があります。
 
-デフォルトでは、Sentry は、(既にログに記録された例外の新しいインスタンスではなく) 新しい例外が発生するたびに、Webhook にイベントデータを ping します。別の (または追加の) トリガーが必要な場合は、プロジェクト設定の Alerts セクションで構成できます。
+- Sentry から送信される Webhook の POST リクエストを受け付ける
+- 必要な認証ヘッダーを追加する
+- ペイロードを宛先に転送する
 
-### エラーにホスト名を追加する (オプション)
+詳しくは [Sentry 公式ドキュメント][1]をご覧ください。
 
-Sentry が報告するサーバー名が Datadog が認識するホスト名と一致しないことがあります。これを解決するには、各イベントにアタッチされている `server_name` タグにカスタム値を設定します。
+## ステップ 2: Sentry で Internal Integration を作成する
 
-Sentry のデフォルトの `server_name` の値を保持したまま、別のホスト名を使用するには、イベントに `hostname` タグを設定します。特定の言語については、Sentry の [タグのカスタマイズ][1]のドキュメントを参照してください。
+1. **Settings > Developer Settings > Internal Integrations** に移動します。
 
-## トラブルシューティング
+2. **Create New Internal Integration** をクリックします。
 
-### Datadog で Sentry のエラーが消えている
+3. Fill in:
 
-Datadog から Sentry のエラーが消えている場合、Sentry Webhook がトリガーされていない可能性があります。これは以下のシナリオが原因であることが考えられます。
+   - **Name**: Alert Forwarder
+   - **Webhook URL**: デプロイしたサービスの公開 URL
+   - **Alert Rule Action** を有効にします
 
-**規則がトリガーされた場合にのみ、アラートが送信される**。<br>
-たとえば、規則条件が「イベントが最初に表示されたとき」である場合、新しい問題が作成されるまで、アラートはディスパッチされません。プロジェクトが受信している問題のユニーク数によっては、少し時間がかかります。
+4. 権限を設定します:
 
-**通知インテグレーションが無効化されている**。<br>
-通知インテグレーションが、規則アクションで特定のサービスとして有効化されている、または「すべての有効化されたサービス」に含まれていることを確認してください。
+   - **Issue & Event**: 読み取り専用
+   - **Alerts**: 読み取り専用
 
-## 参考資料
+5. Webhook トリガーを有効にします:
 
-- [Datadog の Sentry インテグレーションによる共同バグ修正][2]
+   - `issue`
+   - `error`
 
-[1]: https://docs.sentry.io/platforms/java/enriching-events/tags/
-[2]: https://www.datadoghq.com/blog/datadog-sentry-integration-collaborative-bug-fixing/
+6. **Save** をクリックします。
+
+7. オプションで、プロキシがトークンベースの認証に対応している場合は、トークンを生成します。
+
+## ステップ 3: アラート ルールを作成する
+
+1. **Project Settings > Alerts > Issue Alerts** に移動します。
+
+2. 新しいアラート ルールを作成します:
+
+   - **WHEN**: 新しい issue が作成されたとき
+   - (オプション) フィルターを追加します
+   - **THEN**: Internal Integration を使って通知を送信する
+   - 必要に応じて、頻度と通知間隔を設定します
+
+3. **Send Test Notification** オプションを使用して、セットアップを確認します。
+
+## ステップ 4: 受信を確認する
+
+構成の完了後:
+
+- 転送されたアラートについて、転送先のシステムを監視します。
+- ペイロードの構造と内容が想定どおりであることを確認します。
+- プロキシからのログを使用して、配信の問題をデバッグします。
+
+アラートが表示されない場合:
+
+- プロキシが公衆インターネットから到達可能であることを確認します。
+- 認証ヘッダーが正しく追加されているかどうかを検証します。
+- **Developer Settings > Internal Integrations > Your Integration > Logs** で Sentry の Webhook ログを確認します。
+
+## サポート
+
+Sentry の Webhook 統合の構成について質問がある場合や、問題が発生した場合は、Sentry サポートに直接お問い合わせください:  
+[https://support.sentry.io][3]
+
+[1]: https://docs.sentry.io/organization/integrations/integration-platform/webhooks/
+[2]: https://docs.datadoghq.com/ja/api/latest/logs/#send-logs
+[3]: https://support.sentry.io

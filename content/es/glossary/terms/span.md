@@ -1,4 +1,5 @@
 ---
+id: span
 core_product:
 - apm
 short_definition: Un tramo es una unidad lógica de trabajo en un sistema distribuido

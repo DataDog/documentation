@@ -12,9 +12,12 @@ products:
   url: /notebooks/
   icon: notebook
 further_reading:
+- link: "bits_ai/mcp_server"
+  tag: "Documentation"
+  text: "Datadog MCP Server"
 - link: "/ddsql_editor/"
   tag: "Documentation"
-  text: "Learn more about DDSQL Editor"
+  text: "DDSQL Editor"
 ---
 
 {{< product-availability >}}
@@ -22,6 +25,8 @@ further_reading:
 ## Overview
 
 DDSQL is SQL for Datadog data. It implements several standard SQL operations, such as `SELECT`, and allows queries against unstructured data. You can perform actions like getting exactly the data you want by writing your own `SELECT` statement, or querying tags as if they are standard table columns.
+
+You can run DDSQL queries from AI agents using the [Datadog MCP Server][10] `ddsql` toolset (Preview).
 
 This documentation covers the SQL support available and includes:
 - [Syntax compatible with PostgreSQL](#syntax)
@@ -1060,3 +1065,4 @@ FROM aws.ec2_instance
 [7]: https://unicode-org.github.io/icu/userguide/strings/regexp.html#set-expressions-character-classes
 [8]: https://unicode-org.github.io/icu/userguide/strings/regexp.html#flag-options
 [9]: https://unicode-org.github.io/icu/userguide/strings/regexp.html#find-and-replace
+[10]: /bits_ai/mcp_server/
