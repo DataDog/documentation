@@ -64,6 +64,14 @@ Example prompts:
 - `Investigate why EC2 costs changed between January and February`
 - `Which teams are responsible for the highest S3 storage costs this month?`
 
+**Network Device Monitoring**
+
+Query and troubleshoot network devices, interfaces, and traffic patterns. For more information, see [NDM AI Tools][3].
+
+Example prompts:
+- `Show me all network devices in the us-east datacenter`
+- `Which interfaces have high error rates on device switch-prod-02?`
+
 ### Web Application
 
 To open Bits Assistant, click **Ask Bits** in the top-right of the navigation bar, use <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>I</kbd>, or click **Bits AI** in the left-side navigation panel.
@@ -99,3 +107,4 @@ After setup is completed, you can send queries to `@Datadog` in natural language
 
 [1]: /integrations/slack/?tab=applicationforslack
 [2]: /mobile/?tab=ios#installing
+[3]: /network_monitoring/devices/ai_tools/
