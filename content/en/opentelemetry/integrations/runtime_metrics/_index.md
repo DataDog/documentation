@@ -55,7 +55,7 @@ If you use [OpenTelemetry manual instrumentation][4], follow the guides for your
 
 #### Collector configuration
 
-The `jvm.gc.collections.count` and `jvm.gc.collections.elapsed` metrics require the [Delta-to-Rate Processor][8] in the OpenTelemetry Collector. Also set `OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE=delta` or use the `cumulativetodelta` otel processor.
+The `jvm.gc.collections.count` and `jvm.gc.collections.elapsed` metrics require the [Delta-to-Rate Processor][8] in the OpenTelemetry Collector. To ensure correct behavior, set `OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE=delta` or use the `cumulativetodelta` processor.
 
 ```yaml
 processors:
@@ -79,7 +79,7 @@ OpenTelemetry Go applications are [instrumented manually][3]. To enable runtime 
 
 #### Collector configuration
 
-Some Go runtime metrics are reported as monotonic sums, but Datadog expects them as gauges. The [Transform Processor][8] converts these sums to gauges, and the [Cumulative-to-Delta Processor][9] excludes them from delta conversion. Additionally, ensure that `OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE` is *not* set to delta, as excluded metrics from `cumulativetodelta` would then be ignored.
+Some Go runtime metrics are reported as monotonic sums, but Datadog expects them as gauges. The [Transform Processor][8] converts these sums to gauges, and the [Cumulative-to-Delta Processor][9] excludes them from delta conversion. Ensure that `OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE` is not set to `delta`. Otherwise, metrics excluded by `cumulativetodelta` are ignored.
 
 ```yaml
 processors:
@@ -129,7 +129,7 @@ OTEL_METRIC_EXPORT_INTERVAL=10000
 
 #### Collector configuration
 
-The `dotnet.process.cpu.time` and `process.cpu.time` metrics requires the [Delta-to-Rate Processor][8] in the OpenTelemetry Collector. Also set `OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE=delta` or use the `cumulativetodelta` otel processor.
+The `dotnet.process.cpu.time` and `process.cpu.time` metrics requires the [Delta-to-Rate Processor][8] in the OpenTelemetry Collector. To ensure correct behavior, set `OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE=delta` or use the `cumulativetodelta` processor.
 
 ```yaml
 processors:
