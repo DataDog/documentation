@@ -18,9 +18,9 @@ private: true
 
 ## Overview
 
-Tag indexing rules are centralized, sequentially evaluated directives that define how metric tags are handled at ingestion. They let you proactively control which tags are retained or excluded, helping reduce high cardinality by removing unnecessary tags and maintaining consistent tagging across your organization.
+Tag Indexing Rules are centralized configurations that define how metric tags are handled at ingestion. They allow you to proactively control which tags are retained or excluded, helping reduce high cardinality by removing unnecessary tags and ensuring consistent tagging across your organization.
 
-Tag rules operate on groups of metrics identified by name or prefix. They can apply to both existing and future metrics that match the defined patterns, minimizing the need for reactive cleanup or code changes while supporting more predictable cost management.
+Tag Indexing Rules operate on groups of metrics identified by name or prefix. They apply to both existing and newly ingested metrics that match the defined patterns, reducing the need for reactive cleanup or code changes while enabling more predictable cost management.
 
 ## Create a tag rule
 
@@ -97,7 +97,7 @@ Delete a rule
 : Remove rules that are no longer needed. When you delete a rule, Datadog recomputes the tag configuration for affected metrics based on the remaining rules.
 
 Override rules for a specific metric
-: To exempt a metric from tag rules, open the metric's details side panel in Metrics Summary, select **Manage Tags**, and set the metric to retain all tags. This bypasses all tag rules for that metric without modifying the rules themselves.
+: To exempt a metric from tag rules, open the metric's details side panel in Metrics Summary, select **Configure This Metric Individually**, and set the metric to retain all tags. This bypasses all tag rules for that metric without modifying the rules themselves.
 
   To reapply rules, restore the metric's default configuration from the same panel.
          
