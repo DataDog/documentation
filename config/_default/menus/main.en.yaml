@@ -963,11 +963,6 @@ menu:
     #   parent: sdk
     #   identifier: sdk_data_collected
     #   weight: 3
-    # - name: Mobile Vitals
-    #   url: client_sdks/mobile_vitals/
-    #   parent: sdk
-    #   identifier: sdk_mobile_vitals
-    #   weight: 4
     - name: Extend Datadog
       url: extend/
       pre: dev-code
