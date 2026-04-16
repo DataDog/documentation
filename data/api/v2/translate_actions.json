@@ -3699,6 +3699,14 @@
     "description": "Get a list of security scanned assets metadata for an organization.\n\n### Pagination\n\nFor the \"List Vulnerabilities\" endpoint, see the [Pagination section](#pagination).\n\n### Filtering\n\nFor the \"List Vulnerabilities\" endpoint, see the [Filtering section](#filtering).\n\n### Metadata\n\n For the \"List Vulnerabilities\" endpoint, see the [Metadata section](#metadata).\n\n### Related endpoints\n\nThis endpoint returns additional metadata for cloud resources that is not available from the standard resource endpoints. To access a richer dataset, call this endpoint together with the relevant resource endpoint(s) and merge (join) their results using the resource identifier.\n\n**Hosts**\n\nTo enrich host data, join the response from the [Hosts](https://docs.datadoghq.com/api/latest/hosts/) endpoint with the response from the scanned-assets-metadata endpoint on the following key fields:\n\n| ENDPOINT | JOIN KEY | TYPE |\n| --- | --- | --- |\n| [/api/v1/hosts](https://docs.datadoghq.com/api/latest/hosts/) | host_list.host_name | string |\n| /api/v2/security/scanned-assets-metadata | data.attributes.asset.name | string |\n\n**Host Images**\n\nTo enrich host image data, join the response from the [Hosts](https://docs.datadoghq.com/api/latest/hosts/) endpoint with the response from the scanned-assets-metadata endpoint on the following key fields:\n\n| ENDPOINT | JOIN KEY | TYPE |\n| --- | --- | --- |\n| [/api/v1/hosts](https://docs.datadoghq.com/api/latest/hosts/) | host_list.tags_by_source[\"Amazon Web Services\"][\"image\"] | string |\n| /api/v2/security/scanned-assets-metadata | data.attributes.asset.name | string |\n\n**Container Images**\n\nTo enrich container image data, join the response from the [Container Images](https://docs.datadoghq.com/api/latest/container-images/) endpoint with the response from the scanned-assets-metadata endpoint on the following key fields:\n\n| ENDPOINT | JOIN KEY | TYPE |\n| --- | --- | --- |\n| [/api/v2/container_images](https://docs.datadoghq.com/api/latest/container-images/) | `data.attributes.name`@`data.attributes.repo_digest` | string |\n| /api/v2/security/scanned-assets-metadata | data.attributes.asset.name | string |",
     "summary": "List scanned assets metadata"
   },
+  "ListIndicatorsOfCompromise": {
+    "description": "Get a list of indicators of compromise (IoCs) matching the specified filters.",
+    "summary": "List indicators of compromise"
+  },
+  "GetIndicatorOfCompromise": {
+    "description": "Get detailed information about a specific indicator of compromise (IoC).",
+    "summary": "Get an indicator of compromise"
+  },
   "GetSignalNotificationRules": {
     "description": "Returns the list of notification rules for security signals.",
     "summary": "Get the list of signal-based notification rules"
