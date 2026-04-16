@@ -48,7 +48,6 @@ dataset = LLMObs.create_dataset_from_csv(
 - CSV files must have a header row
 - Maximum field size is 10MB
 - All columns not specified in `input_data_columns`, `expected_output_columns`, or `id_column` are automatically treated as metadata
-- If `id_column` is specified but the column is not found in the CSV header, a `ValueError` is raised
 - The dataset is automatically pushed to Datadog after creation
 
 {{% /tab %}}
