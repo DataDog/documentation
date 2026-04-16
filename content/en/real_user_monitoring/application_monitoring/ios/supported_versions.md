@@ -49,18 +49,11 @@ The RUM iOS SDK supports the following iOS versions:
   | DatadogLogs | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | |
   | DatadogTrace | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | |
   | DatadogCrashReporting | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | |
-  | DatadogRUM | {{< X >}} | {{< X >}} | {{< X >}} * | {{< X >}} | |
+  | DatadogRUM | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | watchOS: automatic view/action tracking, frame rate monitoring, and memory warning detection are not available. |
   | DatadogFlags | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | |
   | DatadogProfiling | {{< X >}} | {{< X >}} | | {{< X >}} | Not available on watchOS. The profiling module requires system-level APIs that watchOS does not support. |
-  | DatadogSessionReplay | {{< X >}} | | | | Not available on tvOS, watchOS, and visionOS. SessionReplay depends on specific rendering capabilities that are not available on these platforms. |
-  | DatadogWebViewTracking | {{< X >}} | | | {{< X >}} | Not available on tvOS and watchOS. WebViewTracking requires browser rendering capabilities that are not available on these platforms. |
-
-  \* **RUM limitations on watchOS**
-
-  DatadogRUM on watchOS does not support automatic tracking of views and actions.
-  Frame rate monitoring and memory warning detection are also not available.
-  These features rely on platform capabilities that watchOS does not provide,
-  so they are unavailable regardless of the SDK configuration.
+  | DatadogSessionReplay | {{< X >}} | | | | Not available on tvOS, watchOS, and visionOS. SessionReplay requires rendering capabilities not available on these platforms. |
+  | DatadogWebViewTracking | {{< X >}} | | | {{< X >}} | Not available on tvOS and watchOS. WebViewTracking requires browser rendering capabilities not available on these platforms. |
 
 ## Supported platforms
 
