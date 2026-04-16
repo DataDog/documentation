@@ -125,7 +125,7 @@ In Datadog's [GitHub provisioning flow][5], you can choose between two modes:
 - Team enrichment only links existing teams.
 - Full provisioning and membership management creates teams in Datadog based on the existing teams in GitHub, preserving hierarchy and membership.
 
-Both modes of GitHub provisioning can use CODEOWNERS for richer ownership signals.
+Both modes of GitHub provisioning can use `CODEOWNERS` for richer ownership signals.
 
 #### Common issues
 
