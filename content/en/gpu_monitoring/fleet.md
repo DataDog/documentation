@@ -51,7 +51,7 @@ Metrics relevant for your provisioning workflow:
 - Graphics Activity
 - SM Activity
 - GPU Memory
-- Allocated Devices
+- Allocated Devices (only available for Kubernetes users) 
 - Active Devices
 - Idle Cost
 
@@ -119,8 +119,8 @@ You can click on the gear icon to customize which metrics are displayed within t
 | CPU Utilization       | The percent of time the CPU spent running user space processes. Shown as percent. | `system.cpu.user`
 | Device Type           | Type of GPU device. | `gpu_device`
 | Total Devices         | Count of all devices sending data during this time frame. | `gpu.device.total`
-| Allocated Devices     | Count of devices that have been allocated to a workload. | `gpu.device.total`
-| Active Devices        | Count of allocated devices that are actively used for a workload. | `gpu.gr_engine_active`
+| Allocated Devices     | (only available if using Kubernetes) Count of devices that have been allocated to a workload. | `gpu.device.total`
+| Active Devices        | Count of devices that are actively used for a workload / busy. If using Kubernetes: count of allocated devices that are actively used for a workload. | `gpu.gr_engine_active`
 | Effective Devices     | Count of devices that are used and working for more than 50% of their lifespan. | `gpu.sm_active`
 | Graphics Engine Activity| Percentage of time that the graphics engine was active. | `gpu.gr_engine_active`
 | SM Activity           | Percentage of time the streaming multiprocessor was active. | `gpu.sm_active`
@@ -154,7 +154,7 @@ Datadog's GPU Monitoring doesn't need to rely on NVIDIA'S DCGM Exporter. It uses
 
 Within this side panel, you have a cluster-specific funnel that identifies:
 
-- Number of Total, Allocated, Active, and Effective devices within that particular cluster
+- Number of Total, Allocated (Kubernetes users only) , Active, and Effective devices within that particular cluster
 - Estimated total and idle cost of that cluster
 - Connected entities of that cluster: pods, processes, and Slurm jobs
 - Four key metrics (customizable) for that cluster: Core Utilization (only if System probe is enabled), Memory Utilization, PCIe Throughput, and Graphics Activity
@@ -169,7 +169,7 @@ Within this side panel, you have a cluster-specific funnel that identifies:
 Within this side panel, you have a host-specific view that identifies:
 
 - Host-related metadata such as provider, instance type, CPU utilization, system memory used, system memory total, system IO util, SM activity, and temperature
-- The specific GPU devices allocated to that host sorted by Graphics Engine Activity
+- (only available for Kubernetes users) The specific GPU devices allocated to that host sorted by Graphics Engine Activity
 - Connected Entities of that host: pods, processes, and Slurm jobs
 
 {{< img src="gpu_monitoring/host_sidepanel.png" alt="Host specific side panel that displays the GPU devices tied to that host and Connected Entities" style="width:100%;" >}}

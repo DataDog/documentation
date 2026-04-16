@@ -120,6 +120,14 @@ To create an experiment:
    A task can take any non-null type as `input_data` (string, number, Boolean, object, array). The output that will be used in the Evaluators can be of any type.
    This example generates a string, but a dict can be generated as output to store any intermediary information and compare in the Evaluators.
 
+   Optionally, your task function can accept a third `metadata` parameter to receive the dataset record's metadata:
+   ```python
+   def task(input_data: Dict[str, Any], config: Optional[Dict[str, Any]] = None, metadata: Optional[Dict[str, Any]] = None) -> str:
+       difficulty = metadata.get("difficulty", "unknown") if metadata else "unknown"
+       question = input_data["question"]
+       return "Beijing" if "China" in question else "Unknown"
+   ```
+
    You can trace the different parts of your Experiment task (workflow, tool calls, etc.) using the [same tracing decorators][2] you use in production.
    If you use a [supported framework][3] (OpenAI, Amazon Bedrock, etc.), LLM Observability automatically traces and annotates calls to LLM frameworks and libraries, giving you out-of-the-box observability for calls that your LLM application makes.
 

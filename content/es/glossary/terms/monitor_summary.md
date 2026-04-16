@@ -1,4 +1,5 @@
 ---
+id: monitor_summary
 core_product:
 - dashboards
 related_terms:

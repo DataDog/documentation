@@ -9,6 +9,15 @@ client_sdk_platform_options:
   - id: roku
   - id: unity
 
+client_sdk_mobile_platform_options:
+  - id: android
+    default: true
+  - id: ios
+  - id: flutter
+  - id: react_native
+  - id: kotlin_multiplatform
+  - id: unity
+
 client_sdk_product_options:
   - id: rum
     default: true

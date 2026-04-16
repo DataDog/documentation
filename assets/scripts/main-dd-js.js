@@ -19,6 +19,7 @@ import './components/mobile-nav'; // should move this to websites-modules
 import './components/accordion-auto-open';
 import './components/signup';
 import './components/conversational-search';
+import './components/stepper';
 
 // Add Bootstrap Tooltip across docs
 const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')

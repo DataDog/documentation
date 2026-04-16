@@ -156,7 +156,7 @@ LLM Observability offers managed evaluations and quality checks to evaluate the 
 Datadog provides a variety of options for your evaluations:
 - Use [managed evaluations][12] for your traces
 - [Submit custom evaluations][6] to LLM Observability
-- Integrate with frameworks like [Ragas][13] and [NeMo][14]
+- Integrate with frameworks like [NeMo][13]
 
 In addition, Datadog's [Sensitive Data Scanner][5] is natively integrated with LLM Observability, so you can ensure any sensitive data in your input and output is scanned and redacted.
 
@@ -176,5 +176,4 @@ In addition, Datadog's [Sensitive Data Scanner][5] is natively integrated with L
 [10]: https://github.com/DataDog/llm-observability/blob/main/4-custom-evaluations.ipynb
 [11]: /llm_observability/evaluations/
 [12]: /llm_observability/evaluations/managed_evaluations
-[13]: /llm_observability/evaluations/ragas_evaluations
-[14]: /llm_observability/evaluations/submit_nemo_evaluations
+[13]: /llm_observability/evaluations/submit_nemo_evaluations

@@ -77,7 +77,9 @@ Email your new org name to your [Customer Success Manager](mailto:success@datado
 
 After the Datadog team has set your DDR org, use the Datadog [public API endpoint][8] to retrieve the public IDs of the primary and DDR org. 
 
-To link your DDR and primary orgs, run these commands, replacing the `<PLACEHOLDERS>` with your orgs' values:
+To link your DDR org to your primary org:
+- Add the `disaster_recovery_status_write` scope to your application key in the primary org. 
+- Run the following commands, replacing the placeholders with the appropriate values.
 
 
 ```shell
@@ -90,8 +92,8 @@ export PRIMARY_ORG_ID=<PRIMARY_ORG_PUBLIC_ID>
 export USER_EMAIL=<USER_EMAIL>
 export CONNECTION='{"data":{"id":"'${PRIMARY_ORG_ID}'","type":"hamr_org_connections","attributes":{"TargetOrgUuid":"'${DDR_ORG_ID}'","HamrStatus":1,"ModifiedBy":"'${USER_EMAIL}'", "IsPrimary":true}}}'
 
-curl -v -H "Content-Type: application/json" -H 
-"dd-api-key:${PRIMARY_DD_API_KEY}" -H 
+curl -v -H "Content-Type: application/json" -H \
+"dd-api-key:${PRIMARY_DD_API_KEY}" -H \
 "dd-application-key:${PRIMARY_DD_APP_KEY}" --data "${CONNECTION}" --request POST ${PRIMARY_DD_API_URL}/api/v2/hamr
 ```
 After linking your orgs, only the failover org displays this banner:
@@ -364,3 +366,4 @@ During testing, integration telemetry is spread over both organizations. If you 
 [16]: https://app.datadoghq.com/organization-settings/application-keys
 [17]: https://docs.datadoghq.com/agent/configuration/dual-shipping/?tab=helm
 [18]: https://docs.datadoghq.com/agent/fleet_automation/#overview
+[19]: /account_management/rbac/permissions/#disaster-recovery
