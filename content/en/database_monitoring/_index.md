@@ -29,6 +29,9 @@ further_reading:
 - link: "https://dtdg.co/fe"
   tag: "Foundation Enablement"
   text: "Join an interactive session to level up your Database Monitoring"
+- link: "https://learn.datadoghq.com/courses/database-monitoring"
+  tag: "Learning Center"
+  text: "Monitoring a Postgres Database with Datadog DBM"
 algolia:
   tags: ['database monitoring', 'dbm']
 cascade:
