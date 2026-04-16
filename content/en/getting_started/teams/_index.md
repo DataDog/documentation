@@ -116,7 +116,7 @@ Use SAML mapping to sync Datadog Teams if your organization has the following ch
 Use SAML mapping as a practical, temporary solution when SCIM team creation isn't available, or you want provisioning without building a full pipeline.
 
 ### GitHub-driven teams
-From GitHub, Datadog Teams can apply GitHub teams, hierarchy, and CODEOWNERS information. Use GitHub to sync Datadog Teams if your organization has the following characteristics:
+From GitHub, Datadog Teams can apply GitHub teams, hierarchy, and `CODEOWNERS` information. Use GitHub to sync Datadog Teams if your organization has the following characteristics:
 - GitHub teams closely reflect your real organizational structure.
 - `CODEOWNERS` is your best ownership signal and you want Datadog to reflect it.
 - You care about hierarchy and nested teams.
