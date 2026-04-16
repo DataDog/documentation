@@ -57,3 +57,6 @@ disable_toc: true
    {{< nextlink href="security/sensitive_data_scanner/guide/investigate_sensitive_data_findings" >}}Investigate Sensitive Data Findings{{< /nextlink >}}
 {{< /whatsnext >}}
 
+{{< whatsnext desc="Troubleshooting Guides:" >}}
+   {{< nextlink href="/security/guide/troubleshoot-integrations-cloud-siem" >}}Troubleshoot the Cribl Stream integration with Cloud SIEM{{< /nextlink >}}
+{{< /whatsnext >}}
