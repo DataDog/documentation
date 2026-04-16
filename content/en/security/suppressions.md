@@ -23,6 +23,10 @@ products:
 
 Suppressions are specific conditions for when a signal should not be generated, which can improve the accuracy and relevance of the signals that are generated.
 
+{{< callout btn_hidden="true" header="Suppression timing" >}}
+Suppressions are evaluated at signal creation time and are not applied retroactively to existing signals. To suppress activity, apply suppression queries against **log or event attributes** before a signal is generated, rather than against an already-created signal.
+{{< /callout >}}
+
 ## Suppression routes
 
 You can set up a suppression query within an individual [detection rule](#detection-rules), or define a separate [suppression rule](#suppression-rules) to suppress signals across one or more detection rules.
