@@ -195,9 +195,9 @@ Symptoms:
 
 How to avoid:
 - Assign clear ownership per field:
-  - IdP owns membership
-  - GitHub owns code ownership and hierarchy
-  - Terraform or the API owns metadata standards
+  - IdP owns membership.
+  - GitHub owns code ownership and hierarchy.
+  - Terraform or the API owns metadata standards.
 - When combining sources, use enrichment. Do not co-manage the same attribute across multiple sources.
 
 ### Over-syncing, or creating a team for every group
