@@ -18,7 +18,7 @@ further_reading:
 This guide provides recommendations to Datadog organization administrators on how to use Datadog Teams effectively. It applies to the following situations:
 
 - You want to use Datadog Teams to drive ownership workflows (including routing, visibility, governance, and access), not only as a directory.
-- You already have team data spread across multiple systems. The systems may include Identity Provider (IdP) groups, SAML attributes, GitHub teams and CODEOWNERS files, internal tools, Terraform, spreadsheets, or Slack.
+- You already have team data spread across multiple systems. The systems may include Identity Provider (IdP) groups, SAML attributes, GitHub teams and `CODEOWNERS` files, internal tools, Terraform, spreadsheets, or Slack.
 - Your organization wants to adopt Datadog Teams without breaking existing workflows.
 
 This guide does not provide UI instructions. Instead, it focuses on decisions, sequencing, and common failure modes.
@@ -53,13 +53,13 @@ These sources answer the question of who is in which group. Identity sources pro
 
 These sources provide information about who owns which service:
 
-- GitHub teams and CODEOWNERS files
+- GitHub teams and `CODEOWNERS` files
 - Developer portal software such as Backstage, Port, or Cortex
 - Internal ownership registries or catalogs
 
 Be aware of the following common problems with GitHub data:
-- GitHub teams often have extra members
-- CODEOWNERS files become inaccurate over time due to organizational changes
+- GitHub teams often have extra members.
+- `CODEOWNERS` files become inaccurate over time due to organizational changes.
 
 ### Operational sources
 
@@ -82,7 +82,7 @@ Datadog supports managing or syncing Teams data through the following:
 - [SAML][2] attribute mapping to Teams
 - Datadog [public APIs][3]
 - [Terraform provider][4]
-- [GitHub teams][5] and CODEOWNERS-driven enrichment and provisioning
+- [GitHub teams][5] and `CODEOWNERS`-driven enrichment and provisioning
 - PagerDuty
 
 The following sections describe the tradeoffs between the available strategies.
@@ -160,13 +160,13 @@ Use this path to establish a clean membership life cycle before adding code owne
 
 1. Sync or map teams from Okta, Entra, or SAML to establish a membership baseline.
 2. Treat membership as managed, and avoid manual overrides that can be reverted.
-3. After the team list is stable, add GitHub connections (for example, CODEOWNERS or repo signals) to enrich ownership information.
+3. After the team list is stable, add GitHub connections (for example, `CODEOWNERS` or repo signals) to enrich ownership information.
 
 This approach stabilizes team membership before layering in ownership data.
 
 ### Start with GitHub when code ownership is the driver
 
-Use this path if CODEOWNERS is already how your organization routes issues and ownership.
+Use this path if `CODEOWNERS` is already how your organization routes issues and ownership.
 
 1. Link Datadog Teams to GitHub teams (usually by matching handle to name).
 2. Use `CODEOWNERS` to enrich ownership signals in Datadog.
@@ -220,7 +220,7 @@ Symptoms:
 
 How to avoid:
 - Assign an operational owner per team, even when membership is automated.
-- Account for renames in your operational plan. Renames and downstream handle changes carry significant cost, especially with CODEOWNERS.
+- Account for renames in your operational plan. Renames and downstream handle changes carry significant cost, especially with `CODEOWNERS`.
 
 ### Unexpected SAML provisioning limitations
 
@@ -240,7 +240,7 @@ How to avoid:
 
 Select 5-10 teams and validate the following:
 - Membership correctness
-- Ownership correctness (using CODEOWNERS, repo signals, or service mapping)
+- Ownership correctness (using `CODEOWNERS`, repo signals, or service mapping)
 - Metadata usefulness (using contacts, runbooks, and channels)
 
 ### Expand in controlled iterations
