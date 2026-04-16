@@ -37,9 +37,9 @@ cascade:
 
 ## Overview
 
-APM Basic provides baseline service visibility for services that are not instrumented. APM Basic automatically discovers services and collects request, error, and duration (RED) metrics from network traffic—without requiring code changes or instrumentation. It relies solely on a configured Datadog Agent and [Unified Service Tagging][6].
+APM Basic provides baseline service visibility for services that are not instrumented. APM Basic automatically discovers services and collects request, error, and duration (RED) metrics from network traffic, without requiring code changes or instrumentation. APM Basic relies solely on a configured Datadog Agent and [Unified Service Tagging][6].
 
-For full APM with distributed tracing and request-level debugging, use [Single Step Instrumentation][1]. APM Basic does not replace instrumentation — use it for services where instrumentation is not available or not needed.
+For full APM with distributed tracing and request-level debugging, use [Single Step Instrumentation][1]. APM Basic does not replace instrumentation. Use it for services where instrumentation is not available or not needed.
 
 Services monitored by APM Basic appear in the [Software Catalog][2] and [Service Map][3] alongside your fully instrumented services. APM Basic also works with [Deployment Tracking][7], Monitors, Dashboards, and SLOs.
 
@@ -101,7 +101,7 @@ APM Basic provides baseline service monitoring. For distributed tracing and deep
 | RED metrics (requests, errors, duration) | {{< X >}} | {{< X >}} |
 | Service List and Service Pages | {{< X >}} | {{< X >}} |
 | Service Map | {{< X >}} | {{< X >}} |
-| No code instrumentation required | {{< X >}} | |
+| No instrumentation required | {{< X >}} | |
 | Distributed traces | | {{< X >}} |
 | Trace search and analytics | | {{< X >}} |
 | Flame graphs and span-level detail | | {{< X >}} |

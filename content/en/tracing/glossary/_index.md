@@ -36,7 +36,7 @@ For additional definitions and descriptions of important APM terms such as _span
 
 | Concept                         | Description                                                                                                                                                                                                          |
 |---------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [APM Basic](#apm-basic)         | APM Basic provides RED metrics (requests, errors, duration) for services that are not instrumented with tracing libraries. It uses eBPF in the Datadog Agent to automatically discover services and collect health metrics without code changes. |
+| [APM Basic](#apm-basic)         | APM Basic provides RED metrics (requests, errors, duration) for services that are not instrumented with tracing libraries. APM Basic uses eBPF in the Datadog Agent to automatically discover services and collect health metrics without code changes. |
 | [Service](#services)            | Services are the building blocks of modern microservice architectures - broadly a service groups together endpoints, queries, or jobs for the purposes of building your application.                                  |
 | [Resource](#resources)          | Resources represent a particular domain of a customer application - they are typically an instrumented web endpoint, database query, or background job.                                                              |
 | [Monitors][23]                   | APM metric monitors work like regular metric monitors, but with controls tailored specifically to APM. Use these monitors to receive alerts at the service level on hits, errors, and a variety of latency measures. |
@@ -49,7 +49,7 @@ For additional definitions and descriptions of important APM terms such as _span
 
 ## APM Basic
 
-[APM Basic][29] provides RED metrics (requests, errors, duration) for services that are not instrumented with tracing libraries. It uses eBPF in the Datadog Agent to automatically discover services and collect health metrics without requiring code changes. Services monitored by APM Basic appear in the [Software Catalog][4] and [Service Map][5] alongside fully instrumented services. APM Basic is useful for services that are not instrumented, such as legacy systems or third-party services.
+[APM Basic][29] provides RED metrics (requests, errors, duration) for services that are not instrumented with tracing libraries. APM Basic uses eBPF in the Datadog Agent to automatically discover services and collect health metrics without requiring code changes. Services monitored by APM Basic appear in the [Software Catalog][4] and [Service Map][5] alongside fully instrumented services. APM Basic is useful for services that are not instrumented, such as legacy systems or third-party services.
 
 APM Basic reports metrics under the `universal.http.server` (inbound traffic) and `universal.http.client` (outbound traffic) operation names. For setup instructions, see [APM Basic][30].
 

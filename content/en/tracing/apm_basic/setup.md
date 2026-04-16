@@ -5,7 +5,7 @@ aliases:
 - /universal_service_monitoring/setup/
 ---
 
-<div class="alert alert-info">APM Basic uses the same Agent configuration as the former Universal Service Monitoring. Configuration keys such as <code>service_monitoring_config</code> and environment variables like <code>DD_SYSTEM_PROBE_SERVICE_MONITORING_ENABLED</code> are unchanged.</div>
+<div class="alert alert-info">APM Basic uses the same Agent configuration as the former Universal Service Monitoring. Configuration keys such as <code>service_monitoring_config</code> and environment variables such as <code>DD_SYSTEM_PROBE_SERVICE_MONITORING_ENABLED</code> are unchanged.</div>
 
 ## Supported versions and compatibility
 
