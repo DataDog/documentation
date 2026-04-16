@@ -1,5 +1,6 @@
 ---
 title: Troubleshooting Serverless Monitoring for Azure Logic Apps
+description: Diagnose missing traces and logs for Azure Logic Apps monitoring by verifying diagnostic settings, log forwarding, and APM span generation in Datadog.
 ---
 
 ## I cannot see any traces

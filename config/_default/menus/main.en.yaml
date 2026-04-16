@@ -3506,7 +3506,7 @@ menu:
       parent: serverless
       identifier: serverless_azure_functions
       weight: 6
-    - name: Azure Logic Apps (Preview)
+    - name: Azure Logic Apps
       url: serverless/logic_apps
       parent: serverless
       identifier: serverless_logic_apps
