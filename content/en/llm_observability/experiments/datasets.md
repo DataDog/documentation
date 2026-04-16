@@ -214,12 +214,11 @@ The Dataset class provides methods to manage records: `append()`, `update()`, `d
 ```python
 # Add a new record (id is optional; if omitted, the SDK generates one automatically)
 dataset.append({
-    "id": "switzerland-capital",                                        # optional
+    "id": "switzerland-capital",
     "input_data": {"question": "What is the capital of Switzerland?"},
     "expected_output": "Bern",
     "metadata": {"difficulty": "easy"}
 })
-# Note: passing a duplicate id raises a ValueError
 
 # Update an existing record
 dataset.update(0, {
