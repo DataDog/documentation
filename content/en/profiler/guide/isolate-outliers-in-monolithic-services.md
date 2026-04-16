@@ -141,7 +141,7 @@ tracer.profiling.runWithLabels({ customer_name: <value> }, () => {
 
 All wall time and CPU time samples taken during the function's execution, including across async continuations, carry the custom labels. Nested `runWithLabels` calls merge labels. Inner values take precedence for duplicate keys.
 
-To specify which label keys you want to use for filtering, call `setCustomLabelKeys()` once before calling `runWithLabels()`:
+To specify which label keys you want to use for filtering, call `setCustomLabelKeys()` one time before calling `runWithLabels()`:
 
 ```javascript
 tracer.profiling.setCustomLabelKeys(['customer_name'])
