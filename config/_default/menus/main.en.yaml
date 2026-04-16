@@ -96,6 +96,11 @@ menu:
       url: getting_started/application/
       parent: getting_started
       weight: 8
+    - name: Teams
+      identifier: getting_started_teams
+      url: getting_started/teams/
+      parent: getting_started
+      weight: 27
     - name: Datadog Site
       identifier: getting_started_datadog_site
       url: getting_started/site/
