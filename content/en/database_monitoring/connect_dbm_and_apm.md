@@ -27,7 +27,7 @@ APM tracer integrations support a *Propagation Mode*, which controls the amount 
 | Propagation mode | Description |
 |:-----------------|:------------|
 | `full` | Sends full trace information to the database, allowing you to investigate individual traces within DBM. This is the recommended solution for most integrations. |
-| `service` | Sends the service name, allowing you to understand which services are the contributors to database load. |
+| `service` | Sends the service name, allowing you to understand which services contribute to database load. |
 | `disabled` | Disables propagation and does not send any information from applications. |
 
 
