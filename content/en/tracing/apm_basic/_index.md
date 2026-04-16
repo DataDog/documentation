@@ -78,7 +78,7 @@ An operation name of `universal.http.server` or `universal.http.client` on a ser
 
 ## How APM Basic works (eBPF)
 
-The Datadog Agent uses eBPF to observe network traffic at the kernel level. Because eBPF operates at the kernel level, APM Basic works regardless of the programming language or framework your services use.
+The Datadog Agent uses eBPF to observe network traffic at the kernel level, so APM Basic works regardless of the programming language or framework your services use.
 
 **Note**: On Windows, APM Basic uses Event Tracing for Windows (ETW) instead of eBPF. ETW is only available for IIS-based services. Non-IIS services on Windows support HTTP monitoring only, not HTTPS.
 
@@ -108,7 +108,7 @@ APM Basic provides baseline service monitoring. For distributed tracing and deep
 
 ## Automatic service tagging
 
-APM Basic automatically discovers services running in your infrastructure. If it does not find [unified service tags][6], it assigns them a name based on one of the following tags: `app`, `short_image`, `kube_container_name`, `container_name`, `kube_deployment`, `kube_service`.
+APM Basic automatically discovers services running in your infrastructure. If it does not find [unified service tags][6], it assigns each service a name based on one of the following tags: `app`, `short_image`, `kube_container_name`, `container_name`, `kube_deployment`, `kube_service`.
 
 To update a service's name, set up [Unified Service Tagging][6].
 
@@ -119,7 +119,7 @@ After you configure the Agent, wait about five minutes for your services to appe
 After enabling APM Basic, you can:
 
 - Navigate to **APM** > **Software Catalog** or **APM** > **Service Map** to [visualize your services and their dependencies][2].
-- Click into specific Service pages to see golden signal metrics (requests, errors, and duration), and correlate these against recent code changes with [Deployment Tracking][7].
+- Click a service page to see golden signal metrics (requests, errors, and duration), and correlate these against recent code changes with [Deployment Tracking][7].
 - Create [monitors][8], [dashboards][9], and [SLOs][10] using the `universal.http.*` metrics.
 
 ## Further reading

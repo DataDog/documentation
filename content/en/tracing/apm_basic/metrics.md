@@ -23,7 +23,7 @@ further_reading:
 
 [APM Basic][1] discovers services using popular container tags (such as `app`, `short_image`, and `kube_deployment`) and generates entries in the [Software Catalog][2] for those services.
 
-You can access request, error, and duration metrics in Datadog for both inbound and outbound traffic on all services discovered with APM Basic. These metrics are useful for creating alerts, [tracking deployments][3], and creating [service level objectives (SLOs)][4] for all services running on your infrastructure.
+You can access request, error, and duration metrics in Datadog for both inbound and outbound traffic on all services discovered with APM Basic. These metrics are useful for creating alerts, [tracking deployments][3], and building [service level objectives (SLOs)][4] for all services running on your infrastructure.
 
 {{< img src="universal_service_monitoring/guide/usm_slo.png" alt="APM Basic SLOs for BITSBOUTIQUE" style="width:100%;" >}}
 
@@ -40,7 +40,7 @@ APM Basic reports metrics under the `universal.http.*` namespace.
 | universal.http.client.apdex | Score   | Gauge        | The Apdex score of outbound requests for this service.                |
 | universal.http.server       | Seconds | Distribution | Inbound request latency, counts, errors, and rates.  |
 | universal.http.server.hits  | Hits    | Count        | Total number of inbound requests and errors.                 |
-| universal.http.server.apdex | Score   | Gauge        | The Apdex score for this web service.             |
+| universal.http.server.apdex | Score   | Gauge        | The Apdex score of inbound requests for this service. |
 
 Unlike APM metrics, errors are available under the `error:true` tag instead of as a separate metric.
 
@@ -120,7 +120,7 @@ The [Software Catalog][2] identifies dashboards defined in your service definiti
 
 For more information, see the [Dashboards documentation][16].
 
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 

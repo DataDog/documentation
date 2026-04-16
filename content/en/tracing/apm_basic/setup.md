@@ -420,7 +420,7 @@ services:
      - /etc/zypp:/host/etc/zypp
      - /etc/pki:/host/etc/pki
      - /etc/yum/vars:/host/etc/yum/vars
-     - /etc/dnf:/host/etc/dnf/vars
+     - /etc/dnf/vars:/host/etc/dnf/vars
      - /etc/rhsm:/host/etc/rhsm
     cap_add:
      - SYS_ADMIN
