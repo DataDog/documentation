@@ -159,9 +159,32 @@ If you use [OpenTelemetry automatic instrumentation][3] for Node.js applications
 
 If you use [OpenTelemetry manual instrumentation][4], see the documentation for the [`@opentelemetry/instrumentation-runtime-node`][5] library.
 
+#### Host metrics
+
+Host-level metrics such as system CPU and memory usage are not included in OpenTelemetry automatic instrumentation. To collect these metrics, install and configure the [`@opentelemetry/host-metrics`][6] package separately:
+
+```shell
+npm install @opentelemetry/host-metrics
+```
+
+Then initialize it with your existing `MeterProvider`:
+
+```javascript
+const { HostMetrics } = require('@opentelemetry/host-metrics');
+const { metrics } = require('@opentelemetry/api');
+
+const hostMetrics = new HostMetrics({
+  meterProvider: metrics.getMeterProvider(),
+});
+hostMetrics.start();
+```
+
+For the list of metrics collected by this package, see the [Node Contrib Host](#node-contrib-host) table in the Data collected section.
+
 [3]: https://opentelemetry.io/docs/zero-code/js/
 [4]: https://opentelemetry.io/docs/languages/js/instrumentation/
 [5]: https://github.com/open-telemetry/opentelemetry-js-contrib/tree/main/packages/instrumentation-runtime-node
+[6]: https://github.com/open-telemetry/opentelemetry-js-contrib/tree/main/packages/host-metrics
 
 {{% /tab %}}
 
